@@ -1,11 +1,23 @@
 // The toy shelf: built-in toys. Captured toys are SOG files under
 // assets/toys/<id>/ (prepared with tools/prepare-assets.mjs, credits in
 // CREDITS.md); procedural toys are generator presets built in the browser.
+//
+// This catalogue is metadata only (ids, labels, categories, search words) so
+// it stays small as the shelf grows; toy code that needs more than a
+// generator preset lives in per-pack modules that load when a toy is picked.
+
+// Shelf categories, in shelf order. A category only shows once it has toys.
+export const CATEGORIES = [
+  { id: "scans", label: "Scans" },
+  { id: "shapes", label: "Shapes" },
+];
 
 export const TOYS = [
   {
     id: "cactus",
     label: "Cactus",
+    category: "scans",
+    tags: "plant succulent pot captured photo real",
     kind: "captured",
     url: "assets/toys/cactus/cactus.sog",
     urlWeak: "assets/toys/cactus/cactus-lite.sog",
@@ -21,6 +33,8 @@ export const TOYS = [
   {
     id: "strawberry",
     label: "Strawberry",
+    category: "scans",
+    tags: "fruit food berry captured photo real",
     kind: "captured",
     url: "assets/toys/strawberry/strawberry.sog",
     urlWeak: "assets/toys/strawberry/strawberry-lite.sog",
@@ -37,6 +51,8 @@ export const TOYS = [
   {
     id: "cookie",
     label: "Heart cookie",
+    category: "scans",
+    tags: "food biscuit heart sweet captured photo real",
     kind: "captured",
     url: "assets/toys/cookie/cookie.sog",
     urlWeak: "assets/toys/cookie/cookie-lite.sog",
@@ -52,6 +68,8 @@ export const TOYS = [
   {
     id: "bee",
     label: "Honeybee",
+    category: "scans",
+    tags: "insect animal bug honeybee captured photo real",
     kind: "captured",
     url: "assets/toys/bee/bee.sog",
     urlWeak: "assets/toys/bee/bee-lite.sog",
@@ -67,6 +85,8 @@ export const TOYS = [
   {
     id: "blob",
     label: "Jelly blob",
+    category: "shapes",
+    tags: "jelly noise candy generated",
     kind: "procedural",
     generator: {
       shape: "blob",
@@ -80,6 +100,8 @@ export const TOYS = [
   {
     id: "donut",
     label: "Donut",
+    category: "shapes",
+    tags: "doughnut torus food sprinkles frosting generated",
     kind: "procedural",
     generator: {
       shape: "torus",
@@ -94,6 +116,8 @@ export const TOYS = [
   {
     id: "knot",
     label: "Neon knot",
+    category: "shapes",
+    tags: "trefoil neon maths generated",
     kind: "procedural",
     generator: {
       shape: "knot",
@@ -107,6 +131,8 @@ export const TOYS = [
   {
     id: "planet",
     label: "Tiny planet",
+    category: "shapes",
+    tags: "earth world globe space generated v1",
     kind: "procedural",
     note: "A tribute to Splashery v1",
     generator: {
@@ -122,6 +148,42 @@ export const TOYS = [
 
 export function findToy(id) {
   return TOYS.find((t) => t.id === id) || null;
+}
+
+export function categoryLabel(id) {
+  return CATEGORIES.find((c) => c.id === id)?.label || "";
+}
+
+// Categories that have at least one toy, in shelf order.
+export function shelfCategories() {
+  return CATEGORIES.filter((c) => TOYS.some((t) => t.category === c.id));
+}
+
+// Lower-case, accent-free text for search matching.
+export function foldText(text) {
+  return String(text || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase();
+}
+
+// Toys matching a search: every word must appear in the label, the
+// category name or the toy's search words. Label matches come first.
+export function searchToys(query, toys = TOYS) {
+  const words = foldText(query).split(/\s+/).filter(Boolean);
+  if (!words.length) return toys.slice();
+  const scored = [];
+  for (const t of toys) {
+    const label = foldText(t.label);
+    const hay = `${label} ${foldText(categoryLabel(t.category))} ${foldText(t.tags)} ${t.id}`;
+    if (!words.every((w) => hay.includes(w))) continue;
+    const score = words.reduce(
+      (n, w) => n + (label.startsWith(w) ? 3 : label.includes(w) ? 2 : 0),
+      0,
+    );
+    scored.push({ t, score });
+  }
+  return scored.sort((a, b) => b.score - a.score).map((s) => s.t);
 }
 
 // Resolves an asset path against the Splashery root (works from the app,

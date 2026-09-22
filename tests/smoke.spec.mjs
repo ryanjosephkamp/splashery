@@ -114,13 +114,39 @@ test.describe("Splashery app (WebGL2)", () => {
     expect(problems).toEqual([]);
   });
 
+  test("the shelf filters by category and search, and Surprise me picks a toy", async ({
+    page,
+  }) => {
+    const problems = watchConsole(page);
+    await loadApp(page);
+    await waitForToy(page, "Cactus");
+    const shown = () =>
+      page.locator("#shelf .toy-card").evaluateAll((cards) => cards.map((c) => c.dataset.toy));
+    await page.click(".chip[data-category='shapes']");
+    expect(await shown()).toEqual(["blob", "donut", "knot", "planet"]);
+    await expect(page.locator(".chip[data-category='shapes']")).toHaveAttribute(
+      "aria-pressed",
+      "true",
+    );
+    await page.fill("#shelf-search", "fruit");
+    expect(await shown()).toEqual(["strawberry"]);
+    await page.fill("#shelf-search", "zzzz");
+    await expect(page.locator("#shelf-empty")).toBeVisible();
+    await page.fill("#shelf-search", "");
+    await page.click(".chip[data-category='all']");
+    expect((await shown()).length).toBe(8);
+    await page.click("#shelf-surprise");
+    await expect(page.locator("#toy-status")).not.toHaveText(/^Cactus/, { timeout: 180_000 });
+    expect(problems).toEqual([]);
+  });
+
   test("generating a procedural toy changes canvas pixels", async ({ page }) => {
     const problems = watchConsole(page);
     await loadApp(page);
     await waitForToy(page, "Cactus");
     const canvas = page.locator("#stage");
     const before = await canvas.screenshot({ type: "png" });
-    await page.click("#make-group summary");
+    await page.click("#tab-make");
     await page.selectOption("#gen-shape", "knot");
     await page.selectOption("#gen-palette", "sunset");
     await page.fill("#gen-seed", "4242");
@@ -262,7 +288,7 @@ test.describe("Splashery app (WebGL2)", () => {
       player.paintAt(hit, true);
     });
     await page.waitForTimeout(800);
-    await page.click("#share-group summary");
+    await page.click("#tab-share");
     const downloadPromise = page.waitForEvent("download");
     await page.click("#export-json");
     const download = await downloadPromise;
@@ -308,7 +334,7 @@ test.describe("Splashery app (WebGL2)", () => {
       window.__splashery.app.toggleEffect("twist", true);
       window.__splashery.app.setAutoplay({ effect: "breeze" });
     });
-    await page.click("#share-group summary");
+    await page.click("#tab-share");
     await expect(page.locator("#embed-snippet")).toHaveValue(
       /^<iframe src="http:\/\/127\.0\.0\.1:4173\/embed\/#s=d\./,
     );
@@ -394,7 +420,7 @@ test.describe("Splashery app (WebGL2)", () => {
       expect(await inkPixels(page)).toBeGreaterThan(1500);
     }
     // A link for a user's own file carries the settings only, and says so.
-    await page.click("#share-group summary");
+    await page.click("#tab-share");
     await expect(page.locator("#embed-note")).toContainText("settings only");
     expect(problems).toEqual([]);
   });
@@ -404,7 +430,7 @@ test.describe("Splashery app (WebGL2)", () => {
     await loadApp(page);
     await page.click(".toy-card[data-toy='knot']");
     await waitForToy(page, "Neon knot");
-    await page.click("#share-group summary");
+    await page.click("#tab-share");
     const save = async (selector) => {
       const p = page.waitForEvent("download", { timeout: 200_000 });
       await page.click(selector);
@@ -483,7 +509,49 @@ test.describe("Splashery on a phone", () => {
     await expect(page.locator("#sheet-toggle")).toHaveAttribute("aria-expanded", "true");
     m = await measure();
     expect(m.doc).toBeLessThanOrEqual(m.inner);
+    // The stage shrinks to the space above the open sheet, so the toy stays in view.
+    const layout = await page.evaluate(() => ({
+      stage: document.getElementById("stage").getBoundingClientRect().bottom,
+      panel: document.getElementById("panel").getBoundingClientRect().top,
+    }));
+    expect(layout.stage).toBeLessThanOrEqual(layout.panel + 20);
     await page.screenshot({ path: path.join(SHOTS, "app-390x844-sheet.png") });
+
+    // Tapping the toy closes the sheet (and does not poke or paint).
+    await page.tap("#stage", { position: { x: 195, y: 120 } });
+    await expect(page.locator("#panel-body")).toBeHidden();
+    await expect(page.locator("#sheet-toggle")).toHaveAttribute("aria-expanded", "false");
+
+    // Swiping the handle up opens it, swiping down closes it.
+    const cdp = await page.context().newCDPSession(page);
+    const swipe = async (x, y0, y1) => {
+      await cdp.send("Input.dispatchTouchEvent", {
+        type: "touchStart",
+        touchPoints: [{ x, y: y0 }],
+      });
+      for (let i = 1; i <= 6; i++) {
+        const y = y0 + ((y1 - y0) * i) / 6;
+        await cdp.send("Input.dispatchTouchEvent", { type: "touchMove", touchPoints: [{ x, y }] });
+      }
+      await cdp.send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] });
+    };
+    let handle = await page.locator("#sheet-handle").boundingBox();
+    await swipe(handle.x + handle.width / 2, handle.y + handle.height / 2, handle.y - 140);
+    await expect(page.locator("#panel-body")).toBeVisible();
+    handle = await page.locator("#sheet-handle").boundingBox();
+    await swipe(handle.x + handle.width / 2, handle.y + handle.height / 2, handle.y + 140);
+    await expect(page.locator("#panel-body")).toBeHidden();
+
+    // Tabs switch panes; search finds toys and Enter picks the first one.
+    await page.tap("#sheet-toggle");
+    await page.tap("#tab-look");
+    await expect(page.locator("#pane-look")).toBeVisible();
+    await expect(page.locator("#pane-play")).toBeHidden();
+    await page.tap("#shelf-search-toggle");
+    await page.fill("#shelf-search", "straw");
+    await expect(page.locator("#shelf .toy-card")).toHaveCount(1);
+    await page.press("#shelf-search", "Enter");
+    await waitForToy(page, "Strawberry");
     expect(problems).toEqual([]);
   });
 

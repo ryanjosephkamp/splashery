@@ -130,11 +130,14 @@ export class Stage {
     this.aliveUntil = Math.max(this.aliveUntil, performance.now() + keepAliveMs);
   }
 
+  // The canvas size comes from CSS. app.resizeCanvas() would pin it with
+  // inline pixel sizes (and then CSS changes, such as the phone sheet opening
+  // or the window resizing, would never reach it), so only the drawing-buffer
+  // resolution follows the element here.
   resize() {
     if (this.fixedSize) return;
-    const w = Math.max(1, this.canvas.clientWidth);
-    const h = Math.max(1, this.canvas.clientHeight);
-    this.app.resizeCanvas(w, h);
+    this.canvas.style.removeProperty("width");
+    this.canvas.style.removeProperty("height");
     this.app.setCanvasResolution(pc.RESOLUTION_AUTO);
     this.requestRender();
   }

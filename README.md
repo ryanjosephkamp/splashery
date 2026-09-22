@@ -12,7 +12,9 @@ step, no bundler, no framework, no server, no API keys. Rendering is the
 
 Splashery v1, a planet you could paint, lives on the `checkpoint/v1-planet-painter` branch and in
 [docs/SPEC-v1-planet-painter.md](docs/SPEC-v1-planet-painter.md). The v2 specification is
-[SPEC.md](SPEC.md).
+[SPEC.md](SPEC.md). What comes next (100+ toys, toys that move and open, patterns and flags) is in
+[docs/ROADMAP.md](docs/ROADMAP.md); what is parked, and why, is in
+[docs/BACKLOG.md](docs/BACKLOG.md).
 
 ## The toys
 
@@ -53,6 +55,15 @@ and each has one or two sliders.
 - **Paint** (tool): drag to recolour splats. Each touch splashes droplets and drips run screen-down.
   Paint stays until you clear it.
 
+## The panel
+
+The shelf sits at the top of the panel: search it, filter it by category, or press **Surprise me**
+for a random toy. Below the tools, five tabs hold everything else: **Play** (the tool's settings and
+the effects), **Make** (make a toy, or open your own splat file), **Look**, **Share** and **About**.
+On a phone the panel is a bottom sheet. The shelf and tools always show; **More**, a tab, or swiping
+the handle up opens the rest. The toy shrinks to fit above the sheet so you can watch your changes.
+Tap the toy, swipe down, press **Done** or Escape to close it again.
+
 ## Controls
 
 | Input                                 | Does                                             |
@@ -90,7 +101,7 @@ effect: a breeze, little pokes, a slow twist, or dissolve and rebuild.
 
 ## Sharing
 
-Under **Share**:
+In the **Share** tab:
 
 - **Copy link**: the whole scene, deflate-compressed into `#s=` in the URL. For your own file the
   link carries the settings only and says so.
@@ -190,12 +201,13 @@ The Playwright suite (`tests/smoke.spec.mjs`, `tests/unit.spec.mjs`) starts
 `python3 -m http.server 4173` if nothing is listening and runs headless Chromium with SwiftShader,
 so it needs no GPU. It checks that the app loads with no console errors or warnings, the shelf shows
 its toys, making a toy and switching on effects change canvas pixels, paint, poke and clay work, a
-JSON export imports back to the same scene, the embed page and the custom element load a scene, own
-files (PLY, SPLAT, SPZ, SOG) load, PNG/GIF/WebM exports produce files, an embed stays under 30 MB,
-the no-GPU poster shows, and there is no horizontal overflow at 390 and 360 px. It saves screenshots
-to `tests/screenshots/`. WebGPU checks skip themselves with a message when Chromium offers no
-adapter. Set `SPLASHERY_CHROMIUM` to use a specific Chromium; without it Playwright's own browser is
-used.
+JSON export imports back to the same scene, the shelf filters by category and search, the phone
+sheet opens and closes by button, tap and swipe, the embed page and the custom element load a scene,
+own files (PLY, SPLAT, SPZ, SOG) load, PNG/GIF/WebM exports produce files, an embed stays under 30
+MB, the no-GPU poster shows, and there is no horizontal overflow at 390 and 360 px. It saves
+screenshots to `tests/screenshots/`. WebGPU checks skip themselves with a message when Chromium
+offers no adapter. Set `SPLASHERY_CHROMIUM` to use a specific Chromium; without it Playwright's own
+browser is used.
 
 ## Layout
 

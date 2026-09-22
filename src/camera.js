@@ -310,6 +310,8 @@ export class Gestures {
     if (this.pointers.size === 1) {
       this.primaryId = e.pointerId;
       this.moved = 0;
+      this.downAt = e.timeStamp;
+      this.multi = false;
       const lt = this.lastTap;
       const isDouble =
         e.pointerType !== "mouse" &&
@@ -328,6 +330,7 @@ export class Gestures {
       if (kind === "tool") this.h.onToolStart?.(e);
       else this.h.onOrbitStart?.(e);
     } else if (this.pointers.size === 2) {
+      this.multi = true;
       if (this.gesture === "tool") this.h.onToolEnd?.(e, true);
       else if (this.gesture === "orbit") this.h.onOrbitEnd?.(e);
       this.gesture = "pinch";
@@ -407,6 +410,14 @@ export class Gestures {
       this.gesture = null;
       this.primaryId = null;
       if (this.moved > 12) this.lastTap.time = -1e9;
+      // A short press that barely moved is a tap.
+      if (
+        e.type === "pointerup" &&
+        !this.multi &&
+        this.moved < 10 &&
+        e.timeStamp - this.downAt < 400
+      )
+        this.h.onTap?.(e);
     }
   }
 }
