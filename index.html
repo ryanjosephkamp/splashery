@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Splashery · paint a planet</title>
+    <meta
+      name="description"
+      content="Splashery is a pure-browser 3D paint toy: orbit a planet, splash paint on it, watch it run and dry, then export a GIF, a video, a JSON scene or an embed."
+    />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#101010" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3CradialGradient id='g' cx='38%25' cy='32%25' r='70%25'%3E%3Cstop offset='0' stop-color='%23ffd9a8'/%3E%3Cstop offset='1' stop-color='%23b45a2c'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='32' cy='32' r='28' fill='url(%23g)'/%3E%3Cpath d='M20 22c6-3 10 2 9 7s3 6 2 12-6 4-8-2-7-6-3-17z' fill='%230b4f9c' opacity='.9'/%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "./vendor/three/three.module.js",
+          "gifenc": "./vendor/gifenc/gifenc.esm.js"
+        }
+      }
+    </script>
+    <script type="module" src="./src/app.js"></script>
+  </head>
+  <body class="app">
+    <a class="skip-link" href="#panel">Skip to controls</a>
+
+    <canvas
+      id="stage"
+      tabindex="0"
+      role="img"
+      aria-label="A planet you can paint. In Paint mode, drag on the planet to paint; hold Space to orbit. Arrow keys turn the planet, plus and minus zoom."
+    ></canvas>
+    <div id="brush-cursor" class="brush-cursor" aria-hidden="true" hidden></div>
+
+    <header class="brand">
+      <h1>Splashery</h1>
+      <p>paint a planet</p>
+    </header>
+
+    <section id="fallback" class="fallback" hidden>
+      <svg class="poster" viewBox="0 0 320 320" role="img" aria-label="A painted planet">
+        <defs>
+          <radialGradient id="poster-g" cx="38%" cy="32%" r="72%">
+            <stop offset="0" stop-color="#f3d7b1" />
+            <stop offset="0.7" stop-color="#9f5a33" />
+            <stop offset="1" stop-color="#3a2116" />
+          </radialGradient>
+        </defs>
+        <circle cx="160" cy="160" r="128" fill="url(#poster-g)" />
+        <path
+          d="M104 96c22-14 44 6 40 30s12 26 8 54-30 18-38-8-32-30-10-76z"
+          fill="#0b4f9c"
+          opacity="0.85"
+        />
+        <path
+          d="M196 170c10-2 22 8 16 22s-2 32-12 30-6-24-10-30 0-20 6-22z"
+          fill="#e63b2e"
+          opacity="0.9"
+        />
+      </svg>
+      <h2>Splashery needs WebGL2</h2>
+      <p id="fallback-reason">
+        This browser could not start a WebGL2 context, so the planet cannot be drawn here. A recent
+        Chrome, Edge, Firefox or Safari on a device with graphics acceleration turned on will work.
+      </p>
+    </section>
+
+    <div id="drop-overlay" class="drop-overlay" hidden>
+      <p>Drop a Splashery JSON file to load it</p>
+    </div>
+
+    <aside id="panel" class="panel" aria-label="Splashery controls">
+      <div class="toolbar">
+        <div class="segmented" role="group" aria-label="Mode">
+          <button id="mode-paint" type="button" aria-pressed="true" title="Paint mode (P)">
+            Paint
+          </button>
+          <button id="mode-orbit" type="button" aria-pressed="false" title="Orbit mode (O)">
+            Orbit
+          </button>
+        </div>
+        <label class="color-well" title="Brush color">
+          <span class="visually-hidden">Brush color</span>
+          <input id="brush-color" type="color" value="#e63b2e" />
+        </label>
+        <button
+          id="undo"
+          type="button"
+          class="icon-button"
+          title="Undo (Z)"
+          aria-label="Undo"
+          disabled
+        >
+          <svg viewBox="0 0 20 20" aria-hidden="true">
+            <path d="M8 5 3 10l5 5" fill="none" stroke="currentColor" stroke-width="1.8" />
+            <path d="M3 10h8a5 5 0 0 1 0 10" fill="none" stroke="currentColor" stroke-width="1.8" />
+          </svg>
+        </button>
+        <button
+          id="sheet-toggle"
+          type="button"
+          class="sheet-toggle"
+          aria-expanded="false"
+          aria-controls="panel-body"
+        >
+          More
+        </button>
+      </div>
+
+      <div id="panel-body" class="panel-body">
+        <section class="group" aria-labelledby="h-brush">
+          <h2 id="h-brush">Brush</h2>
+          <div class="swatches" role="group" aria-label="Color swatches"></div>
+          <label class="row">
+            <span>Size</span>
+            <input id="brush-size" type="range" min="0" max="100" value="40" />
+            <output id="brush-size-value" for="brush-size">40</output>
+          </label>
+          <label class="row">
+            <span>Wetness</span>
+            <input id="brush-wetness" type="range" min="0" max="100" value="80" />
+            <output id="brush-wetness-value" for="brush-wetness">80%</output>
+          </label>
+          <label class="row">
+            <span>Opacity</span>
+            <input id="brush-opacity" type="range" min="5" max="100" value="100" />
+            <output id="brush-opacity-value" for="brush-opacity">100%</output>
+          </label>
+        </section>
+
+        <section class="group" aria-labelledby="h-paint">
+          <h2 id="h-paint">Paint</h2>
+          <label class="row">
+            <span>Dry time</span>
+            <input id="dry-time" type="range" min="10" max="150" value="40" />
+            <output id="dry-time-value" for="dry-time">4.0 s</output>
+          </label>
+          <label class="row">
+            <span>Viscosity</span>
+            <input id="viscosity" type="range" min="0" max="100" value="35" />
+            <output id="viscosity-value" for="viscosity">35%</output>
+          </label>
+          <div class="button-row">
+            <button id="clear" type="button">Clear paint</button>
+            <button id="reset-camera" type="button" title="Reset camera (R)">Reset camera</button>
+          </div>
+        </section>
+
+        <section class="group" aria-labelledby="h-planet">
+          <h2 id="h-planet">Planet</h2>
+          <label class="row">
+            <span>Template</span>
+            <select id="template">
+              <option value="rocky">Rocky</option>
+              <option value="icy">Icy</option>
+              <option value="gas">Gas giant</option>
+              <option value="plain">Plain</option>
+            </select>
+          </label>
+          <div class="row">
+            <span>Seed</span>
+            <output id="seed" class="mono">0</output>
+            <button id="randomize" type="button">Randomize</button>
+          </div>
+          <label class="row">
+            <span>Paint texture</span>
+            <select id="resolution">
+              <option value="1024">1024 (light)</option>
+              <option value="2048">2048 (default)</option>
+              <option value="4096">4096 (heavy)</option>
+            </select>
+          </label>
+          <p id="resolution-note" class="note" hidden></p>
+        </section>
+
+        <details class="group">
+          <summary>Light</summary>
+          <label class="row">
+            <span>Exposure</span>
+            <input id="exposure" type="range" min="30" max="220" value="100" />
+            <output id="exposure-value" for="exposure">1.00</output>
+          </label>
+          <label class="row">
+            <span>Key angle</span>
+            <input id="light-angle" type="range" min="-180" max="180" value="-40" />
+            <output id="light-angle-value" for="light-angle">-40°</output>
+          </label>
+        </details>
+
+        <details class="group" id="export-group">
+          <summary>Export &amp; share</summary>
+          <div class="button-row">
+            <button id="export-json" type="button">Save JSON</button>
+            <label class="file-button">
+              <span>Load JSON</span>
+              <input id="import-json" type="file" accept="application/json,.json" />
+            </label>
+          </div>
+          <p class="note">You can also drop a JSON file anywhere on the page.</p>
+
+          <div class="row compact">
+            <span>GIF</span>
+            <select id="gif-frames" aria-label="GIF frames">
+              <option value="24">24 frames</option>
+              <option value="48" selected>48 frames</option>
+              <option value="72">72 frames</option>
+            </select>
+            <select id="gif-size" aria-label="GIF size">
+              <option value="256">256 px</option>
+              <option value="512" selected>512 px</option>
+              <option value="768">768 px</option>
+            </select>
+            <button id="export-gif" type="button">Save GIF</button>
+          </div>
+
+          <div class="row compact" id="webm-row">
+            <span>WebM</span>
+            <select id="webm-seconds" aria-label="WebM length">
+              <option value="2">2 s</option>
+              <option value="3" selected>3 s</option>
+              <option value="5">5 s</option>
+            </select>
+            <button id="export-webm" type="button">Save WebM</button>
+          </div>
+          <p id="webm-unavailable" class="note" hidden></p>
+
+          <div class="row compact">
+            <span>Embed</span>
+            <button id="embed-refresh" type="button">Make snippet</button>
+            <button id="embed-copy" type="button" disabled>Copy</button>
+          </div>
+          <textarea
+            id="embed-snippet"
+            class="mono"
+            rows="4"
+            readonly
+            aria-label="Embed snippet"
+            placeholder="Press “Make snippet” to build an iframe for the current scene."
+          ></textarea>
+          <p id="embed-note" class="note"></p>
+        </details>
+
+        <details class="group">
+          <summary>Controls &amp; keys</summary>
+          <ul class="keys">
+            <li><b>Drag</b> paints in Paint mode, orbits in Orbit mode</li>
+            <li><b>Space</b> + drag, or two fingers, orbits while painting</li>
+            <li><b>Wheel</b> or pinch zooms; no limit</li>
+            <li><b>Double-click</b> in Orbit mode resets the camera</li>
+            <li><b>P</b> / <b>O</b> switch modes, <b>Z</b> undoes, <b>R</b> resets the camera</li>
+            <li><b>[</b> and <b>]</b> change brush size</li>
+            <li><b>Arrows</b>, <b>+</b>, <b>−</b> turn and zoom from the keyboard</li>
+          </ul>
+        </details>
+
+        <footer class="panel-footer">
+          <a href="https://github.com/ryanjosephkamp/splashery">Source on GitHub</a>
+          <span id="perf-note" class="note"></span>
+        </footer>
+      </div>
+    </aside>
+
+    <div
+      id="progress"
+      class="progress"
+      hidden
+      role="progressbar"
+      aria-valuemin="0"
+      aria-valuemax="100"
+    >
+      <span id="progress-label">Working…</span>
+      <div class="progress-track"><div id="progress-bar" class="progress-bar"></div></div>
+    </div>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <noscript>
+      <div class="fallback">
+        <h2>Splashery needs JavaScript</h2>
+        <p>The planet is drawn with WebGL, which needs scripts turned on.</p>
+      </div>
+    </noscript>
+  </body>
+</html>
