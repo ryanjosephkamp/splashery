@@ -1,836 +1,891 @@
-// Splashery: entry point for the main app. Wires the scene, paint system,
-// controls, UI and exports together and runs the frame loop.
+// Splashery app: the shelf, the tools, making toys, look, bring-your-own
+// files and sharing, on top of the shared Player runtime.
 
-import { Color, Quaternion, Vector3 } from "three";
-import { PlanetScene, probeWebGL2, isWeakDevice } from "./scene.js";
-import { createShape } from "./shape.js";
-import { PaintSystem, replayStrokes } from "./paint.js";
-import { TemplateGenerator } from "./templates.js";
-import { BallControls, GestureRecognizer } from "./controls.js";
+import { Player, NoGPUError, Gestures } from "./player.js";
 import { createUI } from "./ui.js";
 import {
-  createDefaultScene,
+  createScene,
   normalizeScene,
-  normalizeBrush,
-  normalizePhysics,
-  normalizeLighting,
-  randomSeed,
-  round,
+  normalizeLook,
+  THEMES,
+  APP_NAME,
   formatBytes,
-  RESOLUTIONS,
-  TEMPLATE_NAMES,
-  DEFAULT_CAMERA,
-  BRUSH_SIZE_MIN,
-  BRUSH_SIZE_MAX,
-  SCENE_VERSION,
+  formatCount,
 } from "./state.js";
+import { defaultEffects, effectDef } from "./effects.js";
+import { normalizeGenerator, PROFILES } from "./generators.js";
+import { decodeSceneHash, parseHash } from "./codec.js";
+import { TOYS, findToy } from "./toys.js";
+import { extOf, readPlyHeader, decimatePly, resourceFromProps, LIMITS } from "./loaders.js";
 import {
-  encodePNG,
-  bytesToDataURI,
-  decodePNGDataURI,
   downloadBlob,
   timestampName,
-  exportGIF,
-  exportWebM,
+  canvasToBlob,
+  encodeGIF,
   webmSupport,
-  buildEmbedHash,
-  embedSnippet,
-} from "./export.js";
-import { decodeSceneHash, parseHash } from "./codec.js";
+  recordWebM,
+  buildShareHash,
+  shareURL,
+  iframeSnippet,
+  elementSnippet,
+} from "./exports.js";
 
-const Y_AXIS = new Vector3(0, 1, 0);
+const canvas = document.getElementById("stage");
+
+function showFallback(reason) {
+  const fb = document.getElementById("fallback");
+  if (reason) document.getElementById("fallback-reason").textContent += ` (${reason})`;
+  fb.hidden = false;
+  canvas.hidden = true;
+  document.getElementById("panel").hidden = true;
+  document.body.dataset.ready = "true";
+}
 
 class App {
   constructor() {
-    this.canvas = document.getElementById("stage");
-    this.reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
-    this.info = probeWebGL2();
-    this.webgl2 = !!this.info.ok;
-    if (!this.webgl2) {
-      this.showFallback();
-      return;
-    }
-    this.weak = isWeakDevice(this.info);
-    this.shape = createShape("sphere");
-    try {
-      this.view = new PlanetScene(this.canvas, this.shape, { weak: this.weak });
-    } catch (err) {
-      this.webgl2 = false;
-      this.showFallback(err && err.message);
-      return;
-    }
-    const renderer = this.view.renderer;
-    this.resolution = this.weak ? 1024 : 2048;
-    this.paint = new PaintSystem(renderer, this.shape, {
-      resolution: this.resolution,
-      mipmaps: !this.weak,
-      undoBudgetBytes: (this.weak ? 96 : 256) * 1024 * 1024,
-    });
-    this.templates = new TemplateGenerator(renderer, this.shape);
-    this.controls = new BallControls({
-      radius: this.shape.radius,
-      reducedMotion: this.reducedMotion,
-    });
-    this.controls.setState(DEFAULT_CAMERA, true);
-
-    this.scene = createDefaultScene();
-    this.brush = { ...this.scene.brushDefaults };
-    this.paint.physics = { ...this.scene.physics };
-    this.mode = "paint";
-    this.spaceHeld = false;
+    this.player = null;
+    this.ui = null;
+    this.tool = "orbit";
+    this.clayMode = "add";
+    this.claySize = 0.4;
     this.busy = false;
-    this.capturing = false;
-    this.hovering = null;
-    this.strokeRecord = null;
-    this.strokeGap = false;
-    this.clock0 = performance.now();
-    this.lastFrame = performance.now();
-    this.needsRender = true;
-    this.gravity = new Vector3(0, -1, 0);
-
-    this.ui = createUI(this);
-    this.ui.setMode(this.mode);
-    this.ui.setBrush(this.brush);
-    this.ui.setPhysics(this.paint.physics);
-    this.ui.setLighting(this.scene.lighting);
-    this.ui.setResolution(
-      this.resolution,
-      this.weak ? "Light mode: this device gets a 1024 paint texture." : "",
-    );
-    const webm = webmSupport();
-    this.webm = webm;
-    this.ui.setWebmUnavailable(webm.ok ? "" : webm.reason);
-    this.ui.setPerfNote(this.weak ? "light device profile" : "");
-
-    this.applyTemplate();
-    this.view.setLighting(this.scene.lighting);
-    this.canvas.classList.toggle("paint-mode", this.mode === "paint");
-
-    this.brushCursor = document.getElementById("brush-cursor");
-    this.gestures = new GestureRecognizer(this.canvas, this.gestureHandlers());
-    this.bindKeyboard();
-    this.bindDrop();
-    this.bindResize();
-
-    this.raf = requestAnimationFrame((t) => this.tick(t));
-    this.loadFromHash();
+    this.file = null; // { name, size, bytes | resource } for a user's own splat
+    this.pendingLarge = null;
+    this.spaceHeld = false;
+    this.genTimer = 0;
+    this.generator = null;
+    this.toolState = null;
   }
 
-  // ---- Setup --------------------------------------------------------------
-
-  showFallback(reason) {
-    const fb = document.getElementById("fallback");
-    if (reason) {
-      const p = document.getElementById("fallback-reason");
-      p.textContent = `${p.textContent} (${reason})`;
+  async start() {
+    document.documentElement.dataset.theme = matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
+    this.player = new Player(canvas);
+    try {
+      await this.player.init();
+    } catch (err) {
+      console.info("Splashery could not start a renderer:", err?.message || err);
+      showFallback(err instanceof NoGPUError ? "" : err?.message);
+      return;
     }
-    fb.hidden = false;
-    document.getElementById("panel").hidden = true;
-    this.canvas.hidden = true;
+    const player = this.player;
+    this.ui = createUI(this);
+    const ui = this.ui;
+    player.on("theme", (theme) => {
+      document.documentElement.dataset.theme = theme;
+      ui.setLook(player.scene.look, theme);
+    });
+    player.on("message", (m) => ui.toast(m));
+    player.on("effects", (fx) => ui.setEffects(fx));
+    player.on("paint", (n) => ui.setPaintCount(n));
+    player.on("toy", (info) => this.onToy(info));
+    const wm = webmSupport();
+    ui.setWebmUnavailable(wm.ok ? null : wm.reason);
+    ui.setTool("orbit");
+    ui.setClayMode("add");
+
+    this.bindGestures();
+    this.bindKeys();
+    this.bindDrop();
+
+    // Scene from the link, or the default.
+    let scene = null;
+    const { s } = parseHash(location.hash);
+    if (s) {
+      try {
+        scene = normalizeScene(await decodeSceneHash(s), player.profile);
+      } catch (err) {
+        ui.toast(`Could not read the shared scene: ${err.message}`, 5000);
+      }
+    }
+    if (!scene) scene = createScene({ toy: { kind: "builtin", id: TOYS[0].id } });
+    try {
+      await this.applyScene(scene);
+    } catch (err) {
+      ui.toast(err.message, 6000);
+      await this.applyScene(createScene({ toy: { kind: "builtin", id: TOYS[0].id } }));
+    }
     document.body.dataset.ready = "true";
   }
 
-  bindResize() {
-    const resize = () => {
-      const w = this.canvas.clientWidth || window.innerWidth;
-      const h = this.canvas.clientHeight || window.innerHeight;
-      if (this.capturing) return;
-      this.view.setSize(w, h, Math.min(2, window.devicePixelRatio || 1));
-      this.controls.setViewport(w, h);
-      this.controls.setHomeDistance(this.view.fitDistance(w / Math.max(1, h)));
-      this.needsRender = true;
-    };
-    window.addEventListener("resize", resize);
-    if (window.visualViewport) window.visualViewport.addEventListener("resize", resize);
-    resize();
+  // ---- Scenes -------------------------------------------------------------------
+
+  async applyScene(scene, { file = null } = {}) {
+    const player = this.player;
+    const ui = this.ui;
+    player.scene = scene;
+    player.applyLook();
+    ui.setEffects(scene.effects);
+    ui.setAutoplay(scene.autoplay, player.reducedMotion);
+    ui.setPaintCount(scene.paint.stamps.length);
+    if (scene.toy.kind === "file" && !file) {
+      const name = scene.toy.file.name;
+      ui.toast(
+        `This link uses someone's own splat file (${name}). Drop that file here to see it with these settings.`,
+        7000,
+      );
+      this.pendingFileScene = scene;
+      scene = { ...scene, toy: { kind: "builtin", id: TOYS[0].id } };
+      player.scene = scene;
+    }
+    await this.loadToy(scene.toy, { file });
+    player.applySettings(scene);
+    ui.setLook(scene.look, player.resolvedTheme());
+    ui.setEffects(scene.effects);
   }
 
-  bindKeyboard() {
-    window.addEventListener("keydown", (e) => {
-      if (this.ui.isTyping(e.target)) return;
-      const k = e.key;
-      if (k === " ") {
-        this.spaceHeld = true;
-        if (e.target === document.body || e.target === this.canvas) e.preventDefault();
-        return;
-      }
-      if (e.metaKey || e.ctrlKey) {
-        if (k.toLowerCase() === "z" && !e.shiftKey) {
-          e.preventDefault();
-          this.undo();
-        }
-        return;
-      }
-      switch (k) {
-        case "p":
-        case "P":
-          this.setMode("paint");
-          break;
-        case "o":
-        case "O":
-          this.setMode("orbit");
-          break;
-        case "z":
-        case "Z":
-          this.undo();
-          break;
-        case "r":
-        case "R":
-          this.resetCamera();
-          break;
-        case "[":
-          this.setBrush({ size: Math.max(BRUSH_SIZE_MIN, this.brush.size / 1.25) });
-          break;
-        case "]":
-          this.setBrush({ size: Math.min(BRUSH_SIZE_MAX, this.brush.size * 1.25) });
-          break;
-        case "ArrowLeft":
-          this.controls.rotateBy(-40, 0, 0);
-          e.preventDefault();
-          break;
-        case "ArrowRight":
-          this.controls.rotateBy(40, 0, 0);
-          e.preventDefault();
-          break;
-        case "ArrowUp":
-          this.controls.rotateBy(0, -40, 0);
-          e.preventDefault();
-          break;
-        case "ArrowDown":
-          this.controls.rotateBy(0, 40, 0);
-          e.preventDefault();
-          break;
-        case "+":
-        case "=":
-          this.controls.zoomBy(0.8);
-          break;
-        case "-":
-        case "_":
-          this.controls.zoomBy(1.25);
-          break;
-        case "Escape":
-          this.ui.collapseSheet();
-          break;
-        default:
-          return;
-      }
+  async loadToy(toy, { file = null } = {}) {
+    const ui = this.ui;
+    let shown = false;
+    const timer = setTimeout(() => {
+      shown = true;
+      ui.progress.show("Loading…");
+    }, 120);
+    try {
+      return await this.player.loadToy(toy, {
+        file,
+        onProgress: (f, label) => {
+          if (!shown && f < 1) {
+            shown = true;
+            clearTimeout(timer);
+            ui.progress.show(label);
+          }
+          ui.progress.update(f, label);
+        },
+      });
+    } finally {
+      clearTimeout(timer);
+      ui.progress.hide();
+    }
+  }
+
+  onToy(info) {
+    const ui = this.ui;
+    const player = this.player;
+    const scene = player.scene;
+    ui.setShelf(
+      scene.toy.kind === "builtin"
+        ? scene.toy.id
+        : scene.toy.kind === "procedural"
+          ? scene.toy.id
+          : null,
+    );
+    const parts = [info.label, `${formatCount(info.splats)} splats`];
+    if (info.credit) parts.push(`by ${info.credit.author} (${info.credit.license})`);
+    ui.setStatus(parts.join(" · "));
+    canvas.setAttribute(
+      "aria-label",
+      `${info.label}, a toy made of ${formatCount(info.splats)} splats. Drag to turn it, scroll or pinch to zoom. With a tool selected, drag on the toy to use it.`,
+    );
+    if (info.kind === "procedural") {
+      this.generator = { ...info.generator };
+      ui.setGenerator(this.generator);
+      ui.setGeneratorNote("");
+    } else {
+      this.generator =
+        this.generator ||
+        normalizeGenerator({ count: PROFILES[player.profile].defaultCount }, player.profile);
+      ui.setGenerator(this.generator);
+      ui.setGeneratorNote("Pick a shape and press Make it to build your own toy.");
+    }
+    ui.setClayAvailable(
+      info.kind === "procedural",
+      info.kind === "procedural" ? "" : "Clay works on generated toys. Make one first.",
+    );
+    ui.setFileToy(info.kind === "file", scene.toy.flip);
+    this.renderCredits(info);
+    ui.setRenderInfo(
+      `Rendering with ${player.deviceType === "webgpu" ? "WebGPU" : "WebGL2"} · ${player.profile} device profile · ${formatCount(info.splats)} splats`,
+    );
+    if (this.ui.els.shareGroup.open) this.updateEmbed();
+  }
+
+  renderCredits(info) {
+    const nodes = [];
+    const captured = TOYS.filter((t) => t.kind === "captured");
+    if (!captured.length) {
+      const p = document.createElement("p");
+      p.className = "credit";
+      p.textContent = "Every toy on the shelf is generated in your browser.";
+      nodes.push(p);
+    }
+    for (const t of captured) {
+      const c = t.credit;
+      const p = document.createElement("p");
+      p.className = "credit";
+      const strong = document.createElement("strong");
+      strong.textContent = t.label;
+      const a = document.createElement("a");
+      a.href = c.source;
+      a.textContent = c.title || "source";
+      const lic = document.createElement("a");
+      lic.href = c.licenseUrl;
+      lic.textContent = c.license;
+      p.append(strong, `: “`, a, `” by ${c.author}, `, lic, c.changes ? `. ${c.changes}` : ".");
+      if (info && info.id === t.id) p.setAttribute("aria-current", "true");
+      nodes.push(p);
+    }
+    const p = document.createElement("p");
+    p.className = "credit";
+    p.textContent =
+      "Generated toys (blob, donut, knot, planet) are made in your browser from a seed.";
+    nodes.push(p);
+    this.ui.setCredits(nodes);
+  }
+
+  async chooseToy(id) {
+    if (this.busy) return;
+    const toy = findToy(id);
+    if (!toy) return;
+    const player = this.player;
+    const scene = player.scene;
+    scene.toy = { kind: "builtin", id };
+    scene.paint.stamps = [];
+    this.file = null;
+    this.ui.setPaintCount(0);
+    try {
+      await this.loadToy(scene.toy);
+      player.camera.setState(toy.camera || createScene().camera, { asHome: true, snap: false });
+      player.syncDrop();
+      this.ui.collapseSheet();
+    } catch (err) {
+      this.ui.toast(err.message, 5000);
+    }
+  }
+
+  // ---- Tools ------------------------------------------------------------------
+
+  setTool(tool) {
+    this.tool = tool;
+    this.ui.setTool(tool);
+    this.ui.setEffects(this.player.scene.effects);
+    canvas.classList.toggle("tool", tool !== "orbit");
+  }
+
+  setClayMode(mode) {
+    this.clayMode = mode;
+    this.ui.setClayMode(mode);
+  }
+
+  setEffectParam(id, key, value) {
+    const fx = this.player.scene.effects;
+    fx[id][key] = value;
+    this.player.setEffects(fx);
+    this.ui.setEffects(fx);
+  }
+
+  toggleEffect(id, on) {
+    const fx = this.player.scene.effects;
+    fx[id].on = on;
+    const ex = effectDef(id).exclusive;
+    if (on && ex && fx[ex].on) {
+      fx[ex].on = false;
+      this.ui.toast(
+        `${effectDef(ex).label} switched off: it cannot run together with ${effectDef(id).label}.`,
+      );
+    }
+    this.player.setEffects(fx);
+    this.ui.setEffects(fx);
+    this.player.interact();
+  }
+
+  allEffectsOff() {
+    const fx = this.player.scene.effects;
+    for (const id in fx) if ("on" in fx[id]) fx[id].on = false;
+    this.player.setEffects(fx);
+    this.ui.setEffects(fx);
+  }
+
+  clearPaint() {
+    this.player.clearPaint();
+    this.ui.toast("Paint cleared.");
+  }
+
+  pokeRandom() {
+    this.player.pokeRandom();
+  }
+
+  resetCamera() {
+    this.player.resetCamera();
+  }
+
+  bindGestures() {
+    const player = this.player;
+    const cam = player.camera;
+    this.gestures = new Gestures(canvas, {
+      classify: (e) => {
+        if (e.button === 1 || e.button === 2 || this.spaceHeld || this.tool === "orbit")
+          return "orbit";
+        return "tool";
+      },
+      onInteract: () => {
+        player.interact();
+        canvas.focus({ preventScroll: true });
+      },
+      onOrbitStart: () => {
+        cam.begin();
+        canvas.classList.add("orbiting");
+      },
+      onOrbit: (dx, dy, dt) => {
+        cam.rotateBy(dx, dy, dt);
+        player.stage.requestRender();
+      },
+      onOrbitEnd: () => {
+        cam.end();
+        canvas.classList.remove("orbiting");
+      },
+      onPinchStart: () => cam.begin(),
+      onPinch: ({ scale, dx, dy, twist, dt }) => {
+        cam.rotateBy(dx, dy, dt);
+        if (scale > 0) cam.zoomBy(1 / scale);
+        cam.rollBy(-twist);
+        player.stage.requestRender();
+      },
+      onPinchEnd: () => cam.end(),
+      onWheel: (e) => {
+        const unit = e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? 120 : 1;
+        cam.zoomBy(Math.exp(e.deltaY * unit * (e.ctrlKey ? 0.01 : 0.0015)));
+        player.stage.requestRender();
+      },
+      onDoubleTap: () => player.resetCamera(),
+      onToolStart: (e) => this.toolStart(e),
+      onToolMove: (e) => this.toolMove(e),
+      onToolEnd: (e) => this.toolEnd(e),
     });
-    window.addEventListener("keyup", (e) => {
+  }
+
+  // Tool strokes. A stroke that starts off the toy becomes an orbit instead.
+  async toolStart(e) {
+    const player = this.player;
+    const [x, y] = player.canvasPoint(e);
+    const st = (this.toolState = {
+      tool: this.tool,
+      x,
+      y,
+      last: 0,
+      busy: false,
+      lastPoint: null,
+      started: false,
+    });
+    player.stroke = st;
+    if (st.tool === "magnet") {
+      player.magnetAt(x, y, true);
+      st.started = true;
+      return;
+    }
+    st.busy = true;
+    player.pickDirty = true;
+    const hit = await player.pickAt(x, y);
+    st.busy = false;
+    if (this.toolState !== st) return;
+    if (!hit) {
+      this.toOrbit();
+      return;
+    }
+    st.started = true;
+    this.applyTool(st, hit, true);
+  }
+
+  toOrbit() {
+    const g = this.gestures;
+    this.toolState = null;
+    this.player.stroke = null;
+    if (g.gesture === "tool") {
+      g.gesture = "orbit";
+      this.player.camera.begin();
+      canvas.classList.add("orbiting");
+    }
+  }
+
+  applyTool(st, hit, first) {
+    const player = this.player;
+    const now = performance.now();
+    if (st.tool === "poke") {
+      player.driver.addPoke(hit, player.time);
+      player.stage.requestRender();
+    } else if (st.tool === "paint") {
+      const r = player.paintAt(hit, first);
+      st.spacing = r * 0.35;
+    } else if (st.tool === "clay") {
+      if (this.player.scene.toy.kind === "builtin") this.promoteToProcedural();
+      const op = player.clayAt(hit, this.clayMode, this.claySize);
+      if (op) this.player.scene.toy.clay = player.proc.clay.slice();
+    }
+    st.lastPoint = hit;
+    st.last = now;
+  }
+
+  async toolMove(e) {
+    const st = this.toolState;
+    if (!st || !st.started) return;
+    const player = this.player;
+    const [x, y] = player.canvasPoint(e);
+    if (st.tool === "magnet") {
+      player.magnetAt(x, y, true);
+      return;
+    }
+    const now = performance.now();
+    const minGap = st.tool === "poke" ? 150 : st.tool === "clay" ? 110 : 0;
+    if (st.busy || now - st.last < minGap) return;
+    st.busy = true;
+    const hit = await player.pickAt(x, y);
+    st.busy = false;
+    if (this.toolState !== st || !hit) return;
+    if (st.tool === "paint" && st.lastPoint) {
+      const d = Math.hypot(
+        hit[0] - st.lastPoint[0],
+        hit[1] - st.lastPoint[1],
+        hit[2] - st.lastPoint[2],
+      );
+      if (d < (st.spacing || 0)) return;
+    }
+    this.applyTool(st, hit, false);
+  }
+
+  toolEnd() {
+    const st = this.toolState;
+    this.toolState = null;
+    this.player.stroke = null;
+    if (!st) return;
+    if (st.tool === "magnet") this.player.magnetAt(st.x, st.y, false);
+    if (st.tool === "clay") this.player.refreshPaint();
+  }
+
+  // Editing a built-in generated toy makes it "your toy" with explicit params.
+  promoteToProcedural() {
+    const player = this.player;
+    const info = player.toyInfo;
+    if (!info || info.kind !== "procedural") return;
+    player.scene.toy = {
+      kind: "procedural",
+      id: info.id,
+      generator: { ...info.generator },
+      clay: [],
+    };
+  }
+
+  bindKeys() {
+    const player = this.player;
+    const cam = player.camera;
+    addEventListener("keydown", (e) => {
+      if (
+        e.key === " " &&
+        !this.ui.isTyping(e.target) &&
+        !(e.target instanceof HTMLButtonElement)
+      ) {
+        this.spaceHeld = true;
+        if (e.target === canvas) e.preventDefault();
+        return;
+      }
+      if (this.ui.isTyping(e.target) || e.metaKey || e.ctrlKey || e.altKey) return;
+      const tools = ["orbit", "poke", "paint", "magnet", "clay"];
+      if (/^[1-5]$/.test(e.key)) this.setTool(tools[Number(e.key) - 1]);
+      else if (e.key === "p" || e.key === "P") this.pokeRandom();
+      else if (e.key === "r" || e.key === "R") this.resetCamera();
+      else if (e.key === "Escape") this.ui.collapseSheet();
+      else if (e.target === canvas && e.key.startsWith("Arrow")) {
+        e.preventDefault();
+        const step = 36;
+        cam.begin();
+        if (e.key === "ArrowLeft") cam.rotateBy(-step, 0, 0);
+        if (e.key === "ArrowRight") cam.rotateBy(step, 0, 0);
+        if (e.key === "ArrowUp") cam.rotateBy(0, -step, 0);
+        if (e.key === "ArrowDown") cam.rotateBy(0, step, 0);
+        cam.end();
+        player.stage.requestRender();
+      } else if (e.key === "+" || e.key === "=") cam.zoomBy(0.85);
+      else if (e.key === "-" || e.key === "_") cam.zoomBy(1 / 0.85);
+      else return;
+      player.stage.requestRender();
+    });
+    addEventListener("keyup", (e) => {
       if (e.key === " ") this.spaceHeld = false;
     });
-    window.addEventListener("blur", () => {
-      this.spaceHeld = false;
-    });
+    addEventListener("blur", () => (this.spaceHeld = false));
   }
 
   bindDrop() {
     let depth = 0;
-    window.addEventListener("dragenter", (e) => {
+    addEventListener("dragenter", (e) => {
+      if (!e.dataTransfer?.types?.includes("Files")) return;
       e.preventDefault();
       depth++;
       this.ui.showDrop(true);
     });
-    window.addEventListener("dragover", (e) => {
-      e.preventDefault();
-      if (e.dataTransfer) e.dataTransfer.dropEffect = "copy";
+    addEventListener("dragover", (e) => {
+      if (e.dataTransfer?.types?.includes("Files")) e.preventDefault();
     });
-    window.addEventListener("dragleave", () => {
+    addEventListener("dragleave", () => {
       depth = Math.max(0, depth - 1);
-      if (depth === 0) this.ui.showDrop(false);
+      if (!depth) this.ui.showDrop(false);
     });
-    window.addEventListener("drop", (e) => {
+    addEventListener("drop", (e) => {
       e.preventDefault();
       depth = 0;
       this.ui.showDrop(false);
-      const file = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
-      if (file) this.importFile(file);
+      const f = e.dataTransfer?.files?.[0];
+      if (f) this.openFile(f);
     });
   }
 
-  async loadFromHash() {
-    const { s } = parseHash(location.hash);
-    document.body.dataset.ready = "true";
-    if (!s) return;
+  // ---- Making toys ---------------------------------------------------------------
+
+  setGenerator(g, { rebuild = true } = {}) {
+    this.generator = normalizeGenerator(g, this.player.profile);
+    if (!rebuild) return;
+    clearTimeout(this.genTimer);
+    this.genTimer = setTimeout(() => this.makeToy(this.generator), 250);
+  }
+
+  async makeToy(g) {
+    if (this.busy) return;
+    const player = this.player;
+    const generator = normalizeGenerator(g, player.profile);
+    this.generator = generator;
+    const scene = player.scene;
+    scene.toy = { kind: "procedural", id: null, generator, clay: [] };
+    scene.paint.stamps = [];
+    this.ui.setPaintCount(scene.paint.stamps.length);
+    this.file = null;
     try {
-      const obj = await decodeSceneHash(s);
-      history.replaceState(null, "", location.pathname + location.search);
-      await this.importScene(obj);
-      this.ui.toast("Scene loaded from the link.");
+      await this.loadToy(scene.toy);
+      player.syncDrop();
     } catch (err) {
-      this.ui.toast(`Could not load the scene in this link: ${err.message}`);
+      this.ui.toast(err.message, 5000);
     }
   }
 
-  // ---- Frame loop ---------------------------------------------------------
+  // ---- Look ---------------------------------------------------------------------
 
-  tick(now) {
-    this.raf = requestAnimationFrame((t) => this.tick(t));
-    const dt = Math.min(0.05, Math.max(0, (now - this.lastFrame) / 1000));
-    this.lastFrame = now;
-    if (this.capturing) return;
-    const c = this.controls;
-    c.autoRotate = !this.reducedMotion && !(this.mode === "paint" && this.hovering);
-    const q0x = c.rotation.x,
-      q0y = c.rotation.y,
-      q0z = c.rotation.z,
-      q0w = c.rotation.w;
-    const d0 = c.distance;
-    c.update(dt);
-    if (
-      q0x !== c.rotation.x ||
-      q0y !== c.rotation.y ||
-      q0z !== c.rotation.z ||
-      q0w !== c.rotation.w ||
-      d0 !== c.distance
-    ) {
-      this.needsRender = true;
-    }
-    this.view.applyView(c.rotation, c.distance);
-    if (this.paint._pendingStamps.length) {
-      this.paint.flushStamps();
-      this.needsRender = true;
-    }
-    if (!this.busy && this.paint.hasWet) {
-      this.view.gravityObject(this.gravity);
-      const steps = dt > 1 / 40 ? 2 : 1;
-      for (let i = 0; i < steps; i++) this.paint.simulate(dt / steps, this.gravity);
-      this.needsRender = true;
-    }
-    if (this.needsRender) {
-      this.view.setPaintTextures(this.paint.wetTexture, this.paint.dryTexture);
-      this.view.render();
-      this.needsRender = false;
-    }
-    this.updateBrushCursor();
+  setLook(partial) {
+    const player = this.player;
+    player.scene.look = normalizeLook({ ...player.scene.look, ...partial });
+    const theme = player.applyLook();
+    this.ui.setLook(player.scene.look, theme);
+    player.stage.requestRender();
+    if (this.ui.els.shareGroup.open) this.updateEmbedSoon();
   }
 
-  // ---- Gestures -----------------------------------------------------------
-
-  gestureHandlers() {
-    const hit = { point: new Vector3(), uv: { u: 0, v: 0 } };
-    const toNDC = (e) => {
-      const r = this.canvas.getBoundingClientRect();
-      return [
-        ((e.clientX - r.left) / r.width) * 2 - 1,
-        -(((e.clientY - r.top) / r.height) * 2 - 1),
-      ];
-    };
-    const raycast = (e) => {
-      const [x, y] = toNDC(e);
-      return this.view.raycast(x, y, hit);
-    };
-    return {
-      classify: (e) => {
-        if (this.busy) return "orbit";
-        if (this.mode !== "paint" || this.spaceHeld) return "orbit";
-        if (e.pointerType === "mouse" && e.button !== 0) return "orbit";
-        return raycast(e) ? "paint" : "orbit";
-      },
-      onInteract: () => this.controls.poke(),
-      onPaintStart: (e) => {
-        const h = raycast(e);
-        if (!h) return;
-        this.cursorAt(e);
-        this.beginStroke(h, e.timeStamp, true);
-      },
-      onPaintMove: (e, events) => {
-        for (const ev of events) {
-          const h = raycast(ev);
-          if (!h) {
-            this.strokeGap = true;
-            continue;
-          }
-          if (this.strokeGap || !this.paint.inStroke) {
-            this.strokeGap = false;
-            this.finishStroke();
-            this.beginStroke(h, ev.timeStamp, false);
-            continue;
-          }
-          const t = (ev.timeStamp - this.clock0) / 1000;
-          const res = this.paint.strokeTo(h.point, t);
-          this.recordPoint(h.uv, t, res.splash);
-        }
-        this.hovering = raycast(e) ? true : null;
-        this.cursorAt(e);
-      },
-      onPaintEnd: () => {
-        this.finishStroke();
-      },
-      onOrbitStart: () => {
-        this.controls.beginDrag();
-        this.canvas.classList.add("orbiting");
-      },
-      onOrbit: (dx, dy, dt) => this.controls.rotateBy(dx, dy, dt),
-      onOrbitEnd: () => {
-        this.controls.endDrag();
-        this.canvas.classList.remove("orbiting");
-      },
-      onPinchStart: () => this.controls.beginDrag(),
-      onPinch: ({ scale, dx, dy, twist, dt }) => {
-        this.controls.rotateBy(dx, dy, dt);
-        if (scale > 0) this.controls.zoomBy(1 / scale);
-        this.controls.rollBy(-twist);
-      },
-      onPinchEnd: () => this.controls.endDrag(),
-      onWheel: (e) => {
-        const unit = e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? 120 : 1;
-        const k = e.ctrlKey ? 0.01 : 0.0016;
-        const factor = Math.exp(e.deltaY * unit * k);
-        this.controls.zoomBy(factor);
-      },
-      onDoubleTap: () => this.resetCamera(),
-      onHover: (e) => {
-        this.hovering = this.mode === "paint" && raycast(e) ? true : null;
-        this.cursorAt(e);
-      },
-    };
+  setAutoplay(partial) {
+    const player = this.player;
+    player.scene.autoplay = { ...player.scene.autoplay, ...partial };
+    player.camera.setTurntable(player.scene.autoplay.turntable);
+    this.ui.setAutoplay(player.scene.autoplay, player.reducedMotion);
+    player.stage.requestRender();
   }
 
-  cursorAt(e) {
-    this._cursorX = e.clientX;
-    this._cursorY = e.clientY;
-    this._cursorTouch = e.pointerType === "touch";
-  }
+  // ---- Files ----------------------------------------------------------------------
 
-  updateBrushCursor() {
-    const el = this.brushCursor;
-    const show =
-      this.mode === "paint" &&
-      this.hovering &&
-      !this._cursorTouch &&
-      !this.busy &&
-      Number.isFinite(this._cursorX);
-    if (!show) {
-      if (!el.hidden) el.hidden = true;
+  async openFile(file) {
+    const ext = extOf(file.name);
+    if (ext === "json" || file.type === "application/json") return this.importJSONFile(file);
+    if (ext === "ksplat") {
+      this.ui.toast("KSPLAT files are not supported yet. Convert them to PLY or SOG first.", 6000);
       return;
     }
-    const px = this.view.projectedBrushPixels(
-      this.brush.size,
-      this.controls.distance,
-      this.canvas.clientHeight || 1,
-    );
-    const d = Math.max(6, Math.min(600, px * 2));
-    el.hidden = false;
-    el.style.width = `${d}px`;
-    el.style.height = `${d}px`;
-    el.style.transform = `translate(${this._cursorX - d / 2}px, ${this._cursorY - d / 2}px)`;
-  }
-
-  // ---- Strokes ------------------------------------------------------------
-
-  beginStroke(h, timeStamp, withSplash) {
-    if (this.busy) return;
-    const gravity = this.view.gravityObject(new Vector3());
-    if (!this.paint.inStroke) {
-      this.paint.pushUndo({ kind: "stroke", strokes: this.scene.strokes.slice() }).catch(() => {});
-      this.ui.setUndoEnabled(true);
-    }
-    const record = this.paint.beginStroke(this.brush, gravity, this.scene.strokes.length);
-    this.strokeRecord = record;
-    this.scene.strokes.push(record);
-    const t = (timeStamp - this.clock0) / 1000;
-    const res = this.paint.strokeTo(h.point, t, { forceSplash: withSplash });
-    this.recordPoint(h.uv, t, res.splash);
-    this.hovering = true;
-  }
-
-  recordPoint(uv, tSec, splash) {
-    if (!this.strokeRecord) return;
-    this.strokeRecord.points.push([
-      Math.round(tSec * 1000),
-      round(uv.u, 4),
-      round(uv.v, 4),
-      splash ? 1 : 0,
-    ]);
-  }
-
-  finishStroke() {
-    if (!this.paint.inStroke) return;
-    this.paint.endStroke();
-    this.paint.flushStamps();
-    const r = this.strokeRecord;
-    if (r && r.points.length === 0) {
-      const i = this.scene.strokes.indexOf(r);
-      if (i >= 0) this.scene.strokes.splice(i, 1);
-    }
-    this.strokeRecord = null;
-    this.strokeGap = false;
-    this.needsRender = true;
-  }
-
-  // ---- Commands -----------------------------------------------------------
-
-  setMode(mode) {
-    if (mode !== "paint" && mode !== "orbit") return;
-    if (this.paint.inStroke) this.finishStroke();
-    this.mode = mode;
-    this.ui.setMode(mode);
-    this.canvas.classList.toggle("paint-mode", mode === "paint");
-    if (mode !== "paint") this.hovering = null;
-  }
-
-  setBrush(partial) {
-    this.brush = normalizeBrush({ ...this.brush, ...partial });
-    this.scene.brushDefaults = { ...this.brush };
-    this.ui.setBrush(this.brush);
-  }
-
-  setPhysics(partial) {
-    this.paint.physics = normalizePhysics({ ...this.paint.physics, ...partial });
-    this.scene.physics = { ...this.paint.physics };
-    this.ui.setPhysics(this.paint.physics);
-  }
-
-  setLighting(partial) {
-    this.scene.lighting = normalizeLighting({ ...this.scene.lighting, ...partial });
-    this.view.setLighting(this.scene.lighting);
-    this.ui.setLighting(this.scene.lighting);
-    this.needsRender = true;
-  }
-
-  applyTemplate() {
-    const { name, seed } = this.scene.template;
-    const w = this.weak ? 1024 : 2048;
-    const tex = this.templates.generate(name, seed, w, w / 2);
-    this.view.setTemplateTexture(tex);
-    this.ui.setTemplate(name, seed);
-    this.needsRender = true;
-  }
-
-  setTemplate(name) {
-    if (!TEMPLATE_NAMES.includes(name)) return;
-    this.scene.template = { name, seed: this.scene.template.seed };
-    this.applyTemplate();
-  }
-
-  randomize() {
-    this.scene.template = { name: this.scene.template.name, seed: randomSeed() };
-    this.applyTemplate();
-  }
-
-  setResolution(res) {
-    if (!RESOLUTIONS.includes(res) || res === this.resolution) return;
-    if (this.paint.inStroke) this.finishStroke();
-    const maxTex = this.info.maxTexture || 4096;
-    if (res > maxTex) {
-      this.ui.toast(`This GPU cannot allocate a ${res} texture (max ${maxTex}).`);
-      this.ui.setResolution(this.resolution);
+    if (!["ply", "sog", "splat", "spz"].includes(ext)) {
+      this.ui.toast(
+        `Splashery cannot read .${ext || "?"} files. It loads PLY, SOG, SPLAT, SPZ and JSON scenes.`,
+        6000,
+      );
       return;
     }
-    this.paint.setResolution(res);
-    this.resolution = res;
-    const note =
-      res === 4096
-        ? "4096 uses about half a gigabyte of video memory; expect lower frame rates."
-        : res === 1024 && !this.weak
-          ? "1024 is light on the GPU; drips get a little softer."
-          : "";
-    this.ui.setResolution(res, note);
-    this.needsRender = true;
+    const limits = LIMITS[this.player.profile];
+    let count = 0;
+    let header = null;
+    if (ext === "ply") {
+      header = readPlyHeader(new Uint8Array(await file.slice(0, 65536).arrayBuffer()));
+      count = header?.count || 0;
+    } else if (ext === "splat") {
+      count = Math.floor(file.size / 32);
+    }
+    const tooBig = file.size > limits.warnBytes || count > limits.warnSplats;
+    if (tooBig) {
+      const canDownsample =
+        ext === "ply" && header && header.format === "binary_little_endian" && !header.compressed;
+      const what = count
+        ? `${formatBytes(file.size)} with ${formatCount(count)} splats`
+        : formatBytes(file.size);
+      this.pendingLarge = { file, header, count };
+      this.ui.showLargeFile(
+        `${file.name} is ${what}, which may be slow or run out of memory on this device.` +
+          (canDownsample
+            ? ` A lighter copy keeps about ${formatCount(limits.downsampleTo)} splats.`
+            : ""),
+        canDownsample,
+      );
+      return;
+    }
+    return this.loadUserFile(file);
   }
 
-  async undo() {
-    if (this.busy || this.paint.inStroke || !this.paint.canUndo) return;
-    this.busy = true;
+  async resolveLargeFile(choice) {
+    const pending = this.pendingLarge;
+    this.pendingLarge = null;
+    this.ui.showLargeFile(null);
+    if (!pending || choice === "cancel") return;
+    if (choice === "all") return this.loadUserFile(pending.file);
+    this.ui.progress.show("Making a lighter copy…");
     try {
-      const meta = await this.paint.undo();
-      if (meta && Array.isArray(meta.strokes)) this.scene.strokes = meta.strokes.slice();
-      this.needsRender = true;
+      const bytes = new Uint8Array(await pending.file.arrayBuffer());
+      const header = readPlyHeader(bytes);
+      const props = decimatePly(bytes, header, LIMITS[this.player.profile].downsampleTo, 7);
+      const resource = resourceFromProps(this.player.stage, props);
+      await this.loadUserFile(pending.file, { resource });
+      this.ui.toast(`Loaded a lighter copy with ${formatCount(props.count)} splats.`);
     } catch (err) {
-      this.ui.toast(`Undo failed: ${err.message}`);
+      this.ui.toast(err.message, 6000);
     } finally {
-      this.busy = false;
-      this.ui.setUndoEnabled(this.paint.canUndo);
+      this.ui.progress.hide();
     }
   }
 
-  async clearPaint() {
-    if (this.busy) return;
-    if (this.paint.inStroke) this.finishStroke();
-    this.paint.pushUndo({ kind: "clear", strokes: this.scene.strokes.slice() }).catch(() => {});
-    this.paint.clear();
-    this.scene.strokes = [];
-    this.ui.setUndoEnabled(true);
-    this.needsRender = true;
-  }
-
-  resetCamera() {
-    this.controls.reset(true);
-  }
-
-  // ---- Scene I/O ----------------------------------------------------------
-
-  async snapshotDataURI(size) {
-    const { data, width, height } = await this.paint.readLayer("dry", size ? { size } : {});
-    const png = await encodePNG(data, width, height);
-    return bytesToDataURI(png, "image/png");
-  }
-
-  sceneSettings() {
-    return {
-      version: SCENE_VERSION,
-      createdAt: new Date().toISOString(),
-      template: { ...this.scene.template },
-      camera: this.controls.getState(),
-      lighting: { ...this.scene.lighting },
-      brushDefaults: { ...this.brush },
-      physics: { ...this.paint.physics },
+  async loadUserFile(file, { resource = null } = {}) {
+    const player = this.player;
+    const ext = extOf(file.name);
+    const bytes = resource ? null : new Uint8Array(await file.arrayBuffer());
+    this.file = { name: file.name, size: file.size, bytes, resource };
+    const pending =
+      this.pendingFileScene && this.pendingFileScene.toy.file.name === file.name
+        ? this.pendingFileScene
+        : null;
+    this.pendingFileScene = null;
+    const scene = pending || player.scene;
+    scene.toy = {
+      kind: "file",
+      file: { name: file.name, bytes: file.size },
+      flip: pending ? pending.toy.flip : ext === "ply" || ext === "splat",
     };
-  }
-
-  async exportScene() {
-    if (this.paint.inStroke) this.finishStroke();
-    const snapshotPNG = await this.snapshotDataURI();
-    return { ...this.sceneSettings(), strokes: this.scene.strokes, snapshotPNG };
-  }
-
-  async exportJSON() {
-    if (this.busy) return;
-    this.setBusy(true, "Saving scene…");
+    if (!pending) scene.paint.stamps = [];
     try {
-      const scene = await this.exportScene();
-      const json = JSON.stringify(scene);
-      downloadBlob(new Blob([json], { type: "application/json" }), timestampName("json"));
-      this.ui.toast(`Saved scene (${formatBytes(json.length)}).`);
+      if (pending) await this.applyScene(scene, { file: this.file });
+      else {
+        await this.loadToy(scene.toy, { file: this.file });
+        player.camera.setState(createScene().camera, { asHome: true, snap: false });
+        player.syncDrop();
+      }
+      this.ui.toast(`${file.name} loaded. It stays in your browser.`);
     } catch (err) {
-      this.ui.toast(`Export failed: ${err.message}`);
-    } finally {
-      this.setBusy(false);
+      this.ui.toast(err.message, 6000);
     }
   }
 
-  async importFile(file) {
-    if (this.busy) return;
+  async setFlip(flip) {
+    const player = this.player;
+    if (player.scene.toy.kind !== "file" || !this.file) return;
+    player.scene.toy.flip = flip;
+    player.scene.paint.stamps = [];
+    await this.loadToy(player.scene.toy, { file: this.file });
+  }
+
+  async importJSONFile(file) {
     try {
-      const text = await file.text();
-      const obj = JSON.parse(text);
-      await this.importScene(obj);
+      const obj = JSON.parse(await file.text());
+      const scene = normalizeScene(obj, this.player.profile);
+      const fileMatch =
+        scene.toy.kind === "file" && this.file && this.file.name === scene.toy.file.name;
+      await this.applyScene(scene, { file: fileMatch ? this.file : null });
       this.ui.toast(`Loaded ${file.name}.`);
     } catch (err) {
-      this.ui.toast(`Could not load that file: ${err.message}`);
+      this.ui.toast(`Could not load that file: ${err.message}`, 6000);
     }
   }
 
-  async importScene(obj) {
-    const scene = normalizeScene(obj);
-    if (this.paint.inStroke) this.finishStroke();
-    this.setBusy(true, "Loading scene…");
-    try {
-      this.paint.pushUndo({ kind: "import", strokes: this.scene.strokes.slice() }).catch(() => {});
-      this.ui.setUndoEnabled(true);
-      this.scene.template = { ...scene.template };
-      this.applyTemplate();
-      this.scene.lighting = scene.lighting;
-      this.view.setLighting(scene.lighting);
-      this.ui.setLighting(scene.lighting);
-      this.setPhysics(scene.physics);
-      this.setBrush(scene.brushDefaults);
-      this.controls.setState(scene.camera);
-      this.view.applyView(this.controls.rotation, this.controls.distance);
-      this.paint.clear();
-      this.scene.strokes = [];
-      let lastT = 0;
-      if (scene.strokes.length) {
-        await replayStrokes(this.paint, scene.strokes, {
-          physics: scene.physics,
-          gravityFallback: this.view.gravityObject(new Vector3()),
-          dt: this.info.software ? 1 / 8 : this.weak ? 1 / 20 : 1 / 30,
-          stepsPerFrame: this.weak ? 8 : 24,
-          onProgress: (f) => {
-            this.ui.progress.update(f, "Replaying strokes…");
-            this.needsRender = true;
-          },
-        });
-        this.scene.strokes = scene.strokes;
-        for (const s of scene.strokes) {
-          for (const p of s.points) lastT = Math.max(lastT, p[0]);
-        }
-      } else if (scene.snapshotPNG) {
-        const bitmap = await decodePNGDataURI(scene.snapshotPNG);
-        this.paint.loadDryFromImage(bitmap);
-        bitmap.close?.();
-      }
-      this.clock0 = performance.now() - lastT - 500;
-      this.needsRender = true;
-    } finally {
-      this.setBusy(false);
-    }
+  // ---- Share ------------------------------------------------------------------------
+
+  exportScene() {
+    const player = this.player;
+    const s = structuredClone(player.scene);
+    s.createdAt = new Date().toISOString();
+    s.camera = player.camera.getState();
+    if (s.toy.kind === "procedural" && player.proc) s.toy.clay = player.proc.clay.slice();
+    return normalizeScene(s, player.profile);
   }
 
-  setBusy(on, label) {
-    this.busy = on;
-    this.ui.setBusy(on);
-    if (on) this.ui.progress.show(label || "Working…");
-    else this.ui.progress.hide();
+  exportJSON() {
+    const scene = this.exportScene();
+    const blob = new Blob([JSON.stringify(scene, null, 2)], { type: "application/json" });
+    downloadBlob(blob, timestampName("json"));
+    this.ui.toast("Scene saved as JSON.");
   }
 
-  // ---- Turntable captures -------------------------------------------------
-
-  pageBackground() {
-    const css = getComputedStyle(document.body).backgroundColor;
-    const c = new Color();
-    try {
-      c.setStyle(css);
-    } catch {
-      c.set(0xffffff);
-    }
-    return c;
-  }
-
-  beginCapture(size) {
-    if (this.paint.inStroke) this.finishStroke();
-    this.paint.flushStamps();
-    this.capturing = true;
-    const r = this.view.renderer;
-    const cam = this.view.camera;
-    this._capturePrev = {
-      pixelRatio: r.getPixelRatio(),
-      width: this.canvas.clientWidth,
-      height: this.canvas.clientHeight,
-      aspect: cam.aspect,
-      clearAlpha: r.getClearAlpha(),
-      clearColor: r.getClearColor(new Color()),
-      rotation: this.controls.rotation.clone(),
-    };
-    r.setPixelRatio(1);
-    r.setSize(size, size, false);
-    cam.aspect = 1;
-    cam.updateProjectionMatrix();
-    r.setClearColor(this.pageBackground(), 1);
-    this.view.setPaintTextures(this.paint.wetTexture, this.paint.dryTexture);
-    const q0 = this._capturePrev.rotation;
-    const q = new Quaternion();
-    return (t01) => {
-      q.setFromAxisAngle(Y_AXIS, Math.PI * 2 * t01).multiply(q0);
-      this.view.applyView(q, this.controls.distance);
-      this.view.render();
-    };
-  }
-
-  endCapture() {
-    const p = this._capturePrev;
-    const r = this.view.renderer;
-    const cam = this.view.camera;
-    r.setClearColor(p.clearColor, p.clearAlpha);
-    r.setPixelRatio(p.pixelRatio);
-    r.setSize(p.width, p.height, false);
-    cam.aspect = p.aspect;
-    cam.updateProjectionMatrix();
-    this.view.applyView(this.controls.rotation, this.controls.distance);
-    this.capturing = false;
-    this.needsRender = true;
-  }
-
-  async exportGif(frames = 48, size = 512) {
-    if (this.busy) return;
-    this.setBusy(true, "Rendering GIF…");
-    let started = false;
-    try {
-      const renderFrame = this.beginCapture(size);
-      started = true;
-      const gl = this.view.renderer.getContext();
-      const buf = new Uint8Array(size * size * 4);
-      const flipped = new Uint8Array(size * size * 4);
-      const stride = size * 4;
-      const blob = await exportGIF({
-        frames,
-        size,
-        renderFrame: async (i, n) => {
-          renderFrame(i / n);
-          gl.readPixels(0, 0, size, size, gl.RGBA, gl.UNSIGNED_BYTE, buf);
-          for (let y = 0; y < size; y++) {
-            flipped.set(buf.subarray((size - 1 - y) * stride, (size - y) * stride), y * stride);
-          }
-          return flipped;
-        },
-        onProgress: (f) => this.ui.progress.update(f, `Rendering GIF… ${Math.round(f * 100)}%`),
-      });
-      downloadBlob(blob, timestampName("gif"));
-      this.ui.toast(`Saved GIF (${formatBytes(blob.size)}).`);
-    } catch (err) {
-      this.ui.toast(`GIF export failed: ${err.message}`);
-    } finally {
-      if (started) this.endCapture();
-      this.setBusy(false);
-    }
-  }
-
-  async exportWebm(seconds = 3) {
-    if (this.busy) return;
-    if (!this.webm.ok) {
-      this.ui.toast(this.webm.reason);
+  async copyLink() {
+    const res = await buildShareHash(this.exportScene());
+    if (!res.ok) {
+      this.ui.setLinkNote(res.notes.join(" "));
+      this.ui.toast("The scene is too big for a link. Save JSON instead.", 5000);
       return;
     }
-    this.setBusy(true, "Recording WebM…");
-    let started = false;
+    const url = shareURL(res.hash);
+    history.replaceState(null, "", `#s=${res.hash}`);
+    this.ui.setLinkNote(res.notes.join(" "));
     try {
-      const size = 512;
-      const renderFrame = this.beginCapture(size);
-      started = true;
-      const blob = await exportWebM({
-        canvas: this.canvas,
-        durationMs: seconds * 1000,
-        fps: 30,
-        mime: this.webm.mime,
-        renderFrame,
-        onProgress: (f) => this.ui.progress.update(f, `Recording WebM… ${Math.round(f * 100)}%`),
-      });
-      downloadBlob(blob, timestampName("webm"));
-      this.ui.toast(`Saved WebM (${formatBytes(blob.size)}).`);
+      await navigator.clipboard.writeText(url);
+      this.ui.toast("Link copied.");
+    } catch {
+      this.ui.toast("The link is in the address bar; copy it from there.");
+    }
+    return url;
+  }
+
+  updateEmbedSoon() {
+    clearTimeout(this.embedTimer);
+    this.embedTimer = setTimeout(() => this.updateEmbed(), 300);
+  }
+
+  async updateEmbed() {
+    const res = await buildShareHash(this.exportScene());
+    const transparent = this.ui.embedTransparent();
+    if (!res.ok) {
+      this.ui.setEmbed({ iframe: "", element: "", note: res.notes.join(" ") });
+      return res;
+    }
+    const note = [
+      ...res.notes,
+      "The iframe works anywhere. The element needs one script tag and no iframe; both load the toy from GitHub Pages.",
+    ].join(" ");
+    this.ui.setEmbed({
+      iframe: iframeSnippet(res.hash, { transparent }),
+      element: elementSnippet(res.hash, { transparent }),
+      note,
+    });
+    return res;
+  }
+
+  async withBusy(label, fn) {
+    if (this.busy) return;
+    this.busy = true;
+    this.ui.setBusy(true);
+    this.ui.progress.show(label);
+    try {
+      return await fn((f, l) => this.ui.progress.update(f, l));
     } catch (err) {
-      this.ui.toast(`WebM export failed: ${err.message}`);
+      console.info(err);
+      this.ui.toast(err.message || String(err), 5000);
     } finally {
-      if (started) this.endCapture();
-      this.setBusy(false);
+      this.ui.progress.hide();
+      this.ui.setBusy(false);
+      this.busy = false;
     }
   }
 
-  // ---- Embed --------------------------------------------------------------
+  async exportPNG() {
+    return this.withBusy("Taking a picture…", async () => {
+      const shot = await this.player.stage.captureFrame();
+      const blob = await canvasToBlob(shot);
+      downloadBlob(blob, timestampName("png"));
+      this.ui.toast("Picture saved.");
+      return blob;
+    });
+  }
 
-  async makeEmbed() {
-    if (this.busy) return null;
-    if (this.paint.inStroke) this.finishStroke();
-    this.setBusy(true, "Building embed…");
-    try {
-      const scene = { ...this.sceneSettings(), strokes: this.scene.strokes };
-      const result = await buildEmbedHash(scene, (size) => this.snapshotDataURI(size));
-      if (result.ok) {
-        const snippet = embedSnippet(result.hash);
-        this.ui.setEmbed({
-          snippet,
-          ok: true,
-          note: `${result.note} URL payload: ${formatBytes(result.bytes)}.`,
-        });
-      } else {
-        this.ui.setEmbed({ snippet: "", ok: false, note: result.note });
-      }
-      this.ui.openExport();
-      return result;
-    } catch (err) {
-      this.ui.setEmbed({ snippet: "", ok: false, note: `Embed failed: ${err.message}` });
-      return null;
-    } finally {
-      this.setBusy(false);
+  // Runs fn with a fixed-size, frozen player and restores it afterwards.
+  async withCapture(size, fn) {
+    const player = this.player;
+    const base = { cam: player.camera.getState(), time: player.time, idle: player.idle.weight };
+    const look = player.scene.look;
+    const fx = player.scene.effects;
+    const savedWind = { ...fx.wind };
+    if (look.background === "transparent") {
+      player.stage.setClearColor(hexRgb(THEMES[player.resolvedTheme()].page), 1);
     }
+    player.idle.weight = 0;
+    player.stage.setFixedSize(size);
+    try {
+      return await fn(base, savedWind);
+    } finally {
+      fx.wind = savedWind;
+      player.stage.setFixedSize(null);
+      player.camera.setState(base.cam, { snap: true });
+      player.time = base.time;
+      player.idle.weight = base.idle;
+      player.applyLook();
+      player.resume();
+    }
+  }
+
+  anyAmbientOn() {
+    const fx = this.player.scene.effects;
+    return ["wind", "dissolve", "drop", "twist", "slice"].some((id) => fx[id].on);
+  }
+
+  async exportGIF({ kind = "turntable", frames = 48, size = 512 } = {}) {
+    const player = this.player;
+    return this.withBusy("Making a GIF…", (progress) =>
+      this.withCapture([size, size], async (base) => {
+        if (kind === "effects" && !this.anyAmbientOn()) {
+          player.scene.effects.wind = { ...player.scene.effects.wind, on: true, strength: 0.4 };
+          this.ui.toast("No effect was on, so the GIF uses a breeze.");
+        }
+        const loop = 4;
+        const blob = await encodeGIF({
+          frames,
+          size,
+          loopMs: loop * 1000,
+          onProgress: (f) => progress(f, "Making a GIF…"),
+          renderFrame: (i, n) => {
+            const pose =
+              kind === "turntable"
+                ? { ...base.cam, yaw: base.cam.yaw + (i / n) * Math.PI * 2 }
+                : base.cam;
+            return player.renderAt(base.time + (i / n) * loop, pose);
+          },
+        });
+        downloadBlob(blob, timestampName("gif"));
+        this.ui.toast(`GIF saved (${formatBytes(blob.size)}).`);
+        return blob;
+      }),
+    );
+  }
+
+  async exportWebM(seconds = 5) {
+    const wm = webmSupport();
+    if (!wm.ok) return;
+    const player = this.player;
+    return this.withBusy("Recording a video…", (progress) =>
+      this.withCapture([720, 720], async (base) => {
+        const blob = await recordWebM({
+          canvas,
+          seconds,
+          mime: wm.mime,
+          onProgress: (f) => progress(f, "Recording a video…"),
+          drawFrame: (t) => {
+            const pose = { ...base.cam, yaw: base.cam.yaw + t * Math.PI * 2 };
+            return player.renderAt(base.time + t * seconds, pose);
+          },
+        });
+        downloadBlob(blob, timestampName("webm"));
+        this.ui.toast(`Video saved (${formatBytes(blob.size)}).`);
+        return blob;
+      }),
+    );
   }
 }
 
-const app = new App();
+function hexRgb(hex) {
+  const n = parseInt(hex.slice(1), 16);
+  return [((n >> 16) & 255) / 255, ((n >> 8) & 255) / 255, (n & 255) / 255];
+}
 
-// Test and debugging hook.
+const app = new App();
+app.start();
+
+// Test and console hooks (the smoke test drives the app through these).
 window.__splashery = {
   app,
-  get webgl2() {
-    return app.webgl2;
+  get player() {
+    return app.player;
   },
   get ready() {
     return document.body.dataset.ready === "true";
   },
+  get renderer() {
+    return app.player?.stage ? app.player.deviceType : null;
+  },
   exportScene: () => app.exportScene(),
-  importScene: (obj) => app.importScene(obj),
-  makeEmbed: () => app.makeEmbed(),
-  strokeCount: () => app.scene.strokes.length,
-  setMode: (m) => app.setMode(m),
-  weak: () => app.weak,
-  resolution: () => app.resolution,
+  get defaultEffects() {
+    return defaultEffects();
+  },
+  name: APP_NAME,
 };
