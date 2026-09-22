@@ -1,193 +1,222 @@
 # Splashery
 
-**paint a planet** — a pure-browser 3D paint toy.
+**Splats you can play with.** Splashery is a toy box of 3D Gaussian splats that runs entirely in the
+browser: pick a toy (a real captured object, or one generated from a seed), spin it, poke it, blow
+on it, splash paint on it, drop it, watch it fall apart and come back, make your own, and share it
+as a link, an embed, a GIF or a video.
 
-Splashery puts a high-resolution planet in front of you. Orbit it, zoom in as far as you like, and
-paint on it. Paint lands with a splash, runs downhill under gravity, and dries into a permanent
-layer over a procedural planet template. Scenes export as JSON (re-importable), as a looping GIF or
-a WebM clip of one full turn, and as an iframe embed.
+Live at **https://ryanjosephkamp.github.io/splashery/**. Static files and ES modules only: no build
+step, no bundler, no framework, no server, no API keys. Rendering is the
+[PlayCanvas engine](https://github.com/playcanvas/engine) (MIT), vendored under
+`vendor/playcanvas/`, using WebGPU when the browser has it and WebGL2 otherwise.
 
-Live: https://ryanjosephkamp.github.io/splashery/
+Splashery v1, a planet you could paint, lives on the `checkpoint/v1-planet-painter` branch and in
+[docs/SPEC-v1-planet-painter.md](docs/SPEC-v1-planet-painter.md). The v2 specification is
+[SPEC.md](SPEC.md).
 
-There is no build step, bundler, framework or server. It is static files and ES modules; Three.js
-and gifenc are vendored under `vendor/` and loaded through an import map. WebGL2 is required.
+## The toys
+
+| Toy          | Kind      | Notes                                                              |
+| ------------ | --------- | ------------------------------------------------------------------ |
+| Cactus       | Captured  | CC0, steam studio / 3D SCAN STUDIO iris                            |
+| Strawberry   | Captured  | CC BY 4.0, Dany Bittel                                             |
+| Heart cookie | Captured  | CC BY 4.0, Dany Bittel                                             |
+| Honeybee     | Captured  | CC BY 4.0, YUMA Co., Ltd.                                          |
+| Jelly blob   | Generated | Noise blob, candy palette                                          |
+| Donut        | Generated | Torus with frosting and sprinkles                                  |
+| Neon knot    | Generated | Trefoil knot                                                       |
+| Tiny planet  | Generated | Oceans, continents, ice caps and clouds: a tribute to Splashery v1 |
+
+Captured toys are SOG files of up to 450,000 splats (about 5 MB each) with a 120,000-splat copy for
+phones. Full credits are in [CREDITS.md](CREDITS.md) and in the app under **About & credits**.
+
+**Make a toy** builds a new one in the browser: pick a shape (sphere, noise blob, torus, capsule,
+knot), a palette, a seed, the number of splats (up to 300,000 on strong devices, 120,000 on phones),
+size jitter, roughness and colour noise. The **Clay** tool then adds lumps where you drag, or erases
+them. Everything is seeded, so a saved scene rebuilds exactly the same toy.
+
+## Effects
+
+Every effect runs on the GPU for every splat, every frame, through one PlayCanvas work-buffer
+modifier (`GSplatComponent.setWorkBufferModifier`); the CPU only sets a few uniforms. Effects stack,
+and each has one or two sliders.
+
+- **Poke** (tool): tap the toy and a ripple rings out from the touch point and settles.
+- **Wind**: a noisy breeze sways the top of the toy; strength and direction.
+- **Dissolve**: splats fly apart and find their way home, over and over.
+- **Drop**: splats fall screen-down and bounce on an invisible floor. Shake the toy (a quick
+  back-and-forth drag, or shake your phone) or switch it off to rebuild it.
+- **Magnet** (tool): hold the pointer near the toy; positive pulls splats in, negative scatters
+  them.
+- **Twist**: wrings the toy around the X, Y or Z axis, still or wobbling.
+- **Slice**: a clipping plane sweeps through the toy with a glowing edge and shows what is inside.
+- **Paint** (tool): drag to recolour splats. Each touch splashes droplets and drips run screen-down.
+  Paint stays until you clear it.
 
 ## Controls
 
-| Action                 | Mouse / keyboard                      | Touch                                          |
-| ---------------------- | ------------------------------------- | ---------------------------------------------- |
-| Paint                  | Drag in Paint mode                    | One finger in Paint mode                       |
-| Orbit                  | Drag in Orbit mode, or hold **Space** | One finger in Orbit mode, two fingers anywhere |
-| Zoom (no maximum)      | Wheel, trackpad pinch, **+** / **−**  | Pinch                                          |
-| Reset camera           | Double-click in Orbit mode, **R**     | Double-tap in Orbit mode                       |
-| Switch mode            | **P** paint, **O** orbit              | Toolbar buttons                                |
-| Undo                   | **Z** or Ctrl/Cmd+Z                   | Toolbar button                                 |
-| Brush size             | **[** and **]**                       | Slider                                         |
-| Turn from the keyboard | Arrow keys                            |                                                |
+| Input                                 | Does                                             |
+| ------------------------------------- | ------------------------------------------------ |
+| Drag, one finger                      | Turn the toy (or use the picked tool on the toy) |
+| Right-drag, Space + drag, two fingers | Always turn the toy                              |
+| Wheel, pinch                          | Zoom, within limits around the toy               |
+| Two-finger twist                      | Roll                                             |
+| Double-click, double-tap              | Reset the view                                   |
+| 1 to 5                                | Orbit, Poke, Paint, Magnet, Clay                 |
+| P / R                                 | Poke a random spot / reset the view              |
+| Arrows, + and −                       | Turn and zoom from the keyboard (canvas focused) |
 
-Dragging the planet turns the ball itself in front of a fixed camera, so "down" is always the bottom
-of your screen and turning the planet changes where wet paint runs. The planet auto-rotates slowly
-when idle; that stops while you interact and is off entirely under `prefers-reduced-motion`.
+The camera eases in and out, coasts after a flick, and turns slowly when you leave it alone (never
+when your system asks for reduced motion).
 
-### Brush and paint
+## Bring your own splat
 
-- **Size, color, wetness, opacity.** Wetness is how much of the stroke sits on top as a loose wet
-  film that can run; opacity is the coverage of the stroke itself.
-- **Dry time** (default 4 s) is how long a full-thickness film takes to dry completely.
-  **Viscosity** slows the flow.
-- **Splashes**: a burst of 8 to 40 droplets on pointer down and on fast flicks.
-- **Undo** keeps up to 60 steps (bounded by memory), **Clear paint** empties both layers, **Reset
-  camera** returns to the home view.
+Drop a file anywhere on the page, or use **Your own splat → Open a splat file…**:
 
-### Planets
+- **PLY** (including SuperSplat's compressed PLY) and **SOG**: loaded by the engine's own parsers.
+- **SPLAT** (antimatter15) and **SPZ versions 1 to 3** (Niantic, gzip): decoded in the browser.
+- Not supported yet: **KSPLAT**, and **SPZ version 4** (it needs a zstd decoder). Convert those to
+  PLY or SOG with [SuperSplat](https://superspl.at/editor) or `splat-transform` first.
 
-Four procedural, seeded templates: **Rocky** (noise and craters), **Icy** (cracks and frost), **Gas
-giant** (bands, turbulence and a storm) and **Plain**. **Randomize** draws a new seed; the template
-name and seed are part of every saved scene, so a scene always reproduces its planet.
+Files stay in your browser; nothing is uploaded. Big files (over 150 MB or 1.5 million splats; 60 MB
+or 400,000 splats on phones) get a warning, and uncompressed binary PLY files can be loaded as a
+lighter random subset instead. **Turn it upside down** fixes captures that load flipped.
 
-### Paint texture resolution
+## Look and autoplay
 
-The paint layers default to 2048 × 2048, with 4096 available for strong GPUs and an automatic 1024
-profile on phones, small GPUs and software renderers. Changing resolution resamples the current
-painting and disposes the old render targets.
+Background (page colour, transparent or any colour), theme (auto, light or dark; auto follows the
+page), accent colour, splat size and exposure. When idle the toy can turn slowly and play one gentle
+effect: a breeze, little pokes, a slow twist, or dissolve and rebuild.
 
-## Exports
+## Sharing
 
-All exports happen in the browser and download directly.
+Under **Share**:
 
-- **JSON** — the whole scene: template name and seed, camera, lighting, brush defaults, physics, the
-  stroke log and a PNG snapshot of the dry layer. Load it back with **Load JSON** or by dropping the
-  file anywhere on the page. When a stroke log is present, import replays it (fast-forwarded);
-  otherwise the snapshot is loaded.
-- **GIF** — one full turn of the planet, 24 to 72 frames at 256 to 768 px, encoded with gifenc. The
-  simulation is frozen during capture so every frame is consistent.
-- **WebM** — the same turn recorded with `MediaRecorder` from `canvas.captureStream`, 2 to 5 seconds
-  at 512 px. If the browser cannot record WebM, the option is hidden and the reason is shown.
-- **Embed** — an iframe snippet (see below).
+- **Copy link**: the whole scene, deflate-compressed into `#s=` in the URL. For your own file the
+  link carries the settings only and says so.
+- **Save JSON / Load JSON**: the scene as a file (you can also drop it on the page). The format is
+  documented in [docs/SCENE-SCHEMA.md](docs/SCENE-SCHEMA.md).
+- **Save picture**: a PNG of the current view (transparent if the background is).
+- **Save GIF**: a turntable or a short effect loop, 48 frames at 512 px by default, encoded in the
+  browser with gifenc.
+- **Save video**: a WebM turntable recorded from the canvas (hidden, with the reason, where the
+  browser cannot record).
+- **Embed**: an iframe snippet and a custom-element snippet, each with a Copy button.
 
-### Scene JSON format
+### Embedding
 
-```json
-{
-  "version": 1,
-  "createdAt": "2026-09-22T12:00:00.000Z",
-  "template": { "name": "rocky", "seed": 3296183301 },
-  "camera": { "rotation": [0, 0, 0, 1], "distance": 4.2 },
-  "lighting": {
-    "exposure": 0.95,
-    "keyIntensity": 2.6,
-    "keyAzimuth": -0.7,
-    "keyElevation": 0.55,
-    "envIntensity": 0.55
-  },
-  "brushDefaults": { "size": 0.05, "color": "#e63b2e", "wetness": 0.8, "opacity": 1 },
-  "physics": { "dryTime": 4, "viscosity": 0.35 },
-  "strokes": [
-    {
-      "size": 0.05,
-      "color": "#e63b2e",
-      "wetness": 0.8,
-      "opacity": 1,
-      "g": [0, -1, 0],
-      "points": [
-        [3042, 0.1254, 0.5556, 1],
-        [3102, 0.1378, 0.5418, 0]
-      ]
-    }
-  ],
-  "snapshotPNG": "data:image/png;base64,..."
-}
-```
-
-Each stroke carries its brush settings and the gravity direction in planet space at the time (`g`),
-followed by pointer events as `[timeMs, u, v, splashFlag]`. Brush size is the geodesic radius in
-radians on the unit sphere.
-
-## Embedding a scene
-
-Open **Export & share → Make snippet**. The snippet points the embed player at the scene through the
-URL hash:
+The iframe works anywhere:
 
 ```html
 <iframe
-  src="https://ryanjosephkamp.github.io/splashery/embed/#s=d.…"
-  width="480"
-  height="360"
-  title="Splashery scene"
+  src="https://ryanjosephkamp.github.io/splashery/embed/#s=PAYLOAD"
+  width="400"
+  height="300"
+  title="Splashery toy"
   loading="lazy"
   style="border:0;border-radius:12px;max-width:100%"
 ></iframe>
 ```
 
-The hash is `s=` plus base64url of the deflate-compressed scene JSON (prefix `d.`); when
-`CompressionStream` is unavailable the JSON is base64url-encoded uncompressed with the prefix `j.`.
-The embed carries the stroke log when it fits in about 8 KB, otherwise a 512, 384 or 256 px snapshot
-of the dry paint with the settings; if even that is too large, the panel says so and the JSON file
-is the way to share the scene. The embed player has no painting UI, orbits, auto-rotates slowly (not
-under reduced motion) and links back to the app, which also accepts `#s=` and imports the scene. An
-optional `?theme=light|dark` query on the embed URL is reserved for hosts that want to force a
-theme.
+The embed player (`embed/index.html`) has no editing UI: it turns slowly when idle (not under
+reduced motion), you can orbit it, it can autoplay one gentle effect, and it links back with **Open
+in Splashery**. Query options: `?toy=cactus` (a shelf toy, when there is no `#s=`),
+`?theme=light|dark`, `?bg=transparent`, `?autoplay=breeze|pokes|twist|dissolve`, `?turntable=off`.
+For a transparent iframe, also give the iframe `color-scheme: normal` (the snippet does) so browsers
+keep it see-through in dark mode. A host page can switch the theme with
+`iframe.contentWindow.postMessage({ type: "splashery:theme", theme: "dark" }, "*")`. Inside an embed
+the mouse wheel scrolls the page; hold Ctrl or ⌘ (or pinch) to zoom.
+
+The `<splashery-toy>` element embeds a toy without an iframe, with one script tag:
+
+```html
+<script type="module" src="https://ryanjosephkamp.github.io/splashery/src/element.js"></script>
+<splashery-toy toy="cactus" autoplay="breeze"></splashery-toy>
+```
+
+Attributes: `scene` (a share payload), `toy`, `theme` (`auto`, `light`, `dark`; auto follows the
+page, including a `paper-theme-change` event on `document` and `data-resolved-theme` on `<html>`),
+`background` (`transparent`, `page` or a colour), `autoplay`, `turntable="off"` and `label`. It is
+4:3 unless you size it, starts when scrolled into view and pauses when scrolled away. See
+[embed/demo.html](embed/demo.html) for both side by side.
+
+Built-in toys load in well under 30 MB (an embed with the heaviest captured toy transfers about 8
+MB: the engine plus one SOG).
 
 ## Running locally
 
-Any static file server works. From the repository root:
-
 ```sh
-python3 -m http.server 4173
+python3 -m http.server 4173 --bind 127.0.0.1
+# open http://127.0.0.1:4173/
 ```
 
-Then open http://127.0.0.1:4173/ (the embed player is at http://127.0.0.1:4173/embed/).
+Any static server works. Useful query options: `?renderer=webgl2|webgpu` (force a renderer),
+`?profile=weak|strong` (force the device profile).
 
-## Running the tests
+## Preparing assets
 
-The smoke test uses Playwright and headless Chromium with SwiftShader so WebGL2 works without a GPU.
+Captured toys are prepared with the MIT
+[`@playcanvas/splat-transform`](https://github.com/playcanvas/splat-transform) CLI, driven by
+[tools/prepare-assets.mjs](tools/prepare-assets.mjs) and the sources in
+[tools/assets.json](tools/assets.json):
 
 ```sh
 npm install
-npm test
+node tools/prepare-assets.mjs            # all toys
+node tools/prepare-assets.mjs bee        # one toy
 ```
 
-To use a Chromium you already have instead of Playwright's download, point `SPLASHERY_CHROMIUM` at
-its executable (the cloud sandbox preinstalls one at `/opt/pw-browsers/chromium`):
+For each toy it rotates the capture upright, drops spherical harmonics, measures robust bounds,
+recentres and scales it, crops floaters, decimates to 450,000 splats and writes
+`assets/toys/<id>/<id>.sog` plus a 120,000-splat `<id>-lite.sog`. The SuperSplat sources are fetched
+from their public URLs; the cactus comes from the Steam Studio sample zip (see `sourceNote` in the
+manifest). Thumbnails are rendered by the app itself:
 
 ```sh
-SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium npm test
+SPLASHERY_CHROMIUM=/path/to/chrome node tools/make-thumbs.mjs
 ```
 
-The test checks that the app loads with no console errors, that a painted stroke changes canvas
-pixels, that JSON export then import round-trips the scene, that the embed page loads a scene from
-its hash, and that there is no horizontal overflow at 390 px. It also saves screenshots at 390 × 844
-and 1440 × 900 under `tests/screenshots/`. If WebGL2 cannot be created in the browser at all, the
-rendering assertions are skipped with a message rather than failing.
+To add a toy: add it to `tools/assets.json` (CC0 or CC BY only), run both tools, add an entry with
+its credit to `src/toys.js`, and add it to [CREDITS.md](CREDITS.md).
 
-Formatting: `npm run format:check` (Prettier).
+## Tests
 
-## Repository layout
-
-```
-index.html            main app shell
-embed/index.html      embed player shell
-styles.css            shared styles (light/dark tokens, bottom sheet on phones)
-src/app.js            app wiring and frame loop
-src/scene.js          renderer, camera, lights, environment, planet material
-src/shape.js          paintable shape interface (sphere; torus/cube can be added)
-src/paint.js          GPU paint system: stamps, wet simulation, snapshots, undo
-src/splash.js         droplet generation
-src/templates.js      seeded procedural planets (GPU pass)
-src/controls.js       ball orbit controls and gesture recognizer
-src/export.js         PNG, JSON, GIF, WebM, embed snippet
-src/codec.js          scene <-> URL hash
-src/ui.js             panel wiring
-src/state.js          scene model, defaults, validation
-src/embed.js          embed player entry
-vendor/               three.js and gifenc (see LICENSES.md)
-tests/smoke.spec.mjs  Playwright smoke test
-SPEC.md               the v1 specification
+```sh
+npm install
+SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium npx playwright test
 ```
 
-## Known limitations
+The Playwright suite (`tests/smoke.spec.mjs`, `tests/unit.spec.mjs`) starts
+`python3 -m http.server 4173` if nothing is listening and runs headless Chromium with SwiftShader,
+so it needs no GPU. It checks that the app loads with no console errors or warnings, the shelf shows
+its toys, making a toy and switching on effects change canvas pixels, paint, poke and clay work, a
+JSON export imports back to the same scene, the embed page and the custom element load a scene, own
+files (PLY, SPLAT, SPZ, SOG) load, PNG/GIF/WebM exports produce files, an embed stays under 30 MB,
+the no-GPU poster shows, and there is no horizontal overflow at 390 and 360 px. It saves screenshots
+to `tests/screenshots/`. WebGPU checks skip themselves with a message when Chromium offers no
+adapter. Set `SPLASHERY_CHROMIUM` to use a specific Chromium; without it Playwright's own browser is
+used.
 
-- Slight pinching of stamps at the two poles is expected for a UV sphere (the seam itself is
-  handled). See SPEC.md for the full list of what is deliberately left for later.
-- Replaying a long stroke log on import runs the simulation fast-forwarded and takes a few seconds
-  on slow GPUs.
+## Layout
+
+```
+index.html, styles.css          the app
+embed/index.html, embed/demo.html   the embed player and an embedding demo
+src/app.js, ui.js               app wiring and panel
+src/player.js                   shared runtime (clock, camera, effects, tools, toys)
+src/stage.js, paint.js          PlayCanvas device, toy entity, picking, capture; GPU paint
+src/effects.js                  the per-splat effect shader (GLSL and WGSL) and its uniforms
+src/generators.js, noise.js     procedural toys and clay
+src/loaders.js                  SOG/PLY via the engine, SPLAT/SPZ decoders, downsampling
+src/camera.js                   orbit camera and gestures
+src/state.js, codec.js          scene schema v2 and link codec
+src/exports.js                  PNG, GIF, WebM, links and embed snippets
+src/viewer.js, embed.js, element.js   embed player and <splashery-toy>
+src/pc.js, toys.js              engine import, toy shelf
+assets/toys/                    captured toys (SOG) and thumbnails
+vendor/                         PlayCanvas 2.22.3 and gifenc 1.0.3
+tools/                          asset and thumbnail scripts
+tests/                          Playwright tests and screenshots
+```
+
+Licences for vendored code are in [LICENSES.md](LICENSES.md).

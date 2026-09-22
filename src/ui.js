@@ -1,49 +1,100 @@
-// DOM wiring for the control panel, bottom sheet, toasts and progress.
+// DOM wiring for the panel, shelf, tools, bottom sheet, toasts and progress.
 // The app owns state; this module reflects it and forwards user intent.
 
-import {
-  SWATCHES,
-  TEMPLATE_LABELS,
-  sliderToBrushSize,
-  brushSizeToSlider,
-  RESOLUTIONS,
-} from "./state.js";
+import { EFFECTS, AXES } from "./effects.js";
+import { SHAPES, PALETTES, PROFILES } from "./generators.js";
+import { TOYS, thumbURL } from "./toys.js";
+import { IDLE_EFFECTS, formatCount } from "./state.js";
 
 const $ = (id) => document.getElementById(id);
+
+const SWATCHES = [
+  "#e63b2e",
+  "#f2a93b",
+  "#f5e663",
+  "#2f9e6a",
+  "#0b4f9c",
+  "#7a3fb1",
+  "#ff5fa2",
+  "#ffffff",
+  "#111111",
+];
+const TOOL_HINTS = {
+  orbit: "Drag to turn the toy, scroll or pinch to zoom, twist two fingers to roll.",
+  clay: "Drag on a generated toy to add lumps of clay, or switch to Erase to carve it away.",
+};
+
+function pct(v) {
+  return `${Math.round(v * 100)}%`;
+}
 
 export function createUI(app) {
   const els = {
     panel: $("panel"),
     panelBody: $("panel-body"),
+    dock: document.querySelector(".dock"),
     sheetToggle: $("sheet-toggle"),
-    modePaint: $("mode-paint"),
-    modeOrbit: $("mode-orbit"),
-    color: $("brush-color"),
-    swatches: document.querySelector(".swatches"),
-    size: $("brush-size"),
-    sizeValue: $("brush-size-value"),
-    wetness: $("brush-wetness"),
-    wetnessValue: $("brush-wetness-value"),
-    opacity: $("brush-opacity"),
-    opacityValue: $("brush-opacity-value"),
-    dryTime: $("dry-time"),
-    dryTimeValue: $("dry-time-value"),
-    viscosity: $("viscosity"),
-    viscosityValue: $("viscosity-value"),
-    undo: $("undo"),
-    clear: $("clear"),
+    shelf: $("shelf"),
+    tools: $("tools"),
+    toolHint: $("tool-hint"),
+    toolParams: $("tool-params"),
+    paintExtras: $("paint-extras"),
+    swatches: $("swatches"),
+    paintColor: $("paint-color"),
+    clearPaint: $("clear-paint"),
+    paintCount: $("paint-count"),
+    clayExtras: $("clay-extras"),
+    clayAdd: $("clay-add"),
+    clayErase: $("clay-erase"),
+    claySize: $("clay-size"),
+    claySizeValue: $("clay-size-value"),
+    clayNote: $("clay-note"),
+    pokeNow: $("poke-now"),
     resetCamera: $("reset-camera"),
-    template: $("template"),
-    seed: $("seed"),
-    randomize: $("randomize"),
-    resolution: $("resolution"),
-    resolutionNote: $("resolution-note"),
-    exposure: $("exposure"),
-    exposureValue: $("exposure-value"),
-    lightAngle: $("light-angle"),
-    lightAngleValue: $("light-angle-value"),
+    effects: $("effects"),
+    effectsOff: $("effects-off"),
+    genShape: $("gen-shape"),
+    genPalette: $("gen-palette"),
+    genSeed: $("gen-seed"),
+    genDice: $("gen-dice"),
+    genCount: $("gen-count"),
+    genCountValue: $("gen-count-value"),
+    genJitter: $("gen-jitter"),
+    genJitterValue: $("gen-jitter-value"),
+    genRough: $("gen-rough"),
+    genRoughValue: $("gen-rough-value"),
+    genNoise: $("gen-noise"),
+    genNoiseValue: $("gen-noise-value"),
+    genMake: $("gen-make"),
+    genNote: $("gen-note"),
+    makeGroup: $("make-group"),
+    lookBg: $("look-bg"),
+    lookBgColor: $("look-bg-color"),
+    lookTheme: $("look-theme"),
+    lookAccent: $("look-accent"),
+    lookAccentColor: $("look-accent-color"),
+    lookSize: $("look-size"),
+    lookSizeValue: $("look-size-value"),
+    lookExposure: $("look-exposure"),
+    lookExposureValue: $("look-exposure-value"),
+    autoTurntable: $("auto-turntable"),
+    autoEffect: $("auto-effect"),
+    motionNote: $("motion-note"),
+    byoFile: $("byo-file"),
+    byoFlipRow: $("byo-flip-row"),
+    byoFlip: $("byo-flip"),
+    byoWarning: $("byo-warning"),
+    byoWarningText: $("byo-warning-text"),
+    byoDownsample: $("byo-downsample"),
+    byoAnyway: $("byo-anyway"),
+    byoCancel: $("byo-cancel"),
+    byoGroup: $("byo-group"),
+    shareLink: $("share-link"),
+    linkNote: $("link-note"),
     exportJson: $("export-json"),
     importJson: $("import-json"),
+    exportPng: $("export-png"),
+    gifKind: $("gif-kind"),
     gifFrames: $("gif-frames"),
     gifSize: $("gif-size"),
     exportGif: $("export-gif"),
@@ -51,99 +102,291 @@ export function createUI(app) {
     webmSeconds: $("webm-seconds"),
     exportWebm: $("export-webm"),
     webmUnavailable: $("webm-unavailable"),
-    embedRefresh: $("embed-refresh"),
+    embedTransparent: $("embed-transparent"),
     embedCopy: $("embed-copy"),
     embedSnippet: $("embed-snippet"),
+    elementCopy: $("element-copy"),
+    elementSnippet: $("element-snippet"),
     embedNote: $("embed-note"),
-    exportGroup: $("export-group"),
+    shareGroup: $("share-group"),
+    credits: $("credits"),
+    renderInfo: $("render-info"),
+    toyStatus: $("toy-status"),
     progress: $("progress"),
     progressBar: $("progress-bar"),
     progressLabel: $("progress-label"),
     toast: $("toast"),
-    perfNote: $("perf-note"),
     dropOverlay: $("drop-overlay"),
   };
 
-  // Swatches.
+  // ---- Shelf -----------------------------------------------------------------
+  for (const toy of TOYS) {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "toy-card";
+    b.dataset.toy = toy.id;
+    b.setAttribute("aria-pressed", "false");
+    b.title = toy.note ? `${toy.label} (${toy.note})` : toy.label;
+    const img = document.createElement("img");
+    img.alt = "";
+    img.width = 64;
+    img.height = 64;
+    img.loading = "lazy";
+    img.decoding = "async";
+    img.src = thumbURL(toy);
+    img.addEventListener(
+      "error",
+      () => img.replaceWith(Object.assign(document.createElement("span"), { className: "thumb" })),
+      {
+        once: true,
+      },
+    );
+    const label = document.createElement("span");
+    label.textContent = toy.label;
+    b.append(img, label);
+    b.addEventListener("click", () => app.chooseToy(toy.id));
+    els.shelf.appendChild(b);
+  }
+
+  // ---- Tools -----------------------------------------------------------------
+  for (const b of els.tools.querySelectorAll("button")) {
+    b.addEventListener("click", () => app.setTool(b.dataset.tool));
+  }
   for (const hex of SWATCHES) {
     const b = document.createElement("button");
     b.type = "button";
     b.style.background = hex;
     b.dataset.color = hex;
-    b.setAttribute("aria-label", `Color ${hex}`);
+    b.setAttribute("aria-label", `Paint colour ${hex}`);
     b.setAttribute("aria-pressed", "false");
-    b.addEventListener("click", () => app.setBrush({ color: hex }));
+    b.addEventListener("click", () => app.setEffectParam("paint", "color", hex));
     els.swatches.appendChild(b);
   }
-
-  // Mode.
-  els.modePaint.addEventListener("click", () => app.setMode("paint"));
-  els.modeOrbit.addEventListener("click", () => app.setMode("orbit"));
-
-  // Brush.
-  els.color.addEventListener("input", () => app.setBrush({ color: els.color.value }));
-  els.size.addEventListener("input", () =>
-    app.setBrush({ size: sliderToBrushSize(Number(els.size.value)) }),
+  els.paintColor.addEventListener("input", () =>
+    app.setEffectParam("paint", "color", els.paintColor.value),
   );
-  els.wetness.addEventListener("input", () =>
-    app.setBrush({ wetness: Number(els.wetness.value) / 100 }),
-  );
-  els.opacity.addEventListener("input", () =>
-    app.setBrush({ opacity: Number(els.opacity.value) / 100 }),
-  );
-
-  // Physics.
-  els.dryTime.addEventListener("input", () =>
-    app.setPhysics({ dryTime: Number(els.dryTime.value) / 10 }),
-  );
-  els.viscosity.addEventListener("input", () =>
-    app.setPhysics({ viscosity: Number(els.viscosity.value) / 100 }),
-  );
-
-  // Actions.
-  els.undo.addEventListener("click", () => app.undo());
-  els.clear.addEventListener("click", () => app.clearPaint());
+  els.clearPaint.addEventListener("click", () => app.clearPaint());
+  els.clayAdd.addEventListener("click", () => app.setClayMode("add"));
+  els.clayErase.addEventListener("click", () => app.setClayMode("erase"));
+  els.claySize.addEventListener("input", () => {
+    app.claySize = Number(els.claySize.value) / 100;
+    els.claySizeValue.value = `${els.claySize.value}%`;
+  });
+  els.pokeNow.addEventListener("click", () => app.pokeRandom());
   els.resetCamera.addEventListener("click", () => app.resetCamera());
 
-  // Planet.
-  els.template.addEventListener("change", () => app.setTemplate(els.template.value));
-  els.randomize.addEventListener("click", () => app.randomize());
-  els.resolution.addEventListener("change", () => app.setResolution(Number(els.resolution.value)));
+  // ---- Effects ---------------------------------------------------------------
+  const sliders = new Map(); // "id.key" -> { input, output, def }
+  const switches = new Map();
+  const bodies = new Map();
+  const axisGroups = new Map();
 
-  // Light.
-  els.exposure.addEventListener("input", () =>
-    app.setLighting({ exposure: Number(els.exposure.value) / 100 }),
+  function makeSlider(def, p, container) {
+    const row = document.createElement("label");
+    row.className = "row";
+    const name = document.createElement("span");
+    name.textContent = p.label;
+    const input = document.createElement("input");
+    input.type = "range";
+    input.min = String(p.min * 100);
+    input.max = String(p.max * 100);
+    input.step = "1";
+    input.id = `fx-${def.id}-${p.key}`;
+    const output = document.createElement("output");
+    output.htmlFor = input.id;
+    input.addEventListener("input", () =>
+      app.setEffectParam(def.id, p.key, Number(input.value) / 100),
+    );
+    row.append(name, input, output);
+    container.appendChild(row);
+    sliders.set(`${def.id}.${p.key}`, { input, output, p });
+  }
+
+  for (const def of EFFECTS) {
+    if (def.kind !== "ambient") continue;
+    const wrap = document.createElement("div");
+    wrap.className = "effect";
+    wrap.id = `effect-${def.id}`;
+    const head = document.createElement("div");
+    head.className = "effect-head";
+    const label = document.createElement("label");
+    const sw = document.createElement("input");
+    sw.type = "checkbox";
+    sw.className = "switch";
+    sw.id = `fx-${def.id}`;
+    sw.setAttribute("role", "switch");
+    sw.addEventListener("change", () => app.toggleEffect(def.id, sw.checked));
+    const text = document.createElement("span");
+    text.textContent = def.label;
+    label.append(sw, text);
+    label.title = def.hint;
+    head.appendChild(label);
+    if (def.axis) {
+      const seg = document.createElement("div");
+      seg.className = "segmented small axis";
+      seg.setAttribute("role", "group");
+      seg.setAttribute("aria-label", `${def.label} axis`);
+      for (const ax of AXES) {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.textContent = ax.toUpperCase();
+        b.dataset.axis = ax;
+        b.setAttribute("aria-label", `${def.label} along ${ax.toUpperCase()}`);
+        b.addEventListener("click", () => app.setEffectParam(def.id, "axis", ax));
+        seg.appendChild(b);
+      }
+      head.appendChild(seg);
+      axisGroups.set(def.id, seg);
+    }
+    const body = document.createElement("div");
+    body.className = "effect-body";
+    const hint = document.createElement("p");
+    hint.className = "note";
+    hint.textContent = def.hint;
+    body.appendChild(hint);
+    for (const p of def.params) makeSlider(def, p, body);
+    wrap.append(head, body);
+    els.effects.appendChild(wrap);
+    switches.set(def.id, sw);
+    bodies.set(def.id, body);
+  }
+  els.effectsOff.addEventListener("click", () => app.allEffectsOff());
+
+  // Tool sliders are rebuilt when the tool changes.
+  function renderToolParams(tool) {
+    els.toolParams.textContent = "";
+    for (const [k, v] of [...sliders]) if (k.startsWith(`${tool}.`)) sliders.delete(k);
+    const def = EFFECTS.find((e) => e.id === tool);
+    els.toolHint.textContent = def ? def.hint : TOOL_HINTS[tool] || "";
+    if (def) for (const p of def.params) makeSlider(def, p, els.toolParams);
+    els.paintExtras.hidden = tool !== "paint";
+    els.clayExtras.hidden = tool !== "clay";
+  }
+
+  // ---- Make a toy -------------------------------------------------------------
+  for (const s of SHAPES) els.genShape.add(new Option(s.label, s.id));
+  for (const p of PALETTES) els.genPalette.add(new Option(p.label, p.id));
+  const profile = PROFILES[app.player?.profile || "strong"];
+  els.genCount.max = String(profile.maxCount);
+  const genInput = () => app.setGenerator(readGenerator());
+  function readGenerator() {
+    return {
+      shape: els.genShape.value,
+      palette: els.genPalette.value,
+      seed: Number(els.genSeed.value) >>> 0,
+      count: Number(els.genCount.value),
+      sizeJitter: Number(els.genJitter.value) / 100,
+      roughness: Number(els.genRough.value) / 100,
+      colorNoise: Number(els.genNoise.value) / 100,
+    };
+  }
+  for (const el of [els.genShape, els.genPalette, els.genSeed])
+    el.addEventListener("change", genInput);
+  for (const el of [els.genCount, els.genJitter, els.genRough, els.genNoise]) {
+    el.addEventListener("input", () => {
+      showGeneratorValues(readGenerator());
+      app.setGenerator(readGenerator(), { rebuild: false });
+    });
+    el.addEventListener("change", genInput);
+  }
+  els.genDice.addEventListener("click", () => {
+    els.genSeed.value = String(Math.floor(Math.random() * 1e6));
+    genInput();
+  });
+  els.genMake.addEventListener("click", () => app.makeToy(readGenerator()));
+
+  function showGeneratorValues(g) {
+    els.genCountValue.value = formatCount(g.count);
+    els.genJitterValue.value = pct(g.sizeJitter);
+    els.genRoughValue.value = pct(g.roughness);
+    els.genNoiseValue.value = pct(g.colorNoise);
+  }
+
+  // ---- Look ------------------------------------------------------------------
+  const lookInput = () => {
+    const bg = els.lookBg.value === "custom" ? els.lookBgColor.value : els.lookBg.value;
+    const accent = els.lookAccent.value === "custom" ? els.lookAccentColor.value : "auto";
+    app.setLook({
+      background: bg,
+      accent,
+      splatScale: Number(els.lookSize.value) / 100,
+      exposure: Number(els.lookExposure.value) / 100,
+    });
+  };
+  els.lookBg.addEventListener("change", lookInput);
+  els.lookBgColor.addEventListener("input", () => {
+    els.lookBg.value = "custom";
+    lookInput();
+  });
+  els.lookAccent.addEventListener("change", lookInput);
+  els.lookAccentColor.addEventListener("input", () => {
+    els.lookAccent.value = "custom";
+    lookInput();
+  });
+  els.lookSize.addEventListener("input", lookInput);
+  els.lookExposure.addEventListener("input", lookInput);
+  for (const b of els.lookTheme.querySelectorAll("button")) {
+    b.addEventListener("click", () => app.setLook({ theme: b.dataset.theme }));
+  }
+  for (const e of IDLE_EFFECTS) els.autoEffect.add(new Option(e.label, e.id));
+  els.autoTurntable.addEventListener("change", () =>
+    app.setAutoplay({ turntable: els.autoTurntable.checked }),
   );
-  els.lightAngle.addEventListener("input", () =>
-    app.setLighting({ keyAzimuth: (Number(els.lightAngle.value) * Math.PI) / 180 }),
+  els.autoEffect.addEventListener("change", () =>
+    app.setAutoplay({ effect: els.autoEffect.value }),
   );
 
-  // Export.
+  // ---- Bring your own ------------------------------------------------------------
+  els.byoFile.addEventListener("change", () => {
+    const f = els.byoFile.files && els.byoFile.files[0];
+    if (f) app.openFile(f);
+    els.byoFile.value = "";
+  });
+  els.byoFlip.addEventListener("change", () => app.setFlip(els.byoFlip.checked));
+  els.byoDownsample.addEventListener("click", () => app.resolveLargeFile("downsample"));
+  els.byoAnyway.addEventListener("click", () => app.resolveLargeFile("all"));
+  els.byoCancel.addEventListener("click", () => app.resolveLargeFile("cancel"));
+
+  // ---- Share -------------------------------------------------------------------
+  els.shareLink.addEventListener("click", () => app.copyLink());
   els.exportJson.addEventListener("click", () => app.exportJSON());
   els.importJson.addEventListener("change", () => {
     const f = els.importJson.files && els.importJson.files[0];
-    if (f) app.importFile(f);
+    if (f) app.openFile(f);
     els.importJson.value = "";
   });
+  els.exportPng.addEventListener("click", () => app.exportPNG());
   els.exportGif.addEventListener("click", () =>
-    app.exportGif(Number(els.gifFrames.value), Number(els.gifSize.value)),
+    app.exportGIF({
+      kind: els.gifKind.value,
+      frames: Number(els.gifFrames.value),
+      size: Number(els.gifSize.value),
+    }),
   );
-  els.exportWebm.addEventListener("click", () => app.exportWebm(Number(els.webmSeconds.value)));
-  els.embedRefresh.addEventListener("click", () => app.makeEmbed());
-  els.embedCopy.addEventListener("click", () => copyText(els.embedSnippet.value, ui));
+  els.exportWebm.addEventListener("click", () => app.exportWebM(Number(els.webmSeconds.value)));
+  els.embedTransparent.addEventListener("change", () => app.updateEmbed());
+  els.embedCopy.addEventListener("click", () =>
+    copyText(els.embedSnippet, "Iframe snippet copied."),
+  );
+  els.elementCopy.addEventListener("click", () =>
+    copyText(els.elementSnippet, "Element snippet copied."),
+  );
+  els.shareGroup.addEventListener("toggle", () => {
+    if (els.shareGroup.open) app.updateEmbed();
+  });
 
-  // Bottom sheet.
-  const narrow = matchMedia("(max-width: 720px)");
+  // ---- Bottom sheet ---------------------------------------------------------------
+  const narrow = matchMedia("(max-width: 760px)");
   let expanded = false;
   const applySheet = () => {
     if (narrow.matches) {
       els.panelBody.hidden = !expanded;
-      els.panel.classList.toggle("expanded", expanded);
       els.sheetToggle.setAttribute("aria-expanded", String(expanded));
       els.sheetToggle.textContent = expanded ? "Less" : "More";
+      const h = els.dock.getBoundingClientRect().height;
+      document.documentElement.style.setProperty("--dock-h", `${Math.round(h)}px`);
     } else {
       els.panelBody.hidden = false;
-      els.panel.classList.remove("expanded");
     }
   };
   els.sheetToggle.addEventListener("click", () => {
@@ -155,78 +398,165 @@ export function createUI(app) {
 
   let toastTimer = 0;
 
+  async function copyText(textarea, message) {
+    const text = textarea.value;
+    if (!text) return;
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(text);
+        ui.toast(message);
+        return;
+      }
+    } catch {
+      // fall through to the selection fallback
+    }
+    textarea.focus();
+    textarea.select();
+    let ok = false;
+    try {
+      ok = document.execCommand("copy");
+    } catch {
+      ok = false;
+    }
+    ui.toast(ok ? message : "Copy is blocked here; select the text and copy it.");
+  }
+
   const ui = {
     els,
-    setMode(mode) {
-      els.modePaint.setAttribute("aria-pressed", String(mode === "paint"));
-      els.modeOrbit.setAttribute("aria-pressed", String(mode === "orbit"));
+    setTool(tool) {
+      for (const b of els.tools.querySelectorAll("button")) {
+        b.setAttribute("aria-pressed", String(b.dataset.tool === tool));
+      }
+      renderToolParams(tool);
     },
-    setBrush(brush) {
-      els.color.value = brush.color;
-      els.size.value = String(brushSizeToSlider(brush.size));
-      els.sizeValue.value = els.size.value;
-      els.wetness.value = String(Math.round(brush.wetness * 100));
-      els.wetnessValue.value = `${els.wetness.value}%`;
-      els.opacity.value = String(Math.round(brush.opacity * 100));
-      els.opacityValue.value = `${els.opacity.value}%`;
-      for (const b of els.swatches.children) {
-        b.setAttribute("aria-pressed", String(b.dataset.color === brush.color));
+    setShelf(id) {
+      for (const b of els.shelf.querySelectorAll(".toy-card")) {
+        b.setAttribute("aria-pressed", String(b.dataset.toy === id));
       }
     },
-    setPhysics(p) {
-      els.dryTime.value = String(Math.round(p.dryTime * 10));
-      els.dryTimeValue.value = `${p.dryTime.toFixed(1)} s`;
-      els.viscosity.value = String(Math.round(p.viscosity * 100));
-      els.viscosityValue.value = `${els.viscosity.value}%`;
+    setEffects(fx) {
+      for (const [id, sw] of switches) {
+        sw.checked = !!fx[id].on;
+        bodies.get(id).hidden = !fx[id].on;
+      }
+      for (const [key, s] of sliders) {
+        const [id, k] = key.split(".");
+        const v = fx[id][k];
+        s.input.value = String(Math.round(v * 100));
+        s.output.value =
+          s.p.unit === "°" ? `${Math.round(v)}°` : s.p.min < 0 ? `${Math.round(v * 100)}` : pct(v);
+      }
+      for (const [id, seg] of axisGroups) {
+        for (const b of seg.querySelectorAll("button"))
+          b.setAttribute("aria-pressed", String(b.dataset.axis === fx[id].axis));
+      }
+      els.paintColor.value = fx.paint.color;
+      for (const b of els.swatches.children)
+        b.setAttribute("aria-pressed", String(b.dataset.color === fx.paint.color));
     },
-    setLighting(l) {
-      els.exposure.value = String(Math.round(l.exposure * 100));
-      els.exposureValue.value = l.exposure.toFixed(2);
-      const deg = Math.round((l.keyAzimuth * 180) / Math.PI);
-      els.lightAngle.value = String(deg);
-      els.lightAngleValue.value = `${deg}°`;
+    setPaintCount(n) {
+      els.paintCount.textContent = n ? `${n} paint stamps` : "";
+      els.clearPaint.disabled = !n;
     },
-    setTemplate(name, seed) {
-      els.template.value = name;
-      els.seed.value = String(seed >>> 0);
-      els.seed.title = `${TEMPLATE_LABELS[name] || name} seed`;
+    setClayMode(mode) {
+      els.clayAdd.setAttribute("aria-pressed", String(mode === "add"));
+      els.clayErase.setAttribute("aria-pressed", String(mode === "erase"));
     },
-    setResolution(res, note) {
-      if (RESOLUTIONS.includes(res)) els.resolution.value = String(res);
-      els.resolutionNote.hidden = !note;
-      els.resolutionNote.textContent = note || "";
+    setClayAvailable(ok, note) {
+      els.clayNote.textContent = note || "";
+      els.clayAdd.disabled = els.clayErase.disabled = !ok;
     },
-    setUndoEnabled(on) {
-      els.undo.disabled = !on;
+    setGenerator(g) {
+      els.genShape.value = g.shape;
+      els.genPalette.value = g.palette;
+      els.genSeed.value = String(g.seed);
+      els.genCount.value = String(g.count);
+      els.genJitter.value = String(Math.round(g.sizeJitter * 100));
+      els.genRough.value = String(Math.round(g.roughness * 100));
+      els.genNoise.value = String(Math.round(g.colorNoise * 100));
+      showGeneratorValues(g);
+    },
+    setGeneratorNote(text) {
+      els.genNote.textContent = text || "";
+    },
+    setLook(look, resolvedTheme) {
+      if (look.background === "page" || look.background === "transparent")
+        els.lookBg.value = look.background;
+      else {
+        els.lookBg.value = "custom";
+        els.lookBgColor.value = look.background;
+      }
+      if (look.accent === "auto") els.lookAccent.value = "auto";
+      else {
+        els.lookAccent.value = "custom";
+        els.lookAccentColor.value = look.accent;
+      }
+      els.lookSize.value = String(Math.round(look.splatScale * 100));
+      els.lookSizeValue.value = `${look.splatScale.toFixed(2)}×`;
+      els.lookExposure.value = String(Math.round(look.exposure * 100));
+      els.lookExposureValue.value = look.exposure.toFixed(2);
+      for (const b of els.lookTheme.querySelectorAll("button")) {
+        b.setAttribute("aria-pressed", String(b.dataset.theme === look.theme));
+      }
+      document.documentElement.dataset.theme = resolvedTheme;
+    },
+    setAutoplay(a, reducedMotion) {
+      els.autoTurntable.checked = a.turntable;
+      els.autoEffect.value = a.effect;
+      els.motionNote.hidden = !reducedMotion;
+      els.autoTurntable.disabled = els.autoEffect.disabled = !!reducedMotion;
+    },
+    setFileToy(isFile, flip) {
+      els.byoFlipRow.hidden = !isFile;
+      els.byoFlip.checked = !!flip;
+    },
+    showLargeFile(text, canDownsample) {
+      els.byoGroup.open = true;
+      els.byoWarning.hidden = !text;
+      els.byoWarningText.textContent = text || "";
+      els.byoDownsample.hidden = !canDownsample;
+    },
+    setStatus(text) {
+      els.toyStatus.textContent = text || "";
+    },
+    setCredits(nodes) {
+      els.credits.replaceChildren(...nodes);
+    },
+    setRenderInfo(text) {
+      els.renderInfo.textContent = text;
     },
     setBusy(on) {
       for (const b of [
         els.exportJson,
         els.exportGif,
         els.exportWebm,
-        els.embedRefresh,
-        els.randomize,
-        els.clear,
-        els.resolution,
-        els.template,
+        els.exportPng,
+        els.genMake,
+        els.shareLink,
       ]) {
         b.disabled = on;
       }
       els.importJson.disabled = on;
+      els.byoFile.disabled = on;
       els.panel.setAttribute("aria-busy", String(on));
     },
     setWebmUnavailable(reason) {
       els.webmRow.hidden = !!reason;
       els.webmUnavailable.hidden = !reason;
-      els.webmUnavailable.textContent = reason ? `WebM export is unavailable: ${reason}` : "";
+      els.webmUnavailable.textContent = reason ? `Video export is unavailable: ${reason}` : "";
     },
-    setEmbed({ snippet, note, ok }) {
-      els.embedSnippet.value = snippet || "";
+    setEmbed({ iframe, element, note }) {
+      els.embedSnippet.value = iframe || "";
+      els.elementSnippet.value = element || "";
       els.embedNote.textContent = note || "";
-      els.embedCopy.disabled = !ok;
+      els.embedCopy.disabled = !iframe;
+      els.elementCopy.disabled = !element;
     },
-    setPerfNote(text) {
-      els.perfNote.textContent = text || "";
+    setLinkNote(text) {
+      els.linkNote.textContent = text || "";
+    },
+    embedTransparent() {
+      return els.embedTransparent.checked;
     },
     toast(message, ms = 3200) {
       els.toast.textContent = message;
@@ -236,15 +566,15 @@ export function createUI(app) {
     },
     progress: {
       show(label) {
-        els.progressLabel.textContent = label;
+        els.progressLabel.textContent = label || "Loading…";
         els.progressBar.style.width = "0%";
         els.progress.setAttribute("aria-valuenow", "0");
         els.progress.hidden = false;
       },
       update(frac, label) {
-        const pct = Math.round(Math.min(1, Math.max(0, frac)) * 100);
-        els.progressBar.style.width = `${pct}%`;
-        els.progress.setAttribute("aria-valuenow", String(pct));
+        const p = Math.round(Math.min(1, Math.max(0, frac)) * 100);
+        els.progressBar.style.width = `${p}%`;
+        els.progress.setAttribute("aria-valuenow", String(p));
         if (label) els.progressLabel.textContent = label;
       },
       hide() {
@@ -254,15 +584,13 @@ export function createUI(app) {
     showDrop(on) {
       els.dropOverlay.hidden = !on;
     },
-    openExport() {
-      els.exportGroup.open = true;
-    },
     collapseSheet() {
       if (expanded) {
         expanded = false;
         applySheet();
       }
     },
+    refreshSheet: applySheet,
     isTyping(target) {
       if (!target || target === document.body) return false;
       const tag = target.tagName;
@@ -270,27 +598,4 @@ export function createUI(app) {
     },
   };
   return ui;
-}
-
-async function copyText(text, ui) {
-  if (!text) return;
-  try {
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      await navigator.clipboard.writeText(text);
-      ui.toast("Embed snippet copied.");
-      return;
-    }
-  } catch {
-    // fall through to the selection fallback
-  }
-  const ta = ui.els.embedSnippet;
-  ta.focus();
-  ta.select();
-  let ok = false;
-  try {
-    ok = document.execCommand("copy");
-  } catch {
-    ok = false;
-  }
-  ui.toast(ok ? "Embed snippet copied." : "Copy is blocked here; select the text and copy it.");
 }

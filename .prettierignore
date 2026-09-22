@@ -1,8 +1,10 @@
 node_modules/
 vendor/
+assets/
 tests/screenshots/
 test-results/
 playwright-report/
+.cache/
 package-lock.json
 SPEC.md
 docs/SPEC-v1-planet-painter.md

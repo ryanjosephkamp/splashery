@@ -64,15 +64,3 @@ export function parseHash(hash) {
   const params = new URLSearchParams(h);
   return { s: params.get("s"), theme: params.get("theme"), params };
 }
-
-// Decodes a PNG data URI into an ImageBitmap with row 0 at the bottom and
-// straight (non-premultiplied) alpha, ready for the paint system.
-export async function decodePNGDataURI(uri) {
-  const res = await fetch(uri);
-  const blob = await res.blob();
-  return createImageBitmap(blob, {
-    imageOrientation: "flipY",
-    premultiplyAlpha: "none",
-    colorSpaceConversion: "none",
-  });
-}

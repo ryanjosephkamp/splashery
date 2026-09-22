@@ -2,13 +2,17 @@ import { defineConfig } from "@playwright/test";
 
 // Chromium is launched through SPLASHERY_CHROMIUM when set (the cloud sandbox
 // preinstalls it at /opt/pw-browsers/chromium); otherwise Playwright's own
-// browser is used. SwiftShader flags give headless WebGL2 without a GPU.
+// browser is used. SwiftShader flags give headless WebGL2 without a GPU, and
+// the Vulkan flags let the same SwiftShader back WebGPU where Chromium allows
+// it. WebGL2 tests force ?renderer=webgl2; WebGPU tests skip themselves with a
+// message when no adapter is available.
 const executablePath = process.env.SPLASHERY_CHROMIUM || undefined;
 
 export default defineConfig({
   testDir: "./tests",
-  timeout: 180_000,
-  expect: { timeout: 30_000 },
+  testMatch: /.*\.spec\.mjs$/,
+  timeout: 240_000,
+  expect: { timeout: 60_000 },
   workers: 1,
   retries: 0,
   reporter: [["list"]],
@@ -24,6 +28,10 @@ export default defineConfig({
         "--ignore-gpu-blocklist",
         "--enable-webgl",
         "--disable-gpu-driver-bug-workarounds",
+        "--enable-unsafe-webgpu",
+        "--enable-features=Vulkan,WebGPU",
+        "--use-webgpu-adapter=swiftshader",
+        "--use-vulkan=swiftshader",
       ],
     },
   },

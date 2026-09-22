@@ -1,17 +1,22 @@
 {
   "name": "splashery",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
-  "description": "Splashery: paint a planet. A pure-browser 3D paint toy.",
+  "description": "Splashery: splats you can play with. A pure-browser toy made of 3D Gaussian splats.",
   "type": "module",
   "scripts": {
     "serve": "python3 -m http.server 4173 --bind 127.0.0.1",
     "test": "playwright test",
+    "assets": "node tools/prepare-assets.mjs",
+    "thumbs": "node tools/make-thumbs.mjs",
     "format": "prettier --write .",
     "format:check": "prettier --check ."
   },
   "devDependencies": {
+    "@playcanvas/splat-transform": "3.6.1",
     "@playwright/test": "1.56.1",
+    "gifenc": "1.0.3",
+    "playcanvas": "2.22.3",
     "prettier": "3.8.1"
   }
 }

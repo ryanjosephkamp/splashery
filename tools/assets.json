@@ -1,0 +1,44 @@
+{
+  "about": "Sources for the captured toys. tools/prepare-assets.mjs turns each into assets/toys/<id>/<id>.sog (and a lighter <id>-lite.sog for weak devices). Licences and credits are in CREDITS.md.",
+  "toys": [
+    {
+      "id": "cactus",
+      "label": "Cactus",
+      "source": ".cache/assets/cactus/cactus_splat3_30kSteps_464k_splats.ply",
+      "sourceNote": "Member of 3DGS_PLY_sample_data.zip from https://note.com/steam_studio/n/ne9736d94f162 (Box share https://app.box.com/s/itozvq23jh4av2a5hg08d7qevdbi93ii). Download the zip and copy this file into .cache/assets/cactus/.",
+      "rotate": [180, 0, 0],
+      "splats": 450000,
+      "lite": 120000
+    },
+    {
+      "id": "strawberry",
+      "label": "Strawberry",
+      "source": "https://d28zzqy0iyovbz.cloudfront.net/84df8849/v1/meta.json",
+      "sourceNote": "The SOG the public SuperSplat viewer streams for https://superspl.at/scene/84df8849 (downloads enabled, CC BY 4.0).",
+      "rotate": [180, 0, 0],
+      "splats": 450000,
+      "lite": 120000
+    },
+    {
+      "id": "cookie",
+      "label": "Heart cookie",
+      "source": "https://d28zzqy0iyovbz.cloudfront.net/bd964899/v3/meta.json",
+      "sourceNote": "The SOG the public SuperSplat viewer streams for https://superspl.at/scene/bd964899 (downloads enabled, CC BY 4.0).",
+      "rotate": [180, 180, 0],
+      "splats": 420000,
+      "lite": 120000
+    },
+    {
+      "id": "bee",
+      "label": "Honeybee",
+      "source": "https://d28zzqy0iyovbz.cloudfront.net/ae58ed2c/v1/meta.json",
+      "sourceNote": "The SOG the public SuperSplat viewer streams for https://superspl.at/scene/ae58ed2c (downloads enabled, CC BY 4.0).",
+      "rotate": [0, 0, 0],
+      "splats": 450000,
+      "lite": 120000,
+      "crop": [-1.35, -0.4, -1.35, 1.35, 0.4, 1.35],
+      "cropNote": "Trims the specimen pin above and below the body and drops the faintest haze.",
+      "filters": ["opacity,gt,0.1"]
+    }
+  ]
+}
