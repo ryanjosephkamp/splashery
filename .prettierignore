@@ -5,3 +5,4 @@ test-results/
 playwright-report/
 package-lock.json
 SPEC.md
+docs/SPEC-v1-planet-painter.md
