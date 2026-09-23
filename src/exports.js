@@ -135,8 +135,9 @@ export async function buildShareHash(scene) {
       "The paint is too detailed for a link, so the link leaves it out. Save JSON to keep it.",
     );
   }
-  if (hash.length > LINK_LIMIT && payload.toy.kind === "procedural" && payload.toy.clay.length) {
+  if (hash.length > LINK_LIMIT && payload.toy.clay?.length) {
     payload = { ...payload, toy: { ...payload.toy, clay: [] } };
+    if (payload.toy.kind === "builtin") delete payload.toy.clay;
     hash = await encodeSceneHash(payload);
     notes.push("The clay edits are too long for a link as well; save JSON to keep them.");
   }

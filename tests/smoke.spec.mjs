@@ -7,6 +7,8 @@ import { test, expect } from "@playwright/test";
 import fs from "node:fs";
 import path from "node:path";
 import { makePly, makeSplat, makeSpz } from "./fixtures.mjs";
+import { TOYS } from "../src/toys.js";
+import { encodeSceneHash } from "../src/codec.js";
 
 const SHOTS = path.resolve("tests/screenshots");
 const WEBGL = "/?renderer=webgl2&profile=weak";
@@ -95,7 +97,7 @@ test.describe("Splashery app (WebGL2)", () => {
     expect(renderer).toBe("webgl2");
     await waitForToy(page, "Cactus");
     const cards = page.locator(".toy-card");
-    await expect(cards).toHaveCount(8);
+    await expect(cards).toHaveCount(TOYS.length);
     for (const id of ["cactus", "strawberry", "cookie", "bee", "blob", "donut", "knot", "planet"]) {
       await expect(page.locator(`.toy-card[data-toy='${id}'] img`)).toHaveJSProperty(
         "complete",
@@ -134,7 +136,7 @@ test.describe("Splashery app (WebGL2)", () => {
     await expect(page.locator("#shelf-empty")).toBeVisible();
     await page.fill("#shelf-search", "");
     await page.click(".chip[data-category='all']");
-    expect((await shown()).length).toBe(8);
+    expect((await shown()).length).toBe(TOYS.length);
     await page.click("#shelf-surprise");
     await expect(page.locator("#toy-status")).not.toHaveText(/^Cactus/, { timeout: 180_000 });
     expect(problems).toEqual([]);
@@ -295,7 +297,7 @@ test.describe("Splashery app (WebGL2)", () => {
     expect(download.suggestedFilename()).toMatch(/^splashery-.*\.json$/);
     const file = await download.path();
     const scene = JSON.parse(fs.readFileSync(file, "utf8"));
-    expect(scene.version).toBe(2);
+    expect(scene.version).toBe(3);
     expect(scene.app).toBe("splashery");
     expect(scene.toy).toEqual({ kind: "builtin", id: "donut" });
     expect(scene.look.exposure).toBeCloseTo(1.3, 5);
@@ -479,6 +481,172 @@ test.describe("Splashery app (WebGL2)", () => {
   });
 });
 
+test.describe("Splashery v3 engine (WebGL2)", () => {
+  test.use({ viewport: { width: 1280, height: 800 }, reducedMotion: "reduce" });
+
+  test("a kit toy loads from its pack, and its action and a tap open and close it", async ({
+    page,
+  }) => {
+    const problems = watchConsole(page);
+    await loadApp(page);
+    await page.click(".toy-card[data-toy='chest']");
+    await waitForToy(page, "Treasure chest");
+    await expect(page.locator("#toy-action")).toHaveText("Open or close");
+    const canvas = page.locator("#stage");
+    const closed = await canvas.screenshot({ type: "png" });
+    await page.click("#toy-action");
+    await page.waitForTimeout(2000);
+    const open = await canvas.screenshot({ type: "png" });
+    expect(await countDifferentPixels(page, closed, open)).toBeGreaterThan(3000);
+    expect((await page.evaluate(() => window.__splashery.exportScene())).motion.controls.open).toBe(
+      1,
+    );
+    // A tap on the toy (Orbit tool) closes it again.
+    const box = await canvas.boundingBox();
+    await page.mouse.click(box.x + box.width / 2, box.y + box.height * 0.62);
+    await expect
+      .poll(() => page.evaluate(() => window.__splashery.exportScene().motion.controls.open))
+      .toBe(0);
+    expect(problems).toEqual([]);
+  });
+
+  test("toys move by themselves once motion is on, and any toy can bounce", async ({ page }) => {
+    const problems = watchConsole(page);
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await loadApp(page);
+    await page.click(".toy-card[data-toy='campfire']");
+    await waitForToy(page, "Campfire");
+    // Reduced motion: nothing moves until asked.
+    await expect(page.locator("#toy-alive")).not.toBeChecked();
+    await page.click("#toy-alive");
+    await page.waitForTimeout(600);
+    const canvas = page.locator("#stage");
+    const a = await canvas.screenshot({ type: "png" });
+    await page.waitForTimeout(700);
+    const b = await canvas.screenshot({ type: "png" });
+    expect(await countDifferentPixels(page, a, b)).toBeGreaterThan(1500);
+    await page.click(".toy-card[data-toy='cactus']");
+    await waitForToy(page, "Cactus");
+    const still = await canvas.screenshot({ type: "png" });
+    await page.click("#toy-move [data-move='bounce']");
+    await page.waitForTimeout(250);
+    const up = await canvas.screenshot({ type: "png" });
+    expect(await countDifferentPixels(page, still, up)).toBeGreaterThan(1500);
+    expect((await page.evaluate(() => window.__splashery.exportScene())).motion.move).toBe(
+      "bounce",
+    );
+    expect(problems).toEqual([]);
+  });
+
+  test("patterns and flags recolour any toy and travel in the link", async ({ page }) => {
+    const problems = watchConsole(page);
+    await loadApp(page);
+    await page.click(".toy-card[data-toy='blob']");
+    await waitForToy(page, "Jelly blob");
+    const canvas = page.locator("#stage");
+    const before = await canvas.screenshot({ type: "png" });
+    await page.click("#tab-look");
+    await page.selectOption("#pat-id", "flag");
+    await page.waitForFunction(() => document.querySelectorAll("#pat-flag option").length > 150);
+    await page.selectOption("#pat-flag", "fr");
+    await expect(page.locator("#toy-status")).toContainText("in the colours of France");
+    await page.waitForTimeout(1000);
+    const flagged = await canvas.screenshot({ type: "png" });
+    expect(await countDifferentPixels(page, before, flagged)).toBeGreaterThan(5000);
+    await page.selectOption("#pat-id", "stripes");
+    await page.waitForTimeout(800);
+    const striped = await canvas.screenshot({ type: "png" });
+    expect(await countDifferentPixels(page, flagged, striped)).toBeGreaterThan(3000);
+    await page.selectOption("#pat-id", "flag");
+    await page.selectOption("#pat-flag", "jp");
+    const link = await page.evaluate(() => window.__splashery.app.copyLink());
+    const hash = new URL(link).hash;
+    const page2 = await page.context().newPage();
+    await page2.goto(`/?renderer=webgl2&profile=weak${hash}`);
+    await page2.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
+    await expect(page2.locator("#toy-status")).toContainText("in the colours of Japan", {
+      timeout: 60_000,
+    });
+    expect(problems).toEqual([]);
+  });
+
+  test("an old version 2 share link still opens", async ({ page }) => {
+    const problems = watchConsole(page);
+    const hash = await encodeSceneHash({
+      app: "splashery",
+      version: 2,
+      seed: 12,
+      toy: { kind: "builtin", id: "donut" },
+      effects: { twist: { on: true, amount: 0.4, wobble: 0, axis: "y" } },
+      autoplay: { turntable: false, effect: "none" },
+    });
+    await page.goto(`/?renderer=webgl2&profile=weak#s=${hash}`);
+    await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
+    await waitForToy(page, "Donut");
+    const s = await page.evaluate(() => window.__splashery.exportScene());
+    expect(s.version).toBe(3);
+    expect(s.effects.twist).toMatchObject({ on: true, amount: 0.4 });
+    expect(s.pattern.id).toBe("none");
+    expect(problems).toEqual([]);
+  });
+
+  test("the sound switch remembers its choice", async ({ page }) => {
+    await loadApp(page);
+    await expect(page.locator("#sound-toggle")).toHaveAttribute("aria-pressed", "false");
+    await page.click("#sound-toggle");
+    await expect(page.locator("#sound-toggle")).toHaveAttribute("aria-pressed", "true");
+    expect(await page.evaluate(() => localStorage.getItem("splashery.sound"))).toBe("on");
+    await page.reload();
+    await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
+    await expect(page.locator("#sound-toggle")).toHaveAttribute("aria-pressed", "true");
+  });
+
+  test("v3 screenshots at 1440x900 and 390x844", async ({ browser }) => {
+    fs.mkdirSync(SHOTS, { recursive: true });
+    const desk = await browser.newContext({ viewport: { width: 1440, height: 900 } });
+    const page = await desk.newPage();
+    const problems = watchConsole(page);
+    await loadApp(page);
+    await page.click(".toy-card[data-toy='chest']");
+    await waitForToy(page, "Treasure chest");
+    await page.click("#toy-action");
+    await page.evaluate(() => window.__splashery.app.setPattern({ id: "flag", flag: "gb" }));
+    await expect(page.locator("#toy-status")).toContainText("United Kingdom");
+    await page.waitForTimeout(2200);
+    await page.screenshot({ path: path.join(SHOTS, "v3-1440x900.png") });
+    expect(problems).toEqual([]);
+    await desk.close();
+    const phone = await browser.newContext({
+      viewport: { width: 390, height: 844 },
+      hasTouch: true,
+      isMobile: true,
+    });
+    const p2 = await phone.newPage();
+    await loadApp(p2);
+    await p2.click(".chip[data-category='weather']");
+    await p2.click(".toy-card[data-toy='campfire']");
+    await waitForToy(p2, "Campfire");
+    await p2.tap("#sheet-toggle");
+    await p2.waitForTimeout(1200);
+    await p2.screenshot({ path: path.join(SHOTS, "v3-390x844.png") });
+    await phone.close();
+  });
+
+  test("an embedded kit toy opens when tapped", async ({ page }) => {
+    const problems = watchConsole(page);
+    await page.setViewportSize({ width: 400, height: 300 });
+    await page.goto("/embed/?toy=chest&renderer=webgl2");
+    await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
+    await page.waitForTimeout(1500);
+    const box = await page.locator("#stage").boundingBox();
+    await page.mouse.click(box.x + box.width / 2, box.y + box.height * 0.62);
+    await expect
+      .poll(() => page.evaluate(() => window.__splashery.player.scene.motion.controls.open))
+      .toBe(1);
+    expect(problems).toEqual([]);
+  });
+});
+
 test.describe("Splashery on a phone", () => {
   test.use({
     viewport: { width: 390, height: 844 },
@@ -605,6 +773,15 @@ test.describe("Splashery on WebGPU", () => {
     await page.waitForTimeout(2500);
     const after = await canvas.screenshot({ type: "png" });
     expect(await countDifferentPixels(page, before, after)).toBeGreaterThan(3000);
+    // The kit shader variant (parts, behaviours) and the pattern layer on WebGPU.
+    await page.click(".toy-card[data-toy='chest']");
+    await waitForToy(page, "Treasure chest");
+    const closed = await canvas.screenshot({ type: "png" });
+    await page.click("#toy-action");
+    await page.evaluate(() => window.__splashery.app.setPattern({ id: "flag", flag: "br" }));
+    await page.waitForTimeout(2000);
+    const open = await canvas.screenshot({ type: "png" });
+    expect(await countDifferentPixels(page, closed, open)).toBeGreaterThan(3000);
     expect(problems).toEqual([]);
   });
 });

@@ -6,6 +6,8 @@ import { EFFECTS, AXES } from "./effects.js";
 import { SHAPES, PALETTES, PROFILES } from "./generators.js";
 import { TOYS, thumbURL, shelfCategories, searchToys } from "./toys.js";
 import { IDLE_EFFECTS, formatCount } from "./state.js";
+import { MOVES } from "./motion.js";
+import { PATTERNS, PROJECTIONS, loadFlags } from "./patterns.js";
 
 const $ = (id) => document.getElementById(id);
 
@@ -45,6 +47,37 @@ export function createUI(app) {
     shelfSearch: $("shelf-search"),
     shelfSearchToggle: $("shelf-search-toggle"),
     shelfSurprise: $("shelf-surprise"),
+    toyGroup: $("toy-group"),
+    toyActionRow: $("toy-action-row"),
+    toyAction: $("toy-action"),
+    toyControls: $("toy-controls"),
+    toyAliveRow: $("toy-alive-row"),
+    toyAlive: $("toy-alive"),
+    toyMove: $("toy-move"),
+    toySpeed: $("toy-speed"),
+    toySpeedValue: $("toy-speed-value"),
+    toyOptions: $("toy-options"),
+    toyNote: $("toy-note"),
+    patId: $("pat-id"),
+    patFlagRow: $("pat-flag-row"),
+    patFlag: $("pat-flag"),
+    patColorsRow: $("pat-colors-row"),
+    patC1: $("pat-c1"),
+    patC2: $("pat-c2"),
+    patC3: $("pat-c3"),
+    patMore: $("pat-more"),
+    patProj: $("pat-proj"),
+    patRepeats: $("pat-repeats"),
+    patRepeatsValue: $("pat-repeats-value"),
+    patScaleRow: $("pat-scale-row"),
+    patScale: $("pat-scale"),
+    patScaleValue: $("pat-scale-value"),
+    patAmount: $("pat-amount"),
+    patAmountValue: $("pat-amount-value"),
+    patDetail: $("pat-detail"),
+    patDetailValue: $("pat-detail-value"),
+    patNote: $("pat-note"),
+    soundToggle: $("sound-toggle"),
     tools: $("tools"),
     toolHint: $("tool-hint"),
     toolParams: $("tool-params"),
@@ -383,6 +416,210 @@ export function createUI(app) {
     els.clayExtras.hidden = tool !== "clay";
   }
 
+  // ---- This toy ----------------------------------------------------------------
+  // Motion for every toy, plus a kit toy's action, controls and options.
+  for (const m of MOVES) {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.dataset.move = m.id;
+    b.textContent = m.label;
+    b.setAttribute("aria-pressed", String(m.id === "still"));
+    b.addEventListener("click", () => app.setMotion({ move: m.id }));
+    els.toyMove.appendChild(b);
+  }
+  els.toySpeed.addEventListener("input", () =>
+    app.setMotion({ speed: Number(els.toySpeed.value) / 100 }),
+  );
+  els.toyAlive.addEventListener("change", () => app.setMotion({ alive: els.toyAlive.checked }));
+  els.toyAction.addEventListener("click", () => app.act());
+  const controlInputs = new Map(); // key -> { input, output, def }
+
+  function renderToyPanel(info) {
+    const recipe = info?.recipe || null;
+    els.toyActionRow.hidden = !recipe?.action;
+    els.toyAction.textContent = recipe?.action?.label || "";
+    els.toyAliveRow.hidden = !recipe?.alive;
+    els.toyControls.textContent = "";
+    controlInputs.clear();
+    for (const c of recipe?.controls || []) {
+      if (c.type === "pulse") continue;
+      if (c.type === "toggle") {
+        if (recipe.action?.key === c.key) continue;
+        const row = document.createElement("label");
+        row.className = "check-row";
+        const input = document.createElement("input");
+        input.type = "checkbox";
+        input.className = "switch";
+        input.setAttribute("role", "switch");
+        input.addEventListener("change", () => app.setControl(c.key, input.checked ? 1 : 0));
+        const text = document.createElement("span");
+        text.textContent = c.label;
+        row.append(input, text);
+        els.toyControls.appendChild(row);
+        controlInputs.set(c.key, { input, def: c });
+        continue;
+      }
+      const row = document.createElement("label");
+      row.className = "row";
+      const name = document.createElement("span");
+      name.textContent = c.label;
+      const input = document.createElement("input");
+      input.type = "range";
+      input.min = "0";
+      input.max = "100";
+      input.id = `ctl-${c.key}`;
+      const output = document.createElement("output");
+      output.htmlFor = input.id;
+      input.addEventListener("input", () => {
+        output.value = `${input.value}%`;
+        app.setControl(c.key, Number(input.value) / 100);
+      });
+      row.append(name, input, output);
+      els.toyControls.appendChild(row);
+      controlInputs.set(c.key, { input, output, def: c });
+    }
+    els.toyOptions.textContent = "";
+    for (const o of recipe?.options || []) {
+      const row = document.createElement("label");
+      row.className = "row";
+      const name = document.createElement("span");
+      name.textContent = o.label;
+      row.appendChild(name);
+      const value = info.options?.[o.key] ?? o.default;
+      let input;
+      if (o.type === "select") {
+        input = document.createElement("select");
+        for (const ch of o.choices) input.add(new Option(ch.label, ch.id));
+        input.value = value;
+        input.addEventListener("change", () => app.setToyOption(o.key, input.value));
+      } else if (o.type === "color") {
+        const well = document.createElement("span");
+        well.className = "color-well small";
+        input = document.createElement("input");
+        input.type = "color";
+        input.value = value;
+        input.setAttribute("aria-label", o.label);
+        input.addEventListener("change", () => app.setToyOption(o.key, input.value));
+        well.appendChild(input);
+        row.appendChild(well);
+        els.toyOptions.appendChild(row);
+        continue;
+      } else if (o.type === "switch") {
+        input = document.createElement("input");
+        input.type = "checkbox";
+        input.className = "switch";
+        input.checked = !!value;
+        input.addEventListener("change", () => app.setToyOption(o.key, input.checked));
+      } else {
+        input = document.createElement("input");
+        input.type = "range";
+        input.min = String(o.min ?? 0);
+        input.max = String(o.max ?? 1);
+        input.step = String(o.step ?? 0.01);
+        input.value = String(value);
+        input.addEventListener("change", () => app.setToyOption(o.key, Number(input.value)));
+      }
+      row.appendChild(input);
+      els.toyOptions.appendChild(row);
+    }
+    els.toyNote.textContent = recipe
+      ? recipe.note || ""
+      : "Every toy can bounce, spin, wobble or float. Tap it to make it hop.";
+  }
+
+  function showMotion(m, controls = {}) {
+    for (const b of els.toyMove.children)
+      b.setAttribute("aria-pressed", String(b.dataset.move === m.move));
+    els.toySpeed.value = String(Math.round(m.speed * 100));
+    els.toySpeedValue.value = pct(m.speed);
+    els.toyAlive.checked = m.alive;
+    for (const [key, c] of controlInputs) {
+      const v = controls[key] ?? m.controls?.[key] ?? c.def.default ?? 0;
+      if (c.def.type === "toggle") c.input.checked = v > 0.5;
+      else {
+        c.input.value = String(Math.round(v * 100));
+        c.output.value = pct(v);
+      }
+    }
+  }
+
+  // ---- Pattern ------------------------------------------------------------------
+  for (const p of PATTERNS) els.patId.add(new Option(p.label, p.id));
+  for (const p of PROJECTIONS) {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.dataset.proj = p.id;
+    b.textContent = p.label;
+    b.addEventListener("click", () => app.setPattern({ projection: p.id }));
+    els.patProj.appendChild(b);
+  }
+  let flagsListed = false;
+  async function listFlags() {
+    if (flagsListed) return;
+    flagsListed = true;
+    const flags = await loadFlags();
+    const sorted = flags.slice().sort((a, b) => a.name.localeCompare(b.name));
+    for (const f of sorted) els.patFlag.add(new Option(f.name, f.code));
+    els.patFlag.value = app.player?.scene.pattern.flag || "";
+  }
+  els.patId.addEventListener("change", () => app.setPattern({ id: els.patId.value }));
+  els.patFlag.addEventListener("change", () => app.setPattern({ flag: els.patFlag.value }));
+  for (const [i, el] of [els.patC1, els.patC2, els.patC3].entries()) {
+    el.addEventListener("input", () => {
+      const colors = app.player.scene.pattern.colors.slice();
+      colors[i] = el.value;
+      app.setPattern({ colors });
+    });
+  }
+  const patSlider = (el, key, out, fmt) => {
+    el.addEventListener("input", () => {
+      const v = key === "repeats" ? Number(el.value) : Number(el.value) / 100;
+      out.value = fmt(v);
+      app.setPattern({ [key]: v });
+    });
+  };
+  patSlider(els.patRepeats, "repeats", els.patRepeatsValue, (v) => String(v));
+  patSlider(els.patScale, "scale", els.patScaleValue, pct);
+  patSlider(els.patAmount, "amount", els.patAmountValue, pct);
+  patSlider(els.patDetail, "detail", els.patDetailValue, pct);
+  const COLOURED = [
+    "stripes",
+    "bands",
+    "dots",
+    "checks",
+    "stars",
+    "hearts",
+    "zigzag",
+    "gradient",
+    "marble",
+  ];
+
+  function showPattern(p) {
+    els.patId.value = p.id;
+    els.patFlagRow.hidden = p.id !== "flag";
+    if (p.id === "flag") listFlags().then(() => (els.patFlag.value = p.flag));
+    els.patColorsRow.hidden = !COLOURED.includes(p.id);
+    els.patC1.value = p.colors[0];
+    els.patC2.value = p.colors[1];
+    els.patC3.value = p.colors[2];
+    els.patMore.hidden = p.id === "none";
+    els.patScaleRow.hidden = ["flag", "gradient", "rainbow"].includes(p.id);
+    for (const b of els.patProj.children)
+      b.setAttribute("aria-pressed", String(b.dataset.proj === p.projection));
+    els.patRepeats.value = String(p.repeats);
+    els.patRepeatsValue.value = String(p.repeats);
+    els.patRepeats.disabled = p.projection === "front";
+    els.patScale.value = String(Math.round(p.scale * 100));
+    els.patScaleValue.value = pct(p.scale);
+    els.patAmount.value = String(Math.round(p.amount * 100));
+    els.patAmountValue.value = pct(p.amount);
+    els.patDetail.value = String(Math.round(p.detail * 100));
+    els.patDetailValue.value = pct(p.detail);
+  }
+
+  // ---- Sound --------------------------------------------------------------------
+  els.soundToggle.addEventListener("click", () => app.toggleSound());
+
   // ---- Make a toy -------------------------------------------------------------
   for (const s of SHAPES) els.genShape.add(new Option(s.label, s.id));
   for (const p of PALETTES) els.genPalette.add(new Option(p.label, p.id));
@@ -662,6 +899,22 @@ export function createUI(app) {
       els.paintColor.value = fx.paint.color;
       for (const b of els.swatches.children)
         b.setAttribute("aria-pressed", String(b.dataset.color === fx.paint.color));
+    },
+    setToyPanel(info) {
+      renderToyPanel(info);
+      showMotion(app.player.effectiveMotion(), app.player.scene.motion.controls);
+    },
+    // Shows motion as it runs (under reduced motion, off until asked).
+    setMotion(m, controls) {
+      showMotion(app.player.effectiveMotion(), controls || m.controls);
+    },
+    setPattern(p, note) {
+      showPattern(p);
+      els.patNote.textContent = note || "";
+    },
+    setSound(on) {
+      els.soundToggle.setAttribute("aria-pressed", String(on));
+      els.soundToggle.title = on ? "Sound effects on" : "Sound effects off";
     },
     setPaintCount(n) {
       els.paintCount.textContent = n ? `${n} paint stamps` : "";

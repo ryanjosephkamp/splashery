@@ -91,6 +91,13 @@ export class Viewer {
         return true;
       },
       onDoubleTap: () => player.resetCamera(),
+      // A tap on the toy runs its action (open the lid, stoke the fire) or
+      // makes it hop.
+      onTap: async (e) => {
+        const [x, y] = player.canvasPoint(e);
+        player.pickDirty = true;
+        if (await player.pickAt(x, y)) player.act();
+      },
     });
   }
 

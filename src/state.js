@@ -1,13 +1,16 @@
-// The scene document (schema version 2): defaults, validation and the
+// The scene document (schema version 3): defaults, validation and the
 // compact form used in links. Everything saved to JSON goes through here.
-// The shape is documented in docs/SCENE-SCHEMA.md.
+// The shape is documented in docs/SCENE-SCHEMA.md. Version 2 files and
+// links load unchanged: the fields version 3 added take their defaults.
 
 import { normalizeGenerator } from "./generators.js";
 import { EFFECTS, AXES, defaultEffects } from "./effects.js";
 import { DEFAULT_CAMERA } from "./camera.js";
 import { randomSeed } from "./noise.js";
+import { DEFAULT_PATTERN, normalizePattern } from "./patterns.js";
+import { DEFAULT_MOTION, MOVE_IDS } from "./motion.js";
 
-export const SCENE_VERSION = 2;
+export const SCENE_VERSION = 3;
 export const APP_NAME = "Splashery";
 export const TAGLINE = "splats you can play with";
 
@@ -68,6 +71,8 @@ export function createScene(overrides = {}) {
     paint: { stamps: [] },
     camera: { ...DEFAULT_CAMERA },
     autoplay: { turntable: true, effect: "none" },
+    pattern: structuredClone(DEFAULT_PATTERN),
+    motion: structuredClone(DEFAULT_MOTION),
     ...overrides,
   };
 }
@@ -154,6 +159,41 @@ export function normalizeClay(ops, limit = 2000) {
   return out;
 }
 
+const KEY_RE = /^[a-z][a-zA-Z0-9]{0,23}$/;
+const WORD_RE = /^[a-z0-9-]{1,24}$/;
+
+// Recipe options for a kit toy: a few short values (numbers, switches,
+// colours, words). The recipe itself checks their meaning when it builds.
+export function normalizeOptions(o) {
+  if (!o || typeof o !== "object" || Array.isArray(o)) return {};
+  const out = {};
+  for (const k of Object.keys(o).slice(0, 16)) {
+    if (!KEY_RE.test(k)) continue;
+    const v = o[k];
+    if (typeof v === "boolean") out[k] = v;
+    else if (typeof v === "number" && Number.isFinite(v)) out[k] = round(clamp(v, -1e6, 1e6), 4);
+    else if (typeof v === "string" && (HEX_RE.test(v) || WORD_RE.test(v))) out[k] = v.toLowerCase();
+  }
+  return out;
+}
+
+export function normalizeMotion(m) {
+  const src = m && typeof m === "object" ? m : {};
+  const controls = {};
+  if (src.controls && typeof src.controls === "object") {
+    for (const k of Object.keys(src.controls).slice(0, 16)) {
+      const v = num(src.controls[k], NaN, 0, 1);
+      if (KEY_RE.test(k) && Number.isFinite(v)) controls[k] = round(v, 3);
+    }
+  }
+  return {
+    alive: src.alive !== false,
+    move: MOVE_IDS.includes(src.move) ? src.move : DEFAULT_MOTION.move,
+    speed: num(src.speed, DEFAULT_MOTION.speed, 0, 1),
+    controls,
+  };
+}
+
 export function normalizeToy(t, profile) {
   const src = t && typeof t === "object" ? t : {};
   if (src.kind === "procedural") {
@@ -175,7 +215,13 @@ export function normalizeToy(t, profile) {
       flip: !!src.flip,
     };
   }
-  return { kind: "builtin", id: typeof src.id === "string" ? src.id.slice(0, 40) : "blob" };
+  const out = { kind: "builtin", id: typeof src.id === "string" ? src.id.slice(0, 40) : "blob" };
+  // Kit toys can carry options and clay; empty ones are left out.
+  const options = normalizeOptions(src.options);
+  if (Object.keys(options).length) out.options = options;
+  const clay = normalizeClay(src.clay);
+  if (clay.length) out.clay = clay;
+  return out;
 }
 
 // Validates an imported object and returns a clean scene. Throws on garbage.
@@ -188,6 +234,7 @@ export function normalizeScene(obj, profile = "strong") {
       "This is a Splashery v1 planet scene. Splashery v2 plays with splat toys; open it on the v1 branch.",
     );
   }
+  // Version 2 scenes are version 3 scenes without pattern and motion.
   if (version > SCENE_VERSION) {
     throw new Error(`This scene was made with a newer Splashery (version ${version}).`);
   }
@@ -207,6 +254,8 @@ export function normalizeScene(obj, profile = "strong") {
       turntable: autoplay.turntable !== false,
       effect: IDLE_EFFECTS.some((e) => e.id === autoplay.effect) ? autoplay.effect : "none",
     },
+    pattern: normalizePattern(obj.pattern, normalizeHex),
+    motion: normalizeMotion(obj.motion),
   };
 }
 
