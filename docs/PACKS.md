@@ -177,21 +177,21 @@ heartbeat, click. Toys without an action hop when tapped.
 A behaviour moves each splat on the GPU, every frame. Set `kind` and `params: [a, b]` on a shape or
 a cloud splat:
 
-| kind      | What it does                                              | a                                     | b                                             |
-| --------- | --------------------------------------------------------- | ------------------------------------- | --------------------------------------------- |
-| `orbit`   | Turns around the toy's up axis.                           | turns per second at the rim (radians) | falloff: 0 rigid, 1.5 Keplerian               |
-| `beat`    | Heartbeat swell from the centre.                          | amount (0.05)                         | phase                                         |
-| `breathe` | Slow swell.                                               | amount                                | phase                                         |
-| `flame`   | Rises, shrinks and reddens in a loop.                     | height in toy radii                   | phase (random)                                |
-| `rise`    | Drifts up and fades (embers, bubbles, smoke).             | height                                | phase                                         |
-| `fall`    | Falls and fades (rain, snow, petals).                     | distance                              | phase                                         |
-| `twinkle` | Brightness flicker.                                       | amount (0.3 to 1)                     | phase                                         |
-| `sway`    | Bends with height above a base (plants, tentacles, hair). | amount                                | base height (toy coordinates, before the fit) |
-| `grow`    | Appears as `out.grow` passes a.                           | threshold 0..1                        | unused                                        |
-| `melt`    | Slumps and spreads to the floor as `out.energy` rises.    | how easily (0..1)                     | unused                                        |
-| `pulse`   | A glow (`out.glow`) runs along a path.                    | position along the path 0..1          | unused                                        |
-| `wave`    | Ripples up and down.                                      | amount                                | phase                                         |
-| `glint`   | Sparkles as the camera moves.                             | amount                                | unused                                        |
+| kind      | What it does                                              | a                                     | b                                |
+| --------- | --------------------------------------------------------- | ------------------------------------- | -------------------------------- |
+| `orbit`   | Turns around the toy's up axis.                           | turns per second at the rim (radians) | falloff: 0 rigid, 1.5 Keplerian  |
+| `beat`    | Heartbeat swell from the centre.                          | amount (0.05)                         | phase                            |
+| `breathe` | Slow swell.                                               | amount                                | phase                            |
+| `flame`   | Rises, shrinks and reddens in a loop.                     | height in toy radii                   | phase (random)                   |
+| `rise`    | Drifts up and fades (embers, bubbles, smoke).             | height                                | phase                            |
+| `fall`    | Falls and fades (rain, snow, petals).                     | distance                              | phase                            |
+| `twinkle` | Brightness flicker.                                       | amount (0.3 to 1)                     | phase                            |
+| `sway`    | Bends with height above a base (plants, tentacles, hair). | amount                                | base height (recipe coordinates) |
+| `grow`    | Appears as `out.grow` passes a.                           | threshold 0..1                        | unused                           |
+| `melt`    | Slumps and spreads to the floor as `out.energy` rises.    | how easily (0..1)                     | unused                           |
+| `pulse`   | A glow (`out.glow`) runs along a path.                    | position along the path 0..1          | unused                           |
+| `wave`    | Ripples up and down.                                      | amount                                | phase                            |
+| `glint`   | Sparkles as the camera moves.                             | amount                                | unused                           |
 
 `amount` from `drive` multiplies beat, breathe, flame, rise, twinkle, sway and wave. Behaviours run
 in the toy's rest pose, before parts move it.
