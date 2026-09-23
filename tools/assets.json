@@ -39,6 +39,141 @@
       "crop": [-1.35, -0.4, -1.35, 1.35, 0.4, 1.35],
       "cropNote": "Trims the specimen pin above and below the body and drops the faintest haze.",
       "filters": ["opacity,gt,0.1"]
+    },
+    {
+      "id": "rubber-duck-real",
+      "label": "Rubber Duck Toy",
+      "source": ".cache/models/rubber-duck-real/rubber-duck-real.ply",
+      "sourceNote": "Made by tools/mesh-to-splats.mjs (see tools/models.json) from the CC0 model https://polyhaven.com/a/rubber_duck_toy",
+      "rotate": [0, 0, 0],
+      "splats": 200000,
+      "lite": 80000
+    },
+    {
+      "id": "garden-gnome",
+      "label": "Garden Gnome",
+      "source": ".cache/models/garden-gnome/garden-gnome.ply",
+      "sourceNote": "Made by tools/mesh-to-splats.mjs (see tools/models.json) from the CC0 model https://polyhaven.com/a/garden_gnome",
+      "rotate": [0, 0, 0],
+      "splats": 200000,
+      "lite": 80000
+    },
+    {
+      "id": "wooden-elephant",
+      "label": "Carved Wooden Elephant",
+      "source": ".cache/models/wooden-elephant/wooden-elephant.ply",
+      "sourceNote": "Made by tools/mesh-to-splats.mjs (see tools/models.json) from the CC0 model https://polyhaven.com/a/carved_wooden_elephant",
+      "rotate": [0, 0, 0],
+      "splats": 200000,
+      "lite": 80000
+    },
+    {
+      "id": "marble-bust",
+      "label": "Marble Bust 01",
+      "source": ".cache/models/marble-bust/marble-bust.ply",
+      "sourceNote": "Made by tools/mesh-to-splats.mjs (see tools/models.json) from the CC0 model https://polyhaven.com/a/marble_bust_01",
+      "rotate": [0, 0, 0],
+      "splats": 200000,
+      "lite": 80000
+    },
+    {
+      "id": "ukulele",
+      "label": "Ukulele 01",
+      "source": ".cache/models/ukulele/ukulele.ply",
+      "sourceNote": "Made by tools/mesh-to-splats.mjs (see tools/models.json) from the CC0 model https://polyhaven.com/a/Ukulele_01",
+      "rotate": [0, 0, 0],
+      "splats": 200000,
+      "lite": 80000
+    },
+    {
+      "id": "alarm-clock",
+      "label": "Alarm Clock 01",
+      "source": ".cache/models/alarm-clock/alarm-clock.ply",
+      "sourceNote": "Made by tools/mesh-to-splats.mjs (see tools/models.json) from the CC0 model https://polyhaven.com/a/alarm_clock_01",
+      "rotate": [0, 0, 0],
+      "splats": 200000,
+      "lite": 80000
+    },
+    {
+      "id": "vintage-camera",
+      "label": "Camera 01",
+      "source": ".cache/models/vintage-camera/vintage-camera.ply",
+      "sourceNote": "Made by tools/mesh-to-splats.mjs (see tools/models.json) from the CC0 model https://polyhaven.com/a/Camera_01",
+      "rotate": [0, 0, 0],
+      "splats": 200000,
+      "lite": 80000
+    },
+    {
+      "id": "boombox",
+      "label": "Boombox",
+      "source": ".cache/models/boombox/boombox.ply",
+      "sourceNote": "Made by tools/mesh-to-splats.mjs (see tools/models.json) from the CC0 model https://polyhaven.com/a/boombox",
+      "rotate": [0, 0, 0],
+      "splats": 200000,
+      "lite": 80000
+    },
+    {
+      "id": "croissant-real",
+      "label": "Croissant",
+      "source": ".cache/models/croissant-real/croissant-real.ply",
+      "sourceNote": "Made by tools/mesh-to-splats.mjs (see tools/models.json) from the CC0 model https://polyhaven.com/a/croissant",
+      "rotate": [0, 0, 0],
+      "splats": 200000,
+      "lite": 80000
+    },
+    {
+      "id": "carrot-cake",
+      "label": "Carrot Cake",
+      "source": ".cache/models/carrot-cake/carrot-cake.ply",
+      "sourceNote": "Made by tools/mesh-to-splats.mjs (see tools/models.json) from the CC0 model https://polyhaven.com/a/carrot_cake",
+      "rotate": [0, 0, 0],
+      "splats": 200000,
+      "lite": 80000
+    },
+    {
+      "id": "pomegranate",
+      "label": "Food Pomegranate 01",
+      "source": ".cache/models/pomegranate/pomegranate.ply",
+      "sourceNote": "Made by tools/mesh-to-splats.mjs (see tools/models.json) from the CC0 model https://polyhaven.com/a/food_pomegranate_01",
+      "rotate": [0, 0, 0],
+      "splats": 200000,
+      "lite": 80000
+    },
+    {
+      "id": "lantern",
+      "label": "Lantern 01",
+      "source": ".cache/models/lantern/lantern.ply",
+      "sourceNote": "Made by tools/mesh-to-splats.mjs (see tools/models.json) from the CC0 model https://polyhaven.com/a/Lantern_01",
+      "rotate": [0, 0, 0],
+      "splats": 200000,
+      "lite": 80000
+    },
+    {
+      "id": "cat-statue",
+      "label": "Concrete Cat Statue",
+      "source": ".cache/models/cat-statue/cat-statue.ply",
+      "sourceNote": "Made by tools/mesh-to-splats.mjs (see tools/models.json) from the CC0 model https://polyhaven.com/a/concrete_cat_statue",
+      "rotate": [0, 0, 0],
+      "splats": 200000,
+      "lite": 80000
+    },
+    {
+      "id": "chess-set",
+      "label": "Chess Set",
+      "source": ".cache/models/chess-set/chess-set.ply",
+      "sourceNote": "Made by tools/mesh-to-splats.mjs (see tools/models.json) from the CC0 model https://polyhaven.com/a/chess_set",
+      "rotate": [0, 0, 0],
+      "splats": 200000,
+      "lite": 80000
+    },
+    {
+      "id": "horse-statue",
+      "label": "Horse Statue 01",
+      "source": ".cache/models/horse-statue/horse-statue.ply",
+      "sourceNote": "Made by tools/mesh-to-splats.mjs (see tools/models.json) from the CC0 model https://polyhaven.com/a/horse_statue_01",
+      "rotate": [0, 0, 0],
+      "splats": 200000,
+      "lite": 80000
     }
   ]
 }

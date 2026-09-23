@@ -1,0 +1,140 @@
+{
+  "about": "3D models turned into splats by tools/mesh-to-splats.mjs (then packed by tools/prepare-assets.mjs, whose manifest tools/assets.json points at the PLY files this writes). CC0 or CC BY only; licences and credits are in CREDITS.md.",
+  "models": [
+    {
+      "id": "rubber-duck-real",
+      "name": "Rubber Duck Toy",
+      "source": "polyhaven:rubber_duck_toy",
+      "page": "https://polyhaven.com/a/rubber_duck_toy",
+      "author": "Plat251",
+      "license": "CC0 1.0",
+      "splats": 200000
+    },
+    {
+      "id": "garden-gnome",
+      "name": "Garden Gnome",
+      "source": "polyhaven:garden_gnome",
+      "page": "https://polyhaven.com/a/garden_gnome",
+      "author": "Bhargav Kubal",
+      "license": "CC0 1.0",
+      "splats": 200000
+    },
+    {
+      "id": "wooden-elephant",
+      "name": "Carved Wooden Elephant",
+      "source": "polyhaven:carved_wooden_elephant",
+      "page": "https://polyhaven.com/a/carved_wooden_elephant",
+      "author": "Greg Zaal",
+      "license": "CC0 1.0",
+      "splats": 200000
+    },
+    {
+      "id": "marble-bust",
+      "name": "Marble Bust 01",
+      "source": "polyhaven:marble_bust_01",
+      "page": "https://polyhaven.com/a/marble_bust_01",
+      "author": "Rico Cilliers",
+      "license": "CC0 1.0",
+      "splats": 200000
+    },
+    {
+      "id": "ukulele",
+      "name": "Ukulele 01",
+      "source": "polyhaven:Ukulele_01",
+      "page": "https://polyhaven.com/a/Ukulele_01",
+      "author": "Joseph Burgan",
+      "license": "CC0 1.0",
+      "splats": 200000
+    },
+    {
+      "id": "alarm-clock",
+      "name": "Alarm Clock 01",
+      "source": "polyhaven:alarm_clock_01",
+      "page": "https://polyhaven.com/a/alarm_clock_01",
+      "author": "Yann Kervran, James Ray Cock",
+      "license": "CC0 1.0",
+      "splats": 200000
+    },
+    {
+      "id": "vintage-camera",
+      "name": "Camera 01",
+      "source": "polyhaven:Camera_01",
+      "page": "https://polyhaven.com/a/Camera_01",
+      "author": "Rajil Jose Macatangay",
+      "license": "CC0 1.0",
+      "splats": 200000
+    },
+    {
+      "id": "boombox",
+      "name": "Boombox",
+      "source": "polyhaven:boombox",
+      "page": "https://polyhaven.com/a/boombox",
+      "author": "Thomas Paul Mouilleron",
+      "license": "CC0 1.0",
+      "splats": 200000
+    },
+    {
+      "id": "croissant-real",
+      "name": "Croissant",
+      "source": "polyhaven:croissant",
+      "page": "https://polyhaven.com/a/croissant",
+      "author": "Greg Zaal, Dario Barresi",
+      "license": "CC0 1.0",
+      "splats": 200000
+    },
+    {
+      "id": "carrot-cake",
+      "name": "Carrot Cake",
+      "source": "polyhaven:carrot_cake",
+      "page": "https://polyhaven.com/a/carrot_cake",
+      "author": "Greg Zaal, James Ray Cock",
+      "license": "CC0 1.0",
+      "splats": 200000
+    },
+    {
+      "id": "pomegranate",
+      "name": "Food Pomegranate 01",
+      "source": "polyhaven:food_pomegranate_01",
+      "page": "https://polyhaven.com/a/food_pomegranate_01",
+      "author": "Oliver Harries",
+      "license": "CC0 1.0",
+      "splats": 200000
+    },
+    {
+      "id": "lantern",
+      "name": "Lantern 01",
+      "source": "polyhaven:Lantern_01",
+      "page": "https://polyhaven.com/a/Lantern_01",
+      "author": "Rajil Jose Macatangay",
+      "license": "CC0 1.0",
+      "splats": 200000
+    },
+    {
+      "id": "cat-statue",
+      "name": "Concrete Cat Statue",
+      "source": "polyhaven:concrete_cat_statue",
+      "page": "https://polyhaven.com/a/concrete_cat_statue",
+      "author": "Rico Cilliers, Riley Queen",
+      "license": "CC0 1.0",
+      "splats": 200000
+    },
+    {
+      "id": "chess-set",
+      "name": "Chess Set",
+      "source": "polyhaven:chess_set",
+      "page": "https://polyhaven.com/a/chess_set",
+      "author": "Riley Queen",
+      "license": "CC0 1.0",
+      "splats": 200000
+    },
+    {
+      "id": "horse-statue",
+      "name": "Horse Statue 01",
+      "source": "polyhaven:horse_statue_01",
+      "page": "https://polyhaven.com/a/horse_statue_01",
+      "author": "Rico Cilliers",
+      "license": "CC0 1.0",
+      "splats": 200000
+    }
+  ]
+}

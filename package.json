@@ -13,10 +13,13 @@
     "format:check": "prettier --check ."
   },
   "devDependencies": {
+    "@gltf-transform/core": "4.5.0",
     "@playcanvas/splat-transform": "3.6.1",
     "@playwright/test": "1.56.1",
     "gifenc": "1.0.3",
+    "jpeg-js": "0.4.4",
     "playcanvas": "2.22.3",
+    "pngjs": "7.0.0",
     "prettier": "3.8.1"
   }
 }
