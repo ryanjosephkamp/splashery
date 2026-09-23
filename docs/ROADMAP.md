@@ -1,4 +1,19 @@
-# Splashery roadmap (v3: the big toy box)
+# Splashery roadmap
+
+## Now: polish phases (v4)
+
+v3 shipped on 2026-09-23 (PRs #4–#11, 283 toys). The next work runs in phases, one session each. The
+current state and the full plan for the next phase are in [HANDOFF.md](HANDOFF.md).
+
+| Phase | What                                                                                                                                               |
+| ----- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| A     | Sharpness (pixel density, splat counts, kit splat size, a Detail setting) and embeds (transparency, framing, size, zoom); then the homepage embed. |
+| B     | Mobile shelf grid and a "Find your own splat" help panel.                                                                                          |
+| C     | More music toys and polish.                                                                                                                        |
+| D     | AI image-to-3D trial (the owner added `HF_TOKEN` on 2026-09-23).                                                                                   |
+| E     | Later: gallery, multi-toy scenes, liquid pour, draw-order fix, more scans.                                                                         |
+
+## v3: the big toy box (done)
 
 Agreed with the owner on 2026-09-22. Splashery v2 (8 toys, 8 effects, share links, embeds) stays
 exactly as it is; v3 grows it into a toy box of 100+ toys in many categories, with toys that move on
@@ -6,16 +21,16 @@ their own, open and close, and can wear patterns and flags.
 
 ## Decisions
 
-| Question                   | Decision                                                                                                                                                                                                                                     |
-| -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| How many toys, which first | As many as possible, mostly generated in code. Sports balls and flags first, then the other packs in the order below.                                                                                                                        |
-| PR slicing                 | Stacked draft PRs, one branch each (`claude/splashery-expansion-alignment-q9os3b` and `…-q9os3b-<part>`), all targeting `main`. Merge them in order; each shrinks to its own diff once the one before it is merged.                          |
-| Flags                      | Every national flag, from Wikimedia Commons, public domain only (each file's licence checked), usable on any toy.                                                                                                                            |
-| Outside models             | Allowed: CC0 or CC BY models and scans (Poly Haven, NASA, SuperSplat and similar), turned into splats at build time and credited. AI image-to-3D at build time is allowed with a Hugging Face token the owner adds to the cloud environment. |
-| Anatomy                    | Stylised and friendly, never gory.                                                                                                                                                                                                           |
-| Sound                      | Optional soft sounds (WebAudio, no files), off until the speaker button is pressed, never on in embeds by default.                                                                                                                           |
-| Weapons                    | Medieval and fantasy only (sword, shield, bow, crossbow, catapult, trebuchet, a historical cannon firing paint). No firearms.                                                                                                                |
-| Brands                     | Generic designs only: no logos, league marks or named products ("building bricks", "puzzle cube", "ocean liner", "supertall").                                                                                                               |
+| Question                   | Decision                                                                                                                                                                                                                         |
+| -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| How many toys, which first | As many as possible, mostly generated in code. Sports balls and flags first, then the other packs in the order below.                                                                                                            |
+| PR slicing                 | Stacked draft PRs, one branch each (`claude/splashery-expansion-alignment-q9os3b` and `…-q9os3b-<part>`), all targeting `main`. Merge them in order; each shrinks to its own diff once the one before it is merged.              |
+| Flags                      | Every national flag, from Wikimedia Commons, public domain only (each file's licence checked), usable on any toy.                                                                                                                |
+| Outside models             | Allowed: CC0 or CC BY models and scans (Poly Haven, NASA, SuperSplat and similar), turned into splats at build time and credited. AI image-to-3D at build time is allowed with a Hugging Face token (added 2026-09-23; Phase D). |
+| Anatomy                    | Stylised and friendly, never gory.                                                                                                                                                                                               |
+| Sound                      | Optional soft sounds (WebAudio, no files), off until the speaker button is pressed, never on in embeds by default.                                                                                                               |
+| Weapons                    | Medieval and fantasy only (sword, shield, bow, crossbow, catapult, trebuchet, a historical cannon firing paint). No firearms.                                                                                                    |
+| Brands                     | Generic designs only: no logos, league marks or named products ("building bricks", "puzzle cube", "ocean liner", "supertall").                                                                                                   |
 
 ## How toys are made
 
@@ -106,8 +121,8 @@ their own, open and close, and can wear patterns and flags.
 
 ## Deferred
 
-- **Gallery** (plan below): after the packs land.
-- **Homepage embed** on ryanjosephkamp.github.io: when the owner says so.
+- **Gallery** (plan below): Phase E.
+- **Homepage embed** on ryanjosephkamp.github.io: scheduled for Phase A (after the embed fixes).
 - **True fluid simulation** (particle water on WebGPU compute): scripted pouring comes first.
 - **Multi-toy scenes and physics** (throwing a toy at another, Newton's cradle with real
   collisions): needs a bigger schema change; single-toy behaviours come first.
