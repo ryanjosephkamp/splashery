@@ -801,7 +801,11 @@ test.describe("Splashery on a phone", () => {
     await expect(page.locator("#pane-play")).toBeHidden();
     await page.tap("#shelf-search-toggle");
     await page.fill("#shelf-search", "straw");
-    await expect(page.locator("#shelf .toy-card")).toHaveCount(1);
+    await expect(page.locator("#shelf .toy-card")).toHaveCount(searchToys("straw").length);
+    await expect(page.locator("#shelf .toy-card").first()).toHaveAttribute(
+      "data-toy",
+      "strawberry",
+    );
     await page.press("#shelf-search", "Enter");
     await waitForToy(page, "Strawberry");
     expect(problems).toEqual([]);
