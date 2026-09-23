@@ -904,11 +904,14 @@ export class Kit {
     for (const r of this.reaches)
       r2 = Math.max(r2, (r[0] - c[0]) ** 2 + (r[1] - c[1]) ** 2 + (r[2] - c[2]) ** 2);
     const s = FIT_RADIUS / (Math.sqrt(r2) || 1);
+    const sway = KINDS.sway;
     for (let i = 0; i < buf.count; i++) {
       for (let k = 0; k < 3; k++) {
         buf.pos[i * 3 + k] = (buf.pos[i * 3 + k] - c[k]) * s;
         buf.scale[i * 3 + k] *= s;
       }
+      // Sway's base height is given in recipe coordinates; move it too.
+      if (buf.anim[i * 4 + 1] === sway) buf.anim[i * 4 + 3] = (buf.anim[i * 4 + 3] - c[1]) * s;
     }
     this.baseSize *= s;
     for (const part of this.parts) part.pivot = mul3(sub3(part.pivot, c), s);
@@ -921,6 +924,31 @@ export class Kit {
     const t = this.transform;
     return mul3(sub3(p, t.center), t.scale);
   }
+}
+
+// A smooth curve through points (Catmull-Rom), as t in [0, 1] -> point.
+// Handy as the path of k.tube().
+export function spline(points, { closed = false } = {}) {
+  const pts = closed ? [...points, points[0]] : points;
+  const n = pts.length - 1;
+  const at = (i) => (closed ? pts[((i % n) + n) % n] : pts[Math.min(n, Math.max(0, i))]);
+  return (t) => {
+    const x = Math.min(n - 1e-6, Math.max(0, t * n));
+    const i = Math.floor(x);
+    const f = x - i;
+    const p0 = at(i - 1);
+    const p1 = at(i);
+    const p2 = at(i + 1);
+    const p3 = at(i + 2);
+    return [0, 1, 2].map(
+      (k) =>
+        0.5 *
+        (2 * p1[k] +
+          (-p0[k] + p2[k]) * f +
+          (2 * p0[k] - 5 * p1[k] + 4 * p2[k] - p3[k]) * f * f +
+          (-p0[k] + 3 * p1[k] - 3 * p2[k] + p3[k]) * f * f * f),
+    );
+  };
 }
 
 // n directions spread evenly over the sphere (a Fibonacci lattice).

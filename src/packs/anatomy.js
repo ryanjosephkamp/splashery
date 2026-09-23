@@ -1,34 +1,12 @@
 // Anatomy pack: stylised, friendly organs. Loaded when one of its toys is
 // picked (see the "kit" entries in src/toys.js).
 
-import { mix, shade, smoothstep, implicitRadius } from "../kit.js";
+import { mix, shade, smoothstep, implicitRadius, spline } from "../kit.js";
 
 const RED = "#c42f3c";
 const DEEP = "#8e1a28";
 const BLUE = "#4d6fd0";
 const VESSEL = "#d2474f";
-
-// A tube through a few control points (Catmull-Rom).
-function spline(points) {
-  const n = points.length - 1;
-  return (t) => {
-    const x = Math.min(n - 1e-6, Math.max(0, t * n));
-    const i = Math.floor(x);
-    const f = x - i;
-    const p0 = points[Math.max(0, i - 1)];
-    const p1 = points[i];
-    const p2 = points[i + 1];
-    const p3 = points[Math.min(n, i + 2)];
-    return [0, 1, 2].map(
-      (k) =>
-        0.5 *
-        (2 * p1[k] +
-          (-p0[k] + p2[k]) * f +
-          (2 * p0[k] - 5 * p1[k] + 4 * p2[k] - p3[k]) * f * f +
-          (-p0[k] + 3 * p1[k] - 3 * p2[k] + p3[k]) * f * f * f),
-    );
-  };
-}
 
 export const RECIPES = {
   heart: {

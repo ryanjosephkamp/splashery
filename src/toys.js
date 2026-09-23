@@ -390,6 +390,56 @@ export const TOYS = [
     tags: "pirate gold coins gems box lid open close",
     camera: { yaw: 0.45, pitch: 0.42, roll: 0, distance: 5.4 },
   },
+  // ---- Pack: space ----
+  // (entries for src/packs/space.js go here)
+
+  // ---- Pack: tiny ----
+  // (entries for src/packs/tiny.js go here)
+
+  // ---- Pack: atoms ----
+  // (entries for src/packs/atoms.js go here)
+
+  // ---- Pack: gems ----
+  // (entries for src/packs/gems.js go here)
+
+  // ---- Pack: anatomy ----
+  // (entries for src/packs/anatomy.js go here)
+
+  // ---- Pack: nature ----
+  // (entries for src/packs/nature.js go here)
+
+  // ---- Pack: elements ----
+  // (entries for src/packs/elements.js go here)
+
+  // ---- Pack: food ----
+  // (entries for src/packs/food.js go here)
+
+  // ---- Pack: playthings ----
+  // (entries for src/packs/playthings.js go here)
+
+  // ---- Pack: maths ----
+  // (entries for src/packs/maths.js go here)
+
+  // ---- Pack: objects ----
+  // (entries for src/packs/objects.js go here)
+
+  // ---- Pack: medieval ----
+  // (entries for src/packs/medieval.js go here)
+
+  // ---- Pack: animals ----
+  // (entries for src/packs/animals.js go here)
+
+  // ---- Pack: holidays ----
+  // (entries for src/packs/holidays.js go here)
+
+  // ---- Pack: music ----
+  // (entries for src/packs/music.js go here)
+
+  // ---- Pack: vehicles ----
+  // (entries for src/packs/vehicles.js go here)
+
+  // ---- Pack: landmarks ----
+  // (entries for src/packs/landmarks.js go here)
 ];
 
 export function findToy(id) {
