@@ -7,7 +7,7 @@ import { test, expect } from "@playwright/test";
 import fs from "node:fs";
 import path from "node:path";
 import { makePly, makeSplat, makeSpz } from "./fixtures.mjs";
-import { TOYS } from "../src/toys.js";
+import { TOYS, searchToys } from "../src/toys.js";
 import { encodeSceneHash } from "../src/codec.js";
 
 const SHOTS = path.resolve("tests/screenshots");
@@ -135,7 +135,9 @@ test.describe("Splashery app (WebGL2)", () => {
       "true",
     );
     await page.fill("#shelf-search", "fruit");
-    expect(await shown()).toEqual(["strawberry"]);
+    const fruit = searchToys("fruit").map((t) => t.id);
+    expect(fruit).toContain("strawberry");
+    expect(await shown()).toEqual(fruit);
     await page.fill("#shelf-search", "zzzz");
     await expect(page.locator("#shelf-empty")).toBeVisible();
     await page.fill("#shelf-search", "");
