@@ -74,7 +74,50 @@
 
     <aside id="panel" class="panel" aria-label="Splashery controls">
       <div class="dock">
+        <div
+          id="sheet-handle"
+          class="sheet-handle"
+          title="Swipe up for more controls, down to close them"
+          aria-hidden="true"
+        >
+          <span></span>
+        </div>
+        <div class="shelf-find" id="shelf-find">
+          <input
+            id="shelf-search"
+            type="search"
+            placeholder="Search toys"
+            aria-label="Search toys"
+            autocomplete="off"
+            spellcheck="false"
+            enterkeyhint="search"
+          />
+        </div>
+        <div class="chips" id="shelf-chips" role="group" aria-label="Toy categories">
+          <button
+            type="button"
+            id="shelf-search-toggle"
+            class="chip chip-icon"
+            aria-label="Search toys"
+            aria-expanded="false"
+            aria-controls="shelf-find"
+          >
+            <svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true">
+              <circle cx="7" cy="7" r="4.6" fill="none" stroke="currentColor" stroke-width="1.6" />
+              <path
+                d="M10.4 10.4 14 14"
+                stroke="currentColor"
+                stroke-width="1.6"
+                stroke-linecap="round"
+              />
+            </svg>
+          </button>
+          <button type="button" id="shelf-surprise" class="chip" title="Pick a random toy">
+            Surprise me
+          </button>
+        </div>
         <nav class="shelf" id="shelf" aria-label="Toy shelf"></nav>
+        <p id="shelf-empty" class="shelf-empty note" hidden></p>
         <div class="toolbar">
           <div class="tools" role="toolbar" aria-label="Tools" id="tools">
             <button type="button" data-tool="orbit" aria-pressed="true" title="Orbit (1)">
@@ -106,276 +149,354 @@
       </div>
 
       <div id="panel-body" class="panel-body">
-        <section class="group" id="tool-group" aria-labelledby="h-tool">
-          <h2 id="h-tool">Tool</h2>
-          <p id="tool-hint" class="note"></p>
-          <div id="tool-params"></div>
-          <div id="paint-extras" class="paint-extras" hidden>
-            <div class="swatch-row">
-              <div class="swatches" role="group" aria-label="Paint colours" id="swatches"></div>
-              <label class="color-well" title="Paint colour">
-                <span class="visually-hidden">Paint colour</span>
-                <input id="paint-color" type="color" value="#e63b2e" />
+        <div class="tabs" role="tablist" aria-label="Controls" id="tabs">
+          <button
+            type="button"
+            role="tab"
+            id="tab-play"
+            aria-controls="pane-play"
+            aria-selected="true"
+          >
+            Play
+          </button>
+          <button
+            type="button"
+            role="tab"
+            id="tab-make"
+            aria-controls="pane-make"
+            aria-selected="false"
+            tabindex="-1"
+          >
+            Make
+          </button>
+          <button
+            type="button"
+            role="tab"
+            id="tab-look"
+            aria-controls="pane-look"
+            aria-selected="false"
+            tabindex="-1"
+          >
+            Look
+          </button>
+          <button
+            type="button"
+            role="tab"
+            id="tab-share"
+            aria-controls="pane-share"
+            aria-selected="false"
+            tabindex="-1"
+          >
+            Share
+          </button>
+          <button
+            type="button"
+            role="tab"
+            id="tab-about"
+            aria-controls="pane-about"
+            aria-selected="false"
+            tabindex="-1"
+          >
+            About
+          </button>
+        </div>
+        <div class="panes" id="panes">
+          <div class="pane" role="tabpanel" id="pane-play" aria-labelledby="tab-play">
+            <section class="group" id="tool-group" aria-labelledby="h-tool">
+              <h2 id="h-tool">Tool</h2>
+              <p id="tool-hint" class="note"></p>
+              <div id="tool-params"></div>
+              <div id="paint-extras" class="paint-extras" hidden>
+                <div class="swatch-row">
+                  <div class="swatches" role="group" aria-label="Paint colours" id="swatches"></div>
+                  <label class="color-well" title="Paint colour">
+                    <span class="visually-hidden">Paint colour</span>
+                    <input id="paint-color" type="color" value="#e63b2e" />
+                  </label>
+                </div>
+                <div class="button-row">
+                  <button id="clear-paint" type="button">Clear paint</button>
+                  <span id="paint-count" class="note"></span>
+                </div>
+              </div>
+              <div id="clay-extras" hidden>
+                <div class="segmented" role="group" aria-label="Clay mode">
+                  <button type="button" id="clay-add" aria-pressed="true">Add</button>
+                  <button type="button" id="clay-erase" aria-pressed="false">Erase</button>
+                </div>
+                <label class="row">
+                  <span>Blob size</span>
+                  <input id="clay-size" type="range" min="0" max="100" value="40" />
+                  <output id="clay-size-value" for="clay-size">40%</output>
+                </label>
+                <p id="clay-note" class="note"></p>
+              </div>
+              <div class="button-row">
+                <button id="poke-now" type="button" title="Poke a random spot (P)">Poke it</button>
+                <button id="reset-camera" type="button" title="Reset the view (R)">
+                  Reset view
+                </button>
+              </div>
+            </section>
+
+            <section class="group" aria-labelledby="h-effects">
+              <h2 id="h-effects">Effects</h2>
+              <div id="effects"></div>
+              <div class="button-row">
+                <button id="effects-off" type="button">All effects off</button>
+              </div>
+            </section>
+          </div>
+
+          <div class="pane" role="tabpanel" id="pane-make" aria-labelledby="tab-make" hidden>
+            <section class="group" id="make-group" aria-labelledby="h-make">
+              <h2 id="h-make">Make a toy</h2>
+              <label class="row">
+                <span>Shape</span>
+                <select id="gen-shape"></select>
               </label>
-            </div>
-            <div class="button-row">
-              <button id="clear-paint" type="button">Clear paint</button>
-              <span id="paint-count" class="note"></span>
-            </div>
+              <label class="row">
+                <span>Palette</span>
+                <select id="gen-palette"></select>
+              </label>
+              <div class="row">
+                <span>Seed</span>
+                <input
+                  id="gen-seed"
+                  class="mono"
+                  type="number"
+                  min="0"
+                  max="4294967295"
+                  step="1"
+                  aria-label="Seed"
+                />
+                <button id="gen-dice" type="button" title="Random seed" aria-label="Random seed">
+                  Dice
+                </button>
+              </div>
+              <label class="row">
+                <span>Splats</span>
+                <input id="gen-count" type="range" min="10000" max="300000" step="5000" />
+                <output id="gen-count-value" for="gen-count"></output>
+              </label>
+              <label class="row">
+                <span>Size jitter</span>
+                <input id="gen-jitter" type="range" min="0" max="100" />
+                <output id="gen-jitter-value" for="gen-jitter"></output>
+              </label>
+              <label class="row">
+                <span>Roughness</span>
+                <input id="gen-rough" type="range" min="0" max="100" />
+                <output id="gen-rough-value" for="gen-rough"></output>
+              </label>
+              <label class="row">
+                <span>Colour noise</span>
+                <input id="gen-noise" type="range" min="0" max="100" />
+                <output id="gen-noise-value" for="gen-noise"></output>
+              </label>
+              <div class="button-row">
+                <button id="gen-make" type="button" class="primary">Make it</button>
+              </div>
+              <p id="gen-note" class="note"></p>
+            </section>
+            <section class="group" id="byo-group" aria-labelledby="h-byo">
+              <h2 id="h-byo">Your own splat</h2>
+              <div class="button-row">
+                <label class="file-button">
+                  <span>Open a splat file…</span>
+                  <input id="byo-file" type="file" accept=".ply,.sog,.splat,.spz" />
+                </label>
+              </div>
+              <p class="note">
+                Loads PLY, SOG, SPLAT and SPZ (versions 1–3). KSPLAT and SPZ v4 are not supported
+                yet. You can also drop a file anywhere on the page. Files stay in your browser;
+                nothing is uploaded.
+              </p>
+              <label class="check-row" id="byo-flip-row" hidden>
+                <input id="byo-flip" type="checkbox" />
+                <span>Turn it upside down</span>
+              </label>
+              <div id="byo-warning" class="warning" hidden>
+                <p id="byo-warning-text"></p>
+                <div class="button-row">
+                  <button id="byo-downsample" type="button" class="primary">
+                    Load a lighter copy
+                  </button>
+                  <button id="byo-anyway" type="button">Load everything</button>
+                  <button id="byo-cancel" type="button">Cancel</button>
+                </div>
+              </div>
+            </section>
           </div>
-          <div id="clay-extras" hidden>
-            <div class="segmented" role="group" aria-label="Clay mode">
-              <button type="button" id="clay-add" aria-pressed="true">Add</button>
-              <button type="button" id="clay-erase" aria-pressed="false">Erase</button>
-            </div>
-            <label class="row">
-              <span>Blob size</span>
-              <input id="clay-size" type="range" min="0" max="100" value="40" />
-              <output id="clay-size-value" for="clay-size">40%</output>
-            </label>
-            <p id="clay-note" class="note"></p>
-          </div>
-          <div class="button-row">
-            <button id="poke-now" type="button" title="Poke a random spot (P)">Poke it</button>
-            <button id="reset-camera" type="button" title="Reset the view (R)">Reset view</button>
-          </div>
-        </section>
 
-        <section class="group" aria-labelledby="h-effects">
-          <h2 id="h-effects">Effects</h2>
-          <div id="effects"></div>
-          <div class="button-row">
-            <button id="effects-off" type="button">All effects off</button>
+          <div class="pane" role="tabpanel" id="pane-look" aria-labelledby="tab-look" hidden>
+            <section class="group" id="look-group" aria-labelledby="h-look">
+              <h2 id="h-look">Colours and splats</h2>
+              <div class="row">
+                <span>Background</span>
+                <select id="look-bg" aria-label="Background">
+                  <option value="page">Page</option>
+                  <option value="transparent">Transparent</option>
+                  <option value="custom">Colour</option>
+                </select>
+                <label class="color-well small" title="Background colour">
+                  <span class="visually-hidden">Background colour</span>
+                  <input id="look-bg-color" type="color" value="#f4efe6" />
+                </label>
+              </div>
+              <div class="row">
+                <span>Theme</span>
+                <div class="segmented" role="group" aria-label="Theme" id="look-theme">
+                  <button type="button" data-theme="auto" aria-pressed="true">Auto</button>
+                  <button type="button" data-theme="light" aria-pressed="false">Light</button>
+                  <button type="button" data-theme="dark" aria-pressed="false">Dark</button>
+                </div>
+              </div>
+              <div class="row">
+                <span>Accent</span>
+                <select id="look-accent" aria-label="Accent">
+                  <option value="auto">Page accent</option>
+                  <option value="custom">Colour</option>
+                </select>
+                <label class="color-well small" title="Accent colour">
+                  <span class="visually-hidden">Accent colour</span>
+                  <input id="look-accent-color" type="color" value="#e63b2e" />
+                </label>
+              </div>
+              <label class="row">
+                <span>Splat size</span>
+                <input id="look-size" type="range" min="30" max="250" value="100" />
+                <output id="look-size-value" for="look-size">1.00×</output>
+              </label>
+              <label class="row">
+                <span>Exposure</span>
+                <input id="look-exposure" type="range" min="30" max="250" value="100" />
+                <output id="look-exposure-value" for="look-exposure">1.00</output>
+              </label>
+            </section>
+            <section class="group" id="idle-group" aria-labelledby="h-idle">
+              <h2 id="h-idle">When nobody is playing</h2>
+              <label class="check-row">
+                <input id="auto-turntable" type="checkbox" checked />
+                <span>Slow turntable when idle</span>
+              </label>
+              <label class="row">
+                <span>When idle</span>
+                <select id="auto-effect"></select>
+              </label>
+              <p id="motion-note" class="note" hidden>
+                Your system asks for reduced motion, so the turntable and idle effects stay off.
+              </p>
+            </section>
           </div>
-        </section>
 
-        <details class="group" id="make-group">
-          <summary>Make a toy</summary>
-          <label class="row">
-            <span>Shape</span>
-            <select id="gen-shape"></select>
-          </label>
-          <label class="row">
-            <span>Palette</span>
-            <select id="gen-palette"></select>
-          </label>
-          <div class="row">
-            <span>Seed</span>
-            <input
-              id="gen-seed"
-              class="mono"
-              type="number"
-              min="0"
-              max="4294967295"
-              step="1"
-              aria-label="Seed"
-            />
-            <button id="gen-dice" type="button" title="Random seed" aria-label="Random seed">
-              Dice
-            </button>
+          <div class="pane" role="tabpanel" id="pane-share" aria-labelledby="tab-share" hidden>
+            <section class="group" id="share-group" aria-labelledby="h-share">
+              <h2 id="h-share">Link and scene file</h2>
+              <div class="button-row">
+                <button id="share-link" type="button">Copy link</button>
+                <button id="export-json" type="button">Save JSON</button>
+                <label class="file-button">
+                  <span>Load JSON</span>
+                  <input id="import-json" type="file" accept="application/json,.json" />
+                </label>
+              </div>
+              <p id="link-note" class="note"></p>
+            </section>
+            <section class="group" id="media-group" aria-labelledby="h-media">
+              <h2 id="h-media">Picture, GIF and video</h2>
+              <div class="row compact">
+                <span>PNG</span>
+                <button id="export-png" type="button">Save picture</button>
+              </div>
+              <div class="row compact">
+                <span>GIF</span>
+                <select id="gif-kind" aria-label="GIF motion">
+                  <option value="turntable">Turntable</option>
+                  <option value="effects">Effect loop</option>
+                </select>
+                <select id="gif-frames" aria-label="GIF frames">
+                  <option value="24">24 frames</option>
+                  <option value="48" selected>48 frames</option>
+                  <option value="72">72 frames</option>
+                </select>
+                <select id="gif-size" aria-label="GIF size">
+                  <option value="256">256 px</option>
+                  <option value="384">384 px</option>
+                  <option value="512" selected>512 px</option>
+                </select>
+                <button id="export-gif" type="button">Save GIF</button>
+              </div>
+              <div class="row compact" id="webm-row">
+                <span>WebM</span>
+                <select id="webm-seconds" aria-label="Video length">
+                  <option value="3">3 s</option>
+                  <option value="5" selected>5 s</option>
+                  <option value="8">8 s</option>
+                </select>
+                <button id="export-webm" type="button">Save video</button>
+              </div>
+              <p id="webm-unavailable" class="note" hidden></p>
+            </section>
+            <section class="group" id="embed-group" aria-labelledby="h-embed">
+              <h2 id="h-embed">Put it on a web page</h2>
+              <div class="row compact">
+                <span>Iframe</span>
+                <label class="check-inline"
+                  ><input id="embed-transparent" type="checkbox" /> Transparent</label
+                >
+                <button id="embed-copy" type="button">Copy iframe</button>
+              </div>
+              <textarea
+                id="embed-snippet"
+                class="mono"
+                rows="3"
+                readonly
+                aria-label="Iframe embed snippet"
+              ></textarea>
+              <div class="row compact">
+                <span>Element</span>
+                <button id="element-copy" type="button">Copy element</button>
+              </div>
+              <textarea
+                id="element-snippet"
+                class="mono"
+                rows="3"
+                readonly
+                aria-label="Custom element embed snippet"
+              ></textarea>
+              <p id="embed-note" class="note"></p>
+            </section>
           </div>
-          <label class="row">
-            <span>Splats</span>
-            <input id="gen-count" type="range" min="10000" max="300000" step="5000" />
-            <output id="gen-count-value" for="gen-count"></output>
-          </label>
-          <label class="row">
-            <span>Size jitter</span>
-            <input id="gen-jitter" type="range" min="0" max="100" />
-            <output id="gen-jitter-value" for="gen-jitter"></output>
-          </label>
-          <label class="row">
-            <span>Roughness</span>
-            <input id="gen-rough" type="range" min="0" max="100" />
-            <output id="gen-rough-value" for="gen-rough"></output>
-          </label>
-          <label class="row">
-            <span>Colour noise</span>
-            <input id="gen-noise" type="range" min="0" max="100" />
-            <output id="gen-noise-value" for="gen-noise"></output>
-          </label>
-          <div class="button-row">
-            <button id="gen-make" type="button" class="primary">Make it</button>
-          </div>
-          <p id="gen-note" class="note"></p>
-        </details>
 
-        <details class="group" id="look-group">
-          <summary>Look</summary>
-          <div class="row">
-            <span>Background</span>
-            <select id="look-bg" aria-label="Background">
-              <option value="page">Page</option>
-              <option value="transparent">Transparent</option>
-              <option value="custom">Colour</option>
-            </select>
-            <label class="color-well small" title="Background colour">
-              <span class="visually-hidden">Background colour</span>
-              <input id="look-bg-color" type="color" value="#f4efe6" />
-            </label>
+          <div class="pane" role="tabpanel" id="pane-about" aria-labelledby="tab-about" hidden>
+            <section class="group" id="about-group" aria-labelledby="h-about">
+              <h2 id="h-about">Credits</h2>
+              <div id="credits"></div>
+            </section>
+            <section class="group" id="keys-group" aria-labelledby="h-keys">
+              <h2 id="h-keys">Controls</h2>
+              <ul class="keys">
+                <li><b>Drag</b> turns the toy; with a tool picked, drag on the toy uses it</li>
+                <li><b>Right-drag</b>, <b>Space</b> + drag or two fingers always orbit</li>
+                <li><b>Wheel</b> or pinch zooms; two-finger twist rolls</li>
+                <li><b>Double-click</b> or double-tap resets the view</li>
+                <li>
+                  <b>1</b>–<b>5</b> pick tools, <b>P</b> pokes, <b>R</b> resets, <b>Arrows</b> and
+                  <b>+</b> / <b>−</b> move the camera
+                </li>
+              </ul>
+              <p class="note" id="render-info"></p>
+              <p class="note">
+                <a href="https://github.com/ryanjosephkamp/splashery">Source on GitHub</a> ·
+                <a href="https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
+                  >All credits</a
+                >
+                · Built on the PlayCanvas engine (MIT)
+              </p>
+            </section>
           </div>
-          <div class="row">
-            <span>Theme</span>
-            <div class="segmented" role="group" aria-label="Theme" id="look-theme">
-              <button type="button" data-theme="auto" aria-pressed="true">Auto</button>
-              <button type="button" data-theme="light" aria-pressed="false">Light</button>
-              <button type="button" data-theme="dark" aria-pressed="false">Dark</button>
-            </div>
-          </div>
-          <div class="row">
-            <span>Accent</span>
-            <select id="look-accent" aria-label="Accent">
-              <option value="auto">Page accent</option>
-              <option value="custom">Colour</option>
-            </select>
-            <label class="color-well small" title="Accent colour">
-              <span class="visually-hidden">Accent colour</span>
-              <input id="look-accent-color" type="color" value="#e63b2e" />
-            </label>
-          </div>
-          <label class="row">
-            <span>Splat size</span>
-            <input id="look-size" type="range" min="30" max="250" value="100" />
-            <output id="look-size-value" for="look-size">1.00×</output>
-          </label>
-          <label class="row">
-            <span>Exposure</span>
-            <input id="look-exposure" type="range" min="30" max="250" value="100" />
-            <output id="look-exposure-value" for="look-exposure">1.00</output>
-          </label>
-          <label class="check-row">
-            <input id="auto-turntable" type="checkbox" checked />
-            <span>Slow turntable when idle</span>
-          </label>
-          <label class="row">
-            <span>When idle</span>
-            <select id="auto-effect"></select>
-          </label>
-          <p id="motion-note" class="note" hidden>
-            Your system asks for reduced motion, so the turntable and idle effects stay off.
-          </p>
-        </details>
-
-        <details class="group" id="byo-group">
-          <summary>Your own splat</summary>
-          <div class="button-row">
-            <label class="file-button">
-              <span>Open a splat file…</span>
-              <input id="byo-file" type="file" accept=".ply,.sog,.splat,.spz" />
-            </label>
-          </div>
-          <p class="note">
-            Loads PLY, SOG, SPLAT and SPZ (versions 1–3). KSPLAT and SPZ v4 are not supported yet.
-            You can also drop a file anywhere on the page. Files stay in your browser; nothing is
-            uploaded.
-          </p>
-          <label class="check-row" id="byo-flip-row" hidden>
-            <input id="byo-flip" type="checkbox" />
-            <span>Turn it upside down</span>
-          </label>
-          <div id="byo-warning" class="warning" hidden>
-            <p id="byo-warning-text"></p>
-            <div class="button-row">
-              <button id="byo-downsample" type="button" class="primary">Load a lighter copy</button>
-              <button id="byo-anyway" type="button">Load everything</button>
-              <button id="byo-cancel" type="button">Cancel</button>
-            </div>
-          </div>
-        </details>
-
-        <details class="group" id="share-group">
-          <summary>Share</summary>
-          <div class="button-row">
-            <button id="share-link" type="button">Copy link</button>
-            <button id="export-json" type="button">Save JSON</button>
-            <label class="file-button">
-              <span>Load JSON</span>
-              <input id="import-json" type="file" accept="application/json,.json" />
-            </label>
-          </div>
-          <p id="link-note" class="note"></p>
-          <div class="row compact">
-            <span>PNG</span>
-            <button id="export-png" type="button">Save picture</button>
-          </div>
-          <div class="row compact">
-            <span>GIF</span>
-            <select id="gif-kind" aria-label="GIF motion">
-              <option value="turntable">Turntable</option>
-              <option value="effects">Effect loop</option>
-            </select>
-            <select id="gif-frames" aria-label="GIF frames">
-              <option value="24">24 frames</option>
-              <option value="48" selected>48 frames</option>
-              <option value="72">72 frames</option>
-            </select>
-            <select id="gif-size" aria-label="GIF size">
-              <option value="256">256 px</option>
-              <option value="384">384 px</option>
-              <option value="512" selected>512 px</option>
-            </select>
-            <button id="export-gif" type="button">Save GIF</button>
-          </div>
-          <div class="row compact" id="webm-row">
-            <span>WebM</span>
-            <select id="webm-seconds" aria-label="Video length">
-              <option value="3">3 s</option>
-              <option value="5" selected>5 s</option>
-              <option value="8">8 s</option>
-            </select>
-            <button id="export-webm" type="button">Save video</button>
-          </div>
-          <p id="webm-unavailable" class="note" hidden></p>
-          <div class="row compact">
-            <span>Embed</span>
-            <label class="check-inline"
-              ><input id="embed-transparent" type="checkbox" /> Transparent</label
-            >
-            <button id="embed-copy" type="button">Copy iframe</button>
-          </div>
-          <textarea
-            id="embed-snippet"
-            class="mono"
-            rows="3"
-            readonly
-            aria-label="Iframe embed snippet"
-          ></textarea>
-          <div class="row compact">
-            <span>Element</span>
-            <button id="element-copy" type="button">Copy element</button>
-          </div>
-          <textarea
-            id="element-snippet"
-            class="mono"
-            rows="3"
-            readonly
-            aria-label="Custom element embed snippet"
-          ></textarea>
-          <p id="embed-note" class="note"></p>
-        </details>
-
-        <details class="group" id="about-group">
-          <summary>About &amp; credits</summary>
-          <div id="credits"></div>
-          <ul class="keys">
-            <li><b>Drag</b> turns the toy; with a tool picked, drag on the toy uses it</li>
-            <li><b>Right-drag</b>, <b>Space</b> + drag or two fingers always orbit</li>
-            <li><b>Wheel</b> or pinch zooms; two-finger twist rolls</li>
-            <li><b>Double-click</b> or double-tap resets the view</li>
-            <li>
-              <b>1</b>–<b>5</b> pick tools, <b>P</b> pokes, <b>R</b> resets, <b>Arrows</b> and
-              <b>+</b> / <b>−</b> move the camera
-            </li>
-          </ul>
-          <p class="note" id="render-info"></p>
-          <p class="note">
-            <a href="https://github.com/ryanjosephkamp/splashery">Source on GitHub</a> ·
-            <a href="https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
-              >All credits</a
-            >
-            · Built on the PlayCanvas engine (MIT)
-          </p>
-        </details>
+        </div>
       </div>
     </aside>
 

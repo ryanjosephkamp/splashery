@@ -198,7 +198,7 @@ class App {
     ui.setRenderInfo(
       `Rendering with ${player.deviceType === "webgpu" ? "WebGPU" : "WebGL2"} · ${player.profile} device profile · ${formatCount(info.splats)} splats`,
     );
-    if (this.ui.els.shareGroup.open) this.updateEmbed();
+    if (this.ui.currentTab() === "share") this.updateEmbed();
   }
 
   renderCredits(info) {
@@ -315,9 +315,14 @@ class App {
     const cam = player.camera;
     this.gestures = new Gestures(canvas, {
       classify: (e) => {
+        // While the phone sheet is open, a tap on the toy only closes it.
+        if (this.ui.sheetOpen()) return "orbit";
         if (e.button === 1 || e.button === 2 || this.spaceHeld || this.tool === "orbit")
           return "orbit";
         return "tool";
+      },
+      onTap: () => {
+        if (this.ui.sheetOpen()) this.ui.collapseSheet();
       },
       onInteract: () => {
         player.interact();
@@ -564,7 +569,7 @@ class App {
     const theme = player.applyLook();
     this.ui.setLook(player.scene.look, theme);
     player.stage.requestRender();
-    if (this.ui.els.shareGroup.open) this.updateEmbedSoon();
+    if (this.ui.currentTab() === "share") this.updateEmbedSoon();
   }
 
   setAutoplay(partial) {

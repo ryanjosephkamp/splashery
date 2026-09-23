@@ -1,9 +1,10 @@
-// DOM wiring for the panel, shelf, tools, bottom sheet, toasts and progress.
+// DOM wiring for the panel, shelf, tools, tabs, bottom sheet, toasts and
+// progress.
 // The app owns state; this module reflects it and forwards user intent.
 
 import { EFFECTS, AXES } from "./effects.js";
 import { SHAPES, PALETTES, PROFILES } from "./generators.js";
-import { TOYS, thumbURL } from "./toys.js";
+import { TOYS, thumbURL, shelfCategories, searchToys } from "./toys.js";
 import { IDLE_EFFECTS, formatCount } from "./state.js";
 
 const $ = (id) => document.getElementById(id);
@@ -34,7 +35,16 @@ export function createUI(app) {
     panelBody: $("panel-body"),
     dock: document.querySelector(".dock"),
     sheetToggle: $("sheet-toggle"),
+    sheetHandle: $("sheet-handle"),
+    tabs: $("tabs"),
+    panes: $("panes"),
     shelf: $("shelf"),
+    shelfEmpty: $("shelf-empty"),
+    shelfChips: $("shelf-chips"),
+    shelfFind: $("shelf-find"),
+    shelfSearch: $("shelf-search"),
+    shelfSearchToggle: $("shelf-search-toggle"),
+    shelfSurprise: $("shelf-surprise"),
     tools: $("tools"),
     toolHint: $("tool-hint"),
     toolParams: $("tool-params"),
@@ -67,7 +77,6 @@ export function createUI(app) {
     genNoiseValue: $("gen-noise-value"),
     genMake: $("gen-make"),
     genNote: $("gen-note"),
-    makeGroup: $("make-group"),
     lookBg: $("look-bg"),
     lookBgColor: $("look-bg-color"),
     lookTheme: $("look-theme"),
@@ -88,7 +97,6 @@ export function createUI(app) {
     byoDownsample: $("byo-downsample"),
     byoAnyway: $("byo-anyway"),
     byoCancel: $("byo-cancel"),
-    byoGroup: $("byo-group"),
     shareLink: $("share-link"),
     linkNote: $("link-note"),
     exportJson: $("export-json"),
@@ -108,7 +116,6 @@ export function createUI(app) {
     elementCopy: $("element-copy"),
     elementSnippet: $("element-snippet"),
     embedNote: $("embed-note"),
-    shareGroup: $("share-group"),
     credits: $("credits"),
     renderInfo: $("render-info"),
     toyStatus: $("toy-status"),
@@ -120,6 +127,9 @@ export function createUI(app) {
   };
 
   // ---- Shelf -----------------------------------------------------------------
+  // Cards are made once; filtering by category or search just re-orders
+  // which ones are in the shelf. Thumbnails load lazily as they scroll in.
+  const cards = new Map();
   for (const toy of TOYS) {
     const b = document.createElement("button");
     b.type = "button";
@@ -145,8 +155,118 @@ export function createUI(app) {
     label.textContent = toy.label;
     b.append(img, label);
     b.addEventListener("click", () => app.chooseToy(toy.id));
-    els.shelf.appendChild(b);
+    cards.set(toy.id, b);
   }
+
+  const categories = shelfCategories();
+  const order = new Map(categories.map((c, i) => [c.id, i]));
+  const allToys = TOYS.map((t, i) => ({ t, i }))
+    .sort((a, b) => (order.get(a.t.category) ?? 99) - (order.get(b.t.category) ?? 99) || a.i - b.i)
+    .map((x) => x.t);
+  const shelf = { category: "all", query: "", list: allToys, current: null };
+  const chips = new Map();
+  for (const c of [{ id: "all", label: "All" }, ...categories]) {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "chip";
+    b.dataset.category = c.id;
+    b.textContent = c.label;
+    b.setAttribute("aria-pressed", String(c.id === "all"));
+    b.addEventListener("click", () => {
+      shelf.category = c.id;
+      if (shelf.query) {
+        shelf.query = "";
+        els.shelfSearch.value = "";
+      }
+      renderShelf();
+    });
+    els.shelfChips.appendChild(b);
+    chips.set(c.id, b);
+  }
+
+  function renderShelf() {
+    const q = shelf.query.trim();
+    const list = q
+      ? searchToys(q, allToys)
+      : shelf.category === "all"
+        ? allToys
+        : allToys.filter((t) => t.category === shelf.category);
+    shelf.list = list;
+    els.shelf.replaceChildren(...list.map((t) => cards.get(t.id)));
+    els.shelf.scrollLeft = 0;
+    els.shelf.scrollTop = 0;
+    els.shelfEmpty.hidden = list.length > 0;
+    els.shelfEmpty.textContent = list.length ? "" : `No toys match “${q}”.`;
+    for (const [id, b] of chips)
+      b.setAttribute("aria-pressed", String(!q && id === shelf.category));
+    revealCurrent();
+  }
+
+  function revealCurrent() {
+    const card = shelf.current && cards.get(shelf.current);
+    if (!card || !card.isConnected) return;
+    const box = els.shelf;
+    if (box.scrollWidth > box.clientWidth) {
+      const left = card.offsetLeft - box.offsetLeft;
+      if (left < box.scrollLeft || left + card.offsetWidth > box.scrollLeft + box.clientWidth)
+        box.scrollLeft = Math.max(0, left - 12);
+    }
+    if (box.scrollHeight > box.clientHeight) {
+      const top = card.offsetTop - box.offsetTop;
+      if (top < box.scrollTop || top + card.offsetHeight > box.scrollTop + box.clientHeight)
+        box.scrollTop = Math.max(0, top - 4);
+    }
+  }
+
+  function setSearching(on) {
+    els.dock.classList.toggle("searching", on);
+    els.shelfSearchToggle.setAttribute("aria-expanded", String(on));
+    if (on) els.shelfSearch.focus({ preventScroll: true });
+    else if (shelf.query) {
+      shelf.query = "";
+      els.shelfSearch.value = "";
+      renderShelf();
+    }
+    refreshDock();
+  }
+
+  els.shelfSearch.addEventListener("input", () => {
+    shelf.query = els.shelfSearch.value;
+    renderShelf();
+  });
+  els.shelfSearch.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && shelf.list.length) {
+      e.preventDefault();
+      app.chooseToy(shelf.list[0].id);
+    } else if (e.key === "Escape") {
+      e.stopPropagation();
+      if (shelf.query) {
+        shelf.query = "";
+        els.shelfSearch.value = "";
+        renderShelf();
+      } else setSearching(false);
+    }
+  });
+  els.shelfSearchToggle.addEventListener("click", () =>
+    setSearching(!els.dock.classList.contains("searching")),
+  );
+  els.shelfSurprise.addEventListener("click", () => {
+    const pool = shelf.list.filter((t) => t.id !== shelf.current);
+    const from = pool.length ? pool : allToys.filter((t) => t.id !== shelf.current);
+    if (from.length) app.chooseToy(from[Math.floor(Math.random() * from.length)].id);
+  });
+  // A mouse wheel scrolls the category chips sideways.
+  els.shelfChips.addEventListener(
+    "wheel",
+    (e) => {
+      if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;
+      if (els.shelfChips.scrollWidth <= els.shelfChips.clientWidth) return;
+      els.shelfChips.scrollLeft += e.deltaY;
+      e.preventDefault();
+    },
+    { passive: false },
+  );
+  renderShelf();
 
   // ---- Tools -----------------------------------------------------------------
   for (const b of els.tools.querySelectorAll("button")) {
@@ -371,29 +491,118 @@ export function createUI(app) {
   els.elementCopy.addEventListener("click", () =>
     copyText(els.elementSnippet, "Element snippet copied."),
   );
-  els.shareGroup.addEventListener("toggle", () => {
-    if (els.shareGroup.open) app.updateEmbed();
+
+  // ---- Tabs ------------------------------------------------------------------------
+  const tabs = [...els.tabs.querySelectorAll("[role='tab']")];
+  let currentTab = "play";
+  function showTab(name, { focus = false } = {}) {
+    for (const t of tabs) {
+      const on = t.id === `tab-${name}`;
+      t.setAttribute("aria-selected", String(on));
+      t.tabIndex = on ? 0 : -1;
+      $(t.getAttribute("aria-controls")).hidden = !on;
+      if (on && focus) t.focus();
+    }
+    const changed = currentTab !== name;
+    currentTab = name;
+    if (changed) els.panes.scrollTop = 0;
+    if (name === "share") app.updateEmbed();
+  }
+  for (const t of tabs) t.addEventListener("click", () => showTab(t.id.slice(4)));
+  els.tabs.addEventListener("keydown", (e) => {
+    const i = tabs.findIndex((t) => t.id === `tab-${currentTab}`);
+    let j = -1;
+    if (e.key === "ArrowRight") j = (i + 1) % tabs.length;
+    else if (e.key === "ArrowLeft") j = (i - 1 + tabs.length) % tabs.length;
+    else if (e.key === "Home") j = 0;
+    else if (e.key === "End") j = tabs.length - 1;
+    if (j < 0) return;
+    e.preventDefault();
+    showTab(tabs[j].id.slice(4), { focus: true });
   });
 
   // ---- Bottom sheet ---------------------------------------------------------------
+  // On phones the panel is a bottom sheet: the dock (shelf and tools) always
+  // shows and the tabs open above it. The stage shrinks to the space above
+  // the panel, so the toy stays in view while you change things. Tapping the
+  // toy, swiping the handle down, swiping down from the top of the controls,
+  // Escape or Done closes it.
   const narrow = matchMedia("(max-width: 760px)");
   let expanded = false;
-  const applySheet = () => {
-    if (narrow.matches) {
-      els.panelBody.hidden = !expanded;
-      els.sheetToggle.setAttribute("aria-expanded", String(expanded));
-      els.sheetToggle.textContent = expanded ? "Less" : "More";
-      const h = els.dock.getBoundingClientRect().height;
-      document.documentElement.style.setProperty("--dock-h", `${Math.round(h)}px`);
-    } else {
-      els.panelBody.hidden = false;
+  function refreshDock() {
+    if (!narrow.matches) {
+      document.documentElement.style.removeProperty("--dock-h");
+      return;
     }
+    const h = els.panel.getBoundingClientRect().height;
+    document.documentElement.style.setProperty("--dock-h", `${Math.round(h)}px`);
+  }
+  const applySheet = () => {
+    const phone = narrow.matches;
+    els.panelBody.hidden = phone && !expanded;
+    document.body.classList.toggle("sheet-open", phone && expanded);
+    els.sheetToggle.setAttribute("aria-expanded", String(expanded));
+    els.sheetToggle.textContent = expanded ? "Done" : "More";
+    refreshDock();
   };
-  els.sheetToggle.addEventListener("click", () => {
-    expanded = !expanded;
+  function setExpanded(on) {
+    if (expanded === on) return;
+    expanded = on;
     applySheet();
-  });
+  }
+  new ResizeObserver(refreshDock).observe(els.panel);
+  els.sheetToggle.addEventListener("click", () => setExpanded(!expanded));
   narrow.addEventListener("change", applySheet);
+
+  // The handle: swipe up to open, down to close, tap to toggle. The tab bar
+  // takes the same swipes.
+  function bindSwipe(el, tapToggles) {
+    let start = null;
+    el.addEventListener("pointerdown", (e) => {
+      if (!narrow.matches || (e.pointerType === "mouse" && e.button !== 0)) return;
+      start = { y: e.clientY, id: e.pointerId };
+    });
+    el.addEventListener("pointerup", (e) => {
+      if (!start || e.pointerId !== start.id) return;
+      const dy = e.clientY - start.y;
+      start = null;
+      if (dy > 28) setExpanded(false);
+      else if (dy < -28) setExpanded(true);
+      else if (tapToggles) setExpanded(!expanded);
+    });
+    el.addEventListener("pointercancel", () => (start = null));
+  }
+  bindSwipe(els.sheetHandle, true);
+  bindSwipe(els.tabs, false);
+
+  // Swiping down from the top of the scrolled controls closes the sheet too.
+  let pull = null;
+  els.panes.addEventListener(
+    "touchstart",
+    (e) => {
+      const t = e.touches[0];
+      const onInput = e.target.closest?.("input, select, textarea");
+      pull =
+        narrow.matches && expanded && e.touches.length === 1 && !onInput
+          ? { x: t.clientX, y: t.clientY, top: els.panes.scrollTop }
+          : null;
+    },
+    { passive: true },
+  );
+  els.panes.addEventListener(
+    "touchmove",
+    (e) => {
+      if (!pull || pull.top > 0 || els.panes.scrollTop > 0) return;
+      const t = e.touches[0];
+      const dy = t.clientY - pull.y;
+      if (dy > 90 && dy > Math.abs(t.clientX - pull.x) * 2) {
+        pull = null;
+        setExpanded(false);
+      }
+    },
+    { passive: true },
+  );
+  els.panes.addEventListener("touchend", () => (pull = null), { passive: true });
   applySheet();
 
   let toastTimer = 0;
@@ -430,9 +639,9 @@ export function createUI(app) {
       renderToolParams(tool);
     },
     setShelf(id) {
-      for (const b of els.shelf.querySelectorAll(".toy-card")) {
-        b.setAttribute("aria-pressed", String(b.dataset.toy === id));
-      }
+      shelf.current = id;
+      for (const [tid, b] of cards) b.setAttribute("aria-pressed", String(tid === id));
+      revealCurrent();
     },
     setEffects(fx) {
       for (const [id, sw] of switches) {
@@ -511,7 +720,10 @@ export function createUI(app) {
       els.byoFlip.checked = !!flip;
     },
     showLargeFile(text, canDownsample) {
-      els.byoGroup.open = true;
+      if (text) {
+        showTab("make");
+        setExpanded(true);
+      }
       els.byoWarning.hidden = !text;
       els.byoWarningText.textContent = text || "";
       els.byoDownsample.hidden = !canDownsample;
@@ -585,10 +797,15 @@ export function createUI(app) {
       els.dropOverlay.hidden = !on;
     },
     collapseSheet() {
-      if (expanded) {
-        expanded = false;
-        applySheet();
-      }
+      setExpanded(false);
+    },
+    // True when the phone sheet covers part of the stage.
+    sheetOpen() {
+      return expanded && narrow.matches;
+    },
+    showTab,
+    currentTab() {
+      return currentTab;
     },
     refreshSheet: applySheet,
     isTyping(target) {
