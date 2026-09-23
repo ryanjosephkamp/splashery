@@ -57,6 +57,7 @@ export function createUI(app) {
     toySpeed: $("toy-speed"),
     toySpeedValue: $("toy-speed-value"),
     toyOptions: $("toy-options"),
+    toyFlag: $("toy-flag"),
     toyNote: $("toy-note"),
     patId: $("pat-id"),
     patFlagRow: $("pat-flag-row"),
@@ -553,15 +554,30 @@ export function createUI(app) {
     b.addEventListener("click", () => app.setPattern({ projection: p.id }));
     els.patProj.appendChild(b);
   }
-  let flagsListed = false;
-  async function listFlags() {
-    if (flagsListed) return;
-    flagsListed = true;
-    const flags = await loadFlags();
-    const sorted = flags.slice().sort((a, b) => a.name.localeCompare(b.name));
-    for (const f of sorted) els.patFlag.add(new Option(f.name, f.code));
-    els.patFlag.value = app.player?.scene.pattern.flag || "";
+  let flagsListed = null;
+  function listFlags() {
+    flagsListed ||= loadFlags().then((flags) => {
+      const sorted = flags.slice().sort((a, b) => a.name.localeCompare(b.name));
+      for (const f of sorted) {
+        els.patFlag.add(new Option(f.name, f.code));
+        els.toyFlag.add(new Option(f.name, f.code));
+      }
+      const p = app.player?.scene.pattern;
+      els.patFlag.value = p?.flag || "";
+      els.toyFlag.value = p?.id === "flag" ? p.flag : "";
+    });
+    return flagsListed;
   }
+  // The flag list is small; fetch it soon after start so pickers are full
+  // before anyone opens them.
+  setTimeout(listFlags, 1500);
+  // The quick "Flag colours" picker in the Play tab.
+  els.toyFlag.addEventListener("focus", listFlags);
+  els.toyFlag.addEventListener("pointerdown", listFlags);
+  els.toyFlag.addEventListener("change", () => {
+    const code = els.toyFlag.value;
+    app.setPattern(code ? { id: "flag", flag: code } : { id: "none" });
+  });
   els.patId.addEventListener("change", () => app.setPattern({ id: els.patId.value }));
   els.patFlag.addEventListener("change", () => app.setPattern({ flag: els.patFlag.value }));
   for (const [i, el] of [els.patC1, els.patC2, els.patC3].entries()) {
@@ -598,6 +614,8 @@ export function createUI(app) {
     els.patId.value = p.id;
     els.patFlagRow.hidden = p.id !== "flag";
     if (p.id === "flag") listFlags().then(() => (els.patFlag.value = p.flag));
+    if (els.toyFlag.options.length > 1 || p.id === "flag")
+      listFlags().then(() => (els.toyFlag.value = p.id === "flag" ? p.flag : ""));
     els.patColorsRow.hidden = !COLOURED.includes(p.id);
     els.patC1.value = p.colors[0];
     els.patC2.value = p.colors[1];

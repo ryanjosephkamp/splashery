@@ -72,6 +72,21 @@ export function quatRotate(q, v) {
   return add3(add3(v, mul3(t, q[3])), cross3(u, t));
 }
 
+// The shortest rotation taking direction a onto direction b.
+export function quatFromTo(a, b) {
+  const u = unit(a);
+  const v = unit(b);
+  const d = dot3(u, v);
+  if (d < -0.999999) {
+    const axis = Math.abs(u[0]) < 0.9 ? cross3(u, [1, 0, 0]) : cross3(u, [0, 1, 0]);
+    return quatAxisAngle(axis, Math.PI);
+  }
+  const c = cross3(u, v);
+  const q = [c[0], c[1], c[2], 1 + d];
+  const l = Math.hypot(q[0], q[1], q[2], q[3]);
+  return [q[0] / l, q[1] / l, q[2] / l, q[3] / l];
+}
+
 // Rotation whose columns are the orthonormal basis (x, y, z).
 function quatBasis(x, y, z) {
   const m00 = x[0];
@@ -230,7 +245,7 @@ function cylinderShape(r0, r1, h, caps) {
   const nr = h / slant;
   return {
     area,
-    thick: Math.max(r0, r1),
+    thick: Math.min(Math.max(r0, r1), h / 2),
     sample(rand) {
       const x = rand() * area;
       const a = rand() * TAU;
@@ -251,6 +266,7 @@ function cylinderShape(r0, r1, h, caps) {
           u: a / TAU,
           v: 1 - t,
           side: true,
+          thick: r,
         };
       }
       const top = x >= side + capB;
@@ -646,7 +662,10 @@ export class Kit {
   // Adds a shape. Options:
   //   pos, rot (degrees, X then Y then Z) or quat, scale (number or [x,y,z])
   //   color: "#hex" | [r,g,b] | (c) => colour, where c = { p, n, lp, ln, u, v,
-  //          t, rand, noise, fbm }
+  //          t, rand, noise, fbm }. A colour function can also return
+  //          { c: colour, keep: true, size } to keep one splat out of the
+  //          pattern layer (seams, stitches) or resize it, or null to leave
+  //          a hole.
   //   weight (density, default 1) | share (fraction of the budget) | count
   //   size (splat size multiplier), flat (thickness 0..1), stretch (length
   //   along the shape's tangent), opacity, jitter (colour noise 0..1)
@@ -761,7 +780,7 @@ export class Kit {
       let lp = s.p;
       if (inside) {
         const depth = 0.08 + 0.88 * Math.pow(rand(), 0.7);
-        lp = sub3(lp, mul3(s.n, depth * it.shape.thick));
+        lp = sub3(lp, mul3(s.n, depth * (s.thick ?? it.shape.thick)));
       }
       const p = add3(quatRotate(it.q, [lp[0] * sc[0], lp[1] * sc[1], lp[2] * sc[2]]), it.pos);
       const n = unit(quatRotate(it.q, [s.n[0] * invSc[0], s.n[1] * invSc[1], s.n[2] * invSc[2]]));
@@ -779,8 +798,15 @@ export class Kit {
         col = coreFn ? coreFn(c) : coreColor || shade(colorFn ? colorFn(c) : fixedColor, 0.8);
       else col = colorFn ? colorFn(c) : fixedColor;
       if (col === null) continue;
+      let splatFlags = flags;
+      let sizeMul = 1;
+      if (col && !Array.isArray(col) && typeof col === "object") {
+        if (col.keep) splatFlags = 16;
+        if (col.size) sizeMul = col.size;
+        col = col.c;
+      }
       col = rgb(col);
-      const sz = size0 * Math.exp((rand() - 0.5) * 0.5);
+      const sz = size0 * sizeMul * Math.exp((rand() - 0.5) * 0.5);
       let scl;
       let q;
       if (inside) {
@@ -806,7 +832,7 @@ export class Kit {
         inside ? 0.9 : opacity,
       ];
       const pr = paramsFn ? paramsFn(c) : params;
-      buf.push(p, scl, q, color, [partIdx + flags, kind, pr[0] ?? 0, pr[1] ?? 0]);
+      buf.push(p, scl, q, color, [partIdx + splatFlags, kind, pr[0] ?? 0, pr[1] ?? 0]);
     }
   }
 
@@ -895,6 +921,18 @@ export class Kit {
     const t = this.transform;
     return mul3(sub3(p, t.center), t.scale);
   }
+}
+
+// n directions spread evenly over the sphere (a Fibonacci lattice).
+export function fibonacciSphere(n) {
+  const out = [];
+  const g = Math.PI * (3 - Math.sqrt(5));
+  for (let i = 0; i < n; i++) {
+    const y = 1 - ((i + 0.5) / n) * 2;
+    const r = Math.sqrt(1 - y * y);
+    out.push([Math.cos(g * i) * r, y, Math.sin(g * i) * r]);
+  }
+  return out;
 }
 
 // Mean brightness of a buffer (the pattern layer keeps shading relative to it).
