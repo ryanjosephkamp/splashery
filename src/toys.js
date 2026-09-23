@@ -173,7 +173,7 @@ export const TOYS = [
     urlWeak: "assets/toys/cluster-fly/cluster-fly-lite.sog",
     credit: {
       title: "Cluster Fly",
-      author: "danylyon",
+      author: "Dany Bittel",
       source: "https://superspl.at/scene/285082b2",
       license: "CC BY 4.0",
       licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
@@ -241,7 +241,7 @@ export const TOYS = [
     urlWeak: "assets/toys/raspberry/raspberry-lite.sog",
     credit: {
       title: "Raspberry",
-      author: "danylyon",
+      author: "Dany Bittel",
       source: "https://superspl.at/scene/04bdd392",
       license: "CC BY 4.0",
       licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
@@ -258,7 +258,7 @@ export const TOYS = [
     urlWeak: "assets/toys/blackberry/blackberry-lite.sog",
     credit: {
       title: "Blackberry",
-      author: "danylyon",
+      author: "Dany Bittel",
       source: "https://superspl.at/scene/827133e7",
       license: "CC BY 4.0",
       licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
@@ -275,7 +275,7 @@ export const TOYS = [
     urlWeak: "assets/toys/blueberry/blueberry-lite.sog",
     credit: {
       title: "Blueberry",
-      author: "danylyon",
+      author: "Dany Bittel",
       source: "https://superspl.at/scene/fd8b85a7",
       license: "CC BY 4.0",
       licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
@@ -292,7 +292,7 @@ export const TOYS = [
     urlWeak: "assets/toys/grape/grape-lite.sog",
     credit: {
       title: "Grape",
-      author: "danylyon",
+      author: "Dany Bittel",
       source: "https://superspl.at/scene/4ae563ac",
       license: "CC BY 4.0",
       licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
@@ -309,7 +309,7 @@ export const TOYS = [
     urlWeak: "assets/toys/star-cookie/star-cookie-lite.sog",
     credit: {
       title: "Cinnamon Star Cookie",
-      author: "danylyon",
+      author: "Dany Bittel",
       source: "https://superspl.at/scene/6584b96e",
       license: "CC BY 4.0",
       licenseUrl: "https://creativecommons.org/licenses/by/4.0/",

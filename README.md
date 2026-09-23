@@ -33,8 +33,11 @@ Splashery v1, a planet you could paint, lives on the `checkpoint/v1-planet-paint
 | Treasure chest  | Pack (Open me)        | Tap to open the lid on glinting coins and gems                                                                                                                                                                                                                                                                                                                                                                 |
 | 25 sports balls | Pack (Balls)          | Basketball, soccer ball, American football, tennis ball, baseball, softball, beach ball, golf ball, rugby ball, volleyball, water polo ball, ping-pong ball, cricket ball, bowling ball, pool ball (cue and 1 to 15), pickleball, dodgeball, medicine ball, lacrosse ball, squash ball, bouncy ball, marble, hockey puck, shuttlecock and flying disc. Seams and stitching stay put under any flag or pattern. |
 
-Captured toys are SOG files of up to 450,000 splats (about 5 MB each) with a 120,000-splat copy for
-phones. Full credits are in [CREDITS.md](CREDITS.md) and in the app under **About & credits**.
+Captured toys are SOG files of up to 450,000 splats (about 5 MB each) with a lighter copy for
+phones. The **Photoreal** shelf adds twelve more CC BY scans from SuperSplat (bugs, berries, a
+grape, a star cookie, tomatoes, a basket and a fractal) and fifteen CC0 Poly Haven models turned
+into splats (a rubber duck, a garden gnome, a ukulele, a boombox, a chess set, a croissant and
+more). Full credits are in [CREDITS.md](CREDITS.md) and in the app under **About & credits**.
 
 **Make a toy** builds a new one in the browser: pick a shape (sphere, noise blob, torus, capsule,
 knot), a palette, a seed, the number of splats (up to 300,000 on strong devices, 120,000 on phones),
@@ -223,6 +226,19 @@ SPLASHERY_CHROMIUM=/path/to/chrome node tools/make-thumbs.mjs
 
 To add a toy: add it to `tools/assets.json` (CC0 or CC BY only), run both tools, add an entry with
 its credit to `src/toys.js`, and add it to [CREDITS.md](CREDITS.md).
+
+Some photoreal toys start as textured 3D models rather than scans.
+[tools/mesh-to-splats.mjs](tools/mesh-to-splats.mjs) turns the CC0 models listed in
+[tools/models.json](tools/models.json) into splats: it downloads each glTF from Poly Haven, scatters
+splats over the surfaces by area, colours each one from the model's textures, skips glass so the
+insides show, and writes `.cache/models/<id>/<id>.ply`, which `tools/prepare-assets.mjs` then packs
+like any scan:
+
+```sh
+node tools/mesh-to-splats.mjs            # all models
+node tools/mesh-to-splats.mjs ukulele    # one model
+node tools/prepare-assets.mjs ukulele
+```
 
 ## Tests
 

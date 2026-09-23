@@ -4,8 +4,8 @@ Splashery vendors two libraries so it runs with no bundler and no CDN. Both are 
 files under `vendor/` are unmodified copies of the published npm builds, except that the source-map
 comment was removed from `gifenc.esm.js` because the map is not shipped.
 
-The captured splat toys under `assets/toys/` have their own licences (CC0 and CC BY 4.0); see
-[CREDITS.md](CREDITS.md).
+The captured splat toys under `assets/toys/` (scans, and CC0 models turned into splats) have their
+own licences (CC0 and CC BY 4.0); see [CREDITS.md](CREDITS.md).
 
 ## PlayCanvas Engine 2.22.3
 
@@ -73,3 +73,7 @@ These are `devDependencies` used to prepare assets and run tests; nothing from t
   the captured toys to SOG (`tools/prepare-assets.mjs`).
 - `@playwright/test` 1.56.1 (Apache-2.0): the smoke test and the thumbnail tool.
 - `prettier` 3.8.1 (MIT): formatting.
+- `@gltf-transform/core` 4.5.0 (MIT), https://github.com/donmccurdy/glTF-Transform: reads the glTF
+  models that `tools/mesh-to-splats.mjs` turns into splats.
+- `jpeg-js` 0.4.4 (BSD-3-Clause), https://github.com/eugeneware/jpeg-js, and `pngjs` 7.0.0 (MIT),
+  https://github.com/pngjs/pngjs: decode those models' textures in `tools/mesh-to-splats.mjs`.
