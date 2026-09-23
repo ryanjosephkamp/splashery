@@ -140,7 +140,11 @@ function halo(
 
 // Glowing gas along a curve (prominences, loops): round translucent splats
 // scattered about the path.
-function glowPath(k, path, { share = 0.01, width = 0.03, size = 1.6, opacity = 0.4, col, twinkle = 0.4, part }) {
+function glowPath(
+  k,
+  path,
+  { share = 0.01, width = 0.03, size = 1.6, opacity = 0.4, col, twinkle = 0.4, part },
+) {
   return k.cloud({ share, size, pattern: false, part }, (rand) => {
     const t = rand();
     const w = typeof width === "function" ? width(t) : width;
@@ -357,7 +361,10 @@ function globe(
 }
 
 // A core in layers for Slice: stops from the centre out.
-const layers = (stops, R = 1) => (c) => ramp(stops, clamp01(len(c.lp) / R));
+const layers =
+  (stops, R = 1) =>
+  (c) =>
+    ramp(stops, clamp01(len(c.lp) / R));
 
 // Colour bands by latitude: stops are [sinLat, colour] from south to north.
 function bandAt(stops, y) {
@@ -417,7 +424,8 @@ function spinAngle(c, t, rate) {
 function earthSurface(noise, facing = [0, 0, 0]) {
   const SEA = 0.07;
   return (c, d) => {
-    const h = noise.fbm(d[0] * 1.3 + 3.1, d[1] * 1.3 - 1.7, d[2] * 1.3 + 0.5, 5) + 0.07 * dot(d, facing);
+    const h =
+      noise.fbm(d[0] * 1.3 + 3.1, d[1] * 1.3 - 1.7, d[2] * 1.3 + 0.5, 5) + 0.07 * dot(d, facing);
     const lat = Math.abs(d[1]);
     const ice = lat + 0.05 * noise(d[0] * 6, d[1] * 6, d[2] * 6);
     let col;
@@ -504,7 +512,12 @@ function jupiterSurface(noise, { grs = true, lon0 = 0.3 } = {}) {
       const g = ovalDist(d, -0.39, lon0, 0.17, 0.085);
       if (g < 1.45) {
         const swirl = noise(d[0] * 20, d[1] * 20, d[2] * 20);
-        if (g < 1) col = mix(mix("#b8452c", "#d9754c", smoothstep(0.2, 1, g + swirl * 0.25)), col, smoothstep(0.85, 1, g));
+        if (g < 1)
+          col = mix(
+            mix("#b8452c", "#d9754c", smoothstep(0.2, 1, g + swirl * 0.25)),
+            col,
+            smoothstep(0.85, 1, g),
+          );
         else col = mix("#f6ead6", col, smoothstep(1.05, 1.45, g));
       }
       // A string of small white ovals in the south.
@@ -541,7 +554,11 @@ function saturnSurface(noise) {
 
 // Saturn's rings in planet radii: C, B, Cassini division, A with the Encke
 // gap, and the thin F ring.
-function saturnRings(k, noise, { R = 1, quat, part, pos, shares = [0.05, 0.15, 0.09, 0.008], glint = 0 }) {
+function saturnRings(
+  k,
+  noise,
+  { R = 1, quat, part, pos, shares = [0.05, 0.15, 0.09, 0.008], glint = 0 },
+) {
   const fine = (r, f, a) => 1 + a * Math.sin(r * f) + a * 0.6 * noise(r * 60, 0.5, 0.5);
   rings(
     k,
@@ -674,7 +691,10 @@ export const RECIPES = {
           for (const s of spots) {
             const x = angle(d, s.d) / s.r;
             if (x < 1) {
-              col = x < 0.45 ? mix("#2a0f04", "#5a2208", x / 0.45) : mix("#8a3a0e", col, smoothstep(0.8, 1, x));
+              col =
+                x < 0.45
+                  ? mix("#2a0f04", "#5a2208", x / 0.45)
+                  : mix("#8a3a0e", col, smoothstep(0.8, 1, x));
             } else if (x < 2.4) {
               col = mix(col, "#fff3b0", 0.4 * (1 - (x - 1) / 1.4));
             }
@@ -748,7 +768,11 @@ export const RECIPES = {
         craters,
         core: layers(["#8a5a3a", "#9a7a62", "#7d746b"]),
         albedo: (c, d) => {
-          const plains = smoothstep(0.02, 0.12, noise.fbm(d[0] * 1.5 + 4, d[1] * 1.5, d[2] * 1.5, 4));
+          const plains = smoothstep(
+            0.02,
+            0.12,
+            noise.fbm(d[0] * 1.5 + 4, d[1] * 1.5, d[2] * 1.5, 4),
+          );
           let col = mix("#a89c8c", "#7e756b", plains * 0.8);
           col = shade(col, 1 + 0.08 * c.noise(d[0] * 36, d[1] * 36, d[2] * 36));
           const L = craters.look(d, c.noise);
@@ -777,7 +801,15 @@ export const RECIPES = {
           return lit(col, c.n, 0.3);
         },
       });
-      halo(k, { r0: 1, r1: 1.07, share: 0.035, size: 2, opacity: 0.16, falloff: 1.3, col: (t) => mix("#fff2cc", "#ffd890", t) });
+      halo(k, {
+        r0: 1,
+        r1: 1.07,
+        share: 0.035,
+        size: 2,
+        opacity: 0.16,
+        falloff: 1.3,
+        col: (t) => mix("#fff2cc", "#ffd890", t),
+      });
     },
   },
 
@@ -793,7 +825,15 @@ export const RECIPES = {
         col: (c, d) => lit(surface(c, d), c.n, 0.3),
       });
       earthClouds(k, noise, { q, share: 0.12 });
-      halo(k, { r0: 1.0, r1: 1.08, share: 0.04, size: 2, opacity: 0.16, falloff: 1.2, col: (t) => mix("#7cc6ff", "#3a7cff", t) });
+      halo(k, {
+        r0: 1.0,
+        r1: 1.08,
+        share: 0.04,
+        size: 2,
+        opacity: 0.16,
+        falloff: 1.2,
+        col: (t) => mix("#7cc6ff", "#3a7cff", t),
+      });
     },
   },
 
@@ -808,7 +848,8 @@ export const RECIPES = {
         shapeR: tabulate((d) => 1 + 0.01 * noise.fbm(d[0] * 2 + 3, d[1] * 2, d[2] * 2, 3)),
         albedo: (c, d) => {
           // Maria: broad dark plains, mostly on the side facing the viewer.
-          const m = noise.fbm(d[0] * 1.5 + 7, d[1] * 1.5, d[2] * 1.5, 4) + 0.12 * dot(d, cam) - 0.02;
+          const m =
+            noise.fbm(d[0] * 1.5 + 7, d[1] * 1.5, d[2] * 1.5, 4) + 0.12 * dot(d, cam) - 0.02;
           const mare = smoothstep(0.03, 0.1, m);
           const fine = c.noise(d[0] * 40, d[1] * 40, d[2] * 40);
           let col = mix("#9e9b94", "#5c5a56", mare * 0.9);
@@ -852,7 +893,15 @@ export const RECIPES = {
           return lit(shade(col, 1 + 0.06 * c.noise(d[0] * 34, d[1] * 34, d[2] * 34)), c.n, 0.3);
         },
       });
-      halo(k, { r0: 1, r1: 1.05, share: 0.03, size: 2, opacity: 0.12, falloff: 1.3, col: (t) => mix("#ffc8a0", "#e08a60", t) });
+      halo(k, {
+        r0: 1,
+        r1: 1.05,
+        share: 0.03,
+        size: 2,
+        opacity: 0.12,
+        falloff: 1.3,
+        col: (t) => mix("#ffc8a0", "#e08a60", t),
+      });
     },
   },
 
@@ -911,7 +960,11 @@ export const RECIPES = {
           const y = d[1] + 0.02 * noise.fbm(d[0] * 3, d[1] * 12, d[2] * 3, 3);
           let col = mix("#8fd3df", "#c3eff1", smoothstep(0.3, 0.85, y));
           col = mix(col, "#7cc2d4", smoothstep(-0.2, -0.7, y) * 0.6);
-          return lit(shade(col, 1 + 0.04 * Math.sin(y * 40) + 0.03 * noise(d[0] * 8, d[1] * 30, d[2] * 8)), c.n, 0.3);
+          return lit(
+            shade(col, 1 + 0.04 * Math.sin(y * 40) + 0.03 * noise(d[0] * 8, d[1] * 30, d[2] * 8)),
+            c.n,
+            0.3,
+          );
         },
       });
       const ring = (r0, r1, op, share) => [r0, r1, op, () => "#c8d6dc", share];
@@ -962,12 +1015,21 @@ export const RECIPES = {
           // High white cirrus streaks.
           const streak = noise(d[0] * 2.5 + 7, d[1] * 22, d[2] * 2.5);
           const lat = latOf(d);
-          const zone = Math.exp(-(((lat + 0.55) / 0.07) ** 2)) + Math.exp(-(((lat - 0.42) / 0.06) ** 2)) * 0.8;
+          const zone =
+            Math.exp(-(((lat + 0.55) / 0.07) ** 2)) + Math.exp(-(((lat - 0.42) / 0.06) ** 2)) * 0.8;
           col = mix(col, "#eef4ff", clamp01(smoothstep(0.18, 0.4, streak) * zone));
           return lit(col, c.n, 0.3);
         },
       });
-      halo(k, { r0: 1, r1: 1.06, share: 0.03, size: 2, opacity: 0.14, falloff: 1.3, col: (t) => mix("#9ab8ff", "#4a70ff", t) });
+      halo(k, {
+        r0: 1,
+        r1: 1.06,
+        share: 0.03,
+        size: 2,
+        opacity: 0.14,
+        falloff: 1.3,
+        col: (t) => mix("#9ab8ff", "#4a70ff", t),
+      });
     },
   },
   asteroid: {
@@ -1272,7 +1334,11 @@ export const RECIPES = {
         const pl = pillars[Math.floor(rand() * 3)];
         const s = rand();
         return {
-          p: [axisOf(pl, 1) + gauss(rand) * 0.06, pl.top + 0.02 + 0.12 * s, pl.z + gauss(rand) * 0.04],
+          p: [
+            axisOf(pl, 1) + gauss(rand) * 0.06,
+            pl.top + 0.02 + 0.12 * s,
+            pl.z + gauss(rand) * 0.04,
+          ],
           color: mix(P.rim, "#ffffff", 0.3 * rand()),
           opacity: 0.12 * (1 - s),
           size: (1 + rand()) * S,
@@ -1314,7 +1380,11 @@ export const RECIPES = {
       for (const P of ORRERY) {
         const th = P.phase + P.w * t;
         out.parts[P.id] = {
-          offset: [P.r * (Math.sin(th) - Math.sin(P.phase)), 0, P.r * (Math.cos(th) - Math.cos(P.phase))],
+          offset: [
+            P.r * (Math.sin(th) - Math.sin(P.phase)),
+            0,
+            P.r * (Math.cos(th) - Math.cos(P.phase)),
+          ],
         };
       }
     },
@@ -1431,7 +1501,9 @@ export const RECIPES = {
         scale: 0.06,
         share: 0.04,
         shapeR: tabulate(
-          (d) => (1 / Math.hypot(d[0] / 1.3, d[1] / 0.85, d[2])) * (1 + 0.15 * noise.fbm(d[0] + 3, d[1], d[2], 3)),
+          (d) =>
+            (1 / Math.hypot(d[0] / 1.3, d[1] / 0.85, d[2])) *
+            (1 + 0.15 * noise.fbm(d[0] + 3, d[1], d[2], 3)),
           64,
           32,
         ),
@@ -1537,7 +1609,11 @@ export const RECIPES = {
         params: (c) => [0.18, c.rand() * TAU],
         color: (c) => {
           const d = c.ln;
-          const g = smoothstep(0, 0.16, Math.abs(c.noise(d[0] * T.freq, d[1] * T.freq, d[2] * T.freq)));
+          const g = smoothstep(
+            0,
+            0.16,
+            Math.abs(c.noise(d[0] * T.freq, d[1] * T.freq, d[2] * T.freq)),
+          );
           const big = c.fbm(d[0] * 2.5 + 9, d[1] * 2.5, d[2] * 2.5, 3);
           // Hotter towards the middle of the face the viewer sees.
           const face = smoothstep(0.2, 1, dot(d, f.c));
@@ -1577,7 +1653,9 @@ export const RECIPES = {
           const pts = [];
           for (let i = 0; i <= 8; i++) {
             const s = i / 8;
-            pts.push(mul(unit(add(mid, mul(along, (s - 0.5) * 0.4))), 0.97 + 0.42 * Math.sin(Math.PI * s)));
+            pts.push(
+              mul(unit(add(mid, mul(along, (s - 0.5) * 0.4))), 0.97 + 0.42 * Math.sin(Math.PI * s)),
+            );
           }
           glowPath(k, spline(pts), {
             share: 0.012,
@@ -2063,7 +2141,11 @@ export const RECIPES = {
         if (x < 0.01) [col, size] = [mix("#ff5a1a", "#ff8a3a", rand()), 2.4];
         else if (x < 0.045) [col, size] = [mix("#ff9a30", "#ffba50", rand()), 1.7];
         else if (x < 0.065) [col, size] = [mix("#4a80ff", "#80a8ff", rand()), 1.4];
-        else [col, size] = [mix("#ffbf40", "#fff0c0", rand() * rand() + 0.5 * inner), 0.5 + 0.4 * rand()];
+        else
+          [col, size] = [
+            mix("#ffbf40", "#fff0c0", rand() * rand() + 0.5 * inner),
+            0.5 + 0.4 * rand(),
+          ];
         return {
           p: mul(randDir(rand), r),
           color: col,
@@ -2105,7 +2187,11 @@ export const RECIPES = {
           }
           // Towns: warm lights scattered over the land, thickest near the coasts.
           const coast = 1 - smoothstep(0, 0.08, h - SEA);
-          const busy = smoothstep(0.02, 0.2, noise.fbm(d[0] * 5 + 7, d[1] * 5, d[2] * 5, 3) + 0.15 * coast);
+          const busy = smoothstep(
+            0.02,
+            0.2,
+            noise.fbm(d[0] * 5 + 7, d[1] * 5, d[2] * 5, 3) + 0.15 * coast,
+          );
           if (c.rand() < 0.02 + 0.3 * busy * (0.4 + 0.6 * coast))
             return keep(mix("#ffc45a", "#fff0c0", c.rand()), 0.8);
           return lit(mix("#1d2a26", "#2a2a24", smoothstep(0, 0.1, h - SEA)), c.n, 0.3);
@@ -2128,11 +2214,19 @@ export const RECIPES = {
         const southern = rand() < 0.25;
         const a = rand() * TAU;
         const colat =
-          0.42 + 0.05 * Math.sin(3 * a + 1) + 0.04 * noise(Math.cos(a) * 2, Math.sin(a) * 2, 3) + gauss(rand) * 0.02;
+          0.42 +
+          0.05 * Math.sin(3 * a + 1) +
+          0.04 * noise(Math.cos(a) * 2, Math.sin(a) * 2, 3) +
+          gauss(rand) * 0.02;
         const fold = 0.025 * Math.sin(a * 22 + 3 * noise(Math.cos(a) * 4, Math.sin(a) * 4, 7));
         const th = colat + fold;
         const pole = southern ? mul(north, -1) : north;
-        const d = unit(add(mul(pole, Math.cos(th)), add(mul(e1, Math.sin(th) * Math.cos(a)), mul(e2, Math.sin(th) * Math.sin(a)))));
+        const d = unit(
+          add(
+            mul(pole, Math.cos(th)),
+            add(mul(e1, Math.sin(th) * Math.cos(a)), mul(e2, Math.sin(th) * Math.sin(a))),
+          ),
+        );
         const hgt = Math.pow(rand(), 1.6);
         const soft = rand() < 0.3;
         const bright = 0.6 + 0.4 * noise(Math.cos(a) * 6, Math.sin(a) * 6, 1.5);
@@ -2170,7 +2264,9 @@ export const RECIPES = {
         scale: R,
         share: 0.08,
         shapeR: tabulate(
-          (d) => (1 / Math.hypot(d[0] / 1.15, d[1] / 0.9, d[2])) * (1 + 0.15 * noise.fbm(d[0] + 5, d[1], d[2], 3)),
+          (d) =>
+            (1 / Math.hypot(d[0] / 1.15, d[1] / 0.9, d[2])) *
+            (1 + 0.15 * noise.fbm(d[0] + 5, d[1], d[2], 3)),
           64,
           32,
         ),
@@ -2219,7 +2315,10 @@ export const RECIPES = {
         const [e1, e2] = basis(T);
         const w = R * (0.8 + 1.6 * s);
         return {
-          p: add(mul(T, s * L * 1.1), add(mul(e1, gauss(rand) * w * 0.5), mul(e2, gauss(rand) * w * 0.5))),
+          p: add(
+            mul(T, s * L * 1.1),
+            add(mul(e1, gauss(rand) * w * 0.5), mul(e2, gauss(rand) * w * 0.5)),
+          ),
           color: mix("#8a7e76", "#5a524e", rand()),
           opacity: 0.05,
           size: 3 * S,
@@ -2239,5 +2338,4 @@ export const RECIPES = {
       k.reach(mul(T, L + 0.45));
     },
   },
-
 };

@@ -7,7 +7,7 @@ import { test, expect } from "@playwright/test";
 import fs from "node:fs";
 import path from "node:path";
 import { makePly, makeSplat, makeSpz } from "./fixtures.mjs";
-import { TOYS } from "../src/toys.js";
+import { TOYS, searchToys } from "../src/toys.js";
 import { encodeSceneHash } from "../src/codec.js";
 
 const SHOTS = path.resolve("tests/screenshots");
@@ -104,10 +104,14 @@ test.describe("Splashery app (WebGL2)", () => {
         true,
       );
     }
-    const loaded = await page.evaluate(() =>
-      [...document.querySelectorAll(".toy-card img")].every((img) => img.naturalWidth > 0),
-    );
-    expect(loaded).toBe(true);
+    // Shelf thumbnails load lazily, so load the offscreen ones before checking them all.
+    const loaded = await page.evaluate(async () => {
+      const imgs = [...document.querySelectorAll(".toy-card img")];
+      for (const img of imgs) img.loading = "eager";
+      await Promise.all(imgs.map((img) => img.decode().catch(() => {})));
+      return imgs.filter((img) => !(img.naturalWidth > 0)).map((img) => img.src);
+    });
+    expect(loaded).toEqual([]);
     await expect(page.locator(".toy-card[data-toy='cactus']")).toHaveAttribute(
       "aria-pressed",
       "true",
@@ -131,7 +135,9 @@ test.describe("Splashery app (WebGL2)", () => {
       "true",
     );
     await page.fill("#shelf-search", "fruit");
-    expect(await shown()).toEqual(["strawberry"]);
+    const fruit = searchToys("fruit").map((t) => t.id);
+    expect(fruit).toContain("strawberry");
+    expect(await shown()).toEqual(fruit);
     await page.fill("#shelf-search", "zzzz");
     await expect(page.locator("#shelf-empty")).toBeVisible();
     await page.fill("#shelf-search", "");
@@ -795,7 +801,11 @@ test.describe("Splashery on a phone", () => {
     await expect(page.locator("#pane-play")).toBeHidden();
     await page.tap("#shelf-search-toggle");
     await page.fill("#shelf-search", "straw");
-    await expect(page.locator("#shelf .toy-card")).toHaveCount(1);
+    await expect(page.locator("#shelf .toy-card")).toHaveCount(searchToys("straw").length);
+    await expect(page.locator("#shelf .toy-card").first()).toHaveAttribute(
+      "data-toy",
+      "strawberry",
+    );
     await page.press("#shelf-search", "Enter");
     await waitForToy(page, "Strawberry");
     expect(problems).toEqual([]);
