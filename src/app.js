@@ -480,6 +480,7 @@ class App {
       next.repeats = 2;
       next.amount = 1;
       if (!next.flag) next.flag = await this.defaultFlag();
+      this.sound.play("chime");
     } else if (partial.id && partial.id !== "flag" && prev.id === "flag") {
       next.repeats = 1;
     }
