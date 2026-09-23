@@ -1,4 +1,4 @@
-# Splashery scene files (schema version 2)
+# Splashery scene files (schema version 3)
 
 A Splashery scene is one JSON document. **Save JSON** downloads it, **Load JSON** (or dropping the
 file on the page) restores it, and share links carry the same document compressed into the URL hash.
@@ -7,12 +7,16 @@ to the ranges below, and anything missing falls back to its default, so hand-edi
 to load. Files from Splashery v1 (the planet painter, `version: 1`) are refused with a message
 pointing at the v1 branch.
 
+Version 3 added `pattern`, `motion`, and `options` and `clay` on shelf toys. Version 2 files and
+links load unchanged: they are version 3 scenes with no pattern, the default motion, and no options.
+Saving always writes version 3.
+
 ## Shape
 
 ```json
 {
   "app": "splashery",
-  "version": 2,
+  "version": 3,
   "createdAt": "2026-09-22T19:49:30.000Z",
   "seed": 123456,
   "toy": { "kind": "builtin", "id": "cactus" },
@@ -35,7 +39,18 @@ pointing at the v1 branch.
   },
   "paint": { "stamps": [[0.12, 0.3, 0.55, 0.06, "#e63b2e", 1]] },
   "camera": { "yaw": 0.55, "pitch": 0.32, "roll": 0, "distance": 4.5 },
-  "autoplay": { "turntable": true, "effect": "none" }
+  "autoplay": { "turntable": true, "effect": "none" },
+  "pattern": {
+    "id": "flag",
+    "flag": "fr",
+    "projection": "wrap",
+    "repeats": 2,
+    "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+    "scale": 0.5,
+    "amount": 1,
+    "detail": 0.6
+  },
+  "motion": { "alive": true, "move": "bounce", "speed": 0.5, "controls": { "open": 1 } }
 }
 ```
 
@@ -44,7 +59,7 @@ pointing at the v1 branch.
 | Field       | Type   | Meaning                                                                                                     |
 | ----------- | ------ | ----------------------------------------------------------------------------------------------------------- |
 | `app`       | string | Always `"splashery"`.                                                                                       |
-| `version`   | number | Schema version, `2`.                                                                                        |
+| `version`   | number | Schema version, `3` (files with `2` load too).                                                              |
 | `createdAt` | string | ISO time the file was saved (informational).                                                                |
 | `seed`      | int    | 0 to 16,777,215. Seeds every per-splat random choice in the effects, idle pokes and paint splashes.         |
 | `toy`       | object | Which toy; see below.                                                                                       |
@@ -53,14 +68,23 @@ pointing at the v1 branch.
 | `paint`     | object | `stamps`: the paint, as a list of brush stamps replayed in order (at most 4,000).                           |
 | `camera`    | object | Orbit pose. `distance` is in multiples of the toy's radius, so it fits any toy.                             |
 | `autoplay`  | object | `turntable` (slow spin when idle) and `effect`: `none`, `breeze`, `pokes`, `twist` or `dissolve` when idle. |
+| `pattern`   | object | A design wrapped around the toy (version 3); see below.                                                     |
+| `motion`    | object | How the toy moves (version 3); see below.                                                                   |
 
 ### `toy`
 
 One of three kinds:
 
-- `{ "kind": "builtin", "id": "cactus" }`: a toy from the shelf (`cactus`, `strawberry`, `cookie`,
-  `bee`, `blob`, `donut`, `knot`, `planet`). The generated shelf toys use the device's default splat
-  count.
+- `{ "kind": "builtin", "id": "cactus" }`: a toy from the shelf (see `src/toys.js` for every id).
+  The generated shelf toys use the device's default splat count. Toys built from a pack recipe can
+  also carry:
+  - `options`: the recipe's choices, such as `{ "style": "love", "color": "#c42f3c" }`. At most 16
+    keys; values are numbers, `true`/`false`, `#rrggbb` colours or short lower-case words. The
+    recipe checks their meaning when it builds, so unknown options are ignored.
+  - `clay`: clay edits, as for generated toys below.
+
+  Both are left out when empty.
+
 - `{ "kind": "procedural", "id": null, "generator": {…}, "clay": […] }`: a generated toy.
   - `generator.shape`: `sphere`, `blob`, `torus`, `capsule` or `knot`.
   - `generator.palette`: `candy`, `ocean`, `meadow`, `sunset`, `ink`, `neon`, `planet` or
@@ -102,6 +126,33 @@ the toy; their `on` is always `false` in a file. Ambient effects run by themselv
 | `twist`    | `amount` (-1 to 1), `wobble` (0 holds the twist still), `axis` (`x`, `y` or `z`)         |
 | `slice`    | `position` (-1 to 1), `sweep` (0 holds the plane still), `axis` (`x`, `y` or `z`)        |
 | `paint`    | `size`, `splash`, `color` (the brush)                                                    |
+
+### `pattern`
+
+| Key          | Values                                                                                                                |
+| ------------ | --------------------------------------------------------------------------------------------------------------------- |
+| `id`         | `none`, `flag`, `stripes`, `bands`, `dots`, `checks`, `stars`, `hearts`, `zigzag`, `gradient`, `rainbow` or `marble`. |
+| `flag`       | For `flag`: a country code from `assets/flags/flags.json` (ISO 3166 alpha-2, plus `xk` for Kosovo).                   |
+| `projection` | `wrap` (around the toy's up axis), `front` (straight through from the front) or `globe` (latitude and longitude).     |
+| `repeats`    | 1 to 4: how many times the design goes around (not used by `front`).                                                  |
+| `colors`     | Three colours for the patterns that use them.                                                                         |
+| `scale`      | 0 to 1: how big the stripes, dots or checks are.                                                                      |
+| `amount`     | 0 to 1: how strongly the pattern covers the toy's own colours.                                                        |
+| `detail`     | 0 to 1: how much of the toy's own light and shade shows through.                                                      |
+
+Seams, stitching, flames and similar details that a recipe marks keep their own colours.
+
+### `motion`
+
+| Key        | Values                                                                                                  |
+| ---------- | ------------------------------------------------------------------------------------------------------- |
+| `alive`    | `true` lets a pack toy's own behaviours run (flames flicker, hearts beat).                              |
+| `move`     | `still`, `bounce`, `spin`, `wobble` or `float`: how the whole toy moves (any toy).                      |
+| `speed`    | 0 to 1.                                                                                                 |
+| `controls` | A pack toy's control values, 0 to 1 (for example `open` for the treasure chest's lid). At most 16 keys. |
+
+Under a system setting for reduced motion, nothing moves by itself until the visitor turns motion
+on.
 
 ### `paint.stamps`
 

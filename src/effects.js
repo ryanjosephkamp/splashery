@@ -145,8 +145,23 @@ uniform vec4 uSpTwist;   // xyz axis (unit), w angle across the toy (radians)
 uniform vec4 uSpSlice;   // xyz plane normal, w offset (world)
 uniform vec4 uSpSliceP;  // x on, y glow width (world)
 uniform vec4 uSpAccent;  // rgb accent colour
-
+uniform vec4 uSpBodyQ;   // whole-toy rotation (quaternion x, y, z, w)
+uniform vec4 uSpBodyT;   // xyz whole-toy offset, w squash (+ flattens, - stretches)
+uniform vec4 uSpBodyF;   // x floor distance below the toy centre
+uniform vec4 uSpPat;     // x on, y projection (0 wrap, 1 front, 2 globe), z repeats, w amount
+uniform vec4 uSpPatB;    // x keep detail, y half height, z mean luminance, w half width
+uniform sampler2D uSpPattern;
+__KIT_UNIFORMS__
 vec3 spHome = vec3(0.0);
+vec3 spRest = vec3(0.0);
+float spKitScale = 1.0;
+float spFade = 1.0;
+float spBright = 1.0;
+vec3 spTint = vec3(0.0);
+float spFlame = -1.0;
+float spNoPat = 0.0;
+vec4 spBodyQ = vec4(0.0, 0.0, 0.0, 1.0);
+vec4 spPartQ = vec4(0.0, 0.0, 0.0, 1.0);
 float spCut = 0.0;
 float spShrink = 0.0;
 float spLanded = 0.0;
@@ -175,6 +190,44 @@ vec4 spQuatMul(vec4 a, vec4 b) {
   return vec4(a.w * b.xyz + b.w * a.xyz + cross(a.xyz, b.xyz), a.w * b.w - dot(a.xyz, b.xyz));
 }
 
+vec3 spQuatRotate(vec4 q, vec3 v) {
+  return v + 2.0 * cross(q.xyz, cross(q.xyz, v) + q.w * v);
+}
+
+// Whole-toy motion (bounce, spin, wobble, float): squash about the floor,
+// rotate about the centre, then move.
+vec3 spBody(vec3 p) {
+  vec4 q = uSpBodyQ;
+  if (q.w == 0.0 && dot(q.xyz, q.xyz) == 0.0) q = vec4(0.0, 0.0, 0.0, 1.0);
+  vec3 toy = uSpToy.xyz;
+  vec3 rel = p - toy;
+  float s = uSpBodyT.w;
+  if (s != 0.0) {
+    float f = uSpBodyF.x;
+    rel = vec3(rel.x * (1.0 + 0.5 * s), (rel.y + f) * (1.0 - s) - f, rel.z * (1.0 + 0.5 * s));
+  }
+  spBodyQ = q;
+  return toy + spQuatRotate(q, rel) + uSpBodyT.xyz;
+}
+
+// The pattern layer: a 2D design wrapped around the toy's rest pose.
+vec3 spPattern(vec3 rgb) {
+  vec3 q = spRest - uSpToy.xyz;
+  vec2 uv;
+  if (uSpPat.y < 0.5) {
+    uv = vec2(atan(q.x, q.z) / 6.2831853 * uSpPat.z + 0.5, 0.5 - q.y / (2.0 * uSpPatB.y));
+  } else if (uSpPat.y < 1.5) {
+    uv = vec2(0.5 + q.x / (2.0 * uSpPatB.w), 0.5 - q.y / (2.0 * uSpPatB.y));
+  } else {
+    vec3 d = normalize(q + vec3(1e-6));
+    uv = vec2(atan(d.x, d.z) / 6.2831853 * uSpPat.z + 0.5, acos(clamp(d.y, -1.0, 1.0)) / 3.1415927);
+  }
+  vec4 pc = textureLod(uSpPattern, uv, 0.0);
+  float lum = dot(rgb, vec3(0.299, 0.587, 0.114));
+  float shade = mix(1.0, clamp(lum / max(uSpPatB.z, 0.05), 0.3, 1.7), uSpPatB.x);
+  return mix(rgb, pc.rgb * shade, uSpPat.w * pc.a);
+}
+__KIT_FUNCTIONS__
 vec3 spPoke(vec4 poke, vec3 home) {
   float age = uSpClock.x - poke.w;
   if (age < 0.0 || age > 6.0) return vec3(0.0);
@@ -214,6 +267,9 @@ vec3 spWind(vec3 home) {
 }
 
 void modifySplatCenter(inout vec3 center) {
+  spRest = center;
+  __KIT_CENTER__
+  center = spBody(center);
   vec3 toy = uSpToy.xyz;
   float R = uSpToy.w;
   vec3 home = center;
@@ -310,12 +366,17 @@ void modifySplatCenter(inout vec3 center) {
 }
 
 void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter, inout vec4 rotation, inout vec3 scale) {
-  rotation = spQuatMul(spTwistQ, rotation);
-  scale *= uSpClock.y * (1.0 - 0.45 * spShrink) * (1.0 + 0.3 * spLanded);
+  rotation = spQuatMul(spTwistQ, spQuatMul(spBodyQ, spQuatMul(spPartQ, rotation)));
+  scale *= uSpClock.y * spKitScale * (1.0 - 0.45 * spShrink) * (1.0 + 0.3 * spLanded);
   if (spCut > 0.5) scale = vec3(0.0);
 }
 
 void modifySplatColor(vec3 center, inout vec4 color) {
+  if (uSpPat.x > 0.5 && spNoPat < 0.5) color.rgb = spPattern(color.rgb);
+  if (spFlame >= 0.0) {
+    color.rgb = mix(color.rgb, vec3(1.0, 0.36, 0.06), smoothstep(0.08, 0.6, spFlame));
+    color.rgb *= 1.0 - 0.45 * smoothstep(0.5, 1.0, spFlame);
+  }
   vec4 paint = loadPaintColor();
   color.rgb = color.rgb * (1.0 - paint.a) + paint.rgb;
   if (uSpSliceP.x > 0.5) {
@@ -325,6 +386,8 @@ void modifySplatColor(vec3 center, inout vec4 color) {
     if (side > 0.0) color.a = 0.0;
   }
   color.rgb = mix(color.rgb, uSpAccent.rgb, clamp(spGlow, 0.0, 1.0) * 0.35);
+  color.rgb = color.rgb * spBright + spTint;
+  color.a *= spFade;
   color.rgb *= uSpClock.z * (1.0 + clamp(spShade, -0.6, 0.6));
 }
 `;
@@ -349,7 +412,23 @@ uniform uSpTwist: vec4f;
 uniform uSpSlice: vec4f;
 uniform uSpSliceP: vec4f;
 uniform uSpAccent: vec4f;
-
+uniform uSpBodyQ: vec4f;
+uniform uSpBodyT: vec4f;
+uniform uSpBodyF: vec4f;
+uniform uSpPat: vec4f;
+uniform uSpPatB: vec4f;
+var uSpPattern: texture_2d<f32>;
+var uSpPatternSampler: sampler;
+__KIT_UNIFORMS__
+var<private> spRest: vec3f = vec3f(0.0);
+var<private> spKitScale: f32 = 1.0;
+var<private> spFade: f32 = 1.0;
+var<private> spBright: f32 = 1.0;
+var<private> spTint: vec3f = vec3f(0.0);
+var<private> spFlame: f32 = -1.0;
+var<private> spNoPat: f32 = 0.0;
+var<private> spBodyQ: vec4f = vec4f(0.0, 0.0, 0.0, 1.0);
+var<private> spPartQ: vec4f = vec4f(0.0, 0.0, 0.0, 1.0);
 var<private> spCut: f32 = 0.0;
 var<private> spShrink: f32 = 0.0;
 var<private> spLanded: f32 = 0.0;
@@ -378,6 +457,41 @@ fn spQuatMul(a: vec4f, b: vec4f) -> vec4f {
   return vec4f(a.w * b.xyz + b.w * a.xyz + cross(a.xyz, b.xyz), a.w * b.w - dot(a.xyz, b.xyz));
 }
 
+fn spQuatRotate(q: vec4f, v: vec3f) -> vec3f {
+  return v + 2.0 * cross(q.xyz, cross(q.xyz, v) + q.w * v);
+}
+
+fn spBody(p: vec3f) -> vec3f {
+  var q = uniform.uSpBodyQ;
+  if (q.w == 0.0 && dot(q.xyz, q.xyz) == 0.0) { q = vec4f(0.0, 0.0, 0.0, 1.0); }
+  let toy = uniform.uSpToy.xyz;
+  var rel = p - toy;
+  let s = uniform.uSpBodyT.w;
+  if (s != 0.0) {
+    let f = uniform.uSpBodyF.x;
+    rel = vec3f(rel.x * (1.0 + 0.5 * s), (rel.y + f) * (1.0 - s) - f, rel.z * (1.0 + 0.5 * s));
+  }
+  spBodyQ = q;
+  return toy + spQuatRotate(q, rel) + uniform.uSpBodyT.xyz;
+}
+
+fn spPattern(rgb: vec3f) -> vec3f {
+  let q = spRest - uniform.uSpToy.xyz;
+  var uv: vec2f;
+  if (uniform.uSpPat.y < 0.5) {
+    uv = vec2f(atan2(q.x, q.z) / 6.2831853 * uniform.uSpPat.z + 0.5, 0.5 - q.y / (2.0 * uniform.uSpPatB.y));
+  } else if (uniform.uSpPat.y < 1.5) {
+    uv = vec2f(0.5 + q.x / (2.0 * uniform.uSpPatB.w), 0.5 - q.y / (2.0 * uniform.uSpPatB.y));
+  } else {
+    let d = normalize(q + vec3f(1e-6));
+    uv = vec2f(atan2(d.x, d.z) / 6.2831853 * uniform.uSpPat.z + 0.5, acos(clamp(d.y, -1.0, 1.0)) / 3.1415927);
+  }
+  let pc = textureSampleLevel(uSpPattern, uSpPatternSampler, uv, 0.0);
+  let lum = dot(rgb, vec3f(0.299, 0.587, 0.114));
+  let shade = mix(1.0, clamp(lum / max(uniform.uSpPatB.z, 0.05), 0.3, 1.7), uniform.uSpPatB.x);
+  return mix(rgb, pc.rgb * shade, uniform.uSpPat.w * pc.a);
+}
+__KIT_FUNCTIONS__
 fn spPoke(poke: vec4f, home: vec3f) -> vec3f {
   let age = uniform.uSpClock.x - poke.w;
   if (age < 0.0 || age > 6.0) { return vec3f(0.0); }
@@ -416,6 +530,9 @@ fn spWind(home: vec3f) -> vec3f {
 }
 
 fn modifySplatCenter(center: ptr<function, vec3f>) {
+  spRest = *center;
+  __KIT_CENTER__
+  *center = spBody(*center);
   let toy = uniform.uSpToy.xyz;
   let R = uniform.uSpToy.w;
   let home = *center;
@@ -511,14 +628,20 @@ fn modifySplatCenter(center: ptr<function, vec3f>) {
 }
 
 fn modifySplatRotationScale(originalCenter: vec3f, modifiedCenter: vec3f, rotation: ptr<function, vec4f>, scale: ptr<function, vec3f>) {
-  *rotation = spQuatMul(spTwistQ, *rotation);
-  *scale = *scale * (uniform.uSpClock.y * (1.0 - 0.45 * spShrink) * (1.0 + 0.3 * spLanded));
+  *rotation = spQuatMul(spTwistQ, spQuatMul(spBodyQ, spQuatMul(spPartQ, *rotation)));
+  *scale = *scale * (uniform.uSpClock.y * spKitScale * (1.0 - 0.45 * spShrink) * (1.0 + 0.3 * spLanded));
   if (spCut > 0.5) { *scale = vec3f(0.0); }
 }
 
 fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {
+  var base = (*color).rgb;
+  if (uniform.uSpPat.x > 0.5 && spNoPat < 0.5) { base = spPattern(base); }
+  if (spFlame >= 0.0) {
+    base = mix(base, vec3f(1.0, 0.36, 0.06), smoothstep(0.08, 0.6, spFlame));
+    base = base * (1.0 - 0.45 * smoothstep(0.5, 1.0, spFlame));
+  }
   let paint = loadPaintColor();
-  var rgb = (*color).rgb * (1.0 - paint.a) + paint.rgb;
+  var rgb = base * (1.0 - paint.a) + paint.rgb;
   var a = (*color).a;
   if (uniform.uSpSliceP.x > 0.5) {
     let side = dot(center - uniform.uSpToy.xyz, uniform.uSpSlice.xyz) - uniform.uSpSlice.w;
@@ -527,11 +650,226 @@ fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {
     if (side > 0.0) { a = 0.0; }
   }
   rgb = mix(rgb, uniform.uSpAccent.rgb, clamp(spGlow, 0.0, 1.0) * 0.35);
+  rgb = rgb * spBright + spTint;
+  a = a * spFade;
   *color = vec4f(rgb * uniform.uSpClock.z * (1.0 + clamp(spShade, -0.6, 0.6)), a);
 }
 `;
 
-export const MODIFIER = { glsl: GLSL, wgsl: WGSL };
+// Generated toys carry a per-splat "splatAnim" stream (RGBA32F): x = part
+// index (0..15) + 16 when the pattern layer should skip the splat, y =
+// behaviour kind (see KINDS), z and w = the behaviour's two parameters.
+// Parts are rigid groups moved by uSpParts (3 vec4 per part: rotation,
+// pivot, offset + visibility). Captured toys have no such stream, so they
+// use the variant without these pieces.
+export const KINDS = {
+  none: 0,
+  orbit: 1, // turn about the toy's up axis: z = turns per unit time at the rim, w = falloff (0 rigid, 1.5 Keplerian)
+  beat: 2, // heartbeat swell from the centre: z = amount, w = phase
+  breathe: 3, // slow sine swell: z = amount, w = phase
+  flame: 4, // rise, shrink and redden in a loop: z = height (toy radii), w = phase
+  rise: 5, // drift up and fade in a loop (embers, bubbles, smoke): z = height, w = phase
+  fall: 6, // fall and fade in a loop (rain, snow): z = distance, w = phase
+  twinkle: 7, // brightness flicker: z = amount, w = phase
+  sway: 8, // bend with height above a base (plants, tentacles): z = amount, w = base height
+  grow: 9, // appear as the grow control passes z (0..1)
+  melt: 10, // slump and spread towards the floor as energy rises: z = how easily
+  pulse: 11, // a glow runs along a path: z = position along the path (0..1)
+  wave: 12, // ripple up and down: z = amount, w = phase
+  glint: 13, // sparkle as the camera moves: z = amount
+};
+
+const GLSL_KIT_UNIFORMS = `uniform vec4 uSpKit;     // x time, y alive (0/1), z speed, w energy (melt 0..1)
+uniform vec4 uSpKitB;    // x grow progress 0..1, y floor distance below the centre, z amount
+uniform vec4 uSpGlowC;   // rgb pulse glow colour, a strength
+uniform vec4 uSpCam;     // xyz camera position
+uniform vec4 uSpParts[48];`;
+
+const GLSL_KIT_FUNCTIONS = `
+float spBeat(float x) {
+  float f = fract(x);
+  return exp(-pow((f - 0.12) * 18.0, 2.0)) + 0.6 * exp(-pow((f - 0.34) * 16.0, 2.0));
+}
+
+vec3 spKitCenter(vec3 p) {
+  vec4 an = loadSplatAnim();
+  int pk = int(an.x + 0.5);
+  int part = pk & 15;
+  spNoPat = float((pk >> 4) & 1);
+  int kind = int(an.y + 0.5);
+  vec3 toy = uSpToy.xyz;
+  float R = uSpToy.w;
+  vec3 up = vec3(0.0, 1.0, 0.0);
+  float t = uSpKit.x * uSpKit.z;
+  float amt = uSpKitB.z;
+  if (uSpKit.y > 0.5 && kind > 0) {
+    float h = spHash(splat.index * 29u + 7u);
+    vec3 rel = p - toy;
+    if (kind == 1) {
+      float r = length(rel.xz);
+      float w = an.z * pow(max(r, 0.04 * R) / R, -an.w);
+      p = toy + spRotate(rel, up, t * w);
+    } else if (kind == 2) {
+      p = toy + rel * (1.0 + amt * an.z * spBeat(t * 1.1 + an.w));
+    } else if (kind == 3) {
+      p = toy + rel * (1.0 + amt * an.z * sin(t * 1.3 + an.w));
+    } else if (kind == 4 || kind == 5) {
+      bool flame = kind == 4;
+      float c = fract(t * (0.6 + 0.5 * h) * (flame ? 1.4 : 0.35) + an.w + h);
+      float travel = amt * an.z * R;
+      vec3 side = vec3(sin(t * 3.0 + h * 17.0), 0.0, cos(t * 2.3 + h * 11.0));
+      p += up * c * travel + side * (flame ? 0.07 : 0.22) * c * travel;
+      spFade = smoothstep(0.0, 0.1, c) * (1.0 - smoothstep(0.55, 1.0, c));
+      spKitScale = flame ? mix(1.0, 0.3, c) : mix(0.7, 1.25, c);
+      if (flame) spFlame = c;
+    } else if (kind == 6) {
+      float c = fract(t * (0.72 + 0.25 * h) + an.w);
+      p -= up * c * an.z * R;
+      spFade = smoothstep(0.0, 0.08, c) * (1.0 - smoothstep(0.85, 1.0, c));
+    } else if (kind == 7) {
+      spBright = 1.0 + amt * an.z * sin(t * (2.0 + 3.0 * h) + 6.2832 * h + an.w);
+    } else if (kind == 8) {
+      float k = max(0.0, dot(rel, up) - an.w) / R;
+      vec3 d = vec3(sin(t * 1.3 + rel.x * 1.7 / R + rel.z * 1.1 / R), 0.0, 0.6 * cos(t * 1.1 + rel.z * 1.9 / R));
+      p += d * amt * an.z * k * k * R;
+    } else if (kind == 9) {
+      spKitScale = smoothstep(an.z, an.z + 0.08, uSpKitB.x);
+    } else if (kind == 10) {
+      float m = clamp(uSpKit.w * an.z, 0.0, 1.0);
+      float f = uSpKitB.y;
+      float hgt = max(0.0, rel.y + f);
+      float nh = hgt * (1.0 - m * (0.82 + 0.15 * h));
+      float spread = 1.0 + m * (0.4 + 1.1 * (1.0 - nh / max(2.0 * f, 1e-3)));
+      p = toy + vec3(rel.x * spread, nh - f, rel.z * spread);
+    } else if (kind == 11) {
+      float d = fract(t * 0.35);
+      float g = exp(-pow((an.z - d) * 16.0, 2.0)) + exp(-pow((an.z - d + 1.0) * 16.0, 2.0));
+      spTint += uSpGlowC.rgb * g * uSpGlowC.a;
+    } else if (kind == 12) {
+      p += up * sin(rel.x * 5.0 / R + rel.z * 3.0 / R - t * 2.0 + an.w) * amt * an.z * R;
+    } else if (kind == 13) {
+      float g = pow(max(0.0, sin(dot(uSpCam.xyz, vec3(3.1, 2.7, 3.7) * (0.5 + h)) + h * 40.0 + t * 0.5)), 24.0);
+      spBright = 1.0 + an.z * g * 3.0;
+    }
+  }
+  if (part > 0) {
+    vec4 q = uSpParts[part * 3];
+    vec4 pv = uSpParts[part * 3 + 1];
+    vec4 ofs = uSpParts[part * 3 + 2];
+    if (q.w == 0.0 && dot(q.xyz, q.xyz) == 0.0) q = vec4(0.0, 0.0, 0.0, 1.0);
+    p = pv.xyz + spQuatRotate(q, p - pv.xyz) + ofs.xyz;
+    spPartQ = q;
+    spKitScale *= ofs.w;
+  }
+  return p;
+}
+`;
+
+const WGSL_KIT_UNIFORMS = `uniform uSpKit: vec4f;
+uniform uSpKitB: vec4f;
+uniform uSpGlowC: vec4f;
+uniform uSpCam: vec4f;
+uniform uSpParts: array<vec4f, 48>;`;
+
+const WGSL_KIT_FUNCTIONS = `
+fn spBeat(x: f32) -> f32 {
+  let f = fract(x);
+  return exp(-pow((f - 0.12) * 18.0, 2.0)) + 0.6 * exp(-pow((f - 0.34) * 16.0, 2.0));
+}
+
+fn spKitCenter(p0: vec3f) -> vec3f {
+  var p = p0;
+  let an = loadSplatAnim();
+  let pk = i32(an.x + 0.5);
+  let part = pk & 15;
+  spNoPat = f32((pk >> 4u) & 1);
+  let kind = i32(an.y + 0.5);
+  let toy = uniform.uSpToy.xyz;
+  let R = uniform.uSpToy.w;
+  let up = vec3f(0.0, 1.0, 0.0);
+  let t = uniform.uSpKit.x * uniform.uSpKit.z;
+  let amt = uniform.uSpKitB.z;
+  if (uniform.uSpKit.y > 0.5 && kind > 0) {
+    let h = spHash(splat.index * 29u + 7u);
+    let rel = p - toy;
+    if (kind == 1) {
+      let r = length(rel.xz);
+      let w = an.z * pow(max(r, 0.04 * R) / R, -an.w);
+      p = toy + spRotate(rel, up, t * w);
+    } else if (kind == 2) {
+      p = toy + rel * (1.0 + amt * an.z * spBeat(t * 1.1 + an.w));
+    } else if (kind == 3) {
+      p = toy + rel * (1.0 + amt * an.z * sin(t * 1.3 + an.w));
+    } else if (kind == 4 || kind == 5) {
+      let flame = kind == 4;
+      let c = fract(t * (0.6 + 0.5 * h) * select(0.35, 1.4, flame) + an.w + h);
+      let travel = amt * an.z * R;
+      let side = vec3f(sin(t * 3.0 + h * 17.0), 0.0, cos(t * 2.3 + h * 11.0));
+      p = p + up * c * travel + side * select(0.22, 0.07, flame) * c * travel;
+      spFade = smoothstep(0.0, 0.1, c) * (1.0 - smoothstep(0.55, 1.0, c));
+      spKitScale = select(mix(0.7, 1.25, c), mix(1.0, 0.3, c), flame);
+      if (flame) { spFlame = c; }
+    } else if (kind == 6) {
+      let c = fract(t * (0.72 + 0.25 * h) + an.w);
+      p = p - up * c * an.z * R;
+      spFade = smoothstep(0.0, 0.08, c) * (1.0 - smoothstep(0.85, 1.0, c));
+    } else if (kind == 7) {
+      spBright = 1.0 + amt * an.z * sin(t * (2.0 + 3.0 * h) + 6.2832 * h + an.w);
+    } else if (kind == 8) {
+      let k = max(0.0, dot(rel, up) - an.w) / R;
+      let d = vec3f(sin(t * 1.3 + rel.x * 1.7 / R + rel.z * 1.1 / R), 0.0, 0.6 * cos(t * 1.1 + rel.z * 1.9 / R));
+      p = p + d * amt * an.z * k * k * R;
+    } else if (kind == 9) {
+      spKitScale = smoothstep(an.z, an.z + 0.08, uniform.uSpKitB.x);
+    } else if (kind == 10) {
+      let m = clamp(uniform.uSpKit.w * an.z, 0.0, 1.0);
+      let f = uniform.uSpKitB.y;
+      let hgt = max(0.0, rel.y + f);
+      let nh = hgt * (1.0 - m * (0.82 + 0.15 * h));
+      let spread = 1.0 + m * (0.4 + 1.1 * (1.0 - nh / max(2.0 * f, 1e-3)));
+      p = toy + vec3f(rel.x * spread, nh - f, rel.z * spread);
+    } else if (kind == 11) {
+      let d = fract(t * 0.35);
+      let g = exp(-pow((an.z - d) * 16.0, 2.0)) + exp(-pow((an.z - d + 1.0) * 16.0, 2.0));
+      spTint = spTint + uniform.uSpGlowC.rgb * g * uniform.uSpGlowC.a;
+    } else if (kind == 12) {
+      p = p + up * sin(rel.x * 5.0 / R + rel.z * 3.0 / R - t * 2.0 + an.w) * amt * an.z * R;
+    } else if (kind == 13) {
+      let g = pow(max(0.0, sin(dot(uniform.uSpCam.xyz, vec3f(3.1, 2.7, 3.7) * (0.5 + h)) + h * 40.0 + t * 0.5)), 24.0);
+      spBright = 1.0 + an.z * g * 3.0;
+    }
+  }
+  if (part > 0) {
+    var q = uniform.uSpParts[part * 3];
+    let pv = uniform.uSpParts[part * 3 + 1];
+    let ofs = uniform.uSpParts[part * 3 + 2];
+    if (q.w == 0.0 && dot(q.xyz, q.xyz) == 0.0) { q = vec4f(0.0, 0.0, 0.0, 1.0); }
+    p = pv.xyz + spQuatRotate(q, p - pv.xyz) + ofs.xyz;
+    spPartQ = q;
+    spKitScale = spKitScale * ofs.w;
+  }
+  return p;
+}
+`;
+
+function variant(code, kit, lang) {
+  const glsl = lang === "glsl";
+  return code
+    .replace("__KIT_UNIFORMS__", kit ? (glsl ? GLSL_KIT_UNIFORMS : WGSL_KIT_UNIFORMS) : "")
+    .replace("__KIT_FUNCTIONS__", kit ? (glsl ? GLSL_KIT_FUNCTIONS : WGSL_KIT_FUNCTIONS) : "")
+    .replace(
+      "__KIT_CENTER__",
+      kit ? (glsl ? "center = spKitCenter(center);" : "*center = spKitCenter(*center);") : "",
+    );
+}
+
+// Captured and file toys.
+export const MODIFIER = { glsl: variant(GLSL, false, "glsl"), wgsl: variant(WGSL, false, "wgsl") };
+// Generated toys (they carry the splatAnim stream).
+export const MODIFIER_KIT = {
+  glsl: variant(GLSL, true, "glsl"),
+  wgsl: variant(WGSL, true, "wgsl"),
+};
 
 // ---- CPU driver -------------------------------------------------------------
 

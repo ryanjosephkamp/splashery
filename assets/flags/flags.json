@@ -1,0 +1,1785 @@
+{
+ "about": "National flags for Splashery's pattern layer, from Wikimedia Commons. Each file's licence was read from the Commons API when it was fetched (tools/fetch-flags.mjs); only public-domain and CC0 files are kept.",
+ "fetched": "2026-09-23",
+ "flags": [
+  {
+   "code": "af",
+   "name": "Afghanistan",
+   "file": "af.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_the_Taliban.svg",
+   "license": "Public domain",
+   "author": "Original: Taliban Vector: Lexicon",
+   "bytes": 37065
+  },
+  {
+   "code": "al",
+   "name": "Albania",
+   "file": "al.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Albania.svg",
+   "license": "Public domain",
+   "author": "Sadik Kaceli",
+   "bytes": 12534
+  },
+  {
+   "code": "dz",
+   "name": "Algeria",
+   "file": "dz.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Algeria.svg",
+   "license": "Public domain",
+   "author": "Original: National Liberation Front of Algeria Vector: SKopp",
+   "bytes": 311
+  },
+  {
+   "code": "ad",
+   "name": "Andorra",
+   "file": "ad.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Andorra.svg",
+   "license": "Public domain",
+   "author": "Original: Napoleon III Vector: HansenBCN",
+   "bytes": 58468
+  },
+  {
+   "code": "ao",
+   "name": "Angola",
+   "file": "ao.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Angola.svg",
+   "license": "Public domain",
+   "author": "Original: Henrique de Carvalho Santos Vector: SKopp",
+   "bytes": 2227
+  },
+  {
+   "code": "ag",
+   "name": "Antigua and Barbuda",
+   "file": "ag.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Antigua_and_Barbuda.svg",
+   "license": "Public domain",
+   "author": "Original: Sir Reginald Samuel Vector: David Benbennick",
+   "bytes": 540
+  },
+  {
+   "code": "ar",
+   "name": "Argentina",
+   "file": "ar.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Argentina.svg",
+   "license": "Public domain",
+   "author": "Manuel Belgrano",
+   "bytes": 4994
+  },
+  {
+   "code": "am",
+   "name": "Armenia",
+   "file": "am.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Armenia.svg",
+   "license": "Public domain",
+   "author": "Original: Stepan Malkhasyants Vector: SKopp",
+   "bytes": 201
+  },
+  {
+   "code": "au",
+   "name": "Australia",
+   "file": "au.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Australia.svg",
+   "license": "Public domain",
+   "author": "Original: Ivor Evans, Leslie John Hawkins, Egbert John Nuttall, Annie Dorrington and William Stevens Vector: Ian Fieggen",
+   "bytes": 1586
+  },
+  {
+   "code": "at",
+   "name": "Austria",
+   "file": "at.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Austria.svg",
+   "license": "Public domain",
+   "author": "Bundesministerium für Landesverteidigung",
+   "bytes": 218
+  },
+  {
+   "code": "az",
+   "name": "Azerbaijan",
+   "file": "az.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Azerbaijan.svg",
+   "license": "Public domain",
+   "author": "SKopp and others",
+   "bytes": 588
+  },
+  {
+   "code": "bs",
+   "name": "Bahamas",
+   "the": true,
+   "file": "bs.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_the_Bahamas.svg",
+   "license": "Public domain",
+   "author": "Government of Bahamas",
+   "bytes": 240
+  },
+  {
+   "code": "bh",
+   "name": "Bahrain",
+   "file": "bh.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Bahrain.svg",
+   "license": "Public domain",
+   "author": "Source: Drawn by SKopp, rewritten by Zscout370",
+   "bytes": 298
+  },
+  {
+   "code": "bd",
+   "name": "Bangladesh",
+   "file": "bd.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Bangladesh.svg",
+   "license": "Public domain",
+   "author": "See File history below for details.",
+   "bytes": 156
+  },
+  {
+   "code": "bb",
+   "name": "Barbados",
+   "file": "bb.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Barbados.svg",
+   "license": "Public domain",
+   "author": "User:Denelson83",
+   "bytes": 638
+  },
+  {
+   "code": "by",
+   "name": "Belarus",
+   "file": "by.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Belarus.svg",
+   "license": "Public domain",
+   "author": "See File history below for details.",
+   "bytes": 2040
+  },
+  {
+   "code": "be",
+   "name": "Belgium",
+   "file": "be.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Belgium.svg",
+   "license": "Public domain",
+   "author": "Dbenbenn and others",
+   "bytes": 182
+  },
+  {
+   "code": "bz",
+   "name": "Belize",
+   "file": "bz.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Belize.svg",
+   "license": "Public domain",
+   "author": "Caleb Moore",
+   "bytes": 71903
+  },
+  {
+   "code": "bj",
+   "name": "Benin",
+   "file": "bj.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Benin.svg",
+   "license": "Public domain",
+   "author": "Drawn by User:SKopp, rewritten by User:Gabbe",
+   "bytes": 197
+  },
+  {
+   "code": "bt",
+   "name": "Bhutan",
+   "file": "bt.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Bhutan.svg",
+   "license": "Public domain",
+   "author": "See File history below for details.",
+   "bytes": 36864
+  },
+  {
+   "code": "bo",
+   "name": "Bolivia",
+   "file": "bo.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Bolivia.svg",
+   "license": "Public domain",
+   "author": "See file history' below for details.",
+   "bytes": 264
+  },
+  {
+   "code": "ba",
+   "name": "Bosnia and Herzegovina",
+   "file": "ba.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Bosnia_and_Herzegovina.svg",
+   "license": "Public domain",
+   "author": "Mladen Kolobarić",
+   "bytes": 512
+  },
+  {
+   "code": "bw",
+   "name": "Botswana",
+   "file": "bw.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Botswana.svg",
+   "license": "Public domain",
+   "author": "SKopp, Gabbe, Madden",
+   "bytes": 268
+  },
+  {
+   "code": "br",
+   "name": "Brazil",
+   "file": "br.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Brazil.svg",
+   "license": "Public domain",
+   "author": "Raimundo Teixeira Mendes",
+   "bytes": 4243
+  },
+  {
+   "code": "bn",
+   "name": "Brunei",
+   "file": "bn.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Brunei.svg",
+   "license": "Public domain",
+   "author": "Nightstallion",
+   "bytes": 31244
+  },
+  {
+   "code": "bg",
+   "name": "Bulgaria",
+   "file": "bg.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Bulgaria.svg",
+   "license": "Public domain",
+   "author": "SKopp",
+   "bytes": 288
+  },
+  {
+   "code": "bf",
+   "name": "Burkina Faso",
+   "file": "bf.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Burkina_Faso.svg",
+   "license": "Public domain",
+   "author": "Drawn by SKopp, rewritten by Gabbe and Андрей Перцев",
+   "bytes": 672
+  },
+  {
+   "code": "bi",
+   "name": "Burundi",
+   "file": "bi.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Burundi.svg",
+   "license": "Public domain",
+   "author": "See File history below for details.",
+   "bytes": 693
+  },
+  {
+   "code": "cv",
+   "name": "Cabo Verde",
+   "file": "cv.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Cape_Verde_(3-2).svg",
+   "license": "Public domain",
+   "author": "Original: Pedro Gregório Vector: SKopp",
+   "bytes": 964
+  },
+  {
+   "code": "kh",
+   "name": "Cambodia",
+   "file": "kh.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Cambodia.svg",
+   "license": "Public domain",
+   "author": "Unknown authorUnknown author",
+   "bytes": 10374
+  },
+  {
+   "code": "cm",
+   "name": "Cameroon",
+   "file": "cm.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Cameroon.svg",
+   "license": "Public domain",
+   "author": "(of code) -xfi-",
+   "bytes": 508
+  },
+  {
+   "code": "ca",
+   "name": "Canada",
+   "file": "ca.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Canada.svg",
+   "license": "Public domain",
+   "author": "Created by George F. G. Stanley / E Pluribus Anthony / User:Mzajac",
+   "bytes": 699
+  },
+  {
+   "code": "cf",
+   "name": "Central African Republic",
+   "the": true,
+   "file": "cf.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_the_Central_African_Republic.svg",
+   "license": "Public domain",
+   "author": "Barthélemy Boganda",
+   "bytes": 400
+  },
+  {
+   "code": "td",
+   "name": "Chad",
+   "file": "td.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Chad.svg",
+   "license": "Public domain",
+   "author": "SKopp & others (see upload log)",
+   "bytes": 197
+  },
+  {
+   "code": "cl",
+   "name": "Chile",
+   "file": "cl.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Chile.svg",
+   "license": "Public domain",
+   "author": "See file history below for details.",
+   "bytes": 592
+  },
+  {
+   "code": "cn",
+   "name": "China",
+   "file": "cn.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_the_People%27s_Republic_of_China.svg",
+   "license": "Public domain",
+   "author": "Zeng Liansong",
+   "bytes": 563
+  },
+  {
+   "code": "co",
+   "name": "Colombia",
+   "file": "co.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Colombia.svg",
+   "license": "Public domain",
+   "author": "See File history below for details.",
+   "bytes": 255
+  },
+  {
+   "code": "km",
+   "name": "Comoros",
+   "the": true,
+   "file": "km.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_the_Comoros.svg",
+   "license": "Public domain",
+   "author": "Original: Comoros; Vector: see file history",
+   "bytes": 620
+  },
+  {
+   "code": "cg",
+   "name": "Congo",
+   "the": true,
+   "file": "cg.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_the_Republic_of_the_Congo.svg",
+   "license": "Public domain",
+   "author": "See File history below for details.",
+   "bytes": 204
+  },
+  {
+   "code": "cd",
+   "name": "DR Congo",
+   "the": true,
+   "file": "cd.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_the_Democratic_Republic_of_the_Congo.svg",
+   "license": "Public domain",
+   "author": "Nightstallion",
+   "bytes": 542
+  },
+  {
+   "code": "cr",
+   "name": "Costa Rica",
+   "file": "cr.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Costa_Rica.svg",
+   "license": "Public domain",
+   "author": "See File history below for details.",
+   "bytes": 266
+  },
+  {
+   "code": "ci",
+   "name": "Côte d'Ivoire",
+   "file": "ci.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_C%C3%B4te_d%27Ivoire.svg",
+   "license": "Public domain",
+   "author": "See File history below for details.",
+   "bytes": 184
+  },
+  {
+   "code": "hr",
+   "name": "Croatia",
+   "file": "hr.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Croatia.svg",
+   "license": "Public domain",
+   "author": "Nightstallion, Elephantus, Neoneo13, Denelson83, Rainman, R-41, Minestrone, Lupo, Zscout370,MaGa (based on Decision of the Parliament)",
+   "bytes": 68547
+  },
+  {
+   "code": "cu",
+   "name": "Cuba",
+   "file": "cu.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Cuba.svg",
+   "license": "Public domain",
+   "author": "Miguel Teurbe Tolón and Narciso López",
+   "bytes": 322
+  },
+  {
+   "code": "cy",
+   "name": "Cyprus",
+   "file": "cy.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Cyprus.svg",
+   "license": "Public domain",
+   "author": "İsmet Güney, SVG by User:Vzb83~commonswiki",
+   "bytes": 23916
+  },
+  {
+   "code": "cz",
+   "name": "Czechia",
+   "file": "cz.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_the_Czech_Republic.svg",
+   "license": "Public domain",
+   "author": "Jaroslav Kursa",
+   "bytes": 275
+  },
+  {
+   "code": "dk",
+   "name": "Denmark",
+   "file": "dk.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Denmark.svg",
+   "license": "Public domain",
+   "author": "Madden and others",
+   "bytes": 186
+  },
+  {
+   "code": "dj",
+   "name": "Djibouti",
+   "file": "dj.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Djibouti.svg",
+   "license": "Public domain",
+   "author": "Unknown authorUnknown author",
+   "bytes": 371
+  },
+  {
+   "code": "dm",
+   "name": "Dominica",
+   "file": "dm.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Dominica.svg",
+   "license": "Public domain",
+   "author": "Alwin Bully",
+   "bytes": 5157
+  },
+  {
+   "code": "do",
+   "name": "Dominican Republic",
+   "the": true,
+   "file": "do.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_the_Dominican_Republic.svg",
+   "license": "Public domain",
+   "author": "Juan Pablo Duarte",
+   "bytes": 203618
+  },
+  {
+   "code": "ec",
+   "name": "Ecuador",
+   "file": "ec.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Ecuador.svg",
+   "license": "Public domain",
+   "author": "President of the Republic of Ecuador, first uploaded by Denelson83 as Flag of Ecuador.svg, modifications by Husunqu, Zscout370",
+   "bytes": 279145
+  },
+  {
+   "code": "eg",
+   "name": "Egypt",
+   "file": "eg.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Egypt.svg",
+   "license": "Public domain",
+   "author": "See File history below for details.",
+   "bytes": 18440
+  },
+  {
+   "code": "sv",
+   "name": "El Salvador",
+   "file": "sv.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_El_Salvador.svg",
+   "license": "Public domain",
+   "author": "See File history below for details.",
+   "bytes": 280714
+  },
+  {
+   "code": "gq",
+   "name": "Equatorial Guinea",
+   "file": "gq.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Equatorial_Guinea.svg",
+   "license": "Public domain",
+   "author": "See File history below for details.",
+   "bytes": 5890
+  },
+  {
+   "code": "er",
+   "name": "Eritrea",
+   "file": "er.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Eritrea.svg",
+   "license": "Public domain",
+   "author": "Unknown authorUnknown author",
+   "bytes": 3309
+  },
+  {
+   "code": "ee",
+   "name": "Estonia",
+   "file": "ee.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Estonia.svg",
+   "license": "Public domain",
+   "author": "Original: Unknown author Vector: SKopp, PeepP and ‍others",
+   "bytes": 183
+  },
+  {
+   "code": "sz",
+   "name": "Eswatini",
+   "file": "sz.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Eswatini.svg",
+   "license": "Public domain",
+   "author": "Sobhuza II",
+   "bytes": 6654
+  },
+  {
+   "code": "et",
+   "name": "Ethiopia",
+   "file": "et.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Ethiopia.svg",
+   "license": "Public domain",
+   "author": "Drawn by User:SKopp",
+   "bytes": 864
+  },
+  {
+   "code": "fj",
+   "name": "Fiji",
+   "file": "fj.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Fiji.svg",
+   "license": "Public domain",
+   "author": "Tessa Mackenzie",
+   "bytes": 40121
+  },
+  {
+   "code": "fi",
+   "name": "Finland",
+   "file": "fi.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Finland.svg",
+   "license": "Public domain",
+   "author": "Unknown",
+   "bytes": 241
+  },
+  {
+   "code": "fr",
+   "name": "France",
+   "file": "fr.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_France.svg",
+   "license": "Public domain",
+   "author": "Original: Unknown Vector: SKopp",
+   "bytes": 193
+  },
+  {
+   "code": "ga",
+   "name": "Gabon",
+   "file": "ga.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Gabon.svg",
+   "license": "Public domain",
+   "author": "Léon Augé and Pierre Claver Eyeghe",
+   "bytes": 201
+  },
+  {
+   "code": "gm",
+   "name": "Gambia",
+   "the": true,
+   "file": "gm.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_The_Gambia.svg",
+   "license": "Public domain",
+   "author": "Vzb83 iThe source code of the previous SVG was invalid due to 39 errors.",
+   "bytes": 291
+  },
+  {
+   "code": "ge",
+   "name": "Georgia",
+   "file": "ge.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Georgia.svg",
+   "license": "Public domain",
+   "author": "Last update by MapGrid SKopp",
+   "bytes": 545
+  },
+  {
+   "code": "de",
+   "name": "Germany",
+   "file": "de.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Germany.svg",
+   "license": "Public domain",
+   "author": "User:SKopp, User:Madden, and other users",
+   "bytes": 502
+  },
+  {
+   "code": "gh",
+   "name": "Ghana",
+   "file": "gh.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Ghana.svg",
+   "license": "Public domain",
+   "author": "Theodosia Okoh",
+   "bytes": 255
+  },
+  {
+   "code": "gr",
+   "name": "Greece",
+   "file": "gr.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Greece.svg",
+   "license": "Public domain",
+   "author": "Unknown authorUnknown author",
+   "bytes": 284
+  },
+  {
+   "code": "gd",
+   "name": "Grenada",
+   "file": "gd.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Grenada.svg",
+   "license": "Public domain",
+   "author": "See file history below for details.",
+   "bytes": 1101
+  },
+  {
+   "code": "gt",
+   "name": "Guatemala",
+   "file": "gt.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Guatemala.svg",
+   "license": "Public domain",
+   "author": "K21edgo",
+   "bytes": 55848
+  },
+  {
+   "code": "gn",
+   "name": "Guinea",
+   "file": "gn.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Guinea.svg",
+   "license": "Public domain",
+   "author": "Wikimedia Commons contributors",
+   "bytes": 205
+  },
+  {
+   "code": "gw",
+   "name": "Guinea-Bissau",
+   "file": "gw.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Guinea-Bissau.svg",
+   "license": "Public domain",
+   "author": "Wikimedia Commons contributors",
+   "bytes": 710
+  },
+  {
+   "code": "gy",
+   "name": "Guyana",
+   "file": "gy.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Guyana.svg",
+   "license": "Public domain",
+   "author": "Whitney Smith",
+   "bytes": 510
+  },
+  {
+   "code": "ht",
+   "name": "Haiti",
+   "file": "ht.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Haiti.svg",
+   "license": "Public domain",
+   "author": "(colours and size changes of the now deleted versions) Madden, Vzb83, Denelson83, Chanheigeorge, Zscout370 and Nightstallion Coat of arms :Lokal_Profil and Myri",
+   "bytes": 176692
+  },
+  {
+   "code": "hn",
+   "name": "Honduras",
+   "file": "hn.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Honduras_(1949%E2%80%932022,_2026%E2%80%93present).svg",
+   "license": "Public domain",
+   "author": "Kes47",
+   "bytes": 467
+  },
+  {
+   "code": "hu",
+   "name": "Hungary",
+   "file": "hu.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Hungary.svg",
+   "license": "Public domain",
+   "author": "SKopp",
+   "bytes": 197
+  },
+  {
+   "code": "is",
+   "name": "Iceland",
+   "file": "is.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Iceland.svg",
+   "license": "Public domain",
+   "author": "Original: Matthías Þórðarson Vector: Árni Dagur and Magasjukur2",
+   "bytes": 281
+  },
+  {
+   "code": "in",
+   "name": "India",
+   "file": "in.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_India.svg",
+   "license": "Public domain",
+   "author": "Government of India",
+   "bytes": 848
+  },
+  {
+   "code": "id",
+   "name": "Indonesia",
+   "file": "id.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Indonesia.svg",
+   "license": "Public domain",
+   "author": "Jayakatwang",
+   "bytes": 148
+  },
+  {
+   "code": "ir",
+   "name": "Iran",
+   "file": "ir.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Iran.svg",
+   "license": "Public domain",
+   "author": "SVG file: SiBr4Designer: Hamid NadimiConstruction: ISIRI",
+   "bytes": 2218
+  },
+  {
+   "code": "iq",
+   "name": "Iraq",
+   "file": "iq.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Iraq.svg",
+   "license": "Public domain",
+   "author": "See File history below for details.",
+   "bytes": 1204
+  },
+  {
+   "code": "ie",
+   "name": "Ireland",
+   "file": "ie.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Ireland.svg",
+   "license": "Public domain",
+   "author": "Éire",
+   "bytes": 282
+  },
+  {
+   "code": "il",
+   "name": "Israel",
+   "file": "il.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Israel.svg",
+   "license": "Public domain",
+   "author": "Israel Belkind and Fanny Abramovitch (original) “The Provisional Council of State Proclamation of the Flag of the State of Israel” of 25 Tishrei 5709 (28 Octobe",
+   "bytes": 398
+  },
+  {
+   "code": "it",
+   "name": "Italy",
+   "file": "it.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Italy.svg",
+   "license": "Public domain",
+   "author": "See below.",
+   "bytes": 273
+  },
+  {
+   "code": "jm",
+   "name": "Jamaica",
+   "file": "jm.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Jamaica.svg",
+   "license": "Public domain",
+   "author": "The SVG code is valid. This vector image was created with Inkscape by SKopp, and then manually edited by Zscout370, Madden and others.",
+   "bytes": 326
+  },
+  {
+   "code": "jp",
+   "name": "Japan",
+   "file": "jp.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Japan.svg",
+   "license": "Public domain",
+   "author": "Various",
+   "bytes": 209
+  },
+  {
+   "code": "jo",
+   "name": "Jordan",
+   "file": "jo.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Jordan.svg",
+   "license": "Public domain",
+   "author": "Unknown",
+   "bytes": 412
+  },
+  {
+   "code": "kz",
+   "name": "Kazakhstan",
+   "file": "kz.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Kazakhstan.svg",
+   "license": "Public domain",
+   "author": "Shaken Niyazbekop",
+   "bytes": 9668
+  },
+  {
+   "code": "ke",
+   "name": "Kenya",
+   "file": "ke.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Kenya.svg",
+   "license": "Public domain",
+   "author": "User:Pumbaa80",
+   "bytes": 1033
+  },
+  {
+   "code": "ki",
+   "name": "Kiribati",
+   "file": "ki.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Kiribati.svg",
+   "license": "Public domain",
+   "author": "User:Hanzlan",
+   "bytes": 7004
+  },
+  {
+   "code": "kw",
+   "name": "Kuwait",
+   "file": "kw.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Kuwait.svg",
+   "license": "Public domain",
+   "author": "Wikimedia Commons contributors",
+   "bytes": 317
+  },
+  {
+   "code": "kg",
+   "name": "Kyrgyzstan",
+   "file": "kg.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Kyrgyzstan.svg",
+   "license": "Public domain",
+   "author": "Shakiev N.T., Primov U.B.",
+   "bytes": 15577
+  },
+  {
+   "code": "la",
+   "name": "Laos",
+   "file": "la.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Laos.svg",
+   "license": "Public domain",
+   "author": "SKopp",
+   "bytes": 233
+  },
+  {
+   "code": "lv",
+   "name": "Latvia",
+   "file": "lv.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Latvia.svg",
+   "license": "Public domain",
+   "author": "Original: Ansis Cīrulis Vector: SKopp",
+   "bytes": 161
+  },
+  {
+   "code": "lb",
+   "name": "Lebanon",
+   "file": "lb.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Lebanon.svg",
+   "license": "Public domain",
+   "author": "Henri Pharaon",
+   "bytes": 14800
+  },
+  {
+   "code": "ls",
+   "name": "Lesotho",
+   "file": "ls.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Lesotho.svg",
+   "license": "Public domain",
+   "author": "See File history below for details.",
+   "bytes": 1484
+  },
+  {
+   "code": "lr",
+   "name": "Liberia",
+   "file": "lr.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Liberia.svg",
+   "license": "Public domain",
+   "author": "Government of Liberia",
+   "bytes": 729
+  },
+  {
+   "code": "ly",
+   "name": "Libya",
+   "file": "ly.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Libya.svg",
+   "license": "Public domain",
+   "author": "Various The SVG code is valid. This vector image was created with a text editor.",
+   "bytes": 479
+  },
+  {
+   "code": "li",
+   "name": "Liechtenstein",
+   "file": "li.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Liechtenstein.svg",
+   "license": "Public domain",
+   "author": "Mnmazur and others",
+   "bytes": 143852
+  },
+  {
+   "code": "lt",
+   "name": "Lithuania",
+   "file": "lt.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Lithuania.svg",
+   "license": "Public domain",
+   "author": "Original: Jonas Basanavičius, Tadas Daugirdas and Antanas Žmuidzinavičius Vector: SKopp The SVG code is valid. This flag was created with a text editor.Previous",
+   "bytes": 201
+  },
+  {
+   "code": "lu",
+   "name": "Luxembourg",
+   "file": "lu.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Luxembourg.svg",
+   "license": "Public domain",
+   "author": "Drawn by User:SKopp",
+   "bytes": 213
+  },
+  {
+   "code": "mg",
+   "name": "Madagascar",
+   "file": "mg.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Madagascar.svg",
+   "license": "Public domain",
+   "author": "Wikimedia Commons contributors",
+   "bytes": 244
+  },
+  {
+   "code": "mw",
+   "name": "Malawi",
+   "file": "mw.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Malawi.svg",
+   "license": "Public domain",
+   "author": "Original: Unknown author Vector: Achim1999",
+   "bytes": 1071
+  },
+  {
+   "code": "my",
+   "name": "Malaysia",
+   "file": "my.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Malaysia.svg",
+   "license": "Public domain",
+   "author": "MapGrid (old version SKopp, Zscout370 and Ranking Update)",
+   "bytes": 683
+  },
+  {
+   "code": "mv",
+   "name": "Maldives",
+   "the": true,
+   "file": "mv.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Maldives.svg",
+   "license": "Public domain",
+   "author": "See File history, below, for details.",
+   "bytes": 267
+  },
+  {
+   "code": "ml",
+   "name": "Mali",
+   "file": "ml.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Mali.svg",
+   "license": "Public domain",
+   "author": "SKopp",
+   "bytes": 197
+  },
+  {
+   "code": "mt",
+   "name": "Malta",
+   "file": "mt.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Malta.svg",
+   "license": "Public domain",
+   "author": "See File history below for details.",
+   "bytes": 15715
+  },
+  {
+   "code": "mh",
+   "name": "Marshall Islands",
+   "the": true,
+   "file": "mh.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_the_Marshall_Islands.svg",
+   "license": "Public domain",
+   "author": "No machine-readable author provided. SKopp assumed (based on copyright claims).",
+   "bytes": 790
+  },
+  {
+   "code": "mr",
+   "name": "Mauritania",
+   "file": "mr.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Mauritania.svg",
+   "license": "Public domain",
+   "author": "See File history below for details.",
+   "bytes": 343
+  },
+  {
+   "code": "mu",
+   "name": "Mauritius",
+   "file": "mu.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Mauritius.svg",
+   "license": "Public domain",
+   "author": "Zscout370",
+   "bytes": 678
+  },
+  {
+   "code": "mx",
+   "name": "Mexico",
+   "file": "mx.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Mexico.svg",
+   "license": "Public domain",
+   "author": "Omar Alejandro Covarrubias Neri, 9 April 2006. Based on the 1968 arms by Francisco Eppens Helguera and Juan Manuel Gabino Villascán.",
+   "bytes": 117180
+  },
+  {
+   "code": "fm",
+   "name": "Micronesia",
+   "file": "fm.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_the_Federated_States_of_Micronesia.svg",
+   "license": "Public domain",
+   "author": "Wikimedia Commons contributors",
+   "bytes": 814
+  },
+  {
+   "code": "md",
+   "name": "Moldova",
+   "file": "md.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Moldova.svg",
+   "license": "Public domain",
+   "author": "Gheorghe Vrabie",
+   "bytes": 34587
+  },
+  {
+   "code": "mc",
+   "name": "Monaco",
+   "file": "mc.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Monaco.svg",
+   "license": "Public domain",
+   "author": "Drawn by User:SKopp",
+   "bytes": 197
+  },
+  {
+   "code": "mn",
+   "name": "Mongolia",
+   "file": "mn.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Mongolia.svg",
+   "license": "Public domain",
+   "author": "See File history below for details.",
+   "bytes": 1526
+  },
+  {
+   "code": "me",
+   "name": "Montenegro",
+   "file": "me.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Montenegro.svg",
+   "license": "Public domain",
+   "author": "B1mbo, Froztbyte, Great Brightstar",
+   "bytes": 123773
+  },
+  {
+   "code": "ma",
+   "name": "Morocco",
+   "file": "ma.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Morocco.svg",
+   "license": "Public domain",
+   "author": "Denelson83, Zscout370",
+   "bytes": 264
+  },
+  {
+   "code": "mz",
+   "name": "Mozambique",
+   "file": "mz.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Mozambique.svg",
+   "license": "Public domain",
+   "author": "FRELIMO",
+   "bytes": 2789
+  },
+  {
+   "code": "mm",
+   "name": "Myanmar",
+   "file": "mm.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Myanmar.svg",
+   "license": "Public domain",
+   "author": "Unknown authorUnknown author",
+   "bytes": 636
+  },
+  {
+   "code": "na",
+   "name": "Namibia",
+   "file": "na.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Namibia.svg",
+   "license": "Public domain",
+   "author": "SVG by Vzb83~commonswiki et al.",
+   "bytes": 788
+  },
+  {
+   "code": "nr",
+   "name": "Nauru",
+   "file": "nr.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Nauru.svg",
+   "license": "Public domain",
+   "author": "User:Skimel",
+   "bytes": 616
+  },
+  {
+   "code": "np",
+   "name": "Nepal",
+   "file": "np.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Nepal.svg",
+   "license": "Public domain",
+   "author": "Drawn by Pumbaa80, Achim1999",
+   "bytes": 1523
+  },
+  {
+   "code": "nl",
+   "name": "Netherlands",
+   "the": true,
+   "file": "nl.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_the_Netherlands.svg",
+   "license": "Public domain",
+   "author": "Zscout370",
+   "bytes": 223
+  },
+  {
+   "code": "nz",
+   "name": "New Zealand",
+   "file": "nz.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_New_Zealand.svg",
+   "license": "Public domain",
+   "author": "Original: Albert Hastings Markham Vector: Zscout370, Hugh Jass, s. File history",
+   "bytes": 2406
+  },
+  {
+   "code": "ni",
+   "name": "Nicaragua",
+   "file": "ni.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Nicaragua.svg",
+   "license": "Public domain",
+   "author": "C records",
+   "bytes": 23964
+  },
+  {
+   "code": "ne",
+   "name": "Niger",
+   "file": "ne.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Niger.svg",
+   "license": "Public domain",
+   "author": "Made by: Philippe Verdy User:verdy_p, see also fr:Utilisateur:verdy_p.",
+   "bytes": 296
+  },
+  {
+   "code": "ng",
+   "name": "Nigeria",
+   "file": "ng.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Nigeria.svg",
+   "license": "Public domain",
+   "author": "Jon Harald Søby.",
+   "bytes": 201
+  },
+  {
+   "code": "kp",
+   "name": "North Korea",
+   "file": "kp.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_North_Korea.svg",
+   "license": "Public domain",
+   "author": "Original: Unknown author Vector: Zscout370",
+   "bytes": 407
+  },
+  {
+   "code": "mk",
+   "name": "North Macedonia",
+   "file": "mk.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_North_Macedonia.svg",
+   "license": "Public domain",
+   "author": "User:SKopp, redrawn by User:Gabbe",
+   "bytes": 379
+  },
+  {
+   "code": "no",
+   "name": "Norway",
+   "file": "no.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Norway.svg",
+   "license": "Public domain",
+   "author": "Original: Fredrik Meltzer Vector: Gutten på Hemsen",
+   "bytes": 319
+  },
+  {
+   "code": "pk",
+   "name": "Pakistan",
+   "file": "pk.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Pakistan.svg",
+   "license": "Public domain",
+   "author": "User:Zscout370",
+   "bytes": 707
+  },
+  {
+   "code": "pw",
+   "name": "Palau",
+   "file": "pw.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Palau.svg",
+   "license": "Public domain",
+   "author": "Original: John Blau Skebong Vector: Nightstallion",
+   "bytes": 214
+  },
+  {
+   "code": "pa",
+   "name": "Panama",
+   "file": "pa.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Panama.svg",
+   "license": "Public domain",
+   "author": "Zscout370 et al.",
+   "bytes": 331
+  },
+  {
+   "code": "pg",
+   "name": "Papua New Guinea",
+   "file": "pg.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Papua_New_Guinea.svg",
+   "license": "Public domain",
+   "author": "User:Nightstallion",
+   "bytes": 3786
+  },
+  {
+   "code": "py",
+   "name": "Paraguay",
+   "file": "py.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Paraguay.svg",
+   "license": "Public domain",
+   "author": "Republica del Paraguay",
+   "bytes": 23523
+  },
+  {
+   "code": "pe",
+   "name": "Peru",
+   "file": "pe.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Peru.svg",
+   "license": "Public domain",
+   "author": "David Benbennick",
+   "bytes": 381
+  },
+  {
+   "code": "ph",
+   "name": "Philippines",
+   "the": true,
+   "file": "ph.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_the_Philippines.svg",
+   "license": "Public domain",
+   "author": "See File history below for details.",
+   "bytes": 892
+  },
+  {
+   "code": "pl",
+   "name": "Poland",
+   "file": "pl.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Poland.svg",
+   "license": "Public domain",
+   "author": "See below.",
+   "bytes": 199
+  },
+  {
+   "code": "pt",
+   "name": "Portugal",
+   "file": "pt.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Portugal.svg",
+   "license": "Public domain",
+   "author": "Original: Columbano Bordalo Pinheiro (1910; generic design) Vector: Vítor Luís Rodrigues; António Martins-Tuválkin (2004; this specific vector set: see sources)",
+   "bytes": 13091
+  },
+  {
+   "code": "qa",
+   "name": "Qatar",
+   "file": "qa.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Qatar.svg",
+   "license": "Public domain",
+   "author": "See File history below for details.",
+   "bytes": 310
+  },
+  {
+   "code": "ro",
+   "name": "Romania",
+   "file": "ro.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Romania.svg",
+   "license": "Public domain",
+   "author": "AdiJapan",
+   "bytes": 297
+  },
+  {
+   "code": "ru",
+   "name": "Russia",
+   "file": "ru.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Russia.svg",
+   "license": "Public domain",
+   "author": "Peter the Great",
+   "bytes": 200
+  },
+  {
+   "code": "rw",
+   "name": "Rwanda",
+   "file": "rw.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Rwanda.svg",
+   "license": "Public domain",
+   "author": "Original: Unknown Vector: Zscout370",
+   "bytes": 939
+  },
+  {
+   "code": "kn",
+   "name": "Saint Kitts and Nevis",
+   "file": "kn.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Saint_Kitts_and_Nevis.svg",
+   "license": "Public domain",
+   "author": "Edrice Lewis",
+   "bytes": 621
+  },
+  {
+   "code": "lc",
+   "name": "Saint Lucia",
+   "file": "lc.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Saint_Lucia.svg",
+   "license": "Public domain",
+   "author": "Dunstan St Omer",
+   "bytes": 309
+  },
+  {
+   "code": "vc",
+   "name": "Saint Vincent and the Grenadines",
+   "file": "vc.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Saint_Vincent_and_the_Grenadines.svg",
+   "license": "Public domain",
+   "author": "No machine-readable author provided. SKopp assumed (based on copyright claims).",
+   "bytes": 404
+  },
+  {
+   "code": "ws",
+   "name": "Samoa",
+   "file": "ws.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Samoa.svg",
+   "license": "Public domain",
+   "author": "Original: Malietoa Tanumafili II and Tupua Tamasese Meaʻole Vector: See the file history below for details.",
+   "bytes": 724
+  },
+  {
+   "code": "sm",
+   "name": "San Marino",
+   "file": "sm.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_San_Marino.svg",
+   "license": "Public domain",
+   "author": "Zscout370",
+   "bytes": 132841
+  },
+  {
+   "code": "st",
+   "name": "São Tomé and Príncipe",
+   "file": "st.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_S%C3%A3o_Tom%C3%A9_and_Pr%C3%ADncipe.svg",
+   "license": "Public domain",
+   "author": "See File history below for details.",
+   "bytes": 417
+  },
+  {
+   "code": "sa",
+   "name": "Saudi Arabia",
+   "file": "sa.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Saudi_Arabia.svg",
+   "license": "Public domain",
+   "author": "The Shura Council",
+   "bytes": 28593
+  },
+  {
+   "code": "sn",
+   "name": "Senegal",
+   "file": "sn.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Senegal.svg",
+   "license": "Public domain",
+   "author": "Original upload by Nightstallion",
+   "bytes": 255
+  },
+  {
+   "code": "rs",
+   "name": "Serbia",
+   "file": "rs.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Serbia.svg",
+   "license": "Public domain",
+   "author": "See File history below for details.",
+   "bytes": 37943
+  },
+  {
+   "code": "sc",
+   "name": "Seychelles",
+   "file": "sc.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Seychelles.svg",
+   "license": "Public domain",
+   "author": "User:Vxb83",
+   "bytes": 320
+  },
+  {
+   "code": "sl",
+   "name": "Sierra Leone",
+   "file": "sl.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Sierra_Leone.svg",
+   "license": "Public domain",
+   "author": "Zscout370",
+   "bytes": 194
+  },
+  {
+   "code": "sg",
+   "name": "Singapore",
+   "file": "sg.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Singapore.svg",
+   "license": "Public domain",
+   "author": "Original: Government of Singapore Vector: Zscout370",
+   "bytes": 591
+  },
+  {
+   "code": "sk",
+   "name": "Slovakia",
+   "file": "sk.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Slovakia.svg",
+   "license": "Public domain",
+   "author": "Original: Ladislav Čisárik and Ladislav Vrtel Vector: SKopp",
+   "bytes": 1574
+  },
+  {
+   "code": "si",
+   "name": "Slovenia",
+   "file": "si.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Slovenia.svg",
+   "license": "Public domain",
+   "author": "Original: Marko Pogačnik Vector: Achim1999",
+   "bytes": 1617
+  },
+  {
+   "code": "sb",
+   "name": "Solomon Islands",
+   "the": true,
+   "file": "sb.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_the_Solomon_Islands.svg",
+   "license": "Public domain",
+   "author": "User:SKopp",
+   "bytes": 1013
+  },
+  {
+   "code": "so",
+   "name": "Somalia",
+   "file": "so.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Somalia.svg",
+   "license": "Public domain",
+   "author": "see upload history",
+   "bytes": 352
+  },
+  {
+   "code": "za",
+   "name": "South Africa",
+   "file": "za.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_South_Africa.svg",
+   "license": "Public domain",
+   "author": "Flag design by Frederick Brownell, image by Wikimedia Commons users",
+   "bytes": 630
+  },
+  {
+   "code": "kr",
+   "name": "South Korea",
+   "file": "kr.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_South_Korea.svg",
+   "license": "Public domain",
+   "author": "Original: Government of the Republic of Korea Vector: Great Brightstar and others",
+   "bytes": 589
+  },
+  {
+   "code": "ss",
+   "name": "South Sudan",
+   "file": "ss.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_South_Sudan.svg",
+   "license": "Public domain",
+   "author": "Achim1999",
+   "bytes": 411
+  },
+  {
+   "code": "es",
+   "name": "Spain",
+   "file": "es.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Spain.svg",
+   "license": "Public domain",
+   "author": "RelShot 263, Echando una mano; earlier version was Pedro A. Gracia Fajardo, escudo de Manual de Imagen Institucional de la Administración General del Estado",
+   "bytes": 155900
+  },
+  {
+   "code": "lk",
+   "name": "Sri Lanka",
+   "file": "lk.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Sri_Lanka.svg",
+   "license": "Public domain",
+   "author": "Original: Sri Lanka Vectorization: Zscout370, Mike Rohsopht",
+   "bytes": 19062
+  },
+  {
+   "code": "sd",
+   "name": "Sudan",
+   "file": "sd.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Sudan.svg",
+   "license": "Public domain",
+   "author": "See File history below for details.",
+   "bytes": 229
+  },
+  {
+   "code": "sr",
+   "name": "Suriname",
+   "file": "sr.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Suriname.svg",
+   "license": "Public domain",
+   "author": "See File history below for details.",
+   "bytes": 393
+  },
+  {
+   "code": "se",
+   "name": "Sweden",
+   "file": "se.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Sweden.svg",
+   "license": "Public domain",
+   "author": "Jon Harald Søby and others.",
+   "bytes": 193
+  },
+  {
+   "code": "ch",
+   "name": "Switzerland",
+   "file": "ch.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Switzerland.svg",
+   "license": "Public domain",
+   "author": "Original: Unknown Vector: User:Marc Mongenet Credits: User:-xfi- User:Zscout370",
+   "bytes": 213
+  },
+  {
+   "code": "sy",
+   "name": "Syria",
+   "file": "sy.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Syria_(2025-).svg",
+   "license": "Public domain",
+   "author": "Modification by AnonMoos of PD image File:Flag of Syria (1930–1958, 1961–1963).svg (previous non-vector versions were by Coup de crayon 2011)",
+   "bytes": 426
+  },
+  {
+   "code": "tj",
+   "name": "Tajikistan",
+   "file": "tj.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Tajikistan.svg",
+   "license": "Public domain",
+   "author": "Unknown authorUnknown author",
+   "bytes": 9835
+  },
+  {
+   "code": "tz",
+   "name": "Tanzania",
+   "file": "tz.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Tanzania.svg",
+   "license": "Public domain",
+   "author": "Wikimedia Commons contributors",
+   "bytes": 320
+  },
+  {
+   "code": "th",
+   "name": "Thailand",
+   "file": "th.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Thailand.svg",
+   "license": "Public domain",
+   "author": "Zscout370",
+   "bytes": 259
+  },
+  {
+   "code": "tl",
+   "name": "Timor-Leste",
+   "file": "tl.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_East_Timor.svg",
+   "license": "Public domain",
+   "author": "See File history, below, for details.",
+   "bytes": 338
+  },
+  {
+   "code": "tg",
+   "name": "Togo",
+   "file": "tg.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Togo.svg",
+   "license": "Public domain",
+   "author": "See File history below for details.",
+   "bytes": 794
+  },
+  {
+   "code": "to",
+   "name": "Tonga",
+   "file": "to.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Tonga.svg",
+   "license": "Public domain",
+   "author": "Uelingatoni Ngu Tupoumalohi",
+   "bytes": 315
+  },
+  {
+   "code": "tt",
+   "name": "Trinidad and Tobago",
+   "file": "tt.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Trinidad_and_Tobago.svg",
+   "license": "Public domain",
+   "author": "See File history, below, for details.",
+   "bytes": 307
+  },
+  {
+   "code": "tn",
+   "name": "Tunisia",
+   "file": "tn.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Tunisia.svg",
+   "license": "Public domain",
+   "author": "Various Wikimedia Commons' contributors",
+   "bytes": 278
+  },
+  {
+   "code": "tr",
+   "name": "Türkiye",
+   "file": "tr.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Turkey.svg",
+   "license": "Public domain",
+   "author": "David Benbennick (original author)",
+   "bytes": 324
+  },
+  {
+   "code": "tm",
+   "name": "Turkmenistan",
+   "file": "tm.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Turkmenistan.svg",
+   "license": "Public domain",
+   "author": "Wikimedia Commons contributors",
+   "bytes": 75449
+  },
+  {
+   "code": "tv",
+   "name": "Tuvalu",
+   "file": "tv.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Tuvalu.svg",
+   "license": "Public domain",
+   "author": "Unknown authorUnknown author",
+   "bytes": 1239
+  },
+  {
+   "code": "ug",
+   "name": "Uganda",
+   "file": "ug.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Uganda.svg",
+   "license": "Public domain",
+   "author": "tobias",
+   "bytes": 6572
+  },
+  {
+   "code": "ua",
+   "name": "Ukraine",
+   "file": "ua.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Ukraine.svg",
+   "license": "Public domain",
+   "author": "Government of Ukraine",
+   "bytes": 182
+  },
+  {
+   "code": "ae",
+   "name": "United Arab Emirates",
+   "the": true,
+   "file": "ae.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_the_United_Arab_Emirates.svg",
+   "license": "Public domain",
+   "author": "Abdulla Mohammed Al Maainah",
+   "bytes": 323
+  },
+  {
+   "code": "gb",
+   "name": "United Kingdom",
+   "the": true,
+   "file": "gb.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_the_United_Kingdom_(3-5).svg",
+   "license": "Public domain",
+   "author": "Original: Acts of Union 1800 Vector: Yaddah",
+   "bytes": 477
+  },
+  {
+   "code": "us",
+   "name": "United States",
+   "the": true,
+   "file": "us.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_the_United_States.svg",
+   "license": "Public domain",
+   "author": "Uploaded by Dbenbenn; edited by users such as Zscout370, Jacobolus, Indolences, and Technion.",
+   "bytes": 823
+  },
+  {
+   "code": "uy",
+   "name": "Uruguay",
+   "file": "uy.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Uruguay.svg",
+   "license": "Public domain",
+   "author": "See File history below for details.",
+   "bytes": 5562
+  },
+  {
+   "code": "uz",
+   "name": "Uzbekistan",
+   "file": "uz.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Uzbekistan.svg",
+   "license": "Public domain",
+   "author": "Farhod Yoʻldoshev",
+   "bytes": 1301
+  },
+  {
+   "code": "vu",
+   "name": "Vanuatu",
+   "file": "vu.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Vanuatu.svg",
+   "license": "Public domain",
+   "author": "Kalontas Mahlon",
+   "bytes": 4007
+  },
+  {
+   "code": "ve",
+   "name": "Venezuela",
+   "file": "ve.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Venezuela.svg",
+   "license": "Public domain",
+   "author": "Various, see File history below for details.",
+   "bytes": 1886
+  },
+  {
+   "code": "vn",
+   "name": "Vietnam",
+   "file": "vn.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Vietnam.svg",
+   "license": "Public domain",
+   "author": "See File history below for details.",
+   "bytes": 283
+  },
+  {
+   "code": "ye",
+   "name": "Yemen",
+   "file": "ye.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Yemen.svg",
+   "license": "Public domain",
+   "author": "Nightstallion et al., see File history below for details.",
+   "bytes": 179
+  },
+  {
+   "code": "zm",
+   "name": "Zambia",
+   "file": "zm.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Zambia.svg",
+   "license": "Public domain",
+   "author": "Gabriel Ellison",
+   "bytes": 5235
+  },
+  {
+   "code": "zw",
+   "name": "Zimbabwe",
+   "file": "zw.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Zimbabwe.svg",
+   "license": "Public domain",
+   "author": "See File history below for details.",
+   "bytes": 1801
+  },
+  {
+   "code": "va",
+   "name": "Vatican City",
+   "file": "va.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Vatican_City_(2023%E2%80%93present).svg",
+   "license": "Public domain",
+   "author": "Goran_tek-en",
+   "bytes": 142914
+  },
+  {
+   "code": "ps",
+   "name": "Palestine",
+   "file": "ps.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Palestine.svg",
+   "license": "Public domain",
+   "author": "Orionist, previous versions by Makaristos, Mysid, etc.",
+   "bytes": 281
+  },
+  {
+   "code": "xk",
+   "name": "Kosovo",
+   "file": "xk.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Kosovo.svg",
+   "license": "Public domain",
+   "author": "Cradel (current version), earlier version by Ningyou",
+   "bytes": 8464
+  },
+  {
+   "code": "tw",
+   "name": "Taiwan",
+   "file": "tw.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Flag_of_the_Republic_of_China.svg",
+   "license": "Public domain",
+   "author": "Sun Yat-sen",
+   "bytes": 416
+  }
+ ]
+}

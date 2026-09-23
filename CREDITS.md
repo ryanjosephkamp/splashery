@@ -31,7 +31,19 @@ Where the files came from:
 ## Procedural toys
 
 The Jelly blob, Donut, Neon knot and Tiny planet (a tribute to Splashery v1) are generated in the
-browser from a seed by `src/generators.js`. They have no external assets.
+browser from a seed by `src/generators.js`. The toys from packs (`src/packs/*.js`, such as the
+beating heart, the campfire and the treasure chest) are built in the browser by the toy kit
+(`src/kit.js`) from recipes written for Splashery. None of them use external assets.
+
+## National flags
+
+The pattern layer can wrap a national flag around any toy. The flags are SVG files from
+[Wikimedia Commons](https://commons.wikimedia.org/wiki/Category:SVG_flags_of_countries), fetched by
+`tools/fetch-flags.mjs`, which reads each file's licence from the Commons API and keeps only public
+domain and CC0 files. The files are unchanged. Each flag's source page, author line and licence are
+listed in [assets/flags/flags.json](assets/flags/flags.json) (196 flags, checked on 23 September
+2026). The flag of Oman is not included: its Commons file is under Oman's Open Government Licence
+rather than a public-domain or Creative Commons licence (see [docs/BACKLOG.md](docs/BACKLOG.md)).
 
 ## Software
 

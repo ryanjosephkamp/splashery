@@ -9,6 +9,9 @@ import { OrbitCamera, Gestures } from "./camera.js";
 import { EffectDriver, hexToRgb } from "./effects.js";
 import { Painter } from "./paint.js";
 import { generate, normalizeGenerator, applyClay, PROFILES } from "./generators.js";
+import { buildRecipe, meanLuminance } from "./kit.js";
+import { MotionDriver } from "./motion.js";
+import { drawPattern, patternUniforms } from "./patterns.js";
 import {
   fetchBytes,
   loadNative,
@@ -20,7 +23,7 @@ import {
 } from "./loaders.js";
 import { findToy, assetURL } from "./toys.js";
 import { createScene, THEMES } from "./state.js";
-import { mulberry32, mixSeed } from "./noise.js";
+import { mulberry32, mixSeed, hash32 } from "./noise.js";
 
 export { NoGPUError };
 
@@ -64,6 +67,12 @@ export class Player {
     this.stroke = null;
     this.pickDirty = true;
     this.lastPoseKey = "";
+    this.motion = new MotionDriver();
+    // Under reduced motion, toys only move once someone asks them to.
+    this.motionAllowed = !this.reducedMotion;
+    this.patternOn = false;
+    this.patternToken = 0;
+    this.patternCanvas = null;
   }
 
   on(name, fn) {
@@ -133,7 +142,13 @@ export class Player {
     this.painter.detach();
     this.driver.clearPokes();
     let info;
-    if (
+    const shelfDef = toy.kind === "builtin" ? findToy(toy.id) : null;
+    this.motion.setToy(null, null);
+    if (shelfDef?.kind === "kit") {
+      info = await this.buildKit(shelfDef, toy, token, progress);
+      if (!info) return null;
+      Object.assign(info, { id: shelfDef.id, label: shelfDef.label, kind: "kit" });
+    } else if (
       toy.kind === "procedural" ||
       (toy.kind === "builtin" && findToy(toy.id)?.kind === "procedural")
     ) {
@@ -196,6 +211,8 @@ export class Player {
       Object.assign(info, { id: null, label: file.name, kind: "file", bytes: file.size });
     }
     this.toyInfo = info;
+    this.patternOn = false;
+    this.applyPattern();
     this.camera.fit(info.radius, info.center);
     this.time = 0;
     this.idle.pokeAt = 0;
@@ -265,16 +282,81 @@ export class Player {
     const ctx = r.value;
     const container = this.makeContainer(ctx.buf);
     this.disposeProcedural();
-    this.stage.setToy({ resource: container, owned: true });
+    this.stage.setToy({ resource: container, owned: true, kit: true });
     this.proc = { ctx, container, clay: clay.slice() };
     const b = ctx.buf.bounds();
     const half = [0, 1, 2].map((k) => Math.max(Math.abs(b.min[k]), Math.abs(b.max[k])));
-    return { center: [0, 0, 0], half, radius: Math.max(...half), splats: ctx.buf.count };
+    return {
+      center: [0, 0, 0],
+      half,
+      radius: Math.max(...half),
+      splats: ctx.buf.count,
+      lum: meanLuminance(ctx.buf),
+    };
+  }
+
+  // A toy from a pack: loads the pack module, builds the recipe with the
+  // scene's options and clay, and shows it with its parts and behaviours.
+  async buildKit(def, toy, token, progress) {
+    progress(0, `Building ${def.label}…`);
+    const mod = await import(`./packs/${def.pack}.js`);
+    if (token !== this.loadToken) return null;
+    const recipe = mod.RECIPES?.[def.id];
+    if (!recipe) throw new Error(`${def.label} is missing from its pack.`);
+    const prof = PROFILES[this.profile];
+    const count = Math.round(Math.min(prof.maxCount, prof.defaultCount * (recipe.density ?? 1)));
+    const options = resolveOptions(recipe, toy.options);
+    const clay = toy.clay || [];
+    const it = buildRecipe(
+      recipe,
+      { seed: recipe.seed ?? hash32(def.id), count, options, clay },
+      applyClay,
+    );
+    let r = it.next();
+    let last = performance.now();
+    while (!r.done) {
+      if (performance.now() - last > 30) {
+        progress(r.value * 0.9, `Building ${def.label}…`);
+        await nextFrame();
+        last = performance.now();
+        if (token !== this.loadToken) return null;
+      }
+      r = it.next();
+    }
+    const ctx = r.value;
+    const container = this.makeContainer(ctx.buf);
+    this.disposeProcedural();
+    this.stage.setToy({ resource: container, owned: true, kit: true });
+    this.proc = { ctx, container, clay: clay.slice(), kit: true };
+    this.motion.setToy(recipe, ctx, this.scene.motion?.controls || {});
+    const b = ctx.buf.bounds();
+    for (const r of ctx.reaches || []) {
+      for (let k = 0; k < 3; k++) {
+        b.min[k] = Math.min(b.min[k], r[k]);
+        b.max[k] = Math.max(b.max[k], r[k]);
+      }
+    }
+    const half = [0, 1, 2].map((k) => Math.max(Math.abs(b.min[k]), Math.abs(b.max[k])));
+    return {
+      center: [0, 0, 0],
+      half,
+      radius: Math.max(...half),
+      splats: ctx.buf.count,
+      lum: ctx.lum,
+      recipe,
+      options,
+      credit: def.credit || null,
+    };
   }
 
   makeContainer(buf) {
     const device = this.stage.device;
-    if (!this.format) this.format = pc.GSplatFormat.createDefaultFormat(device);
+    if (!this.format) {
+      this.format = pc.GSplatFormat.createDefaultFormat(device);
+      this.format.addExtraStreams([
+        { name: "splatAnim", format: pc.PIXELFORMAT_RGBA32F, storage: pc.GSPLAT_STREAM_RESOURCE },
+      ]);
+    }
     const container = new pc.GSplatContainer(device, buf.capacity, this.format);
     this.writeContainer(container, buf, 0, buf.count, true);
     return container;
@@ -287,6 +369,8 @@ export class Player {
     const tcol = container.getTexture("dataColor");
     const ts = container.getTexture("dataScale");
     const tr = container.getTexture("dataRotation");
+    const ta = buf.anim ? container.getTexture("splatAnim") : null;
+    const anim = ta ? ta.lock() : null;
     const center = tc.lock();
     const color = tcol.lock();
     const scale = ts.lock();
@@ -312,7 +396,14 @@ export class Player {
       rot[i4 + 1] = half(buf.rot[i4]);
       rot[i4 + 2] = half(buf.rot[i4 + 1]);
       rot[i4 + 3] = half(buf.rot[i4 + 2]);
+      if (anim) {
+        anim[i4] = buf.anim[i4];
+        anim[i4 + 1] = buf.anim[i4 + 1];
+        anim[i4 + 2] = buf.anim[i4 + 2];
+        anim[i4 + 3] = buf.anim[i4 + 3];
+      }
     }
+    if (ta) ta.unlock();
     tc.unlock();
     tcol.unlock();
     ts.unlock();
@@ -337,6 +428,9 @@ export class Player {
     this.camera.setTurntable(scene.autoplay.turntable);
     if (camera) this.camera.setState(scene.camera, { asHome: true });
     this.applyLook();
+    this.applyPattern();
+    for (const [k, v] of Object.entries(scene.motion?.controls || {}))
+      this.motion.setControl(k, v, { snap: true });
     this.syncDrop();
     this.stage.requestRender();
   }
@@ -400,6 +494,70 @@ export class Player {
   resetCamera() {
     this.camera.reset();
     this.stage.requestRender();
+  }
+
+  // ---- Pattern and motion ------------------------------------------------------
+
+  // Draws the scene's pattern for the current toy and uploads it.
+  async applyPattern() {
+    const token = ++this.patternToken;
+    const p = this.scene.pattern;
+    if (!this.stage || !this.toyInfo || !p || p.id === "none") {
+      this.patternOn = false;
+      this.stage?.setPatternCanvas(null);
+      return;
+    }
+    try {
+      this.patternCanvas ||= document.createElement("canvas");
+      const canvas = await drawPattern(p, this.toyInfo.half, this.patternCanvas);
+      if (token !== this.patternToken) return;
+      this.patternOn = !!canvas;
+      this.stage.setPatternCanvas(canvas);
+    } catch (err) {
+      if (token !== this.patternToken) return;
+      this.patternOn = false;
+      this.stage.setPatternCanvas(null);
+      this.emit("message", err.message);
+    }
+  }
+
+  setPattern(pattern) {
+    this.scene.pattern = pattern;
+    return this.applyPattern();
+  }
+
+  // Motion as it should run now: under reduced motion nothing moves by
+  // itself until the visitor turns motion on.
+  effectiveMotion() {
+    const m = this.scene.motion;
+    if (this.motionAllowed) return m;
+    return { ...m, alive: false, move: "still" };
+  }
+
+  setMotion(partial, { explicit = true } = {}) {
+    if (explicit) this.motionAllowed = true;
+    this.scene.motion = { ...this.scene.motion, ...partial };
+    this.stage.requestRender();
+  }
+
+  setControl(key, value) {
+    this.motion.setControl(key, value);
+    this.scene.motion.controls = { ...this.scene.motion.controls, [key]: value };
+    this.stage.requestRender();
+  }
+
+  // The toy's tap action (open the lid, blow out the candles), or a hop.
+  act() {
+    const r = this.motion.act(this.time);
+    if (r.key !== "hop") {
+      this.scene.motion.controls = {
+        ...this.scene.motion.controls,
+        [r.key]: this.motion.targets[r.key],
+      };
+    }
+    this.stage.requestRender();
+    this.emit("action", r);
+    return r;
   }
 
   // ---- Frame ------------------------------------------------------------------
@@ -486,9 +644,24 @@ export class Player {
       },
       camera: pose,
     });
+    const motion = this.effectiveMotion();
+    Object.assign(
+      u,
+      this.motion.compute({
+        time: this.time,
+        dt: this.frozen ? 0 : dt,
+        motion,
+        info,
+        cameraPos: pose.position,
+      }),
+      patternUniforms(this.scene.pattern, info.half, info.lum ?? 0.5, this.patternOn),
+    );
     this.stage.setUniforms(u);
     const dripping = this.painter.tick(this.time, (s) => this.scene.paint.stamps.push(s));
-    const animating = this.driver.isAnimating(effects, this.time) || this.idle.weight > 0;
+    const animating =
+      this.driver.isAnimating(effects, this.time) ||
+      this.motion.isAnimating(motion, this.time) ||
+      this.idle.weight > 0;
     if (moving || animating || dripping || this.stroke) {
       this.pickDirty = this.pickDirty || animating;
       this.stage.requestRender();
@@ -662,6 +835,25 @@ export class Player {
     this.painter?.detach();
     this.stage?.destroy();
   }
+}
+
+// A kit recipe's options with the scene's values checked against their types.
+export function resolveOptions(recipe, given = {}) {
+  const out = {};
+  for (const o of recipe.options || []) {
+    const v = given?.[o.key];
+    if (o.type === "color") out[o.key] = /^#[0-9a-f]{6}$/i.test(v) ? v.toLowerCase() : o.default;
+    else if (o.type === "select") out[o.key] = o.choices.some((c) => c.id === v) ? v : o.default;
+    else if (o.type === "switch") out[o.key] = typeof v === "boolean" ? v : !!o.default;
+    else {
+      const n = Number(v);
+      out[o.key] =
+        v !== undefined && Number.isFinite(n)
+          ? Math.min(o.max ?? 1, Math.max(o.min ?? 0, n))
+          : o.default;
+    }
+  }
+  return out;
 }
 
 function normalize3(v) {

@@ -10,6 +10,24 @@
 export const CATEGORIES = [
   { id: "scans", label: "Scans" },
   { id: "shapes", label: "Shapes" },
+  { id: "balls", label: "Balls" },
+  { id: "space", label: "Space" },
+  { id: "tiny", label: "Tiny world" },
+  { id: "atoms", label: "Atoms" },
+  { id: "gems", label: "Gems" },
+  { id: "anatomy", label: "Body" },
+  { id: "nature", label: "Nature" },
+  { id: "weather", label: "Weather & fire" },
+  { id: "food", label: "Food" },
+  { id: "toys", label: "Toys" },
+  { id: "objects", label: "Open me" },
+  { id: "medieval", label: "Medieval" },
+  { id: "animals", label: "Animals" },
+  { id: "maths", label: "Maths" },
+  { id: "holidays", label: "Holidays" },
+  { id: "music", label: "Music" },
+  { id: "vehicles", label: "Vehicles" },
+  { id: "landmarks", label: "Landmarks" },
 ];
 
 export const TOYS = [
@@ -143,6 +161,33 @@ export const TOYS = [
       roughness: 0.2,
       colorNoise: 0.25,
     },
+  },
+  // Kit toys: recipes in src/packs/<pack>.js, built in the browser.
+  {
+    id: "heart",
+    label: "Beating heart",
+    category: "anatomy",
+    kind: "kit",
+    pack: "anatomy",
+    tags: "organ body cardio pulse love valentine",
+  },
+  {
+    id: "campfire",
+    label: "Campfire",
+    category: "weather",
+    kind: "kit",
+    pack: "elements",
+    tags: "fire flame camping logs embers sparks",
+    camera: { yaw: 0.5, pitch: 0.38, roll: 0, distance: 5 },
+  },
+  {
+    id: "chest",
+    label: "Treasure chest",
+    category: "objects",
+    kind: "kit",
+    pack: "objects",
+    tags: "pirate gold coins gems box lid open close",
+    camera: { yaw: 0.45, pitch: 0.42, roll: 0, distance: 5.4 },
   },
 ];
 

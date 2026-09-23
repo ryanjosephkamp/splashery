@@ -18,16 +18,19 @@ Splashery v1, a planet you could paint, lives on the `checkpoint/v1-planet-paint
 
 ## The toys
 
-| Toy          | Kind      | Notes                                                              |
-| ------------ | --------- | ------------------------------------------------------------------ |
-| Cactus       | Captured  | CC0, steam studio / 3D SCAN STUDIO iris                            |
-| Strawberry   | Captured  | CC BY 4.0, Dany Bittel                                             |
-| Heart cookie | Captured  | CC BY 4.0, Dany Bittel                                             |
-| Honeybee     | Captured  | CC BY 4.0, YUMA Co., Ltd.                                          |
-| Jelly blob   | Generated | Noise blob, candy palette                                          |
-| Donut        | Generated | Torus with frosting and sprinkles                                  |
-| Neon knot    | Generated | Trefoil knot                                                       |
-| Tiny planet  | Generated | Oceans, continents, ice caps and clouds: a tribute to Splashery v1 |
+| Toy            | Kind                  | Notes                                                              |
+| -------------- | --------------------- | ------------------------------------------------------------------ |
+| Cactus         | Captured              | CC0, steam studio / 3D SCAN STUDIO iris                            |
+| Strawberry     | Captured              | CC BY 4.0, Dany Bittel                                             |
+| Heart cookie   | Captured              | CC BY 4.0, Dany Bittel                                             |
+| Honeybee       | Captured              | CC BY 4.0, YUMA Co., Ltd.                                          |
+| Jelly blob     | Generated             | Noise blob, candy palette                                          |
+| Donut          | Generated             | Torus with frosting and sprinkles                                  |
+| Neon knot      | Generated             | Trefoil knot                                                       |
+| Tiny planet    | Generated             | Oceans, continents, ice caps and clouds: a tribute to Splashery v1 |
+| Beating heart  | Pack (Body)           | A stylised heart that beats; or a love heart                       |
+| Campfire       | Pack (Weather & fire) | Flames that flicker, sparks and smoke; tap to stoke it             |
+| Treasure chest | Pack (Open me)        | Tap to open the lid on glinting coins and gems                     |
 
 Captured toys are SOG files of up to 450,000 splats (about 5 MB each) with a 120,000-splat copy for
 phones. Full credits are in [CREDITS.md](CREDITS.md) and in the app under **About & credits**.
@@ -36,6 +39,36 @@ phones. Full credits are in [CREDITS.md](CREDITS.md) and in the app under **Abou
 knot), a palette, a seed, the number of splats (up to 300,000 on strong devices, 120,000 on phones),
 size jitter, roughness and colour noise. The **Clay** tool then adds lumps where you drag, or erases
 them. Everything is seeded, so a saved scene rebuilds exactly the same toy.
+
+### Toys from packs
+
+Most new toys are **recipes** in `src/packs/<pack>.js`, built in your browser by the toy kit
+(`src/kit.js`): a small library of shapes (spheres, ellipsoids, boxes, rounded boxes, cylinders,
+cones, tori, discs, surfaces of revolution, tubes along curves, parametric and radial surfaces, and
+free point clouds) that shares the splat budget by surface area so the whole toy has an even
+density. A pack only downloads when one of its toys is picked. Recipes can give a toy:
+
+- **behaviours** that run on the GPU per splat: orbit, beat, breathe, flame, rise, fall, twinkle,
+  sway, grow, melt, a glow that pulses along a path, wave and glint;
+- **parts** (up to 15 rigid groups) that hinge, spin or slide, driven by the recipe each frame;
+- **controls** (sliders, switches, one-shot pulses) and an **action** that a tap on the toy runs
+  (open the lid, stoke the fire);
+- **options** that rebuild the toy (a style, a colour).
+
+Clay works on pack toys too.
+
+## Motion, patterns and sound
+
+- **Move** (Play tab, any toy): still, bounce (with squash and stretch), spin, wobble or float, with
+  a speed slider. Tapping a toy with the Orbit tool runs its action, or makes it hop.
+- **Pattern** (Look tab, any toy, captured ones included): stripes, bands, polka dots, checks,
+  stars, hearts, zigzag, gradient, rainbow, marble, or a **national flag** (196 public-domain flags
+  from Wikimedia Commons). It wraps around the toy, across its front, or like a globe, keeps as much
+  of the toy's own shading as you like, and leaves details such as flames or coins alone. The status
+  line says "in the colours of …".
+- **Sound** (the speaker button): soft synthesised sounds for pokes, paint, clay, drops, hops and
+  actions. Off until you turn it on; embeds are always silent.
+- Under a system setting for reduced motion, toys stay still until you switch motion on.
 
 ## Effects
 
@@ -221,13 +254,17 @@ src/effects.js                  the per-splat effect shader (GLSL and WGSL) and 
 src/generators.js, noise.js     procedural toys and clay
 src/loaders.js                  SOG/PLY via the engine, SPLAT/SPZ decoders, downsampling
 src/camera.js                   orbit camera and gestures
-src/state.js, codec.js          scene schema v2 and link codec
+src/state.js, codec.js          scene schema v3 (loads v2) and link codec
+src/kit.js, packs/              the toy kit and the recipe packs
+src/motion.js, patterns.js      whole-toy motion, parts and controls; the pattern layer
+src/sound.js                    WebAudio sound effects
 src/exports.js                  PNG, GIF, WebM, links and embed snippets
 src/viewer.js, embed.js, element.js   embed player and <splashery-toy>
 src/pc.js, toys.js              engine import, toy shelf
 assets/toys/                    captured toys (SOG) and thumbnails
+assets/flags/                   public-domain national flags (SVG) and their sources
 vendor/                         PlayCanvas 2.22.3 and gifenc 1.0.3
-tools/                          asset and thumbnail scripts
+tools/                          asset, flag and thumbnail scripts
 tests/                          Playwright tests and screenshots
 ```
 

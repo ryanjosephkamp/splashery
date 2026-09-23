@@ -5,8 +5,8 @@
 //
 // Attributes (all optional):
 //   scene       a shared scene (the part after "#s=" in a Splashery link)
-//   toy         a shelf toy id when there is no scene (cactus, strawberry,
-//               cookie, bee, blob, donut, knot, planet)
+//   toy         a shelf toy id when there is no scene (see src/toys.js; for
+//               example cactus, strawberry, planet, heart, campfire, chest)
 //   theme       auto | light | dark (auto follows the page, including the
 //               personal site's paper-theme-change event)
 //   background  transparent | page | #rrggbb

@@ -3,7 +3,7 @@
 // the engine directly lives here or in paint.js / loaders.js.
 
 import * as pc from "./pc.js";
-import { MODIFIER } from "./effects.js";
+import { MODIFIER, MODIFIER_KIT } from "./effects.js";
 
 export class NoGPUError extends Error {}
 
@@ -179,8 +179,9 @@ export class Stage {
   // ---- Toy ----------------------------------------------------------------
 
   // Shows a gsplat resource as the toy. transform: { position, rotation
-  // (euler degrees), scale } normalises it around the origin.
-  setToy({ resource, asset = null, owned = false, transform = null }) {
+  // (euler degrees), scale } normalises it around the origin. `kit` marks a
+  // generated toy whose format carries the per-splat splatAnim stream.
+  setToy({ resource, asset = null, owned = false, transform = null, kit = false }) {
     this.clearToy();
     const entity = new pc.Entity("toy");
     if (transform) {
@@ -202,10 +203,12 @@ export class Stage {
       paint.lock().fill(0);
       paint.unlock();
     }
-    entity.gsplat.setWorkBufferModifier(MODIFIER);
+    entity.gsplat.setWorkBufferModifier(kit ? MODIFIER_KIT : MODIFIER);
     entity.gsplat.workBufferUpdate = pc.WORKBUFFER_UPDATE_ALWAYS;
+    // The pattern sampler always needs a texture, even with no pattern on.
+    entity.gsplat.setParameter("uSpPattern", this.blankTexture());
     this.app.root.addChild(entity);
-    this.toy = { entity, resource, asset, owned };
+    this.toy = { entity, resource, asset, owned, kit };
     this.requestRender();
     return this.toy;
   }
@@ -244,6 +247,53 @@ export class Stage {
     const g = this.toy?.entity.gsplat;
     if (!g) return;
     for (const k in u) g.setParameter(k, u[k]);
+  }
+
+  // A 1x1 transparent texture for samplers with nothing to show.
+  blankTexture() {
+    if (!this.blank) {
+      this.blank = new pc.Texture(this.device, {
+        name: "splashery-blank",
+        width: 1,
+        height: 1,
+        format: pc.PIXELFORMAT_RGBA8,
+        mipmaps: false,
+      });
+      const d = this.blank.lock();
+      d.fill(0);
+      this.blank.unlock();
+    }
+    return this.blank;
+  }
+
+  // Uploads a canvas as the pattern texture (repeats sideways, clamps top
+  // and bottom). Passing null shows no pattern.
+  setPatternCanvas(canvas) {
+    const g = this.toy?.entity.gsplat;
+    if (!canvas) {
+      if (g) g.setParameter("uSpPattern", this.blankTexture());
+      this.requestRender();
+      return;
+    }
+    const w = canvas.width;
+    const h = canvas.height;
+    if (!this.patternTex || this.patternTex.width !== w || this.patternTex.height !== h) {
+      this.patternTex?.destroy();
+      this.patternTex = new pc.Texture(this.device, {
+        name: "splashery-pattern",
+        width: w,
+        height: h,
+        format: pc.PIXELFORMAT_RGBA8,
+        mipmaps: false,
+        minFilter: pc.FILTER_LINEAR,
+        magFilter: pc.FILTER_LINEAR,
+        addressU: pc.ADDRESS_REPEAT,
+        addressV: pc.ADDRESS_CLAMP_TO_EDGE,
+      });
+    }
+    this.patternTex.setSource(canvas);
+    if (g) g.setParameter("uSpPattern", this.patternTex);
+    this.requestRender();
   }
 
   // Model <-> world for the toy entity.
@@ -318,6 +368,8 @@ export class Stage {
     this.clearToy();
     this.buryToys(true);
     this.picker?.destroy();
+    this.patternTex?.destroy();
+    this.blank?.destroy();
     this.app.destroy();
   }
 }

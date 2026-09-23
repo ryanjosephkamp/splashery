@@ -78,18 +78,27 @@ const TAU = Math.PI * 2;
 // ---- Buffer -----------------------------------------------------------------
 
 export class SplatBuffer {
-  constructor(capacity) {
+  // `anim` adds the per-splat part and behaviour data kit toys carry
+  // (see KINDS in effects.js): [part + 16 * flags, kind, a, b].
+  constructor(capacity, { anim = false } = {}) {
     this.capacity = capacity;
     this.count = 0;
     this.pos = new Float32Array(capacity * 3);
     this.scale = new Float32Array(capacity * 3);
     this.rot = new Float32Array(capacity * 4);
     this.color = new Float32Array(capacity * 4);
+    this.anim = anim ? new Float32Array(capacity * 4) : null;
   }
 
-  push(p, s, q, c) {
+  push(p, s, q, c, a) {
     if (this.count >= this.capacity) return -1;
     const i = this.count++;
+    if (a && this.anim) {
+      this.anim[i * 4] = a[0];
+      this.anim[i * 4 + 1] = a[1];
+      this.anim[i * 4 + 2] = a[2];
+      this.anim[i * 4 + 3] = a[3];
+    }
     this.pos[i * 3] = p[0];
     this.pos[i * 3 + 1] = p[1];
     this.pos[i * 3 + 2] = p[2];
@@ -130,11 +139,11 @@ export class SplatBuffer {
 
 // ---- Small vector helpers ---------------------------------------------------
 
-const norm = (v) => {
+export const norm = (v) => {
   const l = Math.hypot(v[0], v[1], v[2]) || 1;
   return [v[0] / l, v[1] / l, v[2] / l];
 };
-const cross = (a, b) => [
+export const cross = (a, b) => [
   a[1] * b[2] - a[2] * b[1],
   a[2] * b[0] - a[0] * b[2],
   a[0] * b[1] - a[1] * b[0],
@@ -143,7 +152,7 @@ const dot = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
 const lerp = (a, b, t) => a + (b - a) * t;
 const clamp01 = (v) => (v < 0 ? 0 : v > 1 ? 1 : v);
 
-function hexRgb(hex) {
+export function hexRgb(hex) {
   const n = parseInt(hex.slice(1), 16);
   return [((n >> 16) & 255) / 255, ((n >> 8) & 255) / 255, (n & 255) / 255];
 }
@@ -165,7 +174,7 @@ function gradient(stops, t, sharp = 0) {
 }
 
 // Quaternion (x, y, z, w) turning +Z onto n, then spun by `spin` around n.
-function discRotation(n, spin) {
+export function discRotation(n, spin) {
   let q;
   if (n[2] < -0.9999) q = [1, 0, 0, 0];
   else q = norm4([-n[1], n[0], 0, 1 + n[2]]);
@@ -189,7 +198,7 @@ function quatMul(a, b) {
   ];
 }
 
-function tangentFrame(n) {
+export function tangentFrame(n) {
   const a = Math.abs(n[1]) < 0.9 ? [0, 1, 0] : [1, 0, 0];
   const t1 = norm(cross(a, n));
   const t2 = cross(n, t1);
@@ -346,7 +355,7 @@ function makeShape(id, noise) {
   }
 }
 
-function randomDir(rand) {
+export function randomDir(rand) {
   const z = rand() * 2 - 1;
   const a = rand() * TAU;
   const r = Math.sqrt(1 - z * z);

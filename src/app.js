@@ -11,8 +11,12 @@ import {
   APP_NAME,
   formatBytes,
   formatCount,
+  normalizeHex,
+  normalizeMotion,
 } from "./state.js";
 import { defaultEffects, effectDef } from "./effects.js";
+import { normalizePattern, flagInfo, loadFlags } from "./patterns.js";
+import { Sound } from "./sound.js";
 import { normalizeGenerator, PROFILES } from "./generators.js";
 import { decodeSceneHash, parseHash } from "./codec.js";
 import { TOYS, findToy } from "./toys.js";
@@ -55,6 +59,7 @@ class App {
     this.genTimer = 0;
     this.generator = null;
     this.toolState = null;
+    this.sound = new Sound();
   }
 
   async start() {
@@ -80,6 +85,8 @@ class App {
     player.on("effects", (fx) => ui.setEffects(fx));
     player.on("paint", (n) => ui.setPaintCount(n));
     player.on("toy", (info) => this.onToy(info));
+    player.on("action", (r) => this.onAction(r));
+    ui.setSound(this.sound.enabled);
     const wm = webmSupport();
     ui.setWebmUnavailable(wm.ok ? null : wm.reason);
     ui.setTool("orbit");
@@ -119,6 +126,7 @@ class App {
     ui.setEffects(scene.effects);
     ui.setAutoplay(scene.autoplay, player.reducedMotion);
     ui.setPaintCount(scene.paint.stamps.length);
+    ui.setPattern(scene.pattern);
     if (scene.toy.kind === "file" && !file) {
       const name = scene.toy.file.name;
       ui.toast(
@@ -133,6 +141,9 @@ class App {
     player.applySettings(scene);
     ui.setLook(scene.look, player.resolvedTheme());
     ui.setEffects(scene.effects);
+    ui.setPattern(scene.pattern);
+    ui.setMotion(scene.motion);
+    this.updateStatus();
   }
 
   async loadToy(toy, { file = null } = {}) {
@@ -171,9 +182,7 @@ class App {
           ? scene.toy.id
           : null,
     );
-    const parts = [info.label, `${formatCount(info.splats)} splats`];
-    if (info.credit) parts.push(`by ${info.credit.author} (${info.credit.license})`);
-    ui.setStatus(parts.join(" · "));
+    this.updateStatus();
     canvas.setAttribute(
       "aria-label",
       `${info.label}, a toy made of ${formatCount(info.splats)} splats. Drag to turn it, scroll or pinch to zoom. With a tool selected, drag on the toy to use it.`,
@@ -189,10 +198,12 @@ class App {
       ui.setGenerator(this.generator);
       ui.setGeneratorNote("Pick a shape and press Make it to build your own toy.");
     }
+    const clayOK = info.kind === "procedural" || info.kind === "kit";
     ui.setClayAvailable(
-      info.kind === "procedural",
-      info.kind === "procedural" ? "" : "Clay works on generated toys. Make one first.",
+      clayOK,
+      clayOK ? "" : "Clay works on generated toys. Pick one or make one.",
     );
+    ui.setToyPanel(info);
     ui.setFileToy(info.kind === "file", scene.toy.flip);
     this.renderCredits(info);
     ui.setRenderInfo(
@@ -229,9 +240,51 @@ class App {
     const p = document.createElement("p");
     p.className = "credit";
     p.textContent =
-      "Generated toys (blob, donut, knot, planet) are made in your browser from a seed.";
+      "Every generated toy (the shapes and the toys from packs) is made in your browser from a recipe and a seed.";
     nodes.push(p);
+    const f = document.createElement("p");
+    f.className = "credit";
+    const flags = document.createElement("a");
+    flags.href = "https://commons.wikimedia.org/wiki/Category:SVG_flags_of_countries";
+    flags.textContent = "Wikimedia Commons";
+    f.append(
+      document.createTextNode("National flags for patterns: public-domain files from "),
+      flags,
+      document.createTextNode(" (each source is listed in assets/flags/flags.json)."),
+    );
+    nodes.push(f);
+    if (this.flagCredit) {
+      const c = this.flagCredit;
+      const q = document.createElement("p");
+      q.className = "credit";
+      const a = document.createElement("a");
+      a.href = c.source;
+      a.textContent = `Flag of ${c.name}`;
+      q.append(a, document.createTextNode(`: ${c.license}, from Wikimedia Commons.`));
+      q.setAttribute("aria-current", "true");
+      nodes.push(q);
+    }
     this.ui.setCredits(nodes);
+  }
+
+  // The status line under the toy: name, splats, credit and colours.
+  async updateStatus() {
+    const player = this.player;
+    const info = player.toyInfo;
+    if (!info) return;
+    const parts = [info.label, `${formatCount(info.splats)} splats`];
+    if (info.credit) parts.push(`by ${info.credit.author} (${info.credit.license})`);
+    const pat = player.scene.pattern;
+    this.flagCredit = null;
+    if (pat.id === "flag" && pat.flag) {
+      const f = await flagInfo(pat.flag);
+      if (f) {
+        parts.push(`in the colours of ${f.the ? "the " : ""}${f.name}`);
+        this.flagCredit = f;
+      }
+    }
+    this.ui.setStatus(parts.join(" · "));
+    this.renderCredits(info);
   }
 
   async chooseToy(id) {
@@ -242,6 +295,7 @@ class App {
     const scene = player.scene;
     scene.toy = { kind: "builtin", id };
     scene.paint.stamps = [];
+    scene.motion = { ...scene.motion, controls: {} };
     this.file = null;
     this.ui.setPaintCount(0);
     try {
@@ -249,6 +303,7 @@ class App {
       player.camera.setState(toy.camera || createScene().camera, { asHome: true, snap: false });
       player.syncDrop();
       this.ui.collapseSheet();
+      this.ui.setMotion(scene.motion);
     } catch (err) {
       this.ui.toast(err.message, 5000);
     }
@@ -278,6 +333,7 @@ class App {
   toggleEffect(id, on) {
     const fx = this.player.scene.effects;
     fx[id].on = on;
+    if (on) this.sound.play(id === "drop" ? "drop" : id === "dissolve" ? "whoosh" : "click");
     const ex = effectDef(id).exclusive;
     if (on && ex && fx[ex].on) {
       fx[ex].on = false;
@@ -321,8 +377,9 @@ class App {
           return "orbit";
         return "tool";
       },
-      onTap: () => {
+      onTap: (e) => {
         if (this.ui.sheetOpen()) this.ui.collapseSheet();
+        else if (this.tool === "orbit" && !this.spaceHeld) this.tapToy(e);
       },
       onInteract: () => {
         player.interact();
@@ -358,6 +415,93 @@ class App {
       onToolMove: (e) => this.toolMove(e),
       onToolEnd: (e) => this.toolEnd(e),
     });
+  }
+
+  // A tap on the toy (with the Orbit tool) runs its action, or makes it hop.
+  async tapToy(e) {
+    const player = this.player;
+    const [x, y] = player.canvasPoint(e);
+    player.pickDirty = true;
+    const hit = await player.pickAt(x, y);
+    if (hit) player.act();
+  }
+
+  onAction(r) {
+    const player = this.player;
+    const recipe = player.toyInfo?.recipe;
+    if (r.key === "hop") this.sound.play("hop");
+    else {
+      const snd = recipe?.action?.sound;
+      const name = typeof snd === "string" ? snd : r.value > 0.5 ? snd?.on : snd?.off;
+      this.sound.play(name || "pop");
+    }
+    this.ui.setMotion(player.scene.motion, player.motion.targets);
+  }
+
+  act() {
+    this.player.act();
+  }
+
+  // ---- Motion, controls, options and patterns ---------------------------------
+
+  setMotion(partial) {
+    const player = this.player;
+    player.setMotion(normalizeMotion({ ...player.scene.motion, ...partial }));
+    this.ui.setMotion(player.scene.motion);
+    if (partial.move && partial.move !== "still") this.sound.play("click");
+  }
+
+  setControl(key, value) {
+    this.player.setControl(key, value);
+  }
+
+  // Rebuilds a kit toy with a changed option (colour, style).
+  async setToyOption(key, value) {
+    const player = this.player;
+    const toy = player.scene.toy;
+    if (toy.kind !== "builtin") return;
+    toy.options = { ...(toy.options || {}), [key]: value };
+    const cam = player.camera.getState();
+    try {
+      await this.loadToy(toy);
+      player.camera.setState(cam, { snap: true });
+      player.syncDrop();
+    } catch (err) {
+      this.ui.toast(err.message, 5000);
+    }
+  }
+
+  async setPattern(partial) {
+    const player = this.player;
+    const prev = player.scene.pattern;
+    const next = { ...prev, ...partial };
+    if (partial.id === "flag" && prev.id !== "flag") {
+      next.projection = "wrap";
+      next.repeats = 2;
+      next.amount = 1;
+      if (!next.flag) next.flag = await this.defaultFlag();
+    } else if (partial.id && partial.id !== "flag" && prev.id === "flag") {
+      next.repeats = 1;
+    }
+    player.scene.pattern = normalizePattern(next, normalizeHex);
+    this.ui.setPattern(player.scene.pattern);
+    await player.applyPattern();
+    this.updateStatus();
+    if (this.ui.currentTab() === "share") this.updateEmbedSoon();
+  }
+
+  // The visitor's own country (from the browser's language), else a random flag.
+  async defaultFlag() {
+    const flags = await loadFlags();
+    const region = (navigator.language || "").split("-")[1]?.toLowerCase();
+    const own = flags.find((f) => f.code === region);
+    return (own || flags[Math.floor(Math.random() * flags.length)])?.code || "";
+  }
+
+  toggleSound() {
+    this.sound.setEnabled(!this.sound.enabled);
+    this.ui.setSound(this.sound.enabled);
+    if (this.sound.enabled) this.sound.play("chime");
   }
 
   // Tool strokes. A stroke that starts off the toy becomes an orbit instead.
@@ -409,10 +553,13 @@ class App {
     if (st.tool === "poke") {
       player.driver.addPoke(hit, player.time);
       player.stage.requestRender();
+      this.sound.play("poke", { gap: 0.12, pitch: 0.8 + Math.random() * 0.4 });
     } else if (st.tool === "paint") {
       const r = player.paintAt(hit, first);
       st.spacing = r * 0.35;
+      if (first) this.sound.play("paint");
     } else if (st.tool === "clay") {
+      this.sound.play("clay", { gap: 0.1 });
       if (this.player.scene.toy.kind === "builtin") this.promoteToProcedural();
       const op = player.clayAt(hit, this.clayMode, this.claySize);
       if (op) this.player.scene.toy.clay = player.proc.clay.slice();
@@ -705,6 +852,8 @@ class App {
     s.createdAt = new Date().toISOString();
     s.camera = player.camera.getState();
     if (s.toy.kind === "procedural" && player.proc) s.toy.clay = player.proc.clay.slice();
+    if (s.toy.kind === "builtin" && player.proc?.kit && player.proc.clay.length)
+      s.toy.clay = player.proc.clay.slice();
     return normalizeScene(s, player.profile);
   }
 
