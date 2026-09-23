@@ -47,9 +47,15 @@ Splashery v1, a planet you could paint, lives on the `checkpoint/v1-planet-paint
 | 13 animals                    | Pack (Animals)        | Jellyfish, school of fish, butterfly, pufferfish (poke it), nautilus, ladybug (open the wings), snail (hide in the shell), octopus (squirt ink), starfish, sea urchin, frog, penguin and owl (turn the head).                                                                                                                                                                                                  |
 | 8 holiday toys                | Pack (Holidays)       | Jack-o'-lantern, snowman, fireworks (launch), decorated tree (lights on or off), patterned egg, paper lantern, diya and a menorah (light the candles).                                                                                                                                                                                                                                                         |
 | 3 music toys                  | Pack (Music)          | Acoustic guitar (strum), snare drum (hit) and xylophone (play a scale).                                                                                                                                                                                                                                                                                                                                        |
+| 14 vehicles                   | Pack (Vehicles)       | Rocket on its pad, helicopter, hot-air balloon, steam train, a generic ocean liner, sports car, school bus, propeller plane, jet airliner, sailboat, submarine, bicycle, tractor and a flying saucer.                                                                                                                                                                                                          |
+| 16 landmarks                  | Pack (Landmarks)      | Eiffel Tower, Washington Monument, Pyramids of Giza, a twisting supertall, lighthouse, Statue of Liberty, White House, Leaning Tower of Pisa, Colosseum, Parthenon, Stonehenge, Big Ben, Taj Mahal, a castle, a pagoda and a windmill.                                                                                                                                                                         |
+| 27 photoreal toys             | Captured (Photoreal)  | Twelve CC BY scans from SuperSplat and fifteen CC0 Poly Haven models turned into splats; see below and [CREDITS.md](CREDITS.md).                                                                                                                                                                                                                                                                               |
 
-Captured toys are SOG files of up to 450,000 splats (about 5 MB each) with a 120,000-splat copy for
-phones. Full credits are in [CREDITS.md](CREDITS.md) and in the app under **About & credits**.
+Captured toys are SOG files of up to 450,000 splats (about 5 MB each) with a lighter copy for
+phones. The **Photoreal** shelf adds twelve more CC BY scans from SuperSplat (bugs, berries, a
+grape, a star cookie, tomatoes, a basket and a fractal) and fifteen CC0 Poly Haven models turned
+into splats (a rubber duck, a garden gnome, a ukulele, a boombox, a chess set, a croissant and
+more). Full credits are in [CREDITS.md](CREDITS.md) and in the app under **About & credits**.
 
 **Make a toy** builds a new one in the browser: pick a shape (sphere, noise blob, torus, capsule,
 knot), a palette, a seed, the number of splats (up to 300,000 on strong devices, 120,000 on phones),
@@ -238,6 +244,19 @@ SPLASHERY_CHROMIUM=/path/to/chrome node tools/make-thumbs.mjs
 
 To add a toy: add it to `tools/assets.json` (CC0 or CC BY only), run both tools, add an entry with
 its credit to `src/toys.js`, and add it to [CREDITS.md](CREDITS.md).
+
+Some photoreal toys start as textured 3D models rather than scans.
+[tools/mesh-to-splats.mjs](tools/mesh-to-splats.mjs) turns the CC0 models listed in
+[tools/models.json](tools/models.json) into splats: it downloads each glTF from Poly Haven, scatters
+splats over the surfaces by area, colours each one from the model's textures, skips glass so the
+insides show, and writes `.cache/models/<id>/<id>.ply`, which `tools/prepare-assets.mjs` then packs
+like any scan:
+
+```sh
+node tools/mesh-to-splats.mjs            # all models
+node tools/mesh-to-splats.mjs ukulele    # one model
+node tools/prepare-assets.mjs ukulele
+```
 
 ## Tests
 

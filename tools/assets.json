@@ -39,6 +39,249 @@
       "crop": [-1.35, -0.4, -1.35, 1.35, 0.4, 1.35],
       "cropNote": "Trims the specimen pin above and below the body and drops the faintest haze.",
       "filters": ["opacity,gt,0.1"]
+    },
+    {
+      "id": "rubber-duck-real",
+      "label": "Rubber Duck Toy",
+      "source": ".cache/models/rubber-duck-real/rubber-duck-real.ply",
+      "sourceNote": "Made by tools/mesh-to-splats.mjs (see tools/models.json) from the CC0 model https://polyhaven.com/a/rubber_duck_toy",
+      "rotate": [0, 0, 0],
+      "splats": 200000,
+      "lite": 80000
+    },
+    {
+      "id": "garden-gnome",
+      "label": "Garden Gnome",
+      "source": ".cache/models/garden-gnome/garden-gnome.ply",
+      "sourceNote": "Made by tools/mesh-to-splats.mjs (see tools/models.json) from the CC0 model https://polyhaven.com/a/garden_gnome",
+      "rotate": [0, 0, 0],
+      "splats": 200000,
+      "lite": 80000
+    },
+    {
+      "id": "wooden-elephant",
+      "label": "Carved Wooden Elephant",
+      "source": ".cache/models/wooden-elephant/wooden-elephant.ply",
+      "sourceNote": "Made by tools/mesh-to-splats.mjs (see tools/models.json) from the CC0 model https://polyhaven.com/a/carved_wooden_elephant",
+      "rotate": [0, 0, 0],
+      "splats": 200000,
+      "lite": 80000
+    },
+    {
+      "id": "marble-bust",
+      "label": "Marble Bust 01",
+      "source": ".cache/models/marble-bust/marble-bust.ply",
+      "sourceNote": "Made by tools/mesh-to-splats.mjs (see tools/models.json) from the CC0 model https://polyhaven.com/a/marble_bust_01",
+      "rotate": [0, 0, 0],
+      "splats": 200000,
+      "lite": 80000
+    },
+    {
+      "id": "ukulele",
+      "label": "Ukulele 01",
+      "source": ".cache/models/ukulele/ukulele.ply",
+      "sourceNote": "Made by tools/mesh-to-splats.mjs (see tools/models.json) from the CC0 model https://polyhaven.com/a/Ukulele_01",
+      "rotate": [0, 0, 0],
+      "splats": 200000,
+      "lite": 80000
+    },
+    {
+      "id": "alarm-clock",
+      "label": "Alarm Clock 01",
+      "source": ".cache/models/alarm-clock/alarm-clock.ply",
+      "sourceNote": "Made by tools/mesh-to-splats.mjs (see tools/models.json) from the CC0 model https://polyhaven.com/a/alarm_clock_01",
+      "rotate": [0, 0, 0],
+      "splats": 200000,
+      "lite": 80000
+    },
+    {
+      "id": "vintage-camera",
+      "label": "Camera 01",
+      "source": ".cache/models/vintage-camera/vintage-camera.ply",
+      "sourceNote": "Made by tools/mesh-to-splats.mjs (see tools/models.json) from the CC0 model https://polyhaven.com/a/Camera_01",
+      "rotate": [0, 0, 0],
+      "splats": 200000,
+      "lite": 80000
+    },
+    {
+      "id": "boombox",
+      "label": "Boombox",
+      "source": ".cache/models/boombox/boombox.ply",
+      "sourceNote": "Made by tools/mesh-to-splats.mjs (see tools/models.json) from the CC0 model https://polyhaven.com/a/boombox",
+      "rotate": [0, 0, 0],
+      "splats": 200000,
+      "lite": 80000
+    },
+    {
+      "id": "croissant-real",
+      "label": "Croissant",
+      "source": ".cache/models/croissant-real/croissant-real.ply",
+      "sourceNote": "Made by tools/mesh-to-splats.mjs (see tools/models.json) from the CC0 model https://polyhaven.com/a/croissant",
+      "rotate": [0, 0, 0],
+      "splats": 200000,
+      "lite": 80000
+    },
+    {
+      "id": "carrot-cake",
+      "label": "Carrot Cake",
+      "source": ".cache/models/carrot-cake/carrot-cake.ply",
+      "sourceNote": "Made by tools/mesh-to-splats.mjs (see tools/models.json) from the CC0 model https://polyhaven.com/a/carrot_cake",
+      "rotate": [0, 0, 0],
+      "splats": 200000,
+      "lite": 80000
+    },
+    {
+      "id": "pomegranate",
+      "label": "Food Pomegranate 01",
+      "source": ".cache/models/pomegranate/pomegranate.ply",
+      "sourceNote": "Made by tools/mesh-to-splats.mjs (see tools/models.json) from the CC0 model https://polyhaven.com/a/food_pomegranate_01",
+      "rotate": [0, 0, 0],
+      "splats": 200000,
+      "lite": 80000
+    },
+    {
+      "id": "lantern",
+      "label": "Lantern 01",
+      "source": ".cache/models/lantern/lantern.ply",
+      "sourceNote": "Made by tools/mesh-to-splats.mjs (see tools/models.json) from the CC0 model https://polyhaven.com/a/Lantern_01",
+      "rotate": [0, 0, 0],
+      "splats": 200000,
+      "lite": 80000
+    },
+    {
+      "id": "cat-statue",
+      "label": "Concrete Cat Statue",
+      "source": ".cache/models/cat-statue/cat-statue.ply",
+      "sourceNote": "Made by tools/mesh-to-splats.mjs (see tools/models.json) from the CC0 model https://polyhaven.com/a/concrete_cat_statue",
+      "rotate": [0, 0, 0],
+      "splats": 200000,
+      "lite": 80000
+    },
+    {
+      "id": "chess-set",
+      "label": "Chess Set",
+      "source": ".cache/models/chess-set/chess-set.ply",
+      "sourceNote": "Made by tools/mesh-to-splats.mjs (see tools/models.json) from the CC0 model https://polyhaven.com/a/chess_set",
+      "rotate": [0, 0, 0],
+      "splats": 200000,
+      "lite": 80000
+    },
+    {
+      "id": "horse-statue",
+      "label": "Horse Statue 01",
+      "source": ".cache/models/horse-statue/horse-statue.ply",
+      "sourceNote": "Made by tools/mesh-to-splats.mjs (see tools/models.json) from the CC0 model https://polyhaven.com/a/horse_statue_01",
+      "rotate": [0, 0, 0],
+      "splats": 200000,
+      "lite": 80000
+    },
+    {
+      "id": "cluster-fly",
+      "label": "Cluster Fly",
+      "source": "https://d28zzqy0iyovbz.cloudfront.net/285082b2/v2/meta.json",
+      "sourceNote": "The SOG the public SuperSplat viewer streams for https://superspl.at/scene/285082b2 (downloads enabled, CC BY 4.0, by danylyon).",
+      "rotate": [180, 0, 0],
+      "splats": 300000,
+      "lite": 100000
+    },
+    {
+      "id": "may-beetle",
+      "label": "MAY-BEETLE-HIRES",
+      "source": "https://d28zzqy0iyovbz.cloudfront.net/9d4c4442/v4/meta.json",
+      "sourceNote": "The SOG the public SuperSplat viewer streams for https://superspl.at/scene/9d4c4442 (downloads enabled, CC BY 4.0, by trilithon).",
+      "rotate": [180, 0, 0],
+      "splats": 300000,
+      "lite": 100000
+    },
+    {
+      "id": "millipede",
+      "label": "millipede spec.",
+      "source": "https://d28zzqy0iyovbz.cloudfront.net/3d5482d4/v1/meta.json",
+      "sourceNote": "The SOG the public SuperSplat viewer streams for https://superspl.at/scene/3d5482d4 (downloads enabled, CC BY 4.0, by scant3d).",
+      "rotate": [180, 0, 0],
+      "splats": 300000,
+      "lite": 100000
+    },
+    {
+      "id": "bumblebee",
+      "label": "Macroscan - Brown-banded carder bumblebee (Bombus humilis)",
+      "source": "https://d28zzqy0iyovbz.cloudfront.net/65ff2330/v1/meta.json",
+      "sourceNote": "The SOG the public SuperSplat viewer streams for https://superspl.at/scene/65ff2330 (downloads enabled, CC BY 4.0, by macroscans).",
+      "rotate": [180, 0, 0],
+      "splats": 300000,
+      "lite": 100000
+    },
+    {
+      "id": "raspberry",
+      "label": "Raspberry",
+      "source": "https://d28zzqy0iyovbz.cloudfront.net/04bdd392/v1/meta.json",
+      "sourceNote": "The SOG the public SuperSplat viewer streams for https://superspl.at/scene/04bdd392 (downloads enabled, CC BY 4.0, by danylyon).",
+      "rotate": [180, 0, 0],
+      "splats": 300000,
+      "lite": 100000
+    },
+    {
+      "id": "blackberry",
+      "label": "Blackberry",
+      "source": "https://d28zzqy0iyovbz.cloudfront.net/827133e7/v1/meta.json",
+      "sourceNote": "The SOG the public SuperSplat viewer streams for https://superspl.at/scene/827133e7 (downloads enabled, CC BY 4.0, by danylyon).",
+      "rotate": [180, 0, 0],
+      "splats": 300000,
+      "lite": 100000
+    },
+    {
+      "id": "blueberry",
+      "label": "Blueberry",
+      "source": "https://d28zzqy0iyovbz.cloudfront.net/fd8b85a7/v1/meta.json",
+      "sourceNote": "The SOG the public SuperSplat viewer streams for https://superspl.at/scene/fd8b85a7 (downloads enabled, CC BY 4.0, by danylyon).",
+      "rotate": [180, 0, 0],
+      "splats": 300000,
+      "lite": 100000
+    },
+    {
+      "id": "grape",
+      "label": "Grape",
+      "source": "https://d28zzqy0iyovbz.cloudfront.net/4ae563ac/v1/meta.json",
+      "sourceNote": "The SOG the public SuperSplat viewer streams for https://superspl.at/scene/4ae563ac (downloads enabled, CC BY 4.0, by danylyon).",
+      "rotate": [180, 0, 0],
+      "splats": 300000,
+      "lite": 100000
+    },
+    {
+      "id": "star-cookie",
+      "label": "Cinnamon Star Cookie",
+      "source": "https://d28zzqy0iyovbz.cloudfront.net/6584b96e/v3/meta.json",
+      "sourceNote": "The SOG the public SuperSplat viewer streams for https://superspl.at/scene/6584b96e (downloads enabled, CC BY 4.0, by danylyon).",
+      "rotate": [180, 0, 0],
+      "splats": 300000,
+      "lite": 100000
+    },
+    {
+      "id": "tomatoes",
+      "label": "Tomatoes - No Postshot!",
+      "source": "https://d28zzqy0iyovbz.cloudfront.net/0101ad57/v3/meta.json",
+      "sourceNote": "The SOG the public SuperSplat viewer streams for https://superspl.at/scene/0101ad57 (downloads enabled, CC BY 4.0, by simonbethke).",
+      "rotate": [180, 0, 0],
+      "splats": 300000,
+      "lite": 100000
+    },
+    {
+      "id": "mandeltorus",
+      "label": "MandelTorus 4,12,8,1.5 (Spirula Studio)",
+      "source": "https://d28zzqy0iyovbz.cloudfront.net/e7088609/v1/meta.json",
+      "sourceNote": "The SOG the public SuperSplat viewer streams for https://superspl.at/scene/e7088609 (downloads enabled, CC BY 4.0, by harry7557558).",
+      "rotate": [180, 0, 0],
+      "splats": 300000,
+      "lite": 100000
+    },
+    {
+      "id": "basket",
+      "label": "Basket",
+      "source": "https://d28zzqy0iyovbz.cloudfront.net/efa1fa80/v1/meta.json",
+      "sourceNote": "The SOG the public SuperSplat viewer streams for https://superspl.at/scene/efa1fa80 (downloads enabled, CC BY 4.0, by hollmar).",
+      "rotate": [180, 0, 0],
+      "splats": 300000,
+      "lite": 100000
     }
   ]
 }
