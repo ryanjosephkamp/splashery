@@ -104,10 +104,14 @@ test.describe("Splashery app (WebGL2)", () => {
         true,
       );
     }
-    const loaded = await page.evaluate(() =>
-      [...document.querySelectorAll(".toy-card img")].every((img) => img.naturalWidth > 0),
-    );
-    expect(loaded).toBe(true);
+    // Shelf thumbnails load lazily, so load the offscreen ones before checking them all.
+    const loaded = await page.evaluate(async () => {
+      const imgs = [...document.querySelectorAll(".toy-card img")];
+      for (const img of imgs) img.loading = "eager";
+      await Promise.all(imgs.map((img) => img.decode().catch(() => {})));
+      return imgs.filter((img) => !(img.naturalWidth > 0)).map((img) => img.src);
+    });
+    expect(loaded).toEqual([]);
     await expect(page.locator(".toy-card[data-toy='cactus']")).toHaveAttribute(
       "aria-pressed",
       "true",

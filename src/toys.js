@@ -390,6 +390,246 @@ export const TOYS = [
     tags: "pirate gold coins gems box lid open close",
     camera: { yaw: 0.45, pitch: 0.42, roll: 0, distance: 5.4 },
   },
+  // ---- Pack: space ----
+  {
+    id: "sun",
+    label: "Sun",
+    category: "space",
+    kind: "kit",
+    pack: "space",
+    tags: "star solar corona prominence sunspot hot yellow",
+  },
+  {
+    id: "solar-system",
+    label: "Solar system",
+    category: "space",
+    kind: "kit",
+    pack: "space",
+    tags: "orrery planets orbits sun model",
+    camera: { yaw: 0.55, pitch: 0.72, roll: 0, distance: 3.7 },
+  },
+  {
+    id: "mercury",
+    label: "Mercury",
+    category: "space",
+    kind: "kit",
+    pack: "space",
+    tags: "planet craters grey rocky small solar system",
+  },
+  {
+    id: "venus",
+    label: "Venus",
+    category: "space",
+    kind: "kit",
+    pack: "space",
+    tags: "planet clouds yellow hot solar system",
+  },
+  {
+    id: "earth",
+    label: "Earth",
+    category: "space",
+    kind: "kit",
+    pack: "space",
+    tags: "planet world globe ocean continents clouds home blue",
+  },
+  {
+    id: "moon",
+    label: "Moon",
+    category: "space",
+    kind: "kit",
+    pack: "space",
+    tags: "lunar craters maria grey satellite",
+  },
+  {
+    id: "mars",
+    label: "Mars",
+    category: "space",
+    kind: "kit",
+    pack: "space",
+    tags: "planet red rust polar cap solar system",
+  },
+  {
+    id: "jupiter",
+    label: "Jupiter",
+    category: "space",
+    kind: "kit",
+    pack: "space",
+    tags: "planet gas giant bands great red spot storm",
+  },
+  {
+    id: "saturn",
+    label: "Saturn",
+    category: "space",
+    kind: "kit",
+    pack: "space",
+    tags: "planet rings gas giant bands",
+    camera: { yaw: 0.55, pitch: 0.28, roll: 0, distance: 4.3 },
+  },
+  {
+    id: "uranus",
+    label: "Uranus",
+    category: "space",
+    kind: "kit",
+    pack: "space",
+    tags: "planet ice giant cyan rings tilted",
+    camera: { yaw: 0.55, pitch: 0.28, roll: 0, distance: 4.5 },
+  },
+  {
+    id: "neptune",
+    label: "Neptune",
+    category: "space",
+    kind: "kit",
+    pack: "space",
+    tags: "planet ice giant blue dark spot wind",
+  },
+  {
+    id: "aurora-planet",
+    label: "Aurora world",
+    category: "space",
+    kind: "kit",
+    pack: "space",
+    tags: "planet night aurora northern lights city lights earth",
+  },
+  {
+    id: "asteroid",
+    label: "Asteroid",
+    category: "space",
+    kind: "kit",
+    pack: "space",
+    tags: "rock space potato craters tumble",
+  },
+  {
+    id: "comet",
+    label: "Comet",
+    category: "space",
+    kind: "kit",
+    pack: "space",
+    tags: "ice tail dust coma nucleus",
+  },
+  {
+    id: "meteor",
+    label: "Meteor",
+    category: "space",
+    kind: "kit",
+    pack: "space",
+    tags: "shooting star fireball rock fire trail falling",
+  },
+  {
+    id: "star",
+    label: "Star",
+    category: "space",
+    kind: "kit",
+    pack: "space",
+    tags: "sun red dwarf blue giant white dwarf twinkle",
+  },
+  {
+    id: "pulsar",
+    label: "Pulsar",
+    category: "space",
+    kind: "kit",
+    pack: "space",
+    tags: "neutron star beams lighthouse spin magnetic",
+  },
+  {
+    id: "black-hole",
+    label: "Black hole",
+    category: "space",
+    kind: "kit",
+    pack: "space",
+    tags: "accretion disk event horizon gravity lensing",
+    camera: { yaw: 0.55, pitch: 0.16, roll: 0, distance: 4.4 },
+  },
+  {
+    id: "star-cluster",
+    label: "Star cluster",
+    category: "space",
+    kind: "kit",
+    pack: "space",
+    tags: "globular cluster stars twinkle",
+  },
+  {
+    id: "planetary-nebula",
+    label: "Ring nebula",
+    category: "space",
+    kind: "kit",
+    pack: "space",
+    tags: "planetary nebula shell gas dying star ring",
+    camera: { yaw: 0.35, pitch: 0.3, roll: 0, distance: 4.6 },
+  },
+  {
+    id: "nebula",
+    label: "Nebula",
+    category: "space",
+    kind: "kit",
+    pack: "space",
+    tags: "gas cloud pillars stars emission colourful",
+    camera: { yaw: 0, pitch: 0.06, roll: 0, distance: 4.4 },
+  },
+  {
+    id: "supernova",
+    label: "Supernova",
+    category: "space",
+    kind: "kit",
+    pack: "space",
+    tags: "explosion star remnant debris blast",
+  },
+  {
+    id: "spiral-galaxy",
+    label: "Spiral galaxy",
+    category: "space",
+    kind: "kit",
+    pack: "space",
+    tags: "milky way andromeda stars arms barred",
+    camera: { yaw: 0.55, pitch: 0.9, roll: 0, distance: 3.5 },
+  },
+
+  // ---- Pack: tiny ----
+  // (entries for src/packs/tiny.js go here)
+
+  // ---- Pack: atoms ----
+  // (entries for src/packs/atoms.js go here)
+
+  // ---- Pack: gems ----
+  // (entries for src/packs/gems.js go here)
+
+  // ---- Pack: anatomy ----
+  // (entries for src/packs/anatomy.js go here)
+
+  // ---- Pack: nature ----
+  // (entries for src/packs/nature.js go here)
+
+  // ---- Pack: elements ----
+  // (entries for src/packs/elements.js go here)
+
+  // ---- Pack: food ----
+  // (entries for src/packs/food.js go here)
+
+  // ---- Pack: playthings ----
+  // (entries for src/packs/playthings.js go here)
+
+  // ---- Pack: maths ----
+  // (entries for src/packs/maths.js go here)
+
+  // ---- Pack: objects ----
+  // (entries for src/packs/objects.js go here)
+
+  // ---- Pack: medieval ----
+  // (entries for src/packs/medieval.js go here)
+
+  // ---- Pack: animals ----
+  // (entries for src/packs/animals.js go here)
+
+  // ---- Pack: holidays ----
+  // (entries for src/packs/holidays.js go here)
+
+  // ---- Pack: music ----
+  // (entries for src/packs/music.js go here)
+
+  // ---- Pack: vehicles ----
+  // (entries for src/packs/vehicles.js go here)
+
+  // ---- Pack: landmarks ----
+  // (entries for src/packs/landmarks.js go here)
 ];
 
 export function findToy(id) {

@@ -3,7 +3,7 @@
 // as assets/toys/<id>/thumb.webp (256 px, transparent background).
 //
 //   python3 -m http.server 4173 --bind 127.0.0.1 &
-//   SPLASHERY_CHROMIUM=/path/to/chrome node tools/make-thumbs.mjs [id ...]
+//   SPLASHERY_CHROMIUM=/path/to/chrome node tools/make-thumbs.mjs [id or pack ...]
 //
 // Uses @playwright/test's Chromium API; SwiftShader flags make it work
 // without a GPU.
@@ -11,10 +11,14 @@
 import { chromium } from "@playwright/test";
 import fs from "node:fs";
 import path from "node:path";
+import { TOYS } from "../src/toys.js";
 
 const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
 const base = process.env.SPLASHERY_URL || "http://127.0.0.1:4173/";
-const only = process.argv.slice(2);
+// Arguments are toy ids or pack names.
+const args = process.argv.slice(2);
+const only = TOYS.filter((t) => args.includes(t.id) || args.includes(t.pack)).map((t) => t.id);
+if (args.length && !only.length) throw new Error(`No toys match ${args.join(" ")}`);
 const size = 256;
 
 const browser = await chromium.launch({
