@@ -167,12 +167,14 @@ function wheel(k, pos, r, w, opts = {}) {
     },
   });
   const rw = w * 0.7;
+  // The wheel stays metal and rubber under a flag or pattern.
   k.add(k.cylinder(r * rimR + tr * 0.4, rw), {
     pos,
     rot: [90, 0, 0],
     part,
     flat: 0.2,
     weight: 1.5,
+    pattern: false,
     color: (c) => {
       if (c.s.side) return shade(rim, 0.55);
       const rr = c.s.radial;
@@ -2025,8 +2027,10 @@ function bicycleBuild(k, o) {
       pattern: false,
       color: (c) => shade("#222", 0.8 + 0.25 * Math.abs(c.ln[1])),
     });
-    k.add(k.torus(0.59, 0.016), { part, pos: w, rot: [90, 0, 0], weight: 2.5, color: "#c9ccd1" });
-    k.add(k.cylinder(0.035, 0.13), { part, pos: w, rot: [90, 0, 0], weight: 3, color: "#aeb1b6" });
+    // Rims, hub and spokes stay metal under a flag or pattern.
+    const bare = { part, pos: w, rot: [90, 0, 0], pattern: false };
+    k.add(k.torus(0.59, 0.016), { ...bare, weight: 2.5, color: "#c9ccd1" });
+    k.add(k.cylinder(0.035, 0.13), { ...bare, weight: 3, color: "#aeb1b6" });
     for (let i = 0; i < 24; i++) {
       const a = (i / 24) * TAU;
       const side = i % 2 ? 0.05 : -0.05;
@@ -2038,6 +2042,7 @@ function bicycleBuild(k, o) {
         {
           part,
           weight: 5,
+          pattern: false,
           color: "#d4d6da",
         },
       );
@@ -2175,6 +2180,7 @@ function tractorBuild(k, o) {
       pos: w,
       rot: [90, 0, 0],
       flat: 0.2,
+      pattern: false,
       color: (c) => {
         if (c.s.side) return "#9a927f";
         const rr = c.s.radial;

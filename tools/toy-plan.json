@@ -1,5 +1,5 @@
 {
-  "about": "One entry per shelf toy: the owner's review notes (2026-09-23, docs/reviews/2026-09-23/review.md), a verdict, and a proposed tap effect and sound. v: keep = the owner likes the effect as it is; more = it has an effect that should be clearer or more dramatic; new = it only hops today and needs its own effect. fix = a visual problem to fix. interactive = the owner asked for touch-position or drag interaction. Proposals are suggestions; the owner may change them. tools/toy-plan.mjs checks this file against the shelf and writes docs/TOY-PLAN.md. On 2026-09-24 the owner approved every proposal in this file as written, including the sports-ball texture fixes.",
+  "about": "One entry per shelf toy: the owner's review notes (2026-09-23, docs/reviews/2026-09-23/review.md), a verdict, and a proposed tap effect and sound. v: keep = the owner likes the effect as it is; more = it has an effect that should be clearer or more dramatic; new = it only hops today and needs its own effect. fix = a visual problem to fix; fixed = what was done about it (and in which phase). interactive = the owner asked for touch-position or drag interaction. Proposals are suggestions; the owner may change them. tools/toy-plan.mjs checks this file against the shelf and writes docs/TOY-PLAN.md. On 2026-09-24 the owner approved every proposal in this file as written, including the sports-ball texture fixes.",
   "toys": {
     "cactus": {
       "v": "new",
@@ -75,7 +75,7 @@
     },
     "star-cookie": {
       "v": "new",
-      "fix": "Starts backwards: the bottom of the cookie faces the camera. Turn it round.",
+      "fixed": "C1: turned round so the glazed top faces the camera.",
       "owner": "Looks OK. Maybe it crumbles.",
       "effect": "Crumbles into pieces and crumbs, then reassembles.",
       "sound": "Crunchy crumble."
@@ -112,7 +112,7 @@
     },
     "wooden-elephant": {
       "v": "new",
-      "fix": "Visually underwhelming; improve the look (re-convert at higher detail or pick a better CC0 model).",
+      "fixed": "C1: soft studio light and the model's normal map baked into the colours, and textures filtered to each splat's size, so the carving reads. The model stays (it is the best CC0 elephant found).",
       "owner": "Underwhelming; the style seems off.",
       "effect": "Trunk lifts and it rocks on its wooden feet.",
       "sound": "Wooden knock and a toy trumpet."
@@ -137,14 +137,14 @@
     },
     "vintage-camera": {
       "v": "new",
-      "fix": "Grainy, almost like a reverse-contrast image; detail is lost. Check the mesh-to-splats texture handling (screenshot in docs/reviews/2026-09-23/).",
+      "fixed": "C1: the grain was one-texel aliasing and unlit metal. Textures are now filtered to each splat's size, soft light with gloss is baked in, the lens is dark glass (it was a white disc), and the printed maker's names are painted out.",
       "owner": "Could snap a photo with the flash going off.",
       "effect": "Flash burst from the camera and the view briefly whites out.",
       "sound": "Mechanical shutter click and wind-on."
     },
     "boombox": {
       "v": "new",
-      "fix": "Grainy; could use more detail.",
+      "fixed": "C1: filtered textures and baked light; the speakers read as grilles, not static. The small maker badge is painted out.",
       "owner": "Also a bit grainy.",
       "effect": "Speakers pulse to a beat and the tape reels turn.",
       "sound": "A short synth beat loop."
@@ -188,7 +188,7 @@
     },
     "horse-statue": {
       "v": "new",
-      "fix": "A little too bright; details are hard to see. Lower exposure or contrast.",
+      "fixed": "C1: baked soft light (with the model's normal and occlusion maps) gives it shading, so the marble no longer reads as flat white.",
       "owner": "Work like the other statues.",
       "effect": "Rears up on its hind legs, then settles.",
       "sound": "Stone grind and a whinny-like whistle."
@@ -220,39 +220,39 @@
       "owner": "Balls look good. Bouncing is fine but each should bounce differently.",
       "effect": "Dribble: fast low bounces, then a spin on a fingertip.",
       "sound": "Hollow basketball boing.",
-      "fix": "Check the texture: it should read as pebbled rubber with clean black channels, not grain."
+      "fixed": "C1: pebbled rubber (embossed bumps lit from one side), clean black channels in small splats, even splat placement."
     },
     "soccer-ball": {
       "v": "new",
       "effect": "Keepy-uppy: three small kicks with spin.",
       "sound": "Firm thump.",
-      "fix": "Check the texture: smooth panels with clean seams, not speckle."
+      "fixed": "C1: smooth, slightly glossy panels and clean grooved seams; the speckle (the far side showing through gaps) is gone with even splat placement."
     },
     "american-football": {
       "v": "new",
       "effect": "A tight spiral spin in place.",
       "sound": "Leathery whoosh.",
-      "fix": "Looks grainy, not like leather. Give it a pebbled pigskin leather texture (fine bumps, subtle sheen, darker seams and crisp white laces).",
+      "fixed": "C1: pebbled pigskin with a soft sheen, darker seams, crisp white laces.",
       "owner": "The owner (2026-09-24): some sports balls look grainy rather than realistic; the tennis ball should be fuzzy and the American football should look like leathered pigskin. Look at the other balls too."
     },
     "tennis-ball": {
       "v": "new",
       "effect": "Fast high bounce with the fuzz fluffing out.",
       "sound": "Pock.",
-      "fix": "Should look fuzzy. Make the felt soft and fibrous (fine hair-like noise, slightly blurred edge) with a clean white seam.",
+      "fixed": "C1: soft felt in larger round splats with a fuzz of fine hairs standing off it (which also softens the edge), and a clean white seam.",
       "owner": "The owner (2026-09-24): some sports balls look grainy rather than realistic; the tennis ball should be fuzzy and the American football should look like leathered pigskin. Look at the other balls too."
     },
     "baseball": {
       "v": "new",
       "effect": "Curveball: it spins hard and swerves.",
       "sound": "Bat crack.",
-      "fix": "Check the texture: smooth white leather with crisp red stitches, not grain."
+      "fixed": "C1: smooth white leather with a soft sheen and crisp raised red stitches."
     },
     "softball": {
       "v": "new",
       "effect": "Underhand arc and a softer thud.",
       "sound": "Muffled thud.",
-      "fix": "Check the texture: smooth leather with crisp red stitches, not grain."
+      "fixed": "C1: smooth yellow leather with a soft sheen and crisp raised red stitches."
     },
     "beach-ball": {
       "v": "new",
@@ -268,13 +268,13 @@
       "v": "new",
       "effect": "Tumbles end over end with an odd bounce.",
       "sound": "Dull thud.",
-      "fix": "Check the texture: pebbled grip, not grain."
+      "fixed": "C1: an even pebbled grip; clean seams."
     },
     "volleyball": {
       "v": "new",
       "effect": "A set then a spike straight down.",
       "sound": "Slap.",
-      "fix": "Check the texture: smooth leather panels with clean seams, not speckle."
+      "fixed": "C1: smooth leather panels with a sheen and clean fine seams."
     },
     "water-polo-ball": {
       "v": "new",
@@ -290,7 +290,7 @@
       "v": "new",
       "effect": "Seam-up spin and a skid.",
       "sound": "Crisp leather knock.",
-      "fix": "Check the texture: polished red leather with a shine and a clear raised seam."
+      "fixed": "C1: polished red leather with a bright highlight and a raised, lit seam."
     },
     "bowling-ball": {
       "v": "new",
@@ -316,7 +316,7 @@
       "v": "new",
       "effect": "Barely lifts and lands with a heavy squash.",
       "sound": "Heavy thud.",
-      "fix": "Check the texture: matte rubber grip, not grain."
+      "fixed": "C1: matte rubber grip (low bumps, no shine), and a faint rim of light on dark pages."
     },
     "lacrosse-ball": {
       "v": "new",
@@ -325,7 +325,7 @@
     },
     "squash-ball": {
       "v": "new",
-      "fix": "Hard to see on the dark background (it is black). Consider a faint rim light in dark mode.",
+      "fixed": "C1: a faint rim of light around the ball on a dark page (a see-through shell that adds up at the silhouette); invisible on a light page.",
       "owner": "Weird; hard to see on dark.",
       "effect": "Warms up: glows faintly as it bounces faster.",
       "sound": "Dead, low squash thock."
@@ -343,7 +343,7 @@
     },
     "hockey-puck": {
       "v": "new",
-      "fix": "Hard to see on the dark background.",
+      "fixed": "C1: the same faint rim of light, and a little sheen on the rubber.",
       "owner": "Underwhelming.",
       "effect": "Slides and spins flat, throwing up ice sparkle.",
       "sound": "Stick slap and ice scrape."
@@ -356,7 +356,7 @@
     },
     "flying-disc": {
       "v": "new",
-      "fix": "Could use more texture; make it look more like plastic (sheen).",
+      "fixed": "C1: glossy plastic with a highlight and two moulded flight rings.",
       "owner": "Looks fine.",
       "effect": "Spins fast and hovers, tilting.",
       "sound": "Whirring whoosh."
@@ -409,7 +409,7 @@
     },
     "lava-lamp": {
       "v": "new",
-      "fix": "Refine where the glass meets the top and bottom caps.",
+      "fixed": "C1: the glass now tapers into the cap and sits in rolled metal collars top and bottom.",
       "owner": "Moves really well. On tap: blobs move faster, light up or change colours.",
       "effect": "Blobs speed up, glow and shift colour for a few seconds.",
       "sound": "Low bubbling blorp."
@@ -474,7 +474,7 @@
     },
     "book": {
       "v": "keep",
-      "fix": "Blurry: the text is just grey smudges and the cover is soft. Try readable text (a bitmap font), crisper page splats and a sharper cover (screenshots in docs/reviews/2026-09-23/).",
+      "fixed": "C1: readable words from a 5x7 bitmap font, more and smaller splats on the two open pages, a crisper cover, and no red strip (the cover's inside drew over the pages).",
       "owner": "Blurry; try to make it more detailed so the writing looks like something.",
       "sound": "Page flip."
     },
@@ -596,7 +596,7 @@
     },
     "comet": {
       "v": "new",
-      "fix": "Overhaul: too blurry and not recognisable as a comet. Needs a bright icy nucleus, a coma and two distinct tails (straight blue ion tail, curved dusty tail). The meteor is closer to what the owner wants.",
+      "fixed": "C1: overhauled: a bright icy nucleus in a thin coma, a straight blue ion tail of streamers and a curved gold dust tail.",
       "owner": "Extremely underwhelming; does not look like a comet.",
       "effect": "Tail flares longer and brighter as it swings by.",
       "sound": "Long airy whoosh."
@@ -1398,7 +1398,7 @@
     },
     "decorated-tree": {
       "v": "more",
-      "fix": "The star on top looks like a glowing golden cloud; make it a clear star shape.",
+      "fixed": "C1: a faceted gold star facing the viewer, with only a faint glow.",
       "owner": "Lights only show very briefly; make it more dramatic.",
       "effect": "Lights come on and chase in patterns and stay on; the star glows.",
       "sound": "Sleigh-bell jingle."
@@ -1415,7 +1415,7 @@
     },
     "diya": {
       "v": "more",
-      "fix": "Underwhelming visually; add detail (patterned clay, oil sheen).",
+      "fixed": "C1: painted clay (dots, a red line, lotus petals) and dark amber oil with a sheen and the flame's reflection.",
       "owner": "Very underwhelming.",
       "effect": "The flame grows and a ring of small diyas lights around it.",
       "sound": "Soft flame whoosh."
@@ -1470,7 +1470,7 @@
     },
     "sports-car": {
       "v": "keep",
-      "fix": "A little small in its frame (known issue).",
+      "fixed": "C1: the home camera comes closer.",
       "owner": "Looks really good.",
       "sound": "Engine rev."
     },
@@ -1511,7 +1511,7 @@
     },
     "tractor": {
       "v": "keep",
-      "fix": "The exhaust smoke is heavy (known issue).",
+      "fixed": "C1: a light wisp of exhaust; the cab glass is clear instead of static.",
       "owner": "Perfect.",
       "sound": "Diesel putter."
     },
@@ -1551,7 +1551,7 @@
     },
     "statue-of-liberty": {
       "v": "new",
-      "fix": "The crown looks squashed down; raise its rays and give them clearer spikes (screenshot in docs/reviews/2026-09-23/).",
+      "fixed": "C1: the crown's seven rays rise higher and taper to sharp, lit points.",
       "owner": "Everything else looks fine. Make the effect a good one.",
       "effect": "The torch flame flares bright and sparkles drift from it.",
       "sound": "Flame whoosh and a harbour bell."

@@ -85,7 +85,8 @@ k.add(shape, {
   flat: 0.25,       // splat thickness (0 flat discs .. 1 round blobs)
   stretch: 3,       // for tubes: splats elongated along the tube
   opacity: 0.95,
-  jitter: 0.04,     // colour noise
+  jitter: 0.04,     // colour noise (keep it low, 0.01..0.02, on smooth materials)
+  even: true,       // place surface splats evenly (spheres, boxes, cylinders, cones, lathes, param)
   interior: 0.12,   // share of this shape's splats that fill its inside (for Slice)
   core: "#hex" | (c) => colour,   // colour of the inside
   part: index,      // from k.part(...)
@@ -97,6 +98,13 @@ k.add(shape, {
 The splat budget is shared between shapes by surface area times `weight`, so the toy has an even
 density. Use `share` for small details that need a fixed number of splats, and `weight` > 1 for
 small shapes that would otherwise look sparse (eyes, stitches, gems).
+
+Splats are unlit, so a material reads from colour alone. Random placement leaves thin spots where
+the far side of the toy shows through as dark speckle; `even: true` closes them (it made the sports
+balls read as leather and rubber instead of grain). For smooth materials also bake a little light
+into the colour (a key light from above, and a sheen for gloss) instead of adding noise: see `lit()`
+and `grip()` in `src/packs/balls.js`. Parts that are hidden most of the time can have a low `weight`
+so the faces people see get the splats (see the storybook's pages).
 
 **The colour function** gets `c` with:
 

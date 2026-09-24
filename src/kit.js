@@ -696,9 +696,10 @@ export class Kit {
   //   pattern: false keeps the pattern layer off these splats
   //   even: true spreads the surface splats evenly (a low-discrepancy
   //          sequence) instead of at random; random placement leaves thin
-  //          spots where the far side shows through as dark speckle. For
-  //          spheres, boxes, cylinders, cones, lathes and param surfaces
-  //          (shapes that take a fixed number of random numbers per splat)
+  //          spots where the far side shows through as dark speckle. It
+  //          works for spheres, boxes, cylinders, cones, lathes and param
+  //          surfaces (shapes that take a fixed number of random numbers
+  //          per splat); other shapes are placed at random as before.
   add(shape, opts = {}) {
     const q = opts.quat || (opts.rot ? quatEuler(...opts.rot) : [0, 0, 0, 1]);
     const sc =
@@ -960,8 +961,6 @@ export class Kit {
   }
 }
 
-// A smooth curve through points (Catmull-Rom), as t in [0, 1] -> point.
-// Handy as the path of k.tube().
 // The R_d low-discrepancy sequence (Roberts, 2018), randomly offset: even(i)
 // returns a rand() stand-in whose first `dims` calls give the i-th point's
 // coordinates (later calls fall back to rand). Shapes whose sample() uses a
@@ -986,6 +985,8 @@ function evenRand(rand, dims) {
   };
 }
 
+// A smooth curve through points (Catmull-Rom), as t in [0, 1] -> point.
+// Handy as the path of k.tube().
 export function spline(points, { closed = false } = {}) {
   const pts = closed ? [...points, points[0]] : points;
   const n = pts.length - 1;
