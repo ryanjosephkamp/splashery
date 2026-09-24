@@ -525,11 +525,22 @@ export const RECIPES = {
     // Splats are depth-sorted in the pose they are built in, so the front half
     // is built twice, shut and lying open, and whichever copy is nearer its
     // current pose is shown as it swings.
-    drive(t, c, out) {
+    // Each time it opens, the front half swings on past its resting place,
+    // the crystals light up violet, and then it settles back.
+    drive(t, c, out, info) {
       const e = c.open * c.open * (3 - 2 * c.open);
       const openNow = e >= 0.5 ? 1 : 0;
+      if (geode.prev !== null && c.open > geode.prev && !geode.rising) geode.openedAt = info.time;
+      if (geode.prev !== null && c.open !== geode.prev) geode.rising = c.open > geode.prev;
+      geode.prev = c.open;
+      const a = info.time - geode.openedAt;
+      const wide = GEODE_WIDE * smoothstep(0.5, 1.3, a) * (1 - smoothstep(2.4, 3.8, a));
+      const glow = e * smoothstep(0.2, 0.9, a) * (1 - smoothstep(2.8, 4.6, a));
       out.parts.lidShut = { angle: -GEODE_SWING * e, visible: 1 - openNow };
-      out.parts.lidOpen = { angle: GEODE_SWING * (1 - e), visible: openNow };
+      const apart = [-GEODE_APART * (wide / GEODE_WIDE), 0, 0];
+      out.parts.lidOpen = { angle: GEODE_SWING * (1 - e) - wide, offset: apart, visible: openNow };
+      out.parts.glow = { visible: glow };
+      out.parts.glowLid = { angle: -wide, offset: apart, visible: glow * openNow };
       out.amount = 1;
     },
     build(k, o) {
@@ -542,6 +553,8 @@ export const RECIPES = {
       const hinge = [-R * 1.02, 0, 0];
       const lidShut = k.part("lidShut", { pivot: hinge, axis: [0, 1, 0] });
       const lidOpen = k.part("lidOpen", { pivot: hinge, axis: [0, 1, 0] });
+      // The violet light that fills the two halves as it opens.
+      const glowParts = [k.part("glow"), k.part("glowLid", { pivot: hinge, axis: [0, 1, 0] })];
       const openQ = quatAxisAngle([0, 1, 0], -GEODE_SWING);
       const purple = o.color;
       const halves = [
@@ -655,6 +668,30 @@ export const RECIPES = {
             color: shade(col, clamp(b, 0.4, 1.3)),
             kind: "glint",
             params: [rand() < 0.3 ? 1 : 0.2, 0],
+          };
+        });
+        // The glow (hidden until it opens): a violet haze in the cavity and
+        // bright points on the crystal tips.
+        const gp = glowParts[half.open ? 1 : 0];
+        k.cloud({ share: 0.012, size: 2.6, pattern: false }, (rand) => {
+          const d = randDir(rand);
+          const r = 0.55 * Math.cbrt(rand());
+          return {
+            p: T([d[0] * r, d[1] * r, side * Math.abs(d[2]) * r * 0.7]),
+            color: mix("#b25cff", "#f0d6ff", rand() * 0.4),
+            opacity: 0.08,
+            part: gp,
+          };
+        });
+        k.cloud({ share: 0.01, size: 1.1, pattern: false }, (rand) => {
+          const cr = crystals[Math.floor(rand() * crystals.length)];
+          return {
+            p: add(cr.base, mul(cr.axis, cr.L * (0.7 + 0.35 * rand()))),
+            color: mix("#d9a6ff", "#ffffff", 0.3 + 0.5 * rand()),
+            opacity: 0.9,
+            kind: "twinkle",
+            params: [0.5, rand() * TAU],
+            part: gp,
           };
         });
       }
@@ -893,10 +930,28 @@ export const RECIPES = {
     options: [{ key: "color", label: "Mist", type: "color", default: "#b061ff" }],
     controls: [
       { key: "swirl", label: "Sparkle", type: "slider", default: 0.5 },
-      { key: "gaze", label: "Gaze", type: "pulse", ease: 2.5 },
+      { key: "gaze", label: "Gaze", type: "pulse", ease: 3.6 },
     ],
     action: { key: "gaze", label: "Gaze into the ball", sound: "chime" },
-    drive(t, c, out) {
+    // A tap whips the mist round, and a glowing sign (a star, a moon or a
+    // heart, in turn) rises out of it, turns once and fades.
+    drive(t, c, out, info) {
+      const ball = crystalBall;
+      if (c.gaze > ball.prev + 0.3) ball.count++;
+      ball.prev = c.gaze;
+      const dt = clamp(info.time - ball.last, 0, 0.1);
+      ball.last = info.time;
+      ball.spin += dt * 9 * Math.sqrt(c.gaze);
+      const p = c.gaze > 0 ? 1 - c.gaze : 1;
+      const sign = smoothstep(0.08, 0.3, p) * (1 - smoothstep(0.62, 0.95, p));
+      out.parts.mist = { angle: ball.spin, visible: 1 - 0.5 * sign };
+      BALL_SIGNS.forEach((name, i) => {
+        out.parts[name] = {
+          angle: 0.55 + 0.9 * (p - 0.5),
+          offset: [0, 0.12 * (1 - sign), 0],
+          visible: i === ball.count % BALL_SIGNS.length ? sign : 0,
+        };
+      });
       out.amount = 0.4 + 1.2 * c.swirl + 1.5 * c.gaze;
       out.glow = [0.9, 0.6, 1, 1.4 * c.gaze];
     },
@@ -937,6 +992,7 @@ export const RECIPES = {
       });
       // Swirling mist inside: slow turns, faster near the middle.
       // Three spiral arms of mist that curl up and down as they wind round.
+      const mistPart = k.part("mist", { pivot: [0, cy, 0], axis: [0, 1, 0] });
       k.cloud({ share: 0.26, size: 1.7, pattern: false }, (rand) => {
         const arm = Math.floor(rand() * 3);
         const s = Math.pow(rand(), 0.8);
@@ -954,8 +1010,59 @@ export const RECIPES = {
           opacity: 0.1 + 0.14 * (1 - s),
           kind: "orbit",
           params: [0.5 + 0.2 * rand(), 0.8],
+          part: mistPart,
         };
       });
+      // The signs that appear in the mist (hidden until a tap): flat glowing
+      // shapes with a little depth, and a soft light round them.
+      const inside = {
+        star: (x, y) => {
+          const a = Math.atan2(y, x) + Math.PI / 2;
+          const f = Math.abs((((a / TAU) * 5 + 10.5) % 1) - 0.5) * 2;
+          return Math.hypot(x, y) < 0.38 * (0.45 + 0.55 * f * f);
+        },
+        moon: (x, y) => Math.hypot(x, y) < 0.34 && Math.hypot(x - 0.15, y - 0.07) > 0.28,
+        heart: (x, y) => {
+          const X = x / 0.3;
+          const Y = (y + 0.02) / 0.3;
+          const q = X * X + Y * Y - 1;
+          return q * q * q - X * X * Y * Y * Y < 0;
+        },
+      };
+      const tints = { star: "#fff0a8", moon: "#dff0ff", heart: "#ffb0dc" };
+      for (const name of BALL_SIGNS) {
+        const part = k.part(name, { pivot: [0, cy, 0], axis: [0, 1, 0] });
+        const test = (x, y) => inside[name](x / 1.25, y / 1.25);
+        k.cloud({ share: 0.03, size: 1.3, pattern: false }, (rand) => {
+          for (let i = 0; i < 20; i++) {
+            const x = (rand() - 0.5) * 1;
+            const y = (rand() - 0.5) * 1;
+            if (!test(x, y)) continue;
+            return {
+              p: [x, cy + y, 0.42 + (rand() - 0.5) * 0.04],
+              color: mix(tints[name], "#ffffff", 0.35 + 0.4 * rand()),
+              opacity: 1,
+              part,
+            };
+          }
+          return null;
+        });
+        // A soft light just behind it, a little larger than the sign.
+        k.cloud({ share: 0.006, size: 2.4, pattern: false }, (rand) => {
+          for (let i = 0; i < 20; i++) {
+            const x = (rand() - 0.5) * 1.2;
+            const y = (rand() - 0.5) * 1.2;
+            if (!test(x * 0.8, y * 0.8)) continue;
+            return {
+              p: [x, cy + y, 0.36],
+              color: mix(tints[name], mist, 0.3),
+              opacity: 0.25,
+              part,
+            };
+          }
+          return null;
+        });
+      }
       // Motes of light: a glow rises through them when you gaze into the ball.
       k.cloud({ share: 0.008, size: 0.9, pattern: false }, (rand) => {
         const p = mul(randDir(rand), 0.85 * Math.cbrt(rand()));
@@ -1031,5 +1138,13 @@ export const RECIPES = {
 };
 
 // How far the geode's front half and the oyster's lid swing open (radians).
+// The crystal ball's signs, which one comes next, and its mist's extra turn.
+const BALL_SIGNS = ["star", "moon", "heart"];
+const crystalBall = { prev: 0, count: -1, last: 0, spin: 0 };
+
 const GEODE_SWING = 0.8 * Math.PI;
+// How much further the geode swings as it opens, and when it last began to.
+const GEODE_WIDE = 0.2;
+const GEODE_APART = 0.45;
+const geode = { prev: null, rising: false, openedAt: -1e9 };
 const PEARL_SWING = 1.15;

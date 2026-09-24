@@ -250,6 +250,8 @@ const hop = (s) => 4 * s * (1 - s);
 
 // ---- Ice cream ---------------------------------------------------------------------
 
+// How many rings the coffee's surface is cut into (each a part).
+const COFFEE_RINGS = 12;
 const ICE_RIM = 1.15; // height of the cone's rim above its tip
 const ICE_MELT = 0.48; // how easily the scoops melt (the melt behaviour's a)
 
@@ -366,14 +368,24 @@ export const RECIPES = {
       { key: "sprinkles", label: "Sprinkles", type: "switch", default: true },
       { key: "cherry", label: "Cherry", type: "switch", default: true },
     ],
-    controls: [{ key: "warmth", label: "Warmth", type: "slider", default: 0 }],
+    controls: [
+      { key: "warmth", label: "Warmth", type: "slider", default: 0 },
+      { key: "thaw", label: "Melt", type: "pulse", ease: 5 },
+    ],
+    action: { key: "thaw", label: "Melt and refreeze", sound: "drop" },
     drive(t, c, out) {
-      out.energy = c.warmth;
-      out.grow = c.warmth;
+      // A tap warms it up quickly, so the scoops slump and drips run down the
+      // cone, holds for a moment, then it refreezes.
+      const p = c.thaw > 0 ? 1 - c.thaw : 1;
+      const warm = 1 - Math.pow(1 - clamp(p / 0.28, 0, 1), 2);
+      const tap = c.thaw > 0 ? 0.85 * warm * (1 - smoothstep(0.55, 0.95, p)) : 0;
+      const w = Math.max(c.warmth, tap);
+      out.energy = w;
+      out.grow = w;
       // Melt slumps everything towards the floor (the cone's tip), so the
       // scoops rise by what the rim would sink: they flatten onto the cone
       // and ooze over its edge instead of sinking through it.
-      out.parts.scoops = { offset: [0, ICE_RIM * 0.895 * ICE_MELT * c.warmth, 0] };
+      out.parts.scoops = { offset: [0, ICE_RIM * 0.895 * ICE_MELT * w, 0] };
     },
     build(k, o) {
       const H = ICE_RIM;
@@ -2843,12 +2855,22 @@ export const RECIPES = {
     ],
     controls: [
       { key: "hot", label: "Steam", type: "slider", default: 0.7 },
-      { key: "stir", label: "Stir", type: "pulse", ease: 2.2 },
+      { key: "stir", label: "Stir", type: "pulse", ease: 3.2 },
     ],
     action: { key: "stir", label: "Stir", sound: "chime" },
+    // A stir spins the coffee twice round and twists the latte art into a
+    // swirl (the middle turns further than the edge) that relaxes back as it
+    // stops, while a puff of steam curls up.
     drive(t, c, out) {
-      out.amount = 0.3 + c.hot;
-      out.parts.coffee = { angle: TAU * 2 * easeInOut(1 - c.stir) };
+      const p = 1 - c.stir;
+      const turn = TAU * 2 * easeInOut(p);
+      const twist = c.stir > 0 ? 3.2 * Math.sin(Math.PI * smoothstep(0, 0.9, p)) : 0;
+      for (let i = 0; i < COFFEE_RINGS; i++)
+        out.parts[`coffee${i}`] = { angle: turn + twist * (1 - (i + 0.5) / COFFEE_RINGS) };
+      out.parts.puff = {
+        visible: c.stir > 0 ? smoothstep(0, 0.1, p) * (1 - smoothstep(0.7, 1, p)) : 0,
+      };
+      out.amount = 0.3 + c.hot + 0.8 * c.stir;
     },
     build(k, o) {
       const cup = o.cup;
@@ -2916,23 +2938,49 @@ export const RECIPES = {
         { scale: [1, 1, 0.8], flat: 0.25, weight: 1.3, color: ceramic },
       );
       // The coffee with latte art, on a part that turns when stirred.
-      const coffee = k.part("coffee", { pivot: [0, 0.58, 0], axis: [0, 1, 0] });
+      // It is made of rings, each a part, so a stir can twist the art.
       const art = LATTE[o.art] || LATTE.heart;
-      k.add(topDisc(k, 0.545), {
-        pos: [0, 0.58, 0],
-        part: coffee,
-        flat: 0.15,
-        weight: 1.6,
-        color: (c) => {
-          const x = c.lp[0] / 0.545;
-          const z = c.lp[2] / 0.545;
-          const r = Math.hypot(x, z);
-          let col = mix("#c98d52", "#7a4520", smoothstep(0.62, 1.0, r));
-          col = mix(col, "#a86a36", 0.3 * c.noise(x * 8, z * 8, 1));
-          const a = art(x, -z);
-          if (a > 0) col = mix(col, "#fbf3e4", smoothstep(0, 0.06, a));
-          return keep(mix(col, "#ffffff", 0.2 * spec(c, 30)));
-        },
+      for (let i = 0; i < COFFEE_RINGS; i++) {
+        const r0 = (0.545 * i) / COFFEE_RINGS;
+        const r1 = (0.545 * (i + 1)) / COFFEE_RINGS;
+        const ring = k.param(
+          (u, v) => {
+            const a = u * TAU;
+            const r = r0 + (r1 - r0) * v;
+            return [Math.sin(a) * r, 0, Math.cos(a) * r];
+          },
+          { grid: i < 2 ? 24 : 48, normal: () => [0, 1, 0] },
+        );
+        k.add(ring, {
+          pos: [0, 0.58, 0],
+          part: k.part(`coffee${i}`, { pivot: [0, 0.58, 0], axis: [0, 1, 0] }),
+          flat: 0.15,
+          weight: 1.6,
+          color: (c) => {
+            const x = c.lp[0] / 0.545;
+            const z = c.lp[2] / 0.545;
+            const r = Math.hypot(x, z);
+            let col = mix("#c98d52", "#7a4520", smoothstep(0.62, 1.0, r));
+            col = mix(col, "#a86a36", 0.3 * c.noise(x * 8, z * 8, 1));
+            const a = art(x, -z);
+            if (a > 0) col = mix(col, "#fbf3e4", smoothstep(0, 0.06, a));
+            return keep(mix(col, "#ffffff", 0.2 * spec(c, 30)));
+          },
+        });
+      }
+      // A thicker puff of steam that curls up while it is stirred.
+      const puff = k.part("puff");
+      k.cloud({ share: 0.012, size: 2.6, pattern: false }, (rand) => {
+        const a = rand() * TAU;
+        const r = 0.3 * Math.sqrt(rand());
+        return {
+          p: [Math.sin(a) * r, 0.64 + rand() * 0.05, Math.cos(a) * r],
+          color: "#ffffff",
+          opacity: 0.16,
+          kind: "rise",
+          params: [0.9 + rand() * 0.4, rand()],
+          part: puff,
+        };
       });
       // Steam curling up.
       k.cloud({ share: 0.02, size: 2.4, pattern: false }, (rand) => {
