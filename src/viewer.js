@@ -123,7 +123,8 @@ export class Viewer {
       onTap: async (e) => {
         const [x, y] = player.canvasPoint(e);
         player.pickDirty = true;
-        if (await player.pickAt(x, y)) player.act();
+        const hit = await player.pickAt(x, y);
+        if (hit) player.act(hit);
       },
     });
   }

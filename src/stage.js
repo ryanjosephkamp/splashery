@@ -3,7 +3,7 @@
 // the engine directly lives here or in paint.js / loaders.js.
 
 import * as pc from "./pc.js";
-import { MODIFIER, MODIFIER_KIT } from "./effects.js";
+import { MODIFIER, MODIFIER_KIT, MODIFIER_RIG } from "./effects.js";
 
 export class NoGPUError extends Error {}
 
@@ -265,8 +265,9 @@ export class Stage {
 
   // Shows a gsplat resource as the toy. transform: { position, rotation
   // (euler degrees), scale } normalises it around the origin. `kit` marks a
-  // generated toy whose format carries the per-splat splatAnim stream.
-  setToy({ resource, asset = null, owned = false, transform = null, kit = false }) {
+  // generated toy whose format carries the per-splat splatAnim stream; `rig`
+  // a captured toy with moving parts (a splatPart stream, see src/rig.js).
+  setToy({ resource, asset = null, owned = false, transform = null, kit = false, rig = false }) {
     this.clearToy();
     const entity = new pc.Entity("toy");
     if (transform) {
@@ -280,6 +281,11 @@ export class Stage {
         { name: "paintColor", format: pc.PIXELFORMAT_RGBA8, storage: pc.GSPLAT_STREAM_INSTANCE },
       ]);
     }
+    if (rig && !resource.format.getStream("splatPart")) {
+      resource.format.addExtraStreams([
+        { name: "splatPart", format: pc.PIXELFORMAT_RGBA8, storage: pc.GSPLAT_STREAM_INSTANCE },
+      ]);
+    }
     entity.addComponent("gsplat", asset ? { asset } : { resource });
     // Create (and clear) the paint texture now, so the very first work-buffer
     // pass already has it bound.
@@ -288,12 +294,19 @@ export class Stage {
       paint.lock().fill(0);
       paint.unlock();
     }
-    entity.gsplat.setWorkBufferModifier(kit ? MODIFIER_KIT : MODIFIER);
+    if (rig) {
+      const parts = entity.gsplat.getInstanceTexture("splatPart");
+      if (parts) {
+        parts.lock().fill(0);
+        parts.unlock();
+      }
+    }
+    entity.gsplat.setWorkBufferModifier(kit ? MODIFIER_KIT : rig ? MODIFIER_RIG : MODIFIER);
     entity.gsplat.workBufferUpdate = pc.WORKBUFFER_UPDATE_ALWAYS;
     // The pattern sampler always needs a texture, even with no pattern on.
     entity.gsplat.setParameter("uSpPattern", this.blankTexture());
     this.app.root.addChild(entity);
-    this.toy = { entity, resource, asset, owned, kit };
+    this.toy = { entity, resource, asset, owned, kit, rig };
     this.requestRender();
     return this.toy;
   }
@@ -317,6 +330,7 @@ export class Stage {
         keep.push(t);
         continue;
       }
+      t.rigProc?.destroy();
       t.entity.destroy();
       if (t.asset) {
         t.asset.unload();

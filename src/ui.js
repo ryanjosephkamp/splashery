@@ -24,6 +24,8 @@ const SWATCHES = [
 ];
 const TOOL_HINTS = {
   orbit: "Drag to turn the toy, scroll or pinch to zoom, twist two fingers to roll.",
+  // The Orbit tool on a stretchy toy (a recipe with `grab`).
+  stretch: "Drag the toy to stretch it; drag beside it to turn it. Scroll or pinch to zoom.",
   clay: "Drag on a generated toy to add lumps of clay, or switch to Erase to carve it away.",
 };
 
@@ -422,7 +424,8 @@ export function createUI(app) {
     els.toolParams.textContent = "";
     for (const [k, v] of [...sliders]) if (k.startsWith(`${tool}.`)) sliders.delete(k);
     const def = EFFECTS.find((e) => e.id === tool);
-    els.toolHint.textContent = def ? def.hint : TOOL_HINTS[tool] || "";
+    const stretchy = tool === "orbit" && app.player?.toyInfo?.recipe?.grab;
+    els.toolHint.textContent = def ? def.hint : TOOL_HINTS[stretchy ? "stretch" : tool] || "";
     if (def) for (const p of def.params) makeSlider(def, p, els.toolParams);
     els.paintExtras.hidden = tool !== "paint";
     els.clayExtras.hidden = tool !== "clay";
@@ -448,6 +451,8 @@ export function createUI(app) {
 
   function renderToyPanel(info) {
     const recipe = info?.recipe || null;
+    if (app.tool === "orbit")
+      els.toolHint.textContent = TOOL_HINTS[recipe?.grab ? "stretch" : "orbit"];
     els.toyActionRow.hidden = !recipe?.action;
     els.toyAction.textContent = recipe?.action?.label || "";
     els.toyAliveRow.hidden = !recipe?.alive;

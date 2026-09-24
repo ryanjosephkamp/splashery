@@ -141,6 +141,8 @@ uniform vec4 uSpDropP;   // x floor distance, y recall 0..1, z on, w restitution
 uniform vec4 uSpDropQ;   // x scatter
 uniform vec4 uSpMag;     // xyz point, w intensity 0..1
 uniform vec4 uSpMagP;    // x strength -1..1, y radius (world)
+uniform vec4 uSpGrab;    // xyz grabbed point, w radius (world)
+uniform vec4 uSpGrabD;   // xyz how far it is pulled, w on
 uniform vec4 uSpTwist;   // xyz axis (unit), w angle across the toy (radians)
 uniform vec4 uSpSlice;   // xyz plane normal, w offset (world)
 uniform vec4 uSpSliceP;  // x on, y glow width (world)
@@ -302,6 +304,14 @@ void modifySplatCenter(inout vec3 center) {
     spGlow = f * abs(uSpMagP.x);
   }
 
+  // Grab (drag-to-stretch): splats near the grabbed point follow the pull,
+  // fading with distance, so the toy stretches; it springs back on release.
+  if (uSpGrabD.w > 0.5) {
+    vec3 d = home - uSpGrab.xyz;
+    float rad = max(uSpGrab.w, 1e-3);
+    p += uSpGrabD.xyz * exp(-dot(d, d) / (rad * rad) * 1.5);
+  }
+
   if (uSpDiss.w > 0.5) {
     float h = spHash(idx * 7u + 5u);
     float st = uSpDiss.z;
@@ -408,6 +418,8 @@ uniform uSpDropP: vec4f;
 uniform uSpDropQ: vec4f;
 uniform uSpMag: vec4f;
 uniform uSpMagP: vec4f;
+uniform uSpGrab: vec4f;
+uniform uSpGrabD: vec4f;
 uniform uSpTwist: vec4f;
 uniform uSpSlice: vec4f;
 uniform uSpSliceP: vec4f;
@@ -562,6 +574,12 @@ fn modifySplatCenter(center: ptr<function, vec3f>) {
       p = p + normalize(d + vec3f(1e-5)) * (-uniform.uSpMagP.x) * rad * 1.1 * f;
     }
     spGlow = f * abs(uniform.uSpMagP.x);
+  }
+
+  if (uniform.uSpGrabD.w > 0.5) {
+    let d = home - uniform.uSpGrab.xyz;
+    let rad = max(uniform.uSpGrab.w, 1e-3);
+    p = p + uniform.uSpGrabD.xyz * exp(-dot(d, d) / (rad * rad) * 1.5);
   }
 
   if (uniform.uSpDiss.w > 0.5) {
@@ -852,23 +870,97 @@ fn spKitCenter(p0: vec3f) -> vec3f {
 }
 `;
 
-function variant(code, kit, lang) {
+// Captured toys with a rig (src/rigs.js) carry a per-splat "splatPart"
+// stream (RGBA8, written once by a GSplatProcessor from the rig's regions):
+// r = part index / 255, g = how much the part moves the splat (soft edges
+// blend into the rest of the toy). The parts move by uSpParts as in kits.
+const GLSL_RIG_UNIFORMS = `uniform vec4 uSpParts[48];
+uniform vec4 uSpRigDbg;  // x > 0 tints each part (?rig=show)`;
+
+const GLSL_RIG_FUNCTIONS = `
+vec3 spRigCenter(vec3 p) {
+  vec4 pk = loadSplatPart();
+  int part = int(pk.x * 255.0 + 0.5);
+  float w = pk.y;
+  if (part > 0 && part < 16 && w > 0.0) {
+    vec4 q = uSpParts[part * 3];
+    vec4 pv = uSpParts[part * 3 + 1];
+    vec4 ofs = uSpParts[part * 3 + 2];
+    if (q.w == 0.0 && dot(q.xyz, q.xyz) == 0.0) q = vec4(0.0, 0.0, 0.0, 1.0);
+    vec3 moved = pv.xyz + spQuatRotate(q, p - pv.xyz) + ofs.xyz;
+    p = mix(p, moved, w);
+    spPartQ = normalize(mix(vec4(0.0, 0.0, 0.0, 1.0), q, w));
+    spKitScale *= mix(1.0, ofs.w, w);
+    if (uSpRigDbg.x > 0.0) {
+      float h = float(part) * 2.39996;
+      spTint += w * 0.6 * vec3(0.5 + 0.5 * cos(h), 0.5 + 0.5 * cos(h + 2.1), 0.5 + 0.5 * cos(h + 4.2));
+    }
+  }
+  return p;
+}
+`;
+
+const WGSL_RIG_UNIFORMS = `uniform uSpParts: array<vec4f, 48>;
+uniform uSpRigDbg: vec4f;`;
+
+const WGSL_RIG_FUNCTIONS = `
+fn spRigCenter(p0: vec3f) -> vec3f {
+  var p = p0;
+  let pk = loadSplatPart();
+  let part = i32(pk.x * 255.0 + 0.5);
+  let w = pk.y;
+  if (part > 0 && part < 16 && w > 0.0) {
+    var q = uniform.uSpParts[part * 3];
+    let pv = uniform.uSpParts[part * 3 + 1];
+    let ofs = uniform.uSpParts[part * 3 + 2];
+    if (q.w == 0.0 && dot(q.xyz, q.xyz) == 0.0) { q = vec4f(0.0, 0.0, 0.0, 1.0); }
+    let moved = pv.xyz + spQuatRotate(q, p - pv.xyz) + ofs.xyz;
+    p = mix(p, moved, w);
+    spPartQ = normalize(mix(vec4f(0.0, 0.0, 0.0, 1.0), q, w));
+    spKitScale = spKitScale * mix(1.0, ofs.w, w);
+    if (uniform.uSpRigDbg.x > 0.0) {
+      let h = f32(part) * 2.39996;
+      spTint = spTint + w * 0.6 * vec3f(0.5 + 0.5 * cos(h), 0.5 + 0.5 * cos(h + 2.1), 0.5 + 0.5 * cos(h + 4.2));
+    }
+  }
+  return p;
+}
+`;
+
+// mode: "plain" (captured and file toys), "kit" (generated toys) or "rig"
+// (captured toys with a rig).
+function variant(code, mode, lang) {
   const glsl = lang === "glsl";
+  const pick = (kit, rig) => (mode === "kit" ? kit : mode === "rig" ? rig : "");
   return code
-    .replace("__KIT_UNIFORMS__", kit ? (glsl ? GLSL_KIT_UNIFORMS : WGSL_KIT_UNIFORMS) : "")
-    .replace("__KIT_FUNCTIONS__", kit ? (glsl ? GLSL_KIT_FUNCTIONS : WGSL_KIT_FUNCTIONS) : "")
+    .replace(
+      "__KIT_UNIFORMS__",
+      pick(glsl ? GLSL_KIT_UNIFORMS : WGSL_KIT_UNIFORMS, glsl ? GLSL_RIG_UNIFORMS : WGSL_RIG_UNIFORMS), // prettier-ignore
+    )
+    .replace(
+      "__KIT_FUNCTIONS__",
+      pick(glsl ? GLSL_KIT_FUNCTIONS : WGSL_KIT_FUNCTIONS, glsl ? GLSL_RIG_FUNCTIONS : WGSL_RIG_FUNCTIONS), // prettier-ignore
+    )
     .replace(
       "__KIT_CENTER__",
-      kit ? (glsl ? "center = spKitCenter(center);" : "*center = spKitCenter(*center);") : "",
+      pick(
+        glsl ? "center = spKitCenter(center);" : "*center = spKitCenter(*center);",
+        glsl ? "center = spRigCenter(center);" : "*center = spRigCenter(*center);",
+      ),
     );
 }
 
 // Captured and file toys.
-export const MODIFIER = { glsl: variant(GLSL, false, "glsl"), wgsl: variant(WGSL, false, "wgsl") };
+export const MODIFIER = { glsl: variant(GLSL, "plain", "glsl"), wgsl: variant(WGSL, "plain", "wgsl") }; // prettier-ignore
 // Generated toys (they carry the splatAnim stream).
 export const MODIFIER_KIT = {
-  glsl: variant(GLSL, true, "glsl"),
-  wgsl: variant(WGSL, true, "wgsl"),
+  glsl: variant(GLSL, "kit", "glsl"),
+  wgsl: variant(WGSL, "kit", "wgsl"),
+};
+// Captured toys with a rig (they carry the splatPart stream).
+export const MODIFIER_RIG = {
+  glsl: variant(GLSL, "rig", "glsl"),
+  wgsl: variant(WGSL, "rig", "wgsl"),
 };
 
 // ---- CPU driver -------------------------------------------------------------
@@ -897,6 +989,7 @@ export class EffectDriver {
     ];
     this.pokeSlot = 0;
     this.magnet = { point: [0, 0, 0], target: [0, 0, 0], intensity: 0, held: false };
+    this.grab = { on: false, held: false, anchor: [0, 0, 0], radius: 1, pull: [0, 0, 0], goal: [0, 0, 0], from: [0, 0, 0], releaseAt: 0 }; // prettier-ignore
     this.dissolve = { start: 0, releaseFrom: 0, releaseAt: -1, wasOn: false };
     this.drop = { on: false, start: 0, gravity: [0, -1, 0], recallAt: -1, floor: 1 };
   }
@@ -916,10 +1009,31 @@ export class EffectDriver {
     if (effects.twist.on && effects.twist.wobble > 0) return true;
     if (this.pokes.some((p) => time - p[3] < 6)) return true;
     if (this.magnet.held || this.magnet.intensity > 0.001) return true;
+    if (this.grab.on) return true;
     if (this.dissolve.releaseAt >= 0 && time - this.dissolve.releaseAt < 1.2) return true;
     if (this.drop.on && time - this.drop.start < 8) return true;
     if (this.drop.recallAt >= 0 && time - this.drop.recallAt < 1.2) return true;
     return false;
+  }
+
+  // Grab: `anchor` is the grabbed point (world), `radius` how much of the
+  // toy follows it. grabTo() sets the pull (a world vector); grabEnd()
+  // lets go, and the toy springs back with a few wobbles.
+  grabStart(anchor, radius) {
+    this.grab = { ...this.grab, on: true, held: true, anchor: anchor.slice(), radius, pull: [0, 0, 0], goal: [0, 0, 0] }; // prettier-ignore
+  }
+
+  grabTo(pull) {
+    if (this.grab.held) this.grab.goal = pull.slice();
+  }
+
+  grabEnd(time) {
+    const g = this.grab;
+    if (!g.held) return 0;
+    g.held = false;
+    g.releaseAt = time;
+    g.from = g.pull.slice();
+    return Math.hypot(...g.from) / g.radius;
   }
 
   startDrop(time, gravity, floor) {
@@ -1021,6 +1135,21 @@ export class EffectDriver {
     if (!m.held && m.intensity < 0.001) m.intensity = 0;
     u.uSpMag = [m.point[0], m.point[1], m.point[2], m.intensity];
     u.uSpMagP = [fx.magnet.strength, (0.15 + 0.85 * fx.magnet.radius) * R, 0, 0];
+
+    // Grab: the pull follows the pointer closely while held; after release
+    // it swings back through the rest pose and settles.
+    const gr = this.grab;
+    if (gr.on && gr.held) {
+      const k = 1 - Math.exp(-dt / 0.05);
+      for (let i = 0; i < 3; i++) gr.pull[i] += (gr.goal[i] - gr.pull[i]) * k;
+    } else if (gr.on) {
+      const s = Math.max(0, time - gr.releaseAt);
+      const f = Math.exp(-s * 4.5) * Math.cos(s * 19);
+      for (let i = 0; i < 3; i++) gr.pull[i] = gr.from[i] * f;
+      if (s > 1.6) gr.on = false;
+    }
+    u.uSpGrab = [gr.anchor[0], gr.anchor[1], gr.anchor[2], gr.radius];
+    u.uSpGrabD = [gr.pull[0], gr.pull[1], gr.pull[2], gr.on ? 1 : 0];
 
     // Twist.
     if (fx.twist.on && fx.twist.amount !== 0) {

@@ -6,8 +6,8 @@
 //   node tools/sound-audit.mjs --all    # also one line per toy
 //   node tools/sound-audit.mjs --json   # everything as JSON
 //
-// "Own action" means a kit recipe with an action (captured and procedural
-// toys, and kit toys without one, only hop). "Own sound" means an entry in
+// "Own action" means a kit recipe or a scan rig (src/rigs.js) with an action
+// (the other toys only hop). "Own sound" means an entry in
 // src/toy-sounds.js built from the voice library. Exits non-zero when a toy
 // has no sound.
 
@@ -15,6 +15,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { TOYS } from "../src/toys.js";
 import { TOY_SOUNDS } from "../src/toy-sounds.js";
+import { RIGS } from "../src/rigs.js";
 import { VOICE_NAMES, specFor } from "../src/voices.js";
 
 const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
@@ -25,15 +26,15 @@ const voicesIn = (spec) => [...JSON.stringify(spec ?? null).matchAll(/"voice":"(
 const rows = [];
 for (const t of TOYS) {
   let action = null;
-  let rig = t.rig ? "rig" : null;
+  const rig = RIGS[t.id] || null;
   if (t.kind === "kit") {
     const r = (await import(`../src/packs/${t.pack}.js`)).RECIPES[t.id];
     if (r?.action?.key) {
       const type = r.controls?.find((c) => c.key === r.action.key)?.type || "?";
       action = `${r.action.key} (${type})`;
     }
-  } else if (t.rig?.action?.key) {
-    action = `${t.rig.action.key} (rig)`;
+  } else if (rig?.action?.key) {
+    action = `${rig.action.key} (rig)`;
   }
   const spec = TOY_SOUNDS[t.id];
   const toggle = spec && specFor(spec, true) !== specFor(spec, false);
@@ -43,7 +44,7 @@ for (const t of TOYS) {
     kind: t.kind,
     verdict: plan[t.id]?.v || "?",
     action,
-    rig,
+    rig: !!rig,
     sound: spec ? [...new Set(voicesIn(spec))].join("+") : null,
     toggle,
   });

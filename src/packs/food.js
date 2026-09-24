@@ -1771,6 +1771,8 @@ export const RECIPES = {
 
   "gummy-bear": {
     alive: true,
+    // Drag it to stretch it; let go and it springs back (src/player.js).
+    grab: { radius: 0.55, max: 0.9 },
     options: [
       {
         key: "color",

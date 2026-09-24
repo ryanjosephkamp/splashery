@@ -672,6 +672,68 @@ test.describe("Splashery v3 engine (WebGL2)", () => {
     expect(problems).toEqual([]);
   });
 
+  test("a scan rig moves a part of a captured toy: the cat statue turns its head", async ({
+    page,
+  }) => {
+    const problems = watchConsole(page);
+    await loadApp(page);
+    await page.click(".toy-card[data-toy='cat-statue']");
+    await waitForToy(page, "Cat statue");
+    await expect(page.locator("#toy-action")).toHaveText("Look around");
+    // No idle turntable, so only the rig moves.
+    await page.evaluate(() => window.__splashery.player.camera.setTurntable(false));
+    const canvas = page.locator("#stage");
+    const rest = await canvas.screenshot({ type: "png" });
+    await page.click("#toy-action");
+    await page.waitForTimeout(450);
+    const turned = await canvas.screenshot({ type: "png" });
+    await page.waitForTimeout(3000);
+    const back = await canvas.screenshot({ type: "png" });
+    const moved = await countDifferentPixels(page, rest, turned);
+    expect(moved).toBeGreaterThan(1500);
+    // Only the head and tail move, and they come back.
+    expect(await countDifferentPixels(page, rest, back)).toBeLessThan(moved / 4);
+    expect(problems).toEqual([]);
+  });
+
+  test("a stretchy toy stretches when dragged and springs back; a drag off it orbits", async ({
+    page,
+  }) => {
+    const problems = watchConsole(page);
+    await loadApp(page);
+    await page.click(".chip[data-category='food']");
+    await page.click(".toy-card[data-toy='gummy-bear']");
+    await waitForToy(page, "Gummy bear");
+    const canvas = page.locator("#stage");
+    const box = await canvas.boundingBox();
+    const yaw = () => page.evaluate(() => window.__splashery.player.camera.tgt.yaw);
+    const yaw0 = await yaw();
+    const rest = await canvas.screenshot({ type: "png" });
+    const x0 = box.x + box.width / 2;
+    const y0 = box.y + box.height * 0.4;
+    await page.mouse.move(x0, y0);
+    await page.mouse.down();
+    for (let i = 1; i <= 8; i++) await page.mouse.move(x0 + i * 20, y0 - i * 8);
+    await expect.poll(() => page.evaluate(() => window.__splashery.player.driver.grab.held)).toBe(true); // prettier-ignore
+    await page.waitForTimeout(400);
+    const held = await canvas.screenshot({ type: "png" });
+    expect(await countDifferentPixels(page, rest, held)).toBeGreaterThan(3000);
+    await page.mouse.up();
+    // The camera did not turn, and the bear springs back.
+    expect(await yaw()).toBeCloseTo(yaw0, 5);
+    await expect
+      .poll(() => page.evaluate(() => window.__splashery.player.driver.grab.on), { timeout: 5000 })
+      .toBe(false);
+    // A drag that starts beside the toy still orbits.
+    await page.mouse.move(box.x + 30, box.y + box.height - 60);
+    await page.mouse.down();
+    for (let i = 1; i <= 8; i++)
+      await page.mouse.move(box.x + 30 + i * 25, box.y + box.height - 60);
+    await page.mouse.up();
+    expect(Math.abs((await yaw()) - yaw0)).toBeGreaterThan(0.1);
+    expect(problems).toEqual([]);
+  });
+
   test("every toy's sound renders: audible, not clipping, under five seconds", async ({ page }) => {
     await page.goto("/tools/");
     const bad = await page.evaluate(async () => {

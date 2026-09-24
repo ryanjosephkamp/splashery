@@ -12,6 +12,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { TOYS } from "../src/toys.js";
+import { RIGS } from "../src/rigs.js";
 
 const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
 const plan = JSON.parse(fs.readFileSync(path.join(root, "tools/toy-plan.json"), "utf8")).toys;
@@ -57,6 +58,8 @@ for (const t of TOYS) {
     const mod = await import(`../src/packs/${t.pack}.js`);
     const r = mod.RECIPES[t.id];
     if (r?.action?.label) now = `tap: ${r.action.label}`;
+  } else if (RIGS[t.id]?.action?.label) {
+    now = `tap: ${RIGS[t.id].action.label} (rig)`;
   }
   rows.push({
     id: t.id,

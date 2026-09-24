@@ -3,13 +3,54 @@
 The current state and the next phase. The session that finishes a phase updates this file. The
 ground rules are in [CLAUDE.md](../CLAUDE.md).
 
-## Current state (2026-09-24, after Phase C2)
+## Current state (2026-09-24, after Phase D)
 
 - Phase A is done: splashery PR #13 and homepage PR #33 in
-  `ryanjosephkamp/ryanjosephkamp.github.io`, both merged. Phase B (PR #17) and Phase C1 (PR #18) are
-  merged.
-- Phase C2 is done in splashery PR #19 (branch `claude/phase-c2-slo8ce`). Check that it is merged
-  before starting D.
+  `ryanjosephkamp/ryanjosephkamp.github.io`, both merged. Phases B (PR #17), C1 (PR #18) and C2 (PR
+  #19) are merged.
+- Phase D is done in splashery PR #20 (branch `claude/phase-d-kwz1xa`). Check that it is merged
+  before starting E1.
+- **Sound engine (D).**
+  - `src/voices.js` is a voice library of about 80 synthesised voices (plucked strings with
+    Karplus-Strong, modal bells, bars, glass and wood, drums, buzz, quack, squawk, mew, hoot, ribbit
+    and cheer formant voices, crunch, rattle, patter, crackle, splash, wind, roar, engines, horns,
+    theremin, pads) and a note sequencer (`notes: "C5 E5+G5 -"`, `step`, `strum`). Its header
+    documents the spec format. The old shared names ("chime", "pop" and so on) still play exactly as
+    before, and the effect switches and tools still use them.
+  - `src/toy-sounds.js` gives all 283 shelf toys their own spec, built from the Sound lines in
+    TOY-PLAN.md, with `{ on, off }` halves for the 32 toggles. Recipes no longer carry `sound`
+    (every recipe `sound:` field was removed). Hop-only toys play their own sound too.
+  - Each voice has a measured `LEVEL` (`node tools/sound-check.mjs --voices`), and the output goes
+    through a limiter, so toys are about equally loud and layers never clip.
+  - `tools/sound-check.mjs` renders every sound offline in headless Chromium and checks level,
+    clipping and length; `--sheet=` draws spectrogram pages (in `tests/screenshots/d-sounds*.png`),
+    `--wav=` writes WAV files. `tools/sound-audit.mjs` lists toys without their own action or sound
+    (none lack a sound; 179 still only hop) and voice usage.
+  - No samples were used: the quack, the crowd cheer and the alarm bells are synthesised. Nothing
+    was added to CREDITS.md.
+  - The owner can audition every sound on a private page, the "Splashery Sound Board":
+    https://claude.ai/artifact/VE9XCTxH3djST6dGb6ZAkj (built from the same voices.js and
+    toy-sounds.js; rebuild and republish it if the sounds change).
+- **Taps that know where they landed (D).** A tap on the toy passes the picked point, in the
+  recipe's coordinates, to `action.at(point, c)`, which may fire another control and pick an item;
+  drive() sees `info.tap = { point, key, pick, time, n }`. A sound spec's tune plays only note
+  `pick` for such a tap. The xylophone uses it: tap a bar and the mallet strikes that bar and plays
+  its note. Embeds pass the point too. `tools/effect-strip.mjs --at=x,y,z` taps a point.
+- **Scan rigs (D).** `src/rigs.js` gives captured toys `parts` made of soft ellipsoid regions (world
+  coordinates) plus `controls`, `action` and `drive()` like a recipe. At load a GSplatProcessor
+  (`src/rig.js`) writes each splat's part and weight into a `splatPart` instance stream, and the
+  modifier's rig variant (`MODIFIER_RIG` in `src/effects.js`) moves splats with their part, blended
+  by the weight. `out.body` (squash, offset, rotation) works for scans too. `?rig=show` tints the
+  parts, for placing regions. Two rigs: the cat statue (head turn, tail flick) and the real rubber
+  duck (squeeze and spring back, body only). Option (b) from the old outline, a kit-built add-on
+  drawn as a second splat entity (a lantern flame, a camera flash), was not built.
+- **Drag-to-stretch (D).** A recipe (or rig) with `grab: { radius, max }` is stretchy: with the
+  Orbit tool, a drag that starts on the toy pulls the grabbed part (a Gaussian falloff in the
+  modifier, `uSpGrab`) and it springs back with a few wobbles when let go (EffectDriver `grabStart`,
+  `grabTo`, `grabEnd`); a drag that starts beside the toy still orbits. Only the gummy bear has it.
+  Letting go of a real stretch plays the toy's sound.
+- Plan updates: the cat statue, the real rubber duck and the gummy bear are now `keep` with
+  `improved` entries, and the xylophone has an `improved` entry. 101 toys are keep, 3 more, 179 new.
 - **Clearer effects (C2).** All 33 toys are now `"v": "keep"` in `tools/toy-plan.json`, and each has
   an `improved` entry saying what changed (TOY-PLAN.md shows it as "Improved"). The only toys still
   marked "more" are the four touch and drag toys for Phase F.
@@ -164,6 +205,18 @@ Known issues carried forward:
     existed at low Puff).
   - Scenes saved with the submarine's old `scope=0` load with the periscope up.
   - The rubber duck and the guitar still need their own sounds (Phase D): a quack and real music.
+    (Done in D.)
+- New in D:
+  - No person has listened to the sounds yet. They were checked by level, length and spectrogram
+    only; the owner's review on the sound board may change many of them.
+  - Sounds for toys that only hop were designed for their planned effect (TOY-PLAN.md), so their
+    timing will need matching when E1–E6 build those effects.
+  - Rigs and grab were tested in WebGL2 only; the WGSL versions compile paths were not run (no
+    WebGPU adapter in the sandbox).
+  - On the gummy bear a one-finger drag on the bear stretches it instead of turning the view, and a
+    double tap on the bear does not reset the camera (a double tap beside it does).
+  - A rig part turns rigidly inside its region and bends at the soft edge, so a large turn smears
+    the neck a little. The cat's regions were placed by eye with `?rig=show`.
 
 ## Phases
 
@@ -185,17 +238,18 @@ that tool is not available, ask the owner to press "Copy my marks and notes" on 
 the text. A "change" note overrides the proposal in `tools/toy-plan.json`; update the JSON to match.
 If the plan JSON changes, the page can be republished from it (`node tools/toy-plan.mjs --json`).
 
-| Phase | What                                                                                                                                                      | Repo(s)   |
-| ----- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- |
-| A     | Done: sharpness, Detail setting, embeds, honeybee, thumbnail retry, homepage embed.                                                                       | both      |
-| B     | Done: mobile shelf grid (drag up into a full grid like desktop), thumbnail labels that don't cut off, and a "Find your own splat" help panel.             | splashery |
-| C1    | Done: visual fixes from the review (26 toys: vintage camera, boombox, storybook, comet, Statue of Liberty crown, horse, cookie, sports-ball textures, …). | splashery |
-| C2    | Done: clearer or more dramatic effects for 33 toys the owner found subtle (bacteriophage, Big Ben, bus, octopus, fireworks, …).                           | splashery |
-| **D** | Effects and sound engine: a unique sound per toy, scan rigs (moving parts for captured toys), taps that know where they landed, drag-to-stretch.          | splashery |
-| E1–E6 | New tap effects for the 181 toys marked new (most only hop today), in six waves by category (see TOY-PLAN.md), each with its own sound.                   | splashery |
-| F     | Touch and drag interaction: a solvable puzzle cube, a chess set that plays a real game, a stretchy gummy bear, a draggable Newton's cradle, bricks.       | splashery |
-| G     | AI image-to-3D trial with `HF_TOKEN`.                                                                                                                     | splashery |
-| H     | Later: the gallery, multi-toy scenes, a liquid pour, the draw-order fix, more scans, more instruments, and the final homepage embed(s).                   | both      |
+| Phase  | What                                                                                                                                                      | Repo(s)   |
+| ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- |
+| A      | Done: sharpness, Detail setting, embeds, honeybee, thumbnail retry, homepage embed.                                                                       | both      |
+| B      | Done: mobile shelf grid (drag up into a full grid like desktop), thumbnail labels that don't cut off, and a "Find your own splat" help panel.             | splashery |
+| C1     | Done: visual fixes from the review (26 toys: vintage camera, boombox, storybook, comet, Statue of Liberty crown, horse, cookie, sports-ball textures, …). | splashery |
+| C2     | Done: clearer or more dramatic effects for 33 toys the owner found subtle (bacteriophage, Big Ben, bus, octopus, fireworks, …).                           | splashery |
+| D      | Done: a voice library and a sound per toy, scan rigs, taps that know where they landed, drag-to-stretch, sound check and audit tools.                     | splashery |
+| **E1** | New tap effects for the scans and shapes marked new (33 toys), using scan rigs; the first of six waves (see TOY-PLAN.md).                                 | splashery |
+| E2–E6  | New tap effects for the other toys marked new, in five more waves by category (see TOY-PLAN.md), each with its own sound.                                 | splashery |
+| F      | Touch and drag interaction: a solvable puzzle cube, a chess set that plays a real game, a stretchy gummy bear, a draggable Newton's cradle, bricks.       | splashery |
+| G      | AI image-to-3D trial with `HF_TOKEN`.                                                                                                                     | splashery |
+| H      | Later: the gallery, multi-toy scenes, a liquid pour, the draw-order fix, more scans, more instruments, and the final homepage embed(s).                   | both      |
 
 What the owner asked for across the board (2026-09-23):
 
@@ -213,48 +267,34 @@ What the owner asked for across the board (2026-09-23):
 - Stay respectful: nothing destructive or disrespectful on the White House or the Washington
   Monument, and no fighting or gore (the Colosseum gets a chariot race, not gladiators).
 
-## Phase D in detail: effects and sound engine
+## Phase E1 in detail: scans and shapes
 
-Before starting, check the owner's marks (see above) for any later change.
+Before starting, check the owner's marks (see above) for any later change, and the owner's notes on
+the sound board if they left any (ask).
 
-1. **Sound library.** `src/sound.js` synthesises 12 shared sounds and a recipe names one in
-   `action.sound`. The call sites are in `src/app.js` (search `sound.play`). Add a voice library
-   (plucked string, bell, buzz, squeak and quack formants, crunch, splash, drum hits, a small note
-   sequencer for tunes) and let a recipe declare `action.sound` as a small spec, for example
-   `{ voice: "bell", pitch: 0.8, decay: 1.2 }`. Old names must keep working.
-2. **One sound per toy.** Every toy's Sound line is in TOY-PLAN.md. Start with the toys whose effect
-   is kept (98 after C2). Twins must sound different. Add a test that every toy has a sound and no
-   two share the exact same spec. Embeds stay silent.
-3. **Samples.** CC0 samples are allowed only where synthesis does badly (a real quack, an alarm
-   bell, a crowd). Record each one in CREDITS.md. Check the licence on the live source page.
-4. **Scan rigs, taps that know where they landed, drag-to-stretch and the audit tool.** See the
-   outline below. Each can be its own PR in a stack (`-<part>` suffixes) if the phase gets large.
+1. **Scans (29 marked new).** Build each scan's planned effect (TOY-PLAN.md, wave E1) as a rig in
+   `src/rigs.js`: region parts for heads, wings, legs, lids and trunks; `out.body` for squeezes,
+   hops and rocks. Place regions with `?rig=show` and a density map of the splat centres; check each
+   effect with `tools/effect-strip.mjs`. Several ideas need things rigs cannot do yet:
+   - light and glow (the gnome's lantern, the lantern's flame, the camera's flash, the cookie's jam
+     heart): add a per-part tint or glow to the rig variant, or build option (b), a small kit-built
+     add-on drawn as a second splat entity;
+   - many small pieces (raspberry drupelets, pomegranate seeds, crumbs): a rig allows 15 parts and
+     12 regions, so use a whole-body shader effect or add-ons instead;
+   - the chess set's game is Phase F.
+2. **Shapes (4).** The blob, donut, knot and planet are procedural; give them recipe-like actions.
+3. **Sounds.** Each toy already has a sound. Re-time it to the new effect and keep specs unique.
+4. Mark each finished toy `"v": "keep"` with an `improved` entry and regenerate TOY-PLAN.md.
 
-**Done when:** every toy plays its own sound on tap (or the PR lists which do not, and why), the new
-test passes, all tests pass and prettier is clean.
+**Done when:** every E1 toy has its own tap effect (or the PR lists which do not, and why), all
+tests pass and prettier is clean.
 
 ## Phases C–H (outline)
 
 - **C1, visual fixes.** Done (see Current state).
 - **C2, clearer effects.** Done (see Current state). `tools/effect-strip.mjs` is the tool for
   checking any new tap effect by eye.
-- **D, effects and sound engine.**
-  - Sound: today there are 12 shared synthesized sounds (`src/sound.js`) and toys pick one by name.
-    Build a larger voice library (plucked strings, bells, buzz, squeak and quack formants, crunch,
-    splash, drum hits, a note sequencer for tunes), let each toy declare its own sound as a small
-    spec with pitch and timbre, and add a test that every toy has one and no two share the exact
-    same spec. CC0 samples (for example Kenney's CC0 packs) are allowed for the few sounds synthesis
-    does badly; ask the owner first (see Decisions). Embeds stay silent.
-  - Scan rigs: captured toys are one splat cloud with no parts. Options: (a) region parts, where a
-    few boxes or spheres per toy in `src/toys.js` sort splats into parts at load (an instance stream
-    like `paintColor`), so wings, heads, legs and tails can move; (b) small kit-built add-ons (a
-    lantern flame, a camera flash) drawn as a second splat entity; (c) whole-body effects (squash,
-    crumble, glow) through the modifier. Most scan ideas in TOY-PLAN.md need (a) or (b).
-  - Taps that know where they landed: pass the picked point to the action so a recipe can choose
-    what happens (turn this layer, move this piece).
-  - Drag-to-stretch: the Magnet effect already pulls splats; add a grab mode with a springy release
-    (gummy bear, then others).
-  - An audit tool or test listing toys without their own action or sound.
+- **D, effects and sound engine.** Done (see Current state).
 - **E1–E6, new effects.** One wave per session (about 30–45 toys each), following TOY-PLAN.md. Run
   `check-packs`, a contact sheet and `make-thumbs` for touched packs as usual. Thumbnails take about
   18 s per toy under SwiftShader; render only the toys you changed.
