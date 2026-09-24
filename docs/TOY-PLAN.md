@@ -14,17 +14,18 @@ Proposals below are suggestions; the owner may change them.
 - **keep** (the owner likes the effect): 65.
 - **more** (has an effect; make it clearer or more dramatic): 37.
 - **new** (needs its own effect): 181.
-- Visual fixes: 16. Touch or drag interaction asked for: 5.
+- Visual fixes: 26. Touch or drag interaction asked for: 5.
 
 ## By phase
 
 - **C, polish.** Visual fixes: Cinnamon star cookie, Wooden elephant, Vintage camera, Boombox, Horse
-  statue, Squash ball, Hockey puck, Flying disc, Comet, Lava lamp, Storybook, Decorated tree, Diya,
-  Sports car, Tractor, Statue of Liberty. Make the effect clearer or more dramatic: Bacteriophage,
-  Neuron, DNA, Amethyst geode, Crystal ball, Eye, Cherry blossom, Ice cream, Coffee, Rubber duck,
-  Kite, Lorenz attractor, Klein bottle, Wizard's orb, Jellyfish, Pufferfish, Snail, Octopus,
-  Fireworks, Decorated tree, Diya, Acoustic guitar, Snare drum, Hot-air balloon, Bus, Jet airliner,
-  Sailboat, Submarine, Bicycle, Big Ben, Castle, Pagoda, Windmill.
+  statue, Basketball, Soccer ball, American football, Tennis ball, Baseball, Softball, Rugby ball,
+  Volleyball, Cricket ball, Medicine ball, Squash ball, Hockey puck, Flying disc, Comet, Lava lamp,
+  Storybook, Decorated tree, Diya, Sports car, Tractor, Statue of Liberty. Make the effect clearer
+  or more dramatic: Bacteriophage, Neuron, DNA, Amethyst geode, Crystal ball, Eye, Cherry blossom,
+  Ice cream, Coffee, Rubber duck, Kite, Lorenz attractor, Klein bottle, Wizard's orb, Jellyfish,
+  Pufferfish, Snail, Octopus, Fireworks, Decorated tree, Diya, Acoustic guitar, Snare drum, Hot-air
+  balloon, Bus, Jet airliner, Sailboat, Submarine, Bicycle, Big Ben, Castle, Pagoda, Windmill.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** Cactus, Strawberry, Heart cookie, Honeybee, Jelly blob,
@@ -214,21 +215,35 @@ Proposals below are suggestions; the owner may change them.
 
 - **Basketball** (`basketball`). Now: hops. Plan: new effect (E6).
   - Owner: Balls look good. Bouncing is fine but each should bounce differently.
+  - Fix: Check the texture: it should read as pebbled rubber with clean black channels, not grain.
   - Effect: Dribble: fast low bounces, then a spin on a fingertip.
   - Sound: Hollow basketball boing.
 - **Soccer ball** (`soccer-ball`). Now: hops. Plan: new effect (E6).
+  - Fix: Check the texture: smooth panels with clean seams, not speckle.
   - Effect: Keepy-uppy: three small kicks with spin.
   - Sound: Firm thump.
 - **American football** (`american-football`). Now: hops. Plan: new effect (E6).
+  - Owner: The owner (2026-09-24): some sports balls look grainy rather than realistic; the tennis
+    ball should be fuzzy and the American football should look like leathered pigskin. Look at the
+    other balls too.
+  - Fix: Looks grainy, not like leather. Give it a pebbled pigskin leather texture (fine bumps,
+    subtle sheen, darker seams and crisp white laces).
   - Effect: A tight spiral spin in place.
   - Sound: Leathery whoosh.
 - **Tennis ball** (`tennis-ball`). Now: hops. Plan: new effect (E6).
+  - Owner: The owner (2026-09-24): some sports balls look grainy rather than realistic; the tennis
+    ball should be fuzzy and the American football should look like leathered pigskin. Look at the
+    other balls too.
+  - Fix: Should look fuzzy. Make the felt soft and fibrous (fine hair-like noise, slightly blurred
+    edge) with a clean white seam.
   - Effect: Fast high bounce with the fuzz fluffing out.
   - Sound: Pock.
 - **Baseball** (`baseball`). Now: hops. Plan: new effect (E6).
+  - Fix: Check the texture: smooth white leather with crisp red stitches, not grain.
   - Effect: Curveball: it spins hard and swerves.
   - Sound: Bat crack.
 - **Softball** (`softball`). Now: hops. Plan: new effect (E6).
+  - Fix: Check the texture: smooth leather with crisp red stitches, not grain.
   - Effect: Underhand arc and a softer thud.
   - Sound: Muffled thud.
 - **Beach ball** (`beach-ball`). Now: hops. Plan: new effect (E6).
@@ -238,9 +253,11 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Tiny chip hop and a spin-back.
   - Sound: Click of a club.
 - **Rugby ball** (`rugby-ball`). Now: hops. Plan: new effect (E6).
+  - Fix: Check the texture: pebbled grip, not grain.
   - Effect: Tumbles end over end with an odd bounce.
   - Sound: Dull thud.
 - **Volleyball** (`volleyball`). Now: hops. Plan: new effect (E6).
+  - Fix: Check the texture: smooth leather panels with clean seams, not speckle.
   - Effect: A set then a spike straight down.
   - Sound: Slap.
 - **Water polo ball** (`water-polo-ball`). Now: hops. Plan: new effect (E6).
@@ -250,6 +267,7 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Rapid tiny bounces getting faster.
   - Sound: Tik-tik-tik.
 - **Cricket ball** (`cricket-ball`). Now: hops. Plan: new effect (E6).
+  - Fix: Check the texture: polished red leather with a shine and a clear raised seam.
   - Effect: Seam-up spin and a skid.
   - Sound: Crisp leather knock.
 - **Bowling ball** (`bowling-ball`). Now: hops. Plan: new effect (E6).
@@ -265,6 +283,7 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Squashes hard on a bounce.
   - Sound: Rubbery bwong.
 - **Medicine ball** (`medicine-ball`). Now: hops. Plan: new effect (E6).
+  - Fix: Check the texture: matte rubber grip, not grain.
   - Effect: Barely lifts and lands with a heavy squash.
   - Sound: Heavy thud.
 - **Lacrosse ball** (`lacrosse-ball`). Now: hops. Plan: new effect (E6).
@@ -630,8 +649,8 @@ Proposals below are suggestions; the owner may change them.
   - Sound: Leafy rustle.
 - **Pine tree** (`pine`). Now: hops. Plan: new effect (E4).
   - Owner: Christmas lights and a star appear.
-  - Effect: Owner's idea: lights and a star appear. (Note: the decorated tree already does lights;
-    alternative: it shakes off a dusting of snow.)
+  - Effect: Shakes off a dusting of snow (approved instead of lights, which the decorated tree
+    already has).
   - Sound: Soft jingle.
 - **Palm tree** (`palm`). Now: hops. Plan: new effect (E4).
   - Owner: Tap it and the coconuts fall.
