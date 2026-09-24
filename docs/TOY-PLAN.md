@@ -10,9 +10,9 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 283 toys. 98 have a tap action today; the other 185 only hop.
-- **keep** (the owner likes the effect): 65.
-- **more** (has an effect; make it clearer or more dramatic): 37.
+- 283 toys. 102 have a tap action today; the other 181 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 98.
+- **more** (has an effect; make it clearer or more dramatic): 4.
 - **new** (needs its own effect): 181.
 - Visual fixes: 0 open, 26 done. Touch or drag interaction asked for: 5.
 
@@ -22,11 +22,11 @@ Proposals below are suggestions; the owner may change them.
   Vintage camera, Boombox, Horse statue, Basketball, Soccer ball, American football, Tennis ball,
   Baseball, Softball, Rugby ball, Volleyball, Cricket ball, Medicine ball, Squash ball, Hockey puck,
   Flying disc, Comet, Lava lamp, Storybook, Decorated tree, Diya, Sports car, Tractor, Statue of
-  Liberty. Make the effect clearer or more dramatic: Bacteriophage, Neuron, DNA, Amethyst geode,
-  Crystal ball, Eye, Cherry blossom, Ice cream, Coffee, Rubber duck, Kite, Lorenz attractor, Klein
-  bottle, Wizard's orb, Jellyfish, Pufferfish, Snail, Octopus, Fireworks, Decorated tree, Diya,
-  Acoustic guitar, Snare drum, Hot-air balloon, Bus, Jet airliner, Sailboat, Submarine, Bicycle, Big
-  Ben, Castle, Pagoda, Windmill.
+  Liberty. Effects to make clearer or more dramatic, still open: none. Done in C2: Bacteriophage,
+  Neuron, DNA, Amethyst geode, Crystal ball, Eye, Cherry blossom, Ice cream, Coffee, Rubber duck,
+  Kite, Lorenz attractor, Klein bottle, Wizard's orb, Jellyfish, Pufferfish, Snail, Octopus,
+  Fireworks, Decorated tree, Diya, Acoustic guitar, Snare drum, Hot-air balloon, Bus, Jet airliner,
+  Sailboat, Submarine, Bicycle, Big Ben, Castle, Pagoda, Windmill.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** Cactus, Strawberry, Heart cookie, Honeybee, Jelly blob,
@@ -333,10 +333,12 @@ Proposals below are suggestions; the owner may change them.
   - Owner: Needs a special effect.
   - Effect: Sparks of light race across the folds (a thought).
   - Sound: Electric crackle and a ding.
-- **Eye** (`eye`). Now: tap: Shine a light. Plan: more.
+- **Eye** (`eye`). Now: tap: Blink. Plan: keep.
   - Owner: Pupil dilation is cool but underwhelming. Let the eye look around by itself, and use a
     different tap animation.
   - Effect: Idle: the eye looks around. Tap: it blinks, looks at you and the pupil snaps small.
+  - Improved: C2: it glances around by itself. A tap blinks (new lids), turns it to look at you and
+    snaps the pupil small (about 2.5 s).
   - Sound: Soft blink swish.
 - **Lungs** (`lungs`). Now: hops. Plan: new effect (E3).
   - Owner: Expand and contract like lungs.
@@ -531,10 +533,12 @@ Proposals below are suggestions; the owner may change them.
   - Owner: Looks good; pick an effect.
   - Effect: Spikes wave and it splits into copies that fade away.
   - Sound: Squelchy pop.
-- **Bacteriophage** (`bacteriophage`). Now: tap: Inject DNA. Plan: more.
+- **Bacteriophage** (`bacteriophage`). Now: tap: Inject DNA. Plan: keep.
   - Owner: Tapping does nothing visible. Upgrade it.
   - Effect: Make the injection obvious: the legs splay, the sheath contracts a lot further and a
     glowing DNA strand shoots out of the tail.
+  - Improved: C2: the legs swing out, the sheath snaps to about half its length, the tail pokes
+    through the plate and a glowing DNA strand coils out, then fades (about 4.5 s).
   - Sound: Spring-loaded thunk and a squirt.
 - **Bacterium** (`bacterium`). Now: hops. Plan: new effect (E3).
   - Owner: Needs an effect.
@@ -545,9 +549,11 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Deforms into a sickle shape (as in sickle-cell disease at low oxygen), then relaxes back
     to a disc.
   - Sound: Soft stretchy squeak.
-- **Neuron** (`neuron`). Now: tap: Fire a signal. Plan: more.
+- **Neuron** (`neuron`). Now: tap: Fire a signal. Plan: keep.
   - Owner: Decent effect but should be more dramatic.
   - Effect: A bright pulse runs from the dendrites down the whole axon and bursts at the terminals.
+  - Improved: C2: a bright spark runs from the cell body down the whole axon and bursts into light
+    at the terminals (about 2 s).
   - Sound: Zap and a rising crackle.
 - **Astrocyte** (`astrocyte`). Now: hops. Plan: new effect (E3).
   - Owner: Needs an effect; looks good.
@@ -557,9 +563,11 @@ Proposals below are suggestions; the owner may change them.
   - Owner: Show some process going on inside, like replication.
   - Effect: Cell division: the nucleus splits and the cell pinches into two, then rejoins.
   - Sound: Gloopy stretching pop.
-- **DNA** (`dna`). Now: tap: Unzip or zip. Plan: more.
+- **DNA** (`dna`). Now: tap: Unzip and zip. Plan: keep.
   - Owner: Unzip even further, then zip back up. Almost perfect otherwise.
   - Effect: Unzips all the way, bases light up in pairs, then zips back.
+  - Improved: C2: a tap unzips it almost to the foot, the bases light up in pairs as the fork
+    passes, then it zips back up (about 5.5 s).
   - Sound: Zipper sound.
 - **White blood cell** (`white-blood-cell`). Now: hops. Plan: new effect (E3).
   - Owner: Needs an effect; looks good.
@@ -626,9 +634,11 @@ Proposals below are suggestions; the owner may change them.
 - **Emerald** (`emerald`). Now: hops. Plan: new effect (E2).
   - Effect: Green light runs along the step cuts.
   - Sound: Soft glassy chime.
-- **Amethyst geode** (`amethyst-geode`). Now: tap: Open or close. Plan: more.
+- **Amethyst geode** (`amethyst-geode`). Now: tap: Open or close. Plan: keep.
   - Owner: Really cool.
   - Effect: The geode opens wider and the crystals glow violet.
+  - Improved: C2: each time it opens, the halves swing wider and the crystals glow violet with
+    twinkling tips, then settle (about 4 s).
   - Sound: Stone crack and a chime.
 - **Sapphire** (`sapphire`). Now: hops. Plan: new effect (E2).
   - Effect: A star shimmer (asterism) glides across it.
@@ -642,9 +652,11 @@ Proposals below are suggestions; the owner may change them.
 - **Pearl** (`pearl`). Now: tap: Open or close. Plan: keep.
   - Owner: Really cool.
   - Sound: Soft round clink.
-- **Crystal ball** (`crystal-ball`). Now: tap: Gaze into the ball. Plan: more.
+- **Crystal ball** (`crystal-ball`). Now: tap: Gaze into the ball. Plan: keep.
   - Owner: Hard to tell what the effect is; make it clearer and more dramatic.
   - Effect: Mist swirls hard and a glowing shape appears inside, then fades.
+  - Improved: C2: the mist whips round and thins, and a glowing sign rises out of it and fades: a
+    star, a moon or a heart in turn (about 3.5 s).
   - Sound: Mystic shimmer.
 
 ## Nature (23)
@@ -662,9 +674,11 @@ Proposals below are suggestions; the owner may change them.
   - Owner: Tap it and the coconuts fall.
   - Effect: The coconuts fall and bounce, then regrow.
   - Sound: Two coconut bonks.
-- **Cherry blossom** (`cherry-blossom`). Now: hops. Plan: more.
+- **Cherry blossom** (`cherry-blossom`). Now: tap: Shake the blossom. Plan: keep.
   - Owner: Really cool already. Maybe all the blossoms fall off when touched.
   - Effect: All the petals fall in a flurry, then it blooms again.
+  - Improved: C2: a new tap action shakes the tree: the petals fall in a heavy flurry, the branches
+    go bare, then it blooms again (about 4.5 s).
   - Sound: Soft breeze and petal patter.
 - **Maple tree** (`maple`). Now: hops. Plan: new effect (E4).
   - Owner: Same kind of thing as the cherry blossom.
@@ -737,9 +751,11 @@ Proposals below are suggestions; the owner may change them.
 
 ## Food (27)
 
-- **Ice cream** (`ice-cream`). Now: hops. Plan: more.
+- **Ice cream** (`ice-cream`). Now: tap: Melt and refreeze. Plan: keep.
   - Owner: Really neat; I like that you can melt it. Make melting part of the tap effect.
   - Effect: Tap melts it: drips run down the cone, then it refreezes.
+  - Improved: C2: a tap melts it (the scoops slump and drips run down the cone), then it refreezes
+    (about 5 s). The Warmth slider still works.
   - Sound: Drip-drip.
 - **Watermelon** (`watermelon`). Now: hops. Plan: new effect (E5).
   - Owner: Cut it in half or into slices.
@@ -804,9 +820,11 @@ Proposals below are suggestions; the owner may change them.
 - **Boiled egg** (`egg`). Now: tap: Crack. Plan: keep.
   - Owner: Perfect.
   - Sound: Shell tap.
-- **Coffee** (`coffee`). Now: tap: Stir. Plan: more.
+- **Coffee** (`coffee`). Now: tap: Stir. Plan: keep.
   - Owner: Needs work. The cream on top could spin in a swirl on tap.
   - Effect: Latte art swirl spins; steam curls up.
+  - Improved: C2: the latte art twists into a swirl (the middle turns further than the edge) and
+    relaxes back, with a thick curl of steam.
   - Sound: Spoon stir clink.
 - **Apple** (`apple`). Now: hops. Plan: new effect (E5).
   - Owner: A bite taken out of it, or a worm comes out.
@@ -848,9 +866,11 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Bricks rearrange into a random small build (tower, bridge, animal), different each tap.
   - Sound: Brick clicks.
   - Touch or drag interaction (phase F).
-- **Rubber duck** (`rubber-duck`). Now: tap: Squeak. Plan: more.
+- **Rubber duck** (`rubber-duck`). Now: tap: Squeak. Plan: keep.
   - Owner: Effect is OK; it needs a quack.
   - Effect: Keep the effect.
+  - Improved: C2: the same squeeze and hop, now with a bob and rock that settles by about 1.8 s. The
+    quack is Phase D.
   - Sound: Rubber duck quack.
 - **Spinning top** (`spinning-top`). Now: tap: Spin it. Plan: keep.
   - Owner: Perfect.
@@ -880,9 +900,11 @@ Proposals below are suggestions; the owner may change them.
 - **Spring toy** (`spring-toy`). Now: tap: Make it walk. Plan: keep.
   - Owner: Basically perfect.
   - Sound: Springy slinky boing.
-- **Kite** (`kite`). Now: tap: Gust of wind. Plan: more.
+- **Kite** (`kite`). Now: tap: Gust of wind. Plan: keep.
   - Owner: Underwhelming; develop the animation further.
   - Effect: A big gust: the kite loops the loop and the tail whips.
+  - Improved: C2: a big gust loops the kite round while it rises, and the tail whips; the line stays
+    attached (about 3 s).
   - Sound: Wind gust and a fabric flap.
 - **Paper plane** (`paper-plane`). Now: tap: Barrel roll. Plan: keep.
   - Owner: Fine.
@@ -902,18 +924,22 @@ Proposals below are suggestions; the owner may change them.
 
 ## Maths (11)
 
-- **Lorenz attractor** (`lorenz`). Now: hops. Plan: more.
+- **Lorenz attractor** (`lorenz`). Now: tap: Race along the path. Plan: keep.
   - Owner: Spin a little more or be more dynamic; looks good when still.
   - Effect: A glowing point races along the trail, drawing a new path.
+  - Improved: C2: a new tap action sends a bright spark racing along the whole path, drawing it
+    again in light that then fades (about 3 s).
   - Sound: Chaotic warble.
 - **Möbius strip** (`mobius`). Now: hops. Plan: new effect (E3).
   - Owner: Wow, really neat. Maybe twist a little.
   - Effect: An ant-like dot walks the single side; the band twists.
   - Sound: Looping tone.
-- **Klein bottle** (`klein-bottle`). Now: hops. Plan: more.
+- **Klein bottle** (`klein-bottle`). Now: tap: Send water through. Plan: keep.
   - Owner: Not sure it has an effect. Maybe water flows through it; it already kind of does, make
     that dramatic.
   - Effect: A clear surge of water flows through the neck and round.
+  - Improved: C2: a new tap action sends a surge of rippling water along the tube and round, and the
+    glass glows (about 4 s).
   - Sound: Glug and flow.
 - **Menger sponge** (`menger-sponge`). Now: hops. Plan: new effect (E3).
   - Owner: No idea for an effect; looks good. The owner calls one of these a favourite and a likely
@@ -975,16 +1001,20 @@ Proposals below are suggestions; the owner may change them.
 - **Dragon egg** (`dragon-egg`). Now: tap: Hatch. Plan: keep.
   - Owner: Cute and perfect.
   - Sound: Crack and a tiny roar.
-- **Wizard's orb** (`wizards-orb`). Now: tap: Cast. Plan: more.
+- **Wizard's orb** (`wizards-orb`). Now: tap: Cast. Plan: keep.
   - Owner: Looks really good; develop it further to be more impressive.
   - Effect: A bigger spell: runes orbit, light bursts and sparks spiral out.
+  - Improved: C2: a bigger spell: a flash fills the glass, the swirl spins up, sparks spiral out in
+    five arms and a ring of runes rises and circles the orb (about 3 s).
   - Sound: Magic whoosh and sparkle.
 
 ## Animals (13)
 
-- **Jellyfish** (`jellyfish`). Now: tap: Swim. Plan: more.
+- **Jellyfish** (`jellyfish`). Now: tap: Swim. Plan: keep.
   - Owner: Not sure what the effect does; make it more apparent.
   - Effect: A strong pulse that jets it upward, trailing glowing tentacles.
+  - Improved: C2: one strong stroke squeezes the bell and jets it up about a third of its size,
+    trailing glowing tentacles, then it drifts down (about 3 s).
   - Sound: Soft watery whoomp.
 - **School of fish** (`fish-school`). Now: hops. Plan: new effect (E6).
   - Owner: Swim around more dynamically, like a swarm.
@@ -993,9 +1023,11 @@ Proposals below are suggestions; the owner may change them.
 - **Butterfly** (`butterfly`). Now: tap: Flutter. Plan: keep.
   - Owner: Perfect.
   - Sound: Delicate flutter.
-- **Pufferfish** (`pufferfish`). Now: tap: Poke. Plan: more.
+- **Pufferfish** (`pufferfish`). Now: tap: Poke. Plan: keep.
   - Owner: Should puff: get big, then small.
   - Effect: Inflates to a big spiky ball, then deflates.
+  - Improved: C2: it now rests slim; a tap inflates it to a big spiky ball, holds, then deflates
+    with a sputter (about 4 s).
   - Sound: Balloon inflate and a sputter.
 - **Nautilus** (`nautilus`). Now: hops. Plan: new effect (E6).
   - Owner: Enter and exit its shell.
@@ -1004,13 +1036,17 @@ Proposals below are suggestions; the owner may change them.
 - **Ladybug** (`ladybug`). Now: tap: Open the wings. Plan: keep.
   - Owner: Perfect.
   - Sound: Tiny wing buzz.
-- **Snail** (`snail`). Now: tap: Hide in the shell. Plan: more.
+- **Snail** (`snail`). Now: tap: Hide in the shell. Plan: keep.
   - Owner: Perfect, but it disappears too much when hiding; make it more elegant.
   - Effect: Keep hiding in the shell, but keep the shell clearly visible and ease in more gently.
+  - Improved: C2: it hides more gently (2.4 s): eye stalks first, then the head glides under the
+    shell and the foot slides in; the shell stays in view and rocks once.
   - Sound: Slurpy slide.
-- **Octopus** (`octopus`). Now: tap: Squirt ink. Plan: more.
+- **Octopus** (`octopus`). Now: tap: Squirt ink. Plan: keep.
   - Owner: Underwhelming; the ink should be much bigger and more dramatic.
   - Effect: A big ink cloud billows out while it jets away and back.
+  - Improved: C2: a big billowing ink cloud grows behind it while it jets up and away with its arms
+    streaming, then drifts back as the ink thins (about 4.5 s).
   - Sound: Squirt and whoosh.
 - **Starfish** (`starfish`). Now: tap: Wave the arms. Plan: keep.
   - Owner: Fine.
@@ -1039,15 +1075,19 @@ Proposals below are suggestions; the owner may change them.
   - Owner: Do more than bounce; maybe it melts.
   - Effect: Melts into a puddle, then rebuilds itself.
   - Sound: Drip and a crunchy rebuild.
-- **Fireworks** (`fireworks`). Now: tap: Launch. Plan: more.
+- **Fireworks** (`fireworks`). Now: tap: Launch. Plan: keep.
   - Owner: Outstanding. Make each launch different (like the dice), and the burst match the colour
     of the cannon that fires it.
   - Effect: Random shell types each tap; burst colour matches its tube.
+  - Improved: C2: each tap fires a different tube and shell type (peony, ring, willow or star); the
+    rocket rises from its tube and the burst takes that tube's colour.
   - Sound: Launch whistle and a boom.
-- **Decorated tree** (`decorated-tree`). Now: tap: Lights on or off. Plan: more.
+- **Decorated tree** (`decorated-tree`). Now: tap: Lights on or off. Plan: keep.
   - Owner: Lights only show very briefly; make it more dramatic.
   - Fixed: C1: a faceted gold star facing the viewer, with only a faint glow.
   - Effect: Lights come on and chase in patterns and stay on; the star glows.
+  - Improved: C2: a tap switches the lights on in a sweep up the tree, and they stay on, cycling
+    chase, ripple and steady patterns; the star gets a warm halo. A second tap turns them off.
   - Sound: Sleigh-bell jingle.
 - **Patterned egg** (`patterned-egg`). Now: tap: Spin. Plan: keep.
   - Owner: Pretty cool; keep.
@@ -1055,11 +1095,13 @@ Proposals below are suggestions; the owner may change them.
 - **Paper lantern** (`paper-lantern`). Now: tap: Swing. Plan: keep.
   - Owner: Perfect; the physics are really good.
   - Sound: Paper rustle.
-- **Diya** (`diya`). Now: tap: Blow gently. Plan: more.
+- **Diya** (`diya`). Now: tap: Light the diyas. Plan: keep.
   - Owner: Very underwhelming.
   - Fixed: C1: painted clay (dots, a red line, lotus petals) and dark amber oil with a sheen and the
     flame's reflection.
   - Effect: The flame grows and a ring of small diyas lights around it.
+  - Improved: C2: a tap makes the flame flare and grow, and eight small diyas round the rangoli
+    light one after another and stay lit.
   - Sound: Soft flame whoosh.
 - **Menorah** (`menorah`). Now: tap: Light the candles. Plan: keep.
   - Owner: Pretty much perfect.
@@ -1067,13 +1109,17 @@ Proposals below are suggestions; the owner may change them.
 
 ## Music (3)
 
-- **Acoustic guitar** (`guitar`). Now: tap: Strum. Plan: more.
+- **Acoustic guitar** (`guitar`). Now: tap: Strum. Plan: keep.
   - Owner: Looks fine; add the music.
   - Effect: Keep the strum; strings vibrate visibly.
+  - Improved: C2: the strum rocks the guitar about 13 degrees with a small hop, the strings bend and
+    vibrate one after another, and rings of light pulse out of the soundhole. Music is Phase D.
   - Sound: A real strummed chord progression (synth plucks).
-- **Snare drum** (`drum`). Now: tap: Hit. Plan: more.
+- **Snare drum** (`drum`). Now: tap: Play a roll. Plan: keep.
   - Owner: Could be more dramatic. Fast taps could play longer and faster rolls.
   - Effect: Sticks play a roll; fast repeated taps make faster, longer rolls.
+  - Improved: C2: the sticks play a roll; taps within 0.9 s of each other step up through four
+    speeds and make the roll longer (up to 3 s after the last tap).
   - Sound: Snare hits with rattle.
 - **Xylophone** (`xylophone`). Now: tap: Play a scale. Plan: keep.
   - Owner: Incredible; basically perfect.
@@ -1087,9 +1133,11 @@ Proposals below are suggestions; the owner may change them.
 - **Helicopter** (`helicopter`). Now: tap: Take off or land. Plan: keep.
   - Owner: Basically perfect.
   - Sound: Rotor chop.
-- **Hot-air balloon** (`hot-air-balloon`). Now: tap: Fire the burner. Plan: more.
+- **Hot-air balloon** (`hot-air-balloon`). Now: tap: Fire the burner. Plan: keep.
   - Owner: Could be more dramatic; maybe inflate more.
   - Effect: Burner roars, the envelope swells and it rises higher.
+  - Improved: C2: the burner roars a big flame, the envelope swells and glows warm, and the balloon
+    climbs well up, then drifts back down (4 s).
   - Sound: Burner roar.
 - **Steam train** (`steam-train`). Now: tap: Blow the whistle. Plan: keep.
   - Owner: Basically perfect.
@@ -1101,28 +1149,39 @@ Proposals below are suggestions; the owner may change them.
   - Owner: Looks really good.
   - Fixed: C1: the home camera comes closer.
   - Sound: Engine rev.
-- **Bus** (`bus`). Now: tap: Beep beep. Plan: more.
+- **Bus** (`bus`). Now: tap: Stop for passengers. Plan: keep.
   - Owner: Not sure what the effect is.
   - Effect: Stop sign swings out, lights flash, doors open.
+  - Improved: C2: the school bus stops: warning lights flash, the stop sign swings out and the doors
+    open onto a lit doorway (4.5 s). The double-decker flashes its hazard lights and opens a middle
+    door.
   - Sound: Horn beep and door hiss.
 - **Propeller plane** (`propeller-plane`). Now: tap: Loop the loop. Plan: keep.
   - Owner: Unbelievable; perfect.
   - Sound: Prop engine buzz.
-- **Jet airliner** (`jet`). Now: tap: Climb. Plan: more.
+- **Jet airliner** (`jet`). Now: tap: Climb and bank. Plan: keep.
   - Owner: Very solid; bank more to one side or the other.
   - Effect: Climbs and banks hard left then right.
+  - Improved: C2: it climbs nose up while banking hard left, then hard right (about 50 degrees each
+    way, 3.5 s).
   - Sound: Jet roar.
-- **Sailboat** (`sailboat`). Now: tap: A gust of wind. Plan: more.
+- **Sailboat** (`sailboat`). Now: tap: A gust of wind. Plan: keep.
   - Owner: Pretty good; a bit more dramatic.
   - Effect: A big gust heels it over with spray.
+  - Improved: C2: a gust heels it over twice as far with spray at the bow and stern, then it rocks
+    back upright (3.5 s).
   - Sound: Wind and water spray.
-- **Submarine** (`submarine`). Now: tap: Raise or lower the periscope. Plan: more.
+- **Submarine** (`submarine`). Now: tap: Dive and surface. Plan: keep.
   - Owner: Underwhelming that only the periscope appears and disappears.
   - Effect: Dives with bubbles, then surfaces and raises the periscope.
+  - Improved: C2: a tap dives it: the periscope drops, bubbles rush from the hull and it sinks, then
+    it surfaces and raises the periscope (5 s).
   - Sound: Sonar ping.
-- **Bicycle** (`bicycle`). Now: tap: Ring the bell. Plan: more.
+- **Bicycle** (`bicycle`). Now: tap: Ring the bell. Plan: keep.
   - Owner: Not sure what the effect is; make it more dramatic.
   - Effect: Pedals spin, the wheels turn and the bell rings clearly.
+  - Improved: C2: the bell shakes with flashing ring lines, and the wheels add five fast turns and
+    the pedals two (2.5 s).
   - Sound: Bicycle bell ring-ring.
 - **Tractor** (`tractor`). Now: tap: Chug chug. Plan: keep.
   - Owner: Perfect.
@@ -1180,23 +1239,31 @@ Proposals below are suggestions; the owner may change them.
   - Owner: No idea.
   - Effect: Solstice sunrise: the sun rises through the stones and lights them gold.
   - Sound: Low drone and a bell.
-- **Big Ben** (`big-ben`). Now: tap: Chime the bell. Plan: more.
+- **Big Ben** (`big-ben`). Now: tap: Chime the bell. Plan: keep.
   - Owner: No visible effect; make it pronounced or pick something better.
   - Effect: Hands spin to the hour, the clock face glows and the bell swings.
+  - Improved: C2: the hands spin round and land back on the real time, all four dials glow and a
+    bell swings in the now open belfry (4 s).
   - Sound: Big Ben chimes (Westminster quarters, simplified).
 - **Taj Mahal** (`taj-mahal`). Now: hops. Plan: new effect (E6).
   - Owner: Looks good; needs an effect.
   - Effect: Moonlight: the dome glows and the reflecting pool ripples.
   - Sound: Soft sitar-like pluck.
-- **Castle** (`castle`). Now: tap: Raise or lower the drawbridge. Plan: more.
+- **Castle** (`castle`). Now: tap: Raise or lower the drawbridge. Plan: keep.
   - Owner: Pretty good but underwhelming. Knights come out when the drawbridge opens.
   - Effect: The drawbridge drops and tiny knights march out with a banner.
+  - Improved: C2: the drawbridge now starts up. A tap lowers it and five small knights march out,
+    the leader with a banner; a second tap marches them back in and raises it.
   - Sound: Chain rattle and a trumpet.
-- **Pagoda** (`pagoda`). Now: tap: Ring the bells. Plan: more.
+- **Pagoda** (`pagoda`). Now: tap: Ring the bells. Plan: keep.
   - Owner: Not sure what the effect is.
   - Effect: Wind chimes swing on every roof tier and lanterns light up.
+  - Improved: C2: wind chimes at every roof corner swing, one tier after another, and two stone
+    lanterns by the path light up, with the doors glowing (4 s).
   - Sound: Wind chimes.
-- **Windmill** (`windmill`). Now: tap: A gust of wind. Plan: more.
+- **Windmill** (`windmill`). Now: tap: A gust of wind. Plan: keep.
   - Owner: Pretty good, but move a little faster.
   - Effect: Faster sails; the gust spins them up hard.
+  - Improved: C2: the sails turn faster at rest, and a gust spins them up hard for three extra turns
+    (4 s).
   - Sound: Creaking sails and wind.

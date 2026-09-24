@@ -374,10 +374,11 @@
       "sound": "Electric crackle and a ding."
     },
     "eye": {
-      "v": "more",
+      "v": "keep",
       "owner": "Pupil dilation is cool but underwhelming. Let the eye look around by itself, and use a different tap animation.",
       "effect": "Idle: the eye looks around. Tap: it blinks, looks at you and the pupil snaps small.",
-      "sound": "Soft blink swish."
+      "sound": "Soft blink swish.",
+      "improved": "C2: it glances around by itself. A tap blinks (new lids), turns it to look at you and snaps the pupil small (about 2.5 s)."
     },
     "lungs": {
       "v": "new",
@@ -659,10 +660,11 @@
       "sound": "Squelchy pop."
     },
     "bacteriophage": {
-      "v": "more",
+      "v": "keep",
       "owner": "Tapping does nothing visible. Upgrade it.",
       "effect": "Make the injection obvious: the legs splay, the sheath contracts a lot further and a glowing DNA strand shoots out of the tail.",
-      "sound": "Spring-loaded thunk and a squirt."
+      "sound": "Spring-loaded thunk and a squirt.",
+      "improved": "C2: the legs swing out, the sheath snaps to about half its length, the tail pokes through the plate and a glowing DNA strand coils out, then fades (about 4.5 s)."
     },
     "bacterium": {
       "v": "new",
@@ -677,10 +679,11 @@
       "sound": "Soft stretchy squeak."
     },
     "neuron": {
-      "v": "more",
+      "v": "keep",
       "owner": "Decent effect but should be more dramatic.",
       "effect": "A bright pulse runs from the dendrites down the whole axon and bursts at the terminals.",
-      "sound": "Zap and a rising crackle."
+      "sound": "Zap and a rising crackle.",
+      "improved": "C2: a bright spark runs from the cell body down the whole axon and bursts into light at the terminals (about 2 s)."
     },
     "astrocyte": {
       "v": "new",
@@ -695,10 +698,11 @@
       "sound": "Gloopy stretching pop."
     },
     "dna": {
-      "v": "more",
+      "v": "keep",
       "owner": "Unzip even further, then zip back up. Almost perfect otherwise.",
       "effect": "Unzips all the way, bases light up in pairs, then zips back.",
-      "sound": "Zipper sound."
+      "sound": "Zipper sound.",
+      "improved": "C2: a tap unzips it almost to the foot, the bases light up in pairs as the fork passes, then it zips back up (about 5.5 s)."
     },
     "white-blood-cell": {
       "v": "new",
@@ -794,10 +798,11 @@
       "sound": "Soft glassy chime."
     },
     "amethyst-geode": {
-      "v": "more",
+      "v": "keep",
       "owner": "Really cool.",
       "effect": "The geode opens wider and the crystals glow violet.",
-      "sound": "Stone crack and a chime."
+      "sound": "Stone crack and a chime.",
+      "improved": "C2: each time it opens, the halves swing wider and the crystals glow violet with twinkling tips, then settle (about 4 s)."
     },
     "sapphire": {
       "v": "new",
@@ -820,10 +825,11 @@
       "sound": "Soft round clink."
     },
     "crystal-ball": {
-      "v": "more",
+      "v": "keep",
       "owner": "Hard to tell what the effect is; make it clearer and more dramatic.",
       "effect": "Mist swirls hard and a glowing shape appears inside, then fades.",
-      "sound": "Mystic shimmer."
+      "sound": "Mystic shimmer.",
+      "improved": "C2: the mist whips round and thins, and a glowing sign rises out of it and fades: a star, a moon or a heart in turn (about 3.5 s)."
     },
     "oak": {
       "v": "new",
@@ -844,10 +850,11 @@
       "sound": "Two coconut bonks."
     },
     "cherry-blossom": {
-      "v": "more",
+      "v": "keep",
       "owner": "Really cool already. Maybe all the blossoms fall off when touched.",
       "effect": "All the petals fall in a flurry, then it blooms again.",
-      "sound": "Soft breeze and petal patter."
+      "sound": "Soft breeze and petal patter.",
+      "improved": "C2: a new tap action shakes the tree: the petals fall in a heavy flurry, the branches go bare, then it blooms again (about 4.5 s)."
     },
     "maple": {
       "v": "new",
@@ -956,10 +963,11 @@
       "sound": "Underwater bubbles."
     },
     "ice-cream": {
-      "v": "more",
+      "v": "keep",
       "owner": "Really neat; I like that you can melt it. Make melting part of the tap effect.",
       "effect": "Tap melts it: drips run down the cone, then it refreezes.",
-      "sound": "Drip-drip."
+      "sound": "Drip-drip.",
+      "improved": "C2: a tap melts it (the scoops slump and drips run down the cone), then it refreezes (about 5 s). The Warmth slider still works."
     },
     "watermelon": {
       "v": "new",
@@ -1058,10 +1066,11 @@
       "sound": "Shell tap."
     },
     "coffee": {
-      "v": "more",
+      "v": "keep",
       "owner": "Needs work. The cream on top could spin in a swirl on tap.",
       "effect": "Latte art swirl spins; steam curls up.",
-      "sound": "Spoon stir clink."
+      "sound": "Spoon stir clink.",
+      "improved": "C2: the latte art twists into a swirl (the middle turns further than the edge) and relaxes back, with a thick curl of steam."
     },
     "apple": {
       "v": "new",
@@ -1119,10 +1128,11 @@
       "sound": "Brick clicks."
     },
     "rubber-duck": {
-      "v": "more",
+      "v": "keep",
       "owner": "Effect is OK; it needs a quack.",
       "effect": "Keep the effect.",
-      "sound": "Rubber duck quack."
+      "sound": "Rubber duck quack.",
+      "improved": "C2: the same squeeze and hop, now with a bob and rock that settles by about 1.8 s. The quack is Phase D."
     },
     "spinning-top": {
       "v": "keep",
@@ -1164,10 +1174,11 @@
       "sound": "Springy slinky boing."
     },
     "kite": {
-      "v": "more",
+      "v": "keep",
       "owner": "Underwhelming; develop the animation further.",
       "effect": "A big gust: the kite loops the loop and the tail whips.",
-      "sound": "Wind gust and a fabric flap."
+      "sound": "Wind gust and a fabric flap.",
+      "improved": "C2: a big gust loops the kite round while it rises, and the tail whips; the line stays attached (about 3 s)."
     },
     "paper-plane": {
       "v": "keep",
@@ -1195,10 +1206,11 @@
       "sound": "Wind-up ratchet and clockwork."
     },
     "lorenz": {
-      "v": "more",
+      "v": "keep",
       "owner": "Spin a little more or be more dynamic; looks good when still.",
       "effect": "A glowing point races along the trail, drawing a new path.",
-      "sound": "Chaotic warble."
+      "sound": "Chaotic warble.",
+      "improved": "C2: a new tap action sends a bright spark racing along the whole path, drawing it again in light that then fades (about 3 s)."
     },
     "mobius": {
       "v": "new",
@@ -1207,10 +1219,11 @@
       "sound": "Looping tone."
     },
     "klein-bottle": {
-      "v": "more",
+      "v": "keep",
       "owner": "Not sure it has an effect. Maybe water flows through it; it already kind of does, make that dramatic.",
       "effect": "A clear surge of water flows through the neck and round.",
-      "sound": "Glug and flow."
+      "sound": "Glug and flow.",
+      "improved": "C2: a new tap action sends a surge of rippling water along the tube and round, and the glass glows (about 4 s)."
     },
     "menger-sponge": {
       "v": "new",
@@ -1301,16 +1314,18 @@
       "sound": "Crack and a tiny roar."
     },
     "wizards-orb": {
-      "v": "more",
+      "v": "keep",
       "owner": "Looks really good; develop it further to be more impressive.",
       "effect": "A bigger spell: runes orbit, light bursts and sparks spiral out.",
-      "sound": "Magic whoosh and sparkle."
+      "sound": "Magic whoosh and sparkle.",
+      "improved": "C2: a bigger spell: a flash fills the glass, the swirl spins up, sparks spiral out in five arms and a ring of runes rises and circles the orb (about 3 s)."
     },
     "jellyfish": {
-      "v": "more",
+      "v": "keep",
       "owner": "Not sure what the effect does; make it more apparent.",
       "effect": "A strong pulse that jets it upward, trailing glowing tentacles.",
-      "sound": "Soft watery whoomp."
+      "sound": "Soft watery whoomp.",
+      "improved": "C2: one strong stroke squeezes the bell and jets it up about a third of its size, trailing glowing tentacles, then it drifts down (about 3 s)."
     },
     "fish-school": {
       "v": "new",
@@ -1324,10 +1339,11 @@
       "sound": "Delicate flutter."
     },
     "pufferfish": {
-      "v": "more",
+      "v": "keep",
       "owner": "Should puff: get big, then small.",
       "effect": "Inflates to a big spiky ball, then deflates.",
-      "sound": "Balloon inflate and a sputter."
+      "sound": "Balloon inflate and a sputter.",
+      "improved": "C2: it now rests slim; a tap inflates it to a big spiky ball, holds, then deflates with a sputter (about 4 s)."
     },
     "nautilus": {
       "v": "new",
@@ -1341,16 +1357,18 @@
       "sound": "Tiny wing buzz."
     },
     "snail": {
-      "v": "more",
+      "v": "keep",
       "owner": "Perfect, but it disappears too much when hiding; make it more elegant.",
       "effect": "Keep hiding in the shell, but keep the shell clearly visible and ease in more gently.",
-      "sound": "Slurpy slide."
+      "sound": "Slurpy slide.",
+      "improved": "C2: it hides more gently (2.4 s): eye stalks first, then the head glides under the shell and the foot slides in; the shell stays in view and rocks once."
     },
     "octopus": {
-      "v": "more",
+      "v": "keep",
       "owner": "Underwhelming; the ink should be much bigger and more dramatic.",
       "effect": "A big ink cloud billows out while it jets away and back.",
-      "sound": "Squirt and whoosh."
+      "sound": "Squirt and whoosh.",
+      "improved": "C2: a big billowing ink cloud grows behind it while it jets up and away with its arms streaming, then drifts back as the ink thins (about 4.5 s)."
     },
     "starfish": {
       "v": "keep",
@@ -1391,17 +1409,19 @@
       "sound": "Drip and a crunchy rebuild."
     },
     "fireworks": {
-      "v": "more",
+      "v": "keep",
       "owner": "Outstanding. Make each launch different (like the dice), and the burst match the colour of the cannon that fires it.",
       "effect": "Random shell types each tap; burst colour matches its tube.",
-      "sound": "Launch whistle and a boom."
+      "sound": "Launch whistle and a boom.",
+      "improved": "C2: each tap fires a different tube and shell type (peony, ring, willow or star); the rocket rises from its tube and the burst takes that tube's colour."
     },
     "decorated-tree": {
-      "v": "more",
+      "v": "keep",
       "fixed": "C1: a faceted gold star facing the viewer, with only a faint glow.",
       "owner": "Lights only show very briefly; make it more dramatic.",
       "effect": "Lights come on and chase in patterns and stay on; the star glows.",
-      "sound": "Sleigh-bell jingle."
+      "sound": "Sleigh-bell jingle.",
+      "improved": "C2: a tap switches the lights on in a sweep up the tree, and they stay on, cycling chase, ripple and steady patterns; the star gets a warm halo. A second tap turns them off."
     },
     "patterned-egg": {
       "v": "keep",
@@ -1414,11 +1434,12 @@
       "sound": "Paper rustle."
     },
     "diya": {
-      "v": "more",
+      "v": "keep",
       "fixed": "C1: painted clay (dots, a red line, lotus petals) and dark amber oil with a sheen and the flame's reflection.",
       "owner": "Very underwhelming.",
       "effect": "The flame grows and a ring of small diyas lights around it.",
-      "sound": "Soft flame whoosh."
+      "sound": "Soft flame whoosh.",
+      "improved": "C2: a tap makes the flame flare and grow, and eight small diyas round the rangoli light one after another and stay lit."
     },
     "menorah": {
       "v": "keep",
@@ -1426,16 +1447,18 @@
       "sound": "Match strike and a bell."
     },
     "guitar": {
-      "v": "more",
+      "v": "keep",
       "owner": "Looks fine; add the music.",
       "effect": "Keep the strum; strings vibrate visibly.",
-      "sound": "A real strummed chord progression (synth plucks)."
+      "sound": "A real strummed chord progression (synth plucks).",
+      "improved": "C2: the strum rocks the guitar about 13 degrees with a small hop, the strings bend and vibrate one after another, and rings of light pulse out of the soundhole. Music is Phase D."
     },
     "drum": {
-      "v": "more",
+      "v": "keep",
       "owner": "Could be more dramatic. Fast taps could play longer and faster rolls.",
       "effect": "Sticks play a roll; fast repeated taps make faster, longer rolls.",
-      "sound": "Snare hits with rattle."
+      "sound": "Snare hits with rattle.",
+      "improved": "C2: the sticks play a roll; taps within 0.9 s of each other step up through four speeds and make the roll longer (up to 3 s after the last tap)."
     },
     "xylophone": {
       "v": "keep",
@@ -1453,10 +1476,11 @@
       "sound": "Rotor chop."
     },
     "hot-air-balloon": {
-      "v": "more",
+      "v": "keep",
       "owner": "Could be more dramatic; maybe inflate more.",
       "effect": "Burner roars, the envelope swells and it rises higher.",
-      "sound": "Burner roar."
+      "sound": "Burner roar.",
+      "improved": "C2: the burner roars a big flame, the envelope swells and glows warm, and the balloon climbs well up, then drifts back down (4 s)."
     },
     "steam-train": {
       "v": "keep",
@@ -1475,10 +1499,11 @@
       "sound": "Engine rev."
     },
     "bus": {
-      "v": "more",
+      "v": "keep",
       "owner": "Not sure what the effect is.",
       "effect": "Stop sign swings out, lights flash, doors open.",
-      "sound": "Horn beep and door hiss."
+      "sound": "Horn beep and door hiss.",
+      "improved": "C2: the school bus stops: warning lights flash, the stop sign swings out and the doors open onto a lit doorway (4.5 s). The double-decker flashes its hazard lights and opens a middle door."
     },
     "propeller-plane": {
       "v": "keep",
@@ -1486,28 +1511,32 @@
       "sound": "Prop engine buzz."
     },
     "jet": {
-      "v": "more",
+      "v": "keep",
       "owner": "Very solid; bank more to one side or the other.",
       "effect": "Climbs and banks hard left then right.",
-      "sound": "Jet roar."
+      "sound": "Jet roar.",
+      "improved": "C2: it climbs nose up while banking hard left, then hard right (about 50 degrees each way, 3.5 s)."
     },
     "sailboat": {
-      "v": "more",
+      "v": "keep",
       "owner": "Pretty good; a bit more dramatic.",
       "effect": "A big gust heels it over with spray.",
-      "sound": "Wind and water spray."
+      "sound": "Wind and water spray.",
+      "improved": "C2: a gust heels it over twice as far with spray at the bow and stern, then it rocks back upright (3.5 s)."
     },
     "submarine": {
-      "v": "more",
+      "v": "keep",
       "owner": "Underwhelming that only the periscope appears and disappears.",
       "effect": "Dives with bubbles, then surfaces and raises the periscope.",
-      "sound": "Sonar ping."
+      "sound": "Sonar ping.",
+      "improved": "C2: a tap dives it: the periscope drops, bubbles rush from the hull and it sinks, then it surfaces and raises the periscope (5 s)."
     },
     "bicycle": {
-      "v": "more",
+      "v": "keep",
       "owner": "Not sure what the effect is; make it more dramatic.",
       "effect": "Pedals spin, the wheels turn and the bell rings clearly.",
-      "sound": "Bicycle bell ring-ring."
+      "sound": "Bicycle bell ring-ring.",
+      "improved": "C2: the bell shakes with flashing ring lines, and the wheels add five fast turns and the pedals two (2.5 s)."
     },
     "tractor": {
       "v": "keep",
@@ -1587,10 +1616,11 @@
       "sound": "Low drone and a bell."
     },
     "big-ben": {
-      "v": "more",
+      "v": "keep",
       "owner": "No visible effect; make it pronounced or pick something better.",
       "effect": "Hands spin to the hour, the clock face glows and the bell swings.",
-      "sound": "Big Ben chimes (Westminster quarters, simplified)."
+      "sound": "Big Ben chimes (Westminster quarters, simplified).",
+      "improved": "C2: the hands spin round and land back on the real time, all four dials glow and a bell swings in the now open belfry (4 s)."
     },
     "taj-mahal": {
       "v": "new",
@@ -1599,22 +1629,25 @@
       "sound": "Soft sitar-like pluck."
     },
     "castle": {
-      "v": "more",
+      "v": "keep",
       "owner": "Pretty good but underwhelming. Knights come out when the drawbridge opens.",
       "effect": "The drawbridge drops and tiny knights march out with a banner.",
-      "sound": "Chain rattle and a trumpet."
+      "sound": "Chain rattle and a trumpet.",
+      "improved": "C2: the drawbridge now starts up. A tap lowers it and five small knights march out, the leader with a banner; a second tap marches them back in and raises it."
     },
     "pagoda": {
-      "v": "more",
+      "v": "keep",
       "owner": "Not sure what the effect is.",
       "effect": "Wind chimes swing on every roof tier and lanterns light up.",
-      "sound": "Wind chimes."
+      "sound": "Wind chimes.",
+      "improved": "C2: wind chimes at every roof corner swing, one tier after another, and two stone lanterns by the path light up, with the doors glowing (4 s)."
     },
     "windmill": {
-      "v": "more",
+      "v": "keep",
       "owner": "Pretty good, but move a little faster.",
       "effect": "Faster sails; the gust spins them up hard.",
-      "sound": "Creaking sails and wind."
+      "sound": "Creaking sails and wind.",
+      "improved": "C2: the sails turn faster at rest, and a gust spins them up hard for three extra turns (4 s)."
     }
   }
 }
