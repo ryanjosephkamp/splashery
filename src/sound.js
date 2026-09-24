@@ -43,8 +43,9 @@ export class Sound {
   }
 
   // Plays a sound: an old name ("chime") or a spec from the voice library.
-  // Repeats under the same key are spaced out by `gap` seconds.
-  play(spec, { gap = 0.06, pitch = 1, key } = {}) {
+  // Repeats under the same key are spaced out by `gap` seconds. `pick` plays
+  // only that note (or chord) of a spec's tune.
+  play(spec, { gap = 0.06, pitch = 1, key, pick = null } = {}) {
     if (!this.enabled || !spec) return;
     const ctx = this.audio();
     if (!ctx) return;
@@ -52,7 +53,7 @@ export class Sound {
     const k = key || (typeof spec === "string" ? spec : "spec");
     if (this.last[k] && now - this.last[k] < gap) return;
     this.last[k] = now;
-    playSpec(ctx, this.master, now + 0.005, spec, { pitch });
+    playSpec(ctx, this.master, now + 0.005, spec, { pitch, pick });
   }
 }
 

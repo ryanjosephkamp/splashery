@@ -453,7 +453,7 @@ class App {
     const [x, y] = player.canvasPoint(e);
     player.pickDirty = true;
     const hit = await player.pickAt(x, y);
-    if (hit) player.act();
+    if (hit) player.act(hit);
   }
 
   onAction(r) {
@@ -464,7 +464,8 @@ class App {
     const toy = player.scene.toy;
     const own = toy.kind === "builtin" ? toySound(toy.id) : null;
     const spec = own || recipe?.action?.sound || (r.key === "hop" ? "hop" : "pop");
-    this.sound.play(specFor(spec, r.key === "hop" || r.value > 0.5), { key: "toy" });
+    // A tap that picked an item (a xylophone bar) plays that item's note.
+    this.sound.play(specFor(spec, r.key === "hop" || r.value > 0.5), { key: "toy", pick: r.pick });
     this.ui.setMotion(player.scene.motion, player.motion.targets);
   }
 

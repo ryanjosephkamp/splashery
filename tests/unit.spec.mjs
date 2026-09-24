@@ -183,3 +183,28 @@ test("embeds never load the sound code", () => {
   expect(seen.has("viewer.js")).toBe(true);
   for (const f of ["sound.js", "voices.js", "toy-sounds.js"]) expect(seen.has(f), f).toBe(false);
 });
+
+test("a tap knows where it landed: a xylophone bar strikes that bar", async () => {
+  const { MotionDriver } = await import("../src/motion.js");
+  const { RECIPES } = await import("../src/packs/music.js");
+  const m = new MotionDriver();
+  m.setToy(RECIPES.xylophone, { parts: [], transform: { center: [0, 0, 0], scale: 1 } });
+  // The third bar (x = -0.33), on its top face.
+  const r = m.act(0, [-0.33, 0.1, 0.1]);
+  expect(r).toMatchObject({ key: "strike", pick: 2, value: 1 });
+  expect(m.tap).toMatchObject({ key: "strike", pick: 2, n: 1 });
+  // Off the bars (a rail end, low down) plays the whole scale.
+  expect(m.act(1, [0.9, -0.05, 0.4])).toMatchObject({ key: "play", pick: null });
+  // The Play button has no point: the usual action.
+  expect(m.act(2, null)).toMatchObject({ key: "play", pick: null });
+  expect(m.tap.n).toBe(3);
+  // drive() sees the tap: the struck bar dips when the mallet lands.
+  m.act(3, [0.77, 0.1, 0]);
+  expect(m.tap.pick).toBe(7);
+  m.state.play = 0;
+  m.state.strike = 1 - 0.305;
+  const out = { parts: {} };
+  RECIPES.xylophone.drive(0, m.state, out, { tap: m.tap });
+  expect(out.parts.bar7.offset[1]).toBeLessThan(-0.005);
+  expect(out.parts.bar0.offset[1]).toBe(0);
+});

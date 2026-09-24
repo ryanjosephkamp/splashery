@@ -1309,7 +1309,9 @@ export function specFor(spec, on = true) {
 
 // Plays a spec at time t into `out`. Returns the seconds it lasts.
 // `raw` skips the voice's level (tools/sound-check.mjs --voices measures it).
-export function playSpec(ctx, out, t, spec, { pitch = 1, raw = false } = {}) {
+// `pick` plays only that note (or chord) of a tune, at the tune's start: a
+// tap on one xylophone bar plays that bar.
+export function playSpec(ctx, out, t, spec, { pitch = 1, raw = false, pick = null } = {}) {
   if (!spec) return 0;
   if (typeof spec === "string") {
     const fn = LEGACY[spec];
@@ -1317,10 +1319,10 @@ export function playSpec(ctx, out, t, spec, { pitch = 1, raw = false } = {}) {
   }
   if (Array.isArray(spec)) {
     let end = 0;
-    for (const s of spec) end = Math.max(end, playSpec(ctx, out, t, s, { pitch, raw }));
+    for (const s of spec) end = Math.max(end, playSpec(ctx, out, t, s, { pitch, raw, pick }));
     return end;
   }
-  if ("on" in spec) return playSpec(ctx, out, t, spec.on, { pitch, raw });
+  if ("on" in spec) return playSpec(ctx, out, t, spec.on, { pitch, raw, pick });
   const v = VOICES[spec.voice];
   if (!v) return 0;
   const start = t + (spec.at || 0);
@@ -1340,7 +1342,9 @@ export function playSpec(ctx, out, t, spec, { pitch = 1, raw = false } = {}) {
     const step = spec.step ?? 0.2;
     const strum = spec.strum ?? 0;
     let end = 0;
-    parseNotes(spec.notes).forEach((chord, i) => {
+    let chords = parseNotes(spec.notes);
+    if (pick !== null) chords = [chords[Math.abs(Math.round(pick)) % chords.length]];
+    chords.forEach((chord, i) => {
       chord.forEach((note, j) => {
         const s = start + i * step + j * strum;
         end = Math.max(end, s - t + v.play(ctx, out, s, at(noteFreq(note))));

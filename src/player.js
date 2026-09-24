@@ -642,8 +642,9 @@ export class Player {
   }
 
   // The toy's tap action (open the lid, blow out the candles), or a hop.
-  act() {
-    const r = this.motion.act(this.time);
+  // `world` is where a tap on the toy landed (null from the Play button).
+  act(world = null) {
+    const r = this.motion.act(this.time, world ? this.toRecipe(world) : null);
     if (r.key !== "hop") {
       this.scene.motion.controls = {
         ...this.scene.motion.controls,
@@ -653,6 +654,15 @@ export class Player {
     this.stage.requestRender();
     this.emit("action", r);
     return r;
+  }
+
+  // A world point in the current toy's recipe coordinates: a kit toy's
+  // build space (before it was centred and scaled), else the world.
+  toRecipe(world) {
+    const tf = this.motion.ctx?.transform;
+    if (!tf || !this.stage.toy) return world.slice();
+    const m = this.stage.worldToModel(world);
+    return [0, 1, 2].map((i) => m[i] / tf.scale + tf.center[i]);
   }
 
   // ---- Frame ------------------------------------------------------------------
