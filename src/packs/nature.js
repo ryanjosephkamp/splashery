@@ -244,6 +244,7 @@ function foliage(k, clumps, o) {
           size: (o.leaf ?? 1) * (0.7 + 0.6 * rand()),
           kind: o.kind,
           params: o.params,
+          part: o.part,
         };
       }
       return null;
@@ -673,6 +674,22 @@ export const RECIPES = {
   "cherry-blossom": {
     alive: true,
     options: [SEED],
+    controls: [{ key: "shake", label: "Shake", type: "pulse", ease: 5.5 }],
+    action: { key: "shake", label: "Shake the blossom", sound: "whoosh" },
+    // A tap shakes the tree: every blossom drops in a flurry of petals and
+    // settles on the grass, then the bare branches bloom again.
+    drive(t, c, out) {
+      const p = c.shake > 0 ? 1 - c.shake : 1;
+      const on = c.shake > 0 ? 1 : 0;
+      const gone = smoothstep(0.04, 0.3, p);
+      const bloom = smoothstep(0.5, 0.85, p);
+      out.energy = on * 0.28 * smoothstep(0, 0.2, p) * (1 - smoothstep(0.32, 0.34, p));
+      out.parts.blossom = { visible: on ? (p < 0.4 ? 1 - gone : bloom) : 1 };
+      out.parts.flurry = { visible: on * smoothstep(0, 0.03, p) * (1 - smoothstep(0.4, 0.55, p)) };
+      const shake = on * 0.06 * Math.sin(p * 70) * (1 - smoothstep(0, 0.18, p));
+      out.body = { quat: quatAxisAngle([0, 0, 1], shake) };
+      out.amount = 1 + 2.5 * on * (1 - smoothstep(0.3, 0.5, p));
+    },
     build(k, o) {
       reseed(k, o);
       const rand = k.rand;
@@ -714,11 +731,15 @@ export const RECIPES = {
         below: -0.45,
         tips: tree.tips,
       });
+      // The blossom slumps to the ground when shaken (it no longer sways).
+      const blossom = k.part("blossom", { pivot: [0, 1.12, 0] });
       foliage(k, clumps, {
         share: 0.58,
         size: 1.15,
         tilt: 1.6,
-        ...SW,
+        kind: "melt",
+        params: [1, 0],
+        part: blossom,
         color: (t, r) => {
           const col = ramp(pinks, t);
           const u = r();
@@ -738,6 +759,21 @@ export const RECIPES = {
           color: ramp(pinks, 0.5 + 0.5 * r()),
           kind: "fall",
           params: [0.22 + 0.12 * r(), r()],
+        };
+      });
+      // The flurry (only while shaken): petals raining from the whole crown.
+      const flurry = k.part("flurry");
+      k.cloud({ share: 0.03, size: 1, flat: 0.15, pattern: false }, (r) => {
+        const a = r() * TAU;
+        const rr = 1.3 * Math.sqrt(r());
+        const y = 0.9 + r() * 0.75;
+        return {
+          p: [Math.sin(a) * rr, y, Math.cos(a) * rr],
+          n: randDir(r),
+          color: ramp(pinks, 0.35 + 0.65 * r()),
+          kind: "fall",
+          params: [0.7 + 0.5 * r(), r()],
+          part: flurry,
         };
       });
       grassMound(k, 1.05, 0, {

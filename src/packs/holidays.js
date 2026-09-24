@@ -85,6 +85,46 @@ function flame(k, at, { share = 0.05, height = 0.3, width = 0.05, part, size = 1
   });
 }
 
+// Per-toy memory for drive(): keyed by the control state object, which is
+// new each time a toy loads.
+const MEM = new WeakMap();
+function mem(c) {
+  let m = MEM.get(c);
+  if (!m) MEM.set(c, (m = {}));
+  return m;
+}
+// True on the frame a pulse control fires.
+function fired(m, key, v) {
+  const was = m["p_" + key] ?? 0;
+  m["p_" + key] = v;
+  return v > was + 0.02;
+}
+// A small integer hash for choosing things per tap.
+function hashInt(n) {
+  n = n ^ 61 ^ (n >>> 16);
+  n = (n + (n << 3)) | 0;
+  n ^= n >>> 4;
+  n = Math.imul(n, 0x27d4eb2d);
+  n ^= n >>> 15;
+  return n >>> 0;
+}
+
+// The diya's ring of small lamps.
+const DIYAS = 8;
+
+// Fireworks: the three launch tubes (x, z, colour), the burst each one
+// makes (centre, radius and colours) and the shell types.
+const FW = {
+  ground: -0.95,
+  tubes: [
+    { x: -0.13, z: 0.04, col: "#d8342c", c: [-0.34, 0.42, 0.3], a: "#ff3b3b", b: "#ffd8c8" },
+    { x: 0.0, z: -0.06, col: "#2f6fd8", c: [0.02, 0.58, 0.3], a: "#3b82ff", b: "#e0f0ff" },
+    { x: 0.13, z: 0.05, col: "#f2b61e", c: [0.36, 0.42, 0.3], a: "#ffc21a", b: "#fff6d0" },
+  ],
+  types: ["peony", "ring", "willow", "star"],
+  r: 0.52,
+};
+
 // Inside a five-pointed star of radius R (point up).
 function starRadius(a, R, ri = 0.42) {
   const seg = TAU / 5;
@@ -416,19 +456,37 @@ export const RECIPES = {
     controls: [{ key: "launch", label: "Launch", type: "pulse", ease: 3.4 }],
     action: { key: "launch", label: "Launch", sound: "fire" },
     drive(t, c, out) {
+      // Each launch picks another tube and another shell type (never the
+      // same as the last), so no two in a row look alike. The burst is the
+      // colour of the tube that fired it.
+      const m = mem(c);
+      if (m.tube === undefined) Object.assign(m, { tube: 1, type: 0, n: 0 });
+      if (fired(m, "launch", c.launch)) {
+        m.n++;
+        m.tube = (m.tube + 1 + (hashInt(m.n * 2 + 1) % 2)) % 3;
+        m.type = (m.type + 1 + (hashInt(m.n * 2 + 7) % 3)) % 4;
+      }
       const u = 1 - c.launch;
       const on = c.launch > 0;
-      const rise = easeInOut(band(u, 0, 0.3));
-      out.parts.rocket = { offset: [0, 1.35 * rise, 0], visible: on && u < 0.3 ? 1 : 0 };
-      out.grow = on ? band(u, 0.3, 0.52) : 0;
-      out.parts.burst = {
-        offset: [0, -0.18 * band(u, 0.3, 1) ** 2, 0],
-        visible: on ? 1 - band(u, 0.62, 1) : 0,
+      const T = FW.tubes[m.tube];
+      const from = [T.x, FW.ground + 0.4, T.z];
+      const rise = easeInOut(band(u, 0, 0.24));
+      out.parts.rocket = {
+        offset: vec.mul(vec.sub(T.c, from), rise).map((v, i) => v + [T.x, 0, T.z][i]),
+        visible: on && u < 0.24 ? 1 : 0,
       };
+      out.grow = on ? band(u, 0.24, 0.44) : 0;
+      const droop = FW.types[m.type] === "willow" ? 0.3 : 0.16;
+      for (let i = 0; i < 3; i++)
+        for (let j = 0; j < 4; j++)
+          out.parts[`b${i}${j}`] = {
+            offset: [0, -droop * band(u, 0.24, 1) ** 2, 0],
+            visible: on && i === m.tube && j === m.type ? 1 - band(u, 0.66, 1) : 0,
+          };
       out.amount = 0.7 + 0.4 * c.launch;
     },
     build(k) {
-      const ground = -0.95;
+      const ground = FW.ground;
       // A crate of launch tubes.
       k.add(k.roundedBox(0.5, 0.2, 0.34, 6), {
         pos: [0, ground + 0.1, 0],
@@ -444,12 +502,7 @@ export const RECIPES = {
             0.35,
           ),
       });
-      const tubes = [
-        [-0.13, 0.04, "#d8342c"],
-        [0.0, -0.06, "#2f6fd8"],
-        [0.13, 0.05, "#f2b61e"],
-      ];
-      for (const [x, z, col] of tubes)
+      for (const { x, z, col } of FW.tubes)
         k.add(k.cylinder(0.05, 0.22, { caps: false }), {
           pos: [x, ground + 0.3, z],
           flat: 0.2,
@@ -462,16 +515,16 @@ export const RECIPES = {
         { c: [0.52, 0.46, -0.12], r: 0.48, a: "#3b82ff", b: "#e8f4ff" },
         { c: [-0.02, 0.98, 0.1], r: 0.42, a: "#34e070", b: "#ff5ad8" },
       ];
-      const burst = (B, share, extra = {}) => {
-        const rays = 64;
-        const dirs = [];
-        const g = Math.PI * (3 - Math.sqrt(5));
-        for (let i = 0; i < rays; i++) {
-          const y = 1 - ((i + 0.5) / rays) * 2;
-          const rr = Math.sqrt(1 - y * y);
-          dirs.push([Math.cos(g * i) * rr, y, Math.sin(g * i) * rr]);
-        }
-        k.cloud({ share, size: 0.7, pattern: false, ...extra.opts }, (rand, i) => {
+      const rays = 64;
+      const dirs = [];
+      const g = Math.PI * (3 - Math.sqrt(5));
+      for (let i = 0; i < rays; i++) {
+        const y = 1 - ((i + 0.5) / rays) * 2;
+        const rr = Math.sqrt(1 - y * y);
+        dirs.push([Math.cos(g * i) * rr, y, Math.sin(g * i) * rr]);
+      }
+      const burst = (B, share) => {
+        k.cloud({ share, size: 0.7, pattern: false }, (rand, i) => {
           const d = dirs[i % rays];
           const t = Math.pow(rand(), 0.6);
           const tip = t > 0.9;
@@ -486,9 +539,8 @@ export const RECIPES = {
             size: tip ? 1.5 : 0.9,
             color: mix(B.b, B.a, t),
             opacity: tip ? 1 : 0.4 + 0.5 * t,
-            kind: extra.kind || (tip ? "twinkle" : undefined),
-            params: extra.params ? extra.params(t) : [0.6, rand() * TAU],
-            part: extra.part,
+            kind: tip ? "twinkle" : undefined,
+            params: [0.6, rand() * TAU],
           };
         });
       };
@@ -522,14 +574,14 @@ export const RECIPES = {
           };
         });
       }
-      // The launched rocket and the burst it makes.
+      // The launched rocket (moved to whichever tube fires).
       const rocket = k.part("rocket", { pivot: [0, ground + 0.4, 0] });
       k.add(k.cylinder(0.03, 0.14), {
         pos: [0, ground + 0.45, 0],
         part: rocket,
         weight: 3,
         pattern: false,
-        color: "#ff5a3a",
+        color: "#f4efe4",
       });
       k.cloud({ share: 0.01, size: 0.8, pattern: false }, (rand) => ({
         p: [(rand() - 0.5) * 0.03, ground + 0.38 - rand() * 0.02, (rand() - 0.5) * 0.03],
@@ -539,11 +591,72 @@ export const RECIPES = {
         kind: "flame",
         params: [-0.25, rand()],
       }));
-      const burstPart = k.part("burst", { pivot: [0.05, 0.4, 0.3] });
-      burst({ c: [0.05, 0.4, 0.3], r: 0.5, a: "#ffb020", b: "#ffffff" }, 0.12, {
-        part: burstPart,
-        kind: "grow",
-        params: (t) => [t * 0.9, 0],
+      // A bright spark trail behind it, so the launch reads at a glance.
+      k.cloud({ share: 0.006, size: 1.1, pattern: false }, (rand) => {
+        const f = rand();
+        return {
+          p: [(rand() - 0.5) * 0.02 * (1 + 2 * f), ground + 0.37 - 0.32 * f, (rand() - 0.5) * 0.02],
+          dir: [0, 1, 0],
+          stretch: 2.5,
+          color: mix("#fff6d0", "#ff9a2a", f),
+          opacity: 1 - 0.8 * f,
+          part: rocket,
+        };
+      });
+      // Its burst: one per tube colour and shell type, each revealed from the
+      // centre outwards as it grows. Flat shapes face the home view.
+      const e1 = vec.unit(vec.cross([0, 1, 0], VIEW));
+      const e2 = vec.cross(VIEW, e1);
+      const ringN = vec.unit([0.25, 0.55, 0.8]);
+      const r1 = vec.unit(vec.cross([0, 1, 0], ringN));
+      const r2 = vec.cross(ringN, r1);
+      const shell = {
+        peony: (rand, i) => {
+          const d = dirs[i % rays];
+          const t = Math.pow(rand(), 0.6);
+          return { t, p: vec.add(vec.mul(d, 0.25 + 0.75 * t), [0, -0.06 * t * t, 0]), dir: d };
+        },
+        ring: (rand) => {
+          const a = rand() * TAU;
+          const d = vec.add(vec.mul(r1, Math.cos(a)), vec.mul(r2, Math.sin(a)));
+          const t = rand() < 0.8 ? 0.88 + 0.12 * rand() : 0.2 + 0.6 * rand();
+          return { t, p: vec.mul(d, t), dir: d };
+        },
+        willow: (rand, i) => {
+          const d = dirs[((i * 7) % (rays / 2)) + 2];
+          const s = Math.pow(rand(), 0.7);
+          const p = vec.add(vec.mul(d, 0.8 * s), [0, -0.55 * s * s, 0]);
+          return { t: s, p, dir: vec.unit(vec.add(d, [0, -1.1 * s, 0])), long: true };
+        },
+        star: (rand) => {
+          const a = rand() * TAU;
+          const out = rand() < 0.8;
+          const rr = starRadius(a, 1) * (out ? 0.95 + 0.08 * rand() : rand());
+          const d = vec.add(vec.mul(e1, Math.sin(a)), vec.mul(e2, Math.cos(a)));
+          return { t: out ? 1 : rr, p: vec.mul(d, rr), dir: d };
+        },
+      };
+      FW.tubes.forEach((T, ti) => {
+        FW.types.forEach((type, j) => {
+          const part = k.part(`b${ti}${j}`, { pivot: T.c });
+          k.cloud({ share: 0.025, size: 0.75, pattern: false }, (rand, i) => {
+            const S = shell[type](rand, i);
+            const tip = S.t > 0.9 && !S.long;
+            let col = mix(T.b, T.a, Math.min(1, S.t * 1.3));
+            if (S.long) col = mix(col, "#ffd27a", 0.35 * S.t);
+            return {
+              p: vec.add(T.c, vec.mul(S.p, FW.r)),
+              dir: S.dir,
+              stretch: tip ? 1.2 : S.long ? 3.2 : 2.4,
+              size: tip ? 1.5 : 0.95,
+              color: col,
+              opacity: tip ? 1 : 0.45 + 0.5 * S.t,
+              part,
+              kind: "grow",
+              params: [S.t * 0.9, 0],
+            };
+          });
+        });
       });
     },
   },
@@ -551,11 +664,23 @@ export const RECIPES = {
   // ---- Decorated tree -----------------------------------------------------------------------
   "decorated-tree": {
     alive: true,
-    controls: [{ key: "lights", label: "Lights", type: "toggle", default: 1, ease: 0.4 }],
+    controls: [{ key: "lights", label: "Lights", type: "toggle", default: 0, ease: 1.8 }],
     action: { key: "lights", label: "Lights on or off", sound: "click" },
     drive(t, c, out) {
-      out.parts.lights = { visible: c.lights };
-      out.amount = 0.9;
+      // The lights switch on in a sweep up the tree and stay on, playing
+      // three patterns in turn: a chase, a slow ripple and all steady. The
+      // star glows while they are on.
+      const on = c.lights;
+      out.grow = on;
+      const phase = Math.floor(t / 4) % 3;
+      for (let g = 0; g < 3; g++) {
+        let v = 1.15;
+        if (phase === 0) v = Math.floor(t * 6) % 3 === g ? 1.45 : 0.45;
+        else if (phase === 1) v = 0.55 + 0.75 * (0.5 + 0.5 * Math.sin(t * 4 - g * 2.1));
+        out.parts[`lights${g}`] = { visible: v * smoothstep(0, 0.3, on) };
+      }
+      out.parts.halo = { visible: on * (1 + 0.12 * Math.sin(t * 2.6)) };
+      out.amount = 0.9 + 1.2 * on;
     },
     build(k) {
       const tiers = 5;
@@ -670,8 +795,9 @@ export const RECIPES = {
           color: (c) => lit(c, col, 0.45, 0.9),
         });
       }
-      // Fairy lights: dim bulbs, and a glow that switches on.
-      const lights = k.part("lights", { pivot: [0, 0, 0] });
+      // Fairy lights: dim bulbs, and a glow that switches on in three
+      // groups (every third bulb), bottom to top.
+      const groups = [0, 1, 2].map((g) => k.part(`lights${g}`, { pivot: [0, 0, 0] }));
       const bulbCols = ["#ffe9a8", "#ff6a5a", "#6ac8ff", "#9aff7a", "#ffb0f0"];
       const bulbs = [];
       for (let i = 0; i < 70; i++) {
@@ -682,6 +808,9 @@ export const RECIPES = {
         bulbs.push({
           p: [Math.sin(phi) * r, y, Math.cos(phi) * r],
           col: bulbCols[i % bulbCols.length],
+          out: [Math.sin(phi) * (r + 0.03), y, Math.cos(phi) * (r + 0.03)],
+          t,
+          i,
         });
       }
       k.cloud({ share: 0.004, size: 0.9, pattern: false }, (rand, i) => ({
@@ -689,17 +818,33 @@ export const RECIPES = {
         color: "#5a5a50",
         opacity: 1,
       }));
-      k.cloud({ share: 0.02, size: 1.1, pattern: false }, (rand, i) => {
-        const b = bulbs[i % bulbs.length];
-        const d = vec.unit([rand() - 0.5, rand() - 0.5, rand() - 0.5]);
-        return {
-          p: vec.add(b.p, vec.mul(d, 0.02 * rand())),
-          color: mix(b.col, "#ffffff", 0.35),
-          opacity: 1,
-          part: lights,
-          kind: "twinkle",
-          params: [0.5, (i % bulbs.length) * 1.7],
-        };
+      groups.forEach((part, g) => {
+        const mine = bulbs.filter((b) => b.i % 3 === g);
+        // A bright bulb, a little proud of the needles, and a soft halo.
+        k.cloud({ share: 0.008, size: 2.6, pattern: false }, (rand, i) => {
+          const b = mine[i % mine.length];
+          const d = vec.unit([rand() - 0.5, rand() - 0.5, rand() - 0.5]);
+          return {
+            p: vec.add(b.out, vec.mul(d, 0.025 * rand())),
+            color: mix(b.col, "#ffffff", 0.5),
+            opacity: 1,
+            part,
+            kind: "grow",
+            params: [b.t * 0.9, 0],
+          };
+        });
+        k.cloud({ share: 0.003, size: 5, pattern: false }, (rand, i) => {
+          const b = mine[i % mine.length];
+          const d = vec.unit([rand() - 0.5, rand() - 0.5, rand() - 0.5]);
+          return {
+            p: vec.add(b.out, vec.mul(d, 0.04 * rand())),
+            color: b.col,
+            opacity: 0.24,
+            part,
+            kind: "grow",
+            params: [b.t * 0.9, 0],
+          };
+        });
       });
       // The star on top: a faceted, bevelled gold star (each point has a lit
       // and a shaded face), turned to face the home view so its shape reads.
@@ -746,7 +891,7 @@ export const RECIPES = {
           },
         );
       }
-      // A faint warm glow behind it.
+      // A faint warm glow behind it, and a bright halo while the lights are on.
       k.cloud({ share: 0.004, size: 2.4, pattern: false }, (rand) => {
         const d = vec.unit([rand() - 0.5, rand() - 0.5, rand() - 0.5]);
         return {
@@ -755,6 +900,18 @@ export const RECIPES = {
           opacity: 0.035,
           kind: "twinkle",
           params: [0.3, rand() * TAU],
+        };
+      });
+      const halo = k.part("halo", { pivot: top });
+      const behind = vec.add(top, vec.mul(VIEW, -0.08));
+      k.cloud({ share: 0.005, size: 2.6, pattern: false }, (rand) => {
+        const d = vec.unit([rand() - 0.5, rand() - 0.5, rand() - 0.5]);
+        const r = 0.12 + 0.16 * Math.pow(rand(), 1.5);
+        return {
+          p: vec.add(behind, vec.mul(d, r)),
+          color: mix("#fff6c8", "#ffc840", r * 3),
+          opacity: 0.09,
+          part: halo,
         };
       });
     },
@@ -1011,11 +1168,20 @@ export const RECIPES = {
     controls: [
       { key: "size", label: "Flame", type: "slider", default: 0.6 },
       { key: "blow", label: "Blow", type: "pulse", ease: 2 },
+      { key: "ring", label: "Light the ring", type: "toggle", default: 0, ease: 3 },
     ],
-    action: { key: "blow", label: "Blow gently", sound: "whoosh" },
+    action: { key: "ring", label: "Light the diyas", sound: "whoosh" },
     drive(t, c, out) {
+      // The flame flares up and grows, then carries its light round a ring
+      // of small diyas one by one. They stay lit until the next tap.
       const dip = Math.sin(Math.PI * clamp(c.blow, 0, 1));
-      out.amount = (0.45 + 0.9 * c.size) * (1 - 0.75 * dip);
+      const flare = Math.sin(Math.PI * band(c.ring, 0, 0.3));
+      out.amount = (0.45 + 0.9 * c.size) * (1 - 0.75 * dip) * (1 + 0.45 * c.ring + 0.9 * flare);
+      out.parts.flame = { visible: 1 + 0.35 * c.ring + 0.5 * flare };
+      for (let i = 0; i < DIYAS; i++) {
+        const a = 0.12 + i * 0.1;
+        out.parts[`d${i}`] = { visible: easeInOut(band(c.ring, a, a + 0.1)) };
+      }
     },
     build(k) {
       const base = -0.55;
@@ -1173,7 +1339,64 @@ export const RECIPES = {
           color: (c) => (c.t > 0.85 ? "#2a1a10" : "#f4ecd8"),
         },
       );
-      flame(k, vec.add(tip, [0, 0.02, 0]), { share: 0.08, height: 0.55, width: 0.08, size: 1.2 });
+      const main = k.part("flame", { pivot: vec.add(tip, [0, 0.02, 0]) });
+      flame(k, vec.add(tip, [0, 0.02, 0]), {
+        share: 0.08,
+        height: 0.55,
+        width: 0.08,
+        size: 1.2,
+        part: main,
+      });
+      // A ring of small diyas on the rangoli, unlit until the big one
+      // passes its light round.
+      for (let i = 0; i < DIYAS; i++) {
+        const a = spoutA + TAU / 16 + (i / DIYAS) * TAU;
+        const at = [Math.sin(a) * 0.84, base, Math.cos(a) * 0.84];
+        const small = (u, v, inner) => {
+          const q = (v * Math.PI) / 2;
+          const r = 0.085 * Math.pow(Math.sin(q), 0.8) * (inner ? 0.85 : 1);
+          const y = 0.005 + 0.055 * (1 - Math.cos(q)) * (inner ? 0.85 : 1) + (inner ? 0.008 : 0);
+          return [at[0] + Math.sin(u * TAU) * r, at[1] + y, at[2] + Math.cos(u * TAU) * r];
+        };
+        for (const inner of [false, true])
+          k.add(
+            k.param((u, v) => small(u, v, inner), { grid: 24, flip: inner }),
+            {
+              flat: 0.2,
+              weight: 2,
+              even: true,
+              jitter: 0.012,
+              color: (c) => {
+                if (inner) return lit(c, "#7a3412", 0.3, 0.2);
+                const y = c.p[1] - base;
+                const dotRow = Math.abs(y - 0.042) < 0.006 && fract(c.u * 12) < 0.4;
+                return lit(c, dotRow ? "#fbf4e0" : "#c9662a", 0.35, 0.18);
+              },
+            },
+          );
+        k.add(k.disc(0.062), {
+          pos: [at[0], base + 0.05, at[2]],
+          flat: 0.3,
+          weight: 2,
+          pattern: false,
+          color: (c) => lit(c, "#9c5a12", 0.2, 0.9),
+        });
+        const wick = [at[0], base + 0.065, at[2]];
+        k.add(k.cylinder(0.008, 0.03), {
+          pos: wick,
+          weight: 4,
+          pattern: false,
+          color: "#2a1a10",
+        });
+        const part = k.part(`d${i}`, { pivot: wick });
+        flame(k, vec.add(wick, [0, 0.012, 0]), {
+          share: 0.007,
+          height: 0.22,
+          width: 0.03,
+          size: 0.8,
+          part,
+        });
+      }
       k.reach(vec.add(tip, [0, 0.75, 0]));
     },
   },

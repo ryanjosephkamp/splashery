@@ -31,6 +31,7 @@ const keep = (c, size) => ({ c, keep: true, size });
 const easeInOut = (x) => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2);
 const easeOut = (x) => 1 - Math.pow(1 - clamp(x, 0, 1), 3);
 const bump = (x) => (x <= 0 || x >= 1 ? 0 : Math.sin(Math.PI * x));
+const band = (x, a, b) => clamp((x - a) / (b - a), 0, 1);
 const rotY = (p, a) => [
   p[0] * Math.cos(a) + p[2] * Math.sin(a),
   p[1],
@@ -101,6 +102,18 @@ function hashInt(n) {
   n ^= n >>> 15;
   return n >>> 0;
 }
+
+// The kite leans a little to one side; its line runs from the bridle (just in
+// front of the spars' crossing) down to the flyer.
+const KITE = (() => {
+  const a = -0.28;
+  const tilt = (p) => [
+    p[0] * Math.cos(a) - p[1] * Math.sin(a),
+    p[0] * Math.sin(a) + p[1] * Math.cos(a),
+    p[2],
+  ];
+  return { tilt, bridle: tilt([0, 0.1, 0.1]), flyer: [0.85, -1.05, 0.3] };
+})();
 
 // ---- Custom shapes ------------------------------------------------------------
 
@@ -682,16 +695,19 @@ export const RECIPES = {
   "rubber-duck": {
     alive: true,
     options: [{ key: "color", label: "Colour", type: "color", default: "#ffd21f" }],
-    controls: [{ key: "squeak", label: "Squeak", type: "pulse", ease: 0.9 }],
+    controls: [{ key: "squeak", label: "Squeak", type: "pulse", ease: 1.8 }],
     action: { key: "squeak", label: "Squeak", sound: "poke" },
     drive(t, c, out) {
-      const s = c.squeak;
+      // A squeeze and a hop in the first 0.9 s, then it bobs and settles.
+      const e = (1 - c.squeak) * 1.8;
+      const s = c.squeak > 0 ? clamp(1 - e / 0.9, 0, 1) : 0;
+      const b = e > 0.5 && c.squeak > 0 ? Math.exp(-(e - 0.5) * 2.4) * Math.sin((e - 0.5) * 9) : 0;
       const q = quatMul(
-        quatAxisAngle([1, 0, 0], 0.05 * Math.sin(t * 1.7)),
-        quatAxisAngle([0, 0, 1], 0.04 * Math.sin(t * 1.3 + 1) + 0.12 * bump(1 - s) * s),
+        quatAxisAngle([1, 0, 0], 0.05 * Math.sin(t * 1.7) + 0.06 * b),
+        quatAxisAngle([0, 0, 1], 0.04 * Math.sin(t * 1.3 + 1) + 0.12 * bump(1 - s) * s + 0.1 * b),
       );
       out.body = {
-        offset: [0, 0.02 * Math.sin(t * 2.1) + 0.12 * bump((1 - s) * 1.6), 0],
+        offset: [0, 0.02 * Math.sin(t * 2.1) + 0.12 * bump((1 - s) * 1.6) + 0.02 * b, 0],
         quat: q,
         squash: 0.28 * Math.pow(s, 3),
       };
@@ -1454,25 +1470,38 @@ export const RECIPES = {
       { key: "c1", label: "Colour 1", type: "color", default: "#e8413c" },
       { key: "c2", label: "Colour 2", type: "color", default: "#f7c948" },
     ],
-    controls: [{ key: "gust", label: "Gust", type: "pulse", ease: 2.2 }],
+    controls: [{ key: "gust", label: "Gust", type: "pulse", ease: 2.8 }],
     action: { key: "gust", label: "Gust of wind", sound: "whoosh" },
     drive(t, c, out) {
-      const g = c.gust;
+      // A gust: the kite climbs round a loop, turning once about its bridle,
+      // while the tail whips. The line stays tied to the bridle.
+      const e = (1 - c.gust) * 2.8;
+      const on = c.gust > 0;
+      const f = on ? 0.5 - 0.5 * Math.cos(Math.PI * band(e, 0.03, 1.6)) : 0;
+      const loop = TAU * f;
+      const r = 0.15;
+      const lift = on ? 0.12 * bump(e / 2.6) : 0;
+      const off = [
+        r * Math.sin(loop),
+        0.05 * Math.sin(t * 0.9) + r * (1 - Math.cos(loop)) + lift,
+        0,
+      ];
       out.parts.kite = {
-        angle:
-          0.08 * Math.sin(t * 1.1) + 0.05 * Math.sin(t * 2.3) + 0.25 * g * Math.sin((1 - g) * 12),
-        offset: [0, 0.05 * Math.sin(t * 0.9) + 0.25 * bump(1 - g), 0],
+        angle: 0.08 * Math.sin(t * 1.1) + 0.05 * Math.sin(t * 2.3) + loop,
+        offset: off,
       };
-      out.amount = 1 + 1.5 * g;
+      const from = sub(KITE.bridle, KITE.flyer);
+      const to = add(from, off);
+      const dir = unit(to);
+      out.parts.line = {
+        quat: quatFromTo(unit(from), dir),
+        offset: mul(dir, len(to) - len(from)),
+      };
+      out.amount = 1 + (on ? 4 * bump(band(e, 0, 2.6)) : 0);
     },
     build(k, o) {
-      const kite = k.part("kite", { pivot: [0, 0.1, 0], axis: [0, 0, 1] });
-      const tilt = -0.28;
-      const R = (p) => [
-        p[0] * Math.cos(tilt) - p[1] * Math.sin(tilt),
-        p[0] * Math.sin(tilt) + p[1] * Math.cos(tilt),
-        p[2],
-      ];
+      const R = KITE.tilt;
+      const kite = k.part("kite", { pivot: KITE.bridle, axis: [0, 0, 1] });
       const T = R([0, 0.78, 0]);
       const L = R([-0.52, 0.22, 0.04]);
       const Rt = R([0.52, 0.22, 0.04]);
@@ -1535,9 +1564,10 @@ export const RECIPES = {
           });
         }
       }
-      // The line down to the flyer.
-      const a = R([0, 0.1, 0.1]);
-      const b = [0.85, -1.05, 0.3];
+      // The line down to the flyer, aimed at the bridle as the kite moves.
+      const line = k.part("line", { pivot: KITE.flyer });
+      const a = KITE.bridle;
+      const b = KITE.flyer;
       k.add(
         k.tube(
           (t) => [
@@ -1549,7 +1579,7 @@ export const RECIPES = {
           { samples: 64, grid: 24 },
         ),
         {
-          part: kite,
+          part: line,
           share: 0.02,
           flat: 0.5,
           pattern: false,

@@ -3,12 +3,41 @@
 The current state and the next phase. The session that finishes a phase updates this file. The
 ground rules are in [CLAUDE.md](../CLAUDE.md).
 
-## Current state (2026-09-24, after Phase C1)
+## Current state (2026-09-24, after Phase C2)
 
 - Phase A is done: splashery PR #13 and homepage PR #33 in
-  `ryanjosephkamp/ryanjosephkamp.github.io`, both merged. Phase B is done (PR #17, merged).
-- Phase C1 is done in the splashery PR from branch `claude/phase-c1-8gzmnj`. Check that it is merged
-  before starting C2.
+  `ryanjosephkamp/ryanjosephkamp.github.io`, both merged. Phase B (PR #17) and Phase C1 (PR #18) are
+  merged.
+- Phase C2 is done in splashery PR #19 (branch `claude/phase-c2-slo8ce`). Check that it is merged
+  before starting D.
+- **Clearer effects (C2).** All 33 toys are now `"v": "keep"` in `tools/toy-plan.json`, and each has
+  an `improved` entry saying what changed (TOY-PLAN.md shows it as "Improved"). The only toys still
+  marked "more" are the four touch and drag toys for Phase F.
+  - Several taps changed type or key. DNA's `unzip`, the submarine's `dive` (was the `scope`
+    toggle), the ice cream's `thaw`, the Lorenz attractor's `race`, the Klein bottle's `surge` and
+    the cherry blossom's `shake` are pulses. The diya's tap is a new `ring` toggle (Blow is still a
+    control).
+  - Some defaults changed, so resting looks changed:
+    - The pufferfish's Puff default is 0.1, so it rests slim.
+    - The tree's Lights default is off.
+    - The castle's drawbridge starts up.
+  - Old scenes that saved other values still load with those values.
+  - Per-tap variety uses a counter in the recipe's closure, hashed to pick a variant. Examples: the
+    fireworks' tube and shell type, and the crystal ball's sign. The drum keeps its last tap times
+    there too.
+  - New visible pieces:
+    - the bus's stop sign, doors and lights
+    - Big Ben's open belfry and bell
+    - the pagoda's wind chimes and stone lanterns
+    - the diya's ring of eight small diyas
+    - the eye's lids, which are hidden at rest
+  - Thumbnails were re-rendered for the toys whose resting look changed: pufferfish, decorated tree,
+    diya, bus, Big Ben, castle, pagoda, DNA, Lorenz and Klein bottle.
+  - `tools/effect-strip.mjs` renders a tap effect as a filmstrip (a frame before the tap, then
+    frames at set times after it). It steps the clock by hand, so frames are repeatable.
+    `--taps=3 --gap=0.2` taps several times; `--opt=style=double` sets a toy option. Composites of
+    every C2 toy are in `tests/screenshots/c2-*.png`.
+- `HF_TOKEN` was checked on 2026-09-24 (whoami: account `ryanjosephkamp`, role `read`). It works.
 - **Visual fixes (C1).** All 26 Fix lines are done; each toy's `fixed` entry in
   `tools/toy-plan.json` says what changed (TOY-PLAN.md shows them as "Fixed").
   - Grain had one main cause: random splat placement leaves about a quarter of a surface thinly
@@ -79,9 +108,9 @@ ground rules are in [CLAUDE.md](../CLAUDE.md).
   - `tools/fetch-flags.mjs`: flags.
 - All 49 Playwright tests pass, including the dark-mode transparent embed test and the new phone
   grid and help panel tests.
-- `HF_TOKEN` has still not been checked by any session. Check it (without printing it) before Phase
-  D. If it is missing or rejected, tell the owner exactly what to change: the cloud environment menu
-  in the session's title bar, then Edit, then an environment variable named `HF_TOKEN`.
+- If `HF_TOKEN` is ever missing or rejected, tell the owner exactly what to change: the cloud
+  environment menu in the session's title bar, then Edit, then an environment variable named
+  `HF_TOKEN`.
 - This helper is not in the repo. Rewrite it if needed:
   - A pack screenshot script: a Playwright page opens the app, clicks `.chip[data-category=…]` then
     `.toy-card[data-toy=…]`, waits until `#toy-status` starts with the toy's label, and takes the
@@ -119,6 +148,22 @@ Known issues carried forward:
   - Flags on vehicles were checked (all 14 in the French flag): windows, lights, tyres and now wheel
     rims, hubs and spokes stay unpainted. Launch pads, helipads and the flying saucer's pad do take
     the flag.
+- New in C2:
+  - The eye's blink lids look a little rough and bulky mid-blink.
+  - When the kite loops (about 1 s in), its tail sticks out of the top of the frame. A `k.reach`
+    would fix that but would shrink the kite at rest.
+  - The Klein bottle's water surge only just meets the rule of thumb, because the old glow that
+    moves by itself competes with it. The Lorenz trace reads as a brightening of the path, not a
+    crisp new line.
+  - Big Ben's bell and the pagoda's chimes swing only a little at the default zoom; the dial glow
+    and the lanterns carry those effects.
+  - The bus's stop arm is on the door side (+Z) so the camera sees it; real buses have it on the
+    driver's side.
+  - The bicycle's wheel spin-up reads in motion but not in stills; the bell's ring lines carry it.
+  - The pufferfish's belly patches show as small pale flaps when it is slim (a shape that already
+    existed at low Puff).
+  - Scenes saved with the submarine's old `scope=0` load with the periscope up.
+  - The rubber duck and the guitar still need their own sounds (Phase D): a quack and real music.
 
 ## Phases
 
@@ -140,17 +185,17 @@ that tool is not available, ask the owner to press "Copy my marks and notes" on 
 the text. A "change" note overrides the proposal in `tools/toy-plan.json`; update the JSON to match.
 If the plan JSON changes, the page can be republished from it (`node tools/toy-plan.mjs --json`).
 
-| Phase  | What                                                                                                                                                      | Repo(s)   |
-| ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- |
-| A      | Done: sharpness, Detail setting, embeds, honeybee, thumbnail retry, homepage embed.                                                                       | both      |
-| B      | Done: mobile shelf grid (drag up into a full grid like desktop), thumbnail labels that don't cut off, and a "Find your own splat" help panel.             | splashery |
-| C1     | Done: visual fixes from the review (26 toys: vintage camera, boombox, storybook, comet, Statue of Liberty crown, horse, cookie, sports-ball textures, …). | splashery |
-| **C2** | Make existing effects clearer or more dramatic (33 toys the owner found subtle or underwhelming: bacteriophage, Newton's cradle, Big Ben, bus, …).        | splashery |
-| D      | Effects and sound engine: a unique sound per toy, scan rigs (moving parts for captured toys), taps that know where they landed, drag-to-stretch.          | splashery |
-| E1–E6  | New tap effects for the 181 toys marked new (most only hop today), in six waves by category (see TOY-PLAN.md), each with its own sound.                   | splashery |
-| F      | Touch and drag interaction: a solvable puzzle cube, a chess set that plays a real game, a stretchy gummy bear, a draggable Newton's cradle, bricks.       | splashery |
-| G      | AI image-to-3D trial with `HF_TOKEN`.                                                                                                                     | splashery |
-| H      | Later: the gallery, multi-toy scenes, a liquid pour, the draw-order fix, more scans, more instruments, and the final homepage embed(s).                   | both      |
+| Phase | What                                                                                                                                                      | Repo(s)   |
+| ----- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- |
+| A     | Done: sharpness, Detail setting, embeds, honeybee, thumbnail retry, homepage embed.                                                                       | both      |
+| B     | Done: mobile shelf grid (drag up into a full grid like desktop), thumbnail labels that don't cut off, and a "Find your own splat" help panel.             | splashery |
+| C1    | Done: visual fixes from the review (26 toys: vintage camera, boombox, storybook, comet, Statue of Liberty crown, horse, cookie, sports-ball textures, …). | splashery |
+| C2    | Done: clearer or more dramatic effects for 33 toys the owner found subtle (bacteriophage, Big Ben, bus, octopus, fireworks, …).                           | splashery |
+| **D** | Effects and sound engine: a unique sound per toy, scan rigs (moving parts for captured toys), taps that know where they landed, drag-to-stretch.          | splashery |
+| E1–E6 | New tap effects for the 181 toys marked new (most only hop today), in six waves by category (see TOY-PLAN.md), each with its own sound.                   | splashery |
+| F     | Touch and drag interaction: a solvable puzzle cube, a chess set that plays a real game, a stretchy gummy bear, a draggable Newton's cradle, bricks.       | splashery |
+| G     | AI image-to-3D trial with `HF_TOKEN`.                                                                                                                     | splashery |
+| H     | Later: the gallery, multi-toy scenes, a liquid pour, the draw-order fix, more scans, more instruments, and the final homepage embed(s).                   | both      |
 
 What the owner asked for across the board (2026-09-23):
 
@@ -168,32 +213,31 @@ What the owner asked for across the board (2026-09-23):
 - Stay respectful: nothing destructive or disrespectful on the White House or the Washington
   Monument, and no fighting or gore (the Colosseum gets a chariot race, not gladiators).
 
-## Phase C2 in detail: clearer effects
+## Phase D in detail: effects and sound engine
 
-The toys marked "more" in [TOY-PLAN.md](TOY-PLAN.md) that are not touch or drag toys (33, listed
-under "C, polish"; the interactive ones wait for F). Before starting, check the owner's marks for
-these toys (see above) for any later change.
+Before starting, check the owner's marks (see above) for any later change.
 
-1. For each toy, read its Effect line in TOY-PLAN.md and its recipe's `drive()` and `action`. Many
-   "does nothing" reports are pulse actions that are too small or too short.
-2. Rule of thumb: an effect lasts at least 1.5 s, moves at least about 10% of the toy's size or
-   changes its light clearly, and is obvious in the first half second. Windmill: spin faster.
-3. The decorated tree and the diya are on both lists; C1 only changed their looks.
-4. Check each change by eye: `tools/toy-shots.mjs` can set a control (`--set=`) to render a frame
-   mid-effect. Run `node tools/check-packs.mjs <pack>` for every touched pack.
-5. When a toy is done, set its `"v"` to `"keep"` in `tools/toy-plan.json` (the effect is now right),
-   run `node tools/toy-plan.mjs` and `npx prettier --write docs/TOY-PLAN.md`.
-6. Effects that change the toy's look need new thumbnails (`tools/make-thumbs.mjs`, about 18 s per
-   toy); effects that only move on tap do not.
+1. **Sound library.** `src/sound.js` synthesises 12 shared sounds and a recipe names one in
+   `action.sound`. The call sites are in `src/app.js` (search `sound.play`). Add a voice library
+   (plucked string, bell, buzz, squeak and quack formants, crunch, splash, drum hits, a small note
+   sequencer for tunes) and let a recipe declare `action.sound` as a small spec, for example
+   `{ voice: "bell", pitch: 0.8, decay: 1.2 }`. Old names must keep working.
+2. **One sound per toy.** Every toy's Sound line is in TOY-PLAN.md. Start with the toys whose effect
+   is kept (98 after C2). Twins must sound different. Add a test that every toy has a sound and no
+   two share the exact same spec. Embeds stay silent.
+3. **Samples.** CC0 samples are allowed only where synthesis does badly (a real quack, an alarm
+   bell, a crowd). Record each one in CREDITS.md. Check the licence on the live source page.
+4. **Scan rigs, taps that know where they landed, drag-to-stretch and the audit tool.** See the
+   outline below. Each can be its own PR in a stack (`-<part>` suffixes) if the phase gets large.
 
-**Done when:** every C2 toy's effect meets the rule of thumb or the PR explains why not, all tests
-pass and prettier is clean.
+**Done when:** every toy plays its own sound on tap (or the PR lists which do not, and why), the new
+test passes, all tests pass and prettier is clean.
 
 ## Phases C–H (outline)
 
 - **C1, visual fixes.** Done (see Current state).
-- **C2, clearer effects.** In detail above. Several "do nothing" reports are pulse actions that are
-  simply too small or too short (the bacteriophage's sheath slides 0.5 units for about 3 s).
+- **C2, clearer effects.** Done (see Current state). `tools/effect-strip.mjs` is the tool for
+  checking any new tap effect by eye.
 - **D, effects and sound engine.**
   - Sound: today there are 12 shared synthesized sounds (`src/sound.js`) and toys pick one by name.
     Build a larger voice library (plucked strings, bells, buzz, squeak and quack formants, crunch,

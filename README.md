@@ -295,6 +295,11 @@ dark glass, and paint out printed brand names.
 `tools/toy-shots.mjs <out-dir> id ...` renders toys at their home view to PNG files for before and
 after comparisons (`--size=`, `--bg=`, `--theme=light`, `--set=open=0` to set a control first).
 
+`tools/effect-strip.mjs <out-dir> id ...` renders a toy's tap effect as a filmstrip: a frame before
+the tap, then frames at fixed times after it (`--times=0.1,0.3,0.6,1,1.5,2.2,3`), in one PNG. It
+steps the clock by hand, so the frames land at the same toy time on any machine.
+`--taps=3 --gap=0.2` taps several times (for toys that react to fast taps).
+
 ## Tests
 
 ```sh

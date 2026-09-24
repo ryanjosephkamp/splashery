@@ -375,17 +375,28 @@ export const RECIPES = {
     options: [{ key: "iris", label: "Iris", type: "color", default: "#2f7fc1" }],
     controls: [
       { key: "pupil", label: "Pupil", type: "slider", default: 0.35 },
-      { key: "light", label: "Light", type: "pulse", ease: 2.2 },
+      { key: "light", label: "Blink", type: "pulse", ease: 3.2 },
     ],
-    action: { key: "light", label: "Shine a light", sound: "click" },
+    action: { key: "light", label: "Blink", sound: "whoosh" },
+    // By itself the eye glances from place to place, with quick jumps and
+    // still moments between them. A tap makes it blink, stare at you and
+    // snap its pupil small before it goes back to looking round.
     drive(t, c, out) {
-      out.grow = clamp(c.pupil * (1 - 0.85 * c.light), 0, 1);
-      // Slowly looking around.
-      const yaw = 0.38 * Math.sin(t * 0.37) + 0.12 * Math.sin(t * 1.1);
-      const pitch = 0.2 * Math.sin(t * 0.53 + 1);
+      const p = c.light > 0 ? 1 - c.light : 1;
+      const look = eyeGlance(t);
+      const stare = smoothstep(0.04, 0.12, p) * (1 - smoothstep(0.72, 0.95, p));
+      const yaw = look[0] + (EYE_VIEWER[0] - look[0]) * stare;
+      const pitch = look[1] + (EYE_VIEWER[1] - look[1]) * stare;
       out.parts.ball = {
         quat: quatMul(quatAxisAngle([0, 1, 0], yaw), quatAxisAngle([1, 0, 0], -pitch)),
       };
+      const snap = smoothstep(0.07, 0.11, p) * (1 - smoothstep(0.7, 0.98, p));
+      out.grow = clamp(c.pupil * (1 - 0.9 * snap), 0, 1);
+      // The lid drops over the eye and lifts again in about a third of a second.
+      const shut = c.light > 0 ? smoothstep(0, 0.045, p) * (1 - smoothstep(0.055, 0.12, p)) : 0;
+      const lidOn = p < 0.13 && c.light > 0 ? 1 : 0;
+      out.parts.lid = { angle: -0.95 + 1.07 * shut, visible: lidOn };
+      out.parts.lidLow = { angle: 0.95 - 0.87 * shut, visible: lidOn };
     },
     build(k, o) {
       const ball = k.part("ball", { pivot: [0, 0, 0] });
@@ -543,6 +554,34 @@ export const RECIPES = {
         pattern: false,
         color: (c) => keep("#ffffff"),
       });
+      // The eyelids (only there while it blinks): skin-coloured shells over
+      // the front that close from above and below, with a lash line.
+      for (const up of [1, -1]) {
+        const lid = k.part(up > 0 ? "lid" : "lidLow", { pivot: [0, 0, 0], axis: [1, 0, 0] });
+        // A patch of a sphere: from the lash line at the equator up (or
+        // down) over the front.
+        const shell = k.param(
+          (u, v) => {
+            const az = (u - 0.5) * 2.2;
+            const el = up * v * 1.15;
+            const r = 1.08;
+            return [
+              r * Math.cos(el) * Math.sin(az),
+              r * Math.sin(el),
+              r * Math.cos(el) * Math.cos(az),
+            ];
+          },
+          { grid: 32, normal: (u, v, q) => q },
+        );
+        k.add(shell, {
+          part: lid,
+          flat: 0.2,
+          share: 0.05,
+          pattern: false,
+          color: (c) =>
+            c.v < 0.05 ? "#3a2418" : lit(mix("#e7b394", "#cf8f72", 1 - c.ln[2] / 1.08), c.n),
+        });
+      }
       k.reach([0.4, 0.3, 1.1]);
       k.reach([-0.4, -0.3, 1.1]);
     },
@@ -840,3 +879,26 @@ export const RECIPES = {
     },
   },
 };
+
+// Where the eye looks by itself at time t, as [yaw, pitch]: it holds a glance
+// for a second or two, then jumps quickly to the next one. The first glance is
+// straight ahead, so its still look does not change.
+const EYE_VIEWER = [0.55, 0.28];
+function eyeGlance(t) {
+  const hold = 1.7;
+  const i = Math.floor(t / hold);
+  const f = t / hold - i;
+  const at = (j) => {
+    if (j <= 0) return [0, 0.17];
+    const h = Math.sin(j * 12.9898) * 43758.5453;
+    const r = h - Math.floor(h);
+    const h2 = Math.sin(j * 78.233) * 12345.678;
+    const r2 = h2 - Math.floor(h2);
+    return [0.55 * (2 * r - 1), 0.32 * (2 * r2 - 1)];
+  };
+  const a = at(i);
+  const b = at(i + 1);
+  const s = smoothstep(0.82, 0.92, f);
+  const drift = 0.02 * Math.sin(t * 2.3);
+  return [a[0] + (b[0] - a[0]) * s + drift, a[1] + (b[1] - a[1]) * s];
+}

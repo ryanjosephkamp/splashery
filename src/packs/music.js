@@ -1,7 +1,17 @@
 // Music pack: an acoustic guitar to strum, a snare drum with sticks and a toy
 // xylophone with a mallet.
 
-import { mix, shade, smoothstep, clamp, quatEuler, quatRotate, quatMul, vec } from "../kit.js";
+import {
+  mix,
+  shade,
+  smoothstep,
+  clamp,
+  quatEuler,
+  quatRotate,
+  quatMul,
+  quatAxisAngle,
+  vec,
+} from "../kit.js";
 
 const TAU = Math.PI * 2;
 const LIGHT = vec.unit([0.3, 0.8, 0.55]);
@@ -67,6 +77,30 @@ function group(k, pos = [0, 0, 0], rot = [0, 0, 0]) {
 
 const line = (a, b) => (t) => vec.add(a, vec.mul(vec.sub(b, a), t));
 
+// Per-toy memory for drive(): keyed by the control state object, which is
+// new each time a toy loads.
+const MEM = new WeakMap();
+function mem(c) {
+  let m = MEM.get(c);
+  if (!m) MEM.set(c, (m = {}));
+  return m;
+}
+// True on the frame a pulse control fires.
+function fired(m, key, v) {
+  const was = m["p_" + key] ?? 0;
+  m["p_" + key] = v;
+  return v > was + 0.02;
+}
+
+// A drum roll at four speeds: seconds per stroke, how long it lasts after
+// the last tap, and how high the sticks lift.
+const ROLL = [
+  { beat: 0.13, len: 1.7, lift: 0.34 },
+  { beat: 0.095, len: 2.2, lift: 0.28 },
+  { beat: 0.075, len: 2.6, lift: 0.24 },
+  { beat: 0.06, len: 3.0, lift: 0.2 },
+];
+
 // The drumsticks, resting over the drum: butt, tip.
 const STICKS = [
   { butt: [0.95, 0.62, 0.42], tip: [0.12, 0.33, 0.12], delay: 0 },
@@ -98,10 +132,37 @@ export const RECIPES = {
         ],
       },
     ],
-    controls: [{ key: "strum", label: "Strum", type: "pulse", ease: 2.4 }],
+    controls: [{ key: "strum", label: "Strum", type: "pulse", ease: 3 }],
     action: { key: "strum", label: "Strum", sound: "chime" },
     drive(t, c, out) {
-      out.amount = c.strum;
+      // A down-strum: each string is plucked a moment after the one above
+      // and vibrates, bending at its middle and blurring wider, dying away
+      // over about three seconds. The guitar rocks, hops and settles, and
+      // rings of sound pulse out of the soundhole one after another.
+      const e = (1 - c.strum) * 3;
+      const on = c.strum > 0;
+      for (let i = 0; i < 6; i++) {
+        const el = e - 0.035 * i;
+        const env = on && el > 0 ? Math.exp(-el * 0.8) * band(el, 0, 0.03) : 0;
+        const a = 0.15 * env * Math.cos(TAU * (4.5 + i * 0.6) * el);
+        out.parts[`s${i}a`] = { angle: a, visible: 1 + 1.6 * env };
+        out.parts[`s${i}b`] = { angle: -a, visible: 1 + 1.6 * env };
+      }
+      for (let i = 0; i < 3; i++) {
+        const a = 0.08 + i * 0.35;
+        out.parts[`ring${i}`] = {
+          visible: on ? 1.3 * Math.sin(Math.PI * band(e, a, a + 0.9)) : 0,
+        };
+      }
+      if (on) {
+        const rock = Math.exp(-e * 1.5) * Math.sin(e * 6);
+        const hop = Math.sin(Math.PI * band(e, 0, 0.45));
+        out.body = {
+          quat: quatAxisAngle([0, 0, 1], -0.34 * rock),
+          offset: [0, 0.1 * hop, 0],
+          squash: -0.04 * hop + 0.05 * Math.sin(Math.PI * band(e, 0.45, 0.7)),
+        };
+      }
     },
     build(k, o) {
       const g = group(k, [0.1, -0.05, 0], [-12, 0, 38]);
@@ -238,23 +299,52 @@ export const RECIPES = {
             color: (c) => lit(c, "#f0e8d8", 0.3),
           });
         }
-      // Six strings that shimmer when strummed (anchored at both ends).
+      // Rings of sound that pulse out of the soundhole, hidden at rest: three
+      // circles of glowing sparks, each wider than the last.
+      for (let i = 0; i < 3; i++) {
+        const ring = k.part(`ring${i}`, { pivot: g.pt([0, -0.02, T / 2]) });
+        const rr = 0.2 + i * 0.15;
+        k.cloud({ share: 0.008, size: 1.1 + 0.25 * i, pattern: false }, (rand) => {
+          const a = rand() * TAU;
+          const r = rr * (0.96 + 0.08 * rand());
+          const d = [Math.cos(a), Math.sin(a), 0];
+          return {
+            p: g.pt([d[0] * r, -0.02 + d[1] * r, T / 2 + 0.07 + 0.03 * i]),
+            n: g.dir([0, 0, 1]),
+            color: mix("#fff4c8", "#ffc24a", i * 0.4 + 0.3 * rand()),
+            opacity: 0.9,
+            part: ring,
+            kind: "twinkle",
+            params: [0.4, rand() * TAU],
+          };
+        });
+      }
+      // Six strings that vibrate when strummed. Each is two halves, turned
+      // about the bridge and the nut, so it bends at the middle while both
+      // ends stay put.
       const zS = T / 2 + 0.03;
+      const normal = g.dir([0, 0, 1]);
       for (let i = 0; i < 6; i++) {
         const f = (i - 2.5) / 2.5;
         const a = [f * 0.075, -0.575, zS];
         const b = [f * 0.042, nutY, zS];
+        const mid = vec.mul(vec.add(a, b), 0.5);
         const r = 0.005 - i * 0.0004;
         const wound = i < 4;
-        g.add(k.tube(line(a, b), r, { grid: 8, samples: 16 }), {
-          flat: 0.3,
-          weight: 6,
-          size: 0.6,
-          pattern: false,
-          kind: "wave",
-          params: (c) => [0.06 * Math.sin(Math.PI * c.t), c.t * 30 + i + c.rand() * 0.6],
-          color: (c) => lit(c, wound ? "#e8c890" : "#ffffff", 0.15),
-        });
+        for (const [p0, p1, key] of [
+          [a, mid, "a"],
+          [mid, b, "b"],
+        ]) {
+          const part = k.part(`s${i}${key}`, { pivot: g.pt(key === "a" ? a : b), axis: normal });
+          g.add(k.tube(line(p0, p1), r, { grid: 8, samples: 16 }), {
+            part,
+            flat: 0.3,
+            weight: 6,
+            size: 0.6,
+            pattern: false,
+            color: (c) => lit(c, wound ? "#e8c890" : "#ffffff", 0.15),
+          });
+        }
       }
     },
   },
@@ -263,21 +353,34 @@ export const RECIPES = {
   drum: {
     alive: true,
     options: [{ key: "shell", label: "Shell", type: "color", default: "#c8202e" }],
-    controls: [{ key: "hit", label: "Hit", type: "pulse", ease: 1.5 }],
-    action: { key: "hit", label: "Hit", sound: "bounce" },
+    controls: [{ key: "hit", label: "Hit", type: "pulse", ease: 3.2 }],
+    action: { key: "hit", label: "Play a roll", sound: "bounce" },
     drive(t, c, out) {
-      out.amount = c.hit * 1.2;
-      const u = 1 - c.hit;
+      // A roll: the sticks strike in turn. A tap during a roll speeds it up
+      // (four speeds) and makes it last longer; a pause starts over slowly.
+      const m = mem(c);
+      const e = (1 - c.hit) * 3.2;
+      if (fired(m, "hit", c.hit)) {
+        m.level = m.rolling && m.gap < 0.9 ? Math.min(3, (m.level ?? 0) + 1) : 0;
+        m.fresh = !m.rolling;
+        if (m.fresh) m.beats = 0;
+        m.last = 0;
+      }
+      const R = ROLL[m.level ?? 0];
+      m.gap = e;
+      m.beats = (m.beats ?? 0) + Math.max(0, e - (m.last ?? e)) / R.beat;
+      m.last = e;
+      const env =
+        c.hit > 0 ? (m.fresh ? band(e, 0, 0.08) : 1) * (1 - band(e, R.len - 0.3, R.len)) : 0;
+      m.rolling = env > 0;
+      const P = m.beats;
       STICKS.forEach((s, i) => {
-        const v = u - s.delay;
-        let a = 0;
-        if (c.hit > 0 && v > 0) {
-          a =
-            -0.1 * Math.exp(-(((v - 0.04) / 0.03) ** 2)) +
-            0.3 * Math.sin(Math.PI * band(v, 0.06, 0.55)) * (1 - band(v, 0.06, 0.55));
-        }
-        out.parts[`stick${i}`] = { angle: a };
+        const up = Math.sin((Math.PI * (P + i)) / 2) ** 2;
+        out.parts[`stick${i}`] = { angle: env * (-0.1 + (R.lift + 0.1) * up) };
       });
+      const hitNow = Math.exp(-fract(P) * 5);
+      out.amount = 1.2 * env;
+      out.body = { squash: 0.03 * env * hitNow };
     },
     build(k, o) {
       const R = 0.7;

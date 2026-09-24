@@ -316,14 +316,28 @@ export const RECIPES = {
   bacteriophage: {
     alive: true,
     options: [{ key: "color", label: "Head", type: "color", default: "#8f7fd1" }],
-    controls: [{ key: "inject", label: "Inject", type: "pulse", ease: 3.2 }],
+    controls: [{ key: "inject", label: "Inject", type: "pulse", ease: 4.5 }],
     action: { key: "inject", label: "Inject DNA", sound: "whoosh" },
+    // A tap plays the injection: the legs splay, the sheath snaps short and
+    // pulls the head down, the tail tube punches through the base plate and
+    // a glowing DNA strand coils out of it, then everything relaxes.
     drive(t, c, out) {
-      const s = smoothstep(0, 0.3, c.inject);
+      const p = c.inject > 0 ? 1 - c.inject : 1;
+      const relax = 1 - smoothstep(0.72, 0.95, p);
+      const legs = smoothstep(0, 0.08, p) * relax;
+      const s = smoothstep(0.03, 0.14, p) * relax;
       for (let i = 1; i < PHAGE_BANDS; i++)
         out.parts[`band${i}`] = { offset: [0, -i * PHAGE_SLIDE * s, 0] };
       out.parts.head = { offset: [0, -(PHAGE_BANDS - 1) * PHAGE_SLIDE * s, 0] };
-      out.glow = [0.55, 1, 0.7, 0.25 + 1.4 * c.inject];
+      out.parts.tube = { offset: [0, -PHAGE_POKE * s, 0] };
+      for (let i = 0; i < 6; i++) out.parts[`leg${i}`] = { angle: PHAGE_SPLAY * legs };
+      // The strand grows out along its length, then fades as the tail relaxes.
+      out.grow = smoothstep(0.08, 0.4, p);
+      out.parts.dna = {
+        offset: [0, -PHAGE_POKE * s, 0],
+        visible: c.inject > 0 ? 1 - smoothstep(0.62, 0.78, p) : 0,
+      };
+      out.glow = [0.55, 1, 0.7, 0.25 + 1.6 * Math.min(1, 3 * c.inject)];
     },
     build(k, o) {
       const head = k.part("head");
@@ -395,7 +409,9 @@ export const RECIPES = {
       // The tail tube (inside the sheath; shows when the sheath contracts).
       const tailTop = cy - tip - 0.12;
       const tailBot = -0.6;
+      const tube = k.part("tube");
       k.add(k.cylinder(0.055, tailTop - tailBot, { caps: false }), {
+        part: tube,
         pos: [0, (tailTop + tailBot) / 2, 0],
         pattern: false,
         kind: "pulse",
@@ -455,6 +471,11 @@ export const RECIPES = {
         const a = (i / 6) * TAU + TAU / 12;
         const dir = [Math.cos(a), 0, Math.sin(a)];
         const at = (r, y) => [dir[0] * r, y, dir[2] * r];
+        // Each fibre swings up and out about its root when the phage fires.
+        const leg = k.part(`leg${i}`, {
+          pivot: at(hexR - 0.02, py),
+          axis: [-Math.sin(a), 0, Math.cos(a)],
+        });
         const curve = spline([
           at(hexR - 0.02, py),
           at(0.5, py + 0.2),
@@ -465,13 +486,43 @@ export const RECIPES = {
         k.add(
           k.tube(curve, (t) => 0.03 - 0.012 * t, { grid: 32, samples: 96 }),
           {
+            part: leg,
             weight: 1.6,
             flat: 0.3,
             color: (c) => lit(mix("#6f7fa8", "#a7b4d6", c.t), c.n),
           },
         );
-        k.add(k.sphere(0.035), { pos: at(0.78, py + 0.32), weight: 2, color: "#8b98c4" });
+        k.add(k.sphere(0.035), {
+          part: leg,
+          pos: at(0.78, py + 0.32),
+          weight: 2,
+          color: "#8b98c4",
+        });
       }
+      // The injected DNA: a glowing strand that coils out of the tail tube's
+      // end below the plate (hidden until a tap grows it out).
+      const dna = k.part("dna");
+      const y0 = tailBot - 0.02;
+      k.add(
+        k.tube(
+          (t) => {
+            const a = t * TAU * 2.6;
+            const r = 0.04 + 0.5 * Math.pow(t, 0.8);
+            return [r * Math.cos(a), y0 - 0.1 * Math.sqrt(t) - 0.2 * t, r * Math.sin(a)];
+          },
+          0.028,
+          { samples: 256 },
+        ),
+        {
+          part: dna,
+          share: 0.025,
+          flat: 0.4,
+          pattern: false,
+          kind: "grow",
+          params: (c) => [0.02 + 0.9 * c.t, 0],
+          color: (c) => keep(mix("#fff6a8", "#b8ff9a", 0.5 + 0.5 * Math.sin(c.t * 50))),
+        },
+      );
     },
   },
 
@@ -631,12 +682,28 @@ export const RECIPES = {
     options: [{ key: "color", label: "Cell", type: "color", default: "#b565d8" }],
     controls: [
       { key: "signal", label: "Signal", type: "slider", default: 0.6 },
-      { key: "fire", label: "Fire", type: "pulse", ease: 1.8 },
+      { key: "fire", label: "Fire", type: "pulse", ease: 3 },
     ],
     action: { key: "fire", label: "Fire a signal", sound: "chime" },
+    // A tap fires an action potential: a bright spark gathers in the cell
+    // body, races down the axon with a short tail and bursts at the terminals.
     drive(t, c, out) {
+      const p = c.fire > 0 ? 1 - c.fire : 1;
       out.glow = [1, 0.86, 0.35, 0.25 + 1.1 * c.signal + 1.6 * c.fire];
       out.amount = 1;
+      const axon = neuronAxon();
+      const start = axon(0);
+      const on = c.fire > 0 ? 1 : 0;
+      NEURON_SPARKS.forEach((lag, i) => {
+        const s = smoothstep(0.06 + lag, 0.56 + lag, p);
+        const shown = smoothstep(0, 0.05, p) * (1 - smoothstep(0.56 + lag, 0.66 + lag, p));
+        out.parts[`spark${i}`] = {
+          offset: sub(axon(s), start),
+          visible: on * shown * (1 + 0.5 * (1 - smoothstep(0, 0.14, p))),
+        };
+      });
+      const burst = smoothstep(0.54, 0.62, p) * (1 - smoothstep(0.72, 0.97, p));
+      out.parts.burst = { visible: on * burst * 1.8 };
     },
     build(k, o) {
       const cell = o.color;
@@ -709,14 +776,7 @@ export const RECIPES = {
         );
       }
       // The axon: a long S-curve down to the right, sheathed in myelin.
-      const axon = spline([
-        add(soma, [0.26, -0.18, 0]),
-        [-0.05, 0.08, 0.08],
-        [0.32, -0.02, -0.05],
-        [0.62, -0.28, 0.05],
-        [0.72, -0.62, 0],
-        [0.78, -0.92, -0.05],
-      ]);
+      const axon = neuronAxon();
       k.add(k.tube(axon, 0.036, { grid: 24, samples: 256 }), {
         flat: 0.3,
         kind: "pulse",
@@ -774,6 +834,36 @@ export const RECIPES = {
           color: (c) => litGloss("#ff8fc8", c.n, 0.5),
         });
       }
+      // The signal (hidden until a tap): a spark and its fading tail that
+      // run down the axon, and a spray of light round the terminals.
+      const start = axon(0);
+      NEURON_SPARKS.forEach((lag, i) => {
+        const part = k.part(`spark${i}`);
+        const f = 1 - i / NEURON_SPARKS.length;
+        k.cloud({ share: 0.012 * f, size: 1.5 * f, pattern: false }, (rand, j, n) => {
+          const halo = j < n * 0.35;
+          return {
+            p: add(start, randBall(rand, halo ? 0.2 * f : 0.075 * f)),
+            color: halo ? "#fff08a" : "#ffffff",
+            opacity: halo ? 0.45 : 1,
+            size: halo ? 2.2 : 1,
+            part,
+          };
+        });
+      });
+      const burst = k.part("burst");
+      k.cloud({ share: 0.01, size: 1.1, pattern: false }, (rand, j, n) => {
+        const d = unit(add(tipDir, mul(randDir(rand), 0.9)));
+        const r = 0.05 + 0.32 * Math.pow(rand(), 0.7);
+        return {
+          p: add(end, mul(d, r)),
+          color: mix("#fff4c2", "#ff9fd2", rand()),
+          opacity: 0.55 + 0.4 * (1 - r / 0.37),
+          kind: "twinkle",
+          params: [0.6, rand() * TAU],
+          part: burst,
+        };
+      });
     },
   },
 
@@ -1091,11 +1181,16 @@ export const RECIPES = {
       { key: "strandA", label: "Strand", type: "color", default: "#5b8def" },
       { key: "strandB", label: "Partner", type: "color", default: "#f06b9a" },
     ],
-    controls: [{ key: "unzip", label: "Unzip", type: "toggle", default: 0, ease: 1.8 }],
-    action: { key: "unzip", label: "Unzip or zip", sound: { on: "open", off: "close" } },
+    controls: [{ key: "unzip", label: "Unzip", type: "pulse", ease: 5.5 }],
+    action: { key: "unzip", label: "Unzip and zip", sound: "open" },
+    // A tap unzips the helix almost to its foot, the bases light up in pairs
+    // as the fork passes them, and then it zips back up.
     drive(t, c, out) {
-      const u = c.unzip * c.unzip * (3 - 2 * c.unzip);
+      const p = c.unzip > 0 ? 1 - c.unzip : 1;
+      const open = 1 - Math.pow(1 - clamp(p / 0.3, 0, 1), 3);
+      const u = open * (1 - smoothstep(0.6, 0.95, p));
       Object.assign(out.parts, dnaParts(t * 0.35, u));
+      out.grow = u * 1.05;
     },
     build(k, o) {
       const H = DNA.height;
@@ -1158,6 +1253,19 @@ export const RECIPES = {
             flat: 0.3,
             pattern: false,
             color: (c) => litGloss(BASES[base], c.n, 0.3),
+          });
+          // A glow round the base that lights as the fork passes its pair.
+          k.add(k.cylinder(0.075, L + 0.03, { caps: true }), {
+            part: partAt(s, y),
+            pos: W(lerp(from, mid, 0.5)),
+            quat: quatMul(DNA.tilt, quatFromTo([0, 1, 0], d)),
+            weight: 0.8,
+            size: 1.4,
+            opacity: 0.45,
+            pattern: false,
+            kind: "grow",
+            params: [y < DNA.forkY ? 2 : 0.05 + (0.9 * (y - DNA.forkY)) / (H / 2 - DNA.forkY), 0],
+            color: mix(BASES[base], "#ffffff", 0.55),
           });
         }
       }
@@ -2130,7 +2238,7 @@ const DNA = (() => {
   const pitch = 1.8;
   const radius = 0.52;
   const offset = (150 / 180) * Math.PI;
-  const forkY = -0.15;
+  const forkY = -1.3;
   // Phase so that the strands part left and right (along X) at the fork.
   const phase = Math.PI / 2 - offset / 2 - (forkY / pitch) * TAU;
   const tilt = quatAxisAngle([0.15, 0, 1], -0.5);
@@ -2142,11 +2250,11 @@ const DNA = (() => {
     forkY,
     phase,
     tilt,
-    segs: 3,
+    segs: 6,
     step: pitch / 10,
     y0: -height / 2 + 0.12,
     axis: quatRotate(tilt, [0, 1, 0]),
-    open: 0.36,
+    open: 0.13,
   };
 })();
 
@@ -2218,6 +2326,28 @@ function dnaParts(twist, u) {
   return parts;
 }
 
+// The neuron's axon (shared by its build and the signal's drive), and the
+// lags of the signal spark and its tail along it.
+let neuronAxonCurve = null;
+function neuronAxon() {
+  if (!neuronAxonCurve) {
+    const soma = [-0.6, 0.42, 0];
+    neuronAxonCurve = spline([
+      add(soma, [0.26, -0.18, 0]),
+      [-0.05, 0.08, 0.08],
+      [0.32, -0.02, -0.05],
+      [0.62, -0.28, 0.05],
+      [0.72, -0.62, 0],
+      [0.78, -0.92, -0.05],
+    ]);
+  }
+  return neuronAxonCurve;
+}
+const NEURON_SPARKS = [0, 0.025, 0.05, 0.075];
+
 // The bacteriophage sheath: how many bands, and how far each slides.
 const PHAGE_BANDS = 6;
-const PHAGE_SLIDE = 0.1;
+const PHAGE_SLIDE = 0.15;
+// How far the tail tube pokes out below the plate, and the legs' splay (radians).
+const PHAGE_POKE = 0.3;
+const PHAGE_SPLAY = 0.45;

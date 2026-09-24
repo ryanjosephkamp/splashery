@@ -1544,15 +1544,33 @@ export const RECIPES = {
   "wizards-orb": {
     alive: true,
     options: [{ key: "magic", label: "Magic", type: "color", default: "#b04dff" }],
-    controls: [{ key: "cast", label: "Cast a spell", type: "pulse", ease: 2.5 }],
+    controls: [{ key: "cast", label: "Cast a spell", type: "pulse", ease: 3.2 }],
     action: { key: "cast", label: "Cast", sound: "chime" },
     drive(t, c, out) {
-      out.amount = 0.55 + 1.2 * c.cast;
-      out.glow = [0.75, 0.55, 1, 0.7 + 0.9 * c.cast];
+      // A spell: a flash of light, the swirl spins up, sparks spiral out and a
+      // ring of runes rises round the orb, circles it and fades.
+      const e = (1 - c.cast) * 3.2;
+      const on = c.cast > 0;
+      const env = on ? band(e, 0, 0.2) * (1 - band(e, 2.4, 3.2)) : 0;
+      out.amount = 0.55 + 1.4 * env;
+      out.glow = [0.75, 0.55, 1, 0.7 + 2 * env];
+      out.parts.swirl = { angle: on ? TAU * 1.5 * ease(e / 2.6) : 0 };
+      out.parts.flash = { visible: on ? 3 * Math.exp(-e * 3) * band(e, 0, 0.06) : 0 };
+      out.grow = on ? band(e, 0.08, 1.1) : 0;
+      out.parts.sparks = {
+        angle: on ? 1.2 * ease(e / 2.2) : 0,
+        visible: on ? 1 - band(e, 1.4, 2.4) : 0,
+      };
+      out.parts.runes = {
+        angle: -1.6 * ease(e / 3.2),
+        offset: [0, 0.12 * ease(band(e, 0.1, 1)), 0],
+        visible: on ? ease(band(e, 0.1, 0.5)) * (1 - band(e, 2.3, 3.1)) : 0,
+      };
     },
     build(k, o) {
       const C = [0, 0.18, 0];
       const R = 0.52;
+      const swirl = k.part("swirl", { pivot: C, axis: [0, 1, 0] });
       const bronze = "#9a6a3a";
       // The stand.
       k.add(
@@ -1648,6 +1666,7 @@ export const RECIPES = {
           opacity: 0.55,
           kind: "orbit",
           params: [1.1, 0.6],
+          part: swirl,
         };
       });
       k.cloud({ share: 0.08, size: 2.2, pattern: false }, (rand) => {
@@ -1706,6 +1725,94 @@ export const RECIPES = {
         kind: "rise",
         params: [0.45, rand()],
       }));
+      // The spell, hidden until cast. A flash of light filling the glass.
+      const flash = k.part("flash", { pivot: C });
+      k.cloud({ share: 0.012, size: 3, pattern: false }, (rand) => {
+        const d = vec.unit([rand() - 0.5, rand() - 0.5, rand() - 0.5]);
+        return {
+          p: vec.add(C, vec.mul(d, R * 0.9 * Math.cbrt(rand()))),
+          color: mix(pale, "#ffffff", 0.5 + 0.5 * rand()),
+          opacity: 0.22,
+          part: flash,
+        };
+      });
+      // Sparks spiralling out in five arms, revealed from the glass outwards.
+      const sparks = k.part("sparks", { pivot: C, axis: [0, 1, 0] });
+      k.cloud({ share: 0.03, size: 0.75, pattern: false }, (rand, i) => {
+        const arm = i % 5;
+        const f = Math.sqrt(rand());
+        const a = (arm / 5) * TAU + f * 2.4 + (rand() - 0.5) * 0.15;
+        const rr = R * 1.02 + f * 0.42 + (rand() - 0.5) * 0.03;
+        const y = C[1] + (rand() - 0.5) * 0.06 + 0.18 * f * Math.sin(arm * 2.3);
+        return {
+          p: [Math.sin(a) * rr, y, Math.cos(a) * rr],
+          dir: [Math.cos(a), 0, -Math.sin(a)],
+          stretch: 1.8,
+          size: f > 0.9 ? 1.4 : 1,
+          color: mix("#ffffff", arm % 2 ? other : pale, 0.3 + 0.5 * f),
+          opacity: 1,
+          part: sparks,
+          kind: "grow",
+          params: [f * 0.85, 0],
+        };
+      });
+      // A ring of glowing runes that rises and circles the orb.
+      const runes = k.part("runes", { pivot: C, axis: [0, 1, 0] });
+      const glyphs = [
+        [
+          [0, -1, 0, 1],
+          [0, 1, 0.6, 0.4],
+          [0, 0.3, 0.6, -0.3],
+        ],
+        [
+          [-0.4, -1, -0.4, 1],
+          [-0.4, 1, 0.5, 0],
+          [0.5, 0, -0.4, -0.3],
+        ],
+        [
+          [0, -1, 0, 1],
+          [-0.6, 0.6, 0.6, -0.2],
+        ],
+        [
+          [-0.5, -1, 0, 1],
+          [0, 1, 0.5, -1],
+          [-0.3, -0.2, 0.3, -0.2],
+        ],
+        [
+          [0, -1, 0, 1],
+          [-0.6, 1, 0, 0.2],
+          [0.6, 1, 0, 0.2],
+        ],
+        [
+          [0, 1, 0.5, 0],
+          [0.5, 0, 0, -1],
+          [0, -1, -0.5, 0],
+          [-0.5, 0, 0, 1],
+        ],
+      ];
+      k.cloud({ share: 0.03, size: 0.9, pattern: false }, (rand, i) => {
+        const n = i % 10;
+        const g = glyphs[(n * 7) % glyphs.length];
+        const [x0, y0, x1, y1] = g[Math.floor(rand() * g.length)];
+        const f = rand();
+        const a = (n / 10) * TAU;
+        const out = [Math.sin(a), 0, Math.cos(a)];
+        const side = [Math.cos(a), 0, -Math.sin(a)];
+        const sz = 0.085;
+        const u = (x0 + (x1 - x0) * f) * sz;
+        const v = (y0 + (y1 - y0) * f) * sz;
+        const rr = 0.8;
+        return {
+          p: [out[0] * rr + side[0] * u, C[1] + v, out[2] * rr + side[2] * u],
+          dir: vec.unit(vec.add(vec.mul(side, x1 - x0), [0, y1 - y0, 0])),
+          stretch: 1.6,
+          color: mix(pale, "#ffffff", 0.4 + 0.3 * rand()),
+          opacity: 1,
+          part: runes,
+          kind: "twinkle",
+          params: [0.35, n * 1.3],
+        };
+      });
       k.reach([0, C[1] + R + 0.35, 0]);
     },
   },

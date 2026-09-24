@@ -177,6 +177,34 @@ function lorenzPath() {
   return pts;
 }
 
+// The Lorenz path by length, for the racing spark: at(s) is the point a
+// fraction s of the way along it.
+let lorenzTrackCache = null;
+function lorenzTrack() {
+  if (!lorenzTrackCache) {
+    const pts = lorenzPath();
+    const cum = new Float64Array(pts.length);
+    for (let i = 1; i < pts.length; i++) cum[i] = cum[i - 1] + len(sub(pts[i], pts[i - 1]));
+    const L = cum[pts.length - 1];
+    const at = (s) => {
+      const x = clamp(s, 0, 1) * L;
+      let lo = 0;
+      let hi = pts.length - 1;
+      while (hi - lo > 1) {
+        const m = (lo + hi) >> 1;
+        if (cum[m] <= x) lo = m;
+        else hi = m;
+      }
+      const f = (x - cum[lo]) / (cum[hi] - cum[lo] || 1);
+      return add(pts[lo], mul(sub(pts[hi], pts[lo]), f));
+    };
+    lorenzTrackCache = { at };
+  }
+  return lorenzTrackCache;
+}
+// How far behind the spark (as a fraction of the path) each tail blob runs.
+const LORENZ_SPARKS = [0, 0.004, 0.008, 0.012, 0.016];
+
 function torusKnot(p, q, n = 1600) {
   const pts = [];
   for (let i = 0; i < n; i++) {
@@ -558,8 +586,26 @@ for (const kind of SOLID_KINDS) {
 export const RECIPES = {
   lorenz: {
     alive: true,
-    controls: [{ key: "glow", label: "Glow", type: "slider", default: 0.7 }],
+    controls: [
+      { key: "glow", label: "Glow", type: "slider", default: 0.7 },
+      { key: "race", label: "Race", type: "pulse", ease: 4.2 },
+    ],
+    action: { key: "race", label: "Race along the path", sound: "whoosh" },
+    // A tap sends a bright spark racing round the attractor; it draws the
+    // path afresh in white-gold light behind it, which then fades.
     drive(t, c, out) {
+      const p = c.race > 0 ? 1 - c.race : 1;
+      const on = c.race > 0 ? 1 : 0;
+      const s = clamp(p / 0.7, 0, 1);
+      const path = lorenzTrack();
+      LORENZ_SPARKS.forEach((lag, i) => {
+        out.parts[`spark${i}`] = {
+          offset: sub(path.at(Math.max(0, s - lag)), path.at(0)),
+          visible: on * smoothstep(0, 0.03, p) * (1 - smoothstep(0.72, 0.8, p)),
+        };
+      });
+      out.grow = on * s * 1.08;
+      out.parts.trace = { visible: on * (1 - smoothstep(0.78, 1, p)) };
       out.glow = [1, 0.92, 0.72, 0.3 + 1.5 * c.glow];
     },
     build(k) {
@@ -574,6 +620,39 @@ export const RECIPES = {
           const col = ramp(stops, c.t);
           return shade(col, 0.82 + 0.3 * Math.max(0, dot(c.n, LIGHT)));
         },
+      });
+      // The racing spark and its tail, and the bright trace it draws (all
+      // hidden until a tap).
+      const start = pts[0];
+      LORENZ_SPARKS.forEach((lag, i) => {
+        const part = k.part(`spark${i}`);
+        const f = 1 - i / LORENZ_SPARKS.length;
+        k.cloud({ share: 0.004 * f, size: 1.3 * f, pattern: false }, (rand, j, n) => {
+          const halo = j < n * 0.4;
+          return {
+            p: add(
+              start,
+              mul(
+                unit([rand() - 0.5, rand() - 0.5, rand() - 0.5]),
+                (halo ? 0.16 : 0.06) * f * Math.cbrt(rand()),
+              ),
+            ),
+            color: halo ? "#ffd98a" : "#ffffff",
+            opacity: halo ? 0.35 : 1,
+            size: halo ? 2.4 : 1,
+            part,
+          };
+        });
+      });
+      k.add(polyTube(pts, 0.022), {
+        part: k.part("trace"),
+        share: 0.08,
+        flat: 0.6,
+        stretch: 2.2,
+        pattern: false,
+        kind: "grow",
+        params: (c) => [c.t, 0],
+        color: (c) => mix("#fff4d0", "#ffd36b", 0.5 + 0.5 * Math.sin(c.t * 40)),
       });
     },
   },
@@ -632,9 +711,19 @@ export const RECIPES = {
     alive: true,
     density: 0.8,
     options: [{ key: "color", label: "Glass", type: "color", default: "#3fb6c9" }],
-    controls: [{ key: "glow", label: "Glow", type: "slider", default: 0.5 }],
+    controls: [
+      { key: "glow", label: "Glow", type: "slider", default: 0.5 },
+      { key: "surge", label: "Surge", type: "pulse", ease: 4.5 },
+    ],
+    action: { key: "surge", label: "Send water through", sound: "drop" },
+    // A tap pours a surge of glowing water in at the base: its front runs up
+    // the body, through the neck and round into the bottom, then it fades.
     drive(t, c, out) {
-      out.glow = [0.85, 0.95, 1, 0.2 + 1.0 * c.glow];
+      const p = c.surge > 0 ? 1 - c.surge : 1;
+      const on = c.surge > 0 ? 1 : 0;
+      out.grow = on * 1.1 * (1 - Math.pow(1 - clamp(p / 0.45, 0, 1), 2));
+      out.parts.water = { visible: on * (1 - smoothstep(0.6, 0.95, p)) };
+      out.glow = [0.85, 0.95, 1, 0.2 + 1.0 * c.glow + 0.5 * c.surge];
     },
     build(k, o) {
       const f = (U, V) => {
@@ -681,6 +770,46 @@ export const RECIPES = {
           );
         },
       });
+      // The water (hidden until a tap): a slimmer copy of the surface inside
+      // the glass, drawn in along the tube as the surge advances.
+      const mids = [];
+      for (let i = 0; i <= 256; i++) {
+        const m = [0, 0, 0];
+        for (let j = 0; j < 12; j++) {
+          const q = f(i / 256, j / 12);
+          for (let l = 0; l < 3; l++) m[l] += q[l] / 12;
+        }
+        mids.push(m);
+      }
+      const mid = (U) => {
+        const x = clamp(U, 0, 1) * 256;
+        const i = Math.min(255, Math.floor(x));
+        return add(mids[i], mul(sub(mids[i + 1], mids[i]), x - i));
+      };
+      k.add(
+        k.param(
+          (U, V) => {
+            const m = mid(U);
+            return add(m, mul(sub(f(U, V), m), 0.9));
+          },
+          { grid: 96 },
+        ),
+        {
+          part: k.part("water"),
+          share: 0.14,
+          flat: 0.3,
+          opacity: 1,
+          pattern: false,
+          kind: "grow",
+          params: (c) => [c.u, 0],
+          color: (c) => {
+            // Bright ripples across the flow, so the moving front reads.
+            const ripple = Math.pow(0.5 + 0.5 * Math.sin(c.u * 90 + 2 * Math.sin(c.v * TAU)), 3);
+            const col = mix("#1640d8", "#e6fbff", ripple);
+            return lit(col, c.n, { amb: 0.8, dif: 0.3, spec: 0.5, pow: 20, two: true });
+          },
+        },
+      );
     },
   },
 
