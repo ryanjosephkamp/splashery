@@ -27,18 +27,60 @@ import { mulberry32, mixSeed, hash32 } from "./noise.js";
 
 export { NoGPUError };
 
-// Device profile: weak devices get fewer splats and a lower pixel ratio.
-export function detectProfile() {
-  const params = new URLSearchParams(location.search);
-  const forced = params.get("profile");
-  if (forced === "weak" || forced === "strong") return forced;
+// Device tiers, lowest first. Each has a splat budget (PROFILES in
+// generators.js) and a pixel-ratio cap for the canvas.
+export const TIERS = ["low", "mid", "high", "max"];
+export const PIXEL_RATIO = { low: 1.5, mid: 2, high: 2, max: 3 };
+const TIER_ALIASES = { weak: "low", strong: "high" };
+
+// The viewer's Detail preference: "auto", "high" or "max". It lives in this
+// browser only, never in scenes or links, so a shared link cannot force a
+// heavy load on someone else's phone.
+export const DETAILS = ["auto", "high", "max"];
+const DETAIL_KEY = "splashery.detail";
+
+export function readDetail() {
+  try {
+    const v = localStorage.getItem(DETAIL_KEY);
+    return DETAILS.includes(v) ? v : "auto";
+  } catch {
+    return "auto";
+  }
+}
+
+export function saveDetail(detail) {
+  try {
+    if (detail === "auto") localStorage.removeItem(DETAIL_KEY);
+    else localStorage.setItem(DETAIL_KEY, detail);
+  } catch {
+    // Storage can be off (private windows, blocked site data); the choice
+    // then lasts for this page only.
+  }
+}
+
+// ?profile= forces a tier (the old weak and strong still work).
+export function forcedProfile() {
+  const v = new URLSearchParams(location.search).get("profile");
+  const tier = TIER_ALIASES[v] || v;
+  return TIERS.includes(tier) ? tier : null;
+}
+
+// The tier this device starts at. low: 2 GB of memory or less, or two
+// cores; mid: phones and small machines; high: the rest. Detail High and
+// Max raise it. Slow frames can step an Auto tier down later.
+export function detectProfile(detail = readDetail()) {
+  const forced = forcedProfile();
+  if (forced) return forced;
+  if (detail === "max") return "max";
+  if (detail === "high") return "high";
   const nav = navigator;
+  const mem = typeof nav.deviceMemory === "number" ? nav.deviceMemory : 8;
+  const cores = typeof nav.hardwareConcurrency === "number" ? nav.hardwareConcurrency : 8;
+  if (mem <= 2 || cores <= 2) return "low";
   const coarse = matchMedia("(pointer: coarse)").matches;
   const small = Math.min(screen.width, screen.height) < 820;
-  const lowMem = typeof nav.deviceMemory === "number" && nav.deviceMemory <= 4;
-  const fewCores = typeof nav.hardwareConcurrency === "number" && nav.hardwareConcurrency <= 4;
-  if ((coarse && small) || lowMem || fewCores) return "weak";
-  return "strong";
+  if ((coarse && small) || mem <= 4 || cores <= 4) return "mid";
+  return "high";
 }
 
 export function prefersReducedMotion() {
@@ -51,7 +93,12 @@ export class Player {
   constructor(canvas, opts = {}) {
     this.canvas = canvas;
     this.opts = opts;
-    this.profile = opts.profile || detectProfile();
+    this.detail = readDetail();
+    this.profile = opts.profile || detectProfile(this.detail);
+    // Only an automatic tier steps down when frames are slow; ?adapt=off
+    // keeps both the tier and the resolution fixed (tests and tools).
+    this.adaptive = new URLSearchParams(location.search).get("adapt") !== "off";
+    this.autoTier = !opts.profile && !forcedProfile() && this.detail === "auto";
     this.reducedMotion = opts.reducedMotion ?? prefersReducedMotion();
     this.scene = createScene();
     this.time = 0;
@@ -63,6 +110,7 @@ export class Player {
     this.hostTheme = null;
     this.idle = { weight: 0, pokeAt: 0, pokes: 0 };
     this.loadToken = 0;
+    this.loading = 0;
     this.listeners = {};
     this.stroke = null;
     this.pickDirty = true;
@@ -86,7 +134,13 @@ export class Player {
   async init() {
     const params = new URLSearchParams(location.search);
     const prefer = this.opts.prefer || params.get("renderer") || "auto";
-    this.stage = await Stage.create(this.canvas, { prefer, weak: this.profile === "weak" });
+    this.stage = await Stage.create(this.canvas, {
+      prefer,
+      weak: this.profile === "low",
+      pixelRatio: PIXEL_RATIO[this.profile],
+      adaptive: this.adaptive,
+    });
+    this.stage.onSlow = () => this.stepDown();
     this.camera = new OrbitCamera({ reducedMotion: this.reducedMotion });
     this.driver = new EffectDriver();
     this.painter = new Painter(this.stage);
@@ -101,6 +155,35 @@ export class Player {
 
   get deviceType() {
     return this.stage.deviceType;
+  }
+
+  // ---- Detail -------------------------------------------------------------------
+
+  // Applies a new Detail preference. Returns true when the tier changed, so
+  // the caller can rebuild the toy with the new splat count.
+  setDetail(detail) {
+    this.detail = DETAILS.includes(detail) ? detail : "auto";
+    saveDetail(this.detail);
+    const forced = !!this.opts.profile || !!forcedProfile();
+    this.autoTier = !forced && this.detail === "auto";
+    return forced ? false : this.setProfile(detectProfile(this.detail));
+  }
+
+  setProfile(tier) {
+    if (tier === this.profile) return false;
+    this.profile = tier;
+    this.stage.setPixelRatio(PIXEL_RATIO[tier]);
+    this.emit("profile", tier);
+    return true;
+  }
+
+  // Frames stayed slow even at the reduced resolution: an automatic tier
+  // drops one step. The pixel cap changes now; the splat count changes
+  // with the next toy, so the current one does not pop.
+  stepDown() {
+    if (!this.autoTier) return;
+    const i = TIERS.indexOf(this.profile);
+    if (i > 0) this.setProfile(TIERS[i - 1]);
   }
 
   // ---- Look -----------------------------------------------------------------
@@ -135,7 +218,19 @@ export class Player {
   // ---- Toys -------------------------------------------------------------------
 
   // Loads the toy described by scene.toy. `file` carries bytes for user files.
-  async loadToy(toy, { file = null, onProgress } = {}) {
+  // Frame timing ignores the build (it blocks the page in slices) and the
+  // first frames of the new toy.
+  async loadToy(toy, opts = {}) {
+    this.loading++;
+    try {
+      return await this.loadToyNow(toy, opts);
+    } finally {
+      this.loading--;
+      this.stage.settle();
+    }
+  }
+
+  async loadToyNow(toy, { file = null, onProgress } = {}) {
     const token = ++this.loadToken;
     const progress = (f, label) => onProgress?.(f, label);
     this.stroke = null;
@@ -171,7 +266,7 @@ export class Player {
       const def = findToy(toy.id) || findToy("blob");
       if (def.kind === "procedural")
         return this.loadToy({ kind: "builtin", id: def.id }, { onProgress });
-      const url = assetURL(this.profile === "weak" && def.urlWeak ? def.urlWeak : def.url);
+      const url = assetURL(this.profile === "low" && def.urlWeak ? def.urlWeak : def.url);
       progress(0, `Loading ${def.label}…`);
       const bytes = await fetchBytes(url, (f) => progress(f * 0.9, `Loading ${def.label}…`));
       if (token !== this.loadToken) return null;
@@ -662,10 +757,12 @@ export class Player {
       this.driver.isAnimating(effects, this.time) ||
       this.motion.isAnimating(motion, this.time) ||
       this.idle.weight > 0;
-    if (moving || animating || dripping || this.stroke) {
+    const busy = moving || animating || dripping || !!this.stroke;
+    if (busy) {
       this.pickDirty = this.pickDirty || animating;
       this.stage.requestRender();
     }
+    this.stage.setBusy(busy && !this.loading);
     this.emit("frame", dt);
   }
 

@@ -4,13 +4,19 @@
 //
 //   node tools/check-packs.mjs              # every kit toy
 //   node tools/check-packs.mjs space heart  # a pack, or single toys
+//   node tools/check-packs.mjs --count=280000 space
+//
+// The default count is the high tier's (desktop); see PROFILES.
 
 import { buildRecipe } from "../src/kit.js";
-import { applyClay } from "../src/generators.js";
+import { applyClay, PROFILES } from "../src/generators.js";
 import { TOYS } from "../src/toys.js";
 import { resolveOptions } from "../src/player.js";
 
-const only = process.argv.slice(2);
+const args = process.argv.slice(2);
+const countArg = args.find((a) => a.startsWith("--count="));
+const count = countArg ? Number(countArg.slice(8)) : PROFILES.high.defaultCount;
+const only = args.filter((a) => !a.startsWith("--"));
 const toys = TOYS.filter(
   (t) => t.kind === "kit" && (!only.length || only.includes(t.id) || only.includes(t.pack)),
 );
@@ -28,7 +34,7 @@ for (const def of toys) {
   try {
     const it = buildRecipe(
       recipe,
-      { seed: 1, count: 160000, options: resolveOptions(recipe, {}) },
+      { seed: 1, count, options: resolveOptions(recipe, {}) },
       applyClay,
     );
     let r = it.next();

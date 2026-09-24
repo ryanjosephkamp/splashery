@@ -29,7 +29,7 @@ async function deviceOrder(prefer) {
 }
 
 export class Stage {
-  static async create(canvas, { prefer = "auto", weak = false } = {}) {
+  static async create(canvas, { prefer = "auto", ...opts } = {}) {
     // ?renderer=none shows the no-GPU fallback (used by the tests).
     if (prefer === "none") throw new NoGPUError("Rendering was switched off with ?renderer=none.");
     let device;
@@ -48,14 +48,25 @@ export class Stage {
       device?.destroy?.();
       throw new NoGPUError("Neither WebGPU nor WebGL2 is available.");
     }
-    return new Stage(canvas, device, { weak });
+    return new Stage(canvas, device, opts);
   }
 
-  constructor(canvas, device, { weak }) {
+  // pixelRatio caps the canvas resolution (CSS size x device pixel ratio).
+  // With `adaptive`, the ratio drops while frames are slow and the view is
+  // moving, and comes back for the first still frame.
+  constructor(canvas, device, { weak = false, pixelRatio = 2, adaptive = true } = {}) {
     this.canvas = canvas;
     this.device = device;
     this.weak = weak;
-    device.maxPixelRatio = Math.min(window.devicePixelRatio || 1, weak ? 1 : 1.5);
+    this.pixelCap = pixelRatio;
+    this.adaptive = adaptive;
+    this.reduced = false;
+    this.busy = false;
+    this.frameAvg = 0;
+    this.slowFrames = 0;
+    this.skipFrames = 0;
+    this.onSlow = null;
+    device.maxPixelRatio = this.pixelRatio();
 
     const app = new pc.AppBase(canvas);
     const opts = new pc.AppOptions();
@@ -101,9 +112,11 @@ export class Stage {
         this.requestRender();
       }
       const now = performance.now();
-      this.lastFrameMs.push(now - this.lastRender);
+      const ms = now - this.lastRender;
+      this.lastFrameMs.push(ms);
       if (this.lastFrameMs.length > 60) this.lastFrameMs.shift();
       this.lastRender = now;
+      this.timeFrame(ms);
       if (this.captureWaiters.length) {
         const waiters = this.captureWaiters;
         this.captureWaiters = [];
@@ -123,6 +136,79 @@ export class Stage {
 
   onUpdate(fn) {
     this.updateHandlers.push(fn);
+  }
+
+  // ---- Resolution -------------------------------------------------------------
+
+  // The ratio frames render at now.
+  pixelRatio() {
+    const full = Math.min(window.devicePixelRatio || 1, this.pixelCap);
+    return this.reduced ? Math.max(1, full / 1.5) : full;
+  }
+
+  setPixelRatio(cap) {
+    this.pixelCap = cap;
+    this.applyPixelRatio();
+  }
+
+  applyPixelRatio() {
+    if (this.fixedSize) return;
+    const ratio = this.pixelRatio();
+    if (this.device.maxPixelRatio === ratio) return;
+    this.device.maxPixelRatio = ratio;
+    this.resize();
+  }
+
+  // The player reports each frame whether the view is moving (a drag, the
+  // turntable, an effect). Still views always get the full ratio.
+  setBusy(busy) {
+    this.busy = busy;
+    if (busy) {
+      clearTimeout(this.restoreTimer);
+      this.restoreTimer = 0;
+    } else if (this.reduced && !this.restoreTimer) {
+      this.restoreTimer = setTimeout(() => {
+        this.restoreTimer = 0;
+        if (this.busy) return;
+        this.reduced = false;
+        this.applyPixelRatio();
+      }, 250);
+    }
+  }
+
+  // Forget frame timings (a new toy is loading or has just loaded).
+  settle() {
+    this.frameAvg = 0;
+    this.slowFrames = 0;
+    this.skipFrames = 8;
+  }
+
+  // Frames closer than 100 ms apart were drawn back to back, so their gap is
+  // the frame time. Over about 24 ms while moving drops the ratio; still
+  // over 40 ms at the lowest ratio for 30 frames asks for a lower tier.
+  timeFrame(ms) {
+    if (!this.adaptive || this.fixedSize || ms > 100 || !this.busy) return;
+    if (this.skipFrames > 0) {
+      this.skipFrames--;
+      return;
+    }
+    this.frameAvg = this.frameAvg ? this.frameAvg * 0.8 + ms * 0.2 : ms;
+    // Lower the resolution first, where there is room to.
+    if (!this.reduced && this.pixelRatio() > 1) {
+      if (this.frameAvg > 24) {
+        this.reduced = true;
+        this.frameAvg = 0;
+        this.skipFrames = 4;
+        this.applyPixelRatio();
+      }
+      return;
+    }
+    this.slowFrames = this.frameAvg > 40 ? this.slowFrames + 1 : 0;
+    if (this.slowFrames >= 30) {
+      this.slowFrames = 0;
+      this.frameAvg = 0;
+      this.onSlow?.();
+    }
   }
 
   requestRender(keepAliveMs = 1000) {
@@ -146,13 +232,12 @@ export class Stage {
   setFixedSize(size) {
     const device = this.device;
     if (size) {
-      if (!this.fixedSize) this.savedPixelRatio = device.maxPixelRatio;
       device.maxPixelRatio = 1;
       this.fixedSize = size;
       this.app.setCanvasResolution(pc.RESOLUTION_FIXED, size[0], size[1]);
     } else {
-      if (this.fixedSize) device.maxPixelRatio = this.savedPixelRatio;
       this.fixedSize = null;
+      device.maxPixelRatio = this.pixelRatio();
       this.app.setCanvasResolution(pc.RESOLUTION_AUTO);
       this.resize();
     }
@@ -364,6 +449,7 @@ export class Stage {
   }
 
   destroy() {
+    clearTimeout(this.restoreTimer);
     this.resizeObserver.disconnect();
     this.clearToy();
     this.buryToys(true);

@@ -84,7 +84,17 @@ test("generators are deterministic, finite and stay inside the unit ball", () =>
   }
 });
 
-test("weak devices get at most 120k generated splats", () => {
+test("the low tier stays bounded and the tiers grow in order", () => {
+  expect(normalizeGenerator({ count: 300000 }, "low").count).toBe(120000);
+  expect(PROFILES.low.defaultCount).toBeLessThanOrEqual(60000);
+  // The old names still work: weak is low, strong is high.
   expect(normalizeGenerator({ count: 300000 }, "weak").count).toBe(120000);
   expect(normalizeGenerator({ count: 300000 }, "strong").count).toBe(300000);
+  const tiers = ["low", "mid", "high", "max"].map((t) => PROFILES[t]);
+  for (let i = 1; i < tiers.length; i++) {
+    expect(tiers[i].defaultCount).toBeGreaterThan(tiers[i - 1].defaultCount);
+    expect(tiers[i].maxCount).toBeGreaterThanOrEqual(tiers[i - 1].maxCount);
+  }
+  expect(PROFILES.mid.defaultCount).toBe(140000);
+  expect(PROFILES.high.defaultCount).toBe(200000);
 });

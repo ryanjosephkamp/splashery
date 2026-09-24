@@ -9,15 +9,31 @@ import { findToy, TOYS, ROOT } from "./toys.js";
 
 export { NoGPUError };
 
+// The app's camera starts 5 toy radii away, where the toy fills about 60% of
+// the shorter side. Embeds are small, so they come in to about 80%
+// (3.8 radii with the 38 degree field of view); ?zoom= scales that.
+const EMBED_FIT = 3.8 / 5;
+
+export function embedZoom(value) {
+  const n = Number(value);
+  return value !== null && value !== "" && Number.isFinite(n) ? Math.min(2, Math.max(0.5, n)) : 1;
+}
+
+export const ZOOM_HINT = "Pinch or Ctrl+scroll to zoom";
+
 export class Viewer {
   // opts: { scene (hash payload), toy (id), theme, background, autoplay,
-  // turntable, onStatus(text), onTheme(theme) }
+  // turntable, zoom (0.5-2), onStatus(text), onTheme(theme) }
   constructor(canvas, opts = {}) {
     this.canvas = canvas;
     this.opts = opts;
     this.player = new Player(canvas, { idleDelay: 1.2, prefer: opts.renderer });
     this.hash = null;
     this.active = true;
+    // After a click or tap on the toy, the plain wheel zooms until the
+    // pointer leaves; before that it scrolls the page.
+    this.wheelZooms = false;
+    this.hinted = false;
   }
 
   async start() {
@@ -54,6 +70,8 @@ export class Viewer {
     scene.look = normalizeLook(look);
     if (this.opts.autoplay) scene.autoplay.effect = this.opts.autoplay;
     if (this.opts.turntable === false) scene.autoplay.turntable = false;
+    const fit = EMBED_FIT / embedZoom(this.opts.zoom ?? null);
+    scene.camera = { ...scene.camera, distance: scene.camera.distance * fit };
     player.scene = scene;
     player.applyLook();
     await player.loadToy(scene.toy);
@@ -65,9 +83,14 @@ export class Viewer {
   bindGestures() {
     const player = this.player;
     const cam = player.camera;
+    this.onLeave = () => (this.wheelZooms = false);
+    this.canvas.addEventListener("pointerleave", this.onLeave);
     this.gestures = new Gestures(this.canvas, {
       classify: () => "orbit",
-      onInteract: () => player.interact(),
+      onInteract: () => {
+        this.wheelZooms = true;
+        player.interact();
+      },
       onOrbitStart: () => cam.begin(),
       onOrbit: (dx, dy, dt) => {
         cam.rotateBy(dx, dy, dt);
@@ -82,9 +105,13 @@ export class Viewer {
         player.stage.requestRender();
       },
       onPinchEnd: () => cam.end(),
-      // In an embed the wheel keeps scrolling the page unless Ctrl/Cmd is held.
+      // In an embed the wheel keeps scrolling the page unless Ctrl/Cmd is
+      // held or the toy was clicked; the first plain scroll shows a hint.
       onWheel: (e) => {
-        if (!e.ctrlKey && !e.metaKey) return false;
+        if (!e.ctrlKey && !e.metaKey && !this.wheelZooms) {
+          this.hint();
+          return false;
+        }
         const unit = e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? 120 : 1;
         cam.zoomBy(Math.exp(e.deltaY * unit * 0.01));
         player.stage.requestRender();
@@ -101,6 +128,18 @@ export class Viewer {
     });
   }
 
+  hint() {
+    if (this.hinted) return;
+    this.hinted = true;
+    this.opts.onStatus?.(ZOOM_HINT);
+  }
+
+  // The + and - buttons.
+  zoomBy(steps) {
+    this.player.camera.zoomBy(Math.pow(1.25, -steps));
+    this.player.interact();
+  }
+
   setTheme(theme) {
     this.player.hostTheme = theme === "dark" || theme === "light" ? theme : null;
     this.player.applyLook();
@@ -113,6 +152,7 @@ export class Viewer {
   }
 
   destroy() {
+    this.canvas.removeEventListener("pointerleave", this.onLeave);
     this.gestures?.dispose();
     this.player.destroy();
   }

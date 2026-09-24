@@ -730,7 +730,7 @@ export class Kit {
       .filter((it) => it.opts.count === undefined && it.opts.share === undefined)
       .reduce((s, it) => s + it.n, 0);
     this.baseSize =
-      weighted > 0 ? Math.sqrt(weighted / (Math.max(1, autoCount) * Math.PI)) * 1.35 : 0.01;
+      weighted > 0 ? Math.sqrt(weighted / (Math.max(1, autoCount) * Math.PI)) * 1.2 : 0.01;
     const total = this.items.reduce((s, it) => s + it.n, 0);
     const buf = new SplatBuffer(total + clayBudget(total), { anim: true });
     this.buf = buf;
@@ -756,7 +756,7 @@ export class Kit {
     const buf = this.buf;
     const w = o.weight ?? 1;
     const size0 = (this.baseSize / Math.sqrt(w)) * (o.size ?? 1);
-    const flat = o.flat ?? 0.25;
+    const flat = o.flat ?? 0.2;
     const interiorN = Math.round(it.n * (o.interior ?? 0));
     const surfN = it.n - interiorN;
     const kind = kindOf(o.kind);
