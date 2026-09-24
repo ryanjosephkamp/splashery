@@ -314,7 +314,8 @@ export const TOYS = [
       source: "https://superspl.at/scene/6584b96e",
       license: "CC BY 4.0",
       licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
-      changes: "Converted, decimated, spherical harmonics removed, recentred and scaled.",
+      changes:
+        "Converted, decimated, spherical harmonics removed, turned to show the glazed top, recentred and scaled.",
     },
   },
   {
@@ -420,7 +421,7 @@ export const TOYS = [
       license: "CC0 1.0",
       licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/",
       changes:
-        "Turned into splats from the textured 3D model (tools/mesh-to-splats.mjs), recentred and scaled.",
+        "Turned into splats from the textured 3D model (tools/mesh-to-splats.mjs) with soft studio light baked in, recentred and scaled.",
     },
   },
   {
@@ -492,7 +493,7 @@ export const TOYS = [
       license: "CC0 1.0",
       licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/",
       changes:
-        "Turned into splats from the textured 3D model (tools/mesh-to-splats.mjs), recentred and scaled.",
+        "Turned into splats from the textured 3D model (tools/mesh-to-splats.mjs) with soft studio light baked in, recentred and scaled. The maker's and lens names printed on it were painted out.",
     },
   },
   {
@@ -510,7 +511,7 @@ export const TOYS = [
       license: "CC0 1.0",
       licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/",
       changes:
-        "Turned into splats from the textured 3D model (tools/mesh-to-splats.mjs), recentred and scaled.",
+        "Turned into splats from the textured 3D model (tools/mesh-to-splats.mjs) with soft studio light baked in, recentred and scaled.",
     },
   },
   {
@@ -636,7 +637,7 @@ export const TOYS = [
       license: "CC0 1.0",
       licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/",
       changes:
-        "Turned into splats from the textured 3D model (tools/mesh-to-splats.mjs), recentred and scaled.",
+        "Turned into splats from the textured 3D model (tools/mesh-to-splats.mjs) with soft studio light baked in, recentred and scaled.",
     },
   },
   // Kit toys: recipes in src/packs/<pack>.js, built in the browser.
