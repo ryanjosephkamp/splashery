@@ -477,6 +477,26 @@ test.describe("Splashery app (WebGL2)", () => {
     await waitForToy(page, "Cactus");
     fs.mkdirSync(SHOTS, { recursive: true });
     await page.screenshot({ path: path.join(SHOTS, "app-1440x900.png") });
+    // The desktop shelf is the same four-column grid as before the phone grid.
+    const shelf = await page.evaluate(() => {
+      const el = document.getElementById("shelf");
+      const cs = getComputedStyle(el);
+      const label = getComputedStyle(el.querySelector(".toy-card span"));
+      return {
+        cols: cs.gridTemplateColumns.split(" ").length,
+        maxHeight: cs.maxHeight,
+        wrap: label.whiteSpace,
+        handle: getComputedStyle(document.getElementById("sheet-handle")).display,
+        grid: document.body.classList.contains("shelf-grid"),
+      };
+    });
+    expect(shelf).toEqual({
+      cols: 4,
+      maxHeight: "232px",
+      wrap: "nowrap",
+      handle: "none",
+      grid: false,
+    });
     await page.emulateMedia({ colorScheme: "dark" });
     await page.click(".toy-card[data-toy='strawberry']");
     await waitForToy(page, "Strawberry");
@@ -978,7 +998,7 @@ test.describe("Splashery on a phone", () => {
     await expect(page.locator("#panel-body")).toBeHidden();
     await expect(page.locator("#sheet-toggle")).toHaveAttribute("aria-expanded", "false");
 
-    // Swiping the handle up opens it, swiping down closes it.
+    // Swiping the handle up opens the shelf grid, swiping down closes it.
     const cdp = await page.context().newCDPSession(page);
     const swipe = async (x, y0, y1) => {
       await cdp.send("Input.dispatchTouchEvent", {
@@ -993,6 +1013,13 @@ test.describe("Splashery on a phone", () => {
     };
     let handle = await page.locator("#sheet-handle").boundingBox();
     await swipe(handle.x + handle.width / 2, handle.y + handle.height / 2, handle.y - 140);
+    await expect(page.locator("body")).toHaveClass(/shelf-grid/);
+    await expect(page.locator("#panel-body")).toBeHidden();
+    handle = await page.locator("#sheet-handle").boundingBox();
+    await swipe(handle.x + handle.width / 2, handle.y + handle.height / 2, handle.y + 140);
+    await expect(page.locator("body")).not.toHaveClass(/shelf-grid/);
+    // With the panel open, swiping the handle down closes it.
+    await page.tap("#sheet-toggle");
     await expect(page.locator("#panel-body")).toBeVisible();
     handle = await page.locator("#sheet-handle").boundingBox();
     await swipe(handle.x + handle.width / 2, handle.y + handle.height / 2, handle.y + 140);
@@ -1015,6 +1042,123 @@ test.describe("Splashery on a phone", () => {
     expect(problems).toEqual([]);
   });
 
+  test("dragging the shelf up opens a grid, and picking a toy folds it back", async ({ page }) => {
+    const problems = watchConsole(page);
+    await loadApp(page);
+    await waitForToy(page, "Cactus");
+    const cdp = await page.context().newCDPSession(page);
+    const swipe = async (x, y0, y1) => {
+      await cdp.send("Input.dispatchTouchEvent", {
+        type: "touchStart",
+        touchPoints: [{ x, y: y0 }],
+      });
+      for (let i = 1; i <= 6; i++) {
+        const y = y0 + ((y1 - y0) * i) / 6;
+        await cdp.send("Input.dispatchTouchEvent", { type: "touchMove", touchPoints: [{ x, y }] });
+      }
+      await cdp.send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] });
+    };
+    const shelf = page.locator("#shelf");
+    const row = await shelf.boundingBox();
+    fs.mkdirSync(SHOTS, { recursive: true });
+    await page.screenshot({ path: path.join(SHOTS, "shelf-row-390x844.png") });
+
+    // Drag the row itself up.
+    await swipe(row.x + 120, row.y + row.height / 2, row.y - 160);
+    await expect(page.locator("body")).toHaveClass(/shelf-grid/);
+    await expect(page.locator("#panel-body")).toBeHidden();
+    await expect(page.locator("#sheet-toggle")).toHaveText("Done");
+    const grid = await page.evaluate(() => {
+      const el = document.getElementById("shelf");
+      const r = el.getBoundingClientRect();
+      const tops = new Set(
+        [...el.querySelectorAll(".toy-card")].slice(0, 12).map((c) => c.offsetTop),
+      );
+      return {
+        cols: getComputedStyle(el).gridTemplateColumns.split(" ").length,
+        rows: tops.size,
+        height: r.height,
+        doc: document.documentElement.scrollWidth,
+        shelfOverflow: el.scrollWidth - el.clientWidth,
+        chips: document.getElementById("shelf-chips").getBoundingClientRect().bottom <= r.top,
+      };
+    });
+    expect(grid.cols).toBeGreaterThanOrEqual(3);
+    expect(grid.rows).toBeGreaterThanOrEqual(3);
+    expect(grid.height).toBeGreaterThan(row.height * 3);
+    expect(grid.doc).toBeLessThanOrEqual(390);
+    expect(grid.shelfOverflow).toBeLessThanOrEqual(0);
+    expect(grid.chips).toBe(true);
+    await page.waitForTimeout(1500);
+    await page.screenshot({ path: path.join(SHOTS, "shelf-grid-390x844.png") });
+
+    // Tapping a card loads that toy and folds the grid back to the row.
+    await page.tap('#shelf .toy-card[data-toy="strawberry"]');
+    await expect(page.locator("body")).not.toHaveClass(/shelf-grid/);
+    await waitForToy(page, "Strawberry");
+    await expect(page.locator('#shelf .toy-card[data-toy="strawberry"]')).toHaveAttribute(
+      "aria-pressed",
+      "true",
+    );
+
+    // Swiping down from the top of the grid, and Done, both go back to the row.
+    await swipe(row.x + 120, row.y + row.height / 2, row.y - 160);
+    await expect(page.locator("body")).toHaveClass(/shelf-grid/);
+    const g = await shelf.boundingBox();
+    await swipe(g.x + 120, g.y + 30, g.y + 250);
+    await expect(page.locator("body")).not.toHaveClass(/shelf-grid/);
+    const row2 = await shelf.boundingBox();
+    expect(Math.abs(row2.height - row.height)).toBeLessThan(2);
+    await page.tap("#sheet-handle");
+    await expect(page.locator("body")).toHaveClass(/shelf-grid/);
+    await page.tap("#sheet-toggle");
+    await expect(page.locator("body")).not.toHaveClass(/shelf-grid/);
+    await expect(page.locator("#panel-body")).toBeHidden();
+
+    // More still opens the panel.
+    await page.tap("#sheet-toggle");
+    await expect(page.locator("#panel-body")).toBeVisible();
+
+    // Long names wrap onto two lines instead of ending in "…".
+    const cut = await page.evaluate(
+      () =>
+        [...document.querySelectorAll("#shelf .toy-card span")].filter((s) => {
+          const h = s.scrollHeight;
+          return s.scrollWidth > s.clientWidth + 1 || h > s.clientHeight + 1;
+        }).length,
+    );
+    expect(cut).toBe(0);
+    expect(problems).toEqual([]);
+  });
+
+  test("the Make pane explains where to find your own splat", async ({ page }) => {
+    await loadApp(page);
+    await page.tap("#sheet-toggle");
+    await page.tap("#tab-make");
+    const help = page.locator("#byo-help");
+    await expect(help).toBeVisible();
+    await expect(help).not.toHaveAttribute("open", "");
+    await help.locator("summary").tap();
+    await expect(help).toHaveAttribute("open", "");
+    const links = {
+      "help-superspl": "https://superspl.at/",
+      "help-editor": "https://superspl.at/editor",
+      "help-cc": "https://creativecommons.org/cc-licenses/",
+      "help-scaniverse": "https://scaniverse.com/",
+      "help-polycam": "https://poly.cam/",
+      "help-luma": "https://lumalabs.ai/",
+      "help-kiri": "https://www.kiriengine.app/",
+    };
+    for (const [id, href] of Object.entries(links)) {
+      await expect(page.locator(`#${id}`)).toHaveAttribute("href", href);
+      await expect(page.locator(`#${id}`)).toHaveAttribute("rel", /noopener/);
+    }
+    for (const word of [".ply", ".splat", ".spz", ".sog", "CC0", "share link"])
+      await expect(help).toContainText(word);
+    await help.scrollIntoViewIfNeeded();
+    await page.screenshot({ path: path.join(SHOTS, "make-help-390x844.png") });
+  });
+
   test("has no horizontal overflow at 360px", async ({ browser }) => {
     const ctx = await browser.newContext({
       viewport: { width: 360, height: 740 },
@@ -1034,6 +1178,21 @@ test.describe("Splashery on a phone", () => {
     await page.tap("#sheet-toggle");
     const m2 = await page.evaluate(() => document.documentElement.scrollWidth);
     expect(m2).toBeLessThanOrEqual(360);
+    // The shelf grid fits too.
+    await page.tap("#sheet-toggle");
+    await page.tap("#sheet-handle");
+    await expect(page.locator("body")).toHaveClass(/shelf-grid/);
+    const m3 = await page.evaluate(() => {
+      const el = document.getElementById("shelf");
+      return {
+        doc: document.documentElement.scrollWidth,
+        shelf: el.scrollWidth - el.clientWidth,
+        cols: getComputedStyle(el).gridTemplateColumns.split(" ").length,
+      };
+    });
+    expect(m3.doc).toBeLessThanOrEqual(360);
+    expect(m3.shelf).toBeLessThanOrEqual(0);
+    expect(m3.cols).toBeGreaterThanOrEqual(3);
     await ctx.close();
   });
 });

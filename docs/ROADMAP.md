@@ -8,7 +8,7 @@ current state and the full plan for the next phase are in [HANDOFF.md](HANDOFF.m
 | Phase  | What                                                                                                              |
 | ------ | ----------------------------------------------------------------------------------------------------------------- |
 | A      | Done (PR #13 and the homepage PR): sharpness, Detail setting, embeds, homepage embed.                             |
-| B      | Mobile shelf grid, readable thumbnail labels, "Find your own splat" help panel.                                   |
+| B      | Done: mobile shelf grid, two-line thumbnail labels, "Find your own splat" help panel.                             |
 | C1, C2 | Visual fixes, and clearer or more dramatic effects, from the owner's 2026-09-23 review.                           |
 | D      | Effects and sound engine: a unique sound per toy, scan rigs, position-aware taps, drag-to-stretch.                |
 | E1–E6  | A new tap effect and sound for every toy that only hops, in six waves ([TOY-PLAN.md](TOY-PLAN.md)).               |

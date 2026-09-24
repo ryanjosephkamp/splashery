@@ -195,7 +195,11 @@ export function createUI(app) {
     const label = document.createElement("span");
     label.textContent = toy.label;
     b.append(img, label);
-    b.addEventListener("click", () => app.chooseToy(toy.id));
+    b.addEventListener("click", () => {
+      // Picking from the phone grid folds it back to the row at once.
+      if (mode === "grid") setMode("row");
+      app.chooseToy(toy.id);
+    });
     cards.set(toy.id, b);
   }
 
@@ -788,13 +792,20 @@ export function createUI(app) {
   });
 
   // ---- Bottom sheet ---------------------------------------------------------------
-  // On phones the panel is a bottom sheet: the dock (shelf and tools) always
-  // shows and the tabs open above it. The stage shrinks to the space above
-  // the panel, so the toy stays in view while you change things. Tapping the
-  // toy, swiping the handle down, swiping down from the top of the controls,
-  // Escape or Done closes it.
+  // On phones the panel is a bottom sheet with three states:
+  //  - "row": the dock (shelf row and tools) only;
+  //  - "grid": the shelf opens into a grid of toys that fills the sheet;
+  //  - "panel": the tabs open above the dock.
+  // The stage shrinks to the space above the panel, so the toy stays in view
+  // while you change things. Dragging the handle or the shelf up opens the
+  // grid; More opens the panel. Tapping the toy, swiping the handle down,
+  // swiping down from the top of the grid or the controls, Escape or Done
+  // goes back to the row.
+  // Set SHELF_GRID to false to switch the grid off: the handle then opens the
+  // panel as before.
+  const SHELF_GRID = true;
   const narrow = matchMedia("(max-width: 760px)");
-  let expanded = false;
+  let mode = "row";
   function refreshDock() {
     if (!narrow.matches) {
       document.documentElement.style.removeProperty("--dock-h");
@@ -804,25 +815,28 @@ export function createUI(app) {
     document.documentElement.style.setProperty("--dock-h", `${Math.round(h)}px`);
   }
   const applySheet = () => {
-    const phone = narrow.matches;
-    els.panelBody.hidden = phone && !expanded;
-    document.body.classList.toggle("sheet-open", phone && expanded);
-    els.sheetToggle.setAttribute("aria-expanded", String(expanded));
-    els.sheetToggle.textContent = expanded ? "Done" : "More";
+    const m = narrow.matches ? mode : "row";
+    els.panelBody.hidden = narrow.matches && m !== "panel";
+    document.body.classList.toggle("sheet-open", m === "panel");
+    document.body.classList.toggle("shelf-grid", m === "grid");
+    els.sheetToggle.setAttribute("aria-expanded", String(mode === "panel"));
+    els.sheetToggle.textContent = m === "row" ? "More" : "Done";
     refreshDock();
   };
-  function setExpanded(on) {
-    if (expanded === on) return;
-    expanded = on;
+  function setMode(m) {
+    if (m === "grid" && !SHELF_GRID) m = "panel";
+    if (mode === m) return;
+    mode = m;
     applySheet();
+    if (m !== "panel") revealCurrent();
   }
   new ResizeObserver(refreshDock).observe(els.panel);
-  els.sheetToggle.addEventListener("click", () => setExpanded(!expanded));
+  els.sheetToggle.addEventListener("click", () => setMode(mode === "row" ? "panel" : "row"));
   narrow.addEventListener("change", applySheet);
 
-  // The handle: swipe up to open, down to close, tap to toggle. The tab bar
-  // takes the same swipes.
-  function bindSwipe(el, tapToggles) {
+  // The handle: swipe up for the grid, down for the row, tap to toggle. The
+  // tab bar takes the same swipes but keeps the panel open when swiped up.
+  function bindSwipe(el, up, tap) {
     let start = null;
     el.addEventListener("pointerdown", (e) => {
       if (!narrow.matches || (e.pointerType === "mouse" && e.button !== 0)) return;
@@ -832,14 +846,53 @@ export function createUI(app) {
       if (!start || e.pointerId !== start.id) return;
       const dy = e.clientY - start.y;
       start = null;
-      if (dy > 28) setExpanded(false);
-      else if (dy < -28) setExpanded(true);
-      else if (tapToggles) setExpanded(!expanded);
+      if (dy > 28) setMode("row");
+      else if (dy < -28) setMode(up());
+      else if (tap) setMode(tap());
     });
     el.addEventListener("pointercancel", () => (start = null));
   }
-  bindSwipe(els.sheetHandle, true);
-  bindSwipe(els.tabs, false);
+  bindSwipe(
+    els.sheetHandle,
+    () => (mode === "panel" ? "panel" : "grid"),
+    () => (mode === "row" ? "grid" : "row"),
+  );
+  bindSwipe(els.tabs, () => "panel", null);
+
+  // Dragging the shelf row up opens the grid; dragging down from the top of
+  // the grid closes it. Sideways drags scroll the row as usual.
+  let lift = null;
+  els.shelf.addEventListener(
+    "touchstart",
+    (e) => {
+      const t = e.touches[0];
+      lift =
+        narrow.matches && e.touches.length === 1
+          ? { x: t.clientX, y: t.clientY, top: els.shelf.scrollTop }
+          : null;
+    },
+    { passive: true },
+  );
+  els.shelf.addEventListener(
+    "touchmove",
+    (e) => {
+      if (!lift) return;
+      const t = e.touches[0];
+      const dx = Math.abs(t.clientX - lift.x);
+      const dy = t.clientY - lift.y;
+      if (mode !== "grid" && dy < -36 && -dy > dx * 1.5) {
+        lift = null;
+        setMode("grid");
+      } else if (mode === "grid" && lift.top <= 0 && els.shelf.scrollTop <= 0) {
+        if (dy > 90 && dy > dx * 2) {
+          lift = null;
+          setMode("row");
+        }
+      }
+    },
+    { passive: true },
+  );
+  els.shelf.addEventListener("touchend", () => (lift = null), { passive: true });
 
   // Swiping down from the top of the scrolled controls closes the sheet too.
   let pull = null;
@@ -849,7 +902,7 @@ export function createUI(app) {
       const t = e.touches[0];
       const onInput = e.target.closest?.("input, select, textarea");
       pull =
-        narrow.matches && expanded && e.touches.length === 1 && !onInput
+        narrow.matches && mode === "panel" && e.touches.length === 1 && !onInput
           ? { x: t.clientX, y: t.clientY, top: els.panes.scrollTop }
           : null;
     },
@@ -863,7 +916,7 @@ export function createUI(app) {
       const dy = t.clientY - pull.y;
       if (dy > 90 && dy > Math.abs(t.clientX - pull.x) * 2) {
         pull = null;
-        setExpanded(false);
+        setMode("row");
       }
     },
     { passive: true },
@@ -1009,7 +1062,7 @@ export function createUI(app) {
     showLargeFile(text, canDownsample) {
       if (text) {
         showTab("make");
-        setExpanded(true);
+        setMode("panel");
       }
       els.byoWarning.hidden = !text;
       els.byoWarningText.textContent = text || "";
@@ -1087,11 +1140,11 @@ export function createUI(app) {
       els.dropOverlay.hidden = !on;
     },
     collapseSheet() {
-      setExpanded(false);
+      setMode("row");
     },
-    // True when the phone sheet covers part of the stage.
+    // True when the phone sheet (the grid or the panel) covers part of the stage.
     sheetOpen() {
-      return expanded && narrow.matches;
+      return mode !== "row" && narrow.matches;
     },
     showTab,
     currentTab() {

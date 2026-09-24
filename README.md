@@ -115,9 +115,12 @@ and each has one or two sliders.
 The shelf sits at the top of the panel: search it, filter it by category, or press **Surprise me**
 for a random toy. Below the tools, five tabs hold everything else: **Play** (the tool's settings and
 the effects), **Make** (make a toy, or open your own splat file), **Look**, **Share** and **About**.
-On a phone the panel is a bottom sheet. The shelf and tools always show; **More**, a tab, or swiping
-the handle up opens the rest. The toy shrinks to fit above the sheet so you can watch your changes.
-Tap the toy, swipe down, press **Done** or Escape to close it again.
+On a phone the panel is a bottom sheet. The shelf row and tools always show, with toy names on up to
+two lines. Dragging the handle or the row up opens the shelf into a grid of toys that fills the
+sheet (the chips and search stay on top); picking a toy folds it back to the row. **More** or a tab
+opens the rest. The toy shrinks to fit above the sheet so you can watch your changes. Tap the toy,
+swipe down, press **Done** or Escape to close either one again. The grid can be switched off with
+`SHELF_GRID` in `src/ui.js`; the handle then opens the panel, as before.
 
 ## Controls
 
@@ -146,7 +149,9 @@ Drop a file anywhere on the page, or use **Your own splat â†’ Open a splat fileâ
 
 Files stay in your browser; nothing is uploaded. Big files (over 150 MB or 1.5 million splats; 60 MB
 or 400,000 splats on phones) get a warning, and uncompressed binary PLY files can be loaded as a
-lighter random subset instead. **Turn it upside down** fixes captures that load flipped.
+lighter random subset instead. **Turn it upside down** fixes captures that load flipped. **Find your
+own splat** (in the same section) says where to find files, which apps make them, and what works on
+them.
 
 ## Look and autoplay
 
@@ -294,15 +299,16 @@ The Playwright suite (`tests/smoke.spec.mjs`, `tests/unit.spec.mjs`) starts
 so it needs no GPU. It checks that the app loads with no console errors or warnings, the shelf shows
 its toys, making a toy and switching on effects change canvas pixels, paint, poke and clay work, a
 JSON export imports back to the same scene, the shelf filters by category and search, the phone
-sheet opens and closes by button, tap and swipe, the embed page and the custom element load a scene,
-own files (PLY, SPLAT, SPZ, SOG) load, PNG/GIF/WebM exports produce files, an embed stays under 30
-MB, the canvas renders at the pixel ratio of its detail tier (on 2x and 3x screens) and drops it
-only while frames are slow, Detail stays out of links, a transparent embed stays see-through in dark
-mode, embeds take `?zoom=` and zoom by wheel after a click and by buttons, the embed snippet is
-responsive, a failed thumbnail is retried, the no-GPU poster shows, and there is no horizontal
-overflow at 390 and 360 px. It saves screenshots to `tests/screenshots/`. WebGPU checks skip
-themselves with a message when Chromium offers no adapter. Set `SPLASHERY_CHROMIUM` to use a
-specific Chromium; without it Playwright's own browser is used.
+sheet opens and closes by button, tap and swipe, the phone shelf opens into a grid (at 390 and 360
+px) and folds back when a toy is picked, the "Find your own splat" links are right, the embed page
+and the custom element load a scene, own files (PLY, SPLAT, SPZ, SOG) load, PNG/GIF/WebM exports
+produce files, an embed stays under 30 MB, the canvas renders at the pixel ratio of its detail tier
+(on 2x and 3x screens) and drops it only while frames are slow, Detail stays out of links, a
+transparent embed stays see-through in dark mode, embeds take `?zoom=` and zoom by wheel after a
+click and by buttons, the embed snippet is responsive, a failed thumbnail is retried, the no-GPU
+poster shows, and there is no horizontal overflow at 390 and 360 px. It saves screenshots to
+`tests/screenshots/`. WebGPU checks skip themselves with a message when Chromium offers no adapter.
+Set `SPLASHERY_CHROMIUM` to use a specific Chromium; without it Playwright's own browser is used.
 
 ## Layout
 
