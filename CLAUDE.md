@@ -55,6 +55,9 @@ phase.
 - `README.md`: features and code layout.
 - `docs/ROADMAP.md`: the plan.
 - `docs/BACKLOG.md`: what is not being built now, and what would unblock it.
+- `docs/TOY-PLAN.md`: every toy's planned tap effect, sound and fixes, generated from
+  `tools/toy-plan.json` by `node tools/toy-plan.mjs` (run it after adding or finishing a toy).
+- `docs/reviews/`: the owner's reviews, verbatim, with screenshots.
 - `docs/PACKS.md`: how to write toy recipes.
 - `docs/SCENE-SCHEMA.md`: the scene format.
 - `CREDITS.md` and `LICENSES.md`: attributions and licences.

@@ -5,13 +5,16 @@
 v3 shipped on 2026-09-23 (PRs #4–#11, 283 toys). The next work runs in phases, one session each. The
 current state and the full plan for the next phase are in [HANDOFF.md](HANDOFF.md).
 
-| Phase | What                                                                                                                                                                                  |
-| ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| A     | Done (PR #13 and the homepage PR): sharpness (pixel density, splat counts, kit splat size, a Detail setting) and embeds (transparency, framing, size, zoom); then the homepage embed. |
-| B     | Mobile shelf grid and a "Find your own splat" help panel.                                                                                                                             |
-| C     | More music toys and polish.                                                                                                                                                           |
-| D     | AI image-to-3D trial (the owner added `HF_TOKEN` on 2026-09-23).                                                                                                                      |
-| E     | Later: gallery, multi-toy scenes, liquid pour, draw-order fix, more scans.                                                                                                            |
+| Phase  | What                                                                                                              |
+| ------ | ----------------------------------------------------------------------------------------------------------------- |
+| A      | Done (PR #13 and the homepage PR): sharpness, Detail setting, embeds, homepage embed.                             |
+| B      | Mobile shelf grid, readable thumbnail labels, "Find your own splat" help panel.                                   |
+| C1, C2 | Visual fixes, and clearer or more dramatic effects, from the owner's 2026-09-23 review.                           |
+| D      | Effects and sound engine: a unique sound per toy, scan rigs, position-aware taps, drag-to-stretch.                |
+| E1–E6  | A new tap effect and sound for every toy that only hops, in six waves ([TOY-PLAN.md](TOY-PLAN.md)).               |
+| F      | Touch and drag interaction: puzzle cube, chess, gummy bear, Newton's cradle, bricks.                              |
+| G      | AI image-to-3D trial (`HF_TOKEN`).                                                                                |
+| H      | Later: gallery, multi-toy scenes, liquid pour, draw-order fix, more scans and instruments, final homepage embeds. |
 
 ## v3: the big toy box (done)
 
@@ -26,7 +29,7 @@ their own, open and close, and can wear patterns and flags.
 | How many toys, which first | As many as possible, mostly generated in code. Sports balls and flags first, then the other packs in the order below.                                                                                                            |
 | PR slicing                 | Stacked draft PRs, one branch each (`claude/splashery-expansion-alignment-q9os3b` and `…-q9os3b-<part>`), all targeting `main`. Merge them in order; each shrinks to its own diff once the one before it is merged.              |
 | Flags                      | Every national flag, from Wikimedia Commons, public domain only (each file's licence checked), usable on any toy.                                                                                                                |
-| Outside models             | Allowed: CC0 or CC BY models and scans (Poly Haven, NASA, SuperSplat and similar), turned into splats at build time and credited. AI image-to-3D at build time is allowed with a Hugging Face token (added 2026-09-23; Phase D). |
+| Outside models             | Allowed: CC0 or CC BY models and scans (Poly Haven, NASA, SuperSplat and similar), turned into splats at build time and credited. AI image-to-3D at build time is allowed with a Hugging Face token (added 2026-09-23; Phase G). |
 | Anatomy                    | Stylised and friendly, never gory.                                                                                                                                                                                               |
 | Sound                      | Optional soft sounds (WebAudio, no files), off until the speaker button is pressed, never on in embeds by default.                                                                                                               |
 | Weapons                    | Medieval and fantasy only (sword, shield, bow, crossbow, catapult, trebuchet, a historical cannon firing paint). No firearms.                                                                                                    |
@@ -121,7 +124,7 @@ their own, open and close, and can wear patterns and flags.
 
 ## Deferred
 
-- **Gallery** (plan below): Phase E.
+- **Gallery** (plan below): Phase H.
 - **Homepage embed** on ryanjosephkamp.github.io: scheduled for Phase A (after the embed fixes).
 - **True fluid simulation** (particle water on WebGPU compute): scripted pouring comes first.
 - **Multi-toy scenes and physics** (throwing a toy at another, Newton's cradle with real

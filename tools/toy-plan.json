@@ -1,0 +1,1416 @@
+{
+  "about": "One entry per shelf toy: the owner's review notes (2026-09-23, docs/reviews/2026-09-23/review.md), a verdict, and a proposed tap effect and sound. v: keep = the owner likes the effect as it is; more = it has an effect that should be clearer or more dramatic; new = it only hops today and needs its own effect. fix = a visual problem to fix. interactive = the owner asked for touch-position or drag interaction. Proposals are suggestions; the owner may change them. tools/toy-plan.mjs checks this file against the shelf and writes docs/TOY-PLAN.md.",
+  "toys": {
+    "cactus": {
+      "v": "new",
+      "owner": "No special effect. Looks fine.",
+      "effect": "Tiny flowers bloom on the spines, then close.",
+      "sound": "Soft pluck with a dry rattle."
+    },
+    "strawberry": {
+      "v": "new",
+      "owner": "No special effect. Looks fine.",
+      "effect": "Seeds pop out and sparkle, then settle back; the berry blushes redder.",
+      "sound": "Juicy squish."
+    },
+    "cookie": {
+      "v": "new",
+      "owner": "No special effect. Looks fine.",
+      "effect": "The jam heart glows and throbs twice like a heartbeat.",
+      "sound": "Short crunch and a soft double thump."
+    },
+    "bee": {
+      "v": "new",
+      "owner": "Now the right way up. Maybe flap its wings.",
+      "effect": "Wings buzz in a blur and the bee lifts off a little, then lands.",
+      "sound": "Honeybee buzz (higher than the bumblebee)."
+    },
+    "cluster-fly": {
+      "v": "new",
+      "owner": "Right way up. Do what a fly does: rub its hands together, clean its face, flap its wings.",
+      "effect": "Front legs rub together, then the wings flick.",
+      "sound": "Short thin fly buzz."
+    },
+    "may-beetle": {
+      "v": "new",
+      "owner": "Detail is great but underwhelming; it needs an effect.",
+      "effect": "Wing cases lift and the fanned antennae spread, then fold.",
+      "sound": "Low clicking whirr."
+    },
+    "millipede": {
+      "v": "new",
+      "owner": "Great chance for all the legs to move and the body to stretch out.",
+      "effect": "A leg wave ripples down the body while it stretches and curls.",
+      "sound": "Soft many-footed patter."
+    },
+    "bumblebee": {
+      "v": "new",
+      "owner": "Needs an effect.",
+      "effect": "Fuzzy body shivers and the wings hum; a slow, clumsy hover.",
+      "sound": "Deep, lazy bumblebee drone."
+    },
+    "raspberry": {
+      "v": "new",
+      "owner": "Looks really cool; very good resolution.",
+      "effect": "The drupelets bounce one by one in a ripple.",
+      "sound": "Soft bubbly squish."
+    },
+    "blackberry": {
+      "v": "new",
+      "owner": "Same as the raspberry: looks great.",
+      "effect": "Drupelets gleam in a wave, like light running over it.",
+      "sound": "Darker, deeper squish."
+    },
+    "blueberry": {
+      "v": "new",
+      "owner": "Looks good.",
+      "effect": "The bloom (dusty coat) wipes off in a swirl, showing deep blue, then returns.",
+      "sound": "Small round pop."
+    },
+    "grape": {
+      "v": "new",
+      "owner": "Looks good. Maybe the skin comes off.",
+      "effect": "The skin peels back in strips to show the pale flesh, then closes.",
+      "sound": "Slippery peel."
+    },
+    "star-cookie": {
+      "v": "new",
+      "fix": "Starts backwards: the bottom of the cookie faces the camera. Turn it round.",
+      "owner": "Looks OK. Maybe it crumbles.",
+      "effect": "Crumbles into pieces and crumbs, then reassembles.",
+      "sound": "Crunchy crumble."
+    },
+    "tomatoes": {
+      "v": "new",
+      "owner": "Fantastic, extremely realistic. Maybe they move around.",
+      "effect": "The tomatoes roll and jostle each other, then settle.",
+      "sound": "Soft thuds rolling on a table."
+    },
+    "mandeltorus": {
+      "v": "new",
+      "owner": "Some parts should rotate clockwise and others counterclockwise.",
+      "effect": "Rings of the fractal counter-rotate in bands, then lock back.",
+      "sound": "Shimmering rising chord."
+    },
+    "basket": {
+      "v": "new",
+      "owner": "A basket of seashells. Neat. No effect.",
+      "effect": "Shells hop inside the basket one after another.",
+      "sound": "Clattering shells."
+    },
+    "rubber-duck-real": {
+      "v": "new",
+      "owner": "Squeeze and quack. It must differ from the other rubber duck.",
+      "effect": "Squeezes flat and springs back.",
+      "sound": "Squeaky squeeze (high whistle) — the other duck quacks."
+    },
+    "garden-gnome": {
+      "v": "new",
+      "owner": "Hilarious, looks great. Maybe the lantern lights up, or it moves around.",
+      "effect": "The lantern lights with a warm glow and the gnome gives a little hop.",
+      "sound": "Tiny chuckle-like chirp plus a lamp click."
+    },
+    "wooden-elephant": {
+      "v": "new",
+      "fix": "Visually underwhelming; improve the look (re-convert at higher detail or pick a better CC0 model).",
+      "owner": "Underwhelming; the style seems off.",
+      "effect": "Trunk lifts and it rocks on its wooden feet.",
+      "sound": "Wooden knock and a toy trumpet."
+    },
+    "marble-bust": {
+      "v": "new",
+      "owner": "Looks good. Maybe the face moves and says something.",
+      "effect": "The head turns to look at you; a speech bubble says a short Latin line.",
+      "sound": "Stone grind and a low murmur."
+    },
+    "ukulele": {
+      "v": "new",
+      "owner": "Instruments should be played so music comes out.",
+      "effect": "Strings vibrate and it plays a short strum pattern.",
+      "sound": "Plucked ukulele chord (synth, bright, nylon)."
+    },
+    "alarm-clock": {
+      "v": "new",
+      "owner": "Hands should move. On tap it should jump up and down and ring like an alarm clock.",
+      "effect": "Hands tick all the time; tap rattles it off the table while it rings.",
+      "sound": "Old twin-bell alarm ring (differs from the other alarm clock)."
+    },
+    "vintage-camera": {
+      "v": "new",
+      "fix": "Grainy, almost like a reverse-contrast image; detail is lost. Check the mesh-to-splats texture handling (screenshot in docs/reviews/2026-09-23/).",
+      "owner": "Could snap a photo with the flash going off.",
+      "effect": "Flash burst from the camera and the view briefly whites out.",
+      "sound": "Mechanical shutter click and wind-on."
+    },
+    "boombox": {
+      "v": "new",
+      "fix": "Grainy; could use more detail.",
+      "owner": "Also a bit grainy.",
+      "effect": "Speakers pulse to a beat and the tape reels turn.",
+      "sound": "A short synth beat loop."
+    },
+    "croissant-real": {
+      "v": "new",
+      "owner": "Must do something different from the other croissant.",
+      "effect": "Tears in half and steam puffs out.",
+      "sound": "Flaky tear."
+    },
+    "carrot-cake": {
+      "v": "new",
+      "owner": "Interesting but underwhelming.",
+      "effect": "A slice cuts out and lifts away, showing layers.",
+      "sound": "Soft knife slide."
+    },
+    "pomegranate": {
+      "v": "new",
+      "owner": "Underwhelming.",
+      "effect": "Splits open to show glowing red seeds that spill a little.",
+      "sound": "Crack and a scatter of beads."
+    },
+    "lantern": {
+      "v": "new",
+      "owner": "A flame should light up inside, like the other fire toys.",
+      "effect": "A flame lights inside with a warm glow and flicker.",
+      "sound": "Match strike and soft whoosh."
+    },
+    "cat-statue": {
+      "v": "new",
+      "owner": "Like the bust: the cat moves a bit.",
+      "effect": "The head turns and the tail swishes once.",
+      "sound": "Stone grind and a tiny mew."
+    },
+    "chess-set": {
+      "v": "new",
+      "interactive": true,
+      "owner": "Ideally playable. At least: a tap plays a real game, white against black, as a long animation.",
+      "effect": "Plays a famous public-domain game move by move; later, tap a piece then a square to move it.",
+      "sound": "Wooden piece clacks."
+    },
+    "horse-statue": {
+      "v": "new",
+      "fix": "A little too bright; details are hard to see. Lower exposure or contrast.",
+      "owner": "Work like the other statues.",
+      "effect": "Rears up on its hind legs, then settles.",
+      "sound": "Stone grind and a whinny-like whistle."
+    },
+    "blob": {
+      "v": "new",
+      "owner": "Interesting; no idea for an effect. The original shapes are really good-looking.",
+      "effect": "Splits into three small blobs that merge back.",
+      "sound": "Gloopy wobble."
+    },
+    "donut": {
+      "v": "new",
+      "owner": "Interesting; good-looking.",
+      "effect": "Sprinkles jump off and rain back down.",
+      "sound": "Sprinkle patter."
+    },
+    "knot": {
+      "v": "new",
+      "effect": "The neon flows along the knot and it ties tighter, then relaxes.",
+      "sound": "Electric neon hum."
+    },
+    "planet": {
+      "v": "new",
+      "effect": "Clouds race around and a day-night band sweeps over it.",
+      "sound": "Airy wind."
+    },
+    "basketball": {
+      "v": "new",
+      "owner": "Balls look good. Bouncing is fine but each should bounce differently.",
+      "effect": "Dribble: fast low bounces, then a spin on a fingertip.",
+      "sound": "Hollow basketball boing."
+    },
+    "soccer-ball": {
+      "v": "new",
+      "effect": "Keepy-uppy: three small kicks with spin.",
+      "sound": "Firm thump."
+    },
+    "american-football": {
+      "v": "new",
+      "effect": "A tight spiral spin in place.",
+      "sound": "Leathery whoosh."
+    },
+    "tennis-ball": {
+      "v": "new",
+      "effect": "Fast high bounce with the fuzz fluffing out.",
+      "sound": "Pock."
+    },
+    "baseball": {
+      "v": "new",
+      "effect": "Curveball: it spins hard and swerves.",
+      "sound": "Bat crack."
+    },
+    "softball": {
+      "v": "new",
+      "effect": "Underhand arc and a softer thud.",
+      "sound": "Muffled thud."
+    },
+    "beach-ball": {
+      "v": "new",
+      "effect": "Floats up slowly, drifts and bobs down.",
+      "sound": "Plasticky boing."
+    },
+    "golf-ball": {
+      "v": "new",
+      "effect": "Tiny chip hop and a spin-back.",
+      "sound": "Click of a club."
+    },
+    "rugby-ball": {
+      "v": "new",
+      "effect": "Tumbles end over end with an odd bounce.",
+      "sound": "Dull thud."
+    },
+    "volleyball": {
+      "v": "new",
+      "effect": "A set then a spike straight down.",
+      "sound": "Slap."
+    },
+    "water-polo-ball": {
+      "v": "new",
+      "effect": "Bobs on an invisible water line with ripples.",
+      "sound": "Splash."
+    },
+    "ping-pong-ball": {
+      "v": "new",
+      "effect": "Rapid tiny bounces getting faster.",
+      "sound": "Tik-tik-tik."
+    },
+    "cricket-ball": {
+      "v": "new",
+      "effect": "Seam-up spin and a skid.",
+      "sound": "Crisp leather knock."
+    },
+    "bowling-ball": {
+      "v": "new",
+      "effect": "Heavy roll with a hook.",
+      "sound": "Rumble and a pin crash."
+    },
+    "pool-ball": {
+      "v": "new",
+      "effect": "Clicks forward and spins with back-spin.",
+      "sound": "Ball click."
+    },
+    "pickleball": {
+      "v": "new",
+      "effect": "Light pop-up with air whistling through the holes.",
+      "sound": "Hollow plastic pop."
+    },
+    "dodgeball": {
+      "v": "new",
+      "effect": "Squashes hard on a bounce.",
+      "sound": "Rubbery bwong."
+    },
+    "medicine-ball": {
+      "v": "new",
+      "effect": "Barely lifts and lands with a heavy squash.",
+      "sound": "Heavy thud."
+    },
+    "lacrosse-ball": {
+      "v": "new",
+      "effect": "Very fast, hard bounces.",
+      "sound": "Hard rubber knock."
+    },
+    "squash-ball": {
+      "v": "new",
+      "fix": "Hard to see on the dark background (it is black). Consider a faint rim light in dark mode.",
+      "owner": "Weird; hard to see on dark.",
+      "effect": "Warms up: glows faintly as it bounces faster.",
+      "sound": "Dead, low squash thock."
+    },
+    "bouncy-ball": {
+      "v": "new",
+      "effect": "Wild ricochet bounces all over, then home.",
+      "sound": "Springy boing that rises."
+    },
+    "marble": {
+      "v": "new",
+      "owner": "Super neat.",
+      "effect": "Rolls around a little circle; the swirl inside turns.",
+      "sound": "Glassy clink."
+    },
+    "hockey-puck": {
+      "v": "new",
+      "fix": "Hard to see on the dark background.",
+      "owner": "Underwhelming.",
+      "effect": "Slides and spins flat, throwing up ice sparkle.",
+      "sound": "Stick slap and ice scrape."
+    },
+    "shuttlecock": {
+      "v": "new",
+      "owner": "Cool.",
+      "effect": "Flips over and floats down feathers-up.",
+      "sound": "Light racket tock."
+    },
+    "flying-disc": {
+      "v": "new",
+      "fix": "Could use more texture; make it look more like plastic (sheen).",
+      "owner": "Looks fine.",
+      "effect": "Spins fast and hovers, tilting.",
+      "sound": "Whirring whoosh."
+    },
+    "heart": {
+      "v": "new",
+      "owner": "Needs a special effect.",
+      "effect": "Racing heartbeat: faster beats with a glow, then calms.",
+      "sound": "Lub-dub that speeds up."
+    },
+    "brain": {
+      "v": "new",
+      "owner": "Needs a special effect.",
+      "effect": "Sparks of light race across the folds (a thought).",
+      "sound": "Electric crackle and a ding."
+    },
+    "eye": {
+      "v": "more",
+      "owner": "Pupil dilation is cool but underwhelming. Let the eye look around by itself, and use a different tap animation.",
+      "effect": "Idle: the eye looks around. Tap: it blinks, looks at you and the pupil snaps small.",
+      "sound": "Soft blink swish."
+    },
+    "lungs": {
+      "v": "new",
+      "owner": "Expand and contract like lungs.",
+      "effect": "A deep breath in and out.",
+      "sound": "Breath in, breath out."
+    },
+    "tooth": {
+      "v": "new",
+      "owner": "Looks good; no idea for an effect.",
+      "effect": "A sparkle wipe cleans it bright white.",
+      "sound": "Squeaky clean ding."
+    },
+    "kidney": {
+      "v": "new",
+      "owner": "Add an effect.",
+      "effect": "Fluid flows through in pulses along the vessels.",
+      "sound": "Gentle trickle."
+    },
+    "campfire": { "v": "keep", "owner": "Basically perfect.", "sound": "Crackle and pop." },
+    "storm-cloud": { "v": "keep", "owner": "Basically perfect.", "sound": "Thunder rumble." },
+    "lava-lamp": {
+      "v": "new",
+      "fix": "Refine where the glass meets the top and bottom caps.",
+      "owner": "Moves really well. On tap: blobs move faster, light up or change colours.",
+      "effect": "Blobs speed up, glow and shift colour for a few seconds.",
+      "sound": "Low bubbling blorp."
+    },
+    "snow-globe": {
+      "v": "keep",
+      "owner": "Basically perfect.",
+      "sound": "Glassy shake and tinkle."
+    },
+    "volcano": { "v": "keep", "owner": "Basically perfect.", "sound": "Deep rumble and boom." },
+    "ice-statue": {
+      "v": "new",
+      "owner": "Let the little white specks move. The swan could melt or break apart.",
+      "effect": "Specks drift; tap melts the swan into drips, then it refreezes.",
+      "sound": "Ice crackle and drips."
+    },
+    "candle": {
+      "v": "keep",
+      "owner": "Pretty good; OK as it is.",
+      "sound": "Soft blow and a match strike."
+    },
+    "tornado": {
+      "v": "new",
+      "owner": "Becomes bigger or more intense.",
+      "effect": "Spins up bigger and faster, pulling debris, then weakens.",
+      "sound": "Rising roar of wind."
+    },
+    "rainbow": {
+      "v": "new",
+      "owner": "Pick an effect.",
+      "effect": "The arc draws itself colour by colour and sparkles at the ends.",
+      "sound": "Rising harp glissando."
+    },
+    "iceberg": {
+      "v": "new",
+      "effect": "A chunk calves off and splashes; the berg bobs.",
+      "sound": "Crack and splash."
+    },
+    "waterfall": {
+      "v": "new",
+      "effect": "A surge: the flow doubles and mist billows.",
+      "sound": "Rushing water swell."
+    },
+    "ocean-wave": {
+      "v": "new",
+      "effect": "The wave curls and breaks into foam.",
+      "sound": "Wave crash."
+    },
+    "geyser": { "v": "keep", "owner": "Pretty cool.", "sound": "Hiss and a whoosh of steam." },
+    "chest": { "v": "keep", "owner": "Perfect.", "sound": "Creak and a treasure chime." },
+    "book": {
+      "v": "keep",
+      "fix": "Blurry: the text is just grey smudges and the cover is soft. Try readable text (a bitmap font), crisper page splats and a sharper cover (screenshots in docs/reviews/2026-09-23/).",
+      "owner": "Blurry; try to make it more detailed so the writing looks like something.",
+      "sound": "Page flip."
+    },
+    "laptop": {
+      "v": "keep",
+      "owner": "Pretty awesome; keep it the same.",
+      "sound": "Keyboard clatter and a start-up chime."
+    },
+    "music-box": {
+      "v": "keep",
+      "owner": "Animation is basically perfect; it needs music.",
+      "sound": "A music-box melody (plucked comb tones) while open."
+    },
+    "clock": {
+      "v": "keep",
+      "owner": "Does roughly what the scan alarm clock should do; keep them slightly different.",
+      "sound": "Modern digital-ish ring (different from the scan's twin bells)."
+    },
+    "gift-box": { "v": "keep", "owner": "Outstanding.", "sound": "Ribbon rustle and a ta-da." },
+    "umbrella": { "v": "keep", "owner": "Perfect.", "sound": "Fwump of the canopy opening." },
+    "desk-fan": { "v": "keep", "owner": "Perfect.", "sound": "Motor hum rising." },
+    "lamp": { "v": "keep", "owner": "Perfect.", "sound": "Switch click." },
+    "potion-bottle": { "v": "keep", "owner": "Perfect.", "sound": "Cork pop and fizz." },
+    "telescope": { "v": "keep", "owner": "Perfect.", "sound": "Brass slide and a twinkle." },
+    "sun": {
+      "v": "new",
+      "owner": "Incredible. It should pulse and churn by default, dramatically, like the real Sun. Needs a super effect.",
+      "effect": "Idle: stronger churning and pulsing. Tap: a big solar flare loops off the surface.",
+      "sound": "Deep roaring whoosh."
+    },
+    "solar-system": {
+      "v": "new",
+      "owner": "Really cool. Maybe the planets line up for an eclipse.",
+      "effect": "Planets swing into a line and one eclipses the Sun, then orbits resume.",
+      "sound": "Rising cosmic chord."
+    },
+    "mercury": {
+      "v": "new",
+      "effect": "Quick orbit-like spin and heat shimmer on the day side.",
+      "sound": "Short bright tone."
+    },
+    "venus": {
+      "v": "new",
+      "effect": "The thick clouds swirl fast around it.",
+      "sound": "Muffled wind."
+    },
+    "earth": {
+      "v": "new",
+      "effect": "Night side lights up with city lights as it turns; clouds move.",
+      "sound": "Soft ocean-and-wind swell."
+    },
+    "moon": {
+      "v": "new",
+      "effect": "Cycles through phases, full to new and back.",
+      "sound": "Hollow chime."
+    },
+    "mars": { "v": "new", "effect": "A dust storm sweeps across it.", "sound": "Dusty hiss." },
+    "jupiter": {
+      "v": "new",
+      "effect": "Bands race and the Great Red Spot spins up.",
+      "sound": "Low gas-giant drone."
+    },
+    "saturn": {
+      "v": "new",
+      "owner": "The rings should move by default.",
+      "effect": "Idle: rings turn. Tap: ring particles sparkle and ripple outward.",
+      "sound": "Shimmering ring chime."
+    },
+    "uranus": {
+      "v": "new",
+      "owner": "Rings move a little by default too.",
+      "effect": "Idle: slow ring motion. Tap: it rolls on its side.",
+      "sound": "Cool icy tone."
+    },
+    "neptune": {
+      "v": "new",
+      "effect": "A dark storm and fast white clouds race by.",
+      "sound": "Deep icy wind."
+    },
+    "aurora-planet": {
+      "v": "new",
+      "owner": "The auroras should actually move, realistically and dynamically.",
+      "effect": "Idle: auroras ripple as curtains. Tap: a bright surge of green and violet.",
+      "sound": "Airy shimmering whistle."
+    },
+    "asteroid": {
+      "v": "new",
+      "owner": "Pretty neat. Maybe it breaks into pieces.",
+      "effect": "Cracks and breaks into pieces that drift apart, then pull back together.",
+      "sound": "Rock crack and a low boom."
+    },
+    "comet": {
+      "v": "new",
+      "fix": "Overhaul: too blurry and not recognisable as a comet. Needs a bright icy nucleus, a coma and two distinct tails (straight blue ion tail, curved dusty tail). The meteor is closer to what the owner wants.",
+      "owner": "Extremely underwhelming; does not look like a comet.",
+      "effect": "Tail flares longer and brighter as it swings by.",
+      "sound": "Long airy whoosh."
+    },
+    "meteor": {
+      "v": "new",
+      "owner": "Much cooler than the comet.",
+      "effect": "Streaks in and bursts in a fireball.",
+      "sound": "Sizzling streak and a boom."
+    },
+    "star": {
+      "v": "new",
+      "owner": "Dynamic like the Sun. Maybe a solar flare, or it evolves into a dying star and dies.",
+      "effect": "Tap runs a life cycle: swells into a red giant, puffs off its shell and leaves a white dwarf, then reforms.",
+      "sound": "Slow swelling tone that fades."
+    },
+    "pulsar": {
+      "v": "new",
+      "owner": "Really neat; needs a really cool effect.",
+      "effect": "Beams sweep faster and faster with strobing flashes.",
+      "sound": "Ticking pulse that speeds up."
+    },
+    "black-hole": {
+      "v": "new",
+      "owner": "Almost perfect as it is; add an effect.",
+      "effect": "A small star falls in, gets stretched into a spiral and swallowed; the disk flares.",
+      "sound": "Deep falling drone."
+    },
+    "star-cluster": {
+      "v": "new",
+      "owner": "Extremely cool; no idea for an effect.",
+      "effect": "Stars twinkle in a wave and the cluster breathes in and out.",
+      "sound": "Twinkling bells."
+    },
+    "planetary-nebula": {
+      "v": "new",
+      "effect": "The ring expands and glows brighter, then settles.",
+      "sound": "Soft expanding pad."
+    },
+    "nebula": {
+      "v": "new",
+      "effect": "New stars ignite inside the clouds.",
+      "sound": "Sparkling pings."
+    },
+    "supernova": {
+      "v": "keep",
+      "owner": "Outstanding; keep it as it is.",
+      "sound": "Huge boom with a long tail."
+    },
+    "spiral-galaxy": {
+      "v": "new",
+      "owner": "No clear effect; it should rotate like a spiral galaxy.",
+      "effect": "Idle: slow rotation. Tap: arms swirl faster and the core flares.",
+      "sound": "Deep swirling hum."
+    },
+    "virus": {
+      "v": "new",
+      "owner": "Looks good; pick an effect.",
+      "effect": "Spikes wave and it splits into copies that fade away.",
+      "sound": "Squelchy pop."
+    },
+    "bacteriophage": {
+      "v": "more",
+      "owner": "Tapping does nothing visible. Upgrade it.",
+      "effect": "Make the injection obvious: the legs splay, the sheath contracts a lot further and a glowing DNA strand shoots out of the tail.",
+      "sound": "Spring-loaded thunk and a squirt."
+    },
+    "bacterium": {
+      "v": "new",
+      "owner": "Needs an effect.",
+      "effect": "Divides in two (binary fission), then merges back.",
+      "sound": "Wet pop."
+    },
+    "red-blood-cell": {
+      "v": "new",
+      "owner": "Maybe turn into a sickle cell, if that is realistic.",
+      "effect": "Deforms into a sickle shape (as in sickle-cell disease at low oxygen), then relaxes back to a disc.",
+      "sound": "Soft stretchy squeak."
+    },
+    "neuron": {
+      "v": "more",
+      "owner": "Decent effect but should be more dramatic.",
+      "effect": "A bright pulse runs from the dendrites down the whole axon and bursts at the terminals.",
+      "sound": "Zap and a rising crackle."
+    },
+    "astrocyte": {
+      "v": "new",
+      "owner": "Needs an effect; looks good.",
+      "effect": "Calcium wave: a glow ripples out along its arms.",
+      "sound": "Rippling shimmer."
+    },
+    "animal-cell": {
+      "v": "new",
+      "owner": "Show some process going on inside, like replication.",
+      "effect": "Cell division: the nucleus splits and the cell pinches into two, then rejoins.",
+      "sound": "Gloopy stretching pop."
+    },
+    "dna": {
+      "v": "more",
+      "owner": "Unzip even further, then zip back up. Almost perfect otherwise.",
+      "effect": "Unzips all the way, bases light up in pairs, then zips back.",
+      "sound": "Zipper sound."
+    },
+    "white-blood-cell": {
+      "v": "new",
+      "owner": "Needs an effect; looks good.",
+      "effect": "Chases and engulfs a small bacterium (phagocytosis).",
+      "sound": "Gulp."
+    },
+    "microglia": {
+      "v": "new",
+      "effect": "Arms reach out and sweep, then retract.",
+      "sound": "Soft scratchy rustle."
+    },
+    "diatom": {
+      "v": "new",
+      "effect": "The glass shell glints and splits into two halves.",
+      "sound": "Glassy tink."
+    },
+    "tardigrade": {
+      "v": "keep",
+      "owner": "Looks great; the effect is awesome.",
+      "sound": "Tiny squeaky step."
+    },
+    "pollen": {
+      "v": "new",
+      "effect": "Bursts a puff of tiny grains.",
+      "sound": "Puff and a sneeze-like tweet."
+    },
+    "snowflake": {
+      "v": "new",
+      "owner": "Melt it, or change into another shape.",
+      "effect": "Arms regrow into a new pattern each tap.",
+      "sound": "Crystalline tinkle."
+    },
+    "chromosome": {
+      "v": "new",
+      "owner": "Something like mitosis or meiosis.",
+      "effect": "The sister chromatids pull apart at the centromere, then rejoin.",
+      "sound": "Stretch and snap."
+    },
+    "mitochondrion": {
+      "v": "new",
+      "owner": "The powerhouse of the cell; make the effect about that.",
+      "effect": "The cristae light up and energy sparks (ATP) pop out.",
+      "sound": "Power-up hum."
+    },
+    "paramecium": {
+      "v": "new",
+      "owner": "Needs an effect.",
+      "effect": "Cilia beat in waves and it swims a loop.",
+      "sound": "Rapid soft flutter."
+    },
+    "amoeba": {
+      "v": "new",
+      "owner": "Needs an effect.",
+      "effect": "Pushes out a pseudopod and oozes over.",
+      "sound": "Gloopy ooze."
+    },
+    "orbital": {
+      "v": "new",
+      "owner": "Chemistry toys need good effects.",
+      "effect": "Jumps to a higher orbital shape with a glow, then drops back and flashes.",
+      "sound": "Quantum blip up and down."
+    },
+    "atom": {
+      "v": "new",
+      "effect": "Electrons speed up into blurred shells.",
+      "sound": "Whirring orbit."
+    },
+    "molecule": {
+      "v": "new",
+      "effect": "Bonds vibrate and stretch (like heat), then calm.",
+      "sound": "Springy boing."
+    },
+    "crystal-lattice": {
+      "v": "new",
+      "effect": "A wave of vibration travels through the lattice.",
+      "sound": "Rippling ping."
+    },
+    "diamond": {
+      "v": "new",
+      "owner": "Gems need effects.",
+      "effect": "Fire: rainbow sparkles flash off the facets as it turns.",
+      "sound": "High sparkle chime."
+    },
+    "ruby": { "v": "new", "effect": "Glows deep red from inside.", "sound": "Warm low chime." },
+    "emerald": {
+      "v": "new",
+      "effect": "Green light runs along the step cuts.",
+      "sound": "Soft glassy chime."
+    },
+    "amethyst-geode": {
+      "v": "more",
+      "owner": "Really cool.",
+      "effect": "The geode opens wider and the crystals glow violet.",
+      "sound": "Stone crack and a chime."
+    },
+    "sapphire": {
+      "v": "new",
+      "effect": "A star shimmer (asterism) glides across it.",
+      "sound": "Cool bell."
+    },
+    "quartz-cluster": {
+      "v": "new",
+      "effect": "Points light up one by one.",
+      "sound": "Tinkling chimes."
+    },
+    "opal": {
+      "v": "new",
+      "effect": "Colour play: flashes of colour roll across it.",
+      "sound": "Shimmer."
+    },
+    "pearl": { "v": "keep", "owner": "Really cool.", "sound": "Soft round clink." },
+    "crystal-ball": {
+      "v": "more",
+      "owner": "Hard to tell what the effect is; make it clearer and more dramatic.",
+      "effect": "Mist swirls hard and a glowing shape appears inside, then fades.",
+      "sound": "Mystic shimmer."
+    },
+    "oak": {
+      "v": "new",
+      "owner": "Shake it and leaves come out.",
+      "effect": "Shakes and leaves flutter down.",
+      "sound": "Leafy rustle."
+    },
+    "pine": {
+      "v": "new",
+      "owner": "Christmas lights and a star appear.",
+      "effect": "Owner's idea: lights and a star appear. (Note: the decorated tree already does lights; alternative: it shakes off a dusting of snow.)",
+      "sound": "Soft jingle."
+    },
+    "palm": {
+      "v": "new",
+      "owner": "Tap it and the coconuts fall.",
+      "effect": "The coconuts fall and bounce, then regrow.",
+      "sound": "Two coconut bonks."
+    },
+    "cherry-blossom": {
+      "v": "more",
+      "owner": "Really cool already. Maybe all the blossoms fall off when touched.",
+      "effect": "All the petals fall in a flurry, then it blooms again.",
+      "sound": "Soft breeze and petal patter."
+    },
+    "maple": {
+      "v": "new",
+      "owner": "Same kind of thing as the cherry blossom.",
+      "effect": "Leaves swirl down in a spiral gust (different from the cherry's gentle fall).",
+      "sound": "Crisp autumn rustle."
+    },
+    "bonsai": {
+      "v": "new",
+      "owner": "Maybe shrink or grow.",
+      "effect": "Grows a new branch, then the scissors snip it back.",
+      "sound": "Snip."
+    },
+    "willow": {
+      "v": "new",
+      "owner": "Pick anything.",
+      "effect": "The long branches sway in a wave like a breeze passing.",
+      "sound": "Long soft sigh."
+    },
+    "sunflower": {
+      "v": "new",
+      "effect": "The head turns to face the sun and petals open wide.",
+      "sound": "Warm rising tone."
+    },
+    "rose": {
+      "v": "new",
+      "effect": "Blooms open further, a petal drops.",
+      "sound": "Soft harp note."
+    },
+    "dandelion": {
+      "v": "keep",
+      "owner": "Really cool effect; keep it.",
+      "sound": "Puff of breath."
+    },
+    "tulip": {
+      "v": "new",
+      "effect": "Petals open wide to the sun, then close.",
+      "sound": "Gentle pluck."
+    },
+    "daisy": {
+      "v": "new",
+      "effect": "Petals spin like a pinwheel (loves me, loves me not).",
+      "sound": "Tick-tick petal plucks."
+    },
+    "lotus": {
+      "v": "new",
+      "effect": "The flower rises and opens on the water with ripples.",
+      "sound": "Water drop and a bell."
+    },
+    "mushroom": { "v": "new", "effect": "Puffs a cloud of glowing spores.", "sound": "Soft puff." },
+    "fern": {
+      "v": "new",
+      "effect": "The fronds unroll from fiddleheads.",
+      "sound": "Unfurling rustle."
+    },
+    "saguaro": {
+      "v": "new",
+      "owner": "The spines come out, or it is cut in half to show the cactus water inside.",
+      "effect": "The spines shoot out and back; a second tap shows a cut-away with the watery inside.",
+      "sound": "Prickly zing."
+    },
+    "coral": {
+      "v": "new",
+      "owner": "Really cool; pick something.",
+      "effect": "Polyps open and little fish dart out and back.",
+      "sound": "Bubbles."
+    },
+    "pinecone": {
+      "v": "new",
+      "owner": "Good-looking but underwhelming; break apart.",
+      "effect": "The scales open wide (as in dry weather) and seeds drift out.",
+      "sound": "Woody creak."
+    },
+    "acorn": {
+      "v": "new",
+      "owner": "Should do something.",
+      "effect": "The caps pop off and a sprout pokes out.",
+      "sound": "Tiny pop."
+    },
+    "succulent": {
+      "v": "new",
+      "owner": "Pick something.",
+      "effect": "The rosette opens and a small flower stalk rises.",
+      "sound": "Soft rising pluck."
+    },
+    "bamboo": {
+      "v": "new",
+      "owner": "Maybe it grows.",
+      "effect": "Shoots grow tall very fast, segment by segment.",
+      "sound": "Hollow wooden knocks."
+    },
+    "rocks": {
+      "v": "new",
+      "owner": "Should fall or drop.",
+      "effect": "The pebbles drop and scatter, then stack into a cairn.",
+      "sound": "Pebble clatter."
+    },
+    "kelp": {
+      "v": "new",
+      "owner": "Maybe fish eat it; pick something.",
+      "effect": "Fish swim in and nibble; the kelp sways away.",
+      "sound": "Underwater bubbles."
+    },
+    "ice-cream": {
+      "v": "more",
+      "owner": "Really neat; I like that you can melt it. Make melting part of the tap effect.",
+      "effect": "Tap melts it: drips run down the cone, then it refreezes.",
+      "sound": "Drip-drip."
+    },
+    "watermelon": {
+      "v": "new",
+      "owner": "Cut it in half or into slices.",
+      "effect": "Cuts into slices that fan out.",
+      "sound": "Juicy chop."
+    },
+    "birthday-cake": {
+      "v": "keep",
+      "owner": "Pretty much perfect.",
+      "sound": "Party blower and a cheer-like chime."
+    },
+    "popcorn": { "v": "keep", "owner": "Basically perfect.", "sound": "Popping." },
+    "jelly": { "v": "keep", "owner": "Pretty much fine.", "sound": "Wobbly boing." },
+    "pancakes": { "v": "keep", "owner": "Really neat.", "sound": "Sizzle and a flip." },
+    "cupcake": {
+      "v": "new",
+      "owner": "Needs an effect.",
+      "effect": "A cherry drops on top and sprinkles rain down.",
+      "sound": "Plop and sprinkle patter."
+    },
+    "lollipop": {
+      "v": "new",
+      "owner": "Maybe spins really fast.",
+      "effect": "Spins fast and the swirl hypnotises.",
+      "sound": "Whirr."
+    },
+    "candy-cane": {
+      "v": "new",
+      "owner": "Pick something.",
+      "effect": "The stripes wind around like a barber pole, then it snaps in two and rejoins.",
+      "sound": "Crisp snap."
+    },
+    "macarons": {
+      "v": "new",
+      "owner": "Maybe they do something.",
+      "effect": "They stack themselves into a tower.",
+      "sound": "Soft taps."
+    },
+    "gummy-bear": {
+      "v": "more",
+      "interactive": true,
+      "owner": "Underwhelming. Press, hold and drag to stretch its arm or body, and let go to spring back with realistic physics.",
+      "effect": "Drag to stretch (like the Magnet, with springy release); tap does a jelly jiggle.",
+      "sound": "Rubbery stretch and boing."
+    },
+    "pretzel": {
+      "v": "new",
+      "owner": "Some sort of twisting, like the knots.",
+      "effect": "Untwists into a rope and twists back.",
+      "sound": "Doughy stretch."
+    },
+    "croissant": {
+      "v": "new",
+      "owner": "Must differ from the real croissant.",
+      "effect": "Puffs up in an oven glow (rising), then flakes fly off.",
+      "sound": "Oven ding."
+    },
+    "pizza": { "v": "keep", "owner": "Perfect.", "sound": "Cheese stretch." },
+    "burger": { "v": "keep", "owner": "Perfect.", "sound": "Sizzle." },
+    "sushi": {
+      "v": "new",
+      "owner": "Chopsticks lifted by an invisible hand pick up the sushi.",
+      "effect": "Chopsticks pick up a roll, dip it and put it back.",
+      "sound": "Wooden chopstick clicks."
+    },
+    "taco": {
+      "v": "new",
+      "owner": "Break in half to show what is inside. Really cool taco.",
+      "effect": "Shell cracks in half and the filling spills out, then it reassembles.",
+      "sound": "Crunch."
+    },
+    "egg": { "v": "keep", "owner": "Perfect.", "sound": "Shell tap." },
+    "coffee": {
+      "v": "more",
+      "owner": "Needs work. The cream on top could spin in a swirl on tap.",
+      "effect": "Latte art swirl spins; steam curls up.",
+      "sound": "Spoon stir clink."
+    },
+    "apple": {
+      "v": "new",
+      "owner": "A bite taken out of it, or a worm comes out.",
+      "effect": "A bite appears (crunch); a second tap, a worm peeks out.",
+      "sound": "Crunch."
+    },
+    "banana": {
+      "v": "new",
+      "owner": "Peel open.",
+      "effect": "One banana peels open.",
+      "sound": "Peel."
+    },
+    "orange": {
+      "v": "new",
+      "owner": "Pick something.",
+      "effect": "Splits into segments that fan out.",
+      "sound": "Juicy squirt."
+    },
+    "kiwi": {
+      "v": "new",
+      "owner": "Pick something.",
+      "effect": "Halves open to show the green inside and seeds.",
+      "sound": "Soft slice."
+    },
+    "pineapple": {
+      "v": "new",
+      "owner": "Maybe it gets cut.",
+      "effect": "Cut into rings that stack.",
+      "sound": "Chop."
+    },
+    "cherries": {
+      "v": "new",
+      "owner": "No idea.",
+      "effect": "The pair swings and bounces on its stems.",
+      "sound": "Double plink."
+    },
+    "grapes": {
+      "v": "new",
+      "owner": "Could fall off the stem.",
+      "effect": "Grapes drop off the stem and bounce, then return.",
+      "sound": "Plop-plop cascade."
+    },
+    "avocado": {
+      "v": "new",
+      "owner": "Pick something.",
+      "effect": "Splits open and the stone pops out and back.",
+      "sound": "Thock."
+    },
+    "bricks": {
+      "v": "more",
+      "interactive": true,
+      "owner": "Build something random from the blocks.",
+      "effect": "Bricks rearrange into a random small build (tower, bridge, animal), different each tap.",
+      "sound": "Brick clicks."
+    },
+    "rubber-duck": {
+      "v": "more",
+      "owner": "Effect is OK; it needs a quack.",
+      "effect": "Keep the effect.",
+      "sound": "Rubber duck quack."
+    },
+    "spinning-top": { "v": "keep", "owner": "Perfect.", "sound": "Whirring hum." },
+    "dice": {
+      "v": "keep",
+      "owner": "Maybe my favourite; rolls feel random like real dice. Keep it.",
+      "sound": "Dice rattle and clatter."
+    },
+    "newtons-cradle": {
+      "v": "more",
+      "interactive": true,
+      "owner": "Tapping has no noticeable effect. Make it more interactive.",
+      "effect": "Tap lifts and drops an end ball hard so the clacks are obvious; later, drag a ball back and let go.",
+      "sound": "Crisp steel clacks."
+    },
+    "teddy-bear": { "v": "keep", "owner": "Cute; fine.", "sound": "Soft squeak." },
+    "yo-yo": { "v": "keep", "owner": "Fine.", "sound": "String zip." },
+    "puzzle-cube": {
+      "v": "more",
+      "interactive": true,
+      "owner": "Only the top row twists (very cool). Move more than the top row; ideally swipe any row or column to solve it; add a shuffle.",
+      "effect": "Tap scrambles with several random layer turns. Later: swipe a face to turn that layer, with a solved check.",
+      "sound": "Plastic click per turn."
+    },
+    "spring-toy": { "v": "keep", "owner": "Basically perfect.", "sound": "Springy slinky boing." },
+    "kite": {
+      "v": "more",
+      "owner": "Underwhelming; develop the animation further.",
+      "effect": "A big gust: the kite loops the loop and the tail whips.",
+      "sound": "Wind gust and a fabric flap."
+    },
+    "paper-plane": { "v": "keep", "owner": "Fine.", "sound": "Paper swish." },
+    "origami-crane": { "v": "keep", "owner": "Solid as it is.", "sound": "Paper flutter." },
+    "balloon-dog": { "v": "keep", "owner": "Almost perfect.", "sound": "Balloon squeak and pop." },
+    "soap-bubbles": { "v": "keep", "owner": "Perfect.", "sound": "Tiny pops." },
+    "robot": { "v": "keep", "owner": "Perfect.", "sound": "Wind-up ratchet and clockwork." },
+    "lorenz": {
+      "v": "more",
+      "owner": "Spin a little more or be more dynamic; looks good when still.",
+      "effect": "A glowing point races along the trail, drawing a new path.",
+      "sound": "Chaotic warble."
+    },
+    "mobius": {
+      "v": "new",
+      "owner": "Wow, really neat. Maybe twist a little.",
+      "effect": "An ant-like dot walks the single side; the band twists.",
+      "sound": "Looping tone."
+    },
+    "klein-bottle": {
+      "v": "more",
+      "owner": "Not sure it has an effect. Maybe water flows through it; it already kind of does, make that dramatic.",
+      "effect": "A clear surge of water flows through the neck and round.",
+      "sound": "Glug and flow."
+    },
+    "menger-sponge": {
+      "v": "new",
+      "owner": "No idea for an effect; looks good. The owner calls one of these a favourite and a likely homepage embed (the transcript may refer to the next toy, the hypercube).",
+      "effect": "Zooms into itself: the holes open to show the next level down.",
+      "sound": "Descending recursive blips."
+    },
+    "hypercube": {
+      "v": "new",
+      "owner": "Possibly the favourite and homepage embed (see the Menger sponge).",
+      "effect": "Rotates through the fourth dimension, turning inside out.",
+      "sound": "Phasing synth sweep."
+    },
+    "torus-knot": {
+      "v": "new",
+      "owner": "Contort a little; looks cool.",
+      "effect": "Contorts through different knot shapes.",
+      "sound": "Stretchy twang."
+    },
+    "gyroid": {
+      "v": "new",
+      "owner": "Really neat; needs an effect.",
+      "effect": "The surface flows and shifts phase like a breathing sponge.",
+      "sound": "Watery hum."
+    },
+    "mandelbulb": {
+      "v": "new",
+      "owner": "Like the Mandeltorus: twisting.",
+      "effect": "Morphs through powers (bulb shapes twist and bloom).",
+      "sound": "Deep morphing tone."
+    },
+    "sierpinski": { "v": "keep", "owner": "Perfect as is.", "sound": "Stacked triangle chimes." },
+    "platonic": { "v": "keep", "owner": "Perfect.", "sound": "Five-note chime." },
+    "seashell-spiral": {
+      "v": "new",
+      "owner": "Something to do with hearing the ocean in a seashell.",
+      "effect": "Glows softly and waves ripple out of the opening.",
+      "sound": "Ocean hush."
+    },
+    "sword-in-stone": { "v": "keep", "owner": "Perfect.", "sound": "Metal ring." },
+    "shield": {
+      "v": "new",
+      "owner": "Only bounces; find a better effect.",
+      "effect": "Blocks an invisible hit: it jolts, sparks and the emblem gleams.",
+      "sound": "Metal clang."
+    },
+    "bow-and-target": {
+      "v": "keep",
+      "owner": "Unbelievably impressive.",
+      "sound": "Twang and thunk."
+    },
+    "trebuchet": { "v": "keep", "owner": "Fine.", "sound": "Creak and a whoosh." },
+    "crossbow": { "v": "keep", "owner": "Solid.", "sound": "Click-thwack." },
+    "knights-helmet": { "v": "keep", "owner": "Really neat.", "sound": "Visor clank." },
+    "crown": {
+      "v": "new",
+      "owner": "Needs an effect.",
+      "effect": "Jewels light up in turn and it rises with a glow.",
+      "sound": "Royal fanfare."
+    },
+    "dragon-egg": { "v": "keep", "owner": "Cute and perfect.", "sound": "Crack and a tiny roar." },
+    "wizards-orb": {
+      "v": "more",
+      "owner": "Looks really good; develop it further to be more impressive.",
+      "effect": "A bigger spell: runes orbit, light bursts and sparks spiral out.",
+      "sound": "Magic whoosh and sparkle."
+    },
+    "jellyfish": {
+      "v": "more",
+      "owner": "Not sure what the effect does; make it more apparent.",
+      "effect": "A strong pulse that jets it upward, trailing glowing tentacles.",
+      "sound": "Soft watery whoomp."
+    },
+    "fish-school": {
+      "v": "new",
+      "owner": "Swim around more dynamically, like a swarm.",
+      "effect": "The school swirls into a bait ball and scatters.",
+      "sound": "Swishing water."
+    },
+    "butterfly": { "v": "keep", "owner": "Perfect.", "sound": "Delicate flutter." },
+    "pufferfish": {
+      "v": "more",
+      "owner": "Should puff: get big, then small.",
+      "effect": "Inflates to a big spiky ball, then deflates.",
+      "sound": "Balloon inflate and a sputter."
+    },
+    "nautilus": {
+      "v": "new",
+      "owner": "Enter and exit its shell.",
+      "effect": "Tentacles pull into the shell, then peek back out.",
+      "sound": "Hollow shell whoosh."
+    },
+    "ladybug": { "v": "keep", "owner": "Perfect.", "sound": "Tiny wing buzz." },
+    "snail": {
+      "v": "more",
+      "owner": "Perfect, but it disappears too much when hiding; make it more elegant.",
+      "effect": "Keep hiding in the shell, but keep the shell clearly visible and ease in more gently.",
+      "sound": "Slurpy slide."
+    },
+    "octopus": {
+      "v": "more",
+      "owner": "Underwhelming; the ink should be much bigger and more dramatic.",
+      "effect": "A big ink cloud billows out while it jets away and back.",
+      "sound": "Squirt and whoosh."
+    },
+    "starfish": { "v": "keep", "owner": "Fine.", "sound": "Wet suction pop." },
+    "sea-urchin": {
+      "v": "new",
+      "owner": "Needs an effect.",
+      "effect": "Spines ripple in waves and it creeps along.",
+      "sound": "Prickly rustle."
+    },
+    "frog": {
+      "v": "new",
+      "owner": "Mouth opens and the tongue shoots out.",
+      "effect": "Tongue shoots out to catch a fly.",
+      "sound": "Ribbit."
+    },
+    "penguin": { "v": "keep", "owner": "Perfect and very cute.", "sound": "Squawk." },
+    "owl": { "v": "keep", "owner": "Basically perfect.", "sound": "Hoo-hoo." },
+    "jack-o-lantern": {
+      "v": "keep",
+      "owner": "Basically perfect.",
+      "sound": "Spooky flicker whoosh."
+    },
+    "snowman": {
+      "v": "new",
+      "owner": "Do more than bounce; maybe it melts.",
+      "effect": "Melts into a puddle, then rebuilds itself.",
+      "sound": "Drip and a crunchy rebuild."
+    },
+    "fireworks": {
+      "v": "more",
+      "owner": "Outstanding. Make each launch different (like the dice), and the burst match the colour of the cannon that fires it.",
+      "effect": "Random shell types each tap; burst colour matches its tube.",
+      "sound": "Launch whistle and a boom."
+    },
+    "decorated-tree": {
+      "v": "more",
+      "fix": "The star on top looks like a glowing golden cloud; make it a clear star shape.",
+      "owner": "Lights only show very briefly; make it more dramatic.",
+      "effect": "Lights come on and chase in patterns and stay on; the star glows.",
+      "sound": "Sleigh-bell jingle."
+    },
+    "patterned-egg": { "v": "keep", "owner": "Pretty cool; keep.", "sound": "Painted-shell tap." },
+    "paper-lantern": {
+      "v": "keep",
+      "owner": "Perfect; the physics are really good.",
+      "sound": "Paper rustle."
+    },
+    "diya": {
+      "v": "more",
+      "fix": "Underwhelming visually; add detail (patterned clay, oil sheen).",
+      "owner": "Very underwhelming.",
+      "effect": "The flame grows and a ring of small diyas lights around it.",
+      "sound": "Soft flame whoosh."
+    },
+    "menorah": {
+      "v": "keep",
+      "owner": "Pretty much perfect.",
+      "sound": "Match strike and a bell."
+    },
+    "guitar": {
+      "v": "more",
+      "owner": "Looks fine; add the music.",
+      "effect": "Keep the strum; strings vibrate visibly.",
+      "sound": "A real strummed chord progression (synth plucks)."
+    },
+    "drum": {
+      "v": "more",
+      "owner": "Could be more dramatic. Fast taps could play longer and faster rolls.",
+      "effect": "Sticks play a roll; fast repeated taps make faster, longer rolls.",
+      "sound": "Snare hits with rattle."
+    },
+    "xylophone": {
+      "v": "keep",
+      "owner": "Incredible; basically perfect.",
+      "sound": "The scale it already plays, as mallet tones."
+    },
+    "rocket": { "v": "keep", "owner": "Basically perfect.", "sound": "Launch roar." },
+    "helicopter": { "v": "keep", "owner": "Basically perfect.", "sound": "Rotor chop." },
+    "hot-air-balloon": {
+      "v": "more",
+      "owner": "Could be more dramatic; maybe inflate more.",
+      "effect": "Burner roars, the envelope swells and it rises higher.",
+      "sound": "Burner roar."
+    },
+    "steam-train": { "v": "keep", "owner": "Basically perfect.", "sound": "Whistle and chuff." },
+    "ocean-liner": { "v": "keep", "owner": "Almost perfect.", "sound": "Deep ship horn." },
+    "sports-car": {
+      "v": "keep",
+      "fix": "A little small in its frame (known issue).",
+      "owner": "Looks really good.",
+      "sound": "Engine rev."
+    },
+    "bus": {
+      "v": "more",
+      "owner": "Not sure what the effect is.",
+      "effect": "Stop sign swings out, lights flash, doors open.",
+      "sound": "Horn beep and door hiss."
+    },
+    "propeller-plane": {
+      "v": "keep",
+      "owner": "Unbelievable; perfect.",
+      "sound": "Prop engine buzz."
+    },
+    "jet": {
+      "v": "more",
+      "owner": "Very solid; bank more to one side or the other.",
+      "effect": "Climbs and banks hard left then right.",
+      "sound": "Jet roar."
+    },
+    "sailboat": {
+      "v": "more",
+      "owner": "Pretty good; a bit more dramatic.",
+      "effect": "A big gust heels it over with spray.",
+      "sound": "Wind and water spray."
+    },
+    "submarine": {
+      "v": "more",
+      "owner": "Underwhelming that only the periscope appears and disappears.",
+      "effect": "Dives with bubbles, then surfaces and raises the periscope.",
+      "sound": "Sonar ping."
+    },
+    "bicycle": {
+      "v": "more",
+      "owner": "Not sure what the effect is; make it more dramatic.",
+      "effect": "Pedals spin, the wheels turn and the bell rings clearly.",
+      "sound": "Bicycle bell ring-ring."
+    },
+    "tractor": {
+      "v": "keep",
+      "fix": "The exhaust smoke is heavy (known issue).",
+      "owner": "Perfect.",
+      "sound": "Diesel putter."
+    },
+    "ufo": {
+      "v": "keep",
+      "owner": "Maybe my favourite; really cool.",
+      "sound": "Theremin warble."
+    },
+    "eiffel-tower": {
+      "v": "new",
+      "owner": "Fireworks burst around it.",
+      "effect": "Sparkling lights run up the tower and fireworks burst around it.",
+      "sound": "Sparkle and distant booms."
+    },
+    "washington-monument": {
+      "v": "new",
+      "owner": "Something cool and not disrespectful.",
+      "effect": "The reflecting pool shimmers and the flags wave.",
+      "sound": "Gentle breeze."
+    },
+    "pyramids": {
+      "v": "new",
+      "owner": "Neat. Maybe put a UFO there, as a joke.",
+      "effect": "A tiny UFO (the Flying saucer) hovers over the Great Pyramid and beams up a camel-shaped cloud of sand.",
+      "sound": "Theremin warble and sand hiss."
+    },
+    "supertall": {
+      "v": "new",
+      "owner": "Make it twist or glow.",
+      "effect": "The tower twists further and its lights run upward.",
+      "sound": "Rising elevator ding."
+    },
+    "lighthouse": { "v": "keep", "owner": "Basically perfect.", "sound": "Foghorn." },
+    "statue-of-liberty": {
+      "v": "new",
+      "fix": "The crown looks squashed down; raise its rays and give them clearer spikes (screenshot in docs/reviews/2026-09-23/).",
+      "owner": "Everything else looks fine. Make the effect a good one.",
+      "effect": "The torch flame flares bright and sparkles drift from it.",
+      "sound": "Flame whoosh and a harbour bell."
+    },
+    "white-house": {
+      "v": "new",
+      "owner": "Nothing destructive or disrespectful.",
+      "effect": "The fountain on the lawn sprays higher and the flag raises.",
+      "sound": "Fountain splash."
+    },
+    "leaning-tower": {
+      "v": "new",
+      "owner": "Lean further and things fall off, like Galileo dropping objects.",
+      "effect": "Two balls of different sizes drop from the top and land together.",
+      "sound": "Two thuds at the same time."
+    },
+    "colosseum": {
+      "v": "new",
+      "owner": "Gladiators fighting inside?",
+      "effect": "Non-violent: a tiny chariot race loops the arena while the crowd cheers (no fighting, per the no-gore rule).",
+      "sound": "Crowd cheer."
+    },
+    "parthenon": {
+      "v": "new",
+      "owner": "Little ancient people in it.",
+      "effect": "Tiny robed figures walk between the columns in procession.",
+      "sound": "Lyre strum."
+    },
+    "stonehenge": {
+      "v": "new",
+      "owner": "No idea.",
+      "effect": "Solstice sunrise: the sun rises through the stones and lights them gold.",
+      "sound": "Low drone and a bell."
+    },
+    "big-ben": {
+      "v": "more",
+      "owner": "No visible effect; make it pronounced or pick something better.",
+      "effect": "Hands spin to the hour, the clock face glows and the bell swings.",
+      "sound": "Big Ben chimes (Westminster quarters, simplified)."
+    },
+    "taj-mahal": {
+      "v": "new",
+      "owner": "Looks good; needs an effect.",
+      "effect": "Moonlight: the dome glows and the reflecting pool ripples.",
+      "sound": "Soft sitar-like pluck."
+    },
+    "castle": {
+      "v": "more",
+      "owner": "Pretty good but underwhelming. Knights come out when the drawbridge opens.",
+      "effect": "The drawbridge drops and tiny knights march out with a banner.",
+      "sound": "Chain rattle and a trumpet."
+    },
+    "pagoda": {
+      "v": "more",
+      "owner": "Not sure what the effect is.",
+      "effect": "Wind chimes swing on every roof tier and lanterns light up.",
+      "sound": "Wind chimes."
+    },
+    "windmill": {
+      "v": "more",
+      "owner": "Pretty good, but move a little faster.",
+      "effect": "Faster sails; the gust spins them up hard.",
+      "sound": "Creaking sails and wind."
+    }
+  }
+}
