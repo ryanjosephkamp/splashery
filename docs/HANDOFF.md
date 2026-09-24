@@ -73,25 +73,29 @@ per-toy plan that came out of it is [TOY-PLAN.md](TOY-PLAN.md), generated from `
 by `node tools/toy-plan.mjs`. Keep that JSON current: when a phase finishes a toy, update its entry
 (for example `"v": "keep"`) and regenerate.
 
-The owner marks each proposal Approve, Change or Skip (with notes) on a private page:
-https://claude.ai/artifact/PNGPx7REMdhxLMHDXARhw8 ("Splashery Toy Plan"). **Before starting a phase,
-read the marks for its toys**: with the `ArtifactData` tool, `list` the collection `marks` (one
-document per toy id: `{mark: "yes" | "change" | "skip" | "", note, at}`). If that tool is not
-available, ask the owner to press "Copy my marks and notes" on the page and paste the text. A
-"change" note overrides the proposal in `tools/toy-plan.json`; update the JSON to match. If the plan
-JSON changes, the page can be republished from it (`node tools/toy-plan.mjs --json`).
+**On 2026-09-24 the owner approved every proposal in the plan as written**, including the
+sports-ball texture fixes added that day, and all toys are marked approved on the page below. Build
+them as proposed; use judgement on details.
 
-| Phase | What                                                                                                                                                 | Repo(s)   |
-| ----- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | --------- |
-| A     | Done: sharpness, Detail setting, embeds, honeybee, thumbnail retry, homepage embed.                                                                  | both      |
-| **B** | Mobile shelf grid (drag up into a full grid like desktop), thumbnail labels that don't cut off, and a "Find your own splat" help panel.              | splashery |
-| C1    | Visual fixes from the review (16 toys: vintage camera, boombox, storybook, comet, Statue of Liberty crown, horse brightness, cookie orientation, …). | splashery |
-| C2    | Make existing effects clearer or more dramatic (33 toys the owner found subtle or underwhelming: bacteriophage, Newton's cradle, Big Ben, bus, …).   | splashery |
-| D     | Effects and sound engine: a unique sound per toy, scan rigs (moving parts for captured toys), taps that know where they landed, drag-to-stretch.     | splashery |
-| E1–E6 | New tap effects for the 181 toys marked new (most only hop today), in six waves by category (see TOY-PLAN.md), each with its own sound.              | splashery |
-| F     | Touch and drag interaction: a solvable puzzle cube, a chess set that plays a real game, a stretchy gummy bear, a draggable Newton's cradle, bricks.  | splashery |
-| G     | AI image-to-3D trial with `HF_TOKEN`.                                                                                                                | splashery |
-| H     | Later: the gallery, multi-toy scenes, a liquid pour, the draw-order fix, more scans, more instruments, and the final homepage embed(s).              | both      |
+The owner can still mark a proposal Approve, Change or Skip (with notes) on a private page:
+https://claude.ai/artifact/PNGPx7REMdhxLMHDXARhw8 ("Splashery Toy Plan"). Before starting a phase,
+check the marks for its toys for any later change: with the `ArtifactData` tool, `list` the
+collection `marks` (one document per toy id: `{mark: "yes" | "change" | "skip" | "", note, at}`). If
+that tool is not available, ask the owner to press "Copy my marks and notes" on the page and paste
+the text. A "change" note overrides the proposal in `tools/toy-plan.json`; update the JSON to match.
+If the plan JSON changes, the page can be republished from it (`node tools/toy-plan.mjs --json`).
+
+| Phase | What                                                                                                                                                                       | Repo(s)   |
+| ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- |
+| A     | Done: sharpness, Detail setting, embeds, honeybee, thumbnail retry, homepage embed.                                                                                        | both      |
+| **B** | Mobile shelf grid (drag up into a full grid like desktop), thumbnail labels that don't cut off, and a "Find your own splat" help panel.                                    | splashery |
+| C1    | Visual fixes from the review (26 toys: vintage camera, boombox, storybook, comet, Statue of Liberty crown, horse brightness, cookie orientation, sports-ball textures, …). | splashery |
+| C2    | Make existing effects clearer or more dramatic (33 toys the owner found subtle or underwhelming: bacteriophage, Newton's cradle, Big Ben, bus, …).                         | splashery |
+| D     | Effects and sound engine: a unique sound per toy, scan rigs (moving parts for captured toys), taps that know where they landed, drag-to-stretch.                           | splashery |
+| E1–E6 | New tap effects for the 181 toys marked new (most only hop today), in six waves by category (see TOY-PLAN.md), each with its own sound.                                    | splashery |
+| F     | Touch and drag interaction: a solvable puzzle cube, a chess set that plays a real game, a stretchy gummy bear, a draggable Newton's cradle, bricks.                        | splashery |
+| G     | AI image-to-3D trial with `HF_TOKEN`.                                                                                                                                      | splashery |
+| H     | Later: the gallery, multi-toy scenes, a liquid pour, the draw-order fix, more scans, more instruments, and the final homepage embed(s).                                    | both      |
 
 What the owner asked for across the board (2026-09-23):
 
@@ -184,6 +188,12 @@ row; names are readable; the help panel is in Make; all tests pass; and prettier
     a crisper cover. Also the known faint red strip.
   - Comet: overhaul (icy nucleus, coma, straight blue ion tail and curved dust tail).
   - Statue of Liberty: crown rays look squashed. Decorated tree: the star is a golden cloud.
+  - Sports balls (added 2026-09-24): several look grainy instead of like their material. The tennis
+    ball should be fuzzy felt; the American football should be pebbled pigskin leather with crisp
+    laces. Check basketball, baseball, softball, rugby ball, cricket ball, soccer ball, volleyball
+    and medicine ball too. Likely causes: colour noise and jitter too strong for their size, and
+    discs too flat or too sparse for felt; try per-material splat size, opacity and a fine bump
+    pattern in the colour function.
   - Lava lamp caps, flying disc sheen, diya detail, the dark-on-dark squash ball and hockey puck,
     and the carried-forward sports car framing and tractor smoke.
 - **C2, clearer effects.** The toys marked "more" in TOY-PLAN.md. Several "do nothing" reports are
@@ -226,11 +236,16 @@ row; names are readable; the help panel is in Make; all tests pass; and prettier
   draw-order fix for moving parts, more scans, more instruments (piano, trumpet, violin, maracas,
   harp), and the final homepage embed(s) in ryanjosephkamp.github.io.
 
-## Decisions waiting on the owner
+## Decisions
 
-- Sounds: synthesized only, or CC0 audio samples for the hardest ones (a real quack, an alarm bell,
-  a crowd cheer)? Samples add a few hundred KB; embeds stay silent either way.
-- The favourite maths toy for the homepage: Menger sponge or hypercube? And one embed or several?
-- An owner-set `?detail=high` embed option for the homepage (see above).
-- Pine tree: the owner suggested lights and a star, but the decorated tree already does that; the
-  plan offers shaking off snow instead.
+Settled on 2026-09-24, when the owner approved every recommendation:
+
+- Sounds: synthesize by default; CC0 audio samples are fine for the few that synthesis does badly (a
+  real quack, an alarm bell, a crowd). Record each sample in CREDITS.md.
+- Pine tree: it shakes off a dusting of snow (the decorated tree keeps the lights).
+- An owner-set `?detail=high` embed option for the homepage is approved for Phase H, capped by
+  device tier.
+
+Still open (ask when it comes up, in Phase H):
+
+- The favourite maths toy for the homepage: Menger sponge or hypercube? One embed or several?

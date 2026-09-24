@@ -1,5 +1,5 @@
 {
-  "about": "One entry per shelf toy: the owner's review notes (2026-09-23, docs/reviews/2026-09-23/review.md), a verdict, and a proposed tap effect and sound. v: keep = the owner likes the effect as it is; more = it has an effect that should be clearer or more dramatic; new = it only hops today and needs its own effect. fix = a visual problem to fix. interactive = the owner asked for touch-position or drag interaction. Proposals are suggestions; the owner may change them. tools/toy-plan.mjs checks this file against the shelf and writes docs/TOY-PLAN.md.",
+  "about": "One entry per shelf toy: the owner's review notes (2026-09-23, docs/reviews/2026-09-23/review.md), a verdict, and a proposed tap effect and sound. v: keep = the owner likes the effect as it is; more = it has an effect that should be clearer or more dramatic; new = it only hops today and needs its own effect. fix = a visual problem to fix. interactive = the owner asked for touch-position or drag interaction. Proposals are suggestions; the owner may change them. tools/toy-plan.mjs checks this file against the shelf and writes docs/TOY-PLAN.md. On 2026-09-24 the owner approved every proposal in this file as written, including the sports-ball texture fixes.",
   "toys": {
     "cactus": {
       "v": "new",
@@ -219,32 +219,40 @@
       "v": "new",
       "owner": "Balls look good. Bouncing is fine but each should bounce differently.",
       "effect": "Dribble: fast low bounces, then a spin on a fingertip.",
-      "sound": "Hollow basketball boing."
+      "sound": "Hollow basketball boing.",
+      "fix": "Check the texture: it should read as pebbled rubber with clean black channels, not grain."
     },
     "soccer-ball": {
       "v": "new",
       "effect": "Keepy-uppy: three small kicks with spin.",
-      "sound": "Firm thump."
+      "sound": "Firm thump.",
+      "fix": "Check the texture: smooth panels with clean seams, not speckle."
     },
     "american-football": {
       "v": "new",
       "effect": "A tight spiral spin in place.",
-      "sound": "Leathery whoosh."
+      "sound": "Leathery whoosh.",
+      "fix": "Looks grainy, not like leather. Give it a pebbled pigskin leather texture (fine bumps, subtle sheen, darker seams and crisp white laces).",
+      "owner": "The owner (2026-09-24): some sports balls look grainy rather than realistic; the tennis ball should be fuzzy and the American football should look like leathered pigskin. Look at the other balls too."
     },
     "tennis-ball": {
       "v": "new",
       "effect": "Fast high bounce with the fuzz fluffing out.",
-      "sound": "Pock."
+      "sound": "Pock.",
+      "fix": "Should look fuzzy. Make the felt soft and fibrous (fine hair-like noise, slightly blurred edge) with a clean white seam.",
+      "owner": "The owner (2026-09-24): some sports balls look grainy rather than realistic; the tennis ball should be fuzzy and the American football should look like leathered pigskin. Look at the other balls too."
     },
     "baseball": {
       "v": "new",
       "effect": "Curveball: it spins hard and swerves.",
-      "sound": "Bat crack."
+      "sound": "Bat crack.",
+      "fix": "Check the texture: smooth white leather with crisp red stitches, not grain."
     },
     "softball": {
       "v": "new",
       "effect": "Underhand arc and a softer thud.",
-      "sound": "Muffled thud."
+      "sound": "Muffled thud.",
+      "fix": "Check the texture: smooth leather with crisp red stitches, not grain."
     },
     "beach-ball": {
       "v": "new",
@@ -259,12 +267,14 @@
     "rugby-ball": {
       "v": "new",
       "effect": "Tumbles end over end with an odd bounce.",
-      "sound": "Dull thud."
+      "sound": "Dull thud.",
+      "fix": "Check the texture: pebbled grip, not grain."
     },
     "volleyball": {
       "v": "new",
       "effect": "A set then a spike straight down.",
-      "sound": "Slap."
+      "sound": "Slap.",
+      "fix": "Check the texture: smooth leather panels with clean seams, not speckle."
     },
     "water-polo-ball": {
       "v": "new",
@@ -279,7 +289,8 @@
     "cricket-ball": {
       "v": "new",
       "effect": "Seam-up spin and a skid.",
-      "sound": "Crisp leather knock."
+      "sound": "Crisp leather knock.",
+      "fix": "Check the texture: polished red leather with a shine and a clear raised seam."
     },
     "bowling-ball": {
       "v": "new",
@@ -304,7 +315,8 @@
     "medicine-ball": {
       "v": "new",
       "effect": "Barely lifts and lands with a heavy squash.",
-      "sound": "Heavy thud."
+      "sound": "Heavy thud.",
+      "fix": "Check the texture: matte rubber grip, not grain."
     },
     "lacrosse-ball": {
       "v": "new",
@@ -385,8 +397,16 @@
       "effect": "Fluid flows through in pulses along the vessels.",
       "sound": "Gentle trickle."
     },
-    "campfire": { "v": "keep", "owner": "Basically perfect.", "sound": "Crackle and pop." },
-    "storm-cloud": { "v": "keep", "owner": "Basically perfect.", "sound": "Thunder rumble." },
+    "campfire": {
+      "v": "keep",
+      "owner": "Basically perfect.",
+      "sound": "Crackle and pop."
+    },
+    "storm-cloud": {
+      "v": "keep",
+      "owner": "Basically perfect.",
+      "sound": "Thunder rumble."
+    },
     "lava-lamp": {
       "v": "new",
       "fix": "Refine where the glass meets the top and bottom caps.",
@@ -399,7 +419,11 @@
       "owner": "Basically perfect.",
       "sound": "Glassy shake and tinkle."
     },
-    "volcano": { "v": "keep", "owner": "Basically perfect.", "sound": "Deep rumble and boom." },
+    "volcano": {
+      "v": "keep",
+      "owner": "Basically perfect.",
+      "sound": "Deep rumble and boom."
+    },
     "ice-statue": {
       "v": "new",
       "owner": "Let the little white specks move. The swan could melt or break apart.",
@@ -438,8 +462,16 @@
       "effect": "The wave curls and breaks into foam.",
       "sound": "Wave crash."
     },
-    "geyser": { "v": "keep", "owner": "Pretty cool.", "sound": "Hiss and a whoosh of steam." },
-    "chest": { "v": "keep", "owner": "Perfect.", "sound": "Creak and a treasure chime." },
+    "geyser": {
+      "v": "keep",
+      "owner": "Pretty cool.",
+      "sound": "Hiss and a whoosh of steam."
+    },
+    "chest": {
+      "v": "keep",
+      "owner": "Perfect.",
+      "sound": "Creak and a treasure chime."
+    },
     "book": {
       "v": "keep",
       "fix": "Blurry: the text is just grey smudges and the cover is soft. Try readable text (a bitmap font), crisper page splats and a sharper cover (screenshots in docs/reviews/2026-09-23/).",
@@ -461,12 +493,36 @@
       "owner": "Does roughly what the scan alarm clock should do; keep them slightly different.",
       "sound": "Modern digital-ish ring (different from the scan's twin bells)."
     },
-    "gift-box": { "v": "keep", "owner": "Outstanding.", "sound": "Ribbon rustle and a ta-da." },
-    "umbrella": { "v": "keep", "owner": "Perfect.", "sound": "Fwump of the canopy opening." },
-    "desk-fan": { "v": "keep", "owner": "Perfect.", "sound": "Motor hum rising." },
-    "lamp": { "v": "keep", "owner": "Perfect.", "sound": "Switch click." },
-    "potion-bottle": { "v": "keep", "owner": "Perfect.", "sound": "Cork pop and fizz." },
-    "telescope": { "v": "keep", "owner": "Perfect.", "sound": "Brass slide and a twinkle." },
+    "gift-box": {
+      "v": "keep",
+      "owner": "Outstanding.",
+      "sound": "Ribbon rustle and a ta-da."
+    },
+    "umbrella": {
+      "v": "keep",
+      "owner": "Perfect.",
+      "sound": "Fwump of the canopy opening."
+    },
+    "desk-fan": {
+      "v": "keep",
+      "owner": "Perfect.",
+      "sound": "Motor hum rising."
+    },
+    "lamp": {
+      "v": "keep",
+      "owner": "Perfect.",
+      "sound": "Switch click."
+    },
+    "potion-bottle": {
+      "v": "keep",
+      "owner": "Perfect.",
+      "sound": "Cork pop and fizz."
+    },
+    "telescope": {
+      "v": "keep",
+      "owner": "Perfect.",
+      "sound": "Brass slide and a twinkle."
+    },
     "sun": {
       "v": "new",
       "owner": "Incredible. It should pulse and churn by default, dramatically, like the real Sun. Needs a super effect.",
@@ -499,7 +555,11 @@
       "effect": "Cycles through phases, full to new and back.",
       "sound": "Hollow chime."
     },
-    "mars": { "v": "new", "effect": "A dust storm sweeps across it.", "sound": "Dusty hiss." },
+    "mars": {
+      "v": "new",
+      "effect": "A dust storm sweeps across it.",
+      "sound": "Dusty hiss."
+    },
     "jupiter": {
       "v": "new",
       "effect": "Bands race and the Great Red Spot spins up.",
@@ -723,7 +783,11 @@
       "effect": "Fire: rainbow sparkles flash off the facets as it turns.",
       "sound": "High sparkle chime."
     },
-    "ruby": { "v": "new", "effect": "Glows deep red from inside.", "sound": "Warm low chime." },
+    "ruby": {
+      "v": "new",
+      "effect": "Glows deep red from inside.",
+      "sound": "Warm low chime."
+    },
     "emerald": {
       "v": "new",
       "effect": "Green light runs along the step cuts.",
@@ -750,7 +814,11 @@
       "effect": "Colour play: flashes of colour roll across it.",
       "sound": "Shimmer."
     },
-    "pearl": { "v": "keep", "owner": "Really cool.", "sound": "Soft round clink." },
+    "pearl": {
+      "v": "keep",
+      "owner": "Really cool.",
+      "sound": "Soft round clink."
+    },
     "crystal-ball": {
       "v": "more",
       "owner": "Hard to tell what the effect is; make it clearer and more dramatic.",
@@ -766,7 +834,7 @@
     "pine": {
       "v": "new",
       "owner": "Christmas lights and a star appear.",
-      "effect": "Owner's idea: lights and a star appear. (Note: the decorated tree already does lights; alternative: it shakes off a dusting of snow.)",
+      "effect": "Shakes off a dusting of snow (approved instead of lights, which the decorated tree already has).",
       "sound": "Soft jingle."
     },
     "palm": {
@@ -829,7 +897,11 @@
       "effect": "The flower rises and opens on the water with ripples.",
       "sound": "Water drop and a bell."
     },
-    "mushroom": { "v": "new", "effect": "Puffs a cloud of glowing spores.", "sound": "Soft puff." },
+    "mushroom": {
+      "v": "new",
+      "effect": "Puffs a cloud of glowing spores.",
+      "sound": "Soft puff."
+    },
     "fern": {
       "v": "new",
       "effect": "The fronds unroll from fiddleheads.",
@@ -900,9 +972,21 @@
       "owner": "Pretty much perfect.",
       "sound": "Party blower and a cheer-like chime."
     },
-    "popcorn": { "v": "keep", "owner": "Basically perfect.", "sound": "Popping." },
-    "jelly": { "v": "keep", "owner": "Pretty much fine.", "sound": "Wobbly boing." },
-    "pancakes": { "v": "keep", "owner": "Really neat.", "sound": "Sizzle and a flip." },
+    "popcorn": {
+      "v": "keep",
+      "owner": "Basically perfect.",
+      "sound": "Popping."
+    },
+    "jelly": {
+      "v": "keep",
+      "owner": "Pretty much fine.",
+      "sound": "Wobbly boing."
+    },
+    "pancakes": {
+      "v": "keep",
+      "owner": "Really neat.",
+      "sound": "Sizzle and a flip."
+    },
     "cupcake": {
       "v": "new",
       "owner": "Needs an effect.",
@@ -946,8 +1030,16 @@
       "effect": "Puffs up in an oven glow (rising), then flakes fly off.",
       "sound": "Oven ding."
     },
-    "pizza": { "v": "keep", "owner": "Perfect.", "sound": "Cheese stretch." },
-    "burger": { "v": "keep", "owner": "Perfect.", "sound": "Sizzle." },
+    "pizza": {
+      "v": "keep",
+      "owner": "Perfect.",
+      "sound": "Cheese stretch."
+    },
+    "burger": {
+      "v": "keep",
+      "owner": "Perfect.",
+      "sound": "Sizzle."
+    },
     "sushi": {
       "v": "new",
       "owner": "Chopsticks lifted by an invisible hand pick up the sushi.",
@@ -960,7 +1052,11 @@
       "effect": "Shell cracks in half and the filling spills out, then it reassembles.",
       "sound": "Crunch."
     },
-    "egg": { "v": "keep", "owner": "Perfect.", "sound": "Shell tap." },
+    "egg": {
+      "v": "keep",
+      "owner": "Perfect.",
+      "sound": "Shell tap."
+    },
     "coffee": {
       "v": "more",
       "owner": "Needs work. The cream on top could spin in a swirl on tap.",
@@ -1028,7 +1124,11 @@
       "effect": "Keep the effect.",
       "sound": "Rubber duck quack."
     },
-    "spinning-top": { "v": "keep", "owner": "Perfect.", "sound": "Whirring hum." },
+    "spinning-top": {
+      "v": "keep",
+      "owner": "Perfect.",
+      "sound": "Whirring hum."
+    },
     "dice": {
       "v": "keep",
       "owner": "Maybe my favourite; rolls feel random like real dice. Keep it.",
@@ -1041,8 +1141,16 @@
       "effect": "Tap lifts and drops an end ball hard so the clacks are obvious; later, drag a ball back and let go.",
       "sound": "Crisp steel clacks."
     },
-    "teddy-bear": { "v": "keep", "owner": "Cute; fine.", "sound": "Soft squeak." },
-    "yo-yo": { "v": "keep", "owner": "Fine.", "sound": "String zip." },
+    "teddy-bear": {
+      "v": "keep",
+      "owner": "Cute; fine.",
+      "sound": "Soft squeak."
+    },
+    "yo-yo": {
+      "v": "keep",
+      "owner": "Fine.",
+      "sound": "String zip."
+    },
     "puzzle-cube": {
       "v": "more",
       "interactive": true,
@@ -1050,18 +1158,42 @@
       "effect": "Tap scrambles with several random layer turns. Later: swipe a face to turn that layer, with a solved check.",
       "sound": "Plastic click per turn."
     },
-    "spring-toy": { "v": "keep", "owner": "Basically perfect.", "sound": "Springy slinky boing." },
+    "spring-toy": {
+      "v": "keep",
+      "owner": "Basically perfect.",
+      "sound": "Springy slinky boing."
+    },
     "kite": {
       "v": "more",
       "owner": "Underwhelming; develop the animation further.",
       "effect": "A big gust: the kite loops the loop and the tail whips.",
       "sound": "Wind gust and a fabric flap."
     },
-    "paper-plane": { "v": "keep", "owner": "Fine.", "sound": "Paper swish." },
-    "origami-crane": { "v": "keep", "owner": "Solid as it is.", "sound": "Paper flutter." },
-    "balloon-dog": { "v": "keep", "owner": "Almost perfect.", "sound": "Balloon squeak and pop." },
-    "soap-bubbles": { "v": "keep", "owner": "Perfect.", "sound": "Tiny pops." },
-    "robot": { "v": "keep", "owner": "Perfect.", "sound": "Wind-up ratchet and clockwork." },
+    "paper-plane": {
+      "v": "keep",
+      "owner": "Fine.",
+      "sound": "Paper swish."
+    },
+    "origami-crane": {
+      "v": "keep",
+      "owner": "Solid as it is.",
+      "sound": "Paper flutter."
+    },
+    "balloon-dog": {
+      "v": "keep",
+      "owner": "Almost perfect.",
+      "sound": "Balloon squeak and pop."
+    },
+    "soap-bubbles": {
+      "v": "keep",
+      "owner": "Perfect.",
+      "sound": "Tiny pops."
+    },
+    "robot": {
+      "v": "keep",
+      "owner": "Perfect.",
+      "sound": "Wind-up ratchet and clockwork."
+    },
     "lorenz": {
       "v": "more",
       "owner": "Spin a little more or be more dynamic; looks good when still.",
@@ -1110,15 +1242,27 @@
       "effect": "Morphs through powers (bulb shapes twist and bloom).",
       "sound": "Deep morphing tone."
     },
-    "sierpinski": { "v": "keep", "owner": "Perfect as is.", "sound": "Stacked triangle chimes." },
-    "platonic": { "v": "keep", "owner": "Perfect.", "sound": "Five-note chime." },
+    "sierpinski": {
+      "v": "keep",
+      "owner": "Perfect as is.",
+      "sound": "Stacked triangle chimes."
+    },
+    "platonic": {
+      "v": "keep",
+      "owner": "Perfect.",
+      "sound": "Five-note chime."
+    },
     "seashell-spiral": {
       "v": "new",
       "owner": "Something to do with hearing the ocean in a seashell.",
       "effect": "Glows softly and waves ripple out of the opening.",
       "sound": "Ocean hush."
     },
-    "sword-in-stone": { "v": "keep", "owner": "Perfect.", "sound": "Metal ring." },
+    "sword-in-stone": {
+      "v": "keep",
+      "owner": "Perfect.",
+      "sound": "Metal ring."
+    },
     "shield": {
       "v": "new",
       "owner": "Only bounces; find a better effect.",
@@ -1130,16 +1274,32 @@
       "owner": "Unbelievably impressive.",
       "sound": "Twang and thunk."
     },
-    "trebuchet": { "v": "keep", "owner": "Fine.", "sound": "Creak and a whoosh." },
-    "crossbow": { "v": "keep", "owner": "Solid.", "sound": "Click-thwack." },
-    "knights-helmet": { "v": "keep", "owner": "Really neat.", "sound": "Visor clank." },
+    "trebuchet": {
+      "v": "keep",
+      "owner": "Fine.",
+      "sound": "Creak and a whoosh."
+    },
+    "crossbow": {
+      "v": "keep",
+      "owner": "Solid.",
+      "sound": "Click-thwack."
+    },
+    "knights-helmet": {
+      "v": "keep",
+      "owner": "Really neat.",
+      "sound": "Visor clank."
+    },
     "crown": {
       "v": "new",
       "owner": "Needs an effect.",
       "effect": "Jewels light up in turn and it rises with a glow.",
       "sound": "Royal fanfare."
     },
-    "dragon-egg": { "v": "keep", "owner": "Cute and perfect.", "sound": "Crack and a tiny roar." },
+    "dragon-egg": {
+      "v": "keep",
+      "owner": "Cute and perfect.",
+      "sound": "Crack and a tiny roar."
+    },
     "wizards-orb": {
       "v": "more",
       "owner": "Looks really good; develop it further to be more impressive.",
@@ -1158,7 +1318,11 @@
       "effect": "The school swirls into a bait ball and scatters.",
       "sound": "Swishing water."
     },
-    "butterfly": { "v": "keep", "owner": "Perfect.", "sound": "Delicate flutter." },
+    "butterfly": {
+      "v": "keep",
+      "owner": "Perfect.",
+      "sound": "Delicate flutter."
+    },
     "pufferfish": {
       "v": "more",
       "owner": "Should puff: get big, then small.",
@@ -1171,7 +1335,11 @@
       "effect": "Tentacles pull into the shell, then peek back out.",
       "sound": "Hollow shell whoosh."
     },
-    "ladybug": { "v": "keep", "owner": "Perfect.", "sound": "Tiny wing buzz." },
+    "ladybug": {
+      "v": "keep",
+      "owner": "Perfect.",
+      "sound": "Tiny wing buzz."
+    },
     "snail": {
       "v": "more",
       "owner": "Perfect, but it disappears too much when hiding; make it more elegant.",
@@ -1184,7 +1352,11 @@
       "effect": "A big ink cloud billows out while it jets away and back.",
       "sound": "Squirt and whoosh."
     },
-    "starfish": { "v": "keep", "owner": "Fine.", "sound": "Wet suction pop." },
+    "starfish": {
+      "v": "keep",
+      "owner": "Fine.",
+      "sound": "Wet suction pop."
+    },
     "sea-urchin": {
       "v": "new",
       "owner": "Needs an effect.",
@@ -1197,8 +1369,16 @@
       "effect": "Tongue shoots out to catch a fly.",
       "sound": "Ribbit."
     },
-    "penguin": { "v": "keep", "owner": "Perfect and very cute.", "sound": "Squawk." },
-    "owl": { "v": "keep", "owner": "Basically perfect.", "sound": "Hoo-hoo." },
+    "penguin": {
+      "v": "keep",
+      "owner": "Perfect and very cute.",
+      "sound": "Squawk."
+    },
+    "owl": {
+      "v": "keep",
+      "owner": "Basically perfect.",
+      "sound": "Hoo-hoo."
+    },
     "jack-o-lantern": {
       "v": "keep",
       "owner": "Basically perfect.",
@@ -1223,7 +1403,11 @@
       "effect": "Lights come on and chase in patterns and stay on; the star glows.",
       "sound": "Sleigh-bell jingle."
     },
-    "patterned-egg": { "v": "keep", "owner": "Pretty cool; keep.", "sound": "Painted-shell tap." },
+    "patterned-egg": {
+      "v": "keep",
+      "owner": "Pretty cool; keep.",
+      "sound": "Painted-shell tap."
+    },
     "paper-lantern": {
       "v": "keep",
       "owner": "Perfect; the physics are really good.",
@@ -1258,16 +1442,32 @@
       "owner": "Incredible; basically perfect.",
       "sound": "The scale it already plays, as mallet tones."
     },
-    "rocket": { "v": "keep", "owner": "Basically perfect.", "sound": "Launch roar." },
-    "helicopter": { "v": "keep", "owner": "Basically perfect.", "sound": "Rotor chop." },
+    "rocket": {
+      "v": "keep",
+      "owner": "Basically perfect.",
+      "sound": "Launch roar."
+    },
+    "helicopter": {
+      "v": "keep",
+      "owner": "Basically perfect.",
+      "sound": "Rotor chop."
+    },
     "hot-air-balloon": {
       "v": "more",
       "owner": "Could be more dramatic; maybe inflate more.",
       "effect": "Burner roars, the envelope swells and it rises higher.",
       "sound": "Burner roar."
     },
-    "steam-train": { "v": "keep", "owner": "Basically perfect.", "sound": "Whistle and chuff." },
-    "ocean-liner": { "v": "keep", "owner": "Almost perfect.", "sound": "Deep ship horn." },
+    "steam-train": {
+      "v": "keep",
+      "owner": "Basically perfect.",
+      "sound": "Whistle and chuff."
+    },
+    "ocean-liner": {
+      "v": "keep",
+      "owner": "Almost perfect.",
+      "sound": "Deep ship horn."
+    },
     "sports-car": {
       "v": "keep",
       "fix": "A little small in its frame (known issue).",
@@ -1344,7 +1544,11 @@
       "effect": "The tower twists further and its lights run upward.",
       "sound": "Rising elevator ding."
     },
-    "lighthouse": { "v": "keep", "owner": "Basically perfect.", "sound": "Foghorn." },
+    "lighthouse": {
+      "v": "keep",
+      "owner": "Basically perfect.",
+      "sound": "Foghorn."
+    },
     "statue-of-liberty": {
       "v": "new",
       "fix": "The crown looks squashed down; raise its rays and give them clearer spikes (screenshot in docs/reviews/2026-09-23/).",
