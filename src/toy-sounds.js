@@ -157,8 +157,9 @@ export const TOY_SOUNDS = {
     { voice: "slap", f: 1100, vol: 0.5 },
   ],
   "american-football": [
-    { voice: "whoosh", f: 400, to: 3, decay: 0.5 },
-    { voice: "slap", at: 0.25, f: 700, vol: 0.6 },
+    { voice: "slap", f: 700, vol: 0.6 },
+    { voice: "flutter", at: 0.1, f: 500, rate: 12, decay: 3, vol: 0.5 },
+    { voice: "thud", at: 1.65, f: 100, bright: 0.3, vol: 0.7 },
   ],
   "tennis-ball": { voice: "pock", f: 820 },
   baseball: { voice: "crack", f: 2400, bright: 0.8 },
@@ -168,7 +169,11 @@ export const TOY_SOUNDS = {
     { voice: "clack", f: 3400, decay: 1.4 },
     { voice: "whoosh", f: 1200, to: 3, decay: 0.3, vol: 0.5 },
   ],
-  "rugby-ball": { voice: "thud", f: 85, bright: 0.4, decay: 1.1 },
+  "rugby-ball": [
+    { voice: "thud", f: 85, bright: 0.4, decay: 1.1 },
+    { voice: "thud", at: 1.45, f: 95, bright: 0.3, vol: 0.7 },
+    { voice: "thud", at: 2.05, f: 110, bright: 0.3, vol: 0.4 },
+  ],
   volleyball: { voice: "slap", f: 1500, decay: 1.2 },
   "water-polo-ball": { voice: "splash", f: 1300, bright: 0.6 },
   "ping-pong-ball": { voice: "pock", notes: "E6 - E6 E6 E6", step: 0.13, decay: 0.6 },
@@ -192,8 +197,14 @@ export const TOY_SOUNDS = {
     { voice: "slap", f: 1700, vol: 0.9 },
     { voice: "scrape", at: 0.08, f: 3000, rate: 40, decay: 0.8, vol: 0.5 },
   ],
-  shuttlecock: { voice: "pock", f: 1500, bright: 0.9, decay: 0.7, vol: 0.7 },
-  "flying-disc": { voice: "whoosh", f: 600, to: 2, decay: 0.9 },
+  shuttlecock: [
+    { voice: "pock", f: 1500, bright: 0.9, decay: 0.7, vol: 0.7 },
+    { voice: "flutter", at: 0.9, f: 2200, rate: 30, decay: 3.4, vol: 0.25 },
+  ],
+  "flying-disc": [
+    { voice: "whoosh", f: 600, to: 2, decay: 0.9 },
+    { voice: "wind", at: 0.4, f: 900, rate: 7, decay: 1.2, vol: 0.5 },
+  ],
 
   // ---- Space ------------------------------------------------------------------------
   sun: { voice: "roar", f: 90, bright: 0.25, decay: 1.4 },

@@ -500,10 +500,14 @@ export const RECIPES = {
       const pivot = [0, T / 2, 0];
       const coverPart = k.part("cover", { pivot, axis: [0, 0, 1] });
       const spinePart = k.part("spine", { pivot, axis: [0, 0, 1] });
+      // Book cloth: a fine, even weave (lit, no random speckle).
       const cloth = (c) => {
-        const weave = 0.97 + 0.04 * c.noise(c.p[0] * 70, c.p[1] * 70, c.p[2] * 70);
+        const weave = 0.985 + 0.02 * Math.sin(c.p[0] * 260) * Math.sin(c.p[2] * 260);
         return lit(shade(cover, weave), c.n, { amb: 0.66, dif: 0.42, spec: 0.12 });
       };
+      // The page block's edge: soft cream with faint, even page lines (at a
+      // spacing splats can show, so they read as paper, not noise).
+      const pageEdge = (y) => shade(paper, 0.86 + 0.05 * Math.sin(y * 260));
       // Words on a page. x is measured from the spine, z across the page
       // (the top of the page is at -z). A page that faces down while the
       // book is closed reads the right way once its leaf has turned over, so
@@ -560,6 +564,10 @@ export const RECIPES = {
       k.add(roundBox(W, ct, H, 0.012), {
         pos: [W / 2, ct / 2, 0],
         flat: 0.15,
+        weight: 1.6,
+        even: true,
+        jitter: 0.01,
+        size: 0.8,
         color: (c) => (c.s.face === 2 ? lit(endpaper, c.n, { spec: 0 }) : cloth(c)),
       });
       k.add(
@@ -573,6 +581,10 @@ export const RECIPES = {
         {
           part: spinePart,
           flat: 0.15,
+          weight: 2,
+          even: true,
+          jitter: 0.01,
+          size: 0.8,
           color: (c) => {
             const z = Math.abs(c.p[2]);
             if (Math.abs(z - H * 0.38) < 0.015 || Math.abs(z - H * 0.3) < 0.01) return keep(gold);
@@ -586,6 +598,10 @@ export const RECIPES = {
         pos: [W / 2, T - ct / 2, 0],
         part: coverPart,
         flat: 0.15,
+        weight: 1.6,
+        even: true,
+        jitter: 0.01,
+        size: 0.8,
         color: cloth,
       });
       // The cover's inside, its own part so it can hide under the turned pages.
@@ -601,9 +617,10 @@ export const RECIPES = {
         pos: [W / 2, T, 0],
         part: coverTop,
         flat: 0.15,
-        weight: 2.5,
+        weight: 5,
         even: true,
-        jitter: 0.015,
+        jitter: 0.01,
+        size: 0.8,
         color: (c) => {
           // Gold border, title bands and an emblem on the front.
           const x = c.p[0] - W / 2;
@@ -628,15 +645,18 @@ export const RECIPES = {
       const PW = W - 0.035;
       const PH = H - 0.05;
       const block = BOOK.pb - leaves * lt;
-      const sides = (face) => (face === 2 || face === 3 ? null : shade(paper, 0.8));
+      const sides = (face) => (face === 2 || face === 3 ? null : keep(shade(paper, 0.84)));
       k.add(k.box(PW, block, PH), {
         pos: [PW / 2 + 0.005, ct + block / 2, 0],
         flat: 0.15,
+        weight: 1.8,
+        even: true,
+        jitter: 0,
+        size: 0.7,
         color: (c) => {
           if (c.s.face === 2 || c.s.face === 3) return null;
           if (c.s.face === 1) return shade(paper, 0.8);
-          const lines = 0.9 + 0.1 * Math.sin(c.p[1] * 900);
-          return shade(paper, 0.82 * lines);
+          return keep(pageEdge(c.p[1]));
         },
       });
       k.add(quad(PW, PH), {
@@ -656,7 +676,10 @@ export const RECIPES = {
           pos,
           part,
           flat: 0.15,
-          weight: 0.08,
+          weight: 0.25,
+          even: true,
+          jitter: 0,
+          size: 0.6,
           color: (c) => sides(c.s.face),
         });
         for (const up of [1, -1]) {
@@ -682,11 +705,13 @@ export const RECIPES = {
         pos: [-PW / 2 - 0.005, ct + pileH / 2, 0],
         part: k.part("pile"),
         flat: 0.15,
-        weight: 0.6,
+        weight: 1,
+        even: true,
+        jitter: 0,
+        size: 0.7,
         color: (c) => {
           if (c.s.face === 2 || c.s.face === 3) return null;
-          const lines = 0.9 + 0.1 * Math.sin(c.p[1] * 900);
-          return shade(paper, 0.82 * lines);
+          return keep(pageEdge(c.p[1]));
         },
       });
       k.reach([-W, 0, H / 2]);

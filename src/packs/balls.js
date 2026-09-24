@@ -3,7 +3,16 @@
 // layer, so a ball in the colours of a flag keeps its seams. Tap a ball to
 // make it hop; Move > Bounce keeps it bouncing.
 
-import { mix, shade, smoothstep, fibonacciSphere, quatFromTo, clamp } from "../kit.js";
+import {
+  mix,
+  shade,
+  smoothstep,
+  fibonacciSphere,
+  quatFromTo,
+  quatAxisAngle,
+  quatMul,
+  clamp,
+} from "../kit.js";
 
 const TAU = Math.PI * 2;
 const PHI = (1 + Math.sqrt(5)) / 2;
@@ -337,6 +346,19 @@ function swirl(c, colors, f = 1.6) {
   return colors[2] ? mix(a, colors[2], smoothstep(0.7, 0.95, w) * 0.8) : a;
 }
 
+// ---- Throws ------------------------------------------------------------------------
+// A tap throws the ball the way the real one flies. e is seconds since the
+// tap (-1 at rest); the ball goes up and comes back down into place.
+const band01 = (x, a, b) => clamp((x - a) / (b - a), 0, 1);
+const easeIO = (x) => x * x * (3 - 2 * x);
+const sinceTap = (c, key, secs) => (c[key] > 0 ? (1 - c[key]) * secs : -1);
+const throwPulse = (key, label, secs) => ({
+  controls: [{ key, label, type: "pulse", ease: secs }],
+  action: { key, label },
+});
+// Height of a throw (in toy radii) that peaks at `peak` half way through.
+const arc = (f, peak) => peak * 4 * f * (1 - f);
+
 export const RECIPES = {
   basketball: {
     options: [{ key: "color", label: "Colour", type: "color", default: "#d9632b" }],
@@ -370,6 +392,25 @@ export const RECIPES = {
 
   "american-football": {
     options: [{ key: "color", label: "Leather", type: "color", default: "#7a3b1a" }],
+    // A spiral pass: it flies up nose first, spinning fast about its long
+    // axis, the nose tipping over at the top, and lands with a wobble.
+    ...throwPulse("pass", "Throw a spiral", 2.4),
+    drive(t, c, out) {
+      const e = sinceTap(c, "pass", 2.4);
+      if (e < 0) return;
+      const f = band01(e, 0.05, 1.65);
+      const flying = f > 0 && f < 1;
+      const spin = 2 * Math.PI * 5.5 * easeIO(f);
+      const pitch = flying ? 0.6 * Math.cos(Math.PI * f) : 0;
+      const land = Math.exp(-(e - 1.65) * 5) * Math.sin((e - 1.65) * 18) * band01(e, 1.65, 1.7);
+      out.body = {
+        offset: [0, arc(f, 0.65), 0],
+        quat: quatMul(
+          quatAxisAngle([0, 0, 1], pitch + 0.12 * land),
+          quatAxisAngle([1, 0, 0], spin),
+        ),
+      };
+    },
     build(k, o) {
       const L = 1.45;
       const prof = [];
@@ -527,6 +568,22 @@ export const RECIPES = {
 
   "rugby-ball": {
     options: [{ key: "color", label: "Bands", type: "color", default: "#1d4e89" }],
+    // A punt: it tumbles end over end up and down, then lands on a point and
+    // takes an awkward, lopsided bounce before settling.
+    ...throwPulse("kick", "Punt", 2.6),
+    drive(t, c, out) {
+      const e = sinceTap(c, "kick", 2.6);
+      if (e < 0) return;
+      const f = band01(e, 0.05, 1.45);
+      const g = band01(e, 1.45, 2.05);
+      const tumble = 2 * Math.PI * 2.25 * easeIO(f) + 0.75 * Math.PI * easeIO(g);
+      const hop = arc(g, 0.18);
+      const yaw = 0.6 * Math.sin(Math.PI * g);
+      out.body = {
+        offset: [0.06 * Math.sin(Math.PI * g), arc(f, 0.6) + hop, 0],
+        quat: quatMul(quatAxisAngle([0, 1, 0], yaw), quatAxisAngle([0, 0, 1], tumble)),
+      };
+    },
     build(k, o) {
       const L = 1.3;
       const prof = [];
@@ -667,6 +724,21 @@ export const RECIPES = {
       const col = POOL[n > 8 ? n - 8 : n];
       const stripe = n > 8;
       const text = String(n);
+      // Polished phenolic resin: fully opaque, lit, with a sharp window
+      // highlight and a soft reflection of the room along the top, so even the
+      // black 8 reads as a solid shiny ball on a dark page.
+      const gloss = (base, c) => {
+        const n0 = c.n;
+        let out = lit(base, n0, { sheen: 0.95, tight: 90, soft: 0.3 });
+        // The room: a pale band above the horizon, darker below.
+        const up = n0[1];
+        out = mix(out, "#9aa6b4", 0.16 * smoothstep(0.1, 0.8, up) * (1 - 0.6 * Math.abs(n0[2])));
+        // A broad soft highlight beside the sharp one.
+        out = mix(out, "#ffffff", 0.18 * Math.max(0, dot(n0, HALF)) ** 8);
+        // A thin rim of reflected light at the silhouette (seen from home).
+        const facing = Math.max(0, dot(n0, VIEW));
+        return mix(out, "#8d97a3", 0.22 * (1 - facing) ** 3);
+      };
       body(
         k,
         (c) => {
@@ -675,13 +747,13 @@ export const RECIPES = {
             // The number circle on the front and back.
             const px = z > 0 ? x : -x;
             const d = numberDist(text, px, y, 0.2);
-            return keep(d < 0.024 ? "#141414" : "#f7f5ee");
+            return keep(gloss(d < 0.024 ? "#141414" : "#f7f5ee", c), d < 0.024 ? 0.7 : 1);
           }
-          if (n > 0 && Math.abs(z) > 0.9) return keep(n === 8 ? "#f7f5ee" : col);
-          if (stripe) return Math.abs(y) < 0.46 ? col : "#f7f5ee";
-          return col;
+          if (n > 0 && Math.abs(z) > 0.9) return keep(gloss(n === 8 ? "#f7f5ee" : col, c));
+          if (stripe) return gloss(Math.abs(y) < 0.46 ? col : "#f7f5ee", c);
+          return gloss(col, c);
         },
-        { core: "#eeeeee", interior: 0.05 },
+        { core: n === 8 ? "#111111" : col, interior: 0.2, opacity: 1, flat: 0.25, weight: 1.4 },
       );
     },
   },
@@ -820,6 +892,22 @@ export const RECIPES = {
   },
 
   shuttlecock: {
+    // Hit up: it flips over cork first and flies up spinning, turns over at
+    // the top and floats back down cork first, spinning slower as it falls.
+    ...throwPulse("hit", "Hit it", 3),
+    drive(t, c, out) {
+      const e = sinceTap(c, "hit", 3);
+      if (e < 0) return;
+      const up = band01(e, 0.05, 0.6);
+      const down = band01(e, 0.95, 2.7);
+      const h = e < 0.6 ? 0.7 * (1 - (1 - up) ** 2) : e < 0.95 ? 0.7 : 0.7 * (1 - easeIO(down));
+      const flip = Math.PI * (easeIO(band01(e, 0.05, 0.3)) - easeIO(band01(e, 0.65, 1.05)));
+      const spin = 2 * Math.PI * (3 * easeIO(band01(e, 0.05, 1.0)) + 2.2 * down);
+      out.body = {
+        offset: [0.05 * Math.sin(e * 3), h, 0],
+        quat: quatMul(quatAxisAngle([1, 0, 0], flip), quatAxisAngle([0, 1, 0], spin)),
+      };
+    },
     build(k) {
       // The cork: a rounded base under a short band.
       k.add(k.sphere(0.3), {
@@ -855,6 +943,24 @@ export const RECIPES = {
 
   "flying-disc": {
     options: [{ key: "color", label: "Colour", type: "color", default: "#ff5a36" }],
+    // A throw: it spins fast and flat, banks into a curve, glides round a
+    // loop like a returning throw and settles back, still spinning down.
+    ...throwPulse("throw", "Throw", 3),
+    drive(t, c, out) {
+      const e = sinceTap(c, "throw", 3);
+      if (e < 0) return;
+      const f = band01(e, 0.05, 2.4);
+      const loop = 2 * Math.PI * easeIO(f);
+      const spin = 2 * Math.PI * 7 * (1 - (1 - band01(e, 0, 2.9)) ** 2);
+      const bank = 0.35 * Math.sin(Math.PI * f);
+      out.body = {
+        offset: [0.42 * Math.sin(loop), arc(f, 0.35), 0.28 * (1 - Math.cos(loop)) * -0.5],
+        quat: quatMul(
+          quatAxisAngle([Math.cos(loop), 0, -Math.sin(loop)], -bank),
+          quatAxisAngle([0, 1, 0], -spin),
+        ),
+      };
+    },
     build(k, o) {
       const prof = [
         [0.0, 0.02],
