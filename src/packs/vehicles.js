@@ -2227,13 +2227,14 @@ function tractorBuild(k, o) {
     color: (c) => lit("#bfc2c7", c),
   });
   k.add(k.cylinder(0.06, 0.06), { pos: [0.5, 1.58, -0.12], color: (c) => lit("#bfc2c7", c) });
-  plume(k, [0.88, 2.0, 0.12], [-0.7, 0.55, 0], {
-    share: 0.02,
-    spread: 0.05,
-    grow: 2.6,
+  // A light, thinning wisp of exhaust (it was a heavy cloud).
+  plume(k, [0.88, 2.0, 0.12], [-0.55, 0.45, 0], {
+    share: 0.007,
+    spread: 0.04,
+    grow: 2.2,
     color: "#e6e3de",
-    dark: "#8f8a85",
-    opacity: 0.28,
+    dark: "#9a958f",
+    opacity: 0.08,
     height: 0.45,
   });
   // The cab: posts, roof, windows, a seat and a steering wheel.
@@ -2256,7 +2257,14 @@ function tractorBuild(k, o) {
     k.add(quad(k, a, b, cc, d), {
       opacity: 0.2,
       pattern: false,
-      color: (c) => mix("#bcd6ea", "#ffffff", smoothstep(0.2, 0.9, c.rand())),
+      even: true,
+      jitter: 0.01,
+      // Clear glass with a soft diagonal reflection (it was random static).
+      color: (c) => {
+        const t = (c.p[0] * 0.6 + c.p[1] * 1.4 + c.p[2] * 0.5) * 1.3;
+        const f = t - Math.floor(t);
+        return mix("#bcd6ea", "#ffffff", 0.8 * smoothstep(0, 0.06, f) * smoothstep(0.32, 0.1, f));
+      },
     });
   pane(
     [cx1 - 0.05, 1.05, -0.4],

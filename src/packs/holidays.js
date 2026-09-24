@@ -1062,20 +1062,37 @@ export const RECIPES = {
       const bowl = (inner) =>
         k.param((u, v) => bowlAt(u * TAU, v, inner), { grid: 72, flip: inner });
       const zig = (x) => Math.abs(fract(x) - 0.5) * 4 - 1;
+      // Burnished terracotta, painted: a row of white dots under the rim, a
+      // red line, a band of lotus petals (white outline, saffron fill, a
+      // green heart) and a green line at the foot.
       const clay = (c) => {
         const y = c.p[1] - base;
-        const n = c.noise(c.p[0] * 20, c.p[1] * 20, c.p[2] * 20);
-        let col = mix("#d0702e", "#a24c1c", 0.5 + 0.4 * n);
+        const n = c.fbm(c.p[0] * 4, c.p[1] * 4, c.p[2] * 4, 3);
+        let col = mix("#c9662a", "#a9501f", 0.5 + 0.8 * n);
         const a = Math.atan2(c.p[0], c.p[2]) / TAU;
-        if (y > 0.25 && Math.abs(fract(a * 22) - 0.5) < 0.18 && Math.abs(y - 0.285) < 0.018)
-          col = "#fbf4e0";
-        if (Math.abs(y - 0.215) < 0.015) col = "#e2283a";
-        if (Math.abs(y - (0.15 + 0.03 * zig(a * 14))) < 0.014) col = "#ffd21a";
-        if (Math.abs(y - 0.09) < 0.012) col = "#2f9a5a";
-        return lit(c, col, 0.35, 0.25);
+        const r = Math.hypot(c.p[0], c.p[2]);
+        // Dots: round, about the same size all the way round.
+        const du = (fract(a * 24) - 0.5) * ((TAU * r) / 24);
+        if (Math.hypot(du, y - 0.292) < 0.014) col = "#fbf4e0";
+        if (Math.abs(y - 0.262) < 0.008) col = "#d8202f";
+        // Petals.
+        const h = (y - 0.12) / 0.13;
+        if (h > 0 && h < 1) {
+          const u = Math.abs(fract(a * 14) - 0.5);
+          const w = 0.44 * Math.pow(Math.sin(Math.PI * Math.pow(h, 0.8)), 0.7);
+          if (u < w) col = u > w - 0.09 ? "#fbf4e0" : u < 0.1 && h < 0.55 ? "#2f9a5a" : "#f7b21c";
+        }
+        if (Math.abs(y - 0.105) < 0.008) col = "#2f9a5a";
+        return lit(c, col, 0.35, 0.18);
       };
-      k.add(bowl(false), { flat: 0.2, color: clay });
-      k.add(bowl(true), { flat: 0.2, color: (c) => lit(c, "#8a3a14", 0.3, 0.2) });
+      k.add(bowl(false), { flat: 0.2, weight: 2, even: true, jitter: 0.012, color: clay });
+      k.add(bowl(true), {
+        flat: 0.2,
+        even: true,
+        jitter: 0.012,
+        color: (c) =>
+          lit(c, shade("#8a3a14", 0.95 + 0.1 * c.fbm(c.p[0] * 5, 0, c.p[2] * 5)), 0.3, 0.2),
+      });
       // The rounded lip joining outside and inside.
       k.add(
         k.param(
@@ -1086,7 +1103,13 @@ export const RECIPES = {
           },
           { grid: 64 },
         ),
-        { flat: 0.2, weight: 1.5, color: (c) => lit(c, "#c8642a", 0.3, 0.2) },
+        {
+          flat: 0.2,
+          weight: 2,
+          even: true,
+          jitter: 0.012,
+          color: (c) => lit(c, "#c8642a", 0.3, 0.25),
+        },
       );
       // Oil, glinting.
       k.add(
@@ -1098,7 +1121,31 @@ export const RECIPES = {
           },
           { grid: 40, normal: () => [0, 1, 0] },
         ),
-        { flat: 0.3, pattern: false, color: (c) => lit(c, "#d49a22", 0.2, 0.9) },
+        {
+          flat: 0.3,
+          weight: 1.5,
+          even: true,
+          jitter: 0.008,
+          pattern: false,
+          color: (c) => {
+            // Dark amber oil: rings of a slow ripple, a glossy sheen, and the
+            // flame's warm reflection near the wick.
+            const r = Math.hypot(c.p[0], c.p[2]);
+            const ripple = 0.985 + 0.025 * Math.sin(r * 45);
+            const toWick = Math.hypot(
+              c.p[0] - Math.sin(spoutA) * 0.36,
+              c.p[2] - Math.cos(spoutA) * 0.36,
+            );
+            let col = shade("#9c5a12", ripple);
+            col = mix(col, "#ffe6a0", 0.75 * Math.exp(-((toWick / 0.12) ** 2)));
+            col = mix(
+              col,
+              "#fff4d6",
+              0.35 * smoothstep(0.1, 0.5, c.p[0] * -0.5 + c.p[2] * 0.4 + 0.2),
+            );
+            return lit(c, col, 0.2, 0.9);
+          },
+        },
       );
       // The wick in the spout, and its flame.
       const tip = [Math.sin(spoutA) * 0.7, base + 0.43, Math.cos(spoutA) * 0.7];

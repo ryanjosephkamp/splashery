@@ -2613,7 +2613,7 @@ export const TOYS = [
     kind: "kit",
     pack: "vehicles",
     tags: "car racing coupe fast wheels spoiler",
-    camera: { yaw: 0.6, pitch: 0.3, roll: 0, distance: 3.4 },
+    camera: { yaw: 0.6, pitch: 0.3, roll: 0, distance: 2.85 },
   },
   {
     id: "bus",
