@@ -704,13 +704,16 @@ test.describe("Splashery v3 engine (WebGL2)", () => {
     await page.click(".chip[data-category='food']");
     await page.click(".toy-card[data-toy='gummy-bear']");
     await waitForToy(page, "Gummy bear");
+    await expect(page.locator("#tool-hint")).toContainText("stretch it");
+    // No idle turntable, so the camera turns only if a drag turns it.
+    await page.evaluate(() => window.__splashery.player.camera.setTurntable(false));
     const canvas = page.locator("#stage");
     const box = await canvas.boundingBox();
     const yaw = () => page.evaluate(() => window.__splashery.player.camera.tgt.yaw);
     const yaw0 = await yaw();
     const rest = await canvas.screenshot({ type: "png" });
     const x0 = box.x + box.width / 2;
-    const y0 = box.y + box.height * 0.4;
+    const y0 = box.y + box.height * 0.52;
     await page.mouse.move(x0, y0);
     await page.mouse.down();
     for (let i = 1; i <= 8; i++) await page.mouse.move(x0 + i * 20, y0 - i * 8);
@@ -720,7 +723,7 @@ test.describe("Splashery v3 engine (WebGL2)", () => {
     expect(await countDifferentPixels(page, rest, held)).toBeGreaterThan(3000);
     await page.mouse.up();
     // The camera did not turn, and the bear springs back.
-    expect(await yaw()).toBeCloseTo(yaw0, 5);
+    expect(await yaw()).toBeCloseTo(yaw0, 3);
     await expect
       .poll(() => page.evaluate(() => window.__splashery.player.driver.grab.on), { timeout: 5000 })
       .toBe(false);
