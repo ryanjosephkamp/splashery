@@ -615,9 +615,10 @@ function kindOf(k) {
 }
 
 export class Kit {
-  constructor(seed, { count = 120000, options = {} } = {}) {
+  constructor(seed, { count = 120000, options = {}, fit = true } = {}) {
     this.seed = seed >>> 0;
     this.count = count;
+    this.fitOn = fit; // false keeps the recipe's coordinates (scan rig add-ons)
     this.options = options;
     this.rand = mulberry32(mixSeed(seed, "kit-recipe"));
     this.noise = createNoise3(mixSeed(seed, "kit-noise"));
@@ -775,7 +776,8 @@ export class Kit {
         yield (done / total) * 0.9;
       }
     }
-    this.fit();
+    if (this.fitOn) this.fit();
+    else this.transform = { center: [0, 0, 0], scale: 1 };
     yield 1;
   }
 

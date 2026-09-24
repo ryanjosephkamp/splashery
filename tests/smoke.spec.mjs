@@ -696,6 +696,52 @@ test.describe("Splashery v3 engine (WebGL2)", () => {
     expect(problems).toEqual([]);
   });
 
+  test("rigs pick splats by colour, run effects and show add-ons; shelf shapes have rigs", async ({
+    page,
+  }) => {
+    const problems = watchConsole(page);
+    await loadApp(page);
+    await page.evaluate(() => window.__splashery.player.camera.setTurntable(false));
+    const canvas = page.locator("#stage");
+    // Strawberry: the seeds (a colour key) pop out and the berry blushes, then settles.
+    await page.click(".toy-card[data-toy='strawberry']");
+    await waitForToy(page, "Strawberry");
+    await expect(page.locator("#toy-action")).toHaveText("Pop seeds");
+    const rest = await canvas.screenshot({ type: "png" });
+    await page.click("#toy-action");
+    await page.waitForTimeout(600);
+    const popped = await canvas.screenshot({ type: "png" });
+    const moved = await countDifferentPixels(page, rest, popped);
+    expect(moved).toBeGreaterThan(3000);
+    await page.waitForTimeout(3000);
+    const back = await canvas.screenshot({ type: "png" });
+    expect(await countDifferentPixels(page, rest, back)).toBeLessThan(moved / 4);
+    // Lantern: a toggle lights a flame add-on; a second tap puts it out.
+    await page.click(".toy-card[data-toy='lantern']");
+    await waitForToy(page, "Lantern");
+    expect(await page.evaluate(() => !!window.__splashery.player.stage.toy.addon)).toBe(true);
+    const dark = await canvas.screenshot({ type: "png" });
+    await page.click("#toy-action");
+    await page.waitForTimeout(1200);
+    const lit = await canvas.screenshot({ type: "png" });
+    expect(await countDifferentPixels(page, dark, lit)).toBeGreaterThan(800);
+    await page.click("#toy-action");
+    await page.waitForTimeout(1500);
+    const out = await canvas.screenshot({ type: "png" });
+    expect(await countDifferentPixels(page, dark, out)).toBeLessThan(400);
+    // The jelly blob (a procedural shelf shape) splits in three.
+    await page.click(".chip[data-category='shapes']");
+    await page.click(".toy-card[data-toy='blob']");
+    await waitForToy(page, "Jelly blob");
+    await expect(page.locator("#toy-action")).toHaveText("Split");
+    const whole = await canvas.screenshot({ type: "png" });
+    await page.click("#toy-action");
+    await page.waitForTimeout(900);
+    const split = await canvas.screenshot({ type: "png" });
+    expect(await countDifferentPixels(page, whole, split)).toBeGreaterThan(5000);
+    expect(problems).toEqual([]);
+  });
+
   test("a stretchy toy stretches when dragged and springs back; a drag off it orbits", async ({
     page,
   }) => {

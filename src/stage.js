@@ -311,6 +311,39 @@ export class Stage {
     return this.toy;
   }
 
+  // A scan rig's add-on: a small kit-built splat cloud (a flame, flowers, a
+  // speech bubble) drawn with the toy and freed with it. `resource` is a
+  // container in the kit format (it carries the splatAnim stream).
+  setAddon(resource) {
+    const t = this.toy;
+    if (!t) return null;
+    if (!resource.format.getStream("paintColor")) {
+      resource.format.addExtraStreams([
+        { name: "paintColor", format: pc.PIXELFORMAT_RGBA8, storage: pc.GSPLAT_STREAM_INSTANCE },
+      ]);
+    }
+    const entity = new pc.Entity("addon");
+    entity.addComponent("gsplat", { resource });
+    const paint = entity.gsplat.getInstanceTexture("paintColor");
+    if (paint) {
+      paint.lock().fill(0);
+      paint.unlock();
+    }
+    entity.gsplat.setWorkBufferModifier(MODIFIER_KIT);
+    entity.gsplat.workBufferUpdate = pc.WORKBUFFER_UPDATE_ALWAYS;
+    entity.gsplat.setParameter("uSpPattern", this.blankTexture());
+    this.app.root.addChild(entity);
+    t.addon = { entity, resource };
+    this.requestRender();
+    return t.addon;
+  }
+
+  setAddonUniforms(u) {
+    const g = this.toy?.addon?.entity.gsplat;
+    if (!g) return;
+    for (const k in u) g.setParameter(k, u[k]);
+  }
+
   // The old toy is switched off now and freed a few frames later: the
   // engine's work-buffer manager still references it until it reconciles.
   clearToy() {
@@ -318,6 +351,7 @@ export class Stage {
     if (!t) return;
     this.toy = null;
     t.entity.enabled = false;
+    if (t.addon) t.addon.entity.enabled = false;
     t.frames = 3;
     this.graveyard.push(t);
     this.requestRender();
@@ -332,6 +366,10 @@ export class Stage {
       }
       t.rigProc?.destroy();
       t.entity.destroy();
+      if (t.addon) {
+        t.addon.entity.destroy();
+        t.addon.resource.destroy?.();
+      }
       if (t.asset) {
         t.asset.unload();
         this.app.assets.remove(t.asset);

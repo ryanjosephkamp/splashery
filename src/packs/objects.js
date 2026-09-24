@@ -11,6 +11,7 @@ import {
   quatFromTo,
   quatRotate,
 } from "../kit.js";
+import { inked } from "../font.js";
 
 const easeInOut = (x) => (x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2);
 
@@ -296,45 +297,6 @@ function starPoints(R, r, n = 5) {
 
 const BOOK = { W: 1, H: 1.36, ct: 0.045, leaves: 10, lt: 0.013 };
 
-// A 5 x 7 bitmap font (capitals and a little punctuation) for the storybook,
-// so its pages carry words rather than grey smudges. Rows run top to bottom.
-const FONT = {
-  A: "01110 10001 10001 11111 10001 10001 10001",
-  B: "11110 10001 10001 11110 10001 10001 11110",
-  C: "01110 10001 10000 10000 10000 10001 01110",
-  D: "11110 10001 10001 10001 10001 10001 11110",
-  E: "11111 10000 10000 11110 10000 10000 11111",
-  F: "11111 10000 10000 11110 10000 10000 10000",
-  G: "01110 10001 10000 10111 10001 10001 01111",
-  H: "10001 10001 10001 11111 10001 10001 10001",
-  I: "01110 00100 00100 00100 00100 00100 01110",
-  J: "00111 00010 00010 00010 00010 10010 01100",
-  K: "10001 10010 10100 11000 10100 10010 10001",
-  L: "10000 10000 10000 10000 10000 10000 11111",
-  M: "10001 11011 10101 10101 10001 10001 10001",
-  N: "10001 10001 11001 10101 10011 10001 10001",
-  O: "01110 10001 10001 10001 10001 10001 01110",
-  P: "11110 10001 10001 11110 10000 10000 10000",
-  Q: "01110 10001 10001 10001 10101 10010 01101",
-  R: "11110 10001 10001 11110 10100 10010 10001",
-  S: "01111 10000 10000 01110 00001 00001 11110",
-  T: "11111 00100 00100 00100 00100 00100 00100",
-  U: "10001 10001 10001 10001 10001 10001 01110",
-  V: "10001 10001 10001 10001 10001 01010 00100",
-  W: "10001 10001 10001 10101 10101 10101 01010",
-  X: "10001 10001 01010 00100 01010 10001 10001",
-  Y: "10001 10001 10001 01010 00100 00100 00100",
-  Z: "11111 00001 00010 00100 01000 10000 11111",
-  ".": "00000 00000 00000 00000 00000 01100 01100",
-  ",": "00000 00000 00000 00000 01100 00100 01000",
-  "'": "00100 00100 01000 00000 00000 00000 00000",
-  "!": "00100 00100 00100 00100 00100 00000 00100",
-  "?": "01110 10001 00001 00010 00100 00000 00100",
-  "-": "00000 00000 00000 11111 00000 00000 00000",
-};
-const BITMAP = Object.fromEntries(
-  Object.entries(FONT).map(([ch, rows]) => [ch, rows.split(" ").map((r) => parseInt(r, 2))]),
-);
 const STORY =
   "ONCE UPON A TIME, IN A TOY BOX AT THE END OF A LONG HALL, THERE LIVED A SMALL " +
   "SPLAT CALLED PIP. PIP WAS NOT A BALL AND NOT A BLOCK. PIP WAS A SOFT LITTLE " +
@@ -357,19 +319,6 @@ function storyLines(n, start, count) {
     } else line = line ? `${line} ${w}` : w;
   }
   return lines;
-}
-// Is the point (s, t) of a text block inked? s runs along a line from its
-// start, t down the page from the first line's top, in font pixels.
-function inked(lines, s, t, lead = 10) {
-  const row = Math.floor(t / lead);
-  const gy = Math.floor(t - row * lead);
-  if (row < 0 || row >= lines.length || gy > 6 || s < 0) return false;
-  const col = Math.floor(s / 6);
-  const gx = Math.floor(s - col * 6);
-  const ch = lines[row][col];
-  if (!ch || gx > 4) return false;
-  const g = BITMAP[ch];
-  return !!g && ((g[gy] >> (4 - gx)) & 1) === 1;
 }
 BOOK.pb = 0.27;
 BOOK.T = BOOK.pb + 2 * BOOK.ct;
