@@ -198,7 +198,7 @@ export const RECIPES = {
       { key: "rain", label: "Rain", type: "slider", default: 0.7 },
       { key: "thunder", label: "Thunder", type: "pulse", ease: 1.3 },
     ],
-    action: { key: "thunder", label: "Thunder", sound: "drop" },
+    action: { key: "thunder", label: "Thunder" },
     drive(t, c, out) {
       // Lightning on a random-looking schedule: each slot of time may
       // strike one of three bolts, with a quick double flash.
@@ -491,7 +491,7 @@ export const RECIPES = {
     alive: true,
     options: [{ key: "base", label: "Base", type: "color", default: "#8a2a1e" }],
     controls: [{ key: "shake", label: "Shake", type: "pulse", ease: 3.5 }],
-    action: { key: "shake", label: "Shake the globe", sound: "chime" },
+    action: { key: "shake", label: "Shake the globe" },
     drive(t, c, out) {
       const s = c.shake;
       out.parts.swirl = {
@@ -656,7 +656,7 @@ export const RECIPES = {
   volcano: {
     alive: true,
     controls: [{ key: "erupt", label: "Erupt", type: "pulse", ease: 4 }],
-    action: { key: "erupt", label: "Erupt", sound: "fire" },
+    action: { key: "erupt", label: "Erupt" },
     drive(t, c, out) {
       out.amount = 0.55 + 1.6 * c.erupt;
       out.parts.burst = { visible: smoothstep(0, 0.2, c.erupt) };
@@ -887,7 +887,7 @@ export const RECIPES = {
     alive: true,
     options: [{ key: "wax", label: "Wax", type: "color", default: "#f3ead6" }],
     controls: [{ key: "lit", label: "Lit", type: "toggle", default: 1, ease: 0.5 }],
-    action: { key: "lit", label: "Blow out or light", sound: { on: "fire", off: "whoosh" } },
+    action: { key: "lit", label: "Blow out or light" },
     drive(t, c, out) {
       out.parts.flame = { visible: c.lit };
       out.parts.smoke = { visible: 1 - c.lit };
@@ -1481,7 +1481,7 @@ export const RECIPES = {
   geyser: {
     alive: true,
     controls: [{ key: "erupt", label: "Erupt", type: "pulse", ease: 5 }],
-    action: { key: "erupt", label: "Erupt", sound: "whoosh" },
+    action: { key: "erupt", label: "Erupt" },
     drive(t, c, out) {
       // It bubbles on its own, with a big eruption on a slow cycle.
       const cycle = Math.max(0, Math.sin(t * 0.45)) ** 6;

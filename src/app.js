@@ -17,6 +17,8 @@ import {
 import { defaultEffects, effectDef } from "./effects.js";
 import { normalizePattern, flagInfo, loadFlags } from "./patterns.js";
 import { Sound } from "./sound.js";
+import { specFor } from "./voices.js";
+import { toySound } from "./toy-sounds.js";
 import { normalizeGenerator, PROFILES } from "./generators.js";
 import { decodeSceneHash, parseHash } from "./codec.js";
 import { TOYS, findToy } from "./toys.js";
@@ -401,8 +403,10 @@ class App {
       classify: (e) => {
         // While the phone sheet is open, a tap on the toy only closes it.
         if (this.ui.sheetOpen()) return "orbit";
-        if (e.button === 1 || e.button === 2 || this.spaceHeld || this.tool === "orbit")
-          return "orbit";
+        if (e.button === 1 || e.button === 2 || this.spaceHeld) return "orbit";
+        // A stretchy toy: with Orbit, a drag that starts on it stretches it
+        // (toolStart turns a drag that starts off it back into an orbit).
+        if (this.tool === "orbit") return this.player.canGrab() ? "tool" : "orbit";
         return "tool";
       },
       onTap: (e) => {
@@ -451,18 +455,19 @@ class App {
     const [x, y] = player.canvasPoint(e);
     player.pickDirty = true;
     const hit = await player.pickAt(x, y);
-    if (hit) player.act();
+    if (hit) player.act(hit);
   }
 
   onAction(r) {
     const player = this.player;
     const recipe = player.toyInfo?.recipe;
-    if (r.key === "hop") this.sound.play("hop");
-    else {
-      const snd = recipe?.action?.sound;
-      const name = typeof snd === "string" ? snd : r.value > 0.5 ? snd?.on : snd?.off;
-      this.sound.play(name || "pop");
-    }
+    // The toy's own sound (src/toy-sounds.js), else the recipe's, else a
+    // plain hop or pop. A toggle plays its on or off half.
+    const toy = player.scene.toy;
+    const own = toy.kind === "builtin" ? toySound(toy.id) : null;
+    const spec = own || recipe?.action?.sound || (r.key === "hop" ? "hop" : "pop");
+    // A tap that picked an item (a xylophone bar) plays that item's note.
+    this.sound.play(specFor(spec, r.key === "hop" || r.value > 0.5), { key: "toy", pick: r.pick });
     this.ui.setMotion(player.scene.motion, player.motion.targets);
   }
 
@@ -538,7 +543,7 @@ class App {
     const player = this.player;
     const [x, y] = player.canvasPoint(e);
     const st = (this.toolState = {
-      tool: this.tool,
+      tool: this.tool === "orbit" ? "grab" : this.tool,
       x,
       y,
       last: 0,
@@ -562,6 +567,10 @@ class App {
       return;
     }
     st.started = true;
+    if (st.tool === "grab") {
+      player.grabStart(hit, x, y);
+      return;
+    }
     this.applyTool(st, hit, true);
   }
 
@@ -606,6 +615,10 @@ class App {
       player.magnetAt(x, y, true);
       return;
     }
+    if (st.tool === "grab") {
+      player.grabAt(x, y);
+      return;
+    }
     const now = performance.now();
     const minGap = st.tool === "poke" ? 150 : st.tool === "clay" ? 110 : 0;
     if (st.busy || now - st.last < minGap) return;
@@ -631,6 +644,13 @@ class App {
     if (!st) return;
     if (st.tool === "magnet") this.player.magnetAt(st.x, st.y, false);
     if (st.tool === "clay") this.player.refreshPaint();
+    if (st.tool === "grab" && st.started) {
+      // A real stretch plays the toy's sound as it springs back.
+      const stretched = this.player.grabEnd();
+      const toy = this.player.scene.toy;
+      const spec = toy.kind === "builtin" ? toySound(toy.id) : null;
+      if (stretched > 0.15 && spec) this.sound.play(specFor(spec, true), { key: "toy" });
+    }
   }
 
   // Editing a built-in generated toy makes it "your toy" with explicit params.

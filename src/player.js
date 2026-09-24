@@ -11,6 +11,8 @@ import { Painter } from "./paint.js";
 import { generate, normalizeGenerator, applyClay, PROFILES } from "./generators.js";
 import { buildRecipe, meanLuminance } from "./kit.js";
 import { MotionDriver } from "./motion.js";
+import { rigLayout, tagRig } from "./rig.js";
+import { RIGS } from "./rigs.js";
 import { drawPattern, patternUniforms } from "./patterns.js";
 import {
   fetchBytes,
@@ -98,6 +100,8 @@ export class Player {
     // Only an automatic tier steps down when frames are slow; ?adapt=off
     // keeps both the tier and the resolution fixed (tests and tools).
     this.adaptive = new URLSearchParams(location.search).get("adapt") !== "off";
+    // ?rig=show tints each part of a scan rig (for placing its regions).
+    this.rigDebug = new URLSearchParams(location.search).get("rig") === "show";
     this.autoTier = !opts.profile && !forcedProfile() && this.detail === "auto";
     this.reducedMotion = opts.reducedMotion ?? prefersReducedMotion();
     this.scene = createScene();
@@ -276,9 +280,21 @@ export class Player {
         return null;
       }
       this.disposeProcedural();
-      this.stage.setToy({ resource: asset.resource, asset, transform: def.transform || null });
+      const rig = RIGS[def.id] || null;
+      this.stage.setToy({
+        resource: asset.resource,
+        asset,
+        transform: def.transform || null,
+        rig: !!rig,
+      });
       info = this.measure(asset.resource, def.transform);
       Object.assign(info, { id: def.id, label: def.label, kind: "captured", credit: def.credit });
+      if (rig) {
+        // Rig coordinates are the world's, so the tap point needs no transform.
+        this.motion.setToy(rig, { parts: rigLayout(rig).parts, transform: null }, this.scene.motion?.controls || {}); // prettier-ignore
+        info.recipe = rig;
+        info.rig = rig;
+      }
     } else if (toy.kind === "file") {
       if (!file)
         throw new Error(
@@ -318,6 +334,7 @@ export class Player {
     await nextFrame();
     if (token !== this.loadToken) return null;
     this.painter.attach();
+    if (info.rig) tagRig(this.stage, info.rig);
     this.painter.applyAll(this.scene.paint.stamps);
     this.pickDirty = true;
     progress(1);
@@ -642,8 +659,9 @@ export class Player {
   }
 
   // The toy's tap action (open the lid, blow out the candles), or a hop.
-  act() {
-    const r = this.motion.act(this.time);
+  // `world` is where a tap on the toy landed (null from the Play button).
+  act(world = null) {
+    const r = this.motion.act(this.time, world ? this.toRecipe(world) : null);
     if (r.key !== "hop") {
       this.scene.motion.controls = {
         ...this.scene.motion.controls,
@@ -653,6 +671,15 @@ export class Player {
     this.stage.requestRender();
     this.emit("action", r);
     return r;
+  }
+
+  // A world point in the current toy's recipe coordinates: a kit toy's
+  // build space (before it was centred and scaled), else the world.
+  toRecipe(world) {
+    const tf = this.motion.ctx?.transform;
+    if (!tf || !this.stage.toy) return world.slice();
+    const m = this.stage.worldToModel(world);
+    return [0, 1, 2].map((i) => m[i] / tf.scale + tf.center[i]);
   }
 
   // ---- Frame ------------------------------------------------------------------
@@ -751,6 +778,7 @@ export class Player {
       }),
       patternUniforms(this.scene.pattern, info.half, info.lum ?? 0.5, this.patternOn),
     );
+    if (info.rig) u.uSpRigDbg = [this.rigDebug ? 1 : 0, 0, 0, 0];
     this.stage.setUniforms(u);
     const dripping = this.painter.tick(this.time, (s) => this.scene.paint.stamps.push(s));
     const animating =
@@ -842,6 +870,52 @@ export class Player {
     m.target = point;
     m.held = held;
     this.stage.requestRender();
+  }
+
+  // Drag-to-stretch, for toys whose recipe or rig has `grab: { radius }`
+  // (in toy radii): the grabbed point follows the pointer across a plane
+  // facing the camera, pulling the toy near it along; letting go springs
+  // it back. The pull is capped at about one toy radius.
+  canGrab() {
+    return !!this.toyInfo?.recipe?.grab;
+  }
+
+  grabStart(world, x, y) {
+    const info = this.toyInfo;
+    const g = info.recipe.grab;
+    const ray = this.stage.ray(x, y);
+    this.grabPlane = { point: world.slice(), normal: ray.dir.slice() };
+    this.driver.grabStart(world, (g.radius ?? 0.5) * info.radius);
+    this.stage.requestRender();
+  }
+
+  grabAt(x, y) {
+    const pl = this.grabPlane;
+    if (!pl) return;
+    const ray = this.stage.ray(x, y);
+    const n = pl.normal;
+    const den = ray.dir[0] * n[0] + ray.dir[1] * n[1] + ray.dir[2] * n[2];
+    if (Math.abs(den) < 1e-4) return;
+    const t =
+      ((pl.point[0] - ray.origin[0]) * n[0] +
+        (pl.point[1] - ray.origin[1]) * n[1] +
+        (pl.point[2] - ray.origin[2]) * n[2]) /
+      den;
+    let pull = [0, 1, 2].map((i) => ray.origin[i] + ray.dir[i] * t - pl.point[i]);
+    const max = (this.toyInfo.recipe.grab.max ?? 1) * this.toyInfo.radius;
+    const len = Math.hypot(...pull);
+    // A soft cap: it stretches less the further it goes.
+    if (len > 1e-6) pull = pull.map((v) => (v / len) * max * Math.tanh(len / max));
+    this.driver.grabTo(pull);
+    this.stage.requestRender();
+  }
+
+  // Lets go. Returns how far it was stretched, in toy radii.
+  grabEnd() {
+    this.grabPlane = null;
+    const r = this.driver.grabEnd(this.time);
+    this.stage.requestRender();
+    return r * (this.driver.grab.radius / this.toyInfo.radius);
   }
 
   // Paint at a world point: the stamp, droplets and drips (screen-down).

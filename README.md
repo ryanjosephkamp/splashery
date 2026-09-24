@@ -88,8 +88,18 @@ Clay works on pack toys too.
   from Wikimedia Commons). It wraps around the toy, across its front, or like a globe, keeps as much
   of the toy's own shading as you like, and leaves details such as flames or coins alone. The status
   line says "in the colours of …".
-- **Sound** (the speaker button): soft synthesised sounds for pokes, paint, clay, drops, hops and
-  actions. Off until you turn it on; embeds are always silent.
+- **Sound** (the speaker button): every toy has its own tap sound, synthesised from a library of
+  about 80 voices (plucked strings, bells, xylophone bars, drums, insect buzz, a quack and other
+  creature voices, crunch, splash, wind, engines, horns) with a small note sequencer for tunes: the
+  guitar strums a chord progression, Big Ben plays the Westminster quarters, the music box plays a
+  melody. Pokes, paint, clay and the effect switches have their own soft sounds. Off until you turn
+  it on; embeds are always silent.
+- **Taps know where they land.** A toy can react to the spot you tap: tap one xylophone bar and the
+  mallet strikes that bar and plays its note; tap elsewhere and it plays the scale.
+- **Scan rigs.** Captured toys can have moving parts: the cat statue turns its head and flicks its
+  tail, and the real rubber duck squeezes flat and springs back.
+- **Drag to stretch.** Drag the gummy bear (with the Orbit tool, starting on the bear) to stretch
+  it; let go and it springs back. A drag that starts beside it still turns the view.
 - Under a system setting for reduced motion, toys stay still until you switch motion on.
 
 ## Effects
@@ -298,7 +308,13 @@ after comparisons (`--size=`, `--bg=`, `--theme=light`, `--set=open=0` to set a 
 `tools/effect-strip.mjs <out-dir> id ...` renders a toy's tap effect as a filmstrip: a frame before
 the tap, then frames at fixed times after it (`--times=0.1,0.3,0.6,1,1.5,2.2,3`), in one PNG. It
 steps the clock by hand, so the frames land at the same toy time on any machine.
-`--taps=3 --gap=0.2` taps several times (for toys that react to fast taps).
+`--taps=3 --gap=0.2` taps several times (for toys that react to fast taps). `--at=x,y,z` taps that
+point (recipe coordinates) instead of pressing the action.
+
+`tools/sound-check.mjs [id ...]` renders every toy's sound offline in headless Chromium and checks
+that it is audible, does not clip and ends within 5 s (`--sheet=out.png` draws spectrograms,
+`--wav=dir` writes WAV files, `--voices` re-measures each voice's level). `tools/sound-audit.mjs`
+lists the toys without their own action or sound and how often each voice is used.
 
 ## Tests
 
@@ -338,7 +354,9 @@ src/camera.js                   orbit camera and gestures
 src/state.js, codec.js          scene schema v3 (loads v2) and link codec
 src/kit.js, packs/              the toy kit and the recipe packs
 src/motion.js, patterns.js      whole-toy motion, parts and controls; the pattern layer
-src/sound.js                    WebAudio sound effects
+src/sound.js, voices.js         WebAudio output and the voice library (sound specs)
+src/toy-sounds.js               every toy's own sound spec
+src/rig.js, rigs.js             scan rigs: moving parts for captured toys
 src/exports.js                  PNG, GIF, WebM, links and embed snippets
 src/viewer.js, embed.js, element.js   embed player and <splashery-toy>
 src/pc.js, toys.js              engine import, toy shelf

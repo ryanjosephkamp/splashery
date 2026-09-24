@@ -10,10 +10,10 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 283 toys. 102 have a tap action today; the other 181 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 98.
-- **more** (has an effect; make it clearer or more dramatic): 4.
-- **new** (needs its own effect): 181.
+- 283 toys. 104 have a tap action today; the other 179 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 101.
+- **more** (has an effect; make it clearer or more dramatic): 3.
+- **new** (needs its own effect): 179.
 - Visual fixes: 0 open, 26 done. Touch or drag interaction asked for: 5.
 
 ## By phase
@@ -22,18 +22,19 @@ Proposals below are suggestions; the owner may change them.
   Vintage camera, Boombox, Horse statue, Basketball, Soccer ball, American football, Tennis ball,
   Baseball, Softball, Rugby ball, Volleyball, Cricket ball, Medicine ball, Squash ball, Hockey puck,
   Flying disc, Comet, Lava lamp, Storybook, Decorated tree, Diya, Sports car, Tractor, Statue of
-  Liberty. Effects to make clearer or more dramatic, still open: none. Done in C2: Bacteriophage,
-  Neuron, DNA, Amethyst geode, Crystal ball, Eye, Cherry blossom, Ice cream, Coffee, Rubber duck,
-  Kite, Lorenz attractor, Klein bottle, Wizard's orb, Jellyfish, Pufferfish, Snail, Octopus,
-  Fireworks, Decorated tree, Diya, Acoustic guitar, Snare drum, Hot-air balloon, Bus, Jet airliner,
-  Sailboat, Submarine, Bicycle, Big Ben, Castle, Pagoda, Windmill.
+  Liberty. Effects to make clearer or more dramatic, still open: none. Done in C2: Real rubber duck,
+  Cat statue, Bacteriophage, Neuron, DNA, Amethyst geode, Crystal ball, Eye, Cherry blossom, Ice
+  cream, Gummy bear, Coffee, Rubber duck, Kite, Lorenz attractor, Klein bottle, Wizard's orb,
+  Jellyfish, Pufferfish, Snail, Octopus, Fireworks, Decorated tree, Diya, Acoustic guitar, Snare
+  drum, Xylophone, Hot-air balloon, Bus, Jet airliner, Sailboat, Submarine, Bicycle, Big Ben,
+  Castle, Pagoda, Windmill.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** Cactus, Strawberry, Heart cookie, Honeybee, Jelly blob,
   Donut, Neon knot, Tiny planet, Cluster fly, May beetle, Millipede, Carder bumblebee, Raspberry,
-  Blackberry, Blueberry, Grape, Cinnamon star cookie, Tomatoes, Mandeltorus, Basket, Real rubber
-  duck, Garden gnome, Wooden elephant, Marble bust, Ukulele, Alarm clock, Vintage camera, Boombox,
-  Real croissant, Carrot cake, Pomegranate, Lantern, Cat statue, Chess set, Horse statue
+  Blackberry, Blueberry, Grape, Cinnamon star cookie, Tomatoes, Mandeltorus, Basket, Garden gnome,
+  Wooden elephant, Marble bust, Ukulele, Alarm clock, Vintage camera, Boombox, Real croissant,
+  Carrot cake, Pomegranate, Lantern, Chess set, Horse statue
 - **E2, new effects: space, atoms and gems.** Sun, Solar system, Mercury, Venus, Earth, Moon, Mars,
   Jupiter, Saturn, Uranus, Neptune, Aurora world, Asteroid, Comet, Meteor, Star, Pulsar, Black hole,
   Star cluster, Ring nebula, Nebula, Spiral galaxy, Electron orbital, Atom, Molecule, Crystal
@@ -125,9 +126,11 @@ Proposals below are suggestions; the owner may change them.
   - Owner: A basket of seashells. Neat. No effect.
   - Effect: Shells hop inside the basket one after another.
   - Sound: Clattering shells.
-- **Real rubber duck** (`rubber-duck-real`). Now: hops. Plan: new effect (E1).
+- **Real rubber duck** (`rubber-duck-real`). Now: tap: Squeeze (rig). Plan: keep.
   - Owner: Squeeze and quack. It must differ from the other rubber duck.
   - Effect: Squeezes flat and springs back.
+  - Improved: D: a whole-toy rig. A tap squeezes it flat; it springs back taller, wobbles and
+    settles (1.4 s), with a high rubber squeak (the other duck quacks).
   - Sound: Squeaky squeeze (high whistle) — the other duck quacks.
 - **Garden gnome** (`garden-gnome`). Now: hops. Plan: new effect (E1).
   - Owner: Hilarious, looks great. Maybe the lantern lights up, or it moves around.
@@ -181,9 +184,11 @@ Proposals below are suggestions; the owner may change them.
   - Owner: A flame should light up inside, like the other fire toys.
   - Effect: A flame lights inside with a warm glow and flicker.
   - Sound: Match strike and soft whoosh.
-- **Cat statue** (`cat-statue`). Now: hops. Plan: new effect (E1).
+- **Cat statue** (`cat-statue`). Now: tap: Look around (rig). Plan: keep.
   - Owner: Like the bust: the cat moves a bit.
   - Effect: The head turns and the tail swishes once.
+  - Improved: D: the first scan rig (src/rigs.js). A tap turns the head to one side and back, and
+    the tail curled on the ground flicks its tip up (2.4 s).
   - Sound: Stone grind and a tiny mew.
 - **Chess set** (`chess-set`). Now: hops. Plan: new effect (E1).
   - Owner: Ideally playable. At least: a tap plays a real game, white against black, as a long
@@ -789,10 +794,13 @@ Proposals below are suggestions; the owner may change them.
   - Owner: Maybe they do something.
   - Effect: They stack themselves into a tower.
   - Sound: Soft taps.
-- **Gummy bear** (`gummy-bear`). Now: tap: Squish. Plan: more.
+- **Gummy bear** (`gummy-bear`). Now: tap: Squish. Plan: keep.
   - Owner: Underwhelming. Press, hold and drag to stretch its arm or body, and let go to spring back
     with realistic physics.
   - Effect: Drag to stretch (like the Magnet, with springy release); tap does a jelly jiggle.
+  - Improved: D: drag-to-stretch. With the Orbit tool, a drag that starts on the bear pulls the part
+    you grabbed (up to about a body length) and it springs back with a few wobbles when you let go;
+    a drag beside it still turns the view. A tap still does the jelly jiggle.
   - Sound: Rubbery stretch and boing.
   - Touch or drag interaction (phase F).
 - **Pretzel** (`pretzel`). Now: hops. Plan: new effect (E5).
@@ -1123,6 +1131,8 @@ Proposals below are suggestions; the owner may change them.
   - Sound: Snare hits with rattle.
 - **Xylophone** (`xylophone`). Now: tap: Play a scale. Plan: keep.
   - Owner: Incredible; basically perfect.
+  - Improved: D: a tap on one bar lifts the mallet over that bar, strikes it and plays its note; a
+    tap anywhere else plays the scale. Each bar dips as the mallet hits it.
   - Sound: The scale it already plays, as mallet tones.
 
 ## Vehicles (14)

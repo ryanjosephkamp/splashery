@@ -3126,7 +3126,7 @@ export const RECIPES = {
     alive: true,
     options: [{ key: "color", label: "Stripes", type: "color", default: "#d6322b" }],
     controls: [{ key: "light", label: "Light", type: "toggle", default: 1, ease: 0.8 }],
-    action: { key: "light", label: "Light on or off", sound: "click" },
+    action: { key: "light", label: "Light on or off" },
     drive(t, c, out) {
       out.parts.beam = { angle: t * 0.9, visible: smoothstep(0, 0.6, c.light) };
     },
@@ -3168,7 +3168,7 @@ export const RECIPES = {
   "big-ben": {
     alive: true,
     controls: [{ key: "chime", label: "Chime", type: "pulse", ease: 4 }],
-    action: { key: "chime", label: "Chime the bell", sound: "chime" },
+    action: { key: "chime", label: "Chime the bell" },
     drive(t, c, out) {
       // The hands show the real time (a clock may read the date in drive).
       // A chime spins them round in whole turns (so they land back on the
@@ -3196,11 +3196,7 @@ export const RECIPES = {
     alive: true,
     options: [{ key: "roof", label: "Roofs", type: "color", default: "#2f5d9e" }],
     controls: [{ key: "raise", label: "Drawbridge up", type: "toggle", default: 1, ease: 3.4 }],
-    action: {
-      key: "raise",
-      label: "Raise or lower the drawbridge",
-      sound: { on: "close", off: "open" },
-    },
+    action: { key: "raise", label: "Raise or lower the drawbridge" },
     drive(t, c, out) {
       // Lowering: the bridge drops first, then the knights march out and
       // stand guard. Raising: they march back in before the bridge goes up.
@@ -3219,7 +3215,7 @@ export const RECIPES = {
     alive: true,
     options: [{ key: "color", label: "Timber", type: "color", default: "#c8372d" }],
     controls: [{ key: "chime", label: "Bells", type: "pulse", ease: 4 }],
-    action: { key: "chime", label: "Ring the bells", sound: "chime" },
+    action: { key: "chime", label: "Ring the bells" },
     drive(t, c, out, info) {
       // A breeze: the chimes on every roof swing (each roof a beat behind
       // the one below), and the doors and lanterns light up.
@@ -3241,7 +3237,7 @@ export const RECIPES = {
   windmill: {
     alive: true,
     controls: [{ key: "gust", label: "Gust", type: "pulse", ease: 4 }],
-    action: { key: "gust", label: "A gust of wind", sound: "whoosh" },
+    action: { key: "gust", label: "A gust of wind" },
     drive(t, c, out) {
       // The sails turn briskly; a gust hits them at once and spins them up
       // hard for three extra turns, easing off as it passes.

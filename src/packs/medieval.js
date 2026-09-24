@@ -214,7 +214,7 @@ export const RECIPES = {
   "sword-in-stone": {
     alive: true,
     controls: [{ key: "pull", label: "Pull the sword", type: "toggle", default: 0, ease: 1.6 }],
-    action: { key: "pull", label: "Pull", sound: { on: "chime", off: "drop" } },
+    action: { key: "pull", label: "Pull" },
     drive(t, c, out) {
       const p = easeInOut(c.pull);
       // It sticks at first, wiggles, then slides free.
@@ -533,7 +533,7 @@ export const RECIPES = {
   "bow-and-target": {
     alive: true,
     controls: [{ key: "shot", label: "Shoot", type: "toggle", default: 0, ease: 1.3 }],
-    action: { key: "shot", label: "Shoot", sound: { on: "whoosh", off: "click" } },
+    action: { key: "shot", label: "Shoot" },
     drive(t, c, out) {
       const G = BOW;
       const dir = direction(c, "shot");
@@ -717,7 +717,7 @@ export const RECIPES = {
   trebuchet: {
     alive: true,
     controls: [{ key: "launch", label: "Launch", type: "pulse", ease: 4.2 }],
-    action: { key: "launch", label: "Launch", sound: "whoosh" },
+    action: { key: "launch", label: "Launch" },
     drive(t, c, out) {
       const T = TREB;
       const u = 1 - c.launch;
@@ -870,7 +870,7 @@ export const RECIPES = {
   crossbow: {
     alive: true,
     controls: [{ key: "shoot", label: "Shoot", type: "pulse", ease: 2.6 }],
-    action: { key: "shoot", label: "Shoot", sound: "whoosh" },
+    action: { key: "shoot", label: "Shoot" },
     drive(t, c, out) {
       const X = XBOW;
       const u = 1 - c.shoot;
@@ -1033,7 +1033,7 @@ export const RECIPES = {
     alive: true,
     options: [{ key: "plume", label: "Plume", type: "color", default: "#c8262e" }],
     controls: [{ key: "visor", label: "Visor", type: "toggle", default: 0, ease: 0.9 }],
-    action: { key: "visor", label: "Open the visor", sound: { on: "open", off: "close" } },
+    action: { key: "visor", label: "Open the visor" },
     drive(t, c, out) {
       out.parts.visor = { angle: -1.5 * easeInOut(c.visor) };
       out.amount = 0.8;
@@ -1343,7 +1343,7 @@ export const RECIPES = {
       },
     ],
     controls: [{ key: "hatch", label: "Hatch", type: "toggle", default: 0, ease: 1.8 }],
-    action: { key: "hatch", label: "Hatch", sound: { on: "pop", off: "close" } },
+    action: { key: "hatch", label: "Hatch" },
     drive(t, c, out) {
       const o = easeInOut(c.hatch);
       for (let i = 0; i < 3; i++) out.parts[`shell${i}`] = { angle: 1.75 * o };
@@ -1545,7 +1545,7 @@ export const RECIPES = {
     alive: true,
     options: [{ key: "magic", label: "Magic", type: "color", default: "#b04dff" }],
     controls: [{ key: "cast", label: "Cast a spell", type: "pulse", ease: 3.2 }],
-    action: { key: "cast", label: "Cast", sound: "chime" },
+    action: { key: "cast", label: "Cast" },
     drive(t, c, out) {
       // A spell: a flash of light, the swirl spins up, sparks spiral out and a
       // ring of runes rises round the orb, circles it and fades.

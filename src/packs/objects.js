@@ -515,7 +515,7 @@ export const RECIPES = {
     alive: true,
     options: [{ key: "color", label: "Cover", type: "color", default: "#7a2432" }],
     controls: [{ key: "open", label: "Open", type: "toggle", default: 1, ease: 2 }],
-    action: { key: "open", label: "Open or close", sound: { on: "open", off: "close" } },
+    action: { key: "open", label: "Open or close" },
     drive(t, c, out) {
       const o = c.open;
       const lift = [0, 0, 0, 0, 0, 0, 0, 0.012, 0.03, 0.06];
@@ -749,7 +749,7 @@ export const RECIPES = {
     alive: true,
     options: [{ key: "color", label: "Case", type: "color", default: "#b9bec6" }],
     controls: [{ key: "open", label: "Open", type: "toggle", default: 1, ease: 1.3 }],
-    action: { key: "open", label: "Open or close", sound: { on: "open", off: "close" } },
+    action: { key: "open", label: "Open or close" },
     drive(t, c, out) {
       // Modelled open; closing turns the lid back down onto the keys.
       const a = LAPTOP.open * (1 - ease3(c.open));
@@ -851,7 +851,7 @@ export const RECIPES = {
     alive: true,
     options: [{ key: "wood", label: "Wood", type: "color", default: "#8a4526" }],
     controls: [{ key: "open", label: "Open", type: "toggle", default: 1, ease: 1.4 }],
-    action: { key: "open", label: "Open or close", sound: { on: "chime", off: "close" } },
+    action: { key: "open", label: "Open or close" },
     drive(t, c, out) {
       const m = mem(c);
       const o = ease3(c.open);
@@ -1034,7 +1034,7 @@ export const RECIPES = {
     alive: true,
     options: [{ key: "color", label: "Colour", type: "color", default: "#d6453d" }],
     controls: [{ key: "ring", label: "Ring", type: "pulse", ease: 2.2 }],
-    action: { key: "ring", label: "Ring the bell", sound: "chime" },
+    action: { key: "ring", label: "Ring the bell" },
     drive(t, c, out, info) {
       // The hands show the real local time.
       const d = new Date();
@@ -1207,7 +1207,7 @@ export const RECIPES = {
       { key: "ribbon", label: "Ribbon", type: "color", default: "#f6c343" },
     ],
     controls: [{ key: "open", label: "Open", type: "toggle", default: 0, ease: 1 }],
-    action: { key: "open", label: "Open the present", sound: { on: "pop", off: "close" } },
+    action: { key: "open", label: "Open the present" },
     drive(t, c, out) {
       const o = c.open;
       const up = easeOutBack(clamp(o / 0.7, 0, 1));
@@ -1365,7 +1365,7 @@ export const RECIPES = {
       { key: "color", label: "Colour", type: "color", default: "#d7263d" },
     ],
     controls: [{ key: "open", label: "Open", type: "toggle", default: 1, ease: 1.1 }],
-    action: { key: "open", label: "Open or close", sound: "whoosh" },
+    action: { key: "open", label: "Open or close" },
     drive(t, c, out) {
       const close = 1 - ease3(c.open);
       for (let i = 0; i < 8; i++) out.parts["panel" + i] = { angle: 1.18 * close };
@@ -1466,7 +1466,7 @@ export const RECIPES = {
       { key: "power", label: "On", type: "toggle", default: 1, ease: 1.8 },
       { key: "swing", label: "Swing", type: "toggle", default: 1, ease: 1 },
     ],
-    action: { key: "power", label: "Switch on or off", sound: "click" },
+    action: { key: "power", label: "Switch on or off" },
     drive(t, c, out) {
       const m = mem(c);
       const spin = integrate(m, "spin", t, 24 * c.power * c.power);
@@ -1612,7 +1612,7 @@ export const RECIPES = {
     density: 0.45,
     options: [{ key: "color", label: "Colour", type: "color", default: "#3c7fc4" }],
     controls: [{ key: "light", label: "Light", type: "toggle", default: 1, ease: 0.35 }],
-    action: { key: "light", label: "Switch the light", sound: "click" },
+    action: { key: "light", label: "Switch the light" },
     drive(t, c, out) {
       out.parts.glow = { visible: c.light };
       out.parts.beam = { visible: c.light };
@@ -1750,7 +1750,7 @@ export const RECIPES = {
     alive: true,
     options: [{ key: "color", label: "Potion", type: "color", default: "#b44cff" }],
     controls: [{ key: "pop", label: "Pop the cork", type: "pulse", ease: 1.8 }],
-    action: { key: "pop", label: "Pop the cork", sound: "pop" },
+    action: { key: "pop", label: "Pop the cork" },
     drive(t, c, out) {
       const p = 1 - c.pop;
       const on = c.pop > 0;
@@ -1865,7 +1865,7 @@ export const RECIPES = {
     alive: true,
     density: 0.6,
     controls: [{ key: "open", label: "Extend", type: "toggle", default: 1, ease: 1.2 }],
-    action: { key: "open", label: "Extend or collapse", sound: { on: "open", off: "close" } },
+    action: { key: "open", label: "Extend or collapse" },
     drive(t, c, out) {
       const e = ease3(c.open);
       const d = TELE.dir;

@@ -138,7 +138,7 @@ export const RECIPES = {
   "jack-o-lantern": {
     alive: true,
     controls: [{ key: "lid", label: "Lid", type: "toggle", default: 0, ease: 0.9 }],
-    action: { key: "lid", label: "Lift the lid", sound: { on: "open", off: "close" } },
+    action: { key: "lid", label: "Lift the lid" },
     drive(t, c, out) {
       out.parts.lid = { angle: -1.1 * easeInOut(c.lid), offset: [0, 0.12 * easeInOut(c.lid), 0] };
       out.amount = 0.9;
@@ -454,7 +454,7 @@ export const RECIPES = {
   fireworks: {
     alive: true,
     controls: [{ key: "launch", label: "Launch", type: "pulse", ease: 3.4 }],
-    action: { key: "launch", label: "Launch", sound: "fire" },
+    action: { key: "launch", label: "Launch" },
     drive(t, c, out) {
       // Each launch picks another tube and another shell type (never the
       // same as the last), so no two in a row look alike. The burst is the
@@ -665,7 +665,7 @@ export const RECIPES = {
   "decorated-tree": {
     alive: true,
     controls: [{ key: "lights", label: "Lights", type: "toggle", default: 0, ease: 1.8 }],
-    action: { key: "lights", label: "Lights on or off", sound: "click" },
+    action: { key: "lights", label: "Lights on or off" },
     drive(t, c, out) {
       // The lights switch on in a sweep up the tree and stay on, playing
       // three patterns in turn: a chase, a slow ripple and all steady. The
@@ -939,7 +939,7 @@ export const RECIPES = {
       { key: "c2", label: "Colour 2", type: "color", default: "#f2c230" },
     ],
     controls: [{ key: "spin", label: "Spin", type: "pulse", ease: 2.6 }],
-    action: { key: "spin", label: "Spin", sound: "whoosh" },
+    action: { key: "spin", label: "Spin" },
     drive(t, c, out) {
       const u = 1 - c.spin;
       const turns = c.spin > 0 ? 2 * (1 - (1 - u) ** 3) : 0;
@@ -1059,7 +1059,7 @@ export const RECIPES = {
       },
     ],
     controls: [{ key: "swing", label: "Swing", type: "pulse", ease: 4 }],
-    action: { key: "swing", label: "Swing", sound: "whoosh" },
+    action: { key: "swing", label: "Swing" },
     drive(t, c, out) {
       const a = 0.05 + 0.25 * c.swing;
       out.parts.lantern = {
@@ -1170,7 +1170,7 @@ export const RECIPES = {
       { key: "blow", label: "Blow", type: "pulse", ease: 2 },
       { key: "ring", label: "Light the ring", type: "toggle", default: 0, ease: 3 },
     ],
-    action: { key: "ring", label: "Light the diyas", sound: "whoosh" },
+    action: { key: "ring", label: "Light the diyas" },
     drive(t, c, out) {
       // The flame flares up and grows, then carries its light round a ring
       // of small diyas one by one. They stay lit until the next tap.
@@ -1405,7 +1405,7 @@ export const RECIPES = {
   menorah: {
     alive: true,
     controls: [{ key: "light", label: "Light the candles", type: "toggle", default: 1, ease: 4.5 }],
-    action: { key: "light", label: "Light the candles", sound: "chime" },
+    action: { key: "light", label: "Light the candles" },
     drive(t, c, out) {
       // The helper candle first, then the others one by one.
       out.parts.f8 = { visible: band(c.light, 0, 0.08) };

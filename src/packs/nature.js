@@ -675,7 +675,7 @@ export const RECIPES = {
     alive: true,
     options: [SEED],
     controls: [{ key: "shake", label: "Shake", type: "pulse", ease: 5.5 }],
-    action: { key: "shake", label: "Shake the blossom", sound: "whoosh" },
+    action: { key: "shake", label: "Shake the blossom" },
     // A tap shakes the tree: every blossom drops in a flurry of petals and
     // settles on the grass, then the bare branches bloom again.
     drive(t, c, out) {
@@ -1440,7 +1440,7 @@ export const RECIPES = {
   dandelion: {
     alive: true,
     controls: [{ key: "blow", label: "Blow", type: "pulse", ease: 5 }],
-    action: { key: "blow", label: "Blow the seeds", sound: "whoosh" },
+    action: { key: "blow", label: "Blow the seeds" },
     drive(t, c, out) {
       const s = 1 - c.blow;
       // A gust bends the stalk while the seeds fly.

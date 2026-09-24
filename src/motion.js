@@ -54,6 +54,7 @@ export class MotionDriver {
     this.state = {}; // eased control values
     this.targets = {};
     this.hopStart = -100;
+    this.tap = null;
     this.kitClock = { t: 0, last: null, rate: 1 };
     this.moveClock = { t: 0, last: null, rate: 1 };
     this.partsData = new Float32Array(48 * 4);
@@ -72,6 +73,7 @@ export class MotionDriver {
       this.targets[c.key] = v;
     }
     this.hopStart = -100;
+    this.tap = null;
   }
 
   controlDef(key) {
@@ -86,21 +88,37 @@ export class MotionDriver {
     if (snap || def.type !== "toggle") this.state[key] = value;
   }
 
-  // The tap action: toggles the recipe's action control, or hops.
-  act(time) {
+  // The tap action: toggles the recipe's action control, or hops. `point`
+  // is where the tap landed, in the recipe's own coordinates (null for the
+  // Play button and the keyboard). A recipe's `action.at(point, c)` may pick
+  // another control to fire and an item: it returns a control key, or
+  // { key, pick }, or nothing for the usual action. drive() sees the last
+  // tap as info.tap = { point, key, pick, time, n }.
+  act(time, point = null) {
     const a = this.recipe?.action;
-    if (a?.key) {
-      if (this.controlDef(a.key)?.type === "pulse") {
-        this.state[a.key] = 1;
-        this.targets[a.key] = 0;
-        return { key: a.key, value: 1 };
+    let key = a?.key;
+    let pick = null;
+    if (a?.at && point) {
+      const r = a.at(point, this.state);
+      if (typeof r === "string") key = r;
+      else if (r) {
+        key = r.key ?? key;
+        pick = r.pick ?? null;
       }
-      const cur = this.targets[a.key] ?? 0;
-      this.setControl(a.key, cur > 0.5 ? 0 : 1);
-      return { key: a.key, value: this.targets[a.key] };
+    }
+    this.tap = { point, key: key || "hop", pick, time, n: (this.tap?.n ?? 0) + 1 };
+    if (key && this.controlDef(key)) {
+      if (this.controlDef(key).type === "pulse") {
+        this.state[key] = 1;
+        this.targets[key] = 0;
+        return { key, value: 1, pick, point };
+      }
+      const cur = this.targets[key] ?? 0;
+      this.setControl(key, cur > 0.5 ? 0 : 1);
+      return { key, value: this.targets[key], pick, point };
     }
     this.hop(time);
-    return { key: "hop", value: 1 };
+    return { key: "hop", value: 1, pick, point };
   }
 
   hop(time) {
@@ -179,7 +197,7 @@ export class MotionDriver {
     // The kit toy's own frame: behaviours clock, recipe drive, parts.
     const kt = this.tick(this.kitClock, time, rate, motion.alive !== false);
     const drive = { energy: 0, grow: 1, amount: 1, glow: [1, 1, 1, 0], parts: {}, body: null };
-    if (this.recipe?.drive) this.recipe.drive(kt, this.state, drive, { time, R });
+    if (this.recipe?.drive) this.recipe.drive(kt, this.state, drive, { time, R, tap: this.tap });
     if (drive.body) {
       if (drive.body.quat) q = quatMul(drive.body.quat, q);
       if (drive.body.offset) {

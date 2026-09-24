@@ -1977,7 +1977,7 @@ export const RECIPES = {
   supernova: {
     alive: true,
     controls: [{ key: "boom", label: "Explode", type: "pulse", ease: 5 }],
-    action: { key: "boom", label: "Explode", sound: "whoosh" },
+    action: { key: "boom", label: "Explode" },
     drive(t, c, out) {
       // y runs from 0 (the blast) to 1 (settled again): the debris flies
       // out and fades, then glows back in place.

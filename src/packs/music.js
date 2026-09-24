@@ -133,7 +133,7 @@ export const RECIPES = {
       },
     ],
     controls: [{ key: "strum", label: "Strum", type: "pulse", ease: 3 }],
-    action: { key: "strum", label: "Strum", sound: "chime" },
+    action: { key: "strum", label: "Strum" },
     drive(t, c, out) {
       // A down-strum: each string is plucked a moment after the one above
       // and vibrates, bending at its middle and blurring wider, dying away
@@ -354,7 +354,7 @@ export const RECIPES = {
     alive: true,
     options: [{ key: "shell", label: "Shell", type: "color", default: "#c8202e" }],
     controls: [{ key: "hit", label: "Hit", type: "pulse", ease: 3.2 }],
-    action: { key: "hit", label: "Play a roll", sound: "bounce" },
+    action: { key: "hit", label: "Play a roll" },
     drive(t, c, out) {
       // A roll: the sticks strike in turn. A tap during a roll speeds it up
       // (four speeds) and makes it last longer; a pause starts over slowly.
@@ -473,9 +473,24 @@ export const RECIPES = {
   // ---- Toy xylophone --------------------------------------------------------------------
   xylophone: {
     alive: true,
-    controls: [{ key: "play", label: "Play", type: "pulse", ease: 3 }],
-    action: { key: "play", label: "Play a scale", sound: "chime" },
-    drive(t, c, out) {
+    controls: [
+      { key: "play", label: "Play", type: "pulse", ease: 3 },
+      // A tap on one bar strikes just that bar (the sound plays its note).
+      { key: "strike", label: "Strike", type: "pulse", ease: 1 },
+    ],
+    action: {
+      key: "play",
+      label: "Play a scale",
+      at(p) {
+        const X = XYLO;
+        if (Math.abs(p[1] - X.top) > 0.09) return null;
+        const i = X.bars.findIndex(
+          (b) => Math.abs(p[0] - b.x) < 0.1 && Math.abs(p[2]) < (b.len * 0.86) / 2 + 0.03,
+        );
+        return i < 0 ? null : { key: "strike", pick: i };
+      },
+    },
+    drive(t, c, out, info) {
       const X = XYLO;
       const u = 1 - c.play;
       const first = X.bars[0];
@@ -485,14 +500,31 @@ export const RECIPES = {
         const hop = Math.abs(Math.sin(Math.PI * s * 7));
         return [x, X.top + 0.06 + 0.14 * hop, 0.08];
       };
+      // A struck bar dips and rings for a moment.
+      const dip = X.bars.map(() => 0);
+      const ring = (e) => (e < 0 ? 0 : -0.018 * Math.exp(-e * 6) * Math.cos(e * 45));
       let head = X.rest;
       if (c.play > 0) {
         if (u < 0.1) head = vec.add(X.rest, vec.mul(vec.sub(at(0), X.rest), easeInOut(u / 0.1)));
         else if (u < 0.85) head = at((u - 0.1) / 0.75);
         else head = vec.add(at(1), vec.mul(vec.sub(X.rest, at(1)), easeInOut((u - 0.85) / 0.15)));
+        X.bars.forEach((b, k) => (dip[k] = ring((u - 0.1 - (0.75 * k) / 7) * 3)));
+      }
+      // One bar: the mallet lifts over it, strikes at 0.3 s and goes home.
+      const i = info?.tap?.key === "strike" ? info.tap.pick : null;
+      if (c.strike > 0 && i !== null && !(c.play > 0)) {
+        const e = 1 - c.strike;
+        const hit = [X.bars[i].x, X.top + 0.06, 0.08];
+        const above = vec.add(hit, [0, 0.2, 0]);
+        if (e < 0.2) head = vec.add(X.rest, vec.mul(vec.sub(above, X.rest), easeInOut(e / 0.2)));
+        else if (e < 0.3)
+          head = vec.add(above, vec.mul(vec.sub(hit, above), ((e - 0.2) / 0.1) ** 2));
+        else head = vec.add(hit, vec.mul(vec.sub(X.rest, hit), easeInOut((e - 0.3) / 0.7)));
+        dip[i] = ring(e - 0.3);
       }
       out.parts.mallet = { offset: vec.sub(head, X.rest) };
-      out.amount = c.play;
+      X.bars.forEach((b, k) => (out.parts[`bar${k}`] = { offset: [0, dip[k], 0] }));
+      out.amount = Math.max(c.play, c.strike * 0.6);
     },
     build(k) {
       const X = XYLO;
@@ -530,8 +562,10 @@ export const RECIPES = {
       // The bars, with a nail at each end.
       X.bars.forEach((b, i) => {
         const half = (b.len / 2) * 0.86;
+        const bar = k.part(`bar${i}`, { pivot: [b.x, X.top, 0] });
         k.add(k.roundedBox(0.17, 0.05, b.len * 0.86, 5), {
           pos: [b.x, X.top, 0],
+          part: bar,
           flat: 0.18,
           kind: "wave",
           params: [0.012, i * 1.3],
@@ -540,6 +574,7 @@ export const RECIPES = {
         for (const s of [-1, 1])
           k.add(k.sphere(0.022), {
             pos: [b.x, X.top + 0.025, s * Math.min(half - 0.06, Math.abs(railZ(b.x, s)))],
+            part: bar,
             weight: 3,
             pattern: false,
             color: (c) => chrome(c),

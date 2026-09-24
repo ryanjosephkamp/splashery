@@ -168,10 +168,51 @@ drive(t, c, out, info) {
   over `ease` seconds.
 - `{ key: "stoke", label: "Stoke", type: "pulse", ease: 1.5 }`: jumps to 1 and falls back to 0.
 
-**Action**: `action: { key: "open", label: "Open or close", sound: { on: "open", off: "close" } }`
-(or `sound: "fire"`). A tap on the toy (and the button in the Play tab) toggles a toggle or fires a
-pulse. Sounds: poke, hop, bounce, paint, clay, drop, whoosh, chime, open, close, fire, pop,
-heartbeat, click. Toys without an action hop when tapped.
+**Action**: `action: { key: "open", label: "Open or close" }`. A tap on the toy (and the button in
+the Play tab) toggles a toggle or fires a pulse. Toys without an action hop when tapped.
+
+A tap also knows where it landed. `action.at(point, c)` gets the tapped point in the recipe's own
+coordinates (never for the Play button) and may return another control to fire, `{ key, pick }` to
+fire a control and pick an item, or nothing for the usual action. `drive` sees the last tap as
+`info.tap = { point, key, pick, time, n }`. The xylophone uses it: a tap on bar `i` returns
+`{ key: "strike", pick: i }` and its drive moves the mallet to that bar.
+
+**Sound**: each shelf toy's tap sound is a spec in `src/toy-sounds.js` (not in the recipe), built
+from the voice library in `src/voices.js` (its header lists the parameters):
+
+```js
+"wooden-elephant": [
+  { voice: "wood", f: 520, decay: 1.2 },               // a knock
+  { voice: "brass", at: 0.15, f: "A4", decay: 1.8 },   // then a toy trumpet
+],
+lamp: { on: { voice: "switch", f: 3200 }, off: { voice: "switch", f: 2500 } }, // a toggle
+xylophone: { voice: "bar", notes: "C5 D5 E5 F5 G5 A5 B5 C6", step: 0.32, at: 0.3 }, // a tune
+```
+
+A tap that picked item `i` plays only note `i` of the tune. Every toy needs an entry and no two may
+be the same (the unit tests check). Old shared names ("chime", "pop" and so on) still work as specs.
+Check a new sound with `node tools/sound-check.mjs <id> --sheet=out.png`.
+
+**Grab**: `grab: { radius: 0.55, max: 0.9 }` (in toy radii) makes a toy stretchy: with the Orbit
+tool, a drag that starts on it pulls the grabbed part (up to `max`) and it springs back when let go.
+
+**Scan rigs** (`src/rigs.js`): a captured toy can have the same `controls`, `action` and `drive` as
+a recipe, plus `parts`, each made of soft ellipsoid regions in world coordinates:
+
+```js
+"cat-statue": {
+  parts: [{ name: "head", pivot: [0.05, 0.35, 0.4], axis: [0, 1, 0],
+            regions: [{ at: [0.06, 0.74, 0.5], r: [0.48, 0.5, 0.4], soft: 0.3 }] }],
+  controls: [{ key: "look", label: "Look", type: "pulse", ease: 2.4 }],
+  action: { key: "look", label: "Look around" },
+  drive(t, c, out) { out.parts.head = { angle: 0.5 * Math.sin(Math.PI * (1 - c.look)) } },
+},
+```
+
+A GPU pass tags each splat with the region it falls in when the toy loads; `soft` (a fraction of the
+radius) blends the edge so the part bends into the rest of the toy. Up to 15 parts and 12 regions.
+Open the app with `?rig=show` to tint each part while placing regions. `out.body` (squash, offset,
+rotation) moves the whole scan, for squeezes and hops.
 
 **Options** rebuild the toy and are saved in the scene (`o` in `build`):
 

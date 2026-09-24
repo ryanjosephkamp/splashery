@@ -377,7 +377,7 @@ export const RECIPES = {
       { key: "pupil", label: "Pupil", type: "slider", default: 0.35 },
       { key: "light", label: "Blink", type: "pulse", ease: 3.2 },
     ],
-    action: { key: "light", label: "Blink", sound: "whoosh" },
+    action: { key: "light", label: "Blink" },
     // By itself the eye glances from place to place, with quick jumps and
     // still moments between them. A tap makes it blink, stare at you and
     // snap its pupil small before it goes back to looking round.

@@ -372,7 +372,7 @@ export const RECIPES = {
       { key: "warmth", label: "Warmth", type: "slider", default: 0 },
       { key: "thaw", label: "Melt", type: "pulse", ease: 5 },
     ],
-    action: { key: "thaw", label: "Melt and refreeze", sound: "drop" },
+    action: { key: "thaw", label: "Melt and refreeze" },
     drive(t, c, out) {
       // A tap warms it up quickly, so the scoops slump and drips run down the
       // cone, holds for a moment, then it refreezes.
@@ -699,7 +699,7 @@ export const RECIPES = {
       { key: "candles", label: "Candles", type: "slider", min: 1, max: 9, step: 1, default: 5 },
     ],
     controls: [{ key: "out", label: "Blown out", type: "toggle", default: 0, ease: 0.6 }],
-    action: { key: "out", label: "Blow out", sound: { on: "whoosh", off: "fire" } },
+    action: { key: "out", label: "Blow out" },
     drive(t, c, out) {
       out.parts.flames = { visible: 1 - smoothstep(0, 0.55, c.out) };
       out.parts.smoke = { visible: smoothstep(0.25, 1, c.out) };
@@ -877,7 +877,7 @@ export const RECIPES = {
   popcorn: {
     alive: true,
     controls: [{ key: "pop", label: "Pop", type: "pulse", ease: 1.5 }],
-    action: { key: "pop", label: "Pop!", sound: "pop" },
+    action: { key: "pop", label: "Pop!" },
     drive(t, c, out) {
       const p = 1 - c.pop;
       for (let j = 0; j < POPS.length; j++) {
@@ -1066,7 +1066,7 @@ export const RECIPES = {
       { key: "fruit", label: "Fruit inside", type: "switch", default: true },
     ],
     controls: [{ key: "poke", label: "Poke", type: "pulse", ease: 2.4 }],
-    action: { key: "poke", label: "Poke", sound: "bounce" },
+    action: { key: "poke", label: "Poke" },
     drive(t, c, out, info) {
       const w = jiggle(t, info.time, c.poke);
       out.parts.jelly = {
@@ -1212,7 +1212,7 @@ export const RECIPES = {
       { key: "syrup", label: "Syrup", type: "slider", default: 0.8 },
       { key: "flip", label: "Flip", type: "pulse", ease: 1.3 },
     ],
-    action: { key: "flip", label: "Flip the top one", sound: "whoosh" },
+    action: { key: "flip", label: "Flip the top one" },
     drive(t, c, out) {
       out.grow = c.syrup;
       const s = 1 - c.flip;
@@ -1771,6 +1771,8 @@ export const RECIPES = {
 
   "gummy-bear": {
     alive: true,
+    // Drag it to stretch it; let go and it springs back (src/player.js).
+    grab: { radius: 0.55, max: 0.9 },
     options: [
       {
         key: "color",
@@ -1788,7 +1790,7 @@ export const RECIPES = {
       },
     ],
     controls: [{ key: "squish", label: "Squish", type: "pulse", ease: 2 }],
-    action: { key: "squish", label: "Squish", sound: "bounce" },
+    action: { key: "squish", label: "Squish" },
     drive(t, c, out, info) {
       const w = jiggle(t, info.time, c.squish, { idle: 0.6 });
       out.body = {
@@ -1995,7 +1997,7 @@ export const RECIPES = {
       },
     ],
     controls: [{ key: "serve", label: "Take a slice", type: "toggle", default: 0, ease: 1.1 }],
-    action: { key: "serve", label: "Take a slice", sound: { on: "whoosh", off: "drop" } },
+    action: { key: "serve", label: "Take a slice" },
     drive(t, c, out) {
       // Linear in the eased value, so the cheese strings (which grow in with
       // it) always reach the slice.
@@ -2291,7 +2293,7 @@ export const RECIPES = {
 
   burger: {
     controls: [{ key: "explode", label: "Explode view", type: "toggle", default: 0, ease: 1.2 }],
-    action: { key: "explode", label: "Explode view", sound: { on: "whoosh", off: "drop" } },
+    action: { key: "explode", label: "Explode view" },
     drive(t, c, out) {
       const e = easeInOut(c.explode);
       BURGER_LAYERS.forEach((name, i) => {
@@ -2694,7 +2696,7 @@ export const RECIPES = {
       { key: "cup", label: "Egg cup", type: "color", default: "#8fd6c8" },
     ],
     controls: [{ key: "crack", label: "Cracked open", type: "toggle", default: 0, ease: 0.9 }],
-    action: { key: "crack", label: "Crack", sound: { on: "pop", off: "close" } },
+    action: { key: "crack", label: "Crack" },
     drive(t, c, out) {
       const e = easeInOut(c.crack);
       out.parts.cap = { angle: -2.0 * e, offset: [0, 0.06 * Math.sin(Math.PI * e), 0] };
@@ -2857,7 +2859,7 @@ export const RECIPES = {
       { key: "hot", label: "Steam", type: "slider", default: 0.7 },
       { key: "stir", label: "Stir", type: "pulse", ease: 3.2 },
     ],
-    action: { key: "stir", label: "Stir", sound: "chime" },
+    action: { key: "stir", label: "Stir" },
     // A stir spins the coffee twice round and twists the latte art into a
     // swirl (the middle turns further than the edge) that relaxes back as it
     // stops, while a puff of steam curls up.

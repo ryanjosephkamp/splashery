@@ -9,7 +9,8 @@
 // steps), so frames land at the same toy time on any machine. --taps=3 taps
 // three times, --gap seconds apart (times count from the last tap).
 // --bg sets the page colour (dark theme by default). --opt=style=double sets a
-// toy option first.
+// toy option first. --at=x,y,z taps that point (in the recipe's coordinates)
+// instead of pressing the action, for toys whose tap depends on where it lands.
 
 import { chromium } from "@playwright/test";
 import fs from "node:fs";
@@ -30,6 +31,7 @@ const times = opt("times", "0.1,0.3,0.6,1,1.5,2.2,3").split(",").map(Number);
 const taps = Number(opt("taps", 1));
 const gap = Number(opt("gap", 0.25));
 const toyOpt = opt("opt", "");
+const at = opt("at", "") ? opt("at", "").split(",").map(Number) : null;
 
 fs.mkdirSync(outDir, { recursive: true });
 const browser = await chromium.launch({
@@ -47,7 +49,7 @@ await page.goto(`${base}?renderer=webgl2&profile=high&adapt=off`);
 await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
 for (const id of ids) {
   const dataUrl = await page.evaluate(
-    async ({ id, size, bg, times, taps, gap, toyOpt }) => {
+    async ({ id, size, bg, times, taps, gap, toyOpt, at }) => {
       const { app, player } = window.__splashery;
       await app.chooseToy(id);
       if (toyOpt) {
@@ -91,8 +93,11 @@ for (const id of ids) {
       };
       await advance(0.5);
       const frames = [await shot()];
+      // Recipe coordinates -> world (a kit toy is centred and scaled).
+      const tf = player.motion.ctx?.transform;
+      const world = at && (tf ? at.map((v, i) => (v - tf.center[i]) * tf.scale) : at);
       for (let i = 0; i < taps; i++) {
-        player.act();
+        player.act(world || null);
         if (i < taps - 1) await advance(gap);
       }
       let now = 0;
@@ -119,7 +124,7 @@ for (const id of ids) {
       });
       return out.toDataURL("image/png");
     },
-    { id, size, bg, times, taps, gap, toyOpt },
+    { id, size, bg, times, taps, gap, toyOpt, at },
   );
   const out = path.join(outDir, `${id}${suffix}.png`);
   fs.writeFileSync(out, Buffer.from(dataUrl.split(",")[1], "base64"));

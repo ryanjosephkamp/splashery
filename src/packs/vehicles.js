@@ -2630,7 +2630,7 @@ export const RECIPES = {
     alive: true,
     options: [{ key: "color", label: "Colour", type: "color", default: "#d62d2d" }],
     controls: [{ key: "launch", label: "Launch", type: "pulse", ease: 7 }],
-    action: { key: "launch", label: "Launch", sound: "whoosh" },
+    action: { key: "launch", label: "Launch" },
     drive(t, c, out, info) {
       const on = c.launch > 0.001;
       const p = on ? 1 - c.launch : 1;
@@ -2659,7 +2659,7 @@ export const RECIPES = {
     alive: true,
     options: [{ key: "color", label: "Colour", type: "color", default: "#e8452c" }],
     controls: [{ key: "fly", label: "Fly", type: "toggle", default: 0, ease: 2.4 }],
-    action: { key: "fly", label: "Take off or land", sound: "whoosh" },
+    action: { key: "fly", label: "Take off or land" },
     drive(t, c, out) {
       const f = easeInOut(c.fly);
       const bob = 0.04 * Math.sin(t * 1.9) * f;
@@ -2701,7 +2701,7 @@ export const RECIPES = {
       { key: "c2", label: "Colour 2", type: "color", default: "#f6c945" },
     ],
     controls: [{ key: "burn", label: "Burner", type: "pulse", ease: 4 }],
-    action: { key: "burn", label: "Fire the burner", sound: "fire" },
+    action: { key: "burn", label: "Fire the burner" },
     drive(t, c, out) {
       // The burner roars at once, the envelope swells with hot air, and the
       // balloon climbs, then drifts back down as it cools.
@@ -2724,7 +2724,7 @@ export const RECIPES = {
     alive: true,
     options: [{ key: "color", label: "Colour", type: "color", default: "#1f6b43" }],
     controls: [{ key: "toot", label: "Whistle", type: "pulse", ease: 2 }],
-    action: { key: "toot", label: "Blow the whistle", sound: "chime" },
+    action: { key: "toot", label: "Blow the whistle" },
     drive(t, c, out) {
       const w = t * 2.2;
       const a = -(w + burst(c.toot, 2));
@@ -2744,7 +2744,7 @@ export const RECIPES = {
     alive: true,
     options: [{ key: "funnel", label: "Funnels", type: "color", default: "#c0392b" }],
     controls: [{ key: "horn", label: "Horn", type: "pulse", ease: 2.5 }],
-    action: { key: "horn", label: "Sound the horn", sound: "chime" },
+    action: { key: "horn", label: "Sound the horn" },
     drive(t, c, out) {
       const tq = tilt(0.025 * Math.sin(t * 0.9), 0.012 * Math.sin(t * 0.63 + 1));
       out.parts.ship = carried(LINER.centre, tq, LINER.centre, [0, 0.015 * Math.sin(t * 1.1), 0]);
@@ -2761,7 +2761,7 @@ export const RECIPES = {
       { key: "stripes", label: "Stripes", type: "switch", default: true },
     ],
     controls: [{ key: "vroom", label: "Rev", type: "pulse", ease: 1.8 }],
-    action: { key: "vroom", label: "Rev the engine", sound: "whoosh" },
+    action: { key: "vroom", label: "Rev the engine" },
     drive(t, c, out) {
       const a = -(t * 2.5 + burst(c.vroom, 3));
       out.parts.front = { angle: a };
@@ -2789,7 +2789,7 @@ export const RECIPES = {
       },
     ],
     controls: [{ key: "beep", label: "Stop", type: "pulse", ease: 4.5 }],
-    action: { key: "beep", label: "Stop for passengers", sound: "open" },
+    action: { key: "beep", label: "Stop for passengers" },
     drive(t, c, out) {
       // A bus stop: the lights flash, the stop arm swings out and the doors
       // open; then everything folds away again.
@@ -2817,7 +2817,7 @@ export const RECIPES = {
       { key: "wings", label: "Wings", type: "color", default: "#f4c542" },
     ],
     controls: [{ key: "loop", label: "Loop", type: "pulse", ease: 3 }],
-    action: { key: "loop", label: "Loop the loop", sound: "whoosh" },
+    action: { key: "loop", label: "Loop the loop" },
     drive(t, c, out) {
       out.parts.prop = { angle: t * 20 + burst(c.loop, 4) };
       const th = c.loop > 0.001 ? TAU * smoothstep(0, 1, 1 - c.loop) : 0;
@@ -2837,7 +2837,7 @@ export const RECIPES = {
     alive: true,
     options: [{ key: "color", label: "Tail", type: "color", default: "#1f5fae" }],
     controls: [{ key: "climb", label: "Climb", type: "pulse", ease: 3.5 }],
-    action: { key: "climb", label: "Climb and bank", sound: "whoosh" },
+    action: { key: "climb", label: "Climb and bank" },
     drive(t, c, out) {
       // Climbs with the nose up while banking hard left, then hard right.
       const p = c.climb > 0.001 ? 1 - c.climb : 0;
@@ -2861,7 +2861,7 @@ export const RECIPES = {
       { key: "stripe", label: "Stripe", type: "color", default: "#1f5fae" },
     ],
     controls: [{ key: "gust", label: "Gust", type: "pulse", ease: 3.5 }],
-    action: { key: "gust", label: "A gust of wind", sound: "whoosh" },
+    action: { key: "gust", label: "A gust of wind" },
     drive(t, c, out) {
       // The gust heels her right over at once, throws up spray, and she
       // rocks back upright as it passes.
@@ -2880,7 +2880,7 @@ export const RECIPES = {
     alive: true,
     options: [{ key: "color", label: "Colour", type: "color", default: "#f5c21b" }],
     controls: [{ key: "dive", label: "Dive", type: "pulse", ease: 5 }],
-    action: { key: "dive", label: "Dive and surface", sound: "drop" },
+    action: { key: "dive", label: "Dive and surface" },
     drive(t, c, out) {
       // Periscope down, nose down and a rush of bubbles; she dives, then
       // noses back up to the surface and raises the periscope again.
@@ -2906,7 +2906,7 @@ export const RECIPES = {
     alive: true,
     options: [{ key: "color", label: "Frame", type: "color", default: "#1e88e5" }],
     controls: [{ key: "ring", label: "Bell", type: "pulse", ease: 2.5 }],
-    action: { key: "ring", label: "Ring the bell", sound: "chime" },
+    action: { key: "ring", label: "Ring the bell" },
     drive(t, c, out, info) {
       // Ring-ring: the bell shakes and rings out, and the rider pedals hard
       // (whole turns, so the wheels end where they would have been).
@@ -2928,7 +2928,7 @@ export const RECIPES = {
     alive: true,
     options: [{ key: "color", label: "Colour", type: "color", default: "#c8322b" }],
     controls: [{ key: "chug", label: "Chug", type: "pulse", ease: 2 }],
-    action: { key: "chug", label: "Chug chug", sound: "pop" },
+    action: { key: "chug", label: "Chug chug" },
     drive(t, c, out, info) {
       out.parts.rear = { angle: -(t * 1.2 + burst(c.chug, 1)) };
       out.parts.front = { angle: -((t * 1.2 * TRACTOR.rr) / TRACTOR.fr + burst(c.chug, 2)) };
@@ -2941,7 +2941,7 @@ export const RECIPES = {
   ufo: {
     alive: true,
     controls: [{ key: "beam", label: "Beam", type: "toggle", default: 1, ease: 1.6 }],
-    action: { key: "beam", label: "Beam on or off", sound: "whoosh" },
+    action: { key: "beam", label: "Beam on or off" },
     drive(t, c, out) {
       const b = easeInOut(c.beam);
       const bob = [0, 0.05 * Math.sin(t * 1.3), 0];

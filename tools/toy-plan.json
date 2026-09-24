@@ -99,10 +99,11 @@
       "sound": "Clattering shells."
     },
     "rubber-duck-real": {
-      "v": "new",
+      "v": "keep",
       "owner": "Squeeze and quack. It must differ from the other rubber duck.",
       "effect": "Squeezes flat and springs back.",
-      "sound": "Squeaky squeeze (high whistle) — the other duck quacks."
+      "sound": "Squeaky squeeze (high whistle) — the other duck quacks.",
+      "improved": "D: a whole-toy rig. A tap squeezes it flat; it springs back taller, wobbles and settles (1.4 s), with a high rubber squeak (the other duck quacks)."
     },
     "garden-gnome": {
       "v": "new",
@@ -174,10 +175,11 @@
       "sound": "Match strike and soft whoosh."
     },
     "cat-statue": {
-      "v": "new",
+      "v": "keep",
       "owner": "Like the bust: the cat moves a bit.",
       "effect": "The head turns and the tail swishes once.",
-      "sound": "Stone grind and a tiny mew."
+      "sound": "Stone grind and a tiny mew.",
+      "improved": "D: the first scan rig (src/rigs.js). A tap turns the head to one side and back, and the tail curled on the ground flicks its tip up (2.4 s)."
     },
     "chess-set": {
       "v": "new",
@@ -1020,11 +1022,12 @@
       "sound": "Soft taps."
     },
     "gummy-bear": {
-      "v": "more",
+      "v": "keep",
       "interactive": true,
       "owner": "Underwhelming. Press, hold and drag to stretch its arm or body, and let go to spring back with realistic physics.",
       "effect": "Drag to stretch (like the Magnet, with springy release); tap does a jelly jiggle.",
-      "sound": "Rubbery stretch and boing."
+      "sound": "Rubbery stretch and boing.",
+      "improved": "D: drag-to-stretch. With the Orbit tool, a drag that starts on the bear pulls the part you grabbed (up to about a body length) and it springs back with a few wobbles when you let go; a drag beside it still turns the view. A tap still does the jelly jiggle."
     },
     "pretzel": {
       "v": "new",
@@ -1463,7 +1466,8 @@
     "xylophone": {
       "v": "keep",
       "owner": "Incredible; basically perfect.",
-      "sound": "The scale it already plays, as mallet tones."
+      "sound": "The scale it already plays, as mallet tones.",
+      "improved": "D: a tap on one bar lifts the mallet over that bar, strikes it and plays its note; a tap anywhere else plays the scale. Each bar dips as the mallet hits it."
     },
     "rocket": {
       "v": "keep",

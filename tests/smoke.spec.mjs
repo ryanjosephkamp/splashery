@@ -628,6 +628,146 @@ test.describe("Splashery v3 engine (WebGL2)", () => {
     await expect(page.locator("#sound-toggle")).toHaveAttribute("aria-pressed", "true");
   });
 
+  test("a tap plays the toy's own sound, and a toggle plays its on and off halves", async ({
+    page,
+  }) => {
+    const problems = watchConsole(page);
+    await page.addInitScript(() => localStorage.setItem("splashery.sound", "on"));
+    await loadApp(page);
+    // Record what the app asks the sound engine to play.
+    await page.evaluate(() => {
+      const s = window.__splashery.app.sound;
+      window.__played = [];
+      const play = s.play.bind(s);
+      s.play = (spec, o) => {
+        window.__played.push(JSON.stringify(spec));
+        play(spec, o);
+      };
+    });
+    const { TOY_SOUNDS } = await import("../src/toy-sounds.js");
+    await page.click(".toy-card[data-toy='chest']");
+    await waitForToy(page, "Treasure chest");
+    await page.evaluate(() => (window.__played = []));
+    await page.click("#toy-action");
+    await page.waitForTimeout(300);
+    await page.click("#toy-action");
+    await page.waitForTimeout(300);
+    const played = await page.evaluate(() => window.__played);
+    expect(played).toEqual([
+      JSON.stringify(TOY_SOUNDS.chest.on),
+      JSON.stringify(TOY_SOUNDS.chest.off),
+    ]);
+    // A toy that only hops plays its own sound too.
+    await page.click(".chip[data-category='balls']");
+    await page.click(".toy-card[data-toy='basketball']");
+    await waitForToy(page, "Basketball");
+    await page.evaluate(() => (window.__played = []));
+    const box = await page.locator("#stage").boundingBox();
+    await page.mouse.click(box.x + box.width / 2, box.y + box.height / 2);
+    await expect
+      .poll(() => page.evaluate(() => window.__played))
+      .toEqual([JSON.stringify(TOY_SOUNDS.basketball)]);
+    // The audio context really ran.
+    expect(await page.evaluate(() => window.__splashery.app.sound.ctx?.state)).toBe("running");
+    expect(problems).toEqual([]);
+  });
+
+  test("a scan rig moves a part of a captured toy: the cat statue turns its head", async ({
+    page,
+  }) => {
+    const problems = watchConsole(page);
+    await loadApp(page);
+    await page.click(".toy-card[data-toy='cat-statue']");
+    await waitForToy(page, "Cat statue");
+    await expect(page.locator("#toy-action")).toHaveText("Look around");
+    // No idle turntable, so only the rig moves.
+    await page.evaluate(() => window.__splashery.player.camera.setTurntable(false));
+    const canvas = page.locator("#stage");
+    const rest = await canvas.screenshot({ type: "png" });
+    await page.click("#toy-action");
+    await page.waitForTimeout(450);
+    const turned = await canvas.screenshot({ type: "png" });
+    await page.waitForTimeout(3000);
+    const back = await canvas.screenshot({ type: "png" });
+    const moved = await countDifferentPixels(page, rest, turned);
+    expect(moved).toBeGreaterThan(1500);
+    // Only the head and tail move, and they come back.
+    expect(await countDifferentPixels(page, rest, back)).toBeLessThan(moved / 4);
+    expect(problems).toEqual([]);
+  });
+
+  test("a stretchy toy stretches when dragged and springs back; a drag off it orbits", async ({
+    page,
+  }) => {
+    const problems = watchConsole(page);
+    await loadApp(page);
+    await page.click(".chip[data-category='food']");
+    await page.click(".toy-card[data-toy='gummy-bear']");
+    await waitForToy(page, "Gummy bear");
+    await expect(page.locator("#tool-hint")).toContainText("stretch it");
+    // No idle turntable, so the camera turns only if a drag turns it.
+    await page.evaluate(() => window.__splashery.player.camera.setTurntable(false));
+    const canvas = page.locator("#stage");
+    const box = await canvas.boundingBox();
+    const yaw = () => page.evaluate(() => window.__splashery.player.camera.tgt.yaw);
+    const yaw0 = await yaw();
+    const rest = await canvas.screenshot({ type: "png" });
+    const x0 = box.x + box.width / 2;
+    const y0 = box.y + box.height * 0.52;
+    await page.mouse.move(x0, y0);
+    await page.mouse.down();
+    for (let i = 1; i <= 8; i++) await page.mouse.move(x0 + i * 20, y0 - i * 8);
+    await expect.poll(() => page.evaluate(() => window.__splashery.player.driver.grab.held)).toBe(true); // prettier-ignore
+    await page.waitForTimeout(400);
+    const held = await canvas.screenshot({ type: "png" });
+    expect(await countDifferentPixels(page, rest, held)).toBeGreaterThan(3000);
+    await page.mouse.up();
+    // The camera did not turn, and the bear springs back.
+    expect(await yaw()).toBeCloseTo(yaw0, 3);
+    await expect
+      .poll(() => page.evaluate(() => window.__splashery.player.driver.grab.on), { timeout: 5000 })
+      .toBe(false);
+    // A drag that starts beside the toy still orbits.
+    await page.mouse.move(box.x + 30, box.y + box.height - 60);
+    await page.mouse.down();
+    for (let i = 1; i <= 8; i++)
+      await page.mouse.move(box.x + 30 + i * 25, box.y + box.height - 60);
+    await page.mouse.up();
+    expect(Math.abs((await yaw()) - yaw0)).toBeGreaterThan(0.1);
+    expect(problems).toEqual([]);
+  });
+
+  test("every toy's sound renders: audible, not clipping, under five seconds", async ({ page }) => {
+    await page.goto("/tools/");
+    const bad = await page.evaluate(async () => {
+      const { TOY_SOUNDS } = await import("/src/toy-sounds.js");
+      const { playSpec, specFor } = await import("/src/voices.js");
+      const { masterChain } = await import("/src/sound.js");
+      const out = [];
+      for (const [id, spec] of Object.entries(TOY_SOUNDS)) {
+        for (const on of [true, false]) {
+          const half = specFor(spec, on);
+          if (!on && half === specFor(spec, true)) continue;
+          const rate = 16000;
+          const ctx = new OfflineAudioContext(1, rate * 6, rate);
+          playSpec(ctx, masterChain(ctx), 0.01, half);
+          const d = (await ctx.startRendering()).getChannelData(0);
+          let peak = 0;
+          let last = 0;
+          for (let i = 0; i < d.length; i++) {
+            const a = Math.abs(d[i]);
+            if (a > peak) peak = a;
+            if (a > 0.003) last = i;
+          }
+          if (!(peak > 0.02 && peak < 0.99 && last / rate < 5))
+            out.push(`${id}${on ? "" : ":off"} peak ${peak.toFixed(3)} ${(last / rate).toFixed(2)} s`); // prettier-ignore
+        }
+      }
+      return out;
+    });
+    expect(bad).toEqual([]);
+  });
+
   test("v3 screenshots at 1440x900 and 390x844", async ({ browser }) => {
     fs.mkdirSync(SHOTS, { recursive: true });
     const desk = await browser.newContext({ viewport: { width: 1440, height: 900 } });
