@@ -6,6 +6,7 @@
 //
 // Writes <out-dir>/<id><suffix>.png. The background defaults to the dark
 // theme's page colour; pass --bg=#f4f1ea (or any colour) to check light mode.
+// --set=open=0 sets a toy control first (for example, a closed book).
 
 import { chromium } from "@playwright/test";
 import fs from "node:fs";
@@ -23,6 +24,7 @@ const size = Number(opt("size", 480));
 const bg = opt("bg", "#111111");
 const suffix = opt("suffix", "");
 const theme = opt("theme", "dark");
+const set = opt("set", "");
 
 fs.mkdirSync(outDir, { recursive: true });
 const browser = await chromium.launch({
@@ -44,10 +46,14 @@ await page.goto(`${base}?renderer=webgl2&profile=high&adapt=off`);
 await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
 for (const id of ids) {
   const dataUrl = await page.evaluate(
-    async ({ id, size, bg }) => {
+    async ({ id, size, bg, set }) => {
       const { app, player } = window.__splashery;
       await app.chooseToy(id);
       app.setLook({ background: bg });
+      if (set) {
+        const [key, value] = set.split("=");
+        player.motion.setControl(key, Number(value), { snap: true });
+      }
       player.idle.weight = 0;
       await new Promise((r) => setTimeout(r, 2500));
       player.stage.setFixedSize([size, size]);
@@ -58,7 +64,7 @@ for (const id of ids) {
       player.stage.setFixedSize(null);
       return shot.toDataURL("image/png");
     },
-    { id, size, bg },
+    { id, size, bg, set },
   );
   const out = path.join(outDir, `${id}${suffix}.png`);
   fs.writeFileSync(out, Buffer.from(dataUrl.split(",")[1], "base64"));
