@@ -120,9 +120,14 @@ const TRUNK = { base: [-0.86, 0.52, 0.45] };
 
 // The marble bust: the neck pivot, the jaw hinge and when each syllable of
 // "SALVE, AMICE!" starts (matching its sound).
+// The face looks 20 degrees toward -x; "side" is the jaw's hinge axis.
+const BUST_FACE = unit([-0.33, 0, 0.94]);
 const BUST = {
   head: [-0.02, 0.05, 0.12],
-  jaw: [-0.16, 0.27, 0.16],
+  jaw: [-0.12, 0.25, 0.28],
+  face: BUST_FACE,
+  side: unit([BUST_FACE[2], 0, -BUST_FACE[0]]),
+  mouth: [-0.168, 0.212, 0.446],
   syllables: [0.62, 0.82, 1.1, 1.3, 1.5],
 };
 
@@ -877,8 +882,8 @@ export const RIGS = {
         // The lower lip and chin, hinged below the ear.
         name: "jaw",
         pivot: BUST.jaw,
-        axis: [1, 0, 0],
-        regions: [{ at: [-0.16, 0.15, 0.44], r: [0.1, 0.07, 0.09], over: true }],
+        axis: BUST.side,
+        regions: [{ at: [-0.19, 0.155, 0.455], r: [0.1, 0.065, 0.08], over: true }],
       },
     ],
     addon: {
@@ -886,18 +891,20 @@ export const RIGS = {
       build(k) {
         const at = [0.8, 0.86, 0.42];
         const part = k.part("bubble", { pivot: [0.42, 0.52, 0.38] });
-        // The dark inside of the mouth, behind the lips (seen when the jaw drops).
+        // The shadowed opening behind the lips, seen only while the jaw is down.
         const mouth = k.part("mouth", { pivot: BUST.head });
-        k.cloud({ share: 0.08, part: mouth, pattern: false }, (rand) => {
-          const d = [rand() * 2 - 1, rand() * 2 - 1, rand() * 2 - 1];
-          if (d[0] * d[0] + d[1] * d[1] + d[2] * d[2] > 1) return null;
-          return {
-            p: [-0.16 + d[0] * 0.085, 0.205 + d[1] * 0.035, 0.425 + d[2] * 0.04],
-            color: mix("#2a1d18", "#4a2c26", rand()),
-            size: 1.2,
-            opacity: 1,
-          };
-        });
+        panel(
+          k,
+          BUST.mouth,
+          BUST.face,
+          0.062,
+          0.026,
+          0.06,
+          mouth,
+          (u, v, rand) =>
+            (u - 0.5) ** 2 + (v - 0.5) ** 2 < 0.25 ? mix("#3e3a36", "#5a544e", rand()) : null,
+          { size: 0.8 },
+        );
         const lines = ["SALVE,", "AMICE!"];
         const W = 0.5;
         const H = 0.3;
@@ -942,11 +949,11 @@ export const RIGS = {
       for (const s of BUST.syllables)
         open = Math.max(open, Math.sin(Math.PI * band(e, s, s + 0.17)));
       out.addon = {
-        parts: { bubble: { scale: say }, mouth: { quat: qh, visible: e < 0 ? 0 : 1 } },
+        parts: { bubble: { scale: say }, mouth: { quat: qh, visible: open > 0.06 ? 1 : 0 } },
       };
       if (e < 0) return;
       out.parts.head = { quat: qh };
-      out.parts.jaw = chain(qh, BUST.head, quatAxisAngle([1, 0, 0], 0.13 * open), BUST.jaw);
+      out.parts.jaw = chain(qh, BUST.head, quatAxisAngle(BUST.side, 0.16 * open), BUST.jaw);
     },
   },
 
