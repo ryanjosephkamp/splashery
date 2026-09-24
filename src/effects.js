@@ -890,7 +890,7 @@ fn spKitCenter(p0: vec3f) -> vec3f {
 // blend into the rest of the toy). The parts move by uSpParts as in kits.
 const GLSL_RIG_UNIFORMS = `uniform vec4 uSpParts[48];
 uniform vec4 uSpRigTint[16]; // per part: rgb glow added, a brightness gain
-uniform vec4 uSpFx[36];      // whole-body effects: 4 slots of 9 vec4 (see fxTable in src/rig-fx.js)
+uniform vec4 uSpFx[40];      // whole-body effects: 4 slots of 10 vec4 (see fxTable in src/rig-fx.js)
 uniform vec4 uSpRigDbg;  // x > 0 tints each part (?rig=show), and the colour keys`;
 
 const GLSL_RIG_FUNCTIONS = `
@@ -938,7 +938,26 @@ vec3 spRigFx(vec3 p, vec3 rest, vec4 pk, int part, int o) {
   if (sel <= 0.001) return p;
   float cell = f7.y;
   vec3 cid = cell > 0.0 ? floor(rest / cell) : vec3(0.0);
-  float hc = cell > 0.0 ? spCellHash(cid) : spHash(splat.index * 37u + 3u);
+  vec3 pc = (cid + 0.5) * cell;
+  if (cell < 0.0) {
+    // Voronoi pieces: the nearest of the jittered points in the 27 cells round.
+    float sz = -cell;
+    vec3 g = floor(rest / sz);
+    float bd = 1e9;
+    for (int z = -1; z <= 1; z++)
+      for (int y = -1; y <= 1; y++)
+        for (int x = -1; x <= 1; x++) {
+          vec3 c = g + vec3(float(x), float(y), float(z));
+          vec3 q = (c + 0.5 + 0.38 * spCellHash3(c)) * sz;
+          float d = dot(rest - q, rest - q);
+          if (d < bd) {
+            bd = d;
+            cid = c;
+            pc = q;
+          }
+        }
+  }
+  float hc = cell != 0.0 ? spCellHash(cid) : spHash(splat.index * 37u + 3u);
   int pt = int(f0.w + 0.5);
   float z = f1.z;
   float env = 1.0;
@@ -967,7 +986,7 @@ vec3 spRigFx(vec3 p, vec3 rest, vec4 pk, int part, int o) {
   } else if (mv == 2) {
     p += f3.xyz * m;
   } else if (mv == 3) {
-    vec3 cc = cell > 0.0 ? (cid + 0.5) * cell - org : v;
+    vec3 cc = cell != 0.0 ? pc - org : v;
     vec3 dir = normalize(cc + vec3(1e-5)) * 0.9 + spCellHash3(cid) * 0.5 + vec3(0.0, f3.w, 0.0);
     p += dir * m * (0.7 + 0.6 * hc);
     if (spHash(splat.index * 41u + 9u) < 0.12) p += spHash3(splat.index * 43u + 1u) * m * 0.6;
@@ -1008,6 +1027,35 @@ vec3 spRigFx(vec3 p, vec3 rest, vec4 pk, int part, int o) {
     float s = 1.0 - (1.0 - pow(1.0 / n, 0.4)) * m;
     p = org + (p - org) * s + dir * f7.w * m;
     spKitScale *= mix(1.0, s, 0.7);
+  } else if (mv == 11) {
+    vec4 f9 = uSpFx[o + 9];
+    if (hc <= f9.x) {
+      float u = clamp(env, 0.0, 1.0);
+      vec3 outd = normalize(pc - org + vec3(1e-4));
+      vec3 disp = (outd * f3.w * u * (1.0 - 0.5 * u) + f3.xyz * u * u) * f1.x * sel;
+      // Pieces land on the floor instead of falling through it.
+      float floorY = uSpToy.y - uSpBodyF.x + 0.015 * uSpToy.w;
+      float yc = pc.y + disp.y;
+      if (yc < floorY) disp.y += floorY - yc;
+      float ang = u * f9.y * (hc * 2.0 - 1.0) * 3.0;
+      vec3 ax = normalize(spCellHash3(cid + 3.1) + vec3(1e-3));
+      p = pc + disp + spRotate(p - pc, ax, ang);
+      spPartQ = spQuatMul(vec4(ax * sin(ang * 0.5), cos(ang * 0.5)), spPartQ);
+    }
+  } else if (mv == 12) {
+    vec4 f9 = uSpFx[o + 9];
+    float sAlong = clamp(dot(v, f9.xyz) / max(f9.w, 1e-3), 0.0, 1.0);
+    float h = spHash(splat.index * 67u + 1u);
+    p += f3.xyz * m * sin(3.1415927 * sAlong) * sin(f7.x * f3.w + h * 6.2832);
+  } else if (mv == 13) {
+    vec4 f9 = uSpFx[o + 9];
+    vec3 ax = f3.xyz;
+    vec3 b1 = normalize(cross(ax, abs(ax.y) < 0.9 ? vec3(0.0, 1.0, 0.0) : vec3(1.0, 0.0, 0.0)));
+    vec3 b2 = cross(ax, b1);
+    float a = atan(dot(v, b2), dot(v, b1));
+    vec3 rad = v - ax * dot(v, ax);
+    float wv = f3.w * a - f1.z;
+    p += normalize(rad + vec3(1e-5)) * m * sin(wv) + ax * m * f9.x * cos(wv);
   }
   float c = f1.y * abs(env) * sel;
   int cm = int(f1.w + 0.5);
@@ -1053,14 +1101,14 @@ vec3 spRigCenter(vec3 p) {
     }
   }
   if (uSpRigDbg.x > 0.0) spTint += vec3(0.8, 0.0, 0.6) * pk.z + vec3(0.0, 0.7, 0.8) * pk.w;
-  for (int i = 0; i < 4; i++) p = spRigFx(p, rest, pk, part, i * 9);
+  for (int i = 0; i < 4; i++) p = spRigFx(p, rest, pk, part, i * 10);
   return p;
 }
 `;
 
 const WGSL_RIG_UNIFORMS = `uniform uSpParts: array<vec4f, 48>;
 uniform uSpRigTint: array<vec4f, 16>;
-uniform uSpFx: array<vec4f, 36>;
+uniform uSpFx: array<vec4f, 40>;
 uniform uSpRigDbg: vec4f;`;
 
 const WGSL_RIG_FUNCTIONS = `
@@ -1113,8 +1161,28 @@ fn spRigFx(p0: vec3f, rest: vec3f, pk: vec4f, part: i32, o: i32) -> vec3f {
   let cell = f7.y;
   var cid = vec3f(0.0);
   if (cell > 0.0) { cid = floor(rest / cell); }
+  var pc = (cid + vec3f(0.5)) * cell;
+  if (cell < 0.0) {
+    let sz = -cell;
+    let g = floor(rest / sz);
+    var bd = 1e9;
+    for (var z = -1; z <= 1; z++) {
+      for (var y = -1; y <= 1; y++) {
+        for (var x = -1; x <= 1; x++) {
+          let c = g + vec3f(f32(x), f32(y), f32(z));
+          let q = (c + vec3f(0.5) + 0.38 * spCellHash3(c)) * sz;
+          let d = dot(rest - q, rest - q);
+          if (d < bd) {
+            bd = d;
+            cid = c;
+            pc = q;
+          }
+        }
+      }
+    }
+  }
   var hc = spHash(splat.index * 37u + 3u);
-  if (cell > 0.0) { hc = spCellHash(cid); }
+  if (cell != 0.0) { hc = spCellHash(cid); }
   let pt = i32(f0.w + 0.5);
   let z = f1.z;
   var env = 1.0;
@@ -1144,7 +1212,7 @@ fn spRigFx(p0: vec3f, rest: vec3f, pk: vec4f, part: i32, o: i32) -> vec3f {
     p = p + f3.xyz * m;
   } else if (mv == 3) {
     var cc = v;
-    if (cell > 0.0) { cc = (cid + vec3f(0.5)) * cell - org; }
+    if (cell != 0.0) { cc = pc - org; }
     let dir = normalize(cc + vec3f(1e-5)) * 0.9 + spCellHash3(cid) * 0.5 + vec3f(0.0, f3.w, 0.0);
     p = p + dir * m * (0.7 + 0.6 * hc);
     if (spHash(splat.index * 41u + 9u) < 0.12) { p = p + spHash3(splat.index * 43u + 1u) * m * 0.6; }
@@ -1185,6 +1253,34 @@ fn spRigFx(p0: vec3f, rest: vec3f, pk: vec4f, part: i32, o: i32) -> vec3f {
     let s = 1.0 - (1.0 - pow(1.0 / n, 0.4)) * m;
     p = org + (p - org) * s + dir * f7.w * m;
     spKitScale = spKitScale * mix(1.0, s, 0.7);
+  } else if (mv == 11) {
+    let f9 = uniform.uSpFx[o + 9];
+    if (hc <= f9.x) {
+      let u = clamp(env, 0.0, 1.0);
+      let outd = normalize(pc - org + vec3f(1e-4));
+      var disp = (outd * f3.w * u * (1.0 - 0.5 * u) + f3.xyz * u * u) * f1.x * sel;
+      let floorY = uniform.uSpToy.y - uniform.uSpBodyF.x + 0.015 * uniform.uSpToy.w;
+      let yc = pc.y + disp.y;
+      if (yc < floorY) { disp.y = disp.y + floorY - yc; }
+      let ang = u * f9.y * (hc * 2.0 - 1.0) * 3.0;
+      let ax = normalize(spCellHash3(cid + vec3f(3.1)) + vec3f(1e-3));
+      p = pc + disp + spRotate(p - pc, ax, ang);
+      spPartQ = spQuatMul(vec4f(ax * sin(ang * 0.5), cos(ang * 0.5)), spPartQ);
+    }
+  } else if (mv == 12) {
+    let f9 = uniform.uSpFx[o + 9];
+    let sAlong = clamp(dot(v, f9.xyz) / max(f9.w, 1e-3), 0.0, 1.0);
+    let h = spHash(splat.index * 67u + 1u);
+    p = p + f3.xyz * m * sin(3.1415927 * sAlong) * sin(f7.x * f3.w + h * 6.2832);
+  } else if (mv == 13) {
+    let f9 = uniform.uSpFx[o + 9];
+    let ax = f3.xyz;
+    let b1 = normalize(cross(ax, select(vec3f(1.0, 0.0, 0.0), vec3f(0.0, 1.0, 0.0), abs(ax.y) < 0.9)));
+    let b2 = cross(ax, b1);
+    let a = atan2(dot(v, b2), dot(v, b1));
+    let rad = v - ax * dot(v, ax);
+    let wv = f3.w * a - f1.z;
+    p = p + normalize(rad + vec3f(1e-5)) * m * sin(wv) + ax * m * f9.x * cos(wv);
   }
   let c = f1.y * abs(env) * sel;
   let cm = i32(f1.w + 0.5);
@@ -1231,7 +1327,7 @@ fn spRigCenter(p0: vec3f) -> vec3f {
     }
   }
   if (uniform.uSpRigDbg.x > 0.0) { spTint = spTint + vec3f(0.8, 0.0, 0.6) * pk.z + vec3f(0.0, 0.7, 0.8) * pk.w; }
-  for (var i = 0; i < 4; i++) { p = spRigFx(p, rest, pk, part, i * 9); }
+  for (var i = 0; i < 4; i++) { p = spRigFx(p, rest, pk, part, i * 10); }
   return p;
 }
 `;

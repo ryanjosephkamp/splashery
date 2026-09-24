@@ -4,6 +4,9 @@
 import { rgb as hexColor } from "./kit.js";
 
 export const FX_SLOTS = 4;
+// vec4s per slot in uSpFx.
+export const FX_VEC4 = 10;
+const STRIDE = FX_VEC4 * 4;
 
 function unitAxis(a) {
   const l = Math.hypot(a[0], a[1], a[2]) || 1;
@@ -37,6 +40,16 @@ function unitAxis(a) {
 //            { peel: axis, hinge }          strips curl outwards from the hinge height
 //            { split: axis, n, spread }     the toy becomes n smaller copies round the
 //                                           axis, spread apart (move: 0..1)
+//            { fall: gravity, cell, voronoi, pop, spin, share }
+//                                           pieces break off, pop out, tumble and fall
+//                                           to the floor (use ramp; move = drop height)
+//            { vibrate: dir, freq, along, length }
+//                                           strings: a standing wave between the origin
+//                                           and origin + along * length, shaking along dir
+//            { writhe: axis, k, lift }      a travelling wave of k lobes round the axis
+//                                           swells and lifts the shape (phase moves it)
+//   Cells: `cell` cuts pieces on a grid; with `voronoi: true` they are
+//   rounder pieces round jittered points (drupelets, chunks).
 //   pattern  { front: width }               a shell growing from the origin (phase = radius)
 //            { band: dir, width }           a band along dir (phase = position)
 //            { stagger: spread, cell }      each piece bumps once as phase goes 0..1
@@ -47,17 +60,17 @@ function unitAxis(a) {
 //            | { brighten: true } | { sparkle: fraction } | { fade: true }
 //            | { darken: true }
 const SELECT = { all: 1, key0: 2, key1: 3, "not-key0": 4 };
-const MOVE = { push: 1, along: 2, scatter: 3, hop: 4, shiver: 5, turn: 6, bands: 7, bend: 8, peel: 9, split: 10 }; // prettier-ignore
+const MOVE = { push: 1, along: 2, scatter: 3, hop: 4, shiver: 5, turn: 6, bands: 7, bend: 8, peel: 9, split: 10, fall: 11, vibrate: 12, writhe: 13 }; // prettier-ignore
 const PATTERN = { front: 1, band: 2, stagger: 3, swirl: 4, ramp: 5, wave: 6 };
 const COLOR = { glow: 1, recolor: 2, brighten: 3, sparkle: 4, fade: 5, darken: 6 };
 
 const firstKey = (o, table) => (o ? Object.keys(o).find((k) => table[k]) : null);
 
-// The fixed part of the fx uniforms (9 vec4 per slot).
+// The fixed part of the fx uniforms (FX_VEC4 vec4 per slot).
 export function fxTable(rig, parts) {
-  const d = new Float32Array(FX_SLOTS * 36);
+  const d = new Float32Array(FX_SLOTS * STRIDE);
   (rig.fx || []).slice(0, FX_SLOTS).forEach((f, i) => {
-    const o = i * 36;
+    const o = i * STRIDE;
     const set = (k, v) => d.set(v, o + k * 4);
     const origin = f.origin || [0, 0, 0];
     let select = 1;
@@ -89,6 +102,17 @@ export function fxTable(rig, parts) {
     else if (mk === "bend") [moveV, move2] = [[...unitAxis(m.bend), 0], 0];
     else if (mk === "peel") moveV = [...unitAxis(m.peel), m.hinge ?? 0];
     else if (mk === "split") [moveV, move2] = [[...unitAxis(m.split), m.n ?? 3], m.spread ?? 0.5];
+    let extra = [0, 0, 0, 0];
+    if (mk === "fall") {
+      [moveV, cell] = [[...unitAxis(m.fall), m.pop ?? 0.3], m.cell ?? 0.1];
+      extra = [m.share ?? 1, m.spin ?? 3, 0, 0];
+    } else if (mk === "vibrate") {
+      moveV = [...unitAxis(m.vibrate), m.freq ?? 40];
+      extra = [...unitAxis(m.along || [0, 1, 0]), m.length ?? 1];
+    } else if (mk === "writhe") {
+      moveV = [...unitAxis(m.writhe), m.k ?? 3];
+      extra = [m.lift ?? 0.5, 0, 0, 0];
+    }
     const pk = firstKey(f.pattern, PATTERN);
     const pt = f.pattern || {};
     let patW = 0.2;
@@ -102,6 +126,7 @@ export function fxTable(rig, parts) {
       [patV, patW] = [[...unitAxis(pt.swirl), pt.twist ?? 0], pt.width ?? 0.15]; // prettier-ignore
     else if (pk === "wave") patV = [...unitAxis(pt.wave), pt.k ?? 10];
     if (mk === "bend") patV = [...unitAxis(m.along || [1, 0, 0]), patV[3]];
+    if (m.voronoi || pt.voronoi) cell = -Math.abs(cell);
     const ck = firstKey(f.color, COLOR);
     const c = f.color || {};
     let col = [1, 1, 1, 0];
@@ -117,6 +142,7 @@ export function fxTable(rig, parts) {
     set(6, col);
     set(7, [0, cell, partIdx, move2]);
     set(8, wedge);
+    set(9, extra);
   });
   return d;
 }
@@ -124,7 +150,7 @@ export function fxTable(rig, parts) {
 // Fills in this frame's amounts: out.fx[name] = { move, color, phase }.
 export function fxFrame(table, rig, outFx, sinceTap) {
   (rig.fx || []).slice(0, FX_SLOTS).forEach((f, i) => {
-    const o = i * 36;
+    const o = i * STRIDE;
     const v = outFx?.[f.name];
     table[o + 4] = v?.move ?? 0;
     table[o + 5] = v?.color ?? 0;
