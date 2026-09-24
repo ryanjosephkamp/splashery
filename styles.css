@@ -542,6 +542,38 @@ textarea {
   margin: 0 0 4px;
 }
 
+/* "Find your own splat": a folded help section in Make. */
+.help {
+  margin: 10px 0 2px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+.help summary {
+  padding: 7px 10px;
+  font-weight: 600;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.help[open] summary {
+  border-bottom: 1px solid var(--line);
+}
+
+.help h3 {
+  margin: 10px 10px 2px;
+  font-size: 12.5px;
+  font-weight: 650;
+  color: var(--ink);
+}
+
+.help p {
+  margin: 0 10px 8px;
+}
+
 /* Effects ------------------------------------------------------------------ */
 
 .effect {
@@ -965,7 +997,9 @@ button.primary:hover:not(:disabled) {
   }
 
   body.sheet-open .toy-status,
-  body.sheet-open .brand {
+  body.sheet-open .brand,
+  body.shelf-grid .toy-status,
+  body.shelf-grid .brand {
     display: none;
   }
 
@@ -1045,6 +1079,7 @@ button.primary:hover:not(:disabled) {
     scrollbar-width: none;
     margin: 0 -12px 8px;
     padding: 0 12px;
+    touch-action: pan-x;
   }
 
   .shelf::-webkit-scrollbar {
@@ -1052,12 +1087,68 @@ button.primary:hover:not(:disabled) {
   }
 
   .toy-card {
-    flex: 0 0 66px;
+    flex: 0 0 70px;
   }
 
   .toy-card img,
   .toy-card .thumb {
     max-width: 52px;
+  }
+
+  /* Names wrap onto two lines instead of ending in "…" after a few letters. */
+  .toy-card span {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    min-height: 2.3em;
+    font-size: 10.5px;
+    line-height: 1.15;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    hyphens: auto;
+    text-align: center;
+  }
+
+  /* The shelf grid: dragging the handle or the row up opens the shelf into a
+     grid that fills the sheet. The chips and search stay on top. */
+  body.shelf-grid .panel {
+    height: min(80dvh, calc(100dvh - 120px));
+  }
+
+  body.shelf-grid .dock {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    min-height: 0;
+    border-bottom: 0;
+  }
+
+  body.shelf-grid .dock > * {
+    flex: none;
+  }
+
+  body.shelf-grid .shelf {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(76px, 1fr));
+    align-content: start;
+    gap: 6px 4px;
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    touch-action: pan-y;
+  }
+
+  body.shelf-grid .toy-card img,
+  body.shelf-grid .toy-card .thumb {
+    max-width: 64px;
+  }
+
+  body.shelf-grid .toolbar {
+    padding-top: 8px;
+    border-top: 1px solid var(--line);
   }
 
   .tools button {
