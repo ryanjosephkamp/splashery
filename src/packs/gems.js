@@ -521,7 +521,7 @@ export const RECIPES = {
     alive: true,
     options: [{ key: "color", label: "Crystals", type: "color", default: "#8e44c9" }],
     controls: [{ key: "open", label: "Open", type: "toggle", default: 1, ease: 1.4 }],
-    action: { key: "open", label: "Open or close", sound: { on: "open", off: "close" } },
+    action: { key: "open", label: "Open or close" },
     // Splats are depth-sorted in the pose they are built in, so the front half
     // is built twice, shut and lying open, and whichever copy is nearer its
     // current pose is shown as it swings.
@@ -841,7 +841,7 @@ export const RECIPES = {
       { key: "shell", label: "Oyster shell", type: "switch", default: true },
     ],
     controls: [{ key: "open", label: "Open", type: "toggle", default: 1, ease: 1.2 }],
-    action: { key: "open", label: "Open or close", sound: { on: "open", off: "close" } },
+    action: { key: "open", label: "Open or close" },
     // Like the geode, the lid is built twice (shut and open, since splats sort
     // in their built pose) and the copy nearer its current pose is shown.
     drive(t, c, out) {
@@ -932,7 +932,7 @@ export const RECIPES = {
       { key: "swirl", label: "Sparkle", type: "slider", default: 0.5 },
       { key: "gaze", label: "Gaze", type: "pulse", ease: 3.6 },
     ],
-    action: { key: "gaze", label: "Gaze into the ball", sound: "chime" },
+    action: { key: "gaze", label: "Gaze into the ball" },
     // A tap whips the mist round, and a glowing sign (a star, a moon or a
     // heart, in turn) rises out of it, turns once and fades.
     drive(t, c, out, info) {

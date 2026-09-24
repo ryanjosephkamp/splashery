@@ -590,7 +590,7 @@ export const RECIPES = {
       { key: "glow", label: "Glow", type: "slider", default: 0.7 },
       { key: "race", label: "Race", type: "pulse", ease: 4.2 },
     ],
-    action: { key: "race", label: "Race along the path", sound: "whoosh" },
+    action: { key: "race", label: "Race along the path" },
     // A tap sends a bright spark racing round the attractor; it draws the
     // path afresh in white-gold light behind it, which then fades.
     drive(t, c, out) {
@@ -715,7 +715,7 @@ export const RECIPES = {
       { key: "glow", label: "Glow", type: "slider", default: 0.5 },
       { key: "surge", label: "Surge", type: "pulse", ease: 4.5 },
     ],
-    action: { key: "surge", label: "Send water through", sound: "drop" },
+    action: { key: "surge", label: "Send water through" },
     // A tap pours a surge of glowing water in at the base: its front runs up
     // the body, through the neck and round into the bottom, then it fades.
     drive(t, c, out) {
@@ -1025,7 +1025,7 @@ export const RECIPES = {
       },
     ],
     controls: [{ key: "open", label: "Explode", type: "toggle", default: 0, ease: 1.2 }],
-    action: { key: "open", label: "Explode", sound: { on: "whoosh", off: "click" } },
+    action: { key: "open", label: "Explode" },
     drive(t, c, out) {
       const e = easeInOut(c.open);
       SIER_DIRS.forEach((d, i) => {
@@ -1079,7 +1079,7 @@ export const RECIPES = {
       },
     ],
     controls: [{ key: "open", label: "Explode", type: "toggle", default: 0, ease: 1 }],
-    action: { key: "open", label: "Explode", sound: { on: "whoosh", off: "click" } },
+    action: { key: "open", label: "Explode" },
     drive(t, c, out) {
       const e = easeInOut(c.open);
       for (const kind of SOLID_KINDS)

@@ -638,7 +638,7 @@ export const RECIPES = {
       },
     ],
     controls: [{ key: "snap", label: "Snap", type: "pulse", ease: 1.5 }],
-    action: { key: "snap", label: "Pop the bricks", sound: "click" },
+    action: { key: "snap", label: "Pop the bricks" },
     drive(t, c, out) {
       const p = 1 - c.snap;
       if (c.snap <= 0) return;
@@ -696,7 +696,7 @@ export const RECIPES = {
     alive: true,
     options: [{ key: "color", label: "Colour", type: "color", default: "#ffd21f" }],
     controls: [{ key: "squeak", label: "Squeak", type: "pulse", ease: 1.8 }],
-    action: { key: "squeak", label: "Squeak", sound: "poke" },
+    action: { key: "squeak", label: "Squeak" },
     drive(t, c, out) {
       // A squeeze and a hop in the first 0.9 s, then it bobs and settles.
       const e = (1 - c.squeak) * 1.8;
@@ -799,7 +799,7 @@ export const RECIPES = {
       },
     ],
     controls: [{ key: "whip", label: "Spin", type: "pulse", ease: 3 }],
-    action: { key: "whip", label: "Spin it", sound: "whoosh" },
+    action: { key: "whip", label: "Spin it" },
     drive(t, c, out) {
       const m = mem(c);
       const spin = integrate(m, "spin", t, 9 + 26 * c.whip);
@@ -908,7 +908,7 @@ export const RECIPES = {
       { key: "color", label: "Colour", type: "color", default: "#c8262e" },
     ],
     controls: [{ key: "roll", label: "Roll", type: "pulse", ease: 1.8 }],
-    action: { key: "roll", label: "Roll", sound: "drop" },
+    action: { key: "roll", label: "Roll" },
     drive(t, c, out) {
       // Drives both kinds; only the parts that exist move.
       const m = mem(c);
@@ -1047,7 +1047,7 @@ export const RECIPES = {
   "newtons-cradle": {
     alive: true,
     controls: [{ key: "swing", label: "Swing", type: "pulse", ease: 6 }],
-    action: { key: "swing", label: "Swing harder", sound: "click" },
+    action: { key: "swing", label: "Swing harder" },
     drive(t, c, out) {
       const A = 0.34 + 0.4 * c.swing;
       const th = -A * Math.cos((t * TAU) / 1.3);
@@ -1140,7 +1140,7 @@ export const RECIPES = {
     alive: true,
     options: [{ key: "color", label: "Fur", type: "color", default: "#b5793f" }],
     controls: [{ key: "wave", label: "Wave", type: "pulse", ease: 2.2 }],
-    action: { key: "wave", label: "Wave hello", sound: "poke" },
+    action: { key: "wave", label: "Wave hello" },
     drive(t, c, out) {
       const w = c.wave;
       const p = 1 - w;
@@ -1275,7 +1275,7 @@ export const RECIPES = {
     alive: true,
     options: [{ key: "color", label: "Colour", type: "color", default: "#e6392f" }],
     controls: [{ key: "throw", label: "Throw", type: "pulse", ease: 1.8 }],
-    action: { key: "throw", label: "Throw", sound: "whoosh" },
+    action: { key: "throw", label: "Throw" },
     drive(t, c, out) {
       const idle = YO.rest + 0.12 * Math.sin(t * 2.4);
       const p = 1 - c.throw;
@@ -1357,7 +1357,7 @@ export const RECIPES = {
 
   "puzzle-cube": {
     controls: [{ key: "twist", label: "Twist", type: "pulse", ease: 0.7 }],
-    action: { key: "twist", label: "Twist the top", sound: "click" },
+    action: { key: "twist", label: "Twist the top" },
     drive(t, c, out) {
       const m = mem(c);
       if (fired(m, "twist", c.twist)) m.turns = (m.turns ?? 0) + 1;
@@ -1426,7 +1426,7 @@ export const RECIPES = {
       },
     ],
     controls: [{ key: "hurry", label: "Hurry", type: "pulse", ease: 2.5 }],
-    action: { key: "hurry", label: "Make it walk", sound: "bounce" },
+    action: { key: "hurry", label: "Make it walk" },
     drive(t, c, out) {
       const m = mem(c);
       const ph = integrate(m, "walk", t, 0.5 + 1.8 * c.hurry);
@@ -1471,7 +1471,7 @@ export const RECIPES = {
       { key: "c2", label: "Colour 2", type: "color", default: "#f7c948" },
     ],
     controls: [{ key: "gust", label: "Gust", type: "pulse", ease: 2.8 }],
-    action: { key: "gust", label: "Gust of wind", sound: "whoosh" },
+    action: { key: "gust", label: "Gust of wind" },
     drive(t, c, out) {
       // A gust: the kite climbs round a loop, turning once about its bridle,
       // while the tail whips. The line stays tied to the bridle.
@@ -1614,7 +1614,7 @@ export const RECIPES = {
       { key: "lines", label: "Lined paper", type: "switch", default: true },
     ],
     controls: [{ key: "loop", label: "Barrel roll", type: "pulse", ease: 1.6 }],
-    action: { key: "loop", label: "Barrel roll", sound: "whoosh" },
+    action: { key: "loop", label: "Barrel roll" },
     drive(t, c, out) {
       const p = 1 - c.loop;
       const roll = c.loop > 0 ? TAU * easeInOut(p) : 0;
@@ -1675,7 +1675,7 @@ export const RECIPES = {
     density: 0.18,
     options: [{ key: "color", label: "Paper", type: "color", default: "#e2474f" }],
     controls: [{ key: "flap", label: "Flap", type: "pulse", ease: 1.8 }],
-    action: { key: "flap", label: "Flap the wings", sound: "whoosh" },
+    action: { key: "flap", label: "Flap the wings" },
     drive(t, c, out) {
       const f = c.flap;
       const a = 0.1 * Math.sin(t * 1.6) + f * 0.55 * Math.sin((1 - f) * 22);
@@ -1738,7 +1738,7 @@ export const RECIPES = {
   "balloon-dog": {
     options: [{ key: "color", label: "Balloon", type: "color", default: "#ff4f8b" }],
     controls: [{ key: "pop", label: "Pop", type: "pulse", ease: 2.6 }],
-    action: { key: "pop", label: "Pop", sound: "pop" },
+    action: { key: "pop", label: "Pop" },
     drive(t, c, out) {
       const p = 1 - c.pop;
       const on = c.pop > 0;
@@ -1832,7 +1832,7 @@ export const RECIPES = {
     density: 0.7,
     options: [{ key: "color", label: "Wand", type: "color", default: "#8e5bd9" }],
     controls: [{ key: "blow", label: "Blow", type: "pulse", ease: 2.5 }],
-    action: { key: "blow", label: "Blow bubbles", sound: "whoosh" },
+    action: { key: "blow", label: "Blow bubbles" },
     drive(t, c, out) {
       const m = mem(c);
       const tau = integrate(m, "tau", t, 0.07 + 0.35 * c.blow);
@@ -1916,7 +1916,7 @@ export const RECIPES = {
     alive: true,
     options: [{ key: "color", label: "Colour", type: "color", default: "#4f9fdc" }],
     controls: [{ key: "wind", label: "Wind up", type: "pulse", ease: 3 }],
-    action: { key: "wind", label: "Wind it up", sound: "click" },
+    action: { key: "wind", label: "Wind it up" },
     drive(t, c, out) {
       const m = mem(c);
       const w = c.wind;

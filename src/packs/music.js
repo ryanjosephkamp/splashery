@@ -133,7 +133,7 @@ export const RECIPES = {
       },
     ],
     controls: [{ key: "strum", label: "Strum", type: "pulse", ease: 3 }],
-    action: { key: "strum", label: "Strum", sound: "chime" },
+    action: { key: "strum", label: "Strum" },
     drive(t, c, out) {
       // A down-strum: each string is plucked a moment after the one above
       // and vibrates, bending at its middle and blurring wider, dying away
@@ -354,7 +354,7 @@ export const RECIPES = {
     alive: true,
     options: [{ key: "shell", label: "Shell", type: "color", default: "#c8202e" }],
     controls: [{ key: "hit", label: "Hit", type: "pulse", ease: 3.2 }],
-    action: { key: "hit", label: "Play a roll", sound: "bounce" },
+    action: { key: "hit", label: "Play a roll" },
     drive(t, c, out) {
       // A roll: the sticks strike in turn. A tap during a roll speeds it up
       // (four speeds) and makes it last longer; a pause starts over slowly.
@@ -474,7 +474,7 @@ export const RECIPES = {
   xylophone: {
     alive: true,
     controls: [{ key: "play", label: "Play", type: "pulse", ease: 3 }],
-    action: { key: "play", label: "Play a scale", sound: "chime" },
+    action: { key: "play", label: "Play a scale" },
     drive(t, c, out) {
       const X = XYLO;
       const u = 1 - c.play;

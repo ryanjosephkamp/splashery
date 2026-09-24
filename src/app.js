@@ -17,6 +17,8 @@ import {
 import { defaultEffects, effectDef } from "./effects.js";
 import { normalizePattern, flagInfo, loadFlags } from "./patterns.js";
 import { Sound } from "./sound.js";
+import { specFor } from "./voices.js";
+import { toySound } from "./toy-sounds.js";
 import { normalizeGenerator, PROFILES } from "./generators.js";
 import { decodeSceneHash, parseHash } from "./codec.js";
 import { TOYS, findToy } from "./toys.js";
@@ -457,12 +459,12 @@ class App {
   onAction(r) {
     const player = this.player;
     const recipe = player.toyInfo?.recipe;
-    if (r.key === "hop") this.sound.play("hop");
-    else {
-      const snd = recipe?.action?.sound;
-      const name = typeof snd === "string" ? snd : r.value > 0.5 ? snd?.on : snd?.off;
-      this.sound.play(name || "pop");
-    }
+    // The toy's own sound (src/toy-sounds.js), else the recipe's, else a
+    // plain hop or pop. A toggle plays its on or off half.
+    const toy = player.scene.toy;
+    const own = toy.kind === "builtin" ? toySound(toy.id) : null;
+    const spec = own || recipe?.action?.sound || (r.key === "hop" ? "hop" : "pop");
+    this.sound.play(specFor(spec, r.key === "hop" || r.value > 0.5), { key: "toy" });
     this.ui.setMotion(player.scene.motion, player.motion.targets);
   }
 

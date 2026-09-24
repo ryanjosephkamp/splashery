@@ -175,7 +175,7 @@ export const RECIPES = {
       },
     ],
     controls: [{ key: "pulse", label: "Swim", type: "pulse", ease: 3.2 }],
-    action: { key: "pulse", label: "Swim", sound: "whoosh" },
+    action: { key: "pulse", label: "Swim" },
     drive(t, c, out) {
       // One strong stroke: the bell squeezes tall and narrow and jets the
       // jelly upwards, the tentacles stream behind it, glowing, and it
@@ -498,7 +498,7 @@ export const RECIPES = {
       },
     ],
     controls: [{ key: "flap", label: "Flutter", type: "pulse", ease: 2 }],
-    action: { key: "flap", label: "Flutter", sound: "whoosh" },
+    action: { key: "flap", label: "Flutter" },
     drive(t, c, out) {
       const amp = 0.35 + 0.55 * c.flap;
       const a = 0.12 + amp * (0.5 - 0.5 * Math.cos(t * (5 + 5 * c.flap)));
@@ -664,7 +664,7 @@ export const RECIPES = {
       { key: "puff", label: "Puff", type: "slider", default: 0.1 },
       { key: "poke", label: "Poke", type: "pulse", ease: 4.5 },
     ],
-    action: { key: "poke", label: "Poke", sound: "pop" },
+    action: { key: "poke", label: "Poke" },
     drive(t, c, out) {
       // Poked, it gulps water and swells into a round, spiky ball with a
       // wobble, holds it, then lets it out with a sputter and slims down.
@@ -949,7 +949,7 @@ export const RECIPES = {
   ladybug: {
     alive: true,
     controls: [{ key: "fly", label: "Wings", type: "toggle", default: 0, ease: 0.8 }],
-    action: { key: "fly", label: "Open the wings", sound: { on: "whoosh", off: "click" } },
+    action: { key: "fly", label: "Open the wings" },
     drive(t, c, out) {
       const o = easeInOut(c.fly);
       out.parts.shellR = { angle: 1.15 * o };
@@ -1094,7 +1094,7 @@ export const RECIPES = {
   snail: {
     alive: true,
     controls: [{ key: "hide", label: "Hide", type: "toggle", default: 0, ease: 2.4 }],
-    action: { key: "hide", label: "Hide in the shell", sound: { on: "pop", off: "poke" } },
+    action: { key: "hide", label: "Hide in the shell" },
     drive(t, c, out) {
       // Slowly: the eye stalks pull in, the head glides back under the
       // shell's mouth, the foot draws in and the shell settles onto it with
@@ -1320,7 +1320,7 @@ export const RECIPES = {
       },
     ],
     controls: [{ key: "ink", label: "Ink", type: "pulse", ease: 4.5 }],
-    action: { key: "ink", label: "Squirt ink", sound: "whoosh" },
+    action: { key: "ink", label: "Squirt ink" },
     drive(t, c, out) {
       // A big cloud of ink billows out behind while the octopus jets up and
       // away with its arms streaming, then it drifts back as the ink thins.
@@ -1469,7 +1469,7 @@ export const RECIPES = {
       },
     ],
     controls: [{ key: "wave", label: "Wave", type: "pulse", ease: 2.5 }],
-    action: { key: "wave", label: "Wave the arms", sound: "poke" },
+    action: { key: "wave", label: "Wave the arms" },
     drive(t, c, out) {
       const u = 1 - c.wave;
       for (let i = 0; i < 5; i++) {
@@ -1738,7 +1738,7 @@ export const RECIPES = {
   penguin: {
     alive: true,
     controls: [{ key: "flap", label: "Flap", type: "pulse", ease: 2 }],
-    action: { key: "flap", label: "Flap", sound: "hop" },
+    action: { key: "flap", label: "Flap" },
     drive(t, c, out) {
       const u = 1 - c.flap;
       const f = c.flap > 0 ? Math.abs(Math.sin(u * Math.PI * 6)) * (1 - u) : 0;
@@ -1829,7 +1829,7 @@ export const RECIPES = {
   owl: {
     alive: true,
     controls: [{ key: "turn", label: "Turn head", type: "pulse", ease: 3 }],
-    action: { key: "turn", label: "Turn the head", sound: "poke" },
+    action: { key: "turn", label: "Turn the head" },
     drive(t, c, out) {
       const u = 1 - c.turn;
       const turn =

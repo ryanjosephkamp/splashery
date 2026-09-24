@@ -317,7 +317,7 @@ export const RECIPES = {
     alive: true,
     options: [{ key: "color", label: "Head", type: "color", default: "#8f7fd1" }],
     controls: [{ key: "inject", label: "Inject", type: "pulse", ease: 4.5 }],
-    action: { key: "inject", label: "Inject DNA", sound: "whoosh" },
+    action: { key: "inject", label: "Inject DNA" },
     // A tap plays the injection: the legs splay, the sheath snaps short and
     // pulls the head down, the tail tube punches through the base plate and
     // a glowing DNA strand coils out of it, then everything relaxes.
@@ -684,7 +684,7 @@ export const RECIPES = {
       { key: "signal", label: "Signal", type: "slider", default: 0.6 },
       { key: "fire", label: "Fire", type: "pulse", ease: 3 },
     ],
-    action: { key: "fire", label: "Fire a signal", sound: "chime" },
+    action: { key: "fire", label: "Fire a signal" },
     // A tap fires an action potential: a bright spark gathers in the cell
     // body, races down the axon with a short tail and bursts at the terminals.
     drive(t, c, out) {
@@ -1182,7 +1182,7 @@ export const RECIPES = {
       { key: "strandB", label: "Partner", type: "color", default: "#f06b9a" },
     ],
     controls: [{ key: "unzip", label: "Unzip", type: "pulse", ease: 5.5 }],
-    action: { key: "unzip", label: "Unzip and zip", sound: "open" },
+    action: { key: "unzip", label: "Unzip and zip" },
     // A tap unzips the helix almost to its foot, the bases light up in pairs
     // as the fork passes them, and then it zips back up.
     drive(t, c, out) {
@@ -1501,7 +1501,7 @@ export const RECIPES = {
     alive: true,
     options: [{ key: "color", label: "Colour", type: "color", default: "#e7c39b" }],
     controls: [{ key: "wiggle", label: "Wiggle", type: "pulse", ease: 2.5 }],
-    action: { key: "wiggle", label: "Wiggle", sound: "pop" },
+    action: { key: "wiggle", label: "Wiggle" },
     drive(t, c, out) {
       const amp = 0.22 + 0.35 * c.wiggle;
       const speed = 2.2 + 5 * c.wiggle;

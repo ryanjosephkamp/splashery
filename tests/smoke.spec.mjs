@@ -628,6 +628,81 @@ test.describe("Splashery v3 engine (WebGL2)", () => {
     await expect(page.locator("#sound-toggle")).toHaveAttribute("aria-pressed", "true");
   });
 
+  test("a tap plays the toy's own sound, and a toggle plays its on and off halves", async ({
+    page,
+  }) => {
+    const problems = watchConsole(page);
+    await page.addInitScript(() => localStorage.setItem("splashery.sound", "on"));
+    await loadApp(page);
+    // Record what the app asks the sound engine to play.
+    await page.evaluate(() => {
+      const s = window.__splashery.app.sound;
+      window.__played = [];
+      const play = s.play.bind(s);
+      s.play = (spec, o) => {
+        window.__played.push(JSON.stringify(spec));
+        play(spec, o);
+      };
+    });
+    const { TOY_SOUNDS } = await import("../src/toy-sounds.js");
+    await page.click(".toy-card[data-toy='chest']");
+    await waitForToy(page, "Treasure chest");
+    await page.evaluate(() => (window.__played = []));
+    await page.click("#toy-action");
+    await page.waitForTimeout(300);
+    await page.click("#toy-action");
+    await page.waitForTimeout(300);
+    const played = await page.evaluate(() => window.__played);
+    expect(played).toEqual([
+      JSON.stringify(TOY_SOUNDS.chest.on),
+      JSON.stringify(TOY_SOUNDS.chest.off),
+    ]);
+    // A toy that only hops plays its own sound too.
+    await page.click(".chip[data-category='balls']");
+    await page.click(".toy-card[data-toy='basketball']");
+    await waitForToy(page, "Basketball");
+    await page.evaluate(() => (window.__played = []));
+    const box = await page.locator("#stage").boundingBox();
+    await page.mouse.click(box.x + box.width / 2, box.y + box.height / 2);
+    await expect
+      .poll(() => page.evaluate(() => window.__played))
+      .toEqual([JSON.stringify(TOY_SOUNDS.basketball)]);
+    // The audio context really ran.
+    expect(await page.evaluate(() => window.__splashery.app.sound.ctx?.state)).toBe("running");
+    expect(problems).toEqual([]);
+  });
+
+  test("every toy's sound renders: audible, not clipping, under five seconds", async ({ page }) => {
+    await page.goto("/tools/");
+    const bad = await page.evaluate(async () => {
+      const { TOY_SOUNDS } = await import("/src/toy-sounds.js");
+      const { playSpec, specFor } = await import("/src/voices.js");
+      const { masterChain } = await import("/src/sound.js");
+      const out = [];
+      for (const [id, spec] of Object.entries(TOY_SOUNDS)) {
+        for (const on of [true, false]) {
+          const half = specFor(spec, on);
+          if (!on && half === specFor(spec, true)) continue;
+          const rate = 16000;
+          const ctx = new OfflineAudioContext(1, rate * 6, rate);
+          playSpec(ctx, masterChain(ctx), 0.01, half);
+          const d = (await ctx.startRendering()).getChannelData(0);
+          let peak = 0;
+          let last = 0;
+          for (let i = 0; i < d.length; i++) {
+            const a = Math.abs(d[i]);
+            if (a > peak) peak = a;
+            if (a > 0.003) last = i;
+          }
+          if (!(peak > 0.02 && peak < 0.99 && last / rate < 5))
+            out.push(`${id}${on ? "" : ":off"} peak ${peak.toFixed(3)} ${(last / rate).toFixed(2)} s`); // prettier-ignore
+        }
+      }
+      return out;
+    });
+    expect(bad).toEqual([]);
+  });
+
   test("v3 screenshots at 1440x900 and 390x844", async ({ browser }) => {
     fs.mkdirSync(SHOTS, { recursive: true });
     const desk = await browser.newContext({ viewport: { width: 1440, height: 900 } });
