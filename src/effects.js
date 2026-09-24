@@ -169,6 +169,8 @@ float spShrink = 0.0;
 float spLanded = 0.0;
 float spShade = 0.0;
 float spGlow = 0.0;
+vec4 spRecol = vec4(0.0);
+float spRecolK = 0.0;
 vec4 spTwistQ = vec4(0.0, 0.0, 0.0, 1.0);
 
 float spHash(uint n) {
@@ -388,6 +390,11 @@ void modifySplatColor(vec3 center, inout vec4 color) {
     color.rgb *= 1.0 - 0.45 * smoothstep(0.5, 1.0, spFlame);
   }
   vec4 paint = loadPaintColor();
+  if (spRecol.a > 0.0) {
+    float lum = dot(color.rgb, vec3(0.299, 0.587, 0.114));
+    vec3 kept = spRecol.rgb * (lum / max(dot(spRecol.rgb, vec3(0.299, 0.587, 0.114)), 0.02));
+    color.rgb = mix(color.rgb, mix(spRecol.rgb, kept, spRecolK), clamp(spRecol.a, 0.0, 1.0));
+  }
   color.rgb = color.rgb * (1.0 - paint.a) + paint.rgb;
   if (uSpSliceP.x > 0.5) {
     float side = dot(center - uSpToy.xyz, uSpSlice.xyz) - uSpSlice.w;
@@ -446,6 +453,8 @@ var<private> spShrink: f32 = 0.0;
 var<private> spLanded: f32 = 0.0;
 var<private> spShade: f32 = 0.0;
 var<private> spGlow: f32 = 0.0;
+var<private> spRecol: vec4f = vec4f(0.0);
+var<private> spRecolK: f32 = 0.0;
 var<private> spTwistQ: vec4f = vec4f(0.0, 0.0, 0.0, 1.0);
 
 fn spHash(m: u32) -> f32 {
@@ -658,6 +667,11 @@ fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {
     base = mix(base, vec3f(1.0, 0.36, 0.06), smoothstep(0.08, 0.6, spFlame));
     base = base * (1.0 - 0.45 * smoothstep(0.5, 1.0, spFlame));
   }
+  if (spRecol.a > 0.0) {
+    let lum = dot(base, vec3f(0.299, 0.587, 0.114));
+    let kept = spRecol.rgb * (lum / max(dot(spRecol.rgb, vec3f(0.299, 0.587, 0.114)), 0.02));
+    base = mix(base, mix(spRecol.rgb, kept, spRecolK), clamp(spRecol.a, 0.0, 1.0));
+  }
   let paint = loadPaintColor();
   var rgb = base * (1.0 - paint.a) + paint.rgb;
   var a = (*color).a;
@@ -775,9 +789,9 @@ vec3 spKitCenter(vec3 p) {
     vec4 pv = uSpParts[part * 3 + 1];
     vec4 ofs = uSpParts[part * 3 + 2];
     if (q.w == 0.0 && dot(q.xyz, q.xyz) == 0.0) q = vec4(0.0, 0.0, 0.0, 1.0);
-    p = pv.xyz + spQuatRotate(q, p - pv.xyz) + ofs.xyz;
+    p = pv.xyz + spQuatRotate(q, (p - pv.xyz) * (1.0 + pv.w)) + ofs.xyz;
     spPartQ = q;
-    spKitScale *= ofs.w;
+    spKitScale *= ofs.w * (1.0 + pv.w);
   }
   return p;
 }
@@ -862,9 +876,9 @@ fn spKitCenter(p0: vec3f) -> vec3f {
     let pv = uniform.uSpParts[part * 3 + 1];
     let ofs = uniform.uSpParts[part * 3 + 2];
     if (q.w == 0.0 && dot(q.xyz, q.xyz) == 0.0) { q = vec4f(0.0, 0.0, 0.0, 1.0); }
-    p = pv.xyz + spQuatRotate(q, p - pv.xyz) + ofs.xyz;
+    p = pv.xyz + spQuatRotate(q, (p - pv.xyz) * (1.0 + pv.w)) + ofs.xyz;
     spPartQ = q;
-    spKitScale = spKitScale * ofs.w;
+    spKitScale = spKitScale * ofs.w * (1.0 + pv.w);
   }
   return p;
 }
@@ -875,54 +889,349 @@ fn spKitCenter(p0: vec3f) -> vec3f {
 // r = part index / 255, g = how much the part moves the splat (soft edges
 // blend into the rest of the toy). The parts move by uSpParts as in kits.
 const GLSL_RIG_UNIFORMS = `uniform vec4 uSpParts[48];
-uniform vec4 uSpRigDbg;  // x > 0 tints each part (?rig=show)`;
+uniform vec4 uSpRigTint[16]; // per part: rgb glow added, a brightness gain
+uniform vec4 uSpFx[36];      // whole-body effects: 4 slots of 9 vec4 (see fxTable in src/rig-fx.js)
+uniform vec4 uSpRigDbg;  // x > 0 tints each part (?rig=show), and the colour keys`;
 
 const GLSL_RIG_FUNCTIONS = `
+float spCellHash(vec3 c) {
+  return fract(sin(dot(c, vec3(12.9898, 78.233, 37.719))) * 43758.5453);
+}
+
+vec3 spCellHash3(vec3 c) {
+  return vec3(spCellHash(c), spCellHash(c + 17.31), spCellHash(c + 41.97)) * 2.0 - 1.0;
+}
+
+// One whole-body effect slot (fields in fxTable, src/rig-fx.js).
+vec3 spRigFx(vec3 p, vec3 rest, vec4 pk, int part, int o) {
+  vec4 f0 = uSpFx[o];
+  vec4 f1 = uSpFx[o + 1];
+  if (f0.x < 0.5 || (f1.x == 0.0 && f1.y == 0.0)) return p;
+  vec4 f2 = uSpFx[o + 2];
+  vec4 f3 = uSpFx[o + 3];
+  vec4 f4 = uSpFx[o + 4];
+  vec4 f5 = uSpFx[o + 5];
+  vec4 f6 = uSpFx[o + 6];
+  vec4 f7 = uSpFx[o + 7];
+  int sm = int(f0.x + 0.5);
+  float sel = sm == 2 ? pk.z : sm == 3 ? pk.w : sm == 4 ? 1.0 - pk.z : sm == 5 ? (part == int(f7.z + 0.5) ? pk.y : 0.0) : 1.0;
+  vec3 org = f2.xyz;
+  vec3 v = rest - org;
+  int mk = int(f0.y + 0.5);
+  if (mk == 1) {
+    sel *= smoothstep(-0.015, 0.015, dot(v, f5.xyz) - f5.w);
+  } else if (mk == 2) {
+    vec3 ax = f5.xyz;
+    vec3 b1 = normalize(cross(ax, abs(ax.y) < 0.9 ? vec3(0.0, 1.0, 0.0) : vec3(1.0, 0.0, 0.0)));
+    vec3 b2 = cross(ax, b1);
+    float a = atan(dot(v, b2), dot(v, b1)) / 6.2831853 + 0.5;
+    float st = fract(a * f5.w);
+    sel *= smoothstep(0.02, 0.08, st) * (1.0 - smoothstep(0.42, 0.48, st));
+  } else if (mk == 3) {
+    sel *= 1.0 - smoothstep(0.8, 1.0, distance(rest, f5.xyz) / max(f5.w, 1e-3));
+  } else if (mk == 4) {
+    vec4 f8 = uSpFx[o + 8];
+    vec3 fl = v - f5.xyz * dot(v, f5.xyz);
+    float ang = acos(clamp(dot(normalize(fl + vec3(1e-5)), f8.xyz), -1.0, 1.0));
+    sel *= 1.0 - smoothstep(f8.w - 0.03, f8.w, ang);
+  }
+  if (sel <= 0.001) return p;
+  float cell = f7.y;
+  vec3 cid = cell > 0.0 ? floor(rest / cell) : vec3(0.0);
+  float hc = cell > 0.0 ? spCellHash(cid) : spHash(splat.index * 37u + 3u);
+  int pt = int(f0.w + 0.5);
+  float z = f1.z;
+  float env = 1.0;
+  if (pt == 1) {
+    env = exp(-pow((length(v) - z) / max(f2.w, 1e-3), 2.0));
+  } else if (pt == 2) {
+    env = exp(-pow((dot(v, f4.xyz) - z) / max(f2.w, 1e-3), 2.0));
+  } else if (pt == 3 || pt == 5) {
+    float spread = f4.w;
+    float local = clamp(z * (1.0 + spread) - spread * hc, 0.0, 1.0);
+    env = pt == 3 ? sin(3.1415927 * local) : local * local * (3.0 - 2.0 * local);
+  } else if (pt == 4) {
+    vec3 ax = f4.xyz;
+    vec3 b1 = normalize(cross(ax, abs(ax.y) < 0.9 ? vec3(0.0, 1.0, 0.0) : vec3(1.0, 0.0, 0.0)));
+    vec3 b2 = cross(ax, b1);
+    float a = atan(dot(v, b2), dot(v, b1)) / 6.2831853 + 0.5;
+    float u = (a + f4.w * clamp(dot(v, ax) / uSpToy.w * 0.5 + 0.5, 0.0, 1.0)) / (1.0 + f4.w);
+    env = 1.0 - smoothstep(z - f2.w, z, u);
+  } else if (pt == 6) {
+    env = sin(f4.w * dot(v, f4.xyz) - z);
+  }
+  float m = f1.x * env * sel;
+  int mv = int(f0.z + 0.5);
+  if (mv == 1) {
+    p += normalize(v + vec3(1e-5)) * m;
+  } else if (mv == 2) {
+    p += f3.xyz * m;
+  } else if (mv == 3) {
+    vec3 cc = cell > 0.0 ? (cid + 0.5) * cell - org : v;
+    vec3 dir = normalize(cc + vec3(1e-5)) * 0.9 + spCellHash3(cid) * 0.5 + vec3(0.0, f3.w, 0.0);
+    p += dir * m * (0.7 + 0.6 * hc);
+    if (spHash(splat.index * 41u + 9u) < 0.12) p += spHash3(splat.index * 43u + 1u) * m * 0.6;
+  } else if (mv == 4) {
+    p += f3.xyz * m * (0.75 + 0.5 * hc);
+  } else if (mv == 5) {
+    float h = spHash(splat.index * 47u + 5u);
+    p += spHash3(splat.index * 53u + 7u) * sin(f7.x * f3.w + h * 6.2832) * m;
+  } else if (mv == 6) {
+    p = org + spRotate(p - org, f3.xyz, m);
+    spPartQ = spQuatMul(vec4(f3.xyz * sin(m * 0.5), cos(m * 0.5)), spPartQ);
+  } else if (mv == 7) {
+    vec3 ax = f3.xyz;
+    float along = dot(v, ax);
+    float coord = f7.w > 0.5 ? along : length(v - ax * along);
+    float band = floor(coord / max(f3.w, 1e-3));
+    float sgn = mod(band, 2.0) < 0.5 ? 1.0 : -1.0;
+    p = org + spRotate(p - org, ax, m * sgn);
+  } else if (mv == 8) {
+    float ang = m * dot(v, f4.xyz);
+    p = org + spRotate(p - org, f3.xyz, ang);
+  } else if (mv == 9) {
+    vec3 ax = f3.xyz;
+    float along = dot(v, ax);
+    vec3 rad = v - ax * along;
+    float rl = max(length(rad), 1e-4);
+    vec3 rn = rad / rl;
+    float lift = smoothstep(f3.w, f3.w + 0.25, along);
+    vec3 piv = org + ax * f3.w + rn * rl;
+    vec3 tg = normalize(cross(ax, rn));
+    p = piv + spRotate(p - piv, tg, m * lift);
+  } else if (mv == 10) {
+    float n = max(f3.w, 1.0);
+    float k = floor(spHash(splat.index * 61u + 7u) * n);
+    vec3 ax = f3.xyz;
+    vec3 b1 = normalize(cross(ax, abs(ax.y) < 0.9 ? vec3(0.0, 1.0, 0.0) : vec3(1.0, 0.0, 0.0)));
+    vec3 dir = spRotate(b1, ax, (k + 0.25) * 6.2831853 / n);
+    float s = 1.0 - (1.0 - pow(1.0 / n, 0.4)) * m;
+    p = org + (p - org) * s + dir * f7.w * m;
+    spKitScale *= mix(1.0, s, 0.7);
+  }
+  float c = f1.y * abs(env) * sel;
+  int cm = int(f1.w + 0.5);
+  if (cm == 1) {
+    spTint += f6.rgb * c;
+  } else if (cm == 2) {
+    if (c > spRecol.a) spRecol = vec4(f6.rgb, c);
+    spRecolK = f6.w;
+  } else if (cm == 3) {
+    spBright *= 1.0 + c;
+  } else if (cm == 4) {
+    float h = spHash(splat.index * 59u + 3u);
+    float on = step(1.0 - f6.w, h);
+    spBright *= 1.0 + c * on * (0.6 + 0.4 * sin(f7.x * 23.0 + h * 60.0));
+  } else if (cm == 5) {
+    spFade *= 1.0 - clamp(c, 0.0, 1.0);
+  } else if (cm == 6) {
+    spBright *= 1.0 - clamp(c, 0.0, 0.9);
+  }
+  return p;
+}
+
 vec3 spRigCenter(vec3 p) {
   vec4 pk = loadSplatPart();
   int part = int(pk.x * 255.0 + 0.5);
   float w = pk.y;
+  vec3 rest = p;
   if (part > 0 && part < 16 && w > 0.0) {
     vec4 q = uSpParts[part * 3];
     vec4 pv = uSpParts[part * 3 + 1];
     vec4 ofs = uSpParts[part * 3 + 2];
     if (q.w == 0.0 && dot(q.xyz, q.xyz) == 0.0) q = vec4(0.0, 0.0, 0.0, 1.0);
-    vec3 moved = pv.xyz + spQuatRotate(q, p - pv.xyz) + ofs.xyz;
+    vec3 moved = pv.xyz + spQuatRotate(q, (p - pv.xyz) * (1.0 + pv.w)) + ofs.xyz;
     p = mix(p, moved, w);
     spPartQ = normalize(mix(vec4(0.0, 0.0, 0.0, 1.0), q, w));
-    spKitScale *= mix(1.0, ofs.w, w);
+    spKitScale *= mix(1.0, ofs.w, w) * (1.0 + pv.w * w);
+    vec4 tn = uSpRigTint[part];
+    spTint += tn.rgb * w;
+    spBright *= 1.0 + tn.a * w;
     if (uSpRigDbg.x > 0.0) {
       float h = float(part) * 2.39996;
       spTint += w * 0.6 * vec3(0.5 + 0.5 * cos(h), 0.5 + 0.5 * cos(h + 2.1), 0.5 + 0.5 * cos(h + 4.2));
     }
   }
+  if (uSpRigDbg.x > 0.0) spTint += vec3(0.8, 0.0, 0.6) * pk.z + vec3(0.0, 0.7, 0.8) * pk.w;
+  for (int i = 0; i < 4; i++) p = spRigFx(p, rest, pk, part, i * 9);
   return p;
 }
 `;
 
 const WGSL_RIG_UNIFORMS = `uniform uSpParts: array<vec4f, 48>;
+uniform uSpRigTint: array<vec4f, 16>;
+uniform uSpFx: array<vec4f, 36>;
 uniform uSpRigDbg: vec4f;`;
 
 const WGSL_RIG_FUNCTIONS = `
+fn spCellHash(c: vec3f) -> f32 {
+  return fract(sin(dot(c, vec3f(12.9898, 78.233, 37.719))) * 43758.5453);
+}
+
+fn spCellHash3(c: vec3f) -> vec3f {
+  return vec3f(spCellHash(c), spCellHash(c + vec3f(17.31)), spCellHash(c + vec3f(41.97))) * 2.0 - vec3f(1.0);
+}
+
+fn spRigFx(p0: vec3f, rest: vec3f, pk: vec4f, part: i32, o: i32) -> vec3f {
+  var p = p0;
+  let f0 = uniform.uSpFx[o];
+  let f1 = uniform.uSpFx[o + 1];
+  if (f0.x < 0.5 || (f1.x == 0.0 && f1.y == 0.0)) { return p; }
+  let f2 = uniform.uSpFx[o + 2];
+  let f3 = uniform.uSpFx[o + 3];
+  let f4 = uniform.uSpFx[o + 4];
+  let f5 = uniform.uSpFx[o + 5];
+  let f6 = uniform.uSpFx[o + 6];
+  let f7 = uniform.uSpFx[o + 7];
+  let sm = i32(f0.x + 0.5);
+  var sel = 1.0;
+  if (sm == 2) { sel = pk.z; }
+  else if (sm == 3) { sel = pk.w; }
+  else if (sm == 4) { sel = 1.0 - pk.z; }
+  else if (sm == 5) { sel = select(0.0, pk.y, part == i32(f7.z + 0.5)); }
+  let org = f2.xyz;
+  let v = rest - org;
+  let mk = i32(f0.y + 0.5);
+  if (mk == 1) {
+    sel = sel * smoothstep(-0.015, 0.015, dot(v, f5.xyz) - f5.w);
+  } else if (mk == 2) {
+    let ax = f5.xyz;
+    let b1 = normalize(cross(ax, select(vec3f(1.0, 0.0, 0.0), vec3f(0.0, 1.0, 0.0), abs(ax.y) < 0.9)));
+    let b2 = cross(ax, b1);
+    let a = atan2(dot(v, b2), dot(v, b1)) / 6.2831853 + 0.5;
+    let st = fract(a * f5.w);
+    sel = sel * smoothstep(0.02, 0.08, st) * (1.0 - smoothstep(0.42, 0.48, st));
+  } else if (mk == 3) {
+    sel = sel * (1.0 - smoothstep(0.8, 1.0, distance(rest, f5.xyz) / max(f5.w, 1e-3)));
+  } else if (mk == 4) {
+    let f8 = uniform.uSpFx[o + 8];
+    let fl = v - f5.xyz * dot(v, f5.xyz);
+    let ang = acos(clamp(dot(normalize(fl + vec3f(1e-5)), f8.xyz), -1.0, 1.0));
+    sel = sel * (1.0 - smoothstep(f8.w - 0.03, f8.w, ang));
+  }
+  if (sel <= 0.001) { return p; }
+  let cell = f7.y;
+  var cid = vec3f(0.0);
+  if (cell > 0.0) { cid = floor(rest / cell); }
+  var hc = spHash(splat.index * 37u + 3u);
+  if (cell > 0.0) { hc = spCellHash(cid); }
+  let pt = i32(f0.w + 0.5);
+  let z = f1.z;
+  var env = 1.0;
+  if (pt == 1) {
+    env = exp(-pow((length(v) - z) / max(f2.w, 1e-3), 2.0));
+  } else if (pt == 2) {
+    env = exp(-pow((dot(v, f4.xyz) - z) / max(f2.w, 1e-3), 2.0));
+  } else if (pt == 3 || pt == 5) {
+    let spread = f4.w;
+    let local = clamp(z * (1.0 + spread) - spread * hc, 0.0, 1.0);
+    env = select(local * local * (3.0 - 2.0 * local), sin(3.1415927 * local), pt == 3);
+  } else if (pt == 4) {
+    let ax = f4.xyz;
+    let b1 = normalize(cross(ax, select(vec3f(1.0, 0.0, 0.0), vec3f(0.0, 1.0, 0.0), abs(ax.y) < 0.9)));
+    let b2 = cross(ax, b1);
+    let a = atan2(dot(v, b2), dot(v, b1)) / 6.2831853 + 0.5;
+    let u = (a + f4.w * clamp(dot(v, ax) / uniform.uSpToy.w * 0.5 + 0.5, 0.0, 1.0)) / (1.0 + f4.w);
+    env = 1.0 - smoothstep(z - f2.w, z, u);
+  } else if (pt == 6) {
+    env = sin(f4.w * dot(v, f4.xyz) - z);
+  }
+  let m = f1.x * env * sel;
+  let mv = i32(f0.z + 0.5);
+  if (mv == 1) {
+    p = p + normalize(v + vec3f(1e-5)) * m;
+  } else if (mv == 2) {
+    p = p + f3.xyz * m;
+  } else if (mv == 3) {
+    var cc = v;
+    if (cell > 0.0) { cc = (cid + vec3f(0.5)) * cell - org; }
+    let dir = normalize(cc + vec3f(1e-5)) * 0.9 + spCellHash3(cid) * 0.5 + vec3f(0.0, f3.w, 0.0);
+    p = p + dir * m * (0.7 + 0.6 * hc);
+    if (spHash(splat.index * 41u + 9u) < 0.12) { p = p + spHash3(splat.index * 43u + 1u) * m * 0.6; }
+  } else if (mv == 4) {
+    p = p + f3.xyz * m * (0.75 + 0.5 * hc);
+  } else if (mv == 5) {
+    let h = spHash(splat.index * 47u + 5u);
+    p = p + spHash3(splat.index * 53u + 7u) * sin(f7.x * f3.w + h * 6.2832) * m;
+  } else if (mv == 6) {
+    p = org + spRotate(p - org, f3.xyz, m);
+    spPartQ = spQuatMul(vec4f(f3.xyz * sin(m * 0.5), cos(m * 0.5)), spPartQ);
+  } else if (mv == 7) {
+    let ax = f3.xyz;
+    let along = dot(v, ax);
+    let coord = select(length(v - ax * along), along, f7.w > 0.5);
+    let band = floor(coord / max(f3.w, 1e-3));
+    let sgn = select(-1.0, 1.0, band - 2.0 * floor(band / 2.0) < 0.5);
+    p = org + spRotate(p - org, ax, m * sgn);
+  } else if (mv == 8) {
+    let ang = m * dot(v, f4.xyz);
+    p = org + spRotate(p - org, f3.xyz, ang);
+  } else if (mv == 9) {
+    let ax = f3.xyz;
+    let along = dot(v, ax);
+    let rad = v - ax * along;
+    let rl = max(length(rad), 1e-4);
+    let rn = rad / rl;
+    let lift = smoothstep(f3.w, f3.w + 0.25, along);
+    let piv = org + ax * f3.w + rn * rl;
+    let tg = normalize(cross(ax, rn));
+    p = piv + spRotate(p - piv, tg, m * lift);
+  } else if (mv == 10) {
+    let n = max(f3.w, 1.0);
+    let k = floor(spHash(splat.index * 61u + 7u) * n);
+    let ax = f3.xyz;
+    let b1 = normalize(cross(ax, select(vec3f(1.0, 0.0, 0.0), vec3f(0.0, 1.0, 0.0), abs(ax.y) < 0.9)));
+    let dir = spRotate(b1, ax, (k + 0.25) * 6.2831853 / n);
+    let s = 1.0 - (1.0 - pow(1.0 / n, 0.4)) * m;
+    p = org + (p - org) * s + dir * f7.w * m;
+    spKitScale = spKitScale * mix(1.0, s, 0.7);
+  }
+  let c = f1.y * abs(env) * sel;
+  let cm = i32(f1.w + 0.5);
+  if (cm == 1) {
+    spTint = spTint + f6.rgb * c;
+  } else if (cm == 2) {
+    if (c > spRecol.a) { spRecol = vec4f(f6.rgb, c); }
+    spRecolK = f6.w;
+  } else if (cm == 3) {
+    spBright = spBright * (1.0 + c);
+  } else if (cm == 4) {
+    let h = spHash(splat.index * 59u + 3u);
+    let on = step(1.0 - f6.w, h);
+    spBright = spBright * (1.0 + c * on * (0.6 + 0.4 * sin(f7.x * 23.0 + h * 60.0)));
+  } else if (cm == 5) {
+    spFade = spFade * (1.0 - clamp(c, 0.0, 1.0));
+  } else if (cm == 6) {
+    spBright = spBright * (1.0 - clamp(c, 0.0, 0.9));
+  }
+  return p;
+}
+
 fn spRigCenter(p0: vec3f) -> vec3f {
   var p = p0;
   let pk = loadSplatPart();
   let part = i32(pk.x * 255.0 + 0.5);
   let w = pk.y;
+  let rest = p0;
   if (part > 0 && part < 16 && w > 0.0) {
     var q = uniform.uSpParts[part * 3];
     let pv = uniform.uSpParts[part * 3 + 1];
     let ofs = uniform.uSpParts[part * 3 + 2];
     if (q.w == 0.0 && dot(q.xyz, q.xyz) == 0.0) { q = vec4f(0.0, 0.0, 0.0, 1.0); }
-    let moved = pv.xyz + spQuatRotate(q, p - pv.xyz) + ofs.xyz;
+    let moved = pv.xyz + spQuatRotate(q, (p - pv.xyz) * (1.0 + pv.w)) + ofs.xyz;
     p = mix(p, moved, w);
     spPartQ = normalize(mix(vec4f(0.0, 0.0, 0.0, 1.0), q, w));
-    spKitScale = spKitScale * mix(1.0, ofs.w, w);
+    spKitScale = spKitScale * mix(1.0, ofs.w, w) * (1.0 + pv.w * w);
+    let tn = uniform.uSpRigTint[part];
+    spTint = spTint + tn.rgb * w;
+    spBright = spBright * (1.0 + tn.a * w);
     if (uniform.uSpRigDbg.x > 0.0) {
       let h = f32(part) * 2.39996;
       spTint = spTint + w * 0.6 * vec3f(0.5 + 0.5 * cos(h), 0.5 + 0.5 * cos(h + 2.1), 0.5 + 0.5 * cos(h + 4.2));
     }
   }
+  if (uniform.uSpRigDbg.x > 0.0) { spTint = spTint + vec3f(0.8, 0.0, 0.6) * pk.z + vec3f(0.0, 0.7, 0.8) * pk.w; }
+  for (var i = 0; i < 4; i++) { p = spRigFx(p, rest, pk, part, i * 9); }
   return p;
 }
 `;

@@ -12,26 +12,30 @@
 export const TOY_SOUNDS = {
   // ---- Scans ------------------------------------------------------------------------
   cactus: [
-    { voice: "pluck", f: "E4", decay: 0.35, bright: 0.3 },
+    { voice: "pluck", notes: "E5 G5 B5 D6", step: 0.09, at: 0.15, decay: 0.35, bright: 0.3 },
     { voice: "rattle", at: 0.05, f: 1800, n: 6, decay: 0.8 },
   ],
   strawberry: [
     { voice: "squish", pitch: 1.2, bright: 0.6 },
     { voice: "drip", at: 0.08, f: 1100, n: 1 },
+    { voice: "sparkle", at: 0.3, vol: 0.5 },
   ],
   cookie: [
     { voice: "crunch", f: 1500, n: 10, decay: 0.8 },
     { voice: "thud", at: 0.25, f: 70, bright: 0.1, decay: 0.8 },
-    { voice: "thud", at: 0.5, f: 65, bright: 0.1, decay: 0.8, vol: 0.8 },
+    { voice: "thud", at: 0.55, f: 65, bright: 0.1, decay: 0.8, vol: 0.8 },
   ],
-  bee: { voice: "buzz", f: 230, rate: 13, bright: 0.6, decay: 1.2 },
-  "cluster-fly": { voice: "buzz", f: 190, rate: 21, bright: 0.9, decay: 0.55, vol: 0.8 },
+  bee: { voice: "buzz", f: 230, rate: 13, bright: 0.6, decay: 1.7 },
+  "cluster-fly": [
+    { voice: "scrape", f: 3000, rate: 12, decay: 0.9, vol: 0.4 },
+    { voice: "buzz", at: 1.3, f: 190, rate: 21, bright: 0.9, decay: 0.55, vol: 0.8 },
+  ],
   "may-beetle": [
     { voice: "buzz", f: 85, rate: 9, bright: 0.3, decay: 0.9 },
     { voice: "ratchet", f: 1600, n: 8, rate: 20, vol: 0.6 },
   ],
-  millipede: { voice: "patter", f: 2200, n: 26, decay: 1.3, vol: 0.8 },
-  bumblebee: { voice: "buzz", f: 130, rate: 6, bright: 0.35, decay: 1.6 },
+  millipede: { voice: "patter", f: 2200, n: 30, decay: 2, vol: 0.8 },
+  bumblebee: { voice: "buzz", f: 130, rate: 6, bright: 0.35, decay: 2.4 },
   raspberry: [
     { voice: "squish", pitch: 1.4, bright: 0.5, decay: 0.9 },
     { voice: "bubbles", at: 0.05, f: 900, n: 4, decay: 0.5 },
@@ -41,10 +45,14 @@ export const TOY_SOUNDS = {
     { voice: "bubbles", at: 0.06, f: 420, n: 3, decay: 0.6 },
   ],
   blueberry: { voice: "pop", f: 520, decay: 1.3 },
-  grape: { voice: "tear", f: 1600, to: 0.6, decay: 0.8, bright: 0.7 },
+  grape: [
+    { voice: "tear", f: 1600, to: 0.6, decay: 0.8, bright: 0.7 },
+    { voice: "squish", at: 2.3, pitch: 1.6, vol: 0.5 },
+  ],
   "star-cookie": [
     { voice: "crunch", f: 2100, n: 18, decay: 1.3, bright: 0.7 },
     { voice: "patter", at: 0.2, f: 1300, n: 8, decay: 0.6, vol: 0.7 },
+    { voice: "whoosh", at: 1.55, f: 600, to: 2, decay: 0.6, vol: 0.5 },
   ],
   tomatoes: [
     { voice: "thud", f: 110, bright: 0.2 },
@@ -64,47 +72,64 @@ export const TOY_SOUNDS = {
   ],
   "marble-bust": [
     { voice: "scrape", f: 500, rate: 13, decay: 1.2 },
-    { voice: "murmur", at: 0.3, f: 110 },
+    { voice: "murmur", at: 0.55, f: 110 },
   ],
-  ukulele: { voice: "nylon", notes: "G4+C4+E4+A4", strum: 0.035, bright: 0.45, decay: 0.9 },
-  "alarm-clock": { voice: "bell", notes: "A5 C6 A5 C6 A5 C6 A5 C6 A5 C6", step: 0.06, decay: 0.3, bright: 0.8 }, // prettier-ignore
+  // Four strums (down, down, up, down) on the ukulele's own tuning: C, F, G, C.
+  ukulele: { voice: "nylon", notes: "G4+C4+E4+C5 - A4+C4+F4+A4 B4+D4+G4+B4 - G4+C4+E4+C5", step: 0.15, strum: 0.03, bright: 0.45, decay: 0.9 }, // prettier-ignore
+  "alarm-clock": { voice: "bell", notes: Array(14).fill("A5 C6").join(" "), step: 0.06, decay: 0.3, bright: 0.8 }, // prettier-ignore
   "vintage-camera": [
     { voice: "switch", f: 3600, decay: 1.5 },
     { voice: "ratchet", at: 0.2, f: 1400, n: 9, rate: 26 },
   ],
   boombox: [
-    { voice: "kick", notes: "C2 - C2 C2 - - C2 -", step: 0.15 },
-    { voice: "snare", notes: "- - A3 - - - A3 -", step: 0.15, decay: 0.8 },
-    { voice: "hat", notes: "C8 C8 C8 C8 C8 C8 C8 C8", step: 0.15, vol: 0.6 },
+    { voice: "kick", notes: "C2 - C2 C2 - - C2 - C2 - C2 C2 - - C2 -", step: 0.15, vol: 0.55 },
+    {
+      voice: "snare",
+      notes: "- - A3 - - - A3 - - - A3 - - - A3 -",
+      step: 0.15,
+      decay: 0.8,
+      vol: 0.7,
+    },
+    { voice: "hat", notes: Array(16).fill("C8").join(" "), step: 0.15, vol: 0.45 },
   ],
   "croissant-real": [
     { voice: "tear", f: 1100, to: 1.8, decay: 1.1 },
     { voice: "crunch", at: 0.1, f: 2600, n: 7, decay: 0.8, vol: 0.5 },
+    { voice: "hiss", at: 0.35, decay: 0.8, vol: 0.3 },
   ],
-  "carrot-cake": { voice: "scrape", f: 1400, rate: 3, decay: 1.4, vol: 0.6 },
+  "carrot-cake": [
+    { voice: "scrape", f: 1400, rate: 3, decay: 1.4, vol: 0.6 },
+    { voice: "thud", at: 2.5, f: 180, vol: 0.4 },
+  ],
   pomegranate: [
     { voice: "crack", f: 1600, bright: 0.4 },
-    { voice: "clatter", at: 0.1, f: 2600, n: 14, kind: "clack", decay: 1.1 },
+    { voice: "clatter", at: 0.45, f: 2600, n: 14, kind: "clack", decay: 1.1 },
   ],
-  lantern: [
-    { voice: "scrape", f: 2400, rate: 40, decay: 0.3, vol: 0.8 },
-    { voice: "whoosh", at: 0.15, f: 250, to: 3, decay: 0.8 },
-  ],
+  lantern: {
+    on: [
+      { voice: "scrape", f: 2400, rate: 40, decay: 0.3, vol: 0.8 },
+      { voice: "whoosh", at: 0.15, f: 250, to: 3, decay: 0.8 },
+    ],
+    off: { voice: "breath", f: 900, to: 0.6, decay: 0.5, vol: 0.7 },
+  },
   "cat-statue": [
     { voice: "scrape", f: 620, rate: 11, decay: 0.9 },
     { voice: "mew", at: 0.45, f: 700 },
   ],
-  "chess-set": { voice: "wood", notes: "D5 - A4 - - F5", step: 0.12, decay: 0.9 },
+  "chess-set": { voice: "wood", notes: "D5 - A4 - - F5", step: 0.25, decay: 0.9 },
   "horse-statue": [
     { voice: "scrape", f: 450, rate: 9, decay: 1.1 },
     { voice: "whinny", at: 0.4, f: 1150 },
   ],
 
   // ---- Shapes -----------------------------------------------------------------------
-  blob: { voice: "gloop", f: 140, decay: 1.2 },
-  donut: { voice: "patter", f: 2600, n: 16, decay: 0.8 },
-  knot: { voice: "hum", f: 120, bright: 0.8, decay: 1.2 },
-  planet: { voice: "wind", f: 700, rate: 0.5, decay: 1.1 },
+  blob: [
+    { voice: "gloop", f: 140, decay: 1.2 },
+    { voice: "gloop", at: 1.8, f: 110, decay: 0.9, vol: 0.7 },
+  ],
+  donut: { voice: "patter", at: 0.4, f: 2600, n: 16, decay: 1.2 },
+  knot: { voice: "hum", f: 120, bright: 0.8, decay: 2 },
+  planet: { voice: "wind", f: 700, rate: 0.5, decay: 2 },
 
   // ---- Balls ------------------------------------------------------------------------
   basketball: [

@@ -97,7 +97,11 @@ Clay works on pack toys too.
 - **Taps know where they land.** A toy can react to the spot you tap: tap one xylophone bar and the
   mallet strikes that bar and plays its note; tap elsewhere and it plays the scale.
 - **Scan rigs.** Captured toys can have moving parts: the cat statue turns its head and flicks its
-  tail, and the real rubber duck squeezes flat and springs back.
+  tail, the bee buzzes its wings and lifts off, the horse rears. Rigs can also pick splats by colour
+  (strawberry seeds, the cookie's jam heart), run whole-body effects (the raspberry's ripple, the
+  star cookie crumbling, the blob splitting in three) and show a small kit-built add-on with the
+  scan (the lantern's flame, the cactus's flowers, the marble bust's speech bubble). Every scan and
+  shelf shape now has its own tap effect.
 - **Drag to stretch.** Drag the gummy bear (with the Orbit tool, starting on the bear) to stretch
   it; let go and it springs back. A drag that starts beside it still turns the view.
 - Under a system setting for reduced motion, toys stay still until you switch motion on.
@@ -311,6 +315,10 @@ steps the clock by hand, so the frames land at the same toy time on any machine.
 `--taps=3 --gap=0.2` taps several times (for toys that react to fast taps). `--at=x,y,z` taps that
 point (recipe coordinates) instead of pressing the action.
 
+`tools/rig-map.mjs <out-dir> id ...` renders a scan from the front, right, top and back with an
+orthographic camera and a world grid (0.1 apart), for placing rig regions; `--rig` tints the rig
+parts and colour keys, `--at=0.9` taps and renders the pose that long after.
+
 `tools/sound-check.mjs [id ...]` renders every toy's sound offline in headless Chromium and checks
 that it is audible, does not clip and ends within 5 s (`--sheet=out.png` draws spectrograms,
 `--wav=dir` writes WAV files, `--voices` re-measures each voice's level). `tools/sound-audit.mjs`
@@ -356,7 +364,8 @@ src/kit.js, packs/              the toy kit and the recipe packs
 src/motion.js, patterns.js      whole-toy motion, parts and controls; the pattern layer
 src/sound.js, voices.js         WebAudio output and the voice library (sound specs)
 src/toy-sounds.js               every toy's own sound spec
-src/rig.js, rigs.js             scan rigs: moving parts for captured toys
+src/rig.js, rigs.js, rig-fx.js  rigs: parts, colour keys, effects and add-ons for scans and shapes
+src/font.js                     5x7 bitmap font (storybook pages, speech bubble)
 src/exports.js                  PNG, GIF, WebM, links and embed snippets
 src/viewer.js, embed.js, element.js   embed player and <splashery-toy>
 src/pc.js, toys.js              engine import, toy shelf

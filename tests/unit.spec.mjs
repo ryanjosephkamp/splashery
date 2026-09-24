@@ -208,3 +208,71 @@ test("a tap knows where it landed: a xylophone bar strikes that bar", async () =
   expect(out.parts.bar7.offset[1]).toBeLessThan(-0.005);
   expect(out.parts.bar0.offset[1]).toBe(0);
 });
+
+test("every rig fits the rig limits and names real parts, keys and effects", async () => {
+  const { RIGS } = await import("../src/rigs.js");
+  const { fxTable, fxFrame, FX_SLOTS } = await import("../src/rig-fx.js");
+  const problems = [];
+  for (const [id, rig] of Object.entries(RIGS)) {
+    if (!TOYS.some((t) => t.id === id)) problems.push(`${id}: not on the shelf`);
+    const regions = rig.parts.reduce((n, p) => n + p.regions.length, 0);
+    if (rig.parts.length > 15) problems.push(`${id}: more than 15 parts`);
+    if (regions > 12) problems.push(`${id}: more than 12 regions`);
+    if ((rig.fx || []).length > FX_SLOTS) problems.push(`${id}: more than ${FX_SLOTS} effects`);
+    if ((rig.keys || []).length > 2) problems.push(`${id}: more than 2 keys`);
+    const keyed = (rig.fx || []).some((f) => /key/.test(f.select));
+    if (keyed && !(rig.keys || []).length) problems.push(`${id}: an effect uses a key it lacks`);
+    const parts = [{ name: "body" }, ...rig.parts];
+    for (const f of rig.fx || []) {
+      if (f.select?.part && !parts.some((p) => p.name === f.select.part))
+        problems.push(`${id}: effect ${f.name} selects a missing part`);
+    }
+    if (!rig.action || !rig.controls.some((c) => c.key === rig.action.key))
+      problems.push(`${id}: the action has no control`);
+    // drive() runs at rest and mid-effect without throwing.
+    const state = Object.fromEntries(rig.controls.map((c) => [c.key, 0.5]));
+    const out = { parts: {}, fx: {}, body: null, addon: null };
+    rig.drive(1.2, state, out, { time: 1.2, R: 1, tap: { n: 1, time: 0 } });
+    for (const name of Object.keys(out.fx))
+      if (!(rig.fx || []).some((f) => f.name === name)) problems.push(`${id}: drives unknown fx ${name}`); // prettier-ignore
+    if (rig.fx) {
+      const table = fxTable(rig, parts);
+      expect(table.length).toBe(FX_SLOTS * 36);
+      fxFrame(table, rig, out.fx, 0.5);
+    }
+  }
+  expect(problems).toEqual([]);
+});
+
+test("a rig's effects and part glow reach the modifier's uniforms", async () => {
+  const { MotionDriver } = await import("../src/motion.js");
+  const { RIGS } = await import("../src/rigs.js");
+  const { fxTable } = await import("../src/rig-fx.js");
+  const rig = RIGS.strawberry;
+  const m = new MotionDriver();
+  const parts = [{ name: "body", pivot: [0, 0, 0], axis: [0, 1, 0] }];
+  m.setToy(rig, { parts, transform: null, rig: true, fx: fxTable(rig, parts) });
+  expect(m.act(0, null)).toMatchObject({ key: "pop", value: 1 });
+  const info = { center: [0, 0, 0], half: [1, 1, 1], radius: 1 };
+  const motion = { alive: true, move: "still", speed: 0.5 };
+  const u = m.compute({ time: 0.4, dt: 0.4, motion, info, cameraPos: [0, 0, 5] });
+  const fx = u["uSpFx[0]"];
+  // Slot 0 (seeds): selected by key 0, pushed out, staggered, glowing.
+  expect([...fx.slice(0, 4)]).toEqual([2, 0, 1, 3]);
+  expect(fx[4]).toBeGreaterThan(0); // move
+  expect(fx[5]).toBeGreaterThan(0); // colour
+  expect(fx[28]).toBeCloseTo(0.4, 5); // seconds since the tap
+  expect(u["uSpRigTint[0]"]).toHaveLength(64);
+  // A part driven with tint and scale: the lantern's glass glows when lit.
+  const lantern = new MotionDriver();
+  const lp = [
+    { name: "body", pivot: [0, 0, 0] },
+    { name: "glass", pivot: [0, -0.2, 0] },
+  ];
+  lantern.setToy(RIGS.lantern, { parts: lp, transform: null, rig: true, fx: null }, { lit: 1 });
+  const lu = lantern.compute({ time: 1, dt: 0.1, motion, info, cameraPos: [0, 0, 5] });
+  expect(lu["uSpRigTint[0]"][4]).toBeGreaterThan(0.1);
+  expect(lantern.hasBehaviours()).toBe(true);
+  lantern.setControl("lit", 0, { snap: true });
+  expect(lantern.hasBehaviours()).toBe(false);
+});

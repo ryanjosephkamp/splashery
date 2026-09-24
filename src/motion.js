@@ -3,7 +3,8 @@
 // toggles and sliders) and its rigid parts. Produces uniforms for the effect
 // modifier (uSpBody*, uSpKit*, uSpParts). Pure JavaScript.
 
-import { quatAxisAngle, quatMul, quatEuler } from "./kit.js";
+import { quatAxisAngle, quatMul, quatEuler, rgb } from "./kit.js";
+import { fxFrame, FX_SLOTS } from "./rig-fx.js";
 
 export const MOVES = [
   { id: "still", label: "Still" },
@@ -22,6 +23,7 @@ export const DEFAULT_MOTION = Object.freeze({
 });
 
 const IDENTITY = [0, 0, 0, 1];
+const NO_FX = new Float32Array(FX_SLOTS * 36);
 const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
 
 // Bounce height and squash for a hop that started `t` seconds ago with a
@@ -58,6 +60,9 @@ export class MotionDriver {
     this.kitClock = { t: 0, last: null, rate: 1 };
     this.moveClock = { t: 0, last: null, rate: 1 };
     this.partsData = new Float32Array(48 * 4);
+    this.tintData = new Float32Array(16 * 4);
+    this.addon = null; // { parts, data } of a rig's kit-built add-on
+    this.addonU = null;
     this.out = null;
   }
 
@@ -74,6 +79,14 @@ export class MotionDriver {
     }
     this.hopStart = -100;
     this.tap = null;
+    this.addon = null;
+    this.addonU = null;
+  }
+
+  // A rig's add-on (a small kit-built splat cloud with its own parts).
+  setAddon(ctx) {
+    this.addon = ctx ? { parts: ctx.parts, data: new Float32Array(48 * 4) } : null;
+    this.addonU = null;
   }
 
   controlDef(key) {
@@ -125,8 +138,10 @@ export class MotionDriver {
     this.hopStart = time;
   }
 
+  // A rig's `alive` may depend on its controls (a lantern flickers only while lit).
   hasBehaviours() {
-    return !!this.recipe?.alive;
+    const a = this.recipe?.alive;
+    return typeof a === "function" ? !!a(this.state) : !!a;
   }
 
   // True while something moves by itself.
@@ -196,7 +211,7 @@ export class MotionDriver {
 
     // The kit toy's own frame: behaviours clock, recipe drive, parts.
     const kt = this.tick(this.kitClock, time, rate, motion.alive !== false);
-    const drive = { energy: 0, grow: 1, amount: 1, glow: [1, 1, 1, 0], parts: {}, body: null };
+    const drive = { energy: 0, grow: 1, amount: 1, glow: [1, 1, 1, 0], parts: {}, body: null, fx: {}, addon: null }; // prettier-ignore
     if (this.recipe?.drive) this.recipe.drive(kt, this.state, drive, { time, R, tap: this.tap });
     if (drive.body) {
       if (drive.body.quat) q = quatMul(drive.body.quat, q);
@@ -216,30 +231,63 @@ export class MotionDriver {
       u.uSpKitB = [clamp(drive.grow, 0, 1), F, Math.max(0, drive.amount), 0];
       u.uSpGlowC = drive.glow;
       u.uSpCam = [cameraPos[0], cameraPos[1], cameraPos[2], 0];
-      const data = this.partsData;
-      const parts = this.ctx?.parts || [];
       const scale = this.ctx?.transform?.scale ?? 1;
-      for (let i = 0; i < 16; i++) {
-        const o = i * 12;
-        const def = parts[i];
-        const pd = def ? drive.parts[def.name] : null;
-        let pq = IDENTITY;
-        let po = [0, 0, 0];
-        let vis = 1;
-        if (pd) {
-          if (pd.quat) pq = pd.quat;
-          else if (pd.angle) pq = quatAxisAngle(pd.axis || def.axis, pd.angle);
-          if (pd.offset) po = [pd.offset[0] * scale, pd.offset[1] * scale, pd.offset[2] * scale];
-          if (pd.visible !== undefined) vis = pd.visible;
-        }
-        const pv = def ? def.pivot : [0, 0, 0];
-        data.set(pq, o);
-        data.set([pv[0], pv[1], pv[2], 0], o + 4);
-        data.set([po[0], po[1], po[2], vis], o + 8);
+      u["uSpParts[0]"] = packParts(this.partsData, this.ctx?.parts || [], drive.parts, scale);
+      if (this.ctx?.rig) {
+        const td = this.tintData.fill(0);
+        (this.ctx.parts || []).forEach((def, i) => {
+          const pd = drive.parts[def.name];
+          if (!pd || i >= 16) return;
+          if (pd.tint) {
+            const c = rgb(pd.tint);
+            const g = pd.glow ?? 1;
+            td.set([c[0] * g, c[1] * g, c[2] * g], i * 4);
+          }
+          td[i * 4 + 3] = pd.bright ?? 0;
+        });
+        u["uSpRigTint[0]"] = td;
+        // Always set: uniforms keep the last toy's values otherwise.
+        const since = this.tap ? time - this.tap.time : 1e3;
+        u["uSpFx[0]"] = this.ctx.fx ? fxFrame(this.ctx.fx, this.recipe, drive.fx, since) : NO_FX;
       }
-      u["uSpParts[0]"] = data;
+    }
+    // The add-on shares the toy's clock and body; its own parts and glow.
+    if (this.addon) {
+      const a = drive.addon || {};
+      this.addonU = {
+        uSpKit: [kt, 1, 1, clamp(a.energy ?? 0, 0, 1)],
+        uSpKitB: [clamp(a.grow ?? 0, 0, 1), F, Math.max(0, a.amount ?? 1), 0],
+        uSpGlowC: a.glow || [1, 1, 1, 0],
+        "uSpParts[0]": packParts(this.addon.data, this.addon.parts, a.parts || {}, 1),
+      };
     }
     this.out = drive;
     return u;
   }
+}
+
+// Packs part transforms for uSpParts: per part a rotation, the pivot (w =
+// scale - 1 about the pivot) and an offset (w = splat visibility).
+function packParts(data, parts, driven, scale) {
+  for (let i = 0; i < 16; i++) {
+    const o = i * 12;
+    const def = parts[i];
+    const pd = def ? driven[def.name] : null;
+    let pq = IDENTITY;
+    let po = [0, 0, 0];
+    let vis = 1;
+    let grow = 0;
+    if (pd) {
+      if (pd.quat) pq = pd.quat;
+      else if (pd.angle) pq = quatAxisAngle(pd.axis || def.axis, pd.angle);
+      if (pd.offset) po = [pd.offset[0] * scale, pd.offset[1] * scale, pd.offset[2] * scale];
+      if (pd.visible !== undefined) vis = pd.visible;
+      if (pd.scale !== undefined) grow = pd.scale - 1;
+    }
+    const pv = def ? def.pivot : [0, 0, 0];
+    data.set(pq, o);
+    data.set([pv[0], pv[1], pv[2], grow], o + 4);
+    data.set([po[0], po[1], po[2], vis], o + 8);
+  }
+  return data;
 }

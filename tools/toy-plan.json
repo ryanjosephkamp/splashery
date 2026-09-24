@@ -2,101 +2,117 @@
   "about": "One entry per shelf toy: the owner's review notes (2026-09-23, docs/reviews/2026-09-23/review.md), a verdict, and a proposed tap effect and sound. v: keep = the effect is right (the owner liked it, or a later phase finished it; improved = what that phase changed); more = it has an effect that should be clearer or more dramatic; new = it only hops today and needs its own effect. fix = a visual problem to fix; fixed = what was done about it (and in which phase). interactive = the owner asked for touch-position or drag interaction. Proposals are suggestions; the owner may change them. tools/toy-plan.mjs checks this file against the shelf and writes docs/TOY-PLAN.md. On 2026-09-24 the owner approved every proposal in this file as written, including the sports-ball texture fixes.",
   "toys": {
     "cactus": {
-      "v": "new",
+      "v": "keep",
       "owner": "No special effect. Looks fine.",
       "effect": "Tiny flowers bloom on the spines, then close.",
-      "sound": "Soft pluck with a dry rattle."
+      "sound": "Soft pluck with a dry rattle.",
+      "improved": "E1: nine magenta flowers (a kit-built add-on) open in a ring round the crown, one after another, then close (3.4 s). Plucks rise with them."
     },
     "strawberry": {
-      "v": "new",
+      "v": "keep",
       "owner": "No special effect. Looks fine.",
       "effect": "Seeds pop out and sparkle, then settle back; the berry blushes redder.",
-      "sound": "Juicy squish."
+      "sound": "Juicy squish.",
+      "improved": "E1: the seeds (picked by colour) pop out in a staggered wave and glow, the red flesh blushes deeper, then all settles (2.2 s)."
     },
     "cookie": {
-      "v": "new",
+      "v": "keep",
       "owner": "No special effect. Looks fine.",
       "effect": "The jam heart glows and throbs twice like a heartbeat.",
-      "sound": "Short crunch and a soft double thump."
+      "sound": "Short crunch and a soft double thump.",
+      "improved": "E1: the jam heart (picked by colour) glows red and swells twice like a heartbeat, timed with the two thumps (1.6 s)."
     },
     "bee": {
-      "v": "new",
+      "v": "keep",
       "owner": "Now the right way up. Maybe flap its wings.",
       "effect": "Wings buzz in a blur and the bee lifts off a little, then lands.",
-      "sound": "Honeybee buzz (higher than the bumblebee)."
+      "sound": "Honeybee buzz (higher than the bumblebee).",
+      "improved": "E1: the wings are rig parts that buzz in a blur while the bee lifts off, tilts and lands (2.2 s)."
     },
     "cluster-fly": {
-      "v": "new",
+      "v": "keep",
       "owner": "Right way up. Do what a fly does: rub its hands together, clean its face, flap its wings.",
       "effect": "Front legs rub together, then the wings flick.",
-      "sound": "Short thin fly buzz."
+      "sound": "Short thin fly buzz.",
+      "improved": "E1: the front legs rub together for a second, then the wings flick twice with a short buzz (2.4 s)."
     },
     "may-beetle": {
-      "v": "new",
+      "v": "keep",
       "owner": "Detail is great but underwhelming; it needs an effect.",
       "effect": "Wing cases lift and the fanned antennae spread, then fold.",
-      "sound": "Low clicking whirr."
+      "sound": "Low clicking whirr.",
+      "improved": "E1: the wing cases lift and part with a shiver and the fanned antennae spread, then fold (2.6 s)."
     },
     "millipede": {
-      "v": "new",
+      "v": "keep",
       "owner": "Great chance for all the legs to move and the body to stretch out.",
       "effect": "A leg wave ripples down the body while it stretches and curls.",
-      "sound": "Soft many-footed patter."
+      "sound": "Soft many-footed patter.",
+      "improved": "E1: a leg wave (the legs, picked by colour) ripples down the body while it stretches straight, then curls tighter and relaxes (2.8 s)."
     },
     "bumblebee": {
-      "v": "new",
+      "v": "keep",
       "owner": "Needs an effect.",
       "effect": "Fuzzy body shivers and the wings hum; a slow, clumsy hover.",
-      "sound": "Deep, lazy bumblebee drone."
+      "sound": "Deep, lazy bumblebee drone.",
+      "improved": "E1: the fuzzy body shivers, the wings hum and it hovers up with a slow, clumsy wobble, then settles (3 s)."
     },
     "raspberry": {
-      "v": "new",
+      "v": "keep",
       "owner": "Looks really cool; very good resolution.",
       "effect": "The drupelets bounce one by one in a ripple.",
-      "sound": "Soft bubbly squish."
+      "sound": "Soft bubbly squish.",
+      "improved": "E1: a ripple runs down from the top, pushing the drupelets out and brightening them as it passes (1.8 s)."
     },
     "blackberry": {
-      "v": "new",
+      "v": "keep",
       "owner": "Same as the raspberry: looks great.",
       "effect": "Drupelets gleam in a wave, like light running over it.",
-      "sound": "Darker, deeper squish."
+      "sound": "Darker, deeper squish.",
+      "improved": "E1: a band of light runs across the drupelets with a sparkle of glints (1.8 s)."
     },
     "blueberry": {
-      "v": "new",
+      "v": "keep",
       "owner": "Looks good.",
       "effect": "The bloom (dusty coat) wipes off in a swirl, showing deep blue, then returns.",
-      "sound": "Small round pop."
+      "sound": "Small round pop.",
+      "improved": "E1: the dusty bloom wipes off in a swirl as the berry turns, showing deep blue, then comes back (3.2 s)."
     },
     "grape": {
-      "v": "new",
+      "v": "keep",
       "owner": "Looks good. Maybe the skin comes off.",
       "effect": "The skin peels back in strips to show the pale flesh, then closes.",
-      "sound": "Slippery peel."
+      "sound": "Slippery peel.",
+      "improved": "E1: four strips of skin peel back from the stem end, the flesh under them turns pale, then the skin closes (3.2 s)."
     },
     "star-cookie": {
-      "v": "new",
+      "v": "keep",
       "fixed": "C1: turned round so the glazed top faces the camera.",
       "owner": "Looks OK. Maybe it crumbles.",
       "effect": "Crumbles into pieces and crumbs, then reassembles.",
-      "sound": "Crunchy crumble."
+      "sound": "Crunchy crumble.",
+      "improved": "E1: it crumbles into pieces and crumbs that fall away, then puts itself back together (2.8 s)."
     },
     "tomatoes": {
-      "v": "new",
+      "v": "keep",
       "owner": "Fantastic, extremely realistic. Maybe they move around.",
       "effect": "The tomatoes roll and jostle each other, then settle.",
-      "sound": "Soft thuds rolling on a table."
+      "sound": "Soft thuds rolling on a table.",
+      "improved": "E1: each of the ten tomatoes is a rig part; they roll and bump in different directions, then settle (2.6 s)."
     },
     "mandeltorus": {
-      "v": "new",
+      "v": "keep",
       "owner": "Some parts should rotate clockwise and others counterclockwise.",
       "effect": "Rings of the fractal counter-rotate in bands, then lock back.",
-      "sound": "Shimmering rising chord."
+      "sound": "Shimmering rising chord.",
+      "improved": "E1: alternate rings turn opposite ways with a cyan glow, then lock back (3 s)."
     },
     "basket": {
-      "v": "new",
+      "v": "keep",
       "owner": "A basket of seashells. Neat. No effect.",
       "effect": "Shells hop inside the basket one after another.",
-      "sound": "Clattering shells."
+      "sound": "Clattering shells.",
+      "improved": "E1: the shells (picked by colour, inside the rim) hop one after another in little groups (2 s)."
     },
     "rubber-duck-real": {
       "v": "keep",
@@ -106,73 +122,84 @@
       "improved": "D: a whole-toy rig. A tap squeezes it flat; it springs back taller, wobbles and settles (1.4 s), with a high rubber squeak (the other duck quacks)."
     },
     "garden-gnome": {
-      "v": "new",
+      "v": "keep",
       "owner": "Hilarious, looks great. Maybe the lantern lights up, or it moves around.",
       "effect": "The lantern lights with a warm glow and the gnome gives a little hop.",
-      "sound": "Tiny chuckle-like chirp plus a lamp click."
+      "sound": "Tiny chuckle-like chirp plus a lamp click.",
+      "improved": "E1: the gnome hops and its lantern lights with a warm glow and halo (a flame add-on), then goes out (3.2 s)."
     },
     "wooden-elephant": {
-      "v": "new",
+      "v": "keep",
       "fixed": "C1: soft studio light and the model's normal map baked into the colours, and textures filtered to each splat's size, so the carving reads. The model stays (it is the best CC0 elephant found).",
       "owner": "Underwhelming; the style seems off.",
       "effect": "Trunk lifts and it rocks on its wooden feet.",
-      "sound": "Wooden knock and a toy trumpet."
+      "sound": "Wooden knock and a toy trumpet.",
+      "improved": "E1: the trunk lifts and the elephant rocks on its front and back feet (2.6 s)."
     },
     "marble-bust": {
-      "v": "new",
+      "v": "keep",
       "owner": "Looks good. Maybe the face moves and says something.",
       "effect": "The head turns to look at you; a speech bubble says a short Latin line.",
-      "sound": "Stone grind and a low murmur."
+      "sound": "Stone grind and a low murmur.",
+      "improved": "E1: the head turns towards you and a speech bubble (a splat add-on with the storybook font) says \"SALVE, AMICE!\" (hello, friend) (3.4 s)."
     },
     "ukulele": {
-      "v": "new",
+      "v": "keep",
       "owner": "Instruments should be played so music comes out.",
       "effect": "Strings vibrate and it plays a short strum pattern.",
-      "sound": "Plucked ukulele chord (synth, bright, nylon)."
+      "sound": "Plucked ukulele chord (synth, bright, nylon).",
+      "improved": "E1: four strums (C, F, G, C chords); the strings shimmer and glow with each and the body rocks (2 s)."
     },
     "alarm-clock": {
-      "v": "new",
+      "v": "keep",
       "owner": "Hands should move. On tap it should jump up and down and ring like an alarm clock.",
       "effect": "Hands tick all the time; tap rattles it off the table while it rings.",
-      "sound": "Old twin-bell alarm ring (differs from the other alarm clock)."
+      "sound": "Old twin-bell alarm ring (differs from the other alarm clock).",
+      "improved": "E1: the red second hand ticks all the time. A tap rings the twin bells and the clock rattles across the table (2.4 s)."
     },
     "vintage-camera": {
-      "v": "new",
+      "v": "keep",
       "fixed": "C1: the grain was one-texel aliasing and unlit metal. Textures are now filtered to each splat's size, soft light with gloss is baked in, the lens is dark glass (it was a white disc), and the printed maker's names are painted out.",
       "owner": "Could snap a photo with the flash going off.",
       "effect": "Flash burst from the camera and the view briefly whites out.",
-      "sound": "Mechanical shutter click and wind-on."
+      "sound": "Mechanical shutter click and wind-on.",
+      "improved": "E1: a flash bursts from the camera (a splat add-on) and the whole toy whites out for a moment, with a shutter click and wind-on (1.6 s)."
     },
     "boombox": {
-      "v": "new",
+      "v": "keep",
       "fixed": "C1: filtered textures and baked light; the speakers read as grilles, not static. The small maker badge is painted out.",
       "owner": "Also a bit grainy.",
       "effect": "Speakers pulse to a beat and the tape reels turn.",
-      "sound": "A short synth beat loop."
+      "sound": "A short synth beat loop.",
+      "improved": "E1: the speakers pump and glow blue on the kick drum and the tape reels turn, two bars (2.6 s)."
     },
     "croissant-real": {
-      "v": "new",
+      "v": "keep",
       "owner": "Must do something different from the other croissant.",
       "effect": "Tears in half and steam puffs out.",
-      "sound": "Flaky tear."
+      "sound": "Flaky tear.",
+      "improved": "E1: it tears in half, showing its soft layered inside (an add-on), and a puff of steam rises, then it closes (3 s)."
     },
     "carrot-cake": {
-      "v": "new",
+      "v": "keep",
       "owner": "Interesting but underwhelming.",
       "effect": "A slice cuts out and lifts away, showing layers.",
-      "sound": "Soft knife slide."
+      "sound": "Soft knife slide.",
+      "improved": "E1: a slice facing you lifts out of the ring, showing crumb and frosting layers on its cut faces and in the gap (3.2 s)."
     },
     "pomegranate": {
-      "v": "new",
+      "v": "keep",
       "owner": "Underwhelming.",
       "effect": "Splits open to show glowing red seeds that spill a little.",
-      "sound": "Crack and a scatter of beads."
+      "sound": "Crack and a scatter of beads.",
+      "improved": "E1: it splits open like a book on a hinge at the bottom, showing faces packed with glowing red seeds; a few seeds tumble out (3.4 s)."
     },
     "lantern": {
-      "v": "new",
+      "v": "keep",
       "owner": "A flame should light up inside, like the other fire toys.",
       "effect": "A flame lights inside with a warm glow and flicker.",
-      "sound": "Match strike and soft whoosh."
+      "sound": "Match strike and soft whoosh.",
+      "improved": "E1: a tap lights a flickering flame inside (an add-on) and warms the glass; tap again to blow it out."
     },
     "cat-statue": {
       "v": "keep",
@@ -186,36 +213,42 @@
       "interactive": true,
       "owner": "Ideally playable. At least: a tap plays a real game, white against black, as a long animation.",
       "effect": "Plays a famous public-domain game move by move; later, tap a piece then a square to move it.",
-      "sound": "Wooden piece clacks."
+      "sound": "Wooden piece clacks.",
+      "improved": "E1 (interim, until Phase F plays a real game): the pieces bob in a wave across the board (2.2 s)."
     },
     "horse-statue": {
-      "v": "new",
+      "v": "keep",
       "fixed": "C1: baked soft light (with the model's normal and occlusion maps) gives it shading, so the marble no longer reads as flat white.",
       "owner": "Work like the other statues.",
       "effect": "Rears up on its hind legs, then settles.",
-      "sound": "Stone grind and a whinny-like whistle."
+      "sound": "Stone grind and a whinny-like whistle.",
+      "improved": "E1: it rears higher on its hind legs while the front legs paw the air, then settles (2.6 s)."
     },
     "blob": {
-      "v": "new",
+      "v": "keep",
       "owner": "Interesting; no idea for an effect. The original shapes are really good-looking.",
       "effect": "Splits into three small blobs that merge back.",
-      "sound": "Gloopy wobble."
+      "sound": "Gloopy wobble.",
+      "improved": "E1: splits into three smaller blobs that wobble apart, then merge back with a jelly bounce (2.8 s)."
     },
     "donut": {
-      "v": "new",
+      "v": "keep",
       "owner": "Interesting; good-looking.",
       "effect": "Sprinkles jump off and rain back down.",
-      "sound": "Sprinkle patter."
+      "sound": "Sprinkle patter.",
+      "improved": "E1: the sprinkles (picked by their long shape) jump off in a staggered spray and rain back down (1.8 s)."
     },
     "knot": {
-      "v": "new",
+      "v": "keep",
       "effect": "The neon flows along the knot and it ties tighter, then relaxes.",
-      "sound": "Electric neon hum."
+      "sound": "Electric neon hum.",
+      "improved": "E1: a new neon colour flows round the knot as it ties tighter and turns, then relaxes and the colour flows back (2.8 s)."
     },
     "planet": {
-      "v": "new",
+      "v": "keep",
       "effect": "Clouds race around and a day-night band sweeps over it.",
-      "sound": "Airy wind."
+      "sound": "Airy wind.",
+      "improved": "E1: the clouds race once round the planet and a night band sweeps across it (2.8 s)."
     },
     "basketball": {
       "v": "new",

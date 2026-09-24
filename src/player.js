@@ -9,9 +9,10 @@ import { OrbitCamera, Gestures } from "./camera.js";
 import { EffectDriver, hexToRgb } from "./effects.js";
 import { Painter } from "./paint.js";
 import { generate, normalizeGenerator, applyClay, PROFILES } from "./generators.js";
-import { buildRecipe, meanLuminance } from "./kit.js";
+import { buildRecipe, meanLuminance, Kit } from "./kit.js";
 import { MotionDriver } from "./motion.js";
 import { rigLayout, tagRig } from "./rig.js";
+import { fxTable } from "./rig-fx.js";
 import { RIGS } from "./rigs.js";
 import { drawPattern, patternUniforms } from "./patterns.js";
 import {
@@ -258,10 +259,15 @@ export class Player {
           : toy.generator,
         this.profile,
       );
-      info = await this.buildProcedural(generator, toy.clay || [], token, progress);
-      if (!info) return null;
-      // A shelf toy edited with clay keeps its name.
+      // A shelf shape keeps its rig (its tap effect) while its shape and
+      // colours are the shelf's, even when edited with clay.
       const shelf = preset || (toy.id ? findToy(toy.id) : null);
+      const same = shelf?.generator && generator.shape === shelf.generator.shape && generator.palette === shelf.generator.palette; // prettier-ignore
+      const rig = same ? RIGS[shelf.id] || null : null;
+      info = await this.buildProcedural(generator, toy.clay || [], token, progress, rig);
+      if (!info) return null;
+      if (rig) this.attachRig(shelf.id, rig, info);
+      // A shelf toy edited with clay keeps its name.
       info.id = shelf ? shelf.id : null;
       info.label = preset ? preset.label : shelf ? `${shelf.label}, edited` : "Your toy";
       info.kind = "procedural";
@@ -290,10 +296,7 @@ export class Player {
       info = this.measure(asset.resource, def.transform);
       Object.assign(info, { id: def.id, label: def.label, kind: "captured", credit: def.credit });
       if (rig) {
-        // Rig coordinates are the world's, so the tap point needs no transform.
-        this.motion.setToy(rig, { parts: rigLayout(rig).parts, transform: null }, this.scene.motion?.controls || {}); // prettier-ignore
-        info.recipe = rig;
-        info.rig = rig;
+        this.attachRig(def.id, rig, info);
       }
     } else if (toy.kind === "file") {
       if (!file)
@@ -377,7 +380,7 @@ export class Player {
     };
   }
 
-  async buildProcedural(generator, clay, token, progress) {
+  async buildProcedural(generator, clay, token, progress, rig = null) {
     progress(0, "Building the toy…");
     const it = generate(generator, { clay });
     let r = it.next();
@@ -392,9 +395,9 @@ export class Player {
       r = it.next();
     }
     const ctx = r.value;
-    const container = this.makeContainer(ctx.buf);
+    const container = this.makeContainer(ctx.buf, rig ? "rig" : "kit");
     this.disposeProcedural();
-    this.stage.setToy({ resource: container, owned: true, kit: true });
+    this.stage.setToy({ resource: container, owned: true, kit: !rig, rig: !!rig });
     this.proc = { ctx, container, clay: clay.slice() };
     const b = ctx.buf.bounds();
     const half = [0, 1, 2].map((k) => Math.max(Math.abs(b.min[k]), Math.abs(b.max[k])));
@@ -461,15 +464,44 @@ export class Player {
     };
   }
 
-  makeContainer(buf) {
+  // Moving parts, effects and an add-on for a scan or a shelf shape (see
+  // src/rigs.js). Rig coordinates are the world's, so the tap point needs
+  // no transform.
+  attachRig(id, rig, info) {
+    const parts = rigLayout(rig).parts;
+    const ctx = { parts, transform: null, rig: true, fx: rig.fx ? fxTable(rig, parts) : null };
+    this.motion.setToy(rig, ctx, this.scene.motion?.controls || {});
+    if (rig.addon) {
+      const addon = this.buildAddon(id, rig.addon);
+      this.stage.setAddon(this.makeContainer(addon.buf));
+      this.motion.setAddon(addon);
+    }
+    info.recipe = rig;
+    info.rig = rig;
+  }
+
+  // A scan rig's add-on, built in world coordinates (no fitting).
+  buildAddon(id, addon) {
+    const k = new Kit(hash32(`${id}-addon`), { count: addon.count ?? 8000, fit: false });
+    addon.build(k);
+    const it = k.emit();
+    while (!it.next().done);
+    return { buf: k.buf, parts: k.parts };
+  }
+
+  // kind "kit" carries the splatAnim stream; "rig" (a rigged shelf shape)
+  // gets the splatPart stream from stage.setToy, so it has its own format.
+  makeContainer(buf, kind = "kit") {
     const device = this.stage.device;
     if (!this.format) {
       this.format = pc.GSplatFormat.createDefaultFormat(device);
       this.format.addExtraStreams([
         { name: "splatAnim", format: pc.PIXELFORMAT_RGBA32F, storage: pc.GSPLAT_STREAM_RESOURCE },
       ]);
+      this.rigFormat = pc.GSplatFormat.createDefaultFormat(device);
     }
-    const container = new pc.GSplatContainer(device, buf.capacity, this.format);
+    const format = kind === "rig" ? this.rigFormat : this.format;
+    const container = new pc.GSplatContainer(device, buf.capacity, format);
     this.writeContainer(container, buf, 0, buf.count, true);
     return container;
   }
@@ -780,6 +812,9 @@ export class Player {
     );
     if (info.rig) u.uSpRigDbg = [this.rigDebug ? 1 : 0, 0, 0, 0];
     this.stage.setUniforms(u);
+    if (this.motion.addonU) {
+      this.stage.setAddonUniforms({ ...u, ...this.motion.addonU, uSpPat: [0, 0, 0, 0] });
+    }
     const dripping = this.painter.tick(this.time, (s) => this.scene.paint.stamps.push(s));
     const animating =
       this.driver.isAnimating(effects, this.time) ||
@@ -976,6 +1011,7 @@ export class Player {
     this.proc.clay.push(op);
     if (op[0] === "a") this.writeContainer(container, ctx.buf, res.start, res.end);
     else if (res.erased) this.writeContainer(container, ctx.buf, 0, ctx.buf.count);
+    if (this.toyInfo?.rig) tagRig(this.stage, this.toyInfo.rig);
     this.pickDirty = true;
     this.emit("clay", this.proc.clay);
     return op;

@@ -9,6 +9,7 @@
 // may also move the whole toy (out.body) for squash, rock and hop effects.
 
 import * as pc from "./pc.js";
+import { rgb as hexColor } from "./kit.js";
 
 export const MAX_REGIONS = 12;
 
@@ -19,21 +20,40 @@ uniform vec4 uRigM2;
 uniform vec4 uRigN;    // x region count
 uniform vec4 uRigA[${MAX_REGIONS}]; // xyz centre (world), w part index
 uniform vec4 uRigB[${MAX_REGIONS}]; // xyz radii, w soft edge (0..1 of the radius)
+uniform vec4 uRigC[${MAX_REGIONS}]; // rgb colour the region needs, w tolerance (0 = any colour)
+uniform vec4 uRigK[4];  // two keys: [centre xyz, radius (0 = anywhere)], [rgb, tolerance (< 0: long splats)]
+float rigKey(vec3 p, vec3 col, vec3 s, vec4 at, vec4 key) {
+  if (key.w == 0.0) return 0.0;
+  float m;
+  if (key.w < 0.0) {
+    float hi = max(s.x, max(s.y, s.z));
+    float mid = s.x + s.y + s.z - hi - min(s.x, min(s.y, s.z));
+    m = mid < -key.w * hi ? 1.0 : 0.0;
+  } else {
+    m = 1.0 - smoothstep(key.w * 0.6, key.w, distance(col, key.rgb));
+  }
+  if (at.w > 0.0) m *= 1.0 - smoothstep(0.85, 1.0, distance(p, at.xyz) / at.w);
+  return m;
+}
 void process() {
   vec4 h = vec4(getCenter(), 1.0);
   vec3 p = vec3(dot(uRigM0, h), dot(uRigM1, h), dot(uRigM2, h));
+  vec3 col = clamp(getColor().rgb, 0.0, 1.0);
   float part = 0.0;
   float w = 0.0;
   for (int i = 0; i < ${MAX_REGIONS}; i++) {
     if (float(i) >= uRigN.x) break;
     float r = length((p - uRigA[i].xyz) / uRigB[i].xyz);
     float wi = 1.0 - smoothstep(1.0 - max(uRigB[i].w, 0.001), 1.0, r);
+    vec4 c = uRigC[i];
+    if (c.w > 0.0) wi *= 1.0 - smoothstep(c.w * 0.6, c.w, distance(col, c.rgb));
     if (wi > 0.0 && wi >= w) {
       w = wi;
       part = uRigA[i].w;
     }
   }
-  writeSplatPart(vec4(part / 255.0, w, 0.0, 0.0));
+  vec3 s = getScale();
+  writeSplatPart(vec4(part / 255.0, w, rigKey(p, col, s, uRigK[0], uRigK[1]), rigKey(p, col, s, uRigK[2], uRigK[3])));
 }
 `;
 
@@ -44,23 +64,44 @@ uniform uRigM2: vec4f;
 uniform uRigN: vec4f;
 uniform uRigA: array<vec4f, ${MAX_REGIONS}>;
 uniform uRigB: array<vec4f, ${MAX_REGIONS}>;
+uniform uRigC: array<vec4f, ${MAX_REGIONS}>;
+uniform uRigK: array<vec4f, 4>;
+fn rigKey(p: vec3f, col: vec3f, s: vec3f, at: vec4f, key: vec4f) -> f32 {
+  if (key.w == 0.0) { return 0.0; }
+  var m: f32;
+  if (key.w < 0.0) {
+    let hi = max(s.x, max(s.y, s.z));
+    let mid = s.x + s.y + s.z - hi - min(s.x, min(s.y, s.z));
+    m = select(0.0, 1.0, mid < -key.w * hi);
+  } else {
+    m = 1.0 - smoothstep(key.w * 0.6, key.w, distance(col, key.rgb));
+  }
+  if (at.w > 0.0) { m = m * (1.0 - smoothstep(0.85, 1.0, distance(p, at.xyz) / at.w)); }
+  return m;
+}
 fn process() {
   let h = vec4f(getCenter(), 1.0);
   let p = vec3f(dot(uniform.uRigM0, h), dot(uniform.uRigM1, h), dot(uniform.uRigM2, h));
+  let col = clamp(getColor().rgb, vec3f(0.0), vec3f(1.0));
   var part = 0.0;
   var w = 0.0;
   for (var i = 0; i < ${MAX_REGIONS}; i++) {
     if (f32(i) >= uniform.uRigN.x) { break; }
     let a = uniform.uRigA[i];
     let b = uniform.uRigB[i];
+    let c = uniform.uRigC[i];
     let r = length((p - a.xyz) / b.xyz);
-    let wi = 1.0 - smoothstep(1.0 - max(b.w, 0.001), 1.0, r);
+    var wi = 1.0 - smoothstep(1.0 - max(b.w, 0.001), 1.0, r);
+    if (c.w > 0.0) { wi = wi * (1.0 - smoothstep(c.w * 0.6, c.w, distance(col, c.rgb))); }
     if (wi > 0.0 && wi >= w) {
       w = wi;
       part = a.w;
     }
   }
-  writeSplatPart(vec4f(part / 255.0, w, 0.0, 0.0));
+  let s = getScale();
+  let k0 = rigKey(p, col, s, uniform.uRigK[0], uniform.uRigK[1]);
+  let k1 = rigKey(p, col, s, uniform.uRigK[2], uniform.uRigK[3]);
+  writeSplatPart(vec4f(part / 255.0, w, k0, k1));
 }
 `;
 
@@ -73,7 +114,8 @@ export function rigLayout(rig) {
     parts.push({ name: p.name, pivot: p.pivot.slice(), axis: unitAxis(p.axis || [0, 1, 0]) });
     for (const r of p.regions) {
       const rad = typeof r.r === "number" ? [r.r, r.r, r.r] : r.r;
-      regions.push({ part: parts.length - 1, at: r.at, r: rad, soft: r.soft ?? 0.3 });
+      const col = r.color ? hexColor(r.color) : null;
+      regions.push({ part: parts.length - 1, at: r.at, r: rad, soft: r.soft ?? 0.3, color: col, tol: col ? (r.tol ?? 0.25) : 0 }); // prettier-ignore
     }
   }
   if (parts.length > 16) throw new Error("A rig can have at most 15 parts.");
@@ -109,8 +151,22 @@ export function tagRig(stage, rig) {
     a.set([r.at[0], r.at[1], r.at[2], r.part], i * 4);
     b.set([r.r[0], r.r[1], r.r[2], r.soft], i * 4);
   });
+  const cc = new Float32Array(MAX_REGIONS * 4);
+  regions.forEach((r, i) => {
+    if (r.color) cc.set([...r.color, r.tol], i * 4);
+  });
+  const k = new Float32Array(16);
+  (rig.keys || []).slice(0, 2).forEach((key, i) => {
+    k.set([...(key.at || [0, 0, 0]), key.r ?? 0], i * 8);
+    // A key picks splats by colour, or long thin splats (`long`: the middle
+    // size over the largest is below it), optionally only within r of at.
+    if (key.long) k.set([0, 0, 0, -key.long], i * 8 + 4);
+    else k.set([...hexColor(key.color), key.tol ?? 0.2], i * 8 + 4);
+  });
   proc.setParameter("uRigA[0]", a);
   proc.setParameter("uRigB[0]", b);
+  proc.setParameter("uRigC[0]", cc);
+  proc.setParameter("uRigK[0]", k);
   proc.process();
   // WebGPU may run the pass with the frame, so it is freed with the toy.
   toy.rigProc?.destroy();

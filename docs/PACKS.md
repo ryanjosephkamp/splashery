@@ -211,8 +211,30 @@ a recipe, plus `parts`, each made of soft ellipsoid regions in world coordinates
 
 A GPU pass tags each splat with the region it falls in when the toy loads; `soft` (a fraction of the
 radius) blends the edge so the part bends into the rest of the toy. Up to 15 parts and 12 regions.
-Open the app with `?rig=show` to tint each part while placing regions. `out.body` (squash, offset,
-rotation) moves the whole scan, for squeezes and hops.
+Open the app with `?rig=show` to tint each part (and the colour keys) while placing regions, or
+render `tools/rig-map.mjs <dir> --rig <id>` for front, side and top views on a world grid.
+`out.body` (squash, offset, rotation) moves the whole scan, for squeezes and hops. Shelf shapes
+(blob, donut, knot, planet) use rigs too.
+
+More that a rig can do (Phase E1; the full reference is at the top of `src/rigs.js` and
+`src/rig-fx.js`):
+
+- A region can take only splats of one colour: `{ at, r, color: "#d84a34", tol: 0.4 }` (the alarm
+  clock's red second hand).
+- `keys: [{ color: "#c9b25a", tol: 0.2 }]` marks up to two sets of splats by colour (optionally only
+  within `r` of `at`), or `{ long: 0.42 }` for long thin splats (the donut's sprinkles).
+- A driven part takes `{ tint: "#ffb040", glow: 0.5, bright: 0.3 }` to light up and `{ scale: 1.1 }`
+  to grow about its pivot.
+- `fx` lists up to four whole-body effects for things too many or too small for parts: each picks
+  splats (`select`: all, a key or a part; `mask`: half-space, strips, sphere or wedge), moves them
+  (push, along, scatter, hop, shiver, turn, counter-rotating bands, bend, peel, split) and colours
+  them (glow, recolour, brighten, sparkle, fade, darken), shaped by a pattern (a growing shell, a
+  band, a stagger per piece, a swirl wipe, a wave). `drive()` sets
+  `out.fx.<name> = { move, color, phase }` each frame.
+- `addon: { count, build(k) }` builds a small kit toy in world coordinates, drawn with the scan and
+  sorted with it (flames, flowers, a flash, a speech bubble, cut faces). Its parts move through
+  `out.addon = { parts, glow }`; `visible: 0` or `scale: 0` hides them at rest.
+- `alive: (c) => c.lit > 0` keeps frames coming only while the toy moves by itself.
 
 **Options** rebuild the toy and are saved in the scene (`o` in `build`):
 
