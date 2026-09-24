@@ -5,13 +5,13 @@
 v3 shipped on 2026-09-23 (PRs #4–#11, 283 toys). The next work runs in phases, one session each. The
 current state and the full plan for the next phase are in [HANDOFF.md](HANDOFF.md).
 
-| Phase | What                                                                                                                                               |
-| ----- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| A     | Sharpness (pixel density, splat counts, kit splat size, a Detail setting) and embeds (transparency, framing, size, zoom); then the homepage embed. |
-| B     | Mobile shelf grid and a "Find your own splat" help panel.                                                                                          |
-| C     | More music toys and polish.                                                                                                                        |
-| D     | AI image-to-3D trial (the owner added `HF_TOKEN` on 2026-09-23).                                                                                   |
-| E     | Later: gallery, multi-toy scenes, liquid pour, draw-order fix, more scans.                                                                         |
+| Phase | What                                                                                                                                                                                  |
+| ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| A     | Done (PR #13 and the homepage PR): sharpness (pixel density, splat counts, kit splat size, a Detail setting) and embeds (transparency, framing, size, zoom); then the homepage embed. |
+| B     | Mobile shelf grid and a "Find your own splat" help panel.                                                                                                                             |
+| C     | More music toys and polish.                                                                                                                                                           |
+| D     | AI image-to-3D trial (the owner added `HF_TOKEN` on 2026-09-23).                                                                                                                      |
+| E     | Later: gallery, multi-toy scenes, liquid pour, draw-order fix, more scans.                                                                                                            |
 
 ## v3: the big toy box (done)
 
