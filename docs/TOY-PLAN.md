@@ -183,8 +183,8 @@ Proposals below are suggestions; the owner may change them.
   - Owner: Looks good. Maybe the face moves and says something.
   - Effect: The head turns to look at you; a speech bubble says a short Latin line.
   - Improved: E1b: the head turns on its neck (a straight cut, no bending), the jaw drops once per
-    syllable of "SALVE, AMICE!" (a dark mouth shows behind the lips) and the speech bubble appears
-    (3.4 s).
+    syllable of "SALVE, AMICE!" (a shadowed gap opens between the lips) and the speech bubble
+    appears (3.4 s).
   - Sound: Stone grind and a low murmur.
 - **Ukulele** (`ukulele`). Now: tap: Strum (rig). Plan: keep.
   - Owner: Instruments should be played so music comes out.
