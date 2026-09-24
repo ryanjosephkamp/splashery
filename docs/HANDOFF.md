@@ -3,17 +3,50 @@
 The current state and the next phase. The session that finishes a phase updates this file. The
 ground rules are in [CLAUDE.md](../CLAUDE.md).
 
-## Current state (2026-09-24, after Phase E1)
+## Current state (2026-09-24, after Phase E1b)
 
 - Phase A is done: splashery PR #13 and homepage PR #33 in
   `ryanjosephkamp/ryanjosephkamp.github.io`, both merged. Phases B (PR #17), C1 (PR #18), C2 (PR
-  #19) and D (PR #20) are merged.
-- Phase E1 is done in splashery PR #21 (branch `claude/phase-e1-45lgvf`). Check that it is merged
-  before starting E2.
-- **New effects for the scans and shapes (E1).** All 33 E1 toys have their own tap effect, and 32
-  are now `keep` in `tools/toy-plan.json` with an `improved` entry saying what the tap does. The
-  chess set stays `new` for Phase F: until then a tap bobs its pieces in a wave. 133 toys are keep,
-  3 more, 147 new.
+  #19), D (PR #20) and E1 (PR #21) are merged.
+- **Phase E1b** (the owner's review of E1, verbatim in `docs/reviews/2026-09-24-e1/review.md`) is in
+  three stacked PRs, merged in order: `claude/phase-e1-45lgvf-1` (rules, clip tool, scan and shape
+  fixes), `-2` (thrown balls, eight-ball, storybook) and `-3` (chess and laptop). Check that all
+  three are merged before starting E2.
+- **Effect quality rules (E1b).** CLAUDE.md now has "Effect quality rules" and docs/PACKS.md section
+  7b the details: real motion of solid pieces (never bend a scan with soft regions), separate things
+  move separately, real breaking, instruments visibly played, mouths move, real rules and real
+  throws, real materials, the grape as the bar, and judging effects as clips at phone size.
+- **Effect clips (E1b).** `tools/effect-clip.mjs` renders a tap effect as a looping GIF with the
+  clock stepped by hand (about 90 s per toy under SwiftShader). The owner reviews clips of every
+  changed effect on the private "Effect review" page
+  (https://claude.ai/artifact/NCsg9V5SzFY3Mnwuwgq7pi) before merging. Its `verdicts` collection
+  holds one doc per toy: `{ verdict: "good" | "fix" | "", note, at }`. Read it with ArtifactData,
+  and republish the page (same URL) with new clips each phase.
+- **Scan fixes (E1b).** Rig regions now default to hard edges (`soft: 0.03`), overlapping regions
+  split by the nearest centre, `over: true` makes a region win (a jaw inside a head), and `notColor`
+  keeps a colour out (the tomatoes' plate). New effect movers: `fall` (Voronoi pieces break off,
+  fall to the floor and come back), `vibrate` (a string's standing wave) and `writhe` (a travelling
+  wave that contorts a shape). The cat, horse, elephant, bust, fly, tomatoes, basket, ukulele,
+  raspberry, blackberry, blueberry, donut and knot were redone (see TOY-PLAN.md).
+  `tools/rig-map.mjs` has `--center`/`--half` zoom and left and bottom views. To place regions on a
+  scan, read its splat centres in the page (`player.stage.toy.resource.centers`) and slice them
+  numerically; that found the fly's legs, which the renders hid.
+- **Chess (E1b).** The chess set is now a kit toy (`src/packs/games.js`, category Toys) with 32
+  pieces as "token" splats (`uSpTokens`, 2 vec4 each). A tap plays Morphy's Opera Game (Paris,
+  1858); a unit test checks the final position. Recipes can now ask for sounds mid-effect with
+  `out.cues` (each move clacks as it lands). The old chess scan (CC0, Poly Haven) is off the shelf;
+  its files are still in `assets/toys/chess-set/` and `tools/assets.json`.
+- **Laptop (E1b).** Keycaps with letters (behaviour "key": the pressed key goes down), a live screen
+  (behaviour "screen": splats read the `uSpScreen` texture, drawn by the recipe's `screen.draw` when
+  `screen.version` changes), `typeKey` for a real keyboard (it gets first pick of the keys before
+  the app's shortcuts), and `drag` for the trackpad (a drag that starts on the pad moves the
+  pointer; elsewhere it orbits).
+- **Thrown balls (E1b).** The American football spirals, the rugby ball tumbles end over end, the
+  shuttlecock flips and floats down spinning, and the flying disc spins and loops. The eight-ball is
+  opaque and glossy; the storybook's outside is crisp.
+- 138 toys are keep, 3 more, 142 new.
+- **New effects for the scans and shapes (E1).** All 33 E1 toys have their own tap effect (E1b redid
+  13 of them after the owner's review).
 - **Rigs grew (E1).** Everything is in `src/rigs.js` (reference at its top), `src/rig.js` (tagging
   pass), `src/rig-fx.js` (effects) and the rig variant of the modifier in `src/effects.js`:
   - Colour keys: a region can take only splats of one colour, and `keys` marks up to two sets of
@@ -239,6 +272,16 @@ Known issues carried forward:
   - Scenes saved with the submarine's old `scope=0` load with the periscope up.
   - The rubber duck and the guitar still need their own sounds (Phase D): a quack and real music.
     (Done in D.)
+- New in E1b:
+  - The owner has not yet seen the E1b effects; the clips on the Effect review page are the check.
+  - Hard cuts can leave a thin gap where a part turns away from the rest (the cat's neck is hidden
+    by its collar; the bust's neck and the horse's knees are not).
+  - The laptop's screen text uses the browser's sans-serif font, so it looks a little different on
+    each device. Typing only works while the laptop is on screen and open.
+  - Keys the laptop does not have (such as Tab) still reach the app's shortcuts.
+  - The chess game always plays from the start; there is no pause or step. Tap-to-move is still
+    Phase F work.
+  - Part 3 holds both the chess set and the laptop (they share engine changes).
 - New in E1:
   - No person has seen or heard the E1 effects yet; they were checked with filmstrips
     (`tools/effect-strip.mjs`) in headless Chromium, at 220 px.
@@ -293,6 +336,7 @@ If the plan JSON changes, the page can be republished from it (`node tools/toy-p
 | C2     | Done: clearer or more dramatic effects for 33 toys the owner found subtle (bacteriophage, Big Ben, bus, octopus, fireworks, …).                           | splashery |
 | D      | Done: a voice library and a sound per toy, scan rigs, taps that know where they landed, drag-to-stretch, sound check and audit tools.                     | splashery |
 | E1     | Done: new tap effects for the scans and shapes (33 toys), with colour keys, whole-body effects and kit-built add-ons for rigs.                            | splashery |
+| E1b    | Done: fixes from the owner's E1 review (19 toys, a chess game, a laptop you can type on), effect quality rules, effect clips.                             | splashery |
 | **E2** | New tap effects for space, atoms and gems (32 toys, kit recipes); the second of six waves (see TOY-PLAN.md).                                              | splashery |
 | E3–E6  | New tap effects for the other toys marked new, in four more waves by category (see TOY-PLAN.md), each with its own sound.                                 | splashery |
 | F      | Touch and drag interaction: a solvable puzzle cube, a chess set that plays a real game, a stretchy gummy bear, a draggable Newton's cradle, bricks.       | splashery |
@@ -318,7 +362,8 @@ What the owner asked for across the board (2026-09-23):
 ## Phase E2 in detail: space, atoms and gems
 
 Before starting, check the owner's marks (see above) for any later change, and ask whether the owner
-left notes on the sound board or has tried the E1 effects.
+left notes on the sound board or the Effect review page. Follow the Effect quality rules in
+CLAUDE.md, and publish clips of every new effect on the Effect review page.
 
 1. **Toys (32).** Sun, solar system, the eight planets, aurora world, asteroid, comet, meteor, star,
    pulsar, black hole, star cluster, ring nebula, nebula, spiral galaxy (space pack); electron

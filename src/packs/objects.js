@@ -325,6 +325,146 @@ BOOK.T = BOOK.pb + 2 * BOOK.ct;
 
 const LAPTOP = { W: 1.5, D: 1.0, hb: 0.06, hl: 0.035, open: 1.85 };
 
+// The laptop's keys: id (what it types), label, centre and size on the deck.
+const LAPTOP_KEYS = (() => {
+  const rows = [
+    ["1234567890", [["DEL", 0.16]]],
+    ["QWERTYUIOP", []],
+    ["ASDFGHJKL", [["ENTER", 0.16]]],
+    ["ZXCVBNM,.", []],
+  ];
+  const keys = [];
+  const pitch = 0.105;
+  const size = 0.088;
+  rows.forEach(([chars, extra], r) => {
+    const z = -0.35 + r * 0.095;
+    const items = [...chars].map((ch) => [ch, size]).concat(extra);
+    const total = items.reduce((sum, [, w]) => sum + w, 0) + (items.length - 1) * (pitch - size);
+    let x = -total / 2;
+    for (const [label, w] of items) {
+      keys.push({ id: label, label, x: x + w / 2, z, w, d: size });
+      x += w + (pitch - size);
+    }
+  });
+  keys.push({ id: "SPACE", label: "", x: 0, z: 0.03, w: 0.52, d: size });
+  return keys;
+})();
+const PAD = { x: 0, z: 0.3, w: 0.44, d: 0.26 };
+const onPad = (p) => Math.abs(p[0] - PAD.x) < PAD.w / 2 && Math.abs(p[2] - PAD.z) < PAD.d / 2;
+const padUV = (p) => [clamp((p[0] - PAD.x) / PAD.w + 0.5, 0.02, 0.94), clamp((p[2] - PAD.z) / PAD.d + 0.5, 0.02, 0.9)]; // prettier-ignore
+
+function keyFor(ch) {
+  const id =
+    ch === " " ? "SPACE" : ch === "Backspace" ? "DEL" : ch === "Enter" ? "ENTER" : ch.length === 1 ? ch.toUpperCase() : ""; // prettier-ignore
+  return LAPTOP_KEYS.findIndex((k) => k.id === id);
+}
+
+// What is on the laptop's screen (one laptop is shown at a time).
+const laptopStart = () => ({
+  text: "Hello! Tap the keys,\nor type on your own\nkeyboard.\n",
+  pointer: [0.78, 0.7],
+  target: [0.78, 0.7],
+  clickAt: -99,
+  pressKey: -1,
+  pressAt: -99,
+  queue: [],
+  dragFrom: null,
+  lastTime: null,
+  open: true,
+});
+const LAPTOP_STATE = laptopStart();
+
+function typeInto(st, key, typed) {
+  if (key.id === "DEL") st.text = st.text.slice(0, -1);
+  else if (key.id === "ENTER") st.text += "\n";
+  else if (key.id === "SPACE") st.text += " ";
+  else st.text += typed ?? key.id.toLowerCase();
+  // Keep the last few lines.
+  const lines = st.text.split("\n");
+  if (lines.length > 6) st.text = lines.slice(-6).join("\n");
+  if (st.text.length > 240) st.text = st.text.slice(-240);
+}
+
+// The laptop's display: a wallpaper, a notes window with the typed text and a
+// blinking caret, and the pointer.
+function drawLaptopScreen(g, time) {
+  const st = LAPTOP_STATE;
+  const W = g.canvas.width;
+  const H = g.canvas.height;
+  const sky = g.createLinearGradient(0, 0, 0, H);
+  sky.addColorStop(0, "#2b1b6b");
+  sky.addColorStop(0.55, "#ff5e98");
+  sky.addColorStop(1, "#ff9a62");
+  g.fillStyle = sky;
+  g.fillRect(0, 0, W, H);
+  g.fillStyle = "rgba(18, 194, 181, 0.55)";
+  g.beginPath();
+  g.moveTo(0, H);
+  for (let x = 0; x <= W; x += 16) g.lineTo(x, H * 0.8 + 18 * Math.sin(x / 70));
+  g.lineTo(W, H);
+  g.fill();
+  // The notes window.
+  const x0 = W * 0.06;
+  const y0 = H * 0.08;
+  const w = W * 0.88;
+  const h = H * 0.8;
+  g.fillStyle = "rgba(0,0,0,0.35)";
+  g.fillRect(x0 + 6, y0 + 8, w, h);
+  g.fillStyle = "#fbfaf6";
+  g.fillRect(x0, y0, w, h);
+  g.fillStyle = "#d9dde4";
+  g.fillRect(x0, y0, w, 40);
+  for (const [i, col] of ["#ff5f57", "#febc2e", "#28c840"].entries()) {
+    g.fillStyle = col;
+    g.beginPath();
+    g.arc(x0 + 22 + i * 24, y0 + 20, 8, 0, Math.PI * 2);
+    g.fill();
+  }
+  g.fillStyle = "#3a3f47";
+  g.font = "bold 22px sans-serif";
+  g.textAlign = "center";
+  g.fillText("Notes", x0 + w / 2, y0 + 28);
+  g.textAlign = "left";
+  g.fillStyle = "#1f2329";
+  g.font = "bold 36px sans-serif";
+  const lines = st.text.split("\n");
+  const lh = 44;
+  lines.forEach((line, i) => g.fillText(line, x0 + 20, y0 + 84 + i * lh));
+  // The caret after the last character.
+  if (Math.floor(time * 2) % 2 === 0) {
+    const last = lines[lines.length - 1];
+    const cx = x0 + 22 + g.measureText(last).width;
+    const cy = y0 + 84 + (lines.length - 1) * lh;
+    g.fillStyle = "#2f6bff";
+    g.fillRect(cx, cy - 32, 4, 40);
+  }
+  // A click ripple, then the pointer (an arrow).
+  const age = time - st.clickAt;
+  const px = st.pointer[0] * W;
+  const py = st.pointer[1] * H;
+  if (age >= 0 && age < 0.5) {
+    g.strokeStyle = `rgba(47,107,255,${1 - age / 0.5})`;
+    g.lineWidth = 5;
+    g.beginPath();
+    g.arc(px, py, 10 + 50 * age, 0, Math.PI * 2);
+    g.stroke();
+  }
+  g.fillStyle = "#ffffff";
+  g.strokeStyle = "#111111";
+  g.lineWidth = 3;
+  g.beginPath();
+  g.moveTo(px, py);
+  g.lineTo(px, py + 34);
+  g.lineTo(px + 9, py + 26);
+  g.lineTo(px + 16, py + 40);
+  g.lineTo(px + 22, py + 37);
+  g.lineTo(px + 15, py + 23);
+  g.lineTo(px + 26, py + 23);
+  g.closePath();
+  g.fill();
+  g.stroke();
+}
+
 const FAN = { yawAt: [0, 0.62, -0.12], hub: [0, 0.62, 0.2] };
 
 const TELE = { dir: unit([0.72, 0.5, -0.3]), mount: [0, 0.2, 0] };
@@ -719,56 +859,180 @@ export const RECIPES = {
     },
   },
 
+  // A laptop you can use: tap its keys (or type on your own keyboard) and the
+  // letters appear on the screen; tap or drag on the trackpad to move the
+  // pointer. Tap anywhere else to close or open the lid.
   laptop: {
     alive: true,
     options: [{ key: "color", label: "Case", type: "color", default: "#b9bec6" }],
-    controls: [{ key: "open", label: "Open", type: "toggle", default: 1, ease: 1.3 }],
-    action: { key: "open", label: "Open or close" },
-    drive(t, c, out) {
+    controls: [
+      { key: "open", label: "Open", type: "toggle", default: 1, ease: 1.3 },
+      { key: "type", label: "Type", type: "pulse", ease: 0.2 },
+      { key: "pad", label: "Trackpad", type: "pulse", ease: 0.3 },
+    ],
+    action: {
+      key: "open",
+      label: "Open or close",
+      quiet: ["type", "pad"],
+      at(p, c) {
+        if (c.open < 0.9 || Math.abs(p[1] - LAPTOP.hb) > 0.05) return null;
+        const i = LAPTOP_KEYS.findIndex((k) => Math.abs(p[0] - k.x) < k.w / 2 + 0.008 && Math.abs(p[2] - k.z) < k.d / 2 + 0.008); // prettier-ignore
+        // Taps queue up, so quick typing never loses a key between frames.
+        if (i >= 0) {
+          LAPTOP_STATE.queue.push({ pick: i });
+          return { key: "type", pick: i };
+        }
+        if (onPad(p)) {
+          LAPTOP_STATE.queue.push({ pad: p.slice() });
+          return { key: "pad" };
+        }
+        return null;
+      },
+    },
+    typeKey(ch) {
+      if (!LAPTOP_STATE.open) return null;
+      const i = keyFor(ch);
+      if (i < 0) return null;
+      LAPTOP_STATE.queue.push({ pick: i, typed: ch.length === 1 ? ch : null });
+      return { key: "type", pick: i };
+    },
+    drag: {
+      at: (p) => LAPTOP_STATE.open && onPad(p),
+      start(p) {
+        LAPTOP_STATE.dragFrom = p;
+      },
+      move(p) {
+        const st = LAPTOP_STATE;
+        if (!st.dragFrom) return;
+        // Relative, like a real trackpad: the pointer moves with the finger.
+        st.target = [
+          clamp(st.target[0] + ((p[0] - st.dragFrom[0]) / PAD.w) * 1.2, 0.02, 0.94),
+          clamp(st.target[1] + ((p[2] - st.dragFrom[2]) / PAD.d) * 1.2, 0.02, 0.9),
+        ];
+        st.dragFrom = p;
+      },
+      end() {
+        LAPTOP_STATE.dragFrom = null;
+      },
+    },
+    screen: {
+      width: 640,
+      height: 396,
+      reset() {
+        Object.assign(LAPTOP_STATE, laptopStart());
+      },
+      version(time) {
+        const st = LAPTOP_STATE;
+        const blink = Math.floor(time * 2) % 2;
+        const ripple = time - st.clickAt < 0.5 ? Math.floor(time * 30) : -1;
+        return `${st.text}|${st.pointer[0].toFixed(3)},${st.pointer[1].toFixed(3)}|${blink}|${ripple}`;
+      },
+      draw(g, time) {
+        drawLaptopScreen(g, time);
+      },
+    },
+    drive(t, c, out, info) {
+      const st = LAPTOP_STATE;
+      st.open = c.open > 0.9;
       // Modelled open; closing turns the lid back down onto the keys.
       const a = LAPTOP.open * (1 - ease3(c.open));
       out.parts.lid = { angle: a };
       out.parts.bezel = { angle: a, visible: smoothstep(0.02, 0.3, c.open) };
       out.parts.screen = { angle: a, visible: smoothstep(0.72, 1, c.open) };
       out.parts.deck = { visible: smoothstep(0.02, 0.2, c.open) };
+      for (const ev of st.queue.splice(0)) {
+        if (ev.pick !== undefined) {
+          const k = LAPTOP_KEYS[ev.pick];
+          typeInto(st, k, ev.typed);
+          st.pressKey = ev.pick;
+          st.pressAt = info.time;
+          out.cues.push(k.id === "SPACE" ? { voice: "clack", f: 1300, decay: 0.8, vol: 0.7 } : { voice: "click", f: 1900 + 40 * (ev.pick % 7), decay: 1.2 }); // prettier-ignore
+        } else if (ev.pad) {
+          // A tap on the trackpad: the pointer jumps to the matching spot
+          // and clicks there.
+          st.target = padUV(ev.pad);
+          st.clickAt = info.time + 0.2;
+          out.cues.push({ voice: "click", f: 900, decay: 1.5, vol: 0.8 });
+        }
+      }
+      // The pointer glides to its target.
+      const k = 1 - Math.exp(-(info.time - (st.lastTime ?? info.time)) * 14);
+      st.lastTime = info.time;
+      st.pointer = [st.pointer[0] + (st.target[0] - st.pointer[0]) * k, st.pointer[1] + (st.target[1] - st.pointer[1]) * k]; // prettier-ignore
+      const since = info.time - st.pressAt;
+      if (since >= 0 && since < 0.2) out.press = st.pressKey + 0.999 * Math.sin((Math.PI * since) / 0.2); // prettier-ignore
     },
     build(k, o) {
       const alu = o.color;
       const { W, D, hb, hl } = LAPTOP;
+      // Bead-blasted aluminium: smooth, lit, a faint soft grain (no speckle).
       const metal = (c) => {
-        const brushed = 0.97 + 0.04 * c.noise(c.p[0] * 200, c.p[1] * 5, c.p[2] * 5);
-        return lit(shade(alu, brushed), c.n, { amb: 0.66, dif: 0.4, spec: 0.35, pow: 20 });
+        const grain = 0.985 + 0.02 * c.noise(c.p[0] * 20, c.p[1] * 20, c.p[2] * 20);
+        return lit(shade(alu, grain), c.n, { amb: 0.66, dif: 0.4, spec: 0.35, pow: 20 });
       };
+      const shell = { flat: 0.15, even: true, size: 1.1, jitter: 0.006 };
       // Base; the deck with the keys is its own part so it can hide under
       // the closed lid (splats are ordered by their modelled positions).
+      // Thin sides get small, dense splats so the edges stay crisp.
       k.add(roundBox(W, hb, D, 0.02, { bottom: false, top: false }), {
+        ...shell,
+        even: false,
+        size: 1.4,
+        weight: 3,
+        opacity: 1,
         pos: [0, hb / 2, 0],
-        flat: 0.15,
         color: metal,
       });
       const deck = k.part("deck", { pivot: [0, hb, 0] });
       k.add(quad(W - 0.04, D - 0.04), {
+        ...shell,
         pos: [0, hb, 0],
         part: deck,
-        flat: 0.15,
+        weight: 1.3,
         color: (c) => {
           const [x, , z] = c.p;
-          // Keys: 14 x 5 rows, a space bar in front.
-          if (Math.abs(x) < 0.62 && z > -0.4 && z < 0.08) {
-            const kx = (x + 0.62) / (1.24 / 14);
-            const kz = (z + 0.4) / (0.48 / 5);
-            const row = Math.floor(kz);
-            const inKey = (kx % 1 > 0.12 && kx % 1 < 0.88) || (row === 4 && kx > 4 && kx < 10);
-            if (inKey && kz % 1 > 0.14 && kz % 1 < 0.86)
-              return keep(lit("#2b2e34", c.n, { amb: 0.9, dif: 0.3, spec: 0.1 }));
-            return shade(metal(c), 0.9);
+          // Under a key there is nothing (the key covers it); round the keys,
+          // the dark well they sit in.
+          for (const key of LAPTOP_KEYS) {
+            if (Math.abs(x - key.x) < key.w / 2 - 0.004 && Math.abs(z - key.z) < key.d / 2 - 0.004) return null; // prettier-ignore
           }
-          if (Math.abs(x) < 0.22 && z > 0.16 && z < 0.44) {
-            const e = Math.min(0.22 - Math.abs(x), z - 0.16, 0.44 - z);
-            return e < 0.008 ? shade(metal(c), 0.82) : shade(metal(c), 1.04);
+          if (Math.abs(x) < 0.66 && z > -0.41 && z < 0.08) return keep(lit("#50555d", c.n, { spec: 0.05 }), 0.8); // prettier-ignore
+          if (onPad(c.p)) {
+            const e = Math.min(PAD.w / 2 - Math.abs(x - PAD.x), PAD.d / 2 - Math.abs(z - PAD.z));
+            return keep(e < 0.006 ? shade(metal(c), 0.8) : lit(shade(alu, 1.03), c.n, { amb: 0.7, spec: 0.15 }), 1.1); // prettier-ignore
           }
           return metal(c);
         },
+      });
+      // Key caps: dark, raised, with white letters. Each one goes down when
+      // pressed (behaviour "key").
+      LAPTOP_KEYS.forEach((key, i) => {
+        const legend = key.label;
+        const gp = Math.min(0.0056, (0.78 * key.w) / (6 * legend.length - 1));
+        const gw = (6 * legend.length - 1) * gp;
+        k.add(k.box(key.w, 0.012, key.d), {
+          pos: [key.x, hb + 0.006, key.z],
+          part: deck,
+          kind: "key",
+          params: [i, 0],
+          flat: 0.15,
+          even: true,
+          weight: 3.2,
+          size: 0.8,
+          jitter: 0,
+          pattern: false,
+          color: (c) => {
+            if (c.n[1] < -0.5) return null;
+            const cap = "#2a2d33";
+            if (c.n[1] > 0.5) {
+              const s = (c.lp[0] + gw / 2) / gp;
+              const t = (c.lp[2] + 3.5 * gp) / gp;
+              if (inked([legend], s, t)) return keep("#e6e9ee", 0.55);
+              return keep(lit(cap, c.n, { amb: 0.9, dif: 0.25, spec: 0.12 }), 0.9);
+            }
+            return keep(lit(shade(cap, 0.8), c.n, { amb: 0.9, dif: 0.25, spec: 0 }));
+          },
+        });
       });
       // The lid, hinged along the back edge and modelled standing open.
       const pivot = [0, hb + hl / 2, -D / 2 + 0.01];
@@ -779,44 +1043,59 @@ export const RECIPES = {
       const screen = k.part("screen", { pivot, axis: [1, 0, 0] });
       const lidY = hb + hl / 2 + 0.002;
       k.add(roundBox(W, hl, D, 0.012, { bottom: false }), {
+        ...shell,
+        even: false,
+        size: 1.3,
+        weight: 1.6,
+        opacity: 1,
         pos: place([0, lidY, 0]),
         quat: q,
         part: lid,
-        flat: 0.15,
         color: metal,
       });
-      k.add(quad(W - 0.02, D - 0.02, -1), {
+      const SW = W - 0.14;
+      const SD = D - 0.16;
+      // The black bezel only round the screen: under the screen there is
+      // nothing, so the two never sort through each other (that was the
+      // speckle on the old screen).
+      k.add(quad(W - 0.03, D - 0.03, -1), {
         pos: place([0, lidY - hl / 2 - 0.001, 0]),
         quat: q,
         part: bezel,
         flat: 0.12,
+        even: true,
+        size: 1.1,
+        jitter: 0,
         pattern: false,
         color: (c) => {
           const [x, , z] = c.lp;
-          if (Math.hypot(x, z - (D - 0.02) / 2 + 0.035) < 0.01) return keep("#3a4250");
-          return keep(mix("#0b0e13", "#1a1f27", 0.5 + 0.4 * (z / D)));
+          if (Math.abs(x) < SW / 2 - 0.004 && Math.abs(z - 0.005) < SD / 2 - 0.004) return null;
+          if (Math.hypot(x, z - (D - 0.03) / 2 + 0.035) < 0.01) return keep("#3a4250");
+          // Smaller splats at the outer edge, so the bezel stops at the case.
+          const inner = Math.max(Math.abs(x) - SW / 2, Math.abs(z - 0.005) - SD / 2);
+          const edge = Math.min(
+            (W - 0.03) / 2 - Math.abs(x),
+            (D - 0.03) / 2 - Math.abs(z),
+            inner + 0.004,
+          );
+          const col = mix("#0b0e13", "#1a1f27", 0.5 + 0.4 * (z / D));
+          return keep(col, 0.35 + 0.65 * clamp(edge / 0.03, 0, 1));
         },
       });
-      // The picture on the screen: a bright abstract wallpaper.
-      k.add(quad(W - 0.14, D - 0.16, -1), {
-        pos: place([0, lidY - hl / 2 - 0.008, 0.005]),
+      // The screen: every splat shows the live picture (behaviour "screen").
+      k.add(quad(SW, SD, -1), {
+        pos: place([0, lidY - hl / 2 - 0.002, 0.005]),
         quat: q,
         part: screen,
-        flat: 0.1,
-        size: 1.2,
+        kind: "screen",
+        params: (c) => [c.u, 1 - c.v],
+        flat: 0.08,
+        even: true,
+        weight: 7,
+        size: 1.05,
+        jitter: 0,
         pattern: false,
-        color: (c) => {
-          const u = (c.lp[0] + (W - 0.14) / 2) / (W - 0.14);
-          const v = (c.lp[2] + (D - 0.16) / 2) / (D - 0.16);
-          let col = mix("#ff9a62", "#2b1b6b", 1 - v);
-          col = mix(col, "#ff5e98", 0.5 * Math.exp(-(((v - 0.55) / 0.2) ** 2)));
-          for (let w = 0; w < 3; w++) {
-            const y = 0.22 + w * 0.13 + 0.06 * Math.sin(u * 6 + w * 1.7);
-            if (v < y) col = mix(col, ["#6a3fc1", "#3a86ff", "#12c2b5"][w], 0.55);
-          }
-          if (Math.hypot(u - 0.7, v - 0.72) < 0.08) col = mix(col, "#fff3b0", 0.85);
-          return keep(col);
-        },
+        color: () => keep("#202838"),
       });
     },
   },

@@ -444,6 +444,15 @@ export class Player {
     this.stage.setToy({ resource: container, owned: true, kit: true });
     this.proc = { ctx, container, clay: clay.slice(), kit: true };
     this.motion.setToy(recipe, ctx, this.scene.motion?.controls || {});
+    this.screen = null;
+    if (recipe.screen) {
+      // A live picture drawn by the recipe (the laptop's display).
+      const canvas = document.createElement("canvas");
+      canvas.width = recipe.screen.width;
+      canvas.height = recipe.screen.height;
+      this.screen = { recipe, canvas, g: canvas.getContext("2d"), version: null };
+      recipe.screen.reset?.();
+    }
     const b = ctx.buf.bounds();
     for (const r of ctx.reaches || []) {
       for (let k = 0; k < 3; k++) {
@@ -690,6 +699,19 @@ export class Player {
     this.stage.requestRender();
   }
 
+  // A typed character (a real keyboard, while a toy that takes typing is
+  // shown): the recipe's `typeKey(ch)` names the control and key it presses.
+  // Returns false when the toy does not take that character.
+  typeKey(ch) {
+    const f = this.toyInfo?.recipe?.typeKey;
+    const hit = f ? f(ch) : null;
+    if (!hit) return false;
+    const r = this.motion.act(this.time, null, hit);
+    this.stage.requestRender();
+    this.emit("action", r);
+    return true;
+  }
+
   // The toy's tap action (open the lid, blow out the candles), or a hop.
   // `world` is where a tap on the toy landed (null from the Play button).
   act(world = null) {
@@ -812,6 +834,16 @@ export class Player {
     );
     if (info.rig) u.uSpRigDbg = [this.rigDebug ? 1 : 0, 0, 0, 0];
     this.stage.setUniforms(u);
+    // Redraw a live screen when the recipe says its picture changed.
+    const scr = this.screen;
+    if (scr && scr.recipe === info.recipe) {
+      const v = scr.recipe.screen.version(this.time);
+      if (v !== scr.version) {
+        scr.version = v;
+        scr.recipe.screen.draw(scr.g, this.time);
+        this.stage.setScreenCanvas(scr.canvas);
+      }
+    }
     if (this.motion.addonU) {
       this.stage.setAddonUniforms({ ...u, ...this.motion.addonU, uSpPat: [0, 0, 0, 0] });
     }
@@ -826,6 +858,9 @@ export class Player {
       this.stage.requestRender();
     }
     this.stage.setBusy(busy && !this.loading);
+    // Sounds a recipe asks for mid-effect (a chess move's clack).
+    const cues = this.motion.out?.cues;
+    if (cues?.length && !this.frozen) this.emit("cue", cues.slice());
     this.emit("frame", dt);
   }
 
@@ -912,11 +947,25 @@ export class Player {
   // facing the camera, pulling the toy near it along; letting go springs
   // it back. The pull is capped at about one toy radius.
   canGrab() {
-    return !!this.toyInfo?.recipe?.grab;
+    return !!(this.toyInfo?.recipe?.grab || this.toyInfo?.recipe?.drag);
+  }
+
+  // A recipe's own drag (the laptop's trackpad): `drag.at(point)` says
+  // whether a drag starting there is the toy's; otherwise it orbits.
+  dragStartsHere(world) {
+    const d = this.toyInfo?.recipe?.drag;
+    return !d || !!d.at(this.toRecipe(world));
   }
 
   grabStart(world, x, y) {
     const info = this.toyInfo;
+    const drag = info.recipe.drag;
+    if (drag) {
+      this.dragY = world[1];
+      drag.start?.(this.toRecipe(world), this.time);
+      this.stage.requestRender();
+      return;
+    }
     const g = info.recipe.grab;
     const ray = this.stage.ray(x, y);
     this.grabPlane = { point: world.slice(), normal: ray.dir.slice() };
@@ -925,6 +974,17 @@ export class Player {
   }
 
   grabAt(x, y) {
+    const drag = this.toyInfo?.recipe?.drag;
+    if (drag) {
+      // Across the horizontal plane the drag started on.
+      const ray = this.stage.ray(x, y);
+      if (Math.abs(ray.dir[1]) < 1e-4) return;
+      const t = (this.dragY - ray.origin[1]) / ray.dir[1];
+      const w = [0, 1, 2].map((i) => ray.origin[i] + ray.dir[i] * t);
+      drag.move(this.toRecipe(w), this.time);
+      this.stage.requestRender();
+      return;
+    }
     const pl = this.grabPlane;
     if (!pl) return;
     const ray = this.stage.ray(x, y);
@@ -947,6 +1007,12 @@ export class Player {
 
   // Lets go. Returns how far it was stretched, in toy radii.
   grabEnd() {
+    const drag = this.toyInfo?.recipe?.drag;
+    if (drag) {
+      drag.end?.(this.time);
+      this.stage.requestRender();
+      return 0;
+    }
     this.grabPlane = null;
     const r = this.driver.grabEnd(this.time);
     this.stage.requestRender();

@@ -607,24 +607,6 @@ export const TOYS = [
     },
   },
   {
-    id: "chess-set",
-    label: "Chess set",
-    category: "scans",
-    tags: "photoreal model game board pieces king queen",
-    kind: "captured",
-    url: "assets/toys/chess-set/chess-set.sog",
-    urlWeak: "assets/toys/chess-set/chess-set-lite.sog",
-    credit: {
-      title: "Chess Set",
-      author: "Riley Queen",
-      source: "https://polyhaven.com/a/chess_set",
-      license: "CC0 1.0",
-      licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/",
-      changes:
-        "Turned into splats from the textured 3D model (tools/mesh-to-splats.mjs), recentred and scaled.",
-    },
-  },
-  {
     id: "horse-statue",
     label: "Horse statue",
     category: "scans",
@@ -2071,6 +2053,15 @@ export const TOYS = [
     pack: "playthings",
     tags: "robot tin clockwork key antenna retro",
     camera: { yaw: 0.45, pitch: 0.2, roll: 0, distance: 4.5 },
+  },
+  {
+    id: "chess-set",
+    label: "Chess set",
+    category: "toys",
+    kind: "kit",
+    pack: "games",
+    tags: "chess game board pieces king queen knight opera morphy",
+    camera: { yaw: 0.55, pitch: 0.6, roll: 0, distance: 3.7 },
   },
 
   // ---- Pack: maths ----

@@ -303,8 +303,10 @@ export class Stage {
     }
     entity.gsplat.setWorkBufferModifier(kit ? MODIFIER_KIT : rig ? MODIFIER_RIG : MODIFIER);
     entity.gsplat.workBufferUpdate = pc.WORKBUFFER_UPDATE_ALWAYS;
-    // The pattern sampler always needs a texture, even with no pattern on.
+    // The pattern sampler always needs a texture, even with no pattern on
+    // (and kit toys' screen sampler too).
     entity.gsplat.setParameter("uSpPattern", this.blankTexture());
+    if (kit) entity.gsplat.setParameter("uSpScreen", this.blankTexture());
     this.app.root.addChild(entity);
     this.toy = { entity, resource, asset, owned, kit, rig };
     this.requestRender();
@@ -332,6 +334,7 @@ export class Stage {
     entity.gsplat.setWorkBufferModifier(MODIFIER_KIT);
     entity.gsplat.workBufferUpdate = pc.WORKBUFFER_UPDATE_ALWAYS;
     entity.gsplat.setParameter("uSpPattern", this.blankTexture());
+    entity.gsplat.setParameter("uSpScreen", this.blankTexture());
     this.app.root.addChild(entity);
     t.addon = { entity, resource };
     this.requestRender();
@@ -401,6 +404,32 @@ export class Stage {
       this.blank.unlock();
     }
     return this.blank;
+  }
+
+  // Uploads a canvas as a kit toy's live screen (the laptop's display).
+  setScreenCanvas(canvas) {
+    const g = this.toy?.entity.gsplat;
+    if (!g) return;
+    const w = canvas.width;
+    const h = canvas.height;
+    if (!this.screenTex || this.screenTex.width !== w || this.screenTex.height !== h) {
+      this.screenTex?.destroy();
+      this.screenTex = new pc.Texture(this.device, {
+        name: "splashery-screen",
+        width: w,
+        height: h,
+        format: pc.PIXELFORMAT_RGBA8,
+        mipmaps: false,
+        minFilter: pc.FILTER_LINEAR,
+        magFilter: pc.FILTER_LINEAR,
+        addressU: pc.ADDRESS_CLAMP_TO_EDGE,
+        addressV: pc.ADDRESS_CLAMP_TO_EDGE,
+      });
+    }
+    this.screenTex.setSource(canvas);
+    this.screenTex.upload();
+    g.setParameter("uSpScreen", this.screenTex);
+    this.requestRender();
   }
 
   // Uploads a canvas as the pattern texture (repeats sideways, clamps top

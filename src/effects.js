@@ -384,6 +384,7 @@ void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter, inout ve
 }
 
 void modifySplatColor(vec3 center, inout vec4 color) {
+  __KIT_COLOR__
   if (uSpPat.x > 0.5 && spNoPat < 0.5) color.rgb = spPattern(color.rgb);
   if (spFlame >= 0.0) {
     color.rgb = mix(color.rgb, vec3(1.0, 0.36, 0.06), smoothstep(0.08, 0.6, spFlame));
@@ -662,6 +663,7 @@ fn modifySplatRotationScale(originalCenter: vec3f, modifiedCenter: vec3f, rotati
 
 fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {
   var base = (*color).rgb;
+  __KIT_COLOR__
   if (uniform.uSpPat.x > 0.5 && spNoPat < 0.5) { base = spPattern(base); }
   if (spFlame >= 0.0) {
     base = mix(base, vec3f(1.0, 0.36, 0.06), smoothstep(0.08, 0.6, spFlame));
@@ -709,13 +711,19 @@ export const KINDS = {
   pulse: 11, // a glow runs along a path: z = position along the path (0..1)
   wave: 12, // ripple up and down: z = amount, w = phase
   glint: 13, // sparkle as the camera moves: z = amount
+  token: 14, // a game piece moved and turned by uSpTokens: z = token index (0..31)
+  screen: 15, // a screen pixel coloured from the uSpScreen texture: z, w = u, v
+  key: 16, // a key that goes down when pressed: z = key index (uSpKitB.w = index + depth)
 };
 
 const GLSL_KIT_UNIFORMS = `uniform vec4 uSpKit;     // x time, y alive (0/1), z speed, w energy (melt 0..1)
 uniform vec4 uSpKitB;    // x grow progress 0..1, y floor distance below the centre, z amount
 uniform vec4 uSpGlowC;   // rgb pulse glow colour, a strength
 uniform vec4 uSpCam;     // xyz camera position
-uniform vec4 uSpParts[48];`;
+uniform vec4 uSpParts[48];
+uniform vec4 uSpTokens[64]; // per token: xyz offset + w visibility, then a rotation
+uniform sampler2D uSpScreen; // a live screen picture (the laptop's)
+vec3 spScreenUV = vec3(0.0); // xy uv, z > 0 for a screen splat`;
 
 const GLSL_KIT_FUNCTIONS = `
 float spBeat(float x) {
@@ -784,6 +792,20 @@ vec3 spKitCenter(vec3 p) {
       spBright = 1.0 + an.z * g * 3.0;
     }
   }
+  if (kind == 15) spScreenUV = vec3(an.z, an.w, 1.0);
+  if (kind == 16 && int(an.z + 0.5) == int(floor(uSpKitB.w + 0.001)) && uSpKitB.w >= 0.0) {
+    p -= up * fract(uSpKitB.w) * 0.012 * R;
+  }
+  if (kind == 14) {
+    // Game pieces move by uSpTokens even when the toy's own motion is off.
+    int ti = clamp(int(an.z + 0.5), 0, 31);
+    vec4 to = uSpTokens[ti * 2];
+    vec4 tq = uSpTokens[ti * 2 + 1];
+    if (tq.w == 0.0 && dot(tq.xyz, tq.xyz) == 0.0) tq = vec4(0.0, 0.0, 0.0, 1.0);
+    p = spQuatRotate(tq, p) + to.xyz;
+    spPartQ = tq;
+    spKitScale *= to.w;
+  }
   if (part > 0) {
     vec4 q = uSpParts[part * 3];
     vec4 pv = uSpParts[part * 3 + 1];
@@ -801,7 +823,11 @@ const WGSL_KIT_UNIFORMS = `uniform uSpKit: vec4f;
 uniform uSpKitB: vec4f;
 uniform uSpGlowC: vec4f;
 uniform uSpCam: vec4f;
-uniform uSpParts: array<vec4f, 48>;`;
+uniform uSpParts: array<vec4f, 48>;
+uniform uSpTokens: array<vec4f, 64>;
+var uSpScreen: texture_2d<f32>;
+var uSpScreenSampler: sampler;
+var<private> spScreenUV: vec3f = vec3f(0.0);`;
 
 const WGSL_KIT_FUNCTIONS = `
 fn spBeat(x: f32) -> f32 {
@@ -870,6 +896,19 @@ fn spKitCenter(p0: vec3f) -> vec3f {
       let g = pow(max(0.0, sin(dot(uniform.uSpCam.xyz, vec3f(3.1, 2.7, 3.7) * (0.5 + h)) + h * 40.0 + t * 0.5)), 24.0);
       spBright = 1.0 + an.z * g * 3.0;
     }
+  }
+  if (kind == 15) { spScreenUV = vec3f(an.z, an.w, 1.0); }
+  if (kind == 16 && i32(an.z + 0.5) == i32(floor(uniform.uSpKitB.w + 0.001)) && uniform.uSpKitB.w >= 0.0) {
+    p = p - up * fract(uniform.uSpKitB.w) * 0.012 * R;
+  }
+  if (kind == 14) {
+    let ti = clamp(i32(an.z + 0.5), 0, 31);
+    let to = uniform.uSpTokens[ti * 2];
+    var tq = uniform.uSpTokens[ti * 2 + 1];
+    if (tq.w == 0.0 && dot(tq.xyz, tq.xyz) == 0.0) { tq = vec4f(0.0, 0.0, 0.0, 1.0); }
+    p = spQuatRotate(tq, p) + to.xyz;
+    spPartQ = tq;
+    spKitScale = spKitScale * to.w;
   }
   if (part > 0) {
     var q = uniform.uSpParts[part * 3];
@@ -1345,6 +1384,14 @@ function variant(code, mode, lang) {
     .replace(
       "__KIT_FUNCTIONS__",
       pick(glsl ? GLSL_KIT_FUNCTIONS : WGSL_KIT_FUNCTIONS, glsl ? GLSL_RIG_FUNCTIONS : WGSL_RIG_FUNCTIONS), // prettier-ignore
+    )
+    .replace(
+      "__KIT_COLOR__",
+      mode === "kit"
+        ? glsl
+          ? "if (spScreenUV.z > 0.5) color.rgb = textureLod(uSpScreen, spScreenUV.xy, 0.0).rgb;"
+          : "if (spScreenUV.z > 0.5) { base = textureSampleLevel(uSpScreen, uSpScreenSampler, spScreenUV.xy, 0.0).rgb; }"
+        : "",
     )
     .replace(
       "__KIT_CENTER__",

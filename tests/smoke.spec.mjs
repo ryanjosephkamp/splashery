@@ -742,6 +742,41 @@ test.describe("Splashery v3 engine (WebGL2)", () => {
     expect(problems).toEqual([]);
   });
 
+  test("the chess set plays the Opera Game, and the laptop types what you type", async ({
+    page,
+  }) => {
+    const problems = watchConsole(page);
+    await loadApp(page);
+    await page.evaluate(() => window.__splashery.player.camera.setTurntable(false));
+    const canvas = page.locator("#stage");
+    // Chess: a tap starts the game; pieces leave their squares.
+    await page.click(".chip[data-category='toys']");
+    await page.click(".toy-card[data-toy='chess-set']");
+    await waitForToy(page, "Chess set");
+    await expect(page.locator("#toy-action")).toHaveText("Play the Opera Game");
+    const start = await canvas.screenshot({ type: "png" });
+    await page.click("#toy-action");
+    await expect
+      .poll(() => page.evaluate(() => window.__splashery.player.motion.out?.tokens?.length ?? 0))
+      .toBe(32);
+    await page.waitForTimeout(4000);
+    const later = await canvas.screenshot({ type: "png" });
+    expect(await countDifferentPixels(page, start, later)).toBeGreaterThan(800);
+    // Laptop: real keys type onto the screen.
+    await page.click(".chip[data-category='objects']");
+    await page.click(".toy-card[data-toy='laptop']");
+    await waitForToy(page, "Laptop");
+    const before = await canvas.screenshot({ type: "png" });
+    await canvas.focus();
+    await page.keyboard.type("Hi 42");
+    await page.waitForTimeout(1500);
+    const typed = await canvas.screenshot({ type: "png" });
+    expect(await countDifferentPixels(page, before, typed)).toBeGreaterThan(300);
+    // Keys the laptop takes do not trigger shortcuts (4 would pick the Magnet).
+    expect(await page.evaluate(() => window.__splashery.app.tool)).toBe("orbit");
+    expect(problems).toEqual([]);
+  });
+
   test("a stretchy toy stretches when dragged and springs back; a drag off it orbits", async ({
     page,
   }) => {
