@@ -493,6 +493,18 @@
                 <input id="look-exposure" type="range" min="30" max="250" value="100" />
                 <output id="look-exposure-value" for="look-exposure">1.00</output>
               </label>
+              <div class="row">
+                <span>Detail</span>
+                <div class="segmented" role="group" aria-label="Detail" id="look-detail">
+                  <button type="button" data-detail="auto" aria-pressed="true">Auto</button>
+                  <button type="button" data-detail="high" aria-pressed="false">High</button>
+                  <button type="button" data-detail="max" aria-pressed="false">Max</button>
+                </div>
+              </div>
+              <p class="note">
+                Detail stays on this device and is never part of a link. High and Max draw more
+                splats at sharper resolution, which can be slow on phones.
+              </p>
             </section>
             <section class="group" id="idle-group" aria-labelledby="h-idle">
               <h2 id="h-idle">When nobody is playing</h2>
@@ -562,6 +574,12 @@
               <h2 id="h-embed">Put it on a web page</h2>
               <div class="row compact">
                 <span>Iframe</span>
+                <select id="embed-size" aria-label="Embed size">
+                  <option value="small">Small</option>
+                  <option value="medium" selected>Medium</option>
+                  <option value="large">Large</option>
+                  <option value="full">Full width</option>
+                </select>
                 <label class="check-inline"
                   ><input id="embed-transparent" type="checkbox" /> Transparent</label
                 >

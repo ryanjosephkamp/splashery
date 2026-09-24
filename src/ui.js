@@ -114,6 +114,7 @@ export function createUI(app) {
     lookBg: $("look-bg"),
     lookBgColor: $("look-bg-color"),
     lookTheme: $("look-theme"),
+    lookDetail: $("look-detail"),
     lookAccent: $("look-accent"),
     lookAccentColor: $("look-accent-color"),
     lookSize: $("look-size"),
@@ -145,6 +146,7 @@ export function createUI(app) {
     exportWebm: $("export-webm"),
     webmUnavailable: $("webm-unavailable"),
     embedTransparent: $("embed-transparent"),
+    embedSize: $("embed-size"),
     embedCopy: $("embed-copy"),
     embedSnippet: $("embed-snippet"),
     elementCopy: $("element-copy"),
@@ -178,13 +180,18 @@ export function createUI(app) {
     img.loading = "lazy";
     img.decoding = "async";
     img.src = thumbURL(toy);
-    img.addEventListener(
-      "error",
-      () => img.replaceWith(Object.assign(document.createElement("span"), { className: "thumb" })),
-      {
-        once: true,
-      },
-    );
+    // A failed thumbnail is fetched once more past any cache, then becomes
+    // a plain tile.
+    img.addEventListener("error", () => {
+      if (!img.dataset.retried) {
+        img.dataset.retried = "true";
+        const url = new URL(img.src);
+        url.searchParams.set("retry", String(Date.now()));
+        img.src = url.href;
+      } else {
+        img.replaceWith(Object.assign(document.createElement("span"), { className: "thumb" }));
+      }
+    });
     const label = document.createElement("span");
     label.textContent = toy.label;
     b.append(img, label);
@@ -703,6 +710,9 @@ export function createUI(app) {
   for (const b of els.lookTheme.querySelectorAll("button")) {
     b.addEventListener("click", () => app.setLook({ theme: b.dataset.theme }));
   }
+  for (const b of els.lookDetail.querySelectorAll("button")) {
+    b.addEventListener("click", () => app.setDetail(b.dataset.detail));
+  }
   for (const e of IDLE_EFFECTS) els.autoEffect.add(new Option(e.label, e.id));
   els.autoTurntable.addEventListener("change", () =>
     app.setAutoplay({ turntable: els.autoTurntable.checked }),
@@ -740,6 +750,7 @@ export function createUI(app) {
   );
   els.exportWebm.addEventListener("click", () => app.exportWebM(Number(els.webmSeconds.value)));
   els.embedTransparent.addEventListener("change", () => app.updateEmbed());
+  els.embedSize.addEventListener("change", () => app.updateEmbed());
   els.embedCopy.addEventListener("click", () =>
     copyText(els.embedSnippet, "Iframe snippet copied."),
   );
@@ -980,6 +991,11 @@ export function createUI(app) {
       }
       document.documentElement.dataset.theme = resolvedTheme;
     },
+    setDetail(detail) {
+      for (const b of els.lookDetail.querySelectorAll("button")) {
+        b.setAttribute("aria-pressed", String(b.dataset.detail === detail));
+      }
+    },
     setAutoplay(a, reducedMotion) {
       els.autoTurntable.checked = a.turntable;
       els.autoEffect.value = a.effect;
@@ -1040,6 +1056,9 @@ export function createUI(app) {
     },
     embedTransparent() {
       return els.embedTransparent.checked;
+    },
+    embedSize() {
+      return els.embedSize.value;
     },
     toast(message, ms = 3200) {
       els.toast.textContent = message;

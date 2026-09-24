@@ -155,15 +155,29 @@ export function shareURL(hash) {
   return `${appBaseURL()}#s=${hash}`;
 }
 
-export function iframeSnippet(hash, { transparent = false, width = 400, height = 300 } = {}) {
-  const q = transparent ? "?bg=transparent" : "";
-  const src = `${appBaseURL()}embed/${q}#s=${hash}`;
-  const style = `border:0;border-radius:12px;max-width:100%${transparent ? ";color-scheme:normal" : ""}`;
-  return `<iframe src="${src}" width="${width}" height="${height}" title="Splashery toy" loading="lazy" style="${style}"></iframe>`;
+// Embed sizes for the Share pane: the widest the embed grows to. Embeds
+// fill their column up to that width and keep a 4:3 shape.
+export const EMBED_SIZES = [
+  { id: "small", label: "Small", maxWidth: 360 },
+  { id: "medium", label: "Medium", maxWidth: 600 },
+  { id: "large", label: "Large", maxWidth: 900 },
+  { id: "full", label: "Full width", maxWidth: 0 },
+];
+
+function sizeStyle(size) {
+  const s = EMBED_SIZES.find((x) => x.id === size) || EMBED_SIZES[1];
+  return `width:100%;${s.maxWidth ? `max-width:${s.maxWidth}px;` : ""}aspect-ratio:4/3`;
 }
 
-export function elementSnippet(hash, { transparent = false } = {}) {
+export function iframeSnippet(hash, { transparent = false, size = "medium" } = {}) {
+  const q = transparent ? "?bg=transparent" : "";
+  const src = `${appBaseURL()}embed/${q}#s=${hash}`;
+  const style = `${sizeStyle(size)};border:0;border-radius:12px${transparent ? ";color-scheme:light" : ""}`;
+  return `<iframe src="${src}" title="Splashery toy" loading="lazy" style="${style}"></iframe>`;
+}
+
+export function elementSnippet(hash, { transparent = false, size = "medium" } = {}) {
   const src = `${appBaseURL()}src/element.js`;
   const bg = transparent ? ' background="transparent"' : "";
-  return `<script type="module" src="${src}"></script>\n<splashery-toy scene="${hash}"${bg} style="display:block;width:100%;max-width:400px;aspect-ratio:4/3"></splashery-toy>`;
+  return `<script type="module" src="${src}"></script>\n<splashery-toy scene="${hash}"${bg} style="display:block;${sizeStyle(size)}"></splashery-toy>`;
 }

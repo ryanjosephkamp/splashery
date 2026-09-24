@@ -97,7 +97,8 @@ export const TOYS = [
       source: "https://superspl.at/scene/ae58ed2c",
       license: "CC BY 4.0",
       licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
-      changes: "Converted, decimated, spherical harmonics removed, recentred and scaled.",
+      changes:
+        "Converted, decimated, spherical harmonics removed, turned upright, recentred and scaled.",
     },
   },
   {

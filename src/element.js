@@ -12,6 +12,8 @@
 //   background  transparent | page | #rrggbb
 //   autoplay    none | breeze | pokes | twist | dissolve
 //   turntable   "off" stops the idle spin
+//   zoom        0.5 to 2; 1 fits the toy to about 80% of the shorter side
+//   controls    "0" hides the + and - zoom buttons
 //   label       accessible description of the toy
 //
 // The element sizes itself to 4:3 unless you give it a height. It starts
@@ -31,7 +33,10 @@ canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block
 canvas:focus-visible { outline: 2px solid var(--sp-accent); }
 a { position: absolute; right: 8px; bottom: 8px; padding: 3px 10px; border-radius: 999px;
   background: var(--sp-paper); border: 1px solid var(--sp-line); color: var(--sp-accent); text-decoration: none; }
-a:focus-visible { outline: 2px solid var(--sp-accent); outline-offset: 2px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--sp-accent); outline-offset: 2px; }
+.zoom { position: absolute; top: 8px; right: 8px; display: flex; flex-direction: column; gap: 4px; }
+.zoom button { width: 28px; height: 28px; padding: 0; font-size: 16px; line-height: 1; color: var(--sp-ink); cursor: pointer;
+  background: var(--sp-paper); border: 1px solid var(--sp-line); border-radius: 999px; }
 .status { position: absolute; left: 8px; bottom: 8px; max-width: calc(100% - 150px); padding: 3px 10px;
   border-radius: 999px; background: var(--sp-paper); border: 1px solid var(--sp-line); }
 .fallback { position: absolute; inset: 0; display: grid; place-content: center; gap: 8px; padding: 12px;
@@ -58,6 +63,7 @@ class SplasheryToy extends HTMLElement {
     const root = this.attachShadow({ mode: "open" });
     root.innerHTML = `<style>${STYLE}</style>
       <canvas tabindex="0" role="img"></canvas>
+      <div class="zoom"><button type="button" data-zoom="1" aria-label="Zoom in">+</button><button type="button" data-zoom="-1" aria-label="Zoom out">−</button></div>
       <a target="_blank" rel="noopener" href="https://ryanjosephkamp.github.io/splashery/">Open in Splashery</a>
       <div class="status" role="status" aria-live="polite" hidden></div>
       <div class="fallback" hidden>${POSTER}<p>This browser cannot start WebGL2 or WebGPU, so the toy cannot be shown here.</p></div>`;
@@ -65,6 +71,10 @@ class SplasheryToy extends HTMLElement {
     this.link = root.querySelector("a");
     this.status = root.querySelector(".status");
     this.fallback = root.querySelector(".fallback");
+    this.zoom = root.querySelector(".zoom");
+    for (const b of this.zoom.querySelectorAll("button")) {
+      b.addEventListener("click", () => this.viewer?.zoomBy(Number(b.dataset.zoom)));
+    }
     this.viewer = null;
     this.started = false;
     this.onPageTheme = (e) => {
@@ -81,6 +91,7 @@ class SplasheryToy extends HTMLElement {
       this.getAttribute("label") ||
         "A toy made of splats. Drag to turn it; pinch or Ctrl and scroll to zoom.",
     );
+    this.zoom.hidden = this.getAttribute("controls") === "0";
     document.addEventListener("paper-theme-change", this.onPageTheme);
     this.media = matchMedia("(prefers-color-scheme: dark)");
     this.media.addEventListener("change", this.onPageTheme);
@@ -124,6 +135,7 @@ class SplasheryToy extends HTMLElement {
       background: this.getAttribute("background"),
       autoplay: autoplay || undefined,
       turntable: this.getAttribute("turntable") === "off" ? false : undefined,
+      zoom: this.getAttribute("zoom"),
       onStatus: (t) => this.say(t),
       onTheme: (t) => (this.dataset.theme = t),
     });
@@ -137,6 +149,7 @@ class SplasheryToy extends HTMLElement {
         console.info("splashery-toy could not start:", err?.message || err);
       this.fallback.hidden = false;
       this.canvas.hidden = true;
+      this.zoom.hidden = true;
       this.dataset.ready = "true";
     }
     this.dispatchEvent(new CustomEvent("splashery-ready", { bubbles: true }));

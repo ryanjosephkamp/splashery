@@ -66,11 +66,16 @@ export const DEFAULT_GENERATOR = Object.freeze({
   colorNoise: 0.25,
 });
 
-// Splat counts by device profile.
+// Splat counts by device tier (see detectProfile in player.js). "weak" and
+// "strong" are the tier names before v4, kept for ?profile= and old callers.
 export const PROFILES = {
-  strong: { maxCount: 300000, defaultCount: 160000 },
-  weak: { maxCount: 120000, defaultCount: 60000 },
+  low: { maxCount: 120000, defaultCount: 60000 },
+  mid: { maxCount: 240000, defaultCount: 140000 },
+  high: { maxCount: 300000, defaultCount: 200000 },
+  max: { maxCount: 400000, defaultCount: 280000 },
 };
+PROFILES.weak = PROFILES.low;
+PROFILES.strong = PROFILES.high;
 
 const INTERIOR = 0.18;
 const TAU = Math.PI * 2;
@@ -451,9 +456,9 @@ function makeColoring(paletteId, seed, noise, colorNoise) {
 // ---- Generator ----------------------------------------------------------------
 
 // Normalises generator params (also used when loading JSON).
-export function normalizeGenerator(g, profile = "strong") {
+export function normalizeGenerator(g, profile = "high") {
   const src = g && typeof g === "object" ? g : {};
-  const max = PROFILES[profile]?.maxCount ?? PROFILES.strong.maxCount;
+  const max = PROFILES[profile]?.maxCount ?? PROFILES.high.maxCount;
   const num = (v, d, lo, hi) => {
     const n = Number(v);
     return Number.isFinite(n) ? Math.min(hi, Math.max(lo, n)) : d;

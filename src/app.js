@@ -86,6 +86,7 @@ class App {
     player.on("paint", (n) => ui.setPaintCount(n));
     player.on("toy", (info) => this.onToy(info));
     player.on("action", (r) => this.onAction(r));
+    player.on("profile", () => this.updateRenderInfo());
     ui.setSound(this.sound.enabled);
     const wm = webmSupport();
     ui.setWebmUnavailable(wm.ok ? null : wm.reason);
@@ -125,6 +126,7 @@ class App {
     player.applyLook();
     ui.setEffects(scene.effects);
     ui.setAutoplay(scene.autoplay, player.reducedMotion);
+    ui.setDetail(player.detail);
     ui.setPaintCount(scene.paint.stamps.length);
     ui.setPattern(scene.pattern);
     if (scene.toy.kind === "file" && !file) {
@@ -206,10 +208,36 @@ class App {
     ui.setToyPanel(info);
     ui.setFileToy(info.kind === "file", scene.toy.flip);
     this.renderCredits(info);
-    ui.setRenderInfo(
-      `Rendering with ${player.deviceType === "webgpu" ? "WebGPU" : "WebGL2"} · ${player.profile} device profile · ${formatCount(info.splats)} splats`,
-    );
+    this.updateRenderInfo();
     if (this.ui.currentTab() === "share") this.updateEmbed();
+  }
+
+  updateRenderInfo() {
+    const player = this.player;
+    const info = player.toyInfo;
+    if (!info) return;
+    this.ui.setRenderInfo(
+      `Rendering with ${player.deviceType === "webgpu" ? "WebGPU" : "WebGL2"} · ${player.profile} detail tier · ${formatCount(info.splats)} splats`,
+    );
+  }
+
+  // Detail is a preference of this browser (see readDetail in player.js).
+  // A new tier rebuilds the toy with its splat count, keeping the view.
+  async setDetail(detail) {
+    const player = this.player;
+    const changed = player.setDetail(detail);
+    this.ui.setDetail(player.detail);
+    this.updateRenderInfo();
+    const scene = player.scene;
+    if (!changed || this.busy || scene.toy.kind === "file") return;
+    const cam = player.camera.getState();
+    try {
+      await this.loadToy(scene.toy);
+      player.camera.setState(cam, { snap: true });
+      player.stage.requestRender();
+    } catch (err) {
+      this.ui.toast(err.message, 5000);
+    }
   }
 
   renderCredits(info) {
@@ -892,17 +920,18 @@ class App {
   async updateEmbed() {
     const res = await buildShareHash(this.exportScene());
     const transparent = this.ui.embedTransparent();
+    const size = this.ui.embedSize();
     if (!res.ok) {
       this.ui.setEmbed({ iframe: "", element: "", note: res.notes.join(" ") });
       return res;
     }
     const note = [
       ...res.notes,
-      "The iframe works anywhere. The element needs one script tag and no iframe; both load the toy from GitHub Pages.",
+      "The iframe works anywhere. The element needs one script tag and no iframe; both load the toy from GitHub Pages and fill their column at 4:3, up to the chosen width. The README lists more options, such as zoom and hiding the zoom buttons.",
     ].join(" ");
     this.ui.setEmbed({
-      iframe: iframeSnippet(res.hash, { transparent }),
-      element: elementSnippet(res.hash, { transparent }),
+      iframe: iframeSnippet(res.hash, { transparent, size }),
+      element: elementSnippet(res.hash, { transparent, size }),
       note,
     });
     return res;

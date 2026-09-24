@@ -13,9 +13,13 @@ export const UNSUPPORTED = {
 };
 
 export const LIMITS = {
-  strong: { warnBytes: 150 * 1024 * 1024, warnSplats: 1_500_000, downsampleTo: 1_000_000 },
-  weak: { warnBytes: 60 * 1024 * 1024, warnSplats: 400_000, downsampleTo: 300_000 },
+  low: { warnBytes: 60 * 1024 * 1024, warnSplats: 400_000, downsampleTo: 300_000 },
+  mid: { warnBytes: 100 * 1024 * 1024, warnSplats: 1_000_000, downsampleTo: 600_000 },
+  high: { warnBytes: 150 * 1024 * 1024, warnSplats: 1_500_000, downsampleTo: 1_000_000 },
+  max: { warnBytes: 200 * 1024 * 1024, warnSplats: 2_000_000, downsampleTo: 1_500_000 },
 };
+LIMITS.weak = LIMITS.low;
+LIMITS.strong = LIMITS.high;
 
 const SH_C0 = 0.28209479177387814;
 

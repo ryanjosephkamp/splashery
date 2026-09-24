@@ -33,7 +33,7 @@
       "label": "Honeybee",
       "source": "https://d28zzqy0iyovbz.cloudfront.net/ae58ed2c/v1/meta.json",
       "sourceNote": "The SOG the public SuperSplat viewer streams for https://superspl.at/scene/ae58ed2c (downloads enabled, CC BY 4.0).",
-      "rotate": [0, 0, 0],
+      "rotate": [180, 0, 0],
       "splats": 450000,
       "lite": 120000,
       "crop": [-1.35, -0.4, -1.35, 1.35, 0.4, 1.35],

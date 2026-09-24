@@ -58,9 +58,9 @@ into splats (a rubber duck, a garden gnome, a ukulele, a boombox, a chess set, a
 more). Full credits are in [CREDITS.md](CREDITS.md) and in the app under **About & credits**.
 
 **Make a toy** builds a new one in the browser: pick a shape (sphere, noise blob, torus, capsule,
-knot), a palette, a seed, the number of splats (up to 300,000 on strong devices, 120,000 on phones),
-size jitter, roughness and colour noise. The **Clay** tool then adds lumps where you drag, or erases
-them. Everything is seeded, so a saved scene rebuilds exactly the same toy.
+knot), a palette, a seed, the number of splats (up to 300,000 on desktops, 240,000 on phones; see
+Detail below), size jitter, roughness and colour noise. The **Clay** tool then adds lumps where you
+drag, or erases them. Everything is seeded, so a saved scene rebuilds exactly the same toy.
 
 ### Toys from packs
 
@@ -154,6 +154,22 @@ Background (page colour, transparent or any colour), theme (auto, light or dark;
 page), accent colour, splat size and exposure. When idle the toy can turn slowly and play one gentle
 effect: a breeze, little pokes, a slow twist, or dissolve and rebuild.
 
+**Detail** (Auto, High or Max) sets how many splats toys get and how sharp the canvas is. Auto picks
+a tier for the device:
+
+| Tier | Who gets it                               | Generated toys | Canvas pixel ratio |
+| ---- | ----------------------------------------- | -------------- | ------------------ |
+| low  | 2 GB of memory or less, or two cores      | 60k splats     | up to 1.5          |
+| mid  | phones, and machines with 4 GB or 4 cores | 140k           | up to 2            |
+| high | other desktops, and Detail: High          | 200k           | up to 2            |
+| max  | Detail: Max                               | 280k           | up to 3            |
+
+Captured toys use their lighter file only at the low tier. While the view moves and frames take more
+than about 24 ms, the canvas drops to a lower resolution, and the first still frame is drawn sharp
+again. If frames stay slow even then, an Auto tier steps down one level for the next toy. Detail is
+kept in this browser only (in `localStorage`); it is never part of a link or a scene file, so a
+shared link cannot force a heavy load on someone's phone.
+
 ## Sharing
 
 In the **Share** tab:
@@ -176,22 +192,28 @@ The iframe works anywhere:
 ```html
 <iframe
   src="https://ryanjosephkamp.github.io/splashery/embed/#s=PAYLOAD"
-  width="400"
-  height="300"
   title="Splashery toy"
   loading="lazy"
-  style="border:0;border-radius:12px;max-width:100%"
+  style="width:100%;max-width:600px;aspect-ratio:4/3;border:0;border-radius:12px"
 ></iframe>
 ```
+
+It fills its column at 4:3, up to a maximum width. The Share tab's size picker sets that width:
+Small (360 px), Medium (600 px), Large (900 px) or Full width (no limit).
 
 The embed player (`embed/index.html`) has no editing UI: it turns slowly when idle (not under
 reduced motion), you can orbit it, it can autoplay one gentle effect, and it links back with **Open
 in Splashery**. Query options: `?toy=cactus` (a shelf toy, when there is no `#s=`),
-`?theme=light|dark`, `?bg=transparent`, `?autoplay=breeze|pokes|twist|dissolve`, `?turntable=off`.
-For a transparent iframe, also give the iframe `color-scheme: normal` (the snippet does) so browsers
-keep it see-through in dark mode. A host page can switch the theme with
+`?theme=light|dark`, `?bg=transparent`, `?autoplay=breeze|pokes|twist|dissolve`, `?turntable=off`,
+`?zoom=0.5` to `2` (1 fits the toy to about 80% of the shorter side; 2 comes twice as close) and
+`?controls=0` (hides the + and − zoom buttons in the top corner). For a transparent iframe, also
+give the iframe `color-scheme: light` (the snippet does): the embed then uses a light scheme too,
+and browsers keep it see-through even when the visitor's system is in dark mode. A host page can
+switch the theme with
 `iframe.contentWindow.postMessage({ type: "splashery:theme", theme: "dark" }, "*")`. Inside an embed
-the mouse wheel scrolls the page; hold Ctrl or ⌘ (or pinch) to zoom.
+the mouse wheel scrolls the page until you click or tap the toy; after that it zooms until the
+pointer leaves. Ctrl or ⌘ with the wheel, a pinch and the + and − buttons always zoom. The first
+plain scroll shows a hint: "Pinch or Ctrl+scroll to zoom".
 
 The `<splashery-toy>` element embeds a toy without an iframe, with one script tag:
 
@@ -202,9 +224,9 @@ The `<splashery-toy>` element embeds a toy without an iframe, with one script ta
 
 Attributes: `scene` (a share payload), `toy`, `theme` (`auto`, `light`, `dark`; auto follows the
 page, including a `paper-theme-change` event on `document` and `data-resolved-theme` on `<html>`),
-`background` (`transparent`, `page` or a colour), `autoplay`, `turntable="off"` and `label`. It is
-4:3 unless you size it, starts when scrolled into view and pauses when scrolled away. See
-[embed/demo.html](embed/demo.html) for both side by side.
+`background` (`transparent`, `page` or a colour), `autoplay`, `turntable="off"`, `zoom` (0.5 to 2),
+`controls="0"` and `label`. It is 4:3 unless you size it, starts when scrolled into view and pauses
+when scrolled away. See [embed/demo.html](embed/demo.html) for both side by side.
 
 Built-in toys load in well under 30 MB (an embed with the heaviest captured toy transfers about 8
 MB: the engine plus one SOG).
@@ -217,7 +239,9 @@ python3 -m http.server 4173 --bind 127.0.0.1
 ```
 
 Any static server works. Useful query options: `?renderer=webgl2|webgpu` (force a renderer),
-`?profile=weak|strong` (force the device profile).
+`?profile=low|mid|high|max` (force a detail tier; the old `weak` and `strong` mean low and high),
+`?adapt=off` (no adaptive resolution or tier step-down; the tools use it, since SwiftShader is
+slow).
 
 ## Preparing assets
 
@@ -272,10 +296,13 @@ its toys, making a toy and switching on effects change canvas pixels, paint, pok
 JSON export imports back to the same scene, the shelf filters by category and search, the phone
 sheet opens and closes by button, tap and swipe, the embed page and the custom element load a scene,
 own files (PLY, SPLAT, SPZ, SOG) load, PNG/GIF/WebM exports produce files, an embed stays under 30
-MB, the no-GPU poster shows, and there is no horizontal overflow at 390 and 360 px. It saves
-screenshots to `tests/screenshots/`. WebGPU checks skip themselves with a message when Chromium
-offers no adapter. Set `SPLASHERY_CHROMIUM` to use a specific Chromium; without it Playwright's own
-browser is used.
+MB, the canvas renders at the pixel ratio of its detail tier (on 2x and 3x screens) and drops it
+only while frames are slow, Detail stays out of links, a transparent embed stays see-through in dark
+mode, embeds take `?zoom=` and zoom by wheel after a click and by buttons, the embed snippet is
+responsive, a failed thumbnail is retried, the no-GPU poster shows, and there is no horizontal
+overflow at 390 and 360 px. It saves screenshots to `tests/screenshots/`. WebGPU checks skip
+themselves with a message when Chromium offers no adapter. Set `SPLASHERY_CHROMIUM` to use a
+specific Chromium; without it Playwright's own browser is used.
 
 ## Layout
 
