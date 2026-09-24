@@ -67,15 +67,47 @@ Known issues carried forward:
 
 ## Phases
 
-Each phase is one session and one PR, or a small stack of PRs.
+Each phase is one session and one PR, or a small stack of PRs. The owner reviewed every toy on
+2026-09-23 (raw notes and screenshots in [reviews/2026-09-23/](reviews/2026-09-23/review.md)). The
+per-toy plan that came out of it is [TOY-PLAN.md](TOY-PLAN.md), generated from `tools/toy-plan.json`
+by `node tools/toy-plan.mjs`. Keep that JSON current: when a phase finishes a toy, update its entry
+(for example `"v": "keep"`) and regenerate.
 
-| Phase | What                                                                                                                                                                                   | Repo(s)                                  |
-| ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
-| A     | Done: Sharpness (pixel density, splat counts, kit splat size, Detail setting) and embeds (transparency, framing, size, zoom); honeybee flip; thumbnail retry. Then the homepage embed. | splashery, then ryanjosephkamp.github.io |
-| **B** | Mobile shelf grid (drag the shelf up into a full grid) and a "Find your own splat" help panel.                                                                                         | splashery                                |
-| C     | More music toys (piano, trumpet, violin, maracas, harp, and others) plus the polish items above.                                                                                       | splashery                                |
-| D     | AI image-to-3D trial with `HF_TOKEN`.                                                                                                                                                  | splashery                                |
-| E     | Later: the gallery (plan in ROADMAP), multi-toy scenes, a liquid pour, the draw-order fix, more scans.                                                                                 | splashery                                |
+The owner marks each proposal Approve, Change or Skip (with notes) on a private page:
+https://claude.ai/artifact/PNGPx7REMdhxLMHDXARhw8 ("Splashery Toy Plan"). **Before starting a phase,
+read the marks for its toys**: with the `ArtifactData` tool, `list` the collection `marks` (one
+document per toy id: `{mark: "yes" | "change" | "skip" | "", note, at}`). If that tool is not
+available, ask the owner to press "Copy my marks and notes" on the page and paste the text. A
+"change" note overrides the proposal in `tools/toy-plan.json`; update the JSON to match. If the plan
+JSON changes, the page can be republished from it (`node tools/toy-plan.mjs --json`).
+
+| Phase | What                                                                                                                                                 | Repo(s)   |
+| ----- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | --------- |
+| A     | Done: sharpness, Detail setting, embeds, honeybee, thumbnail retry, homepage embed.                                                                  | both      |
+| **B** | Mobile shelf grid (drag up into a full grid like desktop), thumbnail labels that don't cut off, and a "Find your own splat" help panel.              | splashery |
+| C1    | Visual fixes from the review (16 toys: vintage camera, boombox, storybook, comet, Statue of Liberty crown, horse brightness, cookie orientation, …). | splashery |
+| C2    | Make existing effects clearer or more dramatic (33 toys the owner found subtle or underwhelming: bacteriophage, Newton's cradle, Big Ben, bus, …).   | splashery |
+| D     | Effects and sound engine: a unique sound per toy, scan rigs (moving parts for captured toys), taps that know where they landed, drag-to-stretch.     | splashery |
+| E1–E6 | New tap effects for the 181 toys marked new (most only hop today), in six waves by category (see TOY-PLAN.md), each with its own sound.              | splashery |
+| F     | Touch and drag interaction: a solvable puzzle cube, a chess set that plays a real game, a stretchy gummy bear, a draggable Newton's cradle, bricks.  | splashery |
+| G     | AI image-to-3D trial with `HF_TOKEN`.                                                                                                                | splashery |
+| H     | Later: the gallery, multi-toy scenes, a liquid pour, the draw-order fix, more scans, more instruments, and the final homepage embed(s).              | both      |
+
+What the owner asked for across the board (2026-09-23):
+
+- **Every toy gets its own tap effect and its own sound.** Sounds can be similar within a category
+  but should differ slightly. Toys with a twin (the two rubber ducks, the two croissants, the two
+  alarm clocks, the cactus and the saguaro, the grape and the grapes) must act and sound different.
+- Where the effect is already good, keep it (65 toys are marked keep in TOY-PLAN.md).
+- Some effects should depend on where you touch or drag (puzzle cube, gummy bear, chess, Newton's
+  cradle). Say so if something is not feasible; a good fallback is fine.
+- Sharpness after A1 is "basically perfect"; the homepage embed works in light and dark mode.
+- Later the homepage embed will change to a favourite maths toy (the Menger sponge or the hypercube;
+  the voice transcript is ambiguous, ask) at the highest detail, maybe several embeds. That needs an
+  owner-set embed option such as `?detail=high` (Detail is deliberately not in share links; an embed
+  the site owner chooses is a different case). See BACKLOG.md.
+- Stay respectful: nothing destructive or disrespectful on the White House or the Washington
+  Monument, and no fighting or gore (the Colosseum gets a chariot race, not gladiators).
 
 ## Phase B in detail: mobile shelf grid and "Find your own splat"
 
@@ -104,7 +136,11 @@ Phase A is written up in splashery PR #13 and the homepage PR. The sharpness cro
    - Desktop is unchanged.
    - Thumbnails are lazy `<img>`s with one retry. A grid shows many at once, so check the loading is
      still smooth.
-3. **"Find your own splat" help panel** in the Make pane (a collapsible section, plain text and
+3. **Thumbnail labels.** On phones, long names end in "…" under the thumbnail (for example "Vintage
+   c…"). Try two lines with a slightly smaller font and a clamp, so almost every name fits; the full
+   name is in the card's `title` and on the status line. A scrolling (marquee) label only for the
+   selected card is an option; skip it if it costs frame rate. Check 360 px.
+4. **"Find your own splat" help panel** in the Make pane (a collapsible section, plain text and
    links), covering:
    - Where to find files: superspl.at scenes with downloads on. Check each licence; only CC0, CC BY
      or public domain count for the shelf, but visitors can load anything they own.
@@ -114,7 +150,7 @@ Phase A is written up in splashery PR #13 and the homepage PR. The sharpness cro
      The Detail setting and the adaptive resolution apply too.
    - What doesn't: toy-specific actions (open, blow out), and uploads can't go in share links.
    - No brand logos. App names as plain text are fine.
-4. **Tests.**
+5. **Tests.**
    - Phone (390×844, touch): dragging the shelf up shows the grid (at least 3 columns and no
      horizontal overflow), and tapping a card loads that toy and collapses the grid. Swiping down
      restores the row.
@@ -122,23 +158,79 @@ Phase A is written up in splashery PR #13 and the homepage PR. The sharpness cro
    - Desktop: the shelf layout is unchanged.
    - The help panel exists in Make, and its links have the right `href`s.
    - Keep all 47 existing tests green, including "embed transfer ≤ 30 MB".
-5. **Screenshots.** Take 390×844 with the grid open and closed, the Make pane with the help panel,
+6. **Screenshots.** Take 390×844 with the grid open and closed, the Make pane with the help panel,
    and 1440×900 to show desktop is unchanged.
 
+The owner wants to try the grid and see how it feels; if it is less friendly than the row, it may be
+reverted. Keep the change easy to switch off (one class or one function), and put phone screenshots
+of both states in the PR.
+
 **Done when:** a phone visitor can drag the shelf up into a grid, pick a toy, and get back to the
-row; the help panel is in Make; all tests pass; and prettier is clean.
+row; names are readable; the help panel is in Make; all tests pass; and prettier is clean.
 
-## Phases C–E (outline)
+## Phases C–H (outline)
 
-- **C, music and polish.**
-  - About 6 more instruments, each with a playable action and soft WebAudio notes.
-  - Fix the storybook strip, the sports car framing and the tractor smoke. Check flags on vehicles.
-- **D, AI image-to-3D.**
+- **C1, visual fixes.** The toys with a Fix line in TOY-PLAN.md. Notes:
+  - Vintage camera and boombox look grainy, almost reverse-contrast (screenshot in the review
+    folder). Both came through `tools/mesh-to-splats.mjs`; check which texture it samples (base
+    colour vs. a packed metal/roughness or AO map), sRGB handling and splat size, and the wooden
+    elephant with it. Re-run `prepare-assets` and `make-thumbs` for any rebuilt scan.
+  - Horse statue: too bright. Add a per-toy exposure or tone setting for captured toys, or fix it in
+    preparation.
+  - Cinnamon star cookie: the bottom faces the camera. Flip it in `tools/assets.json` (like the bee)
+    or set its camera preset.
+  - Storybook: text is grey smudges and the cover is soft. Try readable lines from a tiny bitmap
+    font (the kit also builds in Node for `check-packs`, so no canvas), smaller splats on pages, and
+    a crisper cover. Also the known faint red strip.
+  - Comet: overhaul (icy nucleus, coma, straight blue ion tail and curved dust tail).
+  - Statue of Liberty: crown rays look squashed. Decorated tree: the star is a golden cloud.
+  - Lava lamp caps, flying disc sheen, diya detail, the dark-on-dark squash ball and hockey puck,
+    and the carried-forward sports car framing and tractor smoke.
+- **C2, clearer effects.** The toys marked "more" in TOY-PLAN.md. Several "do nothing" reports are
+  pulse actions that are simply too small or too short (the bacteriophage's sheath slides 0.5 units
+  for about 3 s). Rule of thumb: an effect should last at least 1.5 s, move at least ~10% of the
+  toy's size or change its light clearly, and be obvious in the first half second. Windmill: faster.
+- **D, effects and sound engine.**
+  - Sound: today there are 12 shared synthesized sounds (`src/sound.js`) and toys pick one by name.
+    Build a larger voice library (plucked strings, bells, buzz, squeak and quack formants, crunch,
+    splash, drum hits, a note sequencer for tunes), let each toy declare its own sound as a small
+    spec with pitch and timbre, and add a test that every toy has one and no two share the exact
+    same spec. CC0 samples (for example Kenney's CC0 packs) are allowed for the few sounds synthesis
+    does badly; ask the owner first (see Decisions). Embeds stay silent.
+  - Scan rigs: captured toys are one splat cloud with no parts. Options: (a) region parts, where a
+    few boxes or spheres per toy in `src/toys.js` sort splats into parts at load (an instance stream
+    like `paintColor`), so wings, heads, legs and tails can move; (b) small kit-built add-ons (a
+    lantern flame, a camera flash) drawn as a second splat entity; (c) whole-body effects (squash,
+    crumble, glow) through the modifier. Most scan ideas in TOY-PLAN.md need (a) or (b).
+  - Taps that know where they landed: pass the picked point to the action so a recipe can choose
+    what happens (turn this layer, move this piece).
+  - Drag-to-stretch: the Magnet effect already pulls splats; add a grab mode with a springy release
+    (gummy bear, then others).
+  - An audit tool or test listing toys without their own action or sound.
+- **E1–E6, new effects.** One wave per session (about 30–45 toys each), following TOY-PLAN.md. Run
+  `check-packs`, a contact sheet and `make-thumbs` for touched packs as usual. Thumbnails take about
+  18 s per toy under SwiftShader; render only the toys you changed.
+- **F, touch and drag interaction.** Puzzle cube: 26 cubies as parts (the part limit is 48), cube
+  state in JavaScript, swipe on a face to turn a layer, plus scramble and a solved check. Chess set:
+  it is a scan, so either region parts per square or a kit-built set; first a scripted famous
+  public-domain game, then maybe tap-to-move. Gummy bear: drag to stretch. Newton's cradle: drag a
+  ball back and let go. Bricks: build a random model each tap.
+- **G, AI image-to-3D.**
   - Check `HF_TOKEN` (whoami, printing only name and role).
   - Try a public Space through its API from a tool script in `tools/`. TRELLIS outputs Gaussians
     directly; Hunyuan3D is an alternative.
   - Inputs are our own CC0 images, such as renders. Check the model and output licences.
   - Set a quality bar against the procedural toys, and only ship results that beat them.
   - The free GPU quota is limited. If anything would cost money, stop and ask the owner.
-- **E, later.** The gallery (plan in ROADMAP), multi-toy scenes, a scripted liquid pour, the
-  draw-order fix for moving parts, and more scans.
+- **H, later.** The gallery (plan in ROADMAP), multi-toy scenes, a scripted liquid pour, the
+  draw-order fix for moving parts, more scans, more instruments (piano, trumpet, violin, maracas,
+  harp), and the final homepage embed(s) in ryanjosephkamp.github.io.
+
+## Decisions waiting on the owner
+
+- Sounds: synthesized only, or CC0 audio samples for the hardest ones (a real quack, an alarm bell,
+  a crowd cheer)? Samples add a few hundred KB; embeds stay silent either way.
+- The favourite maths toy for the homepage: Menger sponge or hypercube? And one embed or several?
+- An owner-set `?detail=high` embed option for the homepage (see above).
+- Pine tree: the owner suggested lights and a star, but the decorated tree already does that; the
+  plan offers shaking off snow instead.
