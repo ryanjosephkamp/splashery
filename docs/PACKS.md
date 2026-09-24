@@ -224,8 +224,11 @@ node tools/check-packs.mjs <pack>                                   # builds, co
 python3 -m http.server 4173 --bind 127.0.0.1 &                      # serve the site
 SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/make-thumbs.mjs <pack>
 SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/contact-sheet.mjs sheet.png <pack>
+SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/effect-strip.mjs strips <id> ...  # tap effect over time
 SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium npx playwright test tests/kit.spec.mjs
 ```
 
 Look at the contact sheet: every toy should be recognisable at 200 px, fill its square, and face the
-viewer. `make-thumbs` renders with motion off, so behaviours show their resting pose.
+viewer. `make-thumbs` renders with motion off, so behaviours show their resting pose. Check a tap
+effect with `effect-strip`: it should last at least 1.5 s, move at least about a tenth of the toy
+(or change its light clearly), and be obvious within the first half second.

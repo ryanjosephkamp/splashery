@@ -102,7 +102,7 @@ out.push(
   "## Totals",
   "",
   `- ${rows.length} toys. ${count((r) => r.now !== "hops")} have a tap action today; the other ${count((r) => r.now === "hops")} only hop.`,
-  `- **keep** (the owner likes the effect): ${count((r) => r.v === "keep")}.`,
+  `- **keep** (the effect is right: the owner liked it, or C2 finished it): ${count((r) => r.v === "keep")}.`,
   `- **more** (has an effect; make it clearer or more dramatic): ${count((r) => r.v === "more")}.`,
   `- **new** (needs its own effect): ${count((r) => r.v === "new")}.`,
   `- Visual fixes: ${count((r) => r.fix)} open, ${count((r) => r.fixed)} done. Touch or drag interaction asked for: ${count((r) => r.interactive)}.`,
@@ -110,7 +110,7 @@ out.push(
   "## By phase",
   "",
   `- **C, polish.** Visual fixes still open: ${list((r) => r.fix) || "none"}. Done in C1: ${list((r) => r.fixed) || "none"}.`,
-  `  Make the effect clearer or more dramatic: ${list((r) => r.v === "more" && !r.interactive)}.`,
+  `  Effects to make clearer or more dramatic, still open: ${list((r) => r.v === "more" && !r.interactive) || "none"}. Done in C2: ${list((r) => r.improved) || "none"}.`,
   "- **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting",
   "  with the toys whose effect is kept.",
   ...WAVES.map(
@@ -132,6 +132,7 @@ for (const c of categories) {
     if (r.fix) out.push(`  - Fix: ${r.fix}`);
     if (r.fixed) out.push(`  - Fixed: ${r.fixed}`);
     if (r.effect) out.push(`  - Effect: ${r.effect}`);
+    if (r.improved) out.push(`  - Improved: ${r.improved}`);
     out.push(`  - Sound: ${r.sound}`);
     if (r.interactive) out.push("  - Touch or drag interaction (phase F).");
   }
