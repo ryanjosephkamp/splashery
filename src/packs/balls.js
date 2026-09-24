@@ -23,6 +23,83 @@ const keep = (c, size) => ({ c, keep: true, size });
 const pebble = (c, col, amount = 0.08, f = 38) =>
   shade(col, 1 - amount * 0.5 + amount * c.noise(c.lp[0] * f, c.lp[1] * f, c.lp[2] * f));
 
+// Soft studio light baked into the colours (splats are unlit): a key light
+// from the upper left and a highlight where it glints towards the home view.
+// Materials read from this, not from random speckle.
+const LIGHT = unit([-0.35, 0.8, 0.5]);
+const VIEW = unit([0.5, 0.28, 0.82]);
+const HALF = unit([LIGHT[0] + VIEW[0], LIGHT[1] + VIEW[1], LIGHT[2] + VIEW[2]]);
+function lit(col, n, { sheen = 0, tight = 30, soft = 0.22 } = {}) {
+  const out = shade(col, 1 - soft + soft * (0.5 + 0.5 * dot(n, LIGHT)) + soft * 0.1);
+  if (!sheen) return out;
+  return mix(out, "#ffffff", sheen * Math.max(0, dot(n, HALF)) ** tight);
+}
+
+// Pebbled grain as real bumps: a cellular pattern of small domes (about
+// `f` across the ball's radius). Returns the bumped normal and how deep in a
+// crevice between pebbles the point is (0..1).
+function hash3(x, y, z, k) {
+  let h = Math.imul(x, 374761393) ^ Math.imul(y, 668265263) ^ Math.imul(z, 1440662683) ^ k;
+  h = Math.imul(h ^ (h >>> 13), 1274126177);
+  return ((h ^ (h >>> 16)) >>> 0) / 4294967296;
+}
+function pebbled(c, f, depth = 0.5) {
+  const x = c.lp[0] * f;
+  const y = c.lp[1] * f;
+  const z = c.lp[2] * f;
+  const ix = Math.floor(x);
+  const iy = Math.floor(y);
+  const iz = Math.floor(z);
+  let best = 9;
+  let off = [0, 0, 0];
+  for (let dx = -1; dx <= 1; dx++)
+    for (let dy = -1; dy <= 1; dy++)
+      for (let dz = -1; dz <= 1; dz++) {
+        const cx = ix + dx;
+        const cy = iy + dy;
+        const cz = iz + dz;
+        const ox = x - (cx + hash3(cx, cy, cz, 1));
+        const oy = y - (cy + hash3(cx, cy, cz, 2));
+        const oz = z - (cz + hash3(cx, cy, cz, 3));
+        const d = ox * ox + oy * oy + oz * oz;
+        if (d < best) {
+          best = d;
+          off = [ox, oy, oz];
+        }
+      }
+  const d = Math.sqrt(best);
+  const n = c.n;
+  const along = dot(off, n);
+  const t = [off[0] - n[0] * along, off[1] - n[1] * along, off[2] - n[2] * along];
+  return {
+    n: unit([n[0] + t[0] * depth, n[1] + t[1] * depth, n[2] + t[2] * depth]),
+    crevice: smoothstep(0.45, 0.75, d),
+  };
+}
+
+// A pebbled, lit surface colour.
+function grip(c, col, { f = 60, depth = 0.6, crevice = 0.18, sheen = 0, tight = 30 } = {}) {
+  const b = pebbled(c, f, depth);
+  return lit(shade(col, 1 - crevice * b.crevice), b.n, { sheen, tight });
+}
+
+// A faint shell of round, see-through splats just outside a dark toy. Seen
+// face on it is almost invisible; at the silhouette the eye looks through a
+// long stretch of it, so it adds up to a soft rim of light that lifts a black
+// ball off a dark page (and barely shows on a light one).
+function rim(k, shape, opts = {}) {
+  k.add(shape, {
+    flat: 1,
+    size: 1.6,
+    weight: 0.35,
+    opacity: 0.009,
+    jitter: 0,
+    color: "#aeb8c4",
+    pattern: false,
+    ...opts,
+  });
+}
+
 // The seam of a tennis ball or baseball: a curve on the unit sphere made of
 // two interlocking lobes (a + b = 1 keeps it on the sphere).
 function seamCurve(a = 0.72, n = 360) {
@@ -56,11 +133,14 @@ function sub(a, b) {
   return [a[0] - b[0], a[1] - b[1], a[2] - b[2]];
 }
 
-// A plain ball body with a darker core for Slice.
+// A plain ball body with a darker core for Slice. Colour noise is low: the
+// material comes from the colour function.
 function body(k, color, opts = {}) {
   return k.add(k.sphere(1), {
     flat: 0.18,
     interior: 0.12,
+    jitter: 0.012,
+    even: true,
     core: opts.core || "#3b2a22",
     color,
     ...opts,
@@ -72,15 +152,18 @@ function stitchedBall(k, leather, stitch, { a = 0.72, n = 108 } = {}) {
   const seam = seamCurve(a);
   body(k, (c) => {
     const s = seam(c.ln);
-    if (s.dist < 0.012) return keep(shade(leather, 0.8));
-    if (s.dist < 0.07) {
-      // Two rows of angled stitches, one each side of the seam.
-      const across = (s.dist - 0.012) / 0.058;
-      const f = (s.t * n + across * 0.55 * s.side + 10) % 1;
-      if (across > 0.12 && across < 0.95 && f < 0.42) return keep(stitch, 0.8);
-      return keep(pebble(c, shade(leather, 0.94), 0.05));
+    // Smooth leather with a soft sheen; the seam is a fine groove.
+    if (s.dist < 0.012) return keep(lit(shade(leather, 0.72), c.n));
+    if (s.dist < 0.075) {
+      // Two rows of angled stitches, one each side of the seam, standing
+      // proud of the leather: crisp, small splats and a touch of shine.
+      const across = (s.dist - 0.012) / 0.063;
+      const f = (s.t * n + across * 0.6 * s.side + 10) % 1;
+      if (across > 0.14 && across < 0.92 && f < 0.4)
+        return keep(lit(stitch, c.n, { sheen: 0.25, tight: 12 }), 0.6);
+      return keep(lit(shade(leather, 0.93), c.n, { sheen: 0.1 }));
     }
-    return pebble(c, leather, 0.05, 30);
+    return lit(leather, c.n, { sheen: 0.14, tight: 16 });
   });
 }
 
@@ -262,9 +345,9 @@ export const RECIPES = {
       body(k, (c) => {
         const [x, y] = c.ln;
         const seam = Math.abs(x) < w || Math.abs(y) < w || Math.abs(Math.abs(x) - 0.71) < w * 1.05;
-        if (seam) return keep("#1d1511");
-        const dots = c.noise(c.lp[0] * 70, c.lp[1] * 70, c.lp[2] * 70);
-        return shade(o.color, 0.93 + 0.1 * dots);
+        // Clean black channels in small, crisp splats.
+        if (seam) return keep("#16100d", 0.7);
+        return grip(c, o.color, { f: 55, depth: 0.7, crevice: 0.22, sheen: 0.08 });
       });
     },
   },
@@ -278,8 +361,9 @@ export const RECIPES = {
       const face = soccerFaces();
       body(k, (c) => {
         const f = face(c.ln);
-        if (f.edge < 0.012) return keep("#8c8c8c", 0.8);
-        return pebble(c, f.pent ? o.panels : o.base, 0.04, 30);
+        // Smooth, slightly glossy panels; the seams are clean grooves.
+        if (f.edge < 0.011) return keep(lit("#6f6f6f", c.n), 0.6);
+        return lit(f.pent ? o.panels : o.base, c.n, { sheen: 0.22, tight: 24 });
       });
     },
   },
@@ -297,6 +381,8 @@ export const RECIPES = {
         rot: [0, 0, 90],
         flat: 0.18,
         interior: 0.12,
+        jitter: 0.012,
+        even: true,
         core: "#3b1d0c",
         color: (c) => {
           const a = c.u * TAU;
@@ -305,13 +391,17 @@ export const RECIPES = {
           const seamA = Math.abs(Math.sin(2 * a));
           // The laces sit on the seam at a = 90 degrees (turned to the top).
           const d90 = Math.abs(a - Math.PI / 2);
-          if (Math.abs(y) < 0.55 && d90 < 0.05) return keep("#f3f0e6");
-          if (Math.abs(y) < 0.48 && d90 < 0.2) {
+          // Crisp white laces: a spine along the seam and eight cross bars.
+          const lace = "#f5f2e8";
+          if (Math.abs(y) < 0.55 && d90 < 0.045) return keep(lit(lace, c.n, { sheen: 0.2 }), 0.6);
+          if (Math.abs(y) < 0.48 && d90 < 0.19) {
             const bar = Math.abs((((y + 0.48) / 0.12) % 1) - 0.5) > 0.3;
-            if (bar) return keep("#f3f0e6", 0.9);
+            if (bar) return keep(lit(lace, c.n, { sheen: 0.2 }), 0.6);
           }
-          if (seamA < 0.02) return keep(shade(o.color, 0.45));
-          return pebble(c, o.color, 0.12, 45);
+          // Darker, stitched seams between the four panels.
+          if (seamA < 0.022) return keep(lit(shade(o.color, 0.38), c.n), 0.7);
+          // Pebbled pigskin with a soft sheen.
+          return grip(c, o.color, { f: 70, depth: 0.65, crevice: 0.25, sheen: 0.1, tight: 14 });
         },
       });
     },
@@ -321,15 +411,41 @@ export const RECIPES = {
     options: [{ key: "color", label: "Felt", type: "color", default: "#cfe23b" }],
     build(k, o) {
       const seam = seamCurve(0.72);
+      // Felt: soft, round splats with gentle mottling and no shine.
+      const felt = (c) =>
+        lit(shade(o.color, 0.97 + 0.06 * c.fbm(c.lp[0] * 7, c.lp[1] * 7, c.lp[2] * 7)), c.n, {
+          soft: 0.26,
+        });
       body(
         k,
         (c) => {
           const s = seam(c.ln);
-          if (s.dist < 0.035) return keep("#f1f4e4");
-          return pebble(c, o.color, 0.16, 60);
+          // The clean white rubber seam, slightly sunk into the felt.
+          if (s.dist < 0.03) return keep(lit("#f4f6ea", c.n), 0.65);
+          return felt(c);
         },
-        { flat: 0.5, jitter: 0.08, core: "#4a4a3a" },
+        { flat: 0.55, size: 1.15, jitter: 0.01, core: "#4a4a3a" },
       );
+      // A fuzz of fine hairs standing off the felt, which also softens the
+      // silhouette. None grow on the seam.
+      k.cloud({ share: 0.2, size: 0.55, opacity: 0.5 }, (rand) => {
+        const z = rand() * 2 - 1;
+        const a = rand() * TAU;
+        const r = Math.sqrt(1 - z * z);
+        const d = [r * Math.cos(a), z, r * Math.sin(a)];
+        if (seam(d).dist < 0.05) return null;
+        const h = 1 + rand() * 0.035;
+        // Hairs lean at random, mostly along the surface.
+        const t = unit(cross(d, [rand() - 0.5, rand() - 0.5, rand() - 0.5]));
+        const dir = unit([t[0] + d[0] * 0.6, t[1] + d[1] * 0.6, t[2] + d[2] * 0.6]);
+        const tone = 0.9 + rand() * 0.2;
+        return {
+          p: [d[0] * h, d[1] * h, d[2] * h],
+          dir,
+          stretch: 2.6,
+          color: lit(shade(o.color, tone * (0.96 + (h - 1) * 2)), d, { soft: 0.26 }),
+        };
+      });
     },
   },
 
@@ -422,13 +538,16 @@ export const RECIPES = {
         rot: [0, 0, 90],
         flat: 0.18,
         interior: 0.12,
+        jitter: 0.012,
+        even: true,
         core: "#8a8270",
         color: (c) => {
           const a = c.u * TAU;
           const y = c.lp[1];
-          if (Math.abs(Math.sin(2 * a)) < 0.02) return keep("#b9b4a6");
+          if (Math.abs(Math.sin(2 * a)) < 0.02) return keep(lit("#9e998b", c.n), 0.7);
           const band = Math.abs(Math.abs(y) - 0.78) < 0.12;
-          return pebble(c, band ? o.color : "#f2efe6", 0.1, 50);
+          // A pebbled grip in fine, even bumps.
+          return grip(c, band ? o.color : "#f2efe6", { f: 60, depth: 0.55, crevice: 0.14 });
         },
       });
     },
@@ -442,9 +561,10 @@ export const RECIPES = {
     build(k, o) {
       body(k, (c) => {
         const s = strips(c.ln);
-        if (s.seam < 0.018) return keep("#9aa0aa", 0.8);
+        // Smooth leather panels; clean, fine seams.
+        if (s.seam < 0.016) return keep(lit("#7d838d", c.n), 0.6);
         const cols = [o.c1, "#fbfbf8", o.c2];
-        return pebble(c, cols[(s.strip + s.face) % 3], 0.05, 40);
+        return lit(cols[(s.strip + s.face) % 3], c.n, { sheen: 0.14, tight: 18 });
       });
     },
   },
@@ -489,14 +609,16 @@ export const RECIPES = {
         const [x, y] = c.ln;
         const a = Math.atan2(c.ln[0], c.ln[2]);
         if (Math.abs(y) < 0.075) {
-          // The raised seam: six rows of stitching.
+          // The raised seam: six rows of stitching, lit as a ridge.
           const row = Math.floor(((y + 0.075) / 0.15) * 6);
-          if (row === 2 || row === 3) return keep(shade(leather, 0.7));
+          const ridge = unit([c.n[0], c.n[1] + (y / 0.075) * 0.5, c.n[2]]);
+          if (row === 2 || row === 3) return keep(lit(shade(leather, 0.62), ridge), 0.7);
           const dash = ((a / TAU) * 180 + row * 0.5) % 1 < 0.6;
-          return keep(dash ? "#efe6cf" : shade(leather, 0.8), 0.8);
+          return keep(lit(dash ? "#f2ead4" : shade(leather, 0.8), ridge, { sheen: 0.3 }), 0.6);
         }
-        if (Math.abs(x) < 0.008) return keep(shade(leather, 0.75));
-        return shade(pebble(c, leather, 0.06, 30), 0.95 + 0.1 * Math.max(0, c.n[1]));
+        if (Math.abs(x) < 0.008) return keep(lit(shade(leather, 0.7), c.n));
+        // Polished red leather: deep colour and a bright, tight shine.
+        return lit(leather, c.n, { sheen: 0.6, tight: 40, soft: 0.3 });
       });
     },
   },
@@ -596,9 +718,11 @@ export const RECIPES = {
       body(k, (c) => {
         const [x, y] = c.ln;
         if (Math.abs(x) < w || Math.abs(y) < w || Math.abs(Math.abs(x) - 0.71) < w)
-          return keep("#8a8a8a");
-        return pebble(c, "#2b2b2d", 0.25, 25);
+          return keep(lit("#8a8a8a", c.n), 0.7);
+        // Matte rubber grip: low, even bumps and no shine.
+        return grip(c, "#34343a", { f: 45, depth: 0.5, crevice: 0.2 });
       });
+      rim(k, k.sphere(1.035));
     },
   },
 
@@ -616,10 +740,12 @@ export const RECIPES = {
         k,
         (c) => {
           for (const d of dots) if (dot(c.ln, d) > Math.cos(0.09)) return keep("#f5d312");
-          return pebble(c, "#151515", 0.2, 40);
+          // Matte black rubber, with a little sheen so the shape reads.
+          return grip(c, "#1c1c1e", { f: 50, depth: 0.4, crevice: 0.15, sheen: 0.12, tight: 10 });
         },
         { core: "#202020" },
       );
+      rim(k, k.sphere(1.035));
     },
   },
 
@@ -670,20 +796,26 @@ export const RECIPES = {
     build(k) {
       k.add(k.cylinder(1, 0.34), {
         flat: 0.2,
+        jitter: 0.012,
+        even: true,
         interior: 0.1,
         core: "#0c0c0c",
         color: (c) => {
           if (c.s.side) {
             const a = Math.atan2(c.lp[0], c.lp[2]);
             const knurl = ((a / TAU) * 120 + 10) % 1 < 0.5 && Math.abs(c.lp[1]) < 0.12;
-            return keep(knurl ? "#262626" : "#141414");
+            return keep(lit(knurl ? "#303032" : "#18181a", c.n, { sheen: 0.12, tight: 8 }));
           }
           const r = c.s.radial ?? 0;
           return Math.abs(r - 0.72) < 0.015
-            ? keep("#2b2b2b")
-            : shade("#161616", 0.95 + 0.1 * c.noise(c.lp[0] * 30, 0, c.lp[2] * 30));
+            ? keep(lit("#343436", c.n))
+            : lit(shade("#1b1b1d", 0.95 + 0.1 * c.noise(c.lp[0] * 30, 0, c.lp[2] * 30)), c.n, {
+                sheen: 0.12,
+                tight: 10,
+              });
         },
       });
+      rim(k, k.cylinder(1.035, 0.37));
     },
   },
 
@@ -738,10 +870,29 @@ export const RECIPES = {
       ];
       k.add(k.lathe(prof, { grid: 96 }), {
         flat: 0.2,
+        jitter: 0.01,
+        even: true,
         color: (c) => {
           const r = Math.hypot(c.lp[0], c.lp[2]);
-          if (c.lp[1] > 0.06 && Math.abs(r - 0.55) < 0.02) return keep(shade(o.color, 0.7));
-          return mix(o.color, "#ffffff", 0.12 * Math.max(0, c.n[1]));
+          const top = c.lp[1] > 0.06;
+          // Moulded flight rings: two low ridges, lit on one side and shaded
+          // on the other, and a groove.
+          if (top && Math.abs(r - 0.55) < 0.02) return keep(lit(shade(o.color, 0.72), c.n), 0.7);
+          let n = c.n;
+          if (top) {
+            for (const rr of [0.62, 0.68]) {
+              const d = (r - rr) / 0.018;
+              if (Math.abs(d) < 1) {
+                const out = [c.lp[0] / (r || 1), 0, c.lp[2] / (r || 1)];
+                const tilt = -d * 1.2;
+                n = unit([n[0] + out[0] * tilt, n[1], n[2] + out[2] * tilt]);
+              }
+            }
+          }
+          // Glossy plastic: a clear highlight and a faint milky lift on top.
+          const base = mix(o.color, "#ffffff", 0.06 * Math.max(0, c.n[1]));
+          const out = lit(base, n, { sheen: 0.55, tight: 28, soft: 0.28 });
+          return mix(out, "#ffffff", 0.22 * Math.max(0, dot(n, HALF)) ** 4);
         },
       });
     },

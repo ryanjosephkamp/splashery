@@ -701,33 +701,58 @@ export const RECIPES = {
           params: [0.5, (i % bulbs.length) * 1.7],
         };
       });
-      // The star on top.
-      const top = [0, 0.95, 0];
-      for (const z of [0.03, -0.03]) {
+      // The star on top: a faceted, bevelled gold star (each point has a lit
+      // and a shaded face), turned to face the home view so its shape reads.
+      // It sits above the tip, so its lower points clear the needles (the
+      // tufts reach y = 0.98), on a short gold stem.
+      const top = [0, 1.17, 0];
+      const R = 0.2;
+      const seg = TAU / 5;
+      k.add(k.cylinder(0.018, 0.2), {
+        pos: [0, 0.94, 0],
+        weight: 3,
+        pattern: false,
+        color: (c) => shade("#d9a22a", 0.85 + 0.25 * Math.max(0, c.n[0])),
+      });
+      for (const side of [1, -1]) {
         k.add(
           k.param(
             (u, v) => {
               const a = u * TAU;
-              const r = v * starRadius(a, 0.17);
-              return [top[0] + Math.sin(a) * r, top[1] + Math.cos(a) * r, z * (1 - v * 0.7)];
+              const r = v * starRadius(a, R);
+              return [Math.sin(a) * r, Math.cos(a) * r, side * 0.045 * (1 - v)];
             },
-            { grid: 40, normal: () => [0, 0, Math.sign(z)] },
+            { grid: 60, flip: side < 0 },
           ),
           {
-            weight: 2,
+            pos: top,
+            rot: [0, 31.5, 0],
+            weight: 4,
+            even: true,
+            jitter: 0.01,
+            flat: 0.15,
             pattern: false,
             kind: "twinkle",
-            params: [0.25, 0],
-            color: (c) => mix("#fff2a0", "#f0b020", c.v),
+            params: [0.15, 0],
+            color: (c) => {
+              const a = Math.atan2(c.lp[0], c.lp[1]);
+              // Which half of a point the splat is on: one catches the light.
+              const d = fract(a / seg + 0.5) - 0.5;
+              const facet = d > 0 ? 1.08 : 0.72;
+              const ridge = Math.abs(d) < 0.02 ? 1.25 : 1;
+              const tip = c.v > 0.93 ? 1.15 : 1;
+              return shade(mix("#ffe79a", "#e5a51c", c.v * 0.8), facet * ridge * tip);
+            },
           },
         );
       }
-      k.cloud({ share: 0.006, size: 3, pattern: false }, (rand) => {
+      // A faint warm glow behind it.
+      k.cloud({ share: 0.004, size: 2.4, pattern: false }, (rand) => {
         const d = vec.unit([rand() - 0.5, rand() - 0.5, rand() - 0.5]);
         return {
-          p: vec.add(top, vec.mul(d, 0.18 * rand())),
+          p: vec.add(top, vec.mul(d, 0.08 + 0.12 * rand())),
           color: "#fff0a0",
-          opacity: 0.12,
+          opacity: 0.035,
           kind: "twinkle",
           params: [0.3, rand() * TAU],
         };
@@ -1045,20 +1070,37 @@ export const RECIPES = {
       const bowl = (inner) =>
         k.param((u, v) => bowlAt(u * TAU, v, inner), { grid: 72, flip: inner });
       const zig = (x) => Math.abs(fract(x) - 0.5) * 4 - 1;
+      // Burnished terracotta, painted: a row of white dots under the rim, a
+      // red line, a band of lotus petals (white outline, saffron fill, a
+      // green heart) and a green line at the foot.
       const clay = (c) => {
         const y = c.p[1] - base;
-        const n = c.noise(c.p[0] * 20, c.p[1] * 20, c.p[2] * 20);
-        let col = mix("#d0702e", "#a24c1c", 0.5 + 0.4 * n);
+        const n = c.fbm(c.p[0] * 4, c.p[1] * 4, c.p[2] * 4, 3);
+        let col = mix("#c9662a", "#a9501f", 0.5 + 0.8 * n);
         const a = Math.atan2(c.p[0], c.p[2]) / TAU;
-        if (y > 0.25 && Math.abs(fract(a * 22) - 0.5) < 0.18 && Math.abs(y - 0.285) < 0.018)
-          col = "#fbf4e0";
-        if (Math.abs(y - 0.215) < 0.015) col = "#e2283a";
-        if (Math.abs(y - (0.15 + 0.03 * zig(a * 14))) < 0.014) col = "#ffd21a";
-        if (Math.abs(y - 0.09) < 0.012) col = "#2f9a5a";
-        return lit(c, col, 0.35, 0.25);
+        const r = Math.hypot(c.p[0], c.p[2]);
+        // Dots: round, about the same size all the way round.
+        const du = (fract(a * 24) - 0.5) * ((TAU * r) / 24);
+        if (Math.hypot(du, y - 0.292) < 0.014) col = "#fbf4e0";
+        if (Math.abs(y - 0.262) < 0.008) col = "#d8202f";
+        // Petals.
+        const h = (y - 0.12) / 0.13;
+        if (h > 0 && h < 1) {
+          const u = Math.abs(fract(a * 14) - 0.5);
+          const w = 0.44 * Math.pow(Math.sin(Math.PI * Math.pow(h, 0.8)), 0.7);
+          if (u < w) col = u > w - 0.09 ? "#fbf4e0" : u < 0.1 && h < 0.55 ? "#2f9a5a" : "#f7b21c";
+        }
+        if (Math.abs(y - 0.105) < 0.008) col = "#2f9a5a";
+        return lit(c, col, 0.35, 0.18);
       };
-      k.add(bowl(false), { flat: 0.2, color: clay });
-      k.add(bowl(true), { flat: 0.2, color: (c) => lit(c, "#8a3a14", 0.3, 0.2) });
+      k.add(bowl(false), { flat: 0.2, weight: 2, even: true, jitter: 0.012, color: clay });
+      k.add(bowl(true), {
+        flat: 0.2,
+        even: true,
+        jitter: 0.012,
+        color: (c) =>
+          lit(c, shade("#8a3a14", 0.95 + 0.1 * c.fbm(c.p[0] * 5, 0, c.p[2] * 5)), 0.3, 0.2),
+      });
       // The rounded lip joining outside and inside.
       k.add(
         k.param(
@@ -1069,7 +1111,13 @@ export const RECIPES = {
           },
           { grid: 64 },
         ),
-        { flat: 0.2, weight: 1.5, color: (c) => lit(c, "#c8642a", 0.3, 0.2) },
+        {
+          flat: 0.2,
+          weight: 2,
+          even: true,
+          jitter: 0.012,
+          color: (c) => lit(c, "#c8642a", 0.3, 0.25),
+        },
       );
       // Oil, glinting.
       k.add(
@@ -1081,7 +1129,31 @@ export const RECIPES = {
           },
           { grid: 40, normal: () => [0, 1, 0] },
         ),
-        { flat: 0.3, pattern: false, color: (c) => lit(c, "#d49a22", 0.2, 0.9) },
+        {
+          flat: 0.3,
+          weight: 1.5,
+          even: true,
+          jitter: 0.008,
+          pattern: false,
+          color: (c) => {
+            // Dark amber oil: rings of a slow ripple, a glossy sheen, and the
+            // flame's warm reflection near the wick.
+            const r = Math.hypot(c.p[0], c.p[2]);
+            const ripple = 0.985 + 0.025 * Math.sin(r * 45);
+            const toWick = Math.hypot(
+              c.p[0] - Math.sin(spoutA) * 0.36,
+              c.p[2] - Math.cos(spoutA) * 0.36,
+            );
+            let col = shade("#9c5a12", ripple);
+            col = mix(col, "#ffe6a0", 0.75 * Math.exp(-((toWick / 0.12) ** 2)));
+            col = mix(
+              col,
+              "#fff4d6",
+              0.35 * smoothstep(0.1, 0.5, c.p[0] * -0.5 + c.p[2] * 0.4 + 0.2),
+            );
+            return lit(c, col, 0.2, 0.9);
+          },
+        },
       );
       // The wick in the spout, and its flame.
       const tip = [Math.sin(spoutA) * 0.7, base + 0.43, Math.cos(spoutA) * 0.7];

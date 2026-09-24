@@ -287,6 +287,14 @@ node tools/mesh-to-splats.mjs ukulele    # one model
 node tools/prepare-assets.mjs ukulele
 ```
 
+It reads each texture at the mip level that matches a splat's footprint, so busy textures do not
+alias into grain. Options per model in `tools/models.json` (documented at the top of the tool) can
+bake soft studio light into the colours using the model's normal and occlusion maps, draw lenses as
+dark glass, and paint out printed brand names.
+
+`tools/toy-shots.mjs <out-dir> id ...` renders toys at their home view to PNG files for before and
+after comparisons (`--size=`, `--bg=`, `--theme=light`, `--set=open=0` to set a control first).
+
 ## Tests
 
 ```sh

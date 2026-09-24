@@ -167,12 +167,14 @@ function wheel(k, pos, r, w, opts = {}) {
     },
   });
   const rw = w * 0.7;
+  // The wheel stays metal and rubber under a flag or pattern.
   k.add(k.cylinder(r * rimR + tr * 0.4, rw), {
     pos,
     rot: [90, 0, 0],
     part,
     flat: 0.2,
     weight: 1.5,
+    pattern: false,
     color: (c) => {
       if (c.s.side) return shade(rim, 0.55);
       const rr = c.s.radial;
@@ -2025,8 +2027,10 @@ function bicycleBuild(k, o) {
       pattern: false,
       color: (c) => shade("#222", 0.8 + 0.25 * Math.abs(c.ln[1])),
     });
-    k.add(k.torus(0.59, 0.016), { part, pos: w, rot: [90, 0, 0], weight: 2.5, color: "#c9ccd1" });
-    k.add(k.cylinder(0.035, 0.13), { part, pos: w, rot: [90, 0, 0], weight: 3, color: "#aeb1b6" });
+    // Rims, hub and spokes stay metal under a flag or pattern.
+    const bare = { part, pos: w, rot: [90, 0, 0], pattern: false };
+    k.add(k.torus(0.59, 0.016), { ...bare, weight: 2.5, color: "#c9ccd1" });
+    k.add(k.cylinder(0.035, 0.13), { ...bare, weight: 3, color: "#aeb1b6" });
     for (let i = 0; i < 24; i++) {
       const a = (i / 24) * TAU;
       const side = i % 2 ? 0.05 : -0.05;
@@ -2038,6 +2042,7 @@ function bicycleBuild(k, o) {
         {
           part,
           weight: 5,
+          pattern: false,
           color: "#d4d6da",
         },
       );
@@ -2175,6 +2180,7 @@ function tractorBuild(k, o) {
       pos: w,
       rot: [90, 0, 0],
       flat: 0.2,
+      pattern: false,
       color: (c) => {
         if (c.s.side) return "#9a927f";
         const rr = c.s.radial;
@@ -2227,13 +2233,14 @@ function tractorBuild(k, o) {
     color: (c) => lit("#bfc2c7", c),
   });
   k.add(k.cylinder(0.06, 0.06), { pos: [0.5, 1.58, -0.12], color: (c) => lit("#bfc2c7", c) });
-  plume(k, [0.88, 2.0, 0.12], [-0.7, 0.55, 0], {
-    share: 0.02,
-    spread: 0.05,
-    grow: 2.6,
+  // A light, thinning wisp of exhaust (it was a heavy cloud).
+  plume(k, [0.88, 2.0, 0.12], [-0.55, 0.45, 0], {
+    share: 0.007,
+    spread: 0.04,
+    grow: 2.2,
     color: "#e6e3de",
-    dark: "#8f8a85",
-    opacity: 0.28,
+    dark: "#9a958f",
+    opacity: 0.08,
     height: 0.45,
   });
   // The cab: posts, roof, windows, a seat and a steering wheel.
@@ -2256,7 +2263,14 @@ function tractorBuild(k, o) {
     k.add(quad(k, a, b, cc, d), {
       opacity: 0.2,
       pattern: false,
-      color: (c) => mix("#bcd6ea", "#ffffff", smoothstep(0.2, 0.9, c.rand())),
+      even: true,
+      jitter: 0.01,
+      // Clear glass with a soft diagonal reflection (it was random static).
+      color: (c) => {
+        const t = (c.p[0] * 0.6 + c.p[1] * 1.4 + c.p[2] * 0.5) * 1.3;
+        const f = t - Math.floor(t);
+        return mix("#bcd6ea", "#ffffff", 0.8 * smoothstep(0, 0.06, f) * smoothstep(0.32, 0.1, f));
+      },
     });
   pane(
     [cx1 - 0.05, 1.05, -0.4],

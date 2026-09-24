@@ -346,10 +346,12 @@ export const RECIPES = {
     },
     build(k, o) {
       const wax = o.wax;
+      // The glass swells in the middle and tapers into the cap, where it
+      // meets a collar of the cap's own radius.
       const glassR = (y) =>
         0.2 +
         0.075 * Math.sin(Math.PI * clamp((y + 0.05) / 1.35, 0, 1) * 0.8) -
-        0.05 * clamp((y - 0.7) / 0.7, 0, 1);
+        0.115 * smoothstep(0.62, 1.3, y);
       // The metal base and cap, with bright reflections.
       const chrome = (c) => {
         const n = c.n;
@@ -366,18 +368,42 @@ export const RECIPES = {
           [0.215, -0.02],
           [0.2, 0.0],
         ]),
-        { flat: 0.2, color: chrome },
+        { flat: 0.2, even: true, jitter: 0.015, color: chrome },
       );
       k.add(
         k.lathe([
-          [0.13, 1.28],
-          [0.125, 1.35],
+          [0.14, 1.27],
+          [0.135, 1.35],
           [0.1, 1.5],
           [0.085, 1.56],
           [0.0, 1.57],
         ]),
-        { flat: 0.2, color: chrome },
+        { flat: 0.2, even: true, jitter: 0.015, color: chrome },
       );
+      // Rolled metal collars where the glass sits in the base and under the
+      // cap: a lip slightly proud of the glass, with a dark seam against it.
+      const collar = (y0, y1, r) =>
+        k.add(
+          k.lathe([
+            [r - 0.012, y0],
+            [r + 0.006, y0 + 0.004],
+            [r + 0.012, (y0 + y1) / 2],
+            [r + 0.006, y1 - 0.004],
+            [r - 0.012, y1],
+          ]),
+          {
+            flat: 0.2,
+            weight: 2,
+            even: true,
+            jitter: 0.015,
+            color: (c) => {
+              const edge = Math.min(c.lp[1] - y0, y1 - c.lp[1]);
+              return edge < 0.005 ? shade(o.metal, 0.3) : chrome(c);
+            },
+          },
+        );
+      collar(-0.035, 0.03, glassR(0));
+      collar(1.24, 1.3, glassR(1.27));
       // The glass: faint, tinted by the liquid, with a highlight streak.
       k.add(
         k.lathe(
@@ -389,6 +415,8 @@ export const RECIPES = {
         {
           opacity: 0.13,
           flat: 0.3,
+          even: true,
+          jitter: 0.01,
           pattern: false,
           color: (c) => mix(o.liquid, "#ffffff", 0.2 + 0.3 * Math.max(0, c.n[2])),
         },

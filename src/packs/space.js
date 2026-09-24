@@ -1490,16 +1490,19 @@ export const RECIPES = {
       const S = budgetScale(k);
       const f = camFrame();
       // The tails point away from the Sun: up and to the right on screen.
+      // B is across the tails, in the picture plane.
       const T = unit(add(f.up, mul(f.right, 0.55)));
       const B = unit(cross(T, f.c));
       const L = 2.7;
-      // The nucleus: a small dark lumpy rock.
-      const craters = craterField(k.rand, { count: 24, min: 0.1, max: 0.35, power: 1.5 });
+      const R = 0.085;
+      // The nucleus: a lumpy block of dirty ice, bright where the ice shows,
+      // big enough to see inside the coma.
+      const craters = craterField(k.rand, { count: 22, min: 0.1, max: 0.32, power: 1.5 });
       const nuc = rockyBody(k, {
         craters,
         grid: 64,
-        scale: 0.06,
-        share: 0.04,
+        scale: R,
+        share: 0.06,
         shapeR: tabulate(
           (d) =>
             (1 / Math.hypot(d[0] / 1.3, d[1] / 0.85, d[2])) *
@@ -1507,73 +1510,99 @@ export const RECIPES = {
           64,
           32,
         ),
-        albedo: (c, d) => shade("#5e5650", 1 + 0.15 * c.noise(d[0] * 9, d[1] * 9, d[2] * 9)),
-        litAmount: 0.8,
-        core: "#9a9a9a",
+        albedo: (c, d) => {
+          const ice = smoothstep(-0.05, 0.25, c.noise(d[0] * 3.5, d[1] * 3.5, d[2] * 3.5));
+          // The side facing the Sun (away from the tails) is lit.
+          const sun = 0.75 + 0.35 * clamp01(-dot(d, T) * 0.8 + 0.4);
+          return shade(mix("#8c8f96", "#f4fbff", ice), sun);
+        },
+        litAmount: 0.5,
+        core: "#b8c4cc",
       });
-      nuc.opts.size = coverSize(k, nuc.area, 0.04);
-      // Jets of gas from the sunlit side.
-      const jets = [0.5, -0.5, 1.6].map((a) =>
-        unit(add(mul(T, -1), add(mul(B, Math.sin(a) * 0.9), mul(f.c, Math.cos(a) * 0.4)))),
-      );
-      k.cloud({ share: 0.015, pattern: false, kind: "twinkle" }, (rand) => {
-        const j = jets[Math.floor(rand() * jets.length)];
-        const s = rand();
+      nuc.opts.size = coverSize(k, nuc.area, 0.06);
+      nuc.opts.pattern = false;
+      // A tight bright glow hugging the nucleus.
+      halo(k, {
+        r0: R * 1.05,
+        r1: R * 2.2,
+        share: 0.012,
+        size: 1.2 * S,
+        opacity: 0.16,
+        falloff: 2,
+        twinkle: 0.15,
+        col: (t) => mix("#ffffff", "#c8fff2", t),
+      });
+      // The coma: a soft green-blue hood, pressed flat on the sunward side
+      // and drawn out towards the tails. Faint enough to see the nucleus.
+      k.cloud({ share: 0.05, pattern: false, kind: "twinkle" }, (rand) => {
+        const t = Math.pow(rand(), 1.2);
+        const d = randDir(rand);
+        const toward = dot(d, T);
+        const r = (R * 2.4 + 0.5 * t) * (toward < 0 ? 1 + 0.45 * toward : 1 + 0.6 * toward);
         return {
-          p: add(mul(j, 0.06 + s * 0.22), mul(randDir(rand), 0.006 + 0.03 * s)),
-          color: "#f0fffb",
-          opacity: 0.45 * (1 - s),
-          size: 1.1 * S,
-          params: [0.3, rand() * TAU],
+          p: mul(d, r),
+          color: ramp(["#f2fffb", "#b4f5e2", "#6fd9cf", "#3aa6c0"], t),
+          opacity: 0.03 * Math.pow(1 - t, 2) + 0.004,
+          size: (2.2 + 3.5 * t) * S,
+          params: [0.1, rand() * TAU],
         };
       });
-      // The coma: a bright heart in a soft green-blue glow.
-      k.cloud({ share: 0.12, pattern: false, kind: "twinkle" }, (rand) => {
-        const t = Math.pow(rand(), 1.3);
-        const r = 0.03 + 0.36 * t;
-        const p = add(mul(randDir(rand), r * (0.4 + 0.6 * rand())), mul(T, r * 0.5));
+      // The ion tail: straight, narrow and blue, in fine streamers with knots
+      // of brighter gas along them.
+      const rays = [];
+      for (let r = 0; r < 11; r++)
+        rays.push({ a: (r - 5) * 0.02 + gauss(k.rand) * 0.006, ph: k.rand() * TAU, w: k.rand() });
+      k.cloud({ share: 0.22, pattern: false, kind: "rise" }, (rand) => {
+        const s = Math.pow(rand(), 1.3);
+        const ray = rays[Math.floor(rand() * rays.length)];
+        const along = R + s * L;
+        const off = ray.a * along + gauss(rand) * (0.002 + 0.004 * s);
+        const knot = 0.55 + 0.45 * Math.sin(along * 7 + ray.ph) * Math.sin(along * 2.3 + ray.ph);
         return {
-          p,
-          color: ramp(["#ffffff", "#e8fff8", "#9af2de", "#52c8d0"], t),
-          opacity: 0.16 * Math.pow(1 - t, 2) + 0.012,
-          size: (1 + 3.2 * t) * S,
-          params: [0.12, rand() * TAU],
-        };
-      });
-      // The straight blue ion tail, in fine streamers.
-      k.cloud({ share: 0.26, pattern: false, kind: "rise" }, (rand) => {
-        const s = Math.pow(rand(), 0.85);
-        const ray = Math.floor(rand() * 7) - 3;
-        const along = s * L;
-        const off = ray * 0.018 * along + gauss(rand) * (0.008 + 0.01 * along);
-        const p = add(
-          mul(T, 0.04 + along),
-          add(mul(B, off - 0.025 * along), mul(f.c, gauss(rand) * 0.02 * along)),
-        );
-        return {
-          p,
+          p: add(mul(T, along), add(mul(B, off), mul(f.c, gauss(rand) * 0.004))),
           dir: T,
-          stretch: 6,
-          color: ramp(["#eef6ff", "#8ec2ff", "#4f82ff", "#3c4ce0"], s),
-          opacity: 0.36 * Math.pow(1 - s, 0.9) + 0.03,
-          size: (0.7 + 0.5 * rand()) * S,
+          stretch: 9,
+          color: ramp(["#f4f8ff", "#a9c9ff", "#5b8cff", "#3446e6"], s),
+          opacity: (0.22 * Math.pow(1 - s, 1.6) + 0.02) * (0.4 + 0.6 * ray.w) * knot,
+          size: (0.45 + 0.3 * rand()) * S,
           params: [0.3, rand()],
         };
       });
-      // The broad yellow-white dust tail, curving away.
+      // A faint blue sheath around the streamers.
+      k.cloud({ share: 0.04, pattern: false, kind: "rise" }, (rand) => {
+        const s = rand();
+        const along = R + s * L;
+        return {
+          p: add(mul(T, along), mul(B, gauss(rand) * (0.01 + 0.04 * s) * along)),
+          dir: T,
+          stretch: 5,
+          color: mix("#8fb6ff", "#3d52e8", s),
+          opacity: 0.05 * (1 - s),
+          size: 1.6 * S,
+          params: [0.3, rand()],
+        };
+      });
+      // The dust tail: broad, pale gold and curving away, brightest and
+      // sharpest along its outer edge, with faint striations across it.
       k.cloud({ share: 0.3, pattern: false, kind: "rise" }, (rand) => {
-        const s = Math.pow(rand(), 0.75);
-        const c0 = add(mul(T, s * L * 0.82), mul(B, 0.36 * s * s * L));
-        const w = 0.03 + 0.34 * s;
-        const p = add(c0, add(mul(B, gauss(rand) * w * 0.5), mul(f.c, gauss(rand) * w * 0.2)));
+        const s = Math.pow(rand(), 1.1);
+        const q = rand() * 2 - 1; // across the fan: +1 is the outer, curved edge
+        const w = 0.03 + 0.42 * s;
+        const c0 = add(mul(T, R + s * L * 0.8), mul(B, 0.34 * s * s * L));
+        const p = add(c0, add(mul(B, q * w), mul(f.c, gauss(rand) * w * 0.08)));
+        const edge = q > 0 ? smoothstep(1, 0.65, q) * (0.7 + 0.5 * q) : smoothstep(-1, 0.2, q);
+        const stria = 0.45 + 0.55 * Math.cos(q * 7 + s * 6) ** 2;
         return {
           p,
-          color: ramp(["#fffdf0", "#ffeeb8", "#f8d27e", "#e8b060"], s),
-          opacity: 0.26 * Math.pow(1 - s, 1.2) + 0.02,
-          size: (1.3 + 2.6 * s) * S,
+          dir: unit(add(T, mul(B, 0.7 * s))),
+          stretch: 2.5,
+          color: ramp(["#fffaf0", "#fff0c4", "#f5d794", "#dcb070"], s),
+          opacity: (0.11 * Math.pow(1 - s, 1.4) + 0.012) * edge * stria,
+          size: (0.8 + 1.6 * s) * S,
           params: [0.12, rand()],
         };
       });
+      k.reach(mul(T, L + 0.2));
     },
   },
 

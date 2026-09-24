@@ -158,6 +158,7 @@ function sphereShape(r) {
   return {
     area: 4 * Math.PI * r * r,
     thick: r,
+    dims: 2,
     sample(rand) {
       const d = randomDir(rand);
       return {
@@ -352,29 +353,46 @@ function paramShape(fn, { grid = 64, normal = null, flip = false, thick = 0.1 } 
     }
   }
   const eps = 1e-4;
+  // First cell index whose running area reaches x, searching [lo, hi].
+  const find = (x, lo, hi) => {
+    while (lo < hi) {
+      const mid = (lo + hi) >> 1;
+      if (areas[mid] < x) lo = mid + 1;
+      else hi = mid;
+    }
+    return lo;
+  };
+  const cellStart = (i) => (i > 0 ? areas[i - 1] : 0);
+  const at = (u, v) => {
+    const p = fn(u, v);
+    let n;
+    if (normal) n = unit(normal(u, v, p));
+    else {
+      const du = u + eps <= 1 ? sub3(fn(u + eps, v), p) : sub3(p, fn(u - eps, v));
+      const dv = v + eps <= 1 ? sub3(fn(u, v + eps), p) : sub3(p, fn(u, v - eps));
+      n = unit(flip ? cross3(dv, du) : cross3(du, dv));
+    }
+    return { p, n, u, v };
+  };
   return {
     area: total,
     thick,
     sample(rand) {
-      const x = rand() * total;
-      let lo = 0;
-      let hi = G * G - 1;
-      while (lo < hi) {
-        const mid = (lo + hi) >> 1;
-        if (areas[mid] < x) lo = mid + 1;
-        else hi = mid;
-      }
-      const u = ((lo % G) + rand()) / G;
-      const v = (Math.floor(lo / G) + rand()) / G;
-      const p = fn(u, v);
-      let n;
-      if (normal) n = unit(normal(u, v, p));
-      else {
-        const du = u + eps <= 1 ? sub3(fn(u + eps, v), p) : sub3(p, fn(u - eps, v));
-        const dv = v + eps <= 1 ? sub3(fn(u, v + eps), p) : sub3(p, fn(u, v - eps));
-        n = unit(flip ? cross3(dv, du) : cross3(du, dv));
-      }
-      return { p, n, u, v };
+      const lo = find(rand() * total, 0, G * G - 1);
+      return at(((lo % G) + rand()) / G, (Math.floor(lo / G) + rand()) / G);
+    },
+    // Even sampling: a point (a, b) of the unit square, warped by area so
+    // that an evenly spread set of points stays evenly spread on the surface.
+    sampleEven(a, b) {
+      const row = Math.floor(find(a * total, 0, G * G - 1) / G);
+      const r0 = cellStart(row * G);
+      const r1 = areas[row * G + G - 1];
+      const fv = r1 > r0 ? (a * total - r0) / (r1 - r0) : 0.5;
+      const y = r0 + b * (r1 - r0);
+      const cell = find(y, row * G, row * G + G - 1);
+      const c0 = cellStart(cell);
+      const fu = areas[cell] > c0 ? (y - c0) / (areas[cell] - c0) : 0.5;
+      return at(((cell % G) + clamp(fu, 0, 1)) / G, (row + clamp(fv, 0, 1)) / G);
     },
   };
 }
@@ -489,13 +507,15 @@ function tubeShape(curve, radius, { closed = false, samples = 256, grid = 64, ca
       },
     },
   );
-  const inner = shape.sample;
-  shape.sample = (rand) => {
-    const s = inner(rand);
+  const withFrame = (s) => {
     s.t = s.v;
     s.tangent = frame(s.v).t;
     return s;
   };
+  const inner = shape.sample;
+  const innerEven = shape.sampleEven;
+  shape.sample = (rand) => withFrame(inner(rand));
+  shape.sampleEven = (a, b) => withFrame(innerEven(a, b));
   shape.frame = frame;
   if (caps && !closed) {
     const r0 = rad(0);
@@ -503,6 +523,8 @@ function tubeShape(curve, radius, { closed = false, samples = 256, grid = 64, ca
     const capA = Math.PI * (r0 * r0 + r1 * r1);
     const body = shape.area;
     const sampleBody = shape.sample;
+    // Capped tubes fall back to the plain sampler under even: true.
+    shape.sampleEven = null;
     shape.area = body + capA;
     shape.sample = (rand) => {
       if (rand() * shape.area < body) return sampleBody(rand);
@@ -672,6 +694,12 @@ export class Kit {
   //   interior (fraction of this shape's splats that fill its inside), core
   //   part, kind (behaviour name), params ([a, b] or (c) => [a, b])
   //   pattern: false keeps the pattern layer off these splats
+  //   even: true spreads the surface splats evenly (a low-discrepancy
+  //          sequence) instead of at random; random placement leaves thin
+  //          spots where the far side shows through as dark speckle. It
+  //          works for spheres, boxes, cylinders, cones, lathes and param
+  //          surfaces (shapes that take a fixed number of random numbers
+  //          per splat); other shapes are placed at random as before.
   add(shape, opts = {}) {
     const q = opts.quat || (opts.rot ? quatEuler(...opts.rot) : [0, 0, 0, 1]);
     const sc =
@@ -774,9 +802,16 @@ export class Kit {
     const c = { rand, noise, fbm, toy: this };
     const sc = it.sc;
     const invSc = [1 / (sc[0] || 1), 1 / (sc[1] || 1), 1 / (sc[2] || 1)];
+    const shape = it.shape;
+    const even = o.even ? evenRand(rand, shape.sampleEven ? 2 : (shape.dims ?? 3)) : null;
+    const pick = (i) => {
+      if (!even) return shape.sample(rand);
+      const r = even(i);
+      return shape.sampleEven ? shape.sampleEven(r(), r()) : shape.sample(r);
+    };
     for (let i = 0; i < it.n; i++) {
       const inside = i >= surfN;
-      const s = it.shape.sample(rand);
+      const s = inside ? it.shape.sample(rand) : pick(i);
       let lp = s.p;
       if (inside) {
         const depth = 0.08 + 0.88 * Math.pow(rand(), 0.7);
@@ -924,6 +959,30 @@ export class Kit {
     const t = this.transform;
     return mul3(sub3(p, t.center), t.scale);
   }
+}
+
+// The R_d low-discrepancy sequence (Roberts, 2018), randomly offset: even(i)
+// returns a rand() stand-in whose first `dims` calls give the i-th point's
+// coordinates (later calls fall back to rand). Shapes whose sample() uses a
+// fixed number of rand() calls then spread their points evenly.
+function evenRand(rand, dims) {
+  let g = 2;
+  for (let k = 0; k < 30; k++) g = Math.pow(1 + g, 1 / (dims + 1));
+  const alpha = [];
+  const off = [];
+  for (let k = 0; k < dims; k++) {
+    alpha.push(1 / Math.pow(g, k + 1));
+    off.push(rand());
+  }
+  return (i) => {
+    let k = 0;
+    return () => {
+      if (k >= dims) return rand();
+      const v = off[k] + alpha[k] * i;
+      k++;
+      return v - Math.floor(v);
+    };
+  };
 }
 
 // A smooth curve through points (Catmull-Rom), as t in [0, 1] -> point.

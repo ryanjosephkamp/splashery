@@ -165,6 +165,7 @@ function quad(sx, sz, up = 1) {
   return {
     area: sx * sz,
     thick: 0.01,
+    dims: 2,
     sample(rand) {
       const u = rand();
       const v = rand();
@@ -294,6 +295,82 @@ function starPoints(R, r, n = 5) {
 // ---- Book, music box, clock and friends: shared layouts ------------------------------
 
 const BOOK = { W: 1, H: 1.36, ct: 0.045, leaves: 10, lt: 0.013 };
+
+// A 5 x 7 bitmap font (capitals and a little punctuation) for the storybook,
+// so its pages carry words rather than grey smudges. Rows run top to bottom.
+const FONT = {
+  A: "01110 10001 10001 11111 10001 10001 10001",
+  B: "11110 10001 10001 11110 10001 10001 11110",
+  C: "01110 10001 10000 10000 10000 10001 01110",
+  D: "11110 10001 10001 10001 10001 10001 11110",
+  E: "11111 10000 10000 11110 10000 10000 11111",
+  F: "11111 10000 10000 11110 10000 10000 10000",
+  G: "01110 10001 10000 10111 10001 10001 01111",
+  H: "10001 10001 10001 11111 10001 10001 10001",
+  I: "01110 00100 00100 00100 00100 00100 01110",
+  J: "00111 00010 00010 00010 00010 10010 01100",
+  K: "10001 10010 10100 11000 10100 10010 10001",
+  L: "10000 10000 10000 10000 10000 10000 11111",
+  M: "10001 11011 10101 10101 10001 10001 10001",
+  N: "10001 10001 11001 10101 10011 10001 10001",
+  O: "01110 10001 10001 10001 10001 10001 01110",
+  P: "11110 10001 10001 11110 10000 10000 10000",
+  Q: "01110 10001 10001 10001 10101 10010 01101",
+  R: "11110 10001 10001 11110 10100 10010 10001",
+  S: "01111 10000 10000 01110 00001 00001 11110",
+  T: "11111 00100 00100 00100 00100 00100 00100",
+  U: "10001 10001 10001 10001 10001 10001 01110",
+  V: "10001 10001 10001 10001 10001 01010 00100",
+  W: "10001 10001 10001 10101 10101 10101 01010",
+  X: "10001 10001 01010 00100 01010 10001 10001",
+  Y: "10001 10001 10001 01010 00100 00100 00100",
+  Z: "11111 00001 00010 00100 01000 10000 11111",
+  ".": "00000 00000 00000 00000 00000 01100 01100",
+  ",": "00000 00000 00000 00000 01100 00100 01000",
+  "'": "00100 00100 01000 00000 00000 00000 00000",
+  "!": "00100 00100 00100 00100 00100 00000 00100",
+  "?": "01110 10001 00001 00010 00100 00000 00100",
+  "-": "00000 00000 00000 11111 00000 00000 00000",
+};
+const BITMAP = Object.fromEntries(
+  Object.entries(FONT).map(([ch, rows]) => [ch, rows.split(" ").map((r) => parseInt(r, 2))]),
+);
+const STORY =
+  "ONCE UPON A TIME, IN A TOY BOX AT THE END OF A LONG HALL, THERE LIVED A SMALL " +
+  "SPLAT CALLED PIP. PIP WAS NOT A BALL AND NOT A BLOCK. PIP WAS A SOFT LITTLE " +
+  "CLOUD OF COLOUR THAT COULD BE ANYTHING AT ALL. ON MONDAY PIP WAS A RED APPLE. " +
+  "ON TUESDAY PIP WAS A BLUE WHALE. ON WEDNESDAY PIP TRIED TO BE THE MOON, AND " +
+  "EVERY TOY IN THE BOX CAME TO LOOK. WHAT WILL YOU BE TOMORROW? ASKED THE OLD " +
+  "TEDDY BEAR. PIP THOUGHT FOR A WHILE. I THINK, SAID PIP, I WILL BE A STORY. " +
+  "AND SO PIP BECAME THIS BOOK, AND NOW YOU ARE READING IT. THE END. ";
+// Word-wraps the story into lines of at most n characters, starting a few
+// words in so that each page reads differently.
+function storyLines(n, start, count) {
+  const words = STORY.trim().split(/\s+/);
+  const lines = [];
+  let line = "";
+  for (let i = 0; lines.length < count; i++) {
+    const w = words[(start + i) % words.length];
+    if (line && line.length + 1 + w.length > n) {
+      lines.push(line);
+      line = w;
+    } else line = line ? `${line} ${w}` : w;
+  }
+  return lines;
+}
+// Is the point (s, t) of a text block inked? s runs along a line from its
+// start, t down the page from the first line's top, in font pixels.
+function inked(lines, s, t, lead = 10) {
+  const row = Math.floor(t / lead);
+  const gy = Math.floor(t - row * lead);
+  if (row < 0 || row >= lines.length || gy > 6 || s < 0) return false;
+  const col = Math.floor(s / 6);
+  const gx = Math.floor(s - col * 6);
+  const ch = lines[row][col];
+  if (!ch || gx > 4) return false;
+  const g = BITMAP[ch];
+  return !!g && ((g[gy] >> (4 - gx)) & 1) === 1;
+}
 BOOK.pb = 0.27;
 BOOK.T = BOOK.pb + 2 * BOOK.ct;
 
@@ -449,9 +526,20 @@ export const RECIPES = {
         angle: (Math.PI / 2) * ease3(window01(o, 0, 0.42)),
         visible: 1 - smoothstep(0.3, 0.4, o),
       };
+      // Splats keep the draw order of the closed book, where the front cover
+      // and the first leaves lie above the last leaf. Once a leaf has landed
+      // on the left, the one it covers (and the cover's inside, under them
+      // all) hides, so the page on top reads cleanly.
+      const turned = (i) => ease3(window01(o, 0.1 + i * 0.05, 0.5 + i * 0.05));
+      const landed = (i) => (i < BOOK.leaves ? smoothstep(0.9, 1, turned(i)) : 0);
+      out.parts.coverIn = { angle: cover, visible: 1 - landed(0) };
+      // Stands in for the hidden leaves at the left pile's edges.
+      out.parts.pile = { visible: landed(1) };
       for (let i = 0; i < BOOK.leaves; i++) {
-        const f = ease3(window01(o, 0.1 + i * 0.05, 0.5 + i * 0.05));
-        out.parts["leaf" + i] = { angle: (Math.PI - lift[i]) * f };
+        out.parts["leaf" + i] = {
+          angle: (Math.PI - lift[i]) * turned(i),
+          visible: 1 - landed(i + 1),
+        };
       }
     },
     build(k, o) {
@@ -464,21 +552,35 @@ export const RECIPES = {
       const coverPart = k.part("cover", { pivot, axis: [0, 0, 1] });
       const spinePart = k.part("spine", { pivot, axis: [0, 0, 1] });
       const cloth = (c) => {
-        const weave = 0.95 + 0.06 * c.noise(c.p[0] * 90, c.p[1] * 90, c.p[2] * 90);
+        const weave = 0.97 + 0.04 * c.noise(c.p[0] * 70, c.p[1] * 70, c.p[2] * 70);
         return lit(shade(cover, weave), c.n, { amb: 0.66, dif: 0.42, spec: 0.12 });
       };
-      // Text lines on a page (x from the spine, z across the page).
-      const text = (x, z, seed) => {
-        const ax = Math.abs(x);
-        if (ax < 0.09 || ax > W - 0.1 || Math.abs(z) > H / 2 - 0.13) return false;
-        const row = Math.floor((z + H / 2) / 0.052);
-        const f = ((z + H / 2) / 0.052) % 1;
-        if (f < 0.35 || f > 0.72) return false;
-        const end =
-          W - 0.1 - (((row * 7 + seed) % 9 === 0 ? 0.4 : 0) + ((row * 13 + seed) % 5) * 0.02);
-        return ax < end;
+      // Words on a page. x is measured from the spine, z across the page
+      // (the top of the page is at -z). A page that faces down while the
+      // book is closed reads the right way once its leaf has turned over, so
+      // its lines run from the outer edge towards the spine.
+      const PX = 0.0082; // one font pixel
+      const margin = 0.1;
+      const perLine = Math.floor((W - 2 * margin) / (6 * PX));
+      const pages = new Map();
+      const pageText = (seed, picture) => {
+        const key = `${seed}${picture}`;
+        if (!pages.has(key)) {
+          const rows = Math.floor((H - 2 * 0.12) / (10 * PX));
+          const skip = picture ? Math.ceil((H / 2 - 0.12 + 0.03) / (10 * PX)) : 0;
+          pages.set(key, { lines: storyLines(perLine, seed * 23, rows - skip), skip });
+        }
+        return pages.get(key);
       };
-      const pageCol = (c, x, z, seed, picture = false) => {
+      const text = (x, z, seed, flipped, picture) => {
+        const ax = Math.abs(x);
+        const s = (flipped ? W - margin - ax : ax - margin) / PX;
+        const page = pageText(seed, picture);
+        const t = (z + H / 2 - 0.12) / PX - page.skip * 10;
+        return inked(page.lines, s, t);
+      };
+      const ink = "#2f2a26";
+      const pageCol = (c, x, z, seed, picture = false, flipped = false) => {
         if (
           picture &&
           Math.abs(x) > 0.18 &&
@@ -496,8 +598,10 @@ export const RECIPES = {
           const edge = Math.min(u, 1 - u, v, 1 - v);
           return keep(edge < 0.02 ? "#5b4a3a" : col);
         }
-        if (text(x, z, seed)) return keep(mix(paper, "#4b4540", 0.55));
-        return lit(shade(paper, 0.97 + 0.04 * c.noise(x * 30, z * 30, seed)), c.n, {
+        if (text(x, z, seed, flipped, picture)) return keep(ink, 0.8);
+        // A turned page is lit as it lies once turned over.
+        const n = flipped ? [-c.n[0], -c.n[1], c.n[2]] : c.n;
+        return lit(shade(paper, 0.985 + 0.015 * c.noise(x * 12, z * 12, seed)), n, {
           amb: 0.8,
           dif: 0.25,
           spec: 0,
@@ -529,17 +633,28 @@ export const RECIPES = {
       );
       // The front cover: its cloth face is a part of its own that hides once
       // the cover lies open (splats keep the order of the closed book).
-      k.add(roundBox(W, ct, H, 0.012, { top: false }), {
+      k.add(roundBox(W, ct, H, 0.012, { top: false, bottom: false }), {
         pos: [W / 2, T - ct / 2, 0],
         part: coverPart,
         flat: 0.15,
-        color: (c) => (c.s.face === 3 ? lit(endpaper, c.n, { spec: 0 }) : cloth(c)),
+        color: cloth,
+      });
+      // The cover's inside, its own part so it can hide under the turned pages.
+      const coverIn = k.part("coverIn", { pivot, axis: [0, 0, 1] });
+      k.add(quad(W - 0.024, H - 0.024, -1), {
+        pos: [W / 2, T - ct, 0],
+        part: coverIn,
+        flat: 0.15,
+        color: (c) => lit(endpaper, c.n, { spec: 0 }),
       });
       const coverTop = k.part("coverTop", { pivot, axis: [0, 0, 1] });
       k.add(quad(W - 0.024, H - 0.024), {
         pos: [W / 2, T, 0],
         part: coverTop,
         flat: 0.15,
+        weight: 2.5,
+        even: true,
+        jitter: 0.015,
         color: (c) => {
           // Gold border, title bands and an emblem on the front.
           const x = c.p[0] - W / 2;
@@ -557,33 +672,74 @@ export const RECIPES = {
           return cloth(c);
         },
       });
-      // The pages that stay on the right, with a picture on top.
+      // The pages that stay on the right, with a picture on top. The two
+      // pages seen when the book lies open (this one and the underside of the
+      // last leaf) get most of the splats, so their words stay sharp; hidden
+      // page faces get few.
+      const PW = W - 0.035;
+      const PH = H - 0.05;
       const block = BOOK.pb - leaves * lt;
-      k.add(k.box(W - 0.035, block, H - 0.05), {
-        pos: [(W - 0.035) / 2 + 0.005, ct + block / 2, 0],
+      const sides = (face) => (face === 2 || face === 3 ? null : shade(paper, 0.8));
+      k.add(k.box(PW, block, PH), {
+        pos: [PW / 2 + 0.005, ct + block / 2, 0],
         flat: 0.15,
         color: (c) => {
-          if (c.s.face === 2) return pageCol(c, c.p[0], c.p[2], 3, true);
-          if (c.s.face === 3 || c.s.face === 1) return shade(paper, 0.8);
+          if (c.s.face === 2 || c.s.face === 3) return null;
+          if (c.s.face === 1) return shade(paper, 0.8);
           const lines = 0.9 + 0.1 * Math.sin(c.p[1] * 900);
           return shade(paper, 0.82 * lines);
         },
+      });
+      k.add(quad(PW, PH), {
+        pos: [PW / 2 + 0.005, ct + block, 0],
+        flat: 0.15,
+        weight: 6,
+        even: true,
+        jitter: 0.01,
+        color: (c) => pageCol(c, c.p[0], c.p[2], 3, true),
       });
       // Leaves that flip one after another.
       for (let i = 0; i < leaves; i++) {
         const part = k.part("leaf" + i, { pivot, axis: [0, 0, 1] });
         const y = T - ct - (i + 0.5) * lt;
-        k.add(k.box(W - 0.035, lt * 0.8, H - 0.05), {
-          pos: [(W - 0.035) / 2 + 0.005, y, 0],
+        const pos = [PW / 2 + 0.005, y, 0];
+        k.add(k.box(PW, lt * 0.8, PH), {
+          pos,
           part,
           flat: 0.15,
-          color: (c) => {
-            if (c.s.face === 2) return pageCol(c, c.p[0], c.p[2], i * 2);
-            if (c.s.face === 3) return pageCol(c, c.p[0], c.p[2], i * 2 + 1);
-            return shade(paper, 0.85);
-          },
+          weight: 0.08,
+          color: (c) => sides(c.s.face),
         });
+        for (const up of [1, -1]) {
+          const last = i === leaves - 1;
+          // The last leaf's upper face would draw over its turned-up
+          // underside, so it is left out (it only shows mid-turn).
+          if (last && up > 0) continue;
+          const shown = up < 0 && last;
+          k.add(quad(PW, PH, up), {
+            pos: [pos[0], y + up * lt * 0.4, 0],
+            part,
+            flat: 0.15,
+            weight: shown ? 6 : 0.35,
+            even: true,
+            jitter: 0.01,
+            color: (c) => pageCol(c, c.p[0], c.p[2], i * 2 + (up < 0 ? 1 : 0), false, up < 0),
+          });
+        }
       }
+      // The left pile's edges, shown once the leaves under the top one hide.
+      const pileH = (leaves - 1) * lt;
+      k.add(k.box(PW, pileH, PH), {
+        pos: [-PW / 2 - 0.005, ct + pileH / 2, 0],
+        part: k.part("pile"),
+        flat: 0.15,
+        weight: 0.6,
+        color: (c) => {
+          if (c.s.face === 2 || c.s.face === 3) return null;
+          const lines = 0.9 + 0.1 * Math.sin(c.p[1] * 900);
+          return shade(paper, 0.82 * lines);
+        },
+      });
       k.reach([-W, 0, H / 2]);
       k.reach([-W, 0, -H / 2]);
     },

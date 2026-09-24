@@ -105,11 +105,11 @@ out.push(
   `- **keep** (the owner likes the effect): ${count((r) => r.v === "keep")}.`,
   `- **more** (has an effect; make it clearer or more dramatic): ${count((r) => r.v === "more")}.`,
   `- **new** (needs its own effect): ${count((r) => r.v === "new")}.`,
-  `- Visual fixes: ${count((r) => r.fix)}. Touch or drag interaction asked for: ${count((r) => r.interactive)}.`,
+  `- Visual fixes: ${count((r) => r.fix)} open, ${count((r) => r.fixed)} done. Touch or drag interaction asked for: ${count((r) => r.interactive)}.`,
   "",
   "## By phase",
   "",
-  `- **C, polish.** Visual fixes: ${list((r) => r.fix)}.`,
+  `- **C, polish.** Visual fixes still open: ${list((r) => r.fix) || "none"}. Done in C1: ${list((r) => r.fixed) || "none"}.`,
   `  Make the effect clearer or more dramatic: ${list((r) => r.v === "more" && !r.interactive)}.`,
   "- **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting",
   "  with the toys whose effect is kept.",
@@ -130,6 +130,7 @@ for (const c of categories) {
     out.push(`- **${r.label}** (\`${r.id}\`). Now: ${r.now}. Plan: ${tag}.`);
     if (r.owner) out.push(`  - Owner: ${r.owner}`);
     if (r.fix) out.push(`  - Fix: ${r.fix}`);
+    if (r.fixed) out.push(`  - Fixed: ${r.fixed}`);
     if (r.effect) out.push(`  - Effect: ${r.effect}`);
     out.push(`  - Sound: ${r.sound}`);
     if (r.interactive) out.push("  - Touch or drag interaction (phase F).");

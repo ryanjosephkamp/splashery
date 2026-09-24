@@ -252,7 +252,7 @@
       "label": "Cinnamon Star Cookie",
       "source": "https://d28zzqy0iyovbz.cloudfront.net/6584b96e/v3/meta.json",
       "sourceNote": "The SOG the public SuperSplat viewer streams for https://superspl.at/scene/6584b96e (downloads enabled, CC BY 4.0, by danylyon).",
-      "rotate": [180, 0, 0],
+      "rotate": [180, 180, 0],
       "splats": 300000,
       "lite": 100000
     },

@@ -3,12 +3,38 @@
 The current state and the next phase. The session that finishes a phase updates this file. The
 ground rules are in [CLAUDE.md](../CLAUDE.md).
 
-## Current state (2026-09-24, after Phase B)
+## Current state (2026-09-24, after Phase C1)
 
 - Phase A is done: splashery PR #13 and homepage PR #33 in
-  `ryanjosephkamp/ryanjosephkamp.github.io`, both merged.
-- Phase B is done in the splashery PR from branch `claude/phase-b-handoff-lwxazn`. Check that it is
-  merged before starting C1.
+  `ryanjosephkamp/ryanjosephkamp.github.io`, both merged. Phase B is done (PR #17, merged).
+- Phase C1 is done in the splashery PR from branch `claude/phase-c1-8gzmnj`. Check that it is merged
+  before starting C2.
+- **Visual fixes (C1).** All 26 Fix lines are done; each toy's `fixed` entry in
+  `tools/toy-plan.json` says what changed (TOY-PLAN.md shows them as "Fixed").
+  - Grain had one main cause: random splat placement leaves about a quarter of a surface thinly
+    covered, and the far side and the core show through as dark speckle.
+    `k.add(shape, { even: true })` in `src/kit.js` places surface splats with a low-discrepancy
+    sequence (warped by area for lathes and param surfaces; `sampleEven`, `evenRand`). It is opt-in,
+    so other toys are unchanged. It is used on the balls, the storybook's pages and cover, the lava
+    lamp, the diya, the tree's star and the tractor's glass. Making it the default would likely
+    sharpen many toys, but every thumbnail would change; see BACKLOG.md.
+  - The balls have baked soft light and gloss (`lit()`), embossed pebble bumps (`grip()`), low
+    jitter, felt fuzz on the tennis ball, and a faint see-through shell (`rim()`) that shows as a
+    rim of light at the silhouette of the squash ball, hockey puck and medicine ball on a dark page
+    and barely shows on a light one.
+  - `tools/mesh-to-splats.mjs` filters textures to each splat's footprint (a mip chain) and has
+    per-model options in `tools/models.json`: `light` (baked studio light), `normalMap`, `armAO`,
+    `exposure`, `gamma`, `darkGlass`, `paintOut`. The camera, boombox, elephant and horse were
+    rebuilt with them; the other 11 converted models were not (rebuilding them would change their
+    look). The camera's lens and the boombox's printed maker names are painted out (brand rule).
+  - Storybook: a 5x7 bitmap font and a short original story in `src/packs/objects.js`. Because
+    splats sort in the closed book's pose, leaves hide once the next leaf lands on them, the cover's
+    inside is its own part, and a `pile` part stands in for the hidden leaves. It now uses 15 parts,
+    the limit.
+  - The star cookie is turned round in `tools/assets.json` (`rotate: [180, 180, 0]`).
+- `tools/toy-shots.mjs` renders toys at their home view to PNG files (`--size`, `--bg`, `--theme`,
+  `--set=open=0`) for before and after reviews. Before/after crops for C1 are in
+  `tests/screenshots/c1-*.png`.
 - **Phone shelf (B).**
   - The phone sheet has three states in `src/ui.js` ("Bottom sheet"): `row` (the dock only), `grid`
     (body class `shelf-grid`: the shelf fills the sheet as a grid of about 4 columns) and `panel`
@@ -66,10 +92,6 @@ ground rules are in [CLAUDE.md](../CLAUDE.md).
 
 Known issues carried forward:
 
-- Storybook: a faint red strip on the left page when open.
-- The sports car is a little small in its frame.
-- The tractor's exhaust smoke is heavy.
-- Flags on vehicles were never checked (windows and lights should stay unpainted).
 - Splats are depth-sorted in their built pose, so large moving parts can draw out of order.
 - Only 3 music toys exist.
 - New in A1:
@@ -85,6 +107,18 @@ Known issues carried forward:
   - The help panel's app list (Scaniverse, Polycam, Luma, KIRI Engine) was checked against the app
     stores on 2026-09-24. Luma's site now leads with other products; its capture app is still
     listed.
+- New in C1:
+  - While the storybook opens, the last leaf's upper face is left out (it would draw over its
+    turned-up side), so for a moment mid-turn you see the next page's words through it, mirrored.
+  - The elephant is still a low-poly model (2,752 triangles) with its carving in the normal map. It
+    reads much better with baked light, but no better CC0 elephant was looked for.
+  - The rim on dark balls is baked into the toy, so it also shows faintly on a light page and under
+    effects such as Dissolve.
+  - Several vehicles' windows used random colour per splat, like the tractor's did (static). Only
+    the tractor's were fixed.
+  - Flags on vehicles were checked (all 14 in the French flag): windows, lights, tyres and now wheel
+    rims, hubs and spokes stay unpainted. Launch pads, helipads and the flying saucer's pad do take
+    the flag.
 
 ## Phases
 
@@ -106,17 +140,17 @@ that tool is not available, ask the owner to press "Copy my marks and notes" on 
 the text. A "change" note overrides the proposal in `tools/toy-plan.json`; update the JSON to match.
 If the plan JSON changes, the page can be republished from it (`node tools/toy-plan.mjs --json`).
 
-| Phase  | What                                                                                                                                                                       | Repo(s)   |
-| ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- |
-| A      | Done: sharpness, Detail setting, embeds, honeybee, thumbnail retry, homepage embed.                                                                                        | both      |
-| B      | Done: mobile shelf grid (drag up into a full grid like desktop), thumbnail labels that don't cut off, and a "Find your own splat" help panel.                              | splashery |
-| **C1** | Visual fixes from the review (26 toys: vintage camera, boombox, storybook, comet, Statue of Liberty crown, horse brightness, cookie orientation, sports-ball textures, …). | splashery |
-| C2     | Make existing effects clearer or more dramatic (33 toys the owner found subtle or underwhelming: bacteriophage, Newton's cradle, Big Ben, bus, …).                         | splashery |
-| D      | Effects and sound engine: a unique sound per toy, scan rigs (moving parts for captured toys), taps that know where they landed, drag-to-stretch.                           | splashery |
-| E1–E6  | New tap effects for the 181 toys marked new (most only hop today), in six waves by category (see TOY-PLAN.md), each with its own sound.                                    | splashery |
-| F      | Touch and drag interaction: a solvable puzzle cube, a chess set that plays a real game, a stretchy gummy bear, a draggable Newton's cradle, bricks.                        | splashery |
-| G      | AI image-to-3D trial with `HF_TOKEN`.                                                                                                                                      | splashery |
-| H      | Later: the gallery, multi-toy scenes, a liquid pour, the draw-order fix, more scans, more instruments, and the final homepage embed(s).                                    | both      |
+| Phase  | What                                                                                                                                                      | Repo(s)   |
+| ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- |
+| A      | Done: sharpness, Detail setting, embeds, honeybee, thumbnail retry, homepage embed.                                                                       | both      |
+| B      | Done: mobile shelf grid (drag up into a full grid like desktop), thumbnail labels that don't cut off, and a "Find your own splat" help panel.             | splashery |
+| C1     | Done: visual fixes from the review (26 toys: vintage camera, boombox, storybook, comet, Statue of Liberty crown, horse, cookie, sports-ball textures, …). | splashery |
+| **C2** | Make existing effects clearer or more dramatic (33 toys the owner found subtle or underwhelming: bacteriophage, Newton's cradle, Big Ben, bus, …).        | splashery |
+| D      | Effects and sound engine: a unique sound per toy, scan rigs (moving parts for captured toys), taps that know where they landed, drag-to-stretch.          | splashery |
+| E1–E6  | New tap effects for the 181 toys marked new (most only hop today), in six waves by category (see TOY-PLAN.md), each with its own sound.                   | splashery |
+| F      | Touch and drag interaction: a solvable puzzle cube, a chess set that plays a real game, a stretchy gummy bear, a draggable Newton's cradle, bricks.       | splashery |
+| G      | AI image-to-3D trial with `HF_TOKEN`.                                                                                                                     | splashery |
+| H      | Later: the gallery, multi-toy scenes, a liquid pour, the draw-order fix, more scans, more instruments, and the final homepage embed(s).                   | both      |
 
 What the owner asked for across the board (2026-09-23):
 
@@ -134,60 +168,32 @@ What the owner asked for across the board (2026-09-23):
 - Stay respectful: nothing destructive or disrespectful on the White House or the Washington
   Monument, and no fighting or gore (the Colosseum gets a chariot race, not gladiators).
 
-## Phase C1 in detail: visual fixes
+## Phase C2 in detail: clearer effects
 
-The 26 toys with a Fix line in [TOY-PLAN.md](TOY-PLAN.md) (`"fix"` in `tools/toy-plan.json`). Before
-starting, check the owner's marks for these toys (see above) for any later change.
+The toys marked "more" in [TOY-PLAN.md](TOY-PLAN.md) that are not touch or drag toys (33, listed
+under "C, polish"; the interactive ones wait for F). Before starting, check the owner's marks for
+these toys (see above) for any later change.
 
-1. **Converted meshes: vintage camera, boombox, wooden elephant.** Grainy, almost reverse-contrast
-   (screenshot in the review folder). All came through `tools/mesh-to-splats.mjs`. Check which
-   texture it samples (base colour vs. a packed metal/roughness or AO map), sRGB handling, and splat
-   size. Re-run `prepare-assets` and `make-thumbs` for any rebuilt scan. If the elephant stays weak,
-   look for a better CC0 model and record its licence.
-2. **Captured toys.**
-   - Horse statue: too bright. Add a per-toy exposure or tone setting for captured toys, or fix it
-     in preparation.
-   - Cinnamon star cookie: the bottom faces the camera. Flip it in `tools/assets.json` (like the
-     bee) or set its camera preset.
-3. **Sports balls** (basketball, soccer ball, American football, tennis ball, baseball, softball,
-   rugby ball, volleyball, cricket ball, medicine ball). Several look grainy instead of like their
-   material. Tennis ball: fuzzy felt with a clean white seam. American football: pebbled pigskin
-   with darker seams and crisp white laces. Likely causes: colour noise and jitter too strong for
-   their size, and discs too flat or too sparse for felt. Try per-material splat size, opacity and a
-   fine bump pattern in the colour function. Keep the "ball in a country's colours keeps its seams"
-   test green.
-4. **Dark on dark: squash ball and hockey puck.** Hard to see on the dark background; try a faint
-   rim light in dark mode.
-5. **Kit toys.**
-   - Storybook: text is grey smudges and the cover is soft. Try readable lines from a tiny bitmap
-     font (the kit also builds in Node for `check-packs`, so no canvas), smaller splats on pages,
-     and a crisper cover. Also the known faint red strip on the left page.
-   - Comet: overhaul (bright icy nucleus, coma, straight blue ion tail and curved dust tail). The
-     meteor is closer to what the owner wants.
-   - Statue of Liberty: crown rays look squashed; raise them and give them clearer spikes.
-   - Decorated tree: the star is a golden cloud; make it a clear star shape.
-   - Lava lamp: where the glass meets the caps. Flying disc: plastic sheen. Diya: patterned clay and
-     oil sheen.
-   - Carried forward: the sports car is small in its frame; the tractor's smoke is heavy.
-6. **For each touched pack:** `node tools/check-packs.mjs <pack>`, a contact sheet with
-   `tools/contact-sheet.mjs` (review it), and `tools/make-thumbs.mjs` for the changed toys only
-   (about 18 s each). Put before/after crops in `tests/screenshots/` (the sharpness tools can help).
-7. **Plan file.** When a toy's fix is done, drop or mark its `fix` in `tools/toy-plan.json` and run
-   `node tools/toy-plan.mjs`.
+1. For each toy, read its Effect line in TOY-PLAN.md and its recipe's `drive()` and `action`. Many
+   "does nothing" reports are pulse actions that are too small or too short.
+2. Rule of thumb: an effect lasts at least 1.5 s, moves at least about 10% of the toy's size or
+   changes its light clearly, and is obvious in the first half second. Windmill: spin faster.
+3. The decorated tree and the diya are on both lists; C1 only changed their looks.
+4. Check each change by eye: `tools/toy-shots.mjs` can set a control (`--set=`) to render a frame
+   mid-effect. Run `node tools/check-packs.mjs <pack>` for every touched pack.
+5. When a toy is done, set its `"v"` to `"keep"` in `tools/toy-plan.json` (the effect is now right),
+   run `node tools/toy-plan.mjs` and `npx prettier --write docs/TOY-PLAN.md`.
+6. Effects that change the toy's look need new thumbnails (`tools/make-thumbs.mjs`, about 18 s per
+   toy); effects that only move on tap do not.
 
-C1 is large. If it runs long, split it into stacked PRs (`-1`, `-2`: for example converted meshes
-and captured toys first, then sports balls, then kit toys) and say in HANDOFF which parts are left.
-
-**Done when:** every Fix line is either done or explained in the PR, thumbnails are re-rendered for
-changed toys, all tests pass and prettier is clean.
+**Done when:** every C2 toy's effect meets the rule of thumb or the PR explains why not, all tests
+pass and prettier is clean.
 
 ## Phases C–H (outline)
 
-- **C1, visual fixes.** In detail above (26 toys with a Fix line in TOY-PLAN.md).
-- **C2, clearer effects.** The toys marked "more" in TOY-PLAN.md. Several "do nothing" reports are
-  pulse actions that are simply too small or too short (the bacteriophage's sheath slides 0.5 units
-  for about 3 s). Rule of thumb: an effect should last at least 1.5 s, move at least ~10% of the
-  toy's size or change its light clearly, and be obvious in the first half second. Windmill: faster.
+- **C1, visual fixes.** Done (see Current state).
+- **C2, clearer effects.** In detail above. Several "do nothing" reports are pulse actions that are
+  simply too small or too short (the bacteriophage's sheath slides 0.5 units for about 3 s).
 - **D, effects and sound engine.**
   - Sound: today there are 12 shared synthesized sounds (`src/sound.js`) and toys pick one by name.
     Build a larger voice library (plucked strings, bells, buzz, squeak and quack formants, crunch,

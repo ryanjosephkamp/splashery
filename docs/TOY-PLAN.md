@@ -14,18 +14,19 @@ Proposals below are suggestions; the owner may change them.
 - **keep** (the owner likes the effect): 65.
 - **more** (has an effect; make it clearer or more dramatic): 37.
 - **new** (needs its own effect): 181.
-- Visual fixes: 26. Touch or drag interaction asked for: 5.
+- Visual fixes: 0 open, 26 done. Touch or drag interaction asked for: 5.
 
 ## By phase
 
-- **C, polish.** Visual fixes: Cinnamon star cookie, Wooden elephant, Vintage camera, Boombox, Horse
-  statue, Basketball, Soccer ball, American football, Tennis ball, Baseball, Softball, Rugby ball,
-  Volleyball, Cricket ball, Medicine ball, Squash ball, Hockey puck, Flying disc, Comet, Lava lamp,
-  Storybook, Decorated tree, Diya, Sports car, Tractor, Statue of Liberty. Make the effect clearer
-  or more dramatic: Bacteriophage, Neuron, DNA, Amethyst geode, Crystal ball, Eye, Cherry blossom,
-  Ice cream, Coffee, Rubber duck, Kite, Lorenz attractor, Klein bottle, Wizard's orb, Jellyfish,
-  Pufferfish, Snail, Octopus, Fireworks, Decorated tree, Diya, Acoustic guitar, Snare drum, Hot-air
-  balloon, Bus, Jet airliner, Sailboat, Submarine, Bicycle, Big Ben, Castle, Pagoda, Windmill.
+- **C, polish.** Visual fixes still open: none. Done in C1: Cinnamon star cookie, Wooden elephant,
+  Vintage camera, Boombox, Horse statue, Basketball, Soccer ball, American football, Tennis ball,
+  Baseball, Softball, Rugby ball, Volleyball, Cricket ball, Medicine ball, Squash ball, Hockey puck,
+  Flying disc, Comet, Lava lamp, Storybook, Decorated tree, Diya, Sports car, Tractor, Statue of
+  Liberty. Make the effect clearer or more dramatic: Bacteriophage, Neuron, DNA, Amethyst geode,
+  Crystal ball, Eye, Cherry blossom, Ice cream, Coffee, Rubber duck, Kite, Lorenz attractor, Klein
+  bottle, Wizard's orb, Jellyfish, Pufferfish, Snail, Octopus, Fireworks, Decorated tree, Diya,
+  Acoustic guitar, Snare drum, Hot-air balloon, Bus, Jet airliner, Sailboat, Submarine, Bicycle, Big
+  Ben, Castle, Pagoda, Windmill.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** Cactus, Strawberry, Heart cookie, Honeybee, Jelly blob,
@@ -109,7 +110,7 @@ Proposals below are suggestions; the owner may change them.
   - Sound: Slippery peel.
 - **Cinnamon star cookie** (`star-cookie`). Now: hops. Plan: new effect (E1).
   - Owner: Looks OK. Maybe it crumbles.
-  - Fix: Starts backwards: the bottom of the cookie faces the camera. Turn it round.
+  - Fixed: C1: turned round so the glazed top faces the camera.
   - Effect: Crumbles into pieces and crumbs, then reassembles.
   - Sound: Crunchy crumble.
 - **Tomatoes** (`tomatoes`). Now: hops. Plan: new effect (E1).
@@ -134,8 +135,9 @@ Proposals below are suggestions; the owner may change them.
   - Sound: Tiny chuckle-like chirp plus a lamp click.
 - **Wooden elephant** (`wooden-elephant`). Now: hops. Plan: new effect (E1).
   - Owner: Underwhelming; the style seems off.
-  - Fix: Visually underwhelming; improve the look (re-convert at higher detail or pick a better CC0
-    model).
+  - Fixed: C1: soft studio light and the model's normal map baked into the colours, and textures
+    filtered to each splat's size, so the carving reads. The model stays (it is the best CC0
+    elephant found).
   - Effect: Trunk lifts and it rocks on its wooden feet.
   - Sound: Wooden knock and a toy trumpet.
 - **Marble bust** (`marble-bust`). Now: hops. Plan: new effect (E1).
@@ -152,13 +154,15 @@ Proposals below are suggestions; the owner may change them.
   - Sound: Old twin-bell alarm ring (differs from the other alarm clock).
 - **Vintage camera** (`vintage-camera`). Now: hops. Plan: new effect (E1).
   - Owner: Could snap a photo with the flash going off.
-  - Fix: Grainy, almost like a reverse-contrast image; detail is lost. Check the mesh-to-splats
-    texture handling (screenshot in docs/reviews/2026-09-23/).
+  - Fixed: C1: the grain was one-texel aliasing and unlit metal. Textures are now filtered to each
+    splat's size, soft light with gloss is baked in, the lens is dark glass (it was a white disc),
+    and the printed maker's names are painted out.
   - Effect: Flash burst from the camera and the view briefly whites out.
   - Sound: Mechanical shutter click and wind-on.
 - **Boombox** (`boombox`). Now: hops. Plan: new effect (E1).
   - Owner: Also a bit grainy.
-  - Fix: Grainy; could use more detail.
+  - Fixed: C1: filtered textures and baked light; the speakers read as grilles, not static. The
+    small maker badge is painted out.
   - Effect: Speakers pulse to a beat and the tape reels turn.
   - Sound: A short synth beat loop.
 - **Real croissant** (`croissant-real`). Now: hops. Plan: new effect (E1).
@@ -190,7 +194,8 @@ Proposals below are suggestions; the owner may change them.
   - Touch or drag interaction (phase F).
 - **Horse statue** (`horse-statue`). Now: hops. Plan: new effect (E1).
   - Owner: Work like the other statues.
-  - Fix: A little too bright; details are hard to see. Lower exposure or contrast.
+  - Fixed: C1: baked soft light (with the model's normal and occlusion maps) gives it shading, so
+    the marble no longer reads as flat white.
   - Effect: Rears up on its hind legs, then settles.
   - Sound: Stone grind and a whinny-like whistle.
 
@@ -215,35 +220,36 @@ Proposals below are suggestions; the owner may change them.
 
 - **Basketball** (`basketball`). Now: hops. Plan: new effect (E6).
   - Owner: Balls look good. Bouncing is fine but each should bounce differently.
-  - Fix: Check the texture: it should read as pebbled rubber with clean black channels, not grain.
+  - Fixed: C1: pebbled rubber (embossed bumps lit from one side), clean black channels in small
+    splats, even splat placement.
   - Effect: Dribble: fast low bounces, then a spin on a fingertip.
   - Sound: Hollow basketball boing.
 - **Soccer ball** (`soccer-ball`). Now: hops. Plan: new effect (E6).
-  - Fix: Check the texture: smooth panels with clean seams, not speckle.
+  - Fixed: C1: smooth, slightly glossy panels and clean grooved seams; the speckle (the far side
+    showing through gaps) is gone with even splat placement.
   - Effect: Keepy-uppy: three small kicks with spin.
   - Sound: Firm thump.
 - **American football** (`american-football`). Now: hops. Plan: new effect (E6).
   - Owner: The owner (2026-09-24): some sports balls look grainy rather than realistic; the tennis
     ball should be fuzzy and the American football should look like leathered pigskin. Look at the
     other balls too.
-  - Fix: Looks grainy, not like leather. Give it a pebbled pigskin leather texture (fine bumps,
-    subtle sheen, darker seams and crisp white laces).
+  - Fixed: C1: pebbled pigskin with a soft sheen, darker seams, crisp white laces.
   - Effect: A tight spiral spin in place.
   - Sound: Leathery whoosh.
 - **Tennis ball** (`tennis-ball`). Now: hops. Plan: new effect (E6).
   - Owner: The owner (2026-09-24): some sports balls look grainy rather than realistic; the tennis
     ball should be fuzzy and the American football should look like leathered pigskin. Look at the
     other balls too.
-  - Fix: Should look fuzzy. Make the felt soft and fibrous (fine hair-like noise, slightly blurred
-    edge) with a clean white seam.
+  - Fixed: C1: soft felt in larger round splats with a fuzz of fine hairs standing off it (which
+    also softens the edge), and a clean white seam.
   - Effect: Fast high bounce with the fuzz fluffing out.
   - Sound: Pock.
 - **Baseball** (`baseball`). Now: hops. Plan: new effect (E6).
-  - Fix: Check the texture: smooth white leather with crisp red stitches, not grain.
+  - Fixed: C1: smooth white leather with a soft sheen and crisp raised red stitches.
   - Effect: Curveball: it spins hard and swerves.
   - Sound: Bat crack.
 - **Softball** (`softball`). Now: hops. Plan: new effect (E6).
-  - Fix: Check the texture: smooth leather with crisp red stitches, not grain.
+  - Fixed: C1: smooth yellow leather with a soft sheen and crisp raised red stitches.
   - Effect: Underhand arc and a softer thud.
   - Sound: Muffled thud.
 - **Beach ball** (`beach-ball`). Now: hops. Plan: new effect (E6).
@@ -253,11 +259,11 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Tiny chip hop and a spin-back.
   - Sound: Click of a club.
 - **Rugby ball** (`rugby-ball`). Now: hops. Plan: new effect (E6).
-  - Fix: Check the texture: pebbled grip, not grain.
+  - Fixed: C1: an even pebbled grip; clean seams.
   - Effect: Tumbles end over end with an odd bounce.
   - Sound: Dull thud.
 - **Volleyball** (`volleyball`). Now: hops. Plan: new effect (E6).
-  - Fix: Check the texture: smooth leather panels with clean seams, not speckle.
+  - Fixed: C1: smooth leather panels with a sheen and clean fine seams.
   - Effect: A set then a spike straight down.
   - Sound: Slap.
 - **Water polo ball** (`water-polo-ball`). Now: hops. Plan: new effect (E6).
@@ -267,7 +273,7 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Rapid tiny bounces getting faster.
   - Sound: Tik-tik-tik.
 - **Cricket ball** (`cricket-ball`). Now: hops. Plan: new effect (E6).
-  - Fix: Check the texture: polished red leather with a shine and a clear raised seam.
+  - Fixed: C1: polished red leather with a bright highlight and a raised, lit seam.
   - Effect: Seam-up spin and a skid.
   - Sound: Crisp leather knock.
 - **Bowling ball** (`bowling-ball`). Now: hops. Plan: new effect (E6).
@@ -283,7 +289,7 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Squashes hard on a bounce.
   - Sound: Rubbery bwong.
 - **Medicine ball** (`medicine-ball`). Now: hops. Plan: new effect (E6).
-  - Fix: Check the texture: matte rubber grip, not grain.
+  - Fixed: C1: matte rubber grip (low bumps, no shine), and a faint rim of light on dark pages.
   - Effect: Barely lifts and lands with a heavy squash.
   - Sound: Heavy thud.
 - **Lacrosse ball** (`lacrosse-ball`). Now: hops. Plan: new effect (E6).
@@ -291,7 +297,8 @@ Proposals below are suggestions; the owner may change them.
   - Sound: Hard rubber knock.
 - **Squash ball** (`squash-ball`). Now: hops. Plan: new effect (E6).
   - Owner: Weird; hard to see on dark.
-  - Fix: Hard to see on the dark background (it is black). Consider a faint rim light in dark mode.
+  - Fixed: C1: a faint rim of light around the ball on a dark page (a see-through shell that adds up
+    at the silhouette); invisible on a light page.
   - Effect: Warms up: glows faintly as it bounces faster.
   - Sound: Dead, low squash thock.
 - **Bouncy ball** (`bouncy-ball`). Now: hops. Plan: new effect (E6).
@@ -303,7 +310,7 @@ Proposals below are suggestions; the owner may change them.
   - Sound: Glassy clink.
 - **Hockey puck** (`hockey-puck`). Now: hops. Plan: new effect (E6).
   - Owner: Underwhelming.
-  - Fix: Hard to see on the dark background.
+  - Fixed: C1: the same faint rim of light, and a little sheen on the rubber.
   - Effect: Slides and spins flat, throwing up ice sparkle.
   - Sound: Stick slap and ice scrape.
 - **Shuttlecock** (`shuttlecock`). Now: hops. Plan: new effect (E6).
@@ -312,7 +319,7 @@ Proposals below are suggestions; the owner may change them.
   - Sound: Light racket tock.
 - **Flying disc** (`flying-disc`). Now: hops. Plan: new effect (E6).
   - Owner: Looks fine.
-  - Fix: Could use more texture; make it look more like plastic (sheen).
+  - Fixed: C1: glossy plastic with a highlight and two moulded flight rings.
   - Effect: Spins fast and hovers, tilting.
   - Sound: Whirring whoosh.
 
@@ -354,7 +361,7 @@ Proposals below are suggestions; the owner may change them.
   - Sound: Thunder rumble.
 - **Lava lamp** (`lava-lamp`). Now: hops. Plan: new effect (E4).
   - Owner: Moves really well. On tap: blobs move faster, light up or change colours.
-  - Fix: Refine where the glass meets the top and bottom caps.
+  - Fixed: C1: the glass now tapers into the cap and sits in rolled metal collars top and bottom.
   - Effect: Blobs speed up, glow and shift colour for a few seconds.
   - Sound: Low bubbling blorp.
 - **Snow globe** (`snow-globe`). Now: tap: Shake the globe. Plan: keep.
@@ -398,8 +405,8 @@ Proposals below are suggestions; the owner may change them.
   - Sound: Creak and a treasure chime.
 - **Storybook** (`book`). Now: tap: Open or close. Plan: keep.
   - Owner: Blurry; try to make it more detailed so the writing looks like something.
-  - Fix: Blurry: the text is just grey smudges and the cover is soft. Try readable text (a bitmap
-    font), crisper page splats and a sharper cover (screenshots in docs/reviews/2026-09-23/).
+  - Fixed: C1: readable words from a 5x7 bitmap font, more and smaller splats on the two open pages,
+    a crisper cover, and no red strip (the cover's inside drew over the pages).
   - Sound: Page flip.
 - **Laptop** (`laptop`). Now: tap: Open or close. Plan: keep.
   - Owner: Pretty awesome; keep it the same.
@@ -479,9 +486,8 @@ Proposals below are suggestions; the owner may change them.
   - Sound: Rock crack and a low boom.
 - **Comet** (`comet`). Now: hops. Plan: new effect (E2).
   - Owner: Extremely underwhelming; does not look like a comet.
-  - Fix: Overhaul: too blurry and not recognisable as a comet. Needs a bright icy nucleus, a coma
-    and two distinct tails (straight blue ion tail, curved dusty tail). The meteor is closer to what
-    the owner wants.
+  - Fixed: C1: overhauled: a bright icy nucleus in a thin coma, a straight blue ion tail of
+    streamers and a curved gold dust tail.
   - Effect: Tail flares longer and brighter as it swings by.
   - Sound: Long airy whoosh.
 - **Meteor** (`meteor`). Now: hops. Plan: new effect (E2).
@@ -1040,7 +1046,7 @@ Proposals below are suggestions; the owner may change them.
   - Sound: Launch whistle and a boom.
 - **Decorated tree** (`decorated-tree`). Now: tap: Lights on or off. Plan: more.
   - Owner: Lights only show very briefly; make it more dramatic.
-  - Fix: The star on top looks like a glowing golden cloud; make it a clear star shape.
+  - Fixed: C1: a faceted gold star facing the viewer, with only a faint glow.
   - Effect: Lights come on and chase in patterns and stay on; the star glows.
   - Sound: Sleigh-bell jingle.
 - **Patterned egg** (`patterned-egg`). Now: tap: Spin. Plan: keep.
@@ -1051,7 +1057,8 @@ Proposals below are suggestions; the owner may change them.
   - Sound: Paper rustle.
 - **Diya** (`diya`). Now: tap: Blow gently. Plan: more.
   - Owner: Very underwhelming.
-  - Fix: Underwhelming visually; add detail (patterned clay, oil sheen).
+  - Fixed: C1: painted clay (dots, a red line, lotus petals) and dark amber oil with a sheen and the
+    flame's reflection.
   - Effect: The flame grows and a ring of small diyas lights around it.
   - Sound: Soft flame whoosh.
 - **Menorah** (`menorah`). Now: tap: Light the candles. Plan: keep.
@@ -1092,7 +1099,7 @@ Proposals below are suggestions; the owner may change them.
   - Sound: Deep ship horn.
 - **Sports car** (`sports-car`). Now: tap: Rev the engine. Plan: keep.
   - Owner: Looks really good.
-  - Fix: A little small in its frame (known issue).
+  - Fixed: C1: the home camera comes closer.
   - Sound: Engine rev.
 - **Bus** (`bus`). Now: tap: Beep beep. Plan: more.
   - Owner: Not sure what the effect is.
@@ -1119,7 +1126,7 @@ Proposals below are suggestions; the owner may change them.
   - Sound: Bicycle bell ring-ring.
 - **Tractor** (`tractor`). Now: tap: Chug chug. Plan: keep.
   - Owner: Perfect.
-  - Fix: The exhaust smoke is heavy (known issue).
+  - Fixed: C1: a light wisp of exhaust; the cab glass is clear instead of static.
   - Sound: Diesel putter.
 - **Flying saucer** (`ufo`). Now: tap: Beam on or off. Plan: keep.
   - Owner: Maybe my favourite; really cool.
@@ -1149,8 +1156,7 @@ Proposals below are suggestions; the owner may change them.
   - Sound: Foghorn.
 - **Statue of Liberty** (`statue-of-liberty`). Now: hops. Plan: new effect (E6).
   - Owner: Everything else looks fine. Make the effect a good one.
-  - Fix: The crown looks squashed down; raise its rays and give them clearer spikes (screenshot in
-    docs/reviews/2026-09-23/).
+  - Fixed: C1: the crown's seven rays rise higher and taper to sharp, lit points.
   - Effect: The torch flame flares bright and sparkles drift from it.
   - Sound: Flame whoosh and a harbour bell.
 - **White House** (`white-house`). Now: hops. Plan: new effect (E6).
