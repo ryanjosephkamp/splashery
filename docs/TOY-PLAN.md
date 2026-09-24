@@ -10,31 +10,32 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 283 toys. 137 have a tap action today; the other 146 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 133.
+- 283 toys. 141 have a tap action today; the other 142 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 138.
 - **more** (has an effect; make it clearer or more dramatic): 3.
-- **new** (needs its own effect): 147.
-- Visual fixes: 0 open, 26 done. Touch or drag interaction asked for: 5.
+- **new** (needs its own effect): 142.
+- Visual fixes: 0 open, 28 done. Touch or drag interaction asked for: 4.
 
 ## By phase
 
 - **C, polish.** Visual fixes still open: none. Done in C1: Cinnamon star cookie, Wooden elephant,
   Vintage camera, Boombox, Horse statue, Basketball, Soccer ball, American football, Tennis ball,
-  Baseball, Softball, Rugby ball, Volleyball, Cricket ball, Medicine ball, Squash ball, Hockey puck,
-  Flying disc, Comet, Lava lamp, Storybook, Decorated tree, Diya, Sports car, Tractor, Statue of
-  Liberty. Effects to make clearer or more dramatic, still open: none. Done in C2: Cactus,
-  Strawberry, Heart cookie, Honeybee, Jelly blob, Donut, Neon knot, Tiny planet, Cluster fly, May
-  beetle, Millipede, Carder bumblebee, Raspberry, Blackberry, Blueberry, Grape, Cinnamon star
-  cookie, Tomatoes, Mandeltorus, Basket, Real rubber duck, Garden gnome, Wooden elephant, Marble
-  bust, Ukulele, Alarm clock, Vintage camera, Boombox, Real croissant, Carrot cake, Pomegranate,
-  Lantern, Cat statue, Chess set, Horse statue, Bacteriophage, Neuron, DNA, Amethyst geode, Crystal
-  ball, Eye, Cherry blossom, Ice cream, Gummy bear, Coffee, Rubber duck, Kite, Lorenz attractor,
-  Klein bottle, Wizard's orb, Jellyfish, Pufferfish, Snail, Octopus, Fireworks, Decorated tree,
-  Diya, Acoustic guitar, Snare drum, Xylophone, Hot-air balloon, Bus, Jet airliner, Sailboat,
-  Submarine, Bicycle, Big Ben, Castle, Pagoda, Windmill.
+  Baseball, Softball, Rugby ball, Volleyball, Cricket ball, Pool ball, Medicine ball, Squash ball,
+  Hockey puck, Flying disc, Comet, Lava lamp, Storybook, Laptop, Decorated tree, Diya, Sports car,
+  Tractor, Statue of Liberty. Effects to make clearer or more dramatic, still open: none. Done in
+  C2: Cactus, Strawberry, Heart cookie, Honeybee, Jelly blob, Donut, Neon knot, Tiny planet, Cluster
+  fly, May beetle, Millipede, Carder bumblebee, Raspberry, Blackberry, Blueberry, Grape, Cinnamon
+  star cookie, Tomatoes, Mandeltorus, Basket, Real rubber duck, Garden gnome, Wooden elephant,
+  Marble bust, Ukulele, Alarm clock, Vintage camera, Boombox, Real croissant, Carrot cake,
+  Pomegranate, Lantern, Cat statue, Horse statue, American football, Rugby ball, Shuttlecock, Flying
+  disc, Bacteriophage, Neuron, DNA, Amethyst geode, Crystal ball, Eye, Cherry blossom, Ice cream,
+  Gummy bear, Coffee, Rubber duck, Kite, Chess set, Lorenz attractor, Klein bottle, Wizard's orb,
+  Jellyfish, Pufferfish, Snail, Octopus, Fireworks, Decorated tree, Diya, Acoustic guitar, Snare
+  drum, Xylophone, Hot-air balloon, Bus, Jet airliner, Sailboat, Submarine, Bicycle, Big Ben,
+  Castle, Pagoda, Windmill.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
-- **E1, new effects: scans and shapes.** Chess set
+- **E1, new effects: scans and shapes.** None.
 - **E2, new effects: space, atoms and gems.** Sun, Solar system, Mercury, Venus, Earth, Moon, Mars,
   Jupiter, Saturn, Uranus, Neptune, Aurora world, Asteroid, Comet, Meteor, Star, Pulsar, Black hole,
   Star cluster, Ring nebula, Nebula, Spiral galaxy, Electron orbital, Atom, Molecule, Crystal
@@ -49,17 +50,15 @@ Proposals below are suggestions; the owner may change them.
   Iceberg, Waterfall, Ocean wave
 - **E5, new effects: food.** Watermelon, Cupcake, Lollipop, Candy cane, Macarons, Pretzel,
   Croissant, Sushi, Taco, Apple, Bananas, Orange, Kiwi, Pineapple, Cherries, Grapes, Avocado
-- **E6, new effects: balls and the rest.** Basketball, Soccer ball, American football, Tennis ball,
-  Baseball, Softball, Beach ball, Golf ball, Rugby ball, Volleyball, Water polo ball, Ping-pong
-  ball, Cricket ball, Bowling ball, Pool ball, Pickleball, Dodgeball, Medicine ball, Lacrosse ball,
-  Squash ball, Bouncy ball, Marble, Hockey puck, Shuttlecock, Flying disc, Heraldic shield, Crown,
-  School of fish, Nautilus, Sea urchin, Frog, Snowman, Eiffel Tower, Washington Monument, Pyramids
-  of Giza, Twisting supertall, Statue of Liberty, White House, Leaning Tower of Pisa, Colosseum,
-  Parthenon, Stonehenge, Taj Mahal
-- **F, touch and drag interaction.** Chess set, Gummy bear, Building bricks, Newton's cradle, Puzzle
-  cube.
+- **E6, new effects: balls and the rest.** Basketball, Soccer ball, Tennis ball, Baseball, Softball,
+  Beach ball, Golf ball, Volleyball, Water polo ball, Ping-pong ball, Cricket ball, Bowling ball,
+  Pool ball, Pickleball, Dodgeball, Medicine ball, Lacrosse ball, Squash ball, Bouncy ball, Marble,
+  Hockey puck, Heraldic shield, Crown, School of fish, Nautilus, Sea urchin, Frog, Snowman, Eiffel
+  Tower, Washington Monument, Pyramids of Giza, Twisting supertall, Statue of Liberty, White House,
+  Leaning Tower of Pisa, Colosseum, Parthenon, Stonehenge, Taj Mahal
+- **F, touch and drag interaction.** Gummy bear, Building bricks, Newton's cradle, Puzzle cube.
 
-## Scans (31)
+## Scans (30)
 
 - **Cactus** (`cactus`). Now: tap: Bloom (rig). Plan: keep.
   - Owner: No special effect. Looks fine.
@@ -88,8 +87,9 @@ Proposals below are suggestions; the owner may change them.
 - **Cluster fly** (`cluster-fly`). Now: tap: Groom (rig). Plan: keep.
   - Owner: Right way up. Do what a fly does: rub its hands together, clean its face, flap its wings.
   - Effect: Front legs rub together, then the wings flick.
-  - Improved: E1: the front legs rub together for a second, then the wings flick twice with a short
-    buzz (2.4 s).
+  - Improved: E1b: grooming like a real fly: the front legs (cut as solid pieces, bending at the
+    knee) rub together, then reach up and wipe the face while the head dips, then a little shake (3
+    s).
   - Sound: Short thin fly buzz.
 - **May beetle** (`may-beetle`). Now: tap: Open wings (rig). Plan: keep.
   - Owner: Detail is great but underwhelming; it needs an effect.
@@ -109,22 +109,23 @@ Proposals below are suggestions; the owner may change them.
   - Improved: E1: the fuzzy body shivers, the wings hum and it hovers up with a slow, clumsy wobble,
     then settles (3 s).
   - Sound: Deep, lazy bumblebee drone.
-- **Raspberry** (`raspberry`). Now: tap: Ripple (rig). Plan: keep.
+- **Raspberry** (`raspberry`). Now: tap: Drop drupelets (rig). Plan: keep.
   - Owner: Looks really cool; very good resolution.
   - Effect: The drupelets bounce one by one in a ripple.
-  - Improved: E1: a ripple runs down from the top, pushing the drupelets out and brightening them as
-    it passes (1.8 s).
+  - Improved: E1b: drupelets break off as solid pieces one after another, tumble down to the table
+    and hop back into place (3.2 s).
   - Sound: Soft bubbly squish.
-- **Blackberry** (`blackberry`). Now: tap: Gleam (rig). Plan: keep.
+- **Blackberry** (`blackberry`). Now: tap: Burst (rig). Plan: keep.
   - Owner: Same as the raspberry: looks great.
   - Effect: Drupelets gleam in a wave, like light running over it.
-  - Improved: E1: a band of light runs across the drupelets with a sparkle of glints (1.8 s).
+  - Improved: E1b: half the glossy drupelets burst off as solid pieces, bounce on the table and
+    glint, then spring back (2.8 s).
   - Sound: Darker, deeper squish.
-- **Blueberry** (`blueberry`). Now: tap: Polish (rig). Plan: keep.
+- **Blueberry** (`blueberry`). Now: tap: Peel (rig). Plan: keep.
   - Owner: Looks good.
   - Effect: The bloom (dusty coat) wipes off in a swirl, showing deep blue, then returns.
-  - Improved: E1: the dusty bloom wipes off in a swirl as the berry turns, showing deep blue, then
-    comes back (3.2 s).
+  - Improved: E1b: now like the grape (the owner's favourite): the dark skin peels back towards you
+    in five strips, showing the pale green flesh, then closes (3.2 s).
   - Sound: Small round pop.
 - **Grape** (`grape`). Now: tap: Peel (rig). Plan: keep.
   - Owner: Looks good. Maybe the skin comes off.
@@ -142,19 +143,20 @@ Proposals below are suggestions; the owner may change them.
 - **Tomatoes** (`tomatoes`). Now: tap: Roll (rig). Plan: keep.
   - Owner: Fantastic, extremely realistic. Maybe they move around.
   - Effect: The tomatoes roll and jostle each other, then settle.
-  - Improved: E1: each of the ten tomatoes is a rig part; they roll and bump in different
-    directions, then settle (2.6 s).
+  - Improved: E1b: each tomato is its own solid piece (the plate left still): they hop in turn, roll
+    a little round the plate and settle (2.6 s).
   - Sound: Soft thuds rolling on a table.
 - **Mandeltorus** (`mandeltorus`). Now: tap: Counter-spin (rig). Plan: keep.
   - Owner: Some parts should rotate clockwise and others counterclockwise.
   - Effect: Rings of the fractal counter-rotate in bands, then lock back.
   - Improved: E1: alternate rings turn opposite ways with a cyan glow, then lock back (3 s).
   - Sound: Shimmering rising chord.
-- **Basket** (`basket`). Now: tap: Hop shells (rig). Plan: keep.
+- **Basket** (`basket`). Now: tap: Shake (rig). Plan: keep.
   - Owner: A basket of seashells. Neat. No effect.
   - Effect: Shells hop inside the basket one after another.
-  - Improved: E1: the shells (picked by colour, inside the rim) hop one after another in little
-    groups (2 s).
+  - Improved: E1b: seen from above so the shells show; the basket shakes and ten of the biggest
+    shells (urchins, sand dollars, starfish, a scallop) bounce up in turn, spinning, and drop back.
+    The blurry fringe under the basket is hidden (2.6 s).
   - Sound: Clattering shells.
 - **Real rubber duck** (`rubber-duck-real`). Now: tap: Squeeze (rig). Plan: keep.
   - Owner: Squeeze and quack. It must differ from the other rubber duck.
@@ -174,19 +176,21 @@ Proposals below are suggestions; the owner may change them.
     filtered to each splat's size, so the carving reads. The model stays (it is the best CC0
     elephant found).
   - Effect: Trunk lifts and it rocks on its wooden feet.
-  - Improved: E1: the trunk lifts and the elephant rocks on its front and back feet (2.6 s).
+  - Improved: E1b: the whole trunk is one solid carved piece, pinned at the face like a wooden toy:
+    it swings up to trumpet with a few toots while the elephant rocks on its feet (2.6 s).
   - Sound: Wooden knock and a toy trumpet.
 - **Marble bust** (`marble-bust`). Now: tap: Speak (rig). Plan: keep.
   - Owner: Looks good. Maybe the face moves and says something.
   - Effect: The head turns to look at you; a speech bubble says a short Latin line.
-  - Improved: E1: the head turns towards you and a speech bubble (a splat add-on with the storybook
-    font) says "SALVE, AMICE!" (hello, friend) (3.4 s).
+  - Improved: E1b: the head turns on its neck (a straight cut, no bending), the jaw drops once per
+    syllable of "SALVE, AMICE!" (a dark mouth shows behind the lips) and the speech bubble appears
+    (3.4 s).
   - Sound: Stone grind and a low murmur.
 - **Ukulele** (`ukulele`). Now: tap: Strum (rig). Plan: keep.
   - Owner: Instruments should be played so music comes out.
   - Effect: Strings vibrate and it plays a short strum pattern.
-  - Improved: E1: four strums (C, F, G, C chords); the strings shimmer and glow with each and the
-    body rocks (2 s).
+  - Improved: E1b: played like a real ukulele: a pick sweeps across the strings on each of four
+    strums and the strings shake in a standing wave between the nut and the bridge (2.2 s).
   - Sound: Plucked ukulele chord (synth, bright, nylon).
 - **Alarm clock** (`alarm-clock`). Now: tap: Ring (rig). Plan: keep.
   - Owner: Hands should move. On tap it should jump up and down and ring like an alarm clock.
@@ -238,25 +242,16 @@ Proposals below are suggestions; the owner may change them.
 - **Cat statue** (`cat-statue`). Now: tap: Look around (rig). Plan: keep.
   - Owner: Like the bust: the cat moves a bit.
   - Effect: The head turns and the tail swishes once.
-  - Improved: D: the first scan rig (src/rigs.js). A tap turns the head to one side and back, and
-    the tail curled on the ground flicks its tip up (2.4 s).
+  - Improved: E1b: the head turns on its neck under a red collar with a brass bell (a hard cut, so
+    nothing bends), looks at you with a small nod, and the tail tip swishes on the ground (2.6 s).
   - Sound: Stone grind and a tiny mew.
-- **Chess set** (`chess-set`). Now: tap: Wave (rig). Plan: new effect (E1).
-  - Owner: Ideally playable. At least: a tap plays a real game, white against black, as a long
-    animation.
-  - Effect: Plays a famous public-domain game move by move; later, tap a piece then a square to move
-    it.
-  - Improved: E1 (interim, until Phase F plays a real game): the pieces bob in a wave across the
-    board (2.2 s).
-  - Sound: Wooden piece clacks.
-  - Touch or drag interaction (phase F).
 - **Horse statue** (`horse-statue`). Now: tap: Rear up (rig). Plan: keep.
   - Owner: Work like the other statues.
   - Fixed: C1: baked soft light (with the model's normal and occlusion maps) gives it shading, so
     the marble no longer reads as flat white.
   - Effect: Rears up on its hind legs, then settles.
-  - Improved: E1: it rears higher on its hind legs while the front legs paw the air, then settles
-    (2.6 s).
+  - Improved: E1b: the whole horse above the base rears as one solid piece about its hind hooves,
+    while the forelegs (cut at the knees) paw the air (2.6 s).
   - Sound: Stone grind and a whinny-like whistle.
 
 ## Shapes (4)
@@ -267,16 +262,16 @@ Proposals below are suggestions; the owner may change them.
   - Improved: E1: splits into three smaller blobs that wobble apart, then merge back with a jelly
     bounce (2.8 s).
   - Sound: Gloopy wobble.
-- **Donut** (`donut`). Now: tap: Toss sprinkles (rig). Plan: keep.
+- **Donut** (`donut`). Now: tap: Break apart (rig). Plan: keep.
   - Owner: Interesting; good-looking.
   - Effect: Sprinkles jump off and rain back down.
-  - Improved: E1: the sprinkles (picked by their long shape) jump off in a staggered spray and rain
-    back down (1.8 s).
+  - Improved: E1b: it snaps into chunks that fly apart and tumble (the dough shows inside), the
+    sprinkles spray off, then it all flies back together (2.8 s).
   - Sound: Sprinkle patter.
-- **Neon knot** (`knot`). Now: tap: Tie tighter (rig). Plan: keep.
+- **Neon knot** (`knot`). Now: tap: Contort (rig). Plan: keep.
   - Effect: The neon flows along the knot and it ties tighter, then relaxes.
-  - Improved: E1: a new neon colour flows round the knot as it ties tighter and turns, then relaxes
-    and the colour flows back (2.8 s).
+  - Improved: E1b: the knot contorts: waves of swelling loops run round the tube, lifting and
+    twisting it, then it settles back into its trefoil (3 s).
   - Sound: Electric neon hum.
 - **Tiny planet** (`planet`). Now: tap: Day and night (rig). Plan: keep.
   - Effect: Clouds race around and a day-night band sweeps over it.
@@ -296,12 +291,14 @@ Proposals below are suggestions; the owner may change them.
     showing through gaps) is gone with even splat placement.
   - Effect: Keepy-uppy: three small kicks with spin.
   - Sound: Firm thump.
-- **American football** (`american-football`). Now: hops. Plan: new effect (E6).
+- **American football** (`american-football`). Now: tap: Throw a spiral. Plan: keep.
   - Owner: The owner (2026-09-24): some sports balls look grainy rather than realistic; the tennis
     ball should be fuzzy and the American football should look like leathered pigskin. Look at the
     other balls too.
   - Fixed: C1: pebbled pigskin with a soft sheen, darker seams, crisp white laces.
   - Effect: A tight spiral spin in place.
+  - Improved: E1b: a spiral pass: it flies up nose first, spinning fast about its long axis, the
+    nose tipping over at the top, and lands with a wobble (2.4 s).
   - Sound: Leathery whoosh.
 - **Tennis ball** (`tennis-ball`). Now: hops. Plan: new effect (E6).
   - Owner: The owner (2026-09-24): some sports balls look grainy rather than realistic; the tennis
@@ -325,9 +322,11 @@ Proposals below are suggestions; the owner may change them.
 - **Golf ball** (`golf-ball`). Now: hops. Plan: new effect (E6).
   - Effect: Tiny chip hop and a spin-back.
   - Sound: Click of a club.
-- **Rugby ball** (`rugby-ball`). Now: hops. Plan: new effect (E6).
+- **Rugby ball** (`rugby-ball`). Now: tap: Punt. Plan: keep.
   - Fixed: C1: an even pebbled grip; clean seams.
   - Effect: Tumbles end over end with an odd bounce.
+  - Improved: E1b: a punt: it tumbles end over end up and down, lands on a point and takes an
+    awkward bounce before settling (2.6 s).
   - Sound: Dull thud.
 - **Volleyball** (`volleyball`). Now: hops. Plan: new effect (E6).
   - Fixed: C1: smooth leather panels with a sheen and clean fine seams.
@@ -347,6 +346,8 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Heavy roll with a hook.
   - Sound: Rumble and a pin crash.
 - **Pool ball** (`pool-ball`). Now: hops. Plan: new effect (E6).
+  - Fixed: E1b: fully opaque polished resin with a sharp window highlight and a soft room
+    reflection, so the black 8 reads as a solid shiny ball (it looked see-through).
   - Effect: Clicks forward and spins with back-spin.
   - Sound: Ball click.
 - **Pickleball** (`pickleball`). Now: hops. Plan: new effect (E6).
@@ -380,14 +381,18 @@ Proposals below are suggestions; the owner may change them.
   - Fixed: C1: the same faint rim of light, and a little sheen on the rubber.
   - Effect: Slides and spins flat, throwing up ice sparkle.
   - Sound: Stick slap and ice scrape.
-- **Shuttlecock** (`shuttlecock`). Now: hops. Plan: new effect (E6).
+- **Shuttlecock** (`shuttlecock`). Now: tap: Hit it. Plan: keep.
   - Owner: Cool.
   - Effect: Flips over and floats down feathers-up.
+  - Improved: E1b: hit up: it flips over cork first and flies up spinning, turns over at the top and
+    floats back down cork first, spinning slower as it falls (3 s).
   - Sound: Light racket tock.
-- **Flying disc** (`flying-disc`). Now: hops. Plan: new effect (E6).
+- **Flying disc** (`flying-disc`). Now: tap: Throw. Plan: keep.
   - Owner: Looks fine.
   - Fixed: C1: glossy plastic with a highlight and two moulded flight rings.
   - Effect: Spins fast and hovers, tilting.
+  - Improved: E1b: thrown: it spins fast and flat, banks into a curve, glides round a loop like a
+    returning throw and settles back (3 s).
   - Sound: Whirring whoosh.
 
 ## Anatomy (6)
@@ -475,10 +480,15 @@ Proposals below are suggestions; the owner may change them.
 - **Storybook** (`book`). Now: tap: Open or close. Plan: keep.
   - Owner: Blurry; try to make it more detailed so the writing looks like something.
   - Fixed: C1: readable words from a 5x7 bitmap font, more and smaller splats on the two open pages,
-    a crisper cover, and no red strip (the cover's inside drew over the pages).
+    a crisper cover, and no red strip (the cover's inside drew over the pages). E1b: the outside is
+    crisp: evenly spread, denser splats on the cover, spine and page edges, a fine woven cloth and
+    page lines splats can show.
   - Sound: Page flip.
 - **Laptop** (`laptop`). Now: tap: Open or close. Plan: keep.
   - Owner: Pretty awesome; keep it the same.
+  - Fixed: E1b: a clean case (no speckle) and real keycaps with letters. Tap a key (or type on your
+    own keyboard) and it goes down and types on the screen; tap or drag on the trackpad to move the
+    pointer and click.
   - Sound: Keyboard clatter and a start-up chime.
 - **Music box** (`music-box`). Now: tap: Open or close. Plan: keep.
   - Owner: Animation is basically perfect; it needs music.
@@ -929,7 +939,7 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Splits open and the stone pops out and back.
   - Sound: Thock.
 
-## Toys (15)
+## Toys (16)
 
 - **Building bricks** (`bricks`). Now: tap: Pop the bricks. Plan: more.
   - Owner: Build something random from the blocks.
@@ -991,6 +1001,16 @@ Proposals below are suggestions; the owner may change them.
 - **Wind-up robot** (`robot`). Now: tap: Wind it up. Plan: keep.
   - Owner: Perfect.
   - Sound: Wind-up ratchet and clockwork.
+- **Chess set** (`chess-set`). Now: tap: Play the Opera Game. Plan: keep.
+  - Owner: Ideally playable. At least: a tap plays a real game, white against black, as a long
+    animation.
+  - Effect: Plays a famous public-domain game move by move; later, tap a piece then a square to move
+    it.
+  - Improved: E1b: rebuilt as a kit toy (walnut board, 32 turned pieces). A tap plays Morphy's Opera
+    Game (Paris, 1858) move by move: each piece slides to its square, knights jump, captured pieces
+    go to trays beside the board, each move clacks, and at 17.Rd8# the black king tips over. Tap
+    again and the pieces glide home.
+  - Sound: Wooden piece clacks.
 
 ## Maths (11)
 

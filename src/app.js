@@ -88,6 +88,9 @@ class App {
     player.on("paint", (n) => ui.setPaintCount(n));
     player.on("toy", (info) => this.onToy(info));
     player.on("action", (r) => this.onAction(r));
+    player.on("cue", (cues) => {
+      for (const spec of cues) this.sound.play(spec, { key: "cue" });
+    });
     player.on("profile", () => this.updateRenderInfo());
     ui.setSound(this.sound.enabled);
     const wm = webmSupport();
@@ -465,6 +468,11 @@ class App {
     // plain hop or pop. A toggle plays its on or off half.
     const toy = player.scene.toy;
     const own = toy.kind === "builtin" ? toySound(toy.id) : null;
+    // Some taps (a laptop key) make their own sound through cues.
+    if (recipe?.action?.quiet?.includes(r.key)) {
+      this.ui.setMotion(player.scene.motion, player.motion.targets);
+      return;
+    }
     const spec = own || recipe?.action?.sound || (r.key === "hop" ? "hop" : "pop");
     // A tap that picked an item (a xylophone bar) plays that item's note.
     this.sound.play(specFor(spec, r.key === "hop" || r.value > 0.5), { key: "toy", pick: r.pick });
@@ -563,6 +571,10 @@ class App {
     st.busy = false;
     if (this.toolState !== st) return;
     if (!hit) {
+      this.toOrbit();
+      return;
+    }
+    if (st.tool === "grab" && !player.dragStartsHere(hit)) {
       this.toOrbit();
       return;
     }
@@ -670,6 +682,12 @@ class App {
     const player = this.player;
     const cam = player.camera;
     addEventListener("keydown", (e) => {
+      // A toy that takes typing (the laptop) gets the keys it knows first.
+      const typing = this.ui.isTyping(e.target) || e.metaKey || e.ctrlKey || e.altKey;
+      if (!typing && player.toyInfo?.recipe?.typeKey && player.typeKey(e.key)) {
+        e.preventDefault();
+        return;
+      }
       if (
         e.key === " " &&
         !this.ui.isTyping(e.target) &&

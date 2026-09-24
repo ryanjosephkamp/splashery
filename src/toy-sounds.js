@@ -128,7 +128,12 @@ export const TOY_SOUNDS = {
     { voice: "scrape", f: 620, rate: 11, decay: 0.9 },
     { voice: "mew", at: 0.45, f: 700 },
   ],
-  "chess-set": { voice: "wood", notes: "D5 - A4 - - F5", step: 0.25, decay: 0.9 },
+  // Tap to play the Opera Game (each move clacks as it lands, from the recipe);
+  // tap again and the pieces slide home.
+  "chess-set": {
+    on: { voice: "wood", notes: "D5 - A4", step: 0.12, decay: 0.9 },
+    off: { voice: "scrape", f: 900, rate: 6, decay: 1.4, vol: 0.5 },
+  },
   "horse-statue": [
     { voice: "scrape", f: 450, rate: 9, decay: 1.1 },
     { voice: "whinny", at: 0.4, f: 1150 },

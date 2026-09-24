@@ -276,3 +276,14 @@ test("a rig's effects and part glow reach the modifier's uniforms", async () => 
   lantern.setControl("lit", 0, { snap: true });
   expect(lantern.hasBehaviours()).toBe(false);
 });
+
+test("the chess set plays the real Opera Game (Paris, 1858) to its final position", async () => {
+  const { OPERA_GAME, replay, toFen } = await import("../src/packs/games.js");
+  const { after, captured } = replay(OPERA_GAME);
+  expect(OPERA_GAME).toHaveLength(33);
+  // 17.Rd8# : the published final position.
+  expect(toFen(after.at(-1))).toBe("1n1Rkb1r/p4ppp/4q3/4p1B1/4P3/8/PPP2PPP/2K5");
+  // Twelve pieces are taken (4.dxe5 to 16...Nxb8), the last the white queen.
+  expect(captured.filter(Boolean)).toHaveLength(12);
+  expect(captured[31]).toBe("wQ");
+});

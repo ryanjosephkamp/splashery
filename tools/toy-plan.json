@@ -34,7 +34,7 @@
       "owner": "Right way up. Do what a fly does: rub its hands together, clean its face, flap its wings.",
       "effect": "Front legs rub together, then the wings flick.",
       "sound": "Short thin fly buzz.",
-      "improved": "E1: the front legs rub together for a second, then the wings flick twice with a short buzz (2.4 s)."
+      "improved": "E1b: grooming like a real fly: the front legs (cut as solid pieces, bending at the knee) rub together, then reach up and wipe the face while the head dips, then a little shake (3 s)."
     },
     "may-beetle": {
       "v": "keep",
@@ -62,21 +62,21 @@
       "owner": "Looks really cool; very good resolution.",
       "effect": "The drupelets bounce one by one in a ripple.",
       "sound": "Soft bubbly squish.",
-      "improved": "E1: a ripple runs down from the top, pushing the drupelets out and brightening them as it passes (1.8 s)."
+      "improved": "E1b: drupelets break off as solid pieces one after another, tumble down to the table and hop back into place (3.2 s)."
     },
     "blackberry": {
       "v": "keep",
       "owner": "Same as the raspberry: looks great.",
       "effect": "Drupelets gleam in a wave, like light running over it.",
       "sound": "Darker, deeper squish.",
-      "improved": "E1: a band of light runs across the drupelets with a sparkle of glints (1.8 s)."
+      "improved": "E1b: half the glossy drupelets burst off as solid pieces, bounce on the table and glint, then spring back (2.8 s)."
     },
     "blueberry": {
       "v": "keep",
       "owner": "Looks good.",
       "effect": "The bloom (dusty coat) wipes off in a swirl, showing deep blue, then returns.",
       "sound": "Small round pop.",
-      "improved": "E1: the dusty bloom wipes off in a swirl as the berry turns, showing deep blue, then comes back (3.2 s)."
+      "improved": "E1b: now like the grape (the owner's favourite): the dark skin peels back towards you in five strips, showing the pale green flesh, then closes (3.2 s)."
     },
     "grape": {
       "v": "keep",
@@ -98,7 +98,7 @@
       "owner": "Fantastic, extremely realistic. Maybe they move around.",
       "effect": "The tomatoes roll and jostle each other, then settle.",
       "sound": "Soft thuds rolling on a table.",
-      "improved": "E1: each of the ten tomatoes is a rig part; they roll and bump in different directions, then settle (2.6 s)."
+      "improved": "E1b: each tomato is its own solid piece (the plate left still): they hop in turn, roll a little round the plate and settle (2.6 s)."
     },
     "mandeltorus": {
       "v": "keep",
@@ -112,7 +112,7 @@
       "owner": "A basket of seashells. Neat. No effect.",
       "effect": "Shells hop inside the basket one after another.",
       "sound": "Clattering shells.",
-      "improved": "E1: the shells (picked by colour, inside the rim) hop one after another in little groups (2 s)."
+      "improved": "E1b: seen from above so the shells show; the basket shakes and ten of the biggest shells (urchins, sand dollars, starfish, a scallop) bounce up in turn, spinning, and drop back. The blurry fringe under the basket is hidden (2.6 s)."
     },
     "rubber-duck-real": {
       "v": "keep",
@@ -134,21 +134,21 @@
       "owner": "Underwhelming; the style seems off.",
       "effect": "Trunk lifts and it rocks on its wooden feet.",
       "sound": "Wooden knock and a toy trumpet.",
-      "improved": "E1: the trunk lifts and the elephant rocks on its front and back feet (2.6 s)."
+      "improved": "E1b: the whole trunk is one solid carved piece, pinned at the face like a wooden toy: it swings up to trumpet with a few toots while the elephant rocks on its feet (2.6 s)."
     },
     "marble-bust": {
       "v": "keep",
       "owner": "Looks good. Maybe the face moves and says something.",
       "effect": "The head turns to look at you; a speech bubble says a short Latin line.",
       "sound": "Stone grind and a low murmur.",
-      "improved": "E1: the head turns towards you and a speech bubble (a splat add-on with the storybook font) says \"SALVE, AMICE!\" (hello, friend) (3.4 s)."
+      "improved": "E1b: the head turns on its neck (a straight cut, no bending), the jaw drops once per syllable of \"SALVE, AMICE!\" (a dark mouth shows behind the lips) and the speech bubble appears (3.4 s)."
     },
     "ukulele": {
       "v": "keep",
       "owner": "Instruments should be played so music comes out.",
       "effect": "Strings vibrate and it plays a short strum pattern.",
       "sound": "Plucked ukulele chord (synth, bright, nylon).",
-      "improved": "E1: four strums (C, F, G, C chords); the strings shimmer and glow with each and the body rocks (2 s)."
+      "improved": "E1b: played like a real ukulele: a pick sweeps across the strings on each of four strums and the strings shake in a standing wave between the nut and the bridge (2.2 s)."
     },
     "alarm-clock": {
       "v": "keep",
@@ -206,15 +206,14 @@
       "owner": "Like the bust: the cat moves a bit.",
       "effect": "The head turns and the tail swishes once.",
       "sound": "Stone grind and a tiny mew.",
-      "improved": "D: the first scan rig (src/rigs.js). A tap turns the head to one side and back, and the tail curled on the ground flicks its tip up (2.4 s)."
+      "improved": "E1b: the head turns on its neck under a red collar with a brass bell (a hard cut, so nothing bends), looks at you with a small nod, and the tail tip swishes on the ground (2.6 s)."
     },
     "chess-set": {
-      "v": "new",
-      "interactive": true,
+      "v": "keep",
       "owner": "Ideally playable. At least: a tap plays a real game, white against black, as a long animation.",
       "effect": "Plays a famous public-domain game move by move; later, tap a piece then a square to move it.",
       "sound": "Wooden piece clacks.",
-      "improved": "E1 (interim, until Phase F plays a real game): the pieces bob in a wave across the board (2.2 s)."
+      "improved": "E1b: rebuilt as a kit toy (walnut board, 32 turned pieces). A tap plays Morphy's Opera Game (Paris, 1858) move by move: each piece slides to its square, knights jump, captured pieces go to trays beside the board, each move clacks, and at 17.Rd8# the black king tips over. Tap again and the pieces glide home."
     },
     "horse-statue": {
       "v": "keep",
@@ -222,7 +221,7 @@
       "owner": "Work like the other statues.",
       "effect": "Rears up on its hind legs, then settles.",
       "sound": "Stone grind and a whinny-like whistle.",
-      "improved": "E1: it rears higher on its hind legs while the front legs paw the air, then settles (2.6 s)."
+      "improved": "E1b: the whole horse above the base rears as one solid piece about its hind hooves, while the forelegs (cut at the knees) paw the air (2.6 s)."
     },
     "blob": {
       "v": "keep",
@@ -236,13 +235,13 @@
       "owner": "Interesting; good-looking.",
       "effect": "Sprinkles jump off and rain back down.",
       "sound": "Sprinkle patter.",
-      "improved": "E1: the sprinkles (picked by their long shape) jump off in a staggered spray and rain back down (1.8 s)."
+      "improved": "E1b: it snaps into chunks that fly apart and tumble (the dough shows inside), the sprinkles spray off, then it all flies back together (2.8 s)."
     },
     "knot": {
       "v": "keep",
       "effect": "The neon flows along the knot and it ties tighter, then relaxes.",
       "sound": "Electric neon hum.",
-      "improved": "E1: a new neon colour flows round the knot as it ties tighter and turns, then relaxes and the colour flows back (2.8 s)."
+      "improved": "E1b: the knot contorts: waves of swelling loops run round the tube, lifting and twisting it, then it settles back into its trefoil (3 s)."
     },
     "planet": {
       "v": "keep",
@@ -264,11 +263,12 @@
       "fixed": "C1: smooth, slightly glossy panels and clean grooved seams; the speckle (the far side showing through gaps) is gone with even splat placement."
     },
     "american-football": {
-      "v": "new",
+      "v": "keep",
       "effect": "A tight spiral spin in place.",
       "sound": "Leathery whoosh.",
       "fixed": "C1: pebbled pigskin with a soft sheen, darker seams, crisp white laces.",
-      "owner": "The owner (2026-09-24): some sports balls look grainy rather than realistic; the tennis ball should be fuzzy and the American football should look like leathered pigskin. Look at the other balls too."
+      "owner": "The owner (2026-09-24): some sports balls look grainy rather than realistic; the tennis ball should be fuzzy and the American football should look like leathered pigskin. Look at the other balls too.",
+      "improved": "E1b: a spiral pass: it flies up nose first, spinning fast about its long axis, the nose tipping over at the top, and lands with a wobble (2.4 s)."
     },
     "tennis-ball": {
       "v": "new",
@@ -300,10 +300,11 @@
       "sound": "Click of a club."
     },
     "rugby-ball": {
-      "v": "new",
+      "v": "keep",
       "effect": "Tumbles end over end with an odd bounce.",
       "sound": "Dull thud.",
-      "fixed": "C1: an even pebbled grip; clean seams."
+      "fixed": "C1: an even pebbled grip; clean seams.",
+      "improved": "E1b: a punt: it tumbles end over end up and down, lands on a point and takes an awkward bounce before settling (2.6 s)."
     },
     "volleyball": {
       "v": "new",
@@ -335,7 +336,8 @@
     "pool-ball": {
       "v": "new",
       "effect": "Clicks forward and spins with back-spin.",
-      "sound": "Ball click."
+      "sound": "Ball click.",
+      "fixed": "E1b: fully opaque polished resin with a sharp window highlight and a soft room reflection, so the black 8 reads as a solid shiny ball (it looked see-through)."
     },
     "pickleball": {
       "v": "new",
@@ -384,17 +386,19 @@
       "sound": "Stick slap and ice scrape."
     },
     "shuttlecock": {
-      "v": "new",
+      "v": "keep",
       "owner": "Cool.",
       "effect": "Flips over and floats down feathers-up.",
-      "sound": "Light racket tock."
+      "sound": "Light racket tock.",
+      "improved": "E1b: hit up: it flips over cork first and flies up spinning, turns over at the top and floats back down cork first, spinning slower as it falls (3 s)."
     },
     "flying-disc": {
-      "v": "new",
+      "v": "keep",
       "fixed": "C1: glossy plastic with a highlight and two moulded flight rings.",
       "owner": "Looks fine.",
       "effect": "Spins fast and hovers, tilting.",
-      "sound": "Whirring whoosh."
+      "sound": "Whirring whoosh.",
+      "improved": "E1b: thrown: it spins fast and flat, banks into a curve, glides round a loop like a returning throw and settles back (3 s)."
     },
     "heart": {
       "v": "new",
@@ -510,14 +514,15 @@
     },
     "book": {
       "v": "keep",
-      "fixed": "C1: readable words from a 5x7 bitmap font, more and smaller splats on the two open pages, a crisper cover, and no red strip (the cover's inside drew over the pages).",
+      "fixed": "C1: readable words from a 5x7 bitmap font, more and smaller splats on the two open pages, a crisper cover, and no red strip (the cover's inside drew over the pages). E1b: the outside is crisp: evenly spread, denser splats on the cover, spine and page edges, a fine woven cloth and page lines splats can show.",
       "owner": "Blurry; try to make it more detailed so the writing looks like something.",
       "sound": "Page flip."
     },
     "laptop": {
       "v": "keep",
       "owner": "Pretty awesome; keep it the same.",
-      "sound": "Keyboard clatter and a start-up chime."
+      "sound": "Keyboard clatter and a start-up chime.",
+      "fixed": "E1b: a clean case (no speckle) and real keycaps with letters. Tap a key (or type on your own keyboard) and it goes down and types on the screen; tap or drag on the trackpad to move the pointer and click."
     },
     "music-box": {
       "v": "keep",

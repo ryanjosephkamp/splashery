@@ -61,6 +61,7 @@ export class MotionDriver {
     this.moveClock = { t: 0, last: null, rate: 1 };
     this.partsData = new Float32Array(48 * 4);
     this.tintData = new Float32Array(16 * 4);
+    this.tokenData = new Float32Array(64 * 4);
     this.addon = null; // { parts, data } of a rig's kit-built add-on
     this.addonU = null;
     this.out = null;
@@ -107,11 +108,14 @@ export class MotionDriver {
   // another control to fire and an item: it returns a control key, or
   // { key, pick }, or nothing for the usual action. drive() sees the last
   // tap as info.tap = { point, key, pick, time, n }.
-  act(time, point = null) {
+  act(time, point = null, forced = null) {
     const a = this.recipe?.action;
     let key = a?.key;
     let pick = null;
-    if (a?.at && point) {
+    if (forced) {
+      key = forced.key ?? key;
+      pick = forced.pick ?? null;
+    } else if (a?.at && point) {
       const r = a.at(point, this.state);
       if (typeof r === "string") key = r;
       else if (r) {
@@ -211,7 +215,7 @@ export class MotionDriver {
 
     // The kit toy's own frame: behaviours clock, recipe drive, parts.
     const kt = this.tick(this.kitClock, time, rate, motion.alive !== false);
-    const drive = { energy: 0, grow: 1, amount: 1, glow: [1, 1, 1, 0], parts: {}, body: null, fx: {}, addon: null }; // prettier-ignore
+    const drive = { energy: 0, grow: 1, amount: 1, glow: [1, 1, 1, 0], parts: {}, body: null, fx: {}, addon: null, tokens: null, cues: [] }; // prettier-ignore
     if (this.recipe?.drive) this.recipe.drive(kt, this.state, drive, { time, R, tap: this.tap });
     if (drive.body) {
       if (drive.body.quat) q = quatMul(drive.body.quat, q);
@@ -228,11 +232,15 @@ export class MotionDriver {
     // Set for every toy (a generated toy without a recipe just has no parts).
     {
       u.uSpKit = [kt, this.ctx ? 1 : 0, 1, clamp(drive.energy, 0, 1)];
-      u.uSpKitB = [clamp(drive.grow, 0, 1), F, Math.max(0, drive.amount), 0];
+      // w: a pressed key's index plus how far down it is (-1: none).
+      u.uSpKitB = [clamp(drive.grow, 0, 1), F, Math.max(0, drive.amount), drive.press ?? -1];
       u.uSpGlowC = drive.glow;
       u.uSpCam = [cameraPos[0], cameraPos[1], cameraPos[2], 0];
       const scale = this.ctx?.transform?.scale ?? 1;
       u["uSpParts[0]"] = packParts(this.partsData, this.ctx?.parts || [], drive.parts, scale);
+      // Always set (unset tokens are shown in place): the uniform keeps the
+      // last toy's values otherwise.
+      u["uSpTokens[0]"] = packTokens(this.tokenData, drive.tokens || [], this.ctx?.transform); // prettier-ignore
       if (this.ctx?.rig) {
         const td = this.tintData.fill(0);
         (this.ctx.parts || []).forEach((def, i) => {
@@ -290,4 +298,41 @@ function packParts(data, parts, driven, scale) {
     data.set([po[0], po[1], po[2], vis], o + 8);
   }
   return data;
+}
+
+// Packs game pieces for uSpTokens. Each token is { base, offset, quat,
+// visible } in recipe coordinates: it turns by quat about its base (the
+// point it stands on) and moves by offset. The shader turns about the toy's
+// origin, so the offset makes up the difference.
+function packTokens(data, tokens, transform) {
+  const c = transform?.center || [0, 0, 0];
+  const s = transform?.scale ?? 1;
+  for (let i = 0; i < 32; i++) {
+    const t = tokens[i];
+    const o = i * 8;
+    if (!t) {
+      data.set([0, 0, 0, 1, 0, 0, 0, 1], o);
+      continue;
+    }
+    const q = t.quat || IDENTITY;
+    const b = t.base ? [(t.base[0] - c[0]) * s, (t.base[1] - c[1]) * s, (t.base[2] - c[2]) * s] : [0, 0, 0]; // prettier-ignore
+    const rb = quatRotateVec(q, b);
+    const d = t.offset || [0, 0, 0];
+    data.set([b[0] + d[0] * s - rb[0], b[1] + d[1] * s - rb[1], b[2] + d[2] * s - rb[2], t.visible ?? 1], o); // prettier-ignore
+    data.set(q, o + 4);
+  }
+  return data;
+}
+
+function quatRotateVec(q, v) {
+  const [x, y, z, w] = q;
+  const ix = w * v[0] + y * v[2] - z * v[1];
+  const iy = w * v[1] + z * v[0] - x * v[2];
+  const iz = w * v[2] + x * v[1] - y * v[0];
+  const iw = -x * v[0] - y * v[1] - z * v[2];
+  return [
+    ix * w + iw * -x + iy * -z - iz * -y,
+    iy * w + iw * -y + iz * -x - ix * -z,
+    iz * w + iw * -z + ix * -y - iy * -x,
+  ];
 }

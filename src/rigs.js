@@ -1471,28 +1471,6 @@ export const RIGS = {
     },
   },
 
-  // Until Phase F plays a real game: the pieces bob in a wave across the board.
-  "chess-set": {
-    parts: [],
-    fx: [
-      {
-        name: "wave",
-        select: "all",
-        origin: [0, 0, 0],
-        mask: { half: [0, 1, 0], at: -0.05 },
-        move: { hop: [0, 1, 0], cell: 0.19 },
-        pattern: { stagger: 0.8, cell: 0.19 },
-      },
-    ],
-    controls: [pulse("wave", "Wave", 2.2)],
-    action: { key: "wave", label: "Wave" },
-    drive(t, c, out) {
-      const e = since(c, "wave", 2.2);
-      if (e < 0) return;
-      out.fx.wave = { move: 0.12, phase: band(e, 0, 2.1) };
-    },
-  },
-
   // The whole horse (everything above the base, one solid piece) rears
   // higher about its hind hooves, the way a horse rears from its hind legs,
   // while the lower forelegs paw the air from the knees (hard cuts).
