@@ -360,6 +360,8 @@ export const TOYS = [
     kind: "captured",
     url: "assets/toys/basket/basket.sog",
     urlWeak: "assets/toys/basket/basket-lite.sog",
+    // From above, so the shells show (from the side you see only wicker).
+    camera: { yaw: 0.55, pitch: 0.78, roll: 0, distance: 4.6 },
     credit: {
       title: "Basket",
       author: "hollmar",

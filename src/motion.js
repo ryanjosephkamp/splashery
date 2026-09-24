@@ -4,7 +4,7 @@
 // modifier (uSpBody*, uSpKit*, uSpParts). Pure JavaScript.
 
 import { quatAxisAngle, quatMul, quatEuler, rgb } from "./kit.js";
-import { fxFrame, FX_SLOTS } from "./rig-fx.js";
+import { fxFrame, FX_SLOTS, FX_VEC4 } from "./rig-fx.js";
 
 export const MOVES = [
   { id: "still", label: "Still" },
@@ -23,7 +23,7 @@ export const DEFAULT_MOTION = Object.freeze({
 });
 
 const IDENTITY = [0, 0, 0, 1];
-const NO_FX = new Float32Array(FX_SLOTS * 36);
+const NO_FX = new Float32Array(FX_SLOTS * FX_VEC4 * 4);
 const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
 
 // Bounce height and squash for a hop that started `t` seconds ago with a

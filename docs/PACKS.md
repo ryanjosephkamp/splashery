@@ -280,6 +280,41 @@ in the toy's rest pose, before parts move it.
   Avoid per-splat loops over hundreds of items; bucket or precompute.
 - **Stable**: at most 15 parts; behaviour names from the table; positions finite.
 
+## 7b. Effect quality
+
+The owner's review of Phase E1 (`docs/reviews/2026-09-24-e1/review.md`) set these rules. The short
+form is in CLAUDE.md.
+
+- **Real motion, not a warped picture.** A part moves as a solid piece. A scan rig's soft regions
+  (`soft` above about 0.1) bend the picture where a part meets the rest, and at any visible size
+  that reads as a stretched photo (the E1 cat, horse, elephant trunk and tomatoes). Use soft edges
+  only to hide a seam of a few percent of the toy. When a scan cannot move a part cleanly:
+  1. cut the part out with hard edges (`soft: 0.02`, colour-keyed regions) and keep the move small
+     enough that no gap shows;
+  2. hide the scan's part (`visible: 0`) and show a kit-built stand-in from an `addon` that moves;
+  3. rebuild the toy as a kit toy (a recipe) where every piece is its own part; or
+  4. choose an effect that moves the whole scan, or its light, instead.
+- **Separate things move separately.** Tomatoes on a plate, drupelets on a berry, shells in a basket
+  and chess pieces each move as their own rigid piece, with their own path. A wave or ripple pattern
+  over one surface is not "the tomatoes moving".
+- **Breaking is real.** Pieces come off as whole pieces, fall under gravity, bounce or roll, and
+  come back (or the toy regrows them). Crumbs are small solid bits, not a blur.
+- **Instruments are played.** Each note shows its cause: a string is plucked and vibrates, a key
+  goes down, a drum skin moves. Match the picture to the sound's notes and timing.
+- **Faces and bodies.** Things that talk move their mouths in time with the sound. Animals and
+  statues move like the real thing (a horse rears from its hips, a cat turns its head on its neck),
+  not by bending the whole image.
+- **Real rules.** Games follow the real game (chess moves are legal, from a real game). Thrown and
+  hit things move like the real thing: a gridiron football spirals about its long axis, a rugby ball
+  tumbles end over end, a shuttlecock spins nose first, a flying disc spins flat and glides.
+- **Real materials.** Solid things are opaque (no see-through pool balls), gloss where the real
+  thing is shiny, and have no blur or speckle at phone size.
+- **The bar.** The grape's peel (strips of skin curl back to show pale flesh, then close) is the
+  standard: one clear, physical idea that reads at a glance.
+- **Judge motion, at phone size.** Filmstrips at 220 px hide bending, smear and speckle. Render a
+  clip of every changed effect with `tools/effect-clip.mjs` and look at it at full size before
+  showing it; the owner reviews the clips on the private "Effect review" page before merging.
+
 ## 8. Checking your work
 
 ```sh
@@ -288,6 +323,7 @@ python3 -m http.server 4173 --bind 127.0.0.1 &                      # serve the 
 SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/make-thumbs.mjs <pack>
 SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/contact-sheet.mjs sheet.png <pack>
 SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/effect-strip.mjs strips <id> ...  # tap effect over time
+SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/effect-clip.mjs clips <id> ...    # tap effect as a clip
 SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium npx playwright test tests/kit.spec.mjs
 ```
 

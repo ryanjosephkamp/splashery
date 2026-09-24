@@ -3,13 +3,15 @@
 // camera and a world-coordinate grid, for placing rig regions (src/rigs.js).
 //
 //   python3 -m http.server 4173 --bind 127.0.0.1 &
-//   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/rig-map.mjs <out-dir> [--size=420] [--rig] [--at=0.6] [--views=front,right,top,back] id ...
+//   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/rig-map.mjs <out-dir> [--size=420] [--rig] [--at=0.6] [--views=front,right,top,back,bottom,left] [--center=x,y,z --half=0.4] id ...
 //
 // Writes <out-dir>/<id>-map.png. Grid lines are 0.1 apart, labelled every
 // 0.5. Front looks along -z (x right, y up), right along -x (-z right),
 // top along -y (x right, -z up), back along +z (-x right). --rig tints each
 // rig part (as ?rig=show does); --at=0.6 taps the toy and renders the pose
-// that many seconds later.
+// that many seconds later. --center and --half zoom in on a box of that
+// half-size round a point (grid lines stay 0.1 apart, labelled every 0.5,
+// with extra labels every 0.1 when zoomed).
 
 import { chromium } from "@playwright/test";
 import fs from "node:fs";
@@ -27,6 +29,8 @@ const size = Number(opt("size", 420));
 const rig = args.includes("--rig");
 const at = opt("at", "") === "" ? null : Number(opt("at", ""));
 const views = opt("views", "front,right,top,back").split(",");
+const zoomAt = opt("center", "") ? opt("center", "").split(",").map(Number) : null;
+const zoomHalf = Number(opt("half", 0));
 
 fs.mkdirSync(outDir, { recursive: true });
 const browser = await chromium.launch({
@@ -44,7 +48,7 @@ await page.goto(`${base}?renderer=webgl2&profile=high&adapt=off${rig ? "&rig=sho
 await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
 for (const id of ids) {
   const dataUrl = await page.evaluate(
-    async ({ id, size, at, views }) => {
+    async ({ id, size, at, views, zoomAt, zoomHalf }) => {
       const { app, player } = window.__splashery;
       await app.chooseToy(id);
       app.setLook({ background: "#202020" });
@@ -63,8 +67,8 @@ for (const id of ids) {
       stage.setFixedSize([size, size]);
       const info = player.toyInfo;
       const R = info.radius;
-      const c = info.center;
-      const half = Math.ceil(R * 1.15 * 10) / 10;
+      const c = zoomAt || info.center;
+      const half = zoomHalf || Math.ceil(R * 1.15 * 10) / 10;
       const cam = stage.cameraEntity.camera;
       const saved = { proj: cam.projection, oh: cam.orthoHeight, pose: stage.setCameraPose };
       let pose = null;
@@ -81,6 +85,8 @@ for (const id of ids) {
         right: { pos: [c[0] + D, c[1], c[2]], euler: [0, 90, 0], ax: [2, 1], sx: [-1, 1] },
         top: { pos: [c[0], c[1] + D, c[2]], euler: [-90, 0, 0], ax: [0, 2], sx: [1, -1] },
         back: { pos: [c[0], c[1], c[2] - D], euler: [0, 180, 0], ax: [0, 1], sx: [-1, 1] },
+        left: { pos: [c[0] - D, c[1], c[2]], euler: [0, -90, 0], ax: [2, 1], sx: [1, 1] },
+        bottom: { pos: [c[0], c[1] - D, c[2]], euler: [90, 0, 0], ax: [0, 2], sx: [1, 1] },
       };
       const advance = async (secs) => {
         let left = secs;
@@ -130,7 +136,7 @@ for (const id of ids) {
           const hi = Math.ceil((c[v.ax[k]] + half) * 10);
           for (let n = lo; n <= hi; n++) {
             const w = n / 10;
-            const major = n % 5 === 0;
+            const major = n % 5 === 0 || (zoomHalf > 0 && zoomHalf < 0.6);
             const p = k === 0 ? px(w, 0) : size - px(w, 1);
             g.strokeStyle = major ? "rgba(0,220,255,0.55)" : "rgba(0,220,255,0.18)";
             g.lineWidth = 1;
@@ -156,7 +162,7 @@ for (const id of ids) {
       });
       return out.toDataURL("image/png");
     },
-    { id, size, at, views },
+    { id, size, at, views, zoomAt, zoomHalf },
   );
   const out = path.join(outDir, `${id}-map.png`);
   fs.writeFileSync(out, Buffer.from(dataUrl.split(",")[1], "base64"));

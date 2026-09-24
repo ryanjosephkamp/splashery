@@ -28,7 +28,8 @@ export const TOY_SOUNDS = {
   bee: { voice: "buzz", f: 230, rate: 13, bright: 0.6, decay: 1.7 },
   "cluster-fly": [
     { voice: "scrape", f: 3000, rate: 12, decay: 0.9, vol: 0.4 },
-    { voice: "buzz", at: 1.3, f: 190, rate: 21, bright: 0.9, decay: 0.55, vol: 0.8 },
+    { voice: "scrape", at: 1.05, f: 3400, rate: 10, decay: 1.8, vol: 0.35 },
+    { voice: "buzz", at: 2.35, f: 190, rate: 21, bright: 0.9, decay: 0.45, vol: 0.8 },
   ],
   "may-beetle": [
     { voice: "buzz", f: 85, rate: 9, bright: 0.3, decay: 0.9 },
@@ -39,12 +40,17 @@ export const TOY_SOUNDS = {
   raspberry: [
     { voice: "squish", pitch: 1.4, bright: 0.5, decay: 0.9 },
     { voice: "bubbles", at: 0.05, f: 900, n: 4, decay: 0.5 },
+    { voice: "patter", at: 0.45, f: 1500, n: 14, decay: 1.6, vol: 0.7 },
   ],
   blackberry: [
     { voice: "squish", pitch: 0.8, bright: 0.2, decay: 1.2 },
     { voice: "bubbles", at: 0.06, f: 420, n: 3, decay: 0.6 },
+    { voice: "patter", at: 0.75, f: 900, n: 12, decay: 0.8, vol: 0.8 },
   ],
-  blueberry: { voice: "pop", f: 520, decay: 1.3 },
+  blueberry: [
+    { voice: "tear", f: 900, to: 0.7, decay: 1.2, bright: 0.4, vol: 0.8 },
+    { voice: "pop", at: 2.6, f: 520, decay: 1.3 },
+  ],
   grape: [
     { voice: "tear", f: 1600, to: 0.6, decay: 0.8, bright: 0.7 },
     { voice: "squish", at: 2.3, pitch: 1.6, vol: 0.5 },
@@ -55,12 +61,16 @@ export const TOY_SOUNDS = {
     { voice: "whoosh", at: 1.55, f: 600, to: 2, decay: 0.6, vol: 0.5 },
   ],
   tomatoes: [
-    { voice: "thud", f: 110, bright: 0.2 },
-    { voice: "thud", at: 0.22, f: 125, bright: 0.2, vol: 0.7 },
-    { voice: "thud", at: 0.4, f: 140, bright: 0.2, vol: 0.5 },
+    { voice: "thud", at: 0.4, f: 110, bright: 0.2 },
+    { voice: "thud", at: 0.62, f: 125, bright: 0.2, vol: 0.7 },
+    { voice: "thud", at: 0.85, f: 140, bright: 0.2, vol: 0.6 },
+    { voice: "thud", at: 1.1, f: 150, bright: 0.2, vol: 0.45 },
   ],
   mandeltorus: { voice: "shimmer", f: "G4", rate: 7, to: 1.5, decay: 1.4 },
-  basket: { voice: "clatter", f: 2200, n: 12, kind: "shell" },
+  basket: [
+    { voice: "rattle", f: 1600, n: 6, decay: 0.8, vol: 0.6 },
+    { voice: "clatter", at: 0.5, f: 2200, n: 14, kind: "shell", decay: 2.4 },
+  ],
   "rubber-duck-real": { voice: "squeak", f: 2300, to: 1.25, decay: 1.4 },
   "garden-gnome": [
     { voice: "chuckle", f: 640, n: 4 },
@@ -68,11 +78,13 @@ export const TOY_SOUNDS = {
   ],
   "wooden-elephant": [
     { voice: "wood", f: 520, decay: 1.2 },
-    { voice: "brass", at: 0.15, f: "A4", decay: 1.8, vol: 0.8 },
+    { voice: "brass", at: 0.35, f: "A4", decay: 2.4, vol: 0.8 },
   ],
+  // SAL-VE, A-MI-CE: one murmur per syllable, as the jaw drops.
   "marble-bust": [
     { voice: "scrape", f: 500, rate: 13, decay: 1.2 },
-    { voice: "murmur", at: 0.55, f: 110 },
+    { voice: "murmur", at: 0.62, notes: "A2 G2", step: 0.2, decay: 0.3 },
+    { voice: "murmur", at: 1.1, notes: "B2 A2 E2", step: 0.2, decay: 0.3 },
   ],
   // Four strums (down, down, up, down) on the ukulele's own tuning: C, F, G, C.
   ukulele: { voice: "nylon", notes: "G4+C4+E4+C5 - A4+C4+F4+A4 B4+D4+G4+B4 - G4+C4+E4+C5", step: 0.15, strum: 0.03, bright: 0.45, decay: 0.9 }, // prettier-ignore
@@ -127,8 +139,12 @@ export const TOY_SOUNDS = {
     { voice: "gloop", f: 140, decay: 1.2 },
     { voice: "gloop", at: 1.8, f: 110, decay: 0.9, vol: 0.7 },
   ],
-  donut: { voice: "patter", at: 0.4, f: 2600, n: 16, decay: 1.2 },
-  knot: { voice: "hum", f: 120, bright: 0.8, decay: 2 },
+  donut: [
+    { voice: "crack", f: 900, bright: 0.2, vol: 0.7 },
+    { voice: "patter", at: 0.3, f: 2600, n: 16, decay: 1.2 },
+    { voice: "thud", at: 1.9, f: 150, bright: 0.3, vol: 0.5 },
+  ],
+  knot: { voice: "hum", f: 120, to: 1.4, bright: 0.8, decay: 2.4 },
   planet: { voice: "wind", f: 700, rate: 0.5, decay: 2 },
 
   // ---- Balls ------------------------------------------------------------------------

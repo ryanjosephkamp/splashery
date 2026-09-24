@@ -211,7 +211,7 @@ test("a tap knows where it landed: a xylophone bar strikes that bar", async () =
 
 test("every rig fits the rig limits and names real parts, keys and effects", async () => {
   const { RIGS } = await import("../src/rigs.js");
-  const { fxTable, fxFrame, FX_SLOTS } = await import("../src/rig-fx.js");
+  const { fxTable, fxFrame, FX_SLOTS, FX_VEC4 } = await import("../src/rig-fx.js");
   const problems = [];
   for (const [id, rig] of Object.entries(RIGS)) {
     if (!TOYS.some((t) => t.id === id)) problems.push(`${id}: not on the shelf`);
@@ -237,7 +237,7 @@ test("every rig fits the rig limits and names real parts, keys and effects", asy
       if (!(rig.fx || []).some((f) => f.name === name)) problems.push(`${id}: drives unknown fx ${name}`); // prettier-ignore
     if (rig.fx) {
       const table = fxTable(rig, parts);
-      expect(table.length).toBe(FX_SLOTS * 36);
+      expect(table.length).toBe(FX_SLOTS * FX_VEC4 * 4);
       fxFrame(table, rig, out.fx, 0.5);
     }
   }

@@ -56,8 +56,107 @@ function chain(qh, ph, ql, pl) {
   const d = quatRotate(qh, [pl[0] - ph[0], pl[1] - ph[1], pl[2] - ph[2]]);
   return { quat: quatMul(qh, ql), offset: [ph[0] + d[0] - pl[0], ph[1] + d[1] - pl[1], ph[2] + d[2] - pl[2]] }; // prettier-ignore
 }
-const HORSE_BODY = [0.12, -0.62, 0];
-const HORSE_LEGS = [-0.42, 0.28, 0];
+// A fraction t of the rotation q (from no rotation).
+function partial(q, t) {
+  const w = clamp(q[3], -1, 1);
+  const a = 2 * Math.acos(w);
+  const sn = Math.sqrt(1 - w * w);
+  if (sn < 1e-6 || a === 0) return [0, 0, 0, 1];
+  return quatAxisAngle([q[0] / sn, q[1] / sn, q[2] / sn], a * t);
+}
+const sub = (a, b) => [a[0] - b[0], a[1] - b[1], a[2] - b[2]];
+
+// The cluster fly's front legs: hip, knee and foot of each, and the turns
+// that lift the thigh forward and fold the shin so the foot reaches the face.
+const conj = (q) => [-q[0], -q[1], -q[2], q[3]];
+const FLY = (() => {
+  const face = [1.0, 0.06, 0.02];
+  const leg = (hip, knee, foot, kneeTo) => {
+    const up = add(hip, mul(unit(sub(kneeTo, hip)), Math.hypot(...sub(knee, hip))));
+    return {
+      hip,
+      knee,
+      femur: quatFromTo(unit(sub(knee, hip)), unit(sub(up, hip))),
+      shin: quatFromTo(unit(sub(foot, knee)), unit(sub(face, up))),
+    };
+  };
+  return {
+    A: leg([0.56, -0.12, 0.4], [0.64, -0.4, 0.55], [0.76, -0.63, 0.9], [0.78, -0.02, 0.46]),
+    B: leg([0.66, -0.13, -0.24], [0.8, -0.42, -0.4], [0.92, -0.7, -0.78], [0.88, -0.03, -0.3]),
+  };
+})();
+
+// The tomatoes on their plate: name, x, z, radius (from a top view).
+const PLATE_Y = -0.17;
+const TOMATOES = [
+  ["t0", -0.23, -0.48, 0.3],
+  ["t1", 0.27, -0.46, 0.2],
+  ["t2", -0.58, -0.1, 0.21],
+  ["t3", -0.16, 0.05, 0.23],
+  ["t4", 0.11, -0.17, 0.14],
+  ["t5", 0.52, -0.06, 0.22],
+  ["t6", 0.2, 0.05, 0.11],
+  ["t7", -0.54, 0.28, 0.16],
+  ["t8", -0.25, 0.52, 0.2],
+  ["t9", 0.25, 0.45, 0.3],
+];
+
+// The biggest shells in the basket: name, x, z, radius (from a top view).
+const SHELLS = [
+  ["urchinA", -0.43, -0.51, 0.155],
+  ["urchinB", -0.72, 0.01, 0.17],
+  ["dollarA", -0.5, 0.02, 0.15],
+  ["starA", -0.01, -0.52, 0.26],
+  ["urchinC", 0.0, -0.04, 0.16],
+  ["scallop", 0.41, -0.04, 0.14],
+  ["starB", -0.02, 0.38, 0.26],
+  ["urchinD", -0.44, 0.6, 0.15],
+  ["urchinE", 0.34, 0.48, 0.13],
+  ["clam", -0.66, -0.32, 0.14],
+];
+
+// The wooden elephant's trunk: where it is pinned to the face.
+const TRUNK = { base: [-0.86, 0.52, 0.45] };
+
+// The marble bust: the neck pivot, the jaw hinge and when each syllable of
+// "SALVE, AMICE!" starts (matching its sound).
+const BUST = {
+  head: [-0.02, 0.05, 0.12],
+  jaw: [-0.16, 0.27, 0.16],
+  syllables: [0.62, 0.82, 1.1, 1.3, 1.5],
+};
+
+// The ukulele's strings: bridge, length up to the nut, where the pick
+// strums (over the sound hole's lower edge) and the strums (start, direction).
+const UKE = {
+  bridge: [0, -0.7, 0.072],
+  length: 1.27,
+  pickAt: [0, -0.46, 0.09],
+  strums: [
+    [0.0, 1],
+    [0.3, 1],
+    [0.45, -1],
+    [0.75, 1],
+  ],
+};
+
+// The cat statue: its neck (the head turns about it), the collar over the
+// cut, the bell, and the joint where the tail tip swishes.
+const CAT = {
+  neck: [0.07, 0.37, 0.44],
+  neckAxis: unit([0, 1, 0.2]),
+  collarAt: [0.07, 0.37, 0.44],
+  collarR: [0.275, 0.245],
+  bellAt: [0.07, 0.315, 0.7],
+  tailJoint: [0.46, -0.84, 0.12],
+};
+
+// The horse statue: where the hind hooves stand, and the foreleg knees.
+const HORSE = {
+  hooves: [-0.05, -0.72, 0],
+  kneeA: [-0.52, 0.42, -0.09],
+  kneeB: [-0.54, 0.31, 0.19],
+};
 
 // ---- Add-on builders ------------------------------------------------------------
 
@@ -261,47 +360,79 @@ export const RIGS = {
     },
   },
 
-  // The front legs rub together, then the wings flick.
+  // Grooming like a real fly: the front legs rub together, then reach up and
+  // wipe the face while the head dips, and it gives a little shake. The legs
+  // and head are cut with hard edges and move as solid pieces (found from
+  // the splat positions, since the legs splay far out to the sides).
   "cluster-fly": {
     parts: [
       {
-        name: "legA",
-        pivot: [0.45, -0.15, -0.1],
-        axis: [1, 0, 0],
-        regions: [{ at: [0.62, -0.42, -0.18], r: [0.3, 0.26, 0.2], soft: 0.45 }],
+        name: "femurA",
+        pivot: FLY.A.hip,
+        regions: [
+          { at: [0.6, -0.18, 0.46], r: 0.075 },
+          { at: [0.63, -0.32, 0.52], r: 0.07 },
+        ],
       },
       {
-        name: "legB",
-        pivot: [0.45, -0.15, 0.1],
-        axis: [1, 0, 0],
-        regions: [{ at: [0.62, -0.42, 0.18], r: [0.3, 0.26, 0.2], soft: 0.45 }],
+        name: "shinA",
+        pivot: FLY.A.knee,
+        regions: [
+          { at: [0.66, -0.48, 0.6], r: 0.085, over: true },
+          { at: [0.72, -0.58, 0.78], r: 0.11, over: true },
+          { at: [0.76, -0.63, 0.9], r: 0.09, over: true },
+        ],
       },
       {
-        name: "wingA",
-        pivot: [0.1, 0.25, -0.1],
-        axis: [1, 0, 0],
-        regions: [{ at: [-0.42, 0.4, -0.3], r: [0.52, 0.2, 0.28], soft: 0.3 }],
+        name: "femurB",
+        pivot: FLY.B.hip,
+        regions: [
+          { at: [0.71, -0.2, -0.3], r: 0.075 },
+          { at: [0.78, -0.34, -0.37], r: 0.07 },
+        ],
       },
       {
-        name: "wingB",
-        pivot: [0.1, 0.25, 0.1],
-        axis: [1, 0, 0],
-        regions: [{ at: [-0.42, 0.4, 0.3], r: [0.52, 0.2, 0.28], soft: 0.3 }],
+        name: "shinB",
+        pivot: FLY.B.knee,
+        regions: [
+          { at: [0.84, -0.48, -0.45], r: 0.085, over: true },
+          { at: [0.91, -0.6, -0.66], r: 0.12, over: true },
+          { at: [0.92, -0.7, -0.78], r: 0.08, over: true },
+        ],
+      },
+      {
+        name: "head",
+        pivot: [0.6, -0.02, 0],
+        axis: [0, 0, 1],
+        regions: [{ at: [0.8, 0.04, 0], r: [0.2, 0.26, 0.33] }],
       },
     ],
-    controls: [pulse("groom", "Groom", 2.4)],
+    controls: [pulse("groom", "Groom", 3)],
     action: { key: "groom", label: "Groom" },
-    drive(t, c, out, info) {
-      const e = since(c, "groom", 2.4);
+    drive(t, c, out) {
+      const e = since(c, "groom", 3);
       if (e < 0) return;
-      const rub = env(e, 0, 0.15, 1.1, 1.3);
-      const s = Math.sin(e * TAU * 6);
-      out.parts.legA = { angle: -0.4 * rub, offset: [0.04 * s * rub, 0.05 * s * rub, 0.08 * rub] };
-      out.parts.legB = { angle: 0.4 * rub, offset: [-0.04 * s * rub, -0.05 * s * rub, -0.08 * rub] }; // prettier-ignore
-      const flick = bump(e, 1.3, 1.55) + 0.6 * bump(e, 1.6, 1.8);
-      const blur = env(e, 1.3, 1.35, 1.9, 2.1) * Math.sin(info.time * TAU * 31) * 0.25;
-      out.parts.wingA = { angle: 0.55 * flick + blur };
-      out.parts.wingB = { angle: -0.55 * flick - blur };
+      // Reach: 0 = standing, 1 = foot on the face. The thigh lifts forward
+      // and the shin folds at the knee, like a real fly's leg.
+      const rub = env(e, 0.05, 0.3, 0.95, 1.15);
+      const wipe = env(e, 1.0, 1.25, 2.1, 2.35);
+      const scrub = Math.sin(e * TAU * 5);
+      const reach = [0.45 * rub + (0.8 + 0.15 * scrub) * wipe, 0.45 * rub + (0.8 - 0.15 * scrub) * wipe]; // prettier-ignore
+      // While rubbing, the feet cross towards each other and back.
+      const cross = 0.25 * rub * scrub;
+      ["A", "B"].forEach((k, i) => {
+        const L = FLY[k];
+        const qf = quatMul(
+          quatAxisAngle([1, 0, 0], i ? -cross : cross),
+          partial(L.femur, reach[i]),
+        );
+        const qs = partial(L.shin, reach[i]);
+        out.parts[`femur${k}`] = { quat: qf };
+        out.parts[`shin${k}`] = chain(qf, L.hip, quatMul(conj(qf), qs), L.knee);
+      });
+      out.parts.head = { angle: -0.14 * wipe * (0.7 + 0.3 * scrub) };
+      const shake = Math.sin(e * 40) * env(e, 2.35, 2.4, 2.6, 2.75);
+      out.body = { quat: quatAxisAngle([1, 0, 0], 0.03 * shake) };
     },
   },
 
@@ -421,79 +552,90 @@ export const RIGS = {
     },
   },
 
-  // The drupelets bounce one by one in a ripple from the top down.
+  // Drupelets break off one after another, tumble down to the table and
+  // hop back into place.
   raspberry: {
     parts: [],
     fx: [
       {
-        name: "ripple",
+        name: "drop",
         select: "all",
-        origin: [0, 0.02, 0],
-        move: { push: true },
-        pattern: { band: [0, -1, 0], width: 0.13 },
-        color: { brighten: true },
+        origin: [0, 0.05, 0],
+        move: { fall: [0, -1, 0], cell: 0.2, voronoi: true, pop: 0.35, spin: 2.5, share: 0.55 },
+        pattern: { ramp: 0.75 },
       },
     ],
-    controls: [pulse("ripple", "Ripple", 1.8)],
-    action: { key: "ripple", label: "Ripple" },
+    controls: [pulse("drop", "Drop", 3.2)],
+    action: { key: "drop", label: "Drop drupelets" },
     drive(t, c, out) {
-      const e = since(c, "ripple", 1.8);
+      const e = since(c, "drop", 3.2);
       if (e < 0) return;
-      const s = band(e, 0, 1.5);
-      out.fx.ripple = { move: 0.1 * (1 - 0.4 * s), color: 0.45, phase: -0.8 + 1.7 * s };
+      // Each piece falls over about 0.5 s of its own; they come back together.
+      const phase = e < 2.2 ? band(e, 0.02, 1.5) : 1 - ease(band(e, 2.2, 3.1));
+      out.fx.drop = { move: 1.6, phase };
     },
   },
 
-  // Light runs over the drupelets in a gleaming wave.
+  // The glossy drupelets burst off all round, bounce on the table, glint,
+  // and spring back.
   blackberry: {
     parts: [],
     fx: [
       {
-        name: "gleam",
+        name: "burst",
         select: "all",
         origin: [0, 0, 0],
-        pattern: { band: unit([1, 0.4, 0.5]), width: 0.18 },
-        color: { brighten: true },
+        move: { fall: [0, -1, 0], cell: 0.24, voronoi: true, pop: 0.55, spin: 3, share: 0.5 },
+        pattern: { ramp: 0.25 },
       },
       {
         name: "glint",
         select: "all",
         origin: [0, 0, 0],
-        pattern: { band: unit([1, 0.4, 0.5]), width: 0.3 },
-        color: { sparkle: 0.12 },
+        color: { sparkle: 0.15 },
       },
     ],
-    controls: [pulse("gleam", "Gleam", 1.8)],
-    action: { key: "gleam", label: "Gleam" },
+    controls: [pulse("burst", "Burst", 2.8)],
+    action: { key: "burst", label: "Burst" },
     drive(t, c, out) {
-      const e = since(c, "gleam", 1.8);
+      const e = since(c, "burst", 2.8);
       if (e < 0) return;
-      const phase = -1.1 + 2.3 * band(e, 0, 1.6);
-      out.fx.gleam = { color: 0.9, phase };
-      out.fx.glint = { color: 3, phase };
+      const phase = e < 1.7 ? band(e, 0.02, 0.9) : 1 - ease(band(e, 1.7, 2.6));
+      // A small bounce as the pieces land.
+      out.fx.burst = { move: 1.2 * (1 - 0.12 * Math.sin(Math.PI * band(e, 0.9, 1.3))), phase };
+      out.fx.glint = { color: 2.5 * env(e, 0.8, 1.0, 1.4, 1.8) };
     },
   },
 
-  // The dusty bloom wipes off in a swirl, showing deep blue, then returns.
+  // Like the grape: the dark skin peels back towards you in five strips to
+  // show the pale green flesh, then closes.
   blueberry: {
     parts: [],
     fx: [
       {
-        name: "bloom",
+        name: "flesh",
         select: "all",
         origin: [0, 0, 0],
-        pattern: { swirl: [0, 1, 0], width: 0.12, twist: 0.6 },
-        color: { recolor: "#1a1f4a", keep: 0.25 },
+        mask: { half: VIEW, at: -0.15 },
+        color: { recolor: "#cfd8ac", keep: 0.6 },
+      },
+      {
+        name: "peel",
+        select: "all",
+        origin: [0, 0, 0],
+        mask: { stripes: VIEW, n: 5 },
+        move: { peel: VIEW, hinge: -0.1 },
+        color: { recolor: "#2a3160", keep: 0.8 },
       },
     ],
-    controls: [pulse("polish", "Polish", 3.2)],
-    action: { key: "polish", label: "Polish" },
+    controls: [pulse("peel", "Peel", 3.2)],
+    action: { key: "peel", label: "Peel" },
     drive(t, c, out) {
-      const e = since(c, "polish", 3.2);
+      const e = since(c, "peel", 3.2);
       if (e < 0) return;
-      const phase = 1.2 * ease(band(e, 0.05, 1.1)) * (1 - ease(band(e, 2.0, 3.1)));
-      out.fx.bloom = { color: 0.8, phase };
-      out.body = { quat: quatAxisAngle([0, 1, 0], 0.5 * ease(band(e, 0, 1.1)) * (1 - ease(band(e, 2, 3.1)))) }; // prettier-ignore
+      const open = env(e, 0.05, 0.9, 2.2, 3.0);
+      out.fx.flesh = { color: 0.8 * open };
+      out.fx.peel = { move: 1.35 * open, color: 0.9 * open };
     },
   },
 
@@ -552,43 +694,39 @@ export const RIGS = {
     },
   },
 
-  // The tomatoes roll and jostle each other, then settle.
+  // Each tomato is its own solid piece (hard regions split by the nearest
+  // centre, the white plate left out): they hop in turn, roll a little and
+  // bump against each other, then settle.
   tomatoes: {
-    parts: [
-      ["t0", [-0.27, 0.1, -0.55], 0.27],
-      ["t1", [0.16, 0.04, -0.56], 0.21],
-      ["t2", [-0.55, 0.0, -0.2], 0.18],
-      ["t3", [-0.1, 0.05, -0.06], 0.22],
-      ["t4", [0.13, -0.02, -0.22], 0.13],
-      ["t5", [0.4, 0.04, -0.1], 0.21],
-      ["t6", [-0.52, -0.02, 0.26], 0.15],
-      ["t7", [-0.2, 0.04, 0.45], 0.21],
-      ["t8", [0.3, 0.1, 0.45], 0.28],
-      ["t9", [0.2, -0.07, 0.06], 0.09],
-    ].map(([name, at, r]) => ({
+    parts: TOMATOES.map(([name, x, z, r]) => ({
       name,
-      pivot: [at[0], at[1] - r * 0.8, at[2]],
-      axis: [0, 0, 1],
-      regions: [{ at, r: [r * 1.02, r * 1.1, r * 1.02], soft: 0.25 }],
+      pivot: [x, PLATE_Y + r, z],
+      regions: [{ at: [x, PLATE_Y + r, z], r: [r * 1.15, r * 1.35, r * 1.15], notColor: "#eeeeea", tol: 0.2 }], // prettier-ignore
     })),
     controls: [pulse("roll", "Roll", 2.6)],
     action: { key: "roll", label: "Roll" },
     drive(t, c, out, info) {
       const e = since(c, "roll", 2.6);
       if (e < 0) return;
-      const push = 0.6 + 0.8 * vary(info.tap);
-      for (let i = 0; i < 10; i++) {
-        const d = i * 0.06;
-        const s = env(e, 0.05 + d, 0.6 + d, 1.3 + d, 2.1 + d * 0.4);
-        const a = (i * 2.4 + push * 3) % TAU;
+      const spin = vary(info.tap) > 0.5 ? 1 : -1;
+      TOMATOES.forEach(([name, x, z, r], i) => {
+        // Small tomatoes hop higher and later; big ones rock.
+        const d = 0.08 * ((i * 7) % 10);
+        const hop = Math.max(0, Math.sin(Math.PI * band(e, 0.1 + d, 0.45 + d + r)));
+        const settle = spring(e - (0.45 + d + r), 6, 20) * band(e, 0.45 + d + r, 0.5 + d + r);
+        const h = (0.34 - 0.5 * r) * hop;
+        // Roll round the plate a little, like being shaken.
+        const a = Math.atan2(z, x) + Math.PI / 2;
+        const slide = 0.09 * Math.sin(Math.PI * band(e, 0.1 + d, 1.4 + d)) * spin;
         const dir = [Math.cos(a), 0, Math.sin(a)];
-        const dist = 0.12 * s * (1 + (i % 3) * 0.3);
-        const roll = dist / 0.2;
-        out.parts[`t${i}`] = {
-          offset: [dir[0] * dist, 0.05 * bump(e, 0.3 + d, 0.6 + d), dir[2] * dist],
-          quat: quatAxisAngle(unit([dir[2], 0, -dir[0]]), -roll),
+        out.parts[name] = {
+          offset: [dir[0] * slide, Math.max(0, h) + 0.01 * settle, dir[2] * slide],
+          quat: quatMul(
+            quatAxisAngle([dir[2], 0, -dir[0]], (-slide / r) * 1.2),
+            quatAxisAngle([1, 0, 0], 0.25 * hop * ((i % 2) * 2 - 1)),
+          ),
         };
-      }
+      });
     },
   },
 
@@ -614,26 +752,48 @@ export const RIGS = {
     },
   },
 
-  // The shells hop inside the basket one after another.
+  // The basket gives a shake and the biggest shells (urchins, sand dollars,
+  // starfish, a scallop) bounce up one after another, spinning, and drop
+  // back into place. The blurry fringe the capture left under the basket
+  // is hidden.
   basket: {
-    parts: [],
-    keys: [{ color: "#e2dccd", tol: 0.4, at: [0, -0.3, 0], r: 0.86 }],
-    fx: [
+    parts: [
       {
-        name: "hop",
-        select: "key0",
-        origin: [0, 0, 0],
-        mask: { half: [0, 1, 0], at: -0.08 },
-        move: { hop: [0, 1, 0], cell: 0.14 },
-        pattern: { stagger: 0.85, cell: 0.14 },
+        name: "fringe",
+        pivot: [0, -0.5, 0],
+        regions: [{ at: [0, -0.54, 0], r: [1.5, 0.46, 1.5] }],
       },
+      ...SHELLS.map(([name, x, z, r]) => ({
+        name,
+        pivot: [x, 0.07, z],
+        regions: [{ at: [x, 0.07, z], r: [r, 0.1, r] }],
+      })),
     ],
-    controls: [pulse("hop", "Hop", 2)],
-    action: { key: "hop", label: "Hop shells" },
+    controls: [pulse("shake", "Shake", 2.6)],
+    action: { key: "shake", label: "Shake" },
     drive(t, c, out) {
-      const e = since(c, "hop", 2);
+      out.parts.fringe = { visible: 0 };
+      const e = since(c, "shake", 2.6);
       if (e < 0) return;
-      out.fx.hop = { move: 0.26, phase: band(e, 0, 1.9) };
+      const shake = Math.sin(e * 26) * Math.exp(-e * 4) * band(e, 0, 0.05);
+      out.body = {
+        offset: [0.04 * shake, 0, 0],
+        quat: quatAxisAngle([0, 1, 0], 0.05 * shake),
+      };
+      SHELLS.forEach(([name, x, z], i) => {
+        // A wave round the basket: each shell hops in turn.
+        const d = 0.15 + 0.12 * ((Math.atan2(z, x) / TAU + 0.5) * SHELLS.length);
+        const hop = band(e, d, d + 0.55);
+        const up = hop > 0 && hop < 1 ? Math.sin(Math.PI * hop) : 0;
+        const land = spring(e - d - 0.55, 8, 26) * band(e, d + 0.55, d + 0.6);
+        out.parts[name] = {
+          offset: [0, 0.2 * up + 0.012 * land, 0],
+          quat: quatMul(
+            quatAxisAngle([0, 1, 0], (i % 2 ? 1 : -1) * 1.2 * ease(hop)),
+            quatAxisAngle([1, 0, 0], 0.3 * up * (i % 3 ? 1 : -1)),
+          ),
+        };
+      });
     },
   },
 
@@ -668,16 +828,20 @@ export const RIGS = {
     },
   },
 
-  // The trunk lifts and it rocks on its wooden feet.
+  // The trunk is one solid carved piece pinned where it meets the face (a
+  // hard cut, like a wooden toy's jointed trunk): it swings up and forward to
+  // trumpet with a few toots, and the elephant rocks on its feet.
   "wooden-elephant": {
     parts: [
       {
         name: "trunk",
-        pivot: [-0.62, 0.55, 0.42],
+        pivot: TRUNK.base,
         axis: [0, 0, 1],
         regions: [
-          { at: [-0.8, 0.7, 0.46], r: [0.2, 0.2, 0.2], soft: 0.4 },
-          { at: [-0.88, 0.48, 0.47], r: [0.12, 0.2, 0.16], soft: 0.4 },
+          { at: [-0.88, 0.68, 0.43], r: [0.13, 0.17, 0.14] },
+          { at: [-0.86, 0.83, 0.4], r: [0.11, 0.08, 0.13] },
+          { at: [-0.72, 0.85, 0.33], r: [0.1, 0.07, 0.12] },
+          { at: [-0.61, 0.84, 0.19], r: [0.07, 0.07, 0.1] },
         ],
       },
     ],
@@ -687,7 +851,8 @@ export const RIGS = {
       const e = since(c, "trumpet", 2.6);
       if (e < 0) return;
       const up = env(e, 0.05, 0.4, 1.4, 2.0);
-      out.parts.trunk = { angle: -0.8 * up };
+      const toot = 0.06 * Math.sin(e * 28) * env(e, 0.35, 0.45, 1.1, 1.3);
+      out.parts.trunk = { angle: 0.38 * up + toot };
       // Rocks forward and back on its feet (about the front and back feet in turn).
       const rock = 0.13 * Math.sin(e * 7) * Math.exp(-e * 1.3) * band(e, 0, 0.1);
       const pivot = rock > 0 ? [-0.6, -0.85, 0] : [0.6, -0.85, 0];
@@ -701,13 +866,19 @@ export const RIGS = {
   "marble-bust": {
     parts: [
       {
+        // Cut straight across the neck (hard edge): the head turns on it
+        // like a real neck, so nothing bends.
         name: "head",
-        pivot: [0, 0.1, 0.05],
+        pivot: BUST.head,
         axis: [0, 1, 0],
-        regions: [
-          { at: [-0.1, 0.46, 0.14], r: [0.5, 0.56, 0.55], soft: 0.2 },
-          { at: [-0.02, 0.62, -0.18], r: [0.42, 0.42, 0.36], soft: 0.25 },
-        ],
+        regions: [{ at: [-0.08, 0.6, 0.12], r: [0.75, 0.62, 0.8] }],
+      },
+      {
+        // The lower lip and chin, hinged below the ear.
+        name: "jaw",
+        pivot: BUST.jaw,
+        axis: [1, 0, 0],
+        regions: [{ at: [-0.16, 0.15, 0.44], r: [0.1, 0.07, 0.09], over: true }],
       },
     ],
     addon: {
@@ -715,6 +886,18 @@ export const RIGS = {
       build(k) {
         const at = [0.8, 0.86, 0.42];
         const part = k.part("bubble", { pivot: [0.42, 0.52, 0.38] });
+        // The dark inside of the mouth, behind the lips (seen when the jaw drops).
+        const mouth = k.part("mouth", { pivot: BUST.head });
+        k.cloud({ share: 0.08, part: mouth, pattern: false }, (rand) => {
+          const d = [rand() * 2 - 1, rand() * 2 - 1, rand() * 2 - 1];
+          if (d[0] * d[0] + d[1] * d[1] + d[2] * d[2] > 1) return null;
+          return {
+            p: [-0.16 + d[0] * 0.085, 0.205 + d[1] * 0.035, 0.425 + d[2] * 0.04],
+            color: mix("#2a1d18", "#4a2c26", rand()),
+            size: 1.2,
+            opacity: 1,
+          };
+        });
         const lines = ["SALVE,", "AMICE!"];
         const W = 0.5;
         const H = 0.3;
@@ -752,44 +935,75 @@ export const RIGS = {
     drive(t, c, out) {
       const e = since(c, "speak", 3.4);
       const say = env(e, 0.55, 0.8, 2.7, 3.0);
-      out.addon = { parts: { bubble: { scale: say } } };
-      if (e < 0) return;
-      const turn = env(e, 0, 0.55, 2.6, 3.3);
-      out.parts.head = {
-        quat: quatMul(quatAxisAngle([0, 1, 0], 0.45 * turn), quatAxisAngle([1, 0, 0], 0.05 * turn)),
+      const turn = e < 0 ? 0 : env(e, 0, 0.55, 2.6, 3.3);
+      const qh = quatMul(quatAxisAngle([0, 1, 0], 0.4 * turn), quatAxisAngle([1, 0, 0], 0.04 * turn)); // prettier-ignore
+      // SAL-VE, A-MI-CE: the jaw drops once per syllable, with the murmur.
+      let open = 0;
+      for (const s of BUST.syllables)
+        open = Math.max(open, Math.sin(Math.PI * band(e, s, s + 0.17)));
+      out.addon = {
+        parts: { bubble: { scale: say }, mouth: { quat: qh, visible: e < 0 ? 0 : 1 } },
       };
+      if (e < 0) return;
+      out.parts.head = { quat: qh };
+      out.parts.jaw = chain(qh, BUST.head, quatAxisAngle([1, 0, 0], 0.13 * open), BUST.jaw);
     },
   },
 
-  // The strings shimmer as it plays a short strum pattern.
+  // Played like a real ukulele: a pick sweeps across the four strings on each
+  // strum (down, down, up, down, like the sound) and the strings shake in a
+  // standing wave between the nut and the bridge, then ring down.
   ukulele: {
     parts: [],
-    keys: [{ color: "#808080", tol: 2, at: [0, 0.06, 0.13], r: 0.76 }],
+    keys: [{ color: "#b9b8b2", tol: 0.2, at: [0, -0.07, 0.09], r: 0.72 }],
     fx: [
       {
         name: "strings",
         select: "key0",
-        origin: [0, 0, 0],
-        mask: { half: [0, 0, 1], at: 0.108 },
-        move: { along: [1, 0, 0] },
-        pattern: { wave: [0, 1, 0], k: 26 },
-        color: { glow: "#fff1c8" },
+        origin: UKE.bridge,
+        mask: { half: [0, 0, 1], at: 0.0 },
+        move: { vibrate: [1, 0, 0], freq: 70, along: [0, 1, 0], length: UKE.length },
+        color: { glow: "#fff4d6" },
       },
     ],
-    controls: [pulse("strum", "Strum", 2)],
+    addon: {
+      count: 2500,
+      build(k) {
+        // A tortoiseshell pick: a rounded triangle, held flat over the strings.
+        const part = k.part("pick", { pivot: UKE.pickAt });
+        k.cloud({ share: 1, part, pattern: false }, (rand) => {
+          const u = rand();
+          const v = rand() * (1 - u);
+          const x = (u - v) * 0.05;
+          const y = 0.045 - (u + v) * 0.075;
+          if (Math.hypot(x, y - 0.012) > 0.05) return null;
+          return {
+            p: add(UKE.pickAt, [x, y, 0.035]),
+            n: [0, 0, 1],
+            color: mix("#7a3a14", "#d08a3c", 0.5 + 0.5 * Math.sin(x * 90 + y * 60)),
+            size: 0.7,
+            opacity: 0.98,
+          };
+        });
+      },
+    },
+    controls: [pulse("strum", "Strum", 2.2)],
     action: { key: "strum", label: "Strum" },
     drive(t, c, out, info) {
-      const e = since(c, "strum", 2);
-      if (e < 0) return;
-      // Four strums (down, down, up, down) like the sound.
+      const e = since(c, "strum", 2.2);
+      // The pick rests beside the strings, then sweeps across them.
+      let x = 0.12;
       let a = 0;
-      for (const s of [0, 0.3, 0.45, 0.75]) if (e >= s) a = Math.max(a, Math.exp(-(e - s) * 3));
-      out.fx.strings = { move: 0.032 * a, color: 0.7 * a, phase: info.time * 70 };
-      // The body rocks a little with each strum.
-      out.body = {
-        quat: quatAxisAngle([0, 0, 1], 0.07 * a * Math.sin(e * 9)),
-        squash: 0.03 * a * a,
-      };
+      UKE.strums.forEach(([s, dir]) => {
+        const f = band(e, s - 0.05, s + 0.04);
+        if (e >= s - 0.05) x = dir > 0 ? -0.12 + 0.24 * f : 0.12 - 0.24 * f;
+        if (e >= s) a = Math.max(a, Math.exp(-(e - s) * 2.8));
+      });
+      const shown = env(e, -0.2, 0.0, 1.3, 1.6);
+      out.addon = { parts: { pick: { offset: [x, 0, 0], visible: shown } } };
+      if (e < 0) return;
+      out.fx.strings = { move: 0.016 * a, color: 0.5 * a };
+      out.body = { quat: quatAxisAngle([0, 0, 1], 0.02 * a * Math.sin(e * 9)) };
     },
   },
 
@@ -1167,36 +1381,71 @@ export const RIGS = {
     },
   },
 
-  // The cat statue: the head turns to one side and back, and the tail
-  // (curled on the ground round its right side) flicks its tip up once.
+  // The head turns on its neck (a hard cut, hidden under a red collar with a
+  // bell, so nothing bends), looks at you, and the tip of the tail swishes
+  // along the ground.
   "cat-statue": {
     parts: [
       {
         name: "head",
-        pivot: [0.05, 0.35, 0.4],
+        pivot: CAT.neck,
         axis: [0, 1, 0],
-        regions: [{ at: [0.06, 0.74, 0.5], r: [0.48, 0.5, 0.4], soft: 0.3 }],
+        regions: [{ at: [0.08, 0.81, 0.52], r: [0.52, 0.47, 0.52] }],
       },
       {
         name: "tail",
-        pivot: [0.46, -0.84, -0.35],
-        axis: [1, 0, 0],
-        regions: [
-          { at: [0.34, -0.84, -0.55], r: [0.22, 0.11, 0.22], soft: 0.6 },
-          { at: [0.48, -0.84, -0.1], r: [0.14, 0.11, 0.32], soft: 0.4 },
-          { at: [0.42, -0.84, 0.32], r: [0.16, 0.11, 0.3], soft: 0.4 },
-        ],
+        pivot: CAT.tailJoint,
+        axis: [0, 1, 0],
+        regions: [{ at: [0.42, -0.84, 0.36], r: [0.16, 0.12, 0.24] }],
       },
     ],
-    controls: [{ key: "look", label: "Look", type: "pulse", ease: 2.4 }],
+    addon: {
+      count: 5000,
+      build(k) {
+        // The collar sits on the cut, tilted like the neck.
+        const collar = k.part("collar", { pivot: CAT.neck });
+        const q = [0, 0, 0, 1];
+        k.cloud({ share: 0.8, part: collar, pattern: false }, (rand) => {
+          const a = rand() * TAU;
+          const band = (rand() - 0.5) * 0.045;
+          const ring = [Math.cos(a) * CAT.collarR[0], band, Math.sin(a) * CAT.collarR[1]];
+          const n = unit([Math.cos(a), 0, Math.sin(a)]);
+          return {
+            p: add(CAT.collarAt, quatRotate(q, ring)),
+            n: quatRotate(q, n),
+            color: Math.abs(band) > 0.018 ? "#6e1414" : mix("#b0201e", "#d33a2c", rand() * 0.5),
+            size: 0.8,
+            opacity: 1,
+          };
+        });
+        // A little brass bell at the front.
+        k.cloud({ share: 0.2, part: collar, pattern: false }, (rand) => {
+          const d = unit([rand() - 0.5, rand() - 0.5, rand() - 0.5]);
+          const shade = 0.55 + 0.45 * Math.max(0, d[1] * 0.6 + d[2] * 0.5);
+          return {
+            p: add(CAT.bellAt, mul(d, 0.042)),
+            n: d,
+            color: mix("#6b4a12", "#f3cf5a", shade),
+            size: 0.7,
+            opacity: 1,
+          };
+        });
+      },
+    },
+    controls: [pulse("look", "Look", 2.6)],
     action: { key: "look", label: "Look around" },
     drive(t, c, out) {
-      const e = (1 - c.look) * 2.4;
-      const on = c.look > 0;
-      const turn = on ? Math.sin(Math.PI * band(e, 0, 0.7)) * (1 - band(e, 1.4, 2.2)) : 0;
-      const back = on ? Math.sin(Math.PI * band(e, 0.7, 1.4)) : 0;
-      out.parts.head = { angle: 0.55 * turn - 0.35 * back };
-      out.parts.tail = { angle: on ? -0.45 * Math.sin(Math.PI * band(e, 0.2, 1.0)) : 0 };
+      const e = since(c, "look", 2.6);
+      const turn = e < 0 ? 0 : env(e, 0.05, 0.6, 1.7, 2.4);
+      const nod = e < 0 ? 0 : 0.08 * Math.sin(Math.PI * band(e, 0.6, 1.2));
+      const qh = quatMul(quatAxisAngle(CAT.neckAxis, 0.42 * turn), quatAxisAngle([1, 0, 0], nod));
+      // The collar turns with the head; the bell swings a little.
+      out.addon = { parts: { collar: { quat: qh } } };
+      if (e < 0) return;
+      out.parts.head = { quat: qh };
+      const swish =
+        Math.sin(Math.PI * band(e, 0.4, 0.9)) - 0.7 * Math.sin(Math.PI * band(e, 0.9, 1.5));
+      out.parts.tail = { angle: 0.4 * swish };
     },
   },
 
@@ -1237,20 +1486,36 @@ export const RIGS = {
     },
   },
 
-  // Rears up on its hind legs, pawing the air, then settles.
+  // The whole horse (everything above the base, one solid piece) rears
+  // higher about its hind hooves, the way a horse rears from its hind legs,
+  // while the lower forelegs paw the air from the knees (hard cuts).
   "horse-statue": {
     parts: [
       {
         name: "horse",
-        pivot: HORSE_BODY,
+        pivot: HORSE.hooves,
         axis: [0, 0, 1],
-        regions: [{ at: [0, 0.14, 0], r: [0.95, 0.86, 0.6], soft: 0.25 }],
+        regions: [{ at: [0, 0.45, 0], r: [3, 1.18, 3] }],
       },
       {
-        name: "legs",
-        pivot: HORSE_LEGS,
+        name: "shinA",
+        pivot: HORSE.kneeA,
         axis: [0, 0, 1],
-        regions: [{ at: [-0.6, 0.16, 0.02], r: [0.26, 0.24, 0.24], soft: 0.4 }],
+        regions: [
+          { at: [-0.62, 0.32, -0.09], r: 0.09, over: true },
+          { at: [-0.72, 0.22, -0.09], r: 0.08, over: true },
+          { at: [-0.79, 0.18, -0.09], r: 0.065, over: true },
+        ],
+      },
+      {
+        name: "shinB",
+        pivot: HORSE.kneeB,
+        axis: [0, 0, 1],
+        regions: [
+          { at: [-0.56, 0.2, 0.19], r: 0.09, over: true },
+          { at: [-0.6, 0.04, 0.19], r: 0.08, over: true },
+          { at: [-0.62, -0.03, 0.19], r: 0.065, over: true },
+        ],
       },
     ],
     controls: [pulse("rear", "Rear", 2.6)],
@@ -1258,12 +1523,14 @@ export const RIGS = {
     drive(t, c, out) {
       const e = since(c, "rear", 2.6);
       if (e < 0) return;
-      const up = env(e, 0.05, 0.6, 1.4, 2.3);
-      const qh = quatAxisAngle([0, 0, 1], -0.3 * up);
+      const up = env(e, 0.05, 0.55, 1.5, 2.3);
+      const qh = quatAxisAngle([0, 0, 1], -0.13 * up);
       out.parts.horse = { quat: qh };
-      // The front legs paw the air while riding on the rearing body.
-      const ql = quatAxisAngle([0, 0, 1], -0.35 * up * (0.6 + 0.4 * Math.sin(e * 11)));
-      out.parts.legs = chain(qh, HORSE_BODY, ql, HORSE_LEGS);
+      // The forelegs paw in turn, riding on the rearing body.
+      const pawA = 0.35 * up * Math.sin(e * 9);
+      const pawB = 0.35 * up * Math.sin(e * 9 + 2);
+      out.parts.shinA = chain(qh, HORSE.hooves, quatAxisAngle([0, 0, 1], pawA), HORSE.kneeA);
+      out.parts.shinB = chain(qh, HORSE.hooves, quatAxisAngle([0, 0, 1], pawB), HORSE.kneeB);
     },
   },
 
@@ -1291,39 +1558,41 @@ export const RIGS = {
     },
   },
 
-  // The sprinkles jump off and rain back down.
+  // The donut snaps into chunks (the dough shows inside) that fly apart and
+  // tumble, the sprinkles spray off, then it all flies back together.
   donut: {
     parts: [],
     keys: [{ long: 0.42 }],
     fx: [
       {
-        name: "jump",
+        name: "chunks",
+        select: "all",
+        origin: [0, 0, 0],
+        move: { fall: [0, -1, 0], cell: 0.34, voronoi: true, pop: 0.75, spin: 1.6 },
+        pattern: { ramp: 0.3 },
+      },
+      {
+        name: "spray",
         select: "key0",
         origin: [0, 0, 0],
         move: { hop: [0, 1, 0] },
-        pattern: { stagger: 0.55 },
-      },
-      {
-        name: "spread",
-        select: "key0",
-        origin: [0, 0, 0],
-        move: { push: true },
-        pattern: { stagger: 0.55 },
+        pattern: { stagger: 0.6 },
       },
     ],
-    controls: [pulse("sprinkle", "Sprinkle", 1.8)],
-    action: { key: "sprinkle", label: "Toss sprinkles" },
+    controls: [pulse("snap", "Snap", 2.8)],
+    action: { key: "snap", label: "Break apart" },
     drive(t, c, out) {
-      const e = since(c, "sprinkle", 1.8);
+      const e = since(c, "snap", 2.8);
       if (e < 0) return;
-      const phase = band(e, 0.02, 1.6);
-      out.fx.jump = { move: 0.55, phase };
-      out.fx.spread = { move: 0.1, phase };
-      out.body = { squash: 0.05 * bump(e, 0, 0.1) };
+      const phase = e < 1.6 ? band(e, 0.02, 0.8) : 1 - ease(band(e, 1.6, 2.5));
+      out.fx.chunks = { move: 0.7, phase };
+      out.fx.spray = { move: 0.45, phase: band(e, 0.02, 1.4) };
+      out.body = { squash: 0.06 * bump(e, 0, 0.1) };
     },
   },
 
-  // The neon flows along the knot in a new colour and it ties tighter, then relaxes.
+  // The knot contorts: waves of swelling loops run round it, lifting and
+  // twisting the tube, then it settles back into its trefoil.
   knot: {
     parts: [
       {
@@ -1335,11 +1604,16 @@ export const RIGS = {
     ],
     fx: [
       {
-        name: "flow",
+        name: "writhe",
         select: "all",
         origin: [0, 0, 0],
-        pattern: { swirl: [0, 0, 1], width: 0.1, twist: 0 },
-        color: { recolor: "#ff3df2", keep: 0.4 },
+        move: { writhe: [0, 0, 1], k: 3, lift: 0.9 },
+      },
+      {
+        name: "ripple",
+        select: "all",
+        origin: [0, 0, 0],
+        move: { writhe: [0, 0, 1], k: 5, lift: -0.6 },
       },
       {
         name: "glow",
@@ -1347,16 +1621,16 @@ export const RIGS = {
         color: { glow: "#ff9df8" },
       },
     ],
-    controls: [pulse("tie", "Tie", 2.8)],
-    action: { key: "tie", label: "Tie tighter" },
+    controls: [pulse("writhe", "Writhe", 3)],
+    action: { key: "writhe", label: "Contort" },
     drive(t, c, out) {
-      const e = since(c, "tie", 2.8);
+      const e = since(c, "writhe", 3);
       if (e < 0) return;
-      const tight = env(e, 0.1, 0.7, 1.4, 2.4);
-      out.parts.knot = { scale: 1 - 0.16 * tight, angle: 0.5 * tight };
-      const phase = 1.12 * ease(band(e, 0, 1.2)) * (1 - ease(band(e, 1.7, 2.7)));
-      out.fx.flow = { color: 0.9, phase };
-      out.fx.glow = { color: 0.25 * tight };
+      const on = env(e, 0.05, 0.5, 2.2, 2.9);
+      out.fx.writhe = { move: 0.16 * on, phase: e * 7 };
+      out.fx.ripple = { move: 0.05 * on, phase: -e * 11 };
+      out.fx.glow = { color: 0.2 * on };
+      out.parts.knot = { scale: 1 - 0.1 * on * (0.5 + 0.5 * Math.sin(e * 5)), angle: 0.25 * on * Math.sin(e * 3) }; // prettier-ignore
     },
   },
 

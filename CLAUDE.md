@@ -22,6 +22,26 @@ phase.
   commit it, or put it in logs, PRs or files. To check it, test that it is set
   (`[ -n "$HF_TOKEN" ]`), or call the whoami API and print only the account name and token role.
 
+## Effect quality rules
+
+The owner's reviews set these (details and examples in docs/PACKS.md, "Effect quality"). Check every
+new or changed effect against them before calling it done.
+
+- Real motion, not a warped picture. Parts move as solid pieces. Never bend a scan with soft regions
+  for a visible effect. If a scan cannot move a part cleanly, cut the part out with hard edges, swap
+  in a kit-built part, rebuild the toy as a kit toy, or choose a different effect.
+- Separate things move separately (each tomato, each drupelet, each chess piece).
+- Break-apart effects break into real pieces that fall off and come back.
+- Instruments are played: the strings, keys or skins visibly move with each note.
+- Things that talk move their mouths. Animals and statues move like the real thing.
+- Games follow real rules. Balls and discs move like the real thing when thrown or hit.
+- Materials look like the real material: no see-through solids, no blur, no speckle.
+- The grape (a peel that shows the pale flesh) is the bar: a clear, physical effect you read at a
+  glance.
+- Judge effects as motion at phone size, not only as small stills: render a clip of each changed
+  effect (`tools/effect-clip.mjs`) and publish them on the private "Effect review" page for the
+  owner before asking for a merge.
+
 ## Before every push
 
 - `SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium npx playwright test`. Never run
