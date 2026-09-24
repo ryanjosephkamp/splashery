@@ -174,12 +174,26 @@ export const RECIPES = {
         ],
       },
     ],
-    controls: [{ key: "pulse", label: "Swim", type: "pulse", ease: 1.6 }],
+    controls: [{ key: "pulse", label: "Swim", type: "pulse", ease: 3.2 }],
     action: { key: "pulse", label: "Swim", sound: "whoosh" },
     drive(t, c, out) {
-      out.amount = 1 + 1.4 * c.pulse;
+      // One strong stroke: the bell squeezes tall and narrow and jets the
+      // jelly upwards, the tentacles stream behind it, glowing, and it
+      // drifts back down.
+      const e = (1 - c.pulse) * 3.2;
+      const on = c.pulse > 0;
+      const env = on ? band(e, 0, 0.1) * (1 - band(e, 1.6, 3.2)) : 0;
+      const squeeze = on ? Math.sin(Math.PI * band(e, 0, 0.5)) : 0;
+      const relax = on ? Math.sin(Math.PI * band(e, 0.5, 1.2)) : 0;
+      const rise = on ? easeInOut(band(e, 0.05, 0.9)) * (1 - easeInOut(band(e, 1.2, 3.2))) : 0;
+      const trail = on ? easeInOut(band(e, 0.05, 0.4)) * (1 - easeInOut(band(e, 0.9, 2.6))) : 0;
+      out.body = { offset: [0, 0.3 * rise, 0], squash: -0.2 * squeeze + 0.07 * relax };
+      out.amount = 1 + 1.6 * env;
       for (let i = 0; i < 6; i++)
-        out.parts[`t${i}`] = { angle: (0.1 + 0.12 * c.pulse) * Math.sin(t * 1.3 + i * 1.7) };
+        out.parts[`t${i}`] = {
+          angle: 0.1 * (1 - trail) * Math.sin(t * 1.3 + i * 1.7) + 0.32 * trail,
+          visible: 1 + 0.9 * env,
+        };
       out.parts.armsA = { angle: 0.07 * Math.sin(t * 1.1) };
       out.parts.armsB = { angle: 0.07 * Math.sin(t * 1.1 + 2) };
     },
@@ -311,8 +325,8 @@ export const RECIPES = {
             k.tube(spline(pts), (t) => 0.016 * (1 - 0.6 * t), { grid: 24, samples: 64 }),
             {
               part,
-              kind: "breathe",
-              params: [0.03, 0],
+              kind: "twinkle",
+              params: [0.12, ph],
               flat: 0.3,
               weight: 2.2,
               opacity: 0.85,
@@ -647,23 +661,39 @@ export const RECIPES = {
   pufferfish: {
     alive: true,
     controls: [
-      { key: "puff", label: "Puff", type: "slider", default: 0.85 },
-      { key: "poke", label: "Poke", type: "pulse", ease: 4 },
+      { key: "puff", label: "Puff", type: "slider", default: 0.1 },
+      { key: "poke", label: "Poke", type: "pulse", ease: 4.5 },
     ],
     action: { key: "poke", label: "Poke", sound: "pop" },
     drive(t, c, out) {
+      // Poked, it gulps water and swells into a round, spiky ball with a
+      // wobble, holds it, then lets it out with a sputter and slims down.
       const p = c.poke;
-      const scare = Math.min(1, (1 - p) / 0.08) * Math.min(1, p / 0.4);
-      const e = Math.max(c.puff, p > 0 ? scare : 0);
+      const s = (1 - p) * 4.5;
+      const up = band(s, 0, 0.45);
+      const down = easeInOut(band(s, 2.8, 4.3));
+      const scare = p > 0 ? (1 - (1 - up) ** 3) * (1 - down) : 0;
+      const e = Math.max(c.puff, scare);
       const offs = PUFF.dirs.map((d, i) => vec.mul(d, -PUFF.shift[i] * (1 - e)));
       offs.forEach((o, i) => (out.parts[`p${i}`] = { offset: o }));
-      const flap = 0.45 * Math.sin(t * 7);
+      const flap = (0.45 + 0.4 * (p > 0 ? 1 : 0)) * Math.sin(t * 7);
       out.parts.finL = { offset: offs[PUFF.finPatch[0]], angle: flap };
       out.parts.finR = { offset: offs[PUFF.finPatch[1]], angle: -flap };
       out.parts.tail = { angle: 0.35 * Math.sin(t * 4) };
       out.grow = e;
-      // A startled jiggle when poked.
-      if (p > 0) out.body = { squash: 0.1 * Math.sin((1 - p) * 40) * p * p };
+      if (p > 0) {
+        const wobble =
+          0.12 * Math.sin((s - 0.3) * 22) * Math.exp(-3 * Math.max(0, s - 0.3)) * band(s, 0.3, 0.4);
+        const sputter = Math.sin(Math.PI * band(s, 2.8, 4.3));
+        out.body = {
+          squash: wobble,
+          quat: quatMul(
+            quatAxisAngle([0, 1, 0], 0.18 * sputter * Math.sin(s * 31)),
+            quatAxisAngle([0, 0, 1], 0.1 * sputter * Math.sin(s * 23 + 1)),
+          ),
+          offset: [0.05 * sputter * Math.sin(s * 17), 0, 0],
+        };
+      }
     },
     build(k) {
       const { dirs, R } = PUFF;
@@ -1063,34 +1093,108 @@ export const RECIPES = {
   // ---- Snail ------------------------------------------------------------------------------
   snail: {
     alive: true,
-    controls: [{ key: "hide", label: "Hide", type: "toggle", default: 0, ease: 1.2 }],
+    controls: [{ key: "hide", label: "Hide", type: "toggle", default: 0, ease: 2.4 }],
     action: { key: "hide", label: "Hide in the shell", sound: { on: "pop", off: "poke" } },
     drive(t, c, out) {
+      // Slowly: the eye stalks pull in, the head glides back under the
+      // shell's mouth, the foot draws in and the shell settles onto it with
+      // a little rock. The shell stays where it was, in full view.
       const h = c.hide;
-      const s = easeInOut(band(h, 0, 0.45));
-      const b = easeInOut(band(h, 0.2, 1));
-      out.parts.stalks = { offset: [-0.15 * b, -0.25 * s - 0.1 * b, 0], visible: 1 - s };
-      out.parts.body = { offset: [-0.5 * b, 0.12 * b, 0], visible: 1 - band(h, 0.5, 1) };
-      out.parts.shell = { offset: [0, -0.1 * b, 0] };
+      const s = easeInOut(band(h, 0, 0.35));
+      const hb = easeInOut(band(h, 0.12, 0.85));
+      const b = easeInOut(band(h, 0.35, 1));
+      const head = [-0.85 * hb, -0.26 * hb, 0];
+      out.parts.stalks = { offset: [head[0], head[1] - 0.25 * s, 0], visible: 1 - s };
+      out.parts.head = { offset: head, visible: 1 - easeInOut(band(h, 0.72, 0.95)) };
+      // The foot draws together under the shell from both ends.
+      const pull = easeInOut(band(h, 0.2, 0.9));
+      out.parts.body = { offset: [-0.55 * pull, -0.01 * pull, 0] };
+      out.parts.tailEnd = { offset: [0.45 * pull, -0.01 * pull, 0] };
+      out.parts.shell = {
+        offset: [0, -0.1 * b, 0],
+        angle: 0.07 * Math.sin(Math.PI * band(h, 0.55, 1)) * (1 - band(h, 0.9, 1)),
+      };
       out.amount = 1;
     },
     build(k) {
       const ground = -0.62;
       const body = k.part("body", { pivot: [0, ground, 0] });
+      const head = k.part("head", { pivot: [0.6, ground, 0] });
       const stalks = k.part("stalks", { pivot: [0.95, 0, 0] });
-      const shellPart = k.part("shell", { pivot: [-0.15, 0.05, 0] });
+      const shellPart = k.part("shell", { pivot: [-0.12, ground + 0.1, 0], axis: [0, 0, 1] });
       const skinCol = (c) => {
         const n = c.noise(c.p[0] * 30, c.p[1] * 30, c.p[2] * 30);
         const edge = c.p[1] < ground + 0.06 ? 0.3 : 0;
         return lit(c, mix(mix("#b0a07a", "#8a7a58", 0.5 + 0.5 * n), "#d8ccaa", edge), 0.35, 0.6);
       };
-      // The foot, neck and head.
-      k.add(k.ellipsoid(0.85, 0.12, 0.2), {
-        pos: [-0.05, ground + 0.1, 0],
-        part: body,
-        flat: 0.2,
-        color: skinCol,
-      });
+      // The foot (in two halves, so it can draw together), neck and head.
+      const tailEnd = k.part("tailEnd", { pivot: [-0.5, ground, 0] });
+      const cut = Math.acos(-0.07 / 0.85);
+      for (const front of [true, false]) {
+        const phi = (v) => (front ? v * cut : cut + v * (Math.PI - cut));
+        k.add(
+          k.param(
+            (u, v) => {
+              const f = phi(v);
+              const w = u * TAU;
+              return [
+                0.85 * Math.cos(f),
+                0.12 * Math.sin(f) * Math.cos(w),
+                0.2 * Math.sin(f) * Math.sin(w),
+              ];
+            },
+            {
+              grid: 48,
+              normal: (u, v) => {
+                const f = phi(v);
+                const w = u * TAU;
+                return vec.unit([
+                  Math.cos(f) / 0.85,
+                  (Math.sin(f) * Math.cos(w)) / 0.12,
+                  (Math.sin(f) * Math.sin(w)) / 0.2,
+                ]);
+              },
+            },
+          ),
+          {
+            pos: [-0.05, ground + 0.1, 0],
+            part: front ? body : tailEnd,
+            flat: 0.2,
+            color: skinCol,
+          },
+        );
+        // Round off the cut end (hidden inside the other half at rest), so a
+        // drawn-in foot still looks like a foot.
+        const xc = 0.85 * Math.cos(cut);
+        const rc = Math.sin(cut);
+        const sx = front ? -1 : 1;
+        const dome = (u, v) => {
+          const q = (v * Math.PI) / 2;
+          const w = u * TAU;
+          return [Math.cos(q), Math.sin(q) * Math.cos(w), Math.sin(q) * Math.sin(w)];
+        };
+        k.add(
+          k.param(
+            (u, v) => {
+              const d = dome(u, v);
+              return [xc + sx * 0.16 * d[0], 0.12 * rc * d[1], 0.2 * rc * d[2]];
+            },
+            {
+              grid: 24,
+              normal: (u, v) => {
+                const d = dome(u, v);
+                return vec.unit([(sx * d[0]) / 0.16, d[1] / 0.12, d[2] / 0.2]);
+              },
+            },
+          ),
+          {
+            pos: [-0.05, ground + 0.1, 0],
+            part: front ? body : tailEnd,
+            flat: 0.2,
+            color: skinCol,
+          },
+        );
+      }
       k.add(
         k.tube(
           spline([
@@ -1105,11 +1209,11 @@ export const RECIPES = {
             samples: 64,
           },
         ),
-        { part: body, flat: 0.2, color: skinCol },
+        { part: head, flat: 0.2, color: skinCol },
       );
       k.add(k.sphere(0.12), {
         pos: [0.92, ground + 0.52, 0],
-        part: body,
+        part: head,
         flat: 0.2,
         color: skinCol,
       });
@@ -1128,7 +1232,7 @@ export const RECIPES = {
               caps: true,
             },
           ),
-          { part: body, flat: 0.2, color: skinCol },
+          { part: head, flat: 0.2, color: skinCol },
         );
         const top = [1.08, ground + 0.98, s * 0.16];
         k.add(
@@ -1215,10 +1319,26 @@ export const RECIPES = {
         ],
       },
     ],
-    controls: [{ key: "ink", label: "Ink", type: "pulse", ease: 3 }],
-    action: { key: "ink", label: "Squirt ink", sound: "pop" },
+    controls: [{ key: "ink", label: "Ink", type: "pulse", ease: 4.5 }],
+    action: { key: "ink", label: "Squirt ink", sound: "whoosh" },
     drive(t, c, out) {
-      out.parts.ink = { visible: smoothstep(0, 0.25, c.ink) };
+      // A big cloud of ink billows out behind while the octopus jets up and
+      // away with its arms streaming, then it drifts back as the ink thins.
+      const e = (1 - c.ink) * 4.5;
+      const on = c.ink > 0;
+      const jet = on
+        ? (1 - (1 - band(e, 0.05, 0.55)) ** 3) * (1 - easeInOut(band(e, 1.3, 3.6)))
+        : 0;
+      const trail = on ? easeInOut(band(e, 0.05, 0.35)) * (1 - easeInOut(band(e, 0.9, 2.6))) : 0;
+      const off = [0.12 * jet, 0.3 * jet, 0.06 * jet];
+      out.parts.octo = { offset: off };
+      for (let i = 0; i < 8; i++)
+        out.parts[`a${i}`] = { offset: off, angle: 0.55 * trail * (1 + 0.15 * Math.sin(i * 2.1)) };
+      out.grow = on ? 1 - (1 - band(e, 0.05, 1.3)) ** 2 : 0;
+      out.parts.ink = {
+        offset: [0, 0.18 * easeInOut(band(e, 0.4, 4.5)), 0],
+        visible: on ? (1 + 0.35 * band(e, 0.2, 2)) * (1 - easeInOut(band(e, 2.8, 4.5))) : 0,
+      };
       out.amount = 1;
     },
     build(k, o) {
@@ -1234,7 +1354,9 @@ export const RECIPES = {
         return lit(c, col, 0.35, 0.4);
       };
       // Mantle and head.
+      const octo = k.part("octo", { pivot: [0, 0.2, 0] });
       k.add(k.ellipsoid(0.44, 0.5, 0.44), {
+        part: octo,
         pos: [0, 0.4, -0.1],
         rot: [-18, 0, 0],
         flat: 0.2,
@@ -1245,6 +1367,7 @@ export const RECIPES = {
         color: skinCol,
       });
       k.add(k.ellipsoid(0.36, 0.28, 0.32), {
+        part: octo,
         pos: [0, 0.08, 0.08],
         flat: 0.2,
         kind: "breathe",
@@ -1259,6 +1382,7 @@ export const RECIPES = {
       });
       for (const s of [-1, 1]) {
         eye(k, [s * 0.14, 0.14, 0.33], 0.1, [s * 0.15, 0.05, 1], {
+          part: octo,
           white: "#fbfbf8",
           pupil: 0.75,
           irisEdge: 0.6,
@@ -1279,9 +1403,11 @@ export const RECIPES = {
           P(0.94, ground + 0.4),
           P(0.84, ground + 0.34),
         ]);
+        const arm = k.part(`a${i}`, { pivot: P(0.1, 0), axis: [d[2], 0, -d[0]] });
         k.add(
           k.tube(curl, (t) => 0.1 * (1 - t) + 0.018, { grid: 32, samples: 96, caps: true }),
           {
+            part: arm,
             flat: 0.2,
             kind: "sway",
             params: [0.25, ground + 0.1],
@@ -1293,16 +1419,34 @@ export const RECIPES = {
           },
         );
       }
-      // A puff of ink behind, shown when squirted.
-      const ink = k.part("ink", { pivot: [0, 0.2, -0.5] });
-      k.cloud({ share: 0.03, size: 2.6, pattern: false }, (rand) => ({
-        p: [(rand() - 0.5) * 0.3, 0.1 + rand() * 0.2, -0.55 - rand() * 0.2],
-        color: mix("#1c1428", "#3a2a4a", rand()),
-        opacity: 0.55,
-        part: ink,
-        kind: "rise",
-        params: [0.9, rand()],
-      }));
+      // A cloud of ink behind, hidden until squirted: lumpy billows that
+      // spread out from the siphon as it grows.
+      const ink = k.part("ink", { pivot: [0, 0.1, -0.45] });
+      const siphon = [0, 0.05, -0.4];
+      const lumps = [];
+      for (let i = 0; i < 12; i++) {
+        const a = -1.7 + (i / 11) * 3.4 + (k.rand() - 0.5) * 0.3;
+        const r = 0.3 + 0.35 * k.rand();
+        lumps.push({
+          c: [Math.sin(a) * r * 1.6, 0.1 + (k.rand() - 0.3) * 0.7, -0.35 - Math.cos(a) * r * 0.8],
+          r: 0.22 + 0.16 * k.rand(),
+        });
+      }
+      k.cloud({ share: 0.1, size: 3, pattern: false }, (rand, i) => {
+        const L = lumps[i % lumps.length];
+        const d = vec.unit([rand() - 0.5, rand() - 0.5, rand() - 0.5]);
+        const p = vec.add(L.c, vec.mul(d, L.r * Math.cbrt(rand())));
+        p[2] = Math.max(p[2], -1);
+        const far = Math.min(1, vec.len(vec.sub(p, siphon)) / 0.95);
+        return {
+          p,
+          color: mix("#1a1428", "#5a4a70", rand() * (0.3 + 0.7 * far)),
+          opacity: 0.7,
+          part: ink,
+          kind: "grow",
+          params: [far * 0.9, 0],
+        };
+      });
       k.reach([0, 1.2, -0.6]);
     },
   },
