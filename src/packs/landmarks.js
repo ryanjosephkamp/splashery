@@ -2105,6 +2105,7 @@ function benBuild(k) {
       return panel(c);
     },
   });
+  const glow = k.part("glow", { pivot: [0, cy, 0] });
   for (let j = 0; j < 4; j++) {
     const a = (j * Math.PI) / 2;
     const n = [Math.sin(a), 0, Math.cos(a)];
@@ -2122,6 +2123,20 @@ function benBuild(k) {
         if (rr > 0.66 && rr < 0.84 && Math.abs((ang % 1) - 0.5) > 0.4) return "#1f1f1f";
         if (rr < 0.06) return "#1f1f1f";
         return mix("#f6eed8", "#e7dcc0", rr);
+      },
+    });
+    // A warm glow over the dial, lit when the bell chimes (under the hands).
+    k.add(k.disc(BEN.r * 0.97), {
+      part: glow,
+      pos: add(mul(n, BEN.half + 0.013), [0, cy, 0]),
+      quat: quatFromTo([0, 1, 0], n),
+      weight: 1.2,
+      size: 1.4,
+      opacity: 0.8,
+      pattern: false,
+      color: (c) => {
+        if (dot(c.n, n) < 0) return null;
+        return mix("#fff6c8", "#ffc75a", smoothstep(0.2, 1, c.v));
       },
     });
     // Hands, each a part turning about the dial's axis.
@@ -2152,10 +2167,37 @@ function benBuild(k) {
       const along = Math.abs(c.n[0]) > 0.5 ? c.p[2] : c.p[0];
       const f = ((along + 0.52) / (1.04 / 3)) % 1;
       const s = (f - 0.5) * (1.04 / 3);
-      if (inArch(s, c.p[1] - by - 0.1, 0.1, 0.4, 1.3)) return keep("#2a2724");
+      if (inArch(s, c.p[1] - by - 0.1, 0.1, 0.4, 1.3)) return null;
       return lit(Math.abs(c.p[1] - by - 0.75) < 0.03 ? gold : stoneC, c, 0.62);
     },
   });
+  // The great bell hangs in the belfry, seen through the open arches.
+  k.add(k.box(0.98, 0.02, 0.98), {
+    pos: [0, by + 0.02, 0],
+    color: (c) => lit(shade(stoneC, 0.55), c),
+  });
+  const bell = k.part("bell", { pivot: [0, by + 0.74, 0], axis: [0.52, 0, 0.85] });
+  k.add(
+    k.lathe(
+      [
+        [0.2, by + 0.3],
+        [0.17, by + 0.36],
+        [0.13, by + 0.5],
+        [0.12, by + 0.62],
+        [0.08, by + 0.7],
+        [0.0, by + 0.72],
+      ],
+      { grid: 40 },
+    ),
+    {
+      part: bell,
+      weight: 2.5,
+      flat: 0.2,
+      pattern: false,
+      color: (c) => lit(c.p[1] < by + 0.34 ? shade("#b98a3a", 0.8) : "#c99a45", c, 0.55),
+    },
+  );
+  rod(k, [0, by + 0.7, 0], [0, by + 0.8, 0], 0.02, { part: bell, weight: 3, color: "#3a3530" });
   for (const sx of [-1, 1])
     for (const sz of [-1, 1])
       rod(
@@ -2655,6 +2697,53 @@ function castleBuild(k, o) {
       0.006,
       { part: bridge, weight: 3, color: "#3a3a3a" },
     );
+  // A little troop of knights (and a banner) who march out over the lowered
+  // drawbridge. Built where they stand outside; drive() walks them in and out.
+  const knights = k.part("knights", { pivot: CASTLE.gate });
+  const tunic = (c) => lit(Math.abs(c.lp[0]) < 0.008 ? "#f2c230" : roofC, c, 0.6);
+  const knight = (x, z) => {
+    const K = { part: knights, weight: 3, flat: 0.3 };
+    for (const s of [-1, 1])
+      k.add(k.box(0.022, 0.07, 0.026), {
+        ...K,
+        pos: [x + s * 0.016, 0.083, z],
+        color: (c) => lit("#3b3530", c),
+      });
+    k.add(k.ellipsoid(0.042, 0.055, 0.032), { ...K, pos: [x, 0.158, z], color: tunic });
+    for (const s of [-1, 1])
+      k.add(k.ellipsoid(0.013, 0.04, 0.014), {
+        ...K,
+        pos: [x + s * 0.048, 0.158, z],
+        color: (c) => lit("#b9bcc2", c, 0.6),
+      });
+    k.add(k.sphere(0.03), {
+      ...K,
+      pos: [x, 0.238, z],
+      color: (c) =>
+        c.n[2] > 0.5 && Math.abs(c.p[1] - 0.241) < 0.005 ? "#1b1917" : lit("#c9ccd1", c, 0.55),
+    });
+    k.add(k.cone(0.012, 0.0, 0.035), {
+      ...K,
+      pos: [x, 0.283, z],
+      color: (c) => lit(roofC, c, 0.6),
+    });
+  };
+  knight(0, 1.84);
+  for (const z of [1.63, 1.42]) for (const x of [-0.075, 0.075]) knight(x, z);
+  flag(
+    k,
+    [0.05, 0.15, 1.84],
+    0.2,
+    0.1,
+    0.07,
+    (u, v) => (Math.abs(v - 0.5) < 0.2 ? roofC : "#f2c230"),
+    {
+      dir: [0, 0, -1],
+      poleR: 0.006,
+      pole: "#5a4a3a",
+      part: knights,
+    },
+  );
 }
 
 // ---- Pagoda ------------------------------------------------------------------------------------
@@ -2683,6 +2772,9 @@ function pagodaBuild(k, o) {
   });
   let y = 0.16;
   const bells = [];
+  // Lit when the chimes ring: every door glows and the stone lanterns light.
+  const glow = k.part("glow", { pivot: [0, 0.5, 0] });
+  const warm = { part: glow, weight: 1.5, size: 1.3, pattern: false };
   for (let i = 0; i < 5; i++) {
     const s = 0.46 - 0.068 * i;
     const h = i === 0 ? 0.4 : 0.3;
@@ -2702,6 +2794,24 @@ function pagodaBuild(k, o) {
         return lit(plaster, c);
       },
     });
+    for (let q = 0; q < 4; q++) {
+      const a = (q * Math.PI) / 2;
+      const w = 0.28 * s;
+      const face = (x, yy) => add(rotY([x, yy, 0], a), rotY([0, 0, s + 0.008], a));
+      k.add(
+        quad(
+          k,
+          face(-w, yb + 0.03),
+          face(w, yb + 0.03),
+          face(w, yb + h * 0.8),
+          face(-w, yb + h * 0.8),
+        ),
+        {
+          ...warm,
+          color: (c) => mix("#ffe9a8", "#ffb347", smoothstep(0.03, 0.3, c.p[1] - yb)),
+        },
+      );
+    }
     y += h;
     const yr = y;
     // The roof: wide eaves that dip at the middle and curl up at the corners.
@@ -2755,7 +2865,7 @@ function pagodaBuild(k, o) {
     k.add(under, { flat: 0.2, color: (c) => shade(wood, (c.u * 4 * 30) % 1 < 0.4 ? 0.55 : 0.7) });
     for (let q = 0; q < 4; q++) {
       const { xz } = sqPt(q / 4, outer);
-      bells.push([xz[0], roofY(1, 0) - 0.06, xz[1]]);
+      bells.push({ tier: i, p: [xz[0], roofY(1, 0) - 0.02, xz[1]] });
     }
     y += drop * 0.35 + 0.02;
   }
@@ -2787,16 +2897,76 @@ function pagodaBuild(k, o) {
     weight: 3,
     color: (c) => lit("#e0b44a", c, 0.6),
   });
-  // Wind bells at every corner.
-  for (const b of bells)
-    k.add(k.sphere(0.022), {
-      pos: b,
+  // Wind chimes at every corner: a bronze bell on a cord with a tab to catch
+  // the wind. Each roof's four chimes are one part, so they swing together.
+  for (const { tier, p: b } of bells) {
+    const part = k.part(`chime${tier}`, { pivot: [0, b[1], 0] });
+    rod(k, b, add(b, [0, -0.06, 0]), 0.004, { part, weight: 4, color: "#3a3028" });
+    k.add(k.cone(0.03, 0.012, 0.05), {
+      part,
+      pos: add(b, [0, -0.085, 0]),
       weight: 4,
       pattern: false,
       kind: "twinkle",
-      params: [0.6, b[1] * 20],
-      color: "#e7c35a",
+      params: [0.4, b[1] * 20],
+      color: (c) => lit("#e0b44a", c, 0.6),
     });
+    rod(k, add(b, [0, -0.11, 0]), add(b, [0, -0.14, 0]), 0.003, {
+      part,
+      weight: 4,
+      color: "#3a3028",
+    });
+    const tab = add(b, [0, -0.17, 0]);
+    const side = unit(rotY([1, 0, 0], Math.atan2(b[0], b[2])));
+    k.add(
+      quad(
+        k,
+        add(tab, add(mul(side, -0.018), [0, 0.03, 0])),
+        add(tab, add(mul(side, 0.018), [0, 0.03, 0])),
+        add(tab, add(mul(side, 0.018), [0, -0.03, 0])),
+        add(tab, add(mul(side, -0.018), [0, -0.03, 0])),
+      ),
+      { part, weight: 4, pattern: false, color: "#d8342b" },
+    );
+  }
+  // Two stone lanterns by the path to the door.
+  const stoneL = (c) => lit("#b3ada1", c, 0.62);
+  for (const sx of [-1, 1]) {
+    const L = [sx * 0.46, 0, 1.12];
+    k.add(k.cylinder(0.09, 0.04), { pos: add(L, [0, 0.02, 0]), flat: 0.2, color: stoneL });
+    k.add(k.cylinder(0.035, 0.2), { pos: add(L, [0, 0.14, 0]), flat: 0.2, color: stoneL });
+    k.add(k.box(0.13, 0.03, 0.13), { pos: add(L, [0, 0.25, 0]), flat: 0.2, color: stoneL });
+    k.add(k.box(0.1, 0.1, 0.1), {
+      pos: add(L, [0, 0.315, 0]),
+      flat: 0.2,
+      color: (c) =>
+        Math.abs(c.n[1]) < 0.5 &&
+        Math.abs(c.p[1] - 0.315) < 0.03 &&
+        Math.abs(Math.abs(c.n[0]) > 0.5 ? c.p[2] - L[2] : c.p[0] - L[0]) < 0.03
+          ? keep("#2e2620")
+          : stoneL(c),
+    });
+    k.add(k.cone(0.1, 0.015, 0.075, { caps: true }), {
+      pos: add(L, [0, 0.4, 0]),
+      flat: 0.2,
+      color: stoneL,
+    });
+    k.add(k.sphere(0.018), { pos: add(L, [0, 0.45, 0]), weight: 3, color: stoneL });
+    // The flame box and a halo of light.
+    k.add(k.box(0.105, 0.065, 0.105), {
+      ...warm,
+      pos: add(L, [0, 0.315, 0]),
+      color: "#ffd98a",
+    });
+    k.add(k.sphere(0.13), {
+      ...warm,
+      pos: add(L, [0, 0.315, 0]),
+      weight: 0.8,
+      size: 1.8,
+      opacity: 0.28,
+      color: "#ffcf73",
+    });
+  }
 }
 
 // ---- Windmill ----------------------------------------------------------------------------------
@@ -2997,17 +3167,24 @@ export const RECIPES = {
 
   "big-ben": {
     alive: true,
-    controls: [{ key: "chime", label: "Chime", type: "pulse", ease: 3 }],
+    controls: [{ key: "chime", label: "Chime", type: "pulse", ease: 4 }],
     action: { key: "chime", label: "Chime the bell", sound: "chime" },
     drive(t, c, out) {
       // The hands show the real time (a clock may read the date in drive).
+      // A chime spins them round in whole turns (so they land back on the
+      // time), lights the dials and swings the bell.
       const d = new Date();
       const m = d.getMinutes() + d.getSeconds() / 60;
       const h = (d.getHours() % 12) + m / 60;
+      const p = c.chime > 0.001 ? 1 - c.chime : 1;
+      const spin = smoothstep(0, 0.6, p);
       for (let j = 0; j < 4; j++) {
-        out.parts[`hour${j}`] = { angle: (-TAU * h) / 12 };
-        out.parts[`minute${j}`] = { angle: (-TAU * m) / 60 };
+        out.parts[`hour${j}`] = { angle: (-TAU * h) / 12 - TAU * spin };
+        out.parts[`minute${j}`] = { angle: (-TAU * m) / 60 - 3 * TAU * spin };
       }
+      out.parts.glow = { visible: smoothstep(0, 0.06, p) * (1 - smoothstep(0.7, 1, p)) };
+      const swing = smoothstep(0, 0.05, p) * (1 - smoothstep(0.45, 1, p));
+      out.parts.bell = { angle: 0.6 * Math.sin(TAU * 3 * p) * swing };
       out.amount = 1 + 6 * c.chime;
     },
     build: benBuild,
@@ -3018,14 +3195,22 @@ export const RECIPES = {
   castle: {
     alive: true,
     options: [{ key: "roof", label: "Roofs", type: "color", default: "#2f5d9e" }],
-    controls: [{ key: "raise", label: "Drawbridge up", type: "toggle", default: 0, ease: 1.6 }],
+    controls: [{ key: "raise", label: "Drawbridge up", type: "toggle", default: 1, ease: 3.4 }],
     action: {
       key: "raise",
       label: "Raise or lower the drawbridge",
       sound: { on: "close", off: "open" },
     },
     drive(t, c, out) {
-      out.parts.bridge = { angle: -1.45 * easeInOut(c.raise) };
+      // Lowering: the bridge drops first, then the knights march out and
+      // stand guard. Raising: they march back in before the bridge goes up.
+      const r = c.raise;
+      out.parts.bridge = { angle: -1.45 * easeInOut(clamp((r - 0.52) / 0.48, 0, 1)) };
+      const m = clamp((0.6 - r) / 0.6, 0, 1);
+      const D = 1.25;
+      const walking = m > 0.001 && m < 0.999 ? 1 : 0;
+      const bob = 0.012 * Math.abs(Math.sin((m * D * Math.PI) / 0.07)) * walking;
+      out.parts.knights = { offset: [0, bob, -D * (1 - m)], visible: smoothstep(0, 0.06, m) };
     },
     build: castleBuild,
   },
@@ -3033,9 +3218,21 @@ export const RECIPES = {
   pagoda: {
     alive: true,
     options: [{ key: "color", label: "Timber", type: "color", default: "#c8372d" }],
-    controls: [{ key: "chime", label: "Bells", type: "pulse", ease: 2.5 }],
+    controls: [{ key: "chime", label: "Bells", type: "pulse", ease: 4 }],
     action: { key: "chime", label: "Ring the bells", sound: "chime" },
-    drive(t, c, out) {
+    drive(t, c, out, info) {
+      // A breeze: the chimes on every roof swing (each roof a beat behind
+      // the one below), and the doors and lanterns light up.
+      const p = c.chime > 0.001 ? 1 - c.chime : 1;
+      const swing = smoothstep(0, 0.05, p) * (1 - smoothstep(0.45, 1, p));
+      for (let i = 0; i < 5; i++) {
+        const ph = info.time * 7 - i * 0.9;
+        out.parts[`chime${i}`] = {
+          quat: quatAxisAngle([0, 1, 0], 0.07 * Math.sin(ph) * swing),
+          offset: [0.035 * Math.sin(ph + 0.6) * swing, 0, 0.03 * Math.cos(ph) * swing],
+        };
+      }
+      out.parts.glow = { visible: smoothstep(0, 0.07, p) * (1 - smoothstep(0.75, 1, p)) };
       out.amount = 1 + 1.5 * c.chime;
     },
     build: pagodaBuild,
@@ -3043,10 +3240,14 @@ export const RECIPES = {
 
   windmill: {
     alive: true,
-    controls: [{ key: "gust", label: "Gust", type: "pulse", ease: 3 }],
+    controls: [{ key: "gust", label: "Gust", type: "pulse", ease: 4 }],
     action: { key: "gust", label: "A gust of wind", sound: "whoosh" },
     drive(t, c, out) {
-      out.parts.sails = { angle: t * 0.9 + TAU * smoothstep(0, 1, 1 - c.gust) };
+      // The sails turn briskly; a gust hits them at once and spins them up
+      // hard for three extra turns, easing off as it passes.
+      const p = 1 - c.gust;
+      const g = 1 - Math.pow(1 - p, 3);
+      out.parts.sails = { angle: t * 1.5 + 3 * TAU * g };
     },
     build: windmillBuild,
   },

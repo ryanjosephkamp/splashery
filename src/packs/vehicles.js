@@ -609,6 +609,10 @@ function balloonBuild(k, o) {
       ? ["#e53935", "#fb8c00", "#fdd835", "#43a047", "#1e88e5", "#8e24aa"]
       : [o.c1, o.c2];
   const balloon = k.part("balloon", { pivot: BALLOON_C });
+  // Hidden until the burner fires: a slightly larger, warmly lit copy of the
+  // envelope (it swells) and a tall burst of flame.
+  const swell = k.part("swell", { pivot: BALLOON_C });
+  const blast = k.part("blast", { pivot: BALLOON_C });
   const N = 12;
   // The envelope: a teardrop of gores that bulge a little between seams.
   const prof = spline([
@@ -623,39 +627,56 @@ function balloonBuild(k, o) {
     [0.3, 3.72, 0],
     [0.0, 3.75, 0],
   ]);
-  const env = k.param(
-    (u, v) => {
-      const [r, y] = prof(v);
-      const bulge = 1 + 0.03 * Math.abs(Math.sin(u * N * Math.PI)) * smoothstep(0.05, 0.4, v);
-      const a = u * TAU;
-      return [r * bulge * Math.sin(a), y, r * bulge * Math.cos(a)];
-    },
-    {
-      grid: 96,
-      normal: (u, v, p) => {
-        const e = 0.002;
-        const a = prof(Math.max(0, v - e));
-        const b = prof(Math.min(1, v + e));
-        const ang = u * TAU;
-        const nr = b[1] - a[1];
-        const ny = -(b[0] - a[0]);
-        return [nr * Math.sin(ang), ny, nr * Math.cos(ang)];
+  const envelope = (grow) =>
+    k.param(
+      (u, v) => {
+        const [r, y] = prof(v);
+        const bulge = 1 + 0.03 * Math.abs(Math.sin(u * N * Math.PI)) * smoothstep(0.05, 0.4, v);
+        const a = u * TAU;
+        const g = 1 + grow * smoothstep(0.02, 0.35, v);
+        const yy = 1.05 + (y - 1.05) * (1 + grow * 0.5);
+        return [r * bulge * g * Math.sin(a), yy, r * bulge * g * Math.cos(a)];
       },
-    },
-  );
-  k.add(env, {
+      {
+        grid: 96,
+        normal: (u, v, p) => {
+          const e = 0.002;
+          const a = prof(Math.max(0, v - e));
+          const b = prof(Math.min(1, v + e));
+          const ang = u * TAU;
+          const nr = b[1] - a[1];
+          const ny = -(b[0] - a[0]);
+          return [nr * Math.sin(ang), ny, nr * Math.cos(ang)];
+        },
+      },
+    );
+  const gore = (c) => {
+    const g = Math.floor(c.u * N);
+    const seam = Math.abs(((c.u * N) % 1) - 0.5) > 0.475;
+    let base = cols[g % cols.length];
+    const v = c.v;
+    if (v < 0.06) base = "#efe7d4";
+    else if (v > 0.9) base = cols[0];
+    return { base, seam, f: 0.8 + 0.22 * sunOf(c.n) };
+  };
+  k.add(envelope(0), {
     part: balloon,
     flat: 0.2,
     size: 1.2,
     color: (c) => {
-      const g = Math.floor(c.u * N);
-      const seam = Math.abs(((c.u * N) % 1) - 0.5) > 0.475;
-      let base = cols[g % cols.length];
-      const v = c.v;
-      if (v < 0.06) base = "#efe7d4";
-      else if (v > 0.9) base = cols[0];
-      const shadeF = 0.8 + 0.22 * sunOf(c.n);
-      return seam ? keep(shade(base, shadeF * 0.82)) : shade(base, shadeF);
+      const { base, seam, f } = gore(c);
+      return seam ? keep(shade(base, f * 0.82)) : shade(base, f);
+    },
+  });
+  k.add(envelope(0.09), {
+    part: swell,
+    flat: 0.2,
+    size: 1.9,
+    weight: 0.35,
+    color: (c) => {
+      const { base, seam, f } = gore(c);
+      const warm = mix(shade(base, f * 1.12), "#ffcf6a", 0.18 + 0.3 * smoothstep(0.6, 0.05, c.v));
+      return seam ? keep(shade(warm, 0.82)) : warm;
     },
   });
   // Ropes from the mouth to the basket.
@@ -684,6 +705,19 @@ function balloonBuild(k, o) {
       opacity: 0.9,
       kind: "flame",
       params: [0.18 + 0.12 * hot * rand(), rand()],
+    };
+  });
+  k.cloud({ share: 0.025, size: 1.8, pattern: false, part: blast }, (rand) => {
+    const a = rand() * TAU;
+    const r = 0.12 * Math.sqrt(rand());
+    const hot = 1 - r / 0.12;
+    return {
+      p: [Math.sin(a) * r, 0.74 + rand() * 0.1, Math.cos(a) * r],
+      color: mix("#ff7a1a", "#fff6d0", hot),
+      size: 0.8 + 1.2 * hot,
+      opacity: 0.95,
+      kind: "flame",
+      params: [0.22 + 0.12 * rand(), rand()],
     };
   });
   // The wicker basket.
@@ -1354,6 +1388,37 @@ const BUS = {
   double: { front: [0.98, 0.3, 0], rear: [-0.95, 0.3, 0] },
 };
 
+// Two glazed door leaves over a doorway on the +Z side, hinged at their
+// outer edges; they swing out when the bus stops.
+function busDoors(k, x0, x1, y0, y1, z) {
+  const w = (x1 - x0) / 2;
+  const h = y1 - y0;
+  for (const [name, hx, s] of [
+    ["doorA", x0, 1],
+    ["doorB", x1, -1],
+  ]) {
+    const part = k.part(name, { pivot: [hx, (y0 + y1) / 2, z + 0.012], axis: [0, 1, 0] });
+    k.add(k.box(w, h, 0.02), {
+      part,
+      pos: [hx + (s * w) / 2, (y0 + y1) / 2, z + 0.012],
+      flat: 0.2,
+      weight: 1.5,
+      pattern: false,
+      color: (c) => {
+        const u = (c.p[0] - Math.min(hx, hx + s * w)) / w;
+        const v = (c.p[1] - y0) / h;
+        if (u < 0.1 || u > 0.9 || v < 0.04 || v > 0.96 || Math.abs(v - 0.45) < 0.025)
+          return keep("#111214");
+        return glass(c, "#223344");
+      },
+    });
+  }
+}
+
+// The lit doorway behind the doors: steps with a warm interior above.
+const doorway = (h) =>
+  h < 0.22 ? (Math.floor(h / 0.075) % 2 ? "#5b5e63" : "#8d9096") : mix("#e8d9a8", "#b8a878", h);
+
 function busBuild(k, o) {
   const P = { flat: 0.2 };
   const dark = "#111214";
@@ -1373,9 +1438,8 @@ function busBuild(k, o) {
         const n = c.n;
         if (Math.abs(n[2]) > 0.7) {
           if (z > 0 && x > 0.52 && x < 0.94 && y > 0.4 && y < 1.36) {
-            if (Math.abs(x - 0.73) < 0.02 || y < 0.44 || y > 1.33 || x < 0.55 || x > 0.91)
-              return keep(dark);
-            return glass(c, "#223344");
+            if (y < 0.44 || y > 1.33 || x < 0.55 || x > 0.91) return keep(dark);
+            return keep(doorway(y - 0.44));
           }
           if (y > 1.0 && y < 1.33 && x > -1.6 && x < 0.46) {
             const f = (x + 1.6) / 0.31;
@@ -1426,6 +1490,35 @@ function busBuild(k, o) {
       rod(k, [0.98, 1.2, z * 0.85], [1.08, 1.2, z], 0.012, { weight: 3, color: dark });
     for (const z of [-0.6, 0.6])
       k.add(k.box(0.04, 0.16, 0.08), { pos: [1.08, 1.2, z], color: dark });
+    busDoors(k, 0.55, 0.91, 0.44, 1.33, 0.52);
+    // The stop arm lies folded against the side, behind the door; it swings
+    // out to face the traffic.
+    const stop = k.part("stop", { pivot: [0.44, 0.73, 0.535], axis: [0, 1, 0] });
+    rod(k, [0.44, 0.73, 0.54], [0.4, 0.73, 0.54], 0.012, { part: stop, weight: 3, color: dark });
+    k.add(k.disc(0.2), {
+      part: stop,
+      pos: [0.22, 0.73, 0.545],
+      rot: [90, 0, 0],
+      weight: 4,
+      pattern: false,
+      color: (c) => {
+        const x = Math.abs(c.lp[0]);
+        const z = Math.abs(c.lp[2]);
+        const d = Math.max(x, z, (x + z) / Math.SQRT2);
+        if (d > 0.175) return null;
+        if (d > 0.152) return "#f4f4f0";
+        return Math.abs(c.lp[2]) < 0.024 && x < 0.1 ? "#f4f4f0" : "#d8231f";
+      },
+    });
+    // Flashing warning lights: a bright halo over each roof light.
+    const halo = (part, pos, col) =>
+      k.add(k.sphere(0.1), { part, pos, weight: 2, opacity: 0.75, pattern: false, color: col });
+    const fa = k.part("flashA", { pivot: [0, 1.5, 0] });
+    const fb = k.part("flashB", { pivot: [0, 1.5, 0] });
+    for (const z of [-0.34, 0.34]) {
+      halo(fa, [0.96, 1.5, z], "#ff5a4a");
+      halo(fb, [-1.66, 1.5, z], "#ff5a4a");
+    }
   } else {
     const red = "#cc2229";
     const x0 = -1.55;
@@ -1440,6 +1533,10 @@ function busBuild(k, o) {
         const n = c.n;
         const row = (y > 0.8 && y < 1.18) || (y > 1.5 && y < 1.92);
         if (Math.abs(n[2]) > 0.7) {
+          if (z > 0 && x > 0.12 && x < 0.58 && y > 0.36 && y < 1.22) {
+            if (y > 1.18 || x < 0.15 || x > 0.55) return keep(dark);
+            return keep(doorway(y - 0.4));
+          }
           if (row && x > -1.42 && x < 1.3) {
             const f = (x + 1.42) / 0.34;
             if (f % 1 > 0.1) return glass(c, "#223344");
@@ -1463,6 +1560,22 @@ function busBuild(k, o) {
       k.add(k.sphere(0.065), { pos: [1.55, 0.55, z], weight: 3, pattern: false, color: "#fff8d8" });
     for (const x of [1.58, -1.58])
       k.add(k.box(0.06, 0.12, 0.98), { ...P, pos: [x, 0.36, 0], color: (c) => lit(dark, c) });
+    busDoors(k, 0.15, 0.55, 0.4, 1.18, 0.49);
+    // Hazard lights at the corners, and their flashing halos.
+    const fa = k.part("flashA", { pivot: [0, 0.6, 0] });
+    const fb = k.part("flashB", { pivot: [0, 0.6, 0] });
+    for (const x of [1.555, -1.555])
+      for (const z of [-0.42, 0.42]) {
+        k.add(k.sphere(0.045), { pos: [x, 0.62, z], weight: 4, pattern: false, color: "#ffa21a" });
+        k.add(k.sphere(0.1), {
+          part: x * z > 0 ? fa : fb,
+          pos: [x, 0.62, z],
+          weight: 2,
+          opacity: 0.75,
+          pattern: false,
+          color: "#ffc04a",
+        });
+      }
   }
   for (const [name, w] of [
     ["front", W.front],
@@ -1831,6 +1944,21 @@ function sailboatBuild(k, o) {
       color: o.stripe,
     },
   );
+  // Spray thrown up at the bow and along the lee side when a gust hits.
+  const spray = k.part("spray", { pivot: [1.2, wl, 0.4] });
+  k.cloud({ share: 0.018, size: 1.2, pattern: false, part: spray }, (rand) => {
+    const bow = rand() < 0.8;
+    const x = bow ? 1.15 + rand() * 0.35 : -1.2 + rand() * 0.3;
+    const zz = bow ? (rand() - 0.2) * 0.5 : 0.35 + rand() * 0.3;
+    return {
+      p: [x, wl + rand() * 0.08, zz],
+      color: mix("#dff4ff", "#ffffff", rand()),
+      size: 0.6 + rand() * 1.1,
+      opacity: 0.85,
+      kind: "rise",
+      params: [(bow ? 0.28 : 0.14) + rand() * 0.14, rand()],
+    };
+  });
   water(k, wl, 2.0, 1.45, {
     share: 0.22,
     deep: "#1c6a8f",
@@ -1985,6 +2113,21 @@ function submarineBuild(k, o) {
       color: (c) => lit(brass, c),
     });
   }
+  // A rush of bubbles from the vents when she dives.
+  const vent = k.part("vent", { pivot: [0, 0, 0] });
+  k.cloud({ share: 0.02, size: 1.0, pattern: false, part: vent }, (rand) => {
+    const x = (rand() - 0.5) * 2.6;
+    const a = rand() * TAU;
+    const r = 0.5 + rand() * 0.25;
+    return {
+      p: [x, Math.abs(Math.sin(a)) * r * 0.9 + 0.1, Math.cos(a) * r],
+      color: mix("#cdf3ff", "#ffffff", rand()),
+      size: 0.5 + rand() * 1.4,
+      opacity: 0.7,
+      kind: "rise",
+      params: [0.3 + rand() * 0.3, rand()],
+    };
+  });
   // Bubbles.
   k.cloud({ share: 0.018, size: 0.9, pattern: false }, (rand) => {
     const fromProp = rand() < 0.6;
@@ -2104,6 +2247,22 @@ function bicycleBuild(k, o) {
     weight: 4,
     color: (c) => lit("#e3e5e8", c, 0.5),
   });
+  // Ring lines round the bell, shown while it rings (inner, then outer).
+  for (const [name, radii] of [
+    ["ringA", [0.1, 0.2]],
+    ["ringB", [0.15, 0.26]],
+  ]) {
+    const part = k.part(name, { pivot: BIKE.bell });
+    for (const r of radii)
+      for (const s of [-1, 1])
+        k.add(
+          k.tube((t) => {
+            const a = (t - 0.5) * 1.3 + (s > 0 ? 0.35 : Math.PI - 0.35);
+            return add(BIKE.bell, [Math.cos(a) * r, Math.sin(a) * r + 0.02, 0.04]);
+          }, 0.012),
+          { part, weight: 4, pattern: false, color: "#ffe066" },
+        );
+  }
   // The chain, rear cog and kickstand.
   const chain = spline(
     [
@@ -2541,14 +2700,22 @@ export const RECIPES = {
       { key: "c1", label: "Colour 1", type: "color", default: "#e8412f" },
       { key: "c2", label: "Colour 2", type: "color", default: "#f6c945" },
     ],
-    controls: [{ key: "burn", label: "Burner", type: "pulse", ease: 3 }],
+    controls: [{ key: "burn", label: "Burner", type: "pulse", ease: 4 }],
     action: { key: "burn", label: "Fire the burner", sound: "fire" },
     drive(t, c, out) {
-      const up = Math.sin(Math.PI * clamp(1 - c.burn, 0, 1)) * (c.burn > 0.001 ? 1 : 0);
-      const lift = [0, 0.08 * Math.sin(t * 0.8) + 0.35 * up, 0];
+      // The burner roars at once, the envelope swells with hot air, and the
+      // balloon climbs, then drifts back down as it cools.
+      const p = c.burn > 0.001 ? 1 - c.burn : 1;
+      const roar = smoothstep(0, 0.04, p) * (1 - smoothstep(0.3, 0.45, p));
+      const hot = smoothstep(0, 0.12, p) * (1 - smoothstep(0.55, 1, p));
+      const up = smoothstep(0.02, 0.4, p) * (1 - smoothstep(0.55, 1, p));
+      const lift = [0, 0.08 * Math.sin(t * 0.8) + 0.6 * up, 0];
       const tq = tilt(0.03 * Math.sin(t * 0.6 + 1), 0.04 * Math.sin(t * 0.7));
-      out.parts.balloon = carried(BALLOON_C, tq, BALLOON_C, lift);
-      out.amount = 1 + 2.2 * c.burn;
+      const pose = carried(BALLOON_C, tq, BALLOON_C, lift);
+      out.parts.balloon = pose;
+      out.parts.swell = { ...pose, visible: hot };
+      out.parts.blast = { ...pose, visible: roar };
+      out.amount = 1 + 2.2 * hot;
     },
     build: balloonBuild,
   },
@@ -2621,14 +2788,24 @@ export const RECIPES = {
         ],
       },
     ],
-    controls: [{ key: "beep", label: "Beep", type: "pulse", ease: 1.5 }],
-    action: { key: "beep", label: "Beep beep", sound: "pop" },
+    controls: [{ key: "beep", label: "Stop", type: "pulse", ease: 4.5 }],
+    action: { key: "beep", label: "Stop for passengers", sound: "open" },
     drive(t, c, out) {
-      const a = -(t * 2 + burst(c.beep, 2));
+      // A bus stop: the lights flash, the stop arm swings out and the doors
+      // open; then everything folds away again.
+      const p = c.beep > 0.001 ? 1 - c.beep : 1;
+      const open = easeInOut(smoothstep(0, 0.14, p) * (1 - smoothstep(0.78, 0.95, p)));
+      const a = -t * 2;
       out.parts.front = { angle: a };
       out.parts.rear = { angle: a };
-      out.body = { squash: 0.05 * Math.sin(Math.PI * 2 * (1 - c.beep)) * c.beep };
-      out.amount = 1 + 1.5 * c.beep;
+      out.parts.stop = { angle: (Math.PI / 2) * open };
+      out.parts.doorA = { angle: -1.45 * open };
+      out.parts.doorB = { angle: 1.45 * open };
+      const on = p < 0.97;
+      const blink = Math.floor(p * 18) % 2;
+      out.parts.flashA = { visible: on && blink ? 1 : 0 };
+      out.parts.flashB = { visible: on && !blink ? 1 : 0 };
+      out.body = { squash: 0.03 * Math.sin(Math.PI * smoothstep(0, 0.12, p)) };
     },
     build: busBuild,
   },
@@ -2659,16 +2836,19 @@ export const RECIPES = {
   jet: {
     alive: true,
     options: [{ key: "color", label: "Tail", type: "color", default: "#1f5fae" }],
-    controls: [{ key: "climb", label: "Climb", type: "pulse", ease: 3 }],
-    action: { key: "climb", label: "Climb", sound: "whoosh" },
+    controls: [{ key: "climb", label: "Climb", type: "pulse", ease: 3.5 }],
+    action: { key: "climb", label: "Climb and bank", sound: "whoosh" },
     drive(t, c, out) {
-      const v = c.climb > 0.001 ? Math.sin(Math.PI * (1 - c.climb)) : 0;
+      // Climbs with the nose up while banking hard left, then hard right.
+      const p = c.climb > 0.001 ? 1 - c.climb : 0;
+      const v = Math.sin(Math.PI * p);
+      const bank = -0.85 * Math.sin(TAU * p) * smoothstep(0, 0.08, p);
       out.body = {
         quat: quatMulLocal(
-          quatAxisAngle([0, 0, 1], 0.22 * v),
-          quatAxisAngle([1, 0, 0], 0.06 * Math.sin(t * 0.5)),
+          quatAxisAngle([0, 0, 1], 0.2 * v),
+          quatAxisAngle([1, 0, 0], bank + 0.06 * Math.sin(t * 0.5)),
         ),
-        offset: [0, 0.03 * Math.sin(t * 0.9) + 0.25 * v, 0],
+        offset: [0, 0.03 * Math.sin(t * 0.9) + 0.3 * v, 0],
       };
     },
     build: jetBuild,
@@ -2680,13 +2860,18 @@ export const RECIPES = {
       { key: "sails", label: "Sails", type: "color", default: "#f8f6ef" },
       { key: "stripe", label: "Stripe", type: "color", default: "#1f5fae" },
     ],
-    controls: [{ key: "gust", label: "Gust", type: "pulse", ease: 3 }],
+    controls: [{ key: "gust", label: "Gust", type: "pulse", ease: 3.5 }],
     action: { key: "gust", label: "A gust of wind", sound: "whoosh" },
     drive(t, c, out) {
-      const g = c.gust > 0.001 ? Math.sin(Math.PI * (1 - c.gust)) : 0;
-      const tq = tilt(0.05 * Math.sin(t * 0.9) + 0.22 * g, 0.03 * Math.sin(t * 0.7 + 1));
+      // The gust heels her right over at once, throws up spray, and she
+      // rocks back upright as it passes.
+      const p = c.gust > 0.001 ? 1 - c.gust : 1;
+      const g = smoothstep(0, 0.14, p) * (1 - smoothstep(0.4, 1, p));
+      const rock = 0.06 * Math.sin(TAU * 1.5 * p) * smoothstep(0.4, 0.7, p) * (1 - p);
+      const tq = tilt(0.05 * Math.sin(t * 0.9) + 0.42 * g + rock, 0.03 * Math.sin(t * 0.7 + 1));
       out.parts.boat = carried(BOAT.centre, tq, BOAT.centre, [0, 0.02 * Math.sin(t * 1.1), 0]);
-      out.amount = 1 + g;
+      out.parts.spray = { visible: smoothstep(0, 0.06, p) * (1 - smoothstep(0.45, 0.8, p)) };
+      out.amount = 1 + 1.5 * g;
     },
     build: sailboatBuild,
   },
@@ -2694,15 +2879,25 @@ export const RECIPES = {
   submarine: {
     alive: true,
     options: [{ key: "color", label: "Colour", type: "color", default: "#f5c21b" }],
-    controls: [{ key: "scope", label: "Periscope", type: "toggle", default: 1, ease: 1.2 }],
-    action: { key: "scope", label: "Raise or lower the periscope", sound: "click" },
+    controls: [{ key: "dive", label: "Dive", type: "pulse", ease: 5 }],
+    action: { key: "dive", label: "Dive and surface", sound: "drop" },
     drive(t, c, out) {
-      out.parts.prop = { angle: t * 9 };
-      out.parts.scope = { offset: [0, -0.34 * (1 - easeInOut(c.scope)), 0] };
+      // Periscope down, nose down and a rush of bubbles; she dives, then
+      // noses back up to the surface and raises the periscope again.
+      const p = c.dive > 0.001 ? 1 - c.dive : 1;
+      const deep = smoothstep(0, 0.35, p) * (1 - smoothstep(0.5, 0.88, p));
+      const pitch =
+        -0.3 * Math.sin(Math.PI * smoothstep(0, 0.42, p)) +
+        0.22 * Math.sin(Math.PI * smoothstep(0.46, 0.92, p));
+      const down = smoothstep(0, 0.07, p) * (1 - smoothstep(0.82, 0.96, p));
+      out.parts.prop = { angle: t * 9 + burst(c.dive, 6) };
+      out.parts.scope = { offset: [0, -0.34 * down, 0] };
+      out.parts.vent = { visible: smoothstep(0, 0.04, p) * (1 - smoothstep(0.4, 0.6, p)) };
       out.body = {
-        offset: [0, 0.03 * Math.sin(t * 0.9), 0],
-        quat: quatAxisAngle([0, 0, 1], 0.03 * Math.sin(t * 0.7)),
+        offset: [0, 0.03 * Math.sin(t * 0.9) - 0.42 * deep, 0],
+        quat: quatAxisAngle([0, 0, 1], 0.03 * Math.sin(t * 0.7) + pitch),
       };
+      out.amount = 1 + 0.4 * deep;
     },
     build: submarineBuild,
   },
@@ -2710,14 +2905,21 @@ export const RECIPES = {
   bicycle: {
     alive: true,
     options: [{ key: "color", label: "Frame", type: "color", default: "#1e88e5" }],
-    controls: [{ key: "ring", label: "Bell", type: "pulse", ease: 1 }],
+    controls: [{ key: "ring", label: "Bell", type: "pulse", ease: 2.5 }],
     action: { key: "ring", label: "Ring the bell", sound: "chime" },
     drive(t, c, out, info) {
+      // Ring-ring: the bell shakes and rings out, and the rider pedals hard
+      // (whole turns, so the wheels end where they would have been).
+      const p = c.ring > 0.001 ? 1 - c.ring : 1;
       const a = -t * 2.4;
-      out.parts.front = { angle: a };
-      out.parts.rear = { angle: a };
-      out.parts.crank = { angle: a * 0.42 };
-      out.parts.bell = { angle: 0.35 * Math.sin(info.time * 40) * c.ring };
+      out.parts.front = { angle: a - burst(c.ring, 5) };
+      out.parts.rear = { angle: a - burst(c.ring, 5) };
+      out.parts.crank = { angle: a * 0.42 - burst(c.ring, 2) };
+      const ringing = p < 0.7 ? 1 - smoothstep(0.55, 0.7, p) : 0;
+      out.parts.bell = { angle: 0.35 * Math.sin(info.time * 40) * ringing };
+      const beat = Math.floor(p * 16) % 2;
+      out.parts.ringA = { visible: ringing * beat };
+      out.parts.ringB = { visible: ringing * (1 - beat) };
     },
     build: bicycleBuild,
   },
