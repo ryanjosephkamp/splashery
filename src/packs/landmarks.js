@@ -1100,18 +1100,26 @@ function libertyBuild(k) {
     weight: 2,
     color: (c) => patina(c, 0.6),
   });
+  // Seven rays fanning up and out from the crown: steep in front, lower at
+  // the sides, each a long taper to a sharp point that catches the light.
   for (let i = 0; i < 7; i++) {
     const ph = ((-75 + i * 25) * Math.PI) / 180;
-    const e = 0.32;
+    const e = 0.46 + 0.2 * (1 - Math.abs(ph) / ((75 * Math.PI) / 180));
     const d = [Math.sin(ph) * Math.cos(e), Math.sin(e), Math.cos(ph) * Math.cos(e)];
-    const a = add([0, 0.665, -0.005], mul(d, 0.05));
+    const a = add([0, 0.668, -0.005], mul(d, 0.048));
+    const pa = F.p(a);
+    const pb = F.p(add(a, mul(d, 0.135)));
+    const h = len(sub(pb, pa));
     rod(
       k,
-      F.p(a),
-      F.p(add(a, mul(d, 0.105))),
-      0.013 * S,
-      { weight: 3, color: (c) => patina(c, 0.6) },
-      0.0015,
+      pa,
+      pb,
+      0.014 * S,
+      {
+        weight: 4,
+        color: (c) => shade(patina(c, 0.62), 0.92 + 0.3 * clamp(c.lp[1] / h + 0.5, 0, 1)),
+      },
+      0.0008,
     );
   }
   // The raised right arm and the torch.

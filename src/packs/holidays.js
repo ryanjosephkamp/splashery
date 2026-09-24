@@ -701,33 +701,50 @@ export const RECIPES = {
           params: [0.5, (i % bulbs.length) * 1.7],
         };
       });
-      // The star on top.
-      const top = [0, 0.95, 0];
-      for (const z of [0.03, -0.03]) {
+      // The star on top: a faceted, bevelled gold star (each point has a lit
+      // and a shaded face), turned to face the home view so its shape reads.
+      const top = [0, 0.97, 0];
+      const R = 0.2;
+      const seg = TAU / 5;
+      for (const side of [1, -1]) {
         k.add(
           k.param(
             (u, v) => {
               const a = u * TAU;
-              const r = v * starRadius(a, 0.17);
-              return [top[0] + Math.sin(a) * r, top[1] + Math.cos(a) * r, z * (1 - v * 0.7)];
+              const r = v * starRadius(a, R);
+              return [Math.sin(a) * r, Math.cos(a) * r, side * 0.045 * (1 - v)];
             },
-            { grid: 40, normal: () => [0, 0, Math.sign(z)] },
+            { grid: 60, flip: side < 0 },
           ),
           {
-            weight: 2,
+            pos: top,
+            rot: [0, 31.5, 0],
+            weight: 4,
+            even: true,
+            jitter: 0.01,
+            flat: 0.15,
             pattern: false,
             kind: "twinkle",
-            params: [0.25, 0],
-            color: (c) => mix("#fff2a0", "#f0b020", c.v),
+            params: [0.15, 0],
+            color: (c) => {
+              const a = Math.atan2(c.lp[0], c.lp[1]);
+              // Which half of a point the splat is on: one catches the light.
+              const d = fract(a / seg + 0.5) - 0.5;
+              const facet = d > 0 ? 1.08 : 0.72;
+              const ridge = Math.abs(d) < 0.02 ? 1.25 : 1;
+              const tip = c.v > 0.93 ? 1.15 : 1;
+              return shade(mix("#ffe79a", "#e5a51c", c.v * 0.8), facet * ridge * tip);
+            },
           },
         );
       }
-      k.cloud({ share: 0.006, size: 3, pattern: false }, (rand) => {
+      // A faint warm glow behind it.
+      k.cloud({ share: 0.004, size: 2.4, pattern: false }, (rand) => {
         const d = vec.unit([rand() - 0.5, rand() - 0.5, rand() - 0.5]);
         return {
-          p: vec.add(top, vec.mul(d, 0.18 * rand())),
+          p: vec.add(top, vec.mul(d, 0.08 + 0.12 * rand())),
           color: "#fff0a0",
-          opacity: 0.12,
+          opacity: 0.035,
           kind: "twinkle",
           params: [0.3, rand() * TAU],
         };
