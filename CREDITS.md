@@ -65,9 +65,9 @@ downloads each glTF, scatters splats over its surfaces by area, colours them fro
 textures (glass materials are skipped so the insides show), and writes a 3DGS PLY file;
 `tools/prepare-assets.mjs` then packs it like the scans (at most 200,000 splats, 80,000 for phones).
 Poly Haven does not require credit, but it is given here anyway. Since Phase C1 the vintage camera,
-boombox, wooden elephant and horse statue also have soft studio light baked into their colours
-(with the models' own normal and occlusion maps), and the printed maker's names on the camera, its
-lens and the boombox are painted out (see `tools/models.json`).
+boombox, wooden elephant and horse statue also have soft studio light baked into their colours (with
+the models' own normal and occlusion maps), and the printed maker's names on the camera, its lens
+and the boombox are painted out (see `tools/models.json`).
 
 | Toy              | Model                                                                    | Author                       | Licence                                                       |
 | ---------------- | ------------------------------------------------------------------------ | ---------------------------- | ------------------------------------------------------------- |
