@@ -703,9 +703,17 @@ export const RECIPES = {
       });
       // The star on top: a faceted, bevelled gold star (each point has a lit
       // and a shaded face), turned to face the home view so its shape reads.
-      const top = [0, 0.97, 0];
+      // It sits above the tip, so its lower points clear the needles (the
+      // tufts reach y = 0.98), on a short gold stem.
+      const top = [0, 1.17, 0];
       const R = 0.2;
       const seg = TAU / 5;
+      k.add(k.cylinder(0.018, 0.2), {
+        pos: [0, 0.94, 0],
+        weight: 3,
+        pattern: false,
+        color: (c) => shade("#d9a22a", 0.85 + 0.25 * Math.max(0, c.n[0])),
+      });
       for (const side of [1, -1]) {
         k.add(
           k.param(
