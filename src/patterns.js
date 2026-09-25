@@ -27,6 +27,8 @@ export const PROJECTIONS = [
   { id: "wrap", label: "Wrap" },
   { id: "front", label: "Front" },
   { id: "globe", label: "Globe" },
+  // Seen from above: laid over a flat toy like a cloth (the chess board).
+  { id: "top", label: "Top" },
 ];
 export const PROJECTION_IDS = PROJECTIONS.map((p) => p.id);
 
@@ -87,6 +89,7 @@ export function surfaceAspect(pattern, half) {
   const rep = Math.max(1, pattern.repeats || 1);
   if (pattern.projection === "front") return half[0] / hh;
   if (pattern.projection === "globe") return 2 / rep;
+  if (pattern.projection === "top") return half[0] / Math.max(1e-3, half[2]);
   return (Math.PI * hw) / (rep * hh);
 }
 
@@ -324,14 +327,17 @@ export function patternUniforms(pattern, half, lum, on) {
     uSpPat: [
       on ? 1 : 0,
       proj,
-      pattern.projection === "front" ? 1 : Math.max(1, pattern.repeats || 1),
+      pattern.projection === "front" || pattern.projection === "top"
+        ? 1
+        : Math.max(1, pattern.repeats || 1),
       pattern.amount ?? 1,
     ],
+    // y: the half height (the half depth for "top"); w: the half width.
     uSpPatB: [
       pattern.detail ?? 0.6,
-      Math.max(1e-3, half[1]),
+      Math.max(1e-3, pattern.projection === "top" ? half[2] : half[1]),
       Math.max(0.08, lum || 0.5),
-      Math.max(1e-3, proj === 1 ? half[0] : hw),
+      Math.max(1e-3, proj === 1 || pattern.projection === "top" ? half[0] : hw),
     ],
   };
 }

@@ -21,6 +21,7 @@
   --radius: 12px;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   --panel-w: 344px;
+  --shelf-h: 232px;
 }
 
 /* Dark tokens: the script sets data-theme; before it runs, follow the system. */
@@ -222,6 +223,92 @@ textarea {
   border-color: var(--ink);
 }
 
+/* The game bar: under the board while the chess set is out. */
+
+.game-bar {
+  position: fixed;
+  left: calc((100% - var(--panel-w) - 24px) / 2);
+  bottom: 40px;
+  z-index: 4;
+  width: min(460px, calc(100% - var(--panel-w) - 60px));
+  transform: translateX(-50%);
+  padding: 8px 12px 9px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+.game-bar-title {
+  margin: 0;
+  font-size: 13.5px;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.game-bar-info {
+  margin: 1px 0 6px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.game-bar-info:empty {
+  display: none;
+}
+
+.game-bar-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 6px 12px;
+}
+
+.game-buttons {
+  display: flex;
+  gap: 4px;
+}
+
+.game-buttons button {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 30px;
+  padding: 0;
+}
+
+.game-buttons .i-pause,
+#game-play[data-playing="true"] .i-play {
+  display: none;
+}
+
+#game-play[data-playing="true"] .i-pause {
+  display: inline;
+}
+
+.game-bar-move {
+  font-size: 12.5px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.game-details summary {
+  cursor: pointer;
+  font-size: 13px;
+  margin: 8px 0 2px;
+}
+
+.game-details input[type="text"] {
+  grid-column: 2 / 4;
+  min-width: 0;
+  padding: 4px 8px;
+  background: var(--page);
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  font-size: 13px;
+}
+
 /* Panel ------------------------------------------------------------------- */
 
 .panel {
@@ -300,11 +387,11 @@ textarea {
 
 .shelf {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
   align-content: start;
   gap: 8px;
-  max-height: 232px;
-  margin-bottom: 10px;
+  max-height: var(--shelf-h);
+  margin-bottom: 2px;
   overflow-y: auto;
   overscroll-behavior: contain;
   scrollbar-width: thin;
@@ -357,6 +444,72 @@ textarea {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+/* Grips: the panel's left edge sets its width, the bar under the shelf its
+   height (wide screens only). */
+
+.grip {
+  touch-action: none;
+  outline-offset: -2px;
+}
+
+.grip-panel {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+  width: 9px;
+  cursor: col-resize;
+}
+
+.grip-panel::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 3px;
+  width: 3px;
+  height: 44px;
+  margin-top: -22px;
+  border-radius: 2px;
+  background: var(--line-strong);
+  opacity: 0;
+  transition: opacity 140ms var(--ease);
+}
+
+.grip-shelf {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 12px;
+  margin: 0 0 6px;
+  cursor: row-resize;
+}
+
+.grip-shelf::after {
+  content: "";
+  width: 36px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--line);
+  transition: background 140ms var(--ease);
+}
+
+.grip:hover::after,
+.grip:focus-visible::after,
+body.resizing .grip::after {
+  opacity: 1;
+  background: var(--ink);
+}
+
+body.resizing {
+  user-select: none;
+  cursor: col-resize;
+}
+
+body.resizing #stage {
+  pointer-events: none;
 }
 
 .toolbar {
@@ -433,16 +586,22 @@ textarea {
   outline-offset: -2px;
 }
 
+.tabs .tab-icon {
+  flex: 0 0 40px;
+  display: grid;
+  place-items: center;
+}
+
 .panes {
   flex: 1 1 auto;
   min-height: 0;
-  padding: 2px 14px 14px;
+  padding: 4px 16px 16px;
   overflow-y: auto;
   overscroll-behavior: contain;
 }
 
 .group {
-  padding: 10px 0 8px;
+  padding: 14px 0 12px;
   border-bottom: 1px solid var(--line);
 }
 
@@ -451,7 +610,7 @@ textarea {
 }
 
 .group h2 {
-  margin: 0 0 6px;
+  margin: 0 0 10px;
   font-size: 12px;
   font-weight: 650;
   letter-spacing: 0.06em;
@@ -461,11 +620,11 @@ textarea {
 
 .row {
   display: grid;
-  grid-template-columns: 86px minmax(0, 1fr) auto;
+  grid-template-columns: 92px minmax(0, 1fr) auto;
   align-items: center;
-  gap: 8px;
-  margin: 6px 0;
-  font-size: 13px;
+  gap: 10px;
+  margin: 9px 0;
+  font-size: 13.5px;
 }
 
 .row > span:first-child {
@@ -504,9 +663,9 @@ textarea {
 .check-row {
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin: 8px 0;
-  font-size: 13px;
+  gap: 10px;
+  margin: 10px 0;
+  font-size: 13.5px;
 }
 
 .check-inline {
@@ -645,6 +804,40 @@ textarea {
   background: var(--page);
 }
 
+/* A switch that says ON or OFF inside its track. */
+.switch.labelled {
+  width: 50px;
+  height: 22px;
+}
+
+.switch.labelled::after {
+  width: 16px;
+  height: 16px;
+}
+
+.switch.labelled:checked::after {
+  transform: translateX(28px);
+}
+
+.switch.labelled::before {
+  content: "OFF";
+  position: absolute;
+  top: 50%;
+  right: 6px;
+  transform: translateY(-50%);
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--faint);
+}
+
+.switch.labelled:checked::before {
+  content: "ON";
+  right: auto;
+  left: 7px;
+  color: var(--page);
+}
+
 /* Inputs ------------------------------------------------------------------ */
 
 input[type="range"] {
@@ -706,6 +899,28 @@ button.primary {
 
 button.primary:hover:not(:disabled) {
   border-color: var(--ink);
+}
+
+/* Reset everything: quiet until armed (the first tap asks for a second). */
+button.danger {
+  color: var(--warn);
+  border-color: var(--warn);
+}
+
+button.danger.armed {
+  background: var(--warn);
+  border-color: var(--warn);
+  color: var(--page);
+}
+
+.reset-row {
+  margin-top: 14px;
+  align-items: center;
+}
+
+.reset-row .note {
+  flex: 1 1 140px;
+  margin: 0;
 }
 
 .game-box {
@@ -1096,6 +1311,22 @@ button.primary:hover:not(:disabled) {
     margin: 0 -12px 8px;
     padding: 0 12px;
     touch-action: pan-x;
+  }
+
+  .grip {
+    display: none;
+  }
+
+  .game-bar {
+    left: 50%;
+    bottom: calc(var(--dock-h, 200px) + 4px);
+    width: calc(100% - 24px);
+    padding: 6px 10px 7px;
+  }
+
+  body.sheet-open .game-bar,
+  body.shelf-grid .game-bar {
+    display: none;
   }
 
   .shelf::-webkit-scrollbar {

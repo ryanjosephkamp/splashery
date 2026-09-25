@@ -43,6 +43,85 @@
 
     <p id="toy-status" class="toy-status" aria-live="polite"></p>
 
+    <div id="game-bar" class="game-bar" hidden>
+      <p id="game-bar-title" class="game-bar-title"></p>
+      <p id="game-bar-info" class="game-bar-info"></p>
+      <div class="game-bar-row">
+        <div class="game-buttons" role="group" aria-label="Play the game">
+          <button
+            type="button"
+            id="game-start"
+            title="Back to the start"
+            aria-label="Back to the start"
+          >
+            <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">
+              <path
+                d="M3 3v10M13 3 6 8l7 5z"
+                fill="currentColor"
+                stroke="currentColor"
+                stroke-width="1.2"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
+          <button type="button" id="game-back" title="One move back" aria-label="One move back">
+            <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">
+              <path
+                d="M11 3 4 8l7 5z"
+                fill="currentColor"
+                stroke="currentColor"
+                stroke-width="1.2"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
+          <button
+            type="button"
+            id="game-play"
+            class="primary"
+            title="Play or pause (or tap the board)"
+            aria-label="Play"
+          >
+            <svg class="i-play" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">
+              <path
+                d="M5 3l8 5-8 5z"
+                fill="currentColor"
+                stroke="currentColor"
+                stroke-width="1.2"
+                stroke-linejoin="round"
+              />
+            </svg>
+            <svg class="i-pause" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">
+              <path d="M4.5 3h2.5v10H4.5zM9 3h2.5v10H9z" fill="currentColor" />
+            </svg>
+          </button>
+          <button type="button" id="game-next" title="One move on" aria-label="One move on">
+            <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">
+              <path
+                d="M5 3l7 5-7 5z"
+                fill="currentColor"
+                stroke="currentColor"
+                stroke-width="1.2"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
+          <button type="button" id="game-end" title="To the end" aria-label="To the end">
+            <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">
+              <path
+                d="M13 3v10M3 3l7 5-7 5z"
+                fill="currentColor"
+                stroke="currentColor"
+                stroke-width="1.2"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
+        </div>
+        <span id="game-bar-move" class="game-bar-move"></span>
+      </div>
+    </div>
+
     <button
       id="sound-toggle"
       type="button"
@@ -186,17 +265,17 @@
             aria-controls="pane-play"
             aria-selected="true"
           >
-            Play
+            Toy
           </button>
           <button
             type="button"
             role="tab"
-            id="tab-make"
-            aria-controls="pane-make"
+            id="tab-tools"
+            aria-controls="pane-tools"
             aria-selected="false"
             tabindex="-1"
           >
-            Make
+            Tools
           </button>
           <button
             type="button"
@@ -207,6 +286,16 @@
             tabindex="-1"
           >
             Look
+          </button>
+          <button
+            type="button"
+            role="tab"
+            id="tab-make"
+            aria-controls="pane-make"
+            aria-selected="false"
+            tabindex="-1"
+          >
+            Make
           </button>
           <button
             type="button"
@@ -222,11 +311,18 @@
             type="button"
             role="tab"
             id="tab-about"
+            class="tab-icon"
             aria-controls="pane-about"
             aria-selected="false"
+            aria-label="About"
+            title="About"
             tabindex="-1"
           >
-            About
+            <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true">
+              <circle cx="8" cy="8" r="6.4" fill="none" stroke="currentColor" stroke-width="1.5" />
+              <path d="M8 7.2v4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+              <circle cx="8" cy="4.9" r="0.95" fill="currentColor" />
+            </svg>
           </button>
         </div>
         <div class="panes" id="panes">
@@ -238,9 +334,25 @@
                 <span class="note">or tap the toy</span>
               </div>
               <div id="toy-controls"></div>
+              <div id="toy-options"></div>
+              <p id="toy-note" class="note"></p>
+            </section>
+
+            <section class="group" id="motion-group" aria-labelledby="h-motion">
+              <h2 id="h-motion">Motion</h2>
               <label class="check-row" id="toy-alive-row" hidden>
-                <input id="toy-alive" type="checkbox" class="switch" role="switch" />
+                <input id="toy-alive" type="checkbox" class="switch labelled" role="switch" />
                 <span>Moves by itself</span>
+              </label>
+              <label class="check-row">
+                <input
+                  id="auto-turntable"
+                  type="checkbox"
+                  class="switch labelled"
+                  role="switch"
+                  checked
+                />
+                <span>Turntable when idle</span>
               </label>
               <div class="row">
                 <span>Move</span>
@@ -251,16 +363,41 @@
                 <input id="toy-speed" type="range" min="0" max="100" value="50" />
                 <output id="toy-speed-value" for="toy-speed">50%</output>
               </label>
-              <div id="toy-options"></div>
+              <p id="motion-note" class="note" hidden>
+                Your system asks for reduced motion, so the turntable and idle effects stay off.
+              </p>
+            </section>
+
+            <section class="group" id="quick-group" aria-labelledby="h-quick">
+              <h2 id="h-quick">Quick settings</h2>
               <label class="row">
                 <span>Flag colours</span>
                 <select id="toy-flag" aria-label="Flag colours">
                   <option value="">None</option>
                 </select>
               </label>
-              <p id="toy-note" class="note"></p>
+              <div class="row">
+                <span>Detail</span>
+                <div class="segmented" role="group" aria-label="Detail" id="look-detail">
+                  <button type="button" data-detail="auto" aria-pressed="true">Auto</button>
+                  <button type="button" data-detail="high" aria-pressed="false">High</button>
+                  <button type="button" data-detail="max" aria-pressed="false">Max</button>
+                </div>
+              </div>
+              <p class="note">
+                Detail stays on this device and is never part of a link. High and Max draw more
+                splats at sharper resolution, which can be slow on phones.
+              </p>
+              <div class="button-row reset-row">
+                <button id="reset-all" type="button" class="danger">Reset everything</button>
+                <span id="reset-note" class="note">
+                  Flag colours, paint, clay, effects, options and looks
+                </span>
+              </div>
             </section>
+          </div>
 
+          <div class="pane" role="tabpanel" id="pane-tools" aria-labelledby="tab-tools" hidden>
             <section class="group" id="tool-group" aria-labelledby="h-tool">
               <h2 id="h-tool">Tool</h2>
               <p id="tool-hint" class="note"></p>
@@ -559,32 +696,14 @@
                 <input id="look-exposure" type="range" min="30" max="250" value="100" />
                 <output id="look-exposure-value" for="look-exposure">1.00</output>
               </label>
-              <div class="row">
-                <span>Detail</span>
-                <div class="segmented" role="group" aria-label="Detail" id="look-detail">
-                  <button type="button" data-detail="auto" aria-pressed="true">Auto</button>
-                  <button type="button" data-detail="high" aria-pressed="false">High</button>
-                  <button type="button" data-detail="max" aria-pressed="false">Max</button>
-                </div>
-              </div>
-              <p class="note">
-                Detail stays on this device and is never part of a link. High and Max draw more
-                splats at sharper resolution, which can be slow on phones.
-              </p>
             </section>
             <section class="group" id="idle-group" aria-labelledby="h-idle">
               <h2 id="h-idle">When nobody is playing</h2>
-              <label class="check-row">
-                <input id="auto-turntable" type="checkbox" checked />
-                <span>Slow turntable when idle</span>
-              </label>
               <label class="row">
-                <span>When idle</span>
+                <span>Idle effect</span>
                 <select id="auto-effect"></select>
               </label>
-              <p id="motion-note" class="note" hidden>
-                Your system asks for reduced motion, so the turntable and idle effects stay off.
-              </p>
+              <p class="note">The turntable switch is on the Toy tab.</p>
             </section>
           </div>
 

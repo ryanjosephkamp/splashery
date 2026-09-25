@@ -124,6 +124,8 @@ export function createUI(app) {
     lookExposure: $("look-exposure"),
     lookExposureValue: $("look-exposure-value"),
     autoTurntable: $("auto-turntable"),
+    resetAll: $("reset-all"),
+    resetNote: $("reset-note"),
     autoEffect: $("auto-effect"),
     motionNote: $("motion-note"),
     byoFile: $("byo-file"),
@@ -157,6 +159,11 @@ export function createUI(app) {
     credits: $("credits"),
     renderInfo: $("render-info"),
     toyStatus: $("toy-status"),
+    gameBar: $("game-bar"),
+    gameBarTitle: $("game-bar-title"),
+    gameBarInfo: $("game-bar-info"),
+    gameBarMove: $("game-bar-move"),
+    gamePlay: $("game-play"),
     progress: $("progress"),
     progressBar: $("progress-bar"),
     progressLabel: $("progress-label"),
@@ -317,7 +324,11 @@ export function createUI(app) {
 
   // ---- Tools -----------------------------------------------------------------
   for (const b of els.tools.querySelectorAll("button")) {
-    b.addEventListener("click", () => app.setTool(b.dataset.tool));
+    b.addEventListener("click", () => {
+      app.setTool(b.dataset.tool);
+      // A tool with settings (paint colours, clay, strength) opens them.
+      if (b.dataset.tool !== "orbit") showTab("tools");
+    });
   }
   for (const hex of SWATCHES) {
     const b = document.createElement("button");
@@ -495,7 +506,9 @@ export function createUI(app) {
       els.toyControls.appendChild(row);
       controlInputs.set(c.key, { input, output, def: c });
     }
+    barGame = recipe?.game || null;
     if (recipe?.game) renderGamePanel(recipe.game);
+    refreshGameBar();
     els.toyOptions.textContent = "";
     for (const o of recipe?.options || []) {
       const row = document.createElement("label");
@@ -603,10 +616,44 @@ export function createUI(app) {
     goRow.className = "button-row";
     goRow.appendChild(go);
     paste.append(text, goRow);
+    // The game's details, which can be edited (the title follows them).
+    const details = document.createElement("details");
+    details.className = "game-details";
+    const summary = document.createElement("summary");
+    summary.textContent = "Game details";
+    details.appendChild(summary);
+    const fields = {};
+    for (const [key, label] of [
+      ["White", "White"],
+      ["Black", "Black"],
+      ["Event", "Event"],
+      ["Site", "Where"],
+      ["Date", "Date"],
+      ["Result", "Result"],
+    ]) {
+      const r = document.createElement("label");
+      r.className = "row";
+      const name = document.createElement("span");
+      name.textContent = label;
+      const input = document.createElement("input");
+      input.type = "text";
+      input.id = `game-tag-${key.toLowerCase()}`;
+      input.spellcheck = false;
+      input.addEventListener("change", async () => {
+        await game.setTags({ [key]: input.value.trim() });
+        refresh();
+      });
+      r.append(name, input);
+      details.appendChild(r);
+      fields[key] = input;
+    }
     const refresh = () => {
       now.textContent = `On the board: ${game.title()}`;
       reset.hidden = game.isDefault();
+      const tags = game.tags();
+      for (const [key, input] of Object.entries(fields)) input.value = tags[key] || "";
       els.toyAction.textContent = app.player?.toyInfo?.recipe?.action?.label || els.toyAction.textContent; // prettier-ignore
+      refreshGameBar();
     };
     const load = async (source) => {
       error.hidden = true;
@@ -647,10 +694,69 @@ export function createUI(app) {
       load(await f.text());
     });
     go.addEventListener("click", () => load(text.value));
-    box.append(now, row, paste, error, file);
+    box.append(now, row, paste, error, file, details);
     els.toyControls.appendChild(box);
     refresh();
   }
+
+  // ---- The game bar -----------------------------------------------------------------
+  // Under the board while a game toy (the chess set) is out: the game's title
+  // and details, where it has got to, and buttons to play, pause, step and
+  // jump. Tapping the board also plays or pauses.
+  let barGame = null;
+  const playing = () => (app.player?.motion?.targets?.play ?? 0) > 0.5;
+  function refreshGameBar() {
+    const game = barGame;
+    els.gameBar.hidden = !game;
+    if (!game) return;
+    const tags = game.tags();
+    const known = (x) => (x && !/^[?.\s]*$/.test(x) ? x : "");
+    const date = known(tags.Date)
+      .replace(/\.\?\?/g, "")
+      .replace(/\./g, "-");
+    els.gameBarTitle.textContent = game.title();
+    els.gameBarInfo.textContent = [known(tags.Event), known(tags.Site), date, known(tags.Result)]
+      .filter(Boolean)
+      .filter((x, i, a) => a.indexOf(x) === i)
+      .join(" · ");
+    const st = game.state();
+    const moves = Math.ceil(st.n / 2);
+    const at = Math.ceil(st.played / 2);
+    els.gameBarMove.textContent = st.over
+      ? `Game over after ${moves} moves`
+      : st.played
+        ? `Move ${at} of ${moves}`
+        : `${moves} moves`;
+    els.gamePlay.dataset.playing = String(playing());
+    els.gamePlay.setAttribute("aria-label", playing() ? "Pause" : "Play");
+  }
+  setInterval(() => barGame && !document.hidden && refreshGameBar(), 250);
+  const pause = () => app.setControl("play", 0);
+  $("game-start").addEventListener("click", () => {
+    pause();
+    barGame?.jump("start");
+  });
+  $("game-back").addEventListener("click", () => {
+    pause();
+    barGame?.step(-1);
+  });
+  $("game-next").addEventListener("click", () => {
+    pause();
+    barGame?.step(1);
+  });
+  $("game-end").addEventListener("click", () => {
+    pause();
+    barGame?.jump("end");
+  });
+  els.gamePlay.addEventListener("click", () => {
+    if (!barGame) return;
+    if (playing()) pause();
+    else {
+      if (barGame.state().over) barGame.jump("start");
+      app.setControl("play", 1);
+    }
+    refreshGameBar();
+  });
 
   function showMotion(m, controls = {}) {
     for (const b of els.toyMove.children)
@@ -831,6 +937,25 @@ export function createUI(app) {
     b.addEventListener("click", () => app.setDetail(b.dataset.detail));
   }
   for (const e of IDLE_EFFECTS) els.autoEffect.add(new Option(e.label, e.id));
+  // Reset everything: a second tap within a few seconds confirms.
+  let resetArmed = null;
+  const disarmReset = () => {
+    clearTimeout(resetArmed);
+    resetArmed = null;
+    els.resetAll.textContent = "Reset everything";
+    els.resetAll.classList.remove("armed");
+  };
+  els.resetAll.addEventListener("click", async () => {
+    if (!resetArmed) {
+      els.resetAll.textContent = "Tap again to reset";
+      els.resetAll.classList.add("armed");
+      resetArmed = setTimeout(disarmReset, 4000);
+      return;
+    }
+    disarmReset();
+    await app.resetAll();
+  });
+  els.resetAll.addEventListener("blur", () => resetArmed && setTimeout(disarmReset, 200));
   els.autoTurntable.addEventListener("change", () =>
     app.setAutoplay({ turntable: els.autoTurntable.checked }),
   );
@@ -902,6 +1027,101 @@ export function createUI(app) {
     if (j < 0) return;
     e.preventDefault();
     showTab(tabs[j].id.slice(4), { focus: true });
+  });
+
+  // ---- Panel and shelf size (wide screens) ------------------------------------------
+  // Drag the panel's left edge to make the panel (and the shelf, which gains
+  // columns) wider, and the grip under the shelf to show more rows of toys.
+  // Double-click a grip to switch between the usual and a big size; the arrow
+  // keys move a focused grip. The sizes are kept in this browser.
+  const SIZES = {
+    panel: { css: "--panel-w", key: "splashery.panelWidth", min: 300, usual: 344, big: 560, step: 24 }, // prettier-ignore
+    shelf: { css: "--shelf-h", key: "splashery.shelfHeight", min: 120, usual: 232, big: 460, step: 24 }, // prettier-ignore
+  };
+  const sizeMax = {
+    panel: () => Math.max(300, Math.min(760, window.innerWidth * 0.62)),
+    shelf: () => Math.max(120, window.innerHeight * 0.62),
+  };
+  const sizes = {};
+  function setSize(which, v, save = true) {
+    const S = SIZES[which];
+    const n = Math.round(Math.min(sizeMax[which](), Math.max(S.min, v)));
+    sizes[which] = n;
+    document.documentElement.style.setProperty(S.css, `${n}px`);
+    grips[which].setAttribute("aria-valuenow", String(n));
+    if (!save) return;
+    try {
+      localStorage.setItem(S.key, String(n));
+    } catch {
+      // Private windows may refuse storage; the size still applies now.
+    }
+  }
+  function makeGrip(which, label, orientation, parent, before = null) {
+    const g = document.createElement("div");
+    g.className = `grip grip-${which}`;
+    g.setAttribute("role", "separator");
+    g.setAttribute("aria-orientation", orientation);
+    g.setAttribute("aria-label", label);
+    g.setAttribute("aria-valuemin", String(SIZES[which].min));
+    g.title = `${label}: drag, or double-click for a bigger size`;
+    g.tabIndex = 0;
+    parent.insertBefore(g, before);
+    return g;
+  }
+  const grips = {
+    panel: makeGrip("panel", "Panel width", "vertical", els.panel, els.panel.firstChild),
+    shelf: makeGrip("shelf", "Shelf height", "horizontal", els.dock, els.shelf.nextSibling),
+  };
+  for (const [which, g] of Object.entries(grips)) {
+    const S = SIZES[which];
+    // The panel grows leftwards (it sits on the right); the shelf downwards.
+    const sign = which === "panel" ? -1 : 1;
+    let drag = null;
+    g.addEventListener("pointerdown", (e) => {
+      if (narrow.matches || e.button !== 0) return;
+      e.preventDefault();
+      g.setPointerCapture(e.pointerId);
+      drag = { at: which === "panel" ? e.clientX : e.clientY, from: sizes[which] ?? S.usual };
+      document.body.classList.add("resizing");
+    });
+    g.addEventListener("pointermove", (e) => {
+      if (!drag) return;
+      const now = which === "panel" ? e.clientX : e.clientY;
+      setSize(which, drag.from + sign * (now - drag.at), false);
+    });
+    const end = () => {
+      if (!drag) return;
+      drag = null;
+      document.body.classList.remove("resizing");
+      setSize(which, sizes[which]);
+    };
+    g.addEventListener("pointerup", end);
+    g.addEventListener("pointercancel", end);
+    g.addEventListener("dblclick", () => {
+      const cur = sizes[which] ?? S.usual;
+      setSize(which, cur < (S.usual + S.big) / 2 ? S.big : S.usual);
+    });
+    g.addEventListener("keydown", (e) => {
+      const grow = which === "panel" ? "ArrowLeft" : "ArrowDown";
+      const shrink = which === "panel" ? "ArrowRight" : "ArrowUp";
+      const cur = sizes[which] ?? S.usual;
+      if (e.key === grow) setSize(which, cur + S.step);
+      else if (e.key === shrink) setSize(which, cur - S.step);
+      else if (e.key === "Home") setSize(which, S.min);
+      else if (e.key === "End") setSize(which, sizeMax[which]());
+      else return;
+      e.preventDefault();
+    });
+    let saved = NaN;
+    try {
+      saved = Number(localStorage.getItem(S.key));
+    } catch {
+      // No storage: start at the usual size.
+    }
+    setSize(which, saved > 0 ? saved : S.usual, false);
+  }
+  window.addEventListener("resize", () => {
+    for (const which of Object.keys(SIZES)) setSize(which, sizes[which], false);
   });
 
   // ---- Bottom sheet ---------------------------------------------------------------

@@ -12,7 +12,13 @@ import { buildRecipe, Kit } from "../src/kit.js";
 import { applyClay } from "../src/generators.js";
 import { KINDS } from "../src/effects.js";
 import { MotionDriver } from "../src/motion.js";
-import { normalizePattern, surfaceAspect, PATTERN_IDS } from "../src/patterns.js";
+import {
+  normalizePattern,
+  surfaceAspect,
+  patternUniforms,
+  PATTERN_IDS,
+  PROJECTION_IDS,
+} from "../src/patterns.js";
 import { resolveOptions } from "../src/player.js";
 
 const KIT = TOYS.filter((t) => t.kind === "kit");
@@ -180,6 +186,63 @@ test("patterns normalise and are drawn at the aspect of the surface they wrap", 
   expect(surfaceAspect({ projection: "wrap", repeats: 1 }, half)).toBeCloseTo(Math.PI, 5);
   expect(surfaceAspect({ projection: "wrap", repeats: 2 }, half)).toBeCloseTo(Math.PI / 2, 5);
   expect(surfaceAspect({ projection: "front", repeats: 1 }, half)).toBeCloseTo(1, 5);
+  // Top: laid over a flat toy from above (the chess board), at its width / depth.
+  const board = [1, 0.1, 0.5];
+  expect(surfaceAspect({ projection: "top", repeats: 3 }, board)).toBeCloseTo(2, 5);
+  const u = patternUniforms({ ...p, projection: "top", repeats: 3 }, board, 0.5, true);
+  expect(u.uSpPat[1]).toBe(PROJECTION_IDS.indexOf("top"));
+  expect(u.uSpPat[2]).toBe(1);
+  expect(u.uSpPatB[1]).toBeCloseTo(0.5, 5);
+  expect(u.uSpPatB[3]).toBeCloseTo(1, 5);
+});
+
+test("flag colours tint the chess board gently and leave the pieces their own colours", async () => {
+  const { RECIPES } = await import("../src/packs/games.js");
+  const chess = RECIPES["chess-set"];
+  // The board takes the flag from above, at 30%, keeping its light and dark squares.
+  expect(chess.patternProjection).toBe("top");
+  expect(chess.patternAmount).toBeCloseTo(0.3, 5);
+  expect(chess.patternDetail).toBe(1);
+  const ctx = (() => {
+    const it = buildRecipe(
+      chess,
+      { seed: 1, count: 60000, options: resolveOptions(chess, {}) },
+      applyClay,
+    );
+    let r = it.next();
+    while (!r.done) r = it.next();
+    return r.value;
+  })();
+  const { anim, count } = ctx.buf;
+  let pieces = 0;
+  let piecesPatterned = 0;
+  let boardPatterned = 0;
+  for (let i = 0; i < count; i++) {
+    const noPattern = anim[i * 4] >= 16;
+    if (anim[i * 4 + 1] === KINDS.token) {
+      pieces++;
+      if (!noPattern) piecesPatterned++;
+    } else if (!noPattern) boardPatterned++;
+  }
+  expect(pieces).toBeGreaterThan(10000);
+  expect(piecesPatterned).toBe(0);
+  expect(boardPatterned).toBeGreaterThan(10000);
+});
+
+test("the pixel font has digits, and every flag knows its shape", async () => {
+  const { inked, FONT } = await import("../src/font.js");
+  for (const d of "0123456789") expect(FONT[d], d).toBeTruthy();
+  // The middle of the 1's stem is inked, its left edge is not.
+  expect(inked(["1"], 2.5, 3.5)).toBe(true);
+  expect(inked(["1"], 0.5, 3.5)).toBe(false);
+  const fs = await import("node:fs");
+  const flags = JSON.parse(fs.readFileSync("assets/flags/flags.json", "utf8")).flags;
+  for (const f of flags) expect(f.aspect, f.code).toBeGreaterThan(0.5);
+  expect(flags.find((f) => f.code === "ch").aspect).toBeCloseTo(1, 2);
+  expect(flags.find((f) => f.code === "us").aspect).toBeCloseTo(1.9, 2);
+  const { svgAspect } = await import("../tools/flag-aspects.mjs");
+  expect(svgAspect('<svg width="1e3" height="500">')).toBeCloseTo(2, 5);
+  expect(svgAspect('<svg viewBox="0 0 75 18" width="1400" height="550">')).toBeCloseTo(2.545, 3);
 });
 
 test("the motion driver hops, eases toggles and fills the part uniforms", () => {

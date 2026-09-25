@@ -15,7 +15,7 @@ import {
   normalizeMotion,
 } from "./state.js";
 import { defaultEffects, effectDef } from "./effects.js";
-import { normalizePattern, flagInfo, loadFlags } from "./patterns.js";
+import { normalizePattern, flagInfo, loadFlags, DEFAULT_PATTERN } from "./patterns.js";
 import { Sound } from "./sound.js";
 import { specFor } from "./voices.js";
 import { toySound } from "./toy-sounds.js";
@@ -46,6 +46,23 @@ function showFallback(reason) {
   document.getElementById("panel").hidden = true;
   document.body.dataset.ready = "true";
 }
+
+// How a toy likes flag colours laid on (recipe.patternProjection,
+// patternDetail and patternAmount), or null for the usual way; `usual`
+// gives the usual way itself.
+function flagLook(recipe, usual = false) {
+  if (usual) return { projection: "wrap", detail: DEFAULT_PATTERN.detail, amount: 1 };
+  if (!recipe?.patternProjection) return null;
+  return {
+    projection: recipe.patternProjection,
+    detail: recipe.patternDetail ?? DEFAULT_PATTERN.detail,
+    amount: recipe.patternAmount ?? 1,
+  };
+}
+const sameLook = (p, look) =>
+  p.projection === look.projection &&
+  Math.abs(p.detail - look.detail) < 1e-6 &&
+  Math.abs(p.amount - look.amount) < 1e-6;
 
 class App {
   constructor() {
@@ -211,6 +228,17 @@ class App {
       clayOK ? "" : "Clay works on generated toys. Pick one or make one.",
     );
     ui.setToyPanel(info);
+    // A toy that lays flag colours on its own way (the chess board: from
+    // above, gently) gets that way when it comes out with a flag on, and
+    // the next toy gets the usual way back, unless the look was changed.
+    const pat = scene.pattern;
+    const look = flagLook(info.recipe);
+    if (pat.id === "flag") {
+      const auto = this.autoFlagLook;
+      if (look && pat.projection === "wrap") this.setPattern(look);
+      else if (!look && auto && sameLook(pat, auto)) this.setPattern(flagLook(null, true));
+    }
+    this.autoFlagLook = look;
     ui.setFileToy(info.kind === "file", scene.toy.flip);
     this.renderCredits(info);
     this.updateRenderInfo();
@@ -393,6 +421,27 @@ class App {
     this.ui.toast("Paint cleared.");
   }
 
+  // Everything back to how the toy starts: the scene is rebuilt for the same
+  // toy with no flag colours or pattern, paint, clay, effects, toy options,
+  // motion or look changes; Detail goes back to Auto and the view resets.
+  async resetAll() {
+    const player = this.player;
+    const toy = player.scene.toy;
+    const fresh = createScene({ seed: player.scene.seed });
+    if (toy.kind === "builtin") fresh.toy = { kind: "builtin", id: toy.id };
+    else {
+      fresh.toy = structuredClone(toy);
+      delete fresh.toy.clay;
+      delete fresh.toy.options;
+    }
+    const file = toy.kind === "file" ? this.file : null;
+    if (toy.kind === "file" && !file) return;
+    await this.applyScene(fresh, { file });
+    if (player.detail !== "auto") await this.setDetail("auto");
+    this.resetCamera();
+    this.ui.toast("Everything is back to how it started.");
+  }
+
   pokeRandom() {
     this.player.pokeRandom();
   }
@@ -519,9 +568,11 @@ class App {
     const prev = player.scene.pattern;
     const next = { ...prev, ...partial };
     if (partial.id === "flag" && prev.id !== "flag") {
-      next.projection = "wrap";
+      // A toy can prefer a way to lay a flag on (the chess board: from
+      // above, gently, keeping its light and dark squares).
+      const recipe = player.toyInfo?.recipe;
+      Object.assign(next, flagLook(recipe) || { projection: "wrap", amount: 1 });
       next.repeats = 2;
-      next.amount = 1;
       if (!next.flag) next.flag = await this.defaultFlag();
       this.sound.play("chime");
     } else if (partial.id && partial.id !== "flag" && prev.id === "flag") {
