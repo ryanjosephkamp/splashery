@@ -1222,7 +1222,15 @@ export const TOYS = [
     category: "atoms",
     kind: "kit",
     pack: "atoms",
-    tags: "ball stick water caffeine benzene methane ethanol buckyball chemistry",
+    tags: "ball stick water caffeine benzene methane ethanol buckyball chemistry smiles formula mol sdf",
+  },
+  {
+    id: "protein",
+    label: "Protein",
+    category: "atoms",
+    kind: "kit",
+    pack: "atoms",
+    tags: "protein pdb ribbon helix strand ubiquitin insulin gfp hemoglobin biology chemistry",
   },
   {
     id: "crystal-lattice",

@@ -309,6 +309,41 @@ textarea {
   font-size: 13px;
 }
 
+/* A toy's own input (your molecule, your protein). */
+
+.input-box {
+  margin: 12px 0 4px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+
+.input-title {
+  margin: 0 0 8px;
+  font-size: 13.5px;
+  font-weight: 600;
+}
+
+.input-row {
+  display: flex;
+  gap: 6px;
+}
+
+.input-row input[type="text"] {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 6px 10px;
+  background: var(--page);
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  font-size: 13px;
+}
+
+.input-shown {
+  font-weight: 600;
+  color: var(--ink);
+}
+
 /* Panel ------------------------------------------------------------------- */
 
 .panel {

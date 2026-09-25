@@ -280,6 +280,22 @@ class App {
     p.textContent =
       "Every generated toy (the shapes and the toys from packs) is made in your browser from a recipe and a seed.";
     nodes.push(p);
+    // A kit toy built from data files (the protein toy's structures).
+    for (const c of info?.recipe?.credits || []) {
+      const q = document.createElement("p");
+      q.className = "credit";
+      const strong = document.createElement("strong");
+      strong.textContent = c.label;
+      const a = document.createElement("a");
+      a.href = c.source;
+      a.textContent = c.title;
+      const lic = document.createElement("a");
+      lic.href = c.licenseUrl;
+      lic.textContent = c.license;
+      q.append(strong, ": ", a, ` by ${c.author}, `, lic, ".");
+      q.setAttribute("aria-current", "true");
+      nodes.push(q);
+    }
     const f = document.createElement("p");
     f.className = "credit";
     const flags = document.createElement("a");
@@ -526,10 +542,15 @@ class App {
 
   // Rebuilds a kit toy with a changed option (colour, style).
   async setToyOption(key, value) {
+    return this.setToyOptions({ [key]: value });
+  }
+
+  // Sets several of a kit toy's options at once and rebuilds it.
+  async setToyOptions(partial) {
     const player = this.player;
     const toy = player.scene.toy;
     if (toy.kind !== "builtin") return;
-    toy.options = { ...(toy.options || {}), [key]: value };
+    toy.options = { ...(toy.options || {}), ...partial };
     const cam = player.camera.getState();
     try {
       await this.loadToy(toy);

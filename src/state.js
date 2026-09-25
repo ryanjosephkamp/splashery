@@ -161,6 +161,8 @@ export function normalizeClay(ops, limit = 2000) {
 
 const KEY_RE = /^[a-z][a-zA-Z0-9]{0,23}$/;
 const WORD_RE = /^[a-z0-9-]{1,24}$/;
+// The longest text a toy option can hold (a molecule read from a file).
+export const TEXT_MAX = 24000;
 
 // Recipe options for a kit toy: a few short values (numbers, switches,
 // colours, words). The recipe itself checks their meaning when it builds.
@@ -173,6 +175,9 @@ export function normalizeOptions(o) {
     if (typeof v === "boolean") out[k] = v;
     else if (typeof v === "number" && Number.isFinite(v)) out[k] = round(clamp(v, -1e6, 1e6), 4);
     else if (typeof v === "string" && (HEX_RE.test(v) || WORD_RE.test(v))) out[k] = v.toLowerCase();
+    // Text as typed (a SMILES string, a molecule read from a file): printable
+    // ASCII, kept as it is.
+    else if (typeof v === "string" && v.length <= TEXT_MAX && /^[\x20-\x7e]*$/.test(v)) out[k] = v;
   }
   return out;
 }
