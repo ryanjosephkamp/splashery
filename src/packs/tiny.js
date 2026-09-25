@@ -1553,6 +1553,7 @@ export const RECIPES = {
     build(k, o) {
       const base = o.color;
       const { E, F } = WBC;
+      k.fitMorphs = false; // the cup reaches just past the resting cell
       // A soft, lumpy surface with little ruffles, translucent enough to show
       // the nucleus inside.
       const lump = (d) =>
