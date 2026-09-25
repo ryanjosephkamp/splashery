@@ -3,16 +3,38 @@
 The current state and the next phase. The session that finishes a phase updates this file. The
 ground rules are in [CLAUDE.md](../CLAUDE.md).
 
-## Current state (2026-09-25, after Phase E1c; next: Phase E2)
+## Current state (2026-09-25, after Phase E2; next: Phase E3)
 
 - Phase A is done: splashery PR #13 and homepage PR #33 in
   `ryanjosephkamp/ryanjosephkamp.github.io`, both merged. Phases B (PR #17), C1 (PR #18), C2 (PR
-  #19), D (PR #20), E1 (PR #21) and E1b (PRs #22–#24) are merged.
-- **Phase E1c** (the owner's review of E1b, verbatim with screenshots in
-  `docs/reviews/2026-09-25-e1b/`) is in three stacked PRs, merged in order:
-  `claude/phase-e1-45lgvf-1` (the phone panel fix and chess from PGN), `-2` (elephant, horse and
-  cat) and `-3` (hockey puck, Newton's cradle, xylophone, tomatoes, docs). Check that all three are
-  merged before starting E2. **Next: Phase E2** (below).
+  #19), D (PR #20), E1 (PR #21), E1b (PRs #22–#24) and E1c (PRs #26–#28) are merged. The owner
+  approved E1c without changes ("everything from E1 looks great").
+- **Phase E2** is one PR from `claude/quirky-pasteur-modo55`: new tap effects for all 32 space,
+  atoms and gems toys (TOY-PLAN.md has each one's `improved` entry), sounds re-timed to them, and
+  clips of all 32 on the Effect review page. Check it is merged before starting E3. **Next: Phase
+  E3** (below).
+- **Effects (E2).** Space in `src/packs/space.js`, atoms in `src/packs/atoms.js`, gems in
+  `src/packs/gems.js`. Idle motion added where the owner asked: the Sun churns, Saturn's and
+  Uranus's rings turn, the aurora's folds race round, the galaxy's arms turn.
+- **Draw order lessons (E2; docs/PACKS.md 7b "Draw order").** Splats sort in their built pose. A
+  solid body turned past a quarter turn looks hollow, so spinning bodies are built twice
+  (`spinParts`, `TURNED`, `turnedColor` in space.js) and show the copy nearer its built pose; cloud
+  layers over a turning body cannot be fixed that way, so Earth's clouds are painted on and Venus
+  and Neptune turn in latitude bands; `interior` splats draw over a turned surface, so turning
+  bodies are hollow with a separate `coreBall` that hides while they turn; forever-turning rings use
+  marks that repeat every eighth of a turn (`ringAngle`). Pieces that must draw in front are built
+  where they will be (the black hole's star, the orrery's Mercury).
+- **Hidden pieces count in the fit (E2).** Build effect pieces inside the toy's resting size and
+  grow them by part `scale` (the Sun's flare, the star's red giant, the meteor's fireball).
+- **Engine (E2).** `build(k)` can leave `k.data` for `drive`, which gets it as `info.data`
+  (`src/motion.js`; the molecule and the crystal lattice use it). Tokens (`kind: "token"`, up to 48)
+  now also break shapes into pieces: the asteroid (18 cells with fresh broken faces), the meteor's
+  fragments, the molecule's atoms (the buckyball by pentagons). A new hidden `5g` orbital is the
+  excited state for the 4f orbitals.
+- **Sounds (E2).** 32 specs re-timed in `src/toy-sounds.js` (all pass `tools/sound-check.mjs`). The
+  pulsar ticks on each flash and the star rings a bell as it is reborn through `out.cues` (beyond
+  the sound check's five seconds). The Splashery Sound Board page was rebuilt.
+- 172 toys are keep, 2 more, 109 new.
 - **Phone panel (E1c).** Picking a toy folded the phone sheet only after the toy had loaded, so a
   panel opened meanwhile (a scan takes seconds on a phone) shut itself. `chooseToy` now folds it at
   the pick. From the shelf grid, More opens the settings in one tap (the handle, a swipe down, a
@@ -300,8 +322,28 @@ Known issues carried forward:
   - Scenes saved with the submarine's old `scope=0` load with the periscope up.
   - The rubber duck and the guitar still need their own sounds (Phase D): a quack and real music.
     (Done in D.)
+- New in E2:
+  - The owner has not yet seen the E2 effects; the clips on the Effect review page are the check.
+    They were checked by me as clips and strips in headless Chromium (SwiftShader), not on a phone.
+  - Earth's clouds are painted on the globe now (a layer over a turning globe draws in the wrong
+    order), so they turn with the ground instead of drifting over it.
+  - Venus and Neptune turn in latitude bands: during the effect the cloud pattern shears where bands
+    meet (a seam line), then locks together again.
+  - The turning planets (Mercury, Venus, Earth, Jupiter, Neptune) carry a hidden, sparser copy for
+    the half turn, so their resting detail is a little lower, and Slice shows them hollow while they
+    turn.
+  - Running glows (emerald, diamond, opal, the aurora's folds) move at a fixed speed, so where the
+    light starts depends on when you tap.
+  - Solar system: the planets swell while lined up (not to scale), Mercury's transit is still a
+    small dot, and Saturn keeps its fixed lighting. The tip changes the view only during the effect.
+  - Effects that face the viewer (the pulsar's flashes, the Moon's phases, Earth's night, the Mars
+    dust front, the sapphire's star) are set for the default camera; after orbiting the view they no
+    longer line up.
+  - Saturn's spokes and Uranus's arcs repeat every eighth of a turn, so they look regular.
+  - The galaxy's arms now turn as one pattern; before, they slowly wound up over minutes.
+  - No shader code changed in E2 (JavaScript only), so there is nothing new untested on WebGPU.
 - New in E1c:
-  - The owner has not yet seen the E1c effects; the clips on the Effect review page are the check.
+  - The owner approved the E1c effects (2026-09-25).
   - The elephant's trunk is kit-built: a little smoother than the carving round it. A small kit
     patch covers the forehead where the scan's trunk tip rested; at very close zoom a few specks of
     the scan's torn edge show beside it.
@@ -382,8 +424,9 @@ If the plan JSON changes, the page can be republished from it (`node tools/toy-p
 | E1     | Done: new tap effects for the scans and shapes (33 toys), with colour keys, whole-body effects and kit-built add-ons for rigs.                              | splashery |
 | E1b    | Done: fixes from the owner's E1 review (19 toys, a chess game, a laptop you can type on), effect quality rules, effect clips.                               | splashery |
 | E1c    | Done: fixes from the owner's E1b review (a phone panel bug, chess from PGN files, elephant, horse, cat, hockey puck, Newton's cradle, xylophone, tomatoes). | splashery |
-| **E2** | New tap effects for space, atoms and gems (32 toys, kit recipes); the second of six waves (see TOY-PLAN.md).                                                | splashery |
-| E3–E6  | New tap effects for the other toys marked new, in four more waves by category (see TOY-PLAN.md), each with its own sound.                                   | splashery |
+| E2     | Done: new tap effects for space, atoms and gems (32 toys), idle motion for the Sun, rings, aurora and galaxy, the draw-order lessons.                       | splashery |
+| **E3** | New tap effects for tiny things, anatomy and maths (26 toys, kit recipes); the third of six waves (see TOY-PLAN.md).                                        | splashery |
+| E4–E6  | New tap effects for the other toys marked new, in three more waves by category (see TOY-PLAN.md), each with its own sound.                                  | splashery |
 | F      | Touch and drag interaction: a solvable puzzle cube, a chess set that plays a real game, a stretchy gummy bear, a draggable Newton's cradle, bricks.         | splashery |
 | G      | AI image-to-3D trial with `HF_TOKEN`.                                                                                                                       | splashery |
 | H      | Later: the gallery, multi-toy scenes, a liquid pour, the draw-order fix, more scans, more instruments, and the final homepage embed(s).                     | both      |
@@ -404,27 +447,32 @@ What the owner asked for across the board (2026-09-23):
 - Stay respectful: nothing destructive or disrespectful on the White House or the Washington
   Monument, and no fighting or gore (the Colosseum gets a chariot race, not gladiators).
 
-## Phase E2 in detail: space, atoms and gems
+## Phase E3 in detail: tiny things, anatomy and maths
 
-Before starting, check the owner's marks (see above) for any later change, and ask whether the owner
-left notes on the sound board or the Effect review page. Follow the Effect quality rules in
-CLAUDE.md, and publish clips of every new effect on the Effect review page.
+Before starting, check the owner's marks (see above) for any later change, and read the owner's
+verdicts on the Effect review page (the `verdicts` collection, one doc per clip: `e2-<toy id>`) for
+E2 fixes to do first. Follow the Effect quality rules in CLAUDE.md and the draw-order lessons in
+docs/PACKS.md 7b, and publish clips of every new effect on the Effect review page.
 
-1. **Toys (32).** Sun, solar system, the eight planets, aurora world, asteroid, comet, meteor, star,
-   pulsar, black hole, star cluster, ring nebula, nebula, spiral galaxy (space pack); electron
-   orbital, atom, molecule, crystal lattice (atoms pack); diamond, ruby, emerald, sapphire, quartz
-   cluster, opal (gems pack). Build each planned effect (TOY-PLAN.md, wave E2) as `controls`,
-   `action` and `drive()` in its recipe, as C2 did: pulses for one-off effects, toggles for states,
-   parts for moving pieces, `out.glow` and behaviour kinds for light.
-2. **Twins and families.** The eight planets and the five gems must act and sound different from
-   each other; check the sound specs stay unique (`tests/unit.spec.mjs`).
+1. **Toys (26).** Beating heart, virus, bacterium, red blood cell, astrocyte, animal cell, white
+   blood cell, microglia, diatom, pollen grain, snowflake, chromosome, mitochondrion, paramecium,
+   amoeba (tiny pack); brain, lungs, tooth, kidney (anatomy pack); Möbius strip, Menger sponge,
+   hypercube, torus knot, gyroid, Mandelbulb, seashell spiral (maths pack). Build each planned
+   effect (TOY-PLAN.md, wave E3) as `controls`, `action` and `drive()` in its recipe: pulses for
+   one-off effects, toggles for states, parts and tokens for moving pieces, `out.glow` and behaviour
+   kinds for light.
+2. **Real processes.** Several are biology (division, phagocytosis, a sickle cell, mitosis): show
+   the real process, with separate things moving separately (the chromatids pull apart, the cell
+   pinches in two). Anatomy stays friendly and never gory.
 3. **Sounds.** Each toy already has a sound. Re-time it to the new effect with
-   `tools/sound-check.mjs`, and rebuild the sound board page if any change.
-4. Check each effect with `tools/effect-strip.mjs`; re-render thumbnails only where the resting look
-   changes. Mark each finished toy `"v": "keep"` with an `improved` entry and regenerate
-   TOY-PLAN.md.
+   `tools/sound-check.mjs` (under five seconds; use `out.cues` for later sounds), and rebuild the
+   sound board page if any change (its `TOY_SOUNDS` and `TOYS` lines are JSON from
+   `src/toy-sounds.js` and the plan).
+4. Check each effect with `tools/effect-clip.mjs --strip=8` (one render gives the owner's clip and a
+   strip to look at); re-render thumbnails only where the resting look changes. Mark each finished
+   toy `"v": "keep"` with an `improved` entry and regenerate TOY-PLAN.md.
 
-**Done when:** every E2 toy has its own tap effect (or the PR lists which do not, and why), all
+**Done when:** every E3 toy has its own tap effect (or the PR lists which do not, and why), all
 tests pass and prettier is clean.
 
 ## Phases C–H (outline)
@@ -433,9 +481,9 @@ tests pass and prettier is clean.
 - **C2, clearer effects.** Done (see Current state). `tools/effect-strip.mjs` is the tool for
   checking any new tap effect by eye.
 - **D, effects and sound engine.** Done (see Current state).
-- **E1–E6, new effects.** E1 is done. One wave per session (about 30–45 toys each), following
-  TOY-PLAN.md. Run `check-packs`, a contact sheet and `make-thumbs` for touched packs as usual.
-  Thumbnails take about 18 s per toy under SwiftShader; render only the toys you changed.
+- **E1–E6, new effects.** E1 and E2 are done. One wave per session (about 30–45 toys each),
+  following TOY-PLAN.md. Run `check-packs`, a contact sheet and `make-thumbs` for touched packs as
+  usual. Thumbnails take about 18 s per toy under SwiftShader; render only the toys you changed.
 - **F, touch and drag interaction.** Puzzle cube: 26 cubies as parts (the part limit is 48), cube
   state in JavaScript, swipe on a face to turn a layer, plus scramble and a solved check. Chess set:
   it is a scan, so either region parts per square or a kit-built set; first a scripted famous

@@ -10,10 +10,10 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 283 toys. 142 have a tap action today; the other 141 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 140.
+- 283 toys. 173 have a tap action today; the other 110 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 172.
 - **more** (has an effect; make it clearer or more dramatic): 2.
-- **new** (needs its own effect): 141.
+- **new** (needs its own effect): 109.
 - Visual fixes: 0 open, 28 done. Touch or drag interaction asked for: 4.
 
 ## By phase
@@ -28,18 +28,18 @@ Proposals below are suggestions; the owner may change them.
   star cookie, Tomatoes, Mandeltorus, Basket, Real rubber duck, Garden gnome, Wooden elephant,
   Marble bust, Ukulele, Alarm clock, Vintage camera, Boombox, Real croissant, Carrot cake,
   Pomegranate, Lantern, Cat statue, Horse statue, American football, Rugby ball, Hockey puck,
-  Shuttlecock, Flying disc, Bacteriophage, Neuron, DNA, Amethyst geode, Crystal ball, Eye, Cherry
-  blossom, Ice cream, Gummy bear, Coffee, Rubber duck, Newton's cradle, Kite, Chess set, Lorenz
-  attractor, Klein bottle, Wizard's orb, Jellyfish, Pufferfish, Snail, Octopus, Fireworks, Decorated
-  tree, Diya, Acoustic guitar, Snare drum, Xylophone, Hot-air balloon, Bus, Jet airliner, Sailboat,
-  Submarine, Bicycle, Big Ben, Castle, Pagoda, Windmill.
+  Shuttlecock, Flying disc, Sun, Solar system, Mercury, Venus, Earth, Moon, Mars, Jupiter, Saturn,
+  Uranus, Neptune, Aurora world, Asteroid, Comet, Meteor, Star, Pulsar, Black hole, Star cluster,
+  Ring nebula, Nebula, Spiral galaxy, Bacteriophage, Neuron, DNA, Electron orbital, Atom, Molecule,
+  Crystal lattice, Diamond, Ruby, Emerald, Amethyst geode, Sapphire, Quartz cluster, Opal, Crystal
+  ball, Eye, Cherry blossom, Ice cream, Gummy bear, Coffee, Rubber duck, Newton's cradle, Kite,
+  Chess set, Lorenz attractor, Klein bottle, Wizard's orb, Jellyfish, Pufferfish, Snail, Octopus,
+  Fireworks, Decorated tree, Diya, Acoustic guitar, Snare drum, Xylophone, Hot-air balloon, Bus, Jet
+  airliner, Sailboat, Submarine, Bicycle, Big Ben, Castle, Pagoda, Windmill.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
-- **E2, new effects: space, atoms and gems.** Sun, Solar system, Mercury, Venus, Earth, Moon, Mars,
-  Jupiter, Saturn, Uranus, Neptune, Aurora world, Asteroid, Comet, Meteor, Star, Pulsar, Black hole,
-  Star cluster, Ring nebula, Nebula, Spiral galaxy, Electron orbital, Atom, Molecule, Crystal
-  lattice, Diamond, Ruby, Emerald, Sapphire, Quartz cluster, Opal
+- **E2, new effects: space, atoms and gems.** None.
 - **E3, new effects: tiny things, anatomy and maths.** Beating heart, Virus, Bacterium, Red blood
   cell, Astrocyte, Animal cell, White blood cell, Microglia, Diatom, Pollen grain, Snowflake,
   Chromosome, Mitochondrion, Paramecium, Amoeba, Brain, Lungs, Tooth, Kidney, Möbius strip, Menger
@@ -526,91 +526,153 @@ Proposals below are suggestions; the owner may change them.
 
 ## Space (23)
 
-- **Sun** (`sun`). Now: hops. Plan: new effect (E2).
+- **Sun** (`sun`). Now: tap: Solar flare. Plan: keep.
   - Owner: Incredible. It should pulse and churn by default, dramatically, like the real Sun. Needs
     a super effect.
   - Effect: Idle: stronger churning and pulsing. Tap: a big solar flare loops off the surface.
+  - Improved: E2: by itself the Sun churns (two layers of bright granules swell and fade in turn),
+    its prominences rise and sink and the corona breathes. A tap sets off a flare: the footpoints
+    flash, a loop of hot gas climbs off the upper limb, swells, and its top breaks away into space
+    (4.6 s).
   - Sound: Deep roaring whoosh.
-- **Solar system** (`solar-system`). Now: hops. Plan: new effect (E2).
+- **Solar system** (`solar-system`). Now: tap: Line up the planets. Plan: keep.
   - Owner: Really cool. Maybe the planets line up for an eclipse.
   - Effect: Planets swing into a line and one eclipses the Sun, then orbits resume.
+  - Improved: E2: every planet swings forward round its orbit into one straight row beside the Sun,
+    swelling a little so they read; the system tips until we look along its plane, Mercury swings on
+    in front of the Sun as a dark dot (a transit) and a pearly eclipse corona flares; then it tips
+    back and the orbits carry on from where they are (7 s). Mercury is lit from the Sun and turns as
+    it orbits.
   - Sound: Rising cosmic chord.
-- **Mercury** (`mercury`). Now: hops. Plan: new effect (E2).
+- **Mercury** (`mercury`). Now: tap: Spin in the sunlight. Plan: keep.
   - Effect: Quick orbit-like spin and heat shimmer on the day side.
+  - Improved: E2: a tap spins it once, fast, and the side facing the Sun glows red-hot and shimmers,
+    then cools (3.4 s).
   - Sound: Short bright tone.
-- **Venus** (`venus`). Now: hops. Plan: new effect (E2).
+- **Venus** (`venus`). Now: tap: Swirl the clouds. Plan: keep.
   - Effect: The thick clouds swirl fast around it.
+  - Improved: E2: a tap whips the clouds round backwards (as Venus turns): the wide equatorial band
+    twice and the polar caps once, so the chevrons shear where they meet, then lock together again
+    (4 s).
   - Sound: Muffled wind.
-- **Earth** (`earth`). Now: hops. Plan: new effect (E2).
+- **Earth** (`earth`). Now: tap: Turn through a day. Plan: keep.
   - Effect: Night side lights up with city lights as it turns; clouds move.
+  - Improved: E2: a tap turns it through one day with the Sun to the left: night falls over the
+    right half, the Earth turns once, city lights come on as the land turns into the dark and go out
+    at dawn, then the night lifts (6.4 s). The clouds are painted on the globe now.
   - Sound: Soft ocean-and-wind swell.
-- **Moon** (`moon`). Now: hops. Plan: new effect (E2).
+- **Moon** (`moon`). Now: tap: Run through its phases. Plan: keep.
   - Effect: Cycles through phases, full to new and back.
+  - Improved: E2: a tap runs a month: the shadow creeps in from the right to a new moon (faint
+    earthshine), then the light comes back from the right to full (5.6 s).
   - Sound: Hollow chime.
-- **Mars** (`mars`). Now: hops. Plan: new effect (E2).
+- **Mars** (`mars`). Now: tap: Raise a dust storm. Plan: keep.
   - Effect: A dust storm sweeps across it.
+  - Improved: E2: a tap raises a dust storm: billowing ochre dust sweeps across from the left with a
+    ragged front, hides the dark markings as it drifts east, then thins out and clears (5.4 s).
   - Sound: Dusty hiss.
-- **Jupiter** (`jupiter`). Now: hops. Plan: new effect (E2).
+- **Jupiter** (`jupiter`). Now: tap: Race the bands. Plan: keep.
   - Effect: Bands race and the Great Red Spot spins up.
+  - Improved: E2: a tap sets the cloud bands racing, neighbours in opposite directions (the equator
+    fastest), and the Great Red Spot's swirl spins up inside its oval; each band turns whole turns,
+    so the picture comes back together (4.2 s).
   - Sound: Low gas-giant drone.
-- **Saturn** (`saturn`). Now: hops. Plan: new effect (E2).
+- **Saturn** (`saturn`). Now: tap: Ripple the rings. Plan: keep.
   - Owner: The rings should move by default.
   - Effect: Idle: rings turn. Tap: ring particles sparkle and ripple outward.
+  - Improved: E2: the rings turn all the time, inner rings faster, with dark spokes and bright
+    clumps that show the motion. A tap sends two sparkling waves rippling out across the rings (4
+    s).
   - Sound: Shimmering ring chime.
-- **Uranus** (`uranus`). Now: hops. Plan: new effect (E2).
+- **Uranus** (`uranus`). Now: tap: Roll on its side. Plan: keep.
   - Owner: Rings move a little by default too.
   - Effect: Idle: slow ring motion. Tap: it rolls on its side.
+  - Improved: E2: its thin rings turn slowly all the time (bright arcs show it). A tap rolls it like
+    a wheel, to the right and back, as Uranus lies on its side (3.8 s).
   - Sound: Cool icy tone.
-- **Neptune** (`neptune`). Now: hops. Plan: new effect (E2).
+- **Neptune** (`neptune`). Now: tap: Race the clouds. Plan: keep.
   - Effect: A dark storm and fast white clouds race by.
+  - Improved: E2: a tap sends the belts of white cloud racing round it twice while the band with the
+    dark storm and its white companion drifts the other way once (3.8 s).
   - Sound: Deep icy wind.
-- **Aurora world** (`aurora-planet`). Now: hops. Plan: new effect (E2).
+- **Aurora world** (`aurora-planet`). Now: tap: Auroral surge. Plan: keep.
   - Owner: The auroras should actually move, realistically and dynamically.
   - Effect: Idle: auroras ripple as curtains. Tap: a bright surge of green and violet.
+  - Improved: E2: the curtains move all the time: bright folds race round the oval, rays flicker and
+    the oval sways. A tap sets off a substorm: the oval flares, a wider curtain with violet tops
+    bursts out towards the equator and the folds race brighter, then it calms (4.2 s).
   - Sound: Airy shimmering whistle.
-- **Asteroid** (`asteroid`). Now: hops. Plan: new effect (E2).
+- **Asteroid** (`asteroid`). Now: hops. Plan: keep.
   - Owner: Pretty neat. Maybe it breaks into pieces.
   - Effect: Cracks and breaks into pieces that drift apart, then pull back together.
+  - Improved: E2: a tap cracks it (glowing cracks flash), it falls apart into 18 pieces that drift
+    off tumbling, each on its own path, with a puff of dust; the broken faces are paler fresh rock;
+    then gravity pulls the rubble back together and it settles (5.4 s).
   - Sound: Rock crack and a low boom.
-- **Comet** (`comet`). Now: hops. Plan: new effect (E2).
+- **Comet** (`comet`). Now: tap: Swing past the Sun. Plan: keep.
   - Owner: Extremely underwhelming; does not look like a comet.
   - Fixed: C1: overhauled: a bright icy nucleus in a thin coma, a straight blue ion tail of
     streamers and a curved gold dust tail.
   - Effect: Tail flares longer and brighter as it swings by.
+  - Improved: E2: a tap swings it past the Sun: jets of gas burst from the sunward side of the
+    nucleus, the coma swells, and both tails flare longer and brighter as they swing round, then
+    fade back (4.8 s).
   - Sound: Long airy whoosh.
-- **Meteor** (`meteor`). Now: hops. Plan: new effect (E2).
+- **Meteor** (`meteor`). Now: tap: Streak in and burst. Plan: keep.
   - Owner: Much cooler than the comet.
   - Effect: Streaks in and bursts in a fireball.
+  - Improved: E2: a tap sends it streaking in from the upper right; it bursts in a fireball, its
+    rock flying apart in glowing fragments that burn out while the trail is snuffed out; then the
+    next one streaks in to take its place (5.4 s).
   - Sound: Sizzling streak and a boom.
-- **Star** (`star`). Now: hops. Plan: new effect (E2).
+- **Star** (`star`). Now: tap: Live and die. Plan: keep.
   - Owner: Dynamic like the Sun. Maybe a solar flare, or it evolves into a dying star and dies.
   - Effect: Tap runs a life cycle: swells into a red giant, puffs off its shell and leaves a white
     dwarf, then reforms.
+  - Improved: E2: a tap runs its life, sped up: it swells into a throbbing red giant, puffs off its
+    outer layers as a glowing shell and shrinks to a tiny white dwarf; then a new star lights up and
+    grows back (8.5 s).
   - Sound: Slow swelling tone that fades.
-- **Pulsar** (`pulsar`). Now: hops. Plan: new effect (E2).
+- **Pulsar** (`pulsar`). Now: tap: Spin up. Plan: keep.
   - Owner: Really neat; needs a really cool effect.
   - Effect: Beams sweep faster and faster with strobing flashes.
+  - Improved: E2: each time a beam sweeps past the viewer the star flashes, like a lighthouse. A tap
+    spins it up to a blur, the flashes coming faster into a strobe, each with a tick, then it winds
+    down (5.4 s).
   - Sound: Ticking pulse that speeds up.
-- **Black hole** (`black-hole`). Now: hops. Plan: new effect (E2).
+- **Black hole** (`black-hole`). Now: tap: Feed it a star. Plan: keep.
   - Owner: Almost perfect as it is; add an effect.
   - Effect: A small star falls in, gets stretched into a spiral and swallowed; the disk flares.
+  - Improved: E2: a tap sends a small star falling in: it spirals closer, faster, is stretched into
+    a streak and leaves a stream of its gas along its path; it plunges in, the disk and photon ring
+    flare, and the stream swirls down after it (6.6 s).
   - Sound: Deep falling drone.
-- **Star cluster** (`star-cluster`). Now: hops. Plan: new effect (E2).
+- **Star cluster** (`star-cluster`). Now: tap: Breathe in and out. Plan: keep.
   - Owner: Extremely cool; no idea for an effect.
   - Effect: Stars twinkle in a wave and the cluster breathes in and out.
+  - Improved: E2: a tap makes the cluster breathe (in, out and settle, the core first and the
+    outskirts after) while a wave of sparkle runs out from the middle through the stars (4.8 s).
   - Sound: Twinkling bells.
-- **Ring nebula** (`planetary-nebula`). Now: hops. Plan: new effect (E2).
+- **Ring nebula** (`planetary-nebula`). Now: tap: Blow a new shell. Plan: keep.
   - Effect: The ring expands and glows brighter, then settles.
+  - Improved: E2: a tap makes the central star flare and blow out a thin bright shock ring; when it
+    reaches the main ring, the ring glows brighter and is pushed outwards, then settles (4.8 s).
   - Sound: Soft expanding pad.
-- **Nebula** (`nebula`). Now: hops. Plan: new effect (E2).
+- **Nebula** (`nebula`). Now: tap: Light new stars. Plan: keep.
   - Effect: New stars ignite inside the clouds.
+  - Improved: E2: a tap lights seven new stars one after another, three at the tips of the pillars:
+    each flares up with spikes, settles to a bright point in a small glow of lit gas, and later
+    fades (6.5 s).
   - Sound: Sparkling pings.
 - **Supernova** (`supernova`). Now: tap: Explode. Plan: keep.
   - Owner: Outstanding; keep it as it is.
   - Sound: Huge boom with a long tail.
-- **Spiral galaxy** (`spiral-galaxy`). Now: hops. Plan: new effect (E2).
+- **Spiral galaxy** (`spiral-galaxy`). Now: tap: Swirl the arms. Plan: keep.
   - Owner: No clear effect; it should rotate like a spiral galaxy.
   - Effect: Idle: slow rotation. Tap: arms swirl faster and the core flares.
+  - Improved: E2: the spiral pattern now turns slowly all the time, as one piece (the arms keep
+    their shape), while the disc's stars orbit. A tap swirls the arms once more round, fast, and the
+    core flares (4.6 s).
   - Sound: Deep swirling hum.
 
 ## Tiny (18)
@@ -694,31 +756,48 @@ Proposals below are suggestions; the owner may change them.
 
 ## Atoms (4)
 
-- **Electron orbital** (`orbital`). Now: hops. Plan: new effect (E2).
+- **Electron orbital** (`orbital`). Now: tap: Excite the electron. Plan: keep.
   - Owner: Chemistry toys need good effects.
   - Effect: Jumps to a higher orbital shape with a glow, then drops back and flashes.
+  - Improved: E2: a tap sends in a photon (a wiggle of light) that the electron absorbs: its cloud
+    jumps to the next orbital up (one step up in energy, one more unit of angular momentum) and
+    glows, then drops back with a flash and gives the photon out again (5.2 s).
   - Sound: Quantum blip up and down.
-- **Atom** (`atom`). Now: hops. Plan: new effect (E2).
+- **Atom** (`atom`). Now: tap: Speed up the electrons. Plan: keep.
   - Effect: Electrons speed up into blurred shells.
+  - Improved: E2: a tap energises the atom: the electrons whirl faster and faster until each shell
+    blurs into a glowing ring, then slow down (4.6 s). The cloud style's shells swell and brighten.
   - Sound: Whirring orbit.
-- **Molecule** (`molecule`). Now: hops. Plan: new effect (E2).
+- **Molecule** (`molecule`). Now: tap: Heat it up. Plan: keep.
   - Effect: Bonds vibrate and stretch (like heat), then calm.
+  - Improved: E2: the atoms always jiggle a little on their bonds. A tap heats it: every bond
+    stretches and squeezes hard at its own pace, the light hydrogens swinging furthest, then it
+    cools (4.4 s). Each atom moves on its own (the buckyball by pentagons, which also breathe).
   - Sound: Springy boing.
-- **Crystal lattice** (`crystal-lattice`). Now: hops. Plan: new effect (E2).
+- **Crystal lattice** (`crystal-lattice`). Now: tap: Send a wave through. Plan: keep.
   - Effect: A wave of vibration travels through the lattice.
+  - Improved: E2: a tap sends a wave of vibration (a phonon) through the crystal: a ripple runs
+    across it from left to right, each slice of atoms rising and falling in turn with its bonds (3.8
+    s).
   - Sound: Rippling ping.
 
 ## Gems (9)
 
-- **Diamond** (`diamond`). Now: hops. Plan: new effect (E2).
+- **Diamond** (`diamond`). Now: tap: Turn it in the light. Plan: keep.
   - Owner: Gems need effects.
   - Effect: Fire: rainbow sparkles flash off the facets as it turns.
+  - Improved: E2: a tap turns it one way and the other in the light, like a ring: facet after facet
+    flashes rainbow fire and the star glints flare (3.8 s).
   - Sound: High sparkle chime.
-- **Ruby** (`ruby`). Now: hops. Plan: new effect (E2).
+- **Ruby** (`ruby`). Now: tap: Make it glow. Plan: keep.
   - Effect: Glows deep red from inside.
+  - Improved: E2: rubies glow red in ultraviolet light. A tap lights the stone deep red from its
+    heart outwards; the glow throbs twice, shines out round it and fades (4 s).
   - Sound: Warm low chime.
-- **Emerald** (`emerald`). Now: hops. Plan: new effect (E2).
+- **Emerald** (`emerald`). Now: tap: Run light round the steps. Plan: keep.
   - Effect: Green light runs along the step cuts.
+  - Improved: E2: a tap sends green light racing round the edges of the step cut's steps, each step
+    a little behind the one outside it, so the light spirals in to the table (4 s).
   - Sound: Soft glassy chime.
 - **Amethyst geode** (`amethyst-geode`). Now: tap: Open or close. Plan: keep.
   - Owner: Really cool.
@@ -726,14 +805,20 @@ Proposals below are suggestions; the owner may change them.
   - Improved: C2: each time it opens, the halves swing wider and the crystals glow violet with
     twinkling tips, then settle (about 4 s).
   - Sound: Stone crack and a chime.
-- **Sapphire** (`sapphire`). Now: hops. Plan: new effect (E2).
+- **Sapphire** (`sapphire`). Now: tap: Catch the star. Plan: keep.
   - Effect: A star shimmer (asterism) glides across it.
+  - Improved: E2: a tap makes a six-rayed star (asterism) appear on one side of the stone, glide
+    across its top, turning a little, and fade (3.6 s).
   - Sound: Cool bell.
-- **Quartz cluster** (`quartz-cluster`). Now: hops. Plan: new effect (E2).
+- **Quartz cluster** (`quartz-cluster`). Now: tap: Light the points. Plan: keep.
   - Effect: Points light up one by one.
+  - Improved: E2: a tap lights the ten points one by one from left to right, each glowing from
+    within with a star at its tip, with a rising chime for each (4.4 s).
   - Sound: Tinkling chimes.
-- **Opal** (`opal`). Now: hops. Plan: new effect (E2).
+- **Opal** (`opal`). Now: tap: Tilt it in the light. Plan: keep.
   - Effect: Colour play: flashes of colour roll across it.
+  - Improved: E2: a tap rocks the stone in the light while flashes of colour roll across it patch by
+    patch, changing hue as they go (4.2 s).
   - Sound: Shimmer.
 - **Pearl** (`pearl`). Now: tap: Open or close. Plan: keep.
   - Owner: Really cool.

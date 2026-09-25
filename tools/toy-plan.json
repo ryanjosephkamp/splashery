@@ -566,122 +566,143 @@
       "sound": "Brass slide and a twinkle."
     },
     "sun": {
-      "v": "new",
+      "v": "keep",
       "owner": "Incredible. It should pulse and churn by default, dramatically, like the real Sun. Needs a super effect.",
       "effect": "Idle: stronger churning and pulsing. Tap: a big solar flare loops off the surface.",
-      "sound": "Deep roaring whoosh."
+      "sound": "Deep roaring whoosh.",
+      "improved": "E2: by itself the Sun churns (two layers of bright granules swell and fade in turn), its prominences rise and sink and the corona breathes. A tap sets off a flare: the footpoints flash, a loop of hot gas climbs off the upper limb, swells, and its top breaks away into space (4.6 s)."
     },
     "solar-system": {
-      "v": "new",
+      "v": "keep",
       "owner": "Really cool. Maybe the planets line up for an eclipse.",
       "effect": "Planets swing into a line and one eclipses the Sun, then orbits resume.",
-      "sound": "Rising cosmic chord."
+      "sound": "Rising cosmic chord.",
+      "improved": "E2: every planet swings forward round its orbit into one straight row beside the Sun, swelling a little so they read; the system tips until we look along its plane, Mercury swings on in front of the Sun as a dark dot (a transit) and a pearly eclipse corona flares; then it tips back and the orbits carry on from where they are (7 s). Mercury is lit from the Sun and turns as it orbits."
     },
     "mercury": {
-      "v": "new",
+      "v": "keep",
       "effect": "Quick orbit-like spin and heat shimmer on the day side.",
-      "sound": "Short bright tone."
+      "sound": "Short bright tone.",
+      "improved": "E2: a tap spins it once, fast, and the side facing the Sun glows red-hot and shimmers, then cools (3.4 s)."
     },
     "venus": {
-      "v": "new",
+      "v": "keep",
       "effect": "The thick clouds swirl fast around it.",
-      "sound": "Muffled wind."
+      "sound": "Muffled wind.",
+      "improved": "E2: a tap whips the clouds round backwards (as Venus turns): the wide equatorial band twice and the polar caps once, so the chevrons shear where they meet, then lock together again (4 s)."
     },
     "earth": {
-      "v": "new",
+      "v": "keep",
       "effect": "Night side lights up with city lights as it turns; clouds move.",
-      "sound": "Soft ocean-and-wind swell."
+      "sound": "Soft ocean-and-wind swell.",
+      "improved": "E2: a tap turns it through one day with the Sun to the left: night falls over the right half, the Earth turns once, city lights come on as the land turns into the dark and go out at dawn, then the night lifts (6.4 s). The clouds are painted on the globe now."
     },
     "moon": {
-      "v": "new",
+      "v": "keep",
       "effect": "Cycles through phases, full to new and back.",
-      "sound": "Hollow chime."
+      "sound": "Hollow chime.",
+      "improved": "E2: a tap runs a month: the shadow creeps in from the right to a new moon (faint earthshine), then the light comes back from the right to full (5.6 s)."
     },
     "mars": {
-      "v": "new",
+      "v": "keep",
       "effect": "A dust storm sweeps across it.",
-      "sound": "Dusty hiss."
+      "sound": "Dusty hiss.",
+      "improved": "E2: a tap raises a dust storm: billowing ochre dust sweeps across from the left with a ragged front, hides the dark markings as it drifts east, then thins out and clears (5.4 s)."
     },
     "jupiter": {
-      "v": "new",
+      "v": "keep",
       "effect": "Bands race and the Great Red Spot spins up.",
-      "sound": "Low gas-giant drone."
+      "sound": "Low gas-giant drone.",
+      "improved": "E2: a tap sets the cloud bands racing, neighbours in opposite directions (the equator fastest), and the Great Red Spot's swirl spins up inside its oval; each band turns whole turns, so the picture comes back together (4.2 s)."
     },
     "saturn": {
-      "v": "new",
+      "v": "keep",
       "owner": "The rings should move by default.",
       "effect": "Idle: rings turn. Tap: ring particles sparkle and ripple outward.",
-      "sound": "Shimmering ring chime."
+      "sound": "Shimmering ring chime.",
+      "improved": "E2: the rings turn all the time, inner rings faster, with dark spokes and bright clumps that show the motion. A tap sends two sparkling waves rippling out across the rings (4 s)."
     },
     "uranus": {
-      "v": "new",
+      "v": "keep",
       "owner": "Rings move a little by default too.",
       "effect": "Idle: slow ring motion. Tap: it rolls on its side.",
-      "sound": "Cool icy tone."
+      "sound": "Cool icy tone.",
+      "improved": "E2: its thin rings turn slowly all the time (bright arcs show it). A tap rolls it like a wheel, to the right and back, as Uranus lies on its side (3.8 s)."
     },
     "neptune": {
-      "v": "new",
+      "v": "keep",
       "effect": "A dark storm and fast white clouds race by.",
-      "sound": "Deep icy wind."
+      "sound": "Deep icy wind.",
+      "improved": "E2: a tap sends the belts of white cloud racing round it twice while the band with the dark storm and its white companion drifts the other way once (3.8 s)."
     },
     "aurora-planet": {
-      "v": "new",
+      "v": "keep",
       "owner": "The auroras should actually move, realistically and dynamically.",
       "effect": "Idle: auroras ripple as curtains. Tap: a bright surge of green and violet.",
-      "sound": "Airy shimmering whistle."
+      "sound": "Airy shimmering whistle.",
+      "improved": "E2: the curtains move all the time: bright folds race round the oval, rays flicker and the oval sways. A tap sets off a substorm: the oval flares, a wider curtain with violet tops bursts out towards the equator and the folds race brighter, then it calms (4.2 s)."
     },
     "asteroid": {
-      "v": "new",
+      "v": "keep",
       "owner": "Pretty neat. Maybe it breaks into pieces.",
       "effect": "Cracks and breaks into pieces that drift apart, then pull back together.",
-      "sound": "Rock crack and a low boom."
+      "sound": "Rock crack and a low boom.",
+      "improved": "E2: a tap cracks it (glowing cracks flash), it falls apart into 18 pieces that drift off tumbling, each on its own path, with a puff of dust; the broken faces are paler fresh rock; then gravity pulls the rubble back together and it settles (5.4 s)."
     },
     "comet": {
-      "v": "new",
+      "v": "keep",
       "fixed": "C1: overhauled: a bright icy nucleus in a thin coma, a straight blue ion tail of streamers and a curved gold dust tail.",
       "owner": "Extremely underwhelming; does not look like a comet.",
       "effect": "Tail flares longer and brighter as it swings by.",
-      "sound": "Long airy whoosh."
+      "sound": "Long airy whoosh.",
+      "improved": "E2: a tap swings it past the Sun: jets of gas burst from the sunward side of the nucleus, the coma swells, and both tails flare longer and brighter as they swing round, then fade back (4.8 s)."
     },
     "meteor": {
-      "v": "new",
+      "v": "keep",
       "owner": "Much cooler than the comet.",
       "effect": "Streaks in and bursts in a fireball.",
-      "sound": "Sizzling streak and a boom."
+      "sound": "Sizzling streak and a boom.",
+      "improved": "E2: a tap sends it streaking in from the upper right; it bursts in a fireball, its rock flying apart in glowing fragments that burn out while the trail is snuffed out; then the next one streaks in to take its place (5.4 s)."
     },
     "star": {
-      "v": "new",
+      "v": "keep",
       "owner": "Dynamic like the Sun. Maybe a solar flare, or it evolves into a dying star and dies.",
       "effect": "Tap runs a life cycle: swells into a red giant, puffs off its shell and leaves a white dwarf, then reforms.",
-      "sound": "Slow swelling tone that fades."
+      "sound": "Slow swelling tone that fades.",
+      "improved": "E2: a tap runs its life, sped up: it swells into a throbbing red giant, puffs off its outer layers as a glowing shell and shrinks to a tiny white dwarf; then a new star lights up and grows back (8.5 s)."
     },
     "pulsar": {
-      "v": "new",
+      "v": "keep",
       "owner": "Really neat; needs a really cool effect.",
       "effect": "Beams sweep faster and faster with strobing flashes.",
-      "sound": "Ticking pulse that speeds up."
+      "sound": "Ticking pulse that speeds up.",
+      "improved": "E2: each time a beam sweeps past the viewer the star flashes, like a lighthouse. A tap spins it up to a blur, the flashes coming faster into a strobe, each with a tick, then it winds down (5.4 s)."
     },
     "black-hole": {
-      "v": "new",
+      "v": "keep",
       "owner": "Almost perfect as it is; add an effect.",
       "effect": "A small star falls in, gets stretched into a spiral and swallowed; the disk flares.",
-      "sound": "Deep falling drone."
+      "sound": "Deep falling drone.",
+      "improved": "E2: a tap sends a small star falling in: it spirals closer, faster, is stretched into a streak and leaves a stream of its gas along its path; it plunges in, the disk and photon ring flare, and the stream swirls down after it (6.6 s)."
     },
     "star-cluster": {
-      "v": "new",
+      "v": "keep",
       "owner": "Extremely cool; no idea for an effect.",
       "effect": "Stars twinkle in a wave and the cluster breathes in and out.",
-      "sound": "Twinkling bells."
+      "sound": "Twinkling bells.",
+      "improved": "E2: a tap makes the cluster breathe (in, out and settle, the core first and the outskirts after) while a wave of sparkle runs out from the middle through the stars (4.8 s)."
     },
     "planetary-nebula": {
-      "v": "new",
+      "v": "keep",
       "effect": "The ring expands and glows brighter, then settles.",
-      "sound": "Soft expanding pad."
+      "sound": "Soft expanding pad.",
+      "improved": "E2: a tap makes the central star flare and blow out a thin bright shock ring; when it reaches the main ring, the ring glows brighter and is pushed outwards, then settles (4.8 s)."
     },
     "nebula": {
-      "v": "new",
+      "v": "keep",
       "effect": "New stars ignite inside the clouds.",
-      "sound": "Sparkling pings."
+      "sound": "Sparkling pings.",
+      "improved": "E2: a tap lights seven new stars one after another, three at the tips of the pillars: each flares up with spikes, settles to a bright point in a small glow of lit gas, and later fades (6.5 s)."
     },
     "supernova": {
       "v": "keep",
@@ -689,10 +710,11 @@
       "sound": "Huge boom with a long tail."
     },
     "spiral-galaxy": {
-      "v": "new",
+      "v": "keep",
       "owner": "No clear effect; it should rotate like a spiral galaxy.",
       "effect": "Idle: slow rotation. Tap: arms swirl faster and the core flares.",
-      "sound": "Deep swirling hum."
+      "sound": "Deep swirling hum.",
+      "improved": "E2: the spiral pattern now turns slowly all the time, as one piece (the arms keep their shape), while the disc's stars orbit. A tap swirls the arms once more round, fast, and the core flares (4.6 s)."
     },
     "virus": {
       "v": "new",
@@ -802,41 +824,48 @@
       "sound": "Gloopy ooze."
     },
     "orbital": {
-      "v": "new",
+      "v": "keep",
       "owner": "Chemistry toys need good effects.",
       "effect": "Jumps to a higher orbital shape with a glow, then drops back and flashes.",
-      "sound": "Quantum blip up and down."
+      "sound": "Quantum blip up and down.",
+      "improved": "E2: a tap sends in a photon (a wiggle of light) that the electron absorbs: its cloud jumps to the next orbital up (one step up in energy, one more unit of angular momentum) and glows, then drops back with a flash and gives the photon out again (5.2 s)."
     },
     "atom": {
-      "v": "new",
+      "v": "keep",
       "effect": "Electrons speed up into blurred shells.",
-      "sound": "Whirring orbit."
+      "sound": "Whirring orbit.",
+      "improved": "E2: a tap energises the atom: the electrons whirl faster and faster until each shell blurs into a glowing ring, then slow down (4.6 s). The cloud style's shells swell and brighten."
     },
     "molecule": {
-      "v": "new",
+      "v": "keep",
       "effect": "Bonds vibrate and stretch (like heat), then calm.",
-      "sound": "Springy boing."
+      "sound": "Springy boing.",
+      "improved": "E2: the atoms always jiggle a little on their bonds. A tap heats it: every bond stretches and squeezes hard at its own pace, the light hydrogens swinging furthest, then it cools (4.4 s). Each atom moves on its own (the buckyball by pentagons, which also breathe)."
     },
     "crystal-lattice": {
-      "v": "new",
+      "v": "keep",
       "effect": "A wave of vibration travels through the lattice.",
-      "sound": "Rippling ping."
+      "sound": "Rippling ping.",
+      "improved": "E2: a tap sends a wave of vibration (a phonon) through the crystal: a ripple runs across it from left to right, each slice of atoms rising and falling in turn with its bonds (3.8 s)."
     },
     "diamond": {
-      "v": "new",
+      "v": "keep",
       "owner": "Gems need effects.",
       "effect": "Fire: rainbow sparkles flash off the facets as it turns.",
-      "sound": "High sparkle chime."
+      "sound": "High sparkle chime.",
+      "improved": "E2: a tap turns it one way and the other in the light, like a ring: facet after facet flashes rainbow fire and the star glints flare (3.8 s)."
     },
     "ruby": {
-      "v": "new",
+      "v": "keep",
       "effect": "Glows deep red from inside.",
-      "sound": "Warm low chime."
+      "sound": "Warm low chime.",
+      "improved": "E2: rubies glow red in ultraviolet light. A tap lights the stone deep red from its heart outwards; the glow throbs twice, shines out round it and fades (4 s)."
     },
     "emerald": {
-      "v": "new",
+      "v": "keep",
       "effect": "Green light runs along the step cuts.",
-      "sound": "Soft glassy chime."
+      "sound": "Soft glassy chime.",
+      "improved": "E2: a tap sends green light racing round the edges of the step cut's steps, each step a little behind the one outside it, so the light spirals in to the table (4 s)."
     },
     "amethyst-geode": {
       "v": "keep",
@@ -846,19 +875,22 @@
       "improved": "C2: each time it opens, the halves swing wider and the crystals glow violet with twinkling tips, then settle (about 4 s)."
     },
     "sapphire": {
-      "v": "new",
+      "v": "keep",
       "effect": "A star shimmer (asterism) glides across it.",
-      "sound": "Cool bell."
+      "sound": "Cool bell.",
+      "improved": "E2: a tap makes a six-rayed star (asterism) appear on one side of the stone, glide across its top, turning a little, and fade (3.6 s)."
     },
     "quartz-cluster": {
-      "v": "new",
+      "v": "keep",
       "effect": "Points light up one by one.",
-      "sound": "Tinkling chimes."
+      "sound": "Tinkling chimes.",
+      "improved": "E2: a tap lights the ten points one by one from left to right, each glowing from within with a star at its tip, with a rising chime for each (4.4 s)."
     },
     "opal": {
-      "v": "new",
+      "v": "keep",
       "effect": "Colour play: flashes of colour roll across it.",
-      "sound": "Shimmer."
+      "sound": "Shimmer.",
+      "improved": "E2: a tap rocks the stone in the light while flashes of colour roll across it patch by patch, changing hue as they go (4.2 s)."
     },
     "pearl": {
       "v": "keep",

@@ -73,7 +73,9 @@ density. A pack only downloads when one of its toys is picked. Recipes can give 
 
 - **behaviours** that run on the GPU per splat: orbit, beat, breathe, flame, rise, fall, twinkle,
   sway, grow, melt, a glow that pulses along a path, wave and glint;
-- **parts** (up to 15 rigid groups) that hinge, spin or slide, driven by the recipe each frame;
+- **parts** (up to 15 rigid groups) that hinge, spin or slide, driven by the recipe each frame, and
+  up to 48 **tokens** (pieces picked per splat: chess pieces, an asteroid's rubble, a molecule's
+  atoms);
 - **controls** (sliders, switches, one-shot pulses) and an **action** that a tap on the toy runs
   (open the lid, stoke the fire);
 - **options** that rebuild the toy (a style, a colour).
@@ -103,6 +105,13 @@ Clay works on pack toys too.
   star cookie crumbling, the blob splitting in three) and show a small kit-built add-on with the
   scan (the lantern's flame, the cactus's flowers, the marble bust's speech bubble). Every scan and
   shelf shape now has its own tap effect.
+- **Space, atoms and gems.** Every one has its own tap: the Sun throws off a flare (and churns all
+  the time), the planets line up while Mercury crosses the Sun, Earth turns through a night with its
+  city lights, the Moon runs through its phases, Mars raises a dust storm, Jupiter's bands race,
+  Saturn's rings ripple, the asteroid breaks into pieces and pulls back together, a star lives and
+  dies, the pulsar strobes, the black hole swallows a star; an electron jumps to a higher orbital
+  and drops back with a photon, a molecule's bonds shake when heated, a wave runs through a crystal
+  lattice; the diamond flashes rainbow fire, the ruby glows red, a star glides over the sapphire.
 - **Drag to stretch.** Drag the gummy bear (with the Orbit tool, starting on the bear) to stretch
   it; let go and it springs back. A drag that starts beside it still turns the view.
 - Under a system setting for reduced motion, toys stay still until you switch motion on.
