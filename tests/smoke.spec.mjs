@@ -834,8 +834,18 @@ test.describe("Splashery v3 engine (WebGL2)", () => {
     await page.mouse.up();
     // The camera did not turn, and the bear springs back.
     expect(await yaw()).toBeCloseTo(yaw0, 3);
+    // The spring-back takes 1.6 s of the toy's clock, which steps a clamped
+    // amount per frame: SwiftShader draws only a few frames a second, so
+    // wait on that clock rather than on wall time.
     await expect
-      .poll(() => page.evaluate(() => window.__splashery.player.driver.grab.on), { timeout: 5000 })
+      .poll(
+        () =>
+          page.evaluate(() => {
+            const p = window.__splashery.player;
+            return p.time - p.driver.grab.releaseAt > 1.7 ? p.driver.grab.on : "springing";
+          }),
+        { timeout: 30_000 },
+      )
       .toBe(false);
     // A drag that starts beside the toy still orbits.
     await page.mouse.move(box.x + 30, box.y + box.height - 60);
