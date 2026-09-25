@@ -491,7 +491,12 @@ const E3 = {
   maths: "mobius menger-sponge hypercube torus-knot gyroid mandelbulb seashell-spiral",
 };
 
-test("every E3 toy has its own tap, and its channels are near rest when it is done", async () => {
+// Toys whose channels change their shape (a morph): at rest the shape is
+// back where it was built (a gentle idle wobble aside). Light channels
+// instead park outside the range they glow in, and are not checked.
+const SHAPES = "bacterium red-blood-cell animal-cell microglia chromosome amoeba heart lungs mobius menger-sponge torus-knot gyroid mandelbulb".split(" "); // prettier-ignore
+
+test("every E3 toy has its own tap, and a toy that changes shape is back in shape at rest", async () => {
   const { buildRecipe } = await import("../src/kit.js");
   for (const [pack, ids] of Object.entries(E3)) {
     const { RECIPES } = await import(`../src/packs/${pack}.js`);
@@ -499,7 +504,8 @@ test("every E3 toy has its own tap, and its channels are near rest when it is do
       const r = RECIPES[id];
       const ctl = r.controls?.find((c) => c.key === r.action?.key);
       expect(ctl, id).toBeTruthy();
-      const it = buildRecipe(r, { seed: 5, count: 6000 }, () => {});
+      const options = Object.fromEntries((r.options || []).map((o) => [o.key, o.default]));
+      const it = buildRecipe(r, { seed: 5, count: 6000, options }, () => {});
       let b = it.next();
       while (!b.done) b = it.next();
       const data = b.value.kit.data;
@@ -512,7 +518,7 @@ test("every E3 toy has its own tap, and its channels are near rest when it is do
           for (const x of [pd.angle, pd.visible, pd.scale, ...(pd.offset || [])])
             if (x !== undefined) expect(Number.isFinite(x), id).toBe(true);
         for (const m of out.morph || []) expect(Number.isFinite(m), id).toBe(true);
-        if (v === 0 && ctl.type === "pulse")
+        if (v === 0 && SHAPES.includes(id))
           for (const m of out.morph || []) expect(Math.abs(m), `${id} at rest`).toBeLessThan(0.2);
       }
     }

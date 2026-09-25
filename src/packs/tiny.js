@@ -300,7 +300,7 @@ export const RECIPES = {
           visible: on && s > 0.4 ? 1 : 0,
         };
       }
-      out.morph = [0, ease(band(s, 2.3, 4.2))];
+      out.morph = [0, on ? ease(band(s, 2.3, 4.2)) : 0];
     },
     build(k, o) {
       const ico = icosahedron();
@@ -1535,7 +1535,7 @@ export const RECIPES = {
       const cup = ease(band(s, 0.5, 1.7)) * (1 - ease(band(s, 2.1, 3.1)));
       const gather = ease(band(s, 2.9, 3.8)) * (1 - ease(band(s, 4.6, 5.5)));
       const digest = ease(band(s, 3.6, 4.7));
-      out.morph = [cup, gather, band(s, 3.2, 4.4)];
+      out.morph = [cup, gather, on ? band(s, 3.2, 4.4) : 0];
       out.parts.bug = {
         offset: add(at, mul(side, wig)),
         angle: Math.sin(s * 11 + 1) * 0.25 * (1 - pull),
