@@ -818,15 +818,17 @@ const STAR_TYPES = {
 
 // The solar system as an orrery: orbit radius, planet size, angular speed
 // (radians per second) and starting angle.
+// (Shares are small so each planet's splats stay a few pixels wide even in
+// a 256 px thumbnail: the renderer drops splats under about two pixels.)
 const ORRERY = [
-  { id: "mercury", r: 0.35, size: 0.04, w: 0.42, phase: 0.6, share: 0.012, swell: 0 },
-  { id: "venus", r: 0.48, size: 0.06, w: 0.31, phase: 2.5, share: 0.02, swell: 0.08 },
-  { id: "earth", r: 0.62, size: 0.064, w: 0.25, phase: 4.2, share: 0.024, swell: 0.08 },
-  { id: "mars", r: 0.76, size: 0.05, w: 0.2, phase: 5.6, share: 0.016, swell: 0.08 },
-  { id: "jupiter", r: 1.04, size: 0.12, w: 0.11, phase: 0.9, share: 0.06, swell: 0 },
-  { id: "saturn", r: 1.31, size: 0.09, w: 0.08, phase: 3.3, share: 0.045, swell: 0 },
-  { id: "uranus", r: 1.54, size: 0.07, w: 0.058, phase: 5.9, share: 0.028, swell: 0 },
-  { id: "neptune", r: 1.72, size: 0.068, w: 0.046, phase: 2.2, share: 0.028, swell: 0 },
+  { id: "mercury", r: 0.35, size: 0.04, w: 0.42, phase: 0.6, share: 0.006, swell: 0 },
+  { id: "venus", r: 0.48, size: 0.06, w: 0.31, phase: 2.5, share: 0.01, swell: 0.08 },
+  { id: "earth", r: 0.62, size: 0.064, w: 0.25, phase: 4.2, share: 0.013, swell: 0.08 },
+  { id: "mars", r: 0.76, size: 0.05, w: 0.2, phase: 5.6, share: 0.008, swell: 0.08 },
+  { id: "jupiter", r: 1.04, size: 0.12, w: 0.11, phase: 0.9, share: 0.04, swell: 0 },
+  { id: "saturn", r: 1.31, size: 0.09, w: 0.08, phase: 3.3, share: 0.022, swell: 0 },
+  { id: "uranus", r: 1.54, size: 0.07, w: 0.058, phase: 5.9, share: 0.012, swell: 0 },
+  { id: "neptune", r: 1.72, size: 0.068, w: 0.046, phase: 2.2, share: 0.012, swell: 0 },
 ];
 
 // The Sun's prominences (angle round the limb, half span, height, tilt
