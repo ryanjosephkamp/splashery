@@ -491,14 +491,16 @@ function plugFaces(plugs, s, sides) {
 // A triply periodic gyroid sin x cos y + sin y cos z + sin z cos x = 0,
 // clipped to a ball or a cube: points projected onto the surface, both
 // sides offset a little so each can take its own colour.
+const gyroidG = (x, y, z) =>
+  Math.sin(x) * Math.cos(y) + Math.sin(y) * Math.cos(z) + Math.sin(z) * Math.cos(x);
+const gyroidGrad = (x, y, z) => [
+  Math.cos(x) * Math.cos(y) - Math.sin(z) * Math.sin(x),
+  -Math.sin(x) * Math.sin(y) + Math.cos(y) * Math.cos(z),
+  -Math.sin(y) * Math.sin(z) + Math.cos(z) * Math.cos(x),
+];
 function gyroidShape(scale, clip) {
-  const g = (x, y, z) =>
-    Math.sin(x) * Math.cos(y) + Math.sin(y) * Math.cos(z) + Math.sin(z) * Math.cos(x);
-  const grad = (x, y, z) => [
-    Math.cos(x) * Math.cos(y) - Math.sin(z) * Math.sin(x),
-    -Math.sin(x) * Math.sin(y) + Math.cos(y) * Math.cos(z),
-    -Math.sin(y) * Math.sin(z) + Math.cos(z) * Math.cos(x),
-  ];
+  const g = gyroidG;
+  const grad = gyroidGrad;
   const inside =
     clip === "sphere"
       ? (p) => len(p) < 1
@@ -528,11 +530,40 @@ function gyroidShape(scale, clip) {
         n = unit(n);
         const side = rand() < 0.5 ? 1 : -1;
         const nn = mul(n, side);
-        return { p: add(p, mul(nn, 0.014)), n: nn, u: 0, v: 0, side };
+        return { p: add(p, mul(nn, 0.014)), n: nn, u: 0, v: 0, side, at: p };
       }
-      return { p: [0, 0, 0], n: [0, 1, 0], u: 0, v: 0, side: 1 };
+      return { p: [0, 0, 0], n: [0, 1, 0], u: 0, v: 0, side: 1, at: [0, 0, 0] };
     },
   };
+}
+
+// Where a point p0 of the gyroid (g = 0) goes on the level set g = level,
+// and the unit gradient there. Near the clipping cube's faces (or ball) it
+// only slides along them, so the outline stays crisp.
+function gyroidLevel(p0, level, scale, clip) {
+  let p = p0.slice();
+  let gr = [0, 1, 0];
+  for (let it = 0; it < 5; it++) {
+    const sx = Math.sin(p[0] * scale);
+    const cx = Math.cos(p[0] * scale);
+    const sy = Math.sin(p[1] * scale);
+    const cy = Math.cos(p[1] * scale);
+    const sz = Math.sin(p[2] * scale);
+    const cz = Math.cos(p[2] * scale);
+    gr = [cx * cy - sz * sx, -sx * sy + cy * cz, -sy * sz + cz * cx];
+    if (it === 4) break;
+    const v = sx * cy + sy * cz + sz * cx - level;
+    p = sub(p, mul(gr, v / Math.max(dot(gr, gr), 0.3) / scale));
+  }
+  let d = sub(p, p0);
+  if (clip === "sphere") {
+    const r0 = len(p0) || 1;
+    const rn = mul(p0, 1 / r0);
+    d = sub(d, mul(rn, dot(d, rn) * smoothstep(0.88, 0.98, r0)));
+  } else d = d.map((v, i) => v * (1 - smoothstep(0.76, 0.84, Math.abs(p0[i]))));
+  const dl = len(d);
+  if (dl > 0.2) d = mul(d, 0.2 / dl);
+  return { p: add(p0, d), n: unit(gr) };
 }
 
 // The power-8 Mandelbulb (its axis turned to point up): sphere-traced from
@@ -623,6 +654,15 @@ function mandelbulbShape(rays = 12000) {
     },
   };
 }
+
+// The Mandelbulb's twist: BULB_BANDS horizontal bands between -BULB_Y and
+// BULB_Y, each turning BULB_TWIST radians per unit of height at full twist.
+const BULB_BANDS = 14;
+const BULB_Y = 1.2;
+const BULB_TWIST = 0.95;
+const bulbBand = (y) =>
+  clamp(Math.floor(((y + BULB_Y) / (2 * BULB_Y)) * BULB_BANDS), 0, BULB_BANDS - 1);
+const bulbBandMid = (i) => -BULB_Y + ((i + 0.5) * 2 * BULB_Y) / BULB_BANDS;
 
 // Sierpinski tetrahedron: the four corner copies, recursively.
 function sierpinski(level) {
@@ -789,6 +829,16 @@ const ANT_HIPS = [0.042, 0.042, 0.022, 0.022, 0.002, 0.002].map((x, i) =>
 // (for the draw order), inside the band's own reach.
 const MOB_ANT_FRONT = mul(MOB_VIEW, 1.15);
 const MOB_ANT_BACK = mul(MOB_VIEW, -1.15);
+
+// The seashell's mouth (its last cross-section is a circle in the plane
+// z = 0 before the shell is turned 40 degrees about Y): centre, the axis it
+// opens along, and radius. And when each of its three ripples sets off.
+const SHELL_MOUTH = (() => {
+  const q = quatEuler(0, 40, 0);
+  const e = Math.E;
+  return { c: quatRotate(q, [1 - e, 1 - e * e, 0]), n: quatRotate(q, [0, 0, 1]), r: e - 1 };
+})();
+const SHELL_WAVES = [0.7, 1.8, 2.9];
 
 // ---- Recipes ------------------------------------------------------------------------
 
@@ -1301,7 +1351,9 @@ export const RECIPES = {
       const look = {
         flat: 0.25,
         interior: 0.06,
-        core: pal[0],
+        // The inside is the tube's own colour, darker (a dark core would
+        // show through the thinner half-budget copies as speckle).
+        core: (c) => shade(ramp(cyc, c.t), 0.85),
         color: (c) => {
           const col = ramp(cyc, c.t);
           const stripe = (c.t * 90) % 1 < 0.1 ? 0.9 : 1;
@@ -1356,9 +1408,24 @@ export const RECIPES = {
         ],
       },
     ],
+    controls: [{ key: "breathe", label: "Breathe", type: "pulse", ease: 3.8 }],
+    action: { key: "breathe", label: "Breathe in and out" },
+    // A tap makes the sponge breathe: the surface slides along itself to
+    // a shifted level of the same equation, so the blue channels swell as
+    // the orange ones narrow, then the other way, and it settles back.
+    drive(t, c, out) {
+      const x = band(progress(c.breathe), 0.02, 0.96);
+      out.morph = [Math.sin(TAU * x) * Math.pow(Math.sin(Math.PI * x), 0.6)];
+    },
     build(k, o) {
-      k.add(gyroidShape(4.6, o.clip), {
-        flat: 0.08,
+      const scale = 4.6;
+      k.fitMorphs = false; // the breath stays inside the clip; keep the rest fit
+      k.add(gyroidShape(scale, o.clip), {
+        flat: 0.1,
+        to: (c) => {
+          const q = gyroidLevel(c.s.at, 0.85, scale, o.clip);
+          return add(q.p, mul(q.n, c.s.side * 0.014));
+        },
         color: (c) => {
           const h = (c.p[1] + 1) / 2;
           const col =
@@ -1372,8 +1439,41 @@ export const RECIPES = {
   },
 
   mandelbulb: {
+    controls: [{ key: "twist", label: "Twist", type: "pulse", ease: 3.8 }],
+    action: { key: "twist", label: "Wring it" },
+    // A tap wrings the bulb: the top turns one way and the bottom the other
+    // (up to about 55 degrees at the poles) as its bulbs bloom outward, then
+    // it springs back past rest and swings to a stop like a torsion spring.
+    // The bulb is cut into horizontal bands (parts) that each turn by the
+    // twist at their middle, and a morph twists each band within itself (and
+    // blooms it), so the surface twists smoothly with no steps.
+    drive(t, c, out) {
+      const p = c.twist > 0 ? 3.8 * (1 - c.twist) : -1;
+      let tw = 0;
+      if (p >= 0) {
+        const s = Math.max(0, p - 0.7);
+        tw =
+          p < 0.7
+            ? ease(band(p, 0.03, 0.7))
+            : Math.cos((TAU * s) / 1.25) * Math.exp(-s / 0.9) * (1 - band(p, 3.3, 3.75));
+      }
+      out.morph = [tw];
+      for (let i = 0; i < BULB_BANDS; i++)
+        out.parts["b" + i] = { angle: tw * BULB_TWIST * bulbBandMid(i) };
+    },
     build(k) {
+      const bands = [];
+      for (let i = 0; i < BULB_BANDS; i++) bands.push(k.part("b" + i));
+      k.fitMorphs = false; // turning about the axis keeps the size
       k.add(mandelbulbShape(), {
+        part: (c) => bands[bulbBand(c.p[1])],
+        // The bulbs also bloom: the outer ones stand further out and the
+        // folds between them sink, and the other way as it swings back.
+        to: (c) =>
+          rotY(
+            mul(c.p, 1 + (0.28 * (c.s.r - 0.85)) / c.s.r),
+            BULB_TWIST * (c.p[1] - bulbBandMid(bulbBand(c.p[1]))),
+          ),
         flat: 0.45,
         color: (c) => {
           const col = ramp(
@@ -1487,6 +1587,31 @@ export const RECIPES = {
 
   "seashell-spiral": {
     density: 0.85,
+    controls: [{ key: "listen", label: "Listen", type: "pulse", ease: 4.5 }],
+    action: { key: "listen", label: "Hear the sea" },
+    // Hearing the sea in a shell: at a tap, three soft swells of light run
+    // down the spiral from the tip to the opening, and as each one reaches
+    // it a ripple rolls out of the mouth, widening and fading like a wave.
+    drive(t, c, out) {
+      const p = c.listen > 0 ? 4.5 * (1 - c.listen) : -1;
+      const on = p >= 0;
+      // The swells of light: each runs from the tip (0) to the mouth (1).
+      const swell = (p % 1.1) / 0.85;
+      out.morph = [on && p < 3.3 ? -0.25 + 1.45 * swell : -1];
+      out.glow = [0.72, 0.95, 1, on ? 0.75 * (1 - band(p, 3.1, 3.4)) : 0];
+      SHELL_WAVES.forEach((start, i) => {
+        const x = on ? (p - start) / 1.45 : -1;
+        const live = x > 0 && x < 1;
+        const e = 1 - Math.pow(1 - clamp01(x), 1.6);
+        out.parts["wave" + i] = {
+          visible: live ? 1 : 0,
+          offset: mul(SHELL_MOUTH.n, 2.6 * e),
+          scale: 1.25 + 0.95 * e,
+        };
+        // Channel 1 + i: 1 is clear, 0 is solid.
+        out.morph[1 + i] = live ? 1 - band(x, 0, 0.12) * (1 - band(x, 0.35, 1)) : 1;
+      });
+    },
     build(k) {
       const f = (U, V) => {
         const u = U * 6 * Math.PI;
@@ -1502,6 +1627,10 @@ export const RECIPES = {
       k.add(k.param(f, { grid: 140 }), {
         rot: [0, 40, 0],
         flat: 0.15,
+        // A swell of light passes as channel 0 runs from the tip (u = 0) to
+        // the mouth (u = 1).
+        kind: "band",
+        params: (c) => [c.u, 0.12],
         color: (c) => {
           const u = c.u * 6 * Math.PI;
           // Growth lines and zigzag bands, like a cone shell.
@@ -1512,6 +1641,34 @@ export const RECIPES = {
           if (growth) col = shade(col, 0.9);
           return lit(col, c.n, { amb: 0.66, dif: 0.42, spec: 0.4, two: true });
         },
+      });
+      // The ripples (clear at rest): foamy rings the size of the mouth, in
+      // its plane, that roll out along its axis, widen and fade.
+      const { c: mid, n, r } = SHELL_MOUTH;
+      const e1 = unit(cross(n, [0, 1, 0]));
+      const e2 = cross(n, e1);
+      SHELL_WAVES.forEach((_, i) => {
+        const part = k.part("wave" + i, { pivot: mid });
+        k.cloud({ share: 0.03, size: 1.6, pattern: false }, (rand) => {
+          const a = rand() * TAU;
+          const crest = 0.06 * Math.sin(a * 7 + i * 2);
+          // Built a little inside the mouth (hidden pieces count in the fit)
+          // and grown by the part's scale.
+          const rr = 0.8 * (r * (0.97 + crest) + (rand() - 0.5) * 0.12);
+          const lift = -0.1 - rand() * 0.08 + 0.05 * Math.sin(a * 7 + i * 2);
+          const q = add(mid, add(add(mul(e1, rr * Math.cos(a)), mul(e2, rr * Math.sin(a))), mul(n, lift))); // prettier-ignore
+          const foam = rand();
+          return {
+            p: q,
+            color: mix("#7fd8e8", "#f2fdff", foam * foam),
+            opacity: 0.55 + 0.35 * foam,
+            size: 0.8 + 0.8 * rand(),
+            part,
+            kind: "fade",
+            params: [0, 0.99],
+            channel: 1 + i,
+          };
+        });
       });
     },
   },
