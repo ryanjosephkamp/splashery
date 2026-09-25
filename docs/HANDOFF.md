@@ -348,9 +348,12 @@ Known issues carried forward:
     longer line up.
   - Saturn's spokes and Uranus's arcs repeat every eighth of a turn, so they look regular.
   - The galaxy's arms now turn as one pattern; before, they slowly wound up over minutes.
-  - The part `cull` flag is new shader code in both GLSL and WGSL. The tests here run WebGL2 only
-    (no WebGPU adapter in the headless browser), so the WGSL half is untested: check Jupiter's Winds
-    on a WebGPU browser (Chrome on a laptop).
+  - The part `cull` flag is new shader code in both GLSL and WGSL. The WebGPU smoke test (a kit toy
+    with parts) passes, so the WGSL compiles, but the cull itself was only watched on WebGL2. Worth
+    a look at Jupiter's Winds on a WebGPU browser (Chrome on a laptop).
+  - The cat statue's head-turn smoke test failed once in the full run (the head was not quite back 3
+    s after the tap: 7848 changed pixels against a limit of 7535) and passed when run again. E2 does
+    not touch rigs; the test is timing-sensitive on the software renderer.
 - New in E1c:
   - The owner approved the E1c effects (2026-09-25).
   - The elephant's trunk is kit-built: a little smoother than the carving round it. A small kit
