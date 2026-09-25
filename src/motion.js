@@ -288,17 +288,21 @@ function packParts(data, parts, driven, scale) {
     let po = [0, 0, 0];
     let vis = 1;
     let grow = 0;
+    let cull = false;
     if (pd) {
       if (pd.quat) pq = pd.quat;
       else if (pd.angle) pq = quatAxisAngle(pd.axis || def.axis, pd.angle);
       if (pd.offset) po = [pd.offset[0] * scale, pd.offset[1] * scale, pd.offset[2] * scale];
       if (pd.visible !== undefined) vis = pd.visible;
       if (pd.scale !== undefined) grow = pd.scale - 1;
+      cull = !!pd.cull;
     }
     const pv = def ? def.pivot : [0, 0, 0];
     data.set(pq, o);
     data.set([pv[0], pv[1], pv[2], grow], o + 4);
-    data.set([po[0], po[1], po[2], vis], o + 8);
+    // A culled part hides its splats on the far side of its centre (the
+    // kit shader reads visibility -w - 1 from a w of -1 or less).
+    data.set([po[0], po[1], po[2], cull ? -1 - Math.max(0, vis) : vis], o + 8);
   }
   return data;
 }

@@ -607,7 +607,7 @@
       "v": "keep",
       "effect": "A dust storm sweeps across it.",
       "sound": "Dusty hiss.",
-      "improved": "E2: a tap raises a dust storm: billowing ochre dust sweeps across from the left with a ragged front, hides the dark markings as it drifts east, then thins out and clears (5.4 s)."
+      "improved": "E2: a tap raises a dust storm: billowing ochre dust sweeps across from the left with a ragged front, covers the whole face and hides the dark markings, then settles, clearing from the east edge (5.4 s)."
     },
     "jupiter": {
       "v": "keep",

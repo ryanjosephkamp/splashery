@@ -73,9 +73,9 @@ density. A pack only downloads when one of its toys is picked. Recipes can give 
 
 - **behaviours** that run on the GPU per splat: orbit, beat, breathe, flame, rise, fall, twinkle,
   sway, grow, melt, a glow that pulses along a path, wave and glint;
-- **parts** (up to 15 rigid groups) that hinge, spin or slide, driven by the recipe each frame, and
-  up to 48 **tokens** (pieces picked per splat: chess pieces, an asteroid's rubble, a molecule's
-  atoms);
+- **parts** (up to 15 rigid groups) that hinge, spin or slide, driven by the recipe each frame (a
+  turning part can hide its far side), and up to 48 **tokens** (pieces picked per splat: chess
+  pieces, an asteroid's rubble, a molecule's atoms);
 - **controls** (sliders, switches, one-shot pulses) and an **action** that a tap on the toy runs
   (open the lid, stoke the fire);
 - **options** that rebuild the toy (a style, a colour).

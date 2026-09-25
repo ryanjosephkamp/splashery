@@ -162,6 +162,32 @@ function spinParts(out, name, angle, more = {}) {
 }
 // Copy B's share of a body's splats, and the size that keeps it covered.
 const TURNED = { weight: 0.45, size: 1.5 };
+// A shell made of several turning parts (bands) also needs its far side
+// hidden while it turns (the part's cull flag), or one band's back draws
+// over the next band's front near the edge. With the back gone, splats
+// this much bigger close the gaps it used to fill.
+const CULLED_SIZE = 1.2;
+// A fixed layer over part of a turning body (a night shade, a glow) sorts
+// against the copy in its built pose too, and a copy built nearer the
+// camera than where it is shown draws over the layer. Such a body is built
+// four times, a quarter turn apart (name, nameB, nameC, nameD), and
+// spinQuarters() shows the copy whose built pose lies on one side of where
+// it is shown: side +1 shows copies turned 0..90° past their build (built
+// behind: for a layer on the side the ground turns away from), side -1
+// copies turned -90..0° (built ahead: for a layer on the side it turns
+// towards).
+const QUARTER = { weight: 0.55, size: 1.35 };
+const QUARTER_NAMES = ["", "B", "C", "D"];
+function spinQuarters(out, name, angle, side, more = {}) {
+  const step = TAU / 4;
+  const a = ((angle % TAU) + TAU) % TAU;
+  const j = side > 0 ? Math.floor(a / step + 1e-9) : Math.ceil(a / step - 1e-9);
+  const vis = more.visible ?? 1;
+  QUARTER_NAMES.forEach((s, i) => {
+    const shown = i === j % 4;
+    out.parts[name + s] = { ...more, angle: shown ? a - j * step : 0, visible: shown ? vis : 0 };
+  });
+}
 // Splats inside a turning body would draw over its turned surface, so a
 // turning body is a hollow shell and its inside (for Slice) is this ball,
 // its own part, which drive hides while the body turns.
@@ -371,6 +397,7 @@ function rockyBody(
     kind,
     params,
     turn,
+    turnAngle = Math.PI,
     size,
   },
 ) {
@@ -381,7 +408,7 @@ function rockyBody(
     const r = clamp(relief(c, reliefAmount), -0.55, 0.45);
     return lit(shade(base, 1 + r), c.n, litAmount);
   };
-  const q = turn ? halfTurn(turn) : null;
+  const q = turn ? quatAxisAngle(turn, turnAngle) : null;
   return k.add(k.radial(radius, { grid }), {
     flat: 0.22,
     interior,
@@ -395,7 +422,7 @@ function rockyBody(
     share,
     size,
     quat: q || undefined,
-    color: q ? turnedColor(color, q, pos) : color,
+    color: q ? turnedColor(color, quatAxisAngle(turn, -turnAngle), pos) : color,
   });
 }
 
@@ -421,11 +448,12 @@ function globe(
     weight,
     size,
     turn,
+    turnAngle = Math.PI,
   },
 ) {
   const shape = oblate === 1 ? k.sphere(r) : k.ellipsoid(r, r * oblate, r);
   const color = (c) => col(c, unit([c.lp[0], c.lp[1] / oblate, c.lp[2]]));
-  const t = turn ? halfTurn(turn) : null;
+  const t = turn ? quatAxisAngle(turn, turnAngle) : null;
   const item = k.add(shape, {
     quat: t ? quatMul(t, quat || [0, 0, 0, 1]) : quat,
     pos,
@@ -438,7 +466,7 @@ function globe(
     share,
     weight,
     size,
-    color: t ? turnedColor(color, t, pos) : color,
+    color: t ? turnedColor(color, quatAxisAngle(turn, -turnAngle), pos) : color,
   });
   // A fixed share (only used in toys with no weighted surfaces) gets a
   // splat size that covers it.
@@ -823,19 +851,20 @@ const EARTH_TILT = quatEuler(0, 0, -23.4);
 const EARTH_SUN = unit([-0.9, 0.15, 0.55]);
 const EARTH_WEDGES = 10;
 // The middle longitude of each wedge of city lights, and the longitude (in
-// the Earth's own frame) of the middle of the night side the viewer sees.
+// the Earth's own frame) where the ground turns into the night side the
+// viewer sees (just before dusk).
 const EARTH_LIGHTS = (() => {
   const lon = (i) => ((i + 0.5) / EARTH_WEDGES) * TAU - Math.PI;
   const cam = camDir();
-  let mid = 0;
-  let best = -2;
-  for (let j = 0; j < 360; j++) {
-    const a = (j / 360) * TAU - Math.PI;
-    const w = quatRotate(EARTH_TILT, dirOf(0, a));
-    const v = Math.min(-dot(w, EARTH_SUN), dot(w, cam));
-    if (v > best) [best, mid] = [v, a];
+  const sunAt = (a) => dot(quatRotate(EARTH_TILT, dirOf(0, a)), EARTH_SUN);
+  let enter = 0;
+  for (let j = 0; j < 720; j++) {
+    const a = (j / 720) * TAU - Math.PI;
+    const b = a + TAU / 720;
+    const facing = dot(quatRotate(EARTH_TILT, dirOf(0, a)), cam) > 0;
+    if (facing && sunAt(a) >= 0.08 && sunAt(b) < 0.08) enter = a;
   }
-  return { lon, mid };
+  return { lon, enter };
 })();
 
 // Jupiter's bands (between sines of latitude) and how many turns each makes
@@ -1195,10 +1224,12 @@ export const RECIPES = {
       const p = progress(c.spin);
       const on = c.spin > 0 ? 1 : 0;
       const heat = on * bump(p, 0.04, 0.28, 0.6, 0.98);
-      spinParts(out, "globe", TAU * ease(band(p, 0, 0.6)));
+      // The heat lies over the side the ground turns away from (see
+      // spinQuarters).
+      spinQuarters(out, "globe", TAU * ease(band(p, 0, 0.6)), 1);
       out.parts.core = { visible: on ? 0 : 1 };
-      out.parts.heat = { visible: 1.1 * heat, scale: 1 + 0.02 * heat };
-      out.amount = 1 + 1.5 * heat;
+      out.parts.heat = { visible: heat, scale: 1 + 0.02 * heat };
+      out.amount = 1 + 0.8 * heat;
     },
     build(k) {
       const craters = craterField(k.rand, { count: 380, min: 0.016, max: 0.19, rays: 3 });
@@ -1221,8 +1252,10 @@ export const RECIPES = {
           return mix(col, "#e8e2d6", clamp01(L.ray) * 0.55);
         },
       };
-      rockyBody(k, { ...body, part: k.part("globe") });
-      rockyBody(k, { ...body, part: k.part("globeB"), turn: [0, 1, 0], ...TURNED });
+      QUARTER_NAMES.forEach((s, i) => {
+        const turned = i ? { turn: [0, 1, 0], turnAngle: (i * TAU) / 4, ...QUARTER } : {};
+        rockyBody(k, { ...body, part: k.part(`globe${s}`), ...turned });
+      });
       // The heat (hidden until a tap): a shimmering red-hot glow over the
       // day side, hottest under the Sun. It stays put while the ground turns.
       const [e1, e2] = basis(LIGHT);
@@ -1239,8 +1272,8 @@ export const RECIPES = {
           p: mul(d, 1.012 + 0.03 * rand()),
           n: d,
           flat: 0.3,
-          color: ramp(["#c02a0c", "#ff5a18", "#ffa040", "#ffe2a0"], hot),
-          opacity: 0.08 + 0.26 * hot,
+          color: ramp(["#b0260c", "#f0521a", "#ff9038", "#ffd28a"], hot),
+          opacity: 0.06 + 0.22 * hot,
           kind: "twinkle",
           params: [0.3, rand() * TAU],
         };
@@ -1257,7 +1290,11 @@ export const RECIPES = {
     // together again.
     drive(t, c, out) {
       const u = ease(band(progress(c.swirl), 0, 0.94));
-      VENUS_BANDS.forEach((b, i) => spinParts(out, `deck${i}`, -TAU * b.turns * u));
+      const cull = c.swirl > 0;
+      const visible = cull ? CULLED_SIZE : 1;
+      VENUS_BANDS.forEach((b, i) =>
+        spinParts(out, `deck${i}`, -TAU * b.turns * u, { cull, visible }),
+      );
       out.parts.core = { visible: c.swirl > 0 ? 0 : 1 };
     },
     build(k) {
@@ -1305,17 +1342,19 @@ export const RECIPES = {
       const dusk = on * ease(band(p, 0, 0.13)) * (1 - ease(band(p, 0.87, 1)));
       out.grow = 1.1 * dusk;
       const turn = TAU * ease(band(p, 0.08, 0.9));
-      spinParts(out, "globe", turn);
+      // The night lies over the side the ground turns towards.
+      spinQuarters(out, "globe", turn, -1);
       out.parts.core = { visible: on ? 0 : 1 };
-      // Each wedge of lights is built turned to the middle of the part of
-      // the night side the viewer sees; it shines only while it is there.
+      // Each wedge of lights is built turned to where the ground enters the
+      // night, so it is always shown at or past its built pose (drawn over
+      // the night); it shines only while it is on the night side in view.
       const view = camDir();
       for (let i = 0; i < EARTH_WEDGES; i++) {
         const lon = EARTH_LIGHTS.lon(i) + turn;
         const dir = quatRotate(EARTH_TILT, dirOf(0, lon));
         const seen =
           smoothstep(-0.05, 0.25, -dot(dir, EARTH_SUN)) * smoothstep(-0.05, 0.25, dot(dir, view));
-        let a = lon - EARTH_LIGHTS.mid;
+        let a = lon - EARTH_LIGHTS.enter;
         a = ((((a + Math.PI) % TAU) + TAU) % TAU) - Math.PI;
         out.parts[`lights${i}`] = { angle: a, visible: seen * band(dusk, 0.6, 1) };
       }
@@ -1328,7 +1367,10 @@ export const RECIPES = {
       const axis = quatRotate(q, [0, 1, 0]);
       // The clouds are painted on the globe (a separate layer of splats
       // above a turning globe would draw in the wrong order).
-      coreBall(k, { col: layers(["#fff1b0", "#ffc04a", "#ff7a2a", "#c2451e", "#7a3a22"]) });
+      coreBall(k, {
+        r: 0.92,
+        col: layers(["#fff1b0", "#ffc04a", "#ff7a2a", "#c2451e", "#5a2c1c"], 0.92),
+      });
       const ground = {
         quat: q,
         interior: 0,
@@ -1340,8 +1382,10 @@ export const RECIPES = {
           return lit(mix(surface(c, d), white, cloud), c.n, 0.3);
         },
       };
-      globe(k, { ...ground, part: k.part("globe", { axis }) });
-      globe(k, { ...ground, part: k.part("globeB", { axis }), turn: axis, ...TURNED });
+      QUARTER_NAMES.forEach((s, i) => {
+        const turned = i ? { turn: axis, turnAngle: (i * TAU) / 4, ...QUARTER } : { size: 1.15 };
+        globe(k, { ...ground, part: k.part(`globe${s}`, { axis }), ...turned });
+      });
       halo(k, {
         r0: 1.0,
         r1: 1.08,
@@ -1385,10 +1429,10 @@ export const RECIPES = {
           if (rand() > 0.05 + 0.6 * busy * (0.4 + 0.6 * coast)) continue;
           const lon = lonOf(d);
           const i = Math.min(EARTH_WEDGES - 1, Math.floor(((lon + Math.PI) / TAU) * EARTH_WEDGES));
-          // Built turned so that the wedge's middle sits at EARTH_LIGHTS.mid.
+          // Built turned so that the wedge's middle sits at EARTH_LIGHTS.enter.
           const w = quatRotate(
             q,
-            quatRotate(quatAxisAngle([0, 1, 0], EARTH_LIGHTS.mid - EARTH_LIGHTS.lon(i)), d),
+            quatRotate(quatAxisAngle([0, 1, 0], EARTH_LIGHTS.enter - EARTH_LIGHTS.lon(i)), d),
           );
           return {
             p: mul(w, 1.036),
@@ -1476,16 +1520,15 @@ export const RECIPES = {
     controls: [{ key: "storm", label: "Dust storm", type: "pulse", ease: 5.4 }],
     action: { key: "storm", label: "Raise a dust storm" },
     // A tap raises a dust storm: billowing ochre dust sweeps across the
-    // face from the left edge (grow, with a ragged front), drifts east as it
-    // hides the dark markings, then thins out and clears.
+    // face from the left edge (grow, with a ragged front) until it hides
+    // the dark markings, then settles, clearing from the east edge back the
+    // way it came (shrinking the dust instead leaves speckle). The dust
+    // does not drift: turned at all, it sorts behind the ground.
     drive(t, c, out) {
       const p = progress(c.storm);
       const on = c.storm > 0 ? 1 : 0;
-      out.grow = on * 1.1 * ease(band(p, 0.02, 0.42));
-      out.parts.dust = {
-        angle: 0.8 * ease(band(p, 0, 1)),
-        visible: on * (1 - ease(band(p, 0.64, 0.97))),
-      };
+      out.grow = on * 1.1 * ease(band(p, 0.02, 0.42)) * (1 - ease(band(p, 0.62, 0.97)));
+      out.parts.dust = { visible: on };
     },
     build(k) {
       const noise = k.noise;
@@ -1527,26 +1570,22 @@ export const RECIPES = {
       // The dust (hidden until a tap): lumpy clouds in a shell just above
       // the ground, appearing from the viewer's left as the front passes.
       const right = camFrame().right;
-      const axis = quatRotate(q, [0, 1, 0]);
-      k.cloud(
-        { share: 0.16, size: 1.9, pattern: false, part: k.part("dust", { axis }) },
-        (rand) => {
-          const d = randDir(rand);
-          const lump = noise.fbm(d[0] * 3 + 40, d[1] * 3, d[2] * 3, 4);
-          const dens = clamp01(0.55 + lump * 2.2);
-          const front =
-            0.84 * band(dot(d, right), -1.05, 1.05) + 0.1 * noise(d[0] * 5, d[1] * 5 + 9, d[2] * 5);
-          return {
-            p: mul(d, 1.014 + 0.035 * rand() * dens),
-            n: d,
-            flat: 0.3,
-            color: lit(mix("#d09a60", "#f6d7a4", dens * (0.6 + 0.4 * rand())), d, 0.35),
-            opacity: 0.5 + 0.45 * dens,
-            kind: "grow",
-            params: [clamp01(front), 0],
-          };
-        },
-      );
+      k.cloud({ share: 0.16, size: 1.9, pattern: false, part: k.part("dust") }, (rand) => {
+        const d = randDir(rand);
+        const lump = noise.fbm(d[0] * 3 + 40, d[1] * 3, d[2] * 3, 4);
+        const dens = clamp01(0.55 + lump * 2.2);
+        const front =
+          0.84 * band(dot(d, right), -1.05, 1.05) + 0.1 * noise(d[0] * 5, d[1] * 5 + 9, d[2] * 5);
+        return {
+          p: mul(d, 1.014 + 0.035 * rand() * dens),
+          n: d,
+          flat: 0.3,
+          color: lit(mix("#d09a60", "#f6d7a4", dens * (0.6 + 0.4 * rand())), d, 0.35),
+          opacity: 0.5 + 0.45 * dens,
+          kind: "grow",
+          params: [clamp01(front), 0],
+        };
+      });
     },
   },
 
@@ -1560,9 +1599,15 @@ export const RECIPES = {
     // anticlockwise inside its oval.
     drive(t, c, out) {
       const u = ease(band(progress(c.race), 0, 1));
+      // While the bands turn, each hides its far side (cull), or one band's
+      // back would draw over the next band's front near the edge; slightly
+      // bigger splats close the gaps the back no longer fills.
+      const cull = c.race > 0;
+      const visible = cull ? CULLED_SIZE : 1;
       JUPITER_JETS.forEach((j, i) => {
-        if (j.turns) spinParts(out, `band${i}`, TAU * j.turns * u);
+        if (j.turns) spinParts(out, `band${i}`, TAU * j.turns * u, { cull, visible });
       });
+      out.parts.still = { cull, visible };
       out.parts.spot = { angle: TAU * 3 * u };
       out.parts.core = { visible: c.race > 0 ? 0 : 1 };
     },
@@ -1583,7 +1628,9 @@ export const RECIPES = {
           if (ovalDist(d, -0.6, lon0 + 0.9 + i * 0.55, 0.05, 0.035) < 1) storm = 0.2;
         return [storm, c.rand() * TAU];
       };
-      // The planet in latitude bands, each its own part where it moves.
+      // The planet in latitude bands, each its own part where it moves (the
+      // still ones share a part too, to be culled).
+      const still = k.part("still");
       JUPITER_JETS.forEach((j, i) => {
         const shell = {
           y0: j.y0,
@@ -1593,7 +1640,7 @@ export const RECIPES = {
           params: storms,
           col: (c, d) => lit(surf(c, d), c.n, 0.3),
         };
-        bandShell(k, { ...shell, part: j.turns ? k.part(`band${i}`) : 0 });
+        bandShell(k, { ...shell, part: j.turns ? k.part(`band${i}`) : still });
         if (j.turns)
           bandShell(k, { ...shell, part: k.part(`band${i}B`), turn: [0, 1, 0], ...TURNED });
       });
@@ -1759,9 +1806,12 @@ export const RECIPES = {
     // storm and its white companion drifts the other way, once round.
     drive(t, c, out) {
       const u = ease(band(progress(c.winds), 0, 1));
+      const cull = c.winds > 0;
+      const visible = cull ? CULLED_SIZE : 1;
       NEPTUNE_BANDS.forEach((b, i) => {
-        if (b.turns) spinParts(out, `band${i}`, TAU * b.turns * u);
+        if (b.turns) spinParts(out, `band${i}`, TAU * b.turns * u, { cull, visible });
       });
+      out.parts.still = { cull, visible };
       out.parts.core = { visible: c.winds > 0 ? 0 : 1 };
     },
     build(k) {
@@ -1800,9 +1850,10 @@ export const RECIPES = {
         cl = mix(cl, "#eef4ff", clamp01(smoothstep(0.18, 0.4, streak) * zone));
         return lit(cl, c.n, 0.3);
       };
+      const still = k.part("still", { axis });
       NEPTUNE_BANDS.forEach((b, i) => {
         const shell = { y0: b.y0, y1: b.y1, quat: q, col, grid: 64 };
-        bandShell(k, { ...shell, part: b.turns ? k.part(`band${i}`, { axis }) : 0 });
+        bandShell(k, { ...shell, part: b.turns ? k.part(`band${i}`, { axis }) : still });
         if (b.turns)
           bandShell(k, { ...shell, part: k.part(`band${i}B`, { axis }), turn: axis, ...TURNED });
       });

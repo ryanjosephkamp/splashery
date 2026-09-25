@@ -23,14 +23,20 @@ ground rules are in [CLAUDE.md](../CLAUDE.md).
   and Neptune turn in latitude bands; `interior` splats draw over a turned surface, so turning
   bodies are hollow with a separate `coreBall` that hides while they turn; forever-turning rings use
   marks that repeat every eighth of a turn (`ringAngle`). Pieces that must draw in front are built
-  where they will be (the black hole's star, the orrery's Mercury).
+  where they will be (the black hole's star, the orrery's Mercury). Bands that turn at different
+  speeds (Jupiter, Venus, Neptune) set the new part `cull` flag while they turn, so one band's far
+  side cannot show through the next as a flap. Earth and Mercury, whose night and heat layers stay
+  put, have four copies a quarter turn apart (`spinQuarters`) and show one built on the far side of
+  where it is shown, so the layer stays on top.
 - **Hidden pieces count in the fit (E2).** Build effect pieces inside the toy's resting size and
   grow them by part `scale` (the Sun's flare, the star's red giant, the meteor's fireball).
 - **Engine (E2).** `build(k)` can leave `k.data` for `drive`, which gets it as `info.data`
-  (`src/motion.js`; the molecule and the crystal lattice use it). Tokens (`kind: "token"`, up to 48)
-  now also break shapes into pieces: the asteroid (18 cells with fresh broken faces), the meteor's
-  fragments, the molecule's atoms (the buckyball by pentagons). A new hidden `5g` orbital is the
-  excited state for the 4f orbitals.
+  (`src/motion.js`; the molecule and the crystal lattice use it). A driven part can set
+  `cull: true`: the kit shader (GLSL and WGSL, `src/effects.js`) then hides its splats on the far
+  side of the part's pivot from the camera (`packParts` sends it as a visibility of -1 - v). Tokens
+  (`kind: "token"`, up to 48) now also break shapes into pieces: the asteroid (18 cells with fresh
+  broken faces), the meteor's fragments, the molecule's atoms (the buckyball by pentagons). A new
+  hidden `5g` orbital is the excited state for the 4f orbitals.
 - **Sounds (E2).** 32 specs re-timed in `src/toy-sounds.js` (all pass `tools/sound-check.mjs`). The
   pulsar ticks on each flash and the star rings a bell as it is reborn through `out.cues` (beyond
   the sound check's five seconds). The Splashery Sound Board page was rebuilt.
@@ -329,9 +335,10 @@ Known issues carried forward:
     order), so they turn with the ground instead of drifting over it.
   - Venus and Neptune turn in latitude bands: during the effect the cloud pattern shears where bands
     meet (a seam line), then locks together again.
-  - The turning planets (Mercury, Venus, Earth, Jupiter, Neptune) carry a hidden, sparser copy for
-    the half turn, so their resting detail is a little lower, and Slice shows them hollow while they
-    turn.
+  - The turning planets carry hidden, sparser copies (Venus, Jupiter and Neptune one for the half
+    turn; Earth and Mercury three, a quarter turn apart), so their resting detail is a little lower
+    (Earth's most), and Slice shows them hollow while they turn. Earth's globe looks a little softer
+    than at rest for the first three quarters of its turn.
   - Running glows (emerald, diamond, opal, the aurora's folds) move at a fixed speed, so where the
     light starts depends on when you tap.
   - Solar system: the planets swell while lined up (not to scale), Mercury's transit is still a
@@ -341,7 +348,9 @@ Known issues carried forward:
     longer line up.
   - Saturn's spokes and Uranus's arcs repeat every eighth of a turn, so they look regular.
   - The galaxy's arms now turn as one pattern; before, they slowly wound up over minutes.
-  - No shader code changed in E2 (JavaScript only), so there is nothing new untested on WebGPU.
+  - The part `cull` flag is new shader code in both GLSL and WGSL. The tests here run WebGL2 only
+    (no WebGPU adapter in the headless browser), so the WGSL half is untested: check Jupiter's Winds
+    on a WebGPU browser (Chrome on a laptop).
 - New in E1c:
   - The owner approved the E1c effects (2026-09-25).
   - The elephant's trunk is kit-built: a little smoother than the carving round it. A small kit

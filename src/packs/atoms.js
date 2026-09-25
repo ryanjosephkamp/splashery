@@ -769,6 +769,109 @@ function iceLattice(rand) {
   return { atoms, bonds, bondR: 0.1, hbonds };
 }
 
+// An orbital as the toy draws it: its boundary surface (the level that
+// holds 90% of the electron) and a cloud sampled from |psi|² inside it,
+// scaled to fit (1 = the resting size). glow mixes the colours towards
+// white; the surface's weight sets its share of the rest of the budget.
+function orbitalLook(
+  k,
+  orb,
+  { part, plus, minus, lobes, cloudShare, weight = 1, fit = 1, glow = 0 },
+) {
+  const radial = radialSampler(orb.R, orb.rmax);
+  const E = radial.extent;
+  // Chemistry's (x, y, z) -> the toy's axes: z is up; "face" orbitals lie
+  // in the plane facing the viewer.
+  const toToy = (d) => (orb.face ? d : [d[0], d[2], -d[1]]);
+  const toChem = (d) => (orb.face ? d : [d[0], -d[2], d[1]]);
+  const drawDir = (rand) => {
+    let d;
+    let y;
+    for (let tries = 0; tries < 200; tries++) {
+      d = randDir(rand);
+      y = orb.Y(d[0], d[1], d[2]);
+      if (rand() * orb.ymax * orb.ymax <= y * y) break;
+    }
+    return { d, y };
+  };
+  // Densities of samples: the peak (to brighten the thick of the cloud)
+  // and the level whose surface holds 90% of the electron.
+  const dens = [];
+  for (let i = 0; i < 3000; i++) {
+    const r = radial.sample(k.rand);
+    const { y } = drawDir(k.rand);
+    dens.push((orb.R(r) * y) ** 2);
+  }
+  dens.sort((a, b) => a - b);
+  const peak = dens[dens.length - 1] || 1;
+  const level = dens[Math.floor(dens.length * 0.1)];
+  // The boundary surface: along a direction with |Y| = y, the outermost
+  // radius where psi² reaches the level. Tabulated against y.
+  const N = 1024;
+  const g = new Float64Array(N + 1);
+  for (let i = 0; i <= N; i++) g[i] = Math.abs(orb.R((i / N) * orb.rmax));
+  const T = 256;
+  const table = new Float64Array(T + 1);
+  for (let j = 1; j <= T; j++) {
+    const need = Math.sqrt(level) / ((j / T) * orb.ymax);
+    let i = N;
+    while (i > 0 && g[i] < need) i--;
+    table[j] = (i / N) * orb.rmax;
+  }
+  const surfR = (dToy) => {
+    const d = toChem(dToy);
+    const y = Math.abs(orb.Y(d[0], d[1], d[2]));
+    const x = Math.min(T, (y / orb.ymax) * T);
+    const j = Math.floor(x);
+    const f = x - j;
+    const r = j >= T ? table[T] : table[j] * (1 - f) + table[j + 1] * f;
+    return Math.max(0.004, (r / E) * fit);
+  };
+  // (The surface takes the rest of the budget, so splat sizes follow it.)
+  k.add(k.radial(surfR, { grid: 96 }), {
+    weight,
+    part,
+    flat: 0.15,
+    opacity: lobes ? 0.92 : 0.28,
+    pattern: false,
+    kind: "breathe",
+    params: [0.01, 0],
+    color: (c) => {
+      const d = toChem(unit(c.lp));
+      const r = (len(c.lp) / fit) * E;
+      const sign = orb.R(r) * orb.Y(d[0], d[1], d[2]) >= 0;
+      const base = mix(sign ? plus : minus, "#fffbe8", glow);
+      if (!lobes) return gloss(lit(mix(base, "#ffffff", 0.3), c.n, 0.75, 0.3), c.n, 0.5, 20);
+      return gloss(lit(base, c.n, 0.55, 0.55), c.n, 0.45, 16);
+    },
+  });
+  k.cloud({ share: cloudShare, size: 1.1, pattern: false, part }, (rand) => {
+    // Rejection sampling from |psi|², keeping the cloud mostly inside the
+    // boundary surface so its shape reads clearly.
+    let r;
+    let d;
+    let y;
+    let psi;
+    for (let tries = 0; tries < 12; tries++) {
+      r = radial.sample(rand);
+      ({ d, y } = drawDir(rand));
+      psi = orb.R(r) * y;
+      if (psi * psi > level * 0.6 || rand() < 0.08) break;
+    }
+    const t = clamp((psi * psi) / peak, 0, 1);
+    const base = mix(psi >= 0 ? plus : minus, "#fffbe8", glow);
+    const col = mix(shade(base, 0.8), mix(base, "#fffbe8", 0.7), Math.pow(t, 0.6));
+    return {
+      p: mul(toToy(d), (r / E) * fit),
+      color: col,
+      opacity: lobes ? 0.35 : 0.1 + 0.55 * Math.pow(t, 0.6),
+      size: 0.7 + 0.6 * rand(),
+      kind: "twinkle",
+      params: [0.5, rand() * TAU],
+    };
+  });
+}
+
 export const RECIPES = {
   // ---- Electron orbital ---------------------------------------------------------------
   orbital: {
@@ -826,105 +929,14 @@ export const RECIPES = {
       out.parts.flash = {
         visible: on * (1.6 * bump(p, 0.07, 0.09, 0.1, 0.18) + 2 * bump(p, 0.57, 0.6, 0.62, 0.75)),
       };
-      out.amount = 1 + 1.5 * high;
+      out.amount = 1 + 0.6 * high;
     },
     build(k, o) {
       const orb = ORBITALS[o.orbital] || ORBITALS["3dz2"];
       const ground = k.part("ground");
-      const radial = radialSampler(orb.R, orb.rmax);
-      const E = radial.extent;
-      // Chemistry's (x, y, z) -> the toy's axes: z is up; "face" orbitals lie
-      // in the plane facing the viewer.
-      const toToy = (d) => (orb.face ? d : [d[0], d[2], -d[1]]);
-      const toChem = (d) => (orb.face ? d : [d[0], -d[2], d[1]]);
-      const drawDir = (rand) => {
-        let d;
-        let y;
-        for (let tries = 0; tries < 200; tries++) {
-          d = randDir(rand);
-          y = orb.Y(d[0], d[1], d[2]);
-          if (rand() * orb.ymax * orb.ymax <= y * y) break;
-        }
-        return { d, y };
-      };
-      // Densities of samples: the peak (to brighten the thick of the cloud)
-      // and the level whose surface holds 90% of the electron.
-      const dens = [];
-      for (let i = 0; i < 3000; i++) {
-        const r = radial.sample(k.rand);
-        const { y } = drawDir(k.rand);
-        dens.push((orb.R(r) * y) ** 2);
-      }
-      dens.sort((a, b) => a - b);
-      const peak = dens[dens.length - 1] || 1;
-      const level = dens[Math.floor(dens.length * 0.1)];
-      // The boundary surface: along a direction with |Y| = y, the outermost
-      // radius where psi² reaches the level. Tabulated against y.
-      const N = 1024;
-      const g = new Float64Array(N + 1);
-      for (let i = 0; i <= N; i++) g[i] = Math.abs(orb.R((i / N) * orb.rmax));
-      const T = 256;
-      const table = new Float64Array(T + 1);
-      for (let j = 1; j <= T; j++) {
-        const need = Math.sqrt(level) / ((j / T) * orb.ymax);
-        let i = N;
-        while (i > 0 && g[i] < need) i--;
-        table[j] = (i / N) * orb.rmax;
-      }
-      const surfR = (dToy) => {
-        const d = toChem(dToy);
-        const y = Math.abs(orb.Y(d[0], d[1], d[2]));
-        const x = Math.min(T, (y / orb.ymax) * T);
-        const j = Math.floor(x);
-        const f = x - j;
-        const r = j >= T ? table[T] : table[j] * (1 - f) + table[j + 1] * f;
-        return Math.max(0.004, r / E);
-      };
-      const plus = o.plus;
-      const minus = o.minus;
       const lobes = o.look === "lobes";
-      // (The surface takes the rest of the budget, so splat sizes follow it.)
-      k.add(k.radial(surfR, { grid: 96 }), {
-        part: ground,
-        flat: 0.15,
-        opacity: lobes ? 0.92 : 0.28,
-        pattern: false,
-        kind: "breathe",
-        params: [0.01, 0],
-        color: (c) => {
-          const d = toChem(unit(c.lp));
-          const r = len(c.lp) * E;
-          const sign = orb.R(r) * orb.Y(d[0], d[1], d[2]) >= 0;
-          const base = sign ? plus : minus;
-          if (!lobes) return gloss(lit(mix(base, "#ffffff", 0.3), c.n, 0.75, 0.3), c.n, 0.5, 20);
-          return gloss(lit(base, c.n, 0.55, 0.55), c.n, 0.45, 16);
-        },
-      });
-      k.cloud({ share: lobes ? 0.2 : 0.52, size: 1.1, pattern: false, part: ground }, (rand) => {
-        // Rejection sampling from |psi|², keeping the cloud mostly inside the
-        // boundary surface so its shape reads clearly.
-        let r;
-        let d;
-        let y;
-        let psi;
-        for (let tries = 0; tries < 12; tries++) {
-          r = radial.sample(rand);
-          ({ d, y } = drawDir(rand));
-          psi = orb.R(r) * y;
-          if (psi * psi > level * 0.6 || rand() < 0.08) break;
-        }
-        const t = clamp((psi * psi) / peak, 0, 1);
-        const base = psi >= 0 ? plus : minus;
-        const col = mix(shade(base, 0.8), mix(base, "#fffbe8", 0.7), Math.pow(t, 0.6));
-        return {
-          p: mul(toToy(d), r / E),
-          color: col,
-          opacity: lobes ? 0.35 : 0.1 + 0.55 * Math.pow(t, 0.6),
-          size: 0.7 + 0.6 * rand(),
-          kind: "twinkle",
-          params: [0.5, rand() * TAU],
-        };
-      });
+      const look = { plus: o.plus, minus: o.minus, lobes };
+      orbitalLook(k, orb, { ...look, part: ground, cloudShare: lobes ? 0.2 : 0.46 });
       // The nucleus: a tiny bright dot at the centre, with a soft glow.
       k.add(k.sphere(0.03), { share: 0.01, color: (c) => gloss("#fff3c4", c.n, 0.6, 8) });
       k.cloud({ share: 0.01, size: 1.4, pattern: false }, (rand) => ({
@@ -934,33 +946,11 @@ export const RECIPES = {
         kind: "twinkle",
         params: [0.6, rand() * TAU],
       }));
-      // The excited orbital (hidden until a tap): the next shape up, as a
-      // brighter cloud, drawn at the same size and grown by its part.
+      // The excited orbital (hidden until a tap): the next shape up, drawn
+      // the same way, a little brighter, at the same size and grown by its
+      // part.
       const hi = ORBITALS[EXCITE[o.orbital] || "4fz3"];
-      const hiRad = radialSampler(hi.R, hi.rmax);
-      const hiFace = hi.face;
-      k.cloud({ share: 0.2, size: 1.2, pattern: false, part: k.part("excited") }, (rand) => {
-        let r;
-        let d;
-        let psi;
-        for (let tries = 0; tries < 30; tries++) {
-          r = hiRad.sample(rand);
-          d = randDir(rand);
-          const y = hi.Y(d[0], d[1], d[2]);
-          if (rand() * hi.ymax * hi.ymax > y * y) continue;
-          psi = hi.R(r) * y;
-          break;
-        }
-        const base = psi >= 0 ? plus : minus;
-        const toy = hiFace ? d : [d[0], d[2], -d[1]];
-        return {
-          p: mul(toy, (r / hiRad.extent) * 0.95),
-          color: mix(base, "#fffbe8", 0.45 + 0.3 * rand()),
-          opacity: 0.35,
-          kind: "twinkle",
-          params: [0.6, rand() * TAU],
-        };
-      });
+      orbitalLook(k, hi, { ...look, part: k.part("excited"), cloudShare: 0.12, weight: 0.8, fit: 0.95, glow: 0.2 }); // prettier-ignore
       // The photons: short wiggles of light, one coming in and one going out.
       for (const [name, dir, col] of [
         ["photonIn", PHOTON_IN, "#bfe8ff"],

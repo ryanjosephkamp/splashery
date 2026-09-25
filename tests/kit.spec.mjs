@@ -222,3 +222,28 @@ test("the motion driver hops, eases toggles and fills the part uniforms", () => 
   const hop = plain.compute({ time: 0.3, dt: 0.016, motion: still, info, cameraPos: [0, 0, 5] });
   expect(hop.uSpBodyT[1]).toBeGreaterThan(0.3);
 });
+
+test("a culled part sends its visibility as -1 - v so the shader hides its far side", () => {
+  const recipe = {
+    drive(t, c, out) {
+      out.parts.band = { angle: 1, visible: 0.8, cull: true };
+      out.parts.plain = { visible: 0.8 };
+    },
+  };
+  const ctx = {
+    parts: [
+      { name: "body", pivot: [0, 0, 0] },
+      { name: "band", pivot: [0, 0, 0], axis: [0, 1, 0] },
+      { name: "plain", pivot: [0, 0, 0], axis: [0, 1, 0] },
+    ],
+    transform: { scale: 1 },
+  };
+  const m = new MotionDriver();
+  m.setToy(recipe, ctx);
+  const info = { center: [0, 0, 0], half: [1, 1, 1], radius: 1 };
+  const motion = { alive: true, move: "still", speed: 0.5 };
+  const u = m.compute({ time: 0.1, dt: 0.1, motion, info, cameraPos: [0, 0, 5] });
+  const parts = u["uSpParts[0]"];
+  expect(parts[1 * 12 + 11]).toBeCloseTo(-1.8, 5);
+  expect(parts[2 * 12 + 11]).toBeCloseTo(0.8, 5);
+});

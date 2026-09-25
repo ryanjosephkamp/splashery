@@ -579,23 +579,24 @@ export const RECIPES = {
         part: k.part("glow"),
         col: (c, s) => ({
           color: mix(
-            shade("#ff1030", 0.75 + 0.45 * studio(c.n)),
-            "#ffb0c0",
-            s.edge < 0.012 ? 0.5 : 0,
+            shade("#ff2444", 1 + 0.4 * studio(c.n)),
+            "#ffc4d0",
+            s.edge < 0.012 ? 0.6 : 0.12,
           ),
-          opacity: 0.7,
+          opacity: 0.8,
           kind: "grow",
           params: [0.9 * Math.min(1, len(s.p) / 1.05), 0],
         }),
       });
-      // A red light shining out round it.
-      k.cloud({ share: 0.03, size: 2.6, pattern: false, part: k.part("halo") }, (rand) => {
+      // A red light shining out round it: few big soft splats, so it reads
+      // as light, not dust.
+      k.cloud({ share: 0.012, size: 8, pattern: false, part: k.part("halo") }, (rand) => {
         const d = randDir(rand);
         const r = 0.9 + 0.55 * Math.pow(rand(), 1.4);
         return {
           p: [d[0] * r * 1.32, d[1] * r * 0.7, d[2] * r],
-          color: mix("#ff2040", "#ff7088", rand()),
-          opacity: 0.1 * (1 - (r - 0.9) / 0.6),
+          color: mix("#ff2040", "#ff6a80", rand()),
+          opacity: 0.07 * (1 - (r - 0.9) / 0.6),
         };
       });
     },
@@ -943,13 +944,16 @@ export const RECIPES = {
         const part = k.part(`point${order.indexOf(i)}`);
         // Its glow (hidden until its turn): the faces lit from within,
         // brightest towards the point, and a star at the tip.
+        // (Bigger, fainter splats than the crystal's own, so the light
+        // reads as a glow, not as dots.)
         overlay(k, shape, {
           share: 0.018,
+          size: 2.2,
           part,
           lift: 0.005,
           col: (c, s) => ({
             color: mix(mix(tint, "#e8dcff", 0.5), "#ffffff", clamp(s.p[1] / L, 0, 1)),
-            opacity: 0.5 + 0.35 * clamp(s.p[1] / L, 0, 1),
+            opacity: 0.3 + 0.35 * clamp(s.p[1] / L, 0, 1),
           }),
         });
         const tip = add(quatRotate(shape.opts.quat, [0, L, 0]), pos);
@@ -1016,7 +1020,7 @@ export const RECIPES = {
       const on = c.play > 0 ? 1 : 0;
       const u = band(p, 0, 1);
       out.parts.stone = { angle: on * 0.35 * Math.sin(TAU * u) * (1 - 0.5 * u) };
-      out.glow = [...hue((t * 0.45) % 1, 0.85, 1), on * 2.4 * bump(p, 0.02, 0.12, 0.72, 1)];
+      out.glow = [...hue((t * 0.45) % 1, 0.9, 1), on * 1.8 * bump(p, 0.02, 0.12, 0.72, 1)];
     },
     build(k, o) {
       const body = { white: "#e6edf5", black: "#1b2340", fire: "#f28c28" }[o.type] || "#e6edf5";
@@ -1089,6 +1093,7 @@ export const RECIPES = {
       lathe.opts = { scale: [1.35, 1, 1], quat: opalQ };
       overlay(k, lathe, {
         share: 0.1,
+        size: 2,
         part: stone,
         lift: 0.003,
         keep: (s) => s.p[1] > -0.02,
@@ -1097,6 +1102,7 @@ export const RECIPES = {
           const { cell } = cellOf(lp);
           return {
             color: opalColor({ lp: s.p, n: c.n, noise: k.noise }),
+            opacity: 0.55,
             kind: "pulse",
             params: [clamp((lp[0] + 1.35) / 2.9 + 0.1 * (cell.h % 1) - 0.05, 0, 0.999), 0],
           };

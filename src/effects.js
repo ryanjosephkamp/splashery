@@ -813,7 +813,17 @@ vec3 spKitCenter(vec3 p) {
     if (q.w == 0.0 && dot(q.xyz, q.xyz) == 0.0) q = vec4(0.0, 0.0, 0.0, 1.0);
     p = pv.xyz + spQuatRotate(q, (p - pv.xyz) * (1.0 + pv.w)) + ofs.xyz;
     spPartQ = q;
-    spKitScale *= ofs.w * (1.0 + pv.w);
+    // w <= -1: a culled part (visibility -w - 1). Its splats on the far side
+    // of the part's centre are hidden, so a turning shell's back never draws
+    // over its front (splats sort in their built pose).
+    float vis = ofs.w;
+    if (vis < -0.5) {
+      vis = -vis - 1.0;
+      vec3 fc = pv.xyz + ofs.xyz;
+      float fd = dot(normalize(p - fc + vec3(1e-6)), normalize(uSpCam.xyz - p));
+      vis *= smoothstep(-0.12, -0.02, fd);
+    }
+    spKitScale *= vis * (1.0 + pv.w);
   }
   return p;
 }
@@ -917,7 +927,14 @@ fn spKitCenter(p0: vec3f) -> vec3f {
     if (q.w == 0.0 && dot(q.xyz, q.xyz) == 0.0) { q = vec4f(0.0, 0.0, 0.0, 1.0); }
     p = pv.xyz + spQuatRotate(q, (p - pv.xyz) * (1.0 + pv.w)) + ofs.xyz;
     spPartQ = q;
-    spKitScale = spKitScale * ofs.w * (1.0 + pv.w);
+    var vis = ofs.w;
+    if (vis < -0.5) {
+      vis = -vis - 1.0;
+      let fc = pv.xyz + ofs.xyz;
+      let fd = dot(normalize(p - fc + vec3f(1e-6)), normalize(uniform.uSpCam.xyz - p));
+      vis = vis * smoothstep(-0.12, -0.02, fd);
+    }
+    spKitScale = spKitScale * vis * (1.0 + pv.w);
   }
   return p;
 }

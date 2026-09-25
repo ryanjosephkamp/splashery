@@ -10,7 +10,7 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 283 toys. 173 have a tap action today; the other 110 only hop.
+- 283 toys. 174 have a tap action today; the other 109 only hop.
 - **keep** (the effect is right: the owner liked it, or C2 finished it): 172.
 - **more** (has an effect; make it clearer or more dramatic): 2.
 - **new** (needs its own effect): 109.
@@ -569,7 +569,8 @@ Proposals below are suggestions; the owner may change them.
 - **Mars** (`mars`). Now: tap: Raise a dust storm. Plan: keep.
   - Effect: A dust storm sweeps across it.
   - Improved: E2: a tap raises a dust storm: billowing ochre dust sweeps across from the left with a
-    ragged front, hides the dark markings as it drifts east, then thins out and clears (5.4 s).
+    ragged front, covers the whole face and hides the dark markings, then settles, clearing from the
+    east edge (5.4 s).
   - Sound: Dusty hiss.
 - **Jupiter** (`jupiter`). Now: tap: Race the bands. Plan: keep.
   - Effect: Bands race and the Great Red Spot spins up.
@@ -602,7 +603,7 @@ Proposals below are suggestions; the owner may change them.
     the oval sways. A tap sets off a substorm: the oval flares, a wider curtain with violet tops
     bursts out towards the equator and the folds race brighter, then it calms (4.2 s).
   - Sound: Airy shimmering whistle.
-- **Asteroid** (`asteroid`). Now: hops. Plan: keep.
+- **Asteroid** (`asteroid`). Now: tap: Break it apart. Plan: keep.
   - Owner: Pretty neat. Maybe it breaks into pieces.
   - Effect: Cracks and breaks into pieces that drift apart, then pull back together.
   - Improved: E2: a tap cracks it (glowing cracks flash), it falls apart into 18 pieces that drift

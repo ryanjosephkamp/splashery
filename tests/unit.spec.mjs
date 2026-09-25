@@ -409,21 +409,26 @@ test("a turning planet shows only the copy within a quarter turn of how it was b
   const { RECIPES } = await import("../src/packs/space.js");
   // Splats sort in their built pose, so a copy turned further would draw
   // its far side over its near side (see docs/PACKS.md, "Draw order").
-  for (const [id, key] of [
-    ["jupiter", "race"],
-    ["earth", "day"],
-    ["venus", "swirl"],
+  // Earth and Mercury have four copies and show one turned only one way
+  // from its build, so the night or the heat above them stays on top.
+  for (const [id, key, side] of [
+    ["jupiter", "race", 0],
+    ["earth", "day", -1],
+    ["venus", "swirl", 0],
+    ["mercury", "spin", 1],
   ]) {
     for (let v = 1; v > 0; v -= 0.05) {
       const out = { parts: {}, cues: [] };
       RECIPES[id].drive(0, { [key]: v }, out, { time: 0 });
-      for (const [name, pd] of Object.entries(out.parts)) {
+      for (const name of Object.keys(out.parts)) {
         if (!out.parts[`${name}B`]) continue;
-        const b = out.parts[`${name}B`];
-        expect((pd.visible > 0) + (b.visible > 0), `${id} ${name}`).toBe(1);
-        const shown = pd.visible > 0 ? pd.angle : b.angle;
-        const a = Math.abs(Math.atan2(Math.sin(shown), Math.cos(shown)));
-        expect(a, `${id} ${name}`).toBeLessThanOrEqual(Math.PI / 2 + 1e-9);
+        const copies = ["", "B", "C", "D"].map((s) => out.parts[name + s]).filter(Boolean);
+        expect(copies.length, `${id} ${name}`).toBe(side ? 4 : 2);
+        const shown = copies.filter((c) => c.visible > 0);
+        expect(shown.length, `${id} ${name}`).toBe(1);
+        const a = Math.atan2(Math.sin(shown[0].angle), Math.cos(shown[0].angle));
+        expect(Math.abs(a), `${id} ${name}`).toBeLessThanOrEqual(Math.PI / 2 + 1e-9);
+        if (side) expect(a * side, `${id} ${name}`).toBeGreaterThanOrEqual(-1e-9);
       }
     }
   }
