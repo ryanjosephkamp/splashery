@@ -687,7 +687,19 @@ test.describe("Splashery v3 engine (WebGL2)", () => {
     await page.click("#toy-action");
     await page.waitForTimeout(450);
     const turned = await canvas.screenshot({ type: "png" });
-    await page.waitForTimeout(3000);
+    // The look takes 2.6 s of the toy's clock, which steps a clamped amount
+    // per frame: SwiftShader draws only a few frames a second, so wait on
+    // that clock rather than on wall time.
+    await expect
+      .poll(
+        () =>
+          page.evaluate(() => {
+            const p = window.__splashery.player;
+            return p.time - p.motion.tap.time;
+          }),
+        { timeout: 30_000 },
+      )
+      .toBeGreaterThan(3);
     const back = await canvas.screenshot({ type: "png" });
     const moved = await countDifferentPixels(page, rest, turned);
     expect(moved).toBeGreaterThan(1500);

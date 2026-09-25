@@ -351,9 +351,10 @@ Known issues carried forward:
   - The part `cull` flag is new shader code in both GLSL and WGSL. The WebGPU smoke test (a kit toy
     with parts) passes, so the WGSL compiles, but the cull itself was only watched on WebGL2. Worth
     a look at Jupiter's Winds on a WebGPU browser (Chrome on a laptop).
-  - The cat statue's head-turn smoke test failed once in the full run (the head was not quite back 3
-    s after the tap: 7848 changed pixels against a limit of 7535) and passed when run again. E2 does
-    not touch rigs; the test is timing-sensitive on the software renderer.
+  - The cat statue's head-turn smoke test failed in two full runs (the head not quite back 3 s of
+    wall time after the tap; alone it passed). Like the stretchy-toy test before it, it now waits on
+    the toy's own clock (2.6 s of look, stepped a clamped amount per frame), and the full run
+    passes.
 - New in E1c:
   - The owner approved the E1c effects (2026-09-25).
   - The elephant's trunk is kit-built: a little smoother than the carving round it. A small kit
