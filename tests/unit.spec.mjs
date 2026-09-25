@@ -484,3 +484,73 @@ test("the Moon landing is hidden at rest, lands, and leaves nothing behind", asy
   expect(cues).toBeGreaterThan(0);
   expect(shown(drive(0, c))).toEqual([]);
 });
+
+const E3 = {
+  tiny: "virus bacterium red-blood-cell astrocyte animal-cell white-blood-cell microglia diatom pollen snowflake chromosome mitochondrion paramecium amoeba",
+  anatomy: "heart brain lungs tooth kidney",
+  maths: "mobius menger-sponge hypercube torus-knot gyroid mandelbulb seashell-spiral",
+};
+
+test("every E3 toy has its own tap, and its channels are near rest when it is done", async () => {
+  const { buildRecipe } = await import("../src/kit.js");
+  for (const [pack, ids] of Object.entries(E3)) {
+    const { RECIPES } = await import(`../src/packs/${pack}.js`);
+    for (const id of ids.split(" ")) {
+      const r = RECIPES[id];
+      const ctl = r.controls?.find((c) => c.key === r.action?.key);
+      expect(ctl, id).toBeTruthy();
+      const it = buildRecipe(r, { seed: 5, count: 6000 }, () => {});
+      let b = it.next();
+      while (!b.done) b = it.next();
+      const data = b.value.kit.data;
+      for (const v of [0.5, 0]) {
+        const out = { parts: {}, glow: [1, 1, 1, 0], amount: 1, grow: 1, cues: [], fx: {} };
+        const c = { [ctl.key]: v };
+        for (const x of r.controls) if (!(x.key in c)) c[x.key] = x.default ?? 0;
+        r.drive(1.5, c, out, { time: 1.5, R: 1, tap: null, data });
+        for (const pd of Object.values(out.parts))
+          for (const x of [pd.angle, pd.visible, pd.scale, ...(pd.offset || [])])
+            if (x !== undefined) expect(Number.isFinite(x), id).toBe(true);
+        for (const m of out.morph || []) expect(Number.isFinite(m), id).toBe(true);
+        if (v === 0 && ctl.type === "pulse")
+          for (const m of out.morph || []) expect(Math.abs(m), `${id} at rest`).toBeLessThan(0.2);
+      }
+    }
+  }
+});
+
+test("a morph splat packs the offset to its target; band, fade and skin pack their channel", async () => {
+  const { Kit } = await import("../src/kit.js");
+  const { KINDS, MORPH_RANGE } = await import("../src/effects.js");
+  const k = new Kit(1, { count: 3000 });
+  k.add(k.sphere(1), { to: (c) => [c.p[0] * 1.5, c.p[1], c.p[2]], channel: 2 });
+  k.add(k.sphere(0.5), { kind: "band", params: [0.4, 0.1], channel: 1 });
+  k.add(k.sphere(0.5), { kind: "fade", params: [0.3, -0.2], channel: 3 });
+  k.add(k.sphere(0.5), { skin: () => [3, 7, 0.25] });
+  const it = k.emit();
+  while (!it.next().done);
+  const { anim, pos, count } = k.buf;
+  const s = k.transform.scale;
+  const seen = new Set();
+  for (let i = 0; i < count; i++) {
+    const kind = anim[i * 4 + 1];
+    const [z, w] = [anim[i * 4 + 2], anim[i * 4 + 3]];
+    seen.add(kind);
+    if (kind === KINDS.morph) {
+      const qx = Math.floor(z / 4096);
+      const ch = Math.floor(w / 4096);
+      const dx = ((qx - 2048) * MORPH_RANGE) / 2048;
+      // The target is half as far out again along x (in toy units).
+      const x = pos[i * 3] / s + k.transform.center[0];
+      expect(ch).toBe(2);
+      expect(Math.abs(dx - 0.5 * x * s)).toBeLessThan(0.002);
+      expect(Math.abs(((z - qx * 4096 - 2048) * MORPH_RANGE) / 2048)).toBeLessThan(0.002);
+    }
+    if (kind === KINDS.band) expect([z, w]).toEqual([expect.closeTo(0.4), expect.closeTo(1.1)]);
+    if (kind === KINDS.fade) expect([z, w]).toEqual([expect.closeTo(0.3), expect.closeTo(-3.2)]);
+    if (kind === KINDS.skin) expect([z, w]).toEqual([3 + 64 * 7, 0.25]);
+  }
+  for (const kind of ["morph", "band", "fade", "skin"]) expect(seen.has(KINDS[kind]), kind).toBe(true);
+  // Morph targets count in the fit: the stretched sphere fits the frame.
+  expect(s).toBeLessThan(0.7);
+});
