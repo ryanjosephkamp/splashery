@@ -402,16 +402,18 @@
       "improved": "E1b: thrown: it spins fast and flat, banks into a curve, glides round a loop like a returning throw and settles back (3 s)."
     },
     "heart": {
-      "v": "new",
+      "v": "keep",
       "owner": "Needs a special effect.",
       "effect": "Racing heartbeat: faster beats with a glow, then calms.",
-      "sound": "Lub-dub that speeds up."
+      "sound": "Lub-dub that speeds up.",
+      "improved": "E3: a tap sets the heart racing: the atria then the ventricles squeeze (the ventricles wring a little, the aorta swells), faster and stronger with a warm glow on each squeeze, then it calms to its resting beat (about 5 s)."
     },
     "brain": {
-      "v": "new",
+      "v": "keep",
       "owner": "Needs a special effect.",
       "effect": "Sparks of light race across the folds (a thought).",
-      "sound": "Electric crackle and a ding."
+      "sound": "Electric crackle and a ding.",
+      "improved": "E3: a tap sparks a thought: light races out along the folds of the tapped lobe, then through the next lobes and round the brain, and at the end every lobe flashes at once (about 2.5 s)."
     },
     "eye": {
       "v": "keep",
@@ -421,22 +423,25 @@
       "improved": "C2: it glances around by itself. A tap blinks (new lids), turns it to look at you and snaps the pupil small (about 2.5 s)."
     },
     "lungs": {
-      "v": "new",
+      "v": "keep",
       "owner": "Expand and contract like lungs.",
       "effect": "A deep breath in and out.",
-      "sound": "Breath in, breath out."
+      "sound": "Breath in, breath out.",
+      "improved": "E3: a tap takes a deep breath: both lungs fill out sideways and down (the airways stay put), hold, then empty past rest and settle back into gentle breathing (about 5 s)."
     },
     "tooth": {
-      "v": "new",
+      "v": "keep",
       "owner": "Looks good; no idea for an effect.",
       "effect": "A sparkle wipe cleans it bright white.",
-      "sound": "Squeaky clean ding."
+      "sound": "Squeaky clean ding.",
+      "improved": "E3: a tap polishes it: a bright sheen wipes across from the top left, star sparkles pop where it passes and twinkle again while it gleams, then it settles (about 3.5 s)."
     },
     "kidney": {
-      "v": "new",
+      "v": "keep",
       "owner": "Add an effect.",
       "effect": "Fluid flows through in pulses along the vessels.",
-      "sound": "Gentle trickle."
+      "sound": "Gentle trickle.",
+      "improved": "E3: a tap pumps three pulses through: each runs in along the artery as light, spreads through the kidney as a soft flush while it swells a little, leaves along the vein, and a drop runs down the ureter (about 4.5 s)."
     },
     "campfire": {
       "v": "keep",

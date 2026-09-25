@@ -453,21 +453,45 @@ export const TOY_SOUNDS = {
   ],
 
   // ---- Anatomy ----------------------------------------------------------------------
-  heart: { voice: "heartbeat", f: 72, n: 4, rate: 1.3, to: 2 },
+  // Lub-dub on each squeeze: racing to 155 bpm by 0.5 s, calming by 4.6 s.
+  heart: [
+    { voice: "heartbeat", at: 0.16, f: 72, vol: 0.8 },
+    { voice: "heartbeat", at: 0.61, f: 72, vol: 0.9 },
+    { voice: "heartbeat", at: 0.99, f: 72, vol: 1 },
+    { voice: "heartbeat", at: 1.38, f: 72, vol: 1 },
+    { voice: "heartbeat", at: 1.76, f: 72, vol: 1 },
+    { voice: "heartbeat", at: 2.15, f: 72, vol: 1 },
+    { voice: "heartbeat", at: 2.54, f: 72, vol: 1 },
+    { voice: "heartbeat", at: 2.93, f: 72, vol: 0.95 },
+    { voice: "heartbeat", at: 3.36, f: 72, vol: 0.85 },
+    { voice: "heartbeat", at: 3.91, f: 72, vol: 0.75 },
+  ],
+  // Sparks crackle over the lobes; every lobe flashes at once (1.75 s).
   brain: [
-    { voice: "crackle", f: 4200, n: 18, decay: 0.7 },
-    { voice: "ding", at: 0.6, f: "E6" },
+    { voice: "crackle", f: 4200, n: 26, decay: 2 },
+    { voice: "ding", at: 1.75, f: "E6" },
   ],
   eye: { voice: "whoosh", f: 1500, to: 0.6, decay: 0.35, vol: 0.6 },
+  // A deep breath in (1.7 s), held, then out (2.2 s).
   lungs: [
-    { voice: "breath", f: 700, to: 1.4, decay: 1.4 },
-    { voice: "breath", at: 1.1, f: 900, to: 0.6, decay: 1.4 },
+    { voice: "breath", f: 700, to: 1.4, decay: 2.4 },
+    { voice: "breath", at: 2.2, f: 900, to: 0.6, decay: 2.1 },
   ],
+  // A squeaky polish across it, a ding as it gleams (1.1 s), twinkles after.
   tooth: [
-    { voice: "squeak", f: 3000, to: 1.2, decay: 0.7, vol: 0.6 },
-    { voice: "ding", at: 0.15, f: "C7", decay: 0.6 },
+    { voice: "squeak", f: 3000, to: 1.2, decay: 4, vol: 0.6 },
+    { voice: "ding", at: 1.1, f: "C7", decay: 0.6 },
+    { voice: "sparkle", at: 1.7, f: 4200, n: 4, decay: 0.9, vol: 0.4 },
   ],
-  kidney: { voice: "drip", f: 1300, n: 7, rate: 9, decay: 0.8 },
+  // Three pulses (0, 1.15, 2.3 s), each with a drop down the ureter a second later.
+  kidney: [
+    { voice: "wave", f: 220, decay: 0.45, vol: 0.4 },
+    { voice: "drip", at: 1.1, f: 1300, n: 1 },
+    { voice: "wave", at: 1.15, f: 240, decay: 0.45, vol: 0.4 },
+    { voice: "drip", at: 2.25, f: 1200, n: 1 },
+    { voice: "wave", at: 2.3, f: 200, decay: 0.45, vol: 0.4 },
+    { voice: "drip", at: 3.4, f: 1100, n: 1 },
+  ],
 
   // ---- Nature -----------------------------------------------------------------------
   oak: { voice: "flutter", f: 3000, rate: 35, decay: 1.6, vol: 0.6 },

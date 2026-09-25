@@ -10,10 +10,10 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 284 toys. 197 have a tap action today; the other 87 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 187.
+- 284 toys. 200 have a tap action today; the other 84 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 192.
 - **more** (has an effect; make it clearer or more dramatic): 2.
-- **new** (needs its own effect): 95.
+- **new** (needs its own effect): 90.
 - Visual fixes: 0 open, 28 done. Touch or drag interaction asked for: 4.
 
 ## By phase
@@ -28,22 +28,23 @@ Proposals below are suggestions; the owner may change them.
   star cookie, Tomatoes, Mandeltorus, Basket, Real rubber duck, Garden gnome, Wooden elephant,
   Marble bust, Ukulele, Alarm clock, Vintage camera, Boombox, Real croissant, Carrot cake,
   Pomegranate, Lantern, Cat statue, Horse statue, American football, Rugby ball, Hockey puck,
-  Shuttlecock, Flying disc, Sun, Solar system, Mercury, Venus, Earth, Moon, Mars, Jupiter, Saturn,
-  Uranus, Neptune, Aurora world, Asteroid, Comet, Meteor, Star, Pulsar, Black hole, Star cluster,
-  Ring nebula, Nebula, Spiral galaxy, Virus, Bacteriophage, Bacterium, Red blood cell, Neuron,
-  Astrocyte, Animal cell, DNA, White blood cell, Microglia, Diatom, Pollen grain, Snowflake,
+  Shuttlecock, Flying disc, Beating heart, Sun, Solar system, Mercury, Venus, Earth, Moon, Mars,
+  Jupiter, Saturn, Uranus, Neptune, Aurora world, Asteroid, Comet, Meteor, Star, Pulsar, Black hole,
+  Star cluster, Ring nebula, Nebula, Spiral galaxy, Virus, Bacteriophage, Bacterium, Red blood cell,
+  Neuron, Astrocyte, Animal cell, DNA, White blood cell, Microglia, Diatom, Pollen grain, Snowflake,
   Chromosome, Mitochondrion, Paramecium, Amoeba, Electron orbital, Atom, Molecule, Protein, Crystal
   lattice, Diamond, Ruby, Emerald, Amethyst geode, Sapphire, Quartz cluster, Opal, Crystal ball,
-  Eye, Cherry blossom, Ice cream, Gummy bear, Coffee, Rubber duck, Newton's cradle, Kite, Chess set,
-  Lorenz attractor, Klein bottle, Wizard's orb, Jellyfish, Pufferfish, Snail, Octopus, Fireworks,
-  Decorated tree, Diya, Acoustic guitar, Snare drum, Xylophone, Hot-air balloon, Bus, Jet airliner,
-  Sailboat, Submarine, Bicycle, Big Ben, Castle, Pagoda, Windmill.
+  Brain, Eye, Lungs, Tooth, Kidney, Cherry blossom, Ice cream, Gummy bear, Coffee, Rubber duck,
+  Newton's cradle, Kite, Chess set, Lorenz attractor, Klein bottle, Wizard's orb, Jellyfish,
+  Pufferfish, Snail, Octopus, Fireworks, Decorated tree, Diya, Acoustic guitar, Snare drum,
+  Xylophone, Hot-air balloon, Bus, Jet airliner, Sailboat, Submarine, Bicycle, Big Ben, Castle,
+  Pagoda, Windmill.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
 - **E2, new effects: space, atoms and gems.** None.
-- **E3, new effects: tiny things, anatomy and maths.** Beating heart, Brain, Lungs, Tooth, Kidney,
-  Möbius strip, Menger sponge, Hypercube, Torus knot, Gyroid, Mandelbulb, Seashell spiral
+- **E3, new effects: tiny things, anatomy and maths.** Möbius strip, Menger sponge, Hypercube, Torus
+  knot, Gyroid, Mandelbulb, Seashell spiral
 - **E4, new effects: nature and weather.** Oak tree, Pine tree, Palm tree, Maple tree, Bonsai,
   Weeping willow, Sunflower, Rose, Tulips, Daisies, Lotus, Toadstool, Fern, Saguaro cactus, Coral
   reef, Pinecone, Acorns, Succulent, Bamboo, Pebbles, Kelp, Lava lamp, Ice swan, Tornado, Rainbow,
@@ -406,13 +407,19 @@ Proposals below are suggestions; the owner may change them.
 
 ## Anatomy (6)
 
-- **Beating heart** (`heart`). Now: tap: Race and calm. Plan: new effect (E3).
+- **Beating heart** (`heart`). Now: tap: Race and calm. Plan: keep.
   - Owner: Needs a special effect.
   - Effect: Racing heartbeat: faster beats with a glow, then calms.
+  - Improved: E3: a tap sets the heart racing: the atria then the ventricles squeeze (the ventricles
+    wring a little, the aorta swells), faster and stronger with a warm glow on each squeeze, then it
+    calms to its resting beat (about 5 s).
   - Sound: Lub-dub that speeds up.
-- **Brain** (`brain`). Now: tap: Think. Plan: new effect (E3).
+- **Brain** (`brain`). Now: tap: Think. Plan: keep.
   - Owner: Needs a special effect.
   - Effect: Sparks of light race across the folds (a thought).
+  - Improved: E3: a tap sparks a thought: light races out along the folds of the tapped lobe, then
+    through the next lobes and round the brain, and at the end every lobe flashes at once (about 2.5
+    s).
   - Sound: Electric crackle and a ding.
 - **Eye** (`eye`). Now: tap: Blink. Plan: keep.
   - Owner: Pupil dilation is cool but underwhelming. Let the eye look around by itself, and use a
@@ -421,17 +428,24 @@ Proposals below are suggestions; the owner may change them.
   - Improved: C2: it glances around by itself. A tap blinks (new lids), turns it to look at you and
     snaps the pupil small (about 2.5 s).
   - Sound: Soft blink swish.
-- **Lungs** (`lungs`). Now: tap: Take a deep breath. Plan: new effect (E3).
+- **Lungs** (`lungs`). Now: tap: Take a deep breath. Plan: keep.
   - Owner: Expand and contract like lungs.
   - Effect: A deep breath in and out.
+  - Improved: E3: a tap takes a deep breath: both lungs fill out sideways and down (the airways stay
+    put), hold, then empty past rest and settle back into gentle breathing (about 5 s).
   - Sound: Breath in, breath out.
-- **Tooth** (`tooth`). Now: tap: Polish. Plan: new effect (E3).
+- **Tooth** (`tooth`). Now: tap: Polish. Plan: keep.
   - Owner: Looks good; no idea for an effect.
   - Effect: A sparkle wipe cleans it bright white.
+  - Improved: E3: a tap polishes it: a bright sheen wipes across from the top left, star sparkles
+    pop where it passes and twinkle again while it gleams, then it settles (about 3.5 s).
   - Sound: Squeaky clean ding.
-- **Kidney** (`kidney`). Now: tap: Pump blood through. Plan: new effect (E3).
+- **Kidney** (`kidney`). Now: tap: Pump blood through. Plan: keep.
   - Owner: Add an effect.
   - Effect: Fluid flows through in pulses along the vessels.
+  - Improved: E3: a tap pumps three pulses through: each runs in along the artery as light, spreads
+    through the kidney as a soft flush while it swells a little, leaves along the vein, and a drop
+    runs down the ureter (about 4.5 s).
   - Sound: Gentle trickle.
 
 ## Weather (13)
@@ -1200,15 +1214,15 @@ Proposals below are suggestions; the owner may change them.
   - Owner: Possibly the favourite and homepage embed (see the Menger sponge).
   - Effect: Rotates through the fourth dimension, turning inside out.
   - Sound: Phasing synth sweep.
-- **Torus knot** (`torus-knot`). Now: hops. Plan: new effect (E3).
+- **Torus knot** (`torus-knot`). Now: tap: Pull and let go. Plan: new effect (E3).
   - Owner: Contort a little; looks cool.
   - Effect: Contorts through different knot shapes.
   - Sound: Stretchy twang.
-- **Gyroid** (`gyroid`). Now: hops. Plan: new effect (E3).
+- **Gyroid** (`gyroid`). Now: tap: Breathe in and out. Plan: new effect (E3).
   - Owner: Really neat; needs an effect.
   - Effect: The surface flows and shifts phase like a breathing sponge.
   - Sound: Watery hum.
-- **Mandelbulb** (`mandelbulb`). Now: hops. Plan: new effect (E3).
+- **Mandelbulb** (`mandelbulb`). Now: tap: Wring it. Plan: new effect (E3).
   - Owner: Like the Mandeltorus: twisting.
   - Effect: Morphs through powers (bulb shapes twist and bloom).
   - Sound: Deep morphing tone.
