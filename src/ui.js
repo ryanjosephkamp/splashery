@@ -495,6 +495,7 @@ export function createUI(app) {
       els.toyControls.appendChild(row);
       controlInputs.set(c.key, { input, output, def: c });
     }
+    if (recipe?.game) renderGamePanel(recipe.game);
     els.toyOptions.textContent = "";
     for (const o of recipe?.options || []) {
       const row = document.createElement("label");
@@ -542,6 +543,101 @@ export function createUI(app) {
     els.toyNote.textContent = recipe
       ? recipe.note || ""
       : "Every toy can bounce, spin, wobble or float. Tap it to make it hop.";
+  }
+
+  // A toy that plays a game (the chess set): load a game from a PGN file or
+  // pasted text, or go back to its own game.
+  function renderGamePanel(game) {
+    const box = document.createElement("div");
+    box.className = "game-box";
+    box.id = "toy-game";
+    const now = document.createElement("p");
+    now.className = "note game-title";
+    const error = document.createElement("div");
+    error.className = "warning";
+    error.setAttribute("role", "alert");
+    error.hidden = true;
+    const file = document.createElement("input");
+    file.type = "file";
+    file.accept = ".pgn,.txt,application/x-chess-pgn,application/vnd.chess-pgn,text/plain";
+    file.hidden = true;
+    file.id = "game-file";
+    const row = document.createElement("div");
+    row.className = "button-row";
+    const button = (label, id, fn) => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.id = id;
+      b.textContent = label;
+      b.addEventListener("click", fn);
+      row.appendChild(b);
+      return b;
+    };
+    const paste = document.createElement("div");
+    paste.className = "game-paste";
+    paste.hidden = true;
+    const text = document.createElement("textarea");
+    text.id = "game-text";
+    text.rows = 5;
+    text.spellcheck = false;
+    text.setAttribute("aria-label", "A game in PGN");
+    text.placeholder = '[White "Morphy"]\n[Black "Allies"]\n\n1. e4 e5 2. Nf3 d6 3. d4 Bg4 …';
+    const go = document.createElement("button");
+    go.type = "button";
+    go.id = "game-play-text";
+    go.className = "primary";
+    go.textContent = "Play this game";
+    const goRow = document.createElement("div");
+    goRow.className = "button-row";
+    goRow.appendChild(go);
+    paste.append(text, goRow);
+    const refresh = () => {
+      now.textContent = `On the board: ${game.title()}`;
+      reset.hidden = game.isDefault();
+      els.toyAction.textContent = app.player?.toyInfo?.recipe?.action?.label || els.toyAction.textContent; // prettier-ignore
+    };
+    const load = async (source) => {
+      error.hidden = true;
+      try {
+        const g = await game.load(source);
+        refresh();
+        paste.hidden = true;
+        const plies = g.plies.length;
+        const moves = Math.ceil((plies + (g.firstTurn === "b" ? 1 : 0)) / 2);
+        ui.toast(`${g.title}: ${moves} move${moves === 1 ? "" : "s"}${g.more ? " (the first game in the file)" : ""}`); // prettier-ignore
+        app.setControl("play", 0);
+        app.setControl("play", 1);
+      } catch (err) {
+        error.textContent = `That game can't be played: ${err.message}`;
+        error.hidden = false;
+      }
+    };
+    button("Open a PGN file…", "game-open", () => file.click());
+    button("Paste a game", "game-paste", () => {
+      paste.hidden = !paste.hidden;
+      if (!paste.hidden) text.focus();
+    });
+    const reset = button("Opera Game", "game-reset", () => {
+      game.reset();
+      error.hidden = true;
+      refresh();
+      app.setControl("play", 0);
+    });
+    file.addEventListener("change", async () => {
+      const f = file.files?.[0];
+      file.value = "";
+      if (!f) return;
+      if (f.size > 2e6) {
+        error.textContent = "That file is too big for one game (over 2 MB).";
+        error.hidden = false;
+        return;
+      }
+      load(await f.text());
+    });
+    go.addEventListener("click", () => load(text.value));
+    box.append(now, row, paste, error, file);
+    els.toyControls.appendChild(box);
+    refresh();
   }
 
   function showMotion(m, controls = {}) {
@@ -803,9 +899,9 @@ export function createUI(app) {
   //  - "panel": the tabs open above the dock.
   // The stage shrinks to the space above the panel, so the toy stays in view
   // while you change things. Dragging the handle or the shelf up opens the
-  // grid; More opens the panel. Tapping the toy, swiping the handle down,
-  // swiping down from the top of the grid or the controls, Escape or Done
-  // goes back to the row.
+  // grid; More opens the panel (from the row or the grid). Tapping the toy,
+  // swiping the handle down, swiping down from the top of the grid or the
+  // controls, Escape or Done goes back to the row.
   // Set SHELF_GRID to false to switch the grid off: the handle then opens the
   // panel as before.
   const SHELF_GRID = true;
@@ -825,7 +921,9 @@ export function createUI(app) {
     document.body.classList.toggle("sheet-open", m === "panel");
     document.body.classList.toggle("shelf-grid", m === "grid");
     els.sheetToggle.setAttribute("aria-expanded", String(mode === "panel"));
-    els.sheetToggle.textContent = m === "row" ? "More" : "Done";
+    // From the grid, More goes straight to the settings (one tap); the
+    // handle, a swipe down, a pick or a tap on the toy closes the grid.
+    els.sheetToggle.textContent = m === "panel" ? "Done" : "More";
     refreshDock();
   };
   function setMode(m) {
@@ -836,7 +934,7 @@ export function createUI(app) {
     if (m !== "panel") revealCurrent();
   }
   new ResizeObserver(refreshDock).observe(els.panel);
-  els.sheetToggle.addEventListener("click", () => setMode(mode === "row" ? "panel" : "row"));
+  els.sheetToggle.addEventListener("click", () => setMode(mode === "panel" ? "row" : "panel"));
   narrow.addEventListener("change", applySheet);
 
   // The handle: swipe up for the grid, down for the row, tap to toggle. The

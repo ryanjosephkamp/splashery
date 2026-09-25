@@ -758,10 +758,39 @@ test.describe("Splashery v3 engine (WebGL2)", () => {
     await page.click("#toy-action");
     await expect
       .poll(() => page.evaluate(() => window.__splashery.player.motion.out?.tokens?.length ?? 0))
-      .toBe(32);
+      .toBe(48);
     await page.waitForTimeout(4000);
     const later = await canvas.screenshot({ type: "png" });
     expect(await countDifferentPixels(page, start, later)).toBeGreaterThan(800);
+    // Any game from PGN: pasted text plays at once...
+    await expect(page.locator("#toy-game")).toContainText("Opera Game");
+    await page.click("#game-paste");
+    await page.fill(
+      "#game-text",
+      '[White "Fischer, Robert J."]\n[Black "Spassky, Boris V."]\n[Event "World Championship"]\n[Date "1972.07.23"]\n\n1. c4 e6 2. Nf3 d5 3. d4 Nf6 4. Nc3 Be7 5. Bg5 O-O 1/2-1/2',
+    );
+    await page.click("#game-play-text");
+    await expect(page.locator("#toy-game")).toContainText(
+      "Fischer v Spassky, World Championship 1972",
+    );
+    await expect(page.locator("#toy-action")).toHaveText("Play the game");
+    await expect(page.locator("#game-reset")).toBeVisible();
+    // ...a file too, and a file that is not a game says why.
+    await page.setInputFiles("#game-file", {
+      name: "bad.pgn",
+      mimeType: "application/x-chess-pgn",
+      buffer: Buffer.from("1. e4 e5 2. Qh5 Nc6 3. Qxf7 Kxf7 4. Kxe8"),
+    });
+    await expect(page.locator("#toy-game .warning")).toContainText("Move 4.Kxe8");
+    await page.setInputFiles("#game-file", {
+      name: "scholar.pgn",
+      mimeType: "application/x-chess-pgn",
+      buffer: Buffer.from("1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6 4. Qxf7# 1-0"),
+    });
+    await expect(page.locator("#toy-game .warning")).toBeHidden();
+    await expect(page.locator("#toy-game")).toContainText("On the board: A game");
+    await page.click("#game-reset");
+    await expect(page.locator("#toy-action")).toHaveText("Play the Opera Game");
     // Laptop: real keys type onto the screen.
     await page.click(".chip[data-category='objects']");
     await page.click(".toy-card[data-toy='laptop']");
@@ -805,8 +834,18 @@ test.describe("Splashery v3 engine (WebGL2)", () => {
     await page.mouse.up();
     // The camera did not turn, and the bear springs back.
     expect(await yaw()).toBeCloseTo(yaw0, 3);
+    // The spring-back takes 1.6 s of the toy's clock, which steps a clamped
+    // amount per frame: SwiftShader draws only a few frames a second, so
+    // wait on that clock rather than on wall time.
     await expect
-      .poll(() => page.evaluate(() => window.__splashery.player.driver.grab.on), { timeout: 5000 })
+      .poll(
+        () =>
+          page.evaluate(() => {
+            const p = window.__splashery.player;
+            return p.time - p.driver.grab.releaseAt > 1.7 ? p.driver.grab.on : "springing";
+          }),
+        { timeout: 30_000 },
+      )
       .toBe(false);
     // A drag that starts beside the toy still orbits.
     await page.mouse.move(box.x + 30, box.y + box.height - 60);
@@ -1288,7 +1327,7 @@ test.describe("Splashery on a phone", () => {
     await swipe(row.x + 120, row.y + row.height / 2, row.y - 160);
     await expect(page.locator("body")).toHaveClass(/shelf-grid/);
     await expect(page.locator("#panel-body")).toBeHidden();
-    await expect(page.locator("#sheet-toggle")).toHaveText("Done");
+    await expect(page.locator("#sheet-toggle")).toHaveText("More");
     const grid = await page.evaluate(() => {
       const el = document.getElementById("shelf");
       const r = el.getBoundingClientRect();
@@ -1332,13 +1371,19 @@ test.describe("Splashery on a phone", () => {
     expect(Math.abs(row2.height - row.height)).toBeLessThan(2);
     await page.tap("#sheet-handle");
     await expect(page.locator("body")).toHaveClass(/shelf-grid/);
-    await page.tap("#sheet-toggle");
+    await page.tap("#sheet-handle");
     await expect(page.locator("body")).not.toHaveClass(/shelf-grid/);
     await expect(page.locator("#panel-body")).toBeHidden();
 
-    // More still opens the panel.
+    // From the grid, More opens the settings in one tap, and Done closes them.
+    await page.tap("#sheet-handle");
+    await expect(page.locator("body")).toHaveClass(/shelf-grid/);
     await page.tap("#sheet-toggle");
     await expect(page.locator("#panel-body")).toBeVisible();
+    await expect(page.locator("body")).not.toHaveClass(/shelf-grid/);
+    await expect(page.locator("#sheet-toggle")).toHaveText("Done");
+    await page.tap("#sheet-toggle");
+    await expect(page.locator("#panel-body")).toBeHidden();
 
     // Long names wrap onto two lines instead of ending in "…".
     const cut = await page.evaluate(
@@ -1349,6 +1394,30 @@ test.describe("Splashery on a phone", () => {
         }).length,
     );
     expect(cut).toBe(0);
+    expect(problems).toEqual([]);
+  });
+
+  test("a panel opened while a toy from the grid is still loading stays open", async ({ page }) => {
+    const problems = watchConsole(page);
+    await loadApp(page);
+    await waitForToy(page, "Cactus");
+    // A slow download, like a scan on a phone.
+    await page.route("**/assets/toys/horse-statue/**", async (route) => {
+      await new Promise((r) => setTimeout(r, 3000));
+      await route.continue();
+    });
+    await page.tap("#sheet-handle");
+    await expect(page.locator("body")).toHaveClass(/shelf-grid/);
+    await page.tap('#shelf .toy-card[data-toy="horse-statue"]');
+    await expect(page.locator("body")).not.toHaveClass(/shelf-grid/);
+    // More, while the horse is still loading.
+    await page.tap("#sheet-toggle");
+    await expect(page.locator("#panel-body")).toBeVisible();
+    await waitForToy(page, "Horse");
+    await page.waitForTimeout(500);
+    await expect(page.locator("#panel-body")).toBeVisible();
+    await page.tap("#tab-look");
+    await expect(page.locator("#tab-look")).toHaveAttribute("aria-selected", "true");
     expect(problems).toEqual([]);
   });
 

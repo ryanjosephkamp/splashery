@@ -331,11 +331,13 @@ class App {
     scene.motion = { ...scene.motion, controls: {} };
     this.file = null;
     this.ui.setPaintCount(0);
+    // Fold the phone sheet now, not after the load: a scan can take seconds
+    // on a phone, and folding it then would shut a panel opened meanwhile.
+    this.ui.collapseSheet();
     try {
       await this.loadToy(scene.toy);
       player.camera.setState(toy.camera || createScene().camera, { asHome: true, snap: false });
       player.syncDrop();
-      this.ui.collapseSheet();
       this.ui.setMotion(scene.motion);
     } catch (err) {
       this.ui.toast(err.message, 5000);

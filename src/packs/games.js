@@ -122,52 +122,111 @@ export function toFen(pos) {
 }
 
 // Token numbers: each piece of the start position gets one (white 0-15,
-// black 16-31), and keeps it as it moves.
+// black 16-31), and keeps it as it moves. Tokens 32-47 are spares, hidden
+// until a pawn promotes (or a set-up position needs more of a piece).
 const START = startPosition();
-const TOKENS = Object.keys(START)
-  .sort((a, b) => (START[a][0] === START[b][0] ? (a < b ? -1 : 1) : START[a][0] === "w" ? -1 : 1))
-  .map((sq, i) => ({ id: i, home: sq, piece: START[sq] }));
+const SPARE_KINDS = "QQQQQRBN";
+const TOKENS = [
+  ...Object.keys(START)
+    .sort((a, b) => (START[a][0] === START[b][0] ? (a < b ? -1 : 1) : START[a][0] === "w" ? -1 : 1))
+    .map((sq, i) => ({ id: i, home: sq, piece: START[sq], spare: false })),
+  ...["w", "b"].flatMap((side, j) =>
+    [...SPARE_KINDS].map((kind, n) => ({
+      id: 32 + j * 8 + n,
+      home: side === "w" ? "d4" : "e5",
+      piece: side + kind,
+      spare: true,
+    })),
+  ),
+];
+export const TOKEN_COUNT = TOKENS.length;
+
+// Plies as objects: { from, to, rf, rt (castling rook), ep (the pawn taken
+// en passant), promo (the new piece) }. The Opera Game lists them as arrays.
+const asPly = (p) => (Array.isArray(p) ? { from: p[0], to: p[1], rf: p[2], rt: p[3] } : p);
 
 // Where each token stands after every ply: a square, or a place beside the
-// board once captured (white's captures on the right, black's on the left).
-function timeline(plies) {
-  const at = TOKENS.map((t) => t.home);
-  const out = [TOKENS.map((t) => ({ sq: t.home, off: null }))];
+// board once captured (white's captures on the right, black's on the left),
+// and whether it is shown. Each step also says which tokens moved.
+function timeline(game) {
+  const at = TOKENS.map(() => null);
+  const used = new Set();
+  let state = TOKENS.map((t) => ({ sq: t.home, off: null, vis: 0 }));
+  const put = (t, sq) => {
+    used.add(t.id);
+    at[t.id] = sq;
+    state[t.id] = { sq, off: null, vis: 1 };
+  };
+  const squares = Object.keys(game.start);
+  // A piece on its own home square keeps its token; the rest take any free
+  // token of the same kind, spares last.
+  for (const sq of squares) {
+    const t = TOKENS.find((x) => !x.spare && x.home === sq && x.piece === game.start[sq]);
+    if (t) put(t, sq);
+  }
+  for (const sq of squares) {
+    if (at.includes(sq)) continue;
+    const t = TOKENS.find((x) => !used.has(x.id) && x.piece === game.start[sq]);
+    if (!t) throw new Error("The start position has more pieces of one kind than this set has.");
+    put(t, sq);
+  }
+  const out = [state];
   const trays = { w: 0, b: 0 };
-  let state = out[0].map((x) => ({ ...x }));
-  for (const [from, to, rf, rt] of plies) {
+  for (const raw of game.plies) {
+    const { from, to, rf, rt, ep, promo } = asPly(raw);
     state = state.map((x) => ({ ...x }));
     const mover = at.indexOf(from);
-    const victim = at.indexOf(to);
+    if (mover < 0) throw new Error(`No piece on ${from}`);
+    const side = TOKENS[mover].piece[0];
+    const victim = at.indexOf(ep || to);
     let taken = -1;
-    if (victim >= 0) {
-      // The capturing side keeps the piece: a row beside the board.
-      const side = TOKENS[mover].piece[0];
+    if (victim >= 0 && victim !== mover) {
+      // The capturing side keeps the piece: rows beside the board.
       const n = trays[side]++;
-      const x = (side === "w" ? 5.1 : -5.1) * S;
-      const z = (side === "w" ? 3.5 - n * 0.9 : -3.5 + n * 0.9) * S;
-      state[victim] = { sq: null, off: [x, 0, z] };
+      const col = Math.floor(n / 8);
+      const x = (side === "w" ? 5.1 + col * 0.9 : -5.1 - col * 0.9) * S;
+      const z = (side === "w" ? 3.5 - (n % 8) * 0.9 : -3.5 + (n % 8) * 0.9) * S;
+      state[victim] = { sq: null, off: [x, 0, z], vis: 1 };
       at[victim] = null;
       taken = victim;
     }
-    state[mover] = { sq: to, off: null };
+    state[mover] = { sq: to, off: null, vis: 1 };
     at[mover] = to;
     let rook = -1;
     if (rf) {
       rook = at.indexOf(rf);
-      state[rook] = { sq: rt, off: null };
+      state[rook] = { sq: rt, off: null, vis: 1 };
       at[rook] = rt;
+    }
+    // Promotion: the pawn sinks away and a spare piece rises in its place
+    // (or, with no spare left, one of that side's captured pieces returns).
+    let promoted = null;
+    if (promo) {
+      const piece = side + promo;
+      let t = TOKENS.find((x) => x.spare && !used.has(x.id) && x.piece === piece);
+      const fromTray = !t;
+      if (!t) t = TOKENS.find((x) => x.piece === piece && used.has(x.id) && at[x.id] === null && state[x.id].vis > 0); // prettier-ignore
+      if (t) {
+        used.add(t.id);
+        state[t.id] = { sq: to, off: null, vis: 1 };
+        at[t.id] = to;
+        state[mover] = { sq: to, off: null, vis: 0 };
+        at[mover] = null;
+        promoted = { pawn: mover, piece: t.id, fromTray };
+      }
     }
     state.moved = mover;
     state.rook = rook;
     state.taken = taken;
+    state.promoted = promoted;
     out.push(state);
   }
   return out;
 }
 
-const PLY = 1.35; // seconds per move
-const MOVE = 0.8; // seconds a piece takes to move
+const PLY = 1.35; // game seconds per move (the pace control scales them)
+const MOVE = 0.8; // game seconds a piece takes to move
+const SWAP = 0.35; // game seconds a promotion takes
 const point = (s) => (s.sq ? squareAt(s.sq) : s.off);
 
 // ---- Piece shapes ---------------------------------------------------------------
@@ -192,23 +251,48 @@ const PROFILE = {
 
 // ---- Recipe ---------------------------------------------------------------------
 
-const GAME = timeline(OPERA_GAME);
+// The game on the board: the Opera Game unless one was loaded from PGN.
+const OPERA = {
+  title: "The Opera Game (Morphy v the Duke of Brunswick and Count Isouard, Paris 1858)",
+  opera: true,
+  start: START,
+  plies: OPERA_GAME,
+  loser: "b",
+};
+let game = null;
+function setGame(g) {
+  const states = timeline(g);
+  game = { ...g, states, n: g.plies.length };
+  Object.assign(play, { on: false, g: 0, last: null, snap: null, landed: -1 });
+}
 // Per-toy playing state (one chess set is shown at a time).
-const play = { on: false, start: 0, stopAt: -99, snap: null, landed: -1 };
+const play = { on: false, g: 0, last: null, stopAt: -99, snap: null, landed: -1 };
+setGame(OPERA);
 
-// Positions (offsets from home) of every token g seconds into the game.
+// Every token's offset from home and visibility g game seconds in.
 function positionsAt(g) {
-  const n = OPERA_GAME.length;
-  const i = Math.min(n - 1, Math.max(0, Math.floor(g / PLY)));
-  const f = band(g - i * PLY, 0, MOVE);
-  const before = GAME[i];
-  const after = GAME[i + 1];
+  const { states, n } = game;
+  if (g < 0 || !n) {
+    return TOKENS.map((t, k) => {
+      const a = point(states[0][k]);
+      const home = squareAt(t.home);
+      return { offset: [a[0] - home[0], 0, a[2] - home[2]], visible: states[0][k].vis };
+    });
+  }
+  const i = Math.min(n - 1, Math.floor(g / PLY));
+  const local = g - i * PLY;
+  const f = band(local, 0, MOVE);
+  const before = states[i];
+  const after = states[i + 1];
+  const pro = after.promoted;
+  const swap = band(local, MOVE, MOVE + SWAP);
   return TOKENS.map((t, k) => {
-    const a = point(g < 0 ? GAME[0][k] : before[k]);
-    const b = point(g < 0 ? GAME[0][k] : after[k]);
+    const a = point(before[k]);
+    const b = point(after[k]);
     const home = squareAt(t.home);
     let u = f;
     let lift = 0;
+    let visible = after[k].vis;
     if (k === after.taken) {
       // The captured piece is lifted off first and set down beside the board.
       u = band(f, 0, 0.55);
@@ -219,63 +303,117 @@ function positionsAt(g) {
       const knight = t.piece[1] === "N";
       lift = (knight ? 0.7 : 0.12) * S * Math.sin(Math.PI * u);
     }
+    if (pro && k === pro.pawn) visible = 1 - swap;
+    if (pro && k === pro.piece) {
+      if (pro.fromTray) lift = 0.9 * S * Math.sin(Math.PI * f);
+      else u = 1;
+      visible = pro.fromTray ? 1 : swap;
+    }
     const e = easeInOut(u);
     const p = [a[0] + (b[0] - a[0]) * e, lift, a[2] + (b[2] - a[2]) * e];
-    return [p[0] - home[0], p[1], p[2] - home[2]];
+    return { offset: [p[0] - home[0], p[1], p[2] - home[2]], visible };
   });
 }
 
 const CLACK = (f, vol = 1) => ({ voice: "wood", f, decay: 0.8, vol });
+// Move speed: 0.4x to 2.5x (half way is the Opera Game's pace).
+const paceOf = (c) => Math.pow(2.5, ((c.pace ?? 0.5) - 0.5) * 2);
 
 export const RECIPES = {
   "chess-set": {
     // Frames keep coming while the game plays or the pieces go home.
     alive: (c) => c.play > 0 || play.snap !== null,
-    controls: [{ key: "play", label: "Play", type: "toggle", default: 0, ease: 0.2 }],
-    action: { key: "play", label: "Play the Opera Game" },
+    controls: [
+      { key: "play", label: "Play", type: "toggle", default: 0, ease: 0.2 },
+      { key: "pace", label: "Move speed", default: 0.5 },
+    ],
+    action: {
+      key: "play",
+      get label() {
+        return game.opera ? "Play the Opera Game" : "Play the game";
+      },
+    },
+    note: "Open a PGN file or paste a game to watch it played out on the board.",
+    // The game panel (ui.js): load a game from PGN text, or go back to the
+    // Opera Game.
+    game: {
+      title: () => game.title,
+      isDefault: () => !!game.opera,
+      async load(text) {
+        const { readPgn } = await import("../chess.js");
+        const g = readPgn(text);
+        setGame(g);
+        return g;
+      },
+      reset() {
+        setGame(OPERA);
+      },
+    },
     drive(t, c, out, info) {
       const now = info.time;
       const want = c.play > 0.5;
+      // Game time runs at the chosen pace.
+      const dt = play.last === null ? 0 : Math.max(0, Math.min(0.25, now - play.last));
+      play.last = now;
       if (want && !play.on) {
-        Object.assign(play, { on: true, start: now, snap: null, landed: -1 });
+        Object.assign(play, { on: true, g: -dt * paceOf(c), snap: null, landed: -1 });
       } else if (!want && play.on) {
         play.on = false;
-        play.snap = positionsAt(now - play.start);
+        play.snap = positionsAt(play.g);
         play.stopAt = now;
       }
-      let offs;
+      const n = game.n;
+      let pose;
       let quats = null;
       if (play.on) {
-        const g = now - play.start;
-        offs = positionsAt(g);
-        // A clack as each piece lands; a second, lower one for a capture.
-        const n = OPERA_GAME.length;
+        play.g += dt * paceOf(c);
+        const g = play.g;
+        pose = positionsAt(g);
+        // A clack as each piece lands; a lower one for a capture, a bright
+        // one when a pawn becomes a queen.
         const i = Math.floor(g / PLY);
         if (i < n && g - i * PLY >= MOVE && play.landed < i) {
           play.landed = i;
           out.cues.push(CLACK(620 + 90 * (i % 3), 1));
-          if (GAME[i + 1].taken >= 0) out.cues.push({ ...CLACK(430, 0.8), at: 0.07 });
+          const step = game.states[i + 1];
+          if (step.taken >= 0) out.cues.push({ ...CLACK(430, 0.8), at: 0.07 });
+          if (step.promoted) out.cues.push({ ...CLACK(980, 0.7), at: 0.2 });
         }
-        // Checkmate: the black king tips over.
+        // The end: the losing king tips over (checkmate or resignation).
         const done = g - (n - 1) * PLY - MOVE;
-        if (done > 0.3) {
-          const k = TOKENS.findIndex((x) => x.piece === "bK");
-          const tip = (Math.PI / 2.2) * easeInOut(band(done, 0.3, 1.3));
-          const home = squareAt(TOKENS[k].home);
-          quats = { [k]: { quat: quatAxisAngle([1, 0, 0], -tip), base: [home[0], 0, home[2] - 0.3 * S] } }; // prettier-ignore
+        if (done > 0.3 && game.loser) {
+          const k = game.states[n].findIndex((st, j) => st.vis > 0 && TOKENS[j].piece === `${game.loser}K`); // prettier-ignore
+          if (k >= 0) {
+            const dir = game.loser === "b" ? -1 : 1;
+            const tip = (Math.PI / 2.2) * easeInOut(band(done, 0.3, 1.3));
+            const home = squareAt(TOKENS[k].home);
+            quats = { [k]: { quat: quatAxisAngle([1, 0, 0], dir * tip), base: [home[0], 0, home[2] + dir * 0.3 * S] } }; // prettier-ignore
+          }
           if (play.landed < n) {
             play.landed = n;
             out.cues.push({ voice: "wood", f: 300, decay: 1.4, at: 0.6 });
           }
         }
-      } else if (play.snap) {
-        // Stopped: every piece glides home.
-        const u = easeInOut(band(now - play.stopAt, 0, 1.2));
-        offs = play.snap.map((d) => [d[0] * (1 - u), d[1] * (1 - u) + 0.3 * S * Math.sin(Math.PI * u), d[2] * (1 - u)]); // prettier-ignore
-        if (u >= 1) play.snap = null;
+      } else {
+        // At rest the pieces stand on the game's first position; after a stop
+        // they glide back there.
+        pose = positionsAt(-1);
+        if (play.snap) {
+          const u = easeInOut(band(now - play.stopAt, 0, 1.2));
+          const hop = 0.3 * S * Math.sin(Math.PI * u);
+          pose = pose.map((rest, k) => {
+            const from = play.snap[k];
+            const d = from.offset;
+            const r = rest.offset;
+            return {
+              offset: [d[0] + (r[0] - d[0]) * u, d[1] * (1 - u) + hop, d[2] + (r[2] - d[2]) * u],
+              visible: from.visible + (rest.visible - from.visible) * u,
+            };
+          });
+          if (u >= 1) play.snap = null;
+        }
       }
-      if (!offs) return;
-      out.tokens = offs.map((d, k) => ({ offset: d, ...(quats?.[k] || {}) }));
+      out.tokens = pose.map((p, k) => ({ ...p, ...(quats?.[k] || {}) }));
     },
     build(k) {
       const light = "#e9d3a4";

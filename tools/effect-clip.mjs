@@ -3,13 +3,14 @@
 // motion at phone size (filmstrips hide bending, smear and speckle).
 //
 //   python3 -m http.server 4173 --bind 127.0.0.1 &
-//   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/effect-clip.mjs <out-dir> [--size=320] [--secs=3.5] [--fps=15] [--before=0.4] [--taps=1] [--gap=0.25] [--at=x,y,z] [--seq=x,y,z;x,y,z] [--keys=HELLO] [--bg=#111111] [--opt=key=value] id ...
+//   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/effect-clip.mjs <out-dir> [--size=320] [--secs=3.5] [--fps=15] [--before=0.4] [--taps=1] [--gap=0.25] [--at=x,y,z] [--seq=x,y,z;x,y,z] [--keys=HELLO] [--bg=#111111] [--opt=key=value] [--pgn=game.pgn] id ...
 //
 // Writes <out-dir>/<id>.gif. The clock is stepped by hand, so a clip shows
 // the effect at its real speed however slow the renderer is. It starts
 // --before seconds ahead of the tap and runs --secs after it. --seq taps a
 // list of points (recipe coordinates) --gap seconds apart; --keys types
-// letters on a toy that takes typing (the laptop) --gap seconds apart.
+// letters on a toy that takes typing (the laptop) --gap seconds apart;
+// --pgn loads a game into a game toy (the chess set) before the tap.
 
 import { chromium } from "@playwright/test";
 import fs from "node:fs";
@@ -31,6 +32,7 @@ const bg = opt("bg", "#111111");
 const taps = Number(opt("taps", 1));
 const gap = Number(opt("gap", 0.25));
 const toyOpt = opt("opt", "");
+const pgn = opt("pgn", "") ? fs.readFileSync(opt("pgn", ""), "utf8") : "";
 const at = opt("at", "") ? opt("at", "").split(",").map(Number) : null;
 const seq = opt("seq", "")
   ? opt("seq", "")
@@ -55,7 +57,7 @@ await page.goto(`${base}?renderer=webgl2&profile=high&adapt=off`);
 await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
 for (const id of ids) {
   const bytes = await page.evaluate(
-    async ({ id, size, secs, fps, before, bg, taps, gap, toyOpt, at, seq, keys }) => {
+    async ({ id, size, secs, fps, before, bg, taps, gap, toyOpt, at, seq, keys, pgn }) => {
       const { app, player } = window.__splashery;
       const { GIFEncoder, quantize, applyPalette } = await import("gifenc");
       await app.chooseToy(id);
@@ -63,6 +65,8 @@ for (const id of ids) {
         const [key, value] = toyOpt.split("=");
         await app.setToyOption(key, value);
       }
+      // A game toy (the chess set) can load a PGN game first.
+      if (pgn) await player.toyInfo.recipe.game.load(pgn);
       app.setLook({ background: bg });
       player.opts.idleDelay = 1e9;
       player.idle.weight = 0;
@@ -116,7 +120,7 @@ for (const id of ids) {
       stage.updateHandlers.push(...handlers);
       return Array.from(gif.bytes());
     },
-    { id, size, secs, fps, before, bg, taps, gap, toyOpt, at, seq, keys },
+    { id, size, secs, fps, before, bg, taps, gap, toyOpt, at, seq, keys, pgn },
   );
   const out = path.join(outDir, `${id}.gif`);
   fs.writeFileSync(out, Buffer.from(bytes));

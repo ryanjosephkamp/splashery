@@ -708,6 +708,21 @@ button.primary:hover:not(:disabled) {
   border-color: var(--ink);
 }
 
+.game-box {
+  margin: 6px 0 2px;
+}
+
+.game-box .game-title {
+  margin: 0;
+  color: var(--ink);
+  font-size: 12.5px;
+}
+
+.game-box textarea {
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
 .button-row {
   display: flex;
   flex-wrap: wrap;
@@ -1057,7 +1072,8 @@ button.primary:hover:not(:disabled) {
     display: block;
   }
 
-  .shelf-find input {
+  .shelf-find input,
+  .game-box textarea {
     font-size: 16px;
   }
 
