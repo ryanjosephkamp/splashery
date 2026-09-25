@@ -13,11 +13,12 @@ ground rules are in [CLAUDE.md](../CLAUDE.md).
   atoms and gems toys (TOY-PLAN.md has each one's `improved` entry), sounds re-timed to them, and
   clips of all 32 on the Effect review page. Check it is merged before starting E3. **Next: Phase
   E3** (below).
-- **E2 review (2026-09-25).** The owner's review is on the Effect review page (verdicts in its
-  database). 24 of 32 were "good"; the fixes are in this PR: the Moon's phases were replaced by a
-  landing (a lunar module lands near the top of the Moon, an astronaut climbs down, plants a chosen
-  flag, unrolls it and waves; a second tap packs up and lifts off; the flag is a `type: "flag"` toy
-  option drawn from its SVG through the screen texture, at the flag's real shape, which
+- **E2 review (2026-09-25).** The owner's review is word for word in
+  `docs/reviews/2026-09-25-e2/review.md` (and its marks are in the Effect review page's database).
+  24 of 32 were "good"; the fixes are in this PR: the Moon's phases were replaced by a landing (a
+  lunar module lands near the top of the Moon, an astronaut climbs down, plants a chosen flag,
+  unrolls it and waves; a second tap packs up and lifts off; the flag is a `type: "flag"` toy option
+  drawn from its SVG through the screen texture, at the flag's real shape, which
   `tools/flag-aspects.mjs` now writes into flags.json); the sapphire's star lies on the stone and
   ends at its edge; the quartz glints point different ways; the solar system's planets are spaced
   and sized so none touch, at rest or in the row. The atom, orbital, molecule and crystal lattice
