@@ -1598,7 +1598,7 @@ export const RECIPES = {
       // The swells of light: each runs from the tip (0) to the mouth (1).
       const swell = (p % 1.1) / 0.85;
       out.morph = [on && p < 3.3 ? -0.25 + 1.45 * swell : -1];
-      out.glow = [0.72, 0.95, 1, on ? 0.75 * (1 - band(p, 3.1, 3.4)) : 0];
+      out.glow = [0.45, 0.82, 0.95, on ? 0.38 * (1 - band(p, 3.1, 3.4)) : 0];
       SHELL_WAVES.forEach((start, i) => {
         const x = on ? (p - start) / 1.45 : -1;
         const live = x > 0 && x < 1;
@@ -1630,7 +1630,7 @@ export const RECIPES = {
         // A swell of light passes as channel 0 runs from the tip (u = 0) to
         // the mouth (u = 1).
         kind: "band",
-        params: (c) => [c.u, 0.12],
+        params: (c) => [c.u, 0.09],
         color: (c) => {
           const u = c.u * 6 * Math.PI;
           // Growth lines and zigzag bands, like a cone shell.
@@ -1651,18 +1651,18 @@ export const RECIPES = {
         const part = k.part("wave" + i, { pivot: mid });
         k.cloud({ share: 0.03, size: 1.6, pattern: false }, (rand) => {
           const a = rand() * TAU;
-          const crest = 0.06 * Math.sin(a * 7 + i * 2);
+          const crest = 0.025 * Math.sin(a * 5 + i * 2);
           // Built a little inside the mouth (hidden pieces count in the fit)
           // and grown by the part's scale.
-          const rr = 0.8 * (r * (0.97 + crest) + (rand() - 0.5) * 0.12);
-          const lift = -0.1 - rand() * 0.08 + 0.05 * Math.sin(a * 7 + i * 2);
+          const rr = 0.8 * (r * (0.97 + crest) + (rand() - 0.5) * 0.07);
+          const lift = -0.1 - rand() * 0.05 + 0.04 * Math.sin(a * 5 + i * 2);
           const q = add(mid, add(add(mul(e1, rr * Math.cos(a)), mul(e2, rr * Math.sin(a))), mul(n, lift))); // prettier-ignore
           const foam = rand();
           return {
             p: q,
-            color: mix("#7fd8e8", "#f2fdff", foam * foam),
-            opacity: 0.55 + 0.35 * foam,
-            size: 0.8 + 0.8 * rand(),
+            color: mix("#9fe6f2", "#ffffff", foam),
+            opacity: 0.3 + 0.35 * foam,
+            size: 0.7 + 0.6 * rand(),
             part,
             kind: "fade",
             params: [0, 0.99],
