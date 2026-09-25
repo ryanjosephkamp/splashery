@@ -1070,6 +1070,7 @@ test.describe("Settings panel (WebGL2)", () => {
     await page.locator("#game-tag-site").focus();
     await expect(page.locator("#game-bar-title")).toContainText("Friendly game");
     // Another toy puts the bar away.
+    await page.click(".chip[data-category='objects']");
     await page.click(".toy-card[data-toy='laptop']");
     await waitForToy(page, "Laptop");
     await expect(bar).toBeHidden();
@@ -1662,6 +1663,7 @@ test.describe("Splashery on WebGPU", () => {
     await page.click(".toy-card[data-toy='chest']");
     await waitForToy(page, "Treasure chest");
     const closed = await canvas.screenshot({ type: "png" });
+    await page.click("#tab-play");
     await page.click("#toy-action");
     await page.evaluate(() => window.__splashery.app.setPattern({ id: "flag", flag: "br" }));
     await page.waitForTimeout(2000);
