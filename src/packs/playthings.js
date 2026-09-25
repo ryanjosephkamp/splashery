@@ -621,6 +621,12 @@ const BURST = [
 
 // ---- Recipes ----------------------------------------------------------------------------
 
+// Newton's cradle: how far the end ball is lifted (radians), how long the
+// lift takes and when it is let go, the pendulum's period, the swing kept
+// at each strike, and how long a tap plays.
+const CRADLE = { amp: 0.8, lift: 0.35, release: 0.55, period: 1.3, loss: 0.84, secs: 9 };
+const cradle = { hits: 0 };
+
 export const RECIPES = {
   bricks: {
     options: [
@@ -1045,14 +1051,52 @@ export const RECIPES = {
     },
   },
   "newtons-cradle": {
-    alive: true,
-    controls: [{ key: "swing", label: "Swing", type: "pulse", ease: 6 }],
-    action: { key: "swing", label: "Swing harder" },
+    // A tap lifts the end ball and lets it go: it strikes the row, the far
+    // ball flies out and falls back, and so on, each strike a clack and a
+    // little lower, the middle balls twitching as the knock passes through.
+    controls: [{ key: "swing", label: "Swing", type: "pulse", ease: CRADLE.secs }],
+    action: { key: "swing", label: "Lift and let go" },
     drive(t, c, out) {
-      const A = 0.34 + 0.4 * c.swing;
-      const th = -A * Math.cos((t * TAU) / 1.3);
-      out.parts.ball0 = { angle: Math.min(0, th) };
-      out.parts.ball4 = { angle: Math.max(0, th) };
+      const e = c.swing > 0 ? (1 - c.swing) * CRADLE.secs : -1;
+      if (e < 0) {
+        cradle.hits = 0;
+        return;
+      }
+      const { lift, release, period, loss } = CRADLE;
+      let a0 = 0;
+      let a4 = 0;
+      let knock = 0;
+      if (e < release) {
+        // Lifted out on its strings, held a moment.
+        a0 = -CRADLE.amp * Math.sin((Math.PI / 2) * Math.min(1, e / lift)) ** 2;
+      } else {
+        // Falling: a quarter swing to the first strike, then half swings.
+        const s = e - release;
+        const first = period / 4;
+        if (s < first) a0 = -CRADLE.amp * Math.cos(((s / first) * Math.PI) / 2);
+        else {
+          const n = Math.floor((s - first) / (period / 2));
+          const f = (s - first - (n * period) / 2) / (period / 2);
+          // (It dies away over the last two seconds.)
+          const fade = 1 - Math.min(1, Math.max(0, (e - CRADLE.secs + 2) / 2));
+          const amp = CRADLE.amp * Math.pow(loss, n + 1) * fade;
+          const swing = amp * Math.sin(Math.PI * f);
+          if (n % 2 === 0) a4 = swing;
+          else a0 = -swing;
+          knock = Math.exp(-f * 18) * amp;
+          // A clack at each strike, softer as it dies down.
+          const hits = n + 1;
+          if (cradle.hits < hits && amp > 0.03) {
+            cradle.hits = hits;
+            out.cues.push({ voice: "clack", f: 2600, decay: 0.9, vol: Math.min(1, 0.35 + amp) });
+          }
+        }
+      }
+      out.parts.ball0 = { angle: a0 };
+      out.parts.ball4 = { angle: a4 };
+      // The knock travels through the middle three.
+      for (let i = 1; i <= 3; i++)
+        out.parts["ball" + i] = { angle: 0.012 * knock * Math.sin(i * 2.1) };
     },
     build(k) {
       const rb = 0.15;
@@ -1100,8 +1144,7 @@ export const RECIPES = {
       // Balls on strings.
       for (let i = 0; i < 5; i++) {
         const x = (i - 2) * rb * 2;
-        const part =
-          i === 0 || i === 4 ? k.part("ball" + i, { pivot: [x, top, 0], axis: [0, 0, 1] }) : 0;
+        const part = k.part("ball" + i, { pivot: [x, top, 0], axis: [0, 0, 1] });
         k.add(k.sphere(rb), {
           pos: [x, yc, 0],
           part,

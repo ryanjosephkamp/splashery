@@ -202,7 +202,7 @@ test("a tap knows where it landed: a xylophone bar strikes that bar", async () =
   m.act(3, [0.77, 0.1, 0]);
   expect(m.tap.pick).toBe(7);
   m.state.play = 0;
-  m.state.strike = 1 - 0.305;
+  m.state.strike = 1 - 0.13;
   const out = { parts: {} };
   RECIPES.xylophone.drive(0, m.state, out, { tap: m.tap });
   expect(out.parts.bar7.offset[1]).toBeLessThan(-0.005);

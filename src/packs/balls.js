@@ -356,6 +356,21 @@ const throwPulse = (key, label, secs) => ({
   controls: [{ key, label, type: "pulse", ease: secs }],
   action: { key, label },
 });
+// The puck's size in its recipe (the fit maps it to one toy radius).
+const PUCK_R = Math.hypot(1.035, 0.185);
+// v turned by quaternion q.
+const rotate = (q, v) => {
+  const [x, y, z, w] = q;
+  const ix = w * v[0] + y * v[2] - z * v[1];
+  const iy = w * v[1] + z * v[0] - x * v[2];
+  const iz = w * v[2] + x * v[1] - y * v[0];
+  const iw = -x * v[0] - y * v[1] - z * v[2];
+  return [
+    ix * w + iw * -x + iy * -z - iz * -y,
+    iy * w + iw * -y + iz * -x - ix * -z,
+    iz * w + iw * -z + ix * -y - iy * -x,
+  ];
+};
 // Height of a throw (in toy radii) that peaks at `peak` half way through.
 const arc = (f, peak) => peak * 4 * f * (1 - f);
 
@@ -865,7 +880,53 @@ export const RECIPES = {
   },
 
   "hockey-puck": {
+    // A slap shot: ice chips spray from the stick, and the puck glides flat
+    // across the ice, spinning fast, runs round a wide loop as it slows and
+    // slides back to its spot.
+    ...throwPulse("shoot", "Slap shot", 3),
+    drive(t, c, out) {
+      const e = sinceTap(c, "shoot", 3);
+      out.parts.spray = { visible: 0 };
+      if (e < 0) return;
+      // Friction: fast at first, easing to a stop.
+      const f = 1 - (1 - band01(e, 0.04, 2.8)) ** 2;
+      const loop = 2 * Math.PI * f;
+      const spin = 2 * Math.PI * 6 * f;
+      // The slap tips it on edge for a moment, then it lies flat.
+      const tip = 0.22 * Math.sin(Math.PI * band01(e, 0, 0.18)) * (1 - band01(e, 0.12, 0.3));
+      const off = [0.75 * Math.sin(loop), 0.04 * Math.sin(Math.PI * band01(e, 0, 0.2)), -0.45 * (1 - Math.cos(loop))]; // prettier-ignore
+      const q = quatMul(quatAxisAngle([0, 0, 1], tip), quatAxisAngle([0, 1, 0], -spin));
+      out.body = { offset: off, quat: q };
+      // The ice spray stays where the stick hit: undo the puck's motion.
+      const inv = [-q[0], -q[1], -q[2], q[3]];
+      // (Body offsets are in toy radii; part offsets in recipe units.)
+      const back = rotate(
+        inv,
+        off.map((v) => -v * PUCK_R),
+      );
+      const burst = band01(e, 0, 0.45);
+      out.parts.spray = {
+        quat: inv,
+        offset: back,
+        scale: 0.35 + 1.1 * Math.sqrt(burst),
+        visible: 1 - band01(e, 0.25, 0.75),
+      };
+    },
     build(k) {
+      // The spray of ice chips (hidden until the shot).
+      const spray = k.part("spray", { pivot: [0, 0, 0] });
+      k.cloud({ count: 900, part: spray, pattern: false }, (rand) => {
+        const a = Math.PI + (rand() - 0.5) * 1.6;
+        const r = 1.05 + rand() * 0.55;
+        return {
+          p: [Math.cos(a) * r, -0.15 + rand() * 0.35 * rand(), Math.sin(a) * r * 0.8],
+          color: mix("#dff3ff", "#ffffff", rand()),
+          size: 0.35 + 0.4 * rand(),
+          opacity: 0.95,
+          kind: "twinkle",
+          params: [0.7, rand()],
+        };
+      });
       k.add(k.cylinder(1, 0.34), {
         flat: 0.2,
         jitter: 0.012,
