@@ -1314,10 +1314,11 @@
       "improved": "C2: a new tap action sends a bright spark racing along the whole path, drawing it again in light that then fades (about 3 s)."
     },
     "mobius": {
-      "v": "new",
+      "v": "keep",
       "owner": "Wow, really neat. Maybe twist a little.",
       "effect": "An ant-like dot walks the single side; the band twists.",
-      "sound": "Looping tone."
+      "sound": "Looping tone.",
+      "improved": "E3: a tap sends an ant on two laps along the middle of the band: after one lap it is underneath (the band has one side), after two it is back on top where it started, while the band twists a little and untwists (about 5 s)."
     },
     "klein-bottle": {
       "v": "keep",
@@ -1327,34 +1328,39 @@
       "improved": "C2: a new tap action sends a surge of rippling water along the tube and round, and the glass glows (about 4 s)."
     },
     "menger-sponge": {
-      "v": "new",
+      "v": "keep",
       "owner": "No idea for an effect; looks good. The owner calls one of these a favourite and a likely homepage embed (the transcript may refer to the next toy, the hypercube).",
       "effect": "Zooms into itself: the holes open to show the next level down.",
-      "sound": "Descending recursive blips."
+      "sound": "Descending recursive blips.",
+      "improved": "E3: a tap plugs every hole with a solid cube, smallest first, closing the sponge into a plain cube; then it is carved again level by level: the six big cubes slide out of the faces, then the next size down, then the smallest, each fading as it leaves (about 4 s). (Built instead of a zoom, which blurred.)"
     },
     "hypercube": {
-      "v": "new",
+      "v": "keep",
       "owner": "Possibly the favourite and homepage embed (see the Menger sponge).",
       "effect": "Rotates through the fourth dimension, turning inside out.",
-      "sound": "Phasing synth sweep."
+      "sound": "Phasing synth sweep.",
+      "improved": "E3: a tap turns the tesseract once round through the fourth dimension: the pink inner cube swells out to become the outer one while the blue one folds inside, holds a moment, then turns on back to where it started (about 5 s); at rest it rocks gently in 4D."
     },
     "torus-knot": {
-      "v": "new",
+      "v": "keep",
       "owner": "Contort a little; looks cool.",
       "effect": "Contorts through different knot shapes.",
-      "sound": "Stretchy twang."
+      "sound": "Stretchy twang.",
+      "improved": "E3: a tap pulls the knot loose (its lobes stretch out and swirl) and lets go: it springs back past rest into a tight knot and wobbles to a stop like a plucked spring (about 4 s)."
     },
     "gyroid": {
-      "v": "new",
+      "v": "keep",
       "owner": "Really neat; needs an effect.",
       "effect": "The surface flows and shifts phase like a breathing sponge.",
-      "sound": "Watery hum."
+      "sound": "Watery hum.",
+      "improved": "E3: a tap makes the sponge breathe: the surface slides to a shifted level of its own equation, so the orange channels swell as the blue ones narrow, then the other way, and it settles (about 3.8 s)."
     },
     "mandelbulb": {
-      "v": "new",
+      "v": "keep",
       "owner": "Like the Mandeltorus: twisting.",
       "effect": "Morphs through powers (bulb shapes twist and bloom).",
-      "sound": "Deep morphing tone."
+      "sound": "Deep morphing tone.",
+      "improved": "E3: a tap wrings the bulb: the top turns one way and the bottom the other as its bulbs bloom outward, then it springs back past rest and swings to a stop like a torsion spring (about 3.8 s). (A twist, as the owner asked, instead of a change of power.)"
     },
     "sierpinski": {
       "v": "keep",
@@ -1367,10 +1373,11 @@
       "sound": "Five-note chime."
     },
     "seashell-spiral": {
-      "v": "new",
+      "v": "keep",
       "owner": "Something to do with hearing the ocean in a seashell.",
       "effect": "Glows softly and waves ripple out of the opening.",
-      "sound": "Ocean hush."
+      "sound": "Ocean hush.",
+      "improved": "E3: a tap lets you hear the sea in the shell: three soft swells of sea-blue light run down the spiral to the mouth, and a ripple rolls out of the opening with each one, widening and fading (about 4.5 s)."
     },
     "sword-in-stone": {
       "v": "keep",

@@ -670,16 +670,51 @@ export const TOY_SOUNDS = {
 
   // ---- Maths ------------------------------------------------------------------------
   lorenz: { voice: "theremin", f: 360, to: 2.2, decay: 1.2 },
-  mobius: { voice: "tone", notes: "C5 E5 G5 C5 E5 G5", step: 0.16, decay: 0.5, kind: "triangle" },
+  // A step tune as the ant walks two laps: it drops an octave while the ant
+  // is underneath (2.4 s) and comes back up as it returns on top (3.3 s).
+  mobius: {
+    voice: "tone",
+    notes: "C5 E5 G5 C6 E4 G4 C5 E5",
+    step: 0.55,
+    at: 0.2,
+    decay: 0.6,
+    kind: "triangle",
+  },
   "klein-bottle": [
     { voice: "bubbles", f: 180, n: 5, decay: 0.8 },
     { voice: "wave", at: 0.3, f: 300, decay: 0.6 },
   ],
-  "menger-sponge": { voice: "blip", notes: "C6 G5 C5 G4 C4", step: 0.1, decay: 1.2 },
-  hypercube: { voice: "drone", f: 110, to: 2, bright: 0.8, decay: 0.8 },
-  "torus-knot": { voice: "twang", f: 150, decay: 1.2 },
-  gyroid: { voice: "hum", f: 70, to: 0.8, bright: 0.15, decay: 1.4 },
-  mandelbulb: { voice: "drone", f: 80, to: 0.7, bright: 0.6, decay: 1 },
+  // The plugs fly in, it closes (0.65 s), then each level is carved out,
+  // falling blips a size down each time (1.05, 1.95, 2.75 s).
+  "menger-sponge": [
+    { voice: "blip", notes: "C4 G4 C5", step: 0.2, decay: 0.8, vol: 0.6 },
+    { voice: "thud", at: 0.65, f: 90, decay: 0.8 },
+    { voice: "blip", at: 1.05, notes: "C6 G5 C5", step: 0.08, decay: 1.2 },
+    { voice: "blip", at: 1.95, notes: "G5 C5 G4", step: 0.08, decay: 1.2 },
+    { voice: "blip", at: 2.75, notes: "C5 G4 C4", step: 0.08, decay: 1.2 },
+  ],
+  // Sweeps up as it turns inside out (to 2.2 s), and down as it turns home.
+  hypercube: [
+    { voice: "drone", f: 110, to: 2, bright: 0.8, decay: 1.1 },
+    { voice: "drone", at: 2.9, f: 220, to: 0.5, bright: 0.8, decay: 0.9 },
+  ],
+  // A creak as it is pulled, a twang as it is let go (0.85 s).
+  "torus-knot": [
+    { voice: "scrape", at: 0.2, f: 500, rate: 14, decay: 1.2, vol: 0.3 },
+    { voice: "twang", at: 0.85, f: 150, decay: 2.4 },
+    { voice: "twang", at: 1.9, f: 140, decay: 1.4, vol: 0.5 },
+  ],
+  // Swells one way (0.95 s), then the other (2.75 s), with a bubble.
+  gyroid: [
+    { voice: "hum", f: 70, to: 1.25, bright: 0.15, decay: 1.9 },
+    { voice: "hum", at: 1.9, f: 88, to: 0.8, bright: 0.15, decay: 1.8 },
+    { voice: "bubbles", at: 0.6, f: 500, n: 4, decay: 1, vol: 0.4 },
+  ],
+  // Wrung (fullest at 0.7 s), then it swings back and forth to a stop.
+  mandelbulb: [
+    { voice: "drone", f: 80, to: 0.7, bright: 0.6, decay: 0.7 },
+    { voice: "drone", at: 1.33, f: 60, to: 1.2, bright: 0.5, decay: 0.8, vol: 0.6 },
+  ],
   sierpinski: {
     on: { voice: "bell", notes: "C6 G5 C5", step: 0.1, decay: 0.5, bright: 0.6 },
     off: { voice: "bell", notes: "C5 G5 C6", step: 0.1, decay: 0.4, bright: 0.6 },
@@ -688,7 +723,13 @@ export const TOY_SOUNDS = {
     on: { voice: "tine", notes: "C5 D5 E5 G5 A5", step: 0.1, decay: 0.8 },
     off: { voice: "tine", notes: "A5 G5 E5 D5 C5", step: 0.08, decay: 0.6 },
   },
-  "seashell-spiral": { voice: "wave", f: 250, decay: 1.4, vol: 0.7 },
+  // Three hushing waves, each at its loudest as a swell reaches the mouth
+  // (0.7, 1.8, 2.9 s).
+  "seashell-spiral": [
+    { voice: "wave", at: 0.07, f: 250, decay: 0.9, vol: 0.7 },
+    { voice: "wave", at: 1.17, f: 230, decay: 0.9, vol: 0.6 },
+    { voice: "wave", at: 2.27, f: 270, decay: 0.9, vol: 0.55 },
+  ],
 
   // ---- Objects ----------------------------------------------------------------------
   chest: {

@@ -10,10 +10,10 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 284 toys. 200 have a tap action today; the other 84 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 192.
+- 284 toys. 201 have a tap action today; the other 83 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 199.
 - **more** (has an effect; make it clearer or more dramatic): 2.
-- **new** (needs its own effect): 90.
+- **new** (needs its own effect): 83.
 - Visual fixes: 0 open, 28 done. Touch or drag interaction asked for: 4.
 
 ## By phase
@@ -35,16 +35,15 @@ Proposals below are suggestions; the owner may change them.
   Chromosome, Mitochondrion, Paramecium, Amoeba, Electron orbital, Atom, Molecule, Protein, Crystal
   lattice, Diamond, Ruby, Emerald, Amethyst geode, Sapphire, Quartz cluster, Opal, Crystal ball,
   Brain, Eye, Lungs, Tooth, Kidney, Cherry blossom, Ice cream, Gummy bear, Coffee, Rubber duck,
-  Newton's cradle, Kite, Chess set, Lorenz attractor, Klein bottle, Wizard's orb, Jellyfish,
-  Pufferfish, Snail, Octopus, Fireworks, Decorated tree, Diya, Acoustic guitar, Snare drum,
-  Xylophone, Hot-air balloon, Bus, Jet airliner, Sailboat, Submarine, Bicycle, Big Ben, Castle,
-  Pagoda, Windmill.
+  Newton's cradle, Kite, Chess set, Lorenz attractor, Möbius strip, Klein bottle, Menger sponge,
+  Hypercube, Torus knot, Gyroid, Mandelbulb, Seashell spiral, Wizard's orb, Jellyfish, Pufferfish,
+  Snail, Octopus, Fireworks, Decorated tree, Diya, Acoustic guitar, Snare drum, Xylophone, Hot-air
+  balloon, Bus, Jet airliner, Sailboat, Submarine, Bicycle, Big Ben, Castle, Pagoda, Windmill.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
 - **E2, new effects: space, atoms and gems.** None.
-- **E3, new effects: tiny things, anatomy and maths.** Möbius strip, Menger sponge, Hypercube, Torus
-  knot, Gyroid, Mandelbulb, Seashell spiral
+- **E3, new effects: tiny things, anatomy and maths.** None.
 - **E4, new effects: nature and weather.** Oak tree, Pine tree, Palm tree, Maple tree, Bonsai,
   Weeping willow, Sunflower, Rose, Tulips, Daisies, Lotus, Toadstool, Fern, Saguaro cactus, Coral
   reef, Pinecone, Acorns, Succulent, Bamboo, Pebbles, Kelp, Lava lamp, Ice swan, Tornado, Rainbow,
@@ -1194,9 +1193,12 @@ Proposals below are suggestions; the owner may change them.
   - Improved: C2: a new tap action sends a bright spark racing along the whole path, drawing it
     again in light that then fades (about 3 s).
   - Sound: Chaotic warble.
-- **Möbius strip** (`mobius`). Now: tap: Send the ant round. Plan: new effect (E3).
+- **Möbius strip** (`mobius`). Now: tap: Send the ant round. Plan: keep.
   - Owner: Wow, really neat. Maybe twist a little.
   - Effect: An ant-like dot walks the single side; the band twists.
+  - Improved: E3: a tap sends an ant on two laps along the middle of the band: after one lap it is
+    underneath (the band has one side), after two it is back on top where it started, while the band
+    twists a little and untwists (about 5 s).
   - Sound: Looping tone.
 - **Klein bottle** (`klein-bottle`). Now: tap: Send water through. Plan: keep.
   - Owner: Not sure it has an effect. Maybe water flows through it; it already kind of does, make
@@ -1205,26 +1207,42 @@ Proposals below are suggestions; the owner may change them.
   - Improved: C2: a new tap action sends a surge of rippling water along the tube and round, and the
     glass glows (about 4 s).
   - Sound: Glug and flow.
-- **Menger sponge** (`menger-sponge`). Now: tap: Close and carve the holes. Plan: new effect (E3).
+- **Menger sponge** (`menger-sponge`). Now: tap: Close and carve the holes. Plan: keep.
   - Owner: No idea for an effect; looks good. The owner calls one of these a favourite and a likely
     homepage embed (the transcript may refer to the next toy, the hypercube).
   - Effect: Zooms into itself: the holes open to show the next level down.
+  - Improved: E3: a tap plugs every hole with a solid cube, smallest first, closing the sponge into
+    a plain cube; then it is carved again level by level: the six big cubes slide out of the faces,
+    then the next size down, then the smallest, each fading as it leaves (about 4 s). (Built instead
+    of a zoom, which blurred.)
   - Sound: Descending recursive blips.
-- **Hypercube** (`hypercube`). Now: tap: Turn inside out. Plan: new effect (E3).
+- **Hypercube** (`hypercube`). Now: tap: Turn inside out. Plan: keep.
   - Owner: Possibly the favourite and homepage embed (see the Menger sponge).
   - Effect: Rotates through the fourth dimension, turning inside out.
+  - Improved: E3: a tap turns the tesseract once round through the fourth dimension: the pink inner
+    cube swells out to become the outer one while the blue one folds inside, holds a moment, then
+    turns on back to where it started (about 5 s); at rest it rocks gently in 4D.
   - Sound: Phasing synth sweep.
-- **Torus knot** (`torus-knot`). Now: tap: Pull and let go. Plan: new effect (E3).
+- **Torus knot** (`torus-knot`). Now: tap: Pull and let go. Plan: keep.
   - Owner: Contort a little; looks cool.
   - Effect: Contorts through different knot shapes.
+  - Improved: E3: a tap pulls the knot loose (its lobes stretch out and swirl) and lets go: it
+    springs back past rest into a tight knot and wobbles to a stop like a plucked spring (about 4
+    s).
   - Sound: Stretchy twang.
-- **Gyroid** (`gyroid`). Now: tap: Breathe in and out. Plan: new effect (E3).
+- **Gyroid** (`gyroid`). Now: tap: Breathe in and out. Plan: keep.
   - Owner: Really neat; needs an effect.
   - Effect: The surface flows and shifts phase like a breathing sponge.
+  - Improved: E3: a tap makes the sponge breathe: the surface slides to a shifted level of its own
+    equation, so the orange channels swell as the blue ones narrow, then the other way, and it
+    settles (about 3.8 s).
   - Sound: Watery hum.
-- **Mandelbulb** (`mandelbulb`). Now: tap: Wring it. Plan: new effect (E3).
+- **Mandelbulb** (`mandelbulb`). Now: tap: Wring it. Plan: keep.
   - Owner: Like the Mandeltorus: twisting.
   - Effect: Morphs through powers (bulb shapes twist and bloom).
+  - Improved: E3: a tap wrings the bulb: the top turns one way and the bottom the other as its bulbs
+    bloom outward, then it springs back past rest and swings to a stop like a torsion spring (about
+    3.8 s). (A twist, as the owner asked, instead of a change of power.)
   - Sound: Deep morphing tone.
 - **Sierpinski tetrahedron** (`sierpinski`). Now: tap: Explode. Plan: keep.
   - Owner: Perfect as is.
@@ -1232,9 +1250,12 @@ Proposals below are suggestions; the owner may change them.
 - **Platonic solids** (`platonic`). Now: tap: Explode. Plan: keep.
   - Owner: Perfect.
   - Sound: Five-note chime.
-- **Seashell spiral** (`seashell-spiral`). Now: hops. Plan: new effect (E3).
+- **Seashell spiral** (`seashell-spiral`). Now: tap: Hear the sea. Plan: keep.
   - Owner: Something to do with hearing the ocean in a seashell.
   - Effect: Glows softly and waves ripple out of the opening.
+  - Improved: E3: a tap lets you hear the sea in the shell: three soft swells of sea-blue light run
+    down the spiral to the mouth, and a ripple rolls out of the opening with each one, widening and
+    fading (about 4.5 s).
   - Sound: Ocean hush.
 
 ## Medieval (9)
