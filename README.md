@@ -108,16 +108,18 @@ Clay works on pack toys too.
   shelf shape now has its own tap effect.
 - **Space, atoms and gems.** Every one has its own tap: the Sun throws off a flare (and churns all
   the time), the planets line up while Mercury crosses the Sun, Earth turns through a night with its
-  city lights, the Moon runs through its phases, Mars raises a dust storm, Jupiter's bands race,
-  Saturn's rings ripple, the asteroid breaks into pieces and pulls back together, a star lives and
-  dies, the pulsar strobes, the black hole swallows a star; an electron jumps to a higher orbital
-  and drops back with a photon, a molecule's bonds shake when heated, a wave runs through a crystal
-  lattice; the diamond flashes rainbow fire, the ruby glows red, a star glides over the sapphire.
+  city lights, a lander sets down on the Moon and an astronaut plants a flag, Mars raises a dust
+  storm, Jupiter's bands race, Saturn's rings ripple, the asteroid breaks into pieces and pulls back
+  together, a star lives and dies, the pulsar strobes, the black hole swallows a star; an electron
+  jumps to a higher orbital and drops back with a photon, a molecule's bonds shake when heated, a
+  wave runs through a crystal lattice; the diamond flashes rainbow fire, the ruby glows red, a star
+  glides over the sapphire.
 - **Your own molecules and proteins.** Type a molecule's name (about sixty, from aspirin to ATP), a
-  formula or a SMILES string, or open a MOL, SDF, XYZ or PDB file, and the molecule toy lays it out
-  in 3D with its bonds. The protein toy shows ubiquitin, insulin, GFP or haemoglobin as a cartoon of
-  helices, strands and loops, or any PDB or mmCIF file you open (from rcsb.org); tap it to pull it
-  apart into its pieces. Everything is read in the browser; nothing is uploaded.
+  formula (H2O, C9H8O4 or CH3COOH) or a SMILES string, or open a MOL, SDF, XYZ or PDB file, and the
+  molecule toy lays it out in 3D with its bonds. The protein toy shows ubiquitin, insulin, GFP or
+  haemoglobin as a cartoon of helices, strands and loops, or any PDB or mmCIF file you open (from
+  rcsb.org); tap it to pull it apart into its pieces. Everything is read in the browser; nothing is
+  uploaded.
 - **Drag to stretch.** Drag the gummy bear (with the Orbit tool, starting on the bear) to stretch
   it; let go and it springs back. A drag that starts beside it still turns the view.
 - Under a system setting for reduced motion, toys stay still until you switch motion on.
