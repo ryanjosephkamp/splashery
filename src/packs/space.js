@@ -818,15 +818,17 @@ const STAR_TYPES = {
 
 // The solar system as an orrery: orbit radius, planet size, angular speed
 // (radians per second) and starting angle.
+// (Shares are small so each planet's splats stay a few pixels wide even in
+// a 256 px thumbnail: the renderer drops splats under about two pixels.)
 const ORRERY = [
-  { id: "mercury", r: 0.35, size: 0.04, w: 0.42, phase: 0.6, share: 0.012, swell: 0 },
-  { id: "venus", r: 0.48, size: 0.06, w: 0.31, phase: 2.5, share: 0.02, swell: 0.08 },
-  { id: "earth", r: 0.62, size: 0.064, w: 0.25, phase: 4.2, share: 0.024, swell: 0.08 },
-  { id: "mars", r: 0.76, size: 0.05, w: 0.2, phase: 5.6, share: 0.016, swell: 0.08 },
-  { id: "jupiter", r: 1.04, size: 0.12, w: 0.11, phase: 0.9, share: 0.06, swell: 0 },
-  { id: "saturn", r: 1.31, size: 0.09, w: 0.08, phase: 3.3, share: 0.045, swell: 0 },
-  { id: "uranus", r: 1.54, size: 0.07, w: 0.058, phase: 5.9, share: 0.028, swell: 0 },
-  { id: "neptune", r: 1.72, size: 0.068, w: 0.046, phase: 2.2, share: 0.028, swell: 0 },
+  { id: "mercury", r: 0.35, size: 0.04, w: 0.42, phase: 0.6, share: 0.006, swell: 0 },
+  { id: "venus", r: 0.48, size: 0.06, w: 0.31, phase: 2.5, share: 0.01, swell: 0.08 },
+  { id: "earth", r: 0.62, size: 0.064, w: 0.25, phase: 4.2, share: 0.013, swell: 0.08 },
+  { id: "mars", r: 0.76, size: 0.05, w: 0.2, phase: 5.6, share: 0.008, swell: 0.08 },
+  { id: "jupiter", r: 1.04, size: 0.12, w: 0.11, phase: 0.9, share: 0.04, swell: 0 },
+  { id: "saturn", r: 1.31, size: 0.09, w: 0.08, phase: 3.3, share: 0.022, swell: 0 },
+  { id: "uranus", r: 1.54, size: 0.07, w: 0.058, phase: 5.9, share: 0.012, swell: 0 },
+  { id: "neptune", r: 1.72, size: 0.068, w: 0.046, phase: 2.2, share: 0.012, swell: 0 },
 ];
 
 // The Sun's prominences (angle round the limb, half span, height, tilt
@@ -1156,7 +1158,10 @@ function buildLanding(k, ground, code) {
   const QL = spotQuat(L);
   const Lw = (x, y, z) => spotAt(L, [x * G, y * G, z * G]);
   const lander = k.part("lander", { pivot: B(L.base) });
-  const fine = { weight: 6, size: 0.42, pattern: false, flat: 0.25 };
+  // (Denser than the Moon, but not much smaller: the renderer drops splats
+  // that come out under a couple of pixels, and on a small screen the whole
+  // lander would vanish.)
+  const fine = { weight: 3, size: 0.9, pattern: false, flat: 0.25 };
   const metal = (hex) => (c) => lit(hex, c.n, 0.6);
   // Gold foil, crinkled.
   const foil = (c) =>
@@ -1311,7 +1316,7 @@ function buildLanding(k, ground, code) {
   strut(F0.base, top, 0.0032, "#dcdee2", pole);
   k.add(k.sphere(0.005), { ...fine, pos: B(top), part: pole, color: metal("#e8e8e8") });
   strut(spotAt(F0, [0, POLE_H - 0.004, 0]), spotAt(F0, [W + 0.006, POLE_H - 0.004, 0]), 0.0024, "#dcdee2", pole); // prettier-ignore
-  const sheet = { share: 0.03 / CLOTH_STRIPS, size: 0.3, flat: 0.1, even: true, pattern: false, kind: "screen", color: "#ffffff" }; // prettier-ignore
+  const sheet = { share: 0.02 / CLOTH_STRIPS, size: 0.6, flat: 0.1, even: true, pattern: false, kind: "screen", color: "#ffffff" }; // prettier-ignore
   for (let i = 0; i < CLOTH_STRIPS; i++) {
     const u0 = i / CLOTH_STRIPS;
     const strip = k.param(
@@ -1351,7 +1356,7 @@ function astronaut(k, s, facing, part, arm, B) {
   const P = (x, y, z) => spotAt(s, [facing * x * H, y * H, facing * z * H]);
   const suit = (c) => lit("#eeede8", c.n, 0.55);
   const put = (shape, at, color, p = part) =>
-    k.add(shape, { weight: 10, size: 0.36, pattern: false, flat: 0.3, part: p, pos: B(P(...at)), quat: q, color }); // prettier-ignore
+    k.add(shape, { weight: 4, size: 0.8, pattern: false, flat: 0.3, part: p, pos: B(P(...at)), quat: q, color }); // prettier-ignore
   for (const x of [-0.1, 0.1]) {
     put(k.box(0.14 * H, 0.08 * H, 0.2 * H), [x, 0.04, 0.02], (c) => lit("#8e9095", c.n, 0.5));
     put(k.cylinder(0.07 * H, 0.36 * H), [x, 0.26, 0], suit);

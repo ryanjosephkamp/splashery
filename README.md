@@ -84,12 +84,13 @@ Clay works on pack toys too.
 
 ## Motion, patterns and sound
 
-- **Move** (Play tab, any toy): still, bounce (with squash and stretch), spin, wobble or float, with
+- **Move** (Toy tab, any toy): still, bounce (with squash and stretch), spin, wobble or float, with
   a speed slider. Tapping a toy with the Orbit tool runs its action, or makes it hop.
 - **Pattern** (Look tab, any toy, captured ones included): stripes, bands, polka dots, checks,
   stars, hearts, zigzag, gradient, rainbow, marble, or a **national flag** (196 public-domain flags
-  from Wikimedia Commons). It wraps around the toy, across its front, or like a globe, keeps as much
-  of the toy's own shading as you like, and leaves details such as flames or coins alone. The status
+  from Wikimedia Commons). It wraps around the toy, across its front, like a globe, or from above
+  over a flat toy (the chess board takes flag colours on its squares and pieces), keeps as much of
+  the toy's own shading as you like, and leaves details such as flames or coins alone. The status
   line says "in the colours of …".
 - **Sound** (the speaker button): every toy has its own tap sound, synthesised from a library of
   about 80 voices (plucked strings, bells, xylophone bars, drums, insect buzz, a quack and other
@@ -137,14 +138,21 @@ and each has one or two sliders.
 ## The panel
 
 The shelf sits at the top of the panel: search it, filter it by category, or press **Surprise me**
-for a random toy. Below the tools, five tabs hold everything else: **Play** (the tool's settings and
-the effects), **Make** (make a toy, or open your own splat file), **Look**, **Share** and **About**.
-On a phone the panel is a bottom sheet. The shelf row and tools always show, with toy names on up to
-two lines. Dragging the handle or the row up opens the shelf into a grid of toys that fills the
-sheet (the chips and search stay on top); picking a toy folds it back to the row. **More** or a tab
-opens the rest. The toy shrinks to fit above the sheet so you can watch your changes. Tap the toy,
-swipe down, press **Done** or Escape to close either one again. The grid can be switched off with
-`SHELF_GRID` in `src/ui.js`; the handle then opens the panel, as before.
+for a random toy. Below the tools, tabs hold everything else: **Toy** (the main tab: the toy's
+action, controls and options, Motion with the **Turntable when idle** switch, and Quick settings
+with flag colours, **Detail** and **Reset everything**), **Tools** (the picked tool's settings,
+which open by themselves when you pick Paint, Magnet, Poke or Clay, and the effects), **Look**,
+**Make**, **Share** and **About** (the ⓘ). **Reset everything** (tap it twice) takes the toy back to
+how it started: no flag colours or pattern, paint, clay, effects, option or look changes, Detail on
+Auto and the view reset. On a wide screen, drag the panel's left edge to make it (and the shelf,
+which gains columns) wider, and the grip under the shelf to show more rows; double-click either grip
+for a big size. The sizes stay in this browser. On a phone the panel is a bottom sheet. The shelf
+row and tools always show, with toy names on up to two lines. Dragging the handle or the row up
+opens the shelf into a grid of toys that fills the sheet (the chips and search stay on top); picking
+a toy folds it back to the row. **More** or a tab opens the rest. The toy shrinks to fit above the
+sheet so you can watch your changes. Tap the toy, swipe down, press **Done** or Escape to close
+either one again. The grid can be switched off with `SHELF_GRID` in `src/ui.js`; the handle then
+opens the panel, as before.
 
 ## Controls
 

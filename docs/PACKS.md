@@ -169,7 +169,7 @@ drive(t, c, out, info) {
 - `{ key: "stoke", label: "Stoke", type: "pulse", ease: 1.5 }`: jumps to 1 and falls back to 0.
 
 **Action**: `action: { key: "open", label: "Open or close" }`. A tap on the toy (and the button in
-the Play tab) toggles a toggle or fires a pulse. Toys without an action hop when tapped.
+the Toy tab) toggles a toggle or fires a pulse. Toys without an action hop when tapped.
 
 A tap also knows where it landed. `action.at(point, c)` gets the tapped point in the recipe's own
 coordinates (never for the Play button) and may return another control to fire, `{ key, pick }` to
@@ -200,6 +200,15 @@ xylophone: { voice: "bar", notes: "C5 D5 E5 F5 G5 A5 B5 C6", step: 0.32, at: 0.3
 A tap that picked item `i` plays only note `i` of the tune. Every toy needs an entry and no two may
 be the same (the unit tests check). Old shared names ("chime", "pop" and so on) still work as specs.
 Check a new sound with `node tools/sound-check.mjs <id> --sheet=out.png`.
+
+**Flag colours**: `patternProjection: "top"` makes a toy lay flag colours on from above (a flat toy:
+the chess board) when a flag is picked, and `patternDetail: 0.85` keeps more of its own light and
+dark under them (light and dark chess pieces stay apart). Splats a colour function returns with
+`keep: true`, or with `pattern: false` on their shape, never take a pattern.
+
+**Games**: a recipe's `game` (the chess set) gets a panel under This toy and a bar under the stage:
+`title()`, `tags()` and `setTags(partial)` for its details, `state()` (`{ played, n, over }`),
+`step(±1)` and `jump("start" | "end")` for the buttons, `load(text)` and `reset()` for PGN.
 
 **Grab**: `grab: { radius: 0.55, max: 0.9 }` (in toy radii) makes a toy stretchy: with the Orbit
 tool, a drag that starts on it pulls the grabbed part (up to `max`) and it springs back when let go.

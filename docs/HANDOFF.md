@@ -13,6 +13,35 @@ ground rules are in [CLAUDE.md](../CLAUDE.md).
   atoms and gems toys (TOY-PLAN.md has each one's `improved` entry), sounds re-timed to them, and
   clips of all 32 on the Effect review page. Check it is merged before starting E3. **Next: Phase
   E3** (below).
+- **E2 review (2026-09-25).** The owner's review is on the Effect review page (verdicts in its
+  database). 24 of 32 were "good"; the fixes are in this PR: the Moon's phases were replaced by a
+  landing (a lunar module lands near the top of the Moon, an astronaut climbs down, plants a chosen
+  flag, unrolls it and waves; a second tap packs up and lifts off; the flag is a `type: "flag"` toy
+  option drawn from its SVG through the screen texture, at the flag's real shape, which
+  `tools/flag-aspects.mjs` now writes into flags.json); the sapphire's star lies on the stone and
+  ends at its edge; the quartz glints point different ways; the solar system's planets are spaced
+  and sized so none touch, at rest or in the row. The atom, orbital, molecule and crystal lattice
+  were "good, but more of them some day" (BACKLOG). The owner's other requests (a resizable, roomier
+  settings panel with a main tab and a reset button, sharper laptop keys, chess playback and flag
+  colours, molecules from formulas or files, a protein toy with PDB upload) are in the stacked PRs
+  `claude/quirky-pasteur-modo55-2` and `-3`.
+- **Settings panel (after the E2 review, PR `-2`).** Tabs: **Toy** (the main tab: action, controls,
+  options, Motion with the turntable ON/OFF switch, Quick settings with flag colours, Detail and
+  **Reset everything**), **Tools** (the picked tool's settings, opened by picking a tool, and the
+  effects), Look, Make, Share and About (an ⓘ icon). Reset everything (`app.resetAll`) makes a fresh
+  scene for the same toy and sets Detail to Auto. On wide screens `.grip-panel` (the panel's left
+  edge) and `.grip-shelf` (under the shelf) set `--panel-w` and `--shelf-h`, kept in localStorage;
+  the shelf grid is `auto-fill` so it gains columns. Rows and groups are roomier.
+- **Chess (PR `-2`).** A game bar under the board shows the title, details and move, with start,
+  back, play/pause, on and end buttons (`game.step`, `game.jump`); pausing keeps the position; a tap
+  on a finished game that is still playing starts it again (`action.at` fires a `restart` pulse).
+  The game's details (PGN tags) can be edited in the panel. Flag colours lie over the board from
+  above (the new `top` projection, `patternProjection` and `patternDetail` in the recipe) and now
+  cover the squares and the pieces.
+- **Tiny splats vanish on small screens.** The renderer drops splats that come out under about two
+  pixels, so a detail built from very fine splats (high `weight` and small `size`) disappears on a
+  phone or in a 360 px clip. Keep `size / sqrt(weight)` near 0.5 or more for anything that must show
+  (the Moon's lander), and check a clip at 300–360 px.
 - **Effects (E2).** Space in `src/packs/space.js`, atoms in `src/packs/atoms.js`, gems in
   `src/packs/gems.js`. Idle motion added where the owner asked: the Sun churns, Saturn's and
   Uranus's rings turn, the aurora's folds race round, the galaxy's arms turn.
@@ -63,7 +92,8 @@ ground rules are in [CLAUDE.md](../CLAUDE.md).
   spec's `pickAt` times a picked note (a xylophone bar sounds as the mallet lands, at 0.12 s).
 - **Locked toys (owner approved, do not change their look or behaviour):** the laptop ("basically
   perfect … please lock that in"). Engine changes must keep it working exactly as now; the laptop
-  smoke test guards it.
+  smoke test guards it. The one change since, at the owner's request after E2: sharper key letters
+  (every font pixel filled by a 3 x 3 grid of dots just above the cap) and digits on the top row.
 - **Phase E1b** (the owner's review of E1, verbatim in `docs/reviews/2026-09-24-e1/review.md`) is in
   three stacked PRs, merged in order: `claude/phase-e1-45lgvf-1` (rules, clip tool, scan and shape
   fixes), `-2` (thrown balls, eight-ball, storybook) and `-3` (chess and laptop). Check that all
