@@ -1288,7 +1288,7 @@ test.describe("Splashery on a phone", () => {
     await swipe(row.x + 120, row.y + row.height / 2, row.y - 160);
     await expect(page.locator("body")).toHaveClass(/shelf-grid/);
     await expect(page.locator("#panel-body")).toBeHidden();
-    await expect(page.locator("#sheet-toggle")).toHaveText("Done");
+    await expect(page.locator("#sheet-toggle")).toHaveText("More");
     const grid = await page.evaluate(() => {
       const el = document.getElementById("shelf");
       const r = el.getBoundingClientRect();
@@ -1332,13 +1332,19 @@ test.describe("Splashery on a phone", () => {
     expect(Math.abs(row2.height - row.height)).toBeLessThan(2);
     await page.tap("#sheet-handle");
     await expect(page.locator("body")).toHaveClass(/shelf-grid/);
-    await page.tap("#sheet-toggle");
+    await page.tap("#sheet-handle");
     await expect(page.locator("body")).not.toHaveClass(/shelf-grid/);
     await expect(page.locator("#panel-body")).toBeHidden();
 
-    // More still opens the panel.
+    // From the grid, More opens the settings in one tap, and Done closes them.
+    await page.tap("#sheet-handle");
+    await expect(page.locator("body")).toHaveClass(/shelf-grid/);
     await page.tap("#sheet-toggle");
     await expect(page.locator("#panel-body")).toBeVisible();
+    await expect(page.locator("body")).not.toHaveClass(/shelf-grid/);
+    await expect(page.locator("#sheet-toggle")).toHaveText("Done");
+    await page.tap("#sheet-toggle");
+    await expect(page.locator("#panel-body")).toBeHidden();
 
     // Long names wrap onto two lines instead of ending in "…".
     const cut = await page.evaluate(
@@ -1349,6 +1355,30 @@ test.describe("Splashery on a phone", () => {
         }).length,
     );
     expect(cut).toBe(0);
+    expect(problems).toEqual([]);
+  });
+
+  test("a panel opened while a toy from the grid is still loading stays open", async ({ page }) => {
+    const problems = watchConsole(page);
+    await loadApp(page);
+    await waitForToy(page, "Cactus");
+    // A slow download, like a scan on a phone.
+    await page.route("**/assets/toys/horse-statue/**", async (route) => {
+      await new Promise((r) => setTimeout(r, 3000));
+      await route.continue();
+    });
+    await page.tap("#sheet-handle");
+    await expect(page.locator("body")).toHaveClass(/shelf-grid/);
+    await page.tap('#shelf .toy-card[data-toy="horse-statue"]');
+    await expect(page.locator("body")).not.toHaveClass(/shelf-grid/);
+    // More, while the horse is still loading.
+    await page.tap("#sheet-toggle");
+    await expect(page.locator("#panel-body")).toBeVisible();
+    await waitForToy(page, "Horse");
+    await page.waitForTimeout(500);
+    await expect(page.locator("#panel-body")).toBeVisible();
+    await page.tap("#tab-look");
+    await expect(page.locator("#tab-look")).toHaveAttribute("aria-selected", "true");
     expect(problems).toEqual([]);
   });
 

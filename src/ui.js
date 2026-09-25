@@ -803,9 +803,9 @@ export function createUI(app) {
   //  - "panel": the tabs open above the dock.
   // The stage shrinks to the space above the panel, so the toy stays in view
   // while you change things. Dragging the handle or the shelf up opens the
-  // grid; More opens the panel. Tapping the toy, swiping the handle down,
-  // swiping down from the top of the grid or the controls, Escape or Done
-  // goes back to the row.
+  // grid; More opens the panel (from the row or the grid). Tapping the toy,
+  // swiping the handle down, swiping down from the top of the grid or the
+  // controls, Escape or Done goes back to the row.
   // Set SHELF_GRID to false to switch the grid off: the handle then opens the
   // panel as before.
   const SHELF_GRID = true;
@@ -825,7 +825,9 @@ export function createUI(app) {
     document.body.classList.toggle("sheet-open", m === "panel");
     document.body.classList.toggle("shelf-grid", m === "grid");
     els.sheetToggle.setAttribute("aria-expanded", String(mode === "panel"));
-    els.sheetToggle.textContent = m === "row" ? "More" : "Done";
+    // From the grid, More goes straight to the settings (one tap); the
+    // handle, a swipe down, a pick or a tap on the toy closes the grid.
+    els.sheetToggle.textContent = m === "panel" ? "Done" : "More";
     refreshDock();
   };
   function setMode(m) {
@@ -836,7 +838,7 @@ export function createUI(app) {
     if (m !== "panel") revealCurrent();
   }
   new ResizeObserver(refreshDock).observe(els.panel);
-  els.sheetToggle.addEventListener("click", () => setMode(mode === "row" ? "panel" : "row"));
+  els.sheetToggle.addEventListener("click", () => setMode(mode === "panel" ? "row" : "panel"));
   narrow.addEventListener("change", applySheet);
 
   // The handle: swipe up for the grid, down for the row, tap to toggle. The
