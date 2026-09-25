@@ -43,17 +43,19 @@ ground rules are in [CLAUDE.md](../CLAUDE.md).
   with rings, branches, charges, isotopes and aromatic kekulisation; implicit hydrogens), `embed.js`
   (a seeded 3D layout: distance geometry then a small force field with bond lengths, angles, planar
   rings and repulsion), `molfile.js` (MOL/SDF V2000, XYZ and PDB small molecules; bonds guessed from
-  distances when a file has none; a table of 66 named molecules) and `protein.js` (PDB and mmCIF
-  chains, HELIX/SHEET records or a simple DSSP-style fallback, and a smooth backbone path). The
-  molecule toy's **Your own** panel takes a name, a formula that names one table molecule, a SMILES
-  string or a file; the result is kept in the hidden `source` option (SMILES as typed, a file packed
-  as `M1;name;atoms;bonds`, up to 24,000 characters), so links keep it. The **protein** toy (Atoms)
-  draws a cartoon (helix coils, strand arrows, loop tubes, ligands as ball and stick) of 1UBQ, 4INS,
-  1EMA or 4HHB (`assets/proteins/`, CC0) or an opened PDB/mmCIF file; a tap pulls its pieces apart
-  and back (GFP's chromophore glows). An opened protein stays in the page (`fileName` option only);
-  a link to it shows ubiquitin. New engine hooks: `recipe.prepare(options)` (async, before the
-  build), `recipe.input` (the panel), `recipe.credits`, option types `text` and `flag`, and `hidden`
-  options (docs/PACKS.md section 5). Tests: `tests/chem.spec.mjs`.
+  distances when a file has none; a table of 66 named molecules), `condensed.js` (formulas written
+  out, such as CH3COOH or (CH3)2CHOH, turned into SMILES) and `protein.js` (PDB and mmCIF chains,
+  HELIX/SHEET records or a simple DSSP-style fallback, and a smooth backbone path). The molecule
+  toy's **Your own** panel takes a name, a formula (written out, or one that fits a table molecule:
+  C6H12O6 shows glucose and says that fructose fits too), a SMILES string or a file; the result is
+  kept in the hidden `source` option (SMILES as typed, a file packed as `M1;name;atoms;bonds`, up to
+  24,000 characters), so links keep it. The **protein** toy (Atoms) draws a cartoon (helix coils,
+  strand arrows, loop tubes, ligands as ball and stick) of 1UBQ, 4INS, 1EMA or 4HHB
+  (`assets/proteins/`, CC0) or an opened PDB/mmCIF file; a tap pulls its pieces apart and back
+  (GFP's chromophore glows). An opened protein stays in the page (`fileName` option only); a link to
+  it shows ubiquitin. New engine hooks: `recipe.prepare(options)` (async, before the build),
+  `recipe.input` (the panel), `recipe.credits`, option types `text` and `flag`, and `hidden` options
+  (docs/PACKS.md section 5). Tests: `tests/chem.spec.mjs`.
 - **Tiny splats vanish on small screens.** The renderer drops splats that come out under about two
   pixels, so a detail built from very fine splats (high `weight` and small `size`) disappears on a
   phone or in a 360 px clip. Keep `size / sqrt(weight)` near 0.5 or more for anything that must show
