@@ -59,6 +59,13 @@ ground rules are in [CLAUDE.md](../CLAUDE.md).
   it shows ubiquitin. New engine hooks: `recipe.prepare(options)` (async, before the build),
   `recipe.input` (the panel), `recipe.credits`, option types `text` and `flag`, and `hidden` options
   (docs/PACKS.md section 5). Tests: `tests/chem.spec.mjs`.
+- **A rare engine warning (2026-09-25).** Once in seven full test runs, the stretchy-toy smoke test
+  caught
+  `GL_INVALID_OPERATION: glDrawElementsInstanced: Mismatch between texture format and sampler type`
+  from ANGLE. Splashery's own shaders use no integer textures, so it comes from the engine's splat
+  draw (likely a draw while one of its integer data textures is being swapped); the test passed in 4
+  re-runs straight after. If it comes back, catch the trace (`test-results/`) before cleaning up,
+  and look at when the engine swaps its order or work-buffer textures.
 - **Tiny splats vanish on small screens.** The renderer drops splats that come out under about two
   pixels, so a detail built from very fine splats (high `weight` and small `size`) disappears on a
   phone or in a 360 px clip. Keep `size / sqrt(weight)` near 0.5 or more for anything that must show
