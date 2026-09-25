@@ -1663,6 +1663,7 @@ test.describe("Splashery on WebGPU", () => {
     await page.click(".toy-card[data-toy='chest']");
     await waitForToy(page, "Treasure chest");
     const closed = await canvas.screenshot({ type: "png" });
+    await page.click("#tab-play");
     await page.click("#toy-action");
     await page.evaluate(() => window.__splashery.app.setPattern({ id: "flag", flag: "br" }));
     await page.waitForTimeout(2000);
