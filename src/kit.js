@@ -693,7 +693,8 @@ export class Kit {
   //   size (splat size multiplier), flat (thickness 0..1), stretch (length
   //   along the shape's tangent), opacity, jitter (colour noise 0..1)
   //   interior (fraction of this shape's splats that fill its inside), core
-  //   part, kind (behaviour name), params ([a, b] or (c) => [a, b])
+  //   part (an index, or (c) => index to split a shape between parts),
+  //   kind (behaviour name), params ([a, b] or (c) => [a, b])
   //   to: (c) => [x, y, z] | null: a morph target in recipe coordinates
   //          (kind "morph"; the splat moves there as its channel goes to 1)
   //   channel: 0..3 or (c) => 0..3: which of out.morph drives a morph,
@@ -799,6 +800,8 @@ export class Kit {
       if (!this.morph) this.morph = new Float32Array(this.buf.capacity * 3);
       const i = this.buf.count; // the index push() gives this splat
       if (to && i < this.buf.capacity) {
+        if (!Number.isFinite(to[0] + to[1] + to[2]))
+          throw new Error("A morph target is not finite.");
         this.morph[i * 3] = to[0] - p[0];
         this.morph[i * 3 + 1] = to[1] - p[1];
         this.morph[i * 3 + 2] = to[2] - p[2];
@@ -844,7 +847,8 @@ export class Kit {
     const skinFn = typeof o.skin === "function" ? o.skin : null;
     const kind = toFn ? KINDS.morph : skinFn ? KINDS.skin : kindOf(o.kind);
     const chanFn = typeof o.channel === "function" ? o.channel : null;
-    const partIdx = o.part ?? 0;
+    const partFn = typeof o.part === "function" ? o.part : null;
+    const partIdx = partFn ? 0 : (o.part ?? 0);
     const flags = o.pattern === false ? 16 : 0;
     const jitter = o.jitter ?? 0.04;
     const opacity = o.opacity ?? 0.95;
@@ -925,7 +929,8 @@ export class Kit {
       const pr = paramsFn ? paramsFn(c) : params;
       const ch = chanFn ? chanFn(c) : (o.channel ?? 0);
       const [a, b] = this.animParams(kind, p, pr, toFn?.(c), ch, skinFn?.(c));
-      buf.push(p, scl, q, color, [partIdx + splatFlags, kind, a, b]);
+      const part = partFn ? partFn(c) : partIdx;
+      buf.push(p, scl, q, color, [part + splatFlags, kind, a, b]);
     }
   }
 
@@ -983,9 +988,10 @@ export class Kit {
     };
     for (let i = 0; i < buf.count; i++) see(buf.pos[i * 3], buf.pos[i * 3 + 1], buf.pos[i * 3 + 2]);
     for (const r of this.reaches) see(r[0], r[1], r[2]);
-    // Morph targets count too, so a morphed toy stays in its frame.
+    // Morph targets count too, so a morphed toy stays in its frame (unless
+    // the recipe sets k.fitMorphs = false and frames it with k.reach).
     const targets = [];
-    if (this.morph)
+    if (this.morph && this.fitMorphs !== false)
       for (let i = 0; i < buf.count; i++) {
         if (buf.anim[i * 4 + 1] !== KINDS.morph) continue;
         const m = this.morph;

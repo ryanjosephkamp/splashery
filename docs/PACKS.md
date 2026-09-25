@@ -89,7 +89,7 @@ k.add(shape, {
   even: true,       // place surface splats evenly (spheres, boxes, cylinders, cones, lathes, param)
   interior: 0.12,   // share of this shape's splats that fill its inside (for Slice)
   core: "#hex" | (c) => colour,   // colour of the inside
-  part: index,      // from k.part(...)
+  part: index,      // from k.part(...), or (c) => index to split a shape between parts
   kind: "flame", params: [a, b] | (c) => [a, b],  // a behaviour (section 6)
   pattern: false,   // keep this shape's own colours under flags and patterns
 });
