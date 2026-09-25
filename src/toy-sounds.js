@@ -235,10 +235,15 @@ export const TOY_SOUNDS = {
     { voice: "ding", at: 1.6, f: "E6", decay: 1.2, vol: 0.4 },
   ],
   // A hollow chime at full moon, a lower one at new moon (2.8 s).
-  moon: [
-    { voice: "hollow", f: "A5", decay: 3 },
-    { voice: "hollow", at: 2.8, f: "E5", decay: 3 },
-  ],
+  // The descent engine's rumble and hiss (the touchdown thud, the flag's
+  // clink and the lift-off roar are cues from the drive).
+  moon: {
+    on: [
+      { voice: "rumble", f: 55, rate: 3, decay: 1.7, vol: 0.8 },
+      { voice: "hiss", f: 2600, decay: 1.5, vol: 0.25 },
+    ],
+    off: { voice: "breath", f: 700, to: 0.8, decay: 0.6, vol: 0.5 },
+  },
   mars: [
     { voice: "hiss", f: 2200, decay: 2.4 },
     { voice: "wind", at: 0.3, f: 700, rate: 1.4, decay: 2, vol: 0.6 },

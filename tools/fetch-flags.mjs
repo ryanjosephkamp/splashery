@@ -12,6 +12,7 @@
 
 import fs from "node:fs";
 import path from "node:path";
+import { svgAspect } from "./flag-aspects.mjs";
 
 const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
 const outDir = path.join(root, "assets/flags");
@@ -342,6 +343,7 @@ for (let i = 0; i < want.length; i += 40) {
       license: /cc0/i.test(lic + licCode) ? "CC0" : "Public domain",
       author: stripTags(meta.Artist?.value).slice(0, 160) || "Wikimedia Commons contributors",
       bytes: bytes.length,
+      aspect: svgAspect(bytes.toString("utf8")),
     });
     console.log(`${code}: ${title} (${lic}, ${bytes.length} bytes)`);
   }

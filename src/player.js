@@ -1118,6 +1118,7 @@ export function resolveOptions(recipe, given = {}) {
     if (o.type === "color") out[o.key] = /^#[0-9a-f]{6}$/i.test(v) ? v.toLowerCase() : o.default;
     else if (o.type === "select") out[o.key] = o.choices.some((c) => c.id === v) ? v : o.default;
     else if (o.type === "switch") out[o.key] = typeof v === "boolean" ? v : !!o.default;
+    else if (o.type === "flag") out[o.key] = /^[a-z]{2}$/.test(v) ? v : o.default;
     else {
       const n = Number(v);
       out[o.key] =

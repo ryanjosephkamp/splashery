@@ -538,11 +538,12 @@ Proposals below are suggestions; the owner may change them.
 - **Solar system** (`solar-system`). Now: tap: Line up the planets. Plan: keep.
   - Owner: Really cool. Maybe the planets line up for an eclipse.
   - Effect: Planets swing into a line and one eclipses the Sun, then orbits resume.
-  - Improved: E2: every planet swings forward round its orbit into one straight row beside the Sun,
-    swelling a little so they read; the system tips until we look along its plane, Mercury swings on
-    in front of the Sun as a dark dot (a transit) and a pearly eclipse corona flares; then it tips
-    back and the orbits carry on from where they are (7 s). Mercury is lit from the Sun and turns as
-    it orbits.
+  - Improved: E2: every planet swings forward round its orbit into one straight row beside the Sun;
+    the system tips until we look along its plane, Mercury swings on in front of the Sun as a dark
+    dot (a transit) and a pearly eclipse corona flares; then it tips back and the planets swing on
+    round their orbits to where they would have been, spread out again (7 s). The orbits are spaced,
+    and the planets sized, so that no two planets touch, at rest or in the row. Mercury is lit from
+    the Sun and turns as it orbits.
   - Sound: Rising cosmic chord.
 - **Mercury** (`mercury`). Now: tap: Spin in the sunlight. Plan: keep.
   - Effect: Quick orbit-like spin and heat shimmer on the day side.
@@ -561,11 +562,15 @@ Proposals below are suggestions; the owner may change them.
     right half, the Earth turns once, city lights come on as the land turns into the dark and go out
     at dawn, then the night lifts (6.4 s). The clouds are painted on the globe now.
   - Sound: Soft ocean-and-wind swell.
-- **Moon** (`moon`). Now: tap: Run through its phases. Plan: keep.
-  - Effect: Cycles through phases, full to new and back.
-  - Improved: E2: a tap runs a month: the shadow creeps in from the right to a new moon (faint
-    earthshine), then the light comes back from the right to full (5.6 s).
-  - Sound: Hollow chime.
+- **Moon** (`moon`). Now: tap: Land or leave. Plan: keep.
+  - Effect: A lunar module lands; an astronaut plants a flag.
+  - Improved: E2 (redone after review): a tap lands a lunar module near the top of the Moon (it
+    comes down slowing, leaning back, and throws a sheet of dust straight out); an astronaut climbs
+    down the ladder, takes the rolled flag off the leg, bounds over in low-gravity hops, plants it,
+    unrolls it along its crossbar (the flag is a toy option: any country) and waves. A second tap
+    packs up: the flag is rolled and stowed, the astronaut climbs back in and the lander lifts off
+    (10 s each way).
+  - Sound: Engine rumble, touchdown thud, lift-off roar.
 - **Mars** (`mars`). Now: tap: Raise a dust storm. Plan: keep.
   - Effect: A dust storm sweeps across it.
   - Improved: E2: a tap raises a dust storm: billowing ochre dust sweeps across from the left with a
@@ -808,13 +813,15 @@ Proposals below are suggestions; the owner may change them.
   - Sound: Stone crack and a chime.
 - **Sapphire** (`sapphire`). Now: tap: Catch the star. Plan: keep.
   - Effect: A star shimmer (asterism) glides across it.
-  - Improved: E2: a tap makes a six-rayed star (asterism) appear on one side of the stone, glide
-    across its top, turning a little, and fade (3.6 s).
+  - Improved: E2: a tap catches a six-rayed star (asterism): its rays spread out over the stone from
+    a bright centre, lying on the stone and ending at its edge; it glides across the top with its
+    rays keeping their directions, and the rays draw back in at the far side (3.6 s).
   - Sound: Cool bell.
 - **Quartz cluster** (`quartz-cluster`). Now: tap: Light the points. Plan: keep.
   - Effect: Points light up one by one.
   - Improved: E2: a tap lights the ten points one by one from left to right, each glowing from
-    within with a star at its tip, with a rising chime for each (4.4 s).
+    within with a glint at its tip (a long and a short spike, each point's turned its own way), with
+    a rising chime for each (4.4 s).
   - Sound: Tinkling chimes.
 - **Opal** (`opal`). Now: tap: Tilt it in the light. Plan: keep.
   - Effect: Colour play: flashes of colour roll across it.

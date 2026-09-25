@@ -385,12 +385,14 @@ const E2 = {
 };
 
 test("every E2 toy has its own tap: a pulse control that drive() answers", async () => {
+  // The Moon lands and stays until a second tap (a toggle).
+  const TOGGLES = ["moon"];
   for (const [pack, ids] of Object.entries(E2)) {
     const { RECIPES } = await import(`../src/packs/${pack}.js`);
     for (const id of ids.split(" ")) {
       const r = RECIPES[id];
       const ctl = r.controls?.find((c) => c.key === r.action?.key);
-      expect(ctl?.type, id).toBe("pulse");
+      expect(ctl?.type, id).toBe(TOGGLES.includes(id) ? "toggle" : "pulse");
       // Mid-effect and at rest, drive() gives finite numbers.
       for (const v of [0.5, 0]) {
         const out = { parts: {}, glow: [1, 1, 1, 0], amount: 1, grow: 1, cues: [], fx: {} };
@@ -453,4 +455,32 @@ test("a heated molecule moves each atom on its own, along its bonds", async () =
   const calm = { parts: {} };
   RECIPES.molecule.drive(0.37, { heat: 0 }, calm, { data });
   expect(Math.max(...calm.tokens.map((t) => Math.hypot(...t.offset)))).toBeLessThan(moves[1]);
+});
+
+test("the Moon landing is hidden at rest, lands, and leaves nothing behind", async () => {
+  const { RECIPES } = await import("../src/packs/space.js");
+  const moon = RECIPES.moon;
+  const drive = (land, c) => {
+    const out = { parts: {}, cues: [] };
+    moon.drive(0, Object.assign(c, { land }), out, { time: 0, data: { ground: () => 1 } });
+    return out;
+  };
+  const shown = (out) =>
+    Object.entries(out.parts)
+      .filter(([, p]) => p.visible > 0)
+      .map(([n]) => n);
+  expect(shown(drive(0, {}))).toEqual([]);
+  // Landed: the lander, the astronaut and the unrolled flag show.
+  const c = {};
+  for (let v = 0; v <= 1.0001; v += 0.01) drive(Math.min(1, v), c);
+  const landed = shown(drive(1, c));
+  for (const name of ["lander", "astro", "pole", "cloth0", "cloth5"])
+    expect(landed).toContain(name);
+  expect(landed).not.toContain("climber");
+  expect(landed).not.toContain("roll");
+  // Leaving runs to empty again, with the lift-off roar on the way.
+  let cues = 0;
+  for (let v = 1; v >= -0.0001; v -= 0.01) cues += drive(Math.max(0, v), c).cues.length;
+  expect(cues).toBeGreaterThan(0);
+  expect(shown(drive(0, c))).toEqual([]);
 });

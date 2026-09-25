@@ -819,14 +819,14 @@ const STAR_TYPES = {
 // The solar system as an orrery: orbit radius, planet size, angular speed
 // (radians per second) and starting angle.
 const ORRERY = [
-  { id: "mercury", r: 0.36, size: 0.04, w: 0.42, phase: 0.6, share: 0.012 },
-  { id: "venus", r: 0.48, size: 0.062, w: 0.31, phase: 2.5, share: 0.02 },
-  { id: "earth", r: 0.61, size: 0.065, w: 0.25, phase: 4.2, share: 0.024 },
-  { id: "mars", r: 0.73, size: 0.05, w: 0.2, phase: 5.6, share: 0.016 },
-  { id: "jupiter", r: 1.0, size: 0.145, w: 0.11, phase: 0.9, share: 0.06 },
-  { id: "saturn", r: 1.25, size: 0.12, w: 0.08, phase: 3.3, share: 0.045 },
-  { id: "uranus", r: 1.45, size: 0.085, w: 0.058, phase: 5.9, share: 0.028 },
-  { id: "neptune", r: 1.61, size: 0.082, w: 0.046, phase: 2.2, share: 0.028 },
+  { id: "mercury", r: 0.35, size: 0.04, w: 0.42, phase: 0.6, share: 0.012, swell: 0 },
+  { id: "venus", r: 0.48, size: 0.06, w: 0.31, phase: 2.5, share: 0.02, swell: 0.08 },
+  { id: "earth", r: 0.62, size: 0.064, w: 0.25, phase: 4.2, share: 0.024, swell: 0.08 },
+  { id: "mars", r: 0.76, size: 0.05, w: 0.2, phase: 5.6, share: 0.016, swell: 0.08 },
+  { id: "jupiter", r: 1.04, size: 0.12, w: 0.11, phase: 0.9, share: 0.06, swell: 0 },
+  { id: "saturn", r: 1.31, size: 0.09, w: 0.08, phase: 3.3, share: 0.045, swell: 0 },
+  { id: "uranus", r: 1.54, size: 0.07, w: 0.058, phase: 5.9, share: 0.028, swell: 0 },
+  { id: "neptune", r: 1.72, size: 0.068, w: 0.046, phase: 2.2, share: 0.028, swell: 0 },
 ];
 
 // The Sun's prominences (angle round the limb, half span, height, tilt
@@ -844,6 +844,532 @@ const SUN_FLARE = (() => {
   const mid = limbDir(1.95, cam, 0.1);
   return { mid, along: unit(cross(mid, cam)), span: 0.2, h: 0.34 };
 })();
+
+// ---- The Moon landing ----------------------------------------------------------------
+
+// The landing site: near the top of the face we see, tipped towards us, so
+// the lander, the astronaut and the flag stand up against the sky. R runs
+// to the viewer's right, U up from the ground and F towards the viewer.
+// Everything in the scene is built lower down inside the Moon (by `sink`,
+// straight down the screen, so every splat keeps its depth and draws in
+// the right order) and shown moved up into place: built in place, the
+// lander would stand out of the Moon and the Moon would be framed smaller.
+const LANDING = (() => {
+  const f = camFrame();
+  const U = unit(add(mul(f.up, 0.93), mul(f.c, 0.36)));
+  const R = f.right;
+  return { U, R, F: unit(cross(R, U)), sink: mul(f.up, -0.43) };
+})();
+// Where things stand, as [along R, along F] from the site (toy units: the
+// Moon's radius is 1), and how big they are.
+const LANDER_AT = [-0.08, 0];
+const LANDER_G = 1.25; // the lander's scale: it stands 0.31 tall
+const PAD_OUT = 0.22; // the footpads, out from the lander's centre
+const PAD_TOP = 0.014 * LANDER_G; // the top of a footpad
+const TAKE_AT = [0.1, 0.13]; // where the astronaut takes the flag off the leg
+const PLANT_AT = [0.245, 0.07]; // where the astronaut stands to plant it
+const FLAG_AT = [0.2, 0.05];
+const ASTRO_AT = [0.145, 0.12]; // where the astronaut stands at the end, left of the pole
+const ASTRO_H = 0.11;
+const POLE_H = 0.2;
+const CLOTH_H = 0.075;
+// The cloth is built in strips (parts), shown one by one as it unrolls.
+const CLOTH_STRIPS = 6;
+// The landing and the leaving each take this long (the control's ease).
+const MOON_SECS = 10;
+// The flag the astronaut plants (a toy option) and its picture.
+const MOON_FLAG = { code: "us", img: null };
+// Each flag's shape (width / height), so the flag is built at its real
+// proportions before its picture loads. Read once, when the pack loads.
+const FLAG_ASPECTS = await (async () => {
+  try {
+    const r = await fetch(new URL("../../assets/flags/flags.json", import.meta.url));
+    const j = await r.json();
+    return Object.fromEntries(j.flags.map((f) => [f.code, f.aspect || 1.5]));
+  } catch {
+    return {};
+  }
+})();
+
+// A frame on the Moon's surface at [x along R, z along F] from the site:
+// its ground point, up (n), right (r) and forward (f), and the rotation
+// that takes the site's frame there. `ground(d)` is the Moon's radius.
+function moonSpot(ground, [x, z]) {
+  const { U, R, F } = LANDING;
+  const n = unit(add(add(U, mul(R, x)), mul(F, z)));
+  const q = quatFromTo(U, n);
+  return { base: mul(n, ground(n)), n, r: quatRotate(q, R), f: quatRotate(q, F), q };
+}
+// A point in a spot's frame: x to the right, y up, z towards the viewer.
+const spotAt = (s, [x, y, z]) => add(s.base, add(add(mul(s.r, x), mul(s.n, y)), mul(s.f, z)));
+// The rotation that turns a shape's own axes (x, y, z) to a spot's (r, n, f).
+function spotQuat(s) {
+  const { U, R } = LANDING;
+  const q1 = quatFromTo([0, 1, 0], U);
+  const x1 = quatRotate(q1, [1, 0, 0]);
+  const phi = Math.atan2(dot(cross(x1, R), U), dot(x1, R));
+  return quatMul(s.q, quatMul(quatAxisAngle(U, phi), q1));
+}
+// Rigid moves of the scene as shown, p -> Q p + T.
+const MOVE_ID = { Q: [0, 0, 0, 1], T: [0, 0, 0] };
+const moveBy = (v) => ({ Q: [0, 0, 0, 1], T: v });
+const turnAbout = (c, q) => ({ Q: q, T: sub(c, quatRotate(q, c)) });
+const thenMove = (a, b) => ({ Q: quatMul(a.Q, b.Q), T: add(quatRotate(a.Q, b.T), a.T) });
+const applyMove = (m, p) => add(quatRotate(m.Q, p), m.T);
+// Sets a part to a move of the scene as shown. Its splats are built `sink`
+// lower and `pivot` is the part's pivot as built.
+function moonPart(out, name, pivot, m, visible = 1) {
+  // A built splat p + sink must end up at Q p + T.
+  const Tb = sub(m.T, quatRotate(m.Q, LANDING.sink));
+  out.parts[name] = { quat: m.Q, offset: add(sub(Tb, pivot), quatRotate(m.Q, pivot)), visible };
+}
+// A hop: height at u (0..1) along a path of n low-gravity bounds.
+const hops = (u, n, h) => h * Math.abs(Math.sin(Math.PI * n * clamp01(u)));
+const lerp2 = (a, b, t) => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t];
+const lerp3 = (a, b, t) => add(a, mul(sub(b, a), t));
+
+// The picture on the flag: the chosen flag's image, drawn to fill the cloth
+// (which is built at the flag's own shape). Until it loads the cloth is
+// plain white.
+const MOON_SCREEN = {
+  width: 300,
+  height: 200,
+  reset() {},
+  version() {
+    const f = MOON_FLAG;
+    if (typeof Image !== "undefined" && f.img?.code !== f.code) {
+      const img = new Image();
+      img.code = f.code;
+      img.decoding = "async";
+      img.src = new URL(`../../assets/flags/${f.code}.svg`, import.meta.url).href;
+      f.img = img;
+    }
+    return `${f.code}:${f.img?.complete && f.img.naturalWidth ? 1 : 0}`;
+  },
+  draw(g) {
+    const { width: w, height: h } = g.canvas;
+    const img = MOON_FLAG.img;
+    g.fillStyle = "#f2f2ee";
+    g.fillRect(0, 0, w, h);
+    if (img?.complete && img.naturalWidth) {
+      g.fillStyle = "#1c1c1e";
+      g.fillRect(0, 0, w, h);
+      g.drawImage(img, 0, 0, w, h);
+    }
+  },
+};
+
+// The landing, s seconds in: the lander comes down slowing (from the left,
+// leaning back against its motion), stirs up a sheet of dust that flies
+// straight out (no air to hold it up) and sets down; an astronaut climbs
+// down the ladder, takes the flag off the leg, bounds over in low-gravity
+// hops, plants it, unrolls it along its crossbar (it swings a little and
+// keeps swinging a while: no air to stop it), stands beside it and waves.
+function landingPose(s) {
+  const PAD = [LANDER_AT[0], LANDER_AT[1] + PAD_OUT];
+  const d = (1 - band(s, 0, 3.4)) ** 2;
+  const on = s > 0 ? 1 : 0;
+  const walk = [
+    [5.6, 6.0, PAD, TAKE_AT, 1],
+    [6.15, 7.3, TAKE_AT, PLANT_AT, 3],
+    [8.4, 8.85, PLANT_AT, ASTRO_AT, 1],
+  ];
+  const wave = ease(band(s, 8.95, 9.15)) * (1 - ease(band(s, 9.75, 9.98)));
+  const swing = s > 8.6 ? 0.1 * Math.exp(-(s - 8.6) * 2.2) * Math.sin((s - 8.6) * 10) : 0;
+  return {
+    lander: {
+      h: 1.25 * d - 0.006 * bump(s, 3.4, 3.48, 3.55, 3.9),
+      x: -0.32 * d,
+      tilt: 0.45 * d,
+      visible: on,
+    },
+    plume: on && s < 3.45 ? 1 : 0,
+    dust: { t: band(s, 3.1, 4.3), visible: bump(s, 3.1, 3.3, 3.8, 4.3) },
+    climb: { t: ease(band(s, 4.2, 5.4)), visible: s < 5.5 ? smoothstep(4.05, 4.25, s) : 0 },
+    astro: { ...walkAt(s, PAD, walk), visible: s >= 5.5 ? 1 : 0 },
+    flag: flagAt(s, [
+      [5.85, 6.1, "stowed", "hand"],
+      [7.35, 7.7, "hand", "above"],
+      [7.7, 7.9, "above", "planted"],
+    ]),
+    unroll: ease(band(s, 7.9, 8.6)),
+    swing,
+    arm: wave * (2.5 + 0.35 * Math.sin(s * 11)),
+  };
+}
+
+// The leaving, s seconds in: the astronaut bounds back to the flag, folds
+// it back up, pulls it up, carries it to the lander and stows it on the leg, climbs
+// the ladder and goes in; the engine fires, the dust flies and the lander
+// lifts off, faster and faster, and is gone.
+function leavingPose(s) {
+  const PAD = [LANDER_AT[0], LANDER_AT[1] + PAD_OUT];
+  const u = band(s, 5.8, 10);
+  const walk = [
+    [0, 0.8, ASTRO_AT, PLANT_AT, 1],
+    [1.95, 3.3, PLANT_AT, TAKE_AT, 3],
+    [3.75, 4.05, TAKE_AT, PAD, 1],
+  ];
+  return {
+    lander: { h: 1.9 * u * u, x: 0, tilt: 0, visible: 1 },
+    plume: s > 5.6 ? 1 : 0,
+    dust: { t: band(s, 5.5, 6.8), visible: bump(s, 5.5, 5.7, 6.2, 6.8) },
+    climb: {
+      t: 1 - ease(band(s, 4.1, 5.2)),
+      visible: s >= 4.05 ? 1 - smoothstep(5.2, 5.4, s) : 0,
+    },
+    astro: { ...walkAt(s, ASTRO_AT, walk), visible: s < 4.05 ? 1 : 0 },
+    flag: flagAt(s, [
+      [1.4, 1.65, "planted", "above"],
+      [1.65, 1.95, "above", "hand"],
+      [3.3, 3.7, "hand", "stowed"],
+    ]),
+    unroll: 1 - ease(band(s, 0.9, 1.4)),
+    swing: 0,
+    arm: 0,
+  };
+}
+
+// Where the astronaut is at s along a list of bounds [s0, s1, from, to,
+// hops]: [x, z] on the ground and how high its feet are.
+function walkAt(s, start, legs) {
+  let xz = start;
+  let y = 0;
+  for (const [s0, s1, from, to, n] of legs) {
+    if (s < s0) break;
+    const e = band(s, s0, s1);
+    xz = lerp2(from, to, ease(e));
+    y = s < s1 ? hops(e, n, 0.022) : 0;
+  }
+  // On the lander's front footpad it stands on the pad.
+  const PAD = [LANDER_AT[0], LANDER_AT[1] + PAD_OUT];
+  const near = 1 - smoothstep(0.02, 0.06, Math.hypot(xz[0] - PAD[0], xz[1] - PAD[1]));
+  return { xz, y: y + PAD_TOP * near };
+}
+
+// The flag's place at s: [s0, s1, from, to] moves between named places.
+function flagAt(s, moves) {
+  let place = { from: moves[0][2], to: moves[0][2], t: 0 };
+  for (const [s0, s1, from, to] of moves) {
+    if (s < s0) break;
+    place = { from, to, t: ease(band(s, s0, s1)) };
+  }
+  return place;
+}
+
+// Sets every part of the landing scene for a pose. `ground(d)` is the
+// Moon's radius; the pivots are the ones the build used.
+function moonScene(out, ground, pose) {
+  const G = LANDER_G;
+  const H = ASTRO_H;
+  const { U, R, sink } = LANDING;
+  const B = (p) => add(p, sink);
+  const L = moonSpot(ground, LANDER_AT);
+  const on = pose.lander.visible;
+  const lander = thenMove(
+    moveBy(add(mul(U, pose.lander.h), mul(R, pose.lander.x))),
+    turnAbout(L.base, quatAxisAngle(L.f, pose.lander.tilt)),
+  );
+  moonPart(out, "lander", B(L.base), lander, on);
+  moonPart(out, "plume", B(L.base), lander, on * pose.plume);
+  out.parts.dust = {
+    scale: 0.5 + 1.8 * pose.dust.t,
+    offset: mul(sink, -1),
+    visible: on * pose.dust.visible,
+  };
+  // The astronaut, built where it stands at the end (facing us), and a
+  // copy built on the ladder's foot (facing the ladder) for the climb.
+  const A0 = moonSpot(ground, ASTRO_AT);
+  const here = moonSpot(ground, pose.astro.xz);
+  const feet = spotAt(here, [0, pose.astro.y, 0]);
+  const tilt = quatFromTo(A0.n, here.n);
+  const astro = { Q: tilt, T: sub(feet, quatRotate(tilt, A0.base)) };
+  moonPart(out, "astro", B(A0.base), astro, on * pose.astro.visible);
+  const shoulder = spotAt(A0, [-0.26 * H, 0.73 * H, 0]);
+  const arm = thenMove(astro, turnAbout(shoulder, quatAxisAngle(A0.f, -pose.arm)));
+  moonPart(out, "arm", B(shoulder), arm, on * pose.astro.visible);
+  const [porch, rungTop, foot] = ladderPath(ground);
+  const t = pose.climb.t;
+  let at = t < 0.15 ? lerp3(porch, rungTop, t / 0.15) : lerp3(rungTop, foot, (t - 0.15) / 0.85);
+  if (t > 0.15 && t < 0.97) at = add(at, mul(L.n, 0.004 * Math.abs(Math.sin(Math.PI * 7 * t))));
+  moonPart(out, "climber", B(foot), moveBy(sub(at, foot)), on * pose.climb.visible);
+  // The flag: stowed on the right leg, in the astronaut's hand, held above
+  // its spot or planted.
+  const F0 = moonSpot(ground, FLAG_AT);
+  const pad = moonSpot(ground, [LANDER_AT[0] + PAD_OUT, LANDER_AT[1]]);
+  const poleDir = (a) => quatRotate(quatAxisAngle(F0.f, a), F0.n);
+  const hand = add(
+    feet,
+    add(mul(here.r, -0.3 * H), add(mul(here.n, 0.36 * H), mul(here.f, 0.14 * H))),
+  );
+  const places = {
+    stowed: {
+      base: applyMove(lander, spotAt(pad, [-0.022, PAD_TOP + 0.004, 0.03])),
+      tilt: 0.42 + pose.lander.tilt,
+    },
+    hand: { base: sub(hand, mul(poleDir(-0.28), 0.05)), tilt: -0.28 },
+    above: { base: add(F0.base, mul(F0.n, 0.035)), tilt: 0 },
+    planted: { base: add(F0.base, mul(F0.n, -0.012)), tilt: 0 },
+  };
+  const a = places[pose.flag.from];
+  const b = places[pose.flag.to];
+  const base = lerp3(a.base, b.base, pose.flag.t);
+  const lean = a.tilt + (b.tilt - a.tilt) * pose.flag.t;
+  const pole = thenMove(moveBy(sub(base, F0.base)), turnAbout(F0.base, quatAxisAngle(F0.f, lean)));
+  moonPart(out, "pole", B(F0.base), pole, on);
+  // The cloth, in strips shown as it unrolls from the pole along the
+  // crossbar, and the roll of cloth, which travels out along the crossbar
+  // and thins as it unrolls.
+  const cloth = thenMove(pole, turnAbout(F0.base, quatAxisAngle(F0.n, pose.swing)));
+  const W = CLOTH_H * flagShape(MOON_FLAG.code);
+  for (let i = 0; i < CLOTH_STRIPS; i++) {
+    const shown = clamp01(pose.unroll * CLOTH_STRIPS - i);
+    moonPart(out, `cloth${i}`, B(F0.base), cloth, on * shown);
+  }
+  const roll = thenMove(cloth, moveBy(mul(F0.r, W * pose.unroll)));
+  moonPart(out, "roll", B(F0.base), roll, on * (pose.unroll < 0.98 ? 1 - 0.55 * pose.unroll : 0));
+}
+// A flag's width / height, kept within what the crossbar can carry.
+const flagShape = (code) => Math.min(2.6, Math.max(0.8, FLAG_ASPECTS[code] || 1.5));
+
+// The climb: from the porch by the hatch, to the top of the ladder on the
+// front leg, down to the footpad (feet just in front of the rungs).
+function ladderPath(ground) {
+  const G = LANDER_G;
+  const L = moonSpot(ground, LANDER_AT);
+  const pad = moonSpot(ground, [LANDER_AT[0], LANDER_AT[1] + PAD_OUT]);
+  return [
+    spotAt(L, [0, 0.142 * G, 0.086 * G]),
+    spotAt(L, [0, 0.128 * G, 0.106 * G]),
+    spotAt(pad, [0, PAD_TOP, 0]),
+  ];
+}
+
+// Builds the landing scene (all hidden until a tap): the lander, its engine
+// glow and dust, the astronaut (twice: at the end and on the ladder) and
+// the flag, all SINK lower than where they are shown.
+function buildLanding(k, ground, code) {
+  const G = LANDER_G;
+  const H = ASTRO_H;
+  const B = (p) => add(p, LANDING.sink);
+  const L = moonSpot(ground, LANDER_AT);
+  const QL = spotQuat(L);
+  const Lw = (x, y, z) => spotAt(L, [x * G, y * G, z * G]);
+  const lander = k.part("lander", { pivot: B(L.base) });
+  const fine = { weight: 6, size: 0.42, pattern: false, flat: 0.25 };
+  const metal = (hex) => (c) => lit(hex, c.n, 0.6);
+  // Gold foil, crinkled.
+  const foil = (c) =>
+    lit(
+      mix(
+        "#80571a",
+        "#f3cf68",
+        smoothstep(-0.3, 0.35, c.noise(c.p[0] * 90, c.p[1] * 90, c.p[2] * 90)),
+      ),
+      c.n,
+      0.6,
+    );
+  const strut = (a, b, r, color, part = lander) =>
+    k.add(k.cylinder(r, len(sub(b, a)), { caps: false }), {
+      ...fine,
+      pos: B(lerp3(a, b, 0.5)),
+      quat: quatFromTo([0, 1, 0], unit(sub(b, a))),
+      part,
+      color: typeof color === "function" ? color : metal(color),
+    });
+  const box = (sx, sy, sz, at, color) =>
+    k.add(k.box(sx * G, sy * G, sz * G), { ...fine, pos: B(Lw(...at)), quat: QL, part: lander, color }); // prettier-ignore
+
+  // The descent stage (black underneath) and its engine bell.
+  box(0.15, 0.065, 0.15, [0, 0.105, 0], (c) => (c.ln[1] < -0.5 ? "#2a2723" : foil(c)));
+  k.add(k.cone(0.026 * G, 0.012 * G, 0.035 * G), {
+    ...fine,
+    pos: B(Lw(0, 0.055, 0)),
+    quat: QL,
+    part: lander,
+    color: metal("#56585d"),
+  });
+  // The ascent stage: grey panels, two slanted windows and the hatch.
+  box(0.105, 0.08, 0.095, [0, 0.1775, 0], (c) => {
+    const x = c.lp[0] / (0.0525 * G);
+    const y = c.lp[1] / (0.04 * G);
+    const ax = Math.abs(x);
+    if (c.ln[2] > 0.5) {
+      if (ax > 0.14 && ax < 0.72 && y > 0.08 && y < 0.78 - 0.8 * (ax - 0.14))
+        return lit(ax + y > 0.9 ? "#3b4a63" : "#121822", c.n, 0.4);
+      if (ax < 0.3 && y < -0.2 && y > -0.9)
+        return lit(ax > 0.24 || y > -0.27 || y < -0.83 ? "#6f7278" : "#aeb1b6", c.n, 0.6);
+    }
+    const seam = Math.abs(((x * 2 + 5) % 1) - 0.5) > 0.47 || Math.abs(((y * 1.5 + 5) % 1) - 0.5) > 0.47; // prettier-ignore
+    return lit(seam ? "#a7aab0" : "#c9ccd1", c.n, 0.6);
+  });
+  // The docking tunnel on top, the antenna mast and its dish.
+  k.add(k.cylinder(0.019 * G, 0.016 * G), {
+    ...fine,
+    pos: B(Lw(0, 0.2255, 0)),
+    quat: QL,
+    part: lander,
+    color: metal("#b7bac0"),
+  });
+  strut(Lw(0.034, 0.215, -0.028), Lw(0.034, 0.25, -0.028), 0.0022 * G, "#d9d9d9");
+  k.add(k.cone(0.023 * G, 0.004 * G, 0.007 * G), {
+    ...fine,
+    pos: B(Lw(0.034, 0.254, -0.028)),
+    quat: quatMul(quatAxisAngle(L.r, 0.55), QL),
+    part: lander,
+    color: metal("#eeeeee"),
+  });
+  // The porch in front of the hatch.
+  box(0.034, 0.004, 0.03, [0, 0.1395, 0.088], metal("#b9bcc1"));
+  // Four legs, each a main and a side strut, standing on round footpads.
+  for (const [dx, dz] of [
+    [1, 0],
+    [0, 1],
+    [-1, 0],
+    [0, -1],
+  ]) {
+    const pad = moonSpot(ground, [LANDER_AT[0] + dx * PAD_OUT, LANDER_AT[1] + dz * PAD_OUT]);
+    const foot = spotAt(pad, [0, PAD_TOP, 0]);
+    const top = Lw(0.075 * dx, 0.128, 0.075 * dz);
+    strut(top, foot, 0.005 * G, foil);
+    strut(Lw(0.075 * dx, 0.078, 0.075 * dz), lerp3(top, foot, 0.62), 0.0035 * G, "#b3b6bb");
+    k.add(k.cylinder(0.027 * G, 0.008 * G), {
+      ...fine,
+      pos: B(spotAt(pad, [0, 0.006 * G, 0])),
+      quat: spotQuat(pad),
+      part: lander,
+      color: foil,
+    });
+  }
+  // The ladder on the front leg.
+  const [, rungTop, foot] = ladderPath(ground);
+  const ladderBottom = add(foot, mul(L.n, 0.02 * G));
+  const side = mul(L.r, 0.012 * G);
+  for (const s of [-1, 1])
+    strut(add(rungTop, mul(side, s)), add(ladderBottom, mul(side, s)), 0.0017 * G, "#d4d6da");
+  for (let i = 1; i <= 6; i++) {
+    const p = lerp3(rungTop, ladderBottom, i / 7);
+    strut(sub(p, side), add(p, side), 0.0014 * G, "#d4d6da");
+  }
+
+  // The engine's glow under the lander as it comes down or lifts off: a
+  // pale, flickering cone (a real one is nearly invisible in vacuum).
+  const exit = Lw(0, 0.036, 0);
+  k.cloud(
+    { share: 0.006, size: 1.4, pattern: false, part: k.part("plume", { pivot: B(L.base) }) },
+    (rand) => {
+      // prettier-ignore
+      const t = Math.pow(rand(), 0.8);
+      const a = rand() * TAU;
+      const r = (0.012 + 0.05 * t) * Math.sqrt(rand());
+      const p = add(add(exit, mul(L.n, -0.15 * t)), add(mul(L.r, r * Math.cos(a)), mul(L.f, r * Math.sin(a)))); // prettier-ignore
+      return {
+        p: B(p),
+        color: mix("#fff5d8", "#ffa04a", t),
+        opacity: 0.32 * (1 - t) + 0.03,
+        kind: "twinkle",
+        params: [0.6, rand() * TAU],
+      };
+    },
+  );
+  // The dust: a thin sheet low over the ground that flies straight out.
+  k.cloud(
+    { share: 0.01, size: 1.1, pattern: false, part: k.part("dust", { pivot: B(L.base) }) },
+    (rand) => {
+      // prettier-ignore
+      const a = rand() * TAU;
+      const r = 0.07 + 0.11 * Math.sqrt(rand());
+      return {
+        p: B(spotAt(L, [r * Math.cos(a), 0.004 + 0.012 * rand() * rand(), r * Math.sin(a)])),
+        n: L.n,
+        flat: 0.6,
+        color: mix("#8c877e", "#b5afa4", rand()),
+        opacity: 0.4,
+      };
+    },
+  );
+
+  // The astronaut: facing us where it stands at the end (its right arm,
+  // on our left, is its own part to wave), and facing the ladder at its
+  // foot for the climb.
+  const astro = k.part("astro", { pivot: B(moonSpot(ground, ASTRO_AT).base) });
+  const A0 = moonSpot(ground, ASTRO_AT);
+  const arm = k.part("arm", { pivot: B(spotAt(A0, [-0.26 * H, 0.73 * H, 0])) });
+  astronaut(k, A0, 1, astro, arm, B);
+  const climber = k.part("climber", { pivot: B(foot) });
+  const onPad = moonSpot(ground, [LANDER_AT[0], LANDER_AT[1] + PAD_OUT]);
+  astronaut(k, { ...onPad, base: foot }, -1, climber, climber, B);
+
+  // The flag: a pole, a crossbar along its top and the cloth hanging from
+  // it (with the wrinkles it keeps from being folded), coloured from the
+  // chosen flag's picture (behaviour "screen").
+  MOON_FLAG.code = code;
+  const W = CLOTH_H * flagShape(code);
+  const F0 = moonSpot(ground, FLAG_AT);
+  const pole = k.part("pole", { pivot: B(F0.base) });
+  const top = spotAt(F0, [0, POLE_H, 0]);
+  strut(F0.base, top, 0.0032, "#dcdee2", pole);
+  k.add(k.sphere(0.005), { ...fine, pos: B(top), part: pole, color: metal("#e8e8e8") });
+  strut(spotAt(F0, [0, POLE_H - 0.004, 0]), spotAt(F0, [W + 0.006, POLE_H - 0.004, 0]), 0.0024, "#dcdee2", pole); // prettier-ignore
+  const sheet = { share: 0.03 / CLOTH_STRIPS, size: 0.3, flat: 0.1, even: true, pattern: false, kind: "screen", color: "#ffffff" }; // prettier-ignore
+  for (let i = 0; i < CLOTH_STRIPS; i++) {
+    const u0 = i / CLOTH_STRIPS;
+    const strip = k.param(
+      (u, v) => {
+        const x = u0 + u / CLOTH_STRIPS;
+        return B(
+          spotAt(F0, [
+            0.006 + x * W,
+            POLE_H - 0.008 - v * CLOTH_H,
+            0.003 + 0.0035 * Math.sin(x * 13 + v * 2) * (0.35 + 0.65 * x),
+          ]),
+        );
+      },
+      { grid: 24, thick: 0.02 },
+    );
+    const part = k.part(`cloth${i}`, { pivot: B(F0.base) });
+    k.add(strip, { ...sheet, part, params: (c) => [u0 + c.u / CLOTH_STRIPS, c.v] });
+  }
+  // The rolled-up cloth: a fat sleeve at the hoist, showing the fly end's
+  // colours.
+  k.add(k.cylinder(0.0065, CLOTH_H, { caps: true }), {
+    ...fine,
+    pos: B(spotAt(F0, [0.006, POLE_H - 0.008 - CLOTH_H / 2, 0])),
+    quat: spotQuat(F0),
+    part: k.part("roll", { pivot: B(F0.base) }),
+    kind: "screen",
+    params: (c) => [0.9, clamp01(0.5 - c.lp[1] / CLOTH_H)],
+  });
+}
+
+// An astronaut in a white suit, gold visor and backpack, standing at spot
+// s facing us (facing 1) or away (-1). `arm` is the part for the arm on
+// our left.
+function astronaut(k, s, facing, part, arm, B) {
+  const H = ASTRO_H;
+  const q = facing > 0 ? spotQuat(s) : quatMul(quatAxisAngle(s.n, Math.PI), spotQuat(s));
+  const P = (x, y, z) => spotAt(s, [facing * x * H, y * H, facing * z * H]);
+  const suit = (c) => lit("#eeede8", c.n, 0.55);
+  const put = (shape, at, color, p = part) =>
+    k.add(shape, { weight: 10, size: 0.36, pattern: false, flat: 0.3, part: p, pos: B(P(...at)), quat: q, color }); // prettier-ignore
+  for (const x of [-0.1, 0.1]) {
+    put(k.box(0.14 * H, 0.08 * H, 0.2 * H), [x, 0.04, 0.02], (c) => lit("#8e9095", c.n, 0.5));
+    put(k.cylinder(0.07 * H, 0.36 * H), [x, 0.26, 0], suit);
+  }
+  put(k.roundedBox(0.42 * H, 0.34 * H, 0.26 * H, 4), [0, 0.6, 0], suit);
+  put(k.box(0.2 * H, 0.1 * H, 0.06 * H), [0, 0.63, 0.15], (c) => lit("#9ea2a8", c.n, 0.5));
+  put(k.roundedBox(0.38 * H, 0.42 * H, 0.16 * H, 6), [0, 0.62, -0.2], suit);
+  put(k.sphere(0.145 * H), [0, 0.88, 0.01], (c) =>
+    c.ln[2] > 0.3 && c.ln[1] > -0.5 && c.ln[1] < 0.72
+      ? lit(c.ln[1] > 0.35 && c.ln[0] < 0 ? "#fff0bc" : "#c3942f", c.n, 0.5)
+      : suit(c),
+  );
+  for (const x of [-1, 1]) {
+    const p = x * facing < 0 ? arm : part;
+    put(k.cylinder(0.06 * H, 0.36 * H), [x * 0.26, 0.55, 0], suit, p);
+    put(k.sphere(0.065 * H), [x * 0.26, 0.36, 0], (c) => lit("#cfd0cc", c.n, 0.5), p);
+  }
+}
 
 // The Earth's tilt, the Sun's direction during its day (off to the left,
 // so the right half is night) and how many wedges its city lights are in.
@@ -1450,30 +1976,41 @@ export const RECIPES = {
   },
 
   moon: {
-    controls: [{ key: "phase", label: "Phases", type: "pulse", ease: 5.6 }],
-    action: { key: "phase", label: "Run through its phases" },
-    // A tap runs a month: from full the shadow creeps in from the right
-    // (waning) to a new moon, lit only faintly by earthshine, then the
-    // light comes back from the right (waxing) to full. Each half is a
-    // dark shell whose splats appear (grow) in the order the terminator
-    // crosses them; the waning shell hands over to the waxing one at new.
-    drive(t, c, out) {
-      const p = progress(c.phase);
-      const on = c.phase > 0 ? 1 : 0;
-      const wane = ease(band(p, 0.02, 0.44));
-      const wax = ease(band(p, 0.56, 0.98));
-      out.grow = on * 1.1 * (p < 0.5 ? wane : 1 - wax);
-      out.parts.waning = { visible: on && p < 0.5 ? 1 : 0 };
-      out.parts.waxing = { visible: on && p >= 0.5 ? 1 : 0 };
+    controls: [{ key: "land", label: "Landing", type: "toggle", default: 0, ease: MOON_SECS }],
+    action: { key: "land", label: "Land or leave" },
+    options: [{ key: "flag", label: "Flag", type: "flag", default: "us" }],
+    screen: MOON_SCREEN,
+    // A tap lands a lunar module near the top of the Moon: an astronaut
+    // climbs down, plants the chosen flag and waves (see landingPose). A
+    // second tap packs up and lifts off (leavingPose). Tapping again part
+    // way runs the same story back.
+    drive(t, c, out, info) {
+      const m = mem(c);
+      if (c.land >= 1) m.leave = true;
+      if (c.land <= 0) m.leave = false;
+      const s = (m.leave ? 1 - c.land : c.land) * MOON_SECS;
+      const was = m.leave === m.wasLeave ? (m.s ?? s) : s;
+      m.s = s;
+      m.wasLeave = m.leave;
+      const crossed = (x) => was < x && s >= x;
+      if (!m.leave && crossed(3.4)) out.cues.push({ voice: "thud", f: 55, decay: 2.4, vol: 1 });
+      if (!m.leave && crossed(7.72)) out.cues.push({ voice: "pock", f: 520, decay: 1.6, vol: 0.6 });
+      if (m.leave && crossed(5.6)) {
+        out.cues.push({ voice: "rumble", f: 60, rate: 4, decay: 1.7, vol: 0.9 });
+        out.cues.push({ voice: "whoosh", at: 0.3, f: 300, to: 2.5, decay: 2 });
+      }
+      const ground = info?.data?.ground || (() => 1);
+      moonScene(out, ground, m.leave ? leavingPose(s) : landingPose(s));
     },
-    build(k) {
+    build(k, o) {
       const craters = craterField(k.rand, { count: 260, min: 0.02, max: 0.2, rays: 2 });
       const noise = k.noise;
       const cam = camDir();
+      const shapeR = tabulate((d) => 1 + 0.01 * noise.fbm(d[0] * 2 + 3, d[1] * 2, d[2] * 2, 3));
       rockyBody(k, {
         craters,
         core: layers(["#c9a06a", "#8a7a6a", "#6a6560"]),
-        shapeR: tabulate((d) => 1 + 0.01 * noise.fbm(d[0] * 2 + 3, d[1] * 2, d[2] * 2, 3)),
+        shapeR,
         albedo: (c, d) => {
           // Maria: broad dark plains, mostly on the side facing the viewer.
           const m =
@@ -1489,30 +2026,8 @@ export const RECIPES = {
         reliefAmount: 0.85,
         litAmount: 0.25,
       });
-      // The two shadow shells (hidden until a tap), over the face the
-      // viewer sees. A point goes dark when the Sun, swinging round from
-      // behind the viewer to behind the Moon, sets for it.
-      const f = camFrame();
-      for (const [name, waxing] of [
-        ["waning", false],
-        ["waxing", true],
-      ]) {
-        const part = k.part(name);
-        k.cloud({ share: 0.08, size: 2.4, pattern: false, part }, (rand, i, n) => {
-          const d = fibCap(i, n, f.c, -0.2);
-          const a = dot(d, f.c);
-          const set = clamp01(Math.atan2(Math.max(0, a), dot(d, f.right)) / Math.PI);
-          return {
-            p: mul(d, 1.035),
-            n: d,
-            flat: 0.2,
-            color: mix("#0c0d11", "#15171d", rand()),
-            opacity: 0.97,
-            kind: "grow",
-            params: [0.92 * (waxing ? 1 - set : set), 0],
-          };
-        });
-      }
+      k.data = { ground: (d) => shapeR(d) * (1 + craters.height(d)) };
+      buildLanding(k, k.data.ground, o.flag);
     },
   },
 
@@ -2411,9 +2926,12 @@ export const RECIPES = {
     // row beside the Sun. The system tips until we look along its plane;
     // Mercury, the fastest, swings on in front of the Sun as a dark dot
     // (a transit) and a pearly eclipse corona flares round the Sun. Then
-    // it tips back and the orbits carry on from where they are. Mercury is
-    // lit from the Sun and turns as it orbits, so its dark side faces us
-    // as it crosses.
+    // it tips back and the planets swing on round their orbits to where
+    // they would have been, spread out again. Mercury is lit from the Sun
+    // and turns as it orbits, so its dark side faces us as it crosses.
+    // The orbits are spaced so that even in the row no two planets touch
+    // (the inner three swell a little there, and Mercury more as it
+    // crosses the Sun, once it has left the row).
     drive(t, c, out) {
       const m = mem(c);
       if (!m.off) m.off = ORRERY.map(() => 0);
@@ -2425,23 +2943,33 @@ export const RECIPES = {
         m.go = m.start.map((th) => (((SS.row - th) % TAU) + TAU) % TAU);
         m.resumed = false;
       }
+      // From here the planets swing on from the row to where they would
+      // have been without the tap (forward, less than a turn each).
       const RESUME = 0.64;
       if (on && m.start && p >= RESUME && !m.resumed) {
         m.resumed = true;
-        m.off = ORRERY.map((P, i) => m.th[i] - P.phase - P.w * t);
+        m.from = m.th.slice();
+        m.rest0 = ORRERY.map((P, i) => rest(i));
+        m.back = m.from.map((th, i) => (((m.rest0[i] - th) % TAU) + TAU) % TAU);
       }
       m.th = ORRERY.map((P, i) => {
-        if (!on || !m.start || p >= RESUME) return rest(i);
+        if (!on || !m.start) return rest(i);
+        if (p >= RESUME) {
+          const e = ease(band(p, 0.68, 0.98));
+          return m.from[i] + e * (m.back[i] + rest(i) - m.rest0[i]);
+        }
         const th = m.start[i] + ease(band(p, 0, 0.3)) * m.go[i];
         return i === 0 ? th + SS.transit * ease(band(p, 0.38, 0.56)) : th;
       });
       const big = on ? ease(band(p, 0.04, 0.26)) * (1 - ease(band(p, 0.7, 0.86))) : 0;
+      const crossing = on ? ease(band(p, 0.4, 0.5)) * (1 - ease(band(p, 0.62, 0.72))) : 0;
       ORRERY.forEach((P, i) => {
         const th = m.th[i];
         const b = P.build;
         const offset = [P.r * (Math.sin(th) - Math.sin(b)), 0, P.r * (Math.cos(th) - Math.cos(b))];
-        // While lined up the planets swell (Mercury most), so they read.
-        const scale = 1 + (i === 0 ? 1.6 : 0.7) * big;
+        // While lined up the small inner planets swell a little so they
+        // read, and Mercury more while it crosses the Sun.
+        const scale = 1 + (i === 0 ? 1.5 * crossing : P.swell * big);
         if (i === 0) spinParts(out, P.id, th - b, { offset, scale });
         else out.parts[P.id] = { offset, scale };
       });
@@ -2493,7 +3021,7 @@ export const RECIPES = {
       k.cloud(
         { share: 0.012, size: 0.35 * S, pattern: false, kind: "orbit", params: [0.05, 1.5] },
         (rand) => {
-          const r = 0.8 + 0.05 * rand();
+          const r = 0.86 + 0.05 * rand();
           const a = rand() * TAU;
           return {
             p: [r * Math.sin(a), gauss(rand) * 0.01, r * Math.cos(a)],
@@ -2545,7 +3073,7 @@ export const RECIPES = {
         globe(k, planet);
         if (P.id === "saturn")
           saturnRings(k, noise, {
-            R: P.size * 0.82,
+            R: P.size * 0.72,
             quat: saturnTilt,
             part,
             pos,
@@ -2571,8 +3099,8 @@ export const RECIPES = {
         };
       });
       for (const x of [-1, 1]) {
-        k.reach([1.7 * x, 0, 0]);
-        k.reach([0, 0, 1.7 * x]);
+        k.reach([1.8 * x, 0, 0]);
+        k.reach([0, 0, 1.8 * x]);
       }
     },
   },

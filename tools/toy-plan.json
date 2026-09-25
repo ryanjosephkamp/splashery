@@ -577,7 +577,7 @@
       "owner": "Really cool. Maybe the planets line up for an eclipse.",
       "effect": "Planets swing into a line and one eclipses the Sun, then orbits resume.",
       "sound": "Rising cosmic chord.",
-      "improved": "E2: every planet swings forward round its orbit into one straight row beside the Sun, swelling a little so they read; the system tips until we look along its plane, Mercury swings on in front of the Sun as a dark dot (a transit) and a pearly eclipse corona flares; then it tips back and the orbits carry on from where they are (7 s). Mercury is lit from the Sun and turns as it orbits."
+      "improved": "E2: every planet swings forward round its orbit into one straight row beside the Sun; the system tips until we look along its plane, Mercury swings on in front of the Sun as a dark dot (a transit) and a pearly eclipse corona flares; then it tips back and the planets swing on round their orbits to where they would have been, spread out again (7 s). The orbits are spaced, and the planets sized, so that no two planets touch, at rest or in the row. Mercury is lit from the Sun and turns as it orbits."
     },
     "mercury": {
       "v": "keep",
@@ -599,9 +599,9 @@
     },
     "moon": {
       "v": "keep",
-      "effect": "Cycles through phases, full to new and back.",
-      "sound": "Hollow chime.",
-      "improved": "E2: a tap runs a month: the shadow creeps in from the right to a new moon (faint earthshine), then the light comes back from the right to full (5.6 s)."
+      "effect": "A lunar module lands; an astronaut plants a flag.",
+      "sound": "Engine rumble, touchdown thud, lift-off roar.",
+      "improved": "E2 (redone after review): a tap lands a lunar module near the top of the Moon (it comes down slowing, leaning back, and throws a sheet of dust straight out); an astronaut climbs down the ladder, takes the rolled flag off the leg, bounds over in low-gravity hops, plants it, unrolls it along its crossbar (the flag is a toy option: any country) and waves. A second tap packs up: the flag is rolled and stowed, the astronaut climbs back in and the lander lifts off (10 s each way)."
     },
     "mars": {
       "v": "keep",
@@ -878,13 +878,13 @@
       "v": "keep",
       "effect": "A star shimmer (asterism) glides across it.",
       "sound": "Cool bell.",
-      "improved": "E2: a tap makes a six-rayed star (asterism) appear on one side of the stone, glide across its top, turning a little, and fade (3.6 s)."
+      "improved": "E2: a tap catches a six-rayed star (asterism): its rays spread out over the stone from a bright centre, lying on the stone and ending at its edge; it glides across the top with its rays keeping their directions, and the rays draw back in at the far side (3.6 s)."
     },
     "quartz-cluster": {
       "v": "keep",
       "effect": "Points light up one by one.",
       "sound": "Tinkling chimes.",
-      "improved": "E2: a tap lights the ten points one by one from left to right, each glowing from within with a star at its tip, with a rising chime for each (4.4 s)."
+      "improved": "E2: a tap lights the ten points one by one from left to right, each glowing from within with a glint at its tip (a long and a short spike, each point's turned its own way), with a rising chime for each (4.4 s)."
     },
     "opal": {
       "v": "keep",

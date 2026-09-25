@@ -33,6 +33,8 @@ const len = (a) => Math.hypot(a[0], a[1], a[2]);
 const unit = (a) => mul(a, 1 / (len(a) || 1));
 const lerp = (a, b, t) => add(a, mul(sub(b, a), t));
 const keep = (c, size) => ({ c, keep: true, size });
+// A normal random number (mean 0, spread 1).
+const gauss = (rand) => Math.sqrt(-2 * Math.log(1 - rand())) * Math.cos(TAU * rand());
 
 const LIGHT = unit([-0.45, 0.8, 0.45]);
 const VIEW = unit([0.5, 0.3, 0.82]);
@@ -646,17 +648,26 @@ export const RECIPES = {
     action: { key: "star", label: "Catch the star" },
     // Some sapphires show a six-rayed star (asterism: light off fine
     // needles inside) that glides over the stone as the light moves. A tap
-    // makes the star appear on one side, glide across the top, turning a
-    // little, and fade on the other.
+    // catches the star on one side: its rays spread out over the stone from
+    // a bright centre, it glides across the top (its rays keep their
+    // directions, set by the crystal), and the rays draw back in at the
+    // other side. The rays lie on the stone and end at its edge, so the star
+    // is built afresh at points along its path (one part each) and the
+    // nearest one is shown, slid the little way to where the star is.
     drive(t, c, out) {
       const p = progress(c.star);
       const on = c.star > 0 ? 1 : 0;
       const u = ease(band(p, 0.02, 0.95));
-      out.parts.star = {
-        offset: quatRotate(SAPPHIRE_Q, [-0.42 + 0.84 * u, 0, 0.12 - 0.24 * u]),
-        angle: 0.5 * (u - 0.5),
-        visible: on * 1.2 * bump(p, 0.02, 0.2, 0.72, 0.95),
-      };
+      out.grow = on * 1.1 * ease(band(p, 0.02, 0.22)) * (1 - ease(band(p, 0.76, 0.97)));
+      const shown = Math.round(u * (SAPPHIRE_FRAMES - 1));
+      const [x, z] = sapphirePath(u);
+      for (let i = 0; i < SAPPHIRE_FRAMES; i++) {
+        const [x0, z0] = sapphirePath(i / (SAPPHIRE_FRAMES - 1));
+        out.parts[`star${i}`] = {
+          offset: quatRotate(SAPPHIRE_Q, [x - x0, 0, z - z0]),
+          visible: on && i === shown ? 1 : 0,
+        };
+      }
     },
     build(k, o) {
       // A cushion: a square with softly rounded sides.
@@ -673,32 +684,66 @@ export const RECIPES = {
         dark: 0.22,
         light: "#dfe8ff",
       });
-      // The star (hidden until a tap): six soft rays of light lying on the
-      // top of the stone, dipping down its crown past the table's edge.
+      // The star (hidden until a tap): a soft bright centre and six rays of
+      // light lying on the top of the stone, dipping down its crown past the
+      // table's edge and ending at the girdle. Each ray grows out from the
+      // centre (grow) as the star is caught.
       const top = 0.02 + (1 - table) * Math.tan(crown);
       const onTop = (x, z) => {
         const r = Math.hypot(x, z);
         const edge = table * cushion(Math.atan2(z, x));
         return [x, top + 0.006 - Math.max(0, r - edge) * Math.tan(crown), z];
       };
+      const inside = (x, z) => Math.hypot(x, z) < 0.95 * cushion(Math.atan2(z, x));
       const normal = quatRotate(SAPPHIRE_Q, [0, 1, 0]);
-      const star = k.part("star", { pivot: quatRotate(SAPPHIRE_Q, [0, top, 0]), axis: normal });
-      k.cloud({ share: 0.025, pattern: false, part: star }, (rand) => {
-        const a = (Math.floor(rand() * 6) / 6) * TAU + 0.26;
-        const u = Math.pow(rand(), 1.6);
-        const r = 0.85 * u;
-        const w = 0.02 * (1 - u) * (rand() * 2 - 1);
-        const x = Math.cos(a) * r - Math.sin(a) * w;
-        const z = Math.sin(a) * r + Math.cos(a) * w;
-        return {
-          p: quatRotate(SAPPHIRE_Q, onTop(x, z)),
-          n: normal,
-          flat: 0.2,
-          color: mix("#ffffff", "#b8ccff", u),
-          opacity: 0.85 * (1 - u) + 0.05,
-          size: 1.3 * (1 - 0.6 * u),
-        };
-      });
+      const rays = [0, 1, 2, 3, 4, 5].map((i) => (i / 6) * TAU + 0.26);
+      for (let f = 0; f < SAPPHIRE_FRAMES; f++) {
+        const [cx, cz] = sapphirePath(f / (SAPPHIRE_FRAMES - 1));
+        // How far each ray runs before it reaches the girdle.
+        const reach = rays.map((a) => {
+          let d = 0;
+          while (d < 2 && inside(cx + Math.cos(a) * (d + 0.01), cz + Math.sin(a) * (d + 0.01)))
+            d += 0.01;
+          return d;
+        });
+        const part = k.part(`star${f}`);
+        // (Splats drawn out along the rays, so each ray is a smooth streak.)
+        k.cloud({ share: 0.008, pattern: false, part }, (rand) => {
+          let x;
+          let z;
+          let t;
+          let dir;
+          if (rand() < 0.14) {
+            // The bright centre.
+            const r = 0.07 * Math.sqrt(rand());
+            const a = rand() * TAU;
+            t = r / 0.6;
+            x = cx + Math.cos(a) * r;
+            z = cz + Math.sin(a) * r;
+          } else {
+            const i = Math.floor(rand() * 6);
+            const a = rays[i];
+            t = Math.pow(rand(), 1.25);
+            const d = t * reach[i];
+            const w = (0.008 + 0.014 * t) * gauss(rand);
+            x = cx + Math.cos(a) * d - Math.sin(a) * w;
+            z = cz + Math.sin(a) * d + Math.cos(a) * w;
+            t = Math.min(1, d / 0.9);
+            dir = quatRotate(SAPPHIRE_Q, [Math.cos(a), 0, Math.sin(a)]);
+          }
+          return {
+            p: quatRotate(SAPPHIRE_Q, onTop(x, z)),
+            n: normal,
+            flat: 0.2,
+            ...(dir ? { dir, stretch: 2.6 } : {}),
+            color: mix("#ffffff", "#c4d2ff", t),
+            opacity: 0.1 + 0.6 * (1 - t),
+            size: 1.2 * (1 - 0.4 * t),
+            kind: "grow",
+            params: [0.9 * t, 0],
+          };
+        });
+      }
     },
   },
 
@@ -956,16 +1001,29 @@ export const RECIPES = {
             opacity: 0.3 + 0.35 * clamp(s.p[1] / L, 0, 1),
           }),
         });
+        // The star: a glint with a long and a short spike and four faint
+        // ones between, each point's turned its own way (not a row of
+        // upright crosses).
         const tip = add(quatRotate(shape.opts.quat, [0, L, 0]), pos);
-        k.cloud({ count: 260, size: 1, pattern: false, part }, (rand) => {
-          const dir =
-            rand() < 0.5 ? unit(cross([0, 1, 0], VIEW)) : unit(cross(VIEW, cross([0, 1, 0], VIEW)));
+        const right = unit(cross([0, 1, 0], VIEW));
+        const up = cross(VIEW, right);
+        const spin = 0.3 + 1.0 * ((i * 0.618034) % 1);
+        const spikes = [
+          [spin, 0.18],
+          [spin + Math.PI / 2, 0.11],
+          [spin + Math.PI / 4, 0.055],
+          [spin - Math.PI / 4, 0.055],
+        ];
+        k.cloud({ count: 300, size: 1, pattern: false, part }, (rand) => {
+          const r = rand();
+          const [a, len] = spikes[r < 0.45 ? 0 : r < 0.75 ? 1 : r < 0.875 ? 2 : 3];
+          const dir = add(mul(right, Math.cos(a)), mul(up, Math.sin(a)));
           const u = rand() * 2 - 1;
           return {
-            p: add(add(tip, mul(VIEW, 0.03)), mul(dir, u * 0.16)),
+            p: add(add(tip, mul(VIEW, 0.03)), mul(dir, u * len)),
             dir,
             stretch: 3,
-            size: 1.2 * (1 - 0.8 * Math.abs(u)),
+            size: 1.2 * (1 - 0.8 * Math.abs(u)) * Math.sqrt(len / 0.18),
             color: "#ffffff",
             opacity: 0.95,
           };
@@ -1417,6 +1475,10 @@ export const RECIPES = {
 
 // How the sapphire lies (its star glides over its table).
 const SAPPHIRE_Q = quatEuler(10, 30, 0);
+// The sapphire's star: where it is on the stone (x, z in the stone's own
+// frame) as it glides across, and how many places it is built at.
+const SAPPHIRE_FRAMES = 14;
+const sapphirePath = (u) => [-0.42 + 0.84 * u, 0.12 - 0.24 * u];
 
 // How far the geode's front half and the oyster's lid swing open (radians).
 // The crystal ball's signs, which one comes next, and its mist's extra turn.

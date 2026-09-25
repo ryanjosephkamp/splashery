@@ -510,6 +510,18 @@ export function createUI(app) {
         for (const ch of o.choices) input.add(new Option(ch.label, ch.id));
         input.value = value;
         input.addEventListener("change", () => app.setToyOption(o.key, input.value));
+      } else if (o.type === "flag") {
+        // A country's flag, from the flag catalogue (the Moon's flag).
+        input = document.createElement("select");
+        input.add(new Option(value.toUpperCase(), value));
+        input.value = value;
+        loadFlags().then((flags) => {
+          input.textContent = "";
+          const sorted = flags.slice().sort((a, b) => a.name.localeCompare(b.name));
+          for (const f of sorted) input.add(new Option(f.name, f.code));
+          input.value = value;
+        });
+        input.addEventListener("change", () => app.setToyOption(o.key, input.value));
       } else if (o.type === "color") {
         const well = document.createElement("span");
         well.className = "color-well small";
