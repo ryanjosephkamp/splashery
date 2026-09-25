@@ -511,6 +511,7 @@ export function createUI(app) {
     refreshGameBar();
     els.toyOptions.textContent = "";
     for (const o of recipe?.options || []) {
+      if (o.hidden) continue;
       const row = document.createElement("label");
       row.className = "row";
       const name = document.createElement("span");
@@ -565,6 +566,7 @@ export function createUI(app) {
       row.appendChild(input);
       els.toyOptions.appendChild(row);
     }
+    if (recipe?.input) renderInputPanel(recipe.input);
     els.toyNote.textContent = recipe
       ? recipe.note || ""
       : "Every toy can bounce, spin, wobble or float. Tap it to make it hop.";
@@ -697,6 +699,88 @@ export function createUI(app) {
     box.append(now, row, paste, error, file, details);
     els.toyControls.appendChild(box);
     refresh();
+  }
+
+  // A toy that takes something of yours (the molecule: a name, formula or
+  // SMILES, or a file; the protein: a PDB or mmCIF file). The recipe's
+  // input.read turns it into option values, or throws a message to show.
+  function renderInputPanel(input) {
+    const box = document.createElement("div");
+    box.className = "input-box";
+    box.id = "toy-input";
+    const title = document.createElement("p");
+    title.className = "input-title";
+    title.textContent = input.title;
+    const shown = document.createElement("p");
+    shown.className = "note input-shown";
+    shown.textContent = input.shown?.() || "";
+    shown.hidden = !shown.textContent;
+    const error = document.createElement("div");
+    error.className = "warning";
+    error.setAttribute("role", "alert");
+    error.hidden = true;
+    const apply = async (text, fileName = "") => {
+      error.hidden = true;
+      try {
+        const options = await input.read(text, fileName);
+        await app.setToyOptions(options);
+      } catch (err) {
+        error.textContent = err.message;
+        error.hidden = false;
+      }
+    };
+    box.append(title);
+    if (input.placeholder) {
+      const row = document.createElement("form");
+      row.className = "input-row";
+      const text = document.createElement("input");
+      text.type = "text";
+      text.id = "toy-input-text";
+      text.placeholder = input.placeholder;
+      text.spellcheck = false;
+      text.autocomplete = "off";
+      text.setAttribute("aria-label", input.title);
+      const go = document.createElement("button");
+      go.type = "submit";
+      go.className = "primary";
+      go.id = "toy-input-go";
+      go.textContent = input.button || "Show it";
+      row.append(text, go);
+      row.addEventListener("submit", (e) => {
+        e.preventDefault();
+        apply(text.value);
+      });
+      box.append(row);
+    }
+    const file = document.createElement("input");
+    file.type = "file";
+    file.accept = input.accept || "";
+    file.hidden = true;
+    file.id = "toy-input-file";
+    const fileRow = document.createElement("div");
+    fileRow.className = "button-row";
+    const open = document.createElement("button");
+    open.type = "button";
+    open.id = "toy-input-open";
+    open.textContent = input.fileButton || "Open a file…";
+    open.addEventListener("click", () => file.click());
+    fileRow.append(open);
+    file.addEventListener("change", async () => {
+      const f = file.files?.[0];
+      file.value = "";
+      if (!f) return;
+      if (f.size > 40e6) {
+        error.textContent = "That file is too big (over 40 MB).";
+        error.hidden = false;
+        return;
+      }
+      apply(await f.text(), f.name);
+    });
+    const note = document.createElement("p");
+    note.className = "note";
+    note.textContent = input.note || "";
+    box.append(fileRow, shown, error, note, file);
+    els.toyOptions.appendChild(box);
   }
 
   // ---- The game bar -----------------------------------------------------------------

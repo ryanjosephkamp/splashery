@@ -421,6 +421,11 @@ export class Player {
     const prof = PROFILES[this.profile];
     const count = Math.round(Math.min(prof.maxCount, prof.defaultCount * (recipe.density ?? 1)));
     const options = resolveOptions(recipe, toy.options);
+    // A recipe may read a data file first (the protein toy's structure).
+    if (recipe.prepare) {
+      await recipe.prepare(options);
+      if (token !== this.loadToken) return null;
+    }
     const clay = toy.clay || [];
     const it = buildRecipe(
       recipe,
@@ -1119,6 +1124,7 @@ export function resolveOptions(recipe, given = {}) {
     else if (o.type === "select") out[o.key] = o.choices.some((c) => c.id === v) ? v : o.default;
     else if (o.type === "switch") out[o.key] = typeof v === "boolean" ? v : !!o.default;
     else if (o.type === "flag") out[o.key] = /^[a-z]{2}$/.test(v) ? v : o.default;
+    else if (o.type === "text") out[o.key] = typeof v === "string" ? v : o.default;
     else {
       const n = Number(v);
       out[o.key] =

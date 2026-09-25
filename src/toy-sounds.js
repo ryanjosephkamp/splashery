@@ -354,6 +354,11 @@ export const TOY_SOUNDS = {
   ],
   atom: { voice: "hum", f: 220, to: 1.8, bright: 0.2, decay: 2.6 },
   molecule: { voice: "boing", f: 330, to: 1.3, rate: 11, decay: 2 },
+  // An airy rush as the pieces fly apart, and soft clicks as they lock back.
+  protein: [
+    { voice: "whoosh", f: 260, to: 3, decay: 1.4, vol: 0.8 },
+    { voice: "clatter", at: 3.4, f: 900, n: 6, kind: "wood", decay: 0.9, vol: 0.7 },
+  ],
   // A ping as the wave passes each part of the lattice.
   "crystal-lattice": { voice: "glass", notes: "C6 E6 G6 C7", step: 0.55, at: 0.3, decay: 0.6 },
 

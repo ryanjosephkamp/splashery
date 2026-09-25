@@ -32,11 +32,9 @@ for (const def of toys) {
   const t0 = performance.now();
   let ctx;
   try {
-    const it = buildRecipe(
-      recipe,
-      { seed: 1, count, options: resolveOptions(recipe, {}) },
-      applyClay,
-    );
+    const options = resolveOptions(recipe, {});
+    await recipe.prepare?.(options);
+    const it = buildRecipe(recipe, { seed: 1, count, options }, applyClay);
     let r = it.next();
     while (!r.done) r = it.next();
     ctx = r.value;

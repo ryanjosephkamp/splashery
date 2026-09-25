@@ -2,7 +2,19 @@
 // crystal lattices. Stylised, but built from real shapes and numbers.
 // Loaded on demand.
 
-import { mix, shade, clamp, smoothstep, quatFromTo, quatAxisAngle, quatRotate } from "../kit.js";
+import {
+  mix,
+  shade,
+  ramp,
+  clamp,
+  smoothstep,
+  quatFromTo,
+  quatAxisAngle,
+  quatRotate,
+} from "../kit.js";
+import { element, covalentRadius, formulaOf } from "../chem/elements.js";
+import { moleculeFromText, readMoleculeFile } from "../chem/molfile.js";
+import { parseStructure, ribbonPath, centreStructure } from "../chem/protein.js";
 
 const TAU = Math.PI * 2;
 const PHI = (1 + Math.sqrt(5)) / 2;
@@ -369,6 +381,110 @@ function tetraH(p, neighbours, count, bond = 1.09, twist = 0) {
     out.push(add(p, mul(unit(mul(add(add(dirs[0], dirs[1]), dirs[2]), -1)), bond)));
   }
   return out;
+}
+
+// ---- Your own molecule ------------------------------------------------------------
+
+// The molecule toy shows up to this many atoms (hydrogens included).
+const MOLECULE_MAX = 600;
+// What the molecule toy is showing, for its panel.
+const MOLECULE_SHOWN = { label: "" };
+
+// A molecule read from a file, packed into one line of text for the toy's
+// options (and so for links and scene files): "M1;name;atoms;bonds", atoms
+// as "El x y z" (ångströms, two decimals) and bonds as "i j order".
+function packMolecule(mol) {
+  const r = (x) => Math.round(x * 100) / 100;
+  const atoms = mol.atoms.map((a) => `${a.el} ${r(a.p[0])} ${r(a.p[1])} ${r(a.p[2])}`).join(",");
+  const bonds = mol.bonds.map(([i, j, o = 1]) => `${i} ${j} ${o}`).join(",");
+  const name = String(mol.name || "")
+    .replace(/[^\x20-\x7e]|[;,]/g, " ")
+    .slice(0, 60);
+  return `M1;${name};${atoms};${bonds}`;
+}
+function unpackMolecule(text) {
+  const [, name, atomText = "", bondText = ""] = text.split(";");
+  const atoms = atomText
+    .split(",")
+    .filter(Boolean)
+    .map((a) => {
+      const [el, x, y, z] = a.split(" ");
+      return { el, p: [Number(x), Number(y), Number(z)] };
+    });
+  const n = atoms.length;
+  const bonds = bondText
+    .split(",")
+    .filter(Boolean)
+    .map((b) => b.split(" ").map(Number))
+    .filter(([i, j, o]) => i >= 0 && i < n && j >= 0 && j < n && i !== j && o >= 1 && o <= 3);
+  if (!n || atoms.some((a) => !element(a.el) || a.p.some((v) => !Number.isFinite(v))))
+    throw new Error("That molecule could not be read.");
+  return { atoms, bonds, name };
+}
+
+// Checks a molecule fits the toy, else says why.
+function checkSize(mol) {
+  if (mol.atoms.length > MOLECULE_MAX)
+    throw new Error(
+      `That molecule has ${mol.atoms.length} atoms; the molecule toy shows up to ${MOLECULE_MAX}. A protein goes in the Protein toy.`,
+    );
+  return mol;
+}
+
+// The molecule toy's own-molecule panel (ui.js): a name, formula or SMILES
+// string typed in, or a molecule file.
+const MOLECULE_INPUT = {
+  title: "Your own molecule",
+  placeholder: "aspirin, CH3COOH, C6H12O6 or a SMILES string",
+  button: "Show it",
+  fileButton: "Open a molecule file…",
+  accept: ".mol,.sdf,.sd,.xyz,.pdb,.ent,.txt",
+  note: "Type a name (about sixty are built in: aspirin, glucose, dopamine, ATP…), a formula written out (CH3CH2OH, (CH3)2CO, C6H5COOH) or one that names a built-in molecule (C9H8O4), or a SMILES string (PubChem shows one for every compound). Files: MOL, SDF, XYZ or PDB, up to 600 atoms.",
+  async read(text, fileName) {
+    if (fileName) {
+      const mol = checkSize(readMoleculeFile(text, fileName));
+      const source = packMolecule(mol);
+      if (source.length > 24000) throw new Error("That molecule is too big to keep in a link.");
+      return { molecule: "custom", source };
+    }
+    const typed = String(text || "").trim();
+    checkSize(moleculeFromText(typed));
+    return { molecule: "custom", source: typed };
+  },
+  shown: () => MOLECULE_SHOWN.label,
+};
+
+// A molecule's atoms grouped into at most `max` tokens: each hydrogen goes
+// with the atom it is bonded to, and when there are still too many groups
+// the heavy atoms are gathered round well-spread seeds.
+function tokenGroups(atoms, bonds, max = 48) {
+  const owner = atoms.map((a, i) => i);
+  for (const [i, j] of bonds) {
+    if (atoms[i].el === "H" && atoms[j].el !== "H") owner[i] = j;
+    else if (atoms[j].el === "H" && atoms[i].el !== "H") owner[j] = i;
+  }
+  const heads = [...new Set(owner)];
+  let groupOf = new Map(heads.map((h, g) => [h, g]));
+  if (heads.length > max) {
+    // Seeds spread out (each the head furthest from those chosen so far).
+    const seeds = [heads[0]];
+    const near = heads.map((h) => len(sub(atoms[h].p, atoms[heads[0]].p)));
+    while (seeds.length < max) {
+      let best = 0;
+      near.forEach((d, i) => (d > near[best] ? (best = i) : 0));
+      seeds.push(heads[best]);
+      heads.forEach((h, i) => (near[i] = Math.min(near[i], len(sub(atoms[h].p, atoms[heads[best]].p))))); // prettier-ignore
+    }
+    groupOf = new Map();
+    for (const h of heads) {
+      let g = 0;
+      seeds.forEach((sd, i) => {
+        if (len(sub(atoms[h].p, atoms[sd].p)) < len(sub(atoms[h].p, atoms[seeds[g]].p))) g = i;
+      });
+      groupOf.set(h, g);
+    }
+  }
+  return atoms.map((a, i) => groupOf.get(owner[i]));
 }
 
 // Molecule builders: each returns { atoms, bonds } in ångströms.
@@ -872,6 +988,193 @@ function orbitalLook(
   });
 }
 
+// ---- Proteins ------------------------------------------------------------------------
+
+// The proteins on the shelf (structures from the Protein Data Bank, CC0) and
+// what they are.
+const PROTEINS = {
+  ubiquitin: { file: "1ubq", label: "Ubiquitin (1UBQ)" },
+  insulin: { file: "4ins", label: "Insulin (4INS)" },
+  gfp: { file: "1ema", label: "Green fluorescent protein (1EMA)" },
+  hemoglobin: { file: "4hhb", label: "Hemoglobin (4HHB)" },
+};
+// Parsed structures by file, a structure opened from a file, and what the
+// protein toy is showing (for its panel).
+const PROTEIN_CACHE = new Map();
+const PROTEIN_FILE = { name: "", structure: null };
+const PROTEIN_SHOWN = { label: "" };
+
+// A file of this pack's assets as text (fetched in a browser, read from disk
+// in Node for the build tools and tests).
+async function readAsset(rel) {
+  const url = new URL(rel, import.meta.url);
+  if (url.protocol === "file:") {
+    const fs = await import("node:fs/promises");
+    return fs.readFile(url, "utf8");
+  }
+  const r = await fetch(url);
+  if (!r.ok) throw new Error(`Could not load ${rel.split("/").pop()}.`);
+  return r.text();
+}
+
+// The protein toy's panel (ui.js): open a PDB or mmCIF file.
+const PROTEIN_INPUT = {
+  title: "Your own protein",
+  fileButton: "Open a PDB or mmCIF file…",
+  accept: ".pdb,.ent,.cif,.mmcif,.txt",
+  note: "Download any structure from rcsb.org (Download Files → PDB Format or PDBx/mmCIF) and open it here. It stays in your browser; a link to it shows ubiquitin until you open the file again.",
+  async read(text, fileName) {
+    const s = centreStructure(parseStructure(text, fileName));
+    if (!s.chains.length) throw new Error("There is no protein chain in that file.");
+    PROTEIN_FILE.name = String(fileName || "protein")
+      .replace(/[^\x20-\x7e]/g, "")
+      .slice(0, 80);
+    PROTEIN_FILE.structure = s;
+    return { protein: "file", fileName: PROTEIN_FILE.name };
+  },
+  shown: () => PROTEIN_SHOWN.label,
+};
+
+// Where each residue of a chain gets its colour: `rainbow` runs blue to
+// red from each chain's start to its end; `chain` gives each chain its own
+// colour; `structure` colours helices, strands and loops.
+const CHAIN_COLOURS = ["#4f7cff", "#ff8a3d", "#39b86a", "#e04f8c", "#9c6bff", "#f2c230", "#2fb7c9", "#d9544a"]; // prettier-ignore
+const SS_COLOURS = { H: "#e0445c", E: "#f2c230", C: "#d8d8d2" };
+function residueColour(scheme, chainIndex, t, ss) {
+  if (scheme === "chain") return CHAIN_COLOURS[chainIndex % CHAIN_COLOURS.length];
+  if (scheme === "structure") return SS_COLOURS[ss] || SS_COLOURS.C;
+  return ramp(["#3b4cc0", "#4fa3e0", "#6cc86c", "#f2d24a", "#f0843c", "#d6334a"], t);
+}
+
+// The cartoon: the backbone of each chain as a ribbon (a coiled band for a
+// helix, a flat arrow for a strand, a thin tube for a loop), and the small
+// molecules bound to it (hemes, zinc, GFP's chromophore) as balls and
+// sticks. Each run of one kind is a token, so a tap can pull the protein
+// apart into its helices, strands and loops and put it back together.
+function buildProtein(k, s, scheme) {
+  const runs = [];
+  s.chains.forEach((chain, ci) => {
+    const pts = ribbonPath(chain, { perResidue: 6 });
+    const n = chain.residues.length;
+    let run = null;
+    pts.forEach((pt, i) => {
+      const kind = pt.ss === "H" || pt.ss === "E" ? pt.ss : "C";
+      if (!run || run.kind !== kind || run.seg !== pt.seg) {
+        // Each run takes the next run's first point, so they join up.
+        if (run && run.seg === pt.seg) run.pts.push(pt);
+        run = { kind, seg: pt.seg, chain: ci, pts: [], n };
+        runs.push(run);
+      }
+      run.pts.push(pt);
+    });
+  });
+  // At most 48 tokens, the ligands included: merge the shortest runs into
+  // their neighbours in the same chain until the rest fit.
+  const budget = 48 - Math.min(16, s.ligands.length);
+  while (runs.length > budget) {
+    let best = -1;
+    runs.forEach((r, i) => {
+      const next = runs[i + 1];
+      if (next && next.chain === r.chain && (best < 0 || r.pts.length + next.pts.length < runs[best].pts.length + runs[best + 1].pts.length)) best = i; // prettier-ignore
+    });
+    if (best < 0) break;
+    const [a, b] = runs.splice(best, 2);
+    runs.splice(best, 0, { ...a, merged: true, parts: [...(a.parts || [a]), ...(b.parts || [b])], pts: [...a.pts, ...b.pts] }); // prettier-ignore
+  }
+  const tokens = [];
+  runs.forEach((r) => {
+    const id = tokens.length;
+    const base = mul(
+      r.pts.reduce((acc, pt) => add(acc, pt.p), [0, 0, 0]),
+      1 / r.pts.length,
+    );
+    tokens.push({ base, kind: r.kind });
+    for (const piece of r.parts || [r]) ribbonRun(k, piece, id, scheme);
+  });
+  // The bound small molecules.
+  const ligandTokens = [];
+  s.ligands.slice(0, 16).forEach((lig) => {
+    const id = tokens.length;
+    const base = mul(
+      lig.atoms.reduce((acc, a) => add(acc, a.p), [0, 0, 0]),
+      1 / lig.atoms.length,
+    );
+    tokens.push({ base, kind: "L", name: lig.name });
+    ligandTokens.push({ lig, id });
+    const atoms = lig.atoms.map((a) => ({
+      el: a.el,
+      p: a.p,
+      r: a.el === "ZN" || a.el === "Zn" || a.el === "FE" || a.el === "Fe" ? 0.75 : 0.42,
+      color: element(a.el)?.color || "#ff66cc",
+    }));
+    ballStick(k, atoms, lig.bonds || [], { bondR: 0.17, token: () => id, overlap: 0.05 });
+  });
+  const spread = Math.max(...tokens.map((t) => len(t.base)), 8);
+  return { tokens, spread, ligands: ligandTokens };
+}
+
+// One run of the ribbon as a surface: u along the run, v round its cross
+// section (an ellipse: wide and thin for helices and strands, round for
+// loops; a strand ends in an arrowhead).
+function ribbonRun(k, run, token, scheme) {
+  const pts = run.pts;
+  const m = pts.length;
+  if (m < 2) return;
+  const size = (i) => {
+    if (run.kind === "H") return [1.15, 0.28];
+    if (run.kind === "E") {
+      // The arrowhead over the strand's last residue (6 points).
+      const left = m - 1 - i;
+      return left < 6 ? [0.3 + (left / 6) * 1.5, 0.28] : [1.0, 0.28];
+    }
+    return [0.42, 0.42];
+  };
+  const at = (u) => {
+    const x = u * (m - 1);
+    const i = Math.min(m - 2, Math.floor(x));
+    const f = x - i;
+    const a = pts[i];
+    const b = pts[i + 1];
+    const [wa, ha] = size(i);
+    const [wb, hb] = size(i + 1);
+    return {
+      p: lerp(a.p, b.p, f),
+      side: unit(lerp(a.side, b.side, f)),
+      normal: unit(lerp(a.normal, b.normal, f)),
+      w: wa + (wb - wa) * f,
+      h: ha + (hb - ha) * f,
+      res: f < 0.5 ? a.res : b.res,
+    };
+  };
+  const shape = k.param(
+    (u, v) => {
+      const q = at(u);
+      const t = v * TAU;
+      return add(q.p, add(mul(q.side, Math.cos(t) * q.w), mul(q.normal, Math.sin(t) * q.h)));
+    },
+    {
+      grid: Math.min(96, 8 + m),
+      normal: (u, v) => {
+        const q = at(u);
+        const t = v * TAU;
+        return add(mul(q.side, Math.cos(t) * q.h), mul(q.normal, Math.sin(t) * q.w));
+      },
+    },
+  );
+  k.add(shape, {
+    kind: "token",
+    params: [token, 0],
+    flat: 0.3,
+    even: true,
+    pattern: true,
+    color: (c) => {
+      const q = at(c.u);
+      const col = residueColour(scheme, run.chain, q.res / Math.max(1, run.n - 1), run.kind);
+      return gloss(lit(col, c.n, 0.6, 0.45), c.n, 0.35, 18);
+    },
+  });
+}
+
 export const RECIPES = {
   // ---- Electron orbital ---------------------------------------------------------------
   orbital: {
@@ -1140,9 +1443,14 @@ export const RECIPES = {
           { id: "benzene", label: "Benzene" },
           { id: "caffeine", label: "Caffeine" },
           { id: "c60", label: "Buckyball (C60)" },
+          { id: "custom", label: "Your own (below)" },
         ],
       },
+      // Your own molecule: typed text (a name, formula or SMILES) or a
+      // molecule from a file, packed (set from the panel, not shown).
+      { key: "source", label: "Your molecule", type: "text", default: "", hidden: true },
     ],
+    input: MOLECULE_INPUT,
     controls: [{ key: "heat", label: "Heat", type: "pulse", ease: 4.4 }],
     action: { key: "heat", label: "Heat it up" },
     // The atoms always jiggle a little on their bonds. A tap heats the
@@ -1171,16 +1479,41 @@ export const RECIPES = {
       out.tokens = D.tokens.map((tk, i) => ({ base: tk.base, offset: disp[i] }));
     },
     build(k, o) {
-      const make = MOLECULES[o.molecule] || MOLECULES.caffeine;
-      const { atoms, bonds } = make();
+      let mol = null;
+      if (o.molecule === "custom" && o.source) {
+        try {
+          mol = checkSize(
+            o.source.startsWith("M1;") ? unpackMolecule(o.source) : moleculeFromText(o.source),
+          );
+          const name = mol.name || (o.source.startsWith("M1;") ? "" : o.source);
+          MOLECULE_SHOWN.label = `${name ? `${name.slice(0, 40)} · ` : ""}${formulaOf(mol.atoms)} · ${mol.atoms.length} atoms${mol.note ? `. ${mol.note}` : ""}`; // prettier-ignore
+        } catch (err) {
+          mol = null;
+          MOLECULE_SHOWN.label = `Caffeine (yours could not be read: ${err.message})`;
+        }
+      } else MOLECULE_SHOWN.label = "";
+      const { atoms, bonds } = mol
+        ? { atoms: mol.atoms.map((a) => ({ ...a, p: a.p.slice() })), bonds: mol.bonds }
+        : (MOLECULES[o.molecule] || MOLECULES.caffeine)();
+      // Any element: its colour and a size from its covalent radius.
+      for (const a of atoms) {
+        if (CPK[a.el]) continue;
+        a.color = element(a.el)?.color || "#ff66cc";
+        a.r = 0.14 + 0.3 * covalentRadius(a.el);
+      }
       // Turn flat molecules a little so they show some depth.
       const q = quatAxisAngle([0.3, 1, 0], o.molecule === "c60" ? 0.3 : -0.35);
       for (const a of atoms) a.p = quatRotate(q, a.p);
-      // One token per atom; the buckyball's sixty atoms go by pentagon.
-      const c60 = o.molecule === "c60";
-      const tokenOf = c60 ? pentagonOf(atoms) : atoms.map((a, i) => i);
+      // One token per atom; the buckyball's sixty atoms go by pentagon, and
+      // a big molecule of your own by groups (a hydrogen goes with its atom).
+      const c60 = o.molecule === "c60" && !mol;
+      const tokenOf = c60
+        ? pentagonOf(atoms)
+        : atoms.length > 48
+          ? tokenGroups(atoms, bonds)
+          : atoms.map((a, i) => i);
       const n = Math.max(...tokenOf) + 1;
-      const MASS = { H: 1, C: 12, N: 14, O: 16 };
+      const MASS = new Proxy({ H: 1, C: 12, N: 14, O: 16 }, { get: (m, el) => m[el] ?? 2 * (element(el)?.z ?? 6) }); // prettier-ignore
       const tokens = Array.from({ length: n }, () => ({ base: [0, 0, 0], mass: 0, count: 0 }));
       atoms.forEach((a, i) => {
         const tk = tokens[tokenOf[i]];
@@ -1325,6 +1658,118 @@ export const RECIPES = {
             return { p, color: "#9aa3b5", opacity: 0.9, part: slabs[slabAt(p)] };
           });
       }
+    },
+  },
+
+  // ---- Protein ----------------------------------------------------------------------------
+  protein: {
+    alive: true,
+    options: [
+      {
+        key: "protein",
+        label: "Protein",
+        type: "select",
+        default: "ubiquitin",
+        choices: [
+          ...Object.entries(PROTEINS).map(([id, p]) => ({ id, label: p.label })),
+          { id: "file", label: "Your own (below)" },
+        ],
+      },
+      {
+        key: "colour",
+        label: "Colour",
+        type: "select",
+        default: "rainbow",
+        choices: [
+          { id: "rainbow", label: "Rainbow, start to end" },
+          { id: "chain", label: "By chain" },
+          { id: "structure", label: "Helices, strands, loops" },
+        ],
+      },
+      // The name of a file opened in the panel (the structure stays here).
+      { key: "fileName", label: "File", type: "text", default: "", hidden: true },
+    ],
+    input: PROTEIN_INPUT,
+    credits: [
+      {
+        label: "Protein structures",
+        title: "RCSB Protein Data Bank entries 1UBQ, 4INS, 1EMA and 4HHB",
+        source: "https://www.rcsb.org/",
+        author: "the wwPDB and the structures' authors",
+        license: "CC0 1.0",
+        licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/",
+      },
+    ],
+    // The structure is read before the build (a fetch in the browser).
+    async prepare(o) {
+      if (o.protein === "file" && PROTEIN_FILE.structure) return;
+      const def = PROTEINS[o.protein] || PROTEINS.ubiquitin;
+      if (PROTEIN_CACHE.has(def.file)) return;
+      const text = await readAsset(`../../assets/proteins/${def.file}.pdb`);
+      PROTEIN_CACHE.set(def.file, centreStructure(parseStructure(text, `${def.file}.pdb`)));
+    },
+    controls: [{ key: "apart", label: "Pull apart", type: "pulse", ease: 5 }],
+    action: { key: "apart", label: "Pull it apart" },
+    // A tap pulls the protein apart into its pieces: every helix, strand
+    // and loop (and each bound molecule) moves straight out from the middle,
+    // turning a little, so you can see what it is made of, then they all
+    // come back and lock together. In GFP the chromophore in the middle of
+    // the barrel glows green while the barrel is open.
+    drive(t, c, out, info) {
+      const D = info.data;
+      if (!D?.tokens) return;
+      const p = progress(c.apart);
+      const on = c.apart > 0 ? 1 : 0;
+      const e = on * ease(band(p, 0, 0.3)) * (1 - ease(band(p, 0.58, 0.95)));
+      out.tokens = D.tokens.map((tk, i) => {
+        const r = len(tk.base);
+        const away = Math.min(1, r / (0.25 * D.spread));
+        const d = D.spread * (0.35 + 0.2 * ((i * 0.618) % 1)) * away;
+        return {
+          base: tk.base,
+          offset: mul(unit(r > 1e-3 ? tk.base : [0, 1, 0]), d * e),
+          quat: quatAxisAngle(tk.axis, 0.6 * e * tk.spin),
+        };
+      });
+      if (D.glow) out.parts.glow = { visible: 1.3 * e };
+    },
+    build(k, o) {
+      let s = null;
+      let label = "";
+      if (o.protein === "file" && PROTEIN_FILE.structure) {
+        s = PROTEIN_FILE.structure;
+        label = PROTEIN_FILE.name;
+      } else {
+        const def = PROTEINS[o.protein] || PROTEINS.ubiquitin;
+        s = PROTEIN_CACHE.get(def.file) || PROTEIN_CACHE.get("1ubq");
+        label = def.label;
+        if (o.protein === "file") label = `${def.label} (open your file again to see it)`;
+      }
+      if (!s) throw new Error("The protein was not loaded.");
+      const residues = s.chains.reduce((n, ch) => n + ch.residues.length, 0);
+      PROTEIN_SHOWN.label = `${label} · ${s.chains.length} chain${s.chains.length > 1 ? "s" : ""}, ${residues} residues`; // prettier-ignore
+      const built = buildProtein(k, s, o.colour);
+      const rand = k.rand;
+      const tokens = built.tokens.map((tk) => ({
+        ...tk,
+        axis: unit([rand() - 0.5, rand() - 0.5, rand() - 0.5]),
+        spin: rand() < 0.5 ? -1 : 1,
+      }));
+      // GFP's glow: a green haze round the chromophore (hidden until a tap).
+      const cro = built.ligands.find((l) => l.lig.name === "CRO");
+      if (cro) {
+        const at = tokens[cro.id].base;
+        k.cloud({ share: 0.02, size: 3, pattern: false, part: k.part("glow") }, (rnd) => {
+          const d = unit([rnd() - 0.5, rnd() - 0.5, rnd() - 0.5]);
+          const rr = 7 * Math.pow(rnd(), 1.6);
+          return {
+            p: add(at, mul(d, rr)),
+            color: mix("#b6ff9a", "#3fe07a", rr / 7),
+            opacity: 0.22 * (1 - rr / 7) + 0.02,
+          };
+        });
+      }
+      k.data = { tokens, spread: built.spread, glow: !!cro };
     },
   },
 };

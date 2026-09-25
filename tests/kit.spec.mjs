@@ -100,6 +100,7 @@ test("every kit toy has a recipe that builds deterministically and fits the unit
       if (o.type === "select") for (const c of o.choices) variants.push({ [o.key]: c.id });
     for (const given of variants) {
       const options = resolveOptions(recipe, given);
+      await recipe.prepare?.(options);
       const build = () => {
         const it = buildRecipe(recipe, { seed: 3, count: 8000, options }, applyClay);
         let r = it.next();

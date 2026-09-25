@@ -94,6 +94,23 @@ browser from a seed by `src/generators.js`. The toys from packs (`src/packs/*.js
 beating heart, the campfire and the treasure chest) are built in the browser by the toy kit
 (`src/kit.js`) from recipes written for Splashery. None of them use external assets.
 
+## Protein structures
+
+The protein toy shows real structures from the [RCSB Protein Data Bank](https://www.rcsb.org/). PDB
+data files are in the public domain under
+[CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (wwPDB usage policy). The files in
+[assets/proteins](assets/proteins) are unchanged downloads from `https://files.rcsb.org/download/`:
+
+| Entry                                       | Structure                                                 | Authors                                                             |
+| ------------------------------------------- | --------------------------------------------------------- | ------------------------------------------------------------------- |
+| [1UBQ](https://www.rcsb.org/structure/1UBQ) | Ubiquitin, refined at 1.8 Å (1987)                        | S. Vijay-Kumar, C. E. Bugg, W. J. Cook                              |
+| [4INS](https://www.rcsb.org/structure/4INS) | 2Zn pig insulin crystals at 1.5 Å (1990)                  | G. G. Dodson, E. J. Dodson, D. C. Hodgkin, N. W. Isaacs, M. Vijayan |
+| [1EMA](https://www.rcsb.org/structure/1EMA) | Green fluorescent protein from _Aequorea victoria_ (1996) | M. Ormö, S. J. Remington                                            |
+| [4HHB](https://www.rcsb.org/structure/4HHB) | Human deoxyhaemoglobin at 1.74 Å (1984)                   | G. Fermi, M. F. Perutz                                              |
+
+The molecule toy's built-in list and the structures you open yourself are read in your browser
+(`src/chem/`); nothing is fetched from anywhere else.
+
 ## National flags
 
 The pattern layer can wrap a national flag around any toy. The flags are SVG files from

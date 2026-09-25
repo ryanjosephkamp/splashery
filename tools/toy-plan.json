@@ -840,7 +840,14 @@
       "v": "keep",
       "effect": "Bonds vibrate and stretch (like heat), then calm.",
       "sound": "Springy boing.",
-      "improved": "E2: the atoms always jiggle a little on their bonds. A tap heats it: every bond stretches and squeezes hard at its own pace, the light hydrogens swinging furthest, then it cools (4.4 s). Each atom moves on its own (the buckyball by pentagons, which also breathe)."
+      "improved": "E2: the atoms always jiggle a little on their bonds. A tap heats it: every bond stretches and squeezes hard at its own pace, the light hydrogens swinging furthest, then it cools (4.4 s). Each atom moves on its own (the buckyball by pentagons, which also breathe). Your own molecule (after the E2 review): type a name (about sixty well-known ones), a formula that names one, or any SMILES string, or open a MOL, SDF, XYZ or PDB file; it is built in 3D (SMILES are embedded with a small force field) and heats up the same way."
+    },
+    "protein": {
+      "v": "keep",
+      "owner": "(Asked for in the E2 review: a protein toy that can take a PDB file.)",
+      "effect": "The protein pulls apart into its helices, strands and loops, then locks back together.",
+      "sound": "Airy rush, then soft wooden clicks.",
+      "improved": "New after the E2 review: a cartoon of a real structure from the Protein Data Bank (ubiquitin, insulin, GFP, hemoglobin; CC0), helices as coiled bands, strands as flat arrows, loops as tubes, bound molecules (hemes, zinc, GFP's chromophore) as balls and sticks; coloured rainbow start to end, by chain or by structure. Open any PDB or mmCIF file. A tap pulls it apart into its pieces, turning a little, and puts it back (5 s); in GFP the chromophore glows green while the barrel is open."
     },
     "crystal-lattice": {
       "v": "keep",
