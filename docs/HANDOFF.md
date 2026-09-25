@@ -103,7 +103,11 @@ ground rules are in [CLAUDE.md](../CLAUDE.md).
   from ANGLE. Splashery's own shaders use no integer textures, so it comes from the engine's splat
   draw (likely a draw while one of its integer data textures is being swapped); the test passed in 4
   re-runs straight after. If it comes back, catch the trace (`test-results/`) before cleaning up,
-  and look at when the engine swaps its order or work-buffer textures.
+  and look at when the engine swaps its order or work-buffer textures. In E3 the same test failed
+  once in three full runs in another way: the drag on the gummy bear never became a grab (the GPU
+  pick found nothing under the pointer for a minute), so the drag orbited. It passed alone three
+  times and in the next full run; the trace was lost to a re-run, so keep `test-results/` if it
+  comes back.
 - **Tiny splats vanish on small screens.** The renderer drops splats that come out under about two
   pixels, so a detail built from very fine splats (high `weight` and small `size`) disappears on a
   phone or in a 360 px clip. Keep `size / sqrt(weight)` near 0.5 or more for anything that must show
