@@ -1004,12 +1004,11 @@ export const RECIPES = {
           return metal(c);
         },
       });
-      // Key caps: dark, raised, with white letters. Each one goes down when
-      // pressed (behaviour "key").
+      // Key caps: dark and raised. Each one goes down when pressed
+      // (behaviour "key").
+      const legendDots = [];
       LAPTOP_KEYS.forEach((key, i) => {
         const legend = key.label;
-        const gp = Math.min(0.0056, (0.78 * key.w) / (6 * legend.length - 1));
-        const gw = (6 * legend.length - 1) * gp;
         k.add(k.box(key.w, 0.012, key.d), {
           pos: [key.x, hb + 0.006, key.z],
           part: deck,
@@ -1024,15 +1023,48 @@ export const RECIPES = {
           color: (c) => {
             if (c.n[1] < -0.5) return null;
             const cap = "#2a2d33";
-            if (c.n[1] > 0.5) {
-              const s = (c.lp[0] + gw / 2) / gp;
-              const t = (c.lp[2] + 3.5 * gp) / gp;
-              if (inked([legend], s, t)) return keep("#e6e9ee", 0.55);
-              return keep(lit(cap, c.n, { amb: 0.9, dif: 0.25, spec: 0.12 }), 0.9);
-            }
+            if (c.n[1] > 0.5) return keep(lit(cap, c.n, { amb: 0.9, dif: 0.25, spec: 0.12 }), 0.9); // prettier-ignore
             return keep(lit(shade(cap, 0.8), c.n, { amb: 0.9, dif: 0.25, spec: 0 }));
           },
         });
+        // Its letters' pixels (5 x 7 font), each filled by a 3 x 3 grid of
+        // dots, just above the cap.
+        if (!legend) return;
+        const gp = Math.min(0.006, (0.78 * key.w) / (6 * legend.length - 1));
+        const gw = (6 * legend.length - 1) * gp;
+        for (let t = 0; t < 7; t++) {
+          for (let s = 0; s < 6 * legend.length; s++) {
+            if (!inked([legend], s + 0.5, t + 0.5)) continue;
+            for (let a = 0; a < 3; a++) {
+              for (let b = 0; b < 3; b++) {
+                legendDots.push({
+                  key: i,
+                  x: key.x - gw / 2 + (s + (a + 0.5) / 3) * gp,
+                  z: key.z - 3.5 * gp + (t + (b + 0.5) / 3) * gp,
+                });
+              }
+            }
+          }
+        }
+      });
+      // The letters: sharp because every dot sits on its pixel (random
+      // splats on the caps made them blurry). A dot is about a third of a
+      // font pixel across (0.0022 / the laptop's base splat size, which
+      // goes as 1 / sqrt(budget)); on a small budget there are fewer dots
+      // (the list is sampled) and they are bigger.
+      const dotSize = 0.0022 / (0.0056 * Math.sqrt(200000 / k.count));
+      k.cloud({ count: legendDots.length, pattern: false, part: deck }, (rand, j, n) => {
+        const dot = legendDots[Math.floor((j * legendDots.length) / n)];
+        return {
+          p: [dot.x, hb + 0.0126, dot.z],
+          n: [0, 1, 0],
+          flat: 0.2,
+          color: "#eef1f5",
+          opacity: 1,
+          size: dotSize * Math.sqrt(Math.max(1, legendDots.length / n)),
+          kind: "key",
+          params: [dot.key, 0],
+        };
       });
       // The lid, hinged along the back edge and modelled standing open.
       const pivot = [0, hb + hl / 2, -D / 2 + 0.01];

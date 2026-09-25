@@ -222,9 +222,12 @@ vec3 spPattern(vec3 rgb) {
     uv = vec2(atan(q.x, q.z) / 6.2831853 * uSpPat.z + 0.5, 0.5 - q.y / (2.0 * uSpPatB.y));
   } else if (uSpPat.y < 1.5) {
     uv = vec2(0.5 + q.x / (2.0 * uSpPatB.w), 0.5 - q.y / (2.0 * uSpPatB.y));
-  } else {
+  } else if (uSpPat.y < 2.5) {
     vec3 d = normalize(q + vec3(1e-6));
     uv = vec2(atan(d.x, d.z) / 6.2831853 * uSpPat.z + 0.5, acos(clamp(d.y, -1.0, 1.0)) / 3.1415927);
+  } else {
+    // Top: seen from above, the design's top edge at the far side.
+    uv = vec2(0.5 + q.x / (2.0 * uSpPatB.w), 0.5 + q.z / (2.0 * uSpPatB.y));
   }
   vec4 pc = textureLod(uSpPattern, uv, 0.0);
   float lum = dot(rgb, vec3(0.299, 0.587, 0.114));
@@ -504,9 +507,11 @@ fn spPattern(rgb: vec3f) -> vec3f {
     uv = vec2f(atan2(q.x, q.z) / 6.2831853 * uniform.uSpPat.z + 0.5, 0.5 - q.y / (2.0 * uniform.uSpPatB.y));
   } else if (uniform.uSpPat.y < 1.5) {
     uv = vec2f(0.5 + q.x / (2.0 * uniform.uSpPatB.w), 0.5 - q.y / (2.0 * uniform.uSpPatB.y));
-  } else {
+  } else if (uniform.uSpPat.y < 2.5) {
     let d = normalize(q + vec3f(1e-6));
     uv = vec2f(atan2(d.x, d.z) / 6.2831853 * uniform.uSpPat.z + 0.5, acos(clamp(d.y, -1.0, 1.0)) / 3.1415927);
+  } else {
+    uv = vec2f(0.5 + q.x / (2.0 * uniform.uSpPatB.w), 0.5 + q.z / (2.0 * uniform.uSpPatB.y));
   }
   let pc = textureSampleLevel(uSpPattern, uSpPatternSampler, uv, 0.0);
   let lum = dot(rgb, vec3f(0.299, 0.587, 0.114));

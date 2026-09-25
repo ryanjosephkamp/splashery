@@ -211,6 +211,11 @@ class App {
       clayOK ? "" : "Clay works on generated toys. Pick one or make one.",
     );
     ui.setToyPanel(info);
+    // A toy that lays flag colours on its own way (the chess board, from
+    // above) gets that way when it comes out with a flag on.
+    const prefer = info.recipe?.patternProjection;
+    if (prefer && scene.pattern.id === "flag" && scene.pattern.projection === "wrap")
+      this.setPattern({ projection: prefer });
     ui.setFileToy(info.kind === "file", scene.toy.flip);
     this.renderCredits(info);
     this.updateRenderInfo();
@@ -393,6 +398,27 @@ class App {
     this.ui.toast("Paint cleared.");
   }
 
+  // Everything back to how the toy starts: the scene is rebuilt for the same
+  // toy with no flag colours or pattern, paint, clay, effects, toy options,
+  // motion or look changes; Detail goes back to Auto and the view resets.
+  async resetAll() {
+    const player = this.player;
+    const toy = player.scene.toy;
+    const fresh = createScene({ seed: player.scene.seed });
+    if (toy.kind === "builtin") fresh.toy = { kind: "builtin", id: toy.id };
+    else {
+      fresh.toy = structuredClone(toy);
+      delete fresh.toy.clay;
+      delete fresh.toy.options;
+    }
+    const file = toy.kind === "file" ? this.file : null;
+    if (toy.kind === "file" && !file) return;
+    await this.applyScene(fresh, { file });
+    if (player.detail !== "auto") await this.setDetail("auto");
+    this.resetCamera();
+    this.ui.toast("Everything is back to how it started.");
+  }
+
   pokeRandom() {
     this.player.pokeRandom();
   }
@@ -519,7 +545,12 @@ class App {
     const prev = player.scene.pattern;
     const next = { ...prev, ...partial };
     if (partial.id === "flag" && prev.id !== "flag") {
-      next.projection = "wrap";
+      // A toy can prefer a way to lay a flag on (the chess board: from above).
+      const recipe = player.toyInfo?.recipe;
+      next.projection = recipe?.patternProjection || "wrap";
+      // ... and can keep more of its own light and dark under it (the chess
+      // set: light pieces stay light and dark ones dark).
+      if (recipe?.patternDetail !== undefined) next.detail = recipe.patternDetail;
       next.repeats = 2;
       next.amount = 1;
       if (!next.flag) next.flag = await this.defaultFlag();

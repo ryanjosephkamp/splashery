@@ -254,6 +254,14 @@ const PROFILE = {
 // The game on the board: the Opera Game unless one was loaded from PGN.
 const OPERA = {
   title: "The Opera Game (Morphy v the Duke of Brunswick and Count Isouard, Paris 1858)",
+  tags: {
+    Event: "The Opera Game",
+    Site: "Paris",
+    Date: "1858.??.??",
+    White: "Paul Morphy",
+    Black: "Duke Karl of Brunswick and Count Isouard",
+    Result: "1-0",
+  },
   opera: true,
   start: START,
   plies: OPERA_GAME,
@@ -262,12 +270,26 @@ const OPERA = {
 let game = null;
 function setGame(g) {
   const states = timeline(g);
-  game = { ...g, states, n: g.plies.length };
-  Object.assign(play, { on: false, g: 0, last: null, snap: null, landed: -1 });
+  game = { ...g, tags: { ...(g.tags || {}) }, states, n: g.plies.length };
+  Object.assign(play, { g: -1, last: null, target: null, jump: null, glide: null, landed: -1 });
 }
-// Per-toy playing state (one chess set is shown at a time).
-const play = { on: false, g: 0, last: null, stopAt: -99, snap: null, landed: -1 };
+// Per-toy playing state (one chess set is shown at a time): g is game time
+// (-1 before the first move); `target` is a move to step to while paused;
+// `jump` asks for a jump to a move (the start or the end), which the pieces
+// glide to (`glide` holds where they were and when it began).
+const play = { g: -1, last: null, target: null, jump: null, glide: null, landed: -1 };
 setGame(OPERA);
+
+// Game time when p moves have been played and the pieces have settled
+// (-1: the start; after the last move, long enough for the king to tip).
+const settledAt = (p) => (p <= 0 ? -1 : (p - 1) * PLY + MOVE + (p >= game.n ? 1.4 : SWAP + 0.01));
+// Moves played by game time g (a move under way counts once it lands).
+function playedBy(g) {
+  if (g < 0) return 0;
+  const i = Math.floor(g / PLY);
+  return Math.min(game.n, g - i * PLY >= MOVE ? i + 1 : i);
+}
+const gameOver = () => game.n > 0 && play.g >= (game.n - 1) * PLY + MOVE + 0.3;
 
 // Every token's offset from home and visibility g game seconds in.
 function positionsAt(g) {
@@ -321,19 +343,26 @@ const paceOf = (c) => Math.pow(2.5, ((c.pace ?? 0.5) - 0.5) * 2);
 
 export const RECIPES = {
   "chess-set": {
-    // Frames keep coming while the game plays or the pieces go home.
-    alive: (c) => c.play > 0 || play.snap !== null,
+    // Frames keep coming while the game plays or the pieces move.
+    alive: (c) => c.play > 0 || play.target !== null || play.jump !== null || play.glide !== null,
     controls: [
       { key: "play", label: "Play", type: "toggle", default: 0, ease: 0.2 },
+      { key: "restart", label: "Restart", type: "pulse", ease: 0.2 },
       { key: "pace", label: "Move speed", default: 0.5 },
     ],
+    // A tap plays or pauses the game; once it is over, a tap starts it again.
     action: {
       key: "play",
       get label() {
         return game.opera ? "Play the Opera Game" : "Play the game";
       },
+      at: (point, c) => (c.play > 0.5 && gameOver() ? "restart" : undefined),
     },
     note: "Open a PGN file or paste a game to watch it played out on the board.",
+    // Flag colours lie over the board from above, so the squares and the
+    // pieces take them (light pieces light, dark pieces dark).
+    patternProjection: "top",
+    patternDetail: 0.85,
     // The game panel (ui.js): load a game from PGN text, or go back to the
     // Opera Game.
     game: {
@@ -348,70 +377,108 @@ export const RECIPES = {
       reset() {
         setGame(OPERA);
       },
+      // The game's details (PGN tags), which can be edited: the title
+      // follows them.
+      tags: () => ({ ...game.tags }),
+      async setTags(partial) {
+        const { gameTitle } = await import("../chess.js");
+        Object.assign(game.tags, partial);
+        game.title = gameTitle(game.tags);
+        game.edited = true;
+      },
+      // Where the game is: moves played, of how many, and whether it is over.
+      state: () => ({ played: playedBy(play.g), n: game.n, over: gameOver() }),
+      // Step one move on or back (the piece slides), or jump to the start
+      // or the end (the pieces glide there). The caller pauses play first.
+      step(d) {
+        const from = play.target ?? playedBy(play.g);
+        play.target = Math.max(0, Math.min(game.n, from + d));
+      },
+      jump(where) {
+        play.target = null;
+        play.jump = where === "end" ? game.n : 0;
+      },
     },
     drive(t, c, out, info) {
       const now = info.time;
-      const want = c.play > 0.5;
+      const m = (play.mem ||= {});
       // Game time runs at the chosen pace.
       const dt = play.last === null ? 0 : Math.max(0, Math.min(0.25, now - play.last));
       play.last = now;
-      if (want && !play.on) {
-        Object.assign(play, { on: true, g: -dt * paceOf(c), snap: null, landed: -1 });
-      } else if (!want && play.on) {
-        play.on = false;
-        play.snap = positionsAt(play.g);
-        play.stopAt = now;
+      const pace = paceOf(c);
+      const from = () => positionsAt(play.g);
+      // A tap on a finished game: back to the start (gliding) and play on.
+      if (c.restart > (m.restart ?? 0) + 0.02) play.jump = 0;
+      m.restart = c.restart;
+      if (play.jump !== null) {
+        play.glide = { from: from(), at: now };
+        play.g = settledAt(play.jump);
+        play.landed = playedBy(play.g) - 1;
+        play.jump = null;
+      }
+      if (c.play > 0.5 && !play.glide) {
+        // Playing: from the start, the first move begins at once.
+        play.target = null;
+        if (play.g < 0) play.g = -dt * pace;
+        play.g += dt * pace;
+      } else if (play.target !== null) {
+        // Stepping while paused: slide to the settled position of the
+        // target move, forwards or back, a little faster than play.
+        const goal = settledAt(play.target);
+        const d = goal - play.g;
+        const move = 1.6 * dt * pace;
+        if (Math.abs(d) <= move) {
+          play.g = goal;
+          play.target = null;
+        } else play.g += Math.sign(d) * move;
+        if (d < 0) play.landed = Math.min(play.landed, playedBy(play.g) - 1);
       }
       const n = game.n;
-      let pose;
+      const g = play.g;
+      let pose = positionsAt(g);
       let quats = null;
-      if (play.on) {
-        play.g += dt * paceOf(c);
-        const g = play.g;
-        pose = positionsAt(g);
-        // A clack as each piece lands; a lower one for a capture, a bright
-        // one when a pawn becomes a queen.
-        const i = Math.floor(g / PLY);
-        if (i < n && g - i * PLY >= MOVE && play.landed < i) {
-          play.landed = i;
-          out.cues.push(CLACK(620 + 90 * (i % 3), 1));
-          const step = game.states[i + 1];
-          if (step.taken >= 0) out.cues.push({ ...CLACK(430, 0.8), at: 0.07 });
-          if (step.promoted) out.cues.push({ ...CLACK(980, 0.7), at: 0.2 });
+      // A clack as each piece lands; a lower one for a capture, a bright
+      // one when a pawn becomes a queen.
+      const i = Math.floor(g / PLY);
+      if (g >= 0 && i < n && g - i * PLY >= MOVE && play.landed < i) {
+        play.landed = i;
+        out.cues.push(CLACK(620 + 90 * (i % 3), 1));
+        const step = game.states[i + 1];
+        if (step.taken >= 0) out.cues.push({ ...CLACK(430, 0.8), at: 0.07 });
+        if (step.promoted) out.cues.push({ ...CLACK(980, 0.7), at: 0.2 });
+      }
+      // The end: the losing king tips over (checkmate or resignation).
+      const done = g - (n - 1) * PLY - MOVE;
+      if (n && done > 0.3 && game.loser) {
+        const k = game.states[n].findIndex((st, j) => st.vis > 0 && TOKENS[j].piece === `${game.loser}K`); // prettier-ignore
+        if (k >= 0) {
+          const dir = game.loser === "b" ? -1 : 1;
+          const tip = (Math.PI / 2.2) * easeInOut(band(done, 0.3, 1.3));
+          const home = squareAt(TOKENS[k].home);
+          quats = { [k]: { quat: quatAxisAngle([1, 0, 0], dir * tip), base: [home[0], 0, home[2] + dir * 0.3 * S] } }; // prettier-ignore
         }
-        // The end: the losing king tips over (checkmate or resignation).
-        const done = g - (n - 1) * PLY - MOVE;
-        if (done > 0.3 && game.loser) {
-          const k = game.states[n].findIndex((st, j) => st.vis > 0 && TOKENS[j].piece === `${game.loser}K`); // prettier-ignore
-          if (k >= 0) {
-            const dir = game.loser === "b" ? -1 : 1;
-            const tip = (Math.PI / 2.2) * easeInOut(band(done, 0.3, 1.3));
-            const home = squareAt(TOKENS[k].home);
-            quats = { [k]: { quat: quatAxisAngle([1, 0, 0], dir * tip), base: [home[0], 0, home[2] + dir * 0.3 * S] } }; // prettier-ignore
-          }
-          if (play.landed < n) {
-            play.landed = n;
-            out.cues.push({ voice: "wood", f: 300, decay: 1.4, at: 0.6 });
-          }
+        if (play.landed < n && c.play > 0.5) {
+          play.landed = n;
+          out.cues.push({ voice: "wood", f: 300, decay: 1.4, at: 0.6 });
         }
-      } else {
-        // At rest the pieces stand on the game's first position; after a stop
-        // they glide back there.
-        pose = positionsAt(-1);
-        if (play.snap) {
-          const u = easeInOut(band(now - play.stopAt, 0, 1.2));
-          const hop = 0.3 * S * Math.sin(Math.PI * u);
-          pose = pose.map((rest, k) => {
-            const from = play.snap[k];
-            const d = from.offset;
-            const r = rest.offset;
-            return {
-              offset: [d[0] + (r[0] - d[0]) * u, d[1] * (1 - u) + hop, d[2] + (r[2] - d[2]) * u],
-              visible: from.visible + (rest.visible - from.visible) * u,
-            };
-          });
-          if (u >= 1) play.snap = null;
-        }
+      }
+      // After a jump the pieces glide from where they were, with a hop.
+      if (play.glide) {
+        const u = easeInOut(band(now - play.glide.at, 0, 1.1));
+        const hop = 0.3 * S * Math.sin(Math.PI * u);
+        pose = pose.map((to, k) => {
+          const a = play.glide.from[k].offset;
+          const b = to.offset;
+          return {
+            offset: [
+              a[0] + (b[0] - a[0]) * u,
+              a[1] * (1 - u) + b[1] * u + hop,
+              a[2] + (b[2] - a[2]) * u,
+            ],
+            visible: play.glide.from[k].visible + (to.visible - play.glide.from[k].visible) * u,
+          };
+        });
+        if (u >= 1) play.glide = null;
       }
       out.tokens = pose.map((p, k) => ({ ...p, ...(quats?.[k] || {}) }));
     },
@@ -446,7 +513,8 @@ export const RECIPES = {
           // A thin dark inlay line between squares, in small splats.
           if (edge < 0.022) return keep(lit("#3a2413", c.n, { spec: 0.1 }), 0.35);
           const size = 0.35 + 0.65 * Math.min(1, (edge - 0.022) / 0.12);
-          return { c: lit(col, c.n, { spec: 0.35, pow: 40 }), keep: true, size };
+          // (Not kept out of the pattern layer: flag colours cover the squares.)
+          return { c: lit(col, c.n, { spec: 0.35, pow: 40 }), size };
         },
       });
       const B = 8 * S + 0.24;
@@ -481,7 +549,6 @@ export const RECIPES = {
           weight: 4,
           size: 0.7,
           jitter: 0.008,
-          pattern: false,
           interior: 0.05,
           core: col,
         };
