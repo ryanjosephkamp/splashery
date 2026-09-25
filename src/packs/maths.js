@@ -3,7 +3,17 @@
 // itself inside out, and the solids and the Sierpinski tetrahedron come
 // apart when tapped. Loaded on demand.
 
-import { mix, shade, smoothstep, clamp, ramp, quatAxisAngle } from "../kit.js";
+import {
+  mix,
+  shade,
+  smoothstep,
+  clamp,
+  ramp,
+  quatAxisAngle,
+  quatEuler,
+  quatMul,
+  quatRotate,
+} from "../kit.js";
 
 const TAU = Math.PI * 2;
 const PHI = (1 + Math.sqrt(5)) / 2;
@@ -20,6 +30,43 @@ const len = (a) => Math.hypot(a[0], a[1], a[2]);
 const unit = (a) => mul(a, 1 / (len(a) || 1));
 const keep = (c, size) => ({ c, keep: true, size });
 const easeInOut = (x) => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2);
+const clamp01 = (x) => (x < 0 ? 0 : x > 1 ? 1 : x);
+const ease = (x) => x * x * (3 - 2 * x);
+// 0 before a, rising to 1 at b.
+const band = (x, a, b) => clamp01((x - a) / (b - a));
+// Rises from a to b, holds, falls from c to d.
+const bump = (x, a, b, c, d) => band(x, a, b) * (1 - band(x, c, d));
+// A pulse control's progress: 0 at the tap, 1 when done (and at rest).
+const progress = (v) => (v > 0 ? 1 - v : 1);
+const rotY = (p, a) => {
+  const c = Math.cos(a);
+  const s = Math.sin(a);
+  return [p[0] * c + p[2] * s, p[1], -p[0] * s + p[2] * c];
+};
+// The rotation whose columns are the unit vectors x, y and z.
+function quatBasis(x, y, z) {
+  const tr = x[0] + y[1] + z[2];
+  if (tr > 0) {
+    const s = Math.sqrt(tr + 1) * 2;
+    return [(y[2] - z[1]) / s, (z[0] - x[2]) / s, (x[1] - y[0]) / s, 0.25 * s];
+  }
+  if (x[0] > y[1] && x[0] > z[2]) {
+    const s = Math.sqrt(1 + x[0] - y[1] - z[2]) * 2;
+    return [0.25 * s, (y[0] + x[1]) / s, (z[0] + x[2]) / s, (y[2] - z[1]) / s];
+  }
+  if (y[1] > z[2]) {
+    const s = Math.sqrt(1 + y[1] - x[0] - z[2]) * 2;
+    return [(y[0] + x[1]) / s, 0.25 * s, (z[1] + y[2]) / s, (z[0] - x[2]) / s];
+  }
+  const s = Math.sqrt(1 + z[2] - x[0] - y[1]) * 2;
+  return [(z[0] + x[2]) / s, (z[1] + y[2]) / s, 0.25 * s, (x[1] - y[0]) / s];
+}
+// Direction towards a camera at yaw/pitch (see src/camera.js).
+const camDir = (yaw, pitch) => [
+  Math.sin(yaw) * Math.cos(pitch),
+  Math.sin(pitch),
+  Math.cos(yaw) * Math.cos(pitch),
+];
 
 // Baked light from above, front and right, with a sheen towards the viewer.
 const LIGHT = unit([0.4, 0.85, 0.55]);
@@ -39,7 +86,8 @@ function lit(col, n, { amb = 0.62, dif = 0.45, spec = 0.25, pow = 28, two = fals
 // ---- Custom shapes ---------------------------------------------------------------
 
 // A tube along a polyline, sampled evenly by length; samples carry t (0..1
-// along the path) and the tangent (for stretched splats).
+// along the path), the tangent (for stretched splats) and `at`, the place
+// along the list of points (2.5 is halfway from the third to the fourth).
 function polyTube(pts, radius, { closed = false } = {}) {
   const n = pts.length;
   const segs = closed ? n : n - 1;
@@ -76,7 +124,7 @@ function polyTube(pts, radius, { closed = false } = {}) {
       const t = s / L;
       const nn = add(mul(N, Math.cos(ang)), mul(B, Math.sin(ang)));
       const p0 = [a[0] + (b[0] - a[0]) * f, a[1] + (b[1] - a[1]) * f, a[2] + (b[2] - a[2]) * f];
-      return { p: add(p0, mul(nn, rad(t))), n: nn, u: ang / TAU, v: t, t, tangent: T };
+      return { p: add(p0, mul(nn, rad(t))), n: nn, u: ang / TAU, v: t, t, tangent: T, at: lo + f };
     },
   };
 }
@@ -288,40 +336,53 @@ function solid(kind) {
 
 // ---- Fractals and implicit surfaces --------------------------------------------------
 
-// Exposed unit faces of a Menger sponge (level L) in a cube of side 1.
-function mengerShape(level) {
+// The solid cells of a level-L Menger sponge on a grid of 3^L cells a side;
+// at(i, j, k) is 0 outside the grid.
+function mengerGrid(level) {
   const n = 3 ** level;
-  const solidAt = (i, j, k) => {
-    for (let l = 0; l < level; l++) {
-      if ((i % 3 === 1) + (j % 3 === 1) + (k % 3 === 1) >= 2) return false;
-      i = Math.floor(i / 3);
-      j = Math.floor(j / 3);
-      k = Math.floor(k / 3);
-    }
-    return true;
-  };
   const occ = new Uint8Array(n * n * n);
   for (let i = 0; i < n; i++)
     for (let j = 0; j < n; j++)
-      for (let k = 0; k < n; k++) occ[(i * n + j) * n + k] = solidAt(i, j, k) ? 1 : 0;
+      for (let k = 0; k < n; k++) {
+        let a = i;
+        let b = j;
+        let c = k;
+        let solid = 1;
+        for (let l = 0; l < level && solid; l++) {
+          if ((a % 3 === 1) + (b % 3 === 1) + (c % 3 === 1) >= 2) solid = 0;
+          a = Math.floor(a / 3);
+          b = Math.floor(b / 3);
+          c = Math.floor(c / 3);
+        }
+        occ[(i * n + j) * n + k] = solid;
+      }
   const at = (i, j, k) =>
     i < 0 || j < 0 || k < 0 || i >= n || j >= n || k >= n ? 0 : occ[(i * n + j) * n + k];
-  const dirs = [
-    [1, 0, 0],
-    [-1, 0, 0],
-    [0, 1, 0],
-    [0, -1, 0],
-    [0, 0, 1],
-    [0, 0, -1],
-  ];
+  return { n, at };
+}
+
+const CUBE_DIRS = [
+  [1, 0, 0],
+  [-1, 0, 0],
+  [0, 1, 0],
+  [0, -1, 0],
+  [0, 0, 1],
+  [0, 0, -1],
+];
+
+// Exposed faces of the solid cells of `grid` (a cube of side 1 about the
+// origin) that `want(i, j, k, f)` keeps, sampled evenly. `shade` is the grid
+// the occlusion is read from (the filled cells around the one in front of a
+// face). Samples carry the face (0..5) and that occlusion.
+function cellFaces(grid, want, shade = grid) {
+  const { n, at } = grid;
   const faces = [];
   for (let i = 0; i < n; i++)
     for (let j = 0; j < n; j++)
       for (let k = 0; k < n; k++) {
         if (!at(i, j, k)) continue;
-        dirs.forEach((d, f) => {
-          if (at(i + d[0], j + d[1], k + d[2])) return;
-          // Occlusion: filled cells around the one in front of the face.
+        CUBE_DIRS.forEach((d, f) => {
+          if (at(i + d[0], j + d[1], k + d[2]) || !want(i, j, k, f)) return;
           let occl = 0;
           const fi = i + d[0];
           const fj = j + d[1];
@@ -329,7 +390,7 @@ function mengerShape(level) {
           for (let a = -1; a <= 1; a++)
             for (let b = -1; b <= 1; b++) {
               const off = d[0] ? [0, a, b] : d[1] ? [a, 0, b] : [a, b, 0];
-              occl += at(fi + off[0], fj + off[1], fk + off[2]);
+              occl += shade.at(fi + off[0], fj + off[1], fk + off[2]);
             }
           faces.push(i, j, k, f, occl);
         });
@@ -343,21 +404,86 @@ function mengerShape(level) {
     sample(rand) {
       const q = Math.floor(rand() * count) * 5;
       const f = faces[q + 3];
-      const d = dirs[f];
+      const d = CUBE_DIRS[f];
       const u = rand();
       const v = rand();
-      const c = [
-        (faces[q] + 0.5) * cell - 0.5,
-        (faces[q + 1] + 0.5) * cell - 0.5,
-        (faces[q + 2] + 0.5) * cell - 0.5,
-      ];
-      const p = [c[0] + d[0] * cell * 0.5, c[1] + d[1] * cell * 0.5, c[2] + d[2] * cell * 0.5];
-      const a1 = d[0] ? 1 : 0;
-      const a2 = d[2] ? 1 : 2;
-      p[a1] += (u - 0.5) * cell;
-      p[a2] += (v - 0.5) * cell;
-      const depth = Math.min(0.5 - Math.abs(p[0]), 0.5 - Math.abs(p[1]), 0.5 - Math.abs(p[2]));
-      return { p, n: d, u, v, face: f, occl: faces[q + 4], depth };
+      const p = [0, 1, 2].map((a) => (faces[q + a] + 0.5 + d[a] * 0.5) * cell - 0.5);
+      p[d[0] ? 1 : 0] += (u - 0.5) * cell;
+      p[d[2] ? 1 : 2] += (v - 0.5) * cell;
+      return { p, n: d, u, v, face: f, occl: faces[q + 4] };
+    },
+  };
+}
+
+// The sponge's colour at p on a face (0..5) with occlusion occl: warm
+// outside, cooler and darker on the walls deep in the holes.
+const MENGER_LIGHT = [1.0, 0.62, 1.12, 0.5, 0.88, 0.6];
+function mengerLook(p, face, occl) {
+  const outer = ramp(["#c8553d", "#f28f3b", "#ffd5a3"], p[1] + 0.5);
+  const inner = ramp(["#2b2d6e", "#1b4f8a", "#0f7c8c"], (p[0] + p[2] + 1) / 2);
+  const depth = Math.min(0.5 - Math.abs(p[0]), 0.5 - Math.abs(p[1]), 0.5 - Math.abs(p[2]));
+  const wall = depth > 0.002 ? 0.55 + 0.45 * smoothstep(0.0, 0.25, depth) : 0;
+  const col = mix(outer, inner, wall);
+  return shade(col, MENGER_LIGHT[face] * (1 - 0.06 * occl) * (1 - 0.25 * wall));
+}
+
+// The plugs of the holes that level k of the sponge carves: the cube (side
+// 3^-k) at the middle of each face that level k - 1 leaves exposed. Each is
+// { c: centre, f: the face it closes, occl: the occlusion its outer face
+// would have in the finished sponge (read from `fine`) }.
+function mengerPlugs(k, fine) {
+  const g = mengerGrid(k - 1);
+  const cell = 1 / g.n;
+  const plugs = [];
+  for (let i = 0; i < g.n; i++)
+    for (let j = 0; j < g.n; j++)
+      for (let l = 0; l < g.n; l++) {
+        if (!g.at(i, j, l)) continue;
+        CUBE_DIRS.forEach((d, f) => {
+          if (g.at(i + d[0], j + d[1], l + d[2])) return;
+          const mid = [i, j, l].map((x) => (x + 0.5) * cell - 0.5);
+          // The fine cell just outside the middle of this face.
+          const front = mid.map((x, a) => Math.floor((x + d[a] * cell * 0.5 + 0.5) * fine.n + d[a] * 0.5)); // prettier-ignore
+          let occl = 0;
+          for (let a = -1; a <= 1; a++)
+            for (let b = -1; b <= 1; b++) {
+              const off = d[0] ? [0, a, b] : d[1] ? [a, 0, b] : [a, b, 0];
+              occl += fine.at(front[0] + off[0], front[1] + off[1], front[2] + off[2]);
+            }
+          // A hair proud of the face, so the hole's rim never draws over it.
+          plugs.push({ c: add(mid, mul(d, cell / 3 + 0.009)), f, occl });
+        });
+      }
+  return plugs;
+}
+
+// Faces of plug cubes of side s: the outer one, or the four sides (the
+// inner face never shows). Samples carry the face and the plug, and `at`,
+// the matching point on the outer face (sides take its colour).
+function plugFaces(plugs, s, sides) {
+  const per = sides ? 4 : 1;
+  return {
+    area: plugs.length * per * s * s * (sides ? 1 : 1.3),
+    thick: s,
+    sample(rand) {
+      const plug = plugs[Math.floor(rand() * plugs.length)];
+      const d = CUBE_DIRS[plug.f];
+      const ax = d[0] ? 0 : d[1] ? 1 : 2;
+      const face = sides ? [0, 1, 2, 3, 4, 5].filter((f) => f >> 1 !== ax)[Math.floor(rand() * 4)] : plug.f; // prettier-ignore
+      const n = CUBE_DIRS[face];
+      const fa = n[0] ? 0 : n[1] ? 1 : 2;
+      const u = rand();
+      const v = rand();
+      // The outer face overlaps the rim of its hole a little, so a closed
+      // hole shows no seam.
+      const w = sides ? s : s * 1.14;
+      const p = add(plug.c, mul(n, s / 2));
+      const others = [0, 1, 2].filter((a) => a !== fa);
+      p[others[0]] += (u - 0.5) * w;
+      p[others[1]] += (v - 0.5) * w;
+      const at = p.slice();
+      at[ax] = plug.c[ax] + d[ax] * (s / 2);
+      return { p, n, u, v, face, occl: plug.occl, at };
     },
   };
 }
@@ -538,6 +664,24 @@ const PALETTES = {
   candy: ["#ff595e", "#ffca3a", "#8ac926", "#1982c4", "#6a4c93"],
 };
 
+// The tesseract: 16 corners (x, y, z, w each +-1; corner i has w = +1 when
+// i >= 8) and the 32 edges joining corners that differ in one coordinate.
+// Seen in perspective from 4D, the w = +1 cube shows at 0.9 and the w = -1
+// cube inside it at 0.45.
+const TESS = [];
+for (let i = 0; i < 16; i++)
+  TESS.push([i & 1 ? 1 : -1, i & 2 ? 1 : -1, i & 4 ? 1 : -1, i & 8 ? 1 : -1]);
+const TESS_EDGES = [];
+for (let i = 0; i < 16; i++)
+  for (let b = 0; b < 4; b++) if ((i ^ (1 << b)) > i) TESS_EDGES.push([i, i ^ (1 << b)]);
+const tessShow = (v) => mul([v[0], v[1], v[2]], 1.8 / (3 - v[3]));
+// A turn by angle a in the plane of X and W.
+const tessTurn = (v, a) => {
+  const c = Math.cos(a);
+  const s = Math.sin(a);
+  return [v[0] * c - v[3] * s, v[1], v[2], v[0] * s + v[3] * c];
+};
+
 // Directions the four corner copies move when the tetrahedron explodes.
 const SIER = sierpinski(1);
 const SIER_DIRS = SIER.corners.map((v) => unit(sub(v, SIER.centre)));
@@ -580,6 +724,71 @@ for (const kind of SOLID_KINDS) {
   });
   SOLIDS[kind] = { faces, groups, dirs: dirs.map(unit) };
 }
+
+// The Möbius band: half-width MOB_W, tipped by MOB_Q. mobiusPoint(th, w,
+// psi) is the point at angle th round the loop and w across it, with the
+// cross-section turned an extra psi about the middle line.
+const MOB_W = 0.5;
+const MOB_Q = quatEuler(38, 0, -8);
+const MOB_TWIST = (th) => 0.5 * Math.sin(th);
+function mobiusPoint(th, w, psi = 0) {
+  const a = th / 2 + psi;
+  const r = 1 + w * Math.cos(a);
+  return quatRotate(MOB_Q, [r * Math.cos(th), w * Math.sin(a), r * Math.sin(th)]);
+}
+// Where the middle line is at angle th (not wrapped: after one lap the up
+// side is the other face), with the twist m (0..1) applied: position,
+// forward and up.
+function mobiusFrame(th, m) {
+  const R = [Math.cos(th), 0, Math.sin(th)];
+  const a = th / 2;
+  const b = a + MOB_TWIST(th);
+  const d0 = [R[0] * Math.cos(a), Math.sin(a), R[2] * Math.cos(a)];
+  const d1 = [R[0] * Math.cos(b), Math.sin(b), R[2] * Math.cos(b)];
+  const d = unit(add(mul(d0, 1 - m), mul(d1, m)));
+  const fwd = [-Math.sin(th), 0, Math.cos(th)];
+  return {
+    pos: quatRotate(MOB_Q, R),
+    fwd: quatRotate(MOB_Q, fwd),
+    up: quatRotate(MOB_Q, unit(cross(fwd, d))),
+  };
+}
+const MOB_VIEW = camDir(0.9, 0.22);
+const MOB_START = 0.45;
+// The ant's two laps as a function of time (0..1): it hurries while it is
+// underneath (out of sight) and takes its time on top.
+const MOB_WALK = (() => {
+  const N = 512;
+  const time = [0];
+  for (let i = 1; i <= N; i++) {
+    const th = MOB_START + (2 * TAU * (i - 0.5)) / N;
+    const seen = dot(mobiusFrame(th, 0).up, MOB_VIEW);
+    time.push(time[i - 1] + 1 / (1 + 1.3 * smoothstep(0.05, -0.15, seen)));
+  }
+  return (x) => {
+    const tt = clamp(x, 0, 1) * time[N];
+    let i = 1;
+    while (i < N && time[i] < tt) i++;
+    const f = (tt - time[i - 1]) / (time[i] - time[i - 1]);
+    return MOB_START + (2 * TAU * (i - 1 + f)) / N;
+  };
+})();
+// The ant (facing +X, standing on the origin): body parts [centre, radii],
+// and its six hips (front, middle, back; left then right).
+const ANT = 1.3;
+const ANT_BODY = [
+  [[-0.075, 0.048, 0], [0.062, 0.04, 0.044]],
+  [[-0.01, 0.038, 0], [0.013, 0.012, 0.012]],
+  [[0.025, 0.042, 0], [0.04, 0.024, 0.024]],
+  [[0.083, 0.048, 0], [0.031, 0.027, 0.029]],
+].map(([c, r]) => [mul(c, ANT), mul(r, ANT)]);
+const ANT_HIPS = [0.042, 0.042, 0.022, 0.022, 0.002, 0.002].map((x, i) =>
+  mul([x, 0.034, i % 2 ? 0.016 : -0.016], ANT),
+);
+// The two ant copies are built here: in front of the band and behind it
+// (for the draw order), inside the band's own reach.
+const MOB_ANT_FRONT = mul(MOB_VIEW, 1.15);
+const MOB_ANT_BACK = mul(MOB_VIEW, -1.15);
 
 // ---- Recipes ------------------------------------------------------------------------
 
@@ -659,7 +868,7 @@ export const RECIPES = {
 
   mobius: {
     alive: true,
-    density: 0.7,
+    density: 1,
     options: [
       {
         key: "colors",
@@ -673,14 +882,69 @@ export const RECIPES = {
         ],
       },
     ],
-    controls: [{ key: "glow", label: "Glow", type: "slider", default: 0.6 }],
+    controls: [
+      { key: "glow", label: "Glow", type: "slider", default: 0.6 },
+      { key: "walk", label: "Ant walk", type: "pulse", ease: 5 },
+    ],
+    action: { key: "walk", label: "Send the ant round" },
+    // A tap sets an ant walking along the middle of the band. One lap brings
+    // it back underneath where it started (the band has one side); a second
+    // lap brings it back on top. Meanwhile the band twists a little and
+    // untwists, and the ant rides the twisted surface. The band is built
+    // twice: the glowing copy at rest and a copy that can twist (a morph),
+    // swapped while the glow is off. The ant is built twice too, in front of
+    // and behind everything, and shows the copy that draws right for the
+    // face it walks on.
     drive(t, c, out) {
-      out.glow = [1, 1, 0.9, 0.2 + 1.2 * c.glow];
+      const T = 5;
+      const p = c.walk > 0 ? T * (1 - c.walk) : -1;
+      const on = p >= 0;
+      const swapped = on && p > 0.25 && p < T - 0.25;
+      out.parts.band = { visible: swapped ? 0 : 1 };
+      out.parts.twist = { visible: swapped ? 1 : 0 };
+      const dim = on ? bump(p, 0, 0.22, T - 0.22, T) : 0;
+      out.glow = [1, 1, 0.9, (0.2 + 1.2 * c.glow) * (1 - dim)];
+      const m = on ? Math.sin(Math.PI * band(p, 0.3, T - 0.3)) ** 2 : 0;
+      out.morph = [m];
+      const x = band(p, 0.35, T - 0.45);
+      const th = MOB_WALK(x - (0.5 * Math.sin(TAU * x)) / TAU);
+      const f = mobiusFrame(th, m);
+      const q = quatBasis(f.fwd, f.up, cross(f.fwd, f.up));
+      const size = on ? bump(p, 0.18, 0.38, T - 0.42, T - 0.22) : 0;
+      const front = dot(f.up, MOB_VIEW) > 0;
+      // Tripod gait: legs 0, 3 and 4 swing together, 1, 2 and 5 against them.
+      const stride = x * 90;
+      const tokens = [];
+      [MOB_ANT_FRONT, MOB_ANT_BACK].forEach((base, copy) => {
+        const vis = size * ((copy === 0) === front ? 1 : 0);
+        tokens.push({ base, quat: q, offset: sub(f.pos, base), visible: vis });
+        ANT_HIPS.forEach((hip, i) => {
+          const phase = i === 0 || i === 3 || i === 4 ? 0 : Math.PI;
+          const swing = 0.38 * Math.sin(stride + phase) * (on ? 1 : 0);
+          const at = add(base, hip);
+          tokens.push({
+            base: at,
+            quat: quatMul(q, quatAxisAngle([0, 1, 0], swing)),
+            offset: sub(add(f.pos, quatRotate(q, hip)), at),
+            visible: vis,
+          });
+        });
+      });
+      out.tokens = tokens;
     },
     build(k, o) {
       const pal = PALETTES[o.colors] || PALETTES.sunset;
       const cyc = [pal[1], pal[2], pal[3], pal[4], pal[2], pal[1]];
-      const W = 0.5;
+      const W = MOB_W;
+      k.fitMorphs = false; // the twist stays within the frame; keep the rest fit
+      const color = (c) => {
+        const e = Math.abs(c.v - 0.5) * 2;
+        let col = ramp(cyc, c.u);
+        if ((c.u * 40) % 1 < 0.08) col = shade(col, 0.85);
+        col = lit(col, c.n, { amb: 0.66, dif: 0.42, spec: 0.3, two: true });
+        if (e > 0.93) return keep(mix(col, "#fff6d8", 0.75));
+        return col;
+      };
       const band = k.param(
         (u, v) => {
           const th = u * TAU;
@@ -692,17 +956,59 @@ export const RECIPES = {
       );
       k.add(band, {
         rot: [38, 0, -8],
+        part: k.part("band"),
         flat: 0.12,
+        even: true,
         kind: "pulse",
         params: (c) => [(c.u * 2) % 1, 0],
-        color: (c) => {
-          const e = Math.abs(c.v - 0.5) * 2;
-          let col = ramp(cyc, c.u);
-          if ((c.u * 40) % 1 < 0.08) col = shade(col, 0.85);
-          col = lit(col, c.n, { amb: 0.66, dif: 0.42, spec: 0.3, two: true });
-          if (e > 0.93) return keep(mix(col, "#fff6d8", 0.75));
-          return col;
-        },
+        color,
+      });
+      // The copy that twists (hidden at rest): each cross-section turns
+      // about the middle line, one way on one side of the loop and the other
+      // way opposite.
+      k.add(band, {
+        rot: [38, 0, -8],
+        part: k.part("twist"),
+        flat: 0.25,
+        even: true,
+        to: (c) => mobiusPoint(c.u * TAU, (c.v - 0.5) * 2 * W, MOB_TWIST(c.u * TAU)),
+        color,
+      });
+      // The ant, twice: a body and six legs, each leg a token of its own.
+      const antCol = (c) => keep(lit("#2a1810", c.n, { amb: 0.75, dif: 0.55, spec: 0.7, pow: 16 }));
+      [MOB_ANT_FRONT, MOB_ANT_BACK].forEach((base, copy) => {
+        const tok = copy * 7;
+        const body = { kind: "token", params: [tok, 0], flat: 0.5, weight: 6, color: antCol };
+        for (const [pos, r] of ANT_BODY)
+          k.add(k.sphere(1), { ...body, pos: add(base, pos), scale: r });
+        for (const side of [-1, 1])
+          k.add(
+            polyTube(
+              [
+                [0.1, 0.06, 0.012 * side],
+                [0.13, 0.105, 0.035 * side],
+                [0.165, 0.09, 0.055 * side],
+              ].map((q) => add(base, mul(q, ANT))),
+              0.0055 * ANT,
+            ),
+            { ...body, flat: 0.8 },
+          );
+        ANT_HIPS.forEach((hip, i) => {
+          const side = Math.sign(hip[2]);
+          const reach = [0.035, 0, -0.035][i >> 1];
+          const leg = [
+            [0, 0, 0],
+            [reach * 0.6, 0.03, 0.045 * side],
+            [reach * 1.7, -hip[1] / ANT, 0.085 * side],
+          ].map((q) => add(add(base, hip), mul(q, ANT)));
+          k.add(polyTube(leg, 0.0065 * ANT), {
+            kind: "token",
+            params: [tok + 1 + i, 0],
+            flat: 0.8,
+            weight: 6,
+            color: antCol,
+          });
+        });
       });
     },
   },
@@ -826,88 +1132,107 @@ export const RECIPES = {
         ],
       },
     ],
-    build(k, o) {
-      const shape = mengerShape(o.level === "2" ? 2 : 3);
-      const light = [1.0, 0.62, 1.12, 0.5, 0.88, 0.6];
-      k.add(shape, {
-        flat: 0.12,
-        color: (c) => {
-          const s = c.s;
-          const outer = ramp(["#c8553d", "#f28f3b", "#ffd5a3"], c.p[1] + 0.5);
-          const inner = ramp(["#2b2d6e", "#1b4f8a", "#0f7c8c"], (c.p[0] + c.p[2] + 1) / 2);
-          // Walls inside the holes are cooler and darker the deeper they go.
-          const wall = s.depth > 0.002 ? 0.55 + 0.45 * smoothstep(0.0, 0.25, s.depth) : 0;
-          let col = mix(outer, inner, wall);
-          col = shade(col, light[s.face] * (1 - 0.06 * s.occl) * (1 - 0.25 * wall));
-          return col;
-        },
+    controls: [{ key: "carve", label: "Carve", type: "pulse", ease: 3.9 }],
+    action: { key: "carve", label: "Close and carve the holes" },
+    // A tap plugs every hole with a solid cube (the smallest first), so the
+    // sponge closes into a plain cube; then it is carved again as the
+    // fractal is made: the six big plugs slide out of the faces, then the
+    // next level down, then the smallest, each set fading as it leaves.
+    drive(t, c, out) {
+      const p = c.carve > 0 ? 3.9 * (1 - c.carve) : 99;
+      // How far each level's plugs are out of their holes (1 = in the hole)
+      // and how solid they look.
+      const levels = [
+        [0.15, 0.65, 1.05, 1.75],
+        [0.05, 0.45, 1.95, 2.55],
+        [0.0, 0.3, 2.75, 3.3],
+      ].map(([a, b, d, e]) => {
+        const come = ease(band(p, a, b));
+        const go = ease(band(p, d, e));
+        return { out: 1 - come + go, vis: band(come, 0, 0.6) * (1 - band(go, 0.55, 1)) };
       });
+      out.morph = levels.map((l) => l.vis);
+      CUBE_DIRS.forEach((d, f) => {
+        out.parts["p1-" + f] = { offset: mul(d, 0.45 * levels[0].out) };
+        out.parts["p2-" + f] = { offset: mul(d, 0.16 * levels[1].out) };
+      });
+    },
+    build(k, o) {
+      const L = o.level === "2" ? 2 : 3;
+      const whole = mengerGrid(L);
+      k.add(
+        cellFaces(whole, () => true),
+        { flat: 0.12, color: (c) => mengerLook(c.p, c.s.face, c.s.occl) },
+      );
+      // The plugs (clear at rest): big ones for level 1, one part per face
+      // direction for levels 1 and 2, and the smallest only fade.
+      const look = (c) => mengerLook(c.s.at, c.s.face, c.s.occl);
+      for (let lv = 1; lv <= L; lv++) {
+        const plugs = mengerPlugs(lv, whole);
+        const side = 3 ** -lv;
+        const fade = { kind: "fade", channel: lv - 1, params: [0, -0.99], flat: 0.12, color: look };
+        if (lv === L) {
+          k.add(plugFaces(plugs, side, false), fade);
+          continue;
+        }
+        CUBE_DIRS.forEach((d, f) => {
+          const part = k.part(`p${lv}-${f}`);
+          const mine = plugs.filter((q) => q.f === f);
+          k.add(plugFaces(mine, side, false), { ...fade, part });
+          k.add(plugFaces(mine, side, true), { ...fade, part, weight: lv === 1 ? 1 : 0.6 });
+        });
+      }
     },
   },
 
   hypercube: {
     alive: true,
-    controls: [{ key: "turn", label: "4D turn", type: "slider", default: 0.85 }],
+    controls: [
+      { key: "turn", label: "4D turn", type: "slider", default: 0.85 },
+      { key: "flip", label: "Turn inside out", type: "pulse", ease: 5 },
+    ],
+    action: { key: "flip", label: "Turn inside out" },
+    // The sixteen corners are tokens placed each frame by a true turn in the
+    // plane of X and W, seen in perspective from 4D; every edge is skinned
+    // between its two corners, so it stays a straight line. At rest the
+    // tesseract rocks gently in 4D. A tap turns it right round: half a turn
+    // brings the pink inner cube out to be the outer one while the blue one
+    // folds inside (it holds there a moment), and the second half turns it
+    // back.
     drive(t, c, out) {
-      out.amount = c.turn;
+      const p = progress(c.flip);
+      const a =
+        Math.PI * (ease(band(p, 0.02, 0.44)) + ease(band(p, 0.58, 1))) +
+        0.32 * c.turn * Math.sin(t * 1.1);
+      out.tokens = TESS.map((v) => ({ offset: sub(tessShow(tessTurn(v, a)), tessShow(v)) }));
       out.body = { quat: quatAxisAngle(unit([0.25, 1, 0.12]), t * 0.28) };
     },
     build(k) {
-      const a = 0.9;
-      const s = 0.5;
-      const A = 0.3;
       const outerCol = "#35c3f0";
       const innerCol = "#f72585";
-      const corners = [];
-      for (const x of [-1, 1])
-        for (const y of [-1, 1]) for (const z of [-1, 1]) corners.push([x, y, z]);
-      const edges = [];
-      for (let i = 0; i < 8; i++)
-        for (let j = i + 1; j < 8; j++) {
-          const d = sub(corners[i], corners[j]);
-          if (Math.abs(d[0]) + Math.abs(d[1]) + Math.abs(d[2]) === 2) edges.push([i, j]);
-        }
-      const glowTube = (col) => (c) => shade(col, 0.85 + 0.35 * Math.max(0, dot(c.n, LIGHT)));
-      for (const [i, j] of edges) {
-        k.add(polyTube([mul(corners[i], a), mul(corners[j], a)], 0.028), {
-          flat: 0.4,
-          stretch: 1.6,
-          kind: "breathe",
-          params: [-A, 0],
-          color: glowTube(outerCol),
-        });
-        k.add(polyTube([mul(corners[i], a * s), mul(corners[j], a * s)], 0.024), {
-          flat: 0.4,
-          stretch: 1.6,
-          kind: "breathe",
-          params: [A, 0],
-          color: glowTube(innerCol),
+      const colOf = (i) => (TESS[i][3] > 0 ? outerCol : innerCol);
+      const glow = (col, n) => shade(col, 0.85 + 0.35 * Math.max(0, dot(n, LIGHT)));
+      // Round splats: skinned splats keep their built orientation.
+      for (const [i, j] of TESS_EDGES) {
+        const w = TESS[i][3] + TESS[j][3];
+        k.add(polyTube([tessShow(TESS[i]), tessShow(TESS[j])], w > 0 ? 0.026 : 0.022), {
+          flat: 0.9,
+          skin: (c) => [i, j, c.t],
+          color: (c) => glow(mix(colOf(i), colOf(j), c.t), c.n),
         });
       }
-      for (const v of corners) {
-        // A connector from the inner corner to the outer one stays straight
-        // while each end swells with its own cube.
-        k.add(polyTube([mul(v, a * s), mul(v, a)], 0.02), {
-          flat: 0.4,
-          stretch: 1.6,
-          kind: "breathe",
-          params: (c) => [(A * ((1 - c.t) * s - c.t)) / ((1 - c.t) * s + c.t), 0],
-          color: (c) => glowTube(mix(innerCol, outerCol, c.t))(c),
+      TESS.forEach((v, i) => {
+        const col = colOf(i);
+        k.add(k.sphere(v[3] > 0 ? 0.065 : 0.058), {
+          pos: tessShow(v),
+          weight: 1.2,
+          flat: 0.5,
+          kind: "token",
+          params: [i, 0],
+          pattern: false,
+          color: (c) => keep(mix(col, "#ffffff", 0.45 + 0.4 * Math.max(0, dot(c.n, HALF)))),
         });
-        for (const [r, amp, col] of [
-          [0.065, -A, outerCol],
-          [0.055, A, innerCol],
-        ])
-          k.add(k.sphere(r), {
-            pos: mul(v, amp < 0 ? a : a * s),
-            weight: 1.2,
-            flat: 0.3,
-            kind: "breathe",
-            params: [amp, 0],
-            pattern: false,
-            color: (c) => keep(mix(col, "#ffffff", 0.45 + 0.4 * Math.max(0, dot(c.n, HALF)))),
-          });
-      }
+      });
       k.reach([1.2, 1.2, 1.2]);
       k.reach([-1.2, -1.2, -1.2]);
     },
@@ -942,25 +1267,77 @@ export const RECIPES = {
         ],
       },
     ],
-    controls: [{ key: "glow", label: "Glow", type: "slider", default: 0.6 }],
+    controls: [
+      { key: "glow", label: "Glow", type: "slider", default: 0.6 },
+      { key: "twang", label: "Twang", type: "pulse", ease: 4.3 },
+    ],
+    action: { key: "twang", label: "Pull and let go" },
+    // A tap pulls the knot into a looser, swirled shape (its lobes stretch
+    // out and turn), then lets go: it springs back past its rest shape into
+    // a tight one and wobbles to a stop, like a stretched spring. The knot is
+    // built twice: the glowing tube at rest and a copy that can change shape
+    // (a morph), swapped while the glow is off.
     drive(t, c, out) {
-      out.glow = [1, 1, 0.92, 0.2 + 1.3 * c.glow];
+      const T = 4.3;
+      const p = c.twang > 0 ? T * (1 - c.twang) : -1;
+      const on = p >= 0;
+      const swapped = on && p > 0.2 && p < T - 0.25;
+      out.parts.knot = { visible: swapped ? 0 : 1 };
+      out.parts.bend = { visible: swapped ? 1 : 0 };
+      const dim = on ? bump(p, 0, 0.18, T - 0.25, T) : 0;
+      out.glow = [1, 1, 0.92, (0.2 + 1.3 * c.glow) * (1 - dim)];
+      const pull = ease(band(p, 0.22, 0.85));
+      const s = Math.max(0, p - 0.85);
+      const ring = Math.cos((TAU * s) / 1.05) * Math.exp(-s / 0.8);
+      out.morph = [on ? (p < 0.85 ? pull : ring * (1 - band(p, 3.4, 3.95))) : 0];
     },
     build(k, o) {
       const [p, q] = o.knot.split("-").map(Number);
       const pal = PALETTES[o.colors] || PALETTES.sunset;
       const cyc = [pal[1], pal[2], pal[3], pal[4], pal[3], pal[2], pal[1]];
       const r = p * q > 12 ? 0.26 : 0.36;
-      k.add(polyTube(torusKnot(p, q), r, { closed: true }), {
+      const N = 1600;
+      const tube = polyTube(torusKnot(p, q, N), r, { closed: true });
+      const look = {
         flat: 0.25,
-        kind: "pulse",
-        params: (c) => [(c.t * 3) % 1, 0],
         interior: 0.06,
         core: pal[0],
         color: (c) => {
           const col = ramp(cyc, c.t);
           const stripe = (c.t * 90) % 1 < 0.1 ? 0.9 : 1;
           return shade(lit(col, c.n, { amb: 0.6, dif: 0.48, spec: 0.5, pow: 34 }), stripe);
+        },
+      };
+      k.add(tube, {
+        ...look,
+        part: k.part("knot"),
+        kind: "pulse",
+        params: (c) => [(c.t * 3) % 1, 0],
+      });
+      // The knot pulled loose: lobes out further, each turned a little.
+      const rest = (a) => {
+        const rr = 2 + Math.cos(q * a);
+        return [rr * Math.cos(p * a), rr * Math.sin(p * a), -Math.sin(q * a)];
+      };
+      const loose = (a) => {
+        const rr = 2 + 1.3 * Math.cos(q * a);
+        const b = p * a + 0.22 * Math.sin(q * a);
+        return [rr * Math.cos(b), rr * Math.sin(b), -1.3 * Math.sin(q * a)];
+      };
+      k.fitMorphs = false; // the pull stays near the frame; keep the rest fit
+      k.add(tube, {
+        ...look,
+        part: k.part("bend"),
+        flat: 0.35,
+        // Each splat keeps its place round the tube: its offset from the
+        // middle line, turned square to the new line.
+        to: (c) => {
+          const a = (c.s.at / N) * TAU;
+          const off = sub(c.p, rest(a));
+          const mid = loose(a);
+          const tan = unit(sub(loose(a + 1e-3), loose(a - 1e-3)));
+          const side = sub(off, mul(tan, dot(off, tan)));
+          return add(mid, mul(unit(side), len(off)));
         },
       });
     },

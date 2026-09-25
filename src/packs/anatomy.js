@@ -21,6 +21,29 @@ const len = (a) => Math.hypot(a[0], a[1], a[2]);
 const unit = (a) => mul(a, 1 / (len(a) || 1));
 const lerp = (a, b, t) => add(a, mul(sub(b, a), t));
 const keep = (c) => ({ c, keep: true });
+const cross = (a, b) => [
+  a[1] * b[2] - a[2] * b[1],
+  a[2] * b[0] - a[0] * b[2],
+  a[0] * b[1] - a[1] * b[0],
+];
+
+// Timing helpers for tap effects.
+const clamp01 = (x) => (x < 0 ? 0 : x > 1 ? 1 : x);
+const ease = (x) => x * x * (3 - 2 * x);
+// 0 before a, rising to 1 at b.
+const rise = (x, a, b) => clamp01((x - a) / (b - a));
+// Rises from a to b, holds, falls from c to d (eased).
+const bump = (x, a, b, c, d) => ease(rise(x, a, b)) * (1 - ease(rise(x, c, d)));
+// A pulse control's progress: 0 at the tap, 1 when done (and at rest).
+const progress = (v) => (v > 0 ? 1 - v : 1);
+// Per-toy memory for drive(), keyed by the control state object (new each
+// time a toy loads).
+const MEM = new WeakMap();
+function mem(c) {
+  let m = MEM.get(c);
+  if (!m) MEM.set(c, (m = {}));
+  return m;
+}
 
 // Fake lighting for the organs below (splats are unlit).
 const LIGHT = unit([-0.45, 0.8, 0.45]);
@@ -54,6 +77,113 @@ const DEEP = "#8e1a28";
 const BLUE = "#4d6fd0";
 const VESSEL = "#d2474f";
 
+// ---- Lungs ------------------------------------------------------------------------------
+const LUNG_BREATH = 5; // seconds a deep breath lasts
+// How far each point of a lung moves as it empties (channel 0 at 1): the
+// outer walls move in, most at the bottom, the base rises and the front
+// and back come in; the side by the heart and the tips hardly move.
+function lungEmpty(p) {
+  const side = p[0] < 0 ? -1 : 1;
+  const outer = clamp01((Math.abs(p[0]) - 0.22) / 0.8);
+  const low = clamp01((0.9 - p[1]) / 1.5);
+  return [-side * 0.14 * outer * (0.5 + 0.5 * low), 0.24 * low * Math.sqrt(low), -0.16 * p[2]];
+}
+// The deep breath: in over 1.7 s, hold, out past rest by 3.7 s, hold, and back.
+const LUNG_KEYS = [
+  [0, 0],
+  [1.7, -1],
+  [2.2, -1],
+  [3.7, 0.65],
+  [4.1, 0.65],
+  [LUNG_BREATH, 0],
+];
+function lungDeep(s) {
+  for (let i = 1; i < LUNG_KEYS.length; i++) {
+    const [s1, v1] = LUNG_KEYS[i];
+    const [s0, v0] = LUNG_KEYS[i - 1];
+    if (s < s1) return v0 + (v1 - v0) * ease(rise(s, s0, s1));
+  }
+  return 0;
+}
+
+// ---- Brain ------------------------------------------------------------------------------
+const BRAIN_THINK = 2.8; // seconds a thought lasts
+const BRAIN_WIDTH = 0.1; // how long a spark is along its fold
+const BRAIN_FRONT = 1.3; // how fast sparks race along the folds (per second)
+const BRAIN_SPREAD = 1.5; // how fast the thought moves between lobes
+// Regions 0-3 are the near side's frontal, parietal, temporal and occipital
+// lobes, 4-7 the far side's, 8 the cerebellum. A lobe and its twin on the
+// other side share a channel and fire together; the cerebellum fires with
+// the occipital lobes.
+const BRAIN_CHANNEL = [0, 1, 2, 3, 0, 1, 2, 3, 3];
+// When each channel's sparks run after a tap: the tapped lobe (or the
+// frontal lobes for the Play button) first, the others as the thought
+// reaches them; then all the lobes flash at once.
+function brainPlan(data, point) {
+  const { hubs, reach } = data;
+  let r0 = 0;
+  if (point) {
+    let best = Infinity;
+    hubs.forEach((h, r) => {
+      const d = len(sub(point, h));
+      if (d < best) [best, r0] = [d, r];
+    });
+  }
+  const plan = [];
+  let end = 0;
+  for (let ch = 0; ch < 4; ch++) {
+    const rs = BRAIN_CHANNEL.map((c, r) => (c === ch ? r : -1)).filter((r) => r >= 0);
+    // The nearest of this channel's hubs to the tapped one.
+    const t0 = Math.min(...rs.map((r) => len(sub(hubs[r], hubs[r0])))) / BRAIN_SPREAD;
+    const far = Math.max(...rs.map((r) => reach[r]));
+    const t1 = t0 + (far + 0.16) / BRAIN_FRONT;
+    plan.push({ ch, t0, t1, a0: -0.08, a1: far + 0.08 });
+    end = Math.max(end, t1);
+  }
+  for (let ch = 0; ch < 4; ch++) plan.push({ ch, t0: end + 0.15, t1: end + 0.75, a0: -0.1, a1: 0.9 });
+  return plan;
+}
+
+// ---- Tooth ------------------------------------------------------------------------------
+const TOOTH_SHINE = 3.5; // seconds a polish lasts
+const TOOTH_WIPE = [0.02, 1.1]; // when the sheen crosses the tooth
+
+// ---- Kidney -----------------------------------------------------------------------------
+const KIDNEY_FLOW = 4.5; // seconds a tap's pulses last
+const KIDNEY_HILUM = [-0.28, 0, 0];
+const KIDNEY_PULSES = [0, 1.15, 2.3]; // when each pulse enters the artery
+// Each pulse's runs: [channel, from, to (seconds after the pulse), and the
+// channel's value at those times]. 0 artery, 1 kidney, 2 vein, 3 ureter.
+const KIDNEY_RUNS = [
+  [0, 0, 0.45, -0.12, 0.74],
+  [1, 0.35, 1.1, 0.05, 1.25],
+  [2, 0.9, 1.35, -0.12, 0.76],
+  [3, 1.0, 2.0, -0.1, 1.19],
+];
+
+// ---- Heart timing ----------------------------------------------------------------------
+const HEART_RACE = 5; // seconds a tap's race lasts
+const HEART_REST = 1.1; // resting beats per second of the toy's clock
+const HEART_EXTRA = 5; // whole beats a race adds
+// The ventricles squeeze towards their base and wring about their long axis.
+const HEART_PIVOT = [-0.14, 0.32, 0];
+const HEART_AXIS = unit([0.41, -0.91, 0]);
+// Extra beats a race has added s seconds after the tap: the tempo climbs for
+// 0.5 s, holds until 2.6 s and calms by 4.6 s (about 66 to 155 beats a
+// minute). It adds a whole number of beats, so the beat never jumps.
+function heartExtra(s) {
+  const h = HEART_EXTRA / 3.35;
+  const S = (x) => x * x * x - (x * x * x * x) / 2; // the integral of smoothstep
+  if (s <= 0) return 0;
+  if (s < 0.5) return h * 0.5 * S(s / 0.5);
+  if (s < 2.6) return h * (s - 0.25);
+  if (s < 4.6) {
+    const x = (s - 2.6) / 2;
+    return h * (2.35 + 2 * (x - S(x)));
+  }
+  return HEART_EXTRA;
+}
+
 export const RECIPES = {
   heart: {
     alive: true,
@@ -70,13 +200,49 @@ export const RECIPES = {
       },
       { key: "color", label: "Colour", type: "color", default: RED },
     ],
-    controls: [{ key: "strength", label: "Beat", type: "slider", default: 0.6 }],
-    drive(t, c, out) {
-      out.amount = 0.3 + 1.4 * c.strength;
+    controls: [
+      { key: "strength", label: "Beat", type: "slider", default: 0.6 },
+      { key: "race", label: "Race", type: "pulse", ease: HEART_RACE },
+    ],
+    action: { key: "race", label: "Race and calm" },
+    // The heart beats by itself: the atria squeeze, then the ventricles
+    // squeeze and wring a little. A tap sets it racing: the beats come faster
+    // and stronger with a warm glow on each squeeze, then it calms down to
+    // its resting beat.
+    drive(t, c, out, info) {
+      const m = mem(c);
+      const s = progress(c.race) * HEART_RACE;
+      // A new tap restarts the race; keep the beat's phase where it was.
+      if (m.s !== undefined && s < m.s - 1e-4)
+        m.off = (m.off ?? 0) + heartExtra(m.s) - heartExtra(s);
+      m.s = s;
+      const phase = HEART_REST * t + (m.off ?? 0) + heartExtra(s);
+      const f = phase - Math.floor(phase);
+      const env = bump(s, 0, 0.35, 2.6, 4.4);
+      const a0 = 0.15 + 0.4 * c.strength;
+      const amp = a0 + (1 - a0) * env;
+      // Atria first, then the ventricles.
+      const A = amp * (f < 0.24 ? Math.sin((Math.PI * f) / 0.24) ** 2 : 0);
+      const V = amp * ease(rise(f, 0.2, 0.36)) * (1 - ease(rise(f, 0.42, 0.72)));
+      out.morph = [A, V, 0, 0];
+      out.glow = [1, 0.4, 0.16, 0.6 * env];
+      if (info.data?.love) {
+        out.parts.vent = { scale: 1 - 0.1 * V - 0.04 * A };
+        return;
+      }
+      out.parts.vent = { scale: 1 - 0.13 * V, quat: quatAxisAngle(HEART_AXIS, 0.12 * V) };
+      out.parts.atriumR = { scale: 1 - 0.17 * A };
+      out.parts.atriumL = { scale: 1 - 0.17 * A };
+      out.parts.aorta = { scale: 1 + 0.025 * V };
     },
     build(k, o) {
       const base = o.color;
+      // The glow of a squeeze: atria on channel 0, ventricles on channel 1.
+      const glowA = { kind: "band", channel: 0, params: [1, 0.8] };
+      const glowV = { kind: "band", channel: 1, params: [1, 0.8] };
+      k.data = { love: o.style === "love" };
       if (o.style === "love") {
+        const vent = k.part("vent", { pivot: [0, 0.1, 0] });
         // The classic heart surface, (x² + 9/4 z² + y² - 1)³ - x² y³ - 9/80 z² y³ = 0,
         // with y up and z towards the viewer.
         const f = ([x, y, z]) => {
@@ -88,8 +254,8 @@ export const RECIPES = {
           flat: 0.2,
           interior: 0.12,
           core: shade(base, 0.7),
-          kind: "beat",
-          params: [0.06, 0],
+          part: vent,
+          ...glowV,
           color: (c) =>
             mix(
               base,
@@ -100,6 +266,12 @@ export const RECIPES = {
         });
         return;
       }
+      // The ventricles squeeze towards their base, the atria towards their
+      // middles, and the aorta swells a little as blood is pushed into it.
+      const vent = k.part("vent", { pivot: HEART_PIVOT });
+      const atriumR = k.part("atriumR", { pivot: [-0.38, 0.4, 0.02] });
+      const atriumL = k.part("atriumL", { pivot: [0.32, 0.44, -0.12] });
+      const aorta = k.part("aorta", { pivot: [0.02, 0.36, 0.02] });
       // Ventricles: a rounded teardrop leaning its point down and to one side.
       const body = k.lathe(
         [
@@ -124,8 +296,8 @@ export const RECIPES = {
         flat: 0.2,
         interior: 0.12,
         core: DEEP,
-        kind: "beat",
-        params: [0.05, 0],
+        part: vent,
+        ...glowV,
         color: (c) => {
           if (vein(c)) return c.fbm(c.p[0] * 5, 0, c.p[2] * 5) > 0 ? "#6b1622" : "#3d4f9c";
           const groove =
@@ -137,21 +309,24 @@ export const RECIPES = {
         },
       });
       // Atria.
-      const atrium = { flat: 0.22, kind: "beat", params: [0.07, 0.16], core: DEEP };
+      const atrium = { flat: 0.22, core: DEEP, ...glowA };
       k.add(k.ellipsoid(0.3, 0.26, 0.28), {
         ...atrium,
+        part: atriumR,
         pos: [-0.38, 0.4, 0.02],
         color: (c) =>
           mix(shade(base, 0.85), "#7d4a8c", 0.25 + 0.1 * c.fbm(c.p[0] * 4, c.p[1] * 4, c.p[2] * 4)),
       });
       k.add(k.ellipsoid(0.26, 0.22, 0.26), {
         ...atrium,
+        part: atriumL,
         pos: [0.32, 0.44, -0.12],
         color: (c) => mix(base, "#a02838", 0.4 + 0.1 * c.fbm(c.p[0] * 4, c.p[1] * 4, c.p[2] * 4)),
       });
       // Great vessels: the aorta arches over, the pulmonary trunk rises in
       // front, the vena cava joins the right atrium.
-      const vessel = { flat: 0.25, kind: "beat", params: [0.025, 0.08] };
+      const vessel = { flat: 0.25 };
+      const artery = { ...vessel, part: aorta, kind: "band", channel: 1, params: [1.2, 0.6] };
       k.add(
         k.tube(
           spline([
@@ -163,7 +338,7 @@ export const RECIPES = {
           ]),
           (t) => 0.14 - 0.02 * t,
         ),
-        { ...vessel, color: (c) => mix(VESSEL, "#f07a7a", 0.2 * Math.max(0, c.n[1])) },
+        { ...artery, color: (c) => mix(VESSEL, "#f07a7a", 0.2 * Math.max(0, c.n[1])) },
       );
       // Branches off the top of the arch.
       for (const [x, z] of [
@@ -172,7 +347,7 @@ export const RECIPES = {
         [0.3, -0.12],
       ]) {
         k.add(k.cylinder(0.045, 0.3, { caps: false }), {
-          ...vessel,
+          ...artery,
           pos: [x, 1.08, z],
           color: VESSEL,
         });
@@ -187,7 +362,8 @@ export const RECIPES = {
           ]),
           0.115,
         ),
-        { ...vessel, color: (c) => mix(BLUE, "#8aa2f0", 0.25 * Math.max(0, c.n[1])) },
+        // The pulmonary trunk leaves the front of the ventricles, so it moves with them.
+        { ...vessel, part: vent, color: (c) => mix(BLUE, "#8aa2f0", 0.25 * Math.max(0, c.n[1])) },
       );
       k.add(k.cylinder(0.1, 0.5, { caps: false }), {
         ...vessel,
@@ -217,12 +393,45 @@ export const RECIPES = {
         ],
       },
     ],
-    controls: [{ key: "sparks", label: "Sparks", type: "slider", default: 0.6 }],
-    drive(t, c, out) {
+    controls: [
+      { key: "sparks", label: "Sparks", type: "slider", default: 0.6 },
+      { key: "think", label: "Think", type: "pulse", ease: BRAIN_THINK },
+    ],
+    action: { key: "think", label: "Think" },
+    // A tap sparks a thought: sparks of light race out along the folds of the
+    // lobe you tapped, then through the lobes next to it and on round the
+    // brain, and at the end the whole side lights up at once.
+    drive(t, c, out, info) {
+      const s = progress(c.think) * BRAIN_THINK;
+      const d = info.data;
+      const ch = [-5, -5, -5, -5];
+      if (d && c.think > 0) {
+        const m = mem(c);
+        const n = info.tap?.n ?? 0;
+        if (m.n !== n || !m.plan) {
+          m.n = n;
+          m.plan = brainPlan(d, info.tap?.point);
+        }
+        for (const run of m.plan) {
+          if (s < run.t0 || s >= run.t1) continue;
+          ch[run.ch] = run.a0 + ((run.a1 - run.a0) * (s - run.t0)) / (run.t1 - run.t0);
+        }
+      }
+      out.morph = ch;
+      out.glow = [1, 0.96, 0.78, 1.7];
       out.amount = 0.2 + 1.3 * c.sparks;
     },
     build(k, o) {
       const lobes = o.colors !== "plain";
+      // The thought's sparks: splats in the folds glow as their region's
+      // channel passes them (`at` is the distance from the region's hub; see
+      // BRAIN_CHANNEL for the regions).
+      const hubs = [];
+      const reach = [];
+      const LOBES = ["frontal", "parietal", "temporal", "occipital"];
+      const jitter = (p) => 0.06 * k.noise(p[0] * 4 + 7, p[1] * 4, p[2] * 4);
+      const sparkAt = (r, p) => [len(sub(p, hubs[r])) + jitter(p), BRAIN_WIDTH];
+      const noSpark = [1000, 0.05];
       const PAL = lobes
         ? {
             frontal: "#6fa4e0",
@@ -287,10 +496,46 @@ export const RECIPES = {
           return r0 * (1 - 0.05 * g.deep - 0.03 * g.fold);
         };
         surfaces.push({ radius, cz });
+        // Each lobe's hub: the middle of its outer face, on the surface.
+        const off = side > 0 ? 0 : 4;
+        const sum = LOBES.map(() => [0, 0, 0]);
+        const pts = LOBES.map(() => []);
+        const M = 1600;
+        for (let i = 0; i < M; i++) {
+          const y = 1 - (2 * (i + 0.5)) / M;
+          const rr = Math.sqrt(1 - y * y);
+          const a = i * 2.399963;
+          const d = [rr * Math.cos(a), y, rr * Math.sin(a)];
+          const p = add(mul(d, radius(d)), [0, 0, cz]);
+          const r = LOBES.indexOf(region(p));
+          pts[r].push(p);
+          if (d[2] * side > 0.2) sum[r] = add(sum[r], d);
+        }
+        LOBES.forEach((_, r) => {
+          const d = unit(sum[r]);
+          const hub = add(mul(d, radius(d)), [0, 0, cz]);
+          hubs[off + r] = hub;
+          reach[off + r] = Math.min(0.85, Math.max(...pts[r].map((p) => len(sub(p, hub)))));
+        });
+        // The cortex's colour at p with normal n and groove g.
+        const cortex = (p, n, g) => {
+          let col = PAL[region(p)];
+          col = mix(col, shade(col, 0.45), g.fold * 0.85);
+          col = mix(col, shade(col, 0.35), g.deep);
+          return gloss(lit(col, n, 0.62, 0.45), n, 0.25, 12);
+        };
+        let lastG = null;
         k.add(k.radial(radius, { grid: 96, thick: 0.3 }), {
           pos: [0, 0, cz],
           flat: 0.2,
           interior: 0.1,
+          kind: "band",
+          channel: (c) => (c.inside ? 0 : BRAIN_CHANNEL[off + LOBES.indexOf(region(c.p))]),
+          // The colour function has just worked out this splat's groove.
+          params: (c) => {
+            if (c.inside || !lastG || (lastG.fold < 0.25 && lastG.deep < 0.4)) return noSpark;
+            return sparkAt(off + LOBES.indexOf(region(c.p)), c.p);
+          },
           core: (c) => {
             // Grey matter near the surface, white matter within.
             const q = sub(c.p, [0, 0, cz]);
@@ -298,12 +543,8 @@ export const RECIPES = {
             return len(q) > shape(d) * 0.86 ? "#c98e96" : "#f4e4d4";
           },
           color: (c) => {
-            const p = c.p;
-            const g = groove(p);
-            let col = PAL[region(p)];
-            col = mix(col, shade(col, 0.45), g.fold * 0.85);
-            col = mix(col, shade(col, 0.35), g.deep);
-            return gloss(lit(col, c.n, 0.62, 0.45), c.n, 0.25, 12);
+            lastG = groove(c.p);
+            return cortex(c.p, c.n, lastG);
           },
         });
       };
@@ -312,22 +553,32 @@ export const RECIPES = {
       hemi(-1);
       // Cerebellum: tucked under the back, finely striped with folia.
       const cereb = (d) => 1 / Math.hypot(d[0] / 0.42, d[1] / 0.3, d[2] / 0.78);
+      const cerebAt = [0.58, -0.5, 0];
+      const cd = unit([0.25, 0.2, 1]);
+      hubs[8] = add(cerebAt, mul(cd, cereb(cd)));
+      reach[8] = 0.85;
+      const folia = (lp) =>
+        Math.sin(
+          (lp[1] + 0.25 * lp[0] * lp[0]) * 70 + k.noise(lp[0] * 4, lp[1] * 4, lp[2] * 4) * 2,
+        );
       k.add(k.radial(cereb, { grid: 72, thick: 0.22 }), {
-        pos: [0.58, -0.5, 0],
+        pos: cerebAt,
         flat: 0.2,
         interior: 0.1,
         core: "#f4e4d4",
+        kind: "band",
+        channel: BRAIN_CHANNEL[8],
+        params: (c) => (!c.inside && folia(c.lp) > 0.55 ? sparkAt(8, c.p) : noSpark),
         color: (c) => {
           const lp = c.lp;
-          const f = Math.sin(
-            (lp[1] + 0.25 * lp[0] * lp[0]) * 70 + k.noise(lp[0] * 4, lp[1] * 4, lp[2] * 4) * 2,
-          );
+          const f = folia(lp);
           let col = PAL.cerebellum;
           if (f > 0.55) col = shade(col, 0.72);
           if (Math.abs(lp[2]) < 0.04) col = shade(col, 0.6);
           return lit(col, c.n, 0.62, 0.45);
         },
       });
+      k.data = { hubs, reach };
       // Brainstem: the pons and the medulla reaching down.
       k.add(
         k.tube(
@@ -591,16 +842,30 @@ export const RECIPES = {
   lungs: {
     alive: true,
     options: [{ key: "color", label: "Colour", type: "color", default: "#f095a3" }],
-    controls: [{ key: "breath", label: "Breath", type: "slider", default: 0.5 }],
+    controls: [
+      { key: "breath", label: "Breath", type: "slider", default: 0.5 },
+      { key: "deep", label: "Deep breath", type: "pulse", ease: LUNG_BREATH },
+    ],
+    action: { key: "deep", label: "Take a deep breath" },
+    // The lungs breathe gently by themselves. A tap takes a deep breath: they
+    // fill out sideways and down (the airways stay put), hold, then empty
+    // further than usual and settle back to the gentle rhythm.
     drive(t, c, out) {
-      out.amount = 0.3 + 1.5 * c.breath;
+      const s = progress(c.deep) * LUNG_BREATH;
+      // Channel 0 empties the lungs at 1; below 0 it fills them past rest.
+      const idle = -(0.07 + 0.26 * c.breath) * Math.sin(t * 1.3);
+      const calm = 1 - bump(s, 0, 0.5, LUNG_BREATH - 0.9, LUNG_BREATH);
+      out.morph = [idle * calm + lungDeep(s), 0, 0, 0];
     },
     build(k, o) {
       const pink = o.color;
+      const empty = (p, w = 1) => add(p, mul(lungEmpty(p), w));
       // Each lung: tall and rounded, pointed at the top, hollowed beneath,
       // flatter on the side facing the heart.
+      const lungs = [];
       const lung = (side) => {
         const cx = side * 0.52;
+        lungs.push({ cx, shape: (d) => shape(d) });
         const shape = (d) => {
           const medial = d[0] * side < 0;
           const ax = medial ? 0.3 : 0.5;
@@ -632,10 +897,12 @@ export const RECIPES = {
         k.add(k.radial(shape, { grid: 96, thick: 0.3 }), {
           pos: [cx, 0, 0],
           flat: 0.2,
-          interior: 0.1,
-          core: mix(pink, "#ffffff", 0.3),
-          kind: "breathe",
-          params: [0.05, 0],
+          // A little bigger than usual, so the surface stays closed when it
+          // stretches in a deep breath.
+          size: 1.25,
+          interior: 0.08,
+          core: shade(pink, 0.96),
+          to: (c) => empty(c.p),
           color: (c) => {
             const g = fissure(c.p);
             const mott = c.noise(c.p[0] * 30, c.p[1] * 30, c.p[2] * 30);
@@ -653,8 +920,6 @@ export const RECIPES = {
       k.add(k.cylinder(0.13, 0.9, { caps: false }), {
         pos: [0, 0.95, -0.05],
         flat: 0.2,
-        kind: "breathe",
-        params: [0.015, 0],
         color: (c) => ringCol(c, c.p[1]),
       });
       const tree = [];
@@ -685,10 +950,21 @@ export const RECIPES = {
           {
             weight: i < 2 ? 1 : 1.3,
             flat: 0.2,
-            kind: "breathe",
-            params: [0.03, 0],
+            // The branches inside the lungs move with them; the windpipe
+            // end of the tree stays put.
+            to: (c) => empty(c.p, clamp01((Math.abs(c.p[0]) - 0.12) / 0.25)),
             pattern: false,
-            color: (c) => ringCol(c, c.t * 3),
+            // Inside the lungs the airways are pinker, so where the
+            // surface thins in a deep breath they do not show through as
+            // pale flecks.
+            color: (c) => {
+              const col = ringCol(c, c.t * 3);
+              const deep = lungs.some((l) => {
+                const q = sub(c.p, [l.cx, 0, 0]);
+                return len(q) < l.shape(unit(q)) * 0.97;
+              });
+              return deep ? mix(col, shade(pink, 0.9), 0.75) : col;
+            },
           },
         );
       });
@@ -699,11 +975,65 @@ export const RECIPES = {
   tooth: {
     alive: true,
     options: [{ key: "color", label: "Enamel", type: "color", default: "#f5f1e6" }],
-    drive(t, c, out) {
+    controls: [{ key: "shine", label: "Shine", type: "pulse", ease: TOOTH_SHINE }],
+    action: { key: "shine", label: "Polish" },
+    // A tap polishes it: a bright sheen wipes across from the top left, star
+    // sparkles pop where it passes, and the tooth stays bright white for a
+    // moment before it settles.
+    drive(t, c, out, info) {
       out.amount = 1;
+      const s = progress(c.shine) * TOOTH_SHINE;
+      const on = c.shine > 0 ? 1 : 0;
+      // Channel 0: the sheen's place across the tooth (0..1). Channel 1: the
+      // whitening of the dentin that shows through the enamel.
+      const wipe = rise(s, TOOTH_WIPE[0], TOOTH_WIPE[1]);
+      const white = bump(s, 0.05, 1.2, 2.3, 3.3);
+      out.morph = [on ? -0.15 + 1.45 * wipe : -5, on ? -1.3 + 1.45 * white : -5, 0, 0];
+      out.glow = [0.9, 0.96, 1, on * (0.7 * (1 - rise(s, 1.05, 1.4)) + 0.45 * white)];
+      const stars = info.data?.stars || [];
+      out.tokens = stars.map((st) => {
+        let v = 0;
+        let spin = 0;
+        for (const [at, big] of st.pops) {
+          const x = (s - at) / 0.5;
+          if (x <= 0 || x >= 1 || !on) continue;
+          v = Math.max(v, big * Math.pow(Math.sin(Math.PI * x), 0.8));
+          spin = 0.9 * x;
+        }
+        return { base: st.p, quat: quatAxisAngle(VIEW, spin), visible: v };
+      });
     },
     build(k, o) {
       const enamel = o.color;
+      // The wipe's place (0..1) across the tooth, from top left to bottom right
+      // as the camera first sees it.
+      const right = unit(cross([0, 1, 0], VIEW));
+      const up = cross(VIEW, right);
+      const wdir = unit(sub(mul(right, 0.8), up));
+      let w0 = Infinity;
+      let w1 = -Infinity;
+      for (const q of [
+        [-0.62, 0.86, -0.56],
+        [0.62, 0.86, -0.56],
+        [-0.62, 0.86, 0.56],
+        [0.62, 0.86, 0.56],
+        [-0.62, -0.2, -0.56],
+        [0.62, -0.2, -0.56],
+        [-0.62, -0.2, 0.56],
+        [0.62, -0.2, 0.56],
+        [-0.2, -1.0, 0.05],
+        [0.2, -1.0, 0.05],
+      ]) {
+        w0 = Math.min(w0, dot(q, wdir));
+        w1 = Math.max(w1, dot(q, wdir));
+      }
+      const wipeAt = (p) => (dot(p, wdir) - w0) / (w1 - w0);
+      // The enamel's surface takes the sheen; the inside whitens.
+      const shine = {
+        kind: "band",
+        channel: (c) => (c.inside ? 1 : 0),
+        params: (c) => (c.inside ? [0.3 * wipeAt(c.p), 0.99] : [wipeAt(c.p), 0.045]),
+      };
       // The crown: a rounded block with four cusps and grooves between them.
       const cusps = [
         [0.3, 0.3],
@@ -742,6 +1072,7 @@ export const RECIPES = {
         pos: [0, cy, 0],
         flat: 0.2,
         interior: 0.18,
+        ...shine,
         core: (c) => {
           if (pulp(c.p)) return "#e56f7c";
           const d = unit(sub(c.p, [0, cy, 0]));
@@ -776,6 +1107,7 @@ export const RECIPES = {
             scale: [1, 1, 1.35],
             flat: 0.2,
             interior: 0.15,
+            ...shine,
             core: (c) => {
               const a = curve(c.t ?? 0);
               const q = [c.p[0] - a[0], c.p[1] - a[1], c.p[2] / 1.35 - a[2]];
@@ -788,6 +1120,44 @@ export const RECIPES = {
           },
         );
       }
+      // Star sparkles (hidden until a tap), just off the crown's faces and
+      // edges and on the roots; each is a token that pops as the sheen passes.
+      const onCrown = (a, b, lift = 0.03) => {
+        const d = unit(add(VIEW, add(mul(right, a), mul(up, b))));
+        return add([0, cy, 0], mul(d, crown(d) + lift));
+      };
+      const spots = [
+        onCrown(-0.95, 0.75, 0.02),
+        onCrown(-0.3, 0.5),
+        onCrown(0.35, 0.62, 0.02),
+        onCrown(-0.55, -0.05),
+        onCrown(0.15, 0.05),
+        onCrown(0.75, -0.2, 0.02),
+        [-0.3, cy - 0.7, 0.36],
+        [0.36, cy - 0.95, 0.3],
+      ];
+      const stars = spots.map((p) => {
+        const at = TOOTH_WIPE[0] + ((TOOTH_WIPE[1] - TOOTH_WIPE[0]) * (wipeAt(p) + 0.15)) / 1.45;
+        return { p, pops: [[at - 0.08, 1]] };
+      });
+      // A few twinkle again while it gleams.
+      stars[1].pops.push([1.75, 0.8]);
+      stars[4].pops.push([2.05, 0.7]);
+      stars[0].pops.push([2.3, 0.9]);
+      stars[5].pops.push([2.55, 0.6]);
+      stars.forEach((st, i) => {
+        k.cloud({ count: 12, pattern: false }, (rand, j, n) => {
+          const role = Math.floor((j * 6) / n);
+          const base = { p: st.p, kind: "token", params: [i, 0], opacity: 1 };
+          if (role === 0) return { ...base, color: "#dfeeff", size: 14, opacity: 0.3 };
+          if (role === 1) return { ...base, color: "#ffffff", size: 5 };
+          if (role < 4)
+            return { ...base, color: "#ffffff", size: 2.4, dir: role === 2 ? right : up, stretch: 13 };
+          const diag = role === 4 ? add(right, up) : sub(right, up);
+          return { ...base, color: "#f4f8ff", size: 1.7, dir: diag, stretch: 7, opacity: 0.9 };
+        });
+      });
+      k.data = { stars };
     },
   },
 
@@ -795,8 +1165,27 @@ export const RECIPES = {
   kidney: {
     alive: true,
     options: [{ key: "color", label: "Colour", type: "color", default: "#c2504a" }],
+    controls: [{ key: "flow", label: "Flow", type: "pulse", ease: KIDNEY_FLOW }],
+    action: { key: "flow", label: "Pump blood through" },
+    // A tap sends three pulses through: each runs in along the artery,
+    // spreads through the kidney (which swells a little), leaves along the
+    // vein, and a drop runs down the ureter.
+    drive(t, c, out) {
+      const s = progress(c.flow) * KIDNEY_FLOW;
+      const ch = [-5, -5, -5, -5];
+      let swell = 0;
+      for (const T of KIDNEY_PULSES) {
+        for (const [i, t0, t1, a0, a1] of KIDNEY_RUNS)
+          if (s >= T + t0 && s < T + t1) ch[i] = a0 + ((a1 - a0) * (s - T - t0)) / (t1 - t0);
+        swell = Math.max(swell, bump(s - T, 0.3, 0.55, 0.6, 1.1));
+      }
+      out.morph = ch;
+      out.glow = [1, 0.9, 0.78, 0.85];
+      out.parts.kidney = { scale: 1 + 0.008 * Math.sin(t * 1.3) + 0.04 * swell };
+    },
     build(k, o) {
       const col = o.color;
+      const kidney = k.part("kidney", { pivot: KIDNEY_HILUM });
       // A bean: an ellipsoid with a dent (the hilum) on its inner side.
       const bean = (d) => {
         let r = 1 / Math.hypot(d[0] / 0.58, d[1] / 1.0, d[2] / 0.4);
@@ -805,11 +1194,36 @@ export const RECIPES = {
         return r;
       };
       const pelvis = [-0.28, 0, 0];
+      const skin = (c) => {
+        const n = c.noise(c.p[0] * 12, c.p[1] * 12, c.p[2] * 12);
+        const base = shade(col, 1 + 0.06 * n);
+        return gloss(lit(base, c.n, 0.6, 0.45), c.n, 0.45, 18);
+      };
+      // A faint layer just over the surface, coloured as it is, carries a
+      // soft flush that spreads out from the hilum with each pulse (channel 1).
+      const beanAt = (u, v) => {
+        const a = u * TAU;
+        const b = v * Math.PI;
+        const d = [Math.sin(b) * Math.cos(a), Math.cos(b), Math.sin(b) * Math.sin(a)];
+        return mul(d, bean(d) * 1.006);
+      };
+      k.add(k.param(beanAt, { grid: 96 }), {
+        even: true,
+        share: 0.08,
+        size: 3.2,
+        flat: 0.2,
+        opacity: 0.24,
+        jitter: 0.01,
+        part: kidney,
+        kind: "band",
+        channel: 1,
+        params: (c) => [len(sub(c.p, KIDNEY_HILUM)), 0.16],
+        color: skin,
+      });
       k.add(k.radial(bean, { grid: 96, thick: 0.32 }), {
         flat: 0.2,
         interior: 0.15,
-        kind: "breathe",
-        params: [0.012, 0],
+        part: kidney,
         core: (c) => {
           const q = sub(c.p, pelvis);
           const r = Math.hypot(q[0], q[1], q[2] * 1.3);
@@ -822,18 +1236,19 @@ export const RECIPES = {
           if (sector > 0.35 && r < 0.62) return Math.sin(r * 80) > 0 ? "#8e2f35" : "#a8434a";
           return mix(col, "#e7907f", 0.3);
         },
-        color: (c) => {
-          const n = c.noise(c.p[0] * 12, c.p[1] * 12, c.p[2] * 12);
-          const base = shade(col, 1 + 0.06 * n);
-          return gloss(lit(base, c.n, 0.6, 0.45), c.n, 0.45, 18);
-        },
+        color: skin,
       });
       // Vessels at the hilum: artery (red), vein (blue) and the ureter below.
-      const vessel = (pts, r, color, opts = {}) =>
+      // Each carries pulses of light on its own channel: `at` is how far along
+      // the flow a point is (in along the artery, out along the vein and down
+      // the ureter).
+      const vessel = (pts, r, color, channel, at) =>
         k.add(k.tube(spline(pts), r, { grid: 32, samples: 64, caps: true }), {
           flat: 0.2,
           pattern: false,
-          ...opts,
+          kind: "band",
+          channel,
+          params: (c) => [at(c.t ?? 0), 0.09],
           color: (c) => gloss(lit(color, c.n, 0.62, 0.45), c.n, 0.35, 14),
         });
       vessel(
@@ -844,6 +1259,8 @@ export const RECIPES = {
         ],
         0.075,
         "#e0463e",
+        0,
+        (t) => (1 - t) * 0.62,
       );
       vessel(
         [
@@ -853,6 +1270,8 @@ export const RECIPES = {
         ],
         0.085,
         "#4d6fd0",
+        2,
+        (t) => t * 0.64,
       );
       vessel(
         [
@@ -863,12 +1282,15 @@ export const RECIPES = {
         ],
         0.055,
         "#f1d38a",
+        3,
+        (t) => t * 1.09,
       );
       // The adrenal gland perched on top.
       k.add(k.ellipsoid(0.32, 0.14, 0.24), {
         pos: [0.06, 0.98, 0],
         rot: [0, 0, -12],
         flat: 0.2,
+        part: kidney,
         pattern: false,
         color: (c) =>
           lit(
