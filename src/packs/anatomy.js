@@ -111,6 +111,7 @@ const BRAIN_THINK = 2.8; // seconds a thought lasts
 const BRAIN_WIDTH = 0.1; // how long a spark is along its fold
 const BRAIN_FRONT = 1.3; // how fast sparks race along the folds (per second)
 const BRAIN_SPREAD = 1.5; // how fast the thought moves between lobes
+const BRAIN_FLASH = 1.75; // when all the lobes flash at the end
 // Regions 0-3 are the near side's frontal, parietal, temporal and occipital
 // lobes, 4-7 the far side's, 8 the cerebellum. A lobe and its twin on the
 // other side share a channel and fire together; the cerebellum fires with
@@ -140,7 +141,9 @@ function brainPlan(data, point) {
     plan.push({ ch, t0, t1, a0: -0.08, a1: far + 0.08 });
     end = Math.max(end, t1);
   }
-  for (let ch = 0; ch < 4; ch++) plan.push({ ch, t0: end + 0.15, t1: end + 0.75, a0: -0.1, a1: 0.9 });
+  // The flash comes at the same moment whichever lobe was tapped (for the sound).
+  const flash = Math.max(BRAIN_FLASH, end + 0.15);
+  for (let ch = 0; ch < 4; ch++) plan.push({ ch, t0: flash, t1: flash + 0.6, a0: -0.1, a1: 0.9 });
   return plan;
 }
 
@@ -170,7 +173,7 @@ const HEART_PIVOT = [-0.14, 0.32, 0];
 const HEART_AXIS = unit([0.41, -0.91, 0]);
 // Extra beats a race has added s seconds after the tap: the tempo climbs for
 // 0.5 s, holds until 2.6 s and calms by 4.6 s (about 66 to 155 beats a
-// minute). It adds a whole number of beats, so the beat never jumps.
+// minute). It adds a whole number of beats.
 function heartExtra(s) {
   const h = HEART_EXTRA / 3.35;
   const S = (x) => x * x * x - (x * x * x * x) / 2; // the integral of smoothstep
@@ -212,9 +215,12 @@ export const RECIPES = {
     drive(t, c, out, info) {
       const m = mem(c);
       const s = progress(c.race) * HEART_RACE;
-      // A new tap restarts the race; keep the beat's phase where it was.
-      if (m.s !== undefined && s < m.s - 1e-4)
-        m.off = (m.off ?? 0) + heartExtra(m.s) - heartExtra(s);
+      // A new tap starts the race on a fresh beat, so its sound keeps time
+      // with the squeezes.
+      if (m.s !== undefined && s < m.s - 1e-4) {
+        const was = HEART_REST * t + (m.off ?? 0) + heartExtra(m.s);
+        m.off = Math.round(was) - HEART_REST * t - heartExtra(s);
+      }
       m.s = s;
       const phase = HEART_REST * t + (m.off ?? 0) + heartExtra(s);
       const f = phase - Math.floor(phase);
@@ -517,13 +523,6 @@ export const RECIPES = {
           hubs[off + r] = hub;
           reach[off + r] = Math.min(0.85, Math.max(...pts[r].map((p) => len(sub(p, hub)))));
         });
-        // The cortex's colour at p with normal n and groove g.
-        const cortex = (p, n, g) => {
-          let col = PAL[region(p)];
-          col = mix(col, shade(col, 0.45), g.fold * 0.85);
-          col = mix(col, shade(col, 0.35), g.deep);
-          return gloss(lit(col, n, 0.62, 0.45), n, 0.25, 12);
-        };
         let lastG = null;
         k.add(k.radial(radius, { grid: 96, thick: 0.3 }), {
           pos: [0, 0, cz],
@@ -543,8 +542,13 @@ export const RECIPES = {
             return len(q) > shape(d) * 0.86 ? "#c98e96" : "#f4e4d4";
           },
           color: (c) => {
-            lastG = groove(c.p);
-            return cortex(c.p, c.n, lastG);
+            const p = c.p;
+            const g = groove(p);
+            lastG = g;
+            let col = PAL[region(p)];
+            col = mix(col, shade(col, 0.45), g.fold * 0.85);
+            col = mix(col, shade(col, 0.35), g.deep);
+            return gloss(lit(col, c.n, 0.62, 0.45), c.n, 0.25, 12);
           },
         });
       };
@@ -1152,7 +1156,13 @@ export const RECIPES = {
           if (role === 0) return { ...base, color: "#dfeeff", size: 14, opacity: 0.3 };
           if (role === 1) return { ...base, color: "#ffffff", size: 5 };
           if (role < 4)
-            return { ...base, color: "#ffffff", size: 2.4, dir: role === 2 ? right : up, stretch: 13 };
+            return {
+              ...base,
+              color: "#ffffff",
+              size: 2.4,
+              dir: role === 2 ? right : up,
+              stretch: 13,
+            };
           const diag = role === 4 ? add(right, up) : sub(right, up);
           return { ...base, color: "#f4f8ff", size: 1.7, dir: diag, stretch: 7, opacity: 0.9 };
         });
