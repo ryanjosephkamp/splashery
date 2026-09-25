@@ -108,11 +108,12 @@ Clay works on pack toys too.
   shelf shape now has its own tap effect.
 - **Space, atoms and gems.** Every one has its own tap: the Sun throws off a flare (and churns all
   the time), the planets line up while Mercury crosses the Sun, Earth turns through a night with its
-  city lights, the Moon runs through its phases, Mars raises a dust storm, Jupiter's bands race,
-  Saturn's rings ripple, the asteroid breaks into pieces and pulls back together, a star lives and
-  dies, the pulsar strobes, the black hole swallows a star; an electron jumps to a higher orbital
-  and drops back with a photon, a molecule's bonds shake when heated, a wave runs through a crystal
-  lattice; the diamond flashes rainbow fire, the ruby glows red, a star glides over the sapphire.
+  city lights, a lander sets down on the Moon and an astronaut plants a flag, Mars raises a dust
+  storm, Jupiter's bands race, Saturn's rings ripple, the asteroid breaks into pieces and pulls back
+  together, a star lives and dies, the pulsar strobes, the black hole swallows a star; an electron
+  jumps to a higher orbital and drops back with a photon, a molecule's bonds shake when heated, a
+  wave runs through a crystal lattice; the diamond flashes rainbow fire, the ruby glows red, a star
+  glides over the sapphire.
 - **Drag to stretch.** Drag the gummy bear (with the Orbit tool, starting on the bear) to stretch
   it; let go and it springs back. A drag that starts beside it still turns the view.
 - Under a system setting for reduced motion, toys stay still until you switch motion on.
