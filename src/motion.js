@@ -216,7 +216,10 @@ export class MotionDriver {
     // The kit toy's own frame: behaviours clock, recipe drive, parts.
     const kt = this.tick(this.kitClock, time, rate, motion.alive !== false);
     const drive = { energy: 0, grow: 1, amount: 1, glow: [1, 1, 1, 0], parts: {}, body: null, fx: {}, addon: null, tokens: null, cues: [] }; // prettier-ignore
-    if (this.recipe?.drive) this.recipe.drive(kt, this.state, drive, { time, R, tap: this.tap });
+    // info.data is whatever the recipe's build left in k.data (which molecule
+    // was built, say), for effects that depend on the build.
+    const about = { time, R, tap: this.tap, data: this.ctx?.kit?.data };
+    if (this.recipe?.drive) this.recipe.drive(kt, this.state, drive, about);
     if (drive.body) {
       if (drive.body.quat) q = quatMul(drive.body.quat, q);
       if (drive.body.offset) {

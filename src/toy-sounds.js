@@ -212,41 +212,95 @@ export const TOY_SOUNDS = {
   ],
 
   // ---- Space ------------------------------------------------------------------------
-  sun: { voice: "roar", f: 90, bright: 0.25, decay: 1.4 },
-  "solar-system": { voice: "pad", notes: "C4+G4+E5", step: 0, decay: 1.2 },
-  mercury: { voice: "tone", f: "E6", decay: 0.5 },
-  venus: { voice: "wind", f: 260, rate: 0.4, decay: 1.2 },
-  earth: [
-    { voice: "wave", f: 500, decay: 0.9 },
-    { voice: "wind", f: 900, rate: 0.6, decay: 1.1, vol: 0.5 },
+  // The flare's roar, and the whoosh as its top breaks away (1.4 s).
+  sun: [
+    { voice: "roar", f: 90, bright: 0.25, decay: 1.4 },
+    { voice: "whoosh", at: 1.4, f: 160, to: 4, decay: 2.4, vol: 0.8 },
   ],
-  moon: { voice: "hollow", f: "A5", decay: 3 },
-  mars: { voice: "hiss", f: 2200, decay: 1.2 },
-  jupiter: { voice: "drone", f: 44, bright: 0.2 },
-  saturn: { voice: "shimmer", f: "E5", rate: 5 },
+  // A chord rising as the planets swing into line, a shimmer at the eclipse.
+  "solar-system": [
+    { voice: "pad", notes: "C4 G4 C5+E5", step: 0.7, decay: 1.2 },
+    { voice: "shimmer", at: 3.3, f: "E6", rate: 6, decay: 1.2, vol: 0.8 },
+  ],
+  // A bright tone as it spins, then the sizzle of the day side's heat.
+  mercury: [
+    { voice: "tone", f: "E6", decay: 0.5 },
+    { voice: "sizzle", at: 0.5, f: 3200, decay: 1.8, vol: 0.5 },
+  ],
+  venus: { voice: "wind", f: 260, rate: 0.4, decay: 2.4 },
+  // Surf and wind through the day, a soft chime as the city lights come on.
+  earth: [
+    { voice: "wave", f: 500, decay: 1.4 },
+    { voice: "wind", f: 900, rate: 0.6, decay: 2.2, vol: 0.5 },
+    { voice: "ding", at: 1.6, f: "E6", decay: 1.2, vol: 0.4 },
+  ],
+  // A hollow chime at full moon, a lower one at new moon (2.8 s).
+  moon: [
+    { voice: "hollow", f: "A5", decay: 3 },
+    { voice: "hollow", at: 2.8, f: "E5", decay: 3 },
+  ],
+  mars: [
+    { voice: "hiss", f: 2200, decay: 2.4 },
+    { voice: "wind", at: 0.3, f: 700, rate: 1.4, decay: 2, vol: 0.6 },
+  ],
+  jupiter: { voice: "drone", f: 44, bright: 0.2, decay: 1.8 },
+  // A shimmer for each ripple across the rings.
+  saturn: [
+    { voice: "shimmer", f: "E5", rate: 5 },
+    { voice: "shimmer", at: 0.8, f: "B5", rate: 6, decay: 0.8, vol: 0.7 },
+  ],
   uranus: { voice: "tone", f: "B4", to: 1.02, kind: "triangle", decay: 3 },
-  neptune: { voice: "wind", f: 330, rate: 0.9, decay: 1.4 },
-  "aurora-planet": { voice: "whistle", f: 1500, to: 1.3, decay: 1.6, vol: 0.7 },
+  neptune: { voice: "wind", f: 330, rate: 0.9, decay: 2.4 },
+  "aurora-planet": { voice: "whistle", f: 1500, to: 1.3, decay: 2.4, vol: 0.7 },
+  // The crack, a boom as it falls apart, and a knock as the pieces meet again.
   asteroid: [
     { voice: "crack", f: 1300, bright: 0.3 },
-    { voice: "kick", at: 0.05, f: 45, decay: 2 },
+    { voice: "kick", at: 0.3, f: 45, decay: 2 },
+    { voice: "stone", at: 4.5, f: 260, decay: 1.2 },
   ],
   comet: { voice: "whoosh", f: 200, to: 6, decay: 2.2 },
+  // It sizzles in and bursts (0.36 s); the next one sizzles in (3.4 s).
   meteor: [
-    { voice: "sizzle", f: 4500, decay: 0.8 },
-    { voice: "kick", at: 0.7, f: 50, decay: 2.2 },
+    { voice: "sizzle", f: 4500, decay: 0.5 },
+    { voice: "kick", at: 0.36, f: 50, decay: 2.2 },
+    { voice: "sizzle", at: 3.4, f: 3800, decay: 0.8, vol: 0.7 },
   ],
-  star: { voice: "pad", f: "A4", decay: 1.5 },
-  pulsar: { voice: "ratchet", f: 1800, n: 14, rate: 5, to: 5 },
-  "black-hole": { voice: "drone", f: 50, to: 0.5, bright: 0.1, decay: 1.3 },
-  "star-cluster": { voice: "sparkle", f: 3100, n: 10, decay: 1.4 },
-  "planetary-nebula": { voice: "pad", notes: "D4+A4", step: 0, decay: 1.4 },
-  nebula: { voice: "sparkle", f: 2000, n: 6, decay: 1.8, bright: 0.3 },
+  // Swelling to a giant and the whoosh as it puffs off its shell; the
+  // recipe rings a bell when the new star lights (6.6 s).
+  star: [
+    { voice: "pad", notes: "A3 E4", step: 1.2, decay: 1.6 },
+    { voice: "whoosh", at: 3.6, f: 250, to: 3, decay: 2 },
+  ],
+  // It hums as it spins up; the recipe adds a tick at each flash.
+  pulsar: { voice: "hum", f: 110, to: 3, bright: 0.4, decay: 2.4 },
+  // The fall, and a deep boom as the star plunges in (3.2 s).
+  "black-hole": [
+    { voice: "drone", f: 70, to: 0.5, bright: 0.1, decay: 1.8 },
+    { voice: "kick", at: 3.2, f: 38, decay: 2.4 },
+  ],
+  "star-cluster": { voice: "sparkle", f: 3100, n: 12, decay: 2.4 },
+  // A pad, and a shimmer as the shock reaches the ring (1.7 s).
+  "planetary-nebula": [
+    { voice: "pad", notes: "D4+A4", step: 0, decay: 1.4 },
+    { voice: "shimmer", at: 1.7, f: "A5", rate: 8, decay: 1, vol: 0.7 },
+  ],
+  // A ping for each new star as it lights.
+  nebula: {
+    voice: "ding",
+    notes: "E6 B6 G6 D7 A6 E7 C7",
+    step: 0.36,
+    at: 0.4,
+    decay: 0.8,
+    vol: 0.6,
+  },
   supernova: [
     { voice: "kick", f: 40, decay: 3 },
     { voice: "roar", f: 110, bright: 0.5, decay: 2.2 },
   ],
-  "spiral-galaxy": { voice: "drone", f: 62, bright: 0.45, decay: 1.2 },
+  "spiral-galaxy": [
+    { voice: "drone", f: 62, bright: 0.45, decay: 1.8 },
+    { voice: "whoosh", at: 0.3, f: 120, to: 3, decay: 2.2, vol: 0.6 },
+  ],
 
   // ---- Tiny things ------------------------------------------------------------------
   virus: [
@@ -288,18 +342,27 @@ export const TOY_SOUNDS = {
   amoeba: { voice: "gloop", f: 95, decay: 1.8 },
 
   // ---- Atoms ------------------------------------------------------------------------
+  // Up as the photon is taken in (0.45 s), down as it is given out (3 s).
   orbital: [
-    { voice: "blip", f: 700, to: 2 },
-    { voice: "blip", at: 0.12, f: 1400, to: 0.5 },
+    { voice: "blip", at: 0.45, f: 700, to: 2 },
+    { voice: "blip", at: 3, f: 1400, to: 0.5 },
   ],
-  atom: { voice: "hum", f: 220, to: 1.8, bright: 0.2, decay: 0.8 },
-  molecule: { voice: "boing", f: 330, to: 1.3, rate: 11 },
-  "crystal-lattice": { voice: "glass", notes: "C6 E6 G6 C7", step: 0.06, decay: 0.6 },
+  atom: { voice: "hum", f: 220, to: 1.8, bright: 0.2, decay: 2.6 },
+  molecule: { voice: "boing", f: 330, to: 1.3, rate: 11, decay: 2 },
+  // A ping as the wave passes each part of the lattice.
+  "crystal-lattice": { voice: "glass", notes: "C6 E6 G6 C7", step: 0.55, at: 0.3, decay: 0.6 },
 
   // ---- Gems -------------------------------------------------------------------------
-  diamond: { voice: "glass", f: 3520, decay: 1.2, bright: 0.9 },
-  ruby: { voice: "bell", f: "C5", decay: 0.8, bright: 0.25 },
-  emerald: { voice: "glass", f: "G5", decay: 1.1, bright: 0.35 },
+  diamond: [
+    { voice: "glass", f: 3520, decay: 1.2, bright: 0.9 },
+    { voice: "sparkle", at: 0.3, f: 4200, n: 8, decay: 2.4, vol: 0.7 },
+  ],
+  // A warm chime, and a softer one on each throb of the glow.
+  ruby: [
+    { voice: "bell", f: "C5", decay: 0.8, bright: 0.25 },
+    { voice: "bell", at: 1.3, f: "C5", decay: 0.5, bright: 0.2, vol: 0.4 },
+  ],
+  emerald: { voice: "glass", f: "G5", decay: 2, bright: 0.35 },
   "amethyst-geode": {
     on: [
       { voice: "crack", f: 1100, bright: 0.3 },
@@ -308,8 +371,15 @@ export const TOY_SOUNDS = {
     off: [{ voice: "stone", f: 300, decay: 1.4 }],
   },
   sapphire: { voice: "bell", f: "E6", decay: 0.7, bright: 0.7 },
-  "quartz-cluster": { voice: "chimes", f: 1760, n: 6, decay: 0.8 },
-  opal: { voice: "shimmer", f: "A5", rate: 14 },
+  // A chime for each point as it lights, left to right.
+  "quartz-cluster": {
+    voice: "glass",
+    notes: "C6 D6 E6 G6 A6 C7 D7 E7 G7 A7",
+    step: 0.29,
+    at: 0.2,
+    decay: 0.7,
+  },
+  opal: { voice: "shimmer", f: "A5", rate: 14, decay: 2 },
   pearl: {
     on: { voice: "clack", f: 1800, decay: 2.5, bright: 0.2 },
     off: { voice: "clack", f: 1500, decay: 2, bright: 0.2 },

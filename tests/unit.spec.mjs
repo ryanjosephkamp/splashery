@@ -375,3 +375,77 @@ test("the chess set plays a loaded game: spares rise for a promotion, the en pas
   chess.game.reset();
   expect(chess.action.label).toBe("Play the Opera Game");
 });
+
+// Phase E2: space, atoms and gems.
+const E2 = {
+  space:
+    "sun solar-system mercury venus earth moon mars jupiter saturn uranus neptune aurora-planet asteroid comet meteor star pulsar black-hole star-cluster planetary-nebula nebula spiral-galaxy",
+  atoms: "orbital atom molecule crystal-lattice",
+  gems: "diamond ruby emerald sapphire quartz-cluster opal",
+};
+
+test("every E2 toy has its own tap: a pulse control that drive() answers", async () => {
+  for (const [pack, ids] of Object.entries(E2)) {
+    const { RECIPES } = await import(`../src/packs/${pack}.js`);
+    for (const id of ids.split(" ")) {
+      const r = RECIPES[id];
+      const ctl = r.controls?.find((c) => c.key === r.action?.key);
+      expect(ctl?.type, id).toBe("pulse");
+      // Mid-effect and at rest, drive() gives finite numbers.
+      for (const v of [0.5, 0]) {
+        const out = { parts: {}, glow: [1, 1, 1, 0], amount: 1, grow: 1, cues: [], fx: {} };
+        const c = { [ctl.key]: v };
+        for (const x of r.controls) if (!(x.key in c)) c[x.key] = x.default ?? 0;
+        r.drive(1.5, c, out, { time: 1.5, R: 1, tap: null, data: undefined });
+        for (const pd of Object.values(out.parts))
+          for (const x of [pd.angle, pd.visible, pd.scale, ...(pd.offset || [])])
+            if (x !== undefined) expect(Number.isFinite(x), id).toBe(true);
+      }
+    }
+  }
+});
+
+test("a turning planet shows only the copy within a quarter turn of how it was built", async () => {
+  const { RECIPES } = await import("../src/packs/space.js");
+  // Splats sort in their built pose, so a copy turned further would draw
+  // its far side over its near side (see docs/PACKS.md, "Draw order").
+  for (const [id, key] of [
+    ["jupiter", "race"],
+    ["earth", "day"],
+    ["venus", "swirl"],
+  ]) {
+    for (let v = 1; v > 0; v -= 0.05) {
+      const out = { parts: {}, cues: [] };
+      RECIPES[id].drive(0, { [key]: v }, out, { time: 0 });
+      for (const [name, pd] of Object.entries(out.parts)) {
+        if (!out.parts[`${name}B`]) continue;
+        const b = out.parts[`${name}B`];
+        expect((pd.visible > 0) + (b.visible > 0), `${id} ${name}`).toBe(1);
+        const shown = pd.visible > 0 ? pd.angle : b.angle;
+        const a = Math.abs(Math.atan2(Math.sin(shown), Math.cos(shown)));
+        expect(a, `${id} ${name}`).toBeLessThanOrEqual(Math.PI / 2 + 1e-9);
+      }
+    }
+  }
+});
+
+test("a heated molecule moves each atom on its own, along its bonds", async () => {
+  const { RECIPES } = await import("../src/packs/atoms.js");
+  const { buildRecipe } = await import("../src/kit.js");
+  const it = buildRecipe(RECIPES.molecule, { seed: 3, count: 8000, options: { molecule: "water" } }, () => {}); // prettier-ignore
+  let r = it.next();
+  while (!r.done) r = it.next();
+  const data = r.value.kit.data;
+  expect(data.tokens.length).toBe(3);
+  const out = { parts: {}, tokens: null };
+  RECIPES.molecule.drive(0.37, { heat: 0.7 }, out, { data });
+  const moves = out.tokens.map((t) => Math.hypot(...t.offset));
+  // Both hydrogens move, differently, and further than the heavy oxygen.
+  expect(moves[1]).toBeGreaterThan(0.01);
+  expect(Math.abs(moves[1] - moves[2])).toBeGreaterThan(1e-4);
+  expect(moves[0]).toBeLessThan(Math.max(moves[1], moves[2]));
+  // At rest the atoms only jiggle a little.
+  const calm = { parts: {} };
+  RECIPES.molecule.drive(0.37, { heat: 0 }, calm, { data });
+  expect(Math.max(...calm.tokens.map((t) => Math.hypot(...t.offset)))).toBeLessThan(moves[1]);
+});
