@@ -550,7 +550,8 @@ test("a morph splat packs the offset to its target; band, fade and skin pack the
     if (kind === KINDS.fade) expect([z, w]).toEqual([expect.closeTo(0.3), expect.closeTo(-3.2)]);
     if (kind === KINDS.skin) expect([z, w]).toEqual([3 + 64 * 7, 0.25]);
   }
-  for (const kind of ["morph", "band", "fade", "skin"]) expect(seen.has(KINDS[kind]), kind).toBe(true);
+  for (const kind of ["morph", "band", "fade", "skin"])
+    expect(seen.has(KINDS[kind]), kind).toBe(true);
   // Morph targets count in the fit: the stretched sphere fits the frame.
   expect(s).toBeLessThan(0.7);
 });
