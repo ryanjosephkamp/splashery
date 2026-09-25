@@ -717,10 +717,11 @@
       "improved": "E2: the spiral pattern now turns slowly all the time, as one piece (the arms keep their shape), while the disc's stars orbit. A tap swirls the arms once more round, fast, and the core flares (4.6 s)."
     },
     "virus": {
-      "v": "new",
+      "v": "keep",
       "owner": "Looks good; pick an effect.",
       "effect": "Spikes wave and it splits into copies that fade away.",
-      "sound": "Squelchy pop."
+      "sound": "Squelchy pop.",
+      "improved": "E3: its spikes sway at rest; a tap sends a wave rippling through them from the front, and two smaller copies bud out from behind it, drift apart along the diagonal, turn and fade away (about 4.5 s)."
     },
     "bacteriophage": {
       "v": "keep",
@@ -730,16 +731,18 @@
       "improved": "C2: the legs swing out, the sheath snaps to about half its length, the tail pokes through the plate and a glowing DNA strand coils out, then fades (about 4.5 s)."
     },
     "bacterium": {
-      "v": "new",
+      "v": "keep",
       "owner": "Needs an effect.",
       "effect": "Divides in two (binary fission), then merges back.",
-      "sound": "Wet pop."
+      "sound": "Wet pop.",
+      "improved": "E3: binary fission: the rod pinches in at the middle as a new wall closes across it, its DNA and ribosomes split between the halves, and the two daughter cells come apart with a little hinge (the front one without flagella); then they slide back together and merge (5 s)."
     },
     "red-blood-cell": {
-      "v": "new",
+      "v": "keep",
       "owner": "Maybe turn into a sickle cell, if that is realistic.",
       "effect": "Deforms into a sickle shape (as in sickle-cell disease at low oxygen), then relaxes back to a disc.",
-      "sound": "Soft stretchy squeak."
+      "sound": "Soft stretchy squeak.",
+      "improved": "E3: sickling at low oxygen: the soft disc stretches and curls into a stiff crescent with pointed ends, holds, then relaxes back into a disc with a little wobble (4 s)."
     },
     "neuron": {
       "v": "keep",
@@ -749,16 +752,18 @@
       "improved": "C2: a bright spark runs from the cell body down the whole axon and bursts into light at the terminals (about 2 s)."
     },
     "astrocyte": {
-      "v": "new",
+      "v": "keep",
       "owner": "Needs an effect; looks good.",
       "effect": "Calcium wave: a glow ripples out along its arms.",
-      "sound": "Rippling shimmer."
+      "sound": "Rippling shimmer.",
+      "improved": "E3: a calcium wave: a front of green light spreads from the cell body out along every arm to the tips and the end-feet, and the blood vessel they hold widens for a moment; faint waves pass now and then at rest (4.4 s)."
     },
     "animal-cell": {
-      "v": "new",
+      "v": "keep",
       "owner": "Show some process going on inside, like replication.",
       "effect": "Cell division: the nucleus splits and the cell pinches into two, then rejoins.",
-      "sound": "Gloopy stretching pop."
+      "sound": "Gloopy stretching pop.",
+      "improved": "E3: cell division: the nucleus (and its nucleolus and ER) splits into two, then the cell pinches in two across the view, sharing out its mitochondria, vesicles and Golgi; after a moment the two cells flow back into one (5.2 s)."
     },
     "dna": {
       "v": "keep",
@@ -768,20 +773,23 @@
       "improved": "C2: a tap unzips it almost to the foot, the bases light up in pairs as the fork passes, then it zips back up (about 5.5 s)."
     },
     "white-blood-cell": {
-      "v": "new",
+      "v": "keep",
       "owner": "Needs an effect; looks good.",
       "effect": "Chases and engulfs a small bacterium (phagocytosis).",
-      "sound": "Gulp."
+      "sound": "Gulp.",
+      "improved": "E3: phagocytosis: a bacterium swims in from the side, the cell leans out and reaches a cup of membrane round it, draws it inside and closes over it; granules gather on it and it glows and shrinks away as it is digested (5.6 s)."
     },
     "microglia": {
-      "v": "new",
+      "v": "keep",
       "effect": "Arms reach out and sweep, then retract.",
-      "sound": "Soft scratchy rustle."
+      "sound": "Soft scratchy rustle.",
+      "improved": "E3: its six arms feel about at rest; a tap makes every arm stretch out along its length, sweep to and fro twice, and draw back in (4.4 s)."
     },
     "diatom": {
-      "v": "new",
+      "v": "keep",
       "effect": "The glass shell glints and splits into two halves.",
-      "sound": "Glassy tink."
+      "sound": "Glassy tink.",
+      "improved": "E3: a glint of light runs across the glass, then the shell parts into its two halves, opening like a clam from its far edge to show the golden chloroplasts inside, and closes again (4.4 s)."
     },
     "tardigrade": {
       "v": "keep",
@@ -789,39 +797,45 @@
       "sound": "Tiny squeaky step."
     },
     "pollen": {
-      "v": "new",
+      "v": "keep",
       "effect": "Bursts a puff of tiny grains.",
-      "sound": "Puff and a sneeze-like tweet."
+      "sound": "Puff and a sneeze-like tweet.",
+      "improved": "E3: it bursts as pollen does when it soaks up rain: it swells, then a puff of tiny starch granules jets out of its pores (or furrow), stays where it was let go while the grain turns, drifts down and fades (3.8 s)."
     },
     "snowflake": {
-      "v": "new",
+      "v": "keep",
       "owner": "Melt it, or change into another shape.",
       "effect": "Arms regrow into a new pattern each tap.",
-      "sound": "Crystalline tinkle."
+      "sound": "Crystalline tinkle.",
+      "improved": "E3: the arms melt back from their tips to the middle, then a new flake grows out from the centre: three patterns of the chosen kind, one after another, each tap (3.6 s)."
     },
     "chromosome": {
-      "v": "new",
+      "v": "keep",
       "owner": "Something like mitosis or meiosis.",
       "effect": "The sister chromatids pull apart at the centromere, then rejoin.",
-      "sound": "Stretch and snap."
+      "sound": "Stretch and snap.",
+      "improved": "E3: anaphase: spindle fibres reach in from two bright poles to the kinetochores and pull the sister chromatids apart, each led by its centromere with its arms trailing; then they come back together and the fibres let go (4.6 s)."
     },
     "mitochondrion": {
-      "v": "new",
+      "v": "keep",
       "owner": "The powerhouse of the cell; make the effect about that.",
       "effect": "The cristae light up and energy sparks (ATP) pop out.",
-      "sound": "Power-up hum."
+      "sound": "Power-up hum.",
+      "improved": "E3: it powers up: light runs along the cristae from end to end, the whole thing gives a swell, and bright ATP sparks pop out of the open side in three waves and drift off; faint waves run along it now and then at rest (4 s)."
     },
     "paramecium": {
-      "v": "new",
+      "v": "keep",
       "owner": "Needs an effect.",
       "effect": "Cilia beat in waves and it swims a loop.",
-      "sound": "Rapid soft flutter."
+      "sound": "Rapid soft flutter.",
+      "improved": "E3: its cilia beat hard in waves and it swims a full loop in the plane of the view, coming back to where it was (4.2 s)."
     },
     "amoeba": {
-      "v": "new",
+      "v": "keep",
       "owner": "Needs an effect.",
       "effect": "Pushes out a pseudopod and oozes over.",
-      "sound": "Gloopy ooze."
+      "sound": "Gloopy ooze.",
+      "improved": "E3: it crawls: a round pseudopod pushes out to the right, granules stream into it and the cell oozes over; then one pushes out to the left and it oozes back; at rest its pods stretch a little (5.2 s)."
     },
     "orbital": {
       "v": "keep",

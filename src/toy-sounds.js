@@ -308,43 +308,96 @@ export const TOY_SOUNDS = {
   ],
 
   // ---- Tiny things ------------------------------------------------------------------
+  // The spikes ripple, two copies bud off (0.9 s, 1.05 s) and fade (2.3 s).
   virus: [
-    { voice: "squish", pitch: 1.6, decay: 0.6 },
-    { voice: "pop", f: 600 },
+    { voice: "flutter", f: 900, rate: 18, decay: 1.6, vol: 0.5 },
+    { voice: "squish", at: 0.55, pitch: 1.6, decay: 0.6 },
+    { voice: "pop", at: 0.9, f: 600 },
+    { voice: "pop", at: 1.05, f: 720, vol: 0.8 },
+    { voice: "shimmer", at: 2.3, f: "E6", rate: 9, decay: 1.2, vol: 0.35 },
   ],
   bacteriophage: [
     { voice: "boing", f: 120, to: 0.5, rate: 30, decay: 0.5 },
     { voice: "clack", f: 1300, decay: 1.5 },
     { voice: "squish", at: 0.5, pitch: 1.5, bright: 0.8 },
   ],
-  bacterium: { voice: "pop", f: 380, decay: 1.4 },
-  "red-blood-cell": { voice: "squeak", f: 900, to: 1.3, decay: 1.6, vol: 0.6 },
+  // Pinches in, the daughters part (1.45 s), then slide back and merge (3.4 s).
+  bacterium: [
+    { voice: "gloop", f: 160, decay: 1.2, vol: 0.6 },
+    { voice: "pop", at: 1.45, f: 380, decay: 1.4 },
+    { voice: "squish", at: 3.4, pitch: 0.9, decay: 0.8, vol: 0.6 },
+  ],
+  // Curls into a sickle, then relaxes back (2.5 s).
+  "red-blood-cell": [
+    { voice: "squeak", f: 900, to: 1.3, decay: 1.6, vol: 0.6 },
+    { voice: "squeak", at: 2.5, f: 1150, to: 0.8, decay: 1.4, vol: 0.45 },
+  ],
   neuron: [
     { voice: "zap", f: 2400, to: 0.1 },
     { voice: "crackle", at: 0.2, f: 3600, n: 16, decay: 0.9 },
   ],
-  astrocyte: { voice: "shimmer", f: "C6", rate: 11, decay: 0.8 },
+  // The wave spreads out along the arms; the vessel swells (1.8 s).
+  astrocyte: [
+    { voice: "shimmer", f: "C6", rate: 11, decay: 2.2 },
+    { voice: "wave", at: 1.8, f: 180, decay: 0.8, vol: 0.45 },
+  ],
+  // The nucleus splits, the cell pinches in two (2.1 s), then rejoins (3.2 s).
   "animal-cell": [
-    { voice: "gloop", f: 180, decay: 0.9 },
-    { voice: "pop", at: 0.3, f: 450 },
+    { voice: "gloop", f: 180, decay: 1.4 },
+    { voice: "pop", at: 2.1, f: 450 },
+    { voice: "gloop", at: 3.2, f: 140, decay: 1.2, vol: 0.7 },
   ],
   dna: { voice: "ratchet", f: 3000, n: 26, rate: 40, to: 1.6 },
-  "white-blood-cell": { voice: "gloop", f: 110, decay: 0.7 },
-  microglia: { voice: "patter", f: 3200, n: 22, decay: 0.9, vol: 0.6 },
-  diatom: { voice: "glass", f: 3000, decay: 0.4 },
+  // A bacterium wriggles in, is gulped (2.1 s) and digested (3.6 s).
+  "white-blood-cell": [
+    { voice: "flutter", f: 1800, rate: 24, decay: 3, vol: 0.35 },
+    { voice: "gloop", at: 2.1, f: 110, decay: 0.7 },
+    { voice: "sizzle", at: 3.6, f: 3500, decay: 1, vol: 0.35 },
+  ],
+  // Reaches out, sweeps twice (0.9 s, 2.1 s), draws back.
+  microglia: [
+    { voice: "scrape", f: 2600, rate: 10, decay: 1.4, vol: 0.4 },
+    { voice: "patter", at: 0.9, f: 3200, n: 12, decay: 0.7, vol: 0.5 },
+    { voice: "patter", at: 2.1, f: 3000, n: 12, decay: 0.7, vol: 0.5 },
+  ],
+  // A glint runs across, the halves part (0.8 s) and close again (4 s).
+  diatom: [
+    { voice: "sparkle", f: 5000, n: 5, decay: 0.6, vol: 0.5 },
+    { voice: "glass", at: 0.8, f: 3000, decay: 0.4 },
+    { voice: "glass", at: 4, f: 2400, decay: 0.5, vol: 0.7 },
+  ],
   tardigrade: { voice: "squeak", notes: "C7 - D7", step: 0.18, decay: 0.5, vol: 0.6 },
+  // It swells and bursts (0.2 s), a puff of granules drifts away.
   pollen: [
-    { voice: "breath", f: 1300, to: 0.5, decay: 0.4 },
-    { voice: "chirp", at: 0.3, f: 3200, n: 1 },
+    { voice: "breath", at: 0.18, f: 1300, to: 0.5, decay: 0.6 },
+    { voice: "chirp", at: 0.4, f: 3200, n: 1 },
   ],
-  snowflake: { voice: "sparkle", f: 4000, n: 8, decay: 0.9, bright: 0.8 },
+  // The arms melt back, then a new flake grows out (1.2 s).
+  snowflake: [
+    { voice: "sparkle", f: 3000, n: 5, decay: 0.8, bright: 0.5, vol: 0.5 },
+    { voice: "glass", at: 1.2, notes: "E6 G6 B6 D7 E7", step: 0.45, decay: 0.5, vol: 0.45 },
+  ],
+  // The fibres pull the chromatids apart (0.5 s); they rejoin (3.9 s).
   chromosome: [
-    { voice: "twang", f: 90, decay: 0.8 },
-    { voice: "clack", at: 0.25, f: 2000 },
+    { voice: "twang", at: 0.45, f: 90, decay: 1.6 },
+    { voice: "clack", at: 0.55, f: 2000 },
+    { voice: "clack", at: 3.9, f: 1600, vol: 0.6 },
   ],
-  mitochondrion: { voice: "hum", f: 90, to: 2.5, bright: 0.5 },
-  paramecium: { voice: "flutter", f: 2600, rate: 30, decay: 1.2, vol: 0.7 },
-  amoeba: { voice: "gloop", f: 95, decay: 1.8 },
+  // Powers up along the cristae; ATP pops out in three waves (0.95 s on).
+  mitochondrion: [
+    { voice: "hum", f: 90, to: 2.5, bright: 0.5 },
+    { voice: "blip", at: 0.95, notes: "C6 E6 G6", step: 0.35, decay: 0.6, vol: 0.5 },
+  ],
+  // The cilia beat hard while it swims its loop.
+  paramecium: [
+    { voice: "flutter", f: 2600, rate: 30, decay: 5, vol: 0.7 },
+    { voice: "flutter", at: 1.5, f: 2300, rate: 28, decay: 4, vol: 0.5 },
+  ],
+  // A pod pushes out and it oozes over; then back the other way (2.5 s).
+  amoeba: [
+    { voice: "gloop", f: 95, decay: 1.8 },
+    { voice: "gloop", at: 2.5, f: 85, decay: 1.8, vol: 0.8 },
+  ],
 
   // ---- Atoms ------------------------------------------------------------------------
   // Up as the photon is taken in (0.45 s), down as it is given out (3 s).
