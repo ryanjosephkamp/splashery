@@ -1156,7 +1156,10 @@ function buildLanding(k, ground, code) {
   const QL = spotQuat(L);
   const Lw = (x, y, z) => spotAt(L, [x * G, y * G, z * G]);
   const lander = k.part("lander", { pivot: B(L.base) });
-  const fine = { weight: 6, size: 0.42, pattern: false, flat: 0.25 };
+  // (Denser than the Moon, but not much smaller: the renderer drops splats
+  // that come out under a couple of pixels, and on a small screen the whole
+  // lander would vanish.)
+  const fine = { weight: 3, size: 0.9, pattern: false, flat: 0.25 };
   const metal = (hex) => (c) => lit(hex, c.n, 0.6);
   // Gold foil, crinkled.
   const foil = (c) =>
@@ -1311,7 +1314,7 @@ function buildLanding(k, ground, code) {
   strut(F0.base, top, 0.0032, "#dcdee2", pole);
   k.add(k.sphere(0.005), { ...fine, pos: B(top), part: pole, color: metal("#e8e8e8") });
   strut(spotAt(F0, [0, POLE_H - 0.004, 0]), spotAt(F0, [W + 0.006, POLE_H - 0.004, 0]), 0.0024, "#dcdee2", pole); // prettier-ignore
-  const sheet = { share: 0.03 / CLOTH_STRIPS, size: 0.3, flat: 0.1, even: true, pattern: false, kind: "screen", color: "#ffffff" }; // prettier-ignore
+  const sheet = { share: 0.02 / CLOTH_STRIPS, size: 0.6, flat: 0.1, even: true, pattern: false, kind: "screen", color: "#ffffff" }; // prettier-ignore
   for (let i = 0; i < CLOTH_STRIPS; i++) {
     const u0 = i / CLOTH_STRIPS;
     const strip = k.param(
@@ -1351,7 +1354,7 @@ function astronaut(k, s, facing, part, arm, B) {
   const P = (x, y, z) => spotAt(s, [facing * x * H, y * H, facing * z * H]);
   const suit = (c) => lit("#eeede8", c.n, 0.55);
   const put = (shape, at, color, p = part) =>
-    k.add(shape, { weight: 10, size: 0.36, pattern: false, flat: 0.3, part: p, pos: B(P(...at)), quat: q, color }); // prettier-ignore
+    k.add(shape, { weight: 4, size: 0.8, pattern: false, flat: 0.3, part: p, pos: B(P(...at)), quat: q, color }); // prettier-ignore
   for (const x of [-0.1, 0.1]) {
     put(k.box(0.14 * H, 0.08 * H, 0.2 * H), [x, 0.04, 0.02], (c) => lit("#8e9095", c.n, 0.5));
     put(k.cylinder(0.07 * H, 0.36 * H), [x, 0.26, 0], suit);
