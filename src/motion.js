@@ -216,7 +216,10 @@ export class MotionDriver {
     // The kit toy's own frame: behaviours clock, recipe drive, parts.
     const kt = this.tick(this.kitClock, time, rate, motion.alive !== false);
     const drive = { energy: 0, grow: 1, amount: 1, glow: [1, 1, 1, 0], parts: {}, body: null, fx: {}, addon: null, tokens: null, cues: [] }; // prettier-ignore
-    if (this.recipe?.drive) this.recipe.drive(kt, this.state, drive, { time, R, tap: this.tap });
+    // info.data is whatever the recipe's build left in k.data (which molecule
+    // was built, say), for effects that depend on the build.
+    const about = { time, R, tap: this.tap, data: this.ctx?.kit?.data };
+    if (this.recipe?.drive) this.recipe.drive(kt, this.state, drive, about);
     if (drive.body) {
       if (drive.body.quat) q = quatMul(drive.body.quat, q);
       if (drive.body.offset) {
@@ -285,17 +288,21 @@ function packParts(data, parts, driven, scale) {
     let po = [0, 0, 0];
     let vis = 1;
     let grow = 0;
+    let cull = false;
     if (pd) {
       if (pd.quat) pq = pd.quat;
       else if (pd.angle) pq = quatAxisAngle(pd.axis || def.axis, pd.angle);
       if (pd.offset) po = [pd.offset[0] * scale, pd.offset[1] * scale, pd.offset[2] * scale];
       if (pd.visible !== undefined) vis = pd.visible;
       if (pd.scale !== undefined) grow = pd.scale - 1;
+      cull = !!pd.cull;
     }
     const pv = def ? def.pivot : [0, 0, 0];
     data.set(pq, o);
     data.set([pv[0], pv[1], pv[2], grow], o + 4);
-    data.set([po[0], po[1], po[2], vis], o + 8);
+    // A culled part hides its splats on the far side of its centre (the
+    // kit shader reads visibility -w - 1 from a w of -1 or less).
+    data.set([po[0], po[1], po[2], cull ? -1 - Math.max(0, vis) : vis], o + 8);
   }
   return data;
 }

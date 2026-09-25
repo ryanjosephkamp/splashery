@@ -375,3 +375,112 @@ test("the chess set plays a loaded game: spares rise for a promotion, the en pas
   chess.game.reset();
   expect(chess.action.label).toBe("Play the Opera Game");
 });
+
+// Phase E2: space, atoms and gems.
+const E2 = {
+  space:
+    "sun solar-system mercury venus earth moon mars jupiter saturn uranus neptune aurora-planet asteroid comet meteor star pulsar black-hole star-cluster planetary-nebula nebula spiral-galaxy",
+  atoms: "orbital atom molecule crystal-lattice",
+  gems: "diamond ruby emerald sapphire quartz-cluster opal",
+};
+
+test("every E2 toy has its own tap: a pulse control that drive() answers", async () => {
+  // The Moon lands and stays until a second tap (a toggle).
+  const TOGGLES = ["moon"];
+  for (const [pack, ids] of Object.entries(E2)) {
+    const { RECIPES } = await import(`../src/packs/${pack}.js`);
+    for (const id of ids.split(" ")) {
+      const r = RECIPES[id];
+      const ctl = r.controls?.find((c) => c.key === r.action?.key);
+      expect(ctl?.type, id).toBe(TOGGLES.includes(id) ? "toggle" : "pulse");
+      // Mid-effect and at rest, drive() gives finite numbers.
+      for (const v of [0.5, 0]) {
+        const out = { parts: {}, glow: [1, 1, 1, 0], amount: 1, grow: 1, cues: [], fx: {} };
+        const c = { [ctl.key]: v };
+        for (const x of r.controls) if (!(x.key in c)) c[x.key] = x.default ?? 0;
+        r.drive(1.5, c, out, { time: 1.5, R: 1, tap: null, data: undefined });
+        for (const pd of Object.values(out.parts))
+          for (const x of [pd.angle, pd.visible, pd.scale, ...(pd.offset || [])])
+            if (x !== undefined) expect(Number.isFinite(x), id).toBe(true);
+      }
+    }
+  }
+});
+
+test("a turning planet shows only the copy within a quarter turn of how it was built", async () => {
+  const { RECIPES } = await import("../src/packs/space.js");
+  // Splats sort in their built pose, so a copy turned further would draw
+  // its far side over its near side (see docs/PACKS.md, "Draw order").
+  // Earth and Mercury have four copies and show one turned only one way
+  // from its build, so the night or the heat above them stays on top.
+  for (const [id, key, side] of [
+    ["jupiter", "race", 0],
+    ["earth", "day", -1],
+    ["venus", "swirl", 0],
+    ["mercury", "spin", 1],
+  ]) {
+    for (let v = 1; v > 0; v -= 0.05) {
+      const out = { parts: {}, cues: [] };
+      RECIPES[id].drive(0, { [key]: v }, out, { time: 0 });
+      for (const name of Object.keys(out.parts)) {
+        if (!out.parts[`${name}B`]) continue;
+        const copies = ["", "B", "C", "D"].map((s) => out.parts[name + s]).filter(Boolean);
+        expect(copies.length, `${id} ${name}`).toBe(side ? 4 : 2);
+        const shown = copies.filter((c) => c.visible > 0);
+        expect(shown.length, `${id} ${name}`).toBe(1);
+        const a = Math.atan2(Math.sin(shown[0].angle), Math.cos(shown[0].angle));
+        expect(Math.abs(a), `${id} ${name}`).toBeLessThanOrEqual(Math.PI / 2 + 1e-9);
+        if (side) expect(a * side, `${id} ${name}`).toBeGreaterThanOrEqual(-1e-9);
+      }
+    }
+  }
+});
+
+test("a heated molecule moves each atom on its own, along its bonds", async () => {
+  const { RECIPES } = await import("../src/packs/atoms.js");
+  const { buildRecipe } = await import("../src/kit.js");
+  const it = buildRecipe(RECIPES.molecule, { seed: 3, count: 8000, options: { molecule: "water" } }, () => {}); // prettier-ignore
+  let r = it.next();
+  while (!r.done) r = it.next();
+  const data = r.value.kit.data;
+  expect(data.tokens.length).toBe(3);
+  const out = { parts: {}, tokens: null };
+  RECIPES.molecule.drive(0.37, { heat: 0.7 }, out, { data });
+  const moves = out.tokens.map((t) => Math.hypot(...t.offset));
+  // Both hydrogens move, differently, and further than the heavy oxygen.
+  expect(moves[1]).toBeGreaterThan(0.01);
+  expect(Math.abs(moves[1] - moves[2])).toBeGreaterThan(1e-4);
+  expect(moves[0]).toBeLessThan(Math.max(moves[1], moves[2]));
+  // At rest the atoms only jiggle a little.
+  const calm = { parts: {} };
+  RECIPES.molecule.drive(0.37, { heat: 0 }, calm, { data });
+  expect(Math.max(...calm.tokens.map((t) => Math.hypot(...t.offset)))).toBeLessThan(moves[1]);
+});
+
+test("the Moon landing is hidden at rest, lands, and leaves nothing behind", async () => {
+  const { RECIPES } = await import("../src/packs/space.js");
+  const moon = RECIPES.moon;
+  const drive = (land, c) => {
+    const out = { parts: {}, cues: [] };
+    moon.drive(0, Object.assign(c, { land }), out, { time: 0, data: { ground: () => 1 } });
+    return out;
+  };
+  const shown = (out) =>
+    Object.entries(out.parts)
+      .filter(([, p]) => p.visible > 0)
+      .map(([n]) => n);
+  expect(shown(drive(0, {}))).toEqual([]);
+  // Landed: the lander, the astronaut and the unrolled flag show.
+  const c = {};
+  for (let v = 0; v <= 1.0001; v += 0.01) drive(Math.min(1, v), c);
+  const landed = shown(drive(1, c));
+  for (const name of ["lander", "astro", "pole", "cloth0", "cloth5"])
+    expect(landed).toContain(name);
+  expect(landed).not.toContain("climber");
+  expect(landed).not.toContain("roll");
+  // Leaving runs to empty again, with the lift-off roar on the way.
+  let cues = 0;
+  for (let v = 1; v >= -0.0001; v -= 0.01) cues += drive(Math.max(0, v), c).cues.length;
+  expect(cues).toBeGreaterThan(0);
+  expect(shown(drive(0, c))).toEqual([]);
+});

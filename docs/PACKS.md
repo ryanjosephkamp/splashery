@@ -177,6 +177,14 @@ fire a control and pick an item, or nothing for the usual action. `drive` sees t
 `info.tap = { point, key, pick, time, n }`. The xylophone uses it: a tap on bar `i` returns
 `{ key: "strike", pick: i }` and its drive moves the mallet to that bar.
 
+**Build data**: `build(k, o)` may leave data in `k.data` for `drive`, which sees it as `info.data`
+(the molecule stores which atoms and bonds it built, so its vibration fits the molecule chosen).
+
+**Game pieces and loose pieces**: a splat with `kind: "token"` and `params: [i, 0]` belongs to token
+`i` (up to 48), which `out.tokens[i] = { base, offset, quat, visible }` moves and turns. A `params`
+function can pick the token per splat, so one shape can break into many pieces (the asteroid's 18
+cells, the meteor's fragments, the molecule's atoms).
+
 **Sound**: each shelf toy's tap sound is a spec in `src/toy-sounds.js` (not in the recipe), built
 from the voice library in `src/voices.js` (its header lists the parameters):
 
@@ -314,6 +322,45 @@ form is in CLAUDE.md.
 - **Judge motion, at phone size.** Filmstrips at 220 px hide bending, smear and speckle. Render a
   clip of every changed effect with `tools/effect-clip.mjs` and look at it at full size before
   showing it; the owner reviews the clips on the private "Effect review" page before merging.
+- **Draw order (E2).** Splats are depth-sorted in the pose they were built in, so:
+  1. A solid body turned more than a quarter turn draws its far side over its near side (it looks
+     hollow). For a full turn, build it twice, the second copy half a turn round and coloured as the
+     first would be there, and show whichever copy is within a quarter turn of its built pose
+     (`spinParts` in `src/packs/space.js`: Venus, Jupiter, Neptune).
+  2. A layer of splats above a turning body (clouds) draws wrongly even then: paint it onto the
+     body, or split the body into latitude bands that turn at their own speeds.
+  3. A body split into bands that turn at different speeds: one band's far side can draw over the
+     next band's near side at the edge (flaps). Set `cull: true` on the parts while they turn (it
+     hides splats on the far side of the part's pivot; the Jupiter, Venus and Neptune bands) and
+     show them a little bigger (`visible: 1.2`) to close the gaps the far side used to fill. Put the
+     bands that stay still in a part too, so they can be culled.
+  4. A fixed layer over part of a turning body (Earth's night, Mercury's heat) is covered wherever
+     the body's shown copy was built nearer the camera. Build four copies a quarter turn apart and
+     show one that was built on the far side of where it is shown (`spinQuarters`: side -1 when the
+     layer is on the side the ground turns towards, +1 when it turns away). Things that ride over
+     that layer (Earth's city lights) are built where they first come into it, so they are always
+     shown at or past their built pose.
+  5. Splats inside a turning body (`interior`) draw over its turned surface: keep a turning body
+     hollow and put its inside in a separate part that hides while it turns (`coreBall`). Its outer
+     layer shows through gaps in a thin shell, so keep it dark or a little smaller.
+  6. Rings that turn for ever: make their marks repeat every eighth of a turn and turn them by the
+     angle modulo that (`ringAngle`), so they never move far from their built pose.
+  7. A piece that moves in front of something must be built where it will be seen in front (the
+     black hole's star is built where it plunges, the solar system's Mercury in front of the Sun).
+  8. Turning about the view direction keeps the order (Uranus rolls that way).
+- **Fading by size makes speckle.** `visible` and `kind: "grow"` both shrink splats, so a whole
+  layer shrinking away turns into dots. Clear a layer as a moving front instead (run `out.grow` back
+  down: the Mars dust storm), and give glow overlays bigger, fainter splats than the surface under
+  them (the quartz points, the opal).
+- **Hidden pieces count in the fit.** Every splat is used to fit the toy into its frame, hidden or
+  not, so build an effect's pieces small (inside the toy's resting size) and grow them with their
+  part's `scale` (the Sun's flare, the star's red giant and shell, the meteor's fireball).
+- **Light that plays over a surface.** A layer of splats coloured exactly as the surface is there
+  (invisible at rest) with `kind: "pulse"` flashes as `out.glow` runs over it; change the glow's
+  colour each frame for rainbow fire (diamond, opal) or keep it one colour for a running light
+  (emerald, the aurora's folds). The glow runs at a fixed speed (a pass every 2.9 s at normal
+  speed), so it suits loops and repeats, not a front that must start at the tap: for that, use
+  `kind: "grow"` and `out.grow` (the Moon's terminator, the Mars dust front, the ruby's glow).
 
 ## 8. Checking your work
 

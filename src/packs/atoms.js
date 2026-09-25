@@ -2,7 +2,7 @@
 // crystal lattices. Stylised, but built from real shapes and numbers.
 // Loaded on demand.
 
-import { mix, shade, clamp, quatFromTo, quatAxisAngle, quatRotate } from "../kit.js";
+import { mix, shade, clamp, smoothstep, quatFromTo, quatAxisAngle, quatRotate } from "../kit.js";
 
 const TAU = Math.PI * 2;
 const PHI = (1 + Math.sqrt(5)) / 2;
@@ -50,6 +50,32 @@ function gauss(rand) {
   return Math.sqrt(-2 * Math.log(1 - rand())) * Math.cos(TAU * rand());
 }
 
+// ---- Timing helpers for tap effects ------------------------------------------------
+
+const clamp01 = (x) => (x < 0 ? 0 : x > 1 ? 1 : x);
+const ease = (x) => x * x * (3 - 2 * x);
+const easeOut = (x) => 1 - (1 - x) ** 3;
+// 0 before a, rising to 1 at b.
+const band = (x, a, b) => clamp01((x - a) / (b - a));
+// Rises from a to b, holds, falls from c to d.
+const bump = (x, a, b, c, d) => band(x, a, b) * (1 - band(x, c, d));
+// A pulse control's progress: 0 at the tap, 1 when done (and at rest).
+const progress = (v) => (v > 0 ? 1 - v : 1);
+// Per-toy memory for drive(), keyed by the control state object.
+const MEM = new WeakMap();
+function mem(c) {
+  let m = MEM.get(c);
+  if (!m) MEM.set(c, (m = {}));
+  return m;
+}
+// An angle that turns at `rate` (which may change) without jumping.
+function turning(m, key, t, rate) {
+  const s = m[key] || (m[key] = { a: 0, t });
+  s.a += (t - s.t) * rate;
+  s.t = t;
+  return s.a;
+}
+
 // ---- Orbitals --------------------------------------------------------------------
 // Hydrogen-like orbitals: psi = R(r) Y(direction), in units of the Bohr radius,
 // with chemistry's z axis pointing up. |psi|² separates, so the radius is drawn
@@ -95,6 +121,28 @@ const ORBITALS = {
     ymax: 1,
     rmax: 44,
   },
+  "5g": {
+    label: "5g (z⁴)",
+    R: (r) => r * r * r * r * Math.exp(-r / 5),
+    Y: (x, y, z) => 35 * z ** 4 - 30 * z * z + 3,
+    ymax: 8,
+    rmax: 62,
+    hidden: true,
+  },
+};
+
+// The orbital a tap excites each one to: one step up in energy, with the
+// angular momentum one higher (the rule for absorbing a photon).
+const EXCITE = {
+  "1s": "2p",
+  "2s": "3p",
+  "2p": "3dz2",
+  "3p": "3dz2",
+  "3dz2": "4fz3",
+  "3dxy": "4fxyz",
+  "4fz3": "5g",
+  "4fxyz": "5g",
+  "5g": "4fz3",
 };
 
 // A radius sampler for r² R(r)², cut at the 98.5% quantile so a few far
@@ -234,17 +282,29 @@ const CPK = {
 };
 
 // Adds atoms and bonds. atoms: [{ el, p, color?, r? }], bonds: [[i, j, order]].
-// Bonds are split in two, each half in its atom's colour.
-function ballStick(k, atoms, bonds, { bondR = 0.09, vibrate = 0.02, glint = 0, grey = null } = {}) {
+// Bonds are split in two, each half in its atom's colour. Each atom and its
+// bond halves can be a token (token(i), moved by drive) or a part
+// (part(i)); `overlap` lengthens each half past the middle so a stretched
+// bond does not open a gap.
+function ballStick(
+  k,
+  atoms,
+  bonds,
+  { bondR = 0.09, vibrate = 0.02, glint = 0, grey = null, token, part, overlap = 0 } = {},
+) {
   const phase = atoms.map(() => k.rand() * TAU);
+  const motion = (i, own) =>
+    token ? { kind: "token", params: [token(i), 0] } : { ...own, part: part ? part(i) : undefined };
   atoms.forEach((a, i) => {
     const el = CPK[a.el] || {};
     const col = a.color || el.color;
     k.add(k.sphere(a.r ?? el.r), {
       pos: a.p,
       flat: 0.3,
-      kind: glint ? "glint" : "breathe",
-      params: glint ? [glint, 0] : [vibrate, phase[i]],
+      ...motion(i, {
+        kind: glint ? "glint" : "breathe",
+        params: glint ? [glint, 0] : [vibrate, phase[i]],
+      }),
       color: (c) => {
         const base = a.el === "H" ? mix(col, "#b8c4d6", 0.25 * (1 - Math.max(0, c.n[1]))) : col;
         return gloss(lit(base, c.n, 0.6, 0.5), c.n, a.el === "C" ? 0.55 : 0.45, 16);
@@ -264,20 +324,20 @@ function ballStick(k, atoms, bonds, { bondR = 0.09, vibrate = 0.02, glint = 0, g
     const offs = order === 2 ? [-1, 1] : order === 3 ? [-1.4, 0, 1.4] : [0];
     const r = order === 1 ? bondR : bondR * 0.65;
     const q = quatFromTo([0, 1, 0], u);
+    const mid = lerp(A.p, B.p, 0.5);
     for (const o of offs) {
       const shift = mul(side, o * bondR * 1.3);
       for (const [from, to, atom, idx] of [
-        [A.p, lerp(A.p, B.p, 0.5), A, i],
-        [lerp(A.p, B.p, 0.5), B.p, B, j],
+        [A.p, add(mid, mul(u, overlap)), A, i],
+        [add(mid, mul(u, -overlap)), B.p, B, j],
       ]) {
         const el = CPK[atom.el] || {};
         const col = grey || atom.bondColor || atom.color || el.color;
-        k.add(k.cylinder(r, L / 2, { caps: false }), {
+        k.add(k.cylinder(r, L / 2 + overlap, { caps: false }), {
           pos: add(lerp(from, to, 0.5), shift),
           quat: q,
           flat: 0.3,
-          kind: "breathe",
-          params: [vibrate, phase[idx]],
+          ...motion(idx, { kind: "breathe", params: [vibrate, phase[idx]] }),
           color: (c) => lit(atom.el === "H" && !grey ? "#dcdcdc" : col, c.n, 0.65, 0.4),
         });
       }
@@ -517,6 +577,29 @@ const MOLECULES = {
   },
 };
 
+// The buckyball's atoms by pentagon: the twelve pentagons sit round the
+// twelve corners of an icosahedron.
+function pentagonOf(atoms) {
+  const ico = [];
+  for (const [a, b] of [
+    [1, PHI],
+    [-1, PHI],
+    [1, -PHI],
+    [-1, -PHI],
+  ])
+    ico.push(unit([0, a, b]), unit([a, b, 0]), unit([b, 0, a]));
+  return atoms.map((at) => {
+    const d = unit(at.p);
+    let best = 0;
+    let bv = -2;
+    ico.forEach((v, i) => {
+      const x = dot(d, v);
+      if (x > bv) [bv, best] = [x, i];
+    });
+    return best;
+  });
+}
+
 // ---- Crystal lattices ------------------------------------------------------------------
 
 function saltLattice() {
@@ -686,6 +769,109 @@ function iceLattice(rand) {
   return { atoms, bonds, bondR: 0.1, hbonds };
 }
 
+// An orbital as the toy draws it: its boundary surface (the level that
+// holds 90% of the electron) and a cloud sampled from |psi|² inside it,
+// scaled to fit (1 = the resting size). glow mixes the colours towards
+// white; the surface's weight sets its share of the rest of the budget.
+function orbitalLook(
+  k,
+  orb,
+  { part, plus, minus, lobes, cloudShare, weight = 1, fit = 1, glow = 0 },
+) {
+  const radial = radialSampler(orb.R, orb.rmax);
+  const E = radial.extent;
+  // Chemistry's (x, y, z) -> the toy's axes: z is up; "face" orbitals lie
+  // in the plane facing the viewer.
+  const toToy = (d) => (orb.face ? d : [d[0], d[2], -d[1]]);
+  const toChem = (d) => (orb.face ? d : [d[0], -d[2], d[1]]);
+  const drawDir = (rand) => {
+    let d;
+    let y;
+    for (let tries = 0; tries < 200; tries++) {
+      d = randDir(rand);
+      y = orb.Y(d[0], d[1], d[2]);
+      if (rand() * orb.ymax * orb.ymax <= y * y) break;
+    }
+    return { d, y };
+  };
+  // Densities of samples: the peak (to brighten the thick of the cloud)
+  // and the level whose surface holds 90% of the electron.
+  const dens = [];
+  for (let i = 0; i < 3000; i++) {
+    const r = radial.sample(k.rand);
+    const { y } = drawDir(k.rand);
+    dens.push((orb.R(r) * y) ** 2);
+  }
+  dens.sort((a, b) => a - b);
+  const peak = dens[dens.length - 1] || 1;
+  const level = dens[Math.floor(dens.length * 0.1)];
+  // The boundary surface: along a direction with |Y| = y, the outermost
+  // radius where psi² reaches the level. Tabulated against y.
+  const N = 1024;
+  const g = new Float64Array(N + 1);
+  for (let i = 0; i <= N; i++) g[i] = Math.abs(orb.R((i / N) * orb.rmax));
+  const T = 256;
+  const table = new Float64Array(T + 1);
+  for (let j = 1; j <= T; j++) {
+    const need = Math.sqrt(level) / ((j / T) * orb.ymax);
+    let i = N;
+    while (i > 0 && g[i] < need) i--;
+    table[j] = (i / N) * orb.rmax;
+  }
+  const surfR = (dToy) => {
+    const d = toChem(dToy);
+    const y = Math.abs(orb.Y(d[0], d[1], d[2]));
+    const x = Math.min(T, (y / orb.ymax) * T);
+    const j = Math.floor(x);
+    const f = x - j;
+    const r = j >= T ? table[T] : table[j] * (1 - f) + table[j + 1] * f;
+    return Math.max(0.004, (r / E) * fit);
+  };
+  // (The surface takes the rest of the budget, so splat sizes follow it.)
+  k.add(k.radial(surfR, { grid: 96 }), {
+    weight,
+    part,
+    flat: 0.15,
+    opacity: lobes ? 0.92 : 0.28,
+    pattern: false,
+    kind: "breathe",
+    params: [0.01, 0],
+    color: (c) => {
+      const d = toChem(unit(c.lp));
+      const r = (len(c.lp) / fit) * E;
+      const sign = orb.R(r) * orb.Y(d[0], d[1], d[2]) >= 0;
+      const base = mix(sign ? plus : minus, "#fffbe8", glow);
+      if (!lobes) return gloss(lit(mix(base, "#ffffff", 0.3), c.n, 0.75, 0.3), c.n, 0.5, 20);
+      return gloss(lit(base, c.n, 0.55, 0.55), c.n, 0.45, 16);
+    },
+  });
+  k.cloud({ share: cloudShare, size: 1.1, pattern: false, part }, (rand) => {
+    // Rejection sampling from |psi|², keeping the cloud mostly inside the
+    // boundary surface so its shape reads clearly.
+    let r;
+    let d;
+    let y;
+    let psi;
+    for (let tries = 0; tries < 12; tries++) {
+      r = radial.sample(rand);
+      ({ d, y } = drawDir(rand));
+      psi = orb.R(r) * y;
+      if (psi * psi > level * 0.6 || rand() < 0.08) break;
+    }
+    const t = clamp((psi * psi) / peak, 0, 1);
+    const base = mix(psi >= 0 ? plus : minus, "#fffbe8", glow);
+    const col = mix(shade(base, 0.8), mix(base, "#fffbe8", 0.7), Math.pow(t, 0.6));
+    return {
+      p: mul(toToy(d), (r / E) * fit),
+      color: col,
+      opacity: lobes ? 0.35 : 0.1 + 0.55 * Math.pow(t, 0.6),
+      size: 0.7 + 0.6 * rand(),
+      kind: "twinkle",
+      params: [0.5, rand() * TAU],
+    };
+  });
+}
+
 export const RECIPES = {
   // ---- Electron orbital ---------------------------------------------------------------
   orbital: {
@@ -696,7 +882,9 @@ export const RECIPES = {
         label: "Orbital",
         type: "select",
         default: "3dz2",
-        choices: Object.entries(ORBITALS).map(([id, o]) => ({ id, label: o.label })),
+        choices: Object.entries(ORBITALS)
+          .filter(([, o]) => !o.hidden)
+          .map(([id, o]) => ({ id, label: o.label })),
       },
       {
         key: "look",
@@ -711,101 +899,44 @@ export const RECIPES = {
       { key: "plus", label: "Plus phase", type: "color", default: "#ff8a3d" },
       { key: "minus", label: "Minus phase", type: "color", default: "#3d8bff" },
     ],
+    controls: [{ key: "excite", label: "Excite", type: "pulse", ease: 5.2 }],
+    action: { key: "excite", label: "Excite the electron" },
+    // A tap sends in a photon (a wiggle of light) that the electron
+    // absorbs: its cloud jumps to a bigger, higher-energy orbital and glows.
+    // A moment later it drops back to where it was, with a flash, and
+    // gives the photon out again.
+    drive(t, c, out) {
+      const p = progress(c.excite);
+      const on = c.excite > 0 ? 1 : 0;
+      const up = ease(band(p, 0.08, 0.17));
+      const down = ease(band(p, 0.56, 0.64));
+      const high = on * up * (1 - down);
+      out.parts.ground = {
+        visible: (1 - high) * (1 + 0.6 * on * bump(p, 0.58, 0.62, 0.66, 0.8)),
+        scale: 1 + 0.25 * high,
+      };
+      out.parts.excited = { visible: 1.2 * high, scale: 1 + 0.3 * up - 0.2 * down };
+      const inP = band(p, 0, 0.09);
+      out.parts.photonIn = {
+        offset: mul(PHOTON_IN, 2.4 * (1 - inP)),
+        visible: on * (p < 0.09 ? 1 : 0),
+      };
+      const outP = band(p, 0.58, 0.95);
+      out.parts.photonOut = {
+        offset: mul(PHOTON_OUT, 0.2 + 2.4 * outP),
+        visible: on * bump(p, 0.58, 0.6, 0.85, 0.95),
+      };
+      out.parts.flash = {
+        visible: on * (1.6 * bump(p, 0.07, 0.09, 0.1, 0.18) + 2 * bump(p, 0.57, 0.6, 0.62, 0.75)),
+      };
+      out.amount = 1 + 0.6 * high;
+    },
     build(k, o) {
       const orb = ORBITALS[o.orbital] || ORBITALS["3dz2"];
-      const radial = radialSampler(orb.R, orb.rmax);
-      const E = radial.extent;
-      // Chemistry's (x, y, z) -> the toy's axes: z is up; "face" orbitals lie
-      // in the plane facing the viewer.
-      const toToy = (d) => (orb.face ? d : [d[0], d[2], -d[1]]);
-      const toChem = (d) => (orb.face ? d : [d[0], -d[2], d[1]]);
-      const drawDir = (rand) => {
-        let d;
-        let y;
-        for (let tries = 0; tries < 200; tries++) {
-          d = randDir(rand);
-          y = orb.Y(d[0], d[1], d[2]);
-          if (rand() * orb.ymax * orb.ymax <= y * y) break;
-        }
-        return { d, y };
-      };
-      // Densities of samples: the peak (to brighten the thick of the cloud)
-      // and the level whose surface holds 90% of the electron.
-      const dens = [];
-      for (let i = 0; i < 3000; i++) {
-        const r = radial.sample(k.rand);
-        const { y } = drawDir(k.rand);
-        dens.push((orb.R(r) * y) ** 2);
-      }
-      dens.sort((a, b) => a - b);
-      const peak = dens[dens.length - 1] || 1;
-      const level = dens[Math.floor(dens.length * 0.1)];
-      // The boundary surface: along a direction with |Y| = y, the outermost
-      // radius where psi² reaches the level. Tabulated against y.
-      const N = 1024;
-      const g = new Float64Array(N + 1);
-      for (let i = 0; i <= N; i++) g[i] = Math.abs(orb.R((i / N) * orb.rmax));
-      const T = 256;
-      const table = new Float64Array(T + 1);
-      for (let j = 1; j <= T; j++) {
-        const need = Math.sqrt(level) / ((j / T) * orb.ymax);
-        let i = N;
-        while (i > 0 && g[i] < need) i--;
-        table[j] = (i / N) * orb.rmax;
-      }
-      const surfR = (dToy) => {
-        const d = toChem(dToy);
-        const y = Math.abs(orb.Y(d[0], d[1], d[2]));
-        const x = Math.min(T, (y / orb.ymax) * T);
-        const j = Math.floor(x);
-        const f = x - j;
-        const r = j >= T ? table[T] : table[j] * (1 - f) + table[j + 1] * f;
-        return Math.max(0.004, r / E);
-      };
-      const plus = o.plus;
-      const minus = o.minus;
+      const ground = k.part("ground");
       const lobes = o.look === "lobes";
-      // (The surface takes the rest of the budget, so splat sizes follow it.)
-      k.add(k.radial(surfR, { grid: 96 }), {
-        flat: 0.15,
-        opacity: lobes ? 0.92 : 0.28,
-        pattern: false,
-        kind: "breathe",
-        params: [0.01, 0],
-        color: (c) => {
-          const d = toChem(unit(c.lp));
-          const r = len(c.lp) * E;
-          const sign = orb.R(r) * orb.Y(d[0], d[1], d[2]) >= 0;
-          const base = sign ? plus : minus;
-          if (!lobes) return gloss(lit(mix(base, "#ffffff", 0.3), c.n, 0.75, 0.3), c.n, 0.5, 20);
-          return gloss(lit(base, c.n, 0.55, 0.55), c.n, 0.45, 16);
-        },
-      });
-      k.cloud({ share: lobes ? 0.24 : 0.66, size: 1.1, pattern: false }, (rand) => {
-        // Rejection sampling from |psi|², keeping the cloud mostly inside the
-        // boundary surface so its shape reads clearly.
-        let r;
-        let d;
-        let y;
-        let psi;
-        for (let tries = 0; tries < 12; tries++) {
-          r = radial.sample(rand);
-          ({ d, y } = drawDir(rand));
-          psi = orb.R(r) * y;
-          if (psi * psi > level * 0.6 || rand() < 0.08) break;
-        }
-        const t = clamp((psi * psi) / peak, 0, 1);
-        const base = psi >= 0 ? plus : minus;
-        const col = mix(shade(base, 0.8), mix(base, "#fffbe8", 0.7), Math.pow(t, 0.6));
-        return {
-          p: mul(toToy(d), r / E),
-          color: col,
-          opacity: lobes ? 0.35 : 0.1 + 0.55 * Math.pow(t, 0.6),
-          size: 0.7 + 0.6 * rand(),
-          kind: "twinkle",
-          params: [0.5, rand() * TAU],
-        };
-      });
+      const look = { plus: o.plus, minus: o.minus, lobes };
+      orbitalLook(k, orb, { ...look, part: ground, cloudShare: lobes ? 0.2 : 0.46 });
       // The nucleus: a tiny bright dot at the centre, with a soft glow.
       k.add(k.sphere(0.03), { share: 0.01, color: (c) => gloss("#fff3c4", c.n, 0.6, 8) });
       k.cloud({ share: 0.01, size: 1.4, pattern: false }, (rand) => ({
@@ -814,6 +945,33 @@ export const RECIPES = {
         opacity: 0.25,
         kind: "twinkle",
         params: [0.6, rand() * TAU],
+      }));
+      // The excited orbital (hidden until a tap): the next shape up, drawn
+      // the same way, a little brighter, at the same size and grown by its
+      // part.
+      const hi = ORBITALS[EXCITE[o.orbital] || "4fz3"];
+      orbitalLook(k, hi, { ...look, part: k.part("excited"), cloudShare: 0.12, weight: 0.8, fit: 0.95, glow: 0.2 }); // prettier-ignore
+      // The photons: short wiggles of light, one coming in and one going out.
+      for (const [name, dir, col] of [
+        ["photonIn", PHOTON_IN, "#bfe8ff"],
+        ["photonOut", PHOTON_OUT, "#fff2a8"],
+      ]) {
+        const [e1] = basis(dir);
+        k.cloud({ share: 0.01, size: 1.2, pattern: false, part: k.part(name) }, (rand) => {
+          const u = rand() * 2 - 1;
+          const env = Math.exp(-u * u * 3);
+          return {
+            p: add(mul(dir, u * 0.35), mul(e1, 0.07 * env * Math.sin(u * 22))),
+            color: mix(col, "#ffffff", 0.4 * rand()),
+            opacity: 0.9 * env + 0.1,
+          };
+        });
+      }
+      // A flash at the middle as the photon is taken in and given out.
+      k.cloud({ share: 0.01, size: 2.4, pattern: false, part: k.part("flash") }, (rand) => ({
+        p: mul(randDir(rand), 0.3 * Math.pow(rand(), 1.5)),
+        color: mix("#ffffff", "#fff0b0", rand()),
+        opacity: 0.3,
       }));
     },
   },
@@ -843,10 +1001,25 @@ export const RECIPES = {
         ],
       },
     ],
-    controls: [{ key: "speed", label: "Electrons", type: "slider", default: 0.5 }],
+    controls: [
+      { key: "speed", label: "Electrons", type: "slider", default: 0.5 },
+      { key: "energy", label: "Energise", type: "pulse", ease: 4.6 },
+    ],
+    action: { key: "energy", label: "Speed up the electrons" },
+    // A tap energises the atom: the electrons whirl faster and faster until
+    // each shell blurs into a glowing ring (as a fast electron is better
+    // pictured, a cloud round its orbit), then slow down again.
     drive(t, c, out) {
-      const s = 0.3 + 1.7 * c.speed;
-      for (let i = 0; i < 7; i++) out.parts[`shell${i}`] = { angle: t * s * shellSpeed(i) };
+      const m = mem(c);
+      const p = progress(c.energy);
+      const on = c.energy > 0 ? 1 : 0;
+      const boost = on * 16 * ease(band(p, 0, 0.32)) * (1 - ease(band(p, 0.6, 1)));
+      const a = turning(m, "a", t, 0.3 + 1.7 * c.speed + boost);
+      for (let i = 0; i < 7; i++) out.parts[`shell${i}`] = { angle: a * shellSpeed(i) };
+      const blur = band(boost, 3, 13);
+      out.parts.blur = { visible: 1.2 * blur };
+      out.parts.fuzz = { scale: 1 + 0.12 * blur, visible: 1 + 0.6 * blur };
+      out.amount = 1 + 2 * blur;
     },
     build(k, o) {
       const [, , A, shells] = ELEMENTS.find((e) => e[0] === o.element) || ELEMENTS[5];
@@ -877,17 +1050,21 @@ export const RECIPES = {
       if (o.style === "cloud") {
         // Fuzzy shells: electrons as clouds of probability.
         const total = shells.reduce((s, n) => s + Math.sqrt(n), 0);
+        const fuzz = k.part("fuzz");
         shells.forEach((n, i) => {
-          k.cloud({ share: (0.6 * Math.sqrt(n)) / total, size: 1.2, pattern: false }, (rand) => {
-            const r = shellR(i) + 0.05 * gauss(rand);
-            return {
-              p: mul(randDir(rand), r),
-              color: mix("#6fd3ff", "#b388ff", i / 6),
-              opacity: 0.12 + 0.1 * rand(),
-              kind: "twinkle",
-              params: [0.6, rand() * TAU],
-            };
-          });
+          k.cloud(
+            { share: (0.6 * Math.sqrt(n)) / total, size: 1.2, pattern: false, part: fuzz },
+            (rand) => {
+              const r = shellR(i) + 0.05 * gauss(rand);
+              return {
+                p: mul(randDir(rand), r),
+                color: mix("#6fd3ff", "#b388ff", i / 6),
+                opacity: 0.12 + 0.1 * rand(),
+                kind: "twinkle",
+                params: [0.6, rand() * TAU],
+              };
+            },
+          );
         });
         k.cloud({ share: 0.02, size: 2.5, pattern: false }, (rand) => ({
           p: mul(randDir(rand), nucR * 1.2 * rand()),
@@ -896,6 +1073,7 @@ export const RECIPES = {
         }));
         return;
       }
+      const blur = k.part("blur");
       shells.forEach((n, i) => {
         const nrm = shellNormal(i);
         const part = k.part(`shell${i}`, { pivot: [0, 0, 0], axis: nrm });
@@ -927,6 +1105,19 @@ export const RECIPES = {
             params: [0.7, rand() * TAU],
           }));
         }
+        // The blur (hidden until a tap): the shell's electrons smeared
+        // into a glowing ring round their orbit.
+        k.cloud({ share: 0.012 * Math.sqrt(n), size: 1.3, pattern: false, part: blur }, (rand) => {
+          const a = rand() * TAU;
+          const p = mul(add(mul(e1, Math.cos(a)), mul(e2, Math.sin(a))), R);
+          return {
+            p: add(p, mul(randDir(rand), 0.03 * Math.abs(gauss(rand)))),
+            color: mix("#36c9ff", "#d8f6ff", rand() * rand()),
+            opacity: 0.35,
+            kind: "twinkle",
+            params: [0.5, rand() * TAU],
+          };
+        });
       });
     },
   },
@@ -952,13 +1143,77 @@ export const RECIPES = {
         ],
       },
     ],
+    controls: [{ key: "heat", label: "Heat", type: "pulse", ease: 4.4 }],
+    action: { key: "heat", label: "Heat it up" },
+    // The atoms always jiggle a little on their bonds. A tap heats the
+    // molecule: every bond stretches and squeezes hard at its own pace
+    // (light hydrogens swing furthest), then it cools and calms. Each atom
+    // (for the buckyball, each of its twelve pentagons, which also breathe
+    // in and out together) is a token that moves on its own.
+    drive(t, c, out, info) {
+      const D = info.data;
+      if (!D?.bonds) return;
+      const p = progress(c.heat);
+      const on = c.heat > 0 ? 1 : 0;
+      const amp = 0.15 + 0.85 * on * bump(p, 0, 0.1, 0.5, 1);
+      const disp = D.tokens.map(() => [0, 0, 0]);
+      for (const b of D.bonds) {
+        const d = amp * b.L * 0.1 * Math.sin(TAU * b.f * t + b.ph);
+        const ma = D.tokens[b.a].mass;
+        const mb = D.tokens[b.b].mass;
+        disp[b.a] = add(disp[b.a], mul(b.u, (-d * mb) / (ma + mb)));
+        disp[b.b] = add(disp[b.b], mul(b.u, (d * ma) / (ma + mb)));
+      }
+      if (D.breathe) {
+        const r = amp * 0.07 * Math.sin(TAU * 1.6 * t);
+        D.tokens.forEach((tk, i) => (disp[i] = add(disp[i], mul(tk.dir, r * len(tk.base)))));
+      }
+      out.tokens = D.tokens.map((tk, i) => ({ base: tk.base, offset: disp[i] }));
+    },
     build(k, o) {
       const make = MOLECULES[o.molecule] || MOLECULES.caffeine;
       const { atoms, bonds } = make();
       // Turn flat molecules a little so they show some depth.
       const q = quatAxisAngle([0.3, 1, 0], o.molecule === "c60" ? 0.3 : -0.35);
       for (const a of atoms) a.p = quatRotate(q, a.p);
-      ballStick(k, atoms, bonds, { bondR: o.molecule === "c60" ? 0.08 : 0.1 });
+      // One token per atom; the buckyball's sixty atoms go by pentagon.
+      const c60 = o.molecule === "c60";
+      const tokenOf = c60 ? pentagonOf(atoms) : atoms.map((a, i) => i);
+      const n = Math.max(...tokenOf) + 1;
+      const MASS = { H: 1, C: 12, N: 14, O: 16 };
+      const tokens = Array.from({ length: n }, () => ({ base: [0, 0, 0], mass: 0, count: 0 }));
+      atoms.forEach((a, i) => {
+        const tk = tokens[tokenOf[i]];
+        tk.base = add(tk.base, a.p);
+        tk.mass += MASS[a.el] ?? 12;
+        tk.count++;
+      });
+      for (const tk of tokens) {
+        tk.base = mul(tk.base, 1 / tk.count);
+        tk.dir = unit(tk.base);
+      }
+      const heavy = (a) => a.el !== "H";
+      const list = [];
+      bonds.forEach(([i, j], bi) => {
+        if (tokenOf[i] === tokenOf[j]) return;
+        const d = sub(atoms[j].p, atoms[i].p);
+        const L = len(d);
+        const light = !heavy(atoms[i]) || !heavy(atoms[j]);
+        list.push({
+          a: tokenOf[i],
+          b: tokenOf[j],
+          u: mul(d, 1 / L),
+          L,
+          f: (light ? 3.1 : 2.1) * (0.85 + 0.3 * ((bi * 0.618) % 1)),
+          ph: (bi * 2.39996) % TAU,
+        });
+      });
+      k.data = { tokens, bonds: list, breathe: c60 };
+      ballStick(k, atoms, bonds, {
+        bondR: c60 ? 0.08 : 0.1,
+        token: (i) => tokenOf[i],
+        overlap: 0.09,
+      });
     },
   },
 
@@ -979,6 +1234,23 @@ export const RECIPES = {
         ],
       },
     ],
+    controls: [{ key: "wave", label: "Wave", type: "pulse", ease: 3.8 }],
+    action: { key: "wave", label: "Send a wave through" },
+    // A tap sends a wave of vibration (a phonon) through the crystal: a
+    // ripple runs across it from left to right, each slice of atoms rising
+    // and falling in turn with its bonds, and leaves it still again.
+    drive(t, c, out, info) {
+      const D = info.data;
+      if (!D?.slabs) return;
+      const p = progress(c.wave);
+      const on = c.wave > 0 ? 1 : 0;
+      const front = -1.6 + 3.3 * band(p, 0, 0.92);
+      D.slabs.forEach((sk, i) => {
+        const x = sk - front;
+        const y = on * 0.13 * Math.exp(-(x * x) / (2 * 0.3 * 0.3)) * Math.sin(x * 7);
+        out.parts[`slab${i}`] = { offset: mul(D.up, y) };
+      });
+    },
     build(k, o) {
       const make = {
         salt: saltLattice,
@@ -993,22 +1265,49 @@ export const RECIPES = {
         for (const a of lat.atoms) a.p = quatRotate(q, a.p);
         lat.hbonds = lat.hbonds.map(([a, b]) => [quatRotate(q, a), quatRotate(q, b)]);
       }
+      // Every crystal is scaled to the same size (the toy is fitted to its
+      // frame anyway), so the wave's height suits them all.
+      const ext = Math.max(...lat.atoms.map((a) => len(a.p)));
+      const f = 1.5 / ext;
+      for (const a of lat.atoms) {
+        a.p = mul(a.p, f);
+        a.r = (a.r ?? CPK[a.el]?.r ?? 0.3) * f;
+      }
+      lat.bondR *= f;
+      if (lat.hbonds) lat.hbonds = lat.hbonds.map(([a, b]) => [mul(a, f), mul(b, f)]);
+      // Slices across the view, left to right, each a part the wave lifts.
+      const right = unit(cross([0, 1, 0], VIEW));
+      const up = cross(VIEW, right);
+      const across = lat.atoms.map((a) => dot(a.p, right));
+      const lo = Math.min(...across);
+      const hi = Math.max(...across);
+      const SLABS = 14;
+      const slabAt = (p) =>
+        Math.min(
+          SLABS - 1,
+          Math.max(0, Math.floor(((dot(p, right) - lo) / (hi - lo + 1e-6)) * SLABS)),
+        );
+      const slabs = [];
+      for (let i = 0; i < SLABS; i++) slabs.push(k.part(`slab${i}`));
+      k.data = {
+        up,
+        slabs: slabs.map((_, i) => ((lo + ((i + 0.5) / SLABS) * (hi - lo)) / (hi - lo)) * 2),
+      };
       ballStick(k, lat.atoms, lat.bonds, {
         bondR: lat.bondR,
         vibrate: 0.012,
         glint: lat.glint || 0,
         grey: lat.grey || null,
+        part: (i) => slabs[slabAt(lat.atoms[i].p)],
+        overlap: 0.02,
       });
       if (lat.hbonds) {
         // Hydrogen bonds: dotted lines from each hydrogen to its neighbour's oxygen.
         k.cloud({ share: 0.03, size: 0.9, pattern: false }, (rand, i, n) => {
           const [a, b] = lat.hbonds[i % lat.hbonds.length];
           const t = 0.18 + (0.64 * Math.floor(rand() * 6)) / 5;
-          return {
-            p: add(lerp(a, b, t), mul(randDir(rand), 0.03)),
-            color: "#7fc4ff",
-            opacity: 0.9,
-          };
+          const p = add(lerp(a, b, t), mul(randDir(rand), 0.03 * f));
+          return { p, color: "#7fc4ff", opacity: 0.9, part: slabs[slabAt(p)] };
         });
       }
       if (lat.dotted) {
@@ -1022,12 +1321,18 @@ export const RECIPES = {
           k.cloud({ share: 0.02, size: 0.8, pattern: false }, (rand, i) => {
             const [a, b] = pairs[i % pairs.length];
             const t = 0.12 + (0.76 * Math.floor(rand() * 9)) / 8;
-            return { p: lerp(a, b, t), color: "#9aa3b5", opacity: 0.9 };
+            const p = lerp(a, b, t);
+            return { p, color: "#9aa3b5", opacity: 0.9, part: slabs[slabAt(p)] };
           });
       }
     },
   },
 };
+
+// The directions the orbital's photons travel: in from the upper left, out
+// towards the lower right (both in the picture plane).
+const PHOTON_IN = unit([-0.75, 0.62, 0.2]);
+const PHOTON_OUT = unit([0.8, -0.35, -0.1]);
 
 // Keeps a splat out of the pattern layer.
 function keep(c) {
