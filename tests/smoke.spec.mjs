@@ -1070,6 +1070,7 @@ test.describe("Settings panel (WebGL2)", () => {
     await page.locator("#game-tag-site").focus();
     await expect(page.locator("#game-bar-title")).toContainText("Friendly game");
     // Another toy puts the bar away.
+    await page.click(".chip[data-category='objects']");
     await page.click(".toy-card[data-toy='laptop']");
     await waitForToy(page, "Laptop");
     await expect(bar).toBeHidden();
