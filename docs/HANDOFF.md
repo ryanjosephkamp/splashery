@@ -3,11 +3,16 @@
 The current state and the next phase. The session that finishes a phase updates this file. The
 ground rules are in [CLAUDE.md](../CLAUDE.md).
 
-## Current state (2026-09-24, after Phase E1b)
+## Current state (2026-09-25, after Phase E1b; next: Phase E1c)
 
 - Phase A is done: splashery PR #13 and homepage PR #33 in
   `ryanjosephkamp/ryanjosephkamp.github.io`, both merged. Phases B (PR #17), C1 (PR #18), C2 (PR
-  #19), D (PR #20) and E1 (PR #21) are merged.
+  #19), D (PR #20), E1 (PR #21) and E1b (PRs #22–#24) are merged.
+- **Next: Phase E1c.** The owner reviewed E1b on 2026-09-25 (verbatim in
+  `docs/reviews/2026-09-25-e1b/review.md`). Do the fixes in "Phase E1c in detail" below before E2.
+- **Locked toys (owner approved, do not change their look or behaviour):** the laptop ("basically
+  perfect … please lock that in"). Engine changes must keep it working exactly as now; the laptop
+  smoke test guards it.
 - **Phase E1b** (the owner's review of E1, verbatim in `docs/reviews/2026-09-24-e1/review.md`) is in
   three stacked PRs, merged in order: `claude/phase-e1-45lgvf-1` (rules, clip tool, scan and shape
   fixes), `-2` (thrown balls, eight-ball, storybook) and `-3` (chess and laptop). Check that all
@@ -328,20 +333,21 @@ that tool is not available, ask the owner to press "Copy my marks and notes" on 
 the text. A "change" note overrides the proposal in `tools/toy-plan.json`; update the JSON to match.
 If the plan JSON changes, the page can be republished from it (`node tools/toy-plan.mjs --json`).
 
-| Phase  | What                                                                                                                                                      | Repo(s)   |
-| ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- |
-| A      | Done: sharpness, Detail setting, embeds, honeybee, thumbnail retry, homepage embed.                                                                       | both      |
-| B      | Done: mobile shelf grid (drag up into a full grid like desktop), thumbnail labels that don't cut off, and a "Find your own splat" help panel.             | splashery |
-| C1     | Done: visual fixes from the review (26 toys: vintage camera, boombox, storybook, comet, Statue of Liberty crown, horse, cookie, sports-ball textures, …). | splashery |
-| C2     | Done: clearer or more dramatic effects for 33 toys the owner found subtle (bacteriophage, Big Ben, bus, octopus, fireworks, …).                           | splashery |
-| D      | Done: a voice library and a sound per toy, scan rigs, taps that know where they landed, drag-to-stretch, sound check and audit tools.                     | splashery |
-| E1     | Done: new tap effects for the scans and shapes (33 toys), with colour keys, whole-body effects and kit-built add-ons for rigs.                            | splashery |
-| E1b    | Done: fixes from the owner's E1 review (19 toys, a chess game, a laptop you can type on), effect quality rules, effect clips.                             | splashery |
-| **E2** | New tap effects for space, atoms and gems (32 toys, kit recipes); the second of six waves (see TOY-PLAN.md).                                              | splashery |
-| E3–E6  | New tap effects for the other toys marked new, in four more waves by category (see TOY-PLAN.md), each with its own sound.                                 | splashery |
-| F      | Touch and drag interaction: a solvable puzzle cube, a chess set that plays a real game, a stretchy gummy bear, a draggable Newton's cradle, bricks.       | splashery |
-| G      | AI image-to-3D trial with `HF_TOKEN`.                                                                                                                     | splashery |
-| H      | Later: the gallery, multi-toy scenes, a liquid pour, the draw-order fix, more scans, more instruments, and the final homepage embed(s).                   | both      |
+| Phase   | What                                                                                                                                                                      | Repo(s)   |
+| ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- |
+| A       | Done: sharpness, Detail setting, embeds, honeybee, thumbnail retry, homepage embed.                                                                                       | both      |
+| B       | Done: mobile shelf grid (drag up into a full grid like desktop), thumbnail labels that don't cut off, and a "Find your own splat" help panel.                             | splashery |
+| C1      | Done: visual fixes from the review (26 toys: vintage camera, boombox, storybook, comet, Statue of Liberty crown, horse, cookie, sports-ball textures, …).                 | splashery |
+| C2      | Done: clearer or more dramatic effects for 33 toys the owner found subtle (bacteriophage, Big Ben, bus, octopus, fireworks, …).                                           | splashery |
+| D       | Done: a voice library and a sound per toy, scan rigs, taps that know where they landed, drag-to-stretch, sound check and audit tools.                                     | splashery |
+| E1      | Done: new tap effects for the scans and shapes (33 toys), with colour keys, whole-body effects and kit-built add-ons for rigs.                                            | splashery |
+| E1b     | Done: fixes from the owner's E1 review (19 toys, a chess game, a laptop you can type on), effect quality rules, effect clips.                                             | splashery |
+| **E1c** | Fixes from the owner's E1b review: a chess game from a PGN file, the phone sheet after the grid, elephant, cat, horse, hockey puck, Newton's cradle, xylophone, tomatoes. | splashery |
+| E2      | New tap effects for space, atoms and gems (32 toys, kit recipes); the second of six waves (see TOY-PLAN.md).                                                              | splashery |
+| E3–E6   | New tap effects for the other toys marked new, in four more waves by category (see TOY-PLAN.md), each with its own sound.                                                 | splashery |
+| F       | Touch and drag interaction: a solvable puzzle cube, a chess set that plays a real game, a stretchy gummy bear, a draggable Newton's cradle, bricks.                       | splashery |
+| G       | AI image-to-3D trial with `HF_TOKEN`.                                                                                                                                     | splashery |
+| H       | Later: the gallery, multi-toy scenes, a liquid pour, the draw-order fix, more scans, more instruments, and the final homepage embed(s).                                   | both      |
 
 What the owner asked for across the board (2026-09-23):
 
@@ -358,6 +364,26 @@ What the owner asked for across the board (2026-09-23):
   the site owner chooses is a different case). See BACKLOG.md.
 - Stay respectful: nothing destructive or disrespectful on the White House or the Washington
   Monument, and no fighting or gore (the Colosseum gets a chariot race, not gladiators).
+
+## Phase E1c in detail: fixes from the E1b review
+
+The owner's words are in `docs/reviews/2026-09-25-e1b/review.md`; the prompt that starts the phase
+lists the same items. Follow the Effect quality rules, render a clip of every changed effect, and
+republish the Effect review page (same URL) before asking for a merge.
+
+1. **Phone bug.** After the shelf grid has been opened on a phone, tapping the settings sheet (Play,
+   Look, …) sometimes does nothing until the page is reloaded. Reproduce it in Playwright (touch,
+   390×844), fix it and add a test.
+2. **Chess from a file.** Load any game from a PGN file (or pasted PGN) and play it on the board.
+   Needs a legal move generator to resolve SAN (disambiguation, castling, en passant, promotion).
+3. **Wooden elephant.** The trunk still looks broken when it moves. **Horse statue.** The hooves
+   look like they break off. Both need motion that never shows a gap or a loose piece.
+4. **Cat statue.** The collar sinks into the stone in places; fit it to the neck. The head motion
+   still reads as a warp; make it more dramatic.
+5. **Hockey puck** (planned for a later wave): a slide-and-spin like the flying disc. **Newton's
+   cradle** (planned for F): make the tap obvious now. **Xylophone:** a tap on a bar already plays
+   that bar (Phase D), but the owner didn't notice; make it obvious on a phone. **Tomatoes:** a
+   little more polish.
 
 ## Phase E2 in detail: space, atoms and gems
 
