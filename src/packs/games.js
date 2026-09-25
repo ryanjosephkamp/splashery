@@ -359,10 +359,11 @@ export const RECIPES = {
       at: (point, c) => (c.play > 0.5 && gameOver() ? "restart" : undefined),
     },
     note: "Open a PGN file or paste a game to watch it played out on the board.",
-    // Flag colours lie over the board from above, so the squares and the
-    // pieces take them (light pieces light, dark pieces dark).
+    // Flag colours lie over the board from above, gently (30%), keeping
+    // each square's own light or dark; the pieces keep their own colours.
     patternProjection: "top",
-    patternDetail: 0.85,
+    patternDetail: 1,
+    patternAmount: 0.3,
     // The game panel (ui.js): load a game from PGN text, or go back to the
     // Opera Game.
     game: {
@@ -513,7 +514,7 @@ export const RECIPES = {
           // A thin dark inlay line between squares, in small splats.
           if (edge < 0.022) return keep(lit("#3a2413", c.n, { spec: 0.1 }), 0.35);
           const size = 0.35 + 0.65 * Math.min(1, (edge - 0.022) / 0.12);
-          // (Not kept out of the pattern layer: flag colours cover the squares.)
+          // (Not kept out of the pattern layer: flag colours tint the squares.)
           return { c: lit(col, c.n, { spec: 0.35, pow: 40 }), size };
         },
       });
@@ -534,7 +535,9 @@ export const RECIPES = {
           color: (c) => lit(shade(frame, 0.95 + 0.06 * c.noise(c.p[0] * 4, c.p[1] * 30, c.p[2] * 4)), c.n, { spec: 0.35 }), // prettier-ignore
         });
       }
-      // The pieces: turned ivory and ebony, each one a token.
+      // The pieces: turned ivory and ebony, each one a token. They keep
+      // their own colours under flag colours, so the two sides stay light
+      // and dark.
       const tone = { w: "#efe3c8", b: "#2a1d17" };
       for (const t of TOKENS) {
         const [side, kind] = t.piece;
@@ -551,6 +554,7 @@ export const RECIPES = {
           jitter: 0.008,
           interior: 0.05,
           core: col,
+          pattern: false,
         };
         const surface = (c) => {
           // Rook battlements: four notches cut from the crown.

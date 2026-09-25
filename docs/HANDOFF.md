@@ -37,8 +37,10 @@ ground rules are in [CLAUDE.md](../CLAUDE.md).
   back, play/pause, on and end buttons (`game.step`, `game.jump`); pausing keeps the position; a tap
   on a finished game that is still playing starts it again (`action.at` fires a `restart` pulse).
   The game's details (PGN tags) can be edited in the panel. Flag colours lie over the board from
-  above (the new `top` projection, `patternProjection` and `patternDetail` in the recipe) and now
-  cover the squares and the pieces.
+  above, gently (the new `top` projection; `patternProjection`, `patternAmount: 0.3` and
+  `patternDetail: 1` in the recipe), so the light and dark squares stay clear; the pieces keep their
+  own ivory and ebony (`pattern: false`), as the owner asked after seeing them in flag colours
+  (review page, 2026-09-25).
 - **Tiny splats vanish on small screens.** The renderer drops splats that come out under about two
   pixels, so a detail built from very fine splats (high `weight` and small `size`) disappears on a
   phone or in a 360 px clip. Keep `size / sqrt(weight)` near 0.5 or more for anything that must show
