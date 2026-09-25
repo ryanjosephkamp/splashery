@@ -37,8 +37,10 @@ ground rules are in [CLAUDE.md](../CLAUDE.md).
   back, play/pause, on and end buttons (`game.step`, `game.jump`); pausing keeps the position; a tap
   on a finished game that is still playing starts it again (`action.at` fires a `restart` pulse).
   The game's details (PGN tags) can be edited in the panel. Flag colours lie over the board from
-  above (the new `top` projection, `patternProjection` and `patternDetail` in the recipe) and now
-  cover the squares and the pieces.
+  above, gently (the new `top` projection; `patternProjection`, `patternAmount: 0.3` and
+  `patternDetail: 1` in the recipe), so the light and dark squares stay clear; the pieces keep their
+  own ivory and ebony (`pattern: false`), as the owner asked after seeing them in flag colours
+  (review page, 2026-09-25).
 - **Chemistry (PR `-3`).** `src/chem/` reads molecules and proteins with no libraries: `elements.js`
   (69 elements up to uranium, CPK colours, covalent radii, formulas), `smiles.js` (a SMILES parser
   with rings, branches, charges, isotopes and aromatic kekulisation; implicit hydrogens), `embed.js`

@@ -202,9 +202,12 @@ be the same (the unit tests check). Old shared names ("chime", "pop" and so on) 
 Check a new sound with `node tools/sound-check.mjs <id> --sheet=out.png`.
 
 **Flag colours**: `patternProjection: "top"` makes a toy lay flag colours on from above (a flat toy:
-the chess board) when a flag is picked, and `patternDetail: 0.85` keeps more of its own light and
-dark under them (light and dark chess pieces stay apart). Splats a colour function returns with
-`keep: true`, or with `pattern: false` on their shape, never take a pattern.
+the chess board) when a flag is picked; `patternAmount: 0.3` lays them on gently and
+`patternDetail: 1` keeps each splat's own light and dark under them (the chess board's light and
+dark squares stay easy to tell apart). The app switches to the toy's way when it comes out with a
+flag on, and back to the usual way for the next toy unless the look was changed. Splats a colour
+function returns with `keep: true`, or with `pattern: false` on their shape, never take a pattern
+(the chess pieces keep their own ivory and ebony under any flag).
 
 **Games**: a recipe's `game` (the chess set) gets a panel under This toy and a bar under the stage:
 `title()`, `tags()` and `setTags(partial)` for its details, `state()` (`{ played, n, over }`),

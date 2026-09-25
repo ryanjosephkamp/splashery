@@ -197,6 +197,39 @@ test("patterns normalise and are drawn at the aspect of the surface they wrap", 
   expect(u.uSpPatB[3]).toBeCloseTo(1, 5);
 });
 
+test("flag colours tint the chess board gently and leave the pieces their own colours", async () => {
+  const { RECIPES } = await import("../src/packs/games.js");
+  const chess = RECIPES["chess-set"];
+  // The board takes the flag from above, at 30%, keeping its light and dark squares.
+  expect(chess.patternProjection).toBe("top");
+  expect(chess.patternAmount).toBeCloseTo(0.3, 5);
+  expect(chess.patternDetail).toBe(1);
+  const ctx = (() => {
+    const it = buildRecipe(
+      chess,
+      { seed: 1, count: 60000, options: resolveOptions(chess, {}) },
+      applyClay,
+    );
+    let r = it.next();
+    while (!r.done) r = it.next();
+    return r.value;
+  })();
+  const { anim, count } = ctx.buf;
+  let pieces = 0;
+  let piecesPatterned = 0;
+  let boardPatterned = 0;
+  for (let i = 0; i < count; i++) {
+    const noPattern = anim[i * 4] >= 16;
+    if (anim[i * 4 + 1] === KINDS.token) {
+      pieces++;
+      if (!noPattern) piecesPatterned++;
+    } else if (!noPattern) boardPatterned++;
+  }
+  expect(pieces).toBeGreaterThan(10000);
+  expect(piecesPatterned).toBe(0);
+  expect(boardPatterned).toBeGreaterThan(10000);
+});
+
 test("the pixel font has digits, and every flag knows its shape", async () => {
   const { inked, FONT } = await import("../src/font.js");
   for (const d of "0123456789") expect(FONT[d], d).toBeTruthy();
