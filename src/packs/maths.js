@@ -659,7 +659,7 @@ function mandelbulbShape(rays = 12000) {
 // BULB_Y, each turning BULB_TWIST radians per unit of height at full twist.
 const BULB_BANDS = 14;
 const BULB_Y = 1.2;
-const BULB_TWIST = 0.95;
+const BULB_TWIST = 1.2;
 const bulbBand = (y) =>
   clamp(Math.floor(((y + BULB_Y) / (2 * BULB_Y)) * BULB_BANDS), 0, BULB_BANDS - 1);
 const bulbBandMid = (i) => -BULB_Y + ((i + 0.5) * 2 * BULB_Y) / BULB_BANDS;
@@ -817,10 +817,22 @@ const MOB_WALK = (() => {
 // and its six hips (front, middle, back; left then right).
 const ANT = 1.3;
 const ANT_BODY = [
-  [[-0.075, 0.048, 0], [0.062, 0.04, 0.044]],
-  [[-0.01, 0.038, 0], [0.013, 0.012, 0.012]],
-  [[0.025, 0.042, 0], [0.04, 0.024, 0.024]],
-  [[0.083, 0.048, 0], [0.031, 0.027, 0.029]],
+  [
+    [-0.075, 0.048, 0],
+    [0.062, 0.04, 0.044],
+  ],
+  [
+    [-0.01, 0.038, 0],
+    [0.013, 0.012, 0.012],
+  ],
+  [
+    [0.025, 0.042, 0],
+    [0.04, 0.024, 0.024],
+  ],
+  [
+    [0.083, 0.048, 0],
+    [0.031, 0.027, 0.029],
+  ],
 ].map(([c, r]) => [mul(c, ANT), mul(r, ANT)]);
 const ANT_HIPS = [0.042, 0.042, 0.022, 0.022, 0.002, 0.002].map((x, i) =>
   mul([x, 0.034, i % 2 ? 0.016 : -0.016], ANT),
@@ -1381,6 +1393,8 @@ export const RECIPES = {
         ...look,
         part: k.part("bend"),
         flat: 0.35,
+        // A little larger: stretched out, the tube's skin would open gaps.
+        size: 1.25,
         // Each splat keeps its place round the tube: its offset from the
         // middle line, turned square to the new line.
         to: (c) => {
@@ -1415,13 +1429,19 @@ export const RECIPES = {
     // the orange ones narrow, then the other way, and it settles back.
     drive(t, c, out) {
       const x = band(progress(c.breathe), 0.02, 0.96);
-      out.morph = [Math.sin(TAU * x) * Math.pow(Math.sin(Math.PI * x), 0.6)];
+      const v = Math.sin(TAU * x) * Math.pow(Math.sin(Math.PI * x), 0.6);
+      // The blue side's swell is a little smaller: stretched further, the
+      // faces start to show through each other.
+      out.morph = [v < 0 ? 0.75 * v : v];
     },
     build(k, o) {
       const scale = 4.6;
       k.fitMorphs = false; // the breath stays inside the clip; keep the rest fit
+      // Slightly large splats, so each face covers the other (the far face
+      // showed through the gaps as specks of the other colour).
       k.add(gyroidShape(scale, o.clip), {
         flat: 0.1,
+        size: 1.3,
         to: (c) => {
           const q = gyroidLevel(c.s.at, 0.85, scale, o.clip);
           return add(q.p, mul(q.n, c.s.side * 0.014));
@@ -1442,7 +1462,7 @@ export const RECIPES = {
     controls: [{ key: "twist", label: "Twist", type: "pulse", ease: 3.8 }],
     action: { key: "twist", label: "Wring it" },
     // A tap wrings the bulb: the top turns one way and the bottom the other
-    // (up to about 55 degrees at the poles) as its bulbs bloom outward, then
+    // (up to about 70 degrees at the poles) as its bulbs bloom outward, then
     // it springs back past rest and swings to a stop like a torsion spring.
     // The bulb is cut into horizontal bands (parts) that each turn by the
     // twist at their middle, and a morph twists each band within itself (and
@@ -1598,7 +1618,7 @@ export const RECIPES = {
       // The swells of light: each runs from the tip (0) to the mouth (1).
       const swell = (p % 1.1) / 0.85;
       out.morph = [on && p < 3.3 ? -0.25 + 1.45 * swell : -1];
-      out.glow = [0.45, 0.82, 0.95, on ? 0.38 * (1 - band(p, 3.1, 3.4)) : 0];
+      out.glow = [0.35, 0.75, 0.92, on ? 0.36 * (1 - band(p, 3.1, 3.4)) : 0];
       SHELL_WAVES.forEach((start, i) => {
         const x = on ? (p - start) / 1.45 : -1;
         const live = x > 0 && x < 1;
@@ -1609,7 +1629,7 @@ export const RECIPES = {
           scale: 1.25 + 0.95 * e,
         };
         // Channel 1 + i: 1 is clear, 0 is solid.
-        out.morph[1 + i] = live ? 1 - band(x, 0, 0.12) * (1 - band(x, 0.35, 1)) : 1;
+        out.morph[1 + i] = live ? 1 - band(x, 0, 0.1) * (1 - ease(band(x, 0.5, 0.95))) : 1;
       });
     },
     build(k) {
@@ -1649,20 +1669,22 @@ export const RECIPES = {
       const e2 = cross(n, e1);
       SHELL_WAVES.forEach((_, i) => {
         const part = k.part("wave" + i, { pivot: mid });
-        k.cloud({ share: 0.03, size: 1.6, pattern: false }, (rand) => {
+        k.cloud({ share: 0.025, size: 1, pattern: false }, (rand) => {
+          // A crest and a fainter ripple just behind it.
+          const back = rand() < 0.35;
           const a = rand() * TAU;
-          const crest = 0.025 * Math.sin(a * 5 + i * 2);
+          const wob = Math.sin(a * 5 + i * 2);
           // Built a little inside the mouth (hidden pieces count in the fit)
           // and grown by the part's scale.
-          const rr = 0.8 * (r * (0.97 + crest) + (rand() - 0.5) * 0.07);
-          const lift = -0.1 - rand() * 0.05 + 0.04 * Math.sin(a * 5 + i * 2);
+          const rr = 0.8 * r * (back ? 0.86 : 1) * (0.97 + 0.02 * wob) + (rand() - 0.5) * 0.05;
+          const lift = -0.1 - (back ? 0.25 : 0) - rand() * 0.04 + 0.03 * wob;
           const q = add(mid, add(add(mul(e1, rr * Math.cos(a)), mul(e2, rr * Math.sin(a))), mul(n, lift))); // prettier-ignore
           const foam = rand();
           return {
             p: q,
-            color: mix("#9fe6f2", "#ffffff", foam),
-            opacity: 0.3 + 0.35 * foam,
-            size: 0.7 + 0.6 * rand(),
+            color: mix("#8fdcec", "#ffffff", foam),
+            opacity: (back ? 0.2 : 0.3) + 0.3 * foam,
+            size: 0.6 + 0.5 * rand(),
             part,
             kind: "fade",
             params: [0, 0.99],
