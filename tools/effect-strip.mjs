@@ -3,7 +3,7 @@
 // frames at fixed times after it, tiled left to right into one PNG.
 //
 //   python3 -m http.server 4173 --bind 127.0.0.1 &
-//   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/effect-strip.mjs <out-dir> [--size=240] [--times=0.1,0.3,0.6,1,1.5,2.2,3] [--taps=1] [--gap=0.25] [--suffix=-after] id ...
+//   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/effect-strip.mjs <out-dir> [--size=240] [--times=0.1,0.3,0.6,1,1.5,2.2,3] [--taps=1] [--gap=0.25] [--suffix=-after] [--pgn=game.pgn] id ...
 //
 // Writes <out-dir>/<id><suffix>.png. The clock is stepped by hand (1/30 s
 // steps), so frames land at the same toy time on any machine. --taps=3 taps
@@ -11,6 +11,7 @@
 // --bg sets the page colour (dark theme by default). --opt=style=double sets a
 // toy option first. --at=x,y,z taps that point (in the recipe's coordinates)
 // instead of pressing the action, for toys whose tap depends on where it lands.
+// --pgn loads a game into a game toy (the chess set) first.
 
 import { chromium } from "@playwright/test";
 import fs from "node:fs";
@@ -31,6 +32,7 @@ const times = opt("times", "0.1,0.3,0.6,1,1.5,2.2,3").split(",").map(Number);
 const taps = Number(opt("taps", 1));
 const gap = Number(opt("gap", 0.25));
 const toyOpt = opt("opt", "");
+const pgn = opt("pgn", "") ? fs.readFileSync(opt("pgn", ""), "utf8") : "";
 const at = opt("at", "") ? opt("at", "").split(",").map(Number) : null;
 
 fs.mkdirSync(outDir, { recursive: true });
@@ -49,13 +51,15 @@ await page.goto(`${base}?renderer=webgl2&profile=high&adapt=off`);
 await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
 for (const id of ids) {
   const dataUrl = await page.evaluate(
-    async ({ id, size, bg, times, taps, gap, toyOpt, at }) => {
+    async ({ id, size, bg, times, taps, gap, toyOpt, at, pgn }) => {
       const { app, player } = window.__splashery;
       await app.chooseToy(id);
       if (toyOpt) {
         const [key, value] = toyOpt.split("=");
         await app.setToyOption(key, value);
       }
+      // A game toy (the chess set) can load a PGN game first.
+      if (pgn) await player.toyInfo.recipe.game.load(pgn);
       app.setLook({ background: bg });
       player.opts.idleDelay = 1e9;
       player.idle.weight = 0;
@@ -124,7 +128,7 @@ for (const id of ids) {
       });
       return out.toDataURL("image/png");
     },
-    { id, size, bg, times, taps, gap, toyOpt, at },
+    { id, size, bg, times, taps, gap, toyOpt, at, pgn },
   );
   const out = path.join(outDir, `${id}${suffix}.png`);
   fs.writeFileSync(out, Buffer.from(dataUrl.split(",")[1], "base64"));

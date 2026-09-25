@@ -287,3 +287,91 @@ test("the chess set plays the real Opera Game (Paris, 1858) to its final positio
   expect(captured.filter(Boolean)).toHaveLength(12);
   expect(captured[31]).toBe("wQ");
 });
+
+test("the chess rules count every legal move (perft) from tricky positions", async () => {
+  const { parseFen, legalMoves, applyMove, START_FEN } = await import("../src/chess.js");
+  const perft = (p, d) => {
+    if (!d) return 1;
+    let n = 0;
+    for (const m of legalMoves(p)) n += perft(applyMove(p, m), d - 1);
+    return n;
+  };
+  // Published counts: the start, "Kiwipete" (castling, pins), an en passant
+  // endgame, and two positions full of promotions and checks.
+  expect(perft(parseFen(START_FEN), 3)).toBe(8902);
+  expect(perft(parseFen("r3k2r/p1ppqpb1/bn2pnp1/3PN3/1p2P3/2N2Q1p/PPPBBPPP/R3K2R w KQkq - 0 1"), 3)).toBe(97862); // prettier-ignore
+  expect(perft(parseFen("8/2p5/3p4/KP5r/1R3p1k/8/4P1P1/8 w - - 0 1"), 4)).toBe(43238);
+  expect(perft(parseFen("r3k2r/Pppp1ppp/1b3nbN/nP6/BBP1P3/q4N2/Pp1P2PP/R2Q1RK1 w kq - 0 1"), 3)).toBe(9467); // prettier-ignore
+  expect(perft(parseFen("rnbq1k1r/pp1Pbppp/2p5/8/2B5/8/PPP1NnPP/RNBQK2R w KQ - 1 8"), 3)).toBe(62379); // prettier-ignore
+});
+
+test("a PGN game is read move by move: tags, comments, variations, castling, en passant, promotion", async () => {
+  const { readPgn } = await import("../src/chess.js");
+  const { OPERA_GAME } = await import("../src/packs/games.js");
+  // The Opera Game as a PGN file, with a comment, a variation and a NAG.
+  const opera = readPgn(`[Event "Paris"]
+[Site "Paris FRA"]
+[Date "1858.??.??"]
+[White "Morphy, Paul"]
+[Black "Duke Karl / Count Isouard"]
+[Result "1-0"]
+
+1.e4 e5 2.Nf3 d6 3.d4 Bg4 {This is a weak move already.} 4.dxe5 Bxf3 5.Qxf3 dxe5
+6.Bc4 Nf6 7.Qb3 Qe7 8.Nc3 c6 9.Bg5 b5 $6 10.Nxb5 cxb5 11.Bxb5+ Nbd7 (11...Kd8 12.O-O-O)
+12.O-O-O Rd8 13.Rxd7 Rxd7 14.Rd1 Qe6 15.Bxd7+ Nxd7 16.Qb8+ Nxb8 17.Rd8# 1-0`);
+  expect(opera.title).toBe("Morphy v Duke Karl / Count Isouard, Paris 1858");
+  expect(opera.loser).toBe("b");
+  expect(opera.plies.map((p) => [p.from, p.to, p.rf, p.rt].filter(Boolean))).toEqual(OPERA_GAME);
+  // Both castlings, en passant and an underpromotion to a knight.
+  const g = readPgn("1. e4 Nf6 2. e5 d5 3. exd6 e.p. Qxd6 4. Nf3 Nc6 5. Bc4 Bf5 6. O-O O-O-O 7. h4 Kb8 8. h5 a6 9. h6 a5 10. hxg7 a4 11. gxh8=N Qd7 12. Ng6 hxg6 *"); // prettier-ignore
+  expect(g.plies[4]).toMatchObject({ from: "e5", to: "d6", ep: "d5" });
+  expect(g.plies[10]).toMatchObject({ from: "e1", to: "g1", rf: "h1", rt: "f1" });
+  expect(g.plies[11]).toMatchObject({ from: "e8", to: "c8", rf: "a8", rt: "d8" });
+  expect(g.plies[20]).toMatchObject({ from: "g7", to: "h8", promo: "N" });
+  expect(g.loser).toBe(null);
+  // A set-up position (FEN) and a knight move that needs its file.
+  const f = readPgn(
+    '[SetUp "1"]\n[FEN "4k3/8/8/8/8/8/8/N3K1N1 w - - 0 1"]\n\n1. Nac2 Kd7 2. Ne2 *',
+  );
+  expect(f.plies[0]).toMatchObject({ from: "a1", to: "c2" });
+  expect(f.start).toEqual({ a1: "wN", e1: "wK", g1: "wN", e8: "bK" });
+  // Clear messages for things that are not games.
+  expect(() => readPgn("")).toThrow("empty");
+  expect(() => readPgn("hello there")).toThrow(/Move 1\.hello/);
+  expect(() => readPgn("1. e4 e5 2. Ke3")).toThrow(/Move 2\.Ke3: "Ke3" is not a legal move here/);
+  expect(() => readPgn("1. e4 e5 2. Nf3 Nc6 3. Nf5")).toThrow(/not a legal move/);
+  expect(() => readPgn('[Variant "Chess960"]\n1. e4')).toThrow("standard chess");
+});
+
+test("the chess set plays a loaded game: spares rise for a promotion, the en passant pawn leaves", async () => {
+  const { RECIPES, TOKEN_COUNT } = await import("../src/packs/games.js");
+  const { MAX_TOKENS } = await import("../src/motion.js");
+  expect(TOKEN_COUNT).toBe(MAX_TOKENS);
+  const chess = RECIPES["chess-set"];
+  const g = await chess.game.load("1. e4 Nf6 2. e5 d5 3. exd6 Qxd6 4. Nf3 Nc6 5. Bc4 Bf5 6. O-O O-O-O 7. h4 Kb8 8. h5 a6 9. h6 a5 10. hxg7 a4 11. gxh8=Q Qd7 12. d4 Qe6 1-0"); // prettier-ignore
+  expect(chess.action.label).toBe("Play the game");
+  expect(chess.game.title()).toBe("A game");
+  // Run the game to its end, a frame at a time.
+  const out = () => ({ cues: [], tokens: null });
+  let o = out();
+  chess.drive(0, { play: 1, pace: 1 }, o, { time: 0 });
+  let cues = 0;
+  for (let t = 0; t < (g.plies.length * 1.35) / 2.5 + 3; t += 0.1) {
+    o = out();
+    chess.drive(0, { play: 1, pace: 1 }, o, { time: t });
+    cues += o.cues.length;
+  }
+  expect(o.tokens).toHaveLength(MAX_TOKENS);
+  // Captured pieces stay in view in the trays and a promotion swaps the
+  // pawn for a spare, so 32 pieces are shown: one of them the new queen.
+  const onBoard = g.end.board.filter(Boolean).length;
+  expect(onBoard).toBe(32 - 4);
+  expect(o.tokens.filter((t) => t.visible > 0.99)).toHaveLength(32);
+  expect(o.tokens.slice(32).filter((t) => t.visible > 0.99)).toHaveLength(1);
+  // A clack for every move, extra ones for captures and the queen, and the
+  // black king tipping at the end.
+  expect(cues).toBeGreaterThan(g.plies.length);
+  expect(o.tokens.some((t) => t.quat)).toBe(true);
+  chess.game.reset();
+  expect(chess.action.label).toBe("Play the Opera Game");
+});

@@ -61,7 +61,7 @@ export class MotionDriver {
     this.moveClock = { t: 0, last: null, rate: 1 };
     this.partsData = new Float32Array(48 * 4);
     this.tintData = new Float32Array(16 * 4);
-    this.tokenData = new Float32Array(64 * 4);
+    this.tokenData = new Float32Array(MAX_TOKENS * 2 * 4);
     this.addon = null; // { parts, data } of a rig's kit-built add-on
     this.addonU = null;
     this.out = null;
@@ -300,6 +300,10 @@ function packParts(data, parts, driven, scale) {
   return data;
 }
 
+// Game pieces (tokens) the kit shader can move: 32 chess pieces and 16
+// spares for promotions. uSpTokens holds two vec4s per token.
+export const MAX_TOKENS = 48;
+
 // Packs game pieces for uSpTokens. Each token is { base, offset, quat,
 // visible } in recipe coordinates: it turns by quat about its base (the
 // point it stands on) and moves by offset. The shader turns about the toy's
@@ -307,7 +311,7 @@ function packParts(data, parts, driven, scale) {
 function packTokens(data, tokens, transform) {
   const c = transform?.center || [0, 0, 0];
   const s = transform?.scale ?? 1;
-  for (let i = 0; i < 32; i++) {
+  for (let i = 0; i < MAX_TOKENS; i++) {
     const t = tokens[i];
     const o = i * 8;
     if (!t) {

@@ -711,7 +711,7 @@ export const KINDS = {
   pulse: 11, // a glow runs along a path: z = position along the path (0..1)
   wave: 12, // ripple up and down: z = amount, w = phase
   glint: 13, // sparkle as the camera moves: z = amount
-  token: 14, // a game piece moved and turned by uSpTokens: z = token index (0..31)
+  token: 14, // a game piece moved and turned by uSpTokens: z = token index (0..47)
   screen: 15, // a screen pixel coloured from the uSpScreen texture: z, w = u, v
   key: 16, // a key that goes down when pressed: z = key index (uSpKitB.w = index + depth)
 };
@@ -721,7 +721,7 @@ uniform vec4 uSpKitB;    // x grow progress 0..1, y floor distance below the cen
 uniform vec4 uSpGlowC;   // rgb pulse glow colour, a strength
 uniform vec4 uSpCam;     // xyz camera position
 uniform vec4 uSpParts[48];
-uniform vec4 uSpTokens[64]; // per token: xyz offset + w visibility, then a rotation
+uniform vec4 uSpTokens[96]; // per token: xyz offset + w visibility, then a rotation
 uniform sampler2D uSpScreen; // a live screen picture (the laptop's)
 vec3 spScreenUV = vec3(0.0); // xy uv, z > 0 for a screen splat`;
 
@@ -798,7 +798,7 @@ vec3 spKitCenter(vec3 p) {
   }
   if (kind == 14) {
     // Game pieces move by uSpTokens even when the toy's own motion is off.
-    int ti = clamp(int(an.z + 0.5), 0, 31);
+    int ti = clamp(int(an.z + 0.5), 0, 47);
     vec4 to = uSpTokens[ti * 2];
     vec4 tq = uSpTokens[ti * 2 + 1];
     if (tq.w == 0.0 && dot(tq.xyz, tq.xyz) == 0.0) tq = vec4(0.0, 0.0, 0.0, 1.0);
@@ -824,7 +824,7 @@ uniform uSpKitB: vec4f;
 uniform uSpGlowC: vec4f;
 uniform uSpCam: vec4f;
 uniform uSpParts: array<vec4f, 48>;
-uniform uSpTokens: array<vec4f, 64>;
+uniform uSpTokens: array<vec4f, 96>;
 var uSpScreen: texture_2d<f32>;
 var uSpScreenSampler: sampler;
 var<private> spScreenUV: vec3f = vec3f(0.0);`;
@@ -902,7 +902,7 @@ fn spKitCenter(p0: vec3f) -> vec3f {
     p = p - up * fract(uniform.uSpKitB.w) * 0.012 * R;
   }
   if (kind == 14) {
-    let ti = clamp(i32(an.z + 0.5), 0, 31);
+    let ti = clamp(i32(an.z + 0.5), 0, 47);
     let to = uniform.uSpTokens[ti * 2];
     var tq = uniform.uSpTokens[ti * 2 + 1];
     if (tq.w == 0.0 && dot(tq.xyz, tq.xyz) == 0.0) { tq = vec4f(0.0, 0.0, 0.0, 1.0); }

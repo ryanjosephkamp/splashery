@@ -758,10 +758,39 @@ test.describe("Splashery v3 engine (WebGL2)", () => {
     await page.click("#toy-action");
     await expect
       .poll(() => page.evaluate(() => window.__splashery.player.motion.out?.tokens?.length ?? 0))
-      .toBe(32);
+      .toBe(48);
     await page.waitForTimeout(4000);
     const later = await canvas.screenshot({ type: "png" });
     expect(await countDifferentPixels(page, start, later)).toBeGreaterThan(800);
+    // Any game from PGN: pasted text plays at once...
+    await expect(page.locator("#toy-game")).toContainText("Opera Game");
+    await page.click("#game-paste");
+    await page.fill(
+      "#game-text",
+      '[White "Fischer, Robert J."]\n[Black "Spassky, Boris V."]\n[Event "World Championship"]\n[Date "1972.07.23"]\n\n1. c4 e6 2. Nf3 d5 3. d4 Nf6 4. Nc3 Be7 5. Bg5 O-O 1/2-1/2',
+    );
+    await page.click("#game-play-text");
+    await expect(page.locator("#toy-game")).toContainText(
+      "Fischer v Spassky, World Championship 1972",
+    );
+    await expect(page.locator("#toy-action")).toHaveText("Play the game");
+    await expect(page.locator("#game-reset")).toBeVisible();
+    // ...a file too, and a file that is not a game says why.
+    await page.setInputFiles("#game-file", {
+      name: "bad.pgn",
+      mimeType: "application/x-chess-pgn",
+      buffer: Buffer.from("1. e4 e5 2. Qh5 Nc6 3. Qxf7 Kxf7 4. Kxe8"),
+    });
+    await expect(page.locator("#toy-game .warning")).toContainText("Move 4.Kxe8");
+    await page.setInputFiles("#game-file", {
+      name: "scholar.pgn",
+      mimeType: "application/x-chess-pgn",
+      buffer: Buffer.from("1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6 4. Qxf7# 1-0"),
+    });
+    await expect(page.locator("#toy-game .warning")).toBeHidden();
+    await expect(page.locator("#toy-game")).toContainText("On the board: A game");
+    await page.click("#game-reset");
+    await expect(page.locator("#toy-action")).toHaveText("Play the Opera Game");
     // Laptop: real keys type onto the screen.
     await page.click(".chip[data-category='objects']");
     await page.click(".toy-card[data-toy='laptop']");
