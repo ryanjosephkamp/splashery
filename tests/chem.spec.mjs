@@ -7,6 +7,7 @@ import fs from "node:fs";
 import { element, formulaOf, parseFormula } from "../src/chem/elements.js";
 import { parseSmiles, withHydrogens } from "../src/chem/smiles.js";
 import { embed3D, moleculeFromSmiles } from "../src/chem/embed.js";
+import { condensedToSmiles } from "../src/chem/condensed.js";
 import {
   MOLECULES,
   moleculeFromText,
@@ -278,6 +279,43 @@ test("every table molecule parses and matches its formula", () => {
   }
 });
 
+test("condensed formulas are read as written", () => {
+  const cases = {
+    CH3CH2OH: "C2H6O",
+    C2H5OH: "C2H6O",
+    CH3OCH3: "C2H6O",
+    CH3COOH: "C2H4O2",
+    "(CH3)2CHOH": "C3H8O",
+    "CH3(CH2)4CH3": "C6H14",
+    "CH2=CHCl": "C2H3Cl",
+    "HC≡CH": "C2H2",
+    "CH3CH(NH2)COOH": "C3H7NO2",
+    CH2OHCHOHCH2OH: "C3H8O3",
+    CH3COCH3: "C3H6O",
+    CH3CHO: "C2H4O",
+    HCOOH: "CH2O2",
+    CH3CN: "C2H3N",
+    CH3COOC2H5: "C4H8O2",
+    CHCl3: "CHCl3",
+    C6H5COOH: "C7H6O2",
+    C6H5NO2: "C6H5NO2",
+    "(C6H5)2CO": "C13H10O",
+    SO3: "O3S",
+  };
+  for (const [text, formula] of Object.entries(cases)) {
+    const smiles = condensedToSmiles(text);
+    expect(smiles, text).not.toBeNull();
+    expect(countsOf(moleculeFromSmiles(smiles)), text).toBe(formula);
+  }
+  // The C=O comes from the valences: acetone has a double bond to O.
+  const acetone = moleculeFromText("CH3COCH3");
+  const o = acetone.atoms.findIndex((a) => a.el === "O");
+  expect(acetone.bonds.find(([a, b]) => a === o || b === o)[2]).toBe(2);
+  // Not readable this way: a plain formula, a bad valence.
+  expect(condensedToSmiles("C6H12O6")).toBeNull();
+  expect(condensedToSmiles("CH5")).toBeNull();
+});
+
 test("moleculeFromText takes names, formulas and SMILES", () => {
   expect(moleculeFromText("Carbon Dioxide").name).toBe("carbon dioxide");
   expect(moleculeFromText("acetaminophen").name).toBe("paracetamol");
@@ -288,8 +326,16 @@ test("moleculeFromText takes names, formulas and SMILES", () => {
   expect(moleculeFromText("C6H6").name).toBe("benzene");
   expect(countsOf(moleculeFromText("CCO"))).toBe("C2H6O");
   expect(moleculeFromText("Xe").atoms).toHaveLength(1);
-  expect(() => moleculeFromText("C6H12O6")).toThrow(
-    "A formula like C6H12O6 does not say how the atoms join. Paste a SMILES string instead, e.g. from PubChem's page for the molecule.",
+  // A formula that fits a built-in molecule shows it, and says when others
+  // share it; CO is carbon monoxide, OC the SMILES for methanol.
+  const sugar = moleculeFromText("C6H12O6");
+  expect(sugar.name).toBe("glucose");
+  expect(sugar.note).toContain("fructose");
+  expect(moleculeFromText("CO").name).toBe("carbon monoxide");
+  expect(countsOf(moleculeFromText("OC"))).toBe("CH4O");
+  expect(moleculeFromText("Co").name).toBe("cobalt");
+  expect(() => moleculeFromText("C7H6O2")).toThrow(
+    "A formula like C7H6O2 does not say how the atoms join. Write it out (CH3CH2OH rather than C2H6O) or paste a SMILES string, e.g. from PubChem.",
   );
   expect(() => moleculeFromText("vitamin b12")).toThrow(/not in the built-in list/);
   expect(() => moleculeFromText("")).toThrow(/Type a molecule name/);
@@ -648,7 +694,11 @@ test("the molecule toy takes a name, a SMILES string or a file of your own", asy
   // SMILES keeps its case (aromatic atoms are lower case).
   expect((await input.read("c1ccncc1")).source).toBe("c1ccncc1");
   // Something that is not a molecule says why.
-  await expect(input.read("C6H12O6")).rejects.toThrow(/SMILES/);
+  await expect(input.read("C7H6O2")).rejects.toThrow(/SMILES/);
+  // A formula written out is built as written (acetic acid: 8 atoms).
+  const acid = await input.read("CH3COOH");
+  expect((await buildToy("molecule", acid)).data.tokens.length).toBeGreaterThan(1);
+  expect(input.shown()).toContain("C2H4O2");
   // A file is packed into one line that the toy unpacks (cholesterol:
   // 74 atoms, grouped into at most 48 moving pieces).
   const mol = moleculeFromText("cholesterol");

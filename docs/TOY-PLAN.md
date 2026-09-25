@@ -10,8 +10,8 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 283 toys. 174 have a tap action today; the other 109 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 172.
+- 284 toys. 175 have a tap action today; the other 109 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 173.
 - **more** (has an effect; make it clearer or more dramatic): 2.
 - **new** (needs its own effect): 109.
 - Visual fixes: 0 open, 28 done. Touch or drag interaction asked for: 4.
@@ -31,11 +31,11 @@ Proposals below are suggestions; the owner may change them.
   Shuttlecock, Flying disc, Sun, Solar system, Mercury, Venus, Earth, Moon, Mars, Jupiter, Saturn,
   Uranus, Neptune, Aurora world, Asteroid, Comet, Meteor, Star, Pulsar, Black hole, Star cluster,
   Ring nebula, Nebula, Spiral galaxy, Bacteriophage, Neuron, DNA, Electron orbital, Atom, Molecule,
-  Crystal lattice, Diamond, Ruby, Emerald, Amethyst geode, Sapphire, Quartz cluster, Opal, Crystal
-  ball, Eye, Cherry blossom, Ice cream, Gummy bear, Coffee, Rubber duck, Newton's cradle, Kite,
-  Chess set, Lorenz attractor, Klein bottle, Wizard's orb, Jellyfish, Pufferfish, Snail, Octopus,
-  Fireworks, Decorated tree, Diya, Acoustic guitar, Snare drum, Xylophone, Hot-air balloon, Bus, Jet
-  airliner, Sailboat, Submarine, Bicycle, Big Ben, Castle, Pagoda, Windmill.
+  Protein, Crystal lattice, Diamond, Ruby, Emerald, Amethyst geode, Sapphire, Quartz cluster, Opal,
+  Crystal ball, Eye, Cherry blossom, Ice cream, Gummy bear, Coffee, Rubber duck, Newton's cradle,
+  Kite, Chess set, Lorenz attractor, Klein bottle, Wizard's orb, Jellyfish, Pufferfish, Snail,
+  Octopus, Fireworks, Decorated tree, Diya, Acoustic guitar, Snare drum, Xylophone, Hot-air balloon,
+  Bus, Jet airliner, Sailboat, Submarine, Bicycle, Big Ben, Castle, Pagoda, Windmill.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -760,7 +760,7 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Pushes out a pseudopod and oozes over.
   - Sound: Gloopy ooze.
 
-## Atoms (4)
+## Atoms (5)
 
 - **Electron orbital** (`orbital`). Now: tap: Excite the electron. Plan: keep.
   - Owner: Chemistry toys need good effects.
@@ -778,8 +778,21 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Bonds vibrate and stretch (like heat), then calm.
   - Improved: E2: the atoms always jiggle a little on their bonds. A tap heats it: every bond
     stretches and squeezes hard at its own pace, the light hydrogens swinging furthest, then it
-    cools (4.4 s). Each atom moves on its own (the buckyball by pentagons, which also breathe).
+    cools (4.4 s). Each atom moves on its own (the buckyball by pentagons, which also breathe). Your
+    own molecule (after the E2 review): type a name (about sixty well-known ones), a formula that
+    names one, or any SMILES string, or open a MOL, SDF, XYZ or PDB file; it is built in 3D (SMILES
+    are embedded with a small force field) and heats up the same way.
   - Sound: Springy boing.
+- **Protein** (`protein`). Now: tap: Pull it apart. Plan: keep.
+  - Owner: (Asked for in the E2 review: a protein toy that can take a PDB file.)
+  - Effect: The protein pulls apart into its helices, strands and loops, then locks back together.
+  - Improved: New after the E2 review: a cartoon of a real structure from the Protein Data Bank
+    (ubiquitin, insulin, GFP, hemoglobin; CC0), helices as coiled bands, strands as flat arrows,
+    loops as tubes, bound molecules (hemes, zinc, GFP's chromophore) as balls and sticks; coloured
+    rainbow start to end, by chain or by structure. Open any PDB or mmCIF file. A tap pulls it apart
+    into its pieces, turning a little, and puts it back (5 s); in GFP the chromophore glows green
+    while the barrel is open.
+  - Sound: Airy rush, then soft wooden clicks.
 - **Crystal lattice** (`crystal-lattice`). Now: tap: Send a wave through. Plan: keep.
   - Effect: A wave of vibration travels through the lattice.
   - Improved: E2: a tap sends a wave of vibration (a phonon) through the crystal: a ripple runs

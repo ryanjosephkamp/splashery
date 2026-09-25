@@ -259,6 +259,39 @@ More that a rig can do (Phase E1; the full reference is at the top of `src/rigs.
 - `{ key: "style", label: "Style", type: "select", default: "a", choices: [{ id: "a", label: "A" }] }`
 - `{ key: "spots", label: "Spots", type: "switch", default: true }`
 - `{ key: "petals", label: "Petals", type: "slider", min: 3, max: 12, step: 1, default: 5 }`
+- `{ key: "flag", label: "Flag", type: "flag", default: "us" }`: a country picker from
+  `assets/flags/flags.json` (the Moon landing's flag).
+- `{ key: "source", label: "Your molecule", type: "text", default: "", hidden: true }`: printable
+  text of up to 24,000 characters, kept as typed. `hidden: true` leaves an option out of the Toy
+  tab; use it for data the toy's own panel fills in.
+
+**Your own input**: `input` adds a panel to the Toy tab for something the user types or opens (the
+molecule's name, formula or SMILES; the protein's PDB file). `read(text, fileName)` turns it into
+option values (or throws an `Error` whose message is shown), and `shown()` names what is showing.
+
+```js
+input: {
+  title: "Your own molecule",
+  placeholder: "aspirin, H2O, or SMILES like CC(=O)O", // leave out for a file-only panel
+  button: "Show it",
+  fileButton: "Open a molecule file…",
+  accept: ".mol,.sdf,.xyz,.pdb",
+  note: "What works, in a sentence or two.",
+  async read(text, fileName) { return { molecule: "custom", source: text }; },
+  shown: () => "Aspirin (C9H8O4)",
+},
+```
+
+Keep what goes into options small: it is saved in the scene and in `#s=` links. A big file (a
+protein) can stay in the module instead, with only its name in an option; a link to it then falls
+back to the toy's default.
+
+**Loading first**: `async prepare(options)` runs before each build (in the browser and in the Node
+tools), for toys that fetch a file (the protein toy reads `assets/proteins/*.pdb`). Cache what it
+loads; `build` itself stays synchronous.
+
+**Credits**: `credits: [{ label, title, source, author, license, licenseUrl }]` adds the toy's own
+sources to the About tab (the protein toy's PDB entries).
 
 ## 6. Behaviours
 

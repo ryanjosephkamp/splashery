@@ -34,7 +34,7 @@ Splashery v1, a planet you could paint, lives on the `checkpoint/v1-planet-paint
 | 25 sports balls               | Pack (Balls)          | Basketball, soccer ball, American football, tennis ball, baseball, softball, beach ball, golf ball, rugby ball, volleyball, water polo ball, ping-pong ball, cricket ball, bowling ball, pool ball (cue and 1 to 15), pickleball, dodgeball, medicine ball, lacrosse ball, squash ball, bouncy ball, marble, hockey puck, shuttlecock and flying disc. Seams and stitching stay put under any flag or pattern. |
 | 23 space toys                 | Pack (Space)          | The Sun, the eight planets (Saturn's and Uranus's rings, Jupiter's Great Red Spot), the Moon, an aurora world, a solar system that orbits, an asteroid, a comet, a meteor, a star, a pulsar, a black hole with its disc, a star cluster, a ring nebula, a nebula with its pillars, a supernova and a spiral galaxy.                                                                                            |
 | 18 tiny-world toys            | Pack (Tiny world)     | Virus, bacteriophage (tap to inject DNA), bacterium, red and white blood cells, neuron (fire a signal), astrocyte, microglia, animal cell and mitochondrion with cutaways, DNA that unzips, chromosome, diatom, tardigrade, pollen grains, snowflakes, paramecium and amoeba.                                                                                                                                  |
-| 4 atoms toys                  | Pack (Atoms)          | Electron orbitals (1s to 4f), a Bohr atom for 44 elements, molecules (water to caffeine and C60) and crystal lattices (salt, diamond, graphite, ice).                                                                                                                                                                                                                                                          |
+| 5 atoms toys                  | Pack (Atoms)          | Electron orbitals (1s to 4f), a Bohr atom for 44 elements, molecules (water to caffeine and C60, or your own from a name, formula, SMILES string or MOL/SDF/XYZ/PDB file), crystal lattices (salt, diamond, graphite, ice) and proteins (ubiquitin, insulin, GFP, haemoglobin, or your own PDB or mmCIF file).                                                                                                 |
 | 9 gems                        | Pack (Gems)           | Diamond, ruby, emerald and sapphire cuts, an amethyst geode and a pearl in its oyster that open, a quartz cluster, opals and a crystal ball.                                                                                                                                                                                                                                                                   |
 | 5 more body toys              | Pack (Body)           | Brain, eye (shine a light), lungs that breathe, tooth and kidney; Slice shows the insides.                                                                                                                                                                                                                                                                                                                     |
 | 23 nature toys                | Pack (Nature)         | Oak (four seasons), pine, palm, cherry blossom, maple, bonsai, weeping willow, sunflower, rose, dandelion (blow the seeds), tulips, daisies, lotus, toadstool, fern, saguaro, coral reef, pinecone, acorns, succulent, bamboo, pebbles and kelp. Trees and flowers sway.                                                                                                                                       |
@@ -113,6 +113,11 @@ Clay works on pack toys too.
   dies, the pulsar strobes, the black hole swallows a star; an electron jumps to a higher orbital
   and drops back with a photon, a molecule's bonds shake when heated, a wave runs through a crystal
   lattice; the diamond flashes rainbow fire, the ruby glows red, a star glides over the sapphire.
+- **Your own molecules and proteins.** Type a molecule's name (about sixty, from aspirin to ATP), a
+  formula or a SMILES string, or open a MOL, SDF, XYZ or PDB file, and the molecule toy lays it out
+  in 3D with its bonds. The protein toy shows ubiquitin, insulin, GFP or haemoglobin as a cartoon of
+  helices, strands and loops, or any PDB or mmCIF file you open (from rcsb.org); tap it to pull it
+  apart into its pieces. Everything is read in the browser; nothing is uploaded.
 - **Drag to stretch.** Drag the gummy bear (with the Orbit tool, starting on the bear) to stretch
   it; let go and it springs back. A drag that starts beside it still turns the view.
 - Under a system setting for reduced motion, toys stay still until you switch motion on.
@@ -385,11 +390,13 @@ src/toy-sounds.js               every toy's own sound spec
 src/rig.js, rigs.js, rig-fx.js  rigs: parts, colour keys, effects and add-ons for scans and shapes
 src/font.js                     5x7 bitmap font (storybook pages, speech bubble)
 src/chess.js                    chess rules, SAN and PGN (the chess set's games)
+src/chem/                       elements, SMILES, 3D layout, molecule files, PDB/mmCIF proteins
 src/exports.js                  PNG, GIF, WebM, links and embed snippets
 src/viewer.js, embed.js, element.js   embed player and <splashery-toy>
 src/pc.js, toys.js              engine import, toy shelf
 assets/toys/                    captured toys (SOG) and thumbnails
 assets/flags/                   public-domain national flags (SVG) and their sources
+assets/proteins/                four PDB entries (CC0) for the protein toy
 vendor/                         PlayCanvas 2.22.3 and gifenc 1.0.3
 tools/                          asset, flag and thumbnail scripts
 tests/                          Playwright tests and screenshots

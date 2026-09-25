@@ -20,6 +20,7 @@
 import { element, normalSymbol, covalentRadius, parseFormula } from "./elements.js";
 import { finishGraph, withHydrogens, valencesFor, maxMatching, adjacency } from "./smiles.js";
 import { embed3D, toMolecule, centreMolecule, moleculeFromSmiles } from "./embed.js";
+import { condensedToSmiles } from "./condensed.js";
 
 export const MAX_FILE_ATOMS = 2000;
 
@@ -537,7 +538,7 @@ export function toXyz(mol, name = mol.name ?? "") {
 export const MOLECULES = [
   { name: "water", formula: "H2O", smiles: "O", byFormula: true },
   { name: "carbon dioxide", formula: "CO2", smiles: "O=C=O", byFormula: true },
-  { name: "carbon monoxide", formula: "CO", smiles: "[C-]#[O+]" },
+  { name: "carbon monoxide", formula: "CO", smiles: "[C-]#[O+]", byFormula: true },
   { name: "methane", formula: "CH4", smiles: "C", byFormula: true },
   { name: "ammonia", aliases: ["nh3"], formula: "H3N", smiles: "N", byFormula: true },
   { name: "oxygen", aliases: ["dioxygen"], formula: "O2", smiles: "O=O", byFormula: true },
@@ -611,8 +612,10 @@ const nameKey = (text) =>
 const BY_NAME = new Map();
 for (const entry of MOLECULES) {
   for (const key of [entry.name, ...(entry.aliases ?? [])]) BY_NAME.set(nameKey(key), entry);
-  // "h2o", "co2" and the like, typed in lower case.
-  if (entry.byFormula) BY_NAME.set(nameKey(entry.formula), entry);
+  // "h2o", "co2" and the like, typed in lower case (but not "co", which
+  // would hide cobalt).
+  if (entry.byFormula && !element(normalSymbol(entry.formula)))
+    BY_NAME.set(nameKey(entry.formula), entry);
 }
 
 const sameCounts = (a, b) =>
@@ -631,8 +634,16 @@ export function findMolecule(text) {
 
 const pasteSmiles = "Paste a SMILES string instead, e.g. from PubChem's page for the molecule.";
 
-// A molecule from typed text: a name or formula from the table, a SMILES
-// string, or the text of a molecule file.
+// A formula written with each element once (C6H12O6, not CH3CH2OH).
+const plainFormula = (text) => {
+  const symbols = [...String(text).matchAll(/[A-Z][a-z]?/g)].map((m) => m[0]);
+  return new Set(symbols).size === symbols.length;
+};
+
+// A molecule from typed text: a name from the table, a formula (a table
+// molecule's, or a condensed one such as CH3COOH), a SMILES string, or the
+// text of a molecule file. A formula that fits more than one table molecule
+// shows the first and says so in `note`.
 export function moleculeFromText(text, { seed = 1 } = {}) {
   const raw = String(text ?? "")
     .trim()
@@ -642,19 +653,49 @@ export function moleculeFromText(text, { seed = 1 } = {}) {
   const named = (entry) => ({ ...moleculeFromSmiles(entry.smiles, { seed }), name: entry.name });
   const byName = BY_NAME.get(nameKey(raw));
   if (byName) return named(byName);
+  const counts = parseFormula(raw);
+  const fits = counts
+    ? MOLECULES.filter((m) => sameCounts(parseFormula(m.formula), counts)).sort(
+        (a, b) => (b.byFormula ? 1 : 0) - (a.byFormula ? 1 : 0),
+      )
+    : [];
+  const fromTable = () => {
+    const [entry, ...others] = fits;
+    const mol = named(entry);
+    if (entry.byFormula) return mol;
+    const also = others.length ? ` (${others.map((m) => m.name).join(", ")}, and more)` : "";
+    const note = `${raw} fits other molecules too${also}; this is ${entry.name}. Type a name or a SMILES string for another.`; // prettier-ignore
+    return { ...mol, note };
+  };
+  // A formula with counts, or one exactly as the table writes it (CO is
+  // carbon monoxide, though OC is the SMILES for methanol).
+  if (fits.length && plainFormula(raw) && (/\d/.test(raw) || fits.some((m) => m.formula === raw)))
+    return fromTable();
   if (/\s/.test(raw)) fail(`"${raw}" is not in the built-in list. ${pasteSmiles}`);
+  // An element's own symbol (Co, Fe, Xe) is one atom, not SMILES (Cl and Br
+  // stay SMILES: HCl and HBr).
+  if (/^[A-Z][a-z]$/.test(raw) && element(raw) && raw !== "Cl" && raw !== "Br")
+    return { atoms: [{ el: raw, p: [0, 0, 0] }], bonds: [], name: element(raw).name };
   try {
     return moleculeFromSmiles(raw, { seed });
   } catch (err) {
-    const counts = parseFormula(raw);
+    const condensed = condensedToSmiles(raw);
+    if (condensed) {
+      try {
+        return { ...moleculeFromSmiles(condensed, { seed }), name: raw };
+      } catch {
+        // Not a molecule after all; fall through.
+      }
+    }
     if (counts) {
-      const entry = findMolecule(raw);
-      if (entry) return named(entry);
+      if (fits.length) return fromTable();
       // A lone atom, such as Xe or Fe, needs no bonds.
       const [only, more] = Object.keys(counts);
       if (!more && counts[only] === 1)
         return { atoms: [{ el: only, p: [0, 0, 0] }], bonds: [], name: element(only).name };
-      fail(`A formula like ${raw} does not say how the atoms join. ${pasteSmiles}`);
+      fail(
+        `A formula like ${raw} does not say how the atoms join. Write it out (CH3CH2OH rather than C2H6O) or paste a SMILES string, e.g. from PubChem.`,
+      );
     }
     if (/^[A-Za-z][a-z]{3,}$/.test(raw))
       fail(`"${raw}" is not in the built-in list. ${pasteSmiles}`);

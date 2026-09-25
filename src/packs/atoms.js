@@ -435,11 +435,11 @@ function checkSize(mol) {
 // string typed in, or a molecule file.
 const MOLECULE_INPUT = {
   title: "Your own molecule",
-  placeholder: "aspirin, H2O, or SMILES like CC(=O)O",
+  placeholder: "aspirin, CH3COOH, C6H12O6 or a SMILES string",
   button: "Show it",
   fileButton: "Open a molecule file…",
   accept: ".mol,.sdf,.sd,.xyz,.pdb,.ent,.txt",
-  note: "About sixty well-known molecules work by name (aspirin, glucose, dopamine, ATP…). For anything else paste a SMILES string: PubChem shows one for every compound. Files: MOL, SDF, XYZ or PDB, up to 600 atoms.",
+  note: "Type a name (about sixty are built in: aspirin, glucose, dopamine, ATP…), a formula written out (CH3CH2OH, (CH3)2CO, C6H5COOH) or one that names a built-in molecule (C9H8O4), or a SMILES string (PubChem shows one for every compound). Files: MOL, SDF, XYZ or PDB, up to 600 atoms.",
   async read(text, fileName) {
     if (fileName) {
       const mol = checkSize(readMoleculeFile(text, fileName));
@@ -1486,7 +1486,7 @@ export const RECIPES = {
             o.source.startsWith("M1;") ? unpackMolecule(o.source) : moleculeFromText(o.source),
           );
           const name = mol.name || (o.source.startsWith("M1;") ? "" : o.source);
-          MOLECULE_SHOWN.label = `${name ? `${name.slice(0, 40)} · ` : ""}${formulaOf(mol.atoms)} · ${mol.atoms.length} atoms`; // prettier-ignore
+          MOLECULE_SHOWN.label = `${name ? `${name.slice(0, 40)} · ` : ""}${formulaOf(mol.atoms)} · ${mol.atoms.length} atoms${mol.note ? `. ${mol.note}` : ""}`; // prettier-ignore
         } catch (err) {
           mol = null;
           MOLECULE_SHOWN.label = `Caffeine (yours could not be read: ${err.message})`;
