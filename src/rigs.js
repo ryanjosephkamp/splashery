@@ -115,8 +115,62 @@ const SHELLS = [
   ["clam", -0.66, -0.32, 0.14],
 ];
 
-// The wooden elephant's trunk: where it is pinned to the face.
-const TRUNK = { base: [-0.86, 0.52, 0.45] };
+// The wooden elephant's trunk, traced from the scan's splats: it rises from
+// the face, curls back over the head and its tip rests on the forehead, so
+// the scan's own trunk cannot move without tearing. A kit-built trunk (five
+// segments on ball joints, in the scan's colours) takes its place.
+const TRUNK = (() => {
+  const path = [
+    [-0.869, 0.53, 0.417], [-0.884, 0.562, 0.436], [-0.888, 0.601, 0.442], [-0.881, 0.64, 0.446],
+    [-0.873, 0.678, 0.441], [-0.859, 0.715, 0.44], [-0.841, 0.75, 0.434], [-0.823, 0.783, 0.422],
+    [-0.801, 0.81, 0.403], [-0.773, 0.83, 0.383], [-0.742, 0.841, 0.362], [-0.711, 0.842, 0.338],
+    [-0.679, 0.837, 0.315], [-0.648, 0.829, 0.291], [-0.618, 0.819, 0.268], [-0.588, 0.808, 0.244],
+    [-0.545, 0.805, 0.21], [-0.508, 0.822, 0.18], [-0.48, 0.848, 0.157],
+  ]; // prettier-ignore
+  const radii = [0.1, 0.086, 0.082, 0.076, 0.071, 0.068, 0.066, 0.066, 0.066, 0.066, 0.066, 0.065, 0.062, 0.058, 0.055, 0.053, 0.05, 0.046, 0.04]; // prettier-ignore
+  // Arc length along the path, and a smooth point and radius at any length.
+  const at = [0];
+  for (let i = 1; i < path.length; i++)
+    at.push(at[i - 1] + Math.hypot(...sub(path[i], path[i - 1])));
+  const total = at.at(-1);
+  const find = (s) => {
+    const x = clamp(s, 0, total);
+    let i = 0;
+    while (i < at.length - 2 && at[i + 1] < x) i++;
+    return [i, (x - at[i]) / (at[i + 1] - at[i])];
+  };
+  // Catmull-Rom through the traced points.
+  const point = (s) => {
+    const [i, f] = find(s);
+    const p0 = path[Math.max(0, i - 1)];
+    const p1 = path[i];
+    const p2 = path[i + 1];
+    const p3 = path[Math.min(path.length - 1, i + 2)];
+    const f2 = f * f;
+    const f3 = f2 * f;
+    return [0, 1, 2].map((k) => 0.5 * (2 * p1[k] + (-p0[k] + p2[k]) * f + (2 * p0[k] - 5 * p1[k] + 4 * p2[k] - p3[k]) * f2 + (-p0[k] + 3 * p1[k] - 3 * p2[k] + p3[k]) * f3)); // prettier-ignore
+  };
+  const radius = (s) => {
+    const [i, f] = find(s);
+    return radii[i] + (radii[i + 1] - radii[i]) * f;
+  };
+  // Joints (arc lengths) where the segments meet; the curl bends about the
+  // normal of the trunk's plane.
+  const joints = [0, 3, 6, 9, 12].map((i) => at[i]);
+  const bend = unit([-0.593, 0.104, -0.797]);
+  return { path, radii, total, point, radius, joints, bend, base: path[0], tip: path.at(-1) };
+})();
+// The scan's trunk splats (hidden: the kit trunk replaces them), and the
+// little curl of its tip.
+const TRUNK_REGIONS = [
+  ...TRUNK.path.flatMap((p, i) => (i % 2 ? [] : [{ at: p, r: TRUNK.radii[i] + 0.04 }])),
+  { at: [-0.47, 0.862, 0.15], r: 0.05 },
+  { at: [-0.445, 0.805, 0.15], r: 0.055 },
+].map(({ at, r }) => ({ at, r: [r, r, r] }));
+// The carving's wood and its dark specks, from the scan's colours round the
+// trunk and forehead.
+const WOOD = "#633f25";
+const WOOD_SPECK = "#2b1a0e";
 
 // The marble bust: the neck pivot, the jaw hinge and when each syllable of
 // "SALVE, AMICE!" starts (matching its sound).
@@ -145,22 +199,29 @@ const UKE = {
   ],
 };
 
-// The cat statue: its neck (the head turns about it), the collar over the
-// cut, the bell, and the joint where the tail tip swishes.
-const CAT = {
-  neck: [0.07, 0.37, 0.44],
-  neckAxis: unit([0, 1, 0.2]),
-  collarAt: [0.07, 0.37, 0.44],
-  collarR: [0.275, 0.245],
-  bellAt: [0.07, 0.315, 0.7],
-  tailJoint: [0.46, -0.84, 0.12],
-};
+// The cat statue: its neck, measured from the scan's splats: the slanted
+// plane where the head is cut from the body (the head turns about its
+// normal), the neck's radius all round it (widened to cover the seam over a
+// 30 degree turn) for the collar.
+const CAT = (() => {
+  const neck = [0.138, 0.388, 0.388];
+  const neckAxis = unit([0, 1, 0.35]);
+  const side = [-1, 0, 0];
+  const front = cross(neckAxis, side);
+  const collarR = [0.344, 0.344, 0.344, 0.344, 0.34, 0.331, 0.331, 0.331, 0.331, 0.331, 0.301, 0.301, 0.301, 0.301, 0.301, 0.299, 0.291, 0.291, 0.291, 0.291, 0.291, 0.291, 0.29, 0.29, 0.29, 0.29, 0.29, 0.289, 0.289, 0.289, 0.289, 0.292, 0.324, 0.344, 0.344, 0.344]; // prettier-ignore
+  // The collar's radius at angle a (0 = side, a quarter turn = front).
+  const radius = (a) => {
+    const x = ((((a / TAU) % 1) + 1) % 1) * collarR.length;
+    const i = Math.floor(x);
+    return collarR[i] + (collarR[(i + 1) % collarR.length] - collarR[i]) * (x - i);
+  };
+  const ring = (a, r, h = 0) => add(neck, add(add(mul(side, Math.cos(a) * r), mul(front, Math.sin(a) * r)), mul(neckAxis, h))); // prettier-ignore
+  return { neck, neckAxis, side, front, radius, ring };
+})();
 
-// The horse statue: where the hind hooves stand, and the foreleg knees.
+// The horse statue: where the hind hooves stand (it rears about them).
 const HORSE = {
   hooves: [-0.05, -0.72, 0],
-  kneeA: [-0.52, 0.42, -0.09],
-  kneeB: [-0.54, 0.31, 0.19],
 };
 
 // ---- Add-on builders ------------------------------------------------------------
@@ -833,31 +894,94 @@ export const RIGS = {
     },
   },
 
-  // The trunk is one solid carved piece pinned where it meets the face (a
-  // hard cut, like a wooden toy's jointed trunk): it swings up and forward to
-  // trumpet with a few toots, and the elephant rocks on its feet.
+  // The trunk curls up and trumpets: a kit-built trunk (the scan's own is
+  // fused to the forehead, so it could only tear) in five segments on ball
+  // joints uncurls and lifts, toots, and curls back down onto the forehead,
+  // while the elephant rocks on its feet.
   "wooden-elephant": {
     parts: [
       {
         name: "trunk",
         pivot: TRUNK.base,
-        axis: [0, 0, 1],
-        regions: [
-          { at: [-0.88, 0.68, 0.43], r: [0.13, 0.17, 0.14] },
-          { at: [-0.86, 0.83, 0.4], r: [0.11, 0.08, 0.13] },
-          { at: [-0.72, 0.85, 0.33], r: [0.1, 0.07, 0.12] },
-          { at: [-0.61, 0.84, 0.19], r: [0.07, 0.07, 0.1] },
-        ],
+        axis: TRUNK.bend,
+        regions: TRUNK_REGIONS,
       },
     ],
+    addon: {
+      count: 26000,
+      build(k) {
+        // The carved wood: the scan's mean colour with a soft grain, lighter
+        // on top, and the sparse dark specks of the carving.
+        const wood = (c) => {
+          if (c.rand() < 0.035) return { c: WOOD_SPECK, keep: true, size: 0.55 };
+          const grain = 0.94 + 0.12 * c.fbm(c.p[0] * 9, c.p[1] * 9, c.p[2] * 9);
+          return shade(WOOD, grain * (0.9 + 0.2 * Math.max(0, c.n[1])));
+        };
+        const opts = (part) => ({ part, pattern: false, even: true, opacity: 1, size: 0.9, flat: 0.2, color: wood }); // prettier-ignore
+        const seg = (s0, s1) => k.tube((t) => TRUNK.point(s0 + (s1 - s0) * t), (t) => TRUNK.radius(s0 + (s1 - s0) * t), { grid: 48 }); // prettier-ignore
+        // The root: fixed, sunk into the face where the scan's trunk was.
+        const t0 = unit(sub(TRUNK.point(0.02), TRUNK.base));
+        const root = TRUNK.base;
+        const stub = k.tube((t) => add(root, mul(t0, -0.07 * (1 - t))), TRUNK.radii[0], {
+          grid: 32,
+        });
+        k.add(stub, { ...opts(undefined), weight: 1 });
+        const J = TRUNK.joints;
+        for (let j = 0; j < J.length; j++) {
+          const part = k.part(`trunk${j}`, { pivot: TRUNK.point(J[j]), axis: TRUNK.bend });
+          const end = j + 1 < J.length ? J[j + 1] : TRUNK.total;
+          k.add(seg(J[j], end), opts(part));
+          // A ball at the joint fills the bend.
+          k.add(k.sphere(TRUNK.radius(J[j]) * (j ? 0.99 : 0.85)), { ...opts(part), pos: TRUNK.point(J[j]) }); // prettier-ignore
+        }
+        // The rounded tip.
+        k.add(k.sphere(TRUNK.radii.at(-1)), {
+          ...opts(k.part(`trunk${J.length - 1}`)),
+          pos: TRUNK.tip,
+        });
+        // The forehead where the tip rested (the scan never saw it).
+        // Its splats shrink towards the rim, so it blends into the scan.
+        k.add(k.ellipsoid(0.1, 0.022, 0.085), {
+          pos: [-0.53, 0.745, 0.165],
+          rot: [0, 35, 4],
+          pattern: false,
+          even: true,
+          opacity: 1,
+          size: 1.1,
+          flat: 0.2,
+          color: (c) => {
+            if (c.ln[1] < -0.3) return null;
+            const rim = Math.hypot(c.lp[0] / 0.1, c.lp[2] / 0.085);
+            if (c.rand() < 0.035) return { c: WOOD_SPECK, keep: true, size: 0.55 };
+            return { c: shade(WOOD, 1.05 + 0.1 * c.fbm(c.p[0] * 9, c.p[1] * 9, c.p[2] * 9)), keep: true, size: 1.1 - 0.7 * rim * rim }; // prettier-ignore
+          },
+        });
+      },
+    },
     controls: [pulse("trumpet", "Trumpet", 2.6)],
     action: { key: "trumpet", label: "Trumpet" },
     drive(t, c, out) {
       const e = since(c, "trumpet", 2.6);
-      if (e < 0) return;
+      out.parts.trunk = { visible: 0 };
+      // Uncurl and lift (0.05-0.4 s), hold while it toots, curl back down.
       const up = env(e, 0.05, 0.4, 1.4, 2.0);
-      const toot = 0.06 * Math.sin(e * 28) * env(e, 0.35, 0.45, 1.1, 1.3);
-      out.parts.trunk = { angle: 0.38 * up + toot };
+      const toot = 0.07 * Math.sin(e * 28) * env(e, 0.35, 0.45, 1.1, 1.3);
+      const bends = [0.22, 0.32, 0.36, 0.42, 0.45];
+      let Q = [0, 0, 0, 1];
+      let T = [0, 0, 0];
+      const parts = {};
+      TRUNK.joints.forEach((s, j) => {
+        const J = TRUNK.point(s);
+        const R = quatAxisAngle(TRUNK.bend, -bends[j] * up + (j >= 3 ? toot : 0));
+        // Parent transform, then this joint's turn about its own point.
+        const RJ = quatRotate(R, J);
+        T = add(T, quatRotate(Q, sub(J, RJ)));
+        Q = quatMul(Q, R);
+        const QJ = quatRotate(Q, J);
+        parts[`trunk${j}`] = { quat: Q, offset: sub(add(T, QJ), J) };
+      });
+      out.addon = { parts };
+      if (e < 0) return;
       // Rocks forward and back on its feet (about the front and back feet in turn).
       const rock = 0.13 * Math.sin(e * 7) * Math.exp(-e * 1.3) * band(e, 0, 0.1);
       const pivot = rock > 0 ? [-0.6, -0.85, 0] : [0.6, -0.85, 0];
@@ -1388,54 +1512,49 @@ export const RIGS = {
     },
   },
 
-  // The head turns on its neck (a hard cut, hidden under a red collar with a
-  // bell, so nothing bends), looks at you, and the tip of the tail swishes
-  // along the ground.
+  // The cat comes to life: its head (cut on the slanted plane under a red
+  // collar that hugs the neck, so the seam never shows) turns right round to
+  // look at you, tilts quizzically as it mews, tilts the other way, and turns
+  // back. (The tail stays put: it lies on unscanned ground, so moving it
+  // would open a hole.)
   "cat-statue": {
     parts: [
       {
+        // Everything above the collar plane: a sphere so big its underside is
+        // flat there.
         name: "head",
         pivot: CAT.neck,
-        axis: [0, 1, 0],
-        regions: [{ at: [0.08, 0.81, 0.52], r: [0.52, 0.47, 0.52] }],
-      },
-      {
-        name: "tail",
-        pivot: CAT.tailJoint,
-        axis: [0, 1, 0],
-        regions: [{ at: [0.42, -0.84, 0.36], r: [0.16, 0.12, 0.24] }],
+        axis: CAT.neckAxis,
+        regions: [{ at: add(CAT.neck, mul(CAT.neckAxis, 3)), r: [3, 3, 3] }],
       },
     ],
     addon: {
-      count: 5000,
+      count: 9000,
       build(k) {
-        // The collar sits on the cut, tilted like the neck.
         const collar = k.part("collar", { pivot: CAT.neck });
-        const q = [0, 0, 0, 1];
-        k.cloud({ share: 0.8, part: collar, pattern: false }, (rand) => {
+        // A thick leather band on the cut, just outside the neck all round.
+        k.cloud({ share: 0.85, part: collar, pattern: false }, (rand) => {
           const a = rand() * TAU;
-          const band = (rand() - 0.5) * 0.045;
-          const ring = [Math.cos(a) * CAT.collarR[0], band, Math.sin(a) * CAT.collarR[1]];
-          const n = unit([Math.cos(a), 0, Math.sin(a)]);
+          const h = (rand() - 0.5) * 0.075;
+          const depth = rand() * 0.022;
+          const r = CAT.radius(a) + depth;
+          const out = unit(sub(CAT.ring(a, 1), CAT.neck));
+          const edge = Math.abs(h) > 0.03;
+          const lit = 0.75 + 0.35 * Math.max(0, out[0] * 0.5 + out[2] * 0.8);
           return {
-            p: add(CAT.collarAt, quatRotate(q, ring)),
-            n: quatRotate(q, n),
-            color: Math.abs(band) > 0.018 ? "#6e1414" : mix("#b0201e", "#d33a2c", rand() * 0.5),
-            size: 0.8,
+            p: CAT.ring(a, r, h),
+            n: out,
+            color: shade(edge ? "#6e1414" : mix("#b0201e", "#d33a2c", rand() * 0.5), lit),
+            size: 0.75,
             opacity: 1,
           };
         });
-        // A little brass bell at the front.
-        k.cloud({ share: 0.2, part: collar, pattern: false }, (rand) => {
+        // A little brass bell at the front, hanging from the collar.
+        const bell = add(CAT.ring(TAU / 4, CAT.radius(TAU / 4) + 0.045), mul(CAT.neckAxis, -0.05));
+        k.cloud({ share: 0.15, part: collar, pattern: false }, (rand) => {
           const d = unit([rand() - 0.5, rand() - 0.5, rand() - 0.5]);
-          const shade = 0.55 + 0.45 * Math.max(0, d[1] * 0.6 + d[2] * 0.5);
-          return {
-            p: add(CAT.bellAt, mul(d, 0.042)),
-            n: d,
-            color: mix("#6b4a12", "#f3cf5a", shade),
-            size: 0.7,
-            opacity: 1,
-          };
+          const lit = 0.55 + 0.45 * Math.max(0, d[1] * 0.6 + d[2] * 0.5);
+          return { p: add(bell, mul(d, 0.042)), n: d, color: mix("#6b4a12", "#f3cf5a", lit), size: 0.7, opacity: 1 }; // prettier-ignore
         });
       },
     },
@@ -1443,16 +1562,16 @@ export const RIGS = {
     action: { key: "look", label: "Look around" },
     drive(t, c, out) {
       const e = since(c, "look", 2.6);
-      const turn = e < 0 ? 0 : env(e, 0.05, 0.6, 1.7, 2.4);
-      const nod = e < 0 ? 0 : 0.08 * Math.sin(Math.PI * band(e, 0.6, 1.2));
-      const qh = quatMul(quatAxisAngle(CAT.neckAxis, 0.42 * turn), quatAxisAngle([1, 0, 0], nod));
-      // The collar turns with the head; the bell swings a little.
+      // Turn to look at you (0.05-0.5 s, with the stone scrape), tilt one way
+      // as it mews, then the other, and turn back.
+      const turn = e < 0 ? 0 : env(e, 0.05, 0.5, 1.75, 2.4);
+      const tilt = e < 0 ? 0 : 0.26 * bump(e, 0.42, 1.05) - 0.18 * bump(e, 1.0, 1.6);
+      const face = quatRotate(quatAxisAngle(CAT.neckAxis, 0.75 * turn), CAT.front);
+      const qh = quatMul(quatAxisAngle(face, tilt), quatAxisAngle(CAT.neckAxis, 0.75 * turn));
+      // The collar turns with the head.
       out.addon = { parts: { collar: { quat: qh } } };
       if (e < 0) return;
       out.parts.head = { quat: qh };
-      const swish =
-        Math.sin(Math.PI * band(e, 0.4, 0.9)) - 0.7 * Math.sin(Math.PI * band(e, 0.9, 1.5));
-      out.parts.tail = { angle: 0.4 * swish };
     },
   },
 
@@ -1471,9 +1590,9 @@ export const RIGS = {
     },
   },
 
-  // The whole horse (everything above the base, one solid piece) rears
-  // higher about its hind hooves, the way a horse rears from its hind legs,
-  // while the lower forelegs paw the air from the knees (hard cuts).
+  // The whole horse (everything above the base, one solid piece, so nothing
+  // can break off) rears higher about its hind hooves, the way a horse rears
+  // from its hind legs, prances at the top and lands with a small bounce.
   "horse-statue": {
     parts: [
       {
@@ -1482,26 +1601,6 @@ export const RIGS = {
         axis: [0, 0, 1],
         regions: [{ at: [0, 0.45, 0], r: [3, 1.18, 3] }],
       },
-      {
-        name: "shinA",
-        pivot: HORSE.kneeA,
-        axis: [0, 0, 1],
-        regions: [
-          { at: [-0.62, 0.32, -0.09], r: 0.09, over: true },
-          { at: [-0.72, 0.22, -0.09], r: 0.08, over: true },
-          { at: [-0.79, 0.18, -0.09], r: 0.065, over: true },
-        ],
-      },
-      {
-        name: "shinB",
-        pivot: HORSE.kneeB,
-        axis: [0, 0, 1],
-        regions: [
-          { at: [-0.56, 0.2, 0.19], r: 0.09, over: true },
-          { at: [-0.6, 0.04, 0.19], r: 0.08, over: true },
-          { at: [-0.62, -0.03, 0.19], r: 0.065, over: true },
-        ],
-      },
     ],
     controls: [pulse("rear", "Rear", 2.6)],
     action: { key: "rear", label: "Rear up" },
@@ -1509,13 +1608,9 @@ export const RIGS = {
       const e = since(c, "rear", 2.6);
       if (e < 0) return;
       const up = env(e, 0.05, 0.55, 1.5, 2.3);
-      const qh = quatAxisAngle([0, 0, 1], -0.13 * up);
-      out.parts.horse = { quat: qh };
-      // The forelegs paw in turn, riding on the rearing body.
-      const pawA = 0.35 * up * Math.sin(e * 9);
-      const pawB = 0.35 * up * Math.sin(e * 9 + 2);
-      out.parts.shinA = chain(qh, HORSE.hooves, quatAxisAngle([0, 0, 1], pawA), HORSE.kneeA);
-      out.parts.shinB = chain(qh, HORSE.hooves, quatAxisAngle([0, 0, 1], pawB), HORSE.kneeB);
+      const prance = 0.025 * Math.sin((e - 0.55) * 13) * env(e, 0.5, 0.65, 1.3, 1.5);
+      const land = 0.03 * spring(e - 2.3, 6, 18) * band(e, 2.25, 2.35);
+      out.parts.horse = { quat: quatAxisAngle([0, 0, 1], -0.17 * up - prance + land) };
     },
   },
 
