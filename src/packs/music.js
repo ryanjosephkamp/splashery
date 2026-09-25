@@ -108,6 +108,10 @@ const STICKS = [
 ];
 const stickAxis = (s) => vec.unit(vec.cross(vec.sub(s.tip, s.butt), [0, 1, 0]));
 
+// Where the xylophone's mallet head is (so a quick second tap swings on
+// from there instead of jumping home first).
+const xylo = { head: null, from: null, tap: -1 };
+
 // The xylophone's bars (x, length) and the mallet's resting head.
 const XYLO = (() => {
   const bars = [];
@@ -481,12 +485,17 @@ export const RECIPES = {
     action: {
       key: "play",
       label: "Play a scale",
+      // Any tap over the row of bars strikes the nearest bar (fingers are
+      // wide); a tap on the mallet, a wheel or the rail ends plays the scale.
       at(p) {
         const X = XYLO;
-        if (Math.abs(p[1] - X.top) > 0.09) return null;
-        const i = X.bars.findIndex(
-          (b) => Math.abs(p[0] - b.x) < 0.1 && Math.abs(p[2]) < (b.len * 0.86) / 2 + 0.03,
-        );
+        if (p[1] < X.top - 0.07 || p[1] > X.top + 0.25) return null;
+        let i = -1;
+        let best = 0.14;
+        X.bars.forEach((b, k) => {
+          const d = Math.abs(p[0] - b.x);
+          if (d < best && Math.abs(p[2]) < (b.len * 0.86) / 2 + 0.08) [i, best] = [k, d];
+        });
         return i < 0 ? null : { key: "strike", pick: i };
       },
     },
@@ -502,7 +511,7 @@ export const RECIPES = {
       };
       // A struck bar dips and rings for a moment.
       const dip = X.bars.map(() => 0);
-      const ring = (e) => (e < 0 ? 0 : -0.018 * Math.exp(-e * 6) * Math.cos(e * 45));
+      const ring = (e, a = 0.018) => (e < 0 ? 0 : -a * Math.exp(-e * 6) * Math.cos(e * 45));
       let head = X.rest;
       if (c.play > 0) {
         if (u < 0.1) head = vec.add(X.rest, vec.mul(vec.sub(at(0), X.rest), easeInOut(u / 0.1)));
@@ -510,18 +519,25 @@ export const RECIPES = {
         else head = vec.add(at(1), vec.mul(vec.sub(X.rest, at(1)), easeInOut((u - 0.85) / 0.15)));
         X.bars.forEach((b, k) => (dip[k] = ring((u - 0.1 - (0.75 * k) / 7) * 3)));
       }
-      // One bar: the mallet lifts over it, strikes at 0.3 s and goes home.
+      // One bar: the mallet swings over it from wherever it is, strikes at
+      // 0.12 s (with the note), bounces up and goes home; the bar jumps.
       const i = info?.tap?.key === "strike" ? info.tap.pick : null;
       if (c.strike > 0 && i !== null && !(c.play > 0)) {
         const e = 1 - c.strike;
+        if (xylo.tap !== info.tap.n) {
+          xylo.tap = info.tap.n;
+          xylo.from = xylo.head;
+        }
+        const from = xylo.from || X.rest;
         const hit = [X.bars[i].x, X.top + 0.06, 0.08];
-        const above = vec.add(hit, [0, 0.2, 0]);
-        if (e < 0.2) head = vec.add(X.rest, vec.mul(vec.sub(above, X.rest), easeInOut(e / 0.2)));
-        else if (e < 0.3)
-          head = vec.add(above, vec.mul(vec.sub(hit, above), ((e - 0.2) / 0.1) ** 2));
-        else head = vec.add(hit, vec.mul(vec.sub(X.rest, hit), easeInOut((e - 0.3) / 0.7)));
-        dip[i] = ring(e - 0.3);
+        const above = vec.add(hit, [0, 0.24, 0]);
+        if (e < 0.07) head = vec.add(from, vec.mul(vec.sub(above, from), easeInOut(e / 0.07)));
+        else if (e < 0.12) head = vec.add(above, vec.mul(vec.sub(hit, above), ((e - 0.07) / 0.05) ** 2)); // prettier-ignore
+        else if (e < 0.3) head = vec.add(hit, [0, 0.16 * Math.sin(Math.PI * ((e - 0.12) / 0.36)), 0]);
+        else head = vec.add(vec.add(hit, [0, 0.16, 0]), vec.mul(vec.sub(X.rest, vec.add(hit, [0, 0.16, 0])), easeInOut((e - 0.3) / 0.7))); // prettier-ignore
+        dip[i] = ring(e - 0.12, 0.045);
       }
+      xylo.head = head;
       out.parts.mallet = { offset: vec.sub(head, X.rest) };
       X.bars.forEach((b, k) => (out.parts[`bar${k}`] = { offset: [0, dip[k], 0] }));
       out.amount = Math.max(c.play, c.strike * 0.6);

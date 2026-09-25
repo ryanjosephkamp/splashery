@@ -1247,7 +1247,7 @@ export const VOICE_NAMES = Object.keys(VOICES);
 // ---- Specs ------------------------------------------------------------------------
 
 const PARAMS = new Set(
-  "voice pitch f decay vol bright at notes step strum n rate to kind".split(" "),
+  "voice pitch f decay vol bright at pickAt notes step strum n rate to kind".split(" "),
 );
 
 // Checks a spec and returns a list of problems (empty when it is fine).
@@ -1280,7 +1280,19 @@ export function specProblems(spec, where = "sound") {
   }
   if (!VOICES[spec.voice]) out.push(`${where}: unknown voice "${spec.voice}"`);
   for (const k of Object.keys(spec)) if (!PARAMS.has(k)) out.push(`${where}: unknown key "${k}"`);
-  for (const k of ["pitch", "decay", "vol", "bright", "at", "step", "strum", "n", "rate", "to"])
+  for (const k of [
+    "pitch",
+    "decay",
+    "vol",
+    "bright",
+    "at",
+    "pickAt",
+    "step",
+    "strum",
+    "n",
+    "rate",
+    "to",
+  ])
     if (k in spec && !(typeof spec[k] === "number" && Number.isFinite(spec[k])))
       out.push(`${where}: ${k} must be a number`);
   if ("f" in spec) {
@@ -1309,8 +1321,8 @@ export function specFor(spec, on = true) {
 
 // Plays a spec at time t into `out`. Returns the seconds it lasts.
 // `raw` skips the voice's level (tools/sound-check.mjs --voices measures it).
-// `pick` plays only that note (or chord) of a tune, at the tune's start: a
-// tap on one xylophone bar plays that bar.
+// `pick` plays only that note (or chord) of a tune, at the tune's start (or
+// at the spec's `pickAt`): a tap on one xylophone bar plays that bar.
 export function playSpec(ctx, out, t, spec, { pitch = 1, raw = false, pick = null } = {}) {
   if (!spec) return 0;
   if (typeof spec === "string") {
@@ -1325,7 +1337,7 @@ export function playSpec(ctx, out, t, spec, { pitch = 1, raw = false, pick = nul
   if ("on" in spec) return playSpec(ctx, out, t, spec.on, { pitch, raw, pick });
   const v = VOICES[spec.voice];
   if (!v) return 0;
-  const start = t + (spec.at || 0);
+  const start = t + (pick !== null && spec.pickAt !== undefined ? spec.pickAt : spec.at || 0);
   const base = {
     pitch: 1,
     decay: 1,

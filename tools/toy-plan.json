@@ -98,7 +98,7 @@
       "owner": "Fantastic, extremely realistic. Maybe they move around.",
       "effect": "The tomatoes roll and jostle each other, then settle.",
       "sound": "Soft thuds rolling on a table.",
-      "improved": "E1b: each tomato is its own solid piece (the plate left still): they hop in turn, roll a little round the plate and settle (2.6 s)."
+      "improved": "E1c: the plate gives a little shake and a wave of small hops runs round it: four groups of tomatoes land on the four thuds, rocking outward and settling with a wobble. The big ones rock instead of hopping, so no unscanned underside shows (2.6 s)."
     },
     "mandeltorus": {
       "v": "keep",
@@ -134,7 +134,7 @@
       "owner": "Underwhelming; the style seems off.",
       "effect": "Trunk lifts and it rocks on its wooden feet.",
       "sound": "Wooden knock and a toy trumpet.",
-      "improved": "E1b: the whole trunk is one solid carved piece, pinned at the face like a wooden toy: it swings up to trumpet with a few toots while the elephant rocks on its feet (2.6 s)."
+      "improved": "E1c: the scan's trunk is fused to the forehead, so it could only tear; it is replaced by a kit-built trunk traced from the scan (five segments on ball joints, in the carving's colours). A tap uncurls it straight up to trumpet with a few toots, and it curls back down while the elephant rocks on its feet (2.6 s). A small kit patch covers the forehead where the tip rested."
     },
     "marble-bust": {
       "v": "keep",
@@ -206,14 +206,14 @@
       "owner": "Like the bust: the cat moves a bit.",
       "effect": "The head turns and the tail swishes once.",
       "sound": "Stone grind and a tiny mew.",
-      "improved": "E1b: the head turns on its neck under a red collar with a brass bell (a hard cut, so nothing bends), looks at you with a small nod, and the tail tip swishes on the ground (2.6 s)."
+      "improved": "E1c: the head is cut on the neck's own slanted plane, measured from the scan, under a red collar that follows the neck all round (no longer sunk into the stone). A tap turns the head right round to look at you, tilts it one way as it mews and the other, and turns it back (2.6 s). The tail stays still: it lies on unscanned ground."
     },
     "chess-set": {
       "v": "keep",
       "owner": "Ideally playable. At least: a tap plays a real game, white against black, as a long animation.",
       "effect": "Plays a famous public-domain game move by move; later, tap a piece then a square to move it.",
       "sound": "Wooden piece clacks.",
-      "improved": "E1b: rebuilt as a kit toy (walnut board, 32 turned pieces). A tap plays Morphy's Opera Game (Paris, 1858) move by move: each piece slides to its square, knights jump, captured pieces go to trays beside the board, each move clacks, and at 17.Rd8# the black king tips over. Tap again and the pieces glide home."
+      "improved": "E1b: rebuilt as a kit toy (walnut board, 32 turned pieces). A tap plays Morphy's Opera Game (Paris, 1858) move by move: each piece slides to its square, knights jump, captured pieces go to trays beside the board, each move clacks, and at 17.Rd8# the black king tips over. Tap again and the pieces glide home. E1c: plays any game too. Open a PGN file or paste a game (all the rules: castling, en passant, promotion, disambiguation; a set-up position from FEN; a clear message for a bad file), set the move speed, or go back to the Opera Game (the default). A promoting pawn sinks away and a new queen rises; the loser's king tips over after mate or resignation."
     },
     "horse-statue": {
       "v": "keep",
@@ -221,7 +221,7 @@
       "owner": "Work like the other statues.",
       "effect": "Rears up on its hind legs, then settles.",
       "sound": "Stone grind and a whinny-like whistle.",
-      "improved": "E1b: the whole horse above the base rears as one solid piece about its hind hooves, while the forelegs (cut at the knees) paw the air (2.6 s)."
+      "improved": "E1c: no more foreleg cuts (the hooves looked broken off). The whole horse above the base rears as one solid piece about its hind hooves, prances at the top and lands with a small bounce (2.6 s)."
     },
     "blob": {
       "v": "keep",
@@ -379,11 +379,12 @@
       "sound": "Glassy clink."
     },
     "hockey-puck": {
-      "v": "new",
+      "v": "keep",
       "fixed": "C1: the same faint rim of light, and a little sheen on the rubber.",
       "owner": "Underwhelming.",
       "effect": "Slides and spins flat, throwing up ice sparkle.",
-      "sound": "Stick slap and ice scrape."
+      "sound": "Stick slap and ice scrape.",
+      "improved": "E1c: a slap shot. Sparkling ice chips spray from where the stick hit, and the puck glides flat across the ice, spinning fast, round a wide loop and back to its spot (3 s)."
     },
     "shuttlecock": {
       "v": "keep",
@@ -520,7 +521,7 @@
     },
     "laptop": {
       "v": "keep",
-      "owner": "Pretty awesome; keep it the same.",
+      "owner": "Pretty awesome; keep it the same. After E1b: basically perfect, lock it in.",
       "sound": "Keyboard clatter and a start-up chime.",
       "fixed": "E1b: a clean case (no speckle) and real keycaps with letters. Tap a key (or type on your own keyboard) and it goes down and types on the screen; tap or drag on the trackpad to move the pointer and click."
     },
@@ -1186,11 +1187,12 @@
       "sound": "Dice rattle and clatter."
     },
     "newtons-cradle": {
-      "v": "more",
+      "v": "keep",
       "interactive": true,
       "owner": "Tapping has no noticeable effect. Make it more interactive.",
       "effect": "Tap lifts and drops an end ball hard so the clacks are obvious; later, drag a ball back and let go.",
-      "sound": "Crisp steel clacks."
+      "sound": "Crisp steel clacks.",
+      "improved": "E1c: a tap lifts the end ball and lets it go. Each strike sends the far ball out, loses a little height and clacks as it lands, the middle balls twitch with the knock, and it dies away over about 9 s. It no longer swings on its own."
     },
     "teddy-bear": {
       "v": "keep",
@@ -1505,7 +1507,7 @@
       "v": "keep",
       "owner": "Incredible; basically perfect.",
       "sound": "The scale it already plays, as mallet tones.",
-      "improved": "D: a tap on one bar lifts the mallet over that bar, strikes it and plays its note; a tap anywhere else plays the scale. Each bar dips as the mallet hits it."
+      "improved": "D: a tap on one bar lifts the mallet over that bar, strikes it and plays its note; a tap anywhere else plays the scale. Each bar dips as the mallet hits it. E1c: any tap over the row of bars strikes the nearest bar (easy to hit on a phone). The mallet swings over from wherever it is, lands 0.12 s after the tap with the bar's note, bounces off, and the bar jumps. A tap off the bars still plays the scale."
     },
     "rocket": {
       "v": "keep",

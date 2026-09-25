@@ -100,6 +100,10 @@ const TOMATOES = [
   ["t8", -0.25, 0.52, 0.2],
   ["t9", 0.25, 0.45, 0.3],
 ];
+// The tomatoes in four groups round the plate (by angle), for the wave.
+const TOMATO_WAVE = TOMATOES.map(([name, x, z, r]) => ({ name, x, z, r, a: Math.atan2(z, x) }))
+  .sort((p, q) => p.a - q.a)
+  .map((t, i, all) => ({ ...t, group: Math.floor((i * 4) / all.length) }));
 
 // The biggest shells in the basket: name, x, z, radius (from a top view).
 const SHELLS = [
@@ -761,8 +765,11 @@ export const RIGS = {
   },
 
   // Each tomato is its own solid piece (hard regions split by the nearest
-  // centre, the white plate left out): they hop in turn, roll a little and
-  // bump against each other, then settle.
+  // centre, the white plate left out). The plate gives a little shake and a
+  // wave of small hops runs round it: four groups of tomatoes pop up in turn
+  // and land on the four thuds of the sound, each rocking outward and
+  // settling with a wobble. Hops stay low and rolls small, so no tomato
+  // shows the unscanned side where it touched its neighbours.
   tomatoes: {
     parts: TOMATOES.map(([name, x, z, r]) => ({
       name,
@@ -774,23 +781,26 @@ export const RIGS = {
     drive(t, c, out, info) {
       const e = since(c, "roll", 2.6);
       if (e < 0) return;
-      const spin = vary(info.tap) > 0.5 ? 1 : -1;
-      TOMATOES.forEach(([name, x, z, r], i) => {
-        // Small tomatoes hop higher and later; big ones rock.
-        const d = 0.08 * ((i * 7) % 10);
-        const hop = Math.max(0, Math.sin(Math.PI * band(e, 0.1 + d, 0.45 + d + r)));
-        const settle = spring(e - (0.45 + d + r), 6, 20) * band(e, 0.45 + d + r, 0.5 + d + r);
-        const h = (0.34 - 0.5 * r) * hop;
-        // Roll round the plate a little, like being shaken.
-        const a = Math.atan2(z, x) + Math.PI / 2;
-        const slide = 0.09 * Math.sin(Math.PI * band(e, 0.1 + d, 1.4 + d)) * spin;
-        const dir = [Math.cos(a), 0, Math.sin(a)];
+      const way = vary(info.tap) > 0.5 ? 1 : -1;
+      // The plate shakes first.
+      const shake = 0.035 * Math.sin(e * 30) * (1 - band(e, 0.05, 0.4)) * band(e, 0, 0.03);
+      out.body = { quat: quatAxisAngle([0, 1, 0], shake) };
+      TOMATO_WAVE.forEach(({ name, x, z, r, group }) => {
+        // Lands at 0.4, 0.63, 0.86 or 1.09 s (the thuds).
+        const t0 = 0.12 + (way > 0 ? group : 3 - group) * 0.23;
+        const hop = Math.sin(Math.PI * band(e, t0, t0 + 0.28));
+        const land = t0 + 0.28;
+        const settle = spring(e - land, 7, 24) * band(e, land, land + 0.02);
+        // Small ones hop; the big ones (whose undersides the camera would
+        // see) barely lift and rock instead.
+        const h = (r > 0.24 ? 0.015 : Math.min(0.1, 0.3 - 0.6 * r)) * hop;
+        // Rock outward from the plate's middle, and back.
+        const l = Math.hypot(x, z) || 1;
+        const axis = [z / l, 0, -x / l];
+        const rock = (r > 0.24 ? 0.1 : 0.16) * hop + 0.05 * settle;
         out.parts[name] = {
-          offset: [dir[0] * slide, Math.max(0, h) + 0.01 * settle, dir[2] * slide],
-          quat: quatMul(
-            quatAxisAngle([dir[2], 0, -dir[0]], (-slide / r) * 1.2),
-            quatAxisAngle([1, 0, 0], 0.25 * hop * ((i % 2) * 2 - 1)),
-          ),
+          offset: [0, Math.max(0, h), 0],
+          quat: quatAxisAngle(axis, -rock),
         };
       });
     },

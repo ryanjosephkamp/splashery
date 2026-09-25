@@ -200,7 +200,7 @@ export const TOY_SOUNDS = {
   marble: { voice: "glass", f: 2350, decay: 0.6, bright: 0.7 },
   "hockey-puck": [
     { voice: "slap", f: 1700, vol: 0.9 },
-    { voice: "scrape", at: 0.08, f: 3000, rate: 40, decay: 0.8, vol: 0.5 },
+    { voice: "scrape", at: 0.08, f: 3000, rate: 40, decay: 1.9, vol: 0.5 },
   ],
   shuttlecock: [
     { voice: "pock", f: 1500, bright: 0.9, decay: 0.7, vol: 0.7 },
@@ -486,7 +486,8 @@ export const TOY_SOUNDS = {
   "rubber-duck": { voice: "quack", f: 250, n: 2 },
   "spinning-top": { voice: "hum", f: 300, to: 1.2, bright: 0.4, decay: 2 },
   dice: { voice: "clatter", f: 1900, n: 8, kind: "wood", decay: 1.2 },
-  "newtons-cradle": { voice: "clack", notes: "C7 - C7 - C7 - C7", step: 0.2, decay: 1.4 },
+  // The lift is a soft tick; each strike clacks as it lands (cues from the recipe).
+  "newtons-cradle": { voice: "clack", f: 5200, decay: 0.3, vol: 0.25 },
   "teddy-bear": { voice: "squeak", f: 1000, to: 1.2, decay: 2.2, vol: 0.7 },
   "yo-yo": [
     { voice: "whoosh", f: 800, to: 3, decay: 0.5 },
@@ -713,7 +714,14 @@ export const TOY_SOUNDS = {
   },
   drum: { voice: "snare", notes: "C4 C4 C4 C4 C4 C4 C4 C4 C4 C4 C4 C4", step: 0.1, bright: 0.6 },
   // The mallet strikes the eight bars left to right, 0.32 s apart.
-  xylophone: { voice: "bar", notes: "C5 D5 E5 F5 G5 A5 B5 C6", step: 0.3214, at: 0.3 },
+  // A tap on one bar plays its note as the mallet lands (pickAt).
+  xylophone: {
+    voice: "bar",
+    notes: "C5 D5 E5 F5 G5 A5 B5 C6",
+    step: 0.3214,
+    at: 0.3,
+    pickAt: 0.12,
+  },
 
   // ---- Vehicles ---------------------------------------------------------------------
   rocket: [
