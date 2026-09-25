@@ -10,10 +10,10 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 283 toys. 141 have a tap action today; the other 142 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 138.
-- **more** (has an effect; make it clearer or more dramatic): 3.
-- **new** (needs its own effect): 142.
+- 283 toys. 142 have a tap action today; the other 141 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 140.
+- **more** (has an effect; make it clearer or more dramatic): 2.
+- **new** (needs its own effect): 141.
 - Visual fixes: 0 open, 28 done. Touch or drag interaction asked for: 4.
 
 ## By phase
@@ -27,12 +27,12 @@ Proposals below are suggestions; the owner may change them.
   fly, May beetle, Millipede, Carder bumblebee, Raspberry, Blackberry, Blueberry, Grape, Cinnamon
   star cookie, Tomatoes, Mandeltorus, Basket, Real rubber duck, Garden gnome, Wooden elephant,
   Marble bust, Ukulele, Alarm clock, Vintage camera, Boombox, Real croissant, Carrot cake,
-  Pomegranate, Lantern, Cat statue, Horse statue, American football, Rugby ball, Shuttlecock, Flying
-  disc, Bacteriophage, Neuron, DNA, Amethyst geode, Crystal ball, Eye, Cherry blossom, Ice cream,
-  Gummy bear, Coffee, Rubber duck, Kite, Chess set, Lorenz attractor, Klein bottle, Wizard's orb,
-  Jellyfish, Pufferfish, Snail, Octopus, Fireworks, Decorated tree, Diya, Acoustic guitar, Snare
-  drum, Xylophone, Hot-air balloon, Bus, Jet airliner, Sailboat, Submarine, Bicycle, Big Ben,
-  Castle, Pagoda, Windmill.
+  Pomegranate, Lantern, Cat statue, Horse statue, American football, Rugby ball, Hockey puck,
+  Shuttlecock, Flying disc, Bacteriophage, Neuron, DNA, Amethyst geode, Crystal ball, Eye, Cherry
+  blossom, Ice cream, Gummy bear, Coffee, Rubber duck, Newton's cradle, Kite, Chess set, Lorenz
+  attractor, Klein bottle, Wizard's orb, Jellyfish, Pufferfish, Snail, Octopus, Fireworks, Decorated
+  tree, Diya, Acoustic guitar, Snare drum, Xylophone, Hot-air balloon, Bus, Jet airliner, Sailboat,
+  Submarine, Bicycle, Big Ben, Castle, Pagoda, Windmill.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -53,9 +53,9 @@ Proposals below are suggestions; the owner may change them.
 - **E6, new effects: balls and the rest.** Basketball, Soccer ball, Tennis ball, Baseball, Softball,
   Beach ball, Golf ball, Volleyball, Water polo ball, Ping-pong ball, Cricket ball, Bowling ball,
   Pool ball, Pickleball, Dodgeball, Medicine ball, Lacrosse ball, Squash ball, Bouncy ball, Marble,
-  Hockey puck, Heraldic shield, Crown, School of fish, Nautilus, Sea urchin, Frog, Snowman, Eiffel
-  Tower, Washington Monument, Pyramids of Giza, Twisting supertall, Statue of Liberty, White House,
-  Leaning Tower of Pisa, Colosseum, Parthenon, Stonehenge, Taj Mahal
+  Heraldic shield, Crown, School of fish, Nautilus, Sea urchin, Frog, Snowman, Eiffel Tower,
+  Washington Monument, Pyramids of Giza, Twisting supertall, Statue of Liberty, White House, Leaning
+  Tower of Pisa, Colosseum, Parthenon, Stonehenge, Taj Mahal
 - **F, touch and drag interaction.** Gummy bear, Building bricks, Newton's cradle, Puzzle cube.
 
 ## Scans (30)
@@ -143,8 +143,9 @@ Proposals below are suggestions; the owner may change them.
 - **Tomatoes** (`tomatoes`). Now: tap: Roll (rig). Plan: keep.
   - Owner: Fantastic, extremely realistic. Maybe they move around.
   - Effect: The tomatoes roll and jostle each other, then settle.
-  - Improved: E1b: each tomato is its own solid piece (the plate left still): they hop in turn, roll
-    a little round the plate and settle (2.6 s).
+  - Improved: E1c: the plate gives a little shake and a wave of small hops runs round it: four
+    groups of tomatoes land on the four thuds, rocking outward and settling with a wobble. The big
+    ones rock instead of hopping, so no unscanned underside shows (2.6 s).
   - Sound: Soft thuds rolling on a table.
 - **Mandeltorus** (`mandeltorus`). Now: tap: Counter-spin (rig). Plan: keep.
   - Owner: Some parts should rotate clockwise and others counterclockwise.
@@ -176,8 +177,11 @@ Proposals below are suggestions; the owner may change them.
     filtered to each splat's size, so the carving reads. The model stays (it is the best CC0
     elephant found).
   - Effect: Trunk lifts and it rocks on its wooden feet.
-  - Improved: E1b: the whole trunk is one solid carved piece, pinned at the face like a wooden toy:
-    it swings up to trumpet with a few toots while the elephant rocks on its feet (2.6 s).
+  - Improved: E1c: the scan's trunk is fused to the forehead, so it could only tear; it is replaced
+    by a kit-built trunk traced from the scan (five segments on ball joints, in the carving's
+    colours). A tap uncurls it straight up to trumpet with a few toots, and it curls back down while
+    the elephant rocks on its feet (2.6 s). A small kit patch covers the forehead where the tip
+    rested.
   - Sound: Wooden knock and a toy trumpet.
 - **Marble bust** (`marble-bust`). Now: tap: Speak (rig). Plan: keep.
   - Owner: Looks good. Maybe the face moves and says something.
@@ -242,16 +246,19 @@ Proposals below are suggestions; the owner may change them.
 - **Cat statue** (`cat-statue`). Now: tap: Look around (rig). Plan: keep.
   - Owner: Like the bust: the cat moves a bit.
   - Effect: The head turns and the tail swishes once.
-  - Improved: E1b: the head turns on its neck under a red collar with a brass bell (a hard cut, so
-    nothing bends), looks at you with a small nod, and the tail tip swishes on the ground (2.6 s).
+  - Improved: E1c: the head is cut on the neck's own slanted plane, measured from the scan, under a
+    red collar that follows the neck all round (no longer sunk into the stone). A tap turns the head
+    right round to look at you, tilts it one way as it mews and the other, and turns it back (2.6
+    s). The tail stays still: it lies on unscanned ground.
   - Sound: Stone grind and a tiny mew.
 - **Horse statue** (`horse-statue`). Now: tap: Rear up (rig). Plan: keep.
   - Owner: Work like the other statues.
   - Fixed: C1: baked soft light (with the model's normal and occlusion maps) gives it shading, so
     the marble no longer reads as flat white.
   - Effect: Rears up on its hind legs, then settles.
-  - Improved: E1b: the whole horse above the base rears as one solid piece about its hind hooves,
-    while the forelegs (cut at the knees) paw the air (2.6 s).
+  - Improved: E1c: no more foreleg cuts (the hooves looked broken off). The whole horse above the
+    base rears as one solid piece about its hind hooves, prances at the top and lands with a small
+    bounce (2.6 s).
   - Sound: Stone grind and a whinny-like whistle.
 
 ## Shapes (4)
@@ -376,10 +383,12 @@ Proposals below are suggestions; the owner may change them.
   - Owner: Super neat.
   - Effect: Rolls around a little circle; the swirl inside turns.
   - Sound: Glassy clink.
-- **Hockey puck** (`hockey-puck`). Now: hops. Plan: new effect (E6).
+- **Hockey puck** (`hockey-puck`). Now: tap: Slap shot. Plan: keep.
   - Owner: Underwhelming.
   - Fixed: C1: the same faint rim of light, and a little sheen on the rubber.
   - Effect: Slides and spins flat, throwing up ice sparkle.
+  - Improved: E1c: a slap shot. Sparkling ice chips spray from where the stick hit, and the puck
+    glides flat across the ice, spinning fast, round a wide loop and back to its spot (3 s).
   - Sound: Stick slap and ice scrape.
 - **Shuttlecock** (`shuttlecock`). Now: tap: Hit it. Plan: keep.
   - Owner: Cool.
@@ -485,7 +494,7 @@ Proposals below are suggestions; the owner may change them.
     page lines splats can show.
   - Sound: Page flip.
 - **Laptop** (`laptop`). Now: tap: Open or close. Plan: keep.
-  - Owner: Pretty awesome; keep it the same.
+  - Owner: Pretty awesome; keep it the same. After E1b: basically perfect, lock it in.
   - Fixed: E1b: a clean case (no speckle) and real keycaps with letters. Tap a key (or type on your
     own keyboard) and it goes down and types on the screen; tap or drag on the trackpad to move the
     pointer and click.
@@ -958,10 +967,13 @@ Proposals below are suggestions; the owner may change them.
 - **Dice** (`dice`). Now: tap: Roll. Plan: keep.
   - Owner: Maybe my favourite; rolls feel random like real dice. Keep it.
   - Sound: Dice rattle and clatter.
-- **Newton's cradle** (`newtons-cradle`). Now: tap: Swing harder. Plan: more.
+- **Newton's cradle** (`newtons-cradle`). Now: tap: Lift and let go. Plan: keep.
   - Owner: Tapping has no noticeable effect. Make it more interactive.
   - Effect: Tap lifts and drops an end ball hard so the clacks are obvious; later, drag a ball back
     and let go.
+  - Improved: E1c: a tap lifts the end ball and lets it go. Each strike sends the far ball out,
+    loses a little height and clacks as it lands, the middle balls twitch with the knock, and it
+    dies away over about 9 s. It no longer swings on its own.
   - Sound: Crisp steel clacks.
   - Touch or drag interaction (phase F).
 - **Teddy bear** (`teddy-bear`). Now: tap: Wave hello. Plan: keep.
@@ -1009,7 +1021,11 @@ Proposals below are suggestions; the owner may change them.
   - Improved: E1b: rebuilt as a kit toy (walnut board, 32 turned pieces). A tap plays Morphy's Opera
     Game (Paris, 1858) move by move: each piece slides to its square, knights jump, captured pieces
     go to trays beside the board, each move clacks, and at 17.Rd8# the black king tips over. Tap
-    again and the pieces glide home.
+    again and the pieces glide home. E1c: plays any game too. Open a PGN file or paste a game (all
+    the rules: castling, en passant, promotion, disambiguation; a set-up position from FEN; a clear
+    message for a bad file), set the move speed, or go back to the Opera Game (the default). A
+    promoting pawn sinks away and a new queen rises; the loser's king tips over after mate or
+    resignation.
   - Sound: Wooden piece clacks.
 
 ## Maths (11)
@@ -1214,7 +1230,10 @@ Proposals below are suggestions; the owner may change them.
 - **Xylophone** (`xylophone`). Now: tap: Play a scale. Plan: keep.
   - Owner: Incredible; basically perfect.
   - Improved: D: a tap on one bar lifts the mallet over that bar, strikes it and plays its note; a
-    tap anywhere else plays the scale. Each bar dips as the mallet hits it.
+    tap anywhere else plays the scale. Each bar dips as the mallet hits it. E1c: any tap over the
+    row of bars strikes the nearest bar (easy to hit on a phone). The mallet swings over from
+    wherever it is, lands 0.12 s after the tap with the bar's note, bounces off, and the bar jumps.
+    A tap off the bars still plays the scale.
   - Sound: The scale it already plays, as mallet tones.
 
 ## Vehicles (14)
