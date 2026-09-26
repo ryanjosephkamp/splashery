@@ -10,7 +10,7 @@ ground rules are in [CLAUDE.md](../CLAUDE.md).
   #19), D (PR #20), E1 (PR #21), E1b (PRs #22–#24), E1c (PRs #26–#28), E2 (PRs #29–#31) and E3 (PR
   #32) are merged. The owner approved everything from E3 ("everything from E3 looks good and is
   approved").
-- **Phase E4** is one PR from `claude/sweet-babbage-gw9z9r` (PR E4_PR): new tap effects for all 28
+- **Phase E4** is one PR from `claude/sweet-babbage-gw9z9r` (PR #33): new tap effects for all 28
   nature and weather toys (TOY-PLAN.md has each one's `improved` entry), sounds re-timed to them,
   and clips of all 28 (30 clips: the saguaro's second tap and the pebbles' Cairn style too) on the
   Effect review page (the approved E3 clips were removed from the page; the owner's marks on them
