@@ -3,17 +3,59 @@
 The current state and the next phase. The session that finishes a phase updates this file. The
 ground rules are in [CLAUDE.md](../CLAUDE.md).
 
-## Current state (2026-09-25, after Phase E3; next: Phase E4)
+## Current state (2026-09-26, after Phase E4; next: Phase E5)
 
 - Phase A is done: splashery PR #13 and homepage PR #33 in
   `ryanjosephkamp/ryanjosephkamp.github.io`, both merged. Phases B (PR #17), C1 (PR #18), C2 (PR
-  #19), D (PR #20), E1 (PR #21), E1b (PRs #22–#24), E1c (PRs #26–#28) and E2 (PRs #29–#31) are
-  merged. The owner approved everything from E2 ("Everything from E2 is approved and looks good!").
-- **Phase E3** is one PR from `claude/trusting-cerf-d1rtbs` (PR #32): new tap effects for all 26
-  tiny, anatomy and maths toys (TOY-PLAN.md has each one's `improved` entry), sounds re-timed to
-  them, and clips of all 26 on the Effect review page (the older, approved clips were removed from
-  the page; the owner's marks on them stay in its database). Check it is merged, and read the
-  owner's verdicts (`e3-<toy id>`), before starting E4. **Next: Phase E4** (below).
+  #19), D (PR #20), E1 (PR #21), E1b (PRs #22–#24), E1c (PRs #26–#28), E2 (PRs #29–#31) and E3 (PR
+  #32) are merged. The owner approved everything from E3 ("everything from E3 looks good and is
+  approved").
+- **Phase E4** is one PR from `claude/sweet-babbage-gw9z9r` (PR E4_PR): new tap effects for all 28
+  nature and weather toys (TOY-PLAN.md has each one's `improved` entry), sounds re-timed to them,
+  and clips of all 28 (30 clips: the saguaro's second tap and the pebbles' Cairn style too) on the
+  Effect review page (the approved E3 clips were removed from the page; the owner's marks on them
+  stay in its database). Check it is merged, and read the owner's verdicts (`e4-<toy id>`), before
+  starting E5. **Next: Phase E5** (below).
+- **Effects (E4).** Trees, flowers and plants in `src/packs/nature.js`, weather in
+  `src/packs/elements.js`. In short: the oak's leaves flutter down; the maple's whirl round the
+  trunk in a gust; the pine shakes off its snow (a snowless tree gets a quick shower first); the
+  palm drops its coconuts, which bounce and roll; the bonsai grows a branch that scissors snip; a
+  breeze runs through the willow; the sunflower turns to a sun and opens; the rose opens and drops a
+  petal; the tulips open wide; the daisy spins like a pinwheel and flings petals; the lotus rises on
+  its stalk and opens; the toadstool puffs glowing spores; two fiddleheads unroll on the fern; the
+  saguaro's spines shoot out, and its second tap slides out a wedge to show the wet flesh (the
+  cactus scan blooms instead); coral polyps open and six fish dart out; the pinecone opens and its
+  winged seeds spin down; the acorns' caps pop off and sprouts come up; the succulent opens and
+  flowers; bamboo shoots grow a section at a time; the pebbles tumble and stack a cairn; fish come
+  to nibble the kelp; the lava lamp heats up; the ice swan melts and refreezes; the tornado spins up
+  and pulls debris; the rainbow redraws itself; the iceberg calves; the waterfall surges; the wave
+  breaks. The weather effects were built by a helper session in a worktree and merged.
+- **Loose pieces (E4).** Leaves, petals, coconuts, seeds, fish, stones and shoot sections are
+  tokens, each on its own path. Helpers at the top of nature.js: `flutterDown` (a leaf swinging down
+  like a pendulum and landing flat), `swirlDown` (carried round the trunk in a widening spiral),
+  `planFalls` and `leafFall` (when each leaf lets go, lands, withers and regrows), `canopySpots`
+  (where loose leaves hang on a `domeClumps` canopy), `tokenLeaves` (oak and maple leaf shapes as
+  tokens), `moundTop` (the height of a `grassMound` at a radius, so things land on it), `crossing`
+  (a sound cue when the effect passes a moment), `slerpQ`, `frameQuat`. A chain of tokens bends at
+  its joints (the fern's young fronds: each joint turns everything beyond it). A tree's crown is one
+  part (`crown`, about `SHAKE_AXIS`) that rocks while its trunk's roots stay put.
+- **Built where they end (E4).** Pieces that travel are built where they are seen at their fullest
+  and offset back at rest, for the draw order and the fit: the bamboo's sections are built grown and
+  rest as tips on the ground, the tornado's debris is built in front of the funnel, the fern's young
+  fronds are built open and rest rolled up. A hidden piece can rest folded away on a channel held at
+  1 (the lotus's stalk, the coral's polyps). Recipes that need state between frames keep it with
+  `mem(c)` (the lava lamp's extra clock, so the blobs never jump when the effect ends).
+- **Tests (E4).** `tests/unit.spec.mjs` plays every E4 tap through frame by frame and checks that
+  its last moment shows the same things in the same places as the rest pose (so nothing jumps at the
+  end), and that every channel carrying morph splats is back at 0 at rest (the willow and kelp sway
+  by a morph all the time; the lotus and coral rest folded).
+- **Sounds (E4).** 28 specs re-timed in `src/toy-sounds.js` (all pass `tools/sound-check.mjs`);
+  later hits are cues from drive(): the palm's coconut bonks, the daisy's plucks, the bamboo's
+  knocks, the pebbles' clacks, the pine's snow, the saguaro's squelch and drips, the lotus's drop,
+  the iceberg's splash. The Splashery Sound Board page was rebuilt (its builder is not in the repo:
+  it inlines `src/voices.js` with `export` removed, `TOY_SOUNDS`, and `TOYS`/`CATS` from
+  `src/toys.js` with each toy's plan sound line, into the page's own head and UI script).
+- 227 toys are keep, 2 more, 55 new (284 on the shelf, with the protein toy).
 - **E3 review (2026-09-26).** The owner marked 23 of the 26 E3 clips good (verdicts `e3-<id>` on the
   Effect review page). The three notes were fixed in the same PR: the Möbius strip has a Rider
   option (a blue race car by default, red on the Ocean colours; a rolling beach ball; a duck on a
@@ -440,6 +482,27 @@ Known issues carried forward:
   - Scenes saved with the submarine's old `scope=0` load with the periscope up.
   - The rubber duck and the guitar still need their own sounds (Phase D): a quack and real music.
     (Done in D.)
+- New in E4:
+  - The owner has not yet seen the E4 effects; the clips on the Effect review page are the check.
+    They were checked as clips and larger stills in headless Chromium (SwiftShader, WebGL2 only),
+    not on a phone, and the sounds by level and length only.
+  - The oak's and maple's loose leaves are a little paler than the crown, so they show as sunlit
+    leaves at rest. Fallen leaves wither and fresh ones open by size (small pieces, no speckle).
+  - The pine's snow falls straight down in patches (a morph), without tumbling. A snowless pine
+    shows a quick shower first, so its shake starts about 1.6 s after the tap.
+  - Only the daisy's big head spins (it faces the camera, so it turns about the view and keeps the
+    draw order); the small heads bob. The sunflower turns about two thirds of the way to its sun.
+  - The saguaro's taps take turns by the tap count, so after a reload the first tap is the spines.
+  - The pebbles' scattered stones lie a little flatter than in the heap; in the Cairn style the
+    fallen stones may touch the ones that stay.
+  - The fern's young leaflets appear as each piece of the frond opens (they grow by size).
+  - Weather (from the helper's notes): the tornado's funnel top can show a lighter, boxy patch
+    against the cloud (already so at rest); the wave's thrown lip thins a little near its tip and
+    goes by shrinking for about 0.1 s under the white water, and the sea's ripple and the foam
+    twinkle pause for about 4 s while it breaks; the iceberg's effect is modest at 320 px and its
+    splash drops show through the sea for a moment as they fall back; the lava lamp is tall and
+    narrow, so its effect is small at 320 px; the waterfall's front glow is subtle on the already
+    white curtain; the rainbow's sparkle burst is dots.
 - New in E3:
   - The owner has not yet seen the E3 effects; the clips on the Effect review page are the check.
     They were checked as clips and larger stills in headless Chromium (SwiftShader), not on a phone.
@@ -569,8 +632,9 @@ If the plan JSON changes, the page can be republished from it (`node tools/toy-p
 | E1c    | Done: fixes from the owner's E1b review (a phone panel bug, chess from PGN files, elephant, horse, cat, hockey puck, Newton's cradle, xylophone, tomatoes). | splashery |
 | E2     | Done: new tap effects for space, atoms and gems (32 toys), idle motion for the Sun, rings, aurora and galaxy, the draw-order lessons.                       | splashery |
 | E3     | Done: new tap effects for tiny things, anatomy and maths (26 toys), and channel kinds (morph, band, fade, skin) for soft shapes and light fronts.           | splashery |
-| **E4** | New tap effects for nature and weather (28 toys); the fourth of six waves (see TOY-PLAN.md).                                                                | splashery |
-| E5–E6  | New tap effects for food, then balls and the rest, each with its own sound (see TOY-PLAN.md).                                                               | splashery |
+| E4     | Done: new tap effects for nature and weather (28 toys): falling leaves, petals and coconuts as loose pieces, jointed fronds, a breaking wave.               | splashery |
+| **E5** | New tap effects for food (17 new toys, 10 keep); the fifth of six waves (see TOY-PLAN.md).                                                                  | splashery |
+| E6     | New tap effects for balls and the rest, each with its own sound (see TOY-PLAN.md).                                                                          | splashery |
 | F      | Touch and drag interaction: a solvable puzzle cube, a chess set that plays a real game, a stretchy gummy bear, a draggable Newton's cradle, bricks.         | splashery |
 | G      | AI image-to-3D trial with `HF_TOKEN`.                                                                                                                       | splashery |
 | H      | Later: the gallery, multi-toy scenes, a liquid pour, the draw-order fix, more scans, more instruments, and the final homepage embed(s).                     | both      |
@@ -591,31 +655,32 @@ What the owner asked for across the board (2026-09-23):
 - Stay respectful: nothing destructive or disrespectful on the White House or the Washington
   Monument, and no fighting or gore (the Colosseum gets a chariot race, not gladiators).
 
-## Phase E4 in detail: nature and weather
+## Phase E5 in detail: food
 
-Before starting, check that PR #32 (E3) is merged, check the owner's marks (see above) for any later
+Before starting, check that the E4 PR is merged, check the owner's marks (see above) for any later
 change, and read the owner's verdicts on the Effect review page (the `verdicts` collection, one doc
-per clip: `e3-<toy id>`) for E3 fixes to do first. Follow the Effect quality rules in CLAUDE.md, the
+per clip: `e4-<toy id>`) for E4 fixes to do first. Follow the Effect quality rules in CLAUDE.md, the
 draw-order lessons and the channel kinds in docs/PACKS.md (6 and 7b), and publish clips of every new
 effect on the Effect review page.
 
-1. **Toys (28).** Oak tree, pine tree, palm tree, maple tree, bonsai, weeping willow, sunflower,
-   rose, tulips, daisies, lotus, toadstool, fern, saguaro cactus, coral reef, pinecone, acorns,
-   succulent, bamboo, pebbles, kelp, lava lamp, ice swan, tornado, rainbow, iceberg, waterfall,
-   ocean wave. Build each planned effect (TOY-PLAN.md, wave E4) as `controls`, `action` and
-   `drive()` in its recipe. Plants that open, close, sway or droop are natural morphs; leaves,
-   petals, acorns and pebbles that fall or scatter are tokens or parts (separate things move
-   separately); light and water fronts are `band` and `fade`.
-2. **Twins.** The saguaro must act and sound different from the cactus scan; the pine tree shakes
-   off a dusting of snow (a settled decision).
-3. **Sounds.** Re-time each toy's sound to its new effect with `tools/sound-check.mjs` (under five
-   seconds; `out.cues` for later sounds), and rebuild the sound board page if any change.
-4. Check each effect with `tools/effect-clip.mjs --strip=8`, look at a larger still of its fullest
-   moment (`tools/effect-strip.mjs --size=400 --times=…`), re-render thumbnails only where the
-   resting look changes, mark each finished toy `"v": "keep"` with an `improved` entry and
-   regenerate TOY-PLAN.md.
+1. **Toys (17 new).** Watermelon, cupcake, lollipop, candy cane, macarons, pretzel, croissant,
+   sushi, taco, apple, bananas, orange, kiwi, pineapple, cherries, grapes, avocado. Build each
+   planned effect (TOY-PLAN.md, wave E5) as `controls`, `action` and `drive()` in its recipe
+   (`src/packs/food.js`). The 10 food toys already marked keep (ice cream, birthday cake, popcorn,
+   jelly, pancakes, gummy bear, pizza, burger, boiled egg, coffee) stay as they are.
+2. **Twins.** The croissant must act and sound different from the real croissant scan, and the
+   grapes from the grape scan (whose peel is the bar).
+3. **Food rules.** Things that are cut, peeled or bitten come apart as real pieces with their
+   insides showing (built as cut faces, like the E1 croissant and pomegranate add-ons), and go back
+   together or regrow. Separate things move separately (each cherry, each grape, each macaron).
+4. **Sounds.** Re-time each toy's sound to its new effect with `tools/sound-check.mjs` (under five
+   seconds; `out.cues` for later sounds), and rebuild the sound board page.
+5. Check each effect with `tools/effect-clip.mjs --strip=8`, look at a larger still of its fullest
+   moment, re-render thumbnails only where the resting look changes, mark each finished toy
+   `"v": "keep"` with an `improved` entry, regenerate TOY-PLAN.md, and add the wave to the tap test
+   in `tests/unit.spec.mjs` (it checks that each effect ends where the toy rests).
 
-**Done when:** every E4 toy has its own tap effect (or the PR lists which do not, and why), all
+**Done when:** every E5 toy has its own tap effect (or the PR lists which do not, and why), all
 tests pass and prettier is clean.
 
 ## Phases C–H (outline)
@@ -624,7 +689,7 @@ tests pass and prettier is clean.
 - **C2, clearer effects.** Done (see Current state). `tools/effect-strip.mjs` is the tool for
   checking any new tap effect by eye.
 - **D, effects and sound engine.** Done (see Current state).
-- **E1–E6, new effects.** E1, E2 and E3 are done. One wave per session (about 30–45 toys each),
+- **E1–E6, new effects.** E1, E2, E3 and E4 are done. One wave per session (about 30–45 toys each),
   following TOY-PLAN.md. Run `check-packs`, a contact sheet and `make-thumbs` for touched packs as
   usual. Thumbnails take about 18 s per toy under SwiftShader; render only the toys you changed.
 - **F, touch and drag interaction.** Puzzle cube: 26 cubies as parts (the part limit is 48), cube
