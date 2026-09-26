@@ -454,11 +454,12 @@
       "sound": "Thunder rumble."
     },
     "lava-lamp": {
-      "v": "new",
+      "v": "keep",
       "fixed": "C1: the glass now tapers into the cap and sits in rolled metal collars top and bottom.",
       "owner": "Moves really well. On tap: blobs move faster, light up or change colours.",
       "effect": "Blobs speed up, glow and shift colour for a few seconds.",
-      "sound": "Low bubbling blorp."
+      "sound": "Low bubbling blorp.",
+      "improved": "E4: a tap heats the lamp: the wax blobs speed up to about three and a half times, smoothly with no jump, the wax glows and shifts from orange through magenta to gold and the liquid brightens, then it all eases back (about 4.5 s). The glow also shows with motion off."
     },
     "snow-globe": {
       "v": "keep",
@@ -471,10 +472,11 @@
       "sound": "Deep rumble and boom."
     },
     "ice-statue": {
-      "v": "new",
+      "v": "keep",
       "owner": "Let the little white specks move. The swan could melt or break apart.",
       "effect": "Specks drift; tap melts the swan into drips, then it refreezes.",
-      "sound": "Ice crackle and drips."
+      "sound": "Ice crackle and drips.",
+      "improved": "E4: a tap melts the ice swan: it slumps, drips fall and a smooth meltwater puddle spreads from under the pedestal; then it refreezes and a frosty white light sweeps up it from the base to the beak (about 5.5 s). Frost specks drift up round it while it is cold, and the Temperature slider still works."
     },
     "candle": {
       "v": "keep",
@@ -482,31 +484,36 @@
       "sound": "Soft blow and a match strike."
     },
     "tornado": {
-      "v": "new",
+      "v": "keep",
       "owner": "Becomes bigger or more intense.",
       "effect": "Spins up bigger and faster, pulling debris, then weakens.",
-      "sound": "Rising roar of wind."
+      "sound": "Rising roar of wind.",
+      "improved": "E4: a tap spins the tornado up: the funnel widens (most at the foot), whirls round faster and kicks up dust, and the planks, clods and leaves on the field lift one by one, spiral up round the funnel and fall back where they lay as it weakens (about 5 s). Power still works."
     },
     "rainbow": {
-      "v": "new",
+      "v": "keep",
       "owner": "Pick an effect.",
       "effect": "The arc draws itself colour by colour and sparkles at the ends.",
-      "sound": "Rising harp glissando."
+      "sound": "Rising harp glissando.",
+      "improved": "E4: a tap wipes the arc away in a blink, then redraws it colour by colour, red first, each band sweeping left to right behind a bright pen, and sparkles burst from both clouds and settle (about 5 s)."
     },
     "iceberg": {
-      "v": "new",
+      "v": "keep",
       "effect": "A chunk calves off and splashes; the berg bobs.",
-      "sound": "Crack and splash."
+      "sound": "Crack and splash.",
+      "improved": "E4: a tap cracks a chunk off the berg's front shoulder, showing pale fresh broken faces; it tips into the sea with a crown of spray and a ring of ripples, floats and bobs while the berg bobs and rocks, then melts away as one piece as the berg's chunk grows back in place (about 6 s)."
     },
     "waterfall": {
-      "v": "new",
+      "v": "keep",
       "effect": "A surge: the flow doubles and mist billows.",
-      "sound": "Rushing water swell."
+      "sound": "Rushing water swell.",
+      "improved": "E4: a tap sends a surge: a white-water front runs along the river and over the lip, a wider, thicker sheet of white water unrolls down the curtain with streaks pouring down it, foam spreads over the pool and mist billows up, then it calms (about 5 s)."
     },
     "ocean-wave": {
-      "v": "new",
+      "v": "keep",
       "effect": "The wave curls and breaks into foam.",
-      "sound": "Wave crash."
+      "sound": "Wave crash.",
+      "improved": "E4: a tap breaks the wave: the lip pitches forward and crashes into the flat water in front, turns to white water and falls flat, and clumps of spray burst up and fall back; foam spreads down the face and over the water, then thins away as the lip curls over again from the crest (about 5 s)."
     },
     "geyser": {
       "v": "keep",
@@ -931,22 +938,25 @@
       "improved": "C2: the mist whips round and thins, and a glowing sign rises out of it and fades: a star, a moon or a heart in turn (about 3.5 s)."
     },
     "oak": {
-      "v": "new",
+      "v": "keep",
       "owner": "Shake it and leaves come out.",
       "effect": "Shakes and leaves flutter down.",
-      "sound": "Leafy rustle."
+      "sound": "Leafy rustle.",
+      "improved": "E4: a tap shakes the tree: the crown rocks on its trunk and forty leaves come loose one after another, each fluttering down on its own swinging path to lie on the grass; then they wither and fresh leaves open in their places (about 6.5 s). In winter a few dead brown leaves still cling to the twigs, and those fall."
     },
     "pine": {
-      "v": "new",
+      "v": "keep",
       "owner": "Christmas lights and a star appear.",
       "effect": "Shakes off a dusting of snow (approved instead of lights, which the decorated tree already has).",
-      "sound": "Soft jingle."
+      "sound": "Soft jingle.",
+      "improved": "E4: a tap shakes off a dusting of snow: the tree rocks and the snow on its boughs drops a pair of tiers at a time, from the top down, in a puff of powder, lies on the ground and melts (about 5 s). On a snowless day a quick shower dusts the boughs first; with Snow on, fresh snow settles on them again afterwards."
     },
     "palm": {
-      "v": "new",
+      "v": "keep",
       "owner": "Tap it and the coconuts fall.",
       "effect": "The coconuts fall and bounce, then regrow.",
-      "sound": "Two coconut bonks."
+      "sound": "Two coconut bonks.",
+      "improved": "E4: a tap shakes the crown and the five coconuts (now hanging in a bunch you can see) drop one after another, thump into the sand, bounce twice and roll to a stop, each with its own bonk; new coconuts swell in the crown while the fallen ones are carried off (about 5.5 s)."
     },
     "cherry-blossom": {
       "v": "keep",
@@ -956,32 +966,37 @@
       "improved": "C2: a new tap action shakes the tree: the petals fall in a heavy flurry, the branches go bare, then it blooms again (about 4.5 s)."
     },
     "maple": {
-      "v": "new",
+      "v": "keep",
       "owner": "Same kind of thing as the cherry blossom.",
       "effect": "Leaves swirl down in a spiral gust (different from the cherry's gentle fall).",
-      "sound": "Crisp autumn rustle."
+      "sound": "Crisp autumn rustle.",
+      "improved": "E4: a tap sends a whirling gust: the crown leans into it and forty leaves are torn off and carried round the tree in a widening spiral, tumbling, before they settle in a ring on the grass (the cherry's petals just drift down); then they wither and fresh leaves open (about 7 s)."
     },
     "bonsai": {
-      "v": "new",
+      "v": "keep",
       "owner": "Maybe shrink or grow.",
       "effect": "Grows a new branch, then the scissors snip it back.",
-      "sound": "Snip."
+      "sound": "Snip.",
+      "improved": "E4: a tap grows a new branch out of the trunk with a pad of leaves on its end; bonsai scissors slide in, open and snip it off at the cut, the piece tips onto the moss and is cleared away, and the stub heals over (about 5 s)."
     },
     "willow": {
-      "v": "new",
+      "v": "keep",
       "owner": "Pick anything.",
       "effect": "The long branches sway in a wave like a breeze passing.",
-      "sound": "Long soft sigh."
+      "sound": "Long soft sigh.",
+      "improved": "E4: a tap sends a breeze across the tree from the left: the hanging strands swing away with it a curtain at a time (they bend, most at their tips), swing back and settle, and the crown leans a little (about 5.5 s). The strands also sway gently at rest."
     },
     "sunflower": {
-      "v": "new",
+      "v": "keep",
       "effect": "The head turns to face the sun and petals open wide.",
-      "sound": "Warm rising tone."
+      "sound": "Warm rising tone.",
+      "improved": "E4: a tap brings out the sun at the top left: the head turns up to face it and all 48 ray petals spread wide open, each turning about its root; then the sun goes in, the head turns back and the petals lift again (about 5.5 s). The head nods gently at rest."
     },
     "rose": {
-      "v": "new",
+      "v": "keep",
       "effect": "Blooms open further, a petal drops.",
-      "sound": "Soft harp note."
+      "sound": "Soft harp note.",
+      "improved": "E4: a tap opens the bloom further (every petal turns out about its root, the outer ones most) and the outer petal facing you comes loose and flutters down to lie on the grass; the bloom closes up again, the fallen petal withers and a new one fills its place (about 5.5 s)."
     },
     "dandelion": {
       "v": "keep",
@@ -989,77 +1004,90 @@
       "sound": "Puff of breath."
     },
     "tulip": {
-      "v": "new",
+      "v": "keep",
       "effect": "Petals open wide to the sun, then close.",
-      "sound": "Gentle pluck."
+      "sound": "Gentle pluck.",
+      "improved": "E4: a tap opens the three tulips wide to the sun one after another: each of the eighteen petals turns out about its root and shows the dark stamens and the pale pistil inside; then they close up again (about 5 s)."
     },
     "daisy": {
-      "v": "new",
+      "v": "keep",
       "effect": "Petals spin like a pinwheel (loves me, loves me not).",
-      "sound": "Tick-tick petal plucks."
+      "sound": "Tick-tick petal plucks.",
+      "improved": "E4: a tap spins the big head like a pinwheel, twice round (loves me, loves me not), and it flings off eight petals one after another, a tick each, which flutter down to the grass while the small heads bob; it slows to a stop, the fallen petals wither and new ones fill the gaps (about 5.5 s)."
     },
     "lotus": {
-      "v": "new",
+      "v": "keep",
       "effect": "The flower rises and opens on the water with ripples.",
-      "sound": "Water drop and a bell."
+      "sound": "Water drop and a bell.",
+      "improved": "E4: a tap folds the flower into a bud, lifts it out of the water on its stalk with a ring of light spreading over the water, and opens it wide up in the air, the outer petals first; then it sinks back onto its pad, open, with a second ring (about 6.5 s)."
     },
     "mushroom": {
-      "v": "new",
+      "v": "keep",
       "effect": "Puffs a cloud of glowing spores.",
-      "sound": "Soft puff."
+      "sound": "Soft puff.",
+      "improved": "E4: a tap bops the big cap: it dips and springs back, and a cloud of glowing spores puffs out from the gills and billows up and out, each spore on its own path, fading as it drifts (about 4 s)."
     },
     "fern": {
-      "v": "new",
+      "v": "keep",
       "effect": "The fronds unroll from fiddleheads.",
-      "sound": "Unfurling rustle."
+      "sound": "Unfurling rustle.",
+      "improved": "E4: a tap unrolls the two fiddleheads in the middle into two new fronds: each is a chain of six pieces that straighten one joint after another from the base to the tip, their leaflets spreading as they open; they hold, then roll back up into fiddleheads (about 5.5 s)."
     },
     "saguaro": {
-      "v": "new",
+      "v": "keep",
       "owner": "The spines come out, or it is cut in half to show the cactus water inside.",
       "effect": "The spines shoot out and back; a second tap shows a cut-away with the watery inside.",
-      "sound": "Prickly zing."
+      "sound": "Prickly zing.",
+      "improved": "E4: taps take turns. The first shoots every spine out along its own line and draws them back with a quiver; the next slides a wedge out of the trunk to show the inside, wet pale-green flesh round a ring of woody ribs, dripping, then slides it home (about 4.5 s). It acts and sounds unlike the cactus scan, which blooms."
     },
     "coral": {
-      "v": "new",
+      "v": "keep",
       "owner": "Really cool; pick something.",
       "effect": "Polyps open and little fish dart out and back.",
-      "sound": "Bubbles."
+      "sound": "Bubbles.",
+      "improved": "E4: a tap opens the polyps all over the staghorn coral (tiny tentacled stars spread from their cups) and six little fish dart out of the reef, each on its own path, hover, turn and dart back in; then the polyps close (about 5 s)."
     },
     "pinecone": {
-      "v": "new",
+      "v": "keep",
       "owner": "Good-looking but underwhelming; break apart.",
       "effect": "The scales open wide (as in dry weather) and seeds drift out.",
-      "sound": "Woody creak."
+      "sound": "Woody creak.",
+      "improved": "E4: a tap opens the cone as in dry weather: every scale tips out from its root, and sixteen winged seeds slip out and spin down like little propellers, each on its own path; then the scales close again (about 5.5 s)."
     },
     "acorn": {
-      "v": "new",
+      "v": "keep",
       "owner": "Should do something.",
       "effect": "The caps pop off and a sprout pokes out.",
-      "sound": "Tiny pop."
+      "sound": "Tiny pop.",
+      "improved": "E4: a tap pops the caps off: each flips through the air and lands upside down on the leaf, and a green sprout pokes out of each acorn and opens two tiny oak leaves; then the sprouts draw back in and the caps hop home (about 5 s)."
     },
     "succulent": {
-      "v": "new",
+      "v": "keep",
       "owner": "Pick something.",
       "effect": "The rosette opens and a small flower stalk rises.",
-      "sound": "Soft rising pluck."
+      "sound": "Soft rising pluck.",
+      "improved": "E4: a tap opens the rosette (every leaf tips outward about its root) and a flower stalk rises from the middle and arches over with six little coral bells; then it draws back and the rosette closes (about 5.5 s)."
     },
     "bamboo": {
-      "v": "new",
+      "v": "keep",
       "owner": "Maybe it grows.",
       "effect": "Shoots grow tall very fast, segment by segment.",
-      "sound": "Hollow wooden knocks."
+      "sound": "Hollow wooden knocks.",
+      "improved": "E4: three young shoots sit on the ground. A tap makes them shoot up a section at a time, each new section sliding up out of the one below with a hollow knock, carrying the sheathed tip, and a tuft of leaves opens at the top; later they sink back down (about 5.5 s)."
     },
     "rocks": {
-      "v": "new",
+      "v": "keep",
       "owner": "Should fall or drop.",
       "effect": "The pebbles drop and scatter, then stack into a cairn.",
-      "sound": "Pebble clatter."
+      "sound": "Pebble clatter.",
+      "improved": "E4: a tap tumbles the pebbles: each rolls out over the sand on its own path to lie clear of the others, then five hop one at a time onto a cairn, biggest at the bottom, with a clack each; at the end they all hop back (about 7 s). In the Cairn style the top four topple off and are stacked again."
     },
     "kelp": {
-      "v": "new",
+      "v": "keep",
       "owner": "Maybe fish eat it; pick something.",
       "effect": "Fish swim in and nibble; the kelp sways away.",
-      "sound": "Underwater bubbles."
+      "sound": "Underwater bubbles.",
+      "improved": "E4: a tap brings three little fish swimming in from the left; each noses up to a blade and takes a few nibbles, and the kelp sways away from them, the nearest stalks first, then swings back as the fish swim off to the right (about 5.5 s). The kelp also sways gently at rest."
     },
     "ice-cream": {
       "v": "keep",

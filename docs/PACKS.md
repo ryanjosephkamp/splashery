@@ -427,6 +427,14 @@ form is in CLAUDE.md.
   part's `scale` (the Sun's flare, the star's red giant and shell, the meteor's fireball), or add
   them with `fit: false` when they must be built off to one side and stay inside the view (the
   Möbius strip's riders, built in front of and behind the band for the draw order).
+- **Loose pieces (E4).** Leaves, petals, seeds, coconuts and stones that come off are tokens, each
+  on its own path, and they come back (they regrow, or hop home). `flutterDown` and `swirlDown` in
+  `src/packs/nature.js` give a leaf a swinging or whirling fall that lands flat; `moundTop` gives
+  the ground's height so things land on it. A frond that unrolls is a chain of tokens, each joint
+  turning everything beyond it. Pieces that travel are built where they are seen at their fullest
+  and offset back at rest (the bamboo's sections, the tornado's debris). Every effect must end
+  exactly where the toy rests: the tap test in `tests/unit.spec.mjs` plays each one through and
+  compares its last moment with the rest pose.
 - **Light that plays over a surface.** A layer of splats coloured exactly as the surface is there
   (invisible at rest) with `kind: "pulse"` flashes as `out.glow` runs over it; change the glow's
   colour each frame for rainbow fire (diamond, opal) or keep it one colour for a running light
