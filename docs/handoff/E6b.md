@@ -45,7 +45,12 @@ PR title: "Phase E6b: new tap effects for the landmarks, animals, shield, crown 
 
 ## State
 
-Not started.
+Session: https://claude.ai/code/session_01D75yHccYeL9b2vKuqy5gEB, branch `claude/cool-curie-kmdm6f`.
+
+- 2026-09-26: lane started. The owner's Toy Plan marks for all 18 toys are "yes" with no notes (read
+  2026-09-26), so the plan in `tools/toy-plan.json` stands. Main merged (at #34). Draft PR opened.
+- Next: build the 18 effects pack by pack (landmarks, animals, medieval, holidays), clip each and
+  post the clips to the Effect review page.
 
 ## Notes
 
