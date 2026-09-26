@@ -92,6 +92,7 @@ k.add(shape, {
   part: index,      // from k.part(...), or (c) => index to split a shape between parts
   kind: "flame", params: [a, b] | (c) => [a, b],  // a behaviour (section 6)
   pattern: false,   // keep this shape's own colours under flags and patterns
+  fit: false,       // leave it out of the fit (see "Hidden pieces count in the fit")
 });
 ```
 
@@ -423,7 +424,9 @@ form is in CLAUDE.md.
   them (the quartz points, the opal).
 - **Hidden pieces count in the fit.** Every splat is used to fit the toy into its frame, hidden or
   not, so build an effect's pieces small (inside the toy's resting size) and grow them with their
-  part's `scale` (the Sun's flare, the star's red giant and shell, the meteor's fireball).
+  part's `scale` (the Sun's flare, the star's red giant and shell, the meteor's fireball), or add
+  them with `fit: false` when they must be built off to one side and stay inside the view (the
+  Möbius strip's riders, built in front of and behind the band for the draw order).
 - **Light that plays over a surface.** A layer of splats coloured exactly as the surface is there
   (invisible at rest) with `kind: "pulse"` flashes as `out.glow` runs over it; change the glow's
   colour each frame for rainbow fire (diamond, opal) or keep it one colour for a running light

@@ -427,7 +427,7 @@
       "owner": "Expand and contract like lungs.",
       "effect": "A deep breath in and out.",
       "sound": "Breath in, breath out.",
-      "improved": "E3: a tap takes a deep breath: both lungs fill out sideways and down (the airways stay put), hold, then empty past rest and settle back into gentle breathing (about 5 s)."
+      "improved": "E3: a tap takes a deep breath: both lungs swell out sideways, forwards and down (the airways stay put), hold, then empty past rest and settle back into gentle breathing (about 5 s). After the owner's review the breath is about twice as big."
     },
     "tooth": {
       "v": "keep",
@@ -1318,7 +1318,7 @@
       "owner": "Wow, really neat. Maybe twist a little.",
       "effect": "An ant-like dot walks the single side; the band twists.",
       "sound": "Looping tone.",
-      "improved": "E3: a tap sends an ant on two laps along the middle of the band: after one lap it is underneath (the band has one side), after two it is back on top where it started, while the band twists a little and untwists (about 5 s)."
+      "improved": "E3: a tap sends a rider on two laps along the middle of the band: after one lap it is underneath (the band has one side), after two it is back on top where it started, while the band twists a little and untwists (about 5 s). After the owner's review the rider is a choice (the Rider option): a blue race car (the default) with spinning wheels, a rolling beach ball, a duck riding a bicycle (wheels and pedals turning) or the ant."
     },
     "klein-bottle": {
       "v": "keep",
@@ -1360,7 +1360,7 @@
       "owner": "Like the Mandeltorus: twisting.",
       "effect": "Morphs through powers (bulb shapes twist and bloom).",
       "sound": "Deep morphing tone.",
-      "improved": "E3: a tap wrings the bulb: the top turns one way and the bottom the other as its bulbs bloom outward, then it springs back past rest and swings to a stop like a torsion spring (about 3.8 s). (A twist, as the owner asked, instead of a change of power.)"
+      "improved": "E3: a tap turns the bulb's seven horizontal discs like the dials of a combination lock: neighbours click round in opposite directions, top to bottom, then back the other way, bottom to top; each turns a seventh of a turn (the bulb's own symmetry), so it lands on the same picture (about 4 s). This replaced a twist after the owner's review."
     },
     "sierpinski": {
       "v": "keep",

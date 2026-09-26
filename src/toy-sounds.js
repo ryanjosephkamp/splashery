@@ -710,10 +710,12 @@ export const TOY_SOUNDS = {
     { voice: "hum", at: 1.9, f: 88, to: 0.8, bright: 0.15, decay: 1.8 },
     { voice: "bubbles", at: 0.6, f: 500, n: 4, decay: 1, vol: 0.4 },
   ],
-  // Wrung (fullest at 0.7 s), then it swings back and forth to a stop.
+  // The discs click round like a combination lock, top to bottom (from
+  // 0.75 s), then back, bottom to top (from 2.7 s), over a low hum.
   mandelbulb: [
-    { voice: "drone", f: 80, to: 0.7, bright: 0.6, decay: 0.7 },
-    { voice: "drone", at: 1.33, f: 60, to: 1.2, bright: 0.5, decay: 0.8, vol: 0.6 },
+    { voice: "drone", f: 70, bright: 0.4, decay: 1.6, vol: 0.5 },
+    { voice: "ratchet", at: 0.75, f: 1800, n: 7, rate: 10 },
+    { voice: "ratchet", at: 2.7, f: 1500, n: 7, rate: 10 },
   ],
   sierpinski: {
     on: { voice: "bell", notes: "C6 G5 C5", step: 0.1, decay: 0.5, bright: 0.6 },

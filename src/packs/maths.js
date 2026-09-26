@@ -631,10 +631,19 @@ function mandelbulbShape(rays = 12000) {
   }
   let total = 0;
   const cum = hits.map((h) => (total += h.a));
+  // The splats come in sevens, turned a seventh of a turn apart (the bulb's
+  // own symmetry), so a slice turned by a seventh looks exactly as before.
+  let copy = 7;
+  let last = null;
   return {
     area: total,
     thick: 0.05,
     sample(rand) {
+      if (copy < 7) {
+        const a = copy++ * BULB_STEP;
+        return { ...last, p: rotY(last.p, a), n: rotY(last.n, a) };
+      }
+      copy = 1;
       const x = rand() * total;
       let lo = 0;
       let hi = hits.length - 1;
@@ -650,19 +659,26 @@ function mandelbulbShape(rays = 12000) {
       const rad = Math.sqrt(h.a / Math.PI) * Math.sqrt(rand());
       const ang = rand() * TAU;
       const p = add(h.p, add(mul(t1, rad * Math.cos(ang)), mul(t2, rad * Math.sin(ang))));
-      return { p, n: h.n, u: 0, v: 0, trap: h.trap, steps: h.steps, r: h.r };
+      last = { p, n: h.n, u: 0, v: 0, trap: h.trap, steps: h.steps, r: h.r };
+      return last;
     },
   };
 }
 
-// The Mandelbulb's twist: BULB_BANDS horizontal bands between -BULB_Y and
-// BULB_Y, each turning BULB_TWIST radians per unit of height at full twist.
-const BULB_BANDS = 14;
-const BULB_Y = 1.2;
-const BULB_TWIST = 1.2;
+// The Mandelbulb's discs: BULB_BANDS horizontal slices between -BULB_Y and
+// BULB_Y, each turning BULB_STEP (a seventh of a turn, the bulb's symmetry)
+// with a little overshoot, like a dial clicking round.
+const BULB_BANDS = 7;
+const BULB_Y = 1.15;
+const BULB_STEP = TAU / 7;
 const bulbBand = (y) =>
   clamp(Math.floor(((y + BULB_Y) / (2 * BULB_Y)) * BULB_BANDS), 0, BULB_BANDS - 1);
-const bulbBandMid = (i) => -BULB_Y + ((i + 0.5) * 2 * BULB_Y) / BULB_BANDS;
+const click = (x) => {
+  if (x <= 0) return 0;
+  if (x >= 1) return 1;
+  const c1 = 1.4;
+  return 1 + (c1 + 1) * (x - 1) ** 3 + c1 * (x - 1) ** 2;
+};
 
 // Sierpinski tetrahedron: the four corner copies, recursively.
 function sierpinski(level) {
@@ -842,6 +858,237 @@ const ANT_HIPS = [0.042, 0.042, 0.022, 0.022, 0.002, 0.002].map((x, i) =>
 const MOB_ANT_FRONT = mul(MOB_VIEW, 1.15);
 const MOB_ANT_BACK = mul(MOB_VIEW, -1.15);
 
+// The riders that can go round the Möbius strip, each facing +X and standing
+// on the origin (its up is +Y, its side +Z). A rider is a list of pieces,
+// each one token: `hub` is where it turns, `roll` a wheel's (or the ball's)
+// radius, so it turns by the distance over that, and `swing` an ant leg's
+// phase. build(k, at, token, o) adds its shapes at `at` (its hub); o is the
+// toy's options.
+const RIDER_TOKENS = 8;
+const CAR = 1.6; // the car's size (its numbers are for a car 0.34 long)
+const BIKE = 1.5; // the bike's size (its numbers are for a bike 0.3 tall)
+const shiny =
+  (col, spec = 0.6) =>
+  (c) =>
+    keep(lit(col, c.n, { amb: 0.66, dif: 0.45, spec, pow: 24 }));
+// A wheel in the XY plane: a tyre, a light hub, and marks that show it turn.
+function wheelShapes(k, at, token, R, { tyre = 0.3, spokes = 0, rim = "#c9ced6" } = {}) {
+  k.add(k.torus(R * (1 - tyre / 2), R * (tyre / 2)), {
+    ...token,
+    pos: at,
+    rot: [90, 0, 0],
+    flat: 0.5,
+    color: (c) => {
+      // A white mark on the sidewall shows the wheel turning.
+      const a = Math.atan2(c.lp[2], c.lp[0]);
+      const mark = Math.abs(Math.sin(a * 1.5)) < 0.18 && Math.abs(c.ln[1]) > 0.5;
+      return keep(lit(mark ? "#f4f4f4" : "#1c1c20", c.n, { amb: 0.7, dif: 0.4, spec: 0.35 }));
+    },
+  });
+  if (spokes) {
+    for (let i = 0; i < spokes; i++) {
+      const a = (i / spokes) * TAU;
+      const d = [Math.cos(a), Math.sin(a), 0];
+      k.add(polyTube([at, add(at, mul(d, R * (1 - tyre)))], R * 0.045), {
+        ...token,
+        flat: 0.8,
+        color: shiny(rim, 0.3),
+      });
+    }
+    k.add(k.sphere(R * 0.14), { ...token, pos: at, color: shiny(rim) });
+  } else {
+    for (const side of [-1, 1])
+      k.add(k.disc(R * (1 - tyre) * 1.02), {
+        ...token,
+        pos: add(at, [0, 0, side * R * tyre * 0.4]),
+        rot: [90, 0, 0],
+        flat: 0.4,
+        color: (c) => {
+          const a = Math.atan2(c.lp[2], c.lp[0]);
+          const spoke = Math.cos(a * 5) > 0.55;
+          return keep(lit(spoke ? rim : "#5a606b", c.n, { amb: 0.7, dif: 0.4, spec: 0.5 }));
+        },
+      });
+  }
+}
+const RIDERS = {
+  // An open-wheel racing car with a white stripe and four spinning wheels,
+  // blue (red on the ocean colours, so it always stands out).
+  car: [
+    {
+      hub: [0, 0, 0],
+      build(k, at, token, o) {
+        const S = CAR;
+        const paint = o?.colors === "ocean" ? "#d62424" : "#1f5fe0";
+        const body = (c) => {
+          const stripe = Math.abs(c.p[2] - at[2]) < 0.012 * S && c.n[1] > 0.3;
+          return keep(lit(stripe ? "#f7f7f2" : paint, c.n, { amb: 0.62, dif: 0.45, spec: 0.7, pow: 22 })); // prettier-ignore
+        };
+        const dark = shiny("#23262e");
+        const P = (x, y, z) => add(at, [x * S, y * S, z * S]);
+        const add1 = (shape, pos, color, rot) => k.add(shape, { ...token, pos, rot, color });
+        add1(k.roundedBox(0.25 * S, 0.05 * S, 0.1 * S, 5), P(-0.01, 0.07, 0), body);
+        add1(k.cone(0.032 * S, 0.012 * S, 0.1 * S), P(0.16, 0.062, 0), body, [0, 0, -90]);
+        for (const side of [-1, 1])
+          add1(k.roundedBox(0.1 * S, 0.035 * S, 0.03 * S, 4), P(-0.03, 0.065, side * 0.062), body);
+        // The driver's helmet in the cockpit.
+        add1(k.sphere(0.03 * S), P(-0.015, 0.108, 0), shiny("#f2c230", 0.8));
+        add1(k.box(0.012 * S, 0.012 * S, 0.05 * S), P(0.008, 0.11, 0), dark);
+        // Wings, front and back, on struts.
+        add1(k.box(0.045 * S, 0.008 * S, 0.21 * S), P(0.2, 0.03, 0), dark);
+        add1(k.box(0.05 * S, 0.012 * S, 0.21 * S), P(-0.155, 0.145, 0), body);
+        for (const side of [-1, 1])
+          add1(k.box(0.012 * S, 0.05 * S, 0.01 * S), P(-0.15, 0.115, side * 0.05), dark);
+      },
+    },
+    ...[
+      [0.12, 0.092],
+      [0.12, -0.092],
+      [-0.1, 0.095],
+      [-0.1, -0.095],
+    ].map(([x, z], i) => {
+      const r = (i < 2 ? 0.042 : 0.048) * CAR;
+      return {
+        hub: [x * CAR, r, z * CAR],
+        roll: r,
+        build(k, at, token) {
+          wheelShapes(k, at, token, r, { tyre: 0.42 });
+        },
+      };
+    }),
+  ],
+  // A beach ball: coloured gores round its own up axis, so it shows it roll.
+  ball: [
+    {
+      hub: [0, 0.16, 0],
+      roll: 0.16,
+      build(k, at, token) {
+        const gores = ["#e63946", "#f8f8f2", "#1d6fd8", "#ffd23f", "#f8f8f2", "#2bb673"];
+        k.add(k.sphere(0.16), {
+          ...token,
+          pos: at,
+          flat: 0.3,
+          even: true,
+          color: (c) => {
+            const d = c.ln;
+            if (Math.abs(d[1]) > 0.93) return keep(lit("#f8f8f2", c.n, { spec: 0.7 }));
+            const g = Math.floor(((Math.atan2(d[2], d[0]) / TAU + 1) % 1) * 6);
+            return keep(lit(gores[g], c.n, { amb: 0.62, dif: 0.45, spec: 0.7, pow: 20 }));
+          },
+        });
+      },
+    },
+  ],
+  // A yellow duck riding a bicycle: the frame and the duck, two wheels with
+  // spokes, and the pedals.
+  bike: [
+    {
+      hub: [0, 0, 0],
+      build(k, at, token) {
+        const S = BIKE;
+        const P = (x, y, z = 0) => add(at, [x * S, y * S, z * S]);
+        const frame = shiny("#1d9bd1", 0.5);
+        const tube = (pts, r = 0.007) =>
+          k.add(polyTube(pts, r * S), { ...token, flat: 0.8, color: frame });
+        const bb = P(0, 0.065);
+        const seat = P(-0.035, 0.165);
+        const head = P(0.085, 0.16);
+        const rear = P(-0.105, 0.065);
+        const front = P(0.115, 0.065);
+        tube([bb, seat]);
+        tube([seat, head]);
+        tube([bb, P(0.09, 0.14)]);
+        for (const side of [-1, 1]) {
+          tube([bb, add(rear, [0, 0, side * 0.012 * S])], 0.005);
+          tube([seat, add(rear, [0, 0, side * 0.012 * S])], 0.005);
+          tube([head, add(front, [0, 0, side * 0.012 * S])], 0.006);
+        }
+        tube([head, P(0.08, 0.2)], 0.007);
+        tube([P(0.07, 0.2, -0.055), P(0.07, 0.2, 0.055)], 0.006);
+        const put = (shape, pos, color, rot) => k.add(shape, { ...token, pos, rot, color });
+        put(k.ellipsoid(0.03 * S, 0.01 * S, 0.018 * S), P(-0.04, 0.172), shiny("#23262e"));
+        // The duck: a round body on the saddle, a tail, a head, a beak and eyes.
+        const duck = shiny("#ffd23f", 0.4);
+        put(k.ellipsoid(0.075 * S, 0.058 * S, 0.058 * S), P(-0.03, 0.225), duck);
+        put(k.ellipsoid(0.03 * S, 0.02 * S, 0.05 * S), P(-0.1, 0.24), duck, [0, 0, 30]);
+        put(k.sphere(0.042 * S), P(0.035, 0.29), duck);
+        put(k.ellipsoid(0.03 * S, 0.011 * S, 0.022 * S), P(0.078, 0.283), shiny("#ff8c1a"));
+        for (const side of [-1, 1])
+          k.add(k.sphere(0.008 * S), { ...token, pos: P(0.06, 0.305, side * 0.027), weight: 12, color: shiny("#141414", 0.9) }); // prettier-ignore
+        // Its wings reach to the handlebars.
+        for (const side of [-1, 1])
+          k.add(polyTube([P(-0.01, 0.235, side * 0.05), P(0.04, 0.215, side * 0.058), P(0.068, 0.203, side * 0.05)], 0.012 * S), { ...token, flat: 0.6, color: duck }); // prettier-ignore
+      },
+    },
+    ...[-0.105, 0.115].map((x) => ({
+      hub: [x * BIKE, 0.065 * BIKE, 0],
+      roll: 0.065 * BIKE,
+      build(k, at, token) {
+        wheelShapes(k, at, token, 0.065 * BIKE, { tyre: 0.16, spokes: 8 });
+      },
+    })),
+    {
+      // The pedals turn with the back wheel (a gear of about 1 to 1.6).
+      hub: [0, 0.065 * BIKE, 0],
+      roll: 0.065 * 1.6 * BIKE,
+      build(k, at, token) {
+        const S = BIKE;
+        const dark = shiny("#30343c", 0.5);
+        for (const side of [-1, 1]) {
+          const end = add(at, [side * 0.035 * S, 0, side * 0.03 * S]);
+          k.add(polyTube([add(at, [0, 0, side * 0.03 * S]), end], 0.005 * S), { ...token, flat: 0.8, color: dark }); // prettier-ignore
+          k.add(k.box(0.024 * S, 0.006 * S, 0.02 * S), { ...token, pos: add(end, [0, 0, side * 0.012 * S]), color: dark }); // prettier-ignore
+        }
+        k.add(k.torus(0.022 * S, 0.004 * S), { ...token, pos: add(at, [0, 0, 0.02 * S]), rot: [90, 0, 0], color: dark }); // prettier-ignore
+      },
+    },
+  ],
+  // The ant: a body and six legs, each leg a token of its own.
+  ant: [
+    {
+      hub: [0, 0, 0],
+      build(k, at, token) {
+        const antCol = (c) =>
+          keep(lit("#2a1810", c.n, { amb: 0.75, dif: 0.55, spec: 0.7, pow: 16 }));
+        const body = { ...token, flat: 0.5, color: antCol };
+        for (const [pos, r] of ANT_BODY)
+          k.add(k.sphere(1), { ...body, pos: add(at, pos), scale: r });
+        for (const side of [-1, 1])
+          k.add(
+            polyTube(
+              [
+                [0.1, 0.06, 0.012 * side],
+                [0.13, 0.105, 0.035 * side],
+                [0.165, 0.09, 0.055 * side],
+              ].map((q) => add(at, mul(q, ANT))),
+              0.0055 * ANT,
+            ),
+            { ...body, flat: 0.8 },
+          );
+      },
+    },
+    ...ANT_HIPS.map((hip, i) => ({
+      hub: hip,
+      // Legs 0, 3 and 4 swing together, 1, 2 and 5 against them.
+      swing: i === 0 || i === 3 || i === 4 ? 0 : Math.PI,
+      build(k, at, token) {
+        const side = Math.sign(hip[2]);
+        const reach = [0.035, 0, -0.035][i >> 1];
+        const leg = [
+          [0, 0, 0],
+          [reach * 0.6, 0.03, 0.045 * side],
+          [reach * 1.7, -hip[1] / ANT, 0.085 * side],
+        ].map((q) => add(at, mul(q, ANT)));
+        k.add(polyTube(leg, 0.0065 * ANT), {
+          ...token,
+          flat: 0.8,
+          color: (c) => keep(lit("#2a1810", c.n, { amb: 0.75, dif: 0.55, spec: 0.7, pow: 16 })),
+        });
+      },
+    })),
+  ],
+};
+
 // The seashell's mouth (its last cross-section is a circle in the plane
 // z = 0 before the shell is turned 40 degrees about Y): centre, the axis it
 // opens along, and radius. And when each of its three ripples sets off.
@@ -943,21 +1190,34 @@ export const RECIPES = {
           { id: "jewel", label: "Jewel" },
         ],
       },
+      {
+        key: "rider",
+        label: "Rider",
+        type: "select",
+        default: "car",
+        choices: [
+          { id: "car", label: "Race car" },
+          { id: "ball", label: "Beach ball" },
+          { id: "bike", label: "Duck on a bike" },
+          { id: "ant", label: "Ant" },
+        ],
+      },
     ],
     controls: [
       { key: "glow", label: "Glow", type: "slider", default: 0.6 },
-      { key: "walk", label: "Ant walk", type: "pulse", ease: 5 },
+      { key: "walk", label: "Ride", type: "pulse", ease: 5 },
     ],
-    action: { key: "walk", label: "Send the ant round" },
-    // A tap sets an ant walking along the middle of the band. One lap brings
-    // it back underneath where it started (the band has one side); a second
-    // lap brings it back on top. Meanwhile the band twists a little and
-    // untwists, and the ant rides the twisted surface. The band is built
+    action: { key: "walk", label: "Send it round" },
+    // A tap sends the rider (a race car, a beach ball, a duck on a bike or
+    // an ant) along the middle of the band. One lap brings it back
+    // underneath where it started (the band has one side); a second lap
+    // brings it back on top. Wheels and the ball roll with the distance. Meanwhile the band twists a little and
+    // untwists, and the rider rides the twisted surface. The band is built
     // twice: the glowing copy at rest and a copy that can twist (a morph),
-    // swapped while the glow is off. The ant is built twice too, in front of
-    // and behind everything, and shows the copy that draws right for the
-    // face it walks on.
-    drive(t, c, out) {
+    // swapped while the glow is off. The rider is built twice too, in front
+    // of and behind everything, and shows the copy that draws right for the
+    // face it is on.
+    drive(t, c, out, info) {
       const T = 5;
       const p = c.walk > 0 ? T * (1 - c.walk) : -1;
       const on = p >= 0;
@@ -974,22 +1234,26 @@ export const RECIPES = {
       const q = quatBasis(f.fwd, f.up, cross(f.fwd, f.up));
       const size = on ? bump(p, 0.18, 0.38, T - 0.42, T - 0.22) : 0;
       const front = dot(f.up, MOB_VIEW) > 0;
-      // Tripod gait: legs 0, 3 and 4 swing together, 1, 2 and 5 against them.
+      // Wheels (and the ball) turn by the distance over their radius; the
+      // ant's legs swing in a tripod gait.
+      const dist = th - MOB_START;
       const stride = x * 90;
+      const pieces = info?.data?.rider || [];
       const tokens = [];
       [MOB_ANT_FRONT, MOB_ANT_BACK].forEach((base, copy) => {
         const vis = size * ((copy === 0) === front ? 1 : 0);
-        tokens.push({ base, quat: q, offset: sub(f.pos, base), visible: vis });
-        ANT_HIPS.forEach((hip, i) => {
-          const phase = i === 0 || i === 3 || i === 4 ? 0 : Math.PI;
-          const swing = 0.38 * Math.sin(stride + phase) * (on ? 1 : 0);
-          const at = add(base, hip);
-          tokens.push({
+        pieces.forEach((pc, i) => {
+          let turn = [0, 0, 0, 1];
+          if (pc.roll) turn = quatAxisAngle([0, 0, 1], -dist / pc.roll);
+          if (pc.swing !== undefined)
+            turn = quatAxisAngle([0, 1, 0], 0.38 * Math.sin(stride + pc.swing) * (on ? 1 : 0));
+          const at = add(base, pc.hub);
+          tokens[copy * RIDER_TOKENS + i] = {
             base: at,
-            quat: quatMul(q, quatAxisAngle([0, 1, 0], swing)),
-            offset: sub(add(f.pos, quatRotate(q, hip)), at),
+            quat: quatMul(q, turn),
+            offset: sub(add(f.pos, quatRotate(q, pc.hub)), at),
             visible: vis,
-          });
+          };
         });
       });
       out.tokens = tokens;
@@ -1036,40 +1300,14 @@ export const RECIPES = {
         to: (c) => mobiusPoint(c.u * TAU, (c.v - 0.5) * 2 * W, MOB_TWIST(c.u * TAU)),
         color,
       });
-      // The ant, twice: a body and six legs, each leg a token of its own.
-      const antCol = (c) => keep(lit("#2a1810", c.n, { amb: 0.75, dif: 0.55, spec: 0.7, pow: 16 }));
+      // The rider, twice: each piece (body, wheels, legs) a token of its own.
+      const rider = RIDERS[o.rider] || RIDERS.car;
+      k.data = { rider: rider.map(({ hub, roll, swing }) => ({ hub, roll, swing })) };
       [MOB_ANT_FRONT, MOB_ANT_BACK].forEach((base, copy) => {
-        const tok = copy * 7;
-        const body = { kind: "token", params: [tok, 0], flat: 0.5, weight: 6, color: antCol };
-        for (const [pos, r] of ANT_BODY)
-          k.add(k.sphere(1), { ...body, pos: add(base, pos), scale: r });
-        for (const side of [-1, 1])
-          k.add(
-            polyTube(
-              [
-                [0.1, 0.06, 0.012 * side],
-                [0.13, 0.105, 0.035 * side],
-                [0.165, 0.09, 0.055 * side],
-              ].map((q) => add(base, mul(q, ANT))),
-              0.0055 * ANT,
-            ),
-            { ...body, flat: 0.8 },
-          );
-        ANT_HIPS.forEach((hip, i) => {
-          const side = Math.sign(hip[2]);
-          const reach = [0.035, 0, -0.035][i >> 1];
-          const leg = [
-            [0, 0, 0],
-            [reach * 0.6, 0.03, 0.045 * side],
-            [reach * 1.7, -hip[1] / ANT, 0.085 * side],
-          ].map((q) => add(add(base, hip), mul(q, ANT)));
-          k.add(polyTube(leg, 0.0065 * ANT), {
-            kind: "token",
-            params: [tok + 1 + i, 0],
-            flat: 0.8,
-            weight: 6,
-            color: antCol,
-          });
+        rider.forEach((pc, i) => {
+          // Left out of the fit: the band keeps its size whatever rides it.
+          const token = { kind: "token", params: [copy * RIDER_TOKENS + i, 0], weight: 6, fit: false }; // prettier-ignore
+          pc.build(k, add(base, pc.hub), token, o);
         });
       });
     },
@@ -1459,41 +1697,31 @@ export const RECIPES = {
   },
 
   mandelbulb: {
-    controls: [{ key: "twist", label: "Twist", type: "pulse", ease: 3.8 }],
-    action: { key: "twist", label: "Wring it" },
-    // A tap wrings the bulb: the top turns one way and the bottom the other
-    // (up to about 70 degrees at the poles) as its bulbs bloom outward, then
-    // it springs back past rest and swings to a stop like a torsion spring.
-    // The bulb is cut into horizontal bands (parts) that each turn by the
-    // twist at their middle, and a morph twists each band within itself (and
-    // blooms it), so the surface twists smoothly with no steps.
+    controls: [{ key: "twist", label: "Turn", type: "pulse", ease: 4.2 }],
+    action: { key: "twist", label: "Turn the discs" },
+    // A tap turns the bulb's discs like the dials of a combination lock:
+    // stacked horizontal slices click round, neighbours in opposite
+    // directions, top to bottom, then back the other way, bottom to top.
+    // The power-8 bulb has seven-fold symmetry about its axis (and its
+    // splats are laid down seven-fold too), so each slice turns one
+    // seventh of a turn and lands on the same picture; it then snaps back
+    // to its built pose unseen (splats sort in their built pose, so no
+    // slice ever turns much past that).
     drive(t, c, out) {
-      const p = c.twist > 0 ? 3.8 * (1 - c.twist) : -1;
-      let tw = 0;
-      if (p >= 0) {
-        const s = Math.max(0, p - 0.7);
-        tw =
-          p < 0.7
-            ? ease(band(p, 0.03, 0.7))
-            : Math.cos((TAU * s) / 1.25) * Math.exp(-s / 0.9) * (1 - band(p, 3.3, 3.75));
+      const s = c.twist > 0 ? 4.2 * (1 - c.twist) : -1;
+      for (let i = 0; i < BULB_BANDS; i++) {
+        const dir = i % 2 ? -1 : 1;
+        let a = 0;
+        if (s >= 0 && s < 1.9) a = dir * click((s - 0.1 - 0.1 * i) / 0.95);
+        else if (s >= 1.9) a = -dir * click((s - 2.05 - 0.1 * (BULB_BANDS - 1 - i)) / 0.95);
+        out.parts["b" + i] = { angle: a * BULB_STEP };
       }
-      out.morph = [tw];
-      for (let i = 0; i < BULB_BANDS; i++)
-        out.parts["b" + i] = { angle: tw * BULB_TWIST * bulbBandMid(i) };
     },
     build(k) {
       const bands = [];
       for (let i = 0; i < BULB_BANDS; i++) bands.push(k.part("b" + i));
-      k.fitMorphs = false; // turning about the axis keeps the size
       k.add(mandelbulbShape(), {
         part: (c) => bands[bulbBand(c.p[1])],
-        // The bulbs also bloom: the outer ones stand further out and the
-        // folds between them sink, and the other way as it swings back.
-        to: (c) =>
-          rotY(
-            mul(c.p, 1 + (0.28 * (c.s.r - 0.85)) / c.s.r),
-            BULB_TWIST * (c.p[1] - bulbBandMid(bulbBand(c.p[1]))),
-          ),
         flat: 0.45,
         color: (c) => {
           const col = ramp(

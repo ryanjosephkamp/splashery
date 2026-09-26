@@ -430,8 +430,9 @@ Proposals below are suggestions; the owner may change them.
 - **Lungs** (`lungs`). Now: tap: Take a deep breath. Plan: keep.
   - Owner: Expand and contract like lungs.
   - Effect: A deep breath in and out.
-  - Improved: E3: a tap takes a deep breath: both lungs fill out sideways and down (the airways stay
-    put), hold, then empty past rest and settle back into gentle breathing (about 5 s).
+  - Improved: E3: a tap takes a deep breath: both lungs swell out sideways, forwards and down (the
+    airways stay put), hold, then empty past rest and settle back into gentle breathing (about 5 s).
+    After the owner's review the breath is about twice as big.
   - Sound: Breath in, breath out.
 - **Tooth** (`tooth`). Now: tap: Polish. Plan: keep.
   - Owner: Looks good; no idea for an effect.
@@ -1193,12 +1194,14 @@ Proposals below are suggestions; the owner may change them.
   - Improved: C2: a new tap action sends a bright spark racing along the whole path, drawing it
     again in light that then fades (about 3 s).
   - Sound: Chaotic warble.
-- **Möbius strip** (`mobius`). Now: tap: Send the ant round. Plan: keep.
+- **Möbius strip** (`mobius`). Now: tap: Send it round. Plan: keep.
   - Owner: Wow, really neat. Maybe twist a little.
   - Effect: An ant-like dot walks the single side; the band twists.
-  - Improved: E3: a tap sends an ant on two laps along the middle of the band: after one lap it is
+  - Improved: E3: a tap sends a rider on two laps along the middle of the band: after one lap it is
     underneath (the band has one side), after two it is back on top where it started, while the band
-    twists a little and untwists (about 5 s).
+    twists a little and untwists (about 5 s). After the owner's review the rider is a choice (the
+    Rider option): a blue race car (the default) with spinning wheels, a rolling beach ball, a duck
+    riding a bicycle (wheels and pedals turning) or the ant.
   - Sound: Looping tone.
 - **Klein bottle** (`klein-bottle`). Now: tap: Send water through. Plan: keep.
   - Owner: Not sure it has an effect. Maybe water flows through it; it already kind of does, make
@@ -1237,12 +1240,13 @@ Proposals below are suggestions; the owner may change them.
     equation, so the orange channels swell as the blue ones narrow, then the other way, and it
     settles (about 3.8 s).
   - Sound: Watery hum.
-- **Mandelbulb** (`mandelbulb`). Now: tap: Wring it. Plan: keep.
+- **Mandelbulb** (`mandelbulb`). Now: tap: Turn the discs. Plan: keep.
   - Owner: Like the Mandeltorus: twisting.
   - Effect: Morphs through powers (bulb shapes twist and bloom).
-  - Improved: E3: a tap wrings the bulb: the top turns one way and the bottom the other as its bulbs
-    bloom outward, then it springs back past rest and swings to a stop like a torsion spring (about
-    3.8 s). (A twist, as the owner asked, instead of a change of power.)
+  - Improved: E3: a tap turns the bulb's seven horizontal discs like the dials of a combination
+    lock: neighbours click round in opposite directions, top to bottom, then back the other way,
+    bottom to top; each turns a seventh of a turn (the bulb's own symmetry), so it lands on the same
+    picture (about 4 s). This replaced a twist after the owner's review.
   - Sound: Deep morphing tone.
 - **Sierpinski tetrahedron** (`sierpinski`). Now: tap: Explode. Plan: keep.
   - Owner: Perfect as is.

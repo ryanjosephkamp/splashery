@@ -82,19 +82,21 @@ const LUNG_BREATH = 5; // seconds a deep breath lasts
 // How far each point of a lung moves as it empties (channel 0 at 1): the
 // outer walls move in, most at the bottom, the base rises and the front
 // and back come in; the side by the heart and the tips hardly move.
+// A deep breath is this backwards (channel 0 at -1): the lungs swell out
+// sideways and forwards all the way up, and their bases drop.
 function lungEmpty(p) {
   const side = p[0] < 0 ? -1 : 1;
-  const outer = clamp01((Math.abs(p[0]) - 0.22) / 0.8);
+  const outer = clamp01((Math.abs(p[0]) - 0.18) / 0.6);
   const low = clamp01((0.9 - p[1]) / 1.5);
-  return [-side * 0.14 * outer * (0.5 + 0.5 * low), 0.24 * low * Math.sqrt(low), -0.16 * p[2]];
+  return [-side * 0.3 * outer * (0.55 + 0.45 * low), 0.3 * low * Math.sqrt(low), -0.34 * p[2]];
 }
 // The deep breath: in over 1.7 s, hold, out past rest by 3.7 s, hold, and back.
 const LUNG_KEYS = [
   [0, 0],
   [1.7, -1],
   [2.2, -1],
-  [3.7, 0.65],
-  [4.1, 0.65],
+  [3.7, 0.32],
+  [4.1, 0.32],
   [LUNG_BREATH, 0],
 ];
 function lungDeep(s) {
@@ -857,7 +859,7 @@ export const RECIPES = {
     drive(t, c, out) {
       const s = progress(c.deep) * LUNG_BREATH;
       // Channel 0 empties the lungs at 1; below 0 it fills them past rest.
-      const idle = -(0.07 + 0.26 * c.breath) * Math.sin(t * 1.3);
+      const idle = -(0.035 + 0.12 * c.breath) * Math.sin(t * 1.3);
       const calm = 1 - bump(s, 0, 0.5, LUNG_BREATH - 0.9, LUNG_BREATH);
       out.morph = [idle * calm + lungDeep(s), 0, 0, 0];
     },
@@ -900,10 +902,10 @@ export const RECIPES = {
         };
         k.add(k.radial(shape, { grid: 96, thick: 0.3 }), {
           pos: [cx, 0, 0],
-          flat: 0.2,
-          // A little bigger than usual, so the surface stays closed when it
+          flat: 0.3,
+          // Bigger than usual, so the surface stays closed when it
           // stretches in a deep breath.
-          size: 1.25,
+          size: 1.55,
           interior: 0.08,
           core: shade(pink, 0.96),
           to: (c) => empty(c.p),

@@ -702,6 +702,8 @@ export class Kit {
   //   skin: (c) => [a, b, s]: follows tokens a and b, blended by s (kind
   //          "skin": an edge between two moving corners)
   //   pattern: false keeps the pattern layer off these splats
+  //   fit: false leaves the shape out of the fit (a small rider built off
+  //          to one side for the draw order; keep it inside the view)
   //   even: true spreads the surface splats evenly (a low-discrepancy
   //          sequence) instead of at random; random placement leaves thin
   //          spots where the far side shows through as dark speckle. It
@@ -776,8 +778,10 @@ export class Kit {
     let done = 0;
     let nextYield = 6000;
     for (const it of this.items) {
+      it.start = buf.count;
       if (it.kind === "cloud") this.emitCloud(it, rand);
       else this.emitSurface(it, rand, fbm);
+      it.end = buf.count;
       done += it.n;
       if (done >= nextYield) {
         nextYield = done + 6000;
@@ -986,7 +990,12 @@ export class Kit {
         if (v[k] > hi[k]) hi[k] = v[k];
       }
     };
-    for (let i = 0; i < buf.count; i++) see(buf.pos[i * 3], buf.pos[i * 3 + 1], buf.pos[i * 3 + 2]);
+    // Shapes added with fit: false (pieces that ride on the toy) are left
+    // out of the fit.
+    const skip = new Uint8Array(buf.count);
+    for (const it of this.items) if (it.opts.fit === false) skip.fill(1, it.start, it.end);
+    for (let i = 0; i < buf.count; i++)
+      if (!skip[i]) see(buf.pos[i * 3], buf.pos[i * 3 + 1], buf.pos[i * 3 + 2]);
     for (const r of this.reaches) see(r[0], r[1], r[2]);
     // Morph targets count too, so a morphed toy stays in its frame (unless
     // the recipe sets k.fitMorphs = false and frames it with k.reach).
@@ -1006,6 +1015,7 @@ export class Kit {
     const c = [(lo[0] + hi[0]) / 2, (lo[1] + hi[1]) / 2, (lo[2] + hi[2]) / 2];
     let r2 = 0;
     for (let i = 0; i < buf.count; i++) {
+      if (skip[i]) continue;
       const dx = buf.pos[i * 3] - c[0];
       const dy = buf.pos[i * 3 + 1] - c[1];
       const dz = buf.pos[i * 3 + 2] - c[2];
