@@ -10,10 +10,10 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 284 toys. 247 have a tap action today; the other 37 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 245.
+- 284 toys. 264 have a tap action today; the other 20 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 262.
 - **more** (has an effect; make it clearer or more dramatic): 2.
-- **new** (needs its own effect): 37.
+- **new** (needs its own effect): 20.
 - Visual fixes: 0 open, 28 done. Touch or drag interaction asked for: 4.
 
 ## By phase
@@ -37,22 +37,23 @@ Proposals below are suggestions; the owner may change them.
   Brain, Eye, Lungs, Tooth, Kidney, Oak tree, Pine tree, Palm tree, Cherry blossom, Maple tree,
   Bonsai, Weeping willow, Sunflower, Rose, Tulips, Daisies, Lotus, Toadstool, Fern, Saguaro cactus,
   Coral reef, Pinecone, Acorns, Succulent, Bamboo, Pebbles, Kelp, Lava lamp, Ice swan, Tornado,
-  Rainbow, Iceberg, Waterfall, Ocean wave, Ice cream, Gummy bear, Coffee, Rubber duck, Newton's
-  cradle, Kite, Chess set, Lorenz attractor, Möbius strip, Klein bottle, Menger sponge, Hypercube,
-  Torus knot, Gyroid, Mandelbulb, Seashell spiral, Heraldic shield, Crown, Wizard's orb, Jellyfish,
-  School of fish, Pufferfish, Nautilus, Snail, Octopus, Sea urchin, Frog, Snowman, Fireworks,
-  Decorated tree, Diya, Acoustic guitar, Snare drum, Xylophone, Hot-air balloon, Bus, Jet airliner,
-  Sailboat, Submarine, Bicycle, Eiffel Tower, Washington Monument, Pyramids of Giza, Twisting
-  supertall, Statue of Liberty, White House, Leaning Tower of Pisa, Colosseum, Parthenon,
-  Stonehenge, Big Ben, Taj Mahal, Castle, Pagoda, Windmill.
+  Rainbow, Iceberg, Waterfall, Ocean wave, Ice cream, Watermelon, Cupcake, Lollipop, Candy cane,
+  Macarons, Gummy bear, Pretzel, Croissant, Sushi, Taco, Coffee, Apple, Bananas, Orange, Kiwi,
+  Pineapple, Cherries, Grapes, Avocado, Rubber duck, Newton's cradle, Kite, Chess set, Lorenz
+  attractor, Möbius strip, Klein bottle, Menger sponge, Hypercube, Torus knot, Gyroid, Mandelbulb,
+  Seashell spiral, Heraldic shield, Crown, Wizard's orb, Jellyfish, School of fish, Pufferfish,
+  Nautilus, Snail, Octopus, Sea urchin, Frog, Snowman, Fireworks, Decorated tree, Diya, Acoustic
+  guitar, Snare drum, Xylophone, Hot-air balloon, Bus, Jet airliner, Sailboat, Submarine, Bicycle,
+  Eiffel Tower, Washington Monument, Pyramids of Giza, Twisting supertall, Statue of Liberty, White
+  House, Leaning Tower of Pisa, Colosseum, Parthenon, Stonehenge, Big Ben, Taj Mahal, Castle,
+  Pagoda, Windmill.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
 - **E2, new effects: space, atoms and gems.** None.
 - **E3, new effects: tiny things, anatomy and maths.** None.
 - **E4, new effects: nature and weather.** None.
-- **E5, new effects: food.** Watermelon, Cupcake, Lollipop, Candy cane, Macarons, Pretzel,
-  Croissant, Sushi, Taco, Apple, Bananas, Orange, Kiwi, Pineapple, Cherries, Grapes, Avocado
+- **E5, new effects: food.** None.
 - **E6, new effects: balls and the rest.** Basketball, Soccer ball, Tennis ball, Baseball, Softball,
   Beach ball, Golf ball, Volleyball, Water polo ball, Ping-pong ball, Cricket ball, Bowling ball,
   Pool ball, Pickleball, Dodgeball, Medicine ball, Lacrosse ball, Squash ball, Bouncy ball, Marble
@@ -1103,9 +1104,12 @@ Proposals below are suggestions; the owner may change them.
   - Improved: C2: a tap melts it (the scoops slump and drips run down the cone), then it refreezes
     (about 5 s). The Warmth slider still works.
   - Sound: Drip-drip.
-- **Watermelon** (`watermelon`). Now: hops. Plan: new effect (E5).
+- **Watermelon** (`watermelon`). Now: tap: Chop into slices. Plan: keep.
   - Owner: Cut it in half or into slices.
   - Effect: Cuts into slices that fan out.
+  - Improved: E5: a big knife chops the whole melon five times, right to left, then the six slices
+    fan open on their bottoms like an accordion, showing red flesh, pale rind and black seeds on
+    their cut faces, and fold shut (about 3.6 s).
   - Sound: Juicy chop.
 - **Birthday cake** (`birthday-cake`). Now: tap: Blow out. Plan: keep.
   - Owner: Pretty much perfect.
@@ -1119,21 +1123,32 @@ Proposals below are suggestions; the owner may change them.
 - **Pancakes** (`pancakes`). Now: tap: Flip the top one. Plan: keep.
   - Owner: Really neat.
   - Sound: Sizzle and a flip.
-- **Cupcake** (`cupcake`). Now: hops. Plan: new effect (E5).
+- **Cupcake** (`cupcake`). Now: tap: Flick the cherry. Plan: keep.
   - Owner: Needs an effect.
   - Effect: A cherry drops on top and sprinkles rain down.
+  - Improved: E5: the frosting springs and flicks the cherry up; it tumbles and drops back with a
+    plop, the frosting squashes and wobbles, and the sprinkles jump off and rain back down (about
+    2.3 s).
   - Sound: Plop and sprinkle patter.
-- **Lollipop** (`lollipop`). Now: hops. Plan: new effect (E5).
+- **Lollipop** (`lollipop`). Now: tap: Spin fast. Plan: keep.
   - Owner: Maybe spins really fast.
   - Effect: Spins fast and the swirl hypnotises.
+  - Improved: E5: the swirl whirls up to nearly three turns a second, so the spiral seems to pour
+    inwards, then slows back to its idle turn (about 3 s).
   - Sound: Whirr.
-- **Candy cane** (`candy-cane`). Now: hops. Plan: new effect (E5).
+- **Candy cane** (`candy-cane`). Now: tap: Twist and snap. Plan: keep.
   - Owner: Pick something.
   - Effect: The stripes wind around like a barber pole, then it snaps in two and rejoins.
+  - Improved: E5: each cane twists (the hook turns and the stripes wind tighter) until it snaps with
+    a crack; the top half springs clear showing the white candy in the break, sugar chips fly, then
+    the halves come back together and mend with a glint (about 2.9 s).
   - Sound: Crisp snap.
-- **Macarons** (`macarons`). Now: hops. Plan: new effect (E5).
+- **Macarons** (`macarons`). Now: tap: Stack up. Plan: keep.
   - Owner: Maybe they do something.
   - Effect: They stack themselves into a tower.
+  - Improved: E5: the two in front hop one after the other up onto the stack, rising clear of its
+    rim and landing level with a soft tap; the tower of five sways, then they hop back down (about
+    3.5 s).
   - Sound: Soft taps.
 - **Gummy bear** (`gummy-bear`). Now: tap: Squish. Plan: keep.
   - Owner: Underwhelming. Press, hold and drag to stretch its arm or body, and let go to spring back
@@ -1144,13 +1159,20 @@ Proposals below are suggestions; the owner may change them.
     a drag beside it still turns the view. A tap still does the jelly jiggle.
   - Sound: Rubbery stretch and boing.
   - Touch or drag interaction (phase F).
-- **Pretzel** (`pretzel`). Now: hops. Plan: new effect (E5).
+- **Pretzel** (`pretzel`). Now: tap: Twist. Plan: keep.
   - Owner: Some sort of twisting, like the knots.
   - Effect: Untwists into a rope and twists back.
+  - Improved: E5 (r2, after the owner's note): the pretzel contorts like a knot: its loops swirl
+    round and rise out of its plane, one up and one down, and its sides turn opposite ways; let go,
+    it springs back past its shape into the opposite contortion and wobbles to a stop (about 3.8 s).
   - Sound: Doughy stretch.
-- **Croissant** (`croissant`). Now: hops. Plan: new effect (E5).
+- **Croissant** (`croissant`). Now: tap: Open it. Plan: keep.
   - Owner: Must differ from the real croissant.
   - Effect: Puffs up in an oven glow (rising), then flakes fly off.
+  - Improved: E5 (r2, after the owner's note): a tap slices it open along its middle: the top lifts
+    and tips back like a lid, showing the soft layered inside, where a pat of butter melts and
+    spreads; then the top settles back down (about 3.3 s). Unlike the real croissant scan, which
+    tears in half.
   - Sound: Oven ding.
 - **Pizza** (`pizza`). Now: tap: Take a slice. Plan: keep.
   - Owner: Perfect.
@@ -1158,13 +1180,19 @@ Proposals below are suggestions; the owner may change them.
 - **Burger** (`burger`). Now: tap: Explode view. Plan: keep.
   - Owner: Perfect.
   - Sound: Sizzle.
-- **Sushi** (`sushi`). Now: hops. Plan: new effect (E5).
+- **Sushi** (`sushi`). Now: tap: Pick up and dip. Plan: keep.
   - Owner: Chopsticks lifted by an invisible hand pick up the sushi.
   - Effect: Chopsticks pick up a roll, dip it and put it back.
+  - Improved: E5: the chopsticks lift off the board as if held by an invisible hand, pinch a roll
+    (click), carry it to a new dish of soy sauce and dip it twice, set it back (click) and lie down
+    again (about 4.7 s).
   - Sound: Wooden chopstick clicks.
-- **Taco** (`taco`). Now: hops. Plan: new effect (E5).
+- **Taco** (`taco`). Now: tap: Break in half. Plan: keep.
   - Owner: Break in half to show what is inside. Really cool taco.
   - Effect: Shell cracks in half and the filling spills out, then it reassembles.
+  - Improved: E5: the shell snaps across the middle with a crunch; the halves pull apart and swing
+    open like a book, showing the filling in each break, and bits spill onto a new plate and bounce;
+    then they hop back in and the halves close (about 3.1 s).
   - Sound: Crunch.
 - **Boiled egg** (`egg`). Now: tap: Crack. Plan: keep.
   - Owner: Perfect.
@@ -1175,37 +1203,60 @@ Proposals below are suggestions; the owner may change them.
   - Improved: C2: the latte art twists into a swirl (the middle turns further than the edge) and
     relaxes back, with a thick curl of steam.
   - Sound: Spoon stir clink.
-- **Apple** (`apple`). Now: hops. Plan: new effect (E5).
+- **Apple** (`apple`). Now: tap: Take a bite. Plan: keep.
   - Owner: A bite taken out of it, or a worm comes out.
   - Effect: A bite appears (crunch); a second tap, a worm peeks out.
+  - Improved: E5: a tap takes a bite: the chunk comes away and vanishes, leaving a scalloped bite of
+    pale flesh (it stays bitten). The next tap brings a little worm out of the bite; it looks about,
+    ducks back in, and the apple grows whole (about 2.9 s).
   - Sound: Crunch.
-- **Bananas** (`banana`). Now: hops. Plan: new effect (E5).
+- **Bananas** (`banana`). Now: tap: Peel them. Plan: keep.
   - Owner: Peel open.
   - Effect: One banana peels open.
+  - Improved: E5 (r2, after the owner's note): the three bananas pull apart off their crown, then
+    each is peeled from its tip, front first: its skin splits into three strips that curl back, each
+    bending in two places, showing the pale fruit; then the strips fold back up and the bunch comes
+    together (about 4.3 s).
   - Sound: Peel.
-- **Orange** (`orange`). Now: hops. Plan: new effect (E5).
+- **Orange** (`orange`). Now: tap: Open into wedges. Plan: keep.
   - Owner: Pick something.
   - Effect: Splits into segments that fan out.
+  - Improved: E5: the whole orange opens like a flower: eight wedges fall open outwards on their
+    bottoms, one just after another, showing their juicy cut faces, while juice squirts up out of
+    the middle; then it closes up (about 3 s).
   - Sound: Juicy squirt.
-- **Kiwi** (`kiwi`). Now: hops. Plan: new effect (E5).
+- **Kiwi** (`kiwi`). Now: tap: Cut open. Plan: keep.
   - Owner: Pick something.
   - Effect: Halves open to show the green inside and seeds.
+  - Improved: E5: the whole kiwi is cut across the middle; the halves slide apart and turn to show
+    their green faces with the ring of black seeds, then close up again (about 2.8 s).
   - Sound: Soft slice.
-- **Pineapple** (`pineapple`). Now: hops. Plan: new effect (E5).
+- **Pineapple** (`pineapple`). Now: tap: Slice into rings. Plan: keep.
   - Owner: Maybe it gets cut.
   - Effect: Cut into rings that stack.
+  - Improved: E5: four chops, top first: with each, everything above lifts and leans towards you,
+    until five rings stand apart in a leaning stack showing their golden faces and pale cores; then
+    they drop back onto each other (about 3 s).
   - Sound: Chop.
-- **Cherries** (`cherries`). Now: hops. Plan: new effect (E5).
+- **Cherries** (`cherries`). Now: tap: Swing. Plan: keep.
   - Owner: No idea.
   - Effect: The pair swings and bounces on its stems.
+  - Improved: E5: a flick swings the two cherries apart on their own stems; they swing back and
+    knock together (a plink each time), bouncing apart again until they settle, while the joint bobs
+    (about 3.6 s).
   - Sound: Double plink.
-- **Grapes** (`grapes`). Now: hops. Plan: new effect (E5).
+- **Grapes** (`grapes`). Now: tap: Drop grapes. Plan: keep.
   - Owner: Could fall off the stem.
   - Effect: Grapes drop off the stem and bounce, then return.
+  - Improved: E5: ten grapes on the front come off one after another, drop and bounce on the table
+    and roll a little, each on its own path, then hop back up to their places one by one (about 3.9
+    s). Unlike the grape scan, whose peel curls back.
   - Sound: Plop-plop cascade.
-- **Avocado** (`avocado`). Now: hops. Plan: new effect (E5).
+- **Avocado** (`avocado`). Now: tap: Pop the stone. Plan: keep.
   - Owner: Pick something.
   - Effect: Splits open and the stone pops out and back.
+  - Improved: E5: the stone pops out of its half, flies over and drops into the empty half with a
+    thock, rocking it, then pops back home and the first half rocks (about 3.1 s).
   - Sound: Thock.
 
 ## Toys (16)
