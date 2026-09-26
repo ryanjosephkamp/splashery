@@ -1164,14 +1164,14 @@
       "owner": "Some sort of twisting, like the knots.",
       "effect": "Untwists into a rope and twists back.",
       "sound": "Doughy stretch.",
-      "improved": "E5: the pretzel undoes itself the way it was made, backwards: the ends lift off, the twist unwinds and the loops open into a U of dough rope, then it folds and twists back (about 3.3 s)."
+      "improved": "E5 (r2, after the owner's note): the pretzel contorts like a knot: its loops swirl round and rise out of its plane, one up and one down, and its sides turn opposite ways; let go, it springs back past its shape into the opposite contortion and wobbles to a stop (about 3.8 s)."
     },
     "croissant": {
       "v": "keep",
       "owner": "Must differ from the real croissant.",
       "effect": "Puffs up in an oven glow (rising), then flakes fly off.",
       "sound": "Oven ding.",
-      "improved": "E5: it rises on a paper-lined baking tray in a warm oven glow, the oven dings, and flakes of crust spring off and scatter over the tray; the glow fades, it sinks back, and the flakes hop home (about 3.4 s). Unlike the real croissant scan, which tears in half."
+      "improved": "E5 (r2, after the owner's note): a tap slices it open along its middle: the top lifts and tips back like a lid, showing the soft layered inside, where a pat of butter melts and spreads; then the top settles back down (about 3.3 s). Unlike the real croissant scan, which tears in half."
     },
     "pizza": {
       "v": "keep",
@@ -1221,7 +1221,7 @@
       "owner": "Peel open.",
       "effect": "One banana peels open.",
       "sound": "Peel.",
-      "improved": "E5: the front banana's skin splits from the tip into three strips that curl back one after another, each bending in two places, showing the pale fruit; then they fold back up around it (about 3.1 s)."
+      "improved": "E5 (r2, after the owner's note): the three bananas pull apart off their crown, then each is peeled from its tip, front first: its skin splits into three strips that curl back, each bending in two places, showing the pale fruit; then the strips fold back up and the bunch comes together (about 4.3 s)."
     },
     "orange": {
       "v": "keep",

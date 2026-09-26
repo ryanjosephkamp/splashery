@@ -1149,19 +1149,20 @@ Proposals below are suggestions; the owner may change them.
     a drag beside it still turns the view. A tap still does the jelly jiggle.
   - Sound: Rubbery stretch and boing.
   - Touch or drag interaction (phase F).
-- **Pretzel** (`pretzel`). Now: tap: Untwist. Plan: keep.
+- **Pretzel** (`pretzel`). Now: tap: Twist. Plan: keep.
   - Owner: Some sort of twisting, like the knots.
   - Effect: Untwists into a rope and twists back.
-  - Improved: E5: the pretzel undoes itself the way it was made, backwards: the ends lift off, the
-    twist unwinds and the loops open into a U of dough rope, then it folds and twists back (about
-    3.3 s).
+  - Improved: E5 (r2, after the owner's note): the pretzel contorts like a knot: its loops swirl
+    round and rise out of its plane, one up and one down, and its sides turn opposite ways; let go,
+    it springs back past its shape into the opposite contortion and wobbles to a stop (about 3.8 s).
   - Sound: Doughy stretch.
-- **Croissant** (`croissant`). Now: tap: Bake. Plan: keep.
+- **Croissant** (`croissant`). Now: tap: Open it. Plan: keep.
   - Owner: Must differ from the real croissant.
   - Effect: Puffs up in an oven glow (rising), then flakes fly off.
-  - Improved: E5: it rises on a paper-lined baking tray in a warm oven glow, the oven dings, and
-    flakes of crust spring off and scatter over the tray; the glow fades, it sinks back, and the
-    flakes hop home (about 3.4 s). Unlike the real croissant scan, which tears in half.
+  - Improved: E5 (r2, after the owner's note): a tap slices it open along its middle: the top lifts
+    and tips back like a lid, showing the soft layered inside, where a pat of butter melts and
+    spreads; then the top settles back down (about 3.3 s). Unlike the real croissant scan, which
+    tears in half.
   - Sound: Oven ding.
 - **Pizza** (`pizza`). Now: tap: Take a slice. Plan: keep.
   - Owner: Perfect.
@@ -1199,12 +1200,13 @@ Proposals below are suggestions; the owner may change them.
     pale flesh (it stays bitten). The next tap brings a little worm out of the bite; it looks about,
     ducks back in, and the apple grows whole (about 2.9 s).
   - Sound: Crunch.
-- **Bananas** (`banana`). Now: tap: Peel one. Plan: keep.
+- **Bananas** (`banana`). Now: tap: Peel them. Plan: keep.
   - Owner: Peel open.
   - Effect: One banana peels open.
-  - Improved: E5: the front banana's skin splits from the tip into three strips that curl back one
-    after another, each bending in two places, showing the pale fruit; then they fold back up around
-    it (about 3.1 s).
+  - Improved: E5 (r2, after the owner's note): the three bananas pull apart off their crown, then
+    each is peeled from its tip, front first: its skin splits into three strips that curl back, each
+    bending in two places, showing the pale fruit; then the strips fold back up and the bunch comes
+    together (about 4.3 s).
   - Sound: Peel.
 - **Orange** (`orange`). Now: tap: Open into wedges. Plan: keep.
   - Owner: Pick something.

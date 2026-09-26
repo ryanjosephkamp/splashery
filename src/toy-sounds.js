@@ -667,8 +667,12 @@ export const TOY_SOUNDS = {
     { voice: "boing", at: 0.3, f: 200, to: 1.8, rate: 12 },
   ],
   pretzel: { voice: "squish", pitch: 0.7, bright: 0.2, decay: 2 },
-  // The oven's warm rush; the ding and the flakes are cues.
-  croissant: { voice: "wind", f: 260, rate: 1.2, decay: 0.9, vol: 0.7 },
+  // Flaky crust crackling as it is sliced open; the butter's sizzle and the
+  // top settling back are cues.
+  croissant: [
+    { voice: "crackle", f: 2400, n: 9, decay: 0.5, vol: 0.6 },
+    { voice: "tear", at: 0.05, f: 1400, to: 1.3, decay: 0.5, vol: 0.4 },
+  ],
   pizza: {
     on: { voice: "tear", f: 700, to: 0.5, decay: 1.6, bright: 0.3 },
     off: { voice: "thud", f: 120, bright: 0.4, decay: 0.8 },

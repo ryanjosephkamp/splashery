@@ -464,11 +464,11 @@ const CANE_SNAP = 0.8;
 const CANE_JOIN = 2.35;
 const CANE_LAG = 0.16;
 const CANE_SECS = 2.85;
-const PRETZEL_SECS = 3.3;
-// The croissant: the oven dings when it has risen; the flakes hop home.
-const CRO_DING = 1.2;
-const CRO_BACK = 2.45;
-const CRO_SECS = 3.4;
+const PRETZEL_LET = 0.95;
+const PRETZEL_SECS = 3.8;
+// The croissant: the height it is sliced at, and the effect's length.
+const CRO_CUT = -0.02;
+const CRO_SECS = 3.3;
 // The taco: how far each half swings open, and when the bits hop back.
 const TACO_TURN = 0.8;
 const TACO_BACK = 1.85;
@@ -498,7 +498,7 @@ const APPLE_SECS = 2.9;
 // how far each strip's two pieces bend back.
 const BANANA_HINGE = 0.42;
 const BANANA_BEND = [1.25, 0.9];
-const BANANA_SECS = 3.1;
+const BANANA_SECS = 4.3;
 // The avocado's stone flies over and back.
 const AVO_SECS = 3.1;
 const mix1 = (a, b, t) => a + (b - a) * t;
@@ -2547,23 +2547,22 @@ export const RECIPES = {
   },
 
   pretzel: {
-    controls: [{ key: "untwist", label: "Untwist", type: "pulse", ease: PRETZEL_SECS }],
-    action: { key: "untwist", label: "Untwist" },
-    // A tap undoes the pretzel the way it was made, backwards: the ends lift
-    // off the bottom, the twist unwinds and the loops open, until it is a
-    // U of dough rope (one end passing in front of the other). It hangs a
-    // moment, then folds and twists back into a pretzel and settles.
+    controls: [{ key: "twist", label: "Twist", type: "pulse", ease: PRETZEL_SECS }],
+    action: { key: "twist", label: "Twist" },
+    // A tap contorts the pretzel like a knot: its loops swirl round and rise
+    // out of its plane, one up and one down, and the two sides turn opposite
+    // ways. Let go, it springs back past its shape into the opposite
+    // contortion and wobbles to a stop, like a twanged spring.
     drive(t, c, out) {
-      const s = since(c.untwist, PRETZEL_SECS);
+      const s = since(c.twist, PRETZEL_SECS);
       let m = 0;
       if (s >= 0) {
-        const open = smooth(band(s, 0, 1.1));
-        const close = smooth(band(s, 1.9, 2.95));
-        m = open * (1 - close) + 0.035 * Math.sin((s - 1.1) * 6) * bump(s, 1.1, 1.3, 1.7, 1.9);
-        m -= 0.06 * wobble(s - 2.95, 0.3, 20);
+        const u = s - PRETZEL_LET;
+        m = u < 0 ? smooth(band(s, 0, PRETZEL_LET - 0.2)) + 0.04 * Math.sin(s * 14) * band(s, 0.5, 0.7) : 0; // prettier-ignore
+        if (u >= 0) m = Math.cos((TAU * u) / 1.2) * Math.exp(-u / 1.1) * (1 - smooth(band(s, PRETZEL_SECS - 0.6, PRETZEL_SECS - 0.05))); // prettier-ignore
       }
       out.morph = [m, 0, 0, 0];
-      cuesAt(c, "pretzel", s, [[1.9, { voice: "squish", pitch: 0.8, bright: 0.2, decay: 1.6 }]], out); // prettier-ignore
+      cuesAt(c, "pretzel", s, [[PRETZEL_LET, { voice: "boing", f: 150, to: 1.5, rate: 6, decay: 1.4, vol: 0.6 }]], out); // prettier-ignore
     },
     build(k) {
       const pts = [
@@ -2592,13 +2591,20 @@ export const RECIPES = {
       const shape = k.tube(P, rad, { caps: true, samples: 480, grid: 110 });
       const q = quatEuler(-16, 0, 0);
       const qi = [-q[0], -q[1], -q[2], q[3]];
-      // The U of rope it untwists into: the bottom of the loop stays, and
-      // each end rises in a straight arm (the first half's arm in front).
+      // The pretzel contorted like a knot: its loops swirl round its middle
+      // and rise out of its plane (one up, one down), and the two sides turn
+      // opposite ways about the upright. A negative channel contorts it the
+      // other way.
+      const mid = [0, -0.08, 0];
       const U = (t) => {
-        if (t >= 0.35 && t <= 0.65) return P(t);
-        const side = t < 0.5 ? 1 : -1;
-        const a = t < 0.5 ? (0.35 - t) / 0.35 : (t - 0.65) / 0.35;
-        return [side * (0.93 + 0.08 * a), 0.08 + 0.92 * a, side * 0.35 * a];
+        const p = P(t);
+        const a = 0.42 * Math.sin(TAU * 2 * t);
+        const [dx, dy] = [p[0] - mid[0], p[1] - mid[1]];
+        const x = mid[0] + dx * Math.cos(a) - dy * Math.sin(a);
+        const y = mid[1] + dx * Math.sin(a) + dy * Math.cos(a);
+        const z = p[2] + 0.48 * Math.sin(TAU * (2 * t + 0.25));
+        const psi = 0.6 * Math.tanh(x / 0.35);
+        return [x * Math.cos(psi) + z * Math.sin(psi), y, -x * Math.sin(psi) + z * Math.cos(psi)];
       };
       const tangent = (f, t) => unit(sub(f(Math.min(1, t + 1e-3)), f(Math.max(0, t - 1e-3))));
       const frame = (f, t) => {
@@ -2607,8 +2613,8 @@ export const RECIPES = {
         return { T, B, N: cross(B, T) };
       };
       // A point on the pretzel (recipe coordinates) and where it goes: the
-      // same place across the rope, at the same point along it.
-      const untwisted = (p, t) => {
+      // same place across the rope, at the same point along the knot.
+      const contorted = (p, t) => {
         const lp = quatRotate(qi, p);
         const r = frame(P, t);
         const d = sub(lp, P(t));
@@ -2623,7 +2629,7 @@ export const RECIPES = {
         flat: 0.4,
         interior: 0.1,
         core: "#f0d4a0",
-        to: (c) => untwisted(c.p, along(c)),
+        to: (c) => contorted(c.p, along(c)),
         channel: 0,
         color: (c) => {
           // The scored belly splits open along its top, showing pale dough.
@@ -2654,7 +2660,7 @@ export const RECIPES = {
           n: dw,
           color: mix("#ffffff", "#e8e4dc", rand()),
           opacity: 1,
-          to: untwisted(p, t),
+          to: contorted(p, t),
           channel: 0,
         };
       });
@@ -2662,57 +2668,32 @@ export const RECIPES = {
   },
 
   croissant: {
-    controls: [{ key: "bake", label: "Bake", type: "pulse", ease: CRO_SECS }],
-    action: { key: "bake", label: "Bake" },
-    // A tap bakes it: the croissant rises on its tray in a warm oven glow,
-    // the oven dings, and flakes of crust spring off and scatter over the
-    // tray. The glow fades, it sinks back a little, and the flakes hop home.
-    drive(t, c, out, info) {
-      const s = since(c.bake, CRO_SECS);
-      const d = info.data;
-      if (!d) return;
+    controls: [{ key: "open", label: "Open it", type: "pulse", ease: CRO_SECS }],
+    action: { key: "open", label: "Open it" },
+    // A tap slices the croissant open along its middle like a roll for
+    // filling: its top lifts and tips back like a lid, showing the soft,
+    // layered inside, where a pat of butter melts and spreads. Then the top
+    // settles back down. (The real croissant scan tears in half instead.)
+    drive(t, c, out) {
+      const s = since(c.open, CRO_SECS);
       const on = s >= 0;
-      const rise = on ? smooth(band(s, 0, CRO_DING)) * (1 - smooth(band(s, 1.7, 2.5))) : 0;
-      const scale = 1 + 0.17 * rise;
-      out.parts.dough = { scale };
-      const heat = on ? bump(s, 0.05, CRO_DING, 1.5, 2.4) : 0;
-      out.morph = [heat, 0, 0, 0];
-      out.glow = [1, 0.5, 0.12, 0.55];
-      out.tokens = d.flakes.map((f) => {
-        const seat = add(f.home, mul(sub(f.home, d.pivot), scale - 1));
-        const t0 = CRO_DING + f.lag;
-        const back = CRO_BACK + f.lag;
-        if (!on || s < t0 || s >= back + 0.4)
-          return { base: f.home, offset: sub(seat, f.home), visible: 0 };
-        let p;
-        let q;
-        if (s < t0 + 0.55) {
-          const g = (s - t0) / 0.55;
-          p = hopTo(seat, f.land, g, 0.28);
-          q = quatAxisAngle(f.axis, f.spin * g);
-        } else {
-          const b = s - t0 - 0.55;
-          p = add(f.land, [0, 0.03 * Math.max(0, Math.sin((Math.PI * b) / 0.18)) * (b < 0.18 ? 1 : 0), 0]); // prettier-ignore
-          q = quatAxisAngle(f.axis, f.spin);
-        }
-        let shown = 1;
-        if (s >= back) {
-          const g = smooth(band(s, back, back + 0.4));
-          p = hopTo(f.land, f.home, g, 0.25);
-          q = slerpQ(q, IDQ, g);
-          // It melts back into the crust as it lands.
-          shown = 1 - smooth(band(g, 0.7, 1));
-        }
-        return { base: f.home, offset: sub(p, f.home), quat: q, visible: shown };
-      });
+      const open = on ? easeOut(band(s, 0.05, 0.55)) * (1 - smooth(band(s, 2.3, 2.85))) : 0;
+      const settle = on ? 0.04 * wobble(s - 2.85, 0.35, 22) : 0;
+      out.parts.lid = {
+        quat: quatAxisAngle([1, 0, 0], -0.72 * open),
+        offset: [0, 0.26 * open + settle, -0.08 * open],
+      };
+      // The butter melts (channel 0) while the top is up, and is whole again
+      // under it once it is back down.
+      const melt = on ? smooth(band(s, 0.55, 2.0)) * (1 - band(s, 2.9, 3.2)) : 0;
+      out.morph = [melt, 0, 0, 0];
       cuesAt(
         c,
         "croissant",
         s,
         [
-          [CRO_DING, { voice: "ding", f: "A6", decay: 1.3 }],
-          [CRO_DING + 0.5, { voice: "crackle", f: 2600, n: 10, decay: 0.5, vol: 0.5 }],
-          [CRO_BACK + 0.35, { voice: "patter", f: 1800, n: 6, decay: 0.4, vol: 0.4 }],
+          [0.6, { voice: "sizzle", f: 4200, decay: 1.5, vol: 0.25 }],
+          [2.85, { voice: "thud", f: 170, bright: 0.2, decay: 0.5, vol: 0.5 }],
         ],
         out,
       );
@@ -2739,15 +2720,12 @@ export const RECIPES = {
         },
         { grid: 100, thick: 0.25 },
       );
-      // The dough rises about the middle of its underside; it glows (band,
-      // channel 0) in the oven's heat.
-      const pivot = [0, -0.2, -0.12];
-      const dough = k.part("dough", { pivot });
+      // It is sliced level at CRO_CUT: everything above is the top (a lid
+      // that lifts and tips back about the back of the middle roll).
+      const yc = CRO_CUT;
+      const lid = k.part("lid", { pivot: [0, yc, -0.12], axis: [1, 0, 0] });
       k.add(shape, {
-        part: dough,
-        kind: "band",
-        params: [1, 0.45],
-        channel: 0,
+        part: (c) => (c.p[1] > yc ? lid : 0),
         flat: 0.25,
         interior: 0.1,
         core: (c) => {
@@ -2768,6 +2746,65 @@ export const RECIPES = {
         col = shade(col, 0.93 + 0.12 * c.noise(c.p[0] * 40, c.p[1] * 40, c.p[2] * 40));
         return glossy(c, col, 0.55 * (1 - under), 20, 0.72, 0.42);
       }
+      // The cut faces (the bottom's facing up, the top's facing down): the
+      // soft crumb with the laminated layers curving round each roll, inside
+      // a thin line of crust. w runs across the roll (-1 .. 1).
+      const chord = (v) => {
+        const f = frame(v);
+        const r = env(v) * (0.62 + 0.38 * 0.5 * (bulge(v, 0) + bulge(v, 0.5)));
+        const h = (yc - f.p[1]) / Math.max(0.2, f.b[1]);
+        const q = h / (0.8 * r);
+        if (Math.abs(q) > 0.97) return null;
+        return { f, h, hw: r * Math.sqrt(1 - q * q) * 0.985 };
+      };
+      const crumb = (c, w, v) => {
+        const aw = Math.abs(w);
+        if (aw > 0.93) return keep(lit(c, mix("#c98333", "#a8621e", c.rand()), 0.85, 0.2));
+        const holes = c.noise(c.p[0] * 34, c.p[2] * 34, 3.1);
+        const layer = Math.sin(aw * 17 + 2.2 * c.noise(v * 20, aw * 3, 0.4));
+        let col = mix("#f8e7bf", "#f1d49a", 0.5 + 0.5 * c.noise(c.p[0] * 9, c.p[2] * 9, 1.7));
+        if (layer > 0.8) col = mix(col, "#d9a860", 0.7);
+        if (holes > 0.45) col = shade(mix(col, "#e5c07e", 0.6), 0.86);
+        return keep(lit(c, col, 0.86, 0.2));
+      };
+      for (const [part, up] of [
+        [0, 1],
+        [lid, -1],
+      ]) {
+        k.add(
+          k.param(
+            (u, v) => {
+              const ch = chord(v);
+              if (!ch) return frame(v).p;
+              return add(add(ch.f.p, mul(ch.f.n, (u * 2 - 1) * ch.hw)), mul(ch.f.b, ch.h - 0.003 * up)); // prettier-ignore
+            },
+            { grid: 64, normal: () => [0, up, 0] },
+          ),
+          {
+            part,
+            flat: 0.2,
+            weight: up > 0 ? 1.3 : 0.5,
+            pattern: false,
+            color: (c) => (chord(c.v) ? crumb(c, c.u * 2 - 1, c.v) : null),
+          },
+        );
+      }
+      // A pat of butter inside, on the bottom half; it melts and spreads
+      // (channel 0) while the top is up.
+      const pat = [0.02, yc + 0.03, 0.36];
+      k.add(k.roundedBox(0.28, 0.055, 0.19, 3), {
+        pos: pat,
+        rot: [0, 12, 0],
+        flat: 0.3,
+        weight: 2.5,
+        pattern: false,
+        to: (c) => {
+          const d = sub(c.p, pat);
+          return add(pat, [d[0] * 1.9, -0.024 + (d[1] + 0.028) * 0.25, d[2] * 1.7]);
+        },
+        channel: 0,
+        color: (c) => keep(glossy(c, mix("#fbe38a", "#f6d466", 0.3 + 0.3 * c.rand()), 0.8, 30, 0.84, 0.3)), // prettier-ignore
+      });
       // A baking tray lined with paper.
       const trayY = -0.33;
       k.add(k.box(2.3, 0.05, 1.5), {
@@ -2784,54 +2821,13 @@ export const RECIPES = {
         {
           flat: 0.15,
           weight: 0.7,
-          kind: "band",
-          params: [1.4, 0.45],
-          channel: 0,
           color: (c) => {
             const crinkle = c.noise(c.p[0] * 9, c.p[2] * 9, 1.3);
             return lit(c, shade("#efe6d2", 0.94 + 0.1 * crinkle), 0.84, 0.2);
           },
         },
       );
-      // Flakes of crust on the top, each a piece that can spring off.
-      const flakes = [];
-      for (let i = 0; i < 16; i++) {
-        const v = 0.12 + 0.76 * ((i * 0.618 + 0.1) % 1);
-        const u = 0.12 + 0.3 * k.rand();
-        const f = frame(v);
-        const a = u * TAU;
-        const r = env(v) * (0.62 + 0.38 * bulge(v, u));
-        const n = unit(add(mul(f.n, Math.cos(a)), mul(f.b, Math.sin(a))));
-        if (n[1] < 0.2) continue;
-        const home = add(add(f.p, add(mul(f.n, Math.cos(a) * r), mul(f.b, Math.sin(a) * r * 0.8))), mul(n, 0.012)); // prettier-ignore
-        const out = unit([home[0], 0, home[2] + 0.12]);
-        const reach = 0.35 + 0.3 * k.rand();
-        const land = [clamp(home[0] + out[0] * reach, -0.88, 0.88), trayY + 0.02, clamp(home[2] + out[2] * reach, -0.66, 0.46)]; // prettier-ignore
-        const token = flakes.length;
-        flakes.push({ home, land, axis: randDir(k.rand), spin: 2 + 2 * k.rand(), lag: 0.03 * token }); // prettier-ignore
-        const t1 = tangentDir(k.rand, n);
-        const t2 = cross(n, t1);
-        const w = 0.05 + 0.03 * k.rand();
-        k.add(
-          k.param((x, y) => add(mul(t1, (x - 0.5) * w * 1.6), add(mul(t2, (y - 0.5) * w), mul(n, 0.008 * Math.sin(Math.PI * x)))), { grid: 8, normal: () => n }), // prettier-ignore
-          {
-            pos: home,
-            share: 0.001,
-            flat: 0.3,
-            kind: "token",
-            params: [token, 0],
-            // Hidden until it springs off (it would not glow with the crust);
-            // golden like fresh crust, with a ragged edge.
-            color: (c) => {
-              const e = Math.hypot((c.u - 0.5) * 2, (c.v - 0.5) * 2);
-              if (e > 0.8 + 0.25 * c.noise(c.u * 6 + token, c.v * 6, 0)) return null;
-              return keep(mix(crust(c, v, u), "#ffc15a", 0.45));
-            },
-          },
-        );
-      }
-      k.data = { flakes, pivot };
-      k.reach([0, 0.6, 0]);
+      k.reach([0, 0.55, 0]);
     },
   },
 
@@ -4418,33 +4414,42 @@ export const RECIPES = {
         ],
       },
     ],
-    controls: [{ key: "peel", label: "Peel one", type: "pulse", ease: BANANA_SECS }],
-    action: { key: "peel", label: "Peel one" },
-    // A tap peels the front banana from its tip: its skin splits into three
-    // strips that curl back one after another (each bending at two places),
-    // showing the pale fruit inside; then they fold back up around it.
+    controls: [{ key: "peel", label: "Peel them", type: "pulse", ease: BANANA_SECS }],
+    action: { key: "peel", label: "Peel them" },
+    // A tap pulls the three bananas apart off their crown, then peels each
+    // one from its tip, front first: its skin splits into three strips that
+    // curl back one after another (each bending at two places), showing the
+    // pale fruit. Then the strips fold back up and the bunch comes together.
     drive(t, c, out, info) {
       const s = since(c.peel, BANANA_SECS);
       const d = info.data;
       if (!d) return;
       const on = s >= 0;
+      const sep = on ? easeOut(band(s, 0, 0.5)) * (1 - smooth(band(s, 3.55, 4.15))) : 0;
+      const close = on ? smooth(band(s, 2.95, 3.5)) : 0;
       out.tokens = [];
-      d.strips.forEach((st, j) => {
-        const t0 = 0.08 + 0.22 * j;
-        const close = on ? smooth(band(s, 2.1 + 0.05 * j, 2.75 + 0.05 * j)) : 0;
-        const fa = on ? easeOut(band(s, t0, t0 + 0.5)) * (1 - close) : 0;
-        const fb = on ? easeOut(band(s, t0 + 0.12, t0 + 0.62)) * (1 - close) : 0;
-        const qa = quatAxisAngle(st.axisA, BANANA_BEND[0] * fa);
-        const qb = quatMul(qa, quatAxisAngle(st.axisB, BANANA_BEND[1] * fb));
-        const offB = sub(add(quatRotate(qa, sub(st.hingeB, st.hingeA)), st.hingeA), st.hingeB);
-        out.tokens[st.a] = { base: st.hingeA, quat: qa };
-        out.tokens[st.b] = { base: st.hingeB, quat: qb, offset: offB };
+      d.bananas.forEach((bn) => {
+        // Where the whole banana is: turned about its neck and pulled off.
+        const qs = quatAxisAngle([0, 1, 0], bn.spread * sep);
+        const os = mul(bn.away, sep);
+        const place = (p) => add(add(quatRotate(qs, sub(p, bn.neck)), bn.neck), os);
+        out.tokens[bn.body] = { base: bn.neck, quat: qs, offset: os };
+        bn.strips.forEach((st, j) => {
+          const t0 = bn.t0 + 0.12 * j;
+          const fa = on ? easeOut(band(s, t0, t0 + 0.5)) * (1 - close) : 0;
+          const fb = on ? easeOut(band(s, t0 + 0.12, t0 + 0.62)) * (1 - close) : 0;
+          const qa = quatAxisAngle(st.axisA, BANANA_BEND[0] * fa);
+          const qb = quatAxisAngle(st.axisB, BANANA_BEND[1] * fb);
+          out.tokens[st.a] = { base: st.hingeA, quat: quatMul(qs, qa), offset: sub(place(st.hingeA), st.hingeA) }; // prettier-ignore
+          const hb = add(quatRotate(qa, sub(st.hingeB, st.hingeA)), st.hingeA);
+          out.tokens[st.b] = { base: st.hingeB, quat: quatMul(qs, quatMul(qa, qb)), offset: sub(place(hb), st.hingeB) }; // prettier-ignore
+        });
       });
       cuesAt(
         c,
         "banana",
         s,
-        [1, 2].map((j) => [0.08 + 0.22 * j, { voice: "tear", f: 900 + 150 * j, to: 1.5, decay: 0.7, vol: 0.7 }]), // prettier-ignore
+        d.bananas.map((bn, i) => [bn.t0 + 0.1, { voice: "tear", f: 800 + 180 * i, to: 1.5, decay: 0.8, vol: 0.7 }]), // prettier-ignore
         out,
       );
     },
@@ -4483,22 +4488,9 @@ export const RECIPES = {
         { rot: [0, 4, 4], pos: [0, 0.02, 0] },
         { rot: [0, 30, 12], pos: [0, 0.05, 0.18] },
       ];
-      for (const b of bananas.slice(0, 2)) {
-        k.add(shape, {
-          ...b,
-          flat: 0.22,
-          interior: 0.1,
-          core: "#f8ecc4",
-          color,
-        });
-      }
-      // The front banana peels: its skin from BANANA_HINGE to the tip is
-      // three strips (two pieces each, bending where they meet), with a
-      // pale inside, over the fruit.
-      const front = bananas[2];
-      const qf = quatEuler(...front.rot);
-      const toW = (p) => add(front.pos, quatRotate(qf, p));
-      const dirW = (v) => quatRotate(qf, v);
+      // Each banana is pieces: its body (the skin down to BANANA_HINGE and
+      // the fruit) and its peel beyond, three strips of two pieces each
+      // (bending where they meet), with a pale inside.
       const th = BANANA_HINGE;
       const tm = (th + 1) / 2;
       const around = (t, a, r) => {
@@ -4523,78 +4515,87 @@ export const RECIPES = {
           },
         );
       const skinAt = (c, t, a) => color(Object.assign({}, c, { t, u: a / TAU }));
-      k.add(skinPatch(0, th, 0, TAU, 1, false), {
-        quat: qf,
-        pos: front.pos,
-        flat: 0.22,
-        color: (c) => skinAt(c, c.v * th, c.u * TAU),
-      });
-      // The fruit.
-      k.add(
-        k.param(
-          (u, v) => {
-            const t = th - 0.02 + v * (0.995 - th + 0.02);
-            return around(t, u * TAU, rad(t) * 0.84).p;
-          },
-          { grid: 64, normal: (u, v) => around(th + v * (1 - th), u * TAU, 1).d },
-        ),
-        {
-          quat: qf,
-          pos: front.pos,
-          flat: 0.3,
-          weight: 1.2,
-          pattern: false,
-          color: (c) => {
-            const ridge = 0.5 + 0.5 * Math.cos(c.u * TAU * 5);
-            const col = mix("#f7ebbf", "#efdca0", 0.35 * ridge + 0.2 * c.noise(c.p[0] * 20, c.p[1] * 20, c.p[2] * 20)); // prettier-ignore
-            return keep(glossy(c, col, 0.35, 18, 0.8, 0.3));
-          },
+      const fruit = k.param(
+        (u, v) => {
+          const t = th - 0.02 + v * (0.97 - th + 0.02);
+          return around(t, u * TAU, rad(t) * 0.84).p;
         },
+        { grid: 64, normal: (u, v) => around(th + v * (1 - th), u * TAU, 1).d },
       );
-      const strips = [];
+      const fruitColor = (c) => {
+        const ridge = 0.5 + 0.5 * Math.cos(c.u * TAU * 5);
+        const col = mix("#f7ebbf", "#efdca0", 0.35 * ridge + 0.2 * c.noise(c.p[0] * 20, c.p[1] * 20, c.p[2] * 20)); // prettier-ignore
+        return keep(glossy(c, col, 0.35, 18, 0.8, 0.3));
+      };
+      const stub = skinPatch(0, th, 0, TAU, 1, false);
+      const list = [];
       let tok = 0;
-      for (let j = 0; j < 3; j++) {
-        const a0 = (j / 3) * TAU + 0.35;
-        const a1 = ((j + 1) / 3) * TAU + 0.35;
-        const am = (a0 + a1) / 2;
-        const ta = tok++;
-        const tb = tok++;
-        const ha = around(th, am, rad(th));
-        const hb = around(tm, am, rad(tm));
-        strips.push({
-          a: ta,
-          b: tb,
-          hingeA: toW(ha.p),
-          hingeB: toW(hb.p),
-          axisA: unit(dirW(cross(ha.f.t, ha.d))),
-          axisB: unit(dirW(cross(hb.f.t, hb.d))),
+      // Front first: the order they peel in, and how each moves apart.
+      const moves = [
+        { spread: 0.5, away: [-0.05, 0.16, -0.24], t0: 1.25 },
+        { spread: 0.0, away: [0.08, 0.02, 0], t0: 0.85 },
+        { spread: -0.4, away: [0.1, -0.12, 0.14], t0: 0.45 },
+      ];
+      bananas.forEach((bn, i) => {
+        const q = quatEuler(...bn.rot);
+        const toW = (p) => add(bn.pos, quatRotate(q, p));
+        const dirW = (v) => quatRotate(q, v);
+        const body = tok++;
+        const piece = (token) => ({ quat: q, pos: bn.pos, kind: "token", params: [token, 0] });
+        k.add(stub, {
+          ...piece(body),
+          flat: 0.22,
+          color: (c) => skinAt(c, c.v * th, c.u * TAU),
         });
-        for (const [t0, t1, token] of [
-          [th, tm, ta],
-          [tm, 1, tb],
-        ]) {
-          k.add(skinPatch(t0, t1, a0, a1, 1, false), {
-            quat: qf,
-            pos: front.pos,
-            flat: 0.22,
-            kind: "token",
-            params: [token, 0],
-            color: (c) => skinAt(c, t0 + c.v * (t1 - t0), a0 + c.u * (a1 - a0)),
+        k.add(fruit, { ...piece(body), flat: 0.3, weight: 1.2, pattern: false, color: fruitColor });
+        const strips = [];
+        for (let j = 0; j < 3; j++) {
+          const a0 = (j / 3) * TAU + 0.35;
+          const a1 = ((j + 1) / 3) * TAU + 0.35;
+          const am = (a0 + a1) / 2;
+          const ta = tok++;
+          const tb = tok++;
+          const ha = around(th, am, rad(th));
+          const hb = around(tm, am, rad(tm));
+          strips.push({
+            a: ta,
+            b: tb,
+            hingeA: toW(ha.p),
+            hingeB: toW(hb.p),
+            axisA: unit(dirW(cross(ha.f.t, ha.d))),
+            axisB: unit(dirW(cross(hb.f.t, hb.d))),
           });
-          k.add(skinPatch(t0, t1, a0 + 0.04, a1 - 0.04, 0.93, true), {
-            quat: qf,
-            pos: front.pos,
-            flat: 0.22,
-            weight: 0.8,
-            pattern: false,
-            kind: "token",
-            params: [token, 0],
-            color: (c) => keep(lit(c, mix("#f3e6c0", "#e8d7a6", c.rand() * 0.5), 0.84, 0.25)),
-          });
+          for (const [t0, t1, token] of [
+            [th, tm, ta],
+            [tm, 1, tb],
+          ]) {
+            k.add(skinPatch(t0, t1, a0, a1, 1, false), {
+              ...piece(token),
+              flat: 0.22,
+              color: (c) => skinAt(c, t0 + c.v * (t1 - t0), a0 + c.u * (a1 - a0)),
+            });
+            k.add(skinPatch(t0, t1, a0 + 0.04, a1 - 0.04, 0.93, true), {
+              ...piece(token),
+              flat: 0.22,
+              weight: 0.8,
+              pattern: false,
+              color: (c) => keep(lit(c, mix("#f3e6c0", "#e8d7a6", c.rand() * 0.5), 0.84, 0.25)),
+            });
+          }
+          // A third of the dark tip closes each strip's end.
+          k.add(
+            k.param((u, v) => around(1, a0 + u * (a1 - a0), rad(1) * v).p, {
+              grid: 12,
+              normal: () => shape.frame(1).t,
+            }),
+            { ...piece(tb), flat: 0.3, weight: 2, color: (c) => lit(c, "#3a2716") },
+          );
         }
-      }
-      k.data = { strips };
-      k.reach(add(toW(arc(1)), [0, 0.5, 0.3]));
+        list.push({ body, neck: toW(arc(0)), strips, ...moves[i] });
+        k.reach(add(toW(arc(1)), [0, 0.3, 0]));
+        k.reach(add(toW(arc(0.9)), [0, -0.45, moves[i].away[2]]));
+      });
+      k.data = { bananas: list };
       // The crown where the stalks meet.
       const top = arc(0);
       k.add(

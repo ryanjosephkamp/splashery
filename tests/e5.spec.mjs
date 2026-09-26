@@ -131,7 +131,7 @@ test("each E5 effect moves: something is well away from its rest place mid-effec
 });
 
 test("the twins act and sound different from the scans", () => {
-  // The kit croissant bakes; the real croissant scan tears in half.
+  // The kit croissant opens like a roll; the real croissant scan tears in half.
   expect(RECIPES.croissant.action.label).not.toBe(RIGS["croissant-real"].action.label);
   expect(JSON.stringify(TOY_SOUNDS.croissant)).not.toBe(JSON.stringify(TOY_SOUNDS["croissant-real"])); // prettier-ignore
   // The bunch of grapes drops grapes; the grape scan peels.
