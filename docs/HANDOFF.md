@@ -14,6 +14,17 @@ ground rules are in [CLAUDE.md](../CLAUDE.md).
   them, and clips of all 26 on the Effect review page (the older, approved clips were removed from
   the page; the owner's marks on them stay in its database). Check it is merged, and read the
   owner's verdicts (`e3-<toy id>`), before starting E4. **Next: Phase E4** (below).
+- **E3 review (2026-09-26).** The owner marked 23 of the 26 E3 clips good (verdicts `e3-<id>` on the
+  Effect review page). The three notes were fixed in the same PR: the Möbius strip has a Rider
+  option (a blue race car by default, red on the Ocean colours; a rolling beach ball; a duck on a
+  bicycle; the ant), whose pieces are tokens listed in `RIDERS` in `src/packs/maths.js`; the lungs'
+  deep breath is about twice as big (`lungEmpty` in `src/packs/anatomy.js`, larger splats so the
+  stretched surface stays closed); the Mandelbulb no longer twists: its seven horizontal discs click
+  round in opposite directions like a combination lock, each by a seventh of a turn (the bulb's own
+  symmetry, and its splats are laid down in sevens), then snap back to their built pose unseen.
+  Clips of the fixes (`e3f-…`) are at the top of the Effect review page.
+- **`fit: false` (E3 review).** A shape added with `fit: false` is left out of the toy's fit (the
+  Möbius riders, built in front of and behind the band for the draw order); keep it inside the view.
 - **Channels (E3; docs/PACKS.md section 6).** `out.morph = [a, b, c, d]` drives four channels, with
   motion on or off, and three new kinds follow them:
   - `morph` (kind 17): `to: (c) => [x, y, z]` gives each splat its own target (recipe coordinates);
