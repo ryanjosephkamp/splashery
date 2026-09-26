@@ -308,6 +308,42 @@ const TW_AHEAD = mul(TW_CAM, 0.42);
 // The heat-up's glow, added over the wax: hot orange, magenta, gold, orange.
 const LAVA_GLOW = [[0.75, 0.16, 0], [0.45, 0, 1], [0.35, 0, 1], [0.35, 0.45, 0], [0.75, 0.18, 0]];
 
+// Waterfall: the cliff's height, where the river runs over the lip, and
+// the falling curtain (u across, v down). A tap sends a surge down: a
+// white-water front runs along the river, over the lip and down the
+// curtain; the curtain swells wider and thicker, foam spreads over the
+// pool and a cloud of mist billows up; then it calms.
+const WF_TOP = 1.25;
+const WF_LIP = 0.28;
+const WF_SECS = 5.2;
+const wfFall = (u, v) => [
+  (u - 0.5) * 0.6 * (1 + 0.25 * v),
+  WF_TOP - v * (WF_TOP - 0.06),
+  WF_LIP + 0.2 * Math.sin(Math.min(1, v * 2) * Math.PI * 0.5) - 0.02 * v,
+];
+// The surge's curtain: wider, thrown further out and thicker (e from -1
+// at its back to 1 at its front).
+const wfSurge = (u, v, e) => {
+  const p = wfFall(u, v);
+  const out = 0.07 * Math.sin(Math.min(1, v * 1.6) * Math.PI * 0.5);
+  return [p[0] * (1.2 + 0.3 * v), p[1], p[2] + out + e * (0.012 + 0.05 * v)];
+};
+// When the surge's front reaches a place (seconds after the tap): along
+// the river at a steady run, then down the curtain speeding up, then out
+// over the pool. The front's channel is the time over WF_FRONT.
+const WF_FRONT = 2;
+const wfRiver = (z) => 0.42 * clamp01((z + 0.34) / (WF_LIP + 0.34));
+const wfDrop = (v) => {
+  const h = v * (WF_TOP - 0.06);
+  return 0.42 + (-1.2 + Math.sqrt(1.44 + 7 * h)) / 3.5;
+};
+// How far down the curtain the front is at s seconds (0 at the lip, 1 at
+// the foot): wfDrop turned round.
+const wfDown = (s) => {
+  const t = (s - 0.42) * 3.5 + 1.2;
+  return s <= 0.42 ? 0 : Math.min(1, (t * t - 1.44) / 7 / (WF_TOP - 0.06));
+};
+
 export const RECIPES = {
   campfire: {
     alive: true,
@@ -1881,10 +1917,44 @@ export const RECIPES = {
 
   waterfall: {
     alive: true,
+    controls: [{ key: "surge", label: "Surge", type: "pulse", ease: WF_SECS }],
+    action: { key: "surge", label: "Send a surge" },
+    // A tap sends a surge of water over the falls. A white-water front runs
+    // along the river, over the lip and down the curtain (a band on channel
+    // 0, keyed on when the front gets there). Behind it a wider, thicker
+    // sheet of white water unrolls down the curtain from the lip (a morph on
+    // channel 1: built rolled up along the lip), with streaks pouring down
+    // it; foam spreads over the pool and a big cloud of mist billows up
+    // from it (channel 2); then it all calms.
+    drive(t, c, out) {
+      const s = since(c.surge, WF_SECS);
+      if (s === null) {
+        out.morph = [-0.3, 0, 0, 0];
+        out.parts.surge = { visible: 0 };
+        out.parts.streaks = { visible: 0 };
+        out.parts.foam = {};
+        out.parts.mist = {};
+        return;
+      }
+      const calm = 1 - ease(band(s, 3.0, 4.4));
+      const pool = band(s, 0.95, 1.6) * (1 - band(s, 3.2, 4.9));
+      out.morph = [s / WF_FRONT, wfDown(s), pool, 0];
+      out.glow = [0.8, 0.9, 0.95, 1.2 * (1 - band(s, 1.9, 2.3))];
+      out.parts.surge = { visible: band(s, 0.4, 0.5) * calm };
+      out.parts.streaks = { visible: ease(band(s, 0.75, 1.15)) * calm };
+      const gone = band(s, 4.95, 5.15);
+      out.parts.foam = { scale: 1 + 0.85 * easeOut(band(s, 0.95, 2.8)) * (1 - gone) };
+      const billow = easeOut(band(s, 1.0, 4.6));
+      out.parts.mist = {
+        scale: 1 + 2.1 * billow * (1 - gone),
+        offset: [0, 0.3 * billow * (1 - gone), 0.04 * billow * (1 - gone)],
+        quat: quatAxisAngle([0, 1, 0], 0.5 * billow * (1 - gone)),
+      };
+    },
     build(k) {
       const rand = k.rand;
-      const TOP = 1.25;
-      const LIP = 0.28;
+      const TOP = WF_TOP;
+      const LIP = WF_LIP;
       // The cliff: a rock wall with strata and moss on its ledges.
       const rock = (c) => {
         const g = c.fbm(c.p[0] * 4, c.p[1] * 4, c.p[2] * 4);
@@ -1907,6 +1977,9 @@ export const RECIPES = {
           color: rock,
         });
       }
+      // The surge's front glows white as it passes (channel 0: the time
+      // it gets there over WF_FRONT).
+      const front = (at) => ({ kind: "band", channel: 0, params: [at / WF_FRONT, 0.045] });
       // The river on top, running to the lip.
       k.add(
         k.param((u, v) => [(u - 0.5) * 0.6, TOP + 0.005, -0.34 + v * (LIP + 0.34)], {
@@ -1916,28 +1989,50 @@ export const RECIPES = {
         {
           pattern: false,
           color: (c) => mix("#4aa0c8", "#bfe8f6", 0.5 + 0.5 * Math.sin(c.p[2] * 40 + c.p[0] * 5)),
+          ...front(0),
+          params: (c) => [wfRiver(c.p[2]) / WF_FRONT, 0.045],
         },
       );
-      // The falling curtain, curving out from the lip.
-      const fallAt = (u, v) => {
-        const x = (u - 0.5) * 0.6 * (1 + 0.25 * v);
-        const y = TOP - v * (TOP - 0.06);
-        const z = LIP + 0.2 * Math.sin(Math.min(1, v * 2) * Math.PI * 0.5) - 0.02 * v;
-        return [x, y, z];
+      // The falling curtain, curving out from the lip. It swells in a surge
+      // (wider, further out and thicker: its splats spread to the front and
+      // back of the thicker sheet).
+      const sheet = (c) => {
+        const s = 0.5 + 0.5 * Math.sin(c.u * 70 + c.noise(c.u * 8, c.v * 3, 0) * 4);
+        return mix("#7ec4e4", "#ffffff", 0.35 + 0.5 * s);
       };
-      k.add(k.param(fallAt, { grid: 24 }), {
+      k.add(k.param(wfFall, { grid: 24 }), {
         opacity: 0.8,
         flat: 0.25,
         pattern: false,
-        color: (c) => {
-          const s = 0.5 + 0.5 * Math.sin(c.u * 70 + c.noise(c.u * 8, c.v * 3, 0) * 4);
-          return mix("#7ec4e4", "#ffffff", 0.35 + 0.5 * s);
-        },
+        color: sheet,
+        ...front(0),
+        params: (c) => [wfDrop(c.v) / WF_FRONT, 0.045],
+      });
+      // The surge's sheet: built rolled up along the lip and unrolled down
+      // the curtain by channel 1, wider, further out and thicker than it.
+      const surge = k.part("surge", { pivot: [0, TOP, LIP] });
+      k.cloud({ share: 0.05, size: 1.25, pattern: false }, (r) => {
+        const u = r();
+        const v = r();
+        const q = wfSurge(u, v, 2 * r() - 1);
+        const s = 0.5 + 0.5 * Math.sin(u * 70 + 3 * r());
+        return {
+          p: [q[0], TOP - 0.004, LIP + 0.01],
+          to: q,
+          channel: 1,
+          n: unit([0, 0.2, 1]),
+          flat: 0.35,
+          // Softer towards its foot, so its leading edge is ragged water.
+          size: 1 + 0.6 * smoothstep(0.75, 1, v),
+          color: mix("#a8dcf2", "#ffffff", 0.5 + 0.5 * s),
+          opacity: 0.55 * (1 - 0.65 * smoothstep(0.8, 1, v + 0.1 * (r() - 0.5))),
+          part: surge,
+        };
       });
       k.cloud({ share: 0.12, size: 0.8, pattern: false }, (r) => {
         const u = r();
         const v = r() * 0.92;
-        const p = fallAt(u, v);
+        const p = wfFall(u, v);
         return {
           p: [p[0], p[1], p[2] + 0.015],
           dir: [0, -1, 0.1],
@@ -1946,6 +2041,22 @@ export const RECIPES = {
           opacity: 0.8,
           kind: "fall",
           params: [0.22, r()],
+        };
+      });
+      // Streaks pouring down the surge's sheet once it is down (falling
+      // streaks cannot morph).
+      const streaks = k.part("streaks", { pivot: [0, TOP, LIP] });
+      k.cloud({ share: 0.04, size: 0.95, pattern: false }, (r) => {
+        const p = wfSurge(r(), r() * 0.94, 2 * r() - 1);
+        return {
+          p: [p[0], p[1], p[2] + 0.02],
+          dir: [0, -1, 0.12],
+          stretch: 5,
+          color: mix("#e6f7ff", "#ffffff", r()),
+          opacity: 0.85,
+          kind: "fall",
+          params: [0.28, r()],
+          part: streaks,
         };
       });
       // The pool, with foam where the water lands and drifting mist.
@@ -1969,6 +2080,46 @@ export const RECIPES = {
         kind: "rise",
         params: [0.45 + 0.3 * r(), r()],
       }));
+      // The surge's foam: built over the foam patch at the curtain's foot
+      // and spread by its part's scale, coming and going in lacy patches
+      // (channel 2, as the mist).
+      const foot = [0, 0.05, 0.44];
+      const foamPart = k.part("foam", { pivot: foot });
+      k.cloud({ share: 0.02, size: 1.5, pattern: false }, (r) => {
+        const a = r() * TAU;
+        const rr = Math.sqrt(r());
+        const x = Math.cos(a) * rr * 0.34;
+        const z = 0.52 + Math.sin(a) * rr * 0.2;
+        const lace = k.noise(x * 9, 3, z * 9);
+        return {
+          p: [x, 0.047 + 0.004 * r(), z],
+          n: [0, 1, 0],
+          flat: 0.2,
+          color: mix("#e2f4fc", "#ffffff", r()),
+          opacity: 0.85,
+          kind: "fade",
+          channel: 2,
+          params: [clamp01(0.45 * rr + 0.35 * (0.5 + 0.5 * lace)), -0.12],
+          part: foamPart,
+        };
+      });
+      // A cloud of mist that billows up from the pool: built small at the
+      // foot and grown by its part (channel 2 brings it in and out).
+      const mist = k.part("mist", { pivot: [0, 0.06, 0.5] });
+      k.cloud({ share: 0.012, size: 4.2, pattern: false }, (r) => {
+        const d = randDir(r);
+        const rr = Math.cbrt(r());
+        const p = [d[0] * 0.2 * rr, 0.06 + Math.abs(d[1]) * 0.14 * rr, 0.52 + d[2] * 0.12 * rr];
+        return {
+          p,
+          color: mix("#eef8ff", "#ffffff", r()),
+          opacity: 0.2,
+          kind: "fade",
+          channel: 2,
+          params: [0.75 * r() * (0.4 + 0.6 * rr), -0.2],
+          part: mist,
+        };
+      });
       // Mossy boulders around the pool.
       for (let i = 0; i < 9; i++) {
         const a = -0.4 + (i / 8) * (Math.PI + 0.8);
