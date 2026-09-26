@@ -43,6 +43,7 @@ const SUCC_SECS = 5.4;
 const BAMBOO_SECS = 5.4;
 const BAMBOO_SEG = 0.24;
 const STONE_SECS = 6.8;
+const KELP_SECS = 5.6;
 // When the stones hop back where they were.
 const STONE_BACK = 5.4;
 // How far (radians) a pinecone scale tips out when the cone opens.
@@ -2797,6 +2798,7 @@ export const RECIPES = {
       if (on && s > 5.0) ripple = 1.4 * band(s, 5.0, 6.4);
       out.morph = [1 - up, ripple, 0, 0];
       out.glow = [0.85, 1, 1, 0.55];
+      crossing(c, "lotus", on ? s : 0, [5.2], () => out.cues.push({ voice: "drip", f: 650, n: 1 }));
     },
     build(k) {
       const rand = k.rand;
@@ -3343,6 +3345,11 @@ export const RECIPES = {
       const open = cut ? ease(band(s, 0.1, 0.8)) * (1 - ease(band(s, 3.3, 4.3))) : 0;
       out.parts.wedge = { offset: mul(SAGUARO_OUT, open) };
       out.parts.drips = { visible: cut && s > 0.8 && s < 3.4 ? 1 : 0 };
+      crossing(c, "saguaro", on ? s : 0, [0.02, 0.9], (i) => {
+        if (cut && i === 0) out.cues.push({ voice: "squish", f: 200, decay: 1.4, vol: 0.8 });
+        if (cut && i === 1) out.cues.push({ voice: "drip", f: 1100, n: 3, rate: 2.5 });
+        if (!cut && i === 0) out.cues.push({ voice: "zap", f: 3200, to: 0.7, decay: 1.2 });
+      });
     },
     build(k, o) {
       reseed(k, o);
@@ -4420,7 +4427,7 @@ export const RECIPES = {
         const t0 = 0.15 + 0.25 * n;
         const e = [];
         for (let j = 0; j < sh.n; j++) {
-          knocks.push(t0 + 0.3 * j + 0.22);
+          if (n === 0) knocks.push(t0 + 0.3 * j + 0.22);
           const up = on ? easeOut(band(s, t0 + 0.3 * j, t0 + 0.3 * j + 0.26)) : 0;
           const down = on ? ease(band(s, 4.1 + 0.1 * (sh.n - j), 4.35 + 0.1 * (sh.n - j))) : 0;
           e.push(up * (1 - down));
@@ -4800,9 +4807,62 @@ export const RECIPES = {
 
   kelp: {
     alive: true,
+    controls: [{ key: "nibble", label: "Nibble", type: "pulse", ease: KELP_SECS }],
+    action: { key: "nibble", label: "Fish come to nibble" },
+    // A tap brings three little fish swimming in from the left. Each noses
+    // up to a blade and takes a few nibbles, and the kelp sways away from
+    // them, the nearest stalks first (it bends: four channels, one per band
+    // of stalks, which also keep it swaying gently at rest); then the fish
+    // swim off to the right.
+    drive(t, c, out, info) {
+      const s = progress(c.nibble) * KELP_SECS;
+      const on = c.nibble > 0;
+      out.morph = [0, 1, 2, 3].map((g) => {
+        const idle = 0.35 * Math.sin(t * 0.8 + g * 0.9);
+        if (!on) return idle;
+        const tau = s - (1.8 + 0.18 * g);
+        let push = 0;
+        if (tau > 0 && tau < 0.6) push = Math.sin((Math.PI / 2) * (tau / 0.6));
+        else if (tau >= 0.6) push = Math.cos(2.6 * (tau - 0.6)) * Math.exp(-(tau - 0.6) / 1.1);
+        return idle + 1.1 * push * (1 - band(s, KELP_SECS - 0.6, KELP_SECS));
+      });
+      out.tokens = (info.data?.fish || []).map((f, i) => {
+        if (!on) return { base: f.nib, visible: 0 };
+        const t0 = 0.2 * i;
+        let p;
+        let dir;
+        if (s < t0 + 1.2) {
+          const g = easeOut(band(s, t0, t0 + 1.2));
+          p = lerp3(f.from, f.nib, g);
+          p = add(p, [0, 0.04 * Math.sin(g * 9 + i), 0]);
+          dir = sub(f.nib, f.from);
+        } else if (s < 2.6 + 0.15 * i) {
+          // Nibbling: quick little pecks at the blade.
+          const w = s - t0 - 1.2;
+          p = add(f.nib, mul(f.peck, 0.035 * Math.max(0, Math.sin(w * 16))));
+          dir = f.peck;
+        } else {
+          const g = ease(band(s, 2.6 + 0.15 * i, 3.9 + 0.15 * i));
+          p = lerp3(f.nib, f.to, g);
+          dir = lerp3(f.peck, sub(f.to, f.nib), Math.min(1, g * 4));
+        }
+        const flat = unit([dir[0], dir[1] * 0.3, dir[2]]);
+        return {
+          base: f.nib,
+          offset: sub(p, f.nib),
+          quat: quatFromTo([1, 0, 0], flat),
+          visible: band(s, t0, t0 + 0.3) * (1 - band(s, 3.6 + 0.15 * i, 3.9 + 0.15 * i)),
+        };
+      });
+    },
     build(k) {
       const rand = k.rand;
-      const SW = sway(0.04, 0.05);
+      // The kelp bends away from the nibbling fish (a morph towards +x, more
+      // the higher it is), one channel per band of stalks from left to right.
+      const bent = (p, g) => {
+        const f = Math.pow(Math.max(0, (p[1] - 0.05) / 2.3), 1.7);
+        return { to: [p[0] + 0.42 * f, p[1] - 0.12 * f * f, p[2] + 0.08 * f], channel: g };
+      };
       // Sandy sea floor with rocks.
       grassMound(k, 0.85, 0, {
         h: 0.06,
@@ -4834,6 +4894,8 @@ export const RECIPES = {
       ];
       const blades = [];
       for (const st of stipes) {
+        const g = clamp(Math.floor(((st.x + 0.26) / 0.5) * 4), 0, 3);
+        const SW = { channel: g, to: (c) => bent(c.p, g).to };
         const lean = [current[0] * 0.35, 0, current[2] * 0.35];
         const pts = [];
         for (let i = 0; i <= 6; i++) {
@@ -4877,6 +4939,7 @@ export const RECIPES = {
             dir,
             L: 0.45 + 0.3 * rand(),
             W: 0.09 + 0.04 * rand(),
+            g,
           });
           k.add(k.ellipsoid(0.02, 0.028, 0.02), {
             pos: add(p, mul(out, 0.018)),
@@ -4906,7 +4969,8 @@ export const RECIPES = {
         k.add(shape, {
           opacity: 0.9,
           flat: 0.2,
-          ...SW,
+          channel: b.g,
+          to: (c) => bent(c.p, b.g).to,
           color: (c) => {
             const mid = Math.abs(c.u - 0.5) < 0.05;
             const edge = Math.abs(c.u - 0.5) * 2;
@@ -4919,6 +4983,42 @@ export const RECIPES = {
           },
         });
       }
+      // Three fish that come to nibble (hidden until a tap): each built at
+      // the blade it nibbles, in front, and turned to face along its path.
+      const nibbles = blades
+        .filter((b) => b.p[0] < 0.05 && b.p[1] > 0.7 && b.p[1] < 1.7)
+        .sort((a, b) => b.p[2] - a.p[2])
+        .slice(0, 3);
+      const fish = nibbles.map((b, i) => {
+        const at = add(b.p, mul(b.dir, b.L * 0.45));
+        const nib = add(at, [-0.13, 0, 0.14]);
+        const f = {
+          from: [-1.15, nib[1] + 0.2 * (i - 1), nib[2] + 0.3],
+          nib,
+          peck: unit(sub(at, nib)),
+          to: [1.1, nib[1] + 0.3, nib[2] - 0.4],
+        };
+        const cols = [
+          ["#3a8aff", "#ffd11a"],
+          ["#ffd11a", "#ff9a1a"],
+          ["#ff5a8a", "#ffe0e8"],
+        ][i];
+        const tok = { kind: "token", params: [i, 0], pattern: false, weight: 3, fit: false };
+        k.add(k.ellipsoid(0.085, 0.052, 0.028), {
+          ...tok,
+          pos: nib,
+          color: (c) =>
+            c.lp[0] > 0.058 && Math.abs(c.lp[1]) < 0.01 && Math.abs(c.lp[2]) > 0.012 ? "#111111" : lit(cols[0], c.n, 0.3), // prettier-ignore
+        });
+        k.add(k.ellipsoid(0.034, 0.042, 0.009), {
+          ...tok,
+          pos: add(nib, [-0.098, 0, 0]),
+          color: cols[1],
+        });
+        return f;
+      });
+      k.data = { fish };
+      k.fitMorphs = false;
       // Two bright fish nosing about, and bubbles drifting up.
       for (let f = 0; f < 2; f++) {
         const a = f * 2.8 + 0.4;
@@ -4984,6 +5084,13 @@ export const RECIPES = {
         if (snow) vis = Math.max(vis, ease(band(s, 3.2, 4.8)));
       }
       out.parts.dust = { angle: rock, visible: vis };
+      crossing(c, "pine", on ? s : 0, [sh + 0.2, sh + 0.85], (i) =>
+        out.cues.push(
+          i === 0
+            ? { voice: "hiss", f: 2600, decay: 0.9, vol: 0.4 }
+            : { voice: "thud", f: 70, decay: 0.8, vol: 0.5 },
+        ),
+      );
       out.morph = [0, 1, 2, 3].map((g) => {
         if (!on || s > melt + 0.75) return 0;
         const d = sh + 0.18 + 0.16 * g;

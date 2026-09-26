@@ -494,35 +494,68 @@ export const TOY_SOUNDS = {
   ],
 
   // ---- Nature -----------------------------------------------------------------------
-  oak: { voice: "flutter", f: 3000, rate: 35, decay: 1.6, vol: 0.6 },
+  // E4: timed to the tap effects in src/packs/nature.js; later hits (the
+  // palm's coconuts, the daisy's plucks, the bamboo's sections, the pebbles'
+  // clacks, the pine's snow, the saguaro's cut) are cues from drive().
+  oak: [
+    { voice: "flutter", f: 2600, rate: 30, decay: 1.8, vol: 0.6 },
+    { voice: "patter", at: 2.4, f: 1800, n: 10, decay: 2.4, vol: 0.4 },
+  ],
   pine: { voice: "bell", notes: "E7 G7 E7 G7 E7", step: 0.05, decay: 0.15, bright: 0.9, vol: 0.6 }, // prettier-ignore
-  palm: { voice: "hollow", notes: "D4 - A3", step: 0.2, decay: 0.8 },
+  palm: { voice: "flutter", f: 1800, rate: 18, decay: 1.4, vol: 0.5 },
   "cherry-blossom": [
     { voice: "wind", f: 1000, rate: 0.8, decay: 0.9, vol: 0.6 },
     { voice: "patter", at: 0.3, f: 2400, n: 14, decay: 1.4, vol: 0.5 },
   ],
-  maple: { voice: "crunch", f: 3400, n: 24, decay: 2.2, bright: 0.8, vol: 0.6 },
-  bonsai: { voice: "clack", notes: "A7 - A7", step: 0.07, decay: 0.7 },
-  willow: { voice: "breath", f: 500, to: 0.6, decay: 2.2 },
-  sunflower: { voice: "tone", f: "F4", to: 1.5, kind: "triangle", decay: 2 },
-  rose: { voice: "harp", f: "E5" },
-  dandelion: { voice: "breath", f: 1400, to: 0.6, decay: 0.7 },
-  tulip: { voice: "pluck", f: "A4", decay: 0.5, bright: 0.2 },
-  daisy: { voice: "switch", notes: "C6 C6 C6 C6", step: 0.14, decay: 0.6 },
-  lotus: [
-    { voice: "drip", f: 800, n: 1 },
-    { voice: "bell", at: 0.12, f: "G5", decay: 0.8, bright: 0.2 },
+  maple: [
+    { voice: "whoosh", f: 400, to: 1.8, decay: 1.6, vol: 0.7 },
+    { voice: "crunch", at: 0.3, f: 3400, n: 24, decay: 2.6, bright: 0.8, vol: 0.5 },
   ],
-  mushroom: { voice: "breath", f: 350, to: 0.4, decay: 0.35 },
-  fern: { voice: "flutter", f: 2200, rate: 12, decay: 1.3, vol: 0.6 },
-  saguaro: { voice: "zap", f: 3200, to: 0.7, decay: 1.2 },
-  coral: { voice: "bubbles", f: 650, n: 9 },
-  pinecone: { voice: "scrape", f: 350, rate: 25, decay: 0.8 },
-  acorn: { voice: "pop", f: 1150, decay: 0.6 },
-  succulent: { voice: "pluck", f: "C5", decay: 0.4, bright: 0.35 },
-  bamboo: { voice: "hollow", notes: "G4 C5 E5", step: 0.12, decay: 0.7 },
+  bonsai: [
+    { voice: "tone", f: "C4", to: 1.5, kind: "triangle", decay: 1.2, vol: 0.35 },
+    { voice: "clack", at: 2.28, notes: "A7 - A7", step: 0.07, decay: 0.7 },
+  ],
+  willow: { voice: "breath", f: 500, to: 0.6, decay: 2.8 },
+  sunflower: { voice: "tone", f: "F4", to: 1.5, kind: "triangle", decay: 2 },
+  rose: [
+    { voice: "harp", f: "E5" },
+    { voice: "harp", at: 1.5, f: "B4", vol: 0.6 },
+  ],
+  dandelion: { voice: "breath", f: 1400, to: 0.6, decay: 0.7 },
+  tulip: { voice: "pluck", notes: "A4 C#5 E5", step: 0.18, decay: 0.5, bright: 0.2 },
+  daisy: { voice: "whoosh", f: 900, to: 1.4, decay: 0.8, vol: 0.5 },
+  lotus: [
+    { voice: "drip", at: 0.55, f: 800, n: 1 },
+    { voice: "bell", at: 2.0, f: "G5", decay: 0.8, bright: 0.2 },
+  ],
+  mushroom: [
+    { voice: "breath", f: 350, to: 0.4, decay: 0.35 },
+    { voice: "sparkle", at: 0.25, f: 2200, n: 9, decay: 2.4, vol: 0.5 },
+  ],
+  fern: [
+    { voice: "flutter", f: 2200, rate: 12, decay: 2.4, vol: 0.6 },
+    { voice: "flutter", at: 0.8, f: 2000, rate: 10, decay: 2, vol: 0.5 },
+    { voice: "flutter", at: 1.6, f: 1800, rate: 9, decay: 2, vol: 0.4 },
+  ],
+  saguaro: { voice: "scrape", f: 900, rate: 40, decay: 0.3, vol: 0.4 },
+  coral: { voice: "bubbles", f: 650, n: 14, decay: 2.2 },
+  pinecone: [
+    { voice: "scrape", f: 350, rate: 25, decay: 1.2 },
+    { voice: "flutter", at: 1.0, f: 1200, rate: 22, decay: 1.6, vol: 0.4 },
+  ],
+  acorn: [
+    { voice: "pop", f: 1150, decay: 0.6 },
+    { voice: "pop", at: 0.22, f: 980, decay: 0.6 },
+    { voice: "wood", at: 0.66, f: 900, decay: 0.6, vol: 0.5 },
+    { voice: "wood", at: 0.88, f: 780, decay: 0.6, vol: 0.5 },
+  ],
+  succulent: { voice: "pluck", notes: "C5 E5 G5 C6", step: 0.3, at: 0.6, decay: 0.4, bright: 0.35 },
+  bamboo: { voice: "hollow", f: "G3", decay: 0.7 },
   rocks: { voice: "clatter", f: 1600, n: 10 },
-  kelp: { voice: "bubbles", f: 300, n: 12, decay: 1.4 },
+  kelp: [
+    { voice: "bubbles", f: 300, n: 12, decay: 1.4 },
+    { voice: "click", at: 1.4, notes: "C7 - C7 - C7", step: 0.1, vol: 0.5 },
+  ],
 
   // ---- Weather ----------------------------------------------------------------------
   campfire: [
