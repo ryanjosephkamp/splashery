@@ -461,8 +461,11 @@ Proposals below are suggestions; the owner may change them.
   - Fixed: C1: the glass now tapers into the cap and sits in rolled metal collars top and bottom.
   - Effect: Blobs speed up, glow and shift colour for a few seconds.
   - Improved: E4: a tap heats the lamp: the wax blobs speed up to about three and a half times,
-    smoothly with no jump, the wax glows and shifts from orange through magenta to gold and the
-    liquid brightens, then it all eases back (about 4.5 s). The glow also shows with motion off.
+    smoothly with no jump, the wax glows and shifts through its colour set's glow (orange, magenta,
+    gold for the classic lamp) and the liquid brightens, then it all eases back (about 4.5 s). The
+    glow also shows with motion off. After the owner's review: a Colour set (Pick below, Ocean,
+    Violet, Lime, Sunset, Midnight), Blobs (2 to 12), Blob size and Blob shape (mixed, round, tall),
+    and Flow and Glow sliders.
   - Sound: Low bubbling blorp.
 - **Snow globe** (`snow-globe`). Now: tap: Shake the globe. Plan: keep.
   - Owner: Basically perfect.
@@ -473,10 +476,14 @@ Proposals below are suggestions; the owner may change them.
 - **Ice swan** (`ice-statue`). Now: tap: Melt and refreeze. Plan: keep.
   - Owner: Let the little white specks move. The swan could melt or break apart.
   - Effect: Specks drift; tap melts the swan into drips, then it refreezes.
-  - Improved: E4: a tap melts the ice swan: it slumps, drips fall and a smooth meltwater puddle
-    spreads from under the pedestal; then it refreezes and a frosty white light sweeps up it from
-    the base to the beak (about 5.5 s). Frost specks drift up round it while it is cold, and the
-    Temperature slider still works.
+  - Improved: E4, redone after the owner's review ("it melts by dripping water and slowly breaking
+    decomposing, with the melt speed accelerating"): a tap melts the swan faster and faster: water
+    beads and drips from the beak, the wings and the pedestal into a spreading puddle; the beak
+    wears away, the wing tips crack off and fall into the water, then the head and the top of the
+    neck; the tail, the neck and the wings wear away and the body wears down to a lump, each piece
+    solid ice getting smaller; the fallen pieces melt away in the puddle. Then it refreezes piece by
+    piece and a frosty white light sweeps up it (about 7.5 s). Temperature melts it to the same
+    point and back.
   - Sound: Ice crackle and drips.
 - **Candle** (`candle`). Now: tap: Blow out or light. Plan: keep.
   - Owner: Pretty good; OK as it is.
@@ -510,10 +517,11 @@ Proposals below are suggestions; the owner may change them.
   - Sound: Rushing water swell.
 - **Ocean wave** (`ocean-wave`). Now: tap: Break the wave. Plan: keep.
   - Effect: The wave curls and breaks into foam.
-  - Improved: E4: a tap breaks the wave: the lip pitches forward and crashes into the flat water in
-    front, turns to white water and falls flat, and clumps of spray burst up and fall back; foam
-    spreads down the face and over the water, then thins away as the lip curls over again from the
-    crest (about 5 s).
+  - Improved: E4, redone after the owner's review ("the waves themselves should curl, not just the
+    end"): the whole wave moves as one sheet: a tap pitches the lip out and the face leans over
+    after it until the lip crashes into the water in front; white water falls flat, spray bursts up
+    and foam spreads; the wave collapses and flattens, then a new swell rises behind, steepens,
+    throws a lip and curls over into its resting curl (about 5.5 s). Seen from three quarters.
   - Sound: Wave crash.
 - **Geyser** (`geyser`). Now: tap: Erupt. Plan: keep.
   - Owner: Pretty cool.
@@ -1044,9 +1052,11 @@ Proposals below are suggestions; the owner may change them.
 - **Pinecone** (`pinecone`). Now: tap: Open the scales. Plan: keep.
   - Owner: Good-looking but underwhelming; break apart.
   - Effect: The scales open wide (as in dry weather) and seeds drift out.
-  - Improved: E4: a tap opens the cone as in dry weather: every scale tips out from its root, and
-    sixteen winged seeds slip out and spin down like little propellers, each on its own path; then
-    the scales close again (about 5.5 s).
+  - Improved: E4, redone after the owner's review ("the actual pieces of the pinecone must fall
+    off"): a tap opens the cone as in dry weather and six winged seeds spin down; then the 42 scales
+    facing you break off one after another from the bottom up, tumble and land flat in a pile round
+    the base, leaving the bare core with the stubs where they grew; they fly back up into place, top
+    first, and the cone closes (about 7 s).
   - Sound: Woody creak.
 - **Acorns** (`acorn`). Now: tap: Pop the caps. Plan: keep.
   - Owner: Should do something.
