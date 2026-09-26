@@ -1331,7 +1331,6 @@ export const RECIPES = {
 
   tornado: {
     alive: true,
-    controls: [{ key: "power", label: "Power", type: "slider", default: 0.6 }],
     controls: [
       { key: "power", label: "Power", type: "slider", default: 0.6 },
       { key: "whirl", label: "Spin up", type: "pulse", ease: TW_SECS },
