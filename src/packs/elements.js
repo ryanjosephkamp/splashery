@@ -1293,18 +1293,19 @@ export const RECIPES = {
         params: [0.3, r()],
         part: drips,
       }));
-      // The puddle: flat splats lying on the ground, a little uneven at its
-      // rim, spread out by its part's scale.
+      // The puddle: flat splats lying on the ground in a sunflower spiral
+      // (evenly spread, so it is smooth water, not blotches), a little
+      // uneven at its rim, spread out by its part's scale.
       const puddle = k.part("puddle", { pivot: [0, 0, 0] });
-      k.cloud({ share: 0.02, size: 2.6, pattern: false }, (r) => {
-        const a = r() * TAU;
-        const rr = 0.9 * Math.sqrt(r()) * (0.92 + 0.08 * Math.sin(a * 5 + 1));
+      k.cloud({ share: 0.012, size: 3, pattern: false }, (r, i, n) => {
+        const a = i * 2.399963;
+        const rr = 0.9 * Math.sqrt((i + 0.5) / n) * (0.93 + 0.07 * Math.sin(a * 5 + 1));
         return {
           p: [Math.cos(a) * rr, 0.004, Math.sin(a) * rr * 0.9],
           n: [0, 1, 0],
-          flat: 0.5,
-          color: mix("#bfe6f8", "#7fc0e0", rr / 0.9),
-          opacity: 0.4,
+          flat: 0.3,
+          color: mix("#c4e8f8", "#7fc0e0", rr / 0.9),
+          opacity: 0.5,
           part: puddle,
         };
       });
