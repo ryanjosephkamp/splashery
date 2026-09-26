@@ -10,10 +10,10 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 284 toys. 229 have a tap action today; the other 55 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 227.
+- 284 toys. 249 have a tap action today; the other 35 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 247.
 - **more** (has an effect; make it clearer or more dramatic): 2.
-- **new** (needs its own effect): 55.
+- **new** (needs its own effect): 35.
 - Visual fixes: 0 open, 28 done. Touch or drag interaction asked for: 4.
 
 ## By phase
@@ -27,21 +27,24 @@ Proposals below are suggestions; the owner may change them.
   fly, May beetle, Millipede, Carder bumblebee, Raspberry, Blackberry, Blueberry, Grape, Cinnamon
   star cookie, Tomatoes, Mandeltorus, Basket, Real rubber duck, Garden gnome, Wooden elephant,
   Marble bust, Ukulele, Alarm clock, Vintage camera, Boombox, Real croissant, Carrot cake,
-  Pomegranate, Lantern, Cat statue, Horse statue, American football, Rugby ball, Hockey puck,
-  Shuttlecock, Flying disc, Beating heart, Sun, Solar system, Mercury, Venus, Earth, Moon, Mars,
-  Jupiter, Saturn, Uranus, Neptune, Aurora world, Asteroid, Comet, Meteor, Star, Pulsar, Black hole,
-  Star cluster, Ring nebula, Nebula, Spiral galaxy, Virus, Bacteriophage, Bacterium, Red blood cell,
-  Neuron, Astrocyte, Animal cell, DNA, White blood cell, Microglia, Diatom, Pollen grain, Snowflake,
-  Chromosome, Mitochondrion, Paramecium, Amoeba, Electron orbital, Atom, Molecule, Protein, Crystal
-  lattice, Diamond, Ruby, Emerald, Amethyst geode, Sapphire, Quartz cluster, Opal, Crystal ball,
-  Brain, Eye, Lungs, Tooth, Kidney, Oak tree, Pine tree, Palm tree, Cherry blossom, Maple tree,
-  Bonsai, Weeping willow, Sunflower, Rose, Tulips, Daisies, Lotus, Toadstool, Fern, Saguaro cactus,
-  Coral reef, Pinecone, Acorns, Succulent, Bamboo, Pebbles, Kelp, Lava lamp, Ice swan, Tornado,
-  Rainbow, Iceberg, Waterfall, Ocean wave, Ice cream, Gummy bear, Coffee, Rubber duck, Newton's
-  cradle, Kite, Chess set, Lorenz attractor, Möbius strip, Klein bottle, Menger sponge, Hypercube,
-  Torus knot, Gyroid, Mandelbulb, Seashell spiral, Wizard's orb, Jellyfish, Pufferfish, Snail,
-  Octopus, Fireworks, Decorated tree, Diya, Acoustic guitar, Snare drum, Xylophone, Hot-air balloon,
-  Bus, Jet airliner, Sailboat, Submarine, Bicycle, Big Ben, Castle, Pagoda, Windmill.
+  Pomegranate, Lantern, Cat statue, Horse statue, Basketball, Soccer ball, American football, Tennis
+  ball, Baseball, Softball, Beach ball, Golf ball, Rugby ball, Volleyball, Water polo ball,
+  Ping-pong ball, Cricket ball, Bowling ball, Pool ball, Pickleball, Dodgeball, Medicine ball,
+  Lacrosse ball, Squash ball, Bouncy ball, Marble, Hockey puck, Shuttlecock, Flying disc, Beating
+  heart, Sun, Solar system, Mercury, Venus, Earth, Moon, Mars, Jupiter, Saturn, Uranus, Neptune,
+  Aurora world, Asteroid, Comet, Meteor, Star, Pulsar, Black hole, Star cluster, Ring nebula,
+  Nebula, Spiral galaxy, Virus, Bacteriophage, Bacterium, Red blood cell, Neuron, Astrocyte, Animal
+  cell, DNA, White blood cell, Microglia, Diatom, Pollen grain, Snowflake, Chromosome,
+  Mitochondrion, Paramecium, Amoeba, Electron orbital, Atom, Molecule, Protein, Crystal lattice,
+  Diamond, Ruby, Emerald, Amethyst geode, Sapphire, Quartz cluster, Opal, Crystal ball, Brain, Eye,
+  Lungs, Tooth, Kidney, Oak tree, Pine tree, Palm tree, Cherry blossom, Maple tree, Bonsai, Weeping
+  willow, Sunflower, Rose, Tulips, Daisies, Lotus, Toadstool, Fern, Saguaro cactus, Coral reef,
+  Pinecone, Acorns, Succulent, Bamboo, Pebbles, Kelp, Lava lamp, Ice swan, Tornado, Rainbow,
+  Iceberg, Waterfall, Ocean wave, Ice cream, Gummy bear, Coffee, Rubber duck, Newton's cradle, Kite,
+  Chess set, Lorenz attractor, Möbius strip, Klein bottle, Menger sponge, Hypercube, Torus knot,
+  Gyroid, Mandelbulb, Seashell spiral, Wizard's orb, Jellyfish, Pufferfish, Snail, Octopus,
+  Fireworks, Decorated tree, Diya, Acoustic guitar, Snare drum, Xylophone, Hot-air balloon, Bus, Jet
+  airliner, Sailboat, Submarine, Bicycle, Big Ben, Castle, Pagoda, Windmill.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -50,12 +53,9 @@ Proposals below are suggestions; the owner may change them.
 - **E4, new effects: nature and weather.** None.
 - **E5, new effects: food.** Watermelon, Cupcake, Lollipop, Candy cane, Macarons, Pretzel,
   Croissant, Sushi, Taco, Apple, Bananas, Orange, Kiwi, Pineapple, Cherries, Grapes, Avocado
-- **E6, new effects: balls and the rest.** Basketball, Soccer ball, Tennis ball, Baseball, Softball,
-  Beach ball, Golf ball, Volleyball, Water polo ball, Ping-pong ball, Cricket ball, Bowling ball,
-  Pool ball, Pickleball, Dodgeball, Medicine ball, Lacrosse ball, Squash ball, Bouncy ball, Marble,
-  Heraldic shield, Crown, School of fish, Nautilus, Sea urchin, Frog, Snowman, Eiffel Tower,
-  Washington Monument, Pyramids of Giza, Twisting supertall, Statue of Liberty, White House, Leaning
-  Tower of Pisa, Colosseum, Parthenon, Stonehenge, Taj Mahal
+- **E6, new effects: balls and the rest.** Heraldic shield, Crown, School of fish, Nautilus, Sea
+  urchin, Frog, Snowman, Eiffel Tower, Washington Monument, Pyramids of Giza, Twisting supertall,
+  Statue of Liberty, White House, Leaning Tower of Pisa, Colosseum, Parthenon, Stonehenge, Taj Mahal
 - **F, touch and drag interaction.** Gummy bear, Building bricks, Newton's cradle, Puzzle cube.
 
 ## Scans (30)
@@ -287,16 +287,22 @@ Proposals below are suggestions; the owner may change them.
 
 ## Balls (25)
 
-- **Basketball** (`basketball`). Now: hops. Plan: new effect (E6).
+- **Basketball** (`basketball`). Now: tap: Dribble and spin. Plan: keep.
   - Owner: Balls look good. Bouncing is fine but each should bounce differently.
   - Fixed: C1: pebbled rubber (embossed bumps lit from one side), clean black channels in small
     splats, even splat placement.
   - Effect: Dribble: fast low bounces, then a spin on a fingertip.
+  - Improved: E6a: a dribble: three fast, low bounces, each pushed back down by an unseen hand; then
+    a toss onto a fingertip that comes up from below, where it spins with a slight wobble; it drops
+    off and bounces lower each time, still spinning down (4.8 s).
   - Sound: Hollow basketball boing.
-- **Soccer ball** (`soccer-ball`). Now: hops. Plan: new effect (E6).
+- **Soccer ball** (`soccer-ball`). Now: tap: Keepy-uppy. Plan: keep.
   - Fixed: C1: smooth, slightly glossy panels and clean grooved seams; the speckle (the far side
     showing through gaps) is gone with even splat placement.
   - Effect: Keepy-uppy: three small kicks with spin.
+  - Improved: E6a: keepy-uppy: three small kicks from an unseen foot, each with its own spin, the
+    last one higher; then it drops and bounces lower and lower (it keeps about 0.78 of its speed)
+    and settles (3.6 s).
   - Sound: Firm thump.
 - **American football** (`american-football`). Now: tap: Throw a spiral. Plan: keep.
   - Owner: The owner (2026-09-24): some sports balls look grainy rather than realistic; the tennis
@@ -307,27 +313,39 @@ Proposals below are suggestions; the owner may change them.
   - Improved: E1b: a spiral pass: it flies up nose first, spinning fast about its long axis, the
     nose tipping over at the top, and lands with a wobble (2.4 s).
   - Sound: Leathery whoosh.
-- **Tennis ball** (`tennis-ball`). Now: hops. Plan: new effect (E6).
+- **Tennis ball** (`tennis-ball`). Now: tap: Bounce it hard. Plan: keep.
   - Owner: The owner (2026-09-24): some sports balls look grainy rather than realistic; the tennis
     ball should be fuzzy and the American football should look like leathered pigskin. Look at the
     other balls too.
   - Fixed: C1: soft felt in larger round splats with a fuzz of fine hairs standing off it (which
     also softens the edge), and a clean white seam.
   - Effect: Fast high bounce with the fuzz fluffing out.
+  - Improved: E6a: slammed onto the floor, it squashes hard and shoots up high with topspin, the
+    fuzz fluffing out at each hit; each bounce is lower (0.75 of its speed) (1.7 s).
   - Sound: Pock.
-- **Baseball** (`baseball`). Now: hops. Plan: new effect (E6).
+- **Baseball** (`baseball`). Now: tap: Pitch a curveball. Plan: keep.
   - Fixed: C1: smooth white leather with a soft sheen and crisp raised red stitches.
   - Effect: Curveball: it spins hard and swerves.
+  - Improved: E6a: a curveball: wound up, then pitched away spinning hard, it breaks down and to the
+    side late; the crack of the bat sends it back in a looping arc to its spot, where it takes a
+    dead little bounce. Its highlight stays put while it spins (2.3 s).
   - Sound: Bat crack.
-- **Softball** (`softball`). Now: hops. Plan: new effect (E6).
+- **Softball** (`softball`). Now: tap: Pitch underhand. Plan: keep.
   - Fixed: C1: smooth yellow leather with a soft sheen and crisp raised red stitches.
   - Effect: Underhand arc and a softer thud.
+  - Improved: E6a: an underhand pitch: a swing back and through, then a high, slow arc away with a
+    little backspin; it lands with a soft thud and hardly bounces; a softer toss brings it back (3.0
+    s).
   - Sound: Muffled thud.
-- **Beach ball** (`beach-ball`). Now: hops. Plan: new effect (E6).
+- **Beach ball** (`beach-ball`). Now: tap: Toss it up. Plan: keep.
   - Effect: Floats up slowly, drifts and bobs down.
+  - Improved: E6a: punched up, the air slows it at once; it floats down slowly, drifting and turning
+    lazily, lands soft with a wobble and bobs to a stop (2.9 s).
   - Sound: Plasticky boing.
-- **Golf ball** (`golf-ball`). Now: hops. Plan: new effect (E6).
+- **Golf ball** (`golf-ball`). Now: tap: Chip it. Plan: keep.
   - Effect: Tiny chip hop and a spin-back.
+  - Improved: E6a: a chip: it pops up with heavy backspin, lands, checks with a tiny hop, and the
+    backspin grips and pulls it back to its spot (1.7 s).
   - Sound: Click of a club.
 - **Rugby ball** (`rugby-ball`). Now: tap: Punt. Plan: keep.
   - Fixed: C1: an even pebbled grip; clean seams.
@@ -335,53 +353,83 @@ Proposals below are suggestions; the owner may change them.
   - Improved: E1b: a punt: it tumbles end over end up and down, lands on a point and takes an
     awkward bounce before settling (2.6 s).
   - Sound: Dull thud.
-- **Volleyball** (`volleyball`). Now: hops. Plan: new effect (E6).
+- **Volleyball** (`volleyball`). Now: tap: Set and spike. Plan: keep.
   - Fixed: C1: smooth leather panels with a sheen and clean fine seams.
   - Effect: A set then a spike straight down.
+  - Improved: E6a: a soft set straight up with no spin, then a spike drives it down hard with
+    topspin; it slams into the floor, kicks up high and bounces out (2.5 s).
   - Sound: Slap.
-- **Water polo ball** (`water-polo-ball`). Now: hops. Plan: new effect (E6).
+- **Water polo ball** (`water-polo-ball`). Now: tap: Toss it in. Plan: keep.
   - Effect: Bobs on an invisible water line with ripples.
+  - Improved: E6a: tossed up, it plunges into the water with a splash, pops back up and bobs on the
+    water line, sending out ripples that spread and fade (3.1 s).
   - Sound: Splash.
-- **Ping-pong ball** (`ping-pong-ball`). Now: hops. Plan: new effect (E6).
+- **Ping-pong ball** (`ping-pong-ball`). Now: tap: Drop it. Plan: keep.
   - Effect: Rapid tiny bounces getting faster.
+  - Improved: E6a: flicked up, it bounces on and on (it keeps nearly 0.9 of its speed), each bounce
+    lower and quicker, till it buzzes to a stop; a tik for every bounce (1.9 s).
   - Sound: Tik-tik-tik.
-- **Cricket ball** (`cricket-ball`). Now: hops. Plan: new effect (E6).
+- **Cricket ball** (`cricket-ball`). Now: tap: Seam-up flick. Plan: keep.
   - Fixed: C1: polished red leather with a bright highlight and a raised, lit seam.
   - Effect: Seam-up spin and a skid.
+  - Improved: E6a: a seam-up flick: the seam stands upright while the ball spins backwards about it,
+    then it comes down level and skids on with its backspin till the spin grips and rolls it home.
+    Its shine stays put while it spins (1.9 s).
   - Sound: Crisp leather knock.
-- **Bowling ball** (`bowling-ball`). Now: hops. Plan: new effect (E6).
+- **Bowling ball** (`bowling-ball`). Now: tap: Bowl it. Plan: keep.
   - Effect: Heavy roll with a hook.
+  - Improved: E6a: a heavy roll with a hook: it drops onto the lane with a thud, rolls away straight
+    and hooks across, the finger holes turning over; the pins crash far off and it rolls back home
+    (3.8 s).
   - Sound: Rumble and a pin crash.
-- **Pool ball** (`pool-ball`). Now: hops. Plan: new effect (E6).
+- **Pool ball** (`pool-ball`). Now: tap: Draw shot. Plan: keep.
   - Fixed: E1b: fully opaque polished resin with a sharp window highlight and a soft room
     reflection, so the black 8 reads as a solid shiny ball (it looked see-through).
   - Effect: Clicks forward and spins with back-spin.
+  - Improved: E6a: a draw shot: struck low, it slides forward spinning backwards, stops, and the
+    backspin pulls it back till it rolls cleanly home. The window highlight and the room's
+    reflection stay put while the number turns (1.8 s).
   - Sound: Ball click.
-- **Pickleball** (`pickleball`). Now: hops. Plan: new effect (E6).
+- **Pickleball** (`pickleball`). Now: tap: Pop it up. Plan: keep.
   - Effect: Light pop-up with air whistling through the holes.
+  - Improved: E6a: popped up twice off an unseen paddle, the light holed ball slows fast in the air
+    and knuckles (it wobbles without much spin), then lands with a hollow click and a small, dead
+    bounce (1.9 s).
   - Sound: Hollow plastic pop.
-- **Dodgeball** (`dodgeball`). Now: hops. Plan: new effect (E6).
+- **Dodgeball** (`dodgeball`). Now: tap: Slam it down. Plan: keep.
   - Effect: Squashes hard on a bounce.
+  - Improved: E6a: lifted and slammed down, the soft rubber squashes flat and wobbles, bounces up
+    lively and squashes again at each landing (2.2 s).
   - Sound: Rubbery bwong.
-- **Medicine ball** (`medicine-ball`). Now: hops. Plan: new effect (E6).
+- **Medicine ball** (`medicine-ball`). Now: tap: Heave and drop. Plan: keep.
   - Fixed: C1: matte rubber grip (low bumps, no shine), and a faint rim of light on dark pages.
   - Effect: Barely lifts and lands with a heavy squash.
+  - Improved: E6a: heaved up only a little, slowly, it drops with a heavy thud and a big, slow
+    squash, no bounce at all, and a puff of dust spreads out along the floor (1.6 s).
   - Sound: Heavy thud.
-- **Lacrosse ball** (`lacrosse-ball`). Now: hops. Plan: new effect (E6).
+- **Lacrosse ball** (`lacrosse-ball`). Now: tap: Slam it down. Plan: keep.
   - Effect: Very fast, hard bounces.
+  - Improved: E6a: slammed down, the hard rubber ball rockets up and bounces hard and fast, the
+    liveliest ball on the shelf (0.83 of its speed kept) (1.9 s).
   - Sound: Hard rubber knock.
-- **Squash ball** (`squash-ball`). Now: hops. Plan: new effect (E6).
+- **Squash ball** (`squash-ball`). Now: tap: Warm it up. Plan: keep.
   - Owner: Weird; hard to see on dark.
   - Fixed: C1: a faint rim of light around the ball on a dark page (a see-through shell that adds up
     at the silhouette); invisible on a light page.
   - Effect: Warms up: glows faintly as it bounces faster.
+  - Improved: E6a: cold, it is dead: dropped, it hardly bounces. Hit over and over, it warms, glows
+    faintly and bounces higher and faster; let go, it bounces out and cools (2.6 s).
   - Sound: Dead, low squash thock.
-- **Bouncy ball** (`bouncy-ball`). Now: hops. Plan: new effect (E6).
+- **Bouncy ball** (`bouncy-ball`). Now: tap: Throw it down. Plan: keep.
   - Effect: Wild ricochet bounces all over, then home.
+  - Improved: E6a: thrown down hard, it ricochets all over the floor, keeping nearly all its speed,
+    its spin flipping at every bounce, then comes home and settles (2.5 s).
   - Sound: Springy boing that rises.
-- **Marble** (`marble`). Now: hops. Plan: new effect (E6).
+- **Marble** (`marble`). Now: tap: Roll it. Plan: keep.
   - Owner: Super neat.
   - Effect: Rolls around a little circle; the swirl inside turns.
+  - Improved: E6a: it rolls round a little circle, turning the way it rolls, and after one lap is
+    back exactly as it was; the swirl inside turns as it goes (2.4 s).
   - Sound: Glassy clink.
 - **Hockey puck** (`hockey-puck`). Now: tap: Slap shot. Plan: keep.
   - Owner: Underwhelming.
