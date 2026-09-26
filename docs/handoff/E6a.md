@@ -73,6 +73,9 @@ now waits for the owner's marks and fixes any "Needs work" in the same PR (new c
   pool ball passed the same option; the bouncy ball's roll is checked clean). The look at rest is
   unchanged (thumbnail kept).
 
+The owner marked both `-r2` clips "Looks right" (2026-09-26), so all 20 balls are approved. The PR
+waits on the owner's merge; the lane keeps it mergeable.
+
 ## Notes
 
 How the balls move (all in `src/packs/balls.js`, "Real throws and bounces (E6a)"):
