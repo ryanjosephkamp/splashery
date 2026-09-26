@@ -1887,7 +1887,7 @@ export const TOYS = [
     kind: "kit",
     pack: "food",
     tags: "fruit kiwifruit green seeds half fuzzy",
-    camera: { yaw: 0.55, pitch: 0.36, roll: 0, distance: 4.2 },
+    camera: { yaw: 0.55, pitch: 0.36, roll: 0, distance: 3.6 },
   },
   {
     id: "pineapple",

@@ -448,7 +448,7 @@ const MAC_SECS = 3.55;
 // far the frosting squashes and how far down that brings its top.
 const CUP_LAUNCH = 0.14;
 const CUP_FLIGHT = 0.78;
-const CUP_HIGH = 1.0;
+const CUP_HIGH = 0.8;
 const CUP_SQUASH = 0.22;
 const CUP_TOP = 0.76 * CUP_SQUASH;
 const CUP_SECS = 2.3;
@@ -484,6 +484,7 @@ const KIWI_YAW = 121.5;
 const KIWI_TURN = 1.1;
 const KIWI_SECS = 2.8;
 const PINE_RINGS = 5;
+const PINE_GAP = 0.16;
 const PINE_SECS = 3.0;
 // The watermelon: the whole one's turn, when the knife chops (first chop
 // and the time between chops) and when the slices fan out.
@@ -493,6 +494,11 @@ const WM_CHOP = 0.24;
 const WM_FAN = 1.35;
 const WM_SECS = 3.6;
 const APPLE_SECS = 2.9;
+// The banana: where its peel splits (along the banana, from its neck), and
+// how far each strip's two pieces bend back.
+const BANANA_HINGE = 0.42;
+const BANANA_BEND = [1.25, 0.9];
+const BANANA_SECS = 3.1;
 // The avocado's stone flies over and back.
 const AVO_SECS = 3.1;
 const mix1 = (a, b, t) => a + (b - a) * t;
@@ -765,8 +771,9 @@ export const RECIPES = {
         const t0 = WM_CHOP0 + WM_CHOP * i;
         const u = on ? s - t0 : -1;
         const down = u < 0 ? 0 : u < 0.1 ? easeIn(u / 0.1) : u < 0.14 ? 1 : 1 - smooth((u - 0.14) / 0.1); // prettier-ignore
-        const shown =
-          on && u >= -0.06 && u < WM_CHOP - 0.02 + (i === d.knives.length - 1 ? 0.15 : 0);
+        // One knife at a time: each shows from its own chop until the next.
+        const last = i === d.knives.length - 1;
+        const shown = on && u >= (i ? 0 : -0.06) && (last ? u < 0.4 : u < WM_CHOP);
         const up = i === d.knives.length - 1 && u > 0.24 ? 0.6 * smooth(band(u, 0.24, 0.4)) : 0;
         out.parts[`knife${i}`] = {
           offset: [0, (1 - down) * kn.lift + up, 0],
@@ -774,7 +781,7 @@ export const RECIPES = {
         };
       });
       out.parts.wedge = { quat: quatAxisAngle([1, 0, 0], d.slices.length ? 0 : 0.1 * wobble(s, 1.2, 9)) }; // prettier-ignore
-      const list = d.knives.map((kn, i) => [WM_CHOP0 + WM_CHOP * i + 0.09, { voice: "chop", f: 260 + 25 * i, decay: 0.7, vol: 0.8 }]); // prettier-ignore
+      const list = d.knives.map((kn, i) => [WM_CHOP0 + WM_CHOP * i + 0.09, [{ voice: "slap", f: 800 + 60 * i, vol: 0.8 }, { voice: "crack", f: 1200, bright: 0.2, decay: 0.7, vol: 0.4 }]]); // prettier-ignore
       if (d.slices.length) list.push([WM_FAN + 0.05, { voice: "squish", pitch: 1.1, bright: 0.7, decay: 1.2 }]); // prettier-ignore
       cuesAt(c, "watermelon", s, list, out);
     },
@@ -887,7 +894,7 @@ export const RECIPES = {
           const part = k.part(`knife${i}`, { pivot: add(pos, quatRotate(q, [x, 0, 0])) });
           knives.push({ lift });
           k.add(
-            k.param((u, v) => [x, -B + v * H, (u - 0.5) * 2.1], {
+            k.param((u, v) => [x, -B + v * H, (u - 0.5) * 1.95], {
               grid: 24,
               normal: () => [1, 0, 0],
             }),
@@ -895,8 +902,8 @@ export const RECIPES = {
               pos,
               quat: q,
               part,
-              share: 0.014,
-              flat: 0.2,
+              share: 0.02,
+              flat: 0.3,
               size: 1.3,
               jitter: 0.005,
               opacity: 1,
@@ -910,8 +917,8 @@ export const RECIPES = {
               },
             },
           );
-          k.add(k.cylinder(0.055, 0.55), {
-            pos: add(pos, quatRotate(q, [x, -B + H * 0.75, 1.33])),
+          k.add(k.cylinder(0.055, 0.45), {
+            pos: add(pos, quatRotate(q, [x, -B + H * 0.75, 1.2])),
             quat: quatMul(q, quatEuler(90, 0, 0)),
             part,
             share: 0.002,
@@ -921,9 +928,8 @@ export const RECIPES = {
             color: (c) => keep(lit(c, mix("#3a2418", "#24160e", c.rand()), 0.8, 0.35)),
           });
         }
-        k.reach(add(pos, [0, -B + H + lift, 0]));
-        k.reach(add(pos, mul(axis, A + 0.6)));
-        k.reach(add(pos, mul(axis, -A - 0.6)));
+        // (No reach for the raised knife: it may pass the frame's top for a
+        // moment rather than shrink the melon at rest.)
       };
       // A wedge cut from a round slice: apex up, rind at the bottom.
       const wedge = (pos, yaw, R, T, span = 1.05) => {
@@ -1887,7 +1893,7 @@ export const RECIPES = {
           ),
           { part: cherry, flat: 0.3, weight: 3, pattern: false, color: (c) => lit(c, "#6b8a2a") },
         );
-        k.reach(add(cp, [0, CUP_HIGH + 0.15, 0]));
+        k.reach(add(cp, [0, CUP_HIGH + 0.05, 0]));
       }
     },
   },
@@ -2433,7 +2439,7 @@ export const RECIPES = {
         i < 3 ? homes[i] : [top[0], 0.255 + i * h, top[2]],
       );
       k.data = { homes, quats, tower, base: [top[0], 0, top[2]] };
-      k.reach([top[0], 0.255 + 4 * h + 0.3, top[2]]);
+      k.reach([top[0], 0.255 + 4 * h, top[2]]);
     },
   },
 
@@ -2557,6 +2563,7 @@ export const RECIPES = {
         m -= 0.06 * wobble(s - 2.95, 0.3, 20);
       }
       out.morph = [m, 0, 0, 0];
+      cuesAt(c, "pretzel", s, [[1.9, { voice: "squish", pitch: 0.8, bright: 0.2, decay: 1.6 }]], out); // prettier-ignore
     },
     build(k) {
       const pts = [
@@ -2674,7 +2681,7 @@ export const RECIPES = {
       out.tokens = d.flakes.map((f) => {
         const seat = add(f.home, mul(sub(f.home, d.pivot), scale - 1));
         const t0 = CRO_DING + f.lag;
-        const back = CRO_BACK + f.lag * 2;
+        const back = CRO_BACK + f.lag;
         if (!on || s < t0 || s >= back + 0.4)
           return { base: f.home, offset: sub(seat, f.home), visible: 0 };
         let p;
@@ -3553,7 +3560,7 @@ export const RECIPES = {
         });
       }
       k.data = { roll: [0.36, 0.11, 0.12], dish, sticks };
-      k.reach([0.3, 1.1, 0]);
+      k.reach([0.3, 0.8, 0]);
     },
   },
 
@@ -3800,8 +3807,6 @@ export const RECIPES = {
           },
         },
       );
-      k.reach([-1.3, 0.8, -0.9]);
-      k.reach([1.3, 0.8, -0.9]);
     },
   },
 
@@ -4307,8 +4312,10 @@ export const RECIPES = {
       for (const t of teeth) {
         k.add(k.sphere(t.r), {
           pos: t.at,
-          share: 0.012,
-          flat: 0.2,
+          share: 0.04,
+          size: 1.25,
+          flat: 0.3,
+          jitter: 0.01,
           color: (c) => {
             if (!inApple(c.p)) return null;
             if (teeth.some((o2) => o2 !== t && len(sub(c.p, o2.at)) < o2.r * 0.999)) return null;
@@ -4321,7 +4328,7 @@ export const RECIPES = {
             let col = mix("#fbf4dc", "#eedcaa", 0.6 * depth + 0.3 * (0.5 + 0.5 * fibre));
             col = mix(col, "#d9c07e", 0.35 * smoothstep(0.93, 0.975, edge));
             const l = dot(mul(c.n, -1), LIGHT);
-            return keep(shade(col, 0.62 + 0.45 * Math.max(0, l) - 0.12 * depth));
+            return keep(shade(col, 0.86 + 0.2 * l - 0.08 * depth));
           },
         });
       }
@@ -4411,6 +4418,36 @@ export const RECIPES = {
         ],
       },
     ],
+    controls: [{ key: "peel", label: "Peel one", type: "pulse", ease: BANANA_SECS }],
+    action: { key: "peel", label: "Peel one" },
+    // A tap peels the front banana from its tip: its skin splits into three
+    // strips that curl back one after another (each bending at two places),
+    // showing the pale fruit inside; then they fold back up around it.
+    drive(t, c, out, info) {
+      const s = since(c.peel, BANANA_SECS);
+      const d = info.data;
+      if (!d) return;
+      const on = s >= 0;
+      out.tokens = [];
+      d.strips.forEach((st, j) => {
+        const t0 = 0.08 + 0.22 * j;
+        const close = on ? smooth(band(s, 2.1 + 0.05 * j, 2.75 + 0.05 * j)) : 0;
+        const fa = on ? easeOut(band(s, t0, t0 + 0.5)) * (1 - close) : 0;
+        const fb = on ? easeOut(band(s, t0 + 0.12, t0 + 0.62)) * (1 - close) : 0;
+        const qa = quatAxisAngle(st.axisA, BANANA_BEND[0] * fa);
+        const qb = quatMul(qa, quatAxisAngle(st.axisB, BANANA_BEND[1] * fb));
+        const offB = sub(add(quatRotate(qa, sub(st.hingeB, st.hingeA)), st.hingeA), st.hingeB);
+        out.tokens[st.a] = { base: st.hingeA, quat: qa };
+        out.tokens[st.b] = { base: st.hingeB, quat: qb, offset: offB };
+      });
+      cuesAt(
+        c,
+        "banana",
+        s,
+        [1, 2].map((j) => [0.08 + 0.22 * j, { voice: "tear", f: 900 + 150 * j, to: 1.5, decay: 0.7, vol: 0.7 }]), // prettier-ignore
+        out,
+      );
+    },
     build(k, o) {
       const yellow = o.ripe === "green" ? "#a9c93a" : "#f6d43a";
       const Rb = 1.0;
@@ -4446,7 +4483,7 @@ export const RECIPES = {
         { rot: [0, 4, 4], pos: [0, 0.02, 0] },
         { rot: [0, 30, 12], pos: [0, 0.05, 0.18] },
       ];
-      for (const b of bananas) {
+      for (const b of bananas.slice(0, 2)) {
         k.add(shape, {
           ...b,
           flat: 0.22,
@@ -4455,6 +4492,109 @@ export const RECIPES = {
           color,
         });
       }
+      // The front banana peels: its skin from BANANA_HINGE to the tip is
+      // three strips (two pieces each, bending where they meet), with a
+      // pale inside, over the fruit.
+      const front = bananas[2];
+      const qf = quatEuler(...front.rot);
+      const toW = (p) => add(front.pos, quatRotate(qf, p));
+      const dirW = (v) => quatRotate(qf, v);
+      const th = BANANA_HINGE;
+      const tm = (th + 1) / 2;
+      const around = (t, a, r) => {
+        const f = shape.frame(t);
+        const d = add(mul(f.n, Math.cos(a)), mul(f.b, Math.sin(a)));
+        return { p: add(f.p, mul(d, r)), d, f };
+      };
+      // A strip of the tube's surface: t from t0 to t1, angle a0 to a1.
+      const skinPatch = (t0, t1, a0, a1, scale, inward) =>
+        k.param(
+          (u, v) => {
+            const t = t0 + v * (t1 - t0);
+            return around(t, a0 + u * (a1 - a0), rad(t) * scale).p;
+          },
+          {
+            grid: 40,
+            normal: (u, v) => {
+              const t = t0 + v * (t1 - t0);
+              const d = around(t, a0 + u * (a1 - a0), 1).d;
+              return inward ? mul(d, -1) : d;
+            },
+          },
+        );
+      const skinAt = (c, t, a) => color(Object.assign({}, c, { t, u: a / TAU }));
+      k.add(skinPatch(0, th, 0, TAU, 1, false), {
+        quat: qf,
+        pos: front.pos,
+        flat: 0.22,
+        color: (c) => skinAt(c, c.v * th, c.u * TAU),
+      });
+      // The fruit.
+      k.add(
+        k.param(
+          (u, v) => {
+            const t = th - 0.02 + v * (0.995 - th + 0.02);
+            return around(t, u * TAU, rad(t) * 0.84).p;
+          },
+          { grid: 64, normal: (u, v) => around(th + v * (1 - th), u * TAU, 1).d },
+        ),
+        {
+          quat: qf,
+          pos: front.pos,
+          flat: 0.3,
+          weight: 1.2,
+          pattern: false,
+          color: (c) => {
+            const ridge = 0.5 + 0.5 * Math.cos(c.u * TAU * 5);
+            const col = mix("#f7ebbf", "#efdca0", 0.35 * ridge + 0.2 * c.noise(c.p[0] * 20, c.p[1] * 20, c.p[2] * 20)); // prettier-ignore
+            return keep(glossy(c, col, 0.35, 18, 0.8, 0.3));
+          },
+        },
+      );
+      const strips = [];
+      let tok = 0;
+      for (let j = 0; j < 3; j++) {
+        const a0 = (j / 3) * TAU + 0.35;
+        const a1 = ((j + 1) / 3) * TAU + 0.35;
+        const am = (a0 + a1) / 2;
+        const ta = tok++;
+        const tb = tok++;
+        const ha = around(th, am, rad(th));
+        const hb = around(tm, am, rad(tm));
+        strips.push({
+          a: ta,
+          b: tb,
+          hingeA: toW(ha.p),
+          hingeB: toW(hb.p),
+          axisA: unit(dirW(cross(ha.f.t, ha.d))),
+          axisB: unit(dirW(cross(hb.f.t, hb.d))),
+        });
+        for (const [t0, t1, token] of [
+          [th, tm, ta],
+          [tm, 1, tb],
+        ]) {
+          k.add(skinPatch(t0, t1, a0, a1, 1, false), {
+            quat: qf,
+            pos: front.pos,
+            flat: 0.22,
+            kind: "token",
+            params: [token, 0],
+            color: (c) => skinAt(c, t0 + c.v * (t1 - t0), a0 + c.u * (a1 - a0)),
+          });
+          k.add(skinPatch(t0, t1, a0 + 0.04, a1 - 0.04, 0.93, true), {
+            quat: qf,
+            pos: front.pos,
+            flat: 0.22,
+            weight: 0.8,
+            pattern: false,
+            kind: "token",
+            params: [token, 0],
+            color: (c) => keep(lit(c, mix("#f3e6c0", "#e8d7a6", c.rand() * 0.5), 0.84, 0.25)),
+          });
+        }
+      }
+      k.data = { strips };
+      k.reach(add(toW(arc(1)), [0, 0.5, 0.3]));
       // The crown where the stalks meet.
       const top = arc(0);
       k.add(
@@ -4519,16 +4659,7 @@ export const RECIPES = {
       });
       const squeeze = on && d.halfOnly ? 0.08 * hop(band(s, 0, 0.35)) : 0;
       out.parts.half = { scale: 1 - squeeze };
-      cuesAt(
-        c,
-        "orange",
-        s,
-        [
-          [0.08, { voice: "squish", pitch: 1.3, bright: 0.9, decay: 0.7 }],
-          [2.55, { voice: "slap", f: 900, vol: 0.4 }],
-        ],
-        out,
-      );
+      cuesAt(c, "orange", s, [[2.55, { voice: "slap", f: 900, vol: 0.4 }]], out);
     },
     build(k, o) {
       const R = 0.72;
@@ -4843,8 +4974,8 @@ export const RECIPES = {
             },
           );
         }
-        k.reach(add(pos, mul(axis, 0.42 + C * 0.8)));
-        k.reach(add(pos, mul(axis, -0.42 - C * 0.8)));
+        k.reach(add(pos, mul(axis, 0.42 + C * 0.3)));
+        k.reach(add(pos, mul(axis, -0.42 - C * 0.3)));
       };
       const half = (pos, yaw, tilt) => {
         const q = quatMul(quatEuler(0, yaw, 0), quatEuler(tilt, 0, 0));
@@ -4886,7 +5017,7 @@ export const RECIPES = {
       if (o.style === "whole") whole([0, 0, 0], [0, KIWI_YAW, 0]);
       else if (o.style === "half") half([0, 0, 0], 30, -30);
       else {
-        whole([-0.66, 0, -0.55], [0, KIWI_YAW, 0]);
+        whole([-0.55, 0, -0.5], [0, KIWI_YAW, 0]);
         half([0.5, 0.02, 0.4], 32, -36);
       }
       k.data = { halves };
@@ -4912,10 +5043,10 @@ export const RECIPES = {
           // Cut i (under ring i) is chopped top first, then all close again.
           const t0 = 0.1 + 0.17 * (PINE_RINGS - 1 - i);
           const g = easeOut(band(s, t0, t0 + 0.3)) * (1 - easeIn(band(s, 2.0 + 0.06 * i, 2.45 + 0.06 * i))); // prettier-ignore
-          y += 0.2 * g;
+          y += PINE_GAP * g;
           x += 0.1 * g;
         }
-        const tilt = on && i > 0 ? (0.32 * y) / (0.2 * (PINE_RINGS - 1)) : 0;
+        const tilt = on && i > 0 ? (0.32 * y) / (PINE_GAP * (PINE_RINGS - 1)) : 0;
         out.parts[`ring${i}`] = {
           offset: add([0, y, 0], mul(side, x)),
           quat: quatAxisAngle(lean, tilt),
@@ -4923,7 +5054,8 @@ export const RECIPES = {
       }
       const list = [];
       for (let i = 1; i < PINE_RINGS; i++) {
-        list.push([0.1 + 0.17 * (PINE_RINGS - 1 - i), { voice: "chop", f: 300 + 30 * i, decay: 0.8, vol: 0.8 }]); // prettier-ignore
+        if (i < PINE_RINGS - 1)
+          list.push([0.1 + 0.17 * (PINE_RINGS - 1 - i), [{ voice: "slap", f: 700 + 50 * i, vol: 0.7 }, { voice: "crunch", f: 1100, n: 5, decay: 0.4, vol: 0.5 }]]); // prettier-ignore
         list.push([2.45 + 0.06 * i, { voice: "wood", f: 330 - 20 * i, decay: 0.9, vol: 0.5 }]);
       }
       cuesAt(c, "pineapple", s, list, out);
@@ -5048,7 +5180,7 @@ export const RECIPES = {
           },
         });
       }
-      k.reach([0.3, 1.6 + 0.2 * (PINE_RINGS - 1), 0]);
+      k.reach([0.3, 1.6 + 0.1 * (PINE_RINGS - 1), 0]);
     },
   },
 
@@ -5431,7 +5563,6 @@ export const RECIPES = {
       }
       const list = two
         ? [
-            [0.05, { voice: "pop", f: 330, decay: 1, vol: 0.7 }],
             [0.75, { voice: "wood", f: 240, decay: 1.6, bright: 0.2 }],
             [d.back, { voice: "pop", f: 300, decay: 1, vol: 0.7 }],
             [d.back + 0.7, { voice: "wood", f: 210, decay: 1.6, bright: 0.2 }],

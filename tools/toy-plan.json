@@ -1097,10 +1097,11 @@
       "improved": "C2: a tap melts it (the scoops slump and drips run down the cone), then it refreezes (about 5 s). The Warmth slider still works."
     },
     "watermelon": {
-      "v": "new",
+      "v": "keep",
       "owner": "Cut it in half or into slices.",
       "effect": "Cuts into slices that fan out.",
-      "sound": "Juicy chop."
+      "sound": "Juicy chop.",
+      "improved": "E5: a big knife chops the whole melon five times, right to left, then the six slices fan open on their bottoms like an accordion, showing red flesh, pale rind and black seeds on their cut faces, and fold shut (about 3.6 s)."
     },
     "birthday-cake": {
       "v": "keep",
@@ -1123,28 +1124,32 @@
       "sound": "Sizzle and a flip."
     },
     "cupcake": {
-      "v": "new",
+      "v": "keep",
       "owner": "Needs an effect.",
       "effect": "A cherry drops on top and sprinkles rain down.",
-      "sound": "Plop and sprinkle patter."
+      "sound": "Plop and sprinkle patter.",
+      "improved": "E5: the frosting springs and flicks the cherry up; it tumbles and drops back with a plop, the frosting squashes and wobbles, and the sprinkles jump off and rain back down (about 2.3 s)."
     },
     "lollipop": {
-      "v": "new",
+      "v": "keep",
       "owner": "Maybe spins really fast.",
       "effect": "Spins fast and the swirl hypnotises.",
-      "sound": "Whirr."
+      "sound": "Whirr.",
+      "improved": "E5: the swirl whirls up to nearly three turns a second, so the spiral seems to pour inwards, then slows back to its idle turn (about 3 s)."
     },
     "candy-cane": {
-      "v": "new",
+      "v": "keep",
       "owner": "Pick something.",
       "effect": "The stripes wind around like a barber pole, then it snaps in two and rejoins.",
-      "sound": "Crisp snap."
+      "sound": "Crisp snap.",
+      "improved": "E5: each cane twists (the hook turns and the stripes wind tighter) until it snaps with a crack; the top half springs clear showing the white candy in the break, sugar chips fly, then the halves come back together and mend with a glint (about 2.9 s)."
     },
     "macarons": {
-      "v": "new",
+      "v": "keep",
       "owner": "Maybe they do something.",
       "effect": "They stack themselves into a tower.",
-      "sound": "Soft taps."
+      "sound": "Soft taps.",
+      "improved": "E5: the two in front hop one after the other up onto the stack, rising clear of its rim and landing level with a soft tap; the tower of five sways, then they hop back down (about 3.5 s)."
     },
     "gummy-bear": {
       "v": "keep",
@@ -1155,16 +1160,18 @@
       "improved": "D: drag-to-stretch. With the Orbit tool, a drag that starts on the bear pulls the part you grabbed (up to about a body length) and it springs back with a few wobbles when you let go; a drag beside it still turns the view. A tap still does the jelly jiggle."
     },
     "pretzel": {
-      "v": "new",
+      "v": "keep",
       "owner": "Some sort of twisting, like the knots.",
       "effect": "Untwists into a rope and twists back.",
-      "sound": "Doughy stretch."
+      "sound": "Doughy stretch.",
+      "improved": "E5: the pretzel undoes itself the way it was made, backwards: the ends lift off, the twist unwinds and the loops open into a U of dough rope, then it folds and twists back (about 3.3 s)."
     },
     "croissant": {
-      "v": "new",
+      "v": "keep",
       "owner": "Must differ from the real croissant.",
       "effect": "Puffs up in an oven glow (rising), then flakes fly off.",
-      "sound": "Oven ding."
+      "sound": "Oven ding.",
+      "improved": "E5: it rises on a paper-lined baking tray in a warm oven glow, the oven dings, and flakes of crust spring off and scatter over the tray; the glow fades, it sinks back, and the flakes hop home (about 3.4 s). Unlike the real croissant scan, which tears in half."
     },
     "pizza": {
       "v": "keep",
@@ -1177,16 +1184,18 @@
       "sound": "Sizzle."
     },
     "sushi": {
-      "v": "new",
+      "v": "keep",
       "owner": "Chopsticks lifted by an invisible hand pick up the sushi.",
       "effect": "Chopsticks pick up a roll, dip it and put it back.",
-      "sound": "Wooden chopstick clicks."
+      "sound": "Wooden chopstick clicks.",
+      "improved": "E5: the chopsticks lift off the board as if held by an invisible hand, pinch a roll (click), carry it to a new dish of soy sauce and dip it twice, set it back (click) and lie down again (about 4.7 s)."
     },
     "taco": {
-      "v": "new",
+      "v": "keep",
       "owner": "Break in half to show what is inside. Really cool taco.",
       "effect": "Shell cracks in half and the filling spills out, then it reassembles.",
-      "sound": "Crunch."
+      "sound": "Crunch.",
+      "improved": "E5: the shell snaps across the middle with a crunch; the halves pull apart and swing open like a book, showing the filling in each break, and bits spill onto a new plate and bounce; then they hop back in and the halves close (about 3.1 s)."
     },
     "egg": {
       "v": "keep",
@@ -1201,52 +1210,60 @@
       "improved": "C2: the latte art twists into a swirl (the middle turns further than the edge) and relaxes back, with a thick curl of steam."
     },
     "apple": {
-      "v": "new",
+      "v": "keep",
       "owner": "A bite taken out of it, or a worm comes out.",
       "effect": "A bite appears (crunch); a second tap, a worm peeks out.",
-      "sound": "Crunch."
+      "sound": "Crunch.",
+      "improved": "E5: a tap takes a bite: the chunk comes away and vanishes, leaving a scalloped bite of pale flesh (it stays bitten). The next tap brings a little worm out of the bite; it looks about, ducks back in, and the apple grows whole (about 2.9 s)."
     },
     "banana": {
-      "v": "new",
+      "v": "keep",
       "owner": "Peel open.",
       "effect": "One banana peels open.",
-      "sound": "Peel."
+      "sound": "Peel.",
+      "improved": "E5: the front banana's skin splits from the tip into three strips that curl back one after another, each bending in two places, showing the pale fruit; then they fold back up around it (about 3.1 s)."
     },
     "orange": {
-      "v": "new",
+      "v": "keep",
       "owner": "Pick something.",
       "effect": "Splits into segments that fan out.",
-      "sound": "Juicy squirt."
+      "sound": "Juicy squirt.",
+      "improved": "E5: the whole orange opens like a flower: eight wedges fall open outwards on their bottoms, one just after another, showing their juicy cut faces, while juice squirts up out of the middle; then it closes up (about 3 s)."
     },
     "kiwi": {
-      "v": "new",
+      "v": "keep",
       "owner": "Pick something.",
       "effect": "Halves open to show the green inside and seeds.",
-      "sound": "Soft slice."
+      "sound": "Soft slice.",
+      "improved": "E5: the whole kiwi is cut across the middle; the halves slide apart and turn to show their green faces with the ring of black seeds, then close up again (about 2.8 s)."
     },
     "pineapple": {
-      "v": "new",
+      "v": "keep",
       "owner": "Maybe it gets cut.",
       "effect": "Cut into rings that stack.",
-      "sound": "Chop."
+      "sound": "Chop.",
+      "improved": "E5: four chops, top first: with each, everything above lifts and leans towards you, until five rings stand apart in a leaning stack showing their golden faces and pale cores; then they drop back onto each other (about 3 s)."
     },
     "cherries": {
-      "v": "new",
+      "v": "keep",
       "owner": "No idea.",
       "effect": "The pair swings and bounces on its stems.",
-      "sound": "Double plink."
+      "sound": "Double plink.",
+      "improved": "E5: a flick swings the two cherries apart on their own stems; they swing back and knock together (a plink each time), bouncing apart again until they settle, while the joint bobs (about 3.6 s)."
     },
     "grapes": {
-      "v": "new",
+      "v": "keep",
       "owner": "Could fall off the stem.",
       "effect": "Grapes drop off the stem and bounce, then return.",
-      "sound": "Plop-plop cascade."
+      "sound": "Plop-plop cascade.",
+      "improved": "E5: ten grapes on the front come off one after another, drop and bounce on the table and roll a little, each on its own path, then hop back up to their places one by one (about 3.9 s). Unlike the grape scan, whose peel curls back."
     },
     "avocado": {
-      "v": "new",
+      "v": "keep",
       "owner": "Pick something.",
       "effect": "Splits open and the stone pops out and back.",
-      "sound": "Thock."
+      "sound": "Thock.",
+      "improved": "E5: the stone pops out of its half, flies over and drops into the empty half with a thock, rocking it, then pops back home and the first half rocks (about 3.1 s)."
     },
     "bricks": {
       "v": "more",
