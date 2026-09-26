@@ -72,6 +72,16 @@ Helpers exported by `src/kit.js`: `spline(points, { closed })` (smooth curve for
 `fibonacciSphere(n)`, `quatEuler(x, y, z)`, `quatAxisAngle(axis, angle)`, `quatFromTo(a, b)`,
 `quatRotate(q, v)`, `implicitRadius(f, far)`, and `vec` (add, sub, mul, dot, len, cross, unit).
 
+Shape notes from the lanes (2026-09-26):
+
+- `k.roundedBox` takes full sizes, like `k.box`. With a high power (7 or more) it leaves a thin band
+  with no splats across its middle, which shows as a dark stripe (E5 moved the sushi board and the
+  baking tray to `k.box`).
+- Even placement on a sphere leaves a small swirl at each pole. On a sphere that turns, cover the
+  poles with small caps (`poleCap()` in `src/packs/balls.js`).
+- A shape added with a ball's options inherits its `interior`. Give small covering pieces (pole
+  caps) `interior: 0`, or their inside splats show as dots when the part turns.
+
 ## 4. Adding a shape
 
 ```js
@@ -200,7 +210,8 @@ xylophone: { voice: "bar", notes: "C5 D5 E5 F5 G5 A5 B5 C6", step: 0.32, at: 0.3
 
 A tap that picked item `i` plays only note `i` of the tune. Every toy needs an entry and no two may
 be the same (the unit tests check). Old shared names ("chime", "pop" and so on) still work as specs.
-Check a new sound with `node tools/sound-check.mjs <id> --sheet=out.png`.
+Check a new sound with `node tools/sound-check.mjs <id> --sheet=out.png`. Voice names can mislead:
+`chop` is a helicopter rotor, not a knife; E5's knife chops are `slap` plus `crack`.
 
 **Flag colours**: `patternProjection: "top"` makes a toy lay flag colours on from above (a flat toy:
 the chess board) when a flag is picked; `patternAmount: 0.3` lays them on gently and
@@ -345,6 +356,26 @@ with `channel: 0..3` (or `(c) => n`):
 blended by `s`: an edge between two moving corners stays a straight edge (the hypercube's edges
 follow its sixteen corners, which are tokens). Use round splats: they are not turned.
 
+Channel tricks from the lanes (2026-09-26):
+
+- **A whole surface bent through keyframes** is a skinned sheet: each splat follows two tokens, and
+  the tokens move through the keyframes (E4-finish's ocean wave, 38 control tokens). Keep the
+  bending in the plane the camera looks along, and use rounder splats.
+- **Bending one piece that touches itself** (a pretzel): use one smooth twist of space for every
+  splat, so crossings stay joined. Moving each splat along a new centre line lifts the rope off
+  itself where it crosses (E5's pretzel r2; r3 fixed it).
+- **Growing out of a hidden spot** (a tongue, sparks, sand): build the morph bunched up at the spot
+  (`p` at rest) and morph it out to its full shape (`to` at full reach).
+- **A travelling wave with morphs**: split the moving pieces between three channels driven a third
+  of a cycle apart (E6b's sea urchin spines).
+- **Negative glow darkens**: `out.glow` with negative colours on a `band` layer makes night fall
+  (the Taj Mahal) or casts a moving shadow (the Washington Monument's sundial shadow, a band on the
+  ground at each splat's bearing).
+- **A sustained light from a band**: give it `params: [1, 0.5]` and hold its channel partway (0.5 to
+  0.7); the glow follows the channel (the Eiffel Tower's gold lights, Stonehenge's stones).
+- **A frayed edge**: a colour function that returns `null` for more splats towards an edge makes a
+  surface fade into its surroundings instead of stopping at a straight line (the ocean wave).
+
 ## 7. House rules
 
 - **Deterministic**: only `k.rand()`, `c.rand()` and the kit's noise. No `Math.random`, no dates.
@@ -418,6 +449,15 @@ form is in CLAUDE.md.
   7. A piece that moves in front of something must be built where it will be seen in front (the
      black hole's star is built where it plunges, the solar system's Mercury in front of the Sun).
   8. Turning about the view direction keeps the order (Uranus rolls that way).
+  9. A single spinning body can use its part's `cull` flag instead of a second copy: cull while it
+     turns, hide its inside, and show its splats about 1.15 times bigger (E6a's balls).
+  10. Don't bore holes into a body that turns: dark tubes inside it (a bowling ball's finger holes)
+      draw through the shell once it turns. Paint them on the surface.
+  11. Figures that walk towards the camera are built at the point of their path nearest the camera
+      (the Parthenon's procession vanished under the rock when built where it started).
+- **Glossy things that spin.** Baked light turns with a spinning body, so a rolling pool ball looks
+  like glass. Spin an unlit copy built tiny at the centre (it sorts behind everything, from any
+  camera) under a fixed see-through layer of light (`glossSpin()` in `src/packs/balls.js`).
 - **Fading by size makes speckle.** `visible` and `kind: "grow"` both shrink splats, so a whole
   layer shrinking away turns into dots. Clear a layer as a moving front instead (run `out.grow` back
   down: the Mars dust storm), and give glow overlays bigger, fainter splats than the surface under
@@ -426,7 +466,12 @@ form is in CLAUDE.md.
   not, so build an effect's pieces small (inside the toy's resting size) and grow them with their
   part's `scale` (the Sun's flare, the star's red giant and shell, the meteor's fireball), or add
   them with `fit: false` when they must be built off to one side and stay inside the view (the
-  Möbius strip's riders, built in front of and behind the band for the draw order).
+  Möbius strip's riders, built in front of and behind the band for the draw order). They also count
+  in the **framing**: the app frames a kit toy by the bounds of all its splats (`buildKit` in
+  `src/player.js`), even with `fit: false`, so a hidden fly, moon or burst built outside the toy
+  shrinks it in its frame and on its thumbnail. Build such pieces inside the resting bounds and move
+  or grow them out with their part (E6b's frog, crown, Eiffel Tower and Taj Mahal; E6a's basketball
+  hand).
 - **Loose pieces (E4).** Leaves, petals, seeds, coconuts and stones that come off are tokens, each
   on its own path, and they come back (they regrow, or hop home). `flutterDown` and `swirlDown` in
   `src/packs/nature.js` give a leaf a swinging or whirling fall that lands flat; `moundTop` gives
@@ -435,6 +480,12 @@ form is in CLAUDE.md.
   and offset back at rest (the bamboo's sections, the tornado's debris). Every effect must end
   exactly where the toy rests: `tests/taps.spec.mjs` plays every kit toy's tap through and compares
   its last moment with the rest pose.
+- **Pieces that melt or wear away** ride on the piece they grow from: scale them about the parent's
+  pivot too, or they are left hanging in the air (E4-finish's ice swan, `iceAttached`).
+- **Opening and swapping (E5).** A thing that opens is built open and hidden when closed, lit from
+  its rest pose (the kiwi). A piece that must look right both still and moving fast can be two
+  copies that swap while it is fast (the avocado stone). A toggle can tell a two-part story, with
+  each tap remembering which way it goes (the apple: a bite, then a worm and it heals).
 - **Light that plays over a surface.** A layer of splats coloured exactly as the surface is there
   (invisible at rest) with `kind: "pulse"` flashes as `out.glow` runs over it; change the glow's
   colour each frame for rainbow fire (diamond, opal) or keep it one colour for a running light

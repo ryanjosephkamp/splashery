@@ -43,6 +43,10 @@ PR title: "Phase E6a: new tap effects for the balls".
 
 ## State
 
+**Merged on 2026-09-26 as PR #38**; the owner approved all 20 clips, after r2 of the basketball and
+the bowling ball. The lane is finished; its summary is in [history.md](history.md), "Lanes", and the
+Operator moved its "For the Operator" items (PACKS.md, BACKLOG.md, HANDOFF.md).
+
 2026-09-26: started (session https://claude.ai/code/session_01WRMAsMCm1HekeLSMVgJPW2, branch
 `claude/blissful-noether-4w5y0t`, draft PR
 [ryanjosephkamp/splashery#38](https://github.com/ryanjosephkamp/splashery/pull/38)). The owner's

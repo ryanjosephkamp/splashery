@@ -7,16 +7,16 @@ remaining phases run as parallel lanes, one session each, with an Operator sessi
 plan ([OPERATING.md](OPERATING.md), [WORKSTREAMS.md](WORKSTREAMS.md)). The current state is in
 [HANDOFF.md](HANDOFF.md).
 
-| Phase  | What                                                                                                              |
-| ------ | ----------------------------------------------------------------------------------------------------------------- |
-| A      | Done (PR #13 and the homepage PR): sharpness, Detail setting, embeds, homepage embed.                             |
-| B      | Done: mobile shelf grid, two-line thumbnail labels, "Find your own splat" help panel.                             |
-| C1, C2 | Visual fixes, and clearer or more dramatic effects, from the owner's 2026-09-23 review.                           |
-| D      | Effects and sound engine: a unique sound per toy, scan rigs, position-aware taps, drag-to-stretch.                |
-| E1–E6  | A new tap effect and sound for every toy that only hops, in six waves ([TOY-PLAN.md](TOY-PLAN.md)).               |
-| F      | Touch and drag interaction: puzzle cube, chess, gummy bear, Newton's cradle, bricks.                              |
-| G      | AI image-to-3D trial (`HF_TOKEN`).                                                                                |
-| H      | Later: gallery, multi-toy scenes, liquid pour, draw-order fix, more scans and instruments, final homepage embeds. |
+| Phase  | What                                                                                                                                                           |
+| ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| A      | Done (PR #13 and the homepage PR): sharpness, Detail setting, embeds, homepage embed.                                                                          |
+| B      | Done: mobile shelf grid, two-line thumbnail labels, "Find your own splat" help panel.                                                                          |
+| C1, C2 | Visual fixes, and clearer or more dramatic effects, from the owner's 2026-09-23 review.                                                                        |
+| D      | Effects and sound engine: a unique sound per toy, scan rigs, position-aware taps, drag-to-stretch.                                                             |
+| E1–E6  | Done: a new tap effect and sound for every toy that only hopped, in six waves ([TOY-PLAN.md](TOY-PLAN.md)); the last ones ran as parallel lanes on 2026-09-26. |
+| F      | Touch and drag interaction: puzzle cube, chess, gummy bear, Newton's cradle, bricks.                                                                           |
+| G      | AI image-to-3D trial (`HF_TOKEN`).                                                                                                                             |
+| H      | Later: gallery, multi-toy scenes, liquid pour, draw-order fix, more scans and instruments, final homepage embeds.                                              |
 
 ## v3: the big toy box (done)
 

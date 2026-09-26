@@ -10,13 +10,15 @@ work is in [OPERATING.md](OPERATING.md).
   `ryanjosephkamp/ryanjosephkamp.github.io`), B (#17), C1 (#18), C2 (#19), D (#20), E1 (#21), E1b
   (#22–#24), E1c (#26–#28), E2 (#29–#31), E3 (#32) and E4 (#33, merged 2026-09-26). The owner
   approved everything from E3.
+- The first parallel lanes all merged on 2026-09-26: E4-finish (#37), E6b (#36), E5 (#35) and E6a
+  (#38). The owner approved every clip on the Effect review page, including the redone ones (the
+  bananas, croissant and pretzel; the basketball's robot hand and the bowling ball). Summaries and
+  known issues: [handoff/history.md](handoff/history.md), "Lanes".
 - The shelf has 284 toys (30 scans, 4 shapes and 250 kit toys; with the protein toy). The plan
-  (`tools/toy-plan.json`, [TOY-PLAN.md](TOY-PLAN.md)): 227 keep, 2 more (the puzzle cube and the
-  bricks), 55 new. Scene schema v3; v2 still loads.
-- The owner's E4 review (Effect review page, `e4-*`): 26 of 30 clips look right; the ice swan, the
-  ocean wave, the pinecone and the lava lamp need work (lane E4-finish).
-- Parallel lanes began on 2026-09-26 (the governance PR, #34, merged that day). Every kit toy's tap
-  is checked by `tests/taps.spec.mjs`; its known exceptions (with reasons) are listed at its top.
+  (`tools/toy-plan.json`, [TOY-PLAN.md](TOY-PLAN.md)): 282 keep and 2 more (the puzzle cube and the
+  bricks, lane F). Every planned new tap effect is built. Scene schema v3; v2 still loads.
+- Every kit toy's tap is checked by `tests/taps.spec.mjs`; its known exceptions (with reasons) are
+  listed at its top. The full suite has 147 tests.
 - Locked (owner approved, do not change its look or behaviour): the laptop. Its smoke test guards
   it.
 
@@ -24,25 +26,24 @@ work is in [OPERATING.md](OPERATING.md).
 
 The full table, with owned files, sessions, branches and PRs, is [WORKSTREAMS.md](WORKSTREAMS.md).
 
-| Lane                      | Status              | PR                                                         | Handoff                                      |
-| ------------------------- | ------------------- | ---------------------------------------------------------- | -------------------------------------------- |
-| Operator                  | Running             | "Ops: …" PRs                                               | —                                            |
-| E4-finish                 | Running             | [#37](https://github.com/ryanjosephkamp/splashery/pull/37) | [handoff/E4-finish.md](handoff/E4-finish.md) |
-| E5 Food                   | Running             | [#35](https://github.com/ryanjosephkamp/splashery/pull/35) | [handoff/E5.md](handoff/E5.md)               |
-| E6a Balls                 | Running             | [#38](https://github.com/ryanjosephkamp/splashery/pull/38) | [handoff/E6a.md](handoff/E6a.md)             |
-| E6b Landmarks and friends | Running             | [#36](https://github.com/ryanjosephkamp/splashery/pull/36) | [handoff/E6b.md](handoff/E6b.md)             |
-| F Touch and drag          | Later (Prompt 2E)   | —                                                          | [handoff/F.md](handoff/F.md)                 |
-| G AI image-to-3D          | Later (Prompt 2F)   | —                                                          | [handoff/G.md](handoff/G.md)                 |
-| H Later                   | After the toy lanes | —                                                          | —                                            |
+| Lane             | Status                     | Handoff                       |
+| ---------------- | -------------------------- | ----------------------------- |
+| Operator         | Running                    | —                             |
+| F Touch and drag | Ready: open with Prompt 2E | [handoff/F.md](handoff/F.md)  |
+| G AI image-to-3D | Ready: open with Prompt 2F | [handoff/G.md](handoff/G.md)  |
+| H Later          | After the toy lanes        | —                             |
+| New toys         | When the owner asks        | The Toy Ideas page (approved) |
 
-All four lanes and the Operator started on 2026-09-26. F and G start when a lane finishes.
+E4-finish, E5, E6a and E6b are done (WORKSTREAMS.md, "Done"). New-toy lanes come from the ideas the
+owner approves on the Toy Ideas page.
 
 The prompts are on the Splashery Parallel Plan page (OPERATING.md, "Pages").
 
 ## Where things are
 
-- [handoff/history.md](handoff/history.md): the phase notes from A to E4, with every lesson, the
-  known issues by phase, the phases table, the owner's asks and the settled decisions.
+- [handoff/history.md](handoff/history.md): the phase notes from A to E4 and a summary of each
+  finished lane, with every lesson, the known issues by phase, the phases table, the owner's asks
+  and the settled decisions.
 - [handoff/](handoff/)`<lane>.md`: each lane's brief, state, notes and known issues.
 - [PACKS.md](PACKS.md): how to write a recipe; channels (section 6); draw order and effect quality
   (7b).
@@ -67,11 +68,14 @@ Each has its full notes in handoff/history.md (the phase is in brackets) and, fo
 - Channels and morphs (E3): one behaviour per splat; rounder or larger splats where a morph turns or
   stretches a surface.
 - Loose pieces as tokens, and pieces built where they end (E4).
+- Skinned sheets, twists of space, negative glow, spinning gloss, `cull` for one spinning body, and
+  hidden pieces counting in the framing (the E lanes, 2026-09-26): PACKS.md 3, 6 and 7b.
 - Tiny splats vanish on small screens: keep `size / sqrt(weight)` near 0.5 or more (E2).
 - Scan rigs, kit parts for scans and add-ons (D, E1, E1b, E1c).
 - A rare engine warning (2026-09-25; back once on 2026-09-26 in a phone test, just after a scan
-  loaded) and a flaky drag in the stretchy-toy smoke test: keep `test-results/` if either comes
-  back.
+  loaded, and once in a lane's full run as a SwiftShader warning in the cat statue smoke test), a
+  flaky drag in the stretchy-toy smoke test, and the strawberry smoke test (once not settled 3 s
+  after its tap, in two lanes' runs): keep `test-results/` if any comes back.
 
 ## Standing facts
 
