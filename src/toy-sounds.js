@@ -563,7 +563,14 @@ export const TOY_SOUNDS = {
     { voice: "roar", f: 60, bright: 0.2, decay: 0.8, vol: 0.4 },
   ],
   "storm-cloud": { voice: "rumble", f: 80, rate: 6 },
-  "lava-lamp": { voice: "gloop", f: 75, decay: 2.4 },
+  // Heats up: a warm hum swells, the blobs gloop faster, then it cools.
+  "lava-lamp": [
+    { voice: "hum", f: 70, to: 1.5, decay: 3.2, bright: 0.1, vol: 0.5 },
+    { voice: "gloop", at: 0.1, f: 75, decay: 1.6 },
+    { voice: "gloop", at: 0.9, f: 95, decay: 1.4 },
+    { voice: "bubbles", at: 1.3, f: 240, n: 9, decay: 2.2, vol: 0.6 },
+    { voice: "gloop", at: 2.3, f: 85, decay: 1.4 },
+  ],
   "snow-globe": [
     { voice: "rattle", f: 3500, n: 10, decay: 1.2, vol: 0.6 },
     { voice: "sparkle", at: 0.2, f: 3600, n: 7 },
@@ -572,9 +579,13 @@ export const TOY_SOUNDS = {
     { voice: "rumble", f: 55, rate: 4, decay: 1.3 },
     { voice: "kick", at: 0.4, f: 42, decay: 2.5 },
   ],
+  // Thaws with a sigh and drips, then crackles as it refreezes and the
+  // frost sweeps up it.
   "ice-statue": [
-    { voice: "crackle", f: 5200, n: 12, decay: 0.6 },
-    { voice: "drip", at: 0.4, f: 1500, n: 3, rate: 5 },
+    { voice: "breath", f: 800, to: 0.5, decay: 1.4, vol: 0.5 },
+    { voice: "drip", at: 0.4, f: 1400, n: 5, rate: 2.5 },
+    { voice: "crackle", at: 2.4, f: 4200, n: 12, decay: 1.3, vol: 0.7 },
+    { voice: "sparkle", at: 3.6, f: 3400, n: 8, decay: 1.3 },
   ],
   candle: {
     on: [
@@ -583,14 +594,38 @@ export const TOY_SOUNDS = {
     ],
     off: { voice: "breath", f: 1100, to: 0.4, decay: 0.5 },
   },
-  tornado: { voice: "wind", f: 250, rate: 3, decay: 2 },
-  rainbow: { voice: "harp", notes: "C5 D5 E5 G5 A5 C6 D6 E6", step: 0.06, decay: 0.6 },
+  // Spins up with a howl, then the debris clatters back down.
+  tornado: [
+    { voice: "wind", f: 250, rate: 3, decay: 2.6 },
+    { voice: "whoosh", at: 0.3, f: 180, to: 5, decay: 2.2, vol: 0.8 },
+    { voice: "clatter", at: 3.9, f: 900, n: 10, kind: "wood", decay: 1.4, vol: 0.8 },
+  ],
+  // Wiped with a swish, drawn again a note per colour, then sparkles.
+  rainbow: [
+    { voice: "whoosh", f: 1200, to: 0.3, decay: 0.7, vol: 0.5 },
+    { voice: "harp", at: 0.8, notes: "C5 D5 E5 G5 A5 C6 D6", step: 0.4, decay: 0.8 },
+    { voice: "sparkle", at: 3.5, f: 3000, n: 9, decay: 1.4 },
+  ],
+  // The crack as the chunk breaks and a groan as it tips; the splash is a
+  // cue from the recipe, when it hits the water.
   iceberg: [
     { voice: "crack", f: 1800, bright: 0.5, decay: 1.5 },
-    { voice: "splash", at: 0.35, f: 900, decay: 1.4 },
+    { voice: "crackle", at: 0.05, f: 2600, n: 8, decay: 0.8, vol: 0.7 },
+    { voice: "rumble", at: 0.1, f: 60, rate: 4, decay: 0.8, vol: 0.7 },
   ],
-  waterfall: { voice: "roar", f: 400, bright: 0.8, decay: 1.8 },
-  "ocean-wave": { voice: "wave", f: 400 },
+  // A surge: a rush over the lip, the roar swelling, a thump in the pool.
+  waterfall: [
+    { voice: "whoosh", f: 500, to: 3, decay: 0.9, vol: 0.8 },
+    { voice: "roar", at: 0.4, f: 320, bright: 0.8, decay: 2.2 },
+    { voice: "rumble", at: 0.95, f: 65, rate: 3, decay: 1.1, vol: 0.7 },
+  ],
+  // The lip rushes over, crashes, and the foam fizzes away.
+  "ocean-wave": [
+    { voice: "whoosh", f: 220, to: 3, decay: 1.2, vol: 0.8 },
+    { voice: "rumble", at: 0.7, f: 60, rate: 3, decay: 0.8, vol: 0.8 },
+    { voice: "splash", at: 0.72, f: 900, decay: 2.2 },
+    { voice: "hiss", at: 1.0, f: 3500, decay: 3, vol: 0.5 },
+  ],
   geyser: [
     { voice: "hiss", f: 3000, decay: 1.6 },
     { voice: "whoosh", at: 0.3, f: 250, to: 4, decay: 1.3 },
