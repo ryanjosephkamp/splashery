@@ -49,6 +49,10 @@ the E4 review fixes".
 
 ## State
 
+**Merged on 2026-09-26 as PR #37**; the owner approved all five fix clips. The lane is finished; its
+summary is in [history.md](history.md), "Lanes", and the Operator moved its "For the Operator" items
+(PACKS.md, BACKLOG.md, HANDOFF.md).
+
 2026-09-26: all four fixes are built, in draft PR #37 ("Phase E4-finish: the E4 review fixes") from
 `claude/sweet-babbage-gw9z9r` (restarted from main after #33 merged). Clips of the fixes are on the
 Effect review page as `e4-<toy id>-r2` cards in lane E4, group "fixes", and replace the four clips

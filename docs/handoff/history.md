@@ -8,7 +8,69 @@ each finished lane at the top ("Lanes"), newest first.
 
 ## Lanes
 
-None finished yet.
+The first four lanes ran in parallel on 2026-09-26 and all merged that day. Their briefs, notes and
+known issues are in [E4-finish.md](E4-finish.md), [E5.md](E5.md), [E6a.md](E6a.md) and
+[E6b.md](E6b.md); their lessons are in PACKS.md (sections 3, 6 and 7b). Two smoke tests each failed
+once in a lane's full run and passed when run again: "rigs pick splats by colour…" (the strawberry
+had not settled 3 s after its tap) and "a scan rig moves a part of a captured toy" (a SwiftShader
+console warning, like the rare engine warning in HANDOFF.md). Keep `test-results/` if either comes
+back.
+
+### E6a Balls (PR #38, merged 2026-09-26)
+
+- 20 balls got their own tap and sound, with real arcs, spin and bounciness (a dead squash ball, a
+  lively bouncy ball, a heavy medicine ball). Glossy balls spin as an unlit copy under a fixed layer
+  of light; single spinning bodies use `cull`.
+- Review: 18 of 20 looked right at once. The basketball's fingertip became a kit-built robot hand
+  (the owner's note), and the bowling ball's black spots were fixed in the app too: its finger holes
+  were dark tubes that drew through the turning ball, and its pole caps had dark inside dots.
+- Known issues: a thin dark line can show along a spinning ball's edge past a quarter turn; flags
+  show on the four glossy balls only at rest; the robot hand's forearm is cut off in wide views; the
+  American football (kept) ends its spiral half a turn round and snaps back (BACKLOG.md).
+
+### E5 Food (PR #35, merged 2026-09-26)
+
+- 17 food toys got their own tap and sound (TOY-PLAN.md has each one). Cut, peeled and bitten food
+  comes apart as real pieces with their insides showing, and comes back; the croissant and the
+  grapes act differently from their scan twins.
+- Review: 14 of 17 looked right at once. The bananas now pull apart and each one peels; the
+  croissant is sliced along its middle and opens like a lid with butter melting inside; the pretzel
+  twists like a knot in one piece (r3, after an r2 that looked broken).
+- Known issues: non-default styles do less (a lone watermelon wedge, kiwi half or orange half);
+  small draw-order slips (a taco half's edge, the dipped sushi roll by the dish's rim); the apple's
+  bite is a little mottled close up; the cupcake's sprinkles jump as fine dots; the watermelon knife
+  can pass the top of the frame. Rest looks changed for the watermelon, kiwi, croissant (a tray),
+  sushi (a soy dish and a plain board) and taco (a plate).
+
+### E6b Landmarks and friends (PR #36, merged 2026-09-26)
+
+- 18 toys: eleven landmarks, each with a respectful moment (a sundial day at the Washington
+  Monument, whose model has no reflecting pool; the White House flag stays at the top of its pole; a
+  chariot race at the Colosseum; Galileo's drop at Pisa), the school of fish (48 separate fish), the
+  nautilus, sea urchin, frog, shield, crown and snowman (which melts as solid pieces and rebuilds).
+- Review: all 18 looked right at once.
+- Known issues: the chariots and fish turn full circles, so small draw-order slips are possible
+  (none seen); Pisa's small bronze ball hides behind the top ledge until it drops; the Eiffel
+  Tower's fireworks, Liberty's sparks and the pyramids' saucer reach outside the resting frame at
+  their fullest. The lane's last handoff note (the owner's approval and a last merge of main) was
+  pushed after the merge and is copied into [E6b.md](E6b.md).
+
+### E4-finish (PR #37, merged 2026-09-26)
+
+- The four fixes from the owner's E4 review, all approved at once:
+  - Ice swan: ten solid pieces wear away and break off, faster and faster, meltwater drips into a
+    spreading puddle, then it refreezes (7.6 s). The Temperature slider melts it the same way.
+  - Ocean wave: one skinned sheet bent through keyframes by 38 control tokens, so the whole face
+    curls over and crashes, then a new swell builds (5.8 s). It is seen from three quarters now.
+  - Pinecone: the 42 scales facing the camera break off from the bottom up, pile at the base and fly
+    back (7.2 s); six seeds (was sixteen).
+  - Lava lamp: colour sets, a blob count (2 to 12), blob size and shape, and Flow and Glow sliders;
+    the default lamp builds exactly as before.
+- Known issues: the wave's white water shows as a sheet for a tenth of a second at impact and its
+  near end shows the profile's edge; the swan's wing tips break along straight lines and its
+  pedestal does not melt; some lava colour sets read less clearly at 320 px; a colour set other than
+  "Pick below" ignores the Wax and Liquid pickers (the Toy tab cannot hide an option by another's
+  value).
 
 ## State after Phase E4 (2026-09-26)
 
@@ -635,24 +697,24 @@ that tool is not available, ask the owner to press "Copy my marks and notes" on 
 the text. A "change" note overrides the proposal in `tools/toy-plan.json`; update the JSON to match.
 If the plan JSON changes, the page can be republished from it (`node tools/toy-plan.mjs --json`).
 
-| Phase  | What                                                                                                                                                        | Repo(s)   |
-| ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- |
-| A      | Done: sharpness, Detail setting, embeds, honeybee, thumbnail retry, homepage embed.                                                                         | both      |
-| B      | Done: mobile shelf grid (drag up into a full grid like desktop), thumbnail labels that don't cut off, and a "Find your own splat" help panel.               | splashery |
-| C1     | Done: visual fixes from the review (26 toys: vintage camera, boombox, storybook, comet, Statue of Liberty crown, horse, cookie, sports-ball textures, …).   | splashery |
-| C2     | Done: clearer or more dramatic effects for 33 toys the owner found subtle (bacteriophage, Big Ben, bus, octopus, fireworks, …).                             | splashery |
-| D      | Done: a voice library and a sound per toy, scan rigs, taps that know where they landed, drag-to-stretch, sound check and audit tools.                       | splashery |
-| E1     | Done: new tap effects for the scans and shapes (33 toys), with colour keys, whole-body effects and kit-built add-ons for rigs.                              | splashery |
-| E1b    | Done: fixes from the owner's E1 review (19 toys, a chess game, a laptop you can type on), effect quality rules, effect clips.                               | splashery |
-| E1c    | Done: fixes from the owner's E1b review (a phone panel bug, chess from PGN files, elephant, horse, cat, hockey puck, Newton's cradle, xylophone, tomatoes). | splashery |
-| E2     | Done: new tap effects for space, atoms and gems (32 toys), idle motion for the Sun, rings, aurora and galaxy, the draw-order lessons.                       | splashery |
-| E3     | Done: new tap effects for tiny things, anatomy and maths (26 toys), and channel kinds (morph, band, fade, skin) for soft shapes and light fronts.           | splashery |
-| E4     | Done: new tap effects for nature and weather (28 toys): falling leaves, petals and coconuts as loose pieces, jointed fronds, a breaking wave.               | splashery |
-| **E5** | New tap effects for food (17 new toys, 10 keep); the fifth of six waves (see TOY-PLAN.md).                                                                  | splashery |
-| E6     | New tap effects for balls and the rest, each with its own sound (see TOY-PLAN.md).                                                                          | splashery |
-| F      | Touch and drag interaction: a solvable puzzle cube, a chess set that plays a real game, a stretchy gummy bear, a draggable Newton's cradle, bricks.         | splashery |
-| G      | AI image-to-3D trial with `HF_TOKEN`.                                                                                                                       | splashery |
-| H      | Later: the gallery, multi-toy scenes, a liquid pour, the draw-order fix, more scans, more instruments, and the final homepage embed(s).                     | both      |
+| Phase | What                                                                                                                                                        | Repo(s)   |
+| ----- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- |
+| A     | Done: sharpness, Detail setting, embeds, honeybee, thumbnail retry, homepage embed.                                                                         | both      |
+| B     | Done: mobile shelf grid (drag up into a full grid like desktop), thumbnail labels that don't cut off, and a "Find your own splat" help panel.               | splashery |
+| C1    | Done: visual fixes from the review (26 toys: vintage camera, boombox, storybook, comet, Statue of Liberty crown, horse, cookie, sports-ball textures, …).   | splashery |
+| C2    | Done: clearer or more dramatic effects for 33 toys the owner found subtle (bacteriophage, Big Ben, bus, octopus, fireworks, …).                             | splashery |
+| D     | Done: a voice library and a sound per toy, scan rigs, taps that know where they landed, drag-to-stretch, sound check and audit tools.                       | splashery |
+| E1    | Done: new tap effects for the scans and shapes (33 toys), with colour keys, whole-body effects and kit-built add-ons for rigs.                              | splashery |
+| E1b   | Done: fixes from the owner's E1 review (19 toys, a chess game, a laptop you can type on), effect quality rules, effect clips.                               | splashery |
+| E1c   | Done: fixes from the owner's E1b review (a phone panel bug, chess from PGN files, elephant, horse, cat, hockey puck, Newton's cradle, xylophone, tomatoes). | splashery |
+| E2    | Done: new tap effects for space, atoms and gems (32 toys), idle motion for the Sun, rings, aurora and galaxy, the draw-order lessons.                       | splashery |
+| E3    | Done: new tap effects for tiny things, anatomy and maths (26 toys), and channel kinds (morph, band, fade, skin) for soft shapes and light fronts.           | splashery |
+| E4    | Done: new tap effects for nature and weather (28 toys): falling leaves, petals and coconuts as loose pieces, jointed fronds, a breaking wave.               | splashery |
+| E5    | Done (lane E5, PR #35): new tap effects for food (17 toys).                                                                                                 | splashery |
+| E6    | Done (lanes E6a, PR #38, and E6b, PR #36): new tap effects for 20 balls, 11 landmarks, 4 animals, the shield, the crown and the snowman.                    | splashery |
+| F     | Touch and drag interaction: a solvable puzzle cube, a chess set that plays a real game, a stretchy gummy bear, a draggable Newton's cradle, bricks.         | splashery |
+| G     | AI image-to-3D trial with `HF_TOKEN`.                                                                                                                       | splashery |
+| H     | Later: the gallery, multi-toy scenes, a liquid pour, the draw-order fix, more scans, more instruments, and the final homepage embed(s).                     | both      |
 
 What the owner asked for across the board (2026-09-23):
 

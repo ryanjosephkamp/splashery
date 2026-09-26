@@ -114,6 +114,14 @@ Clay works on pack toys too.
   jumps to a higher orbital and drops back with a photon, a molecule's bonds shake when heated, a
   wave runs through a crystal lattice; the diamond flashes rainbow fire, the ruby glows red, a star
   glides over the sapphire.
+- **Nature, food, balls and landmarks.** Every one has its own tap too: leaves, petals, snow and
+  coconuts come down as separate pieces and come back, the ice swan melts piece by piece and
+  refreezes, the ocean wave curls over and breaks, the pinecone drops its scales; the watermelon is
+  chopped into slices that fan open, each banana peels, the pretzel twists like a knot; every ball
+  has its own arc, spin and bounce (a cold squash ball warms up, a robot hand spins the basketball
+  on a fingertip); the Eiffel Tower lights up gold with fireworks, the Colosseum holds a chariot
+  race, Galileo drops two balls from the Leaning Tower, and the snowman melts and builds itself
+  again. The lava lamp lets you choose its colours, how many blobs it has and their size and shape.
 - **Your own molecules and proteins.** Type a molecule's name (about sixty, from aspirin to ATP), a
   formula (H2O, C9H8O4 or CH3COOH) or a SMILES string, or open a MOL, SDF, XYZ or PDB file, and the
   molecule toy lays it out in 3D with its bonds. The protein toy shows ubiquitin, insulin, GFP or
