@@ -2044,7 +2044,7 @@ export const RECIPES = {
       out.parts.foam = { scale: 1 + 0.85 * easeOut(band(s, 0.82, 2.7)) * (1 - gone) };
       const billow = easeOut(band(s, 0.85, 4.6));
       out.parts.mist = {
-        scale: 1 + 2.1 * billow * (1 - gone),
+        scale: 1 + 1.6 * billow * (1 - gone),
         offset: [0, 0.3 * billow * (1 - gone), 0.04 * billow * (1 - gone)],
         quat: quatAxisAngle([0, 1, 0], 0.5 * billow * (1 - gone)),
       };
@@ -2204,14 +2204,15 @@ export const RECIPES = {
       // A cloud of mist that billows up from the pool: built small at the
       // foot and grown by its part (channel 2 brings it in and out).
       const mist = k.part("mist", { pivot: [0, 0.06, 0.5] });
-      k.cloud({ share: 0.012, size: 4.2, pattern: false }, (r) => {
+      // Faint, so the rocks and the pool show through it.
+      k.cloud({ share: 0.012, size: 3.6, pattern: false }, (r) => {
         const d = randDir(r);
         const rr = Math.cbrt(r());
         const p = [d[0] * 0.2 * rr, 0.06 + Math.abs(d[1]) * 0.14 * rr, 0.52 + d[2] * 0.12 * rr];
         return {
           p,
-          color: mix("#eef8ff", "#ffffff", r()),
-          opacity: 0.2,
+          color: mix("#e4f2fa", "#ffffff", r()),
+          opacity: 0.09 + 0.06 * rr,
           kind: "fade",
           channel: 2,
           params: [0.75 * r() * (0.4 + 0.6 * rr), -0.2],
