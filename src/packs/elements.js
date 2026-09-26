@@ -306,7 +306,13 @@ function icebergPose(ch, s) {
 // while it passes behind the funnel instead).
 const TW_AHEAD = mul(TW_CAM, 0.42);
 // The heat-up's glow, added over the wax: hot orange, magenta, gold, orange.
-const LAVA_GLOW = [[0.75, 0.16, 0], [0.45, 0, 1], [0.35, 0, 1], [0.35, 0.45, 0], [0.75, 0.18, 0]];
+const LAVA_GLOW = [
+  [0.75, 0.16, 0],
+  [0.45, 0, 1],
+  [0.35, 0, 1],
+  [0.35, 0.45, 0],
+  [0.75, 0.18, 0],
+];
 
 // Waterfall: the cliff's height, where the river runs over the lip, and
 // the falling curtain (u across, v down). A tap sends a surge down: a
@@ -1579,8 +1585,7 @@ export const RECIPES = {
             pos,
             rot: [0, d.yaw, 0],
             count: 50,
-            color: (c) =>
-              lit(ramp(["#4a8a2a", "#9aa830", "#e0a020", "#c8601a"], d.tone), c.n, 0.3),
+            color: (c) => lit(ramp(["#4a8a2a", "#9aa830", "#e0a020", "#c8601a"], d.tone), c.n, 0.3),
           });
       });
       // The storm cloud it hangs from, turning slowly: soft puffs, lit on top.
@@ -1671,12 +1676,12 @@ export const RECIPES = {
         };
       });
       const burst = s === null ? 0 : band(s, 3.5, 4.7);
-      const grow = 1 + 9 * easeOut(burst);
+      const grow = 1 + 6 * easeOut(burst);
       const fade = s === null || s < 3.5 ? 0 : 1 - band(s, 4.1, 4.8);
       for (const side of ["L", "R"]) {
         out.parts[`burst${side}`] = {
           scale: grow,
-          offset: [0, -0.07 * burst * burst, 0],
+          offset: [0, -0.12 * burst * burst, 0],
           visible: fade / grow,
         };
         out.parts[`cloud${side}`] = {
@@ -2241,8 +2246,6 @@ export const RECIPES = {
     // from the crest (a copy of the lip fading back in on channel 3).
     drive(t, c, out) {
       const s = since(c.crash, OW_SECS);
-      const m = mem(c);
-      cuesAt(m, s, [[OW_HIT, { voice: "splash", f: 900, decay: 2.2, vol: 0.9 }]], out);
       const hide = { visible: 0 };
       if (s === null) {
         out.morph = [0, 0, 0, 0];
@@ -2429,7 +2432,7 @@ export const RECIPES = {
           const x = 1.02 + 0.28 * r();
           p = [x, 0.008, OW_Z0 + (OW_Z1 - OW_Z0) * v];
           n = [0, 1, 0];
-          at = 0.05 + 0.45 * Math.abs(x - 1.1) / 0.25;
+          at = 0.05 + (0.45 * Math.abs(x - 1.1)) / 0.25;
         }
         const l = lace(p);
         if (l < 0.25) return null;
