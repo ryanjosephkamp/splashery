@@ -12,6 +12,7 @@ import {
   quatFromTo,
   quatAxisAngle,
   quatMul,
+  quatRotate,
   clamp,
 } from "../kit.js";
 
@@ -170,8 +171,9 @@ function body(k, color, opts = {}) {
   });
   // Even placement leaves a tiny swirl at the sphere's two poles, unseen at
   // rest (the top one is edge-on); a spinning ball turns them into view, so
-  // two small caps of the same surface cover them.
-  for (const s of [1, -1]) k.add(poleCap(k, s), { ...look, part: ball });
+  // two small caps of the same surface cover them. (Surface only: their
+  // inside splats would turn with the shell and show as dark dots.)
+  for (const s of [1, -1]) k.add(poleCap(k, s), { ...look, interior: 0, part: ball });
   return shell;
 }
 function poleCap(k, s, a = 0.14) {
@@ -802,12 +804,9 @@ function throwBall(key, label, g, legs, { extra, gloss } = {}) {
 
 // ---- The balls' plans ----------------------------------------------------------------
 
-const mix1 = (a, b, t) => a + (b - a) * t;
 // The lowest point of the ball's outline in the home view (on the ball at
 // rest): a fingertip there touches the ball without crossing it.
 const LIMB = unit(add3([0, -1, 0], scale3(VIEW, VIEW[1])));
-// Where the fingertip's top is built (inside the ball's sphere).
-const FINGER_TOP = 0.95;
 const BOUNCE = (i, k) => [
   { voice: "boing", f: 95, to: 0.8, rate: 30, decay: 0.6, vol: 0.9 * k },
   { voice: "slap", f: 900, vol: 0.6 * k },
@@ -859,13 +858,193 @@ const BASKETBALL = [
   }),
   spinDown(0.45, 1.2, UP),
 ];
-// When the fingertip comes up, holds the ball and drops away.
-const BASKETBALL_FINGER = (() => {
+// When the hand comes up, catches the ball on its fingertip, spins it and
+// drops away.
+const BASKETBALL_HAND = (() => {
   const P = plan(BB_G, BASKETBALL);
   const toss = P.segs.find((s) => s.L.fly && s.L.axis === UP);
   const spin = P.segs.find((s) => s.L.tilt);
-  return { rise: toss.t0 + 0.1, catch: toss.t0 + toss.T, drop: spin.t0 + spin.T };
+  return {
+    rise: toss.t0 + 0.1,
+    catch: toss.t0 + toss.T,
+    spin: spin.t0,
+    spinT: spin.T,
+    drop: spin.t0 + spin.T,
+  };
 })();
+
+// The basketball's robot hand: the index finger points up under the ball,
+// the other fingers curl into a fist with the thumb across them, and the
+// wrist and forearm come up from below. It is seen from the palm side,
+// turned a little towards the thumb. Its own frame: x along the knuckles towards the
+// thumb, y up the finger, z out of the palm; sizes in ball radii (times
+// HAND_SIZE). It is built at half size inside the ball's sphere (the toy is
+// framed by all its splats) and grown and moved into place by its parts,
+// hidden at rest.
+const HAND_Q = (() => {
+  const a = 0.45;
+  const thumb = add3(scale3(ACROSS, Math.cos(a)), scale3(TOWARD, Math.sin(a)));
+  return quatAxisAngle(UP, Math.atan2(-thumb[2], thumb[0]));
+})();
+const HAND_SIZE = 1.12;
+const handDir = (l) => quatRotate(HAND_Q, scale3(l, HAND_SIZE));
+const HAND_BUILT = 0.5;
+// The hand's knuckle (its origin) as built: the hand centred in the ball.
+const HAND_AT = scale3(handDir([0.14, 0.52, 0]), HAND_BUILT);
+const handB = (l) => add3(HAND_AT, scale3(handDir(l), HAND_BUILT));
+// The index finger's joints up from its knuckle, its length and its joints
+// curled (radians).
+const INDEX_J = [0, 0.19, 0.33];
+const INDEX_L = 0.44;
+const INDEX_CURL = [0.5, 0.8, 0.5];
+// How far below its hold the hand comes from and goes to, and how long it
+// takes to go.
+const HAND_LOW = 2.8;
+const HAND_GO = 0.45;
+
+// Shows the hand e s after the tap: it rises as the ball is tossed, its
+// index straightening to meet it; holds it through the spin, dipping as it
+// catches and swaying with the wobble; and drops away faster than the ball
+// falls, the finger relaxing.
+function showHand(out, e, pose) {
+  const f = BASKETBALL_HAND;
+  const names = ["hand", "index1", "index2", "index3"];
+  if (!(e > f.rise && e < f.drop + HAND_GO)) {
+    for (const n of names) out.parts[n] = { visible: 0 };
+    return;
+  }
+  let lift = 0;
+  let curl = 0;
+  let sway = IDQ;
+  let y = BB_FINGER_Y;
+  if (e < f.catch) {
+    lift = -HAND_LOW * (1 - easeOut(band01(e, f.rise, f.catch)));
+    curl = 1 - easeIO(band01(e, f.catch - 0.3, f.catch));
+  } else if (e < f.drop) {
+    y = pose.p[1];
+    const s = Math.max(0, e - f.spin);
+    const w = 0.05 * Math.sin((Math.PI * s) / f.spinT);
+    sway = quatAxisAngle([Math.cos(9 * s), 0, Math.sin(9 * s)], w);
+  } else {
+    const s = e - f.drop;
+    lift = -HAND_LOW * (s / HAND_GO) ** 2;
+    curl = 0.6 * easeIO(band01(s, 0, 0.25));
+  }
+  // The straight finger's tip on the ball; the hand turns about it.
+  const tip = add3(LIMB, [0, y + lift, 0]);
+  let j = sub(tip, quatRotate(sway, handDir([0, INDEX_L, 0])));
+  const grow = 1 / HAND_BUILT;
+  out.parts.hand = { quat: sway, scale: grow, offset: sub(j, HAND_AT), visible: 1 };
+  let a = 0;
+  for (let i = 0; i < 3; i++) {
+    a += curl * INDEX_CURL[i];
+    const q = quatMul(sway, quatAxisAngle(handDir([1, 0, 0]), a));
+    const at = handB([0, INDEX_J[i], 0]);
+    out.parts[names[i + 1]] = { quat: q, scale: grow, offset: sub(j, at), visible: 1 };
+    if (i < 2) j = add3(j, quatRotate(q, handDir([0, INDEX_J[i + 1] - INDEX_J[i], 0])));
+  }
+}
+
+function buildHand(k) {
+  const hand = k.part("hand", { pivot: HAND_AT });
+  const index = INDEX_J.map((y, i) => k.part(`index${i + 1}`, { pivot: handB([0, y, 0]) }));
+  const metal =
+    (col, sheen = 0.45) =>
+    (c) =>
+      keep(lit(col, c.n, { sheen, tight: 14, soft: 0.4 }));
+  const SILVER = metal("#c3c9d1");
+  const GRAPHITE = metal("#3d424a", 0.3);
+  const JOINT = metal("#858c95", 0.4);
+  const BLUE = "#46b4ff";
+  const look = { flat: 0.3, pattern: false, weight: 3, even: true, scale: HAND_BUILT * HAND_SIZE }; // prettier-ignore
+  // A limb from a to b (in the hand's frame).
+  const limb = (a, b, r, part, color = SILVER, r1 = r, caps = false) => {
+    const d = sub(b, a);
+    k.add(k.cone(r, r1, Math.hypot(...d), { caps }), {
+      ...look,
+      part,
+      color,
+      pos: handB(scale3(add3(a, b), 0.5)),
+      quat: quatMul(HAND_Q, quatFromTo(UP, unit(d))),
+    });
+  };
+  const ball = (at, r, part, color = GRAPHITE) =>
+    k.add(k.sphere(r), { ...look, part, color, pos: handB(at) });
+  // A jointed finger along points pts: silver segments, darker joints and a
+  // graphite fingertip pad.
+  const finger = (pts, r, parts) => {
+    for (let i = 0; i + 1 < pts.length; i++) {
+      const last = i + 2 === pts.length;
+      const b = last ? add3(pts[i + 1], scale3(unit(sub(pts[i], pts[i + 1])), r)) : pts[i + 1];
+      limb(pts[i], b, r * (1 - 0.03 * i), parts[i]);
+      ball(pts[i], r * (i ? 1.04 : 1.1), i ? parts[i] : hand, JOINT);
+      if (last) ball(b, r * 0.97, parts[i]);
+    }
+  };
+  // The index, straight up (its tip pad reaches INDEX_L).
+  finger([...INDEX_J.map((y) => [0, y, 0]), [0, INDEX_L, 0]], 0.056, index);
+  // The curled fingers: out over the palm, down, and back to it.
+  const d1 = unit([0, -0.15, 1]);
+  const d2 = unit([0, -1, -0.12]);
+  const d3 = unit([0, -0.35, -1]);
+  for (const [x, y, r, l] of [
+    [-0.125, 0, 0.056, 1.05],
+    [-0.245, -0.012, 0.053, 1],
+    [-0.355, -0.04, 0.046, 0.8],
+  ]) {
+    const p0 = [x, y, 0];
+    const p1 = add3(p0, scale3(d1, 0.17 * l));
+    const p2 = add3(p1, scale3(d2, 0.13 * l));
+    const p3 = add3(p2, scale3(d3, 0.085 * l + r));
+    finger([p0, p1, p2, p3], r, [hand, hand, hand]);
+  }
+  // The thumb, across the middle finger.
+  finger(
+    [
+      [0.03, -0.33, 0.04],
+      [0.1, -0.225, 0.13],
+      [0.05, -0.14, 0.235],
+      [-0.085 - 0.058, -0.1, 0.27],
+    ],
+    0.06,
+    [hand, hand, hand],
+  );
+  // The palm: silver, with a dark pad and a blue ring on its face and a seam
+  // across the back of the hand.
+  k.add(k.roundedBox(0.43, 0.42, 0.15, 5), {
+    ...look,
+    part: hand,
+    pos: handB([-0.175, -0.2, 0]),
+    quat: HAND_Q,
+    color: (c) => {
+      const [x, y] = c.lp;
+      if (c.ln[2] < -0.6 && Math.abs(y - 0.12) < 0.007) return metal("#8a919b")(c);
+      if (c.ln[2] > 0.6 && Math.max(Math.abs(x) - 0.16, Math.abs(y + 0.1) - 0.09) < 0) {
+        if (Math.abs(Math.hypot(x, y + 0.1) - 0.055) < 0.012) return keep(BLUE);
+        return GRAPHITE(c);
+      }
+      return SILVER(c);
+    },
+  });
+  // The wrist joint, and the forearm: a cuff, a blue band and a seam.
+  k.add(k.roundedBox(0.32, 0.09, 0.14, 4), {
+    ...look,
+    part: hand,
+    pos: handB([-0.175, -0.44, 0]),
+    quat: HAND_Q,
+    color: JOINT,
+  });
+  const w0 = [-0.175, -0.47, 0];
+  const w1 = add3(w0, scale3(unit([0.12, -1, -0.22]), 0.95));
+  const forearm = (c) => {
+    const from = c.lp[1] + 0.475;
+    if (from < 0.05) return JOINT(c);
+    if (Math.abs(from - 0.11) < 0.018) return keep(BLUE);
+    if (Math.abs(Math.atan2(c.lp[2], c.lp[0]) - 0.6) < 0.03) return metal("#8a919b")(c);
+    return SILVER(c);
+  };
+  limb(w0, w1, 0.14, hand, forearm, 0.175, "bottom");
+}
 
 // Tennis: slammed onto the floor, it squashes hard and shoots up high with
 // topspin; a tennis ball keeps about 0.75 of its speed at each bounce.
@@ -1331,54 +1510,22 @@ const MARBLE = (() => {
 
 export const RECIPES = {
   basketball: {
+    // A few more splats (as far as the device allows) for the robot hand, so
+    // the ball at rest keeps its own.
+    density: 1.13,
     options: [{ key: "color", label: "Colour", type: "color", default: "#d9632b" }],
     // Dribble: four fast, low bounces, each pushed back down by an unseen
-    // hand; then a toss onto a fingertip that comes up from below, where it
-    // spins with a slight wobble, and it drops off, bouncing lower each time
-    // (about 0.78 of its speed kept), still spinning down.
+    // hand; then a toss onto the fingertip of a robot hand that comes up
+    // from below, where it spins with a slight wobble, and it drops off,
+    // bouncing lower each time (about 0.78 of its speed kept), still
+    // spinning down.
     ...throwBall("dribble", "Dribble and spin", grav(0.12), BASKETBALL, {
       extra(e, pose, c, out) {
-        // The fingertip rises under the ball, holds it and drops away.
-        const f = BASKETBALL_FINGER;
-        const up = easeOut(band01(e, f.rise, f.catch));
-        const down = easeIO(band01(e, f.drop, f.drop + 0.22));
-        const shown = e > f.rise && e < f.drop + 0.22;
-        const y = LIMB[1] - FINGER_TOP + mix1(-1.2, pose.p[1], up) - 1.4 * down;
-        out.parts.finger = { offset: [0, shown ? y : 0, 0], visible: shown ? 1 : 0 };
+        showHand(out, e, pose);
       },
     }),
     build(k, o) {
-      // The fingertip, hidden until the spin; it touches the ball's lower
-      // edge as seen from the front, so it never crosses the spinning ball.
-      // It is built inside the ball (the toy is framed by all its splats)
-      // and moved down under the ball when it shows.
-      const finger = k.part("finger");
-      const R = 0.085;
-      const top = FINGER_TOP - R;
-      // Skin, with a nail and two knuckle creases on the side facing home.
-      const skin = (c) => {
-        const down = top - c.p[1];
-        const face = (c.n[0] * VIEW[0] + c.n[2] * VIEW[2]) / Math.hypot(VIEW[0], VIEW[2]);
-        let col = "#e3b08c";
-        if (face > 0.35 && down > -0.03 && down < 0.2) col = "#f1cdbf";
-        else if (face > 0.2 && [0.42, 0.78].some((y) => Math.abs(down - y) < 0.012))
-          col = "#b98264";
-        return keep(lit(col, c.n, { sheen: col === "#f1cdbf" ? 0.35 : 0.1, tight: 10, soft: 0.3 }));
-      };
-      k.add(k.cylinder(R, 1.72, { caps: false }), {
-        pos: [LIMB[0], top - 0.86, LIMB[2]],
-        part: finger,
-        flat: 0.3,
-        pattern: false,
-        color: skin,
-      });
-      k.add(k.sphere(R), {
-        pos: [LIMB[0], top, LIMB[2]],
-        part: finger,
-        flat: 0.3,
-        pattern: false,
-        color: (c) => (c.lp[1] < 0 ? null : skin(c)),
-      });
+      buildHand(k);
       const w = 0.026;
       body(k, (c) => {
         const [x, y] = c.ln;
@@ -1858,28 +2005,20 @@ export const RECIPES = {
         { d: unit([0.2, 0.95, 0.22]), r: 0.1 },
         { d: unit([0, 0.8, -0.6]), r: 0.12 },
       ];
+      // The finger holes are painted on the shell: a dark well with a dimmer
+      // wall at its edge. (Bored as cylinders into the ball, they drew over
+      // the shell as black spots once the roll turned them away.)
       body(
         k,
         (c) => {
-          for (const h of holes) if (Math.acos(clamp(dot(c.ln, h.d), -1, 1)) < h.r) return null;
+          for (const h of holes) {
+            const a = Math.acos(clamp(dot(c.ln, h.d), -1, 1));
+            if (a < h.r) return keep(a > h.r - 0.02 ? "#2b2338" : "#0e0b13");
+          }
           return swirl(c, [o.c1, o.c2, "#f5f0ff"]);
         },
         { core: "#1e1633", interior: 0.08 },
       );
-      for (const h of holes) {
-        const depth = 0.4;
-        const q = quatFromTo([0, 1, 0], h.d);
-        const mid = h.d.map((v) => v * (1 - depth / 2));
-        k.add(k.cylinder(Math.sin(h.r), depth, { caps: "bottom" }), {
-          part: k.part("ball"),
-          quat: q,
-          pos: mid,
-          flat: 0.3,
-          weight: 1.4,
-          color: "#141018",
-          pattern: false,
-        });
-      }
     },
   },
 

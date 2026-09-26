@@ -54,6 +54,25 @@ line. Their clips and cards (`e6a-<toy id>`) are on the Effect review page in th
 hit and kicked; bounces and squashes; floating, bobbing and rolling), posted 2026-09-26. The lane
 now waits for the owner's marks and fixes any "Needs work" in the same PR (new clips as `-r2`).
 
+2026-09-26, round 2: the owner's marks were 18 "Looks right" and 2 "Needs work". Main merged again
+(TOY-PLAN.md taken from main and regenerated). Both fixes are posted as `e6a-basketball-r2` and
+`e6a-bowling-ball-r2` (the old cards marked `replacedBy`):
+
+- **Basketball.** "The finger doesn't look like a finger… put more of the hand in the shot… Can you
+  make it a robot hand, too?" The fingertip is now a kit-built robot hand (`buildHand()`,
+  `showHand()`): a pointing hand with a jointed index finger (three parts, each turning about its
+  own joint), the other fingers curled into a fist with the thumb across them, a palm with a blue
+  light, and the wrist and forearm. It rises as the ball is tossed, its finger straightening to
+  catch it, sways with the wobble, and drops away as the ball falls. The ball's motion and sound are
+  unchanged.
+- **Bowling ball.** "At the end of the video, a couple of black spots appear on the ball." They were
+  in the app too. Two causes, both turning with the rolling ball: the finger holes (dark tubes bored
+  into the ball) drew through it as black blocks, and the pole caps' inside splats (the caps took
+  the ball's `interior` option) showed as a cluster of dark dots. The holes are now painted on the
+  shell and the caps are surface only on every ball (the bouncy ball, beach ball, ping-pong ball and
+  pool ball passed the same option; the bouncy ball's roll is checked clean). The look at rest is
+  unchanged (thumbnail kept).
+
 ## Notes
 
 How the balls move (all in `src/packs/balls.js`, "Real throws and bounces (E6a)"):
@@ -82,8 +101,12 @@ How the balls move (all in `src/packs/balls.js`, "Real throws and bounces (E6a)"
   on renders against the ball at rest (`LIGHT_OVERLAP`). They ask for twice the splats
   (`density: 2`) so the ball at rest keeps its own.
 - **Effect pieces are built inside the ball.** The app frames a toy (and puts its floor) by all its
-  splats, and the kit fits it by the farthest one, so the fingertip, splash, ripples and dust are
+  splats, and the kit fits it by the farthest one, so the robot hand, splash, ripples and dust are
   built inside the ball's sphere and moved or grown by their parts, hidden at rest.
+- **The robot hand** is built at half size in the pose it shows in (so it sorts right) and grown
+  twice by its parts. Each index segment's part turns about its own joint, and `showHand()` chains
+  the joints (the tip stays on the ball while the hand sways about it). It takes about a seventh of
+  the splats, so the basketball asks for a few more (`density: 1.13`) and the ball keeps its own.
 
 ## Known issues
 
@@ -111,6 +134,11 @@ Lessons for PACKS.md, backlog items and README lines, to move after the merge.
   `fit: false`.
 - PACKS.md 3: even placement on a sphere leaves a small swirl at the poles; cover them with caps if
   the sphere turns (`poleCap()`).
+- PACKS.md 7b (draw order): don't bore holes into a body that turns (a bowling ball's finger holes
+  as dark tubes): the inside draws through the shell once it turns. Paint them on the surface.
+- PACKS.md 3: a shape added with a ball's options inherits `interior`; small covering pieces (pole
+  caps) should pass `interior: 0`, or their inside splats show as dots when the part turns.
+- PACKS.md 3: `k.roundedBox(sx, sy, sz)` takes full sizes, unlike the half sizes one might expect.
 - Backlog: the American football's end (above).
 - A smoke test fails in this sandbox on main as well as on this branch: "rigs pick splats by colour,
   run effects and show add-ons" (`tests/smoke.spec.mjs`); the strawberry has not settled back 3 s

@@ -293,8 +293,9 @@ Proposals below are suggestions; the owner may change them.
     splats, even splat placement.
   - Effect: Dribble: fast low bounces, then a spin on a fingertip.
   - Improved: E6a: a dribble: three fast, low bounces, each pushed back down by an unseen hand; then
-    a toss onto a fingertip that comes up from below, where it spins with a slight wobble; it drops
-    off and bounces lower each time, still spinning down (4.8 s).
+    a toss onto the fingertip of a jointed robot hand that comes up from below, its finger
+    straightening to catch it; it spins there with a slight wobble; it drops off as the hand drops
+    away and bounces lower each time, still spinning down (4.8 s).
   - Sound: Hollow basketball boing.
 - **Soccer ball** (`soccer-ball`). Now: tap: Keepy-uppy. Plan: keep.
   - Fixed: C1: smooth, slightly glossy panels and clean grooved seams; the speckle (the far side
