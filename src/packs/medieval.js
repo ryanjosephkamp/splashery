@@ -119,6 +119,9 @@ const BOW = {
   target: [-0.85, 0.12, 0],
 };
 
+// Seconds since a pulse fired, as 0..1 (1 at rest).
+const progress = (v) => (v > 0 ? 1 - v : 1);
+const easeOut = (x) => 1 - (1 - clamp(x, 0, 1)) ** 3;
 const easeInOut = (x) => {
   const t = clamp(x, 0, 1);
   return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
@@ -414,6 +417,26 @@ export const RECIPES = {
       { key: "field", label: "Field", type: "color", default: "#1f4fa3" },
       { key: "charge", label: "Charge", type: "color", default: "#e8b93a" },
     ],
+    controls: [{ key: "block", label: "Block", type: "pulse", ease: 2.8 }],
+    action: { key: "block", label: "Block a blow" },
+    drive(t, c, out) {
+      // The shield takes an unseen blow near its top corner: it jolts back
+      // and rocks, sparks spray off the iron rim (channel 0) and burn out,
+      // a flash marks the spot, and a gleam of light sweeps across the
+      // emblem (channel 1).
+      const on = c.block > 0;
+      const s = progress(c.block) * 2.8;
+      const jolt = on ? Math.exp(-3.2 * s) * Math.sin(Math.min(s, 2.6) * 11 + 0.9) * (1 - band(s, 2.2, 2.6)) : 0; // prettier-ignore
+      out.body = {
+        quat: quatAxisAngle(vec.unit([1, 0, -0.35]), -0.2 * jolt),
+        offset: [0, 0, -0.05 * Math.max(0, jolt)],
+      };
+      const fly = on ? easeOut(band(s, 0, 0.85)) : 0;
+      out.parts.sparks = { visible: on && s < 1.0 ? 1 - band(s, 0.35, 0.95) : 0 };
+      out.parts.flash = { scale: 0.3 + 1.2 * easeOut(band(s, 0, 0.2)), visible: on ? 1 - band(s, 0.05, 0.3) : 0 }; // prettier-ignore
+      out.morph = [on && s < 1.0 ? fly : 0, on ? 1.2 * band(s, 0.35, 1.5) : 0];
+      out.glow = [1.0, 0.95, 0.78, on ? 0.9 * band(s, 0.3, 0.45) * (1 - band(s, 1.35, 1.55)) : 0];
+    },
     build(k, o) {
       const W = 0.78;
       const yt = 0.92;
@@ -462,6 +485,10 @@ export const RECIPES = {
         flat: 0.15,
         interior: 0.05,
         core: "#6b4a2b",
+        // A gleam sweeps across it, top left to bottom right, on channel 1.
+        kind: "band",
+        channel: 1,
+        params: (c) => (c.inside ? [5, 0.01] : [0.5 + 0.3 * (c.lp[0] / W - c.lp[1]), 0.07]),
         color: (c) => {
           const x = c.lp[0];
           const y = c.lp[1];
@@ -514,6 +541,39 @@ export const RECIPES = {
         kind: "glint",
         params: [0.12, 0],
         color: (c) => metal(c, "#a9b0b8"),
+      });
+      // Where the blow lands (hidden at rest): a flash, and sparks that fly
+      // off the rim on channel 0, streaking along their paths.
+      const hit = g.pt([W * 0.62, yt - 0.18, bow(W * 0.62, yt - 0.18) + 0.04]);
+      const fwd = g.dir([0, 0, 1]);
+      const flash = k.part("flash", { pivot: hit });
+      k.cloud({ share: 0.003, size: 1.8, pattern: false, part: flash }, (rand) => {
+        const d = vec.unit([rand() - 0.5, rand() - 0.5, rand() - 0.5]);
+        return {
+          p: vec.add(hit, vec.mul(d, 0.06 * Math.sqrt(rand()))),
+          color: mix("#ffffff", "#ffe29a", rand()),
+          opacity: 0.7,
+        };
+      });
+      k.fitMorphs = false;
+      // Sparks fly mostly up and away from the corner that was struck.
+      const sparks = k.part("sparks", { pivot: hit });
+      k.cloud({ share: 0.005, size: 0.95, pattern: false, part: sparks }, (rand) => {
+        const a = 0.75 + (rand() - 0.5) * 2.6;
+        const spread = vec.unit([Math.cos(a), Math.sin(a) * 0.8 + 0.25, 0]);
+        const dir = vec.unit(vec.add(g.dir(spread), vec.mul(fwd, 0.35 + 0.5 * rand())));
+        const d = 0.25 + 0.65 * Math.pow(rand(), 0.7);
+        const to = vec.add(vec.add(hit, vec.mul(dir, d)), [0, -0.35 * d * d, 0]);
+        return {
+          p: vec.add(hit, vec.mul(dir, 0.02 * rand())),
+          dir,
+          stretch: 4.5,
+          color: mix("#ffb640", "#fff4c8", rand()),
+          opacity: 0.95,
+          kind: "morph",
+          channel: 0,
+          to,
+        };
       });
       for (let i = 0; i < 18; i++) {
         const [x, y] = pts[Math.floor(((i + 0.5) / 18) * pts.length)];
@@ -1205,6 +1265,25 @@ export const RECIPES = {
   crown: {
     alive: true,
     options: [{ key: "velvet", label: "Velvet", type: "color", default: "#8e1430" }],
+    controls: [{ key: "rise", label: "Rise", type: "pulse", ease: 4.2 }],
+    action: { key: "rise", label: "Light the jewels" },
+    drive(t, c, out, info) {
+      // The crown lifts and hovers; its eight jewels light up one after
+      // another round the band (channel 0 passing each one, each flashing
+      // white as it lights), golden motes drift up round it, then the
+      // jewels go out in turn and it settles back down.
+      const on = c.rise > 0;
+      const s = progress(c.rise) * 4.2;
+      const lift = on ? easeInOut(band(s, 0, 0.9)) * (1 - easeInOut(band(s, 3.2, 4.1))) : 0;
+      out.body = {
+        offset: [0, 0.3 * lift + 0.02 * Math.sin(s * 4) * lift, 0],
+        quat: quatAxisAngle([0, 0, 1], 0.03 * Math.sin(s * 3.1) * lift),
+      };
+      const jewels = on ? (s < 2.6 ? band(s, 0.3, 1.7) : 1 - band(s, 2.6, 3.6)) : 0;
+      out.morph = [jewels];
+      out.glow = [1, 1, 1, on && s < 2.0 ? 1 : 0];
+      out.parts.motes = { visible: lift > 0.02 ? lift : 0 };
+    },
     build(k, o) {
       const R = (y) => 0.6 + 0.07 * (y + 0.3);
       const top = (u) => {
@@ -1263,8 +1342,10 @@ export const RECIPES = {
           rot: [0, (a * 180) / Math.PI, 0],
           weight: 4,
           pattern: false,
-          kind: "glint",
-          params: [1.1, 0],
+          // Each jewel flashes white as channel 0 reaches it.
+          kind: "band",
+          channel: 0,
+          params: [0.03 + (i / 8) * 0.85 + 0.04, 0.06],
           color: (c) => gem(c, gemCols[i % 4]),
         });
         k.add(k.torus(0.075, 0.012), {
@@ -1284,6 +1365,36 @@ export const RECIPES = {
           color: (c) => lit(c, "#f6efe2", 0.35, 0.6),
         });
       }
+      // Each jewel's light: a glow of its own colour over it that appears
+      // as channel 0 passes its turn (hidden at rest).
+      k.cloud({ share: 0.012, size: 2, pattern: false }, (rand, j) => {
+        const i = j % 8;
+        const a = (i / 8) * TAU;
+        const r = R(-0.13) + 0.02;
+        const d = vec.unit([rand() - 0.5, rand() - 0.5, rand() - 0.5]);
+        const q = 0.075 * Math.sqrt(rand());
+        return {
+          p: vec.add([Math.sin(a) * r, -0.13, Math.cos(a) * r], vec.mul(d, q)),
+          color: mix(gemCols[i % 4], "#ffffff", 0.25 + 0.6 * (1 - q / 0.075)),
+          opacity: 0.75 * (1 - q / 0.085),
+          kind: "fade",
+          channel: 0,
+          params: [0.03 + (i / 8) * 0.85, -0.08],
+        };
+      });
+      // Golden motes drift up round the crown while it hovers (hidden at
+      // rest).
+      k.cloud({ share: 0.004, size: 1.1, pattern: false, part: k.part("motes") }, (rand) => {
+        const a = rand() * TAU;
+        const r = 0.5 + 0.18 * rand();
+        return {
+          p: [Math.sin(a) * r, -0.3 + rand() * 0.4, Math.cos(a) * r],
+          color: mix("#ffd35a", "#fffbe8", rand()),
+          opacity: 0.95,
+          kind: "rise",
+          params: [0.5 + 0.3 * rand(), rand()],
+        };
+      });
       // The velvet cap and a golden orb on top.
       k.add(k.ellipsoid(0.56, 0.5, 0.56), {
         pos: [0, -0.08, 0],

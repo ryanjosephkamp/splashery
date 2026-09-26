@@ -143,7 +143,7 @@ function prism(k, n, r0, r1, y0, y1, opts, { a0 = Math.PI / n, cap = true } = {}
 
 // Free splats along straight members (lattice girders, rigging).
 // segs: [a, b, thickness]; the budget is shared by length times thickness.
-function lattice(k, segs, { share, size = 0.7, stretch = 2.4, color, part, pattern }) {
+function lattice(k, segs, { share, size = 0.7, stretch = 2.4, color, part, pattern, more }) {
   const cum = new Float64Array(segs.length);
   let total = 0;
   segs.forEach((s, i) => {
@@ -164,7 +164,8 @@ function lattice(k, segs, { share, size = 0.7, stretch = 2.4, color, part, patte
     const d = sub(b, a);
     const j = 0.006 * w;
     const p = add(lerp3(a, b, t), [(rand() - 0.5) * j, (rand() - 0.5) * j, (rand() - 0.5) * j]);
-    return { p, dir: d, stretch, size: 0.7 + 0.3 * Math.sqrt(w), color: color(p, d, rand) };
+    const splat = { p, dir: d, stretch, size: 0.7 + 0.3 * Math.sqrt(w), color: color(p, d, rand) };
+    return more ? { ...splat, ...more(p, rand) } : splat;
   });
 }
 
@@ -327,6 +328,45 @@ function curve(points) {
 // Units of 100 m. Four curved lattice legs meet above the second floor and
 // rise as one tapering shaft to the top and its antenna.
 
+// Firework bursts round the tower: centre, radius and colours (blue, white,
+// red and gold), each at its own moment after the tap (at, seconds). Placed
+// either side of the tower as seen from the home view.
+const EIF_VIEW_R = [0.85, 0, -0.52];
+const EIF_BURSTS = [
+  { c: add(mul(EIF_VIEW_R, -0.78), [0, 2.2, 0.1]), r: 0.44, a: "#2f6bff", b: "#cfe0ff", at: 0.35 },
+  { c: add(mul(EIF_VIEW_R, 0.82), [0, 2.55, 0]), r: 0.46, a: "#f4f7ff", b: "#fff6c8", at: 0.9 },
+  { c: add(mul(EIF_VIEW_R, -0.5), [0, 2.95, -0.25]), r: 0.4, a: "#ff3346", b: "#ffd0b0", at: 1.45 }, // prettier-ignore
+  { c: add(mul(EIF_VIEW_R, 0.62), [0, 1.7, 0.05]), r: 0.4, a: "#ffb52e", b: "#fff2b0", at: 2.1 },
+];
+const EIF_SECS = 4.2;
+const EIF_BUILT = 0.6;
+
+// A firework burst: rays of sparks from the centre with bright tips, built
+// at its fullest (drive() grows it with its part's scale and fades it).
+function burst(k, part, C, r, a, b, share) {
+  const rays = 72;
+  const g = Math.PI * (3 - Math.sqrt(5));
+  const dirs = [];
+  for (let i = 0; i < rays; i++) {
+    const y = 1 - ((i + 0.5) / rays) * 2;
+    const rr = Math.sqrt(1 - y * y);
+    dirs.push([Math.cos(g * i) * rr, y, Math.sin(g * i) * rr]);
+  }
+  k.cloud({ share, size: 0.8, pattern: false, part }, (rand, i) => {
+    const d = dirs[i % rays];
+    const t = Math.pow(rand(), 0.55);
+    const tip = t > 0.9;
+    return {
+      p: add(C, add(mul(d, r * (0.18 + 0.82 * t)), [0, -0.06 * r * t * t, 0])),
+      dir: d,
+      stretch: tip ? 1.2 : 2.6,
+      size: tip ? 1.6 : 0.95,
+      color: mix(b, a, Math.min(1, t * 1.2)),
+      opacity: tip ? 1 : 0.45 + 0.5 * t,
+    };
+  });
+}
+
 const eifW = (y) => 0.57 * Math.exp(-y / 0.8) + 0.05;
 const eifLeg = (y) => 0.26 + (0.185 - 0.26) * (y / 1.15);
 const eifIn = (y) => Math.max(0, eifW(y) - eifLeg(y));
@@ -422,7 +462,38 @@ function eiffelBuild(k) {
     const f = 0.78 + 0.16 * side + 0.08 * (rand() - 0.5) + 0.08 * smoothstep(0, 2.8, p[1]);
     return shade(brown, f);
   };
-  lattice(k, segs, { share: 0.56, size: 0.75, stretch: 2.4, color: lat });
+  // The ironwork glows gold at night as channel 1 rises towards 1 (its
+  // floodlights: drive() holds the channel partway for a warm wash).
+  lattice(k, segs, {
+    share: 0.56,
+    size: 0.75,
+    stretch: 2.4,
+    color: lat,
+    more: () => ({ kind: "band", channel: 1, params: [1, 0.5] }),
+  });
+  // Sparkle lights on the ironwork, shown only while the tower is lit (so
+  // they are coloured as the lit iron). Each flashes once as channel 0
+  // passes it: drive() runs the channel up, and lower lights come a little
+  // earlier, so the sparkle climbs.
+  lattice(k, segs, {
+    share: 0.06,
+    size: 1.35,
+    stretch: 1,
+    color: (p, d, rand) => mix(lat(p, d, rand), "#f2b865", 0.6),
+    part: k.part("sparkle", { pivot: [0, 1.4, 0] }),
+    pattern: false,
+    more: (p, rand) => ({
+      kind: "band",
+      channel: 0,
+      params: [0.06 + 0.5 * (p[1] / TOP) + 0.38 * rand(), 0.06],
+    }),
+  });
+  // Fireworks round the tower (drive() pops them one after another).
+  // Each is built at EIF_BUILT of its size, inside the tower's reach, and
+  // grown by its part.
+  EIF_BURSTS.forEach((B, i) =>
+    burst(k, k.part(`burst${i}`, { pivot: B.c }), B.c, B.r * EIF_BUILT, B.a, B.b, 0.03),
+  );
   // The top: a deck, the lantern and the antenna.
   const iron = (c) => lit(brown, c, 0.62);
   k.add(roundBox(0.19, 0.04, 0.19, 0.006), { pos: [0, TOP, 0], flat: 0.2, weight: 2, color: iron });
@@ -486,6 +557,21 @@ function eiffelBuild(k) {
 
 // ---- Washington monument ---------------------------------------------------------------------
 
+// Bearings round the monument as 0..1, with the home view at 0.5, so the
+// shadow's sweep past the front of the lawn never wraps.
+const MON_VIEW = 0.55;
+const monBearing = (p) => {
+  const b = Math.atan2(p[0], p[2]) / TAU - MON_VIEW / TAU + 0.5;
+  return b - Math.floor(b);
+};
+// The sun on its arc behind the monument, u from sunrise (0) to sunset (1).
+const monSun = (u) => {
+  const th = MON_VIEW + Math.PI + (u - 0.5) * Math.PI;
+  const e = 0.12 + 0.95 * Math.sin(Math.PI * u);
+  return [Math.sin(th) * Math.cos(e) * 1.02, 0.14 + Math.sin(e) * 0.98, Math.cos(th) * Math.cos(e) * 1.02]; // prettier-ignore
+};
+const MON_SECS = 4.6;
+
 function monumentBuild(k) {
   const y0 = 0.1;
   const hb = 0.084;
@@ -516,13 +602,27 @@ function monumentBuild(k) {
       color: (cc) => lit(marble, cc, 0.62),
     });
   }
-  // The plaza, the ring of flags and the grassy knoll.
+  // The plaza, the ring of flags and the grassy knoll. The ground carries
+  // the obelisk's shadow: a band on channel 0 darkens each splat as the
+  // channel passes its bearing (drive() sweeps it round like a sundial's).
+  const shadow = {
+    kind: "band",
+    channel: 0,
+    params: (c) => {
+      const r = Math.hypot(c.p[0], c.p[2]);
+      if (r < 0.09 || r > 0.8 || c.n[1] < 0.3) return [5, 0.01];
+      const hw = 1.5 * (0.012 + 0.074 * (1 - r / 1.35));
+      return [monBearing(c.p), hw / (r * TAU)];
+    },
+  };
   k.add(k.box(0.26, 0.03, 0.26), {
+    ...shadow,
     pos: [0, y0 - 0.015, 0],
     flat: 0.2,
     color: (c) => lit("#d9d2c2", c),
   });
   k.add(k.cylinder(0.46, 0.02), {
+    ...shadow,
     pos: [0, y0 - 0.04, 0],
     flat: 0.2,
     color: (c) => {
@@ -540,8 +640,31 @@ function monumentBuild(k) {
       ],
       { grid: 64, thick: 0.05 },
     ),
-    { flat: 0.2, pattern: false, color: (c) => grass(c, "#62a34a") },
+    { ...shadow, flat: 0.2, pattern: false, color: (c) => grass(c, "#62a34a") },
   );
+  // The sun that casts it, built at noon behind the monument (hidden at
+  // rest; drive() carries it along its arc, and it fades in and out by
+  // channel 1 at sunrise and sunset).
+  const sun = k.part("sun", { pivot: monSun(0.5) });
+  const sunFade = { kind: "fade", channel: 1, params: [0.02, -0.4] };
+  k.add(k.sphere(0.065), {
+    part: sun,
+    pos: monSun(0.5),
+    weight: 4,
+    pattern: false,
+    fit: false,
+    ...sunFade,
+    color: (c) => keep(mix("#fff6c2", "#ffd24a", 0.5 - 0.5 * c.n[1])),
+  });
+  k.cloud({ share: 0.006, size: 2.4, pattern: false, part: sun, fit: false }, (rand) => {
+    const d = unit([rand() - 0.5, rand() - 0.5, rand() - 0.5]);
+    return {
+      p: add(monSun(0.5), mul(d, 0.07 + 0.06 * Math.sqrt(rand()))),
+      color: "#ffe27a",
+      opacity: 0.22,
+      ...sunFade,
+    };
+  });
   for (let i = 0; i < 50; i++) {
     const a = (i / 50) * TAU;
     const base = [Math.sin(a) * 0.4, y0 - 0.03, Math.cos(a) * 0.4];
@@ -586,9 +709,60 @@ function pyramid(k, cx, cy, cz, half, h, { cap = 0, weight = 1 } = {}) {
   }
 }
 
+// Where the saucer hovers (over the sand in front of the Great Pyramid, so
+// from the home view it floats by the Great Pyramid's top), and the patch
+// of sand it lifts. The camel faces screen right (r), side on to the view.
+const PYR = {
+  r: [0.85, 0, -0.52],
+  f: [0.52, 0, 0.85],
+  ground: [1.6, 0, 0.5],
+  hover: [1.6, 1.34, 0.5],
+  secs: 5.4,
+};
+
+// A dromedary as a few simple solids in its own frame (x forward, y up, z
+// to its left): [kind, centre or ends, radii], sampled by area.
+const CAMEL = [
+  ["ell", [0, 0.27, 0], [0.19, 0.09, 0.085]],
+  ["ell", [-0.01, 0.35, 0], [0.09, 0.085, 0.06]],
+  ["rod", [0.12, 0.22, 0.045], [0.13, 0.0, 0.05], 0.022],
+  ["rod", [0.12, 0.22, -0.045], [0.1, 0.0, -0.05], 0.022],
+  ["rod", [-0.12, 0.22, 0.045], [-0.1, 0.0, 0.05], 0.022],
+  ["rod", [-0.12, 0.22, -0.045], [-0.14, 0.0, -0.05], 0.022],
+  ["rod", [0.15, 0.28, 0], [0.25, 0.36, 0], 0.035],
+  ["rod", [0.25, 0.36, 0], [0.29, 0.46, 0], 0.03],
+  ["ell", [0.33, 0.47, 0], [0.065, 0.033, 0.03]],
+  ["rod", [-0.18, 0.28, 0], [-0.22, 0.17, 0], 0.01],
+];
+
+// A point on the camel's surface and its normal, in its own frame.
+function camelPoint(rand) {
+  const area = (sh) =>
+    sh[0] === "ell"
+      ? 4 * Math.PI * Math.pow((sh[2][0] * sh[2][1] + sh[2][0] * sh[2][2] + sh[2][1] * sh[2][2]) / 3, 1) // prettier-ignore
+      : TAU * sh[3] * len(sub(sh[2], sh[1]));
+  const total = CAMEL.reduce((a, sh) => a + area(sh), 0);
+  let x = rand() * total;
+  let sh = CAMEL[0];
+  for (const it of CAMEL) {
+    sh = it;
+    x -= area(it);
+    if (x <= 0) break;
+  }
+  const d = unit([rand() - 0.5, rand() - 0.5, rand() - 0.5]);
+  if (sh[0] === "ell") {
+    const [a, b, c] = sh[2];
+    return { p: add(sh[1], [d[0] * a, d[1] * b, d[2] * c]), n: unit([d[0] / a, d[1] / b, d[2] / c]) }; // prettier-ignore
+  }
+  const t = rand();
+  const ax = unit(sub(sh[2], sh[1]));
+  const side = unit(sub(d, mul(ax, dot(d, ax))));
+  return { p: add(lerp3(sh[1], sh[2], t), mul(side, sh[3])), n: side };
+}
+
 function pyramidsBuild(k) {
-  const r = [0.85, 0, -0.52];
-  const f = [0.52, 0, 0.85];
+  const r = PYR.r;
+  const f = PYR.f;
   const at = (s, d) => add(mul(r, s), mul(f, d));
   const khufu = at(1.25, -0.45);
   const khafre = at(-0.72, -0.85);
@@ -629,6 +803,43 @@ function pyramidsBuild(k) {
       return lit(shade("#e2c48c", 0.92 + 0.12 * n + ripple), c);
     },
   });
+  // The visitor: a tiny saucer (hidden at rest), its beam, and grains of
+  // sand buried under the desert that rise into the shape of a camel
+  // (channel 0) and float up into the saucer with their part.
+  miniSaucer(k, k.part("ufo", { pivot: PYR.hover }), PYR.hover, 0.2);
+  const top = add(PYR.hover, [0, -0.06, 0]);
+  k.cloud({ share: 0.008, size: 1.6, pattern: false, fit: false }, (rand) => {
+    const t = rand();
+    const R = 0.08 + 0.34 * t;
+    const a = rand() * TAU;
+    const edge = rand() < 0.7;
+    const rr = edge ? R * (0.9 + 0.1 * rand()) : R * Math.sqrt(rand());
+    return {
+      p: add(lerp3(top, PYR.ground, t), [Math.sin(a) * rr, 0.01, Math.cos(a) * rr]),
+      color: mix("#b9fff0", "#f2fffc", rand()),
+      opacity: edge ? 0.07 : 0.035,
+      kind: "fade",
+      channel: 1,
+      params: [0.2 + 0.3 * t, -0.3],
+    };
+  });
+  const camel = k.part("camel", { pivot: add(PYR.ground, [0, 0.4, 0]) });
+  const side = cross(r, [0, 1, 0]);
+  k.cloud({ share: 0.035, size: 1.1, pattern: false, part: camel }, (rand) => {
+    const { p: cp, n: cn } = camelPoint(rand);
+    const S = 1.45;
+    const to = add(PYR.ground, add(add(mul(r, cp[0] * S), [0, cp[1] * S + 0.02, 0]), mul(side, cp[2] * S))); // prettier-ignore
+    const n = unit(add(add(mul(r, cn[0]), [0, cn[1], 0]), mul(side, cn[2])));
+    const g = add(PYR.ground, add(mul(r, cp[0]), mul(side, cp[2] * 1.5 + (rand() - 0.5) * 0.14))); // prettier-ignore
+    const light = 0.62 + 0.38 * Math.max(0, n[0] * SUN[0] + n[1] * SUN[1] + n[2] * SUN[2]);
+    return {
+      p: [g[0], -0.025, g[2]],
+      color: shade(mix("#d6ad6c", "#ecd09a", rand() * 0.5), light),
+      kind: "morph",
+      channel: 0,
+      to,
+    };
+  });
   for (let i = 0; i < 7; i++) {
     const a = k.rand() * TAU;
     const d = 1.75 + k.rand() * 0.45;
@@ -641,6 +852,59 @@ function pyramidsBuild(k) {
       color: (c) => (c.n[1] < 0 ? null : lit("#e0c08a", c)),
     });
   }
+}
+
+// A tiny flying saucer (the Flying saucer toy's look), centred on C with a
+// hull radius of 1.5 * s, on `part`. Left out of the fit: it flies in.
+function miniSaucer(k, part, C, s) {
+  const S = { part, flat: 0.2, fit: false, pattern: false };
+  const hull = k.lathe(
+    [
+      [0.0, -0.3],
+      [0.55, -0.27],
+      [1.05, -0.16],
+      [1.42, -0.03],
+      [1.5, 0.03],
+      [1.42, 0.09],
+      [1.02, 0.2],
+      [0.62, 0.29],
+      [0.44, 0.31],
+    ],
+    { grid: 64 },
+  );
+  k.add(hull, {
+    ...S,
+    pos: C,
+    scale: s,
+    weight: 3,
+    color: (c) => {
+      const r = Math.hypot(c.lp[0], c.lp[2]);
+      let base = mix("#8a9099", "#eef1f5", smoothstep(-0.6, 0.9, c.n[1]));
+      if (Math.abs(c.lp[1] - 0.03) < 0.04 && r > 1.38) base = "#5d636c";
+      return mix(base, "#ffffff", Math.pow(Math.max(0, sunOf(c.n)), 12) * 0.35);
+    },
+  });
+  k.add(k.sphere(0.46), {
+    ...S,
+    pos: add(C, [0, 0.28 * s, 0]),
+    scale: s,
+    weight: 3,
+    opacity: 0.55,
+    color: (c) => (c.lp[1] < 0 ? null : mix("#2f7f9f", "#bfeaf5", smoothstep(0, 0.9, sunOf(c.n)))),
+  });
+  k.add(k.sphere(0.17), { ...S, pos: add(C, [0, 0.45 * s, 0]), scale: s, weight: 4, color: "#6fd35a" }); // prettier-ignore
+  const bulbs = ["#ff4d6d", "#ffd23f", "#3ee6ff", "#7cff6b", "#c77dff"];
+  for (let i = 0; i < 12; i++) {
+    const a = (i / 12) * TAU;
+    k.add(k.sphere(0.07), {
+      ...S,
+      pos: add(C, mul([Math.sin(a) * 1.46, 0.035, Math.cos(a) * 1.46], s)),
+      scale: s,
+      weight: 6,
+      color: bulbs[i % bulbs.length],
+    });
+  }
+  k.add(k.torus(0.5, 0.07), { ...S, pos: add(C, [0, -0.28 * s, 0]), scale: s, weight: 4, color: "#8ff7ff" }); // prettier-ignore
 }
 
 // ---- Twisting supertall ------------------------------------------------------------------------
@@ -678,10 +942,19 @@ function roundedSquare(round = 0.28, n = 480) {
   };
 }
 
+// The supertall's floors turn as ST.bands rigid bands (drive() twists them
+// further, each by its height), and a ring of light runs up the glass.
+const ST = { H: 3.2, y0: 0.14, bands: 12, twist: 0.95, secs: 4.0 };
+
 function supertallBuild(k, o) {
-  const H = 3.2;
-  const y0 = 0.14;
+  const H = ST.H;
+  const y0 = ST.y0;
   const twist = 1.75;
+  const floorsOf = [];
+  for (let i = 0; i < ST.bands; i++)
+    floorsOf.push(k.part(`floor${i}`, { pivot: [0, y0 + (H * (i + 0.5)) / ST.bands, 0] }));
+  const bandOf = (y) => floorsOf[clamp(Math.floor(((y - y0) / H) * ST.bands), 0, ST.bands - 1)];
+  const topPart = floorsOf[ST.bands - 1];
   const size = (v) => lerp(0.36, 0.15, Math.pow(v, 1.1));
   const sq = roundedSquare(0.35);
   const at = (u, v) => {
@@ -697,36 +970,49 @@ function supertallBuild(k, o) {
   };
   const tint = o.glass;
   const floors = 44;
-  k.add(
-    k.param((u, v) => at(u, v).p, { grid: 128, normal: (u, v) => at(u, v).n, thick: 0.2 }),
-    {
-      flat: 0.15,
-      jitter: 0.015,
-      interior: 0.05,
-      core: "#39414a",
-      kind: "glint",
-      params: (c) => (c.rand() < 0.06 ? [0.5, 0] : [0, 0]),
-      color: (c) => {
-        const v = (c.p[1] - y0) / H;
-        const f = (v * floors) % 1;
-        const mull = (c.u * 40) % 1 < 0.12;
-        const face = sunOf(c.n);
-        const glassC = mix(
-          shade(tint, 0.62),
-          "#cfe6f5",
-          clamp(0.08 + 0.62 * Math.max(0, face) + 0.18 * v, 0, 0.85),
-        );
-        if (v > 0.965) return keep(shade("#e8eef2", 0.8 + 0.2 * face));
-        if (f < 0.2) return keep(shade(mix(tint, "#1c2833", 0.6), 0.8 + 0.3 * Math.max(0, face)));
-        if (mull) return keep(mix(glassC, "#d7dee3", 0.22));
-        return glassC;
-      },
-    },
-  );
+  const skin = k.param((u, v) => at(u, v).p, { grid: 128, normal: (u, v) => at(u, v).n, thick: 0.2 }); // prettier-ignore
+  const glassColor = (c) => {
+    const v = (c.p[1] - y0) / H;
+    const f = (v * floors) % 1;
+    const mull = (c.u * 40) % 1 < 0.12;
+    const face = sunOf(c.n);
+    const glassC = mix(
+      shade(tint, 0.62),
+      "#cfe6f5",
+      clamp(0.08 + 0.62 * Math.max(0, face) + 0.18 * v, 0, 0.85),
+    );
+    if (v > 0.965) return keep(shade("#e8eef2", 0.8 + 0.2 * face));
+    if (f < 0.2) return keep(shade(mix(tint, "#1c2833", 0.6), 0.8 + 0.3 * Math.max(0, face)));
+    if (mull) return keep(mix(glassC, "#d7dee3", 0.22));
+    return glassC;
+  };
+  // The glass carries the running light (channel 0 passing its height); a
+  // thin second layer keeps the glints.
+  k.add(skin, {
+    flat: 0.15,
+    jitter: 0.015,
+    interior: 0.05,
+    core: "#39414a",
+    part: (c) => bandOf(c.p[1]),
+    kind: "band",
+    channel: 0,
+    params: (c) => (c.inside ? [5, 0.01] : [(c.p[1] - y0) / H, 0.07]),
+    color: glassColor,
+  });
+  k.add(skin, {
+    share: 0.008,
+    flat: 0.15,
+    jitter: 0.015,
+    part: (c) => bandOf(c.p[1]),
+    kind: "glint",
+    params: [0.5, 0],
+    color: glassColor,
+  });
   // The crown and spire with a beacon.
   const topY = y0 + H;
   const ts = size(1);
   k.add(k.cone(ts * 0.9, ts * 0.35, 0.18), {
+    part: topPart,
     pos: [0, topY + 0.09, 0],
     flat: 0.2,
     color: (c) => lit("#dfe6ea", c, 0.6),
@@ -736,10 +1022,11 @@ function supertallBuild(k, o) {
     [0, topY + 0.18, 0],
     [0, topY + 0.72, 0],
     0.03,
-    { weight: 2, color: (c) => lit("#cfd6db", c, 0.6) },
+    { part: topPart, weight: 2, color: (c) => lit("#cfd6db", c, 0.6) },
     0.006,
   );
   k.add(k.sphere(0.02), {
+    part: topPart,
     pos: [0, topY + 0.73, 0],
     weight: 4,
     pattern: false,
@@ -1035,10 +1322,18 @@ function libertyBuild(k) {
   );
   k.add(k.box(0.43, 0.035, 0.43), { pos: [0, y1 + 0.0175, 0], flat: 0.2, color: plain });
   k.add(k.box(0.3, 0.06, 0.3), { pos: [0, y1 + 0.065, 0], flat: 0.2, color: plain });
-  // The statue, modelled facing +Z and turned towards the viewer.
+  // The statue, modelled facing +Z and turned towards the viewer. Its
+  // copper carries a warm light from the torch (channel 2: brightest near
+  // the torch, see drive()).
   const F = frame([0, y1 + 0.095, 0], 0.5, 0.9);
   const S = F.s;
-  const P = { flat: 0.2 };
+  const torchY = F.p([0, 0.998, 0])[1];
+  const warm = {
+    kind: "band",
+    channel: 2,
+    params: (c) => [1 + 0.4 * clamp((torchY - c.p[1]) / (torchY - y1), 0, 1), 0.5],
+  };
+  const P = { flat: 0.2, ...warm };
   const robeR = curve([
     [0, 0.17],
     [0.06, 0.15],
@@ -1116,6 +1411,7 @@ function libertyBuild(k) {
       pb,
       0.014 * S,
       {
+        ...warm,
         weight: 4,
         color: (c) => shade(patina(c, 0.62), 0.92 + 0.3 * clamp(c.lp[1] / h + 0.5, 0, 1)),
       },
@@ -1186,7 +1482,11 @@ function libertyBuild(k) {
     { grid: 32, thick: 0.03 },
   );
   const fb = add(tb, [0, 0.138, 0]);
+  // The flame flares with its part; a halo of light and a spray of sparks
+  // are hidden at rest.
+  const flame = k.part("flame", { pivot: F.p(fb) });
   k.add(flameShape, {
+    part: flame,
     pos: F.p(fb),
     quat: F.q(),
     scale: S,
@@ -1196,13 +1496,49 @@ function libertyBuild(k) {
     color: (c) => keep(mix("#f7cf55", "#fff3b8", smoothstep(0.2, 1, sunOf(c.n)))),
   });
   const fp = F.p(add(fb, [0, 0.03, 0]));
-  k.cloud({ share: 0.004, size: 0.9, pattern: false }, (rand) => ({
+  k.cloud({ share: 0.004, size: 0.9, pattern: false, part: flame }, (rand) => ({
     p: add(fp, [(rand() - 0.5) * 0.04, rand() * 0.03, (rand() - 0.5) * 0.04]),
     color: mix("#ffd35a", "#fff2c2", rand()),
     opacity: 0.8,
     kind: "flame",
     params: [0.06 + 0.04 * rand(), rand()],
   }));
+  const hp = F.p(add(fb, [0, 0.06, 0]));
+  // (Built small, within the torch's reach, and grown by its part.)
+  const halo = k.part("halo", { pivot: hp });
+  k.cloud({ share: 0.005, size: 2.6, pattern: false, part: halo }, (rand) => {
+    const d = unit([rand() - 0.5, rand() - 0.5, rand() - 0.5]);
+    const r = 0.055 * Math.sqrt(rand());
+    return {
+      p: add(hp, mul(d, r)),
+      color: mix("#ffe9a0", "#fff8e0", rand()),
+      opacity: 0.16 * (1 - r / 0.066),
+      kind: "fade",
+      channel: 1,
+      params: [0.3, -0.5],
+    };
+  });
+  // Sparks drift up and away on the harbour breeze (to the right as seen
+  // from the home view), by channel 0.
+  k.fitMorphs = false;
+  // Each spark's target lies in a plume that widens as it rises and bends
+  // with the wind, so the spray streams out of the torch.
+  const sparks = k.part("sparks", { pivot: fp });
+  k.cloud({ share: 0.005, size: 1.3, pattern: false, part: sparks }, (rand) => {
+    const t = Math.pow(rand(), 0.8);
+    const centre = add([0, 0.08 + 0.42 * t, 0], mul([0.85, 0, -0.52], 0.55 * t * t));
+    const d = unit([rand() - 0.5, rand() - 0.5, rand() - 0.5]);
+    const r = (0.02 + 0.17 * t) * Math.sqrt(rand());
+    return {
+      p: add(fp, [(rand() - 0.5) * 0.03, rand() * 0.04, (rand() - 0.5) * 0.03]),
+      color: mix("#ffc23a", "#fff4c8", rand()),
+      opacity: 0.95,
+      size: 1.25 - 0.5 * t,
+      kind: "morph",
+      channel: 0,
+      to: add(fp, add(centre, mul(d, r))),
+    };
+  });
   // The left arm cradling the tablet.
   const armL = spline([
     [0.11, 0.49, 0],
@@ -1414,6 +1750,76 @@ function whiteHouseBuild(k) {
     kind: "rise",
     params: [0.1, rand()],
   }));
+  // The fountain's tall jet: a column that rests as a low spout and shoots
+  // up by channel 0, and the spray that falls from its top into the basin
+  // (hidden at rest; it rises with the jet).
+  const base = [0, g + 0.02, 1.05];
+  const jetH = 0.56;
+  k.cloud({ share: 0.008, size: 0.9, pattern: false }, (rand) => {
+    const y = Math.pow(rand(), 0.8) * jetH;
+    const a = rand() * TAU;
+    const r = (0.012 + 0.012 * (y / jetH)) * Math.sqrt(rand());
+    const to = add(base, [Math.cos(a) * r, y, Math.sin(a) * r]);
+    return {
+      p: add(base, [Math.cos(a) * r, y * 0.2, Math.sin(a) * r]),
+      color: mix("#dff2ff", "#ffffff", rand()),
+      opacity: 0.75,
+      kind: "morph",
+      channel: 0,
+      to,
+    };
+  });
+  const spray = k.part("spray", { pivot: base });
+  k.cloud({ share: 0.008, size: 0.85, pattern: false, part: spray }, (rand) => {
+    const a = rand() * TAU;
+    const t = rand();
+    const R = 0.12 * (0.7 + 0.3 * rand());
+    const to = add(base, [Math.cos(a) * R * t, jetH * (1 - t * t) + 0.01, Math.sin(a) * R * t]);
+    return {
+      p: add(base, [Math.cos(a) * R * t * 0.5, (to[1] - base[1]) * 0.2, Math.sin(a) * R * t * 0.5]),
+      color: mix("#cfeaff", "#ffffff", rand()),
+      opacity: 0.55,
+      kind: "morph",
+      channel: 0,
+      to,
+    };
+  });
+  // Warm lights in the windows of the two faces in view: each window's
+  // light fades in as channel 1 passes its own moment (and out again as
+  // the channel runs back), so they come on one by one.
+  const wins = [];
+  const bay = 0.142;
+  for (const [span, face] of [
+    [X, "south"],
+    [Z, "east"],
+  ])
+    for (let b = 0; b < 40; b++) {
+      const a = -span + (b + 0.5) * bay;
+      if (a > span - 0.05) break;
+      if (Math.abs(a) > span - 0.05) continue;
+      if (face === "south" && Math.abs(a) < 0.3) continue;
+      for (const [y0w, y1w] of [
+        [0.04, 0.12],
+        [0.2, 0.33],
+        [0.38, 0.47],
+      ])
+        wins.push({ face, a, y0w, y1w, at: 0.08 + 0.72 * hash(b, y0w * 10, face === "south" ? 1 : 2) }); // prettier-ignore
+    }
+  k.cloud({ share: 0.012, size: 0.9, pattern: false }, (rand, i) => {
+    const w = wins[i % wins.length];
+    const a = w.a + (rand() - 0.5) * bay * 0.36;
+    const y = g + w.y0w + rand() * (w.y1w - w.y0w);
+    const p = w.face === "south" ? [a, y, Z + 0.004] : [X + 0.004, y, a];
+    return {
+      p,
+      n: w.face === "south" ? [0, 0, 1] : [1, 0, 0],
+      color: mix("#ffcf6a", "#fff0c0", 0.4 * rand() + 0.3 * ((y - g - w.y0w) / (w.y1w - w.y0w))),
+      opacity: 0.95,
+      kind: "fade",
+      channel: 1,
+      params: [w.at, -0.05],
+    };
+  });
   for (const [x, z, r] of [
     [-1.3, 0.2, 0.13],
     [-1.4, 0.75, 0.15],
@@ -1430,6 +1836,25 @@ function whiteHouseBuild(k) {
 // ---- Leaning tower -----------------------------------------------------------------------------
 
 const PISA = { base: [0, 0.08, 0], axis: unit([-0.52, 0, -0.85]), max: 0.19 };
+// Galileo's drop: two balls on the top ledge on the leaning side (the tower
+// leans to the right as seen from the home view), [side, depth, radius,
+// colour, bounce]. The heavy one is iron, the light one bronze.
+const PISA_R = [0.85, 0, -0.52];
+const PISA_V = [0.52, 0, 0.85];
+const PISA_BALLS = [
+  [0.6, -0.1, 0.1, "#46464c", 0.07],
+  [0.2, 0.6, 0.066, "#c8943e", 0.11],
+];
+const PISA_LEDGE = 3.39;
+const PISA_SECS = 4.4;
+// Where ball i sits on the ledge with the tower leaning by `angle`; `roll`
+// (0..1) rolls it out from well on the ledge to its edge, where it drops.
+const pisaLedge = (i, angle, roll = 1) => {
+  const [side, depth, r] = PISA_BALLS[i];
+  const out = 0.72 + 0.28 * roll;
+  const local = add(add(mul(PISA_R, side * out), mul(PISA_V, depth * out)), [0, PISA_LEDGE + r, 0]); // prettier-ignore
+  return add(PISA.base, quatRotate(quatAxisAngle(PISA.axis, angle), sub(local, PISA.base)));
+};
 
 function pisaBuild(k) {
   const marble = "#f1ece0";
@@ -1542,9 +1967,98 @@ function pisaBuild(k) {
   const tip = add(PISA.base, [0, 3.7, 0]);
   const lean = quatRotate(quatAxisAngle(PISA.axis, PISA.max * 1.05), sub(tip, PISA.base));
   k.reach(add(PISA.base, lean));
+  // The two balls and their puffs of dust, built on the lawn where they
+  // land with the tower at its default lean (drive() moves them and hides
+  // them at rest).
+  PISA_BALLS.forEach(([, , r, col], i) => {
+    const land = pisaLedge(i, 0.35 * PISA.max + 0.07);
+    const at = [land[0], 0.02 + r, land[2]];
+    k.add(k.sphere(r), {
+      part: k.part(`ball${i}`, { pivot: at }),
+      pos: at,
+      weight: 6,
+      flat: 0.3,
+      pattern: false,
+      color: (c) => {
+        const l = sunOf(c.n);
+        return mix(shade(col, 0.55 + 0.55 * Math.max(0, l)), "#ffffff", Math.pow(Math.max(0, l), 18) * 0.6); // prettier-ignore
+      },
+    });
+    const foot = [land[0], 0.03, land[2]];
+    const dust = k.part(`dust${i}`, { pivot: foot });
+    k.cloud({ share: 0.004, size: 1.6, pattern: false, part: dust }, (rand) => {
+      const a = rand() * TAU;
+      const d = r * (1.2 + 1.6 * rand());
+      return {
+        p: add(foot, [
+          Math.cos(a) * d,
+          0.01 + 0.06 * rand() * (1 - (d - r) / (3 * r)),
+          Math.sin(a) * d,
+        ]),
+        color: mix("#c9b48c", "#e8dcc0", rand()),
+        opacity: 0.45,
+      };
+    });
+  });
 }
 
 // ---- Colosseum ---------------------------------------------------------------------------------
+
+// The chariot race: four chariots (the red, white, blue and green teams) on
+// an oval track round the arena floor, built side by side near the front of
+// the track where they start (hidden at rest).
+const COL = {
+  a: 0.66,
+  b: 0.37,
+  floor: 0.036,
+  start: 0.83,
+  teams: ["#c8332b", "#f2efe6", "#2f5fb8", "#3c8f3e"],
+  horses: ["#6b4424", "#e9e2d4", "#2e2622", "#8a5a30"],
+  secs: 5.2,
+};
+// Two lanes: chariots 0 and 2 on the inside, 1 and 3 outside, in two rows.
+const colLane = (i) => 0.075 * (i % 2 ? 1 : -1);
+const colTrack = (phi, i) => [Math.sin(phi) * (COL.a + colLane(i)), COL.floor, Math.cos(phi) * (COL.b + colLane(i))]; // prettier-ignore
+const colHeading = (phi, i) => Math.atan2(Math.cos(phi) * (COL.a + colLane(i)), -Math.sin(phi) * (COL.b + colLane(i))); // prettier-ignore
+const colStart = (i) => COL.start + 0.45 - (i < 2 ? 0 : 0.85);
+
+// One chariot: two horses, the car on two wheels and its driver, in the
+// frame of a point on the track (x forward, y up, z to the left).
+function chariot(k, part, i, team, horse, S) {
+  const phi = colStart(i);
+  const at = colTrack(phi, i);
+  const h = colHeading(phi, i);
+  const F = [Math.sin(h), 0, Math.cos(h)];
+  const L = [F[2], 0, -F[0]];
+  const W = (l) => add(at, add(add(mul(F, l[0] * S), [0, l[1] * S, 0]), mul(L, l[2] * S)));
+  const q = quatAxisAngle([0, 1, 0], h - Math.PI / 2);
+  const P = { part, weight: 8, flat: 0.3, pattern: false, channel: 0, kind: "fade", params: [0.02, -0.25] }; // prettier-ignore
+  const skinC = (col) => (c) => shade(col, 0.7 + 0.35 * Math.max(0, sunOf(c.n)));
+  for (const side of [-1, 1]) {
+    const z = side * 0.022;
+    k.add(k.ellipsoid(0.046, 0.021, 0.016), { ...P, pos: W([0.075, 0.058, z]), quat: q, scale: S, color: skinC(horse) }); // prettier-ignore
+    k.add(k.ellipsoid(0.02, 0.012, 0.011), { ...P, pos: W([0.123, 0.083, z]), quat: quatMul(q, quatAxisAngle([0, 0, 1], 0.9)), scale: S, color: skinC(horse) }); // prettier-ignore
+    for (const [lx, lz] of [
+      [0.108, 0.006],
+      [0.108, -0.006],
+      [0.042, 0.006],
+      [0.042, -0.006],
+    ])
+      rod(k, W([lx, 0.045, z + lz]), W([lx + 0.006, 0.0, z + lz]), 0.0045 * S, { ...P, color: shade(horse, 0.7) }); // prettier-ignore
+  }
+  rod(k, W([-0.005, 0.032, 0]), W([0.06, 0.05, 0]), 0.003 * S, { ...P, color: "#5a3a20" });
+  k.add(k.box(0.034, 0.03, 0.05), { ...P, pos: W([-0.018, 0.037, 0]), quat: q, scale: S, color: skinC(team) }); // prettier-ignore
+  for (const side of [-1, 1])
+    k.add(k.cylinder(0.021, 0.006), {
+      ...P,
+      pos: W([-0.022, 0.021, side * 0.03]),
+      quat: quatMul(q, quatAxisAngle([1, 0, 0], Math.PI / 2)),
+      scale: S,
+      color: (c) => (Math.hypot(c.lp[0], c.lp[2]) < 0.006 ? "#2a2018" : skinC("#6e4a2a")(c)),
+    });
+  k.add(k.ellipsoid(0.012, 0.022, 0.012), { ...P, pos: W([-0.02, 0.07, 0]), quat: q, scale: S, color: skinC(team) }); // prettier-ignore
+  k.add(k.sphere(0.009), { ...P, pos: W([-0.017, 0.098, 0]), scale: S, color: skinC("#c68d62") });
+}
 
 function colosseumBuild(k) {
   const A = 1.88;
@@ -1700,6 +2214,37 @@ function colosseumBuild(k) {
       return lit(wall ? "#bfb197" : "#5f4f3d", c);
     },
   });
+  // The race and its crowd (both hidden at rest). The spectators fill the
+  // seats as channel 1 passes each one's moment, in two halves that jump
+  // up and down in turn as they cheer.
+  COL.teams.forEach(
+    (team, i) =>
+    chariot(k, k.part(`chariot${i}`, { pivot: colTrack(colStart(i), i) }), i, team, COL.horses[i], 1.9), // prettier-ignore
+  );
+  const crowd = [
+    k.part("crowd0", { pivot: [0, 0.3, 0] }),
+    k.part("crowd1", { pivot: [0, 0.3, 0] }),
+  ];
+  const tunics = ["#e9e1cf", "#ddd0b2", "#e4ddcc", "#cdbb96", "#a9493a", "#4a67a0", "#b98b3a"];
+  k.cloud({ share: 0.006, size: 1.45, pattern: false }, (rand) => {
+    const a = rand() * TAU;
+    const v = 0.25 + 0.6 * rand();
+    const p = [
+      Math.sin(a) * lerp(A * inner, aIn, v),
+      lerp(H2, 0.1, v) + 0.014,
+      Math.cos(a) * lerp(B * inner, bIn, v),
+    ];
+    const col = tunics[Math.floor(Math.pow(rand(), 2.2) * tunics.length)];
+    return {
+      p,
+      color: shade(col, 0.85 + 0.2 * rand()),
+      opacity: 1,
+      part: crowd[rand() < 0.5 ? 0 : 1],
+      kind: "fade",
+      channel: 1,
+      params: [0.05 + 0.6 * rand(), -0.12],
+    };
+  });
   // A paved plaza round it all.
   k.add(k.cylinder(1, 0.04), {
     pos: [0, -0.02, 0],
@@ -1714,6 +2259,28 @@ function colosseumBuild(k) {
 }
 
 // ---- Parthenon ---------------------------------------------------------------------------------
+
+// The procession: robed figures walk on the rock along the side in view
+// (+X), round the corner and across the front of the steps. A path by
+// distance d: straight along +Z, a quarter turn, then along -X.
+const PAR = { x: 1.87, z0: -1.2, z1: 3.6, r: 0.25, x1: -1.9, y: 0.0, n: 8, gap: 0.38, speed: 1.0, secs: 5.6 }; // prettier-ignore
+const parLen = () => PAR.z1 - PAR.z0 + (Math.PI / 2) * PAR.r + (PAR.x - PAR.r - PAR.x1);
+// Position and heading (turn about Y from facing +Z) at distance d.
+function parPath(d) {
+  const a = PAR.z1 - PAR.z0;
+  const b = (Math.PI / 2) * PAR.r;
+  if (d <= a) return { p: [PAR.x, PAR.y, PAR.z0 + d], h: 0 };
+  if (d <= a + b) {
+    const t = (d - a) / PAR.r;
+    return { p: [PAR.x - PAR.r + PAR.r * Math.cos(t), PAR.y, PAR.z1 + PAR.r * Math.sin(t)], h: -t };
+  }
+  return { p: [PAR.x - PAR.r - (d - a - b), PAR.y, PAR.z1 + PAR.r], h: -Math.PI / 2 };
+}
+// Where figure i starts (in line along the side walk, the leader first).
+const parStart = (i) => 3.3 - i * PAR.gap;
+// Every figure is built at the corner, the point of the walk nearest the
+// home view, so the rock never draws over one (splats sort where built).
+const PAR_BUILT = [PAR.x, PAR.y, PAR.z1];
 
 function parthenonBuild(k, o) {
   const ruin = o.style !== "ancient";
@@ -1877,6 +2444,40 @@ function parthenonBuild(k, o) {
           : weather(c, shade(marble, 0.92)),
     });
   }
+  // The figures (hidden at rest: they fade in by channel 0), facing along
+  // the side walk.
+  const robes = [
+    "#f3eee2",
+    "#d9a23a",
+    "#f0e9da",
+    "#a8452f",
+    "#e8e0cc",
+    "#4e6fa3",
+    "#f2ece0",
+    "#7f8f4a",
+  ];
+  const skins = ["#c68d62", "#b07a52", "#d9a47a", "#a86f4a"];
+  for (let i = 0; i < PAR.n; i++) {
+    const base = PAR_BUILT;
+    const part = k.part(`walker${i}`, { pivot: base });
+    const P = { part, weight: 8, flat: 0.3, pattern: false, kind: "fade", channel: 0, params: [0.25, -0.5] }; // prettier-ignore
+    const W = (l) => add(base, l);
+    const robe = robes[i % robes.length];
+    const col = (c0) => (c) => shade(c0, 0.66 + 0.4 * Math.max(0, sunOf(c.n)));
+    k.add(k.cone(0.05, 0.026, 0.2), { ...P, pos: W([0, 0.1, 0]), color: col(robe) });
+    k.add(k.ellipsoid(0.03, 0.045, 0.024), { ...P, pos: W([0, 0.215, 0]), color: col(robe) });
+    for (const sx of [-1, 1])
+      rod(k, W([sx * 0.028, 0.23, 0]), W([sx * 0.034, 0.15, 0.012]), 0.009, { ...P, color: col(skins[i % 4]) }); // prettier-ignore
+    k.add(k.sphere(0.024), { ...P, pos: W([0, 0.28, 0.002]), color: col(skins[i % 4]) });
+    k.add(k.sphere(0.025), { ...P, pos: W([0, 0.288, -0.006]), scale: [1, 0.8, 1], color: col(i % 3 ? "#3a2a1e" : "#5a4632") }); // prettier-ignore
+    // Some carry a basket or a jar on their heads.
+    if (i % 3 === 1)
+      k.add(k.cylinder(0.04, 0.025), { ...P, pos: W([0, 0.318, 0]), color: col("#c49a52") });
+    if (i % 3 === 2) {
+      k.add(k.ellipsoid(0.026, 0.036, 0.026), { ...P, pos: W([0, 0.338, 0]), color: col("#b8623a") }); // prettier-ignore
+      k.add(k.cylinder(0.012, 0.02), { ...P, pos: W([0, 0.38, 0]), color: col("#9c5230") });
+    }
+  }
   if (!ruin) {
     const ry = py;
     const tile = (c) =>
@@ -1900,9 +2501,24 @@ function parthenonBuild(k, o) {
 
 // ---- Stonehenge -------------------------------------------------------------------------------
 
+// The solstice sun rises over the far bank, behind the great trilithon
+// (the horseshoe opens towards the home view, bearing 0.55).
+const HENGE = {
+  dir: unit([Math.sin(0.55 + Math.PI), 0.32, Math.cos(0.55 + Math.PI)]),
+  sun: [Math.sin(0.55 + Math.PI) * 2.3, 0.78, Math.cos(0.55 + Math.PI) * 2.3],
+  secs: 5.2,
+};
+
 function stonehengeBuild(k) {
   const sarsen = "#9a968b";
   const face = 0.55;
+  // Every stone catches the solstice sun on channel 1: faces towards the
+  // sun (behind the horseshoe) most, the faces in view a little.
+  const sunlit = {
+    kind: "band",
+    channel: 1,
+    params: (c) => [1 + 0.3 * (1 - clamp(0.5 + 0.6 * dot(c.n, HENGE.dir), 0, 1)), 0.5],
+  };
   const rock = (c, base = sarsen) => {
     const n = c.fbm(c.p[0] * 9, c.p[1] * 9, c.p[2] * 9);
     let col = mix(base, "#5f5b53", clamp(0.35 + 0.5 * n, 0, 1) * 0.6);
@@ -1933,6 +2549,7 @@ function stonehengeBuild(k) {
         pos: add(p, [0, d / 2, 0]),
         rot: [0, yaw + tilt, 0],
         flat: 0.25,
+        ...sunlit,
         color: (c) => rock(c, base),
       });
       return;
@@ -1941,6 +2558,7 @@ function stonehengeBuild(k) {
       pos: add(p, [0, h / 2 - sink, 0]),
       rot: [tilt, yaw, tilt * 0.5],
       flat: 0.25,
+      ...sunlit,
       color: (c) => rock(c, base),
     });
   };
@@ -1966,6 +2584,7 @@ function stonehengeBuild(k) {
         pos: p,
         rot: [0, (am - Math.PI / 2) * DEG, 0],
         flat: 0.25,
+        ...sunlit,
         color: (c) => rock(c),
       });
     }
@@ -1991,6 +2610,7 @@ function stonehengeBuild(k) {
         pos: add(p, [0, h / 2 - 0.03, 0]),
         rot: [0, (a - Math.PI / 2) * DEG, great ? 4 : 0],
         flat: 0.25,
+        ...sunlit,
         color: (c) => rock(c),
       });
     }
@@ -1999,6 +2619,7 @@ function stonehengeBuild(k) {
         pos: add(c0, [0.05, 0.05, 0.25]),
         rot: [0, (a - Math.PI / 2) * DEG + 25, 0],
         flat: 0.25,
+        ...sunlit,
         color: (c) => rock(c),
       });
     } else {
@@ -2006,6 +2627,7 @@ function stonehengeBuild(k) {
         pos: add(c0, [0, h + 0.02, 0]),
         rot: [0, (a - Math.PI / 2) * DEG, 0],
         flat: 0.25,
+        ...sunlit,
         color: (c) => rock(c),
       });
     }
@@ -2025,13 +2647,62 @@ function stonehengeBuild(k) {
     pos: [Math.sin(face + Math.PI) * 0.35, 0.03, Math.cos(face + Math.PI) * 0.35],
     rot: [0, face * DEG + 90, 0],
     flat: 0.25,
+    ...sunlit,
     color: (c) => rock(c, "#8e7f6c"),
+  });
+  // The sun, built high over the far bank (it rises there, fading in by
+  // channel 0), and its beam shining through the great trilithon along the
+  // axis to the heel stone (channel 2).
+  const sun = k.part("sun", { pivot: HENGE.sun });
+  k.add(k.sphere(0.2), {
+    part: sun,
+    pos: HENGE.sun,
+    weight: 3,
+    pattern: false,
+    fit: false,
+    kind: "fade",
+    channel: 0,
+    params: [0.05, -0.5],
+    color: (c) => keep(mix("#ffd35a", "#fff7cf", 0.5 + 0.5 * dot(c.n, mul(HENGE.dir, -1)))),
+  });
+  k.cloud({ share: 0.008, size: 3, pattern: false, part: sun, fit: false }, (rand) => {
+    const d = unit([rand() - 0.5, rand() - 0.5, rand() - 0.5]);
+    const r = 0.2 + 0.2 * Math.sqrt(rand());
+    return {
+      p: add(HENGE.sun, mul(d, r)),
+      color: mix("#ffc84a", "#ffe9a0", rand()),
+      opacity: 0.18 * (1 - (r - 0.2) / 0.22),
+      kind: "fade",
+      channel: 0,
+      params: [0.05, -0.5],
+    };
+  });
+  k.cloud({ share: 0.02, size: 2.2, pattern: false }, (rand) => {
+    const t = rand();
+    const along = lerp(2.2, -2.3, t);
+    const w = lerp(0.2, 0.55, t) * (rand() - 0.5);
+    const across = [Math.cos(face), 0, -Math.sin(face)];
+    const axis = [Math.sin(face), 0, Math.cos(face)];
+    const p = add(add(mul(axis, along), mul(across, w)), [
+      0,
+      0.02 + rand() * lerp(0.45, 0.08, t),
+      0,
+    ]);
+    return {
+      p,
+      color: mix("#ffcf5a", "#fff0b8", rand()),
+      opacity: 0.1 * (1 - 0.6 * t),
+      kind: "fade",
+      channel: 2,
+      params: [0.2, -0.6],
+    };
   });
   const heel = [Math.sin(face + 0.15) * 2.25, 0, Math.cos(face + 0.15) * 2.25];
   k.add(k.ellipsoid(0.14, 0.26, 0.12), {
     pos: add(heel, [0, 0.2, 0]),
     rot: [0, 0, 12],
     flat: 0.25,
+    ...sunlit,
     color: (c) => rock(c),
   });
 }
@@ -2255,13 +2926,22 @@ function benBuild(k) {
 
 // ---- Taj Mahal ---------------------------------------------------------------------------------
 
+// Moonlight at the Taj Mahal: the moon hangs behind it, left of the dome as
+// seen from the home view.
+const TAJ = { moon: [-0.98, 1.42, -0.95], secs: 5.2 };
+
 function tajBuild(k) {
+  // Night falls on channel 1 (a cool dusk, drive()'s negative glow) on
+  // everything but the great dome, its drum and finial, which stay bright
+  // in the moonlight.
+  const night = { kind: "band", channel: 1, params: [1, 0.5] };
   const marble = "#f6f2ea";
   const shadowC = "#b9c0cc";
   const g = 0.04;
   const base = g + 0.12;
   // The garden, the reflecting pool and cypress trees.
   k.add(k.box(2.7, g, 4.4), {
+    ...night,
     pos: [0, g / 2, 0.85],
     pattern: false,
     flat: 0.2,
@@ -2286,6 +2966,7 @@ function tajBuild(k) {
     for (const s of [-1, 1]) {
       const z = 1.2 + i * 0.26;
       k.add(k.cone(0.055, 0.0, 0.3), {
+        ...night,
         pos: [s * 0.4, g + 0.15, z],
         pattern: false,
         flat: 0.35,
@@ -2299,6 +2980,7 @@ function tajBuild(k) {
     }
   // The plinth with its row of niches.
   k.add(k.box(2.0, 0.12, 2.0), {
+    ...night,
     pos: [0, g + 0.06, 0],
     flat: 0.2,
     color: (c) => {
@@ -2353,6 +3035,7 @@ function tajBuild(k) {
     const n = dot(nn, mid) < 0 ? mul(nn, -1) : nn;
     const main = i % 2 === 0;
     k.add(quad(k, [x0, base, z0], [x1, base, z1], [x1, top, z1], [x0, top, z0], n), {
+      ...night,
       flat: 0.2,
       color: hallColor(main, mid),
     });
@@ -2371,14 +3054,16 @@ function tajBuild(k) {
           [a[0], top + 0.1, a[2]],
           n,
         ),
-        {
-          flat: 0.2,
-          color: (c) => lit(marble, c),
-        },
+        { ...night, flat: 0.2, color: (c) => lit(marble, c) },
       );
     }
   }
-  k.add(k.box(2 * hw, 0.01, 2 * hw), { pos: [0, top, 0], flat: 0.2, color: (c) => lit(marble, c) });
+  k.add(k.box(2 * hw, 0.01, 2 * hw), {
+    ...night,
+    pos: [0, top, 0],
+    flat: 0.2,
+    color: (c) => lit(marble, c),
+  });
   // The drum, the onion dome and its finial.
   k.add(k.cylinder(0.3, 0.16), {
     pos: [0, top + 0.08, 0],
@@ -2422,24 +3107,27 @@ function tajBuild(k) {
         [x + Math.sin(a) * 0.075 * s, top, z + Math.cos(a) * 0.075 * s],
         [x + Math.sin(a) * 0.075 * s, top + 0.13 * s, z + Math.cos(a) * 0.075 * s],
         0.011 * s,
-        {
-          weight: 2.5,
-          color: (c) => lit(marble, c),
-        },
+        { ...night, weight: 2.5, color: (c) => lit(marble, c) },
       );
     }
     k.add(k.cylinder(0.1 * s, 0.02 * s), {
+      ...night,
       pos: [x, top + 0.14 * s, z],
       flat: 0.2,
       color: (c) => lit(marble, c),
     });
     k.add(k.sphere(0.085 * s), {
+      ...night,
       pos: [x, top + 0.17 * s, z],
       scale: [1, 1.15, 1],
       flat: 0.2,
       color: (c) => (c.p[1] < top + 0.15 * s ? null : lit(marble, c)),
     });
-    rod(k, [x, top + 0.26 * s, z], [x, top + 0.31 * s, z], 0.006, { weight: 3, color: "#d4af37" });
+    rod(k, [x, top + 0.26 * s, z], [x, top + 0.31 * s, z], 0.006, {
+      ...night,
+      weight: 3,
+      color: "#d4af37",
+    });
   };
   for (const sx of [-1, 1]) for (const sz of [-1, 1]) kiosk(sx * 0.36, sz * 0.36, 1);
   for (const [x, z] of poly)
@@ -2448,7 +3136,7 @@ function tajBuild(k) {
       [x, top, z],
       [x, top + 0.14, z],
       0.014,
-      { weight: 2.5, color: (c) => lit(marble, c) },
+      { ...night, weight: 2.5, color: (c) => lit(marble, c) },
       0.004,
     );
   // Minarets at the corners of the plinth.
@@ -2457,6 +3145,7 @@ function tajBuild(k) {
       const x = sx * 0.9;
       const z = sz * 0.9;
       k.add(k.cone(0.075, 0.055, 1.18, { caps: false }), {
+        ...night,
         pos: [x, base + 0.59, z],
         flat: 0.2,
         weight: 1.3,
@@ -2464,6 +3153,7 @@ function tajBuild(k) {
       });
       for (const y of [0.42, 0.8, 1.15])
         k.add(k.cylinder(0.1 - y * 0.02, 0.025), {
+          ...night,
           pos: [x, base + y, z],
           flat: 0.2,
           weight: 1.5,
@@ -2477,21 +3167,63 @@ function tajBuild(k) {
           [x + Math.sin(a) * 0.055, mt, z + Math.cos(a) * 0.055],
           [x + Math.sin(a) * 0.055, mt + 0.08, z + Math.cos(a) * 0.055],
           0.008,
-          {
-            weight: 3,
-            color: (c) => lit(marble, c),
-          },
+          { ...night, weight: 3, color: (c) => lit(marble, c) },
         );
       }
       k.add(k.sphere(0.07), {
+        ...night,
         pos: [x, mt + 0.09, z],
         scale: [1, 1.1, 1],
         flat: 0.2,
         weight: 1.5,
         color: (c) => (c.p[1] < mt + 0.08 ? null : lit(marble, c)),
       });
-      rod(k, [x, mt + 0.16, z], [x, mt + 0.21, z], 0.005, { weight: 3, color: "#d4af37" });
+      rod(k, [x, mt + 0.16, z], [x, mt + 0.21, z], 0.005, {
+        ...night,
+        weight: 3,
+        color: "#d4af37",
+      });
     }
+  // Moonlight (hidden at rest): the moon, built where it hangs behind the
+  // Taj and rising into place (fading in by channel 0), and a shimmer of
+  // moonlight on the pool.
+  const moon = k.part("moon", { pivot: TAJ.moon });
+  k.add(k.sphere(0.15), {
+    part: moon,
+    pos: TAJ.moon,
+    weight: 4,
+    pattern: false,
+    fit: false,
+    kind: "fade",
+    channel: 0,
+    params: [0.05, -0.5],
+    color: (c) => {
+      const m = c.noise(c.p[0] * 14, c.p[1] * 14, c.p[2] * 14);
+      return keep(mix("#f4f7ff", "#c9d0e0", smoothstep(0.1, 0.5, m)));
+    },
+  });
+  k.cloud({ share: 0.006, size: 3, pattern: false, part: moon, fit: false }, (rand) => {
+    const d = unit([rand() - 0.5, rand() - 0.5, rand() - 0.5]);
+    const r = 0.15 + 0.11 * Math.sqrt(rand());
+    return {
+      p: add(TAJ.moon, mul(d, r)),
+      color: "#dfe8ff",
+      opacity: 0.14 * (1 - (r - 0.15) / 0.13),
+      kind: "fade",
+      channel: 0,
+      params: [0.05, -0.5],
+    };
+  });
+  const shimmer = k.part("shimmer", { pivot: [0, g, 1.9] });
+  k.cloud({ share: 0.006, size: 1.2, pattern: false, part: shimmer }, (rand) => ({
+    p: [(rand() - 0.5) * 0.12 * (0.4 + rand()), g + 0.01, 1.16 + rand() * 1.48],
+    dir: [1, 0, 0],
+    stretch: 2.5,
+    color: mix("#e8efff", "#ffffff", rand()),
+    opacity: 0.85,
+    kind: "wave",
+    params: [0.006, rand() * TAU],
+  }));
 }
 
 // ---- Castle ------------------------------------------------------------------------------------
@@ -3108,17 +3840,118 @@ function windmillBuild(k) {
 // ---- Recipes ----------------------------------------------------------------------------------
 
 const easeInOut = (x) => (x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2);
+const easeOut = (x) => 1 - (1 - x) ** 3;
+// 0..1 as x runs from a to b.
+const band = (x, a, b) => clamp((x - a) / (b - a), 0, 1);
+// Seconds since a pulse fired, as 0..1 (1 at rest).
+const progress = (v) => (v > 0 ? 1 - v : 1);
 
 export const RECIPES = {
-  "eiffel-tower": { build: eiffelBuild },
+  "eiffel-tower": {
+    controls: [{ key: "show", label: "Light show", type: "pulse", ease: EIF_SECS }],
+    action: { key: "show", label: "Sparkle and fireworks" },
+    drive(t, c, out) {
+      // The night show: the tower's gold lights come on, a sparkle of
+      // white lights climbs the ironwork, and four fireworks burst round it
+      // (blue, white, red and gold), each opening fast, drooping and
+      // burning out. Then the lights go down.
+      const on = c.show > 0;
+      const s = progress(c.show) * EIF_SECS;
+      const lights = on ? easeInOut(band(s, 0, 0.5)) * (1 - easeInOut(band(s, 3.5, 4.1))) : 0;
+      out.morph = [on ? 1.1 * band(s, 0.3, 3.4) : 0, 0.46 * lights];
+      out.glow = [1.25, 1.0, 0.62, on ? 1 : 0];
+      out.parts.sparkle = { visible: lights > 0.02 ? Math.min(1, lights * 1.6) : 0 };
+      EIF_BURSTS.forEach((B, i) => {
+        const u = on ? (s - B.at) / 1.8 : -1;
+        const live = u > 0 && u < 1;
+        out.parts[`burst${i}`] = {
+          scale: (0.06 + 0.94 * easeOut(clamp(u / 0.2, 0, 1))) / EIF_BUILT,
+          offset: [0, -0.16 * Math.max(0, u) ** 2, 0],
+          visible: live ? 1 - band(u, 0.5, 1) : 0,
+        };
+      });
+    },
+    build: eiffelBuild,
+  },
 
-  "washington-monument": { alive: true, build: monumentBuild },
+  "washington-monument": {
+    alive: true,
+    controls: [{ key: "day", label: "A day", type: "pulse", ease: MON_SECS }],
+    action: { key: "day", label: "Sun and shadow" },
+    drive(t, c, out) {
+      // A day in a few seconds: the sun rises behind the monument, arcs
+      // over and sets, and the obelisk's shadow swings round the lawn in
+      // front like a sundial's, while the flags ripple in the breeze.
+      const on = c.day > 0;
+      const s = progress(c.day) * MON_SECS;
+      const u = on ? easeInOut(band(s, 0.2, MON_SECS - 0.2)) : 0;
+      const up = on ? band(u, 0, 0.1) * (1 - band(u, 0.9, 1)) : 0;
+      out.morph = [0.25 + 0.5 * u, up];
+      out.glow = [-0.36, -0.34, -0.27, up];
+      out.parts.sun = { offset: sub(monSun(u), monSun(0.5)), visible: up > 0.001 ? 1 : 0 };
+      out.amount = 1 + 3 * (on ? band(s, 0, 0.6) * (1 - band(s, MON_SECS - 1.2, MON_SECS)) : 0);
+    },
+    build: monumentBuild,
+  },
 
-  pyramids: { build: pyramidsBuild },
+  pyramids: {
+    controls: [{ key: "visit", label: "Visitor", type: "pulse", ease: PYR.secs }],
+    action: { key: "visit", label: "A visitor from space" },
+    drive(t, c, out) {
+      // A joke: a tiny flying saucer glides in by the Great Pyramid and
+      // switches on its beam; sand streams up out of the desert into the
+      // shape of a camel, which floats up into the saucer. The saucer
+      // wobbles happily and zips away. (The sand settles back unseen.)
+      const on = c.visit > 0;
+      const s = progress(c.visit) * PYR.secs;
+      const arrive = easeOut(band(s, 0, 1.1));
+      const leave = band(s, 4.3, 5.0) ** 2;
+      const wob = Math.sin(s * 5) * 0.06 * band(s, 0.6, 1.2) + Math.sin(s * 14) * 0.12 * band(s, 3.9, 4.1) * (1 - band(s, 4.2, 4.4)); // prettier-ignore
+      const from = [-1.6, 1.2, -0.9];
+      const away = [1.2, 2.6, -0.6];
+      out.parts.ufo = {
+        offset: add(mul(from, 1 - arrive), add(mul(away, leave), [0, 0.03 * Math.sin(s * 3.1), 0])),
+        quat: quatAxisAngle([0.52, 0, 0.85], wob + 0.25 * (1 - arrive) - 0.3 * leave),
+        visible: on && s < 4.95 ? 1 : 0,
+      };
+      const beam = on ? band(s, 1.1, 1.5) * (1 - band(s, 3.9, 4.2)) : 0;
+      // The camel forms, holds, then rises and shrinks into the saucer; it
+      // is back under the sand (hidden) before it shows again at rest.
+      const form = on ? easeInOut(band(s, 1.4, 2.7)) : 0;
+      const lift = on ? easeInOut(band(s, 3.0, 3.9)) : 0;
+      const back = !on || s > 4.4;
+      out.morph = [back ? 0 : form, beam];
+      out.parts.camel = {
+        offset: back ? [0, 0, 0] : [0, (PYR.hover[1] - 0.42) * lift + 0.015 * Math.sin(s * 6) * form, 0], // prettier-ignore
+        scale: back ? 1 : 1 - 0.85 * lift,
+        visible: back ? (on ? band(s, 4.5, 4.7) : 1) : lift > 0.97 ? 0 : 1,
+      };
+    },
+    build: pyramidsBuild,
+  },
 
   supertall: {
     alive: true,
     options: [{ key: "glass", label: "Glass", type: "color", default: "#4f86ad" }],
+    controls: [{ key: "twist", label: "Twist", type: "pulse", ease: ST.secs }],
+    action: { key: "twist", label: "Twist and light up" },
+    drive(t, c, out) {
+      // The floors wring round further, each band by its height (the top
+      // turns most), while a ring of light runs up the glass; then they
+      // unwind with a little sway and a second light runs up.
+      const on = c.twist > 0;
+      const s = progress(c.twist) * ST.secs;
+      const wind = on ? easeInOut(band(s, 0.1, 1.4)) * (1 - easeInOut(band(s, 2.2, 3.5))) : 0;
+      const sway = on ? 0.12 * Math.sin((s - 3.5) * 9) * band(s, 3.5, 3.6) * (1 - band(s, 3.6, 4)) : 0; // prettier-ignore
+      for (let i = 0; i < ST.bands; i++) {
+        const v = (i + 0.5) / ST.bands;
+        out.parts[`floor${i}`] = { quat: quatAxisAngle([0, 1, 0], -(ST.twist * wind + sway) * v) };
+      }
+      const first = s < 2;
+      out.morph = [on ? 1.15 * (first ? band(s, 0.3, 1.6) : band(s, 2.3, 3.6)) : 0];
+      const g = first ? band(s, 0.2, 0.4) * (1 - band(s, 1.5, 1.7)) : band(s, 2.2, 2.4) * (1 - band(s, 3.5, 3.7)); // prettier-ignore
+      out.glow = [0.55, 0.85, 1.0, on ? 0.9 * g : 0];
+    },
     build: supertallBuild,
   },
 
@@ -3133,19 +3966,136 @@ export const RECIPES = {
     build: lighthouseBuild,
   },
 
-  "statue-of-liberty": { alive: true, build: libertyBuild },
+  "statue-of-liberty": {
+    alive: true,
+    controls: [{ key: "flare", label: "Flare", type: "pulse", ease: 4.2 }],
+    action: { key: "flare", label: "Light the torch" },
+    drive(t, c, out, info) {
+      // The torch flares: its flame leaps to twice its size in a halo of
+      // light, a warm glow spreads down the statue, and golden sparks drift
+      // up and away on the breeze and burn out. Then it settles.
+      const on = c.flare > 0;
+      const s = progress(c.flare) * 4.2;
+      const big = on ? easeOut(band(s, 0, 0.35)) * (1 - easeInOut(band(s, 2.8, 3.7))) : 0;
+      const flick = 1 + 0.08 * Math.sin(info.time * 23) * big;
+      out.parts.flame = { scale: (1 + 1.2 * big) * flick };
+      out.parts.halo = { scale: 1.1 + 2 * big, visible: big > 0.01 ? 1 : 0 };
+      const drift = on ? easeOut(band(s, 0.15, 3.3)) : 0;
+      const live = on && s < 3.3;
+      out.parts.sparks = { visible: live ? band(s, 0.1, 0.2) * (1 - band(s, 2.3, 3.2)) : 0 };
+      out.morph = [live ? drift : 0, big, 0.52 * big];
+      out.glow = [1.0, 0.7, 0.28, on ? 1 : 0];
+    },
+    build: libertyBuild,
+  },
 
-  "white-house": { alive: true, build: whiteHouseBuild },
+  "white-house": {
+    alive: true,
+    controls: [{ key: "evening", label: "Evening", type: "pulse", ease: 4.6 }],
+    action: { key: "evening", label: "Fountain and lights" },
+    drive(t, c, out) {
+      // The fountain on the south lawn shoots up a tall jet that falls back
+      // as spray, the lights come on in the windows one by one, and the
+      // flag ripples in the breeze. Then the jet sinks and the lights go
+      // out one by one.
+      const on = c.evening > 0;
+      const s = progress(c.evening) * 4.6;
+      const jet = on ? easeOut(band(s, 0.05, 0.7)) * (1 - easeInOut(band(s, 3.3, 4.3))) : 0;
+      const pump = 1 + 0.05 * Math.sin(s * 9) * jet;
+      out.parts.spray = { visible: jet > 0.2 ? 1 : jet * 5 };
+      const lights = on ? (s < 2.8 ? band(s, 0.3, 2.1) : 1 - band(s, 2.9, 4.4)) : 0;
+      out.morph = [jet * pump, lights];
+      out.amount = 1 + 2.5 * jet;
+    },
+    build: whiteHouseBuild,
+  },
 
   "leaning-tower": {
-    controls: [{ key: "lean", label: "Lean", type: "slider", default: 0.35 }],
+    controls: [
+      { key: "lean", label: "Lean", type: "slider", default: 0.35 },
+      { key: "drop", label: "Drop", type: "pulse", ease: PISA_SECS },
+    ],
+    action: { key: "drop", label: "Drop two balls" },
     drive(t, c, out) {
-      out.parts.tower = { angle: c.lean * PISA.max };
+      // Galileo's experiment: the tower leans a little further, two balls
+      // (a big iron one and a small bronze one) roll off the top ledge and
+      // fall side by side, landing at the same moment with a puff of dust.
+      // They bounce, settle and fade, and the tower eases back.
+      const on = c.drop > 0;
+      const s = progress(c.drop) * PISA_SECS;
+      const extra = on ? 0.07 * easeInOut(band(s, 0, 0.7)) * (1 - easeInOut(band(s, 2.8, 3.9))) : 0;
+      const angle = c.lean * PISA.max + extra;
+      out.parts.tower = { angle };
+      const T0 = 0.8;
+      const T1 = 1.9;
+      PISA_BALLS.forEach(([, , r, , hop], i) => {
+        const built = pisaLedge(i, 0.35 * PISA.max + 0.07);
+        const home = [built[0], 0.02 + r, built[2]];
+        // They roll out to the edge as the tower leans, and drop off it.
+        const roll = easeInOut(band(s, 0.35, T0));
+        const from = pisaLedge(i, s < T0 ? angle : c.lean * PISA.max + 0.07 * easeInOut(band(T0, 0, 0.7)), roll); // prettier-ignore
+        const ground = 0.02 + r;
+        let p = from;
+        if (s >= T0) {
+          const f = band(s, T0, T1);
+          const y = from[1] - (from[1] - ground) * f * f;
+          const b = s - T1;
+          const bounce = b <= 0 ? 0 : hop * Math.abs(Math.sin(b * 7.5)) * Math.exp(-b * 4.5);
+          p = [from[0], y + bounce, from[2]];
+        }
+        out.parts[`ball${i}`] = {
+          offset: sub(p, home),
+          visible: on ? easeOut(band(s, 0.15, 0.45)) * (1 - band(s, 3.4, 4.0)) : 0,
+        };
+        const puff = on ? band(s, T1, T1 + 0.9) : 0;
+        out.parts[`dust${i}`] = {
+          offset: sub([from[0], 0.03, from[2]], [built[0], 0.03, built[2]]),
+          scale: 0.4 + 1.1 * easeOut(puff),
+          visible: puff > 0 && puff < 1 ? 1 - puff : 0,
+        };
+      });
     },
     build: pisaBuild,
   },
 
-  colosseum: { build: colosseumBuild },
+  colosseum: {
+    controls: [{ key: "race", label: "Race", type: "pulse", ease: COL.secs }],
+    action: { key: "race", label: "A chariot race" },
+    drive(t, c, out) {
+      // A chariot race (no fighting): the crowd fills the seats, and four
+      // chariots in the team colours race a lap and a quarter of the arena,
+      // swapping the lead, while the crowd jumps and cheers. Then the
+      // chariots and the crowd fade away.
+      const on = c.race > 0;
+      const s = progress(c.race) * COL.secs;
+      const u = band(s, 0.35, 4.7);
+      const go = (u + easeInOut(u)) / 2;
+      const fans = on ? band(s, 0, 1.2) * (1 - band(s, 4.4, 5.1)) : 0;
+      const cars = on ? band(s, 0.05, 0.35) * (1 - band(s, 4.6, 5.0)) : 0;
+      // The two lanes take turns to lead (each lane's pair keeps its gap).
+      COL.teams.forEach((_, i) => {
+        const ph = i % 2 ? Math.PI + 0.4 : 0.4;
+        const d = TAU * (1.25 * go + 0.07 * (Math.sin(TAU * go + ph) - Math.sin(ph)));
+        const phi = colStart(i) + d;
+        const bob = 0.004 * Math.abs(Math.sin(s * 22 + i));
+        out.parts[`chariot${i}`] =
+          cars > 0.001
+            ? {
+                offset: add(sub(colTrack(phi, i), colTrack(colStart(i), i)), [0, bob, 0]),
+                quat: quatAxisAngle([0, 1, 0], colHeading(phi, i) - colHeading(colStart(i), i)),
+              }
+            : { visible: 0 };
+      });
+      const cheer = on ? band(s, 0.4, 1.0) * (1 - band(s, 4.3, 4.9)) : 0;
+      for (let j = 0; j < 2; j++)
+        out.parts[`crowd${j}`] =
+          fans > 0.001
+            ? { offset: [0, 0.012 * cheer * Math.max(0, Math.sin(s * 11 + j * Math.PI)), 0] }
+            : { visible: 0 };
+      out.morph = [cars, 0.7 * fans];
+    },
+    build: colosseumBuild,
+  },
 
   parthenon: {
     options: [
@@ -3160,10 +4110,56 @@ export const RECIPES = {
         ],
       },
     ],
+    controls: [{ key: "walk", label: "Procession", type: "pulse", ease: PAR.secs }],
+    action: { key: "walk", label: "A procession" },
+    drive(t, c, out) {
+      // A procession: eight robed figures, some with baskets and jars on
+      // their heads, walk in single file along the temple, round the corner
+      // and across the front of its steps, then fade away.
+      const on = c.walk > 0;
+      const s = progress(c.walk) * PAR.secs;
+      const walk = on ? PAR.speed * Math.max(0, s - 0.5) : 0;
+      const seen = on ? band(s, 0, 0.6) * (1 - band(s, PAR.secs - 0.8, PAR.secs - 0.1)) : 0;
+      for (let i = 0; i < PAR.n; i++) {
+        const d = Math.min(parLen(), parStart(i) + walk);
+        const { p, h } = parPath(d);
+        const home = PAR_BUILT;
+        const step = walk > 0 && d < parLen() ? 1 : 0;
+        const ph = walk * 11 + i * 1.3;
+        out.parts[`walker${i}`] =
+          seen > 0.001
+            ? {
+                offset: add(sub(p, home), [0, 0.008 * Math.abs(Math.sin(ph)) * step, 0]),
+                quat: quatMul(quatAxisAngle([0, 1, 0], h), quatAxisAngle([0, 0, 1], 0.05 * Math.sin(ph) * step)), // prettier-ignore
+              }
+            : { visible: 0 };
+      }
+      out.morph = [seen];
+    },
     build: parthenonBuild,
   },
 
-  stonehenge: { build: stonehengeBuild },
+  stonehenge: {
+    controls: [{ key: "dawn", label: "Solstice", type: "pulse", ease: HENGE.secs }],
+    action: { key: "dawn", label: "Solstice sunrise" },
+    drive(t, c, out) {
+      // Solstice sunrise: the sun comes up over the far bank, framed by the
+      // great trilithon, a golden beam shines through the stones along the
+      // monument's axis, and the stones glow gold. Then it fades back.
+      const on = c.dawn > 0;
+      const s = progress(c.dawn) * HENGE.secs;
+      const rise = on ? easeOut(band(s, 0, 2.4)) : 0;
+      const set = on ? easeInOut(band(s, 3.8, HENGE.secs)) : 0;
+      out.parts.sun = {
+        offset: [0, -0.7 * (1 - rise) - 0.55 * set, 0],
+        visible: rise * (1 - set) > 0.001 ? 1 : 0,
+      };
+      const lightUp = on ? band(s, 0.9, 2.2) * (1 - band(s, 3.6, 4.8)) : 0;
+      out.morph = [on ? rise * (1 - set) : 0, 0.7 * easeInOut(lightUp), easeInOut(lightUp)];
+      out.glow = [1.0, 0.62, 0.18, lightUp > 0 ? 0.8 : 0];
+    },
+    build: stonehengeBuild,
+  },
 
   "big-ben": {
     alive: true,
@@ -3190,7 +4186,28 @@ export const RECIPES = {
     build: benBuild,
   },
 
-  "taj-mahal": { alive: true, build: tajBuild },
+  "taj-mahal": {
+    alive: true,
+    controls: [{ key: "moon", label: "Moonlight", type: "pulse", ease: TAJ.secs }],
+    action: { key: "moon", label: "Moonlight" },
+    drive(t, c, out) {
+      // Moonlight: night falls on the garden and the buildings, the moon
+      // rises behind the Taj, the great dome stays bright white and glows
+      // against the night, and moonlight shimmers on the rippling pool.
+      // Then day comes back.
+      const on = c.moon > 0;
+      const s = progress(c.moon) * TAJ.secs;
+      const dusk = on ? easeInOut(band(s, 0, 1.2)) * (1 - easeInOut(band(s, 3.9, 5.1))) : 0;
+      const rise = on ? easeOut(band(s, 0.3, 2.2)) : 0;
+      const moonUp = on ? rise * (1 - band(s, 3.9, 5.0)) : 0;
+      out.parts.moon = { offset: [0, -0.5 * (1 - rise), 0], visible: moonUp > 0.001 ? 1 : 0 };
+      out.parts.shimmer = { visible: dusk > 0.05 ? dusk : 0 };
+      out.morph = [moonUp, dusk];
+      out.glow = [-0.46, -0.4, -0.24, dusk > 0 ? 1 : 0];
+      out.amount = 1 + 2.5 * dusk;
+    },
+    build: tajBuild,
+  },
 
   castle: {
     alive: true,
