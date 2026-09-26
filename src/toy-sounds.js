@@ -167,9 +167,21 @@ export const TOY_SOUNDS = {
     { voice: "thud", at: 1.65, f: 100, bright: 0.3, vol: 0.7 },
   ],
   "tennis-ball": { voice: "pock", f: 820 },
-  baseball: { voice: "crack", f: 2400, bright: 0.8 },
-  softball: { voice: "thud", f: 130, bright: 0.25, decay: 0.8 },
-  "beach-ball": { voice: "boing", f: 240, to: 1.4, rate: 9, decay: 0.8 },
+  // The pitch's whoosh, then the crack of the bat as it comes back.
+  baseball: [
+    { voice: "whoosh", at: 0.24, f: 900, to: 3, decay: 0.5, vol: 0.4 },
+    { voice: "crack", at: 0.76, f: 2400, bright: 0.8 },
+  ],
+  // The underhand release, then a muffled thud where it lands far off.
+  softball: [
+    { voice: "whoosh", at: 0.52, f: 500, to: 2, decay: 0.6, vol: 0.3 },
+    { voice: "thud", at: 1.4, f: 130, bright: 0.25, decay: 0.8 },
+  ],
+  // A soft punch up, then the plasticky boing as it lands.
+  "beach-ball": [
+    { voice: "slap", f: 600, vol: 0.35 },
+    { voice: "boing", at: 1.42, f: 240, to: 1.4, rate: 9, decay: 0.8 },
+  ],
   "golf-ball": [
     { voice: "clack", f: 3400, decay: 1.4 },
     { voice: "whoosh", f: 1200, to: 3, decay: 0.3, vol: 0.5 },
@@ -179,25 +191,55 @@ export const TOY_SOUNDS = {
     { voice: "thud", at: 1.45, f: 95, bright: 0.3, vol: 0.7 },
     { voice: "thud", at: 2.05, f: 110, bright: 0.3, vol: 0.4 },
   ],
-  volleyball: { voice: "slap", f: 1500, decay: 1.2 },
-  "water-polo-ball": { voice: "splash", f: 1300, bright: 0.6 },
-  "ping-pong-ball": { voice: "pock", notes: "E6 - E6 E6 E6", step: 0.13, decay: 0.6 },
+  // A soft slap for the set, a hard one for the spike.
+  volleyball: [
+    { voice: "slap", f: 1400, decay: 1, vol: 0.45 },
+    { voice: "slap", at: 0.69, f: 1700, decay: 1.2 },
+  ],
+  // A light toss, then the splash as it plunges in.
+  "water-polo-ball": [
+    { voice: "slap", f: 800, vol: 0.3 },
+    { voice: "splash", at: 0.55, f: 1300, bright: 0.6 },
+  ],
+  // The flick's tik (each bounce after it is a cue from the recipe).
+  "ping-pong-ball": { voice: "pock", f: 2000, bright: 0.7, decay: 0.5 },
   "cricket-ball": [
     { voice: "wood", f: 900, decay: 0.8 },
     { voice: "pock", f: 1100, decay: 0.8 },
   ],
+  // The roll's rumble, then the pins crash far off.
   "bowling-ball": [
-    { voice: "rumble", f: 70, rate: 12, decay: 0.6 },
-    { voice: "clatter", at: 1.0, f: 1100, n: 10, kind: "wood" },
+    { voice: "rumble", at: 0.32, f: 70, rate: 12, decay: 0.9 },
+    { voice: "clatter", at: 2.02, f: 1100, n: 10, kind: "wood" },
   ],
   "pool-ball": { voice: "clack", f: 2900 },
-  pickleball: { voice: "pock", f: 1250, bright: 0.2, decay: 1.3 },
-  dodgeball: { voice: "boing", f: 150, to: 0.7, rate: 20, decay: 0.7 },
-  "medicine-ball": { voice: "thud", f: 60, bright: 0.2, decay: 1.4 },
+  // The paddle's hollow pop, and air whistling through the holes.
+  pickleball: [
+    { voice: "pock", f: 1250, bright: 0.2, decay: 1.3 },
+    { voice: "whistle", f: 1800, to: 0.8, decay: 0.9, vol: 0.35 },
+  ],
+  // Lifted, then the rubbery bwong as it is slammed down.
+  dodgeball: [
+    { voice: "whoosh", f: 400, to: 2, decay: 0.3, vol: 0.25 },
+    { voice: "boing", at: 0.43, f: 150, to: 0.7, rate: 20, decay: 0.7 },
+  ],
+  // A heave, then the heavy thud.
+  "medicine-ball": [
+    { voice: "breath", f: 500, to: 0.8, decay: 0.8, vol: 0.25 },
+    { voice: "thud", at: 0.81, f: 55, bright: 0.15, decay: 1.6 },
+  ],
   "lacrosse-ball": { voice: "pock", f: 620, bright: 0.8 },
-  "squash-ball": { voice: "pock", f: 380, bright: 0.1, decay: 1.2 },
+  // A racket's tap, then the dead, low thock of a cold squash ball.
+  "squash-ball": [
+    { voice: "pock", f: 700, bright: 0.3, decay: 0.5, vol: 0.4 },
+    { voice: "pock", at: 0.2, f: 380, bright: 0.1, decay: 1.2 },
+  ],
   "bouncy-ball": { voice: "boing", f: 260, to: 2.6, rate: 16 },
-  marble: { voice: "glass", f: 2350, decay: 0.6, bright: 0.7 },
+  // A glassy clink, and a soft whirr as it rolls.
+  marble: [
+    { voice: "glass", f: 2350, decay: 0.6, bright: 0.7 },
+    { voice: "rumble", f: 380, rate: 28, decay: 1.2, vol: 0.18 },
+  ],
   "hockey-puck": [
     { voice: "slap", f: 1700, vol: 0.9 },
     { voice: "scrape", at: 0.08, f: 3000, rate: 40, decay: 1.9, vol: 0.5 },

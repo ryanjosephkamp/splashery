@@ -5,6 +5,7 @@
 
 import {
   mix,
+  rgb,
   shade,
   smoothstep,
   fibonacciSphere,
@@ -43,6 +44,16 @@ function lit(col, n, { sheen = 0, tight = 30, soft = 0.22 } = {}) {
   if (!sheen) return out;
   return mix(out, "#ffffff", sheen * Math.max(0, dot(n, HALF)) ** tight);
 }
+
+// The key light's brightness in lit() at normal n, and lit()'s light as
+// out = a * base + b (for glossSpin()).
+const keyF = (n, soft = 0.22) => 1 - soft + soft * (0.5 + 0.5 * dot(n, LIGHT)) + soft * 0.1;
+const litLight =
+  ({ sheen = 0, tight = 30, soft = 0.22 } = {}) =>
+  (n) => {
+    const s = sheen * Math.max(0, dot(n, HALF)) ** tight;
+    return { a: keyF(n, soft) * (1 - s), b: [s, s, s] };
+  };
 
 // Pebbled grain as real bumps: a cellular pattern of small domes (about
 // `f` across the ball's radius). Returns the bumped normal and how deep in a
@@ -98,6 +109,7 @@ function grip(c, col, { f = 60, depth = 0.6, crevice = 0.18, sheen = 0, tight = 
 // ball off a dark page (and barely shows on a light one).
 function rim(k, shape, opts = {}) {
   k.add(shape, {
+    part: k.part("rim"),
     flat: 1,
     size: 1.6,
     weight: 0.35,
@@ -144,36 +156,65 @@ function sub(a, b) {
 
 // A plain ball body with a darker core for Slice. Colour noise is low: the
 // material comes from the colour function.
+// The shell is part "ball" and its inside part "core", so a tap can spin
+// it (see "Real throws and bounces").
 function body(k, color, opts = {}) {
-  return k.add(k.sphere(1), {
-    flat: 0.18,
+  const ball = k.part("ball");
+  const core = k.part("core");
+  const look = { flat: 0.18, jitter: 0.012, even: true, color, ...opts };
+  const shell = k.add(k.sphere(1), {
     interior: 0.12,
-    jitter: 0.012,
-    even: true,
     core: opts.core || "#3b2a22",
-    color,
-    ...opts,
+    part: (c) => (c.inside ? core : ball),
+    ...look,
   });
+  // Even placement leaves a tiny swirl at the sphere's two poles, unseen at
+  // rest (the top one is edge-on); a spinning ball turns them into view, so
+  // two small caps of the same surface cover them.
+  for (const s of [1, -1]) k.add(poleCap(k, s), { ...look, part: ball });
+  return shell;
+}
+function poleCap(k, s, a = 0.14) {
+  return k.param(
+    (u, v) => {
+      const th = a * v;
+      const ph = TAU * u;
+      return [Math.sin(th) * Math.cos(ph), s * Math.cos(th), s * Math.sin(th) * Math.sin(ph)];
+    },
+    { grid: 16 },
+  );
 }
 
 // Leather ball with stitched seam (baseball, softball).
 function stitchedBall(k, leather, stitch, { a = 0.72, n = 108 } = {}) {
   const seam = seamCurve(a);
-  body(k, (c) => {
+  // Its colours and what it is (for the light): groove, stitch, band or
+  // leather.
+  const part = (c) => {
     const s = seam(c.ln);
-    // Smooth leather with a soft sheen; the seam is a fine groove.
-    if (s.dist < 0.012) return keep(lit(shade(leather, 0.72), c.n));
+    if (s.dist < 0.012) return "groove";
     if (s.dist < 0.075) {
-      // Two rows of angled stitches, one each side of the seam, standing
-      // proud of the leather: crisp, small splats and a touch of shine.
       const across = (s.dist - 0.012) / 0.063;
       const f = (s.t * n + across * 0.6 * s.side + 10) % 1;
-      if (across > 0.14 && across < 0.92 && f < 0.4)
-        return keep(lit(stitch, c.n, { sheen: 0.25, tight: 12 }), 0.6);
-      return keep(lit(shade(leather, 0.93), c.n, { sheen: 0.1 }));
+      return across > 0.14 && across < 0.92 && f < 0.4 ? "stitch" : "band";
     }
-    return lit(leather, c.n, { sheen: 0.14, tight: 16 });
+    return "leather";
+  };
+  const PAINT = {
+    groove: (c) => keep(c(shade(leather, 0.72))),
+    stitch: (c) => keep(c(stitch), 0.6),
+    band: (c) => keep(c(shade(leather, 0.93))),
+    leather: (c) => c(leather),
+  };
+  body(k, (c) => {
+    // Smooth leather with a soft sheen; the seam is a fine groove, with two
+    // rows of angled stitches, one each side, standing proud of the leather:
+    // crisp, small splats and a touch of shine.
+    const p = part(c);
+    const light = { groove: {}, stitch: { sheen: 0.25, tight: 12 }, band: { sheen: 0.1 }, leather: { sheen: 0.14, tight: 16 } }[p]; // prettier-ignore
+    return PAINT[p]((col) => lit(col, c.n, light));
   });
+  glossSpin(k, (c) => PAINT[part(c)]((col) => col), litLight({ sheen: 0.14, tight: 16 }));
 }
 
 // Truncated icosahedron faces (soccer ball): 12 pentagon and 20 hexagon
@@ -374,10 +415,974 @@ const rotate = (q, v) => {
 // Height of a throw (in toy radii) that peaks at `peak` half way through.
 const arc = (f, peak) => peak * 4 * f * (1 - f);
 
+// ---- Real throws and bounces (E6a) ------------------------------------------------
+// A tap sends a ball along a plan of legs: real arcs under the ball's own
+// gravity, bounces that lose height by its restitution, the spin a kick or a
+// bounce gives it, and a squash on the floor as soft as the ball.
+//
+// A moving ball is its own part ("ball"), so it can spin freely. While it is
+// turned it culls its far side, which would otherwise draw over its near
+// side (splats sort in their built pose: docs/PACKS.md 7b), with splats a
+// little bigger to close the gaps the far side filled, and its inside
+// ("core", for Slice) hides. The whole toy squashes on the floor (body).
+
+// The home view: across the screen (to the right) and towards the camera,
+// both along the floor.
+const ACROSS = unit([VIEW[2], 0, -VIEW[0]]);
+const TOWARD = unit([VIEW[0], 0, VIEW[2]]);
+const UP = [0, 1, 0];
+const IDQ = [0, 0, 0, 1];
+const CULL_SIZE = 1.15;
+const add3 = (a, b) => [a[0] + b[0], a[1] + b[1], a[2] + b[2]];
+const scale3 = (a, s) => [a[0] * s, a[1] * s, a[2] * s];
+const lerp3 = (a, b, t) => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t]; // prettier-ignore
+// A point on the floor plan: x across the screen, z towards the camera, y up.
+const at3 = (x, y = 0, z = 0) => add3(add3(scale3(ACROSS, x), scale3(TOWARD, z)), [0, y, 0]);
+// The axis a ball rolls about when it moves along d (topspin for d).
+const rollAxis = (d) => unit(cross(UP, d));
+const easeOut = (x) => 1 - (1 - x) * (1 - x);
+const EASE = { linear: (x) => x, out: easeOut, inout: easeIO, in: (x) => x * x };
+// Each ball's gravity, in its own radii per second squared: a slowed-down
+// real g over the real ball's radius (metres), so a big ball falls slowly
+// for its size and a small one snaps.
+const grav = (r) => 1.4 / r;
+const KICK = [
+  { voice: "thud", f: 100, bright: 0.5, vol: 0.8 },
+  { voice: "slap", f: 1100, vol: 0.4 },
+];
+
+// Legs, in ball radii (the ball rests at [0, 0, 0] with its bottom on the
+// floor, so y is its height) and seconds. Each starts where the last ended:
+//   { fly: T, to, spin, axis }  a free flight that lands at `to` after T s
+//        (or { fly: { h }, ... }: its top h above where it starts); spin
+//        in turns per second about axis; `g` for a gravity of its own
+//   { hit: w, squash, spin, axis }  w s on the floor, squashing by `squash`
+//        (a soft ball's squash rings on: `ring` Hz, dying by `damp` per s)
+//   { roll: T, to, ease }  rolls along the floor without slipping
+//   { rollPath: T, pos(u) }  rolls along any path on the floor
+//   { turn: T, turns, axis, ease }  spins in place
+//   { wait: T }
+//   { path: T, pos(u, s), spin, axis }  anything else: pos gives the place
+//        at u = 0..1 (s in seconds)
+// Any leg may also give angle(u, s) (radians about axis), squash(u, s),
+// rot(u, s) (its own turn, a quaternion) and tilt(u, s) (a wobble that is
+// back to none at both ends).
+// The free spin about each axis is scaled so the turns about it come to a
+// whole number (rolls and legs marked `fixed` count but keep their angle),
+// so the ball comes back to rest as it started.
+const axisKey = (a) => {
+  const s = Math.abs(a[0]) > 1e-6 ? Math.sign(a[0]) : Math.abs(a[1]) > 1e-6 ? Math.sign(a[1]) : Math.sign(a[2]); // prettier-ignore
+  return { key: a.map((v) => (v * s).toFixed(5)).join(","), sign: s };
+};
+function plan(g, legs) {
+  const pass = (scale, fix) => {
+    let p = [0, 0, 0];
+    let q = IDQ;
+    let t = 0;
+    const turned = new Map();
+    const count = (axis, angle, fixed) => {
+      const { key, sign } = axisKey(axis);
+      const c = turned.get(key) ?? { pos: 0, neg: 0, fixed: 0 };
+      const a = angle * sign;
+      if (fixed) c.fixed += a;
+      else c[a >= 0 ? "pos" : "neg"] += a;
+      turned.set(key, c);
+    };
+    const segs = legs.map((L) => {
+      const p0 = p;
+      const s = { L, t0: t, p0, q0: q, axis: L.axis, kscale: 1 };
+      if (L.fly !== undefined) {
+        const to = L.to ?? p0;
+        const gl = L.g ?? g;
+        let T = L.fly;
+        if (typeof T === "object") {
+          const top = p0[1] + T.h;
+          T = Math.sqrt((2 * (top - p0[1])) / gl) + Math.sqrt((2 * Math.max(0, top - to[1])) / gl);
+        }
+        s.T = T;
+        s.p1 = to;
+        s.vy = (to[1] - p0[1]) / T + 0.5 * gl * T;
+        s.pos = (u, e) => {
+          const h = lerp3(p0, to, u);
+          h[1] = p0[1] + s.vy * e - 0.5 * gl * e * e;
+          return h;
+        };
+      } else if (L.roll !== undefined) {
+        const to = L.to;
+        const d = [to[0] - p0[0], 0, to[2] - p0[2]];
+        const dist = Math.hypot(d[0], d[2]);
+        const f = EASE[L.ease ?? "out"];
+        s.T = L.roll;
+        s.p1 = to;
+        s.pos = (u) => lerp3(p0, to, f(u));
+        s.rollAxis = dist > 1e-6 ? rollAxis(d) : null;
+        s.rollAngle = (u) => dist * f(u);
+        if (s.rollAxis) count(s.rollAxis, dist, true);
+      } else if (L.rollPath !== undefined) {
+        // Rolled step by step: each step turns the ball about the axis
+        // across its way, by the distance.
+        s.T = L.rollPath;
+        const N = 240;
+        const pts = [];
+        const qs = [IDQ];
+        for (let i = 0; i <= N; i++) pts.push(L.pos(i / N));
+        for (let i = 1; i <= N; i++) {
+          const d = [pts[i][0] - pts[i - 1][0], 0, pts[i][2] - pts[i - 1][2]];
+          const len = Math.hypot(d[0], d[2]);
+          qs.push(len > 1e-9 ? quatMul(quatAxisAngle(rollAxis(d), len), qs[i - 1]) : qs[i - 1]);
+        }
+        s.p1 = pts[N];
+        s.pos = (u) => L.pos(u);
+        s.pathRot = (u) => {
+          const x = clamp(u, 0, 1) * N;
+          const i = Math.min(N - 1, Math.floor(x));
+          return nlerp(qs[i], qs[i + 1], x - i);
+        };
+      } else if (L.path !== undefined) {
+        s.T = L.path;
+        s.pos = L.pos;
+        s.p1 = L.pos(1, s.T);
+      } else {
+        s.T = L.hit ?? L.turn ?? L.wait;
+        s.p1 = p0;
+        s.pos = () => p0;
+      }
+      s.angle = (u, e) => {
+        if (L.angle) return L.angle(u, e) * s.kscale;
+        if (L.turns !== undefined) return TAU * L.turns * EASE[L.ease ?? "linear"](u) * s.kscale;
+        return TAU * (L.spin ?? 0) * e * s.kscale;
+      };
+      if (L.axis && !L.fixed) {
+        const k = axisKey(L.axis);
+        const sc = scale.get(k.key);
+        if (sc) s.kscale = s.angle(1, s.T) * k.sign >= 0 ? sc.a : sc.b;
+      }
+      s.rot = (u, e) => {
+        let r = L.rot ? L.rot(u, e) : IDQ;
+        if (s.axis) r = quatMul(quatAxisAngle(s.axis, s.angle(u, e)), r);
+        if (s.rollAxis) r = quatMul(quatAxisAngle(s.rollAxis, s.rollAngle(u)), r);
+        if (s.pathRot) r = quatMul(s.pathRot(u), r);
+        if (L.tilt) r = quatMul(L.tilt(u, e), r);
+        if (L.absorb && fix) r = quatMul(quatAxisAngle(fix.axis, fix.angle * easeIO(u)), r);
+        return r;
+      };
+      if (s.axis) count(s.axis, s.angle(1, s.T), !!L.fixed);
+      s.q1 = quatMul(s.rot(1, s.T), q);
+      p = s.p1;
+      q = s.q1;
+      t += s.T;
+      return s;
+    });
+    return { segs, T: t, turned };
+  };
+  // Whole turns about each axis: scale the spins one way (or both) by as
+  // little as will do.
+  const first = pass(new Map());
+  const scale = new Map();
+  for (const [key, c] of first.turned) {
+    const free = c.pos + c.neg;
+    if (Math.abs(c.pos) + Math.abs(c.neg) < 1e-9) continue;
+    const r = Math.round((free + c.fixed) / TAU);
+    let best = null;
+    const offer = (a, b) => {
+      if (!(a > 0 && b > 0)) return;
+      const cost = Math.abs(Math.log(a)) + Math.abs(Math.log(b));
+      if (!best || cost < best.cost) best = { a, b, cost };
+    };
+    for (const n of [r - 1, r, r + 1]) {
+      const need = n * TAU - c.fixed;
+      if (c.pos > 1e-9) offer((need - c.neg) / c.pos, 1);
+      if (c.neg < -1e-9) offer(1, (need - c.pos) / c.neg);
+      if (Math.abs(free) > 1e-9) offer(need / free, need / free);
+    }
+    if (best) scale.set(key, best);
+  }
+  // A leg marked `absorb` (a last settling roll) takes up what is left, so
+  // the ball ends exactly as it started.
+  let { segs, T } = pass(scale);
+  if (legs.some((L) => L.absorb)) {
+    const q = segs[segs.length - 1].q1;
+    const w = clamp(q[3], -1, 1);
+    const sn = Math.sqrt(Math.max(0, 1 - w * w));
+    if (sn > 1e-7) {
+      const angle = -2 * Math.atan2(sn, w);
+      ({ segs, T } = pass(scale, { axis: [q[0] / sn, q[1] / sn, q[2] / sn], angle }));
+    }
+  }
+  return {
+    T,
+    segs,
+    at(e) {
+      if (e < 0 || e >= T) return { p: [0, 0, 0], q: IDQ, squash: 0, seg: null };
+      let i = 0;
+      while (i + 1 < segs.length && segs[i + 1].t0 <= e) i++;
+      const s = segs[i];
+      const le = e - s.t0;
+      const u = s.T > 0 ? clamp(le / s.T, 0, 1) : 1;
+      const p = s.pos(u, le);
+      const q = quatMul(s.rot(u, le), s.q0);
+      const L = s.L;
+      let squash = 0;
+      if (L.squash !== undefined)
+        squash = typeof L.squash === "function" ? L.squash(u, le) : L.squash * Math.sin(Math.PI * u); // prettier-ignore
+      // A soft ball's squash rings on after it leaves the floor.
+      const prev = segs[i - 1];
+      if (L.hit === undefined && prev?.L.ring) {
+        const r = prev.L;
+        squash += -(r.squash ?? 0) * 0.5 * Math.sin(TAU * r.ring * le) * Math.exp(-r.damp * le);
+      }
+      return { p, q, squash, seg: s };
+    },
+  };
+}
+const nlerp = (a, b, t) => {
+  const d = a[0] * b[0] + a[1] * b[1] + a[2] * b[2] + a[3] * b[3] < 0 ? -1 : 1;
+  const q = [0, 1, 2, 3].map((i) => a[i] + (b[i] * d - a[i]) * t);
+  const l = Math.hypot(...q) || 1;
+  return q.map((v) => v / l);
+};
+
+// Bounces that lose height: from the floor, each flight is `e` times shorter
+// and e^2 lower than the last. opts: h (the first height), e (restitution),
+// n (how many), w (contact time), squash (at the first landing; less as the
+// landings soften), spin/axis (turns per second, `keep` of it kept at each
+// bounce), to(i) (where flight i lands; home by default), ring/damp, and
+// cue(i, k) (the sound of landing i, k = its strength 0..1).
+function bounces(g, o) {
+  const { h, e, n, w = 0.05, squash = 0.1, spin = 0, axis, keep = 0.7, to, ring, damp, cue } = o;
+  const legs = [];
+  for (let i = 0; i <= n; i++) {
+    const k = e ** i;
+    const hit = { hit: w * Math.sqrt(k), squash: squash * k, spin: spin * keep ** i, axis, ring, damp }; // prettier-ignore
+    legs.push({ ...hit, cue: cue?.(i, k) });
+    if (i === n) break;
+    legs.push({ fly: { h: h * k * k }, to: to ? to(i) : [0, 0, 0], spin: spin * keep ** (i + 0.5), axis }); // prettier-ignore
+  }
+  return legs;
+}
+
+// Spin that runs down to a stop in T s from `rate` turns per second.
+const spinDown = (T, rate, axis, more = {}) => ({
+  turn: T,
+  axis,
+  angle: (u) => TAU * rate * T * (u - (u * u) / 2),
+  ...more,
+});
+
+// Shows a ball's pose: its shell and core parts move together, the shell
+// culls its far side while turned and the core hides.
+function showBall(out, { p, q, squash }, more = {}) {
+  const turned = Math.abs(q[3]) < 0.9998;
+  out.parts.ball = { offset: p, quat: q, cull: turned, visible: turned ? CULL_SIZE : 1, ...more };
+  out.parts.core = { offset: p, visible: turned ? 0 : 1 };
+  // A see-through rim shell (dark balls) only moves: it looks the same turned.
+  out.parts.rim = { offset: p };
+  if (squash) {
+    // The squash widens the toy about its centre: keep the ball's place.
+    const k = 1 + 0.5 * squash;
+    const o = [p[0] / k, p[1], p[2] / k];
+    out.parts.ball.offset = out.parts.core.offset = out.parts.rim.offset = o;
+    out.body = { squash };
+  }
+}
+
+// Spinning a glossy ball. Its light is baked into its colours, so a copy
+// that spins would carry its highlight round with it (a rolling pool ball
+// would look like glass). While it moves it shows instead an unlit copy that
+// spins ("spin": built tiny at the centre, so it always sorts behind, and
+// grown to size by its part) under a fixed layer of light ("light": a
+// see-through shell that darkens and brightens what is under it just as
+// the baked light did: out = a * base + b). At rest the ball is itself.
+// The unlit copy leaves the flag pattern out (it is built too small to map
+// it), so a flag shows only at rest.
+const SPIN_R = 0.04;
+const SPIN_SCALE = 1 / SPIN_R;
+// How many light splats cover a point, as a power (calibrated on renders
+// against the ball at rest); more towards the outline, where the eye looks
+// along the layer.
+const LIGHT_OVERLAP = 3.1;
+const lightOverlap = (n) => LIGHT_OVERLAP * (1 + 1.5 * (1 - Math.max(0, dot(n, VIEW))) ** 2);
+function glossSpin(k, albedo, light, { weight = 0.5, share = 0.12, size = 2.2, flat = 0.25 } = {}) {
+  k.add(k.sphere(SPIN_R), {
+    part: k.part("spin"),
+    flat,
+    even: true,
+    pattern: false,
+    opacity: 1,
+    jitter: 0.008,
+    weight: weight / (SPIN_R * SPIN_R),
+    color: albedo,
+  });
+  const pts = fibonacciSphere(Math.max(64, Math.round(share * k.count)));
+  k.cloud(
+    { count: pts.length * (160000 / k.count), size, part: k.part("light"), pattern: false },
+    (rand, i) => {
+      const n = pts[i];
+      const { a, b } = light(n);
+      const alpha = clamp(1 - a, 0, 0.995);
+      const col = alpha > 1e-4 ? b.map((v) => clamp(v / alpha, 0, 1)) : [0, 0, 0];
+      return {
+        p: scale3(n, 1.004),
+        n,
+        flat: 0.06,
+        color: col,
+        opacity: 1 - (1 - alpha) ** (1 / lightOverlap(n)),
+      };
+    },
+  );
+}
+// Shows a glossy ball's pose: the unlit copy spins under the fixed light
+// while it moves; at rest the ball shows as itself.
+function showGloss(out, pose, moving) {
+  const { p, q } = pose;
+  const o = out.parts.ball.offset;
+  out.parts.ball.visible = moving ? 0 : 1;
+  out.parts.core.visible = moving ? 0 : out.parts.core.visible;
+  out.parts.spin = { offset: o, quat: q, scale: SPIN_SCALE, cull: true, visible: moving ? CULL_SIZE : 0 }; // prettier-ignore
+  out.parts.light = { offset: o, visible: moving ? 1 : 0 };
+}
+
+// Per-toy memory for drive() (the sounds' clock), keyed by the control state
+// object, which is new each time a toy loads.
+const MEM = new WeakMap();
+function mem(c) {
+  let m = MEM.get(c);
+  if (!m) MEM.set(c, (m = {}));
+  return m;
+}
+// Later sounds of a tap: each [at, spec] plays when the effect's clock e
+// (seconds since the tap, -1 at rest) passes `at`.
+function cuesAt(c, e, list, out) {
+  const m = mem(c);
+  const was = m.cueE ?? -1;
+  m.cueE = e;
+  if (e < 0 || e < was) return;
+  for (const [at, spec] of list) if (was < at && e >= at) out.cues.push(spec);
+}
+
+// A ball's tap: a pulse that lasts the plan, a drive that shows it, and the
+// legs' later sounds. `gloss`: the ball spins as glossSpin() built it.
+function throwBall(key, label, g, legs, { extra, gloss } = {}) {
+  const P = plan(g, legs);
+  const secs = P.T + 0.05;
+  // A leg's `cue` sounds as it starts (the first is the tap's own sound).
+  const cues = P.segs.filter((s) => s.L.cue && s.t0 > 0.02).map((s) => [s.t0, s.L.cue]);
+  return {
+    ...throwPulse(key, label, secs),
+    plan: P,
+    drive(t, c, out, info) {
+      const e = sinceTap(c, key, secs);
+      const pose = P.at(e);
+      showBall(out, pose);
+      if (gloss) showGloss(out, pose, e >= 0 && e < P.T);
+      cuesAt(c, e, cues, out);
+      if (extra) extra(e, pose, c, out, info);
+    },
+  };
+}
+
+// ---- The balls' plans ----------------------------------------------------------------
+
+const mix1 = (a, b, t) => a + (b - a) * t;
+// The lowest point of the ball's outline in the home view (on the ball at
+// rest): a fingertip there touches the ball without crossing it.
+const LIMB = unit(add3([0, -1, 0], scale3(VIEW, VIEW[1])));
+// Where the fingertip's top is built (inside the ball's sphere).
+const FINGER_TOP = 0.95;
+const BOUNCE = (i, k) => [
+  { voice: "boing", f: 95, to: 0.8, rate: 30, decay: 0.6, vol: 0.9 * k },
+  { voice: "slap", f: 900, vol: 0.6 * k },
+];
+// One dribble: up from the floor to the hand, which pushes it back down
+// harder than it fell.
+function dribble(g, H, push = 3) {
+  const v0 = Math.sqrt(2 * g * H);
+  const up = v0 / g;
+  const down = Math.sqrt((2 * H) / (push * g));
+  const y = (e) => (e < up ? v0 * e - 0.5 * g * e * e : H - 0.5 * push * g * (e - up) ** 2);
+  return { path: up + down, pos: (u, e) => [0, Math.max(0, y(e ?? u * (up + down))), 0] };
+}
+const BB_G = grav(0.12);
+const BB_HIT = (i) => ({ hit: 0.045, squash: 0.1, cue: BOUNCE(i, 1) });
+const BB_FINGER_Y = 0.45;
+const BASKETBALL = [
+  dribble(BB_G, 0.38),
+  BB_HIT(0),
+  dribble(BB_G, 0.36),
+  BB_HIT(1),
+  dribble(BB_G, 0.36),
+  BB_HIT(2),
+  // The toss onto the fingertip, set spinning.
+  { fly: { h: 0.7 }, to: [0, BB_FINGER_Y, 0], spin: 1.6, axis: UP },
+  {
+    path: 0.14,
+    pos: (u) => [0, BB_FINGER_Y - 0.05 * Math.sin(Math.PI * u), 0],
+    spin: 3.2,
+    axis: UP,
+  },
+  {
+    turn: 1.1,
+    axis: UP,
+    angle: (u, e) => TAU * (3.2 * e - (0.6 / 1.1) * e * e),
+    tilt: (u, e) =>
+      quatAxisAngle([Math.cos(9 * e), 0, Math.sin(9 * e)], 0.09 * Math.sin(Math.PI * u)),
+  },
+  { fly: { h: 0.001 }, to: [0, 0, 0], spin: 2.2, axis: UP },
+  ...bounces(BB_G, {
+    h: BB_FINGER_Y * 0.61,
+    e: 0.78,
+    n: 2,
+    squash: 0.12,
+    spin: 2,
+    axis: UP,
+    keep: 0.8,
+    cue: (i, k) => BOUNCE(i, 0.9 * k),
+  }),
+  spinDown(0.45, 1.2, UP),
+];
+// When the fingertip comes up, holds the ball and drops away.
+const BASKETBALL_FINGER = (() => {
+  const P = plan(BB_G, BASKETBALL);
+  const toss = P.segs.find((s) => s.L.fly && s.L.axis === UP);
+  const spin = P.segs.find((s) => s.L.tilt);
+  return { rise: toss.t0 + 0.1, catch: toss.t0 + toss.T, drop: spin.t0 + spin.T };
+})();
+
+// Tennis: slammed onto the floor, it squashes hard and shoots up high with
+// topspin; a tennis ball keeps about 0.75 of its speed at each bounce.
+const TN_G = grav(0.033);
+const POCK = (f, k) => ({ voice: "pock", f, vol: 0.9 * k });
+const TENNIS = [
+  { hit: 0.07, squash: 0.3 },
+  { fly: { h: 0.72 }, spin: -2.4, axis: TOWARD },
+  ...bounces(TN_G, {
+    h: 0.72 * 0.56,
+    e: 0.75,
+    n: 4,
+    squash: 0.18,
+    w: 0.05,
+    spin: -2,
+    axis: TOWARD,
+    keep: 0.75,
+    cue: (i, k) => POCK(820 - 20 * i, k),
+  }),
+  spinDown(0.35, -0.5, TOWARD),
+];
+const TENNIS_HITS = plan(TN_G, TENNIS).segs.filter((s) => s.L.hit !== undefined);
+
+// Baseball: a curveball pitched away, spinning hard, that breaks down and
+// to the side late; the crack of the bat sends it back in a looping arc to
+// land at its spot, where it takes a dead little bounce (0.5 of its speed).
+const CURVE_AXIS = unit(add3(scale3(ACROSS, -0.87), scale3(UP, 0.5)));
+const BASEBALL = [
+  // The wind-up: back towards the camera and up, in the hand.
+  { path: 0.24, pos: (u) => lerp3([0, 0, 0], at3(0.08, 0.28, 0.4), easeIO(u)) },
+  {
+    path: 0.52,
+    pos: (u) => add3(lerp3(at3(0.08, 0.28, 0.4), at3(0.12, 0.42, -2.6), u), at3(-0.42 * u * u, -0.2 * u * u)), // prettier-ignore
+    spin: 5,
+    axis: CURVE_AXIS,
+  },
+  { fly: { h: 0.45 }, to: [0, 0, 0], g: 5.5, spin: -3, axis: ACROSS },
+  ...bounces(grav(0.037), {
+    h: 0.08,
+    e: 0.5,
+    n: 2,
+    squash: 0.05,
+    w: 0.03,
+    spin: -1.5,
+    axis: ACROSS,
+    keep: 0.6,
+    cue: (i, k) => ({ voice: "thud", f: 150, bright: 0.5, decay: 0.6, vol: 0.8 * k }),
+  }),
+  spinDown(0.3, -0.5, ACROSS),
+];
+
+// Softball: an underhand pitch: a swing back and through, then a high,
+// slow arc away with a little backspin; it lands with a soft thud, barely
+// bounces (softballs keep under half their speed) and stops; a softer toss
+// brings it back.
+const SB_AWAY = at3(-0.55, 0, -1.9);
+const SB_RELEASE = at3(0, 0.12, -0.25);
+const SB_BACK = unit(scale3(rollAxis(sub(SB_AWAY, SB_RELEASE)), -1));
+const THUD_SOFT = (k) => ({ voice: "thud", f: 130, bright: 0.25, decay: 0.8, vol: k });
+const SOFTBALL = [
+  { path: 0.3, pos: (u) => lerp3([0, 0, 0], at3(0, 0.34, 0.45), easeOut(u)) },
+  {
+    path: 0.22,
+    pos: (u) => {
+      const p = lerp3(at3(0, 0.34, 0.45), SB_RELEASE, u);
+      p[1] -= 0.28 * Math.sin(Math.PI * u) * (1 - u);
+      return p;
+    },
+  },
+  { fly: { h: 0.52 }, to: SB_AWAY, g: 6, spin: 1.1, axis: SB_BACK },
+  { hit: 0.06, squash: 0.08, spin: 0.8, axis: SB_BACK },
+  { fly: { h: 0.04 }, to: lerp3(SB_AWAY, [0, 0, 0], -0.04), spin: 0.5, axis: SB_BACK },
+  { hit: 0.04, squash: 0.03, spin: 0.2, axis: SB_BACK },
+  { wait: 0.3 },
+  { fly: { h: 0.42 }, to: [0, 0, 0], g: 7, spin: -1, axis: SB_BACK },
+  { hit: 0.06, squash: 0.08, spin: -0.6, axis: SB_BACK, cue: THUD_SOFT(0.9) },
+  { fly: { h: 0.035 }, to: [0, 0, 0], spin: -0.4, axis: SB_BACK },
+  { hit: 0.04, squash: 0.03 },
+  spinDown(0.25, -0.3, SB_BACK),
+];
+
+// Beach ball: punched up, the air slows it at once (a light ball with a lot
+// of drag); it floats down at its slow falling speed, drifting and turning
+// lazily, lands soft with a wobble and bobs to a stop.
+const BEACH = (() => {
+  const g = 2.5;
+  const vt = 0.9;
+  const H = 0.6;
+  const phi = Math.atan(Math.sqrt(Math.exp((2 * g * H) / (vt * vt)) - 1));
+  const up = (vt * phi) / g;
+  const down = (vt / g) * Math.acosh(Math.exp((H * g) / (vt * vt)));
+  const T = up + down;
+  const y = (e) =>
+    e < up
+      ? ((vt * vt) / g) * Math.log(Math.cos(phi - (g * e) / vt) / Math.cos(phi))
+      : H - ((vt * vt) / g) * Math.log(Math.cosh((g * (e - up)) / vt));
+  const drift = (u) => at3(0.34 * Math.sin(Math.PI * u), 0, -0.12 * Math.sin(TAU * u));
+  const pos = (u, e) => {
+    const p = drift(u);
+    p[1] = Math.max(0, y(e ?? u * T));
+    return p;
+  };
+  return [
+    { path: T, pos, spin: 0.3, axis: TOWARD },
+    { hit: 0.16, squash: 0.22, ring: 3.2, damp: 4.5, spin: 0.2, axis: TOWARD },
+    { fly: { h: 0.1 }, g: 3, spin: 0.2, axis: TOWARD },
+    { hit: 0.12, squash: 0.1, ring: 3.2, damp: 5, spin: 0.1, axis: TOWARD, cue: BEACH_BOING(0.5) },
+    { fly: { h: 0.03 }, g: 3, spin: 0.1, axis: TOWARD },
+    { hit: 0.08, squash: 0.04, ring: 3.2, damp: 6 },
+    spinDown(0.35, 0.08, TOWARD),
+  ];
+})();
+function BEACH_BOING(k) {
+  return { voice: "boing", f: 240, to: 1.4, rate: 9, decay: 0.7, vol: k };
+}
+
+// Golf: a chip: it pops up with heavy backspin, lands, checks with a tiny
+// hop, and the backspin grips and pulls it back to its spot.
+const GOLF = [
+  { fly: { h: 0.4 }, to: at3(0.5), g: 28, spin: 3.5, axis: TOWARD },
+  { hit: 0.03, squash: 0.05, spin: 3, axis: TOWARD, cue: { voice: "clack", f: 2200, decay: 0.6, vol: 0.5 } }, // prettier-ignore
+  { fly: { h: 0.07 }, to: at3(0.62), g: 28, spin: 3, axis: TOWARD },
+  { hit: 0.025, squash: 0.02, spin: 2.6, axis: TOWARD, cue: { voice: "clack", f: 2400, decay: 0.4, vol: 0.3 } }, // prettier-ignore
+  { turn: 0.14, spin: 2.2, axis: TOWARD },
+  { roll: 1.0, to: [0, 0, 0], ease: "inout" },
+];
+
+// Volleyball: a soft set straight up with no spin (a good set does not
+// spin), then a spike drives it down hard with topspin; it slams into the
+// floor, kicks up high and bounces out (0.7 of its speed each time).
+const VB_G = grav(0.105);
+const VB_TOP = at3(0.28, 0.4);
+const VOLLEYBALL = [
+  { fly: { h: 0.5 }, to: VB_TOP, g: 4.5 },
+  {
+    path: 0.12,
+    pos: (u) => lerp3(VB_TOP, at3(0.1, 0), u * u),
+    spin: 5,
+    axis: TOWARD,
+  },
+  { hit: 0.05, squash: 0.22, spin: 4, axis: TOWARD, cue: { voice: "thud", f: 110, bright: 0.6, vol: 0.9 } }, // prettier-ignore
+  { fly: { h: 0.48 }, to: at3(-0.05), spin: 3.2, axis: TOWARD },
+  ...bounces(VB_G, {
+    h: 0.48 * 0.49,
+    e: 0.7,
+    n: 2,
+    squash: 0.12,
+    spin: 2,
+    axis: TOWARD,
+    keep: 0.6,
+    cue: (i, k) => ({ voice: "thud", f: 120, bright: 0.5, vol: 0.7 * k }),
+  }),
+  spinDown(0.3, 0.5, TOWARD),
+];
+
+// Ping-pong: flicked up, it bounces on and on (it keeps nearly 0.9 of its
+// speed), each bounce lower and quicker, till it buzzes to a stop.
+const PP_G = grav(0.02);
+const PINGPONG = [
+  { fly: { h: 0.55 } },
+  ...bounces(PP_G, {
+    h: 0.55 * 0.77,
+    e: 0.88,
+    n: 14,
+    squash: 0.04,
+    w: 0.012,
+    cue: (i, k) => ({ voice: "pock", f: 1900 + 12 * i, bright: 0.7, decay: 0.5, vol: 0.35 + 0.6 * k }), // prettier-ignore
+  }),
+];
+
+// Lacrosse: hard rubber, the liveliest of the lot (0.83 of its speed kept):
+// slammed down, it rockets up and bounces hard and fast.
+const LX_G = grav(0.032);
+const LACROSSE = [
+  { hit: 0.025, squash: 0.08 },
+  { fly: { h: 0.72 }, spin: 1.5, axis: TOWARD },
+  ...bounces(LX_G, {
+    h: 0.72 * 0.69,
+    e: 0.83,
+    n: 6,
+    squash: 0.06,
+    w: 0.02,
+    spin: 1.3,
+    axis: TOWARD,
+    keep: 0.8,
+    cue: (i, k) => ({ voice: "pock", f: 620, bright: 0.8, vol: 0.3 + 0.7 * k }),
+  }),
+  spinDown(0.25, 0.4, TOWARD),
+];
+
+// Dodgeball: lifted and slammed down, the soft rubber squashes flat and
+// wobbles, and it bounces up lively (0.65 of its speed), squashing again.
+const DB_G = grav(0.1);
+const BWONG = (k) => ({ voice: "boing", f: 150, to: 0.7, rate: 20, decay: 0.6, vol: k });
+const DODGEBALL = [
+  { path: 0.3, pos: (u) => [0, 0.42 * easeOut(u), 0], spin: 0.3, axis: TOWARD },
+  { path: 0.13, pos: (u) => [0, 0.42 * (1 - u * u), 0], spin: 0.6, axis: TOWARD },
+  { hit: 0.11, squash: 0.36, ring: 4.5, damp: 4.5, spin: 0.5, axis: TOWARD },
+  { fly: { h: 0.55 }, spin: 0.8, axis: TOWARD },
+  ...bounces(DB_G, {
+    h: 0.55 * 0.42,
+    e: 0.65,
+    n: 2,
+    squash: 0.22,
+    w: 0.09,
+    ring: 4.5,
+    damp: 5,
+    spin: 0.6,
+    axis: TOWARD,
+    keep: 0.6,
+    cue: (i, k) => BWONG(0.8 * k),
+  }),
+  spinDown(0.3, 0.2, TOWARD),
+];
+
+// The pool ball's baked light as out = a * base + b: a key light with a
+// sharp window highlight (lit()), a soft reflection of the room along the
+// top, a broad soft highlight beside the sharp one and a thin rim of
+// reflected light at the silhouette (seen from home).
+const POOL_ROOM = rgb("#9aa6b4");
+const POOL_RIM = rgb("#8d97a3");
+function poolLight(n) {
+  const F = 0.7 + 0.3 * (0.5 + 0.5 * dot(n, LIGHT)) + 0.03;
+  const h = Math.max(0, dot(n, HALF));
+  const steps = [
+    [[1, 1, 1], 0.95 * h ** 90],
+    [POOL_ROOM, 0.16 * smoothstep(0.1, 0.8, n[1]) * (1 - 0.6 * Math.abs(n[2]))],
+    [[1, 1, 1], 0.18 * h ** 8],
+    [POOL_RIM, 0.22 * (1 - Math.max(0, dot(n, VIEW))) ** 3],
+  ];
+  let a = F;
+  let b = [0, 0, 0];
+  for (const [col, t] of steps) {
+    a *= 1 - t;
+    b = b.map((v, i) => v * (1 - t) + col[i] * t);
+  }
+  return { a, b };
+}
+
+// Pickleball: popped up, the light holed ball slows fast in the air (a lot
+// of drag for its weight) and knuckles, wobbling without much spin; it lands
+// with a hollow click and a small, dead plastic bounce.
+const PICKLE = (() => {
+  const g = 10;
+  const vt = 1.6;
+  const H = 0.6;
+  const phi = Math.atan(Math.sqrt(Math.exp((2 * g * H) / (vt * vt)) - 1));
+  const up = (vt * phi) / g;
+  const down = (vt / g) * Math.acosh(Math.exp((H * g) / (vt * vt)));
+  const T = up + down;
+  const y = (e) =>
+    e < up
+      ? ((vt * vt) / g) * Math.log(Math.cos(phi - (g * e) / vt) / Math.cos(phi))
+      : H - ((vt * vt) / g) * Math.log(Math.cosh((g * (e - up)) / vt));
+  const knuckle = (u, e) =>
+    quatAxisAngle([Math.cos(5 * e), 0.3, Math.sin(5 * e)], 0.35 * Math.sin(Math.PI * u));
+  return [
+    { path: T, pos: (u, e) => [0, Math.max(0, y(e ?? u * T)), 0], tilt: knuckle },
+    ...bounces(grav(0.037), {
+      h: 0.6 * 0.3,
+      e: 0.55,
+      n: 2,
+      squash: 0.07,
+      w: 0.035,
+      cue: (i, k) => ({ voice: "pock", f: 1250, bright: 0.2, decay: 0.8, vol: k }),
+    }),
+  ];
+})();
+
+// Pool: a draw shot. The cue strikes low: it slides forward spinning
+// backwards, friction stops it, and the backspin pulls it back till it rolls
+// cleanly home. (The backspin is k times its speed, chosen so it turns
+// exactly once backwards in all.)
+const POOL_SHOT = (() => {
+  const D = 0.55;
+  const t0 = 0.8;
+  const a = (2 * D) / (t0 * t0);
+  const v0 = a * t0;
+  // Slides until its backspin has turned into rolling back (a solid ball:
+  // friction slows it by a and its spin by 2.5 a).
+  const shot = (k) => {
+    const ts = ((1 + k) * v0) / (3.5 * a);
+    const xs = v0 * ts - 0.5 * a * ts * ts;
+    return { ts, xs, turn: -k * v0 * ts + 1.25 * a * ts * ts - xs };
+  };
+  let lo = 2.6;
+  let hi = 40;
+  for (let i = 0; i < 60; i++) {
+    const m = (lo + hi) / 2;
+    if (shot(m).turn > -TAU) lo = m;
+    else hi = m;
+  }
+  const k = lo;
+  const { ts, xs } = shot(k);
+  const vs = v0 - a * ts;
+  const ar = (vs * vs) / (2 * xs);
+  const tr = Math.abs(vs) / ar;
+  const TOP = rollAxis(ACROSS);
+  return [
+    {
+      path: ts,
+      pos: (u, e) => at3(v0 * (e ?? u * ts) - 0.5 * a * (e ?? u * ts) ** 2),
+      axis: TOP,
+      angle: (u, e) => -k * v0 * e + 1.25 * a * e * e,
+      fixed: true,
+    },
+    {
+      path: tr,
+      pos: (u, e) => at3(xs + vs * (e ?? u * tr) + 0.5 * ar * (e ?? u * tr) ** 2),
+      axis: TOP,
+      angle: (u, e) => vs * e + 0.5 * ar * e * e,
+      fixed: true,
+    },
+  ];
+})();
+
+// Cricket: flicked up seam-up, as a bowler does: it turns so the seam
+// stands upright and spins backwards about the seam's own axis (the seam
+// stays still while the stitches run round), comes down level, and skids on
+// low with its backspin till the spin grips and rolls it home.
+const NACROSS = scale3(ACROSS, -1);
+const KNOCK = (vol) => ({ voice: "wood", f: 900, decay: 0.8, vol });
+const CRICKET = [
+  {
+    fly: { h: 0.5 },
+    to: at3(0, 0, 0.1),
+    g: 16,
+    rot: (u) => {
+      const s1 = easeIO(band01(u, 0, 0.2));
+      const s2 = easeIO(band01(u, 0.8, 1));
+      const spin = quatAxisAngle(ACROSS, -TAU * 2 * band01(u, 0.2, 0.8));
+      return quatMul(quatAxisAngle(TOWARD, (-Math.PI / 2) * s2), quatMul(spin, quatAxisAngle(TOWARD, (Math.PI / 2) * s1))); // prettier-ignore
+    },
+  },
+  { hit: 0.03, squash: 0.04, cue: [KNOCK(0.8), { voice: "scrape", f: 1400, rate: 30, decay: 0.6, vol: 0.3 }] }, // prettier-ignore
+  { path: 0.4, pos: (u) => lerp3(at3(0, 0, 0.1), at3(0, 0, 0.45), easeOut(u)), spin: 2.2, axis: NACROSS }, // prettier-ignore
+  { roll: 0.85, to: [0, 0, 0], ease: "inout" },
+];
+
+// Bowling: a heavy roll with a hook. It drops onto the lane with a thud,
+// rolls away straight, then hooks across as its spin bites; the pins crash
+// far off, and it rolls back home.
+const BW_FAR = at3(0.3 - 0.95, 0, -3.65);
+const BOWLING = [
+  { fly: { h: 0.1 }, to: at3(0, 0, -0.35) },
+  { hit: 0.07, squash: 0.035, cue: { voice: "thud", f: 60, bright: 0.2, decay: 1.2, vol: 0.9 } },
+  {
+    rollPath: 1.7,
+    pos: (u) => {
+      const s = 1 - (1 - u) ** 1.3;
+      return at3(0.3 * s - 0.95 * s * s * s, 0, -0.35 - 3.3 * s);
+    },
+  },
+  { wait: 0.3 },
+  {
+    rollPath: 1.5,
+    pos: (u) => lerp3(BW_FAR, [0, 0, 0], easeOut(u)),
+    absorb: true,
+    cue: { voice: "rumble", f: 60, rate: 10, decay: 0.8, vol: 0.5 },
+  },
+];
+
+// Squash: a cold squash ball is dead: dropped, it hardly bounces. Hit over
+// and over (by an unseen racket), it warms, glows faintly and bounces higher
+// and faster; let go, it bounces out and cools.
+const SQ_G = 45;
+const THOCK = (i, vol = 1) => ({ voice: "pock", f: 380 + 25 * i, bright: 0.1, decay: 1.2, vol });
+const SQUASH = [
+  { fly: { h: 0.22 } },
+  { hit: 0.08, squash: 0.3 },
+  { fly: { h: 0.012 } },
+  { hit: 0.03, squash: 0.05 },
+  dribble(SQ_G, 0.14),
+  { hit: 0.06, squash: 0.27, cue: THOCK(1) },
+  dribble(SQ_G, 0.22),
+  { hit: 0.06, squash: 0.26, cue: THOCK(2) },
+  dribble(SQ_G, 0.32),
+  { hit: 0.06, squash: 0.25, cue: THOCK(3) },
+  dribble(SQ_G, 0.44),
+  { hit: 0.06, squash: 0.24, cue: THOCK(4), warm: true },
+  { fly: { h: 0.52 } },
+  { hit: 0.06, squash: 0.2, cue: THOCK(5, 0.8) },
+  { fly: { h: 0.13 } },
+  { hit: 0.05, squash: 0.1, cue: THOCK(5, 0.5) },
+  { fly: { h: 0.035 } },
+  { hit: 0.04, squash: 0.04 },
+  { wait: 0.6 },
+];
+const SQUASH_WARM = (() => {
+  const P = plan(SQ_G, SQUASH);
+  const first = P.segs.find((s) => s.L.path !== undefined);
+  const hot = P.segs.find((s) => s.L.warm);
+  return { start: first.t0, hot: hot.t0 };
+})();
+
+// Medicine ball: heavy: heaved up only a little, slowly, it drops with a
+// thud and a big, slow squash, no bounce at all, and a puff of dust.
+const MB_G = grav(0.17);
+const MEDICINE = [
+  {
+    path: 0.5,
+    pos: (u) => [0, 0.22 * easeIO(u), 0],
+    tilt: (u) => quatAxisAngle(ACROSS, 0.06 * Math.sin(Math.PI * u)),
+  },
+  { path: 0.06, pos: () => [0, 0.22, 0] },
+  { fly: { h: 0.001 }, to: [0, 0, 0] },
+  {
+    hit: 0.24,
+    squash: 0.22,
+    ring: 2.3,
+    damp: 6,
+    dust: true,
+  },
+  { wait: 0.6 },
+];
+const MB_DUST = plan(MB_G, MEDICINE).segs.find((s) => s.L.dust).t0;
+
+// Bouncy ball: a superball keeps nearly all its speed, and its spin flips at
+// every bounce, so it ricochets all over, then comes home and settles.
+const BY_G = 55;
+const BOUNCY = (() => {
+  const pts = [
+    at3(0.55, 0, 0.3),
+    at3(-0.5, 0, -0.35),
+    at3(0.4, 0, -0.6),
+    at3(-0.45, 0, 0.35),
+    at3(0.28, 0, 0.42),
+    at3(-0.15, 0, -0.15),
+    [0, 0, 0],
+  ];
+  const hs = [0.62, 0.58, 0.54, 0.5, 0.45, 0.4, 0.34];
+  const boing = (i, k = 1) => ({ voice: "boing", f: 260 + 30 * i, to: 2.6, rate: 16, decay: 0.5, vol: k }); // prettier-ignore
+  const legs = [{ hit: 0.02, squash: 0.1 }];
+  let from = [0, 0, 0];
+  pts.forEach((p, i) => {
+    const axis = rollAxis(sub(p, from));
+    legs.push({ fly: { h: hs[i] }, to: p, spin: (i % 2 ? -1 : 1) * 3, axis });
+    legs.push({ hit: 0.02, squash: 0.08, cue: boing(i + 1, 1 - 0.07 * i) });
+    from = p;
+  });
+  legs.push(...bounces(BY_G, { h: 0.2, e: 0.75, n: 3, squash: 0.06, w: 0.02, cue: (i, k) => boing(9 + i, 0.4 * k) })); // prettier-ignore
+  // (the first landing of those is the one already there)
+  legs.splice(-7, 1);
+  return legs;
+})();
+
+// Water polo: tossed up, it plunges into the water with a splash, pops back
+// up and bobs on the water line, each bob sending out a ripple.
+const WP_G = 12;
+const WATER_Y = -0.45;
+const WATERPOLO = (() => {
+  const w = TAU / 0.6;
+  const vin = WP_G * Math.sqrt(0.9 / WP_G);
+  const A = vin / w;
+  const T = 2.6;
+  const env = (e) => Math.exp(-2 * e) * (1 - smoothstep(2.1, T, e));
+  return [
+    { fly: { h: 0.45 } },
+    {
+      path: T,
+      pos: (u, e) => [0, -A * env(e ?? u * T) * Math.sin(w * (e ?? u * T)), 0],
+      tilt: (u, e) => quatAxisAngle(ACROSS, 0.16 * env(e) * Math.sin(w * e + 0.7)),
+    },
+  ];
+})();
+const WP_PLUNGE = plan(WP_G, WATERPOLO).segs[1].t0;
+const WP_RINGS = [0, 0.3, 0.9];
+
+// Marble: it rolls round a little circle as wide as itself, turning about
+// the way it rolls and with it (so after one lap it is back exactly as it
+// was), the swirl inside turning as it goes.
+const MARBLE = (() => {
+  const a0 = rollAxis(ACROSS);
+  const turn = (u) => TAU * easeIO(u);
+  return [
+    {
+      path: 2.4,
+      pos: (u) => {
+        const f = turn(u);
+        return at3(Math.sin(f), 0, Math.cos(f) - 1);
+      },
+      rot: (u) => quatMul(quatAxisAngle(UP, turn(u)), quatAxisAngle(a0, turn(u))),
+    },
+  ];
+})();
+
 export const RECIPES = {
   basketball: {
     options: [{ key: "color", label: "Colour", type: "color", default: "#d9632b" }],
+    // Dribble: four fast, low bounces, each pushed back down by an unseen
+    // hand; then a toss onto a fingertip that comes up from below, where it
+    // spins with a slight wobble, and it drops off, bouncing lower each time
+    // (about 0.78 of its speed kept), still spinning down.
+    ...throwBall("dribble", "Dribble and spin", grav(0.12), BASKETBALL, {
+      extra(e, pose, c, out) {
+        // The fingertip rises under the ball, holds it and drops away.
+        const f = BASKETBALL_FINGER;
+        const up = easeOut(band01(e, f.rise, f.catch));
+        const down = easeIO(band01(e, f.drop, f.drop + 0.22));
+        const shown = e > f.rise && e < f.drop + 0.22;
+        const y = LIMB[1] - FINGER_TOP + mix1(-1.2, pose.p[1], up) - 1.4 * down;
+        out.parts.finger = { offset: [0, shown ? y : 0, 0], visible: shown ? 1 : 0 };
+      },
+    }),
     build(k, o) {
+      // The fingertip, hidden until the spin; it touches the ball's lower
+      // edge as seen from the front, so it never crosses the spinning ball.
+      // It is built inside the ball (the toy is framed by all its splats)
+      // and moved down under the ball when it shows.
+      const finger = k.part("finger");
+      const R = 0.085;
+      const top = FINGER_TOP - R;
+      // Skin, with a nail and two knuckle creases on the side facing home.
+      const skin = (c) => {
+        const down = top - c.p[1];
+        const face = (c.n[0] * VIEW[0] + c.n[2] * VIEW[2]) / Math.hypot(VIEW[0], VIEW[2]);
+        let col = "#e3b08c";
+        if (face > 0.35 && down > -0.03 && down < 0.2) col = "#f1cdbf";
+        else if (face > 0.2 && [0.42, 0.78].some((y) => Math.abs(down - y) < 0.012))
+          col = "#b98264";
+        return keep(lit(col, c.n, { sheen: col === "#f1cdbf" ? 0.35 : 0.1, tight: 10, soft: 0.3 }));
+      };
+      k.add(k.cylinder(R, 1.72, { caps: false }), {
+        pos: [LIMB[0], top - 0.86, LIMB[2]],
+        part: finger,
+        flat: 0.3,
+        pattern: false,
+        color: skin,
+      });
+      k.add(k.sphere(R), {
+        pos: [LIMB[0], top, LIMB[2]],
+        part: finger,
+        flat: 0.3,
+        pattern: false,
+        color: (c) => (c.lp[1] < 0 ? null : skin(c)),
+      });
       const w = 0.026;
       body(k, (c) => {
         const [x, y] = c.ln;
@@ -394,6 +1399,26 @@ export const RECIPES = {
       { key: "panels", label: "Panels", type: "color", default: "#151515" },
       { key: "base", label: "Base", type: "color", default: "#f4f4f2" },
     ],
+    // Keepy-uppy: three small kicks from an unseen foot, each with a little
+    // backspin, the last one higher; then it drops, bounces lower and lower
+    // (a soccer ball keeps about 0.78 of its speed) and settles.
+    ...throwBall("kick", "Keepy-uppy", grav(0.11), [
+      { fly: { h: 0.5 }, to: at3(0.12, 0.2), spin: -1.1, axis: TOWARD },
+      { fly: { h: 0.42 }, to: at3(-0.1, 0.2), spin: 1.4, axis: TOWARD, cue: KICK },
+      { fly: { h: 0.55 }, to: at3(0.06, 0), spin: -1.7, axis: TOWARD, cue: KICK },
+      ...bounces(grav(0.11), {
+        h: 0.42,
+        e: 0.78,
+        n: 4,
+        squash: 0.12,
+        spin: -1.2,
+        axis: TOWARD,
+        keep: 0.55,
+        to: (i) => at3(0.06 * (1 - (i + 1) / 4)),
+        cue: (i, k) => ({ voice: "thud", f: 100 + 10 * i, bright: 0.4, vol: 0.9 * k }),
+      }),
+      spinDown(0.3, -0.15, TOWARD),
+    ]),
     build(k, o) {
       const face = soccerFaces();
       body(k, (c) => {
@@ -465,6 +1490,18 @@ export const RECIPES = {
 
   "tennis-ball": {
     options: [{ key: "color", label: "Felt", type: "color", default: "#cfe23b" }],
+    // Slammed onto the floor: it squashes hard and shoots up high with
+    // topspin, the felt's fuzz fluffing out at each hit, then bounces lower
+    // and lower (0.75 of its speed each time).
+    ...throwBall("slam", "Bounce it hard", TN_G, TENNIS, {
+      extra(e, pose, c, out) {
+        // The fuzz stands up at each hit and lies back down.
+        let f = 0;
+        for (const s of TENNIS_HITS)
+          if (e >= s.t0) f = Math.max(f, (s.L.squash / 0.3) * Math.exp(-(e - s.t0) / 0.22));
+        out.morph = [Math.min(1, f), 0, 0, 0];
+      },
+    }),
     build(k, o) {
       const seam = seamCurve(0.72);
       // Felt: soft, round splats with gentle mottling and no shine.
@@ -483,8 +1520,11 @@ export const RECIPES = {
         { flat: 0.55, size: 1.15, jitter: 0.01, core: "#4a4a3a" },
       );
       // A fuzz of fine hairs standing off the felt, which also softens the
-      // silhouette. None grow on the seam.
-      k.cloud({ share: 0.2, size: 0.55, opacity: 0.5 }, (rand) => {
+      // silhouette. None grow on the seam. They spin with the ball, and a
+      // hit fluffs them out (channel 0; the fluffed hairs stay out of the
+      // fit, so the ball keeps its size at rest).
+      k.fitMorphs = false;
+      k.cloud({ share: 0.2, size: 0.55, opacity: 0.5, part: k.part("ball") }, (rand) => {
         const z = rand() * 2 - 1;
         const a = rand() * TAU;
         const r = Math.sqrt(1 - z * z);
@@ -495,8 +1535,11 @@ export const RECIPES = {
         const t = unit(cross(d, [rand() - 0.5, rand() - 0.5, rand() - 0.5]));
         const dir = unit([t[0] + d[0] * 0.6, t[1] + d[1] * 0.6, t[2] + d[2] * 0.6]);
         const tone = 0.9 + rand() * 0.2;
+        const out = h + 0.035 + 0.04 * rand();
         return {
           p: [d[0] * h, d[1] * h, d[2] * h],
+          to: [d[0] * out, d[1] * out, d[2] * out],
+          channel: 0,
           dir,
           stretch: 2.6,
           color: lit(shade(o.color, tone * (0.96 + (h - 1) * 2)), d, { soft: 0.26 }),
@@ -506,12 +1549,28 @@ export const RECIPES = {
   },
 
   baseball: {
+    // Twice the splats (as far as the device allows): the unlit copy and the
+    // light for its spin (glossSpin) take a share, and the ball at rest keeps
+    // its own.
+    density: 2,
+    // A curveball: pitched away, spinning hard, it breaks down and to the
+    // side late; the crack of the bat sends it back in a looping arc to its
+    // spot, where it takes a dead little bounce.
+    ...throwBall("pitch", "Pitch a curveball", grav(0.037), BASEBALL, { gloss: true }),
     build(k) {
       stitchedBall(k, "#f3eee2", "#c8102e");
     },
   },
 
   softball: {
+    // Twice the splats (as far as the device allows): the unlit copy and the
+    // light for its spin (glossSpin) take a share, and the ball at rest keeps
+    // its own.
+    density: 2,
+    // An underhand pitch: a swing back and through, a high, slow arc away
+    // with a little backspin, a soft thud and hardly a bounce; then a softer
+    // toss brings it back.
+    ...throwBall("pitch", "Pitch underhand", grav(0.048), SOFTBALL, { gloss: true }),
     build(k) {
       stitchedBall(k, "#e6e44a", "#c8102e", { n: 88 });
     },
@@ -523,6 +1582,9 @@ export const RECIPES = {
       { key: "c2", label: "Colour 2", type: "color", default: "#f4d35e" },
       { key: "c3", label: "Colour 3", type: "color", default: "#1d70b8" },
     ],
+    // Punched up, the air slows it at once; it floats down slowly, drifting
+    // and turning lazily, lands soft with a wobble and bobs to a stop.
+    ...throwBall("toss", "Toss it up", 2.5, BEACH),
     build(k, o) {
       const gores = [o.c1, "#fafafa", o.c2, "#2a9d8f", o.c3, "#f77f00"];
       body(
@@ -542,6 +1604,9 @@ export const RECIPES = {
   },
 
   "golf-ball": {
+    // A chip: it pops up with heavy backspin, lands, checks with a tiny hop,
+    // and the backspin grips and pulls it back to its spot.
+    ...throwBall("chip", "Chip it", 28, GOLF),
     build(k) {
       const dimples = fibonacciSphere(336);
       const R = 0.088;
@@ -566,18 +1631,34 @@ export const RECIPES = {
         const t = Math.acos(clamp(v, -1, 1)) / R;
         return 1 - t * t;
       };
-      k.add(
-        k.radial((d) => 1 - 0.035 * depth(d), { grid: 160 }),
-        {
-          flat: 0.2,
-          interior: 0.1,
-          core: "#c9c9c9",
-          color: (c) => {
-            const dd = depth(unit(c.lp));
-            return shade("#f6f6f3", 1 - 0.2 * dd + 0.04 * c.n[1]);
-          },
-        },
-      );
+      const ball = k.part("ball");
+      const core = k.part("core");
+      const color = (c) => {
+        const dd = depth(unit(c.lp));
+        return shade("#f6f6f3", 1 - 0.2 * dd + 0.04 * c.n[1]);
+      };
+      const r = (d) => 1 - 0.035 * depth(d);
+      k.add(k.radial(r, { grid: 160 }), {
+        flat: 0.2,
+        even: true,
+        interior: 0.1,
+        core: "#c9c9c9",
+        part: (c) => (c.inside ? core : ball),
+        color,
+      });
+      // Caps over the poles of the sampling (see body()).
+      for (const sy of [1, -1])
+        k.add(
+          k.param(
+            (u, v) => {
+              const th = 0.14 * v;
+              const d = [Math.sin(th) * Math.cos(TAU * u), sy * Math.cos(th), sy * Math.sin(th) * Math.sin(TAU * u)]; // prettier-ignore
+              return scale3(d, r(d));
+            },
+            { grid: 16 },
+          ),
+          { flat: 0.2, even: true, part: ball, color },
+        );
     },
   },
 
@@ -630,6 +1711,9 @@ export const RECIPES = {
       { key: "c1", label: "Colour 1", type: "color", default: "#f7c948" },
       { key: "c2", label: "Colour 2", type: "color", default: "#1f4e9c" },
     ],
+    // A soft set straight up with no spin, then a spike drives it down hard
+    // with topspin; it slams into the floor, kicks up and bounces out.
+    ...throwBall("spike", "Set and spike", VB_G, VOLLEYBALL),
     build(k, o) {
       body(k, (c) => {
         const s = strips(c.ln);
@@ -642,6 +1726,23 @@ export const RECIPES = {
   },
 
   "water-polo-ball": {
+    // Tossed up, it plunges into the water with a splash, pops back up and
+    // bobs on the water line, each bob sending out a ripple.
+    ...throwBall("toss", "Toss it in", WP_G, WATERPOLO, {
+      extra(e, pose, c, out) {
+        const m = [0, 0, 0, 0];
+        const s = e - WP_PLUNGE;
+        const splash = s >= 0 && s < 0.6;
+        out.parts.splash = { visible: splash ? 1 : 0, scale: 1.5 };
+        m[0] = splash ? Math.sin(Math.PI * band01(s, 0, 0.6)) : 0;
+        WP_RINGS.forEach((r, i) => {
+          const on = s >= r && s < r + 1.4;
+          out.parts[`ring${i}`] = { visible: on ? 1 : 0, scale: 1 + 1.9 * easeOut(band01(s, r, r + 1.4)) }; // prettier-ignore
+          m[i + 1] = on ? band01(s, r + 0.15, r + 1.4) : 0;
+        });
+        out.morph = m;
+      },
+    }),
     build(k) {
       body(k, (c) => {
         const s = strips(c.ln);
@@ -649,10 +1750,46 @@ export const RECIPES = {
         const grip = c.noise(c.lp[0] * 90, c.lp[1] * 90, c.lp[2] * 90);
         return shade((s.strip + s.face) % 2 ? "#1c4fa1" : "#f2cf1d", 0.92 + 0.12 * grip);
       });
+      // The splash and the ripples on the water line, hidden at rest. They
+      // are built small, inside the ball (the toy is framed by all its
+      // splats), and spread by their parts.
+      const water = [0, WATER_Y, 0];
+      const splash = k.part("splash", { pivot: water });
+      k.cloud({ share: 0.012, size: 0.9, part: splash, pattern: false }, (rand) => {
+        const a = rand() * TAU;
+        const r = 0.5 + 0.25 * rand();
+        const up = 0.25 + 0.35 * rand() * rand();
+        const out = 1.2 + 0.1 * rand();
+        return {
+          p: [r * Math.cos(a), WATER_Y, r * Math.sin(a)],
+          to: [r * out * Math.cos(a), WATER_Y + up, r * out * Math.sin(a)],
+          channel: 0,
+          color: mix("#d6eefc", "#ffffff", rand()),
+          opacity: 0.85,
+        };
+      });
+      WP_RINGS.forEach((_, i) => {
+        const ring = k.part(`ring${i}`, { pivot: water });
+        k.cloud({ share: 0.015, size: 0.7, part: ring, pattern: false }, (rand) => {
+          const a = rand() * TAU;
+          const r = 0.84 + 0.04 * (rand() - 0.5);
+          return {
+            p: [r * Math.cos(a), WATER_Y, r * Math.sin(a)],
+            color: mix("#cfeaff", "#ffffff", rand()),
+            opacity: 0.45,
+            kind: "fade",
+            params: [0, 1],
+            channel: 1 + i,
+          };
+        });
+      });
     },
   },
 
   "ping-pong-ball": {
+    // Flicked up, it bounces on and on, each bounce lower and quicker, till
+    // it buzzes to a stop.
+    ...throwBall("flick", "Drop it", PP_G, PINGPONG),
     options: [
       {
         key: "color",
@@ -675,9 +1812,19 @@ export const RECIPES = {
   },
 
   "cricket-ball": {
+    // Twice the splats (as far as the device allows): the unlit copy and the
+    // light for its spin (glossSpin) take a share, and the ball at rest keeps
+    // its own.
+    density: 2,
+    // Flicked up seam-up: the seam stands upright and the ball spins
+    // backwards about it, comes down level and skids on with its backspin
+    // till the spin grips and rolls it home.
+    ...throwBall("flick", "Seam-up flick", grav(0.036), CRICKET, { gloss: true }),
     build(k) {
       const leather = "#8f1d1d";
-      body(k, (c) => {
+      // lit: (colour, normal, light) => colour. Unlit (for the spinning
+      // copy), the seam keeps the shading of its ridge.
+      const paint = (c, lit) => {
         const [x, y] = c.ln;
         const a = Math.atan2(c.ln[0], c.ln[2]);
         if (Math.abs(y) < 0.075) {
@@ -691,7 +1838,13 @@ export const RECIPES = {
         if (Math.abs(x) < 0.008) return keep(lit(shade(leather, 0.7), c.n));
         // Polished red leather: deep colour and a bright, tight shine.
         return lit(leather, c.n, { sheen: 0.6, tight: 40, soft: 0.3 });
-      });
+      };
+      body(k, (c) => paint(c, lit));
+      glossSpin(
+        k,
+        (c) => paint(c, (col, n) => shade(col, keyF(n) / keyF(c.n))),
+        litLight({ sheen: 0.6, tight: 40, soft: 0.3 }),
+      );
     },
   },
 
@@ -700,6 +1853,9 @@ export const RECIPES = {
       { key: "c1", label: "Colour 1", type: "color", default: "#3a1f78" },
       { key: "c2", label: "Colour 2", type: "color", default: "#d946ef" },
     ],
+    // A heavy roll with a hook: it drops onto the lane, rolls away straight
+    // and hooks across; the pins crash far off, and it rolls back home.
+    ...throwBall("bowl", "Bowl it", grav(0.109), BOWLING),
     build(k, o) {
       const holes = [
         { d: unit([-0.2, 0.95, 0.22]), r: 0.1 },
@@ -719,6 +1875,7 @@ export const RECIPES = {
         const q = quatFromTo([0, 1, 0], h.d);
         const mid = h.d.map((v) => v * (1 - depth / 2));
         k.add(k.cylinder(Math.sin(h.r), depth, { caps: "bottom" }), {
+          part: k.part("ball"),
           quat: q,
           pos: mid,
           flat: 0.3,
@@ -731,9 +1888,17 @@ export const RECIPES = {
   },
 
   "pool-ball": {
+    // Twice the splats (as far as the device allows): the unlit copy and the
+    // light for its spin (glossSpin) take a share, and the ball at rest keeps
+    // its own.
+    density: 2,
     options: [
       { key: "number", label: "Number", type: "select", default: "n8", choices: numberChoices() },
     ],
+    // A draw shot: struck low, it slides forward spinning backwards, stops,
+    // and the backspin pulls it back till it rolls cleanly home. Its window
+    // highlight and the room's reflection stay put while it turns.
+    ...throwBall("shot", "Draw shot", 10, POOL_SHOT, { gloss: true }),
     build(k, o) {
       const n = o.number === "cue" ? 0 : Number(String(o.number).slice(1)) || 8;
       const col = POOL[n > 8 ? n - 8 : n];
@@ -743,38 +1908,40 @@ export const RECIPES = {
       // highlight and a soft reflection of the room along the top, so even the
       // black 8 reads as a solid shiny ball on a dark page.
       const gloss = (base, c) => {
-        const n0 = c.n;
-        let out = lit(base, n0, { sheen: 0.95, tight: 90, soft: 0.3 });
-        // The room: a pale band above the horizon, darker below.
-        const up = n0[1];
-        out = mix(out, "#9aa6b4", 0.16 * smoothstep(0.1, 0.8, up) * (1 - 0.6 * Math.abs(n0[2])));
-        // A broad soft highlight beside the sharp one.
-        out = mix(out, "#ffffff", 0.18 * Math.max(0, dot(n0, HALF)) ** 8);
-        // A thin rim of reflected light at the silhouette (seen from home).
-        const facing = Math.max(0, dot(n0, VIEW));
-        return mix(out, "#8d97a3", 0.22 * (1 - facing) ** 3);
+        const { a, b } = poolLight(c.n);
+        const x = rgb(base);
+        return [0, 1, 2].map((i) => clamp(x[i] * a + b[i], 0, 1));
+      };
+      // Its colours, before the light: the number circle on the front and
+      // back, the stripe or the solid colour.
+      const paint = (c) => {
+        const [x, y, z] = c.ln;
+        if (n > 0 && Math.abs(z) > 0.93) {
+          const px = z > 0 ? x : -x;
+          const d = numberDist(text, px, y, 0.2);
+          return { c: d < 0.024 ? "#141414" : "#f7f5ee", size: d < 0.024 ? 0.7 : 1, keep: true };
+        }
+        if (n > 0 && Math.abs(z) > 0.9) return { c: n === 8 ? "#f7f5ee" : col, keep: true };
+        if (stripe) return Math.abs(y) < 0.46 ? col : "#f7f5ee";
+        return col;
       };
       body(
         k,
         (c) => {
-          const [x, y, z] = c.ln;
-          if (n > 0 && Math.abs(z) > 0.93) {
-            // The number circle on the front and back.
-            const px = z > 0 ? x : -x;
-            const d = numberDist(text, px, y, 0.2);
-            return keep(gloss(d < 0.024 ? "#141414" : "#f7f5ee", c), d < 0.024 ? 0.7 : 1);
-          }
-          if (n > 0 && Math.abs(z) > 0.9) return keep(gloss(n === 8 ? "#f7f5ee" : col, c));
-          if (stripe) return gloss(Math.abs(y) < 0.46 ? col : "#f7f5ee", c);
-          return gloss(col, c);
+          const p = paint(c);
+          return p.c ? { ...p, c: gloss(p.c, c) } : gloss(p, c);
         },
         { core: n === 8 ? "#111111" : col, interior: 0.2, opacity: 1, flat: 0.25, weight: 1.4 },
       );
+      glossSpin(k, paint, poolLight);
     },
   },
 
   pickleball: {
     options: [{ key: "color", label: "Colour", type: "color", default: "#dce83a" }],
+    // Popped up, the light holed ball slows fast in the air and knuckles,
+    // then lands with a hollow click and a small, dead bounce.
+    ...throwBall("pop", "Pop it up", 10, PICKLE),
     build(k, o) {
       const holes = fibonacciSphere(40);
       const R = 0.12;
@@ -788,18 +1955,37 @@ export const RECIPES = {
         },
       );
       // The hollow inside, seen through the holes.
-      k.add(k.sphere(0.9), { flat: 0.3, weight: 0.5, color: shade(o.color, 0.45), pattern: false });
+      k.add(k.sphere(0.9), {
+        part: k.part("ball"),
+        flat: 0.3,
+        weight: 0.5,
+        color: shade(o.color, 0.45),
+        pattern: false,
+      });
     },
   },
 
   dodgeball: {
     options: [{ key: "color", label: "Colour", type: "color", default: "#d7263d" }],
+    // Lifted and slammed down: the soft rubber squashes flat and wobbles,
+    // and it bounces up lively, squashing again.
+    ...throwBall("slam", "Slam it down", DB_G, DODGEBALL),
     build(k, o) {
       body(k, (c) => pebble(c, o.color, 0.14, 55), { flat: 0.3, core: shade(o.color, 0.5) });
     },
   },
 
   "medicine-ball": {
+    // Heaved up only a little, slowly, it drops with a thud and a big, slow
+    // squash, no bounce at all, and a puff of dust.
+    ...throwBall("heave", "Heave and drop", MB_G, MEDICINE, {
+      extra(e, pose, c, out) {
+        const d = band01(e, MB_DUST, MB_DUST + 0.72);
+        const on = e >= MB_DUST && e < MB_DUST + 0.72;
+        out.parts.dust = { scale: 1 + 3 * easeOut(d), visible: on ? 1 : 0 };
+        out.morph = [0, on ? band01(e, MB_DUST + 0.08, MB_DUST + 0.72) : 0, 0, 0];
+      },
+    }),
     build(k) {
       const w = 0.035;
       body(k, (c) => {
@@ -810,17 +1996,47 @@ export const RECIPES = {
         return grip(c, "#34343a", { f: 45, depth: 0.5, crevice: 0.2 });
       });
       rim(k, k.sphere(1.035));
+      // A puff of dust where it lands: a ring of soft puffs under the ball,
+      // built small (inside the ball) and spread by its part, fading out on
+      // channel 1.
+      const dust = k.part("dust", { pivot: [0, -0.93, 0] });
+      k.cloud({ share: 0.02, size: 2.2, part: dust, pattern: false }, (rand) => {
+        const a = rand() * TAU;
+        const r = 0.24 + 0.12 * rand();
+        return {
+          p: [r * Math.cos(a), -0.95 + 0.08 * rand(), r * Math.sin(a)],
+          color: mix("#9b9284", "#c4bcae", rand()),
+          opacity: 0.14,
+          kind: "fade",
+          params: [0, 1],
+          channel: 1,
+        };
+      });
     },
   },
 
   "lacrosse-ball": {
     options: [{ key: "color", label: "Colour", type: "color", default: "#f4f3ef" }],
+    // Slammed down, the hard rubber ball rockets up and bounces hard and
+    // fast, the liveliest ball on the shelf.
+    ...throwBall("slam", "Slam it down", LX_G, LACROSSE),
     build(k, o) {
       body(k, (c) => pebble(c, o.color, 0.05, 20), { core: shade(o.color, 0.8) });
     },
   },
 
   "squash-ball": {
+    // Cold, it is dead: dropped, it hardly bounces. Hit over and over, it
+    // warms, glows faintly and bounces higher and faster; let go, it bounces
+    // out and cools.
+    ...throwBall("warm", "Warm it up", SQ_G, SQUASH, {
+      extra(e, pose, c, out) {
+        const w = SQUASH_WARM;
+        const heat =
+          e < 0 ? 0 : band01(e, w.start, w.hot) * Math.exp(-Math.max(0, e - w.hot) * 2.2);
+        out.glow = [1, 0.42, 0.12, 0.34 * heat];
+      },
+    }),
     build(k) {
       const dots = [unit([0.35, 0.3, 0.88]), unit([-0.35, 0.3, 0.88])];
       body(
@@ -830,7 +2046,9 @@ export const RECIPES = {
           // Matte black rubber, with a little sheen so the shape reads.
           return grip(c, "#1c1c1e", { f: 50, depth: 0.4, crevice: 0.15, sheen: 0.12, tight: 10 });
         },
-        { core: "#202020" },
+        // It warms with a faint glow (out.glow, a band on channel 3 that is
+        // always on: the glow's strength does the work).
+        { core: "#202020", kind: "band", params: [0, 4], channel: 3 },
       );
       rim(k, k.sphere(1.035));
     },
@@ -842,6 +2060,9 @@ export const RECIPES = {
       { key: "c2", label: "Colour 2", type: "color", default: "#27e1c1" },
       { key: "c3", label: "Colour 3", type: "color", default: "#ffe14d" },
     ],
+    // Thrown down hard, it ricochets all over, its spin flipping at every
+    // bounce, then comes home and settles.
+    ...throwBall("throw", "Throw it down", BY_G, BOUNCY),
     build(k, o) {
       body(k, (c) => swirl(c, [o.c1, o.c2, o.c3], 2.4), { core: o.c2, interior: 0.2 });
     },
@@ -849,9 +2070,24 @@ export const RECIPES = {
 
   marble: {
     options: [{ key: "color", label: "Swirl", type: "color", default: "#1e88e5" }],
+    // It rolls round a little circle, the swirl inside turning as it goes,
+    // and is back exactly as it was after one lap.
+    ...throwBall("roll", "Roll it", grav(0.008), MARBLE, {
+      extra(e, pose, c, out) {
+        // The clear glass stays as it is (it looks the same turned); only
+        // the swirl inside turns, and it keeps its far side.
+        out.parts.ball.cull = false;
+        out.parts.ball.visible = 1;
+        out.parts.glass = { offset: pose.p };
+      },
+    }),
     build(k, o) {
-      // Clear glass that glints, with twisted vanes of colour inside.
+      // Clear glass that glints, with twisted vanes of colour inside. The
+      // vanes turn when it rolls (part "ball"); the glass only moves.
+      const glass = k.part("glass");
+      const ball = k.part("ball");
       k.add(k.sphere(1), {
+        part: glass,
         flat: 0.15,
         opacity: 0.16,
         kind: "glint",
@@ -871,6 +2107,7 @@ export const RECIPES = {
           { grid: 48 },
         );
         k.add(vane, {
+          part: ball,
           weight: 1.6,
           flat: 0.3,
           color: (c) => mix(o.color, v === 1 ? "#ffffff" : shade(o.color, 0.6), 0.25 + 0.25 * c.u),
