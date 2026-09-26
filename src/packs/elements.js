@@ -338,16 +338,18 @@ const wfSurge = (u, v, e) => {
 // the river at a steady run, then down the curtain speeding up, then out
 // over the pool. The front's channel is the time over WF_FRONT.
 const WF_FRONT = 2;
-const wfRiver = (z) => 0.42 * clamp01((z + 0.34) / (WF_LIP + 0.34));
+// When it goes over the lip.
+const WF_OVER = 0.28;
+const wfRiver = (z) => WF_OVER * clamp01((z + 0.34) / (WF_LIP + 0.34));
 const wfDrop = (v) => {
   const h = v * (WF_TOP - 0.06);
-  return 0.42 + (-1.2 + Math.sqrt(1.44 + 7 * h)) / 3.5;
+  return WF_OVER + (-1.2 + Math.sqrt(1.44 + 7 * h)) / 3.5;
 };
 // How far down the curtain the front is at s seconds (0 at the lip, 1 at
 // the foot): wfDrop turned round.
 const wfDown = (s) => {
-  const t = (s - 0.42) * 3.5 + 1.2;
-  return s <= 0.42 ? 0 : Math.min(1, (t * t - 1.44) / 7 / (WF_TOP - 0.06));
+  const t = (s - WF_OVER) * 3.5 + 1.2;
+  return s <= WF_OVER ? 0 : Math.min(1, (t * t - 1.44) / 7 / (WF_TOP - 0.06));
 };
 
 // Ocean wave: the face's profile (x across, y up), from the sea in front up
@@ -2032,14 +2034,14 @@ export const RECIPES = {
         return;
       }
       const calm = 1 - ease(band(s, 3.0, 4.4));
-      const pool = band(s, 0.95, 1.6) * (1 - band(s, 3.2, 4.9));
+      const pool = band(s, 0.82, 1.5) * (1 - band(s, 3.2, 4.9));
       out.morph = [s / WF_FRONT, wfDown(s), pool, 0];
       out.glow = [0.8, 0.9, 0.95, 1.2 * (1 - band(s, 1.9, 2.3))];
-      out.parts.surge = { visible: band(s, 0.4, 0.5) * calm };
-      out.parts.streaks = { visible: ease(band(s, 0.75, 1.15)) * calm };
+      out.parts.surge = { visible: band(s, 0.26, 0.34) * calm };
+      out.parts.streaks = { visible: ease(band(s, 0.62, 1.0)) * calm };
       const gone = band(s, 4.95, 5.15);
-      out.parts.foam = { scale: 1 + 0.85 * easeOut(band(s, 0.95, 2.8)) * (1 - gone) };
-      const billow = easeOut(band(s, 1.0, 4.6));
+      out.parts.foam = { scale: 1 + 0.85 * easeOut(band(s, 0.82, 2.7)) * (1 - gone) };
+      const billow = easeOut(band(s, 0.85, 4.6));
       out.parts.mist = {
         scale: 1 + 2.1 * billow * (1 - gone),
         offset: [0, 0.3 * billow * (1 - gone), 0.04 * billow * (1 - gone)],
@@ -2267,7 +2269,11 @@ export const RECIPES = {
       out.parts.wash = {
         visible: band(s, OW_HIT - 0.04, OW_HIT + 0.04) * (1 - band(s, 1.7, 2.3)),
       };
-      out.parts.spray = { visible: s < 0.05 ? 1 - band(s, 0, 0.05) : band(s, 3.4, 4.4) };
+      // The spray off the lip goes as it is thrown and comes back once the
+      // lip has curled over again, rising off it (the behaviours' amount
+      // grows back from 0, so it starts on the lip).
+      out.parts.spray = { visible: s < 0.05 ? 1 - band(s, 0, 0.05) : ease(band(s, 3.9, 4.5)) };
+      out.amount = s < 0.4 ? 1 - band(s, 0, 0.4) : ease(band(s, 3.9, 5.2));
       out.tokens = OW_SPRAY.map((d) => {
         const u = s - d.at;
         if (u < 0 || u > d.dur) return { base: d.base, visible: 0 };
