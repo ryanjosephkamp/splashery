@@ -12,8 +12,9 @@ effect quality rules in [CLAUDE.md](../CLAUDE.md) apply to every session.
 - **The Operator** is one long-lived session that coordinates and never builds toys. It keeps this
   file, WORKSTREAMS.md, [HANDOFF.md](HANDOFF.md) and CLAUDE.md, writes the prompts and handoffs for
   new lanes (and opens those sessions when the owner asks), does the upkeep on main after each
-  merge, sends the owner a daily digest and runs the daily toy-ideas routine. Governance questions
-  go to it.
+  merge, sends the owner a daily digest and runs the daily toy-ideas routine (both are routines that
+  wake the Operator session each morning: the ideas at 7:43 and the digest at 7:54, Eastern time).
+  Governance questions go to it.
 - **The owner** (Ryan) opens sessions, reviews clips on the Effect review page and merges PRs. Only
   the owner merges.
 
@@ -28,6 +29,7 @@ around the toys; the rules below keep it apart.
 | Effect review             | https://claude.ai/artifact/NCsg9V5SzFY3Mnwuwgq7pi | Lanes add clips and cards (below); the owner marks; the Operator tidies      |
 | Sound Board               | https://claude.ai/artifact/VE9XCTxH3djST6dGb6ZAkj | The Operator, after merges (`node tools/upkeep.mjs`)                         |
 | Toy Plan (owner's marks)  | https://claude.ai/artifact/PNGPx7REMdhxLMHDXARhw8 | The owner marks; the Operator republishes (`node tools/toy-plan.mjs --json`) |
+| Toy Ideas                 | https://claude.ai/artifact/5TukiuV3mCt3G3zk6Arx9S | The Operator adds three ideas each morning; the owner marks (below)          |
 | Splashery Parallel Plan   | https://claude.ai/artifact/KjJrfKxi4phzJmbgSyRbr7 | The Operator (the lane prompts)                                              |
 | Splashery Operator Manual | https://claude.ai/artifact/3WYMJxtZDR7m1ecTCN47ZB | The Operator (the owner's how-to)                                            |
 
@@ -168,6 +170,23 @@ the owner's note gets the old card's id plus `-r2` (then `-r3`), in the old card
 Never republish the page, write to `verdicts`, change another lane's cards or record, or delete
 clips. When the owner has approved all of a lane's clips and its PR has merged, the Operator sets
 the lane's `finished: true`, which folds it away on the page.
+
+## The Toy Ideas page
+
+https://claude.ai/artifact/5TukiuV3mCt3G3zk6Arx9S (source: `tools/pages/toy-ideas.html`). Every
+morning the Operator's routine adds three new toy ideas that fit the ground rules, each with a tap
+effect and a sound. Its collections:
+
+- `ideas/<idea id>`:
+  `{ day, order, name, kind: "kit" | "scan", shelf, tap, sound, why, source, lane, reply, revised }`.
+  The id is a slug of the name. A scan idea's `source` is `{ title, url, licence, author }`, with
+  the licence checked on the live source page (CC0 or CC BY only). Only the Operator writes ideas.
+- `marks/<idea id>`: the owner's marks, `{ mark: "approve" | "change" | "skip" | "", note, at }`.
+  Only the owner writes these. "Change" keeps the idea with the owner's note, and the note wins: the
+  next morning run rewrites the idea to match and sets `reply` and `revised`.
+
+Approved and changed ideas wait on the page until the owner asks for a lane. The Operator then
+writes the lane's brief from them (like any new lane) and sets each idea's `lane` to the lane id.
 
 ## Merging and conflicts
 
