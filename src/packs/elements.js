@@ -143,6 +143,123 @@ const LAVA = [
 ];
 const lavaY = (b, t) => b.lo + (b.hi - b.lo) * (0.5 - 0.5 * Math.cos(t * b.speed + b.phase));
 const LAVA_SECS = 4.6;
+// The lamp's glass: it swells in the middle and tapers into the cap.
+const lavaGlassR = (y) =>
+  0.2 +
+  0.075 * Math.sin(Math.PI * clamp((y + 0.05) / 1.35, 0, 1) * 0.8) -
+  0.115 * smoothstep(0.62, 1.3, y);
+// Colour sets: wax, liquid, and the glow the wax runs through when heated
+// (from its resting glow round to it again). "own" takes the Wax and
+// Liquid colours from the pickers and the classic orange-magenta-gold.
+const LAVA_SETS = {
+  own: { label: "Pick below" },
+  ocean: {
+    label: "Ocean",
+    wax: "#3fd8e8",
+    liquid: "#1d3fa8",
+    glow: [
+      [0.1, 0.3, 0.8],
+      [0, 0.65, 0.8],
+      [0.4, 0.15, 0.8],
+      [0.1, 0.7, 0.7],
+      [0.1, 0.3, 0.8],
+    ],
+  },
+  violet: {
+    label: "Violet",
+    wax: "#ff5fae",
+    liquid: "#6b2fc0",
+    glow: [
+      [0.5, 0.08, 0.8],
+      [0.8, 0.15, 0.55],
+      [0.8, 0.5, 0.8],
+      [0.65, 0.25, 0.8],
+      [0.5, 0.08, 0.8],
+    ],
+  },
+  lime: {
+    label: "Lime",
+    wax: "#62d62a",
+    liquid: "#3f86e8",
+    glow: [
+      [0.3, 0.8, 0.05],
+      [0.8, 0.8, 0.1],
+      [0.05, 0.8, 0.6],
+      [0.4, 0.8, 0.1],
+      [0.3, 0.8, 0.05],
+    ],
+  },
+  sunset: {
+    label: "Sunset",
+    wax: "#ff7a1f",
+    liquid: "#d81b60",
+    glow: [
+      [0.8, 0.35, 0],
+      [0.8, 0.08, 0.3],
+      [0.8, 0.65, 0.08],
+      [0.8, 0.3, 0.08],
+      [0.8, 0.35, 0],
+    ],
+  },
+  midnight: {
+    label: "Midnight",
+    wax: "#f2efe6",
+    liquid: "#1d2c78",
+    glow: [
+      [0.4, 0.55, 0.8],
+      [0.15, 0.8, 0.8],
+      [0.7, 0.7, 0.8],
+      [0.3, 0.55, 0.8],
+      [0.4, 0.55, 0.8],
+    ],
+  },
+};
+// The blobs for a lamp's options: the six classic ones first, then more
+// (each from its own seed, so a blob keeps its path whatever the count),
+// scaled by Blob size (smaller as they get many) and shaped. A blob made
+// bigger than the classic ones rises less far, so it stays in the glass.
+function lavaBlobs(o) {
+  const n = clamp(Math.round(o.blobs ?? LAVA.length), 2, 12);
+  const size = clamp(o.size ?? 1, 0.5, 1.5) * Math.pow(Math.min(1, LAVA.length / n), 0.35);
+  const shape = o.shape || "mixed";
+  const list = [];
+  for (let i = 0; i < n; i++) {
+    let b;
+    if (i < LAVA.length) b = { ...LAVA[i] };
+    else {
+      const r = lcg(701 + 37 * i);
+      const a = r() * TAU;
+      const d = 0.03 + 0.04 * r();
+      const lo = 0.12 + 0.28 * r();
+      b = {
+        x: Math.sin(a) * d,
+        z: Math.cos(a) * d,
+        r: 0.055 + 0.06 * r(),
+        tall: 1.1 + 0.4 * r(),
+        lo,
+        hi: Math.min(1.15, lo + 0.45 + 0.5 * r()),
+        speed: 0.2 + 0.22 * r(),
+        phase: r() * TAU,
+        twin: r() < 0.3,
+      };
+    }
+    if (size !== 1) b.r *= size;
+    if (shape === "round") {
+      b.tall = 1;
+      b.twin = false;
+    } else if (shape === "tall") {
+      b.tall = 1.75;
+      b.twin = false;
+    }
+    if (size > 1 || i >= LAVA.length) {
+      const room = (y) => lavaGlassR(y) - Math.hypot(b.x, b.z) + 0.01;
+      while (b.hi > b.lo + 0.05 && b.r > room(b.hi + 0.5 * b.r * b.tall)) b.hi -= 0.02;
+      b.r = Math.min(b.r, room(b.hi + 0.5 * b.r * b.tall));
+    }
+    list.push(b);
+  }
+  return list;
+}
 const ICE_SECS = 5.6;
 
 // A small seeded generator for tables that build() and drive() share.
@@ -677,19 +794,59 @@ export const RECIPES = {
   "lava-lamp": {
     alive: true,
     options: [
+      {
+        key: "set",
+        label: "Colour set",
+        type: "select",
+        default: "own",
+        choices: Object.entries(LAVA_SETS).map(([id, v]) => ({ id, label: v.label })),
+      },
       { key: "wax", label: "Wax", type: "color", default: "#e8341c" },
       { key: "liquid", label: "Liquid", type: "color", default: "#f2b632" },
       { key: "metal", label: "Base", type: "color", default: "#b8bcc4" },
+      { key: "blobs", label: "Blobs", type: "slider", min: 2, max: 12, step: 1, default: 6 },
+      {
+        key: "size",
+        label: "Blob size",
+        type: "slider",
+        min: 0.5,
+        max: 1.5,
+        step: 0.1,
+        default: 1,
+      },
+      {
+        key: "shape",
+        label: "Blob shape",
+        type: "select",
+        default: "mixed",
+        choices: [
+          { id: "mixed", label: "Mixed" },
+          { id: "round", label: "Round" },
+          { id: "tall", label: "Tall" },
+        ],
+      },
     ],
-    controls: [{ key: "heat", label: "Heat up", type: "pulse", ease: LAVA_SECS }],
+    controls: [
+      { key: "heat", label: "Heat up", type: "pulse", ease: LAVA_SECS },
+      { key: "flow", label: "Flow", type: "slider", default: 0.5 },
+      { key: "glow", label: "Glow", type: "slider", default: 0 },
+    ],
     action: { key: "heat", label: "Heat it up" },
     // A tap heats the lamp: the blobs run about three and a half times as
-    // fast for a few seconds, the wax glows and shifts from warm orange to
-    // magenta to gold, and the liquid brightens; then it all eases back.
-    // The extra speed is an extra clock (the boost's integral), kept when
-    // the effect ends so the blobs never jump.
-    drive(t, c, out) {
+    // fast for a few seconds, the wax glows and shifts through its colour
+    // set's glow (orange, magenta, gold for the classic lamp), and the
+    // liquid brightens; then it all eases back. The extra speed is an extra
+    // clock (the boost's integral), kept when the effect ends so the blobs
+    // never jump. Flow sets how fast the blobs drift (a quarter as fast to
+    // one and three quarters, through the same kind of clock), and Glow
+    // lights the wax and the liquid from within at rest.
+    drive(t, c, out, info) {
       const m = mem(c);
+      const blobs = info?.data?.blobs || LAVA;
+      const flow = 0.25 + 1.5 * (c.flow ?? 0.5);
+      if (m.lastT === undefined) m.flowT = t;
+      else if (t >= m.lastT) m.flowT += (t - m.lastT) * flow;
+      m.lastT = t;
       const s = since(c.heat, LAVA_SECS);
       const extra = s === null ? 0 : boostClock(s, 2.5, 0.3, 2.7, 3.9);
       if (fired(m, "heat", c.heat)) m.base = (m.base ?? 0) + (m.run ?? 0);
@@ -698,26 +855,24 @@ export const RECIPES = {
         m.base = (m.base ?? 0) + m.run;
         m.run = 0;
       }
-      const tt = t + (m.base ?? 0) + extra;
-      LAVA.forEach((b, i) => {
+      const tt = m.flowT + (m.base ?? 0) + extra;
+      blobs.forEach((b, i) => {
         const y = lavaY(b, tt);
         out.parts[`blob${i}`] = {
           offset: [Math.sin(tt * b.speed * 0.8 + b.phase) * 0.02, y - lavaY(b, 0), 0],
         };
       });
       const hot = s === null ? 0 : ease(band(s, 0, 0.3)) * (1 - ease(band(s, 3.1, 4.5)));
-      const col = ramp(LAVA_GLOW, band(s ?? 0, 0.2, 3.2));
-      out.glow = [col[0], col[1], col[2], 0.75 * hot];
-      out.morph = [0, hot];
+      const lit = clamp(c.glow ?? 0, 0, 1);
+      const col = ramp(info?.data?.glow || LAVA_GLOW, band(s ?? 0, 0.2, 3.2));
+      out.glow = [col[0], col[1], col[2], 0.75 * hot + 0.45 * lit * (1 - hot)];
+      out.morph = [0, Math.max(hot, 0.7 * lit)];
     },
     build(k, o) {
-      const wax = o.wax;
-      // The glass swells in the middle and tapers into the cap, where it
-      // meets a collar of the cap's own radius.
-      const glassR = (y) =>
-        0.2 +
-        0.075 * Math.sin(Math.PI * clamp((y + 0.05) / 1.35, 0, 1) * 0.8) -
-        0.115 * smoothstep(0.62, 1.3, y);
+      const set = LAVA_SETS[o.set] || LAVA_SETS.own;
+      const wax = set.wax || o.wax;
+      const liquid = set.liquid || o.liquid;
+      const glassR = lavaGlassR;
       // The metal base and cap, with bright reflections.
       const chrome = (c) => {
         const n = c.n;
@@ -784,7 +939,7 @@ export const RECIPES = {
           even: true,
           jitter: 0.01,
           pattern: false,
-          color: (c) => mix(o.liquid, "#ffffff", 0.2 + 0.3 * Math.max(0, c.n[2])),
+          color: (c) => mix(liquid, "#ffffff", 0.2 + 0.3 * Math.max(0, c.n[2])),
         },
       );
       k.cloud({ share: 0.012, size: 1.2, pattern: false }, (r) => {
@@ -804,7 +959,7 @@ export const RECIPES = {
         const rr = glassR(y) * 0.85 * Math.sqrt(r());
         return {
           p: [Math.sin(a) * rr, y, Math.cos(a) * rr],
-          color: mix(o.liquid, "#ffb070", 0.3 * (1 - y / 1.3)),
+          color: mix(liquid, "#ffb070", 0.3 * (1 - y / 1.3)),
           opacity: 0.06,
         };
       });
@@ -815,7 +970,7 @@ export const RECIPES = {
         const rr = glassR(y) * 0.8 * Math.sqrt(r());
         return {
           p: [Math.sin(a) * rr, y, Math.cos(a) * rr],
-          color: mix(o.liquid, "#fff4c8", 0.35 + 0.3 * (1 - y / 1.3)),
+          color: mix(liquid, "#fff4c8", 0.35 + 0.3 * (1 - y / 1.3)),
           opacity: 0.1,
           kind: "fade",
           channel: 1,
@@ -838,7 +993,8 @@ export const RECIPES = {
       };
       k.add(k.ellipsoid(0.22, 0.1, 0.22), { pos: [0, 0.04, 0], ...waxy });
       k.add(k.ellipsoid(0.1, 0.04, 0.1), { pos: [0, 1.25, 0], ...waxy });
-      LAVA.forEach((b, i) => {
+      const blobs = lavaBlobs(o);
+      blobs.forEach((b, i) => {
         const part = k.part(`blob${i}`, { pivot: [b.x, lavaY(b, 0), b.z] });
         k.add(k.ellipsoid(b.r, b.r * b.tall, b.r), {
           pos: [b.x, lavaY(b, 0), b.z],
@@ -859,6 +1015,7 @@ export const RECIPES = {
         pattern: false,
         color: (c) => mix("#fff2c0", "#ffb040", Math.hypot(c.p[0], c.p[2]) / 0.16),
       });
+      k.data = { blobs, glow: set.glow || LAVA_GLOW };
     },
   },
 
