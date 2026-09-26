@@ -33,6 +33,27 @@ const len = (a) => Math.hypot(a[0], a[1], a[2]);
 const unit = (a) => mul(a, 1 / (len(a) || 1));
 const lerp = (a, b, t) => add(a, mul(sub(b, a), t));
 const keep = (c, size) => ({ c, keep: true, size });
+const clamp01 = (x) => Math.min(1, Math.max(0, x));
+const ease = (x) => x * x * (3 - 2 * x);
+const easeOut = (x) => 1 - (1 - x) * (1 - x) * (1 - x);
+// 0 before a, rising to 1 at b.
+const band = (x, a, b) => clamp01((x - a) / (b - a));
+// A pulse control's progress: 0 at the tap, 1 when done (and at rest).
+const progress = (v) => (v > 0 ? 1 - v : 1);
+// Per-toy memory for drive(), keyed by the control state object (new each
+// time a toy loads).
+const MEM = new WeakMap();
+function mem(c) {
+  let m = MEM.get(c);
+  if (!m) MEM.set(c, (m = {}));
+  return m;
+}
+// True on the frame a pulse control fires.
+function fired(m, key, v) {
+  const was = m["p_" + key] ?? 0;
+  m["p_" + key] = v;
+  return v > was + 0.02;
+}
 
 // Fake lighting (splats are unlit): a soft key light from the upper left
 // front and a highlight towards the default camera.
@@ -247,8 +268,39 @@ export const RECIPES = {
       { key: "color", label: "Capsid", type: "color", default: "#4fb3a9" },
       { key: "spikes", label: "Spikes", type: "color", default: "#f0605d" },
     ],
-    drive(t, c, out) {
-      out.body = { quat: quatAxisAngle([0.25, 1, 0.1], t * 0.22) };
+    controls: [{ key: "copy", label: "Copy", type: "pulse", ease: 4.6 }],
+    action: { key: "copy", label: "Make copies" },
+    // Its spikes sway at rest. A tap sends a wave rippling through them from
+    // the front, and two copies bud off, drift apart and fade (channel 1).
+    drive(t, c, out, info) {
+      const p = progress(c.copy);
+      const s = p * 4.6;
+      const on = c.copy > 0;
+      const body = quatAxisAngle([0.25, 1, 0.1], t * 0.22);
+      out.body = { quat: body };
+      const spikes = info.data?.spikes || [];
+      const amp = 0.06 + (on ? 0.36 * band(s, 0, 0.3) * (1 - ease(band(s, 2.6, 4.2))) : 0);
+      const wave = on ? s * 7 : t * 1.6;
+      out.tokens = spikes.map((sp, i) => ({
+        base: sp.root,
+        quat: quatAxisAngle(sp.tilt, amp * Math.sin(wave - 3.2 * sp.from + (on ? 0 : i * 1.7))),
+      }));
+      // The copies (built small, just behind): out from behind it along the
+      // view's diagonal and up level with it (undoing the body's turn, so
+      // they leave in the same place on screen), then drifting on.
+      const out1 = ease(band(s, 0.45, 1.9));
+      const drift = band(s, 1.6, 4.4);
+      const back = [-body[0], -body[1], -body[2], body[3]];
+      for (let i = 0; i < 2; i++) {
+        const dir = mul(VIRUS.diag, i ? -1 : 1);
+        const go = add(mul(dir, 1.55 * out1 + 0.32 * drift), mul(VIEW, -VIRUS.behind * out1));
+        out.parts[`copy${i}`] = {
+          offset: quatRotate(back, go),
+          quat: quatAxisAngle([0, 1, 0], (i ? -1 : 1) * 1.2 * drift),
+          visible: on && s > 0.4 ? 1 : 0,
+        };
+      }
+      out.morph = [0, on ? ease(band(s, 2.3, 4.2)) : 0];
     },
     build(k, o) {
       const ico = icosahedron();
@@ -264,29 +316,38 @@ export const RECIPES = {
         }
         return 0.62 * poly + 0.4;
       };
-      const breathe = { kind: "breathe", params: [0.035, 0] };
       const capsid = o.color;
-      k.add(k.radial(radius, { grid: 64 }), {
-        ...breathe,
-        flat: 0.2,
-        color: (c) => {
-          const d = unit(c.lp);
-          const nb = nearest2(cells, d);
-          const edge = smoothstep(0.0, 0.012, nb.d1 - nb.d2);
-          const knob = smoothstep(0.97, 1, nb.d1);
-          let col = penton[nb.i] ? mix(capsid, "#fff1b8", 0.55) : capsid;
-          col = mix(shade(col, 0.55), mix(col, "#ffffff", 0.18 * knob), edge);
-          return litGloss(col, d, 0.3);
-        },
-      });
-      // Protein spikes: a stalk and a knob on every vertex and face.
+      const skin = (c) => {
+        const d = unit(c.lp);
+        const nb = nearest2(cells, d);
+        const edge = smoothstep(0.0, 0.012, nb.d1 - nb.d2);
+        const knob = smoothstep(0.97, 1, nb.d1);
+        let col = penton[nb.i] ? mix(capsid, "#fff1b8", 0.55) : capsid;
+        col = mix(shade(col, 0.55), mix(col, "#ffffff", 0.18 * knob), edge);
+        return litGloss(col, d, 0.3);
+      };
+      k.add(k.radial(radius, { grid: 64 }), { flat: 0.2, color: skin });
+      // Protein spikes: a stalk and a knob on every vertex and face, each a
+      // token that tilts about its root.
       const spikes = [...ico.v, ...faceN];
-      for (const d of spikes) {
+      const W = VIEW;
+      k.data = {
+        spikes: spikes.map((d) => {
+          const tilt = cross(d, W);
+          return {
+            root: mul(d, radius(d) - 0.03),
+            tilt: len(tilt) > 1e-3 ? unit(tilt) : basis(d)[0],
+            from: Math.acos(clamp(dot(d, W), -1, 1)),
+          };
+        }),
+      };
+      spikes.forEach((d, i) => {
         const r0 = radius(d) - 0.03;
         const q = quatFromTo([0, 1, 0], d);
         const stalk = 0.3;
+        const token = { kind: "token", params: [i, 0] };
         k.add(k.cylinder(0.032, stalk, { caps: false }), {
-          ...breathe,
+          ...token,
           quat: q,
           pos: mul(d, r0 + stalk / 2),
           weight: 2,
@@ -294,14 +355,14 @@ export const RECIPES = {
           color: (c) => lit(mix(o.spikes, "#ffffff", 0.45), c.n),
         });
         k.add(k.ellipsoid(0.1, 0.075, 0.1), {
-          ...breathe,
+          ...token,
           quat: q,
           pos: mul(d, r0 + stalk + 0.04),
           weight: 2.2,
           flat: 0.3,
           color: (c) => litGloss(o.spikes, c.n, 0.45),
         });
-      }
+      });
       // The genome, coiled inside (Slice shows it).
       k.add(k.tube(tangle(k.rand, 40, 0.62), 0.028, { samples: 512 }), {
         share: 0.05,
@@ -309,6 +370,43 @@ export const RECIPES = {
         pattern: false,
         color: (c) => mix("#ffd166", "#ff9f1c", 0.5 + 0.5 * Math.sin(c.t * 60)),
       });
+      // Two copies, built small just behind the virus (so they draw behind
+      // it as they come out; hidden until they bud off), with fewer splats.
+      // They fade out as channel 1 rises.
+      const at = VIRUS.home;
+      const sc = VIRUS.scale;
+      for (let i = 0; i < 2; i++) {
+        const part = k.part(`copy${i}`, { pivot: at });
+        const fade = { part, kind: "fade", channel: 1, params: [0.2, 0.75] };
+        k.add(k.radial(radius, { grid: 48 }), {
+          ...fade,
+          pos: at,
+          scale: sc,
+          share: 0.09,
+          flat: 0.25,
+          color: skin,
+        });
+        for (const d of spikes) {
+          const r0 = radius(d) - 0.03;
+          const q = quatFromTo([0, 1, 0], d);
+          k.add(k.cylinder(0.032, 0.3, { caps: false }), {
+            ...fade,
+            quat: q,
+            pos: add(at, mul(d, (r0 + 0.15) * sc)),
+            scale: sc,
+            share: 0.0009,
+            color: (c) => lit(mix(o.spikes, "#ffffff", 0.45), c.n),
+          });
+          k.add(k.ellipsoid(0.1, 0.075, 0.1), {
+            ...fade,
+            quat: q,
+            pos: add(at, mul(d, (r0 + 0.34) * sc)),
+            scale: sc,
+            share: 0.0014,
+            color: (c) => litGloss(o.spikes, c.n, 0.45),
+          });
+        }
+      }
     },
   },
 
@@ -530,50 +628,87 @@ export const RECIPES = {
   bacterium: {
     alive: true,
     options: [{ key: "color", label: "Colour", type: "color", default: "#62b845" }],
-    controls: [{ key: "swim", label: "Swim", type: "slider", default: 0.5 }],
+    controls: [
+      { key: "swim", label: "Swim", type: "slider", default: 0.5 },
+      { key: "divide", label: "Divide", type: "pulse", ease: 5 },
+    ],
+    action: { key: "divide", label: "Divide in two" },
+    // A tap plays binary fission: the cell pinches in at the middle as a
+    // new wall closes across it, its DNA splits between the halves, and
+    // the two daughter cells come apart with a little hinge. Then they
+    // slide back together and merge.
     drive(t, c, out) {
+      const p = progress(c.divide);
+      const pinch = ease(band(p, 0.02, 0.3)) * (1 - ease(band(p, 0.74, 0.95)));
+      const apart = ease(band(p, 0.28, 0.44)) * (1 - ease(band(p, 0.6, 0.78)));
+      out.morph = [pinch];
+      const axis = BAC.axis;
+      for (const [name, sgn] of [
+        ["top", 1],
+        ["bottom", -1],
+      ]) {
+        out.parts[name] = {
+          offset: mul(axis, sgn * BAC.apart * apart),
+          angle: -0.14 * apart,
+        };
+      }
       out.amount = 0.3 + 1.5 * c.swim;
       out.body = { offset: [0.03 * Math.sin(t * 0.7), 0.02 * Math.sin(t * 1.1), 0] };
     },
     build(k, o) {
-      const half = 0.75;
-      const R = 0.42;
-      // Lying across the view, tilted up to the right.
-      const tilt = quatFromTo([1, 0, 0], unit([0.82, 0.34, -0.46]));
+      const { half, R, tilt } = BAC;
       const toWorld = (p) => quatRotate(tilt, p);
+      const toLocal = (p) => quatRotate(BAC.untilt, p);
+      // Each half turns a little about the new wall as they come apart (a
+      // hinge in the view plane).
+      const hinge = unit(cross(BAC.axis, VIEW));
+      const top = k.part("top", { pivot: [0, 0, 0], axis: hinge });
+      const bottom = k.part("bottom", { pivot: [0, 0, 0], axis: mul(hinge, -1) });
+      const side = (x) => (x >= 0 ? top : bottom);
       // The rod: a capsule along X.
       const rod = quatMul(tilt, quatEuler(0, 0, -90));
       const body = o.color;
       k.add(k.lathe(capsuleProfile(half, R), { grid: 64 }), {
         quat: rod,
-        flat: 0.2,
-        kind: "breathe",
-        params: [0.02, 0],
+        flat: 0.35,
+        part: (c) => side(c.lp[1]),
+        // Lathe y runs along the rod (rod-local x); lathe x is rod-local -y.
+        to: (c) => toWorld(fission([c.lp[1], -c.lp[0], c.lp[2]])),
         color: (c) => {
           const spot = c.fbm(c.p[0] * 5, c.p[1] * 5, c.p[2] * 5);
           const col = mix(body, shade(body, 0.8), smoothstep(-0.2, 0.5, spot));
           return litGloss(col, c.n, 0.35);
         },
       });
-      // Inside: ribosome speckles and a tangled nucleoid (Slice shows them).
+      // Inside: ribosome speckles and a tangled nucleoid (Slice shows them);
+      // each daughter gets its share, and half of the DNA.
       k.cloud({ share: 0.03, size: 0.6, pattern: false }, (rand) => {
         const x = (rand() * 2 - 1) * (half + R * 0.5);
         const rr = R * 0.85 * Math.sqrt(rand());
         const a = rand() * TAU;
+        const at = [x, rr * Math.cos(a), rr * Math.sin(a)];
         return {
-          p: toWorld([x, rr * Math.cos(a), rr * Math.sin(a)]),
+          p: toWorld(at),
+          to: toWorld(inside(at)),
+          part: side(x),
           color: rand() < 0.5 ? "#2f6b3a" : "#b8e6a0",
           opacity: 0.9,
         };
       });
       const nuc = tangle(k.rand, 30, 0.22);
+      const strand = (t) => nuc(t).map((v, i) => (i === 0 ? v * 2.2 : v));
       k.add(
-        k.tube((t) => toWorld(mul(nuc(t), 1).map((v, i) => (i === 0 ? v * 2.2 : v))), 0.018, {
-          samples: 512,
-        }),
-        { share: 0.03, pattern: false, color: "#7a5cc7" },
+        k.tube((t) => toWorld(strand(t)), 0.018, { samples: 512 }),
+        {
+          share: 0.03,
+          pattern: false,
+          part: (c) => side(toLocal(c.p)[0]),
+          to: (c) => toWorld(inside(toLocal(c.p))),
+          color: "#7a5cc7",
+        },
       );
       // Flagella: long whips trailing behind, rippling as the cell swims.
+      // They grow from the rear half, so they go with that daughter.
       const n = 6;
       for (let i = 0; i < n; i++) {
         const a = (i / n) * TAU + 0.4;
@@ -594,13 +729,15 @@ export const RECIPES = {
             base[2] + ring[2] * fan + amp * Math.sin(w),
           ]);
         };
+        // The root follows the rear pole as the cell pinches.
+        const shift = sub(fission(base), base);
         k.add(
           k.tube(curve, (t) => 0.03 - 0.012 * t, { grid: 32, samples: 160 }),
           {
             weight: 1.5,
             flat: 0.35,
-            kind: "wave",
-            params: (c) => [0.07 * c.t, ph],
+            part: bottom,
+            to: (c) => add(c.p, toWorld(shift)),
             color: (c) => lit(mix("#b7cf7a", "#7f9c45", c.t), c.n, 0.7, 0.35),
           },
         );
@@ -618,8 +755,11 @@ export const RECIPES = {
         }
         const l = 0.02 + 0.05 * rand();
         const nw = toWorld(nrm);
+        const tip = add(toWorld(p), mul(nw, l));
         return {
-          p: add(toWorld(p), mul(nw, l)),
+          p: tip,
+          to: add(toWorld(fission(p)), mul(nw, l)),
+          part: side(x),
           dir: nw,
           stretch: 3,
           color: mix(body, "#f4ffe0", 0.55),
@@ -633,7 +773,17 @@ export const RECIPES = {
   "red-blood-cell": {
     alive: true,
     options: [{ key: "color", label: "Colour", type: "color", default: "#d8323f" }],
+    controls: [{ key: "sickle", label: "Sickle", type: "pulse", ease: 4 }],
+    action: { key: "sickle", label: "Sickle and relax" },
+    // A tap plays sickling at low oxygen: the soft disc stretches, curls
+    // into a stiff crescent with pointed ends, holds, then relaxes back.
     drive(t, c, out) {
+      const p = progress(c.sickle);
+      const w = ease(band(p, 0.02, 0.3)) * (1 - ease(band(p, 0.62, 0.95)));
+      // A small give as it stiffens, and a wobble as it springs back.
+      const give = 0.05 * Math.sin(band(p, 0.3, 0.45) * Math.PI);
+      const back = 0.07 * Math.sin(band(p, 0.95, 1) * Math.PI * 2) * (1 - band(p, 0.95, 1));
+      out.morph = [w - give - back];
       out.body = {
         quat: quatMul(
           quatAxisAngle([0, 1, 0], 0.25 * Math.sin(t * 0.4)),
@@ -656,14 +806,33 @@ export const RECIPES = {
         prof.push([r, h(r)]);
       }
       const q = quatFromTo([0, 1, 0], unit([0.25, 0.8, 0.55]));
+      // The sickle: the disc's x runs along a crescent (an arc of radius
+      // RC through +-SPAN), its z across it, tapering to points at the ends;
+      // the dimples fill out into an even, stiff thickness.
+      const RC = 1.1;
+      const SPAN = 1.36;
+      const sickle = (lp) => {
+        const [x, y, z] = lp;
+        const r = Math.hypot(x, z);
+        const a = clamp(x, -1, 1);
+        const chord = Math.sqrt(Math.max(1e-4, 1 - a * a));
+        const b = clamp(z / chord, -1.2, 1.2);
+        const phi = a * SPAN;
+        const taper = Math.pow(chord, 1.1);
+        const across = 0.38 * b * taper;
+        const cx = (RC + across) * Math.sin(phi);
+        const cz = (RC + across) * Math.cos(phi) - RC * 0.78;
+        const thick = 0.24 * Math.sqrt(Math.max(0, 1 - Math.min(1, b * b))) * taper + 0.01;
+        const hy = Math.max(0.02, h(Math.min(r, 0.999)));
+        return quatRotate(q, [cx, clamp(y / hy, -1.2, 1.2) * thick, cz]);
+      };
       const base = o.color;
       k.add(k.lathe(prof, { grid: 96, thick: 0.1 }), {
         quat: q,
-        flat: 0.2,
+        flat: 0.3,
         interior: 0.1,
         core: shade(base, 0.75),
-        kind: "breathe",
-        params: [0.02, 0],
+        to: (c) => sickle(c.lp),
         color: (c) => {
           const r = Math.hypot(c.lp[0], c.lp[2]);
           const thin = smoothstep(0.62, 0.05, r);
@@ -871,17 +1040,39 @@ export const RECIPES = {
   astrocyte: {
     alive: true,
     options: [{ key: "color", label: "Cell", type: "color", default: "#35c79a" }],
+    controls: [{ key: "wave", label: "Calcium wave", type: "pulse", ease: 4.4 }],
+    action: { key: "wave", label: "Send a calcium wave" },
+    // A tap sends a calcium wave: a bright front of light spreads from the
+    // cell body out along every arm to the tips and the end-feet (channel
+    // 0), and the blood vessel they hold widens for a moment (channel 1).
+    // At rest, faint waves pass now and then.
+    drive(t, c, out) {
+      const p = progress(c.wave);
+      const s = p * 4.4;
+      const on = c.wave > 0;
+      // Idle waves start again from the body a while after a tap.
+      const m = mem(c);
+      if (on || m.since === undefined) m.since = t;
+      const idle = (((t - m.since) * 0.11) % 1.9) - 0.5;
+      out.morph = [
+        on ? -0.12 + 1.45 * band(s, 0, 2.7) : idle,
+        on ? ease(band(s, 1.8, 2.6)) * (1 - ease(band(s, 3, 4.2))) : 0,
+      ];
+      const strength = on ? 0.95 * (1 - band(s, 2.7, 3.4) * 0.6) : 0.3;
+      out.glow = [0.5, 0.95, 0.45, strength];
+    },
     build(k, o) {
       const cell = o.color;
       const glow = mix(cell, "#e8fff4", 0.55);
+      // The wave's place along the cell (0 at the body, 1 at the far tips).
+      const wave = (at, width = 0.1) => ({ kind: "band", channel: 0, params: [at, width] });
       k.add(
         k.radial((d) => 0.24 + 0.03 * k.noise(d[0] * 3, d[1] * 3, d[2] * 3), { grid: 32 }),
         {
           flat: 0.2,
           interior: 0.15,
           core: shade(cell, 0.6),
-          kind: "breathe",
-          params: [0.03, 0],
+          ...wave(0, 0.14),
           color: (c) => litGloss(glow, c.n, 0.4),
         },
       );
@@ -894,9 +1085,12 @@ export const RECIPES = {
         [0.4, vy - 0.02, vz + 0.05],
         [1.1, vy + 0.06, vz - 0.05],
       ]);
+      // It widens as the wave reaches the end-feet.
       k.add(k.tube(vessel, 0.15, { grid: 48, samples: 64 }), {
         pattern: false,
-        flat: 0.25,
+        flat: 0.3,
+        channel: 1,
+        to: (c) => add(c.p, mul(sub(c.p, vessel(c.t)), 0.35)),
         color: (c) => litGloss(mix("#d8465a", "#f07b8a", 0.3 + 0.2 * c.noise(c.t * 9, 0, 0)), c.n),
       });
       const branches = [];
@@ -931,11 +1125,16 @@ export const RECIPES = {
         const foot = vessel((x + 1.1) / 2.2);
         const top = add(foot, [0, 0.15, 0]);
         const pts = [[x * 0.15, -0.12, 0.02], [x * 0.5, -0.4, vz * 0.3], top];
-        branches.push({ pts, r0: 0.05, r1: 0.035, dist: 0, length: 0.7 });
+        branches.push({ pts, r0: 0.05, r1: 0.035, dist: 0, length: 0.7, feet: true });
+      }
+      const far = Math.max(...branches.map((b) => b.dist + b.length));
+      for (const x of [-0.5, 0.05, 0.55]) {
+        const foot = vessel((x + 1.1) / 2.2);
         k.add(k.ellipsoid(0.12, 0.05, 0.13), {
           pos: add(foot, [0, 0.14, 0]),
           weight: 1.2,
           flat: 0.2,
+          ...wave(0.7 / far + 0.04),
           color: (c) => litGloss(glow, c.n, 0.3),
         });
       }
@@ -945,8 +1144,9 @@ export const RECIPES = {
           {
             weight: 1.2,
             flat: 0.3,
-            kind: "sway",
-            params: [0.05, 0],
+            kind: "band",
+            channel: 0,
+            params: (c) => [(b.dist + c.t * b.length) / far, 0.1],
             color: (c) => lit(mix(glow, cell, clamp((b.dist + c.t * b.length) / 1.1, 0, 1)), c.n),
           },
         );
@@ -973,17 +1173,39 @@ export const RECIPES = {
       { key: "color", label: "Membrane", type: "color", default: "#f29ab8" },
       { key: "cutaway", label: "Cutaway", type: "switch", default: true },
     ],
+    controls: [{ key: "divide", label: "Divide", type: "pulse", ease: 5.2 }],
+    action: { key: "divide", label: "Divide in two" },
+    // A tap plays cell division: the nucleus splits into two (channel 0),
+    // then the cell pinches in two across the middle and shares out its
+    // parts (channel 1); after a moment the two cells flow back into one.
+    drive(t, c, out) {
+      const p = progress(c.divide);
+      const nuc = ease(band(p, 0.02, 0.26)) * (1 - ease(band(p, 0.78, 0.96)));
+      const pinch = ease(band(p, 0.14, 0.42)) * (1 - ease(band(p, 0.6, 0.82)));
+      out.morph = [nuc, pinch];
+      // The living cell swells a little, slowly, at rest.
+      out.body = { squash: 0.012 * Math.sin(t * 1.3) };
+    },
     build(k, o) {
       const mem = o.color;
       const cut = o.cutaway;
       // The open wedge faces the viewer (upper right front).
       const inWedge = (p) => cut && p[0] > 0 && p[1] > 0 && p[2] > 0;
-      const breathe = { kind: "breathe", params: [0.012, 0] };
+      // Division: the membrane splits into two cells across the view. The
+      // daughters (drawn a little small) reach just past the resting cell,
+      // still inside the view, so they are left out of the fit.
+      k.fitMorphs = false;
+      const pinch = { channel: 1, to: (c) => cellSkin(c.p) };
+      const inner = { channel: 1, to: (c) => cellInside(c.p) };
+      const shift = (at) => {
+        const d = sub(cellPart(at), at);
+        return { channel: 1, to: (c) => add(c.p, d) };
+      };
       const radius = (d) => 1 + 0.035 * k.noise(d[0] * 2.2 + 3, d[1] * 2.2, d[2] * 2.2);
       // A translucent membrane; with the cutaway, a wedge is taken out.
       k.add(k.radial(radius, { grid: 64 }), {
-        ...breathe,
-        flat: 0.15,
+        ...pinch,
+        flat: 0.3,
         opacity: 0.62,
         share: 0.36,
         color: (c) => {
@@ -1002,15 +1224,15 @@ export const RECIPES = {
           p,
           color: mix("#fff0f4", "#f9d3e1", rand()),
           opacity: 0.06,
-          kind: "breathe",
-          params: [0.012, 0],
+          channel: 1,
+          to: cellInside(p),
         };
       });
       // The nucleus, cut open by the wedge to show chromatin and the nucleolus.
-      const nc = [-0.08, 0.02, -0.08];
-      const NR = 0.4;
+      const { nc, NR } = CELL;
+      const split = { channel: 0, to: (c) => nucleusSplit(c.p) };
       k.add(k.sphere(NR), {
-        ...breathe,
+        ...split,
         pos: nc,
         weight: 1.5,
         flat: 0.2,
@@ -1026,9 +1248,12 @@ export const RECIPES = {
           return litGloss(pore ? "#dcc6f7" : "#8a57c6", c.n, 0.4);
         },
       });
+      // The nucleolus: each new nucleus gets one.
+      const nco = add(nc, [0.1, 0.1, 0.1]);
       k.add(k.sphere(0.15), {
-        ...breathe,
-        pos: add(nc, [0.1, 0.1, 0.1]),
+        channel: 0,
+        to: (c) => nucleolusSplit(c.p, nco, 0.15),
+        pos: nco,
         weight: 1.5,
         interior: 0.5,
         pattern: false,
@@ -1053,7 +1278,8 @@ export const RECIPES = {
             { grid: 40, thick: 0.02 },
           ),
           {
-            ...breathe,
+            channel: 0,
+            to: (c) => erSplit(c.p),
             flat: 0.2,
             pattern: false,
             color: (c) => {
@@ -1074,7 +1300,7 @@ export const RECIPES = {
           pts.push(p);
         }
         k.add(k.tube(spline(pts), 0.022, { grid: 16, samples: 64 }), {
-          ...breathe,
+          ...shift(pts[2]),
           weight: 1.4,
           pattern: false,
           color: (c) => (inWedge(c.p) ? null : lit("#8fd27b", c.n)),
@@ -1083,6 +1309,7 @@ export const RECIPES = {
       // Golgi apparatus: a stack of curved cisternae with vesicles budding off.
       const gc = [0.46, -0.34, 0.3];
       const gq = quatFromTo([0, 0, 1], unit(sub(nc, gc)));
+      const golgi = shift(gc);
       for (let i = 0; i < 5; i++) {
         const Rg = 0.3 + i * 0.045;
         const w = 0.85 - i * 0.08;
@@ -1101,7 +1328,7 @@ export const RECIPES = {
             { grid: 24, thick: 0.02 },
           ),
           {
-            ...breathe,
+            ...golgi,
             flat: 0.2,
             weight: 1.5,
             pattern: false,
@@ -1127,7 +1354,7 @@ export const RECIPES = {
         if (!p) continue;
         const q = quatFromTo([0, 1, 0], randDir(k.rand));
         k.add(k.lathe(capsuleProfile(0.085, 0.065, 6), { grid: 24 }), {
-          ...breathe,
+          ...shift(p),
           pos: p,
           quat: q,
           weight: 1.5,
@@ -1145,7 +1372,7 @@ export const RECIPES = {
         const p = place(0.2, 0.86, r);
         if (!p) continue;
         k.add(k.sphere(r), {
-          ...breathe,
+          ...shift(p),
           pos: p,
           weight: 1.6,
           pattern: false,
@@ -1153,6 +1380,7 @@ export const RECIPES = {
         });
       }
       // A pair of centrioles near the nucleus.
+      const centrioles = shift([-0.31, 0.56, 0.25]);
       for (const [rot, off] of [
         [
           [0, 0, 0],
@@ -1168,6 +1396,7 @@ export const RECIPES = {
           rot,
           weight: 2,
           pattern: false,
+          ...centrioles,
           color: (c) => lit("#4aa3d8", c.n),
         });
       }
@@ -1284,11 +1513,47 @@ export const RECIPES = {
   "white-blood-cell": {
     alive: true,
     options: [{ key: "color", label: "Colour", type: "color", default: "#cdb4f0" }],
+    controls: [{ key: "eat", label: "Engulf", type: "pulse", ease: 5.6 }],
+    action: { key: "eat", label: "Catch a bacterium" },
+    // A tap plays phagocytosis: a bacterium swims in from the side, the
+    // cell reaches out a cup of membrane round it (channel 0), pulls it in
+    // and closes over it; granules gather on it (channel 1) and it is
+    // digested (glows, channel 2, and shrinks away).
     drive(t, c, out) {
-      out.body = { quat: quatAxisAngle([0.2, 1, 0.1], 0.3 * Math.sin(t * 0.3)) };
+      const p = progress(c.eat);
+      const s = p * 5.6; // seconds since the tap
+      const on = c.eat > 0;
+      const { E, F, side } = WBC;
+      // The bacterium's path: in from beyond the edge, wriggling, into the
+      // cup, then drawn inside.
+      const swim = ease(band(s, 0, 1.7));
+      const pull = ease(band(s, 1.7, 2.7));
+      // From beyond the edge to the cup's mouth (1.1 E), then in to F.
+      const mouth = sub(mul(E, 1.1), F);
+      const at = add(mul(mouth, 1 - pull), mul(E, 1.5 * (1 - swim)));
+      const wig = Math.sin(s * 11) * 0.05 * (1 - pull);
+      const cup = ease(band(s, 0.5, 1.7)) * (1 - ease(band(s, 2.1, 3.1)));
+      const gather = ease(band(s, 2.9, 3.8)) * (1 - ease(band(s, 4.6, 5.5)));
+      const digest = ease(band(s, 3.6, 4.7));
+      out.morph = [cup, gather, on ? band(s, 3.2, 4.4) : 0];
+      out.parts.bug = {
+        offset: add(at, mul(side, wig)),
+        angle: Math.sin(s * 11 + 1) * 0.25 * (1 - pull),
+        scale: 1 - 0.8 * digest,
+        visible: on && digest < 0.98 ? 1 : 0,
+      };
+      out.glow = [1, 0.5, 0.8, 2.2];
+      // The cell leans towards its catch, and breathes gently at rest.
+      out.body = {
+        quat: quatAxisAngle([0.2, 1, 0.1], 0.3 * Math.sin(t * 0.3) * (1 - 0.8 * c.eat)),
+        offset: mul(E, 0.05 * cup),
+        squash: 0.02 * Math.sin(t * 1.3),
+      };
     },
     build(k, o) {
       const base = o.color;
+      const { E, F } = WBC;
+      k.fitMorphs = false; // the cup reaches just past the resting cell
       // A soft, lumpy surface with little ruffles, translucent enough to show
       // the nucleus inside.
       const lump = (d) =>
@@ -1297,18 +1562,20 @@ export const RECIPES = {
       k.add(
         k.radial((d) => 1 + lump(d), { grid: 72 }),
         {
-          flat: 0.2,
+          flat: 0.3,
           opacity: 0.5,
           share: 0.55,
-          kind: "breathe",
-          params: [0.03, 0],
+          channel: 0,
+          to: (c) => wbcCup(c.p),
           color: (c) => {
             const d = unit(c.lp);
             const h = lump(d);
             let col = mix(shade(base, 0.8), mix(base, "#ffffff", 0.4), smoothstep(-0.06, 0.08, h));
             const face = Math.abs(dot(c.n, VIEW));
             col = shade(col, 0.72 + 0.35 * face);
-            return litGloss(col, c.n, 0.35);
+            // Bigger splats where the cup stretches the membrane.
+            const cupSide = smoothstep(0.2, 0.75, dot(d, WBC.E));
+            return { c: litGloss(col, c.n, 0.35), size: 1 + 0.15 * cupSide };
           },
         },
       );
@@ -1333,16 +1600,47 @@ export const RECIPES = {
           pattern: false,
           color: (c) => lit("#6b3fb3", c.n),
         });
+      // Granules; the nearest gather round the swallowed bacterium.
       k.cloud({ share: 0.05, size: 1.1, pattern: false }, (rand) => {
         const p = randBall(rand, 0.9);
+        const near = len(sub(p, F)) < 0.62 && rand() < 0.75;
         return {
           p,
           color: rand() < 0.6 ? "#f08fc8" : "#c46ad6",
+          size: near ? 1.3 : 1,
           opacity: 0.95,
-          kind: "breathe",
-          params: [0.03, 0],
+          channel: 1,
+          to: near ? add(F, mul(randDir(rand), 0.1 + 0.05 * rand())) : p,
         };
       });
+      // The bacterium: built where it ends up (inside the cell), hidden
+      // until a tap brings it in from outside.
+      const bug = k.part("bug", { pivot: F, axis: cross(E, VIEW) });
+      const rodQ = quatFromTo([0, 1, 0], E);
+      k.add(k.lathe(capsuleProfile(0.13, 0.08, 8), { grid: 32 }), {
+        pos: F,
+        quat: rodQ,
+        part: bug,
+        weight: 3,
+        flat: 0.35,
+        pattern: false,
+        kind: "band",
+        channel: 2,
+        params: [0.5, 0.3],
+        color: (c) => litGloss(mix("#7cc947", "#4e9a2c", 0.5 + 0.5 * c.lp[1] * 4), c.n, 0.4),
+      });
+      // Its tail whips out behind (away from the cell).
+      k.add(
+        k.tube(
+          (t) => {
+            const q = add(F, mul(E, 0.2 + 0.17 * t));
+            return add(q, mul(cross(E, VIEW), 0.04 * Math.sin(t * 14) * t));
+          },
+          0.017,
+          { samples: 64 },
+        ),
+        { part: bug, weight: 3, pattern: false, color: "#a9d46e" },
+      );
     },
   },
 
@@ -1350,6 +1648,22 @@ export const RECIPES = {
   microglia: {
     alive: true,
     options: [{ key: "color", label: "Cell", type: "color", default: "#f08a4b" }],
+    controls: [{ key: "sense", label: "Sense", type: "pulse", ease: 4.4 }],
+    action: { key: "sense", label: "Reach and sweep" },
+    // Its six arms (parts) feel about gently at rest. A tap makes it reach:
+    // every arm stretches out along its length (channel 0), sweeps to and
+    // fro twice, then draws back in.
+    drive(t, c, out, info) {
+      const p = progress(c.sense);
+      const s = p * 4.4;
+      const reach = ease(band(s, 0, 0.8)) * (1 - ease(band(s, 3, 4.2)));
+      const sweep = Math.sin(((s - 0.6) / 1.2) * TAU) * band(s, 0.5, 0.9) * (1 - band(s, 2.9, 3.4));
+      out.morph = [reach + 0.12 * Math.sin(band(s, 0.8, 1.3) * Math.PI)];
+      (info.data?.arms || []).forEach((arm, i) => {
+        const idle = 0.07 * Math.sin(t * 0.9 + i * 1.9);
+        out.parts[`arm${i}`] = { angle: idle + 0.42 * sweep * (i % 2 ? -1 : 1) };
+      });
+    },
     build(k, o) {
       const cell = o.color;
       k.add(k.ellipsoid(0.2, 0.14, 0.15), {
@@ -1357,8 +1671,6 @@ export const RECIPES = {
         flat: 0.2,
         interior: 0.15,
         core: shade(cell, 0.7),
-        kind: "breathe",
-        params: [0.03, 0],
         color: (c) => litGloss(mix(cell, "#ffd1b3", 0.25), c.n, 0.4),
       });
       k.add(k.sphere(0.09), {
@@ -1369,7 +1681,7 @@ export const RECIPES = {
       });
       // Long, fine, much-branched processes that sway as they sense around.
       const branches = [];
-      const grow = (start, dir, length, r0, depth, dist) => {
+      const grow = (start, dir, length, r0, depth, dist, arm) => {
         const r1 = Math.max(0.006, r0 * 0.6);
         const pts = [start];
         let p = start;
@@ -1379,14 +1691,14 @@ export const RECIPES = {
           p = add(p, mul(d, length / 4));
           pts.push(p);
         }
-        branches.push({ pts, r0, r1, dist, length });
+        branches.push({ pts, r0, r1, dist, length, arm });
         if (depth <= 0) return;
         const n = 2 + (k.rand() < 0.35 ? 1 : 0);
         const curve = spline(pts);
         for (let i = 0; i < n; i++) {
           const at = 0.45 + 0.5 * k.rand();
           const nd = unit(add(d, mul(randDir(k.rand), 0.9)));
-          grow(curve(at), nd, length * 0.55, r1, depth - 1, dist + length * at);
+          grow(curve(at), nd, length * 0.55, r1, depth - 1, dist + length * at, arm);
         }
       };
       const dirs = [
@@ -1397,18 +1709,27 @@ export const RECIPES = {
         [0.6, -0.7, -0.3],
         [-0.5, 0.6, 0.6],
       ];
-      for (const d0 of dirs) {
+      // Each arm is a part that sweeps about the body, across its length.
+      const arms = dirs.map((d0, i) => {
         const d = unit(d0);
-        grow(mul(d, 0.15), d, 0.75 + 0.2 * k.rand(), 0.045, 3, 0);
-      }
+        const axis = unit(cross(d, i % 2 ? VIEW : [0, 1, 0.3]));
+        return { d, part: k.part(`arm${i}`, { pivot: [0, 0, 0], axis }) };
+      });
+      k.data = { arms: arms.map((a) => a.d) };
+      arms.forEach((a, i) => grow(mul(a.d, 0.15), a.d, 0.75 + 0.2 * k.rand(), 0.045, 3, 0, i));
+      const far = Math.max(...branches.map((b) => b.dist + b.length));
       for (const b of branches) {
+        const { d, part } = arms[b.arm];
+        const curve = spline(b.pts);
         k.add(
-          k.tube(spline(b.pts), (t) => b.r0 + (b.r1 - b.r0) * t, { grid: 10, samples: 24 }),
+          k.tube(curve, (t) => b.r0 + (b.r1 - b.r0) * t, { grid: 10, samples: 24 }),
           {
             weight: 1.5,
-            flat: 0.3,
-            kind: "sway",
-            params: [0.06, -0.2],
+            flat: 0.35,
+            part,
+            // Reaching: each point moves out along its arm, the more the
+            // further it is from the body, so the arm lengthens.
+            to: (c) => add(c.p, mul(d, (0.38 * (b.dist + c.t * b.length)) / far)),
             color: (c) =>
               lit(mix(cell, "#ffc49e", clamp((b.dist + c.t * b.length) / 1.3, 0, 1)), c.n),
           },
@@ -1421,12 +1742,35 @@ export const RECIPES = {
   diatom: {
     alive: true,
     options: [{ key: "color", label: "Glass", type: "color", default: "#7fd6d0" }],
+    controls: [{ key: "open", label: "Open", type: "pulse", ease: 4.4 }],
+    action: { key: "open", label: "Glint and open" },
+    // A tap sends a glint of light across the glass (channel 0), then the
+    // shell parts into its two halves, opening like a clam from its far
+    // edge to show the golden cell inside; then it closes again.
+    drive(t, c, out) {
+      const p = progress(c.open);
+      const s = p * 4.4;
+      const open = ease(band(s, 0.7, 1.6)) * (1 - ease(band(s, 3, 4.1)));
+      out.morph = [c.open > 0 ? -0.2 + 1.5 * band(s, 0, 1.3) : -1];
+      out.glow = [0.85, 1, 1, 1.1];
+      const axis = DIATOM_AXIS;
+      out.parts.lid = { offset: mul(axis, 0.12 * open), angle: -0.5 * open };
+      out.parts.base = { offset: mul(axis, -0.1 * open), angle: 0.14 * open };
+    },
     build(k, o) {
       const glass = o.color;
       const R = 1;
       const H = 0.16;
-      const q = quatFromTo([0, 1, 0], unit([0.15, 0.85, 0.5]));
+      const q = quatFromTo([0, 1, 0], DIATOM_AXIS);
       const W = (p) => quatRotate(q, p);
+      // The two halves open like a clam about the far edge of the rim.
+      const tip = unit(cross(DIATOM_AXIS, VIEW));
+      const away = unit(cross(tip, DIATOM_AXIS));
+      const hinge = mul(away, R);
+      const lid = k.part("lid", { pivot: hinge, axis: tip });
+      const base = k.part("base", { pivot: hinge, axis: tip });
+      // The glint's place: across the shell from upper left to lower right.
+      const across = unit(add(tip, mul(cross(VIEW, tip), -0.5)));
       const ribs = 24;
       // The glass pattern on a valve face: radial ribs, rings of pores and a
       // clear centre. Returns null for a pore (a hole in the glass).
@@ -1459,8 +1803,10 @@ export const RECIPES = {
         k.add(face, {
           flat: 0.15,
           weight: 1.6,
-          kind: "glint",
-          params: (c) => [0.6 * c.rand(), 0],
+          part: side > 0 ? lid : base,
+          kind: "band",
+          channel: 0,
+          params: (c) => [0.5 + 0.5 * dot(c.p, across) + 0.04 * c.rand(), 0.07],
           color: (c) => {
             const r = Math.sqrt(c.v) * R;
             const a = c.u * TAU;
@@ -1472,10 +1818,11 @@ export const RECIPES = {
           },
         });
       }
-      // The girdle band round the edge.
+      // The girdle band round the edge: the lid's half overlaps the base's.
       k.add(k.cylinder(R, 2 * H, { caps: false }), {
         quat: q,
         flat: 0.15,
+        part: (c) => (c.lp[1] > 0 ? lid : base),
         color: (c) => {
           const band = Math.abs(Math.sin(c.lp[1] * 60)) > 0.7;
           return lit(band ? shade(glass, 0.7) : mix(glass, "#ffffff", 0.3), c.n, 0.75, 0.3);
@@ -1635,12 +1982,49 @@ export const RECIPES = {
       },
       { key: "color", label: "Colour", type: "color", default: "#f5c131" },
     ],
+    controls: [{ key: "burst", label: "Burst", type: "pulse", ease: 3.8 }],
+    action: { key: "burst", label: "Burst" },
+    // A tap bursts the grain, as pollen does when it soaks up rain: it
+    // swells, then a puff of tiny starch granules jets out of its pores
+    // (channel 0), drifts down and fades away. The puff stays where it was
+    // let go while the grain turns on.
     drive(t, c, out) {
-      out.body = { quat: quatAxisAngle([0.2, 1, 0.1], t * 0.2) };
+      const p = progress(c.burst);
+      const s = p * 3.8;
+      const on = c.burst > 0;
+      const m = mem(c);
+      if (!on) m.at = t;
+      const body = quatAxisAngle([0.2, 1, 0.1], t * 0.2);
+      const atTap = quatAxisAngle([0.2, 1, 0.1], (m.at ?? t) * 0.2);
+      const swell = Math.sin(band(s, 0, 0.3) * Math.PI);
+      out.body = { quat: body, squash: -0.05 * swell + 0.04 * Math.sin(band(s, 0.25, 0.6) * TAU) };
+      out.morph = [on ? 1.06 * easeOut(band(s, 0.2, 1.3)) : 0];
+      const fall = band(s, 0.5, 3.8);
+      out.parts.puff = {
+        // Undo the grain's turn since the tap: the puff stays put.
+        quat: quatMul([-body[0], -body[1], -body[2], body[3]], atTap),
+        offset: [0.06 * fall, -0.6 * fall * fall, 0],
+        visible: on && s > 0.18 ? 1 - ease(band(s, 2.6, 3.7)) : 0,
+      };
     },
     build(k, o) {
       const col = o.color;
       const tw = { kind: "breathe", params: [0.02, 0] };
+      k.fitMorphs = false; // the puff may spread past the frame
+      // The puff: granules packed inside, each sent out through a pore.
+      const puff = k.part("puff");
+      const granules = (pores, spread, far) =>
+        k.cloud({ share: 0.06, size: 0.65, pattern: false, part: puff }, (rand) => {
+          const pore = pores[Math.floor(rand() * pores.length)];
+          const d = unit(add(pore, mul(randDir(rand), spread)));
+          const r = far * (0.35 + 0.65 * Math.sqrt(rand()));
+          return {
+            p: mul(d, 0.3 * rand()),
+            to: add(mul(d, r), mul(randDir(rand), 0.12 * r)),
+            color: rand() < 0.7 ? mix("#fff6d8", col, 0.25 * rand()) : shade(col, 0.8),
+            opacity: 0.95,
+          };
+        });
       // A net of ridges (reticulate pollen) from cells around random points.
       const netPts = fibonacciSphere(70).map((d) => unit(add(d, mul(randDir(k.rand), 0.12))));
       const net = (d) => {
@@ -1672,6 +2056,8 @@ export const RECIPES = {
             },
           });
         }
+        // Out of the furrow on its underside.
+        granules([[0, -1, 0.15]], 0.55, 1.25);
         return;
       }
       if (o.kind === "lily") {
@@ -1689,6 +2075,16 @@ export const RECIPES = {
             return litGloss(mix(shade(col, 0.62), mix(col, "#ffffff", 0.3), r), c.n, 0.35);
           },
         });
+        // Out of the long furrow on top.
+        granules(
+          [
+            [-0.5, 1, 0.1],
+            [0, 1, 0.1],
+            [0.5, 1, 0.1],
+          ],
+          0.35,
+          1.3,
+        );
         return;
       }
       // Sunflower: a spiky ball with three pores.
@@ -1718,6 +2114,8 @@ export const RECIPES = {
             litGloss(mix(col, "#fff7d6", clamp((c.lp[1] + L / 2) / L, 0, 1) * 0.7), c.n, 0.4),
         });
       }
+      // Out of the three pores.
+      granules(pores, 0.4, 1.45);
     },
   },
 
@@ -1739,135 +2137,28 @@ export const RECIPES = {
       },
       { key: "variant", label: "Variant", type: "slider", min: 1, max: 9, step: 1, default: 3 },
     ],
+    controls: [{ key: "regrow", label: "Regrow", type: "pulse", ease: 3.6 }],
+    action: { key: "regrow", label: "Grow a new flake" },
+    // A tap melts the arms back from their tips to the middle, then a new
+    // flake grows out from the centre, branch by branch: three patterns
+    // (parts), one after another, each tap.
     drive(t, c, out) {
+      const p = progress(c.regrow);
+      const s = p * 3.6;
+      const on = c.regrow > 0;
+      const m = mem(c);
+      if (fired(m, "regrow", c.regrow)) m.n = (m.n ?? 0) + 1;
+      const n = m.n ?? 0;
+      const shown = on && s < 1.1 ? (n + 2) % 3 : n % 3;
+      out.grow = on ? (s < 1.1 ? 1 - ease(band(s, 0, 1.1)) : ease(band(s, 1.15, 3.4))) : 1;
+      for (let i = 0; i < 3; i++) out.parts[`flake${i}`] = { visible: i === shown ? 1 : 0 };
       out.body = { quat: quatAxisAngle([0, 1, 0], 0.35 * Math.sin(t * 0.4)) };
     },
     build(k, o) {
-      // Its own random numbers, so each variant is a different flake.
-      let seed = (o.variant * 7919 + o.style.length * 104729) >>> 0;
-      const rnd = () => {
-        seed = (seed + 0x6d2b79f5) >>> 0;
-        let t = seed;
-        t = Math.imul(t ^ (t >>> 15), t | 1);
-        t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
-        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-      };
-      const ice = (c) => {
-        const r = Math.hypot(c.p[0], c.p[1]);
-        let col = mix("#e8f6ff", "#6fb8ee", smoothstep(0.1, 1.05, r));
-        if (c.n[2] < 0) col = shade(col, 0.9);
-        return col;
-      };
-      const segs = [];
-      // A flat bar from a to b (in the XY plane) of width w.
-      const bar = (a, b, w) => segs.push({ a, b, w });
-      const plates = [];
-      const style = o.style;
-      // One arm along +Y; the others are copies turned by 60 degrees.
-      const arm = [];
-      const L = 1;
-      if (style === "star") {
-        arm.push({ a: [0, 0], b: [0, L], w: 0.11 });
-        arm.push({ a: [0, 0.55], b: [0.16, 0.72], w: 0.05 });
-        arm.push({ a: [0, 0.55], b: [-0.16, 0.72], w: 0.05 });
-      } else if (style === "plate") {
-        plates.push({ r: 0.62, w: 0.05 });
-        arm.push({ a: [0, 0], b: [0, 0.62], w: 0.06 });
-        for (let i = 1; i <= 3; i++) {
-          const y = 0.15 * i;
-          const l = 0.12 + 0.05 * i * rnd();
-          arm.push({ a: [0, y], b: [l * 0.87, y + l * 0.5], w: 0.025 });
-          arm.push({ a: [0, y], b: [-l * 0.87, y + l * 0.5], w: 0.025 });
-        }
-        arm.push({ a: [0, 0.62], b: [0, L], w: 0.08 });
-        arm.push({ a: [0, 0.85], b: [0.13, 0.95], w: 0.04 });
-        arm.push({ a: [0, 0.85], b: [-0.13, 0.95], w: 0.04 });
-      } else {
-        const fern = style === "fern";
-        arm.push({ a: [0, 0], b: [0, L], w: 0.07 });
-        const n = fern ? 9 : 4 + Math.floor(rnd() * 2);
-        for (let i = 0; i < n; i++) {
-          const y = 0.18 + (0.72 * (i + 0.5 * rnd())) / n;
-          const env = Math.sin(((y - 0.1) / 0.95) * Math.PI);
-          const l = (fern ? 0.28 : 0.3 + 0.15 * rnd()) * (0.35 + 0.65 * env);
-          for (const s of [1, -1]) {
-            const b = [s * l * 0.87, y + l * 0.5];
-            arm.push({ a: [0, y], b, w: fern ? 0.03 : 0.045 });
-            if (!fern && l > 0.2) {
-              // Side branches of the side branches.
-              for (let j = 1; j <= 2; j++) {
-                const f = j / 3;
-                const p = [s * l * 0.87 * f, y + l * 0.5 * f];
-                const l2 = l * (0.35 - 0.1 * j);
-                arm.push({ a: p, b: [p[0], p[1] + l2], w: 0.025 });
-                arm.push({ a: p, b: [p[0] + s * l2 * 0.87, p[1] - l2 * 0.5], w: 0.025 });
-              }
-            }
-          }
-        }
-        if (!fern) plates.push({ r: 0.17, w: 0.04 });
-      }
-      for (let i = 0; i < 6; i++) {
-        const a = (i / 6) * TAU;
-        const ca = Math.cos(a);
-        const sa = Math.sin(a);
-        const rot = (p) => [p[0] * ca - p[1] * sa, p[0] * sa + p[1] * ca, 0];
-        for (const s of arm) bar(rot(s.a), rot(s.b), s.w);
-      }
-      for (const s of segs) {
-        const d = sub(s.b, s.a);
-        const l = len(d);
-        k.add(k.box(s.w, l + s.w * 0.8, 0.035), {
-          pos: lerp(s.a, s.b, 0.5),
-          rot: [0, 0, (Math.atan2(-d[0], d[1]) * 180) / Math.PI],
-          flat: 0.2,
-          kind: "glint",
-          params: [0.7, 0],
-          color: (c) => (c.s.face === 4 && Math.abs(c.lp[0]) < s.w * 0.2 ? "#ffffff" : ice(c)),
-        });
-      }
-      // Hexagonal plates with a ridge inside the rim.
-      const hex = (r, h) => {
-        const tris = [];
-        for (let i = 0; i < 6; i++) {
-          const a0 = (i / 6) * TAU + TAU / 12;
-          const a1 = ((i + 1) / 6) * TAU + TAU / 12;
-          const p0 = [r * Math.cos(a0), r * Math.sin(a0)];
-          const p1 = [r * Math.cos(a1), r * Math.sin(a1)];
-          for (const z of [h, -h])
-            tris.push([
-              [0, 0, z],
-              [p0[0], p0[1], z],
-              [p1[0], p1[1], z],
-            ]);
-          tris.push([
-            [p0[0], p0[1], h],
-            [p0[0], p0[1], -h],
-            [p1[0], p1[1], -h],
-          ]);
-          tris.push([
-            [p0[0], p0[1], h],
-            [p1[0], p1[1], -h],
-            [p1[0], p1[1], h],
-          ]);
-        }
-        return facets(tris, h);
-      };
-      for (const pl of plates) {
-        k.add(hex(pl.r, 0.014), {
-          flat: 0.2,
-          kind: "glint",
-          params: [0.8, 0],
-          color: (c) => {
-            const r = Math.hypot(c.p[0], c.p[1]);
-            const a = Math.atan2(c.p[1], c.p[0]);
-            // Distance to the hexagon's edge, for the inner ridge line.
-            const sec = (((a - TAU / 12) % (TAU / 6)) + TAU / 6) % (TAU / 6);
-            const apo = r * Math.cos(sec - TAU / 12);
-            const inner = Math.abs(apo - pl.r * 0.7) < 0.015 || Math.abs(apo - pl.r * 0.4) < 0.012;
-            return inner ? "#ffffff" : mix(ice(c), "#d7efff", 0.4);
-          },
-        });
+      // Three flakes of the chosen kind: the chosen variant and two more.
+      for (let f = 0; f < 3; f++) {
+        const variant = ((o.variant - 1 + 3 * f) % 9) + 1;
+        snowflake(k, o.style, variant, k.part(`flake${f}`));
       }
       k.add(k.sphere(0.05), { weight: 2, color: "#ffffff", kind: "glint", params: [1, 0] });
     },
@@ -1877,8 +2168,31 @@ export const RECIPES = {
   chromosome: {
     alive: true,
     options: [{ key: "color", label: "Colour", type: "color", default: "#8f6fe0" }],
+    controls: [{ key: "split", label: "Split", type: "pulse", ease: 4.6 }],
+    action: { key: "split", label: "Pull apart" },
+    // A tap plays anaphase: spindle fibres reach in from two poles to the
+    // kinetochores and pull the sister chromatids apart (channel 0), each
+    // led by its centromere with its arms trailing; then they come back
+    // together and the fibres let go.
+    drive(t, c, out) {
+      const p = progress(c.split);
+      const s = p * 4.6;
+      const on = c.split > 0;
+      out.morph = [ease(band(s, 0.45, 1.9)) * (1 - ease(band(s, 2.7, 4))) + 0.02 * Math.sin(t)];
+      out.parts.spindle = {
+        visible: on ? ease(band(s, 0, 0.45)) * (1 - ease(band(s, 3.8, 4.5))) : 0,
+      };
+    },
     build(k, o) {
       const col = o.color;
+      // Each chromatid moves out to its side, most at its centromere (so its
+      // arms trail behind in a V).
+      const PULL = 0.62;
+      const cenY = 0.25;
+      const pull = (p, side, t) => {
+        const lag = Math.min(1, Math.abs(t - 0.38) / 0.62);
+        return add(p, [side * PULL * (1 - 0.55 * lag), 0.06 * lag * (p[1] > cenY ? -1 : 1), 0]);
+      };
       const dark = shade(mix(col, "#2b1a5c", 0.5), 0.8);
       // Banding: the same pattern on both sister chromatids.
       const bands = [];
@@ -1915,11 +2229,10 @@ export const RECIPES = {
           return s;
         };
         k.add(tube, {
-          flat: 0.2,
+          flat: 0.3,
           interior: 0.1,
           core: mix(col, "#ffffff", 0.3),
-          kind: "breathe",
-          params: [0.02, 0],
+          to: (c) => pull(c.p, side, c.t ?? 0),
           color: (c) => {
             const t = c.t ?? 0;
             const coil = Math.sin(c.u * TAU * 2 + t * 90) * 0.5 + 0.5;
@@ -1930,13 +2243,41 @@ export const RECIPES = {
           },
         });
       }
-      // The kinetochore at the centromere.
+      // The kinetochores at the centromere, one per chromatid.
+      const kin = [0, cenY, 0.12];
       k.add(k.ellipsoid(0.1, 0.08, 0.1), {
-        pos: [0, 0.25, 0.12],
+        pos: kin,
         weight: 2,
         pattern: false,
+        to: (c) => pull(c.p, c.p[0] >= 0 ? 1 : -1, 0.38),
         color: (c) => litGloss("#ff6b8b", c.n, 0.4),
       });
+      // The spindle: a bright centrosome at each pole and fibres from it to
+      // the kinetochores, which shorten as they pull (hidden at rest).
+      const spindle = k.part("spindle");
+      for (const side of [-1, 1]) {
+        const pole = [side * 1.08, cenY, 0.05];
+        k.add(k.sphere(0.07), {
+          pos: pole,
+          part: spindle,
+          weight: 3,
+          pattern: false,
+          color: (c) => litGloss("#ffe27a", c.n, 0.5),
+        });
+        for (let i = 0; i < 7; i++) {
+          const end = add(kin, [side * 0.05, (i - 3) * 0.022, (i % 3) * 0.02 - 0.02]);
+          const bow = [0, (i - 3) * 0.07, ((i % 3) - 1) * 0.05];
+          const fibre = (u) => add(lerp(pole, end, u), mul(bow, Math.sin(u * Math.PI)));
+          k.add(k.tube(fibre, 0.009, { samples: 48, grid: 6 }), {
+            part: spindle,
+            weight: 2.5,
+            flat: 0.5,
+            pattern: false,
+            to: (c) => add(c.p, mul([side * PULL, 0, 0], c.t ?? 0)),
+            color: "#bfe8ff",
+          });
+        }
+      }
     },
   },
 
@@ -1947,9 +2288,32 @@ export const RECIPES = {
       { key: "color", label: "Colour", type: "color", default: "#f08a4b" },
       { key: "cutaway", label: "Cutaway", type: "switch", default: true },
     ],
+    controls: [{ key: "power", label: "Power up", type: "pulse", ease: 4 }],
+    action: { key: "power", label: "Make energy" },
+    // A tap powers it up: light runs along the cristae from end to end
+    // (channel 0, the electron transport chain at work), the whole thing
+    // gives a hum of a swell, and sparks of ATP pop out of the open side in
+    // three waves (channels 1 to 3) and drift off. At rest faint waves run along now and then.
+    drive(t, c, out) {
+      const p = progress(c.power);
+      const s = p * 4;
+      const on = c.power > 0;
+      const m = mem(c);
+      if (on || m.since === undefined) m.since = t;
+      const idle = (((t - m.since) * 0.13) % 1.8) - 0.3;
+      const pop = (at) => (on ? easeOut(band(s, at, at + 1.3)) : 0);
+      out.morph = [on ? -0.15 + 1.4 * band(s, 0, 1.2) : idle, pop(0.9), pop(1.25), pop(1.6)];
+      out.glow = [1, 0.8, 0.35, on ? 1.3 : 0.35];
+      out.body = { squash: -0.04 * Math.sin(band(s, 0.7, 1.3) * Math.PI) };
+      out.parts.atp = {
+        offset: [0, 0.25 * band(s, 1.2, 4), 0],
+        visible: on && s > 0.85 ? 1 - ease(band(s, 3, 3.95)) : 0,
+      };
+    },
     build(k, o) {
       const col = o.color;
       const cut = o.cutaway;
+      k.fitMorphs = false; // the sparks fly out past the frame
       const half = 0.75;
       const R = 0.45;
       // Lying across the view with the open side turned up towards the viewer.
@@ -1960,9 +2324,7 @@ export const RECIPES = {
       const W = (p) => quatRotate(q, p);
       const cutY = 0.06;
       const open = (p) => cut && local(p)[0] > cutY;
-      const breathe = { kind: "breathe", params: [0.015, 0] };
       k.add(capsuleSurface(k, half, R, cut ? cutY : Infinity), {
-        ...breathe,
         quat: q,
         flat: 0.2,
         interior: cut ? 0 : 0.08,
@@ -1974,7 +2336,6 @@ export const RECIPES = {
       });
       // Inner membrane just inside, and the matrix floor seen from above.
       k.add(capsuleSurface(k, half - 0.04, R - 0.05, cut ? cutY : Infinity), {
-        ...breathe,
         quat: q,
         flat: 0.2,
         color: (c) =>
@@ -1998,11 +2359,14 @@ export const RECIPES = {
           { grid: 24, thick: 0.02 },
         );
         k.add(shelf, {
-          ...breathe,
           quat: q,
           weight: 1.3,
           flat: 0.2,
           pattern: false,
+          // Light runs along the cristae, end to end.
+          kind: "band",
+          channel: 0,
+          params: (c) => [(c.lp[1] + half + 0.1) / (2 * half + 0.2), 0.09],
           color: (c) => {
             const lp = c.lp;
             // Stay inside the inner membrane.
@@ -2023,6 +2387,33 @@ export const RECIPES = {
         if (cut && lp[0] > cutY) return null;
         return { p: W(lp), color: rand() < 0.7 ? "#7a2e1c" : "#fff0c0", opacity: 0.95 };
       });
+      // ATP: bright sparks packed among the cristae (hidden until a tap),
+      // which pop out through the open side in three waves (channels 1-3)
+      // and spread. Each is a bright core in a soft halo.
+      const atp = k.part("atp");
+      const sparks = [];
+      for (let i = 0; i < 90; i++) {
+        const x = (k.rand() * 2 - 1) * half * 0.9;
+        const a = k.rand() * TAU;
+        const r = (R - 0.15) * Math.sqrt(k.rand());
+        const lp = [Math.min(r * Math.cos(a), cutY - 0.02), x, r * Math.sin(a)];
+        // Out mostly through the cut (local +x, towards the viewer).
+        const d = unit([0.9 + 0.6 * k.rand(), (k.rand() * 2 - 1) * 0.9, (k.rand() * 2 - 1) * 1.1]);
+        const go = add(lp, mul(d, 0.5 + 0.7 * k.rand()));
+        sparks.push({ p: W(lp), to: W(go), channel: 1 + (i % 3), hot: k.rand() < 0.6 });
+      }
+      k.cloud({ count: 180, size: 2.2, pattern: false, part: atp }, (rand, i) => {
+        const sp = sparks[i % sparks.length];
+        const halo = Math.floor(i / sparks.length) % 2 === 1;
+        return {
+          p: sp.p,
+          to: sp.to,
+          channel: sp.channel,
+          size: halo ? 2.6 : 1,
+          color: halo ? "#ffb52e" : sp.hot ? "#fffbe0" : "#ffe27a",
+          opacity: halo ? 0.28 : 1,
+        };
+      });
     },
   },
 
@@ -2030,10 +2421,27 @@ export const RECIPES = {
   paramecium: {
     alive: true,
     options: [{ key: "color", label: "Colour", type: "color", default: "#7fcb98" }],
-    controls: [{ key: "swim", label: "Swim", type: "slider", default: 0.5 }],
+    controls: [
+      { key: "swim", label: "Swim", type: "slider", default: 0.5 },
+      { key: "loop", label: "Loop", type: "pulse", ease: 4.2 },
+    ],
+    action: { key: "loop", label: "Swim a loop" },
+    // A tap sets its cilia beating hard in waves and it swims a full loop
+    // in the plane of the view (turning about the view keeps it drawn in
+    // the right order), coming back to where it was.
     drive(t, c, out) {
-      out.amount = 0.3 + 1.6 * c.swim;
-      out.body = { quat: quatAxisAngle([1, 0.1, 0], 0.25 * Math.sin(t * 0.5)) };
+      const p = progress(c.loop);
+      const s = p * 4.2;
+      const beat = band(s, 0, 0.4) * (1 - ease(band(s, 3.4, 4.2)));
+      out.amount = (0.3 + 1.6 * c.swim) * (1 + 3.5 * beat);
+      const th = TAU * ease(band(s, 0.3, 3.6));
+      const { F, N } = PARAMECIUM;
+      const rho = 0.28;
+      const rock = quatAxisAngle([1, 0.1, 0], 0.25 * Math.sin(t * 0.5) * (1 - beat));
+      out.body = {
+        quat: quatMul(quatAxisAngle(VIEW, th), rock),
+        offset: add(mul(F, rho * Math.sin(th)), mul(N, rho * (1 - Math.cos(th)))),
+      };
     },
     build(k, o) {
       const col = o.color;
@@ -2149,11 +2557,26 @@ export const RECIPES = {
   amoeba: {
     alive: true,
     options: [{ key: "color", label: "Colour", type: "color", default: "#9fb6ea" }],
+    controls: [{ key: "crawl", label: "Crawl", type: "pulse", ease: 5.2 }],
+    action: { key: "crawl", label: "Crawl" },
+    // A tap makes it crawl: a pseudopod pushes out to the right (channel 0)
+    // and the cell oozes over into it, then one pushes out to the left
+    // (channel 1) and it oozes back. At rest its pods stretch a little.
     drive(t, c, out) {
+      const p = progress(c.crawl);
+      const s = p * 5.2;
+      const on = c.crawl > 0 ? 1 : 0;
+      const right = ease(band(s, 0.05, 1.1)) * (1 - ease(band(s, 1.2, 2.4)));
+      const left = ease(band(s, 2.5, 3.5)) * (1 - ease(band(s, 3.6, 4.9)));
+      const over = ease(band(s, 1.1, 2.5)) * (1 - ease(band(s, 3.5, 5)));
+      const idle = 0.07 * (1 - on);
+      out.morph = [right + idle * Math.sin(t * 0.7), left + idle * Math.sin(t * 0.7 + 2.5)];
+      out.body = { offset: mul(AMOEBA_DIR, 0.36 * over) };
       out.amount = 1;
     },
     build(k, o) {
       const col = o.color;
+      k.fitMorphs = false; // a new pod stays inside the view
       // Pseudopods reaching out across a flattened blob.
       const pods = [];
       for (let i = 0; i < 5; i++) {
@@ -2173,10 +2596,25 @@ export const RECIPES = {
         return r;
       };
       const breathe = { kind: "breathe", params: [0.035, 0] };
+      // Each side of the cell can push out a new pseudopod.
+      const pod = (p, sgn) => {
+        const D = mul(AMOEBA_DIR, sgn);
+        const r = Math.hypot(p[0], p[2]);
+        const d = [p[0] / (r || 1), 0, p[2] / (r || 1)];
+        const cg = dot(d, D);
+        // A broad lobe with a round tip: the skin bulges out most along
+        // the pod's line, less to the sides, and draws in a little.
+        const f = Math.exp(-((Math.acos(clamp(cg, -1, 1)) / 0.55) ** 2));
+        const reach = r + 0.6 * f;
+        const along = add(mul(D, cg * reach), mul(sub(d, mul(D, cg)), r * (1 - 0.3 * f)));
+        return [along[0], p[1] * (1 - 0.12 * f), along[2]];
+      };
+      const side = (p) => (dot(p, AMOEBA_DIR) >= 0 ? 0 : 1);
       k.add(k.radial(radius, { grid: 96 }), {
-        ...breathe,
+        channel: (c) => side(c.p),
+        to: (c) => pod(c.p, side(c.p) ? -1 : 1),
         scale: [1, 0.42, 1],
-        flat: 0.2,
+        flat: 0.3,
         opacity: 0.55,
         share: 0.4,
         color: (c) => {
@@ -2191,11 +2629,17 @@ export const RECIPES = {
       k.cloud({ share: 0.04, size: 0.7, pattern: false }, (rand) => {
         const d = unit([rand() * 2 - 1, (rand() * 2 - 1) * 0.2, rand() * 2 - 1]);
         const r = radius(d) * 0.75 * Math.sqrt(rand());
+        const p = [d[0] * r, (rand() * 2 - 1) * 0.12, d[2] * r];
+        // Granules stream into a new pod.
+        const ch = side(p);
+        const D = mul(AMOEBA_DIR, ch ? -1 : 1);
+        const flow = 0.45 * smoothstep(-0.2, 0.7, dot(p, D)) * (0.6 + 0.4 * rand());
         return {
-          p: [d[0] * r, (rand() * 2 - 1) * 0.12, d[2] * r],
+          p,
           color: mix(shade(col, 0.55), "#5a6fa8", rand()),
           opacity: 0.9,
-          ...breathe,
+          channel: ch,
+          to: add(p, mul(D, flow)),
         };
       });
       // Inside: nucleus, a pulsing contractile vacuole and food vacuoles.
@@ -2351,3 +2795,346 @@ const PHAGE_SLIDE = 0.15;
 // How far the tail tube pokes out below the plate, and the legs' splay (radians).
 const PHAGE_POKE = 0.3;
 const PHAGE_SPLAY = 0.45;
+
+// ---- Bacterium fission --------------------------------------------------------------
+
+// The rod (half length and radius, lying along its local x, tilted up to
+// the right across the view) and its two daughters: shorter capsules,
+// DAUGHTER_HALF long, whose inner ends meet at the middle.
+const BAC = (() => {
+  const tilt = quatFromTo([1, 0, 0], unit([0.82, 0.34, -0.46]));
+  const half = 0.75;
+  const R = 0.42;
+  const hd = 0.2;
+  const Rd = 0.4;
+  return {
+    half,
+    R,
+    hd,
+    Rd,
+    tilt,
+    untilt: [-tilt[0], -tilt[1], -tilt[2], tilt[3]],
+    axis: quatRotate(tilt, [1, 0, 0]),
+    D: hd + Rd + 0.025, // a daughter's centre from the middle
+    apart: 0.13, // how far each daughter slides out
+  };
+})();
+
+// Where a point of the rod's skin goes when the cell has pinched in two
+// (rod-local coordinates): its half's skin, from the outer pole to the
+// middle, is spread over a whole daughter capsule, so the middle closes
+// into the daughter's new round end.
+function fission(P) {
+  const { half, R, hd, Rd, D } = BAC;
+  const sgn = P[0] >= 0 ? 1 : -1;
+  const ax = Math.abs(P[0]);
+  const r = Math.hypot(P[1], P[2]);
+  const dir = r > 1e-6 ? [P[1] / r, P[2] / r] : [1, 0];
+  const cap = (Math.PI / 2) * R;
+  const s = ax > half ? R * Math.atan2(r, ax - half) : cap + (half - ax);
+  const capD = (Math.PI / 2) * Rd;
+  const total = 2 * capD + 2 * hd;
+  const sd = (s / (cap + half)) * total;
+  let x;
+  let rr;
+  if (sd < capD) {
+    x = hd + Rd * Math.cos(sd / Rd);
+    rr = Rd * Math.sin(sd / Rd);
+  } else if (sd < capD + 2 * hd) {
+    x = hd - (sd - capD);
+    rr = Rd;
+  } else {
+    const a = (total - sd) / Rd;
+    x = -hd - Rd * Math.cos(a);
+    rr = Rd * Math.sin(a);
+  }
+  return [sgn * (D + x), dir[0] * rr, dir[1] * rr];
+}
+
+// Where a point inside the rod goes: into its own half's daughter, which
+// is about half as long.
+function inside(P) {
+  const { half, R, hd, D } = BAC;
+  const sgn = P[0] >= 0 ? 1 : -1;
+  const e = half + R * 0.5;
+  const ed = hd + R * 0.45;
+  return [sgn * (D - ed + (Math.abs(P[0]) / e) * 2 * ed), P[1] * 0.95, P[2] * 0.95];
+}
+
+// ---- Animal cell division -----------------------------------------------------------
+
+// The cell (radius about 1) divides along AXIS, across the view. Each half
+// becomes a daughter cell of radius Rd centred D from the middle; the
+// nucleus (centre nc, radius NR) splits into two of radius NRd at the
+// daughters' centres.
+const CELL = (() => {
+  const Rd = 0.62;
+  return {
+    axis: unit([0.82, 0, -0.5]),
+    Rd,
+    D: Rd + 0.012,
+    nc: [-0.08, 0.02, -0.08],
+    NR: 0.4,
+    NRd: 0.3,
+  };
+})();
+
+// A point of a sphere about `center` whose halves (across the division
+// axis) each become a whole sphere of `r0` times the point's distance,
+// centred `to` from the middle: the angle from the axis doubles, so the
+// rim between the halves closes into each new sphere's inner end.
+function halveSphere(P, center, scale, to) {
+  const A = CELL.axis;
+  const v = sub(P, center);
+  const a = dot(v, A);
+  const sgn = a >= 0 ? 1 : -1;
+  const r = len(v);
+  const perp = sub(v, mul(A, a));
+  const pl = len(perp);
+  const dir = pl > 1e-6 ? mul(perp, 1 / pl) : basis(A)[0];
+  const alpha = 2 * Math.acos(clamp(Math.abs(a) / (r || 1), 0, 1));
+  const out = add(mul(A, sgn * Math.cos(alpha)), mul(dir, Math.sin(alpha)));
+  return add(mul(A, sgn * to), mul(out, r * scale));
+}
+
+// The membrane: each half wraps a daughter cell.
+function cellSkin(P) {
+  return halveSphere(P, [0, 0, 0], CELL.Rd, CELL.D);
+}
+
+// Where a piece inside the cell goes: into its own half's daughter, kept
+// clear of the new nucleus and inside the membrane.
+function cellPart(P) {
+  const A = CELL.axis;
+  const a = dot(P, A);
+  const sgn = a >= 0 ? 1 : -1;
+  const perp = sub(P, mul(A, a));
+  let off = add(mul(A, sgn * (Math.abs(a) - 0.4) * 0.9), mul(perp, 0.6));
+  const l = len(off) || 1e-6;
+  off = mul(off, clamp(l, CELL.NRd + 0.08, CELL.Rd - 0.1) / l);
+  return add(mul(A, sgn * CELL.D), off);
+}
+
+// The cytoplasm's fill: into its daughter, inside the membrane.
+function cellInside(P) {
+  const A = CELL.axis;
+  const a = dot(P, A);
+  const sgn = a >= 0 ? 1 : -1;
+  const perp = sub(P, mul(A, a));
+  let off = add(mul(A, sgn * (Math.abs(a) - 0.45) * 1.05), mul(perp, 0.62));
+  const l = len(off) || 1e-6;
+  off = mul(off, Math.min(l, CELL.Rd - 0.06) / l);
+  return add(mul(A, sgn * CELL.D), off);
+}
+
+// The nucleus splits into two smaller ones at the daughters' centres.
+function nucleusSplit(P) {
+  return halveSphere(P, CELL.nc, CELL.NRd / CELL.NR, CELL.D);
+}
+
+// The nucleolus splits too: one small one in each new nucleus.
+function nucleolusSplit(P, at, r) {
+  const A = CELL.axis;
+  const sgn = dot(sub(P, at), A) >= 0 ? 1 : -1;
+  const home = add(mul(A, sgn * CELL.D), mul(sub(at, CELL.nc), CELL.NRd / CELL.NR));
+  return add(halveSphere(P, at, 0.72, 0), home);
+}
+
+// The ER round the nucleus goes with each new nucleus, drawn in a little.
+function erSplit(P) {
+  const A = CELL.axis;
+  const v = sub(P, CELL.nc);
+  const sgn = dot(v, A) >= 0 ? 1 : -1;
+  return add(mul(A, sgn * CELL.D), mul(v, 0.7));
+}
+
+// ---- White blood cell's catch -------------------------------------------------------
+
+// E: the direction the bacterium comes from (the right of the view, a
+// little up); F: where it ends up inside the cell (the path bends in
+// through the cup to it); side: across its path.
+const WBC = (() => {
+  const E = unit([0.8, 0.42, -0.42]);
+  // Just under the front of the membrane, so it shows as it is digested.
+  const F = add(mul(E, 0.5), mul(VIEW, 0.4));
+  return { E, F, side: unit(cross(E, VIEW)) };
+})();
+
+// The phagocytic cup: round the side facing E the membrane rises into a
+// rim that reaches out and curls round the bacterium, and the middle of
+// the cup dips in where the bacterium presses.
+function wbcCup(P) {
+  const { E } = WBC;
+  const r = len(P);
+  const d = mul(P, 1 / (r || 1));
+  const g = Math.acos(clamp(dot(d, E), -1, 1));
+  const rim = Math.exp(-(((g - 0.6) / 0.3) ** 2));
+  const dip = Math.exp(-((g / 0.32) ** 2));
+  const toAxis = sub(mul(E, dot(d, E)), d); // towards the cup's middle
+  return add(P, add(mul(E, 0.44 * rim - 0.14 * dip), mul(toAxis, 0.38 * rim)));
+}
+
+// The amoeba crawls to the right of the view and back.
+const AMOEBA_DIR = unit([0.82, 0, -0.5]);
+
+// The virus's copies leave along the view's diagonal (up-left and
+// down-right on screen). They are built at `home`, `scale` times the size.
+const VIRUS = (() => {
+  const right = unit(cross([0, 1, 0], VIEW));
+  const up = cross(VIEW, right);
+  const behind = 0.6;
+  return {
+    diag: unit(add(mul(right, -0.75), mul(up, 0.66))),
+    behind,
+    home: mul(VIEW, -behind), // where the copies are built
+    scale: 0.55,
+  };
+})();
+
+// The diatom's shell faces up and a little towards the view.
+const DIATOM_AXIS = unit([0.15, 0.85, 0.5]);
+
+// The paramecium's loop: F is its front as seen on screen, N the side it
+// turns towards (turning about VIEW by a positive angle).
+const PARAMECIUM = (() => {
+  const front = quatRotate(quatEuler(0, 31, 24), [1, 0, 0]);
+  const F = unit(sub(front, mul(VIEW, dot(front, VIEW))));
+  return { F, N: cross(VIEW, F) };
+})();
+
+// ---- Snowflake ----------------------------------------------------------------------
+
+// One six-armed flake of a style and variant, as a part. Each splat grows
+// in (kind "grow") by its distance from the centre, so the arms grow out
+// from the middle and melt back from their tips.
+function snowflake(k, style, variant, part) {
+  const grow = {
+    kind: "grow",
+    params: (c) => [clamp(Math.hypot(c.p[0], c.p[1]) / 1.12, 0, 0.92), 0],
+  };
+  // Its own random numbers, so each variant is a different flake.
+  let seed = (variant * 7919 + style.length * 104729) >>> 0;
+  const rnd = () => {
+    seed = (seed + 0x6d2b79f5) >>> 0;
+    let t = seed;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+  const ice = (c) => {
+    const r = Math.hypot(c.p[0], c.p[1]);
+    let col = mix("#e8f6ff", "#6fb8ee", smoothstep(0.1, 1.05, r));
+    if (c.n[2] < 0) col = shade(col, 0.9);
+    return col;
+  };
+  const segs = [];
+  // A flat bar from a to b (in the XY plane) of width w.
+  const bar = (a, b, w) => segs.push({ a, b, w });
+  const plates = [];
+  // One arm along +Y; the others are copies turned by 60 degrees.
+  const arm = [];
+  const L = 1;
+  if (style === "star") {
+    arm.push({ a: [0, 0], b: [0, L], w: 0.11 });
+    arm.push({ a: [0, 0.55], b: [0.16, 0.72], w: 0.05 });
+    arm.push({ a: [0, 0.55], b: [-0.16, 0.72], w: 0.05 });
+  } else if (style === "plate") {
+    plates.push({ r: 0.62, w: 0.05 });
+    arm.push({ a: [0, 0], b: [0, 0.62], w: 0.06 });
+    for (let i = 1; i <= 3; i++) {
+      const y = 0.15 * i;
+      const l = 0.12 + 0.05 * i * rnd();
+      arm.push({ a: [0, y], b: [l * 0.87, y + l * 0.5], w: 0.025 });
+      arm.push({ a: [0, y], b: [-l * 0.87, y + l * 0.5], w: 0.025 });
+    }
+    arm.push({ a: [0, 0.62], b: [0, L], w: 0.08 });
+    arm.push({ a: [0, 0.85], b: [0.13, 0.95], w: 0.04 });
+    arm.push({ a: [0, 0.85], b: [-0.13, 0.95], w: 0.04 });
+  } else {
+    const fern = style === "fern";
+    arm.push({ a: [0, 0], b: [0, L], w: 0.07 });
+    const n = fern ? 9 : 4 + Math.floor(rnd() * 2);
+    for (let i = 0; i < n; i++) {
+      const y = 0.18 + (0.72 * (i + 0.5 * rnd())) / n;
+      const env = Math.sin(((y - 0.1) / 0.95) * Math.PI);
+      const l = (fern ? 0.28 : 0.3 + 0.15 * rnd()) * (0.35 + 0.65 * env);
+      for (const s of [1, -1]) {
+        const b = [s * l * 0.87, y + l * 0.5];
+        arm.push({ a: [0, y], b, w: fern ? 0.03 : 0.045 });
+        if (!fern && l > 0.2) {
+          // Side branches of the side branches.
+          for (let j = 1; j <= 2; j++) {
+            const f = j / 3;
+            const p = [s * l * 0.87 * f, y + l * 0.5 * f];
+            const l2 = l * (0.35 - 0.1 * j);
+            arm.push({ a: p, b: [p[0], p[1] + l2], w: 0.025 });
+            arm.push({ a: p, b: [p[0] + s * l2 * 0.87, p[1] - l2 * 0.5], w: 0.025 });
+          }
+        }
+      }
+    }
+    if (!fern) plates.push({ r: 0.17, w: 0.04 });
+  }
+  for (let i = 0; i < 6; i++) {
+    const a = (i / 6) * TAU;
+    const ca = Math.cos(a);
+    const sa = Math.sin(a);
+    const rot = (p) => [p[0] * ca - p[1] * sa, p[0] * sa + p[1] * ca, 0];
+    for (const s of arm) bar(rot(s.a), rot(s.b), s.w);
+  }
+  for (const s of segs) {
+    const d = sub(s.b, s.a);
+    const l = len(d);
+    k.add(k.box(s.w, l + s.w * 0.8, 0.035), {
+      pos: lerp(s.a, s.b, 0.5),
+      rot: [0, 0, (Math.atan2(-d[0], d[1]) * 180) / Math.PI],
+      flat: 0.2,
+      part,
+      ...grow,
+      color: (c) => (c.s.face === 4 && Math.abs(c.lp[0]) < s.w * 0.2 ? "#ffffff" : ice(c)),
+    });
+  }
+  // Hexagonal plates with a ridge inside the rim.
+  const hex = (r, h) => {
+    const tris = [];
+    for (let i = 0; i < 6; i++) {
+      const a0 = (i / 6) * TAU + TAU / 12;
+      const a1 = ((i + 1) / 6) * TAU + TAU / 12;
+      const p0 = [r * Math.cos(a0), r * Math.sin(a0)];
+      const p1 = [r * Math.cos(a1), r * Math.sin(a1)];
+      for (const z of [h, -h])
+        tris.push([
+          [0, 0, z],
+          [p0[0], p0[1], z],
+          [p1[0], p1[1], z],
+        ]);
+      tris.push([
+        [p0[0], p0[1], h],
+        [p0[0], p0[1], -h],
+        [p1[0], p1[1], -h],
+      ]);
+      tris.push([
+        [p0[0], p0[1], h],
+        [p1[0], p1[1], -h],
+        [p1[0], p1[1], h],
+      ]);
+    }
+    return facets(tris, h);
+  };
+  for (const pl of plates) {
+    k.add(hex(pl.r, 0.014), {
+      flat: 0.2,
+      part,
+      ...grow,
+      color: (c) => {
+        const r = Math.hypot(c.p[0], c.p[1]);
+        const a = Math.atan2(c.p[1], c.p[0]);
+        // Distance to the hexagon's edge, for the inner ridge line.
+        const sec = (((a - TAU / 12) % (TAU / 6)) + TAU / 6) % (TAU / 6);
+        const apo = r * Math.cos(sec - TAU / 12);
+        const inner = Math.abs(apo - pl.r * 0.7) < 0.015 || Math.abs(apo - pl.r * 0.4) < 0.012;
+        return inner ? "#ffffff" : mix(ice(c), "#d7efff", 0.4);
+      },
+    });
+  }
+}

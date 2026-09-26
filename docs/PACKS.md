@@ -89,9 +89,10 @@ k.add(shape, {
   even: true,       // place surface splats evenly (spheres, boxes, cylinders, cones, lathes, param)
   interior: 0.12,   // share of this shape's splats that fill its inside (for Slice)
   core: "#hex" | (c) => colour,   // colour of the inside
-  part: index,      // from k.part(...)
+  part: index,      // from k.part(...), or (c) => index to split a shape between parts
   kind: "flame", params: [a, b] | (c) => [a, b],  // a behaviour (section 6)
   pattern: false,   // keep this shape's own colours under flags and patterns
+  fit: false,       // leave it out of the fit (see "Hidden pieces count in the fit")
 });
 ```
 
@@ -316,9 +317,33 @@ a cloud splat:
 | `pulse`   | A glow (`out.glow`) runs along a path.                    | position along the path 0..1          | unused                           |
 | `wave`    | Ripples up and down.                                      | amount                                | phase                            |
 | `glint`   | Sparkles as the camera moves.                             | amount                                | unused                           |
+| `band`    | Glows (`out.glow`) as its channel passes a.               | where along the channel (0..1)        | band width (0.08)                |
+| `fade`    | Fades out (alpha) as its channel passes a.                | where along the channel               | width; negative: fades in        |
 
 `amount` from `drive` multiplies beat, breathe, flame, rise, twinkle, sway and wave. Behaviours run
 in the toy's rest pose, before parts move it.
+
+**Channels (E3).** `out.morph = [a, b, c, d]` sets four channels (0 at rest) that drive three more
+kinds. They run with motion on or off (like parts), and a shape or cloud splat picks its channel
+with `channel: 0..3` (or `(c) => n`):
+
+- **Morph**: `to: (c) => [x, y, z]` (a cloud splat: `to: [x, y, z]`) gives each splat a target in
+  recipe coordinates; it moves there in a straight line as its channel goes 0 → 1 (and beyond, or
+  back past its rest place for negative values). Use it for soft things that really change shape: a
+  red cell curling into a sickle, a cell pinching in two, a knot contorting. Return `null` to keep a
+  splat still. Targets count in the fit. Splats keep the orientation they were built with, so where
+  the surface turns a lot use rounder splats (`flat` 0.4 or more). Morph combines with a part (the
+  part moves the morphed splat), not with another behaviour.
+- **Band**: `kind: "band", params: [at, width]` adds the glow colour where the channel passes `at`:
+  a wave of light that starts at the tap (a calcium wave, a sheen wiping across). Give each splat
+  its `at` from its place (distance along an arm, height).
+- **Fade**: `kind: "fade", params: [at, width]` clears a splat by its alpha as the channel passes
+  `at` (a negative width makes it appear instead). Unlike `visible` and `grow`, it does not shrink
+  splats, so a fading layer never turns to speckle.
+
+**Skin**: `skin: (c) => [a, b, s]` makes a splat follow tokens `a` and `b` (their `offset` only),
+blended by `s`: an edge between two moving corners stays a straight edge (the hypercube's edges
+follow its sixteen corners, which are tokens). Use round splats: they are not turned.
 
 ## 7. House rules
 
@@ -399,7 +424,9 @@ form is in CLAUDE.md.
   them (the quartz points, the opal).
 - **Hidden pieces count in the fit.** Every splat is used to fit the toy into its frame, hidden or
   not, so build an effect's pieces small (inside the toy's resting size) and grow them with their
-  part's `scale` (the Sun's flare, the star's red giant and shell, the meteor's fireball).
+  part's `scale` (the Sun's flare, the star's red giant and shell, the meteor's fireball), or add
+  them with `fit: false` when they must be built off to one side and stay inside the view (the
+  Möbius strip's riders, built in front of and behind the band for the draw order).
 - **Light that plays over a surface.** A layer of splats coloured exactly as the surface is there
   (invisible at rest) with `kind: "pulse"` flashes as `out.glow` runs over it; change the glow's
   colour each frame for rainbow fire (diamond, opal) or keep it one colour for a running light

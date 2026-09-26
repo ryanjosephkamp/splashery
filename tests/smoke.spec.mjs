@@ -539,6 +539,23 @@ test.describe("Splashery v3 engine (WebGL2)", () => {
     expect(problems).toEqual([]);
   });
 
+  test("a kit toy can change shape: the red blood cell curls into a sickle (morph)", async ({
+    page,
+  }) => {
+    const problems = watchConsole(page);
+    await loadApp(page);
+    await page.click(".toy-card[data-toy='red-blood-cell']");
+    await waitForToy(page, "Red blood cell");
+    await expect(page.locator("#toy-action")).toHaveText("Sickle and relax");
+    const canvas = page.locator("#stage");
+    const disc = await canvas.screenshot({ type: "png" });
+    await page.click("#toy-action");
+    await page.waitForTimeout(1600);
+    const sickle = await canvas.screenshot({ type: "png" });
+    expect(await countDifferentPixels(page, disc, sickle)).toBeGreaterThan(3000);
+    expect(problems).toEqual([]);
+  });
+
   test("toys move by themselves once motion is on, and any toy can bounce", async ({ page }) => {
     const problems = watchConsole(page);
     await page.emulateMedia({ reducedMotion: "reduce" });

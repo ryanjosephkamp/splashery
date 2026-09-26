@@ -3,16 +3,66 @@
 The current state and the next phase. The session that finishes a phase updates this file. The
 ground rules are in [CLAUDE.md](../CLAUDE.md).
 
-## Current state (2026-09-25, after Phase E2; next: Phase E3)
+## Current state (2026-09-25, after Phase E3; next: Phase E4)
 
 - Phase A is done: splashery PR #13 and homepage PR #33 in
   `ryanjosephkamp/ryanjosephkamp.github.io`, both merged. Phases B (PR #17), C1 (PR #18), C2 (PR
-  #19), D (PR #20), E1 (PR #21), E1b (PRs #22–#24) and E1c (PRs #26–#28) are merged. The owner
-  approved E1c without changes ("everything from E1 looks great").
-- **Phase E2** is one PR from `claude/quirky-pasteur-modo55`: new tap effects for all 32 space,
-  atoms and gems toys (TOY-PLAN.md has each one's `improved` entry), sounds re-timed to them, and
-  clips of all 32 on the Effect review page. Check it is merged before starting E3. **Next: Phase
-  E3** (below).
+  #19), D (PR #20), E1 (PR #21), E1b (PRs #22–#24), E1c (PRs #26–#28) and E2 (PRs #29–#31) are
+  merged. The owner approved everything from E2 ("Everything from E2 is approved and looks good!").
+- **Phase E3** is one PR from `claude/trusting-cerf-d1rtbs` (PR #32): new tap effects for all 26
+  tiny, anatomy and maths toys (TOY-PLAN.md has each one's `improved` entry), sounds re-timed to
+  them, and clips of all 26 on the Effect review page (the older, approved clips were removed from
+  the page; the owner's marks on them stay in its database). Check it is merged, and read the
+  owner's verdicts (`e3-<toy id>`), before starting E4. **Next: Phase E4** (below).
+- **E3 review (2026-09-26).** The owner marked 23 of the 26 E3 clips good (verdicts `e3-<id>` on the
+  Effect review page). The three notes were fixed in the same PR: the Möbius strip has a Rider
+  option (a blue race car by default, red on the Ocean colours; a rolling beach ball; a duck on a
+  bicycle; the ant), whose pieces are tokens listed in `RIDERS` in `src/packs/maths.js`; the lungs'
+  deep breath is about twice as big (`lungEmpty` in `src/packs/anatomy.js`, larger splats so the
+  stretched surface stays closed); the Mandelbulb no longer twists: its seven horizontal discs click
+  round in opposite directions like a combination lock, each by a seventh of a turn (the bulb's own
+  symmetry, and its splats are laid down in sevens), then snap back to their built pose unseen.
+  Clips of the fixes (`e3f-…`) are at the top of the Effect review page.
+- **`fit: false` (E3 review).** A shape added with `fit: false` is left out of the toy's fit (the
+  Möbius riders, built in front of and behind the band for the draw order); keep it inside the view.
+  The kit test's "fits the unit ball" check skips these shapes.
+- **Channels (E3; docs/PACKS.md section 6).** `out.morph = [a, b, c, d]` drives four channels, with
+  motion on or off, and three new kinds follow them:
+  - `morph` (kind 17): `to: (c) => [x, y, z]` gives each splat its own target (recipe coordinates);
+    it moves there in a straight line as its `channel` goes 0 → 1 (values past 1 or below 0
+    extrapolate). The offset is packed into the splat's two behaviour values (12 bits per axis over
+    ±`MORPH_RANGE` = 2 toy units, `Kit.encodeMorphs`), so no new stream was needed. Targets count in
+    the fit unless the recipe sets `k.fitMorphs = false` (then keep the morphed shape within about
+    1.2 toy radii, the edge of the view). A non-finite target throws at build.
+  - `band` (18): glow (`out.glow`) where the channel passes `params[0]`, width `params[1]`: a light
+    front that starts at the tap (the astrocyte's calcium wave, the mitochondrion's cristae).
+  - `fade` (19): alpha fade as the channel passes `params[0]` (negative width fades in), so a layer
+    clears without speckle (the virus's copies).
+  - `skin` (20): `skin: (c) => [a, b, s]` follows tokens a and b's offsets blended by s (the
+    hypercube's edges between its sixteen corner tokens).
+  - `part` may be a function `(c) => index`, to split one shape between parts (the bacterium's
+    halves, the diatom's girdle).
+  - Tests: unit tests for the packing and for every E3 toy's tap; a smoke test that the red blood
+    cell's morph changes the picture.
+- **Morph lessons (E3).** Splats keep the orientation they were built with, so where a morph turns
+  the surface a lot (a pinch closing into a new round end) use rounder splats (`flat` 0.3–0.45).
+  Where a morph stretches a surface its splats spread apart and the far side shows through as
+  speckle: use slightly larger splats on the morphing copy (`size` 1.25–1.3: the torus knot, the
+  gyroid) or keep the stretch modest (the white cell's cup). A two-sided surface with a different
+  colour per side (the gyroid) speckles wherever one face has gaps. A morph and another behaviour
+  cannot share a splat: morphing toys lost their `breathe`; several drive a gentle idle morph or a
+  body squash instead. A toy that turns its body (the virus, the pollen grain) and sends pieces off
+  undoes the body's turn in the pieces' part so they leave in a fixed place on screen.
+- **Effects (E3).** Tiny in `src/packs/tiny.js` (fission `BAC`, division `CELL`, phagocytosis `WBC`,
+  `AMOEBA_DIR`, `PARAMECIUM`, `VIRUS`, `DIATOM_AXIS` and `snowflake()` at the end), anatomy in
+  `src/packs/anatomy.js`, maths in `src/packs/maths.js`. Two E3 effects differ from the plan: the
+  Menger sponge is carved level by level (a zoom into itself blurred), and the Mandelbulb is wrung
+  (a twist, as the owner's note asked) instead of changing power. The paramecium swims its loop
+  about the view direction (turning about the view keeps the draw order). The hypercube is a true
+  rotation in the X–W plane with 4D perspective; a full turn brings it back exactly.
+- **Sounds (E3).** 26 specs re-timed in `src/toy-sounds.js` (all pass `tools/sound-check.mjs`); the
+  heart's lub-dubs follow its racing beat. The Splashery Sound Board page was rebuilt.
+- 199 toys are keep, 2 more, 83 new.
 - **E2 review (2026-09-25).** The owner's review is word for word in
   `docs/reviews/2026-09-25-e2/review.md` (and its marks are in the Effect review page's database).
   24 of 32 were "good"; the fixes are in this PR: the Moon's phases were replaced by a landing (a
@@ -65,7 +115,11 @@ ground rules are in [CLAUDE.md](../CLAUDE.md).
   from ANGLE. Splashery's own shaders use no integer textures, so it comes from the engine's splat
   draw (likely a draw while one of its integer data textures is being swapped); the test passed in 4
   re-runs straight after. If it comes back, catch the trace (`test-results/`) before cleaning up,
-  and look at when the engine swaps its order or work-buffer textures.
+  and look at when the engine swaps its order or work-buffer textures. In E3 the same test failed
+  once in three full runs in another way: the drag on the gummy bear never became a grab (the GPU
+  pick found nothing under the pointer for a minute), so the drag orbited. It passed alone three
+  times and in the next full run; the trace was lost to a re-run, so keep `test-results/` if it
+  comes back.
 - **Tiny splats vanish on small screens.** The renderer drops splats that come out under about two
   pixels, so a detail built from very fine splats (high `weight` and small `size`) disappears on a
   phone or in a 360 px clip. Keep `size / sqrt(weight)` near 0.5 or more for anything that must show
@@ -386,6 +440,24 @@ Known issues carried forward:
   - Scenes saved with the submarine's old `scope=0` load with the periscope up.
   - The rubber duck and the guitar still need their own sounds (Phase D): a quack and real music.
     (Done in D.)
+- New in E3:
+  - The owner has not yet seen the E3 effects; the clips on the Effect review page are the check.
+    They were checked as clips and larger stills in headless Chromium (SwiftShader), not on a phone.
+  - The channel kinds are new shader code in GLSL and WGSL; only WebGL2 was run (no WebGPU adapter
+    in the sandbox).
+  - Morphing toys lost their `breathe` idle swell (a splat has one behaviour); several now idle with
+    a gentle morph instead. The animal cell's daughters are drawn a little small (so they stay in
+    view), and its cutaway wedge ends up stretched over the right-hand daughter.
+  - Some effects that send pieces past the resting shape leave them out of the fit
+    (`k.fitMorphs = false`): the white cell's cup, the pollen puff, the ATP sparks and the amoeba's
+    pods reach towards the edge of the view.
+  - The snowflake holds three flakes (one shown at a time), so each has a third of the splats; the
+    glint behaviour on its arms was replaced by the growth front (the centre still glints).
+  - The paramecium's loop is small, so it reads partly as a spin in place.
+  - The gyroid and the stretched torus knot still show a few specks of the far side at the extremes
+    of their morphs; the brain's sparks are thin at phone size; the kidney's ureter drops are mostly
+    behind the kidney from the default view; the Möbius ant's copy (in front of or behind the band)
+    is chosen for the default camera.
 - New in E2:
   - The owner has not yet seen the E2 effects; the clips on the Effect review page are the check.
     They were checked by me as clips and strips in headless Chromium (SwiftShader), not on a phone.
@@ -496,8 +568,9 @@ If the plan JSON changes, the page can be republished from it (`node tools/toy-p
 | E1b    | Done: fixes from the owner's E1 review (19 toys, a chess game, a laptop you can type on), effect quality rules, effect clips.                               | splashery |
 | E1c    | Done: fixes from the owner's E1b review (a phone panel bug, chess from PGN files, elephant, horse, cat, hockey puck, Newton's cradle, xylophone, tomatoes). | splashery |
 | E2     | Done: new tap effects for space, atoms and gems (32 toys), idle motion for the Sun, rings, aurora and galaxy, the draw-order lessons.                       | splashery |
-| **E3** | New tap effects for tiny things, anatomy and maths (26 toys, kit recipes); the third of six waves (see TOY-PLAN.md).                                        | splashery |
-| E4–E6  | New tap effects for the other toys marked new, in three more waves by category (see TOY-PLAN.md), each with its own sound.                                  | splashery |
+| E3     | Done: new tap effects for tiny things, anatomy and maths (26 toys), and channel kinds (morph, band, fade, skin) for soft shapes and light fronts.           | splashery |
+| **E4** | New tap effects for nature and weather (28 toys); the fourth of six waves (see TOY-PLAN.md).                                                                | splashery |
+| E5–E6  | New tap effects for food, then balls and the rest, each with its own sound (see TOY-PLAN.md).                                                               | splashery |
 | F      | Touch and drag interaction: a solvable puzzle cube, a chess set that plays a real game, a stretchy gummy bear, a draggable Newton's cradle, bricks.         | splashery |
 | G      | AI image-to-3D trial with `HF_TOKEN`.                                                                                                                       | splashery |
 | H      | Later: the gallery, multi-toy scenes, a liquid pour, the draw-order fix, more scans, more instruments, and the final homepage embed(s).                     | both      |
@@ -518,32 +591,31 @@ What the owner asked for across the board (2026-09-23):
 - Stay respectful: nothing destructive or disrespectful on the White House or the Washington
   Monument, and no fighting or gore (the Colosseum gets a chariot race, not gladiators).
 
-## Phase E3 in detail: tiny things, anatomy and maths
+## Phase E4 in detail: nature and weather
 
-Before starting, check the owner's marks (see above) for any later change, and read the owner's
-verdicts on the Effect review page (the `verdicts` collection, one doc per clip: `e2-<toy id>`) for
-E2 fixes to do first. Follow the Effect quality rules in CLAUDE.md and the draw-order lessons in
-docs/PACKS.md 7b, and publish clips of every new effect on the Effect review page.
+Before starting, check that PR #32 (E3) is merged, check the owner's marks (see above) for any later
+change, and read the owner's verdicts on the Effect review page (the `verdicts` collection, one doc
+per clip: `e3-<toy id>`) for E3 fixes to do first. Follow the Effect quality rules in CLAUDE.md, the
+draw-order lessons and the channel kinds in docs/PACKS.md (6 and 7b), and publish clips of every new
+effect on the Effect review page.
 
-1. **Toys (26).** Beating heart, virus, bacterium, red blood cell, astrocyte, animal cell, white
-   blood cell, microglia, diatom, pollen grain, snowflake, chromosome, mitochondrion, paramecium,
-   amoeba (tiny pack); brain, lungs, tooth, kidney (anatomy pack); Möbius strip, Menger sponge,
-   hypercube, torus knot, gyroid, Mandelbulb, seashell spiral (maths pack). Build each planned
-   effect (TOY-PLAN.md, wave E3) as `controls`, `action` and `drive()` in its recipe: pulses for
-   one-off effects, toggles for states, parts and tokens for moving pieces, `out.glow` and behaviour
-   kinds for light.
-2. **Real processes.** Several are biology (division, phagocytosis, a sickle cell, mitosis): show
-   the real process, with separate things moving separately (the chromatids pull apart, the cell
-   pinches in two). Anatomy stays friendly and never gory.
-3. **Sounds.** Each toy already has a sound. Re-time it to the new effect with
-   `tools/sound-check.mjs` (under five seconds; use `out.cues` for later sounds), and rebuild the
-   sound board page if any change (its `TOY_SOUNDS` and `TOYS` lines are JSON from
-   `src/toy-sounds.js` and the plan).
-4. Check each effect with `tools/effect-clip.mjs --strip=8` (one render gives the owner's clip and a
-   strip to look at); re-render thumbnails only where the resting look changes. Mark each finished
-   toy `"v": "keep"` with an `improved` entry and regenerate TOY-PLAN.md.
+1. **Toys (28).** Oak tree, pine tree, palm tree, maple tree, bonsai, weeping willow, sunflower,
+   rose, tulips, daisies, lotus, toadstool, fern, saguaro cactus, coral reef, pinecone, acorns,
+   succulent, bamboo, pebbles, kelp, lava lamp, ice swan, tornado, rainbow, iceberg, waterfall,
+   ocean wave. Build each planned effect (TOY-PLAN.md, wave E4) as `controls`, `action` and
+   `drive()` in its recipe. Plants that open, close, sway or droop are natural morphs; leaves,
+   petals, acorns and pebbles that fall or scatter are tokens or parts (separate things move
+   separately); light and water fronts are `band` and `fade`.
+2. **Twins.** The saguaro must act and sound different from the cactus scan; the pine tree shakes
+   off a dusting of snow (a settled decision).
+3. **Sounds.** Re-time each toy's sound to its new effect with `tools/sound-check.mjs` (under five
+   seconds; `out.cues` for later sounds), and rebuild the sound board page if any change.
+4. Check each effect with `tools/effect-clip.mjs --strip=8`, look at a larger still of its fullest
+   moment (`tools/effect-strip.mjs --size=400 --times=…`), re-render thumbnails only where the
+   resting look changes, mark each finished toy `"v": "keep"` with an `improved` entry and
+   regenerate TOY-PLAN.md.
 
-**Done when:** every E3 toy has its own tap effect (or the PR lists which do not, and why), all
+**Done when:** every E4 toy has its own tap effect (or the PR lists which do not, and why), all
 tests pass and prettier is clean.
 
 ## Phases C–H (outline)
@@ -552,7 +624,7 @@ tests pass and prettier is clean.
 - **C2, clearer effects.** Done (see Current state). `tools/effect-strip.mjs` is the tool for
   checking any new tap effect by eye.
 - **D, effects and sound engine.** Done (see Current state).
-- **E1–E6, new effects.** E1 and E2 are done. One wave per session (about 30–45 toys each),
+- **E1–E6, new effects.** E1, E2 and E3 are done. One wave per session (about 30–45 toys each),
   following TOY-PLAN.md. Run `check-packs`, a contact sheet and `make-thumbs` for touched packs as
   usual. Thumbnails take about 18 s per toy under SwiftShader; render only the toys you changed.
 - **F, touch and drag interaction.** Puzzle cube: 26 cubies as parts (the part limit is 48), cube

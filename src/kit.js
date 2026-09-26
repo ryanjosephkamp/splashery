@@ -18,7 +18,7 @@
 
 import { mulberry32, createNoise3, mixSeed } from "./noise.js";
 import { SplatBuffer, discRotation, randomDir, hexRgb, clayBudget, norm } from "./generators.js";
-import { KINDS } from "./effects.js";
+import { KINDS, MORPH_RANGE } from "./effects.js";
 
 const TAU = Math.PI * 2;
 const DEG = Math.PI / 180;
@@ -693,8 +693,17 @@ export class Kit {
   //   size (splat size multiplier), flat (thickness 0..1), stretch (length
   //   along the shape's tangent), opacity, jitter (colour noise 0..1)
   //   interior (fraction of this shape's splats that fill its inside), core
-  //   part, kind (behaviour name), params ([a, b] or (c) => [a, b])
+  //   part (an index, or (c) => index to split a shape between parts),
+  //   kind (behaviour name), params ([a, b] or (c) => [a, b])
+  //   to: (c) => [x, y, z] | null: a morph target in recipe coordinates
+  //          (kind "morph"; the splat moves there as its channel goes to 1)
+  //   channel: 0..3 or (c) => 0..3: which of out.morph drives a morph,
+  //          band or fade splat
+  //   skin: (c) => [a, b, s]: follows tokens a and b, blended by s (kind
+  //          "skin": an edge between two moving corners)
   //   pattern: false keeps the pattern layer off these splats
+  //   fit: false leaves the shape out of the fit (a small rider built off
+  //          to one side for the draw order; keep it inside the view)
   //   even: true spreads the surface splats evenly (a low-discrepancy
   //          sequence) instead of at random; random placement leaves thin
   //          spots where the far side shows through as dark speckle. It
@@ -724,7 +733,8 @@ export class Kit {
   }
 
   // Free-form splats: sample(rand, i, n) -> { p, color, size?, opacity?,
-  // n?, flat?, part?, kind?, params?, pattern? } in toy coordinates.
+  // n?, flat?, part?, kind?, params?, pattern?, to?, channel?, skin? } in
+  // toy coordinates (to, channel and skin as in add()).
   // Sized by share (fraction of the budget) or count.
   cloud(opts, sample) {
     const item = { kind: "cloud", opts, sample, area: 0 };
@@ -768,8 +778,10 @@ export class Kit {
     let done = 0;
     let nextYield = 6000;
     for (const it of this.items) {
+      it.start = buf.count;
       if (it.kind === "cloud") this.emitCloud(it, rand);
       else this.emitSurface(it, rand, fbm);
+      it.end = buf.count;
       done += it.n;
       if (done >= nextYield) {
         nextYield = done + 6000;
@@ -778,7 +790,53 @@ export class Kit {
     }
     if (this.fitOn) this.fit();
     else this.transform = { center: [0, 0, 0], scale: 1 };
+    this.encodeMorphs();
     yield 1;
+  }
+
+  // The last two behaviour values of a splat. Morph, band, fade and skin
+  // splats pack their data (see KINDS in effects.js); a morph's target is
+  // kept aside until the fit and packed by encodeMorphs().
+  animParams(kind, p, pr, to, ch, skin) {
+    const c = Math.max(0, Math.min(3, Math.round(ch || 0)));
+    const width = (w) => Math.max(0.005, Math.min(0.99, w));
+    if (kind === KINDS.morph) {
+      if (!this.morph) this.morph = new Float32Array(this.buf.capacity * 3);
+      const i = this.buf.count; // the index push() gives this splat
+      if (to && i < this.buf.capacity) {
+        if (!Number.isFinite(to[0] + to[1] + to[2]))
+          throw new Error("A morph target is not finite.");
+        this.morph[i * 3] = to[0] - p[0];
+        this.morph[i * 3 + 1] = to[1] - p[1];
+        this.morph[i * 3 + 2] = to[2] - p[2];
+      }
+      return [0, c];
+    }
+    if (kind === KINDS.band) return [pr[0] ?? 0, c + width(pr[1] ?? 0.08)];
+    if (kind === KINDS.fade) {
+      const w = pr[1] ?? 0.1;
+      return [pr[0] ?? 0, (w < 0 ? -1 : 1) * (c + width(Math.abs(w)))];
+    }
+    if (kind === KINDS.skin) return [(skin[0] | 0) + 64 * (skin[1] | 0), skin[2] ?? 0];
+    return [pr[0] ?? 0, pr[1] ?? 0];
+  }
+
+  // Packs each morph splat's offset to its target (in toy coordinates,
+  // after the fit) into its behaviour values: 12 bits per axis over
+  // +-MORPH_RANGE, z = x * 4096 + y and w = z + 4096 * channel (exact in a
+  // float32).
+  encodeMorphs() {
+    if (!this.morph) return;
+    const buf = this.buf;
+    const s = this.transform.scale;
+    const q = (v) => Math.max(0, Math.min(4095, Math.round((v * s * 2048) / MORPH_RANGE) + 2048));
+    for (let i = 0; i < buf.count; i++) {
+      if (buf.anim[i * 4 + 1] !== KINDS.morph) continue;
+      const m = this.morph;
+      const ch = buf.anim[i * 4 + 3];
+      buf.anim[i * 4 + 2] = q(m[i * 3]) * 4096 + q(m[i * 3 + 1]);
+      buf.anim[i * 4 + 3] = q(m[i * 3 + 2]) + 4096 * ch;
+    }
   }
 
   emitSurface(it, rand, fbm) {
@@ -789,8 +847,12 @@ export class Kit {
     const flat = o.flat ?? 0.2;
     const interiorN = Math.round(it.n * (o.interior ?? 0));
     const surfN = it.n - interiorN;
-    const kind = kindOf(o.kind);
-    const partIdx = o.part ?? 0;
+    const toFn = typeof o.to === "function" ? o.to : null;
+    const skinFn = typeof o.skin === "function" ? o.skin : null;
+    const kind = toFn ? KINDS.morph : skinFn ? KINDS.skin : kindOf(o.kind);
+    const chanFn = typeof o.channel === "function" ? o.channel : null;
+    const partFn = typeof o.part === "function" ? o.part : null;
+    const partIdx = partFn ? 0 : (o.part ?? 0);
     const flags = o.pattern === false ? 16 : 0;
     const jitter = o.jitter ?? 0.04;
     const opacity = o.opacity ?? 0.95;
@@ -869,7 +931,10 @@ export class Kit {
         inside ? 0.9 : opacity,
       ];
       const pr = paramsFn ? paramsFn(c) : params;
-      buf.push(p, scl, q, color, [partIdx + splatFlags, kind, pr[0] ?? 0, pr[1] ?? 0]);
+      const ch = chanFn ? chanFn(c) : (o.channel ?? 0);
+      const [a, b] = this.animParams(kind, p, pr, toFn?.(c), ch, skinFn?.(c));
+      const part = partFn ? partFn(c) : partIdx;
+      buf.push(p, scl, q, color, [part + splatFlags, kind, a, b]);
     }
   }
 
@@ -898,16 +963,17 @@ export class Kit {
         scl = [sz, sz, sz];
         q = [0, 0, 0, 1];
       }
-      const kind = kindOf(s.kind ?? o.kind);
+      const kind = s.to ? KINDS.morph : s.skin ? KINDS.skin : kindOf(s.kind ?? o.kind);
       const pr = s.params ?? o.params ?? [0, 0];
       const partIdx = s.part ?? o.part ?? 0;
       const flags = (s.pattern ?? o.pattern) === false ? 16 : 0;
+      const [a, b] = this.animParams(kind, s.p, pr, s.to, s.channel ?? o.channel, s.skin);
       buf.push(
         s.p,
         scl,
         q,
         [col[0], col[1], col[2], s.opacity ?? o.opacity ?? 0.9],
-        [partIdx + flags, kind, pr[0] ?? 0, pr[1] ?? 0],
+        [partIdx + flags, kind, a, b],
       );
     }
   }
@@ -924,8 +990,24 @@ export class Kit {
         if (v[k] > hi[k]) hi[k] = v[k];
       }
     };
-    for (let i = 0; i < buf.count; i++) see(buf.pos[i * 3], buf.pos[i * 3 + 1], buf.pos[i * 3 + 2]);
+    // Shapes added with fit: false (pieces that ride on the toy) are left
+    // out of the fit.
+    const skip = new Uint8Array(buf.count);
+    for (const it of this.items) if (it.opts.fit === false) skip.fill(1, it.start, it.end);
+    for (let i = 0; i < buf.count; i++)
+      if (!skip[i]) see(buf.pos[i * 3], buf.pos[i * 3 + 1], buf.pos[i * 3 + 2]);
     for (const r of this.reaches) see(r[0], r[1], r[2]);
+    // Morph targets count too, so a morphed toy stays in its frame (unless
+    // the recipe sets k.fitMorphs = false and frames it with k.reach).
+    const targets = [];
+    if (this.morph && this.fitMorphs !== false)
+      for (let i = 0; i < buf.count; i++) {
+        if (buf.anim[i * 4 + 1] !== KINDS.morph) continue;
+        const m = this.morph;
+        const t = [0, 1, 2].map((k) => buf.pos[i * 3 + k] + m[i * 3 + k]);
+        if (m[i * 3] || m[i * 3 + 1] || m[i * 3 + 2]) targets.push(t);
+      }
+    for (const t of targets) see(t[0], t[1], t[2]);
     if (lo[0] === Infinity) {
       this.transform = { center: [0, 0, 0], scale: 1 };
       return;
@@ -933,12 +1015,13 @@ export class Kit {
     const c = [(lo[0] + hi[0]) / 2, (lo[1] + hi[1]) / 2, (lo[2] + hi[2]) / 2];
     let r2 = 0;
     for (let i = 0; i < buf.count; i++) {
+      if (skip[i]) continue;
       const dx = buf.pos[i * 3] - c[0];
       const dy = buf.pos[i * 3 + 1] - c[1];
       const dz = buf.pos[i * 3 + 2] - c[2];
       r2 = Math.max(r2, dx * dx + dy * dy + dz * dz);
     }
-    for (const r of this.reaches)
+    for (const r of [...this.reaches, ...targets])
       r2 = Math.max(r2, (r[0] - c[0]) ** 2 + (r[1] - c[1]) ** 2 + (r[2] - c[2]) ** 2);
     const s = FIT_RADIUS / (Math.sqrt(r2) || 1);
     const sway = KINDS.sway;

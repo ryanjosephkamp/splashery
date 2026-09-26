@@ -701,6 +701,10 @@ fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {
 // Parts are rigid groups moved by uSpParts (3 vec4 per part: rotation,
 // pivot, offset + visibility). Captured toys have no such stream, so they
 // use the variant without these pieces.
+// Morph offsets are packed over +-MORPH_RANGE toy units (the fitted toy is
+// 1.9 across, so any two of its points are closer than that).
+export const MORPH_RANGE = 2;
+
 export const KINDS = {
   none: 0,
   orbit: 1, // turn about the toy's up axis: z = turns per unit time at the rim, w = falloff (0 rigid, 1.5 Keplerian)
@@ -719,6 +723,11 @@ export const KINDS = {
   token: 14, // a game piece moved and turned by uSpTokens: z = token index (0..47)
   screen: 15, // a screen pixel coloured from the uSpScreen texture: z, w = u, v
   key: 16, // a key that goes down when pressed: z = key index (uSpKitB.w = index + depth)
+  // Channel kinds follow out.morph (uSpMorph, four channels), with motion on or off:
+  morph: 17, // move towards a target by the channel: z = x * 4096 + y, w = z + 4096 * channel (12-bit offsets, see Kit.encodeMorphs)
+  band: 18, // glow (uSpGlowC) where the channel passes z: w = channel + band width
+  fade: 19, // fade out as the channel passes z: w = channel + width (negative: fade in)
+  skin: 20, // follow two tokens' offsets: z = a + 64 * b, w = blend towards b
 };
 
 const GLSL_KIT_UNIFORMS = `uniform vec4 uSpKit;     // x time, y alive (0/1), z speed, w energy (melt 0..1)
@@ -727,6 +736,7 @@ uniform vec4 uSpGlowC;   // rgb pulse glow colour, a strength
 uniform vec4 uSpCam;     // xyz camera position
 uniform vec4 uSpParts[48];
 uniform vec4 uSpTokens[96]; // per token: xyz offset + w visibility, then a rotation
+uniform vec4 uSpMorph;   // the four channels of the morph, band and fade kinds
 uniform sampler2D uSpScreen; // a live screen picture (the laptop's)
 vec3 spScreenUV = vec3(0.0); // xy uv, z > 0 for a screen splat`;
 
@@ -734,6 +744,11 @@ const GLSL_KIT_FUNCTIONS = `
 float spBeat(float x) {
   float f = fract(x);
   return exp(-pow((f - 0.12) * 18.0, 2.0)) + 0.6 * exp(-pow((f - 0.34) * 16.0, 2.0));
+}
+
+// One of the four channels of uSpMorph.
+float spChan(float ch) {
+  return dot(uSpMorph, step(abs(vec4(0.0, 1.0, 2.0, 3.0) - ch), vec4(0.5)));
 }
 
 vec3 spKitCenter(vec3 p) {
@@ -797,6 +812,35 @@ vec3 spKitCenter(vec3 p) {
       spBright = 1.0 + an.z * g * 3.0;
     }
   }
+  if (kind >= 17 && kind <= 20) {
+    // Channel kinds: a morph moves to its packed target, a band glows as
+    // its channel passes, a fade clears (or appears) as its channel passes,
+    // a skin splat follows two tokens (an edge between moving corners).
+    if (kind == 17) {
+      float qx = floor(an.z / 4096.0);
+      float qy = an.z - qx * 4096.0;
+      float ch = floor(an.w / 4096.0);
+      float qz = an.w - ch * 4096.0;
+      p += (vec3(qx, qy, qz) - 2048.0) * (${MORPH_RANGE.toFixed(1)} / 2048.0) * spChan(ch);
+    } else if (kind == 18) {
+      float ch = floor(an.w);
+      float x = (spChan(ch) - an.z) / max(an.w - ch, 0.005);
+      spTint += uSpGlowC.rgb * uSpGlowC.a * exp(-x * x);
+    } else if (kind == 19) {
+      float aw = abs(an.w);
+      float ch = floor(aw);
+      float f = smoothstep(an.z, an.z + max(aw - ch, 0.005), spChan(ch));
+      spFade *= an.w < 0.0 ? f : 1.0 - f;
+    } else {
+      float fb = floor(an.z / 64.0);
+      int ia = clamp(int(an.z - fb * 64.0 + 0.5), 0, 47);
+      int ib = clamp(int(fb + 0.5), 0, 47);
+      vec4 ta = uSpTokens[ia * 2];
+      vec4 tb = uSpTokens[ib * 2];
+      p += mix(ta.xyz, tb.xyz, an.w);
+      spKitScale *= mix(ta.w, tb.w, an.w);
+    }
+  }
   if (kind == 15) spScreenUV = vec3(an.z, an.w, 1.0);
   if (kind == 16 && int(an.z + 0.5) == int(floor(uSpKitB.w + 0.001)) && uSpKitB.w >= 0.0) {
     p -= up * fract(uSpKitB.w) * 0.012 * R;
@@ -840,6 +884,7 @@ uniform uSpGlowC: vec4f;
 uniform uSpCam: vec4f;
 uniform uSpParts: array<vec4f, 48>;
 uniform uSpTokens: array<vec4f, 96>;
+uniform uSpMorph: vec4f;
 var uSpScreen: texture_2d<f32>;
 var uSpScreenSampler: sampler;
 var<private> spScreenUV: vec3f = vec3f(0.0);`;
@@ -848,6 +893,10 @@ const WGSL_KIT_FUNCTIONS = `
 fn spBeat(x: f32) -> f32 {
   let f = fract(x);
   return exp(-pow((f - 0.12) * 18.0, 2.0)) + 0.6 * exp(-pow((f - 0.34) * 16.0, 2.0));
+}
+
+fn spChan(ch: f32) -> f32 {
+  return dot(uniform.uSpMorph, step(abs(vec4f(0.0, 1.0, 2.0, 3.0) - ch), vec4f(0.5)));
 }
 
 fn spKitCenter(p0: vec3f) -> vec3f {
@@ -910,6 +959,32 @@ fn spKitCenter(p0: vec3f) -> vec3f {
     } else if (kind == 13) {
       let g = pow(max(0.0, sin(dot(uniform.uSpCam.xyz, vec3f(3.1, 2.7, 3.7) * (0.5 + h)) + h * 40.0 + t * 0.5)), 24.0);
       spBright = 1.0 + an.z * g * 3.0;
+    }
+  }
+  if (kind >= 17 && kind <= 20) {
+    if (kind == 17) {
+      let qx = floor(an.z / 4096.0);
+      let qy = an.z - qx * 4096.0;
+      let ch = floor(an.w / 4096.0);
+      let qz = an.w - ch * 4096.0;
+      p = p + (vec3f(qx, qy, qz) - 2048.0) * (${MORPH_RANGE.toFixed(1)} / 2048.0) * spChan(ch);
+    } else if (kind == 18) {
+      let ch = floor(an.w);
+      let x = (spChan(ch) - an.z) / max(an.w - ch, 0.005);
+      spTint = spTint + uniform.uSpGlowC.rgb * uniform.uSpGlowC.a * exp(-x * x);
+    } else if (kind == 19) {
+      let aw = abs(an.w);
+      let ch = floor(aw);
+      let f = smoothstep(an.z, an.z + max(aw - ch, 0.005), spChan(ch));
+      spFade = spFade * select(1.0 - f, f, an.w < 0.0);
+    } else {
+      let fb = floor(an.z / 64.0);
+      let ia = clamp(i32(an.z - fb * 64.0 + 0.5), 0, 47);
+      let ib = clamp(i32(fb + 0.5), 0, 47);
+      let ta = uniform.uSpTokens[ia * 2];
+      let tb = uniform.uSpTokens[ib * 2];
+      p = p + mix(ta.xyz, tb.xyz, vec3f(an.w));
+      spKitScale = spKitScale * mix(ta.w, tb.w, an.w);
     }
   }
   if (kind == 15) { spScreenUV = vec3f(an.z, an.w, 1.0); }

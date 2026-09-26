@@ -10,10 +10,10 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 284 toys. 175 have a tap action today; the other 109 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 173.
+- 284 toys. 201 have a tap action today; the other 83 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 199.
 - **more** (has an effect; make it clearer or more dramatic): 2.
-- **new** (needs its own effect): 109.
+- **new** (needs its own effect): 83.
 - Visual fixes: 0 open, 28 done. Touch or drag interaction asked for: 4.
 
 ## By phase
@@ -28,22 +28,22 @@ Proposals below are suggestions; the owner may change them.
   star cookie, Tomatoes, Mandeltorus, Basket, Real rubber duck, Garden gnome, Wooden elephant,
   Marble bust, Ukulele, Alarm clock, Vintage camera, Boombox, Real croissant, Carrot cake,
   Pomegranate, Lantern, Cat statue, Horse statue, American football, Rugby ball, Hockey puck,
-  Shuttlecock, Flying disc, Sun, Solar system, Mercury, Venus, Earth, Moon, Mars, Jupiter, Saturn,
-  Uranus, Neptune, Aurora world, Asteroid, Comet, Meteor, Star, Pulsar, Black hole, Star cluster,
-  Ring nebula, Nebula, Spiral galaxy, Bacteriophage, Neuron, DNA, Electron orbital, Atom, Molecule,
-  Protein, Crystal lattice, Diamond, Ruby, Emerald, Amethyst geode, Sapphire, Quartz cluster, Opal,
-  Crystal ball, Eye, Cherry blossom, Ice cream, Gummy bear, Coffee, Rubber duck, Newton's cradle,
-  Kite, Chess set, Lorenz attractor, Klein bottle, Wizard's orb, Jellyfish, Pufferfish, Snail,
-  Octopus, Fireworks, Decorated tree, Diya, Acoustic guitar, Snare drum, Xylophone, Hot-air balloon,
-  Bus, Jet airliner, Sailboat, Submarine, Bicycle, Big Ben, Castle, Pagoda, Windmill.
+  Shuttlecock, Flying disc, Beating heart, Sun, Solar system, Mercury, Venus, Earth, Moon, Mars,
+  Jupiter, Saturn, Uranus, Neptune, Aurora world, Asteroid, Comet, Meteor, Star, Pulsar, Black hole,
+  Star cluster, Ring nebula, Nebula, Spiral galaxy, Virus, Bacteriophage, Bacterium, Red blood cell,
+  Neuron, Astrocyte, Animal cell, DNA, White blood cell, Microglia, Diatom, Pollen grain, Snowflake,
+  Chromosome, Mitochondrion, Paramecium, Amoeba, Electron orbital, Atom, Molecule, Protein, Crystal
+  lattice, Diamond, Ruby, Emerald, Amethyst geode, Sapphire, Quartz cluster, Opal, Crystal ball,
+  Brain, Eye, Lungs, Tooth, Kidney, Cherry blossom, Ice cream, Gummy bear, Coffee, Rubber duck,
+  Newton's cradle, Kite, Chess set, Lorenz attractor, Möbius strip, Klein bottle, Menger sponge,
+  Hypercube, Torus knot, Gyroid, Mandelbulb, Seashell spiral, Wizard's orb, Jellyfish, Pufferfish,
+  Snail, Octopus, Fireworks, Decorated tree, Diya, Acoustic guitar, Snare drum, Xylophone, Hot-air
+  balloon, Bus, Jet airliner, Sailboat, Submarine, Bicycle, Big Ben, Castle, Pagoda, Windmill.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
 - **E2, new effects: space, atoms and gems.** None.
-- **E3, new effects: tiny things, anatomy and maths.** Beating heart, Virus, Bacterium, Red blood
-  cell, Astrocyte, Animal cell, White blood cell, Microglia, Diatom, Pollen grain, Snowflake,
-  Chromosome, Mitochondrion, Paramecium, Amoeba, Brain, Lungs, Tooth, Kidney, Möbius strip, Menger
-  sponge, Hypercube, Torus knot, Gyroid, Mandelbulb, Seashell spiral
+- **E3, new effects: tiny things, anatomy and maths.** None.
 - **E4, new effects: nature and weather.** Oak tree, Pine tree, Palm tree, Maple tree, Bonsai,
   Weeping willow, Sunflower, Rose, Tulips, Daisies, Lotus, Toadstool, Fern, Saguaro cactus, Coral
   reef, Pinecone, Acorns, Succulent, Bamboo, Pebbles, Kelp, Lava lamp, Ice swan, Tornado, Rainbow,
@@ -406,13 +406,19 @@ Proposals below are suggestions; the owner may change them.
 
 ## Anatomy (6)
 
-- **Beating heart** (`heart`). Now: hops. Plan: new effect (E3).
+- **Beating heart** (`heart`). Now: tap: Race and calm. Plan: keep.
   - Owner: Needs a special effect.
   - Effect: Racing heartbeat: faster beats with a glow, then calms.
+  - Improved: E3: a tap sets the heart racing: the atria then the ventricles squeeze (the ventricles
+    wring a little, the aorta swells), faster and stronger with a warm glow on each squeeze, then it
+    calms to its resting beat (about 5 s).
   - Sound: Lub-dub that speeds up.
-- **Brain** (`brain`). Now: hops. Plan: new effect (E3).
+- **Brain** (`brain`). Now: tap: Think. Plan: keep.
   - Owner: Needs a special effect.
   - Effect: Sparks of light race across the folds (a thought).
+  - Improved: E3: a tap sparks a thought: light races out along the folds of the tapped lobe, then
+    through the next lobes and round the brain, and at the end every lobe flashes at once (about 2.5
+    s).
   - Sound: Electric crackle and a ding.
 - **Eye** (`eye`). Now: tap: Blink. Plan: keep.
   - Owner: Pupil dilation is cool but underwhelming. Let the eye look around by itself, and use a
@@ -421,17 +427,25 @@ Proposals below are suggestions; the owner may change them.
   - Improved: C2: it glances around by itself. A tap blinks (new lids), turns it to look at you and
     snaps the pupil small (about 2.5 s).
   - Sound: Soft blink swish.
-- **Lungs** (`lungs`). Now: hops. Plan: new effect (E3).
+- **Lungs** (`lungs`). Now: tap: Take a deep breath. Plan: keep.
   - Owner: Expand and contract like lungs.
   - Effect: A deep breath in and out.
+  - Improved: E3: a tap takes a deep breath: both lungs swell out sideways, forwards and down (the
+    airways stay put), hold, then empty past rest and settle back into gentle breathing (about 5 s).
+    After the owner's review the breath is about twice as big.
   - Sound: Breath in, breath out.
-- **Tooth** (`tooth`). Now: hops. Plan: new effect (E3).
+- **Tooth** (`tooth`). Now: tap: Polish. Plan: keep.
   - Owner: Looks good; no idea for an effect.
   - Effect: A sparkle wipe cleans it bright white.
+  - Improved: E3: a tap polishes it: a bright sheen wipes across from the top left, star sparkles
+    pop where it passes and twinkle again while it gleams, then it settles (about 3.5 s).
   - Sound: Squeaky clean ding.
-- **Kidney** (`kidney`). Now: hops. Plan: new effect (E3).
+- **Kidney** (`kidney`). Now: tap: Pump blood through. Plan: keep.
   - Owner: Add an effect.
   - Effect: Fluid flows through in pulses along the vessels.
+  - Improved: E3: a tap pumps three pulses through: each runs in along the artery as light, spreads
+    through the kidney as a soft flush while it swells a little, leaves along the vein, and a drop
+    runs down the ureter (about 4.5 s).
   - Sound: Gentle trickle.
 
 ## Weather (13)
@@ -683,9 +697,12 @@ Proposals below are suggestions; the owner may change them.
 
 ## Tiny (18)
 
-- **Virus** (`virus`). Now: hops. Plan: new effect (E3).
+- **Virus** (`virus`). Now: tap: Make copies. Plan: keep.
   - Owner: Looks good; pick an effect.
   - Effect: Spikes wave and it splits into copies that fade away.
+  - Improved: E3: its spikes sway at rest; a tap sends a wave rippling through them from the front,
+    and two smaller copies bud out from behind it, drift apart along the diagonal, turn and fade
+    away (about 4.5 s).
   - Sound: Squelchy pop.
 - **Bacteriophage** (`bacteriophage`). Now: tap: Inject DNA. Plan: keep.
   - Owner: Tapping does nothing visible. Upgrade it.
@@ -694,14 +711,19 @@ Proposals below are suggestions; the owner may change them.
   - Improved: C2: the legs swing out, the sheath snaps to about half its length, the tail pokes
     through the plate and a glowing DNA strand coils out, then fades (about 4.5 s).
   - Sound: Spring-loaded thunk and a squirt.
-- **Bacterium** (`bacterium`). Now: hops. Plan: new effect (E3).
+- **Bacterium** (`bacterium`). Now: tap: Divide in two. Plan: keep.
   - Owner: Needs an effect.
   - Effect: Divides in two (binary fission), then merges back.
+  - Improved: E3: binary fission: the rod pinches in at the middle as a new wall closes across it,
+    its DNA and ribosomes split between the halves, and the two daughter cells come apart with a
+    little hinge (the front one without flagella); then they slide back together and merge (5 s).
   - Sound: Wet pop.
-- **Red blood cell** (`red-blood-cell`). Now: hops. Plan: new effect (E3).
+- **Red blood cell** (`red-blood-cell`). Now: tap: Sickle and relax. Plan: keep.
   - Owner: Maybe turn into a sickle cell, if that is realistic.
   - Effect: Deforms into a sickle shape (as in sickle-cell disease at low oxygen), then relaxes back
     to a disc.
+  - Improved: E3: sickling at low oxygen: the soft disc stretches and curls into a stiff crescent
+    with pointed ends, holds, then relaxes back into a disc with a little wobble (4 s).
   - Sound: Soft stretchy squeak.
 - **Neuron** (`neuron`). Now: tap: Fire a signal. Plan: keep.
   - Owner: Decent effect but should be more dramatic.
@@ -709,13 +731,19 @@ Proposals below are suggestions; the owner may change them.
   - Improved: C2: a bright spark runs from the cell body down the whole axon and bursts into light
     at the terminals (about 2 s).
   - Sound: Zap and a rising crackle.
-- **Astrocyte** (`astrocyte`). Now: hops. Plan: new effect (E3).
+- **Astrocyte** (`astrocyte`). Now: tap: Send a calcium wave. Plan: keep.
   - Owner: Needs an effect; looks good.
   - Effect: Calcium wave: a glow ripples out along its arms.
+  - Improved: E3: a calcium wave: a front of green light spreads from the cell body out along every
+    arm to the tips and the end-feet, and the blood vessel they hold widens for a moment; faint
+    waves pass now and then at rest (4.4 s).
   - Sound: Rippling shimmer.
-- **Animal cell** (`animal-cell`). Now: hops. Plan: new effect (E3).
+- **Animal cell** (`animal-cell`). Now: tap: Divide in two. Plan: keep.
   - Owner: Show some process going on inside, like replication.
   - Effect: Cell division: the nucleus splits and the cell pinches into two, then rejoins.
+  - Improved: E3: cell division: the nucleus (and its nucleolus and ER) splits into two, then the
+    cell pinches in two across the view, sharing out its mitochondria, vesicles and Golgi; after a
+    moment the two cells flow back into one (5.2 s).
   - Sound: Gloopy stretching pop.
 - **DNA** (`dna`). Now: tap: Unzip and zip. Plan: keep.
   - Owner: Unzip even further, then zip back up. Almost perfect otherwise.
@@ -723,41 +751,65 @@ Proposals below are suggestions; the owner may change them.
   - Improved: C2: a tap unzips it almost to the foot, the bases light up in pairs as the fork
     passes, then it zips back up (about 5.5 s).
   - Sound: Zipper sound.
-- **White blood cell** (`white-blood-cell`). Now: hops. Plan: new effect (E3).
+- **White blood cell** (`white-blood-cell`). Now: tap: Catch a bacterium. Plan: keep.
   - Owner: Needs an effect; looks good.
   - Effect: Chases and engulfs a small bacterium (phagocytosis).
+  - Improved: E3: phagocytosis: a bacterium swims in from the side, the cell leans out and reaches a
+    cup of membrane round it, draws it inside and closes over it; granules gather on it and it glows
+    and shrinks away as it is digested (5.6 s).
   - Sound: Gulp.
-- **Microglia** (`microglia`). Now: hops. Plan: new effect (E3).
+- **Microglia** (`microglia`). Now: tap: Reach and sweep. Plan: keep.
   - Effect: Arms reach out and sweep, then retract.
+  - Improved: E3: its six arms feel about at rest; a tap makes every arm stretch out along its
+    length, sweep to and fro twice, and draw back in (4.4 s).
   - Sound: Soft scratchy rustle.
-- **Diatom** (`diatom`). Now: hops. Plan: new effect (E3).
+- **Diatom** (`diatom`). Now: tap: Glint and open. Plan: keep.
   - Effect: The glass shell glints and splits into two halves.
+  - Improved: E3: a glint of light runs across the glass, then the shell parts into its two halves,
+    opening like a clam from its far edge to show the golden chloroplasts inside, and closes again
+    (4.4 s).
   - Sound: Glassy tink.
 - **Tardigrade** (`tardigrade`). Now: tap: Wiggle. Plan: keep.
   - Owner: Looks great; the effect is awesome.
   - Sound: Tiny squeaky step.
-- **Pollen grain** (`pollen`). Now: hops. Plan: new effect (E3).
+- **Pollen grain** (`pollen`). Now: tap: Burst. Plan: keep.
   - Effect: Bursts a puff of tiny grains.
+  - Improved: E3: it bursts as pollen does when it soaks up rain: it swells, then a puff of tiny
+    starch granules jets out of its pores (or furrow), stays where it was let go while the grain
+    turns, drifts down and fades (3.8 s).
   - Sound: Puff and a sneeze-like tweet.
-- **Snowflake** (`snowflake`). Now: hops. Plan: new effect (E3).
+- **Snowflake** (`snowflake`). Now: tap: Grow a new flake. Plan: keep.
   - Owner: Melt it, or change into another shape.
   - Effect: Arms regrow into a new pattern each tap.
+  - Improved: E3: the arms melt back from their tips to the middle, then a new flake grows out from
+    the centre: three patterns of the chosen kind, one after another, each tap (3.6 s).
   - Sound: Crystalline tinkle.
-- **Chromosome** (`chromosome`). Now: hops. Plan: new effect (E3).
+- **Chromosome** (`chromosome`). Now: tap: Pull apart. Plan: keep.
   - Owner: Something like mitosis or meiosis.
   - Effect: The sister chromatids pull apart at the centromere, then rejoin.
+  - Improved: E3: anaphase: spindle fibres reach in from two bright poles to the kinetochores and
+    pull the sister chromatids apart, each led by its centromere with its arms trailing; then they
+    come back together and the fibres let go (4.6 s).
   - Sound: Stretch and snap.
-- **Mitochondrion** (`mitochondrion`). Now: hops. Plan: new effect (E3).
+- **Mitochondrion** (`mitochondrion`). Now: tap: Make energy. Plan: keep.
   - Owner: The powerhouse of the cell; make the effect about that.
   - Effect: The cristae light up and energy sparks (ATP) pop out.
+  - Improved: E3: it powers up: light runs along the cristae from end to end, the whole thing gives
+    a swell, and bright ATP sparks pop out of the open side in three waves and drift off; faint
+    waves run along it now and then at rest (4 s).
   - Sound: Power-up hum.
-- **Paramecium** (`paramecium`). Now: hops. Plan: new effect (E3).
+- **Paramecium** (`paramecium`). Now: tap: Swim a loop. Plan: keep.
   - Owner: Needs an effect.
   - Effect: Cilia beat in waves and it swims a loop.
+  - Improved: E3: its cilia beat hard in waves and it swims a full loop in the plane of the view,
+    coming back to where it was (4.2 s).
   - Sound: Rapid soft flutter.
-- **Amoeba** (`amoeba`). Now: hops. Plan: new effect (E3).
+- **Amoeba** (`amoeba`). Now: tap: Crawl. Plan: keep.
   - Owner: Needs an effect.
   - Effect: Pushes out a pseudopod and oozes over.
+  - Improved: E3: it crawls: a round pseudopod pushes out to the right, granules stream into it and
+    the cell oozes over; then one pushes out to the left and it oozes back; at rest its pods stretch
+    a little (5.2 s).
   - Sound: Gloopy ooze.
 
 ## Atoms (5)
@@ -1142,9 +1194,14 @@ Proposals below are suggestions; the owner may change them.
   - Improved: C2: a new tap action sends a bright spark racing along the whole path, drawing it
     again in light that then fades (about 3 s).
   - Sound: Chaotic warble.
-- **Möbius strip** (`mobius`). Now: hops. Plan: new effect (E3).
+- **Möbius strip** (`mobius`). Now: tap: Send it round. Plan: keep.
   - Owner: Wow, really neat. Maybe twist a little.
   - Effect: An ant-like dot walks the single side; the band twists.
+  - Improved: E3: a tap sends a rider on two laps along the middle of the band: after one lap it is
+    underneath (the band has one side), after two it is back on top where it started, while the band
+    twists a little and untwists (about 5 s). After the owner's review the rider is a choice (the
+    Rider option): a blue race car (the default) with spinning wheels, a rolling beach ball, a duck
+    riding a bicycle (wheels and pedals turning) or the ant.
   - Sound: Looping tone.
 - **Klein bottle** (`klein-bottle`). Now: tap: Send water through. Plan: keep.
   - Owner: Not sure it has an effect. Maybe water flows through it; it already kind of does, make
@@ -1153,26 +1210,43 @@ Proposals below are suggestions; the owner may change them.
   - Improved: C2: a new tap action sends a surge of rippling water along the tube and round, and the
     glass glows (about 4 s).
   - Sound: Glug and flow.
-- **Menger sponge** (`menger-sponge`). Now: hops. Plan: new effect (E3).
+- **Menger sponge** (`menger-sponge`). Now: tap: Close and carve the holes. Plan: keep.
   - Owner: No idea for an effect; looks good. The owner calls one of these a favourite and a likely
     homepage embed (the transcript may refer to the next toy, the hypercube).
   - Effect: Zooms into itself: the holes open to show the next level down.
+  - Improved: E3: a tap plugs every hole with a solid cube, smallest first, closing the sponge into
+    a plain cube; then it is carved again level by level: the six big cubes slide out of the faces,
+    then the next size down, then the smallest, each fading as it leaves (about 4 s). (Built instead
+    of a zoom, which blurred.)
   - Sound: Descending recursive blips.
-- **Hypercube** (`hypercube`). Now: hops. Plan: new effect (E3).
+- **Hypercube** (`hypercube`). Now: tap: Turn inside out. Plan: keep.
   - Owner: Possibly the favourite and homepage embed (see the Menger sponge).
   - Effect: Rotates through the fourth dimension, turning inside out.
+  - Improved: E3: a tap turns the tesseract once round through the fourth dimension: the pink inner
+    cube swells out to become the outer one while the blue one folds inside, holds a moment, then
+    turns on back to where it started (about 5 s); at rest it rocks gently in 4D.
   - Sound: Phasing synth sweep.
-- **Torus knot** (`torus-knot`). Now: hops. Plan: new effect (E3).
+- **Torus knot** (`torus-knot`). Now: tap: Pull and let go. Plan: keep.
   - Owner: Contort a little; looks cool.
   - Effect: Contorts through different knot shapes.
+  - Improved: E3: a tap pulls the knot loose (its lobes stretch out and swirl) and lets go: it
+    springs back past rest into a tight knot and wobbles to a stop like a plucked spring (about 4
+    s).
   - Sound: Stretchy twang.
-- **Gyroid** (`gyroid`). Now: hops. Plan: new effect (E3).
+- **Gyroid** (`gyroid`). Now: tap: Breathe in and out. Plan: keep.
   - Owner: Really neat; needs an effect.
   - Effect: The surface flows and shifts phase like a breathing sponge.
+  - Improved: E3: a tap makes the sponge breathe: the surface slides to a shifted level of its own
+    equation, so the orange channels swell as the blue ones narrow, then the other way, and it
+    settles (about 3.8 s).
   - Sound: Watery hum.
-- **Mandelbulb** (`mandelbulb`). Now: hops. Plan: new effect (E3).
+- **Mandelbulb** (`mandelbulb`). Now: tap: Turn the discs. Plan: keep.
   - Owner: Like the Mandeltorus: twisting.
   - Effect: Morphs through powers (bulb shapes twist and bloom).
+  - Improved: E3: a tap turns the bulb's seven horizontal discs like the dials of a combination
+    lock: neighbours click round in opposite directions, top to bottom, then back the other way,
+    bottom to top; each turns a seventh of a turn (the bulb's own symmetry), so it lands on the same
+    picture (about 4 s). This replaced a twist after the owner's review.
   - Sound: Deep morphing tone.
 - **Sierpinski tetrahedron** (`sierpinski`). Now: tap: Explode. Plan: keep.
   - Owner: Perfect as is.
@@ -1180,9 +1254,12 @@ Proposals below are suggestions; the owner may change them.
 - **Platonic solids** (`platonic`). Now: tap: Explode. Plan: keep.
   - Owner: Perfect.
   - Sound: Five-note chime.
-- **Seashell spiral** (`seashell-spiral`). Now: hops. Plan: new effect (E3).
+- **Seashell spiral** (`seashell-spiral`). Now: tap: Hear the sea. Plan: keep.
   - Owner: Something to do with hearing the ocean in a seashell.
   - Effect: Glows softly and waves ripple out of the opening.
+  - Improved: E3: a tap lets you hear the sea in the shell: three soft swells of sea-blue light run
+    down the spiral to the mouth, and a ripple rolls out of the opening with each one, widening and
+    fading (about 4.5 s).
   - Sound: Ocean hush.
 
 ## Medieval (9)

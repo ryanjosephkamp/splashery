@@ -215,7 +215,7 @@ export class MotionDriver {
 
     // The kit toy's own frame: behaviours clock, recipe drive, parts.
     const kt = this.tick(this.kitClock, time, rate, motion.alive !== false);
-    const drive = { energy: 0, grow: 1, amount: 1, glow: [1, 1, 1, 0], parts: {}, body: null, fx: {}, addon: null, tokens: null, cues: [] }; // prettier-ignore
+    const drive = { energy: 0, grow: 1, amount: 1, glow: [1, 1, 1, 0], parts: {}, body: null, fx: {}, addon: null, tokens: null, cues: [], morph: null }; // prettier-ignore
     // info.data is whatever the recipe's build left in k.data (which molecule
     // was built, say), for effects that depend on the build.
     const about = { time, R, tap: this.tap, data: this.ctx?.kit?.data };
@@ -238,6 +238,9 @@ export class MotionDriver {
       // w: a pressed key's index plus how far down it is (-1: none).
       u.uSpKitB = [clamp(drive.grow, 0, 1), F, Math.max(0, drive.amount), drive.press ?? -1];
       u.uSpGlowC = drive.glow;
+      // The four channels of the morph, band and fade kinds (always set).
+      const m = drive.morph || [];
+      u.uSpMorph = [m[0] ?? 0, m[1] ?? 0, m[2] ?? 0, m[3] ?? 0];
       u.uSpCam = [cameraPos[0], cameraPos[1], cameraPos[2], 0];
       const scale = this.ctx?.transform?.scale ?? 1;
       u["uSpParts[0]"] = packParts(this.partsData, this.ctx?.parts || [], drive.parts, scale);
@@ -269,6 +272,7 @@ export class MotionDriver {
         uSpKit: [kt, 1, 1, clamp(a.energy ?? 0, 0, 1)],
         uSpKitB: [clamp(a.grow ?? 0, 0, 1), F, Math.max(0, a.amount ?? 1), 0],
         uSpGlowC: a.glow || [1, 1, 1, 0],
+        uSpMorph: [0, 0, 0, 0],
         "uSpParts[0]": packParts(this.addon.data, this.addon.parts, a.parts || {}, 1),
       };
     }
