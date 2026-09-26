@@ -271,7 +271,7 @@ function icebergChunk(shapeR) {
   const th1 = 0.62;
   const w1 = (2 * th1) / T1;
   const C1 = add(hinge, quatRotate(quatAxisAngle(IB_AXIS, th1), sub(C0, hinge)));
-  const V1 = add(mul(cross(IB_AXIS, sub(C1, hinge)), w1), mul(IB_RIGHT, 0.6));
+  const V1 = add(mul(cross(IB_AXIS, sub(C1, hinge)), w1), mul(IB_RIGHT, 0.02));
   const tau = (V1[1] + Math.sqrt(V1[1] * V1[1] + 2 * IB_G * Math.max(0, C1[1] - IB_FLOAT))) / IB_G;
   return { h, F, C0, hinge, T1, th1, w1, C1, V1, Ti: T1 + tau };
 }
@@ -292,7 +292,7 @@ function icebergPose(ch, s) {
   // Afloat: it plunges, bobs up, rocks, drifts on and melts away.
   const u = s - Ti;
   const Ci = add(add(C1, mul(V1, Ti - T1)), [0, -0.5 * IB_G * (Ti - T1) * (Ti - T1), 0]);
-  const glide = 0.28 * (1 - Math.exp(-u / 0.28)) + 0.04 * u;
+  const glide = 0.08 * (1 - Math.exp(-u / 0.3)) + 0.015 * u;
   const melt = band(s, 3.3, 4.6);
   const bob = -0.07 * Math.exp(-u / 0.6) * Math.sin((TAU * u) / 1.05);
   const C = add(add(Ci, mul(IB_RIGHT, glide * Math.hypot(V1[0], V1[2]))), [0, bob - Ci[1] + IB_FLOAT - 0.06 * melt, 0]); // prettier-ignore
@@ -1841,16 +1841,16 @@ export const RECIPES = {
       // rings of ripples and foam spreading on the sea (channel 1 fades
       // them in and out).
       const w = s - ch.Ti;
-      if (w > 0 && w < 0.62) {
+      if (w > 0 && w < 0.85) {
         const kk = w / 0.06;
         out.parts.splash = {
           scale: kk,
           offset: add(mul(IB_CAM, -0.3), [0, -0.5 * IB_G * w * w, 0]),
-          visible: (Math.min(1, kk * 0.3) / kk) * (1 - band(w, 0.45, 0.6)),
+          visible: (Math.min(1, kk * 0.3) / kk) * (1 - band(w, 0.55, 0.8)),
         };
       } else out.parts.splash = { visible: 0 };
       const kr = 1 + 11 * easeOut(band(w, 0, 1.6));
-      out.parts.ripple = { scale: kr, visible: w > 0 ? 1 / Math.sqrt(kr) : 0 };
+      out.parts.ripple = { scale: kr, visible: w > 0 ? Math.pow(kr, -0.45) : 0 };
       out.morph = [0, w > 0 ? band(w, 0, 0.12) * (1 - ease(band(w, 0.5, 1.7))) : 0];
     },
     build(k) {
@@ -1955,10 +1955,13 @@ export const RECIPES = {
       // part's scale; the drive adds the fall (see splash in drive).
       const W1 = add(W, mul(IB_CAM, 0.3));
       const splash = k.part("splash", { pivot: W1 });
-      k.cloud({ share: 0.004, size: 0.9, pattern: false }, (r) => {
+      k.cloud({ share: 0.008, size: 1.15, pattern: false }, (r) => {
         const a = r() * TAU;
-        const vr = 0.45 + 0.65 * Math.sqrt(r());
-        const v = [Math.cos(a) * vr, 1.45 + 0.3 * r(), Math.sin(a) * vr];
+        // A crown thrown out and up, and a jet up the middle.
+        const crown = r() < 0.65;
+        const vr = crown ? 0.55 + 0.4 * r() : 0.25 * r();
+        const vy = crown ? 1.5 + 0.5 * r() : 1.9 + 0.5 * r();
+        const v = [Math.cos(a) * vr, vy, Math.sin(a) * vr];
         return {
           p: add(W1, mul(v, 0.06)),
           color: mix("#d8f2ff", "#ffffff", r()),
