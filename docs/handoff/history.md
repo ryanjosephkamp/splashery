@@ -171,7 +171,12 @@ None finished yet.
   once in three full runs in another way: the drag on the gummy bear never became a grab (the GPU
   pick found nothing under the pointer for a minute), so the drag orbited. It passed alone three
   times and in the next full run; the trace was lost to a re-run, so keep `test-results/` if it
-  comes back.
+  comes back. It came back on 2026-09-26, in the full run of the parallel-setup PR (which changed no
+  app code), in the phone test "a panel opened while a toy from the grid is still loading stays
+  open": the same warning about 0.9 s after the horse statue (a rigged scan, its download held back
+  3 s by the test) had replaced the cactus, with no test action in between. The test passed alone
+  straight after. So far it has shown up just after a new toy's splats replace the old ones (a kit
+  toy with `grab` once, a rigged scan once).
 - **Tiny splats vanish on small screens.** The renderer drops splats that come out under about two
   pixels, so a detail built from very fine splats (high `weight` and small `size`) disappears on a
   phone or in a 360 px clip. Keep `size / sqrt(weight)` near 0.5 or more for anything that must show

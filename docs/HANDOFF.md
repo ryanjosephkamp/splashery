@@ -65,8 +65,9 @@ Each has its full notes in handoff/history.md (the phase is in brackets) and, fo
 - Loose pieces as tokens, and pieces built where they end (E4).
 - Tiny splats vanish on small screens: keep `size / sqrt(weight)` near 0.5 or more (E2).
 - Scan rigs, kit parts for scans and add-ons (D, E1, E1b, E1c).
-- A rare engine warning and a flaky drag in the stretchy-toy smoke test (2026-09-25): keep
-  `test-results/` if either comes back.
+- A rare engine warning (2026-09-25; back once on 2026-09-26 in a phone test, just after a scan
+  loaded) and a flaky drag in the stretchy-toy smoke test: keep `test-results/` if either comes
+  back.
 
 ## Standing facts
 
