@@ -50,9 +50,16 @@ draft PR https://github.com/ryanjosephkamp/splashery/pull/36.
 
 - 2026-09-26: lane started. The owner's Toy Plan marks for all 18 toys are "yes" with no notes, so
   the plan in `tools/toy-plan.json` stands. Main merged (at #34).
-- 2026-09-26: all 18 effects and sounds built, each checked as stills and clips; the 18 toys are
+- 2026-09-26: all 18 effects and sounds built and checked as stills and clips; the 18 toys are
   `"v": "keep"` with an `improved` entry and TOY-PLAN.md is regenerated. Lane tests in
-  `tests/e6b.spec.mjs`. Next: clips and cards on the Effect review page, thumbnails, screenshots.
+  `tests/e6b.spec.mjs`. All 18 clips are on the Effect review page (cards `e6b-<toy id>`, in three
+  sections: landmarks, animals, and shield, crown and snowman), waiting for the owner's marks.
+- Lane end done: check-packs (every toy under 0.7 s), contact sheet, sound check (18 sounds OK, all
+  under 5 s), screenshots `tests/screenshots/e6b-*`, full test suite, standard screenshots restored,
+  prettier clean. Only the school of fish's thumbnail changed (its fish are now separate pieces);
+  every other toy rests and is framed exactly as on main.
+- Next: fix whatever the owner marks "Needs work" in this PR and post the new clips as `-r2` cards;
+  merge main into the branch when it moves.
 
 ## Notes
 
@@ -77,13 +84,19 @@ What each tap does now (the `improved` entries in `tools/toy-plan.json` have the
 - Deviations from the plan text: the Washington Monument has no reflecting pool in its model, so its
   shadow sweeps like a sundial's instead of a pool shimmering; the White House flag stays at the top
   of its pole (lowering it could read as half-mast) and ripples instead of being raised.
-- Scratch tools (not committed): `.cache/stills.mjs` renders chosen moments after a tap at any size
-  and camera, which is quicker than a clip for tuning.
+- Scratch tools (in `.cache/`, not committed): `stills.mjs` renders chosen moments after a tap at
+  any size and camera (quicker than a clip for tuning), `appshot.mjs` takes an app screenshot a set
+  time after a tap, and `framedbg.mjs` compares a toy's fitted scale and camera radius with main's.
 
 ## Known issues
 
-- The chariots and fish turn full circles about the vertical, so tiny draw-order slips are possible
+- The chariots and fish turn full circles about the vertical, so small draw-order slips are possible
   (as with every orbiting toy); none showed in the clips.
+- Pisa: the small bronze ball starts on the far half of the top ledge, so from the home view it is
+  hidden until it rolls to the edge and drops; both balls are in clear view as they fall and land.
+- The pyramids' saucer, camel and beam, the Statue of Liberty's sparks and the Eiffel Tower's
+  fireworks reach outside the toy's resting frame at their fullest; they stay in view at the home
+  camera but can leave the frame if the view is zoomed right in.
 
 ## For the Operator
 
@@ -103,3 +116,11 @@ Lessons for PACKS.md, backlog items and README lines, to move after the merge.
 - A morph target that should grow out of a hidden spot (a tongue, sparks, sand) is built bunched up
   at the spot and morphs out to its full shape; build it as a cloud with `p` at rest and `to` at
   full reach.
+- Hidden pieces also count in the camera's framing, not only in the fit: the player frames a kit toy
+  by the bounds of all its splats (`buildKit` in `src/player.js`), so a hidden fly, moon or burst
+  built outside the toy shrinks it in its frame and on its thumbnail even with `fit: false`. Build
+  such pieces inside the resting bounds and move or grow them out with their part (E6b's frog,
+  crown, Eiffel Tower and Taj Mahal). Worth adding to PACKS.md 7b next to "Hidden pieces count in
+  the fit".
+- Backlog idea: the Washington Monument's plan mentioned a reflecting pool, which the model does not
+  have; a pool could be added to the diorama later if the owner wants the shimmer too.
