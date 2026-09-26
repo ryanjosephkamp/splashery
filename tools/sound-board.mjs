@@ -8,6 +8,8 @@
 //
 //   node tools/sound-board.mjs                 # writes .cache/pages/sound-board.html
 //   node tools/sound-board.mjs --out=file.html
+//   node tools/sound-board.mjs --label=E5 --out=.cache/pages/sound-board-e5.html
+//                                              # a lane's own copy, titled "Splashery Sound Board E5"
 //
 // Then republish the page to its link with the Artifact tool (the link is in
 // docs/OPERATING.md, "Pages"): file_path the written file, url the link.
@@ -22,6 +24,7 @@ const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..")
 const arg = (name, fallback) =>
   process.argv.find((a) => a.startsWith(`--${name}=`))?.slice(name.length + 3) ?? fallback;
 const out = path.resolve(root, arg("out", ".cache/pages/sound-board.html"));
+const label = arg("label", "").replace(/[^\w .-]/g, "");
 
 const template = fs.readFileSync(path.join(root, "tools/pages/sound-board.html"), "utf8");
 const plan = JSON.parse(fs.readFileSync(path.join(root, "tools/toy-plan.json"), "utf8")).toys;
@@ -54,7 +57,8 @@ const lines = template.split("\n");
 const at = lines.findIndex((l) => l.trim().startsWith("// @@SOUND-DATA@@"));
 if (at < 0 || !template.includes("@@BUILT@@")) throw new Error("The template lost its markers");
 lines.splice(at, 1, data);
-const html = lines.join("\n").replace("@@BUILT@@", built);
+let html = lines.join("\n").replace("@@BUILT@@", built);
+if (label) html = html.replace("<title>Splashery Sound Board</title>", `<title>Splashery Sound Board ${label}</title>`); // prettier-ignore
 
 fs.mkdirSync(path.dirname(out), { recursive: true });
 fs.writeFileSync(out, html);

@@ -356,21 +356,22 @@ npm install
 SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium npx playwright test
 ```
 
-The Playwright suite (`tests/smoke.spec.mjs`, `tests/unit.spec.mjs`) starts
-`python3 -m http.server 4173` if nothing is listening and runs headless Chromium with SwiftShader,
-so it needs no GPU. It checks that the app loads with no console errors or warnings, the shelf shows
-its toys, making a toy and switching on effects change canvas pixels, paint, poke and clay work, a
-JSON export imports back to the same scene, the shelf filters by category and search, the phone
-sheet opens and closes by button, tap and swipe, the phone shelf opens into a grid (at 390 and 360
-px) and folds back when a toy is picked, the "Find your own splat" links are right, the embed page
-and the custom element load a scene, own files (PLY, SPLAT, SPZ, SOG) load, PNG/GIF/WebM exports
-produce files, an embed stays under 30 MB, the canvas renders at the pixel ratio of its detail tier
-(on 2x and 3x screens) and drops it only while frames are slow, Detail stays out of links, a
-transparent embed stays see-through in dark mode, embeds take `?zoom=` and zoom by wheel after a
-click and by buttons, the embed snippet is responsive, a failed thumbnail is retried, the no-GPU
-poster shows, and there is no horizontal overflow at 390 and 360 px. It saves screenshots to
-`tests/screenshots/`. WebGPU checks skip themselves with a message when Chromium offers no adapter.
-Set `SPLASHERY_CHROMIUM` to use a specific Chromium; without it Playwright's own browser is used.
+The Playwright suite (`tests/smoke.spec.mjs`, `tests/unit.spec.mjs`, `tests/taps.spec.mjs` and the
+others in `tests/`) starts `python3 -m http.server 4173` if nothing is listening and runs headless
+Chromium with SwiftShader, so it needs no GPU. It checks that the app loads with no console errors
+or warnings, the shelf shows its toys, making a toy and switching on effects change canvas pixels,
+paint, poke and clay work, a JSON export imports back to the same scene, the shelf filters by
+category and search, the phone sheet opens and closes by button, tap and swipe, the phone shelf
+opens into a grid (at 390 and 360 px) and folds back when a toy is picked, the "Find your own splat"
+links are right, the embed page and the custom element load a scene, own files (PLY, SPLAT, SPZ,
+SOG) load, PNG/GIF/WebM exports produce files, an embed stays under 30 MB, the canvas renders at the
+pixel ratio of its detail tier (on 2x and 3x screens) and drops it only while frames are slow,
+Detail stays out of links, a transparent embed stays see-through in dark mode, embeds take `?zoom=`
+and zoom by wheel after a click and by buttons, the embed snippet is responsive, a failed thumbnail
+is retried, the no-GPU poster shows, and there is no horizontal overflow at 390 and 360 px. It saves
+screenshots to `tests/screenshots/`. WebGPU checks skip themselves with a message when Chromium
+offers no adapter. Set `SPLASHERY_CHROMIUM` to use a specific Chromium; without it Playwright's own
+browser is used.
 
 ## Layout
 
@@ -400,7 +401,7 @@ assets/toys/                    captured toys (SOG) and thumbnails
 assets/flags/                   public-domain national flags (SVG) and their sources
 assets/proteins/                four PDB entries (CC0) for the protein toy
 vendor/                         PlayCanvas 2.22.3 and gifenc 1.0.3
-tools/                          asset, flag and thumbnail scripts
+tools/                          asset, flag, thumbnail, clip and sound tools; upkeep and page builders
 tests/                          Playwright tests and screenshots
 ```
 
