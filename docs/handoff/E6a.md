@@ -147,3 +147,7 @@ Lessons for PACKS.md, backlog items and README lines, to move after the merge.
   run effects and show add-ons" (`tests/smoke.spec.mjs`); the strawberry has not settled back 3 s
   after its tap (about 68,000 pixels differ against a limit near 14,000 on main). Nothing in this
   lane touches it; worth a look by whoever owns the scan rigs.
+- Once in three full runs (2026-09-26), "a scan rig moves a part of a captured toy: the cat statue
+  turns its head" (`tests/smoke.spec.mjs`) failed on a console warning from SwiftShader
+  ("glDrawElementsInstanced: Mismatch between texture format and sampler type"); it passed on the
+  same code in the run before and when run alone. Not this lane's code; noted in case it recurs.
