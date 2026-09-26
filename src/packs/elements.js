@@ -668,80 +668,329 @@ const wfDown = (s) => {
   return s <= WF_OVER ? 0 : Math.min(1, (t * t - 1.44) / 7 / (WF_TOP - 0.06));
 };
 
-// Ocean wave: the face's profile (x across, y up), from the sea in front up
-// the concave face, over the crest and curling down into a barrel. A tap
-// throws the lip forward (a morph towards OW_THROWN, the same profile with
-// its lip flung out and down to the water in front), it crashes, turns to
-// white water and falls flat, spray bursts up, foam spreads, and the lip
-// curls over again from the crest.
+// Ocean wave (E4 review: "The waves themselves should curl, not just the
+// end"). The wave's profile (x across, y up; the same all along z) is two
+// curves: the main one from the sea in front, up the face, over the crest
+// and down the back to the sea behind, and the lip, from the crest. Each
+// runs through keyframes, from the curl it rests in: the lip pitches out
+// and the whole face leans over after it until the lip hits the water in
+// front, the wave collapses into white water and flattens, a new swell
+// rises behind, steepens, and curls over into the rest pose again. The
+// water is skinned (kind "skin") to control points along the two curves,
+// tokens that follow the keyframes, so the whole surface bends as one
+// sheet; its splats are rounder, since it turns a lot.
 const OW_Z0 = -0.85;
 const OW_Z1 = 0.85;
-const OW_SECS = 5.4;
-const OW_HIT = 0.72;
-const OW_PTS = [
-  [1.05, 0],
-  [0.62, 0.015],
-  [0.34, 0.1],
-  [0.16, 0.32],
-  [0.1, 0.58],
-  [0.18, 0.82],
-  [0.36, 0.97],
-  [0.58, 0.96],
-  [0.76, 0.84],
-  [0.84, 0.64],
-  [0.8, 0.48],
-  [0.7, 0.42],
+const OW_SECS = 5.8;
+// When the lip hits the water.
+const OW_HIT = 0.8;
+// Control points along the main curve and the lip, and spray clumps
+// (tokens, in that order).
+const OW_NM = 28;
+const OW_NL = 10;
+const OW_NS = 10;
+// Keyframes: when, the main curve (13 points, the crest at index 7), the
+// lip (6 points from the crest) and how much of the lip shows.
+const OW_KEYS = [
+  {
+    at: 0,
+    m: [
+      [1.3, 0],
+      [1.0, 0],
+      [0.62, 0.015],
+      [0.34, 0.1],
+      [0.16, 0.32],
+      [0.1, 0.58],
+      [0.18, 0.82],
+      [0.34, 0.95],
+      [0.1, 0.9],
+      [-0.2, 0.62],
+      [-0.48, 0.28],
+      [-0.75, 0.07],
+      [-1.0, 0],
+    ],
+    lip: [
+      [0.34, 0.95],
+      [0.58, 0.96],
+      [0.76, 0.84],
+      [0.84, 0.64],
+      [0.8, 0.48],
+      [0.7, 0.42],
+    ],
+    w: 1,
+  },
+  {
+    at: 0.45,
+    m: [
+      [1.3, 0],
+      [1.02, 0],
+      [0.66, 0.012],
+      [0.4, 0.09],
+      [0.24, 0.3],
+      [0.2, 0.58],
+      [0.28, 0.84],
+      [0.46, 0.97],
+      [0.2, 0.92],
+      [-0.12, 0.64],
+      [-0.42, 0.3],
+      [-0.72, 0.07],
+      [-1.0, 0],
+    ],
+    lip: [
+      [0.46, 0.97],
+      [0.72, 0.95],
+      [0.92, 0.8],
+      [1.0, 0.56],
+      [0.98, 0.36],
+      [0.9, 0.26],
+    ],
+    w: 1,
+  },
+  {
+    at: OW_HIT,
+    m: [
+      [1.3, 0],
+      [1.05, 0],
+      [0.72, 0.01],
+      [0.47, 0.08],
+      [0.32, 0.28],
+      [0.3, 0.56],
+      [0.38, 0.82],
+      [0.56, 0.96],
+      [0.3, 0.9],
+      [0.0, 0.62],
+      [-0.34, 0.3],
+      [-0.68, 0.07],
+      [-1.0, 0],
+    ],
+    lip: [
+      [0.56, 0.96],
+      [0.82, 0.9],
+      [1.02, 0.7],
+      [1.12, 0.45],
+      [1.15, 0.22],
+      [1.16, 0.03],
+    ],
+    w: 1,
+  },
+  {
+    at: 1.35,
+    m: [
+      [1.3, 0],
+      [1.12, 0.03],
+      [0.92, 0.1],
+      [0.74, 0.2],
+      [0.6, 0.3],
+      [0.52, 0.4],
+      [0.54, 0.47],
+      [0.64, 0.5],
+      [0.42, 0.46],
+      [0.14, 0.34],
+      [-0.2, 0.18],
+      [-0.6, 0.05],
+      [-1.0, 0],
+    ],
+    lip: [
+      [0.64, 0.5],
+      [0.84, 0.44],
+      [1.0, 0.32],
+      [1.1, 0.2],
+      [1.18, 0.1],
+      [1.24, 0.03],
+    ],
+    w: 1,
+  },
+  {
+    at: 2.2,
+    m: [
+      [1.3, 0],
+      [1.14, 0.01],
+      [0.98, 0.03],
+      [0.84, 0.06],
+      [0.72, 0.09],
+      [0.62, 0.11],
+      [0.54, 0.12],
+      [0.46, 0.12],
+      [0.3, 0.1],
+      [0.08, 0.07],
+      [-0.25, 0.04],
+      [-0.62, 0.01],
+      [-1.0, 0],
+    ],
+    lip: [
+      [0.46, 0.12],
+      [0.6, 0.11],
+      [0.74, 0.09],
+      [0.88, 0.07],
+      [1.0, 0.05],
+      [1.1, 0.03],
+    ],
+    w: 0,
+  },
+  {
+    at: 3.1,
+    m: [
+      [1.3, 0],
+      [1.0, 0],
+      [0.7, 0.005],
+      [0.42, 0.02],
+      [0.2, 0.05],
+      [0.04, 0.1],
+      [-0.1, 0.16],
+      [-0.24, 0.2],
+      [-0.38, 0.18],
+      [-0.52, 0.13],
+      [-0.66, 0.08],
+      [-0.82, 0.03],
+      [-1.0, 0],
+    ],
+    lip: [
+      [-0.24, 0.2],
+      [-0.3, 0.2],
+      [-0.36, 0.19],
+      [-0.42, 0.17],
+      [-0.48, 0.15],
+      [-0.54, 0.13],
+    ],
+    w: 0,
+  },
+  {
+    at: 3.95,
+    m: [
+      [1.3, 0],
+      [1.0, 0],
+      [0.66, 0.01],
+      [0.38, 0.06],
+      [0.18, 0.18],
+      [0.04, 0.34],
+      [-0.02, 0.5],
+      [0.04, 0.6],
+      [-0.14, 0.56],
+      [-0.38, 0.4],
+      [-0.6, 0.22],
+      [-0.8, 0.07],
+      [-1.0, 0],
+    ],
+    lip: [
+      [0.04, 0.6],
+      [0.08, 0.61],
+      [0.12, 0.6],
+      [0.15, 0.58],
+      [0.17, 0.56],
+      [0.18, 0.54],
+    ],
+    w: 0.3,
+  },
+  {
+    at: 4.7,
+    m: [
+      [1.3, 0],
+      [1.02, 0],
+      [0.64, 0.012],
+      [0.36, 0.09],
+      [0.18, 0.28],
+      [0.1, 0.52],
+      [0.14, 0.74],
+      [0.26, 0.88],
+      [0.04, 0.84],
+      [-0.24, 0.58],
+      [-0.52, 0.27],
+      [-0.76, 0.07],
+      [-1.0, 0],
+    ],
+    lip: [
+      [0.26, 0.88],
+      [0.42, 0.92],
+      [0.54, 0.86],
+      [0.6, 0.75],
+      [0.6, 0.64],
+      [0.56, 0.58],
+    ],
+    w: 1,
+  },
 ];
-const OW_FACE = baked(spline(OW_PTS));
-const OW_THROWN = baked(
-  spline([
-    ...OW_PTS.slice(0, 7),
-    [0.63, 0.99],
-    [0.88, 0.9],
-    [1.05, 0.66],
-    [1.13, 0.36],
-    [1.16, 0.05],
-  ]),
-);
-// Where the lip starts (the face runs a little past it, so they overlap)
-// and how much of the throw each place along the profile takes.
-const OW_LIP = 0.62;
-const owThrow = (s) => smoothstep(OW_LIP, 0.74, s);
-// The wave peels along z: tall and hollow at the front (towards the
-// viewer), fading into the sea behind.
-const owGrow = (z) => smoothstep(OW_Z0, OW_Z0 + 0.9, z);
-function owAt(curve, s, v) {
-  const z = OW_Z0 + (OW_Z1 - OW_Z0) * v;
-  const g = owGrow(z);
-  const p = curve(s);
-  // Behind, the lip has not formed yet: pull it back towards the crest.
-  const x = p[0] * (0.55 + 0.45 * g) + 0.2 * (1 - g);
-  return [x, p[1] * (0.2 + 0.8 * g), z];
+OW_KEYS.push({ ...OW_KEYS[0], at: 5.45 });
+// A curve through points, sampled evenly by length: u in 0..1 -> [x, y].
+function owCurve(pts) {
+  const c = spline(pts.map((p) => [p[0], p[1], 0]));
+  const n = 240;
+  const at = [];
+  for (let i = 0; i <= n; i++) at.push(c(i / n));
+  const len = [0];
+  for (let i = 1; i <= n; i++) len.push(len[i - 1] + Math.hypot(at[i][0] - at[i - 1][0], at[i][1] - at[i - 1][1])); // prettier-ignore
+  return (u) => {
+    const L = clamp01(u) * len[n];
+    let i = 1;
+    while (i < n && len[i] < L) i++;
+    const f = (L - len[i - 1]) / Math.max(1e-9, len[i] - len[i - 1]);
+    return [at[i - 1][0] + (at[i][0] - at[i - 1][0]) * f, at[i - 1][1] + (at[i][1] - at[i - 1][1]) * f]; // prettier-ignore
+  };
 }
-// The lip thrown out: its place at s, v once it has landed.
-function owThrown(s, v) {
-  const a = owAt(OW_FACE, s, v);
-  return lerp3(a, owAt(OW_THROWN, s, v), owThrow(s));
+// Each keyframe's control points, and the rest curves the water is built on.
+const OW_CTL = OW_KEYS.map((key) => {
+  const m = owCurve(key.m);
+  const l = owCurve(key.lip);
+  return [
+    ...Array.from({ length: OW_NM }, (_, i) => m(i / (OW_NM - 1))),
+    ...Array.from({ length: OW_NL }, (_, i) => l(i / (OW_NL - 1))),
+  ];
+});
+const OW_REST_M = owCurve(OW_KEYS[0].m);
+const OW_REST_L = owCurve(OW_KEYS[0].lip);
+const OW_LANDED = owCurve(OW_KEYS[2].lip);
+// Where the crest is along the main curve at rest (the face before it,
+// the back after it).
+const OW_CREST = (() => {
+  let best = 0;
+  for (let i = 0; i <= 200; i++) if (OW_REST_M(i / 200)[1] > OW_REST_M(best)[1]) best = i / 200;
+  return best;
+})();
+// The controls at time s after the tap: through the keyframes on smooth
+// (Catmull-Rom) paths, and how much of the lip shows.
+function owPose(s) {
+  const K = OW_KEYS;
+  const n = K.length - 1;
+  let k = 0;
+  while (k < n - 1 && s >= K[k + 1].at) k++;
+  const f = ease(clamp01((s - K[k].at) / (K[k + 1].at - K[k].at)));
+  // The loop is closed (the last key is the first), so the paths are too.
+  const idx = (j) => (j < 0 ? j + n : j > n ? j - n : j);
+  const [a, b, c, d] = [idx(k - 1), k, k + 1, idx(k + 2)].map((j) => OW_CTL[j]);
+  const pts = b.map((p1, i) => {
+    const p0 = a[i];
+    const p2 = c[i];
+    const p3 = d[i];
+    return [0, 1].map(
+      (x) =>
+        0.5 *
+        (2 * p1[x] +
+          (-p0[x] + p2[x]) * f +
+          (2 * p0[x] - 5 * p1[x] + 4 * p2[x] - p3[x]) * f * f +
+          (-p0[x] + 3 * p1[x] - 3 * p2[x] + p3[x]) * f * f * f),
+    );
+  });
+  return { pts, w: K[k].w + (K[k + 1].w - K[k].w) * f };
 }
+const owZ = (v) => OW_Z0 + (OW_Z1 - OW_Z0) * v;
 // Spray: clumps of drops (tokens) thrown up from along the line where the
 // lip lands, each on its own path, falling back into the foam.
 const OW_G = 5.5;
 const OW_SPRAY = (() => {
   const r = lcg(77);
   const out = [];
-  for (let i = 0; i < 44; i++) {
-    const v = 0.3 + 0.68 * ((i + r()) / 44);
-    const g = owGrow(OW_Z0 + (OW_Z1 - OW_Z0) * v);
-    const base = add(owThrown(1, v), [0.02 - 0.12 * r(), 0.04, 0]);
-    const vy = (1.7 + 1.5 * r()) * (0.4 + 0.6 * g);
+  const tip = OW_LANDED(1);
+  for (let i = 0; i < OW_NS; i++) {
+    const z = owZ(0.08 + 0.84 * ((i + r()) / OW_NS));
+    const base = [tip[0] + 0.02 - 0.14 * r(), 0.05, z];
+    const vy = 1.8 + 1.5 * r();
     out.push({
       base,
       at: OW_HIT - 0.02 + 0.12 * r(),
-      vel: [(0.55 * r() - 0.35) * g, vy, 0.5 * (r() - 0.5)],
+      vel: [0.55 * r() - 0.3, vy, 0.5 * (r() - 0.5)],
       dur: (2 * vy) / OW_G,
       axis: unit([r() - 0.5, r() - 0.5, r() - 0.5]),
       spin: 4 + 6 * r(),
-      size: 0.035 + 0.035 * r(),
+      size: 0.05 + 0.04 * r(),
     });
   }
   return out;
@@ -2676,43 +2925,25 @@ export const RECIPES = {
     alive: true,
     controls: [{ key: "crash", label: "Crash", type: "pulse", ease: OW_SECS }],
     action: { key: "crash", label: "Break the wave" },
-    // A tap breaks the wave. The lip pitches forward and down (a morph on
-    // channel 1) and crashes into the flat water in front; there it turns
-    // to white water that falls flat (a copy built where the lip lands,
-    // morphing down on channel 0), clumps of spray burst up and fall back
-    // (tokens), and foam spreads down the face and over the water (a fade
-    // on channel 2). Then the foam thins away and the lip curls over again
-    // from the crest (a copy of the lip fading back in on channel 3).
+    // A tap sets the whole wave going (OW_KEYS): the lip pitches out and
+    // the face leans over after it until the lip crashes into the water in
+    // front. There the lip turns to white water that falls flat (a copy
+    // built where it lands, morphing down on channel 0), clumps of spray
+    // burst up and fall back (tokens), foam spreads over the water (a fade
+    // on channel 2), and the wave collapses and flattens. Then a new swell
+    // rises behind, steepens, throws a lip and curls over into the curl it
+    // rests in.
     drive(t, c, out) {
       const s = since(c.crash, OW_SECS);
-      const hide = { visible: 0 };
-      if (s === null) {
-        out.morph = [0, 0, 0, 0];
-        out.parts.lip = hide;
-        out.parts.wash = hide;
-        out.parts.spray = {};
-        out.tokens = OW_SPRAY.map((d) => ({ base: d.base, visible: 0 }));
-        return;
-      }
-      // The lip is thrown, speeding up, and lands at OW_HIT.
-      const thrown = Math.pow(band(s, 0, OW_HIT), 1.4);
-      // The white water falls flat on the water.
-      const flat = Math.pow(band(s, OW_HIT + 0.03, OW_HIT + 0.55), 1.6);
-      const foam = band(s, OW_HIT, 1.7) * (1 - band(s, 2.7, 4.8));
-      // The lip comes back from the crest out to its tip.
-      const curl = 1 - ease(band(s, 1.5, 3.9));
-      out.morph = [flat, thrown, foam, curl];
-      out.parts.lip = { visible: 1 - band(s, OW_HIT + 0.02, OW_HIT + 0.12) };
-      out.parts.wash = {
-        visible: band(s, OW_HIT - 0.04, OW_HIT + 0.04) * (1 - band(s, 1.7, 2.3)),
-      };
-      // The spray off the lip goes as it is thrown and comes back once the
-      // lip has curled over again, rising off it (the behaviours' amount
-      // grows back from 0, so it starts on the lip).
-      out.parts.spray = { visible: s < 0.05 ? 1 - band(s, 0, 0.05) : ease(band(s, 3.9, 4.5)) };
-      out.amount = s < 0.4 ? 1 - band(s, 0, 0.4) : ease(band(s, 3.9, 5.2));
-      out.tokens = OW_SPRAY.map((d) => {
-        const u = s - d.at;
+      const pose = owPose(s === null ? 0 : Math.min(s, OW_KEYS[OW_KEYS.length - 1].at));
+      const rest = OW_CTL[0];
+      const ctl = pose.pts.map((p, i) => ({
+        base: [rest[i][0], rest[i][1], 0],
+        offset: [p[0] - rest[i][0], p[1] - rest[i][1], 0],
+        visible: i < OW_NM ? 1 : pose.w,
+      }));
+      const spray = OW_SPRAY.map((d) => {
+        const u = s === null ? -1 : s - d.at;
         if (u < 0 || u > d.dur) return { base: d.base, visible: 0 };
         const off = [d.vel[0] * u, d.vel[1] * u - 0.5 * OW_G * u * u, d.vel[2] * u];
         return {
@@ -2722,6 +2953,27 @@ export const RECIPES = {
           visible: band(u, 0, 0.04) * (1 - band(u, d.dur - 0.1, d.dur)),
         };
       });
+      out.tokens = [...ctl, ...spray];
+      if (s === null) {
+        out.morph = [0, 0, 0, 0];
+        out.parts.wash = { visible: 0 };
+        out.parts.spray = {};
+        out.parts.churn = {};
+        return;
+      }
+      // The white water falls flat on the water.
+      const flat = Math.pow(band(s, OW_HIT + 0.03, OW_HIT + 0.55), 1.6);
+      const foam = band(s, OW_HIT, 1.7) * (1 - band(s, 2.9, 4.6));
+      out.morph = [flat, 0, foam, 0];
+      out.parts.wash = {
+        visible: band(s, OW_HIT - 0.04, OW_HIT + 0.04) * (1 - band(s, 1.9, 2.5)),
+      };
+      // The spray off the lip goes as it is thrown and comes back once the
+      // lip has curled over again, rising off it (the behaviours' amount
+      // grows back from 0, so it starts on the lip).
+      out.parts.spray = { visible: s < 0.05 ? 1 - band(s, 0, 0.05) : ease(band(s, 5.2, 5.7)) };
+      out.parts.churn = { visible: 1 - band(s, 0.3, 0.8) + ease(band(s, 4.9, 5.6)) };
+      out.amount = s < 0.4 ? 1 - band(s, 0, 0.4) : ease(band(s, 5.0, 5.7));
     },
     build(k) {
       const water = (c, s, isBack) => {
@@ -2736,100 +2988,91 @@ export const RECIPES = {
         if (foamN > 0.5) col = mix(col, "#dff4ff", 0.55);
         return lit(col, c.n, 0.25);
       };
-      const back = baked(
-        spline([
-          [0.3, 0.96],
-          [0.08, 0.9],
-          [-0.2, 0.62],
-          [-0.48, 0.28],
-          [-0.75, 0.07],
-          [-0.95, 0.0],
-        ]),
-      );
-      // The face up to where the lip starts (and a little past).
-      const lipS = (u) => OW_LIP + (1 - OW_LIP) * u;
-      const top = OW_LIP + 0.02;
-      k.add(
-        k.param((u, v) => owAt(OW_FACE, u * top, v), { grid: 80 }),
-        {
-          flat: 0.25,
-          color: (c) => water(c, c.u * top, false),
+      // The sea and the wave thin out towards their ends, so they fade into
+      // the water round them instead of stopping at a straight edge.
+      const frayed = (c) => {
+        const z = Math.abs(c.p[2]);
+        const edge = Math.max(
+          band(z, 0.6, OW_Z1),
+          band(c.p[0], 1.02, 1.3),
+          1 - band(c.p[0], -1.0, -0.72),
+        );
+        return c.rand() < edge * 0.92;
+      };
+      const on = (curve) => (u, v) => {
+        const p = curve(u);
+        return [p[0], p[1], owZ(v)];
+      };
+      // Each splat follows the two control points either side of it.
+      const skin = (first, n) => (c) => {
+        const x = clamp01(c.u) * (n - 1);
+        const i = Math.min(n - 2, Math.floor(x));
+        return [first + i, first + i + 1, x - i];
+      };
+      // The main sheet: the sea in front, the face, the crest, the back.
+      k.add(k.param(on(OW_REST_M), { grid: 110 }), {
+        flat: 0.42,
+        size: 1.15,
+        weight: 1.4,
+        skin: skin(0, OW_NM),
+        color: (c) =>
+          frayed(c)
+            ? null
+            : c.u < OW_CREST
+              ? water(c, (0.62 * c.u) / OW_CREST, false)
+              : water(c, (c.u - OW_CREST) / (1 - OW_CREST), true),
+      });
+      // The lip (denser, since it stretches as it is thrown, and it fades
+      // away by size while the wave is low).
+      k.add(k.param(on(OW_REST_L), { grid: 64 }), {
+        flat: 0.42,
+        weight: 2.2,
+        size: 1.3,
+        skin: skin(OW_NM, OW_NL),
+        color: (c) => {
+          if (frayed(c)) return null;
+          // White only towards its tip, where it breaks.
+          const foamN = c.noise(c.p[0] * 12, c.p[1] * 12, c.p[2] * 5);
+          if (foamN > 0.95 - 1.7 * c.u * c.u) return keep(mix("#e4f6ff", "#ffffff", c.rand()));
+          return water(c, 0.5, false);
         },
-      );
-      // The lip, twice. The one that is thrown (hidden at rest) morphs out
-      // to where it lands on channel 1; it is denser, since it stretches.
-      // The one shown at rest fades out on a tap and back in from the
-      // crest to the tip as the wave re-forms (channel 3).
-      const lip = k.part("lip", { pivot: [0.6, 0.9, 0] });
-      k.add(
-        k.param((u, v) => owAt(OW_FACE, lipS(u), v), { grid: 64 }),
-        {
-          flat: 0.35,
-          weight: 2.2,
-          size: 1.3,
-          color: (c) => water(c, lipS(c.u), false),
-          part: lip,
-          channel: 1,
-          to: (c) => owThrown(lipS(c.u), c.v),
-        },
-      );
-      k.add(
-        k.param((u, v) => owAt(OW_FACE, lipS(u), v), { grid: 64 }),
-        {
-          flat: 0.25,
-          color: (c) => water(c, lipS(c.u), false),
-          kind: "fade",
-          channel: 3,
-          params: (c) => [0.85 * (1 - c.u), 0.14],
-        },
-      );
-      k.add(
-        k.param((u, v) => owAt(back, u, v), { grid: 48 }),
-        {
-          flat: 0.25,
-          color: (c) => water(c, c.u, true),
-        },
-      );
+      });
       // White water: the lip where it lands, built there (hidden until it
       // crashes), falling flat onto the water on channel 0.
       // It churns: its splats sit a little off the sheet, in and out, and
       // scatter as it falls.
       const wash = k.part("wash", { pivot: [1, 0.3, 0] });
-      k.add(
-        k.param((u, v) => owThrown(OW_LIP + (1 - OW_LIP) * u, v), { grid: 48 }),
-        {
-          flat: 0.9,
-          size: 1.5,
-          weight: 0.9,
-          opacity: 0.85,
-          pattern: false,
-          part: wash,
-          color: (c) => {
-            const l = 0.5 + 0.5 * c.noise(c.p[0] * 14, c.p[1] * 14, c.p[2] * 6);
-            if (l < 0.25) return null;
-            return mix("#cfeaf5", "#ffffff", l);
-          },
-          channel: 0,
-          to: (c) => {
-            const p = c.p;
-            const g = owGrow(p[2]);
-            const f = p[1] / 0.97;
-            return [
-              p[0] + 0.24 * f + 0.3 * f * (c.rand() - 0.5),
-              (0.015 + 0.04 * c.rand()) * (0.2 + 0.8 * g),
-              p[2] + 0.16 * f * (c.rand() - 0.5),
-            ];
-          },
+      k.add(k.param(on(OW_LANDED), { grid: 48 }), {
+        flat: 0.9,
+        size: 1.5,
+        weight: 0.9,
+        opacity: 0.85,
+        pattern: false,
+        part: wash,
+        color: (c) => {
+          const l = 0.5 + 0.5 * c.noise(c.p[0] * 14, c.p[1] * 14, c.p[2] * 6);
+          if (l < 0.25 + 0.6 * band(Math.abs(c.p[2]), 0.55, OW_Z1)) return null;
+          return mix("#cfeaf5", "#ffffff", l);
         },
-      );
-      // Spray flying off the lip, foam churning where it lands (the spray
-      // goes while the lip is thrown).
+        channel: 0,
+        to: (c) => {
+          const p = c.p;
+          const f = p[1] / 0.97;
+          const spread = 0.8 + 0.5 * c.noise(3, 0, p[2] * 3);
+          return [
+            p[0] + (0.24 * f + 0.3 * f * (c.rand() - 0.5)) * spread,
+            0.015 + 0.04 * c.rand(),
+            p[2] + 0.16 * f * (c.rand() - 0.5),
+          ];
+        },
+      });
+      // Spray flying off the lip at rest (it goes while the wave breaks),
+      // and foam churning at the foot of the face.
       const spray = k.part("spray", { pivot: [0.7, 0.7, 0] });
       k.cloud({ share: 0.04, size: 0.8, pattern: false }, (r) => {
-        const v = 0.35 + 0.65 * r();
-        const p = owAt(OW_FACE, 0.6 + 0.32 * r(), v);
+        const p = OW_REST_L(0.3 + 0.65 * r());
         return {
-          p: [p[0] + 0.02, p[1] + 0.02, p[2]],
+          p: [p[0] + 0.02, p[1] + 0.02, owZ(0.05 + 0.9 * r())],
           color: "#ffffff",
           opacity: 0.8,
           kind: "rise",
@@ -2837,62 +3080,49 @@ export const RECIPES = {
           part: spray,
         };
       });
-      k.cloud({ share: 0.03, size: 1.4, pattern: false }, (r) => {
+      const churn = k.part("churn", { pivot: [0.75, 0.03, 0] });
+      k.cloud({ share: 0.03, size: 1.2, pattern: false }, (r) => {
         const v = r();
-        const g = owGrow(OW_Z0 + (OW_Z1 - OW_Z0) * v);
+        const z = owZ(v);
+        const x = 0.62 + 0.3 * r();
+        // Lacy, thicker where the lip lands, thinning to the ends.
+        const l = 0.5 + 0.5 * k.noise(x * 8, 0, z * 5);
+        if (l < 0.45 + 0.4 * band(Math.abs(z), 0.4, OW_Z1)) return null;
         return {
-          p: [
-            0.66 + 0.2 * r() + 0.08 * Math.sin(v * 17),
-            0.02 + 0.07 * r() * g,
-            OW_Z0 + (OW_Z1 - OW_Z0) * v,
-          ],
+          p: [x, 0.015 + 0.05 * r() * l, z],
           color: mix("#dff4ff", "#ffffff", r()),
           opacity: 0.75,
           kind: "twinkle",
           params: [0.3, r() * 6],
+          part: churn,
         };
       });
-      // The crash's foam: lace over the face (spreading down it from the
-      // crest) and over the water in front (spreading out from where the
-      // lip lands), faded in and out on channel 2.
+      // The crash's foam: lace over the water, spreading out from where
+      // the lip lands (ragged, thinning away from it and to the ends),
+      // faded in and out on channel 2.
       const lace = (p) => 0.5 + 0.5 * k.noise(p[0] * 9, p[1] * 9, p[2] * 4);
-      k.cloud({ share: 0.05, size: 1.5, pattern: false }, (r) => {
-        const v = r();
-        const g = owGrow(OW_Z0 + (OW_Z1 - OW_Z0) * v);
-        if (r() > 0.25 + 0.75 * g) return null;
-        let p;
-        let n;
-        let at;
-        if (r() < 0.62) {
-          const s = 0.63 * Math.sqrt(r());
-          const a = owAt(OW_FACE, s, v);
-          const b = owAt(OW_FACE, s + 0.004, v);
-          const tn = unit(sub(b, a));
-          n = [tn[1], -tn[0], 0];
-          p = add(a, mul(n, 0.01));
-          at = 0.04 + 0.5 * ((0.63 - s) / 0.63);
-        } else {
-          const x = 1.02 + 0.28 * r();
-          p = [x, 0.008, OW_Z0 + (OW_Z1 - OW_Z0) * v];
-          n = [0, 1, 0];
-          at = 0.05 + (0.45 * Math.abs(x - 1.1)) / 0.25;
-        }
+      k.cloud({ share: 0.045, size: 1.5, pattern: false }, (r) => {
+        const z = owZ(r());
+        const reach = 0.28 + 0.14 * k.noise(3, 0, z * 3);
+        const x = 1.12 + (r() * 2 - 1) * 0.5;
+        const d = Math.abs(x - 1.12) / reach;
+        const p = [x, 0.012, z];
         const l = lace(p);
-        if (l < 0.25) return null;
+        if (d > 1 || l < 0.25 + 0.5 * d * d + 0.5 * band(Math.abs(z), 0.55, OW_Z1)) return null;
         return {
           p,
-          n,
+          n: [0, 1, 0],
           flat: 0.2,
           color: mix("#d4eef8", "#ffffff", l),
           opacity: 0.9,
           kind: "fade",
           channel: 2,
-          params: [clamp01(at + 0.3 * (1 - l)), -0.12],
+          params: [clamp01(0.05 + 0.5 * d + 0.25 * (1 - l)), -0.12],
         };
       });
       // Clumps of spray, one per token, built where they are thrown from.
       OW_SPRAY.forEach((d, i) => {
-        k.cloud({ count: 28, size: 0.9, pattern: false }, (r) => {
+        k.cloud({ count: 40, size: 0.9, pattern: false }, (r) => {
           const d0 = randDir(r);
           // Drawn out a little along its flight.
           const q = [d0[0] * 0.8, d0[1] * 1.5, d0[2] * 0.8];
@@ -2902,23 +3132,10 @@ export const RECIPES = {
             size: 0.6 + 0.8 * r(),
             opacity: 0.95,
             kind: "token",
-            params: [i, 0],
+            params: [OW_NM + OW_NL + i, 0],
           };
         });
       });
-      // Calmer sea in front, rippling.
-      k.add(
-        k.param((u, v) => [1.05 + 0.25 * u, 0, OW_Z0 + (OW_Z1 - OW_Z0) * v], {
-          grid: 12,
-          flip: true,
-        }),
-        {
-          pattern: false,
-          kind: "wave",
-          params: [0.01, 0],
-          color: (c) => lit(mix("#08457a", "#0f5a8e", c.rand()), c.n, 0.2),
-        },
-      );
     },
   },
 
