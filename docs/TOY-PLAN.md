@@ -10,10 +10,10 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 284 toys. 201 have a tap action today; the other 83 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 199.
+- 284 toys. 229 have a tap action today; the other 55 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 227.
 - **more** (has an effect; make it clearer or more dramatic): 2.
-- **new** (needs its own effect): 83.
+- **new** (needs its own effect): 55.
 - Visual fixes: 0 open, 28 done. Touch or drag interaction asked for: 4.
 
 ## By phase
@@ -34,20 +34,20 @@ Proposals below are suggestions; the owner may change them.
   Neuron, Astrocyte, Animal cell, DNA, White blood cell, Microglia, Diatom, Pollen grain, Snowflake,
   Chromosome, Mitochondrion, Paramecium, Amoeba, Electron orbital, Atom, Molecule, Protein, Crystal
   lattice, Diamond, Ruby, Emerald, Amethyst geode, Sapphire, Quartz cluster, Opal, Crystal ball,
-  Brain, Eye, Lungs, Tooth, Kidney, Cherry blossom, Ice cream, Gummy bear, Coffee, Rubber duck,
-  Newton's cradle, Kite, Chess set, Lorenz attractor, Möbius strip, Klein bottle, Menger sponge,
-  Hypercube, Torus knot, Gyroid, Mandelbulb, Seashell spiral, Wizard's orb, Jellyfish, Pufferfish,
-  Snail, Octopus, Fireworks, Decorated tree, Diya, Acoustic guitar, Snare drum, Xylophone, Hot-air
-  balloon, Bus, Jet airliner, Sailboat, Submarine, Bicycle, Big Ben, Castle, Pagoda, Windmill.
+  Brain, Eye, Lungs, Tooth, Kidney, Oak tree, Pine tree, Palm tree, Cherry blossom, Maple tree,
+  Bonsai, Weeping willow, Sunflower, Rose, Tulips, Daisies, Lotus, Toadstool, Fern, Saguaro cactus,
+  Coral reef, Pinecone, Acorns, Succulent, Bamboo, Pebbles, Kelp, Lava lamp, Ice swan, Tornado,
+  Rainbow, Iceberg, Waterfall, Ocean wave, Ice cream, Gummy bear, Coffee, Rubber duck, Newton's
+  cradle, Kite, Chess set, Lorenz attractor, Möbius strip, Klein bottle, Menger sponge, Hypercube,
+  Torus knot, Gyroid, Mandelbulb, Seashell spiral, Wizard's orb, Jellyfish, Pufferfish, Snail,
+  Octopus, Fireworks, Decorated tree, Diya, Acoustic guitar, Snare drum, Xylophone, Hot-air balloon,
+  Bus, Jet airliner, Sailboat, Submarine, Bicycle, Big Ben, Castle, Pagoda, Windmill.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
 - **E2, new effects: space, atoms and gems.** None.
 - **E3, new effects: tiny things, anatomy and maths.** None.
-- **E4, new effects: nature and weather.** Oak tree, Pine tree, Palm tree, Maple tree, Bonsai,
-  Weeping willow, Sunflower, Rose, Tulips, Daisies, Lotus, Toadstool, Fern, Saguaro cactus, Coral
-  reef, Pinecone, Acorns, Succulent, Bamboo, Pebbles, Kelp, Lava lamp, Ice swan, Tornado, Rainbow,
-  Iceberg, Waterfall, Ocean wave
+- **E4, new effects: nature and weather.** None.
 - **E5, new effects: food.** Watermelon, Cupcake, Lollipop, Candy cane, Macarons, Pretzel,
   Croissant, Sushi, Taco, Apple, Bananas, Orange, Kiwi, Pineapple, Cherries, Grapes, Avocado
 - **E6, new effects: balls and the rest.** Basketball, Soccer ball, Tennis ball, Baseball, Softball,
@@ -456,10 +456,13 @@ Proposals below are suggestions; the owner may change them.
 - **Storm cloud** (`storm-cloud`). Now: tap: Thunder. Plan: keep.
   - Owner: Basically perfect.
   - Sound: Thunder rumble.
-- **Lava lamp** (`lava-lamp`). Now: hops. Plan: new effect (E4).
+- **Lava lamp** (`lava-lamp`). Now: tap: Heat it up. Plan: keep.
   - Owner: Moves really well. On tap: blobs move faster, light up or change colours.
   - Fixed: C1: the glass now tapers into the cap and sits in rolled metal collars top and bottom.
   - Effect: Blobs speed up, glow and shift colour for a few seconds.
+  - Improved: E4: a tap heats the lamp: the wax blobs speed up to about three and a half times,
+    smoothly with no jump, the wax glows and shifts from orange through magenta to gold and the
+    liquid brightens, then it all eases back (about 4.5 s). The glow also shows with motion off.
   - Sound: Low bubbling blorp.
 - **Snow globe** (`snow-globe`). Now: tap: Shake the globe. Plan: keep.
   - Owner: Basically perfect.
@@ -467,29 +470,50 @@ Proposals below are suggestions; the owner may change them.
 - **Volcano** (`volcano`). Now: tap: Erupt. Plan: keep.
   - Owner: Basically perfect.
   - Sound: Deep rumble and boom.
-- **Ice swan** (`ice-statue`). Now: hops. Plan: new effect (E4).
+- **Ice swan** (`ice-statue`). Now: tap: Melt and refreeze. Plan: keep.
   - Owner: Let the little white specks move. The swan could melt or break apart.
   - Effect: Specks drift; tap melts the swan into drips, then it refreezes.
+  - Improved: E4: a tap melts the ice swan: it slumps, drips fall and a smooth meltwater puddle
+    spreads from under the pedestal; then it refreezes and a frosty white light sweeps up it from
+    the base to the beak (about 5.5 s). Frost specks drift up round it while it is cold, and the
+    Temperature slider still works.
   - Sound: Ice crackle and drips.
 - **Candle** (`candle`). Now: tap: Blow out or light. Plan: keep.
   - Owner: Pretty good; OK as it is.
   - Sound: Soft blow and a match strike.
-- **Tornado** (`tornado`). Now: hops. Plan: new effect (E4).
+- **Tornado** (`tornado`). Now: tap: Spin it up. Plan: keep.
   - Owner: Becomes bigger or more intense.
   - Effect: Spins up bigger and faster, pulling debris, then weakens.
+  - Improved: E4: a tap spins the tornado up: the funnel widens (most at the foot), whirls round
+    faster and kicks up dust, and the planks, clods and leaves on the field lift one by one, spiral
+    up round the funnel and fall back where they lay as it weakens (about 5 s). Power still works.
   - Sound: Rising roar of wind.
-- **Rainbow** (`rainbow`). Now: hops. Plan: new effect (E4).
+- **Rainbow** (`rainbow`). Now: tap: Draw the rainbow. Plan: keep.
   - Owner: Pick an effect.
   - Effect: The arc draws itself colour by colour and sparkles at the ends.
+  - Improved: E4: a tap wipes the arc away in a blink, then redraws it colour by colour, red first,
+    each band sweeping left to right behind a bright pen, and sparkles burst from both clouds and
+    settle (about 5 s).
   - Sound: Rising harp glissando.
-- **Iceberg** (`iceberg`). Now: hops. Plan: new effect (E4).
+- **Iceberg** (`iceberg`). Now: tap: Break off a chunk. Plan: keep.
   - Effect: A chunk calves off and splashes; the berg bobs.
+  - Improved: E4: a tap cracks a chunk off the berg's front shoulder, showing pale fresh broken
+    faces; it tips into the sea with a crown of spray and a ring of ripples, floats and bobs while
+    the berg bobs and rocks, then melts away as one piece as the berg's chunk grows back in place
+    (about 6 s).
   - Sound: Crack and splash.
-- **Waterfall** (`waterfall`). Now: hops. Plan: new effect (E4).
+- **Waterfall** (`waterfall`). Now: tap: Send a surge. Plan: keep.
   - Effect: A surge: the flow doubles and mist billows.
+  - Improved: E4: a tap sends a surge: a white-water front runs along the river and over the lip, a
+    wider, thicker sheet of white water unrolls down the curtain with streaks pouring down it, foam
+    spreads over the pool and mist billows up, then it calms (about 5 s).
   - Sound: Rushing water swell.
-- **Ocean wave** (`ocean-wave`). Now: hops. Plan: new effect (E4).
+- **Ocean wave** (`ocean-wave`). Now: tap: Break the wave. Plan: keep.
   - Effect: The wave curls and breaks into foam.
+  - Improved: E4: a tap breaks the wave: the lip pitches forward and crashes into the flat water in
+    front, turns to white water and falls flat, and clumps of spray burst up and fall back; foam
+    spreads down the face and over the water, then thins away as the lip curls over again from the
+    crest (about 5 s).
   - Sound: Wave crash.
 - **Geyser** (`geyser`). Now: tap: Erupt. Plan: keep.
   - Owner: Pretty cool.
@@ -905,18 +929,29 @@ Proposals below are suggestions; the owner may change them.
 
 ## Nature (23)
 
-- **Oak tree** (`oak`). Now: hops. Plan: new effect (E4).
+- **Oak tree** (`oak`). Now: tap: Shake the tree. Plan: keep.
   - Owner: Shake it and leaves come out.
   - Effect: Shakes and leaves flutter down.
+  - Improved: E4: a tap shakes the tree: the crown rocks on its trunk and forty leaves come loose
+    one after another, each fluttering down on its own swinging path to lie on the grass; then they
+    wither and fresh leaves open in their places (about 6.5 s). In winter a few dead brown leaves
+    still cling to the twigs, and those fall.
   - Sound: Leafy rustle.
-- **Pine tree** (`pine`). Now: hops. Plan: new effect (E4).
+- **Pine tree** (`pine`). Now: tap: Shake off the snow. Plan: keep.
   - Owner: Christmas lights and a star appear.
   - Effect: Shakes off a dusting of snow (approved instead of lights, which the decorated tree
     already has).
+  - Improved: E4: a tap shakes off a dusting of snow: the tree rocks and the snow on its boughs
+    drops a pair of tiers at a time, from the top down, in a puff of powder, lies on the ground and
+    melts (about 5 s). On a snowless day a quick shower dusts the boughs first; with Snow on, fresh
+    snow settles on them again afterwards.
   - Sound: Soft jingle.
-- **Palm tree** (`palm`). Now: hops. Plan: new effect (E4).
+- **Palm tree** (`palm`). Now: tap: Shake down the coconuts. Plan: keep.
   - Owner: Tap it and the coconuts fall.
   - Effect: The coconuts fall and bounce, then regrow.
+  - Improved: E4: a tap shakes the crown and the five coconuts (now hanging in a bunch you can see)
+    drop one after another, thump into the sand, bounce twice and roll to a stop, each with its own
+    bonk; new coconuts swell in the crown while the fallen ones are carried off (about 5.5 s).
   - Sound: Two coconut bonks.
 - **Cherry blossom** (`cherry-blossom`). Now: tap: Shake the blossom. Plan: keep.
   - Owner: Really cool already. Maybe all the blossoms fall off when touched.
@@ -924,73 +959,130 @@ Proposals below are suggestions; the owner may change them.
   - Improved: C2: a new tap action shakes the tree: the petals fall in a heavy flurry, the branches
     go bare, then it blooms again (about 4.5 s).
   - Sound: Soft breeze and petal patter.
-- **Maple tree** (`maple`). Now: hops. Plan: new effect (E4).
+- **Maple tree** (`maple`). Now: tap: Send a gust. Plan: keep.
   - Owner: Same kind of thing as the cherry blossom.
   - Effect: Leaves swirl down in a spiral gust (different from the cherry's gentle fall).
+  - Improved: E4: a tap sends a whirling gust: the crown leans into it and forty leaves are torn off
+    and carried round the tree in a widening spiral, tumbling, before they settle in a ring on the
+    grass (the cherry's petals just drift down); then they wither and fresh leaves open (about 7 s).
   - Sound: Crisp autumn rustle.
-- **Bonsai** (`bonsai`). Now: hops. Plan: new effect (E4).
+- **Bonsai** (`bonsai`). Now: tap: Grow a branch, then trim it. Plan: keep.
   - Owner: Maybe shrink or grow.
   - Effect: Grows a new branch, then the scissors snip it back.
+  - Improved: E4: a tap grows a new branch out of the trunk with a pad of leaves on its end; bonsai
+    scissors slide in, open and snip it off at the cut, the piece tips onto the moss and is cleared
+    away, and the stub heals over (about 5 s).
   - Sound: Snip.
-- **Weeping willow** (`willow`). Now: hops. Plan: new effect (E4).
+- **Weeping willow** (`willow`). Now: tap: Send a breeze through. Plan: keep.
   - Owner: Pick anything.
   - Effect: The long branches sway in a wave like a breeze passing.
+  - Improved: E4: a tap sends a breeze across the tree from the left: the hanging strands swing away
+    with it a curtain at a time (they bend, most at their tips), swing back and settle, and the
+    crown leans a little (about 5.5 s). The strands also sway gently at rest.
   - Sound: Long soft sigh.
-- **Sunflower** (`sunflower`). Now: hops. Plan: new effect (E4).
+- **Sunflower** (`sunflower`). Now: tap: Bring out the sun. Plan: keep.
   - Effect: The head turns to face the sun and petals open wide.
+  - Improved: E4: a tap brings out the sun at the top left: the head turns up to face it and all 48
+    ray petals spread wide open, each turning about its root; then the sun goes in, the head turns
+    back and the petals lift again (about 5.5 s). The head nods gently at rest.
   - Sound: Warm rising tone.
-- **Rose** (`rose`). Now: hops. Plan: new effect (E4).
+- **Rose** (`rose`). Now: tap: Open the bloom. Plan: keep.
   - Effect: Blooms open further, a petal drops.
+  - Improved: E4: a tap opens the bloom further (every petal turns out about its root, the outer
+    ones most) and the outer petal facing you comes loose and flutters down to lie on the grass; the
+    bloom closes up again, the fallen petal withers and a new one fills its place (about 5.5 s).
   - Sound: Soft harp note.
 - **Dandelion** (`dandelion`). Now: tap: Blow the seeds. Plan: keep.
   - Owner: Really cool effect; keep it.
   - Sound: Puff of breath.
-- **Tulips** (`tulip`). Now: hops. Plan: new effect (E4).
+- **Tulips** (`tulip`). Now: tap: Open to the sun. Plan: keep.
   - Effect: Petals open wide to the sun, then close.
+  - Improved: E4: a tap opens the three tulips wide to the sun one after another: each of the
+    eighteen petals turns out about its root and shows the dark stamens and the pale pistil inside;
+    then they close up again (about 5 s).
   - Sound: Gentle pluck.
-- **Daisies** (`daisy`). Now: hops. Plan: new effect (E4).
+- **Daisies** (`daisy`). Now: tap: Loves me, loves me not. Plan: keep.
   - Effect: Petals spin like a pinwheel (loves me, loves me not).
+  - Improved: E4: a tap spins the big head like a pinwheel, twice round (loves me, loves me not),
+    and it flings off eight petals one after another, a tick each, which flutter down to the grass
+    while the small heads bob; it slows to a stop, the fallen petals wither and new ones fill the
+    gaps (about 5.5 s).
   - Sound: Tick-tick petal plucks.
-- **Lotus** (`lotus`). Now: hops. Plan: new effect (E4).
+- **Lotus** (`lotus`). Now: tap: Rise and open. Plan: keep.
   - Effect: The flower rises and opens on the water with ripples.
+  - Improved: E4: a tap folds the flower into a bud, lifts it out of the water on its stalk with a
+    ring of light spreading over the water, and opens it wide up in the air, the outer petals first;
+    then it sinks back onto its pad, open, with a second ring (about 6.5 s).
   - Sound: Water drop and a bell.
-- **Toadstool** (`mushroom`). Now: hops. Plan: new effect (E4).
+- **Toadstool** (`mushroom`). Now: tap: Puff out spores. Plan: keep.
   - Effect: Puffs a cloud of glowing spores.
+  - Improved: E4: a tap bops the big cap: it dips and springs back, and a cloud of glowing spores
+    puffs out from the gills and billows up and out, each spore on its own path, fading as it drifts
+    (about 4 s).
   - Sound: Soft puff.
-- **Fern** (`fern`). Now: hops. Plan: new effect (E4).
+- **Fern** (`fern`). Now: tap: Unfurl the fiddleheads. Plan: keep.
   - Effect: The fronds unroll from fiddleheads.
+  - Improved: E4: a tap unrolls the two fiddleheads in the middle into two new fronds: each is a
+    chain of six pieces that straighten one joint after another from the base to the tip, their
+    leaflets spreading as they open; they hold, then roll back up into fiddleheads (about 5.5 s).
   - Sound: Unfurling rustle.
-- **Saguaro cactus** (`saguaro`). Now: hops. Plan: new effect (E4).
+- **Saguaro cactus** (`saguaro`). Now: tap: Spines out, then a look inside. Plan: keep.
   - Owner: The spines come out, or it is cut in half to show the cactus water inside.
   - Effect: The spines shoot out and back; a second tap shows a cut-away with the watery inside.
+  - Improved: E4: taps take turns. The first shoots every spine out along its own line and draws
+    them back with a quiver; the next slides a wedge out of the trunk to show the inside, wet
+    pale-green flesh round a ring of woody ribs, dripping, then slides it home (about 4.5 s). It
+    acts and sounds unlike the cactus scan, which blooms.
   - Sound: Prickly zing.
-- **Coral reef** (`coral`). Now: hops. Plan: new effect (E4).
+- **Coral reef** (`coral`). Now: tap: Open the polyps. Plan: keep.
   - Owner: Really cool; pick something.
   - Effect: Polyps open and little fish dart out and back.
+  - Improved: E4: a tap opens the polyps all over the staghorn coral (tiny tentacled stars spread
+    from their cups) and six little fish dart out of the reef, each on its own path, hover, turn and
+    dart back in; then the polyps close (about 5 s).
   - Sound: Bubbles.
-- **Pinecone** (`pinecone`). Now: hops. Plan: new effect (E4).
+- **Pinecone** (`pinecone`). Now: tap: Open the scales. Plan: keep.
   - Owner: Good-looking but underwhelming; break apart.
   - Effect: The scales open wide (as in dry weather) and seeds drift out.
+  - Improved: E4: a tap opens the cone as in dry weather: every scale tips out from its root, and
+    sixteen winged seeds slip out and spin down like little propellers, each on its own path; then
+    the scales close again (about 5.5 s).
   - Sound: Woody creak.
-- **Acorns** (`acorn`). Now: hops. Plan: new effect (E4).
+- **Acorns** (`acorn`). Now: tap: Pop the caps. Plan: keep.
   - Owner: Should do something.
   - Effect: The caps pop off and a sprout pokes out.
+  - Improved: E4: a tap pops the caps off: each flips through the air and lands upside down on the
+    leaf, and a green sprout pokes out of each acorn and opens two tiny oak leaves; then the sprouts
+    draw back in and the caps hop home (about 5 s).
   - Sound: Tiny pop.
-- **Succulent** (`succulent`). Now: hops. Plan: new effect (E4).
+- **Succulent** (`succulent`). Now: tap: Open and flower. Plan: keep.
   - Owner: Pick something.
   - Effect: The rosette opens and a small flower stalk rises.
+  - Improved: E4: a tap opens the rosette (every leaf tips outward about its root) and a flower
+    stalk rises from the middle and arches over with six little coral bells; then it draws back and
+    the rosette closes (about 5.5 s).
   - Sound: Soft rising pluck.
-- **Bamboo** (`bamboo`). Now: hops. Plan: new effect (E4).
+- **Bamboo** (`bamboo`). Now: tap: Grow new shoots. Plan: keep.
   - Owner: Maybe it grows.
   - Effect: Shoots grow tall very fast, segment by segment.
+  - Improved: E4: three young shoots sit on the ground. A tap makes them shoot up a section at a
+    time, each new section sliding up out of the one below with a hollow knock, carrying the
+    sheathed tip, and a tuft of leaves opens at the top; later they sink back down (about 5.5 s).
   - Sound: Hollow wooden knocks.
-- **Pebbles** (`rocks`). Now: hops. Plan: new effect (E4).
+- **Pebbles** (`rocks`). Now: tap: Tumble and stack. Plan: keep.
   - Owner: Should fall or drop.
   - Effect: The pebbles drop and scatter, then stack into a cairn.
+  - Improved: E4: a tap tumbles the pebbles: each rolls out over the sand on its own path to lie
+    clear of the others, then five hop one at a time onto a cairn, biggest at the bottom, with a
+    clack each; at the end they all hop back (about 7 s). In the Cairn style the top four topple off
+    and are stacked again.
   - Sound: Pebble clatter.
-- **Kelp** (`kelp`). Now: hops. Plan: new effect (E4).
+- **Kelp** (`kelp`). Now: tap: Fish come to nibble. Plan: keep.
   - Owner: Maybe fish eat it; pick something.
   - Effect: Fish swim in and nibble; the kelp sways away.
+  - Improved: E4: a tap brings three little fish swimming in from the left; each noses up to a blade
+    and takes a few nibbles, and the kelp sways away from them, the nearest stalks first, then
+    swings back as the fish swim off to the right (about 5.5 s). The kelp also sways gently at rest.
   - Sound: Underwater bubbles.
 
 ## Food (27)
