@@ -29,7 +29,7 @@ The full table, with owned files, sessions, branches and PRs, is [WORKSTREAMS.md
 | Operator                  | Running             | "Ops: …" PRs                                               | —                                            |
 | E4-finish                 | Running             | [#37](https://github.com/ryanjosephkamp/splashery/pull/37) | [handoff/E4-finish.md](handoff/E4-finish.md) |
 | E5 Food                   | Running             | [#35](https://github.com/ryanjosephkamp/splashery/pull/35) | [handoff/E5.md](handoff/E5.md)               |
-| E6a Balls                 | Running             | Not yet opened                                             | [handoff/E6a.md](handoff/E6a.md)             |
+| E6a Balls                 | Running             | [#38](https://github.com/ryanjosephkamp/splashery/pull/38) | [handoff/E6a.md](handoff/E6a.md)             |
 | E6b Landmarks and friends | Running             | [#36](https://github.com/ryanjosephkamp/splashery/pull/36) | [handoff/E6b.md](handoff/E6b.md)             |
 | F Touch and drag          | Later (Prompt 2E)   | —                                                          | [handoff/F.md](handoff/F.md)                 |
 | G AI image-to-3D          | Later (Prompt 2F)   | —                                                          | [handoff/G.md](handoff/G.md)                 |
