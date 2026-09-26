@@ -433,8 +433,8 @@ form is in CLAUDE.md.
   the ground's height so things land on it. A frond that unrolls is a chain of tokens, each joint
   turning everything beyond it. Pieces that travel are built where they are seen at their fullest
   and offset back at rest (the bamboo's sections, the tornado's debris). Every effect must end
-  exactly where the toy rests: the tap test in `tests/unit.spec.mjs` plays each one through and
-  compares its last moment with the rest pose.
+  exactly where the toy rests: `tests/taps.spec.mjs` plays every kit toy's tap through and compares
+  its last moment with the rest pose.
 - **Light that plays over a surface.** A layer of splats coloured exactly as the surface is there
   (invisible at rest) with `kind: "pulse"` flashes as `out.glow` runs over it; change the glow's
   colour each frame for rainbow fire (diamond, opal) or keep it one colour for a running light

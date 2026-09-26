@@ -17,7 +17,7 @@ import { RIGS } from "../src/rigs.js";
 const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
 const plan = JSON.parse(fs.readFileSync(path.join(root, "tools/toy-plan.json"), "utf8")).toys;
 
-// New effects are built in waves by shelf category (see docs/HANDOFF.md).
+// New effects are built in waves by shelf category (lanes: docs/WORKSTREAMS.md).
 export const WAVES = [
   { id: "E1", title: "Scans and shapes", categories: ["scans", "shapes"] },
   { id: "E2", title: "Space, atoms and gems", categories: ["space", "atoms", "gems"] },

@@ -2,8 +2,10 @@
 
 ## Now: polish phases (v4)
 
-v3 shipped on 2026-09-23 (PRs #4–#11, 283 toys). The next work runs in phases, one session each. The
-current state and the full plan for the next phase are in [HANDOFF.md](HANDOFF.md).
+v3 shipped on 2026-09-23 (PRs #4–#11, 283 toys). The next work runs in phases. Since 2026-09-26 the
+remaining phases run as parallel lanes, one session each, with an Operator session that keeps the
+plan ([OPERATING.md](OPERATING.md), [WORKSTREAMS.md](WORKSTREAMS.md)). The current state is in
+[HANDOFF.md](HANDOFF.md).
 
 | Phase  | What                                                                                                              |
 | ------ | ----------------------------------------------------------------------------------------------------------------- |

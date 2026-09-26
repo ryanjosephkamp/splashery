@@ -4,9 +4,25 @@ Splashery is a pure-browser toy box of 3D Gaussian splats. The owner is Ryan (Gi
 `ryanjosephkamp`). The live site is https://ryanjosephkamp.github.io/splashery/ and GitHub Pages
 serves it from `main`.
 
-**Start here:** read [docs/HANDOFF.md](docs/HANDOFF.md). It holds the current state and the phase to
-work on. Do one phase per session. At the end, update HANDOFF.md with the new state and the next
-phase.
+**Start here:** read [docs/HANDOFF.md](docs/HANDOFF.md) (the state of main and the active lanes) and
+[docs/OPERATING.md](docs/OPERATING.md) (how parallel sessions work). A lane session then reads its
+row in [docs/WORKSTREAMS.md](docs/WORKSTREAMS.md) and its own `docs/handoff/<lane>.md`, does that
+lane's work, and keeps its handoff file current. Only the Operator session edits HANDOFF.md.
+
+## Parallel sessions
+
+Several sessions build at once: one per lane, plus the long-lived Operator session that plans and
+coordinates. [docs/OPERATING.md](docs/OPERATING.md) has the rules. In short:
+
+- A lane edits only the files it owns (its row in WORKSTREAMS.md) and its own toys' entries in the
+  shared lists (`src/toy-sounds.js`, `tools/toy-plan.json`, `src/toys.js`, credits).
+- Regenerate TOY-PLAN.md; never merge it by hand.
+- No engine changes in a lane PR: a small, additive "Engine: …" PR, merged first.
+- Never edit `tests/taps.spec.mjs` (it finds every kit toy's tap by itself); a lane's extra tests go
+  in `tests/<prefix>.spec.mjs`.
+- Lanes post clips and cards to the Effect review page without republishing it (OPERATING.md, "Steps
+  for a lane").
+- When main moves, merge it into your branch; never rebase a pushed branch.
 
 ## Ground rules
 
@@ -53,30 +69,41 @@ new or changed effect against them before calling it done.
   - Review a contact sheet made with `tools/contact-sheet.mjs`.
   - Re-render thumbnails with `tools/make-thumbs.mjs`.
   - The tools expect `python3 -m http.server 4173 --bind 127.0.0.1` to be running.
-- Take screenshots at 390×844 and 1440×900 and save them in `tests/screenshots/`.
+- Take screenshots at 390×844 and 1440×900 and save them in `tests/screenshots/`. A lane names its
+  own `<prefix>-<name>-390x844.png` and `…-1440x900.png`, and after the full test run puts the
+  standard screenshots back with `node tools/upkeep.mjs --restore-shots` (the Operator refreshes
+  them on main).
 
 ## Pull requests
 
 - Open draft PRs against `main`. The body has five sections: Summary, Verification, Deviations,
   Known issues, What was cut.
-- The owner merges, using "Create a merge commit". Never merge yourself.
+- The owner merges, using "Create a merge commit", in any order. Never merge yourself.
 - Use the branch the session assigns. For stacked PRs, add `-<part>` suffixes and merge them in
   order.
+- A lane opens one PR titled "Phase <lane>: …". The Operator's PRs are "Ops: …" on
+  `claude/operator-<topic>`. Keep your PR mergeable: when main moves, merge it into your branch.
 - Report honestly. Say what was verified and what was skipped.
 
 ## Working style
 
 - Run at most 2 or 3 subagents at once. Seven parallel builders used up a week's usage in one go.
+  While lanes run in parallel (at most three at once, plus the Operator), a lane uses at most one
+  helper at a time.
 - The owner works from the phone app. Keep replies short and plain, and give step-by-step
   instructions whenever the owner has to do something.
 
 ## Where things are
 
 - `README.md`: features and code layout.
+- `docs/OPERATING.md`: how parallel sessions work. `docs/WORKSTREAMS.md`: the lanes and who owns
+  what. `docs/handoff/`: each lane's file and `history.md` (the phase notes from A to E4).
 - `docs/ROADMAP.md`: the plan.
 - `docs/BACKLOG.md`: what is not being built now, and what would unblock it.
 - `docs/TOY-PLAN.md`: every toy's planned tap effect, sound and fixes, generated from
   `tools/toy-plan.json` by `node tools/toy-plan.mjs` (run it after adding or finishing a toy).
+- `tools/upkeep.mjs`: the Operator's upkeep after a merge (TOY-PLAN.md, the Sound Board page file,
+  the standard screenshots). `tools/sound-board.mjs` builds the Sound Board page.
 - `docs/reviews/`: the owner's reviews, verbatim, with screenshots.
 - `docs/PACKS.md`: how to write toy recipes.
 - `docs/SCENE-SCHEMA.md`: the scene format.

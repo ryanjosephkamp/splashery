@@ -1,0 +1,589 @@
+<title>Splashery Effect Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,750&display=swap"
+/>
+<style>
+  :root {
+    --page: #f3f4f7;
+    --panel: #ffffff;
+    --ink: #14171c;
+    --muted: #5a6270;
+    --line: rgba(24, 40, 72, 0.13);
+    --stage: #111111;
+    --accent: #0b5fd0;
+    --accent-ink: #ffffff;
+    --good: #1b7a45;
+    --good-soft: #dff3e7;
+    --fix: #a4570b;
+    --fix-soft: #fcebd6;
+    --display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+    --body: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --page: #101216;
+      --panel: #191c22;
+      --ink: #eef0f4;
+      --muted: #a0a8b6;
+      --line: rgba(190, 205, 235, 0.15);
+      --accent: #8db8ff;
+      --accent-ink: #0c1626;
+      --good: #7bdca4;
+      --good-soft: #173826;
+      --fix: #ffc27a;
+      --fix-soft: #3b2912;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --page: #101216;
+    --panel: #191c22;
+    --ink: #eef0f4;
+    --muted: #a0a8b6;
+    --line: rgba(190, 205, 235, 0.15);
+    --accent: #8db8ff;
+    --accent-ink: #0c1626;
+    --good: #7bdca4;
+    --good-soft: #173826;
+    --fix: #ffc27a;
+    --fix-soft: #3b2912;
+  }
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    background: var(--page);
+    color: var(--ink);
+    font: 15px/1.5 var(--body);
+  }
+  .wrap {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding-inline: 16px;
+    padding-block: 22px 64px;
+  }
+  header h1 {
+    font: 750 clamp(28px, 6vw, 40px) / 1.05 var(--display);
+    margin: 0 0 8px;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+  header p {
+    margin: 0 0 8px;
+    max-width: 64ch;
+    color: var(--muted);
+  }
+  .bar {
+    position: sticky;
+    top: env(safe-area-inset-top, 0px);
+    z-index: 5;
+    margin: 18px -16px 0;
+    padding: 10px 16px;
+    background: var(--page);
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+  }
+  .bar button {
+    font: 600 13px/1 var(--body);
+    color: var(--ink);
+    background: transparent;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 8px 12px;
+    cursor: pointer;
+  }
+  .bar button[aria-pressed="true"] {
+    background: var(--ink);
+    color: var(--page);
+    border-color: var(--ink);
+  }
+  .count {
+    margin-left: auto;
+    font-size: 13px;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+  h2 {
+    font: 750 22px/1.2 var(--display);
+    margin: 30px 0 4px;
+  }
+  .part-note {
+    margin: 0 0 12px;
+    color: var(--muted);
+    font-size: 14px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 14px;
+  }
+  .toy {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .clip {
+    background: var(--stage);
+    aspect-ratio: 1;
+    max-width: 100%;
+    display: grid;
+    place-items: center;
+  }
+  .clip img,
+  .clip video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+  .body {
+    padding: 12px 14px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+  }
+  .toy h3 {
+    margin: 0;
+    font: 650 17px/1.25 var(--body);
+    display: flex;
+    gap: 8px;
+    align-items: baseline;
+    flex-wrap: wrap;
+  }
+  .state {
+    font: 600 11px/1 var(--body);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 4px 7px;
+    border-radius: 6px;
+  }
+  .state.good {
+    background: var(--good-soft);
+    color: var(--good);
+  }
+  .state.fix {
+    background: var(--fix-soft);
+    color: var(--fix);
+  }
+  dl {
+    margin: 0;
+    display: grid;
+    gap: 4px;
+    font-size: 14px;
+  }
+  dt {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--muted);
+  }
+  dd {
+    margin: 0 0 4px;
+  }
+  dd.said {
+    font-style: italic;
+  }
+  .marks {
+    margin-top: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .marks button {
+    font: 600 13px/1 var(--body);
+    color: var(--ink);
+    background: transparent;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 9px 13px;
+    cursor: pointer;
+  }
+  .marks button[data-v="good"][aria-pressed="true"] {
+    background: var(--good-soft);
+    border-color: var(--good);
+    color: var(--good);
+  }
+  .marks button[data-v="fix"][aria-pressed="true"] {
+    background: var(--fix-soft);
+    border-color: var(--fix);
+    color: var(--fix);
+  }
+  textarea {
+    width: 100%;
+    min-height: 64px;
+    resize: vertical;
+    font: inherit;
+    color: var(--ink);
+    background: var(--page);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 8px 10px;
+  }
+  .saved {
+    font-size: 12px;
+    color: var(--muted);
+    min-height: 1em;
+  }
+  button:focus-visible,
+  textarea:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  footer {
+    margin-top: 28px;
+    color: var(--muted);
+    font-size: 13px;
+    max-width: 64ch;
+  }
+  .lanes {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    margin: 0 -16px;
+    padding: 8px 16px 0;
+    flex-basis: 100%;
+  }
+  .lanes:empty {
+    display: none;
+  }
+  .lanes button {
+    flex: none;
+  }
+  .lane-head {
+    margin: 34px 0 2px;
+    display: flex;
+    gap: 10px;
+    align-items: baseline;
+    flex-wrap: wrap;
+  }
+  .lane-head h2 {
+    margin: 0;
+  }
+  .lane-tag {
+    font: 600 11px/1 var(--body);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 4px 7px;
+  }
+  h3.group {
+    font: 650 16px/1.3 var(--body);
+    margin: 20px 0 2px;
+  }
+  .msg {
+    margin: 28px 0;
+    color: var(--muted);
+    max-width: 60ch;
+  }
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>Splashery Effect Review</h1>
+    <p>
+      Clips of new and changed tap effects from every lane. Each clip starts a moment before the
+      tap. Mark each one "Looks right" or "Needs work" and add a note; the lane that made it reads
+      your marks.
+    </p>
+  </header>
+
+  <div class="bar" role="group" aria-label="Show">
+    <button type="button" data-f="all" aria-pressed="true">All</button>
+    <button type="button" data-f="open" aria-pressed="false">Not marked yet</button>
+    <button type="button" data-f="fix" aria-pressed="false">Needs work</button>
+    <span class="count" id="count" aria-live="polite"></span>
+    <div class="lanes" id="lanes" role="group" aria-label="Lanes"></div>
+  </div>
+
+  <main id="list"><p class="msg">Loading the clips…</p></main>
+
+  <footer id="status">
+    Clips are rendered in a headless browser at 320 pixels, so colours and sharpness are a little
+    softer than on a real screen. Lanes add their clips here as they finish them; a clip that has
+    been redone after your note is replaced by the new one.
+  </footer>
+</div>
+
+<script>
+  // Everything on this page comes from its database, so several sessions
+  // can add clips at once without republishing it (docs/OPERATING.md in the
+  // splashery repo, "The Effect review page"):
+  //   lanes/<lane id>   { title, note, order, finished, groups: [{ id, title, note }] }
+  //   cards/<card id>   { lane, group, order, name, said, now, asset | clip, video,
+  //                       replacedBy, at }
+  //   verdicts/<card id> { verdict: "good" | "fix" | "", note, at }   (your marks)
+  const els = {
+    list: document.getElementById("list"),
+    count: document.getElementById("count"),
+    lanes: document.getElementById("lanes"),
+  };
+  const marks = {};
+  const cards = {};
+  const lanes = {};
+  let filter = "all";
+  let laneFilter = "all";
+  let showFinished = false;
+  let db = null;
+  let loaded = false;
+
+  const esc = (s) =>
+    String(s ?? "").replace(
+      /[&<>"']/g,
+      (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c],
+    );
+  const num = (v, d) => (Number.isFinite(v) ? v : d);
+  const byOrder = (a, b) =>
+    num(a.order, 1e9) - num(b.order, 1e9) || String(a.id).localeCompare(String(b.id));
+
+  // An uploaded clip is served at /_blob/<id>; older clips are files
+  // published with the page (e4/oak.gif).
+  function clipSrc(t) {
+    if (typeof t.asset === "string" && /^[0-9a-f]{32}$/.test(t.asset)) return "/_blob/" + t.asset;
+    if (
+      typeof t.clip === "string" &&
+      /^[\w./-]+\.(gif|png|webp|jpg|mp4|webm)$/i.test(t.clip) &&
+      !t.clip.includes("..")
+    )
+      return t.clip;
+    return "";
+  }
+
+  function card(t) {
+    const m = marks[t.id] || {};
+    const state =
+      m.verdict === "good"
+        ? '<span class="state good">Looks right</span>'
+        : m.verdict === "fix"
+          ? '<span class="state fix">Needs work</span>'
+          : "";
+    const src = clipSrc(t);
+    const alt = `${esc(t.name)}: ${esc(t.now)}`;
+    const media = !src
+      ? '<p class="msg">No clip yet.</p>'
+      : t.video || /\.(mp4|webm)$/i.test(src)
+        ? `<video src="${esc(src)}" autoplay muted loop playsinline aria-label="${alt}"></video>`
+        : `<img src="${esc(src)}" alt="${alt}" loading="lazy" width="360" height="360" />`;
+    return `<article class="toy" data-id="${esc(t.id)}">
+      <div class="clip">${media}</div>
+      <div class="body">
+        <h3>${esc(t.name)} ${state}</h3>
+        <dl>
+          <dt>You said</dt><dd class="said">${esc(t.said)}</dd>
+          <dt>Now</dt><dd>${esc(t.now)}</dd>
+        </dl>
+        <div class="marks" role="group" aria-label="Your verdict on ${esc(t.name)}">
+          <button type="button" data-v="good" aria-pressed="${m.verdict === "good"}">Looks right</button>
+          <button type="button" data-v="fix" aria-pressed="${m.verdict === "fix"}">Needs work</button>
+        </div>
+        <textarea id="note-${esc(t.id)}" data-note placeholder="What should change?" aria-label="Note on ${esc(t.name)}" ${m.verdict === "fix" || m.note ? "" : "hidden"}>${esc(m.note || "")}</textarea>
+        <div class="saved" data-saved></div>
+      </div>
+    </article>`;
+  }
+
+  function laneList() {
+    const ids = new Set(Object.values(cards).map((c) => String(c.lane || "other")));
+    return [...ids]
+      .map((id) => ({
+        id,
+        order: lanes[id]?.order,
+        title: lanes[id]?.title || id,
+        lane: lanes[id] || {},
+      }))
+      .sort(byOrder);
+  }
+
+  // The cards a view shows: current clips (not replaced by a newer one) in
+  // lanes that are open, or all lanes when finished ones are shown.
+  function current() {
+    return Object.values(cards).filter((t) => {
+      if (t.replacedBy && cards[t.replacedBy]) return false;
+      const lane = lanes[String(t.lane || "other")];
+      if (lane?.finished && !showFinished) return false;
+      if (laneFilter !== "all" && String(t.lane || "other") !== laneFilter) return false;
+      return true;
+    });
+  }
+
+  function visible(t) {
+    const v = marks[t.id]?.verdict;
+    if (filter === "open") return !v;
+    if (filter === "fix") return v === "fix";
+    return true;
+  }
+
+  function renderLanes() {
+    const list = laneList();
+    const finished = list.filter((l) => l.lane.finished).length;
+    if (list.length < 2 && !finished) {
+      els.lanes.innerHTML = "";
+      return;
+    }
+    const chip = (id, label) =>
+      `<button type="button" data-lane="${esc(id)}" aria-pressed="${laneFilter === id}">${esc(label)}</button>`;
+    els.lanes.innerHTML =
+      chip("all", "All lanes") +
+      list
+        .filter((l) => showFinished || !l.lane.finished)
+        .map((l) => chip(l.id, l.title))
+        .join("") +
+      (finished
+        ? `<button type="button" data-finished aria-pressed="${showFinished}">Finished lanes (${finished})</button>`
+        : "");
+  }
+
+  function render() {
+    // Keep a note being typed from being replaced mid-edit.
+    const active = document.activeElement;
+    if (active?.matches?.("textarea[data-note]")) return updateCount();
+    renderLanes();
+    if (!loaded) return updateCount();
+    const shown = current();
+    const html = laneList()
+      .map((l) => {
+        const items = shown
+          .filter((t) => String(t.lane || "other") === l.id && visible(t))
+          .sort(byOrder);
+        if (!items.length) return "";
+        const groups = Array.isArray(l.lane.groups) ? l.lane.groups : [];
+        const known = new Set(groups.map((g) => g.id));
+        const parts = [
+          ...groups.map((g) => ({ g, items: items.filter((t) => t.group === g.id) })),
+          { g: null, items: items.filter((t) => !known.has(t.group)) },
+        ].filter((p) => p.items.length);
+        const tag = l.lane.finished ? '<span class="lane-tag">Finished</span>' : "";
+        return `<section>
+          <div class="lane-head"><h2>${esc(l.title)}</h2>${tag}</div>
+          ${l.lane.note ? `<p class="part-note">${esc(l.lane.note)}</p>` : ""}
+          ${parts
+            .map(
+              (
+                p,
+              ) => `${p.g ? `<h3 class="group">${esc(p.g.title)}</h3>${p.g.note ? `<p class="part-note">${esc(p.g.note)}</p>` : ""}` : parts.length > 1 ? '<h3 class="group">More</h3>' : ""}
+          <div class="grid">${p.items.map(card).join("")}</div>`,
+            )
+            .join("")}
+        </section>`;
+      })
+      .join("");
+    els.list.innerHTML =
+      html ||
+      `<p class="msg">${Object.keys(cards).length ? "Nothing here with this filter." : "No clips yet. Lanes add theirs here as they finish them."}</p>`;
+    updateCount();
+  }
+
+  function updateCount() {
+    if (!loaded) {
+      els.count.textContent = "";
+      return;
+    }
+    const all = current();
+    const done = all.filter((t) => marks[t.id]?.verdict).length;
+    const fix = all.filter((t) => marks[t.id]?.verdict === "fix").length;
+    els.count.textContent = `${done} of ${all.length} marked` + (fix ? `, ${fix} need work` : "");
+  }
+
+  async function save(id, patch, el) {
+    marks[id] = { ...(marks[id] || {}), ...patch, at: new Date().toISOString().slice(0, 10) };
+    const saved = el?.querySelector("[data-saved]");
+    if (!db) {
+      if (saved) saved.textContent = "Not saved: this view cannot store marks.";
+      return;
+    }
+    try {
+      await db.doc(`verdicts/${id}`).set(marks[id]);
+      if (saved) saved.textContent = "Saved";
+    } catch (e) {
+      if (saved) saved.textContent = "Could not save. Try again in a moment.";
+    }
+  }
+
+  els.list.addEventListener("click", (e) => {
+    const b = e.target.closest(".marks button");
+    if (!b) return;
+    const el = b.closest(".toy");
+    const id = el.dataset.id;
+    const v = marks[id]?.verdict === b.dataset.v ? "" : b.dataset.v;
+    save(id, { verdict: v }, el);
+    render();
+    if (v === "fix") document.getElementById(`note-${id}`)?.focus();
+  });
+
+  let noteTimer = null;
+  els.list.addEventListener("input", (e) => {
+    const ta = e.target.closest("textarea[data-note]");
+    if (!ta) return;
+    const el = ta.closest(".toy");
+    clearTimeout(noteTimer);
+    noteTimer = setTimeout(() => save(el.dataset.id, { note: ta.value }, el), 700);
+  });
+  els.list.addEventListener("focusout", (e) => {
+    if (e.target.matches?.("textarea[data-note]")) setTimeout(render, 0);
+  });
+
+  document.querySelector(".bar").addEventListener("click", (e) => {
+    const f = e.target.closest("button[data-f]");
+    if (f) {
+      filter = f.dataset.f;
+      document
+        .querySelectorAll(".bar button[data-f]")
+        .forEach((x) => x.setAttribute("aria-pressed", x === f));
+      return render();
+    }
+    const l = e.target.closest("button[data-lane]");
+    if (l) {
+      laneFilter = l.dataset.lane;
+      return render();
+    }
+    if (e.target.closest("button[data-finished]")) {
+      showFinished = !showFinished;
+      if (!showFinished && lanes[laneFilter]?.finished) laneFilter = "all";
+      return render();
+    }
+  });
+
+  render();
+
+  (async () => {
+    db = (await window.claude?.use?.("db")) || null;
+    if (!db) {
+      els.list.innerHTML =
+        '<p class="msg">This view cannot load the clips. Open the page from its link while signed in to claude.ai.</p>';
+      return;
+    }
+    // Marks are kept as they are stored; lanes and cards also carry their id.
+    const watch = (name, into, withId) =>
+      db.collection(name).onSnapshot(
+        (snap) => {
+          for (const k of Object.keys(into)) delete into[k];
+          for (const d of snap.docs)
+            into[d.id] = withId ? { ...d.data(), id: d.id } : { ...d.data() };
+          if (name === "cards") loaded = true;
+          render();
+        },
+        () => {
+          if (name === "cards")
+            els.list.innerHTML =
+              '<p class="msg">The clips could not be loaded. Reload the page to try again.</p>';
+        },
+      );
+    watch("lanes", lanes, true);
+    watch("verdicts", marks, false);
+    watch("cards", cards, true);
+  })();
+</script>
