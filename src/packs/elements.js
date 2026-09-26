@@ -71,6 +71,21 @@ const lerp3 = (a, b, t) => [
   a[2] + (b[2] - a[2]) * t,
 ];
 const keep = (c, size) => ({ c, keep: true, size });
+// Spherical interpolation between two rotations.
+function slerpQ(a, b, f) {
+  let d = a[0] * b[0] + a[1] * b[1] + a[2] * b[2] + a[3] * b[3];
+  const sg = d < 0 ? -1 : 1;
+  d *= sg;
+  if (d > 0.9995) {
+    const q = a.map((x, i) => x + (sg * b[i] - x) * f);
+    const l = Math.hypot(...q);
+    return q.map((x) => x / l);
+  }
+  const th = Math.acos(d);
+  const wa = Math.sin((1 - f) * th) / Math.sin(th);
+  const wb = (sg * Math.sin(f * th)) / Math.sin(th);
+  return a.map((x, i) => wa * x + wb * b[i]);
+}
 
 // A fake light from the upper left, in front.
 const LIGHT = unit([-0.35, 0.85, 0.45]);
@@ -260,7 +275,191 @@ function lavaBlobs(o) {
   }
   return list;
 }
-const ICE_SECS = 5.6;
+const ICE_SECS = 7.6;
+// The ice swan (E4 review: "it melts by dripping water and slowly
+// breaking decomposing, with the melt speed accelerating a bit as more of
+// it melts"). A tap melts it from the tap to ICE_MELT seconds, faster and
+// faster, as far as ICE_TOP (1: all but a lump of the body), then it
+// refreezes. Each piece is a part that melts by getting smaller about
+// where it joins the rest (its pivot) over its window of the melt level
+// [start, end]; a piece that breaks off first thins a little, cracks off
+// at `detach`, falls (over `fall` of the melt level) to lie in the water
+// at `land` (its centre, `centre`, turned by `turn`), and melts away there
+// over `gone`. `min` is what is left of it (the body's lump).
+const ICE_MELT = 4.4;
+const ICE_TOP = 0.93;
+// Drops: how long one beads before it falls, and how fast it falls.
+const ICE_HANG = 0.3;
+const ICE_G = 5.5;
+// Where the neck breaks, and the height above which a wing's arched top
+// cracks off.
+const ICE_NECK_BREAK = 0.8;
+const ICE_WING_BREAK = 0.8;
+const ICE_PIECES = [
+  { name: "body", pivot: [-0.02, 0.3, 0], start: 0.12, end: 1, min: 0.32 },
+  { name: "beak", on: "head", pivot: [0.52, 1.155, 0], start: 0.03, end: 0.15 },
+  { name: "tail", on: "body", pivot: [-0.3, 0.5, 0], start: 0.1, end: 0.46 },
+  { name: "neckLo", on: "body", pivot: [0.27, 0.53, 0], start: 0.36, end: 0.76 },
+  { name: "wingNear", on: "body", pivot: [0.02, 0.58, 0.17], start: 0.3, end: 0.72 },
+  { name: "wingFar", on: "body", pivot: [0.02, 0.58, -0.17], start: 0.32, end: 0.74 },
+  {
+    name: "tipNear",
+    on: "wingNear",
+    pivot: [-0.12, ICE_WING_BREAK, 0.17],
+    centre: [-0.12, 0.87, 0.17],
+    start: 0.04,
+    thin: 0.12,
+    detach: 0.14,
+    fall: 0.06,
+    gone: [0.24, 0.48],
+    land: [-0.66, 0.035, 0.2],
+    turn: [[0, 0, 1], 1.25, [1, 0, 0], 0.35],
+  },
+  {
+    name: "tipFar",
+    on: "wingFar",
+    pivot: [-0.12, ICE_WING_BREAK, -0.17],
+    centre: [-0.12, 0.87, -0.17],
+    start: 0.06,
+    thin: 0.12,
+    detach: 0.2,
+    fall: 0.06,
+    gone: [0.3, 0.54],
+    land: [-0.62, 0.035, -0.22],
+    turn: [[0, 0, 1], 1.35, [1, 0, 0], -0.35],
+  },
+  {
+    name: "head",
+    on: "neckHi",
+    pivot: [0.4, 1.16, 0],
+    centre: [0.47, 1.16, 0],
+    start: 0.12,
+    thin: 0.1,
+    detach: 0.27,
+    fall: 0.07,
+    gone: [0.36, 0.6],
+    land: [0.66, 0.05, -0.1],
+    turn: [[0, 0, 1], -1.7, [0, 1, 0], 0.6],
+  },
+  {
+    name: "neckHi",
+    on: "neckLo",
+    pivot: [0.4, ICE_NECK_BREAK, 0],
+    centre: [0.36, 0.99, 0],
+    start: 0.14,
+    thin: 0.2,
+    detach: 0.38,
+    fall: 0.09,
+    gone: [0.5, 0.74],
+    land: [0.72, 0.04, 0.2],
+    turn: [[0, 1, 0], -1.1, [0, 0, 1], -1.5],
+  },
+];
+for (const pc of ICE_PIECES) if (pc.gone) pc.end = pc.gone[1];
+const ICE_Q0 = [0, 0, 0, 1];
+// Where each drop of meltwater beads: [piece, point]. The beak's tip, the
+// head's chin, the wing tips' lower edges, the tail's tip, the body's
+// underside and the pedestal's top edges (null: it stays).
+const ICE_DROPS = [
+  ["beak", [0.63, 1.12, 0]],
+  ["beak", [0.6, 1.125, 0.01]],
+  ["head", [0.47, 1.11, 0.02]],
+  ["head", [0.43, 1.12, -0.02]],
+  ["tipNear", [-0.3, 0.82, 0.18]],
+  ["tipNear", [-0.05, 0.83, 0.18]],
+  ["tipNear", [-0.2, 0.84, 0.19]],
+  ["tipFar", [-0.28, 0.82, -0.18]],
+  ["tail", [-0.5, 0.64, 0]],
+  ["tail", [-0.44, 0.55, 0.02]],
+  ["neckHi", [0.3, 1.02, 0.03]],
+  ["neckLo", [0.33, 0.62, 0.05]],
+  ["wingNear", [0.05, 0.6, 0.2]],
+  ["wingNear", [-0.2, 0.62, 0.2]],
+  ["body", [0.1, 0.32, 0.18]],
+  ["body", [-0.2, 0.33, 0.17]],
+  ["body", [0.25, 0.34, 0.12]],
+  [null, [0.49, 0.3, 0.3]],
+  [null, [0.2, 0.3, 0.31]],
+  [null, [-0.15, 0.3, 0.31]],
+  [null, [-0.45, 0.3, 0.3]],
+  [null, [0.5, 0.3, 0.05]],
+  [null, [-0.5, 0.3, -0.1]],
+  [null, [0.5, 0.3, -0.2]],
+  ["beak", [0.62, 1.115, -0.01]],
+  ["tipNear", [-0.33, 0.85, 0.17]],
+  ["head", [0.5, 1.12, 0.0]],
+  ["body", [-0.3, 0.36, 0.14]],
+  [null, [0.35, 0.3, 0.31]],
+  [null, [-0.3, 0.3, 0.31]],
+];
+// Where the attached pieces are at melt level L: each melts (gets smaller)
+// about its pivot and rides on the piece it grows from ("on"), which
+// shrinks about its own pivot, so nothing is left hanging in the air.
+// Returns, per piece, a map of points and its total scale.
+function iceAttached(L) {
+  const at = {};
+  const byName = Object.fromEntries(ICE_PIECES.map((pc) => [pc.name, pc]));
+  const get = (name) => {
+    if (at[name]) return at[name];
+    const pc = byName[name];
+    const own = pc.detach
+      ? 1 - pc.thin * band(L, pc.start, pc.detach)
+      : 1 - (1 - (pc.min ?? 0)) * ease(band(L, pc.start, pc.end));
+    const up = pc.on ? get(pc.on) : { map: (x) => x, scale: 1 };
+    const pv = up.map(pc.pivot);
+    const scale = own * up.scale;
+    return (at[name] = { map: (x) => add(pv, mul(sub(x, pc.pivot), scale)), scale });
+  };
+  for (const pc of ICE_PIECES) get(pc.name);
+  return at;
+}
+// Every piece's pose at melt level L. A piece that breaks off falls from
+// where it was when it cracked off. `regrow(pc)`: it has melted away and
+// the swan is freezing again, so it grows back in place instead of rising
+// from where it fell.
+function icePose(L, regrow) {
+  const now = iceAttached(L);
+  const pose = {};
+  for (const pc of ICE_PIECES) {
+    if (!pc.detach || L < pc.detach || regrow(pc)) {
+      // In place: a scale about the pivot plus the ride on its parent.
+      let { map, scale } = now[pc.name];
+      if (pc.detach && regrow(pc)) {
+        const up = pc.on ? now[pc.on] : { map: (x) => x, scale: 1 };
+        scale = (1 - ease(band(L, pc.start, pc.end))) * up.scale;
+        const pv = up.map(pc.pivot);
+        map = (x) => add(pv, mul(sub(x, pc.pivot), scale));
+      }
+      pose[pc.name] = {
+        scale,
+        visible: scale > 0.004 ? 1 : 0,
+        offset: sub(map(pc.pivot), pc.pivot),
+        attached: true,
+      };
+      continue;
+    }
+    const then = iceAttached(pc.detach)[pc.name];
+    const c0 = then.map(pc.centre);
+    const qLand = quatMul(
+      quatAxisAngle(pc.turn[2], pc.turn[3]),
+      quatAxisAngle(pc.turn[0], pc.turn[1]),
+    );
+    const f = band(L, pc.detach, pc.detach + pc.fall);
+    const sc = then.scale * (1 - ease(band(L, pc.gone[0], pc.gone[1])));
+    const q = slerpQ(ICE_Q0, qLand, ease(f));
+    // The centre falls (faster and faster) and drifts to where it lands,
+    // then the piece melts away about its centre, lying in the water.
+    const landY = pc.land[1] * Math.max(0.3, sc);
+    const at = [
+      c0[0] + (pc.land[0] - c0[0]) * easeOut(f),
+      c0[1] + (landY - c0[1]) * f * f,
+      c0[2] + (pc.land[2] - c0[2]) * easeOut(f),
+    ];
+    const offset = sub(sub(at, pc.pivot), mul(quatRotate(q, sub(pc.centre, pc.pivot)), sc));
+    pose[pc.name] = { scale: sc, visible: sc > 0.004 ? 1 : 0, offset, quat: q, attached: false };
+  }
+  return pose;
+}
 
 // A small seeded generator for tables that build() and drive() share.
 function lcg(seed) {
@@ -1304,32 +1503,78 @@ export const RECIPES = {
       { key: "thaw", label: "Thaw", type: "pulse", ease: ICE_SECS },
     ],
     action: { key: "thaw", label: "Melt and refreeze" },
-    // A tap thaws the swan: it slumps and spreads, drips fall and a puddle
-    // spreads from under the pedestal. Then it freezes again: it stands
-    // back up, the puddle draws back in, and a white band of frost sweeps
-    // up it from the foot to the beak (a coat of splats over the ice,
-    // shown only while the frost passes). Frost specks drift about it
+    // A tap melts the swan like real ice, faster and faster as it goes:
+    // water beads and drips from the beak, the wings and the pedestal's
+    // edges into a spreading puddle; the thin beak wears away first; the
+    // wing tips crack off and fall into the water, then the head and the
+    // top of the neck; the tail, the rest of the neck and the wings wear
+    // away, and the body wears down to a lump, each piece solid ice getting
+    // smaller (never squashing). The fallen pieces melt away in the puddle.
+    // Then it refreezes, the pieces growing back from the body out in the
+    // reverse order, the puddle drawing in, and a white band of frost
+    // sweeps up it from the foot to the beak. Temperature melts it to the
+    // same point and back (lowered after a piece has melted away on the
+    // ground, the piece grows back in place). Frost specks drift about it
     // while it is cold.
-    drive(t, c, out) {
+    drive(t, c, out, info) {
+      const m = mem(c);
       const s = since(c.thaw, ICE_SECS);
-      const thaw = s === null ? 0 : 0.4 * ease(band(s, 0.05, 1.5)) * (1 - ease(band(s, 2.3, 3.6)));
-      const e = Math.max(c.temp, thaw);
-      out.energy = e;
-      const wet = s === null ? 0 : ease(band(s, 0.2, 1.7)) * (1 - ease(band(s, 2.5, 3.8)));
-      const pool = Math.max(smoothstep(0.05, 0.7, c.temp), wet);
-      // The puddle spreads out from under the pedestal (it grows, rather
-      // than fading by size).
+      const tap =
+        s === null
+          ? 0
+          : ICE_TOP * Math.pow(band(s, 0.1, ICE_MELT), 1.6) * (1 - ease(band(s, ICE_MELT + 0.3, ICE_MELT + 1.6))); // prettier-ignore
+      const e = Math.max(clamp(c.temp ?? 0, 0, 1), tap);
+      if (e < 0.002) m.maxL = 0;
+      else m.maxL = Math.max(m.maxL ?? 0, e);
+      const cooling = e < (m.maxL ?? 0) - 0.004;
+      const pieces = icePose(e, (pc) => cooling && (m.maxL ?? 0) >= pc.end);
+      for (const [name, st] of Object.entries(pieces)) {
+        const { attached, ...part } = st;
+        out.parts[name] = part;
+      }
+      // Water: a puddle spreading out from under the pedestal, and drops
+      // (tokens) that bead at the low points and fall while it melts, more
+      // of them the more it has melted.
+      const pool = smoothstep(0.01, 0.8, e);
       out.parts.puddle = { scale: 0.3 + 0.7 * pool, visible: pool > 0.002 ? 1 : 0 };
-      const dripping = (c.temp > 0.1 && c.temp < 0.95) || (s !== null && s > 0.3 && s < 3.2);
-      out.parts.drips = { visible: dripping ? 1 : 0 };
+      const melting = e > 0.02 && !cooling;
+      const drops = info?.data?.drops || [];
+      out.tokens = drops.map((d, i) => {
+        const pc = pieces[d.piece];
+        const onIt = !pc || (pc.attached && (pc.scale ?? 1) > 0.25);
+        if (!melting || !onIt || i / drops.length > 0.25 + 1.3 * e)
+          return { base: d.p, visible: 0 };
+        const u = (((t + d.phase * d.period) % d.period) + d.period) % d.period;
+        const from = pc ? add(add(d.pv, pc.offset ?? [0, 0, 0]), mul(sub(d.p, d.pv), pc.scale ?? 1)) : d.p; // prettier-ignore
+        if (u < ICE_HANG) {
+          // Beading up at the edge.
+          return { base: d.p, offset: sub(from, d.p), visible: 0.35 + 0.65 * (u / ICE_HANG) };
+        }
+        const f = u - ICE_HANG;
+        const drop = 0.5 * ICE_G * f * f;
+        if (drop > from[1] - d.to) return { base: d.p, visible: 0 };
+        return { base: d.p, offset: [from[0] - d.p[0], from[1] - drop - d.p[1], from[2] - d.p[2]] };
+      });
       out.parts.frost = { visible: 1 - smoothstep(0, 0.3, e) };
       // The frost front: the coat shows (coloured as the ice) just before
       // it and the band of light runs up it on channel 0.
-      const front = s === null ? 0 : bump(s, 3.55, 3.7, 5.05, 5.3);
+      const F = ICE_MELT + 1.5;
+      const front = s === null ? 0 : bump(s, F, F + 0.15, F + 1.4, F + 1.6);
       out.parts.coat = { visible: e < 0.01 ? front : 0 };
-      out.morph = [s === null ? -0.3 : -0.25 + 1.5 * band(s, 3.7, 5.0)];
-      const g = s === null ? 0 : bump(s, 3.65, 3.8, 4.8, 5.05);
+      out.morph = [s === null ? -0.3 : -0.25 + 1.5 * band(s, F + 0.15, F + 1.35)];
+      const g = s === null ? 0 : bump(s, F + 0.1, F + 0.25, F + 1.15, F + 1.4);
       out.glow = [0.72, 0.9, 1, 1.1 * g];
+      // A crack as each piece breaks off, and the crackle of refreezing.
+      if (s !== null) {
+        const at = (L) => 0.1 + (ICE_MELT - 0.1) * Math.pow(L / ICE_TOP, 1 / 1.6);
+        const cues = ICE_PIECES.filter((pc) => pc.fall).map((pc, n) => [
+          at(pc.detach),
+          { voice: "crack", f: 2400 - 250 * n, decay: 0.35, vol: 0.75 },
+        ]);
+        cues.push([ICE_MELT + 0.35, { voice: "crackle", f: 4600, n: 14, decay: 1.2, vol: 0.6 }]);
+        cues.push([F + 0.1, { voice: "sparkle", f: 3400, n: 8, decay: 1.3 }]);
+        cuesAt(m, s, cues, out);
+      } else cuesAt(m, null, [], out);
     },
     build(k) {
       const V = unit([0.15, 0.25, 1]);
@@ -1342,21 +1587,20 @@ export const RECIPES = {
         if (Math.abs(g) < 0.018) col = mix(col, "#ffffff", 0.6);
         return col;
       };
-      const ice = (a, deep = 0) => ({
-        kind: "melt",
-        params: [a, 0],
-        flat: 0.25,
-        opacity: 0.9,
-        color: iceCol(deep),
-      });
+      const ice = (deep = 0) => ({ flat: 0.25, opacity: 0.9, color: iceCol(deep) });
+      // Each piece of the swan is a part that melts (gets smaller about
+      // where it joins the rest) and may break off (ICE_PIECES).
+      const P = Object.fromEntries(
+        ICE_PIECES.map((pc) => [pc.name, k.part(pc.name, { pivot: pc.pivot })]),
+      );
       // The frost coat: fewer, bigger splats over the same surfaces,
       // coloured as the ice there, that glow as the frost front (channel
-      // 0, by height) passes. Hidden except while it runs, since it does
-      // not melt with the ice.
+      // 0, by height) passes. Hidden except while it runs, when the swan is
+      // whole again.
       const coat = k.part("coat", { pivot: [0, 0.5, 0] });
       const both = (shape, opts) => {
         k.add(shape, opts);
-        const { interior, core, ...rest } = opts;
+        const { interior, core, part, ...rest } = opts;
         k.add(shape, {
           ...rest,
           weight: 0.3,
@@ -1374,14 +1618,15 @@ export const RECIPES = {
         pos: [0, 0.15, 0],
         interior: 0.08,
         core: "#a8dcf4",
-        ...ice(0.45, 0.1),
+        ...ice(0.1),
       });
       // The swan: a full body with a lifted tail, arched wings and an S neck.
       both(k.ellipsoid(0.38, 0.19, 0.21), {
         pos: [-0.02, 0.47, 0],
         interior: 0.08,
         core: "#bfe8fa",
-        ...ice(0.75),
+        part: P.body,
+        ...ice(),
       });
       both(
         k.tube(
@@ -1393,7 +1638,7 @@ export const RECIPES = {
           (t) => 0.11 * (1 - 0.8 * t),
           { samples: 24, grid: 14, caps: true },
         ),
-        ice(0.85),
+        { part: P.tail, ...ice() },
       );
       const neck = spline([
         [0.26, 0.52, 0],
@@ -1404,13 +1649,23 @@ export const RECIPES = {
         [0.36, 1.16, 0],
         [0.45, 1.17, 0],
       ]);
+      // The neck breaks where it is thinnest between its curves.
       both(
         k.tube(neck, (t) => 0.075 - 0.035 * t, { samples: 96, grid: 24 }),
-        ice(1),
+        {
+          part: (c) => (c.p[1] < ICE_NECK_BREAK ? P.neckLo : P.neckHi),
+          ...ice(),
+        },
       );
-      both(k.ellipsoid(0.075, 0.058, 0.052), { pos: [0.46, 1.165, 0], ...ice(1) });
-      both(k.cone(0.032, 0.004, 0.13), { pos: [0.57, 1.14, 0], rot: [0, 0, -105], ...ice(1) });
+      both(k.ellipsoid(0.075, 0.058, 0.052), { pos: [0.46, 1.165, 0], part: P.head, ...ice() });
+      both(k.cone(0.032, 0.004, 0.13), {
+        pos: [0.57, 1.14, 0],
+        rot: [0, 0, -105],
+        part: P.beak,
+        ...ice(),
+      });
       for (const side of [-1, 1]) {
+        const near = side > 0;
         both(
           k.param(
             (u, v) => {
@@ -1427,7 +1682,14 @@ export const RECIPES = {
             },
             { grid: 24 },
           ),
-          ice(0.9),
+          {
+            // The arched top of the wing is what cracks off.
+            part: (c) =>
+              c.p[1] > ICE_WING_BREAK
+                ? P[near ? "tipNear" : "tipFar"]
+                : P[near ? "wingNear" : "wingFar"],
+            ...ice(),
+          },
         );
       }
       // Frost specks drifting about it while it is cold.
@@ -1440,21 +1702,36 @@ export const RECIPES = {
         params: [0.14, r()],
         part: frost,
       }));
-      // Drips and the puddle as it melts.
-      const drips = k.part("drips", { pivot: [0, 0.4, 0] });
-      k.cloud({ share: 0.005, size: 0.8, pattern: false }, (r) => ({
-        p: [(r() - 0.5) * 1.1, 0.1 + r() * 0.55, (r() - 0.5) * 0.72],
-        color: "#d8f2ff",
-        opacity: 0.8,
-        kind: "fall",
-        params: [0.3, r()],
-        part: drips,
-      }));
+      // Drops of meltwater: each a token that beads at a low point of a
+      // piece (or the pedestal's edge) and falls to the pedestal's top or
+      // the ground. Big enough to show on a phone.
+      const r = lcg(33);
+      const byName = Object.fromEntries(ICE_PIECES.map((pc) => [pc.name, pc]));
+      const drops = ICE_DROPS.map(([piece, p], i) => {
+        const over = Math.abs(p[0]) < 0.49 && Math.abs(p[2]) < 0.3 && p[1] > 0.31;
+        const tok = { kind: "token", params: [i, 0], pattern: false };
+        k.add(k.ellipsoid(0.017, 0.026, 0.017), {
+          ...tok,
+          pos: p,
+          weight: 3,
+          size: 1.3,
+          color: (c) => mix("#e4f6ff", "#ffffff", Math.max(0, dot(c.n, LIGHT))),
+          opacity: 0.85,
+        });
+        return {
+          p,
+          piece,
+          pv: byName[piece]?.pivot || p,
+          to: over ? 0.31 : 0.01,
+          period: 0.7 + 0.5 * r(),
+          phase: r(),
+        };
+      });
       // The puddle: flat splats lying on the ground in a sunflower spiral
       // (evenly spread, so it is smooth water, not blotches), a little
       // uneven at its rim, spread out by its part's scale.
       const puddle = k.part("puddle", { pivot: [0, 0, 0] });
-      k.cloud({ share: 0.012, size: 8, pattern: false }, (r, i, n) => {
+      k.cloud({ share: 0.012, size: 8, pattern: false }, (r2, i, n) => {
         const a = i * 2.399963;
         const rr = 0.86 * Math.sqrt((i + 0.5) / n) * (0.93 + 0.07 * Math.sin(a * 5 + 1));
         return {
@@ -1466,6 +1743,7 @@ export const RECIPES = {
           part: puddle,
         };
       });
+      k.data = { drops };
     },
   },
 
