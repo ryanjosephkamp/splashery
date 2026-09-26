@@ -50,8 +50,9 @@ marks on the Toy Plan page: all 20 balls "yes" with no notes, so the plan in `to
 stands as written. Main merged (up to date at `fb6c81d`).
 
 All 20 balls have their tap effect and a re-timed sound, and are marked `keep` with an `improved`
-line. Clips go to the Effect review page (group per kind of throw); the lane then waits for the
-owner's marks.
+line. Their clips and cards (`e6a-<toy id>`) are on the Effect review page in three groups (thrown,
+hit and kicked; bounces and squashes; floating, bobbing and rolling), posted 2026-09-26. The lane
+now waits for the owner's marks and fixes any "Needs work" in the same PR (new clips as `-r2`).
 
 ## Notes
 
@@ -111,3 +112,7 @@ Lessons for PACKS.md, backlog items and README lines, to move after the merge.
 - PACKS.md 3: even placement on a sphere leaves a small swirl at the poles; cover them with caps if
   the sphere turns (`poleCap()`).
 - Backlog: the American football's end (above).
+- A smoke test fails in this sandbox on main as well as on this branch: "rigs pick splats by colour,
+  run effects and show add-ons" (`tests/smoke.spec.mjs`); the strawberry has not settled back 3 s
+  after its tap (about 68,000 pixels differ against a limit near 14,000 on main). Nothing in this
+  lane touches it; worth a look by whoever owns the scan rigs.
