@@ -33,6 +33,20 @@ const ROSE_SECS = 5.6;
 const TULIP_SECS = 5.2;
 const DAISY_SECS = 5.6;
 const LOTUS_SECS = 6.4;
+const SPORE_SECS = 4.2;
+const FERN_SECS = 5.4;
+const SAGUARO_SECS = 4.6;
+const CORAL_SECS = 5.0;
+const CONE_SECS = 5.6;
+const ACORN_SECS = 5.0;
+// How far (radians) a pinecone scale tips out when the cone opens.
+const CONE_OPEN = 0.8;
+// The saguaro's wedge slides out this way: towards the camera and to the
+// left, so it clears the hole it leaves.
+const SAGUARO_OUT = [-0.2, 0.02, 0.38];
+// How far each joint of a young fern frond is bent to roll it into a
+// fiddlehead (the first stands its stalk upright).
+const FERN_CURL = [0.33, -1.1, -1.4, -1.6, -1.8, -2.0];
 const LOTUS_RISE = 0.42;
 // The breeze through the willow: its direction (to the right on screen and a
 // little towards the camera) and how far a strand bends per unit of drop.
@@ -2882,9 +2896,24 @@ export const RECIPES = {
   mushroom: {
     alive: true,
     options: [{ key: "color", label: "Cap", type: "color", default: "#d21f1a" }],
+    controls: [{ key: "puff", label: "Puff", type: "pulse", ease: SPORE_SECS }],
+    action: { key: "puff", label: "Puff out spores" },
+    // A tap bops the big cap: it dips and springs back, and a cloud of
+    // glowing spores puffs out from the gills underneath, billows outwards
+    // and upwards (each spore on its own path) and fades as it drifts.
+    drive(t, c, out) {
+      const s = progress(c.puff) * SPORE_SECS;
+      const on = c.puff > 0;
+      const dip = on ? -0.05 * Math.exp(-(((s - 0.1) / 0.09) ** 2)) + 0.02 * shake(s - 0.2, 1.2, 14) : 0; // prettier-ignore
+      out.parts.cap = { offset: [0, dip, 0] };
+      out.morph = [on ? easeOut(band(s, 0.12, 3.6)) : 0, 0, 0, 0];
+      out.parts.spores = {
+        visible: on ? ease(band(s, 0.1, 0.3)) * (1 - ease(band(s, 2.4, 3.8))) : 0,
+      };
+    },
     build(k, o) {
       const rand = k.rand;
-      const shroom = (x, z, h, R, open, lean) => {
+      const shroom = (x, z, h, R, open, lean, part) => {
         const q = quatFromTo([0, 1, 0], [lean, 1, lean * 0.3]);
         const at = (p) => add([x, 0, z], quatRotate(q, p));
         const sr = R * 0.2;
@@ -2945,6 +2974,7 @@ export const RECIPES = {
           pos: [x, 0, z],
           quat: q,
           flat: 0.2,
+          part,
           color: (c) => {
             const rr = Math.hypot(c.lp[0], c.lp[2]) / R;
             let col = mix(
@@ -2968,6 +2998,7 @@ export const RECIPES = {
             pos: [x, 0, z],
             quat: q,
             flat: 0.2,
+            part,
             color: (c) => {
               if (c.n[1] > 0.3) return null;
               const g = Math.abs(Math.sin(c.u * Math.PI * 110));
@@ -2990,11 +3021,41 @@ export const RECIPES = {
             quat: quatMul(q, quatFromTo([0, 1, 0], nrm)),
             weight: 2.5,
             flat: 0.3,
+            part,
             color: (c) => lit(mix("#fbf8ef", "#e8dcc0", c.rand() * 0.5), c.n, 0.3),
           });
         }
       };
-      shroom(0.08, 0, 0.78, 0.55, 1, 0.05);
+      const cap = k.part("cap", { pivot: [0.08, 0.78, 0] });
+      shroom(0.08, 0, 0.78, 0.55, 1, 0.05, cap);
+      // Spores (hidden until a tap): under the gills, each flying out on
+      // its own path (a morph) as channel 0 rises.
+      const spores = k.part("spores", { pivot: [0.08, 0.7, 0] });
+      k.cloud({ share: 0.018, size: 0.75, pattern: false, part: spores }, (r) => {
+        const a = r() * TAU;
+        const rr = 0.08 + 0.42 * Math.sqrt(r());
+        const out = [Math.sin(a), 0, Math.cos(a)];
+        const p = [0.08 + out[0] * rr, 0.74 - 0.03 * r(), out[2] * rr];
+        // Out and up in a billow: some rise high over the cap, some drift
+        // wide and low.
+        const high = r();
+        const far = (0.15 + 0.55 * r()) * (1 - 0.5 * high);
+        const lift = -0.15 + 0.7 * high * high + 0.15 * r();
+        const swirl = (r() - 0.5) * 0.5;
+        return {
+          p,
+          size: 0.8 + 0.6 * r(),
+          color: mix("#f4ff80", "#b8ff4a", r()),
+          opacity: 0.9,
+          to: add(p, [
+            out[0] * far + out[2] * swirl * far,
+            lift,
+            out[2] * far - out[0] * swirl * far,
+          ]),
+          channel: 0,
+        };
+      });
+      k.fitMorphs = false;
       shroom(-0.56, 0.3, 0.36, 0.24, 0.3, -0.25);
       shroom(0.62, 0.34, 0.2, 0.14, 0, 0.3);
       // Mossy ground with grass and fallen leaves.
@@ -3020,6 +3081,38 @@ export const RECIPES = {
   fern: {
     alive: true,
     options: [SEED],
+    controls: [{ key: "unfurl", label: "Unfurl", type: "pulse", ease: FERN_SECS }],
+    action: { key: "unfurl", label: "Unfurl the fiddleheads" },
+    // A tap unrolls the two fiddleheads in the middle into two new fronds:
+    // each is a chain of six pieces (tokens) that straighten one joint
+    // after another from the base out to the tip, and the leaflets on
+    // each piece spread as it opens. They hold, then roll back up.
+    drive(t, c, out, info) {
+      const s = progress(c.unfurl) * FERN_SECS;
+      const on = c.unfurl > 0;
+      out.tokens = [];
+      (info.data?.young || []).forEach((f, n) => {
+        const d = 0.35 * n;
+        const opened = (jn) =>
+          on
+            ? ease(band(s, 0.1 + d + 0.28 * jn, 0.9 + d + 0.28 * jn)) *
+              (1 - ease(band(s, 4.2 + 0.08 * (5 - jn), 5.1 + 0.08 * (5 - jn))))
+            : 0;
+        const bend = FERN_CURL.map((b, jn) => b * (1 - opened(jn)));
+        // Forward along the chain: each joint turns everything beyond it.
+        let q = [0, 0, 0, 1];
+        let shift = [0, 0, 0];
+        for (let jn = 0; jn < 6; jn++) {
+          const J = f.J[jn];
+          const moved = add(add(f.J[0], quatRotate(q, sub(J, f.J[0]))), shift);
+          q = quatMul(quatAxisAngle(f.A, bend[jn]), q);
+          const piece = { base: J, quat: q, offset: sub(moved, J) };
+          out.tokens[n * 12 + jn] = piece;
+          out.tokens[n * 12 + 6 + jn] = { ...piece, visible: ease(band(opened(jn), 0.2, 0.9)) };
+          shift = sub(moved, add(f.J[0], quatRotate(q, sub(J, f.J[0]))));
+        }
+      });
+    },
     build(k, o) {
       reseed(k, o);
       const rand = k.rand;
@@ -3079,35 +3172,61 @@ export const RECIPES = {
         );
         return { p, n: pn.Np, color: ramp(greens, tone), ...SW };
       });
-      // Two fiddleheads uncurling in the middle.
-      for (const [x, z, a] of [
-        [0.06, 0.04, 0.4],
-        [-0.07, -0.02, 2.6],
-      ]) {
-        const pts = [];
-        for (let i = 0; i <= 24; i++) {
-          const t = i / 24;
-          if (t < 0.45) pts.push([x, 0.08 + (t / 0.45) * 0.34, z]);
-          else {
-            const th = ((t - 0.45) / 0.55) * Math.PI * 3.2;
-            const rr = 0.07 * (1 - th / (Math.PI * 3.6));
-            const d = [Math.sin(a), 0, Math.cos(a)];
-            pts.push([
-              x + d[0] * Math.sin(th) * rr,
-              0.42 + rr * (1 - Math.cos(th)) * 0.9 - 0.0,
-              z + d[2] * Math.sin(th) * rr,
-            ]);
-          }
-        }
+      // Two young fronds in the middle, built open but rolled up into
+      // fiddleheads at rest (their leaflets hidden); a tap unrolls them.
+      const young = [];
+      [
+        [0.06, 0.04, 1.3],
+        [-0.07, -0.02, -0.9],
+      ].forEach(([x, z, a], n) => {
+        const h = [Math.sin(a), 0, Math.cos(a)];
+        const L = 1.25;
+        // Taller and more upright than the grown fronds: they stand above them.
+        const at = (s) => [x + h[0] * L * 0.55 * s, 0.08 + L * (1.6 * s - 0.9 * s * s), z + h[2] * L * 0.55 * s]; // prettier-ignore
+        const seg = (s) => Math.min(5, Math.floor(s * 6));
         k.add(
-          k.tube(spline(pts), (t) => 0.014 * (1 - 0.5 * t), { samples: 64, grid: 10 }),
+          k.tube(at, (t) => 0.02 * (1 - 0.5 * t), { samples: 48, grid: 10 }),
           {
-            ...SW,
             weight: 1.5,
+            kind: "token",
+            params: (c) => [n * 12 + seg(c.t), 0],
             color: (c) => lit(mix("#6a9a3a", "#9ac050", c.t), c.n, 0.4),
           },
         );
-      }
+        const pinnae = [];
+        for (let jn = 0; jn < 24; jn++) {
+          const s = 0.18 + (0.8 * (jn + 0.5)) / 24;
+          const T = unit(sub(at(s + 0.01), at(s - 0.01)));
+          const Sr = unit(cross(T, [0, 1, 0]));
+          const Np = unit(cross(Sr, T));
+          const len = 0.3 * L * Math.sin(Math.PI * Math.min(1, s * 1.1)) ** 0.8 * (1 - 0.5 * s);
+          for (const side of [-1, 1]) {
+            const pd = unit(add(mul(Sr, side * Math.cos(0.5)), mul(T, Math.sin(0.5))));
+            pinnae.push({ base: at(s), pd, Np, len, s });
+          }
+        }
+        k.cloud({ share: 0.07, size: 0.62, flat: 0.25 }, (r) => {
+          const pn = pinnae[Math.floor(r() * pinnae.length)];
+          const u = r();
+          const v = r();
+          const across = unit(cross(pn.pd, pn.Np));
+          const w = pn.len * 0.24 * Math.sin(Math.PI * u) * (r() - 0.5) * 2;
+          const p = add(add(pn.base, mul(pn.pd, pn.len * u)), mul(across, w));
+          const tone = clamp(0.45 + 0.3 * dot(pn.Np, LIGHT) + 0.25 * v + 0.12 * (r() - 0.5), 0, 1);
+          return {
+            p,
+            n: pn.Np,
+            color: ramp(["#2f6a22", "#4a8a2e", "#7ab244", "#b0d46a", "#d0e88a"], tone),
+            kind: "token",
+            params: [n * 12 + 6 + seg(pn.s), 0],
+          };
+        });
+        young.push({
+          J: [0, 1, 2, 3, 4, 5].map((q) => at(q / 6)),
+          A: unit(cross(h, [0, 1, 0])),
+        });
+      });
+      k.data = { young };
       grassMound(k, 0.72, 0, {
         h: 0.07,
         colors: ["#2f4a1a", "#46662a", "#6a8a3a"],
@@ -3134,6 +3253,24 @@ export const RECIPES = {
       { key: "flowers", label: "Flowers", type: "switch", default: true },
       SEED,
     ],
+    controls: [{ key: "poke", label: "Spines or cut-away", type: "pulse", ease: SAGUARO_SECS }],
+    action: { key: "poke", label: "Spines out, then a look inside" },
+    // Taps take turns. The first shoots every spine out along its own line
+    // and draws them back with a quiver (a morph); the next slides a wedge
+    // out of the trunk (towards you and to the left) to show the inside:
+    // wet, pale green flesh round a ring of woody ribs, dripping; then it
+    // slides home.
+    // (The cactus scan beside it on the shelf blooms instead.)
+    drive(t, c, out, info) {
+      const s = progress(c.poke) * SAGUARO_SECS;
+      const on = c.poke > 0;
+      const cut = on && (info.tap?.n ?? 1) % 2 === 0;
+      const spines = on && !cut ? easeOut(band(s, 0, 0.22)) * (1 - ease(band(s, 0.9, 1.7))) + 0.08 * shake(s - 1.7, 0.8, 30) : 0; // prettier-ignore
+      out.morph = [spines, 0, 0, 0];
+      const open = cut ? ease(band(s, 0.1, 0.8)) * (1 - ease(band(s, 3.3, 4.3))) : 0;
+      out.parts.wedge = { offset: mul(SAGUARO_OUT, open) };
+      out.parts.drips = { visible: cut && s > 0.8 && s < 3.4 ? 1 : 0 };
+    },
     build(k, o) {
       reseed(k, o);
       const rand = k.rand;
@@ -3150,12 +3287,25 @@ export const RECIPES = {
         col = shade(col, 0.95 + 0.1 * c.noise(c.p[0] * 5, c.p[1] * 30, c.p[2] * 5));
         return lit(col, c.n, 0.45);
       };
+      // The wedge that slides out for a look inside: towards the camera,
+      // below the arms.
+      const W0 = 0.45;
+      const WW = 0.75;
+      const Y0 = 0.1;
+      const Y1 = 0.88;
+      const wedge = k.part("wedge", { pivot: [0, Y0, 0], axis: [0, 1, 0] });
+      const inWedge = (p) => {
+        const a = Math.atan2(p[0], p[2]);
+        return p[1] > Y0 && p[1] < Y1 && Math.abs(Math.atan2(Math.sin(a - W0), Math.cos(a - W0))) < WW; // prettier-ignore
+      };
+      const cutPart = (c) => (inWedge(c.p) ? wedge : 0);
+      const edgeR = (a, y) => R * prof(y) * (1 + 0.07 * Math.cos(RIBS * a));
       k.add(
         k.param(
           (u, v) => {
             const a = u * TAU;
             const y = v * H;
-            const rr = R * prof(y) * (1 + 0.07 * Math.cos(RIBS * a));
+            const rr = edgeR(a, y);
             return [Math.sin(a) * rr, y, Math.cos(a) * rr];
           },
           { grid: 72 },
@@ -3163,9 +3313,77 @@ export const RECIPES = {
         {
           interior: 0.1,
           core: "#b8c890",
+          part: cutPart,
           color: (c) => ribCol(Math.cos(RIBS * c.u * TAU), c),
         },
       );
+      // The cut faces, inside at rest: the trunk's (facing into the gap)
+      // and the wedge's own. Wet pale flesh, a ring of woody ribs, pith.
+      const flesh = (f, c, key) => {
+        if (f > 0.93) return "#2c5a2a";
+        if (f > 0.87) return "#5f8f42";
+        if (Math.abs(f - 0.56) < 0.035 && key) return mix("#b89868", "#d8b888", c.rand());
+        if (c.rand() < 0.05) return "#f4fff0";
+        if (f < 0.14) return "#eef6d8";
+        return mix(
+          "#c8e4a0",
+          "#a8d088",
+          0.5 + 0.5 * c.noise(c.p[0] * 30, c.p[1] * 30, c.p[2] * 30),
+        );
+      };
+      for (const part of [0, wedge]) {
+        for (const a of [W0 - WW, W0 + WW]) {
+          k.add(
+            k.param(
+              (u, v) => {
+                const y = Y0 + v * (Y1 - Y0);
+                const rr = u * edgeR(a, y) * 0.995;
+                return [Math.sin(a) * rr, y, Math.cos(a) * rr];
+              },
+              { grid: 16 },
+            ),
+            { part, weight: 1.2, flat: 0.2, pattern: false, color: (c) => flesh(c.u, c, true) },
+          );
+        }
+        for (const y of [Y0, Y1]) {
+          k.add(
+            k.param(
+              (u, v) => {
+                const a = W0 - WW + v * 2 * WW;
+                const rr = u * edgeR(a, y) * 0.995;
+                return [Math.sin(a) * rr, y, Math.cos(a) * rr];
+              },
+              { grid: 16 },
+            ),
+            {
+              part,
+              weight: 1.2,
+              flat: 0.2,
+              pattern: false,
+              // The woody ribs show as a ring of dots across the cut.
+              color: (c) => {
+                const a = W0 - WW + c.v * 2 * WW;
+                const rib = Math.cos(RIBS * a) > 0.6;
+                return flesh(c.u, c, rib);
+              },
+            },
+          );
+        }
+      }
+      // Drops of water running from the cut (only while it is open).
+      const drips = k.part("drips");
+      k.cloud({ share: 0.002, size: 0.8, pattern: false, part: drips }, (r) => {
+        const a = W0 + (r() < 0.5 ? -WW : WW);
+        const y = Y0 + r() * (Y1 - Y0);
+        const rr = r() * R;
+        return {
+          p: [Math.sin(a) * rr, y, Math.cos(a) * rr],
+          color: "#e8fbff",
+          opacity: 0.9,
+          kind: "fall",
+          params: [0.25, r()],
+        };
+      });
       const spines = [];
       for (let i = 0; i < RIBS; i++) {
         for (let y = 0.05; y < H - 0.02; y += 0.055) {
@@ -3216,16 +3434,22 @@ export const RECIPES = {
           }
         }
       }
+      // Spines: each shoots out along its own line as channel 0 rises.
       k.cloud({ share: 0.015, size: 0.45, pattern: false }, (r) => {
         const s = spines[Math.floor(r() * spines.length)];
         const dd = unit(add(s.d, [(r() - 0.5) * 1.2, (r() - 0.3) * 1.2, (r() - 0.5) * 1.2]));
+        const p = add(s.p, mul(dd, 0.012 * r()));
         return {
-          p: add(s.p, mul(dd, 0.012 * r())),
+          p,
           dir: dd,
           stretch: 3,
           color: r() < 0.3 ? "#8a7a5a" : mix("#c8bc94", "#efe4c0", r()),
+          to: add(p, mul(dd, 0.07 + 0.05 * r())),
+          channel: 0,
+          part: inWedge(s.p) ? wedge : 0,
         };
       });
+      k.fitMorphs = false;
       if (o.flowers) {
         for (const tp of tips) {
           for (let f = 0; f < 3; f++) {
@@ -3291,9 +3515,54 @@ export const RECIPES = {
   coral: {
     alive: true,
     options: [SEED],
+    controls: [{ key: "bloom", label: "Polyps", type: "pulse", ease: CORAL_SECS }],
+    action: { key: "bloom", label: "Open the polyps" },
+    // A tap opens the polyps all over the staghorn coral (tiny tentacled
+    // stars spread from their cups), and six little fish dart out from
+    // hiding in the reef, each on its own path, hover, turn and dart back
+    // in. Then the polyps close.
+    drive(t, c, out, info) {
+      const s = progress(c.bloom) * CORAL_SECS;
+      const on = c.bloom > 0;
+      const open = on ? easeOut(band(s, 0.1, 1.0)) * (1 - ease(band(s, 3.8, 4.8))) : 0;
+      out.parts.polyps = { visible: on ? band(s, 0, 0.12) * (1 - band(s, 4.7, 4.9)) : 0 };
+      out.morph = [1 - open, 0, 0, 0];
+      out.tokens = (info.data?.fish || []).map((f, i) => {
+        if (!on) return { base: f.out, visible: 0 };
+        const t0 = 0.35 + 0.18 * i;
+        const back = 2.6 + 0.12 * i;
+        let p;
+        let dir;
+        if (s < t0) return { base: f.out, visible: 0 };
+        if (s < t0 + 0.45) {
+          const g = easeOut(band(s, t0, t0 + 0.45));
+          p = lerp3(f.home, f.out, g);
+          dir = sub(f.out, f.home);
+        } else if (s < back) {
+          // Hovering: a little wander and a flick of the tail.
+          const w = s - t0 - 0.45;
+          p = add(f.out, [0.03 * Math.sin(w * 3 + i), 0.02 * Math.sin(w * 4.1 + i), 0.03 * Math.cos(w * 2.6 + i)]); // prettier-ignore
+          const turn = ease(band(s, back - 0.4, back));
+          dir = lerp3(sub(f.out, f.home), sub(f.home, f.out), turn);
+          dir = add(dir, [0.15 * Math.cos(w * 3 + i), 0, -0.15 * Math.sin(w * 3 + i)]);
+        } else {
+          const g = ease(band(s, back, back + 0.45));
+          p = lerp3(f.out, f.home, g);
+          dir = sub(f.home, f.out);
+        }
+        const flat = unit([dir[0], dir[1] * 0.4, dir[2]]);
+        return {
+          base: f.out,
+          offset: sub(p, f.out),
+          quat: quatFromTo([1, 0, 0], flat),
+          visible: band(s, t0, t0 + 0.12) * (1 - band(s, back + 0.35, back + 0.45)),
+        };
+      });
+    },
     build(k, o) {
       reseed(k, o);
       const rand = k.rand;
+      const polypSites = [];
       // The reef: a lumpy dark base crusted with pink and green.
       k.add(k.ellipsoid(0.95, 0.22, 0.72), {
         pos: [0, 0, 0],
@@ -3350,6 +3619,18 @@ export const RECIPES = {
         });
         for (const b of tree.branches) {
           const last = b.level === 3;
+          if (b.level >= 2) {
+            const curve = spline(b.pts);
+            for (let q = 0; q < 7; q++) {
+              const t = 0.15 + 0.8 * rand();
+              const p0 = curve(t);
+              const tg = unit(sub(curve(Math.min(1, t + 0.02)), curve(Math.max(0, t - 0.02))));
+              const [e1, e2] = perp(tg);
+              const a = rand() * TAU;
+              const nrm = add(mul(e1, Math.cos(a)), mul(e2, Math.sin(a)));
+              polypSites.push({ p: add(p0, mul(nrm, lerp(b.r0, b.r1, t))), n: nrm });
+            }
+          }
           k.add(
             k.tube(spline(b.pts), (t) => lerp(b.r0, b.r1, t), {
               samples: 16,
@@ -3372,6 +3653,25 @@ export const RECIPES = {
           );
         }
       }
+      // Polyps (hidden until a tap): little eight-armed stars on the
+      // staghorn branches, drawn in to their cups (a morph) until they open.
+      const polyps = k.part("polyps");
+      k.cloud({ share: 0.05, size: 0.6, pattern: false, part: polyps }, (r) => {
+        const st = polypSites[Math.floor(r() * polypSites.length)];
+        const [e1, e2] = perp(st.n);
+        const arm = Math.floor(r() * 8);
+        const a = (arm / 8) * TAU + 0.2 * (r() - 0.5);
+        const along = r();
+        const d = unit(add(add(mul(e1, Math.cos(a)), mul(e2, Math.sin(a))), mul(st.n, 0.9)));
+        return {
+          p: add(st.p, mul(d, 0.045 * along + 0.006)),
+          dir: d,
+          stretch: 1.6,
+          color: along > 0.75 ? "#fff6c8" : mix("#f6d890", "#fbe8b0", r()),
+          to: add(st.p, mul(st.n, 0.004)),
+          channel: 0,
+        };
+      });
       // Brain coral.
       k.add(k.sphere(0.3), {
         pos: [-0.32, 0.12, 0.22],
@@ -3485,6 +3785,73 @@ export const RECIPES = {
           color: "#e85a10",
         });
       }
+      // Six little fish hiding in the reef (hidden until a tap). Each is
+      // built where it hovers when it has darted out, in front (so it draws
+      // over the reef), and turned to face along its path.
+      const FISH = [
+        {
+          home: [0.35, 0.35, -0.1],
+          out: [0.55, 0.62, 0.55],
+          body: "#ffd11a",
+          fin: "#ffb000",
+          stripe: null,
+        },
+        {
+          home: [-0.1, 0.35, 0.0],
+          out: [-0.55, 0.7, 0.5],
+          body: "#2a6fff",
+          fin: "#ffd11a",
+          stripe: null,
+        },
+        {
+          home: [0.6, 0.3, 0.2],
+          out: [0.85, 0.45, 0.62],
+          body: "#ff7a1a",
+          fin: "#ff7a1a",
+          stripe: "#ffffff",
+        },
+        {
+          home: [-0.3, 0.3, 0.2],
+          out: [-0.75, 0.42, 0.62],
+          body: "#a040e0",
+          fin: "#ffd11a",
+          stripe: null,
+        },
+        {
+          home: [0.3, 0.4, 0.1],
+          out: [0.2, 0.95, 0.5],
+          body: "#20c8c0",
+          fin: "#20a8a0",
+          stripe: null,
+        },
+        {
+          home: [-0.05, 0.3, 0.3],
+          out: [-0.2, 0.55, 0.78],
+          body: "#ffe040",
+          fin: "#1a1a1a",
+          stripe: "#1a1a1a",
+        },
+      ];
+      FISH.forEach((f, i) => {
+        const fishy = { kind: "token", params: [i, 0], pattern: false, fit: false, weight: 3 };
+        k.add(k.ellipsoid(0.06, 0.036, 0.018), {
+          ...fishy,
+          pos: f.out,
+          color: (c) => {
+            const x = c.lp[0] / 0.06;
+            if (x > 0.6 && Math.abs(c.lp[1]) < 0.01 && Math.abs(c.lp[2]) > 0.008) return "#111111";
+            if (f.stripe && Math.abs(x - 0.1) < 0.14) return f.stripe;
+            return lit(f.body, c.n, 0.3);
+          },
+        });
+        k.add(k.ellipsoid(0.022, 0.028, 0.006), {
+          ...fishy,
+          pos: add(f.out, [-0.07, 0, 0]),
+          color: f.fin,
+        });
+      });
+      k.data = { fish: FISH.map((f) => ({ home: f.home, out: f.out })) };
+      k.fitMorphs = false;
       // Bubbles.
       k.cloud({ share: 0.004, size: 1.2, pattern: false }, (r) => ({
         p: [0.1 + (r() - 0.5) * 0.15, 0.45, 0.4 + (r() - 0.5) * 0.15],
@@ -3498,6 +3865,35 @@ export const RECIPES = {
   },
 
   pinecone: {
+    alive: true,
+    controls: [{ key: "dry", label: "Open", type: "pulse", ease: CONE_SECS }],
+    action: { key: "dry", label: "Open the scales" },
+    // A tap opens the cone as it does in dry weather: every scale tips out
+    // from its root (a morph), showing the dark gaps, and winged seeds slip
+    // out from between them and spin down like little propellers, each on
+    // its own path. Then the scales close up again.
+    drive(t, c, out, info) {
+      const s = progress(c.dry) * CONE_SECS;
+      const on = c.dry > 0;
+      out.morph = [on ? ease(band(s, 0.1, 1.3)) * (1 - ease(band(s, 4.0, 5.3))) : 0, 0, 0, 0];
+      out.tokens = (info.data?.seeds || []).map((sd, i) => {
+        const t0 = 0.9 + 0.07 * i;
+        if (!on || s < t0) return { base: sd.p, visible: 0 };
+        const f = band(s, t0, t0 + sd.dur);
+        const th = sd.a + sd.dir * (0.3 * f + 3.2 * TAU * f * f) * 0.35;
+        const r = lerp(sd.r0, sd.r1, easeOut(Math.min(1, f * 1.6)));
+        const y = sd.p[1] + 0.06 * Math.sin(Math.PI * Math.min(1, f * 4)) - (sd.p[1] - sd.y1) * f * f * (3 - 2 * f); // prettier-ignore
+        const at = [Math.sin(th) * r, y, Math.cos(th) * r];
+        // It spins on itself as it falls, wing out, tilted a little.
+        const q = quatMul(quatAxisAngle([0, 1, 0], sd.dir * 22 * f), quatAxisAngle([1, 0, 0], 0.35 * Math.min(1, f * 3))); // prettier-ignore
+        return {
+          base: sd.p,
+          offset: sub(at, sd.p),
+          quat: q,
+          visible: band(s, t0, t0 + 0.15) * (1 - band(f, 0.85, 1)),
+        };
+      });
+    },
     build(k) {
       const rand = k.rand;
       const N = 120;
@@ -3523,10 +3919,15 @@ export const RECIPES = {
         ];
         const rot = [-(e * 180) / Math.PI, (th * 180) / Math.PI, 0];
         const tone = 0.9 + 0.2 * rand();
+        // Opening: the scale tips out about its root (away from the tip).
+        const hinge = sub(centre, mul(d, len * 0.5));
+        const q = quatAxisAngle([Math.cos(th), 0, -Math.sin(th)], CONE_OPEN * (0.6 + 0.4 * Math.sin(Math.PI * h))); // prettier-ignore
         k.add(k.ellipsoid(wid, 0.028, len * 0.55), {
           pos: centre,
           rot,
           flat: 0.25,
+          channel: 0,
+          to: (c) => add(hinge, quatRotate(q, sub(c.p, hinge))),
           color: (c) => {
             const along = c.lp[2] / (len * 0.55);
             let col = mix("#3a2212", "#8a5a2e", smoothstep(-0.8, 0.4, along));
@@ -3542,6 +3943,39 @@ export const RECIPES = {
         pos: [0, Y0 - 0.04, 0],
         color: (c) => lit("#4a2e18", c.n, 0.4),
       });
+      // Winged seeds (hidden until the scales open): a dark seed on a
+      // papery wing, each a token, built on the cone where it slips out.
+      const seeds = [];
+      for (let i = 0; i < 16; i++) {
+        const h = 0.3 + 0.5 * rand();
+        const a = rand() * TAU;
+        const r0 = radius(h) + 0.03;
+        const p = [Math.sin(a) * r0, Y0 + HT * h, Math.cos(a) * r0];
+        const tok = { kind: "token", params: [i, 0], pattern: false, weight: 4 };
+        const out = [Math.sin(a), 0, Math.cos(a)];
+        k.add(k.ellipsoid(0.022, 0.012, 0.016), {
+          ...tok,
+          pos: p,
+          color: (c) => lit("#3a2414", c.n, 0.4),
+        });
+        k.add(k.ellipsoid(0.055, 0.004, 0.026), {
+          ...tok,
+          pos: add(p, mul(out, 0.05)),
+          quat: quatFromTo([1, 0, 0], out),
+          color: (c) => lit(mix("#c8a070", "#e0c090", c.rand()), c.n, 0.3),
+        });
+        seeds.push({
+          p,
+          a,
+          r0,
+          r1: 0.5 + 0.3 * rand(),
+          y1: -0.78 + 0.1 * rand(),
+          dur: 2.4 + 0.6 * rand(),
+          dir: rand() < 0.5 ? -1 : 1,
+        });
+      }
+      k.data = { seeds };
+      k.fitMorphs = false;
     },
   },
 
@@ -3558,10 +3992,41 @@ export const RECIPES = {
         ],
       },
     ],
+    controls: [{ key: "sprout", label: "Sprout", type: "pulse", ease: ACORN_SECS }],
+    action: { key: "sprout", label: "Pop the caps" },
+    // A tap pops the caps off: each flips up through the air and lands
+    // upside down on the leaf, and a green sprout pokes out of the top of
+    // each acorn and opens two tiny leaves. Then the sprouts draw back in
+    // and the caps hop home.
+    drive(t, c, out, info) {
+      const s = progress(c.sprout) * ACORN_SECS;
+      const on = c.sprout > 0;
+      (info.data?.caps || []).forEach((cp, i) => {
+        const d = 0.22 * i;
+        const go = on ? band(s, 0.05 + d, 0.65 + d) : 0;
+        const home = on ? band(s, 4.05 + d, 4.6 + d) : 0;
+        const f = home > 0 ? 1 - home : go;
+        const arc = 0.42 * Math.sin(Math.PI * f);
+        const bump = home > 0 ? 0 : 0.03 * Math.sin(Math.PI * band(s, 0.65 + d, 0.85 + d));
+        out.parts[`cap${i}`] = {
+          offset: [cp.land[0] * f, cp.land[1] * f + arc + bump, cp.land[2] * f],
+          angle: Math.PI * f,
+        };
+        const grow = on ? easeOut(band(s, 0.55 + d, 1.9 + d)) * (1 - ease(band(s, 3.4 + d, 4.0 + d))) : 0; // prettier-ignore
+        out.parts[`sprout${i}`] = { scale: 0.01 + 0.99 * grow, visible: grow > 0.005 ? 1 : 0 };
+      });
+    },
     build(k, o) {
-      const acorn = (pos, rot, s) => {
+      const caps = [];
+      const acorn = (pos, rot, s, land) => {
         const q = quatEuler(...rot);
         const at = (p) => add(pos, quatRotate(q, mul(p, s)));
+        const n = caps.length;
+        const cap = k.part(`cap${n}`, {
+          pivot: at([0, 0.2, 0]),
+          axis: quatRotate(q, [1, 0, 0.3]),
+        });
+        caps.push({ land: sub(land, at([0, 0.2, 0])) });
         k.add(
           k.lathe([
             [0, -0.56],
@@ -3603,6 +4068,7 @@ export const RECIPES = {
             quat: q,
             scale: s,
             flat: 0.3,
+            part: cap,
             color: (c) => {
               const row = Math.floor(c.v * 9);
               const f = (c.u * 30 + row * 0.5) % 1;
@@ -3621,9 +4087,44 @@ export const RECIPES = {
           }),
           {
             weight: 2,
+            part: cap,
             color: (c) => lit("#5a3e22", c.n, 0.4),
           },
         );
+        // The sprout (hidden until the cap is off): a pale green shoot
+        // curling up out of the top with two tiny oak leaves.
+        const base = at([0, 0.08, 0]);
+        const sprout = k.part(`sprout${n}`, { pivot: base });
+        const sp = [base, at([0.02, 0.3, 0]), at([0.08, 0.55, 0.04]), at([0.2, 0.68, 0.06])];
+        k.add(
+          k.tube(spline(sp), (t) => 0.035 * s * (1 - 0.5 * t), { samples: 24, grid: 10 }),
+          {
+            part: sprout,
+            weight: 2,
+            color: (c) => lit(mix("#e8f0c0", "#8ac050", c.t), c.n, 0.4),
+          },
+        );
+        const shootTip = sp[3];
+        for (const side of [-1, 1]) {
+          k.add(
+            k.param(
+              (u, v) => {
+                const x = (u - 0.5) * 2;
+                return [x * 0.06 * s * oakLobes(v), v * 0.16 * s, 0.02 * s * x * x];
+              },
+              { grid: 10 },
+            ),
+            {
+              pos: shootTip,
+              quat: quatMul(q, quatEuler(-30, side * 50, side * 60)),
+              part: sprout,
+              weight: 2.5,
+              flat: 0.2,
+              color: (c) =>
+                Math.abs(c.u - 0.5) * 2 > oakLobes(c.v) ? null : lit(mix("#6aa83a", "#a8d060", c.v), c.n, 0.3), // prettier-ignore
+            },
+          );
+        }
       };
       // An oak leaf with rounded lobes behind the acorns.
       const autumn = o.leaf === "autumn";
@@ -3675,8 +4176,19 @@ export const RECIPES = {
           color: autumn ? "#8a5a22" : "#4f7a2a",
         },
       );
-      acorn([-0.28, -0.08, 0.2], [0, 0, 18], 0.95);
-      acorn([0.34, -0.22, 0.28], [0, 40, -35], 0.8);
+      // Each cap lands upside down on the leaf: a point on its surface
+      // (the leaf's own u, v), lifted by the cap's height.
+      const leafQ = quatEuler(-72, 25, 0);
+      const onLeaf = (u, v) => {
+        const x = (u - 0.5) * 2 * W;
+        const lp = [x, v * L, 0.08 * x * x - 0.12 * Math.sin(v * Math.PI)];
+        const up = quatRotate(leafQ, [0, 0, 1]);
+        return add(add([0.05, -0.5, -0.25], quatRotate(leafQ, lp)), mul(up[1] > 0 ? up : mul(up, -1), 0.12)); // prettier-ignore
+      };
+      const spots = [onLeaf(0.15, 0.55), onLeaf(0.88, 0.62)];
+      acorn([-0.28, -0.08, 0.2], [0, 0, 18], 0.95, spots[0]);
+      acorn([0.34, -0.22, 0.28], [0, 40, -35], 0.8, spots[1]);
+      k.data = { caps };
     },
   },
 
