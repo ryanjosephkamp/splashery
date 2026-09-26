@@ -2954,6 +2954,16 @@ export const RECIPES = {
         };
       });
       out.tokens = [...ctl, ...spray];
+      // The new swell rising, and its lip curling over (later sounds).
+      cuesAt(
+        mem(c),
+        s,
+        [
+          [3.1, { voice: "wave", decay: 1.2, vol: 0.45 }],
+          [4.5, { voice: "whoosh", f: 260, to: 2, decay: 0.5, vol: 0.4 }],
+        ],
+        out,
+      );
       if (s === null) {
         out.morph = [0, 0, 0, 0];
         out.parts.wash = { visible: 0 };

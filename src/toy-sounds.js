@@ -541,7 +541,9 @@ export const TOY_SOUNDS = {
   coral: { voice: "bubbles", f: 650, n: 14, decay: 2.2 },
   pinecone: [
     { voice: "scrape", f: 350, rate: 25, decay: 1.2 },
-    { voice: "flutter", at: 1.0, f: 1200, rate: 22, decay: 1.6, vol: 0.4 },
+    { voice: "flutter", at: 0.8, f: 1200, rate: 22, decay: 1.6, vol: 0.4 },
+    { voice: "crackle", at: 1.35, f: 2600, n: 10, decay: 1.8, vol: 0.5 },
+    { voice: "rattle", at: 4.35, f: 1800, n: 8, decay: 0.9, vol: 0.5 },
   ],
   acorn: [
     { voice: "pop", f: 1150, decay: 0.6 },
@@ -583,9 +585,8 @@ export const TOY_SOUNDS = {
   // frost sweeps up it.
   "ice-statue": [
     { voice: "breath", f: 800, to: 0.5, decay: 1.4, vol: 0.5 },
-    { voice: "drip", at: 0.4, f: 1400, n: 5, rate: 2.5 },
-    { voice: "crackle", at: 2.4, f: 4200, n: 12, decay: 1.3, vol: 0.7 },
-    { voice: "sparkle", at: 3.6, f: 3400, n: 8, decay: 1.3 },
+    { voice: "drip", at: 0.4, f: 1400, n: 10, rate: 2.6 },
+    { voice: "drip", at: 2.2, f: 1150, n: 8, rate: 4 },
   ],
   candle: {
     on: [
@@ -622,9 +623,9 @@ export const TOY_SOUNDS = {
   // The lip rushes over, crashes, and the foam fizzes away.
   "ocean-wave": [
     { voice: "whoosh", f: 220, to: 3, decay: 1.2, vol: 0.8 },
-    { voice: "rumble", at: 0.7, f: 60, rate: 3, decay: 0.8, vol: 0.8 },
-    { voice: "splash", at: 0.72, f: 900, decay: 2.2 },
-    { voice: "hiss", at: 1.0, f: 3500, decay: 3, vol: 0.5 },
+    { voice: "rumble", at: 0.75, f: 60, rate: 3, decay: 0.8, vol: 0.8 },
+    { voice: "splash", at: 0.8, f: 900, decay: 2.2 },
+    { voice: "hiss", at: 1.05, f: 3500, decay: 2.6, vol: 0.5 },
   ],
   geyser: [
     { voice: "hiss", f: 3000, decay: 1.6 },
