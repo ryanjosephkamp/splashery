@@ -25,6 +25,7 @@ ground rules are in [CLAUDE.md](../CLAUDE.md).
   Clips of the fixes (`e3f-…`) are at the top of the Effect review page.
 - **`fit: false` (E3 review).** A shape added with `fit: false` is left out of the toy's fit (the
   Möbius riders, built in front of and behind the band for the draw order); keep it inside the view.
+  The kit test's "fits the unit ball" check skips these shapes.
 - **Channels (E3; docs/PACKS.md section 6).** `out.morph = [a, b, c, d]` drives four channels, with
   motion on or off, and three new kinds follow them:
   - `morph` (kind 17): `to: (c) => [x, y, z]` gives each splat its own target (recipe coordinates);

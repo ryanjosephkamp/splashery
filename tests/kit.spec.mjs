@@ -113,6 +113,11 @@ test("every kit toy has a recipe that builds deterministically and fits the unit
       let same = a.buf.count === b.buf.count;
       let bad = 0;
       let far = 0;
+      // Shapes added with `fit: false` are left out of the fit on purpose (the Möbius riders'
+      // hidden copies sit off to one side for draw order), so they may lie outside the ball.
+      const unfit = new Uint8Array(buf.count);
+      for (const item of a.kit.items)
+        if (item.opts.fit === false) unfit.fill(1, item.start, item.end);
       for (let i = 0; i < buf.count; i++) {
         for (let k = 0; k < 3; k++) {
           const v = buf.pos[i * 3 + k];
@@ -120,7 +125,7 @@ test("every kit toy has a recipe that builds deterministically and fits the unit
           if (!Number.isFinite(v)) bad++;
         }
         const r = Math.hypot(buf.pos[i * 3], buf.pos[i * 3 + 1], buf.pos[i * 3 + 2]);
-        if (r > 1.001) far++;
+        if (r > 1.001 && !unfit[i]) far++;
         for (let k = 0; k < 4; k++)
           if (!(buf.color[i * 4 + k] >= 0 && buf.color[i * 4 + k] <= 1)) bad++;
         if (!kinds.has(buf.anim[i * 4 + 1])) bad++;
