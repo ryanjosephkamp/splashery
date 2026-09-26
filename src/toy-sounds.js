@@ -870,7 +870,12 @@ export const TOY_SOUNDS = {
       { voice: "stone", at: 0.35, f: 250, decay: 1.5 },
     ],
   },
-  shield: { voice: "metal", f: 260, decay: 1.4 },
+  // A clang, crackling sparks and a shimmer as the gleam crosses it.
+  shield: [
+    { voice: "metal", f: 260, decay: 1.4 },
+    { voice: "crackle", at: 0.02, f: 4200, n: 14, decay: 1, vol: 0.5 },
+    { voice: "shimmer", at: 0.4, f: 1600, decay: 1.1, vol: 0.4 },
+  ],
   "bow-and-target": {
     on: [
       { voice: "twang", at: 0.42, f: 130 },
@@ -892,7 +897,18 @@ export const TOY_SOUNDS = {
     on: { voice: "metal", f: 520, decay: 0.5, bright: 0.6 },
     off: { voice: "metal", f: 440, decay: 0.45, bright: 0.4 },
   },
-  crown: { voice: "brass", notes: "C5 C5 C5 G5 - E5 G5+C6", step: 0.14, decay: 1.2 },
+  // A royal fanfare, and a ping for each jewel as it lights.
+  crown: [
+    { voice: "brass", notes: "C5 C5 C5 G5 - E5 G5+C6", step: 0.14, decay: 1.2 },
+    {
+      voice: "glass",
+      at: 0.4,
+      notes: "C6 D6 E6 G6 A6 C7 D7 E7",
+      step: 0.175,
+      decay: 0.8,
+      vol: 0.35,
+    },
+  ],
   "dragon-egg": {
     on: [
       { voice: "crack", f: 1500, bright: 0.5 },
@@ -965,9 +981,12 @@ export const TOY_SOUNDS = {
     ],
     off: { voice: "whoosh", f: 600, to: 0.3, decay: 0.6 },
   },
+  // Drips as it melts, then the crunch of snow as it builds itself again
+  // and a twinkle as the pieces hop back.
   snowman: [
-    { voice: "drip", f: 1000, n: 2, rate: 4 },
-    { voice: "crunch", at: 0.5, f: 1000, n: 16, decay: 1.8, bright: 0.2 },
+    { voice: "drip", at: 0.3, f: 1000, n: 6, rate: 3.5 },
+    { voice: "crunch", at: 3.1, f: 1000, n: 16, decay: 1.6, bright: 0.2 },
+    { voice: "chimes", at: 3.95, f: "E6", n: 4, decay: 0.8, vol: 0.4 },
   ],
   fireworks: [
     { voice: "whistle", f: 900, to: 2.2, decay: 1 },
