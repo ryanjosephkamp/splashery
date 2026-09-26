@@ -1162,9 +1162,10 @@ Proposals below are suggestions; the owner may change them.
 - **Pretzel** (`pretzel`). Now: tap: Twist. Plan: keep.
   - Owner: Some sort of twisting, like the knots.
   - Effect: Untwists into a rope and twists back.
-  - Improved: E5 (r2, after the owner's note): the pretzel contorts like a knot: its loops swirl
-    round and rise out of its plane, one up and one down, and its sides turn opposite ways; let go,
-    it springs back past its shape into the opposite contortion and wobbles to a stop (about 3.8 s).
+  - Improved: E5 (r3, after the owner's notes): the pretzel twists like a knot, all in one piece:
+    its two sides wring opposite ways and its loops fold a little towards you, and wherever the rope
+    crosses or rests on itself it stays joined; let go, it springs a little past its shape into the
+    opposite twist and wobbles to a stop (about 3.8 s).
   - Sound: Doughy stretch.
 - **Croissant** (`croissant`). Now: tap: Open it. Plan: keep.
   - Owner: Must differ from the real croissant.

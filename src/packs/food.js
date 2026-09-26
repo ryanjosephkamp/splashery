@@ -2549,10 +2549,10 @@ export const RECIPES = {
   pretzel: {
     controls: [{ key: "twist", label: "Twist", type: "pulse", ease: PRETZEL_SECS }],
     action: { key: "twist", label: "Twist" },
-    // A tap contorts the pretzel like a knot: its loops swirl round and rise
-    // out of its plane, one up and one down, and the two sides turn opposite
-    // ways. Let go, it springs back past its shape into the opposite
-    // contortion and wobbles to a stop, like a twanged spring.
+    // A tap twists the pretzel like a knot, all in one piece: its two sides
+    // wring opposite ways and its loops fold a little towards you. Let go, it
+    // springs back a little past its shape into the opposite twist and
+    // wobbles to a stop, like a twanged spring.
     drive(t, c, out) {
       const s = since(c.twist, PRETZEL_SECS);
       let m = 0;
@@ -2591,45 +2591,28 @@ export const RECIPES = {
       const shape = k.tube(P, rad, { caps: true, samples: 480, grid: 110 });
       const q = quatEuler(-16, 0, 0);
       const qi = [-q[0], -q[1], -q[2], q[3]];
-      // The pretzel contorted like a knot: its loops swirl round its middle
-      // and rise out of its plane (one up, one down), and the two sides turn
-      // opposite ways about the upright. A negative channel contorts it the
-      // other way.
-      const mid = [0, -0.08, 0];
-      const U = (t) => {
-        const p = P(t);
-        const a = 0.42 * Math.sin(TAU * 2 * t);
-        const [dx, dy] = [p[0] - mid[0], p[1] - mid[1]];
-        const x = mid[0] + dx * Math.cos(a) - dy * Math.sin(a);
-        const y = mid[1] + dx * Math.sin(a) + dy * Math.cos(a);
-        const z = p[2] + 0.48 * Math.sin(TAU * (2 * t + 0.25));
-        const psi = 0.6 * Math.tanh(x / 0.35);
-        return [x * Math.cos(psi) + z * Math.sin(psi), y, -x * Math.sin(psi) + z * Math.cos(psi)];
+      // The pretzel twisted like a knot: its two sides wring opposite ways
+      // about its width, the top turns against the bottom, and the loops fold
+      // a little towards you. It is one smooth twist of the whole shape, so
+      // wherever the rope crosses or rests on itself it stays joined. A
+      // negative channel twists it the other way.
+      const y0 = -0.08;
+      const twisted = (p) => {
+        let [x, y, z] = quatRotate(qi, p);
+        const w = 0.42 * Math.tanh(x / 0.45);
+        [y, z] = [y0 + (y - y0) * Math.cos(w) - z * Math.sin(w), (y - y0) * Math.sin(w) + z * Math.cos(w)]; // prettier-ignore
+        const g = 0.3 * (y - y0);
+        [x, y] = [x * Math.cos(g) - (y - y0) * Math.sin(g), y0 + x * Math.sin(g) + (y - y0) * Math.cos(g)]; // prettier-ignore
+        const a = x / 1.7;
+        [x, z] = [(1.7 - z) * Math.sin(a), 1.7 - (1.7 - z) * Math.cos(a)];
+        return quatRotate(q, [x, y, z]);
       };
-      const tangent = (f, t) => unit(sub(f(Math.min(1, t + 1e-3)), f(Math.max(0, t - 1e-3))));
-      const frame = (f, t) => {
-        const T = tangent(f, t);
-        const B = unit(sub([0, 0, 1], mul(T, T[2])));
-        return { T, B, N: cross(B, T) };
-      };
-      // A point on the pretzel (recipe coordinates) and where it goes: the
-      // same place across the rope, at the same point along the knot.
-      const contorted = (p, t) => {
-        const lp = quatRotate(qi, p);
-        const r = frame(P, t);
-        const d = sub(lp, P(t));
-        const [dn, db, dt] = [dot(d, r.N), dot(d, r.B), dot(d, r.T)];
-        const u = frame(U, t);
-        const to = add(U(t), add(add(mul(u.N, dn), mul(u.B, db)), mul(u.T, dt)));
-        return quatRotate(q, to);
-      };
-      const along = (c) => c.t ?? (quatRotate(qi, c.p)[0] < 0 ? 0 : 1);
       k.add(shape, {
         quat: q,
         flat: 0.4,
         interior: 0.1,
         core: "#f0d4a0",
-        to: (c) => contorted(c.p, along(c)),
+        to: (c) => twisted(c.p),
         channel: 0,
         color: (c) => {
           // The scored belly splits open along its top, showing pale dough.
@@ -2660,7 +2643,7 @@ export const RECIPES = {
           n: dw,
           color: mix("#ffffff", "#e8e4dc", rand()),
           opacity: 1,
-          to: contorted(p, t),
+          to: twisted(p),
           channel: 0,
         };
       });
