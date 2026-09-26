@@ -14,6 +14,7 @@ import {
   implicitRadius,
   quatAxisAngle,
   quatEuler,
+  quatFromTo,
   quatMul,
   quatRotate,
   rgb,
@@ -248,6 +249,100 @@ function leafColor(base = "#3f8f2f", light = "#8cc65a") {
 const easeInOut = (x) => (x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2);
 const hop = (s) => 4 * s * (1 - s);
 
+// ---- Tap effect helpers (E5) -------------------------------------------------------
+
+const band = (x, a, b) => clamp((x - a) / (b - a), 0, 1);
+// Rises from a to b, holds, falls from c to d.
+const bump = (x, a, b, c, d) => band(x, a, b) * (1 - band(x, c, d));
+const easeOut = (x) => 1 - (1 - x) ** 3;
+const easeIn = (x) => x * x * x;
+const smooth = (x) => x * x * (3 - 2 * x);
+// Seconds since the tap of a pulse control that runs `secs`, or -1 at rest.
+const since = (v, secs) => (v > 0 ? (1 - v) * secs : -1);
+// A damped wobble that starts at s = 0 and dies away over `len` seconds.
+const wobble = (s, len, freq = 14) =>
+  s <= 0 || s >= len ? 0 : Math.sin(s * freq) * (1 - s / len) ** 2;
+const lerp3 = (a, b, t) => [
+  a[0] + (b[0] - a[0]) * t,
+  a[1] + (b[1] - a[1]) * t,
+  a[2] + (b[2] - a[2]) * t,
+];
+const IDQ = [0, 0, 0, 1];
+// Spherical blend of two rotations.
+function slerpQ(a, b, t) {
+  let d = a[0] * b[0] + a[1] * b[1] + a[2] * b[2] + a[3] * b[3];
+  const s = d < 0 ? -1 : 1;
+  d *= s;
+  if (d > 0.9995) {
+    const q = a.map((x, i) => x + (s * b[i] - x) * t);
+    const l = Math.hypot(...q);
+    return q.map((x) => x / l);
+  }
+  const th = Math.acos(d);
+  const wa = Math.sin((1 - t) * th) / Math.sin(th);
+  const wb = (s * Math.sin(t * th)) / Math.sin(th);
+  return a.map((x, i) => wa * x + wb * b[i]);
+}
+// Per-toy memory for drive() (keyed by the controls object, new each time a
+// toy loads), for sounds that play as the effect passes a moment.
+const MEM = new WeakMap();
+function mem(c) {
+  let m = MEM.get(c);
+  if (!m) MEM.set(c, (m = {}));
+  return m;
+}
+// Pushes each [at, spec] sound whose moment the effect clock s (seconds, -1
+// at rest) has just passed.
+function cuesAt(c, key, s, list, out) {
+  const m = mem(c);
+  const was = m[key] ?? -1;
+  m[key] = s;
+  if (s < 0 || s < was) return;
+  for (const [at, spec] of list) if (was < at && s >= at) out.cues.push(spec);
+}
+// A ball dropped at s = 0 from `h` above the floor with upward speed `v0`,
+// bouncing with restitution `e` under gravity `g`: its height above the
+// floor, and how many times it has landed.
+function bounce(s, h, v0 = 0, g = 12, e = 0.4) {
+  let y = h;
+  let v = v0;
+  let t = s;
+  let n = 0;
+  for (let i = 0; i < 6 && t > 0; i++) {
+    // Time to reach the floor from height y with upward speed v.
+    const land = (v + Math.sqrt(v * v + 2 * g * y)) / g;
+    if (t < land) return { y: y + v * t - 0.5 * g * t * t, n };
+    t -= land;
+    n++;
+    v = e * (g * land - v);
+    y = 0;
+    if (v < 0.25) return { y: 0, n };
+  }
+  return { y: 0, n };
+}
+// Time of the n-th landing of bounce(…) (for sounds).
+function landings(h, v0 = 0, g = 12, e = 0.4, max = 3) {
+  const out = [];
+  let y = h;
+  let v = v0;
+  let t = 0;
+  for (let i = 0; i < max; i++) {
+    const land = (v + Math.sqrt(v * v + 2 * g * y)) / g;
+    t += land;
+    out.push(t);
+    v = e * (g * land - v);
+    y = 0;
+    if (v < 0.25) break;
+  }
+  return out;
+}
+// A hop from a to b over f = 0..1, peaking `h` above the higher end.
+function hopTo(a, b, f, h) {
+  const p = lerp3(a, b, f);
+  p[1] += (Math.max(a[1], b[1]) - (a[1] + b[1]) / 2 + h) * hop(f);
+  return p;
+}
+
 // ---- Ice cream ---------------------------------------------------------------------
 
 // How many rings the coffee's surface is cut into (each a part).
@@ -336,6 +431,99 @@ function melonFlesh(rho, c) {
   const grain = 0.08 * c.noise(c.p[0] * 25, c.p[1] * 25, c.p[2] * 25);
   return shade(mix(MELON.deep, MELON.flesh, smoothstep(0, 0.8, rho)), 1 + grain);
 }
+
+// The cherries' swing (E5): two pendulums hung from one joint that touch
+// at rest, played once at load. A tap flicks them apart; each swings on
+// its own stem, and when they meet they knock and bounce apart again.
+const CHERRY_SECS = 3.6;
+// The macarons: which one hops onto the stack when, and when it hops back
+// down; the two in front keep their turn about the vertical as they go.
+const MAC_HOPS = [
+  [3, 0.1, 2.9],
+  [4, 0.75, 2.25],
+];
+const MAC_YAW = { 3: 20, 4: 60 };
+const MAC_SECS = 3.55;
+// The cupcake: when the cherry leaves, how long it flies and how high, how
+// far the frosting squashes and how far down that brings its top.
+const CUP_LAUNCH = 0.14;
+const CUP_FLIGHT = 0.78;
+const CUP_HIGH = 1.0;
+const CUP_SQUASH = 0.22;
+const CUP_TOP = 0.76 * CUP_SQUASH;
+const CUP_SECS = 2.3;
+// The lollipop's whirl: up to speed by LOLLY_RAMP[0] s, full speed until
+// [1], slowing to a stop at [2], for a whole number of extra turns.
+const LOLLY_RAMP = [0.45, 1.7, 3.0];
+const LOLLY_TURNS = 6;
+const LOLLY_SECS = 3.05;
+// The candy canes: how far the hook turns in the twist, when each snaps
+// and mends (seconds after it starts), and how far behind the second is.
+const CANE_TWIST = 1.1;
+const CANE_SNAP = 0.8;
+const CANE_JOIN = 2.35;
+const CANE_LAG = 0.16;
+const CANE_SECS = 2.85;
+const PRETZEL_SECS = 3.3;
+// The croissant: the oven dings when it has risen; the flakes hop home.
+const CRO_DING = 1.2;
+const CRO_BACK = 2.45;
+const CRO_SECS = 3.4;
+// The taco: how far each half swings open, and when the bits hop back.
+const TACO_TURN = 0.8;
+const TACO_BACK = 1.85;
+const TACO_SECS = 3.1;
+// The sushi: the chopsticks are up by lift, pinch the roll at grab, let
+// it go at drop and lie back down by lay.
+const SUSHI_T = { lift: 0.55, grab: 0.95, drop: 3.65, lay: 4.15 };
+const SUSHI_SECS = 4.7;
+const ORANGE_SECS = 3.0;
+// The kiwi: its long axis at right angles to the view, and how far each
+// half turns to show its face.
+const KIWI_YAW = 121.5;
+const KIWI_TURN = 1.1;
+const KIWI_SECS = 2.8;
+const PINE_RINGS = 5;
+const PINE_SECS = 3.0;
+// The watermelon: the whole one's turn, when the knife chops (first chop
+// and the time between chops) and when the slices fan out.
+const WM_YAW = -20;
+const WM_CHOP0 = 0.1;
+const WM_CHOP = 0.24;
+const WM_FAN = 1.35;
+const WM_SECS = 3.6;
+const APPLE_SECS = 2.9;
+// The avocado's stone flies over and back.
+const AVO_SECS = 3.1;
+const mix1 = (a, b, t) => a + (b - a) * t;
+// The grapes: when the fallen grapes start to hop home, and the effect's length.
+const GRAPE_BACK = 2.1;
+const GRAPE_SECS = 3.9;
+const CHERRY_SIM = (() => {
+  const dt = 1 / 240;
+  const w = TAU / 1.05;
+  const damp = 1.2;
+  let a = [0, 0];
+  let v = [-3.2, 1.6];
+  const frames = [];
+  const hits = [];
+  for (let i = 0; i * dt <= CHERRY_SECS + dt; i++) {
+    frames.push([a[0], a[1]]);
+    for (let j = 0; j < 2; j++) {
+      v[j] += (-w * w * Math.sin(a[j]) - damp * v[j]) * dt;
+      a[j] += v[j] * dt;
+    }
+    // The left one cannot swing right past the right one.
+    if (a[0] > a[1] && v[0] > v[1]) {
+      const m = (v[0] + v[1]) / 2;
+      const d = ((v[0] - v[1]) / 2) * 0.8;
+      if (d > 0.12) hits.push({ t: i * dt, v: d });
+      v = [m - d, m + d];
+      a = [(a[0] + a[1]) / 2, (a[0] + a[1]) / 2];
+    }
+  }
+  return { dt, frames, hits };
+})();
 
 // ---- Recipes -------------------------------------------------------------------------
 
@@ -552,6 +740,44 @@ export const RECIPES = {
         ],
       },
     ],
+    controls: [{ key: "chop", label: "Chop into slices", type: "pulse", ease: WM_SECS }],
+    action: { key: "chop", label: "Chop into slices" },
+    // A tap brings down a big knife: it chops the whole melon five times,
+    // right to left. Then the six slices fan open on their bottoms like an
+    // accordion, showing the red flesh, the pale rind and the black seeds on
+    // their cut faces, and fold shut again. (A lone wedge just rocks.)
+    drive(t, c, out, info) {
+      const s = since(c.chop, WM_SECS);
+      const d = info.data;
+      if (!d) return;
+      const on = s >= 0;
+      const fan = on ? easeOut(band(s, WM_FAN, WM_FAN + 0.5)) * (1 - smooth(band(s, 2.8, 3.4))) : 0;
+      const n = d.slices.length;
+      out.tokens = d.slices.map((sl, i) => {
+        const f = (i - (n - 1) / 2) / ((n - 1) / 2);
+        const settle = on ? 0.05 * wobble(s - WM_FAN - 0.5, 0.6, 13) * f : 0;
+        const q = quatAxisAngle(d.hinge, -f * 0.75 * fan - settle);
+        return { base: sl.foot, quat: q, offset: mul(d.axis, f * 0.18 * fan) };
+      });
+      // The knife: one copy per cut (each drawn in its own place), shown in
+      // turn as it chops.
+      d.knives.forEach((kn, i) => {
+        const t0 = WM_CHOP0 + WM_CHOP * i;
+        const u = on ? s - t0 : -1;
+        const down = u < 0 ? 0 : u < 0.1 ? easeIn(u / 0.1) : u < 0.14 ? 1 : 1 - smooth((u - 0.14) / 0.1); // prettier-ignore
+        const shown =
+          on && u >= -0.06 && u < WM_CHOP - 0.02 + (i === d.knives.length - 1 ? 0.15 : 0);
+        const up = i === d.knives.length - 1 && u > 0.24 ? 0.6 * smooth(band(u, 0.24, 0.4)) : 0;
+        out.parts[`knife${i}`] = {
+          offset: [0, (1 - down) * kn.lift + up, 0],
+          visible: shown ? 1 : 0,
+        };
+      });
+      out.parts.wedge = { quat: quatAxisAngle([1, 0, 0], d.slices.length ? 0 : 0.1 * wobble(s, 1.2, 9)) }; // prettier-ignore
+      const list = d.knives.map((kn, i) => [WM_CHOP0 + WM_CHOP * i + 0.09, { voice: "chop", f: 260 + 25 * i, decay: 0.7, vol: 0.8 }]); // prettier-ignore
+      if (d.slices.length) list.push([WM_FAN + 0.05, { voice: "squish", pitch: 1.1, bright: 0.7, decay: 1.2 }]); // prettier-ignore
+      cuesAt(c, "watermelon", s, list, out);
+    },
     build(k, o) {
       // Seeds: one teardrop per cell of a grid, in a band of the flesh.
       const seedAt = (p, rho) => {
@@ -572,36 +798,138 @@ export const RECIPES = {
         const perp = len(sub(dp, mul(r, along)));
         return (along / 0.05) ** 2 + (perp / 0.028) ** 2 < 1;
       };
+      // The whole melon is six slices (pieces) across its length, each its
+      // band of rind and its cut faces; a knife (one copy per cut) chops it.
+      const slices = [];
+      const knives = [];
+      let hinge = [0, 0, 1];
+      let axis = [1, 0, 0];
       const whole = (pos, yaw) => {
         const A = 1.2;
         const B = 0.92;
-        const local = (p) => turnY(sub(p, pos), -yaw);
-        k.add(k.ellipsoid(A, B, B), {
-          pos,
-          rot: [0, yaw, 0],
-          flat: 0.2,
-          interior: 0.22,
-          color: (c) => {
-            const [x, y, z] = c.lp;
-            let col = melonSkin(c, Math.atan2(z, y), x);
-            // A pale patch where it lay in the field, and the stem end.
-            col = mix(col, "#d8d27c", 0.7 * smoothstep(-0.7, -0.95, c.ln[1]));
-            if (x > A * 0.97) col = mix(col, "#6b5a2a", smoothstep(0.97, 0.995, x / A));
-            return col;
-          },
-          core: (c) => {
-            const q = local(c.p);
-            const rho = Math.hypot(q[0] / A, q[1] / B, q[2] / B);
-            if (seedAt(q, rho)) return keep(MELON.seed);
-            return melonFlesh(rho, c);
-          },
-        });
+        const q = quatEuler(0, yaw, 0);
+        const qi = [-q[0], -q[1], -q[2], q[3]];
+        const local = (p) => quatRotate(qi, sub(p, pos));
+        hinge = quatRotate(q, [0, 0, 1]);
+        axis = quatRotate(q, [1, 0, 0]);
+        const n = 6;
+        const xs = [];
+        for (let i = 0; i <= n; i++) xs.push(-A + (2 * A * i) / n);
+        const rAt = (x) => B * Math.sqrt(Math.max(0, 1 - (x / A) ** 2));
+        const flesh = (c) => {
+          const lp = local(c.p);
+          const rho = Math.hypot(lp[0] / A, lp[1] / B, lp[2] / B);
+          if (seedAt(lp, rho)) return keep(MELON.seed);
+          const col = melonFlesh(rho, c);
+          return c.noise(c.p[0] * 40, c.p[1] * 40, c.p[2] * 40) > 0.55 ? mix(col, "#ffffff", 0.3) : col; // prettier-ignore
+        };
+        for (let i = 0; i < n; i++) {
+          const token = slices.length;
+          const piece = { kind: "token", params: [token, 0] };
+          const [x0, x1] = [xs[i], xs[i + 1]];
+          slices.push({ foot: add(pos, quatRotate(q, [(x0 + x1) / 2, -B * 0.98, 0])) });
+          k.add(
+            k.param(
+              (u, v) => {
+                const x = x0 + u * (x1 - x0);
+                const r = rAt(x);
+                const th = v * TAU;
+                return [x, r * Math.cos(th), r * Math.sin(th)];
+              },
+              {
+                grid: 40,
+                normal: (u, v) => {
+                  const x = x0 + u * (x1 - x0);
+                  const r = rAt(x);
+                  const th = v * TAU;
+                  return unit([x / (A * A), (r * Math.cos(th)) / (B * B), (r * Math.sin(th)) / (B * B)]); // prettier-ignore
+                },
+              },
+            ),
+            {
+              pos,
+              quat: q,
+              flat: 0.2,
+              ...piece,
+              color: (c) => {
+                const [x, y, z] = c.lp;
+                let col = melonSkin(c, Math.atan2(z, y), x);
+                col = mix(col, "#d8d27c", 0.7 * smoothstep(-0.7, -0.95, c.ln[1]));
+                if (x > A * 0.97) col = mix(col, "#6b5a2a", smoothstep(0.97, 0.995, x / A));
+                return col;
+              },
+            },
+          );
+          for (const [x, sgn] of [
+            [x0, -1],
+            [x1, 1],
+          ]) {
+            if ((i === 0 && sgn < 0) || (i === n - 1 && sgn > 0)) continue;
+            const r = rAt(x) * 0.995;
+            k.add(
+              k.param(
+                (u, v) => {
+                  const a = u * TAU;
+                  return [x, Math.cos(a) * v * r, Math.sin(a) * v * r];
+                },
+                { grid: 40, normal: () => [sgn, 0, 0] },
+              ),
+              { pos, quat: q, flat: 0.15, weight: 1.3, ...piece, color: flesh },
+            );
+          }
+        }
+        // The knife: a steel blade across the melon with a dark handle
+        // towards you, built down in each cut and lifted clear at rest.
+        const lift = B * 2 + 0.12;
+        const H = 0.5;
+        for (let i = 0; i < n - 1; i++) {
+          const x = xs[n - 1 - i];
+          const part = k.part(`knife${i}`, { pivot: add(pos, quatRotate(q, [x, 0, 0])) });
+          knives.push({ lift });
+          k.add(
+            k.param((u, v) => [x, -B + v * H, (u - 0.5) * 2.1], {
+              grid: 24,
+              normal: () => [1, 0, 0],
+            }),
+            {
+              pos,
+              quat: q,
+              part,
+              share: 0.014,
+              flat: 0.2,
+              size: 1.3,
+              jitter: 0.005,
+              opacity: 1,
+              pattern: false,
+              fit: false,
+              // Brushed steel, bright along the edge and the spine.
+              color: (c) => {
+                const h = c.v;
+                const col = h < 0.1 ? "#eef1f4" : h > 0.94 ? "#b8bec6" : mix("#aeb4bc", "#d5d9de", 0.5 + 0.5 * Math.sin(c.u * 9)); // prettier-ignore
+                return keep(col);
+              },
+            },
+          );
+          k.add(k.cylinder(0.055, 0.55), {
+            pos: add(pos, quatRotate(q, [x, -B + H * 0.75, 1.33])),
+            quat: quatMul(q, quatEuler(90, 0, 0)),
+            part,
+            share: 0.002,
+            flat: 0.3,
+            pattern: false,
+            fit: false,
+            color: (c) => keep(lit(c, mix("#3a2418", "#24160e", c.rand()), 0.8, 0.35)),
+          });
+        }
+        k.reach(add(pos, [0, -B + H + lift, 0]));
+        k.reach(add(pos, mul(axis, A + 0.6)));
+        k.reach(add(pos, mul(axis, -A - 0.6)));
       };
       // A wedge cut from a round slice: apex up, rind at the bottom.
       const wedge = (pos, yaw, R, T, span = 1.05) => {
         const a0 = -span / 2;
         const q = quatEuler(0, yaw, 0);
-        const place = { pos, quat: q };
+        const place = { pos, quat: q, part: k.part("wedge", { pivot: add(pos, [0, -R, 0]) }) };
         const rows = [
           [0.5, 4, 0.1],
           [0.66, 5, 0.0],
@@ -670,12 +998,14 @@ export const RECIPES = {
           );
         }
       };
-      if (o.style === "whole") whole([0, 0, 0], 12);
+      // The whole melon lies at an angle, so its cut faces turn towards you.
+      if (o.style === "whole") whole([0, 0, 0], WM_YAW);
       else if (o.style === "wedge") wedge([0, 0.3, 0], 28, 1.1, 0.34);
       else {
-        whole([-0.35, 0, -0.55], 14);
-        wedge([0.62, -0.92 + 0.78, 0.55], 30, 0.78, 0.26);
+        whole([-0.45, 0, -0.6], WM_YAW);
+        wedge([0.72, -0.92 + 0.78, 0.6], 30, 0.78, 0.26);
       }
+      k.data = { slices, knives, hinge, axis };
     },
   },
 
@@ -1410,6 +1740,42 @@ export const RECIPES = {
         ],
       },
     ],
+    controls: [{ key: "flick", label: "Flick the cherry", type: "pulse", ease: CUP_SECS }],
+    action: { key: "flick", label: "Flick the cherry" },
+    // A tap presses the frosting, which springs and flicks the cherry up;
+    // it tumbles and drops back on top with a plop. The frosting squashes
+    // and wobbles under it, and the sprinkles jump off and rain back down.
+    drive(t, c, out) {
+      const s = since(c.flick, CUP_SECS);
+      const on = s >= 0;
+      const land = CUP_LAUNCH + CUP_FLIGHT;
+      const u = s - land;
+      // Channel 0 squashes the frosting (negative stretches it).
+      const press = on ? 0.35 * hop(band(s, 0, CUP_LAUNCH + 0.04)) : 0;
+      const squash = on && u > 0 ? Math.sin(u * 16) * Math.exp(-u / 0.24) : 0;
+      const m0 = press + squash;
+      const jump = (at) => (on ? hop(band(s, at, at + 0.55)) : 0);
+      out.morph = [m0, jump(land), jump(land + 0.04), jump(land + 0.08)];
+      // The cherry rides the frosting's top, and flies in between.
+      let y = -CUP_TOP * m0;
+      let tilt = 0;
+      if (on && s > CUP_LAUNCH && s < land) {
+        const f = (s - CUP_LAUNCH) / CUP_FLIGHT;
+        y = 4 * CUP_HIGH * f * (1 - f);
+        tilt = 0.5 * Math.sin(Math.PI * f);
+      } else if (on && u > 0) tilt = 0.25 * wobble(u, 0.8, 13);
+      out.parts.cherry = { offset: [0, y, 0], quat: quatAxisAngle([0, 0, 1], tilt) };
+      cuesAt(
+        c,
+        "cupcake",
+        s,
+        [
+          [land, { voice: "thud", f: 150, bright: 0.5, decay: 0.6 }],
+          [land + 0.5, { voice: "patter", f: 2900, n: 10, decay: 0.5, vol: 0.6 }],
+        ],
+        out,
+      );
+    },
     build(k, o) {
       const cake = { vanilla: "#e7b466", chocolate: "#6a3b22", velvet: "#9c2530" }[o.cake];
       const LH = 0.62;
@@ -1458,10 +1824,19 @@ export const RECIPES = {
       };
       const rope = (t) => 0.145 * (1 - 0.72 * Math.pow(t, 1.3)) + 0.012;
       const swirl = k.tube(curve, rope, { caps: true, samples: 420, grid: 96 });
+      // The frosting squashes about its base on channel 0: lower and wider.
+      const y0 = LH + 0.06;
+      const squash = (p) => {
+        const h = clamp((p[1] - y0) / 0.8, 0, 1);
+        const wide = 1 + CUP_SQUASH * 0.7 * (1 - 0.4 * h);
+        return [p[0] * wide, y0 + (p[1] - y0) * (1 - CUP_SQUASH), p[2] * wide];
+      };
       k.add(swirl, {
-        flat: 0.3,
+        flat: 0.35,
         interior: 0.06,
         core: o.frosting,
+        to: (c) => squash(c.p),
+        channel: 0,
         color: (c) => {
           const ridge = Math.cos(c.u * TAU * 8);
           const col = lit(c, shade(o.frosting, 1 + 0.07 * ridge), 0.8, 0.32);
@@ -1469,19 +1844,36 @@ export const RECIPES = {
         },
       });
       if (o.topping === "both" || o.topping === "sprinkles") {
-        sprinkles(k, 0.03, (rand) => {
+        // Each sprinkle jumps straight up by its own height (channels 1 to 3,
+        // a little apart) and falls back.
+        k.cloud({ share: 0.03, size: 0.62, pattern: false }, (rand) => {
           const t = rand() * 0.95;
           const f = swirl.frame(t);
           const a = rand() * TAU;
           const d = add(mul(f.n, Math.cos(a)), mul(f.b, Math.sin(a)));
           if (d[1] < -0.1) return null;
-          return { p: add(f.p, mul(d, rope(t))), n: d };
+          const p = add(f.p, mul(d, rope(t) + 0.012));
+          const h = 0.05 + 0.12 * rand();
+          const out = unit([p[0], 0, p[2]]);
+          const jumps = rand() < 0.35;
+          return {
+            p,
+            dir: tangentDir(rand, d),
+            stretch: 2.7,
+            color: SPRINKLES[Math.floor(rand() * SPRINKLES.length)],
+            opacity: 1,
+            ...(jumps
+              ? { to: add(p, [out[0] * h * 0.3, h, out[2] * h * 0.3]), channel: 1 + Math.floor(rand() * 3) } // prettier-ignore
+              : {}),
+          };
         });
       }
       if (o.topping === "both" || o.topping === "cherry") {
         const cp = add(curve(1), [0, 0.1, 0]);
+        const cherry = k.part("cherry", { pivot: cp, axis: [0, 0, 1] });
         k.add(k.sphere(0.12), {
           pos: cp,
+          part: cherry,
           flat: 0.25,
           weight: 2.5,
           pattern: false,
@@ -1493,8 +1885,9 @@ export const RECIPES = {
             spline([add(cp, [0, 0.1, 0]), add(cp, [0.04, 0.22, 0]), add(cp, [0.12, 0.3, 0])]),
             0.014,
           ),
-          { flat: 0.3, weight: 3, pattern: false, color: (c) => lit(c, "#6b8a2a") },
+          { part: cherry, flat: 0.3, weight: 3, pattern: false, color: (c) => lit(c, "#6b8a2a") },
         );
+        k.reach(add(cp, [0, CUP_HIGH + 0.15, 0]));
       }
     },
   },
@@ -1515,8 +1908,26 @@ export const RECIPES = {
         ],
       },
     ],
+    controls: [{ key: "spin", label: "Spin fast", type: "pulse", ease: LOLLY_SECS }],
+    action: { key: "spin", label: "Spin fast" },
+    // A tap whirls the swirl up to nearly three turns a second, so the
+    // spiral seems to pour inwards, then it slows back to its idle turn.
+    // It spins a whole number of extra turns, so it ends as it began.
     drive(t, c, out) {
-      out.parts.swirl = { angle: -t * 0.5 };
+      const s = since(c.spin, LOLLY_SECS);
+      const [a, b, e] = LOLLY_RAMP;
+      const w = (TAU * LOLLY_TURNS) / (a / 2 + (b - a) + (e - b) / 2);
+      let extra = 0;
+      if (s >= 0) {
+        const x = Math.min(s, e);
+        if (x < a) extra = (w * x * x) / (2 * a);
+        else if (x < b) extra = (w * a) / 2 + w * (x - a);
+        else {
+          const y = x - b;
+          extra = (w * a) / 2 + w * (b - a) + w * (y - (y * y) / (2 * (e - b)));
+        }
+      }
+      out.parts.swirl = { angle: -t * 0.5 - extra };
     },
     build(k, o) {
       const cols = {
@@ -1604,6 +2015,71 @@ export const RECIPES = {
       },
       { key: "stripe", label: "Stripes", type: "color", default: "#d7192a" },
     ],
+    controls: [{ key: "snap", label: "Twist and snap", type: "pulse", ease: CANE_SECS }],
+    action: { key: "snap", label: "Twist and snap" },
+    // A tap twists each cane: the hook turns and the stripes wind tighter
+    // up the shaft, until it snaps in two with a crack. The top half springs
+    // back, jumps clear and leans out, showing the white candy inside the
+    // break, and a few sugar chips fly. Then the halves come back together
+    // and mend with a glint (the second cane a moment after the first).
+    drive(t, c, out, info) {
+      const s = since(c.snap, CANE_SECS);
+      const d = info.data;
+      if (!d) return;
+      const morph = [0, 0, 0, 0];
+      out.tokens = [];
+      d.canes.forEach((cn, i) => {
+        const u = s - CANE_LAG * i;
+        const on = s >= 0 && u >= 0;
+        // The twist (channel i), which springs back when it snaps.
+        let tw = 0;
+        if (on && u < CANE_SNAP) tw = easeIn(u / CANE_SNAP) * 0.7 + 0.3 * smooth(u / CANE_SNAP);
+        else if (on) tw = Math.exp(-(u - CANE_SNAP) / 0.12) * Math.cos((u - CANE_SNAP) * 26);
+        morph[i] = tw;
+        // The top half: out after the snap, back to mend.
+        const out1 = on ? easeOut(band(u, CANE_SNAP, CANE_SNAP + 0.3)) : 0;
+        const back = on ? smooth(band(u, CANE_JOIN - 0.45, CANE_JOIN)) : 0;
+        const apart = out1 * (1 - back);
+        const bob = on ? 0.03 * Math.sin((u - CANE_SNAP) * 7) * apart : 0;
+        const qTwist = quatAxisAngle(cn.axis, CANE_TWIST * tw);
+        const qLean = quatAxisAngle([0, 0, 1], cn.lean * 0.26 * apart);
+        out.parts[cn.top] = {
+          quat: quatMul(qLean, qTwist),
+          offset: add(mul(cn.axis, (0.2 + bob) * apart), mul(cn.out, 0.06 * apart)),
+        };
+        const kick = on ? 0.06 * wobble(u - CANE_SNAP, 0.7, 16) : 0;
+        out.parts[cn.low] = { quat: quatAxisAngle([0, 0, 1], -cn.lean * kick) };
+        // Sugar chips fly out of the break and back in as it mends.
+        cn.chips.forEach((ch) => {
+          const f = on ? band(u, CANE_SNAP, CANE_SNAP + 0.55) : 0;
+          const r = on ? 1 - smooth(band(u, CANE_JOIN - 0.4, CANE_JOIN - 0.05)) : 0;
+          const g = Math.min(f, 1) * r;
+          const fl = f < 1 ? f : 1;
+          const p = add(mul(ch.dir, 0.35 * g), [
+            0,
+            (0.25 * hop(Math.min(fl, 1)) - 0.25 * fl) * r,
+            0,
+          ]);
+          out.tokens[ch.token] = {
+            base: cn.pivot,
+            offset: p,
+            quat: quatAxisAngle(ch.spin, 3 * g),
+            visible: on && u > CANE_SNAP && u < CANE_JOIN - 0.06 ? 1 : 0,
+          };
+        });
+        // The mend glints as the halves meet (channel 2 passes 0.5).
+        if (i === 0) morph[2] = on ? band(u, CANE_JOIN - 0.1, CANE_JOIN + 0.25) : 0;
+        if (i === 1) morph[3] = on ? band(u, CANE_JOIN - 0.1, CANE_JOIN + 0.25) : 0;
+      });
+      out.morph = morph;
+      out.glow = [1, 0.97, 0.9, 0.9];
+      const list = [];
+      d.canes.forEach((cn, i) => {
+        list.push([CANE_LAG * i + CANE_SNAP, { voice: "crack", f: 3000 - 400 * i, bright: 0.9, decay: 0.6 }]); // prettier-ignore
+        list.push([CANE_LAG * i + CANE_JOIN, { voice: "glass", f: i ? "E7" : "C7", decay: 0.5, vol: 0.5 }]); // prettier-ignore
+      });
+      cuesAt(c, "cane", s, list, out);
+    },
     build(k, o) {
       const L1 = 1.8;
       const Rh = 0.32;
@@ -1620,28 +2096,144 @@ export const RECIPES = {
         return [-2 * Rh, -1.3 + L1 - (s - L1 - L2), 0];
       };
       const shape = k.tube(path, 0.1, { caps: true, samples: 360, grid: 96 });
-      const cane = (quat, pos) =>
+      const stripe = (u, t) => {
+        const f = (((u + (t * total) / 0.42) % 1) + 1) % 1;
+        if (f < 0.3) return o.stripe;
+        if (f > 0.42 && f < 0.47) return o.stripe;
+        if (f > 0.53 && f < 0.56) return "#2f9e44";
+        return "#fbf8f2";
+      };
+      // It breaks a little above the middle of the shaft, along a jagged
+      // line; everything above goes with the hook.
+      const yb = -0.25;
+      const tb = (yb + 1.3) / total;
+      const fb = shape.frame(tb);
+      const jag = (a) => 0.025 * (Math.abs((((a / TAU) * 7) % 1) - 0.5) * 4 - 1);
+      const angleAt = (lp, f) => {
+        const d = sub(lp, f.p);
+        return Math.atan2(dot(d, f.b), dot(d, f.n));
+      };
+      const canes = [];
+      let chipToken = 0;
+      const cane = (quat, pos, lean) => {
+        const i = canes.length;
+        const pivot = add(pos, quatRotate(quat, [0, yb, 0]));
+        const axis = quatRotate(quat, [0, 1, 0]);
+        const top = `top${i}`;
+        const low = `low${i}`;
+        const partTop = k.part(top, { pivot, axis });
+        const partLow = k.part(low, { pivot: add(pos, quatRotate(quat, [0, -1.3, 0])) });
+        const along = (c) => (c.t ?? (c.lp[1] < -1.2 ? 0 : 1)) * total;
+        const above = (c) => {
+          const sAl = along(c);
+          if (sAl > L1) return true;
+          return c.lp[1] > yb + jag(angleAt(c.lp, fb));
+        };
+        // The twist: the shaft turns about its axis, more the higher it is;
+        // the top half also turns as a whole with the hook (CANE_TWIST).
+        const twist = (c) => {
+          if (along(c) > L1 + 0.01) return null;
+          const y = clamp(c.lp[1], -1.3, 0.5);
+          let a = (CANE_TWIST * (y + 1.3)) / 1.8;
+          if (above(c)) a -= CANE_TWIST;
+          const q = quatAxisAngle([0, 1, 0], a);
+          const lq = quatRotate(q, c.lp);
+          return add(pos, quatRotate(quat, lq));
+        };
         k.add(shape, {
           quat,
           pos,
-          flat: 0.22,
+          flat: 0.3,
           interior: 0.05,
           core: "#fbf8f2",
+          part: (c) => (above(c) ? partTop : partLow),
+          to: twist,
+          channel: i,
+          color: (c) => glossy(c, stripe(c.u, c.t ?? 0), 0.9, 30, 0.8, 0.3),
+        });
+        // The mend's glint: a ring of splats just below the break, coloured
+        // as the cane is there, that glows as channel 2 (or 3) passes 0.5.
+        k.add(k.cylinder(0.104, 0.03, { caps: false }), {
+          quat,
+          pos: add(pos, quatRotate(quat, [0, yb - 0.042, 0])),
+          share: 0.004,
+          size: 1.3,
+          part: partLow,
+          kind: "band",
+          params: [0.5, 0.18],
+          channel: 2 + i,
+          pattern: false,
           color: (c) => {
-            const f = (((c.u + (c.t * total) / 0.42) % 1) + 1) % 1;
-            let col = "#fbf8f2";
-            if (f < 0.3) col = o.stripe;
-            else if (f > 0.42 && f < 0.47) col = o.stripe;
-            else if (f > 0.53 && f < 0.56) col = "#2f9e44";
-            return glossy(c, col, 0.9, 30, 0.8, 0.3);
+            const d = [c.lp[0], 0, c.lp[2]];
+            const a = Math.atan2(dot(d, fb.b), dot(d, fb.n));
+            const u = (((a / TAU) % 1) + 1) % 1;
+            return glossy(c, stripe(u, tb + (c.lp[1] - 0.042) / total), 0.9, 30, 0.8, 0.3);
           },
         });
+        // The broken ends: white candy with the stripes round the rim.
+        for (const [dir, part] of [
+          [1, partLow],
+          [-1, partTop],
+        ]) {
+          k.add(
+            k.param(
+              (u, v) => {
+                const a = u * TAU;
+                const r = 0.098 * Math.sqrt(v);
+                const d = add(mul(fb.n, r * Math.cos(a)), mul(fb.b, r * Math.sin(a)));
+                return [d[0], yb + jag(a) * v - 0.004 * dir, d[2]];
+              },
+              { grid: 24, normal: () => [0, dir, 0] },
+            ),
+            {
+              quat,
+              pos,
+              part,
+              share: 0.006,
+              flat: 0.3,
+              pattern: false,
+              color: (c) => {
+                if (c.v < 0.8) return keep(lit(c, mix("#ffffff", "#f1ebe0", c.rand() * 0.5), 0.9, 0.15)); // prettier-ignore
+                return keep(stripe(c.u, tb));
+              },
+            },
+          );
+        }
+        // A few chips of sugar, hidden inside the break until it snaps.
+        const chips = [];
+        for (let j = 0; j < 4; j++) {
+          const token = chipToken++;
+          const a = (j / 4) * TAU + 0.4;
+          const dirL = [Math.cos(a), 0.3, Math.sin(a)];
+          chips.push({ token, dir: unit(quatRotate(quat, dirL)), spin: unit([Math.sin(a), 1, Math.cos(a)]) }); // prettier-ignore
+          k.cloud({ count: 26, pattern: false, size: 0.7 }, (rand) => ({
+            p: add(pivot, mul(randDir(rand), 0.02)),
+            color: rand() < 0.35 ? o.stripe : "#fbf8f2",
+            n: randDir(rand),
+            flat: 0.4,
+            opacity: 1,
+            kind: "token",
+            params: [token, 0],
+          }));
+        }
+        canes.push({
+          top,
+          low,
+          pivot,
+          axis,
+          lean,
+          out: unit([lean < 0 ? 1 : -1, 0.2, 0]),
+          chips,
+        });
+      };
       if (o.style === "single") {
-        cane(quatEuler(0, 0, -8), [0.2, 0, 0]);
-        return;
+        cane(quatEuler(0, 0, -8), [0.2, 0, 0], 1);
+      } else {
+        cane(quatEuler(0, 0, 16), [-0.12, 0, -0.07], 1);
+        cane(quatEuler(0, 180, -16), [0.12, 0, 0.07], -1);
       }
-      cane(quatEuler(0, 0, 16), [-0.12, 0, -0.07]);
-      cane(quatEuler(0, 180, -16), [0.12, 0, 0.07]);
+      k.data = { canes };
+      if (o.style === "single") return;
       // A satin bow where they cross.
       const bowY = -0.62;
       const satin = (c) => glossy(c, "#23823a", 0.55, 14, 0.72, 0.42);
@@ -1687,6 +2279,68 @@ export const RECIPES = {
         ],
       },
     ],
+    controls: [{ key: "stack", label: "Stack up", type: "pulse", ease: MAC_SECS }],
+    action: { key: "stack", label: "Stack up" },
+    // A tap sends the two in front hopping, one after the other, up onto
+    // the stack: each rises clear of the stack's rim, comes over and lands
+    // level on top with a soft tap. The tower of five sways, then they hop
+    // back down to where they lay, the top one first.
+    drive(t, c, out, info) {
+      const s = since(c.stack, MAC_SECS);
+      const d = info.data;
+      if (!d) return;
+      const { homes, quats, tower, base } = d;
+      // Where each is (centre) and how it has turned from its built pose.
+      const at = homes.map((h) => h.slice());
+      const turn = homes.map(() => IDQ);
+      if (s >= 0) {
+        MAC_HOPS.forEach(([who, up, down], n) => {
+          const to = tower[3 + n];
+          const level = quatMul(quatEuler(0, MAC_YAW[who], 0), [-quats[who][0], -quats[who][1], -quats[who][2], quats[who][3]]); // prettier-ignore
+          let f = 0;
+          let from = homes[who];
+          let goal = to;
+          if (s >= up && s < up + 0.5) f = band(s, up, up + 0.5);
+          else if (s >= up + 0.5 && s < down) f = 1;
+          else if (s >= down && s < down + 0.5) {
+            f = band(s, down, down + 0.5);
+            [from, goal] = [to, homes[who]];
+          }
+          if (f <= 0) return;
+          // It rises clear of the stack's rim before it comes over.
+          const peak = Math.max(from[1], goal[1]) + 0.35;
+          const fh = smooth(band(f, 0.25, 1));
+          const y = f < 0.55 ? mix1(from[1], peak, easeOut(f / 0.55)) : mix1(peak, goal[1], easeIn((f - 0.55) / 0.45)); // prettier-ignore
+          at[who] = [from[0] + (goal[0] - from[0]) * fh, y, from[2] + (goal[2] - from[2]) * fh];
+          const onTop = goal === to ? smooth(f) : 1 - smooth(f);
+          turn[who] = slerpQ(IDQ, level, onTop);
+          // A little bounce as it lands.
+          const land = goal === to ? up + 0.5 : down + 0.5;
+          at[who][1] += 0.05 * Math.max(0, Math.sin((Math.PI * (s - land)) / 0.2)) * (s > land && s < land + 0.2 ? 1 : 0); // prettier-ignore
+        });
+        // The tower of five sways once the last one is on.
+        const sway = 0.05 * wobble(s - MAC_HOPS[1][1] - 0.5, 1.1, 8);
+        if (sway) {
+          const q = quatAxisAngle([Math.sin(0.55), 0, Math.cos(0.55)], sway);
+          for (let i = 0; i < homes.length; i++) {
+            if (Math.hypot(at[i][0] - base[0], at[i][2] - base[2]) > 0.1) continue;
+            at[i] = add(base, quatRotate(q, sub(at[i], base)));
+            turn[i] = quatMul(q, turn[i]);
+          }
+        }
+      }
+      out.tokens = homes.map((h, i) => ({ base: h, offset: sub(at[i], h), quat: turn[i] }));
+      cuesAt(
+        c,
+        "macarons",
+        s,
+        MAC_HOPS.flatMap(([who, up, down], n) => [
+          [up + 0.5, { voice: "wood", f: n ? "G6" : "E6", decay: 0.5, vol: 0.6 }],
+          [down + 0.5, { voice: "wood", f: n ? "D6" : "C6", decay: 0.5, vol: 0.5 }],
+        ]),
+        out,
+      );
+    },
     build(k, o) {
       const ONE = {
         raspberry: ["#f27ba2", "#fff1f5"],
@@ -1724,10 +2378,17 @@ export const RECIPES = {
         [0.445, 0.03],
         [0.4, 0.055],
       ]);
+      // Each macaron is a piece (a token) that can hop about.
+      const homes = [];
+      const quats = [];
       const macaron = (q, pos, [col, fill]) => {
+        const token = { kind: "token", params: [homes.length, 0] };
+        homes.push(pos);
+        quats.push(q);
         const put = (off, flip) => ({
           quat: flip ? quatMul(q, quatEuler(180, 0, 0)) : q,
           pos: add(pos, quatRotate(q, [0, off, 0])),
+          ...token,
         });
         const shellColor = (c) => {
           const y = c.lp[1];
@@ -1764,8 +2425,15 @@ export const RECIPES = {
         macaron(q, [(k.rand() - 0.5) * 0.04, 0.255 + i * h, -0.35], set[i]);
       }
       // Two more lying in front, one tipped against the other.
-      macaron(quatEuler(0, 20, 0), [-0.55, 0.255, 0.45], set[3]);
-      macaron(quatEuler(-14, 60, 12), [0.5, 0.33, 0.5], set[o.flavours === "pastel" ? 0 : 3]);
+      macaron(quatEuler(0, MAC_YAW[3], 0), [-0.55, 0.255, 0.45], set[3]);
+      macaron(quatEuler(-14, MAC_YAW[4], 12), [0.5, 0.33, 0.5], set[o.flavours === "pastel" ? 0 : 3]); // prettier-ignore
+      // The tower they build: five high on the stack.
+      const top = homes[2];
+      const tower = [0, 1, 2, 3, 4].map((i) =>
+        i < 3 ? homes[i] : [top[0], 0.255 + i * h, top[2]],
+      );
+      k.data = { homes, quats, tower, base: [top[0], 0, top[2]] };
+      k.reach([top[0], 0.255 + 4 * h + 0.3, top[2]]);
     },
   },
 
@@ -1873,6 +2541,23 @@ export const RECIPES = {
   },
 
   pretzel: {
+    controls: [{ key: "untwist", label: "Untwist", type: "pulse", ease: PRETZEL_SECS }],
+    action: { key: "untwist", label: "Untwist" },
+    // A tap undoes the pretzel the way it was made, backwards: the ends lift
+    // off the bottom, the twist unwinds and the loops open, until it is a
+    // U of dough rope (one end passing in front of the other). It hangs a
+    // moment, then folds and twists back into a pretzel and settles.
+    drive(t, c, out) {
+      const s = since(c.untwist, PRETZEL_SECS);
+      let m = 0;
+      if (s >= 0) {
+        const open = smooth(band(s, 0, 1.1));
+        const close = smooth(band(s, 1.9, 2.95));
+        m = open * (1 - close) + 0.035 * Math.sin((s - 1.1) * 6) * bump(s, 1.1, 1.3, 1.7, 1.9);
+        m -= 0.06 * wobble(s - 2.95, 0.3, 20);
+      }
+      out.morph = [m, 0, 0, 0];
+    },
     build(k) {
       const pts = [
         [-0.46, -0.42, 0.08],
@@ -1896,13 +2581,43 @@ export const RECIPES = {
         [0.46, -0.42, 0.08],
       ];
       const rad = (t) => 0.085 + 0.06 * Math.exp(-(((t - 0.5) / 0.17) ** 2));
-      const shape = k.tube(spline(pts), rad, { caps: true, samples: 480, grid: 110 });
+      const P = spline(pts);
+      const shape = k.tube(P, rad, { caps: true, samples: 480, grid: 110 });
       const q = quatEuler(-16, 0, 0);
+      const qi = [-q[0], -q[1], -q[2], q[3]];
+      // The U of rope it untwists into: the bottom of the loop stays, and
+      // each end rises in a straight arm (the first half's arm in front).
+      const U = (t) => {
+        if (t >= 0.35 && t <= 0.65) return P(t);
+        const side = t < 0.5 ? 1 : -1;
+        const a = t < 0.5 ? (0.35 - t) / 0.35 : (t - 0.65) / 0.35;
+        return [side * (0.93 + 0.08 * a), 0.08 + 0.92 * a, side * 0.35 * a];
+      };
+      const tangent = (f, t) => unit(sub(f(Math.min(1, t + 1e-3)), f(Math.max(0, t - 1e-3))));
+      const frame = (f, t) => {
+        const T = tangent(f, t);
+        const B = unit(sub([0, 0, 1], mul(T, T[2])));
+        return { T, B, N: cross(B, T) };
+      };
+      // A point on the pretzel (recipe coordinates) and where it goes: the
+      // same place across the rope, at the same point along it.
+      const untwisted = (p, t) => {
+        const lp = quatRotate(qi, p);
+        const r = frame(P, t);
+        const d = sub(lp, P(t));
+        const [dn, db, dt] = [dot(d, r.N), dot(d, r.B), dot(d, r.T)];
+        const u = frame(U, t);
+        const to = add(U(t), add(add(mul(u.N, dn), mul(u.B, db)), mul(u.T, dt)));
+        return quatRotate(q, to);
+      };
+      const along = (c) => c.t ?? (quatRotate(qi, c.p)[0] < 0 ? 0 : 1);
       k.add(shape, {
         quat: q,
-        flat: 0.25,
+        flat: 0.4,
         interior: 0.1,
         core: "#f0d4a0",
+        to: (c) => untwisted(c.p, along(c)),
+        channel: 0,
         color: (c) => {
           // The scored belly splits open along its top, showing pale dough.
           const belly = Math.exp(-(((c.t - 0.5) / 0.1) ** 2));
@@ -1918,7 +2633,7 @@ export const RECIPES = {
           return glossy(c, col, 0.55, 22, 0.72, 0.42);
         },
       });
-      // Coarse salt on the top side.
+      // Coarse salt on the top side, carried along with the dough.
       k.cloud({ share: 0.012, size: 0.9, flat: 0.7, pattern: false }, (rand) => {
         const t = rand();
         const f = shape.frame(t);
@@ -1926,17 +2641,75 @@ export const RECIPES = {
         const d = add(mul(f.n, Math.cos(a)), mul(f.b, Math.sin(a)));
         const dw = quatRotate(q, d);
         if (dw[2] < 0.25 || rand() < 0.4) return null;
+        const p = quatRotate(q, add(f.p, mul(d, rad(t) * 1.02)));
         return {
-          p: quatRotate(q, add(f.p, mul(d, rad(t) * 1.02))),
+          p,
           n: dw,
           color: mix("#ffffff", "#e8e4dc", rand()),
           opacity: 1,
+          to: untwisted(p, t),
+          channel: 0,
         };
       });
     },
   },
 
   croissant: {
+    controls: [{ key: "bake", label: "Bake", type: "pulse", ease: CRO_SECS }],
+    action: { key: "bake", label: "Bake" },
+    // A tap bakes it: the croissant rises on its tray in a warm oven glow,
+    // the oven dings, and flakes of crust spring off and scatter over the
+    // tray. The glow fades, it sinks back a little, and the flakes hop home.
+    drive(t, c, out, info) {
+      const s = since(c.bake, CRO_SECS);
+      const d = info.data;
+      if (!d) return;
+      const on = s >= 0;
+      const rise = on ? smooth(band(s, 0, CRO_DING)) * (1 - smooth(band(s, 1.7, 2.5))) : 0;
+      const scale = 1 + 0.17 * rise;
+      out.parts.dough = { scale };
+      const heat = on ? bump(s, 0.05, CRO_DING, 1.5, 2.4) : 0;
+      out.morph = [heat, 0, 0, 0];
+      out.glow = [1, 0.5, 0.12, 0.55];
+      out.tokens = d.flakes.map((f) => {
+        const seat = add(f.home, mul(sub(f.home, d.pivot), scale - 1));
+        const t0 = CRO_DING + f.lag;
+        const back = CRO_BACK + f.lag * 2;
+        if (!on || s < t0 || s >= back + 0.4)
+          return { base: f.home, offset: sub(seat, f.home), visible: 0 };
+        let p;
+        let q;
+        if (s < t0 + 0.55) {
+          const g = (s - t0) / 0.55;
+          p = hopTo(seat, f.land, g, 0.28);
+          q = quatAxisAngle(f.axis, f.spin * g);
+        } else {
+          const b = s - t0 - 0.55;
+          p = add(f.land, [0, 0.03 * Math.max(0, Math.sin((Math.PI * b) / 0.18)) * (b < 0.18 ? 1 : 0), 0]); // prettier-ignore
+          q = quatAxisAngle(f.axis, f.spin);
+        }
+        let shown = 1;
+        if (s >= back) {
+          const g = smooth(band(s, back, back + 0.4));
+          p = hopTo(f.land, f.home, g, 0.25);
+          q = slerpQ(q, IDQ, g);
+          // It melts back into the crust as it lands.
+          shown = 1 - smooth(band(g, 0.7, 1));
+        }
+        return { base: f.home, offset: sub(p, f.home), quat: q, visible: shown };
+      });
+      cuesAt(
+        c,
+        "croissant",
+        s,
+        [
+          [CRO_DING, { voice: "ding", f: "A6", decay: 1.3 }],
+          [CRO_DING + 0.5, { voice: "crackle", f: 2600, n: 10, decay: 0.5, vol: 0.5 }],
+          [CRO_BACK + 0.35, { voice: "patter", f: 1800, n: 6, decay: 0.4, vol: 0.4 }],
+        ],
+        out,
+      );
+    },
     build(k) {
       // A crescent of rolled dough: plump rolls in the middle, thin tips
       // curling in, each roll wrapping slightly on the slant.
@@ -1959,7 +2732,15 @@ export const RECIPES = {
         },
         { grid: 100, thick: 0.25 },
       );
+      // The dough rises about the middle of its underside; it glows (band,
+      // channel 0) in the oven's heat.
+      const pivot = [0, -0.2, -0.12];
+      const dough = k.part("dough", { pivot });
       k.add(shape, {
+        part: dough,
+        kind: "band",
+        params: [1, 0.45],
+        channel: 0,
         flat: 0.25,
         interior: 0.1,
         core: (c) => {
@@ -1967,17 +2748,83 @@ export const RECIPES = {
           if (len(sub(c.p, c.lp)) > env(c.v) * 0.9) return null;
           return c.noise(c.p[0] * 30, c.p[1] * 30, c.p[2] * 30) > 0.1 ? "#f6e2b0" : "#e2bd7c";
         },
-        color: (c) => {
-          const b = bulge(c.v, c.u);
-          const under = smoothstep(-0.2, -0.7, c.n[1]);
-          const tip = smoothstep(0.3, 0.05, Math.min(c.v, 1 - c.v));
-          let col = mix("#f4d08e", "#c26a1f", smoothstep(0.2, 0.85, b));
-          col = mix(col, "#9a5418", 0.5 * tip);
-          col = mix(col, "#e9bb72", under * 0.7);
-          col = shade(col, 0.93 + 0.12 * c.noise(c.p[0] * 40, c.p[1] * 40, c.p[2] * 40));
-          return glossy(c, col, 0.55 * (1 - under), 20, 0.72, 0.42);
-        },
+        color: (c) => crust(c, c.v, c.u),
       });
+      // The crust's colour at (v along, u around).
+      function crust(c, cv, cu) {
+        const b = bulge(cv, cu);
+        const under = smoothstep(-0.2, -0.7, c.n[1]);
+        const tip = smoothstep(0.3, 0.05, Math.min(cv, 1 - cv));
+        let col = mix("#f4d08e", "#c26a1f", smoothstep(0.2, 0.85, b));
+        col = mix(col, "#9a5418", 0.5 * tip);
+        col = mix(col, "#e9bb72", under * 0.7);
+        col = shade(col, 0.93 + 0.12 * c.noise(c.p[0] * 40, c.p[1] * 40, c.p[2] * 40));
+        return glossy(c, col, 0.55 * (1 - under), 20, 0.72, 0.42);
+      }
+      // A baking tray lined with paper.
+      const trayY = -0.33;
+      k.add(k.box(2.3, 0.05, 1.5), {
+        pos: [0, trayY - 0.03, -0.1],
+        flat: 0.2,
+        weight: 0.6,
+        color: (c) => (c.n[1] > 0.5 ? lit(c, "#5a5f66", 0.8, 0.3) : lit(c, "#3c4046", 0.8, 0.3)),
+      });
+      k.add(
+        k.param((u, v) => [(u - 0.5) * 1.9, trayY + 0.004, (v - 0.5) * 1.2 - 0.1], {
+          grid: 48,
+          normal: () => [0, 1, 0],
+        }),
+        {
+          flat: 0.15,
+          weight: 0.7,
+          kind: "band",
+          params: [1.4, 0.45],
+          channel: 0,
+          color: (c) => {
+            const crinkle = c.noise(c.p[0] * 9, c.p[2] * 9, 1.3);
+            return lit(c, shade("#efe6d2", 0.94 + 0.1 * crinkle), 0.84, 0.2);
+          },
+        },
+      );
+      // Flakes of crust on the top, each a piece that can spring off.
+      const flakes = [];
+      for (let i = 0; i < 16; i++) {
+        const v = 0.12 + 0.76 * ((i * 0.618 + 0.1) % 1);
+        const u = 0.12 + 0.3 * k.rand();
+        const f = frame(v);
+        const a = u * TAU;
+        const r = env(v) * (0.62 + 0.38 * bulge(v, u));
+        const n = unit(add(mul(f.n, Math.cos(a)), mul(f.b, Math.sin(a))));
+        if (n[1] < 0.2) continue;
+        const home = add(add(f.p, add(mul(f.n, Math.cos(a) * r), mul(f.b, Math.sin(a) * r * 0.8))), mul(n, 0.012)); // prettier-ignore
+        const out = unit([home[0], 0, home[2] + 0.12]);
+        const reach = 0.35 + 0.3 * k.rand();
+        const land = [clamp(home[0] + out[0] * reach, -0.88, 0.88), trayY + 0.02, clamp(home[2] + out[2] * reach, -0.66, 0.46)]; // prettier-ignore
+        const token = flakes.length;
+        flakes.push({ home, land, axis: randDir(k.rand), spin: 2 + 2 * k.rand(), lag: 0.03 * token }); // prettier-ignore
+        const t1 = tangentDir(k.rand, n);
+        const t2 = cross(n, t1);
+        const w = 0.05 + 0.03 * k.rand();
+        k.add(
+          k.param((x, y) => add(mul(t1, (x - 0.5) * w * 1.6), add(mul(t2, (y - 0.5) * w), mul(n, 0.008 * Math.sin(Math.PI * x)))), { grid: 8, normal: () => n }), // prettier-ignore
+          {
+            pos: home,
+            share: 0.001,
+            flat: 0.3,
+            kind: "token",
+            params: [token, 0],
+            // Hidden until it springs off (it would not glow with the crust);
+            // golden like fresh crust, with a ragged edge.
+            color: (c) => {
+              const e = Math.hypot((c.u - 0.5) * 2, (c.v - 0.5) * 2);
+              if (e > 0.8 + 0.25 * c.noise(c.u * 6 + token, c.v * 6, 0)) return null;
+              return keep(mix(crust(c, v, u), "#ffc15a", 0.45));
+            },
+          },
+        );
+      }
+      k.data = { flakes, pivot };
+      k.reach([0, 0.6, 0]);
     },
   },
 
@@ -2470,9 +3317,85 @@ export const RECIPES = {
   },
 
   sushi: {
+    controls: [{ key: "dip", label: "Pick up and dip", type: "pulse", ease: SUSHI_SECS }],
+    action: { key: "dip", label: "Pick up and dip" },
+    // A tap lifts the chopsticks off the board as if by an invisible hand.
+    // They open over a roll, come down and pinch it (click), carry it over
+    // to the soy sauce and dip it twice, bring it back and set it down
+    // (click), and lie back down on the board.
+    drive(t, c, out, info) {
+      const s = since(c.dip, SUSHI_SECS);
+      const d = info.data;
+      if (!d) return;
+      const on = s >= 0;
+      const roll = d.roll;
+      // The roll's centre over time (it rides between the tips when held).
+      const above = add(roll, [0, 0.34, 0]);
+      const overDish = [d.dish[0], 0.45, d.dish[2]];
+      const inDish = [d.dish[0], d.dish[1] + 0.13, d.dish[2]];
+      const keys = [
+        [SUSHI_T.grab, roll],
+        [SUSHI_T.grab + 0.55, above],
+        [SUSHI_T.grab + 1.05, overDish],
+        [SUSHI_T.grab + 1.3, inDish],
+        [SUSHI_T.grab + 1.45, overDish],
+        [SUSHI_T.grab + 1.62, inDish],
+        [SUSHI_T.grab + 1.8, overDish],
+        [SUSHI_T.grab + 2.4, above],
+        [SUSHI_T.drop, roll],
+      ];
+      let at = roll;
+      let swing = 0;
+      if (on && s > keys[0][0] && s < keys[keys.length - 1][0]) {
+        for (let i = 1; i < keys.length; i++) {
+          if (s <= keys[i][0]) {
+            const f = smooth(band(s, keys[i - 1][0], keys[i][0]));
+            at = lerp3(keys[i - 1][1], keys[i][1], f);
+            swing = 0.12 * Math.sin(Math.PI * f) * (keys[i][1][0] < keys[i - 1][1][0] ? 1 : -1);
+            break;
+          }
+        }
+      }
+      out.parts.roll = {
+        offset: sub(at, roll),
+        quat: quatAxisAngle([Math.cos(0.45), 0, -Math.sin(0.45)], swing * 0.5),
+      };
+      // The chopsticks: lying on the board, or held in the invisible hand
+      // (tips either side of the roll, open or closed).
+      const S = [Math.cos(0.45), 0, -Math.sin(0.45)];
+      const D = unit([0.6, 0.5, 0.3]);
+      const spread = 0.26 - 0.07 * (on ? bump(s, SUSHI_T.grab - 0.15, SUSHI_T.grab, SUSHI_T.drop, SUSHI_T.drop + 0.15) : 0); // prettier-ignore
+      const low = on ? bump(s, SUSHI_T.lift, SUSHI_T.grab - 0.15, SUSHI_T.drop + 0.15, SUSHI_T.lay) : 0; // prettier-ignore
+      const tipsAt = add(at, [0, 0.22 * (1 - low), 0]);
+      const held = on ? smooth(bump(s, 0, SUSHI_T.lift, SUSHI_T.lay, SUSHI_SECS - 0.2)) : 0;
+      d.sticks.forEach((st, i) => {
+        const sign = i ? 1 : -1;
+        const tip = add(tipsAt, mul(S, sign * spread));
+        const base = add(add(tipsAt, mul(D, st.len)), mul(S, sign * 0.04));
+        const hc = mul(add(tip, base), 0.5);
+        const hq = quatFromTo([1, 0, 0], unit(sub(tip, base)));
+        const lift = 0.35 * hop(held);
+        const cen = add(lerp3(st.center, hc, held), [0, lift, 0]);
+        out.parts[`stick${i}`] = { offset: sub(cen, st.center), quat: slerpQ(IDQ, hq, held) };
+      });
+      cuesAt(
+        c,
+        "sushi",
+        s,
+        [
+          [SUSHI_T.grab, { voice: "wood", f: "B6", decay: 0.4 }],
+          [SUSHI_T.grab + 1.3, { voice: "drip", f: 900, n: 1, vol: 0.4 }],
+          [SUSHI_T.grab + 1.62, { voice: "drip", f: 1000, n: 1, vol: 0.4 }],
+          [SUSHI_T.drop, { voice: "wood", f: "A6", decay: 0.4 }],
+          [SUSHI_SECS - 0.15, { voice: "clack", f: 2200, decay: 0.5, vol: 0.5 }],
+        ],
+        out,
+      );
+    },
     build(k) {
       // A wooden board.
-      k.add(k.roundedBox(2.6, 0.12, 1.3, 7), {
+      // (A plain box: the rounded box left a thin band across its middle.)
+      k.add(k.box(2.6, 0.12, 1.3), {
         pos: [0, -0.06, 0],
         flat: 0.2,
         color: (c) => {
@@ -2520,6 +3443,7 @@ export const RECIPES = {
         ["#7cc242", "#b8e07a"],
         ["#ffd23f", "#7cc242"],
       ];
+      const rollPart = k.part("roll", { pivot: [0.36, 0.11, 0.12] });
       [
         [0.36, 0.12],
         [0.74, 0.02],
@@ -2529,6 +3453,7 @@ export const RECIPES = {
         k.add(k.cylinder(0.18, 0.22), {
           pos: [x, 0.11, z],
           rot: [0, i * 50, 0],
+          part: i === 0 ? rollPart : 0,
           flat: 0.25,
           interior: 0.08,
           core: "#f4f0e6",
@@ -2584,10 +3509,42 @@ export const RECIPES = {
           color: (c) => lit(c, mix("#f9c9c4", "#f3a6a6", c.v), 0.85, 0.25),
         });
       }
-      // Chopsticks along the front.
+      // A little dish of soy sauce at the front, with nothing in front of it.
+      const dish = [-0.98, 0, 0.42];
+      k.add(
+        revolve(
+          k,
+          [
+            [0, 0.005],
+            [0.15, 0.005],
+            [0.19, 0.02],
+            [0.215, 0.06],
+            [0.228, 0.075],
+          ],
+          null,
+          { flip: true, grid: 64 },
+        ),
+        {
+          pos: dish,
+          flat: 0.2,
+          weight: 1.2,
+          color: (c) => glossy(c, "#f6f3ec", 0.8, 40, 0.76, 0.3),
+        },
+      );
+      k.add(topDisc(k, 0.2), {
+        pos: add(dish, [0, 0.045, 0]),
+        flat: 0.15,
+        weight: 1.5,
+        color: (c) => glossy(c, "#2e1608", 0.9, 50, 0.8, 0.3),
+      });
+      // Chopsticks along the front, each a part the invisible hand moves.
+      const sticks = [];
       for (const dz of [0, 0.07]) {
+        const center = [0.42, 0.025, 0.5 + dz];
+        sticks.push({ center, len: 2.0 });
         k.add(k.cone(0.024, 0.013, 2.0), {
-          pos: [0.02, 0.025, 0.5 + dz],
+          pos: center,
+          part: k.part(`stick${sticks.length - 1}`, { pivot: center }),
           rot: [0, 0, -90],
           flat: 0.3,
           weight: 1.5,
@@ -2595,14 +3552,69 @@ export const RECIPES = {
             c.lp[1] > 0.72 ? lit(c, "#1d1a18") : glossy(c, "#b5262e", 0.6, 24, 0.75, 0.4),
         });
       }
+      k.data = { roll: [0.36, 0.11, 0.12], dish, sticks };
+      k.reach([0.3, 1.1, 0]);
     },
   },
 
   taco: {
+    controls: [{ key: "snap", label: "Break in half", type: "pulse", ease: TACO_SECS }],
+    action: { key: "snap", label: "Break in half" },
+    // A tap snaps the shell across the middle with a crunch. The halves
+    // pull apart and swing open like a book, showing the filling packed in
+    // each break (meat, lettuce, cheese and tomato), and bits spill out onto
+    // the plate and bounce. Then the bits hop back in and the halves close.
+    drive(t, c, out, info) {
+      const s = since(c.snap, TACO_SECS);
+      const d = info.data;
+      if (!d) return;
+      const on = s >= 0;
+      const open = on ? easeOut(band(s, 0.08, 0.65)) * (1 - smooth(band(s, 2.2, 2.8))) : 0;
+      const jolt = on ? 0.03 * wobble(s, 0.3, 30) : 0;
+      for (const [name, side] of [
+        ["tacoL", -1],
+        ["tacoR", 1],
+      ]) {
+        const turn = side < 0 ? -TACO_TURN : TACO_TURN;
+        out.parts[name] = {
+          quat: quatAxisAngle([0, 1, 0], turn * open),
+          offset: [side * (0.42 * open + jolt), 0.08 * open, 0.1 * open],
+        };
+      }
+      out.tokens = d.bits.map((bt) => {
+        if (!on || s < bt.t0) return { base: bt.home };
+        const u = s - bt.t0;
+        const back = TACO_BACK + bt.lag;
+        const fall = bounce(u, bt.h, 0.4, 12, 0.3);
+        const f = Math.min(1, u / bt.t1);
+        let p = [bt.home[0] + bt.dx * f, bt.floor + fall.y, bt.home[2] + bt.dz * f];
+        let q = quatAxisAngle(bt.axis, bt.spin * f);
+        if (s >= back) {
+          const g = smooth(band(s, back, back + 0.4));
+          p = hopTo(p, bt.home, g, 0.2);
+          q = slerpQ(q, IDQ, g);
+        }
+        return { base: bt.home, offset: sub(p, bt.home), quat: q };
+      });
+      const list = [
+        [2.78, { voice: "crunch", f: 1800, n: 6, decay: 0.5, vol: 0.5 }],
+        ...d.bits.map((bt, i) => [bt.t0 + bt.t1, { voice: "thud", f: 180 + 30 * (i % 4), bright: 0.3, decay: 0.3, vol: 0.35 }]), // prettier-ignore
+      ];
+      cuesAt(c, "taco", s, list, out);
+    },
     build(k) {
       const R = 0.95;
       const rho = 0.46;
       const yaw = 0;
+      const xb = 0.02;
+      const L = k.part("tacoL", { pivot: [xb, 0, 0] });
+      const Rt = k.part("tacoR", { pivot: [xb, 0, 0] });
+      // The shell cracks along a jagged line across the middle.
+      const jag = (p) => {
+        const ph = Math.atan2(p[2], rho - p[1]);
+        return 0.045 * (Math.abs((((ph / TAU) * 9 + 20) % 1) - 0.5) * 4 - 1);
+      };
+      const side = (p) => (p[0] < xb + jag(p) ? L : Rt);
       const shellAt = (u, v, off = 0) => {
         const x = (u * 2 - 1) * R;
         const W = Math.sqrt(Math.max(0, R * R - x * x)) * 0.985;
@@ -2624,6 +3636,7 @@ export const RECIPES = {
           {
             rot: [0, yaw, 0],
             flat: 0.2,
+            part: (c) => side(c.p),
             color: shellColor(inner),
           },
         );
@@ -2640,11 +3653,17 @@ export const RECIPES = {
         const z = (rand() * 2 - 1) * rho * Math.sin(ph) * spread;
         return quatRotate(q, [x, y, z]);
       };
+      const byX = (p) => (p[0] < xb ? L : Rt);
       k.cloud({ share: 0.16, size: 1.5, flat: 0.6 }, (rand) => {
         const p = inU(rand, -0.4, -0.02, 0.8);
         const n = randDir(rand);
         const l = Math.max(0, dot(n, LIGHT));
-        return { p, n, color: shade(mix("#7a4322", "#4a2512", rand()), 0.7 + 0.5 * l) };
+        return {
+          p,
+          n,
+          part: byX(p),
+          color: shade(mix("#7a4322", "#4a2512", rand()), 0.7 + 0.5 * l),
+        };
       });
       k.cloud({ share: 0.12, size: 0.95, pattern: false }, (rand) => {
         const p = inU(rand, -0.1, 0.07, 0.95, 0.84);
@@ -2653,6 +3672,7 @@ export const RECIPES = {
           p,
           dir: d,
           stretch: 3.5,
+          part: byX(p),
           color: shade(mix("#b5e35f", "#62b52f", rand()), 0.85 + 0.25 * rand()),
           opacity: 1,
         };
@@ -2663,21 +3683,125 @@ export const RECIPES = {
           p,
           dir: unit([rand() - 0.5, rand() * 0.3, rand() - 0.5]),
           stretch: 3.2,
+          part: byX(p),
           color: mix("#ffc23a", "#f58f1a", rand()),
           opacity: 1,
         };
       });
+      // The filling seen in each break: meat below, then lettuce, cheese and
+      // tomato near the rim, inside a thin edge of shell.
+      const top0 = rho * (1 - Math.cos((R * 0.985) / rho));
+      const face = (c, y, z) => {
+        const wall = rho - Math.hypot(z, rho - y);
+        if (wall < 0.028) return keep(lit(c, mix("#e2a843", "#c98a2e", c.rand()), 0.8, 0.3));
+        const h = y - (top0 - 0.12);
+        const n = c.noise(z * 30, y * 30, 0.5);
+        if (h > 0.02 && n > 0.35) return keep(mix("#e8321f", "#f0654c", c.rand()));
+        if (h > -0.02 && n < -0.25) return keep(mix("#ffc23a", "#f58f1a", c.rand()));
+        if (h > -0.07) return keep(mix("#b5e35f", "#62b52f", 0.5 + 0.5 * n));
+        // Seasoned mince, with bits of tomato and melted cheese through it.
+        const g = c.noise(z * 45, y * 45, 2.5);
+        const bit = c.noise(z * 22, y * 22, 7.1);
+        if (bit > 0.5) return keep(mix("#d8452a", "#b83220", c.rand()));
+        if (bit < -0.55) return keep(mix("#f6b73a", "#e89a24", c.rand()));
+        return keep(shade(mix("#9a5a32", "#5e3018", 0.5 + 0.5 * g), 0.95 + 0.25 * c.rand()));
+      };
+      for (const [part, dx, nx] of [
+        [L, -0.004, 1],
+        [Rt, 0.004, -1],
+      ]) {
+        k.add(
+          k.param(
+            (u, v) => {
+              const z = (u * 2 - 1) * rho * 0.995;
+              const yb = rho - Math.sqrt(Math.max(0, rho * rho - z * z));
+              return [xb + dx, yb + v * Math.max(0, top0 + 0.02 - yb), z];
+            },
+            { grid: 48, normal: () => [nx, 0, 0] },
+          ),
+          {
+            part,
+            share: 0.03,
+            flat: 0.3,
+            pattern: false,
+            color: (c) => face(c, c.p[1], c.p[2]),
+          },
+        );
+      }
+      // Tomato cubes: those near the break spill out (tokens), the others
+      // go with their half.
+      const bits = [];
       for (let i = 0; i < 16; i++) {
         const p = inU(k.rand, 0.0, 0.06, 0.7, 0.7);
+        const near = Math.abs(p[0] - xb) < 0.28 && bits.length < 7;
+        const rot = [k.rand() * 90, k.rand() * 90, 0];
         k.add(k.box(0.075, 0.07, 0.075), {
           pos: p,
-          rot: [k.rand() * 90, k.rand() * 90, 0],
+          rot,
           flat: 0.3,
           weight: 2,
           pattern: false,
+          ...(near ? { kind: "token", params: [bits.length, 0] } : { part: byX(p) }),
           color: (c) => glossy(c, c.s.face % 2 ? "#e8321f" : "#f0654c", 0.4, 16),
         });
+        if (near) bits.push({ home: p });
       }
+      // Crumbles of meat and shreds of lettuce that spill too.
+      for (let i = 0; i < 9; i++) {
+        const token = bits.length;
+        const lettuce = i % 3 === 2;
+        const p = quatRotate(q, [xb + (k.rand() - 0.5) * 0.3, top0 - 0.08 - 0.12 * k.rand(), (k.rand() - 0.5) * 0.3]); // prettier-ignore
+        bits.push({ home: p });
+        k.cloud({ count: lettuce ? 70 : 90, size: lettuce ? 0.9 : 1.2, pattern: false }, (rand) => {
+          const d = randDir(rand);
+          const pp = add(p, mul(d, (lettuce ? 0.05 : 0.04) * Math.cbrt(rand())));
+          return lettuce
+            ? { p: pp, dir: randDir(rand), stretch: 3, color: mix("#b5e35f", "#62b52f", rand()), opacity: 1, kind: "token", params: [token, 0] } // prettier-ignore
+            : { p: pp, n: d, flat: 0.6, color: shade(mix("#7a4322", "#4a2512", rand()), 0.8 + 0.4 * rand()), kind: "token", params: [token, 0] }; // prettier-ignore
+        });
+      }
+      // Where each bit falls to: out of the break, onto the plate in front.
+      const floor = -0.01;
+      bits.forEach((bt, i) => {
+        const a = 0.2 + (i / bits.length) * 2.6 + 0.3 * k.rand();
+        const r = 0.25 + 0.3 * k.rand();
+        bt.dx = Math.cos(a) * r * 0.9;
+        bt.dz = 0.35 + Math.sin(a) * r * 0.6;
+        bt.h = bt.home[1] - floor - 0.03;
+        bt.floor = floor + 0.03;
+        bt.t0 = 0.18 + 0.035 * i;
+        bt.t1 = landings(bt.h, 0.4, 12, 0.3, 1)[0];
+        bt.axis = randDir(k.rand);
+        bt.spin = 1 + 2 * k.rand();
+        bt.lag = 0.03 * (bits.length - i);
+      });
+      k.data = { bits };
+      // A plate underneath.
+      k.add(
+        revolve(
+          k,
+          [
+            [0, -0.05],
+            [0.9, -0.05],
+            [1.12, -0.02],
+            [1.22, 0.04],
+            [1.26, 0.06],
+          ],
+          null,
+          { flip: true, grid: 96 },
+        ),
+        {
+          flat: 0.2,
+          weight: 0.8,
+          color: (c) => {
+            const r = Math.hypot(c.p[0], c.p[2]);
+            const band2 = r > 1.02 && r < 1.07 ? 0.85 : 1;
+            return glossy(c, shade("#f4f1ea", band2), 0.7, 40, 0.78, 0.3);
+          },
+        },
+      );
+      k.reach([-1.3, 0.8, -0.9]);
+      k.reach([1.3, 0.8, -0.9]);
     },
   },
 
@@ -3030,6 +4154,45 @@ export const RECIPES = {
         ],
       },
     ],
+    controls: [{ key: "bite", label: "Take a bite", type: "toggle", default: 0, ease: APPLE_SECS }], // prettier-ignore
+    action: { key: "bite", label: "Take a bite" },
+    // A tap takes a bite: the chunk comes away and vanishes, leaving a
+    // scalloped bite of pale flesh (it stays bitten). The next tap brings a
+    // little worm out of the bite: it looks about, ducks back in, and the
+    // apple grows whole again.
+    drive(t, c, out, info) {
+      const d = info.data;
+      if (!d) return;
+      const m = mem(c);
+      const v = c.bite;
+      if (v > (m.v ?? 0) + 1e-6) m.dir = 1;
+      else if (v < (m.v ?? 0) - 1e-6) {
+        if (m.dir !== -1) m.v0 = m.v ?? 1;
+        m.dir = -1;
+      }
+      m.v = v;
+      // Leaving the bitten state plays the worm and the healing over the
+      // way back down (all of it, even if the bite had not quite settled).
+      const leaving = m.dir === -1 && v > 0;
+      const s = leaving ? (1 - v / Math.max(m.v0 ?? 1, 1e-3)) * APPLE_SECS : -1;
+      // The chunk: gone once bitten, back as it heals at the end.
+      let gone = v > 0 ? smooth(band(v * APPLE_SECS, 0, 0.18)) : 0;
+      if (leaving) gone = 1 - smooth(band(s, APPLE_SECS - 0.75, APPLE_SECS - 0.1));
+      const away = m.dir === 1 ? gone : 0;
+      out.morph = [gone, 0, 0, 0];
+      out.parts.bite = { offset: mul(d.out, 0.3 * away) };
+      // The worm, out of the bite while the apple is leaving its bitten state.
+      const head = leaving ? 0.34 * bump(s, 0.15, 0.65, 1.75, 2.15) : 0;
+      const look = leaving ? 0.5 * Math.sin((s - 0.65) * 5.5) * bump(s, 0.6, 0.8, 1.55, 1.75) : 0;
+      const nod = leaving ? 0.25 * Math.sin((s - 0.65) * 9) * bump(s, 0.6, 0.8, 1.55, 1.75) : 0;
+      out.tokens = d.worm.map((w, i) => {
+        const sg = head - w.at;
+        const p = d.path(sg, look);
+        const q = i === 0 ? quatMul(quatAxisAngle([0, 1, 0], look * 1.2), quatAxisAngle(d.side, -nod)) : IDQ; // prettier-ignore
+        return { base: w.home, offset: sub(p, w.home), quat: q, visible: sg > 0.005 ? 1 : 0 };
+      });
+      cuesAt(c, "apple", s, [[0.3, { voice: "squeak", f: 1300, to: 1.4, decay: 0.5, vol: 0.4 }]], out); // prettier-ignore
+    },
     build(k, o) {
       const [skin, blush, deep] = {
         red: ["#c81d2a", "#f2b13e", "#7a0d17"],
@@ -3049,46 +4212,168 @@ export const RECIPES = {
         [0.03, 0.34],
         [0, 0.33],
       ];
+      // The bite: a few overlapping spheres (the teeth) on the side towards
+      // you. Skin and flesh inside them are the chunk that comes away (it
+      // fades on channel 0); under it lies the bitten surface.
+      const rAt = radiusAt(pts);
+      const inApple = (p) => Math.hypot(p[0], p[2]) < rAt(p[1]) * 0.995 && p[1] > -0.42 && p[1] < 0.45; // prettier-ignore
+      const az = 0.9;
+      const nOut = [Math.sin(az), 0, Math.cos(az)];
+      const tang = [Math.cos(az), 0, -Math.sin(az)];
+      const surf = add(mul(nOut, 0.72), [0, 0.02, 0]);
+      const teeth = [-0.17, 0, 0.17].map((d, i) => ({
+        at: add(add(surf, mul(nOut, 0.14)), add(mul(tang, d), [0, 0.04 * (i === 1 ? -1 : 1), 0])),
+        r: 0.29,
+      }));
+      const inBite = (p) => teeth.some((t) => len(sub(p, t.at)) < t.r);
+      const coreColor = (c) => {
+        const [x, y, z] = c.p;
+        const r = Math.hypot(x, z);
+        const a = Math.atan2(x, z);
+        if (Math.abs(y) < 0.2 && r < 0.17 * (0.55 + 0.45 * Math.abs(Math.cos(a * 2.5)))) {
+          for (let i = 0; i < 5; i++) {
+            const sa = (i / 5) * TAU;
+            if (
+              Math.hypot(x - Math.sin(sa) * 0.1, (y + 0.02) * 0.7, z - Math.cos(sa) * 0.1) < 0.035
+            )
+              return keep("#4a2a14");
+          }
+          return "#efe0b2";
+        }
+        return shade("#f8f0cf", 0.95 + 0.08 * c.noise(x * 20, y * 20, z * 20));
+      };
+      const skinColor = (c) => {
+        const [x, y, z] = c.p;
+        const a = Math.atan2(x, z);
+        const streak = c.fbm(Math.sin(a) * 2.5, y * 10, Math.cos(a) * 2.5, 3);
+        let col = mix(
+          skin,
+          blush,
+          clamp(0.35 * smoothstep(-0.1, 0.5, streak) + 0.35 * smoothstep(0.1, -0.5, y), 0, 1),
+        );
+        col = mix(col, deep, 0.35 * smoothstep(0.2, 0.8, c.fbm(x * 3, y * 3, z * 3, 2) + 0.4));
+        // Around the stalk the skin turns yellowish and shaded.
+        const r = Math.hypot(x, z);
+        if (y > 0.28 && r < 0.3) col = mix(col, shade(blush, 0.7), 0.5 * (1 - r / 0.3));
+        if (c.noise(x * 80, y * 80, z * 80) > 0.62) col = mix(col, "#fff2c8", 0.3);
+        return glossy(c, col, 0.8, 38, 0.72, 0.4);
+      };
       k.add(
         revolve(k, pts, (a) => 1 + 0.012 * Math.sin(a * 5 + 0.5), { grid: 96, thick: 0.6 }),
         {
           flat: 0.2,
           interior: 0.12,
-          core: (c) => {
-            const [x, y, z] = c.p;
-            const r = Math.hypot(x, z);
-            const a = Math.atan2(x, z);
-            if (Math.abs(y) < 0.2 && r < 0.17 * (0.55 + 0.45 * Math.abs(Math.cos(a * 2.5)))) {
-              for (let i = 0; i < 5; i++) {
-                const sa = (i / 5) * TAU;
-                if (
-                  Math.hypot(x - Math.sin(sa) * 0.1, (y + 0.02) * 0.7, z - Math.cos(sa) * 0.1) <
-                  0.035
-                )
-                  return keep("#4a2a14");
-              }
-              return "#efe0b2";
-            }
-            return shade("#f8f0cf", 0.95 + 0.08 * c.noise(x * 20, y * 20, z * 20));
-          },
-          color: (c) => {
-            const [x, y, z] = c.p;
-            const a = Math.atan2(x, z);
-            const streak = c.fbm(Math.sin(a) * 2.5, y * 10, Math.cos(a) * 2.5, 3);
-            let col = mix(
-              skin,
-              blush,
-              clamp(0.35 * smoothstep(-0.1, 0.5, streak) + 0.35 * smoothstep(0.1, -0.5, y), 0, 1),
-            );
-            col = mix(col, deep, 0.35 * smoothstep(0.2, 0.8, c.fbm(x * 3, y * 3, z * 3, 2) + 0.4));
-            // Around the stalk the skin turns yellowish and shaded.
-            const r = Math.hypot(x, z);
-            if (y > 0.28 && r < 0.3) col = mix(col, shade(blush, 0.7), 0.5 * (1 - r / 0.3));
-            if (c.noise(x * 80, y * 80, z * 80) > 0.62) col = mix(col, "#fff2c8", 0.3);
-            return glossy(c, col, 0.8, 38, 0.72, 0.4);
-          },
+          core: (c) => (inBite(c.p) ? null : coreColor(c)),
+          color: (c) => (inBite(c.p) ? null : skinColor(c)),
         },
       );
+      const bite = k.part("bite", { pivot: surf });
+      // The chunk's skin (a window of the surface round the bite) and its flesh.
+      const wob = (a) => 1 + 0.012 * Math.sin(a * 5 + 0.5);
+      k.add(
+        k.param(
+          (u, v) => {
+            const a = az - 0.55 + u * 1.1;
+            const y = -0.3 + v * 0.66;
+            const r = rAt(y) * wob(a);
+            return [Math.sin(a) * r, y, Math.cos(a) * r];
+          },
+          {
+            grid: 40,
+            normal: (u, v) => {
+              const a = az - 0.55 + u * 1.1;
+              const y = -0.3 + v * 0.66;
+              const dr = (rAt(y + 0.01) - rAt(y - 0.01)) / 0.02;
+              return unit([Math.sin(a), -dr, Math.cos(a)]);
+            },
+          },
+        ),
+        {
+          part: bite,
+          kind: "fade",
+          params: [0.2, 0.5],
+          channel: 0,
+          flat: 0.2,
+          color: (c) => (inBite(c.p) ? skinColor(c) : null),
+        },
+      );
+      k.cloud({ share: 0.02, part: bite, kind: "fade", params: [0.2, 0.5], channel: 0 }, (rand) => {
+        const p = add(surf, [(rand() - 0.5) * 0.7, (rand() - 0.5) * 0.7, (rand() - 0.5) * 0.7]);
+        if (!inApple(p) || !inBite(p)) return null;
+        return { p, color: shade("#f8f0cf", 0.95 + 0.08 * rand()), opacity: 0.9, size: 1.4 };
+      });
+      // The bitten surface: the insides of the teeth spheres, within the
+      // apple, pale flesh with a thin line of skin at its rim.
+      for (const t of teeth) {
+        k.add(k.sphere(t.r), {
+          pos: t.at,
+          share: 0.012,
+          flat: 0.2,
+          color: (c) => {
+            if (!inApple(c.p)) return null;
+            if (teeth.some((o2) => o2 !== t && len(sub(c.p, o2.at)) < o2.r * 0.999)) return null;
+            const edge = Math.hypot(c.p[0], c.p[2]) / rAt(c.p[1]);
+            if (edge > 0.975) return keep(skinColor(c));
+            // Deeper in, a little yellower; lit as a hollow (inward normal),
+            // with a shadow under the top edge.
+            const depth = clamp((1 - edge) / 0.25, 0, 1);
+            const fibre = c.noise(c.p[0] * 30, c.p[1] * 30, c.p[2] * 30);
+            let col = mix("#fbf4dc", "#eedcaa", 0.6 * depth + 0.3 * (0.5 + 0.5 * fibre));
+            col = mix(col, "#d9c07e", 0.35 * smoothstep(0.93, 0.975, edge));
+            const l = dot(mul(c.n, -1), LIGHT);
+            return keep(shade(col, 0.62 + 0.45 * Math.max(0, l) - 0.12 * depth));
+          },
+        });
+      }
+      // The worm: a head with eyes and six body beads, each a piece that
+      // follows the path out of the bite. They are built where they are
+      // when it is all the way out.
+      const E = add(surf, mul(nOut, -0.12));
+      const up = [0, 1, 0];
+      const path = (sg, look = 0) => {
+        if (sg <= 0) return add(E, mul(nOut, sg));
+        const sway = mul(tang, look * sg * sg * 1.6);
+        return add(add(add(E, mul(nOut, sg * 0.75)), mul(up, sg * sg * 2.2)), sway);
+      };
+      const worm = [];
+      const full = 0.34;
+      for (let i = 0; i < 7; i++) {
+        const at = i * 0.048;
+        const home = path(full - at);
+        const token = i;
+        worm.push({ at, home });
+        const r = i === 0 ? 0.06 : 0.048 - 0.003 * i;
+        k.add(k.sphere(r), {
+          pos: home,
+          share: i === 0 ? 0.006 : 0.003,
+          flat: 0.3,
+          pattern: false,
+          kind: "token",
+          params: [token, 0],
+          color: (c) => keep(glossy(c, mix("#9fd35a", "#6fae33", 0.5 + 0.5 * c.noise(c.p[0] * 60, c.p[1] * 60, 0)), 0.6, 20)), // prettier-ignore
+        });
+        if (i === 0) {
+          // Eyes and a smile, facing out of the bite.
+          const face = unit(add(nOut, [0, 0.35, 0]));
+          for (const sd of [-1, 1]) {
+            const eye = add(add(home, mul(face, 0.05)), add(mul(tang, sd * 0.025), [0, 0.02, 0]));
+            k.add(k.sphere(0.018), {
+              pos: eye,
+              share: 0.0015,
+              pattern: false,
+              kind: "token",
+              params: [0, 0],
+              color: (c) => keep(dot(c.n, face) > 0.5 ? "#141414" : "#ffffff"),
+            });
+          }
+          k.cloud({ count: 60, pattern: false, size: 0.5 }, (rand) => {
+            const a = (rand() - 0.5) * 1.6;
+            const p = add(add(home, mul(face, 0.057)), add(mul(tang, Math.sin(a) * 0.025), [0, -0.012 - 0.008 * Math.cos(a), 0])); // prettier-ignore
+            return { p, color: "#2a3a14", opacity: 1, kind: "token", params: [0, 0] };
+          });
+        }
+      }
+      k.data = { worm, path, side: tang, out: nOut };
       k.add(
         k.tube(
           spline([
@@ -3201,6 +4486,50 @@ export const RECIPES = {
         ],
       },
     ],
+    controls: [{ key: "open", label: "Open into wedges", type: "pulse", ease: ORANGE_SECS }],
+    action: { key: "open", label: "Open into wedges" },
+    // A tap opens the whole orange like a flower: it is cut into eight
+    // wedges from the top, and they fall open outwards on their bottoms, one
+    // just after another, showing the juicy cut faces, while juice squirts
+    // up out of the middle. Then they close up into a whole orange again.
+    // (A lone half squeezes and squirts.)
+    drive(t, c, out, info) {
+      const s = since(c.open, ORANGE_SECS);
+      const d = info.data;
+      if (!d) return;
+      const on = s >= 0;
+      out.tokens = [];
+      d.wedges.forEach((w, i) => {
+        const t0 = 0.05 + 0.03 * i;
+        const open = on ? easeOut(band(s, t0, t0 + 0.5)) * (1 - smooth(band(s, 2.0, 2.6))) : 0;
+        const settle = on
+          ? 0.08 * wobble(s - t0 - 0.5, 0.6, 14) + 0.05 * wobble(s - 2.6, 0.4, 16)
+          : 0;
+        out.tokens[w.token] = { base: w.pivot, quat: quatAxisAngle(w.axis, 0.66 * open + settle) };
+      });
+      d.drops.forEach((dr) => {
+        const u = on ? s - dr.t0 : -1;
+        const g = clamp(u / dr.life, 0, 1);
+        const p = [dr.v[0] * u, dr.v[1] * u - 6 * u * u, dr.v[2] * u];
+        out.tokens[dr.token] = {
+          base: dr.from,
+          offset: u > 0 && g < 1 ? p : [0, 0, 0],
+          visible: u > 0 && g < 1 ? 1 - smooth(band(g, 0.7, 1)) : 0,
+        };
+      });
+      const squeeze = on && d.halfOnly ? 0.08 * hop(band(s, 0, 0.35)) : 0;
+      out.parts.half = { scale: 1 - squeeze };
+      cuesAt(
+        c,
+        "orange",
+        s,
+        [
+          [0.08, { voice: "squish", pitch: 1.3, bright: 0.9, decay: 0.7 }],
+          [2.55, { voice: "slap", f: 900, vol: 0.4 }],
+        ],
+        out,
+      );
+    },
     build(k, o) {
       const R = 0.72;
       const peel = (c) => {
@@ -3223,49 +4552,138 @@ export const RECIPES = {
         const col = mix("#fb9c1f", "#f57e0f", 0.5 + 0.5 * juice + 0.4 * (e - 0.25));
         return c.noise(a * 30, rho * 30, 3) > 0.55 ? mix(col, "#ffd9a0", 0.5) : col;
       };
+      // The whole orange is eight wedges (pieces), each its peel and two cut
+      // faces, hinged at the bottom so it can fall open outwards.
+      const wedges = [];
+      const drops = [];
+      let tokens = 0;
+      const H = R * 0.94;
+      const cutFace = (c, rho, y) => {
+        const x = Math.sqrt(Math.max(0, rho * rho - (y / H) ** 2));
+        if (rho > 0.965) return "#ec7a14";
+        if (rho > 0.88) return "#fbeed6";
+        if (x < 0.07) return "#fbeed6";
+        // Juice sacs run out from the core towards the peel.
+        const sacs = c.noise(Math.atan2(y / H, x) * 18, rho * 4, 0.5);
+        const col = mix("#fb9c1f", "#f57e0f", 0.5 + 0.5 * c.noise(x * 9, y * 9, 1.5));
+        return sacs > 0.3 ? mix(col, "#ffcf8a", 0.55) : col;
+      };
       const whole = (pos) => {
-        k.add(k.sphere(R), {
-          pos,
-          scale: [1, 0.94, 1],
-          flat: 0.2,
-          interior: 0.14,
-          core: (c) => {
-            const q = sub(c.p, pos);
-            const rho = len([q[0], q[1] / 0.94, q[2]]) / R;
-            return flesh(
-              Math.atan2(q[0], q[2]) + Math.PI,
-              Math.hypot(q[0], q[2]) / R < 0.09 ? 0 : rho,
-              c,
+        const n = 8;
+        for (let i = 0; i < n; i++) {
+          const a0 = (i / n) * TAU;
+          const a1 = ((i + 1) / n) * TAU;
+          const am = (a0 + a1) / 2;
+          const m = [Math.sin(am), 0, Math.cos(am)];
+          const token = tokens++;
+          const piece = { kind: "token", params: [token, 0] };
+          const pivot = add(pos, add([0, -H * 0.92, 0], mul(m, 0.18)));
+          wedges.push({ token, pivot, axis: unit(cross([0, 1, 0], m)) });
+          k.add(
+            k.param(
+              (u, v) => {
+                const a = a0 + u * (a1 - a0);
+                const th = v * Math.PI;
+                return [Math.sin(th) * Math.sin(a) * R, Math.cos(th) * H, Math.sin(th) * Math.cos(a) * R]; // prettier-ignore
+              },
+              {
+                grid: 40,
+                normal: (u, v) => {
+                  const a = a0 + u * (a1 - a0);
+                  const th = v * Math.PI;
+                  return unit([Math.sin(th) * Math.sin(a) / R, Math.cos(th) / H, Math.sin(th) * Math.cos(a) / R]); // prettier-ignore
+                },
+              },
+            ),
+            {
+              pos,
+              flat: 0.2,
+              ...piece,
+              color: (c) => {
+                const top = c.ln[1];
+                if (top > 0.985) return keep(lit(c, "#6b7a2a"));
+                if (top > 0.965) return keep(lit(c, "#c8a03a"));
+                return peel(c);
+              },
+            },
+          );
+          for (const [a, sgn] of [
+            [a0, -1],
+            [a1, 1],
+          ]) {
+            const dir = [Math.sin(a), 0, Math.cos(a)];
+            const nrm = mul([Math.cos(a), 0, -Math.sin(a)], sgn);
+            k.add(
+              k.param(
+                (u, v) => {
+                  const th = u * Math.PI;
+                  return add(mul(dir, Math.sin(th) * v * R * 0.995), [0, Math.cos(th) * v * H * 0.995, 0]); // prettier-ignore
+                },
+                { grid: 32, normal: () => nrm },
+              ),
+              {
+                pos,
+                flat: 0.15,
+                weight: 1.2,
+                ...piece,
+                color: (c) => {
+                  const rho = c.v;
+                  const col = cutFace(c, rho, c.lp[1]);
+                  return keep(mix(col, "#ffffff", 0.3 * spec(c, 30)));
+                },
+              },
             );
-          },
-          color: (c) => {
-            const top = c.ln[1];
-            if (top > 0.985) return keep(lit(c, "#6b7a2a"));
-            if (top > 0.965) return keep(lit(c, "#c8a03a"));
-            return peel(c);
-          },
-        });
-        const cap = add(pos, [0, R * 0.94, 0]);
-        k.add(k.cylinder(0.018, 0.08), {
-          pos: add(cap, [0, 0.03, 0]),
-          weight: 3,
-          pattern: false,
-          color: "#5a4a22",
-        });
-        k.add(leafShape(k, 0.5, 0.15, 0.2), {
-          pos: add(cap, [0.01, 0.02, 0]),
-          rot: [0, -60, 16],
-          flat: 0.2,
-          weight: 1.5,
-          pattern: false,
-          color: leafColor("#2f7a2a", "#7fbf5a"),
-        });
+          }
+          if (i === n - 3) {
+            // The stalk and leaf ride on one wedge (at the back).
+            const cap = add(pos, [0, H, 0]);
+            k.add(k.cylinder(0.018, 0.08), {
+              pos: add(cap, [0, 0.03, 0]),
+              weight: 3,
+              pattern: false,
+              ...piece,
+              color: "#5a4a22",
+            });
+            k.add(leafShape(k, 0.5, 0.15, 0.2), {
+              pos: add(cap, [0.01, 0.02, 0]),
+              rot: [0, -60, 16],
+              flat: 0.2,
+              weight: 1.5,
+              pattern: false,
+              ...piece,
+              color: leafColor("#2f7a2a", "#7fbf5a"),
+            });
+          }
+        }
+        // Drops of juice that squirt up out of the middle as it opens.
+        for (let j = 0; j < 12; j++) {
+          const token = tokens++;
+          const a = k.rand() * TAU;
+          const from = add(pos, [0, H * 0.6, 0]);
+          const sp = 0.5 + 0.8 * k.rand();
+          drops.push({
+            token,
+            from,
+            v: [Math.sin(a) * sp, 2.2 + 1.4 * k.rand(), Math.cos(a) * sp],
+            t0: 0.12 + 0.3 * k.rand(),
+            life: 0.55 + 0.2 * k.rand(),
+          });
+          k.cloud({ count: 30, size: 0.9, pattern: false }, (rand) => ({
+            p: add(from, mul(randDir(rand), 0.025 * Math.cbrt(rand()))),
+            color: mix("#ffb347", "#ff9a1f", rand()),
+            opacity: 0.85,
+            kind: "token",
+            params: [token, 0],
+          }));
+        }
       };
       const half = (pos, yaw, tilt) => {
         const q = quatMul(quatEuler(0, yaw, 0), quatEuler(tilt, 0, 0));
+        const part = k.part("half", { pivot: add(pos, [0, -R * 0.6, 0]) });
         k.add(halfEllipsoid(k, R * 0.95, R * 0.95, R * 0.95), {
           quat: q,
           pos,
+          part,
           flat: 0.2,
           color: peel,
         });
@@ -3281,6 +4699,7 @@ export const RECIPES = {
           {
             quat: q,
             pos,
+            part,
             flat: 0.15,
             interior: 0.08,
             core: "#f98d1c",
@@ -3297,6 +4716,8 @@ export const RECIPES = {
         whole([-0.42, 0, -0.35]);
         half([0.55, -0.1, 0.45], 32, -42);
       }
+      k.data = { wedges, drops, halfOnly: o.style === "half" };
+      if (wedges.length) k.reach(add(wedges[0].pivot, [0, 1.6, 0]));
     },
   },
 
@@ -3314,6 +4735,28 @@ export const RECIPES = {
         ],
       },
     ],
+    controls: [{ key: "open", label: "Cut open", type: "pulse", ease: KIWI_SECS }],
+    action: { key: "open", label: "Cut open" },
+    // A tap cuts the whole kiwi across the middle: the halves slide apart
+    // and turn to show their green faces with the ring of black seeds, then
+    // they turn back and close up. (A lone half rocks.)
+    drive(t, c, out, info) {
+      const s = since(c.open, KIWI_SECS);
+      const d = info.data;
+      if (!d) return;
+      const on = s >= 0;
+      const open = on ? easeOut(band(s, 0.08, 0.6)) * (1 - smooth(band(s, 1.9, 2.5))) : 0;
+      const settle = on ? 0.05 * wobble(s - 0.6, 0.5, 15) : 0;
+      out.tokens = [];
+      for (const h of d.halves) {
+        const q = slerpQ(h.back, IDQ, clamp(open + settle, 0, 1.2));
+        const offset = mul(sub(h.closed, h.open), 1 - open);
+        out.tokens[h.token] = { base: h.open, quat: q, offset };
+        out.tokens[h.face] = { base: h.open, quat: q, offset, visible: open > 0.15 ? 1 : 0 };
+      }
+      out.parts.half = { quat: quatAxisAngle([1, 0, 0], d.halves.length ? 0 : 0.12 * wobble(s, 1.2, 9)) }; // prettier-ignore
+      cuesAt(c, "kiwi", s, [[2.45, { voice: "squish", pitch: 1.6, bright: 0.3, decay: 0.3, vol: 0.4 }]], out); // prettier-ignore
+    },
     build(k, o) {
       const A = 0.46;
       const B = 0.42;
@@ -3348,25 +4791,68 @@ export const RECIPES = {
         }
         return mix("#7fb80f", "#a6d83c", 0.35 * streak + 0.2 * smoothstep(0.6, 0.9, rho));
       };
+      // The whole kiwi is two halves (pieces) that part and turn to show
+      // their faces. Each is built open (so it draws right open) and turned
+      // back at rest; its face is a piece of its own, hidden when closed.
+      const halves = [];
+      let tokens = 0;
       const whole = (pos, rot) => {
-        k.add(k.ellipsoid(A, B, C), {
-          pos,
-          rot,
-          flat: 0.55,
-          jitter: 0.08,
-          interior: 0.14,
-          core: (c) => {
-            const q = turnY(sub(c.p, pos), -rot[1]);
-            return face(q[0] / A, q[1] / B, c);
-          },
-          color: (c) => (Math.abs(c.ln[2]) > 0.985 ? keep(lit(c, "#4a3218")) : skin(c)),
-        });
+        const qk = quatEuler(...rot);
+        const axis = quatRotate(qk, [0, 0, 1]);
+        for (const side of [-1, 1]) {
+          const turn = quatAxisAngle([0, 1, 0], side * KIWI_TURN);
+          const open = add(pos, mul(axis, side * 0.42));
+          const q = quatMul(turn, side > 0 ? quatMul(qk, quatEuler(0, 180, 0)) : qk);
+          const token = tokens++;
+          const faceToken = tokens++;
+          const back = [-turn[0], -turn[1], -turn[2], turn[3]];
+          halves.push({ token, face: faceToken, open, closed: pos, back });
+          k.add(halfEllipsoid(k, A, B, C), {
+            quat: q,
+            pos: open,
+            flat: 0.55,
+            jitter: 0.08,
+            kind: "token",
+            params: [token, 0],
+            // Lit as it lies at rest (closed), so the two halves match.
+            color: (c) => {
+              const cc = Object.assign({}, c, { n: quatRotate(back, c.n) });
+              return c.v < 0.03 ? keep(lit(cc, "#4a3218")) : skin(cc);
+            },
+          });
+          k.add(
+            k.param(
+              (u, v) => {
+                const a = u * TAU;
+                return [Math.cos(a) * v * A * 0.99, Math.sin(a) * v * B * 0.99, 0];
+              },
+              { grid: 72, normal: () => [0, 0, 1] },
+            ),
+            {
+              quat: q,
+              pos: open,
+              flat: 0.15,
+              weight: 1.3,
+              kind: "token",
+              params: [faceToken, 0],
+              color: (c) => {
+                const col = face(c.lp[0] / A, c.lp[1] / B, c);
+                if (col.keep) return col;
+                return keep(mix(col, "#ffffff", 0.4 * spec(c, 30)));
+              },
+            },
+          );
+        }
+        k.reach(add(pos, mul(axis, 0.42 + C * 0.8)));
+        k.reach(add(pos, mul(axis, -0.42 - C * 0.8)));
       };
       const half = (pos, yaw, tilt) => {
         const q = quatMul(quatEuler(0, yaw, 0), quatEuler(tilt, 0, 0));
+        const part = k.part("half", { pivot: add(pos, [0, -0.3, 0]) });
         k.add(halfEllipsoid(k, A, B, C * 0.9), {
           quat: q,
           pos,
+          part,
           flat: 0.55,
           jitter: 0.08,
           color: skin,
@@ -3382,6 +4868,7 @@ export const RECIPES = {
           {
             quat: q,
             pos,
+            part,
             flat: 0.15,
             weight: 1.3,
             interior: 0.06,
@@ -3394,16 +4881,53 @@ export const RECIPES = {
           },
         );
       };
-      if (o.style === "whole") whole([0, 0, 0], [0, 30, 0]);
+      // The whole one lies side on to the viewer, so its halves part
+      // across the view.
+      if (o.style === "whole") whole([0, 0, 0], [0, KIWI_YAW, 0]);
       else if (o.style === "half") half([0, 0, 0], 30, -30);
       else {
-        whole([-0.38, 0, -0.35], [0, 60, 0]);
-        half([0.42, 0.02, 0.38], 32, -36);
+        whole([-0.66, 0, -0.55], [0, KIWI_YAW, 0]);
+        half([0.5, 0.02, 0.4], 32, -36);
       }
+      k.data = { halves };
     },
   },
 
   pineapple: {
+    controls: [{ key: "slice", label: "Slice into rings", type: "pulse", ease: PINE_SECS }],
+    action: { key: "slice", label: "Slice into rings" },
+    // A tap chops the pineapple into five rings, top first: with each chop
+    // everything above lifts a little and leans towards you, until the
+    // rings stand apart in a leaning stack showing their golden faces and
+    // pale cores. Then they drop back down onto each other.
+    drive(t, c, out) {
+      const s = since(c.slice, PINE_SECS);
+      const on = s >= 0;
+      const lean = [Math.cos(0.55), 0, -Math.sin(0.55)];
+      const side = [Math.sin(0.55 + Math.PI / 2), 0, Math.cos(0.55 + Math.PI / 2)];
+      let y = 0;
+      let x = 0;
+      for (let i = 0; i < PINE_RINGS; i++) {
+        if (i > 0 && on) {
+          // Cut i (under ring i) is chopped top first, then all close again.
+          const t0 = 0.1 + 0.17 * (PINE_RINGS - 1 - i);
+          const g = easeOut(band(s, t0, t0 + 0.3)) * (1 - easeIn(band(s, 2.0 + 0.06 * i, 2.45 + 0.06 * i))); // prettier-ignore
+          y += 0.2 * g;
+          x += 0.1 * g;
+        }
+        const tilt = on && i > 0 ? (0.32 * y) / (0.2 * (PINE_RINGS - 1)) : 0;
+        out.parts[`ring${i}`] = {
+          offset: add([0, y, 0], mul(side, x)),
+          quat: quatAxisAngle(lean, tilt),
+        };
+      }
+      const list = [];
+      for (let i = 1; i < PINE_RINGS; i++) {
+        list.push([0.1 + 0.17 * (PINE_RINGS - 1 - i), { voice: "chop", f: 300 + 30 * i, decay: 0.8, vol: 0.8 }]); // prettier-ignore
+        list.push([2.45 + 0.06 * i, { voice: "wood", f: 330 - 20 * i, decay: 0.9, vol: 0.5 }]);
+      }
+      cuesAt(c, "pineapple", s, list, out);
+    },
     build(k) {
       const pts = [
         [0, -0.86],
@@ -3426,6 +4950,14 @@ export const RECIPES = {
         const db = fb - Math.round(fb);
         return { d: Math.max(Math.abs(da), Math.abs(db)), da, db };
       };
+      // Five rings, each a part; the crown goes with the top one.
+      const cuts = [];
+      for (let i = 0; i <= PINE_RINGS; i++) cuts.push(-0.86 + (1.64 * i) / PINE_RINGS);
+      const ringOf = (y) => clamp(Math.floor(((y + 0.86) / 1.64) * PINE_RINGS), 0, PINE_RINGS - 1);
+      const rings = [];
+      for (let i = 0; i < PINE_RINGS; i++)
+        rings.push(k.part(`ring${i}`, { pivot: [0, (cuts[i] + cuts[i + 1]) / 2, 0] }));
+      const radius = radiusAt(pts);
       k.add(
         revolve(
           k,
@@ -3437,6 +4969,7 @@ export const RECIPES = {
           { grid: 120, thick: 0.6 },
         ),
         {
+          part: (c) => rings[ringOf(c.p[1])],
           flat: 0.25,
           interior: 0.12,
           core: (c) =>
@@ -3457,6 +4990,29 @@ export const RECIPES = {
           },
         },
       );
+      // The cut faces on top of each ring (all but the top one): golden
+      // flesh with fibres running out from a pale core, inside the skin.
+      for (let i = 0; i < PINE_RINGS - 1; i++) {
+        const y = cuts[i + 1];
+        const R = radius(y) * 0.99;
+        k.add(topDisc(k, R), {
+          pos: [0, y - 0.004, 0],
+          part: rings[i],
+          flat: 0.15,
+          weight: 1.4,
+          pattern: false,
+          color: (c) => {
+            const r = c.v;
+            const a = c.u * TAU;
+            if (r > 0.93) return keep(lit(c, mix("#7a5a1c", "#4d3a14", c.rand()), 0.8, 0.3));
+            if (r > 0.86) return keep(mix("#f3e39a", "#e8c85a", c.rand() * 0.5));
+            if (r < 0.2) return keep(mix("#f7efc4", "#efe2a2", c.rand() * 0.4));
+            const fibre = c.noise(Math.cos(a) * 3 + a * 9, r * 2.5, 0.7 + i);
+            const col = mix("#f9d24a", "#f3bd2c", 0.5 + 0.5 * fibre);
+            return keep(mix(col, "#ffffff", 0.25 * spec(c, 30)));
+          },
+        });
+      }
       // A crown of spiky leaves.
       const leaves = 30;
       for (let i = 0; i < leaves; i++) {
@@ -3481,6 +5037,7 @@ export const RECIPES = {
           { grid: 20 },
         );
         k.add(blade, {
+          part: rings[PINE_RINGS - 1],
           flat: 0.2,
           weight: 1.4,
           pattern: false,
@@ -3491,10 +5048,44 @@ export const RECIPES = {
           },
         });
       }
+      k.reach([0.3, 1.6 + 0.2 * (PINE_RINGS - 1), 0]);
     },
   },
 
   cherries: {
+    controls: [{ key: "swing", label: "Swing", type: "pulse", ease: CHERRY_SECS }],
+    action: { key: "swing", label: "Swing" },
+    // A tap flicks the pair: each cherry swings out on its own stem from the
+    // joint, and they swing back and knock together (a plink each time),
+    // bouncing apart again until they settle. The joint bobs as they go.
+    drive(t, c, out) {
+      const s = since(c.swing, CHERRY_SECS);
+      let [a, b] = [0, 0];
+      let bob = 0;
+      let side = [0, 0];
+      if (s >= 0) {
+        const f = CHERRY_SIM.frames[Math.min(CHERRY_SIM.frames.length - 1, Math.round(s / CHERRY_SIM.dt))]; // prettier-ignore
+        const end = 1 - smooth(band(s, CHERRY_SECS - 0.7, CHERRY_SECS - 0.05));
+        [a, b] = [f[0] * end, f[1] * end];
+        bob = 0.05 * wobble(s, 1.4, 17) * end;
+        const fade = Math.exp(-1.1 * s) * end;
+        side = [0.1 * Math.sin(s * 6.3 + 0.4) * fade, -0.08 * Math.sin(s * 5.7 + 1.9) * fade];
+      }
+      const turn = (z, x) => quatMul(quatAxisAngle([0, 0, 1], z), quatAxisAngle([1, 0, 0], x));
+      out.parts.left = { quat: turn(a, side[0]), offset: [0, bob, 0] };
+      out.parts.right = { quat: turn(b, side[1]), offset: [0, bob, 0] };
+      out.parts.leaf = { quat: quatAxisAngle([0, 0, 1], 0.4 * (a + b) * 0.5), offset: [0, bob, 0] };
+      cuesAt(
+        c,
+        "cherries",
+        s,
+        CHERRY_SIM.hits.map((h, i) => [
+          h.t,
+          { voice: "pop", f: i % 2 ? "C6" : "G5", decay: 1.1, vol: Math.min(1, 0.35 + h.v) },
+        ]),
+        out,
+      );
+    },
     build(k) {
       const shape = revolve(
         k,
@@ -3511,6 +5102,8 @@ export const RECIPES = {
         null,
         { grid: 80, thick: 0.35 },
       );
+      const joint = [0.06, 1.0, 0];
+      const parts = ["left", "right"].map((n) => k.part(n, { pivot: joint, axis: [0, 0, 1] }));
       const cherries = [
         { pos: [-0.36, -0.42, 0.05], rot: [0, 0, 8] },
         { pos: [0.34, -0.5, -0.06], rot: [0, 40, -6] },
@@ -3523,9 +5116,10 @@ export const RECIPES = {
         );
         return glossy(c, col, 1, 36, 0.72, 0.4);
       };
-      for (const ch of cherries) {
+      cherries.forEach((ch, i) => {
         k.add(shape, {
           ...ch,
+          part: parts[i],
           flat: 0.2,
           interior: 0.1,
           core: (c) => (len(sub(c.p, ch.pos)) < 0.1 ? "#e8d0a0" : "#8a0f1e"),
@@ -3533,6 +5127,7 @@ export const RECIPES = {
         });
         k.add(shape, {
           ...ch,
+          part: parts[i],
           share: 0.01,
           size: 0.7,
           pattern: false,
@@ -3540,8 +5135,7 @@ export const RECIPES = {
           params: [0.8, 0],
           color: (c) => (spec(c, 36) > 0.5 ? keep("#ffffff") : null),
         });
-      }
-      const joint = [0.06, 1.0, 0];
+      });
       const stems = [
         [
           add(cherries[0].pos, [0.02, 0.24, 0]),
@@ -3556,25 +5150,30 @@ export const RECIPES = {
           joint,
         ],
       ];
-      for (const s of stems) {
+      stems.forEach((st, i) => {
         k.add(
-          k.tube(spline(s), (t) => 0.024 - 0.006 * t, { caps: true }),
+          k.tube(spline(st), (t) => 0.024 - 0.006 * t, { caps: true }),
           {
+            part: parts[i],
             flat: 0.3,
             weight: 2,
             pattern: false,
             color: (c) => lit(c, mix("#7a9a2a", "#6b4a22", smoothstep(0.6, 1, c.t ?? 0))),
           },
         );
-      }
+      });
       k.add(leafShape(k, 0.62, 0.2, 0.25), {
         pos: add(joint, [0, -0.02, 0]),
         rot: [20, -20, -14],
+        part: k.part("leaf", { pivot: joint, axis: [0, 0, 1] }),
         flat: 0.2,
         weight: 1.4,
         pattern: false,
         color: leafColor("#3f8f2f", "#9fd06a"),
       });
+      // They swing out about a third of a turn each way.
+      k.reach([-1.0, -0.2, 0]);
+      k.reach([1.0, -0.2, 0]);
     },
   },
 
@@ -3592,6 +5191,46 @@ export const RECIPES = {
         ],
       },
     ],
+    controls: [{ key: "drop", label: "Drop grapes", type: "pulse", ease: GRAPE_SECS }],
+    action: { key: "drop", label: "Drop grapes" },
+    // A tap shakes the bunch: one after another, a dozen grapes on the
+    // front come off, drop and bounce on the table and roll a little, each
+    // on its own path. Then they hop back up to their places, one by one.
+    drive(t, c, out, info) {
+      const s = since(c.drop, GRAPE_SECS);
+      const d = info.data;
+      if (!d) return;
+      out.tokens = d.drops.map((g) => {
+        if (s < g.t0) return { base: g.home };
+        const back = GRAPE_BACK + g.lag;
+        if (s >= back + 0.45) return { base: g.home };
+        const u = s - g.t0;
+        // Falling and bouncing, then rolling out a little.
+        const fall = bounce(u, g.h, 0.7, 12, 0.35);
+        const first = g.t1;
+        const out1 = g.vh * Math.min(u, first) + (u > first ? 0.08 * (1 - Math.exp(-(u - first) / 0.22)) : 0); // prettier-ignore
+        let p = [g.home[0] + g.dir[0] * out1, g.land + fall.y, g.home[2] + g.dir[2] * out1];
+        // It tumbles as it falls, then rolls (turning by distance / radius).
+        const roll = u < first ? g.spin * (u / first) : g.spin + (out1 - g.vh * first) / 0.16;
+        let q = quatAxisAngle(cross([0, 1, 0], g.dir), roll);
+        if (s >= back) {
+          const f = smooth(band(s, back, back + 0.45));
+          const rest = [p[0], p[1], p[2]];
+          p = hopTo(rest, g.home, f, 0.22);
+          q = slerpQ(q, IDQ, f);
+        }
+        return { base: g.home, offset: sub(p, g.home), quat: q };
+      });
+      const list = [];
+      d.drops.forEach((g, i) => {
+        landings(g.h, 0.7, 12, 0.35, 2).forEach(
+          (x, n) =>
+          list.push([g.t0 + x, { voice: "pop", f: 260 + 40 * (i % 5), decay: 0.9, vol: n ? 0.35 : 0.8 }]), // prettier-ignore
+        );
+        list.push([GRAPE_BACK + g.lag + 0.44, { voice: "pop", f: 700 + 50 * (i % 4), decay: 0.5, vol: 0.4 }]); // prettier-ignore
+      });
+      cuesAt(c, "grapes", s, list, out);
+    },
     build(k, o) {
       const [base, bloom, dark] = {
         purple: ["#4e2464", "#9b86b8", "#2a0f38"],
@@ -3605,6 +5244,11 @@ export const RECIPES = {
         col = mix(col, dark, 0.45 * smoothstep(0.2, -0.8, c.n[1]));
         return glossy(c, col, 0.55, 30, 0.72, 0.42);
       };
+      // The grapes that fall: a dozen on the front (towards the viewer),
+      // from the second row down, each a piece on its own path.
+      const view = [Math.sin(0.45), 0, Math.cos(0.45)];
+      const floor = -0.97;
+      const drops = [];
       const rows = 7;
       for (let j = 0; j < rows; j++) {
         const y = 0.5 - j * 0.21;
@@ -3613,12 +5257,22 @@ export const RECIPES = {
         for (let i = 0; i < n; i++) {
           const a = (i / n) * TAU + j * 0.7 + k.rand() * 0.2;
           const p = [Math.sin(a) * rr, y + (k.rand() - 0.5) * 0.06, Math.cos(a) * rr];
+          const dir = [Math.sin(a), 0, Math.cos(a)];
+          const front = dot(dir, view);
+          let token = null;
+          if (j >= 1 && j <= 5 && front > 0.2 && drops.length < 10 && (j + i) % 3 !== 1) {
+            token = drops.length;
+            const h = p[1] - (floor + 0.16);
+            drops.push({ home: p, h, land: floor + 0.16, spin: 0.3 + 0.3 * k.rand() });
+          }
+          // A falling grape tumbles, so it has no inside to show through.
           k.add(grape, {
             pos: p,
             rot: [k.rand() * 30, a * 57, 0],
             flat: 0.2,
-            interior: 0.06,
-            core: mix(bloom, "#dfe8a8", 0.5),
+            ...(token === null
+              ? { interior: 0.06, core: mix(bloom, "#dfe8a8", 0.5) }
+              : { kind: "token", params: [token, 0] }),
             color: grapeColor,
           });
         }
@@ -3630,6 +5284,28 @@ export const RECIPES = {
           });
         }
       }
+      // They come off one after another, top first; each lands after its
+      // first fall (t1) and later hops home a little after the one before.
+      // Each lands on its own spot of an arc in front of the bunch (two
+      // rows, so they do not pile up), the spot nearest its side.
+      const side = (g) => Math.atan2(g.home[0], g.home[2]) - 0.45;
+      drops.sort((x, y) => side(x) - side(y));
+      drops.forEach((g, i) => {
+        const a = 0.45 + (-1.25 + (2.5 * i) / (drops.length - 1));
+        const r = i % 2 ? 0.86 : 0.62;
+        const to = [Math.sin(a) * r, g.land, Math.cos(a) * r];
+        const flat = [to[0] - g.home[0], 0, to[2] - g.home[2]];
+        g.dir = unit(flat);
+        g.t1 = landings(g.h, 0.7, 12, 0.35, 1)[0];
+        g.vh = len(flat) / g.t1;
+        k.reach(add(to, mul(g.dir, 0.25)));
+      });
+      drops.sort((x, y) => y.home[1] - x.home[1]);
+      drops.forEach((g, i) => {
+        g.t0 = 0.06 + 0.1 * i;
+        g.lag = 0.1 * (drops.length - 1 - i);
+      });
+      k.data = { drops };
       // The stalk, a curly tendril and a leaf.
       k.add(
         k.tube(
@@ -3692,6 +5368,77 @@ export const RECIPES = {
         ],
       },
     ],
+    controls: [{ key: "pop", label: "Pop the stone", type: "pulse", ease: AVO_SECS }],
+    action: { key: "pop", label: "Pop the stone" },
+    // A tap pops the stone out of its half: it flies over and drops into
+    // the empty half with a thock, rocking it, then pops back home and the
+    // first half rocks. (With one half, it pops up and drops back in.)
+    drive(t, c, out, info) {
+      const s = since(c.pop, AVO_SECS);
+      const d = info.data;
+      if (!d) return;
+      const rock = (name, from) => {
+        const h = d.halves[name];
+        if (!h) return IDQ;
+        const a = 0.12 * wobble(s - from, 1.1, 11);
+        const q = quatAxisAngle(h.axis, a);
+        out.parts[name] = { quat: q };
+        return q;
+      };
+      const two = !!d.halves.b;
+      const qa = rock("a", two ? d.back + 0.75 : 0.8);
+      const qb = two ? rock("b", 0.75) : IDQ;
+      // Where the stone sits in a (rocking) half.
+      const seat = (name, q) => {
+        const h = d.halves[name];
+        return add(h.pivot, quatRotate(q, sub(h.seat, h.pivot)));
+      };
+      let p = seat("a", qa);
+      let spin = IDQ;
+      if (s >= 0) {
+        const flights = two
+          ? [
+              [0.05, "a", "b"],
+              [d.back, "b", "a"],
+            ]
+          : [[0.05, "a", "a"]];
+        for (const [t0, from, to] of flights) {
+          if (s < t0) break;
+          const f = band(s, t0, t0 + 0.7);
+          const qf = from === "a" ? qa : qb;
+          const qt = to === "a" ? qa : qb;
+          p = hopTo(seat(from, qf), seat(to, qt), f, 0.55);
+          spin = quatAxisAngle([1, 0, 0.3], 0.9 * Math.sin(Math.PI * f));
+          if (f >= 1) {
+            // A little bounce as it lands.
+            const b = s - t0 - 0.7;
+            p[1] += 0.06 * Math.max(0, Math.sin((Math.PI * b) / 0.22)) * (b < 0.22 ? 1 : 0);
+          }
+        }
+      }
+      // Two copies of the stone: one built in each half, so each draws
+      // over the flesh of the half it sits in. The one built in the empty
+      // half flies; they swap just after it leaves home and just before it
+      // is back, while it moves fast.
+      const away = two && s >= 0.12 && s < d.back + 0.62;
+      for (const [name, at] of [
+        ["stone", d.stones.a],
+        ["stoneB", d.stones.b],
+      ]) {
+        if (!at) continue;
+        const shown = name === "stone" ? !away : away;
+        out.parts[name] = { offset: sub(p, at), quat: spin, visible: shown ? 1 : 0 };
+      }
+      const list = two
+        ? [
+            [0.05, { voice: "pop", f: 330, decay: 1, vol: 0.7 }],
+            [0.75, { voice: "wood", f: 240, decay: 1.6, bright: 0.2 }],
+            [d.back, { voice: "pop", f: 300, decay: 1, vol: 0.7 }],
+            [d.back + 0.7, { voice: "wood", f: 210, decay: 1.6, bright: 0.2 }],
+          ]
+        : [[0.75, { voice: "wood", f: 230, decay: 1.6, bright: 0.2 }]];
+      cuesAt(c, "avocado", s, list, out);
+    },
     build(k, o) {
       const pts = [
         [0, -0.62],
@@ -3729,11 +5476,20 @@ export const RECIPES = {
         }
         return col;
       };
-      const half = (pos, yaw, stone) => {
+      // Each half is a part that can rock on its back; the stone is its own
+      // part. It is built where it lands in the empty half (so it draws
+      // over that half's flesh) and moved to its own half at rest.
+      const halves = {};
+      const half = (name, pos, yaw, hollow) => {
         const q = quatMul(quatEuler(0, yaw, 0), quatEuler(-52, 0, 0));
+        const pivot = add(pos, quatRotate(q, [0, pitY, -0.4]));
+        const axis = quatRotate(q, [0, 1, 0]);
+        const part = k.part(name, { pivot, axis });
+        halves[name] = { pivot, axis, seat: add(pos, quatRotate(q, [0, pitY, 0.02])), q };
         k.add(revolve(k, pts, null, { grid: 80, arc: [Math.PI / 2, (3 * Math.PI) / 2] }), {
           quat: q,
           pos,
+          part,
           flat: 0.3,
           color: skin,
         });
@@ -3749,33 +5505,47 @@ export const RECIPES = {
           {
             quat: q,
             pos,
+            part,
             flat: 0.15,
             interior: 0.08,
             core: "#d6e07a",
-            color: (c) => keep(lit(c, flesh(c.lp[0], c.lp[1], !stone), 0.82, 0.25)),
+            color: (c) => keep(lit(c, flesh(c.lp[0], c.lp[1], hollow), 0.82, 0.25)),
           },
         );
-        if (stone) {
-          k.add(k.sphere(0.235), {
-            quat: q,
-            pos: add(pos, quatRotate(q, [0, pitY, 0.02])),
-            flat: 0.2,
-            weight: 1.4,
-            color: (c) =>
-              glossy(
-                c,
-                mix("#8a5226", "#5e3316", 0.5 + 0.5 * c.fbm(c.p[0] * 8, c.p[1] * 8, c.p[2] * 8, 2)),
-                0.8,
-                30,
-              ),
-          });
-        }
       };
-      if (o.style === "pit") half([0, 0, 0], 30, true);
+      if (o.style === "pit") half("a", [0, 0, 0], 30, false);
       else {
-        half([-0.36, 0, -0.1], 18, true);
-        half([0.42, -0.02, 0.26], 42, false);
+        half("a", [-0.36, 0, -0.1], 18, false);
+        half("b", [0.42, -0.02, 0.26], 42, true);
       }
+      const stones = {};
+      for (const [name, h] of [
+        ["stone", halves.a],
+        ["stoneB", halves.b],
+      ]) {
+        if (!h) continue;
+        stones[name === "stone" ? "a" : "b"] = h.seat;
+        k.add(k.sphere(0.235), {
+          quat: halves.a.q,
+          pos: h.seat,
+          part: k.part(name, { pivot: h.seat }),
+          flat: 0.2,
+          weight: name === "stone" ? 1.4 : 0.8,
+          color: (c) =>
+            glossy(
+              c,
+              mix(
+                "#8a5226",
+                "#5e3316",
+                0.5 + 0.5 * c.fbm(c.lp[0] * 8, c.lp[1] * 8, c.lp[2] * 8, 2),
+              ),
+              0.8,
+              30,
+            ),
+        });
+      }
+      k.data = { halves, stones, back: 1.45 };
+      k.reach(add(halves.a.seat, [0, 0.9, 0]));
     },
   },
 };
