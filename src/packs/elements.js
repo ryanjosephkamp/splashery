@@ -1858,7 +1858,7 @@ export const RECIPES = {
         };
       } else out.parts.splash = { visible: 0 };
       const kr = 1 + 11 * easeOut(band(w, 0, 1.6));
-      out.parts.ripple = { scale: kr, visible: w > 0 ? Math.pow(kr, -0.45) : 0 };
+      out.parts.ripple = { scale: kr, visible: w > 0 && w < 1.8 ? Math.pow(kr, -0.45) : 0 };
       out.morph = [0, w > 0 ? band(w, 0, 0.12) * (1 - ease(band(w, 0.5, 1.7))) : 0];
     },
     build(k) {

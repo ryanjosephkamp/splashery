@@ -525,6 +525,98 @@ test("every E3 toy has its own tap, and a toy that changes shape is back in shap
   }
 });
 
+const E4 = {
+  nature:
+    "oak pine palm maple bonsai willow sunflower rose tulip daisy lotus mushroom fern saguaro coral pinecone acorn succulent bamboo rocks kelp",
+  elements: "lava-lamp ice-statue tornado rainbow iceberg waterfall ocean-wave",
+};
+
+test("every E4 toy has its own tap, and at rest its pieces are home and its shape is back", async () => {
+  const { buildRecipe } = await import("../src/kit.js");
+  const { KINDS } = await import("../src/effects.js");
+  // Toys that sway by a morph all the time (the willow and the kelp bend
+  // gently at rest), and those whose hidden pieces rest folded away with
+  // their channel at 1 (the lotus's stalk, the coral's polyps), are left
+  // out of the shape check.
+  const IDLE = ["willow", "kelp", "lotus", "coral"];
+  for (const [pack, ids] of Object.entries(E4)) {
+    const { RECIPES } = await import(`../src/packs/${pack}.js`);
+    for (const id of ids.split(" ")) {
+      const r = RECIPES[id];
+      const ctl = r.controls?.find((c) => c.key === r.action?.key);
+      expect(ctl?.type, id).toBe("pulse");
+      const options = Object.fromEntries((r.options || []).map((o) => [o.key, o.default]));
+      const it = buildRecipe(r, { seed: 5, count: 6000, options }, () => {});
+      let b = it.next();
+      while (!b.done) b = it.next();
+      const data = b.value.kit.data;
+      const run = (v, n = 1) => {
+        const out = { parts: {}, glow: [1, 1, 1, 0], amount: 1, grow: 1, cues: [], fx: {}, tokens: null }; // prettier-ignore
+        const c = { [ctl.key]: v };
+        for (const x of r.controls) if (!(x.key in c)) c[x.key] = x.default ?? 0;
+        r.drive(1.5, c, out, { time: 1.5, R: 1, tap: { n, point: null }, data });
+        return out;
+      };
+      for (const v of [0.8, 0.5, 0.2, 0]) {
+        for (const n of [1, 2]) {
+          const out = run(v, n);
+          for (const pd of Object.values(out.parts))
+            for (const x of [pd.angle, pd.visible, pd.scale, ...(pd.offset || []), ...(pd.quat || [])]) // prettier-ignore
+              if (x !== undefined) expect(Number.isFinite(x), `${id} ${v}`).toBe(true);
+          for (const tk of out.tokens || [])
+            for (const x of [...(tk?.offset || []), ...(tk?.quat || []), tk?.visible])
+              if (x !== undefined) expect(Number.isFinite(x), `${id} token ${v}`).toBe(true);
+          for (const m of out.morph || []) expect(Number.isFinite(m), id).toBe(true);
+        }
+      }
+      // The effect ends where the toy rests: played through frame by frame
+      // (drive may keep state between frames), its last moment and the rest
+      // pose show the same things in the same places, so nothing jumps.
+      // (Channels are left to the shape check below: light channels park
+      // wherever they are dark.)
+      const c = {};
+      for (const x of r.controls) c[x.key] = x.default ?? 0;
+      let clock = 1.5;
+      const frame = (v) => {
+        const out = { parts: {}, glow: [1, 1, 1, 0], amount: 1, grow: 1, cues: [], fx: {}, tokens: null }; // prettier-ignore
+        c[ctl.key] = v;
+        r.drive(clock, c, out, { time: clock, R: 1, tap: { n: 1, point: null }, data });
+        return out;
+      };
+      frame(0);
+      for (let v = 1; v > 0.001; v -= 0.01) {
+        clock += 0.01 * ctl.ease;
+        frame(v);
+      }
+      const last = frame(0.0004);
+      const rest = frame(0);
+      const shown = (x) => (x?.visible ?? 1) * (x?.scale ?? 1);
+      const far = (a, b) => Math.hypot(...[0, 1, 2].map((i) => (a?.offset?.[i] ?? 0) - (b?.offset?.[i] ?? 0))); // prettier-ignore
+      for (const [name, pd] of Object.entries(last.parts)) {
+        const q = rest.parts[name];
+        expect(Math.abs(shown(pd) - shown(q)), `${id} ${name} shown at the end`).toBeLessThan(0.05);
+        if (shown(pd) > 0.05) expect(far(pd, q), `${id} ${name} at the end`).toBeLessThan(0.03);
+      }
+      (last.tokens || []).forEach((tk, i) => {
+        const q = rest.tokens?.[i];
+        expect(Math.abs(shown(tk) - shown(q)), `${id} piece ${i} shown at the end`).toBeLessThan(0.05); // prettier-ignore
+        if (shown(tk) > 0.05) expect(far(tk, q), `${id} piece ${i} at the end`).toBeLessThan(0.03);
+      });
+      // At rest the shape is back: every channel that carries morph splats
+      // is near 0 (light channels park outside the range they glow in).
+      const { anim, count } = b.value.kit.buf;
+      const shaped = new Set();
+      for (let i = 0; i < count; i++)
+        if (anim[i * 4 + 1] === KINDS.morph) shaped.add(Math.floor(anim[i * 4 + 3] / 4096));
+      if (!IDLE.includes(id))
+        for (const ch of shaped)
+          expect(Math.abs(run(0).morph?.[ch] ?? 0), `${id} channel ${ch} at rest`).toBeLessThan(
+            0.05,
+          );
+    }
+  }
+});
+
 test("a morph splat packs the offset to its target; band, fade and skin pack their channel", async () => {
   const { Kit } = await import("../src/kit.js");
   const { KINDS, MORPH_RANGE } = await import("../src/effects.js");

@@ -1020,10 +1020,15 @@ export const RECIPES = {
       const on = c.shake > 0;
       out.parts.crown = { angle: on ? 0.07 * shake(s, 1.8, 9) : 0 };
       const nuts = info.data?.nuts || [];
-      out.tokens = nuts.map((n) => (on ? coconutAt(n, s) : { base: n.home }));
+      out.tokens = nuts.map((n) =>
+        on && s < PALM_SECS - 0.2 ? coconutAt(n, s) : { base: n.home },
+      );
       // New coconuts swell in the crown; at the end they take the fallen
       // ones' place (the same coconuts, so nothing jumps).
-      out.parts.regrow = { visible: on && s < PALM_SECS - 0.05 ? 1 : 0, scale: on ? 0.02 + 0.98 * ease(band(s, 3.4, 5.2)) : 1 }; // prettier-ignore
+      // At the very end the coconuts themselves are back in the crown and
+      // the new ones hide under them (the same shape in the same place).
+      const done = s >= PALM_SECS - 0.2;
+      out.parts.regrow = { visible: on && !done ? 1 : 0, scale: on ? 0.02 + 0.98 * ease(band(s, 3.4, 5.2)) : 1 }; // prettier-ignore
       crossing(
         c,
         "palm",
@@ -1103,7 +1108,7 @@ export const RECIPES = {
           kind: "token",
           params: [i, 0],
         });
-        k.add(k.ellipsoid(0.085, 0.095, 0.085), { ...look, pos: home, part: regrow, weight: 1 });
+        k.add(k.ellipsoid(0.085, 0.095, 0.085), { ...look, pos: home, part: regrow });
         nuts.push(planCoconut(k, home, i, a));
       }
       k.data = { nuts };
