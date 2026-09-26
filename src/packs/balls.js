@@ -642,6 +642,25 @@ const nlerp = (a, b, t) => {
   return q.map((v) => v / l);
 };
 
+// A flight through air that slows a light ball hard (drag that grows with
+// the square of its speed, falling no faster than vt): from the floor up to
+// H, then down again, slowly. drift(u) moves it sideways on the way.
+function dragFlight(H, g, vt, { drift, ...more } = {}) {
+  const phi = Math.atan(Math.sqrt(Math.exp((2 * g * H) / (vt * vt)) - 1));
+  const up = (vt * phi) / g;
+  const T = up + (vt / g) * Math.acosh(Math.exp((H * g) / (vt * vt)));
+  const y = (e) =>
+    e < up
+      ? ((vt * vt) / g) * Math.log(Math.cos(phi - (g * e) / vt) / Math.cos(phi))
+      : H - ((vt * vt) / g) * Math.log(Math.cosh((g * (e - up)) / vt));
+  const pos = (u, e) => {
+    const p = drift ? drift(u) : [0, 0, 0];
+    p[1] = Math.max(0, y(e ?? u * T));
+    return p;
+  };
+  return { path: T, pos, ...more };
+}
+
 // Bounces that lose height: from the floor, each flight is `e` times shorter
 // and e^2 lower than the last. opts: h (the first height), e (restitution),
 // n (how many), w (contact time), squash (at the first landing; less as the
@@ -878,8 +897,8 @@ const BASEBALL = [
   // The wind-up: back towards the camera and up, in the hand.
   { path: 0.24, pos: (u) => lerp3([0, 0, 0], at3(0.08, 0.28, 0.4), easeIO(u)) },
   {
-    path: 0.52,
-    pos: (u) => add3(lerp3(at3(0.08, 0.28, 0.4), at3(0.12, 0.42, -2.6), u), at3(-0.42 * u * u, -0.2 * u * u)), // prettier-ignore
+    path: 0.58,
+    pos: (u) => add3(lerp3(at3(0.08, 0.28, 0.4), at3(0.12, 0.42, -2.6), u), at3(-0.62 * u * u * u, -0.26 * u * u)), // prettier-ignore
     spin: 5,
     axis: CURVE_AXIS,
   },
@@ -931,34 +950,19 @@ const SOFTBALL = [
 // Beach ball: punched up, the air slows it at once (a light ball with a lot
 // of drag); it floats down at its slow falling speed, drifting and turning
 // lazily, lands soft with a wobble and bobs to a stop.
-const BEACH = (() => {
-  const g = 2.5;
-  const vt = 0.9;
-  const H = 0.6;
-  const phi = Math.atan(Math.sqrt(Math.exp((2 * g * H) / (vt * vt)) - 1));
-  const up = (vt * phi) / g;
-  const down = (vt / g) * Math.acosh(Math.exp((H * g) / (vt * vt)));
-  const T = up + down;
-  const y = (e) =>
-    e < up
-      ? ((vt * vt) / g) * Math.log(Math.cos(phi - (g * e) / vt) / Math.cos(phi))
-      : H - ((vt * vt) / g) * Math.log(Math.cosh((g * (e - up)) / vt));
-  const drift = (u) => at3(0.34 * Math.sin(Math.PI * u), 0, -0.12 * Math.sin(TAU * u));
-  const pos = (u, e) => {
-    const p = drift(u);
-    p[1] = Math.max(0, y(e ?? u * T));
-    return p;
-  };
-  return [
-    { path: T, pos, spin: 0.3, axis: TOWARD },
-    { hit: 0.16, squash: 0.22, ring: 3.2, damp: 4.5, spin: 0.2, axis: TOWARD },
-    { fly: { h: 0.1 }, g: 3, spin: 0.2, axis: TOWARD },
-    { hit: 0.12, squash: 0.1, ring: 3.2, damp: 5, spin: 0.1, axis: TOWARD, cue: BEACH_BOING(0.5) },
-    { fly: { h: 0.03 }, g: 3, spin: 0.1, axis: TOWARD },
-    { hit: 0.08, squash: 0.04, ring: 3.2, damp: 6 },
-    spinDown(0.35, 0.08, TOWARD),
-  ];
-})();
+const BEACH = [
+  dragFlight(0.6, 2.5, 0.9, {
+    drift: (u) => at3(0.34 * Math.sin(Math.PI * u), 0, -0.12 * Math.sin(TAU * u)),
+    spin: 0.3,
+    axis: TOWARD,
+  }),
+  { hit: 0.16, squash: 0.22, ring: 3.2, damp: 4.5, spin: 0.2, axis: TOWARD },
+  { fly: { h: 0.1 }, g: 3, spin: 0.2, axis: TOWARD },
+  { hit: 0.12, squash: 0.1, ring: 3.2, damp: 5, spin: 0.1, axis: TOWARD, cue: BEACH_BOING(0.5) },
+  { fly: { h: 0.03 }, g: 3, spin: 0.1, axis: TOWARD },
+  { hit: 0.08, squash: 0.04, ring: 3.2, damp: 6 },
+  spinDown(0.35, 0.08, TOWARD),
+];
 function BEACH_BOING(k) {
   return { voice: "boing", f: 240, to: 1.4, rate: 9, decay: 0.7, vol: k };
 }
@@ -1086,32 +1090,24 @@ function poolLight(n) {
   return { a, b };
 }
 
-// Pickleball: popped up, the light holed ball slows fast in the air (a lot
-// of drag for its weight) and knuckles, wobbling without much spin; it lands
-// with a hollow click and a small, dead plastic bounce.
+// Pickleball: popped up twice off an unseen paddle, the light holed ball
+// slows fast in the air (a lot of drag for its weight) and knuckles,
+// wobbling without much spin; it lands with a hollow click and a small, dead
+// plastic bounce.
 const PICKLE = (() => {
-  const g = 10;
-  const vt = 1.6;
-  const H = 0.6;
-  const phi = Math.atan(Math.sqrt(Math.exp((2 * g * H) / (vt * vt)) - 1));
-  const up = (vt * phi) / g;
-  const down = (vt / g) * Math.acosh(Math.exp((H * g) / (vt * vt)));
-  const T = up + down;
-  const y = (e) =>
-    e < up
-      ? ((vt * vt) / g) * Math.log(Math.cos(phi - (g * e) / vt) / Math.cos(phi))
-      : H - ((vt * vt) / g) * Math.log(Math.cosh((g * (e - up)) / vt));
-  const knuckle = (u, e) =>
-    quatAxisAngle([Math.cos(5 * e), 0.3, Math.sin(5 * e)], 0.35 * Math.sin(Math.PI * u));
+  const knuckle = (k) => (u, e) =>
+    quatAxisAngle([Math.cos(5 * e + k), 0.3, Math.sin(5 * e + k)], 0.35 * Math.sin(Math.PI * u));
+  const pop = { voice: "pock", f: 1250, bright: 0.2, decay: 1.3, vol: 0.8 };
   return [
-    { path: T, pos: (u, e) => [0, Math.max(0, y(e ?? u * T)), 0], tilt: knuckle },
+    dragFlight(0.55, 10, 1.6, { tilt: knuckle(0) }),
+    dragFlight(0.42, 10, 1.6, { tilt: knuckle(2), cue: pop }),
     ...bounces(grav(0.037), {
-      h: 0.6 * 0.3,
+      h: 0.42 * 0.3,
       e: 0.55,
       n: 2,
       squash: 0.07,
       w: 0.035,
-      cue: (i, k) => ({ voice: "pock", f: 1250, bright: 0.2, decay: 0.8, vol: k }),
+      cue: (i, k) => ({ voice: "pock", f: 1100, bright: 0.2, decay: 0.8, vol: k }),
     }),
   ];
 })();
@@ -1121,8 +1117,8 @@ const PICKLE = (() => {
 // cleanly home. (The backspin is k times its speed, chosen so it turns
 // exactly once backwards in all.)
 const POOL_SHOT = (() => {
-  const D = 0.55;
-  const t0 = 0.8;
+  const D = 0.42;
+  const t0 = 0.95;
   const a = (2 * D) / (t0 * t0);
   const v0 = a * t0;
   // Slides until its backspin has turned into rolling back (a solid ball:
@@ -1171,9 +1167,9 @@ const NACROSS = scale3(ACROSS, -1);
 const KNOCK = (vol) => ({ voice: "wood", f: 900, decay: 0.8, vol });
 const CRICKET = [
   {
-    fly: { h: 0.5 },
+    fly: { h: 0.55 },
     to: at3(0, 0, 0.1),
-    g: 16,
+    g: 12,
     rot: (u) => {
       const s1 = easeIO(band01(u, 0, 0.2));
       const s2 = easeIO(band01(u, 0.8, 1));
@@ -1770,9 +1766,9 @@ export const RECIPES = {
       });
       WP_RINGS.forEach((_, i) => {
         const ring = k.part(`ring${i}`, { pivot: water });
-        k.cloud({ share: 0.015, size: 0.7, part: ring, pattern: false }, (rand) => {
+        k.cloud({ share: 0.015, size: 1.2, part: ring, pattern: false }, (rand) => {
           const a = rand() * TAU;
-          const r = 0.84 + 0.04 * (rand() - 0.5);
+          const r = 0.84 + 0.012 * (rand() - 0.5);
           return {
             p: [r * Math.cos(a), WATER_Y, r * Math.sin(a)],
             color: mix("#cfeaff", "#ffffff", rand()),
@@ -1939,8 +1935,8 @@ export const RECIPES = {
 
   pickleball: {
     options: [{ key: "color", label: "Colour", type: "color", default: "#dce83a" }],
-    // Popped up, the light holed ball slows fast in the air and knuckles,
-    // then lands with a hollow click and a small, dead bounce.
+    // Popped up twice, the light holed ball slows fast in the air and
+    // knuckles, then lands with a hollow click and a small, dead bounce.
     ...throwBall("pop", "Pop it up", 10, PICKLE),
     build(k, o) {
       const holes = fibonacciSphere(40);
@@ -2000,13 +1996,13 @@ export const RECIPES = {
       // built small (inside the ball) and spread by its part, fading out on
       // channel 1.
       const dust = k.part("dust", { pivot: [0, -0.93, 0] });
-      k.cloud({ share: 0.02, size: 2.2, part: dust, pattern: false }, (rand) => {
+      k.cloud({ share: 0.005, size: 2.4, part: dust, pattern: false }, (rand) => {
         const a = rand() * TAU;
         const r = 0.24 + 0.12 * rand();
         return {
           p: [r * Math.cos(a), -0.95 + 0.08 * rand(), r * Math.sin(a)],
           color: mix("#9b9284", "#c4bcae", rand()),
-          opacity: 0.14,
+          opacity: 0.2,
           kind: "fade",
           params: [0, 1],
           channel: 1,
@@ -2034,7 +2030,7 @@ export const RECIPES = {
         const w = SQUASH_WARM;
         const heat =
           e < 0 ? 0 : band01(e, w.start, w.hot) * Math.exp(-Math.max(0, e - w.hot) * 2.2);
-        out.glow = [1, 0.42, 0.12, 0.34 * heat];
+        out.glow = [1, 0.42, 0.12, 0.28 * heat];
       },
     }),
     build(k) {

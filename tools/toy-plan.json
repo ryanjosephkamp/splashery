@@ -285,7 +285,7 @@
       "effect": "Curveball: it spins hard and swerves.",
       "sound": "Bat crack.",
       "fixed": "C1: smooth white leather with a soft sheen and crisp raised red stitches.",
-      "improved": "E6a: a curveball: wound up, then pitched away spinning hard, it breaks down and to the side late; the crack of the bat sends it back in a looping arc to its spot, where it takes a dead little bounce. Its highlight stays put while it spins (2.2 s)."
+      "improved": "E6a: a curveball: wound up, then pitched away spinning hard, it breaks down and to the side late; the crack of the bat sends it back in a looping arc to its spot, where it takes a dead little bounce. Its highlight stays put while it spins (2.3 s)."
     },
     "softball": {
       "v": "keep",
@@ -337,7 +337,7 @@
       "effect": "Seam-up spin and a skid.",
       "sound": "Crisp leather knock.",
       "fixed": "C1: polished red leather with a bright highlight and a raised, lit seam.",
-      "improved": "E6a: a seam-up flick: the seam stands upright while the ball spins backwards about it, then it comes down level and skids on with its backspin till the spin grips and rolls it home. Its shine stays put while it spins (1.8 s)."
+      "improved": "E6a: a seam-up flick: the seam stands upright while the ball spins backwards about it, then it comes down level and skids on with its backspin till the spin grips and rolls it home. Its shine stays put while it spins (1.9 s)."
     },
     "bowling-ball": {
       "v": "keep",
@@ -356,7 +356,7 @@
       "v": "keep",
       "effect": "Light pop-up with air whistling through the holes.",
       "sound": "Hollow plastic pop.",
-      "improved": "E6a: popped up, the light holed ball slows fast in the air and knuckles (it wobbles without much spin), then lands with a hollow click and a small, dead bounce (1.4 s)."
+      "improved": "E6a: popped up twice off an unseen paddle, the light holed ball slows fast in the air and knuckles (it wobbles without much spin), then lands with a hollow click and a small, dead bounce (1.9 s)."
     },
     "dodgeball": {
       "v": "keep",

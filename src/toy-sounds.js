@@ -170,7 +170,7 @@ export const TOY_SOUNDS = {
   // The pitch's whoosh, then the crack of the bat as it comes back.
   baseball: [
     { voice: "whoosh", at: 0.24, f: 900, to: 3, decay: 0.5, vol: 0.4 },
-    { voice: "crack", at: 0.76, f: 2400, bright: 0.8 },
+    { voice: "crack", at: 0.82, f: 2400, bright: 0.8 },
   ],
   // The underhand release, then a muffled thud where it lands far off.
   softball: [

@@ -328,7 +328,7 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Curveball: it spins hard and swerves.
   - Improved: E6a: a curveball: wound up, then pitched away spinning hard, it breaks down and to the
     side late; the crack of the bat sends it back in a looping arc to its spot, where it takes a
-    dead little bounce. Its highlight stays put while it spins (2.2 s).
+    dead little bounce. Its highlight stays put while it spins (2.3 s).
   - Sound: Bat crack.
 - **Softball** (`softball`). Now: tap: Pitch underhand. Plan: keep.
   - Fixed: C1: smooth yellow leather with a soft sheen and crisp raised red stitches.
@@ -374,7 +374,7 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Seam-up spin and a skid.
   - Improved: E6a: a seam-up flick: the seam stands upright while the ball spins backwards about it,
     then it comes down level and skids on with its backspin till the spin grips and rolls it home.
-    Its shine stays put while it spins (1.8 s).
+    Its shine stays put while it spins (1.9 s).
   - Sound: Crisp leather knock.
 - **Bowling ball** (`bowling-ball`). Now: tap: Bowl it. Plan: keep.
   - Effect: Heavy roll with a hook.
@@ -392,8 +392,9 @@ Proposals below are suggestions; the owner may change them.
   - Sound: Ball click.
 - **Pickleball** (`pickleball`). Now: tap: Pop it up. Plan: keep.
   - Effect: Light pop-up with air whistling through the holes.
-  - Improved: E6a: popped up, the light holed ball slows fast in the air and knuckles (it wobbles
-    without much spin), then lands with a hollow click and a small, dead bounce (1.4 s).
+  - Improved: E6a: popped up twice off an unseen paddle, the light holed ball slows fast in the air
+    and knuckles (it wobbles without much spin), then lands with a hollow click and a small, dead
+    bounce (1.9 s).
   - Sound: Hollow plastic pop.
 - **Dodgeball** (`dodgeball`). Now: tap: Slam it down. Plan: keep.
   - Effect: Squashes hard on a bounce.

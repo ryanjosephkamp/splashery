@@ -6,6 +6,8 @@
 // later layers land on the plan's own moments.
 
 import { test, expect } from "@playwright/test";
+import fs from "node:fs";
+import path from "node:path";
 import { buildRecipe } from "../src/kit.js";
 import { TOY_SOUNDS } from "../src/toy-sounds.js";
 
@@ -138,5 +140,87 @@ test("each ball's sound lands on its own moments", async () => {
       expect(near, `${id}: a layer at ${l.at} s starts with a leg`).toBeLessThan(0.03);
       expect(l.at, id).toBeLessThan(4.5);
     }
+  }
+});
+
+test("a glossy ball spins as an unlit copy under a fixed light, and only while it moves", async () => {
+  const R = await recipes();
+  for (const id of ["pool-ball", "cricket-ball", "baseball", "softball"]) {
+    const r = R[id];
+    const key = r.action.key;
+    const at = (v) => {
+      const out = { parts: {}, glow: [1, 1, 1, 0], cues: [], morph: null, body: null };
+      r.drive(1, { [key]: v }, out, { time: 1, R: 1, tap: null, data: {} });
+      return out.parts;
+    };
+    const rest = at(0);
+    expect([rest.ball.visible, rest.spin.visible, rest.light.visible], id).toEqual([1, 0, 0]);
+    const mid = at(0.6);
+    expect(mid.ball.visible, id).toBe(0);
+    expect(mid.spin.visible, id).toBeGreaterThan(0);
+    expect(mid.light.visible, id).toBe(1);
+    expect(mid.light.quat, `${id}: the light does not turn`).toBeUndefined();
+  }
+});
+
+// Screenshots of two effects at their fullest, with the clock stepped by
+// hand so the moment is exact (as tools/effect-clip.mjs does).
+const SHOTS = path.resolve("tests/screenshots");
+async function effectShot(browser, { id, label, at, viewport, name, mobile }) {
+  const ctx = await browser.newContext({ viewport, hasTouch: !!mobile, isMobile: !!mobile });
+  const page = await ctx.newPage();
+  const problems = [];
+  page.on("pageerror", (e) => problems.push(e.message));
+  await page.goto("/?renderer=webgl2&profile=weak");
+  await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
+  await page.evaluate((id) => window.__splashery.app.chooseToy(id), id);
+  await expect(page.locator("#toy-status")).toHaveText(new RegExp(`^${label}`), {
+    timeout: 180_000,
+  });
+  await page.waitForTimeout(1500);
+  await page.evaluate(async (at) => {
+    const { player } = window.__splashery;
+    player.opts.idleDelay = 1e9;
+    player.idle.weight = 0;
+    const stage = player.stage;
+    const handlers = stage.updateHandlers.slice();
+    let pending = 0;
+    stage.updateHandlers.length = 0;
+    stage.updateHandlers.push(() => {
+      const d = pending;
+      pending = 0;
+      for (const h of handlers) h(d);
+    });
+    player.camera.cur = { ...player.camera.home };
+    player.camera.tgt = { ...player.camera.home };
+    // Let the splat sort (on a worker) catch up with the home view first.
+    for (let i = 0; i < 20; i++) {
+      await stage.captureFrame();
+      await new Promise((r) => setTimeout(r, 50));
+    }
+    player.act(null);
+    for (let t = 0; t < at; t += 1 / 30) {
+      pending = 1 / 30;
+      await stage.captureFrame();
+    }
+    pending = 0;
+    await stage.captureFrame();
+  }, at);
+  fs.mkdirSync(SHOTS, { recursive: true });
+  await page.screenshot({ path: path.join(SHOTS, name) });
+  await ctx.close();
+  expect(problems).toEqual([]);
+}
+
+test("e6a screenshots at 1440x900 and 390x844", async ({ browser }) => {
+  const desk = { width: 1440, height: 900 };
+  const phone = { width: 390, height: 844 };
+  const shots = [
+    { id: "basketball", label: "Basketball", at: 2.7, name: "e6a-fingertip" },
+    { id: "pool-ball", label: "Pool ball", at: 0.9, name: "e6a-draw-shot" },
+  ];
+  for (const s of shots) {
+    await effectShot(browser, { ...s, viewport: desk, name: `${s.name}-1440x900.png` });
+    await effectShot(browser, { ...s, viewport: phone, mobile: true, name: `${s.name}-390x844.png` }); // prettier-ignore
   }
 });
