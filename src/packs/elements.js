@@ -162,7 +162,7 @@ const TW_SECS = 5.4;
 const twRad = (y) => 0.05 + 0.5 * Math.pow(y / TW_H, 1.7) + 0.02 * Math.sin(y * 7);
 const TW_BANDS = 5;
 // How much wider each band gets (the foot most, like a wedge tornado).
-const TW_GROW = [1.75, 1.6, 1.45, 1.3, 1.12];
+const TW_GROW = [1.75, 1.6, 1.45, 1.3, 1.04];
 const twBand = (y) => Math.max(0, Math.min(TW_BANDS - 1, Math.floor((y / TW_H) * TW_BANDS)));
 // The default camera's heading (yaw 0.45), for which debris is in front.
 const TW_CAM = [Math.sin(0.45), 0, Math.cos(0.45)];
@@ -405,11 +405,11 @@ const OW_G = 5.5;
 const OW_SPRAY = (() => {
   const r = lcg(77);
   const out = [];
-  for (let i = 0; i < 36; i++) {
-    const v = 0.3 + 0.68 * ((i + r()) / 36);
+  for (let i = 0; i < 44; i++) {
+    const v = 0.3 + 0.68 * ((i + r()) / 44);
     const g = owGrow(OW_Z0 + (OW_Z1 - OW_Z0) * v);
     const base = add(owThrown(1, v), [0.02 - 0.12 * r(), 0.04, 0]);
-    const vy = (1.5 + 1.3 * r()) * (0.4 + 0.6 * g);
+    const vy = (1.7 + 1.5 * r()) * (0.4 + 0.6 * g);
     out.push({
       base,
       at: OW_HIT - 0.02 + 0.12 * r(),
@@ -417,7 +417,7 @@ const OW_SPRAY = (() => {
       dur: (2 * vy) / OW_G,
       axis: unit([r() - 0.5, r() - 0.5, r() - 0.5]),
       spin: 4 + 6 * r(),
-      size: 0.03 + 0.03 * r(),
+      size: 0.035 + 0.035 * r(),
     });
   }
   return out;
@@ -1195,11 +1195,13 @@ export const RECIPES = {
         k.add(shape, {
           ...rest,
           weight: 0.3,
+          size: 1.5,
+          flat: 0.4,
           part: coat,
-          opacity: 0.6,
+          opacity: 0.45,
           kind: "band",
           channel: 0,
-          params: (c) => [clamp(c.p[1] / 1.25, 0, 1), 0.09],
+          params: (c) => [clamp(c.p[1] / 1.25, 0, 1), 0.12],
         });
       };
       // The pedestal: a thick slab of ice.
@@ -1283,14 +1285,20 @@ export const RECIPES = {
         params: [0.3, r()],
         part: drips,
       }));
+      // The puddle: flat splats lying on the ground, a little uneven at its
+      // rim, spread out by its part's scale.
       const puddle = k.part("puddle", { pivot: [0, 0, 0] });
-      k.add(k.disc(0.95), {
-        pos: [0, 0.004, 0],
-        part: puddle,
-        opacity: 0.6,
-        even: true,
-        pattern: false,
-        color: (c) => mix("#bfe6f8", "#7fc0e0", Math.hypot(c.p[0], c.p[2]) / 0.95),
+      k.cloud({ share: 0.02, size: 2.6, pattern: false }, (r) => {
+        const a = r() * TAU;
+        const rr = 0.9 * Math.sqrt(r()) * (0.92 + 0.08 * Math.sin(a * 5 + 1));
+        return {
+          p: [Math.cos(a) * rr, 0.004, Math.sin(a) * rr * 0.9],
+          n: [0, 1, 0],
+          flat: 0.5,
+          color: mix("#bfe6f8", "#7fc0e0", rr / 0.9),
+          opacity: 0.4,
+          part: puddle,
+        };
       });
     },
   },
@@ -2435,7 +2443,7 @@ export const RECIPES = {
       });
       // Clumps of spray, one per token, built where they are thrown from.
       OW_SPRAY.forEach((d, i) => {
-        k.cloud({ count: 26, size: 0.75, pattern: false }, (r) => {
+        k.cloud({ count: 28, size: 0.9, pattern: false }, (r) => {
           const d0 = randDir(r);
           // Drawn out a little along its flight.
           const q = [d0[0] * 0.8, d0[1] * 1.5, d0[2] * 0.8];
