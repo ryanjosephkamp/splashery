@@ -4,10 +4,67 @@
 // rise, dust orbits; lightning, blobs of wax and swirling snow are parts
 // that drive() shows, hides and moves on a clock.
 
-import { mix, shade, smoothstep, clamp, ramp, spline, quatAxisAngle, vec } from "../kit.js";
+import {
+  mix,
+  shade,
+  smoothstep,
+  clamp,
+  ramp,
+  spline,
+  quatAxisAngle,
+  quatMul,
+  quatRotate,
+  vec,
+} from "../kit.js";
 
 const TAU = Math.PI * 2;
-const { add, mul, dot, unit } = vec;
+const { add, sub, mul, dot, cross, len, unit } = vec;
+
+// Timing for tap effects. A pulse control runs from 1 down to 0 over its
+// `ease` seconds, so progress() is 0 at the tap and 1 when it is done.
+const clamp01 = (x) => (x < 0 ? 0 : x > 1 ? 1 : x);
+const ease = (x) => x * x * (3 - 2 * x);
+const easeOut = (x) => 1 - (1 - x) * (1 - x) * (1 - x);
+// 0 before a, rising to 1 at b.
+const band = (x, a, b) => clamp01((x - a) / (b - a));
+// Rises from a to b, holds, falls from c to d.
+const bump = (x, a, b, c, d) => band(x, a, b) * (1 - band(x, c, d));
+const progress = (v) => (v > 0 ? 1 - v : 1);
+// Seconds since the tap (the effect's own clock), or null at rest.
+const since = (v, secs) => (v > 0 ? (1 - v) * secs : null);
+
+// Per-toy memory for drive(), keyed by the control state object (new each
+// time a toy loads).
+const MEM = new WeakMap();
+function mem(c) {
+  let m = MEM.get(c);
+  if (!m) MEM.set(c, (m = {}));
+  return m;
+}
+// True on the frame a pulse control fires.
+function fired(m, key, v) {
+  const was = m["p_" + key] ?? 0;
+  m["p_" + key] = v;
+  return v > was + 0.02;
+}
+// Later sounds of a tap effect: each [at, spec] plays from drive() when the
+// effect's clock s (seconds, null at rest) passes `at`.
+function cuesAt(m, s, list, out) {
+  const was = m.cueS ?? -1;
+  m.cueS = s ?? -1;
+  if (s === null || s < was) return;
+  for (const [at, spec] of list) if (was < at && s >= at) out.cues.push(spec);
+}
+// The integral of a trapezoid speed boost: 0 to k over [0, r], k until a,
+// back to 0 at b. An extra clock for "runs faster for a while" without a
+// jump when it ends.
+function boostClock(s, k, r, a, b) {
+  if (s <= 0) return 0;
+  if (s <= r) return (k * s * s) / (2 * r);
+  if (s <= a) return (k * r) / 2 + k * (s - r);
+  const x = Math.min(s, b) - a;
+  return (k * r) / 2 + k * (a - r) + k * (x - (x * x) / (2 * (b - a)));
+}
 const lerp3 = (a, b, t) => [
   a[0] + (b[0] - a[0]) * t,
   a[1] + (b[1] - a[1]) * t,
@@ -85,6 +142,171 @@ const LAVA = [
   { x: -0.05, z: 0.0, r: 0.06, tall: 1.3, lo: 0.4, hi: 1.18, speed: 0.36, phase: 3.3 },
 ];
 const lavaY = (b, t) => b.lo + (b.hi - b.lo) * (0.5 - 0.5 * Math.cos(t * b.speed + b.phase));
+const LAVA_SECS = 4.6;
+const ICE_SECS = 5.6;
+
+// A small seeded generator for tables that build() and drive() share.
+function lcg(seed) {
+  let x = seed >>> 0;
+  return () => {
+    x = (Math.imul(x, 1664525) + 1013904223) >>> 0;
+    return x / 4294967296;
+  };
+}
+
+// Tornado: the funnel's shape, its bands (parts that widen on a tap) and
+// the debris lying on the field in front of it, which a tap lifts, whirls
+// round the funnel and flings back down where it lay.
+const TW_H = 1.9;
+const TW_SECS = 5.4;
+const twRad = (y) => 0.05 + 0.5 * Math.pow(y / TW_H, 1.7) + 0.02 * Math.sin(y * 7);
+const TW_BANDS = 5;
+// How much wider each band gets (the foot most, like a wedge tornado).
+const TW_GROW = [1.75, 1.6, 1.45, 1.3, 1.12];
+const twBand = (y) => Math.max(0, Math.min(TW_BANDS - 1, Math.floor((y / TW_H) * TW_BANDS)));
+// The default camera's heading (yaw 0.45), for which debris is in front.
+const TW_CAM = [Math.sin(0.45), 0, Math.cos(0.45)];
+const TW_RIGHT = [Math.cos(0.45), 0, -Math.sin(0.45)];
+const TW_DEBRIS = (() => {
+  const r = lcg(41);
+  const out = [];
+  for (let i = 0; i < 20; i++) {
+    const a = 0.45 + (i / 19 - 0.5) * 2.7 + (r() - 0.5) * 0.12;
+    const r0 = 0.42 + 0.43 * r();
+    const type = i % 5 === 0 || i % 5 === 3 ? "plank" : i % 5 === 1 ? "clod" : "leaf";
+    const lag = 0.12 + 0.55 * ((r0 - 0.42) / 0.43) + 0.15 * r();
+    out.push({
+      a,
+      r0,
+      type,
+      h: type === "plank" ? 0.009 : type === "clod" ? 0.02 : 0.004,
+      lag,
+      dur: 3.7 + 0.5 * r(),
+      top: 0.45 + 1.0 * r(),
+      turns: 2 + (r() < 0.4 ? 1 : 0),
+      yaw: r() * 360,
+      axis: unit([r() - 0.5, r() - 0.5, r() - 0.5]),
+      spin: (r() < 0.5 ? -1 : 1) * (2 + Math.floor(3 * r())),
+      tone: r(),
+    });
+  }
+  return out;
+})();
+// Where debris piece d is, s seconds after the tap: [position, u].
+function twDebrisAt(d, s, lift) {
+  const u = band(s, d.lag, d.lag + d.dur);
+  const up = 0.55;
+  const y =
+    u < up ? d.top * ease(u / up) : d.top * (1 - ((u - up) / (1 - up)) * ((u - up) / (1 - up)));
+  const hug = ease(band(u, 0, 0.3)) * (1 - ease(band(u, 0.62, 1)));
+  const rIn = twRad(Math.min(TW_H, y)) * (1 + 0.55 * lift) + 0.1;
+  const rr = d.r0 + (rIn - d.r0) * hug;
+  const a = d.a + TAU * d.turns * ease(u);
+  return [[Math.sin(a) * rr, d.h + y, Math.cos(a) * rr], u];
+}
+// Rainbow: seven bands, red outside. A tap wipes it away (violet first,
+// right to left) and draws it again, red first, each colour from left to
+// right (a fade on channel 0: the undrawing run backwards). at() is where
+// a splat of band i at angle a (0 at the right foot, PI at the left) sits
+// along the channel.
+const RB_R = 0.82;
+const RB_W = 0.2;
+const RB_SECS = 5.2;
+const RB_COLS = ["#e8302a", "#f58a1f", "#f7d51d", "#4cb748", "#2a8fd8", "#4a4aa8", "#8a3aa0"];
+const rbAt = (i, a) => (6 - i + clamp01(a / Math.PI)) / 7;
+// The radius of band i's middle.
+const rbRadius = (i) => RB_R + (0.5 - (i + 0.5) / 7) * 2 * RB_W;
+// The channel over time: wiped by 0.55 s, drawn again from 0.8 s to 3.6 s.
+const rbChannel = (s) => (s === null ? 0 : s < 0.7 ? 1.02 * band(s, 0, 0.55) : 1.02 * (1 - band(s, 0.8, 3.6))); // prettier-ignore
+
+// Iceberg: a chunk calves off its front-right shoulder (a cap cut by a
+// plane), tips over to the right, falls into the sea with a splash, bobs
+// and drifts, melts away, and grows back in place on the berg.
+const IB_SECS = 6.4;
+const IB_CAM = [Math.sin(0.45), 0, Math.cos(0.45)];
+const IB_RIGHT = [Math.cos(0.45), 0, -Math.sin(0.45)];
+const IB_OUT = unit(add(mul(IB_RIGHT, 0.75), mul(IB_CAM, 0.66)));
+// The chunk is a slab off the side: outside a steep cut (normal IB_N) and
+// above a level break at IB_FLOOR, clear of the sea. It tips about the
+// view direction (clockwise as seen from the default camera, so the draw
+// order holds) and floats at IB_FLOAT.
+const IB_N = unit(add(mul(IB_OUT, 0.93), [0, 0.37, 0]));
+const IB_FLOOR = 0.2;
+const IB_AXIS = mul(IB_CAM, -1);
+const IB_FLOAT = 0.02;
+const IB_G = 6;
+
+// The chunk's geometry for a berg of radius function shapeR: the cut
+// (dot(p, IB_N) > h), the chunk's centre, a point on its broken face, the
+// hinge it tips over, and its fall worked out ahead (the time it hits the
+// water and how it is moving then).
+function icebergChunk(shapeR) {
+  const dirs = [];
+  const n = 3000;
+  for (let i = 0; i < n; i++) {
+    const y = 1 - (2 * (i + 0.5)) / n;
+    const r = Math.sqrt(1 - y * y);
+    const a = i * 2.399963;
+    dirs.push([Math.cos(a) * r, y, Math.sin(a) * r]);
+  }
+  const pts = dirs.map((d) => mul(d, shapeR(d))).filter((p) => p[1] > IB_FLOOR);
+  let hmax = -Infinity;
+  for (const p of pts) hmax = Math.max(hmax, dot(p, IB_N));
+  const h = hmax - 0.27;
+  const cap = pts.filter((p) => dot(p, IB_N) > h);
+  const mean = (list) => mul(list.reduce(add, [0, 0, 0]), 1 / Math.max(1, list.length));
+  // The broken face's middle (the chunk's outside, pressed onto the cut),
+  // and the chunk's centre (between that and its outer surface).
+  const F = mean(cap.map((p) => sub(p, mul(IB_N, dot(p, IB_N) - h))));
+  const C0 = add(mul(mean(cap), 0.65), mul(F, 0.35));
+  // It tips over its outer bottom edge, on the right.
+  let hinge = F;
+  let best = -Infinity;
+  for (const p of cap) {
+    const v = dot(p, IB_RIGHT) - 3 * p[1];
+    if (v > best) [best, hinge] = [v, p];
+  }
+  // Tipping (0..T1, speeding up), then falling free, still turning.
+  const T1 = 0.55;
+  const th1 = 0.62;
+  const w1 = (2 * th1) / T1;
+  const C1 = add(hinge, quatRotate(quatAxisAngle(IB_AXIS, th1), sub(C0, hinge)));
+  const V1 = add(mul(cross(IB_AXIS, sub(C1, hinge)), w1), mul(IB_RIGHT, 0.6));
+  const tau = (V1[1] + Math.sqrt(V1[1] * V1[1] + 2 * IB_G * Math.max(0, C1[1] - IB_FLOAT))) / IB_G;
+  return { h, F, C0, hinge, T1, th1, w1, C1, V1, Ti: T1 + tau };
+}
+
+// Where the chunk is at s seconds: { C, th, k } (its centre, how far it has
+// turned about IB_AXIS, and its size), or { regrow } while it grows back.
+function icebergPose(ch, s) {
+  const { T1, th1, w1, C1, V1, Ti, hinge, C0 } = ch;
+  if (s < T1) {
+    const th = th1 * (s / T1) * (s / T1);
+    return { C: add(hinge, quatRotate(quatAxisAngle(IB_AXIS, th), sub(C0, hinge))), th, k: 1 };
+  }
+  if (s < Ti) {
+    const u = s - T1;
+    return { C: add(add(C1, mul(V1, u)), [0, -0.5 * IB_G * u * u, 0]), th: th1 + w1 * u, k: 1 };
+  }
+  if (s > 4.7) return { regrow: ease(band(s, 4.75, 6.1)) };
+  // Afloat: it plunges, bobs up, rocks, drifts on and melts away.
+  const u = s - Ti;
+  const Ci = add(add(C1, mul(V1, Ti - T1)), [0, -0.5 * IB_G * (Ti - T1) * (Ti - T1), 0]);
+  const glide = 0.28 * (1 - Math.exp(-u / 0.28)) + 0.04 * u;
+  const melt = band(s, 3.3, 4.6);
+  const bob = -0.07 * Math.exp(-u / 0.6) * Math.sin((TAU * u) / 1.05);
+  const C = add(add(Ci, mul(IB_RIGHT, glide * Math.hypot(V1[0], V1[2]))), [0, bob - Ci[1] + IB_FLOAT - 0.06 * melt, 0]); // prettier-ignore
+  const thi = th1 + w1 * (Ti - T1);
+  const th = thi + 0.25 * (1 - Math.exp(-u / 0.3)) + 0.12 * Math.exp(-u / 0.7) * Math.sin((TAU * u) / 0.9); // prettier-ignore
+  return { C, th, k: 1 - ease(melt) };
+}
+
+// Debris is built this far towards the default camera and moved back to
+// where it lies, so it sorts in front of the funnel's dust (it is hidden
+// while it passes behind the funnel instead).
+const TW_AHEAD = mul(TW_CAM, 0.42);
+// The heat-up's glow, added over the wax: hot orange, magenta, gold, orange.
+const LAVA_GLOW = [[0.75, 0.16, 0], [0.45, 0, 1], [0.35, 0, 1], [0.35, 0.45, 0], [0.75, 0.18, 0]];
 
 export const RECIPES = {
   campfire: {
@@ -336,13 +558,34 @@ export const RECIPES = {
       { key: "liquid", label: "Liquid", type: "color", default: "#f2b632" },
       { key: "metal", label: "Base", type: "color", default: "#b8bcc4" },
     ],
+    controls: [{ key: "heat", label: "Heat up", type: "pulse", ease: LAVA_SECS }],
+    action: { key: "heat", label: "Heat it up" },
+    // A tap heats the lamp: the blobs run about three and a half times as
+    // fast for a few seconds, the wax glows and shifts from warm orange to
+    // magenta to gold, and the liquid brightens; then it all eases back.
+    // The extra speed is an extra clock (the boost's integral), kept when
+    // the effect ends so the blobs never jump.
     drive(t, c, out) {
+      const m = mem(c);
+      const s = since(c.heat, LAVA_SECS);
+      const extra = s === null ? 0 : boostClock(s, 2.5, 0.3, 2.7, 3.9);
+      if (fired(m, "heat", c.heat)) m.base = (m.base ?? 0) + (m.run ?? 0);
+      if (s !== null) m.run = extra;
+      else if (m.run) {
+        m.base = (m.base ?? 0) + m.run;
+        m.run = 0;
+      }
+      const tt = t + (m.base ?? 0) + extra;
       LAVA.forEach((b, i) => {
-        const y = lavaY(b, t);
+        const y = lavaY(b, tt);
         out.parts[`blob${i}`] = {
-          offset: [Math.sin(t * b.speed * 0.8 + b.phase) * 0.02, y - lavaY(b, 0), 0],
+          offset: [Math.sin(tt * b.speed * 0.8 + b.phase) * 0.02, y - lavaY(b, 0), 0],
         };
       });
+      const hot = s === null ? 0 : ease(band(s, 0, 0.3)) * (1 - ease(band(s, 3.1, 4.5)));
+      const col = ramp(LAVA_GLOW, band(s ?? 0, 0.2, 3.2));
+      out.glow = [col[0], col[1], col[2], 0.75 * hot];
+      out.morph = [0, hot];
     },
     build(k, o) {
       const wax = o.wax;
@@ -442,39 +685,48 @@ export const RECIPES = {
           opacity: 0.06,
         };
       });
-      // Wax: a pool at the bottom and blobs that rise and sink.
+      // More glow in the liquid while it is heated (fades in on channel 1).
+      k.cloud({ share: 0.02, size: 3.4, pattern: false }, (r) => {
+        const y = 0.02 + Math.pow(r(), 2.2) * 1.1;
+        const a = r() * TAU;
+        const rr = glassR(y) * 0.8 * Math.sqrt(r());
+        return {
+          p: [Math.sin(a) * rr, y, Math.cos(a) * rr],
+          color: mix(o.liquid, "#fff4c8", 0.35 + 0.3 * (1 - y / 1.3)),
+          opacity: 0.1,
+          kind: "fade",
+          channel: 1,
+          params: [0, -0.99],
+        };
+      });
+      // Wax: a pool at the bottom and blobs that rise and sink. The wax
+      // takes the heat-up's glow (a band that sits on channel 0).
       const waxCol = (c) => {
         const facing = Math.max(0, dot(c.n, unit([0.3, 0.2, 1])));
         return mix(shade(wax, 0.75), mix(wax, "#ffe090", 0.6), facing * facing);
       };
-      k.add(k.ellipsoid(0.22, 0.1, 0.22), {
-        pos: [0, 0.04, 0],
+      const waxy = {
         weight: 1.5,
         pattern: false,
         color: waxCol,
-      });
-      k.add(k.ellipsoid(0.1, 0.04, 0.1), {
-        pos: [0, 1.25, 0],
-        weight: 1.5,
-        pattern: false,
-        color: waxCol,
-      });
+        kind: "band",
+        channel: 0,
+        params: [0, 0.5],
+      };
+      k.add(k.ellipsoid(0.22, 0.1, 0.22), { pos: [0, 0.04, 0], ...waxy });
+      k.add(k.ellipsoid(0.1, 0.04, 0.1), { pos: [0, 1.25, 0], ...waxy });
       LAVA.forEach((b, i) => {
         const part = k.part(`blob${i}`, { pivot: [b.x, lavaY(b, 0), b.z] });
         k.add(k.ellipsoid(b.r, b.r * b.tall, b.r), {
           pos: [b.x, lavaY(b, 0), b.z],
           part,
-          weight: 1.5,
-          pattern: false,
-          color: waxCol,
+          ...waxy,
         });
         if (b.twin) {
           k.add(k.ellipsoid(b.r * 0.6, b.r * 0.7, b.r * 0.6), {
             pos: [b.x + b.r * 0.5, lavaY(b, 0) - b.r * 1.1, b.z],
             part,
-            weight: 1.5,
-            pattern: false,
-            color: waxCol,
+            ...waxy,
           });
         }
       });
@@ -767,45 +1019,89 @@ export const RECIPES = {
 
   "ice-statue": {
     alive: true,
-    controls: [{ key: "temp", label: "Temperature", type: "slider", default: 0 }],
+    controls: [
+      { key: "temp", label: "Temperature", type: "slider", default: 0 },
+      { key: "thaw", label: "Thaw", type: "pulse", ease: ICE_SECS },
+    ],
+    action: { key: "thaw", label: "Melt and refreeze" },
+    // A tap thaws the swan: it slumps and spreads, drips fall and a puddle
+    // spreads from under the pedestal. Then it freezes again: it stands
+    // back up, the puddle draws back in, and a white band of frost sweeps
+    // up it from the foot to the beak (a coat of splats over the ice,
+    // shown only while the frost passes). Frost specks drift about it
+    // while it is cold.
     drive(t, c, out) {
-      out.energy = c.temp;
-      out.parts.puddle = { visible: smoothstep(0.05, 0.7, c.temp) };
-      out.parts.drips = { visible: c.temp > 0.1 && c.temp < 0.95 ? 1 : 0 };
-      out.parts.frost = { visible: 1 - smoothstep(0, 0.3, c.temp) };
+      const s = since(c.thaw, ICE_SECS);
+      const thaw = s === null ? 0 : 0.4 * ease(band(s, 0.05, 1.5)) * (1 - ease(band(s, 2.3, 3.6)));
+      const e = Math.max(c.temp, thaw);
+      out.energy = e;
+      const wet = s === null ? 0 : ease(band(s, 0.2, 1.7)) * (1 - ease(band(s, 2.5, 3.8)));
+      const pool = Math.max(smoothstep(0.05, 0.7, c.temp), wet);
+      // The puddle spreads out from under the pedestal (it grows, rather
+      // than fading by size).
+      out.parts.puddle = { scale: 0.3 + 0.7 * pool, visible: pool > 0.002 ? 1 : 0 };
+      const dripping = (c.temp > 0.1 && c.temp < 0.95) || (s !== null && s > 0.3 && s < 3.2);
+      out.parts.drips = { visible: dripping ? 1 : 0 };
+      out.parts.frost = { visible: 1 - smoothstep(0, 0.3, e) };
+      // The frost front: the coat shows (coloured as the ice) just before
+      // it and the band of light runs up it on channel 0.
+      const front = s === null ? 0 : bump(s, 3.55, 3.7, 5.05, 5.3);
+      out.parts.coat = { visible: e < 0.01 ? front : 0 };
+      out.morph = [s === null ? -0.3 : -0.25 + 1.5 * band(s, 3.7, 5.0)];
+      const g = s === null ? 0 : bump(s, 3.65, 3.8, 4.8, 5.05);
+      out.glow = [0.72, 0.9, 1, 1.1 * g];
     },
     build(k) {
       const V = unit([0.15, 0.25, 1]);
+      const iceCol = (deep) => (c) => {
+        const rim = 1 - Math.abs(dot(c.n, V));
+        const g = c.fbm(c.p[0] * 5, c.p[1] * 5, c.p[2] * 5);
+        const l = clamp(0.5 + 0.45 * dot(c.n, LIGHT) + 0.2 * g - deep, 0, 1);
+        let col = ramp(["#3f8fc0", "#7cc0e4", "#bfe6f7", "#f2fbff"], l);
+        col = mix(col, "#ffffff", 0.55 * Math.pow(rim, 3));
+        if (Math.abs(g) < 0.018) col = mix(col, "#ffffff", 0.6);
+        return col;
+      };
       const ice = (a, deep = 0) => ({
         kind: "melt",
         params: [a, 0],
         flat: 0.25,
         opacity: 0.9,
-        color: (c) => {
-          const rim = 1 - Math.abs(dot(c.n, V));
-          const g = c.fbm(c.p[0] * 5, c.p[1] * 5, c.p[2] * 5);
-          const l = clamp(0.5 + 0.45 * dot(c.n, LIGHT) + 0.2 * g - deep, 0, 1);
-          let col = ramp(["#3f8fc0", "#7cc0e4", "#bfe6f7", "#f2fbff"], l);
-          col = mix(col, "#ffffff", 0.55 * Math.pow(rim, 3));
-          if (Math.abs(g) < 0.018) col = mix(col, "#ffffff", 0.6);
-          return col;
-        },
+        color: iceCol(deep),
       });
+      // The frost coat: fewer, bigger splats over the same surfaces,
+      // coloured as the ice there, that glow as the frost front (channel
+      // 0, by height) passes. Hidden except while it runs, since it does
+      // not melt with the ice.
+      const coat = k.part("coat", { pivot: [0, 0.5, 0] });
+      const both = (shape, opts) => {
+        k.add(shape, opts);
+        const { interior, core, ...rest } = opts;
+        k.add(shape, {
+          ...rest,
+          weight: 0.3,
+          part: coat,
+          opacity: 0.6,
+          kind: "band",
+          channel: 0,
+          params: (c) => [clamp(c.p[1] / 1.25, 0, 1), 0.09],
+        });
+      };
       // The pedestal: a thick slab of ice.
-      k.add(k.box(1.0, 0.3, 0.62), {
+      both(k.box(1.0, 0.3, 0.62), {
         pos: [0, 0.15, 0],
         interior: 0.08,
         core: "#a8dcf4",
         ...ice(0.45, 0.1),
       });
       // The swan: a full body with a lifted tail, arched wings and an S neck.
-      k.add(k.ellipsoid(0.38, 0.19, 0.21), {
+      both(k.ellipsoid(0.38, 0.19, 0.21), {
         pos: [-0.02, 0.47, 0],
         interior: 0.08,
         core: "#bfe8fa",
         ...ice(0.75),
       });
-      k.add(
+      both(
         k.tube(
           spline([
             [-0.3, 0.5, 0],
@@ -826,14 +1122,14 @@ export const RECIPES = {
         [0.36, 1.16, 0],
         [0.45, 1.17, 0],
       ]);
-      k.add(
+      both(
         k.tube(neck, (t) => 0.075 - 0.035 * t, { samples: 96, grid: 24 }),
         ice(1),
       );
-      k.add(k.ellipsoid(0.075, 0.058, 0.052), { pos: [0.46, 1.165, 0], ...ice(1) });
-      k.add(k.cone(0.032, 0.004, 0.13), { pos: [0.57, 1.14, 0], rot: [0, 0, -105], ...ice(1) });
+      both(k.ellipsoid(0.075, 0.058, 0.052), { pos: [0.46, 1.165, 0], ...ice(1) });
+      both(k.cone(0.032, 0.004, 0.13), { pos: [0.57, 1.14, 0], rot: [0, 0, -105], ...ice(1) });
       for (const side of [-1, 1]) {
-        k.add(
+        both(
           k.param(
             (u, v) => {
               // u runs along the wing (front to back), v from its root up
@@ -852,20 +1148,20 @@ export const RECIPES = {
           ice(0.9),
         );
       }
-      // Frost glinting while it is cold.
+      // Frost specks drifting about it while it is cold.
       const frost = k.part("frost", { pivot: [0, 0.5, 0] });
-      k.cloud({ share: 0.002, size: 0.6, pattern: false }, (r) => ({
-        p: [(r() - 0.5) * 1.1, 0.35 + r() * 0.9, (r() - 0.5) * 0.7],
+      k.cloud({ share: 0.003, size: 0.6, pattern: false }, (r) => ({
+        p: [(r() - 0.5) * 1.1, 0.3 + r() * 0.9, (r() - 0.5) * 0.7],
         color: "#ffffff",
         opacity: 0.85,
-        kind: "twinkle",
-        params: [0.5, r() * 6],
+        kind: "rise",
+        params: [0.14, r()],
         part: frost,
       }));
       // Drips and the puddle as it melts.
       const drips = k.part("drips", { pivot: [0, 0.4, 0] });
-      k.cloud({ share: 0.004, size: 0.8, pattern: false }, (r) => ({
-        p: [(r() - 0.5) * 0.9, 0.1 + r() * 0.5, (r() - 0.5) * 0.55],
+      k.cloud({ share: 0.005, size: 0.8, pattern: false }, (r) => ({
+        p: [(r() - 0.5) * 1.1, 0.1 + r() * 0.55, (r() - 0.5) * 0.72],
         color: "#d8f2ff",
         opacity: 0.8,
         kind: "fall",
@@ -876,7 +1172,8 @@ export const RECIPES = {
       k.add(k.disc(0.95), {
         pos: [0, 0.004, 0],
         part: puddle,
-        opacity: 0.55,
+        opacity: 0.6,
+        even: true,
         pattern: false,
         color: (c) => mix("#bfe6f8", "#7fc0e0", Math.hypot(c.p[0], c.p[2]) / 0.95),
       });
@@ -1035,13 +1332,54 @@ export const RECIPES = {
   tornado: {
     alive: true,
     controls: [{ key: "power", label: "Power", type: "slider", default: 0.6 }],
+    controls: [
+      { key: "power", label: "Power", type: "slider", default: 0.6 },
+      { key: "whirl", label: "Spin up", type: "pulse", ease: TW_SECS },
+    ],
+    action: { key: "whirl", label: "Spin it up" },
+    // A tap spins the tornado up: each band of the funnel widens about its
+    // own middle (the foot most) and the whole funnel turns two extra
+    // times, faster and faster, while the dust at its foot boils up. The
+    // planks, leaves and clods lying on the field in front are lifted one
+    // by one, whirl up round the funnel and are flung back out as it
+    // weakens, landing where they lay.
     drive(t, c, out) {
-      out.amount = 0.4 + 1.2 * c.power;
+      const s = since(c.whirl, TW_SECS);
+      const grow = s === null ? 0 : ease(band(s, 0.05, 1.0)) * (1 - ease(band(s, 2.9, 4.3)));
+      const weak = s === null ? 0 : bump(s, 3.8, 4.3, 4.7, 5.3);
+      const q = quatAxisAngle([0, 1, 0], s === null ? 0 : TAU * 2 * ease(band(s, 0.05, 4.6)));
+      for (let i = 0; i < TW_BANDS; i++)
+        out.parts[`band${i}`] = { quat: q, scale: 1 + (TW_GROW[i] - 1) * grow - 0.14 * weak };
+      out.parts.dust = { scale: 1 + 0.5 * grow };
+      out.amount = 0.4 + 1.2 * c.power + 0.5 * grow;
+      out.tokens = TW_DEBRIS.map((d) => {
+        const rest = [Math.sin(d.a) * d.r0, d.h, Math.cos(d.a) * d.r0];
+        const base = add(rest, TW_AHEAD);
+        if (s === null) return { base, offset: mul(TW_AHEAD, -1) };
+        const [p, u] = twDebrisAt(d, s, grow);
+        // Hidden while it passes behind the funnel (seen from the front).
+        const y = p[1];
+        const fr = twRad(Math.min(TW_H, y)) * (1 + (TW_GROW[twBand(y)] - 1) * grow);
+        const behind = smoothstep(0.04, -0.06, dot(p, TW_CAM));
+        const across = smoothstep(fr * 1.05, fr * 0.8, Math.abs(dot(p, TW_RIGHT)));
+        return {
+          base,
+          offset: sub(p, base),
+          quat: quatAxisAngle(d.axis, TAU * d.spin * ease(u)),
+          visible: 1 - behind * across,
+        };
+      });
     },
     build(k) {
-      const H = 1.9;
-      const rad = (y) => 0.05 + 0.5 * Math.pow(y / H, 1.7) + 0.02 * Math.sin(y * 7);
-      // The funnel: dust whirling fastest near the ground.
+      const H = TW_H;
+      const rad = twRad;
+      // The funnel: dust whirling fastest near the ground, in five bands
+      // (parts) that widen and spin up on a tap. The bottom band grows up
+      // from the ground and the top one down from the cloud.
+      const bands = Array.from({ length: TW_BANDS }, (_, i) => {
+        const y = i === 0 ? 0 : i === TW_BANDS - 1 ? H : ((i + 0.5) / TW_BANDS) * H;
+        return k.part(`band${i}`, { pivot: [0, y, 0] });
+      });
       k.cloud({ share: 0.55, size: 2.3, pattern: false }, (r) => {
         const y = H * Math.pow(r(), 0.8);
         const a = r() * TAU;
@@ -1056,6 +1394,7 @@ export const RECIPES = {
           opacity: 0.55 + 0.3 * (1 - y / H),
           kind: "orbit",
           params: [2.2, 0.6],
+          part: bands[twBand(y)],
         };
       });
       // Debris caught in the wind.
@@ -1069,9 +1408,11 @@ export const RECIPES = {
           color: mix("#2a2018", "#5a4a38", r()),
           kind: "orbit",
           params: [1.3, 0.3],
+          part: bands[twBand(y)],
         };
       });
       // Dust boiling up around the foot.
+      const dust = k.part("dust", { pivot: [0, 0, 0] });
       k.cloud({ share: 0.025, size: 2.2, pattern: false }, (r) => {
         const a = r() * TAU;
         const rr = 0.06 + 0.26 * r();
@@ -1081,7 +1422,44 @@ export const RECIPES = {
           opacity: 0.2,
           kind: "rise",
           params: [0.4 + 0.3 * r(), r()],
+          part: dust,
         };
+      });
+      // Planks, clods and leaves lying on the field in front, each a token
+      // (built ahead of the funnel for the draw order; see TW_AHEAD).
+      TW_DEBRIS.forEach((d, i) => {
+        const pos = add([Math.sin(d.a) * d.r0, d.h, Math.cos(d.a) * d.r0], TW_AHEAD);
+        const token = { kind: "token", params: [i, 0], pattern: false, fit: false, flat: 0.3 };
+        if (d.type === "plank")
+          k.add(k.box(0.13, 0.018, 0.036), {
+            ...token,
+            pos,
+            rot: [0, d.yaw, 0],
+            count: 110,
+            color: (c) =>
+              lit(
+                mix("#8a5a30", "#5a3a1e", 0.5 + 0.5 * Math.sin(c.lp[0] * 90 + 3 * d.tone)),
+                c.n,
+                0.4,
+              ),
+          });
+        else if (d.type === "clod")
+          k.add(k.sphere(0.024), {
+            ...token,
+            pos,
+            scale: [1.2, 0.8, 1],
+            count: 60,
+            color: (c) => lit(mix("#4a3624", "#6a5238", c.rand()), c.n, 0.4),
+          });
+        else
+          k.add(k.ellipsoid(0.036, 0.005, 0.021), {
+            ...token,
+            pos,
+            rot: [0, d.yaw, 0],
+            count: 50,
+            color: (c) =>
+              lit(ramp(["#4a8a2a", "#9aa830", "#e0a020", "#c8601a"], d.tone), c.n, 0.3),
+          });
       });
       // The storm cloud it hangs from, turning slowly: soft puffs, lit on top.
       const puffs = [];
@@ -1143,14 +1521,65 @@ export const RECIPES = {
 
   rainbow: {
     alive: true,
+    controls: [{ key: "draw", label: "Draw", type: "pulse", ease: RB_SECS }],
+    action: { key: "draw", label: "Draw the rainbow" },
+    // A tap wipes the arc away in a blink (violet first), then draws it
+    // again colour by colour, red first, each band from the left cloud to
+    // the right one behind a bright little pen of its own colour. When the
+    // last band is in, sparkles burst from both clouds, which puff up, and
+    // drift down as they fade.
+    drive(t, c, out) {
+      const s = since(c.draw, RB_SECS);
+      const ch = rbChannel(s);
+      out.morph = [ch];
+      // The pen rides the drawing front: band i, from the left foot (f = 1)
+      // to the right (f = 0).
+      const x = ch * 7;
+      const drawing = s !== null && s > 0.8 && s < 3.6;
+      out.tokens = RB_COLS.map((_, i) => {
+        const base = [0, rbRadius(i), 0.075];
+        const f = x - (6 - i);
+        if (!drawing || f < 0 || f > 1) return { base, visible: 0 };
+        const a = Math.PI * f;
+        const r = rbRadius(i);
+        return {
+          base,
+          offset: sub([Math.cos(a) * r, Math.sin(a) * r, 0.075], base),
+          visible: smoothstep(0, 0.05, f) * smoothstep(1, 0.95, f),
+        };
+      });
+      const burst = s === null ? 0 : band(s, 3.5, 4.7);
+      const grow = 1 + 9 * easeOut(burst);
+      const fade = s === null || s < 3.5 ? 0 : 1 - band(s, 4.1, 4.8);
+      for (const side of ["L", "R"]) {
+        out.parts[`burst${side}`] = {
+          scale: grow,
+          offset: [0, -0.07 * burst * burst, 0],
+          visible: fade / grow,
+        };
+        out.parts[`cloud${side}`] = {
+          scale: 1 + 0.1 * (s === null ? 0 : bump(s, 3.45, 3.65, 3.8, 4.6)),
+        };
+      }
+      out.parts.glitter = { visible: 1 - clamp01(ch) };
+    },
     build(k) {
-      const bands = ["#e8302a", "#f58a1f", "#f7d51d", "#4cb748", "#2a8fd8", "#4a4aa8", "#8a3aa0"];
-      const R = 0.82;
-      const w = 0.2;
+      const bands = RB_COLS;
+      const R = RB_R;
+      const w = RB_W;
+      // The arc: each splat fades out as channel 0 passes its place (its
+      // band, then how far along it is).
       k.add(k.torus(R, w), {
         rot: [90, 0, 0],
         scale: [1, 0.3, 1],
         flat: 0.25,
+        kind: "fade",
+        channel: 0,
+        params: (c) => {
+          const d = Math.hypot(c.p[0], c.p[1]) - R;
+          const f = clamp(0.5 - d / (2 * w), 0, 0.999);
+          return [rbAt(Math.floor(f * 7), Math.atan2(c.p[1], c.p[0])), 0.012];
+        },
         color: (c) => {
           if (c.p[1] < -0.02) return null;
           const d = Math.hypot(c.p[0], c.p[1]) - R;
@@ -1159,8 +1588,9 @@ export const RECIPES = {
           return lit(col, c.n, 0.2);
         },
       });
-      // Fluffy clouds at both feet.
+      // Fluffy clouds at both feet (a part each, to puff up).
       for (const side of [-1, 1]) {
+        const cloud = k.part(side < 0 ? "cloudL" : "cloudR", { pivot: [side * R, 0.02, 0] });
         for (let i = 0; i < 7; i++) {
           const s = 0.13 + 0.07 * k.rand();
           const pos = [
@@ -1174,12 +1604,14 @@ export const RECIPES = {
             flat: 0.8,
             kind: "breathe",
             params: [0.015, side],
+            part: cloud,
             color: (c) =>
               mix("#c8d4e4", "#ffffff", clamp(0.4 + 0.6 * dot(c.n, LIGHT) + 0.3 * c.n[1], 0, 1)),
           });
         }
       }
-      // Sparkles.
+      // Sparkles (they go while the arc is wiped).
+      const glitter = k.part("glitter", { pivot: [0, 0.5, 0] });
       k.cloud({ share: 0.01, size: 0.9, pattern: false }, (r) => {
         const a = r() * Math.PI;
         const rr = R + (r() - 0.5) * 0.7;
@@ -1189,31 +1621,139 @@ export const RECIPES = {
           opacity: 0.9,
           kind: "twinkle",
           params: [0.45, r() * 6],
+          part: glitter,
         };
       });
+      // The pens, one per band (token i), built at the top of the arc just
+      // in front of it: a bright core and a soft halo.
+      RB_COLS.forEach((col, i) => {
+        const at = [0, rbRadius(i), 0.075];
+        k.cloud({ count: 70, size: 0.8, pattern: false }, (r) => {
+          const d = randDir(r);
+          const rr = 0.022 * Math.cbrt(r());
+          return {
+            p: add(at, mul(d, rr)),
+            color: mix(col, "#ffffff", 0.55 + 0.4 * (1 - rr / 0.022)),
+            opacity: 1,
+            kind: "token",
+            params: [i, 0],
+          };
+        });
+        k.cloud({ count: 16, size: 3.2, pattern: false }, (r) => ({
+          p: add(at, mul(randDir(r), 0.02 * r())),
+          color: mix(col, "#ffffff", 0.35),
+          opacity: 0.25,
+          kind: "token",
+          params: [i, 0],
+        }));
+      });
+      // Bursts of sparkles from both clouds, built packed at each foot and
+      // spread by their part's scale.
+      for (const side of [-1, 1]) {
+        // In front of the cloud, so they draw over it.
+        const foot = [side * (R - 0.02), 0.2, 0.3];
+        const part = k.part(side < 0 ? "burstL" : "burstR", { pivot: foot });
+        k.cloud({ share: 0.0016, size: 1.9, pattern: false }, (r) => {
+          const d = randDir(r);
+          const up = [d[0] * 1.1, Math.abs(d[1]) * 0.8 + 0.55, d[2] * 0.3];
+          return {
+            p: add(foot, mul(up, 0.06 * (0.3 + 0.7 * r()))),
+            color: r() < 0.6 ? "#ffffff" : mix(RB_COLS[Math.floor(r() * 7)], "#ffffff", 0.35),
+            opacity: 1,
+            part,
+          };
+        });
+      }
     },
   },
 
   iceberg: {
     alive: true,
+    controls: [{ key: "calve", label: "Calve", type: "pulse", ease: IB_SECS }],
+    action: { key: "calve", label: "Break off a chunk" },
+    // A tap cracks a chunk off the berg's shoulder (a part cut by a plane,
+    // with fresh pale ice on both broken faces). It tips over to the right,
+    // falls into the sea with a crown of spray and a ring of ripples, bobs
+    // and drifts, then melts away as one piece; the berg, lighter, bobs up
+    // and rocks, and the chunk grows back in place from its broken face.
+    drive(t, c, out, info) {
+      const ch = info?.data?.chunk;
+      if (!ch) return;
+      const s = since(c.calve, IB_SECS);
+      const m = mem(c);
+      cuesAt(m, s, [[ch.Ti, { voice: "splash", f: 1100, decay: 1.6, vol: 0.9 }]], out);
+      const P = ch.hinge;
+      if (s === null) {
+        out.parts.chunk = {};
+        out.parts.berg = {};
+        out.parts.splash = { visible: 0 };
+        out.parts.ripple = { visible: 0 };
+        out.morph = [0, 0];
+        return;
+      }
+      const pose = icebergPose(ch, s);
+      if (pose.regrow !== undefined) {
+        const k = pose.regrow;
+        out.parts.chunk = { scale: k, offset: mul(sub(ch.F, P), 1 - k), visible: k > 0.01 ? 1 : 0 };
+      } else {
+        const q = quatAxisAngle(IB_AXIS, pose.th);
+        const off = sub(sub(pose.C, P), quatRotate(q, mul(sub(ch.C0, P), pose.k)));
+        // A jolt as it cracks, before it starts to tip.
+        const jolt = 0.012 * bump(s, 0, 0.03, 0.06, 0.12);
+        out.parts.chunk = {
+          quat: q,
+          scale: pose.k,
+          offset: add(off, mul(IB_OUT, jolt)),
+          visible: pose.k > 0.01 ? 1 : 0,
+        };
+      }
+      // The berg, lighter, bobs up and rocks after the chunk goes.
+      const u = Math.max(0, s - 0.45);
+      const damp = Math.exp(-u / 1.0) * (1 - band(s, 3.6, 4.6)) * (s > 0.45 ? 1 : 0);
+      const rockAxis = unit(cross([0, 1, 0], IB_OUT));
+      out.parts.berg = {
+        offset: [0, 0.035 * damp * Math.sin((TAU * u) / 1.4), 0],
+        quat: quatAxisAngle(rockAxis, -0.07 * damp * Math.sin((TAU * u) / 1.7)),
+      };
+      // The splash: a crown of drops thrown up from where it lands, and
+      // rings of ripples and foam spreading on the sea (channel 1 fades
+      // them in and out).
+      const w = s - ch.Ti;
+      if (w > 0 && w < 0.62) {
+        const kk = w / 0.06;
+        out.parts.splash = {
+          scale: kk,
+          offset: add(mul(IB_CAM, -0.3), [0, -0.5 * IB_G * w * w, 0]),
+          visible: (Math.min(1, kk * 0.3) / kk) * (1 - band(w, 0.45, 0.6)),
+        };
+      } else out.parts.splash = { visible: 0 };
+      const kr = 1 + 11 * easeOut(band(w, 0, 1.6));
+      out.parts.ripple = { scale: kr, visible: w > 0 ? 1 / Math.sqrt(kr) : 0 };
+      out.morph = [0, w > 0 ? band(w, 0, 0.12) * (1 - ease(band(w, 0.5, 1.7))) : 0];
+    },
     build(k) {
       const n = k.noise;
-      const shape = k.radial(
-        (d) => {
-          const up = smoothstep(-0.25, 0.25, d[1]);
-          const a = 0.82 - 0.3 * up;
-          const b = 1.0 - 0.25 * smoothstep(-0.1, 0.1, d[1]);
-          const base = 1 / Math.hypot(Math.hypot(d[0], d[2]) / a, d[1] / b);
-          const bump = Math.max(0, n(d[0] * 1.6 + 5, d[1] * 1.6, d[2] * 1.6));
-          const peaks = 0.9 * bump * bump * Math.max(0, d[1]);
-          return base * (1 + 0.1 * n.fbm(d[0] * 2, d[1] * 2, d[2] * 2, 3) + peaks);
-        },
-        { grid: 96 },
-      );
+      const shapeR = (d) => {
+        const up = smoothstep(-0.25, 0.25, d[1]);
+        const a = 0.82 - 0.3 * up;
+        const b = 1.0 - 0.25 * smoothstep(-0.1, 0.1, d[1]);
+        const base = 1 / Math.hypot(Math.hypot(d[0], d[2]) / a, d[1] / b);
+        const bump = Math.max(0, n(d[0] * 1.6 + 5, d[1] * 1.6, d[2] * 1.6));
+        const peaks = 0.9 * bump * bump * Math.max(0, d[1]);
+        return base * (1 + 0.1 * n.fbm(d[0] * 2, d[1] * 2, d[2] * 2, 3) + peaks);
+      };
+      const shape = k.radial(shapeR, { grid: 96 });
+      const ch = icebergChunk(shapeR);
+      k.data = { chunk: ch };
+      const inChunk = (p) => dot(p, IB_N) > ch.h && p[1] > IB_FLOOR;
+      const berg = k.part("berg", { pivot: [0, 0, 0] });
+      const chunk = k.part("chunk", { pivot: ch.hinge });
       k.add(shape, {
         flat: 0.25,
         interior: 0.12,
-        core: "#8fd0ee",
+        // The chunk is hollow (its inside would draw over it as it turns).
+        core: (c) => (inChunk(c.p) ? null : "#8fd0ee"),
+        part: (c) => (inChunk(c.p) ? chunk : berg),
         color: (c) => {
           const y = c.p[1];
           const g = c.fbm(c.p[0] * 5, c.p[1] * 5, c.p[2] * 5);
@@ -1227,6 +1767,45 @@ export const RECIPES = {
           return col;
         },
       });
+      // The broken faces, on the two cuts, inside until it breaks: fresh
+      // ice, paler and glassier than the weathered surface. One set stays
+      // on the berg and one goes with the chunk.
+      const e1 = unit(cross(IB_N, [0, 1, 0]));
+      const e2 = cross(IB_N, e1);
+      const Q = mul(IB_N, ch.h);
+      const inside = (p) => len(p) < shapeR(unit(p)) * 0.995;
+      // A point on the steep cut (above the floor) or on the floor (outside
+      // the cut), with the face's normal out of the berg.
+      const onCut = (r) => {
+        for (let tries = 0; tries < 80; tries++) {
+          if (r() < 0.7) {
+            const p = add(Q, add(mul(e1, (r() - 0.5) * 1.4), mul(e2, (r() - 0.5) * 1.4)));
+            if (p[1] > IB_FLOOR && inside(p)) return [p, IB_N];
+          } else {
+            const p = [(r() - 0.5) * 1.8, IB_FLOOR, (r() - 0.5) * 1.8];
+            if (dot(p, IB_N) > ch.h && inside(p)) return [p, [0, 1, 0]];
+          }
+        }
+        return null;
+      };
+      for (const side of [1, -1]) {
+        k.cloud({ share: 0.03, size: 1.15, pattern: false }, (r) => {
+          const hit = onCut(r);
+          if (!hit) return null;
+          const p = hit[0];
+          const nn = mul(hit[1], side);
+          const vein = n(p[0] * 7, p[1] * 7, p[2] * 7);
+          const col = mix("#e6f7ff", "#9fd6f2", 0.5 + 0.5 * vein);
+          return {
+            p: add(p, mul(nn, 0.004)),
+            n: nn,
+            flat: 0.2,
+            color: lit(Math.abs(vein) < 0.05 ? "#ffffff" : col, nn, 0.35),
+            opacity: 0.97,
+            part: side > 0 ? berg : chunk,
+          };
+        });
+      }
       // The sea: see-through and rippling, with foam at the waterline,
       // fading out towards its edge.
       k.cloud({ share: 0.14, size: 1.7, flat: 0.3, pattern: false }, (r) => {
@@ -1243,6 +1822,47 @@ export const RECIPES = {
           opacity: foam ? 0.85 : 0.5 * (1 - smoothstep(0.75, 1.38, rr)) + 0.04,
           kind: "wave",
           params: [0.006, 0],
+        };
+      });
+      // Where the chunk lands.
+      const fall = ch.Ti - ch.T1;
+      const Ci = add(add(ch.C1, mul(ch.V1, fall)), [0, -0.5 * IB_G * fall * fall, 0]);
+      const W = [Ci[0], 0.012, Ci[2]];
+      // The splash: drops built packed at the landing point (a little
+      // towards the camera, to draw over the chunk) and thrown up by their
+      // part's scale; the drive adds the fall (see splash in drive).
+      const W1 = add(W, mul(IB_CAM, 0.3));
+      const splash = k.part("splash", { pivot: W1 });
+      k.cloud({ share: 0.004, size: 0.9, pattern: false }, (r) => {
+        const a = r() * TAU;
+        const vr = 0.45 + 0.65 * Math.sqrt(r());
+        const v = [Math.cos(a) * vr, 1.45 + 0.3 * r(), Math.sin(a) * vr];
+        return {
+          p: add(W1, mul(v, 0.06)),
+          color: mix("#d8f2ff", "#ffffff", r()),
+          opacity: 0.9,
+          part: splash,
+        };
+      });
+      // Ripples: two rings and a patch of foam, built small and spread by
+      // their part's scale, fading in and out on channel 1.
+      const ripple = k.part("ripple", { pivot: W });
+      k.cloud({ share: 0.005, size: 0.8, pattern: false }, (r) => {
+        const a = r() * TAU;
+        const pick = r();
+        const rr = pick < 0.4 ? 0.05 : pick < 0.7 ? 0.03 : 0.018 * Math.sqrt(r());
+        const ring = pick < 0.7;
+        return {
+          p: add(W, [Math.cos(a) * rr, 0, Math.sin(a) * rr]),
+          dir: ring ? [-Math.sin(a), 0, Math.cos(a)] : undefined,
+          n: ring ? undefined : [0, 1, 0],
+          stretch: 2.5,
+          color: mix("#e2f5ff", "#ffffff", r()),
+          opacity: ring ? 0.75 : 0.85,
+          kind: "fade",
+          channel: 1,
+          params: [0, -0.99],
+          part: ripple,
         };
       });
       // Two little floes.
