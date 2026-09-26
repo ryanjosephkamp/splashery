@@ -907,13 +907,26 @@ export const TOY_SOUNDS = {
 
   // ---- Animals ----------------------------------------------------------------------
   jellyfish: { voice: "thud", f: 55, bright: 0.1, decay: 2.2 },
-  "fish-school": { voice: "whoosh", f: 700, to: 1.6, decay: 0.7, vol: 0.7 },
+  // Water swishes as the school swirls into a ball, then bursts apart.
+  "fish-school": [
+    { voice: "whoosh", f: 500, to: 1.8, decay: 2.6, vol: 0.6 },
+    { voice: "whoosh", at: 2.15, f: 900, to: 2.5, decay: 0.7, vol: 0.8 },
+    { voice: "bubbles", at: 2.25, f: 600, n: 12, decay: 1.4, vol: 0.6 },
+  ],
   butterfly: { voice: "flutter", f: 3500, rate: 14, decay: 0.8, vol: 0.4 },
   pufferfish: [
     { voice: "whoosh", f: 200, to: 2.5, decay: 0.6 },
     { voice: "engine", at: 0.5, f: 30, to: 1.3, bright: 0.2, decay: 0.5, vol: 0.6 },
   ],
-  nautilus: { voice: "hollow", f: 180, decay: 2.2, bright: 0.2 },
+  // A jet of water as it pulls in, the hollow shell ringing, and a knock and
+  // a few bubbles as it peeks out again.
+  nautilus: [
+    { voice: "whoosh", f: 260, to: 0.6, decay: 0.7, vol: 0.7 },
+    { voice: "hollow", at: 0.1, f: 180, decay: 2.2, bright: 0.2 },
+    { voice: "bubbles", at: 0.05, f: 420, n: 6, decay: 0.9, vol: 0.5 },
+    { voice: "hollow", at: 2.05, f: 200, decay: 1.6, bright: 0.2, vol: 0.6 },
+    { voice: "bubbles", at: 3.1, f: 380, n: 5, decay: 1, vol: 0.4 },
+  ],
   ladybug: {
     on: { voice: "buzz", f: 300, rate: 25, bright: 0.8, decay: 0.8, vol: 0.6 },
     off: { voice: "buzz", f: 280, rate: 25, bright: 0.8, decay: 0.4, vol: 0.5 },
@@ -927,8 +940,17 @@ export const TOY_SOUNDS = {
     { voice: "whoosh", at: 0.1, f: 250, to: 3, decay: 0.8 },
   ],
   starfish: { voice: "pop", f: 300, decay: 1.8 },
-  "sea-urchin": { voice: "rattle", f: 3000, n: 14, decay: 1.3, vol: 0.6 },
-  frog: { voice: "ribbit", f: 320 },
+  // The spines rustle wave after wave.
+  "sea-urchin": { voice: "rattle", f: 3000, n: 40, decay: 10, vol: 0.55 },
+  // The fly buzzes in, the tongue flicks out and back, a gulp, two croaks.
+  frog: [
+    { voice: "buzz", f: 230, rate: 13, decay: 1.25, vol: 0.4 },
+    { voice: "whoosh", at: 0.98, f: 1400, to: 2, decay: 0.25, vol: 0.6 },
+    { voice: "pop", at: 1.4, f: 500, vol: 0.6 },
+    { voice: "gloop", at: 1.7, f: 140, vol: 0.7 },
+    { voice: "ribbit", at: 2.45, f: 320 },
+    { voice: "ribbit", at: 2.95, f: 300 },
+  ],
   penguin: { voice: "squawk", f: 420 },
   owl: [
     { voice: "hoot", f: 360 },
