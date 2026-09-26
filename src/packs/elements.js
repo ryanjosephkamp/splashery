@@ -1297,15 +1297,15 @@ export const RECIPES = {
       // (evenly spread, so it is smooth water, not blotches), a little
       // uneven at its rim, spread out by its part's scale.
       const puddle = k.part("puddle", { pivot: [0, 0, 0] });
-      k.cloud({ share: 0.012, size: 3, pattern: false }, (r, i, n) => {
+      k.cloud({ share: 0.012, size: 8, pattern: false }, (r, i, n) => {
         const a = i * 2.399963;
-        const rr = 0.9 * Math.sqrt((i + 0.5) / n) * (0.93 + 0.07 * Math.sin(a * 5 + 1));
+        const rr = 0.86 * Math.sqrt((i + 0.5) / n) * (0.93 + 0.07 * Math.sin(a * 5 + 1));
         return {
           p: [Math.cos(a) * rr, 0.004, Math.sin(a) * rr * 0.9],
           n: [0, 1, 0],
-          flat: 0.3,
-          color: mix("#c4e8f8", "#7fc0e0", rr / 0.9),
-          opacity: 0.5,
+          flat: 0.2,
+          color: mix("#cdeefb", "#86c6e4", rr / 0.86),
+          opacity: 0.32,
           part: puddle,
         };
       });
