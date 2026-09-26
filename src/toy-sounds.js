@@ -871,7 +871,12 @@ export const TOY_SOUNDS = {
       { voice: "stone", at: 0.35, f: 250, decay: 1.5 },
     ],
   },
-  shield: { voice: "metal", f: 260, decay: 1.4 },
+  // A clang, crackling sparks and a shimmer as the gleam crosses it.
+  shield: [
+    { voice: "metal", f: 260, decay: 1.4 },
+    { voice: "crackle", at: 0.02, f: 4200, n: 14, decay: 1, vol: 0.5 },
+    { voice: "shimmer", at: 0.4, f: 1600, decay: 1.1, vol: 0.4 },
+  ],
   "bow-and-target": {
     on: [
       { voice: "twang", at: 0.42, f: 130 },
@@ -893,7 +898,18 @@ export const TOY_SOUNDS = {
     on: { voice: "metal", f: 520, decay: 0.5, bright: 0.6 },
     off: { voice: "metal", f: 440, decay: 0.45, bright: 0.4 },
   },
-  crown: { voice: "brass", notes: "C5 C5 C5 G5 - E5 G5+C6", step: 0.14, decay: 1.2 },
+  // A royal fanfare, and a ping for each jewel as it lights.
+  crown: [
+    { voice: "brass", notes: "C5 C5 C5 G5 - E5 G5+C6", step: 0.14, decay: 1.2 },
+    {
+      voice: "glass",
+      at: 0.4,
+      notes: "C6 D6 E6 G6 A6 C7 D7 E7",
+      step: 0.175,
+      decay: 0.8,
+      vol: 0.35,
+    },
+  ],
   "dragon-egg": {
     on: [
       { voice: "crack", f: 1500, bright: 0.5 },
@@ -908,13 +924,26 @@ export const TOY_SOUNDS = {
 
   // ---- Animals ----------------------------------------------------------------------
   jellyfish: { voice: "thud", f: 55, bright: 0.1, decay: 2.2 },
-  "fish-school": { voice: "whoosh", f: 700, to: 1.6, decay: 0.7, vol: 0.7 },
+  // Water swishes as the school swirls into a ball, then bursts apart.
+  "fish-school": [
+    { voice: "whoosh", f: 500, to: 1.8, decay: 2.6, vol: 0.6 },
+    { voice: "whoosh", at: 2.15, f: 900, to: 2.5, decay: 0.7, vol: 0.8 },
+    { voice: "bubbles", at: 2.25, f: 600, n: 12, decay: 1.4, vol: 0.6 },
+  ],
   butterfly: { voice: "flutter", f: 3500, rate: 14, decay: 0.8, vol: 0.4 },
   pufferfish: [
     { voice: "whoosh", f: 200, to: 2.5, decay: 0.6 },
     { voice: "engine", at: 0.5, f: 30, to: 1.3, bright: 0.2, decay: 0.5, vol: 0.6 },
   ],
-  nautilus: { voice: "hollow", f: 180, decay: 2.2, bright: 0.2 },
+  // A jet of water as it pulls in, the hollow shell ringing, and a knock and
+  // a few bubbles as it peeks out again.
+  nautilus: [
+    { voice: "whoosh", f: 260, to: 0.6, decay: 0.7, vol: 0.7 },
+    { voice: "hollow", at: 0.1, f: 180, decay: 2.2, bright: 0.2 },
+    { voice: "bubbles", at: 0.05, f: 420, n: 6, decay: 0.9, vol: 0.5 },
+    { voice: "hollow", at: 2.05, f: 200, decay: 1.6, bright: 0.2, vol: 0.6 },
+    { voice: "bubbles", at: 3.1, f: 380, n: 5, decay: 1, vol: 0.4 },
+  ],
   ladybug: {
     on: { voice: "buzz", f: 300, rate: 25, bright: 0.8, decay: 0.8, vol: 0.6 },
     off: { voice: "buzz", f: 280, rate: 25, bright: 0.8, decay: 0.4, vol: 0.5 },
@@ -928,8 +957,17 @@ export const TOY_SOUNDS = {
     { voice: "whoosh", at: 0.1, f: 250, to: 3, decay: 0.8 },
   ],
   starfish: { voice: "pop", f: 300, decay: 1.8 },
-  "sea-urchin": { voice: "rattle", f: 3000, n: 14, decay: 1.3, vol: 0.6 },
-  frog: { voice: "ribbit", f: 320 },
+  // The spines rustle wave after wave.
+  "sea-urchin": { voice: "rattle", f: 3000, n: 40, decay: 10, vol: 0.55 },
+  // The fly buzzes in, the tongue flicks out and back, a gulp, two croaks.
+  frog: [
+    { voice: "buzz", f: 230, rate: 13, decay: 1.25, vol: 0.4 },
+    { voice: "whoosh", at: 0.98, f: 1400, to: 2, decay: 0.25, vol: 0.6 },
+    { voice: "pop", at: 1.56, f: 500, vol: 0.6 },
+    { voice: "gloop", at: 1.82, f: 140, vol: 0.7 },
+    { voice: "ribbit", at: 2.55, f: 320 },
+    { voice: "ribbit", at: 3.05, f: 300 },
+  ],
   penguin: { voice: "squawk", f: 420 },
   owl: [
     { voice: "hoot", f: 360 },
@@ -944,9 +982,12 @@ export const TOY_SOUNDS = {
     ],
     off: { voice: "whoosh", f: 600, to: 0.3, decay: 0.6 },
   },
+  // Drips as it melts, then the crunch of snow as it builds itself again
+  // and a twinkle as the pieces hop back.
   snowman: [
-    { voice: "drip", f: 1000, n: 2, rate: 4 },
-    { voice: "crunch", at: 0.5, f: 1000, n: 16, decay: 1.8, bright: 0.2 },
+    { voice: "drip", at: 0.3, f: 1000, n: 6, rate: 3.5 },
+    { voice: "crunch", at: 3.1, f: 1000, n: 16, decay: 1.6, bright: 0.2 },
+    { voice: "chimes", at: 3.95, f: "E6", n: 4, decay: 0.8, vol: 0.4 },
   ],
   fireworks: [
     { voice: "whistle", f: 900, to: 2.2, decay: 1 },
@@ -1031,45 +1072,73 @@ export const TOY_SOUNDS = {
   },
 
   // ---- Landmarks --------------------------------------------------------------------
+  // The lights sparkle, and a boom for each of the four bursts.
   "eiffel-tower": [
-    { voice: "sparkle", f: 3000, n: 10, decay: 1.6 },
-    { voice: "kick", at: 0.3, f: 45, decay: 1.2, vol: 0.4 },
-    { voice: "kick", at: 0.7, f: 50, decay: 1.2, vol: 0.3 },
+    { voice: "sparkle", at: 0.25, f: 3000, n: 18, decay: 4.5, vol: 0.8 },
+    { voice: "kick", at: 0.38, f: 48, decay: 1.4, vol: 0.45 },
+    { voice: "kick", at: 0.93, f: 55, decay: 1.4, vol: 0.4 },
+    { voice: "kick", at: 1.48, f: 45, decay: 1.4, vol: 0.45 },
+    { voice: "kick", at: 2.13, f: 52, decay: 1.6, vol: 0.4 },
   ],
-  "washington-monument": { voice: "wind", f: 400, rate: 0.3, decay: 1.3 },
+  // A day's breeze while the sun crosses, and a soft chime at noon.
+  "washington-monument": [
+    { voice: "wind", f: 400, rate: 0.3, decay: 2.6 },
+    { voice: "chimes", at: 2.2, f: "G5", n: 3, decay: 1.2, vol: 0.35 },
+  ],
+  // The saucer arrives, sand hisses up into the beam, and it zips away.
   pyramids: [
     { voice: "theremin", f: 330, to: 1.26, decay: 1.2, vol: 0.7 },
-    { voice: "hiss", f: 6000, decay: 1.4, vol: 0.5 },
+    { voice: "hiss", at: 1.4, f: 6000, decay: 2.2, vol: 0.5 },
+    { voice: "theremin", at: 4.3, f: 440, to: 2.2, decay: 0.5, vol: 0.6 },
   ],
+  // A rising lift tone as the floors wring round, and a ding each time the
+  // ring of light reaches the top.
   supertall: [
-    { voice: "tone", f: "C5", to: 2, kind: "sine", decay: 2, vol: 0.5 },
-    { voice: "ding", at: 0.8, f: "E6" },
+    { voice: "tone", f: "C5", to: 2, kind: "sine", decay: 1.4, vol: 0.5 },
+    { voice: "ding", at: 1.55, f: "E6" },
+    { voice: "ding", at: 3.55, f: "G6", vol: 0.7 },
   ],
   lighthouse: {
     on: { voice: "horn", f: 62, kind: "fog", decay: 1.4 },
     off: { voice: "switch", f: 1800, decay: 1.5 },
   },
+  // The flame whooshes up, sparks crackle and a harbour bell rings.
   "statue-of-liberty": [
     { voice: "whoosh", f: 300, to: 3, decay: 0.8 },
-    { voice: "bell", at: 0.4, f: "D5", decay: 1.1, bright: 0.4 },
+    { voice: "crackle", at: 0.2, f: 2600, n: 16, decay: 2.6, vol: 0.5 },
+    { voice: "bell", at: 0.5, f: "D5", decay: 1.3, bright: 0.4 },
   ],
-  "white-house": { voice: "splash", f: 2400, bright: 0.8, decay: 1.6 },
+  // The jet shoots up and its spray patters back into the basin.
+  "white-house": [
+    { voice: "splash", f: 2400, bright: 0.8, decay: 1.6 },
+    { voice: "patter", at: 0.5, f: 2200, n: 30, decay: 4.5, vol: 0.5 },
+  ],
+  // The tower grinds as it leans, then both balls land at the same moment.
   "leaning-tower": [
-    { voice: "thud", f: 140, bright: 0.3 },
-    { voice: "thud", f: 75, bright: 0.2 },
+    { voice: "scrape", f: 240, rate: 9, decay: 1.4, vol: 0.35 },
+    { voice: "thud", at: 1.9, f: 140, bright: 0.3 },
+    { voice: "thud", at: 1.9, f: 75, bright: 0.2 },
   ],
-  colosseum: { voice: "cheer", f: 200, n: 10 },
-  parthenon: { voice: "harp", notes: "D4+A4+D5+F5", strum: 0.05, decay: 0.8 },
+  // The crowd cheers over the drumming hooves.
+  colosseum: [
+    { voice: "cheer", f: 200, n: 10, decay: 1.8 },
+    { voice: "patter", at: 0.4, f: 500, n: 48, decay: 7, vol: 0.8 },
+    { voice: "cheer", at: 2.4, f: 220, n: 10, decay: 1.4, vol: 0.8 },
+  ],
+  // A lyre plays a walking tune for the procession.
+  parthenon: { voice: "harp", notes: "D4 A4 D5 F5 E5 D5 A4 D5", step: 0.45, decay: 0.9 },
+  // A low drone as the sun rises, and a bell as it lights the stones.
   stonehenge: [
-    { voice: "drone", f: 65, bright: 0.25, decay: 1.4 },
-    { voice: "bell", at: 0.5, f: "D5", decay: 1.3, bright: 0.2 },
+    { voice: "drone", f: 65, bright: 0.25, decay: 2 },
+    { voice: "bell", at: 1.9, f: "D5", decay: 1.4, bright: 0.2 },
   ],
   // The Westminster quarters, simplified: four notes, then the hour bell.
   "big-ben": [
     { voice: "bell", notes: "E5 C5 D5 G4 - G4 D5 E5 C5", step: 0.34, decay: 0.8 },
     { voice: "bell", at: 3.3, f: "E3", decay: 1.3 },
   ],
-  "taj-mahal": { voice: "sitar", f: "D3" },
+  // A slow sitar phrase for the moonlight.
+  "taj-mahal": { voice: "sitar", notes: "D3 A3 D4 - C4 A3", step: 0.55, decay: 0.9 },
   castle: {
     // Raising (on): chains, then the bridge thuds shut. Lowering: a fanfare.
     on: [

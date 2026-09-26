@@ -110,6 +110,12 @@ function hashInt(n) {
 }
 
 // The diya's ring of small lamps.
+// The snowman stands on the ground at SNOW.ground; its melt and rebuild
+// take SNOW.secs.
+const SNOW = { ground: -0.97, secs: 6.2 };
+// Seconds since a pulse fired, as 0..1 (1 at rest).
+const progress = (v) => (v > 0 ? 1 - v : 1);
+
 const DIYAS = 8;
 
 // Fireworks: the three launch tubes (x, z, colour), the burst each one
@@ -301,13 +307,77 @@ export const RECIPES = {
   // ---- Snowman ----------------------------------------------------------------------------
   snowman: {
     alive: true,
-    controls: [{ key: "warmth", label: "Warmth", type: "slider", default: 0 }],
-    drive(t, c, out) {
-      out.energy = c.warmth;
-      out.grow = c.warmth;
+    controls: [
+      { key: "warmth", label: "Warmth", type: "slider", default: 0 },
+      { key: "thaw", label: "Thaw", type: "pulse", ease: SNOW.secs },
+    ],
+    action: { key: "thaw", label: "Melt and rebuild" },
+    drive(t, c, out, info) {
+      // It melts as solid pieces, not a squash: the three snowballs shrink
+      // (the head fastest), drips fall, and the hat, nose, coals, arms and
+      // scarf drop off one by one into a spreading puddle. Then it builds
+      // itself again: the balls grow back from the bottom up, and each
+      // piece hops back to its place. Warmth melts it the same way.
+      const on = c.thaw > 0;
+      const s = progress(c.thaw) * SNOW.secs;
+      const tap = on ? (s < 3.1 ? band(s, 0.1, 2.7) ** 1.5 : 1) : 0;
+      const m = Math.max(c.warmth, tap);
+      const r = on ? band(s, 3.1, SNOW.secs - 0.2) : 0;
+      const d = info.data;
+      if (!d) return;
+      // The balls: each shrinks about its centre and sits on the one below.
+      const melted = d.balls.map((b, i) => 1 - 0.85 * band(m, b.from, b.to));
+      const grown = d.balls.map((b, i) => {
+        const g = band(r, 0.12 * i, 0.12 * i + 0.25);
+        return g <= 0 ? 0 : g >= 1 ? 1 : easeInOut(g) + 0.12 * Math.sin(Math.PI * g);
+      });
+      const sc = melted.map((v, i) => (r > 0 ? v + (1 - v) * grown[i] : v));
+      const centres = [];
+      d.balls.forEach((b, i) => {
+        const y =
+          i === 0
+            ? SNOW.ground + b.r * sc[0]
+            : centres[i - 1] + (b.y - d.balls[i - 1].y) * (sc[i] + sc[i - 1]) * 0.5;
+        centres.push(y);
+        out.parts[`ball${i}`] = { scale: sc[i], offset: [0, y - b.y, 0] };
+      });
+      // The pieces ride on their ball, drop off when the melt reaches them,
+      // and hop home in turn as it is rebuilt.
+      out.tokens = d.pieces.map((pc, i) => {
+        const b = d.balls[pc.ball];
+        const rideAt = (mm) => {
+          const k = 1 - 0.85 * band(mm, b.from, b.to);
+          const idx = pc.ball;
+          let y =
+            SNOW.ground + d.balls[0].r * (1 - 0.85 * band(mm, d.balls[0].from, d.balls[0].to));
+          for (let j = 1; j <= idx; j++) {
+            const kj = 1 - 0.85 * band(mm, d.balls[j].from, d.balls[j].to);
+            const kp = 1 - 0.85 * band(mm, d.balls[j - 1].from, d.balls[j - 1].to);
+            y += (d.balls[j].y - d.balls[j - 1].y) * (kj + kp) * 0.5;
+          }
+          return vec.add([0, y, 0], vec.mul(vec.sub(pc.home, [0, b.y, 0]), k));
+        };
+        const f = band(m, pc.drop, pc.drop + 0.2);
+        let p = rideAt(Math.min(m, pc.drop));
+        let angle = 0;
+        if (f > 0) {
+          const from = rideAt(pc.drop);
+          p = vec.add(vec.add(from, vec.mul(vec.sub(pc.land, from), f)), [0, 0, 0]);
+          p[1] = from[1] + (pc.land[1] - from[1]) * f * f;
+          angle = pc.spin * f;
+        }
+        if (r > 0) {
+          const e = easeInOut(band(r, 0.4 + 0.025 * pc.order, 0.6 + 0.025 * pc.order));
+          const from = f > 0 ? p : rideAt(m);
+          p = vec.add(vec.add(from, vec.mul(vec.sub(pc.home, from), e)), [0, (0.3 + 0.2 * Math.max(0, pc.home[1] - pc.land[1])) * Math.sin(Math.PI * e), 0]); // prettier-ignore
+          angle *= 1 - e;
+        }
+        return { base: pc.home, offset: vec.sub(p, pc.home), quat: quatAxisAngle(pc.axis, angle) };
+      });
+      out.grow = r > 0 ? m * (1 - easeInOut(band(r, 0.2, 0.7))) : m;
+      out.parts.drips = { visible: m > 0.08 && m < 0.45 && r <= 0 ? 1 : 0 };
     },
     build(k) {
-      const melt = (a = 1) => ({ kind: "melt", params: [a, 0] });
       const snow = (c) => {
         const d = dot(c.n, LIGHT);
         const n = c.noise(c.p[0] * 40, c.p[1] * 40, c.p[2] * 40);
@@ -315,66 +385,83 @@ export const RECIPES = {
         if (n > 0.62) col = "#ffffff";
         return col;
       };
+      // The three balls, each a part; `from` and `to` are the melt levels
+      // over which it shrinks (the head first).
       const balls = [
-        [0.55, -0.42],
-        [0.4, 0.3],
-        [0.29, 0.85],
+        { r: 0.55, y: -0.42, from: 0.35, to: 1 },
+        { r: 0.4, y: 0.3, from: 0.2, to: 0.92 },
+        { r: 0.29, y: 0.85, from: 0.05, to: 0.8 },
       ];
-      for (const [r, y] of balls)
-        k.add(k.sphere(r), {
-          pos: [0, y, 0],
+      balls.forEach((b, i) =>
+        k.add(k.sphere(b.r), {
+          part: k.part(`ball${i}`, { pivot: [0, b.y, 0] }),
+          pos: [0, b.y, 0],
           flat: 0.25,
           interior: 0.08,
           core: "#e8eef6",
-          ...melt(),
           color: snow,
-        });
+        }),
+      );
+      // The pieces, each a token: where it sits, which ball holds it, the
+      // melt level at which it drops off, where it lands and how it turns.
+      const pieces = [];
+      const piece = (home, ball, drop, landR, spin, order, lift = 0.035) => {
+        const out = vec.unit([home[0] || 0.001, 0, home[2] || 0.001]);
+        const land = [out[0] * landR, SNOW.ground + lift, out[2] * landR];
+        const axis = vec.unit(vec.cross([0, 1, 0], out));
+        pieces.push({ home, ball, drop, land, spin, axis, order });
+        return { kind: "token", params: [pieces.length - 1, 0] };
+      };
       const coal = (c) => lit(c, "#1d1c1f", 0.3, 0.4);
       for (const s of [-1, 1])
         k.add(k.sphere(0.035), {
           pos: [s * 0.1, 0.94, 0.26],
           weight: 3,
           pattern: false,
-          ...melt(0.95),
+          ...piece([s * 0.1, 0.94, 0.26], 2, 0.45 + 0.03 * s, 0.62, 1.2, 10 + s),
           color: coal,
         });
       for (let i = 0; i < 5; i++) {
         const a = (i - 2) * 0.22;
+        const home = [Math.sin(a) * 0.16, 0.76 - Math.cos(a) * 0.04 + 0.03, 0.26];
         k.add(k.sphere(0.022), {
-          pos: [Math.sin(a) * 0.16, 0.76 - Math.cos(a) * 0.04 + 0.03, 0.26],
+          pos: home,
           weight: 3,
           pattern: false,
-          ...melt(0.95),
+          ...piece(home, 2, 0.5 + 0.02 * i, 0.5 + 0.06 * Math.abs(i - 2), 1.5, 5 + i),
           color: coal,
         });
       }
-      for (const y of [0.45, 0.3, 0.15]) {
+      [0.45, 0.3, 0.15].forEach((y, i) => {
         const z = Math.sqrt(0.4 * 0.4 - (y - 0.3) ** 2);
+        const home = [0, y, z - 0.01];
         k.add(k.sphere(0.04), {
-          pos: [0, y, z - 0.01],
+          pos: home,
           weight: 3,
           pattern: false,
-          ...melt(0.95),
+          ...piece(home, 1, 0.72 + 0.05 * i, 0.72 + 0.08 * i, 1.4, 2 + i),
           color: coal,
         });
-      }
+      });
       k.add(k.cone(0.045, 0.0, 0.26), {
         pos: [0, 0.86, 0.38],
         rot: [90, 0, 0],
         weight: 2.5,
         pattern: false,
-        ...melt(0.95),
+        ...piece([0, 0.86, 0.38], 2, 0.38, 0.85, 0.25, 12),
         color: (c) => lit(c, fract(c.lp[1] * 22) < 0.2 ? "#d2601a" : "#f28a2a", 0.3),
       });
       // Stick arms.
       for (const s of [-1, 1]) {
         const a = [s * 0.36, 0.38, 0];
         const b = [s * 0.82, 0.68, 0.04];
+        const home = vec.mul(vec.add(a, b), 0.5);
+        // Both sticks of an arm share its token.
         const stick = {
           flat: 0.25,
           weight: 2,
           pattern: false,
-          ...melt(0.9),
+          ...piece(home, 1, 0.55 + 0.04 * s, 1.1, 0.6, 8 + s, 0.05),
           color: (c) => lit(c, "#5a3a22", 0.3),
         };
         k.add(
@@ -396,13 +483,14 @@ export const RECIPES = {
           stick,
         );
       }
-      // Scarf.
+      // Scarf (ring and tail together) and the top hat.
+      const scarf = piece([0, 0.6, 0.001], 1, 0.66, 0.02, 0.25, 1);
       k.add(k.torus(0.27, 0.06), {
         pos: [0, 0.6, 0],
         scale: [1, 0.8, 1],
         flat: 0.3,
         pattern: false,
-        ...melt(0.9),
+        ...scarf,
         color: (c) =>
           lit(c, fract(Math.atan2(c.p[0], c.p[2]) * 1.6) < 0.5 ? "#d8262e" : "#f4f0e6", 0.3),
       });
@@ -411,25 +499,26 @@ export const RECIPES = {
         rot: [-15, 0, 10],
         flat: 0.3,
         pattern: false,
-        ...melt(0.9),
+        ...scarf,
         color: (c) => lit(c, fract(c.lp[1] * 7) < 0.5 ? "#d8262e" : "#f4f0e6", 0.3),
       });
-      // A top hat.
+      const hat = piece([0.01, 1.16, 0], 2, 0.2, 0.95, 1.5, 13, 0.17);
       k.add(k.cylinder(0.26, 0.02), {
         pos: [0, 1.08, 0],
         rot: [0, 0, -8],
         pattern: false,
-        ...melt(0.9),
+        ...hat,
         color: (c) => lit(c, "#222026", 0.3, 0.3),
       });
       k.add(k.cylinder(0.17, 0.3), {
         pos: [0.02, 1.24, 0],
         rot: [0, 0, -8],
         pattern: false,
-        ...melt(0.9),
+        ...hat,
         color: (c) =>
           c.lp[1] < -0.08 && c.lp[1] > -0.13 ? lit(c, "#c8262e", 0.3) : lit(c, "#222026", 0.3, 0.3),
       });
+      k.data = { balls, pieces };
       // A puddle spreads as it melts.
       k.add(k.disc(1), {
         pos: [0, -0.965, 0],
@@ -438,6 +527,20 @@ export const RECIPES = {
         kind: "grow",
         params: (c) => [0.15 + 0.6 * clamp(Math.hypot(c.p[0], c.p[2]), 0, 1), 0],
         color: (c) => mix("#bfe3ff", "#e8f6ff", c.rand()),
+      });
+      // Drips falling from the bottom ball as the melt starts (hidden at
+      // rest, and before that ball shrinks).
+      k.cloud({ share: 0.002, size: 0.9, pattern: false, part: k.part("drips") }, (rand) => {
+        const b = balls[0];
+        const a = rand() * TAU;
+        const rr = b.r * (0.72 + 0.12 * rand());
+        return {
+          p: [Math.sin(a) * rr, b.y - b.r * 0.62, Math.cos(a) * rr],
+          color: mix("#cfeaff", "#ffffff", rand()),
+          opacity: 0.85,
+          kind: "fall",
+          params: [0.22, rand()],
+        };
       });
       // Snow falling round it.
       k.cloud({ share: 0.004, size: 0.8, pattern: false }, (rand) => ({
