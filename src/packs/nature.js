@@ -39,6 +39,12 @@ const SAGUARO_SECS = 4.6;
 const CORAL_SECS = 5.0;
 const CONE_SECS = 5.6;
 const ACORN_SECS = 5.0;
+const SUCC_SECS = 5.4;
+const BAMBOO_SECS = 5.4;
+const BAMBOO_SEG = 0.24;
+const STONE_SECS = 6.8;
+// When the stones hop back where they were.
+const STONE_BACK = 5.4;
 // How far (radians) a pinecone scale tips out when the cone opens.
 const CONE_OPEN = 0.8;
 // The saguaro's wedge slides out this way: towards the camera and to the
@@ -726,6 +732,73 @@ function frameQuat(x, y, z) {
   const q1 = quatFromTo([1, 0, 0], x);
   const y1 = quatRotate(q1, [0, 1, 0]);
   return quatMul(quatAxisAngle(x, Math.atan2(dot(cross(y1, y), x), dot(y1, y))), q1);
+}
+
+// A rotation part of the way (f) from a to b (both unit quaternions).
+function slerpQ(a, b, f) {
+  let d = a[0] * b[0] + a[1] * b[1] + a[2] * b[2] + a[3] * b[3];
+  const s = d < 0 ? -1 : 1;
+  d *= s;
+  if (d > 0.9995) {
+    const q = a.map((x, i) => x + (s * b[i] - x) * f);
+    const l = Math.hypot(...q);
+    return q.map((x) => x / l);
+  }
+  const th = Math.acos(d);
+  const wa = Math.sin((1 - f) * th) / Math.sin(th);
+  const wb = (s * Math.sin(f * th)) / Math.sin(th);
+  return a.map((x, i) => wa * x + wb * b[i]);
+}
+const conj = (q) => [-q[0], -q[1], -q[2], q[3]];
+
+// The pebbles' tumble: each moving stone rolls out from where it lies to
+// its own spot on the sand, and the cairn's stones (in order, biggest
+// first) hop from there onto the stack. Turns are relative to how each
+// stone was built.
+function planStones(k, stones, cairn, reach = 0.98) {
+  const moving = stones.filter((st) => st.moves);
+  const top = Math.max(...moving.map((st) => st.home[1]));
+  // Spots on the sand, biggest stones first, none overlapping another (or
+  // the stones still lying where they were), clear of the cairn's place.
+  const placed = stones.filter((st) => !st.moves).map((st) => ({ p: st.home, r: st.size[0] }));
+  const bySize = [...moving].sort((a, b) => b.size[0] - a.size[0]);
+  for (const st of bySize) {
+    const home = Math.atan2(st.home[0], st.home[2]);
+    const r0 = st.size[0];
+    let best = null;
+    let bestGap = -Infinity;
+    for (let tries = 0; tries < 80; tries++) {
+      const a = home + (k.rand() - 0.5) * 2.4;
+      const r = 0.36 + r0 + Math.max(0, reach - 0.36 - 2 * r0) * k.rand();
+      const p = [Math.sin(a) * r, 0, Math.cos(a) * r];
+      let gap = Infinity;
+      for (const q of placed) gap = Math.min(gap, Math.hypot(p[0] - q.p[0], p[2] - q.p[2]) - (r0 + q.r) * 0.92); // prettier-ignore
+      if (gap > bestGap) {
+        bestGap = gap;
+        best = p;
+      }
+      if (gap > 0) break;
+    }
+    st.scatter = [best[0], st.size[1] * 0.95 + 0.005, best[2]];
+    placed.push({ p: best, r: r0 });
+  }
+  moving.forEach((st, i) => {
+    const q0 = quatEuler(...st.rot);
+    const travel = sub(st.scatter, st.home);
+    const roll = cross([0, 1, 0], unit([travel[0], 0, travel[2]]));
+    // It rolls over and comes to rest lying flat on the sand.
+    const flat = quatAxisAngle([0, 1, 0], k.rand() * TAU);
+    st.scatterQ = slerpQ(quatMul(flat, conj(q0)), quatMul(quatAxisAngle(roll, 2.5), conj(q0)), 0.06); // prettier-ignore
+    // Higher stones slide off first.
+    st.t0 = 0.05 + 0.45 * (1 - st.home[1] / (top || 1)) + 0.1 * k.rand();
+    st.lag = 0.15 * k.rand();
+  });
+  cairn.forEach((st, n) => {
+    st.cairn = st.cairnAt || st.home;
+    st.cairnQ = st.cairnAt ? quatMul(quatAxisAngle([0, 1, 0], k.rand() * TAU), conj(quatEuler(...st.rot))) : [0, 0, 0, 1]; // prettier-ignore
+    st.t1 = 1.5 + 0.45 * n;
+  });
+  return { stones: stones.map((st) => ({ ...st, rot: undefined })) };
 }
 
 // ---- Recipes ----------------------------------------------------------------------
@@ -4201,6 +4274,19 @@ export const RECIPES = {
         default: "#d8607a",
       },
     ],
+    controls: [{ key: "bloom", label: "Bloom", type: "pulse", ease: SUCC_SECS }],
+    action: { key: "bloom", label: "Open and flower" },
+    // A tap opens the rosette (every leaf tips outward about its root, the
+    // inner ones most: a morph) and a flower stalk rises from the middle,
+    // arching over with little coral bells; then it draws back and the
+    // rosette closes.
+    drive(t, c, out) {
+      const s = progress(c.bloom) * SUCC_SECS;
+      const on = c.bloom > 0;
+      out.morph = [on ? ease(band(s, 0.1, 1.2)) * (1 - ease(band(s, 4.0, 5.2))) : 0, 0, 0, 0];
+      const g = on ? easeOut(band(s, 0.6, 2.2)) * (1 - ease(band(s, 3.7, 4.5))) : 0;
+      out.parts.stalk = { scale: 0.01 + 0.99 * g, visible: g > 0.005 ? 1 : 0 };
+    },
     build(k, o) {
       const rand = k.rand;
       // A terracotta pot with a rim, and gravel on top.
@@ -4253,10 +4339,14 @@ export const RECIPES = {
         const W = 0.17 * (1 - 0.5 * f);
         const e = 8 + 72 * Math.pow(f, 0.8);
         const tone = 0.9 + 0.15 * rand();
+        const hinge = [0, 0.02 + 0.12 * f, 0];
+        const q = quatAxisAngle([Math.cos(th), 0, -Math.sin(th)], ((e * Math.PI) / 180) * 0.45);
         k.add(leafShape(L, W), {
-          pos: [0, 0.02 + 0.12 * f, 0],
+          pos: hinge,
           rot: [-e, (th * 180) / Math.PI, 0],
           flat: 0.25,
+          channel: 0,
+          to: (c) => add(hinge, quatRotate(q, sub(c.p, hinge))),
           color: (c) => {
             let col = mix("#3f7468", "#6fa08c", smoothstep(0.05, 0.75, c.v));
             col = mix(col, "#a8c8b8", 0.2 * smoothstep(0.3, 1, Math.sin(c.u * TAU)));
@@ -4265,11 +4355,94 @@ export const RECIPES = {
           },
         });
       }
+      // The flower stalk (hidden until a tap): it arches up out of the
+      // middle with little coral bells along its top.
+      const foot = [0, 0.14, 0];
+      const stalk = k.part("stalk", { pivot: foot });
+      const stem = spline([foot, [0.02, 0.4, 0.02], [0.1, 0.62, 0.06], [0.26, 0.66, 0.12], [0.36, 0.56, 0.16]]); // prettier-ignore
+      k.add(
+        k.tube(stem, (t) => 0.02 * (1 - 0.5 * t), { samples: 40, grid: 10 }),
+        {
+          part: stalk,
+          weight: 2,
+          color: (c) => lit(mix("#8aa878", "#d8906a", c.t), c.n, 0.4),
+        },
+      );
+      for (let b = 0; b < 6; b++) {
+        const t = 0.42 + 0.11 * b;
+        const at = stem(t);
+        // Each bell hangs on a short stalk below the arch, alternating sides.
+        const side = b % 2 ? 1 : -1;
+        const hang = unit([0.35 * side, -1, -0.3 * side]);
+        const bell = add(at, mul(hang, 0.045));
+        k.add(k.tube(spline([at, bell]), 0.006, { samples: 6, grid: 5 }), {
+          part: stalk,
+          weight: 3,
+          color: "#c88a6a",
+        });
+        k.add(
+          k.lathe([
+            [0.0, 0],
+            [0.016, 0.005],
+            [0.022, 0.022],
+            [0.025, 0.042],
+            [0.019, 0.046],
+          ]),
+          {
+            pos: bell,
+            quat: quatFromTo([0, 1, 0], hang),
+            part: stalk,
+            weight: 3,
+            pattern: false,
+            color: (c) =>
+              lit(c.lp[1] > 0.05 ? "#ffd24a" : mix("#ff7a4a", "#ff9a6a", c.v), c.n, 0.3),
+          },
+        );
+      }
     },
   },
 
   bamboo: {
     alive: true,
+    controls: [{ key: "grow", label: "Grow", type: "pulse", ease: BAMBOO_SECS }],
+    action: { key: "grow", label: "Grow new shoots" },
+    // Three young shoots sit on the ground. A tap makes them shoot up, a
+    // section at a time: each new section slides up out of the one below
+    // (a hollow knock each), carrying the pointed tip, and a tuft of leaves
+    // opens at the top. Later they sink back down to shoots.
+    drive(t, c, out, info) {
+      const s = progress(c.grow) * BAMBOO_SECS;
+      const on = c.grow > 0;
+      const shoots = info.data?.shoots || [];
+      out.tokens = [];
+      const knocks = [];
+      shoots.forEach((sh, n) => {
+        const t0 = 0.15 + 0.25 * n;
+        const e = [];
+        for (let j = 0; j < sh.n; j++) {
+          knocks.push(t0 + 0.3 * j + 0.22);
+          const up = on ? easeOut(band(s, t0 + 0.3 * j, t0 + 0.3 * j + 0.26)) : 0;
+          const down = on ? ease(band(s, 4.1 + 0.1 * (sh.n - j), 4.35 + 0.1 * (sh.n - j))) : 0;
+          e.push(up * (1 - down));
+        }
+        // The top of section j is where the extended sections below it end.
+        let h = 0;
+        for (let j = 0; j < sh.n; j++) {
+          h += e[j] * BAMBOO_SEG;
+          out.tokens[sh.first + j] = {
+            base: sh.at,
+            offset: [0, h - (j + 1) * BAMBOO_SEG, 0],
+            visible: ease(Math.min(1, e[j] * 1.6)),
+          };
+        }
+        out.tokens[sh.first + sh.n] = { base: sh.at, offset: [0, h - sh.n * BAMBOO_SEG, 0] };
+        const leaves = on ? easeOut(band(s, t0 + 0.3 * sh.n, t0 + 0.3 * sh.n + 0.6)) * (1 - ease(band(s, 3.8, 4.2))) : 0; // prettier-ignore
+        out.tokens[sh.first + sh.n + 1] = { base: sh.top, offset: [0, h - sh.n * BAMBOO_SEG, 0], visible: leaves }; // prettier-ignore
+      });
+      crossing(c, "bamboo", on ? s : 0, knocks, (i) =>
+        out.cues.push({ voice: "hollow", f: 330 * 2 ** ((i % 6) / 7), decay: 0.6, vol: 0.5 }),
+      );
+    },
     build(k) {
       const rand = k.rand;
       const SW = sway(0.012, 0);
@@ -4360,6 +4533,65 @@ export const RECIPES = {
         blades: 0.015,
         bladeLen: 0.1,
       });
+      // Three young shoots (tokens): sections built where they end up,
+      // each a little thinner than the one below, a pointed sheathed tip,
+      // and a tuft of leaves (hidden until grown).
+      const shoots = [];
+      let tok = 0;
+      for (const [x, z, n] of [
+        [0.3, 0.3, 6],
+        [-0.32, 0.28, 5],
+        [0.42, -0.1, 4],
+      ]) {
+        const g = moundTop(0.6, 0, 0.05, Math.hypot(x, z)) - 0.01;
+        const at = [x, g, z];
+        const first = tok;
+        const rOf = (j) => 0.042 * (1 - 0.05 * j);
+        for (let j = 0; j < n; j++) {
+          k.add(k.cylinder(rOf(j), BAMBOO_SEG, { caps: false }), {
+            pos: [x, g + (j + 0.5) * BAMBOO_SEG, z],
+            weight: 1.5,
+            flat: 0.3,
+            kind: "token",
+            params: [tok, 0],
+            color: (c) => {
+              const f = (c.p[1] - g - j * BAMBOO_SEG) / BAMBOO_SEG;
+              let col = mix("#6aa83a", "#9ac850", 0.5 + 0.4 * c.noise(c.p[0] * 30, c.p[1] * 4, c.p[2] * 30)); // prettier-ignore
+              if (f < 0.06) col = "#4a7a2a";
+              else if (f < 0.18) col = mix(col, "#e0e8c0", 0.6);
+              if (f > 0.82 && c.noise(c.p[0] * 20, c.p[1] * 20, c.p[2] * 20) > -0.1) col = mix("#a8804a", "#c8a060", c.rand()); // prettier-ignore
+              return lit(col, c.n, 0.45);
+            },
+          });
+          tok++;
+        }
+        // The tip: a pointed shoot in brown sheaths (all that shows at rest).
+        k.add(k.cone(rOf(n) * 1.15, 0.004, 0.2), {
+          pos: [x, g + n * BAMBOO_SEG + 0.1, z],
+          weight: 2,
+          kind: "token",
+          params: [tok, 0],
+          color: (c) =>
+            lit(mix("#7a5a2a", "#b08a4a", 0.5 + 0.5 * Math.sin(c.p[1] * 90)), c.n, 0.45),
+        });
+        tok++;
+        const top = [x, g + n * BAMBOO_SEG + 0.12, z];
+        for (let m = 0; m < 5; m++) {
+          const a = (m / 5) * TAU + rand();
+          const d = unit([Math.sin(a), 0.25 + 0.3 * rand(), Math.cos(a)]);
+          k.add(blade(k, { L: 0.2, W: 0.022, grid: 8, bend: (v) => -0.2 * v * v }), {
+            pos: top,
+            quat: quatFromTo([0, 1, 0], d),
+            weight: 2,
+            kind: "token",
+            params: [tok, 0],
+            color: (c) => lit(mix("#4a8a2a", "#8ac04a", c.v), c.n, 0.3),
+          });
+        }
+        shoots.push({ at, top, n, first, leaves: tok });
+        tok++;
+      }
+      k.data = { shoots };
       for (let i = 0; i < 6; i++) {
         const a = rand() * TAU;
         const s = 0.04 + rand() * 0.04;
@@ -4386,9 +4618,61 @@ export const RECIPES = {
       },
       SEED,
     ],
+    controls: [{ key: "stack", label: "Tumble and stack", type: "pulse", ease: STONE_SECS }],
+    action: { key: "stack", label: "Tumble and stack" },
+    // A tap tumbles the stones (the pile slumps, or the cairn's top four
+    // topple off):
+    // each rolls and bounces out over the sand on its own path, then five
+    // of them hop one at a time onto a cairn, biggest at the bottom,
+    // with a clack as each lands. At the end they all hop back where they
+    // were.
+    drive(t, c, out, info) {
+      const s = progress(c.stack) * STONE_SECS;
+      const on = c.stack > 0;
+      const d = info.data;
+      if (!d) return;
+      out.tokens = d.stones.map((st) => {
+        if (!on || !st.moves) return { base: st.home };
+        // Where it is and how it is turned at each stage.
+        const poses = [
+          { p: st.home, q: [0, 0, 0, 1] },
+          { p: st.scatter, q: st.scatterQ },
+        ];
+        if (st.cairn) poses.push({ p: st.cairn, q: st.cairnQ });
+        let a = poses[0];
+        let b = poses[0];
+        let f = 0;
+        let hop = 0;
+        if (s < st.t0) a = b = poses[0];
+        else if (s < st.t0 + 0.75) {
+          // Tumbling out: it drops and rolls, with a bounce at the end.
+          [a, b, f] = [poses[0], poses[1], band(s, st.t0, st.t0 + 0.75)];
+          hop = 0.05 * Math.sin(Math.PI * band(f, 0.6, 1));
+        } else if (st.cairn && s >= st.t1 && s < st.t1 + 0.4) {
+          [a, b, f] = [poses[1], poses[2], band(s, st.t1, st.t1 + 0.4)];
+          hop = 0.28 * Math.sin(Math.PI * f);
+        } else if (s >= STONE_BACK && s < STONE_BACK + 0.8) {
+          [a, b, f] = [poses[poses.length - 1], poses[0], band(s, STONE_BACK + st.lag, STONE_BACK + st.lag + 0.6)]; // prettier-ignore
+          hop = 0.22 * Math.sin(Math.PI * f);
+        } else if (s >= STONE_BACK + 0.8) a = b = poses[0];
+        else a = b = poses[st.cairn && s >= st.t1 + 0.4 ? 2 : 1];
+        const e = ease(f);
+        const p = lerp3(a.p, b.p, e);
+        return { base: st.home, offset: sub([p[0], p[1] + hop, p[2]], st.home), quat: slerpQ(a.q, b.q, e) }; // prettier-ignore
+      });
+      const clacks = d.stones.filter((st) => st.cairn && st.moves).map((st) => st.t1 + 0.4);
+      crossing(c, "rocks", on ? s : 0, [0.5, ...clacks, STONE_BACK + 0.6], (n) =>
+        out.cues.push(
+          n === 0 || n === clacks.length + 1
+            ? { voice: "clatter", f: 1400, n: 8, vol: 0.8 }
+            : { voice: "stone", f: 380 + 40 * n, decay: 0.8, vol: 0.8 },
+        ),
+      );
+    },
     build(k, o) {
       reseed(k, o);
       const rand = k.rand;
+      const stones = [];
       const kinds = [
         { base: "#8a8a86", dark: "#5a5a58", speck: 0.2, vein: 0.1 },
         { base: "#b8a48a", dark: "#8a7458", speck: 0.1, vein: 0 },
@@ -4397,13 +4681,16 @@ export const RECIPES = {
         { base: "#d8d2c6", dark: "#a8a296", speck: 0.3, vein: 0 },
         { base: "#4a4a4a", dark: "#2a2a2a", speck: 0.05, vein: 0.3 },
       ];
-      const stone = (pos, size, rot, kind) => {
+      const stone = (pos, size, rot, kind, moves = true) => {
         const kd = kinds[kind % kinds.length];
         const va = randDir(rand);
+        stones.push({ home: pos, size, rot, moves });
         k.add(k.sphere(1), {
           pos,
           rot,
           scale: size,
+          kind: "token",
+          params: [stones.length - 1, 0],
           flat: 0.2,
           interior: 0.1,
           core: shade(kd.base, 0.8),
@@ -4431,6 +4718,7 @@ export const RECIPES = {
             [w, h, w * (0.75 + 0.2 * rand())],
             [(rand() - 0.5) * 8, rand() * 180, (rand() - 0.5) * 8],
             i + 1,
+            i >= 3,
           );
           y += h * 1.85;
         }
@@ -4443,8 +4731,11 @@ export const RECIPES = {
             [s * 1.3, s * 0.7, s],
             [0, rand() * 180, 0],
             Math.floor(rand() * 6),
+            false,
           );
         }
+        // The cairn's top four stones topple off and are stacked again.
+        k.data = planStones(k, stones, stones.slice(3, n), 1.1);
         return;
       }
       // A heap: big pebbles below, smaller ones resting higher.
@@ -4480,6 +4771,23 @@ export const RECIPES = {
           Math.floor(rand() * 6),
         );
       }
+      // Five stones of shrinking size make the cairn, biggest at the bottom.
+      const pick = [];
+      for (const want of [0.3, 0.25, 0.2, 0.16, 0.12]) {
+        let best = null;
+        for (const st of stones) {
+          if (pick.includes(st)) continue;
+          if (!best || Math.abs(st.size[0] - want) < Math.abs(best.size[0] - want)) best = st;
+        }
+        pick.push(best);
+      }
+      let y = 0.005;
+      for (const st of pick) {
+        const h = st.size[1];
+        st.cairnAt = [(rand() - 0.5) * 0.04, y + h * 0.9, (rand() - 0.5) * 0.04];
+        y += h * 1.75;
+      }
+      k.data = planStones(k, stones, pick);
       k.add(k.disc(1.05), {
         pos: [0, 0.005, 0],
         color: (c) =>
