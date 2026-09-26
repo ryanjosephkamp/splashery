@@ -43,7 +43,10 @@ PR title: "Phase E6a: new tap effects for the balls".
 
 ## State
 
-Not started.
+2026-09-26: started (session https://claude.ai/code/session_01WRMAsMCm1HekeLSMVgJPW2, branch
+`claude/blissful-noether-4w5y0t`). The owner's marks on the Toy Plan page: all 20 balls "yes" with
+no notes, so the plan in `tools/toy-plan.json` stands as written. Main merged (up to date at
+`fb6c81d`). Next: the shared motion helpers in `src/packs/balls.js`, then the 20 effects.
 
 ## Notes
 
