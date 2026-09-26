@@ -25,6 +25,9 @@ const keep = (c, size) => ({ c, keep: true, size });
 const band = (x, a, b) => clamp((x - a) / (b - a), 0, 1);
 const dot = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
 const fract = (x) => x - Math.floor(x);
+// Seconds since a pulse fired, as 0..1 (1 at rest).
+const progress = (v) => (v > 0 ? 1 - v : 1);
+const easeOut = (x) => 1 - (1 - clamp(x, 0, 1)) ** 3;
 const easeInOut = (x) => {
   const t = clamp(x, 0, 1);
   return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
@@ -147,8 +150,36 @@ const NAUT = (() => {
       s.ht * rho * Math.sin(phi) * (1 - 0.12 * Math.cos(phi)),
     ];
   };
-  return { b, tMax, r, sec, at };
+  // The way the shell grows at its mouth: the tentacles reach out along it.
+  const tan = [-Math.sin(tMax), Math.cos(tMax), 0];
+  return { b, tMax, r, sec, at, tan };
 })();
+
+// ---- Frog ------------------------------------------------------------------------------
+// The jaw hinges at the back of the mouth. The tongue is built at its full
+// reach with the jaw open by `open`, so its tip meets the fly at `catch`.
+const FROG = (() => {
+  const hinge = [0, 0.11, 0.04];
+  const open = 0.5;
+  // Front left of the frog, so the tongue shoots across the home view.
+  const catchAt = [-0.5, 0.24, 0.7];
+  const unJaw = (p) =>
+    vec.add(hinge, quatRotate(quatAxisAngle([1, 0, 0], -open), vec.sub(p, hinge)));
+  const tipRest = [0, 0.105, 0.36];
+  return {
+    hinge,
+    open,
+    catch: catchAt,
+    flyBuilt: [catchAt[0], catchAt[1], 0.45],
+    from: [-0.75, 0.42, -0.1],
+    tipRest,
+    tipFull: unJaw(catchAt),
+    secs: 3.8,
+  };
+})();
+
+// ---- School of fish ------------------------------------------------------------------
+const FISH_SECS = 5.0;
 
 // ---- Jellyfish palettes --------------------------------------------------------------
 const JELLY = {
@@ -354,14 +385,38 @@ export const RECIPES = {
         ],
       },
     ],
+    controls: [{ key: "swirl", label: "Swirl", type: "pulse", ease: FISH_SECS }],
+    action: { key: "swirl", label: "Bait ball" },
+    drive(t, c, out, info) {
+      // Each fish is its own piece, orbiting with its shell. A tap: the
+      // school tightens into a spinning bait ball, then bursts outwards in
+      // every direction as if something struck at it, each fish darting
+      // away head first, and swims back into its place.
+      const F = info.data?.fish;
+      if (!F) return;
+      const on = c.swirl > 0;
+      const s = progress(c.swirl) * FISH_SECS;
+      const spin = on ? TAU * easeInOut(band(s, 0.2, 2.4)) : 0;
+      out.tokens = F.map((f, i) => {
+        const d = f.jit * 0.25;
+        const ball = on ? easeInOut(band(s, 0.1 + d, 1.2 + d)) * (1 - band(s, 2.2 + d, 2.45 + d)) : 0; // prettier-ignore
+        const burst = on ? (1 - (1 - band(s, 2.2 + d, 2.6 + d)) ** 3) * (1 - easeInOut(band(s, 3.1 + d, 4.7 + d))) : 0; // prettier-ignore
+        const rho = 1 - 0.45 * ball + (0.18 + 0.24 * f.far) * burst;
+        const face = -(Math.PI / 2) * (on ? band(s, 2.2 + d, 2.4 + d) * (1 - band(s, 2.9 + d, 3.7 + d)) : 0); // prettier-ignore
+        const th = f.rate * t + spin;
+        const q = quatAxisAngle([0, 1, 0], th + face);
+        const P = quatRotate(quatAxisAngle([0, 1, 0], th), vec.mul(f.pos, rho));
+        return { base: [0, 0, 0], quat: q, offset: vec.sub(P, quatRotate(q, f.pos)) };
+      });
+    },
     build(k, o) {
-      // Fish in three shells round the middle; each shell orbits at its own
-      // speed (rigidly, so no fish is stretched).
+      // Fish in three shells round the middle; each fish is a token that
+      // drive() orbits with its shell (rigidly, so no fish is stretched).
       const fish = [];
       const shells = [
-        { r: 0.36, n: 9, rate: 0.95 },
-        { r: 0.62, n: 17, rate: 0.75 },
-        { r: 0.88, n: 26, rate: 0.6 },
+        { r: 0.36, n: 8, rate: 0.95 },
+        { r: 0.62, n: 16, rate: 0.75 },
+        { r: 0.88, n: 24, rate: 0.6 },
       ];
       const tropical = ["#ffd23a", "#ff8a2a", "#3fb8ff", "#ff5f8a", "#8be04a"];
       for (const sh of shells) {
@@ -385,15 +440,19 @@ export const RECIPES = {
             rate: sh.rate,
             size: 0.85 + 0.3 * k.rand(),
             col: tropical[Math.floor(k.rand() * tropical.length)],
+            jit: k.rand(),
+            far: k.rand(),
           });
         }
       }
+      k.data = { fish: fish.map((f) => ({ pos: f.pos, rate: f.rate, jit: f.jit, far: f.far })) };
       const L = 0.25;
       const D = 0.085;
       const W = 0.044;
       const silver = o.kind !== "tropical";
       k.cloud({ share: 0.97, size: 0.55, flat: 0.3 }, (rand, i) => {
-        const f = fish[i % fish.length];
+        const fi = i % fish.length;
+        const f = fish[fi];
         const s = f.size;
         const pick = rand();
         let lp;
@@ -464,8 +523,8 @@ export const RECIPES = {
           color: shade(col, lightF),
           size: 1,
           opacity: 0.95,
-          kind: "orbit",
-          params: [f.rate, 0],
+          kind: "token",
+          params: [fi, 0],
           pattern: keepIt ? false : undefined,
         };
       });
@@ -806,8 +865,26 @@ export const RECIPES = {
   // ---- Nautilus ---------------------------------------------------------------------------
   nautilus: {
     alive: true,
+    controls: [{ key: "hide", label: "Hide", type: "pulse", ease: 4.4 }],
+    action: { key: "hide", label: "Hide in the shell" },
     drive(t, c, out) {
-      out.parts.arms = { angle: 0.08 * Math.sin(t * 1.2) };
+      // Startled, the nautilus jets back a little and pulls its tentacles
+      // in behind its hood (each shortens towards its base). It waits, peeks
+      // out halfway, then slowly reaches out again.
+      const on = c.hide > 0;
+      const s = progress(c.hide) * 4.4;
+      const pull = on
+        ? easeOut(band(s, 0, 0.55)) *
+          (1 - 0.45 * easeInOut(band(s, 2.0, 2.5)) - 0.55 * easeInOut(band(s, 3.0, 4.1)))
+        : 0;
+      const tan = NAUT.tan;
+      out.parts.arms = {
+        angle: 0.08 * Math.sin(t * 1.2) * (1 - pull),
+        offset: vec.mul(tan, -0.09 * pull),
+      };
+      out.morph = [pull];
+      const jet = on ? Math.sin(Math.PI * band(s, 0, 1.1)) * (1 - band(s, 0, 1.1)) : 0;
+      out.body = { offset: vec.mul(tan, -0.12 * jet) };
       out.amount = 0.8;
     },
     build(k) {
@@ -930,17 +1007,23 @@ export const RECIPES = {
             ),
           );
         }
-        k.add(
-          k.tube(spline(pts), (t) => 0.02 * (1 - 0.55 * t), { grid: 16, samples: 32, caps: true }),
-          {
-            part: arms,
-            flat: 0.3,
-            weight: 1.4,
-            kind: "wave",
-            params: [0.015, f * TAU],
-            color: (c) => lit(c, fract(c.t * 7) < 0.3 ? "#e8b894" : "#f6dcc2", 0.3),
+        // Each tentacle shortens towards its base on channel 0 (its rings
+        // bunch up), keeping its thickness.
+        const curve = spline(pts);
+        const rad = (t) => 0.02 * (1 - 0.55 * t);
+        k.add(k.tube(curve, rad, { grid: 16, samples: 32, caps: true }), {
+          part: arms,
+          flat: 0.35,
+          weight: 1.4,
+          kind: "morph",
+          channel: 0,
+          to: (c) => {
+            const tt = clamp(c.t ?? 0, 0, 1);
+            const off = vec.sub(c.p, curve(tt));
+            return vec.add(curve(tt * 0.12), vec.mul(off, rad(tt * 0.12) / rad(tt)));
           },
-        );
+          color: (c) => lit(c, fract(c.t * 7) < 0.3 ? "#e8b894" : "#f6dcc2", 0.3),
+        });
       }
     },
   },
@@ -1565,6 +1648,21 @@ export const RECIPES = {
         ],
       },
     ],
+    controls: [{ key: "walk", label: "Walk", type: "pulse", ease: 4.6 }],
+    action: { key: "walk", label: "Wave the spines" },
+    drive(t, c, out, info) {
+      // The spines sweep round in waves (each tilts on its base, by one of
+      // three channels a third of a cycle apart, so the wave runs round the
+      // urchin), the pink tube feet reach out, and it creeps a little way
+      // to the side and back.
+      const on = c.walk > 0;
+      const s = progress(c.walk) * 4.6;
+      const amp = on ? easeInOut(band(s, 0, 0.5)) * (1 - easeInOut(band(s, 3.6, 4.5))) : 0;
+      const ph = s * TAU * 1.1;
+      out.morph = [0, 1, 2].map((j) => amp * Math.sin(ph - (j * TAU) / 3));
+      out.morph.push(amp);
+      out.body = { offset: vec.mul([0.85, 0, -0.52], 0.15 * Math.sin(Math.PI * (on ? band(s, 0.2, 4.4) : 0))) }; // prettier-ignore
+    },
     build(k, o) {
       const pal = {
         purple: ["#4a1f6a", "#b46ad8"],
@@ -1606,6 +1704,17 @@ export const RECIPES = {
           len: 0.42 + 0.22 * k.rand() * (1 - 0.4 * Math.abs(y)),
         });
       }
+      // Each spine tilts sideways (round the urchin) on its base by one of
+      // channels 0 to 2, picked by its sector, so the spine stays straight.
+      // (The tilted tips stay within the urchin's reach, so they are left
+      // out of the fit.)
+      k.fitMorphs = false;
+      for (const sp of spines) {
+        const a = Math.atan2(sp.base[0], sp.base[2]);
+        sp.side = [Math.cos(a), 0, -Math.sin(a)];
+        sp.tilt = vec.unit(vec.add(vec.mul(sp.dir, Math.cos(0.6)), vec.mul(sp.side, Math.sin(0.6)))); // prettier-ignore
+        sp.ch = Math.floor((a / TAU + 0.5) * 12) % 3;
+      }
       k.cloud({ share: 0.55, size: 0.55 }, (rand, i) => {
         const s = spines[i % spines.length];
         const t = rand();
@@ -1615,14 +1724,24 @@ export const RECIPES = {
           stretch: 3,
           size: 1.2 - 0.8 * t,
           color: mix(pal[0], pal[1], t * t),
-          kind: "sway",
-          params: [0.1, cy],
+          kind: "morph",
+          channel: s.ch,
+          to: vec.add(s.base, vec.mul(s.tilt, t * s.len)),
         };
       });
-      // Little pink tube feet between the spines.
+      // Little pink tube feet between the spines: they reach out on
+      // channel 3.
       k.cloud({ share: 0.02, size: 0.5 }, (rand) => {
         const d = vec.unit([rand() - 0.5, rand() * 0.9 - 0.3, rand() - 0.5]);
-        return { p: vec.add(onTest(d), vec.mul(d, 0.02)), color: "#f7a8c8", pattern: false };
+        const p = vec.add(onTest(d), vec.mul(d, 0.02));
+        return {
+          p,
+          color: "#f7a8c8",
+          pattern: false,
+          kind: "morph",
+          channel: 3,
+          to: vec.add(p, vec.mul(d, 0.05 + 0.05 * rand())),
+        };
       });
     },
   },
@@ -1644,6 +1763,44 @@ export const RECIPES = {
         ],
       },
     ],
+    controls: [{ key: "snap", label: "Catch", type: "pulse", ease: FROG.secs }],
+    action: { key: "snap", label: "Catch a fly" },
+    drive(t, c, out) {
+      // A fly buzzes in and hovers. The frog's jaw drops, its tongue shoots
+      // out (channel 0), catches the fly and snaps back into the mouth; the
+      // jaw shuts, the eyes sink to push the fly down (frogs swallow with
+      // their eyes), and it croaks twice with its throat sac.
+      const on = c.snap > 0;
+      const s = progress(c.snap) * FROG.secs;
+      const jaw = on ? FROG.open * easeOut(band(s, 0.92, 1.02)) * (1 - easeInOut(band(s, 1.62, 1.78))) : 0; // prettier-ignore
+      const tongue = on ? easeOut(band(s, 1.0, 1.1)) * (1 - easeInOut(band(s, 1.34, 1.6))) : 0;
+      out.parts.jaw = { angle: jaw };
+      out.morph = [tongue];
+      // The fly: in from the right on a wobbly path, a hover, then carried
+      // on the tongue's tip into the mouth.
+      let fp;
+      if (s < 1.1) {
+        const u = easeOut(band(s, 0, 0.95));
+        const w = 1 - u;
+        fp = vec.add(vec.add(FROG.catch, vec.mul(FROG.from, w)), [
+          0.06 * Math.sin(s * 17) * (0.3 + w),
+          0.05 * Math.sin(s * 23 + 1) * (0.3 + w),
+          0.03 * Math.sin(s * 13),
+        ]);
+      } else {
+        const tip = vec.add(FROG.tipRest, vec.mul(vec.sub(FROG.tipFull, FROG.tipRest), tongue));
+        fp = vec.add(FROG.hinge, quatRotate(quatAxisAngle([1, 0, 0], jaw), vec.sub(tip, FROG.hinge))); // prettier-ignore
+      }
+      out.parts.fly = {
+        offset: vec.sub(fp, FROG.flyBuilt),
+        quat: quatAxisAngle([0, 1, 0], 0.4 * Math.sin(s * 9)),
+        visible: on && s < 1.58 ? 1 : 0,
+      };
+      out.parts.eyes = { offset: [0, -0.065 * (on ? band(s, 1.8, 2.0) * (1 - band(s, 2.2, 2.45)) : 0), 0] }; // prettier-ignore
+      const croak = (a) => Math.sin(Math.PI * band(s, a, a + 0.36));
+      const sac = on ? Math.max(croak(2.55), croak(3.05)) : 0;
+      out.parts.sac = { scale: 0.2 + 0.8 * sac, visible: sac > 0.01 ? 1 : 0 };
+    },
     build(k, o) {
       const skin = { green: "#58b83a", red: "#e8452a", blue: "#2f7fe0", yellow: "#f2c52a" }[
         o.color
@@ -1667,13 +1824,18 @@ export const RECIPES = {
         ...breathe,
         color: (c) => skinCol(c, (cc) => cc.lp[2] > 0.25 && cc.lp[1] < 0.05),
       });
+      // The head; below its smile the front is the lower jaw (a part hinged
+      // at the back of the mouth).
+      const jaw = k.part("jaw", { pivot: FROG.hinge, axis: [1, 0, 0] });
+      const smileAt = (x) => -0.06 + 0.1 * (x / 0.46) ** 2;
       k.add(k.ellipsoid(0.46, 0.28, 0.4), {
         pos: [0, 0.14, 0.22],
         flat: 0.2,
         ...breathe,
+        part: (c) => (c.lp[1] < smileAt(c.lp[0]) - 0.012 && c.lp[2] > -0.12 ? jaw : 0),
         color: (c) => {
           const l = c.lp;
-          const smile = -0.06 + 0.1 * (l[0] / 0.46) ** 2;
+          const smile = smileAt(l[0]);
           if (l[2] > 0.1 && Math.abs(l[1] - smile) < 0.012 && Math.abs(l[0]) < 0.36)
             return keep("#2a1a14");
           if (l[2] > 0.3 && l[1] > 0.02 && l[1] < 0.07 && Math.abs(Math.abs(l[0]) - 0.07) < 0.015)
@@ -1683,14 +1845,83 @@ export const RECIPES = {
           return skinCol(c, (cc) => cc.lp[1] < smile - 0.01 && cc.lp[2] > 0.0);
         },
       });
+      // Inside the mouth (hidden while it is shut): the palate, the floor
+      // and the tongue, which shoots out to the fly on channel 0 (built at
+      // its full reach, with the jaw open).
+      k.add(k.disc(1), {
+        pos: [0, 0.114, 0.25],
+        scale: [0.42, 1, 0.34],
+        flat: 0.3,
+        pattern: false,
+        color: (c) => mix("#6e1c28", "#8e2a36", c.rand()),
+      });
+      k.add(k.disc(1), {
+        part: jaw,
+        pos: [0, 0.1, 0.25],
+        scale: [0.41, 1, 0.33],
+        flat: 0.3,
+        pattern: false,
+        color: (c) => mix("#b8404f", "#c9566a", c.rand()),
+      });
+      k.fitMorphs = false;
+      const tongueR = (t) => 0.032 + 0.028 * smoothstep(0.82, 1, t);
+      const axis = vec.sub(FROG.tipFull, FROG.tipRest);
+      const ax = vec.unit(axis);
+      const e1 = vec.unit(vec.cross(ax, [0, 1, 0]));
+      const e2 = vec.cross(e1, ax);
+      k.cloud({ share: 0.012, size: 1.1, pattern: false, part: jaw }, (rand) => {
+        const t = Math.sqrt(rand());
+        const a = rand() * TAU;
+        const rr = [Math.cos(a), Math.sin(a)];
+        const n = vec.add(vec.mul(e1, rr[0]), vec.mul(e2, rr[1]));
+        const full = vec.add(vec.add(FROG.tipRest, vec.mul(axis, t)), vec.mul(n, tongueR(t)));
+        const rest = vec.add(vec.add(FROG.tipRest, vec.mul(ax, 0.07 * t)), vec.mul(n, 0.8 * tongueR(t))); // prettier-ignore
+        const light = 0.8 + 0.3 * Math.max(0, dot(n, LIGHT));
+        return {
+          p: rest,
+          n,
+          color: shade(mix("#e2677e", "#f28aa0", rand() * 0.5), light),
+          kind: "morph",
+          channel: 0,
+          to: full,
+        };
+      });
+      // The fly, built where the tongue catches it.
+      // The fly (hidden at rest), built within the frog's own bounds (so it
+      // takes no room in the frame) and carried out to where it is caught.
+      const fly = k.part("fly", { pivot: FROG.flyBuilt });
+      const F = { part: fly, weight: 12, flat: 0.3, pattern: false };
+      const at = (p) => vec.add(FROG.flyBuilt, p);
+      k.add(k.ellipsoid(0.045, 0.034, 0.058), { ...F, pos: FROG.flyBuilt, color: (c) => lit(c, "#2c2c34", 0.4, 0.5) }); // prettier-ignore
+      k.add(k.sphere(0.03), { ...F, pos: at([0, 0.006, 0.058]), color: "#9a2424" });
+      for (const sx of [-1, 1])
+        k.add(k.ellipsoid(0.07, 0.006, 0.034), {
+          ...F,
+          pos: at([sx * 0.06, 0.036, -0.015]),
+          rot: [0, sx * 25, sx * 18],
+          opacity: 0.65,
+          color: "#e2ecf4",
+        });
+      // The throat sac that blows up for a croak (hidden at rest).
+      const sac = k.part("sac", { pivot: [0, -0.02, 0.42] });
+      k.add(k.sphere(0.15), {
+        part: sac,
+        pos: [0, -0.07, 0.44],
+        flat: 0.3,
+        pattern: false,
+        color: (c) => lit(c, "#f6efc8", 0.3, 0.6),
+      });
+      const eyes = k.part("eyes", { pivot: [0, 0.35, 0.22] });
       for (const s of [-1, 1]) {
         k.add(k.sphere(0.15), {
+          part: eyes,
           pos: [s * 0.24, 0.34, 0.2],
           flat: 0.2,
           ...breathe,
           color: (c) => skinCol(c),
         });
         eye(k, [s * 0.25, 0.37, 0.28], 0.12, [s * 0.35, 0.15, 1], {
+          part: eyes,
           iris: "#e8b020",
           white: "#e8b020",
           pupil: 0.86,

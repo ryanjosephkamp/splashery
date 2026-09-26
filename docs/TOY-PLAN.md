@@ -10,10 +10,10 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 284 toys. 246 have a tap action today; the other 38 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 244.
+- 284 toys. 264 have a tap action today; the other 20 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 262.
 - **more** (has an effect; make it clearer or more dramatic): 2.
-- **new** (needs its own effect): 38.
+- **new** (needs its own effect): 20.
 - Visual fixes: 0 open, 28 done. Touch or drag interaction asked for: 4.
 
 ## By phase
@@ -41,9 +41,12 @@ Proposals below are suggestions; the owner may change them.
   Macarons, Gummy bear, Pretzel, Croissant, Sushi, Taco, Coffee, Apple, Bananas, Orange, Kiwi,
   Pineapple, Cherries, Grapes, Avocado, Rubber duck, Newton's cradle, Kite, Chess set, Lorenz
   attractor, Möbius strip, Klein bottle, Menger sponge, Hypercube, Torus knot, Gyroid, Mandelbulb,
-  Seashell spiral, Wizard's orb, Jellyfish, Pufferfish, Snail, Octopus, Fireworks, Decorated tree,
-  Diya, Acoustic guitar, Snare drum, Xylophone, Hot-air balloon, Bus, Jet airliner, Sailboat,
-  Submarine, Bicycle, Big Ben, Castle, Pagoda, Windmill.
+  Seashell spiral, Heraldic shield, Crown, Wizard's orb, Jellyfish, School of fish, Pufferfish,
+  Nautilus, Snail, Octopus, Sea urchin, Frog, Snowman, Fireworks, Decorated tree, Diya, Acoustic
+  guitar, Snare drum, Xylophone, Hot-air balloon, Bus, Jet airliner, Sailboat, Submarine, Bicycle,
+  Eiffel Tower, Washington Monument, Pyramids of Giza, Twisting supertall, Statue of Liberty, White
+  House, Leaning Tower of Pisa, Colosseum, Parthenon, Stonehenge, Big Ben, Taj Mahal, Castle,
+  Pagoda, Windmill.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -53,10 +56,7 @@ Proposals below are suggestions; the owner may change them.
 - **E5, new effects: food.** None.
 - **E6, new effects: balls and the rest.** Basketball, Soccer ball, Tennis ball, Baseball, Softball,
   Beach ball, Golf ball, Volleyball, Water polo ball, Ping-pong ball, Cricket ball, Bowling ball,
-  Pool ball, Pickleball, Dodgeball, Medicine ball, Lacrosse ball, Squash ball, Bouncy ball, Marble,
-  Heraldic shield, Crown, School of fish, Nautilus, Sea urchin, Frog, Snowman, Eiffel Tower,
-  Washington Monument, Pyramids of Giza, Twisting supertall, Statue of Liberty, White House, Leaning
-  Tower of Pisa, Colosseum, Parthenon, Stonehenge, Taj Mahal
+  Pool ball, Pickleball, Dodgeball, Medicine ball, Lacrosse ball, Squash ball, Bouncy ball, Marble
 - **F, touch and drag interaction.** Gummy bear, Building bricks, Newton's cradle, Puzzle cube.
 
 ## Scans (30)
@@ -462,8 +462,11 @@ Proposals below are suggestions; the owner may change them.
   - Fixed: C1: the glass now tapers into the cap and sits in rolled metal collars top and bottom.
   - Effect: Blobs speed up, glow and shift colour for a few seconds.
   - Improved: E4: a tap heats the lamp: the wax blobs speed up to about three and a half times,
-    smoothly with no jump, the wax glows and shifts from orange through magenta to gold and the
-    liquid brightens, then it all eases back (about 4.5 s). The glow also shows with motion off.
+    smoothly with no jump, the wax glows and shifts through its colour set's glow (orange, magenta,
+    gold for the classic lamp) and the liquid brightens, then it all eases back (about 4.5 s). The
+    glow also shows with motion off. After the owner's review: a Colour set (Pick below, Ocean,
+    Violet, Lime, Sunset, Midnight), Blobs (2 to 12), Blob size and Blob shape (mixed, round, tall),
+    and Flow and Glow sliders.
   - Sound: Low bubbling blorp.
 - **Snow globe** (`snow-globe`). Now: tap: Shake the globe. Plan: keep.
   - Owner: Basically perfect.
@@ -474,10 +477,14 @@ Proposals below are suggestions; the owner may change them.
 - **Ice swan** (`ice-statue`). Now: tap: Melt and refreeze. Plan: keep.
   - Owner: Let the little white specks move. The swan could melt or break apart.
   - Effect: Specks drift; tap melts the swan into drips, then it refreezes.
-  - Improved: E4: a tap melts the ice swan: it slumps, drips fall and a smooth meltwater puddle
-    spreads from under the pedestal; then it refreezes and a frosty white light sweeps up it from
-    the base to the beak (about 5.5 s). Frost specks drift up round it while it is cold, and the
-    Temperature slider still works.
+  - Improved: E4, redone after the owner's review ("it melts by dripping water and slowly breaking
+    decomposing, with the melt speed accelerating"): a tap melts the swan faster and faster: water
+    beads and drips from the beak, the wings and the pedestal into a spreading puddle; the beak
+    wears away, the wing tips crack off and fall into the water, then the head and the top of the
+    neck; the tail, the neck and the wings wear away and the body wears down to a lump, each piece
+    solid ice getting smaller; the fallen pieces melt away in the puddle. Then it refreezes piece by
+    piece and a frosty white light sweeps up it (about 7.5 s). Temperature melts it to the same
+    point and back.
   - Sound: Ice crackle and drips.
 - **Candle** (`candle`). Now: tap: Blow out or light. Plan: keep.
   - Owner: Pretty good; OK as it is.
@@ -511,10 +518,11 @@ Proposals below are suggestions; the owner may change them.
   - Sound: Rushing water swell.
 - **Ocean wave** (`ocean-wave`). Now: tap: Break the wave. Plan: keep.
   - Effect: The wave curls and breaks into foam.
-  - Improved: E4: a tap breaks the wave: the lip pitches forward and crashes into the flat water in
-    front, turns to white water and falls flat, and clumps of spray burst up and fall back; foam
-    spreads down the face and over the water, then thins away as the lip curls over again from the
-    crest (about 5 s).
+  - Improved: E4, redone after the owner's review ("the waves themselves should curl, not just the
+    end"): the whole wave moves as one sheet: a tap pitches the lip out and the face leans over
+    after it until the lip crashes into the water in front; white water falls flat, spray bursts up
+    and foam spreads; the wave collapses and flattens, then a new swell rises behind, steepens,
+    throws a lip and curls over into its resting curl (about 5.5 s). Seen from three quarters.
   - Sound: Wave crash.
 - **Geyser** (`geyser`). Now: tap: Erupt. Plan: keep.
   - Owner: Pretty cool.
@@ -1045,9 +1053,11 @@ Proposals below are suggestions; the owner may change them.
 - **Pinecone** (`pinecone`). Now: tap: Open the scales. Plan: keep.
   - Owner: Good-looking but underwhelming; break apart.
   - Effect: The scales open wide (as in dry weather) and seeds drift out.
-  - Improved: E4: a tap opens the cone as in dry weather: every scale tips out from its root, and
-    sixteen winged seeds slip out and spin down like little propellers, each on its own path; then
-    the scales close again (about 5.5 s).
+  - Improved: E4, redone after the owner's review ("the actual pieces of the pinecone must fall
+    off"): a tap opens the cone as in dry weather and six winged seeds spin down; then the 42 scales
+    facing you break off one after another from the bottom up, tumble and land flat in a pile round
+    the base, leaving the bare core with the stubs where they grew; they fly back up into place, top
+    first, and the cone closes (about 7 s).
   - Sound: Woody creak.
 - **Acorns** (`acorn`). Now: tap: Pop the caps. Plan: keep.
   - Owner: Should do something.
@@ -1410,10 +1420,13 @@ Proposals below are suggestions; the owner may change them.
 - **Sword in the stone** (`sword-in-stone`). Now: tap: Pull. Plan: keep.
   - Owner: Perfect.
   - Sound: Metal ring.
-- **Heraldic shield** (`shield`). Now: hops. Plan: new effect (E6).
+- **Heraldic shield** (`shield`). Now: tap: Block a blow. Plan: keep.
   - Owner: Only bounces; find a better effect.
   - Effect: Blocks an invisible hit: it jolts, sparks and the emblem gleams.
-  - Sound: Metal clang.
+  - Improved: E6: it blocks an unseen blow near its top corner: it jolts back and rocks, sparks
+    spray off the iron rim and burn out, a flash marks the spot, and a gleam of light sweeps across
+    the emblem (about 2 s).
+  - Sound: A clang, crackling sparks and a shimmer.
 - **Bow and target** (`bow-and-target`). Now: tap: Shoot. Plan: keep.
   - Owner: Unbelievably impressive.
   - Sound: Twang and thunk.
@@ -1426,10 +1439,13 @@ Proposals below are suggestions; the owner may change them.
 - **Knight's helmet** (`knights-helmet`). Now: tap: Open the visor. Plan: keep.
   - Owner: Really neat.
   - Sound: Visor clank.
-- **Crown** (`crown`). Now: hops. Plan: new effect (E6).
+- **Crown** (`crown`). Now: tap: Light the jewels. Plan: keep.
   - Owner: Needs an effect.
   - Effect: Jewels light up in turn and it rises with a glow.
-  - Sound: Royal fanfare.
+  - Improved: E6: the crown lifts and hovers; its eight jewels light up one after another round the
+    band, each flashing white, golden motes drift up round it, then the jewels go out in turn and it
+    settles (about 4 s).
+  - Sound: A royal fanfare and a ping for each jewel.
 - **Dragon egg** (`dragon-egg`). Now: tap: Hatch. Plan: keep.
   - Owner: Cute and perfect.
   - Sound: Crack and a tiny roar.
@@ -1448,10 +1464,13 @@ Proposals below are suggestions; the owner may change them.
   - Improved: C2: one strong stroke squeezes the bell and jets it up about a third of its size,
     trailing glowing tentacles, then it drifts down (about 3 s).
   - Sound: Soft watery whoomp.
-- **School of fish** (`fish-school`). Now: hops. Plan: new effect (E6).
+- **School of fish** (`fish-school`). Now: tap: Bait ball. Plan: keep.
   - Owner: Swim around more dynamically, like a swarm.
   - Effect: The school swirls into a bait ball and scatters.
-  - Sound: Swishing water.
+  - Improved: E6: each fish is now its own piece (48 fish). A tap: the school tightens into a
+    spinning bait ball, bursts outwards head first in every direction as if something struck at it,
+    and swims back into place (5 s).
+  - Sound: Water swishes and bursts, with bubbles.
 - **Butterfly** (`butterfly`). Now: tap: Flutter. Plan: keep.
   - Owner: Perfect.
   - Sound: Delicate flutter.
@@ -1461,10 +1480,13 @@ Proposals below are suggestions; the owner may change them.
   - Improved: C2: it now rests slim; a tap inflates it to a big spiky ball, holds, then deflates
     with a sputter (about 4 s).
   - Sound: Balloon inflate and a sputter.
-- **Nautilus** (`nautilus`). Now: hops. Plan: new effect (E6).
+- **Nautilus** (`nautilus`). Now: tap: Hide in the shell. Plan: keep.
   - Owner: Enter and exit its shell.
   - Effect: Tentacles pull into the shell, then peek back out.
-  - Sound: Hollow shell whoosh.
+  - Improved: E6: startled, it jets back a little and pulls its tentacles in behind its hood (each
+    shortens towards its base); it waits, peeks out halfway, then slowly reaches out again (about
+    4.5 s).
+  - Sound: A jet of water, the hollow shell, a knock and bubbles.
 - **Ladybug** (`ladybug`). Now: tap: Open the wings. Plan: keep.
   - Owner: Perfect.
   - Sound: Tiny wing buzz.
@@ -1483,14 +1505,20 @@ Proposals below are suggestions; the owner may change them.
 - **Starfish** (`starfish`). Now: tap: Wave the arms. Plan: keep.
   - Owner: Fine.
   - Sound: Wet suction pop.
-- **Sea urchin** (`sea-urchin`). Now: hops. Plan: new effect (E6).
+- **Sea urchin** (`sea-urchin`). Now: tap: Wave the spines. Plan: keep.
   - Owner: Needs an effect.
   - Effect: Spines ripple in waves and it creeps along.
-  - Sound: Prickly rustle.
-- **Frog** (`frog`). Now: hops. Plan: new effect (E6).
+  - Improved: E6: the spines sweep round the urchin in waves (each tilts on its base, so it stays
+    straight), the pink tube feet reach out, and it creeps a little way to the side and back (about
+    4.5 s).
+  - Sound: A prickly rustle, wave after wave.
+- **Frog** (`frog`). Now: tap: Catch a fly. Plan: keep.
   - Owner: Mouth opens and the tongue shoots out.
   - Effect: Tongue shoots out to catch a fly.
-  - Sound: Ribbit.
+  - Improved: E6: a fly buzzes in and hovers; the frog's jaw drops, its tongue shoots out, catches
+    the fly and snaps back; the jaw shuts, its eyes sink to push the fly down (frogs swallow with
+    their eyes), and it croaks twice with its throat sac (about 3.5 s).
+  - Sound: A fly's buzz, a flick, a gulp and two croaks.
 - **Penguin** (`penguin`). Now: tap: Flap. Plan: keep.
   - Owner: Perfect and very cute.
   - Sound: Squawk.
@@ -1503,10 +1531,14 @@ Proposals below are suggestions; the owner may change them.
 - **Jack-o'-lantern** (`jack-o-lantern`). Now: tap: Lift the lid. Plan: keep.
   - Owner: Basically perfect.
   - Sound: Spooky flicker whoosh.
-- **Snowman** (`snowman`). Now: hops. Plan: new effect (E6).
+- **Snowman** (`snowman`). Now: tap: Melt and rebuild. Plan: keep.
   - Owner: Do more than bounce; maybe it melts.
   - Effect: Melts into a puddle, then rebuilds itself.
-  - Sound: Drip and a crunchy rebuild.
+  - Improved: E6: it melts as solid pieces, not a squash: the snowballs shrink (the head first),
+    drips fall, and the hat, nose, coals, arms and scarf drop off one by one into a spreading
+    puddle; then it builds itself again: the balls grow back from the bottom up and each piece hops
+    back to its place (about 6 s). The Warmth slider melts it the same way.
+  - Sound: Drips, then a crunch of snow and a twinkle as it rebuilds.
 - **Fireworks** (`fireworks`). Now: tap: Launch. Plan: keep.
   - Owner: Outstanding. Make each launch different (like the dice), and the burst match the colour
     of the cannon that fires it.
@@ -1630,62 +1662,97 @@ Proposals below are suggestions; the owner may change them.
 
 ## Landmarks (16)
 
-- **Eiffel Tower** (`eiffel-tower`). Now: hops. Plan: new effect (E6).
+- **Eiffel Tower** (`eiffel-tower`). Now: tap: Sparkle and fireworks. Plan: keep.
   - Owner: Fireworks burst around it.
   - Effect: Sparkling lights run up the tower and fireworks burst around it.
-  - Sound: Sparkle and distant booms.
-- **Washington Monument** (`washington-monument`). Now: hops. Plan: new effect (E6).
+  - Improved: E6: a tap starts the night show: the ironwork lights up gold, a sparkle of white
+    lights climbs the tower, and four fireworks burst round it one after another (blue, white, red
+    and gold), each opening fast, drooping and burning out; then the lights go down (about 4 s).
+  - Sound: Sparkle, and a boom for each burst.
+- **Washington Monument** (`washington-monument`). Now: tap: Sun and shadow. Plan: keep.
   - Owner: Something cool and not disrespectful.
   - Effect: The reflecting pool shimmers and the flags wave.
-  - Sound: Gentle breeze.
-- **Pyramids of Giza** (`pyramids`). Now: hops. Plan: new effect (E6).
+  - Improved: E6: a day in a few seconds, like a sundial: the sun rises behind the monument, arcs
+    over and sets, the obelisk's shadow swings round the lawn in front, and the flags ripple in the
+    breeze (about 4.5 s). There is no reflecting pool in the model, so the shadow replaced the
+    pool's shimmer.
+  - Sound: A day's breeze and a soft chime at noon.
+- **Pyramids of Giza** (`pyramids`). Now: tap: A visitor from space. Plan: keep.
   - Owner: Neat. Maybe put a UFO there, as a joke.
   - Effect: A tiny UFO (the Flying saucer) hovers over the Great Pyramid and beams up a camel-shaped
     cloud of sand.
-  - Sound: Theremin warble and sand hiss.
-- **Twisting supertall** (`supertall`). Now: hops. Plan: new effect (E6).
+  - Improved: E6: a tiny flying saucer glides in by the Great Pyramid and switches on its beam; sand
+    streams up out of the desert into the shape of a camel, which floats up into the saucer; the
+    saucer wobbles happily and zips away (about 5 s).
+  - Sound: Theremin warble, sand hiss and a zip away.
+- **Twisting supertall** (`supertall`). Now: tap: Twist and light up. Plan: keep.
   - Owner: Make it twist or glow.
   - Effect: The tower twists further and its lights run upward.
-  - Sound: Rising elevator ding.
+  - Improved: E6: the floors wring round further in twelve rigid bands (the top turns most) while a
+    ring of light runs up the glass, then they unwind with a little sway as a second ring runs up (4
+    s).
+  - Sound: A rising lift tone and a ding each time the light reaches the top.
 - **Lighthouse** (`lighthouse`). Now: tap: Light on or off. Plan: keep.
   - Owner: Basically perfect.
   - Sound: Foghorn.
-- **Statue of Liberty** (`statue-of-liberty`). Now: hops. Plan: new effect (E6).
+- **Statue of Liberty** (`statue-of-liberty`). Now: tap: Light the torch. Plan: keep.
   - Owner: Everything else looks fine. Make the effect a good one.
   - Fixed: C1: the crown's seven rays rise higher and taper to sharp, lit points.
   - Effect: The torch flame flares bright and sparkles drift from it.
-  - Sound: Flame whoosh and a harbour bell.
-- **White House** (`white-house`). Now: hops. Plan: new effect (E6).
+  - Improved: E6: the torch flares: the flame leaps to twice its size in a halo of light, a warm
+    glow spreads down the statue, and a plume of golden sparks drifts up and away on the breeze and
+    burns out (about 4 s).
+  - Sound: Flame whoosh, crackling sparks and a harbour bell.
+- **White House** (`white-house`). Now: tap: Fountain and lights. Plan: keep.
   - Owner: Nothing destructive or disrespectful.
   - Effect: The fountain on the lawn sprays higher and the flag raises.
-  - Sound: Fountain splash.
-- **Leaning Tower of Pisa** (`leaning-tower`). Now: hops. Plan: new effect (E6).
+  - Improved: E6: the fountain on the south lawn shoots up a tall jet that falls back as spray, the
+    lights come on in the windows one by one and the flag ripples; then the jet sinks and the lights
+    go out one by one (about 4.5 s). The flag stays at the top of its pole, so it never looks like
+    half-mast.
+  - Sound: Fountain splash and patter.
+- **Leaning Tower of Pisa** (`leaning-tower`). Now: tap: Drop two balls. Plan: keep.
   - Owner: Lean further and things fall off, like Galileo dropping objects.
   - Effect: Two balls of different sizes drop from the top and land together.
-  - Sound: Two thuds at the same time.
-- **Colosseum** (`colosseum`). Now: hops. Plan: new effect (E6).
+  - Improved: E6: Galileo's drop: the tower leans a little further, a big iron ball and a small
+    bronze one roll off the top ledge and fall side by side, landing at the same moment with puffs
+    of dust; they bounce, settle and fade, and the tower eases back (about 4 s).
+  - Sound: The tower grinds, then two thuds at the same moment.
+- **Colosseum** (`colosseum`). Now: tap: A chariot race. Plan: keep.
   - Owner: Gladiators fighting inside?
   - Effect: Non-violent: a tiny chariot race loops the arena while the crowd cheers (no fighting,
     per the no-gore rule).
-  - Sound: Crowd cheer.
-- **Parthenon** (`parthenon`). Now: hops. Plan: new effect (E6).
+  - Improved: E6: a chariot race (no fighting): a crowd fills the seats, and four chariots in the
+    team colours (red, white, blue and green) race a lap and a quarter of the arena in two lanes,
+    swapping the lead, while the crowd jumps and cheers; then they fade away (about 5 s).
+  - Sound: Crowd cheers over drumming hooves.
+- **Parthenon** (`parthenon`). Now: tap: A procession. Plan: keep.
   - Owner: Little ancient people in it.
   - Effect: Tiny robed figures walk between the columns in procession.
-  - Sound: Lyre strum.
-- **Stonehenge** (`stonehenge`). Now: hops. Plan: new effect (E6).
+  - Improved: E6: a procession: eight robed figures, some with baskets and jars on their heads, walk
+    in single file along the temple, round the corner and across the front of its steps, then fade
+    away (about 5.5 s).
+  - Sound: A lyre plays a walking tune.
+- **Stonehenge** (`stonehenge`). Now: tap: Solstice sunrise. Plan: keep.
   - Owner: No idea.
   - Effect: Solstice sunrise: the sun rises through the stones and lights them gold.
-  - Sound: Low drone and a bell.
+  - Improved: E6: solstice sunrise: the sun comes up over the far bank, framed by the great
+    trilithon, a golden beam shines through the stones along the monument's axis, and the stones
+    glow gold; then it fades back (about 5 s).
+  - Sound: A low drone and a bell as the stones light.
 - **Big Ben** (`big-ben`). Now: tap: Chime the bell. Plan: keep.
   - Owner: No visible effect; make it pronounced or pick something better.
   - Effect: Hands spin to the hour, the clock face glows and the bell swings.
   - Improved: C2: the hands spin round and land back on the real time, all four dials glow and a
     bell swings in the now open belfry (4 s).
   - Sound: Big Ben chimes (Westminster quarters, simplified).
-- **Taj Mahal** (`taj-mahal`). Now: hops. Plan: new effect (E6).
+- **Taj Mahal** (`taj-mahal`). Now: tap: Moonlight. Plan: keep.
   - Owner: Looks good; needs an effect.
   - Effect: Moonlight: the dome glows and the reflecting pool ripples.
-  - Sound: Soft sitar-like pluck.
+  - Improved: E6: moonlight: night falls on the garden and the buildings, the moon rises behind the
+    Taj, the great dome stays bright white and glows against the night, and moonlight shimmers on
+    the rippling pool; then day comes back (about 5 s).
+  - Sound: A slow sitar phrase.
 - **Castle** (`castle`). Now: tap: Raise or lower the drawbridge. Plan: keep.
   - Owner: Pretty good but underwhelming. Knights come out when the drawbridge opens.
   - Effect: The drawbridge drops and tiny knights march out with a banner.
