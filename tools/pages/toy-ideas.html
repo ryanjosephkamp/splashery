@@ -211,6 +211,33 @@
     background: var(--lane-soft);
     color: var(--lane);
   }
+  .chip.owner {
+    background: var(--ink);
+    color: var(--page);
+  }
+  h3.set {
+    font: 600 17px/1.25 var(--display);
+    margin: 20px 0 4px;
+  }
+  .set-note {
+    margin: 0 0 10px;
+    max-width: 70ch;
+    font-size: 14px;
+    color: var(--muted);
+  }
+  details.more {
+    font-size: 13px;
+    color: var(--muted);
+  }
+  details.more summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  details.more p {
+    margin: 6px 0 0;
+    white-space: pre-line;
+  }
   .idea h3 {
     margin: 0;
     font: 600 21px/1.15 var(--display);
@@ -320,7 +347,8 @@
       Three new toy ideas arrive here every morning at about 7:45 (Eastern time), each with its tap
       effect and its sound. Mark each one <b>Approve</b>, <b>Change</b> (write what should be
       different) or <b>Skip</b>. Approved and changed ideas wait here until you ask the Operator to
-      plan a lane for them.
+      plan a lane for them. Your own ideas are here too, tagged "Your idea", with the effect and
+      sound the Operator suggests for each.
     </p>
     <details class="rules">
       <summary>What every idea follows</summary>
@@ -360,8 +388,9 @@
 <script>
   // Everything on this page comes from its database (docs/OPERATING.md in the
   // splashery repo, "Pages"):
-  //   ideas/<idea id>  { day, order, name, kind: "kit" | "scan", shelf, tap, sound, why,
-  //                      source: { title, url, licence, author } (scans), lane, reply, revised }
+  //   ideas/<idea id>  { day, order, name, kind: "kit" | "scan", shelf, tap, sound, why, notes,
+  //                      source: { title, url, licence, author } (scans), lane, reply, revised,
+  //                      set, setNote (a group within the day), from: "owner" (your idea) }
   //   marks/<idea id>  { mark: "approve" | "change" | "skip" | "", note, at }   (your marks)
   const els = {
     list: document.getElementById("list"),
@@ -424,13 +453,14 @@
         : "";
     const showNote = m.mark === "change" || !!m.note;
     return `<article class="idea" data-id="${esc(t.id)}">
-      <div class="meta">${kindChip(t)}${t.shelf ? `<span class="chip shelf">${esc(t.shelf)}</span>` : ""}${stateChips(t)}</div>
+      <div class="meta">${t.from === "owner" ? '<span class="chip owner">Your idea</span>' : ""}${kindChip(t)}${t.shelf ? `<span class="chip shelf">${esc(t.shelf)}</span>` : ""}${stateChips(t)}</div>
       <h3>${esc(t.name)}</h3>
       <dl>
         <dt>Tap</dt><dd>${esc(t.tap)}</dd>
         <dt>Sound</dt><dd>${esc(t.sound)}</dd>
       </dl>
       ${t.why ? `<p class="why">${esc(t.why)}</p>` : ""}
+      ${t.notes ? `<details class="more"><summary>Details</summary><p>${esc(t.notes)}</p></details>` : ""}
       ${source}
       ${t.reply ? `<p class="reply"><b>Updated${t.revised ? ` ${esc(t.revised)}` : ""}:</b> ${esc(t.reply)}</p>` : ""}
       <div class="marks" role="group" aria-label="Your mark on ${esc(t.name)}">
@@ -468,7 +498,17 @@
           .filter((t) => String(t.day || "") === day && visible(t))
           .sort((a, b) => num(a.order, 99) - num(b.order, 99) || a.id.localeCompare(b.id));
         if (!items.length) return "";
-        return `<section><h2>${esc(dayTitle(day))}</h2><div class="grid">${items.map(card).join("")}</div></section>`;
+        // Ideas with a set are grouped under its heading, after the day's own ideas.
+        const sets = [...new Set(items.map((t) => t.set || ""))];
+        const parts = sets.map((name) => {
+          const its = items.filter((t) => (t.set || "") === name);
+          const note = its.find((t) => t.setNote)?.setNote;
+          const head = name
+            ? `<h3 class="set">${esc(name)}</h3>${note ? `<p class="set-note">${esc(note)}</p>` : ""}`
+            : "";
+          return `${head}<div class="grid">${its.map(card).join("")}</div>`;
+        });
+        return `<section><h2>${esc(dayTitle(day))}</h2>${parts.join("")}</section>`;
       })
       .join("");
     els.list.innerHTML =

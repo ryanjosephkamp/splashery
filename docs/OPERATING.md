@@ -178,9 +178,11 @@ morning the Operator's routine adds three new toy ideas that fit the ground rule
 effect and a sound. Its collections:
 
 - `ideas/<idea id>`:
-  `{ day, order, name, kind: "kit" | "scan", shelf, tap, sound, why, source, lane, reply, revised }`.
+  `{ day, order, name, kind: "kit" | "scan", shelf, tap, sound, why, notes, source, lane, reply, revised, set, setNote, from }`.
   The id is a slug of the name. A scan idea's `source` is `{ title, url, licence, author }`, with
-  the licence checked on the live source page (CC0 or CC BY only). Only the Operator writes ideas.
+  the licence checked on the live source page (CC0 or CC BY only). `set` groups ideas under a
+  heading within their day (`setNote` is its line), and `from: "owner"` tags the owner's own ideas.
+  Only the Operator writes ideas.
 - `marks/<idea id>`: the owner's marks, `{ mark: "approve" | "change" | "skip" | "", note, at }`.
   Only the owner writes these. "Change" keeps the idea with the owner's note, and the note wins: the
   next morning run rewrites the idea to match and sets `reply` and `revised`.
