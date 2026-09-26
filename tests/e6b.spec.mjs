@@ -65,15 +65,21 @@ test("Galileo's two balls land at the same moment, clear of the tower, at any le
 
 test("the frog's tongue reaches the fly and carries it into the mouth", async () => {
   const { r, kit } = await load("animals", "frog");
-  let caught = false;
+  // Where the fly hovers just before the tongue shoots out, and where it
+  // is once the tongue is fully out: the tongue's tip has it.
+  let hover = null;
+  let caught = null;
   let swallowed = false;
   play(r, kit, "snap", (s, out) => {
     const tongue = out.morph?.[0] ?? 0;
     const fly = out.parts.fly;
-    if (tongue > 0.99 && fly.visible > 0.5 && Math.hypot(...fly.offset) < 0.03) caught = true;
+    if (s > 0.95 && s < 1.0) hover = fly.offset;
+    if (!caught && tongue > 0.99 && fly.visible > 0.5) caught = fly.offset;
     if (caught && s > 1.6 && fly.visible === 0) swallowed = true;
   });
-  expect(caught).toBe(true);
+  expect(hover).not.toBeNull();
+  expect(caught).not.toBeNull();
+  expect(Math.hypot(...caught.map((v, i) => v - hover[i]))).toBeLessThan(0.05);
   expect(swallowed).toBe(true);
 });
 

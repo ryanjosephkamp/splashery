@@ -339,6 +339,7 @@ const EIF_BURSTS = [
   { c: add(mul(EIF_VIEW_R, 0.62), [0, 1.7, 0.05]), r: 0.4, a: "#ffb52e", b: "#fff2b0", at: 2.1 },
 ];
 const EIF_SECS = 4.2;
+const EIF_BUILT = 0.6;
 
 // A firework burst: rays of sparks from the centre with bright tips, built
 // at its fullest (drive() grows it with its part's scale and fades it).
@@ -488,8 +489,10 @@ function eiffelBuild(k) {
     }),
   });
   // Fireworks round the tower (drive() pops them one after another).
+  // Each is built at EIF_BUILT of its size, inside the tower's reach, and
+  // grown by its part.
   EIF_BURSTS.forEach((B, i) =>
-    burst(k, k.part(`burst${i}`, { pivot: B.c }), B.c, B.r, B.a, B.b, 0.03),
+    burst(k, k.part(`burst${i}`, { pivot: B.c }), B.c, B.r * EIF_BUILT, B.a, B.b, 0.03),
   );
   // The top: a deck, the lantern and the antenna.
   const iron = (c) => lit(brown, c, 0.62);
@@ -712,8 +715,8 @@ function pyramid(k, cx, cy, cz, half, h, { cap = 0, weight = 1 } = {}) {
 const PYR = {
   r: [0.85, 0, -0.52],
   f: [0.52, 0, 0.85],
-  ground: [1.75, 0, 0.45],
-  hover: [1.75, 1.34, 0.45],
+  ground: [1.6, 0, 0.5],
+  hover: [1.6, 1.34, 0.5],
   secs: 5.4,
 };
 
@@ -827,7 +830,7 @@ function pyramidsBuild(k) {
     const S = 1.45;
     const to = add(PYR.ground, add(add(mul(r, cp[0] * S), [0, cp[1] * S + 0.02, 0]), mul(side, cp[2] * S))); // prettier-ignore
     const n = unit(add(add(mul(r, cn[0]), [0, cn[1], 0]), mul(side, cn[2])));
-    const g = add(PYR.ground, add(mul(r, cp[0] * 1.5), mul(side, cp[2] * 2.5 + (rand() - 0.5) * 0.2))); // prettier-ignore
+    const g = add(PYR.ground, add(mul(r, cp[0]), mul(side, cp[2] * 1.5 + (rand() - 0.5) * 0.14))); // prettier-ignore
     const light = 0.62 + 0.38 * Math.max(0, n[0] * SUN[0] + n[1] * SUN[1] + n[2] * SUN[2]);
     return {
       p: [g[0], -0.025, g[2]],
@@ -1501,46 +1504,41 @@ function libertyBuild(k) {
     params: [0.06 + 0.04 * rand(), rand()],
   }));
   const hp = F.p(add(fb, [0, 0.06, 0]));
-  k.cloud(
-    { share: 0.005, size: 2.6, pattern: false, part: k.part("halo", { pivot: hp }) },
-    (rand) => {
-      // prettier-ignore
-      const d = unit([rand() - 0.5, rand() - 0.5, rand() - 0.5]);
-      const r = 0.1 * Math.sqrt(rand());
-      return {
-        p: add(hp, mul(d, r)),
-        color: mix("#ffe9a0", "#fff8e0", rand()),
-        opacity: 0.16 * (1 - r / 0.12),
-        kind: "fade",
-        channel: 1,
-        params: [0.3, -0.5],
-      };
-    },
-  );
+  // (Built small, within the torch's reach, and grown by its part.)
+  const halo = k.part("halo", { pivot: hp });
+  k.cloud({ share: 0.005, size: 2.6, pattern: false, part: halo }, (rand) => {
+    const d = unit([rand() - 0.5, rand() - 0.5, rand() - 0.5]);
+    const r = 0.055 * Math.sqrt(rand());
+    return {
+      p: add(hp, mul(d, r)),
+      color: mix("#ffe9a0", "#fff8e0", rand()),
+      opacity: 0.16 * (1 - r / 0.066),
+      kind: "fade",
+      channel: 1,
+      params: [0.3, -0.5],
+    };
+  });
   // Sparks drift up and away on the harbour breeze (to the right as seen
   // from the home view), by channel 0.
   k.fitMorphs = false;
   // Each spark's target lies in a plume that widens as it rises and bends
   // with the wind, so the spray streams out of the torch.
-  k.cloud(
-    { share: 0.005, size: 1.3, pattern: false, part: k.part("sparks", { pivot: fp }) },
-    (rand) => {
-      // prettier-ignore
-      const t = Math.pow(rand(), 0.8);
-      const centre = add([0, 0.08 + 0.42 * t, 0], mul([0.85, 0, -0.52], 0.55 * t * t));
-      const d = unit([rand() - 0.5, rand() - 0.5, rand() - 0.5]);
-      const r = (0.02 + 0.17 * t) * Math.sqrt(rand());
-      return {
-        p: add(fp, [(rand() - 0.5) * 0.03, rand() * 0.04, (rand() - 0.5) * 0.03]),
-        color: mix("#ffc23a", "#fff4c8", rand()),
-        opacity: 0.95,
-        size: 1.25 - 0.5 * t,
-        kind: "morph",
-        channel: 0,
-        to: add(fp, add(centre, mul(d, r))),
-      };
-    },
-  );
+  const sparks = k.part("sparks", { pivot: fp });
+  k.cloud({ share: 0.005, size: 1.3, pattern: false, part: sparks }, (rand) => {
+    const t = Math.pow(rand(), 0.8);
+    const centre = add([0, 0.08 + 0.42 * t, 0], mul([0.85, 0, -0.52], 0.55 * t * t));
+    const d = unit([rand() - 0.5, rand() - 0.5, rand() - 0.5]);
+    const r = (0.02 + 0.17 * t) * Math.sqrt(rand());
+    return {
+      p: add(fp, [(rand() - 0.5) * 0.03, rand() * 0.04, (rand() - 0.5) * 0.03]),
+      color: mix("#ffc23a", "#fff4c8", rand()),
+      opacity: 0.95,
+      size: 1.25 - 0.5 * t,
+      kind: "morph",
+      channel: 0,
+      to: add(fp, add(centre, mul(d, r))),
+    };
+  });
   // The left arm cradling the tablet.
   const armL = spline([
     [0.11, 0.49, 0],
@@ -1987,23 +1985,20 @@ function pisaBuild(k) {
       },
     });
     const foot = [land[0], 0.03, land[2]];
-    k.cloud(
-      { share: 0.004, size: 1.6, pattern: false, part: k.part(`dust${i}`, { pivot: foot }) },
-      (rand) => {
-        // prettier-ignore
-        const a = rand() * TAU;
-        const d = r * (1.2 + 1.6 * rand());
-        return {
-          p: add(foot, [
-            Math.cos(a) * d,
-            0.01 + 0.06 * rand() * (1 - (d - r) / (3 * r)),
-            Math.sin(a) * d,
-          ]),
-          color: mix("#c9b48c", "#e8dcc0", rand()),
-          opacity: 0.45,
-        };
-      },
-    );
+    const dust = k.part(`dust${i}`, { pivot: foot });
+    k.cloud({ share: 0.004, size: 1.6, pattern: false, part: dust }, (rand) => {
+      const a = rand() * TAU;
+      const d = r * (1.2 + 1.6 * rand());
+      return {
+        p: add(foot, [
+          Math.cos(a) * d,
+          0.01 + 0.06 * rand() * (1 - (d - r) / (3 * r)),
+          Math.sin(a) * d,
+        ]),
+        color: mix("#c9b48c", "#e8dcc0", rand()),
+        opacity: 0.45,
+      };
+    });
   });
 }
 
@@ -2933,7 +2928,7 @@ function benBuild(k) {
 
 // Moonlight at the Taj Mahal: the moon hangs behind it, left of the dome as
 // seen from the home view.
-const TAJ = { moon: [-1.02, 1.45, -1.15], secs: 5.2 };
+const TAJ = { moon: [-0.98, 1.42, -0.95], secs: 5.2 };
 
 function tajBuild(k) {
   // Night falls on channel 1 (a cool dusk, drive()'s negative glow) on
@@ -3209,29 +3204,26 @@ function tajBuild(k) {
   });
   k.cloud({ share: 0.006, size: 3, pattern: false, part: moon, fit: false }, (rand) => {
     const d = unit([rand() - 0.5, rand() - 0.5, rand() - 0.5]);
-    const r = 0.15 + 0.16 * Math.sqrt(rand());
+    const r = 0.15 + 0.11 * Math.sqrt(rand());
     return {
       p: add(TAJ.moon, mul(d, r)),
       color: "#dfe8ff",
-      opacity: 0.14 * (1 - (r - 0.15) / 0.18),
+      opacity: 0.14 * (1 - (r - 0.15) / 0.13),
       kind: "fade",
       channel: 0,
       params: [0.05, -0.5],
     };
   });
-  k.cloud(
-    { share: 0.006, size: 1.2, pattern: false, part: k.part("shimmer", { pivot: [0, g, 1.9] }) },
-    (rand) => ({
-      // prettier-ignore
-      p: [(rand() - 0.5) * 0.12 * (0.4 + rand()), g + 0.01, 1.16 + rand() * 1.48],
-      dir: [1, 0, 0],
-      stretch: 2.5,
-      color: mix("#e8efff", "#ffffff", rand()),
-      opacity: 0.85,
-      kind: "wave",
-      params: [0.006, rand() * TAU],
-    }),
-  );
+  const shimmer = k.part("shimmer", { pivot: [0, g, 1.9] });
+  k.cloud({ share: 0.006, size: 1.2, pattern: false, part: shimmer }, (rand) => ({
+    p: [(rand() - 0.5) * 0.12 * (0.4 + rand()), g + 0.01, 1.16 + rand() * 1.48],
+    dir: [1, 0, 0],
+    stretch: 2.5,
+    color: mix("#e8efff", "#ffffff", rand()),
+    opacity: 0.85,
+    kind: "wave",
+    params: [0.006, rand() * TAU],
+  }));
 }
 
 // ---- Castle ------------------------------------------------------------------------------------
@@ -3873,7 +3865,7 @@ export const RECIPES = {
         const u = on ? (s - B.at) / 1.8 : -1;
         const live = u > 0 && u < 1;
         out.parts[`burst${i}`] = {
-          scale: 0.06 + 0.94 * easeOut(clamp(u / 0.2, 0, 1)),
+          scale: (0.06 + 0.94 * easeOut(clamp(u / 0.2, 0, 1))) / EIF_BUILT,
           offset: [0, -0.16 * Math.max(0, u) ** 2, 0],
           visible: live ? 1 - band(u, 0.5, 1) : 0,
         };
@@ -3987,7 +3979,7 @@ export const RECIPES = {
       const big = on ? easeOut(band(s, 0, 0.35)) * (1 - easeInOut(band(s, 2.8, 3.7))) : 0;
       const flick = 1 + 0.08 * Math.sin(info.time * 23) * big;
       out.parts.flame = { scale: (1 + 1.2 * big) * flick };
-      out.parts.halo = { scale: 0.6 + 1.1 * big, visible: big > 0.01 ? 1 : 0 };
+      out.parts.halo = { scale: 1.1 + 2 * big, visible: big > 0.01 ? 1 : 0 };
       const drift = on ? easeOut(band(s, 0.15, 3.3)) : 0;
       const live = on && s < 3.3;
       out.parts.sparks = { visible: live ? band(s, 0.1, 0.2) * (1 - band(s, 2.3, 3.2)) : 0 };

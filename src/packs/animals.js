@@ -170,6 +170,7 @@ const FROG = (() => {
     hinge,
     open,
     catch: catchAt,
+    flyBuilt: [catchAt[0], catchAt[1], 0.45],
     from: [-0.75, 0.42, -0.1],
     tipRest,
     tipFull: unJaw(catchAt),
@@ -1705,6 +1706,9 @@ export const RECIPES = {
       }
       // Each spine tilts sideways (round the urchin) on its base by one of
       // channels 0 to 2, picked by its sector, so the spine stays straight.
+      // (The tilted tips stay within the urchin's reach, so they are left
+      // out of the fit.)
+      k.fitMorphs = false;
       for (const sp of spines) {
         const a = Math.atan2(sp.base[0], sp.base[2]);
         sp.side = [Math.cos(a), 0, -Math.sin(a)];
@@ -1788,7 +1792,7 @@ export const RECIPES = {
         fp = vec.add(FROG.hinge, quatRotate(quatAxisAngle([1, 0, 0], jaw), vec.sub(tip, FROG.hinge))); // prettier-ignore
       }
       out.parts.fly = {
-        offset: vec.sub(fp, FROG.catch),
+        offset: vec.sub(fp, FROG.flyBuilt),
         quat: quatAxisAngle([0, 1, 0], 0.4 * Math.sin(s * 9)),
         visible: on && s < 1.58 ? 1 : 0,
       };
@@ -1883,10 +1887,12 @@ export const RECIPES = {
         };
       });
       // The fly, built where the tongue catches it.
-      const fly = k.part("fly", { pivot: FROG.catch });
-      const F = { part: fly, weight: 12, flat: 0.3, pattern: false, fit: false };
-      const at = (p) => vec.add(FROG.catch, p);
-      k.add(k.ellipsoid(0.045, 0.034, 0.058), { ...F, pos: FROG.catch, color: (c) => lit(c, "#2c2c34", 0.4, 0.5) }); // prettier-ignore
+      // The fly (hidden at rest), built within the frog's own bounds (so it
+      // takes no room in the frame) and carried out to where it is caught.
+      const fly = k.part("fly", { pivot: FROG.flyBuilt });
+      const F = { part: fly, weight: 12, flat: 0.3, pattern: false };
+      const at = (p) => vec.add(FROG.flyBuilt, p);
+      k.add(k.ellipsoid(0.045, 0.034, 0.058), { ...F, pos: FROG.flyBuilt, color: (c) => lit(c, "#2c2c34", 0.4, 0.5) }); // prettier-ignore
       k.add(k.sphere(0.03), { ...F, pos: at([0, 0.006, 0.058]), color: "#9a2424" });
       for (const sx of [-1, 1])
         k.add(k.ellipsoid(0.07, 0.006, 0.034), {
@@ -1898,9 +1904,9 @@ export const RECIPES = {
         });
       // The throat sac that blows up for a croak (hidden at rest).
       const sac = k.part("sac", { pivot: [0, -0.02, 0.42] });
-      k.add(k.sphere(0.17), {
+      k.add(k.sphere(0.15), {
         part: sac,
-        pos: [0, -0.07, 0.47],
+        pos: [0, -0.07, 0.44],
         flat: 0.3,
         pattern: false,
         color: (c) => lit(c, "#f6efc8", 0.3, 0.6),

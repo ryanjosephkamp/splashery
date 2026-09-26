@@ -1370,13 +1370,13 @@ export const RECIPES = {
       k.cloud({ share: 0.012, size: 2, pattern: false }, (rand, j) => {
         const i = j % 8;
         const a = (i / 8) * TAU;
-        const r = R(-0.13) + 0.05;
+        const r = R(-0.13) + 0.02;
         const d = vec.unit([rand() - 0.5, rand() - 0.5, rand() - 0.5]);
-        const q = 0.12 * Math.sqrt(rand());
+        const q = 0.075 * Math.sqrt(rand());
         return {
           p: vec.add([Math.sin(a) * r, -0.13, Math.cos(a) * r], vec.mul(d, q)),
-          color: mix(gemCols[i % 4], "#ffffff", 0.25 + 0.6 * (1 - q / 0.12)),
-          opacity: 0.75 * (1 - q / 0.13),
+          color: mix(gemCols[i % 4], "#ffffff", 0.25 + 0.6 * (1 - q / 0.075)),
+          opacity: 0.75 * (1 - q / 0.085),
           kind: "fade",
           channel: 0,
           params: [0.03 + (i / 8) * 0.85, -0.08],
@@ -1386,9 +1386,9 @@ export const RECIPES = {
       // rest).
       k.cloud({ share: 0.004, size: 1.1, pattern: false, part: k.part("motes") }, (rand) => {
         const a = rand() * TAU;
-        const r = 0.62 + 0.3 * rand();
+        const r = 0.5 + 0.18 * rand();
         return {
-          p: [Math.sin(a) * r, -0.4 + rand() * 0.5, Math.cos(a) * r],
+          p: [Math.sin(a) * r, -0.3 + rand() * 0.4, Math.cos(a) * r],
           color: mix("#ffd35a", "#fffbe8", rand()),
           opacity: 0.95,
           kind: "rise",
