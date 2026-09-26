@@ -1,0 +1,572 @@
+<title>Splashery Toy Ideas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&display=swap"
+/>
+<style>
+  :root {
+    --page: #eef3f3;
+    --panel: #ffffff;
+    --ink: #13201f;
+    --muted: #55655f;
+    --line: rgba(20, 60, 58, 0.14);
+    --accent: #0c6f78;
+    --accent-ink: #ffffff;
+    --accent-soft: #d9eeee;
+    --grid: rgba(12, 111, 120, 0.07);
+    --yes: #1b7a45;
+    --yes-soft: #dff3e7;
+    --change: #9a5208;
+    --change-soft: #fcebd6;
+    --skip: #5d6663;
+    --skip-soft: #e7eceb;
+    --lane: #4747b8;
+    --lane-soft: #e5e5f8;
+    --display: "Fredoka", ui-rounded, ui-sans-serif, system-ui, sans-serif;
+    --body: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --page: #0e1616;
+      --panel: #162121;
+      --ink: #e6efee;
+      --muted: #9fb2ae;
+      --line: rgba(170, 225, 220, 0.15);
+      --accent: #5cc8cf;
+      --accent-ink: #0b1a1b;
+      --accent-soft: #163536;
+      --grid: rgba(92, 200, 207, 0.06);
+      --yes: #7bdca4;
+      --yes-soft: #173826;
+      --change: #ffc27a;
+      --change-soft: #3b2912;
+      --skip: #a9b5b2;
+      --skip-soft: #242e2d;
+      --lane: #aeb0ff;
+      --lane-soft: #25264a;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --page: #0e1616;
+    --panel: #162121;
+    --ink: #e6efee;
+    --muted: #9fb2ae;
+    --line: rgba(170, 225, 220, 0.15);
+    --accent: #5cc8cf;
+    --accent-ink: #0b1a1b;
+    --accent-soft: #163536;
+    --grid: rgba(92, 200, 207, 0.06);
+    --yes: #7bdca4;
+    --yes-soft: #173826;
+    --change: #ffc27a;
+    --change-soft: #3b2912;
+    --skip: #a9b5b2;
+    --skip-soft: #242e2d;
+    --lane: #aeb0ff;
+    --lane-soft: #25264a;
+  }
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    background-color: var(--page);
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 24px 24px;
+    color: var(--ink);
+    font: 15px/1.5 var(--body);
+  }
+  .wrap {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding-inline: 16px;
+    padding-block: 24px 64px;
+  }
+  header {
+    display: grid;
+    gap: 8px;
+  }
+  header h1 {
+    font: 600 clamp(30px, 7vw, 44px) / 1.02 var(--display);
+    margin: 0;
+    letter-spacing: -0.005em;
+    text-wrap: balance;
+  }
+  header p {
+    margin: 0;
+    max-width: 62ch;
+    color: var(--muted);
+  }
+  details.rules {
+    max-width: 62ch;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 10px 14px;
+  }
+  details.rules summary {
+    cursor: pointer;
+    font-weight: 600;
+  }
+  details.rules ul {
+    margin: 8px 0 2px;
+    padding-left: 20px;
+    display: grid;
+    gap: 4px;
+    color: var(--muted);
+    font-size: 14px;
+  }
+  .bar {
+    position: sticky;
+    top: env(safe-area-inset-top, 0px);
+    z-index: 5;
+    margin: 18px -16px 0;
+    padding: 10px 16px;
+    background: var(--page);
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+  }
+  .bar button {
+    font: 600 13px/1 var(--body);
+    color: var(--ink);
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-variant-numeric: tabular-nums;
+  }
+  .bar button[aria-pressed="true"] {
+    background: var(--ink);
+    color: var(--page);
+    border-color: var(--ink);
+  }
+  .count {
+    margin-left: auto;
+    font-size: 13px;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+  h2 {
+    font: 600 22px/1.2 var(--display);
+    margin: 28px 0 10px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    gap: 14px;
+  }
+  .idea {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+  }
+  .chip {
+    font: 600 11px/1 var(--body);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 5px 7px;
+    border-radius: 6px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    white-space: nowrap;
+  }
+  .chip.shelf {
+    background: transparent;
+    color: var(--muted);
+    padding-inline: 0;
+  }
+  .chip.yes {
+    background: var(--yes-soft);
+    color: var(--yes);
+  }
+  .chip.change {
+    background: var(--change-soft);
+    color: var(--change);
+  }
+  .chip.skip {
+    background: var(--skip-soft);
+    color: var(--skip);
+  }
+  .chip.lane {
+    background: var(--lane-soft);
+    color: var(--lane);
+  }
+  .idea h3 {
+    margin: 0;
+    font: 600 21px/1.15 var(--display);
+  }
+  .idea dl {
+    margin: 0;
+    display: grid;
+    gap: 6px;
+  }
+  .idea dt {
+    font: 600 11px/1.2 var(--body);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .idea dd {
+    margin: 0 0 2px;
+  }
+  .why {
+    margin: 0;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .source {
+    font-size: 13px;
+    overflow-wrap: anywhere;
+  }
+  .reply {
+    margin: 0;
+    font-size: 13px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    background: var(--accent-soft);
+  }
+  a {
+    color: var(--accent);
+  }
+  .marks {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+    margin-top: auto;
+  }
+  .marks button {
+    font: 600 14px/1 var(--body);
+    color: var(--ink);
+    background: transparent;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 11px 6px;
+    cursor: pointer;
+  }
+  .marks button[data-m="approve"][aria-pressed="true"] {
+    background: var(--yes);
+    border-color: var(--yes);
+    color: var(--panel);
+  }
+  .marks button[data-m="change"][aria-pressed="true"] {
+    background: var(--change);
+    border-color: var(--change);
+    color: var(--panel);
+  }
+  .marks button[data-m="skip"][aria-pressed="true"] {
+    background: var(--skip);
+    border-color: var(--skip);
+    color: var(--panel);
+  }
+  textarea {
+    width: 100%;
+    min-height: 68px;
+    resize: vertical;
+    font: 14px/1.4 var(--body);
+    color: var(--ink);
+    background: var(--page);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 8px 10px;
+  }
+  .saved {
+    min-height: 1em;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .msg {
+    color: var(--muted);
+    padding: 18px 0;
+  }
+  button:focus-visible,
+  textarea:focus-visible,
+  summary:focus-visible,
+  a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  footer {
+    margin-top: 28px;
+    font-size: 13px;
+    color: var(--muted);
+    max-width: 64ch;
+  }
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>Splashery Toy Ideas</h1>
+    <p>
+      Three new toy ideas arrive here every morning at about 7:45 (Eastern time), each with its tap
+      effect and its sound. Mark each one <b>Approve</b>, <b>Change</b> (write what should be
+      different) or <b>Skip</b>. Approved and changed ideas wait here until you ask the Operator to
+      plan a lane for them.
+    </p>
+    <details class="rules">
+      <summary>What every idea follows</summary>
+      <ul>
+        <li>
+          Kit-built from shapes, or a scan under CC0 or CC BY (the licence checked on its source
+          page). Never BY-SA or NC.
+        </li>
+        <li>No brands or logos, no firearms, no gore. Flags stay respectful.</li>
+        <li>Not already on the shelf or in the plan, and its tap and sound are its own.</li>
+        <li>
+          The effect quality rules: real motion with solid pieces, separate things move separately,
+          instruments are played, games follow real rules.
+        </li>
+      </ul>
+    </details>
+  </header>
+
+  <div class="bar" role="group" aria-label="Show">
+    <button type="button" data-f="open" aria-pressed="false">Waiting for you</button>
+    <button type="button" data-f="yes" aria-pressed="false">Approved</button>
+    <button type="button" data-f="skip" aria-pressed="false">Skipped</button>
+    <button type="button" data-f="lane" aria-pressed="false">In a lane</button>
+    <button type="button" data-f="all" aria-pressed="true">All</button>
+    <span class="count" id="count" aria-live="polite"></span>
+  </div>
+
+  <main id="list"><p class="msg">Loading the ideas…</p></main>
+
+  <footer>
+    "Change" keeps the idea with your note, and your note wins over its text; the Operator rewrites
+    the idea to match on its next morning run. To build approved ideas, tell the Operator: "Plan a
+    lane for the toy ideas I approved."
+  </footer>
+</div>
+
+<script>
+  // Everything on this page comes from its database (docs/OPERATING.md in the
+  // splashery repo, "Pages"):
+  //   ideas/<idea id>  { day, order, name, kind: "kit" | "scan", shelf, tap, sound, why,
+  //                      source: { title, url, licence, author } (scans), lane, reply, revised }
+  //   marks/<idea id>  { mark: "approve" | "change" | "skip" | "", note, at }   (your marks)
+  const els = {
+    list: document.getElementById("list"),
+    count: document.getElementById("count"),
+  };
+  const ideas = {};
+  const marks = {};
+  let filter = "all";
+  let db = null;
+  let loaded = false;
+
+  const esc = (s) =>
+    String(s ?? "").replace(
+      /[&<>"']/g,
+      (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c],
+    );
+  const num = (v, d) => (Number.isFinite(v) ? v : d);
+  const LABEL = { approve: "Approved", change: "Approved with a change", skip: "Skipped" };
+
+  function dayTitle(day) {
+    const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(day || ""));
+    if (!m) return "Earlier";
+    const d = new Date(Date.UTC(+m[1], +m[2] - 1, +m[3]));
+    return d.toLocaleDateString("en-GB", {
+      weekday: "long",
+      day: "numeric",
+      month: "long",
+      timeZone: "UTC",
+    });
+  }
+
+  function safeUrl(u) {
+    return typeof u === "string" && /^https:\/\/[^\s"'<>]+$/.test(u) ? u : "";
+  }
+
+  function kindChip(t) {
+    if (t.kind === "scan") {
+      const lic = t.source?.licence ? ` · ${esc(t.source.licence)}` : "";
+      return `<span class="chip">Scan${lic}</span>`;
+    }
+    return '<span class="chip">Kit-built</span>';
+  }
+
+  function stateChips(t) {
+    const m = marks[t.id]?.mark;
+    const out = [];
+    if (t.lane) out.push(`<span class="chip lane">In lane ${esc(t.lane)}</span>`);
+    else if (m === "approve") out.push('<span class="chip yes">Approved</span>');
+    else if (m === "change") out.push('<span class="chip change">Approved, with a change</span>');
+    else if (m === "skip") out.push('<span class="chip skip">Skipped</span>');
+    return out.join("");
+  }
+
+  function card(t) {
+    const m = marks[t.id] || {};
+    const url = safeUrl(t.source?.url);
+    const source =
+      t.kind === "scan" && t.source
+        ? `<div class="source">Source: ${url ? `<a href="${esc(url)}" target="_blank" rel="noopener">${esc(t.source.title || url)}</a>` : esc(t.source.title)}${t.source.author ? `, by ${esc(t.source.author)}` : ""}${t.source.licence ? ` (${esc(t.source.licence)})` : ""}</div>`
+        : "";
+    const showNote = m.mark === "change" || !!m.note;
+    return `<article class="idea" data-id="${esc(t.id)}">
+      <div class="meta">${kindChip(t)}${t.shelf ? `<span class="chip shelf">${esc(t.shelf)}</span>` : ""}${stateChips(t)}</div>
+      <h3>${esc(t.name)}</h3>
+      <dl>
+        <dt>Tap</dt><dd>${esc(t.tap)}</dd>
+        <dt>Sound</dt><dd>${esc(t.sound)}</dd>
+      </dl>
+      ${t.why ? `<p class="why">${esc(t.why)}</p>` : ""}
+      ${source}
+      ${t.reply ? `<p class="reply"><b>Updated${t.revised ? ` ${esc(t.revised)}` : ""}:</b> ${esc(t.reply)}</p>` : ""}
+      <div class="marks" role="group" aria-label="Your mark on ${esc(t.name)}">
+        <button type="button" data-m="approve" aria-pressed="${m.mark === "approve"}">Approve</button>
+        <button type="button" data-m="change" aria-pressed="${m.mark === "change"}">Change</button>
+        <button type="button" data-m="skip" aria-pressed="${m.mark === "skip"}">Skip</button>
+      </div>
+      <textarea id="note-${esc(t.id)}" data-note placeholder="What should be different?" aria-label="Note on ${esc(t.name)}" ${showNote ? "" : "hidden"}>${esc(m.note || "")}</textarea>
+      <div class="saved" data-saved></div>
+    </article>`;
+  }
+
+  function group(t) {
+    const m = marks[t.id]?.mark;
+    if (t.lane) return "lane";
+    if (m === "approve" || m === "change") return "yes";
+    if (m === "skip") return "skip";
+    return "open";
+  }
+
+  function visible(t) {
+    return filter === "all" || group(t) === filter;
+  }
+
+  function render() {
+    // Keep a note being typed from being replaced mid-edit.
+    if (document.activeElement?.matches?.("textarea[data-note]")) return updateCount();
+    updateCount();
+    if (!loaded) return;
+    const all = Object.values(ideas);
+    const days = [...new Set(all.map((t) => String(t.day || "")))].sort().reverse();
+    const html = days
+      .map((day) => {
+        const items = all
+          .filter((t) => String(t.day || "") === day && visible(t))
+          .sort((a, b) => num(a.order, 99) - num(b.order, 99) || a.id.localeCompare(b.id));
+        if (!items.length) return "";
+        return `<section><h2>${esc(dayTitle(day))}</h2><div class="grid">${items.map(card).join("")}</div></section>`;
+      })
+      .join("");
+    els.list.innerHTML =
+      html ||
+      `<p class="msg">${all.length ? "Nothing here with this filter." : "No ideas yet. The first three arrive with the next morning run."}</p>`;
+  }
+
+  function updateCount() {
+    if (!loaded) {
+      els.count.textContent = "";
+      return;
+    }
+    const all = Object.values(ideas);
+    const n = (g) => all.filter((t) => group(t) === g).length;
+    const labels = { open: "Waiting for you", yes: "Approved", skip: "Skipped", lane: "In a lane" };
+    document.querySelectorAll(".bar button[data-f]").forEach((b) => {
+      const f = b.dataset.f;
+      b.textContent = f === "all" ? `All (${all.length})` : `${labels[f]} (${n(f)})`;
+    });
+    const open = n("open");
+    const yes = n("yes");
+    els.count.textContent =
+      `${open} waiting for you` + (yes ? ` · ${yes} approved, waiting for a lane` : "");
+  }
+
+  async function save(id, patch, el) {
+    marks[id] = { ...(marks[id] || {}), ...patch, at: new Date().toISOString().slice(0, 10) };
+    const saved = el?.querySelector("[data-saved]");
+    if (!db) {
+      if (saved) saved.textContent = "Not saved: this view cannot store marks.";
+      return;
+    }
+    try {
+      await db.doc(`marks/${id}`).set(marks[id]);
+      if (saved) saved.textContent = "Saved";
+    } catch (e) {
+      if (saved) saved.textContent = "Could not save. Try again in a moment.";
+    }
+  }
+
+  els.list.addEventListener("click", (e) => {
+    const b = e.target.closest(".marks button");
+    if (!b) return;
+    const el = b.closest(".idea");
+    const id = el.dataset.id;
+    const mk = marks[id]?.mark === b.dataset.m ? "" : b.dataset.m;
+    save(id, { mark: mk }, el);
+    render();
+    if (mk === "change") document.getElementById(`note-${id}`)?.focus();
+  });
+
+  let noteTimer = null;
+  els.list.addEventListener("input", (e) => {
+    const ta = e.target.closest("textarea[data-note]");
+    if (!ta) return;
+    const el = ta.closest(".idea");
+    clearTimeout(noteTimer);
+    noteTimer = setTimeout(() => save(el.dataset.id, { note: ta.value }, el), 700);
+  });
+  els.list.addEventListener("focusout", (e) => {
+    if (e.target.matches?.("textarea[data-note]")) setTimeout(render, 0);
+  });
+
+  document.querySelector(".bar").addEventListener("click", (e) => {
+    const f = e.target.closest("button[data-f]");
+    if (!f) return;
+    filter = f.dataset.f;
+    document
+      .querySelectorAll(".bar button[data-f]")
+      .forEach((x) => x.setAttribute("aria-pressed", x === f));
+    render();
+  });
+
+  render();
+
+  (async () => {
+    db = (await window.claude?.use?.("db")) || null;
+    if (!db) {
+      els.list.innerHTML =
+        '<p class="msg">This view cannot load the ideas. Open the page from its link while signed in to claude.ai.</p>';
+      return;
+    }
+    const watch = (name, into, withId) =>
+      db.collection(name).onSnapshot(
+        (snap) => {
+          for (const k of Object.keys(into)) delete into[k];
+          for (const d of snap.docs)
+            into[d.id] = withId ? { ...d.data(), id: d.id } : { ...d.data() };
+          if (name === "ideas") loaded = true;
+          render();
+        },
+        () => {
+          if (name === "ideas")
+            els.list.innerHTML =
+              '<p class="msg">The ideas could not be loaded. Reload the page to try again.</p>';
+        },
+      );
+    watch("marks", marks, false);
+    watch("ideas", ideas, true);
+  })();
+</script>
