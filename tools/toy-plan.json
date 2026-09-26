@@ -1413,10 +1413,11 @@
       "sound": "Metal ring."
     },
     "shield": {
-      "v": "new",
+      "v": "keep",
       "owner": "Only bounces; find a better effect.",
       "effect": "Blocks an invisible hit: it jolts, sparks and the emblem gleams.",
-      "sound": "Metal clang."
+      "sound": "A clang, crackling sparks and a shimmer.",
+      "improved": "E6: it blocks an unseen blow near its top corner: it jolts back and rocks, sparks spray off the iron rim and burn out, a flash marks the spot, and a gleam of light sweeps across the emblem (about 2 s)."
     },
     "bow-and-target": {
       "v": "keep",
@@ -1439,10 +1440,11 @@
       "sound": "Visor clank."
     },
     "crown": {
-      "v": "new",
+      "v": "keep",
       "owner": "Needs an effect.",
       "effect": "Jewels light up in turn and it rises with a glow.",
-      "sound": "Royal fanfare."
+      "sound": "A royal fanfare and a ping for each jewel.",
+      "improved": "E6: the crown lifts and hovers; its eight jewels light up one after another round the band, each flashing white, golden motes drift up round it, then the jewels go out in turn and it settles (about 4 s)."
     },
     "dragon-egg": {
       "v": "keep",
@@ -1464,10 +1466,11 @@
       "improved": "C2: one strong stroke squeezes the bell and jets it up about a third of its size, trailing glowing tentacles, then it drifts down (about 3 s)."
     },
     "fish-school": {
-      "v": "new",
+      "v": "keep",
       "owner": "Swim around more dynamically, like a swarm.",
       "effect": "The school swirls into a bait ball and scatters.",
-      "sound": "Swishing water."
+      "sound": "Water swishes and bursts, with bubbles.",
+      "improved": "E6: each fish is now its own piece (48 fish). A tap: the school tightens into a spinning bait ball, bursts outwards head first in every direction as if something struck at it, and swims back into place (5 s)."
     },
     "butterfly": {
       "v": "keep",
@@ -1482,10 +1485,11 @@
       "improved": "C2: it now rests slim; a tap inflates it to a big spiky ball, holds, then deflates with a sputter (about 4 s)."
     },
     "nautilus": {
-      "v": "new",
+      "v": "keep",
       "owner": "Enter and exit its shell.",
       "effect": "Tentacles pull into the shell, then peek back out.",
-      "sound": "Hollow shell whoosh."
+      "sound": "A jet of water, the hollow shell, a knock and bubbles.",
+      "improved": "E6: startled, it jets back a little and pulls its tentacles in behind its hood (each shortens towards its base); it waits, peeks out halfway, then slowly reaches out again (about 4.5 s)."
     },
     "ladybug": {
       "v": "keep",
@@ -1512,16 +1516,18 @@
       "sound": "Wet suction pop."
     },
     "sea-urchin": {
-      "v": "new",
+      "v": "keep",
       "owner": "Needs an effect.",
       "effect": "Spines ripple in waves and it creeps along.",
-      "sound": "Prickly rustle."
+      "sound": "A prickly rustle, wave after wave.",
+      "improved": "E6: the spines sweep round the urchin in waves (each tilts on its base, so it stays straight), the pink tube feet reach out, and it creeps a little way to the side and back (about 4.5 s)."
     },
     "frog": {
-      "v": "new",
+      "v": "keep",
       "owner": "Mouth opens and the tongue shoots out.",
       "effect": "Tongue shoots out to catch a fly.",
-      "sound": "Ribbit."
+      "sound": "A fly's buzz, a flick, a gulp and two croaks.",
+      "improved": "E6: a fly buzzes in and hovers; the frog's jaw drops, its tongue shoots out, catches the fly and snaps back; the jaw shuts, its eyes sink to push the fly down (frogs swallow with their eyes), and it croaks twice with its throat sac (about 3.5 s)."
     },
     "penguin": {
       "v": "keep",
@@ -1539,10 +1545,11 @@
       "sound": "Spooky flicker whoosh."
     },
     "snowman": {
-      "v": "new",
+      "v": "keep",
       "owner": "Do more than bounce; maybe it melts.",
       "effect": "Melts into a puddle, then rebuilds itself.",
-      "sound": "Drip and a crunchy rebuild."
+      "sound": "Drips, then a crunch of snow and a twinkle as it rebuilds.",
+      "improved": "E6: it melts as solid pieces, not a squash: the snowballs shrink (the head first), drips fall, and the hat, nose, coals, arms and scarf drop off one by one into a spreading puddle; then it builds itself again: the balls grow back from the bottom up and each piece hops back to its place (about 6 s). The Warmth slider melts it the same way."
     },
     "fireworks": {
       "v": "keep",
@@ -1687,28 +1694,32 @@
       "sound": "Theremin warble."
     },
     "eiffel-tower": {
-      "v": "new",
+      "v": "keep",
       "owner": "Fireworks burst around it.",
       "effect": "Sparkling lights run up the tower and fireworks burst around it.",
-      "sound": "Sparkle and distant booms."
+      "sound": "Sparkle, and a boom for each burst.",
+      "improved": "E6: a tap starts the night show: the ironwork lights up gold, a sparkle of white lights climbs the tower, and four fireworks burst round it one after another (blue, white, red and gold), each opening fast, drooping and burning out; then the lights go down (about 4 s)."
     },
     "washington-monument": {
-      "v": "new",
+      "v": "keep",
       "owner": "Something cool and not disrespectful.",
       "effect": "The reflecting pool shimmers and the flags wave.",
-      "sound": "Gentle breeze."
+      "sound": "A day's breeze and a soft chime at noon.",
+      "improved": "E6: a day in a few seconds, like a sundial: the sun rises behind the monument, arcs over and sets, the obelisk's shadow swings round the lawn in front, and the flags ripple in the breeze (about 4.5 s). There is no reflecting pool in the model, so the shadow replaced the pool's shimmer."
     },
     "pyramids": {
-      "v": "new",
+      "v": "keep",
       "owner": "Neat. Maybe put a UFO there, as a joke.",
       "effect": "A tiny UFO (the Flying saucer) hovers over the Great Pyramid and beams up a camel-shaped cloud of sand.",
-      "sound": "Theremin warble and sand hiss."
+      "sound": "Theremin warble, sand hiss and a zip away.",
+      "improved": "E6: a tiny flying saucer glides in by the Great Pyramid and switches on its beam; sand streams up out of the desert into the shape of a camel, which floats up into the saucer; the saucer wobbles happily and zips away (about 5 s)."
     },
     "supertall": {
-      "v": "new",
+      "v": "keep",
       "owner": "Make it twist or glow.",
       "effect": "The tower twists further and its lights run upward.",
-      "sound": "Rising elevator ding."
+      "sound": "A rising lift tone and a ding each time the light reaches the top.",
+      "improved": "E6: the floors wring round further in twelve rigid bands (the top turns most) while a ring of light runs up the glass, then they unwind with a little sway as a second ring runs up (4 s)."
     },
     "lighthouse": {
       "v": "keep",
@@ -1716,41 +1727,47 @@
       "sound": "Foghorn."
     },
     "statue-of-liberty": {
-      "v": "new",
+      "v": "keep",
       "fixed": "C1: the crown's seven rays rise higher and taper to sharp, lit points.",
       "owner": "Everything else looks fine. Make the effect a good one.",
       "effect": "The torch flame flares bright and sparkles drift from it.",
-      "sound": "Flame whoosh and a harbour bell."
+      "sound": "Flame whoosh, crackling sparks and a harbour bell.",
+      "improved": "E6: the torch flares: the flame leaps to twice its size in a halo of light, a warm glow spreads down the statue, and a plume of golden sparks drifts up and away on the breeze and burns out (about 4 s)."
     },
     "white-house": {
-      "v": "new",
+      "v": "keep",
       "owner": "Nothing destructive or disrespectful.",
       "effect": "The fountain on the lawn sprays higher and the flag raises.",
-      "sound": "Fountain splash."
+      "sound": "Fountain splash and patter.",
+      "improved": "E6: the fountain on the south lawn shoots up a tall jet that falls back as spray, the lights come on in the windows one by one and the flag ripples; then the jet sinks and the lights go out one by one (about 4.5 s). The flag stays at the top of its pole, so it never looks like half-mast."
     },
     "leaning-tower": {
-      "v": "new",
+      "v": "keep",
       "owner": "Lean further and things fall off, like Galileo dropping objects.",
       "effect": "Two balls of different sizes drop from the top and land together.",
-      "sound": "Two thuds at the same time."
+      "sound": "The tower grinds, then two thuds at the same moment.",
+      "improved": "E6: Galileo's drop: the tower leans a little further, a big iron ball and a small bronze one roll off the top ledge and fall side by side, landing at the same moment with puffs of dust; they bounce, settle and fade, and the tower eases back (about 4 s)."
     },
     "colosseum": {
-      "v": "new",
+      "v": "keep",
       "owner": "Gladiators fighting inside?",
       "effect": "Non-violent: a tiny chariot race loops the arena while the crowd cheers (no fighting, per the no-gore rule).",
-      "sound": "Crowd cheer."
+      "sound": "Crowd cheers over drumming hooves.",
+      "improved": "E6: a chariot race (no fighting): a crowd fills the seats, and four chariots in the team colours (red, white, blue and green) race a lap and a quarter of the arena in two lanes, swapping the lead, while the crowd jumps and cheers; then they fade away (about 5 s)."
     },
     "parthenon": {
-      "v": "new",
+      "v": "keep",
       "owner": "Little ancient people in it.",
       "effect": "Tiny robed figures walk between the columns in procession.",
-      "sound": "Lyre strum."
+      "sound": "A lyre plays a walking tune.",
+      "improved": "E6: a procession: eight robed figures, some with baskets and jars on their heads, walk in single file along the temple, round the corner and across the front of its steps, then fade away (about 5.5 s)."
     },
     "stonehenge": {
-      "v": "new",
+      "v": "keep",
       "owner": "No idea.",
       "effect": "Solstice sunrise: the sun rises through the stones and lights them gold.",
-      "sound": "Low drone and a bell."
+      "sound": "A low drone and a bell as the stones light.",
+      "improved": "E6: solstice sunrise: the sun comes up over the far bank, framed by the great trilithon, a golden beam shines through the stones along the monument's axis, and the stones glow gold; then it fades back (about 5 s)."
     },
     "big-ben": {
       "v": "keep",
@@ -1760,10 +1777,11 @@
       "improved": "C2: the hands spin round and land back on the real time, all four dials glow and a bell swings in the now open belfry (4 s)."
     },
     "taj-mahal": {
-      "v": "new",
+      "v": "keep",
       "owner": "Looks good; needs an effect.",
       "effect": "Moonlight: the dome glows and the reflecting pool ripples.",
-      "sound": "Soft sitar-like pluck."
+      "sound": "A slow sitar phrase.",
+      "improved": "E6: moonlight: night falls on the garden and the buildings, the moon rises behind the Taj, the great dome stays bright white and glows against the night, and moonlight shimmers on the rippling pool; then day comes back (about 5 s)."
     },
     "castle": {
       "v": "keep",

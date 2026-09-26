@@ -1841,14 +1841,16 @@ const PISA_R = [0.85, 0, -0.52];
 const PISA_V = [0.52, 0, 0.85];
 const PISA_BALLS = [
   [0.6, -0.1, 0.1, "#46464c", 0.07],
-  [0.14, 0.55, 0.066, "#c8943e", 0.11],
+  [0.2, 0.6, 0.066, "#c8943e", 0.11],
 ];
 const PISA_LEDGE = 3.39;
 const PISA_SECS = 4.4;
-// Where ball i sits on the ledge with the tower leaning by `angle`.
-const pisaLedge = (i, angle) => {
+// Where ball i sits on the ledge with the tower leaning by `angle`; `roll`
+// (0..1) rolls it out from well on the ledge to its edge, where it drops.
+const pisaLedge = (i, angle, roll = 1) => {
   const [side, depth, r] = PISA_BALLS[i];
-  const local = add(add(mul(PISA_R, side), mul(PISA_V, depth)), [0, PISA_LEDGE + r, 0]);
+  const out = 0.72 + 0.28 * roll;
+  const local = add(add(mul(PISA_R, side * out), mul(PISA_V, depth * out)), [0, PISA_LEDGE + r, 0]); // prettier-ignore
   return add(PISA.base, quatRotate(quatAxisAngle(PISA.axis, angle), sub(local, PISA.base)));
 };
 
@@ -4036,7 +4038,9 @@ export const RECIPES = {
       PISA_BALLS.forEach(([, , r, , hop], i) => {
         const built = pisaLedge(i, 0.35 * PISA.max + 0.07);
         const home = [built[0], 0.02 + r, built[2]];
-        const from = pisaLedge(i, s < T0 ? angle : c.lean * PISA.max + 0.07 * easeInOut(band(T0, 0, 0.7))); // prettier-ignore
+        // They roll out to the edge as the tower leans, and drop off it.
+        const roll = easeInOut(band(s, 0.35, T0));
+        const from = pisaLedge(i, s < T0 ? angle : c.lean * PISA.max + 0.07 * easeInOut(band(T0, 0, 0.7)), roll); // prettier-ignore
         const ground = 0.02 + r;
         let p = from;
         if (s >= T0) {
