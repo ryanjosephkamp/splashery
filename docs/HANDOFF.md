@@ -15,8 +15,8 @@ work is in [OPERATING.md](OPERATING.md).
   bricks), 55 new. Scene schema v3; v2 still loads.
 - The owner's E4 review (Effect review page, `e4-*`): 26 of 30 clips look right; the ice swan, the
   ocean wave, the pinecone and the lava lamp need work (lane E4-finish).
-- Parallel lanes began on 2026-09-26. Every kit toy's tap is checked by `tests/taps.spec.mjs`; its
-  known exceptions (with reasons) are listed at its top.
+- Parallel lanes began on 2026-09-26 (the governance PR, #34, merged that day). Every kit toy's tap
+  is checked by `tests/taps.spec.mjs`; its known exceptions (with reasons) are listed at its top.
 - Locked (owner approved, do not change its look or behaviour): the laptop. Its smoke test guards
   it.
 
@@ -24,16 +24,18 @@ work is in [OPERATING.md](OPERATING.md).
 
 The full table, with owned files, sessions, branches and PRs, is [WORKSTREAMS.md](WORKSTREAMS.md).
 
-| Lane                      | Status               | Handoff                                      |
-| ------------------------- | -------------------- | -------------------------------------------- |
-| Operator                  | Ready (Prompt 2A)    | —                                            |
-| E4-finish                 | Waiting for Prompt 3 | [handoff/E4-finish.md](handoff/E4-finish.md) |
-| E5 Food                   | Ready (Prompt 2B)    | [handoff/E5.md](handoff/E5.md)               |
-| E6a Balls                 | Ready (Prompt 2C)    | [handoff/E6a.md](handoff/E6a.md)             |
-| E6b Landmarks and friends | Ready (Prompt 2D)    | [handoff/E6b.md](handoff/E6b.md)             |
-| F Touch and drag          | Later (Prompt 2E)    | [handoff/F.md](handoff/F.md)                 |
-| G AI image-to-3D          | Later (Prompt 2F)    | [handoff/G.md](handoff/G.md)                 |
-| H Later                   | After the toy lanes  | —                                            |
+| Lane                      | Status              | PR                                                         | Handoff                                      |
+| ------------------------- | ------------------- | ---------------------------------------------------------- | -------------------------------------------- |
+| Operator                  | Running             | "Ops: …" PRs                                               | —                                            |
+| E4-finish                 | Running             | [#37](https://github.com/ryanjosephkamp/splashery/pull/37) | [handoff/E4-finish.md](handoff/E4-finish.md) |
+| E5 Food                   | Running             | [#35](https://github.com/ryanjosephkamp/splashery/pull/35) | [handoff/E5.md](handoff/E5.md)               |
+| E6a Balls                 | Running             | [#38](https://github.com/ryanjosephkamp/splashery/pull/38) | [handoff/E6a.md](handoff/E6a.md)             |
+| E6b Landmarks and friends | Running             | [#36](https://github.com/ryanjosephkamp/splashery/pull/36) | [handoff/E6b.md](handoff/E6b.md)             |
+| F Touch and drag          | Later (Prompt 2E)   | —                                                          | [handoff/F.md](handoff/F.md)                 |
+| G AI image-to-3D          | Later (Prompt 2F)   | —                                                          | [handoff/G.md](handoff/G.md)                 |
+| H Later                   | After the toy lanes | —                                                          | —                                            |
+
+All four lanes and the Operator started on 2026-09-26. F and G start when a lane finishes.
 
 The prompts are on the Splashery Parallel Plan page (OPERATING.md, "Pages").
 
@@ -49,8 +51,10 @@ The prompts are on the Splashery Parallel Plan page (OPERATING.md, "Pages").
 - [reviews/](reviews/): the owner's reviews, word for word, with screenshots.
 - [BACKLOG.md](BACKLOG.md), [ROADMAP.md](ROADMAP.md), [SCENE-SCHEMA.md](SCENE-SCHEMA.md),
   `CREDITS.md`, `LICENSES.md`, `README.md` (features and code layout).
-- The private pages (Effect review, Sound Board, Toy Plan, Parallel Plan, Operator Manual): links in
-  OPERATING.md, "Pages".
+- The private pages (Effect review, Sound Board, Toy Plan, Toy Ideas, Parallel Plan, Operator
+  Manual): links in OPERATING.md, "Pages".
+- The Operator's daily routines (from 2026-09-27, Eastern time): three toy ideas on the Toy Ideas
+  page at 7:43, then the owner's digest at 7:54.
 
 ## Lessons at a glance
 

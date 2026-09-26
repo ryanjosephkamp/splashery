@@ -49,12 +49,72 @@ the E4 review fixes".
 
 ## State
 
-Waiting for the owner's prompt.
+2026-09-26: all four fixes are built, in draft PR #37 ("Phase E4-finish: the E4 review fixes") from
+`claude/sweet-babbage-gw9z9r` (restarted from main after #33 merged). Clips of the fixes are on the
+Effect review page as `e4-<toy id>-r2` cards in lane E4, group "fixes", and replace the four clips
+the owner marked. Waiting for the owner's marks.
 
 ## Notes
 
+- **Pinecone** (`src/packs/nature.js`, `looseScale`, `CONE_LOOSE`, `CONE_SEEDS`): the 42 scales
+  facing the home camera most squarely are tokens (a window with none left standing on the bare
+  core); the other 78 keep the morph opening. Six seeds (tokens) spin out first. A loose scale
+  breaks off from the bottom up, tumbles and lands flat in a pile round the base (a scale that lands
+  on others lies a little higher), and flies back top first. Each leaves a small broken stub on the
+  core, hidden under it at rest. 7.2 s.
+- **Lava lamp** (`src/packs/elements.js`, `LAVA_SETS`, `lavaBlobs`, `lavaGlassR`): new options
+  Colour set, Blobs (2 to 12), Blob size (0.5 to 1.5) and Blob shape (mixed, round, tall), and new
+  sliders Flow (a quarter to one and three quarters as fast) and Glow (the wax and liquid lit from
+  within at rest). The six classic blobs come first; extra ones each have their own seed, so a blob
+  keeps its path whatever the count; blobs get smaller as they get many; a blob made bigger rises
+  less far so it stays in the glass. Flow runs a clock kept in `mem(c)`, so a change of speed never
+  jumps. The default lamp builds exactly as before (same splats; checked by hashing the build), so
+  its thumbnail was not re-rendered. A colour set other than "Pick below" ignores the Wax and Liquid
+  pickers (the Base picker still works).
+- **Ice swan** (`ICE_PIECES`, `iceAttached`, `icePose`, `ICE_DROPS`): the `melt` kind is gone. Ten
+  parts, each melting by getting smaller about where it joins the rest and riding on the piece it
+  grows from (`on`), so nothing hangs in the air; four of them (the wing tips, the head, the top of
+  the neck) crack off, fall from where they were and melt in the puddle beside the pedestal (never
+  in front of it, where the pedestal would draw over them). The melt level runs faster and faster
+  (`L = 0.93 u^1.6`); lowered again after a piece has melted away on the ground, the piece grows
+  back in place (a per-toy memory of the highest level). Thirty drops are tokens that bead at the
+  low points and fall. The refreeze reverses the melt, then the frost front runs (7.6 s). 13 parts,
+  30 tokens.
+- **Ocean wave** (`OW_KEYS`, `owPose`, `OW_CTL`): the wave is now the same all along z, and its
+  water is two sheets (the main curve: the sea in front, the face, the crest and the back; and the
+  lip) skinned (`kind: "skin"`) to 28 and 10 control tokens that run through eight keyframes on
+  Catmull-Rom paths, a closed loop from the resting curl. Skinning moves splats in the profile's
+  plane only, and the camera looks nearly along z, so the draw order holds. The home camera turned
+  to three quarters (`src/toys.js`: yaw 0.6, pitch 0.22), which shows the curl as a wave; the sea
+  and the wave's ends fray (splats dropped by a colour function returning null) instead of stopping
+  at a straight edge. Spray is ten clumps now (was 44), to make room for the controls. 5.8 s.
+- Sounds re-timed in `src/toy-sounds.js` (pinecone, ocean wave, ice swan); the wave's swell and curl
+  and the ice swan's cracks, refreeze crackle and sparkle are cues from drive().
+- `tests/e4f.spec.mjs`: the lava lamp's options keep its blobs in the glass, Flow never jumps, the
+  ice swan's Temperature melts it and brings it back whole, the wave's keyframes move the whole face
+  and every skinned splat names real controls, and the pinecone's tokens fit.
+
 ## Known issues
+
+- Checked as clips and larger stills in headless Chromium (SwiftShader, WebGL2 only), not on a
+  phone; sounds by level and length only.
+- Ocean wave: at the moment of impact the white water appears as a white curved sheet for about 0.1
+  s before it falls flat; the sea's ripple and the foam's twinkle pause while the wave breaks (as
+  before); the wave is a straight tube along its length (no peel), and its near end shows the
+  profile's edge.
+- Ice swan: the wing tips break along a straight line at a fixed height, so the wings are left with
+  flat tops while they melt; the pedestal itself does not melt.
+- Pinecone: only the side facing the home camera breaks off; from behind, the far side's scales just
+  open and close.
+- Lava lamp: some colour sets read less clearly at 320 px, since the liquid tints the wax.
 
 ## For the Operator
 
-Lessons for PACKS.md, backlog items and README lines, to move after the merge.
+- PACKS.md lessons: (1) a skinned sheet (`kind: "skin"`, two tokens per splat) is how to bend a
+  whole surface through keyframes (the ocean wave); keep the bending in the plane the camera looks
+  along, and use rounder splats. (2) Pieces that melt should ride on the piece they grow from (scale
+  about the parent's pivot too), or they are left hanging (the ice swan's `iceAttached`). (3) A
+  colour function that returns null for more splats towards an edge makes a surface fray into its
+  surroundings instead of stopping at a straight line.
+- The lava lamp's option set could become a pattern for other toys: a preset select plus the
+  pickers, with the pickers ignored by a preset (the UI cannot hide an option by another's value).

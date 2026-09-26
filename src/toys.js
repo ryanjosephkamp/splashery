@@ -1669,7 +1669,7 @@ export const TOYS = [
     kind: "kit",
     pack: "elements",
     tags: "sea surf wave curl barrel water beach",
-    camera: { yaw: 0.05, pitch: 0.15, roll: 0, distance: 4.2 },
+    camera: { yaw: 0.6, pitch: 0.22, roll: 0, distance: 4.4 },
   },
   {
     id: "geyser",

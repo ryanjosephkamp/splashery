@@ -71,6 +71,21 @@ const lerp3 = (a, b, t) => [
   a[2] + (b[2] - a[2]) * t,
 ];
 const keep = (c, size) => ({ c, keep: true, size });
+// Spherical interpolation between two rotations.
+function slerpQ(a, b, f) {
+  let d = a[0] * b[0] + a[1] * b[1] + a[2] * b[2] + a[3] * b[3];
+  const sg = d < 0 ? -1 : 1;
+  d *= sg;
+  if (d > 0.9995) {
+    const q = a.map((x, i) => x + (sg * b[i] - x) * f);
+    const l = Math.hypot(...q);
+    return q.map((x) => x / l);
+  }
+  const th = Math.acos(d);
+  const wa = Math.sin((1 - f) * th) / Math.sin(th);
+  const wb = (sg * Math.sin(f * th)) / Math.sin(th);
+  return a.map((x, i) => wa * x + wb * b[i]);
+}
 
 // A fake light from the upper left, in front.
 const LIGHT = unit([-0.35, 0.85, 0.45]);
@@ -143,7 +158,308 @@ const LAVA = [
 ];
 const lavaY = (b, t) => b.lo + (b.hi - b.lo) * (0.5 - 0.5 * Math.cos(t * b.speed + b.phase));
 const LAVA_SECS = 4.6;
-const ICE_SECS = 5.6;
+// The lamp's glass: it swells in the middle and tapers into the cap.
+const lavaGlassR = (y) =>
+  0.2 +
+  0.075 * Math.sin(Math.PI * clamp((y + 0.05) / 1.35, 0, 1) * 0.8) -
+  0.115 * smoothstep(0.62, 1.3, y);
+// Colour sets: wax, liquid, and the glow the wax runs through when heated
+// (from its resting glow round to it again). "own" takes the Wax and
+// Liquid colours from the pickers and the classic orange-magenta-gold.
+const LAVA_SETS = {
+  own: { label: "Pick below" },
+  ocean: {
+    label: "Ocean",
+    wax: "#3fd8e8",
+    liquid: "#1d3fa8",
+    glow: [
+      [0.1, 0.3, 0.8],
+      [0, 0.65, 0.8],
+      [0.4, 0.15, 0.8],
+      [0.1, 0.7, 0.7],
+      [0.1, 0.3, 0.8],
+    ],
+  },
+  violet: {
+    label: "Violet",
+    wax: "#ff5fae",
+    liquid: "#6b2fc0",
+    glow: [
+      [0.5, 0.08, 0.8],
+      [0.8, 0.15, 0.55],
+      [0.8, 0.5, 0.8],
+      [0.65, 0.25, 0.8],
+      [0.5, 0.08, 0.8],
+    ],
+  },
+  lime: {
+    label: "Lime",
+    wax: "#62d62a",
+    liquid: "#3f86e8",
+    glow: [
+      [0.3, 0.8, 0.05],
+      [0.8, 0.8, 0.1],
+      [0.05, 0.8, 0.6],
+      [0.4, 0.8, 0.1],
+      [0.3, 0.8, 0.05],
+    ],
+  },
+  sunset: {
+    label: "Sunset",
+    wax: "#ff7a1f",
+    liquid: "#d81b60",
+    glow: [
+      [0.8, 0.35, 0],
+      [0.8, 0.08, 0.3],
+      [0.8, 0.65, 0.08],
+      [0.8, 0.3, 0.08],
+      [0.8, 0.35, 0],
+    ],
+  },
+  midnight: {
+    label: "Midnight",
+    wax: "#f2efe6",
+    liquid: "#1d2c78",
+    glow: [
+      [0.4, 0.55, 0.8],
+      [0.15, 0.8, 0.8],
+      [0.7, 0.7, 0.8],
+      [0.3, 0.55, 0.8],
+      [0.4, 0.55, 0.8],
+    ],
+  },
+};
+// The blobs for a lamp's options: the six classic ones first, then more
+// (each from its own seed, so a blob keeps its path whatever the count),
+// scaled by Blob size (smaller as they get many) and shaped. A blob made
+// bigger than the classic ones rises less far, so it stays in the glass.
+function lavaBlobs(o) {
+  const n = clamp(Math.round(o.blobs ?? LAVA.length), 2, 12);
+  const size = clamp(o.size ?? 1, 0.5, 1.5) * Math.pow(Math.min(1, LAVA.length / n), 0.35);
+  const shape = o.shape || "mixed";
+  const list = [];
+  for (let i = 0; i < n; i++) {
+    let b;
+    if (i < LAVA.length) b = { ...LAVA[i] };
+    else {
+      const r = lcg(701 + 37 * i);
+      const a = r() * TAU;
+      const d = 0.03 + 0.04 * r();
+      const lo = 0.12 + 0.28 * r();
+      b = {
+        x: Math.sin(a) * d,
+        z: Math.cos(a) * d,
+        r: 0.055 + 0.06 * r(),
+        tall: 1.1 + 0.4 * r(),
+        lo,
+        hi: Math.min(1.15, lo + 0.45 + 0.5 * r()),
+        speed: 0.2 + 0.22 * r(),
+        phase: r() * TAU,
+        twin: r() < 0.3,
+      };
+    }
+    if (size !== 1) b.r *= size;
+    if (shape === "round") {
+      b.tall = 1;
+      b.twin = false;
+    } else if (shape === "tall") {
+      b.tall = 1.75;
+      b.twin = false;
+    }
+    if (size > 1 || i >= LAVA.length) {
+      const room = (y) => lavaGlassR(y) - Math.hypot(b.x, b.z) + 0.01;
+      while (b.hi > b.lo + 0.05 && b.r > room(b.hi + 0.5 * b.r * b.tall)) b.hi -= 0.02;
+      b.r = Math.min(b.r, room(b.hi + 0.5 * b.r * b.tall));
+    }
+    list.push(b);
+  }
+  return list;
+}
+const ICE_SECS = 7.6;
+// The ice swan (E4 review: "it melts by dripping water and slowly
+// breaking decomposing, with the melt speed accelerating a bit as more of
+// it melts"). A tap melts it from the tap to ICE_MELT seconds, faster and
+// faster, as far as ICE_TOP (1: all but a lump of the body), then it
+// refreezes. Each piece is a part that melts by getting smaller about
+// where it joins the rest (its pivot) over its window of the melt level
+// [start, end]; a piece that breaks off first thins a little, cracks off
+// at `detach`, falls (over `fall` of the melt level) to lie in the water
+// at `land` (its centre, `centre`, turned by `turn`), and melts away there
+// over `gone`. `min` is what is left of it (the body's lump).
+const ICE_MELT = 4.4;
+const ICE_TOP = 0.93;
+// Drops: how long one beads before it falls, and how fast it falls.
+const ICE_HANG = 0.3;
+const ICE_G = 5.5;
+// Where the neck breaks, and the height above which a wing's arched top
+// cracks off.
+const ICE_NECK_BREAK = 0.8;
+const ICE_WING_BREAK = 0.8;
+const ICE_PIECES = [
+  { name: "body", pivot: [-0.02, 0.3, 0], start: 0.12, end: 1, min: 0.32 },
+  { name: "beak", on: "head", pivot: [0.52, 1.155, 0], start: 0.03, end: 0.15 },
+  { name: "tail", on: "body", pivot: [-0.3, 0.5, 0], start: 0.1, end: 0.46 },
+  { name: "neckLo", on: "body", pivot: [0.27, 0.53, 0], start: 0.36, end: 0.76 },
+  { name: "wingNear", on: "body", pivot: [0.02, 0.58, 0.17], start: 0.3, end: 0.72 },
+  { name: "wingFar", on: "body", pivot: [0.02, 0.58, -0.17], start: 0.32, end: 0.74 },
+  {
+    name: "tipNear",
+    on: "wingNear",
+    pivot: [-0.12, ICE_WING_BREAK, 0.17],
+    centre: [-0.12, 0.87, 0.17],
+    start: 0.04,
+    thin: 0.12,
+    detach: 0.14,
+    fall: 0.06,
+    gone: [0.24, 0.48],
+    land: [-0.66, 0.035, 0.2],
+    turn: [[0, 0, 1], 1.25, [1, 0, 0], 0.35],
+  },
+  {
+    name: "tipFar",
+    on: "wingFar",
+    pivot: [-0.12, ICE_WING_BREAK, -0.17],
+    centre: [-0.12, 0.87, -0.17],
+    start: 0.06,
+    thin: 0.12,
+    detach: 0.2,
+    fall: 0.06,
+    gone: [0.3, 0.54],
+    land: [-0.62, 0.035, -0.22],
+    turn: [[0, 0, 1], 1.35, [1, 0, 0], -0.35],
+  },
+  {
+    name: "head",
+    on: "neckHi",
+    pivot: [0.4, 1.16, 0],
+    centre: [0.47, 1.16, 0],
+    start: 0.12,
+    thin: 0.1,
+    detach: 0.27,
+    fall: 0.07,
+    gone: [0.36, 0.6],
+    land: [0.66, 0.05, -0.1],
+    turn: [[0, 0, 1], -1.7, [0, 1, 0], 0.6],
+  },
+  {
+    name: "neckHi",
+    on: "neckLo",
+    pivot: [0.4, ICE_NECK_BREAK, 0],
+    centre: [0.36, 0.99, 0],
+    start: 0.14,
+    thin: 0.2,
+    detach: 0.38,
+    fall: 0.09,
+    gone: [0.5, 0.74],
+    land: [0.72, 0.04, 0.2],
+    turn: [[0, 1, 0], -1.1, [0, 0, 1], -1.5],
+  },
+];
+for (const pc of ICE_PIECES) if (pc.gone) pc.end = pc.gone[1];
+const ICE_Q0 = [0, 0, 0, 1];
+// Where each drop of meltwater beads: [piece, point]. The beak's tip, the
+// head's chin, the wing tips' lower edges, the tail's tip, the body's
+// underside and the pedestal's top edges (null: it stays).
+const ICE_DROPS = [
+  ["beak", [0.63, 1.12, 0]],
+  ["beak", [0.6, 1.125, 0.01]],
+  ["head", [0.47, 1.11, 0.02]],
+  ["head", [0.43, 1.12, -0.02]],
+  ["tipNear", [-0.3, 0.82, 0.18]],
+  ["tipNear", [-0.05, 0.83, 0.18]],
+  ["tipNear", [-0.2, 0.84, 0.19]],
+  ["tipFar", [-0.28, 0.82, -0.18]],
+  ["tail", [-0.5, 0.64, 0]],
+  ["tail", [-0.44, 0.55, 0.02]],
+  ["neckHi", [0.3, 1.02, 0.03]],
+  ["neckLo", [0.33, 0.62, 0.05]],
+  ["wingNear", [0.05, 0.6, 0.2]],
+  ["wingNear", [-0.2, 0.62, 0.2]],
+  ["body", [0.1, 0.32, 0.18]],
+  ["body", [-0.2, 0.33, 0.17]],
+  ["body", [0.25, 0.34, 0.12]],
+  [null, [0.49, 0.3, 0.3]],
+  [null, [0.2, 0.3, 0.31]],
+  [null, [-0.15, 0.3, 0.31]],
+  [null, [-0.45, 0.3, 0.3]],
+  [null, [0.5, 0.3, 0.05]],
+  [null, [-0.5, 0.3, -0.1]],
+  [null, [0.5, 0.3, -0.2]],
+  ["beak", [0.62, 1.115, -0.01]],
+  ["tipNear", [-0.33, 0.85, 0.17]],
+  ["head", [0.5, 1.12, 0.0]],
+  ["body", [-0.3, 0.36, 0.14]],
+  [null, [0.35, 0.3, 0.31]],
+  [null, [-0.3, 0.3, 0.31]],
+];
+// Where the attached pieces are at melt level L: each melts (gets smaller)
+// about its pivot and rides on the piece it grows from ("on"), which
+// shrinks about its own pivot, so nothing is left hanging in the air.
+// Returns, per piece, a map of points and its total scale.
+function iceAttached(L) {
+  const at = {};
+  const byName = Object.fromEntries(ICE_PIECES.map((pc) => [pc.name, pc]));
+  const get = (name) => {
+    if (at[name]) return at[name];
+    const pc = byName[name];
+    const own = pc.detach
+      ? 1 - pc.thin * band(L, pc.start, pc.detach)
+      : 1 - (1 - (pc.min ?? 0)) * ease(band(L, pc.start, pc.end));
+    const up = pc.on ? get(pc.on) : { map: (x) => x, scale: 1 };
+    const pv = up.map(pc.pivot);
+    const scale = own * up.scale;
+    return (at[name] = { map: (x) => add(pv, mul(sub(x, pc.pivot), scale)), scale });
+  };
+  for (const pc of ICE_PIECES) get(pc.name);
+  return at;
+}
+// Every piece's pose at melt level L. A piece that breaks off falls from
+// where it was when it cracked off. `regrow(pc)`: it has melted away and
+// the swan is freezing again, so it grows back in place instead of rising
+// from where it fell.
+function icePose(L, regrow) {
+  const now = iceAttached(L);
+  const pose = {};
+  for (const pc of ICE_PIECES) {
+    if (!pc.detach || L < pc.detach || regrow(pc)) {
+      // In place: a scale about the pivot plus the ride on its parent.
+      let { map, scale } = now[pc.name];
+      if (pc.detach && regrow(pc)) {
+        const up = pc.on ? now[pc.on] : { map: (x) => x, scale: 1 };
+        scale = (1 - ease(band(L, pc.start, pc.end))) * up.scale;
+        const pv = up.map(pc.pivot);
+        map = (x) => add(pv, mul(sub(x, pc.pivot), scale));
+      }
+      pose[pc.name] = {
+        scale,
+        visible: scale > 0.004 ? 1 : 0,
+        offset: sub(map(pc.pivot), pc.pivot),
+        attached: true,
+      };
+      continue;
+    }
+    const then = iceAttached(pc.detach)[pc.name];
+    const c0 = then.map(pc.centre);
+    const qLand = quatMul(
+      quatAxisAngle(pc.turn[2], pc.turn[3]),
+      quatAxisAngle(pc.turn[0], pc.turn[1]),
+    );
+    const f = band(L, pc.detach, pc.detach + pc.fall);
+    const sc = then.scale * (1 - ease(band(L, pc.gone[0], pc.gone[1])));
+    const q = slerpQ(ICE_Q0, qLand, ease(f));
+    // The centre falls (faster and faster) and drifts to where it lands,
+    // then the piece melts away about its centre, lying in the water.
+    const landY = pc.land[1] * Math.max(0.3, sc);
+    const at = [
+      c0[0] + (pc.land[0] - c0[0]) * easeOut(f),
+      c0[1] + (landY - c0[1]) * f * f,
+      c0[2] + (pc.land[2] - c0[2]) * easeOut(f),
+    ];
+    const offset = sub(sub(at, pc.pivot), mul(quatRotate(q, sub(pc.centre, pc.pivot)), sc));
+    pose[pc.name] = { scale: sc, visible: sc > 0.004 ? 1 : 0, offset, quat: q, attached: false };
+  }
+  return pose;
+}
 
 // A small seeded generator for tables that build() and drive() share.
 function lcg(seed) {
@@ -352,80 +668,329 @@ const wfDown = (s) => {
   return s <= WF_OVER ? 0 : Math.min(1, (t * t - 1.44) / 7 / (WF_TOP - 0.06));
 };
 
-// Ocean wave: the face's profile (x across, y up), from the sea in front up
-// the concave face, over the crest and curling down into a barrel. A tap
-// throws the lip forward (a morph towards OW_THROWN, the same profile with
-// its lip flung out and down to the water in front), it crashes, turns to
-// white water and falls flat, spray bursts up, foam spreads, and the lip
-// curls over again from the crest.
+// Ocean wave (E4 review: "The waves themselves should curl, not just the
+// end"). The wave's profile (x across, y up; the same all along z) is two
+// curves: the main one from the sea in front, up the face, over the crest
+// and down the back to the sea behind, and the lip, from the crest. Each
+// runs through keyframes, from the curl it rests in: the lip pitches out
+// and the whole face leans over after it until the lip hits the water in
+// front, the wave collapses into white water and flattens, a new swell
+// rises behind, steepens, and curls over into the rest pose again. The
+// water is skinned (kind "skin") to control points along the two curves,
+// tokens that follow the keyframes, so the whole surface bends as one
+// sheet; its splats are rounder, since it turns a lot.
 const OW_Z0 = -0.85;
 const OW_Z1 = 0.85;
-const OW_SECS = 5.4;
-const OW_HIT = 0.72;
-const OW_PTS = [
-  [1.05, 0],
-  [0.62, 0.015],
-  [0.34, 0.1],
-  [0.16, 0.32],
-  [0.1, 0.58],
-  [0.18, 0.82],
-  [0.36, 0.97],
-  [0.58, 0.96],
-  [0.76, 0.84],
-  [0.84, 0.64],
-  [0.8, 0.48],
-  [0.7, 0.42],
+const OW_SECS = 5.8;
+// When the lip hits the water.
+const OW_HIT = 0.8;
+// Control points along the main curve and the lip, and spray clumps
+// (tokens, in that order).
+const OW_NM = 28;
+const OW_NL = 10;
+const OW_NS = 10;
+// Keyframes: when, the main curve (13 points, the crest at index 7), the
+// lip (6 points from the crest) and how much of the lip shows.
+const OW_KEYS = [
+  {
+    at: 0,
+    m: [
+      [1.3, 0],
+      [1.0, 0],
+      [0.62, 0.015],
+      [0.34, 0.1],
+      [0.16, 0.32],
+      [0.1, 0.58],
+      [0.18, 0.82],
+      [0.34, 0.95],
+      [0.1, 0.9],
+      [-0.2, 0.62],
+      [-0.48, 0.28],
+      [-0.75, 0.07],
+      [-1.0, 0],
+    ],
+    lip: [
+      [0.34, 0.95],
+      [0.58, 0.96],
+      [0.76, 0.84],
+      [0.84, 0.64],
+      [0.8, 0.48],
+      [0.7, 0.42],
+    ],
+    w: 1,
+  },
+  {
+    at: 0.45,
+    m: [
+      [1.3, 0],
+      [1.02, 0],
+      [0.66, 0.012],
+      [0.4, 0.09],
+      [0.24, 0.3],
+      [0.2, 0.58],
+      [0.28, 0.84],
+      [0.46, 0.97],
+      [0.2, 0.92],
+      [-0.12, 0.64],
+      [-0.42, 0.3],
+      [-0.72, 0.07],
+      [-1.0, 0],
+    ],
+    lip: [
+      [0.46, 0.97],
+      [0.72, 0.95],
+      [0.92, 0.8],
+      [1.0, 0.56],
+      [0.98, 0.36],
+      [0.9, 0.26],
+    ],
+    w: 1,
+  },
+  {
+    at: OW_HIT,
+    m: [
+      [1.3, 0],
+      [1.05, 0],
+      [0.72, 0.01],
+      [0.47, 0.08],
+      [0.32, 0.28],
+      [0.3, 0.56],
+      [0.38, 0.82],
+      [0.56, 0.96],
+      [0.3, 0.9],
+      [0.0, 0.62],
+      [-0.34, 0.3],
+      [-0.68, 0.07],
+      [-1.0, 0],
+    ],
+    lip: [
+      [0.56, 0.96],
+      [0.82, 0.9],
+      [1.02, 0.7],
+      [1.12, 0.45],
+      [1.15, 0.22],
+      [1.16, 0.03],
+    ],
+    w: 1,
+  },
+  {
+    at: 1.35,
+    m: [
+      [1.3, 0],
+      [1.12, 0.03],
+      [0.92, 0.1],
+      [0.74, 0.2],
+      [0.6, 0.3],
+      [0.52, 0.4],
+      [0.54, 0.47],
+      [0.64, 0.5],
+      [0.42, 0.46],
+      [0.14, 0.34],
+      [-0.2, 0.18],
+      [-0.6, 0.05],
+      [-1.0, 0],
+    ],
+    lip: [
+      [0.64, 0.5],
+      [0.84, 0.44],
+      [1.0, 0.32],
+      [1.1, 0.2],
+      [1.18, 0.1],
+      [1.24, 0.03],
+    ],
+    w: 1,
+  },
+  {
+    at: 2.2,
+    m: [
+      [1.3, 0],
+      [1.14, 0.01],
+      [0.98, 0.03],
+      [0.84, 0.06],
+      [0.72, 0.09],
+      [0.62, 0.11],
+      [0.54, 0.12],
+      [0.46, 0.12],
+      [0.3, 0.1],
+      [0.08, 0.07],
+      [-0.25, 0.04],
+      [-0.62, 0.01],
+      [-1.0, 0],
+    ],
+    lip: [
+      [0.46, 0.12],
+      [0.6, 0.11],
+      [0.74, 0.09],
+      [0.88, 0.07],
+      [1.0, 0.05],
+      [1.1, 0.03],
+    ],
+    w: 0,
+  },
+  {
+    at: 3.1,
+    m: [
+      [1.3, 0],
+      [1.0, 0],
+      [0.7, 0.005],
+      [0.42, 0.02],
+      [0.2, 0.05],
+      [0.04, 0.1],
+      [-0.1, 0.16],
+      [-0.24, 0.2],
+      [-0.38, 0.18],
+      [-0.52, 0.13],
+      [-0.66, 0.08],
+      [-0.82, 0.03],
+      [-1.0, 0],
+    ],
+    lip: [
+      [-0.24, 0.2],
+      [-0.3, 0.2],
+      [-0.36, 0.19],
+      [-0.42, 0.17],
+      [-0.48, 0.15],
+      [-0.54, 0.13],
+    ],
+    w: 0,
+  },
+  {
+    at: 3.95,
+    m: [
+      [1.3, 0],
+      [1.0, 0],
+      [0.66, 0.01],
+      [0.38, 0.06],
+      [0.18, 0.18],
+      [0.04, 0.34],
+      [-0.02, 0.5],
+      [0.04, 0.6],
+      [-0.14, 0.56],
+      [-0.38, 0.4],
+      [-0.6, 0.22],
+      [-0.8, 0.07],
+      [-1.0, 0],
+    ],
+    lip: [
+      [0.04, 0.6],
+      [0.08, 0.61],
+      [0.12, 0.6],
+      [0.15, 0.58],
+      [0.17, 0.56],
+      [0.18, 0.54],
+    ],
+    w: 0.3,
+  },
+  {
+    at: 4.7,
+    m: [
+      [1.3, 0],
+      [1.02, 0],
+      [0.64, 0.012],
+      [0.36, 0.09],
+      [0.18, 0.28],
+      [0.1, 0.52],
+      [0.14, 0.74],
+      [0.26, 0.88],
+      [0.04, 0.84],
+      [-0.24, 0.58],
+      [-0.52, 0.27],
+      [-0.76, 0.07],
+      [-1.0, 0],
+    ],
+    lip: [
+      [0.26, 0.88],
+      [0.42, 0.92],
+      [0.54, 0.86],
+      [0.6, 0.75],
+      [0.6, 0.64],
+      [0.56, 0.58],
+    ],
+    w: 1,
+  },
 ];
-const OW_FACE = baked(spline(OW_PTS));
-const OW_THROWN = baked(
-  spline([
-    ...OW_PTS.slice(0, 7),
-    [0.63, 0.99],
-    [0.88, 0.9],
-    [1.05, 0.66],
-    [1.13, 0.36],
-    [1.16, 0.05],
-  ]),
-);
-// Where the lip starts (the face runs a little past it, so they overlap)
-// and how much of the throw each place along the profile takes.
-const OW_LIP = 0.62;
-const owThrow = (s) => smoothstep(OW_LIP, 0.74, s);
-// The wave peels along z: tall and hollow at the front (towards the
-// viewer), fading into the sea behind.
-const owGrow = (z) => smoothstep(OW_Z0, OW_Z0 + 0.9, z);
-function owAt(curve, s, v) {
-  const z = OW_Z0 + (OW_Z1 - OW_Z0) * v;
-  const g = owGrow(z);
-  const p = curve(s);
-  // Behind, the lip has not formed yet: pull it back towards the crest.
-  const x = p[0] * (0.55 + 0.45 * g) + 0.2 * (1 - g);
-  return [x, p[1] * (0.2 + 0.8 * g), z];
+OW_KEYS.push({ ...OW_KEYS[0], at: 5.45 });
+// A curve through points, sampled evenly by length: u in 0..1 -> [x, y].
+function owCurve(pts) {
+  const c = spline(pts.map((p) => [p[0], p[1], 0]));
+  const n = 240;
+  const at = [];
+  for (let i = 0; i <= n; i++) at.push(c(i / n));
+  const len = [0];
+  for (let i = 1; i <= n; i++) len.push(len[i - 1] + Math.hypot(at[i][0] - at[i - 1][0], at[i][1] - at[i - 1][1])); // prettier-ignore
+  return (u) => {
+    const L = clamp01(u) * len[n];
+    let i = 1;
+    while (i < n && len[i] < L) i++;
+    const f = (L - len[i - 1]) / Math.max(1e-9, len[i] - len[i - 1]);
+    return [at[i - 1][0] + (at[i][0] - at[i - 1][0]) * f, at[i - 1][1] + (at[i][1] - at[i - 1][1]) * f]; // prettier-ignore
+  };
 }
-// The lip thrown out: its place at s, v once it has landed.
-function owThrown(s, v) {
-  const a = owAt(OW_FACE, s, v);
-  return lerp3(a, owAt(OW_THROWN, s, v), owThrow(s));
+// Each keyframe's control points, and the rest curves the water is built on.
+const OW_CTL = OW_KEYS.map((key) => {
+  const m = owCurve(key.m);
+  const l = owCurve(key.lip);
+  return [
+    ...Array.from({ length: OW_NM }, (_, i) => m(i / (OW_NM - 1))),
+    ...Array.from({ length: OW_NL }, (_, i) => l(i / (OW_NL - 1))),
+  ];
+});
+const OW_REST_M = owCurve(OW_KEYS[0].m);
+const OW_REST_L = owCurve(OW_KEYS[0].lip);
+const OW_LANDED = owCurve(OW_KEYS[2].lip);
+// Where the crest is along the main curve at rest (the face before it,
+// the back after it).
+const OW_CREST = (() => {
+  let best = 0;
+  for (let i = 0; i <= 200; i++) if (OW_REST_M(i / 200)[1] > OW_REST_M(best)[1]) best = i / 200;
+  return best;
+})();
+// The controls at time s after the tap: through the keyframes on smooth
+// (Catmull-Rom) paths, and how much of the lip shows.
+function owPose(s) {
+  const K = OW_KEYS;
+  const n = K.length - 1;
+  let k = 0;
+  while (k < n - 1 && s >= K[k + 1].at) k++;
+  const f = ease(clamp01((s - K[k].at) / (K[k + 1].at - K[k].at)));
+  // The loop is closed (the last key is the first), so the paths are too.
+  const idx = (j) => (j < 0 ? j + n : j > n ? j - n : j);
+  const [a, b, c, d] = [idx(k - 1), k, k + 1, idx(k + 2)].map((j) => OW_CTL[j]);
+  const pts = b.map((p1, i) => {
+    const p0 = a[i];
+    const p2 = c[i];
+    const p3 = d[i];
+    return [0, 1].map(
+      (x) =>
+        0.5 *
+        (2 * p1[x] +
+          (-p0[x] + p2[x]) * f +
+          (2 * p0[x] - 5 * p1[x] + 4 * p2[x] - p3[x]) * f * f +
+          (-p0[x] + 3 * p1[x] - 3 * p2[x] + p3[x]) * f * f * f),
+    );
+  });
+  return { pts, w: K[k].w + (K[k + 1].w - K[k].w) * f };
 }
+const owZ = (v) => OW_Z0 + (OW_Z1 - OW_Z0) * v;
 // Spray: clumps of drops (tokens) thrown up from along the line where the
 // lip lands, each on its own path, falling back into the foam.
 const OW_G = 5.5;
 const OW_SPRAY = (() => {
   const r = lcg(77);
   const out = [];
-  for (let i = 0; i < 44; i++) {
-    const v = 0.3 + 0.68 * ((i + r()) / 44);
-    const g = owGrow(OW_Z0 + (OW_Z1 - OW_Z0) * v);
-    const base = add(owThrown(1, v), [0.02 - 0.12 * r(), 0.04, 0]);
-    const vy = (1.7 + 1.5 * r()) * (0.4 + 0.6 * g);
+  const tip = OW_LANDED(1);
+  for (let i = 0; i < OW_NS; i++) {
+    const z = owZ(0.08 + 0.84 * ((i + r()) / OW_NS));
+    const base = [tip[0] + 0.02 - 0.14 * r(), 0.05, z];
+    const vy = 1.8 + 1.5 * r();
     out.push({
       base,
       at: OW_HIT - 0.02 + 0.12 * r(),
-      vel: [(0.55 * r() - 0.35) * g, vy, 0.5 * (r() - 0.5)],
+      vel: [0.55 * r() - 0.3, vy, 0.5 * (r() - 0.5)],
       dur: (2 * vy) / OW_G,
       axis: unit([r() - 0.5, r() - 0.5, r() - 0.5]),
       spin: 4 + 6 * r(),
-      size: 0.035 + 0.035 * r(),
+      size: 0.05 + 0.04 * r(),
     });
   }
   return out;
@@ -677,19 +1242,59 @@ export const RECIPES = {
   "lava-lamp": {
     alive: true,
     options: [
+      {
+        key: "set",
+        label: "Colour set",
+        type: "select",
+        default: "own",
+        choices: Object.entries(LAVA_SETS).map(([id, v]) => ({ id, label: v.label })),
+      },
       { key: "wax", label: "Wax", type: "color", default: "#e8341c" },
       { key: "liquid", label: "Liquid", type: "color", default: "#f2b632" },
       { key: "metal", label: "Base", type: "color", default: "#b8bcc4" },
+      { key: "blobs", label: "Blobs", type: "slider", min: 2, max: 12, step: 1, default: 6 },
+      {
+        key: "size",
+        label: "Blob size",
+        type: "slider",
+        min: 0.5,
+        max: 1.5,
+        step: 0.1,
+        default: 1,
+      },
+      {
+        key: "shape",
+        label: "Blob shape",
+        type: "select",
+        default: "mixed",
+        choices: [
+          { id: "mixed", label: "Mixed" },
+          { id: "round", label: "Round" },
+          { id: "tall", label: "Tall" },
+        ],
+      },
     ],
-    controls: [{ key: "heat", label: "Heat up", type: "pulse", ease: LAVA_SECS }],
+    controls: [
+      { key: "heat", label: "Heat up", type: "pulse", ease: LAVA_SECS },
+      { key: "flow", label: "Flow", type: "slider", default: 0.5 },
+      { key: "glow", label: "Glow", type: "slider", default: 0 },
+    ],
     action: { key: "heat", label: "Heat it up" },
     // A tap heats the lamp: the blobs run about three and a half times as
-    // fast for a few seconds, the wax glows and shifts from warm orange to
-    // magenta to gold, and the liquid brightens; then it all eases back.
-    // The extra speed is an extra clock (the boost's integral), kept when
-    // the effect ends so the blobs never jump.
-    drive(t, c, out) {
+    // fast for a few seconds, the wax glows and shifts through its colour
+    // set's glow (orange, magenta, gold for the classic lamp), and the
+    // liquid brightens; then it all eases back. The extra speed is an extra
+    // clock (the boost's integral), kept when the effect ends so the blobs
+    // never jump. Flow sets how fast the blobs drift (a quarter as fast to
+    // one and three quarters, through the same kind of clock), and Glow
+    // lights the wax and the liquid from within at rest.
+    drive(t, c, out, info) {
       const m = mem(c);
+      const blobs = info?.data?.blobs || LAVA;
+      const flow = 0.25 + 1.5 * (c.flow ?? 0.5);
+      if (m.lastT === undefined) m.flowT = t;
+      else if (t >= m.lastT) m.flowT += (t - m.lastT) * flow;
+      m.lastT = t;
       const s = since(c.heat, LAVA_SECS);
       const extra = s === null ? 0 : boostClock(s, 2.5, 0.3, 2.7, 3.9);
       if (fired(m, "heat", c.heat)) m.base = (m.base ?? 0) + (m.run ?? 0);
@@ -698,26 +1303,24 @@ export const RECIPES = {
         m.base = (m.base ?? 0) + m.run;
         m.run = 0;
       }
-      const tt = t + (m.base ?? 0) + extra;
-      LAVA.forEach((b, i) => {
+      const tt = m.flowT + (m.base ?? 0) + extra;
+      blobs.forEach((b, i) => {
         const y = lavaY(b, tt);
         out.parts[`blob${i}`] = {
           offset: [Math.sin(tt * b.speed * 0.8 + b.phase) * 0.02, y - lavaY(b, 0), 0],
         };
       });
       const hot = s === null ? 0 : ease(band(s, 0, 0.3)) * (1 - ease(band(s, 3.1, 4.5)));
-      const col = ramp(LAVA_GLOW, band(s ?? 0, 0.2, 3.2));
-      out.glow = [col[0], col[1], col[2], 0.75 * hot];
-      out.morph = [0, hot];
+      const lit = clamp(c.glow ?? 0, 0, 1);
+      const col = ramp(info?.data?.glow || LAVA_GLOW, band(s ?? 0, 0.2, 3.2));
+      out.glow = [col[0], col[1], col[2], 0.75 * hot + 0.45 * lit * (1 - hot)];
+      out.morph = [0, Math.max(hot, 0.7 * lit)];
     },
     build(k, o) {
-      const wax = o.wax;
-      // The glass swells in the middle and tapers into the cap, where it
-      // meets a collar of the cap's own radius.
-      const glassR = (y) =>
-        0.2 +
-        0.075 * Math.sin(Math.PI * clamp((y + 0.05) / 1.35, 0, 1) * 0.8) -
-        0.115 * smoothstep(0.62, 1.3, y);
+      const set = LAVA_SETS[o.set] || LAVA_SETS.own;
+      const wax = set.wax || o.wax;
+      const liquid = set.liquid || o.liquid;
+      const glassR = lavaGlassR;
       // The metal base and cap, with bright reflections.
       const chrome = (c) => {
         const n = c.n;
@@ -784,7 +1387,7 @@ export const RECIPES = {
           even: true,
           jitter: 0.01,
           pattern: false,
-          color: (c) => mix(o.liquid, "#ffffff", 0.2 + 0.3 * Math.max(0, c.n[2])),
+          color: (c) => mix(liquid, "#ffffff", 0.2 + 0.3 * Math.max(0, c.n[2])),
         },
       );
       k.cloud({ share: 0.012, size: 1.2, pattern: false }, (r) => {
@@ -804,7 +1407,7 @@ export const RECIPES = {
         const rr = glassR(y) * 0.85 * Math.sqrt(r());
         return {
           p: [Math.sin(a) * rr, y, Math.cos(a) * rr],
-          color: mix(o.liquid, "#ffb070", 0.3 * (1 - y / 1.3)),
+          color: mix(liquid, "#ffb070", 0.3 * (1 - y / 1.3)),
           opacity: 0.06,
         };
       });
@@ -815,7 +1418,7 @@ export const RECIPES = {
         const rr = glassR(y) * 0.8 * Math.sqrt(r());
         return {
           p: [Math.sin(a) * rr, y, Math.cos(a) * rr],
-          color: mix(o.liquid, "#fff4c8", 0.35 + 0.3 * (1 - y / 1.3)),
+          color: mix(liquid, "#fff4c8", 0.35 + 0.3 * (1 - y / 1.3)),
           opacity: 0.1,
           kind: "fade",
           channel: 1,
@@ -838,7 +1441,8 @@ export const RECIPES = {
       };
       k.add(k.ellipsoid(0.22, 0.1, 0.22), { pos: [0, 0.04, 0], ...waxy });
       k.add(k.ellipsoid(0.1, 0.04, 0.1), { pos: [0, 1.25, 0], ...waxy });
-      LAVA.forEach((b, i) => {
+      const blobs = lavaBlobs(o);
+      blobs.forEach((b, i) => {
         const part = k.part(`blob${i}`, { pivot: [b.x, lavaY(b, 0), b.z] });
         k.add(k.ellipsoid(b.r, b.r * b.tall, b.r), {
           pos: [b.x, lavaY(b, 0), b.z],
@@ -859,6 +1463,7 @@ export const RECIPES = {
         pattern: false,
         color: (c) => mix("#fff2c0", "#ffb040", Math.hypot(c.p[0], c.p[2]) / 0.16),
       });
+      k.data = { blobs, glow: set.glow || LAVA_GLOW };
     },
   },
 
@@ -1147,32 +1752,78 @@ export const RECIPES = {
       { key: "thaw", label: "Thaw", type: "pulse", ease: ICE_SECS },
     ],
     action: { key: "thaw", label: "Melt and refreeze" },
-    // A tap thaws the swan: it slumps and spreads, drips fall and a puddle
-    // spreads from under the pedestal. Then it freezes again: it stands
-    // back up, the puddle draws back in, and a white band of frost sweeps
-    // up it from the foot to the beak (a coat of splats over the ice,
-    // shown only while the frost passes). Frost specks drift about it
+    // A tap melts the swan like real ice, faster and faster as it goes:
+    // water beads and drips from the beak, the wings and the pedestal's
+    // edges into a spreading puddle; the thin beak wears away first; the
+    // wing tips crack off and fall into the water, then the head and the
+    // top of the neck; the tail, the rest of the neck and the wings wear
+    // away, and the body wears down to a lump, each piece solid ice getting
+    // smaller (never squashing). The fallen pieces melt away in the puddle.
+    // Then it refreezes, the pieces growing back from the body out in the
+    // reverse order, the puddle drawing in, and a white band of frost
+    // sweeps up it from the foot to the beak. Temperature melts it to the
+    // same point and back (lowered after a piece has melted away on the
+    // ground, the piece grows back in place). Frost specks drift about it
     // while it is cold.
-    drive(t, c, out) {
+    drive(t, c, out, info) {
+      const m = mem(c);
       const s = since(c.thaw, ICE_SECS);
-      const thaw = s === null ? 0 : 0.4 * ease(band(s, 0.05, 1.5)) * (1 - ease(band(s, 2.3, 3.6)));
-      const e = Math.max(c.temp, thaw);
-      out.energy = e;
-      const wet = s === null ? 0 : ease(band(s, 0.2, 1.7)) * (1 - ease(band(s, 2.5, 3.8)));
-      const pool = Math.max(smoothstep(0.05, 0.7, c.temp), wet);
-      // The puddle spreads out from under the pedestal (it grows, rather
-      // than fading by size).
+      const tap =
+        s === null
+          ? 0
+          : ICE_TOP * Math.pow(band(s, 0.1, ICE_MELT), 1.6) * (1 - ease(band(s, ICE_MELT + 0.3, ICE_MELT + 1.6))); // prettier-ignore
+      const e = Math.max(clamp(c.temp ?? 0, 0, 1), tap);
+      if (e < 0.002) m.maxL = 0;
+      else m.maxL = Math.max(m.maxL ?? 0, e);
+      const cooling = e < (m.maxL ?? 0) - 0.004;
+      const pieces = icePose(e, (pc) => cooling && (m.maxL ?? 0) >= pc.end);
+      for (const [name, st] of Object.entries(pieces)) {
+        const { attached, ...part } = st;
+        out.parts[name] = part;
+      }
+      // Water: a puddle spreading out from under the pedestal, and drops
+      // (tokens) that bead at the low points and fall while it melts, more
+      // of them the more it has melted.
+      const pool = smoothstep(0.01, 0.8, e);
       out.parts.puddle = { scale: 0.3 + 0.7 * pool, visible: pool > 0.002 ? 1 : 0 };
-      const dripping = (c.temp > 0.1 && c.temp < 0.95) || (s !== null && s > 0.3 && s < 3.2);
-      out.parts.drips = { visible: dripping ? 1 : 0 };
+      const melting = e > 0.02 && !cooling;
+      const drops = info?.data?.drops || [];
+      out.tokens = drops.map((d, i) => {
+        const pc = pieces[d.piece];
+        const onIt = !pc || (pc.attached && (pc.scale ?? 1) > 0.25);
+        if (!melting || !onIt || i / drops.length > 0.25 + 1.3 * e)
+          return { base: d.p, visible: 0 };
+        const u = (((t + d.phase * d.period) % d.period) + d.period) % d.period;
+        const from = pc ? add(add(d.pv, pc.offset ?? [0, 0, 0]), mul(sub(d.p, d.pv), pc.scale ?? 1)) : d.p; // prettier-ignore
+        if (u < ICE_HANG) {
+          // Beading up at the edge.
+          return { base: d.p, offset: sub(from, d.p), visible: 0.35 + 0.65 * (u / ICE_HANG) };
+        }
+        const f = u - ICE_HANG;
+        const drop = 0.5 * ICE_G * f * f;
+        if (drop > from[1] - d.to) return { base: d.p, visible: 0 };
+        return { base: d.p, offset: [from[0] - d.p[0], from[1] - drop - d.p[1], from[2] - d.p[2]] };
+      });
       out.parts.frost = { visible: 1 - smoothstep(0, 0.3, e) };
       // The frost front: the coat shows (coloured as the ice) just before
       // it and the band of light runs up it on channel 0.
-      const front = s === null ? 0 : bump(s, 3.55, 3.7, 5.05, 5.3);
+      const F = ICE_MELT + 1.5;
+      const front = s === null ? 0 : bump(s, F, F + 0.15, F + 1.4, F + 1.6);
       out.parts.coat = { visible: e < 0.01 ? front : 0 };
-      out.morph = [s === null ? -0.3 : -0.25 + 1.5 * band(s, 3.7, 5.0)];
-      const g = s === null ? 0 : bump(s, 3.65, 3.8, 4.8, 5.05);
+      out.morph = [s === null ? -0.3 : -0.25 + 1.5 * band(s, F + 0.15, F + 1.35)];
+      const g = s === null ? 0 : bump(s, F + 0.1, F + 0.25, F + 1.15, F + 1.4);
       out.glow = [0.72, 0.9, 1, 1.1 * g];
+      // A crack as each piece breaks off, and the crackle of refreezing.
+      if (s !== null) {
+        const at = (L) => 0.1 + (ICE_MELT - 0.1) * Math.pow(L / ICE_TOP, 1 / 1.6);
+        const cues = ICE_PIECES.filter((pc) => pc.fall).map((pc, n) => [
+          at(pc.detach),
+          { voice: "crack", f: 2400 - 250 * n, decay: 0.35, vol: 0.75 },
+        ]);
+        cues.push([ICE_MELT + 0.35, { voice: "crackle", f: 4600, n: 14, decay: 1.2, vol: 0.6 }]);
+        cues.push([F + 0.1, { voice: "sparkle", f: 3400, n: 8, decay: 1.3 }]);
+        cuesAt(m, s, cues, out);
+      } else cuesAt(m, null, [], out);
     },
     build(k) {
       const V = unit([0.15, 0.25, 1]);
@@ -1185,21 +1836,20 @@ export const RECIPES = {
         if (Math.abs(g) < 0.018) col = mix(col, "#ffffff", 0.6);
         return col;
       };
-      const ice = (a, deep = 0) => ({
-        kind: "melt",
-        params: [a, 0],
-        flat: 0.25,
-        opacity: 0.9,
-        color: iceCol(deep),
-      });
+      const ice = (deep = 0) => ({ flat: 0.25, opacity: 0.9, color: iceCol(deep) });
+      // Each piece of the swan is a part that melts (gets smaller about
+      // where it joins the rest) and may break off (ICE_PIECES).
+      const P = Object.fromEntries(
+        ICE_PIECES.map((pc) => [pc.name, k.part(pc.name, { pivot: pc.pivot })]),
+      );
       // The frost coat: fewer, bigger splats over the same surfaces,
       // coloured as the ice there, that glow as the frost front (channel
-      // 0, by height) passes. Hidden except while it runs, since it does
-      // not melt with the ice.
+      // 0, by height) passes. Hidden except while it runs, when the swan is
+      // whole again.
       const coat = k.part("coat", { pivot: [0, 0.5, 0] });
       const both = (shape, opts) => {
         k.add(shape, opts);
-        const { interior, core, ...rest } = opts;
+        const { interior, core, part, ...rest } = opts;
         k.add(shape, {
           ...rest,
           weight: 0.3,
@@ -1217,14 +1867,15 @@ export const RECIPES = {
         pos: [0, 0.15, 0],
         interior: 0.08,
         core: "#a8dcf4",
-        ...ice(0.45, 0.1),
+        ...ice(0.1),
       });
       // The swan: a full body with a lifted tail, arched wings and an S neck.
       both(k.ellipsoid(0.38, 0.19, 0.21), {
         pos: [-0.02, 0.47, 0],
         interior: 0.08,
         core: "#bfe8fa",
-        ...ice(0.75),
+        part: P.body,
+        ...ice(),
       });
       both(
         k.tube(
@@ -1236,7 +1887,7 @@ export const RECIPES = {
           (t) => 0.11 * (1 - 0.8 * t),
           { samples: 24, grid: 14, caps: true },
         ),
-        ice(0.85),
+        { part: P.tail, ...ice() },
       );
       const neck = spline([
         [0.26, 0.52, 0],
@@ -1247,13 +1898,23 @@ export const RECIPES = {
         [0.36, 1.16, 0],
         [0.45, 1.17, 0],
       ]);
+      // The neck breaks where it is thinnest between its curves.
       both(
         k.tube(neck, (t) => 0.075 - 0.035 * t, { samples: 96, grid: 24 }),
-        ice(1),
+        {
+          part: (c) => (c.p[1] < ICE_NECK_BREAK ? P.neckLo : P.neckHi),
+          ...ice(),
+        },
       );
-      both(k.ellipsoid(0.075, 0.058, 0.052), { pos: [0.46, 1.165, 0], ...ice(1) });
-      both(k.cone(0.032, 0.004, 0.13), { pos: [0.57, 1.14, 0], rot: [0, 0, -105], ...ice(1) });
+      both(k.ellipsoid(0.075, 0.058, 0.052), { pos: [0.46, 1.165, 0], part: P.head, ...ice() });
+      both(k.cone(0.032, 0.004, 0.13), {
+        pos: [0.57, 1.14, 0],
+        rot: [0, 0, -105],
+        part: P.beak,
+        ...ice(),
+      });
       for (const side of [-1, 1]) {
+        const near = side > 0;
         both(
           k.param(
             (u, v) => {
@@ -1270,7 +1931,14 @@ export const RECIPES = {
             },
             { grid: 24 },
           ),
-          ice(0.9),
+          {
+            // The arched top of the wing is what cracks off.
+            part: (c) =>
+              c.p[1] > ICE_WING_BREAK
+                ? P[near ? "tipNear" : "tipFar"]
+                : P[near ? "wingNear" : "wingFar"],
+            ...ice(),
+          },
         );
       }
       // Frost specks drifting about it while it is cold.
@@ -1283,21 +1951,36 @@ export const RECIPES = {
         params: [0.14, r()],
         part: frost,
       }));
-      // Drips and the puddle as it melts.
-      const drips = k.part("drips", { pivot: [0, 0.4, 0] });
-      k.cloud({ share: 0.005, size: 0.8, pattern: false }, (r) => ({
-        p: [(r() - 0.5) * 1.1, 0.1 + r() * 0.55, (r() - 0.5) * 0.72],
-        color: "#d8f2ff",
-        opacity: 0.8,
-        kind: "fall",
-        params: [0.3, r()],
-        part: drips,
-      }));
+      // Drops of meltwater: each a token that beads at a low point of a
+      // piece (or the pedestal's edge) and falls to the pedestal's top or
+      // the ground. Big enough to show on a phone.
+      const r = lcg(33);
+      const byName = Object.fromEntries(ICE_PIECES.map((pc) => [pc.name, pc]));
+      const drops = ICE_DROPS.map(([piece, p], i) => {
+        const over = Math.abs(p[0]) < 0.49 && Math.abs(p[2]) < 0.3 && p[1] > 0.31;
+        const tok = { kind: "token", params: [i, 0], pattern: false };
+        k.add(k.ellipsoid(0.017, 0.026, 0.017), {
+          ...tok,
+          pos: p,
+          weight: 3,
+          size: 1.3,
+          color: (c) => mix("#e4f6ff", "#ffffff", Math.max(0, dot(c.n, LIGHT))),
+          opacity: 0.85,
+        });
+        return {
+          p,
+          piece,
+          pv: byName[piece]?.pivot || p,
+          to: over ? 0.31 : 0.01,
+          period: 0.7 + 0.5 * r(),
+          phase: r(),
+        };
+      });
       // The puddle: flat splats lying on the ground in a sunflower spiral
       // (evenly spread, so it is smooth water, not blotches), a little
       // uneven at its rim, spread out by its part's scale.
       const puddle = k.part("puddle", { pivot: [0, 0, 0] });
-      k.cloud({ share: 0.012, size: 8, pattern: false }, (r, i, n) => {
+      k.cloud({ share: 0.012, size: 8, pattern: false }, (r2, i, n) => {
         const a = i * 2.399963;
         const rr = 0.86 * Math.sqrt((i + 0.5) / n) * (0.93 + 0.07 * Math.sin(a * 5 + 1));
         return {
@@ -1309,6 +1992,7 @@ export const RECIPES = {
           part: puddle,
         };
       });
+      k.data = { drops };
     },
   },
 
@@ -2241,43 +2925,25 @@ export const RECIPES = {
     alive: true,
     controls: [{ key: "crash", label: "Crash", type: "pulse", ease: OW_SECS }],
     action: { key: "crash", label: "Break the wave" },
-    // A tap breaks the wave. The lip pitches forward and down (a morph on
-    // channel 1) and crashes into the flat water in front; there it turns
-    // to white water that falls flat (a copy built where the lip lands,
-    // morphing down on channel 0), clumps of spray burst up and fall back
-    // (tokens), and foam spreads down the face and over the water (a fade
-    // on channel 2). Then the foam thins away and the lip curls over again
-    // from the crest (a copy of the lip fading back in on channel 3).
+    // A tap sets the whole wave going (OW_KEYS): the lip pitches out and
+    // the face leans over after it until the lip crashes into the water in
+    // front. There the lip turns to white water that falls flat (a copy
+    // built where it lands, morphing down on channel 0), clumps of spray
+    // burst up and fall back (tokens), foam spreads over the water (a fade
+    // on channel 2), and the wave collapses and flattens. Then a new swell
+    // rises behind, steepens, throws a lip and curls over into the curl it
+    // rests in.
     drive(t, c, out) {
       const s = since(c.crash, OW_SECS);
-      const hide = { visible: 0 };
-      if (s === null) {
-        out.morph = [0, 0, 0, 0];
-        out.parts.lip = hide;
-        out.parts.wash = hide;
-        out.parts.spray = {};
-        out.tokens = OW_SPRAY.map((d) => ({ base: d.base, visible: 0 }));
-        return;
-      }
-      // The lip is thrown, speeding up, and lands at OW_HIT.
-      const thrown = Math.pow(band(s, 0, OW_HIT), 1.4);
-      // The white water falls flat on the water.
-      const flat = Math.pow(band(s, OW_HIT + 0.03, OW_HIT + 0.55), 1.6);
-      const foam = band(s, OW_HIT, 1.7) * (1 - band(s, 2.7, 4.8));
-      // The lip comes back from the crest out to its tip.
-      const curl = 1 - ease(band(s, 1.5, 3.9));
-      out.morph = [flat, thrown, foam, curl];
-      out.parts.lip = { visible: 1 - band(s, OW_HIT + 0.02, OW_HIT + 0.12) };
-      out.parts.wash = {
-        visible: band(s, OW_HIT - 0.04, OW_HIT + 0.04) * (1 - band(s, 1.7, 2.3)),
-      };
-      // The spray off the lip goes as it is thrown and comes back once the
-      // lip has curled over again, rising off it (the behaviours' amount
-      // grows back from 0, so it starts on the lip).
-      out.parts.spray = { visible: s < 0.05 ? 1 - band(s, 0, 0.05) : ease(band(s, 3.9, 4.5)) };
-      out.amount = s < 0.4 ? 1 - band(s, 0, 0.4) : ease(band(s, 3.9, 5.2));
-      out.tokens = OW_SPRAY.map((d) => {
-        const u = s - d.at;
+      const pose = owPose(s === null ? 0 : Math.min(s, OW_KEYS[OW_KEYS.length - 1].at));
+      const rest = OW_CTL[0];
+      const ctl = pose.pts.map((p, i) => ({
+        base: [rest[i][0], rest[i][1], 0],
+        offset: [p[0] - rest[i][0], p[1] - rest[i][1], 0],
+        visible: i < OW_NM ? 1 : pose.w,
+      }));
+      const spray = OW_SPRAY.map((d) => {
+        const u = s === null ? -1 : s - d.at;
         if (u < 0 || u > d.dur) return { base: d.base, visible: 0 };
         const off = [d.vel[0] * u, d.vel[1] * u - 0.5 * OW_G * u * u, d.vel[2] * u];
         return {
@@ -2287,6 +2953,37 @@ export const RECIPES = {
           visible: band(u, 0, 0.04) * (1 - band(u, d.dur - 0.1, d.dur)),
         };
       });
+      out.tokens = [...ctl, ...spray];
+      // The new swell rising, and its lip curling over (later sounds).
+      cuesAt(
+        mem(c),
+        s,
+        [
+          [3.1, { voice: "wave", decay: 1.2, vol: 0.45 }],
+          [4.5, { voice: "whoosh", f: 260, to: 2, decay: 0.5, vol: 0.4 }],
+        ],
+        out,
+      );
+      if (s === null) {
+        out.morph = [0, 0, 0, 0];
+        out.parts.wash = { visible: 0 };
+        out.parts.spray = {};
+        out.parts.churn = {};
+        return;
+      }
+      // The white water falls flat on the water.
+      const flat = Math.pow(band(s, OW_HIT + 0.03, OW_HIT + 0.55), 1.6);
+      const foam = band(s, OW_HIT, 1.7) * (1 - band(s, 2.9, 4.6));
+      out.morph = [flat, 0, foam, 0];
+      out.parts.wash = {
+        visible: band(s, OW_HIT - 0.04, OW_HIT + 0.04) * (1 - band(s, 1.9, 2.5)),
+      };
+      // The spray off the lip goes as it is thrown and comes back once the
+      // lip has curled over again, rising off it (the behaviours' amount
+      // grows back from 0, so it starts on the lip).
+      out.parts.spray = { visible: s < 0.05 ? 1 - band(s, 0, 0.05) : ease(band(s, 5.2, 5.7)) };
+      out.parts.churn = { visible: 1 - band(s, 0.3, 0.8) + ease(band(s, 4.9, 5.6)) };
+      out.amount = s < 0.4 ? 1 - band(s, 0, 0.4) : ease(band(s, 5.0, 5.7));
     },
     build(k) {
       const water = (c, s, isBack) => {
@@ -2301,100 +2998,91 @@ export const RECIPES = {
         if (foamN > 0.5) col = mix(col, "#dff4ff", 0.55);
         return lit(col, c.n, 0.25);
       };
-      const back = baked(
-        spline([
-          [0.3, 0.96],
-          [0.08, 0.9],
-          [-0.2, 0.62],
-          [-0.48, 0.28],
-          [-0.75, 0.07],
-          [-0.95, 0.0],
-        ]),
-      );
-      // The face up to where the lip starts (and a little past).
-      const lipS = (u) => OW_LIP + (1 - OW_LIP) * u;
-      const top = OW_LIP + 0.02;
-      k.add(
-        k.param((u, v) => owAt(OW_FACE, u * top, v), { grid: 80 }),
-        {
-          flat: 0.25,
-          color: (c) => water(c, c.u * top, false),
+      // The sea and the wave thin out towards their ends, so they fade into
+      // the water round them instead of stopping at a straight edge.
+      const frayed = (c) => {
+        const z = Math.abs(c.p[2]);
+        const edge = Math.max(
+          band(z, 0.6, OW_Z1),
+          band(c.p[0], 1.02, 1.3),
+          1 - band(c.p[0], -1.0, -0.72),
+        );
+        return c.rand() < edge * 0.92;
+      };
+      const on = (curve) => (u, v) => {
+        const p = curve(u);
+        return [p[0], p[1], owZ(v)];
+      };
+      // Each splat follows the two control points either side of it.
+      const skin = (first, n) => (c) => {
+        const x = clamp01(c.u) * (n - 1);
+        const i = Math.min(n - 2, Math.floor(x));
+        return [first + i, first + i + 1, x - i];
+      };
+      // The main sheet: the sea in front, the face, the crest, the back.
+      k.add(k.param(on(OW_REST_M), { grid: 110 }), {
+        flat: 0.42,
+        size: 1.15,
+        weight: 1.4,
+        skin: skin(0, OW_NM),
+        color: (c) =>
+          frayed(c)
+            ? null
+            : c.u < OW_CREST
+              ? water(c, (0.62 * c.u) / OW_CREST, false)
+              : water(c, (c.u - OW_CREST) / (1 - OW_CREST), true),
+      });
+      // The lip (denser, since it stretches as it is thrown, and it fades
+      // away by size while the wave is low).
+      k.add(k.param(on(OW_REST_L), { grid: 64 }), {
+        flat: 0.42,
+        weight: 2.2,
+        size: 1.3,
+        skin: skin(OW_NM, OW_NL),
+        color: (c) => {
+          if (frayed(c)) return null;
+          // White only towards its tip, where it breaks.
+          const foamN = c.noise(c.p[0] * 12, c.p[1] * 12, c.p[2] * 5);
+          if (foamN > 0.95 - 1.7 * c.u * c.u) return keep(mix("#e4f6ff", "#ffffff", c.rand()));
+          return water(c, 0.5, false);
         },
-      );
-      // The lip, twice. The one that is thrown (hidden at rest) morphs out
-      // to where it lands on channel 1; it is denser, since it stretches.
-      // The one shown at rest fades out on a tap and back in from the
-      // crest to the tip as the wave re-forms (channel 3).
-      const lip = k.part("lip", { pivot: [0.6, 0.9, 0] });
-      k.add(
-        k.param((u, v) => owAt(OW_FACE, lipS(u), v), { grid: 64 }),
-        {
-          flat: 0.35,
-          weight: 2.2,
-          size: 1.3,
-          color: (c) => water(c, lipS(c.u), false),
-          part: lip,
-          channel: 1,
-          to: (c) => owThrown(lipS(c.u), c.v),
-        },
-      );
-      k.add(
-        k.param((u, v) => owAt(OW_FACE, lipS(u), v), { grid: 64 }),
-        {
-          flat: 0.25,
-          color: (c) => water(c, lipS(c.u), false),
-          kind: "fade",
-          channel: 3,
-          params: (c) => [0.85 * (1 - c.u), 0.14],
-        },
-      );
-      k.add(
-        k.param((u, v) => owAt(back, u, v), { grid: 48 }),
-        {
-          flat: 0.25,
-          color: (c) => water(c, c.u, true),
-        },
-      );
+      });
       // White water: the lip where it lands, built there (hidden until it
       // crashes), falling flat onto the water on channel 0.
       // It churns: its splats sit a little off the sheet, in and out, and
       // scatter as it falls.
       const wash = k.part("wash", { pivot: [1, 0.3, 0] });
-      k.add(
-        k.param((u, v) => owThrown(OW_LIP + (1 - OW_LIP) * u, v), { grid: 48 }),
-        {
-          flat: 0.9,
-          size: 1.5,
-          weight: 0.9,
-          opacity: 0.85,
-          pattern: false,
-          part: wash,
-          color: (c) => {
-            const l = 0.5 + 0.5 * c.noise(c.p[0] * 14, c.p[1] * 14, c.p[2] * 6);
-            if (l < 0.25) return null;
-            return mix("#cfeaf5", "#ffffff", l);
-          },
-          channel: 0,
-          to: (c) => {
-            const p = c.p;
-            const g = owGrow(p[2]);
-            const f = p[1] / 0.97;
-            return [
-              p[0] + 0.24 * f + 0.3 * f * (c.rand() - 0.5),
-              (0.015 + 0.04 * c.rand()) * (0.2 + 0.8 * g),
-              p[2] + 0.16 * f * (c.rand() - 0.5),
-            ];
-          },
+      k.add(k.param(on(OW_LANDED), { grid: 48 }), {
+        flat: 0.9,
+        size: 1.5,
+        weight: 0.9,
+        opacity: 0.85,
+        pattern: false,
+        part: wash,
+        color: (c) => {
+          const l = 0.5 + 0.5 * c.noise(c.p[0] * 14, c.p[1] * 14, c.p[2] * 6);
+          if (l < 0.25 + 0.6 * band(Math.abs(c.p[2]), 0.55, OW_Z1)) return null;
+          return mix("#cfeaf5", "#ffffff", l);
         },
-      );
-      // Spray flying off the lip, foam churning where it lands (the spray
-      // goes while the lip is thrown).
+        channel: 0,
+        to: (c) => {
+          const p = c.p;
+          const f = p[1] / 0.97;
+          const spread = 0.8 + 0.5 * c.noise(3, 0, p[2] * 3);
+          return [
+            p[0] + (0.24 * f + 0.3 * f * (c.rand() - 0.5)) * spread,
+            0.015 + 0.04 * c.rand(),
+            p[2] + 0.16 * f * (c.rand() - 0.5),
+          ];
+        },
+      });
+      // Spray flying off the lip at rest (it goes while the wave breaks),
+      // and foam churning at the foot of the face.
       const spray = k.part("spray", { pivot: [0.7, 0.7, 0] });
       k.cloud({ share: 0.04, size: 0.8, pattern: false }, (r) => {
-        const v = 0.35 + 0.65 * r();
-        const p = owAt(OW_FACE, 0.6 + 0.32 * r(), v);
+        const p = OW_REST_L(0.3 + 0.65 * r());
         return {
-          p: [p[0] + 0.02, p[1] + 0.02, p[2]],
+          p: [p[0] + 0.02, p[1] + 0.02, owZ(0.05 + 0.9 * r())],
           color: "#ffffff",
           opacity: 0.8,
           kind: "rise",
@@ -2402,62 +3090,49 @@ export const RECIPES = {
           part: spray,
         };
       });
-      k.cloud({ share: 0.03, size: 1.4, pattern: false }, (r) => {
+      const churn = k.part("churn", { pivot: [0.75, 0.03, 0] });
+      k.cloud({ share: 0.03, size: 1.2, pattern: false }, (r) => {
         const v = r();
-        const g = owGrow(OW_Z0 + (OW_Z1 - OW_Z0) * v);
+        const z = owZ(v);
+        const x = 0.62 + 0.3 * r();
+        // Lacy, thicker where the lip lands, thinning to the ends.
+        const l = 0.5 + 0.5 * k.noise(x * 8, 0, z * 5);
+        if (l < 0.45 + 0.4 * band(Math.abs(z), 0.4, OW_Z1)) return null;
         return {
-          p: [
-            0.66 + 0.2 * r() + 0.08 * Math.sin(v * 17),
-            0.02 + 0.07 * r() * g,
-            OW_Z0 + (OW_Z1 - OW_Z0) * v,
-          ],
+          p: [x, 0.015 + 0.05 * r() * l, z],
           color: mix("#dff4ff", "#ffffff", r()),
           opacity: 0.75,
           kind: "twinkle",
           params: [0.3, r() * 6],
+          part: churn,
         };
       });
-      // The crash's foam: lace over the face (spreading down it from the
-      // crest) and over the water in front (spreading out from where the
-      // lip lands), faded in and out on channel 2.
+      // The crash's foam: lace over the water, spreading out from where
+      // the lip lands (ragged, thinning away from it and to the ends),
+      // faded in and out on channel 2.
       const lace = (p) => 0.5 + 0.5 * k.noise(p[0] * 9, p[1] * 9, p[2] * 4);
-      k.cloud({ share: 0.05, size: 1.5, pattern: false }, (r) => {
-        const v = r();
-        const g = owGrow(OW_Z0 + (OW_Z1 - OW_Z0) * v);
-        if (r() > 0.25 + 0.75 * g) return null;
-        let p;
-        let n;
-        let at;
-        if (r() < 0.62) {
-          const s = 0.63 * Math.sqrt(r());
-          const a = owAt(OW_FACE, s, v);
-          const b = owAt(OW_FACE, s + 0.004, v);
-          const tn = unit(sub(b, a));
-          n = [tn[1], -tn[0], 0];
-          p = add(a, mul(n, 0.01));
-          at = 0.04 + 0.5 * ((0.63 - s) / 0.63);
-        } else {
-          const x = 1.02 + 0.28 * r();
-          p = [x, 0.008, OW_Z0 + (OW_Z1 - OW_Z0) * v];
-          n = [0, 1, 0];
-          at = 0.05 + (0.45 * Math.abs(x - 1.1)) / 0.25;
-        }
+      k.cloud({ share: 0.045, size: 1.5, pattern: false }, (r) => {
+        const z = owZ(r());
+        const reach = 0.28 + 0.14 * k.noise(3, 0, z * 3);
+        const x = 1.12 + (r() * 2 - 1) * 0.5;
+        const d = Math.abs(x - 1.12) / reach;
+        const p = [x, 0.012, z];
         const l = lace(p);
-        if (l < 0.25) return null;
+        if (d > 1 || l < 0.25 + 0.5 * d * d + 0.5 * band(Math.abs(z), 0.55, OW_Z1)) return null;
         return {
           p,
-          n,
+          n: [0, 1, 0],
           flat: 0.2,
           color: mix("#d4eef8", "#ffffff", l),
           opacity: 0.9,
           kind: "fade",
           channel: 2,
-          params: [clamp01(at + 0.3 * (1 - l)), -0.12],
+          params: [clamp01(0.05 + 0.5 * d + 0.25 * (1 - l)), -0.12],
         };
       });
       // Clumps of spray, one per token, built where they are thrown from.
       OW_SPRAY.forEach((d, i) => {
-        k.cloud({ count: 28, size: 0.9, pattern: false }, (r) => {
+        k.cloud({ count: 40, size: 0.9, pattern: false }, (r) => {
           const d0 = randDir(r);
           // Drawn out a little along its flight.
           const q = [d0[0] * 0.8, d0[1] * 1.5, d0[2] * 0.8];
@@ -2467,23 +3142,10 @@ export const RECIPES = {
             size: 0.6 + 0.8 * r(),
             opacity: 0.95,
             kind: "token",
-            params: [i, 0],
+            params: [OW_NM + OW_NL + i, 0],
           };
         });
       });
-      // Calmer sea in front, rippling.
-      k.add(
-        k.param((u, v) => [1.05 + 0.25 * u, 0, OW_Z0 + (OW_Z1 - OW_Z0) * v], {
-          grid: 12,
-          flip: true,
-        }),
-        {
-          pattern: false,
-          kind: "wave",
-          params: [0.01, 0],
-          color: (c) => lit(mix("#08457a", "#0f5a8e", c.rand()), c.n, 0.2),
-        },
-      );
     },
   },
 

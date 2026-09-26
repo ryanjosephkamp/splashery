@@ -37,7 +37,10 @@ const SPORE_SECS = 4.2;
 const FERN_SECS = 5.4;
 const SAGUARO_SECS = 4.6;
 const CORAL_SECS = 5.0;
-const CONE_SECS = 5.6;
+const CONE_SECS = 7.2;
+// How many of the pinecone's scales break off (tokens), and its seeds.
+const CONE_LOOSE = 42;
+const CONE_SEEDS = 6;
 const ACORN_SECS = 5.0;
 const SUCC_SECS = 5.4;
 const BAMBOO_SECS = 5.4;
@@ -800,6 +803,41 @@ function planStones(k, stones, cairn, reach = 0.98) {
     st.t1 = 1.5 + 0.45 * n;
   });
   return { stones: stones.map((st) => ({ ...st, rot: undefined })) };
+}
+
+// A loose pinecone scale over the effect's clock s: it opens with the
+// others (open, 0..1), breaks off at sc.tb and tumbles down to land flat at
+// sc.land with a little bounce, lies there, and at sc.back flies up in an
+// arc into its place again. Turns are about the scale's centre (its base).
+function looseScale(sc, s, open) {
+  const qOpen = quatAxisAngle(sc.tip, sc.ang * open);
+  const atOpen = sub(add(sc.hinge, quatRotate(qOpen, sub(sc.p, sc.hinge))), sc.p);
+  const rest = { base: sc.p, quat: qOpen, offset: atOpen };
+  if (s < sc.tb || s > sc.back + 0.5) return rest;
+  // Lying flat: its face up (or down), turned about the vertical.
+  const up = sc.flip ? [0, -1, 0] : [0, 1, 0];
+  const qLand = quatMul(quatAxisAngle([0, 1, 0], sc.spin), turnPart(sc.up, up, 1));
+  const qFull = quatAxisAngle(sc.tip, sc.ang);
+  const landOff = sub(sc.land, sc.p);
+  if (s < sc.back) {
+    const g = band(s, sc.tb, sc.tb + sc.fall);
+    const pop = 0.05 * Math.sin(Math.PI * Math.min(1, g * 2.5));
+    const hop = 0.03 * Math.sin(Math.PI * band(s, sc.tb + sc.fall, sc.tb + sc.fall + 0.2));
+    const e = g * g;
+    const out = [sc.tip[2], 0, -sc.tip[0]];
+    const offset = [
+      lerp(atOpen[0], landOff[0], easeOut(g)) + out[0] * pop,
+      lerp(atOpen[1], landOff[1], e) + hop,
+      lerp(atOpen[2], landOff[2], easeOut(g)) + out[2] * pop,
+    ];
+    const tumble = quatAxisAngle(sc.tumble, 5 * Math.sin(Math.PI * g));
+    return { base: sc.p, offset, quat: quatMul(tumble, slerpQ(qFull, qLand, ease(g))) };
+  }
+  // Flying back: an arc up and into place, turning back as it goes.
+  const f = ease(band(s, sc.back, sc.back + 0.5));
+  const offset = lerp3(landOff, atOpen, f);
+  offset[1] += 0.25 * Math.sin(Math.PI * f);
+  return { base: sc.p, offset, quat: slerpQ(qLand, qOpen, f) };
 }
 
 // ---- Recipes ----------------------------------------------------------------------
@@ -3953,16 +3991,21 @@ export const RECIPES = {
     alive: true,
     controls: [{ key: "dry", label: "Open", type: "pulse", ease: CONE_SECS }],
     action: { key: "dry", label: "Open the scales" },
-    // A tap opens the cone as it does in dry weather: every scale tips out
-    // from its root (a morph), showing the dark gaps, and winged seeds slip
-    // out from between them and spin down like little propellers, each on
-    // its own path. Then the scales close up again.
+    // A tap opens the cone as it does in dry weather (every scale tips out
+    // from its root) and eight winged seeds slip out and spin down like
+    // little propellers. Then the scales on the side facing you break off
+    // one after another from the bottom up, each tumbling down to land
+    // flat in a pile under the cone, and the dark core shows where they
+    // were. After a moment they fly back up into place, top first, and
+    // the cone closes.
     drive(t, c, out, info) {
       const s = progress(c.dry) * CONE_SECS;
       const on = c.dry > 0;
-      out.morph = [on ? ease(band(s, 0.1, 1.3)) * (1 - ease(band(s, 4.0, 5.3))) : 0, 0, 0, 0];
-      out.tokens = (info.data?.seeds || []).map((sd, i) => {
-        const t0 = 0.9 + 0.07 * i;
+      const d = info.data || { seeds: [], loose: [] };
+      const open = on ? ease(band(s, 0.1, 1.2)) * (1 - ease(band(s, 5.9, 6.9))) : 0;
+      out.morph = [open, 0, 0, 0];
+      const seeds = d.seeds.map((sd, i) => {
+        const t0 = 0.8 + 0.1 * i;
         if (!on || s < t0) return { base: sd.p, visible: 0 };
         const f = band(s, t0, t0 + sd.dur);
         const th = sd.a + sd.dir * (0.3 * f + 3.2 * TAU * f * f) * 0.35;
@@ -3978,6 +4021,17 @@ export const RECIPES = {
           visible: band(s, t0, t0 + 0.15) * (1 - band(f, 0.85, 1)),
         };
       });
+      const scales = d.loose.map((sc) => (on ? looseScale(sc, s, open) : { base: sc.p }));
+      out.tokens = [...scales, ...seeds];
+      crossing(
+        c,
+        "cone",
+        on ? s : 0,
+        d.loose.map((sc) => sc.tb + sc.fall),
+        (i) => {
+          if (i % 3 === 0) out.cues.push({ voice: "wood", f: 1300 + 90 * (i % 5), decay: 0.5, vol: 0.45 }); // prettier-ignore
+        },
+      );
     },
     build(k) {
       const rand = k.rand;
@@ -3989,6 +4043,19 @@ export const RECIPES = {
         pos: [0, Y0 + HT * 0.48, 0],
         color: "#3a2412",
       });
+      // The scales that break off (tokens): every scale in a window on the
+      // side facing the home camera, the ones facing it most squarely, so
+      // none is left standing on the bare core. The rest only open.
+      const VH = [Math.sin(0.45), Math.cos(0.45)];
+      const facing = [];
+      for (let i = 0; i < N; i++) {
+        const h = (i + 0.5) / N;
+        const th = i * GOLDEN;
+        if (h > 0.06 && h < 0.94) facing.push([i, Math.sin(th) * VH[0] + Math.cos(th) * VH[1]]);
+      }
+      facing.sort((a, b) => b[1] - a[1]);
+      const pick = new Set(facing.slice(0, CONE_LOOSE).map(([i]) => i));
+      const loose = [];
       for (let i = 0; i < N; i++) {
         const h = (i + 0.5) / N;
         const th = i * GOLDEN;
@@ -4006,13 +4073,27 @@ export const RECIPES = {
         const tone = 0.9 + 0.2 * rand();
         // Opening: the scale tips out about its root (away from the tip).
         const hinge = sub(centre, mul(d, len * 0.5));
-        const q = quatAxisAngle([Math.cos(th), 0, -Math.sin(th)], CONE_OPEN * (0.6 + 0.4 * Math.sin(Math.PI * h))); // prettier-ignore
+        const tip = [Math.cos(th), 0, -Math.sin(th)];
+        const ang = CONE_OPEN * (0.6 + 0.4 * Math.sin(Math.PI * h));
+        const q = quatAxisAngle(tip, ang);
+        const own = pick.has(i)
+          ? { kind: "token", params: [loose.length, 0] }
+          : { channel: 0, to: (c) => add(hinge, quatRotate(q, sub(c.p, hinge))) };
+        if (pick.has(i)) {
+          loose.push({ p: centre, hinge, tip, ang, th, h, up: quatRotate(quatEuler(...rot), [0, 1, 0]) }); // prettier-ignore
+          // The broken stub it leaves on the core (under the scale at rest).
+          k.add(k.ellipsoid(wid * 0.32, 0.018, 0.03), {
+            pos: add(hinge, mul(d, 0.012)),
+            rot,
+            flat: 0.3,
+            color: (c) => lit(shade("#6a4424", tone), c.n, 0.5),
+          });
+        }
         k.add(k.ellipsoid(wid, 0.028, len * 0.55), {
           pos: centre,
           rot,
           flat: 0.25,
-          channel: 0,
-          to: (c) => add(hinge, quatRotate(q, sub(c.p, hinge))),
+          ...own,
           color: (c) => {
             const along = c.lp[2] / (len * 0.55);
             let col = mix("#3a2212", "#8a5a2e", smoothstep(-0.8, 0.4, along));
@@ -4028,15 +4109,47 @@ export const RECIPES = {
         pos: [0, Y0 - 0.04, 0],
         color: (c) => lit("#4a2e18", c.n, 0.4),
       });
+      // Where each loose scale lands on the ground under the cone (flat,
+      // clear of the others), and when it breaks off and comes back: from
+      // the bottom up, and back top first.
+      const floor = Y0 - 0.14;
+      const spots = [];
+      loose.forEach((sc, n) => {
+        const rank = n / loose.length;
+        let best = null;
+        let bestGap = -Infinity;
+        for (let tries = 0; tries < 40; tries++) {
+          const a = sc.th + (rand() - 0.5) * 1.4;
+          const r = 0.3 + 0.24 * rand();
+          const p = [Math.sin(a) * r, 0, Math.cos(a) * r];
+          let gap = Infinity;
+          for (const q of spots) gap = Math.min(gap, Math.hypot(p[0] - q[0], p[2] - q[2]));
+          if (gap > bestGap) {
+            bestGap = gap;
+            best = p;
+          }
+          if (gap > 0.13) break;
+        }
+        // A scale that lands on others lies a little higher, on top of them.
+        const under = spots.filter((q) => Math.hypot(best[0] - q[0], best[2] - q[2]) < 0.1).length;
+        spots.push(best);
+        sc.land = [best[0], floor + 0.015 + 0.022 * Math.min(3, under), best[2]];
+        sc.tb = 1.35 + 1.8 * rank + 0.06 * rand();
+        sc.fall = 0.3 + 0.35 * Math.sqrt(Math.max(0, sc.p[1] - floor));
+        sc.back = 4.3 + 1.2 * (1 - rank) + 0.05 * rand();
+        sc.spin = rand() * TAU;
+        sc.tumble = unit([rand() - 0.5, 0, rand() - 0.5]);
+        sc.flip = rand() < 0.5;
+      });
       // Winged seeds (hidden until the scales open): a dark seed on a
       // papery wing, each a token, built on the cone where it slips out.
       const seeds = [];
-      for (let i = 0; i < 16; i++) {
+      for (let i = 0; i < CONE_SEEDS; i++) {
         const h = 0.3 + 0.5 * rand();
         const a = rand() * TAU;
         const r0 = radius(h) + 0.03;
         const p = [Math.sin(a) * r0, Y0 + HT * h, Math.cos(a) * r0];
-        const tok = { kind: "token", params: [i, 0], pattern: false, weight: 4 };
+        const tok = { kind: "token", params: [loose.length + i, 0], pattern: false, weight: 4 };
         const out = [Math.sin(a), 0, Math.cos(a)];
         k.add(k.ellipsoid(0.022, 0.012, 0.016), {
           ...tok,
@@ -4059,7 +4172,7 @@ export const RECIPES = {
           dir: rand() < 0.5 ? -1 : 1,
         });
       }
-      k.data = { seeds };
+      k.data = { seeds, loose };
       k.fitMorphs = false;
     },
   },
