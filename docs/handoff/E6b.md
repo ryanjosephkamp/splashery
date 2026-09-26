@@ -58,8 +58,10 @@ draft PR https://github.com/ryanjosephkamp/splashery/pull/36.
   under 5 s), screenshots `tests/screenshots/e6b-*`, full test suite, standard screenshots restored,
   prettier clean. Only the school of fish's thumbnail changed (its fish are now separate pieces);
   every other toy rests and is framed exactly as on main.
-- Next: fix whatever the owner marks "Needs work" in this PR and post the new clips as `-r2` cards;
-  merge main into the branch when it moves.
+- 2026-09-26: the owner marked all 18 clips "Looks right" on the Effect review page. Main merged
+  again (E4-finish #37 and the Operator's #39 and #40), with no conflicts; TOY-PLAN.md regenerated
+  and unchanged.
+- Next: the PR waits for the owner's merge; merge main into the branch whenever it moves.
 
 ## Notes
 
