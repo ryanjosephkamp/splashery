@@ -634,10 +634,8 @@ export const TOY_SOUNDS = {
 
   // ---- Food -------------------------------------------------------------------------
   "ice-cream": { voice: "drip", f: 1000, n: 3, rate: 2.5 },
-  watermelon: [
-    { voice: "crack", f: 1400, bright: 0.2, decay: 0.8 },
-    { voice: "squish", at: 0.04, pitch: 1.1, bright: 0.7, decay: 1.2 },
-  ],
+  // The knife swings down; each chop and the fan are cues from the recipe.
+  watermelon: { voice: "whoosh", f: 500, to: 3, decay: 0.3, vol: 0.6 },
   "birthday-cake": {
     on: [
       { voice: "horn", f: 740, decay: 0.8 },
@@ -655,19 +653,27 @@ export const TOY_SOUNDS = {
     { voice: "whoosh", at: 0.1, f: 500, to: 3, decay: 0.4, vol: 0.6 },
     { voice: "slap", at: 0.8, f: 800, vol: 0.6 },
   ],
-  cupcake: [
-    { voice: "thud", f: 150, bright: 0.5, decay: 0.6 },
-    { voice: "patter", at: 0.1, f: 2900, n: 10, decay: 0.5, vol: 0.6 },
+  // The frosting flicks the cherry up; its plop and the sprinkles are cues.
+  cupcake: { voice: "boing", f: 260, to: 1.8, rate: 9, decay: 0.5, vol: 0.6 },
+  lollipop: [
+    { voice: "hum", f: 150, to: 1.8, bright: 0.2, decay: 1.8, vol: 0.8 },
+    { voice: "wind", at: 0.2, f: 900, rate: 3, decay: 1.2, vol: 0.5 },
   ],
-  lollipop: { voice: "hum", f: 180, to: 1.6, bright: 0.2, decay: 0.7 },
-  "candy-cane": { voice: "crack", f: 3000, bright: 0.9, decay: 0.6 },
-  macarons: { voice: "wood", notes: "E6 G6 E6", step: 0.11, decay: 0.5, vol: 0.6 },
+  // A creak as it twists; the snaps and the mends are cues.
+  "candy-cane": { voice: "squeak", f: 520, to: 1.25, decay: 3, vol: 0.35 },
+  // A hop; each landing is a cue.
+  macarons: { voice: "whoosh", f: 900, to: 1.6, decay: 0.3, vol: 0.4 },
   "gummy-bear": [
     { voice: "squeak", f: 700, to: 1.6, decay: 2, vol: 0.5 },
     { voice: "boing", at: 0.3, f: 200, to: 1.8, rate: 12 },
   ],
   pretzel: { voice: "squish", pitch: 0.7, bright: 0.2, decay: 2 },
-  croissant: { voice: "ding", f: "A6", decay: 1.3 },
+  // Flaky crust crackling as it is sliced open; the butter's sizzle and the
+  // top settling back are cues.
+  croissant: [
+    { voice: "crackle", f: 2400, n: 9, decay: 0.5, vol: 0.6 },
+    { voice: "tear", at: 0.05, f: 1400, to: 1.3, decay: 0.5, vol: 0.4 },
+  ],
   pizza: {
     on: { voice: "tear", f: 700, to: 0.5, decay: 1.6, bright: 0.3 },
     off: { voice: "thud", f: 120, bright: 0.4, decay: 0.8 },
@@ -692,7 +698,10 @@ export const TOY_SOUNDS = {
     off: { voice: "clack", notes: "E6 E6", step: 0.15, decay: 1.2, bright: 0.2 },
   },
   coffee: { voice: "glass", notes: "A6 C7 A6 C7 A6", step: 0.18, decay: 0.3 },
-  apple: { voice: "crunch", f: 2400, n: 12, decay: 0.9, bright: 0.6 },
+  apple: {
+    on: { voice: "crunch", f: 2400, n: 12, decay: 0.9, bright: 0.6 },
+    off: { voice: "pop", f: 520, decay: 1.2, vol: 0.6 },
+  },
   banana: { voice: "tear", f: 900, to: 1.5, decay: 1.4, bright: 0.3 },
   orange: [
     { voice: "squish", pitch: 1.3, bright: 0.9, decay: 0.7 },
@@ -703,9 +712,12 @@ export const TOY_SOUNDS = {
     { voice: "wood", f: 380, decay: 1.2 },
     { voice: "crunch", f: 1100, n: 6, decay: 0.5, vol: 0.6 },
   ],
-  cherries: { voice: "pop", notes: "G5 C6", step: 0.16, decay: 1.1 },
-  grapes: { voice: "drip", f: 620, n: 6, rate: 11, decay: 1.2 },
-  avocado: { voice: "wood", f: 240, decay: 1.6, bright: 0.2 },
+  // The flick; each knock of the pair is a cue.
+  cherries: { voice: "pluck", f: "C5", decay: 0.4, bright: 0.2, vol: 1 },
+  // A rustle as the bunch shakes; each grape's plop is a cue.
+  grapes: { voice: "rattle", f: 900, n: 5, decay: 0.7, vol: 0.5 },
+  // The stone pops out; its thocks as it lands are cues.
+  avocado: { voice: "pop", f: 330, decay: 1, vol: 0.7 },
 
   // ---- Toys -------------------------------------------------------------------------
   bricks: { voice: "clack", notes: "D6 - D6", step: 0.08, decay: 0.6, bright: 0.3 },
