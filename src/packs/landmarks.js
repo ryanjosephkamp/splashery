@@ -640,14 +640,17 @@ function monumentBuild(k) {
     { ...shadow, flat: 0.2, pattern: false, color: (c) => grass(c, "#62a34a") },
   );
   // The sun that casts it, built at noon behind the monument (hidden at
-  // rest; drive() carries it along its arc).
+  // rest; drive() carries it along its arc, and it fades in and out by
+  // channel 1 at sunrise and sunset).
   const sun = k.part("sun", { pivot: monSun(0.5) });
+  const sunFade = { kind: "fade", channel: 1, params: [0.02, -0.4] };
   k.add(k.sphere(0.065), {
     part: sun,
     pos: monSun(0.5),
     weight: 4,
     pattern: false,
     fit: false,
+    ...sunFade,
     color: (c) => keep(mix("#fff6c2", "#ffd24a", 0.5 - 0.5 * c.n[1])),
   });
   k.cloud({ share: 0.006, size: 2.4, pattern: false, part: sun, fit: false }, (rand) => {
@@ -656,6 +659,7 @@ function monumentBuild(k) {
       p: add(monSun(0.5), mul(d, 0.07 + 0.06 * Math.sqrt(rand()))),
       color: "#ffe27a",
       opacity: 0.22,
+      ...sunFade,
     };
   });
   for (let i = 0; i < 50; i++) {
@@ -3890,12 +3894,9 @@ export const RECIPES = {
       const s = progress(c.day) * MON_SECS;
       const u = on ? easeInOut(band(s, 0.2, MON_SECS - 0.2)) : 0;
       const up = on ? band(u, 0, 0.1) * (1 - band(u, 0.9, 1)) : 0;
-      out.morph = [0.25 + 0.5 * u];
+      out.morph = [0.25 + 0.5 * u, up];
       out.glow = [-0.36, -0.34, -0.27, up];
-      out.parts.sun = {
-        offset: sub(monSun(u), monSun(0.5)),
-        visible: up > 0.01 ? Math.min(1, up * 1.4) : 0,
-      };
+      out.parts.sun = { offset: sub(monSun(u), monSun(0.5)), visible: up > 0.001 ? 1 : 0 };
       out.amount = 1 + 3 * (on ? band(s, 0, 0.6) * (1 - band(s, MON_SECS - 1.2, MON_SECS)) : 0);
     },
     build: monumentBuild,

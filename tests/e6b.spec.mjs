@@ -71,7 +71,7 @@ test("the frog's tongue reaches the fly and carries it into the mouth", async ()
     const tongue = out.morph?.[0] ?? 0;
     const fly = out.parts.fly;
     if (tongue > 0.99 && fly.visible > 0.5 && Math.hypot(...fly.offset) < 0.03) caught = true;
-    if (caught && s > 1.45 && fly.visible === 0) swallowed = true;
+    if (caught && s > 1.6 && fly.visible === 0) swallowed = true;
   });
   expect(caught).toBe(true);
   expect(swallowed).toBe(true);

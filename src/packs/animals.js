@@ -1660,7 +1660,7 @@ export const RECIPES = {
       const ph = s * TAU * 1.1;
       out.morph = [0, 1, 2].map((j) => amp * Math.sin(ph - (j * TAU) / 3));
       out.morph.push(amp);
-      out.body = { offset: vec.mul([0.85, 0, -0.52], 0.1 * Math.sin(Math.PI * (on ? band(s, 0.2, 4.4) : 0))) }; // prettier-ignore
+      out.body = { offset: vec.mul([0.85, 0, -0.52], 0.15 * Math.sin(Math.PI * (on ? band(s, 0.2, 4.4) : 0))) }; // prettier-ignore
     },
     build(k, o) {
       const pal = {
@@ -1708,7 +1708,7 @@ export const RECIPES = {
       for (const sp of spines) {
         const a = Math.atan2(sp.base[0], sp.base[2]);
         sp.side = [Math.cos(a), 0, -Math.sin(a)];
-        sp.tilt = vec.unit(vec.add(vec.mul(sp.dir, Math.cos(0.42)), vec.mul(sp.side, Math.sin(0.42)))); // prettier-ignore
+        sp.tilt = vec.unit(vec.add(vec.mul(sp.dir, Math.cos(0.6)), vec.mul(sp.side, Math.sin(0.6)))); // prettier-ignore
         sp.ch = Math.floor((a / TAU + 0.5) * 12) % 3;
       }
       k.cloud({ share: 0.55, size: 0.55 }, (rand, i) => {
@@ -1768,8 +1768,8 @@ export const RECIPES = {
       // their eyes), and it croaks twice with its throat sac.
       const on = c.snap > 0;
       const s = progress(c.snap) * FROG.secs;
-      const jaw = on ? FROG.open * easeOut(band(s, 0.92, 1.02)) * (1 - easeInOut(band(s, 1.44, 1.6))) : 0; // prettier-ignore
-      const tongue = on ? easeOut(band(s, 1.0, 1.1)) * (1 - easeInOut(band(s, 1.18, 1.42))) : 0;
+      const jaw = on ? FROG.open * easeOut(band(s, 0.92, 1.02)) * (1 - easeInOut(band(s, 1.62, 1.78))) : 0; // prettier-ignore
+      const tongue = on ? easeOut(band(s, 1.0, 1.1)) * (1 - easeInOut(band(s, 1.34, 1.6))) : 0;
       out.parts.jaw = { angle: jaw };
       out.morph = [tongue];
       // The fly: in from the right on a wobbly path, a hover, then carried
@@ -1790,11 +1790,11 @@ export const RECIPES = {
       out.parts.fly = {
         offset: vec.sub(fp, FROG.catch),
         quat: quatAxisAngle([0, 1, 0], 0.4 * Math.sin(s * 9)),
-        visible: on && s < 1.4 ? 1 : 0,
+        visible: on && s < 1.58 ? 1 : 0,
       };
-      out.parts.eyes = { offset: [0, -0.065 * (on ? band(s, 1.65, 1.85) * (1 - band(s, 2.05, 2.3)) : 0), 0] }; // prettier-ignore
+      out.parts.eyes = { offset: [0, -0.065 * (on ? band(s, 1.8, 2.0) * (1 - band(s, 2.2, 2.45)) : 0), 0] }; // prettier-ignore
       const croak = (a) => Math.sin(Math.PI * band(s, a, a + 0.36));
-      const sac = on ? Math.max(croak(2.45), croak(2.95)) : 0;
+      const sac = on ? Math.max(croak(2.55), croak(3.05)) : 0;
       out.parts.sac = { scale: 0.2 + 0.8 * sac, visible: sac > 0.01 ? 1 : 0 };
     },
     build(k, o) {

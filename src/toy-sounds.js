@@ -962,10 +962,10 @@ export const TOY_SOUNDS = {
   frog: [
     { voice: "buzz", f: 230, rate: 13, decay: 1.25, vol: 0.4 },
     { voice: "whoosh", at: 0.98, f: 1400, to: 2, decay: 0.25, vol: 0.6 },
-    { voice: "pop", at: 1.4, f: 500, vol: 0.6 },
-    { voice: "gloop", at: 1.7, f: 140, vol: 0.7 },
-    { voice: "ribbit", at: 2.45, f: 320 },
-    { voice: "ribbit", at: 2.95, f: 300 },
+    { voice: "pop", at: 1.56, f: 500, vol: 0.6 },
+    { voice: "gloop", at: 1.82, f: 140, vol: 0.7 },
+    { voice: "ribbit", at: 2.55, f: 320 },
+    { voice: "ribbit", at: 3.05, f: 300 },
   ],
   penguin: { voice: "squawk", f: 420 },
   owl: [
