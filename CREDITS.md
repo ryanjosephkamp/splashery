@@ -87,6 +87,27 @@ and the boombox are painted out (see `tools/models.json`).
 | Chess set        | [Chess Set](https://polyhaven.com/a/chess_set)                           | Riley Queen                  | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | Horse statue     | [Horse Statue 01](https://polyhaven.com/a/horse_statue_01)               | Rico Cilliers                | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 
+### Made from one photo with an image-to-3D model (lane G)
+
+Each of these started as a single photo (CC0 or CC BY, the licence checked on its Wikimedia Commons
+page on 27 September 2026, with no brands or logos). `tools/image-to-3d.mjs` sent the photo, shrunk
+to 1024 px, to the public [TRELLIS Space](https://huggingface.co/spaces/trellis-community/TRELLIS)
+on Hugging Face, which cut out the background (rembg with the u2net model, Apache-2.0) and generated
+3D Gaussians with [TRELLIS](https://github.com/microsoft/TRELLIS) (model
+[microsoft/TRELLIS-image-large](https://huggingface.co/microsoft/TRELLIS-image-large), MIT). The MIT
+licence puts no terms on what the model makes, so each toy keeps its photo's licence and credit.
+`tools/prepare-assets.mjs` then packs it like the scans. The sides the photo does not show are the
+model's guess.
+
+| Toy          | Photo                                                                                                  | Photographer | Licence                                                       |
+| ------------ | ------------------------------------------------------------------------------------------------------ | ------------ | ------------------------------------------------------------- |
+| Real pencil  | [Kleiner Bleistift](<https://commons.wikimedia.org/wiki/File:Kleiner_Bleistift_(40045317711).jpg>)     | Tim Reckmann | [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/)     |
+| Real tin can | [Can opened with side opener](https://commons.wikimedia.org/wiki/File:Can_opened_with_side_opener.jpg) | Ll1324       | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+
+The Real pencil's yellow paint and the Real tin can's peaches label are painted over each scan's own
+shading by `tools/g-looks.mjs`. The label is an original design drawn by that tool for Splashery,
+released as CC0; it copies no product's label.
+
 ## Procedural toys
 
 The Jelly blob, Donut, Neon knot and Tiny planet (a tribute to Splashery v1) are generated in the
