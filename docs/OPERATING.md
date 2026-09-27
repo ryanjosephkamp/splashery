@@ -119,8 +119,10 @@ tap code in `src/motion.js`); no other lane edits those parts.
   `e5-watermelon-390x844.png`).
 - Every full test run rewrites twelve standard screenshots (`app-*`, `balls-*`, `embed-400x300`,
   `make-help-*`, `shelf-*`, `v3-*`; the list is `STANDARD_SHOTS` in `tools/upkeep.mjs`). Lanes never
-  commit them: after a full run, `node tools/upkeep.mjs --restore-shots` puts them back. The
-  Operator refreshes them on main.
+  commit them: after a full run, `node tools/upkeep.mjs --restore-shots` puts them back. A full run
+  also rewrites other lanes' screenshots (`e5-*`, `e6a-*` and so on): put back every screenshot your
+  branch didn't change with `git checkout -- tests/screenshots/` (then re-add your own). The
+  Operator refreshes the standard ones on main.
 
 ## The Effect review page
 
@@ -148,7 +150,8 @@ the owner's note gets the old card's id plus `-r2` (then `-r3`), in the old card
 
 1. Render each clip: `node tools/effect-clip.mjs --strip=8 --size=320 <toy id>:<seconds>` (the
    server must be running; `--taps`, `--opt=key=value` and `--pgn=` are in the tool's header). It
-   writes a looping GIF. Watch it before posting.
+   writes a looping GIF. Watch it before posting. For a drag, use `node tools/drag-clip.mjs`
+   instead.
 2. Read the page once in the session (a session must read an artifact before it can add to it):
    Artifact tool, `action: "read"`, `url` the page's link.
 3. Upload the clips: Artifact tool, `action: "publish"`, `url` the page's link, `asset: true`,

@@ -16,6 +16,36 @@ had not settled 3 s after its tap) and "a scan rig moves a part of a captured to
 console warning, like the rare engine warning in HANDOFF.md). Keep `test-results/` if either comes
 back.
 
+### G AI image-to-3D trial (PR #43, merged 2026-09-27)
+
+- A free image-to-3D Space on Hugging Face (TRELLIS, MIT) turns one photo into Gaussian splats in
+  about 30 seconds. `tools/image-to-3d.mjs` drives it with plain fetch, and `tools/splat-views.mjs`
+  renders a result from several sides.
+- Shipped: the real pencil (a CC BY 2.0 photo; a flick spins it flat) and the real tin can (a CC0
+  photo; it spins on its rim and drops flat). `tools/g-looks.mjs` paints their default looks over
+  the scan's own shading: a classic yellow pencil, and an original, brand-free "Peaches" label.
+- Not shipped: the fountain pen (the thin nib broke into spikes); the soda can, running shoe, hoodie
+  and red water bottle (no usable CC0 photo without a brand, a person or a watermark). The clear
+  water bottle waits on the free GPU quota.
+- Review: the owner asked for real-looking defaults instead of the bare scans, then approved them;
+  Peaches stays the can's default. The first worker was replaced by a fresh session for the fixes.
+- Known issues: the can photo's glare still shows faintly; the pencil's guessed underside is a
+  darker yellow; the pencil is a stubby one, as in the photo.
+
+### F Touch and drag (PRs #45 and #42, merged 2026-09-27)
+
+- Four toys you play with your finger: the puzzle cube (a real 3×3 whose layers follow a swipe and
+  snap to quarter turns; a tap scrambles or solves it), Newton's cradle (drag any ball out and let
+  go), the chess set (tap a piece, then a legal square, while the game is paused; the game carries
+  on from there) and the bricks (18 bricks that build a new model on each tap).
+- The engine PR (#45) re-sorts tokens that land far from where they were built (`out.resort`), and
+  the game panel follows a game started from the board.
+- A recipe's `drag` can name its plane, and a drag beside a draggable toy still turns the view.
+  `tools/drag-clip.mjs` renders drags as clips.
+- Review: all four looked right at once.
+- Known issues: a half-turned cube layer can show a seam until it lands; the cube's button reads
+  "Scramble or solve"; brick colors are random per model.
+
 ### E6a Balls (PR #38, merged 2026-09-26)
 
 - 20 balls got their own tap and sound, with real arcs, spin and bounciness (a dead squash ball, a
