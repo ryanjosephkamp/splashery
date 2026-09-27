@@ -271,6 +271,55 @@ test.describe("equation reader", () => {
   });
 });
 
+// ---- Circle and waves, and Fourier circles: typed paths, words and every letter -------
+
+test("the circle's path and the Fourier words read what people type", async () => {
+  const { RECIPES } = await import("../src/packs/maths.js");
+  const uc = RECIPES["unit-circle"].input;
+  expect(await uc.read("x = cos t, y = sin 2t")).toEqual({ path: "custom", eq: "x = cos t, y = sin 2t" }); // prettier-ignore
+  expect(await uc.read("r = 1 + cos θ")).toEqual({ path: "custom", eq: "r = 1 + cos theta" });
+  await expect(uc.read("y = x")).rejects.toThrow(/goes round/);
+  await expect(uc.read("x = 1/t, y = t")).rejects.toThrow(/finite/);
+  const fc = RECIPES["fourier-circles"].input;
+  expect(await fc.read("Ryan")).toEqual({ shape: "words", words: "RYAN" });
+  expect(await fc.read("hi ❤️ ★")).toEqual({ shape: "words", words: "HI # *" });
+  expect(await fc.read("I <3 U")).toEqual({ shape: "words", words: "I # U" });
+  expect(await fc.read("x = cos t, y = sin(3t)")).toEqual({ shape: "custom", eq: "x = cos t, y = sin(3t)" }); // prettier-ignore
+  await expect(fc.read("Ryan!")).rejects.toThrow(/can't be drawn/);
+  await expect(fc.read("😀")).rejects.toThrow(/can't be drawn/);
+  await expect(fc.read("toolongword")).rejects.toThrow(/more than 6/);
+  await expect(fc.read("   ")).rejects.toThrow(/Type a word/);
+  await expect(fc.read("y = x^2")).rejects.toThrow(/closed curve/);
+});
+
+test("every letter, digit, heart and star builds a finite Fourier drawing, in 2D and 3D", async () => {
+  const { RECIPES } = await import("../src/packs/maths.js");
+  const { buildRecipe } = await import("../src/kit.js");
+  const { applyClay } = await import("../src/generators.js");
+  const { resolveOptions } = await import("../src/player.js");
+  const recipe = RECIPES["fourier-circles"];
+  const all = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#*";
+  for (let i = 0; i < all.length; i += 6)
+    for (const view of ["2d", "3d"]) {
+      const words = all.slice(i, i + 6);
+      const options = resolveOptions(recipe, { shape: "words", words, view, circles: 60 });
+      const it = buildRecipe(recipe, { seed: 1, count: 20000, options }, applyClay);
+      let r = it.next();
+      while (!r.done) r = it.next();
+      const { buf, data } = r.value.kit;
+      expect(data.fourier.set.chains.length, words).toBe(words.length);
+      let bad = 0;
+      for (let j = 0; j < buf.count * 3; j++) if (!Number.isFinite(buf.pos[j])) bad++;
+      expect(bad, words).toBe(0);
+      // The drive runs finite for a frame mid-spin.
+      const out = { parts: {}, tokens: null, morph: null, cues: [] };
+      recipe.drive(0, { spin: 0.5 }, out, { data });
+      for (const tk of out.tokens.filter(Boolean))
+        for (const v of [...(tk.offset || []), ...(tk.quat || [])])
+          expect(Number.isFinite(v)).toBe(true);
+    }
+});
+
 // ---- The plotters' input panel, in the app ------------------------------------------
 
 test("the graph plotter draws a typed curve, keeps it through a link, and keeps the last good curve after bad input", async ({
