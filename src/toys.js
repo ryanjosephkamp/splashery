@@ -2275,6 +2275,24 @@ export const TOYS = [
     tags: "spiral shell logarithmic conch snail growth",
     camera: { yaw: 0.5, pitch: 0.85, roll: 0, distance: 3.8 },
   },
+  {
+    id: "graph-plotter",
+    label: "Graph plotter",
+    category: "maths",
+    kind: "kit",
+    pack: "maths",
+    tags: "graph plot curve function equation type sine polar parametric cardioid rose butterfly heart lissajous spiral",
+    camera: { yaw: 0, pitch: 0.08, roll: 0, distance: 3.5 },
+  },
+  {
+    id: "surface-plotter",
+    label: "Surface plotter",
+    category: "maths",
+    kind: "kit",
+    pack: "maths",
+    tags: "surface plot 3d function equation type saddle sombrero egg crate gaussian rosenbrock banana",
+    camera: { yaw: 0.55, pitch: 0.55, roll: 0, distance: 3.9 },
+  },
 
   // ---- Pack: objects ----
   {

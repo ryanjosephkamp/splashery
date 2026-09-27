@@ -3,6 +3,7 @@
 // itself inside out, and the solids and the Sierpinski tetrahedron come
 // apart when tapped. Loaded on demand.
 
+import { readCurve, readSurface, EquationError } from "../equation.js";
 import {
   mix,
   shade,
@@ -1923,3 +1924,941 @@ export const RECIPES = {
     },
   },
 };
+
+// ---- Math you can type (lane Math) --------------------------------------------------
+// The graph plotter, the surface plotter, the circle and its waves, the
+// Fourier circles and the Pythagoras proof. The plotters read what people
+// type with src/equation.js (no eval), and keep the typed text in a hidden
+// option, so it is saved in links.
+
+// Per-toy memory for drive() (the sounds' clocks), keyed by the control
+// state object, which is new each time a toy loads.
+const MEM = new WeakMap();
+function mem(c) {
+  let m = MEM.get(c);
+  if (!m) MEM.set(c, (m = {}));
+  return m;
+}
+// Seconds since the tap of pulse `key` lasting `secs`, or -1 at rest.
+const since = (c, key, secs) => (c[key] > 0 ? (1 - c[key]) * secs : -1);
+// Plays each [at, spec] once as the effect's clock e passes `at`.
+function cuesAt(c, e, list, out, slot = "cue") {
+  const m = mem(c);
+  const was = m[slot] ?? -1;
+  m[slot] = e;
+  if (e < 0 || e < was) return;
+  for (const [at, spec] of list) if (was < at && e >= at) out.cues.push(spec);
+}
+
+// A little lower-case bitmap font (5 x 7, like src/font.js) for the labels
+// and Euler's formula.
+const GLYPHS = {
+  a: "00000 00000 01110 00001 01111 10001 01111",
+  b: "10000 10000 10110 11001 10001 10001 11110",
+  c: "00000 00000 01110 10000 10000 10001 01110",
+  e: "00000 00000 01110 10001 11111 10000 01110",
+  i: "00100 00000 01100 00100 00100 00100 01110",
+  n: "00000 00000 10110 11001 10001 10001 10001",
+  o: "00000 00000 01110 10001 10001 10001 01110",
+  s: "00000 00000 01111 10000 01110 00001 11110",
+  x: "00000 00000 10001 01010 00100 01010 10001",
+  y: "00000 00000 10001 10001 01111 00001 01110",
+  z: "00000 00000 11111 00010 00100 01000 11111",
+  "θ": "01110 10001 10001 11111 10001 10001 01110",
+  "=": "00000 00000 11111 00000 11111 00000 00000",
+  "+": "00000 00100 00100 11111 00100 00100 00000",
+  "(": "00010 00100 01000 01000 01000 00100 00010",
+  ")": "01000 00100 00010 00010 00010 00100 01000",
+  " ": "00000 00000 00000 00000 00000 00000 00000",
+};
+// The pixel centres of a line of text: `h` is the glyph height; the text's
+// left end, baseline middle is at `at` in the XY plane (z = at[2]). Pieces of
+// the form "^(...)" are set small and raised (an exponent). Returns
+// [{ p, char }] with the index of each character.
+function textPixels(text, at, h) {
+  const out = [];
+  let x = at[0];
+  let sup = false;
+  let ci = 0;
+  for (let i = 0; i < text.length; i++) {
+    const ch = text[i];
+    if (ch === "^") {
+      sup = true;
+      continue;
+    }
+    if (sup && ch === "}") {
+      sup = false;
+      continue;
+    }
+    if (sup && ch === "{") continue;
+    const g = GLYPHS[ch];
+    const s = h / 7;
+    const px = sup ? s * 0.6 : s;
+    const y0 = at[1] + (sup ? h * 0.55 : 0) - (sup ? 0 : h / 2);
+    if (g) {
+      const rows = g.split(" ");
+      rows.forEach((row, r) => {
+        for (let q = 0; q < 5; q++)
+          if (row[q] === "1")
+            out.push({ p: [x + (q + 0.5) * px, y0 + (6.5 - r) * px, at[2]], char: ci, px });
+      });
+    }
+    x += 6 * px;
+    ci++;
+  }
+  return { pixels: out, width: x - at[0] };
+}
+// Splats for text pixels: a few per pixel, so the letters read as solid
+// strokes.
+function textCloud(k, pixels, opts, look) {
+  const per = 4;
+  k.cloud({ count: pixels.length * per, pattern: false, ...opts }, (rand, i) => {
+    const px = pixels[Math.floor(i / per)];
+    if (!px) return null;
+    const j = px.px * 0.45;
+    return {
+      p: [px.p[0] + (rand() - 0.5) * j, px.p[1] + (rand() - 0.5) * j, px.p[2]],
+      n: [0, 0, 1],
+      flat: 0.4,
+      size: (px.px / 0.02) * 1.1,
+      ...look(px, rand),
+    };
+  });
+}
+
+// A "nice" grid step for a span: 1, 2 or 5 times a power of ten.
+function niceStep(span, lines = 8) {
+  const raw = span / lines;
+  const p = Math.pow(10, Math.floor(Math.log10(raw)));
+  const m = raw / p;
+  return (m < 1.5 ? 1 : m < 3.5 ? 2 : m < 7.5 ? 5 : 10) * p;
+}
+function percentile(sorted, q) {
+  if (!sorted.length) return 0;
+  const i = Math.min(sorted.length - 1, Math.max(0, Math.round(q * (sorted.length - 1))));
+  return sorted[i];
+}
+// The parameter a over a slider position u in 0..1: lo at 0, a0 at the
+// middle, hi at 1 (straight lines in between).
+const aAt = (A, u) => (u < 0.5 ? A[0] + (A[1] - A[0]) * (u / 0.5) : A[1] + (A[2] - A[1]) * ((u - 0.5) / 0.5)); // prettier-ignore
+// The sweep's knots: a copy of the curve (or surface) is built at each and
+// morphs to the next, so the shape bends exactly through each knot.
+const SWEEP_KNOTS = 8;
+
+// ---- Graph plotter ------------------------------------------------------------------
+
+// The plot area on the board, in recipe units (4:3).
+const PLOT_W = 2.0;
+const PLOT_H = 1.5;
+const PLOT_Z = 0.045; // the curve's height in front of the board
+// Famous curves: the equation (read by src/equation.js, like a typed one),
+// the range of x, θ or t, and a's slider [lo, rest, hi]. `cycle`: a is an
+// angle and hi − lo a whole period, so the sweep runs one way round.
+const CURVES = [
+  { id: "sine", label: "Sine wave", eq: "y = a·sin(x)", a: [-1, 1, 2] },
+  { id: "bell", label: "Bell curve", eq: "y = exp(−x²/(2a²))/(a·√(2π))", range: [-4, 4], a: [0.5, 1, 1.8] }, // prettier-ignore
+  { id: "parabola", label: "Parabola", eq: "y = a·x²", range: [-3, 3], a: [-1, 0.5, 1.5] },
+  { id: "cubic", label: "Cubic", eq: "y = x³ − a·x", range: [-2.5, 2.5], a: [-1, 3, 5] },
+  { id: "quartic", label: "Double well", eq: "y = x⁴ − a·x²", range: [-2.4, 2.4], a: [-1, 3, 4.5] }, // prettier-ignore
+  { id: "tangent", label: "Tangent", eq: "y = tan(a·x)", a: [0.4, 1, 1.4] },
+  { id: "hyperbola", label: "Hyperbola", eq: "y = a/x", range: [-5, 5], a: [-2, 1, 3] },
+  { id: "exponential", label: "Exponential", eq: "y = e^(a·x)", range: [-3, 3], a: [-1, 1, 1.4] },
+  { id: "logarithm", label: "Logarithm", eq: "y = a·ln(x)", range: [-1, 8], a: [-1, 1, 2] },
+  { id: "sqrt", label: "Square root", eq: "y = a·√x", range: [-1, 9], a: [-1, 1, 1.5] },
+  { id: "sinc", label: "Sinc", eq: "y = sin(a·x)/x", range: [-15, 15], a: [0.5, 1, 2] },
+  { id: "damped", label: "Damped wave", eq: "y = e^(−x/5)·cos(a·x)", range: [0, 15], a: [0.5, 2, 3] }, // prettier-ignore
+  { id: "square-wave", label: "Square wave (Fourier)", eq: "y = sin x + a(sin 3x/3 + sin 5x/5 + sin 7x/7 + sin 9x/9)", a: [0, 1, 1.5] }, // prettier-ignore
+  { id: "beats", label: "Beats", eq: "y = sin(5x) + sin(a·5x)", a: [0.8, 0.9, 1.1] },
+  { id: "sigmoid", label: "S-curve (logistic)", eq: "y = 1/(1 + e^(−a·x))", range: [-6, 6], a: [0.3, 1, 4] }, // prettier-ignore
+  { id: "catenary", label: "Catenary (hanging chain)", eq: "y = a·cosh(x/a)", range: [-3, 3], a: [0.6, 1, 2] }, // prettier-ignore
+  { id: "witch", label: "Witch of Agnesi", eq: "y = 8a³/(x² + 4a²)", range: [-6, 6], a: [0.5, 1, 1.4] }, // prettier-ignore
+  { id: "wiggle", label: "x·sin(1/x)", eq: "y = x·sin(a/x)", range: [-1, 1], a: [0.5, 1, 2] },
+  { id: "circle", label: "Circle", eq: "r = a", a: [0.5, 1, 1.5] },
+  { id: "cardioid", label: "Cardioid", eq: "r = 1 + a·cos θ", a: [0.2, 1, 1.8] },
+  { id: "limacon", label: "Limaçon", eq: "r = a + 2cos θ", a: [0.5, 1, 3] },
+  { id: "rose", label: "Rose (8 petals)", eq: "r = cos(4θ + a·sin θ)", a: [-1, 0, 1] },
+  { id: "rose3", label: "Rose (3 petals)", eq: "r = sin(3θ) + a", range: [0, Math.PI], a: [-0.3, 0, 0.3] }, // prettier-ignore
+  { id: "butterfly", label: "Butterfly", eq: "r = e^(sin θ) − 2a·cos(4θ) + sin((2θ − π)/24)^5", range: [0, 12 * Math.PI], a: [0.5, 1, 1.25] }, // prettier-ignore
+  { id: "heart", label: "Heart", eq: "x = 16a·sin(t)³, y = a(13cos t − 5cos 2t − 2cos 3t − cos 4t)", a: [0.8, 1, 1.12] }, // prettier-ignore
+  { id: "lissajous", label: "Lissajous", eq: "x = sin(3t + a), y = sin(2t)", a: [Math.PI / 2 - Math.PI, Math.PI / 2, Math.PI / 2 + Math.PI], cycle: true }, // prettier-ignore
+  { id: "lissajous54", label: "Lissajous 5:4", eq: "x = sin(5t + a), y = sin(4t)", a: [-Math.PI, 0, Math.PI], cycle: true }, // prettier-ignore
+  { id: "archimedes", label: "Archimedean spiral", eq: "r = a·θ", range: [0, 6 * Math.PI], a: [0.6, 1, 1.4] }, // prettier-ignore
+  { id: "log-spiral", label: "Logarithmic spiral", eq: "r = e^(a·θ)", range: [-4 * Math.PI, 2.5 * Math.PI], a: [0.12, 0.18, 0.22] }, // prettier-ignore
+  { id: "hyperbolic-spiral", label: "Hyperbolic spiral", eq: "r = a/θ", range: [0.3, 8 * Math.PI], a: [0.6, 1, 1.4] }, // prettier-ignore
+  { id: "lemniscate", label: "Lemniscate (infinity)", eq: "x = cos t/(1 + sin(t)²), y = a·sin t·cos t/(1 + sin(t)²)", a: [-1, 1, 2] }, // prettier-ignore
+  { id: "astroid", label: "Astroid", eq: "x = cos(t)³, y = a·sin(t)³", a: [0.3, 1, 1.5] },
+  { id: "deltoid", label: "Deltoid", eq: "x = 2cos t + a·cos 2t, y = 2sin t − a·sin 2t", a: [0, 1, 1.5] }, // prettier-ignore
+  { id: "nephroid", label: "Nephroid", eq: "x = 3cos t − a·cos 3t, y = 3sin t − a·sin 3t", a: [0, 1, 1.5] }, // prettier-ignore
+  { id: "cycloid", label: "Cycloid", eq: "x = t − a·sin t, y = 1 − a·cos t", range: [-2 * Math.PI, 4 * Math.PI], a: [0.3, 1, 1.7] }, // prettier-ignore
+  { id: "spirograph", label: "Spirograph", eq: "x = 2cos t + a·cos(2t/3), y = 2sin t − a·sin(2t/3)", range: [0, 6 * Math.PI], a: [1, 2.5, 3.2] }, // prettier-ignore
+  { id: "epitrochoid", label: "Epitrochoid", eq: "x = 4cos t − a·cos 4t, y = 4sin t − a·sin 4t", a: [0.5, 1.5, 2.5] }, // prettier-ignore
+  { id: "involute", label: "Involute of a circle", eq: "x = cos t + a·t·sin t, y = sin t − a·t·cos t", range: [0, 5 * Math.PI], a: [0.6, 1, 1.4] }, // prettier-ignore
+  { id: "conic", label: "Conic sections", eq: "r = 1/(1 + a·cos θ)", a: [0, 0.5, 1.6] },
+  { id: "folium", label: "Folium of Descartes", eq: "x = 3a·t/(1 + t³), y = 3a·t²/(1 + t³)", range: [-8, 8], a: [0.6, 1, 1.4] }, // prettier-ignore
+  { id: "tractrix", label: "Tractrix", eq: "x = t − tanh t, y = a/cosh t", range: [-5, 5], a: [0.5, 1, 1.5] }, // prettier-ignore
+  { id: "freeth", label: "Freeth's nephroid", eq: "r = 1 + 2sin(a·θ/2)", range: [0, 4 * Math.PI], a: [0.8, 1, 1.2] }, // prettier-ignore
+];
+const CURVE_BY_ID = Object.fromEntries(CURVES.map((c) => [c.id, c]));
+// A typed equation's ranges and a's slider.
+const TYPED_RANGE = { y: [-2 * Math.PI, 2 * Math.PI], polar: [0, 2 * Math.PI], param: [0, 2 * Math.PI] }; // prettier-ignore
+const TYPED_A = [0, 1, 2];
+const CURVE_SAMPLES = 1600;
+
+// A curve's point at parameter u (x, θ or t) and a, or null.
+function curvePoint(parsed, u, a, b) {
+  const v = { x: u, t: u, "θ": u, a, b, y: 0, r: 0 };
+  let x;
+  let y;
+  if (parsed.kind === "y") {
+    x = u;
+    y = parsed.y(v);
+  } else if (parsed.kind === "polar") {
+    const r = parsed.r(v);
+    x = r * Math.cos(u);
+    y = r * Math.sin(u);
+  } else {
+    x = parsed.x(v);
+    y = parsed.y(v);
+  }
+  return Number.isFinite(x) && Number.isFinite(y) ? [x, y] : null;
+}
+
+// Everything the graph plotter draws for one curve: the window, the knots
+// of a and, for each knot, the curve's visible pieces on the board.
+const PLOT_CACHE = new Map();
+function curvePlot(o) {
+  const b = Number.isFinite(o.b) ? o.b : 1;
+  const famous = CURVE_BY_ID[o.curve];
+  const key = `${o.curve}|${o.curve === "custom" ? o.eq : ""}|${b}`;
+  if (PLOT_CACHE.has(key)) return PLOT_CACHE.get(key);
+  let spec = famous;
+  let parsed = null;
+  if (o.curve === "custom") {
+    try {
+      parsed = readCurve(o.eq);
+      spec = { id: "custom", label: "Your curve", eq: o.eq, range: TYPED_RANGE[parsed.kind], a: TYPED_A }; // prettier-ignore
+    } catch {
+      spec = null;
+    }
+  }
+  if (!spec) spec = CURVES[0];
+  if (!parsed) parsed = readCurve(spec.eq);
+  const plot = makePlot(parsed, spec, b);
+  if (!plot.ok && spec.id === "custom") {
+    // Nothing of a typed curve shows (from an old link, say): the sine.
+    const fallback = makePlot(readCurve(CURVES[0].eq), CURVES[0], 1);
+    PLOT_CACHE.set(key, fallback);
+    return fallback;
+  }
+  if (PLOT_CACHE.size > 40) PLOT_CACHE.clear();
+  PLOT_CACHE.set(key, plot);
+  return plot;
+}
+
+function makePlot(parsed, spec, b) {
+  const range = spec.range || TYPED_RANGE[parsed.kind];
+  const A = spec.a || TYPED_A;
+  const usesA = parsed.usesA;
+  const knots = usesA
+    ? Array.from({ length: SWEEP_KNOTS + 1 }, (_, j) => aAt(A, j / SWEEP_KNOTS))
+    : [A[1]];
+  // Samples at every knot (and the rest value).
+  const M = CURVE_SAMPLES;
+  const us = Array.from({ length: M + 1 }, (_, i) => range[0] + ((range[1] - range[0]) * i) / M);
+  const at = (a) => us.map((u) => curvePoint(parsed, u, a, b));
+  const rest = at(A[1]);
+  const all = usesA ? knots.map((a) => at(a)) : [rest];
+  // The window: robust bounds over every knot (a few wild points, near an
+  // asymptote, are left off the board).
+  const xs = [];
+  const ys = [];
+  for (const list of all)
+    for (const p of list) {
+      if (!p) continue;
+      xs.push(p[0]);
+      ys.push(p[1]);
+    }
+  if (xs.length < 8) return { ok: false };
+  xs.sort((p, q) => p - q);
+  ys.sort((p, q) => p - q);
+  const cut = parsed.kind === "y" ? 0.03 : 0.004;
+  let x0;
+  let x1;
+  let y0 = percentile(ys, cut);
+  let y1 = percentile(ys, 1 - cut);
+  if (parsed.kind === "y") {
+    x0 = range[0];
+    x1 = range[1];
+    if (y1 - y0 < 1e-6) {
+      y0 -= 1;
+      y1 += 1;
+    }
+    const pad = (y1 - y0) * 0.1;
+    y0 -= pad;
+    y1 += pad;
+  } else {
+    x0 = percentile(xs, cut);
+    x1 = percentile(xs, 1 - cut);
+    const cx = (x0 + x1) / 2;
+    const cy = (y0 + y1) / 2;
+    // Equal scales, so circles stay round.
+    let half = Math.max((x1 - x0) / PLOT_W, (y1 - y0) / PLOT_H) * 0.56;
+    if (!(half > 1e-6)) half = 1;
+    x0 = cx - half * PLOT_W;
+    x1 = cx + half * PLOT_W;
+    y0 = cy - half * PLOT_H;
+    y1 = cy + half * PLOT_H;
+  }
+  const sx = PLOT_W / (x1 - x0);
+  const sy = PLOT_H / (y1 - y0);
+  const toBoard = (p) => [(p[0] - x0) * sx - PLOT_W / 2, (p[1] - y0) * sy - PLOT_H / 2, PLOT_Z];
+  const inside = (P) => Math.abs(P[0]) <= PLOT_W / 2 + 1e-9 && Math.abs(P[1]) <= PLOT_H / 2 + 1e-9;
+  // The visible pieces of the curve for one list of samples: a jump across
+  // most of the board (an asymptote) or a missing point breaks it.
+  const pieces = (list) => {
+    const out = [];
+    let cur = null;
+    list.forEach((p, i) => {
+      const P = p && toBoard(p);
+      const ok = P && inside(P);
+      if (ok && cur && Math.hypot(P[0] - cur[cur.length - 1].P[0], P[1] - cur[cur.length - 1].P[1]) < 0.35) { // prettier-ignore
+        cur.push({ i, P });
+        return;
+      }
+      if (cur && cur.length > 1) out.push(cur);
+      cur = ok ? [{ i, P }] : null;
+    });
+    if (cur && cur.length > 1) out.push(cur);
+    return out;
+  };
+  const restPieces = pieces(rest);
+  const knotPieces = usesA ? all.map(pieces) : [];
+  const length = (ps) => ps.reduce((s, pc) => s + pc.reduce((t, q, j) => (j ? t + Math.hypot(q.P[0] - pc[j - 1].P[0], q.P[1] - pc[j - 1].P[1]) : 0), 0), 0); // prettier-ignore
+  const L = length(restPieces);
+  if (!(L > 0.05)) return { ok: false };
+  // The pen's path: points along the rest curve by arc length (0..1), with
+  // a flag where the pen lifts to jump a gap.
+  const path = [];
+  let run = 0;
+  for (const pc of restPieces) {
+    pc.forEach((q, j) => {
+      if (j) run += Math.hypot(q.P[0] - pc[j - 1].P[0], q.P[1] - pc[j - 1].P[1]);
+      if (j % 4 === 0 || j === pc.length - 1) path.push([run / L, q.P[0], q.P[1], j === 0 ? 1 : 0]); // prettier-ignore
+    });
+  }
+  // The grid.
+  const stepX = niceStep(x1 - x0, parsed.kind === "y" ? 10 : 8);
+  const stepY = parsed.kind === "y" ? niceStep(y1 - y0, 7) : stepX;
+  const grid = [];
+  for (let g = Math.ceil(x0 / stepX) * stepX; g <= x1 + 1e-9; g += stepX) {
+    const X = (g - x0) * sx - PLOT_W / 2;
+    grid.push({ a: [X, -PLOT_H / 2], b: [X, PLOT_H / 2], axis: Math.abs(g) < stepX * 1e-6 });
+  }
+  for (let g = Math.ceil(y0 / stepY) * stepY; g <= y1 + 1e-9; g += stepY) {
+    const Y = (g - y0) * sy - PLOT_H / 2;
+    grid.push({ a: [-PLOT_W / 2, Y], b: [PLOT_W / 2, Y], axis: Math.abs(g) < stepY * 1e-6 });
+  }
+  return {
+    ok: true,
+    spec,
+    parsed,
+    b,
+    A,
+    usesA,
+    cycle: !!spec.cycle,
+    knots,
+    us,
+    range,
+    rest: restPieces,
+    knotPieces,
+    L,
+    path,
+    grid,
+    toBoard,
+    inside,
+    point: (u, a) => curvePoint(parsed, u, a, b),
+  };
+}
+
+// The pen's place at s (0..1 along the curve): [x, y, lifted].
+function penAt(path, s) {
+  if (!path.length) return [0, 0];
+  let lo = 0;
+  let hi = path.length - 1;
+  if (s <= path[0][0]) return [path[0][1], path[0][2]];
+  if (s >= path[hi][0]) return [path[hi][1], path[hi][2]];
+  while (hi - lo > 1) {
+    const mid = (lo + hi) >> 1;
+    if (path[mid][0] <= s) lo = mid;
+    else hi = mid;
+  }
+  const p = path[lo];
+  const q = path[hi];
+  if (q[3]) return [q[1], q[2]]; // a jump: the pen hops to the next piece
+  const f = (s - p[0]) / (q[0] - p[0] || 1);
+  return [p[1] + (q[1] - p[1]) * f, p[2] + (q[2] - p[2]) * f];
+}
+
+// Splats along a curve's pieces, evenly by length. Each gets its place, its
+// parameter u (interpolated between samples) and its arc fraction s.
+function alongPieces(pieces, us, n, rand, i) {
+  // Cumulative lengths (cached on the pieces).
+  if (!pieces.cum) {
+    const cum = [];
+    let run = 0;
+    for (const pc of pieces)
+      pc.forEach((q, j) => {
+        if (j) run += Math.hypot(q.P[0] - pc[j - 1].P[0], q.P[1] - pc[j - 1].P[1]);
+        cum.push({ run, q, first: j === 0 });
+      });
+    pieces.cum = cum;
+    pieces.total = run;
+  }
+  const cum = pieces.cum;
+  const target = ((i + rand()) / n) * pieces.total;
+  let lo = 0;
+  let hi = cum.length - 1;
+  while (hi - lo > 1) {
+    const mid = (lo + hi) >> 1;
+    if (cum[mid].run <= target) lo = mid;
+    else hi = mid;
+  }
+  const A = cum[lo];
+  const B = cum[hi];
+  if (B.first) return { P: A.q.P, u: us[A.q.i], s: A.run / pieces.total, d: [1, 0] };
+  const f = (target - A.run) / (B.run - A.run || 1);
+  const dl = B.run - A.run || 1;
+  return {
+    d: [(B.q.P[0] - A.q.P[0]) / dl, (B.q.P[1] - A.q.P[1]) / dl],
+    P: [A.q.P[0] + (B.q.P[0] - A.q.P[0]) * f, A.q.P[1] + (B.q.P[1] - A.q.P[1]) * f, PLOT_Z],
+    u: us[A.q.i] + (us[B.q.i] - us[A.q.i]) * f,
+    s: target / pieces.total,
+  };
+}
+
+// What the plotter shows (for the input panel).
+const PLOT_SHOWN = { label: "" };
+// The curve's colour along its parameter (the same on every copy, so the
+// copies swap without a flicker).
+const CURVE_RAMP = ["#ffd166", "#ff9f43", "#ff6b6b", "#f06595", "#cc5de8"];
+
+const GRAPH_INPUT = {
+  title: "Your own curve",
+  placeholder: "y = a·sin(b·x), r = 1 + cos θ, or x = cos 3t, y = sin 2t",
+  button: "Draw it",
+  fileButton: "Open a text file…",
+  accept: ".txt",
+  note: "Type y = … (x from −2π to 2π), r = … with θ (a polar curve, one turn), or x = …, y = … with t (a curve in t, 0 to 2π). Use + − × ÷ ^, brackets, sin, cos, tan, exp, log, √, abs, pi and e. Put a in it to see it bend when you tap; b is the b slider.",
+  async read(text) {
+    const eq = String(text || "")
+      .replace(/\s+/g, " ")
+      .trim();
+    const parsed = readCurve(eq);
+    const plot = makePlot(parsed, { id: "custom", eq, a: TYPED_A }, 1);
+    if (!plot.ok) throw new EquationError("none of it lands on the grid. Try another.");
+    return { curve: "custom", eq };
+  },
+  shown: () => PLOT_SHOWN.label,
+};
+
+// A flat ribbon along a curve's pieces, facing +Z, sampled by length.
+// Samples carry u (the curve's parameter there), s (the arc fraction) and
+// t (the parameter as a fraction of its range, for colour).
+function ribbon(pieces, us, width) {
+  alongPieces(pieces, us, 1, () => 0, 0); // fills the cumulative lengths
+  const u0 = us[0];
+  const u1 = us[us.length - 1];
+  return {
+    area: pieces.total * width,
+    thick: width / 2,
+    sample(rand) {
+      const q = alongPieces(pieces, us, 1, rand, 0);
+      const w = (rand() - 0.5) * width;
+      const p = [q.P[0] - q.d[1] * w, q.P[1] + q.d[0] * w, q.P[2]];
+      return { p, c0: q.P, n: [0, 0, 1], u: q.u, s: q.s, t: (q.u - u0) / (u1 - u0 || 1), tangent: [q.d[0], q.d[1], 0] }; // prettier-ignore
+    },
+  };
+}
+// Straight grid lines as thin ribbons: lines [{ a, b, axis }].
+function gridLines(lines, width, z) {
+  const lens = lines.map((l) => Math.hypot(l.b[0] - l.a[0], l.b[1] - l.a[1]) * (l.axis ? 2 : 1));
+  const total = lens.reduce((s, x) => s + x, 0);
+  return {
+    area: total * width,
+    thick: width,
+    sample(rand) {
+      let r = rand() * total;
+      let i = 0;
+      while (i < lines.length - 1 && r > lens[i]) r -= lens[i++];
+      const l = lines[i];
+      const f = rand();
+      const w = (rand() - 0.5) * width * (l.axis ? 2 : 1);
+      const horiz = Math.abs(l.b[1] - l.a[1]) < 1e-9;
+      const x = l.a[0] + (l.b[0] - l.a[0]) * f + (horiz ? 0 : w);
+      const y = l.a[1] + (l.b[1] - l.a[1]) * f + (horiz ? w : 0);
+      return { p: [x, y, z], n: [0, 0, 1], axis: l.axis, tangent: horiz ? [1, 0, 0] : [0, 1, 0] };
+    },
+  };
+}
+
+// The slider under a plot: a track with an "a" beside it and a knob that
+// slides with a (knob at the middle for a's rest value).
+const SLIDER_LEN = 1.1;
+function plotSlider(k, at, { part = null } = {}) {
+  const [x, y, z] = at;
+  k.add(k.cylinder(0.018, SLIDER_LEN, { caps: true }), {
+    pos: [x, y, z],
+    rot: [0, 0, 90],
+    weight: 1.5,
+    color: (c) => lit("#56637a", c.n, { amb: 0.7, dif: 0.35, spec: 0.3 }),
+  });
+  // Tick marks at the ends and the middle.
+  for (const f of [-0.5, 0, 0.5])
+    k.add(k.box(0.012, 0.07, 0.012), { pos: [x + f * SLIDER_LEN, y, z - 0.01], weight: 2, color: "#8b97ad" }); // prettier-ignore
+  const label = textPixels("a", [x - SLIDER_LEN / 2 - 0.16, y, z], 0.09);
+  textCloud(k, label.pixels, {}, () => ({ color: "#ffd166" }));
+  const knob = part ?? k.part("knob", { pivot: [x, y, z] });
+  k.add(k.cylinder(0.055, 0.05, { caps: true }), {
+    pos: [x, y, z + 0.03],
+    rot: [90, 0, 0],
+    part: knob,
+    weight: 2.5,
+    pattern: false,
+    color: (c) => lit(c.s.cap ? "#ffd166" : "#d9a93f", c.n, { amb: 0.72, dif: 0.35, spec: 0.5 }),
+  });
+  return knob;
+}
+
+// A marker pen, its tip at `tip`, leaning back towards the viewer.
+function plotPen(k, tip, part) {
+  const dir = unit([0.32, 0.62, 0.72]);
+  const q = quatFromDir(dir);
+  const at = (d) => add(tip, mul(dir, d));
+  k.add(k.cone(0.004, 0.02, 0.05, { caps: false }), { pos: at(0.025), quat: q, part, weight: 3, pattern: false, color: "#ff6b6b" }); // prettier-ignore
+  k.add(k.cone(0.02, 0.032, 0.05, { caps: false }), { pos: at(0.075), quat: q, part, weight: 3, pattern: false, color: (c) => lit("#e8e8ee", c.n) }); // prettier-ignore
+  k.add(k.cylinder(0.033, 0.3, { caps: "top" }), { pos: at(0.25), quat: q, part, weight: 2, pattern: false, color: (c) => lit("#3d6fd6", c.n, { spec: 0.4 }) }); // prettier-ignore
+  k.add(k.cylinder(0.036, 0.09, { caps: "top" }), { pos: at(0.43), quat: q, part, weight: 2, pattern: false, color: (c) => lit("#ff6b6b", c.n, { spec: 0.4 }) }); // prettier-ignore
+}
+function quatFromDir(d) {
+  // The rotation taking +Y to d.
+  const y = [0, 1, 0];
+  const axis = cross(y, d);
+  const s = len(axis);
+  if (s < 1e-9) return d[1] > 0 ? [0, 0, 0, 1] : [1, 0, 0, 0];
+  return quatAxisAngle(unit(axis), Math.atan2(s, dot(y, d)));
+}
+
+Object.assign(RECIPES, {
+  "graph-plotter": {
+    alive: true,
+    density: 1.2,
+    options: [
+      {
+        key: "curve",
+        label: "Curve",
+        type: "select",
+        default: "sine",
+        choices: [
+          ...CURVES.map((c) => ({ id: c.id, label: c.label })),
+          { id: "custom", label: "Your own (below)" },
+        ],
+      },
+      { key: "b", label: "b (your own curve)", type: "slider", min: 0.25, max: 5, step: 0.25, default: 1 }, // prettier-ignore
+      // Your own curve, as typed (set from the panel, not shown).
+      { key: "eq", label: "Your curve", type: "text", default: "", hidden: true },
+    ],
+    input: GRAPH_INPUT,
+    controls: [
+      { key: "a", label: "a", type: "slider", default: 0.5 },
+      { key: "draw", label: "Draw", type: "pulse", ease: 4.5 },
+    ],
+    action: { key: "draw", label: "Draw it" },
+    // A tap wipes the curve and a pen draws it again across the lit grid,
+    // humming a tone that follows its height; then the a slider sweeps up,
+    // down and back and the curve bends with it in real time (4.5 s). The
+    // curve is built once at rest (it appears behind the pen, channel 0)
+    // and once at each of nine values of a; each of those copies morphs
+    // exactly into the next (channel 1), and the one for the slider's
+    // place is shown.
+    drive(t, c, out, info) {
+      const g = info?.data?.graph;
+      if (!g) return;
+      const T = 4.5;
+      const e = since(c, "draw", T);
+      const on = e >= 0;
+      const drawEnd = g.usesA ? 2.45 : 3.6;
+      const sPen = on ? easeInOut(band(e, 0.25, drawEnd)) : 1;
+      const drawing = on && e < drawEnd + 0.1;
+      // The slider: its own place, swept by a tap.
+      const base = clamp01(c.a ?? 0.5);
+      let u = base;
+      let sweeping = false;
+      if (on && g.usesA) {
+        const x = band(e, drawEnd + 0.2, T - 0.15);
+        if (x > 0 && x < 1) {
+          sweeping = true;
+          const w = easeInOut(x);
+          if (g.cycle) u = (base + w) % 1;
+          else {
+            const s = Math.sin(TAU * w);
+            u = s > 0 ? base + (1 - base) * s : base + base * s;
+          }
+        }
+      }
+      const showRest = !g.usesA || drawing || (!sweeping && Math.abs(u - 0.5) < 1e-4);
+      const j = Math.min(SWEEP_KNOTS - 1, Math.floor(u * SWEEP_KNOTS));
+      const frac = clamp01(u * SWEEP_KNOTS - j);
+      out.parts.curve = { visible: showRest ? 1 : 0 };
+      for (let i = 0; i < g.copies; i++) out.parts[`sweep${i}`] = { visible: !showRest && i === j ? 1 : 0 }; // prettier-ignore
+      out.morph = [drawing && sPen < 1 ? 1.002 - sPen : 0, showRest ? 0 : frac, 0, 0];
+      if (g.usesA) out.parts.knob = { offset: [(u - 0.5) * SLIDER_LEN, 0, 0] };
+      // The pen comes down, draws and lifts away.
+      const pv = on ? bump(e, 0.02, 0.2, drawEnd, drawEnd + 0.25) : 0;
+      const pen = penAt(g.path, sPen);
+      out.parts.pen = { offset: [pen[0], pen[1], 0.25 * (1 - pv)], visible: pv };
+      // The grid lights up.
+      out.glow = [0.35, 0.6, 1, on ? 0.22 * bump(e, 0, 0.3, T - 0.9, T - 0.05) : 0];
+      // The tone follows the pen's height, a short glide every 0.09 s.
+      if (on && e >= 0.25 && e < drawEnd) {
+        const m = mem(c);
+        if (m.toneE === undefined || e < m.toneE) m.tone = -1;
+        m.toneE = e;
+        const step = 0.09;
+        const n = Math.floor((e - 0.25) / step);
+        if (n > m.tone) {
+          m.tone = n;
+          const p1 = penAt(g.path, easeInOut(band(e + step, 0.25, drawEnd)));
+          const hz = (Y) => 196 * Math.pow(2, 2.2 * clamp01(Y / PLOT_H + 0.5));
+          const f0 = hz(pen[1]);
+          out.cues.push({ voice: "tone", f: f0, to: hz(p1[1]) / f0, decay: 0.3, vol: 0.4 });
+        }
+      }
+    },
+    build(k, o) {
+      const g = curvePlot(o);
+      PLOT_SHOWN.label = `${g.spec.id === "custom" ? "Your curve" : g.spec.label}: ${g.spec.eq}`;
+      const copies = g.usesA ? SWEEP_KNOTS : 0;
+      k.data = { graph: { usesA: g.usesA, cycle: g.cycle, copies, path: g.path } };
+      // The board: a dark slate panel in a lighter frame.
+      const BW = PLOT_W + 0.26;
+      const BH = PLOT_H + 0.26;
+      k.add(k.box(PLOT_W + 0.04, PLOT_H + 0.04, 0.04), {
+        pos: [0, 0, -0.02],
+        weight: 0.6,
+        flat: 0.15,
+        jitter: 0.01,
+        color: (c) => {
+          if (c.s.face !== 4) return "#141c2c";
+          const glow = 0.5 + 0.5 * smoothstep(1.6, 0, Math.hypot(c.p[0] + 0.4, c.p[1] - 0.4));
+          return mix("#121a2a", "#1f2b44", glow);
+        },
+      });
+      const frame = (c) => lit("#46557a", c.n, { amb: 0.7, dif: 0.4, spec: 0.35 });
+      for (const [w, h, x, y] of [
+        [BW, 0.11, 0, (BH - 0.11) / 2],
+        [BW, 0.11, 0, -(BH - 0.11) / 2],
+        [0.11, BH - 0.22, (BW - 0.11) / 2, 0],
+        [0.11, BH - 0.22, -(BW - 0.11) / 2, 0],
+      ])
+        k.add(k.box(w, h, 0.07), { pos: [x, y, -0.015], weight: 1.4, flat: 0.2, jitter: 0.01, even: true, color: frame }); // prettier-ignore
+      // The grid, which lights up (a band on channel 2, held at 0).
+      k.add(gridLines(g.grid, 0.008, 0.012), {
+        weight: 2.2,
+        flat: 0.3,
+        stretch: 2.2,
+        kind: "band",
+        params: [0, 0.5],
+        channel: 2,
+        pattern: false,
+        color: (c) => (c.s.axis ? "#9fb3d6" : "#3b4d6e"),
+      });
+      const col = (c) => {
+        const t = g.cycle ? 0.5 - 0.5 * Math.cos(TAU * c.s.t) : c.s.t;
+        return keep(shade(ramp(CURVE_RAMP, t), 1.05 + 0.1 * Math.sin(c.s.u * 3)));
+      };
+      // The curve at rest: it appears behind the pen as channel 0 falls.
+      k.add(ribbon(g.rest, g.us, 0.026), {
+        part: k.part("curve"),
+        weight: 9,
+        flat: 0.5,
+        stretch: 1.4,
+        kind: "fade",
+        params: (c) => [1.002 - c.s.s, 0.004],
+        channel: 0,
+        pattern: false,
+        color: col,
+      });
+      // The copies for the sweep: copy j is the curve at knot j, morphing
+      // to knot j + 1.
+      for (let j = 0; j < copies; j++) {
+        const next = g.knots[j + 1];
+        k.add(ribbon(g.knotPieces[j], g.us, 0.026), {
+          part: k.part(`sweep${j}`),
+          weight: 6,
+          flat: 0.6,
+          channel: 1,
+          pattern: false,
+          to: (c) => {
+            const p = g.point(c.s.u, next);
+            const P = p && g.toBoard(p);
+            if (!P || !g.inside(P) || Math.hypot(P[0] - c.s.c0[0], P[1] - c.s.c0[1]) > 1.2) return null; // prettier-ignore
+            return [P[0] + c.p[0] - c.s.c0[0], P[1] + c.p[1] - c.s.c0[1], c.p[2]];
+          },
+          color: col,
+        });
+      }
+      // The pen, built with its tip at the middle of the board (inside the
+      // toy, so it doesn't change the framing) and moved to the curve.
+      plotPen(k, [0, 0, PLOT_Z + 0.004], k.part("pen", { pivot: [0, 0, PLOT_Z] }));
+      if (g.usesA) plotSlider(k, [0.12, -BH / 2 - 0.16, 0.02]);
+    },
+  },
+});
+
+// ---- Surface plotter ----------------------------------------------------------------
+
+// The surface spans X and Z in [-1, 1]; heights map into [-SURF_H, SURF_H].
+const SURF_H = 0.5;
+const SURFACES = [
+  { id: "saddle", label: "Saddle", eq: "z = a(x² − y²)", dom: [-2, 2], a: [-1, 1, 1.5] },
+  { id: "monkey-saddle", label: "Monkey saddle", eq: "z = r³·cos(3θ + a)", dom: [-2, 2], a: [-Math.PI, 0, Math.PI], cycle: true, move: "twists round" }, // prettier-ignore
+  { id: "sombrero", label: "Sombrero", eq: "z = 2cos(2r − a)/(1 + r)", dom: [-6, 6], a: [-Math.PI, 0, Math.PI], cycle: true, move: "ripples outward" }, // prettier-ignore
+  { id: "egg-crate", label: "Egg crate", eq: "z = sin(x)·sin(y + a)", dom: [-6, 6], a: [-Math.PI, 0, Math.PI], cycle: true, move: "rolls" }, // prettier-ignore
+  { id: "gaussian", label: "Gaussian hill", eq: "z = a·exp(−r²/2)", dom: [-3, 3], a: [-0.6, 1, 1.4], move: "breathes" }, // prettier-ignore
+  { id: "banana", label: "Rosenbrock's banana valley", eq: "z = log(1 + (a − x)² + 100(y − x²)²)", dom: [-2, 2], domY: [-1, 3], a: [0, 1, 2], move: "slides its valley" }, // prettier-ignore
+  { id: "paraboloid", label: "Paraboloid (bowl)", eq: "z = a(x² + y²)", dom: [-2, 2], a: [-1, 1, 1.5] }, // prettier-ignore
+  { id: "waves", label: "Ocean waves", eq: "z = sin(x + a) + 0.5sin(0.7x + 1.3y + 2a)", dom: [-6, 6], a: [-Math.PI, 0, Math.PI], cycle: true, move: "rolls" }, // prettier-ignore
+  { id: "interference", label: "Two-source ripples", eq: "z = sin(3√((x + 2)² + y²) − a) + sin(3√((x − 2)² + y²) − a)", dom: [-5, 5], a: [-Math.PI, 0, Math.PI], cycle: true, move: "ripples" }, // prettier-ignore
+  { id: "pinwheel", label: "Pinwheel", eq: "z = r·sin(3θ + r − a)/3", dom: [-3, 3], a: [-Math.PI, 0, Math.PI], cycle: true, move: "spins" }, // prettier-ignore
+  { id: "twist", label: "Twisted sheet", eq: "z = sin(a·x·y)", dom: [-3, 3], a: [0.15, 0.5, 0.8] },
+  { id: "peaks", label: "Three peaks", eq: "z = a(3(1 − x)²e^(−x² − (y + 1)²) − 10(x/5 − x³ − y⁵)e^(−x² − y²) − e^(−(x + 1)² − y²)/3)", dom: [-3, 3], a: [-1, 1, 1.3] }, // prettier-ignore
+  { id: "himmelblau", label: "Himmelblau's four valleys", eq: "z = log(1 + (x² + y − a)² + (x + y² − 7)²)", dom: [-5, 5], a: [7, 11, 13] }, // prettier-ignore
+  { id: "rastrigin", label: "Bumpy (Rastrigin)", eq: "z = x² + y² − a(10cos(2πx) + 10cos(2πy)) + 20a", dom: [-3, 3], a: [0, 1, 1.5] }, // prettier-ignore
+  { id: "volcano", label: "Volcano", eq: "z = 2e^(−(r − 2)²) + (1 − a)e^(−r²)", dom: [-4, 4], a: [-0.5, 1, 2], move: "fills and empties its crater" }, // prettier-ignore
+  { id: "ripple-bowl", label: "Cosine bumps", eq: "z = a·cos(x)·cos(y)", dom: [-5, 5], a: [-1, 1, 1.5] }, // prettier-ignore
+];
+const SURFACE_BY_ID = Object.fromEntries(SURFACES.map((s) => [s.id, s]));
+const TYPED_DOM = [-3, 3];
+const SURF_RAMP = ["#27348b", "#1d7fc4", "#1fb59a", "#9ccf3a", "#ffc233", "#ff6b3d", "#e8384f"];
+
+const SURF_CACHE = new Map();
+function surfacePlot(o) {
+  const key = `${o.surface}|${o.surface === "custom" ? o.eq : ""}`;
+  if (SURF_CACHE.has(key)) return SURF_CACHE.get(key);
+  let spec = SURFACE_BY_ID[o.surface];
+  let parsed = null;
+  if (o.surface === "custom") {
+    try {
+      parsed = readSurface(o.eq);
+      spec = { id: "custom", label: "Your surface", eq: o.eq, dom: TYPED_DOM, a: TYPED_A };
+    } catch {
+      spec = null;
+    }
+  }
+  if (!spec) spec = SURFACES[0];
+  if (!parsed) parsed = readSurface(spec.eq);
+  let plot = makeSurface(parsed, spec);
+  if (!plot.ok) plot = makeSurface(readSurface(SURFACES[0].eq), SURFACES[0]);
+  if (SURF_CACHE.size > 40) SURF_CACHE.clear();
+  SURF_CACHE.set(key, plot);
+  return plot;
+}
+
+function makeSurface(parsed, spec) {
+  const A = spec.a || TYPED_A;
+  const usesA = parsed.usesA;
+  const knots = usesA
+    ? Array.from({ length: SWEEP_KNOTS + 1 }, (_, j) => aAt(A, j / SWEEP_KNOTS))
+    : [A[1]];
+  const dx = spec.dom || TYPED_DOM;
+  const dy = spec.domY || dx;
+  const v = { x: 0, y: 0, a: 1, b: 1, r: 0, "θ": 0, t: 0 };
+  const zAt = (U, V, a) => {
+    v.x = dx[0] + (dx[1] - dx[0]) * U;
+    v.y = dy[0] + (dy[1] - dy[0]) * V;
+    v.a = a;
+    return parsed.z(v);
+  };
+  // Heights over every knot, robustly (a few wild values are cut off).
+  const zs = [];
+  const N = 60;
+  for (const a of usesA ? knots : [A[1]])
+    for (let i = 0; i <= N; i++)
+      for (let j = 0; j <= N; j++) {
+        const z = zAt(i / N, j / N, a);
+        if (Number.isFinite(z)) zs.push(z);
+      }
+  if (zs.length < 40) return { ok: false };
+  zs.sort((p, q) => p - q);
+  let z0 = percentile(zs, 0.01);
+  let z1 = percentile(zs, 0.99);
+  if (z1 - z0 < 1e-6) {
+    z0 -= 1;
+    z1 += 1;
+  }
+  const pad = (z1 - z0) * 0.04;
+  z0 -= pad;
+  z1 += pad;
+  const hs = (2 * SURF_H) / (z1 - z0);
+  const toY = (z) => (z - z0) * hs - SURF_H;
+  // The flat sheet it rises from: the level of z = 0 when that is in view.
+  const floorY = toY(Math.min(z1, Math.max(z0, 0)));
+  // A point of the surface (U, V in 0..1) at a, or null off the plot.
+  const point = (U, V, a) => {
+    const z = zAt(U, V, a);
+    if (!Number.isFinite(z) || z < z0 || z > z1) return null;
+    return [U * 2 - 1, toY(z), 1 - V * 2];
+  };
+  return { ok: true, spec, parsed, A, usesA, knots, cycle: !!spec.cycle, point, floorY, dx, dy }; // prettier-ignore
+}
+
+const SURF_SHOWN = { label: "" };
+const SURFACE_INPUT = {
+  title: "Your own surface",
+  placeholder: "z = sin(x)·cos(y), z = a(x² − y²), z = sin(r)/r",
+  button: "Plot it",
+  fileButton: "Open a text file…",
+  accept: ".txt",
+  note: "Type z = … with x and y (each from −3 to 3), or r and θ (the distance from the middle and the angle round it). Use + − × ÷ ^, brackets, sin, cos, tan, exp, log, √, abs, pi and e. Put a in it to see it move when you tap.",
+  async read(text) {
+    const eq = String(text || "")
+      .replace(/\s+/g, " ")
+      .trim();
+    const plot = makeSurface(readSurface(eq), { id: "custom", eq, dom: TYPED_DOM, a: TYPED_A });
+    if (!plot.ok) throw new EquationError("none of it lands on the plot. Try another.");
+    return { surface: "custom", eq };
+  },
+  shown: () => SURF_SHOWN.label,
+};
+
+Object.assign(RECIPES, {
+  "surface-plotter": {
+    alive: true,
+    density: 1.6,
+    options: [
+      {
+        key: "surface",
+        label: "Surface",
+        type: "select",
+        default: "sombrero",
+        choices: [
+          ...SURFACES.map((s) => ({ id: s.id, label: s.label })),
+          { id: "custom", label: "Your own (below)" },
+        ],
+      },
+      // Your own surface, as typed (set from the panel, not shown).
+      { key: "eq", label: "Your surface", type: "text", default: "", hidden: true },
+    ],
+    input: SURFACE_INPUT,
+    controls: [
+      { key: "a", label: "a", type: "slider", default: 0.5 },
+      { key: "rise", label: "Rise", type: "pulse", ease: 5 },
+    ],
+    action: { key: "rise", label: "Raise it" },
+    // A tap lays the surface flat, then it rises out of the sheet (its
+    // colours are its heights) and overshoots a little; then its parameter
+    // a plays, so it ripples, twists or breathes, and settles (5 s). As with
+    // the graph plotter, the surface is built once at rest (morphing to the
+    // flat sheet on channel 0) and once at each of nine values of a, each
+    // copy morphing into the next on channel 1.
+    drive(t, c, out, info) {
+      const g = info?.data?.surface;
+      if (!g) return;
+      const T = 5;
+      const e = since(c, "rise", T);
+      const on = e >= 0;
+      // Flat: 1. Down fast, a pause, then up with a small overshoot.
+      let flat = 0;
+      if (on) {
+        if (e < 0.25) flat = easeInOut(e / 0.25);
+        else if (e < 0.45) flat = 1;
+        else {
+          const x = band(e, 0.45, 2.1);
+          flat = 1 - easeInOut(x) - 0.07 * Math.sin(Math.PI * band(e, 1.6, 2.3));
+        }
+      }
+      const base = clamp01(c.a ?? 0.5);
+      let u = base;
+      let sweeping = false;
+      if (on && g.usesA) {
+        const x = band(e, 2.3, T - 0.15);
+        if (x > 0 && x < 1) {
+          sweeping = true;
+          const w = easeInOut(x);
+          if (g.cycle) u = (base + w) % 1;
+          else {
+            const s = Math.sin(TAU * w);
+            u = s > 0 ? base + (1 - base) * s : base + base * s;
+          }
+        }
+      }
+      const showRest = !g.usesA || (on && e < 2.3) || (!sweeping && Math.abs(u - 0.5) < 1e-4);
+      const j = Math.min(SWEEP_KNOTS - 1, Math.floor(u * SWEEP_KNOTS));
+      const frac = clamp01(u * SWEEP_KNOTS - j);
+      out.parts.surface = { visible: showRest ? 1 : 0 };
+      for (let i = 0; i < g.copies; i++) out.parts[`sweep${i}`] = { visible: !showRest && i === j ? 1 : 0 }; // prettier-ignore
+      out.morph = [showRest ? flat : 0, showRest ? 0 : frac, 0, 0];
+      if (g.usesA) out.parts.knob = { offset: [(u - 0.5) * SLIDER_LEN, 0, 0] };
+    },
+    build(k, o) {
+      const g = surfacePlot(o);
+      SURF_SHOWN.label = `${g.spec.id === "custom" ? "Your surface" : g.spec.label}: ${g.spec.eq}`;
+      const copies = g.usesA ? SWEEP_KNOTS : 0;
+      k.data = { surface: { usesA: g.usesA, cycle: g.cycle, copies } };
+      const step = niceStep(g.dx[1] - g.dx[0], 12);
+      const gridStep = [step / (g.dx[1] - g.dx[0]), step / (g.dy[1] - g.dy[0])];
+      const gridOff = [(-g.dx[0] / step) % 1, (-g.dy[0] / step) % 1];
+      const onLine = (U, V) => {
+        const fu = Math.abs((((U / gridStep[0] - gridOff[0]) % 1) + 1) % 1 - 0.5);
+        const fv = Math.abs((((V / gridStep[1] - gridOff[1]) % 1) + 1) % 1 - 0.5);
+        return Math.max(fu, fv) > 0.47;
+      };
+      // Coloured by height, with a fine mesh of darker lines, two-sided.
+      const look = (a) => (c) => {
+        const p = g.point(c.u, c.v, a);
+        if (!p) return null;
+        let col = ramp(SURF_RAMP, (p[1] + SURF_H) / (2 * SURF_H));
+        if (onLine(c.u, c.v)) col = shade(col, 0.62);
+        return lit(col, c.n, { amb: 0.66, dif: 0.42, spec: 0.22, two: true });
+      };
+      const sheet = (a) => k.param((U, V) => g.point(U, V, a) || [U * 2 - 1, g.floorY, 1 - V * 2], { grid: 90 }); // prettier-ignore
+      // At rest; it morphs down to the flat sheet on channel 0.
+      k.add(sheet(g.A[1]), {
+        part: k.part("surface"),
+        flat: 0.35,
+        even: true,
+        jitter: 0.01,
+        channel: 0,
+        to: (c) => [c.p[0], g.floorY, c.p[2]],
+        color: look(g.A[1]),
+      });
+      for (let j = 0; j < copies; j++) {
+        const next = g.knots[j + 1];
+        k.add(sheet(g.knots[j]), {
+          part: k.part(`sweep${j}`),
+          weight: 0.9,
+          size: 1.2,
+          flat: 0.4,
+          even: true,
+          jitter: 0.01,
+          channel: 1,
+          to: (c) => g.point(c.u, c.v, next),
+          color: look(g.knots[j]),
+        });
+      }
+      // A dark base plate under it, and the a slider in front.
+      const baseY = -SURF_H - 0.12;
+      k.add(k.box(2.2, 0.05, 2.2), {
+        pos: [0, baseY, 0],
+        weight: 0.4,
+        even: true,
+        jitter: 0.01,
+        color: (c) => {
+          const edge = Math.min(1.1 - Math.abs(c.p[0]), 1.1 - Math.abs(c.p[2]));
+          return lit(edge < 0.06 ? "#4a5874" : "#1c2536", c.n, { amb: 0.75, dif: 0.3, spec: 0 });
+        },
+      });
+      if (g.usesA) plotSlider(k, [0.12, baseY - 0.05, 1.22]);
+    },
+  },
+});
