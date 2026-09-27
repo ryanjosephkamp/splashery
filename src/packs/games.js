@@ -1,11 +1,22 @@
 // Games: a chess set that plays a real game. Loaded on demand.
 //
 // Every piece is its own token (behaviour "token"), so all 32 can slide,
-// hop, leave the board when captured and tip over at the end. The game is
+// hop, leave the board when captured and tip over at the end. Tap a piece
+// and then a square to play a legal move yourself (from any point of the
+// game on the board: the game goes on from there as your own). The game is
 // Paul Morphy against the Duke of Brunswick and Count Isouard, Paris 1858
 // (the "Opera Game"), a public-domain classic, move by move.
 
 import { mix, shade, clamp, quatAxisAngle } from "../kit.js";
+import {
+  START_FEN,
+  parseFen,
+  legalMoves,
+  applyMove,
+  inCheck,
+  sanOf,
+  squareName,
+} from "../chess.js";
 
 const TAU = Math.PI * 2;
 const dot = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
@@ -270,19 +281,130 @@ const OPERA = {
 let game = null;
 function setGame(g) {
   const states = timeline(g);
-  game = { ...g, tags: { ...(g.tags || {}) }, states, n: g.plies.length };
+  game = { ...g, tags: { ...(g.tags || {}) }, states, n: g.plies.length, positions: null };
   Object.assign(play, { g: -1, last: null, target: null, jump: null, glide: null, landed: -1 });
+  touch.sel = null;
 }
 // Per-toy playing state (one chess set is shown at a time): g is game time
 // (-1 before the first move); `target` is a move to step to while paused;
 // `jump` asks for a jump to a move (the start or the end), which the pieces
 // glide to (`glide` holds where they were and when it began).
 const play = { g: -1, last: null, target: null, jump: null, glide: null, landed: -1 };
+// Tap-to-move: the square of the picked piece (or null), when it was
+// picked, and sounds for the next frame.
+const touch = { sel: null, at: 0, cues: [] };
 setGame(OPERA);
+
+// ---- Tap to move ------------------------------------------------------------------
+
+// The rules position after p plies of the game on the board (chess.js), or
+// null if a ply cannot be matched (it never happens for a checked game).
+function positionAfter(p) {
+  if (!game.positions) {
+    let pos;
+    try {
+      pos = parseFen(game.fen || game.tags.FEN || START_FEN);
+    } catch {
+      return null;
+    }
+    game.positions = [pos];
+  }
+  const list = game.positions;
+  while (list.length <= p) {
+    const pos = list[list.length - 1];
+    const ply = asPly(game.plies[list.length - 1]);
+    const m = legalMoves(pos).find((x) => squareName(x.from) === ply.from && squareName(x.to) === ply.to && (x.promo || null) === (ply.promo || null)); // prettier-ignore
+    if (!m) return null;
+    list.push(applyMove(pos, m));
+  }
+  return list[p];
+}
+// The square under a point on the board (recipe coordinates), or null.
+function squareUnder(p) {
+  const f = Math.floor(p[0] / S + 4);
+  const r = Math.floor(4 - p[2] / S);
+  if (f < 0 || f > 7 || r < 0 || r > 7 || p[1] > 1.6 * S) return null;
+  return FILES[f] + (r + 1);
+}
+// Whether the game stands between moves (not mid-move).
+function betweenMoves() {
+  const i = Math.floor(play.g / PLY);
+  return play.g < 0 || i >= game.n || play.g - i * PLY >= MOVE + SWAP;
+}
+// Whether the pieces stand still (not playing, stepping or gliding).
+const settled = (c) => c.play < 0.5 && play.target === null && play.jump === null && !play.glide && betweenMoves(); // prettier-ignore
+const tick = (f, vol) => touch.cues.push({ voice: "wood", f, decay: 1.2, vol });
+// A tap on the board while the game is paused: pick one of the pieces
+// whose turn it is, then tap a square it can legally move to (a pawn
+// reaching the last rank becomes a queen). Tapping the piece again, or a
+// square it cannot go to, puts it down.
+function touchSquare(sq, c, time) {
+  // Paused half way through a move: that move finishes first.
+  if (c.play < 0.5 && play.target === null && !betweenMoves())
+    play.target = Math.min(game.n, Math.floor(play.g / PLY) + 1);
+  if (!settled(c)) return;
+  const p = playedBy(play.g);
+  const pos = positionAfter(p);
+  if (!pos) return;
+  const piece = pos.board[squareIndexOf(sq)];
+  const mine = piece && piece[0] === pos.turn;
+  if (touch.sel && touch.sel !== sq) {
+    const from = squareIndexOf(touch.sel);
+    const to = squareIndexOf(sq);
+    const m = legalMoves(pos).find((x) => x.from === from && x.to === to && (!x.promo || x.promo === "Q")); // prettier-ignore
+    if (m) {
+      touch.sel = null;
+      yourMove(pos, p, m);
+      return;
+    }
+  }
+  if (mine && touch.sel !== sq) {
+    touch.sel = sq;
+    touch.at = time;
+    tick(900, 0.5);
+  } else if (touch.sel) {
+    touch.sel = null;
+    tick(520, 0.35);
+  }
+}
+const squareIndexOf = (sq) => FILES.indexOf(sq[0]) + 8 * (Number(sq[1]) - 1);
+// Plays a move of yours after p plies: the game on the board goes on from
+// there as your own game, and the move slides into place.
+function yourMove(pos, p, m) {
+  const ply = {
+    from: squareName(m.from),
+    to: squareName(m.to),
+    ...(m.castle ? { rf: squareName(m.castle.from), rt: squareName(m.castle.to) } : {}),
+    ...(m.ep ? { ep: squareName(m.capture) } : {}),
+    ...(m.promo ? { promo: m.promo } : {}),
+    san: sanOf(pos, m),
+  };
+  const next = applyMove(pos, m);
+  const mate = inCheck(next) && !legalMoves(next).length;
+  const from = game.own ? game.from : game.opera ? "the Opera Game" : game.title;
+  const g = {
+    own: true,
+    from,
+    title: from ? `Your game, from ${from}` : "Your game",
+    tags: { Event: "Your game", White: "You", Black: "You", Result: mate ? (next.turn === "w" ? "0-1" : "1-0") : "*" }, // prettier-ignore
+    fen: game.fen || game.tags.FEN || START_FEN,
+    start: game.start,
+    firstTurn: game.firstTurn,
+    plies: [...game.plies.slice(0, p), ply],
+    loser: mate ? next.turn : null,
+  };
+  const positions = game.positions?.slice(0, p + 1);
+  setGame(g);
+  if (positions) game.positions = positions;
+  // From the start of the new move (the same pose as after p plies).
+  play.g = p * PLY;
+  play.landed = p - 1;
+  play.target = p + 1;
+}
 
 // Game time when p moves have been played and the pieces have settled
 // (-1: the start; after the last move, long enough for the king to tip).
-const settledAt = (p) => (p <= 0 ? -1 : (p - 1) * PLY + MOVE + (p >= game.n ? 1.4 : SWAP + 0.01));
+const settledAt = (p) => (p <= 0 ? -1 : (p - 1) * PLY + MOVE + (p >= game.n && game.loser ? 1.4 : SWAP + 0.01)); // prettier-ignore
 // Moves played by game time g (a move under way counts once it lands).
 function playedBy(g) {
   if (g < 0) return 0;
@@ -343,11 +465,13 @@ const paceOf = (c) => Math.pow(2.5, ((c.pace ?? 0.5) - 0.5) * 2);
 
 export const RECIPES = {
   "chess-set": {
-    // Frames keep coming while the game plays or the pieces move.
-    alive: (c) => c.play > 0 || play.target !== null || play.jump !== null || play.glide !== null,
+    // Frames keep coming while the game plays, the pieces move or one is
+    // picked up.
+    alive: (c) => c.play > 0 || play.target !== null || play.jump !== null || play.glide !== null || touch.sel !== null, // prettier-ignore
     controls: [
       { key: "play", label: "Play", type: "toggle", default: 0, ease: 0.2 },
       { key: "restart", label: "Restart", type: "pulse", ease: 0.2 },
+      { key: "touch", label: "Move a piece", type: "pulse", ease: 0.2 },
       { key: "pace", label: "Move speed", default: 0.5 },
     ],
     // A tap plays or pauses the game; once it is over, a tap starts it again.
@@ -356,9 +480,19 @@ export const RECIPES = {
       get label() {
         return game.opera ? "Play the Opera Game" : "Play the game";
       },
-      at: (point, c) => (c.play > 0.5 && gameOver() ? "restart" : undefined),
+      // While it plays, a tap pauses (or, once it is over, starts again).
+      // Paused, a tap on a square picks up or moves a piece; a tap beside
+      // the board plays.
+      at(point, c) {
+        if (c.play > 0.5) return gameOver() ? "restart" : undefined;
+        const sq = squareUnder(point);
+        if (!sq) return undefined;
+        return { key: "touch", pick: sq };
+      },
+      // Tap-to-move makes its own sounds (drive's cues).
+      quiet: ["touch"],
     },
-    note: "Open a PGN file or paste a game to watch it played out on the board.",
+    note: "Tap a piece, then a square, to move it. Open a PGN file or paste a game to watch it played out on the board.", // prettier-ignore
     // Flag colours lie over the board from above, gently (30%), keeping
     // each square's own light or dark; the pieces keep their own colours.
     patternProjection: "top",
@@ -388,7 +522,8 @@ export const RECIPES = {
         game.edited = true;
       },
       // Where the game is: moves played, of how many, and whether it is over.
-      state: () => ({ played: playedBy(play.g), n: game.n, over: gameOver() }),
+      // (Your own game is over only at checkmate.)
+      state: () => ({ played: playedBy(play.g), n: game.n, over: gameOver() && (!game.own || !!game.loser) }), // prettier-ignore
       // Step one move on or back (the piece slides), or jump to the start
       // or the end (the pieces glide there). The caller pauses play first.
       step(d) {
@@ -434,9 +569,25 @@ export const RECIPES = {
         } else play.g += Math.sign(d) * move;
         if (d < 0) play.landed = Math.min(play.landed, playedBy(play.g) - 1);
       }
+      // Tap-to-move: the tapped square (a new tap), and the picked piece
+      // put down if the game moves on.
+      if (info.tap?.key === "touch" && info.tap.n !== m.touchN) {
+        m.touchN = info.tap.n;
+        if (info.tap.pick) touchSquare(info.tap.pick, c, now);
+      }
+      if (touch.sel && !settled(c)) touch.sel = null;
+      out.cues.push(...touch.cues.splice(0));
       const n = game.n;
       const g = play.g;
       let pose = positionsAt(g);
+      // The picked piece lifts off its square and hovers.
+      if (touch.sel) {
+        const k = game.states[playedBy(g)].findIndex((st) => st.sq === touch.sel && st.vis > 0);
+        if (k >= 0) {
+          const up = 0.35 * S * Math.min(1, (now - touch.at) / 0.12) + 0.05 * S * Math.sin((now - touch.at) * 6); // prettier-ignore
+          pose[k] = { ...pose[k], offset: [pose[k].offset[0], pose[k].offset[1] + up, pose[k].offset[2]] }; // prettier-ignore
+        }
+      }
       let quats = null;
       // A clack as each piece lands; a lower one for a capture, a bright
       // one when a pawn becomes a queen.
