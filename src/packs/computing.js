@@ -1901,6 +1901,209 @@ const XOR_AT = {
 const xorWire = (w) => 0.014 + 0.016 * Math.abs(w);
 const xorWireColor = (w) => (w > 0 ? "#5d8fd6" : "#d66a6a");
 
+// The classic encoder-decoder transformer (the layout of the 2017 paper's
+// figure, with generic labels): the encoder column on the left, the decoder
+// on the right, each box lit as the data passes. Heights are recipe y.
+const TFC = (() => {
+  const enc = -0.72;
+  const dec = 0.72;
+  const box = (col, y, label, color, h = 0.14) => ({ x: col, y, label, color, h });
+  const PINK = "#f2a7b8";
+  const ORANGE = "#f5a45a";
+  const YELLOW = "#f2d95c";
+  const BLUE = "#7fb2ea";
+  const encBoxes = [
+    box(enc, -0.84, "EMBED", PINK),
+    box(enc, -0.28, "ATTENTION", ORANGE),
+    box(enc, -0.1, "ADD+NORM", YELLOW, 0.1),
+    box(enc, 0.14, "FEED FWD", BLUE),
+    box(enc, 0.32, "ADD+NORM", YELLOW, 0.1),
+  ];
+  const decBoxes = [
+    box(dec, -0.84, "EMBED", PINK),
+    box(dec, -0.34, "MASKED ATTN", ORANGE),
+    box(dec, -0.17, "ADD+NORM", YELLOW, 0.1),
+    box(dec, 0.03, "ATTENTION", ORANGE),
+    box(dec, 0.2, "ADD+NORM", YELLOW, 0.1),
+    box(dec, 0.41, "FEED FWD", BLUE),
+    box(dec, 0.58, "ADD+NORM", YELLOW, 0.1),
+    box(dec, 0.84, "LINEAR", "#b9a7ec"),
+    box(dec, 1.03, "SOFTMAX", "#8fd9a0"),
+  ];
+  // The data's way up each column, and across from the encoder's top into
+  // the decoder's middle attention.
+  const encPath = [[enc, -1.06, 0], [enc, 0.5, 0]]; // prettier-ignore
+  const decPath = [[dec, -1.06, 0], [dec, 1.2, 0]]; // prettier-ignore
+  const cross = [[enc, 0.5, 0], [enc, 0.66, 0], [0, 0.66, 0], [0, 0.03, 0], [dec - 0.3, 0.03, 0]]; // prettier-ignore
+  const y0 = -1.06;
+  const encTop = 0.5;
+  const decTop = 1.2;
+  return { enc, dec, encBoxes, decBoxes, encPath, decPath, cross, y0, encTop, decTop, PINK, ORANGE, YELLOW, BLUE }; // prettier-ignore
+})();
+// Where the packets are at time s: the encoder's (0.3 to 1.8 s), across to
+// the decoder (1.8 to 2.4 s), the decoder's (up to its middle attention by
+// 2.4 s, then on to the softmax by 3.4 s); heights along each column (0..1).
+function tfcPacket(s) {
+  const T = TFC;
+  const enc = ease(band(s, 0.3, 1.8));
+  const cross = ease(band(s, 1.8, 2.4));
+  const midFrac = (0.03 - T.y0) / (T.decTop - T.y0);
+  const decA = ease(band(s, 0.9, 2.4)) * midFrac;
+  const decB = ease(band(s, 2.5, 3.4)) * ((1.03 - T.y0) / (T.decTop - T.y0) - midFrac);
+  return { enc, cross, dec: decA + decB };
+}
+
+// The classic transformer's tap: a cyan packet rises up the encoder (each
+// box lights as it passes, channel 0), crosses to the decoder's middle
+// attention; a gold packet rises up the decoder (channel 1), meets it, goes
+// on through the linear layer and the softmax, and the next word rises out
+// of the top.
+function tfcDrive(s, out, info) {
+  const on = s >= 0;
+  const T = TFC;
+  const P = on ? tfcPacket(s) : { enc: 0, cross: 0, dec: 0 };
+  const model = info.data?.view === "model";
+  const Z = model ? 0.2 : 0.1;
+  const encP = polyline(T.encPath.map((p) => [p[0], p[1], Z]));
+  const decP = polyline(T.decPath.map((p) => [p[0], p[1], Z]));
+  const crossP = polyline(T.cross.map((p, i) => [p[0], p[1], Z + (model ? 0.25 * Math.sin((Math.PI * i) / (T.cross.length - 1)) : 0)])); // prettier-ignore
+  out.tokens = [];
+  const show = (tk, live, p, home) => (out.tokens[tk] = live ? { offset: sub(p, home), visible: 1 } : { visible: 0 }); // prettier-ignore
+  show(0, on && s > 0.25 && s < 1.85, encP(P.enc), encP(0));
+  show(1, on && s >= 1.8 && s < 2.5, crossP(P.cross), crossP(0));
+  show(2, on && s > 0.85 && s < 3.5, decP(P.dec), decP(0));
+  // The next word: rises out of the softmax, holds, then fades.
+  const rise = ease(band(s, 3.4, 3.9));
+  const vis = on ? band(s, 3.4, 3.5) * (1 - band(s, 4.55, 4.9)) : 0;
+  out.tokens[3] = vis > 0 ? { offset: [0, 0.3 * rise - 0.3, 0], visible: vis } : { visible: 0 };
+  // Box lights: a band that follows each packet up its column.
+  out.morph = [on && s > 0.25 && s < 1.9 ? P.enc : -1, on && s > 0.85 && s < 3.5 ? P.dec : -1];
+  out.glow = [1, 0.95, 0.75, 0.85];
+  if (model) out.resort = resortSteps(info.recipe || tfcDrive, "tfc", on ? s : -1, 0.25, 4.0, 0.15);
+}
+// The classic transformer, as a poster or a 3D model.
+function buildClassicTf(k, model) {
+  const T = TFC;
+  k.data = { view: model ? "model" : "poster", diagram: "classic" };
+  const depth = model ? 0.24 : 0.04;
+  const zf = model ? 0 : 0.03; // box centres
+  const front = zf + depth / 2;
+  if (model) {
+    k.add(k.box(2.7, 0.08, 1.0), {
+      pos: [0, T.y0 - 0.1, 0],
+      even: true,
+      flat: 0.25,
+      color: (c) =>
+        c.n[1] > 0.5 ? keep(BOARD) : lit(BOARD_RIM, c.n, { amb: 0.75, dif: 0.3, spec: 0.1 }),
+    });
+  } else board(k, 3.05, 2.62, { at: [0, 0.07] });
+  const W = 1.0;
+  // The two N× blocks behind the layers.
+  for (const [x, y0, y1] of [
+    [T.enc, -0.4, 0.42],
+    [T.dec, -0.44, 0.68],
+  ]) {
+    // prettier-ignore
+    const c = [x, (y0 + y1) / 2, model ? 0 : 0.008];
+    if (model) wireBox(k, c, [W + 0.16, y1 - y0, 0.4], 0.012, "#8e9ab8");
+    else
+      k.add(k.box(W + 0.16, y1 - y0, 0.01), {
+        pos: c,
+        flat: 0.2,
+        pattern: false,
+        color: (cc) => {
+          const e = Math.min(
+            W / 2 + 0.08 - Math.abs(cc.p[0] - x),
+            (y1 - y0) / 2 - Math.abs(cc.p[1] - c[1]),
+          );
+          return keep(e < 0.012 ? "#8e9ab8" : "#232b40");
+        },
+      });
+    text(k, "N×".replace("×", "X"), [x - W / 2 - 0.2, (y0 + y1) / 2, model ? 0.2 : 0.003], 0.018, "#9fb0d6"); // prettier-ignore
+  }
+  // The boxes: solid, their names on the front, and a lit overlay that
+  // glows as the packet passes (band on channel 0 or 1 by column).
+  const boxes = [...T.encBoxes.map((b) => [b, 0, T.encTop]), ...T.decBoxes.map((b) => [b, 1, T.decTop])]; // prettier-ignore
+  for (const [b, ch, top] of boxes) {
+    const at = (b.y - T.y0) / (top - T.y0);
+    k.add(k.box(W, b.h, depth), {
+      pos: [b.x, b.y, zf],
+      even: model,
+      flat: 0.25,
+      weight: 1.4,
+      pattern: false,
+      color: (c) => keep(model ? lit(b.color, c.n, { amb: 0.78, dif: 0.35, spec: 0.2 }) : b.color),
+    });
+    k.add(k.box(W + 0.02, b.h + 0.02, 0.01), {
+      pos: [b.x, b.y, front + 0.004],
+      flat: 0.2,
+      opacity: 0.35,
+      pattern: false,
+      kind: "band",
+      params: [at, 0.06],
+      channel: ch,
+      color: () => keep(b.color),
+    });
+    const px = Math.min(b.h < 0.12 ? 0.015 : 0.018, (W - 0.08) / textWidth(b.label));
+    text(k, b.label, [b.x, b.y, front + 0.01], px, "#1a2030");
+  }
+  // Positional encoding: a ⊕ over each column's embedding, with a little
+  // sine-wave dial beside it.
+  for (const x of [T.enc, T.dec]) {
+    const c = [x, -0.62, front];
+    k.add(k.torus(0.07, 0.012), { pos: c, rot: [90, 0, 0], weight: 3, flat: 0.4, pattern: false, color: () => keep("#dfe8ff") }); // prettier-ignore
+    text(k, "+", add(c, [0, 0, 0.005]), 0.018, "#dfe8ff");
+    const d = [x + (x < 0 ? 0.34 : -0.34), -0.62, front];
+    k.add(k.torus(0.08, 0.01), { pos: d, rot: [90, 0, 0], weight: 3, flat: 0.4, pattern: false, color: () => keep("#dfe8ff") }); // prettier-ignore
+    wire(k, Array.from({ length: 17 }, (_, i) => [d[0] - 0.06 + (0.12 * i) / 16, d[1] + 0.035 * Math.sin((i / 16) * TAU), front]), 0.006, { color: "#dfe8ff" }); // prettier-ignore
+    wire(k, [add(d, [x < 0 ? -0.08 : 0.08, 0, 0]), add(c, [x < 0 ? 0.07 : -0.07, 0, 0])], 0.008, { color: "#9fb0d6" }); // prettier-ignore
+    text(k, "POS", add(d, [0, -0.14, 0]), 0.013, "#9fb0d6");
+  }
+  // The lines the data follows: up each column, residual loops round each
+  // sublayer, and the encoder's output across into the decoder.
+  const Z = front + 0.002;
+  wire(
+    k,
+    T.encPath.map((p) => [p[0], p[1], Z - 0.01]),
+    0.01,
+    { color: "#9fb0d6" },
+  );
+  wire(
+    k,
+    T.decPath.map((p) => [p[0], Math.min(p[1], 1.1), Z - 0.01]),
+    0.01,
+    { color: "#9fb0d6" },
+  );
+  wire(k, T.cross.map((p, i) => [p[0], p[1], Z + (model ? 0.25 * Math.sin((Math.PI * i) / (T.cross.length - 1)) : 0)]), 0.012, { color: "#f5a45a" }); // prettier-ignore
+  for (const [x, ya, yb] of [
+    [T.enc, -0.42, -0.1],
+    [T.enc, 0.02, 0.32],
+    [T.dec, -0.47, -0.17],
+    [T.dec, -0.08, 0.2],
+    [T.dec, 0.3, 0.58],
+  ]) {
+    // prettier-ignore
+    const side = x + (x < 0 ? -1 : 1) * (W / 2 + 0.05);
+    wire(k, [[x, ya, Z], [side, ya, Z], [side, yb, Z], [x + (x < 0 ? -W / 2 : W / 2), yb, Z]], 0.007, { color: "#9fb0d6" }); // prettier-ignore
+  }
+  // Inputs, outputs (shifted right) and the answer.
+  const tile = (word, p, color, token) =>
+    model ? block3D(k, word, p, color, token, { w: 0.48, h: 0.16, d: 0.1, px: 0.015 }) : wordTile(k, word, p, color, token, { w: 0.48, h: 0.16, px: 0.015 }); // prettier-ignore
+  tile("HELLO", [T.enc - 0.26, T.y0, zf + 0.02], "#e8eefc");
+  tile("WORLD", [T.enc + 0.26, T.y0, zf + 0.02], "#e8eefc");
+  tile("START", [T.dec - 0.26, T.y0, zf + 0.02], "#e8eefc");
+  tile("HOLA", [T.dec + 0.26, T.y0, zf + 0.02], "#e8eefc");
+  tile("MUNDO", [T.dec, 1.33, zf + 0.02], "#ffd34d", 3);
+  text(k, "INPUTS", [T.enc, T.y0 - 0.15, model ? 0.2 : 0.003], 0.015, "#9fb0d6");
+  text(k, "OUTPUTS", [T.dec, T.y0 - 0.15, model ? 0.2 : 0.003], 0.015, "#9fb0d6");
+  // The packets (tokens 0 to 2).
+  const Zp = model ? 0.2 : 0.1;
+  bead(k, [T.enc, T.y0, Zp], 0.07, "#57e0ff", 0);
+  bead(k, [T.enc, 0.5, Zp], 0.07, "#57e0ff", 1);
+  bead(k, [T.dec, T.y0, Zp], 0.07, "#ffd34d", 2);
+  k.reach([T.dec, 1.45, 0]);
+}
+
 export const RECIPES = {
   perceptron: {
     options: [VIEW_OPTION],
@@ -2606,7 +2809,19 @@ export const RECIPES = {
     },
   },
   transformer: {
-    options: [VIEW_OPTION],
+    options: [
+      {
+        key: "diagram",
+        label: "Diagram",
+        type: "select",
+        default: "tokens",
+        choices: [
+          { id: "tokens", label: "Token flow" },
+          { id: "classic", label: "Encoder–decoder" },
+        ],
+      },
+      VIEW_OPTION,
+    ],
     controls: [{ key: "go", label: "Predict", type: "pulse", ease: 5 }],
     action: { key: "go", label: "Predict the next word" },
     // Arcs of light jump between the word tiles (thicker where attention is
@@ -2614,8 +2829,9 @@ export const RECIPES = {
     // feed-forward block to the next layer, where new arcs jump, then up
     // through its block to the top; the next word drops into place at the
     // end of the row.
-    drive(t, c, out) {
+    drive(t, c, out, info) {
       const s = since(c.go, 5);
+      if (info.data?.diagram === "classic") return tfcDrive(s, out, { ...info, recipe: this });
       const on = s >= 0;
       const draw = (a, b, e0, e1) => (on ? ease(band(s, a, b)) * (1 - ease(band(s, e0, e1))) : 0);
       out.morph = [draw(0.05, 0.45, 0.75, 0.95), draw(0.3, 0.7, 0.8, 1.0), draw(1.6, 2.0, 2.3, 2.5), draw(1.85, 2.25, 2.35, 2.55)]; // prettier-ignore
@@ -2639,6 +2855,7 @@ export const RECIPES = {
       out.resort = resortSteps(this, "tf", on ? s : -1, 0.95, 4.15, 0.15);
     },
     build(k, o) {
+      if (o.diagram === "classic") return buildClassicTf(k, o.view === "model");
       if (o.view === "model") return buildTransformer3D(k);
       board(k, 3.3, 2.4, { at: [-0.23, 0.12] });
       const z = 0.1;

@@ -1886,7 +1886,9 @@ Proposals below are suggestions; the owner may change them.
   - Improved: AI: a 3-4-2 network with a real forward pass: yellow pulses run layer by layer and
     each neuron glows as bright as it fires; red pulses run back and the wires thicken or thin a
     little, easing back at the end (4.5 s). Owner's review: a View option adds a 3D model (glass
-    neurons in rings on a stand, pulses through the air).
+    neurons in rings on a stand, pulses through the air). Its size is set by options: 2 to 4 inputs,
+    1 to 3 hidden layers of 2 to 5 neurons, 1 to 3 outputs (at most 14 neurons); networks with more
+    than 24 wires send waves of light along the wires.
   - Sound: A rising arpeggio going forward, a falling one coming back.
 - **Convolutional network** (`cnn`). Now: tap: Read the digit. Plan: keep.
   - Owner: Approved on the Toy Ideas page (lane AI).
@@ -1916,7 +1918,11 @@ Proposals below are suggestions; the owner may change them.
   - Improved: AI: two heads of attention arcs (cyan and magenta, thicker where stronger) draw
     between THE CAT SAT ON at each of two layers; the tiles rise through the feed-forward blocks,
     and MAT drops into the end of the row (5 s). A View option adds a 3D model (word blocks,
-    box-outline blocks, arcs upright and leaning back).
+    box-outline blocks, arcs upright and leaning back). A Diagram option adds the classic
+    encoder-decoder layout (from the 2017 paper's figure, with generic labels): a packet rises up
+    the encoder, each box lighting as it passes, crosses into the decoder's middle attention, the
+    decoder's packet meets it and goes on through the linear layer and softmax, and the next word
+    comes out of the top; both diagrams have a 3D model.
   - Sound: A shimmering chord for each layer, a pop for the new token.
 - **Looped transformer** (`looped-transformer`). Now: tap: Loop until it's sure. Plan: keep.
   - Owner: Approved on the Toy Ideas page (lane AI).

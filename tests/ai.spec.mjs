@@ -250,3 +250,21 @@ test("neural network: any size in the options plays through and ends at rest", (
     expect(Math.abs(rest.morph[0])).toBeLessThan(0.05);
   }
 });
+
+test("transformer: both diagrams in both views play through and end at rest", () => {
+  for (const diagram of ["tokens", "classic"])
+    for (const view of ["poster", "model"]) {
+      const { rest, frames } = play("transformer", { diagram, view });
+      const last = frames[frames.length - 2].out;
+      (last.tokens || []).forEach((tk, i) => {
+        const q = rest.tokens?.[i];
+        expect(Math.abs((tk.visible ?? 1) - (q?.visible ?? 1)), `${diagram} ${view} piece ${i}`).toBeLessThan(0.05); // prettier-ignore
+      });
+      // The classic diagram's packets really travel.
+      if (diagram === "classic") {
+        const mid = frames.find((f) => f.s >= 2.0).out;
+        expect(mid.tokens[1].visible).toBe(1);
+        expect(Math.hypot(...mid.tokens[1].offset)).toBeGreaterThan(0.3);
+      }
+    }
+});
