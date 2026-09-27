@@ -2578,7 +2578,8 @@ Object.assign(RECIPES, {
         k.add(k.box(w, h, 0.07), { pos: [x, y, -0.015], weight: 1.4, flat: 0.2, jitter: 0.01, even: true, color: frame }); // prettier-ignore
       // The grid, which lights up (a band on channel 2, held at 0).
       k.add(gridLines(g.grid, 0.008, 0.012), {
-        weight: 2.2,
+        weight: 3,
+        size: 0.6,
         flat: 0.3,
         stretch: 2.2,
         kind: "band",
