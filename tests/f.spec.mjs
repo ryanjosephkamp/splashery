@@ -4,6 +4,10 @@
 // A drag beside a toy still turns the view.
 
 import { test, expect } from "@playwright/test";
+import fs from "node:fs";
+import path from "node:path";
+
+const SHOTS = "tests/screenshots";
 
 const WEBGL = "/?renderer=webgl2&profile=weak";
 
@@ -262,5 +266,86 @@ test.describe("Touch and drag (WebGL2)", () => {
     await page.click("#game-reset");
     await expect(page.locator("#toy-game .game-title")).toContainText("Opera Game");
     await expect(page.locator("#game-reset")).toBeHidden();
+  });
+
+  test("a finger swipe turns the cube on a phone", async ({ browser }) => {
+    const phone = await browser.newContext({
+      viewport: { width: 390, height: 844 },
+      hasTouch: true,
+      isMobile: true,
+    });
+    const page = await phone.newPage();
+    await loadApp(page);
+    await page.evaluate(() => window.__splashery.player.camera.setTurntable(false));
+    await page.evaluate(() => window.__splashery.app.chooseToy("puzzle-cube"));
+    await expect(page.locator("#toy-status")).toHaveText(/^Puzzle cube/, { timeout: 180_000 });
+    await page.waitForTimeout(1500);
+    const solved = () =>
+      page.evaluate(() => window.__splashery.player.toyInfo.recipe.cube.solved());
+    const yaw0 = await yaw(page);
+    // A touch swipe across the top face, through real touch events.
+    const cdp = await phone.newCDPSession(page);
+    const [x0, y0] = await screenAt(page, [-0.6, 1.5, 1]);
+    const [x1, y1] = await screenAt(page, [1.8, 1.5, 1]);
+    const touch = (type, x, y) =>
+      cdp.send("Input.dispatchTouchEvent", { type, touchPoints: type === "touchEnd" ? [] : [{ x, y }] }); // prettier-ignore
+    await touch("touchStart", x0, y0);
+    await page.waitForTimeout(400);
+    for (let i = 1; i <= 10; i++) await touch("touchMove", x0 + ((x1 - x0) * i) / 10, y0 + ((y1 - y0) * i) / 10); // prettier-ignore
+    await page.waitForTimeout(300);
+    await touch("touchEnd");
+    await expect.poll(solved, { timeout: 30_000 }).toBe(false);
+    expect(await yaw(page)).toBeCloseTo(yaw0, 3);
+    await phone.close();
+  });
+
+  test("lane F screenshots at 1440x900 and 390x844", async ({ browser }) => {
+    fs.mkdirSync(SHOTS, { recursive: true });
+    // Each toy mid-play: the cube scrambled, the cradle let go, a chess
+    // piece picked up, the bricks built.
+    const play = {
+      "puzzle-cube": async (page) => {
+        await page.evaluate(() => window.__splashery.player.act());
+        await waitClock(page, 4.3);
+      },
+      "newtons-cradle": async (page) => {
+        await page.evaluate(() => {
+          const p = window.__splashery.player;
+          const d = p.toyInfo.recipe.drag;
+          d.start([0.3, 0.2, 0.15]);
+          d.move([0.8, 0.45, 0.15]);
+        });
+        await waitClock(page, 0.3);
+      },
+      "chess-set": async (page) => {
+        await page.evaluate(() => {
+          const p = window.__splashery.player;
+          p.act(p.fromRecipe([0.1, 0.03, 0.5]));
+        });
+        await waitClock(page, 0.5);
+      },
+      bricks: async (page) => {
+        await page.evaluate(() => window.__splashery.player.act());
+        await waitClock(page, 5.3);
+      },
+    };
+    const names = { "puzzle-cube": "cube", "newtons-cradle": "cradle", "chess-set": "chess", bricks: "bricks" }; // prettier-ignore
+    for (const [w, h, opts] of [
+      [1440, 900, {}],
+      [390, 844, { hasTouch: true, isMobile: true }],
+    ]) {
+      const ctx = await browser.newContext({ viewport: { width: w, height: h }, ...opts });
+      const page = await ctx.newPage();
+      await loadApp(page);
+      await page.evaluate(() => window.__splashery.player.camera.setTurntable(false));
+      for (const [id, fn] of Object.entries(play)) {
+        await page.evaluate((id) => window.__splashery.app.chooseToy(id), id);
+        await page.waitForFunction((id) => window.__splashery.player.scene.toy.id === id, id);
+        await page.waitForTimeout(2500);
+        await fn(page);
+        await page.screenshot({ path: path.join(SHOTS, `f-${names[id]}-${w}x${h}.png`) });
+      }
+      await ctx.close();
+    }
   });
 });

@@ -498,8 +498,8 @@ const MODELS = [
     slots: [
       ["D", -1.5, 0, 0, 1], ["D", 1.5, 0, 0, 1],
       ["A", 0, 0, 1],
-      ["B", 1, 0, 2], ["D", -2, -0.5, 2],
-      ["B", 2, 0, 3], ["D", 2.5, 0, 4, 1],
+      ["B", 1, 0, 2], ["D", -2, 0.5, 2],
+      ["A", 2, 0, 3], ["D", 0.5, 0, 4, 1],
     ],
   },
   {
@@ -1055,6 +1055,8 @@ export const RECIPES = {
         ],
       },
     ],
+    // More splats for eighteen small bricks and their studs.
+    density: 1.5,
     controls: [{ key: "snap", label: "Build", type: "pulse", ease: BUILD.secs }],
     action: { key: "snap", label: "Build something" },
     drive(t, c, out, info) {
@@ -1821,6 +1823,8 @@ export const RECIPES = {
     // solved cube, or turns a scrambled one back to solved, one layer at a
     // time. Solving it by hand earns a little hop and a chime.
     alive: () => cubeBusy(),
+    // More splats: 26 cubies spend half theirs on faces hidden inside.
+    density: 1.8,
     controls: [{ key: "twist", label: "Scramble", type: "pulse", ease: CUBE_TAP }],
     action: { key: "twist", label: "Scramble or solve" },
     // For tests: whether each face shows one colour, and the turns since.

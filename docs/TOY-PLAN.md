@@ -11,8 +11,8 @@ Proposals below are suggestions; the owner may change them.
 ## Totals
 
 - 284 toys. 284 have a tap action today; the other 0 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 282.
-- **more** (has an effect; make it clearer or more dramatic): 2.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 284.
+- **more** (has an effect; make it clearer or more dramatic): 0.
 - **new** (needs its own effect): 0.
 - Visual fixes: 0 open, 28 done. Touch or drag interaction asked for: 4.
 
@@ -42,13 +42,14 @@ Proposals below are suggestions; the owner may change them.
   Pinecone, Acorns, Succulent, Bamboo, Pebbles, Kelp, Lava lamp, Ice swan, Tornado, Rainbow,
   Iceberg, Waterfall, Ocean wave, Ice cream, Watermelon, Cupcake, Lollipop, Candy cane, Macarons,
   Gummy bear, Pretzel, Croissant, Sushi, Taco, Coffee, Apple, Bananas, Orange, Kiwi, Pineapple,
-  Cherries, Grapes, Avocado, Rubber duck, Newton's cradle, Kite, Chess set, Lorenz attractor, Möbius
-  strip, Klein bottle, Menger sponge, Hypercube, Torus knot, Gyroid, Mandelbulb, Seashell spiral,
-  Heraldic shield, Crown, Wizard's orb, Jellyfish, School of fish, Pufferfish, Nautilus, Snail,
-  Octopus, Sea urchin, Frog, Snowman, Fireworks, Decorated tree, Diya, Acoustic guitar, Snare drum,
-  Xylophone, Hot-air balloon, Bus, Jet airliner, Sailboat, Submarine, Bicycle, Eiffel Tower,
-  Washington Monument, Pyramids of Giza, Twisting supertall, Statue of Liberty, White House, Leaning
-  Tower of Pisa, Colosseum, Parthenon, Stonehenge, Big Ben, Taj Mahal, Castle, Pagoda, Windmill.
+  Cherries, Grapes, Avocado, Building bricks, Rubber duck, Newton's cradle, Puzzle cube, Kite, Chess
+  set, Lorenz attractor, Möbius strip, Klein bottle, Menger sponge, Hypercube, Torus knot, Gyroid,
+  Mandelbulb, Seashell spiral, Heraldic shield, Crown, Wizard's orb, Jellyfish, School of fish,
+  Pufferfish, Nautilus, Snail, Octopus, Sea urchin, Frog, Snowman, Fireworks, Decorated tree, Diya,
+  Acoustic guitar, Snare drum, Xylophone, Hot-air balloon, Bus, Jet airliner, Sailboat, Submarine,
+  Bicycle, Eiffel Tower, Washington Monument, Pyramids of Giza, Twisting supertall, Statue of
+  Liberty, White House, Leaning Tower of Pisa, Colosseum, Parthenon, Stonehenge, Big Ben, Taj Mahal,
+  Castle, Pagoda, Windmill.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -1311,9 +1312,12 @@ Proposals below are suggestions; the owner may change them.
 
 ## Toys (16)
 
-- **Building bricks** (`bricks`). Now: tap: Pop the bricks. Plan: more.
+- **Building bricks** (`bricks`). Now: tap: Build something. Plan: keep.
   - Owner: Build something random from the blocks.
   - Effect: Bricks rearrange into a random small build (tower, bridge, animal), different each tap.
+  - Improved: F: eighteen bricks lie poured out round the table. Each tap pops the last model apart
+    and builds a new one in the middle, brick by brick from the bottom up, each clicking into place:
+    a tower, a bridge, stairs, a dog or a tree (never the same twice running; about 5 s).
   - Sound: Brick clicks.
   - Touch or drag interaction (phase F).
 - **Rubber duck** (`rubber-duck`). Now: tap: Squeak. Plan: keep.
@@ -1334,7 +1338,8 @@ Proposals below are suggestions; the owner may change them.
     and let go.
   - Improved: E1c: a tap lifts the end ball and lets it go. Each strike sends the far ball out,
     loses a little height and clacks as it lands, the middle balls twitch with the knock, and it
-    dies away over about 9 s. It no longer swings on its own.
+    dies away over about 9 s. It no longer swings on its own. F: drag any ball out to the side and
+    let go; the balls between it and the end come with it, and as many balls fly out the other side.
   - Sound: Crisp steel clacks.
   - Touch or drag interaction (phase F).
 - **Teddy bear** (`teddy-bear`). Now: tap: Wave hello. Plan: keep.
@@ -1343,11 +1348,15 @@ Proposals below are suggestions; the owner may change them.
 - **Yo-yo** (`yo-yo`). Now: tap: Throw. Plan: keep.
   - Owner: Fine.
   - Sound: String zip.
-- **Puzzle cube** (`puzzle-cube`). Now: tap: Twist the top. Plan: more.
+- **Puzzle cube** (`puzzle-cube`). Now: tap: Scramble or solve. Plan: keep.
   - Owner: Only the top row twists (very cool). Move more than the top row; ideally swipe any row or
     column to solve it; add a shuffle.
   - Effect: Tap scrambles with several random layer turns. Later: swipe a face to turn that layer,
     with a solved check.
+  - Improved: F: a real 3x3 cube of 26 cubies. Swipe across any face to turn that row or column: it
+    follows your finger and snaps to the nearest quarter turn with a click. A tap scrambles it (14
+    quick turns), or turns a scrambled cube back to solved; solve it by hand and it hops, spins and
+    chimes.
   - Sound: Plastic click per turn.
   - Touch or drag interaction (phase F).
 - **Spring toy** (`spring-toy`). Now: tap: Make it walk. Plan: keep.
@@ -1386,7 +1395,9 @@ Proposals below are suggestions; the owner may change them.
     the rules: castling, en passant, promotion, disambiguation; a set-up position from FEN; a clear
     message for a bad file), set the move speed, or go back to the Opera Game (the default). A
     promoting pawn sinks away and a new queen rises; the loser's king tips over after mate or
-    resignation.
+    resignation. F: tap a piece whose turn it is (it lifts), then a square it can legally move to;
+    the game goes on from there as your own (a queen for a pawn on the last rank; mate tips the king
+    over). The Play button, the game bar and a tap beside the board still play the Opera Game.
   - Sound: Wooden piece clacks.
 
 ## Maths (11)
