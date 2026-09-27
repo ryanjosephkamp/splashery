@@ -1270,7 +1270,7 @@ export const TOY_SOUNDS = {
     { voice: "tone", at: 0.75, f: "C5", decay: 1.4, vol: 0.7 },
     { voice: "tone", at: 2.0, f: "E5", decay: 1.4, vol: 0.7 },
     { voice: "tone", at: 3.2, f: "G5", decay: 1.4, vol: 0.7 },
-    { voice: "tine", at: 3.95, notes: "C5+E5+G5+C6", strum: 0.04, decay: 1.2 },
+    { voice: "tine", at: 3.85, notes: "C5+E5+G5+C6", strum: 0.04, decay: 0.55 },
   ],
   // A white-noise hiss that fades as the specks clear, and a clean chord at
   // step 0.
