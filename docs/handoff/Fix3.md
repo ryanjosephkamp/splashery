@@ -48,17 +48,18 @@ e5-banana-r2 and e4-ocean-wave-r2 to point at them. Check the owner's marks (ver
 September 27, 2026: both fixes are built, in draft PR #54 ("Phase Fix3: the banana's stem and the
 ocean wave's collapse") from `claude/lane-fix3`. Clips are on the Effect review page as cards
 `fix3-banana` and `fix3-ocean-wave` (lane record "Fix3"), replacing `e5-banana-r2` and
-`e4-ocean-wave-r2`. Waiting for the owner's marks.
+`e4-ocean-wave-r2`. The owner marked the wave good and the bananas "fix" (remove the crown); the
+redo is card `fix3-banana-r2`, waiting for a mark.
 
 ## Notes
 
 - **Bananas** (`banana` in `src/packs/food.js`): the piece hanging loose in the owner's screenshot
   was the bunch's crown, a plain shape with no token, so it stayed where it was built while all
-  three bananas (tokens) pulled away from it. It is now built in the middle banana's frame on that
-  banana's body token, so it moves with it (the middle banana moves least), and the front and back
-  bananas break off it with their own dark neck stubs. Every splat of the toy is a token now
-  (`tests/fix3.spec.mjs` checks). Its resting place moved a hair with the middle banana's turn, so
-  the thumbnail was re-rendered.
+  three bananas (tokens) pulled away from it. The first fix put it on the middle banana's token; the
+  owner marked that "fix" ("Just remove that stem ... so the top-left end of each banana looks the
+  same"), so r2 removes the crown altogether. Each banana now ends in its own neck and stalk tip,
+  the same on all three, and every splat of the toy is on one of the 21 tokens
+  (`tests/fix3.spec.mjs` checks). The thumbnail was re-rendered.
 - **Ocean wave** (`ocean-wave` in `src/packs/elements.js`, `OW_ROLL`, `OW_FALL`, `owFallIndex`):
   - The old collapse eased in and out of every keyframe (`ease()` per segment), so the wave stopped
     dead at the moment the lip hit the water and again at each key after it, and the keys between

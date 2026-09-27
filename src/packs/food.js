@@ -4574,29 +4574,6 @@ export const RECIPES = {
             { ...piece(tb), flat: 0.3, weight: 2, color: (c) => lit(c, "#3a2716") },
           );
         }
-        // The crown where the stalks meet rides on the middle banana (the
-        // one that moves least), so it stays joined to that banana's neck as
-        // the other two pull off it, like a banana broken off a bunch.
-        if (i === 1) {
-          const top = arc(0);
-          k.add(
-            k.tube(
-              spline([
-                add(top, [0.02, 0.0, 0]),
-                add(top, [-0.08, 0.06, 0]),
-                add(top, [-0.18, 0.08, 0]),
-              ]),
-              0.065,
-              { caps: true },
-            ),
-            {
-              ...piece(body),
-              flat: 0.3,
-              weight: 1.5,
-              color: (c) => lit(c, mix("#7a6a2e", "#4a3a1a", c.t ?? 0)),
-            },
-          );
-        }
         list.push({ body, neck: toW(arc(0)), strips, ...moves[i] });
         k.reach(add(toW(arc(1)), [0, 0.3, 0]));
         k.reach(add(toW(arc(0.9)), [0, -0.45, moves[i].away[2]]));
