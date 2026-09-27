@@ -79,10 +79,82 @@ Notes:
 
 ## State
 
-September 27, 2026: lane started. Handoff file, shelf category and draft PR first; then the toys.
+September 27, 2026: all 11 toys are built in `src/packs/computing.js` on the new "AI and computing"
+shelf (after Maths), each with its sound and plan entry. Draft PR:
+https://github.com/ryanjosephkamp/splashery/pull/52. Next: clips on the Effect review page, then the
+owner's marks.
+
+Clips are on the Effect review page (lane record `AI`, cards `ai-<toy id>`, posted September 27,
+2026). All 11 toys are `"v": "keep"` in the plan with an `improved` entry.
+
+What each tap does now:
+
+1. **Perceptron** (4 s): inputs X1 and X3 light (1, 0, 1) and send pulses along wires as thick as
+   their weights; the Σ node flashes, the gauge fills to under the threshold line and the lamp
+   flashes red (it wanted 1). The two live wires thicken (it learns), the pulses go again, the gauge
+   passes the threshold and the lamp snaps on gold. The weights ease back at the end.
+2. **Neural network** (4.5 s): a 3-4-2 network with a real forward pass (sigmoid). The inputs light,
+   yellow pulses (as big as the signal they carry) run to the hidden layer, whose neurons glow as
+   bright as they fire, then on to the outputs, where one wins. Red pulses run back and the wires
+   thicken or thin a little as they pass; they ease back at the end.
+3. **Convolutional network** (5 s): a glowing 3×3 filter slides over a handwritten 7 (7×7 pixels),
+   stamping a 5×5 feature map tile by tile (a real convolution with a down-left stroke filter, then
+   ReLU); the tiles slide together into the 3×3 pooled map (2×2 max pooling), and the digit scores
+   rise, 7 on top.
+4. **Recurrent network** (4.5 s): THE, CAT and SAT rise into the cell one at a time; the cell
+   flashes and the orb (the hidden state) takes on the word's color mixed with what it carried, runs
+   round the loop and back in. The LSTM style adds forget, input and output gates whose slats turn
+   open and shut like shutters.
+5. **Transformer** (5 s): cyan and magenta arcs (two heads, thicker where attention is stronger)
+   draw between THE CAT SAT ON; the tiles rise through the first feed-forward block (it glows), new
+   arcs draw at the second layer, the tiles rise through its block to the top, and MAT drops into
+   the row's last slot; the tiles come home and MAT fades at the end.
+6. **Looped transformer** (5 s): five tiles ride three laps round a track through one block; each
+   pass sharpens every tile's mark one step (noise, a coarse 2×2 mosaic, nearly right, exact) until
+   "3 + 4 = 7" settles (the 7 in gold); the marks go back to noise at the end.
+7. **Diffusion model** (5 s): a cloud of specks clears in ten steps into a rubber duck while the
+   STEP counter runs 50, 45 … 0; then the noise washes back (counter back to 50).
+8. **Gradient descent** (4.5 s): the ball takes 21 steps of gradient descent with momentum, each a
+   hop, leaving a trail of dots: just right, it overshoots the valley and settles; too low, it
+   creeps down the slope; too high, it bounces from wall to wall. It flies back to the start.
+9. **Word vectors** (4 s): an arrow runs from the origin to KING, another from MAN to WOMAN, and the
+   same step runs on from KING, landing right next to QUEEN, which lights up.
+10. **Sorting machine** (5 s): eight bars sort by bubble sort, quicksort or merge sort (the
+    Algorithm option), each bar a solid piece gliding to its new slot (right-movers pass in front,
+    left-movers behind), with a SWAPS counter (MOVES for merge sort); then they shuffle back.
+11. **Half adder** (3.5 s): switches A and B flip to 1, light fills the wires into the XOR and AND
+    gates, the XOR flashes and gives 0 (the sum lamp stays dark), the AND glows and lights the carry
+    lamp: "1+1=10" shows; then the switches flip back.
 
 ## Notes
 
+- Every toy is a dark display board (`board()`), so the glowing parts read on the white stage.
+- Shared helpers in `computing.js`: `board`, `wire` (thickness can change by a morph), `wireLight`
+  (a lit copy that fills with light along a fade channel), `bead` (a glowing token), `lamp` and
+  `lampLight`, `text` and `sign` (the 5×7 font plus Σ, +, =, →), `sevenSeg` and `showDigit`
+  (counters on tokens), `resortSteps` (below).
+- Draw order: tokens that travel across the board vanish behind it unless they are sorted again, so
+  `resortSteps()` sets `out.resort` once per step while pieces travel (the CNN's tiles, the RNN's
+  words, the transformer's tiles, the loop's tiles, the ball, the bars) and once after.
+- The diffusion duck's specks rest at random places but keep their depth on the duck, so its far
+  side still sorts behind its near side (splats sort where they rest).
+- Text is legible at phone size at a font pixel of about 0.016 to 0.025 of a board 2.5 to 3 wide.
+
 ## Known issues
 
+- On the weak tier (about 56,000 splats) the smallest labels (IN, HIDDEN, FFN, ATTN) blur at phone
+  size; the high tier and the clips read cleanly. The words that matter (word tiles, signs,
+  counters) are larger.
+- The looped transformer's tiles read right to left along the top of the loop (they ride a real loop
+  and keep facing you).
+- Taps undo their "learning" at the end (the perceptron's and the network's weights ease back), as
+  every tap must end where it started.
+- The tokens that glide across a board are re-sorted a few times a second during the glide
+  (`out.resort`); a very slow phone may show a brief draw-order flicker between re-sorts.
+- Sounds are first drafts for the Sound Board round; the sorting machine's notes follow the default
+  bubble sort only.
+
 ## For the Operator
+
+- A lesson for PACKS.md 7b: tokens that glide across a flat board just in front of it disappear
+  behind it until resorted; `out.resort` a few times during the glide fixes it.

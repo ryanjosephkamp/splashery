@@ -215,7 +215,7 @@ const textWidth = (str) => str.length * 6 - 1;
 
 // A line of text facing +Z, centred on `at`, `px` the size of one font pixel.
 // Dense, keep-coloured splats, so it stays crisp at phone size.
-function text(k, str, at, px, color, { weight = 7, align = "center", ...rest } = {}) {
+function text(k, str, at, px, color, { weight = 10, align = "center", ...rest } = {}) {
   const W = textWidth(str) * px;
   const H = 7 * px;
   const x0 = align === "left" ? at[0] : align === "right" ? at[0] - W : at[0] - W / 2;
