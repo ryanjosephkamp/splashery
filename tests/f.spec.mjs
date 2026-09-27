@@ -61,4 +61,19 @@ test.describe("Touch and drag (WebGL2)", () => {
     // Recipes ask for it with out.resort; it is off unless a recipe sets it.
     expect(r.resort).toBe(false);
   });
+
+  test("the game panel follows a game that changes on the board", async ({ page }) => {
+    await loadApp(page);
+    await openToy(page, "toys", "chess-set", "Chess set");
+    await expect(page.locator("#game-reset")).toBeHidden();
+    // Not through the panel: straight through the toy's game.
+    await page.evaluate(() =>
+      window.__splashery.player.toyInfo.recipe.game.load('[White "A"]\n[Black "B"]\n\n1. e4 e5 *'),
+    );
+    await expect(page.locator("#toy-game .game-title")).toContainText("On the board: A v B");
+    await expect(page.locator("#game-reset")).toBeVisible();
+    await page.click("#game-reset");
+    await expect(page.locator("#toy-game .game-title")).toContainText("Opera Game");
+    await expect(page.locator("#game-reset")).toBeHidden();
+  });
 });
