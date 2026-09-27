@@ -10,10 +10,10 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 287 toys. 287 have a tap action today; the other 0 only hop.
+- 297 toys. 297 have a tap action today; the other 0 only hop.
 - **keep** (the effect is right: the owner liked it, or C2 finished it): 286.
 - **more** (has an effect; make it clearer or more dramatic): 0.
-- **new** (needs its own effect): 1.
+- **new** (needs its own effect): 11.
 - Visual fixes: 0 open, 28 done. Touch or drag interaction asked for: 4.
 
 ## By phase
@@ -57,7 +57,9 @@ Proposals below are suggestions; the owner may change them.
 - **E3, new effects: tiny things, anatomy and maths.** None.
 - **E4, new effects: nature and weather.** None.
 - **E5, new effects: food.** None.
-- **E6, new effects: balls and the rest.** Perceptron
+- **E6, new effects: balls and the rest.** Perceptron, Neural network, Convolutional network,
+  Recurrent network, Transformer, Looped transformer, Diffusion model, Gradient descent, Word
+  vectors, Sorting machine, Half adder
 - **F, touch and drag interaction.** Gummy bear, Building bricks, Newton's cradle, Puzzle cube.
 
 ## Scans (32)
@@ -1852,7 +1854,7 @@ Proposals below are suggestions; the owner may change them.
     (4 s).
   - Sound: Creaking sails and wind.
 
-## Computing (1)
+## Computing (11)
 
 - **Perceptron** (`perceptron`). Now: tap: Try an example. Plan: new effect (E6).
   - Owner: Approved on the Toy Ideas page (lane AI).
@@ -1860,3 +1862,61 @@ Proposals below are suggestions; the owner may change them.
     node; the sum fills a gauge, and if it passes the threshold the output lamp snaps on. On a wrong
     answer the wires thicken or thin, so you watch it learn (4 s).
   - Sound: A blip for each input, a click as the lamp decides, a rising tone when it learns.
+- **Neural network** (`neural-network`). Now: tap: Forward and back. Plan: new effect (E6).
+  - Owner: Approved on the Toy Ideas page (lane AI).
+  - Effect: A forward pass: a wave of light runs left to right through three layers, each neuron
+    glowing as bright as its activation; then a red backprop pulse runs right to left and the
+    weights shift a little (4.5 s).
+  - Sound: A rising arpeggio going forward, a falling one coming back.
+- **Convolutional network** (`cnn`). Now: tap: Read the digit. Plan: new effect (E6).
+  - Owner: Approved on the Toy Ideas page (lane AI).
+  - Effect: A glowing 3×3 filter slides across a pixel picture of a handwritten 7, stamping a
+    feature map tile by tile; pooling shrinks the map, and a bar chart of the digits 0 to 9 rises
+    with 7 on top (5 s).
+  - Sound: A tick at each step of the filter, a chime at the answer.
+- **Recurrent network** (`rnn`). Now: tap: Read a sentence. Plan: new effect (E6).
+  - Owner: Approved on the Toy Ideas page (lane AI).
+  - Effect: Word blocks feed in one at a time; the hidden state, a glowing orb, loops back through
+    the cell after each one and changes color as it carries what came before. An LSTM style (an
+    option) shows its three gates opening and closing like shutters (4.5 s).
+  - Sound: A pulse for each word, the loop humming higher as the memory builds.
+- **Transformer** (`transformer`). Now: tap: Predict the next word. Plan: new effect (E6).
+  - Owner: Approved on the Toy Ideas page (lane AI).
+  - Effect: A row of token tiles; arcs of light jump between them, thicker where attention is
+    stronger and a different color for each head; the tiles rise through a feed-forward block and up
+    the stack of layers, and a new token tile appears at the end of the row (5 s).
+  - Sound: A shimmering chord for each layer, a pop for the new token.
+- **Looped transformer** (`looped-transformer`). Now: tap: Loop until it's sure. Plan: new effect
+  (E6).
+  - Owner: Approved on the Toy Ideas page (lane AI).
+  - Effect: One transformer block with a track looping through it: the row of tokens rides round the
+    loop several times, going from blurry to sharp on each pass, until the answer settles (5 s).
+  - Sound: A tone that climbs a step on each loop, then resolves.
+- **Diffusion model** (`diffusion-model`). Now: tap: Denoise. Plan: new effect (E6).
+  - Owner: Approved on the Toy Ideas page (lane AI).
+  - Effect: A cloud of random specks clears step by step into a crisp small toy (a rubber duck)
+    while a step counter runs down from 50 to 0; then the noise washes back over it (5 s).
+  - Sound: A white-noise hiss that settles into a clean chord.
+- **Gradient descent** (`gradient-descent`). Now: tap: Roll downhill. Plan: new effect (E6).
+  - Owner: Approved on the Toy Ideas page (lane AI).
+  - Effect: A ball rolls down a hilly loss landscape, overshoots and settles into a valley. A
+    "Learning rate" option makes it creep, or bounce right out of the valley when it's too high (4.5
+    s).
+  - Sound: A rolling tone that falls in pitch as the loss drops.
+- **Word vectors** (`word-vectors`). Now: tap: King − man + woman. Plan: new effect (E6).
+  - Owner: Approved on the Toy Ideas page (lane AI).
+  - Effect: Word points float in 3D, each with a small sign; arrows add up, king minus man plus
+    woman, and land right next to queen, which lights up (4 s).
+  - Sound: Three chimes, then a bright ding at the answer.
+- **Sorting machine** (`sorting-machine`). Now: tap: Sort the bars. Plan: new effect (E6).
+  - Owner: Approved on the Toy Ideas page (lane AI).
+  - Effect: A row of colored bars of different heights sorts itself, the bars swapping as solid
+    pieces, by bubble sort, quicksort or merge sort (an option), with a swap counter; then it
+    shuffles again (5 s).
+  - Sound: Each bar plays its height as a note, so you hear the sort rise into a scale.
+- **Half adder** (`half-adder`). Now: tap: Add 1 + 1. Plan: new effect (E6).
+  - Owner: Approved on the Toy Ideas page (lane AI).
+  - Effect: Two input switches flip; light flows along the wires through an XOR gate and an AND
+    gate, whose shapes glow as they fire, and the sum and carry lamps show 1 + 1 = 10 in binary (3.5
+    s).
+  - Sound: Switch clicks, and a buzz through each gate.
