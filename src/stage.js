@@ -470,6 +470,19 @@ export class Stage {
     return [out.x, out.y, out.z];
   }
 
+  modelToWorld(p) {
+    const out = new pc.Vec3();
+    this.toy.entity.getWorldTransform().transformPoint(new pc.Vec3(p[0], p[1], p[2]), out);
+    return [out.x, out.y, out.z];
+  }
+
+  // Where a world point shows on the canvas (CSS pixels), for tests and clips.
+  toScreen(p) {
+    const out = new pc.Vec3();
+    this.cameraEntity.camera.worldToScreen(new pc.Vec3(p[0], p[1], p[2]), out);
+    return [out.x, out.y];
+  }
+
   modelScale() {
     return this.toy ? this.toy.entity.getLocalScale().x : 1;
   }

@@ -215,7 +215,9 @@ export class MotionDriver {
 
     // The kit toy's own frame: behaviours clock, recipe drive, parts.
     const kt = this.tick(this.kitClock, time, rate, motion.alive !== false);
-    const drive = { energy: 0, grow: 1, amount: 1, glow: [1, 1, 1, 0], parts: {}, body: null, fx: {}, addon: null, tokens: null, cues: [], morph: null }; // prettier-ignore
+    // out.resort: true on a frame asks the player to sort the tokens again
+    // where they stand (resortTokens in src/player.js).
+    const drive = { energy: 0, grow: 1, amount: 1, glow: [1, 1, 1, 0], parts: {}, body: null, fx: {}, addon: null, tokens: null, cues: [], morph: null, resort: false }; // prettier-ignore
     // info.data is whatever the recipe's build left in k.data (which molecule
     // was built, say), for effects that depend on the build.
     const about = { time, R, tap: this.tap, data: this.ctx?.kit?.data };

@@ -6,7 +6,7 @@
 import * as pc from "./pc.js";
 import { Stage, NoGPUError } from "./stage.js";
 import { OrbitCamera, Gestures } from "./camera.js";
-import { EffectDriver, hexToRgb } from "./effects.js";
+import { EffectDriver, hexToRgb, KINDS } from "./effects.js";
 import { Painter } from "./paint.js";
 import { generate, normalizeGenerator, applyClay, PROFILES } from "./generators.js";
 import { buildRecipe, meanLuminance, Kit } from "./kit.js";
@@ -574,6 +574,46 @@ export class Player {
     if (!all) this.stage.requestRender();
   }
 
+  // Splats are depth-sorted in the pose they were built in, so a token
+  // (a game piece) moved far from its built place, say from the back of a
+  // toy to its front, draws in the wrong order. This sorts a kit toy's
+  // token splats again at the places the current token uniforms put them
+  // (the same move as the kit shader's: a turn about the origin, then the
+  // offset). The recipe asks for it by setting out.resort on a frame where
+  // its pieces have settled; it is a one-off cost, not for every frame.
+  resortTokens() {
+    const proc = this.proc;
+    if (!proc?.kit || !proc.ctx?.buf?.anim) return 0;
+    const { buf } = proc.ctx;
+    const centers = proc.container.centers;
+    const td = this.motion.tokenData;
+    let n = 0;
+    for (let i = 0; i < buf.count; i++) {
+      const i3 = i * 3;
+      const i4 = i * 4;
+      if (Math.round(buf.anim[i4 + 1]) !== KINDS.token) continue;
+      const o = Math.min(47, Math.max(0, Math.round(buf.anim[i4 + 2]))) * 8;
+      let [x, y, z, w] = [td[o + 4], td[o + 5], td[o + 6], td[o + 7]];
+      if (!x && !y && !z && !w) w = 1;
+      const px = buf.pos[i3];
+      const py = buf.pos[i3 + 1];
+      const pz = buf.pos[i3 + 2];
+      // v + 2 u x (u x v + w v), with u = (x, y, z).
+      const cx = y * pz - z * py + w * px;
+      const cy = z * px - x * pz + w * py;
+      const cz = x * py - y * px + w * pz;
+      centers[i3] = px + 2 * (y * cz - z * cy) + td[o];
+      centers[i3 + 1] = py + 2 * (z * cx - x * cz) + td[o + 1];
+      centers[i3 + 2] = pz + 2 * (x * cy - y * cx) + td[o + 2];
+      n++;
+    }
+    if (n) {
+      proc.container.update(buf.count, true);
+      this.stage.requestRender();
+    }
+    return n;
+  }
+
   disposeProcedural() {
     this.proc = null;
   }
@@ -741,6 +781,18 @@ export class Player {
     return [0, 1, 2].map((i) => m[i] / tf.scale + tf.center[i]);
   }
 
+  // The inverse: a point in the current toy's recipe coordinates in the world.
+  fromRecipe(p) {
+    const tf = this.motion.ctx?.transform;
+    if (!tf || !this.stage.toy) return p.slice();
+    return this.stage.modelToWorld([0, 1, 2].map((i) => (p[i] - tf.center[i]) * tf.scale));
+  }
+
+  // Where a recipe point shows on the canvas (CSS pixels), for tests and clips.
+  screenPoint(p) {
+    return this.stage.toScreen(this.fromRecipe(p));
+  }
+
   // ---- Frame ------------------------------------------------------------------
 
   // Effect settings with the idle behaviour blended in.
@@ -863,6 +915,9 @@ export class Player {
       this.stage.requestRender();
     }
     this.stage.setBusy(busy && !this.loading);
+    // A recipe's pieces moved far from where they were built (a cube's
+    // turned layer): sort them again where they stand now.
+    if (this.motion.out?.resort) this.resortTokens();
     // Sounds a recipe asks for mid-effect (a chess move's clack).
     const cues = this.motion.out?.cues;
     if (cues?.length && !this.frozen) this.emit("cue", cues.slice());
@@ -956,7 +1011,10 @@ export class Player {
   }
 
   // A recipe's own drag (the laptop's trackpad): `drag.at(point)` says
-  // whether a drag starting there is the toy's; otherwise it orbits.
+  // whether a drag starting there is the toy's; otherwise it orbits. The
+  // pointer follows the horizontal plane the drag started on, or the plane
+  // `drag.plane` names: "view" (facing the camera) or a normal in recipe
+  // coordinates (or `(point) => normal`, such as the face of a cube).
   dragStartsHere(world) {
     const d = this.toyInfo?.recipe?.drag;
     return !d || !!d.at(this.toRecipe(world));
@@ -967,7 +1025,10 @@ export class Player {
     const drag = info.recipe.drag;
     if (drag) {
       this.dragY = world[1];
-      drag.start?.(this.toRecipe(world), this.time);
+      const p = this.toRecipe(world);
+      const n = typeof drag.plane === "function" ? drag.plane(p) : drag.plane;
+      this.dragPlane = n ? { point: p, normal: n === "view" ? this.recipeRay(x, y).dir : n } : null; // prettier-ignore
+      drag.start?.(p, this.time);
       this.stage.requestRender();
       return;
     }
@@ -980,6 +1041,21 @@ export class Player {
 
   grabAt(x, y) {
     const drag = this.toyInfo?.recipe?.drag;
+    if (drag && this.dragPlane) {
+      // Across the recipe's own plane, in recipe coordinates.
+      const { point: o, normal: n } = this.dragPlane;
+      const ray = this.recipeRay(x, y);
+      const den = ray.dir[0] * n[0] + ray.dir[1] * n[1] + ray.dir[2] * n[2];
+      if (Math.abs(den) < 1e-4) return;
+      const t = ((o[0] - ray.origin[0]) * n[0] + (o[1] - ray.origin[1]) * n[1] + (o[2] - ray.origin[2]) * n[2]) / den; // prettier-ignore
+      if (t < 0) return;
+      drag.move(
+        [0, 1, 2].map((i) => ray.origin[i] + ray.dir[i] * t),
+        this.time,
+      );
+      this.stage.requestRender();
+      return;
+    }
     if (drag) {
       // Across the horizontal plane the drag started on.
       const ray = this.stage.ray(x, y);
@@ -1010,10 +1086,22 @@ export class Player {
     this.stage.requestRender();
   }
 
+  // The pointer's ray in the current toy's recipe coordinates (the
+  // direction is a unit vector).
+  recipeRay(x, y) {
+    const ray = this.stage.ray(x, y);
+    const o = this.toRecipe(ray.origin);
+    const b = this.toRecipe(ray.origin.map((v, i) => v + ray.dir[i]));
+    const d = [b[0] - o[0], b[1] - o[1], b[2] - o[2]];
+    const l = Math.hypot(d[0], d[1], d[2]) || 1;
+    return { origin: o, dir: [d[0] / l, d[1] / l, d[2] / l] };
+  }
+
   // Lets go. Returns how far it was stretched, in toy radii.
   grabEnd() {
     const drag = this.toyInfo?.recipe?.drag;
     if (drag) {
+      this.dragPlane = null;
       drag.end?.(this.time);
       this.stage.requestRender();
       return 0;

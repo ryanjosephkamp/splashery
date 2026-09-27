@@ -213,7 +213,7 @@
       "owner": "Ideally playable. At least: a tap plays a real game, white against black, as a long animation.",
       "effect": "Plays a famous public-domain game move by move; later, tap a piece then a square to move it.",
       "sound": "Wooden piece clacks.",
-      "improved": "E1b: rebuilt as a kit toy (walnut board, 32 turned pieces). A tap plays Morphy's Opera Game (Paris, 1858) move by move: each piece slides to its square, knights jump, captured pieces go to trays beside the board, each move clacks, and at 17.Rd8# the black king tips over. Tap again and the pieces glide home. E1c: plays any game too. Open a PGN file or paste a game (all the rules: castling, en passant, promotion, disambiguation; a set-up position from FEN; a clear message for a bad file), set the move speed, or go back to the Opera Game (the default). A promoting pawn sinks away and a new queen rises; the loser's king tips over after mate or resignation."
+      "improved": "E1b: rebuilt as a kit toy (walnut board, 32 turned pieces). A tap plays Morphy's Opera Game (Paris, 1858) move by move: each piece slides to its square, knights jump, captured pieces go to trays beside the board, each move clacks, and at 17.Rd8# the black king tips over. Tap again and the pieces glide home. E1c: plays any game too. Open a PGN file or paste a game (all the rules: castling, en passant, promotion, disambiguation; a set-up position from FEN; a clear message for a bad file), set the move speed, or go back to the Opera Game (the default). A promoting pawn sinks away and a new queen rises; the loser's king tips over after mate or resignation. F: tap a piece whose turn it is (it lifts), then a square it can legally move to; the game goes on from there as your own (a queen for a pawn on the last rank; mate tips the king over). The Play button, the game bar and a tap beside the board still play the Opera Game."
     },
     "horse-statue": {
       "v": "keep",
@@ -1300,11 +1300,12 @@
       "improved": "E5: the stone pops out of its half, flies over and drops into the empty half with a thock, rocking it, then pops back home and the first half rocks (about 3.1 s)."
     },
     "bricks": {
-      "v": "more",
+      "v": "keep",
       "interactive": true,
       "owner": "Build something random from the blocks.",
       "effect": "Bricks rearrange into a random small build (tower, bridge, animal), different each tap.",
-      "sound": "Brick clicks."
+      "sound": "Brick clicks.",
+      "improved": "F: eighteen bricks lie poured out round the table. Each tap pops the last model apart and builds a new one in the middle, brick by brick from the bottom up, each clicking into place: a tower, a bridge, stairs, a dog or a tree (never the same twice running; about 5 s)."
     },
     "rubber-duck": {
       "v": "keep",
@@ -1329,7 +1330,7 @@
       "owner": "Tapping has no noticeable effect. Make it more interactive.",
       "effect": "Tap lifts and drops an end ball hard so the clacks are obvious; later, drag a ball back and let go.",
       "sound": "Crisp steel clacks.",
-      "improved": "E1c: a tap lifts the end ball and lets it go. Each strike sends the far ball out, loses a little height and clacks as it lands, the middle balls twitch with the knock, and it dies away over about 9 s. It no longer swings on its own."
+      "improved": "E1c: a tap lifts the end ball and lets it go. Each strike sends the far ball out, loses a little height and clacks as it lands, the middle balls twitch with the knock, and it dies away over about 9 s. It no longer swings on its own. F: drag any ball out to the side and let go; the balls between it and the end come with it, and as many balls fly out the other side."
     },
     "teddy-bear": {
       "v": "keep",
@@ -1342,11 +1343,12 @@
       "sound": "String zip."
     },
     "puzzle-cube": {
-      "v": "more",
+      "v": "keep",
       "interactive": true,
       "owner": "Only the top row twists (very cool). Move more than the top row; ideally swipe any row or column to solve it; add a shuffle.",
       "effect": "Tap scrambles with several random layer turns. Later: swipe a face to turn that layer, with a solved check.",
-      "sound": "Plastic click per turn."
+      "sound": "Plastic click per turn.",
+      "improved": "F: a real 3x3 cube of 26 cubies. Swipe across any face to turn that row or column: it follows your finger and snaps to the nearest quarter turn with a click. A tap scrambles it (14 quick turns), or turns a scrambled cube back to solved; solve it by hand and it hops, spins and chimes."
     },
     "spring-toy": {
       "v": "keep",

@@ -1973,7 +1973,7 @@ export const TOYS = [
     kind: "kit",
     pack: "playthings",
     tags: "blocks studs stack build construction plastic",
-    camera: { yaw: 0.6, pitch: 0.42, roll: 0, distance: 4.4 },
+    camera: { yaw: 0.6, pitch: 0.5, roll: 0, distance: 3.3 },
   },
   {
     id: "rubber-duck",
