@@ -624,6 +624,45 @@ export const TOYS = [
         "Turned into splats from the textured 3D model (tools/mesh-to-splats.mjs) with soft studio light baked in, recentred and scaled.",
     },
   },
+  // ---- Photoreal from one photo (lane G: TRELLIS image-to-3D, MIT) ----
+  {
+    id: "pencil-real",
+    label: "Real pencil",
+    category: "scans",
+    tags: "photoreal ai photo pencil wood eraser school stationery",
+    kind: "captured",
+    url: "assets/toys/pencil-real/pencil-real.sog",
+    urlWeak: "assets/toys/pencil-real/pencil-real-lite.sog",
+    camera: { yaw: 0.35, pitch: 0.55, roll: 0, distance: 4.2 },
+    credit: {
+      title: "Kleiner Bleistift",
+      author: "Tim Reckmann",
+      source: "https://commons.wikimedia.org/wiki/File:Kleiner_Bleistift_(40045317711).jpg",
+      license: "CC BY 2.0",
+      licenseUrl: "https://creativecommons.org/licenses/by/2.0/",
+      changes:
+        "Made into 3D Gaussian splats from this one photo with the TRELLIS image-to-3D model (MIT), recentred and scaled.",
+    },
+  },
+  {
+    id: "tin-can-real",
+    label: "Real tin can",
+    category: "scans",
+    tags: "photoreal ai photo tin can soup food metal kitchen",
+    kind: "captured",
+    url: "assets/toys/tin-can-real/tin-can-real.sog",
+    urlWeak: "assets/toys/tin-can-real/tin-can-real-lite.sog",
+    camera: { yaw: 0.35, pitch: 0.45, roll: 0, distance: 4.6 },
+    credit: {
+      title: "Can opened with side opener",
+      author: "Ll1324",
+      source: "https://commons.wikimedia.org/wiki/File:Can_opened_with_side_opener.jpg",
+      license: "CC0 1.0",
+      licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/",
+      changes:
+        "Made into 3D Gaussian splats from this one photo with the TRELLIS image-to-3D model (MIT), recentred and scaled.",
+    },
+  },
   // Kit toys: recipes in src/packs/<pack>.js, built in the browser.
   {
     id: "basketball",

@@ -78,3 +78,8 @@ These are `devDependencies` used to prepare assets and run tests; nothing from t
 - `jpeg-js` 0.4.4 (BSD-3-Clause), https://github.com/eugeneware/jpeg-js, and `pngjs` 7.0.0 (MIT),
   https://github.com/pngjs/pngjs: decode those models' textures in `tools/mesh-to-splats.mjs`, and
   put the before-and-after sharpness crops side by side in `tools/sharpness-pairs.mjs`.
+- The TRELLIS Space on Hugging Face (not a package; `tools/image-to-3d.mjs` calls it over HTTPS with
+  plain fetch): https://huggingface.co/spaces/trellis-community/TRELLIS (MIT), running the TRELLIS
+  model https://huggingface.co/microsoft/TRELLIS-image-large (MIT) and rembg's u2net background
+  cut-out (Apache-2.0). It made the Real pencil and Real tin can; their photos' licences are in
+  CREDITS.md.

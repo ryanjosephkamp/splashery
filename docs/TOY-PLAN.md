@@ -10,8 +10,8 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 284 toys. 284 have a tap action today; the other 0 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 282.
+- 286 toys. 286 have a tap action today; the other 0 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 284.
 - **more** (has an effect; make it clearer or more dramatic): 2.
 - **new** (needs its own effect): 0.
 - Visual fixes: 0 open, 28 done. Touch or drag interaction asked for: 4.
@@ -27,28 +27,29 @@ Proposals below are suggestions; the owner may change them.
   fly, May beetle, Millipede, Carder bumblebee, Raspberry, Blackberry, Blueberry, Grape, Cinnamon
   star cookie, Tomatoes, Mandeltorus, Basket, Real rubber duck, Garden gnome, Wooden elephant,
   Marble bust, Ukulele, Alarm clock, Vintage camera, Boombox, Real croissant, Carrot cake,
-  Pomegranate, Lantern, Cat statue, Horse statue, Basketball, Soccer ball, American football, Tennis
-  ball, Baseball, Softball, Beach ball, Golf ball, Rugby ball, Volleyball, Water polo ball,
-  Ping-pong ball, Cricket ball, Bowling ball, Pool ball, Pickleball, Dodgeball, Medicine ball,
-  Lacrosse ball, Squash ball, Bouncy ball, Marble, Hockey puck, Shuttlecock, Flying disc, Beating
-  heart, Sun, Solar system, Mercury, Venus, Earth, Moon, Mars, Jupiter, Saturn, Uranus, Neptune,
-  Aurora world, Asteroid, Comet, Meteor, Star, Pulsar, Black hole, Star cluster, Ring nebula,
-  Nebula, Spiral galaxy, Virus, Bacteriophage, Bacterium, Red blood cell, Neuron, Astrocyte, Animal
-  cell, DNA, White blood cell, Microglia, Diatom, Pollen grain, Snowflake, Chromosome,
-  Mitochondrion, Paramecium, Amoeba, Electron orbital, Atom, Molecule, Protein, Crystal lattice,
-  Diamond, Ruby, Emerald, Amethyst geode, Sapphire, Quartz cluster, Opal, Crystal ball, Brain, Eye,
-  Lungs, Tooth, Kidney, Oak tree, Pine tree, Palm tree, Cherry blossom, Maple tree, Bonsai, Weeping
-  willow, Sunflower, Rose, Tulips, Daisies, Lotus, Toadstool, Fern, Saguaro cactus, Coral reef,
-  Pinecone, Acorns, Succulent, Bamboo, Pebbles, Kelp, Lava lamp, Ice swan, Tornado, Rainbow,
-  Iceberg, Waterfall, Ocean wave, Ice cream, Watermelon, Cupcake, Lollipop, Candy cane, Macarons,
-  Gummy bear, Pretzel, Croissant, Sushi, Taco, Coffee, Apple, Bananas, Orange, Kiwi, Pineapple,
-  Cherries, Grapes, Avocado, Rubber duck, Newton's cradle, Kite, Chess set, Lorenz attractor, Möbius
-  strip, Klein bottle, Menger sponge, Hypercube, Torus knot, Gyroid, Mandelbulb, Seashell spiral,
-  Heraldic shield, Crown, Wizard's orb, Jellyfish, School of fish, Pufferfish, Nautilus, Snail,
-  Octopus, Sea urchin, Frog, Snowman, Fireworks, Decorated tree, Diya, Acoustic guitar, Snare drum,
-  Xylophone, Hot-air balloon, Bus, Jet airliner, Sailboat, Submarine, Bicycle, Eiffel Tower,
-  Washington Monument, Pyramids of Giza, Twisting supertall, Statue of Liberty, White House, Leaning
-  Tower of Pisa, Colosseum, Parthenon, Stonehenge, Big Ben, Taj Mahal, Castle, Pagoda, Windmill.
+  Pomegranate, Lantern, Cat statue, Horse statue, Real pencil, Real tin can, Basketball, Soccer
+  ball, American football, Tennis ball, Baseball, Softball, Beach ball, Golf ball, Rugby ball,
+  Volleyball, Water polo ball, Ping-pong ball, Cricket ball, Bowling ball, Pool ball, Pickleball,
+  Dodgeball, Medicine ball, Lacrosse ball, Squash ball, Bouncy ball, Marble, Hockey puck,
+  Shuttlecock, Flying disc, Beating heart, Sun, Solar system, Mercury, Venus, Earth, Moon, Mars,
+  Jupiter, Saturn, Uranus, Neptune, Aurora world, Asteroid, Comet, Meteor, Star, Pulsar, Black hole,
+  Star cluster, Ring nebula, Nebula, Spiral galaxy, Virus, Bacteriophage, Bacterium, Red blood cell,
+  Neuron, Astrocyte, Animal cell, DNA, White blood cell, Microglia, Diatom, Pollen grain, Snowflake,
+  Chromosome, Mitochondrion, Paramecium, Amoeba, Electron orbital, Atom, Molecule, Protein, Crystal
+  lattice, Diamond, Ruby, Emerald, Amethyst geode, Sapphire, Quartz cluster, Opal, Crystal ball,
+  Brain, Eye, Lungs, Tooth, Kidney, Oak tree, Pine tree, Palm tree, Cherry blossom, Maple tree,
+  Bonsai, Weeping willow, Sunflower, Rose, Tulips, Daisies, Lotus, Toadstool, Fern, Saguaro cactus,
+  Coral reef, Pinecone, Acorns, Succulent, Bamboo, Pebbles, Kelp, Lava lamp, Ice swan, Tornado,
+  Rainbow, Iceberg, Waterfall, Ocean wave, Ice cream, Watermelon, Cupcake, Lollipop, Candy cane,
+  Macarons, Gummy bear, Pretzel, Croissant, Sushi, Taco, Coffee, Apple, Bananas, Orange, Kiwi,
+  Pineapple, Cherries, Grapes, Avocado, Rubber duck, Newton's cradle, Kite, Chess set, Lorenz
+  attractor, Möbius strip, Klein bottle, Menger sponge, Hypercube, Torus knot, Gyroid, Mandelbulb,
+  Seashell spiral, Heraldic shield, Crown, Wizard's orb, Jellyfish, School of fish, Pufferfish,
+  Nautilus, Snail, Octopus, Sea urchin, Frog, Snowman, Fireworks, Decorated tree, Diya, Acoustic
+  guitar, Snare drum, Xylophone, Hot-air balloon, Bus, Jet airliner, Sailboat, Submarine, Bicycle,
+  Eiffel Tower, Washington Monument, Pyramids of Giza, Twisting supertall, Statue of Liberty, White
+  House, Leaning Tower of Pisa, Colosseum, Parthenon, Stonehenge, Big Ben, Taj Mahal, Castle,
+  Pagoda, Windmill.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -59,7 +60,7 @@ Proposals below are suggestions; the owner may change them.
 - **E6, new effects: balls and the rest.** None.
 - **F, touch and drag interaction.** Gummy bear, Building bricks, Newton's cradle, Puzzle cube.
 
-## Scans (30)
+## Scans (32)
 
 - **Cactus** (`cactus`). Now: tap: Bloom (rig). Plan: keep.
   - Owner: No special effect. Looks fine.
@@ -261,6 +262,21 @@ Proposals below are suggestions; the owner may change them.
     base rears as one solid piece about its hind hooves, prances at the top and lands with a small
     bounce (2.6 s).
   - Sound: Stone grind and a whinny-like whistle.
+- **Real pencil** (`pencil-real`). Now: tap: Spin (rig). Plan: keep.
+  - Owner: Owner's list of real-life (photographic) splats (lane G brief): a pencil, no brands.
+  - Effect: Flicked, it spins flat on the desk and slows to a stop.
+  - Improved: G: made from one CC BY photo with the TRELLIS image-to-3D model. A tap flicks the
+    pencil: it spins flat on the desk about its middle, two whole turns, slowing evenly to a stop
+    where it began (2.4 s). It stays photo side up; a roll showed the dark underside the model
+    guessed.
+  - Sound: A wooden flick, then a soft scrape that slows.
+- **Real tin can** (`tin-can-real`). Now: tap: Knock (rig). Plan: keep.
+  - Owner: Owner's list of real-life (photographic) splats (lane G brief): a can of soup, no brands.
+  - Effect: Knocked onto its rim, spins round on it faster and faster, and drops flat.
+  - Improved: G: made from one CC0 photo of a plain unlabelled can with the TRELLIS image-to-3D
+    model. A tap tips it onto its bottom rim; it spins round on the rim faster as it leans less,
+    like a settling coin, and drops flat with a clank (2.6 s).
+  - Sound: A tin clank, a rim rattle that speeds up, a last clank.
 
 ## Shapes (4)
 
