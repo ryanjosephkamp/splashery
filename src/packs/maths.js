@@ -1964,12 +1964,13 @@ const GLYPHS = {
   x: "00000 00000 10001 01010 00100 01010 10001",
   y: "00000 00000 10001 10001 01111 00001 01110",
   z: "00000 00000 11111 00010 00100 01000 11111",
-  "θ": "01110 10001 10001 11111 10001 10001 01110",
+  θ: "01110 10001 10001 11111 10001 10001 01110",
   "=": "00000 00000 11111 00000 11111 00000 00000",
   "+": "00000 00100 00100 11111 00100 00100 00000",
   "(": "00010 00100 01000 01000 01000 00100 00010",
   ")": "01000 00100 00010 00010 00010 00100 01000",
   " ": "00000 00000 00000 00000 00000 00000 00000",
+  2: "01110 10001 00001 00010 00100 01000 11111",
 };
 // The pixel centres of a line of text: `h` is the glyph height; the text's
 // left end, baseline middle is at `at` in the XY plane (z = at[2]). Pieces of
@@ -1993,7 +1994,7 @@ function textPixels(text, at, h) {
     if (sup && ch === "{") continue;
     const g = GLYPHS[ch];
     const s = h / 7;
-    const px = sup ? s * 0.6 : s;
+    const px = sup ? s * 0.72 : s;
     const y0 = at[1] + (sup ? h * 0.55 : 0) - (sup ? 0 : h / 2);
     if (g) {
       const rows = g.split(" ");
@@ -2020,7 +2021,7 @@ function textCloud(k, pixels, opts, look) {
       p: [px.p[0] + (rand() - 0.5) * j, px.p[1] + (rand() - 0.5) * j, px.p[2]],
       n: [0, 0, 1],
       flat: 0.4,
-      size: (px.px / 0.02) * 1.1,
+      size: Math.max(0.9, (px.px / 0.014) * 1.05),
       ...look(px, rand),
     };
   });
@@ -2106,7 +2107,7 @@ const CURVE_SAMPLES = 1600;
 
 // A curve's point at parameter u (x, θ or t) and a, or null.
 function curvePoint(parsed, u, a, b) {
-  const v = { x: u, t: u, "θ": u, a, b, y: 0, r: 0 };
+  const v = { x: u, t: u, θ: u, a, b, y: 0, r: 0 };
   let x;
   let y;
   if (parsed.kind === "y") {
@@ -2221,7 +2222,12 @@ function makePlot(parsed, spec, b) {
     list.forEach((p, i) => {
       const P = p && toBoard(p);
       const ok = P && inside(P);
-      if (ok && cur && Math.hypot(P[0] - cur[cur.length - 1].P[0], P[1] - cur[cur.length - 1].P[1]) < 0.35) { // prettier-ignore
+      if (
+        ok &&
+        cur &&
+        Math.hypot(P[0] - cur[cur.length - 1].P[0], P[1] - cur[cur.length - 1].P[1]) < 0.35
+      ) {
+        // prettier-ignore
         cur.push({ i, P });
         return;
       }
@@ -2672,7 +2678,7 @@ function makeSurface(parsed, spec) {
     : [A[1]];
   const dx = spec.dom || TYPED_DOM;
   const dy = spec.domY || dx;
-  const v = { x: 0, y: 0, a: 1, b: 1, r: 0, "θ": 0, t: 0 };
+  const v = { x: 0, y: 0, a: 1, b: 1, r: 0, θ: 0, t: 0 };
   const zAt = (U, V, a) => {
     v.x = dx[0] + (dx[1] - dx[0]) * U;
     v.y = dy[0] + (dy[1] - dy[0]) * V;
@@ -2809,8 +2815,8 @@ Object.assign(RECIPES, {
       const gridStep = [step / (g.dx[1] - g.dx[0]), step / (g.dy[1] - g.dy[0])];
       const gridOff = [(-g.dx[0] / step) % 1, (-g.dy[0] / step) % 1];
       const onLine = (U, V) => {
-        const fu = Math.abs((((U / gridStep[0] - gridOff[0]) % 1) + 1) % 1 - 0.5);
-        const fv = Math.abs((((V / gridStep[1] - gridOff[1]) % 1) + 1) % 1 - 0.5);
+        const fu = Math.abs(((((U / gridStep[0] - gridOff[0]) % 1) + 1) % 1) - 0.5);
+        const fv = Math.abs(((((V / gridStep[1] - gridOff[1]) % 1) + 1) % 1) - 0.5);
         return Math.max(fu, fv) > 0.47;
       };
       // Coloured by height, with a fine mesh of darker lines, two-sided.
@@ -2859,6 +2865,662 @@ Object.assign(RECIPES, {
         },
       });
       if (g.usesA) plotSlider(k, [0.12, baseY - 0.05, 1.22]);
+    },
+  },
+});
+
+// ---- Circle and waves ---------------------------------------------------------------
+
+// The unit circle (centre UC_C, radius UC_R) with the sine wave on a wall to
+// its right and the cosine wave on a wall below it, like the classic
+// diagram; Euler's formula sits in the corner between them.
+const UC_C = [-0.62, 0.36, 0];
+const UC_R = 0.44;
+const UC_W = 1.45; // one turn along each wave
+const UC_SX = UC_C[0] + UC_R + 0.17; // where the sine wave starts
+const UC_CY = UC_C[1] - UC_R - 0.17; // where the cosine wave starts
+const UC_SIN = "#ff5d73";
+const UC_COS = "#4dabf7";
+const ucPoint = (th) => [UC_C[0] + UC_R * Math.cos(th), UC_C[1] + UC_R * Math.sin(th), 0.03];
+const ucSine = (th) => [UC_SX + (UC_W * th) / TAU, UC_C[1] + UC_R * Math.sin(th), 0.03];
+const ucCosine = (th) => [UC_C[0] + UC_R * Math.cos(th), UC_CY - (UC_W * th) / TAU, 0.03];
+// Euler's formula, and which characters make each term: e^(iθ), cos θ and
+// i sin θ light up in turn.
+const EULER = "e^{iθ} = cos θ + i sin θ";
+const EULER_TERMS = [
+  { from: 0, to: 2, at: 0.12, color: "#ffe08a" },
+  { from: 6, to: 10, at: 0.42, color: UC_COS },
+  { from: 14, to: 20, at: 0.72, color: UC_SIN },
+];
+
+// A wave (or any path) drawn as a ribbon of splats, sampled by length:
+// samples carry f, the fraction along it.
+function pathRibbon(fn, n, width) {
+  const pts = Array.from({ length: n + 1 }, (_, i) => fn(i / n));
+  const cum = [0];
+  for (let i = 1; i <= n; i++) cum.push(cum[i - 1] + len(sub(pts[i], pts[i - 1])));
+  const L = cum[n];
+  return {
+    area: L * width,
+    thick: width / 2,
+    sample(rand) {
+      const s = rand() * L;
+      let lo = 0;
+      let hi = n;
+      while (hi - lo > 1) {
+        const mid = (lo + hi) >> 1;
+        if (cum[mid] <= s) lo = mid;
+        else hi = mid;
+      }
+      const f = (s - cum[lo]) / (cum[hi] - cum[lo] || 1);
+      const a = pts[lo];
+      const b = pts[hi];
+      const d = unit(sub(b, a));
+      const w = (rand() - 0.5) * width;
+      return {
+        p: [a[0] + (b[0] - a[0]) * f - d[1] * w, a[1] + (b[1] - a[1]) * f + d[0] * w, a[2]],
+        n: [0, 0, 1],
+        f: (lo + f) / n,
+        tangent: d,
+      };
+    },
+  };
+}
+
+Object.assign(RECIPES, {
+  "unit-circle": {
+    alive: true,
+    controls: [{ key: "turn", label: "Turn", type: "pulse", ease: 5 }],
+    action: { key: "turn", label: "Go round" },
+    // A tap sends the point once round the circle (its radius sweeping with
+    // it); its height is carried across to draw the sine wave on the right
+    // wall and its left-right place down to draw the cosine wave on the
+    // lower wall, while e^(iθ) = cos θ + i sin θ lights up term by term in
+    // the colours of the waves (5 s). The dotted guide lines stretch between
+    // the point and the two wave heads (tokens 0, 1 and 2, skinned).
+    drive(t, c, out) {
+      const T = 5;
+      const e = since(c, "turn", T);
+      const on = e >= 0;
+      const f = on ? easeInOut(band(e, 0.3, 4.1)) : 0;
+      const th = TAU * f;
+      const running = on && e < 4.15;
+      out.parts.arm = { angle: th };
+      const p0 = ucPoint(0);
+      const s0 = ucSine(0);
+      const c0 = ucCosine(0);
+      // The heads ride the waves while it runs; at rest they wait at the
+      // start of each wave (the waves are drawn in full).
+      out.tokens = [
+        { offset: sub(ucPoint(th), p0) },
+        { offset: sub(ucSine(th), s0) },
+        { offset: sub(ucCosine(th), c0) },
+      ];
+      // Channel 0 wipes and redraws the waves; channel 3 lights the terms.
+      out.morph = [running && f < 1 ? 1.002 - f : 0, 0, 0, on ? band(e, 0.35, 3.2) * (1 - band(e, 4.3, 4.95)) : 0]; // prettier-ignore
+      out.glow = [1, 0.95, 0.8, 0];
+    },
+    build(k) {
+      // Two walls and the circle's own panel, dark slate.
+      const panel = (x0, x1, y0, y1) =>
+        k.add(k.box(x1 - x0, y1 - y0, 0.04), {
+          pos: [(x0 + x1) / 2, (y0 + y1) / 2, -0.03],
+          weight: 0.5,
+          flat: 0.15,
+          jitter: 0.01,
+          color: (c) =>
+            c.s.face === 4 ? mix("#151d2e", "#1f2a42", 0.5 + 0.5 * c.p[1]) : "#2f3b55",
+        });
+      panel(UC_C[0] - UC_R - 0.12, UC_C[0] + UC_R + 0.12, UC_C[1] - UC_R - 0.12, UC_C[1] + UC_R + 0.12); // prettier-ignore
+      panel(UC_SX - 0.06, UC_SX + UC_W + 0.06, UC_C[1] - UC_R - 0.12, UC_C[1] + UC_R + 0.12);
+      panel(UC_C[0] - UC_R - 0.12, UC_C[0] + UC_R + 0.12, UC_CY - UC_W - 0.06, UC_CY + 0.06);
+      // Axes: through the circle, and each wave's middle line.
+      const line = (a, b, col, w = 0.008) =>
+        k.add(
+          pathRibbon((f) => [a[0] + (b[0] - a[0]) * f, a[1] + (b[1] - a[1]) * f, 0.01], 8, w),
+          {
+            weight: 2,
+            flat: 0.3,
+            stretch: 2,
+            pattern: false,
+            color: col,
+          },
+        );
+      const [cx, cy] = UC_C;
+      line([cx - UC_R - 0.08, cy], [cx + UC_R + 0.08, cy], "#56688c");
+      line([cx, cy - UC_R - 0.08], [cx, cy + UC_R + 0.08], "#56688c");
+      line([UC_SX, cy], [UC_SX + UC_W, cy], "#56688c");
+      line([cx, UC_CY], [cx, UC_CY - UC_W], "#56688c");
+      for (let q = 1; q <= 4; q++) {
+        const x = UC_SX + (UC_W * q) / 4;
+        line([x, cy - 0.03], [x, cy + 0.03], "#56688c");
+        const y = UC_CY - (UC_W * q) / 4;
+        line([cx - 0.03, y], [cx + 0.03, y], "#56688c");
+      }
+      // The circle.
+      k.add(
+        pathRibbon((f) => ucPoint(TAU * f), 160, 0.022),
+        {
+          weight: 5,
+          flat: 0.4,
+          stretch: 1.5,
+          pattern: false,
+          color: (c) => keep(mix("#e9ecf5", "#ffffff", 0.3 + 0.3 * Math.sin(c.s.f * TAU))),
+        },
+      );
+      // The radius, turning with the point.
+      k.add(
+        pathRibbon((f) => [cx + UC_R * f, cy, 0.035], 20, 0.014),
+        {
+          part: k.part("arm", { pivot: [cx, cy, 0.035], axis: [0, 0, 1] }),
+          weight: 4,
+          flat: 0.4,
+          stretch: 1.5,
+          pattern: false,
+          color: "#ffe08a",
+        },
+      );
+      // The waves, drawn behind their heads as channel 0 falls.
+      const wave = (fn, col) =>
+        k.add(
+          pathRibbon((f) => fn(TAU * f), 240, 0.024),
+          {
+            weight: 6,
+            flat: 0.5,
+            stretch: 1.4,
+            kind: "fade",
+            params: (c) => [1.002 - c.s.f, 0.004],
+            channel: 0,
+            pattern: false,
+            color: (c) => keep(shade(col, 0.95 + 0.15 * Math.sin(c.s.f * 20))),
+          },
+        );
+      wave(ucSine, UC_SIN);
+      wave(ucCosine, UC_COS);
+      // The point and the two heads (tokens 0, 1 and 2).
+      const bead = (at, i, col, r) =>
+        k.add(k.sphere(r), {
+          pos: at,
+          weight: 4,
+          kind: "token",
+          params: [i, 0],
+          pattern: false,
+          color: (c) => keep(mix(col, "#ffffff", 0.35 * Math.max(0, dot(c.n, HALF)))),
+        });
+      bead(ucPoint(0), 0, "#ffe08a", 0.042);
+      bead(ucSine(0), 1, UC_SIN, 0.034);
+      bead(ucCosine(0), 2, UC_COS, 0.034);
+      // Dotted guides from the point to each head (skinned between tokens).
+      const guide = (a, b, i, j, col) =>
+        k.cloud({ count: 70, pattern: false }, (rand, n, N) => {
+          const s = (n + 0.5) / N;
+          return {
+            p: [a[0] + (b[0] - a[0]) * s, a[1] + (b[1] - a[1]) * s, 0.02],
+            color: col,
+            opacity: 0.8,
+            size: 1.1,
+            skin: [i, j, s],
+          };
+        });
+      guide(ucPoint(0), ucSine(0), 0, 1, "#ff9aa8");
+      guide(ucPoint(0), ucCosine(0), 0, 2, "#9dd0ff");
+      // Euler's formula, dim, with a bright copy of each term that fades
+      // in on channel 3.
+      const h = 0.1;
+      const { pixels, width } = textPixels(EULER, [0, 0, 0.02], h);
+      const x0 = UC_SX + (UC_W - width) / 2 + 0.02;
+      const y0 = UC_CY - 0.62;
+      const placed = pixels.map((px) => ({ ...px, p: [px.p[0] + x0, px.p[1] + y0, 0.02] }));
+      textCloud(k, placed, {}, () => ({ color: "#5d6b88" }));
+      EULER_TERMS.forEach((term) => {
+        const lit3 = placed
+          .filter((px) => px.char >= term.from && px.char <= term.to)
+          .map((px) => ({ ...px, p: [px.p[0], px.p[1], 0.03] }));
+        textCloud(k, lit3, {}, () => ({ color: term.color, kind: "fade", params: [term.at, -0.06], channel: 3 })); // prettier-ignore
+      });
+    },
+  },
+});
+
+// ---- Fourier circles ----------------------------------------------------------------
+
+const FOURIER_MAX = 60;
+const FOURIER_TOKENS = 46; // circles 0..45 are tokens, the rest parts
+const FOURIER_TIP = 46; // the glowing tip (a token)
+const FOURIER_HEAD = 47; // the wave's head (a token)
+// The shapes, as closed paths sampled evenly (heart and star), scaled to
+// about 0.8 across.
+function fourierPath(shape, M) {
+  if (shape === "star") {
+    const corners = [];
+    for (let i = 0; i < 10; i++) {
+      const a = Math.PI / 2 + (i * Math.PI) / 5;
+      const r = i % 2 ? 0.36 : 0.9;
+      corners.push([r * Math.cos(a), r * Math.sin(a)]);
+    }
+    const out = [];
+    for (let i = 0; i < M; i++) {
+      const f = (i / M) * 10;
+      const k = Math.floor(f);
+      const a = corners[k];
+      const b = corners[(k + 1) % 10];
+      out.push([a[0] + (b[0] - a[0]) * (f - k), a[1] + (b[1] - a[1]) * (f - k)]);
+    }
+    return out;
+  }
+  // The heart (the classic curve), traced from its top notch.
+  return Array.from({ length: M }, (_, i) => {
+    const t = (i / M) * TAU;
+    const x = 16 * Math.sin(t) ** 3;
+    const y = 13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t);
+    return [x / 19, y / 19 + 0.1];
+  });
+}
+// The circles for a shape: [{ r, f, ph }] (radius, turns per round, start
+// angle) biggest first, and the centre they hang from.
+const FOURIER_CACHE = new Map();
+function fourierCircles(shape, n) {
+  const key = `${shape}|${n}`;
+  if (FOURIER_CACHE.has(key)) return FOURIER_CACHE.get(key);
+  let circles;
+  let centre;
+  if (shape === "wave") {
+    // A square wave: odd harmonics with radii 4/(πk), riding on the left.
+    circles = Array.from({ length: n }, (_, i) => {
+      const f = 2 * i + 1;
+      return { r: (4 / (Math.PI * f)) * 0.3, f, ph: 0 };
+    });
+    centre = [-0.75, 0];
+  } else {
+    const M = 512;
+    const pts = fourierPath(shape, M);
+    const coef = [];
+    for (let f = -M / 2; f < M / 2; f++) {
+      let re = 0;
+      let im = 0;
+      for (let i = 0; i < M; i++) {
+        const a = (-TAU * f * i) / M;
+        re += pts[i][0] * Math.cos(a) - pts[i][1] * Math.sin(a);
+        im += pts[i][0] * Math.sin(a) + pts[i][1] * Math.cos(a);
+      }
+      coef.push({ f, re: re / M, im: im / M });
+    }
+    const c0 = coef.find((c) => c.f === 0);
+    centre = [c0.re, c0.im];
+    circles = coef
+      .filter((c) => c.f !== 0)
+      .map((c) => ({ r: Math.hypot(c.re, c.im), f: c.f, ph: Math.atan2(c.im, c.re) }))
+      .sort((p, q) => q.r - p.r)
+      .slice(0, n);
+  }
+  const out = { circles, centre, wave: shape === "wave" };
+  FOURIER_CACHE.set(key, out);
+  return out;
+}
+// Where each circle's centre is, and the tip, at θ (0..2π for one round).
+function fourierChain(F, th) {
+  let x = F.centre[0];
+  let y = F.centre[1];
+  const centres = [];
+  for (const c of F.circles) {
+    centres.push([x, y]);
+    const a = c.f * th + c.ph;
+    x += c.r * Math.cos(a);
+    y += c.r * Math.sin(a);
+  }
+  return { centres, tip: [x, y] };
+}
+const WAVE_X0 = 0.05; // where the wave's trace starts
+const WAVE_W = 1.35;
+
+Object.assign(RECIPES, {
+  "fourier-circles": {
+    alive: true,
+    options: [
+      {
+        key: "shape",
+        label: "Shape",
+        type: "select",
+        default: "heart",
+        choices: [
+          { id: "heart", label: "Heart" },
+          { id: "star", label: "Star" },
+          { id: "wave", label: "Square wave" },
+        ],
+      },
+      { key: "circles", label: "Circles", type: "slider", min: 3, max: FOURIER_MAX, step: 1, default: 12 }, // prettier-ignore
+    ],
+    controls: [{ key: "spin", label: "Spin", type: "pulse", ease: 5 }],
+    action: { key: "spin", label: "Spin the circles" },
+    // A tap wipes the drawing and spins the chain of circles once round:
+    // each circle turns at its own whole number of turns, riding on the rim
+    // of the one before, and the tip draws the shape again behind it (for
+    // the square wave, the tip's height is carried across and drawn out to
+    // the right). Few circles draw a wobbly shape, many a crisp one (5 s).
+    // Circles 0 to 45 are tokens, the rest parts; the drawing appears on
+    // channel 0.
+    drive(t, c, out, info) {
+      const d = info?.data?.fourier;
+      if (!d) return;
+      const F = fourierCircles(d.shape, d.n);
+      const T = 5;
+      const e = since(c, "spin", T);
+      const on = e >= 0;
+      const f = on ? easeInOut(band(e, 0.3, 4.6)) : 0;
+      const th = TAU * f;
+      const now = fourierChain(F, th);
+      const rest = fourierChain(F, 0);
+      const tokens = [];
+      F.circles.forEach((ci, i) => {
+        const turn = quatAxisAngle([0, 0, 1], ci.f * th);
+        const offset = [now.centres[i][0] - rest.centres[i][0], now.centres[i][1] - rest.centres[i][1], 0]; // prettier-ignore
+        if (i < FOURIER_TOKENS)
+          tokens[i] = { base: [rest.centres[i][0], rest.centres[i][1], 0], quat: turn, offset }; // prettier-ignore
+        else out.parts[`c${i}`] = { angle: ci.f * th, offset };
+      });
+      tokens[FOURIER_TIP] = { offset: [now.tip[0] - rest.tip[0], now.tip[1] - rest.tip[1], 0] };
+      if (F.wave) {
+        const head = [WAVE_X0 + WAVE_W * f, now.tip[1]];
+        tokens[FOURIER_HEAD] = { offset: [head[0] - WAVE_X0, head[1] - rest.tip[1], 0] };
+      }
+      out.tokens = tokens;
+      out.morph = [on && e < 4.65 && f < 1 ? 1.002 - f : 0, 0, 0, 0];
+    },
+    build(k, o) {
+      const n = Math.max(3, Math.min(FOURIER_MAX, Math.round(o.circles ?? 12)));
+      const shape = ["heart", "star", "wave"].includes(o.shape) ? o.shape : "heart";
+      const F = fourierCircles(shape, n);
+      k.data = { fourier: { shape, n } };
+      const rest = fourierChain(F, 0);
+      const Z = 0.02;
+      // A dark round board behind it all.
+      const span = F.wave ? [-1.45, 1.5, -0.8, 0.8] : [-1.15, 1.15, -1.1, 1.1];
+      k.add(k.box(span[1] - span[0], span[3] - span[2], 0.04), {
+        // Well behind the rings: they turn a long way from where they were
+        // built (and sorted).
+        pos: [(span[0] + span[1]) / 2, (span[2] + span[3]) / 2, -0.16],
+        weight: 0.4,
+        flat: 0.15,
+        jitter: 0.01,
+        color: (c) => (c.s.face === 4 ? mix("#10172a", "#1b2540", 0.5 + 0.4 * c.p[1]) : "#2b3651"), // prettier-ignore
+      });
+      // Each circle: a thin ring and its arm, built at rest.
+      F.circles.forEach((ci, i) => {
+        const [cx, cy] = rest.centres[i];
+        const opt =
+          i < FOURIER_TOKENS
+            ? { kind: "token", params: [i, 0] }
+            : { part: k.part(`c${i}`, { pivot: [cx, cy, 0], axis: [0, 0, 1] }) };
+        const hue = ramp(["#7dd3fc", "#a5b4fc", "#c4b5fd", "#f0abfc"], Math.min(1, i / 20));
+        const w = Math.max(0.004, Math.min(0.01, ci.r * 0.06));
+        k.add(
+          pathRibbon(
+            (f) => [cx + ci.r * Math.cos(TAU * f), cy + ci.r * Math.sin(TAU * f), Z],
+            96,
+            w,
+          ),
+          {
+            // prettier-ignore
+            ...opt,
+            weight: 2.5,
+            flat: 0.4,
+            opacity: 0.7,
+            pattern: false,
+            color: shade(hue, 0.8),
+          },
+        );
+        const a = [cx, cy, Z + 0.004];
+        const b = [cx + ci.r * Math.cos(ci.ph), cy + ci.r * Math.sin(ci.ph), Z + 0.004];
+        k.add(
+          pathRibbon((f) => [a[0] + (b[0] - a[0]) * f, a[1] + (b[1] - a[1]) * f, a[2]], 4, w * 1.4),
+          {
+            // prettier-ignore
+            ...opt,
+            weight: 4,
+            flat: 0.4,
+            pattern: false,
+            color: "#f1f5ff",
+          },
+        );
+      });
+      // The drawing: the path the tip really traces (so few circles draw a
+      // wobbly shape), appearing behind it on channel 0.
+      const trace = F.wave
+        ? (f) => [WAVE_X0 + WAVE_W * f, fourierChain(F, TAU * f).tip[1], Z]
+        : (f) => [...fourierChain(F, TAU * f).tip, Z];
+      k.add(pathRibbon(trace, 700, 0.026), {
+        weight: 6,
+        flat: 0.5,
+        stretch: 1.4,
+        kind: "fade",
+        params: (c) => [1.002 - c.s.f, 0.004],
+        channel: 0,
+        pattern: false,
+        color: (c) => keep(ramp(["#ff6b6b", "#ff8fab", "#ffd166"], 0.5 - 0.5 * Math.cos(TAU * c.s.f))), // prettier-ignore
+      });
+      // The tip, and for the wave its head and the guide between them.
+      const tip = [...rest.tip, Z + 0.01];
+      k.add(k.sphere(0.03), { pos: tip, weight: 4, kind: "token", params: [FOURIER_TIP, 0], pattern: false, color: "#ffd166" }); // prettier-ignore
+      if (F.wave) {
+        const head = [WAVE_X0, rest.tip[1], Z + 0.01];
+        k.add(k.sphere(0.026), { pos: head, weight: 4, kind: "token", params: [FOURIER_HEAD, 0], pattern: false, color: "#ff6b6b" }); // prettier-ignore
+        k.cloud({ count: 60, pattern: false }, (rand, i, N) => {
+          const s = (i + 0.5) / N;
+          return {
+            p: [tip[0] + (head[0] - tip[0]) * s, tip[1], Z],
+            color: "#ffd9a0",
+            opacity: 0.7,
+            skin: [FOURIER_TIP, FOURIER_HEAD, s],
+          };
+        });
+        // The wave's middle line.
+        k.add(pathRibbon((f) => [WAVE_X0 + WAVE_W * f, 0, Z - 0.01], 8, 0.006), { weight: 2, pattern: false, color: "#3b4d6e" }); // prettier-ignore
+      }
+    },
+  },
+});
+
+// ---- Pythagoras proof ---------------------------------------------------------------
+
+// Legs a = 3 and b = 4 (so c = 5) in a square of side a + b, scaled to 2
+// across. The four right triangles first sit as two rectangles, leaving the
+// squares a² and b² empty; slid into the corners they leave the tilted
+// square c². In this arrangement no triangle needs to turn: three slide and
+// one stays put.
+const PY_A = 3;
+const PY_B = 4;
+const PY_S = PY_A + PY_B;
+const PY_U = 2 / PY_S;
+const pyP = (x, y, z = 0) => [(x - PY_S / 2) * PY_U, (y - PY_S / 2) * PY_U, z];
+// Each triangle at rest: its right-angle corner R, the end of leg a (A) and
+// of leg b (B); `move` slides it to its corner; `go` and `back` are when.
+const PY_TRIS = [
+  { R: [PY_A, 0], A: [PY_A, PY_A], B: [PY_S, 0], move: [-PY_A, 0], go: 0.3, back: 3.8, col: "#e8a33d" }, // prettier-ignore
+  { R: [PY_S, PY_A], A: [PY_S, 0], B: [PY_A, PY_A], move: [0, PY_B], go: 1.3, back: 2.9, col: "#d9534f" }, // prettier-ignore
+  { R: [PY_A, PY_A], A: [0, PY_A], B: [PY_A, PY_S], move: [PY_B, -PY_A], go: 0.8, back: 3.35, col: "#4a90d9" }, // prettier-ignore
+  { R: [0, PY_S], A: [PY_A, PY_S], B: [0, PY_A], move: [0, 0], go: -1, back: -1, col: "#5cb85c" }, // prettier-ignore
+];
+const PY_SLIDE = 0.45;
+const PY_THICK = 0.07;
+const PY_CUES = [];
+const PY_SORTS = [];
+for (const tri of PY_TRIS) {
+  if (tri.go < 0) continue;
+  for (const [at, f] of [
+    [tri.go, 700],
+    [tri.back, 620],
+  ]) {
+    PY_CUES.push([at, { voice: "scrape", f, rate: 9, decay: 0.35, vol: 0.35 }]);
+    PY_CUES.push([at + PY_SLIDE, { voice: "wood", f: 1100, decay: 0.6 }]);
+    for (const f of [0.02, 0.2, 0.4, 0.6, 0.8, 1]) PY_SORTS.push(at + PY_SLIDE * f);
+  }
+}
+
+Object.assign(RECIPES, {
+  "pythagoras-proof": {
+    alive: true,
+    controls: [{ key: "prove", label: "Prove", type: "pulse", ease: 4.5 }],
+    action: { key: "prove", label: "Rearrange" },
+    // A tap slides the triangles one at a time, as solid wooden pieces
+    // lifted a little off the board, from the two rectangles into the four
+    // corners: the empty squares a² and b² fade and the tilted square c²
+    // lights up in their place, with a² + b² = c² below; then they slide
+    // back (4.5 s). Each landing clicks.
+    drive(t, c, out) {
+      const T = 4.5;
+      const e = since(c, "prove", T);
+      const on = e >= 0;
+      const tokens = [];
+      PY_TRIS.forEach((tri, i) => {
+        let m = 0;
+        if (on && tri.go >= 0) m = easeInOut(band(e, tri.go, tri.go + PY_SLIDE)) - easeInOut(band(e, tri.back, tri.back + PY_SLIDE)); // prettier-ignore
+        const lift = on && tri.go >= 0 ? 0.07 * (Math.sin(Math.PI * band(e, tri.go, tri.go + PY_SLIDE)) + Math.sin(Math.PI * band(e, tri.back, tri.back + PY_SLIDE))) : 0; // prettier-ignore
+        tokens[i] = { offset: [tri.move[0] * PY_U * m, tri.move[1] * PY_U * m, lift] };
+      });
+      out.tokens = tokens;
+      // Sorted again where they stand a few times on each slide (they
+      // cross the board, which would otherwise draw over them).
+      const m = mem(c);
+      const was = m.sortE ?? -1;
+      m.sortE = e;
+      if (e >= 0 && e >= was && PY_SORTS.some((at) => was < at && e >= at)) out.resort = true;
+      if (!on && was >= 0) out.resort = true;
+      // Channel 1 clears a² and b²; channel 2 shows c² and the equation.
+      out.morph = [0, on ? band(e, 0.3, 0.6) * (1 - band(e, 4.0, 4.35)) : 0, on ? band(e, 1.75, 2.05) * (1 - band(e, 2.75, 2.95)) : 0, 0]; // prettier-ignore
+      cuesAt(c, e, PY_CUES, out);
+    },
+    build(k) {
+      const z0 = 0;
+      // The board and a raised wooden frame round the big square.
+      const wood = (c, base) => lit(mix(base, shade(base, 0.85), 0.5 + 0.5 * Math.sin(c.p[0] * 40 + 3 * c.noise(c.p[0] * 3, c.p[1] * 8, 0))), c.n, { amb: 0.7, dif: 0.35, spec: 0.15 }); // prettier-ignore
+      k.add(k.box(2, 2, 0.04), {
+        pos: [0, 0, z0 - 0.02],
+        weight: 0.7,
+        flat: 0.15,
+        jitter: 0.01,
+        color: (c) => (c.s.face === 4 ? mix("#f4ecd8", "#efe3c6", 0.5 + 0.5 * c.noise(c.p[0] * 4, c.p[1] * 4, 0)) : "#c9b48a"), // prettier-ignore
+      });
+      const F = 0.09;
+      for (const [w, h, x, y] of [
+        [2 + 2 * F, F, 0, 1 + F / 2],
+        [2 + 2 * F, F, 0, -1 - F / 2],
+        [F, 2, 1 + F / 2, 0],
+        [F, 2, -1 - F / 2, 0],
+      ])
+        k.add(k.box(w, h, 0.12), { pos: [x, y, z0 + 0.02], weight: 1.2, flat: 0.2, jitter: 0.01, even: true, color: (c) => wood(c, "#8b5a2b") }); // prettier-ignore
+      // The empty squares, tinted: a² and b² (fading on channel 1), and
+      // the tilted c² (appearing on channel 2).
+      const zt = z0 + 0.003;
+      k.add(polyShape([pyP(0, 0, zt), pyP(PY_A, 0, zt), pyP(PY_A, PY_A, zt), pyP(0, PY_A, zt)]), {
+        weight: 1.2,
+        flat: 0.15,
+        jitter: 0.01,
+        kind: "fade",
+        params: [0.5, 0.3],
+        channel: 1,
+        pattern: false, // prettier-ignore
+        color: (c) => (c.s.edge < 0.015 ? "#3d6fb0" : "#b9d3f2"),
+      });
+      k.add(
+        polyShape([
+          pyP(PY_A, PY_A, zt),
+          pyP(PY_S, PY_A, zt),
+          pyP(PY_S, PY_S, zt),
+          pyP(PY_A, PY_S, zt),
+        ]),
+        {
+          // prettier-ignore
+          weight: 1.2,
+          flat: 0.15,
+          jitter: 0.01,
+          kind: "fade",
+          params: [0.5, 0.3],
+          channel: 1,
+          pattern: false, // prettier-ignore
+          color: (c) => (c.s.edge < 0.015 ? "#3f8f4a" : "#c3e6c3"),
+        },
+      );
+      k.add(
+        polyShape([
+          pyP(PY_B, 0, zt + 0.002),
+          pyP(PY_S, PY_B, zt + 0.002),
+          pyP(PY_A, PY_S, zt + 0.002),
+          pyP(0, PY_A, zt + 0.002),
+        ]),
+        {
+          // prettier-ignore
+          weight: 1.2,
+          flat: 0.15,
+          jitter: 0.01,
+          kind: "fade",
+          params: [0.4, -0.3],
+          channel: 2,
+          pattern: false, // prettier-ignore
+          color: (c) => (c.s.edge < 0.015 ? "#b8860b" : "#ffe7a3"),
+        },
+      );
+      // Labels in the squares.
+      const label = (text, x, y, col, fade) => {
+        const { pixels, width } = textPixels(text, [0, 0, 0], 0.16);
+        const placed = pixels.map((px) => ({ ...px, p: [px.p[0] + x - width / 2, px.p[1] + y, zt + 0.006] })); // prettier-ignore
+        textCloud(k, placed, {}, () => ({ color: col, ...fade }));
+      };
+      label("a^{2}", ...pyP(PY_A / 2, PY_A / 2).slice(0, 2), "#23466f", { kind: "fade", params: [0.5, 0.3], channel: 1 }); // prettier-ignore
+      label("b^{2}", ...pyP(PY_A + PY_B / 2, PY_A + PY_B / 2).slice(0, 2), "#2d5f33", { kind: "fade", params: [0.5, 0.3], channel: 1 }); // prettier-ignore
+      label("c^{2}", 0, 0, "#7a5500", { kind: "fade", params: [0.4, -0.3], channel: 2 });
+      // The equation under the board: dim, lit on channel 2.
+      const eq = textPixels("a^{2} + b^{2} = c^{2}", [0, 0, 0], 0.13);
+      const eqPx = eq.pixels.map((px) => ({ ...px, p: [px.p[0] - eq.width / 2, px.p[1] - 1.28, 0.02] })); // prettier-ignore
+      textCloud(k, eqPx, {}, () => ({ color: "#6b6150" }));
+      textCloud(k, eqPx.map((px) => ({ ...px, p: [px.p[0], px.p[1], 0.03] })), {}, () => ({ color: "#ffcf4a", kind: "fade", params: [0.4, -0.3], channel: 2 })); // prettier-ignore
+      // The triangles: wooden slabs, each its own part, with a, b and c on
+      // their sides.
+      PY_TRIS.forEach((tri, i) => {
+        const part = { kind: "token", params: [i, 0] };
+        const zb = z0 + 0.01;
+        const zt2 = zb + PY_THICK;
+        const pts = [tri.R, tri.A, tri.B];
+        // Shrunk a hair about their middle, so neighbours show a seam.
+        const mid = [(pts[0][0] + pts[1][0] + pts[2][0]) / 3, (pts[0][1] + pts[1][1] + pts[2][1]) / 3]; // prettier-ignore
+        const inset = (p) => [mid[0] + (p[0] - mid[0]) * 0.985, mid[1] + (p[1] - mid[1]) * 0.985];
+        const P = pts.map(inset);
+        const top = P.map((p) => pyP(p[0], p[1], zt2));
+        // Wind the top towards the viewer.
+        const n = cross(sub(top[1], top[0]), sub(top[2], top[0]));
+        const topPts = n[2] > 0 ? top : [top[0], top[2], top[1]];
+        k.add(polyShape(topPts), {
+          ...part,
+          weight: 2,
+          flat: 0.15,
+          jitter: 0.01,
+          color: (c) => {
+            const col = mix(
+              tri.col,
+              shade(tri.col, 0.9),
+              0.5 + 0.5 * Math.sin(c.p[0] * 30 + c.p[1] * 12),
+            );
+            return c.s.edge < 0.02 ? mix(col, "#ffffff", 0.35) : col;
+          },
+        });
+        for (let j = 0; j < 3; j++) {
+          const p = P[j];
+          const q = P[(j + 1) % 3];
+          const quad = [pyP(p[0], p[1], zb), pyP(q[0], q[1], zb), pyP(q[0], q[1], zt2), pyP(p[0], p[1], zt2)]; // prettier-ignore
+          k.add(polyShape(quad), { ...part, weight: 2, flat: 0.15, jitter: 0.01, color: shade(tri.col, 0.7) }); // prettier-ignore
+        }
+        // Side letters, just inside each side's middle.
+        const place = (u, v, text) => {
+          const m = [(u[0] + v[0]) / 2, (u[1] + v[1]) / 2];
+          const at = [m[0] + (mid[0] - m[0]) * 0.32, m[1] + (mid[1] - m[1]) * 0.32];
+          const { pixels, width } = textPixels(text, [0, 0, 0], 0.1);
+          const w = pyP(at[0], at[1], zt2 + 0.004);
+          const placed = pixels.map((px) => ({ ...px, p: [px.p[0] + w[0] - width / 2, px.p[1] + w[1], w[2]] })); // prettier-ignore
+          textCloud(k, placed, {}, () => ({ color: "#ffffff", ...part }));
+        };
+        place(tri.R, tri.A, "a");
+        place(tri.R, tri.B, "b");
+        place(tri.A, tri.B, "c");
+      });
     },
   },
 });

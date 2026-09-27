@@ -2293,6 +2293,33 @@ export const TOYS = [
     tags: "surface plot 3d function equation type saddle sombrero egg crate gaussian rosenbrock banana",
     camera: { yaw: 0.55, pitch: 0.55, roll: 0, distance: 3.9 },
   },
+  {
+    id: "unit-circle",
+    label: "Circle and waves",
+    category: "maths",
+    kind: "kit",
+    pack: "maths",
+    tags: "unit circle sine cosine wave trigonometry euler formula angle radian",
+    camera: { yaw: 0.12, pitch: 0.08, roll: 0, distance: 3.6 },
+  },
+  {
+    id: "fourier-circles",
+    label: "Fourier circles",
+    category: "maths",
+    kind: "kit",
+    pack: "maths",
+    tags: "fourier series epicycles circles spinning draw heart star square wave frequency",
+    camera: { yaw: 0, pitch: 0, roll: 0, distance: 3.6 },
+  },
+  {
+    id: "pythagoras-proof",
+    label: "Pythagoras proof",
+    category: "maths",
+    kind: "kit",
+    pack: "maths",
+    tags: "pythagoras theorem proof right triangle square hypotenuse geometry",
+    camera: { yaw: 0.2, pitch: 0.3, roll: 0, distance: 3.7 },
+  },
 
   // ---- Pack: objects ----
   {
