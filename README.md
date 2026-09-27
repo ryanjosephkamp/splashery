@@ -413,4 +413,9 @@ tools/                          asset, flag, thumbnail, clip and sound tools; up
 tests/                          Playwright tests and screenshots
 ```
 
-Licences for vendored code are in [LICENSES.md](LICENSES.md).
+## License
+
+Splashery's own code is under the [MIT License](LICENSE). The assets keep their own licenses: the
+captured and converted toys, flags and proteins are CC0, CC BY or public domain, each credited in
+[CREDITS.md](CREDITS.md) and in the app. The vendored libraries (PlayCanvas and gifenc, both MIT)
+and the build tools' licenses are listed in [LICENSES.md](LICENSES.md).

@@ -1,8 +1,9 @@
 # Operating Splashery in parallel
 
 How several Claude sessions build Splashery at once without getting in each other's way. The owner
-accepted this setup on 2026-09-26 (the "Splashery Parallel Plan" page). The ground rules and the
-effect quality rules in [CLAUDE.md](../CLAUDE.md) apply to every session.
+accepted this setup on 2026-09-26 (the "Splashery Parallel Plan" page), and on September 27, 2026 he
+handed the running of the lanes to the Operator (Part 1 of the "How Splashery Is Made" page). The
+ground rules and the effect quality rules in [CLAUDE.md](../CLAUDE.md) apply to every session.
 
 ## Who does what
 
@@ -10,13 +11,13 @@ effect quality rules in [CLAUDE.md](../CLAUDE.md) apply to every session.
   one draft PR and a set of files it owns. The lanes, their files and their state are in
   [WORKSTREAMS.md](WORKSTREAMS.md). A lane builds; it does not change governance.
 - **The Operator** is one long-lived session that coordinates and never builds toys. It keeps this
-  file, WORKSTREAMS.md, [HANDOFF.md](HANDOFF.md) and CLAUDE.md, writes the prompts and handoffs for
-  new lanes (and opens those sessions when the owner asks), does the upkeep on main after each
-  merge, sends the owner a daily digest and runs the daily toy-ideas routine (both are routines that
-  wake the Operator session each morning: the ideas at 7:43 and the digest at 7:54, Eastern time).
-  Governance questions go to it.
-- **The owner** (Ryan) opens sessions, reviews clips on the Effect review page and merges PRs. Only
-  the owner merges.
+  file, WORKSTREAMS.md, [HANDOFF.md](HANDOFF.md) and CLAUDE.md; writes each lane's brief, starts its
+  worker session and runs it (below); does the upkeep on main after each merge; sends the owner a
+  daily digest; and runs the daily toy-ideas routine (both are routines that wake the Operator
+  session each morning: the ideas at 7:43 and the digest at 7:54, Eastern time). Governance
+  questions go to it. It also keeps the owner's pages (below) and the Sound Board.
+- **The owner** (Ryan) talks only to the Operator, reviews clips on the Effect review page, sends
+  notes (sound reviews as files) and merges PRs. Only the owner merges.
 
 Every cloud session has its own container, clone and branch, so sessions never share a working tree.
 Worktrees are only for helpers inside one session. What can still collide is the shared material
@@ -27,22 +28,23 @@ around the toys; the rules below keep it apart.
 | Page                      | Link                                              | Who changes it                                                               |
 | ------------------------- | ------------------------------------------------- | ---------------------------------------------------------------------------- |
 | Effect review             | https://claude.ai/artifact/NCsg9V5SzFY3Mnwuwgq7pi | Lanes add clips and cards (below); the owner marks; the Operator tidies      |
-| Sound Board               | https://claude.ai/artifact/VE9XCTxH3djST6dGb6ZAkj | The Operator, after merges (`node tools/upkeep.mjs`)                         |
+| Sound Board               | https://claude.ai/artifact/VE9XCTxH3djST6dGb6ZAkj | The Operator (after merges and each sound-review round); the owner may mark  |
 | Toy Plan (owner's marks)  | https://claude.ai/artifact/PNGPx7REMdhxLMHDXARhw8 | The owner marks; the Operator republishes (`node tools/toy-plan.mjs --json`) |
 | Toy Ideas                 | https://claude.ai/artifact/5TukiuV3mCt3G3zk6Arx9S | The Operator adds three ideas each morning; the owner marks (below)          |
 | Splashery Parallel Plan   | https://claude.ai/artifact/KjJrfKxi4phzJmbgSyRbr7 | The Operator (the lane prompts)                                              |
 | Splashery Operator Manual | https://claude.ai/artifact/3WYMJxtZDR7m1ecTCN47ZB | The Operator (the owner's how-to)                                            |
+| How Splashery Is Made     | https://claude.ai/artifact/HHj9PBXUQck3kAHrHhdkjA | The Operator (the plan in Part 1, the public write-up's basis in Part 2)     |
 
 ## Lanes and file ownership
 
 Each lane owns the files in its row of WORKSTREAMS.md: usually its pack files (`src/packs/*.js`),
 its handoff file (`docs/handoff/<lane>.md`), its own test file (`tests/<prefix>.spec.mjs`), its
 screenshots (`tests/screenshots/<prefix>-*.png`) and its toys' folders (`assets/toys/<toy id>/`).
-Only that lane edits them. Packs that no active lane owns (space, atoms, gems, tiny, anatomy, maths,
-objects, vehicles, music) are frozen: a change to them needs a lane that the Operator starts.
+Only that lane edits them. Packs that no active lane owns (WORKSTREAMS.md, "Frozen packs") are
+frozen: a change to them needs a lane that the Operator starts.
 
 Each lane has a **prefix**, the lane id in lower case, used for card ids, screenshot names and its
-test file: `e4f`, `e5`, `e6a`, `e6b`, `f`, `g`.
+test file: `e4f`, `e5`, `e6a`, `e6b`, `f`, `g`, `ai`, `math`.
 
 ### Shared files: edit only your own toys' lines
 
@@ -60,9 +62,10 @@ or reformat anyone else's lines, so git can merge the lanes line by line.
 `CLAUDE.md`, `docs/OPERATING.md`, `docs/WORKSTREAMS.md`, `docs/HANDOFF.md`,
 `docs/handoff/history.md`, `README.md`, `docs/ROADMAP.md`, `docs/BACKLOG.md`, `docs/PACKS.md`,
 `tests/taps.spec.mjs`, `tools/upkeep.mjs`, `tools/sound-board.mjs`, `tools/pages/`, `package.json`
-and `package-lock.json`, and the standard screenshots (below). A lane that has something for these
-files writes it in its handoff file (under "For the Operator": a lesson for PACKS.md, a backlog
-item, a README line) and the Operator moves it after the merge.
+and `package-lock.json`, the standard screenshots (below), and the sound review files (except a
+sound lane's own toys in them, "The sound review"). A lane that has something for these files writes
+it in its handoff file (under "For the Operator": a lesson for PACKS.md, a backlog item, a README
+line) and the Operator moves it after the merge.
 
 ### Generated files
 
@@ -86,8 +89,89 @@ change:
    with `-engine` added, and say in both PRs that the lane's PR needs it.
 3. Tell the owner it should be merged first, then merge main into the lane's branch.
 
-Lane F owns the input path (pointer handling in `src/player.js` and `src/stage.js`, and the grab and
-tap code in `src/motion.js`); no other lane edits those parts.
+The input path lane F built (pointer handling in `src/player.js` and `src/stage.js`, and the grab
+and tap code in `src/motion.js`) is engine code like the rest.
+
+## How the Operator runs a lane
+
+Since September 27, 2026 the owner talks only to the Operator; the Operator starts, steers and
+reconciles the worker sessions and brings him finished work.
+
+1. **Brief.** The Operator writes the lane's brief (its toys or job, its files, its branch and PR
+   title, and the rules below) and adds the lane's row to WORKSTREAMS.md.
+2. **Start.** The Operator starts the worker session with the brief as its first prompt, pinned to
+   Opus 5.5, on the lane's branch. The worker copies the brief into `docs/handoff/<lane>.md` and
+   opens its draft PR early.
+3. **Model and effort.** Workers run Opus 5.5 only; any other model needs the owner's permission
+   first. At every check-in the Operator reads the worker's session record, and if it has run on
+   another model (a fallback), the Operator stops it and tells the owner. Effort is the default for
+   now, a trial the owner chose. If either of them thinks it isn't enough, the owner adds
+   `CLAUDE_CODE_EFFORT_LEVEL=xhigh` to the environment's variables, and every new session runs at
+   Extra High. Helpers use the worker's own model.
+4. **Messages.** A worker never asks the owner. It ends each working turn with a short final
+   message: "READY:" (PR link, card ids, test results, anything for the Operator), "WORKING:" (what
+   is left) or "BLOCKED:" (exactly what it needs). The Operator reads it from the session record,
+   answers or relays, and sends a worker its messages as one-shot triggers into its session, headed
+   "From the Operator".
+5. **Checks.** The Operator subscribes to each lane's PR and checks in about hourly while lanes
+   work. It tells lanes to merge main after each merge, answers their questions, and keeps
+   `tests/taps.spec.mjs` exceptions.
+6. **Present.** When a lane is ready, the Operator reviews its diff and tests and watches its clips,
+   then sends the owner one short message: what it does, which cards to mark and where it goes in
+   the merge order.
+7. **Marks.** The owner marks clips on the Effect review page (or says so in chat, and the Operator
+   passes it on). Lanes also read the marks on an hourly check-in of their own, fix every "fix" in
+   the same PR, and post "-r2" cards.
+8. **End.** After the merge the Operator does the upkeep, tells the worker to stand down, and stops
+   its check-ins.
+
+The owner can still open any worker to watch it. If he sends one an instruction, he tells the
+Operator too, so they don't cross wires.
+
+## Language
+
+Every new public-facing text is in American English: the docs in the repository, the words on the
+site (toy names, descriptions, buttons, credits, messages) and PR titles and bodies. So color,
+center, gray, math, license, toward, catalog, -ize endings, dates like "September 27, 2026", and
+commas and periods inside quotation marks. Internal notes and pages follow it too, to keep one
+habit.
+
+- Leave code identifiers, file names and anything stored in links or saved scenes as they are (the
+  pack file `maths.js`, option keys, toy ids), so old links keep working.
+- Don't rewrite older British text on the side. One sweep does that, as a single Ops PR at a quiet
+  moment before the blog post.
+- `node tools/us-english.mjs --diff` lists British spellings in the public text a branch adds
+  (against `origin/main`); run it before you push. After the sweep, the Operator runs it on
+  everything.
+
+## The sound review
+
+The owner reviews the sounds on the Sound Board and agrees on new ones there before they reach the
+site.
+
+1. **Notes.** The owner sends notes as a Markdown file (voice-typed is fine). He names only the toys
+   he wants to comment on; any toy he doesn't mention stays as it is.
+2. **Filed.** The Operator keeps the notes word for word in `docs/reviews/sounds-<date>.md` and
+   writes a clean version per toy into `tools/sound-review.json`:
+   `{ "round", "note", "toys": { "<toy id>": { "status", "said", "note", "plan", "candidates" } } }`.
+   `status` is `keep`, `change`, `ready` (a new sound to hear), `approved` or `site` (in the site);
+   `said` is his words, `note` the clean version, `plan` what the new sound will be. The Sound Board
+   shows each toy's line, with filters (All, To change, Ready to hear, Approved), "Play through"
+   (the filtered toys one after another, the name shown large) and optional marks.
+3. **New sounds, on the board only.** Sound lanes add candidates to their toys' entries:
+   `candidates: [{ "id": "a", "label": "New A", "sound": <spec> }]`, with the same specs as
+   `src/toy-sounds.js`. New voices go in `tools/sound-voices-next.js` as `VOICES.name = { … };`
+   lines (no imports or exports). The site doesn't change yet. The Operator rebuilds and republishes
+   the board (`node tools/sound-board.mjs`) after each round.
+4. **The owner listens** and answers in chat or another notes file. A new sound he doesn't mention
+   counts as approved; the Operator lists every candidate so he always knows what he is approving.
+   His optional marks on the board are in its `verdicts` collection:
+   `{ verdict: "good" | "fix" | "", pick: "<candidate id>" | "", note, at }`.
+5. **Into the site.** A sound lane moves approved sounds into `src/toy-sounds.js` (and new voices
+   into `src/voices.js`, re-measuring levels with `node tools/sound-check.mjs --voices`), sets their
+   status to `site`, and posts no clips unless an effect changed.
+6. **Preferences.** From the owner's notes the Operator drafts a "Sound preferences" section for
+   PACKS.md (general guidance, not strict rules). The owner OKs it, and every lane follows it.
 
 ## Handoffs
 
@@ -212,15 +296,15 @@ writes the lane's brief from them (like any new lane) and sets each idea's `lane
 
 ## Concurrency and usage
 
-- At most three lanes at once, plus the Operator (and a short fixes lane such as E4 finish).
-  CLAUDE.md records that seven parallel builders once used a week's usage in one go.
+- Three lanes at once by default, four when one of them is small (a sound-only lane, say), plus the
+  Operator. CLAUDE.md records that seven parallel builders once used a week's usage in one go.
 - While lanes run in parallel, a lane uses at most one helper subagent at a time. The Operator uses
   none.
-- The Operator starts the next lane when one finishes (the owner can also start it).
+- The Operator starts the next lane when a slot is free, in the order in ROADMAP.md.
 
 ## Branches and PRs
 
-- A lane works on the branch its session assigns and opens one draft PR against `main`, titled
+- A lane works on the branch the Operator gives it and opens one draft PR against `main`, titled
   "Phase <lane>: …" (for example "Phase E5: new tap effects for the food toys"), with the five
   sections from CLAUDE.md. Stacked parts add `-<part>` to the branch.
 - The Operator's branches are `claude/operator-<topic>` and its PRs "Ops: …".
@@ -229,13 +313,15 @@ writes the lane's brief from them (like any new lane) and sets each idea's `lane
 
 ## A lane's start
 
-1. Read CLAUDE.md, this file, WORKSTREAMS.md (your row), your `docs/handoff/<lane>.md`,
-   docs/PACKS.md and your toys in docs/TOY-PLAN.md.
-2. Check the owner's marks on the Toy Plan page for your toys: ArtifactData, `action: "list"`,
-   `collection: "marks"` on https://claude.ai/artifact/PNGPx7REMdhxLMHDXARhw8 (one document per toy
-   id: `{ mark: "yes" | "change" | "skip" | "", note, at }`). A "change" note overrides the proposal
-   in `tools/toy-plan.json`; update your toys' entries to match. If the tool is not available, ask
-   the owner to press "Copy my marks and notes" on the page and paste the text.
+1. Your brief is your session's first prompt. Copy it into `docs/handoff/<lane>.md` under "Brief",
+   then read CLAUDE.md, this file, WORKSTREAMS.md (your row), docs/PACKS.md and your toys in
+   docs/TOY-PLAN.md (new toys aren't there yet).
+2. For toys already on the shelf, check the owner's marks on the Toy Plan page: ArtifactData,
+   `action: "list"`, `collection: "marks"` on https://claude.ai/artifact/PNGPx7REMdhxLMHDXARhw8 (one
+   document per toy id: `{ mark: "yes" | "change" | "skip" | "", note, at }`). A "change" note
+   overrides the proposal in `tools/toy-plan.json`; update your toys' entries to match. If the tool
+   is not available, ask the owner to press "Copy my marks and notes" on the page and paste the
+   text.
 3. Merge the latest main into your branch.
 4. Fill in "State" in your handoff file and open your draft PR early, so the owner and the Operator
    can see the lane.
@@ -250,8 +336,8 @@ writes the lane's brief from them (like any new lane) and sets each idea's `lane
 4. The full test suite passes, `node tools/upkeep.mjs --restore-shots` has put the standard
    screenshots back, and `npx prettier --check .` is clean.
 5. Your handoff file says what was done, the known issues, and anything for the Operator.
-6. The PR is ready for the owner. Keep it mergeable, and fix whatever the owner marks "Needs work"
-   in the same PR.
+6. The PR is ready for the owner. Finish with "READY:" for the Operator. Keep the PR mergeable, and
+   fix whatever the owner marks "Needs work" in the same PR.
 
 ## Upkeep after a merge (the Operator)
 
@@ -265,3 +351,4 @@ writes the lane's brief from them (like any new lane) and sets each idea's `lane
    its "For the Operator" items (PACKS.md lessons, backlog, README), and set its review lane
    `finished` once the owner has approved its clips.
 5. Commit on `claude/operator-<topic>` as a small "Ops: …" PR, and tell open lanes to merge main.
+6. Tell the merged lane's worker to stand down (a one-shot trigger), and stop its check-ins.

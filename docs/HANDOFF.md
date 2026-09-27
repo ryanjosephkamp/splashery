@@ -33,18 +33,27 @@ work is in [OPERATING.md](OPERATING.md).
 
 The full table, with owned files, sessions, branches and PRs, is [WORKSTREAMS.md](WORKSTREAMS.md).
 
-| Lane     | Status              | Handoff                       |
-| -------- | ------------------- | ----------------------------- |
-| Operator | Running             | —                             |
-| H Later  | After the toy lanes | —                             |
-| New toys | When the owner asks | The Toy Ideas page (approved) |
+| Lane                        | Status                               | Handoff                            |
+| --------------------------- | ------------------------------------ | ---------------------------------- |
+| Operator                    | Running; runs the lanes              | —                                  |
+| AI: AI and computing        | Running (started September 27, 2026) | [handoff/AI.md](handoff/AI.md)     |
+| Math: math you can type     | Running (started September 27, 2026) | [handoff/Math.md](handoff/Math.md) |
+| Fix3: two fixes             | Running (started September 27, 2026) | [handoff/Fix3.md](handoff/Fix3.md) |
+| Next (WORKSTREAMS.md, Next) | Toy help, sound review, pianos…      | —                                  |
 
-E4-finish, E5, E6a, E6b, F and G are done (WORKSTREAMS.md, "Done"), and no lane is running. The next
-lanes (AI and computing, Math you can type) start when the owner sends the prompt on the How
-Splashery Is Made page. The Operator starts and runs the worker sessions; workers are Opus 5.5 at
-the default effort, a trial the owner chose on 2026-09-27.
+E4-finish, E5, E6a, E6b, F and G are done (WORKSTREAMS.md, "Done"). On September 27, 2026 the owner
+approved the plan in Part 1 of the How Splashery Is Made page: the Operator runs the lanes, workers
+are Opus 5.5 only (at the default effort, a trial), new public text is in American English, and the
+work goes in the order in ROADMAP.md, "Now". Lanes AI and Math started that day, and the Sound Board
+has its review features, ready for the owner's sound notes.
 
-The prompts are on the Splashery Parallel Plan page (OPERATING.md, "Pages").
+The owner reviewed the AI and Math clips the same day
+([reviews/2026-09-27-ai-math](reviews/2026-09-27-ai-math/review.md)): seven good, and extras for the
+rest (3D versions beside the 2D "poster" ones, a second transformer diagram, MLPs, a CNN you draw
+on, word vectors for any words, more sorting algorithms, your own settings and Fourier text). Both
+lanes are building them in their PRs, which merge when he approves the new clips. His notes on the
+bananas' stem and the ocean wave's collapse went to lane Fix3. He also asked for toy help (a how-to
+line when a toy opens and an About tab), now step 2 of the plan.
 
 ## Where things are
 
@@ -60,7 +69,7 @@ The prompts are on the Splashery Parallel Plan page (OPERATING.md, "Pages").
 - [BACKLOG.md](BACKLOG.md), [ROADMAP.md](ROADMAP.md), [SCENE-SCHEMA.md](SCENE-SCHEMA.md),
   `CREDITS.md`, `LICENSES.md`, `README.md` (features and code layout).
 - The private pages (Effect review, Sound Board, Toy Plan, Toy Ideas, Parallel Plan, Operator
-  Manual): links in OPERATING.md, "Pages".
+  Manual, How Splashery Is Made): links in OPERATING.md, "Pages".
 - The Operator's daily routines (from 2026-09-27, Eastern time): three toy ideas on the Toy Ideas
   page at 7:43, then the owner's digest at 7:54.
 
@@ -116,6 +125,24 @@ Settled on 2026-09-24, when the owner approved every recommendation:
 
 Settled on 2026-09-26: the remaining work runs as parallel lanes with an Operator session
 (OPERATING.md).
+
+Settled on September 27, 2026 (the How Splashery Is Made page, Part 1):
+
+- The Operator runs the lanes; the owner talks only to the Operator, reviews clips and merges.
+- Workers are Opus 5.5 only, at the default effort as a trial; Extra High is one environment
+  variable away (OPERATING.md).
+- Three lanes at once by default, four when one is small.
+- American English for new public-facing text, with one sweep before the blog post.
+- Sounds are agreed on the Sound Board before they reach the site (OPERATING.md, "The sound
+  review"); a toy the owner doesn't mention keeps its sound.
+- Hands-on play for every toy: a Play button, a Hands-on switch and Reset, on a physics engine of
+  our own (position-based dynamics), showcased first on four toys.
+- The Toy Workshop (Remix, Build from parts, Code a toy, From a photo), a "Take it to your AI"
+  package, and submissions through a GitHub issue form, with files optional.
+- The code gets the MIT license; assets keep their own licenses and credits.
+- The blog post comes last, after the Workshop, physics, hands-on play and submissions.
+- The pencil defaults to yellow, the tin can to an original "Peaches" label, and both have a Look
+  choice.
 
 Still open (ask when it comes up, in Phase H):
 
