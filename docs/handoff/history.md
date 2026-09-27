@@ -29,6 +29,10 @@ back.
   water bottle waits on the free GPU quota.
 - Review: the owner asked for real-looking defaults instead of the bare scans, then approved them;
   Peaches stays the can's default. The first worker was replaced by a fresh session for the fixes.
+- Looks (PRs #47 and #48): a captured toy may list `looks`, each a finished pair of files, and the
+  Toy tab shows a Look choice; only the look's id goes into links. The pencil has seven looks and
+  the can four, each with its bare scan as "Original". Only the chosen look downloads; the
+  repository grew by about 24 MB.
 - Known issues: the can photo's glare still shows faintly; the pencil's guessed underside is a
   darker yellow; the pencil is a stubby one, as in the photo.
 

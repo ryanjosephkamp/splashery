@@ -236,6 +236,11 @@ view. `tools/drag-clip.mjs` renders drags and taps as clips for review.
 **Image-to-3D scans** (lane G): the side the photo can't see is a guess (the pencil's underside came
 out dark), so pick taps that keep the photographed side toward the camera.
 
+**Looks** (engine PR #47): a captured toy in `src/toys.js` may list
+`looks: [{ id, label, url?, urlWeak? }]`; the first is the default and may use the toy's own files.
+The Toy tab shows them as a Look choice, and only the look's id is saved. Each look is a finished
+pair of files, checked from several sides before it ships (`tools/g-looks.mjs` paints them).
+
 **Scan rigs** (`src/rigs.js`): a captured toy can have the same `controls`, `action` and `drive` as
 a recipe, plus `parts`, each made of soft ellipsoid regions in world coordinates:
 
