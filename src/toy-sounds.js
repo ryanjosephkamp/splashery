@@ -138,6 +138,15 @@ export const TOY_SOUNDS = {
     { voice: "scrape", f: 450, rate: 9, decay: 1.1 },
     { voice: "whinny", at: 0.4, f: 1150 },
   ],
+  "pencil-real": [
+    { voice: "wood", f: 1500, decay: 0.5, vol: 0.8 },
+    { voice: "scrape", at: 0.05, f: 900, rate: 7, decay: 4.2, vol: 0.45 },
+  ],
+  "tin-can-real": [
+    { voice: "metal", f: 520, decay: 0.5, bright: 0.7 },
+    { voice: "ratchet", at: 0.1, f: 3200, n: 22, rate: 9, to: 2.6, vol: 0.45 },
+    { voice: "metal", at: 2.3, f: 470, decay: 0.7, bright: 0.6, vol: 0.9 },
+  ],
 
   // ---- Shapes -----------------------------------------------------------------------
   blob: [

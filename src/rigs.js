@@ -1624,6 +1624,50 @@ export const RIGS = {
     },
   },
 
+  // ---- Photoreal from one photo (lane G) ---------------------------------------------
+
+  // Flicked at one end, the pencil spins flat on the desk about its middle,
+  // two whole turns, slowing evenly as friction stops it where it began. It
+  // stays flat side up: the side the photo never saw is the model's guess.
+  "pencil-real": {
+    parts: [],
+    controls: [pulse("spin", "Spin", 2.4)],
+    action: { key: "spin", label: "Spin" },
+    drive(t, c, out) {
+      const e = since(c, "spin", 2.4);
+      if (e < 0) return;
+      // Constant friction: the angle eases out as 1 - (1 - x)^2 over 0.05-2.25 s.
+      const x = band(e, 0.05, 2.25);
+      out.body = { quat: quatAxisAngle([0, 1, 0], 2 * TAU * (1 - (1 - x) ** 2)) };
+    },
+  },
+
+  // A knock tips the can onto its bottom rim; it spins round on the rim,
+  // faster and faster as it leans less (like a coin settling), and drops back
+  // flat with a clank.
+  "tin-can-real": {
+    parts: [],
+    controls: [pulse("knock", "Knock", 2.6)],
+    action: { key: "knock", label: "Knock" },
+    drive(t, c, out, info) {
+      const e = since(c, "knock", 2.6);
+      if (e < 0) return;
+      const lean =
+        0.2 * ease(band(e, 0, 0.12)) * Math.exp(-e * 0.9) * (1 - ease(band(e, 1.9, 2.3)));
+      // The lean's direction goes round, faster as the lean shrinks.
+      const start = TAU * vary(info?.tap, 7);
+      const round = start + e * 7 + e * e * 2.2;
+      const d = [Math.cos(round), 0, Math.sin(round)];
+      // Rim contact point (radius 0.59, bottom -0.9 in the can's normalised size).
+      const rim = [0.59 * d[0], -0.9, 0.59 * d[2]];
+      const q = quatAxisAngle(cross([0, 1, 0], d), lean);
+      const moved = quatRotate(q, rim);
+      const drop =
+        0.012 * Math.abs(spring(e - 2.3, 6, 40)) * band(e, 2.25, 2.35) * (1 - band(e, 2.45, 2.6));
+      out.body = { quat: q, offset: [rim[0] - moved[0], rim[1] - moved[1] + drop, rim[2] - moved[2]] }; // prettier-ignore
+    },
+  },
+
   // ---- Shelf shapes (procedural) ------------------------------------------------------
 
   // Splits into three little blobs that wobble and merge back.
