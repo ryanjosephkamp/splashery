@@ -45,11 +45,49 @@ e5-banana-r2 and e4-ocean-wave-r2 to point at them. Check the owner's marks (ver
 
 ## State
 
-September 27, 2026: lane started on branch `claude/lane-fix3`. Working on the bananas first, then
-the wave.
+September 27, 2026: both fixes are built, in draft PR #54 ("Phase Fix3: the banana's stem and the
+ocean wave's collapse") from `claude/lane-fix3`. Clips are on the Effect review page as cards
+`fix3-banana` and `fix3-ocean-wave` (lane record "Fix3"), replacing `e5-banana-r2` and
+`e4-ocean-wave-r2`. Waiting for the owner's marks.
 
 ## Notes
 
+- **Bananas** (`banana` in `src/packs/food.js`): the piece hanging loose in the owner's screenshot
+  was the bunch's crown, a plain shape with no token, so it stayed where it was built while all
+  three bananas (tokens) pulled away from it. It is now built in the middle banana's frame on that
+  banana's body token, so it moves with it (the middle banana moves least), and the front and back
+  bananas break off it with their own dark neck stubs. Every splat of the toy is a token now
+  (`tests/fix3.spec.mjs` checks). Its resting place moved a hair with the middle banana's turn, so
+  the thumbnail was re-rendered.
+- **Ocean wave** (`ocean-wave` in `src/packs/elements.js`, `OW_ROLL`, `OW_FALL`, `owFallIndex`):
+  - The old collapse eased in and out of every keyframe (`ease()` per segment), so the wave stopped
+    dead at the moment the lip hit the water and again at each key after it, and the keys between
+    the impact and the flat water folded the face into a notch and the lip into a straight ramp.
+  - The fall (from the rest curl to the flat water of key 4 at 2.2 s) now runs through its own keys
+    on one clock: a smooth monotone curve through the keys' times (still at the start and at the
+    end, never stopping between), and Catmull-Rom paths through the keys. It keeps the throw (keys 1
+    and 2) and replaces key 3 with three keys where the barrel the lip closes shrinks as it rolls
+    forward (the lip's tip stays where it plunged in), down to a low roll that meets the flat water.
+    The rebuild (2.2 s on) runs exactly as before, through `OW_KEYS` (key 3 is still there for its
+    first segment's path).
+  - White water: the copy of the landed lip that flashed as a white curved sheet and fell flat is
+    gone. A lumpy wall of foam (a cloud, part `bore`) is built round the roll at its fullest and
+    fades in on channel 0 from the place the lip plunged in, so it froths up out of the plunge and
+    climbs over the roll; as channel 0 falls it sinks away from the top (a fade, so no speckle) into
+    the existing lace on channel 2, drifting forward a little. The lip goes (by size) while it is
+    under the foam.
+  - The spray off the lip at rest now goes over 0.3 s after the tap (was 0.05 s).
+  - Sounds unchanged: the impact is still at 0.8 s and the rebuild's cues are where they were.
+
 ## Known issues
 
+- Checked as clips and frame grids in headless Chromium (SwiftShader), not on a phone.
+- Ocean wave: the foam wall's near end still reads as a fairly straight edge from the home camera
+  (it frays, but less than the sea); the near end of the wave shows the profile's edge (as before).
+
 ## For the Operator
+
+- PACKS.md lesson: keyframes eased one by one (`ease()` per segment) stop the motion at every key.
+  For motion that should flow through keys (a falling wave), run one clock through all of them: a
+  monotone curve from time to key index, still only at the start and end, then Catmull-Rom between
+  the keys (`owFallIndex` in `src/packs/elements.js`).
