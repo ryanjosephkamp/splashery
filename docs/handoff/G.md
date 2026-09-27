@@ -33,7 +33,9 @@ PR title: "Phase G: AI image-to-3D trial".
 
 ## State
 
-In progress on `claude/lane-g-image-to-3d` (2026-09-27).
+In progress on `claude/lane-g-image-to-3d`, PR #43 (2026-09-27). Report page:
+https://claude.ai/artifact/GFHZX3NF5DA4Vs39s8BGbY. Clips: cards `g-pencil-real` and `g-tin-can-real`
+on the Effect review page.
 
 - `HF_TOKEN` checked with whoami: account `ryanjosephkamp`, role `read`.
 - Space: `trellis-community/TRELLIS` (ZeroGPU, MIT; runs `microsoft/TRELLIS-image-large`, MIT;
@@ -42,14 +44,42 @@ In progress on `claude/lane-g-image-to-3d` (2026-09-27).
   excludes some regions and outputs a mesh, so they were not used.
 - `tools/image-to-3d.mjs` runs one photo through the Space with plain fetch (no new devDependency)
   and saves the cut-out, the Space's turntable and the Gaussians (PLY) to `.cache/g/out/<name>/`.
-  One run takes about 30 s of wall time.
-- `tools/splat-views.mjs` renders a PLY from four sides in the real app. TRELLIS PLYs need
+  One run takes about 30 s of wall time and asks for 120 s of GPU quota.
+- `tools/splat-views.mjs` renders a PLY from several sides in the real app. TRELLIS PLYs need
   `rotate: [180, 0, 0]`, like the SuperSplat scans.
+- Shipped: **Real pencil** (`pencil-real`, CC BY 2.0 photo by Tim Reckmann; tap: a flick spins it
+  flat, two turns) and **Real tin can** (`tin-can-real`, CC0 photo by Ll1324; tap: knocked onto its
+  rim, spins round like a settling coin and drops flat).
+- Failed: fountain pen (the thin nib broke into spikes).
+- Waiting on quota: the clear water bottle (CC0 photo ready). The free ZeroGPU quota ran out after
+  four runs.
+- Report only: the red water bottle and the running shoe are rawpixel previews with a watermark, and
+  their licence pages block automated checks, so they cannot ship.
+- No usable photo: soda can (all branded or cropped) and hoodie (worn, branded or tiny).
 
 ## Notes
 
+- Inputs: shrink photos to 1024 px first (the Space works at 518 px). The Space cuts out the
+  background itself unless the PNG has alpha.
+- The side the photo cannot see is a guess: the pencil's underside came out dark, so a roll showed
+  it. Taps that keep the photographed side towards the camera work better (the spin).
+- The lite SOG at 80,000 splats made the can's wall see-through on the weak profile; it uses 160,000
+  (1.9 MB).
+- Our own kit renders come back as faithful copies of the cartoon toy, so photos are the way to get
+  a real look.
+
 ## Known issues
+
+- The tin can has the photo's glare baked in (one side brighter).
+- The pencil is short (the photo is of a stubby pencil).
 
 ## For the Operator
 
-Lessons for PACKS.md, backlog items and README lines, to move after the merge.
+- A full test run also rewrites lanes' own screenshots (`e5-*`, `e6a-*`), which
+  `node tools/upkeep.mjs --restore-shots` does not put back; lanes need
+  `git checkout -- tests/screenshots/` too. Maybe restore every screenshot the branch did not
+  change.
+- PACKS.md lesson: an image-to-3D scan's unseen side is a guess; pick taps that do not show it.
+- Backlog: owner's own phone photos (released as CC0) would unlock the soda can, running shoe and
+  hoodie; Poly Haven also has `russian_food_cans_01` and `stationery_supplies` (CC0) for
+  mesh-to-splats.
