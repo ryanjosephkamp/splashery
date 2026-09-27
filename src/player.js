@@ -6,7 +6,7 @@
 import * as pc from "./pc.js";
 import { Stage, NoGPUError } from "./stage.js";
 import { OrbitCamera, Gestures } from "./camera.js";
-import { EffectDriver, hexToRgb } from "./effects.js";
+import { EffectDriver, hexToRgb, KINDS } from "./effects.js";
 import { Painter } from "./paint.js";
 import { generate, normalizeGenerator, applyClay, PROFILES } from "./generators.js";
 import { buildRecipe, meanLuminance, Kit } from "./kit.js";
@@ -574,6 +574,46 @@ export class Player {
     if (!all) this.stage.requestRender();
   }
 
+  // Splats are depth-sorted in the pose they were built in, so a token
+  // (a game piece) moved far from its built place, say from the back of a
+  // toy to its front, draws in the wrong order. This sorts a kit toy's
+  // token splats again at the places the current token uniforms put them
+  // (the same move as the kit shader's: a turn about the origin, then the
+  // offset). The recipe asks for it by setting out.resort on a frame where
+  // its pieces have settled; it is a one-off cost, not for every frame.
+  resortTokens() {
+    const proc = this.proc;
+    if (!proc?.kit || !proc.ctx?.buf?.anim) return 0;
+    const { buf } = proc.ctx;
+    const centers = proc.container.centers;
+    const td = this.motion.tokenData;
+    let n = 0;
+    for (let i = 0; i < buf.count; i++) {
+      const i3 = i * 3;
+      const i4 = i * 4;
+      if (Math.round(buf.anim[i4 + 1]) !== KINDS.token) continue;
+      const o = Math.min(47, Math.max(0, Math.round(buf.anim[i4 + 2]))) * 8;
+      let [x, y, z, w] = [td[o + 4], td[o + 5], td[o + 6], td[o + 7]];
+      if (!x && !y && !z && !w) w = 1;
+      const px = buf.pos[i3];
+      const py = buf.pos[i3 + 1];
+      const pz = buf.pos[i3 + 2];
+      // v + 2 u x (u x v + w v), with u = (x, y, z).
+      const cx = y * pz - z * py + w * px;
+      const cy = z * px - x * pz + w * py;
+      const cz = x * py - y * px + w * pz;
+      centers[i3] = px + 2 * (y * cz - z * cy) + td[o];
+      centers[i3 + 1] = py + 2 * (z * cx - x * cz) + td[o + 1];
+      centers[i3 + 2] = pz + 2 * (x * cy - y * cx) + td[o + 2];
+      n++;
+    }
+    if (n) {
+      proc.container.update(buf.count, true);
+      this.stage.requestRender();
+    }
+    return n;
+  }
+
   disposeProcedural() {
     this.proc = null;
   }
@@ -875,6 +915,9 @@ export class Player {
       this.stage.requestRender();
     }
     this.stage.setBusy(busy && !this.loading);
+    // A recipe's pieces moved far from where they were built (a cube's
+    // turned layer): sort them again where they stand now.
+    if (this.motion.out?.resort) this.resortTokens();
     // Sounds a recipe asks for mid-effect (a chess move's clack).
     const cues = this.motion.out?.cues;
     if (cues?.length && !this.frozen) this.emit("cue", cues.slice());
