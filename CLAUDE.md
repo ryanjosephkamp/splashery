@@ -14,6 +14,13 @@ lane's work, and keeps its handoff file current. Only the Operator session edits
 Several sessions build at once: one per lane, plus the long-lived Operator session that plans and
 coordinates. [docs/OPERATING.md](docs/OPERATING.md) has the rules. In short:
 
+- The Operator runs the lanes (since September 27, 2026). It writes each lane's brief, starts the
+  worker session with it, checks and steers it, reconciles the PRs and brings the owner finished
+  work. The owner talks only to the Operator, reviews the clips and merges. A worker puts its
+  questions in its final message ("READY:", "WORKING:" or "BLOCKED:"), not to the owner.
+- Workers run Opus 5.5 only, at the default effort for now (a trial). Any other model needs the
+  owner's permission first. The Operator checks each worker's model at every check-in and stops one
+  that has run on another model.
 - A lane edits only the files it owns (its row in WORKSTREAMS.md) and its own toys' entries in the
   shared lists (`src/toy-sounds.js`, `tools/toy-plan.json`, `src/toys.js`, credits).
 - Regenerate TOY-PLAN.md; never merge it by hand.
@@ -34,6 +41,11 @@ coordinates. [docs/OPERATING.md](docs/OPERATING.md) has the rules. In short:
   toy's in-app credit.
 - Old `#s=` links and saved scene JSON (schema v2 and v3) must keep loading.
 - No firearms, no logos or brand names, no gore. Flags stay respectful.
+- American English for every new public-facing text: the docs, the words on the site (toy names,
+  descriptions, buttons, credits) and PR titles and bodies. So color, center, gray, math, license,
+  toward, catalog, -ize endings, and dates like "September 27, 2026". Code identifiers, file names
+  and anything stored in links or saved scenes stay as they are. Don't rewrite older British text on
+  the side: one sweep does that before the blog post.
 - Secrets: `HF_TOKEN` (a Hugging Face read token) is for build-time tools only. Never print it,
   commit it, or put it in logs, PRs or files. To check it, test that it is set
   (`[ -n "$HF_TOKEN" ]`), or call the whoami API and print only the account name and token role.
@@ -62,6 +74,8 @@ new or changed effect against them before calling it done.
 
 - `SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium npx playwright test`. Never run
   `playwright install`. Keep the "embed transfer ≤ 30 MB" test green.
+- `node tools/us-english.mjs --diff`: new public text in American English (it lists British
+  spellings in the lines your branch adds).
 - `npx prettier --check .`. If `.claude/worktrees/` exists, also pass
   `--ignore-path .gitignore --ignore-path .prettierignore --ignore-path .git/info/exclude`.
 - For new or changed toys:
@@ -88,8 +102,8 @@ new or changed effect against them before calling it done.
 ## Working style
 
 - Run at most 2 or 3 subagents at once. Seven parallel builders used up a week's usage in one go.
-  While lanes run in parallel (at most three at once, plus the Operator), a lane uses at most one
-  helper at a time.
+  Lanes run three at once by default (four when one is small), plus the Operator, and a lane uses at
+  most one helper at a time.
 - The owner works from the phone app. Keep replies short and plain, and give step-by-step
   instructions whenever the owner has to do something.
 
@@ -104,7 +118,9 @@ new or changed effect against them before calling it done.
   `tools/toy-plan.json` by `node tools/toy-plan.mjs` (run it after adding or finishing a toy).
 - `tools/upkeep.mjs`: the Operator's upkeep after a merge (TOY-PLAN.md, the Sound Board page file,
   the standard screenshots). `tools/sound-board.mjs` builds the Sound Board page.
-- `docs/reviews/`: the owner's reviews, verbatim, with screenshots.
+- `docs/reviews/`: the owner's reviews, verbatim, with screenshots (sound notes too).
+- `tools/sound-review.json`: the sound review, per toy (notes, plans and new sounds to hear), shown
+  on the Sound Board (OPERATING.md, "The sound review").
 - `docs/PACKS.md`: how to write toy recipes.
 - `docs/SCENE-SCHEMA.md`: the scene format.
 - `CREDITS.md` and `LICENSES.md`: attributions and licences.

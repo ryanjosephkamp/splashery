@@ -6,6 +6,16 @@
 // (each with the Sound line from tools/toy-plan.json) put in at its
 // @@SOUND-DATA@@ line.
 //
+// The sound review (docs/OPERATING.md, "The sound review") adds two optional
+// files, both put in too:
+//   tools/sound-review.json      notes and new sounds per toy:
+//     { "round": "", "note": "", "toys": { "<toy id>": { "status", "said",
+//       "note", "plan", "candidates": [{ "id", "label", "sound" }] } } }
+//     status: keep | change | ready | approved | site
+//   tools/sound-voices-next.js   new voices for candidate sounds, as
+//     `VOICES.name = { ... };` lines (no imports or exports); they reach the
+//     site only when a sound lane moves them into src/voices.js.
+//
 //   node tools/sound-board.mjs                 # writes .cache/pages/sound-board.html
 //   node tools/sound-board.mjs --out=file.html
 //   node tools/sound-board.mjs --label=E5 --out=.cache/pages/sound-board-e5.html
@@ -19,6 +29,7 @@ import path from "node:path";
 import { execSync } from "node:child_process";
 import { TOYS, CATEGORIES } from "../src/toys.js";
 import { TOY_SOUNDS } from "../src/toy-sounds.js";
+import { specProblems } from "../src/voices.js";
 
 const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
 const arg = (name, fallback) =>
@@ -31,6 +42,30 @@ const plan = JSON.parse(fs.readFileSync(path.join(root, "tools/toy-plan.json"), 
 const voices = fs.readFileSync(path.join(root, "src/voices.js"), "utf8");
 if (/^(import|export \{|export default)/m.test(voices))
   throw new Error("src/voices.js has an import or an export list: update tools/sound-board.mjs");
+
+const STATUSES = ["keep", "change", "ready", "approved", "site"];
+const reviewFile = path.join(root, "tools/sound-review.json");
+const review = fs.existsSync(reviewFile)
+  ? JSON.parse(fs.readFileSync(reviewFile, "utf8"))
+  : { round: "", note: "", toys: {} };
+const nextFile = path.join(root, "tools/sound-voices-next.js");
+const nextVoices = fs.existsSync(nextFile) ? fs.readFileSync(nextFile, "utf8") : "";
+if (/^(import|export)/m.test(nextVoices))
+  throw new Error("tools/sound-voices-next.js must not import or export");
+const nextNames = new Set([...nextVoices.matchAll(/^VOICES\.(\w+)\s*=/gm)].map((m) => m[1]));
+for (const [id, r] of Object.entries(review.toys || {})) {
+  if (!TOYS.some((t) => t.id === id)) throw new Error(`sound-review.json: no toy "${id}"`);
+  if (r.status && !STATUSES.includes(r.status))
+    throw new Error(`sound-review.json: ${id} has status "${r.status}" (${STATUSES.join(", ")})`);
+  for (const c of r.candidates || []) {
+    if (!c.id || !c.sound) throw new Error(`sound-review.json: ${id} has a candidate without id or sound`); // prettier-ignore
+    const problems = specProblems(c.sound, `${id} ${c.id}`).filter(
+      (p) =>
+        !/unknown voice "(\w+)"/.test(p) || !nextNames.has(p.match(/unknown voice "(\w+)"/)[1]),
+    );
+    if (problems.length) throw new Error(`sound-review.json: ${problems.join("; ")}`);
+  }
+}
 
 const toys = TOYS.map((t) => ({ id: t.id, label: t.label, c: t.category, s: plan[t.id]?.sound || "" })); // prettier-ignore
 const cats = CATEGORIES.filter((c) => toys.some((t) => t.c === c.id)).map((c) => ({ id: c.id, label: c.label })); // prettier-ignore
@@ -48,10 +83,12 @@ const built = new Date().toISOString().slice(0, 10) + (commit ? `, ${commit}` : 
 
 const data = [
   voices.replace(/^export /gm, "").trimEnd(),
+  nextVoices.trimEnd(),
   "",
   `const TOY_SOUNDS = ${JSON.stringify(sounds)};`,
   `const TOYS = ${JSON.stringify(toys)};`,
   `const CATS = ${JSON.stringify(cats)};`,
+  `const REVIEW = ${JSON.stringify(review)};`,
 ].join("\n");
 const lines = template.split("\n");
 const at = lines.findIndex((l) => l.trim().startsWith("// @@SOUND-DATA@@"));
