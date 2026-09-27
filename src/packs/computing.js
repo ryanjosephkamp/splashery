@@ -269,9 +269,10 @@ const SEGS = [
 ];
 const DIGIT_SEGS = ["abcdef", "bc", "abdeg", "abcdg", "bcfg", "acdfg", "acdefg", "abc", "abcdefg", "abcdfg"]; // prettier-ignore
 
-// A seven-segment digit of height h at p (its centre): dim segments always,
-// and a lit copy of each on its own token (tokens from `token` to token + 6).
-function sevenSeg(k, p, h, token, { on = "#ff5a4f", off = "#2a1c24" } = {}) {
+// A seven-segment digit of height h at p (its centre): each segment on its
+// own token (tokens from `token` to token + 6), shown only when lit. Unlit
+// segments are not drawn at all, so a counter never reads as a dim "8".
+function sevenSeg(k, p, h, token, { on = "#ff5a4f" } = {}) {
   const w = h * 0.5;
   const th = h * 0.1;
   SEGS.forEach(([x0, y0, x1, y1], i) => {
@@ -281,7 +282,6 @@ function sevenSeg(k, p, h, token, { on = "#ff5a4f", off = "#2a1c24" } = {}) {
     const L = len(sub(b, a)) - th * 0.9;
     const size = horiz ? [L, th, th * 0.5] : [th, L, th * 0.5];
     const mid = mul(add(a, b), 0.5);
-    k.add(k.box(...size), { pos: mid, flat: 0.2, weight: 3, pattern: false, color: () => keep(off) }); // prettier-ignore
     k.add(k.box(size[0] * 1.08, size[1] * 1.04, size[2]), {
       pos: add(mid, [0, 0, th * 0.4]),
       flat: 0.2,

@@ -132,7 +132,8 @@ What each tap does now:
 - Shared helpers in `computing.js`: `board`, `wire` (thickness can change by a morph), `wireLight`
   (a lit copy that fills with light along a fade channel), `bead` (a glowing token), `lamp` and
   `lampLight`, `text` and `sign` (the 5×7 font plus Σ, +, =, →), `sevenSeg` and `showDigit`
-  (counters on tokens), `resortSteps` (below).
+  (counters on tokens; unlit segments are not drawn and a leading zero is blank, after the
+  Operator's note that dim segments read as "8"), `resortSteps` (below).
 - Draw order: tokens that travel across the board vanish behind it unless they are sorted again, so
   `resortSteps()` sets `out.resort` once per step while pieces travel (the CNN's tiles, the RNN's
   words, the transformer's tiles, the loop's tiles, the ball, the bars) and once after.
