@@ -738,6 +738,68 @@ const SORT = (() => {
     qs(0, a.length - 1);
     steps.quick = out;
   }
+  // The swap sorts: each records the arrangement after every swap.
+  const swaps = (sort) => {
+    const a = start.slice();
+    const out = [];
+    const swap = (i, j) => {
+      if (i === j) return;
+      [a[i], a[j]] = [a[j], a[i]];
+      out.push(a.slice());
+    };
+    sort(a, swap);
+    return out;
+  };
+  // Insertion sort: each bar swaps down past the bigger ones before it.
+  steps.insertion = swaps((a, swap) => {
+    for (let i = 1; i < a.length; i++)
+      for (let j = i; j > 0 && a[j - 1] > a[j]; j--) swap(j - 1, j);
+  });
+  // Selection sort: the smallest bar left swaps to the front.
+  steps.selection = swaps((a, swap) => {
+    for (let i = 0; i < a.length - 1; i++) {
+      let m = i;
+      for (let j = i + 1; j < a.length; j++) if (a[j] < a[m]) m = j;
+      swap(i, m);
+    }
+  });
+  // Cocktail shaker sort: bubble sort passes left to right, then back.
+  steps.cocktail = swaps((a, swap) => {
+    let lo = 0;
+    let hi = a.length - 1;
+    while (lo < hi) {
+      for (let i = lo; i < hi; i++) if (a[i] > a[i + 1]) swap(i, i + 1);
+      hi--;
+      for (let i = hi; i > lo; i--) if (a[i - 1] > a[i]) swap(i - 1, i);
+      lo++;
+    }
+  });
+  // Shell sort (gaps 4, 2, 1): insertion sort over bars a gap apart.
+  steps.shell = swaps((a, swap) => {
+    for (const gap of [4, 2, 1])
+      for (let i = gap; i < a.length; i++)
+        for (let j = i; j >= gap && a[j - gap] > a[j]; j -= gap) swap(j - gap, j);
+  });
+  // Heap sort: build a max-heap, then swap the top to the end and sift.
+  steps.heap = swaps((a, swap) => {
+    const sift = (i, n) => {
+      for (;;) {
+        let m = i;
+        const l = 2 * i + 1;
+        const r = l + 1;
+        if (l < n && a[l] > a[m]) m = l;
+        if (r < n && a[r] > a[m]) m = r;
+        if (m === i) return;
+        swap(i, m);
+        i = m;
+      }
+    };
+    for (let i = Math.floor(a.length / 2) - 1; i >= 0; i--) sift(i, a.length);
+    for (let n = a.length - 1; n > 0; n--) {
+      swap(0, n);
+      sift(0, n);
+    }
+  });
   // Merge sort (bottom up, in place): each bar taken from the right run
   // ahead of the left run's bars is one move.
   {
@@ -765,7 +827,17 @@ const SORT = (() => {
   const colors = ["#e8413c", "#f07a2c", "#f5b72a", "#b8d63a", "#46c46a", "#2fb3c9", "#3d78e0", "#8a55d9"]; // prettier-ignore
   const x = (slot) => (slot - 3.5) * 0.24;
   const height = (v) => 0.2 + v * 0.13;
-  return { start, steps, colors, x, height, t0: 0.25, t1: 3.85 };
+  const names = {
+    bubble: "BUBBLE SORT",
+    quick: "QUICKSORT",
+    merge: "MERGE SORT",
+    insertion: "INSERTION SORT",
+    selection: "SELECTION SORT",
+    cocktail: "COCKTAIL SORT",
+    shell: "SHELL SORT",
+    heap: "HEAP SORT",
+  };
+  return { start, steps, names, colors, x, height, t0: 0.25, t1: 3.85 };
 })();
 
 // The half adder: switches A and B, wires to an XOR gate (the sum) and an
@@ -1906,6 +1978,11 @@ export const RECIPES = {
           { id: "bubble", label: "Bubble sort" },
           { id: "quick", label: "Quicksort" },
           { id: "merge", label: "Merge sort" },
+          { id: "insertion", label: "Insertion sort" },
+          { id: "selection", label: "Selection sort" },
+          { id: "cocktail", label: "Cocktail shaker sort" },
+          { id: "shell", label: "Shell sort" },
+          { id: "heap", label: "Heap sort" },
         ],
       },
     ],
@@ -1982,16 +2059,20 @@ export const RECIPES = {
           color: (c) => keep(lit(SORT.colors[v], c.n, { amb: 0.7, dif: 0.4, spec: 0.3 })),
         });
       });
-      // The counter, on a panel behind the bars.
-      const cy = 1.38;
-      k.add(k.box(1.3, 0.36, 0.05), {
-        pos: [0, cy, -0.3],
+      // The algorithm's name and the counter, on a panel behind the bars.
+      const cy = 1.34;
+      const pw = 1.7;
+      const ph = 0.6;
+      k.add(k.box(pw, ph, 0.05), {
+        pos: [0, cy + 0.12, -0.3],
         flat: 0.2,
         even: true,
         pattern: false,
-        color: (c) => keep(Math.abs(c.p[1] - cy) > 0.16 || Math.abs(c.p[0]) > 0.63 ? BOARD_RIM : "#0b1020"), // prettier-ignore
+        color: (c) =>
+          keep(Math.abs(c.p[1] - cy - 0.12) > ph / 2 - 0.03 || Math.abs(c.p[0]) > pw / 2 - 0.03 ? BOARD_RIM : "#0b1020"), // prettier-ignore
       });
-      k.add(k.box(0.05, 1.2, 0.05), { pos: [0, 0.6, -0.3], flat: 0.3, pattern: false, color: () => keep(BOARD_RIM) }); // prettier-ignore
+      k.add(k.box(0.05, 1.1, 0.05), { pos: [0, 0.55, -0.3], flat: 0.3, pattern: false, color: () => keep(BOARD_RIM) }); // prettier-ignore
+      text(k, SORT.names[algo], [0, cy + 0.27, -0.27], 0.018, "#ffd34d");
       text(k, algo === "merge" ? "MOVES" : "SWAPS", [-0.22, cy, -0.27], 0.022, "#9fb0d6");
       sevenSeg(k, [0.26, cy, -0.27], 0.22, 8);
       sevenSeg(k, [0.44, cy, -0.27], 0.22, 15);

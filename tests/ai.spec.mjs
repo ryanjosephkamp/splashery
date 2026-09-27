@@ -100,7 +100,16 @@ for (const id of IDS) {
 }
 
 test("sorting machine: every algorithm ends with the bars in order, and shuffles back", () => {
-  for (const algo of ["bubble", "quick", "merge"]) {
+  for (const algo of [
+    "bubble",
+    "quick",
+    "merge",
+    "insertion",
+    "selection",
+    "cocktail",
+    "shell",
+    "heap",
+  ]) {
     const kit = build("sorting-machine", { algo });
     const steps = kit.data.steps;
     expect(steps[steps.length - 1], algo).toEqual([0, 1, 2, 3, 4, 5, 6, 7]);
