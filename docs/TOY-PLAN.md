@@ -334,7 +334,9 @@ Proposals below are suggestions; the owner may change them.
   - Fixed: C1: pebbled pigskin with a soft sheen, darker seams, crisp white laces.
   - Effect: A tight spiral spin in place.
   - Improved: E1b: a spiral pass: it flies up nose first, spinning fast about its long axis, the
-    nose tipping over at the top, and lands with a wobble (2.4 s).
+    nose tipping over at the top, and lands with a wobble (2.4 s). Math: the spiral is six whole
+    turns, so it lands laces up with no snap back, and the ball is built twice, half a turn apart,
+    so its laces never show through while it is upside down.
   - Sound: Leathery whoosh.
 - **Tennis ball** (`tennis-ball`). Now: tap: Bounce it hard. Plan: keep.
   - Owner: The owner (2026-09-24): some sports balls look grainy rather than realistic; the tennis
@@ -1620,7 +1622,12 @@ Proposals below are suggestions; the owner may change them.
   - Owner: Perfect, but it disappears too much when hiding; make it more elegant.
   - Effect: Keep hiding in the shell, but keep the shell clearly visible and ease in more gently.
   - Improved: C2: it hides more gently (2.4 s): eye stalks first, then the head glides under the
-    shell and the foot slides in; the shell stays in view and rocks once.
+    shell and the foot slides in; the shell stays in view and rocks once. Math (owner: it "looks
+    weird while and after retracting"): like a real snail, the eye stalks roll in first (each
+    shortens from its tip into the head), then the head, neck and whole foot, front and tail, are
+    drawn in through the shell's opening as solid pieces the shell hides, and the shell settles on
+    the ground with nothing soft showing (3.2 s). Coming out, the foot slides out first, then the
+    head, then the stalks unroll.
   - Sound: Slurpy slide.
 - **Octopus** (`octopus`). Now: tap: Squirt ink. Plan: keep.
   - Owner: Underwhelming; the ink should be much bigger and more dramatic.

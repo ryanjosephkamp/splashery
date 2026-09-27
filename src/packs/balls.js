@@ -1574,24 +1574,33 @@ export const RECIPES = {
   },
 
   "american-football": {
+    // Twice the splats (as far as the device allows): it is built twice.
+    density: 2,
     options: [{ key: "color", label: "Leather", type: "color", default: "#7a3b1a" }],
     // A spiral pass: it flies up nose first, spinning fast about its long
-    // axis, the nose tipping over at the top, and lands with a wobble.
+    // axis (six whole turns, so it lands laces up as it started), the nose
+    // tipping over at the top, and lands with a wobble. Splats sort in their
+    // built pose, so the ball is built twice (PACKS.md 7b, rule 1): the
+    // second copy half a turn round about its long axis, coloured as the
+    // first would be there, and whichever copy is within a quarter turn of
+    // its built pose is shown. Its inside hides while it spins.
     ...throwPulse("pass", "Throw a spiral", 2.4),
     drive(t, c, out) {
       const e = sinceTap(c, "pass", 2.4);
-      if (e < 0) return;
-      const f = band01(e, 0.05, 1.65);
+      const f = e < 0 ? 0 : band01(e, 0.05, 1.65);
       const flying = f > 0 && f < 1;
-      const spin = 2 * Math.PI * 5.5 * easeIO(f);
+      const spin = 2 * Math.PI * 6 * easeIO(f);
+      const turn = ((spin % TAU) + TAU) % TAU;
+      const useB = turn > Math.PI / 2 && turn < (3 * Math.PI) / 2;
+      out.parts.ballA = { quat: quatAxisAngle([1, 0, 0], spin), visible: useB ? 0 : 1 };
+      out.parts.ballB = { quat: quatAxisAngle([1, 0, 0], spin - Math.PI), visible: useB ? 1 : 0 };
+      out.parts.core = { visible: flying ? 0 : 1 };
+      if (e < 0) return;
       const pitch = flying ? 0.6 * Math.cos(Math.PI * f) : 0;
       const land = Math.exp(-(e - 1.65) * 5) * Math.sin((e - 1.65) * 18) * band01(e, 1.65, 1.7);
       out.body = {
         offset: [0, arc(f, 0.65), 0],
-        quat: quatMul(
-          quatAxisAngle([0, 0, 1], pitch + 0.12 * land),
-          quatAxisAngle([1, 0, 0], spin),
-        ),
+        quat: quatAxisAngle([0, 0, 1], pitch + 0.12 * land),
       };
     },
     build(k, o) {
@@ -1601,32 +1610,44 @@ export const RECIPES = {
         const y = -L + (2 * L * i) / 24;
         prof.push([0.86 * Math.pow(Math.max(0, 1 - (y / L) ** 2), 0.78), y]);
       }
-      k.add(k.lathe(prof, { grid: 80 }), {
+      const look = (turned) => (c) => {
+        const a = (c.u * TAU + (turned ? Math.PI : 0)) % TAU;
+        const y = c.lp[1];
+        // Four panels meet along four meridians.
+        const seamA = Math.abs(Math.sin(2 * a));
+        // The laces sit on the seam at a = 90 degrees (turned to the top).
+        const d90 = Math.abs(a - Math.PI / 2);
+        // Crisp white laces: a spine along the seam and eight cross bars.
+        const lace = "#f5f2e8";
+        if (Math.abs(y) < 0.55 && d90 < 0.045) return keep(lit(lace, c.n, { sheen: 0.2 }), 0.6);
+        if (Math.abs(y) < 0.48 && d90 < 0.19) {
+          const bar = Math.abs((((y + 0.48) / 0.12) % 1) - 0.5) > 0.3;
+          if (bar) return keep(lit(lace, c.n, { sheen: 0.2 }), 0.6);
+        }
+        // Darker, stitched seams between the four panels.
+        if (seamA < 0.022) return keep(lit(shade(o.color, 0.38), c.n), 0.7);
+        // Pebbled pigskin with a soft sheen.
+        return grip(c, o.color, { f: 70, depth: 0.65, crevice: 0.25, sheen: 0.1, tight: 14 });
+      };
+      const shape = k.lathe(prof, { grid: 80 });
+      const core = k.part("core");
+      k.add(shape, {
         rot: [0, 0, 90],
+        part: (c) => (c.inside ? core : k.part("ballA", { axis: [1, 0, 0] })),
         flat: 0.18,
         interior: 0.12,
         jitter: 0.012,
         even: true,
         core: "#3b1d0c",
-        color: (c) => {
-          const a = c.u * TAU;
-          const y = c.lp[1];
-          // Four panels meet along four meridians.
-          const seamA = Math.abs(Math.sin(2 * a));
-          // The laces sit on the seam at a = 90 degrees (turned to the top).
-          const d90 = Math.abs(a - Math.PI / 2);
-          // Crisp white laces: a spine along the seam and eight cross bars.
-          const lace = "#f5f2e8";
-          if (Math.abs(y) < 0.55 && d90 < 0.045) return keep(lit(lace, c.n, { sheen: 0.2 }), 0.6);
-          if (Math.abs(y) < 0.48 && d90 < 0.19) {
-            const bar = Math.abs((((y + 0.48) / 0.12) % 1) - 0.5) > 0.3;
-            if (bar) return keep(lit(lace, c.n, { sheen: 0.2 }), 0.6);
-          }
-          // Darker, stitched seams between the four panels.
-          if (seamA < 0.022) return keep(lit(shade(o.color, 0.38), c.n), 0.7);
-          // Pebbled pigskin with a soft sheen.
-          return grip(c, o.color, { f: 70, depth: 0.65, crevice: 0.25, sheen: 0.1, tight: 14 });
-        },
+        color: look(false),
+      });
+      k.add(shape, {
+        rot: [0, 0, 90],
+        part: k.part("ballB", { axis: [1, 0, 0] }),
+        flat: 0.18,
+        jitter: 0.012,
+        even: true,
+        color: look(true),
       });
     },
   },
