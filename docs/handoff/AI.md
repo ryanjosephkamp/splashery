@@ -193,8 +193,8 @@ What each tap does now:
   something else, tell me.
 - Word vectors: GloVe is under the ODC PDDL (public domain), checked on the live page; credited in
   CREDITS.md and in the toy. The word list leaves out words about violence, weapons and sex.
-- A lesson for PACKS.md: text and other small keep-colored details need size / sqrt(weight) of
-  about 0.5 or more, or they vanish at 320 pixels (weight 10 did).
+- A lesson for PACKS.md: text and other small keep-colored details need size / sqrt(weight) of about
+  0.5 or more, or they vanish at 320 pixels (weight 10 did).
 
 - A lesson for PACKS.md 7b: tokens that glide across a flat board just in front of it disappear
   behind it until resorted; `out.resort` a few times during the glide fixes it.
