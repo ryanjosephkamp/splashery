@@ -148,7 +148,8 @@ the owner's note gets the old card's id plus `-r2` (then `-r3`), in the old card
 
 1. Render each clip: `node tools/effect-clip.mjs --strip=8 --size=320 <toy id>:<seconds>` (the
    server must be running; `--taps`, `--opt=key=value` and `--pgn=` are in the tool's header). It
-   writes a looping GIF. Watch it before posting.
+   writes a looping GIF. Watch it before posting. For a drag, use `node tools/drag-clip.mjs`
+   instead.
 2. Read the page once in the session (a session must read an artifact before it can add to it):
    Artifact tool, `action: "read"`, `url` the page's link.
 3. Upload the clips: Artifact tool, `action: "publish"`, `url` the page's link, `asset: true`,

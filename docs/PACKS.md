@@ -228,6 +228,11 @@ function returns with `keep: true`, or with `pattern: false` on their shape, nev
 **Grab**: `grab: { radius: 0.55, max: 0.9 }` (in toy radii) makes a toy stretchy: with the Orbit
 tool, a drag that starts on it pulls the grabbed part (up to `max`) and it springs back when let go.
 
+**Drag**: `drag: { at, start, move, end, plane }` gives a toy its own touch play (the puzzle cube,
+Newton's cradle). `plane` is `"view"`, a normal, or `(point) => normal`; without it, a drag follows
+the horizontal plane it started on (the laptop). A drag that starts beside the toy still turns the
+view. `tools/drag-clip.mjs` renders drags and taps as clips for review.
+
 **Scan rigs** (`src/rigs.js`): a captured toy can have the same `controls`, `action` and `drive` as
 a recipe, plus `parts`, each made of soft ellipsoid regions in world coordinates:
 
@@ -455,6 +460,9 @@ form is in CLAUDE.md.
       draw through the shell once it turns. Paint them on the surface.
   11. Figures that walk towards the camera are built at the point of their path nearest the camera
       (the Parthenon's procession vanished under the rock when built where it started).
+  12. Tokens that move far (a cube's cubies, a model's bricks) set `out.resort` on the frame they
+      land, and the player sorts them again where they stand. Do it once per landing, not every
+      frame (lane F).
 - **Glossy things that spin.** Baked light turns with a spinning body, so a rolling pool ball looks
   like glass. Spin an unlit copy built tiny at the centre (it sorts behind everything, from any
   camera) under a fixed see-through layer of light (`glossSpin()` in `src/packs/balls.js`).

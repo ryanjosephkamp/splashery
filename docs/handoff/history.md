@@ -16,6 +16,20 @@ had not settled 3 s after its tap) and "a scan rig moves a part of a captured to
 console warning, like the rare engine warning in HANDOFF.md). Keep `test-results/` if either comes
 back.
 
+### F Touch and drag (PRs #45 and #42, merged 2026-09-27)
+
+- Four toys you play with your finger: the puzzle cube (a real 3×3 whose layers follow a swipe and
+  snap to quarter turns; a tap scrambles or solves it), Newton's cradle (drag any ball out and let
+  go), the chess set (tap a piece, then a legal square, while the game is paused; the game carries
+  on from there) and the bricks (18 bricks that build a new model on each tap).
+- The engine PR (#45) re-sorts tokens that land far from where they were built (`out.resort`), and
+  the game panel follows a game started from the board.
+- A recipe's `drag` can name its plane, and a drag beside a draggable toy still turns the view.
+  `tools/drag-clip.mjs` renders drags as clips.
+- Review: all four looked right at once.
+- Known issues: a half-turned cube layer can show a seam until it lands; the cube's button reads
+  "Scramble or solve"; brick colors are random per model.
+
 ### E6a Balls (PR #38, merged 2026-09-26)
 
 - 20 balls got their own tap and sound, with real arcs, spin and bounciness (a dead squash ball, a
