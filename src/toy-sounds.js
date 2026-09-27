@@ -1218,6 +1218,21 @@ export const TOY_SOUNDS = {
     { voice: "scrape", f: 260, rate: 3, decay: 2.4 },
     { voice: "wind", f: 550, rate: 0.6, decay: 1.2, vol: 0.7 },
   ],
+
+  // ---- AI and computing -----------------------------------------------------------
+  // Blips as the two live inputs fire (0.3 s, then again at 2.1 s), a click as
+  // the lamp decides wrong (1.4 s), a rising tone as it learns, a click as the
+  // lamp snaps on (3.15 s).
+  perceptron: [
+    { voice: "blip", at: 0.3, f: 660, to: 1.3 },
+    { voice: "blip", at: 0.36, f: 880, to: 1.3 },
+    { voice: "click", at: 1.4, f: 900 },
+    { voice: "tone", at: 1.55, f: 330, to: 2, decay: 1.2, vol: 0.8 },
+    { voice: "blip", at: 2.1, f: 660, to: 1.3 },
+    { voice: "blip", at: 2.16, f: 880, to: 1.3 },
+    { voice: "click", at: 3.15, f: 2200 },
+    { voice: "ding", at: 3.17, f: "E6", decay: 0.6, vol: 0.5 },
+  ],
 };
 
 // The toy's sound, or null when it has none (visitors' own splats).

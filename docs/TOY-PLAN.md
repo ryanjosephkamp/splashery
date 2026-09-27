@@ -10,10 +10,10 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 286 toys. 286 have a tap action today; the other 0 only hop.
+- 287 toys. 287 have a tap action today; the other 0 only hop.
 - **keep** (the effect is right: the owner liked it, or C2 finished it): 286.
 - **more** (has an effect; make it clearer or more dramatic): 0.
-- **new** (needs its own effect): 0.
+- **new** (needs its own effect): 1.
 - Visual fixes: 0 open, 28 done. Touch or drag interaction asked for: 4.
 
 ## By phase
@@ -57,7 +57,7 @@ Proposals below are suggestions; the owner may change them.
 - **E3, new effects: tiny things, anatomy and maths.** None.
 - **E4, new effects: nature and weather.** None.
 - **E5, new effects: food.** None.
-- **E6, new effects: balls and the rest.** None.
+- **E6, new effects: balls and the rest.** Perceptron
 - **F, touch and drag interaction.** Gummy bear, Building bricks, Newton's cradle, Puzzle cube.
 
 ## Scans (32)
@@ -1851,3 +1851,12 @@ Proposals below are suggestions; the owner may change them.
   - Improved: C2: the sails turn faster at rest, and a gust spins them up hard for three extra turns
     (4 s).
   - Sound: Creaking sails and wind.
+
+## Computing (1)
+
+- **Perceptron** (`perceptron`). Now: tap: Try an example. Plan: new effect (E6).
+  - Owner: Approved on the Toy Ideas page (lane AI).
+  - Effect: Three input lights send pulses along wires whose thickness shows their weights into one
+    node; the sum fills a gauge, and if it passes the threshold the output lamp snaps on. On a wrong
+    answer the wires thicken or thin, so you watch it learn (4 s).
+  - Sound: A blip for each input, a click as the lamp decides, a rising tone when it learns.

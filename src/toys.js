@@ -28,6 +28,7 @@ export const CATEGORIES = [
   { id: "medieval", label: "Medieval" },
   { id: "animals", label: "Animals" },
   { id: "maths", label: "Maths" },
+  { id: "computing", label: "AI and computing" },
   { id: "holidays", label: "Holidays" },
   { id: "music", label: "Music" },
   { id: "vehicles", label: "Vehicles" },
@@ -2936,6 +2937,16 @@ export const TOYS = [
     pack: "landmarks",
     tags: "netherlands dutch mill sails tulips",
     camera: { yaw: 0.55, pitch: 0.28, roll: 0, distance: 4.3 },
+  },
+  // ---- Pack: computing ----
+  {
+    id: "perceptron",
+    label: "Perceptron",
+    category: "computing",
+    kind: "kit",
+    pack: "computing",
+    tags: "neuron neural network learning weights threshold ai machine learning",
+    camera: { yaw: 0.18, pitch: 0.1, roll: 0, distance: 3.4 },
   },
 ];
 

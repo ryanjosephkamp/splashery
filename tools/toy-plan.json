@@ -1856,6 +1856,12 @@
       "effect": "Faster sails; the gust spins them up hard.",
       "sound": "Creaking sails and wind.",
       "improved": "C2: the sails turn faster at rest, and a gust spins them up hard for three extra turns (4 s)."
+    },
+    "perceptron": {
+      "v": "new",
+      "owner": "Approved on the Toy Ideas page (lane AI).",
+      "effect": "Three input lights send pulses along wires whose thickness shows their weights into one node; the sum fills a gauge, and if it passes the threshold the output lamp snaps on. On a wrong answer the wires thicken or thin, so you watch it learn (4 s).",
+      "sound": "A blip for each input, a click as the lamp decides, a rising tone when it learns."
     }
   }
 }
