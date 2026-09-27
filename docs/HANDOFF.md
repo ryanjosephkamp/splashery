@@ -26,16 +26,18 @@ work is in [OPERATING.md](OPERATING.md).
 
 The full table, with owned files, sessions, branches and PRs, is [WORKSTREAMS.md](WORKSTREAMS.md).
 
-| Lane             | Status                     | Handoff                       |
-| ---------------- | -------------------------- | ----------------------------- |
-| Operator         | Running                    | —                             |
-| F Touch and drag | Ready: open with Prompt 2E | [handoff/F.md](handoff/F.md)  |
-| G AI image-to-3D | Ready: open with Prompt 2F | [handoff/G.md](handoff/G.md)  |
-| H Later          | After the toy lanes        | —                             |
-| New toys         | When the owner asks        | The Toy Ideas page (approved) |
+| Lane             | Status                                                               | Handoff                       |
+| ---------------- | -------------------------------------------------------------------- | ----------------------------- |
+| Operator         | Running                                                              | —                             |
+| F Touch and drag | Running ([#42](https://github.com/ryanjosephkamp/splashery/pull/42)) | [handoff/F.md](handoff/F.md)  |
+| G AI image-to-3D | Running ([#43](https://github.com/ryanjosephkamp/splashery/pull/43)) | [handoff/G.md](handoff/G.md)  |
+| H Later          | After the toy lanes                                                  | —                             |
+| New toys         | When the owner asks                                                  | The Toy Ideas page (approved) |
 
-E4-finish, E5, E6a and E6b are done (WORKSTREAMS.md, "Done"). New-toy lanes come from the ideas the
-owner approves on the Toy Ideas page.
+E4-finish, E5, E6a and E6b are done (WORKSTREAMS.md, "Done"). F and G started on 2026-09-27 (the
+Operator opened both sessions). New-toy lanes come from the ideas the owner approves on the Toy
+Ideas page; the owner wants real photo-scans, not cartoons, for everyday objects where a good one
+exists (lane G tries making some).
 
 The prompts are on the Splashery Parallel Plan page (OPERATING.md, "Pages").
 
