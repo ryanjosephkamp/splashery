@@ -3103,7 +3103,10 @@ export const RECIPES = {
       const froth = easeOut(band(s, OW_HIT - 0.05, 1.45)) * (1 - ease(band(s, 1.55, 2.35)));
       const foam = band(s, OW_HIT, 1.7) * (1 - band(s, 2.9, 4.6));
       out.morph = [froth, 0, foam, 0];
-      out.parts.bore = { offset: [0.07 * ease(band(s, OW_HIT, 2.2)), 0, 0] };
+      // It drifts forward, and goes home once it has sunk away.
+      out.parts.bore = {
+        offset: [0.07 * ease(band(s, OW_HIT, 2.2)) * (1 - band(s, 2.4, 2.6)), 0, 0],
+      };
       // The spray off the lip goes as it is thrown and comes back once the
       // lip has curled over again, rising off it (the behaviours' amount
       // grows back from 0, so it starts on the lip).
