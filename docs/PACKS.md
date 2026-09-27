@@ -233,6 +233,9 @@ Newton's cradle). `plane` is `"view"`, a normal, or `(point) => normal`; without
 the horizontal plane it started on (the laptop). A drag that starts beside the toy still turns the
 view. `tools/drag-clip.mjs` renders drags and taps as clips for review.
 
+**Image-to-3D scans** (lane G): the side the photo can't see is a guess (the pencil's underside came
+out dark), so pick taps that keep the photographed side toward the camera.
+
 **Scan rigs** (`src/rigs.js`): a captured toy can have the same `controls`, `action` and `drive` as
 a recipe, plus `parts`, each made of soft ellipsoid regions in world coordinates:
 

@@ -119,8 +119,10 @@ tap code in `src/motion.js`); no other lane edits those parts.
   `e5-watermelon-390x844.png`).
 - Every full test run rewrites twelve standard screenshots (`app-*`, `balls-*`, `embed-400x300`,
   `make-help-*`, `shelf-*`, `v3-*`; the list is `STANDARD_SHOTS` in `tools/upkeep.mjs`). Lanes never
-  commit them: after a full run, `node tools/upkeep.mjs --restore-shots` puts them back. The
-  Operator refreshes them on main.
+  commit them: after a full run, `node tools/upkeep.mjs --restore-shots` puts them back. A full run
+  also rewrites other lanes' screenshots (`e5-*`, `e6a-*` and so on): put back every screenshot your
+  branch didn't change with `git checkout -- tests/screenshots/` (then re-add your own). The
+  Operator refreshes the standard ones on main.
 
 ## The Effect review page
 
