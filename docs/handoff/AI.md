@@ -148,7 +148,11 @@ Second round (the Operator's notes on the owner's review, September 27, 2026;
   drawing pad for a toy's input panel", branch `claude/lane-ai-computing-engine`), which must merge
   first. Without it, typing a digit shows a handwritten sample. okdalto/CNN-visualization is
   LGPL-3.0 and trained on MNIST (CC BY-SA), so only its idea was used: no code, no weights. Cards
-  `ai-cnn-draw` and `ai-cnn-draw-pad`.
+  `ai-cnn-draw` and `ai-cnn-draw-pad`. After the Operator's review it is laid out in two rows
+  (input, conv, pool on top; conv, pool, then the scores on a plinth and the answer below): the kit
+  fits every toy to a sphere, so a long thin row came out as a small strip, and a compact block
+  fills the frame like the poster does. The two cards' assets were replaced (no -r2, as they were
+  not yet marked).
 - Word vectors: `words.txt` loads only when that toy is built (its `prepare`), never in embeds of
   other toys; the embed transfer test stays green. Unknown words get one message: "\"xyz\" is not
   one of the 24,000 words it knows. Try a more common word."
@@ -236,3 +240,7 @@ What each tap does now:
 
 - A lesson for PACKS.md 7b: tokens that glide across a flat board just in front of it disappear
   behind it until resorted; `out.resort` a few times during the glide fixes it.
+
+- A lesson for PACKS.md: the kit fits a toy to a sphere around its bounding box, so a long, thin
+  model (a row of layers) comes out small whatever its scale; lay it out as a compact block (two
+  rows here) to fill the frame.

@@ -2162,22 +2162,27 @@ function cnnPixels(text) {
 }
 const CNN_DRAWN = { text: cnnPad(CNN_SAMPLES[7]) };
 // The layers' places: each layer a stack of sheets (one per channel)
-// facing you, fanned back like a hand of cards, the layers left to right.
+// facing you, fanned like a hand of cards. The kit fits a toy to a sphere,
+// so the model is kept compact to fill the frame: the input and first
+// layers across the top, the last layers and the scores across the bottom.
 const CNND = (() => {
   const layers = [
-    { key: "x", ch: 1, S: 8, x: -1.08, cell: 0.1, label: "INPUT" },
-    { key: "c1", ch: 4, S: 8, x: -0.42, cell: 0.066, label: "CONV" },
-    { key: "p1", ch: 4, S: 4, x: 0.14, cell: 0.08, label: "POOL" },
-    { key: "c2", ch: 8, S: 4, x: 0.58, cell: 0.06, label: "CONV" },
-    { key: "p2", ch: 8, S: 2, x: 0.98, cell: 0.07, label: "POOL" },
+    { key: "x", ch: 1, S: 8, at: [-0.86, 0.6], cell: 0.12, label: "INPUT" },
+    { key: "c1", ch: 4, S: 8, at: [0.2, 0.6], cell: 0.075, label: "CONV" },
+    { key: "p1", ch: 4, S: 4, at: [0.98, 0.6], cell: 0.1, label: "POOL" },
+    { key: "c2", ch: 8, S: 4, at: [-1.02, -0.4], cell: 0.1, label: "CONV" },
+    { key: "p2", ch: 8, S: 2, at: [-0.3, -0.4], cell: 0.14, label: "POOL" },
   ];
-  const fan = [0.05, 0, -0.14]; // each channel behind the last
+  // Each channel sits behind the last, a little right and up, so its edge
+  // shows past the one in front.
+  const fan = (L) => (L.ch > 4 ? [0.05, 0.03, -0.05] : [0.06, 0.04, -0.07]);
   const sheet = (L, c) => {
     const k = c - (L.ch - 1) / 2;
-    return [L.x + fan[0] * k, 0.3 + fan[1] * k, fan[2] * k];
+    const f = fan(L);
+    return [L.at[0] + f[0] * k, L.at[1] + f[1] * k, f[2] * k];
   };
   const cellAt = (L, c, y, x) => add(sheet(L, c), [(x - (L.S - 1) / 2) * L.cell, ((L.S - 1) / 2 - y) * L.cell, 0]); // prettier-ignore
-  return { layers, sheet, cellAt, floor: -0.62 };
+  return { layers, sheet, cellAt, floor: -0.86 };
 })();
 
 // The drawable network as a 3D model (see CNND): its cells appear layer by
@@ -2189,26 +2194,32 @@ function buildCnnDraw(k, o) {
   const f = cnnForward(px);
   k.data = { view: "draw", digit: f.digit };
   const G = CNND;
-  stand(k, 1.35, G.floor);
+  // A plinth along the bottom row, the digits on its front.
+  k.add(k.box(2.7, 0.2, 0.62), {
+    pos: [0, G.floor - 0.1, 0.05],
+    flat: 0.25,
+    color: (c) => (c.n[1] > 0.5 ? keep(Math.abs(c.p[0]) > 1.31 || Math.abs(c.p[2] - 0.05) > 0.27 ? BOARD_RIM : BOARD) : lit(BOARD_RIM, c.n, { amb: 0.75, dif: 0.3, spec: 0.1 })), // prettier-ignore
+  });
   G.layers.forEach((L, li) => {
     const vals = f[L.key];
     const top = Math.max(1e-6, ...vals);
     const at = li === 0 ? -1 : 0.05 + (li - 1) * 0.2;
     for (let c = 0; c < L.ch; c++) {
       // A dark backing sheet behind each channel's cells.
-      const w = L.S * L.cell + 0.03;
-      k.add(k.box(w, w, 0.012), {
-        pos: add(G.sheet(L, c), [0, 0, -0.02]),
+      const w = L.S * L.cell + 0.04;
+      const mid = G.sheet(L, c);
+      k.add(k.box(w, w, 0.015), {
+        pos: add(mid, [0, 0, -0.025]),
         flat: 0.25,
         pattern: false,
-        color: (cc) => keep(Math.max(Math.abs(cc.p[0] - G.sheet(L, c)[0]), Math.abs(cc.p[1] - G.sheet(L, c)[1])) > w / 2 - 0.008 ? BOARD_RIM : "#10172a"), // prettier-ignore
+        color: (cc) => keep(Math.max(Math.abs(cc.p[0] - mid[0]), Math.abs(cc.p[1] - mid[1])) > w / 2 - 0.012 ? BOARD_RIM : "#10172a"), // prettier-ignore
       });
       for (let y = 0; y < L.S; y++)
         for (let x = 0; x < L.S; x++) {
           const v = vals[c * L.S * L.S + y * L.S + x] / top;
           const col =
             li === 0 ? mix("#1c2542", "#f4f7ff", v) : mix("#15284a", "#7ff6ff", Math.pow(v, 0.7));
-          k.add(k.box(L.cell * 0.86, L.cell * 0.86, 0.03), {
+          k.add(k.box(L.cell * 0.86, L.cell * 0.86, 0.035), {
             pos: G.cellAt(L, c, y, x),
             flat: 0.25,
             weight: 1.4,
@@ -2218,18 +2229,19 @@ function buildCnnDraw(k, o) {
           });
         }
     }
+    // The label over the front sheet.
     const front = G.sheet(L, 0);
-    sign(k, L.label, add(front, [0, (L.S * L.cell) / 2 + (li % 2 ? 0.26 : 0.12), 0.02]), 0.015, { color: "#9fb0d6" }); // prettier-ignore
+    sign(k, L.label, add(front, [0, (L.S * L.cell) / 2 + 0.1, 0.03]), 0.02, { color: "#9fb0d6" }); // prettier-ignore
   });
-  // The scores: a column per digit in front, rising together (out.grow) to
-  // its probability, the winner in gold.
+  // The scores: a column per digit on the plinth, rising together
+  // (out.grow) to its probability, the winner in gold.
   const y0 = G.floor;
-  const H = 0.55;
+  const H = 0.8;
   f.prob.forEach((p, d) => {
-    const base = [-0.55 + d * 0.13, 0, 0.72];
+    const base = [-0.02 + d * 0.1, 0, 0.1];
     const h = Math.max(0.02, H * p);
     const win = d === f.digit;
-    k.add(k.box(0.08, h, 0.08), {
+    k.add(k.box(0.085, h, 0.085), {
       pos: [base[0], y0 + h / 2, base[2]],
       flat: 0.25,
       weight: 1.5,
@@ -2239,10 +2251,10 @@ function buildCnnDraw(k, o) {
       color: (cc) =>
         keep(lit(win ? "#ffb400" : "#3d7fe0", cc.n, { amb: 0.85, dif: 0.3, spec: 0.3 })),
     });
-    text(k, String(d), [base[0], y0 + 0.05, base[2] + 0.05], 0.017, win ? "#ffd34d" : "#9fb0d6");
+    text(k, String(d), [base[0], y0 - 0.1, 0.365], 0.019, win ? "#ffd34d" : "#9fb0d6"); // prettier-ignore
   });
-  // The answer, big, over the scores (lit as the tap ends).
-  const ans = [1.12, y0 + 0.45, 0.6];
+  // The answer, big, at the end of the row (lit as the tap ends).
+  const ans = [1.16, y0 + 0.5, 0.1];
   sign(k, String(f.digit), ans, 0.04, { color: "#ffd34d", part: k.part("answer", { pivot: ans }) });
 }
 
