@@ -118,6 +118,41 @@ The owner's marks (September 27, 2026): gradient descent and half adder "good". 
 - Text on every toy now uses a lower splat weight (4): at weight 10 the letters vanished at 320
   pixels (PACKS.md: tiny splats vanish on small screens).
 
+Second round (the Operator's notes on the owner's review, September 27, 2026;
+[review](../reviews/2026-09-27-ai-math/review.md)):
+
+- **Neural network, your own size**: options for 2 to 4 inputs, 1 to 3 hidden layers of 2 to 5
+  neurons and 1 to 3 outputs (at most 14 neurons: each neuron's glow is a part). Every size gets a
+  real forward pass (the default 3-4-2 keeps its weights). Up to 24 wires, each wire carries a pulse
+  (a token each way); a bigger network sends waves of light along its wires instead (a band on a
+  glassy sheath round each wire, channel 1). Card `ai-neural-network-sizes`.
+- **Multilayer perceptron** (new toy, `multilayer-perceptron`): the neural network toy already is a
+  general MLP, so, as the Operator suggested, this one solves XOR, which a single perceptron cannot:
+  an OR and a NAND neuron feed an AND neuron; blue wires add, red subtract; it tries 00, 01, 10 and
+  11 in turn and fills in a truth table. Poster and 3D. Cards `ai-multilayer-perceptron` and
+  `ai-multilayer-perceptron-3d`.
+- **Transformer, the classic encoder-decoder**: a Diagram option (Token flow, the first one, or
+  Encoder–decoder), each with the View option. The classic layout follows the 2017 paper's figure
+  with generic labels (EMBED, ATTENTION, ADD+NORM, FEED FWD, MASKED ATTN, LINEAR, SOFTMAX, POS, N×);
+  a cyan packet rises up the encoder (boxes light as it passes, a band on channel 0), crosses into
+  the decoder's middle attention, the decoder's gold packet (channel 1) meets it and goes on to the
+  softmax, and the next word comes out of the top (HELLO WORLD, START HOLA → MUNDO). Cards
+  `ai-transformer-classic` and `ai-transformer-classic-3d`.
+- **CNN, draw a digit**: a third View, "3D, draw a digit". `tools/cnn-train.mjs` (plain JavaScript,
+  no dependencies, seeded, about 10 s) trains a small CNN (conv 3×3 ×4, pool, conv 3×3 ×8, pool,
+  dense to 10) on the UCI "Optical Recognition of Handwritten Digits" set (8×8, CC BY 4.0, license
+  checked on the live page) and writes `src/packs/computing-cnn.js` (the weights, ten sample digits,
+  97.0% test accuracy). The toy runs the network on your drawing at build time and shows every cell
+  of every layer as a cube as bright as it fires; a tap lights the layers in order and raises the
+  scores. The drawing pad is in the Toy tab ("Draw a digit"): it needs the engine PR #56 ("Engine: a
+  drawing pad for a toy's input panel", branch `claude/lane-ai-computing-engine`), which must merge
+  first. Without it, typing a digit shows a handwritten sample. okdalto/CNN-visualization is
+  LGPL-3.0 and trained on MNIST (CC BY-SA), so only its idea was used: no code, no weights. Cards
+  `ai-cnn-draw` and `ai-cnn-draw-pad`.
+- Word vectors: `words.txt` loads only when that toy is built (its `prepare`), never in embeds of
+  other toys; the embed transfer test stays green. Unknown words get one message: "\"xyz\" is not
+  one of the 24,000 words it knows. Try a more common word."
+
 What each tap does now:
 
 1. **Perceptron** (4 s): inputs X1 and X3 light (1, 0, 1) and send pulses along wires as thick as
@@ -187,6 +222,9 @@ What each tap does now:
   bubble sort only.
 
 ## For the Operator
+
+- Merge order: the engine PR #56 first, then #52 (the drawing pad needs it; without it the CNN's
+  "draw a digit" view still works from a typed digit).
 
 - Please confirm: the transformer and looped transformer were marked "fix" with no note. I read them
   as the same ask as the other models (an actual 3D version) and built that; if the owner meant

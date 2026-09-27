@@ -1898,7 +1898,10 @@ Proposals below are suggestions; the owner may change them.
   - Improved: AI: a gold 3×3 filter slides over a handwritten 7, stamping a 5×5 feature map tile by
     tile (a real convolution); the tiles slide together into a 3×3 pooled map and the digit scores
     rise, 7 on top (5 s). Owner's review: a View option adds a 3D model (slabs of cubes, the
-    filter's receptive field as lines to the tile it stamps).
+    filter's receptive field as lines to the tile it stamps). A third View, "3D, draw a digit": a
+    small CNN trained on the UCI handwritten digits (CC BY 4.0) reads a digit you draw on a pad in
+    the Toy tab; every cell of every layer lights as bright as it fires, the layers light in order
+    and the scores rise.
   - Sound: A tick at each step of the filter, a chime at the answer.
 - **Recurrent network** (`rnn`). Now: tap: Read a sentence. Plan: keep.
   - Owner: Approved on the Toy Ideas page (lane AI).
