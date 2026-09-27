@@ -322,6 +322,23 @@ const PERC = {
   theta: 1,
   max: 1.6,
 };
+// Where the inputs and the sum node sit, on the poster and in the 3D model.
+const PERC2D = {
+  P: [
+    [-0.98, 0.5, 0],
+    [-0.98, 0, 0],
+    [-0.98, -0.5, 0],
+  ],
+  node: [0.02, 0, 0],
+};
+const PERC3D = {
+  P: [
+    [-0.98, 0.5, -0.3],
+    [-0.98, 0, 0],
+    [-0.98, -0.5, 0.3],
+  ],
+  node: [0.02, 0, 0],
+};
 const percRadius = (w) => 0.012 + 0.036 * w;
 const percLevel = (w) => w.reduce((s, x, i) => s + x * PERC.inputs[i], 0) / PERC.max;
 
@@ -363,6 +380,55 @@ const MLP = (() => {
   return { acts, pos, wires };
 })();
 const mlpRadius = (w) => 0.008 + 0.014 * Math.abs(w);
+// The 3D model's neurons: each layer a ring (a triangle, a square, a pair)
+// standing across the way the signal flows, and its wires between them.
+const MLP3D = (() => {
+  const X = [-1.05, 0, 1.05];
+  const radius = { 2: 0.42, 3: 0.55, 4: 0.7 };
+  // The flow runs toward the front right (turned 0.7 rad about the up axis),
+  // so the rings are seen at a slant from the front.
+  const turn = (p) => [p[0] * Math.cos(0.7) - p[2] * Math.sin(0.7), p[1], p[0] * Math.sin(0.7) + p[2] * Math.cos(0.7)]; // prettier-ignore
+  const pos = MLP.acts.map((col, l) =>
+    col.map((_, i) => {
+      const n = col.length;
+      const a = Math.PI / 2 + (i * TAU) / n + (n === 2 ? Math.PI / 2 : n === 4 ? Math.PI / 4 : 0);
+      return turn([X[l], 0.25 + radius[n] * Math.sin(a), radius[n] * Math.cos(a)]);
+    }),
+  );
+  const wires = MLP.wires.map((w) => ({ ...w, p0: pos[w.l][w.a], p1: pos[w.l + 1][w.b] }));
+  // Where each layer's label stands: on the stand, in front of its ring.
+  const foot = X.map((x) => add(turn([x, -0.55, 0]), [0, 0, 0.75]));
+  return { pos, wires, foot };
+})();
+// The two views every model toy has: the flat poster and the 3D model.
+const VIEW_OPTION = {
+  key: "view",
+  label: "View",
+  type: "select",
+  default: "poster",
+  choices: [
+    { id: "poster", label: "Poster (2D)" },
+    { id: "model", label: "3D model" },
+  ],
+};
+// A dark round stand under a 3D model, so its glowing parts read on any
+// background.
+function stand(k, r, y, { color = BOARD } = {}) {
+  k.add(k.cylinder(r, 0.08), {
+    pos: [0, y - 0.04, 0],
+    even: true,
+    flat: 0.25,
+    color: (c) => {
+      if (c.s.cap && c.n[1] > 0) {
+        const d = Math.hypot(c.p[0], c.p[2]);
+        return keep(
+          d > r - 0.05 ? BOARD_RIM : mix(color, shade(color, 1.35), 0.5 + 0.5 * (1 - d / r)),
+        );
+      }
+      return lit(BOARD_RIM, c.n, { amb: 0.75, dif: 0.3, spec: 0.1 });
+    },
+  });
+}
 
 // The convolutional network: a handwritten 7 (7 x 7 pixels), one 3 x 3
 // filter that finds strokes running down to the left, the feature map it
@@ -596,12 +662,14 @@ const DUCK = [
 const DUCK_EYES = [-1, 1].map((sd) => add([0.3, 0.56, 0], mul(unit([0.55, 0.4, sd * 0.62]), 0.27)));
 const DIFF = { steps: 10, t0: 0.2, dt: 0.3, turn: -0.5, scale: 0.62, c: [0, 0.18, 0.45] };
 // Recipe coordinates of a point on the duck (turned to three-quarters).
-function duckPlace(p) {
+function duckPlace(p, g = DIFF) {
   const a = DIFF.turn;
   const x = p[0] * Math.cos(a) + p[2] * Math.sin(a);
   const z = -p[0] * Math.sin(a) + p[2] * Math.cos(a);
-  return add(DIFF.c, mul([x - 0.05, p[1] - 0.12, z], DIFF.scale));
+  return add(g.c, mul([x - 0.05, p[1] - 0.12, z], g.scale));
 }
+// The 3D model's duck: bigger, floating over a stand, in a round cloud.
+const DIFF3D = { c: [0, 0.12, 0], scale: 0.85, spread: [0.42, 0.36, 0.42] };
 // The denoising progress after `s` seconds: a quick move at each step, then
 // a hold (0 at 50 steps to go, 1 at 0).
 function diffStep(s) {
@@ -1039,23 +1107,241 @@ function wireLight(k, pts, r, color, channel, from = 0, to = 1) {
   });
 }
 
+// The neural network as a 3D model: glass neurons in rings on a round stand,
+// each with a golden core that grows as it fires, and wires between them.
+function buildMlp3D(k) {
+  const { pos, wires } = MLP3D;
+  k.data = { view: "model", wires };
+  stand(k, 1.05, -0.72);
+  const R = 0.13;
+  const n = wires.length;
+  wires.forEach((w, i) => {
+    const dir = unit(sub(w.p1, w.p0));
+    const a = add(w.p0, mul(dir, R * 0.95));
+    const b = sub(w.p1, mul(dir, R * 0.95));
+    const r0 = mlpRadius(w.w);
+    wire(k, [a, b], r0, {
+      to: r0 * (1 + 0.6 * w.nudge),
+      channel: 0,
+      weight: 1.6,
+      color: "#6d7fa6",
+    });
+    bead(k, w.p0, 0.04 + 0.04 * w.sig, "#ffb000", i);
+    bead(k, w.p1, 0.045, "#ff3b4e", n + i);
+  });
+  pos.forEach((col, l) =>
+    col.forEach((p, i) => {
+      // Glass: see-through, so the core shows inside.
+      k.add(k.sphere(R), {
+        pos: p,
+        even: true,
+        flat: 0.35,
+        weight: 1.5,
+        opacity: 0.42,
+        pattern: false,
+        color: (c) => keep(lit("#3b4a74", c.n, { amb: 0.75, dif: 0.35, spec: 0.8, pow: 24 })),
+      });
+      const part = k.part(`n${l}${i}`, { pivot: p });
+      k.add(k.sphere(R * 0.8), {
+        pos: p,
+        flat: 0.4,
+        weight: 2,
+        part,
+        pattern: false,
+        color: (c) => keep(lit("#ffb400", c.n, { amb: 0.95, dif: 0.25, spec: 0.5 })),
+      });
+      k.add(k.sphere(R * 1.25), {
+        pos: p,
+        flat: 0.5,
+        size: 1.5,
+        opacity: 0.25,
+        part,
+        pattern: false,
+        color: () => keep("#ffe28a"),
+      });
+      // A post down to the stand.
+      const h = p[1] + 0.72;
+      k.add(k.cylinder(0.008, h - R), {
+        pos: [p[0], -0.72 + (h - R) / 2, p[2]],
+        flat: 0.4,
+        weight: 1.2,
+        pattern: false,
+        color: () => keep("#4a5778"),
+      });
+    }),
+  );
+  ["IN", "HIDDEN", "OUT"].forEach((label, l) =>
+    sign(k, label, add(MLP3D.foot[l], [0, 0.0, 0]), 0.022, { color: "#9fb0d6" }),
+  );
+}
+
+// A light in 3D: a bright sphere and a soft halo round it, turned on by a
+// part, a token or a fade channel.
+function glow3D(k, p, r, color, { part, token, channel } = {}) {
+  const ride = {};
+  if (part !== undefined) ride.part = part;
+  if (token !== undefined) Object.assign(ride, { kind: "token", params: [token, 0] });
+  if (channel !== undefined) Object.assign(ride, { kind: "fade", params: [0, -0.5], channel });
+  k.add(k.sphere(r), {
+    pos: p,
+    flat: 0.4,
+    weight: 1.8,
+    pattern: false,
+    ...ride,
+    color: (c) => keep(lit(mix(color, "#ffffff", 0.35), c.n, { amb: 0.95, dif: 0.2, spec: 0.5 })),
+  });
+  k.add(k.sphere(r * 1.45), {
+    pos: p,
+    flat: 0.5,
+    size: 1.5,
+    opacity: 0.22,
+    pattern: false,
+    ...ride,
+    color: () => keep(color),
+  });
+}
+// A glass bulb on a post down to the stand.
+function bulb(k, p, r, floor, { post = true } = {}) {
+  k.add(k.sphere(r), {
+    pos: p,
+    even: true,
+    flat: 0.35,
+    weight: 1.5,
+    opacity: 0.45,
+    pattern: false,
+    color: (c) => keep(lit("#3b4a74", c.n, { amb: 0.75, dif: 0.35, spec: 0.8, pow: 24 })),
+  });
+  if (post) {
+    const h = p[1] - r - floor;
+    k.add(k.cylinder(0.018, h), {
+      pos: [p[0], floor + h / 2, p[2]],
+      even: true,
+      flat: 0.35,
+      weight: 1.3,
+      pattern: false,
+      color: (c) => lit("#6d7896", c.n, { amb: 0.7, dif: 0.35, spec: 0.4 }),
+    });
+  }
+}
+
+// The perceptron as a 3D model on a round stand: glass bulbs on posts for
+// the inputs, wires through the air to a metal sum node, a glass gauge the
+// sum fills, and a bulb for the output.
+function buildPerceptron3D(k) {
+  const { P, node } = PERC3D;
+  k.data = { view: "model" };
+  const floor = -0.62;
+  stand(k, 1.2, floor);
+  const R = 0.11;
+  P.forEach((p, i) => {
+    const dir = unit(sub(node, p));
+    const a = add(p, mul(dir, R));
+    const b = sub(node, mul(dir, 0.19));
+    const r0 = percRadius(PERC.before[i]);
+    const r1 = percRadius(PERC.after[i]);
+    wire(
+      k,
+      [a, b],
+      r0,
+      r0 !== r1 ? { to: r1, channel: 0, color: "#6d7fa6" } : { color: "#6d7fa6" },
+    );
+    bulb(k, p, R, floor);
+    glow3D(k, p, R * 0.75, "#3fd8ff", { part: k.part("in" + i, { pivot: p }) });
+    bead(k, p, 0.075, "#3fd8ff", i);
+    sign(k, "X" + (i + 1), add(p, [-0.26, 0, 0]), 0.018, { color: "#9fb0d6" });
+  });
+  // The sum node: a metal ball with Σ on a plate, and a flash (channel 1).
+  k.add(k.sphere(0.18), {
+    pos: node,
+    even: true,
+    flat: 0.3,
+    weight: 1.4,
+    pattern: false,
+    color: (c) => keep(lit("#56648a", c.n, { amb: 0.6, dif: 0.45, spec: 0.7, pow: 20 })),
+  });
+  sign(k, "Σ", add(node, [0, 0, 0.2]), 0.03, { color: "#dfe8ff" });
+  k.add(k.cylinder(0.02, node[1] - 0.18 - floor), {
+    pos: [node[0], (node[1] - 0.18 + floor) / 2, node[2]],
+    flat: 0.35,
+    pattern: false,
+    color: () => keep("#4a5778"),
+  });
+  k.add(k.sphere(0.27), {
+    pos: node,
+    flat: 0.5,
+    size: 1.4,
+    opacity: 0.35,
+    pattern: false,
+    kind: "fade",
+    params: [0, -0.6],
+    channel: 1,
+    color: () => keep("#8ff0ff"),
+  });
+  // The gauge: a glass tube standing on the stand; the liquid rises with
+  // the sum (out.grow); an orange ring marks the threshold.
+  const gx = 0.6;
+  const gh = 1.0;
+  const g0 = floor + 0.02;
+  wire(k, [add(node, [0.18, 0, 0]), [gx - 0.12, 0, 0]], percRadius(0.6), { color: "#6d7fa6" });
+  k.add(k.cylinder(0.11, gh, { caps: false }), {
+    pos: [gx, g0 + gh / 2, 0],
+    even: true,
+    flat: 0.3,
+    weight: 0.5,
+    opacity: 0.14,
+    pattern: false,
+    color: (c) => keep(lit("#7d90b8", c.n, { amb: 0.7, dif: 0.3, spec: 0.9, pow: 30 })),
+  });
+  k.add(k.cylinder(0.085, gh - 0.04), {
+    pos: [gx, g0 + gh / 2, 0],
+    flat: 0.3,
+    weight: 1.3,
+    pattern: false,
+    kind: "grow",
+    params: (c) => [clamp01((c.p[1] - g0) / gh) * 0.93, 0],
+    color: (c) => keep(lit(mix("#1f8fe0", "#8ff0ff", (c.p[1] - g0) / gh), c.n, { amb: 0.85, dif: 0.3, spec: 0.4 })), // prettier-ignore
+  });
+  const thY = g0 + (PERC.theta / PERC.max) * gh;
+  k.add(k.torus(0.125, 0.014), {
+    pos: [gx, thY, 0],
+    weight: 3,
+    flat: 0.4,
+    pattern: false,
+    color: () => keep("#ffb347"),
+  });
+  // The output bulb: red for a wrong answer (channel 3), gold when it fires
+  // (channel 2).
+  const out = [1.05, 0, 0];
+  wire(
+    k,
+    [
+      [gx + 0.12, 0, 0],
+      [out[0] - 0.17, 0, 0],
+    ],
+    percRadius(0.6),
+    { color: "#6d7fa6" },
+  );
+  bulb(k, out, 0.17, floor);
+  glow3D(k, out, 0.13, "#ffc934", { channel: 2 });
+  glow3D(k, out, 0.13, "#ff4d5e", { channel: 3 });
+  sign(k, "OUT", add(out, [0, 0.32, 0]), 0.02, { color: "#9fb0d6" });
+  sign(k, "WANT 1", add(out, [0, -0.3, 0.1]), 0.016, { color: "#ffd34d" });
+}
+
 export const RECIPES = {
   perceptron: {
+    options: [VIEW_OPTION],
     controls: [{ key: "go", label: "Try", type: "pulse", ease: 4 }],
     action: { key: "go", label: "Try an example" },
     // Three inputs (1, 0, 1) send pulses along wires as thick as their
     // weights; the sum fills the gauge but stays under the threshold, so the
     // lamp flashes red. The two live wires thicken (it learns), the pulses
     // go again, the gauge passes the threshold and the lamp snaps on.
-    drive(t, c, out) {
+    drive(t, c, out, info) {
       const s = since(c.go, 4);
       const on = s >= 0;
-      const P = [
-        [-0.98, 0.5, 0],
-        [-0.98, 0, 0],
-        [-0.98, -0.5, 0],
-      ];
-      const node = [0.02, 0, 0];
+      const model = info.data?.view === "model";
+      const { P, node } = model ? PERC3D : PERC2D;
       out.tokens = [];
       // Two rounds of pulses: at 0.3 s and at 2.1 s, 0.7 s along the wires.
       const travel = (x) => (x > 0 && x < 1 ? ease(x) : -1);
@@ -1083,8 +1369,11 @@ export const RECIPES = {
       const wrong = on ? bump(s, 1.4, 1.45, 1.6, 1.8) : 0;
       const lampOn = on ? band(s, 3.15, 3.2) * (1 - band(s, 3.7, 3.8)) : 0;
       out.morph = [learn, flash, lampOn, wrong];
+      if (model) out.resort = resortSteps(this, "perc", on ? s : -1, 0.3, 3.0, 0.15);
     },
-    build(k) {
+    build(k, o) {
+      if (o.view === "model") return buildPerceptron3D(k);
+      k.data = { view: "poster" };
       board(k, 2.95, 1.75);
       const P = [
         [-0.98, 0.5, 0],
@@ -1178,6 +1467,7 @@ export const RECIPES = {
     },
   },
   "neural-network": {
+    options: [VIEW_OPTION],
     controls: [{ key: "go", label: "Train", type: "pulse", ease: 4.5 }],
     action: { key: "go", label: "Forward and back" },
     // A forward pass: the inputs light, pulses of light run along the wires
@@ -1185,9 +1475,10 @@ export const RECIPES = {
     // glow as bright as they fire, then on to the outputs, where one wins.
     // Then red pulses run back from the outputs (backpropagation), and the
     // wires thicken or thin a little as they pass.
-    drive(t, c, out) {
+    drive(t, c, out, info) {
       const s = since(c.go, 4.5);
       const on = s >= 0;
+      const wires = info.data?.wires || MLP.wires;
       const fade = on ? 1 - ease(band(s, 3.95, 4.45)) : 0;
       // Each layer lights when the pulses reach it.
       const lightAt = [0.05, 1.1, 2.1];
@@ -1199,9 +1490,9 @@ export const RECIPES = {
         });
       });
       out.tokens = [];
-      const n = MLP.wires.length;
+      const n = wires.length;
       const go = (x) => (x > 0 && x < 1 ? ease(x) : -1);
-      MLP.wires.forEach((w, i) => {
+      wires.forEach((w, i) => {
         const d = sub(w.p1, w.p0);
         // Forward: layer 0 wires at 0.35 s, layer 1 at 1.4 s.
         const f = on ? go((s - (w.l === 0 ? 0.35 : 1.4)) / 0.7) : -1;
@@ -1212,8 +1503,12 @@ export const RECIPES = {
       });
       // The weights shift as the red pulses pass, and ease back at the end.
       out.morph = [on ? ease(band(s, 2.6, 3.9)) * fade : 0];
+      // In the 3D model the pulses pass in front of and behind each other.
+      if (info.data?.view === "model") out.resort = resortSteps(this, "mlp", on ? s : -1, 0.35, 4.0, 0.12); // prettier-ignore
     },
-    build(k) {
+    build(k, o) {
+      if (o.view === "model") return buildMlp3D(k);
+      k.data = { view: "poster", wires: MLP.wires };
       board(k, 2.9, 1.8);
       const z = 0.04;
       const R = 0.13;
@@ -1785,12 +2080,13 @@ export const RECIPES = {
     },
   },
   "diffusion-model": {
+    options: [VIEW_OPTION],
     controls: [{ key: "go", label: "Denoise", type: "pulse", ease: 5 }],
     action: { key: "go", label: "Denoise" },
     // A cloud of random specks clears in ten steps into a crisp rubber
     // duck while the step counter runs down from 50 to 0; then the noise
     // washes back over it.
-    drive(t, c, out) {
+    drive(t, c, out, info) {
       const s = since(c.go, 5);
       const on = s >= 0;
       let w = 0;
@@ -1802,13 +2098,25 @@ export const RECIPES = {
         n = Math.round(st.n * (1 - back));
       }
       out.morph = [w, w];
+      // The 3D model: once the specks have landed (step 0), a solid copy of
+      // the duck, sorted as it stands, takes their place (specks sort where
+      // they rested, so from all round the duck's far side would show).
+      if (info.data?.view === "model") {
+        const solid = w > 0.97;
+        out.parts.solid = { visible: solid ? 1 : 0 };
+        out.parts.specks = { visible: solid ? 0 : 1 };
+      }
       out.tokens = [];
       const left = 50 - 5 * n;
       showDigit(out.tokens, 0, left >= 10 ? Math.floor(left / 10) : -1);
       showDigit(out.tokens, 7, left % 10);
     },
-    build(k) {
-      board(k, 2.1, 2.2, { at: [0, 0.05] });
+    build(k, o) {
+      const model = o.view === "model";
+      const G = model ? DIFF3D : DIFF;
+      k.data = { view: model ? "model" : "poster" };
+      if (model) stand(k, 0.95, -0.82);
+      else board(k, 2.1, 2.2, { at: [0, 0.05] });
       // Where the specks rest: a Gaussian cloud about the duck, clipped.
       const gauss = (rand) => {
         for (;;) {
@@ -1819,9 +2127,10 @@ export const RECIPES = {
           if (len(v) < 2.3) return v;
         }
       };
+      const spread = G.spread || [0.36, 0.3, 0.22];
       const cloudAt = (rand) => {
         const g = gauss(rand);
-        return add(DIFF.c, [g[0] * 0.36, g[1] * 0.3, g[2] * 0.22]);
+        return add(G.c, [g[0] * spread[0], g[1] * spread[1], g[2] * spread[2]]);
       };
       // The duck's surface, shared out between its ellipsoids by area, with
       // points inside another ellipsoid left out.
@@ -1830,7 +2139,8 @@ export const RECIPES = {
       const shapes = DUCK.map(([, r]) => k.ellipsoid(r[0], r[1], r[2]));
       const areas = shapes.map((sh) => sh.area);
       const total = areas.reduce((a, b) => a + b, 0);
-      k.cloud({ share: 0.45, size: 0.95, pattern: false }, (rand) => {
+      // A point on the duck, its normal and its colour.
+      const duckPoint = (rand) => {
         for (let tries = 0; tries < 40; tries++) {
           let x = rand() * total;
           let j = 0;
@@ -1839,42 +2149,58 @@ export const RECIPES = {
           const sm = shapes[Math.min(j, DUCK.length - 1)].sample(rand);
           const p = add(c, sm.p);
           if (p[1] < -0.27 || inside(p, j)) continue;
-          const nl = sm.n;
           const eye = DUCK_EYES.some((e) => len(sub(p, e)) < 0.062);
           const glint = DUCK_EYES.some((e) => len(sub(p, add(e, [0.02, 0.025, 0]))) < 0.022);
-          const q = duckPlace(p);
-          const n = unit(sub(duckPlace(add(p, nl)), duckPlace([0, 0, 0])));
+          const q = duckPlace(p, G);
+          const n = unit(sub(duckPlace(add(p, sm.n), G), duckPlace([0, 0, 0], G)));
           const color = glint
             ? "#ffffff"
             : eye
               ? "#141414"
               : lit(col, n, { amb: 0.72, dif: 0.38, spec: 0.35, pow: 24 });
-          // Specks keep their depth on the duck: splats sort by where they
-          // rest, so the duck's far side stays behind its near side.
-          const g = cloudAt(rand);
-          return { p: [g[0], g[1], q[2] + (g[2] - DIFF.c[2]) * 0.15], to: q, n, flat: 0.45, color, channel: 0 }; // prettier-ignore
+          return { q, n, color };
         }
         return null;
+      };
+      const specks = model ? k.part("specks", { pivot: G.c }) : 0;
+      k.cloud({ share: model ? 0.36 : 0.45, size: 0.95, pattern: false }, (rand) => {
+        const d = duckPoint(rand);
+        if (!d) return null;
+        const g = cloudAt(rand);
+        // On the poster the specks keep their depth on the duck: splats sort
+        // by where they rest, so its far side stays behind its near side.
+        const p = model ? g : [g[0], g[1], d.q[2] + (g[2] - G.c[2]) * 0.15];
+        return { p, to: d.q, n: d.n, flat: 0.45, color: d.color, channel: 0, part: specks };
       });
+      if (model) {
+        const solid = k.part("solid", { pivot: G.c });
+        k.cloud({ share: 0.36, size: 0.95, pattern: false }, (rand) => {
+          const d = duckPoint(rand);
+          return d && { p: d.q, n: d.n, flat: 0.45, color: d.color, part: solid };
+        });
+      }
       // Loose coloured specks that clear, step by step, on channel 1.
-      k.cloud({ share: 0.22, size: 0.9, pattern: false }, (rand) => ({
+      k.cloud({ share: model ? 0.2 : 0.22, size: 0.9, pattern: false }, (rand) => ({
         p: cloudAt(rand),
         color: [rand(), rand(), rand()],
         kind: "fade",
         params: [0.05 + 0.9 * rand(), 0.06],
         channel: 1,
       }));
-      // The step counter.
-      const cy = -0.82;
-      k.add(k.box(1.0, 0.36, 0.03), {
-        pos: [0, cy, 0.015],
+      // The step counter (in the 3D model, a little display on the stand).
+      const cy = -0.82 + (model ? 0.25 : 0);
+      const cz = model ? 0.62 : 0;
+      k.add(k.box(1.0, 0.36, model ? 0.12 : 0.03), {
+        pos: [0, cy, cz + (model ? -0.045 : 0.015)],
         flat: 0.2,
+        even: model,
         pattern: false,
-        color: (c) => keep(Math.abs(c.p[1] - cy) > 0.16 || Math.abs(c.p[0]) > 0.48 ? BOARD_RIM : "#0b1020"), // prettier-ignore
+        color: (c) =>
+          keep(c.s.face !== 4 && model ? BOARD_RIM : Math.abs(c.p[1] - cy) > 0.16 || Math.abs(c.p[0]) > 0.48 ? BOARD_RIM : "#0b1020"), // prettier-ignore
       });
-      text(k, "STEP", [-0.24, cy, 0.034], 0.022, "#9fb0d6");
-      sevenSeg(k, [0.16, cy, 0.034], 0.22, 0);
-      sevenSeg(k, [0.34, cy, 0.034], 0.22, 7);
+      text(k, "STEP", [-0.24, cy, cz + 0.034], 0.022, "#9fb0d6");
+      sevenSeg(k, [0.16, cy, cz + 0.034], 0.22, 0);
+      sevenSeg(k, [0.34, cy, cz + 0.034], 0.22, 7);
     },
   },
   "gradient-descent": {
