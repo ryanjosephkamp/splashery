@@ -3,7 +3,7 @@
 // tools/effect-clip.mjs does for a single tap. A white dot shows the finger.
 //
 //   python3 -m http.server 4173 --bind 127.0.0.1 &
-//   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/drag-clip.mjs <out-dir> <name> <toy id> <script.json> [--size=320] [--fps=15] [--bg=#111111] [--strip=8] [--cam=yaw,pitch]
+//   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/drag-clip.mjs <out-dir> <name> <toy id> <script.json> [--size=320] [--fps=15] [--bg=#111111] [--strip=8] [--cam=yaw,pitch] [--zoom=1]
 //
 // The script is a JSON list of steps, played in order, in recipe
 // coordinates (the toy's build space):
@@ -13,7 +13,9 @@
 //        still for hold seconds, then let go (the player's grab path)
 //   { "tap": [x, y, z] }                          a tap on the toy there
 //   { "act": true }                               the toy's action (Play)
-// Writes <out-dir>/<name>.gif (and <name>-strip.png with --strip).
+//   { "shot": true }                              puts this moment in the strip
+// Writes <out-dir>/<name>.gif (and <name>-strip.png with --strip: that many
+// frames spread evenly, or the "shot" moments if the script has any).
 
 import { chromium } from "@playwright/test";
 import fs from "node:fs";
@@ -32,6 +34,7 @@ const size = Number(opt("size", 320));
 const fps = Number(opt("fps", 15));
 const bg = opt("bg", "#111111");
 const stripN = Number(opt("strip", 0));
+const zoom = Number(opt("zoom", 1));
 const cam = opt("cam", "") ? opt("cam", "").split(",").map(Number) : null;
 
 fs.mkdirSync(outDir, { recursive: true });
@@ -44,7 +47,7 @@ page.on("pageerror", (e) => console.error("page error:", e.message));
 await page.goto(`${base}?renderer=webgl2&profile=high&adapt=off`);
 await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
 const { bytes, strip } = await page.evaluate(
-  async ({ id, size, fps, bg, script, stripN, cam }) => {
+  async ({ id, size, fps, bg, script, stripN, cam, zoom }) => {
     const { app, player } = window.__splashery;
     const { GIFEncoder, quantize, applyPalette } = await import("gifenc");
     await app.chooseToy(id);
@@ -64,6 +67,7 @@ const { bytes, strip } = await page.evaluate(
     stage.setFixedSize([size, size]);
     const home = { ...player.camera.home };
     if (cam) Object.assign(home, { yaw: home.yaw + cam[0], pitch: home.pitch + cam[1] });
+    home.distance *= zoom;
     const hold = () => {
       player.camera.cur = { ...home };
       player.camera.tgt = { ...home };
@@ -72,6 +76,8 @@ const { bytes, strip } = await page.evaluate(
     const gif = GIFEncoder();
     const delay = Math.round(1000 / fps);
     const frames = [];
+    const shots = [];
+    const keep = stripN > 1 || script.some((x) => x.shot);
     let finger = null; // [x, y] in CSS pixels while pressed
     const frame = async () => {
       pending = step;
@@ -92,7 +98,7 @@ const { bytes, strip } = await page.evaluate(
         ctx.fill();
         ctx.stroke();
       }
-      if (stripN > 1) frames.push(await createImageBitmap(c));
+      if (keep) frames.push(await createImageBitmap(c));
       const rgba = ctx.getImageData(0, 0, size, size).data;
       const palette = quantize(rgba, 256, { format: "rgb565" });
       gif.writeFrame(applyPalette(rgba, palette, "rgb565"), size, size, { palette, delay, repeat: 0 }); // prettier-ignore
@@ -105,10 +111,10 @@ const { bytes, strip } = await page.evaluate(
       else if (s.tap) {
         finger = player.screenPoint(s.tap);
         player.act(player.fromRecipe(s.tap));
-        await frame();
-        await frame();
+        for (let i = 0; i < 5; i++) await frame();
         finger = null;
       } else if (s.act) player.act();
+      else if (s.shot) shots.push(frames.length - 1);
       else if (s.drag) {
         const pts = s.drag;
         const at = (u) => {
@@ -136,8 +142,10 @@ const { bytes, strip } = await page.evaluate(
     stage.updateHandlers.length = 0;
     stage.updateHandlers.push(...handlers);
     let strip = null;
-    if (stripN > 1) {
-      const pick = Array.from({ length: stripN }, (_, i) => frames[Math.round((i / (stripN - 1)) * (frames.length - 1))]); // prettier-ignore
+    if (keep) {
+      const pick = shots.length
+        ? shots.map((i) => frames[Math.max(0, i)])
+        : Array.from({ length: stripN }, (_, i) => frames[Math.round((i / (stripN - 1)) * (frames.length - 1))]); // prettier-ignore
       const out = document.createElement("canvas");
       out.width = size * pick.length;
       out.height = size;
@@ -147,7 +155,7 @@ const { bytes, strip } = await page.evaluate(
     }
     return { bytes: Array.from(gif.bytes()), strip };
   },
-  { id, size, fps, bg, script, stripN, cam },
+  { id, size, fps, bg, script, stripN, cam, zoom },
 );
 fs.writeFileSync(path.join(outDir, `${name}.gif`), Buffer.from(bytes));
 if (strip) fs.writeFileSync(path.join(outDir, `${name}-strip.png`), Buffer.from(strip.split(",")[1], "base64")); // prettier-ignore

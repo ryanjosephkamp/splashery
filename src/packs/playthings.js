@@ -451,12 +451,13 @@ const BRICKS = (() => {
   return [...kinds].map((kind, i) => {
     const t = (i + 0.3 * Math.sin(i * 2.7)) / kinds.length;
     const ang = t * TAU;
-    const r = 6.6 + (i % 2) * 1.5;
+    // An ellipse, wider than deep like the models, kept clear of them.
+    const r = (i % 2) * 1.3;
     return {
       kind,
       colour: (i * 3) % 7,
-      x: r * Math.sin(ang),
-      z: r * Math.cos(ang),
+      x: (6.6 + r) * Math.sin(ang),
+      z: (5 + r) * Math.cos(ang),
       yaw: (ang * 180) / Math.PI + 90 + 14 * Math.sin(i * 5.1),
     };
   });
@@ -478,8 +479,9 @@ const MODELS = [
     name: "bridge",
     slots: [
       ["B", -3, 0, 0], ["B", 3, 0, 0], ["B", -3, 0, 1], ["B", 3, 0, 1], ["B", -3, 0, 2], ["B", 3, 0, 2],
-      ["A", -2, 0, 3], ["A", 2, 0, 3], ["A", 0, 0, 4],
-      ["C", -2, -0.5, 4], ["C", 2, 0.5, 4], ["D", -3, 0.5, 4], ["D", 3, -0.5, 4],
+      ["A", -2, 0, 3], ["A", 2, 0, 3],
+      ["A", 0, 0, 4], ["D", -3, -0.5, 4], ["D", -3, 0.5, 4], ["D", 3, -0.5, 4], ["D", 3, 0.5, 4],
+      ["C", -2, -0.5, 5], ["C", 2, -0.5, 5],
     ],
   },
   {
@@ -506,7 +508,7 @@ const MODELS = [
       ["B", 0, 0, 0], ["B", 0, 0, 1], ["B", 0, 0, 2],
       ["A", 0, -1, 3], ["A", 0, 1, 3],
       ["A", -1, 0, 4, 1], ["A", 1, 0, 4, 1],
-      ["B", 0, 0, 5], ["D", 0, -0.5, 6],
+      ["B", 0, 0, 5],
     ],
   },
 ]; // prettier-ignore
@@ -594,6 +596,12 @@ function bricksDrive(c, out, info) {
     while (s.clicks < s.order.length && e >= BUILD.pop + s.clicks * step + BUILD.fly) {
       s.clicks++;
       out.cues.push({ voice: "click", f: 2100 + 90 * (s.clicks % 4), decay: 1.3, vol: 0.9 });
+      out.resort = true;
+    }
+    if (!s.sorted && e >= BUILD.pop) {
+      // The old model is back on the table: sort the bricks where they lie.
+      s.sorted = true;
+      out.resort = true;
     }
   }
 }
@@ -869,6 +877,9 @@ function cubeApply(t, record = true) {
     cube.q[i] = cube.q[i].map((v) => v / l);
     cube.pos[i] = roundV(quatRotate(r, cube.pos[i]));
   }
+  // Sort the cubies again where they now stand (splats sort in the pose
+  // they were built in).
+  cube.resort = true;
   if (!record) return;
   // The history keeps turns short: a turn undoing the last one cancels it,
   // and turns of the same layer add up (four make none).
@@ -1008,6 +1019,8 @@ function cubeDrive(c, out, info) {
       anim = { axis: s.axis, layer: s.layer, angle: s.from + (s.to * (Math.PI / 2) - s.from) * easeOut(f) }; // prettier-ignore
     }
   }
+  out.resort = !!cube.resort;
+  cube.resort = false;
   const turning = anim ? new Set(layerOf(anim.axis, anim.layer)) : null;
   const r = anim ? quatAxisAngle(AXES[anim.axis], anim.angle) : null;
   out.tokens = CUBIES.map((_, i) => ({
@@ -1084,7 +1097,7 @@ export const RECIPES = {
           }
       });
       // Room above for the tallest model.
-      k.reach([0, 7 * BRICK_H + 0.3, 0]);
+      k.reach([0, 6 * BRICK_H + 0.3, 0]);
     },
   },
 
@@ -1809,12 +1822,9 @@ export const RECIPES = {
     // time. Solving it by hand earns a little hop and a chime.
     alive: () => cubeBusy(),
     controls: [{ key: "twist", label: "Scramble", type: "pulse", ease: CUBE_TAP }],
-    action: {
-      key: "twist",
-      get label() {
-        return cubeSolved() ? "Scramble" : "Solve";
-      },
-    },
+    action: { key: "twist", label: "Scramble or solve" },
+    // For tests: whether each face shows one colour, and the turns since.
+    cube: { solved: () => cubeSolved(), turns: () => cube.history.length },
     note: "Swipe across a face to turn a row or a column. Tap to scramble, or to solve it again.",
     drag: {
       at: () => !cubeBusy(),

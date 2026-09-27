@@ -284,6 +284,7 @@ function setGame(g) {
   game = { ...g, tags: { ...(g.tags || {}) }, states, n: g.plies.length, positions: null };
   Object.assign(play, { g: -1, last: null, target: null, jump: null, glide: null, landed: -1 });
   touch.sel = null;
+  touch.pending = [];
 }
 // Per-toy playing state (one chess set is shown at a time): g is game time
 // (-1 before the first move); `target` is a move to step to while paused;
@@ -291,8 +292,9 @@ function setGame(g) {
 // glide to (`glide` holds where they were and when it began).
 const play = { g: -1, last: null, target: null, jump: null, glide: null, landed: -1 };
 // Tap-to-move: the square of the picked piece (or null), when it was
-// picked, and sounds for the next frame.
-const touch = { sel: null, at: 0, cues: [] };
+// picked, sounds for the next frame and the squares tapped while the pieces were
+// still moving (they wait until the pieces settle).
+const touch = { sel: null, at: 0, cues: [], pending: [] };
 setGame(OPERA);
 
 // ---- Tap to move ------------------------------------------------------------------
@@ -339,10 +341,6 @@ const tick = (f, vol) => touch.cues.push({ voice: "wood", f, decay: 1.2, vol });
 // reaching the last rank becomes a queen). Tapping the piece again, or a
 // square it cannot go to, puts it down.
 function touchSquare(sq, c, time) {
-  // Paused half way through a move: that move finishes first.
-  if (c.play < 0.5 && play.target === null && !betweenMoves())
-    play.target = Math.min(game.n, Math.floor(play.g / PLY) + 1);
-  if (!settled(c)) return;
   const p = playedBy(play.g);
   const pos = positionAfter(p);
   if (!pos) return;
@@ -487,6 +485,9 @@ export const RECIPES = {
         if (c.play > 0.5) return gameOver() ? "restart" : undefined;
         const sq = squareUnder(point);
         if (!sq) return undefined;
+        // Taps queue up (like the laptop's keys), so two quick taps between
+        // frames are both played.
+        touch.pending = [...touch.pending, sq].slice(-4);
         return { key: "touch", pick: sq };
       },
       // Tap-to-move makes its own sounds (drive's cues).
@@ -571,10 +572,19 @@ export const RECIPES = {
       }
       // Tap-to-move: the tapped square (a new tap), and the picked piece
       // put down if the game moves on.
-      if (info.tap?.key === "touch" && info.tap.n !== m.touchN) {
-        m.touchN = info.tap.n;
-        if (info.tap.pick) touchSquare(info.tap.pick, c, now);
-      }
+      // Tapped squares wait until the pieces have landed. Paused half way
+      // through a move, that move finishes first.
+      if (
+        touch.pending.length &&
+        c.play < 0.5 &&
+        play.target === null &&
+        play.jump === null &&
+        !betweenMoves()
+      )
+        // prettier-ignore
+        play.target = Math.min(game.n, Math.floor(play.g / PLY) + 1);
+      if (c.play > 0.5) touch.pending = [];
+      while (touch.pending.length && settled(c)) touchSquare(touch.pending.shift(), c, now);
       if (touch.sel && !settled(c)) touch.sel = null;
       out.cues.push(...touch.cues.splice(0));
       const n = game.n;
