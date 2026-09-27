@@ -380,26 +380,84 @@ const MLP = (() => {
   return { acts, pos, wires };
 })();
 const mlpRadius = (w) => 0.008 + 0.014 * Math.abs(w);
-// The 3D model's neurons: each layer a ring (a triangle, a square, a pair)
-// standing across the way the signal flows, and its wires between them.
-const MLP3D = (() => {
-  const X = [-1.05, 0, 1.05];
-  const radius = { 2: 0.42, 3: 0.55, 4: 0.7 };
-  // The flow runs toward the front right (turned 0.7 rad about the up axis),
-  // so the rings are seen at a slant from the front.
+// The neural network's size comes from its options: 2 to 4 inputs, 1 to 3
+// hidden layers of 2 to 5 neurons, 1 to 3 outputs, at most 14 neurons in all
+// (each neuron's glow is a part). The default, 3-4-2, uses the weights above;
+// any other size gets seeded weights and a real forward pass (sigmoid).
+const NET_MAX = 14;
+function netSizes(o = {}) {
+  const ins = clamp(Math.round(Number(o.inputs ?? 3)), 2, 4);
+  const outs = clamp(Math.round(Number(o.outputs ?? 2)), 1, 3);
+  let layers = clamp(Math.round(Number(o.layers ?? 1)), 1, 3);
+  let hid = clamp(Math.round(Number(o.neurons ?? 4)), 2, 5);
+  while (ins + outs + layers * hid > NET_MAX && hid > 2) hid--;
+  while (ins + outs + layers * hid > NET_MAX && layers > 1) layers--;
+  return [ins, ...Array(layers).fill(hid), outs];
+}
+function makeNet(sizes) {
+  if (sizes.join() === "3,4,2") {
+    const wires = MLP.wires.map(({ l, a, b, w, sig, nudge }) => ({ l, a, b, w, sig, nudge }));
+    return { sizes, acts: MLP.acts, wires };
+  }
+  let seed = sizes.reduce((s, n) => s * 7 + n, 11);
+  const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  const sig = (v) => 1 / (1 + Math.exp(-v));
+  const acts = [[0.9, 0.2, 0.75, 0.5].slice(0, sizes[0])];
+  const wires = [];
+  for (let l = 0; l + 1 < sizes.length; l++) {
+    const next = [];
+    for (let j = 0; j < sizes[l + 1]; j++) {
+      let v = -0.4;
+      for (let i = 0; i < sizes[l]; i++) {
+        const w = (rnd() * 2 - 1) * 1.8;
+        v += w * acts[l][i];
+        wires.push({ l, a: i, b: j, w });
+      }
+      next.push(sig(v));
+    }
+    acts.push(next);
+  }
+  wires.forEach((wr, i) => {
+    wr.sig = acts[wr.l][wr.a] * Math.min(1, Math.abs(wr.w) / 1.8);
+    wr.nudge = (i * 7) % 3 === 0 ? -1 : 1;
+  });
+  return { sizes, acts, wires };
+}
+// Where the neurons sit: in columns on the poster, in rings in the 3D model
+// (the flow slanting toward the front right).
+function netLayout(net, view) {
+  const L = net.sizes.length;
   const turn = (p) => [p[0] * Math.cos(0.7) - p[2] * Math.sin(0.7), p[1], p[0] * Math.sin(0.7) + p[2] * Math.cos(0.7)]; // prettier-ignore
-  const pos = MLP.acts.map((col, l) =>
-    col.map((_, i) => {
-      const n = col.length;
+  const pos = net.sizes.map((n, l) => {
+    const x = -1 + (2 * l) / (L - 1);
+    return Array.from({ length: n }, (_, i) => {
+      if (view !== "model") {
+        const gap = n <= 2 ? 0.6 : n === 3 ? 0.5 : n === 4 ? 0.4 : 0.34;
+        return [x * 0.95, ((n - 1) / 2 - i) * gap, 0];
+      }
+      const r = n === 1 ? 0 : n === 2 ? 0.42 : n === 3 ? 0.55 : n === 4 ? 0.7 : 0.78;
       const a = Math.PI / 2 + (i * TAU) / n + (n === 2 ? Math.PI / 2 : n === 4 ? Math.PI / 4 : 0);
-      return turn([X[l], 0.25 + radius[n] * Math.sin(a), radius[n] * Math.cos(a)]);
-    }),
+      return turn([x * 1.05, 0.25 + r * Math.sin(a), r * Math.cos(a)]);
+    });
+  });
+  const wires = net.wires.map((w) => ({ ...w, p0: pos[w.l][w.a], p1: pos[w.l + 1][w.b] }));
+  const foot = net.sizes.map((_, l) => add(turn([(-1 + (2 * l) / (L - 1)) * 1.05, -0.55, 0]), [0, 0, 0.75])); // prettier-ignore
+  const labels = net.sizes.map((_, l) =>
+    l === 0 ? "IN" : l === L - 1 ? "OUT" : L === 3 ? "HIDDEN" : `H${l}`,
   );
-  const wires = MLP.wires.map((w) => ({ ...w, p0: pos[w.l][w.a], p1: pos[w.l + 1][w.b] }));
-  // Where each layer's label stands: on the stand, in front of its ring.
-  const foot = X.map((x) => add(turn([x, -0.55, 0]), [0, 0, 0.75]));
-  return { pos, wires, foot };
-})();
+  return { pos, wires, foot, labels };
+}
+// Times of the pass for a network of L layers: when each layer lights, and
+// when the pulses of each layer of wires travel forward and back.
+function netTimes(L) {
+  const step = 2.05 / (L - 1);
+  const light = Array.from({ length: L }, (_, l) => 0.05 + l * step);
+  const fwd = Array.from({ length: L - 1 }, (_, l) => [light[l] + 0.3, step - 0.3]);
+  const bstep = 1.4 / (L - 1);
+  const back = Array.from({ length: L - 1 }, (_, l) => [2.5 + (L - 2 - l) * bstep, bstep]);
+  return { light, fwd, back };
+}
+
 // The two views every model toy has: the flat poster and the 3D model.
 const VIEW_OPTION = {
   key: "view",
@@ -1148,72 +1206,113 @@ function wireLight(k, pts, r, color, channel, from = 0, to = 1) {
   });
 }
 
-// The neural network as a 3D model: glass neurons in rings on a round stand,
-// each with a golden core that grows as it fires, and wires between them.
-function buildMlp3D(k) {
-  const { pos, wires } = MLP3D;
-  k.data = { view: "model", wires };
-  stand(k, 1.05, -0.72);
-  const R = 0.13;
-  const n = wires.length;
-  wires.forEach((w, i) => {
+// The neural network (poster or 3D model) for any size from netSizes(). Up
+// to 24 wires each carry a pulse (a token each way); a bigger network shows
+// its pulses as waves of light along the wires instead (a band on a glassy
+// sheath round each wire, channel 1).
+function buildNet(k, o) {
+  const model = o.view === "model";
+  const net = makeNet(netSizes(o));
+  const lay = netLayout(net, model ? "model" : "poster");
+  const beads = lay.wires.length * 2 <= 48;
+  const L = net.sizes.length;
+  k.data = { view: model ? "model" : "poster", sizes: net.sizes, acts: net.acts, wires: lay.wires, beads }; // prettier-ignore
+  const z = model ? 0 : 0.04;
+  const R = model ? 0.13 : 0.13;
+  const maxN = Math.max(...net.sizes);
+  if (model) stand(k, 1.05, -0.72);
+  else board(k, 2.9, Math.max(1.8, maxN * 0.36 + 0.75));
+  const n = lay.wires.length;
+  lay.wires.forEach((w, i) => {
     const dir = unit(sub(w.p1, w.p0));
-    const a = add(w.p0, mul(dir, R * 0.95));
-    const b = sub(w.p1, mul(dir, R * 0.95));
+    const a = add(add(w.p0, mul(dir, R * 0.92)), [0, 0, z]);
+    const b = add(sub(w.p1, mul(dir, R * 0.92)), [0, 0, z]);
     const r0 = mlpRadius(w.w);
-    wire(k, [a, b], r0, {
-      to: r0 * (1 + 0.6 * w.nudge),
-      channel: 0,
-      weight: 1.6,
-      color: "#6d7fa6",
-    });
-    bead(k, w.p0, 0.04 + 0.04 * w.sig, "#ffb000", i);
-    bead(k, w.p1, 0.045, "#ff3b4e", n + i);
+    wire(k, [a, b], r0, { to: r0 * (1 + 0.6 * w.nudge), channel: 0, weight: 1.6, color: model ? "#6d7fa6" : "#5b6b8c" }); // prettier-ignore
+    if (beads) {
+      bead(k, add(w.p0, [0, 0, model ? 0 : z + 0.03]), 0.04 + 0.04 * w.sig, model ? "#ffb000" : "#ffe680", i); // prettier-ignore
+      bead(k, add(w.p1, [0, 0, model ? 0 : z + 0.035]), model ? 0.045 : 0.04, model ? "#ff3b4e" : "#ff4b5c", n + i); // prettier-ignore
+    } else {
+      k.add(
+        k.tube((t) => lerp3(a, b, t), r0 * 1.5 + 0.008, { grid: 24 }),
+        {
+          flat: 0.4,
+          weight: 1.2,
+          opacity: 0.35,
+          pattern: false,
+          kind: "band",
+          params: (c) => [(w.l + c.t) / (L - 1), 0.05],
+          channel: 1,
+          color: () => keep(model ? "#6d7fa6" : "#5b6b8c"),
+        },
+      );
+    }
   });
-  pos.forEach((col, l) =>
+  lay.pos.forEach((col, l) =>
     col.forEach((p, i) => {
-      // Glass: see-through, so the core shows inside.
+      const part = k.part(`n${l}${i}`, { pivot: add(p, [0, 0, model ? 0 : z + 0.06]) });
+      if (model) {
+        k.add(k.sphere(R), {
+          pos: p,
+          even: true,
+          flat: 0.35,
+          weight: 1.5,
+          opacity: 0.42,
+          pattern: false,
+          color: (c) => keep(lit("#3b4a74", c.n, { amb: 0.75, dif: 0.35, spec: 0.8, pow: 24 })),
+        });
+        k.add(k.sphere(R * 0.8), {
+          pos: p,
+          flat: 0.4,
+          weight: 2,
+          part,
+          pattern: false,
+          color: (c) => keep(lit("#ffb400", c.n, { amb: 0.95, dif: 0.25, spec: 0.5 })),
+        });
+        k.add(k.sphere(R * 1.25), {
+          pos: p,
+          flat: 0.5,
+          size: 1.5,
+          opacity: 0.25,
+          part,
+          pattern: false,
+          color: () => keep("#ffe28a"),
+        });
+        const h = p[1] + 0.72;
+        k.add(k.cylinder(0.008, h - R), {
+          pos: [p[0], -0.72 + (h - R) / 2, p[2]],
+          flat: 0.4,
+          weight: 1.2,
+          pattern: false,
+          color: () => keep("#4a5778"),
+        });
+        return;
+      }
       k.add(k.sphere(R), {
-        pos: p,
+        pos: add(p, [0, 0, z]),
+        scale: [1, 1, 0.5],
         even: true,
-        flat: 0.35,
-        weight: 1.5,
-        opacity: 0.42,
+        flat: 0.3,
+        weight: 1.4,
         pattern: false,
-        color: (c) => keep(lit("#3b4a74", c.n, { amb: 0.75, dif: 0.35, spec: 0.8, pow: 24 })),
+        color: (c) => lit("#2c3654", c.n, { amb: 0.7, dif: 0.35, spec: 0.6, pow: 18 }),
       });
-      const part = k.part(`n${l}${i}`, { pivot: p });
-      k.add(k.sphere(R * 0.8), {
-        pos: p,
-        flat: 0.4,
-        weight: 2,
-        part,
+      k.add(k.torus(R * 1.02, R * 0.1), {
+        pos: add(p, [0, 0, z + 0.004]),
+        rot: [90, 0, 0],
+        even: true,
+        weight: 1.4,
         pattern: false,
-        color: (c) => keep(lit("#ffb400", c.n, { amb: 0.95, dif: 0.25, spec: 0.5 })),
+        color: (c) => lit("#7d8aab", c.n, { amb: 0.7, dif: 0.4, spec: 0.5 }),
       });
-      k.add(k.sphere(R * 1.25), {
-        pos: p,
-        flat: 0.5,
-        size: 1.5,
-        opacity: 0.25,
-        part,
-        pattern: false,
-        color: () => keep("#ffe28a"),
-      });
-      // A post down to the stand.
-      const h = p[1] + 0.72;
-      k.add(k.cylinder(0.008, h - R), {
-        pos: [p[0], -0.72 + (h - R) / 2, p[2]],
-        flat: 0.4,
-        weight: 1.2,
-        pattern: false,
-        color: () => keep("#4a5778"),
-      });
+      lampLight(k, add(p, [0, 0, z + 0.06]), R * 0.95, "#ffd34d", { part });
     }),
   );
-  ["IN", "HIDDEN", "OUT"].forEach((label, l) =>
-    sign(k, label, add(MLP3D.foot[l], [0, 0.0, 0]), 0.022, { color: "#9fb0d6" }),
-  );
+  const bottom = -Math.max(1.8, maxN * 0.36 + 0.75) / 2 + 0.1;
+  lay.labels.forEach((label, l) => {
+    if (model) sign(k, label, lay.foot[l], 0.022, { color: "#9fb0d6" });
+    else text(k, label, [lay.pos[l][0][0], bottom, 0.003], 0.02, "#9fb0d6");
+  });
 }
 
 // A light in 3D: a bright sphere and a soft halo round it, turned on by a
@@ -1899,90 +1998,76 @@ export const RECIPES = {
     },
   },
   "neural-network": {
-    options: [VIEW_OPTION],
+    options: [
+      { key: "inputs", label: "Inputs", type: "slider", min: 2, max: 4, step: 1, default: 3 },
+      {
+        key: "layers",
+        label: "Hidden layers",
+        type: "slider",
+        min: 1,
+        max: 3,
+        step: 1,
+        default: 1,
+      },
+      { key: "neurons", label: "Neurons per hidden layer", type: "slider", min: 2, max: 5, step: 1, default: 4 }, // prettier-ignore
+      { key: "outputs", label: "Outputs", type: "slider", min: 1, max: 3, step: 1, default: 2 },
+      VIEW_OPTION,
+    ],
     controls: [{ key: "go", label: "Train", type: "pulse", ease: 4.5 }],
     action: { key: "go", label: "Forward and back" },
     // A forward pass: the inputs light, pulses of light run along the wires
-    // (as big as the signal they carry) into the hidden layer, whose neurons
-    // glow as bright as they fire, then on to the outputs, where one wins.
-    // Then red pulses run back from the outputs (backpropagation), and the
-    // wires thicken or thin a little as they pass.
+    // (as big as the signal they carry) layer by layer, each neuron glowing
+    // as bright as it fires, to the outputs, where one wins. Then red pulses
+    // run back (backpropagation), and the wires thicken or thin a little as
+    // they pass. A network with more than 24 wires sends waves of light
+    // along its wires instead of one pulse per wire.
     drive(t, c, out, info) {
       const s = since(c.go, 4.5);
       const on = s >= 0;
-      const wires = info.data?.wires || MLP.wires;
+      const D = info.data?.wires ? info.data : { sizes: [3, 4, 2], acts: MLP.acts, wires: MLP.wires, beads: true }; // prettier-ignore
+      const L = D.sizes.length;
+      const T = netTimes(L);
       const fade = on ? 1 - ease(band(s, 3.95, 4.45)) : 0;
       // Each layer lights when the pulses reach it.
-      const lightAt = [0.05, 1.1, 2.1];
-      MLP.acts.forEach((col, l) => {
-        const g = on ? ease(band(s, lightAt[l], lightAt[l] + 0.3)) * fade : 0;
+      D.acts.forEach((col, l) => {
+        const g = on ? ease(band(s, T.light[l], T.light[l] + 0.3)) * fade : 0;
         col.forEach((a, i) => {
           const v = g * (0.25 + 0.75 * a);
           out.parts[`n${l}${i}`] = { scale: v, visible: v > 0.01 ? 1 : 0 };
         });
       });
-      out.tokens = [];
-      const n = wires.length;
       const go = (x) => (x > 0 && x < 1 ? ease(x) : -1);
-      wires.forEach((w, i) => {
-        const d = sub(w.p1, w.p0);
-        // Forward: layer 0 wires at 0.35 s, layer 1 at 1.4 s.
-        const f = on ? go((s - (w.l === 0 ? 0.35 : 1.4)) / 0.7) : -1;
-        out.tokens[i] = f < 0 ? { visible: 0 } : { offset: mul(d, f), visible: 1 };
-        // Back: layer 1 wires at 2.5 s, layer 0 at 3.2 s (built at the far end).
-        const b = on ? go((s - (w.l === 1 ? 2.5 : 3.2)) / 0.7) : -1;
-        out.tokens[n + i] = b < 0 ? { visible: 0 } : { offset: mul(d, -b), visible: 1 };
-      });
+      out.tokens = [];
+      if (D.beads) {
+        const n = D.wires.length;
+        D.wires.forEach((w, i) => {
+          const d = sub(w.p1, w.p0);
+          const [f0, fd] = T.fwd[w.l];
+          const f = on ? go((s - f0) / fd) : -1;
+          out.tokens[i] = f < 0 ? { visible: 0 } : { offset: mul(d, f), visible: 1 };
+          // Back pulses are built at the far end.
+          const [b0, bd] = T.back[w.l];
+          const b = on ? go((s - b0) / bd) : -1;
+          out.tokens[n + i] = b < 0 ? { visible: 0 } : { offset: mul(d, -b), visible: 1 };
+        });
+      }
       // The weights shift as the red pulses pass, and ease back at the end.
-      out.morph = [on ? ease(band(s, 2.6, 3.9)) * fade : 0];
+      out.morph = [on ? ease(band(s, 2.6, 3.9)) * fade : 0, -1];
+      // Waves of light (bigger networks): forward in gold, back in red.
+      if (!D.beads && on) {
+        if (s < 2.4) {
+          out.morph[1] = s > 0.35 ? (s - 0.35) / (2.1 - 0.35) : -1;
+          out.glow = [1, 0.8, 0.25, 0.9];
+        } else if (s < 3.95) {
+          out.morph[1] = s > 2.5 ? 1 - (s - 2.5) / 1.4 : -1;
+          out.glow = [1, 0.2, 0.25, 0.9];
+        }
+      }
       // In the 3D model the pulses pass in front of and behind each other.
-      if (info.data?.view === "model") out.resort = resortSteps(this, "mlp", on ? s : -1, 0.35, 4.0, 0.12); // prettier-ignore
+      if (info.data?.view === "model" && D.beads) out.resort = resortSteps(this, "mlp", on ? s : -1, 0.35, 4.0, 0.12); // prettier-ignore
     },
     build(k, o) {
-      if (o.view === "model") return buildMlp3D(k);
-      k.data = { view: "poster", wires: MLP.wires };
-      board(k, 2.9, 1.8);
-      const z = 0.04;
-      const R = 0.13;
-      const n = MLP.wires.length;
-      MLP.wires.forEach((w, i) => {
-        const dir = unit(sub(w.p1, w.p0));
-        const a = add(add(w.p0, mul(dir, R * 0.9)), [0, 0, z]);
-        const b = add(sub(w.p1, mul(dir, R * 0.9)), [0, 0, z]);
-        const r0 = mlpRadius(w.w);
-        wire(k, [a, b], r0, { to: r0 * (1 + 0.6 * w.nudge), channel: 0, weight: 1.6 });
-        const br = 0.04 + 0.04 * w.sig;
-        bead(k, add(w.p0, [0, 0, z + 0.03]), br, "#ffe680", i);
-        bead(k, add(w.p1, [0, 0, z + 0.035]), 0.04, "#ff4b5c", n + i);
-      });
-      // Neurons: dark glass, with a glowing core that grows with how
-      // strongly the neuron fires (a part each).
-      MLP.pos.forEach((col, l) =>
-        col.forEach((p, i) => {
-          k.add(k.sphere(R), {
-            pos: add(p, [0, 0, z]),
-            scale: [1, 1, 0.5],
-            even: true,
-            flat: 0.3,
-            weight: 1.4,
-            pattern: false,
-            color: (c) => lit("#2c3654", c.n, { amb: 0.7, dif: 0.35, spec: 0.6, pow: 18 }),
-          });
-          k.add(k.torus(R * 1.02, R * 0.1), {
-            pos: add(p, [0, 0, z + 0.004]),
-            rot: [90, 0, 0],
-            even: true,
-            weight: 1.4,
-            pattern: false,
-            color: (c) => lit("#7d8aab", c.n, { amb: 0.7, dif: 0.4, spec: 0.5 }),
-          });
-          const part = k.part(`n${l}${i}`, { pivot: add(p, [0, 0, z + 0.06]) });
-          lampLight(k, add(p, [0, 0, z + 0.06]), R * 0.95, "#ffd34d", { part });
-        }),
-      );
-      ["IN", "HIDDEN", "OUT"].forEach((label, l) =>
-        text(k, label, [MLP.pos[l][0][0], -0.8, 0.003], 0.02, "#9fb0d6"),
-      );
+      buildNet(k, o);
     },
   },
   cnn: {

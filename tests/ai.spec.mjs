@@ -10,6 +10,7 @@ import path from "node:path";
 import { TOYS, CATEGORIES } from "../src/toys.js";
 import { TOY_SOUNDS } from "../src/toy-sounds.js";
 import { buildRecipe } from "../src/kit.js";
+import { KINDS } from "../src/effects.js";
 import { RECIPES } from "../src/packs/computing.js";
 
 const IDS = ["perceptron", "neural-network", "cnn", "rnn", "transformer", "looped-transformer", "diffusion-model", "gradient-descent", "word-vectors", "sorting-machine", "half-adder"]; // prettier-ignore
@@ -97,7 +98,12 @@ for (const id of IDS) {
         if (shown(tk) > 0.05)
           expect(Math.hypot(...at(tk).map((x, j) => x - at(q)[j])), `${id}: piece ${i}`).toBeLessThan(0.03); // prettier-ignore
       });
-      for (const m of rest.morph || []) expect(Math.abs(m)).toBeLessThan(0.05);
+      // Channels that move splats (morphs) are back at 0; light channels
+      // may park anywhere dark.
+      const { anim, count } = kit.buf;
+      const shaped = new Set();
+      for (let i = 0; i < count; i++) if (anim[i * 4 + 1] === KINDS.morph) shaped.add(Math.floor(anim[i * 4 + 3] / 4096)); // prettier-ignore
+      for (const ch of shaped) expect(Math.abs(rest.morph?.[ch] ?? 0), `${id}: channel ${ch}`).toBeLessThan(0.05); // prettier-ignore
       // Toys that use out.grow (a gauge, the scores) keep it at 0 at rest.
       expect(rest.grow ?? 0).toBeLessThan(0.05);
     });
@@ -224,4 +230,23 @@ test("word vectors: typed words work out A − B + C from the real vectors", asy
   expect(build("word-vectors", { a: "zzqx", b: "man", c: "woman" }).data.words.answer).toBe(
     "queen",
   );
+});
+
+test("neural network: any size in the options plays through and ends at rest", () => {
+  for (const o of [
+    { layers: 2, neurons: 3 },
+    { layers: 3, neurons: 5, inputs: 4, outputs: 3 },
+    { inputs: 2, outputs: 1, neurons: 2 },
+    { layers: 2, neurons: 4, view: "model" },
+  ]) {
+    const { rest, frames, kit } = play("neural-network", o);
+    const n = kit.data.sizes.reduce((a, b) => a + b, 0);
+    expect(n, JSON.stringify(o)).toBeLessThanOrEqual(14);
+    expect(kit.parts.length).toBeLessThanOrEqual(16);
+    const last = frames[frames.length - 2].out;
+    for (const [key, pd] of Object.entries(last.parts))
+      expect(Math.abs((pd.visible ?? 1) * (pd.scale ?? 1) - (rest.parts[key]?.visible ?? 1) * (rest.parts[key]?.scale ?? 1))).toBeLessThan(0.05); // prettier-ignore
+    for (const tk of last.tokens || []) expect(tk.visible ?? 1).toBe(0);
+    expect(Math.abs(rest.morph[0])).toBeLessThan(0.05);
+  }
 });
