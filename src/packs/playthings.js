@@ -439,17 +439,172 @@ const BRICK_COLOURS = {
   rainbow: ["#e63946", "#f4a261", "#ffd23f", "#3bb273", "#3a86ff", "#8338ec", "#ff5fa2"],
   ocean: ["#0b3c5d", "#1d7ea8", "#5bc0be", "#b8e1dd", "#f6f5ae", "#328cc1", "#f5f5f0"],
 };
-// [studs along x, studs along z, centre x, centre z, layer, colour, turn (deg)]
-const PILE = [
-  [4, 2, -1, -1, 0, 0, 0],
-  [4, 2, -1, 1, 0, 1, 0],
-  [2, 4, -2, 0, 1, 2, 0],
-  [2, 2, 0, -1, 1, 3, 0],
-  [2, 2, -2, -1, 2, 5, 0],
-  [4, 2, 2.6, 2.1, 0, 4, 24],
-  [2, 2, 2.3, -1.4, 0, 6, -12],
-  [2, 2, 0, 1, 1, 5, 0],
-];
+// ---- Building bricks -----------------------------------------------------------------
+// Units are studs; a brick is BRICK_H tall. Kinds are [studs along x, studs
+// along z] as the brick lies unturned.
+const BRICK_H = 1.2;
+const BRICK_KINDS = { A: [4, 2], B: [2, 2], C: [4, 1], D: [2, 1] };
+// Where each brick lies at rest: poured out round the table in two loose
+// rings, long bricks pointing outwards.
+const BRICKS = (() => {
+  const kinds = "AABBDABCABBDAABDDC";
+  return [...kinds].map((kind, i) => {
+    const t = (i + 0.3 * Math.sin(i * 2.7)) / kinds.length;
+    const ang = t * TAU;
+    // An ellipse, wider than deep like the models, kept clear of them.
+    const r = (i % 2) * 1.3;
+    return {
+      kind,
+      colour: (i * 3) % 7,
+      x: (6.6 + r) * Math.sin(ang),
+      z: (5 + r) * Math.cos(ang),
+      yaw: (ang * 180) / Math.PI + 90 + 14 * Math.sin(i * 5.1),
+    };
+  });
+})();
+// The models: each brick's slot as [kind, centre x, centre z, layer, turned]
+// (turned: a quarter turn, so a 4x2 runs along z). Built in this order.
+const MODELS = [
+  {
+    name: "tower",
+    slots: [
+      ["A", 0, -1, 0], ["A", 0, 1, 0],
+      ["A", -1, 0, 1, 1], ["A", 1, 0, 1, 1],
+      ["A", 0, -1, 2], ["A", 0, 1, 2],
+      ["B", -1, -1, 3], ["B", 1, -1, 3], ["B", -1, 1, 3], ["B", 1, 1, 3],
+      ["B", -1, -1, 4], ["B", 1, 1, 4], ["D", 1.5, -1, 4, 1], ["D", -1.5, 1, 4, 1],
+    ],
+  },
+  {
+    name: "bridge",
+    slots: [
+      ["B", -3, 0, 0], ["B", 3, 0, 0], ["B", -3, 0, 1], ["B", 3, 0, 1], ["B", -3, 0, 2], ["B", 3, 0, 2],
+      ["A", -2, 0, 3], ["A", 2, 0, 3],
+      ["A", 0, 0, 4], ["D", -3, -0.5, 4], ["D", -3, 0.5, 4], ["D", 3, -0.5, 4], ["D", 3, 0.5, 4],
+      ["C", -2, -0.5, 5], ["C", 2, -0.5, 5],
+    ],
+  },
+  {
+    name: "stairs",
+    slots: [
+      ["A", -3, 0, 0, 1], ["A", -1, 0, 0, 1], ["A", 1, 0, 0, 1], ["A", 3, 0, 0, 1],
+      ["B", -1, -1, 1], ["B", -1, 1, 1], ["A", 1, 0, 1, 1], ["A", 3, 0, 1, 1],
+      ["B", 1, -1, 2], ["B", 1, 1, 2], ["B", 3, -1, 2], ["B", 3, 1, 2],
+      ["C", 2.5, 0, 3, 1], ["C", 3.5, 0, 3, 1],
+    ],
+  },
+  {
+    name: "dog",
+    slots: [
+      ["D", -1.5, 0, 0, 1], ["D", 1.5, 0, 0, 1],
+      ["A", 0, 0, 1],
+      ["B", 1, 0, 2], ["D", -2, 0.5, 2],
+      ["A", 2, 0, 3], ["D", 0.5, 0, 4, 1],
+    ],
+  },
+  {
+    name: "tree",
+    slots: [
+      ["B", 0, 0, 0], ["B", 0, 0, 1], ["B", 0, 0, 2],
+      ["A", 0, -1, 3], ["A", 0, 1, 3],
+      ["A", -1, 0, 4, 1], ["A", 1, 0, 4, 1],
+      ["B", 0, 0, 5],
+    ],
+  },
+]; // prettier-ignore
+// A tap's timing: the old model pops apart, then the bricks fly in one at a
+// time, each taking FLY seconds.
+const BUILD = { secs: 5, pop: 0.9, fly: 0.45 };
+const bricks = { at: null, seq: null, model: -1 };
+// A brick's place: its centre and yaw (degrees).
+const brickHome = (i) => ({ p: [BRICKS[i].x, BRICK_H / 2, BRICKS[i].z], yaw: BRICKS[i].yaw });
+function slotPlace(slot, i) {
+  const [, x, z, layer, turned] = slot;
+  // Of the two ways a brick fits a slot, the one nearer its own yaw.
+  let yaw = turned ? 90 : 0;
+  const d = ((((BRICKS[i].yaw - yaw) % 180) + 270) % 180) - 90;
+  yaw = BRICKS[i].yaw - d;
+  return { p: [x, (layer + 0.5) * BRICK_H, z], yaw };
+}
+// Gives each slot of a model a free brick of its kind, shuffled by seed.
+function assignBricks(model, seed) {
+  const at = BRICKS.map(() => null);
+  const order = BRICKS.map((_, i) => i).sort((a, b) => hashInt(seed * 31 + a) - hashInt(seed * 31 + b)); // prettier-ignore
+  const seq = [];
+  for (const slot of MODELS[model].slots) {
+    const i = order.find((j) => at[j] === null && BRICKS[j].kind === slot[0]);
+    if (i === undefined) continue;
+    at[i] = slotPlace(slot, i);
+    seq.push(i);
+  }
+  return { at, seq };
+}
+function brickPose(i, place) {
+  const h = brickHome(i);
+  const q = quatAxisAngle([0, 1, 0], ((place.yaw - h.yaw) * Math.PI) / 180);
+  return { base: h.p, offset: sub(place.p, h.p), quat: q };
+}
+// A brick's place part way u (0-1) along a hop from a to b.
+function brickHop(a, b, u, height) {
+  const e = easeInOut(u);
+  const p = add(a.p, mul(sub(b.p, a.p), e));
+  p[1] += height * Math.sin(Math.PI * u);
+  return { p, yaw: a.yaw + (b.yaw - a.yaw) * e };
+}
+function bricksDrive(c, out, info) {
+  const m = mem(c);
+  if (!m.bricks) {
+    m.bricks = true;
+    Object.assign(bricks, { at: BRICKS.map(() => null), seq: null, model: -1 });
+  }
+  if (fired(m, "snap", c.snap)) {
+    // A different model from the last one.
+    const seed = hashInt((info.tap?.n ?? 1) * 977 + Math.floor(info.time * 1000));
+    let model = seed % MODELS.length;
+    if (model === bricks.model) model = (model + 1 + (seed >> 8) % (MODELS.length - 1)) % MODELS.length; // prettier-ignore
+    const next = assignBricks(model, seed);
+    bricks.seq = { from: bricks.at, to: next.at, order: next.seq, clicks: 0, popped: false };
+    bricks.at = next.at;
+    bricks.model = model;
+  }
+  const s = bricks.seq;
+  const e = s && c.snap > 0 ? (1 - c.snap) * BUILD.secs : null;
+  if (s && e === null) bricks.seq = null;
+  const step = s ? (BUILD.secs - BUILD.pop - BUILD.fly - 0.2) / Math.max(1, s.order.length - 1) : 0;
+  out.tokens = BRICKS.map((_, i) => {
+    const home = brickHome(i);
+    if (e === null) return brickPose(i, bricks.at[i] || home);
+    const from = s.from[i];
+    const to = s.to[i];
+    // Popping apart: bricks of the old model hop back to the table.
+    if (e < BUILD.pop) {
+      if (!from) return brickPose(i, home);
+      const u = band(e, 0.05 * (from.p[1] / BRICK_H), BUILD.pop);
+      return brickPose(i, brickHop(from, home, u, 2.5));
+    }
+    if (!to) return brickPose(i, home);
+    const k = s.order.indexOf(i);
+    const u = band(e, BUILD.pop + k * step, BUILD.pop + k * step + BUILD.fly);
+    return brickPose(i, brickHop(home, to, u, 2 + 0.6 * to.p[1]));
+  });
+  if (e !== null) {
+    if (!s.popped && e >= BUILD.pop * 0.8 && s.from.some(Boolean)) {
+      s.popped = true;
+      out.cues.push({ voice: "clatter", vol: 0.6 });
+    }
+    // A click as each brick lands.
+    while (s.clicks < s.order.length && e >= BUILD.pop + s.clicks * step + BUILD.fly) {
+      s.clicks++;
+      out.cues.push({ voice: "click", f: 2100 + 90 * (s.clicks % 4), decay: 1.3, vol: 0.9 });
+      out.resort = true;
+    }
+    if (!s.sorted && e >= BUILD.pop) {
+      // The old model is back on the table: sort the bricks where they lie.
+      s.sorted = true;
+      out.resort = true;
+    }
+  }
+}
 
 // ---- Dice ----------------------------------------------------------------------------
 
@@ -625,10 +780,267 @@ const BURST = [
 // lift takes and when it is let go, the pendulum's period, the swing kept
 // at each strike, and how long a tap plays.
 const CRADLE = { amp: 0.8, lift: 0.35, release: 0.55, period: 1.3, loss: 0.84, secs: 9 };
-const cradle = { hits: 0 };
+const cradle = { hits: 0, grab: null, free: null };
+const CRADLE_TOP = 1.0; // where the strings hang from
+const CRADLE_Y = 0.2; // the balls' centres at rest
+const cradleX = (i) => (i - 2) * 0.3;
+// The ball a point is on (or -1).
+function cradleBall(p) {
+  if (Math.abs(p[1] - CRADLE_Y) > 0.24) return -1;
+  const k = clamp(Math.round(p[0] / 0.3 + 2), 0, 4);
+  return Math.abs(p[0] - cradleX(k)) < 0.22 ? k : -1;
+}
+// The pointer's angle about ball k's pivot (0 straight down, + to the right).
+const cradlePointer = (k, p) => Math.atan2(p[0] - cradleX(k), CRADLE_TOP - p[1]);
+// The balls' angles `s` seconds after m balls were let go from one side at
+// angle amp: a quarter swing to the first strike, then half swings, the m
+// balls at the far end flying out and back each time, a little lower. A
+// clack at each strike; the middle balls twitch with the knock. `e` is the
+// time the swing dies away by (it fades over its last two seconds).
+function cradleSwing(s, m, left, amp0, out, e = s) {
+  const { period, loss } = CRADLE;
+  const a = [0, 0, 0, 0, 0];
+  const near = (i) => (left ? i < m : i > 4 - m);
+  const far = (i) => (left ? i > 4 - m : i < m);
+  const dir = left ? -1 : 1;
+  const first = period / 4;
+  let knock = 0;
+  if (s < first) {
+    const v = dir * amp0 * Math.cos(((s / first) * Math.PI) / 2);
+    for (let i = 0; i < 5; i++) if (near(i)) a[i] = v;
+  } else {
+    const n = Math.floor((s - first) / (period / 2));
+    const f = (s - first - (n * period) / 2) / (period / 2);
+    const fade = 1 - Math.min(1, Math.max(0, (e - CRADLE.secs + 2) / 2));
+    const amp = amp0 * Math.pow(loss, n + 1) * fade;
+    const swing = amp * Math.sin(Math.PI * f);
+    // Even half swings: the far balls fly out; odd ones: the near balls.
+    for (let i = 0; i < 5; i++) {
+      if (n % 2 === 0 && far(i)) a[i] = -dir * swing;
+      else if (n % 2 === 1 && near(i)) a[i] = dir * swing;
+    }
+    knock = Math.exp(-f * 18) * amp;
+    const hits = n + 1;
+    if (cradle.hits < hits && amp > 0.03) {
+      cradle.hits = hits;
+      out.cues.push({ voice: "clack", f: 2600, decay: 0.9, vol: Math.min(1, 0.35 + amp * (0.8 + 0.2 * m)) }); // prettier-ignore
+    }
+  }
+  // The knock travels through the balls that stay put.
+  for (let i = 0; i < 5; i++) if (!near(i) && !far(i)) a[i] = 0.012 * knock * Math.sin(i * 2.1);
+  return a;
+}
+
+// ---- Puzzle cube -----------------------------------------------------------------
+// The cube is 3 units wide, centred on the origin: 26 cubies, each a token
+// turned about the centre by its own quaternion. A turn is { axis (0-2),
+// layer (-1, 0 or 1), q (quarter turns, +1 or -1 about the axis) }.
+
+const CUBE_TAP = 4; // seconds a scramble or a solve takes
+const CUBE_SNAP = 0.16; // seconds a let-go layer takes to snap into place
+// Sticker colours by face (+x, -x, +y, -y, +z, -z).
+const CUBE_COLOURS = ["#c41e3a", "#ff6d1f", "#f6f6f1", "#ffd21a", "#0aa04f", "#1b4fc4"];
+const CUBIES = [];
+for (let x = -1; x <= 1; x++)
+  for (let y = -1; y <= 1; y++)
+    for (let z = -1; z <= 1; z++) if (x || y || z) CUBIES.push([x, y, z]);
+const AXES = [
+  [1, 0, 0],
+  [0, 1, 0],
+  [0, 0, 1],
+];
+const cube = { c: null };
+function cubeReset() {
+  Object.assign(cube, {
+    q: CUBIES.map(() => [0, 0, 0, 1]),
+    pos: CUBIES.map((h) => h.slice()),
+    history: [], // turns made since solved, simplified as they come
+    seq: null, // a tap's turns: { turns, done }
+    live: null, // the layer under the finger: { axis, layer, angle }
+    drag: null,
+    snap: null, // a let-go layer easing into place: { axis, layer, from, to, at }
+    cheer: -100, // when it was last solved by hand
+    cues: [],
+  });
+}
+cubeReset();
+const cubeBusy = () => !!(cube.seq || cube.snap || cube.live) || cube.lastTime - cube.cheer < 1.2;
+const roundV = (v) => v.map((x) => Math.round(x));
+// The cubies in a layer.
+const layerOf = (axis, layer) => CUBIES.map((_, i) => i).filter((i) => cube.pos[i][axis] === layer); // prettier-ignore
+// Makes a turn for good (the state moves on by whole quarter turns).
+function cubeApply(t, record = true) {
+  const r = quatAxisAngle(AXES[t.axis], (t.q * Math.PI) / 2);
+  for (const i of layerOf(t.axis, t.layer)) {
+    cube.q[i] = quatMul(r, cube.q[i]);
+    const l = Math.hypot(...cube.q[i]);
+    cube.q[i] = cube.q[i].map((v) => v / l);
+    cube.pos[i] = roundV(quatRotate(r, cube.pos[i]));
+  }
+  // Sort the cubies again where they now stand (splats sort in the pose
+  // they were built in).
+  cube.resort = true;
+  if (!record) return;
+  // The history keeps turns short: a turn undoing the last one cancels it,
+  // and turns of the same layer add up (four make none).
+  const h = cube.history;
+  const last = h[h.length - 1];
+  if (last && last.axis === t.axis && last.layer === t.layer) {
+    last.q = ((((last.q + t.q) % 4) + 5) % 4) - 1; // -1, 0, 1 or 2
+    if (last.q === 0) h.pop();
+  } else h.push({ ...t });
+}
+// Solved when each face shows one colour (the whole cube may have turned).
+function cubeSolved() {
+  const seen = {};
+  for (let i = 0; i < CUBIES.length; i++) {
+    const home = CUBIES[i];
+    for (let ax = 0; ax < 3; ax++) {
+      if (!home[ax]) continue;
+      const n = [0, 0, 0];
+      n[ax] = home[ax];
+      const now = roundV(quatRotate(cube.q[i], n)).join();
+      const colour = ax * 2 + (home[ax] > 0 ? 0 : 1);
+      if ((seen[now] ??= colour) !== colour) return false;
+    }
+  }
+  return true;
+}
+// The face a point on the cube is on: its axis, side and normal.
+function cubeFace(p) {
+  let a = 0;
+  for (let i = 1; i < 3; i++) if (Math.abs(p[i]) > Math.abs(p[a])) a = i;
+  const s = p[a] < 0 ? -1 : 1;
+  const n = [0, 0, 0];
+  n[a] = s;
+  return { a, s, n };
+}
+function cubeDragStart(p) {
+  cube.drag = cubeBusy() ? null : { p0: p, ...cubeFace(p) };
+}
+// The finger's path across the face picks the row or column (whichever
+// way it moves more), then turns it by the arc it has travelled.
+function cubeDragMove(p) {
+  const d = cube.drag;
+  if (!d) return;
+  const dv = sub(p, d.p0);
+  if (!cube.live) {
+    const [b1, b2] = [0, 1, 2].filter((i) => i !== d.a);
+    const b = Math.abs(dv[b1]) >= Math.abs(dv[b2]) ? b1 : b2;
+    if (Math.abs(dv[b]) < 0.2) return;
+    const axis = 3 - d.a - b;
+    // Which way round the axis moves the face's surface along +b.
+    const k = cross(AXES[axis], d.n)[b];
+    cube.live = { axis, b, k, layer: clamp(Math.round(d.p0[axis]), -1, 1), angle: 0 };
+  }
+  const L = cube.live;
+  L.angle = clamp((dv[L.b] * L.k) / 1.5, -Math.PI, Math.PI);
+}
+function cubeDragEnd(time) {
+  const L = cube.live;
+  cube.drag = null;
+  if (!L) return;
+  cube.live = null;
+  const to = Math.round(L.angle / (Math.PI / 2));
+  cube.snap = { axis: L.axis, layer: L.layer, from: L.angle, to, at: time };
+}
+function cubeDrive(c, out, info) {
+  const m = mem(c);
+  if (!m.cube) {
+    // A newly loaded cube starts solved.
+    m.cube = true;
+    cubeReset();
+  }
+  const now = info.time;
+  cube.lastTime = now;
+  const click = (vol = 1) => out.cues.push({ voice: "click", f: 1500 + 300 * Math.random(), decay: 1.4, vol }); // prettier-ignore
+  // A tap: scramble a solved cube, or play its turns back to solved.
+  if (fired(m, "twist", c.twist)) {
+    if (cube.seq) for (const t of cube.seq.turns.slice(cube.seq.done)) cubeApply(t);
+    cube.live = cube.drag = cube.snap = null;
+    let turns;
+    if (!cube.history.length || cubeSolved()) {
+      cube.history = [];
+      turns = [];
+      let seed = (info.tap?.n ?? 1) * 7919 + Math.floor(now * 1000);
+      while (turns.length < 14) {
+        seed = hashInt(seed);
+        const t = { axis: seed % 3, layer: ((seed >> 3) % 3) - 1, q: (seed >> 6) % 2 ? 1 : -1 };
+        const last = turns[turns.length - 1];
+        if (last && last.axis === t.axis && last.layer === t.layer) continue;
+        turns.push(t);
+      }
+    } else {
+      // Undo the history, split into quarter turns.
+      turns = [];
+      for (const h of cube.history.slice().reverse()) {
+        const n = Math.abs(h.q);
+        for (let j = 0; j < n; j++) turns.push({ axis: h.axis, layer: h.layer, q: -Math.sign(h.q) }); // prettier-ignore
+      }
+    }
+    cube.seq = { turns, done: 0, solving: !!cube.history.length };
+  }
+  let anim = null;
+  if (cube.seq) {
+    const { turns } = cube.seq;
+    const slot = c.twist > 0 ? (1 - c.twist) * turns.length : turns.length;
+    while (cube.seq.done < Math.min(turns.length, Math.floor(slot))) {
+      cubeApply(turns[cube.seq.done++], !cube.seq.solving);
+      click(0.8);
+    }
+    if (cube.seq.done >= turns.length) {
+      if (cube.seq.solving) cube.history = [];
+      cube.seq = null;
+    } else {
+      const t = turns[cube.seq.done];
+      anim = { axis: t.axis, layer: t.layer, angle: easeInOut(slot - cube.seq.done) * t.q * (Math.PI / 2) }; // prettier-ignore
+    }
+  } else if (cube.live) anim = cube.live;
+  else if (cube.snap) {
+    const s = cube.snap;
+    const f = band(
+      now - s.at,
+      0,
+      CUBE_SNAP * Math.max(0.5, Math.abs(s.to * (Math.PI / 2) - s.from)),
+    );
+    if (f >= 1 || now < s.at) {
+      cube.snap = null;
+      const q = ((s.to % 4) + 4) % 4;
+      if (q) {
+        cubeApply({ axis: s.axis, layer: s.layer, q: q === 3 ? -1 : q === 2 ? 2 : 1 });
+        click();
+        if (cubeSolved()) {
+          cube.history = [];
+          cube.cheer = now;
+          out.cues.push({ voice: "ding", f: 1319, decay: 1, vol: 0.8, at: 0.1 });
+        }
+      }
+    } else {
+      anim = { axis: s.axis, layer: s.layer, angle: s.from + (s.to * (Math.PI / 2) - s.from) * easeOut(f) }; // prettier-ignore
+    }
+  }
+  out.resort = !!cube.resort;
+  cube.resort = false;
+  const turning = anim ? new Set(layerOf(anim.axis, anim.layer)) : null;
+  const r = anim ? quatAxisAngle(AXES[anim.axis], anim.angle) : null;
+  out.tokens = CUBIES.map((_, i) => ({
+    base: [0, 0, 0],
+    quat: turning?.has(i) ? quatMul(r, cube.q[i]) : cube.q[i],
+  }));
+  // Solved by hand: a happy hop with a full spin.
+  const e = now - cube.cheer;
+  if (e >= 0 && e < 1.2) {
+    const f = e / 1.2;
+    out.body = { offset: [0, 0.18 * bump(f), 0], quat: quatAxisAngle([0, 1, 0], TAU * easeInOut(band(f, 0.05, 0.9))) }; // prettier-ignore
+  }
+}
 
 export const RECIPES = {
   bricks: {
+    // Eighteen bricks lie poured out round the table. A tap builds a random
+    // model in the middle (a tower, a bridge, stairs, a dog or a tree),
+    // brick by brick from the bottom up, each one clicking into place; the
+    // next tap pops that model apart and builds another.
     options: [
       {
         key: "colors",
@@ -643,45 +1055,37 @@ export const RECIPES = {
         ],
       },
     ],
-    controls: [{ key: "snap", label: "Snap", type: "pulse", ease: 1.5 }],
-    action: { key: "snap", label: "Pop the bricks" },
-    drive(t, c, out) {
-      const p = 1 - c.snap;
-      if (c.snap <= 0) return;
-      PILE.forEach((b, i) => {
-        const d = (b[4] * 3 + (i % 3)) * 0.06;
-        out.parts["brick" + i] = { offset: [0, 0.9 * bump((p - d) / 0.4), 0] };
-      });
+    // More splats for eighteen small bricks and their studs.
+    density: 1.5,
+    controls: [{ key: "snap", label: "Build", type: "pulse", ease: BUILD.secs }],
+    action: { key: "snap", label: "Build something" },
+    drive(t, c, out, info) {
+      bricksDrive(c, out, info);
     },
     build(k, o) {
       const pal = BRICK_COLOURS[o.colors] || BRICK_COLOURS.classic;
-      const H = 1.2;
-      PILE.forEach(([w, d, cx, cz, layer, ci, turn], i) => {
-        const col = pal[ci % pal.length];
-        const cy = layer * H + H / 2;
-        const yaw = (turn * Math.PI) / 180;
-        const part = k.part("brick" + i, { pivot: [cx, cy, cz] });
-        const hx = w / 2 - 0.02;
-        const hy = H / 2 - 0.01;
-        const hz = d / 2 - 0.02;
-        k.add(roundBox(hx * 2, hy * 2, hz * 2, 0.05, { bottom: false }), {
-          pos: [cx, cy, cz],
-          rot: [0, turn, 0],
-          part,
-          flat: 0.15,
+      const H = BRICK_H;
+      BRICKS.forEach((b, i) => {
+        const [w, d] = BRICK_KINDS[b.kind];
+        const col = pal[b.colour % pal.length];
+        const opts = { kind: "token", params: [i, 0], flat: 0.15, even: true };
+        const yaw = (b.yaw * Math.PI) / 180;
+        const centre = [b.x, H / 2, b.z];
+        k.add(roundBox(w - 0.04, H - 0.02, d - 0.04, 0.05, { bottom: false }), {
+          ...opts,
+          pos: centre,
+          rot: [0, b.yaw, 0],
           color: (c) => {
             const col2 = lit(col, c.n, { amb: 0.66, dif: 0.42, spec: 0.3, pow: 40 });
             return c.s.face < 0 ? mix(col2, "#ffffff", 0.08) : col2;
           },
         });
         for (let a = 0; a < w; a++)
-          for (let b = 0; b < d; b++) {
-            const local = [a - (w - 1) / 2, H / 2 + 0.09, b - (d - 1) / 2];
-            const pos = add([cx, cy, cz], rotY(local, yaw));
+          for (let e = 0; e < d; e++) {
+            const local = [a - (w - 1) / 2, H / 2 + 0.09, e - (d - 1) / 2];
             k.add(k.cylinder(0.29, 0.18, { caps: "top" }), {
-              pos,
-              part,
-              flat: 0.15,
+              ...opts,
+              pos: add(centre, rotY(local, yaw)),
               weight: 1.4,
               color: (c) => {
                 if (c.s.cap) {
@@ -694,7 +1098,8 @@ export const RECIPES = {
             });
           }
       });
-      k.reach([0, 4.6, 0]);
+      // Room above for the tallest model.
+      k.reach([0, 6 * BRICK_H + 0.3, 0]);
     },
   },
 
@@ -1054,49 +1459,62 @@ export const RECIPES = {
     // A tap lifts the end ball and lets it go: it strikes the row, the far
     // ball flies out and falls back, and so on, each strike a clack and a
     // little lower, the middle balls twitching as the knock passes through.
+    // Or drag a ball out to the side (the balls beside it come along) and
+    // let go: as many balls fly out the other side as were let go.
+    alive: () => !!(cradle.grab || cradle.free),
     controls: [{ key: "swing", label: "Swing", type: "pulse", ease: CRADLE.secs }],
     action: { key: "swing", label: "Lift and let go" },
-    drive(t, c, out) {
-      const e = c.swing > 0 ? (1 - c.swing) * CRADLE.secs : -1;
-      if (e < 0) {
+    note: "Drag a ball out to the side and let go.",
+    drag: {
+      at: (p) => cradleBall(p) >= 0,
+      plane: [0, 0, 1],
+      start(p) {
+        const k = cradleBall(p);
+        cradle.grab = { k, a0: cradlePointer(k, p), angle: 0 };
+      },
+      move(p) {
+        const g = cradle.grab;
+        if (!g) return;
+        g.angle = clamp(cradlePointer(g.k, p) - g.a0, -1.1, 1.1);
+      },
+      end(time) {
+        const g = cradle.grab;
+        cradle.grab = null;
+        if (!g || Math.abs(g.angle) < 0.06) return;
+        const left = g.angle < 0;
+        cradle.free = { m: left ? g.k + 1 : 5 - g.k, left, amp: Math.abs(g.angle), at: time };
         cradle.hits = 0;
-        return;
+      },
+    },
+    drive(t, c, out, info) {
+      const m = mem(c);
+      if (!m.cradle) {
+        m.cradle = true;
+        cradle.grab = cradle.free = null;
       }
-      const { lift, release, period, loss } = CRADLE;
-      let a0 = 0;
-      let a4 = 0;
-      let knock = 0;
-      if (e < release) {
-        // Lifted out on its strings, held a moment.
-        a0 = -CRADLE.amp * Math.sin((Math.PI / 2) * Math.min(1, e / lift)) ** 2;
+      // A tap takes over from a swing that was let go by hand.
+      if (fired(m, "swing", c.swing)) cradle.free = null;
+      let a = [0, 0, 0, 0, 0];
+      if (cradle.grab) {
+        const { k, angle } = cradle.grab;
+        for (let i = 0; i < 5; i++) if (angle < 0 ? i <= k : i >= k) a[i] = angle;
+      } else if (cradle.free) {
+        const f = cradle.free;
+        const e = info.time - f.at;
+        if (e < 0 || e > CRADLE.secs) cradle.free = null;
+        else a = cradleSwing(e, f.m, f.left, f.amp, out);
       } else {
-        // Falling: a quarter swing to the first strike, then half swings.
-        const s = e - release;
-        const first = period / 4;
-        if (s < first) a0 = -CRADLE.amp * Math.cos(((s / first) * Math.PI) / 2);
-        else {
-          const n = Math.floor((s - first) / (period / 2));
-          const f = (s - first - (n * period) / 2) / (period / 2);
-          // (It dies away over the last two seconds.)
-          const fade = 1 - Math.min(1, Math.max(0, (e - CRADLE.secs + 2) / 2));
-          const amp = CRADLE.amp * Math.pow(loss, n + 1) * fade;
-          const swing = amp * Math.sin(Math.PI * f);
-          if (n % 2 === 0) a4 = swing;
-          else a0 = -swing;
-          knock = Math.exp(-f * 18) * amp;
-          // A clack at each strike, softer as it dies down.
-          const hits = n + 1;
-          if (cradle.hits < hits && amp > 0.03) {
-            cradle.hits = hits;
-            out.cues.push({ voice: "clack", f: 2600, decay: 0.9, vol: Math.min(1, 0.35 + amp) });
-          }
+        const e = c.swing > 0 ? (1 - c.swing) * CRADLE.secs : -1;
+        if (e < 0) {
+          cradle.hits = 0;
+          return;
         }
+        // Lifted out on its strings and held a moment, then let go.
+        const { lift, release } = CRADLE;
+        if (e < release) a[0] = -CRADLE.amp * Math.sin((Math.PI / 2) * Math.min(1, e / lift)) ** 2;
+        else a = cradleSwing(e - release, 1, true, CRADLE.amp, out, e);
       }
-      out.parts.ball0 = { angle: a0 };
-      out.parts.ball4 = { angle: a4 };
-      // The knock travels through the middle three.
-      for (let i = 1; i <= 3; i++)
-        out.parts["ball" + i] = { angle: 0.012 * knock * Math.sin(i * 2.1) };
+      for (let i = 0; i < 5; i++) out.parts["ball" + i] = { angle: a[i] };
     },
     build(k) {
       const rb = 0.15;
@@ -1399,56 +1817,56 @@ export const RECIPES = {
   },
 
   "puzzle-cube": {
-    controls: [{ key: "twist", label: "Twist", type: "pulse", ease: 0.7 }],
-    action: { key: "twist", label: "Twist the top" },
-    drive(t, c, out) {
-      const m = mem(c);
-      if (fired(m, "twist", c.twist)) m.turns = (m.turns ?? 0) + 1;
-      const n = m.turns ?? 0;
-      const a = n ? (n - 1 + easeInOut(1 - c.twist)) * (Math.PI / 2) : 0;
-      out.parts.layer = { angle: -a };
+    // A real 3x3 cube: 26 cubies (tokens) and the cube state in JavaScript.
+    // Swipe across a face to turn that row or column (it follows the finger
+    // and snaps to the nearest quarter turn when let go); a tap scrambles a
+    // solved cube, or turns a scrambled one back to solved, one layer at a
+    // time. Solving it by hand earns a little hop and a chime.
+    alive: () => cubeBusy(),
+    // More splats: 26 cubies spend half theirs on faces hidden inside.
+    density: 1.8,
+    controls: [{ key: "twist", label: "Scramble", type: "pulse", ease: CUBE_TAP }],
+    action: { key: "twist", label: "Scramble or solve" },
+    // For tests: whether each face shows one colour, and the turns since.
+    cube: { solved: () => cubeSolved(), turns: () => cube.history.length },
+    note: "Swipe across a face to turn a row or a column. Tap to scramble, or to solve it again.",
+    drag: {
+      at: () => !cubeBusy(),
+      plane: (p) => cubeFace(p).n,
+      start: (p) => cubeDragStart(p),
+      move: (p) => cubeDragMove(p),
+      end: (time) => cubeDragEnd(time),
+    },
+    drive(t, c, out, info) {
+      cubeDrive(c, out, info);
     },
     build(k) {
-      const COLS = {
-        "+x": "#c41e3a",
-        "-x": "#ff6d1f",
-        "+y": "#f6f6f1",
-        "-y": "#ffd21a",
-        "+z": "#0aa04f",
-        "-z": "#1b4fc4",
-      };
       const plastic = "#141518";
-      const faceKey = ["+x", "-x", "+y", "-y", "+z", "-z"];
-      const sticker = (c, inner) => {
-        const f = c.s.face;
-        if (f < 0 || inner) return lit(plastic, c.n, { amb: 0.9, dif: 0.5, spec: 0.12 });
-        const ax = f >> 1;
-        const a = c.p[(ax + 1) % 3] + 1.5;
-        const b = c.p[(ax + 2) % 3] + 1.5;
-        const la = Math.abs((a % 1) - 0.5);
-        const lb = Math.abs((b % 1) - 0.5);
-        const r = 0.1;
-        const qa = Math.max(la - (0.43 - r), 0);
-        const qb = Math.max(lb - (0.43 - r), 0);
-        if (Math.hypot(qa, qb) > r) return lit(plastic, c.n, { amb: 0.9, dif: 0.5, spec: 0.12 });
-        const col = lit(COLS[faceKey[f]], c.n, { amb: 0.72, dif: 0.35, spec: 0.45, pow: 30 });
-        return keep(mix(col, "#ffffff", 0.12 * smoothstep(0.2, 0.45, Math.max(la, lb))));
-      };
-      k.add(roundBox(3, 2, 3, 0.1), {
-        pos: [0, -0.5, 0],
-        flat: 0.15,
-        interior: 0.1,
-        core: "#23242a",
-        color: (c) => sticker(c, c.s.face === 2),
-      });
-      const layer = k.part("layer", { pivot: [0, 0, 0] });
-      k.add(roundBox(3, 1, 3, 0.1), {
-        pos: [0, 1, 0],
-        part: layer,
-        flat: 0.15,
-        interior: 0.1,
-        core: "#23242a",
-        color: (c) => sticker(c, c.s.face === 3),
+      const lightOf = (col, n) => lit(col, n, { amb: 0.8, dif: 0.22, spec: 0.3, pow: 30 });
+      CUBIES.forEach((home, i) => {
+        k.add(roundBox(0.97, 0.97, 0.97, 0.09), {
+          pos: home,
+          kind: "token",
+          params: [i, 0],
+          flat: 0.15,
+          even: true,
+          color: (c) => {
+            const f = c.s.face;
+            if (f < 0) return lightOf(plastic, c.n);
+            const ax = f >> 1;
+            const sign = f % 2 ? -1 : 1;
+            // Only the cube's outside faces carry stickers.
+            if (home[ax] !== sign) return lightOf(plastic, c.n);
+            const la = Math.abs(c.lp[(ax + 1) % 3]);
+            const lb = Math.abs(c.lp[(ax + 2) % 3]);
+            const r = 0.1;
+            const qa = Math.max(la - (0.41 - r), 0);
+            const qb = Math.max(lb - (0.41 - r), 0);
+            if (Math.hypot(qa, qb) > r) return lightOf(plastic, c.n);
+            const col = lightOf(CUBE_COLOURS[f], c.n);
+            return keep(mix(col, "#ffffff", 0.1 * smoothstep(0.2, 0.41, Math.max(la, lb))));
+          },
+        });
       });
     },
   },

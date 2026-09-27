@@ -781,6 +781,18 @@ export class Player {
     return [0, 1, 2].map((i) => m[i] / tf.scale + tf.center[i]);
   }
 
+  // The inverse: a point in the current toy's recipe coordinates in the world.
+  fromRecipe(p) {
+    const tf = this.motion.ctx?.transform;
+    if (!tf || !this.stage.toy) return p.slice();
+    return this.stage.modelToWorld([0, 1, 2].map((i) => (p[i] - tf.center[i]) * tf.scale));
+  }
+
+  // Where a recipe point shows on the canvas (CSS pixels), for tests and clips.
+  screenPoint(p) {
+    return this.stage.toScreen(this.fromRecipe(p));
+  }
+
   // ---- Frame ------------------------------------------------------------------
 
   // Effect settings with the idle behaviour blended in.
@@ -999,7 +1011,10 @@ export class Player {
   }
 
   // A recipe's own drag (the laptop's trackpad): `drag.at(point)` says
-  // whether a drag starting there is the toy's; otherwise it orbits.
+  // whether a drag starting there is the toy's; otherwise it orbits. The
+  // pointer follows the horizontal plane the drag started on, or the plane
+  // `drag.plane` names: "view" (facing the camera) or a normal in recipe
+  // coordinates (or `(point) => normal`, such as the face of a cube).
   dragStartsHere(world) {
     const d = this.toyInfo?.recipe?.drag;
     return !d || !!d.at(this.toRecipe(world));
@@ -1010,7 +1025,10 @@ export class Player {
     const drag = info.recipe.drag;
     if (drag) {
       this.dragY = world[1];
-      drag.start?.(this.toRecipe(world), this.time);
+      const p = this.toRecipe(world);
+      const n = typeof drag.plane === "function" ? drag.plane(p) : drag.plane;
+      this.dragPlane = n ? { point: p, normal: n === "view" ? this.recipeRay(x, y).dir : n } : null; // prettier-ignore
+      drag.start?.(p, this.time);
       this.stage.requestRender();
       return;
     }
@@ -1023,6 +1041,21 @@ export class Player {
 
   grabAt(x, y) {
     const drag = this.toyInfo?.recipe?.drag;
+    if (drag && this.dragPlane) {
+      // Across the recipe's own plane, in recipe coordinates.
+      const { point: o, normal: n } = this.dragPlane;
+      const ray = this.recipeRay(x, y);
+      const den = ray.dir[0] * n[0] + ray.dir[1] * n[1] + ray.dir[2] * n[2];
+      if (Math.abs(den) < 1e-4) return;
+      const t = ((o[0] - ray.origin[0]) * n[0] + (o[1] - ray.origin[1]) * n[1] + (o[2] - ray.origin[2]) * n[2]) / den; // prettier-ignore
+      if (t < 0) return;
+      drag.move(
+        [0, 1, 2].map((i) => ray.origin[i] + ray.dir[i] * t),
+        this.time,
+      );
+      this.stage.requestRender();
+      return;
+    }
     if (drag) {
       // Across the horizontal plane the drag started on.
       const ray = this.stage.ray(x, y);
@@ -1053,10 +1086,22 @@ export class Player {
     this.stage.requestRender();
   }
 
+  // The pointer's ray in the current toy's recipe coordinates (the
+  // direction is a unit vector).
+  recipeRay(x, y) {
+    const ray = this.stage.ray(x, y);
+    const o = this.toRecipe(ray.origin);
+    const b = this.toRecipe(ray.origin.map((v, i) => v + ray.dir[i]));
+    const d = [b[0] - o[0], b[1] - o[1], b[2] - o[2]];
+    const l = Math.hypot(d[0], d[1], d[2]) || 1;
+    return { origin: o, dir: [d[0] / l, d[1] / l, d[2] / l] };
+  }
+
   // Lets go. Returns how far it was stretched, in toy radii.
   grabEnd() {
     const drag = this.toyInfo?.recipe?.drag;
     if (drag) {
+      this.dragPlane = null;
       drag.end?.(this.time);
       this.stage.requestRender();
       return 0;
