@@ -2095,7 +2095,7 @@ const CURVES = [
   { id: "epitrochoid", label: "Epitrochoid", eq: "x = 4cos t − a·cos 4t, y = 4sin t − a·sin 4t", a: [0.5, 1.5, 2.5] }, // prettier-ignore
   { id: "involute", label: "Involute of a circle", eq: "x = cos t + a·t·sin t, y = sin t − a·t·cos t", range: [0, 5 * Math.PI], a: [0.6, 1, 1.4] }, // prettier-ignore
   { id: "conic", label: "Conic sections", eq: "r = 1/(1 + a·cos θ)", a: [0, 0.5, 1.6] },
-  { id: "folium", label: "Folium of Descartes", eq: "x = 3a·t/(1 + t³), y = 3a·t²/(1 + t³)", range: [-8, 8], a: [0.6, 1, 1.4] }, // prettier-ignore
+  { id: "folium", label: "Folium of Descartes", eq: "x = 3a·t/(1 + t³), y = 3a·t²/(1 + t³)", range: [-8, 8], a: [0.6, 1, 1.4], win: [-2.6, 2.2, -2.6, 2.2] }, // prettier-ignore
   { id: "tractrix", label: "Tractrix", eq: "x = t − tanh t, y = a/cosh t", range: [-5, 5], a: [0.5, 1, 1.5] }, // prettier-ignore
   { id: "freeth", label: "Freeth's nephroid", eq: "r = 1 + 2sin(a·θ/2)", range: [0, 4 * Math.PI], a: [0.8, 1, 1.2] }, // prettier-ignore
 ];
@@ -2169,24 +2169,34 @@ function makePlot(parsed, spec, b) {
   const at = (a) => us.map((u) => curvePoint(parsed, u, a, b));
   const rest = at(A[1]);
   const all = usesA ? knots.map((a) => at(a)) : [rest];
-  // The window: robust bounds over every knot (a few wild points, near an
-  // asymptote, are left off the board).
-  const xs = [];
-  const ys = [];
-  for (const list of all)
-    for (const p of list) {
-      if (!p) continue;
-      xs.push(p[0]);
-      ys.push(p[1]);
-    }
-  if (xs.length < 8) return { ok: false };
-  xs.sort((p, q) => p - q);
-  ys.sort((p, q) => p - q);
-  const cut = parsed.kind === "y" ? 0.03 : 0.004;
-  let x0;
-  let x1;
-  let y0 = percentile(ys, cut);
-  let y1 = percentile(ys, 1 - cut);
+  // The window: robust bounds of the curve at rest (a few wild points, near
+  // an asymptote, are left off the board), widened a little towards where
+  // the sweep takes it, so the curve bends within the board.
+  const bounds = (lists, cut) => {
+    const xs = [];
+    const ys = [];
+    for (const list of lists)
+      for (const p of list) {
+        if (!p) continue;
+        xs.push(p[0]);
+        ys.push(p[1]);
+      }
+    if (xs.length < 8) return null;
+    xs.sort((p, q) => p - q);
+    ys.sort((p, q) => p - q);
+    return [percentile(xs, cut), percentile(xs, 1 - cut), percentile(ys, cut), percentile(ys, 1 - cut)]; // prettier-ignore
+  };
+  const cut = parsed.kind === "y" ? 0.02 : 0.004;
+  const R = bounds([rest], cut);
+  if (!R) return { ok: false };
+  const U = usesA ? bounds(all, cut * 2) : R;
+  const widen = (r0, r1, u0, u1) => {
+    const span = Math.max(r1 - r0, 1e-6);
+    return [Math.min(r0, Math.max(u0, r0 - 0.25 * span)), Math.max(r1, Math.min(u1, r1 + 0.25 * span))]; // prettier-ignore
+  };
+  let [x0, x1] = widen(R[0], R[1], U[0], U[1]);
+  let [y0, y1] = widen(R[2], R[3], U[2], U[3]);
+  if (spec.win) [x0, x1, y0, y1] = spec.win;
   if (parsed.kind === "y") {
     x0 = range[0];
     x1 = range[1];
@@ -2198,12 +2208,10 @@ function makePlot(parsed, spec, b) {
     y0 -= pad;
     y1 += pad;
   } else {
-    x0 = percentile(xs, cut);
-    x1 = percentile(xs, 1 - cut);
     const cx = (x0 + x1) / 2;
     const cy = (y0 + y1) / 2;
     // Equal scales, so circles stay round.
-    let half = Math.max((x1 - x0) / PLOT_W, (y1 - y0) / PLOT_H) * 0.56;
+    let half = Math.max((x1 - x0) / PLOT_W, (y1 - y0) / PLOT_H) * (spec.win ? 0.5 : 0.56);
     if (!(half > 1e-6)) half = 1;
     x0 = cx - half * PLOT_W;
     x1 = cx + half * PLOT_W;
@@ -2428,7 +2436,8 @@ function plotSlider(k, at, { part = null } = {}) {
     pos: [x, y, z + 0.03],
     rot: [90, 0, 0],
     part: knob,
-    weight: 2.5,
+    weight: 1.2,
+    size: 1.3,
     pattern: false,
     color: (c) => lit(c.s.cap ? "#ffd166" : "#d9a93f", c.n, { amb: 0.72, dif: 0.35, spec: 0.5 }),
   });
@@ -2585,7 +2594,8 @@ Object.assign(RECIPES, {
       // The curve at rest: it appears behind the pen as channel 0 falls.
       k.add(ribbon(g.rest, g.us, 0.026), {
         part: k.part("curve"),
-        weight: 9,
+        weight: 2.5,
+        size: 1.5,
         flat: 0.5,
         stretch: 1.4,
         kind: "fade",
@@ -2600,15 +2610,19 @@ Object.assign(RECIPES, {
         const next = g.knots[j + 1];
         k.add(ribbon(g.knotPieces[j], g.us, 0.026), {
           part: k.part(`sweep${j}`),
-          weight: 6,
+          weight: 2,
+          size: 1.5,
           flat: 0.6,
           channel: 1,
           pattern: false,
           to: (c) => {
             const p = g.point(c.s.u, next);
             const P = p && g.toBoard(p);
-            if (!P || !g.inside(P) || Math.hypot(P[0] - c.s.c0[0], P[1] - c.s.c0[1]) > 1.2) return null; // prettier-ignore
-            return [P[0] + c.p[0] - c.s.c0[0], P[1] + c.p[1] - c.s.c0[1], c.p[2]];
+            if (!P || Math.hypot(P[0] - c.s.c0[0], P[1] - c.s.c0[1]) > 1.2) return null;
+            // Past the edge of the board it runs along the edge.
+            const X = clamp(P[0] + c.p[0] - c.s.c0[0], -PLOT_W / 2, PLOT_W / 2);
+            const Y = clamp(P[1] + c.p[1] - c.s.c0[1], -PLOT_H / 2, PLOT_H / 2);
+            return [X, Y, c.p[2]];
           },
           color: col,
         });
@@ -2740,7 +2754,7 @@ const SURFACE_INPUT = {
 Object.assign(RECIPES, {
   "surface-plotter": {
     alive: true,
-    density: 1.6,
+    density: 1.25,
     options: [
       {
         key: "surface",
@@ -2819,15 +2833,41 @@ Object.assign(RECIPES, {
         const fv = Math.abs(((((V / gridStep[1] - gridOff[1]) % 1) + 1) % 1) - 0.5);
         return Math.max(fu, fv) > 0.47;
       };
-      // Coloured by height, with a fine mesh of darker lines, two-sided.
-      const look = (a) => (c) => {
-        const p = g.point(c.u, c.v, a);
-        if (!p) return null;
-        let col = ramp(SURF_RAMP, (p[1] + SURF_H) / (2 * SURF_H));
+      // Coloured by height, with a fine mesh of darker lines, two-sided. A
+      // point off the plot is marked `bad` (a hole).
+      const look = (c) => {
+        if (c.s.p.bad) return null;
+        let col = ramp(SURF_RAMP, (c.p[1] + SURF_H) / (2 * SURF_H));
         if (onLine(c.u, c.v)) col = shade(col, 0.62);
         return lit(col, c.n, { amb: 0.66, dif: 0.42, spec: 0.22, two: true });
       };
-      const sheet = (a) => k.param((U, V) => g.point(U, V, a) || [U * 2 - 1, g.floorY, 1 - V * 2], { grid: 90 }); // prettier-ignore
+      // Normals from a grid of heights (cheaper than asking the equation
+      // twice more for every splat).
+      const G = 90;
+      const sheet = (a) => {
+        const H = new Float64Array((G + 1) * (G + 1));
+        for (let j = 0; j <= G; j++)
+          for (let i = 0; i <= G; i++)
+            H[j * (G + 1) + i] = g.point(i / G, j / G, a)?.[1] ?? g.floorY;
+        const h = (i, j) => H[Math.min(G, Math.max(0, j)) * (G + 1) + Math.min(G, Math.max(0, i))];
+        const normal = (u, v) => {
+          const i = Math.round(u * G);
+          const j = Math.round(v * G);
+          const dx = (h(i + 1, j) - h(i - 1, j)) / (4 / G); // per unit of X
+          const dz = (h(i, j + 1) - h(i, j - 1)) / (4 / G); // per unit of -Z
+          return [-dx, 1, dz];
+        };
+        return k.param(
+          (U, V) => {
+            const p = g.point(U, V, a);
+            if (p) return p;
+            const q = [U * 2 - 1, g.floorY, 1 - V * 2];
+            q.bad = true;
+            return q;
+          },
+          { grid: G, normal },
+        );
+      };
       // At rest; it morphs down to the flat sheet on channel 0.
       k.add(sheet(g.A[1]), {
         part: k.part("surface"),
@@ -2836,7 +2876,7 @@ Object.assign(RECIPES, {
         jitter: 0.01,
         channel: 0,
         to: (c) => [c.p[0], g.floorY, c.p[2]],
-        color: look(g.A[1]),
+        color: look,
       });
       for (let j = 0; j < copies; j++) {
         const next = g.knots[j + 1];
@@ -2849,7 +2889,7 @@ Object.assign(RECIPES, {
           jitter: 0.01,
           channel: 1,
           to: (c) => g.point(c.u, c.v, next),
-          color: look(g.knots[j]),
+          color: look,
         });
       }
       // A dark base plate under it, and the a slider in front.
@@ -2947,14 +2987,13 @@ Object.assign(RECIPES, {
       const running = on && e < 4.15;
       out.parts.arm = { angle: th };
       const p0 = ucPoint(0);
-      const s0 = ucSine(0);
-      const c0 = ucCosine(0);
-      // The heads ride the waves while it runs; at rest they wait at the
-      // start of each wave (the waves are drawn in full).
+      // The heads ride the waves; at rest they wait at the far end of
+      // each wave (where a turn leaves them).
+      const hth = on ? th : TAU;
       out.tokens = [
         { offset: sub(ucPoint(th), p0) },
-        { offset: sub(ucSine(th), s0) },
-        { offset: sub(ucCosine(th), c0) },
+        { offset: sub(ucSine(hth), ucSine(TAU)) },
+        { offset: sub(ucCosine(hth), ucCosine(TAU)) },
       ];
       // Channel 0 wipes and redraws the waves; channel 3 lights the terms.
       out.morph = [running && f < 1 ? 1.002 - f : 0, 0, 0, on ? band(e, 0.35, 3.2) * (1 - band(e, 4.3, 4.95)) : 0]; // prettier-ignore
@@ -3001,7 +3040,8 @@ Object.assign(RECIPES, {
       k.add(
         pathRibbon((f) => ucPoint(TAU * f), 160, 0.022),
         {
-          weight: 5,
+          weight: 2,
+          size: 1.5,
           flat: 0.4,
           stretch: 1.5,
           pattern: false,
@@ -3013,7 +3053,8 @@ Object.assign(RECIPES, {
         pathRibbon((f) => [cx + UC_R * f, cy, 0.035], 20, 0.014),
         {
           part: k.part("arm", { pivot: [cx, cy, 0.035], axis: [0, 0, 1] }),
-          weight: 4,
+          weight: 2,
+          size: 1.4,
           flat: 0.4,
           stretch: 1.5,
           pattern: false,
@@ -3025,7 +3066,8 @@ Object.assign(RECIPES, {
         k.add(
           pathRibbon((f) => fn(TAU * f), 240, 0.024),
           {
-            weight: 6,
+            weight: 2.5,
+            size: 1.4,
             flat: 0.5,
             stretch: 1.4,
             kind: "fade",
@@ -3048,8 +3090,8 @@ Object.assign(RECIPES, {
           color: (c) => keep(mix(col, "#ffffff", 0.35 * Math.max(0, dot(c.n, HALF)))),
         });
       bead(ucPoint(0), 0, "#ffe08a", 0.042);
-      bead(ucSine(0), 1, UC_SIN, 0.034);
-      bead(ucCosine(0), 2, UC_COS, 0.034);
+      bead(ucSine(TAU), 1, UC_SIN, 0.034);
+      bead(ucCosine(TAU), 2, UC_COS, 0.034);
       // Dotted guides from the point to each head (skinned between tokens).
       const guide = (a, b, i, j, col) =>
         k.cloud({ count: 70, pattern: false }, (rand, n, N) => {
@@ -3062,8 +3104,8 @@ Object.assign(RECIPES, {
             skin: [i, j, s],
           };
         });
-      guide(ucPoint(0), ucSine(0), 0, 1, "#ff9aa8");
-      guide(ucPoint(0), ucCosine(0), 0, 2, "#9dd0ff");
+      guide(ucPoint(0), ucSine(TAU), 0, 1, "#ff9aa8");
+      guide(ucPoint(0), ucCosine(TAU), 0, 2, "#9dd0ff");
       // Euler's formula, dim, with a bright copy of each term that fades
       // in on channel 3.
       const h = 0.1;
@@ -3262,7 +3304,8 @@ Object.assign(RECIPES, {
           {
             // prettier-ignore
             ...opt,
-            weight: 2.5,
+            weight: 1.6,
+            size: 1.3,
             flat: 0.4,
             opacity: 0.7,
             pattern: false,
@@ -3276,7 +3319,8 @@ Object.assign(RECIPES, {
           {
             // prettier-ignore
             ...opt,
-            weight: 4,
+            weight: 2,
+            size: 1.3,
             flat: 0.4,
             pattern: false,
             color: "#f1f5ff",
@@ -3289,7 +3333,8 @@ Object.assign(RECIPES, {
         ? (f) => [WAVE_X0 + WAVE_W * f, fourierChain(F, TAU * f).tip[1], Z]
         : (f) => [...fourierChain(F, TAU * f).tip, Z];
       k.add(pathRibbon(trace, 700, 0.026), {
-        weight: 6,
+        weight: 2.5,
+        size: 1.4,
         flat: 0.5,
         stretch: 1.4,
         kind: "fade",

@@ -10,8 +10,8 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 286 toys. 286 have a tap action today; the other 0 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 286.
+- 291 toys. 291 have a tap action today; the other 0 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 291.
 - **more** (has an effect; make it clearer or more dramatic): 0.
 - **new** (needs its own effect): 0.
 - Visual fixes: 0 open, 28 done. Touch or drag interaction asked for: 4.
@@ -44,9 +44,10 @@ Proposals below are suggestions; the owner may change them.
   Macarons, Gummy bear, Pretzel, Croissant, Sushi, Taco, Coffee, Apple, Bananas, Orange, Kiwi,
   Pineapple, Cherries, Grapes, Avocado, Building bricks, Rubber duck, Newton's cradle, Puzzle cube,
   Kite, Chess set, Lorenz attractor, Möbius strip, Klein bottle, Menger sponge, Hypercube, Torus
-  knot, Gyroid, Mandelbulb, Seashell spiral, Heraldic shield, Crown, Wizard's orb, Jellyfish, School
-  of fish, Pufferfish, Nautilus, Snail, Octopus, Sea urchin, Frog, Snowman, Fireworks, Decorated
-  tree, Diya, Acoustic guitar, Snare drum, Xylophone, Hot-air balloon, Bus, Jet airliner, Sailboat,
+  knot, Gyroid, Mandelbulb, Seashell spiral, Graph plotter, Surface plotter, Circle and waves,
+  Fourier circles, Pythagoras proof, Heraldic shield, Crown, Wizard's orb, Jellyfish, School of
+  fish, Pufferfish, Nautilus, Snail, Octopus, Sea urchin, Frog, Snowman, Fireworks, Decorated tree,
+  Diya, Acoustic guitar, Snare drum, Xylophone, Hot-air balloon, Bus, Jet airliner, Sailboat,
   Submarine, Bicycle, Eiffel Tower, Washington Monument, Pyramids of Giza, Twisting supertall,
   Statue of Liberty, White House, Leaning Tower of Pisa, Colosseum, Parthenon, Stonehenge, Big Ben,
   Taj Mahal, Castle, Pagoda, Windmill.
@@ -1419,7 +1420,7 @@ Proposals below are suggestions; the owner may change them.
     over). The Play button, the game bar and a tap beside the board still play the Opera Game.
   - Sound: Wooden piece clacks.
 
-## Maths (11)
+## Maths (16)
 
 - **Lorenz attractor** (`lorenz`). Now: tap: Race along the path. Plan: keep.
   - Owner: Spin a little more or be more dynamic; looks good when still.
@@ -1494,6 +1495,51 @@ Proposals below are suggestions; the owner may change them.
     down the spiral to the mouth, and a ripple rolls out of the opening with each one, widening and
     fading (about 4.5 s).
   - Sound: Ocean hush.
+- **Graph plotter** (`graph-plotter`). Now: tap: Draw it. Plan: keep.
+  - Owner: Toy Ideas page (approved, 2026-09-27): type y = …, r = … or x(t), y(t), or pick one of
+    about 40 famous curves.
+  - Effect: A pen traces the curve across a lit grid, then the a slider sweeps and the curve bends
+    in real time before settling back.
+  - Improved: Math: new toy. A tap wipes the curve and a pen draws it again across the lit grid,
+    humming a tone that follows its height; then the a slider sweeps up, down and back and the curve
+    bends with it (4.5 s). 42 famous curves, or your own equation typed in the Toy tab (read by a
+    safe reader, no eval); a is a live slider, b an option.
+  - Sound: A tone that follows the curve's height as the pen draws it.
+- **Surface plotter** (`surface-plotter`). Now: tap: Raise it. Plan: keep.
+  - Owner: Toy Ideas page (approved, 2026-09-27): type z = f(x, y), or pick a famous surface.
+  - Effect: The surface rises out of a flat sheet, colored by height, then its parameter plays so it
+    ripples, twists or breathes, and it settles.
+  - Improved: Math: new toy. A tap lays the surface flat, then it rises out of the sheet colored by
+    height, overshoots a little, and its parameter a plays so it ripples, twists or breathes before
+    settling (5 s). 16 famous surfaces (sombrero, saddle, monkey saddle, egg crate, Rosenbrock's
+    banana valley and more), or your own z = … typed in the Toy tab.
+  - Sound: A low whoosh that rises with the surface.
+- **Circle and waves** (`unit-circle`). Now: tap: Go round. Plan: keep.
+  - Owner: Toy Ideas page (approved, 2026-09-27).
+  - Effect: A point runs round the unit circle while its shadows unroll as a sine wave and a cosine
+    wave on two walls, and Euler's formula lights up term by term.
+  - Improved: Math: new toy. A tap sends the point once round the circle; dotted guides carry its
+    height to the sine wave on the right wall and its left-right place down to the cosine wave on
+    the lower wall, both drawn afresh, while e^(iθ) = cos θ + i sin θ lights up term by term in the
+    waves' colors (5 s).
+  - Sound: Two pure tones a quarter turn apart, swelling and fading with the waves.
+- **Fourier circles** (`fourier-circles`). Now: tap: Spin the circles. Plan: keep.
+  - Owner: Toy Ideas page (approved, 2026-09-27).
+  - Effect: A chain of spinning circles, each riding on the last, draws a shape with its tip; a
+    Circles option sets how many.
+  - Improved: Math: new toy. A tap spins the chain of circles once round and the tip draws the shape
+    again: a heart, a star or a square wave (drawn out to the right). The Circles option runs from a
+    wobbly 3 to a crisp 60 (5 s).
+  - Sound: Each circle hums its own frequency, building into a chord.
+- **Pythagoras proof** (`pythagoras-proof`). Now: tap: Rearrange. Plan: keep.
+  - Owner: Toy Ideas page (approved, 2026-09-27).
+  - Effect: Four copies of a right triangle slide as solid pieces inside a big square, so the empty
+    space changes from a² + b² into c²; then they slide back.
+  - Improved: Math: new toy. A tap slides the wooden triangles one at a time from two rectangles
+    into the four corners: the empty squares a² and b² fade and the tilted square c² lights up, with
+    a² + b² = c² below; then they slide back (4.5 s). In this classic arrangement the pieces slide
+    without turning, and one stays put.
+  - Sound: Wooden slides, and a click as each piece lands.
 
 ## Medieval (9)
 

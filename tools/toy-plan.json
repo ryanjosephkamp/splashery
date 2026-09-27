@@ -1453,6 +1453,41 @@
       "owner": "Perfect.",
       "sound": "Five-note chime."
     },
+    "graph-plotter": {
+      "v": "keep",
+      "owner": "Toy Ideas page (approved, 2026-09-27): type y = …, r = … or x(t), y(t), or pick one of about 40 famous curves.",
+      "effect": "A pen traces the curve across a lit grid, then the a slider sweeps and the curve bends in real time before settling back.",
+      "sound": "A tone that follows the curve's height as the pen draws it.",
+      "improved": "Math: new toy. A tap wipes the curve and a pen draws it again across the lit grid, humming a tone that follows its height; then the a slider sweeps up, down and back and the curve bends with it (4.5 s). 42 famous curves, or your own equation typed in the Toy tab (read by a safe reader, no eval); a is a live slider, b an option."
+    },
+    "surface-plotter": {
+      "v": "keep",
+      "owner": "Toy Ideas page (approved, 2026-09-27): type z = f(x, y), or pick a famous surface.",
+      "effect": "The surface rises out of a flat sheet, colored by height, then its parameter plays so it ripples, twists or breathes, and it settles.",
+      "sound": "A low whoosh that rises with the surface.",
+      "improved": "Math: new toy. A tap lays the surface flat, then it rises out of the sheet colored by height, overshoots a little, and its parameter a plays so it ripples, twists or breathes before settling (5 s). 16 famous surfaces (sombrero, saddle, monkey saddle, egg crate, Rosenbrock's banana valley and more), or your own z = … typed in the Toy tab."
+    },
+    "unit-circle": {
+      "v": "keep",
+      "owner": "Toy Ideas page (approved, 2026-09-27).",
+      "effect": "A point runs round the unit circle while its shadows unroll as a sine wave and a cosine wave on two walls, and Euler's formula lights up term by term.",
+      "sound": "Two pure tones a quarter turn apart, swelling and fading with the waves.",
+      "improved": "Math: new toy. A tap sends the point once round the circle; dotted guides carry its height to the sine wave on the right wall and its left-right place down to the cosine wave on the lower wall, both drawn afresh, while e^(iθ) = cos θ + i sin θ lights up term by term in the waves' colors (5 s)."
+    },
+    "fourier-circles": {
+      "v": "keep",
+      "owner": "Toy Ideas page (approved, 2026-09-27).",
+      "effect": "A chain of spinning circles, each riding on the last, draws a shape with its tip; a Circles option sets how many.",
+      "sound": "Each circle hums its own frequency, building into a chord.",
+      "improved": "Math: new toy. A tap spins the chain of circles once round and the tip draws the shape again: a heart, a star or a square wave (drawn out to the right). The Circles option runs from a wobbly 3 to a crisp 60 (5 s)."
+    },
+    "pythagoras-proof": {
+      "v": "keep",
+      "owner": "Toy Ideas page (approved, 2026-09-27).",
+      "effect": "Four copies of a right triangle slide as solid pieces inside a big square, so the empty space changes from a² + b² into c²; then they slide back.",
+      "sound": "Wooden slides, and a click as each piece lands.",
+      "improved": "Math: new toy. A tap slides the wooden triangles one at a time from two rectangles into the four corners: the empty squares a² and b² fade and the tilted square c² lights up, with a² + b² = c² below; then they slide back (4.5 s). In this classic arrangement the pieces slide without turning, and one stays put."
+    },
     "seashell-spiral": {
       "v": "keep",
       "owner": "Something to do with hearing the ocean in a seashell.",

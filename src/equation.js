@@ -65,9 +65,9 @@ const NAMES = [...Object.keys(FUNCS), ...Object.keys(CONSTS), ...Object.keys(ALI
 // Symbols people paste from phones and word processors, turned into the
 // plain ones.
 function normalize(text) {
+  const SUP = "⁰¹²³⁴⁵⁶⁷⁸⁹";
   return String(text)
-    .replace(/²/g, "^2")
-    .replace(/³/g, "^3")
+    .replace(/[⁰¹²³⁴⁵⁶⁷⁸⁹]+/g, (m) => `^${[...m].map((d) => SUP.indexOf(d)).join("")}`)
     .normalize("NFKC")
     .replace(/[−–—]/g, "-")
     .replace(/[×·⋅∙*]{1,2}/g, (m) => (m === "**" ? "^" : "*"))

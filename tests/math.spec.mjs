@@ -52,6 +52,9 @@ test.describe("equation reader", () => {
     close(ev("5 − 2"), 3);
     close(ev("x²", { x: 3 }), 9);
     close(ev("x³", { x: 2 }), 8);
+    close(ev("x⁴ − x²", { x: 2 }), 12);
+    close(ev("2¹⁰"), 1024);
+    close(ev("y⁵", { y: 2 }), 32);
     close(ev("√4"), 2);
     close(ev("√(x+5)", { x: 4 }), 3);
     close(ev("π"), Math.PI);
