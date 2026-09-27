@@ -76,21 +76,77 @@ The two fixes:
 
 ## State
 
-Started September 27, 2026. Branch `claude/lane-math-typed`; PR "Phase Math: math you can type, and
-two fixes" (draft).
+Started September 27, 2026. Branch `claude/lane-math-typed`; draft PR #50, "Phase Math: math you can
+type, and two fixes". Everything in the brief is built; clips go on the Effect review page (lane
+`Math`, cards `math-*`).
 
-- [ ] Equation reader (`src/equation.js`) and its unit tests
-- [ ] Graph plotter
-- [ ] Surface plotter
-- [ ] Circle and waves
-- [ ] Fourier circles
-- [ ] Pythagoras proof
-- [ ] Snail fix
-- [ ] American football fix
-- [ ] Clips posted on the Effect review page
+- Equation reader: `src/equation.js` (no eval or Function; closures built from a small grammar).
+  Unit tests in `tests/math.spec.mjs`, including hostile input and 4,000 random strings.
+- Graph plotter (`graph-plotter`): 42 famous curves, or your own `y = …`, `r = …` (θ) or
+  `x = …, y = …` (t) typed in the Toy tab. a is a live slider (it bends the curve), b an option for
+  typed curves. Tap: 4.5 s.
+- Surface plotter (`surface-plotter`): 16 famous surfaces, or your own `z = …` (x, y, r, θ). Tap: 5
+  s.
+- Circle and waves (`unit-circle`), Fourier circles (`fourier-circles`: heart, star, square wave; 3
+  to 60 circles) and Pythagoras proof (`pythagoras-proof`). Taps: 5, 5 and 4.5 s.
+- Snail fix and American football fix (below).
 
 ## Notes
 
+- **Curves that bend in real time.** Splats can't be moved freely each frame, so the plotters build
+  the curve (or surface) once at rest and once at each of nine values of a across the slider; copy j
+  morphs exactly into copy j + 1 on channel 1, and the copy for the slider's place is shown (parts,
+  so at most 15). The shape passes exactly through each knot and moves in straight lines between
+  them. A cyclic parameter (a phase, as in Lissajous or the ripples) runs one way round.
+- **Drawing behind a pen.** The rest copy uses `kind: "fade"` on channel 0 with `at = 1.002 − s` (s
+  the arc fraction): the channel falls from 1 to 0 as the pen moves, so the ink appears exactly
+  behind it, crisp (fade changes alpha, not size).
+- **The tone that follows the curve** is `out.cues`: every 0.09 s while the pen draws, drive pushes
+  a short gliding tone whose pitch maps the pen's height (two octaves). So the sound fits any typed
+  curve with no engine change.
+- **Typed text in links.** `normalizeScene` keeps only printable ASCII text options, so typed
+  equations are stored in an ASCII form (`asciiEquation`: θ → theta, x² → x^2, · and × → \*, − → -).
+  The panel shows that form.
+- **Tiny splats vanish.** A heavily weighted thin ribbon (weight 9) got splats so small that the
+  curve vanished below about 300 px. Fewer, bigger splats (weight 2 to 2.5, size 1.5) fixed it.
+- **Moving far across a board.** Pieces that cross a lot of the board (the Pythagoras triangles, the
+  Fourier rings turning) drew under it: sorted in their built pose. The triangles are tokens
+  re-sorted six times per slide (`out.resort`); the Fourier board sits well behind the rings.
+- **Snail.** Its body is 23 tokens: eight slices of the foot, the head, four pieces of neck, and
+  each stalk in four pieces plus its eye. The stalks telescope into the head (tip first), the head
+  and neck follow a path down the neck and back along the foot into the shell's opening, the front
+  of the foot slides back and the tail forward, each piece vanishing once it is behind the shell,
+  and the tokens are re-sorted every sixteenth of the way. A dark disc just inside the opening is
+  the drawn-in body. Hide takes 3.2 s (was 2.4 s).
+- **American football.** Built twice (PACKS.md 7b, rule 1): the second copy half a turn round its
+  long axis, and whichever is within a quarter turn of its built pose shows. The cull flag (rule 9)
+  did not suit it: it hides by the direction from the centre, which cuts off the ends of a long
+  ball. The spiral is six whole turns, so it lands laces up. Its inside hides while it spins.
+  `density: 2`.
+
 ## Known issues
 
+- The input panel always shows a file button (the engine adds it); the plotters' reads a text file's
+  first line as an equation (`Open a text file…`).
+- Between the nine knots a point moves in a straight line, so a travelling wave dips slightly in
+  height mid-step (about 8% for the cyclic ones). It reads as smooth motion at phone size.
+- A curve that runs off the board during the sweep slides along the board's edge until it comes
+  back.
+- Pythagoras proof: in this classic arrangement the triangles slide without turning (and one stays
+  put), so "slide and turn" became "slide".
+- Circle and waves: the "two walls" are two panels in the plane of the circle, beside and below it
+  (the classic diagram), so the waves read face on.
+- Fourier circles: the "wave" is a square wave, drawn out to the right from the tip's height.
+
 ## For the Operator
+
+- PACKS.md lesson: a set of copies, each morphing exactly into the next, gives real-time bending
+  through keyframes of any shape (the plotters); the `fade` kind on a channel draws a line crisply
+  behind a moving pen.
+- PACKS.md lesson: `out.cues` can make a sound that follows the effect (the plotter's pitch).
+- PACKS.md lesson: a thin ribbon with a high weight gets splats too small to see below about 300 px.
+- PACKS.md, draw order rule 9: the cull flag suits round bodies only; a long one (a football) loses
+  its ends, so use two copies (rule 1).
+- Engine idea (not needed now): `normalizeScene` drops non-ASCII text options, so typed text with θ
+  or ² is kept in an ASCII form. An engine change could allow Unicode letters.
+- No exceptions needed in `tests/taps.spec.mjs`.
