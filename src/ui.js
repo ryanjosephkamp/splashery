@@ -574,6 +574,9 @@ export function createUI(app) {
 
   // A toy that plays a game (the chess set): load a game from a PGN file or
   // pasted text, or go back to its own game.
+  // The open game panel: it follows a game that changes on the board by
+  // itself (a move played by tapping the pieces starts your own game).
+  let panelRefresh = null;
   function renderGamePanel(game) {
     const box = document.createElement("div");
     box.className = "game-box";
@@ -657,6 +660,7 @@ export function createUI(app) {
       els.toyAction.textContent = app.player?.toyInfo?.recipe?.action?.label || els.toyAction.textContent; // prettier-ignore
       refreshGameBar();
     };
+    panelRefresh = { game, title: game.title(), refresh };
     const load = async (source) => {
       error.hidden = true;
       try {
@@ -814,7 +818,14 @@ export function createUI(app) {
     els.gamePlay.dataset.playing = String(playing());
     els.gamePlay.setAttribute("aria-label", playing() ? "Pause" : "Play");
   }
-  setInterval(() => barGame && !document.hidden && refreshGameBar(), 250);
+  setInterval(() => {
+    if (!barGame || document.hidden) return;
+    const p = panelRefresh;
+    if (p && p.game === barGame && p.game.title() !== p.title) {
+      p.title = p.game.title();
+      p.refresh();
+    } else refreshGameBar();
+  }, 250);
   const pause = () => app.setControl("play", 0);
   $("game-start").addEventListener("click", () => {
     pause();
