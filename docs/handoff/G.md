@@ -33,7 +33,18 @@ PR title: "Phase G: AI image-to-3D trial".
 
 ## State
 
-Not started.
+In progress on `claude/lane-g-image-to-3d` (2026-09-27).
+
+- `HF_TOKEN` checked with whoami: account `ryanjosephkamp`, role `read`.
+- Space: `trellis-community/TRELLIS` (ZeroGPU, MIT; runs `microsoft/TRELLIS-image-large`, MIT;
+  background removal is `rembg` with `u2net`, Apache-2.0). `microsoft/TRELLIS` itself is down
+  (config error). `tencent/Hunyuan3D-2` and `-2.1` run too, but their Tencent community licence
+  excludes some regions and outputs a mesh, so they were not used.
+- `tools/image-to-3d.mjs` runs one photo through the Space with plain fetch (no new devDependency)
+  and saves the cut-out, the Space's turntable and the Gaussians (PLY) to `.cache/g/out/<name>/`.
+  One run takes about 30 s of wall time.
+- `tools/splat-views.mjs` renders a PLY from four sides in the real app. TRELLIS PLYs need
+  `rotate: [180, 0, 0]`, like the SuperSplat scans.
 
 ## Notes
 
