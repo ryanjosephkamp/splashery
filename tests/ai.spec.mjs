@@ -15,6 +15,11 @@ import { RECIPES } from "../src/packs/computing.js";
 const IDS = ["perceptron", "neural-network", "cnn", "rnn", "transformer", "looped-transformer", "diffusion-model", "gradient-descent", "word-vectors", "sorting-machine", "half-adder"]; // prettier-ignore
 const PLAN = JSON.parse(fs.readFileSync(new URL("../tools/toy-plan.json", import.meta.url), "utf8")).toys; // prettier-ignore
 
+// The word vectors toy reads its word list before it builds.
+test.beforeAll(async () => {
+  await RECIPES["word-vectors"].prepare({});
+});
+
 function build(id, options = {}) {
   const r = RECIPES[id];
   const opts = Object.fromEntries((r.options || []).map((o) => [o.key, o.default]));
@@ -201,3 +206,22 @@ for (const [id, label, wait] of [
     }
   });
 }
+
+test("word vectors: typed words work out A − B + C from the real vectors", async () => {
+  const r = RECIPES["word-vectors"];
+  const cases = [
+    ["king - man + woman", "queen"],
+    ["Paris minus France plus Italy", "rome"],
+  ];
+  for (const [typed, answer] of cases) {
+    const o = await r.input.read(typed);
+    const kit = build("word-vectors", o);
+    expect(kit.data.words.answer, typed).toBe(answer);
+  }
+  await expect(r.input.read("king - man")).rejects.toThrow(/three words/);
+  await expect(r.input.read("king - zzqx + woman")).rejects.toThrow(/not one of/);
+  // A word it does not know in a saved link falls back to the default.
+  expect(build("word-vectors", { a: "zzqx", b: "man", c: "woman" }).data.words.answer).toBe(
+    "queen",
+  );
+});

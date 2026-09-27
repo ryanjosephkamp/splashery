@@ -646,23 +646,145 @@ const GD = (() => {
   return { f, H, R, paths, t0: 0.3, dt: 0.165 };
 })();
 
-// Word vectors: words as points in space. The step from MAN to WOMAN, added
-// to KING, lands right next to QUEEN.
-const WV = (() => {
-  const words = {
-    KING: [-0.4, 0.52, 0.3],
-    MAN: [-0.85, -0.02, 0.22],
-    WOMAN: [-0.05, 0.04, -0.3],
-    QUEEN: [0.46, 0.63, -0.25],
-    APPLE: [0.62, -0.12, 0.45],
-    DOG: [0.72, 0.02, -0.55],
+// Word vectors: real word embeddings (GloVe, 50 dimensions, built into
+// assets/toys/word-vectors/words.txt by tools/word-vectors.mjs). A − B + C
+// is worked out over all 50 dimensions, and the nearest of the 10,000 most
+// common words (leaving out A, B and C) is the answer. The toy shows a 3-D
+// slice through the words: two axes along A − B and C − B, so the
+// parallelogram of arrows is exact, and the third along the step from the
+// sum to the answer, so the answer's true distance from the sum shows.
+const WV_SHOWN = { label: "king − man + woman ≈ queen" };
+const WORDS = { list: null, vec: null, index: null, common: 10000, dims: 50 };
+async function readAsset(rel) {
+  const url = new URL(rel, import.meta.url);
+  if (url.protocol === "file:") {
+    const fs = await import("node:fs/promises");
+    return fs.readFile(url, "utf8");
+  }
+  const r = await fetch(url);
+  if (!r.ok) throw new Error(`Could not load ${rel.split("/").pop()}.`);
+  return r.text();
+}
+async function loadWords() {
+  if (WORDS.list) return;
+  const [line, data] = (await readAsset("../../assets/toys/word-vectors/words.txt")).split("\n");
+  const bin = atob(data.trim());
+  const vec = new Float32Array(bin.length);
+  for (let i = 0; i < bin.length; i++) vec[i] = ((bin.charCodeAt(i) << 24) >> 24) / 127;
+  WORDS.list = line.trim().split(" ");
+  WORDS.index = new Map(WORDS.list.map((w, i) => [w, i]));
+  WORDS.vec = vec;
+}
+const wordVec = (i) => Array.from(WORDS.vec.subarray(i * WORDS.dims, (i + 1) * WORDS.dims));
+const nsub = (a, b) => a.map((x, i) => x - b[i]);
+const nadd = (a, b) => a.map((x, i) => x + b[i]);
+const ndot = (a, b) => a.reduce((s, x, i) => s + x * b[i], 0);
+const nunit = (a) => {
+  const l = Math.sqrt(ndot(a, a)) || 1;
+  return a.map((x) => x / l);
+};
+// The words of a typed sum: "king - man + woman", "king man woman" or
+// "king minus man plus woman".
+function parseSum(text) {
+  const words = String(text || "")
+    .toLowerCase()
+    .replace(/\b(minus|plus)\b|[-+−=,]/g, " ")
+    .split(/\s+/)
+    .filter(Boolean);
+  if (words.length !== 3) throw new Error("Type three words, like: king - man + woman.");
+  for (const w of words)
+    if (!WORDS.index.has(w))
+      throw new Error(`"${w}" is not one of the 24,000 words it knows. Try a more common word.`);
+  if (new Set(words).size < 3) throw new Error("Use three different words.");
+  return words;
+}
+// A − B + C: the sum, the answer (nearest common word by cosine) and the
+// runner-up.
+function analogy(a, b, c) {
+  const [va, vb, vc] = [a, b, c].map((w) => wordVec(WORDS.index.get(w)));
+  const r = nunit(nadd(nsub(va, vb), vc));
+  const best = [];
+  const n = Math.min(WORDS.common, WORDS.list.length);
+  for (let i = 0; i < n; i++) {
+    const w = WORDS.list[i];
+    if (w === a || w === b || w === c) continue;
+    const s = ndot(r, WORDS.vec.subarray(i * WORDS.dims, (i + 1) * WORDS.dims));
+    if (best.length < 2 || s > best[1][0]) {
+      best.push([s, w]);
+      best.sort((p, q) => q[0] - p[0]);
+      best.length = Math.min(2, best.length);
+    }
+  }
+  return { answer: best[0][1], score: best[0][0], runner: best[1][1] };
+}
+// Scene places for the words: B at the origin of the slice, the slice's
+// axes turned so the default (king, man, woman) looks as it always has.
+function wvLayout(a, b, c) {
+  const { answer, runner } = analogy(a, b, c);
+  const V = Object.fromEntries([a, b, c, answer, runner].map((w) => [w, wordVec(WORDS.index.get(w))])); // prettier-ignore
+  const sum = nadd(nsub(V[a], V[b]), V[c]);
+  // The slice: u1 along A − B, u2 along C − B, u3 along answer − sum.
+  const u1 = nunit(nsub(V[a], V[b]));
+  const cb = nsub(V[c], V[b]);
+  const u2 = nunit(
+    nsub(
+      cb,
+      u1.map((x) => x * ndot(cb, u1)),
+    ),
+  );
+  let off = nsub(V[answer], sum);
+  off = nsub(
+    off,
+    u1.map((x) => x * ndot(off, u1)),
+  );
+  off = nsub(
+    off,
+    u2.map((x) => x * ndot(off, u2)),
+  );
+  const u3 = nunit(off);
+  const slice = (v) => {
+    const d = nsub(v, V[b]);
+    return [ndot(d, u1), ndot(d, u2), ndot(d, u3)];
   };
-  const colors = { KING: "#ffc93c", QUEEN: "#ffc93c", MAN: "#5fb4ff", WOMAN: "#5fb4ff", APPLE: "#8fd694", DOG: "#8fd694" }; // prettier-ignore
-  const origin = [-0.55, -0.42, 0.55];
-  const result = add(words.KING, sub(words.WOMAN, words.MAN));
-  const floor = -0.42;
-  return { words, colors, origin, result, floor };
-})();
+  const e1 = unit([0.45, 0.54, 0.08]);
+  const e2 = unit(sub([0.8, 0.06, -0.52], mul(e1, dot([0.8, 0.06, -0.52], e1))));
+  const e3 = [e1[1] * e2[2] - e1[2] * e2[1], e1[2] * e2[0] - e1[0] * e2[2], e1[0] * e2[1] - e1[1] * e2[0]]; // prettier-ignore
+  // Each axis is scaled to fit (a linear map, so the parallelogram stays
+  // exact): A − B and C − B come out the same length.
+  const qa = slice(V[a]);
+  const qc = slice(V[c]);
+  const sa = Math.abs(qa[0]) || 1;
+  const sc = Math.hypot(qc[0] / sa, qc[1]) > 1e-6 ? Math.abs(qc[1]) || 1 : 1;
+  const map = (q) => add(add(mul(e1, q[0] / sa), mul(e2, q[1] / sc)), mul(e3, q[2] / sc));
+  const raw = {};
+  for (const [key, w] of [
+    ["a", a],
+    ["b", b],
+    ["c", c],
+  ])
+    raw[key] = map(slice(V[w]));
+  raw.sum = add(raw.a, sub(raw.c, raw.b));
+  // The answer and the runner-up sit off the sum by their true offset from
+  // it, measured on A − B's scale (the same on every axis).
+  const qs = slice(sum);
+  for (const [key, w] of [
+    ["answer", answer],
+    ["runner", runner],
+  ]) {
+    const d = nsub(slice(V[w]), qs).map((x) => x / sa);
+    raw[key] = add(raw.sum, add(add(mul(e1, d[0]), mul(e2, d[1])), mul(e3, d[2])));
+  }
+  const s = 1.0;
+  const pts = Object.values(raw);
+  const lo = [0, 1, 2].map((i) => Math.min(...pts.map((p) => p[i])));
+  const hi = [0, 1, 2].map((i) => Math.max(...pts.map((p) => p[i])));
+  const mid = [(lo[0] + hi[0]) / 2, lo[1] + 0.35, (lo[2] + hi[2]) / 2];
+  const place = (p) => add(sub(mul(p, s), mid), [0, -0.1, 0]);
+  const at = Object.fromEntries(Object.entries(raw).map(([k, p]) => [k, place(p)]));
+  const words = { a, b, c, answer, runner };
+  const span = [hi[0] - lo[0], hi[2] - lo[2]];
+  return { at, words, floor: -0.45, span };
+}
 
 // An arrow from a to b (a tube and a cone), drawn from a to b as its
 // channel rises.
@@ -1875,44 +1997,92 @@ export const RECIPES = {
     },
   },
   "word-vectors": {
+    options: [
+      { key: "a", label: "Word A", type: "text", default: "king", hidden: true },
+      { key: "b", label: "Word B", type: "text", default: "man", hidden: true },
+      { key: "c", label: "Word C", type: "text", default: "woman", hidden: true },
+    ],
+    async prepare() {
+      await loadWords();
+    },
+    input: {
+      title: "Your own words",
+      placeholder: "king - man + woman",
+      button: "Add them",
+      note: "Type A - B + C with three common English words (24,000 are built in, from GloVe). It works out A − B + C over all 50 dimensions and shows the nearest of the 10,000 most common words, with the runner-up in gray.",
+      async read(text) {
+        await loadWords();
+        const [a, b, c] = parseSum(text);
+        return { a, b, c };
+      },
+      shown: () => WV_SHOWN.label,
+    },
+    credits: [
+      {
+        label: "Word vectors",
+        title:
+          "GloVe: Global Vectors for Word Representation (Wikipedia 2014 + Gigaword 5, 50 dimensions)",
+        source: "https://nlp.stanford.edu/projects/glove/",
+        author: "Jeffrey Pennington, Richard Socher and Christopher D. Manning",
+        license: "ODC Public Domain Dedication and License 1.0",
+        licenseUrl: "https://opendatacommons.org/licenses/pddl/1.0/",
+      },
+    ],
     controls: [{ key: "go", label: "Add", type: "pulse", ease: 4 }],
-    action: { key: "go", label: "King − man + woman" },
-    // An arrow runs out to KING; another runs from MAN to WOMAN; a copy of
-    // that one runs on from KING and lands right next to QUEEN, which
-    // lights up.
+    action: { key: "go", label: "A − B + C" },
+    // A pink arrow runs from B to A (A − B) and a blue one from B to C; the
+    // same two steps run on from C and from A, closing the parallelogram at
+    // A − B + C, which lands next to the answer, and the answer lights up.
     drive(t, c, out) {
       const s = since(c.go, 4);
       const on = s >= 0;
       const draw = (a) => (on ? ease(band(s, a, a + 0.55)) * (1 - ease(band(s, 3.35, 3.8))) : 0);
       out.morph = [draw(0.15), draw(0.85), draw(1.55), on ? band(s, 2.25, 2.35) * (1 - band(s, 3.4, 3.8)) : 0]; // prettier-ignore
     },
-    build(k) {
-      const W = WV.words;
-      const F = WV.floor;
-      // The floor: a dark plate with a grid.
-      k.add(k.box(2.1, 0.04, 1.7), {
+    build(k, o) {
+      let a = String(o.a || "king").toLowerCase();
+      let b = String(o.b || "man").toLowerCase();
+      let c = String(o.c || "woman").toLowerCase();
+      if (![a, b, c].every((w) => WORDS.index?.has(w)) || new Set([a, b, c]).size < 3)
+        [a, b, c] = ["king", "man", "woman"];
+      const L = wvLayout(a, b, c);
+      const { at, words } = L;
+      WV_SHOWN.label = `${a} − ${b} + ${c} ≈ ${words.answer}`;
+      const F = L.floor;
+      // The floor: a dark plate with a grid, under all the words.
+      const fw = Math.max(2.1, (L.span[0] * 1.25) / 1.25 + 0.9);
+      k.add(k.box(fw, 0.04, 1.7), {
         pos: [0, F - 0.02, 0],
         even: true,
         flat: 0.25,
-        color: (c) => {
-          if (c.s.face !== 2) return keep(BOARD_RIM);
-          const gx = Math.abs(((c.p[0] / 0.2) % 1) + 1) % 1;
-          const gz = Math.abs(((c.p[2] / 0.2) % 1) + 1) % 1;
+        color: (cc) => {
+          if (cc.s.face !== 2) return keep(BOARD_RIM);
+          const gx = Math.abs(((cc.p[0] / 0.2) % 1) + 1) % 1;
+          const gz = Math.abs(((cc.p[2] / 0.2) % 1) + 1) % 1;
           return keep(Math.min(gx, 1 - gx, gz, 1 - gz) < 0.05 ? "#2d3a5c" : BOARD);
         },
       });
       // The words: a glowing point, a stem down to the floor and a sign.
-      for (const [word, p] of Object.entries(W)) {
-        const col = WV.colors[word];
+      const colors = {
+        a: "#ffc93c",
+        b: "#5fb4ff",
+        c: "#5fb4ff",
+        answer: "#ffc93c",
+        runner: "#9aa3b5",
+      };
+      for (const key of ["a", "b", "c", "answer", "runner"]) {
+        const p = at[key];
+        const col = colors[key];
         k.add(k.sphere(0.045), {
           pos: p,
           flat: 0.4,
           weight: 3,
           pattern: false,
-          color: (c) => keep(mix(col, "#ffffff", 0.5 * Math.max(0, c.n[1]))),
+          color: (cc) => keep(mix(col, "#ffffff", 0.5 * Math.max(0, cc.n[1]))),
         });
-        k.add(k.cylinder(0.006, p[1] - F), {
-          pos: [p[0], (p[1] + F) / 2, p[2]],
+        const h = Math.max(0.02, p[1] - F);
+        k.add(k.cylinder(0.006, h), {
+          pos: [p[0], F + h / 2, p[2]],
           flat: 0.4,
           weight: 1.5,
           pattern: false,
@@ -1924,11 +2094,13 @@ export const RECIPES = {
           pattern: false,
           color: () => keep(mix(col, BOARD, 0.55)),
         });
-        sign(k, word, add(p, [0, 0.13, 0]), 0.017, { color: col });
+        const lift = key === "runner" ? -0.13 : 0.13;
+        sign(k, words[key].toUpperCase(), add(p, [0, lift, 0]), 0.015, { color: col });
       }
-      // QUEEN lights up (channel 3): a halo round its point and a lit sign.
+      // The answer lights up (channel 3): a halo round its point and a lit
+      // sign.
       k.add(k.sphere(0.075), {
-        pos: W.QUEEN,
+        pos: at.answer,
         flat: 0.5,
         size: 1.3,
         opacity: 0.4,
@@ -1938,9 +2110,9 @@ export const RECIPES = {
         channel: 3,
         color: () => keep("#fff1a8"),
       });
-      const qw = (textWidth("QUEEN") + 5) * 0.017;
-      k.add(k.box(qw + 0.04, 12 * 0.017 + 0.04, 0.01), {
-        pos: add(W.QUEEN, [0, 0.13, -0.03]),
+      const qw = (textWidth(words.answer) + 5) * 0.015;
+      k.add(k.box(qw + 0.04, 12 * 0.015 + 0.04, 0.01), {
+        pos: add(at.answer, [0, 0.13, -0.03]),
         flat: 0.2,
         pattern: false,
         kind: "fade",
@@ -1948,15 +2120,15 @@ export const RECIPES = {
         channel: 3,
         color: () => keep("#ffd34d"),
       });
-      // The origin, and the arrows: to KING, from MAN to WOMAN, and the same
-      // step on from KING.
-      k.add(k.sphere(0.03), { pos: WV.origin, flat: 0.4, weight: 3, pattern: false, color: () => keep("#dfe8ff") }); // prettier-ignore
-      arrow(k, WV.origin, W.KING, 0.014, "#ffe28a", 0);
-      arrow(k, W.MAN, W.WOMAN, 0.014, "#ff6fb5", 1);
-      arrow(k, W.KING, WV.result, 0.014, "#ff6fb5", 2);
-      // Where the sum lands: a small star-white point.
+      // The arrows: B to A, B to C, then the same two steps from C and from
+      // A, meeting at A − B + C.
+      arrow(k, at.b, at.a, 0.014, "#ff6fb5", 0);
+      arrow(k, at.b, at.c, 0.014, "#4fc3ff", 1);
+      arrow(k, at.a, at.sum, 0.014, "#4fc3ff", 2);
+      arrow(k, at.c, at.sum, 0.014, "#ff6fb5", 2);
+      // Where the sum lands: a small white point.
       k.add(k.sphere(0.03), {
-        pos: WV.result,
+        pos: at.sum,
         flat: 0.4,
         weight: 3,
         pattern: false,
@@ -1965,6 +2137,7 @@ export const RECIPES = {
         channel: 3,
         color: () => keep("#ffffff"),
       });
+      k.data = { words };
     },
   },
   "sorting-machine": {

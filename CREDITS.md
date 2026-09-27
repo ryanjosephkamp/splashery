@@ -130,6 +130,16 @@ data files are in the public domain under
 | [1EMA](https://www.rcsb.org/structure/1EMA) | Green fluorescent protein from _Aequorea victoria_ (1996) | M. Ormö, S. J. Remington                                            |
 | [4HHB](https://www.rcsb.org/structure/4HHB) | Human deoxyhaemoglobin at 1.74 Å (1984)                   | G. Fermi, M. F. Perutz                                              |
 
+## Word vectors
+
+The word vectors toy uses [GloVe](https://nlp.stanford.edu/projects/glove/) word vectors (Wikipedia
+2014 + Gigaword 5, 50 dimensions) by Jeffrey Pennington, Richard Socher and Christopher D. Manning,
+Stanford NLP, released under the
+[ODC Public Domain Dedication and License 1.0](https://opendatacommons.org/licenses/pddl/1.0/).
+`tools/word-vectors.mjs` keeps the 24,000 most common plain words (leaving out words about violence,
+weapons and sex), scales each vector to unit length and packs it into
+[assets/toys/word-vectors/words.txt](assets/toys/word-vectors/words.txt).
+
 The molecule toy's built-in list and the structures you open yourself are read in your browser
 (`src/chem/`); nothing is fetched from anywhere else.
 
