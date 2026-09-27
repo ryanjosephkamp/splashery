@@ -19,12 +19,13 @@ work is in [OPERATING.md](OPERATING.md).
   owner approved all four clips.
 - Lane G merged on 2026-09-27 (#43): the real pencil and the real tin can, made from photos with a
   free image-to-3D model (TRELLIS on Hugging Face). They default to a yellow pencil and a "Peaches"
-  label, and the owner approved both.
+  label, and the owner approved both. Their Look choice followed (#47, an engine PR for looks on
+  captured toys, then #48): seven pencil looks and four can looks, the bare scan included.
 - The shelf has 286 toys (32 scans, 4 shapes and 250 kit toys; with the protein toy). The plan
   (`tools/toy-plan.json`, [TOY-PLAN.md](TOY-PLAN.md)): all 286 keep. Every planned new tap effect is
   built. Scene schema v3; v2 still loads.
 - Every kit toy's tap is checked by `tests/taps.spec.mjs`; its known exceptions (with reasons) are
-  listed at its top. The full suite has 161 tests.
+  listed at its top. The full suite has 164 tests.
 - Locked (owner approved, do not change its look or behaviour): the laptop. Its smoke test guards
   it.
 
@@ -32,16 +33,16 @@ work is in [OPERATING.md](OPERATING.md).
 
 The full table, with owned files, sessions, branches and PRs, is [WORKSTREAMS.md](WORKSTREAMS.md).
 
-| Lane              | Status                                | Handoff                       |
-| ----------------- | ------------------------------------- | ----------------------------- |
-| Operator          | Running                               | —                             |
-| G Looks for scans | Running: an engine PR, then the looks | [handoff/G.md](handoff/G.md)  |
-| H Later           | After the toy lanes                   | —                             |
-| New toys          | When the owner asks                   | The Toy Ideas page (approved) |
+| Lane     | Status              | Handoff                       |
+| -------- | ------------------- | ----------------------------- |
+| Operator | Running             | —                             |
+| H Later  | After the toy lanes | —                             |
+| New toys | When the owner asks | The Toy Ideas page (approved) |
 
-E4-finish, E5, E6a, E6b, F and the G trial are done (WORKSTREAMS.md, "Done"). Lane G now adds color
-choices (looks) to the pencil and the can, with an engine PR first. The Operator starts and runs the
-worker sessions; workers are Opus 5.5 at the default effort, a trial the owner chose on 2026-09-27.
+E4-finish, E5, E6a, E6b, F and G are done (WORKSTREAMS.md, "Done"), and no lane is running. The next
+lanes (AI and computing, Math you can type) start when the owner sends the prompt on the How
+Splashery Is Made page. The Operator starts and runs the worker sessions; workers are Opus 5.5 at
+the default effort, a trial the owner chose on 2026-09-27.
 
 The prompts are on the Splashery Parallel Plan page (OPERATING.md, "Pages").
 
