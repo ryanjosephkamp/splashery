@@ -1,22 +1,83 @@
 # Splashery roadmap
 
-## Now: polish phases (v4)
+## Now: the plan from September 27, 2026
 
-v3 shipped on 2026-09-23 (PRs #4–#11, 283 toys). The next work runs in phases. Since 2026-09-26 the
-remaining phases run as parallel lanes, one session each, with an Operator session that keeps the
-plan ([OPERATING.md](OPERATING.md), [WORKSTREAMS.md](WORKSTREAMS.md)). The current state is in
-[HANDOFF.md](HANDOFF.md).
+The owner approved this plan on September 27, 2026 (Part 1 of the How Splashery Is Made page). The
+Operator runs the lanes ([OPERATING.md](OPERATING.md), [WORKSTREAMS.md](WORKSTREAMS.md)); the
+current state is in [HANDOFF.md](HANDOFF.md).
+
+| Step | What                                                                                                                                                                                                |
+| ---- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1    | Running: lane AI (11 AI and computing toys) and lane Math (5 math toys you can type, a safe equation reader, the snail and football fixes).                                                         |
+| 2    | The sound overhaul: the owner's notes go on the Sound Board, sound lanes build new sounds there, he approves them, and they go into the site. A "Sound preferences" section follows from his notes. |
+| 3    | Pianos and songs: the five approved pianos, a song bar based on the chess bar, and MIDI files.                                                                                                      |
+| 4    | A sound round for the new AI and Math toys.                                                                                                                                                         |
+| 5    | Physics and hands-on play (below): the engine and four showcase toys, then a hands-on plan for every toy, then category lanes.                                                                      |
+| 6    | The Toy Workshop, the "Take it to your AI" package, submissions and the gallery; the flag toy (it needs the cloth).                                                                                 |
+| 7    | Last: the American English sweep, `docs/HOW-IT-WORKS.md`, the blog post, a "How it's made" page and the homepage embeds.                                                                            |
+
+Whenever a slot is free: a Real objects lane for the approved scans (historical figures, real
+vehicles, and the everyday objects as real captures), as brand-free sources turn up.
+
+### Hands-on play
+
+- Three controls on the stage: **▶ Play** runs the toy's animation (today's tap); **✋ Hands-on** is
+  a switch (off: everything works as today; on: a drag on the toy grabs what's under the finger, a
+  drag beside it or with two fingers turns the view, and a tap on a piece does that piece's action);
+  **↺ Reset** sends every piece home.
+- Toys that are hands-on already (the laptop, xylophone, chess, puzzle cube, Newton's cradle, gummy
+  bear, bricks, and the pianos when they come) start with the switch on and keep their controls.
+- Two levels: every toy can be picked up and tossed (it lands, bounces and settles; soft ones
+  squish), scans included; rich toys come apart into pieces (blocks to build with, sushi and
+  chopsticks, jelly to stretch, a cupcake's icing, a cake's candles, pizza slices with cheese
+  strings, a DNA strand to rip, a tree's leaves).
+- A link still opens the toy as built; saving what you made may come later as an added field, and
+  old links keep loading. Whether Hands-on is on by default is decided after the showcase.
+
+### Physics
+
+One small engine of our own, based on position-based dynamics (XPBD), with no library: pieces are
+points held together by rules, stiff for solid pieces, loose for soft things (jelly, cheese, icing),
+a grid for cloth (the flag) and a chain for strands (DNA). Pieces collide with simple shapes and the
+floor, on the CPU for a few dozen pieces and a few hundred points; the GPU still moves every splat.
+It lands as an "Engine: …" PR before the showcase toys. The engine lane checks how far the 48-token
+limit can go on phones.
+
+### Toy Workshop, AI package and submissions
+
+- **Workshop** layers: Remix (exists), Build from parts (kit shapes with handles, hinges, tap-effect
+  templates and a sound, saved as plain data, never code), Code a toy (a recipe editor), From a
+  photo (lane G's method and your own splat files). It reuses the hands-on grab and adds physics
+  templates.
+- **"Take it to your AI"**: a zip made in the browser with `PROMPT.md` (the description and the
+  task, ready to paste), `CLAUDE.md` and `AGENTS.md` pointing to it, the toy as Workshop data, a kit
+  guide generated from the code, two or three example recipes, the rules and a small test page. "Try
+  a recipe file" runs the result on your own device only, never in links or embeds.
+- **Submissions**: one form, three ways (an idea, a toy you made as a link or Workshop data, and
+  files, which are optional: a recipe, your own splat capture, photos). A Submit button opens a
+  pre-filled GitHub issue form; people who code can open a PR. Each submission confirms it's the
+  person's own work (or CC0 or CC BY with the source) and follows the content rules. The Operator
+  puts each on the Toy Ideas page, the owner approves, a lane builds it, and it joins a "Community"
+  shelf with the maker's credit. No email route at launch.
+- The code is MIT licensed (decided September 27, 2026); assets keep their own licenses and credits.
+
+### The public write-up
+
+Part 2 of the How Splashery Is Made page is the approved basis. At step 7 it is rewritten for
+readers in American English, checked against the code, and becomes `docs/HOW-IT-WORKS.md` and a
+draft post in the blog repository, framed as an experiment in building with Claude Opus 5.5.
+
+## Earlier phases (v4)
 
 | Phase  | What                                                                                                                                                           |
 | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | A      | Done (PR #13 and the homepage PR): sharpness, Detail setting, embeds, homepage embed.                                                                          |
 | B      | Done: mobile shelf grid, two-line thumbnail labels, "Find your own splat" help panel.                                                                          |
-| C1, C2 | Visual fixes, and clearer or more dramatic effects, from the owner's 2026-09-23 review.                                                                        |
-| D      | Effects and sound engine: a unique sound per toy, scan rigs, position-aware taps, drag-to-stretch.                                                             |
+| C1, C2 | Done: visual fixes, and clearer or more dramatic effects, from the owner's 2026-09-23 review.                                                                  |
+| D      | Done: effects and sound engine: a unique sound per toy, scan rigs, position-aware taps, drag-to-stretch.                                                       |
 | E1–E6  | Done: a new tap effect and sound for every toy that only hopped, in six waves ([TOY-PLAN.md](TOY-PLAN.md)); the last ones ran as parallel lanes on 2026-09-26. |
-| F      | Touch and drag interaction: puzzle cube, chess, gummy bear, Newton's cradle, bricks.                                                                           |
-| G      | AI image-to-3D trial (`HF_TOKEN`).                                                                                                                             |
-| H      | Later: gallery, multi-toy scenes, liquid pour, draw-order fix, more scans and instruments, final homepage embeds.                                              |
+| F      | Done (#45, #42): touch and drag play for the puzzle cube, chess, Newton's cradle and the bricks.                                                               |
+| G      | Done (#43, #47, #48): the AI image-to-3D trial (the real pencil and tin can) and their looks.                                                                  |
 
 ## v3: the big toy box (done)
 
@@ -129,8 +190,8 @@ their own, open and close, and can wear patterns and flags.
 - **Gallery** (plan below): Phase H.
 - **Homepage embed** on ryanjosephkamp.github.io: scheduled for Phase A (after the embed fixes).
 - **True fluid simulation** (particle water on WebGPU compute): scripted pouring comes first.
-- **Multi-toy scenes and physics** (throwing a toy at another, Newton's cradle with real
-  collisions): needs a bigger schema change; single-toy behaviours come first.
+- **Multi-toy scenes** (several toys in one scene): needs a bigger schema change. Physics within one
+  toy is now planned (above, "Physics").
 - **4D Gaussian splat captures**: see "How toys move".
 
 See [BACKLOG.md](BACKLOG.md) for the reasons and what would unblock each one.
@@ -140,9 +201,8 @@ See [BACKLOG.md](BACKLOG.md) for the reasons and what would unblock each one.
 - **No backend to start with.** `gallery/index.html` reads `gallery/entries.json` from the repo. An
   entry is mostly a scene link (or scene JSON) plus a thumbnail and a credit line, because a
   generated or shelf toy is fully described by its scene.
-- **Submissions**: an in-app "Submit to gallery" button opens a prefilled GitHub issue form (scene
-  link, name, credit, licence checkbox). An email address is the fallback for people without GitHub.
-  Custom scans attach a zip or link to the file, with its licence.
+- **Submissions**: now part of the plan above ("Toy Workshop, AI package and submissions"): a
+  pre-filled GitHub issue form, files optional, and no email route at launch.
 - **Approval from a phone**: say "add issue #N to the gallery" in a session, or let a GitHub Action
   (built-in `GITHUB_TOKEN`, no secrets) turn a labelled issue into a PR the owner merges.
 - **Grid performance**: browsers allow about 16 WebGL contexts, so the grid shows still or animated
