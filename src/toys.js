@@ -5,6 +5,10 @@
 // This catalogue is metadata only (ids, labels, categories, search words) so
 // it stays small as the shelf grows; toy code that needs more than a
 // generator preset lives in per-pack modules that load when a toy is picked.
+//
+// A captured toy may list looks: [{ id, label, url?, urlWeak? }]. The first is
+// the default and may leave out url (the toy's own files); the Toy tab shows a
+// "Look" choice, and only the chosen look's id is saved (scene option `look`).
 
 // Shelf categories, in shelf order. A category only shows once it has toys.
 export const CATEGORIES = [
@@ -2881,6 +2885,22 @@ export function findToy(id) {
 
 export function categoryLabel(id) {
   return CATEGORIES.find((c) => c.id === id)?.label || "";
+}
+
+// A scan's looks as a Toy tab option, and the look a scene's options pick
+// (null for a scan without looks). Only the look's id is saved.
+export function lookOption(def) {
+  return {
+    key: "look",
+    label: "Look",
+    type: "select",
+    default: def.looks[0].id,
+    choices: def.looks.map((l) => ({ id: l.id, label: l.label })),
+  };
+}
+export function pickLook(def, options) {
+  if (!def.looks?.length) return null;
+  return def.looks.find((l) => l.id === options?.look) || def.looks[0];
 }
 
 // Categories that have at least one toy, in shelf order.

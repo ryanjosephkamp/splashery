@@ -86,3 +86,35 @@ for (const [id, label, wait] of [
     }
   });
 }
+
+// Looks for captured toys (src/toys.js): the scene option `look` picks one of
+// a scan's files; no look, or an unknown one, is the first (the default).
+test("a scan's look is picked from the scene and survives a link", async () => {
+  const { lookOption, pickLook } = await import("../src/toys.js");
+  const { encodeSceneHash, decodeSceneHash } = await import("../src/codec.js");
+  const { createScene, normalizeScene } = await import("../src/state.js");
+  const def = {
+    id: "demo",
+    url: "a.sog",
+    looks: [
+      { id: "plain", label: "Plain" },
+      { id: "red", label: "Red", url: "a-red.sog", urlWeak: "a-red-lite.sog" },
+    ],
+  };
+  expect(pickLook({ id: "x", url: "x.sog" }, { look: "red" })).toBe(null);
+  expect(pickLook(def, undefined).id).toBe("plain");
+  expect(pickLook(def, {}).id).toBe("plain");
+  expect(pickLook(def, { look: "nope" }).id).toBe("plain");
+  expect(pickLook(def, { look: "red" }).url).toBe("a-red.sog");
+  const opt = lookOption(def);
+  expect(opt).toMatchObject({ key: "look", type: "select", default: "plain" });
+  expect(opt.choices.map((c) => c.id)).toEqual(["plain", "red"]);
+  // A link carries only the look's id; a link without one has no options.
+  const scene = createScene();
+  scene.toy = { kind: "builtin", id: "demo", options: { look: "red" } };
+  const back = normalizeScene(await decodeSceneHash(await encodeSceneHash(scene)));
+  expect(back.toy.options).toEqual({ look: "red" });
+  scene.toy = { kind: "builtin", id: "demo" };
+  const old = normalizeScene(await decodeSceneHash(await encodeSceneHash(scene)));
+  expect(old.toy.options).toBeUndefined();
+});

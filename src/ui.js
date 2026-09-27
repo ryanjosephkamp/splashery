@@ -510,7 +510,8 @@ export function createUI(app) {
     if (recipe?.game) renderGamePanel(recipe.game);
     refreshGameBar();
     els.toyOptions.textContent = "";
-    for (const o of recipe?.options || []) {
+    // A kit toy's options, or a scan's looks (info.optionDefs).
+    for (const o of info?.optionDefs || recipe?.options || []) {
       if (o.hidden) continue;
       const row = document.createElement("label");
       row.className = "row";
