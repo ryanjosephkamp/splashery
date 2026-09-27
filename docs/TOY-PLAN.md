@@ -10,8 +10,8 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 297 toys. 297 have a tap action today; the other 0 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 297.
+- 298 toys. 298 have a tap action today; the other 0 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 298.
 - **more** (has an effect; make it clearer or more dramatic): 0.
 - **new** (needs its own effect): 0.
 - Visual fixes: 0 open, 28 done. Touch or drag interaction asked for: 4.
@@ -49,9 +49,9 @@ Proposals below are suggestions; the owner may change them.
   tree, Diya, Acoustic guitar, Snare drum, Xylophone, Hot-air balloon, Bus, Jet airliner, Sailboat,
   Submarine, Bicycle, Eiffel Tower, Washington Monument, Pyramids of Giza, Twisting supertall,
   Statue of Liberty, White House, Leaning Tower of Pisa, Colosseum, Parthenon, Stonehenge, Big Ben,
-  Taj Mahal, Castle, Pagoda, Windmill, Perceptron, Neural network, Convolutional network, Recurrent
-  network, Transformer, Looped transformer, Diffusion model, Gradient descent, Word vectors, Sorting
-  machine, Half adder.
+  Taj Mahal, Castle, Pagoda, Windmill, Perceptron, Multilayer perceptron, Neural network,
+  Convolutional network, Recurrent network, Transformer, Looped transformer, Diffusion model,
+  Gradient descent, Word vectors, Sorting machine, Half adder.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -1854,7 +1854,7 @@ Proposals below are suggestions; the owner may change them.
     (4 s).
   - Sound: Creaking sails and wind.
 
-## Computing (11)
+## Computing (12)
 
 - **Perceptron** (`perceptron`). Now: tap: Try an example. Plan: keep.
   - Owner: Approved on the Toy Ideas page (lane AI).
@@ -1867,6 +1867,17 @@ Proposals below are suggestions; the owner may change them.
     Owner's review: a 3D version too, so a View option adds a 3D model (bulbs on posts, a glass
     gauge, an output bulb on a stand).
   - Sound: A blip for each input, a click as the lamp decides, a rising tone when it learns.
+- **Multilayer perceptron** (`multilayer-perceptron`). Now: tap: Try all four inputs. Plan: keep.
+  - Owner: Owner's review of the perceptron (September 27, 2026): add 2D poster and 3D multilayer
+    perceptrons (MLPs).
+  - Effect: A two-layer perceptron solving XOR, which a single perceptron cannot: each input pair
+    lights in turn, pulses run through an OR and a NAND neuron to an AND neuron, and the truth table
+    fills in.
+  - Improved: AI: XOR, one input pair at a time (00, 01, 10, 11): the inputs light, pulses run along
+    blue (adding) and red (subtracting) wires to the OR and NAND neurons, the ones that fire send
+    pulses to the AND neuron, the output lamp lights for 01 and 10 only, and each answer is written
+    into the truth table (5 s). A View option picks the poster or a 3D model.
+  - Sound: A blip for each input, a ding when the answer is 1, a knock when it is 0.
 - **Neural network** (`neural-network`). Now: tap: Forward and back. Plan: keep.
   - Owner: Approved on the Toy Ideas page (lane AI).
   - Effect: A forward pass: a wave of light runs left to right through three layers, each neuron

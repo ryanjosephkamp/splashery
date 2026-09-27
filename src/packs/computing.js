@@ -1859,6 +1859,48 @@ function buildLoop3D(k) {
   });
 }
 
+// The multilayer perceptron: two inputs, a hidden layer of two step neurons
+// (OR and NAND) and an output neuron (AND), which together give XOR, the
+// sum a single perceptron cannot learn. Wire thickness is the weight's size;
+// blue wires add, red ones subtract.
+const XOR = {
+  cases: [
+    [0, 0],
+    [0, 1],
+    [1, 0],
+    [1, 1],
+  ],
+  hidden: [
+    { label: "OR", w: [1, 1], theta: 0.5 },
+    { label: "NAND", w: [-1, -1], theta: -1.5 },
+  ],
+  out: { label: "AND", w: [1, 1], theta: 1.5 },
+  t0: 0.15,
+  dt: 1.15,
+};
+const xorFire = (n, x) => (n.w[0] * x[0] + n.w[1] * x[1] >= n.theta ? 1 : 0);
+const xorCase = (x) => {
+  const h = XOR.hidden.map((n) => xorFire(n, x));
+  return { h, y: xorFire(XOR.out, h) };
+};
+// Where things sit, on the poster and in the 3D model.
+const XOR_AT = {
+  poster: {
+    P: [[-1.07, 0.38, 0], [-1.07, -0.38, 0]], // prettier-ignore
+    H: [[-0.3, 0.38, 0], [-0.3, -0.38, 0]], // prettier-ignore
+    O: [0.42, 0, 0],
+    table: [1.0, 0.0, 0],
+  },
+  model: {
+    P: [[-1.12, 0.38, -0.2], [-1.12, -0.38, 0.2]], // prettier-ignore
+    H: [[-0.3, 0.38, 0.2], [-0.3, -0.38, -0.2]], // prettier-ignore
+    O: [0.42, 0, 0],
+    table: [1.02, 0.0, -0.1],
+  },
+};
+const xorWire = (w) => 0.014 + 0.016 * Math.abs(w);
+const xorWireColor = (w) => (w > 0 ? "#5d8fd6" : "#d66a6a");
+
 export const RECIPES = {
   perceptron: {
     options: [VIEW_OPTION],
@@ -1995,6 +2037,168 @@ export const RECIPES = {
       text(k, "OUT", [out[0], 0.42, 0.003], 0.022, "#9fb0d6");
       text(k, "WANT 1", [out[0] + 0.07, -0.42, 0.003], 0.016, "#ffd34d");
       k.data = {};
+    },
+  },
+  "multilayer-perceptron": {
+    options: [VIEW_OPTION],
+    controls: [{ key: "go", label: "Run", type: "pulse", ease: 5 }],
+    action: { key: "go", label: "Try all four inputs" },
+    // XOR, one input pair at a time (00, 01, 10, 11): the inputs light,
+    // pulses run to the OR and NAND neurons, the ones that fire send pulses
+    // on to the AND neuron, and the output lamp lights for 01 and 10 only;
+    // each answer is written into the truth table.
+    drive(t, c, out, info) {
+      const s = since(c.go, 5);
+      const on = s >= 0;
+      const A = info.data?.view === "model" ? XOR_AT.model : XOR_AT.poster;
+      const k = on ? Math.floor((s - XOR.t0) / XOR.dt) : -1;
+      const u = on ? (s - XOR.t0 - k * XOR.dt) / XOR.dt : 0;
+      const live = on && k >= 0 && k < 4;
+      const x = live ? XOR.cases[k] : [0, 0];
+      const { h, y } = xorCase(x);
+      out.tokens = [];
+      const go = (v) => (v > 0 && v < 1 ? ease(v) : -1);
+      // Inputs light, then pulses to the hidden layer, then on to the output.
+      x.forEach((xi, i) => (out.parts["in" + i] = { visible: live && xi && u < 0.92 ? 1 : 0 }));
+      let j = 0;
+      for (let i = 0; i < 2; i++)
+        for (let hh = 0; hh < 2; hh++) {
+          const f = live && x[i] ? go((u - 0.08) / 0.3) : -1;
+          out.tokens[j++] =
+            f < 0 ? { visible: 0 } : { offset: mul(sub(A.H[hh], A.P[i]), f), visible: 1 };
+        }
+      h.forEach((hv, hh) => {
+        out.parts["h" + hh] = { visible: live && hv && u > 0.36 && u < 0.92 ? 1 : 0 };
+        const f = live && hv ? go((u - 0.42) / 0.26) : -1;
+        out.tokens[4 + hh] =
+          f < 0 ? { visible: 0 } : { offset: mul(sub(A.O, A.H[hh]), f), visible: 1 };
+      });
+      out.parts.out = { visible: live && y && u > 0.7 && u < 0.97 ? 1 : 0 };
+      // The truth table: a bar marks the row being tried; each answer is
+      // written in as it comes out, and all clear at the end.
+      const row = clamp(k, 0, 3);
+      out.tokens[6] = live ? { offset: [0, -row * 0.2, 0], visible: 1 } : { visible: 0 };
+      for (let r = 0; r < 4; r++) {
+        const done = on && (r < k || (r === k && u > 0.72)) && s < 4.85;
+        out.tokens[7 + r] = { visible: done ? 1 : 0 };
+      }
+      if (info.data?.view === "model")
+        out.resort = resortSteps(this, "xor", on ? s : -1, 0.15, 4.8, 0.2);
+    },
+    build(k, o) {
+      const model = o.view === "model";
+      const A = model ? XOR_AT.model : XOR_AT.poster;
+      k.data = { view: model ? "model" : "poster" };
+      const floor = -0.62;
+      if (model) stand(k, 1.25, floor);
+      else board(k, 3.05, 1.6);
+      const z = model ? 0 : 0.04;
+      const R = 0.12;
+      const lift = (p) => add(p, [0, 0, z]);
+      // Wires, as thick as their weights; blue adds, red subtracts.
+      A.P.forEach((p, i) =>
+        A.H.forEach((hp, hh) => {
+          const w = XOR.hidden[hh].w[i];
+          const dir = unit(sub(hp, p));
+          wire(k, [lift(add(p, mul(dir, R))), lift(sub(hp, mul(dir, 0.15)))], xorWire(w), { color: xorWireColor(w) }); // prettier-ignore
+        }),
+      );
+      A.H.forEach((hp, hh) => {
+        const w = XOR.out.w[hh];
+        const dir = unit(sub(A.O, hp));
+        wire(k, [lift(add(hp, mul(dir, 0.15))), lift(sub(A.O, mul(dir, 0.16)))], xorWire(w), { color: xorWireColor(w) }); // prettier-ignore
+      });
+      // Inputs: lamps (bulbs in 3D) that light for a 1, and their pulses.
+      A.P.forEach((p, i) => {
+        const part = k.part("in" + i, { pivot: p });
+        if (model) {
+          bulb(k, p, R, floor);
+          glow3D(k, p, R * 0.75, "#3fd8ff", { part });
+        } else lamp(k, lift(p), R, { on: "#57e0ff", part });
+        text(k, "X" + (i + 1), [p[0] - 0.3, p[1], model ? p[2] : 0.003], 0.018, "#9fb0d6");
+        A.H.forEach((_, hh) => bead(k, lift(add(p, [0, 0, model ? 0 : 0.03])), 0.06, "#8af0ff", i * 2 + hh)); // prettier-ignore
+      });
+      // Hidden neurons (OR, NAND) and the output neuron (AND): discs with
+      // their names, and a light when they fire.
+      const neuron = (p, label, name, color) => {
+        k.add(model ? k.sphere(0.15) : k.cylinder(0.15, 0.06), {
+          pos: lift(p),
+          rot: model ? [0, 0, 0] : [90, 0, 0],
+          even: true,
+          flat: 0.3,
+          weight: 1.4,
+          pattern: false,
+          color: (c) => keep(lit("#3a4768", c.n, { amb: 0.75, dif: 0.35, spec: 0.5 })),
+        });
+        const part = k.part(name, { pivot: p });
+        if (model) glow3D(k, p, 0.12, color, { part });
+        else lampLight(k, add(lift(p), [0, 0, 0.035]), 0.14, color, { part });
+        sign(k, label, add(p, [0, 0.27, model ? 0 : 0.003]), 0.017, { color: "#c7d3f0" });
+        if (model) {
+          k.add(k.cylinder(0.012, p[1] - 0.15 - floor), {
+            pos: [p[0], (p[1] - 0.15 + floor) / 2, p[2]],
+            flat: 0.35,
+            pattern: false,
+            color: () => keep("#4a5778"),
+          });
+        }
+      };
+      XOR.hidden.forEach((n, hh) => {
+        neuron(A.H[hh], n.label, "h" + hh, "#ffd34d");
+        bead(k, lift(add(A.H[hh], [0, 0, model ? 0 : 0.05])), 0.06, "#ffd34d", 4 + hh);
+      });
+      neuron(A.O, XOR.out.label, "out", "#7dff9a");
+      text(k, "XOR", [A.O[0], A.O[1] - 0.3, model ? A.O[2] + 0.1 : 0.003], 0.022, "#7dff9a");
+      // The truth table: X1 X2 and the answer, a bar on the row being tried
+      // (token 6), and each answer (tokens 7 to 10).
+      const T = A.table;
+      const tz = model ? T[2] : 0.012;
+      k.add(k.box(0.72, 1.02, model ? 0.06 : 0.02), {
+        pos: [T[0], T[1], tz],
+        even: true,
+        flat: 0.2,
+        pattern: false,
+        color: (c) => keep(c.s.face !== 4 && model ? BOARD_RIM : "#0b1020"),
+      });
+      const fz = tz + (model ? 0.035 : 0.014);
+      const cols = [T[0] - 0.22, T[0] - 0.02, T[0] + 0.22];
+      ["X1", "X2", "Y"].forEach((h, i) => text(k, h, [cols[i], T[1] + 0.4, fz], 0.017, "#9fb0d6"));
+      // The row marker: an outline round the row (so the row still shows).
+      const mw = 0.66;
+      const mh = 0.17;
+      for (const [dx, dy, w, h] of [
+        [0, mh / 2, mw, 0.014],
+        [0, -mh / 2, mw, 0.014],
+        [mw / 2, 0, 0.014, mh],
+        [-mw / 2, 0, 0.014, mh],
+      ])
+        k.add(k.box(w, h, 0.01), {
+          pos: [T[0] + dx, T[1] + 0.22 + dy, fz + 0.004],
+          flat: 0.3,
+          weight: 3,
+          pattern: false,
+          kind: "token",
+          params: [6, 0],
+          color: () => keep("#ffd34d"),
+        });
+      XOR.cases.forEach((x, r) => {
+        const y0 = T[1] + 0.22 - r * 0.2;
+        text(k, String(x[0]), [cols[0], y0, fz + 0.004], 0.018, "#dfe8ff");
+        text(k, String(x[1]), [cols[1], y0, fz + 0.004], 0.018, "#dfe8ff");
+        const yv = xorCase(x).y;
+        text(k, String(yv), [cols[2], y0, fz + 0.004], 0.018, yv ? "#7dff9a" : "#ff8c8c", {
+          kind: "token",
+          params: [7 + r, 0],
+        });
+      });
+      if (model) {
+        k.add(k.cylinder(0.02, T[1] - 0.51 - floor), {
+          pos: [T[0], (T[1] - 0.51 + floor) / 2, T[2]],
+          flat: 0.35,
+          pattern: false,
+          color: () => keep("#4a5778"),
+        });
+      }
     },
   },
   "neural-network": {

@@ -13,7 +13,7 @@ import { buildRecipe } from "../src/kit.js";
 import { KINDS } from "../src/effects.js";
 import { RECIPES } from "../src/packs/computing.js";
 
-const IDS = ["perceptron", "neural-network", "cnn", "rnn", "transformer", "looped-transformer", "diffusion-model", "gradient-descent", "word-vectors", "sorting-machine", "half-adder"]; // prettier-ignore
+const IDS = ["perceptron", "multilayer-perceptron", "neural-network", "cnn", "rnn", "transformer", "looped-transformer", "diffusion-model", "gradient-descent", "word-vectors", "sorting-machine", "half-adder"]; // prettier-ignore
 const PLAN = JSON.parse(fs.readFileSync(new URL("../tools/toy-plan.json", import.meta.url), "utf8")).toys; // prettier-ignore
 
 // The word vectors toy reads its word list before it builds.
@@ -49,7 +49,7 @@ function play(id, options = {}, fps = 30) {
   return { rest, frames, kit };
 }
 
-test("the computing shelf: after Maths, with its eleven toys, sounds and plan entries", () => {
+test("the computing shelf: after Maths, with its twelve toys, sounds and plan entries", () => {
   const ids = CATEGORIES.map((c) => c.id);
   expect(ids.indexOf("computing")).toBe(ids.indexOf("maths") + 1);
   expect(CATEGORIES.find((c) => c.id === "computing").label).toBe("AI and computing");

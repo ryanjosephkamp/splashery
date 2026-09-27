@@ -2949,6 +2949,15 @@ export const TOYS = [
     camera: { yaw: 0.18, pitch: 0.1, roll: 0, distance: 3.4 },
   },
   {
+    id: "multilayer-perceptron",
+    label: "Multilayer perceptron",
+    category: "computing",
+    kind: "kit",
+    pack: "computing",
+    tags: "mlp xor hidden layer perceptron logic neural network ai machine learning",
+    camera: { yaw: 0.18, pitch: 0.1, roll: 0, distance: 3.4 },
+  },
+  {
     id: "neural-network",
     label: "Neural network",
     category: "computing",

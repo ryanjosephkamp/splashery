@@ -1233,6 +1233,19 @@ export const TOY_SOUNDS = {
     { voice: "click", at: 3.15, f: 2200 },
     { voice: "ding", at: 3.17, f: "E6", decay: 0.6, vol: 0.5 },
   ],
+  // XOR, one input pair at a time (every 1.15 s from 0.15 s): a blip for
+  // each lit input, a tick as the hidden layer fires, and a ding only when
+  // the answer is 1 (01 and 10), a low knock when it is 0.
+  "multilayer-perceptron": [
+    { voice: "wood", at: 1.08, f: 300, decay: 0.8 },
+    { voice: "blip", at: 1.33, f: 700, to: 1.3 },
+    { voice: "ding", at: 2.14, f: "E6", decay: 0.5, vol: 0.6 },
+    { voice: "blip", at: 2.48, f: 700, to: 1.3 },
+    { voice: "ding", at: 3.29, f: "G6", decay: 0.5, vol: 0.6 },
+    { voice: "blip", at: 3.63, f: 700, to: 1.3 },
+    { voice: "blip", at: 3.67, f: 880, to: 1.3 },
+    { voice: "wood", at: 4.38, f: 300, decay: 0.8 },
+  ],
   // A rising arpeggio as each layer lights (0.05, 1.1, 2.1 s), a falling one
   // as the red pulses run back (2.5 to 3.55 s).
   "neural-network": [

@@ -1864,6 +1864,13 @@
       "sound": "A blip for each input, a click as the lamp decides, a rising tone when it learns.",
       "improved": "AI: inputs X1 and X3 light and send pulses along wires as thick as their weights; the gauge fills to under the threshold and the lamp flashes red. The two live wires thicken (it learns), the pulses go again, the gauge passes the threshold and the lamp snaps on gold (4 s). Owner's review: a 3D version too, so a View option adds a 3D model (bulbs on posts, a glass gauge, an output bulb on a stand)."
     },
+    "multilayer-perceptron": {
+      "v": "keep",
+      "owner": "Owner's review of the perceptron (September 27, 2026): add 2D poster and 3D multilayer perceptrons (MLPs).",
+      "effect": "A two-layer perceptron solving XOR, which a single perceptron cannot: each input pair lights in turn, pulses run through an OR and a NAND neuron to an AND neuron, and the truth table fills in.",
+      "sound": "A blip for each input, a ding when the answer is 1, a knock when it is 0.",
+      "improved": "AI: XOR, one input pair at a time (00, 01, 10, 11): the inputs light, pulses run along blue (adding) and red (subtracting) wires to the OR and NAND neurons, the ones that fire send pulses to the AND neuron, the output lamp lights for 01 and 10 only, and each answer is written into the truth table (5 s). A View option picks the poster or a 3D model."
+    },
     "neural-network": {
       "v": "keep",
       "owner": "Approved on the Toy Ideas page (lane AI).",
