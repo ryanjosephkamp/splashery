@@ -1596,6 +1596,170 @@ function buildCnn3D(k) {
   });
 }
 
+// A box outline (12 edges) as wires, for blocks the tiles pass through.
+function wireBox(k, c, size, r, color, opts = {}) {
+  const [hx, hy, hz] = size.map((v) => v / 2);
+  const corners = [
+    [[-hx, -hy, -hz], [hx, -hy, -hz]], [[-hx, hy, -hz], [hx, hy, -hz]],
+    [[-hx, -hy, hz], [hx, -hy, hz]], [[-hx, hy, hz], [hx, hy, hz]],
+    [[-hx, -hy, -hz], [-hx, hy, -hz]], [[hx, -hy, -hz], [hx, hy, -hz]],
+    [[-hx, -hy, hz], [-hx, hy, hz]], [[hx, -hy, hz], [hx, hy, hz]],
+    [[-hx, -hy, -hz], [-hx, -hy, hz]], [[hx, -hy, -hz], [hx, -hy, hz]],
+    [[-hx, hy, -hz], [-hx, hy, hz]], [[hx, hy, -hz], [hx, hy, hz]],
+  ]; // prettier-ignore
+  for (const [a, b] of corners) wire(k, [add(c, a), add(c, b)], r, { color, weight: 2, ...opts });
+}
+// A word tile as a solid block, its word on the front face.
+function block3D(k, word, p, color, token, { w = 0.42, h = 0.22, d = 0.14, px = 0.02 } = {}) {
+  const ride = token === undefined ? {} : { kind: "token", params: [token, 0] };
+  k.add(k.box(w, h, d), {
+    pos: p,
+    even: true,
+    flat: 0.25,
+    weight: 1.5,
+    pattern: false,
+    ...ride,
+    color: (c) => {
+      if (c.s.face !== 4)
+        return keep(lit(shade(color, 0.45), c.n, { amb: 0.8, dif: 0.3, spec: 0.2 }));
+      const edge = Math.min(w / 2 - Math.abs(c.p[0] - p[0]), h / 2 - Math.abs(c.p[1] - p[1]));
+      return keep(edge < 0.014 ? color : "#10172a");
+    },
+  });
+  if (word) text(k, word, add(p, [0, 0, d / 2 + 0.003]), px, color, ride);
+}
+
+// The transformer as a 3D model: word blocks on a plinth, glass-edged
+// feed-forward blocks above them, and attention arcs in the air: head A's
+// upright, head B's leaning back.
+function buildTransformer3D(k) {
+  k.data = { view: "model" };
+  const floor = TF.row - TF_TILE[1] / 2 - 0.02;
+  k.add(k.box(3.0, 0.08, 0.9), {
+    pos: [0, floor - 0.04, 0],
+    even: true,
+    flat: 0.25,
+    color: (c) =>
+      c.n[1] > 0.5 ? keep(BOARD) : lit(BOARD_RIM, c.n, { amb: 0.75, dif: 0.3, spec: 0.1 }),
+  });
+  // The feed-forward blocks: box outlines the tiles rise through, and a lit
+  // copy of each (a part).
+  TF.ffn.forEach((fy, i) => {
+    const size = [2.12, 0.26, 0.5];
+    const c = [-0.26, fy, 0];
+    wireBox(k, c, size, 0.016, "#6d7fa6");
+    wireBox(k, c, size, 0.024, "#9fe8ff", { part: k.part("ffn" + i, { pivot: c }) });
+    sign(k, "FFN", [-1.55, fy, 0.25], 0.019, { color: "#9fb0d6" });
+  });
+  for (const y of [TF.row, TF.levels[1]])
+    sign(k, "ATTN", [-1.55, y + 0.26, 0.25], 0.019, { color: "#9fb0d6" });
+  // Attention arcs: head A's stand upright, head B's lean back.
+  TF.heads.forEach((layer, l) =>
+    layer.forEach((arcs, h) =>
+      arcs.forEach(([a, b, w]) => {
+        const y0 = TF.levels[l] + TF_TILE[1] / 2;
+        const xa = TF.xs[a] + (h ? 0.05 : -0.05);
+        const xb = TF.xs[b] + (h ? 0.05 : -0.05);
+        const lift = 0.1 + 0.08 * Math.abs(a - b);
+        const lean = h ? 0.9 : 0;
+        const curve = (t) => {
+          const up = lift * Math.sin(Math.PI * t);
+          return [xa + (xb - xa) * t, y0 + up * Math.cos(lean), 0.02 - up * Math.sin(lean)];
+        };
+        k.add(k.tube(curve, 0.007 + 0.02 * w, { grid: 40 }), {
+          flat: 0.4,
+          weight: 1.6,
+          pattern: false,
+          kind: "fade",
+          params: (c) => [c.t * 0.82, -0.18],
+          channel: l * 2 + h,
+          color: (c) => keep(lit(TF_HEADS[h], c.n, { amb: 0.95, dif: 0.2, spec: 0.5 })),
+        });
+      }),
+    ),
+  );
+  // The word blocks (tokens 0 to 3), and the next word (token 4), built
+  // where it lands.
+  TF.words.forEach((w, i) => block3D(k, w, [TF.xs[i], TF.row, 0], "#e8eefc", i));
+  block3D(k, TF.next, [TF.xs[4], TF.row, 0], "#ffd34d", 4);
+  k.reach([TF.xs[4], TF.levels[2] + 0.15, 0]);
+}
+
+// The looped transformer as a 3D model: the loop leans back (its bottom
+// straight in front, the block at the back), the block is a box outline,
+// and the tiles are blocks that ride round it facing you.
+const LOOP_TILT = 0.65;
+const loopTilt = (p) => [p[0], 0.1 + p[1] * Math.cos(LOOP_TILT), -p[1] * Math.sin(LOOP_TILT)];
+function buildLoop3D(k) {
+  const L = LOOP;
+  k.data = { view: "model" };
+  const floor = loopTilt([0, -L.r, 0])[1] - L.tile / 2 - 0.02;
+  stand(k, 1.2, floor);
+  const track = [];
+  for (let i = 0; i <= 160; i++) track.push(add(loopTilt(L.at((L.P * i) / 160)), [0, -L.tile / 2 - 0.03, 0])); // prettier-ignore
+  wire(k, track, 0.022, { color: "#6d7fa6" });
+  // The block: a box outline round the top straight, and a lit copy.
+  const c = add(loopTilt([0, L.r, 0]), [0, 0.02, 0]);
+  const size = [2 * L.half + 0.2, L.tile + 0.2, 0.42];
+  wireBox(k, c, size, 0.016, "#6d7fa6");
+  wireBox(k, c, size, 0.024, "#9fe8ff", { part: k.part("block", { pivot: c }) });
+  sign(k, "BLOCK", add(c, [0, size[1] / 2 + 0.1, 0]), 0.018, { color: "#9fb0d6" });
+  // Posts holding up the loop's back.
+  for (const x of [-L.half - L.r * 0.7, L.half + L.r * 0.7]) {
+    const top = loopTilt([x > 0 ? L.half + L.r * 0.7 : -L.half - L.r * 0.7, 0, 0]);
+    k.add(k.cylinder(0.018, top[1] - floor), {
+      pos: [x, (top[1] + floor) / 2, top[2]],
+      flat: 0.35,
+      pattern: false,
+      color: () => keep("#4a5778"),
+    });
+  }
+  // The tiles: a block each (tokens 20 to 24) and each mark at four levels
+  // (token i * 4 + level) on its front face.
+  const T = L.tile;
+  const px = 0.028;
+  L.rest.forEach((d0, i) => {
+    const p = loopTilt(L.at(d0));
+    k.add(k.box(T, T, 0.1), {
+      pos: p,
+      even: true,
+      flat: 0.25,
+      weight: 1.5,
+      pattern: false,
+      kind: "token",
+      params: [20 + i, 0],
+      color: (cc) => {
+        if (cc.s.face !== 4) return keep(lit("#3a4768", cc.n, { amb: 0.8, dif: 0.3, spec: 0.2 }));
+        const edge = Math.min(T / 2 - Math.abs(cc.p[0] - p[0]), T / 2 - Math.abs(cc.p[1] - p[1]));
+        return keep(edge < 0.012 ? "#6b7ca6" : "#0d1324");
+      },
+    });
+    const answer = i === L.marks.length - 1;
+    L.levels[i].forEach((grid, v) => {
+      const x0 = p[0] - 2.5 * px;
+      const y0 = p[1] + 3.5 * px;
+      k.add(
+        k.param((u, w) => [x0 + u * 5 * px, y0 - w * 7 * px, p[2] + 0.053], {
+          grid: 24,
+          normal: () => [0, 0, 1],
+        }),
+        {
+          weight: 5,
+          flat: 0.2,
+          pattern: false,
+          kind: "token",
+          params: [i * 4 + v, 0],
+          color: (cc) => {
+            const val = grid[Math.min(6, Math.floor(cc.v * 7))][Math.min(4, Math.floor(cc.u * 5))];
+            if (val < 0.12) return null;
+            return keep(mix("#1e3558", v === 3 && answer ? "#ffd34d" : "#7ff6ff", val));
+          },
+        },
+      );
+    });
+  });
+}
+
 export const RECIPES = {
   perceptron: {
     options: [VIEW_OPTION],
@@ -2153,6 +2317,7 @@ export const RECIPES = {
     },
   },
   transformer: {
+    options: [VIEW_OPTION],
     controls: [{ key: "go", label: "Predict", type: "pulse", ease: 5 }],
     action: { key: "go", label: "Predict the next word" },
     // Arcs of light jump between the word tiles (thicker where attention is
@@ -2184,7 +2349,8 @@ export const RECIPES = {
       out.parts.ffn1 = { visible: on && s > 2.6 && s < 3.05 ? 1 : 0 };
       out.resort = resortSteps(this, "tf", on ? s : -1, 0.95, 4.15, 0.15);
     },
-    build(k) {
+    build(k, o) {
+      if (o.view === "model") return buildTransformer3D(k);
       board(k, 3.3, 2.4, { at: [-0.23, 0.12] });
       const z = 0.1;
       // The feed-forward blocks: frames the tiles rise through, and a lit
@@ -2256,16 +2422,18 @@ export const RECIPES = {
     },
   },
   "looped-transformer": {
+    options: [VIEW_OPTION],
     controls: [{ key: "go", label: "Think", type: "pulse", ease: 5 }],
     action: { key: "go", label: "Loop until it's sure" },
     // The row of tiles rides round the loop three times. Each pass through
     // the block sharpens every tile's mark one step (noise, a coarse mosaic,
     // nearly right, exact), until "3 + 4 = 7" settles; then the marks go
     // back to noise for the next go.
-    drive(t, c, out) {
+    drive(t, c, out, info) {
       const s = since(c.go, 5);
       const on = s >= 0;
       const L = LOOP;
+      const at = info.data?.view === "model" ? (d) => loopTilt(L.at(d)) : L.at;
       // Distance travelled: three laps between 0.2 s and 4.0 s, easing in
       // and out.
       const D = on ? 3 * L.P * ease(band(s, 0.2, 4.0)) : 0;
@@ -2275,7 +2443,7 @@ export const RECIPES = {
       L.rest.forEach((d0, i) => {
         const d = d0 + D;
         const p = L.at(d);
-        const off = sub(p, L.at(d0));
+        const off = sub(at(d), at(d0));
         let level = clamp(Math.floor((d - L.block) / L.P) + 1, 0, 3);
         if (blur > 0) level = Math.min(level, 3 - Math.min(3, Math.floor(blur * 4)));
         for (let v = 0; v < 4; v++) out.tokens[i * 4 + v] = { offset: off, visible: v === level ? 1 : 0 }; // prettier-ignore
@@ -2285,7 +2453,8 @@ export const RECIPES = {
       out.parts.block = { visible: on && inBlock && s < 4.1 ? 1 : 0 };
       out.resort = resortSteps(this, "loop", on ? s : -1, 0.2, 4.05, 0.12);
     },
-    build(k) {
+    build(k, o) {
+      if (o.view === "model") return buildLoop3D(k);
       const L = LOOP;
       board(k, 2.5, 1.8, { at: [0, 0.03] });
       const z = 0.04;
