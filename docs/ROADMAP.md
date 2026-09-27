@@ -6,18 +6,38 @@ The owner approved this plan on September 27, 2026 (Part 1 of the How Splashery 
 Operator runs the lanes ([OPERATING.md](OPERATING.md), [WORKSTREAMS.md](WORKSTREAMS.md)); the
 current state is in [HANDOFF.md](HANDOFF.md).
 
-| Step | What                                                                                                                                                                                                |
-| ---- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1    | Running: lane AI (11 AI and computing toys) and lane Math (5 math toys you can type, a safe equation reader, the snail and football fixes).                                                         |
-| 2    | The sound overhaul: the owner's notes go on the Sound Board, sound lanes build new sounds there, he approves them, and they go into the site. A "Sound preferences" section follows from his notes. |
-| 3    | Pianos and songs: the five approved pianos, a song bar based on the chess bar, and MIDI files.                                                                                                      |
-| 4    | A sound round for the new AI and Math toys.                                                                                                                                                         |
-| 5    | Physics and hands-on play (below): the engine and four showcase toys, then a hands-on plan for every toy, then category lanes.                                                                      |
-| 6    | The Toy Workshop, the "Take it to your AI" package, submissions and the gallery; the flag toy (it needs the cloth).                                                                                 |
-| 7    | Last: the American English sweep, `docs/HOW-IT-WORKS.md`, the blog post, a "How it's made" page and the homepage embeds.                                                                            |
+| Step | What                                                                                                                                                                                                                                                                                                         |
+| ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 1    | Running: lane AI (11 AI and computing toys) and lane Math (5 math toys you can type, a safe equation reader, the snail and football fixes), now building the owner's extras from his September 27 review (3D versions, more options, new toys); lane Fix3 (the bananas' stem and the ocean wave's collapse). |
+| 2    | Toy help (below): a short "how to play" line when a toy opens, and an About tab in the panel. An engine PR first, then the text for every toy. Added on September 27, 2026 at the owner's request; its place in the order is the Operator's proposal.                                                        |
+| 3    | The sound overhaul: the owner's notes go on the Sound Board, sound lanes build new sounds there, he approves them, and they go into the site. A "Sound preferences" section follows from his notes.                                                                                                          |
+| 4    | Pianos and songs: the five approved pianos, a song bar based on the chess bar, and MIDI files.                                                                                                                                                                                                               |
+| 5    | A sound round for the new AI and Math toys.                                                                                                                                                                                                                                                                  |
+| 6    | Physics and hands-on play (below): the engine and four showcase toys, then a hands-on plan for every toy, then category lanes.                                                                                                                                                                               |
+| 7    | The Toy Workshop, the "Take it to your AI" package, submissions and the gallery; the flag toy (it needs the cloth).                                                                                                                                                                                          |
+| 8    | Last: the American English sweep, `docs/HOW-IT-WORKS.md`, the blog post, a "How it's made" page and the homepage embeds.                                                                                                                                                                                     |
 
 Whenever a slot is free: a Real objects lane for the approved scans (historical figures, real
 vehicles, and the everyday objects as real captures), as brand-free sources turn up.
+
+### Toy help
+
+The owner asked for this on September 27, 2026 ([review](reviews/2026-09-27-ai-math/review.md)):
+
+- **How to play**: when a toy opens (from the shelf, a link or a refresh), one short line says how
+  to play with it, for example "Drag a row or column to turn it" on the puzzle cube, or "Tap a bar
+  to play it" on the xylophone. It sits beside the toy, not over it (under the toy's name on a
+  phone, beside the stage on a wide screen), fades after a few seconds, and a "?" button shows it
+  again. Toys with only a tap say so in a few words.
+- **About**: a new tab in the settings panel with a proper description: what the toy is and what it
+  shows or means, what you can do with it (its tap, drags, options and typing), and a fact or two,
+  so a visitor can learn about something they don't recognize without leaving the site.
+- **How it's built**: an "Engine: …" PR adds the line, the button and the tab, reading the text from
+  a new shared list, `src/toy-help.js` (like `src/toy-sounds.js`: each lane edits only its own toys'
+  entries), loaded when needed so the page stays light. A test checks that every toy has a line.
+  Then two lanes, split by shelf, write the how-to lines and About texts for all toys in American
+  English, checked against what each toy really does; the owner reads them on a review page. From
+  then on, every lane writes its own toys' help as part of "done".
 
 ### Hands-on play
 
@@ -63,7 +83,7 @@ limit can go on phones.
 
 ### The public write-up
 
-Part 2 of the How Splashery Is Made page is the approved basis. At step 7 it is rewritten for
+Part 2 of the How Splashery Is Made page is the approved basis. At step 8 it is rewritten for
 readers in American English, checked against the code, and becomes `docs/HOW-IT-WORKS.md` and a
 draft post in the blog repository, framed as an experiment in building with Claude Opus 5.5.
 
