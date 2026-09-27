@@ -49,7 +49,9 @@ PR title: "Phase F: touch and drag play".
 
 ## State
 
-Not started.
+Started 2026-09-27 on `claude/lane-f-touch-drag`. The owner's Toy Plan marks for the four toys are
+all "yes" with no notes, so the plan entries stand. Working on: the drag plane in the input path,
+then the puzzle cube, Newton's cradle, the chess set and the bricks.
 
 ## Notes
 
