@@ -475,7 +475,20 @@ const CNN_AT = {
   barH: 0.62,
 };
 // The centre of cell (r, c) of an n x n grid centred at g.
-const cellAt = (g, n, cell, r, c) => [g[0] + (c - (n - 1) / 2) * cell, g[1] - (r - (n - 1) / 2) * cell, 0]; // prettier-ignore
+const cellAt = (g, n, cell, r, c) => [g[0] + (c - (n - 1) / 2) * cell, g[1] - (r - (n - 1) / 2) * cell, g[2] ?? 0]; // prettier-ignore
+// The 3D model: the maps are slabs of little cubes standing one behind
+// another (the picture in front, the feature map behind it, the pooled map
+// behind that), over the scores' columns on a stand.
+const CNN_AT3D = {
+  img: [-0.95, 0.35, 0.4],
+  feat: [0.1, 0.35, 0],
+  pool: [0.95, 0.35, -0.4],
+  cell: 0.13,
+  pcell: 0.17,
+  floor: -0.78,
+  barZ: 0.62,
+  barH: 0.5,
+};
 const featColor = (v) => mix("#16305a", "#7ff6ff", Math.pow(v, 0.8));
 
 // The recurrent network: three words go into the cell one at a time, and
@@ -521,6 +534,34 @@ const RNN_GATES = [
   return { ...g, c, slats: [0.06, 0, -0.06].map((dy) => [c[0], c[1] + dy, 0.16]) };
 });
 const quatX = (a) => [Math.sin(a / 2), 0, 0, Math.cos(a / 2)];
+// The 3D model: a glass cell on a stand, the loop arching over it on a
+// slant (turned 0.7 rad about the up axis, so it runs from back right to
+// front left), and the words in front, rising up into the cell from below.
+const RNN3D = (() => {
+  const a = 0.7;
+  const turn = (x, y) => [x * Math.cos(a), y, -x * Math.sin(a)];
+  const cell = { c: [0, 0.05, 0], w: 0.84, h: 0.56, d: 0.5 };
+  const orbY = 0.13;
+  const { loop } = RNN;
+  const arc = (t) => turn(loop.c[0] + loop.rx * Math.cos(t), loop.c[1] + loop.ry * Math.sin(t));
+  const right = loop.c[0] + loop.rx * Math.cos(loop.a0);
+  // The orb waits just in front of the cell's face.
+  const home = [0, orbY, cell.d / 2 + 0.13];
+  const pts = [home, turn(right, orbY)];
+  for (let i = 0; i <= 40; i++) pts.push(arc(loop.a0 + ((loop.a1 - loop.a0) * i) / 40));
+  pts.push(turn(-right, orbY), home);
+  const path = polyline(pts);
+  const track = pts.slice(1, -1);
+  const slots = [-0.62, 0, 0.62].map((x) => [x, -0.46, 0.66]);
+  const entry = [0, cell.c[1] - cell.h / 2 + 0.02, 0];
+  const feed = slots.map((p) => polyline([p, [p[0], -0.36, p[2]], [0, -0.36, 0], entry]));
+  const gates = RNN_GATES.map((g) => ({
+    ...g,
+    c: [g.c[0], g.c[1], cell.d / 2 + 0.01],
+    slats: g.slats.map((b) => [b[0], b[1], cell.d / 2 + 0.02]),
+  }));
+  return { cell, orbY, path, track, slots, entry, feed, gates };
+})();
 
 // The transformer: four word tiles, two layers (attention, then a
 // feed-forward block), two attention heads a layer, and the next word.
@@ -1328,6 +1369,233 @@ function buildPerceptron3D(k) {
   sign(k, "WANT 1", add(out, [0, -0.3, 0.1]), 0.016, { color: "#ffd34d" });
 }
 
+// The recurrent network as a 3D model: a glass cell with lit edges on a
+// stand, the loop arching over it on a slant, and word blocks in front.
+function buildRnn3D(k, lstm) {
+  const G = RNN3D;
+  const { cell } = G;
+  k.data = { view: "model" };
+  const floor = -0.6;
+  stand(k, 1.1, floor);
+  wire(k, G.track, 0.028, { color: "#6d7fa6" });
+  // The cell: a dark block with lit edges, and a glow that flashes
+  // (channel 0) as a word goes in.
+  const [cx, cy, cz] = cell.c;
+  k.add(k.box(cell.w, cell.h, cell.d), {
+    pos: cell.c,
+    even: true,
+    flat: 0.25,
+    pattern: false,
+    color: (c) => keep(lit("#26324f", c.n, { amb: 0.8, dif: 0.3, spec: 0.4 })),
+  });
+  const hx = cell.w / 2;
+  const hy = cell.h / 2;
+  const hz = cell.d / 2;
+  for (const [
+    a,
+    b,
+  ] of [
+    [[-hx, -hy, -hz], [hx, -hy, -hz]], [[-hx, hy, -hz], [hx, hy, -hz]],
+    [[-hx, -hy, hz], [hx, -hy, hz]], [[-hx, hy, hz], [hx, hy, hz]],
+    [[-hx, -hy, -hz], [-hx, hy, -hz]], [[hx, -hy, -hz], [hx, hy, -hz]],
+    [[-hx, -hy, hz], [-hx, hy, hz]], [[hx, -hy, hz], [hx, hy, hz]],
+    [[-hx, -hy, -hz], [-hx, -hy, hz]], [[hx, -hy, -hz], [hx, -hy, hz]],
+    [[-hx, hy, -hz], [-hx, hy, hz]], [[hx, hy, -hz], [hx, hy, hz]],
+  ]) // prettier-ignore
+    wire(k, [add(cell.c, a), add(cell.c, b)], 0.014, { color: "#9fb0d6", weight: 2 });
+  k.add(k.box(cell.w + 0.06, cell.h + 0.06, cell.d + 0.06), {
+    pos: cell.c,
+    flat: 0.3,
+    size: 1.3,
+    weight: 0.5,
+    opacity: 0.16,
+    pattern: false,
+    kind: "fade",
+    params: [0, -0.7],
+    channel: 0,
+    color: () => keep("#7d94e0"),
+  });
+  sign(k, lstm ? "LSTM CELL" : "RNN CELL", [cx, cy + hy + 0.1, cz + hz], 0.018, {
+    color: "#9fb0d6",
+  });
+  k.add(k.cylinder(0.03, cy - hy - floor), {
+    pos: [cx - hx + 0.08, (cy - hy + floor) / 2, cz - hz + 0.08],
+    flat: 0.35,
+    pattern: false,
+    color: () => keep("#4a5778"),
+  });
+  k.add(k.cylinder(0.03, cy - hy - floor), {
+    pos: [cx + hx - 0.08, (cy - hy + floor) / 2, cz - hz + 0.08],
+    flat: 0.35,
+    pattern: false,
+    color: () => keep("#4a5778"),
+  });
+  // The gates (LSTM): slats on the cell's front that turn open.
+  if (lstm)
+    G.gates.forEach((g, gi) => {
+      g.slats.forEach((b, j) =>
+        k.add(k.box(0.2, 0.058, 0.012), {
+          pos: b,
+          flat: 0.3,
+          weight: 2.5,
+          pattern: false,
+          kind: "token",
+          params: [7 + gi * 3 + j, 0],
+          color: (c) => keep(lit(g.color, c.n, { amb: 0.8, dif: 0.3, spec: 0.3 })),
+        }),
+      );
+      text(k, g.label, [g.c[0], g.c[1] - 0.155, g.c[2] + 0.02], 0.016, g.color);
+    });
+  // The orb: four copies, one per colour (tokens 3 to 6), in front of the
+  // cell.
+  RNN.orbColors.forEach((col, j) => {
+    const p = G.path(0);
+    k.add(k.sphere(0.095), {
+      pos: p,
+      flat: 0.4,
+      weight: 2.5,
+      pattern: false,
+      kind: "token",
+      params: [3 + j, 0],
+      color: (c) => keep(lit(mix(col, "#ffffff", 0.2), c.n, { amb: 0.9, dif: 0.25, spec: 0.6 })),
+    });
+    k.add(k.sphere(0.13), {
+      pos: p,
+      flat: 0.5,
+      size: 1.4,
+      opacity: 0.25,
+      pattern: false,
+      kind: "token",
+      params: [3 + j, 0],
+      color: () => keep(col),
+    });
+  });
+  // The words: blocks on the stand in front (tokens 0 to 2).
+  RNN.words.forEach((w, i) => {
+    const p = G.slots[i];
+    k.add(k.box(0.5, 0.22, 0.14), {
+      pos: p,
+      even: true,
+      flat: 0.25,
+      weight: 1.5,
+      pattern: false,
+      kind: "token",
+      params: [i, 0],
+      color: (c) => {
+        if (c.s.face !== 4) return keep(lit(shade(RNN.wordColors[i], 0.55), c.n, { amb: 0.8, dif: 0.3, spec: 0.2 })); // prettier-ignore
+        const edge = Math.min(0.25 - Math.abs(c.p[0] - p[0]), 0.11 - Math.abs(c.p[1] - p[1]));
+        return keep(edge < 0.014 ? RNN.wordColors[i] : "#10172a");
+      },
+    });
+    text(k, w, add(p, [0, 0, 0.073]), 0.024, RNN.wordColors[i], { kind: "token", params: [i, 0] });
+  });
+}
+
+// The convolutional network as a 3D model (see CNN_AT3D).
+function buildCnn3D(k) {
+  const A = CNN_AT3D;
+  k.data = { view: "model" };
+  stand(k, 1.35, A.floor);
+  const cube = (p, size, depth, color, opts = {}) =>
+    k.add(k.box(size, size, depth), {
+      pos: p,
+      flat: 0.25,
+      weight: 1.6,
+      pattern: false,
+      color: (c) => keep(lit(color, c.n, { amb: 0.78, dif: 0.35, spec: 0.2 })),
+      ...opts,
+    });
+  // The picture of a 7: a slab of cubes, the inked ones white.
+  CNN.img.forEach(
+    (row, r) =>
+    row.forEach((v, c) => cube(cellAt(A.img, 7, A.cell, r, c), A.cell * 0.92, 0.07, mix("#1c2542", "#f4f7ff", v))), // prettier-ignore
+  );
+  // Empty slots for the feature map and the pooled map.
+  for (let r = 0; r < 5; r++)
+    for (let c = 0; c < 5; c++)
+      cube(cellAt(A.feat, 5, A.cell, r, c), A.cell * 0.92, 0.05, "#1a2238");
+  for (let r = 0; r < 3; r++)
+    for (let c = 0; c < 3; c++)
+      cube(cellAt(A.pool, 3, A.pcell, r, c), A.pcell * 0.92, 0.05, "#1a2238");
+  // Feature tiles (tokens 1 to 25) and pooled tiles (26 to 34), in front of
+  // their slots.
+  CNN.fmap.forEach(
+    (v, j) =>
+    cube(add(cellAt(A.feat, 5, A.cell, Math.floor(j / 5), j % 5), [0, 0, 0.045]), A.cell * 0.9, 0.04, featColor(v), { kind: "token", params: [1 + j, 0] }), // prettier-ignore
+  );
+  CNN.pool.forEach(
+    (v, j) =>
+    cube(add(cellAt(A.pool, 3, A.pcell, Math.floor(j / 3), j % 3), [0, 0, 0.045]), A.pcell * 0.9, 0.04, featColor(v), { kind: "token", params: [26 + j, 0] }), // prettier-ignore
+  );
+  // The filter: a glowing 3 x 3 frame in front of the picture (token 0),
+  // and the marker on the tile it stamps (token 35).
+  const f0 = add(cellAt(A.img, 7, A.cell, 1, 1), [0, 0, 0.12]);
+  const fs = A.cell * 3;
+  const frame = (c, size, token, color, th) => {
+    for (const [dx, dy, w, h] of [
+      [0, size / 2, size + th, th],
+      [0, -size / 2, size + th, th],
+      [size / 2, 0, th, size],
+      [-size / 2, 0, th, size],
+    ])
+      k.add(k.box(w, h, th), {
+        pos: add(c, [dx, dy, 0]),
+        flat: 0.3,
+        weight: 3,
+        pattern: false,
+        kind: "token",
+        params: [token, 0],
+        color: () => keep(color),
+      });
+  };
+  frame(f0, fs, 0, "#ffd34d", 0.025);
+  const m0 = add(cellAt(A.feat, 5, A.cell, 0, 0), [0, 0, 0.12]);
+  frame(m0, A.cell, 35, "#ffd34d", 0.018);
+  // The receptive field: lines from the filter's four corners to the
+  // marker's, each end following its token (skin).
+  for (const [sx, sy] of [
+    [-1, -1],
+    [1, -1],
+    [1, 1],
+    [-1, 1],
+  ]) {
+    // prettier-ignore
+    const a = add(f0, [(sx * fs) / 2, (sy * fs) / 2, 0]);
+    const b = add(m0, [(sx * A.cell) / 2, (sy * A.cell) / 2, 0]);
+    k.cloud({ count: 220, size: 0.7, pattern: false }, (rand, i, n) => {
+      const t = (i + rand()) / n;
+      return {
+        p: lerp3(a, b, t),
+        color: mix("#ffd34d", "#fff4c2", 0.4),
+        opacity: 0.75,
+        skin: [0, 35, t],
+      };
+    });
+  }
+  sign(k, "FILTER", add(A.img, [0, 0.58, 0]), 0.018, { color: "#9fb0d6" });
+  sign(k, "MAP", add(A.feat, [0, 0.46, 0]), 0.018, { color: "#9fb0d6" });
+  sign(k, "POOL", add(A.pool, [0, 0.4, 0]), 0.018, { color: "#9fb0d6" });
+  // The scores: columns on the stand that rise together (out.grow), each
+  // stopping at its own height, 7 in gold.
+  const y0 = A.floor;
+  CNN.scores.forEach((v, d) => {
+    const x = (d - 4.5) * 0.22;
+    const h = A.barH * v;
+    const top = d === 7;
+    k.add(k.box(0.13, h, 0.13), {
+      pos: [x, y0 + h / 2, A.barZ],
+      flat: 0.25,
+      weight: 1.5,
+      pattern: false,
+      kind: "grow",
+      params: (c) => [clamp01((c.p[1] - y0) / A.barH) * 0.92, 0],
+      color: (c) =>
+        keep(lit(top ? mix("#ffb400", "#fff1a8", (c.p[1] - y0) / h) : mix("#2a6fd6", "#7fd0ff", (c.p[1] - y0) / A.barH), c.n, { amb: 0.85, dif: 0.3, spec: 0.3 })), // prettier-ignore
+    });
+    text(k, String(d), [x, y0 + 0.07, A.barZ + 0.1], 0.02, top ? "#ffd34d" : "#9fb0d6");
+  });
+}
+
 export const RECIPES = {
   perceptron: {
     options: [VIEW_OPTION],
@@ -1554,16 +1822,18 @@ export const RECIPES = {
     },
   },
   cnn: {
+    options: [VIEW_OPTION],
     controls: [{ key: "go", label: "Read", type: "pulse", ease: 5 }],
     action: { key: "go", label: "Read the digit" },
     // A glowing 3 x 3 filter slides across the handwritten 7, stamping the
     // feature map one tile at a time; the tiles then slide together into
     // the pooled map (2 x 2 max pooling), and the digit scores rise, 7 on
     // top.
-    drive(t, c, out) {
+    drive(t, c, out, info) {
       const s = since(c.go, 5);
       const on = s >= 0;
-      const A = CNN_AT;
+      const model = info.data?.view === "model";
+      const A = model ? CNN_AT3D : CNN_AT;
       out.tokens = [];
       // The scan: 25 steps from 0.25 s to 2.35 s.
       const step = 0.084;
@@ -1591,13 +1861,24 @@ export const RECIPES = {
           stamped && shown && !gone ? { offset: mul(sub(to, home), pooling), visible: 1 } : { visible: 0 }; // prettier-ignore
       }
       for (let j = 0; j < 9; j++) out.tokens[26 + j] = { visible: shown && pooling >= 1 ? 1 : 0 };
+      // The 3D model's marker on the tile being stamped (token 35): the
+      // lines from the filter's corners to it follow both.
+      if (model) {
+        const cell = (j) => cellAt(A.feat, 5, A.cell, Math.floor(j / 5), j % 5);
+        const m = i === 0 ? cell(0) : lerp3(cell(from), cell(i), f);
+        out.tokens[35] = scanning ? { offset: sub(m, cell(0)), visible: 1 } : { visible: 0 };
+      }
       // The scores rise (out.grow), then drop at the end.
       out.grow = on ? ease(band(s, 3.15, 3.9)) * (1 - ease(band(s, 4.4, 4.9))) : 0;
       // Tiles that fly across the board are sorted again as they go
       // (docs/PACKS.md 7b, draw order), and once more when they are hidden.
-      out.resort = resortSteps(this, "cnn", on ? s : -1, 2.55, 3.2, 0.11);
+      out.resort = model
+        ? resortSteps(this, "cnn3d", on ? s : -1, 0.25, 3.2, 0.17)
+        : resortSteps(this, "cnn", on ? s : -1, 2.55, 3.2, 0.11);
     },
-    build(k) {
+    build(k, o) {
+      if (o.view === "model") return buildCnn3D(k);
+      k.data = { view: "poster" };
       board(k, 3.0, 2.1);
       const A = CNN_AT;
       const z = 0.012;
@@ -1703,6 +1984,7 @@ export const RECIPES = {
           { id: "lstm", label: "LSTM" },
         ],
       },
+      VIEW_OPTION,
     ],
     controls: [{ key: "go", label: "Read", type: "pulse", ease: 4.5 }],
     action: { key: "go", label: "Read a sentence" },
@@ -1710,9 +1992,11 @@ export const RECIPES = {
     // state) takes on the word's colour mixed with what it carried, runs out
     // of the cell, round the loop and back in, ready for the next word. The
     // LSTM style also opens and shuts its forget, input and output gates.
-    drive(t, c, out) {
+    drive(t, c, out, info) {
       const s = since(c.go, 4.5);
       const on = s >= 0;
+      const G = info.data?.view === "model" ? RNN3D : RNN;
+      const gates = info.data?.view === "model" ? RNN3D.gates : RNN_GATES;
       out.tokens = [];
       let flash = 0;
       let orb = 0;
@@ -1724,7 +2008,7 @@ export const RECIPES = {
         // taken in; all three come back at the end.
         const back = on ? band(s, 4.0, 4.3) : 1;
         const inside = x >= 1 && back <= 0;
-        const at = sub(RNN.feed[i](ease(x)), RNN.slots[i]);
+        const at = sub(G.feed[i](ease(x)), G.slots[i]);
         out.tokens[i] =
           on && x > 0 && !inside ? { offset: back > 0 ? [0, 0, 0] : at, visible: back > 0 ? back : 1 } : { visible: inside ? 0 : 1 }; // prettier-ignore
         if (on && s >= t0 + 0.4) orb = i + 1;
@@ -1734,8 +2018,8 @@ export const RECIPES = {
       });
       if (on && s > 4.0) orb = 0;
       // The orb: one copy per colour, one shown.
-      const p = RNN.path(ease(f));
-      const home = RNN.path(0);
+      const p = G.path(ease(f));
+      const home = G.path(0);
       for (let j = 0; j < 4; j++)
         out.tokens[3 + j] = { offset: sub(p, home), visible: j === orb ? 1 : 0 };
       out.morph = [flash];
@@ -1754,10 +2038,12 @@ export const RECIPES = {
       };
       for (let g = 0; g < 3; g++)
         for (let j = 0; j < 3; j++)
-          out.tokens[7 + g * 3 + j] = { quat: quatX(-1.35 * gate(g)), base: RNN_GATES[g].slats[j] };
+          out.tokens[7 + g * 3 + j] = { quat: quatX(-1.35 * gate(g)), base: gates[g].slats[j] };
       out.resort = resortSteps(this, "rnn", on ? s : -1, 0.15, 4.35, 0.2);
     },
     build(k, o) {
+      if (o.view === "model") return buildRnn3D(k, o.style === "lstm");
+      k.data = { view: "poster" };
       board(k, 2.3, 1.85);
       const lstm = o.style === "lstm";
       const { cell } = RNN;
