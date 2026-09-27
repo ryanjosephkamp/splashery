@@ -563,7 +563,8 @@ class App {
     this.player.setControl(key, value);
   }
 
-  // Rebuilds a kit toy with a changed option (colour, style).
+  // Rebuilds a kit toy with a changed option (colour, style), or loads a
+  // scan's other look.
   async setToyOption(key, value) {
     return this.setToyOptions({ [key]: value });
   }

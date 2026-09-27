@@ -24,7 +24,7 @@ import {
   parseSpz,
   resourceFromArrays,
 } from "./loaders.js";
-import { findToy, assetURL } from "./toys.js";
+import { findToy, assetURL, lookOption, pickLook } from "./toys.js";
 import { createScene, THEMES } from "./state.js";
 import { mulberry32, mixSeed, hash32 } from "./noise.js";
 
@@ -276,7 +276,11 @@ export class Player {
       const def = findToy(toy.id) || findToy("blob");
       if (def.kind === "procedural")
         return this.loadToy({ kind: "builtin", id: def.id }, { onProgress });
-      const url = assetURL(this.profile === "low" && def.urlWeak ? def.urlWeak : def.url);
+      // A scan may come in several looks (colours, a label): the scene's
+      // `look` option picks one, and a missing or unknown look is the first.
+      const look = pickLook(def, toy.options);
+      const src = look?.url ? look : def;
+      const url = assetURL(this.profile === "low" && src.urlWeak ? src.urlWeak : src.url);
       progress(0, `Loading ${def.label}…`);
       const bytes = await fetchBytes(url, (f) => progress(f * 0.9, `Loading ${def.label}…`));
       if (token !== this.loadToken) return null;
@@ -295,6 +299,10 @@ export class Player {
       });
       info = this.measure(asset.resource, def.transform);
       Object.assign(info, { id: def.id, label: def.label, kind: "captured", credit: def.credit });
+      if (look) {
+        info.options = { look: look.id };
+        info.optionDefs = [lookOption(def)];
+      }
       if (rig) {
         this.attachRig(def.id, rig, info);
       }
