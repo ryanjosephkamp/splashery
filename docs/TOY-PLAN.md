@@ -1523,7 +1523,11 @@ Proposals below are suggestions; the owner may change them.
   - Improved: Math: new toy. A tap sends the point once round the circle; dotted guides carry its
     height to the sine wave on the right wall and its left-right place down to the cosine wave on
     the lower wall, both drawn afresh, while e^(iθ) = cos θ + i sin θ lights up term by term in the
-    waves' colors (5 s).
+    waves' colors (5 s). After the owner's review (a 3D version, and your own equation or
+    parameters): a View option adds a 3D helix (the point runs back along e^(iθ) while its shadows
+    draw the cosine wave on the floor and the sine wave on a side wall); a Path option picks the
+    circle, an ellipse, a figure eight, a cardioid, a rose or your own typed path (x = …, y = … or r
+    = …); and a Turns option runs it one to three times.
   - Sound: Two pure tones a quarter turn apart, swelling and fading with the waves.
 - **Fourier circles** (`fourier-circles`). Now: tap: Spin the circles. Plan: keep.
   - Owner: Toy Ideas page (approved, 2026-09-27).
@@ -1531,7 +1535,11 @@ Proposals below are suggestions; the owner may change them.
     Circles option sets how many.
   - Improved: Math: new toy. A tap spins the chain of circles once round and the tip draws the shape
     again: a heart, a star or a square wave (drawn out to the right). The Circles option runs from a
-    wobbly 3 to a crisp 60 (5 s).
+    wobbly 3 to a crisp 60 (5 s). After the owner's review (a 3D version, your own equation or
+    parameters, and spelling a name): a View option stacks the circles in depth (3D); Your words
+    gives each letter or digit its own chain of circles (up to six, on one or two lines; ♥ and ★,
+    and heart and star emoji, draw a heart and a star); and your own closed curve (x = …, y = … or r
+    = …) can be typed too.
   - Sound: Each circle hums its own frequency, building into a chord.
 - **Pythagoras proof** (`pythagoras-proof`). Now: tap: Rearrange. Plan: keep.
   - Owner: Toy Ideas page (approved, 2026-09-27).

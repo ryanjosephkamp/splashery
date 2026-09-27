@@ -91,6 +91,20 @@ type, and two fixes". Everything in the brief is built; clips go on the Effect r
   to 60 circles) and Pythagoras proof (`pythagoras-proof`). Taps: 5, 5 and 4.5 s.
 - Snail fix and American football fix (below).
 
+- Second round (owner's review, September 27, 2026; cards `-r2`): the owner marked Circle and waves
+  and Fourier circles "Needs work" (a 3D version as well, your own equation or parameters, and for
+  Fourier circles a name spelled out, letters, digits and emoji); the other five are "Looks right".
+  - Circle and waves: a View option (2D diagram, or a 3D helix whose shadows are the cosine wave on
+    the floor and the sine wave on a side wall), a Path option (circle, ellipse, figure eight,
+    cardioid, rose, or your own `x = …, y = …` or `r = …`) and Turns (one to three).
+  - Fourier circles: a View option (3D stacks the circles in depth), Your words (each letter or
+    digit gets its own chain; up to six, on one or two lines; ♥ and ★, and heart and star emoji,
+    draw a heart and a star) and your own closed curve. Words are kept in links as ASCII (capitals,
+    digits, `#` for a heart, `*` for a star).
+  - The letters are this lane's own single-stroke paths (`STROKES` in `src/packs/maths.js`, drawn
+    there and back), not a font, so no credit is needed. Other emoji are not drawn (the Operator
+    suggested Twemoji, CC BY 4.0; cut, since the letters matter more).
+
 ## Notes
 
 - **Curves that bend in real time.** Splats can't be moved freely each frame, so the plotters build
