@@ -2,7 +2,16 @@
 // new maths toys and the two fixes in the app.
 
 import { test, expect } from "@playwright/test";
-import { compile, readCurve, readSurface, EquationError, MAX_LENGTH } from "../src/equation.js";
+import fs from "node:fs";
+import path from "node:path";
+import {
+  compile,
+  readCurve,
+  readSurface,
+  asciiEquation,
+  EquationError,
+  MAX_LENGTH,
+} from "../src/equation.js";
 
 const ev = (text, vals = {}, allowed) =>
   compile(text, allowed || ["x", "y", "t", "r", "θ", "a", "b"]).f({
@@ -146,6 +155,17 @@ test.describe("equation reader", () => {
     expect(readSurface("z = a x y").usesA).toBe(true);
   });
 
+  test("typed text is kept as plain ASCII that reads the same", () => {
+    const typed = "r = 2·sin(3θ)² − √(π) ÷ 4 + x⁴";
+    const kept = asciiEquation(typed.replace("x⁴", "1"));
+    expect(kept).toBe("r = 2*sin(3theta)^2 - sqrt(pi) / 4 + 1");
+    expect(/^[\x20-\x7e]*$/.test(kept)).toBe(true);
+    const a = readCurve(typed.replace("x⁴", "1"));
+    const b = readCurve(kept);
+    for (const th of [0.1, 1, 2.5]) close(a.r({ θ: th }), b.r({ θ: th }));
+    expect(asciiEquation("  y  =\n x² ")).toBe("y = x^2");
+  });
+
   test("each plotter only takes its own letters", () => {
     fails(() => readCurve("y = t"), /“t” can't be used here/);
     fails(() => readCurve("r = x"), /can't be used here/);
@@ -250,3 +270,104 @@ test.describe("equation reader", () => {
     }
   });
 });
+
+// ---- The plotters' input panel, in the app ------------------------------------------
+
+test("the graph plotter draws a typed curve, keeps it through a link, and keeps the last good curve after bad input", async ({
+  page,
+}) => {
+  const { encodeSceneHash } = await import("../src/codec.js");
+  const { createScene } = await import("../src/state.js");
+  const problems = [];
+  page.on("pageerror", (e) => problems.push(e.message));
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/?renderer=webgl2&profile=weak");
+  await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
+  await page.evaluate(() => window.__splashery.app.chooseToy("graph-plotter"));
+  await expect(page.locator("#toy-status")).toHaveText(/^Graph plotter/, { timeout: 180_000 });
+  const options = () => page.evaluate(() => window.__splashery.player.scene.toy.options);
+  const box = page.locator("#toy-input-text");
+  await box.fill("y = a·x² − 1");
+  await page.locator("#toy-input-go").click();
+  await expect.poll(options).toMatchObject({ curve: "custom", eq: "y = a*x^2 - 1" });
+  await expect(page.locator("#toy-input .input-shown")).toHaveText(/y = a\*x\^2 - 1/, { timeout: 60_000 }); // prettier-ignore
+  // Bad input: one plain message, and the curve stays.
+  await page.locator("#toy-input-text").fill("y = sin(x");
+  await page.locator("#toy-input-go").click();
+  await expect(page.locator("#toy-input .warning")).toHaveText(/^That can't be drawn: check the brackets/); // prettier-ignore
+  expect(await options()).toMatchObject({ curve: "custom", eq: "y = a*x^2 - 1" });
+  // A link keeps the typed curve.
+  const scene = createScene();
+  scene.toy = { kind: "builtin", id: "graph-plotter", options: { curve: "custom", eq: "r = 1 + cos theta" } }; // prettier-ignore
+  await page.goto("about:blank");
+  await page.goto(`/?renderer=webgl2&profile=weak#s=${await encodeSceneHash(scene)}`);
+  await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
+  await expect(page.locator("#toy-status")).toHaveText(/^Graph plotter/, { timeout: 180_000 });
+  await expect(page.locator("#toy-input .input-shown")).toHaveText(/r = 1 \+ cos theta/, { timeout: 60_000 }); // prettier-ignore
+  // A link with text that can't be read falls back to the sine wave.
+  scene.toy.options = { curve: "custom", eq: "y = )(" };
+  await page.goto("about:blank");
+  await page.goto(`/?renderer=webgl2&profile=weak#s=${await encodeSceneHash(scene)}`);
+  await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
+  await expect(page.locator("#toy-status")).toHaveText(/^Graph plotter/, { timeout: 180_000 });
+  await expect(page.locator("#toy-input .input-shown")).toHaveText(/Sine wave/, { timeout: 60_000 }); // prettier-ignore
+  expect(problems).toEqual([]);
+});
+
+test("the surface plotter plots a typed surface", async ({ page }) => {
+  const problems = [];
+  page.on("pageerror", (e) => problems.push(e.message));
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/?renderer=webgl2&profile=weak");
+  await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
+  await page.evaluate(() => window.__splashery.app.chooseToy("surface-plotter"));
+  await expect(page.locator("#toy-status")).toHaveText(/^Surface plotter/, { timeout: 180_000 });
+  await page.locator("#toy-input-text").fill("z = sin(x)·cos(y)·a");
+  await page.locator("#toy-input-go").click();
+  await expect
+    .poll(() => page.evaluate(() => window.__splashery.player.scene.toy.options))
+    .toMatchObject({ surface: "custom", eq: "z = sin(x)*cos(y)*a" });
+  await page.locator("#toy-input-text").fill("z = t");
+  await page.locator("#toy-input-go").click();
+  await expect(page.locator("#toy-input .warning")).toHaveText(/^That can't be drawn: “t” can't be used here/); // prettier-ignore
+  expect(problems).toEqual([]);
+});
+
+// ---- Screenshots (math-*.png): each toy mid-tap, on a phone and a desktop ------------
+
+const SHOTS = path.resolve("tests/screenshots");
+for (const [id, label, wait] of [
+  ["graph-plotter", "Graph plotter", 1500],
+  ["surface-plotter", "Surface plotter", 1300],
+  ["unit-circle", "Circle and waves", 2200],
+  ["fourier-circles", "Fourier circles", 2600],
+  ["pythagoras-proof", "Pythagoras proof", 2300],
+  ["snail", "Snail", 1400],
+  ["american-football", "American football", 700],
+]) {
+  test(`${id} mid-tap screenshots at 390x844 and 1440x900`, async ({ browser }) => {
+    fs.mkdirSync(SHOTS, { recursive: true });
+    for (const [w, h, mobile] of [
+      [390, 844, true],
+      [1440, 900, false],
+    ]) {
+      const ctx = await browser.newContext({
+        viewport: { width: w, height: h },
+        ...(mobile ? { hasTouch: true, isMobile: true } : {}),
+      });
+      const page = await ctx.newPage();
+      const problems = [];
+      page.on("pageerror", (e) => problems.push(e.message));
+      await page.goto("/?renderer=webgl2&profile=weak");
+      await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
+      await page.evaluate((toy) => window.__splashery.app.chooseToy(toy), id);
+      await expect(page.locator("#toy-status")).toHaveText(new RegExp(`^${label}`), { timeout: 180_000 }); // prettier-ignore
+      await page.waitForTimeout(1500);
+      await page.evaluate(() => window.__splashery.player.act(null));
+      await page.waitForTimeout(wait);
+      await page.screenshot({ path: path.join(SHOTS, `math-${id}-${w}x${h}.png`) });
+      expect(problems).toEqual([]);
+      await ctx.close();
+    }
+  });
+}

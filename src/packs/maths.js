@@ -3,7 +3,7 @@
 // itself inside out, and the solids and the Sierpinski tetrahedron come
 // apart when tapped. Loaded on demand.
 
-import { readCurve, readSurface, EquationError } from "../equation.js";
+import { readCurve, readSurface, asciiEquation, EquationError } from "../equation.js";
 import {
   mix,
   shade,
@@ -2364,10 +2364,10 @@ const GRAPH_INPUT = {
   accept: ".txt",
   note: "Type y = … (x from −2π to 2π), r = … with θ (a polar curve, one turn), or x = …, y = … with t (a curve in t, 0 to 2π). Use + − × ÷ ^, brackets, sin, cos, tan, exp, log, √, abs, pi and e. Put a in it to see it bend when you tap; b is the b slider.",
   async read(text) {
-    const eq = String(text || "")
-      .replace(/\s+/g, " ")
-      .trim();
-    const parsed = readCurve(eq);
+    const parsed = readCurve(text);
+    // Kept as plain ASCII (links keep only that).
+    const eq = asciiEquation(text);
+    readCurve(eq);
     const plot = makePlot(parsed, { id: "custom", eq, a: TYPED_A }, 1);
     if (!plot.ok) throw new EquationError("none of it lands on the grid. Try another.");
     return { curve: "custom", eq };
@@ -2741,9 +2741,8 @@ const SURFACE_INPUT = {
   accept: ".txt",
   note: "Type z = … with x and y (each from −3 to 3), or r and θ (the distance from the middle and the angle round it). Use + − × ÷ ^, brackets, sin, cos, tan, exp, log, √, abs, pi and e. Put a in it to see it move when you tap.",
   async read(text) {
-    const eq = String(text || "")
-      .replace(/\s+/g, " ")
-      .trim();
+    readSurface(text);
+    const eq = asciiEquation(text);
     const plot = makeSurface(readSurface(eq), { id: "custom", eq, dom: TYPED_DOM, a: TYPED_A });
     if (!plot.ok) throw new EquationError("none of it lands on the plot. Try another.");
     return { surface: "custom", eq };

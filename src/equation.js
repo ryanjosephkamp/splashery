@@ -447,9 +447,20 @@ export function readSurface(text) {
   return { kind: "surface", z: f, usesA: c.used.has("a"), usesB: c.used.has("b") };
 }
 
-// Tidies typed text for showing and keeping (one line, trimmed).
-export function tidy(text) {
+// Typed text as plain ASCII, the way it is kept (links keep only printable
+// ASCII text): θ becomes theta, x² becomes x^2, × and · become *, and so on.
+// One line, trimmed.
+export function asciiEquation(text) {
+  const SUP = "⁰¹²³⁴⁵⁶⁷⁸⁹";
   return String(text ?? "")
+    .replace(/[⁰¹²³⁴⁵⁶⁷⁸⁹]+/g, (m) => `^${[...m].map((d) => SUP.indexOf(d)).join("")}`)
+    .normalize("NFKC")
+    .replace(/[−–—]/g, "-")
+    .replace(/[×·⋅∙]/g, "*")
+    .replace(/[÷∕]/g, "/")
+    .replace(/√/g, "sqrt")
+    .replace(/[θΘϑ]/g, "theta")
+    .replace(/π/g, "pi")
     .replace(/\s+/g, " ")
     .trim();
 }
