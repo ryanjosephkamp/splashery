@@ -120,7 +120,7 @@ type, and two fixes". Everything in the brief is built; clips go on the Effect r
   the drawn-in body. Hide takes 3.2 s (was 2.4 s).
 - **American football.** Built twice (PACKS.md 7b, rule 1): the second copy half a turn round its
   long axis, and whichever is within a quarter turn of its built pose shows. The cull flag (rule 9)
-  did not suit it: it hides by the direction from the centre, which cuts off the ends of a long
+  did not suit it: it hides by the direction from the center, which cuts off the ends of a long
   ball. The spiral is six whole turns, so it lands laces up. Its inside hides while it spins.
   `density: 2`.
 
@@ -128,7 +128,7 @@ type, and two fixes". Everything in the brief is built; clips go on the Effect r
 
 - The input panel always shows a file button (the engine adds it); the plotters' reads a text file's
   first line as an equation (`Open a text file…`).
-- Between the nine knots a point moves in a straight line, so a travelling wave dips slightly in
+- Between the nine knots a point moves in a straight line, so a traveling wave dips slightly in
   height mid-step (about 8% for the cyclic ones). It reads as smooth motion at phone size.
 - A curve that runs off the board during the sweep slides along the board's edge until it comes
   back.
