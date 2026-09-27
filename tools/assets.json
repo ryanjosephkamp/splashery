@@ -289,7 +289,7 @@
       "lite": 80000,
       "rotate": [180, 0, 0],
       "source": ".cache/g/out/pencil-1/pencil-1.ply",
-      "sourceNote": "Made by tools/image-to-3d.mjs (TRELLIS, seed 1) from the CC BY 2.0 photo https://commons.wikimedia.org/wiki/File:Kleiner_Bleistift_(40045317711).jpg by Tim Reckmann, resized to 1024 px: node tools/image-to-3d.mjs <photo.png> --name=pencil-1",
+      "sourceNote": "Made by tools/image-to-3d.mjs (TRELLIS, seed 1) from the CC BY 2.0 photo https://commons.wikimedia.org/wiki/File:Kleiner_Bleistift_(40045317711).jpg by Tim Reckmann, resized to 1024 px: node tools/image-to-3d.mjs <photo.png> --name=pencil-1. After packing, node tools/g-looks.mjs pencil-real paints the yellow pencil look.",
       "splats": 200000
     },
     {
@@ -298,7 +298,7 @@
       "lite": 160000,
       "rotate": [180, 0, 0],
       "source": ".cache/g/out/soup-can-1/soup-can-1.ply",
-      "sourceNote": "Made by tools/image-to-3d.mjs (TRELLIS, seed 1) from the CC0 photo https://commons.wikimedia.org/wiki/File:Can_opened_with_side_opener.jpg by Ll1324, resized to 1024 px: node tools/image-to-3d.mjs <photo.png> --name=soup-can-1",
+      "sourceNote": "Made by tools/image-to-3d.mjs (TRELLIS, seed 1) from the CC0 photo https://commons.wikimedia.org/wiki/File:Can_opened_with_side_opener.jpg by Ll1324, resized to 1024 px: node tools/image-to-3d.mjs <photo.png> --name=soup-can-1. After packing, node tools/g-looks.mjs tin-can-real wraps on the peaches label (an original CC0 design drawn by that tool).",
       "splats": 200000
     }
   ]

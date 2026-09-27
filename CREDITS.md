@@ -104,6 +104,10 @@ model's guess.
 | Real pencil  | [Kleiner Bleistift](<https://commons.wikimedia.org/wiki/File:Kleiner_Bleistift_(40045317711).jpg>)     | Tim Reckmann | [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/)     |
 | Real tin can | [Can opened with side opener](https://commons.wikimedia.org/wiki/File:Can_opened_with_side_opener.jpg) | Ll1324       | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 
+The Real pencil's yellow paint and the Real tin can's peaches label are painted over each scan's own
+shading by `tools/g-looks.mjs`. The label is an original design drawn by that tool for Splashery,
+released as CC0; it copies no product's label.
+
 ## Procedural toys
 
 The Jelly blob, Donut, Neon knot and Tiny planet (a tribute to Splashery v1) are generated in the

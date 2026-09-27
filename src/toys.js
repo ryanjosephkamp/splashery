@@ -629,7 +629,7 @@ export const TOYS = [
     id: "pencil-real",
     label: "Real pencil",
     category: "scans",
-    tags: "photoreal ai photo pencil wood eraser school stationery",
+    tags: "photoreal ai photo pencil yellow hb wood eraser school stationery",
     kind: "captured",
     url: "assets/toys/pencil-real/pencil-real.sog",
     urlWeak: "assets/toys/pencil-real/pencil-real-lite.sog",
@@ -641,14 +641,14 @@ export const TOYS = [
       license: "CC BY 2.0",
       licenseUrl: "https://creativecommons.org/licenses/by/2.0/",
       changes:
-        "Made into 3D Gaussian splats from this one photo with the TRELLIS image-to-3D model (MIT), recentred and scaled.",
+        "Made into 3D Gaussian splats from this one photo with the TRELLIS image-to-3D model (MIT), recentred and scaled. Painted as a classic yellow pencil (yellow body, silver ferrule, pink eraser, a plain HB mark) over the scan's own shading.",
     },
   },
   {
     id: "tin-can-real",
     label: "Real tin can",
     category: "scans",
-    tags: "photoreal ai photo tin can soup food metal kitchen",
+    tags: "photoreal ai photo tin can peaches label fruit food metal kitchen",
     kind: "captured",
     url: "assets/toys/tin-can-real/tin-can-real.sog",
     urlWeak: "assets/toys/tin-can-real/tin-can-real-lite.sog",
@@ -660,7 +660,7 @@ export const TOYS = [
       license: "CC0 1.0",
       licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/",
       changes:
-        "Made into 3D Gaussian splats from this one photo with the TRELLIS image-to-3D model (MIT), recentred and scaled.",
+        "Made into 3D Gaussian splats from this one photo with the TRELLIS image-to-3D model (MIT), recentred and scaled. The peaches label is an original design made for Splashery (CC0), wrapped round the can's side over the scan's own shading.",
     },
   },
   // Kit toys: recipes in src/packs/<pack>.js, built in the browser.
