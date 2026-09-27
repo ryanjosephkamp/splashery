@@ -80,7 +80,7 @@ Notes:
 ## State
 
 September 27, 2026: all 11 toys are built in `src/packs/computing.js` on the new "AI and computing"
-shelf (after Maths), each with its sound and plan entry. Draft PR:
+shelf (after Math), each with its sound and plan entry. Draft PR:
 https://github.com/ryanjosephkamp/splashery/pull/52. Next: clips on the Effect review page, then the
 owner's marks.
 
@@ -193,7 +193,7 @@ What each tap does now:
   something else, tell me.
 - Word vectors: GloVe is under the ODC PDDL (public domain), checked on the live page; credited in
   CREDITS.md and in the toy. The word list leaves out words about violence, weapons and sex.
-- A lesson for PACKS.md: text and other small keep-coloured details need size / sqrt(weight) of
+- A lesson for PACKS.md: text and other small keep-colored details need size / sqrt(weight) of
   about 0.5 or more, or they vanish at 320 pixels (weight 10 did).
 
 - A lesson for PACKS.md 7b: tokens that glide across a flat board just in front of it disappear
