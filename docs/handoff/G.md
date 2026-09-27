@@ -51,6 +51,17 @@ on the Effect review page.
   flat, two turns) and **Real tin can** (`tin-can-real`, CC0 photo by Ll1324; tap: knocked onto its
   rim, spins round like a settling coin and drops flat).
 - Failed: fountain pen (the thin nib broke into spikes).
+- Owner's review (2026-09-27): both "look great", but the defaults should look like the real thing,
+  not blank. `tools/g-looks.mjs` now paints them over the scan's own shading (each splat's colour
+  scaled by its brightness against its region's median): the pencil is a classic yellow pencil
+  (yellow body, silver ferrule, pink eraser, bare wood cone, graphite point, a plain "HB" mark); the
+  can wears an original vintage-style "Peaches" label (CC0, drawn by the tool in Chromium's canvas)
+  on its side only, with the rims and lid left metal. Cards `g-pencil-real-r2` and
+  `g-tin-can-real-r2`; the old cards are marked replaced.
+- Real labels: every real can label found (Commons, label archives) carries a brand name, so none is
+  used. Commons' API rate-limited this container (HTTP 429), so the search there was short.
+- Custom colours need a small engine change (below); the tool already has the other looks
+  (`--look=red|blue|green|wood` for the pencil, `--look=tomatoes|plain` for the can).
 - Waiting on quota: the clear water bottle (CC0 photo ready). The free ZeroGPU quota ran out after
   four runs.
 - Report only: the red water bottle and the running shoe are rawpixel previews with a watermark, and
@@ -70,10 +81,20 @@ on the Effect review page.
 
 ## Known issues
 
-- The tin can has the photo's glare baked in (one side brighter).
+- The tin can's photo glare is softened under the label but still shows faintly on the metal and on
+  the label's cream bands.
+- The pencil's unseen underside (the model's guess) is a darker yellow; the spin shows it briefly.
 - The pencil is short (the photo is of a stubby pencil).
 
 ## For the Operator
+
+- Engine change for colour options on scan toys (not made): let a captured toy in `src/toys.js` list
+  `looks: [{ id, label, url, urlWeak }]`. The captured loader in `src/player.js` would pick the url
+  from `toy.options.look` (checked with `resolveOptions` against a select option built from `looks`,
+  default the first), return that option in `info.options`/`info.recipe.options` so the Toy tab
+  shows it, and rebuild on change as kit toys do. Only the look's id is saved in links. Each extra
+  look is a pair of SOGs from `tools/g-looks.mjs --look=<id> --out=...` (about 1.9 MB per pencil
+  look, 4.1 MB per can look).
 
 - A full test run also rewrites lanes' own screenshots (`e5-*`, `e6a-*`), which
   `node tools/upkeep.mjs --restore-shots` does not put back; lanes need
