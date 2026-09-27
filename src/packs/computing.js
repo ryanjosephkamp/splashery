@@ -9,6 +9,7 @@
 
 import { mix, shade, clamp, ramp } from "../kit.js";
 import { FONT } from "../font.js";
+import { CNN_NET, CNN_SAMPLES, CNN_ACCURACY } from "./computing-cnn.js";
 
 const TAU = Math.PI * 2;
 const add = (a, b) => [a[0] + b[0], a[1] + b[1], a[2] + b[2]];
@@ -2104,6 +2105,147 @@ function buildClassicTf(k, model) {
   k.reach([T.dec, 1.45, 0]);
 }
 
+// The drawable network (the CNN's "3D, draw a digit" view): a small CNN
+// trained by tools/cnn-train.mjs on the UCI handwritten digits (CC BY 4.0)
+// reads your 8 x 8 drawing: conv (4 filters) + ReLU, max pool, conv (8
+// filters) + ReLU, max pool, then the ten digit scores. Every cell of every
+// layer is a cube as bright as it fires.
+function cnnForward(px) {
+  const N = CNN_NET;
+  const x = px.map((v) => v / 16);
+  const conv = (inp, cin, S, w, b, cout) => {
+    const out = new Array(cout * S * S).fill(0);
+    for (let o = 0; o < cout; o++)
+      for (let y = 0; y < S; y++)
+        for (let xx = 0; xx < S; xx++) {
+          let v = b[o];
+          for (let c = 0; c < cin; c++)
+            for (let dy = -1; dy <= 1; dy++)
+              for (let dx = -1; dx <= 1; dx++) {
+                const yy = y + dy;
+                const x2 = xx + dx;
+                if (yy < 0 || x2 < 0 || yy >= S || x2 >= S) continue;
+                v += w[((o * cin + c) * 3 + dy + 1) * 3 + dx + 1] * inp[c * S * S + yy * S + x2];
+              }
+          out[o * S * S + y * S + xx] = Math.max(0, v);
+        }
+    return out;
+  };
+  const pool = (inp, c, S) => {
+    const H = S / 2;
+    const out = [];
+    for (let k = 0; k < c; k++)
+      for (let y = 0; y < H; y++)
+        for (let xx = 0; xx < H; xx++)
+          out.push(Math.max(...[0, 1, 2, 3].map((d) => inp[k * S * S + (2 * y + (d >> 1)) * S + 2 * xx + (d & 1)]))); // prettier-ignore
+    return out;
+  };
+  const c1 = conv(x, 1, 8, N.w1, N.b1, 4);
+  const p1 = pool(c1, 4, 8);
+  const c2 = conv(p1, 4, 4, N.w2, N.b2, 8);
+  const p2 = pool(c2, 8, 4);
+  const z = N.b3.map((b, o) => p2.reduce((s, v, i) => s + v * N.w3[o * 32 + i], b));
+  const m = Math.max(...z);
+  const e = z.map((v) => Math.exp(v - m));
+  const sum = e.reduce((a, b) => a + b, 0);
+  const prob = e.map((v) => v / sum);
+  return { x, c1, p1, c2, p2, prob, digit: prob.indexOf(Math.max(...prob)) };
+}
+// A drawing as option text ("pad:v,v,...", 64 values 0..16) and back.
+const cnnPad = (px) => `pad:${px.join(",")}`;
+function cnnPixels(text) {
+  const v = String(text || "")
+    .replace(/^pad:/, "")
+    .split(",")
+    .map(Number);
+  return v.length === 64 && v.every((n) => Number.isFinite(n)) ? v.map((n) => clamp(Math.round(n), 0, 16)) : CNN_SAMPLES[7]; // prettier-ignore
+}
+const CNN_DRAWN = { text: cnnPad(CNN_SAMPLES[7]) };
+// The layers' places: each layer a stack of sheets (one per channel)
+// facing you, fanned back like a hand of cards, the layers left to right.
+const CNND = (() => {
+  const layers = [
+    { key: "x", ch: 1, S: 8, x: -1.08, cell: 0.1, label: "INPUT" },
+    { key: "c1", ch: 4, S: 8, x: -0.42, cell: 0.066, label: "CONV" },
+    { key: "p1", ch: 4, S: 4, x: 0.14, cell: 0.08, label: "POOL" },
+    { key: "c2", ch: 8, S: 4, x: 0.58, cell: 0.06, label: "CONV" },
+    { key: "p2", ch: 8, S: 2, x: 0.98, cell: 0.07, label: "POOL" },
+  ];
+  const fan = [0.05, 0, -0.14]; // each channel behind the last
+  const sheet = (L, c) => {
+    const k = c - (L.ch - 1) / 2;
+    return [L.x + fan[0] * k, 0.3 + fan[1] * k, fan[2] * k];
+  };
+  const cellAt = (L, c, y, x) => add(sheet(L, c), [(x - (L.S - 1) / 2) * L.cell, ((L.S - 1) / 2 - y) * L.cell, 0]); // prettier-ignore
+  return { layers, sheet, cellAt, floor: -0.62 };
+})();
+
+// The drawable network as a 3D model (see CNND): its cells appear layer by
+// layer as a tap runs your drawing through it (a fade on channel 0), and the
+// scores rise (out.grow), the winner in gold.
+function buildCnnDraw(k, o) {
+  const px = cnnPixels(o.digit);
+  CNN_DRAWN.text = cnnPad(px);
+  const f = cnnForward(px);
+  k.data = { view: "draw", digit: f.digit };
+  const G = CNND;
+  stand(k, 1.35, G.floor);
+  G.layers.forEach((L, li) => {
+    const vals = f[L.key];
+    const top = Math.max(1e-6, ...vals);
+    const at = li === 0 ? -1 : 0.05 + (li - 1) * 0.2;
+    for (let c = 0; c < L.ch; c++) {
+      // A dark backing sheet behind each channel's cells.
+      const w = L.S * L.cell + 0.03;
+      k.add(k.box(w, w, 0.012), {
+        pos: add(G.sheet(L, c), [0, 0, -0.02]),
+        flat: 0.25,
+        pattern: false,
+        color: (cc) => keep(Math.max(Math.abs(cc.p[0] - G.sheet(L, c)[0]), Math.abs(cc.p[1] - G.sheet(L, c)[1])) > w / 2 - 0.008 ? BOARD_RIM : "#10172a"), // prettier-ignore
+      });
+      for (let y = 0; y < L.S; y++)
+        for (let x = 0; x < L.S; x++) {
+          const v = vals[c * L.S * L.S + y * L.S + x] / top;
+          const col =
+            li === 0 ? mix("#1c2542", "#f4f7ff", v) : mix("#15284a", "#7ff6ff", Math.pow(v, 0.7));
+          k.add(k.box(L.cell * 0.86, L.cell * 0.86, 0.03), {
+            pos: G.cellAt(L, c, y, x),
+            flat: 0.25,
+            weight: 1.4,
+            pattern: false,
+            ...(li === 0 ? {} : { kind: "fade", params: [at, -0.08], channel: 0 }),
+            color: (cc) => keep(lit(col, cc.n, { amb: 0.85, dif: 0.3, spec: 0.2 })),
+          });
+        }
+    }
+    const front = G.sheet(L, 0);
+    sign(k, L.label, add(front, [0, (L.S * L.cell) / 2 + (li % 2 ? 0.26 : 0.12), 0.02]), 0.015, { color: "#9fb0d6" }); // prettier-ignore
+  });
+  // The scores: a column per digit in front, rising together (out.grow) to
+  // its probability, the winner in gold.
+  const y0 = G.floor;
+  const H = 0.55;
+  f.prob.forEach((p, d) => {
+    const base = [-0.55 + d * 0.13, 0, 0.72];
+    const h = Math.max(0.02, H * p);
+    const win = d === f.digit;
+    k.add(k.box(0.08, h, 0.08), {
+      pos: [base[0], y0 + h / 2, base[2]],
+      flat: 0.25,
+      weight: 1.5,
+      pattern: false,
+      kind: "grow",
+      params: (cc) => [clamp01((cc.p[1] - y0) / H) * 0.92, 0],
+      color: (cc) =>
+        keep(lit(win ? "#ffb400" : "#3d7fe0", cc.n, { amb: 0.85, dif: 0.3, spec: 0.3 })),
+    });
+    text(k, String(d), [base[0], y0 + 0.05, base[2] + 0.05], 0.017, win ? "#ffd34d" : "#9fb0d6");
+  });
+  // The answer, big, over the scores (lit as the tap ends).
+  const ans = [1.12, y0 + 0.45, 0.6];
+  sign(k, String(f.digit), ans, 0.04, { color: "#ffd34d", part: k.part("answer", { pivot: ans }) });
+}
+
 export const RECIPES = {
   perceptron: {
     options: [VIEW_OPTION],
@@ -2478,7 +2620,42 @@ export const RECIPES = {
     },
   },
   cnn: {
-    options: [VIEW_OPTION],
+    options: [
+      {
+        ...VIEW_OPTION,
+        choices: [...VIEW_OPTION.choices, { id: "draw", label: "3D, draw a digit" }],
+      },
+      { key: "digit", label: "Your digit", type: "text", default: "", hidden: true },
+    ],
+    input: {
+      title: "Draw a digit",
+      placeholder: "or type a digit, 0 to 9",
+      button: "Show it",
+      fileButton: false,
+      pad: { cols: 8, rows: 8, max: 16, button: "Read my digit", value: () => CNN_DRAWN.text },
+      note: `Draw a digit on the pad, as big as the pad (or type one to see a handwritten sample), and the 3D network reads it: a small CNN trained on 3,823 handwritten digits from the UCI digits set (${(CNN_ACCURACY * 100).toFixed(0)}% right on 1,797 it had not seen).`, // prettier-ignore
+      async read(text) {
+        const t = String(text || "").trim();
+        if (/^pad:/.test(t)) {
+          const px = cnnPixels(t);
+          if (px.every((v) => v === 0)) throw new Error("The pad is empty: draw a digit first.");
+          return { view: "draw", digit: cnnPad(px) };
+        }
+        if (/^[0-9]$/.test(t)) return { view: "draw", digit: cnnPad(CNN_SAMPLES[Number(t)]) };
+        throw new Error("Draw on the pad, or type a single digit from 0 to 9.");
+      },
+      shown: () => "",
+    },
+    credits: [
+      {
+        label: "Handwritten digits",
+        title: "Optical Recognition of Handwritten Digits (UCI Machine Learning Repository)",
+        source: "https://archive.ics.uci.edu/dataset/80/optical+recognition+of+handwritten+digits",
+        author: "E. Alpaydin and C. Kaynak (1998)",
+        license: "CC BY 4.0",
+        licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
+      },
+    ],
     controls: [{ key: "go", label: "Read", type: "pulse", ease: 5 }],
     action: { key: "go", label: "Read the digit" },
     // A glowing 3 x 3 filter slides across the handwritten 7, stamping the
@@ -2488,6 +2665,16 @@ export const RECIPES = {
     drive(t, c, out, info) {
       const s = since(c.go, 5);
       const on = s >= 0;
+      if (info.data?.view === "draw") {
+        // Your digit: the layers go dark, then light up one after another as
+        // the data flows through; the scores rise; the answer lights.
+        const dip = on ? 1 - ease(band(s, 0, 0.25)) : 1;
+        const flow = on && s >= 0.3 ? band(s, 0.4, 3.2) : dip;
+        out.morph = [on ? (s < 0.3 ? dip : flow) : 1];
+        out.grow = on ? (s < 0.3 ? dip : ease(band(s, 3.1, 3.8))) : 1;
+        out.parts.answer = { visible: on && s > 0.2 && s < 3.8 ? 0 : 1 };
+        return;
+      }
       const model = info.data?.view === "model";
       const A = model ? CNN_AT3D : CNN_AT;
       out.tokens = [];
@@ -2533,6 +2720,7 @@ export const RECIPES = {
         : resortSteps(this, "cnn", on ? s : -1, 2.55, 3.2, 0.11);
     },
     build(k, o) {
+      if (o.view === "draw") return buildCnnDraw(k, o);
       if (o.view === "model") return buildCnn3D(k);
       k.data = { view: "poster" };
       board(k, 3.0, 2.1);

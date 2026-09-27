@@ -104,8 +104,8 @@ for (const id of IDS) {
       const shaped = new Set();
       for (let i = 0; i < count; i++) if (anim[i * 4 + 1] === KINDS.morph) shaped.add(Math.floor(anim[i * 4 + 3] / 4096)); // prettier-ignore
       for (const ch of shaped) expect(Math.abs(rest.morph?.[ch] ?? 0), `${id}: channel ${ch}`).toBeLessThan(0.05); // prettier-ignore
-      // Toys that use out.grow (a gauge, the scores) keep it at 0 at rest.
-      expect(rest.grow ?? 0).toBeLessThan(0.05);
+      // out.grow ends where it rests.
+      expect(Math.abs((last.grow ?? 1) - (rest.grow ?? 1))).toBeLessThan(0.05);
     });
   }
 }
@@ -267,4 +267,22 @@ test("transformer: both diagrams in both views play through and end at rest", ()
         expect(Math.hypot(...mid.tokens[1].offset)).toBeGreaterThan(0.3);
       }
     }
+});
+
+test("CNN: the drawable network reads typed samples and drawings with its trained weights", async () => {
+  const r = RECIPES.cnn;
+  // Every sample digit is read as itself.
+  for (let d = 0; d < 10; d++) {
+    const o = await r.input.read(String(d));
+    expect(o.view).toBe("draw");
+    expect(build("cnn", o).data.digit, `sample ${d}`).toBe(d);
+  }
+  // A drawing from the pad: a plain vertical stroke reads as a 1.
+  const one = Array.from({ length: 64 }, (_, i) => (i % 8 === 3 || i % 8 === 4 ? 16 : 0));
+  const o = await r.input.read(`pad:${one.join(",")}`);
+  expect(build("cnn", o).data.digit).toBe(1);
+  await expect(r.input.read(`pad:${new Array(64).fill(0).join(",")}`)).rejects.toThrow(/empty/);
+  await expect(r.input.read("12")).rejects.toThrow(/single digit/);
+  // A saved link with a broken drawing falls back to the sample 7.
+  expect(build("cnn", { view: "draw", digit: "pad:1,2,3" }).data.digit).toBe(7);
 });

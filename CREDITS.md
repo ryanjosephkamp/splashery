@@ -140,6 +140,17 @@ Stanford NLP, released under the
 weapons and sex), scales each vector to unit length and packs it into
 [assets/toys/word-vectors/words.txt](assets/toys/word-vectors/words.txt).
 
+## Handwritten digits
+
+The convolutional network toy's "3D, draw a digit" view uses a small CNN trained by
+`tools/cnn-train.mjs` on the
+[Optical Recognition of Handwritten Digits](https://archive.ics.uci.edu/dataset/80/optical+recognition+of+handwritten+digits)
+set from the UCI Machine Learning Repository (E. Alpaydin and C. Kaynak, 1998;
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)). The trained weights and ten sample
+digits from the set's test part are in [src/packs/computing-cnn.js](src/packs/computing-cnn.js). The
+idea of a 3D network that reads your drawing comes from okdalto's CNN-visualization (LGPL-3.0); no
+code or weights were taken from it.
+
 The molecule toy's built-in list and the structures you open yourself are read in your browser
 (`src/chem/`); nothing is fetched from anywhere else.
 
