@@ -26,6 +26,10 @@ work is in [OPERATING.md](OPERATING.md).
   built. Scene schema v3; v2 still loads.
 - Every kit toy's tap is checked by `tests/taps.spec.mjs`; its known exceptions (with reasons) are
   listed at its top. The full suite has 164 tests.
+- The governance from September 27 is merged (#53): the Operator runs the lanes, workers are Opus
+  5.5 only, new public text is in American English (`tools/us-english.mjs`), and the sound review
+  runs on the Sound Board. Splashery's own code is MIT licensed (#51, `LICENSE`); assets keep their
+  own licenses and credits.
 - Locked (owner approved, do not change its look or behaviour): the laptop. Its smoke test guards
   it.
 
