@@ -215,7 +215,7 @@ const textWidth = (str) => str.length * 6 - 1;
 
 // A line of text facing +Z, centred on `at`, `px` the size of one font pixel.
 // Dense, keep-coloured splats, so it stays crisp at phone size.
-function text(k, str, at, px, color, { weight = 10, align = "center", ...rest } = {}) {
+function text(k, str, at, px, color, { weight = 4, align = "center", ...rest } = {}) {
   const W = textWidth(str) * px;
   const H = 7 * px;
   const x0 = align === "left" ? at[0] : align === "right" ? at[0] - W : at[0] - W / 2;
@@ -1744,7 +1744,7 @@ function buildLoop3D(k) {
           normal: () => [0, 0, 1],
         }),
         {
-          weight: 5,
+          weight: 3.5,
           flat: 0.2,
           pattern: false,
           kind: "token",
@@ -2515,7 +2515,7 @@ export const RECIPES = {
               normal: () => [0, 0, 1],
             }),
             {
-              weight: 5,
+              weight: 3.5,
               flat: 0.2,
               pattern: false,
               kind: "token",
@@ -2790,7 +2790,9 @@ export const RECIPES = {
       title: "Your own words",
       placeholder: "king - man + woman",
       button: "Add them",
-      note: "Type A - B + C with three common English words (24,000 are built in, from GloVe). It works out A − B + C over all 50 dimensions and shows the nearest of the 10,000 most common words, with the runner-up in gray.",
+      fileButton: "Open a text file…",
+      accept: ".txt",
+      note: "Type A - B + C with three common English words (24,000 are built in, from GloVe). It works out A − B + C over all 50 dimensions and shows the nearest of the 10,000 most common words, with the runner-up in gray. A text file with the sum in it works too.",
       async read(text) {
         await loadWords();
         const [a, b, c] = parseSum(text);
@@ -3026,8 +3028,8 @@ export const RECIPES = {
           keep(Math.abs(c.p[1] - cy - 0.12) > ph / 2 - 0.03 || Math.abs(c.p[0]) > pw / 2 - 0.03 ? BOARD_RIM : "#0b1020"), // prettier-ignore
       });
       k.add(k.box(0.05, 1.1, 0.05), { pos: [0, 0.55, -0.3], flat: 0.3, pattern: false, color: () => keep(BOARD_RIM) }); // prettier-ignore
-      text(k, SORT.names[algo], [0, cy + 0.27, -0.27], 0.018, "#ffd34d");
-      text(k, algo === "merge" ? "MOVES" : "SWAPS", [-0.22, cy, -0.27], 0.022, "#9fb0d6");
+      text(k, SORT.names[algo], [0, cy + 0.27, -0.255], 0.018, "#ffd34d");
+      text(k, algo === "merge" ? "MOVES" : "SWAPS", [-0.22, cy, -0.255], 0.022, "#9fb0d6");
       sevenSeg(k, [0.26, cy, -0.27], 0.22, 8);
       sevenSeg(k, [0.44, cy, -0.27], 0.22, 15);
     },

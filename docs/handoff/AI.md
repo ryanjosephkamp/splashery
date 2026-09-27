@@ -87,6 +87,37 @@ owner's marks.
 Clips are on the Effect review page (lane record `AI`, cards `ai-<toy id>`, posted September 27,
 2026). All 11 toys are `"v": "keep"` in the plan with an `improved` entry.
 
+The owner's marks (September 27, 2026): gradient descent and half adder "good". Fixed in this PR:
+
+- **3D models** (perceptron, neural network, CNN, RNN, diffusion model: "perfect for the 2D poster
+  version; in addition I want an actual 3D version"): each has a View option, Poster (2D, the
+  default, unchanged) or 3D model. The transformer and looped transformer were marked "fix" with no
+  note; they got the same 3D view (the Operator was asked to confirm that reading).
+  - Neural network: glass neurons in rings on a round stand, the flow slanting toward you, golden
+    cores that grow as they fire, pulses through the air.
+  - Perceptron: bulbs on posts, wires through the air to a metal Σ ball, a glass gauge the sum fills
+    with an orange threshold ring, an output bulb.
+  - CNN: slabs of little cubes one behind another (picture, feature map, pooled map), the filter's
+    receptive field as four lines from its corners to the tile it stamps, score columns on a stand.
+  - RNN: a dark cell with lit edges, the loop arching over it on a slant, word blocks rising in from
+    the front; the LSTM's gates on its face.
+  - Diffusion: a round 3D cloud clears into a bigger duck over a stand; at step 0 a solid copy of
+    the duck (sorted as it stands) takes the specks' place, so it looks right from every side.
+  - Transformer: word blocks on a plinth, box-outline feed-forward blocks, head A's arcs upright and
+    head B's leaning back. Looped transformer: the loop leans back, the block is a box outline, the
+    tiles are blocks.
+- **Sorting machine**: the algorithm's name is on the panel above the counter, and five more
+  algorithms: insertion, selection, cocktail shaker, Shell and heap sort (eight in all).
+- **Word vectors**: real GloVe vectors (50 dimensions, public domain) for 24,000 common words, built
+  by `tools/word-vectors.mjs` into `assets/toys/word-vectors/words.txt` (1.7 MB, loaded only by this
+  toy). Type "A - B + C" in the Toy tab (or open a text file with it); A − B + C is worked out over
+  all 50 dimensions and the answer is the nearest of the 10,000 most common words (the runner-up
+  shows in gray). The toy shows a 3-D slice: axes along A − B and C − B (each scaled to fit, so the
+  parallelogram of arrows is exact) and the answer at its true offset from the sum on A − B's scale.
+  The default is still king − man + woman ≈ queen.
+- Text on every toy now uses a lower splat weight (4): at weight 10 the letters vanished at 320
+  pixels (PACKS.md: tiny splats vanish on small screens).
+
 What each tap does now:
 
 1. **Perceptron** (4 s): inputs X1 and X3 light (1, 0, 1) and send pulses along wires as thick as
@@ -156,6 +187,14 @@ What each tap does now:
   bubble sort only.
 
 ## For the Operator
+
+- Please confirm: the transformer and looped transformer were marked "fix" with no note. I read them
+  as the same ask as the other models (an actual 3D version) and built that; if the owner meant
+  something else, tell me.
+- Word vectors: GloVe is under the ODC PDDL (public domain), checked on the live page; credited in
+  CREDITS.md and in the toy. The word list leaves out words about violence, weapons and sex.
+- A lesson for PACKS.md: text and other small keep-coloured details need size / sqrt(weight) of
+  about 0.5 or more, or they vanish at 320 pixels (weight 10 did).
 
 - A lesson for PACKS.md 7b: tokens that glide across a flat board just in front of it disappear
   behind it until resorted; `out.resort` a few times during the glide fixes it.
