@@ -637,6 +637,45 @@ export const TOYS = [
     kind: "captured",
     url: "assets/toys/pencil-real/pencil-real.sog",
     urlWeak: "assets/toys/pencil-real/pencil-real-lite.sog",
+    looks: [
+      { id: "yellow", label: "Yellow" },
+      {
+        id: "red",
+        label: "Red",
+        url: "assets/toys/pencil-real/pencil-real-red.sog",
+        urlWeak: "assets/toys/pencil-real/pencil-real-red-lite.sog",
+      },
+      {
+        id: "blue",
+        label: "Blue",
+        url: "assets/toys/pencil-real/pencil-real-blue.sog",
+        urlWeak: "assets/toys/pencil-real/pencil-real-blue-lite.sog",
+      },
+      {
+        id: "green",
+        label: "Green",
+        url: "assets/toys/pencil-real/pencil-real-green.sog",
+        urlWeak: "assets/toys/pencil-real/pencil-real-green-lite.sog",
+      },
+      {
+        id: "black",
+        label: "Black",
+        url: "assets/toys/pencil-real/pencil-real-black.sog",
+        urlWeak: "assets/toys/pencil-real/pencil-real-black-lite.sog",
+      },
+      {
+        id: "wood",
+        label: "Plain wood",
+        url: "assets/toys/pencil-real/pencil-real-wood.sog",
+        urlWeak: "assets/toys/pencil-real/pencil-real-wood-lite.sog",
+      },
+      {
+        id: "original",
+        label: "Original (the bare scan)",
+        url: "assets/toys/pencil-real/pencil-real-original.sog",
+        urlWeak: "assets/toys/pencil-real/pencil-real-original-lite.sog",
+      },
+    ],
     camera: { yaw: 0.35, pitch: 0.55, roll: 0, distance: 4.2 },
     credit: {
       title: "Kleiner Bleistift",
@@ -645,7 +684,7 @@ export const TOYS = [
       license: "CC BY 2.0",
       licenseUrl: "https://creativecommons.org/licenses/by/2.0/",
       changes:
-        "Made into 3D Gaussian splats from this one photo with the TRELLIS image-to-3D model (MIT), recentred and scaled. Painted as a classic yellow pencil (yellow body, silver ferrule, pink eraser, a plain HB mark) over the scan's own shading.",
+        "Made into 3D Gaussian splats from this one photo with the TRELLIS image-to-3D model (MIT), recentred and scaled. Painted as a classic yellow pencil (yellow body, silver ferrule, pink eraser, a plain HB mark) over the scan's own shading; other colors, plain wood and the bare scan are in Look.",
     },
   },
   {
@@ -656,6 +695,27 @@ export const TOYS = [
     kind: "captured",
     url: "assets/toys/tin-can-real/tin-can-real.sog",
     urlWeak: "assets/toys/tin-can-real/tin-can-real-lite.sog",
+    looks: [
+      { id: "peaches", label: "Peaches label" },
+      {
+        id: "tomatoes",
+        label: "Tomatoes label",
+        url: "assets/toys/tin-can-real/tin-can-real-tomatoes.sog",
+        urlWeak: "assets/toys/tin-can-real/tin-can-real-tomatoes-lite.sog",
+      },
+      {
+        id: "metal",
+        label: "Plain metal",
+        url: "assets/toys/tin-can-real/tin-can-real-metal.sog",
+        urlWeak: "assets/toys/tin-can-real/tin-can-real-metal-lite.sog",
+      },
+      {
+        id: "original",
+        label: "Original (the bare scan)",
+        url: "assets/toys/tin-can-real/tin-can-real-original.sog",
+        urlWeak: "assets/toys/tin-can-real/tin-can-real-original-lite.sog",
+      },
+    ],
     camera: { yaw: 0.35, pitch: 0.45, roll: 0, distance: 4.6 },
     credit: {
       title: "Can opened with side opener",
@@ -664,7 +724,7 @@ export const TOYS = [
       license: "CC0 1.0",
       licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/",
       changes:
-        "Made into 3D Gaussian splats from this one photo with the TRELLIS image-to-3D model (MIT), recentred and scaled. The peaches label is an original design made for Splashery (CC0), wrapped round the can's side over the scan's own shading.",
+        "Made into 3D Gaussian splats from this one photo with the TRELLIS image-to-3D model (MIT), recentred and scaled. The peaches and tomatoes labels are original designs made for Splashery (CC0), wrapped around the can's side over the scan's own shading; plain metal and the bare scan are in Look.",
     },
   },
   // Kit toys: recipes in src/packs/<pack>.js, built in the browser.

@@ -33,9 +33,11 @@ PR title: "Phase G: AI image-to-3D trial".
 
 ## State
 
-In progress on `claude/lane-g-image-to-3d`, PR #43 (2026-09-27). Report page:
-https://claude.ai/artifact/GFHZX3NF5DA4Vs39s8BGbY. Clips: cards `g-pencil-real` and `g-tin-can-real`
-on the Effect review page.
+PR #43 (the two scans and their default looks) merged on 2026-09-27. Now: looks for the two scans,
+in the engine PR #47 ("Engine: looks for captured toys", branch `claude/lane-g-looks-engine`, merge
+first) and the lane PR "Phase G: pencil colors and can labels" (branch `claude/lane-g-looks`, built
+on the engine branch). Report page: https://claude.ai/artifact/GFHZX3NF5DA4Vs39s8BGbY. Clips: cards
+`g-pencil-real` and `g-tin-can-real` on the Effect review page.
 
 - `HF_TOKEN` checked with whoami: account `ryanjosephkamp`, role `read`.
 - Space: `trellis-community/TRELLIS` (ZeroGPU, MIT; runs `microsoft/TRELLIS-image-large`, MIT;
@@ -60,8 +62,16 @@ on the Effect review page.
   `g-tin-can-real-r2`; the old cards are marked replaced.
 - Real labels: every real can label found (Commons, label archives) carries a brand name, so none is
   used. Commons' API rate-limited this container (HTTP 429), so the search there was short.
-- Custom colours need a small engine change (below); the tool already has the other looks
-  (`--look=red|blue|green|wood` for the pencil, `--look=tomatoes|plain` for the can).
+- Looks (owner: "Yes to looks", "Peaches is good"): a captured toy lists `looks` in `src/toys.js`,
+  and the Toy tab's Look choice loads that look's files; only the look's id goes into links. Pencil:
+  Yellow (default), Red, Blue, Green, Black, Plain wood, Original (the bare scan). Can: Peaches
+  label (default), Tomatoes label, Plain metal, Original. The files are `<id>-<look>.sog` and
+  `-lite.sog`, from `node tools/g-looks.mjs pencil-real tin-can-real --all`. Clips: cards
+  `g-pencil-looks` and `g-can-looks`, rendered with `tools/g-looks-clip.mjs`.
+- Separate files, not a load-time recolor: the labels are pictures, which a region recolor cannot
+  paint without a new texture pass; files keep the engine change small, and only the chosen look is
+  downloaded. About 1.9 MB per extra pencil look and 4.1 MB per extra can look, counting the lite
+  files.
 - Waiting on quota: the clear water bottle (CC0 photo ready). The free ZeroGPU quota ran out after
   four runs.
 - Report only: the red water bottle and the running shoe are rawpixel previews with a watermark, and
@@ -74,6 +84,9 @@ on the Effect review page.
   background itself unless the PNG has alpha.
 - The side the photo cannot see is a guess: the pencil's underside came out dark, so a roll showed
   it. Taps that keep the photographed side towards the camera work better (the spin).
+- Painting a scan: paint every splat of a region, not only the outer layer. Unpainted splats just
+  under the surface showed through as pale speckle under dark paints (black, blue). Under dark
+  colors, shade by brightness averaged over about 1 cm, so fine grain does not turn into speckle.
 - The lite SOG at 80,000 splats made the can's wall see-through on the weak profile; it uses 160,000
   (1.9 MB).
 - Our own kit renders come back as faithful copies of the cartoon toy, so photos are the way to get
@@ -88,13 +101,8 @@ on the Effect review page.
 
 ## For the Operator
 
-- Engine change for colour options on scan toys (not made): let a captured toy in `src/toys.js` list
-  `looks: [{ id, label, url, urlWeak }]`. The captured loader in `src/player.js` would pick the url
-  from `toy.options.look` (checked with `resolveOptions` against a select option built from `looks`,
-  default the first), return that option in `info.options`/`info.recipe.options` so the Toy tab
-  shows it, and rebuild on change as kit toys do. Only the look's id is saved in links. Each extra
-  look is a pair of SOGs from `tools/g-looks.mjs --look=<id> --out=...` (about 1.9 MB per pencil
-  look, 4.1 MB per can look).
+- PACKS.md lesson: a captured toy can offer looks (`looks` in `src/toys.js`, engine PR #47); each
+  look is a finished pair of files, checked from several sides before it ships.
 
 - A full test run also rewrites lanes' own screenshots (`e5-*`, `e6a-*`), which
   `node tools/upkeep.mjs --restore-shots` does not put back; lanes need

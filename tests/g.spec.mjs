@@ -118,3 +118,66 @@ test("a scan's look is picked from the scene and survives a link", async () => {
   const old = normalizeScene(await decodeSceneHash(await encodeSceneHash(scene)));
   expect(old.toy.options).toBeUndefined();
 });
+
+// In the app: a link with a look opens that look's files, the Toy tab's Look
+// choice loads another, and an old link (no look) opens the default.
+test("the Real pencil opens in a linked look, switches looks, and old links still load", async ({
+  page,
+}) => {
+  const { encodeSceneHash } = await import("../src/codec.js");
+  const { createScene } = await import("../src/state.js");
+  const loaded = [];
+  page.on("request", (r) => {
+    const m = r.url().match(/pencil-real\/(pencil-real[a-z-]*)\.sog$/);
+    if (m) loaded.push(m[1].replace(/-lite$/, ""));
+  });
+  const problems = [];
+  page.on("pageerror", (e) => problems.push(e.message));
+  const open = async (options) => {
+    const scene = createScene();
+    scene.toy = { kind: "builtin", id: "pencil-real", ...(options ? { options } : {}) };
+    await page.goto("about:blank");
+    loaded.length = 0;
+    await page.goto(`/?renderer=webgl2&profile=weak#s=${await encodeSceneHash(scene)}`);
+    await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
+    await expect(page.locator("#toy-status")).toHaveText(/^Real pencil/, { timeout: 180_000 });
+  };
+  const look = page.locator("#toy-options select");
+
+  await open({ look: "red" });
+  expect(loaded).toEqual(["pencil-real-red"]);
+  await expect(look).toHaveValue("red");
+  expect(await look.locator("option").count()).toBe(7);
+
+  loaded.length = 0;
+  await look.selectOption("original");
+  await expect.poll(() => loaded).toEqual(["pencil-real-original"]);
+  await expect(page.locator("#toy-status")).toHaveText(/^Real pencil/, { timeout: 180_000 });
+  expect(await page.evaluate(() => window.__splashery.player.scene.toy.options)).toEqual({
+    look: "original",
+  });
+
+  // An old link, from before looks: the default (yellow) files.
+  await open(null);
+  expect(loaded).toEqual(["pencil-real"]);
+  await expect(look).toHaveValue("yellow");
+  // An unknown look falls back to the default too.
+  await open({ look: "plaid" });
+  expect(loaded).toEqual(["pencil-real"]);
+  expect(problems).toEqual([]);
+});
+
+test("every look's files exist and stay small", () => {
+  for (const id of G) {
+    const toy = TOYS.find((t) => t.id === id);
+    expect(toy.looks.length).toBeGreaterThan(2);
+    expect(toy.looks[0].url).toBeUndefined();
+    expect(toy.looks.some((l) => l.id === "original")).toBe(true);
+    for (const l of toy.looks.slice(1)) {
+      for (const url of [l.url, l.urlWeak]) {
+        expect(fs.existsSync(url), url).toBe(true);
+        expect(fs.statSync(url).size).toBeLessThan(3 * 1024 * 1024);
+      }
+    }
+  }
+});
