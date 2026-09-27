@@ -70,8 +70,8 @@ on the engine branch). Report page: https://claude.ai/artifact/GFHZX3NF5DA4Vs39s
   `g-pencil-looks` and `g-can-looks`, rendered with `tools/g-looks-clip.mjs`.
 - Separate files, not a load-time recolor: the labels are pictures, which a region recolor cannot
   paint without a new texture pass; files keep the engine change small, and only the chosen look is
-  downloaded. About 1 MB per extra pencil look and 2 MB per extra can look (each with its lite
-  file).
+  downloaded. About 1.9 MB per extra pencil look and 4.1 MB per extra can look, counting the lite
+  files.
 - Waiting on quota: the clear water bottle (CC0 photo ready). The free ZeroGPU quota ran out after
   four runs.
 - Report only: the red water bottle and the running shoe are rawpixel previews with a watermark, and
