@@ -7,7 +7,9 @@
 //   python3 -m http.server 4173 --bind 127.0.0.1 &   (the can's label is drawn in Chromium)
 //   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/g-looks.mjs pencil-real tin-can-real
 //     [--look=<id>]   another look (see LOOKS) instead of the default
-//     [--out=<dir>]   write <id>.sog and <id>-lite.sog there instead of assets/toys/<id>/
+//     [--all]         every look: the default as <id>.sog, the others as <id>-<look>.sog
+//                     (each with its -lite.sog), the files src/toys.js lists as looks
+//     [--out=<dir>]   write the files there instead of assets/toys/<id>/
 //     [--label=<png>] also save the can's label picture
 //
 // The plain scans are read from git (PLAIN, the commit before the looks), so
@@ -39,12 +41,19 @@ export const LOOKS = {
     red: { body: [0.78, 0.12, 0.1], ferrule: "silver", eraser: [0.93, 0.5, 0.52], imprint: [0.95, 0.85, 0.6] }, // prettier-ignore
     blue: { body: [0.12, 0.3, 0.72], ferrule: "silver", eraser: [0.93, 0.5, 0.52], imprint: [0.95, 0.9, 0.75] }, // prettier-ignore
     green: { body: [0.12, 0.45, 0.25], ferrule: "silver", eraser: [0.93, 0.5, 0.52], imprint: [0.95, 0.85, 0.6] }, // prettier-ignore
-    wood: null,
+    black: { body: [0.075, 0.075, 0.085], ferrule: "silver", eraser: [0.93, 0.5, 0.52], imprint: [0.86, 0.7, 0.32] }, // prettier-ignore
+    // Bare wood with a silver ferrule, a pink eraser and a dark mark.
+    wood: { body: null, ferrule: "silver", eraser: [0.93, 0.5, 0.52], imprint: [0.2, 0.13, 0.07] }, // prettier-ignore
+    // The scan as it came from the photo (gold ferrule, red eraser).
+    original: null,
   },
   "tin-can-real": {
     peaches: { label: "peaches" },
     tomatoes: { label: "tomatoes" },
-    plain: null,
+    // Bare tinplate between the rims.
+    metal: { metal: [0.7, 0.71, 0.73] },
+    // The scan as it came from the photo.
+    original: null,
   },
 };
 const DEFAULT = { "pencil-real": "yellow", "tin-can-real": "peaches" };
@@ -102,11 +111,15 @@ function setColor(ply, s, c) {
 // Paints each splat of a group with colour(s) times its brightness against
 // the group's median (kept within a sensible range, so glare and the unseen
 // side's guesswork do not turn to white or black).
-function paint(ply, group, color, lo = 0.35, hi = 1.35) {
+// With `smooth` (a cell size), each splat's brightness is the mean over its
+// neighbours within about a cell: the facets' light stays, while fine grain
+// in the scan (wood fibres) no longer turns into speckle under a dark paint.
+function paint(ply, group, color, lo = 0.35, hi = 1.35, smooth = 0) {
   if (!group.length) return;
-  const ref = median(group.map((s) => lum(s.c)));
+  const bright = smooth ? smoothed(group, smooth) : new Map(group.map((s) => [s, lum(s.c)]));
+  const ref = median([...bright.values()]);
   for (const s of group) {
-    const k = clamp(lum(s.c) / ref, lo, hi);
+    const k = clamp(bright.get(s) / ref, lo, hi);
     const c = typeof color === "function" ? color(s) : color;
     setColor(
       ply,
@@ -114,6 +127,32 @@ function paint(ply, group, color, lo = 0.35, hi = 1.35) {
       c.map((v) => v * k),
     );
   }
+}
+
+function smoothed(group, cell) {
+  const key = (x, y, z) => `${x},${y},${z}`;
+  const cells = new Map();
+  const at = (s) => s.p.map((v) => Math.floor(v / cell));
+  for (const s of group) {
+    const k = key(...at(s));
+    const c = cells.get(k) || cells.set(k, [0, 0]).get(k);
+    c[0] += lum(s.c);
+    c[1]++;
+  }
+  const out = new Map();
+  for (const s of group) {
+    const [x, y, z] = at(s);
+    let sum = 0;
+    let n = 0;
+    for (let dx = -1; dx <= 1; dx++)
+      for (let dy = -1; dy <= 1; dy++)
+        for (let dz = -1; dz <= 1; dz++) {
+          const c = cells.get(key(x + dx, y + dy, z + dz));
+          if (c) [sum, n] = [sum + c[0], n + c[1]];
+        }
+    out.set(s, sum / n);
+  }
+  return out;
 }
 
 // ---- The pencil ---------------------------------------------------------------------
@@ -147,7 +186,7 @@ function pencil(ply, look) {
     const [r, a] = polar(s);
     if (x < -0.72 && red(s.c)) eraser.push(s);
     else if (x < -0.36 && (chroma(s.c) > 0.4 || x < -0.45)) ferrule.push(s);
-    else if (x < -0.36) body.push(s);
+    else if (x < 0.5) body.push(s);
     else if (x < 0.84 && r > outline[bin(a)] - 0.006) {
       // On the sharpened cone only the facets' ridges keep their paint, which
       // gives the scalloped edge of a real sharpened pencil.
@@ -165,7 +204,10 @@ function pencil(ply, look) {
     return Math.min(d, BINS - d) <= 5;
   };
   const glyph = inked("HB", -0.27, 0.24, 0.085);
-  paint(ply, body, (s) => (face(s) && glyph(s.p[0], s.p[2] - cz) ? look.imprint : look.body));
+  const mark = (s) => face(s) && glyph(s.p[0], s.p[2] - cz);
+  // A bare wood body keeps the scan's own colour under its mark.
+  if (!look.body) paint(ply, body.filter(mark), look.imprint);
+  else paint(ply, body, (s) => (mark(s) ? look.imprint : look.body), 0.35, 1.35, 0.012);
 }
 
 // Two block capitals, drawn from 5x7 cells: x from x0, width w, centred on
@@ -324,6 +366,9 @@ function can(ply, look, art) {
     );
   });
   if (!look) return;
+  // Bare tinplate keeps the wall's full shading: on metal the photo's glare
+  // reads as a shine.
+  if (look.metal) return paint(ply, side, look.metal, 0.45, 1.3);
   // The front panel (u = 0.25) faces the home camera, which sits towards
   // (sin yaw, 0, cos yaw); u runs left to right seen from outside.
   const front = Math.atan2(Math.cos(HOME_YAW), Math.sin(HOME_YAW));
@@ -361,10 +406,16 @@ function can(ply, look, art) {
   }
 }
 
-for (const id of ids) {
-  const lookId = opt("look", DEFAULT[id]);
+const jobs = ids.flatMap((id) =>
+  (args.includes("--all") ? Object.keys(LOOKS[id]) : [opt("look", DEFAULT[id])]).map((lookId) => [
+    id,
+    lookId,
+  ]),
+);
+for (const [id, lookId] of jobs) {
   if (!(lookId in LOOKS[id])) throw new Error(`${id} has no look "${lookId}"`);
   const look = LOOKS[id][lookId];
+  const stem = lookId === DEFAULT[id] ? id : `${id}-${lookId}`;
   const out = opt("out", path.join(root, "assets/toys", id));
   fs.mkdirSync(out, { recursive: true });
   let art = null;
@@ -375,13 +426,20 @@ for (const id of ids) {
   for (const f of [`${id}.sog`, `${id}-lite.sog`]) {
     const plain = path.join(work, `plain-${f}`);
     fs.writeFileSync(plain, execFileSync("git", ["show", `${PLAIN}:assets/toys/${id}/${f}`], { cwd: root, maxBuffer: 1 << 28 })); // prettier-ignore
+    const dest = path.join(out, f.replace(id, stem));
+    // The original look is the plain scan itself.
+    if (!look) {
+      fs.copyFileSync(plain, dest);
+      console.log(`${id} (${lookId}): ${dest} (the plain scan)`);
+      continue;
+    }
     const ply = path.join(work, f.replace(".sog", ".ply"));
     st([plain, ply]);
     const data = readPly(ply);
     if (id === "pencil-real") pencil(data, look);
     else can(data, look, art);
     writePly(ply, data);
-    st([ply, path.join(out, f)]);
-    console.log(`${id} (${lookId}): ${path.join(out, f)} ${(fs.statSync(path.join(out, f)).size / 1048576).toFixed(2)} MB`); // prettier-ignore
+    st([ply, dest]);
+    console.log(`${id} (${lookId}): ${dest} ${(fs.statSync(dest).size / 1048576).toFixed(2)} MB`);
   }
 }

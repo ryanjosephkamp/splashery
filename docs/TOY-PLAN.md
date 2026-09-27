@@ -269,7 +269,8 @@ Proposals below are suggestions; the owner may change them.
     pencil: it spins flat on the desk about its middle, two whole turns, slowing evenly to a stop
     where it began (2.4 s). It stays photo side up; a roll showed the dark underside the model
     guessed. G review: painted as a classic yellow pencil (yellow body, silver ferrule, pink eraser,
-    an HB mark) over the scan's own shading.
+    an HB mark) over the scan's own shading. G looks: the Toy tab's Look picks yellow, red, blue,
+    green, black, plain wood or the original bare scan.
   - Sound: A wooden flick, then a soft scrape that slows.
 - **Real tin can** (`tin-can-real`). Now: tap: Knock (rig). Plan: keep.
   - Owner: Owner's list of real-life (photographic) splats (lane G brief): a can of soup, no brands.
@@ -277,7 +278,8 @@ Proposals below are suggestions; the owner may change them.
   - Improved: G: made from one CC0 photo of a plain unlabelled can with the TRELLIS image-to-3D
     model. A tap tips it onto its bottom rim; it spins round on the rim faster as it leans less,
     like a settling coin, and drops flat with a clank (2.6 s). G review: an original vintage-style
-    peaches label (CC0) wraps its side; the rims and lid stay metal.
+    peaches label (CC0) wraps its side; the rims and lid stay metal. G looks: the Toy tab's Look
+    picks the peaches label, a tomatoes label, plain metal or the original bare scan.
   - Sound: A tin clank, a rim rattle that speeds up, a last clank.
 
 ## Shapes (4)
