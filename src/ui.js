@@ -1437,6 +1437,110 @@ export function createUI(app) {
   els.panes.addEventListener("touchend", () => (pull = null), { passive: true });
   applySheet();
 
+  // ---- Toy help (lane Help) ---------------------------------------------------------
+  // A short how-to-play line when a new toy opens (picked from the shelf,
+  // opened from a link or after a refresh). It fades after a few seconds and
+  // "?" shows it again. The About tab gets "About this toy". The text comes
+  // from src/toy-help.js, loaded when the first toy opens so it never holds
+  // up the first paint. Nothing here goes into links or saved scenes.
+  const HELP_MS = 7000;
+  // Automated browsers (the test suite) show the line by itself only with
+  // ?help=show, so the older screenshot tests see the stage as before; "?"
+  // works everywhere.
+  const helpAuto = !navigator.webdriver || new URLSearchParams(location.search).get("help") === "show"; // prettier-ignore
+  const help = {
+    line: $("help-line"),
+    text: $("help-line-text"),
+    about: $("help-line-about"),
+    toggle: $("help-toggle"),
+    name: $("toy-about-name"),
+    aboutText: $("toy-about-text"),
+    howTo: $("toy-about-howto"),
+    can: $("toy-about-can"),
+  };
+  let helpModule = null;
+  let helpKey = null;
+  let helpInfo = null;
+  let helpTimer = 0;
+  function hideHelpLine() {
+    clearTimeout(helpTimer);
+    help.line.classList.remove("show");
+    help.toggle.setAttribute("aria-expanded", "false");
+    // Hidden once faded (the fade is off under reduced motion).
+    helpTimer = setTimeout(() => (help.line.hidden = true), 500);
+  }
+  // On a phone the line sits under the toy's name line, which wraps to two
+  // lines for a scan's credit.
+  function placeHelpLine() {
+    const r = els.toyStatus.getBoundingClientRect();
+    help.line.style.top = narrow.matches && r.height ? `${Math.round(r.bottom + 6)}px` : "";
+  }
+  function showHelpLine() {
+    clearTimeout(helpTimer);
+    placeHelpLine();
+    help.line.hidden = false;
+    void help.line.offsetWidth; // start the fade from the hidden state
+    help.line.classList.add("show");
+    help.toggle.setAttribute("aria-expanded", "true");
+    helpTimer = setTimeout(hideHelpLine, HELP_MS);
+  }
+  function renderToyAbout(h) {
+    help.name.textContent = h.label;
+    const paras = h.about.length
+      ? h.about
+      : ["A longer description of this toy is on its way. Until then, here is how to play."];
+    help.aboutText.replaceChildren(
+      ...paras.map((t) => {
+        const p = document.createElement("p");
+        p.textContent = t;
+        if (!h.about.length) p.className = "note";
+        return p;
+      }),
+    );
+    help.howTo.textContent = h.howTo;
+    help.can.replaceChildren(
+      ...h.abilities.flatMap(([k, v]) => {
+        const dt = document.createElement("dt");
+        dt.textContent = k;
+        const dd = document.createElement("dd");
+        dd.textContent = v;
+        return [dt, dd];
+      }),
+    );
+  }
+  async function setToyHelp(info) {
+    helpInfo = info;
+    // A new toy shows the line; the same toy rebuilt (an option, the detail
+    // tier) only updates the text.
+    const key = info ? `${info.kind}:${info.id ?? info.label}` : null;
+    const isNew = key !== helpKey;
+    helpKey = key;
+    let mod;
+    try {
+      mod = await (helpModule ??= import("./toy-help.js"));
+    } catch {
+      helpModule = null;
+      return;
+    }
+    if (helpInfo !== info || !info) return;
+    const h = mod.toyHelp(info);
+    help.text.textContent = h.howTo;
+    help.line.dataset.toy = key;
+    renderToyAbout(h);
+    help.toggle.hidden = false;
+    if (isNew && helpAuto) showHelpLine();
+  }
+  help.toggle.addEventListener("click", () =>
+    help.line.classList.contains("show") ? hideHelpLine() : showHelpLine(),
+  );
+  help.about.addEventListener("click", () => {
+    hideHelpLine();
+    showTab("about");
+    if (narrow.matches) setMode("panel");
+    els.panes.scrollTop = 0;
+  });
+  // /Toy help
+
   let toastTimer = 0;
 
   async function copyText(textarea, message) {
@@ -1497,6 +1601,7 @@ export function createUI(app) {
     },
     setToyPanel(info) {
       renderToyPanel(info);
+      setToyHelp(info); // Toy help (lane Help)
       showMotion(app.player.effectiveMotion(), app.player.scene.motion.controls);
     },
     // Shows motion as it runs (under reduced motion, off until asked).
@@ -1583,6 +1688,7 @@ export function createUI(app) {
     },
     setStatus(text) {
       els.toyStatus.textContent = text || "";
+      placeHelpLine(); // Toy help (lane Help)
     },
     setCredits(nodes) {
       els.credits.replaceChildren(...nodes);

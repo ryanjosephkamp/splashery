@@ -151,6 +151,26 @@
       </svg>
     </button>
 
+    <!-- Toy help (lane Help): the how-to-play line that shows when a toy opens, and the
+         "?" button that shows it again. Filled in by src/ui.js from src/toy-help.js. -->
+    <div id="help-line" class="help-line" role="status" hidden>
+      <span id="help-line-text"></span>
+      <button type="button" id="help-line-about" class="help-line-about">About this toy</button>
+    </div>
+    <button
+      id="help-toggle"
+      type="button"
+      class="help-toggle"
+      aria-expanded="false"
+      aria-controls="help-line"
+      title="How to play"
+      aria-label="How to play"
+      hidden
+    >
+      ?
+    </button>
+    <!-- /Toy help -->
+
     <section id="fallback" class="fallback" hidden>
       <svg
         class="poster"
@@ -793,6 +813,16 @@
           </div>
 
           <div class="pane" role="tabpanel" id="pane-about" aria-labelledby="tab-about" hidden>
+            <!-- Toy help (lane Help): what the toy on the stage is, and how to play. -->
+            <section class="group toy-about" id="toy-about" aria-labelledby="h-toy-about">
+              <h2 id="h-toy-about">About this toy</h2>
+              <p id="toy-about-name" class="toy-about-name"></p>
+              <div id="toy-about-text" class="toy-about-text"></div>
+              <h3 class="toy-about-h">How to play</h3>
+              <p id="toy-about-howto"></p>
+              <dl id="toy-about-can" class="toy-about-can"></dl>
+            </section>
+            <!-- /Toy help -->
             <section class="group" id="about-group" aria-labelledby="h-about">
               <h2 id="h-about">Credits</h2>
               <div id="credits"></div>
