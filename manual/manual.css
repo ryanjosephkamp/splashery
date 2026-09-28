@@ -1,0 +1,451 @@
+/* The Tinkerer's Manual: its own small stylesheet, for the screen and for
+   print (tools/manual-pdf.mjs prints it to manual/tinkerers-manual.pdf). */
+
+:root {
+  --page: #fbfaf7;
+  --panel: #ffffff;
+  --ink: #1b1d22;
+  --muted: #5b6270;
+  --line: #dcdfe6;
+  --accent: #1f5fbf;
+  --code-bg: #f1f2f5;
+  --code-ink: #23262d;
+  --stage: #15171c;
+  --tip: #eaf3ff;
+  --tip-line: #9dbdf0;
+  --svg-ink: #1b1d22;
+  --svg-soft: #9aa3b2;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --page: #121418;
+    --panel: #1a1d23;
+    --ink: #e9ecf2;
+    --muted: #a3abba;
+    --line: #2d323c;
+    --accent: #8fb8ff;
+    --code-bg: #1f232b;
+    --code-ink: #e3e7ee;
+    --tip: #172335;
+    --tip-line: #34507c;
+    --svg-ink: #e9ecf2;
+    --svg-soft: #6f7888;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --page: #121418;
+  --panel: #1a1d23;
+  --ink: #e9ecf2;
+  --muted: #a3abba;
+  --line: #2d323c;
+  --accent: #8fb8ff;
+  --code-bg: #1f232b;
+  --code-ink: #e3e7ee;
+  --tip: #172335;
+  --tip-line: #34507c;
+  --svg-ink: #e9ecf2;
+  --svg-soft: #6f7888;
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+html {
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  margin: 0;
+  background: var(--page);
+  color: var(--ink);
+  font:
+    17px/1.6 Georgia,
+    "Iowan Old Style",
+    "Palatino Linotype",
+    serif;
+}
+main {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 24px 16px 80px;
+}
+h1,
+h2,
+h3,
+h4,
+.kicker,
+nav,
+figcaption,
+table,
+.button {
+  font-family:
+    ui-sans-serif,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
+}
+h1 {
+  font-size: clamp(32px, 7vw, 48px);
+  line-height: 1.05;
+  margin: 8px 0 12px;
+  letter-spacing: -0.01em;
+}
+h2 {
+  font-size: 28px;
+  line-height: 1.2;
+  margin: 56px 0 8px;
+}
+h3 {
+  font-size: 20px;
+  margin: 32px 0 6px;
+}
+h4 {
+  font-size: 16px;
+  margin: 20px 0 4px;
+}
+.kicker {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 13px;
+  color: var(--muted);
+  margin: 0;
+}
+.level {
+  display: block;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  margin-bottom: 2px;
+}
+.lead {
+  font-size: 19px;
+  color: var(--muted);
+}
+a {
+  color: var(--accent);
+}
+p,
+li {
+  max-width: 68ch;
+}
+hr {
+  border: 0;
+  border-top: 1px solid var(--line);
+  margin: 40px 0;
+}
+
+/* Code and math */
+code,
+pre,
+kbd {
+  font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  font-size: 0.88em;
+}
+code {
+  background: var(--code-bg);
+  color: var(--code-ink);
+  padding: 1px 5px;
+  border-radius: 5px;
+}
+pre {
+  background: var(--code-bg);
+  color: var(--code-ink);
+  padding: 14px 16px;
+  border-radius: 10px;
+  overflow-x: auto;
+  line-height: 1.5;
+  break-inside: avoid;
+}
+pre code {
+  background: none;
+  padding: 0;
+  font-size: 1em;
+}
+.math {
+  display: block;
+  text-align: center;
+  font-size: 1.12em;
+  margin: 16px 0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  font-style: normal;
+  break-inside: avoid;
+}
+.math var,
+p var,
+li var,
+td var {
+  font-style: italic;
+}
+.mat {
+  display: inline-grid;
+  grid-template-columns: repeat(3, auto);
+  gap: 0 14px;
+  padding: 2px 8px;
+  border-left: 1.5px solid currentColor;
+  border-right: 1.5px solid currentColor;
+  border-radius: 6px;
+  vertical-align: middle;
+  font-size: 0.95em;
+}
+
+/* Tips and notes */
+.tip {
+  background: var(--tip);
+  border-left: 4px solid var(--tip-line);
+  padding: 10px 14px;
+  border-radius: 6px;
+  margin: 16px 0;
+  break-inside: avoid;
+}
+.tip p {
+  margin: 4px 0;
+}
+
+/* Tables */
+.table-wrap {
+  overflow-x: auto;
+  margin: 16px 0;
+}
+table {
+  border-collapse: collapse;
+  font-size: 15px;
+  width: 100%;
+  break-inside: auto;
+}
+tr {
+  break-inside: avoid;
+}
+th,
+td {
+  text-align: left;
+  vertical-align: top;
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--line);
+}
+th {
+  font-weight: 650;
+}
+
+/* Figures */
+figure {
+  margin: 24px 0;
+  break-inside: avoid;
+}
+figure img,
+figure svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+figcaption {
+  font-size: 14px;
+  color: var(--muted);
+  margin-top: 8px;
+  line-height: 1.45;
+}
+.shots {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+.shots img {
+  width: 100%;
+  border-radius: 8px;
+  background: var(--stage);
+}
+.shots.two {
+  grid-template-columns: repeat(2, 1fr);
+}
+.shot-label {
+  font-size: 13px;
+  text-align: center;
+  color: var(--muted);
+  margin-top: 4px;
+}
+.diagram {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px;
+}
+.diagram svg {
+  margin: 0 auto;
+  color: var(--svg-ink);
+}
+
+/* The gallery */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+}
+.card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  break-inside: avoid;
+  display: flex;
+  flex-direction: column;
+}
+.card img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  background: var(--stage);
+  display: block;
+}
+.card .body {
+  padding: 10px 14px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+.card h4 {
+  margin: 0;
+}
+.card p {
+  margin: 0;
+  font-size: 15px;
+}
+.card pre {
+  font-size: 12.5px;
+  padding: 10px 12px;
+  margin: 4px 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.button {
+  align-self: flex-start;
+  margin-top: auto;
+  display: inline-block;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--page);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Contents */
+nav.toc {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 12px 18px;
+  margin: 24px 0;
+}
+nav.toc ol {
+  margin: 6px 0;
+  padding-left: 22px;
+}
+nav.toc li {
+  margin: 3px 0;
+}
+.cover-art {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  margin: 20px 0;
+}
+.cover-art img {
+  width: 100%;
+  border-radius: 8px;
+  display: block;
+  background: var(--stage);
+}
+footer {
+  color: var(--muted);
+  font-size: 14px;
+  margin-top: 48px;
+}
+
+@media (max-width: 560px) {
+  body {
+    font-size: 16px;
+  }
+  h2 {
+    font-size: 24px;
+  }
+  .shots {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+  }
+  .cover-art {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .math {
+    font-size: 1em;
+  }
+}
+
+/* Print: letter pages; page numbers come from the PDF tool's footer. */
+@page {
+  size: letter;
+  margin: 0.7in 0.75in 0.8in;
+}
+@media print {
+  :root {
+    --page: #ffffff;
+    --panel: #ffffff;
+    --ink: #111111;
+    --muted: #4a4f59;
+    --line: #cfd3da;
+    --accent: #174ea6;
+    --code-bg: #f2f3f5;
+    --code-ink: #1d1f24;
+    --tip: #eef4fd;
+    --tip-line: #8fb0e6;
+    --svg-ink: #111111;
+    color-scheme: light;
+  }
+  body {
+    font-size: 11pt;
+    line-height: 1.5;
+  }
+  main {
+    max-width: none;
+    padding: 0;
+  }
+  h2 {
+    break-before: page;
+    margin-top: 0;
+  }
+  h2,
+  h3,
+  h4 {
+    break-after: avoid;
+  }
+  .no-print {
+    display: none;
+  }
+  a {
+    text-decoration: none;
+  }
+  .gallery {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  .card img {
+    max-height: 2.6in;
+  }
+  pre {
+    white-space: pre-wrap;
+    word-break: break-word;
+    break-inside: auto;
+  }
+  .card pre {
+    break-inside: avoid;
+  }
+  .cover {
+    min-height: 8.5in;
+  }
+}

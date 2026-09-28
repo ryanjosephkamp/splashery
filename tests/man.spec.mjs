@@ -266,3 +266,22 @@ test("splat equation mid-tap screenshots at 390x844 and 1440x900", async ({ brow
     await ctx.close();
   }
 });
+
+test("the manual's example recipe builds, and its gust ends where the sails would be", async () => {
+  const { RECIPES: EXAMPLE } = await import("../manual/example-recipe.js");
+  const recipe = EXAMPLE["little-windmill"];
+  const it = buildRecipe(recipe, { seed: 1, count: 60000, options: { sails: "#f2eee4" } }, applyClay); // prettier-ignore
+  let r = it.next();
+  while (!r.done) r = it.next();
+  expect(r.value.buf.count).toBeGreaterThan(50000);
+  const angle = (gust) => {
+    const out = { parts: {} };
+    recipe.drive(2, { wind: 0.4, gust }, out);
+    return out.parts.sails.angle;
+  };
+  expect(angle(1e-9) - angle(0)).toBeCloseTo(2 * Math.PI, 5);
+  expect(angle(1)).toBeCloseTo(angle(0), 9);
+  // The page shows the same code.
+  const html = fs.readFileSync("manual/index.html", "utf8");
+  expect(html).toContain("const extra = 2 * Math.PI * g * g * (3 - 2 * g);");
+});
