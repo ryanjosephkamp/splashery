@@ -235,7 +235,12 @@ function inkShape(str, px) {
   const N = Math.max(1, cells.length);
   const at = (k, fu, fv) => {
     const [gx, gy] = cells[Math.min(N - 1, k)] || [0, 0];
-    return { p: [(gx + fu) * px, -(gy + fv) * px, 0], n: [0, 0, 1], u: (gx + fu) / cols, v: (gy + fv) / 7 };
+    return {
+      p: [(gx + fu) * px, -(gy + fv) * px, 0],
+      n: [0, 0, 1],
+      u: (gx + fu) / cols,
+      v: (gy + fv) / 7,
+    };
   };
   return {
     area: cells.length * px * px,
