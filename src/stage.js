@@ -355,6 +355,7 @@ export class Stage {
     this.toy = null;
     t.entity.enabled = false;
     if (t.addon) t.addon.entity.enabled = false;
+    for (const sh of t.sheets || []) sh.entity.enabled = false; // Pictures
     t.frames = 3;
     this.graveyard.push(t);
     this.requestRender();
@@ -373,6 +374,7 @@ export class Stage {
         t.addon.entity.destroy();
         t.addon.resource.destroy?.();
       }
+      for (const sh of t.sheets || []) this.destroySheet(sh); // Pictures
       if (t.asset) {
         t.asset.unload();
         this.app.assets.remove(t.asset);
@@ -387,6 +389,11 @@ export class Stage {
     const g = this.toy?.entity.gsplat;
     if (!g) return;
     for (const k in u) g.setParameter(k, u[k]);
+    // Pictures: a kit toy's picture sheets move with it.
+    for (const sh of this.toy.sheets || []) {
+      const sg = sh.entity.gsplat;
+      for (const k in u) sg.setParameter(k, u[k]);
+    }
   }
 
   // A 1x1 transparent texture for samplers with nothing to show.
@@ -461,6 +468,98 @@ export class Stage {
     if (g) g.setParameter("uSpPattern", this.patternTex);
     this.requestRender();
   }
+
+  // ---- Picture sheets (lane Pictures) ------------------------------------------
+  // A kit toy's picture sheets (src/pictures.js): extra gsplat entities in
+  // the kit format, drawn and sorted with the toy and moved by the same
+  // uniforms (its parts, tokens and leaves). Each has its own screen texture
+  // (a video or a GIF), so the toy's own screen (the laptop's) is untouched.
+  // They are freed with the toy, or on their own a few frames after
+  // removeSheet (the work-buffer manager still references them until then).
+
+  addSheet(container) {
+    const t = this.toy;
+    if (!t) return null;
+    if (!container.format.getStream("paintColor")) {
+      container.format.addExtraStreams([
+        { name: "paintColor", format: pc.PIXELFORMAT_RGBA8, storage: pc.GSPLAT_STREAM_INSTANCE },
+      ]);
+    }
+    const entity = new pc.Entity("sheet");
+    entity.addComponent("gsplat", { resource: container });
+    const paint = entity.gsplat.getInstanceTexture("paintColor");
+    if (paint) {
+      paint.lock().fill(0);
+      paint.unlock();
+    }
+    entity.gsplat.setWorkBufferModifier(MODIFIER_KIT);
+    entity.gsplat.workBufferUpdate = pc.WORKBUFFER_UPDATE_ALWAYS;
+    entity.gsplat.setParameter("uSpPattern", this.blankTexture());
+    entity.gsplat.setParameter("uSpScreen", this.blankTexture());
+    this.app.root.addChild(entity);
+    const sheet = { entity, container, screen: null };
+    (t.sheets ||= []).push(sheet);
+    this.requestRender();
+    return sheet;
+  }
+
+  removeSheet(sheet) {
+    const t = this.toy;
+    if (!sheet || !t?.sheets) return;
+    const i = t.sheets.indexOf(sheet);
+    if (i < 0) return;
+    t.sheets.splice(i, 1);
+    sheet.entity.enabled = false;
+    // Buried like a toy: a few frames later.
+    this.graveyard.push({ frames: 3, entity: { destroy: () => this.destroySheet(sheet) } });
+    this.requestRender();
+  }
+
+  destroySheet(sheet) {
+    sheet.entity.destroy();
+    sheet.container.destroy?.();
+    sheet.screen?.destroy();
+    sheet.screen = null;
+  }
+
+  // Uploads a sheet's live picture (a canvas or an image) as its screen.
+  setSheetScreen(sheet, source) {
+    const w = source.width;
+    const h = source.height;
+    if (!sheet.screen || sheet.screen.width !== w || sheet.screen.height !== h) {
+      sheet.screen?.destroy();
+      sheet.screen = new pc.Texture(this.device, {
+        name: "splashery-sheet-screen",
+        width: w,
+        height: h,
+        format: pc.PIXELFORMAT_RGBA8,
+        mipmaps: false,
+        minFilter: pc.FILTER_NEAREST,
+        magFilter: pc.FILTER_NEAREST,
+        addressU: pc.ADDRESS_CLAMP_TO_EDGE,
+        addressV: pc.ADDRESS_CLAMP_TO_EDGE,
+      });
+    }
+    sheet.screen.setSource(source);
+    sheet.screen.upload();
+    sheet.entity.gsplat.setParameter("uSpScreen", sheet.screen);
+    this.requestRender();
+  }
+
+  // The engine skips splats under about 2 screen pixels (minPixelSize 2,
+  // minContribution 3). A picture toy's far pages use splats near a pixel,
+  // so while one shows it lowers both; every other toy gets the defaults.
+  setPictureCulling(on) {
+    const g = this.app.scene.gsplat;
+    this.cullDefaults ||= { minPixelSize: g.minPixelSize, minContribution: g.minContribution };
+    const v = on ? { minPixelSize: 0.5, minContribution: 0.5 } : this.cullDefaults;
+    if (g.minPixelSize === v.minPixelSize && g.minContribution === v.minContribution) return;
+    g.minPixelSize = v.minPixelSize;
+    g.minContribution = v.minContribution;
+    this.requestRender();
+  }
+
+  // ---- End of picture sheets ------------------------------------------------------
 
   // Model <-> world for the toy entity.
   worldToModel(p) {

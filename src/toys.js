@@ -29,6 +29,7 @@ export const CATEGORIES = [
   { id: "animals", label: "Animals" },
   { id: "maths", label: "Maths" },
   { id: "computing", label: "AI and computing" },
+  { id: "pictures", label: "Pictures and pages" },
   { id: "holidays", label: "Holidays" },
   { id: "music", label: "Music" },
   { id: "vehicles", label: "Vehicles" },
@@ -3092,6 +3093,17 @@ export const TOYS = [
     tags: "logic gates xor and binary addition circuit bits carry computer",
     camera: { yaw: 0.18, pitch: 0.1, roll: 0, distance: 3.4 },
   },
+  // ---- Pack: pictures ----
+  {
+    id: "picture-lab",
+    label: "Picture lab",
+    category: "pictures",
+    kind: "kit",
+    pack: "pictures",
+    labs: true,
+    tags: "pdf page document article photo picture image gif video open file",
+    camera: { yaw: 0, pitch: 0, roll: 0, distance: 2.3 },
+  },
 ];
 
 export function findToy(id) {
@@ -3118,9 +3130,37 @@ export function pickLook(def, options) {
   return def.looks.find((l) => l.id === options?.look) || def.looks[0];
 }
 
-// Categories that have at least one toy, in shelf order.
+// ---- Labs (lane Pictures) ------------------------------------------------------------
+// Toys marked `labs: true` are being tried out: they stay off the shelf and
+// out of Surprise me unless labs is on in this browser. ?labs=1 turns it on
+// (and remembers it), ?labs=0 turns it off. A link to a labs toy still opens
+// it.
+const LABS_KEY = "splashery.labs";
+let labsState = null;
+export function labsOn() {
+  if (labsState !== null) return labsState;
+  let on = false;
+  try {
+    const v = typeof location !== "undefined" ? new URLSearchParams(location.search).get("labs") : null; // prettier-ignore
+    if (v === "1") localStorage.setItem(LABS_KEY, "1");
+    else if (v === "0") localStorage.removeItem(LABS_KEY);
+    on = v === "1" || (v !== "0" && localStorage.getItem(LABS_KEY) === "1");
+  } catch {
+    on = typeof location !== "undefined" && new URLSearchParams(location.search).get("labs") === "1"; // prettier-ignore
+  }
+  labsState = on;
+  return on;
+}
+
+// Whether a toy shows on the shelf and in Surprise me.
+export function onShelf(t) {
+  return !t.labs || labsOn();
+}
+// ---- End of labs ---------------------------------------------------------------------
+
+// Categories that have at least one toy on the shelf, in shelf order.
 export function shelfCategories() {
-  return CATEGORIES.filter((c) => TOYS.some((t) => t.category === c.id));
+  return CATEGORIES.filter((c) => TOYS.some((t) => t.category === c.id && onShelf(t)));
 }
 
 // Lower-case, accent-free text for search matching.

@@ -190,11 +190,123 @@ later src/voices.js. Leave their lines alone; keep both sides when you merge.
 
 ## State
 
-September 28, 2026: started. Handoff file and draft PR first, then the page architecture prototype.
+September 28, 2026: the prototype works end to end in the app (Picture lab with `?labs=1`): the
+sample PDF, a photo, a GIF, a WebM video, a 200-page PDF, a web address, and the messages for a
+password-protected PDF and a refused address. Next: the page bend (kind "leaf"), links and embeds,
+tests, the help and sound entries, the thumbnail, clips.
 
 ## Design
 
-(Filled in once the first prototype works.)
+Measured on September 28, 2026 in the test Chromium (software WebGL, 390×844 at 2x, the "mid" tier),
+with the sample article (two Letter pages, dense: about 17% of a page's pixels are ink).
+
+**Page architecture: one gsplat entity per sheet, rebuilt per page.** A recipe places sheets with
+`k.sheet(...)`. Each sheet is its own gsplat entity (`stage.addSheet`) in the kit format (it carries
+`splatAnim`), drawn and sorted with the toy and moved by the same uniforms (parts, tokens, and the
+new leaves), so a page can ride on a part or turn about a spine. When a sheet's page (or its level
+of detail) changes, the page is drawn from the file (PDF.js, or the picture, or the GIF or video
+frame) at the size wanted, a Web Worker (`src/pictures-worker.js`, pure code in
+`src/picture-splats.js`) turns the pixels into packed arrays in the container's own texture layout,
+and the main thread copies them into the sheet's container (a new, bigger container only when a page
+needs more than it holds). Why this over the alternatives:
+
+- Texture-driven sheets for pages would need a sheet dense enough for the sharpest page everywhere
+  (splats where there is only paper) and give up the per-splat ink colors; rebuilt splat sets spend
+  splats only on ink.
+- One entity per sheet (not one big container) lets a page swap without touching the others, and a
+  turning page keeps its own splats.
+- Memory and splat count do not grow with the page count. Paging through all 200 pages of a test
+  PDF: splats on show stayed at 18,942 to 19,835, the container's capacity stayed at 23,678, the JS
+  heap plateaued at 71 to 78 MB, and each page took 127 to 205 ms from "go" to shown (drawing the
+  page, building and uploading). A small cache keeps built pages (up to 600,000 splats, about 40 MB;
+  the page after the open one is built ahead).
+
+**The splats.** Each sheet has a smooth base and the detail on it:
+
+- Base: two staggered lattices of 8-pixel blocks, each a flat disc with a sigma of 3.6 px (0.45
+  block). They close up to about 97% cover with no grid (the Operator's test showed a grid with one
+  lattice). Its color is the paper's own color per block for a document, the mean color for a photo.
+- Detail: one flat disc per pixel, sigma 0.6 px, opacity 0.99, the pixel's own color, 6 px (0.75
+  block) in front of the base, so the paper does not sort over the ink until the page is seen from
+  more than about 60 degrees off its face.
+- "ink" (documents): the paper color is found per block from the lighter half of its pixels,
+  smoothed; blocks much darker than the page's most common color (a figure) borrow that color. A
+  pixel is ink when it differs from the paper under it by more than 0.075 in any channel. The page's
+  edge is six rows of long thin splats (0.6 to 2 px across), so the edge is sharp while the paper
+  inside stays coarse.
+- "pixels" (photos): every pixel is detail; the base stays 8 px inside the edge.
+- "screen" (GIF and video): the same splats as "pixels", colored on the GPU from the sheet's own
+  texture (the kit's "screen" kind, 15). Each sheet has its own texture (`stage.setSheetScreen`), so
+  the toy's own screen (the laptop's `uSpScreen`) is untouched. A new frame draws the frame at the
+  sheet's size into a canvas and uploads it (a 192×144 video: 28k splats).
+
+**Near and far detail.** Each frame the controller measures how many device pixels the sheet's width
+covers and builds the page at about one picture pixel per device pixel, on a ladder of widths a
+square root of two apart (128, 181, 256, 362, 512, 724, 1024, 1448, 2048, …), within the tier's cap.
+It rebuilds when the wanted level has held for 250 ms and is over 1.3 times or under 0.6 times the
+built one. Measured for the article's first page (ink method):
+
+| Width   | Splats  | Ink pixels | Draw (PDF.js) | Worker | Total   |
+| ------- | ------- | ---------- | ------------- | ------ | ------- |
+| 362 px  | 31,998  | 23,890     | 65 ms         | 19 ms  | 86 ms   |
+| 512 px  | 57,548  | 42,918     | 23 ms         | 47 ms  | 171 ms  |
+| 724 px  | 95,307  | 68,471     | 856 ms        | 113 ms | 1026 ms |
+| 1024 px | 175,215 | 124,870    | 862 ms        | 163 ms | 1041 ms |
+| 1448 px | 330,060 | 234,094    | 906 ms        | 474 ms | 1397 ms |
+| 1600 px | 388,004 | 271,962    | 957 ms        | 402 ms | 1377 ms |
+
+(The jump in drawing time from 724 px on is PDF.js in this software-rendered container; the numbers
+on a phone will differ. The page stays on show while its sharper build runs.) Whole page on a
+390-wide phone: the page shows about 340 CSS px (680 device px) wide at the Picture lab's camera, so
+it is built at 724 px (95k splats); the title and headings read, and zoomed in four times (1600 px,
+388k splats) every word of the body text reads.
+
+**Splat budgets per tier** (one sheet; `PICTURE_BUDGETS` in `src/pictures.js`):
+
+| Tier | Photo or frame ("pixels") | Video or GIF ("screen") | Page ink  | Widest page |
+| ---- | ------------------------- | ----------------------- | --------- | ----------- |
+| low  | 160,000                   | 100,000                 | 220,000   | 1,100 px    |
+| mid  | 320,000                   | 180,000                 | 420,000   | 1,600 px    |
+| high | 640,000                   | 320,000                 | 750,000   | 2,400 px    |
+| max  | 1,200,000                 | 500,000                 | 1,300,000 | 3,200 px    |
+
+A page with more ink than its budget is drawn again, smaller. Photos are never built wider than the
+picture itself.
+
+**minPixelSize: both.** The detail levels keep splats near one device pixel, and while a picture toy
+shows the stage lowers `minPixelSize` and `minContribution` from 2 and 3 to 0.5 and 0.5
+(`stage.setPictureCulling`), putting the defaults back for every other toy (the next toy's build
+calls it with `false`). Measured on the whole page (dark pixels in the frame, default thresholds →
+lowered):
+
+| Page on screen | Built at | Default   | Lowered |
+| -------------- | -------- | --------- | ------- |
+| 511 px         | 512 px   | 15,247    | 15,247  |
+| 511 px         | 1024 px  | 30,279    | 30,279  |
+| 511 px         | 1600 px  | 0 (blank) | 32,501  |
+| 256 px         | 1024 px  | 0 (blank) | 11,433  |
+| 170 px         | 512 px   | 0 (blank) | 2,565   |
+
+So with the defaults a page built at three times its screen size disappears (the Operator's blank
+page); at one to two times it shows. The lowered thresholds cover the moment between a zoom-out and
+the rebuild. Pages built much finer than the screen also look bolder (each sub-pixel splat covers a
+whole pixel), which is another reason to follow the view.
+
+**Files and web addresses.** `src/media.js` opens a File or an https address (or the local test
+server) and gives one interface: `kind`, `count`, `aspect(i)`, `draw(i, w, h)`, and for video
+`play`, `pause`, `seek`, `setMuted`, `onFrame`. PDF.js (6.3.289, the legacy build: the modern build
+needs `Map.prototype.getOrInsertComputed`, which the test Chromium and many phones lack) and omggif
+(1.0.10) load with a dynamic import only when a PDF or a GIF without ImageDecoder is opened. The app
+opens the media first (`app.openMedia`), so a file the browser can't read, a password, an address
+that refuses (CORS) or a file too big for the tier leaves the toy as it was and shows the message in
+the Toy tab. Then the scene gets `toy.media = { url }` (a link or an embed opens it again) or
+`{ file: { name, bytes } }` (settings only: a link says so, and whoever opens it is asked to open
+the same file; the sample shows meanwhile), plus `page`.
+
+**Labs.** `labs: true` in `src/toys.js` keeps a toy's card hidden (it stays in the shelf's list, so
+the shelf tests that count every toy's card still pass) and out of Surprise me; the "Pictures and
+pages" chip shows only when one of its toys is on the shelf. `?labs=1` turns labs on and remembers
+it in localStorage, `?labs=0` turns it off; a link or `chooseToy` opens a labs toy either way.
 
 ## Notes
 

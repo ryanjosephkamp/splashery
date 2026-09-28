@@ -27,6 +27,7 @@ import {
 import { findToy, assetURL, lookOption, pickLook } from "./toys.js";
 import { createScene, THEMES } from "./state.js";
 import { mulberry32, mixSeed, hash32 } from "./noise.js";
+import { Pictures } from "./pictures.js"; // Pictures
 
 export { NoGPUError };
 
@@ -333,6 +334,7 @@ export class Player {
       Object.assign(info, { id: null, label: file.name, kind: "file", bytes: file.size });
     }
     this.toyInfo = info;
+    if (!this.pictures) this.closeMedia(); // Pictures
     this.patternOn = false;
     this.applyPattern();
     this.camera.fit(info.radius, info.center);
@@ -466,6 +468,7 @@ export class Player {
       this.screen = { recipe, canvas, g: canvas.getContext("2d"), version: null };
       recipe.screen.reset?.();
     }
+    this.startPictures(ctx, toy, recipe, options); // Pictures
     const b = ctx.buf.bounds();
     for (const r of ctx.reaches || []) {
       for (let k = 0; k < 3; k++) {
@@ -624,7 +627,117 @@ export class Player {
 
   disposeProcedural() {
     this.proc = null;
+    // Pictures: the old toy's sheets go with it.
+    if (this.pictures) this.camera.setTurntable(this.scene.autoplay.turntable);
+    this.pictures?.destroy();
+    this.pictures = null;
+    this.stage.setPictureCulling(false);
   }
+
+  // ---- Pictures (lane Pictures) ----------------------------------------------------
+  // A kit toy with picture sheets (k.sheet) shows media on them: the scene's
+  // media web address (toy.media.url), a file opened on this device
+  // (this.mediaFile, never saved), or the recipe's own sample
+  // (recipe.pictures.sample(options), a path under the site). The media is
+  // opened once and kept while the same source shows.
+
+  startPictures(ctx, toy, recipe, options) {
+    const defs = ctx.kit?.sheets;
+    this.stage.setPictureCulling(!!defs?.length);
+    if (!defs?.length) {
+      this.closeMedia();
+      return;
+    }
+    const pics = new Pictures(this, {
+      defs,
+      transform: ctx.transform,
+      spine: ctx.kit.spineDef || null,
+      profile: this.profile,
+    });
+    pics.setSound(this.mediaSound);
+    this.pictures = pics;
+    ctx.kit.data ||= {};
+    ctx.kit.data.pictures = pics.api;
+    const src = this.mediaSource(toy, recipe, options);
+    if (!src) {
+      this.closeMedia();
+      return;
+    }
+    if (this.pictureMedia?.key === src.key) {
+      this.pictureMedia.ready.then((m) => {
+        if (this.pictures !== pics || !m) return;
+        pics.setMedia(m);
+        if (src.page) pics.go(src.page);
+      });
+      return;
+    }
+    this.closeMedia();
+    const entry = { key: src.key, media: null };
+    entry.ready = import("./media.js")
+      .then(({ openMedia }) => openMedia(src.source, { profile: this.profile }))
+      .then(
+        (m) => {
+          entry.media = m;
+          if (this.pictureMedia !== entry) {
+            m.close();
+            return null;
+          }
+          if (this.pictures === pics) {
+            pics.setMedia(m);
+            if (src.page) pics.go(src.page);
+          }
+          this.emit("media", { ok: true, kind: m.kind, name: m.name, count: m.count });
+          return m;
+        },
+        (err) => {
+          if (this.pictureMedia === entry) this.pictureMedia = null;
+          this.emit("media", { ok: false, error: err.message, source: src });
+          this.emit("message", err.message);
+          return null;
+        },
+      );
+    this.pictureMedia = entry;
+  }
+
+  // Where the toy's media comes from: { key, source, page }.
+  mediaSource(toy, recipe, options) {
+    const m = toy.media;
+    if (m?.file && this.mediaFile && this.mediaFile.name === m.file.name)
+      return { key: mediaKey(this.mediaFile), source: this.mediaFile, page: m.page || 0 };
+    if (m?.url) return { key: mediaKey(m.url), source: m.url, page: m.page || 0 };
+    const sample = recipe.pictures?.sample?.(options || {});
+    if (sample) {
+      const url = assetURL(sample);
+      return { key: `url:${url}`, source: url, page: 0 };
+    }
+    return null;
+  }
+
+  // Media the app has opened already (to show its errors before anything
+  // changes); the next build uses it.
+  adoptMedia(source, media) {
+    this.closeMedia();
+    this.pictureMedia = { key: mediaKey(source), media, ready: Promise.resolve(media) };
+  }
+
+  closeMedia() {
+    const e = this.pictureMedia;
+    this.pictureMedia = null;
+    if (e) e.ready?.then(() => e.media?.close());
+  }
+
+  // Video sound follows the site's speaker button; embeds keep it off.
+  setMediaSound(on) {
+    this.mediaSound = !!on;
+    this.pictures?.setSound(this.mediaSound);
+  }
+
+  // A container in the kit format for a picture sheet.
+  pictureContainer(capacity) {
+    return new pc.GSplatContainer(this.stage.device, capacity, this.format);
+  }
+
+  // ---- End of pictures ---------------------------------------------------------------
 
   // ---- Scene ----------------------------------------------------------------
 
@@ -833,6 +946,8 @@ export class Player {
       return;
     }
     if (!this.frozen) this.time += dt * this.timeScale;
+    // Pictures: a picture toy (turntable: false) keeps still, facing you.
+    if (this.pictures && this.toyInfo.recipe?.turntable === false) this.camera.turntable = false;
     const d = this.driver.drop;
     if (d.on && d.recallAt < 0) {
       const k = Math.min(1, (this.time - d.start) / 0.9) * d.floor * 0.5;
@@ -909,6 +1024,7 @@ export class Player {
         this.stage.setScreenCanvas(scr.canvas);
       }
     }
+    this.pictures?.update(this.motion.out, this.time); // Pictures
     if (this.motion.addonU) {
       this.stage.setAddonUniforms({ ...u, ...this.motion.addonU, uSpPat: [0, 0, 0, 0] });
     }
@@ -1206,9 +1322,18 @@ export class Player {
 
   destroy() {
     this.loadToken++;
+    this.pictures?.destroy(); // Pictures
+    this.closeMedia();
     this.painter?.detach();
     this.stage?.destroy();
   }
+}
+
+// Pictures: which media a source is (a file on this device, or an address).
+export function mediaKey(source) {
+  return typeof source === "string"
+    ? `url:${source}`
+    : `file:${source.name}:${source.size}:${source.lastModified ?? 0}`;
 }
 
 // A kit recipe's options with the scene's values checked against their types.

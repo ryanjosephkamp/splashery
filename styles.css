@@ -479,6 +479,27 @@ textarea {
   color: var(--ink);
 }
 
+/* Pictures: the picture panel (lane Pictures) ---------------------------------- */
+.input-media {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+.input-media .input-row input[type="url"] {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 6px 10px;
+  background: var(--page);
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  font-size: 13px;
+}
+.input-media .input-shown {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+/* End of pictures */
+
 /* Panel ------------------------------------------------------------------- */
 
 .panel {

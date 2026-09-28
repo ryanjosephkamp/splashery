@@ -199,6 +199,40 @@ export function normalizeMotion(m) {
   };
 }
 
+// ---- Picture media (lane Pictures) -------------------------------------------------
+// A picture toy's media (schema v3, additive): { url } for a web address
+// (https, or the local test server) that a link or an embed opens again, or
+// { file: { name, bytes } } for a file from the visitor's device, which is
+// never put in a scene (the settings only, as with splat files). `page` is
+// the page showing (0 is the first). Anything else is dropped.
+export function normalizeMediaURL(url) {
+  if (typeof url !== "string" || url.length > 2000) return null;
+  try {
+    const u = new URL(url.trim());
+    const local = u.protocol === "http:" && ["127.0.0.1", "localhost"].includes(u.hostname);
+    return u.protocol === "https:" || local ? u.href : null;
+  } catch {
+    return null;
+  }
+}
+
+export function normalizeMedia(m) {
+  if (!m || typeof m !== "object" || Array.isArray(m)) return null;
+  const out = {};
+  const url = normalizeMediaURL(m.url);
+  if (url) out.url = url;
+  else if (m.file && typeof m.file === "object") {
+    out.file = {
+      name: typeof m.file.name === "string" ? m.file.name.slice(0, 200) : "file",
+      bytes: num(m.file.bytes, 0, 0, 1e12),
+    };
+  } else return null;
+  const page = Math.round(num(m.page, 0, 0, 100000));
+  if (page) out.page = page;
+  return out;
+}
+// ---- End of picture media -----------------------------------------------------------
+
 export function normalizeToy(t, profile) {
   const src = t && typeof t === "object" ? t : {};
   if (src.kind === "procedural") {
@@ -226,6 +260,8 @@ export function normalizeToy(t, profile) {
   if (Object.keys(options).length) out.options = options;
   const clay = normalizeClay(src.clay);
   if (clay.length) out.clay = clay;
+  const media = normalizeMedia(src.media); // Pictures
+  if (media) out.media = media;
   return out;
 }
 

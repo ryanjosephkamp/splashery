@@ -634,6 +634,50 @@ export class Kit {
     this.reaches.push(p.slice());
   }
 
+  // ---- Picture sheets (lane Pictures) ------------------------------------------
+  // A flat place where a picture shows (a page, a photo, a screen), filled
+  // by src/pictures.js after the build with the page or frame drive() asks
+  // for. In recipe coordinates: `center`, `width` and `height` (the box the
+  // picture is fitted into, keeping its shape), `normal` (the side it faces)
+  // and `up`. Options: `part` (it moves with a part), `method` ("auto",
+  // "pixels", "ink" or "screen"), `fit` ("contain", or "fill" to stretch),
+  // `align` ([-1..1, -1..1]: where a picture narrower than the box sits;
+  // [-1, 0] against the left), `leaf` (the slot of a page that bends, see
+  // k.spine) and `lift` (how far in front of `center` it floats, in recipe
+  // units). Returns the sheet's index. Its corners count in the fit.
+  sheet(opts) {
+    const s = {
+      id: opts.id || `sheet${(this.sheets || []).length}`,
+      center: (opts.center || [0, 0, 0]).slice(),
+      width: opts.width ?? 1,
+      height: opts.height ?? 1,
+      normal: unit(opts.normal || [0, 0, 1]),
+      up: unit(opts.up || [0, 1, 0]),
+      part: opts.part ?? 0,
+      method: opts.method || "auto",
+      fit: opts.fit || "contain",
+      align: opts.align || [0, 0],
+      leaf: opts.leaf ?? null,
+      lift: opts.lift ?? 0,
+      opacity: opts.opacity ?? 0.99,
+    };
+    (this.sheets ||= []).push(s);
+    const x = unit(cross3(s.up, s.normal));
+    for (const a of [-1, 1])
+      for (const b of [-1, 1])
+        this.reach([0, 1, 2].map((k) => s.center[k] + (x[k] * a * s.width) / 2 + (s.up[k] * b * s.height) / 2)); // prettier-ignore
+    return this.sheets.length - 1;
+  }
+
+  // A book's spine, for pages that bend (sheets with a `leaf`): `at` a point
+  // on it, `axis` along it, and `dir` from it along the pages at rest. The
+  // leaves turn about it (drive() sets out.leaves).
+  spine({ at = [0, 0, 0], axis = [0, 1, 0], dir = [1, 0, 0] } = {}) {
+    this.spineDef = { at: at.slice(), axis: unit(axis), dir: unit(dir) };
+  }
+
+  // ---- End of picture sheets ------------------------------------------------------
+
   // Shapes.
   sphere(r = 0.8) {
     return sphereShape(r);

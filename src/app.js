@@ -110,6 +110,14 @@ class App {
     });
     player.on("profile", () => this.updateRenderInfo());
     ui.setSound(this.sound.enabled);
+    // Pictures: video sound follows the speaker button; the Toy tab's
+    // picture panel and the status line follow the pages.
+    player.setMediaSound(this.sound.enabled);
+    player.on("pictures", (p) => {
+      ui.setPictures?.(p);
+      this.updateStatus();
+    });
+    player.on("media", (m) => ui.setPictures?.(player.pictures?.info() || null, m));
     const wm = webmSupport();
     ui.setWebmUnavailable(wm.ok ? null : wm.reason);
     ui.setTool("orbit");
@@ -160,6 +168,13 @@ class App {
       this.pendingFileScene = scene;
       scene = { ...scene, toy: { kind: "builtin", id: TOYS[0].id } };
       player.scene = scene;
+    }
+    // Pictures: a picture toy's own file cannot come with a link.
+    if (scene.toy.media?.file && player.mediaFile?.name !== scene.toy.media.file.name) {
+      ui.toast(
+        `This link shows someone's own file (${scene.toy.media.file.name}) with these settings. Open that file in the Toy tab to see it; the sample shows meanwhile.`,
+        7000,
+      );
     }
     await this.loadToy(scene.toy, { file });
     player.applySettings(scene);
@@ -349,7 +364,9 @@ class App {
     const player = this.player;
     const info = player.toyInfo;
     if (!info) return;
-    const parts = [info.label, `${formatCount(info.splats)} splats`];
+    // Pictures: a picture toy's sheets count too.
+    const splats = info.splats + (player.pictures?.splats() || 0);
+    const parts = [info.label, `${formatCount(splats)} splats`];
     if (info.credit) parts.push(`by ${info.credit.author} (${info.credit.license})`);
     const pat = player.scene.pattern;
     this.flagCredit = null;
@@ -585,6 +602,65 @@ class App {
     }
   }
 
+  // ---- Pictures (lane Pictures) ------------------------------------------------------
+  // Opens a file from this device or a web address on the picture toy that
+  // shows now. The media is opened first, so a file this browser can't read
+  // (or an address that refuses) leaves the toy as it was and throws a
+  // message for the Toy tab to show.
+  async openMedia(source) {
+    const player = this.player;
+    const toy = player.scene.toy;
+    if (toy.kind !== "builtin" || !player.pictures)
+      throw new Error("Pick a picture toy first (Picture lab).");
+    const { openMedia, checkMediaURL } = await import("./media.js");
+    const src = typeof source === "string" ? checkMediaURL(source) : source;
+    const media = await openMedia(src, { profile: player.profile });
+    player.adoptMedia(src, media);
+    const same = toy.media?.file && src.name === toy.media.file.name;
+    if (typeof src === "string") {
+      player.mediaFile = null;
+      toy.media = { url: src };
+    } else {
+      player.mediaFile = src;
+      toy.media = { file: { name: src.name, bytes: src.size }, ...(same && toy.media.page ? { page: toy.media.page } : {}) }; // prettier-ignore
+    }
+    const cam = player.camera.getState();
+    await this.loadToy(toy);
+    player.camera.setState(cam, { snap: true });
+    this.ui.toast(
+      typeof src === "string"
+        ? `${media.name} opened from the web.`
+        : `${media.name} opened. It stays on this device.`,
+    );
+    if (this.ui.currentTab() === "share") this.updateEmbedSoon();
+    return media;
+  }
+
+  // Back to the toy's own sample.
+  async clearMedia() {
+    const player = this.player;
+    const toy = player.scene.toy;
+    if (!toy.media && !player.mediaFile) return;
+    delete toy.media;
+    player.mediaFile = null;
+    const cam = player.camera.getState();
+    await this.loadToy(toy);
+    player.camera.setState(cam, { snap: true });
+  }
+
+  // Pages and play, for the Toy tab's picture panel.
+  pictureStep(delta) {
+    const p = this.player.pictures;
+    if (!p) return;
+    p.go(p.page + delta);
+  }
+
+  pictureTogglePlay() {
+    this.player.pictures?.togglePlay();
+  }
+
+  // ---- End of pictures ---------------------------------------------------------------
+
   async setPattern(partial) {
     const player = this.player;
     const prev = player.scene.pattern;
@@ -618,6 +694,7 @@ class App {
   toggleSound() {
     this.sound.setEnabled(!this.sound.enabled);
     this.ui.setSound(this.sound.enabled);
+    this.player.setMediaSound(this.sound.enabled); // Pictures
     if (this.sound.enabled) this.sound.play("chime");
   }
 
@@ -991,6 +1068,8 @@ class App {
   exportScene() {
     const player = this.player;
     const s = structuredClone(player.scene);
+    // Pictures: the page showing goes with the media.
+    if (s.toy.media && player.pictures) s.toy.media.page = player.pictures.page;
     s.createdAt = new Date().toISOString();
     s.camera = player.camera.getState();
     if (s.toy.kind === "procedural" && player.proc) s.toy.clay = player.proc.clay.slice();
@@ -1015,6 +1094,11 @@ class App {
     }
     const url = shareURL(res.hash);
     history.replaceState(null, "", `#s=${res.hash}`);
+    // Pictures: a file from this device stays here; the link has the settings.
+    if (this.player.scene.toy.media?.file)
+      res.notes.push(
+        "Your own file stays on this device: the link carries the settings only, and whoever opens it is asked to open the same file.",
+      );
     this.ui.setLinkNote(res.notes.join(" "));
     try {
       await navigator.clipboard.writeText(url);
