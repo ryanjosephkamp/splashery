@@ -3115,6 +3115,16 @@ export const TOYS = [
     tags: "pdf page document article photo picture image gif video open file",
     camera: { yaw: 0, pitch: 0, roll: 0, distance: 3.2 },
   },
+  {
+    id: "your-book",
+    label: "Your book",
+    category: "pictures",
+    kind: "kit",
+    pack: "pictures",
+    labs: true,
+    tags: "book pdf pages flip turn read hardcover paperback magazine notebook spiral stapled",
+    camera: { yaw: 0.12, pitch: 0.12, roll: 0, distance: 2.6 },
+  },
 ];
 
 export function findToy(id) {
