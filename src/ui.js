@@ -706,6 +706,84 @@ export function createUI(app) {
     refresh();
   }
 
+  // A drawing pad for a toy's input panel (input.pad = { cols, rows, max,
+  // button, value }): a grid you draw on with a soft brush, a Clear button
+  // and a button that hands the drawing to input.read as the text
+  // "pad:v,v,..." (row by row, each cell 0..max). value() gives the drawing
+  // to start from, in the same form.
+  function renderInputPad(pad, apply) {
+    const cols = pad.cols || 8;
+    const rows = pad.rows || 8;
+    const max = pad.max || 16;
+    const cells = new Array(cols * rows).fill(0);
+    const start = String(pad.value?.() || "").replace(/^pad:/, "");
+    start
+      .split(",")
+      .slice(0, cells.length)
+      .forEach((v, i) => (cells[i] = Math.max(0, Math.min(max, Number(v) || 0))));
+    const wrap = document.createElement("div");
+    wrap.className = "input-pad";
+    const canvas = document.createElement("canvas");
+    canvas.id = "toy-input-pad";
+    canvas.width = cols * 24;
+    canvas.height = rows * 24;
+    canvas.setAttribute("aria-label", pad.label || "Drawing pad");
+    const g = canvas.getContext("2d");
+    const draw = () => {
+      const w = canvas.width / cols;
+      const h = canvas.height / rows;
+      cells.forEach((v, i) => {
+        const t = v / max;
+        const c = Math.round(20 + 225 * t);
+        g.fillStyle = `rgb(${c},${c},${Math.round(40 + 215 * t)})`;
+        g.fillRect((i % cols) * w, Math.floor(i / cols) * h, w - 1, h - 1);
+      });
+    };
+    // A soft brush: the cell under the pointer fills fastest, its
+    // neighbors a little.
+    const ink = (e) => {
+      const r = canvas.getBoundingClientRect();
+      const x = ((e.clientX - r.left) / r.width) * cols - 0.5;
+      const y = ((e.clientY - r.top) / r.height) * rows - 0.5;
+      for (let j = 0; j < rows; j++)
+        for (let i = 0; i < cols; i++) {
+          const d = Math.hypot(i - x, j - y);
+          if (d < 1.1) cells[j * cols + i] = Math.min(max, cells[j * cols + i] + max * 0.3 * (1.1 - d)); // prettier-ignore
+        }
+      draw();
+    };
+    let down = false;
+    canvas.addEventListener("pointerdown", (e) => {
+      down = true;
+      canvas.setPointerCapture?.(e.pointerId);
+      ink(e);
+    });
+    canvas.addEventListener("pointermove", (e) => down && ink(e));
+    const up = () => (down = false);
+    canvas.addEventListener("pointerup", up);
+    canvas.addEventListener("pointercancel", up);
+    const buttons = document.createElement("div");
+    buttons.className = "button-row";
+    const clear = document.createElement("button");
+    clear.type = "button";
+    clear.id = "toy-input-pad-clear";
+    clear.textContent = "Clear";
+    clear.addEventListener("click", () => {
+      cells.fill(0);
+      draw();
+    });
+    const go = document.createElement("button");
+    go.type = "button";
+    go.className = "primary";
+    go.id = "toy-input-pad-go";
+    go.textContent = pad.button || "Use this drawing";
+    go.addEventListener("click", () => apply(`pad:${cells.map((v) => Math.round(v)).join(",")}`));
+    buttons.append(clear, go);
+    wrap.append(canvas, buttons);
+    draw();
+    return wrap;
+  }
+
   // A toy that takes something of yours (the molecule: a name, formula or
   // SMILES, or a file; the protein: a PDB or mmCIF file). The recipe's
   // input.read turns it into option values, or throws a message to show.
@@ -757,6 +835,7 @@ export function createUI(app) {
       });
       box.append(row);
     }
+    if (input.pad) box.append(renderInputPad(input.pad, apply));
     const file = document.createElement("input");
     file.type = "file";
     file.accept = input.accept || "";
@@ -764,6 +843,9 @@ export function createUI(app) {
     file.id = "toy-input-file";
     const fileRow = document.createElement("div");
     fileRow.className = "button-row";
+    // fileButton: false leaves the file button out (a toy that only takes
+    // typing or drawing).
+    fileRow.hidden = input.fileButton === false;
     const open = document.createElement("button");
     open.type = "button";
     open.id = "toy-input-open";

@@ -4579,20 +4579,6 @@ export const RECIPES = {
         k.reach(add(toW(arc(0.9)), [0, -0.45, moves[i].away[2]]));
       });
       k.data = { bananas: list };
-      // The crown where the stalks meet.
-      const top = arc(0);
-      k.add(
-        k.tube(
-          spline([
-            add(top, [0.02, 0.0, 0]),
-            add(top, [-0.08, 0.06, 0]),
-            add(top, [-0.18, 0.08, 0]),
-          ]),
-          0.065,
-          { caps: true },
-        ),
-        { flat: 0.3, weight: 1.5, color: (c) => lit(c, mix("#7a6a2e", "#4a3a1a", c.t ?? 0)) },
-      );
     },
   },
 

@@ -857,6 +857,25 @@ export const TOY_SOUNDS = {
     on: { voice: "tine", notes: "C5 D5 E5 G5 A5", step: 0.1, decay: 0.8 },
     off: { voice: "tine", notes: "A5 G5 E5 D5 C5", step: 0.08, decay: 0.6 },
   },
+  // A pen touches down; then drive() hums a tone that follows the curve's
+  // height as the pen draws (cues every 0.09 s).
+  "graph-plotter": { voice: "scrape", f: 2600, rate: 22, decay: 0.3, vol: 0.25 },
+  // A low whoosh that rises with the surface (0.45 to 2.1 s), then a soft
+  // swell while its parameter plays.
+  "surface-plotter": [
+    { voice: "whoosh", at: 0.35, f: 90, to: 5, decay: 2.4, vol: 0.8 },
+    { voice: "hum", at: 2.3, f: 98, to: 1.2, bright: 0.2, decay: 2.5, vol: 0.5 },
+  ],
+  // Two pure tones a quarter turn apart (the turn takes 3.8 s), swelling
+  // and fading with the waves.
+  "unit-circle": [
+    { voice: "pad", at: 0.3, f: "A4", decay: 1.9, vol: 0.9 },
+    { voice: "pad", at: 1.25, f: "E5", decay: 1.5, vol: 0.8 },
+  ],
+  // Each circle's hum joins in, building into a chord.
+  "fourier-circles": { voice: "pad", notes: "C3 G3 C4 E4 G4 C5", step: 0.35, at: 0.3, decay: 1.6 },
+  // A wooden slide; drive() adds a slide and a click for each piece.
+  "pythagoras-proof": { voice: "scrape", at: 0.3, f: 700, rate: 9, decay: 0.35, vol: 0.35 },
   // Three hushing waves, each at its loudest as a swell reaches the mouth
   // (0.7, 1.8, 2.9 s).
   "seashell-spiral": [
