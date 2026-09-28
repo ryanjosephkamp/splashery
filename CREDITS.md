@@ -168,6 +168,28 @@ The Picture lab (a labs toy) opens with two samples:
 
 Files and web addresses people open in the Picture lab are read in their browser and never uploaded.
 
+Your book opens with the same article. The photo album and the picture frame (labs toys, lane Books)
+open with these photos, each [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) on Flickr
+(checked on the live pages on September 28, 2026), made smaller (900 pixels on the long side):
+
+- `assets/toys/photo-album/lighthouse.jpg`: "The lighthouse" by
+  [-anna--](https://www.flickr.com/photos/77532212@N07/16563630874).
+- `assets/toys/photo-album/sailboat.jpg`: "Sailboat" by
+  [leex6221](https://www.flickr.com/photos/135788700@N05/35295085365).
+- `assets/toys/photo-album/tulips.jpg`: "Tulips" by
+  [Lucía Quiñónez](https://www.flickr.com/photos/133590734@N04/17935969728).
+- `assets/toys/photo-album/daffodils.jpg`: "CRW_2034.jpg" (daffodils and tulips) by
+  [patrick jourdheuille](https://www.flickr.com/photos/128176757@N06/16361600725).
+- `assets/toys/photo-album/red-barn.jpg`: "Barn A Glow" by
+  [Alan Levine](https://www.flickr.com/photos/37996646802@N01/51912951761).
+- `assets/toys/photo-album/seashell.jpg`: "Seashell by the Seashore" by
+  [samsonites89](https://www.flickr.com/photos/116158494@N02/20532087302).
+- `assets/toys/picture-frame/islands.jpg`: "Sailboat in the Kornati Isalnds" by
+  [Camilla K](https://www.flickr.com/photos/148372846@N03/37778143022) (the digital frame also steps
+  through the album's photos).
+
+Photos and PDFs people open in these toys are read in their browser and never uploaded.
+
 ## National flags
 
 The pattern layer can wrap a national flag around any toy. The flags are SVG files from

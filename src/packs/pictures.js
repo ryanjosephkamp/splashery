@@ -67,7 +67,24 @@ function bkLit(col, n, amb = 0.72, dif = 0.3) {
 // (recipe units), `n` the side it faces; `color(a, b)` gets the place along
 // u and v (0..1). `leaf` = { slot, S, at, dir } makes every splat turn with
 // that leaf (its distance from the spine in toy units: S is the fit's scale).
-function rect(k, { share, at, u, v, n, color, part = 0, leaf = null, opacity = 0.99, size = 1 }) {
+function rect(
+  k,
+  {
+    share,
+    at,
+    u,
+    v,
+    n,
+    color,
+    part = 0,
+    leaf = null,
+    opacity = 0.99,
+    size = 1,
+    kind = null,
+    params = null,
+  },
+) {
+  // prettier-ignore
   const lu = Math.hypot(...u);
   const lv = Math.hypot(...v);
   k.cloud({ share, pattern: false, flat: 0.06 }, (rand, i, total) => {
@@ -92,6 +109,11 @@ function rect(k, { share, at, u, v, n, color, part = 0, leaf = null, opacity = 0
       opacity,
       part,
     };
+    if (kind) {
+      s.kind = kind;
+      s.params = params;
+      s.channel = 0;
+    }
     if (leaf) {
       s.kind = "leaf";
       const d = (p[0] - leaf.at[0]) * leaf.dir[0] + (p[1] - leaf.at[1]) * leaf.dir[1] + (p[2] - leaf.at[2]) * leaf.dir[2]; // prettier-ignore
@@ -120,7 +142,12 @@ function boxFaces(k, [x0, x1], [y0, y1], [z0, z1], faces, opts) {
 // Pages and spreads. Side-bound: spread 0 is the closed book; spread K >= 1
 // shows page 2K - 2 on the left (none on spread 1, the cover's inside) and
 // 2K - 1 on the right. Top-bound: "spread" K is sheet K on top.
+//
+// The photo album uses the same leaves with "sides" in place of pages
+// (BOOK.sides: the photos on each side of each leaf, side 0 the cover), and
+// its own sheets per side (BOOK.sheetsOf).
 function bookCount(pics) {
+  if (BOOK.sides) return pics && !pics.count ? 0 : BOOK.sides.length;
   if (!pics) return 7; // no pictures (the Node tests): a short made-up book
   return pics.count || 0;
 }
@@ -129,11 +156,26 @@ function lastSpread(st, N) {
 }
 function spreadPage(st, K, N) {
   if (st.bound === "top") return K;
+  if (BOOK.sides) {
+    // The picture a spread starts with: the first on its right, else left.
+    const on = (side) => BOOK.sides[side]?.[0];
+    return K <= 0 ? 0 : (on(2 * K - 1) ?? on(2 * K - 2) ?? 0);
+  }
   return K <= 0 ? 0 : Math.min(2 * K - 1, N - 1);
+}
+function sideSpread(p) {
+  return p <= 0 ? 0 : p % 2 ? (p + 1) / 2 : p / 2 + 1;
 }
 function pageSpread(st, p) {
   if (st.bound === "top") return Math.max(0, p);
-  return p <= 0 ? 0 : p % 2 ? (p + 1) / 2 : p / 2 + 1;
+  if (BOOK.sides) return sideSpread(BOOK.sideOf?.[p] ?? 0);
+  return sideSpread(p);
+}
+// The sheets that show one side of the leaf in slot i ("f" front, "b"
+// back): [{ id, page }], page -1 for a sheet that side does not use.
+function sheetsOf(i, fb, side) {
+  if (BOOK.sheetsOf) return BOOK.sheetsOf(i, fb, side);
+  return [{ id: `${fb}${i}`, page: side }];
 }
 
 // Starts a turn from the current spread to K2 (a jump of more than one
@@ -327,9 +369,13 @@ const BOOK_RECIPE = {
       // and a half on: a page that fails to build should not stop the book).
       const mid = bookLayout(st, N, time, 0.5);
       const want = [];
+      const need = (i, fb, side) => {
+        if (side < 0 || side >= N) return;
+        for (const x of sheetsOf(i, fb, side)) if (x.page >= 0) want.push(x.id);
+      };
       mid.slots.forEach((s, i) => {
-        if (s.fv && s.f >= 0 && s.f < N) want.push(`f${i}`);
-        if (s.bv && s.b >= 0 && s.b < N) want.push(`b${i}`);
+        if (s.fv) need(i, "f", s.f);
+        if (s.bv) need(i, "b", s.b);
       });
       if (!pics || time - a.asked > 1.5 || want.every((id) => pics.ready(id))) a.t0 = time;
     }
@@ -352,12 +398,18 @@ const BOOK_RECIPE = {
       }
     }
     const L = bookLayout(st, N, time);
-    out.sheets = { cover: { page: 0, visible: N ? 1 : 0 } };
+    out.sheets = BOOK.sides ? {} : { cover: { page: 0, visible: N ? 1 : 0 } };
     out.leaves = [];
+    const put = (i, fb, side, vis, ahead) => {
+      for (const x of sheetsOf(i, fb, side)) {
+        const on = x.page >= 0 && side >= 0 && side < N;
+        out.sheets[x.id] = { page: on ? x.page : -1, visible: on ? vis : 0, ahead: on ? ahead : 0 };
+      }
+    };
     L.slots.forEach((s, i) => {
       out.leaves[i] = { angle: s.angle, curl: s.curl };
-      out.sheets[`f${i}`] = { page: s.f, visible: s.fv, ahead: s.ahead };
-      if (st.bound === "side") out.sheets[`b${i}`] = { page: s.b, visible: s.bv, ahead: s.ahead };
+      put(i, "f", s.f, s.fv, s.ahead);
+      if (st.bound === "side") put(i, "b", s.b, s.bv, s.ahead);
     });
     // Splats sort where they were built: while things turn, every second
     // frame (and a few frames after they land) they are sorted where they
@@ -386,148 +438,165 @@ const BOOK_RECIPE = {
     const W = H * Math.max(0.4, Math.min(2.2, aspect || SAMPLE_ASPECT));
     const cover = o.color || "#2f4b6e";
     const paper = "#fcfbf7";
-    Object.assign(BOOK, { K: 0, anim: null, queue: 0, tapN: 0, lastPage: 0, style: st, frame: 0, landed: 3 }); // prettier-ignore
+    Object.assign(BOOK, { K: 0, anim: null, queue: 0, tapN: 0, lastPage: 0, style: st, frame: 0, landed: 3, sides: null, sideOf: null, sheetsOf: null }); // prettier-ignore
     if (st.bound === "top") return buildStapled(k, st, W, H);
-    const { T, cb, ov, g } = st;
-    const X1 = g + W;
-    // The fit, fixed by the reach box (every splat lies inside it), so the
-    // leaves' kit splats know their distance from the spine in toy units.
-    const BX = X1 + ov + 0.03;
-    const BY = H / 2 + ov + 0.03;
-    const BZ = BX;
-    for (const x of [-BX, BX]) for (const y of [-BY, BY]) for (const z of [-BZ, BZ]) k.reach([x, y, z]); // prettier-ignore
-    const S = 0.95 / Math.hypot(BX, BY, BZ);
-    BOOK.dims = { W, H, g, S };
-    k.spine({ at: [0, 0, 0], axis: [0, -1, 0], dir: [1, 0, 0] });
-    const leafOf = (slot) => ({ slot, S, at: [0, 0, 0], dir: [1, 0, 0] });
-    // The page blocks: the right one, and the left one (a copy that turns
-    // with the cover and lands under the left-hand pages).
-    const edge = (a, b, p) => shade("#ece5d3", 0.97 + 0.03 * Math.sin(p[2] * 900));
-    const top = TOP;
-    // The left block's top lands under the left-hand pages (and under a
-    // card cover, which lies on it); it turns about zb to get there.
-    const leftTop = st.cover === "board" ? TOP : -(C0 + cb) - 0.012;
-    const zb = (leftTop - T) / 2;
-    const lblock = k.part("lblock", { pivot: [0, 0, zb], axis: [0, -1, 0] });
-    const block = (part) =>
-      boxFaces(
-        k,
-        [g, X1],
-        [-H / 2, H / 2],
-        [-T, top],
-        {
-          // The right block's top is its front; the left one's is its back.
-          ...(part ? { back: { share: 0.08, color: () => bkLit(paper, [0, 0, 1]) } } : { front: { share: 0.08, color: () => bkLit(paper, [0, 0, 1]) } }), // prettier-ignore
-          right: { share: 0.025, color: (a, b, p) => bkLit(edge(a, b, p), [1, 0, 0]) },
-          top: { share: 0.018, color: (a, b, p) => bkLit(edge(a, b, p), [0, 1, 0]) },
-          bottom: { share: 0.018, color: (a, b, p) => bkLit(edge(a, b, p), [0, -1, 0], 0.6) },
-          ...(g > 0 ? { left: { share: 0.02, color: (a, b, p) => bkLit(edge(a, b, p), [-1, 0, 0]) } } : {}), // prettier-ignore
-        },
-        { part },
-      );
-    block(0);
-    block(lblock);
-    if (st.cover === "board") {
-      // Head and tail bands: striped rolls at the spine end of each block.
-      const band = (a) => (Math.floor(a * 9) % 2 ? "#b8323a" : "#f0e2c4");
-      for (const part of [0, lblock])
-        for (const y of [H / 2 + 0.001, -H / 2 - 0.001])
-          rect(k, { share: 0.003, at: [0.001, y, -T], u: [0, 0, T + top], v: [0.012, 0, 0], n: [0, Math.sign(y), 0], color: (a) => band(a), part }); // prettier-ignore
-    }
-    // The back cover.
-    const cloth = (n) => (a, b, p) =>
-      bkLit(shade(cover, 0.985 + 0.02 * Math.sin(p[0] * 700) * Math.sin(p[1] * 700)), n);
-    const inside = st.cover === "board" ? mix(cover, "#f1e6cf", 0.75) : "#f2efe8";
-    const bx = [st.cover === "board" ? 0 : g, X1 + ov];
-    const by = [-H / 2 - ov, H / 2 + ov];
-    boxFaces(k, bx, by, [-T - cb, -T], {
-      back: { share: 0.05, color: cloth([0, 0, -1]) },
-      front: { share: 0.02, color: () => bkLit(inside, [0, 0, 1]) },
+    buildSideBound(k, st, o, { W, H, cover, paper });
+  },
+};
+
+// A side-bound book (and the photo album): the page blocks, the covers, the
+// spine or the coil, the cover's sheet and the leaves' sheets. `extra` may
+// change the look: cloth(n) for the covers' color, edge (the page blocks'
+// edge color), coverSheet (false: a plain cover), bands (head and tail
+// bands) and leaves(k, leafOf) to add the leaves' sheets and kit itself.
+function buildSideBound(k, st, o, extra) {
+  const { W, H, cover, paper } = extra;
+  const { T, cb, ov, g } = st;
+  const X1 = g + W;
+  // The fit, fixed by the reach box (every splat lies inside it), so the
+  // leaves' kit splats know their distance from the spine in toy units.
+  const BX = X1 + ov + 0.03;
+  const BY = H / 2 + ov + 0.03;
+  const BZ = BX;
+  for (const x of [-BX, BX]) for (const y of [-BY, BY]) for (const z of [-BZ, BZ]) k.reach([x, y, z]); // prettier-ignore
+  const S = 0.95 / Math.hypot(BX, BY, BZ);
+  BOOK.dims = { W, H, g, S };
+  k.spine({ at: [0, 0, 0], axis: [0, -1, 0], dir: [1, 0, 0] });
+  const leafOf = (slot) => ({ slot, S, at: [0, 0, 0], dir: [1, 0, 0] });
+  // The page blocks: the right one, and the left one (a copy that turns
+  // with the cover and lands under the left-hand pages).
+  const edge = (a, b, p) => shade(extra.edge || "#ece5d3", 0.97 + 0.03 * Math.sin(p[2] * 900));
+  const top = TOP;
+  // The left block's top lands under the left-hand pages (and under a
+  // card cover, which lies on it); it turns about zb to get there.
+  const c0 = st.c0 ?? C0;
+  const leftTop = st.cover === "board" ? TOP : -(c0 + cb) - 0.012;
+  const zb = (leftTop - T) / 2;
+  const lblock = k.part("lblock", { pivot: [0, 0, zb], axis: [0, -1, 0] });
+  const block = (part) =>
+    boxFaces(
+      k,
+      [g, X1],
+      [-H / 2, H / 2],
+      [-T, top],
+      {
+        // The right block's top is its front; the left one's is its back.
+        ...(part ? { back: { share: 0.08, color: () => bkLit(paper, [0, 0, 1]) } } : { front: { share: 0.08, color: () => bkLit(paper, [0, 0, 1]) } }), // prettier-ignore
+        right: { share: 0.025, color: (a, b, p) => bkLit(edge(a, b, p), [1, 0, 0]) },
+        top: { share: 0.018, color: (a, b, p) => bkLit(edge(a, b, p), [0, 1, 0]) },
+        bottom: { share: 0.018, color: (a, b, p) => bkLit(edge(a, b, p), [0, -1, 0], 0.6) },
+        ...(g > 0 ? { left: { share: 0.02, color: (a, b, p) => bkLit(edge(a, b, p), [-1, 0, 0]) } } : {}), // prettier-ignore
+      },
+      { part },
+    );
+  block(0);
+  block(lblock);
+  if (st.cover === "board" && extra.bands !== false) {
+    // Head and tail bands: striped rolls at the spine end of each block.
+    const band = (a) => (Math.floor(a * 9) % 2 ? "#b8323a" : "#f0e2c4");
+    for (const part of [0, lblock])
+      for (const y of [H / 2 + 0.001, -H / 2 - 0.001])
+        rect(k, { share: 0.003, at: [0.001, y, -T], u: [0, 0, T + top], v: [0.012, 0, 0], n: [0, Math.sign(y), 0], color: (a) => band(a), part }); // prettier-ignore
+  }
+  // The back cover.
+  const cloth =
+    extra.cloth ||
+    ((n) => (a, b, p) =>
+      bkLit(shade(cover, 0.985 + 0.02 * Math.sin(p[0] * 700) * Math.sin(p[1] * 700)), n));
+  const inside = extra.inside || (st.cover === "board" ? mix(cover, "#f1e6cf", 0.75) : "#f2efe8");
+  const bx = [st.cover === "board" ? 0 : g, X1 + ov];
+  const by = [-H / 2 - ov, H / 2 + ov];
+  boxFaces(k, bx, by, [-T - cb, -T], {
+    back: { share: 0.05, color: cloth([0, 0, -1]) },
+    front: { share: 0.02, color: () => bkLit(inside, [0, 0, 1]) },
+    right: { share: 0.006, color: cloth([1, 0, 0]) },
+    top: { share: 0.006, color: cloth([0, 1, 0]) },
+    bottom: { share: 0.006, color: cloth([0, -1, 0]) },
+  });
+  // The front cover: a board that turns as one piece, or a card that
+  // flexes (a leaf, slot 8). It shows page 0: the whole card, or a panel
+  // on the cloth.
+  const coverZ = [c0, c0 + cb];
+  if (st.cover === "board") {
+    const zp = (c0 - T) / 2;
+    const cp = k.part("cover", { pivot: [0, 0, zp], axis: [0, -1, 0] });
+    boxFaces(k, bx, by, coverZ, {
+      front: { share: 0.1, color: cloth([0, 0, 1]) },
+      back: { share: 0.05, color: () => bkLit(inside, [0, 0, 1]) },
       right: { share: 0.006, color: cloth([1, 0, 0]) },
       top: { share: 0.006, color: cloth([0, 1, 0]) },
       bottom: { share: 0.006, color: cloth([0, -1, 0]) },
-    });
-    // The front cover: a board that turns as one piece, or a card that
-    // flexes (a leaf, slot 8). It shows page 0: the whole card, or a panel
-    // on the cloth.
-    const coverZ = [C0, C0 + cb];
-    if (st.cover === "board") {
-      const zp = (C0 - T) / 2;
-      const cp = k.part("cover", { pivot: [0, 0, zp], axis: [0, -1, 0] });
-      boxFaces(k, bx, by, coverZ, {
-        front: { share: 0.1, color: cloth([0, 0, 1]) },
-        back: { share: 0.05, color: () => bkLit(inside, [0, 0, 1]) },
-        right: { share: 0.006, color: cloth([1, 0, 0]) },
-        top: { share: 0.006, color: cloth([0, 1, 0]) },
-        bottom: { share: 0.006, color: cloth([0, -1, 0]) },
-      }, { part: cp }); // prettier-ignore
-      k.sheet({ id: "cover", center: [(W + ov) / 2 + 0.015, 0.04, C0 + cb], width: W * 0.72, height: H * 0.66, part: cp, lift: 0.02 }); // prettier-ignore
-    } else {
-      const leaf = leafOf(8);
-      boxFaces(k, [g, X1], [-H / 2, H / 2], coverZ, {
-        // (Its front is the page itself, the cover sheet.)
-        back: { share: 0.08, color: () => bkLit(inside, [0, 0, 1]) },
-        right: { share: 0.004, color: () => bkLit(cover, [1, 0, 0]) },
-        top: { share: 0.004, color: () => bkLit(cover, [0, 1, 0]) },
-        bottom: { share: 0.004, color: () => bkLit(cover, [0, -1, 0]) },
-      }, { leaf }); // prettier-ignore
-      k.sheet({ id: "cover", center: [g + W / 2, 0, C0 + cb], width: W, height: H, lift: 0.01, align: [-1, 0], leaf: 8 }); // prettier-ignore
-    }
-    // The leaves' sheets (after the cover's, which the engine builds first).
+    }, { part: cp }); // prettier-ignore
+    if (extra.coverSheet !== false)
+      k.sheet({ id: "cover", center: [(W + ov) / 2 + 0.015, 0.04, c0 + cb], width: W * 0.72, height: H * 0.66, part: cp, lift: 0.02 }); // prettier-ignore
+    extra.onCover?.(k, cp, { bx, by, z: c0 + cb });
+  } else {
+    const leaf = leafOf(8);
+    boxFaces(k, [g, X1], [-H / 2, H / 2], coverZ, {
+      // (Its front is the page itself, the cover sheet.)
+      back: { share: 0.08, color: () => bkLit(inside, [0, 0, 1]) },
+      right: { share: 0.004, color: () => bkLit(cover, [1, 0, 0]) },
+      top: { share: 0.004, color: () => bkLit(cover, [0, 1, 0]) },
+      bottom: { share: 0.004, color: () => bkLit(cover, [0, -1, 0]) },
+    }, { leaf }); // prettier-ignore
+    k.sheet({ id: "cover", center: [g + W / 2, 0, c0 + cb], width: W, height: H, lift: 0.01, align: [-1, 0], leaf: 8 }); // prettier-ignore
+  }
+  // The leaves' sheets (after the cover's, which the engine builds first).
+  if (extra.leaves) extra.leaves(k, leafOf);
+  else
     for (let s = 0; s < 4; s++) {
       k.sheet({ id: `f${s}`, center: [g + W / 2, 0, 0], width: W, height: H, lift: E, align: [-1, 0], leaf: s }); // prettier-ignore
       k.sheet({ id: `b${s}`, center: [g + W / 2, 0, 0], width: W, height: H, normal: [0, 0, -1], lift: E, align: [1, 0], leaf: s }); // prettier-ignore
     }
-    // The spine (not the spiral's): a strip down the closed book's left
-    // side that turns to lie under the gutter as the book opens.
-    if (g === 0) {
-      const sw = st.cover === "board" ? 0.014 : 0.004;
-      const z0 = -T - cb;
-      const z1 = C0 + cb;
-      const sp = k.part("spine", { pivot: [-sw / 2, 0, (z0 + z1) / 2], axis: [0, -1, 0] });
-      const col = st.cover === "board" ? cloth([-1, 0, 0]) : () => bkLit(cover, [-1, 0, 0]);
-      boxFaces(k, [-sw, 0], by, [z0, z1], {
-        left: { share: 0.012, color: col },
-        front: { share: 0.004, color: col },
-        back: { share: 0.004, color: col },
-        top: { share: 0.003, color: col },
-        bottom: { share: 0.003, color: col },
-      }, { part: sp }); // prettier-ignore
-      if (o.style === "magazine") {
-        // Two staples through the fold.
-        for (const y of [-0.25 * H, 0.25 * H])
-          k.cloud({ share: 0.002, pattern: false }, (rand, i, n) => ({
-            p: [-sw - 0.001, y - 0.03 + (0.06 * i) / n, (z0 + z1) / 2],
-            color: mix("#8e959e", "#e7ebf0", 0.5 + 0.5 * Math.sin(i)),
-            size: 0.25,
-            opacity: 1,
-            part: sp,
-          }));
-      }
-    } else {
-      // The spiral: a wire coil through the pages' holes.
-      const rc = g + 0.012;
-      const loops = Math.floor((H - 0.05) / 0.042);
-      k.cloud({ share: 0.03, pattern: false }, (rand, i, n) => {
-        const per = Math.floor(n / loops);
-        const li = Math.floor(i / per);
-        if (li >= loops) return null;
-        const f = (i % per) / per;
-        const phi = f * 2 * Math.PI;
-        const y = -H / 2 + 0.025 + li * 0.042 + 0.03 * f;
-        const nx = Math.cos(phi);
-        const nz = Math.sin(phi);
-        const shine = 0.5 + 0.5 * (nx * BK_LIGHT[0] + nz * BK_LIGHT[2]);
-        return {
-          p: [rc * nx, y, -T / 2 + rc * nz],
-          color: mix("#3d4148", "#d9dde3", shine),
-          size: 0.35,
+  // The spine (not the spiral's): a strip down the closed book's left
+  // side that turns to lie under the gutter as the book opens.
+  if (g === 0) {
+    const sw = st.cover === "board" ? 0.014 : 0.004;
+    const z0 = -T - cb;
+    const z1 = c0 + cb;
+    const sp = k.part("spine", { pivot: [-sw / 2, 0, (z0 + z1) / 2], axis: [0, -1, 0] });
+    const col = st.cover === "board" ? cloth([-1, 0, 0]) : () => bkLit(cover, [-1, 0, 0]);
+    boxFaces(k, [-sw, 0], by, [z0, z1], {
+      left: { share: 0.012, color: col },
+      front: { share: 0.004, color: col },
+      back: { share: 0.004, color: col },
+      top: { share: 0.003, color: col },
+      bottom: { share: 0.003, color: col },
+    }, { part: sp }); // prettier-ignore
+    if (o.style === "magazine") {
+      // Two staples through the fold.
+      for (const y of [-0.25 * H, 0.25 * H])
+        k.cloud({ share: 0.002, pattern: false }, (rand, i, n) => ({
+          p: [-sw - 0.001, y - 0.03 + (0.06 * i) / n, (z0 + z1) / 2],
+          color: mix("#8e959e", "#e7ebf0", 0.5 + 0.5 * Math.sin(i)),
+          size: 0.25,
           opacity: 1,
-        };
-      });
+          part: sp,
+        }));
     }
-  },
-};
+  } else {
+    // The spiral: a wire coil through the pages' holes.
+    const rc = g + 0.012;
+    const loops = Math.floor((H - 0.05) / 0.042);
+    k.cloud({ share: 0.03, pattern: false }, (rand, i, n) => {
+      const per = Math.floor(n / loops);
+      const li = Math.floor(i / per);
+      if (li >= loops) return null;
+      const f = (i % per) / per;
+      const phi = f * 2 * Math.PI;
+      const y = -H / 2 + 0.025 + li * 0.042 + 0.03 * f;
+      const nx = Math.cos(phi);
+      const nz = Math.sin(phi);
+      const shine = 0.5 + 0.5 * (nx * BK_LIGHT[0] + nz * BK_LIGHT[2]);
+      return {
+        p: [rc * nx, y, -T / 2 + rc * nz],
+        color: mix("#3d4148", "#d9dde3", shine),
+        size: 0.35,
+        opacity: 1,
+      };
+    });
+  }
+}
 
 // Stapled paper: loose sheets, one page each, a staple in the top left
 // corner; a sheet turns up and over the top edge.
@@ -561,6 +630,460 @@ function buildStapled(k, st, W, H) {
     };
   });
 }
+
+// ---- Photo album (lane Books) -----------------------------------------------------
+//
+// A set of photos in an album of thick card pages that turn like the book's
+// leaves (the same four leaf slots and turns). Each side of a page holds one
+// photo, or two when they are both wide (one above the other) or both tall
+// (side by side). Each photo is its own picture sheet on the page; its photo
+// corners and caption are drawn on it before it becomes splats
+// (pictures.decorate), since a page slot shows a different photo each time
+// it comes round.
+
+const ALBUM_STYLES = {
+  leather: {
+    cover: "#5b3522",
+    page: "#211f1e",
+    edge: "#34302c",
+    corner: "#0f0f10",
+    ink: "#ece6d8",
+  },
+  linen: { cover: "#7d8fa3", page: "#efe8d8", edge: "#e2d9c6", corner: "#1c1b1a", ink: "#3b352f" },
+  scrapbook: {
+    cover: "#b98b57",
+    page: "#d8c09a",
+    edge: "#cbb088",
+    corner: "#f6f1e7",
+    ink: "#3a2b1c",
+  },
+};
+const ALBUM_BOOK = { bound: "side", cover: "board", T: 0.05, cb: 0.03, ov: 0.03, g: 0, c0: 0.034, curl: 0.3, coverCurl: 0 }; // prettier-ignore
+const ALBUM_W = 0.95; // a page, in recipe units (a little taller than wide)
+const ALBUM_H = 1.05;
+const ALBUM_CARD = 0.008; // half a page's thickness
+const ALBUM_LIFT = 0.012; // photos over the card
+// The sample: six CC0 photos (CREDITS.md), wide and tall.
+const ALBUM_SAMPLE = ["sailboat", "tulips", "lighthouse", "red-barn", "seashell", "daffodils"];
+const ALBUM_SAMPLE_ASPECTS = [900 / 597, 900 / 675, 599 / 900, 900 / 556, 900 / 600, 615 / 900];
+
+// Groups photos (by shape) onto page sides: side 0 is the cover.
+function albumSides(aspects) {
+  const sides = [[]];
+  const kinds = [""];
+  const sideOf = [];
+  for (let i = 0; i < aspects.length; ) {
+    const a = aspects[i];
+    const b = aspects[i + 1];
+    let kind = "one";
+    if (b !== undefined && a > 1.15 && b > 1.15) kind = "stack";
+    else if (b !== undefined && a < 0.87 && b < 0.87) kind = "pair";
+    const n = kind === "one" ? 1 : 2;
+    const side = sides.length;
+    sides.push(Array.from({ length: n }, (_, j) => i + j));
+    kinds.push(kind);
+    for (let j = 0; j < n; j++) sideOf[i + j] = side;
+    i += n;
+  }
+  return { sides, kinds, sideOf };
+}
+
+// Draws a photo mounted on its page: the page's color around it, the photo
+// inside (its shape kept), four photo corners and, with captions on, its
+// file name below.
+function albumDecorate(canvas, { name, options }) {
+  const look = ALBUM_STYLES[options.cover] || ALBUM_STYLES.leather;
+  const w = canvas.width;
+  const h = canvas.height;
+  const copy = document.createElement("canvas");
+  copy.width = w;
+  copy.height = h;
+  copy.getContext("2d").drawImage(canvas, 0, 0);
+  const g = canvas.getContext("2d");
+  const m = Math.round(0.05 * Math.min(w, h));
+  const band = options.captions ? Math.round(0.13 * h) : 0;
+  // The page's color as the card around it is lit (bkLit facing the viewer).
+  const pc = bkLit(look.page, [0, 0, 1]);
+  g.fillStyle = `rgb(${pc.map((v) => Math.round(Math.max(0, Math.min(1, v)) * 255)).join(",")})`;
+  g.fillRect(0, 0, w, h);
+  // The photo, fitted inside the margins.
+  const iw = w - 2 * m;
+  const ih = h - 2 * m - band;
+  const s = Math.min(iw / w, ih / h);
+  const pw = Math.round(w * s);
+  const ph = Math.round(h * s);
+  const x0 = Math.round((w - pw) / 2);
+  const y0 = m + Math.round((ih - ph) / 2);
+  g.drawImage(copy, 0, 0, w, h, x0, y0, pw, ph);
+  // Photo corners: a triangle over each corner, a little past the photo.
+  const c = Math.round(0.11 * Math.min(pw, ph));
+  const o = Math.max(1, Math.round(c * 0.12));
+  g.fillStyle = look.corner;
+  for (const [cx, cy, sx, sy] of [
+    [x0, y0, 1, 1],
+    [x0 + pw, y0, -1, 1],
+    [x0, y0 + ph, 1, -1],
+    [x0 + pw, y0 + ph, -1, -1],
+  ]) {
+    g.beginPath();
+    g.moveTo(cx - sx * o, cy - sy * o);
+    g.lineTo(cx + sx * c, cy - sy * o);
+    g.lineTo(cx - sx * o, cy + sy * c);
+    g.closePath();
+    g.fill();
+  }
+  if (band) {
+    const size = Math.max(8, Math.round(band * 0.42));
+    g.fillStyle = look.ink;
+    g.font = `italic ${size}px Georgia, "Times New Roman", serif`;
+    g.textAlign = "center";
+    g.textBaseline = "middle";
+    let text = name || "";
+    while (text.length > 4 && g.measureText(text).width > w - 2 * m) text = text.slice(0, -2);
+    if (text !== name) text += "…";
+    g.fillText(text, w / 2, h - m - band / 2 + m * 0.2);
+  }
+}
+
+// The cover's look: leather with a grain and a stitched border, woven
+// linen, or kraft card with a label.
+function albumCloth(style, bx, by) {
+  const look = ALBUM_STYLES[style] || ALBUM_STYLES.leather;
+  return (n) => (a, b, p) => {
+    let col = look.cover;
+    if (style === "leather") {
+      const grain = Math.sin(p[0] * 173 + Math.sin(p[1] * 91) * 2) * Math.sin(p[1] * 157 + Math.sin(p[0] * 67) * 2); // prettier-ignore
+      col = shade(col, 0.97 + 0.05 * grain);
+      if (n[2] > 0.5) {
+        const d = Math.min(p[0] - bx[0], bx[1] - p[0], p[1] - by[0], by[1] - p[1]);
+        if (Math.abs(d - 0.04) < 0.004 && Math.floor((p[0] + p[1]) * 90) % 2 === 0) col = "#d9c6a5";
+        else if (Math.abs(d - 0.07) < 0.003) col = shade(col, 0.8);
+      }
+    } else if (style === "linen") {
+      col = shade(col, 0.97 + 0.035 * Math.sin(p[0] * 520) * Math.sin(p[1] * 520) + 0.02 * Math.sin(p[1] * 1040)); // prettier-ignore
+    } else {
+      col = shade(col, 0.96 + 0.05 * Math.sin(p[0] * 61 + p[1] * 37) * Math.sin(p[1] * 83));
+      if (n[2] > 0.5) {
+        const lx = (bx[0] + bx[1]) / 2;
+        if (Math.abs(p[0] - lx) < 0.22 && Math.abs(p[1] - 0.08) < 0.1) col = "#f1e8d6";
+      }
+    }
+    return bkLit(col, n);
+  };
+}
+
+const ALBUM_BOXES = (W, H) => ({
+  o: { c: [W / 2, 0], s: [W * 0.84, H * 0.86] },
+  t: { c: [W / 2, H * 0.235], s: [W * 0.9, H * 0.45] },
+  u: { c: [W / 2, -H * 0.235], s: [W * 0.9, H * 0.45] },
+  l: { c: [W * 0.265, 0], s: [W * 0.45, H * 0.86] },
+  r: { c: [W * 0.735, 0], s: [W * 0.45, H * 0.86] },
+});
+
+const ALBUM_RECIPE = {
+  turntable: false,
+  density: 0.35,
+  alive: BOOK_RECIPE.alive,
+  options: [
+    {
+      key: "cover",
+      label: "Cover",
+      type: "select",
+      default: "leather",
+      choices: [
+        { id: "leather", label: "Leather" },
+        { id: "linen", label: "Linen" },
+        { id: "scrapbook", label: "Scrapbook" },
+      ],
+    },
+    { key: "captions", label: "Captions", type: "switch", default: true },
+  ],
+  controls: [{ key: "turn", label: "Turn the page", type: "pulse", ease: 1.2 }],
+  action: { key: "turn", label: "Turn the page" },
+  pictures: {
+    sample: () => ALBUM_SAMPLE.map((n) => `assets/toys/photo-album/${n}.jpg`),
+    accept: ["image"],
+    decorate: albumDecorate,
+  },
+  credits: [
+    ["The lighthouse", "https://www.flickr.com/photos/77532212@N07/16563630874", "-anna--"],
+    ["Sailboat", "https://www.flickr.com/photos/135788700@N05/35295085365", "leex6221"],
+    ["Tulips", "https://www.flickr.com/photos/133590734@N04/17935969728", "Lucía Quiñónez"],
+    ["Daffodils and tulips (CRW_2034)", "https://www.flickr.com/photos/128176757@N06/16361600725", "patrick jourdheuille"], // prettier-ignore
+    ["Barn A Glow", "https://www.flickr.com/photos/37996646802@N01/51912951761", "Alan Levine"],
+    ["Seashell by the Seashore", "https://www.flickr.com/photos/116158494@N02/20532087302", "samsonites89"], // prettier-ignore
+  ].map(([title, source, author]) => ({
+    label: "Photo album",
+    title,
+    source,
+    author,
+    license: "CC0 1.0",
+    licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/",
+  })),
+  input: {
+    title: "Your own photos",
+    media: { accept: ["image"], multiple: true, button: "Open photos…" },
+    note: "Pick several photos at once (a folder's worth) and turn through them in the album. Your photos stay on this device; nothing is uploaded.",
+  },
+  drive: (t, c, out, info) => BOOK_RECIPE.drive(t, c, out, info),
+  build(k, o) {
+    const look = ALBUM_STYLES[o.cover] || ALBUM_STYLES.leather;
+    const st = ALBUM_BOOK;
+    const W = ALBUM_W;
+    const H = ALBUM_H;
+    const m = k.media;
+    const aspects = m?.aspects || (m ? [m.aspect] : ALBUM_SAMPLE_ASPECTS);
+    const { sides, kinds, sideOf } = albumSides(aspects);
+    Object.assign(BOOK, { K: 0, anim: null, queue: 0, tapN: 0, lastPage: 0, style: st, frame: 0, landed: 3, sides, sideOf }); // prettier-ignore
+    const names = ["o", "t", "u", "l", "r"];
+    BOOK.sheetsOf = (i, fb, side) => {
+      const kind = kinds[side] || "";
+      const ph = sides[side] || [];
+      const use = { o: kind === "one" ? ph[0] : -1, t: kind === "stack" ? ph[0] : -1, u: kind === "stack" ? ph[1] : -1, l: kind === "pair" ? ph[0] : -1, r: kind === "pair" ? ph[1] : -1 }; // prettier-ignore
+      return names.map((n) => ({ id: `a${i}${fb}${n}`, page: use[n] ?? -1 }));
+    };
+    const bx = [0, W + st.ov];
+    const by = [-H / 2 - st.ov, H / 2 + st.ov];
+    buildSideBound(k, st, o, {
+      W,
+      H,
+      cover: look.cover,
+      paper: look.page,
+      edge: look.edge,
+      inside: look.page,
+      bands: false,
+      coverSheet: false,
+      cloth: albumCloth(o.cover, bx, by),
+      leaves(k, leafOf) {
+        const boxes = ALBUM_BOXES(W, H);
+        for (let s = 0; s < 4; s++) {
+          const leaf = leafOf(s);
+          // The thick card page, both faces and its free edge.
+          boxFaces(k, [0, W], [-H / 2, H / 2], [-ALBUM_CARD, ALBUM_CARD], {
+            front: { share: 0.03, color: () => bkLit(look.page, [0, 0, 1]) },
+            back: { share: 0.03, color: () => bkLit(look.page, [0, 0, 1]) },
+            right: { share: 0.002, color: () => bkLit(look.edge, [1, 0, 0]) },
+          }, { leaf }); // prettier-ignore
+          for (const fb of ["f", "b"])
+            for (const n of names) {
+              const bxx = boxes[n];
+              // A back side reads the other way once turned over.
+              const x = fb === "f" ? bxx.c[0] : W - bxx.c[0];
+              k.sheet({ id: `a${s}${fb}${n}`, center: [x, bxx.c[1], 0], width: bxx.s[0], height: bxx.s[1], normal: [0, 0, fb === "f" ? 1 : -1], lift: ALBUM_CARD + ALBUM_LIFT, method: "pixels", leaf: s }); // prettier-ignore
+            }
+        }
+      },
+    });
+  },
+};
+
+// ---- Picture frame (lane Books) ---------------------------------------------------
+//
+// One photo in a frame, hung on a nail by a wire against a patch of wall.
+// The frame, its wire and the photo are one part that swings about the nail
+// when tapped, as a damped pendulum, and settles (about 3 s). The digital
+// frame steps through a set of photos, fading through black while the next
+// one is built.
+
+const FRAME = { tapN: 0, t0: -99, digital: false, shown: -1, fade: 0, next: -1, since: 0, asked: 0 }; // prettier-ignore
+const FRAME_SWING = 3; // seconds
+const FRAME_STEP = 4.5; // seconds a photo shows on the digital frame
+const FRAME_FADE = 0.45; // seconds to fade out, and to fade in
+
+const FRAME_STYLES = {
+  wood: { w: 0.09, d: 0.05 },
+  gold: { w: 0.13, d: 0.06 },
+  modern: { w: 0.028, d: 0.04, mat: 0.13 },
+  digital: { w: 0.07, d: 0.045 },
+};
+
+// The swing: a push, then a damped swing that ends exactly at rest.
+function frameAngle(t) {
+  if (t <= 0 || t >= FRAME_SWING) return 0;
+  const w = (2 * Math.PI) / 1.05;
+  const end = 1 - (Math.max(0, t - FRAME_SWING + 0.6) / 0.6) ** 2;
+  return 0.2 * Math.exp(-t / 0.95) * Math.sin(w * t) * end;
+}
+
+const FRAME_RECIPE = {
+  turntable: false,
+  density: 0.3,
+  alive: () => FRAME.digital || FRAME.t0 > -99,
+  options: [
+    {
+      key: "frame",
+      label: "Frame",
+      type: "select",
+      default: "wood",
+      choices: [
+        { id: "wood", label: "Wood" },
+        { id: "gold", label: "Gold" },
+        { id: "modern", label: "Modern" },
+        { id: "digital", label: "Digital" },
+      ],
+    },
+  ],
+  controls: [{ key: "swing", label: "Swing", type: "pulse", ease: FRAME_SWING }],
+  action: { key: "swing", label: "Swing the frame" },
+  pictures: {
+    sample: (o) =>
+      o.frame === "digital"
+        ? ["assets/toys/picture-frame/islands.jpg", ...ALBUM_SAMPLE.map((n) => `assets/toys/photo-album/${n}.jpg`)] // prettier-ignore
+        : "assets/toys/picture-frame/islands.jpg",
+    accept: ["image"],
+  },
+  credits: [
+    {
+      label: "Picture frame",
+      title: "Sailboat in the Kornati Isalnds",
+      source: "https://www.flickr.com/photos/148372846@N03/37778143022",
+      author: "Camilla K",
+      license: "CC0 1.0",
+      licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/",
+    },
+    ...ALBUM_RECIPE.credits.map((c) => ({ ...c, label: "Picture frame (digital)" })),
+  ],
+  input: {
+    title: "Your own photo",
+    media: { accept: ["image"], multiple: true, button: "Open photos…" },
+    note: "Open a photo to frame it, or several for the digital frame to step through. Your photos stay on this device; nothing is uploaded.",
+  },
+  drive(t, c, out, info) {
+    const pics = info.data?.pictures;
+    const time = info.time ?? t;
+    const n = info.tap?.n ?? 0;
+    if (n < FRAME.tapN) FRAME.tapN = 0;
+    if (n > FRAME.tapN) {
+      FRAME.tapN = n;
+      FRAME.t0 = time;
+    }
+    const st = time - FRAME.t0;
+    if (st > FRAME_SWING) FRAME.t0 = -99;
+    out.parts.frame = { angle: FRAME.t0 > -99 ? frameAngle(st) : 0 };
+    let fade = 0;
+    if (FRAME.digital && pics?.count > 1) {
+      // Show a photo, fade to black, turn to the next, and fade back in
+      // once it is built.
+      if (FRAME.next < 0 && time - FRAME.since > FRAME_STEP) {
+        FRAME.next = (pics.page + 1) % pics.count;
+        FRAME.asked = time;
+      }
+      if (FRAME.next >= 0) {
+        fade = Math.min(1, (time - FRAME.asked) / FRAME_FADE);
+        if (fade >= 1 && pics.page !== FRAME.next) pics.go(FRAME.next);
+        if (
+          fade >= 1 &&
+          pics.page === FRAME.next &&
+          (pics.ready("photo") || time - FRAME.asked > 3)
+        ) {
+          FRAME.next = -1;
+          FRAME.since = time;
+        }
+      } else fade = Math.max(0, 1 - (time - FRAME.since) / FRAME_FADE);
+    }
+    out.morph = [fade, 0, 0, 0];
+    out.sheets = { photo: { page: pics?.page ?? 0 } };
+  },
+  build(k, o) {
+    const style = FRAME_STYLES[o.frame] ? o.frame : "wood";
+    const fs = FRAME_STYLES[style];
+    Object.assign(FRAME, { tapN: 0, t0: -99, digital: style === "digital", next: -1, since: 0 });
+    // The opening follows the photo's shape (a digital frame is 4:3).
+    const aspect = style === "digital" ? 4 / 3 : Math.max(0.5, Math.min(2, k.media?.aspect || 900 / 675)); // prettier-ignore
+    const H = 1;
+    const W = H * aspect;
+    const mat = fs.mat || 0;
+    const ow = W / 2 + mat; // the frame's inner edge, half width and height
+    const oh = H / 2 + mat;
+    const fw = fs.w;
+    const X = ow + fw;
+    const Y = oh + fw;
+    const nailY = Y + 0.3;
+    const fp = k.part("frame", { pivot: [0, nailY, 0.02], axis: [0, 0, 1] });
+    // Room for the swing.
+    for (const sx of [-1, 1]) k.reach([sx * (X + 0.25), -Y - 0.1, 0]);
+    // A patch of wall behind, and the frame's soft shadow on it (it swings
+    // with the frame).
+    const wallX = X + 0.35;
+    rect(k, { share: 0.26, at: [-wallX, -Y - 0.3, -0.09], u: [2 * wallX, 0, 0], v: [0, nailY + 0.18 + Y + 0.3, 0], n: [0, 0, 1], color: (a, b) => bkLit(shade("#ebe5da", 1.02 - 0.05 * b), [0, 0, 1]) }); // prettier-ignore
+    rect(k, { share: 0.03, at: [-X + 0.03, -Y - 0.04, -0.075], u: [2 * X, 0, 0], v: [0, 2 * Y, 0], n: [0, 0, 1], color: () => bkLit("#cfc8bc", [0, 0, 1]), part: fp }); // prettier-ignore
+    // The nail: a round head and a little of its shank.
+    k.cloud({ share: 0.004, pattern: false }, (rand, i, n) => {
+      const r = Math.sqrt(i / n) * 0.022;
+      const a = i * 2.39996;
+      return { p: [r * Math.cos(a), nailY + r * Math.sin(a), 0.025], n: [0, 0, 1], color: mix("#6b6f75", "#d8dce2", 0.5 + 0.5 * Math.cos(a) * (r / 0.022)), size: 0.35, opacity: 1 }; // prettier-ignore
+    });
+    // The wire: from the nail down to screw eyes behind the frame's sides.
+    k.cloud({ share: 0.006, pattern: false }, (rand, i, n) => {
+      const side = i % 2 ? 1 : -1;
+      const f = Math.floor(i / 2) / (n / 2);
+      const end = [side * X * 0.7, Y - 0.12, -0.03];
+      return { p: [end[0] * f, nailY + (end[1] - nailY) * f, 0.018 + (end[2] - 0.018) * f], color: "#9aa0a6", size: 0.18, opacity: 1, part: fp }; // prettier-ignore
+    });
+    // The frame: four sides, each with its face, outer edge and inner lip.
+    const d = fs.d;
+    const faceColor = (u, across, side) => {
+      // u: along the side (0..1), across: 0 at the inner edge, 1 outer.
+      if (style === "wood") {
+        const grain = Math.sin(u * 60 + Math.sin(across * 7 + side) * 1.5) * 0.5 + Math.sin(u * 190 + side * 3) * 0.2; // prettier-ignore
+        return shade("#8b5a31", 0.94 + 0.08 * grain - 0.1 * across);
+      }
+      if (style === "gold") {
+        // A molded profile: ridges, a hollow and a bead run along it.
+        const prof = Math.cos(across * Math.PI * 3.2) * 0.5 + 0.5;
+        const bead = across > 0.72 && across < 0.86 && Math.sin(u * 180) > 0.3 ? 0.25 : 0;
+        return shade(mix("#8a6420", "#f4d67a", prof), 0.85 + bead + 0.1 * (1 - across));
+      }
+      if (style === "digital")
+        return shade("#1b1c1f", 1 + 0.25 * Math.exp(-((across - 0.3) ** 2) / 0.01));
+      return "#18181a";
+    };
+    const sides = [
+      { at: [-X, oh, d], u: [2 * X, 0, 0], v: [0, fw, 0], n: [0, 1, 0], s: 0 },
+      { at: [-X, -Y, d], u: [2 * X, 0, 0], v: [0, fw, 0], n: [0, -1, 0], s: 1 },
+      { at: [-X, -oh, d], u: [0, 2 * oh, 0], v: [fw, 0, 0], n: [-1, 0, 0], s: 2 },
+      { at: [ow, -oh, d], u: [0, 2 * oh, 0], v: [fw, 0, 0], n: [1, 0, 0], s: 3 },
+    ];
+    for (const sd of sides) {
+      // The face (mitered: the top and bottom run the full width).
+      rect(k, {
+        share: 0.06,
+        at: sd.at,
+        u: sd.u,
+        v: sd.v,
+        n: [0, 0, 1],
+        part: fp,
+        color: (a, b) => {
+          const across = sd.s === 0 ? b : sd.s === 1 ? 1 - b : sd.s === 2 ? 1 - b : b;
+          return bkLit(faceColor(a, across, sd.s), [0, 0, 1]);
+        },
+      });
+      // The outer edge, down to the wall.
+      const out = sd.s === 0 ? [[-X, Y, -0.045], [2 * X, 0, 0]] : sd.s === 1 ? [[-X, -Y, -0.045], [2 * X, 0, 0]] : sd.s === 2 ? [[-X, -Y, -0.045], [0, 2 * Y, 0]] : [[X, -Y, -0.045], [0, 2 * Y, 0]]; // prettier-ignore
+      rect(k, { share: 0.012, at: out[0], u: out[1], v: [0, 0, d + 0.045], n: sd.n, part: fp, color: () => bkLit(shade(faceColor(0.5, 1, sd.s), 0.85), sd.n) }); // prettier-ignore
+      // The inner lip, down to the picture.
+      const inn = sd.s === 0 ? [[-ow, oh, 0], [2 * ow, 0, 0]] : sd.s === 1 ? [[-ow, -oh, 0], [2 * ow, 0, 0]] : sd.s === 2 ? [[-ow, -oh, 0], [0, 2 * oh, 0]] : [[ow, -oh, 0], [0, 2 * oh, 0]]; // prettier-ignore
+      rect(k, { share: 0.006, at: inn[0], u: inn[1], v: [0, 0, d], n: [-sd.n[0], -sd.n[1], 0], part: fp, color: () => bkLit(shade(faceColor(0.5, 0, sd.s), 0.7), [0, 0, 1]) }); // prettier-ignore
+    }
+    if (mat) {
+      // A white mat with a beveled window, a little over the photo.
+      const mz = 0.014;
+      const band = (at, u, v) => rect(k, { share: 0.035, at, u, v, n: [0, 0, 1], part: fp, color: () => bkLit("#f7f5f0", [0, 0, 1]) }); // prettier-ignore
+      band([-ow, H / 2, mz], [2 * ow, 0, 0], [0, mat, 0]);
+      band([-ow, -oh, mz], [2 * ow, 0, 0], [0, mat, 0]);
+      band([-ow, -H / 2, mz], [mat, 0, 0], [0, H, 0]);
+      band([W / 2, -H / 2, mz], [mat, 0, 0], [0, H, 0]);
+    }
+    if (style === "digital") {
+      // A black screen behind the photo, a small light, and the fade: a
+      // black layer over the photo that clears as channel 0 falls.
+      rect(k, { share: 0.03, at: [-W / 2, -H / 2, -0.012], u: [W, 0, 0], v: [0, H, 0], n: [0, 0, 1], part: fp, color: () => "#0b0b0d" }); // prettier-ignore
+      rect(k, { share: 0.05, at: [-W / 2, -H / 2, 0.022], u: [W, 0, 0], v: [0, H, 0], n: [0, 0, 1], part: fp, color: () => "#0b0b0d", kind: "fade", params: [0, -0.99] }); // prettier-ignore
+      k.cloud({ share: 0.0008, pattern: false }, () => ({ p: [X - fw * 0.5, -Y + fw * 0.5, d + 0.002], n: [0, 0, 1], color: "#5dd67a", size: 0.5, opacity: 1, part: fp })); // prettier-ignore
+    }
+    k.sheet({ id: "photo", center: [0, 0, 0], width: W, height: H, method: "pixels", part: fp });
+  },
+};
 
 export const RECIPES = {
   "picture-lab": {
@@ -644,4 +1167,6 @@ export const RECIPES = {
     },
   },
   "your-book": BOOK_RECIPE,
+  "photo-album": ALBUM_RECIPE,
+  "picture-frame": FRAME_RECIPE,
 };
