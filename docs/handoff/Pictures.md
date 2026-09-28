@@ -190,6 +190,47 @@ later src/voices.js. Leave their lines alone; keep both sides when you merge.
 
 ## State
 
+September 28, 2026: everything in the brief is built and pushed on `claude/lane-pictures-engine` (PR
+#64, draft):
+
+- Media in (`src/media.js`): PDF (PDF.js 6.3.289, legacy build), pictures, GIFs (ImageDecoder, or
+  omggif), videos (MP4, WebM, MOV where the browser plays them), from a file or an https address,
+  with messages for an unreadable file, a password, a refused address, a bad address and a file too
+  big for the tier.
+- Pictures to splats (`src/picture-splats.js`, run in `src/pictures-worker.js`): "pixels", "ink" and
+  "screen".
+- Pages that stream and near and far detail (`src/pictures.js`), the sheets on the stage
+  (`stage.addSheet`, `setSheetScreen`, `setPictureCulling`), `k.sheet` and `k.spine` in the kit, and
+  the page bend (kind "leaf", 21, in `src/effects.js`).
+- The Toy tab's picture panel (Open a file…, a web address, Previous and Next or Play, Back to the
+  sample), `toy.media` in scenes (docs/SCENE-SCHEMA.md), links and embeds, video sound on the
+  speaker button, the labs switch, and the Picture lab (labs only) with its samples, help, sound,
+  plan entry, thumbnail and credits. Close up, a drag moves across a page.
+- Tests: `tests/pic.spec.mjs` (13 tests) and the smoke, unit, help, kit and taps specs pass.
+- Clips on the Effect review page: `pic-pdf-phone`, `pic-pages`, `pic-photo`, `pic-gif`,
+  `pic-video`, `pic-desktop`.
+
+## Design" section in your handoff and push it.
+
+Cover the page architecture you chose and why, the near and far detail, the splat budgets per tier,
+the minPixelSize approach, the file and web-address flow, and the labs switch, with your measured
+numbers. Keep working; the Operator reads it at his check-in and messages you if he disagrees.
+
+- Clips for the owner on the Effect review page (https://claude.ai/artifact/NCsg9V5SzFY3Mnwuwgq7pi;
+  lane record "Pictures", which the Operator has made), as OPERATING.md's "Steps for a lane" says.
+  Cards:
+  - `pic-pdf-phone`: the sample PDF whole and zoomed at 390×844;
+  - `pic-pages`: paging through a long PDF;
+  - `pic-photo`: a photo;
+  - `pic-gif`: a GIF;
+  - `pic-video`: a video playing;
+  - `pic-desktop`: a desktop view at 1440×900.
+
+  tools/effect-clip.mjs may not open files; write your own clip script and keep it in tools/ if it's
+  reusable. The owner then tries the Picture lab on his phone with ?labs=1 after the merge.
+
+## State
+
 September 28, 2026: the prototype works end to end in the app (Picture lab with `?labs=1`): the
 sample PDF, a photo, a GIF, a WebM video, a 200-page PDF, a web address, and the messages for a
 password-protected PDF and a refused address. Next: the page bend (kind "leaf"), links and embeds,
@@ -310,7 +351,30 @@ it in localStorage, `?labs=0` turns it off; a link or `chooseToy` opens a labs t
 
 ## Notes
 
+- PDF.js's modern build calls `Map.prototype.getOrInsertComputed`, which the test Chromium does not
+  have (and many phones won't yet); the legacy build carries its own polyfills. Keep the legacy
+  build when updating.
+- Rendering here is software (SwiftShader), so the PDF drawing times in the Design section are much
+  slower than a phone's GPU-backed canvas will be; the splat counts are what matter.
+- `tools/pic-samples.mjs` rebuilds the sample article and every fixture; `tools/pic-clip.mjs`
+  records the review clips (GIF and video clips step the clock and the video's time by hand, so they
+  play at the right speed however slow the renderer).
+- The password-protected fixture is written by hand (the standard security handler, revision 2,
+  RC4), because Chromium cannot print one.
+
 ## Known issues
+
+- A page zoomed past the tier's widest build (1,600 px on "mid") stops getting sharper; a detail
+  patch for the visible part is in the backlog note under "For the Operator".
+- Viewed from more than about 60 degrees off its face, some paper splats sort over the ink (the ink
+  is 0.75 block in front of the paper); a page seen that far round is already hard to read.
+- Paper is white on the light theme's white page, so a page's edge only shows where the paper's
+  color differs (scans) or as the text's edge. A toy that frames the page (the book, the frame)
+  gives it its edge.
+- A leaf page on a part: the part's turn replaces the leaf's splat turn (as with tokens on parts),
+  so leaves belong on part 0.
+- Safari: GIFs use omggif (no ImageDecoder); iPhone .mov (HEVC) plays in Safari only. Not tried on a
+  real phone yet: the owner tries the Picture lab with `?labs=1` after the merge.
 
 ## For the Operator
 
