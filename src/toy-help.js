@@ -661,6 +661,68 @@ export const TOY_HELP = {
       "Circles turning on circles can draw any closed shape. Each circle spins a whole number of times per loop while riding on the rim of the one before, and the tip of the last one traces the drawing. This is a Fourier series, named after Joseph Fourier, who showed in the early 1800s that repeating patterns can be built by adding up simple waves.\n\nTap to spin them and watch the shape drawn again. Few circles draw a wobbly shape and many draw a crisp one: set how many in the Toy tab, pick a heart, a star or a square wave, stack them in 3D, or type a word and each letter gets its own chain of circles.",
   },
 
+  // ---- AI and computing ----------------------------------------------------------------
+  perceptron: {
+    howTo: "Tap it to watch it try an example, get it wrong, and learn.",
+    about:
+      "A perceptron is the simplest artificial neuron, invented by Frank Rosenblatt in 1958. It takes a few inputs, multiplies each by a weight (how much that input counts), and adds them up. If the sum passes a threshold, it fires: its answer is 1, otherwise 0. It learns by nudging its weights each time it gets an answer wrong.\n\nTap it: inputs X1 and X3 light up and send pulses along wires as thick as their weights. The sum fills the gauge but stays under the threshold line, so the lamp flashes red. The two live wires thicken, the pulses go again, the gauge passes the line and the lamp lights gold. Pick the flat poster or a 3D model in the Toy tab.",
+  },
+  "multilayer-perceptron": {
+    howTo: "Tap it to try all four inputs and fill in the XOR truth table.",
+    about:
+      "One perceptron can only split its inputs with a single straight line, so it cannot learn XOR, “exclusive or”, which is 1 when exactly one of two inputs is 1. Put neurons in layers and it can. Here an OR neuron and a NAND (“not both”) neuron feed an AND neuron, and together they give XOR. Blue wires add to a neuron's sum and red wires subtract.\n\nTap it and it tries the inputs 00, 01, 10 and 11 in turn, lighting each neuron that fires, and fills in the truth table: 0, 1, 1, 0. Pick the poster or a 3D model in the Toy tab.",
+  },
+  "neural-network": {
+    howTo: "Tap it to send signals forward, then learn backward. Set its size in the Toy tab.",
+    about:
+      "A neural network is made of simple artificial neurons in layers. Each neuron adds up the signals coming in, each multiplied by a weight, and passes on a signal of its own; the weights are what the network learns. In training, a forward pass makes a guess, and backpropagation sends the error back through the network, nudging every weight a little to do better next time.\n\nTap it: pulses run from the inputs through the hidden layer to the outputs, each neuron glowing as strongly as it fires, and one output wins. Then red pulses run back and the wires thicken or thin as the weights change. In the Toy tab, set the number of inputs, hidden layers, neurons and outputs, and pick the poster or a 3D model.",
+  },
+  cnn: {
+    howTo: "Tap it to read the digit. Draw your own digit in the Toy tab.",
+    about:
+      "A convolutional network, or CNN, is a neural network built for pictures. It slides small filters across the picture: each filter is a little grid of weights that lights up where it finds its pattern, such as a slanted stroke, and makes a feature map. Pooling shrinks the map, keeping the strongest signal in each patch, and later layers combine the features to recognize the whole shape.\n\nTap it: a glowing 3-by-3 filter slides over a handwritten 7, stamping a feature map tile by tile; the tiles pool into a smaller map, and the scores for the digits 0 to 9 rise with 7 on top. In the Toy tab, pick a 3D view, or draw a digit and a small trained network reads it.",
+  },
+  rnn: {
+    howTo: "Tap it to read a sentence one word at a time. Try the LSTM style in the Toy tab.",
+    about:
+      "A recurrent network, or RNN, reads a sequence, like the words of a sentence, one piece at a time. It keeps a memory called the hidden state: after each word, the state loops back in with the next word, so what it knows builds up as it reads. An LSTM (long short-term memory) adds gates that decide what to forget, what to take in and what to pass on.\n\nTap it: THE, CAT and SAT rise into the cell one at a time. The cell flashes, and the glowing orb, the hidden state, takes on the word's color mixed with what it carried and runs around the loop. In the Toy tab, pick the LSTM style to see its three gates open and shut like shutters, or a 3D model.",
+  },
+  transformer: {
+    howTo: "Tap it to predict the next word. Try the Encoder–decoder diagram in the Toy tab.",
+    about:
+      "A transformer is a neural network for language, first described in 2017. It splits text into tokens, and in each layer every token uses attention: it looks at all the others and weighs how much each one matters to it. After many layers, it predicts the next token. Tap it: arcs jump between THE CAT SAT ON, thicker where attention is stronger, one color for each of two heads; the tiles rise through the layers, and MAT drops in.\n\nThe Encoder–decoder diagram in the Toy tab is the classic design. Its key: an eye is attention; a lidded eye, masked attention (it only looks back); +, add and norm; », feed forward; a vector, embedding; a wave, positional encoding; a slash, linear; bars, softmax; N×, repeated N times. HELLO WORLD goes in, and given START HOLA, it predicts MUNDO.",
+  },
+  "looped-transformer": {
+    howTo: "Tap it: the tiles loop through one block, sharper each lap, until 3 + 4 = 7.",
+    about:
+      "A looped transformer runs the same transformer block again and again, feeding its output back in as its next input, instead of stacking many different layers. Each pass through the loop can refine the answer a little more, a bit like checking your work, so a small model can spend longer thinking about a harder problem.\n\nTap it: five tiles ride three laps around a track through one block. Each pass sharpens every tile one step, from noise to a blocky mosaic, to nearly right, to exact, until “3 + 4 = 7” settles with the 7 in gold. Pick the poster or a 3D model in the Toy tab.",
+  },
+  "diffusion-model": {
+    howTo: "Tap it: the noise clears, step by step, into a rubber duck.",
+    about:
+      "A diffusion model makes pictures out of noise. It is trained by taking real pictures, adding random noise to them a little at a time until only specks are left, and learning to undo each step. To make a new picture, it starts from pure noise and takes a little away at each of many steps, until a clear picture appears.\n\nTap it: a cloud of random specks clears in ten steps into a rubber duck while the STEP counter runs down from 50 to 0, then the noise washes back over it. It suits Splashery well: every toy here is drawn from many soft, blurry points too. Pick the poster or a 3D model in the Toy tab.",
+  },
+  "gradient-descent": {
+    howTo: "Tap it to roll the ball downhill. Try the Learning rate in the Toy tab.",
+    about:
+      "Gradient descent is how most neural networks learn. Picture the network's error as a hilly landscape: the lower the ground, the better its answers. At each step, it works out which way is downhill, the gradient, and steps that way. The learning rate sets how big each step is, and momentum lets it keep some speed from step to step.\n\nTap it: the ball takes 21 hopping steps downhill, leaving a trail of dots, overshoots the valley and settles in it. In the Toy tab, set the Learning rate: too low, and it creeps down the slope; too high, and it bounces from wall to wall; just right, and it settles.",
+  },
+  "word-vectors": {
+    howTo: "Tap it to work out king − man + woman. Type your own words in the Toy tab.",
+    about:
+      "Word vectors turn each word into a list of numbers, a point in a space with many directions, so that words used in similar ways land near each other. These have 50 numbers per word, learned from a huge amount of text. Directions in the space can carry meaning: the step from man to woman is much like the step from king to queen.\n\nTap it: an arrow runs out to KING, the step from MAN to WOMAN is added on from there, and it lands right next to QUEEN, which lights up. Type your own A − B + C in the Toy tab, with any of 24,000 common words, and it finds the nearest word to the answer.",
+  },
+  "sorting-machine": {
+    howTo: "Tap it to sort the bars. Pick one of eight ways to sort in the Toy tab.",
+    about:
+      "A sorting algorithm is a step-by-step recipe a computer follows to put things in order. There are many: bubble sort keeps swapping neighbors that are the wrong way around; quicksort picks one item and splits the rest into smaller and bigger piles; merge sort sorts small groups, then merges them. On a long list, some need far fewer steps than others.\n\nTap it: eight bars of different heights sort themselves, each bar gliding to its new place, while a counter counts the swaps; then they shuffle back. Pick one of eight algorithms in the Toy tab, from bubble sort to heap sort, and watch how differently they work.",
+  },
+  "half-adder": {
+    howTo: "Tap it to add 1 + 1 in binary: the answer is 10.",
+    about:
+      "A half adder is a tiny circuit that adds two bits, binary digits that are each 0 or 1. It uses two logic gates: an XOR gate gives the sum bit, which is 1 when exactly one input is 1, and an AND gate gives the carry bit, which is 1 when both are. Two half adders make a full adder, and a chain of full adders lets a computer add numbers of any size.\n\nTap it: switches A and B flip to 1, and light runs along the wires into the gates. The XOR gives 0, so the sum lamp stays dark, and the AND lights the carry lamp. The board reads 1 + 1 = 10, which is two in binary. Then the switches flip back.",
+  },
+
   // ---- Holidays -------------------------------------------------------------------------
   "jack-o-lantern": { howTo: "Tap to lift the lid; tap again to put it back." },
   snowman: { howTo: "Tap to melt it and build it again. Try the Warmth slider in the Toy tab." },
