@@ -775,33 +775,86 @@ export const TOY_HELP = {
   snail: { howTo: "Tap to make it hide in its shell; tap again to bring it out." },
 
   // ---- Math -----------------------------------------------------------------------------
-  lorenz: { howTo: "Tap to race along the path. Set the glow in the Toy tab." },
-  mobius: { howTo: "Tap to send the rider round. Pick a rider in the Toy tab." },
-  "klein-bottle": { howTo: "Tap to send water through. Set the glow in the Toy tab." },
-  "menger-sponge": { howTo: "Tap to close and carve the holes. Pick the level in the Toy tab." },
-  hypercube: { howTo: "Tap to turn it inside out. Try the 4D turn slider in the Toy tab." },
-  "torus-knot": { howTo: "Tap to pull it and let go. Pick another knot in the Toy tab." },
-  gyroid: { howTo: "Tap to make it breathe. Pick a cube or a ball in the Toy tab." },
+  lorenz: {
+    howTo: "Tap to race along the path. Set the glow in the Toy tab.",
+    about:
+      "In 1963 the scientist Edward Lorenz made a very simple model of moving air: three short equations. He found that its path loops around two centers forever, never repeating and never crossing itself, in a shape like a pair of butterfly wings. This shape is called the Lorenz attractor.\n\nTap it and a bright spark races along the whole path, drawing it again in light that then fades. Two starting points that are almost the same soon follow very different paths. This is called chaos, or the butterfly effect, and it is why weather is so hard to forecast far ahead.",
+  },
+  mobius: {
+    howTo: "Tap to send the rider round. Pick a rider in the Toy tab.",
+    about:
+      "A Möbius strip is a loop with a half twist in it. It has only one side and only one edge: a line drawn along its middle comes back to where it started without ever crossing an edge. It is named after August Möbius, who wrote about it in the 1850s. You can make one from a strip of paper and some tape.\n\nTap it and the rider goes along the middle of the band. After one lap it is underneath where it started, and after two it is back on top. Pick a race car, a beach ball, a duck on a bike or an ant in the Toy tab.",
+  },
+  "klein-bottle": {
+    howTo: "Tap to send water through. Set the glow in the Toy tab.",
+    about:
+      "A Klein bottle is a surface with no inside and no outside. Its neck bends around and passes through its own side to join the bottom from within, so an ant crawling on it could reach every part of it without ever crossing an edge. Felix Klein described it in 1882. A true Klein bottle needs four dimensions; in our world its neck has to cut through the wall.\n\nTap it and a surge of glowing water pours in at the base, runs up the body, through the neck and around into the bottom, then fades. Set the glow, or pick the color of the glass, in the Toy tab.",
+  },
+  "menger-sponge": {
+    howTo: "Tap to close and carve the holes. Pick the level in the Toy tab.",
+    about:
+      "A Menger sponge is a fractal. Start with a cube and cut it into 27 smaller cubes, like a puzzle cube. Take out the one in the middle and the six at the middle of each face, leaving 20. Then do the same to each of those 20 cubes, and again, forever. Karl Menger described it in 1926.\n\nTap it and every hole is plugged, the smallest first, until it is a plain cube. Then it is carved again: the big cubes slide out of the faces, then the next size down, then the smallest. Pick level 2 or 3 in the Toy tab: level 3 is made of 8,000 little cubes.",
+  },
+  hypercube: {
+    howTo: "Tap to turn it inside out. Try the 4D turn slider in the Toy tab.",
+    about:
+      "A hypercube, or tesseract, is a cube in four dimensions. A square has 4 corners and a cube has 8; a tesseract has 16 corners and 32 edges, and its sides are 8 cubes. We can't see four dimensions, so this toy shows its shadow in our three: a cube inside a cube, with their corners joined.\n\nAt rest it rocks gently in 4D. Tap it to turn it once around through the fourth dimension: the pink inner cube swells out to become the outer one while the blue one folds inside, then it turns on back to where it started. Every edge stays perfectly straight the whole time.",
+  },
+  "torus-knot": {
+    howTo: "Tap to pull it and let go. Pick another knot in the Toy tab.",
+    about:
+      "A torus knot is a knot that winds around the surface of a donut shape, called a torus. It goes around the hole a few times one way while it loops through it a few times the other way. The simplest is the trefoil, which winds 2 and 3 times; it is the simplest true knot, one that can never be untied without cutting it.\n\nTap it and the knot is pulled loose, its loops stretching and swirling; then it is let go and springs back past its rest shape and wobbles to a stop, like a spring. Pick a trefoil, a cinquefoil or another knot in the Toy tab.",
+  },
+  gyroid: {
+    howTo: "Tap to make it breathe. Pick a cube or a ball in the Toy tab.",
+    about:
+      "A gyroid is a curving surface that splits space into two tangled mazes of tunnels that never meet. It has no straight lines and no flat parts, and it repeats forever in every direction. Alan Schoen, a scientist working for NASA, found it in 1970. Nature makes it too: tiny gyroid crystals in some butterfly wings give them their shiny green color.\n\nTap it and it breathes: the surface slides along itself, so one set of tunnels swells while the other narrows, then the other way, and it settles. In the Toy tab, cut it into a cube or a ball.",
+  },
+  mandelbulb: {
+    howTo: "Tap it to turn its discs like the dials of a lock.",
+    about:
+      "The Mandelbulb is a 3D fractal, a cousin of the famous flat Mandelbrot set. It is made by repeating one short formula over and over for each point in space and keeping only the points that never fly away. Zoom in anywhere and there is more and more detail. It was found in 2009 by Daniel White and Paul Nylander.\n\nTap it and its seven slices turn like the dials of a combination lock, neighbors in opposite directions, then back again. Each turns one seventh of a turn, because the bulb looks the same after a seventh of a turn, so it lands on the same picture.",
+  },
   sierpinski: {
     howTo: "Tap to explode it; tap again to put it back. Pick the level in the Toy tab.",
+    about:
+      "A Sierpinski tetrahedron is a fractal pyramid. It is made of four smaller copies of itself, each half as tall, and each of those is made of four smaller ones, and so on. It is the 3D cousin of the Sierpinski triangle, named after the mathematician Wacław Sierpiński, who described the triangle in 1915.\n\nTap it to explode it into its pieces; tap again to put it back together. Pick the level in the Toy tab: each level has four times as many little pyramids, so level 4 has 256 and level 5 has 1,024.",
   },
   platonic: {
     howTo:
       "Tap to explode it; tap again to put it back. Pick one of the five solids in the Toy tab.",
+    about:
+      "The Platonic solids are the only five shapes whose faces are all the same regular shape, meeting in the same way at every corner: the tetrahedron (4 triangles), the cube (6 squares), the octahedron (8 triangles), the dodecahedron (12 pentagons) and the icosahedron (20 triangles). They are named after the Greek thinker Plato, and Euclid proved there can be no others.\n\nIt starts as a dodecahedron. Tap it to explode its faces apart; tap again to put them back. Pick any of the five solids, and its colors, in the Toy tab. Many game dice come in these shapes.",
+  },
+  "seashell-spiral": {
+    howTo: "Tap it to hear the sea in the shell.",
+    about:
+      "Many seashells grow in a spiral. As the animal inside grows, it adds new shell at the opening, each turn wider than the one before but the same shape, so the shell gets bigger without changing its form. Mathematicians call this a logarithmic spiral.\n\nPeople say you can hear the sea in a shell. Tap it and three soft swells of sea-blue light run down the spiral to the opening, and with each one a ripple rolls out of the mouth, widening and fading like a wave. The sound in a real shell is the noise around you, echoing inside it.",
   },
   "graph-plotter": {
     howTo: "Tap to draw the curve. Pick a curve, or type your own, in the Toy tab.",
+    about:
+      "A graph turns an equation into a picture. For y = x², every x along the bottom gets a height y, and joining them draws a curve. René Descartes wrote about this kind of grid in 1637. Curves can be drawn other ways too: by distance and angle (polar), or by following a moving point over time.\n\nTap it and a pen draws the curve across the grid, humming a note that follows its height; then the a slider sweeps and the curve bends with it. Pick one of 42 famous curves in the Toy tab, or type your own: y = … with x, r = … with θ, or x = …, y = … with t. Put a in it to see it bend.",
   },
   "surface-plotter": {
     howTo: "Tap to raise the surface. Pick one, or type your own, in the Toy tab.",
+    about:
+      "A surface plot is a graph in 3D. For each point on a flat floor, with its x and y, the equation gives a height z, so the graph becomes a landscape of hills, valleys and saddles. Colors show how high each part is.\n\nTap it and the surface lies flat, then rises out of the sheet and ripples, twists or breathes as a number called a changes. Pick one of 16 famous surfaces in the Toy tab, such as the sombrero, the saddle or Rosenbrock's banana valley, which is used to test computer methods that hunt for the lowest point. Or type your own: z = … with x and y, or with r and θ.",
   },
   "unit-circle": {
     howTo: "Tap to send the point round. Try 3D, or type your own path, in the Toy tab.",
+    about:
+      "The unit circle is a circle with a radius of 1. As a point goes around it, turning through an angle called θ, its height is the sine of θ and its left-right place is the cosine. Traced out over time, they make two waves, the same shapes as sound and light waves.\n\nTap it and the point goes once around while its height draws the sine wave and its left-right place draws the cosine wave. For the circle, Euler's formula, e^(iθ) = cos θ + i sin θ, lights up piece by piece. In the Toy tab, try a 3D helix, another path, up to three turns, or type your own: x = …, y = … with t, or r = … with θ.",
   },
   "fourier-circles": {
     howTo: "Tap to spin the circles. Type a word or a curve in the Toy tab.",
     about:
       "Circles turning on circles can draw any closed shape. Each circle spins a whole number of times per loop while riding on the rim of the one before, and the tip of the last one traces the drawing. This is a Fourier series, named after Joseph Fourier, who showed in the early 1800s that repeating patterns can be built by adding up simple waves.\n\nTap to spin them and watch the shape drawn again. Few circles draw a wobbly shape and many draw a crisp one: set how many in the Toy tab, pick a heart, a star or a square wave, stack them in 3D, or type a word and each letter gets its own chain of circles.",
+  },
+  "pythagoras-proof": {
+    howTo: "Tap it to slide the triangles and show that a² + b² = c².",
+    about:
+      "In a right triangle, the two short sides a and b and the long side c always fit a rule: a² + b² = c². So a square drawn on the long side has the same area as the squares on the two short sides put together. It is named after Pythagoras, a Greek thinker of about 2,500 years ago, though people in Babylon knew it even earlier.\n\nThis is one of the oldest proofs. Four copies of the triangle fill a big square, leaving two empty squares, a² and b². Tap it and the triangles slide into the corners, and the empty space becomes one tilted square, c², so a² + b² must equal c². Then they slide back.",
   },
 
   // ---- Holidays -------------------------------------------------------------------------

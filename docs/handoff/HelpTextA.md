@@ -99,42 +99,71 @@ HOW THIS LANE RUNS
   screenshots, merging), docs/handoff/Help.md (the style guide), docs/TOY-PLAN.md and
   docs/WORKSTREAMS.md.
 - Your handoff file: create it. Start it with this brief, word for word, under "## Brief", then keep
-  "## State" (which shelves are done), "## Notes", "## Known issues" and "## For the Operator"
-  current, like the other lanes' files.
-- Never edit tests/taps.spec.mjs.
-- Engine changes: none. If the help UI needs a change, say so in your final message; don't make it.
-- Sounds: this lane changes no toy's sound.
-- Before every push:
-  `SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium npx playwright test tests/help.spec.mjs` (it checks
-  every entry's shape and lengths), `npx prettier --check .`, and
-  `node tools/us-english.mjs --diff`. Before you say READY, and after merging main: the full suite
-  (`SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium npx playwright test`), then put back the standard
-  screenshots (`node tools/upkeep.mjs --restore-shots`) and any other lane's screenshots your branch
-  didn't change (`git checkout -- tests/screenshots/`). Add two screenshots of the About tab for one
-  of your toys with a long About text: `<prefix>-about-390x844.png` and
-  `<prefix>-about-1440x900.png`.
-- PR: one draft PR against main with the five sections (Summary, Verification, Deviations, Known
-  issues, What was cut). In Summary, list your shelves with a count of how-to lines and About texts
-  each. Never merge anything. When main moves, merge it into your branch (never rebase a pushed
-  branch).
-- Finish every working turn with a short final message that starts with "READY:" (PR link, counts,
-  test results, anything for the Operator), "WORKING:" (what's left), or "BLOCKED:" (exactly what
-  you need).
+  "## State
 
-Start now: read the docs and the style guide, create your handoff file, open your draft PR early,
-then write shelf by shelf, pushing each shelf. When every toy on your shelves has both texts and the
-checks pass, finish with "READY:".
+September 28, 2026: all ten shelves written; draft PR
+[#60](https://github.com/ryanjosephkamp/splashery/pull/60).
 
-## State
+| Shelf          | Toys | How-to lines | About texts |
+| -------------- | ---- | ------------ | ----------- |
+| Photoreal      | 32   | 32           | 32          |
+| Shapes         | 4    | 3            | 4           |
+| Space          | 23   | 23           | 23          |
+| Tiny world     | 18   | 18           | 18          |
+| Atoms          | 5    | 5            | 5           |
+| Gems           | 9    | 9            | 9           |
+| Body           | 6    | 6            | 6           |
+| Nature         | 23   | 23           | 23          |
+| Weather & fire | 13   | 13           | 13          |
+| Maths          | 16   | 16           | 16          |
+| **Total**      | 149  | 148          | 149         |
 
-September 28, 2026: started. Shelves done: none yet.
+The one missing how-to line is the donut's (below, "For the Operator"). The owner's marks on the
+Help Board: none read yet (the board's link has not arrived).
 
 ## Notes
 
+- Approved entries are kept word for word; no approved line was changed.
+- Every tap was described from the recipe's comment above `action`, the "Improved:" line in
+  TOY-PLAN.md, and for sliders the code that reads them (Sparks sets how many sparks twinkle, Pupil
+  the pupil's size, Breath how deep the resting breaths are). Toggles checked against `default`: the
+  lantern starts dark, the candle lit, the geode and the pearl open, the Sierpinski tetrahedron and
+  the Platonic solids closed, the Moon without its lander.
+- Tried in the app (stills before and during the tap): pearl (with and without its shell), star (red
+  dwarf), solar system, supernova, Venus, geyser, gyroid, Pythagoras proof, Mandelbulb, diatom,
+  amethyst geode (both taps), candle (both taps), saguaro (the About tab at both sizes).
+- Facts come from NASA and ESA, NOAA and the National Weather Service, the National Park Service,
+  the NIH (NHGRI, NHLBI, NINDS), USGS, GIA, the Protein Data Bank, nobelprize.org and Britannica.
+  Where a toy does something the real thing doesn't (a bacterium or a cell that joins back up, a
+  diatom that opens like a clam, a virus that buds copies by itself), the text says "the toy" does
+  it and describes the real thing separately.
+- Helper: one Opus 5.5 helper drafted Space, Tiny world, Atoms and Gems, Weather & fire and Maths in
+  the scratchpad, with a source for each fact; every line was checked and several were changed (less
+  certain facts cut or softened, a match-and-candle fact swapped for the round candle flame in
+  space).
+- `tests/hta.spec.mjs`: every toy on these shelves has an entry of the right shape (the donut's
+  how-to line excepted), and the About tab shows the saguaro's long text whole at 390x844 and
+  1440x900 (`hta-about-*.png`).
+
 ## Known issues
 
-None yet.
+- The donut has no how-to line yet (below).
+- The star's Type option (red dwarf, yellow, blue giant, white dwarf) changes the look, but the tap
+  runs the same Sun-like life for every type: a red giant, a shell and a white dwarf. The About text
+  says "the life of a star like the Sun" so it stays true.
+- The pearl with "Oyster shell" switched off: the tap shows nothing (checked in the app; the lid it
+  opens isn't built). The text doesn't mention the switch.
 
 ## For the Operator
 
-Nothing yet.
+- **The donut's how-to line**: `tests/help.spec.mjs` (line 148) expects the donut's default line,
+  "Tap it: Break apart.", in the old-link test. With my line ("Tap it to break it apart and put it
+  back together.") that test fails, and this lane may not edit the file, so the donut has no `howTo`
+  for now (the line waits in a comment in `src/toy-help.js`). The same test (line 325) expects the
+  basketball's default line, which lane HelpTextB will hit. Suggested fix, in an Ops PR or lane
+  Help's file: compare with `toyHelp(...)` for the toy instead of a fixed string, or use a toy that
+  will never get an entry. Then add the donut's line and drop `NO_HOWTO` in `tests/hta.spec.mjs`.
+- Recipe follow-ups for a later lane (not text): the star's tap for the other types, and the pearl's
+  tap without its shell.
+- Two approved lines say "round" (Möbius strip, Circle and waves: "send the rider round", "send the
+  point round"); "around" reads more American. Left as approved.
