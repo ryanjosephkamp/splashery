@@ -761,7 +761,8 @@ export class Player {
   panBy(dx, dy) {
     const cam = this.camera;
     const pose = cam.pose();
-    const k = (2 * cam.cur.distance * Math.tan((19 * Math.PI) / 180)) / (this.canvas.clientHeight || 600);
+    const k =
+      (2 * cam.cur.distance * Math.tan((19 * Math.PI) / 180)) / (this.canvas.clientHeight || 600);
     const R = this.toyInfo?.radius || 1;
     const c = this.toyInfo?.center || [0, 0, 0];
     for (let i = 0; i < 3; i++) {
