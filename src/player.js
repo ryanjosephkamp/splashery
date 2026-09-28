@@ -338,6 +338,8 @@ export class Player {
     this.patternOn = false;
     this.applyPattern();
     this.camera.fit(info.radius, info.center);
+    // Pictures: a page viewer comes close enough to read a page's small print.
+    if (this.pictures) this.camera.minDistance = info.radius * 0.3;
     this.time = 0;
     this.idle.pokeAt = 0;
     this.idle.pokes = 0;
@@ -754,6 +756,26 @@ export class Player {
     return d;
   }
 
+  // Moves the view across a picture toy (a page seen close up): the finger
+  // drags the picture. Stays within the toy.
+  panBy(dx, dy) {
+    const cam = this.camera;
+    const pose = cam.pose();
+    const k = (2 * cam.cur.distance * Math.tan((19 * Math.PI) / 180)) / (this.canvas.clientHeight || 600);
+    const R = this.toyInfo?.radius || 1;
+    const c = this.toyInfo?.center || [0, 0, 0];
+    for (let i = 0; i < 3; i++) {
+      const v = cam.target[i] - pose.right[i] * dx * k + pose.up[i] * dy * k;
+      cam.target[i] = Math.min(c[i] + R, Math.max(c[i] - R, v));
+    }
+    this.stage.requestRender();
+  }
+
+  // A one-finger drag pans (instead of turning) on a picture toy seen close up.
+  pansHere() {
+    return !!this.pictures && this.camera.cur.distance < (this.toyInfo?.radius || 1) * 1.6;
+  }
+
   // A container in the kit format for a picture sheet.
   pictureContainer(capacity) {
     return new pc.GSplatContainer(this.stage.device, capacity, this.format);
@@ -833,6 +855,7 @@ export class Player {
   }
 
   resetCamera() {
+    if (this.pictures && this.toyInfo) this.camera.target = this.toyInfo.center.slice(); // Pictures
     this.camera.reset();
     this.stage.requestRender();
   }

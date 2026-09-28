@@ -102,13 +102,17 @@ export class Viewer {
       },
       onOrbitStart: () => cam.begin(),
       onOrbit: (dx, dy, dt) => {
-        cam.rotateBy(dx, dy, dt);
+        // Pictures: close up on a page, a drag moves across it.
+        if (player.pansHere()) player.panBy(dx, dy);
+        else cam.rotateBy(dx, dy, dt);
         player.stage.requestRender();
       },
       onOrbitEnd: () => cam.end(),
       onPinchStart: () => cam.begin(),
       onPinch: ({ scale, dx, dy, twist, dt }) => {
-        cam.rotateBy(dx, dy, dt);
+        // Pictures: two fingers move a picture toy, as in a photo viewer.
+        if (player.pictures) player.panBy(dx, dy);
+        else cam.rotateBy(dx, dy, dt);
         if (scale > 0) cam.zoomBy(1 / scale);
         cam.rollBy(-twist);
         player.stage.requestRender();

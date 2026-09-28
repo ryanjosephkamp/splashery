@@ -103,11 +103,10 @@ async function record(scene) {
   const run = (fn, arg) => page.evaluate(fn, arg);
   if (scene === "pdf-phone" || scene === "desktop") {
     await shot(1500);
-    // Zoom in on the top of the page, in steps, and let it sharpen.
-    for (let i = 0; i < 8; i++) {
+    // Zoom in on the page, in steps, and let it sharpen.
+    for (let i = 0; i < 10; i++) {
       await run(() => {
-        const c = window.__splashery.player.camera;
-        c.zoomBy(0.86);
+        window.__splashery.player.camera.zoomBy(0.84);
         window.__splashery.player.stage.requestRender();
       });
       await page.waitForTimeout(120);
@@ -115,14 +114,25 @@ async function record(scene) {
     }
     await settle();
     await page.waitForTimeout(600);
-    await shot(2600);
+    await shot(2200);
+    // Move up to the title, as a finger would, then down the page.
+    for (const [dx, dy, n] of [
+      [0, 45, 8],
+      [30, -40, 10],
+    ]) {
+      for (let i = 0; i < n; i++) {
+        await run(([dx, dy]) => window.__splashery.player.panBy(dx, dy), [dx, dy]);
+        await page.waitForTimeout(80);
+        await shot(140);
+      }
+      await settle();
+      await page.waitForTimeout(400);
+      await shot(2200);
+    }
     // And back out.
-    for (let i = 0; i < 8; i++) {
-      await run(() => {
-        window.__splashery.player.camera.zoomBy(1 / 0.86);
-        window.__splashery.player.stage.requestRender();
-      });
-      await page.waitForTimeout(120);
+    await run(() => window.__splashery.player.resetCamera());
+    for (let i = 0; i < 6; i++) {
+      await page.waitForTimeout(150);
       await shot(160);
     }
     await settle();
@@ -152,12 +162,32 @@ async function record(scene) {
     await settle();
     await page.waitForTimeout(600);
     await shot(2400);
+  } else if (scene === "gif") {
+    // The clock is stepped by hand: 12 steps a second, for four seconds.
+    await run(() => (window.__splashery.player.frozen = true));
+    for (let i = 0; i < 48; i++) {
+      await run((t) => {
+        const pl = window.__splashery.player;
+        pl.time = t;
+        pl.stage.requestRender();
+      }, i / 12);
+      await page.waitForTimeout(250);
+      await shot(83);
+    }
   } else {
-    if (scene === "video") await run(() => window.__splashery.player.act());
-    const t0 = Date.now();
-    while (Date.now() - t0 < 4000) {
-      await run(() => window.__splashery.player.stage.requestRender());
-      await shot();
+    // The video is stepped through by seeking, 10 frames a second.
+    await run(() => window.__splashery.player.pictures.media.pause());
+    for (let i = 0; i < 20; i++) {
+      await run(async (t) => {
+        const m = window.__splashery.player.pictures.media;
+        await new Promise((r) => {
+          m.video.addEventListener("seeked", r, { once: true });
+          m.seek(t);
+        });
+        window.__splashery.player.stage.requestRender();
+      }, i / 10);
+      await page.waitForTimeout(400);
+      await shot(100);
     }
   }
   await page.close();
@@ -169,6 +199,15 @@ async function record(scene) {
   gif.finish();
   const file = path.join(outDir, `pic-${scene}.gif`);
   fs.writeFileSync(file, gif.bytes());
+  // A strip of six frames, for checking a clip without playing it.
+  const pick = [0, 1, 2, 3, 4, 5].map((k) => frames[Math.round((k * (frames.length - 1)) / 5)].img);
+  const sw = pick[0].w;
+  const sh = pick[0].h;
+  const strip = new PNG({ width: sw * 6, height: sh });
+  pick.forEach((im, k) => {
+    for (let y = 0; y < sh; y++) strip.data.set(im.data.subarray(y * sw * 4, (y + 1) * sw * 4), (y * sw * 6 + k * sw) * 4); // prettier-ignore
+  });
+  fs.writeFileSync(path.join(outDir, `pic-${scene}-strip.png`), PNG.sync.write(strip));
   console.log(`${file}: ${frames.length} frames, ${Math.round(gif.bytes().length / 1024)} KB`);
 }
 

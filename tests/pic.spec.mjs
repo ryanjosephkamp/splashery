@@ -195,6 +195,20 @@ test.describe("the Picture lab", () => {
       { timeout: 120_000 },
     );
     expect(await darkPixels(page)).toBeGreaterThan(whole);
+    // Close up, a drag moves across the page (it pans, it does not turn).
+    const moved = await page.evaluate(() => {
+      const pl = window.__splashery.player;
+      const yaw = pl.camera.cur.yaw;
+      pl.camera.zoomBy(0.4);
+      pl.camera.update(1);
+      const here = pl.pansHere();
+      pl.panBy(0, 120);
+      return { here, up: pl.camera.target[1], yaw: pl.camera.cur.yaw - yaw };
+    });
+    expect(moved.here).toBe(true);
+    expect(moved.up).toBeGreaterThan(0.05);
+    expect(moved.yaw).toBe(0);
+    await page.evaluate(() => window.__splashery.player.resetCamera());
     // A tap goes to the next page.
     await page.evaluate(() => window.__splashery.player.act());
     await page.waitForFunction(() => window.__splashery.player.pictures.page === 1);
