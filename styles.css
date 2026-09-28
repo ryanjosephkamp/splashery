@@ -324,6 +324,19 @@ textarea {
   font-weight: 600;
 }
 
+.input-pad {
+  display: grid;
+  gap: 8px;
+  justify-items: start;
+}
+.input-pad canvas {
+  width: 168px;
+  height: 168px;
+  border-radius: 8px;
+  touch-action: none;
+  cursor: crosshair;
+  image-rendering: pixelated;
+}
 .input-row {
   display: flex;
   gap: 6px;
