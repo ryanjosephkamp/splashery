@@ -308,6 +308,19 @@
     border-color: var(--warn);
     color: var(--warn);
   }
+  .mk .part {
+    min-width: 92px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+  }
+  .mk .row button:disabled {
+    opacity: 0.4;
+    cursor: default;
+  }
+  .howto.ok {
+    border-color: var(--good);
+  }
   .mk textarea {
     width: 100%;
     box-sizing: border-box;
@@ -350,8 +363,9 @@
     <h1>Splashery <span>Help Board</span></h1>
     <p class="lede">
       Every toy's "how to play" line and its About text, just as the app shows them. Read each one,
-      then mark it: <b>Reads right</b>, or <b>Needs work</b> with a note for the writer. The text
-      lanes read your marks within the hour and fix them.
+      then mark the how-to line and the About text: <b>Reads right</b>, or <b>Needs work</b> with a
+      note for the writer. The text lanes read your marks within the hour and fix them. A text
+      changed after you approved it shows as not marked again.
     </p>
   </header>
 
@@ -446,23 +460,33 @@
 
     const mk = el("div", "mk");
     mk.hidden = true;
-    const row = el("div", "row");
-    for (const [v, label] of [
-      ["good", "Reads right"],
-      ["fix", "Needs work"],
+    for (const [part, name] of [
+      ["howTo", "How-to line"],
+      ["about", "About text"],
     ]) {
-      const b = el("button", "", label);
-      b.type = "button";
-      b.dataset.v = v;
-      b.setAttribute("aria-pressed", "false");
-      b.addEventListener("click", () => {
-        const same = (marks[t.id] || {}).verdict === v;
-        save(t.id, { verdict: same ? "" : v });
-      });
-      row.append(b);
+      const row = el("div", "row");
+      row.dataset.part = part;
+      row.append(el("span", "part", name));
+      for (const [v, label] of [
+        ["good", "Reads right"],
+        ["fix", "Needs work"],
+      ]) {
+        const b = el("button", "", label);
+        b.type = "button";
+        b.dataset.v = v;
+        b.setAttribute("aria-pressed", "false");
+        b.disabled = !(part === "howTo" ? t.howTo : t.about.length);
+        b.addEventListener("click", () => {
+          const same = partState(t, part) === v;
+          const patch = { [part]: same ? "" : v };
+          patch[`${part}Text`] = same ? "" : textOf(t, part);
+          save(t.id, patch);
+        });
+        row.append(b);
+      }
+      mk.append(row);
     }
     const saved = el("span", "saved");
-    row.append(saved);
     const ta = el("textarea");
     ta.id = `note-${t.id}`;
     ta.rows = 1;
@@ -477,7 +501,7 @@
       clearTimeout(timer);
       if ((marks[t.id]?.note || "") !== ta.value.trim()) save(t.id, { note: ta.value.trim() });
     });
-    mk.append(row, ta);
+    mk.append(ta, saved);
     art.append(mk);
     cards.set(t.id, art);
     return art;
@@ -485,8 +509,26 @@
 
   // ---- Filters and counts --------------------------------------------------------------
   const byId = Object.fromEntries(TOYS.map((t) => [t.id, t]));
+  // A mark is on one part: the how-to line or the About text. It holds the text
+  // it was given for, so a text changed since then counts as not marked.
+  function textOf(t, part) {
+    return part === "howTo" ? t.howTo : t.about.join("\n\n");
+  }
+  function partState(t, part) {
+    const text = textOf(t, part);
+    if (!text) return "none";
+    const m = marks[t.id] || {};
+    const v = m[part] || m.verdict || "";
+    if (v === "fix") return "fix";
+    if (v === "good" && (m.verdict === "good" || m[`${part}Text`] === text)) return "good";
+    return "open";
+  }
   function state(id) {
-    return marks[id]?.verdict || "open";
+    const t = byId[id];
+    const parts = [partState(t, "howTo"), partState(t, "about")];
+    if (parts.includes("fix")) return "fix";
+    if (parts.includes("open")) return "open";
+    return parts.includes("good") ? "good" : "none";
   }
   function show() {
     const q = $("q").value.trim().toLowerCase();
@@ -513,13 +555,15 @@
     const n = TOYS.length;
     const how = TOYS.filter((t) => t.howTo).length;
     const about = TOYS.filter((t) => t.about.length).length;
-    const good = TOYS.filter((t) => state(t.id) === "good").length;
+    const howOk = TOYS.filter((t) => partState(t, "howTo") === "good").length;
+    const aboutOk = TOYS.filter((t) => partState(t, "about") === "good").length;
     const fix = TOYS.filter((t) => state(t.id) === "fix").length;
     const tiles = [
       ["", how, `of ${n} have their own how-to line`],
       ["", about, `of ${n} have an About text`],
-      ["good", good, "marked Reads right"],
-      ["warn", fix, "marked Needs work"],
+      ["good", howOk, `of ${how} how-to lines approved`],
+      ["good", aboutOk, `of ${about} About texts approved`],
+      ["warn", fix, "toys marked Needs work"],
     ];
     if (!db) tiles.splice(2);
     $("stats").replaceChildren(
@@ -546,11 +590,18 @@
     const art = cards.get(id);
     if (!art) return;
     const m = marks[id] || {};
-    art.classList.toggle("m-good", m.verdict === "good");
-    art.classList.toggle("m-fix", m.verdict === "fix");
-    art.querySelectorAll(".mk .row button").forEach((b) => {
-      b.setAttribute("aria-pressed", String(m.verdict === b.dataset.v));
+    const t = byId[id];
+    const st = state(id);
+    art.classList.toggle("m-good", st === "good");
+    art.classList.toggle("m-fix", st === "fix");
+    art.querySelectorAll(".mk .row").forEach((row) => {
+      const ps = partState(t, row.dataset.part);
+      row.querySelectorAll("button").forEach((b) => {
+        b.setAttribute("aria-pressed", String(ps === b.dataset.v));
+      });
     });
+    const how = art.querySelector(".howto");
+    how.classList.toggle("ok", partState(t, "howTo") === "good");
     const ta = art.querySelector(".mk textarea");
     if (ta && document.activeElement !== ta) ta.value = m.note || "";
   }

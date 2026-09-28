@@ -184,9 +184,12 @@ in `docs/handoff/Help.md`). The owner reads them on the Help Board: each toy's t
 - The Operator builds the board with `node tools/help-board.mjs` (it writes
   `.cache/pages/help-board.html`) and republishes it to its link, from main after a merge or from a
   checkout with the text lanes' branches merged in while they run.
-- The owner's marks are in the board's `verdicts` collection, one document per toy id:
-  `{ verdict: "good" | "fix" | "", note, at }`. A lane reads them (never writes them), fixes every
-  "fix" on its toys, and the Operator republishes the board.
+- The owner's marks are in the board's `verdicts` collection, one document per toy id, with a mark
+  for each part:
+  `{ howTo: "good" | "fix" | "", howToText, about: "good" | "fix" | "", aboutText, note, at }`. A
+  mark keeps the text it was given for, so a text changed since then shows as not marked again. A
+  lane reads the marks (never writes them), fixes every "fix" on its toys and leaves approved texts
+  as they are; the Operator republishes the board.
 - From the text lanes on, every lane writes its own toys' entries as part of "done", and they go on
   the board with the lane's review.
 
