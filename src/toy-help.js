@@ -782,8 +782,76 @@ export const TOY_HELP = {
       "A xylophone is a row of tuned wooden bars that you strike with a mallet. Each bar's length sets its note: the shorter the bar, the higher it sounds. The name comes from the Greek for “wood” and “sound”.\n\nThis toy one has eight colored bars, a scale from C up to the next C. Tap a bar and the mallet swings over and strikes it, and the bar jumps and plays its note, so you can play a tune. Tap the mallet, a wheel or the ends of the frame instead, and it plays the whole scale.",
   },
   // ---- Vehicles -------------------------------------------------------------------------
-  helicopter: { howTo: "Tap to take off; tap again to land." },
-  ufo: { howTo: "Tap to switch the beam off or on." },
+  rocket: {
+    howTo: "Tap it to launch the rocket.",
+    about:
+      "A rocket flies by pushing hot gas out of its engine very fast. As the gas rushes down, it pushes the rocket up, just as a balloon zooms off when you let its air out. A rocket carries its own oxygen to burn its fuel, so unlike a plane it can fly where there is no air at all, out in space.\n\nTap it to launch: the arm of the tower swings away, the engine lights, clouds of smoke billow across the pad, and the rocket shakes, lifts off and climbs faster and faster until it is gone. Then a new one stands ready on the pad. Pick its color in the Toy tab.",
+  },
+  helicopter: {
+    howTo: "Tap to take off; tap again to land.",
+    about:
+      "A helicopter lifts itself with a big rotor on top: its long blades are thin, spinning wings. By tilting the blades, the pilot can fly up, down, forward, backward or sideways, or hover in one place. The small rotor on the tail stops the body from spinning around the other way.\n\nIts rotors are always turning. Tap to take off: it lifts into the air, tips its nose down a little and hovers, bobbing gently. Tap again to land. Pick its color in the Toy tab. Helicopters can land in places planes cannot, so they are used for rescues at sea and in the mountains.",
+  },
+  "hot-air-balloon": {
+    howTo: "Tap it to fire the burner: the balloon swells and climbs.",
+    about:
+      "A hot-air balloon flies because hot air is lighter than the cool air around it. A burner under the big fabric envelope heats the air inside, and the balloon floats up; as the air cools, it sinks again. Pilots can only go up and down, so they steer by finding winds at different heights that blow the way they want to go. The first people to fly in a hot-air balloon took off in Paris in 1783.\n\nTap it to fire the burner: a big flame roars, the envelope swells and glows warm, and the balloon climbs well up, then drifts back down. Pick stripes or a rainbow, and two colors, in the Toy tab.",
+  },
+  "steam-train": {
+    howTo: "Tap it to blow the whistle.",
+    about:
+      "A steam locomotive burns coal or wood to boil water in a long boiler. The steam pushes pistons back and forth, and rods turn that push into the turning of the big driving wheels. The first steam locomotive to pull a train on rails ran in Wales in 1804, and for more than a hundred years steam trains carried people and goods around the world.\n\nThe engine puffs smoke from its chimney. Tap it to blow the whistle: a jet of white steam shoots up from the whistle and a big cloud billows from the chimney. Pick the color of the engine in the Toy tab.",
+  },
+  "ocean-liner": {
+    howTo: "Tap it to sound the horn.",
+    about:
+      "An ocean liner is a big passenger ship that sailed on a regular route, or line, across an ocean. Before airliners, liners were the way to cross the Atlantic, and the fastest took about five days. The largest carried thousands of people, with dining rooms, lounges and decks for walking.\n\nThe liner rocks gently on the waves, smoke drifting from its funnels. Tap it to sound the horn: steam blasts from the horn and the funnels smoke harder. Pick the color of the funnels in the Toy tab. A ship's horn is deep and loud so that other ships can hear it from miles away, even in fog.",
+  },
+  "sports-car": {
+    howTo: "Tap it to rev the engine.",
+    about:
+      "A sports car is a small, light car with a powerful engine, built for speed and for taking corners well. It sits low to the ground, which helps it stay steady, and the wing on its back works like an upside-down airplane wing: at speed, the air pushes the car down onto the road, so its tires grip better.\n\nTap it to rev the engine: the car rocks on its springs, the wheels spin and a puff of exhaust shoots out of the back. In the Toy tab, pick its color and turn its racing stripes on or off.",
+  },
+  bus: {
+    howTo: "Tap it to stop for passengers: the lights flash and the doors open.",
+    about:
+      "A bus carries many people along a set route, stopping to let them on and off. In the United States and Canada, school buses are painted a bright yellow that is easy to see, and when they stop, red lights flash and a stop sign swings out so that traffic waits while children cross. Double-decker buses have two floors, and they are a famous sight in London.\n\nTap it: the school bus stops, its warning lights flash, the stop sign swings out and the doors open onto the lit doorway, then everything folds away again. Pick the school bus or a double-decker, which flashes its lights and opens its middle door, in the Toy tab.",
+  },
+  "propeller-plane": {
+    howTo: "Tap it to loop the loop.",
+    about:
+      "This propeller plane is a biplane: it has two sets of wings, one above the other, held together by struts and wires. Two wings give a lot of lift for a light, slow plane. The spinning propeller at the front pulls it through the air. The first airplane to fly with a pilot, the Wright brothers' Flyer of 1903, was a biplane too.\n\nTap it to loop the loop: it climbs, flies up and over on its back in a big circle, and comes out level again. Pick the colors of the body and the wings in the Toy tab.",
+  },
+  jet: {
+    howTo: "Tap it to climb and bank left, then right.",
+    about:
+      "A jet airliner is a big passenger plane driven by jet engines. Each engine sucks in air, squeezes it, burns fuel in it and blasts it out of the back, pushing the plane forward. Airliners cruise about 10 to 12 kilometers (6 to 7 miles) high, where the thin air lets them fly fast while burning less fuel.\n\nTap it and it climbs nose up while banking hard to the left, then hard to the right. Banking means tilting the wings: a plane turns by leaning into the turn, just as a bicycle does. Pick the color of the tail in the Toy tab.",
+  },
+  sailboat: {
+    howTo: "Tap it for a gust of wind: it heels over, then rocks back upright.",
+    about:
+      "A sailboat is pushed along by the wind in its sails. A sail works like a wing, so a sailboat can even sail at an angle toward the wind. Under the water, a heavy fin called a keel stops the boat from sliding sideways and keeps it from tipping over.\n\nTap it for a big gust: the boat heels over, leaning far to one side, with spray flying at the bow and the stern, then it rocks back upright. Sailors lean out over the high side to help hold the boat up. Pick the colors of the sails and the stripe in the Toy tab.",
+  },
+  submarine: {
+    howTo: "Tap it to dive; then it surfaces and raises its periscope.",
+    about:
+      "A submarine is a ship that can travel underwater. To dive, it lets seawater into big tanks, making it heavy enough to sink; to come back up, it blows the water out with compressed air. A periscope, a long tube with mirrors inside, lets the crew see above the surface while the submarine stays hidden below.\n\nTap it to dive: the periscope drops, bubbles rush from the hull and it sinks under the water. Then it rises back to the surface and raises its periscope again. Pick its color in the Toy tab.",
+  },
+  bicycle: {
+    howTo: "Tap it to ring the bell and spin the wheels.",
+    about:
+      "A bicycle has two wheels, one behind the other, and pedals that turn a chain, which turns the back wheel. It stays up while it moves, because the rider keeps steering the front wheel a little under the bike, balancing it without thinking. The first bicycles with pedals were built in France in the 1860s.\n\nTap it: the bell shakes and rings, the wheels spin through five fast turns, and the pedals go around twice. Bicycles are among the most efficient ways to travel ever invented: a rider uses less energy to go a mile than a walker does. Pick the color of the frame in the Toy tab.",
+  },
+  tractor: {
+    howTo: "Tap it to make it chug: it shakes and puffs smoke.",
+    about:
+      "A tractor is a strong farm machine for pulling heavy things: plows, trailers and all kinds of tools. Its big back wheels have deep treads to grip soft, muddy ground, and its small front wheels steer. Tractors are built for pulling power, not speed.\n\nIts wheels turn slowly and smoke rises from its exhaust pipe. Tap it to make it chug: the engine shakes the tractor, the wheels turn faster and thick puffs of smoke rise from the pipe. Pick its color in the Toy tab. Before tractors, farmers used horses and oxen to pull their plows.",
+  },
+  ufo: {
+    howTo: "Tap to switch the beam off or on.",
+    about:
+      "A flying saucer is an imaginary spaceship from science fiction, shaped like a round, flat saucer. The name was first used in 1947, after a pilot said he had seen shiny objects skimming across the sky. Anything seen in the sky that no one can identify is called a UFO, an unidentified flying object; most turn out to be planes, balloons, birds or bright planets.\n\nThis saucer hovers over a field with its rim lights turning, and its glowing beam lifts a cow into the air. Tap to switch the beam off, and the cow settles back on the grass; tap again to switch it on.",
+  },
 
   // ---- Landmarks ------------------------------------------------------------------------
   "eiffel-tower": {
