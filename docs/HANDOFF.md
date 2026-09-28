@@ -26,11 +26,20 @@ work is in [OPERATING.md](OPERATING.md).
   and the snail and American football fixes. Lane Fix3 merged the same night (#54): the bananas
   without the loose crown and the ocean wave's smooth collapse. The owner approved every clip of
   both. Lane AI's drawing pad for a toy's input panel is merged too (#56, an engine PR).
-- The shelf has 291 toys (32 scans, 4 shapes and 255 kit toys). The plan (`tools/toy-plan.json`,
-  [TOY-PLAN.md](TOY-PLAN.md)): all 291 keep. Every planned new tap effect is built. Scene schema v3;
+- Lane AI merged on 2026-09-28 (#52): a new "AI and computing" shelf of twelve toys (perceptron,
+  multilayer perceptron, neural network, CNN, RNN, transformer, looped transformer, diffusion model,
+  gradient descent, word vectors, sorting machine, half adder), with 3D models, a network you size
+  yourself, the classic encoder-decoder transformer, a CNN you draw on, real word vectors and eight
+  sorting algorithms. The owner approved every clip after four rounds.
+- Lane Help merged the same night (#57): when a toy opens, a short "how to play" line shows beside
+  it and fades; a "?" button shows it again; "About this toy" heads the About tab. The texts live in
+  `src/toy-help.js` (88 how-to lines and 13 About texts so far); a toy without its own line gets one
+  built from its recipe. Two text lanes now write the rest (below).
+- The shelf has 303 toys (32 scans, 4 shapes and 267 kit toys). The plan (`tools/toy-plan.json`,
+  [TOY-PLAN.md](TOY-PLAN.md)): all 303 keep. Every planned new tap effect is built. Scene schema v3;
   v2 still loads.
 - Every kit toy's tap is checked by `tests/taps.spec.mjs`; its known exceptions (with reasons) are
-  listed at its top. The full suite has 164 tests.
+  listed at its top. The full suite has 250 tests.
 - The governance from September 27 is merged (#53): the Operator runs the lanes, workers are Opus
   5.5 only, new public text is in American English (`tools/us-english.mjs`), and the sound review
   runs on the Sound Board. Splashery's own code is MIT licensed (#51, `LICENSE`); assets keep their
@@ -42,18 +51,18 @@ work is in [OPERATING.md](OPERATING.md).
 
 The full table, with owned files, sessions, branches and PRs, is [WORKSTREAMS.md](WORKSTREAMS.md).
 
-| Lane                        | Status                               | Handoff                            |
-| --------------------------- | ------------------------------------ | ---------------------------------- |
-| Operator                    | Running; runs the lanes              | —                                  |
-| AI: AI and computing        | Running (started September 27, 2026) | [handoff/AI.md](handoff/AI.md)     |
-| Help: toy help              | Running (started September 28, 2026) | [handoff/Help.md](handoff/Help.md) |
-| Next (WORKSTREAMS.md, Next) | Help text, sound review, pianos…     | —                                  |
+| Lane                                         | Status                               | Handoff                                      |
+| -------------------------------------------- | ------------------------------------ | -------------------------------------------- |
+| Operator                                     | Running; runs the lanes              | —                                            |
+| HelpTextA: help text, science and nature     | Running (started September 28, 2026) | [handoff/HelpTextA.md](handoff/HelpTextA.md) |
+| HelpTextB: help text, everyday, play, places | Running (started September 28, 2026) | [handoff/HelpTextB.md](handoff/HelpTextB.md) |
+| Next (WORKSTREAMS.md, Next)                  | Sound review, pianos and songs…      | —                                            |
 
-E4-finish, E5, E6a, E6b, F, G, Math and Fix3 are done (WORKSTREAMS.md, "Done"). On September 27,
-2026 the owner approved the plan in Part 1 of the How Splashery Is Made page: the Operator runs the
-lanes, workers are Opus 5.5 only (at the default effort, a trial), new public text is in American
-English, and the work goes in the order in ROADMAP.md, "Now". Lanes AI and Math started that day,
-and the Sound Board has its review features, ready for the owner's sound notes.
+E4-finish, E5, E6a, E6b, F, G, Math, Fix3, AI and Help are done (WORKSTREAMS.md, "Done"). On
+September 27, 2026 the owner approved the plan in Part 1 of the How Splashery Is Made page: the
+Operator runs the lanes, workers are Opus 5.5 only (at the default effort, a trial), new public text
+is in American English, and the work goes in the order in ROADMAP.md, "Now". Lanes AI and Math
+started that day, and the Sound Board has its review features, ready for the owner's sound notes.
 
 The owner reviewed the AI and Math clips the same day
 ([reviews/2026-09-27-ai-math](reviews/2026-09-27-ai-math/review.md)): seven good, and extras for the
@@ -61,9 +70,10 @@ rest (3D versions beside the 2D "poster" ones, a second transformer diagram, MLP
 on, word vectors for any words, more sorting algorithms, your own settings and Fourier text). His
 notes on the bananas' stem and the ocean wave's collapse went to lane Fix3. He also asked for toy
 help (a how-to line when a toy opens and an About tab), now step 2 of the plan. Math and Fix3 merged
-after his later rounds. Lane AI is on its fourth round: its floating 3D models and the classic
-transformer need readable, sharper labels, and the transformer's key moves off the toy into the
-panel (his notes of September 28 on the Effect review page).
+after his later rounds; AI after its fourth, when its labels became readable and sharper and the
+classic transformer's key moved off the toy into the Toy tab. The two help text lanes write a how-to
+line and an About text for every toy; the owner reads and marks them on the Help Board (a new page,
+OPERATING.md, "Pages").
 
 ## Where things are
 
@@ -78,8 +88,8 @@ panel (his notes of September 28 on the Effect review page).
 - [reviews/](reviews/): the owner's reviews, word for word, with screenshots.
 - [BACKLOG.md](BACKLOG.md), [ROADMAP.md](ROADMAP.md), [SCENE-SCHEMA.md](SCENE-SCHEMA.md),
   `CREDITS.md`, `LICENSES.md`, `README.md` (features and code layout).
-- The private pages (Effect review, Sound Board, Toy Plan, Toy Ideas, Parallel Plan, Operator
-  Manual, How Splashery Is Made): links in OPERATING.md, "Pages".
+- The private pages (Effect review, Sound Board, Help Board, Toy Plan, Toy Ideas, Parallel Plan,
+  Operator Manual, How Splashery Is Made): links in OPERATING.md, "Pages".
 - The Operator's daily routines (from 2026-09-27, Eastern time): three toy ideas on the Toy Ideas
   page at 7:43, then the owner's digest at 7:54.
 

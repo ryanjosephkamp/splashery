@@ -398,6 +398,7 @@ src/kit.js, packs/              the toy kit and the recipe packs
 src/motion.js, patterns.js      whole-toy motion, parts and controls; the pattern layer
 src/sound.js, voices.js         WebAudio output and the voice library (sound specs)
 src/toy-sounds.js               every toy's own sound spec
+src/toy-help.js                 every toy's how-to line and About text (toy help)
 src/rig.js, rigs.js, rig-fx.js  rigs: parts, colour keys, effects and add-ons for scans and shapes
 src/font.js                     5x7 bitmap font (storybook pages, speech bubble)
 src/chess.js                    chess rules, SAN and PGN (the chess set's games)
