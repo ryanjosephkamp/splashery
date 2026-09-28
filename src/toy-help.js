@@ -205,6 +205,133 @@ export const TOY_HELP = {
       "A tiny, made-up planet with blue seas, green and sandy land and white clouds, built by the computer from a sphere and a palette of planet colors. It is a tribute to the very first version of Splashery.\n\nTap it and the clouds race once around the planet while a band of night sweeps across it. Day and night happen because a planet spins: at any moment, the half facing its star has day and the other half has night. Earth turns once about every 24 hours.",
   },
 
+  // ---- Balls ----------------------------------------------------------------------------
+  basketball: {
+    howTo: "Tap it to dribble it, then spin it on a fingertip.",
+    about:
+      "A basketball is a bouncy ball with a pebbled skin for grip and dark grooves, called channels, running around it. The game was invented in 1891 by James Naismith, a teacher in Springfield, Massachusetts, who nailed up two peach baskets as the first hoops.\n\nTap it for three fast, low dribbles, then a toss onto the fingertip of a robot hand, where it spins until the hand drops away and it bounces down. A full-size ball is about 75 centimeters (29.5 inches) around. Pick its color in the Toy tab.",
+  },
+  "soccer-ball": {
+    howTo: "Tap it for keepy-uppy: three kicks in the air, then it bounces to a stop.",
+    about:
+      "The classic soccer ball is stitched from 32 panels: 12 black pentagons and 20 white hexagons, a shape mathematicians call a truncated icosahedron. In most of the world the game is called football, and it is the most popular sport on Earth.\n\nTap it for keepy-uppy, the trick of keeping the ball in the air with your feet: three small kicks, each with its own spin, the last one higher, then it drops and bounces lower each time until it settles. Pick the colors of the panels and the base in the Toy tab.",
+  },
+  "american-football": {
+    howTo: "Tap it to throw a spiral pass.",
+    about:
+      "An American football is a pointed oval ball of leather with a row of white laces along one side for the fingers to grip. It is often called a pigskin, though today it is made of cowhide or rubber.\n\nTap it to throw a spiral: it flies up nose first, spinning fast around its long middle line, tips over at the top and lands with a wobble. The spin is what makes a good pass: like a spinning top, a spinning ball holds its direction and cuts cleanly through the air. Pick the color of the leather in the Toy tab.",
+  },
+  "tennis-ball": {
+    howTo: "Tap it to slam it down and watch it bounce high.",
+    about:
+      "A tennis ball is a hollow rubber ball filled with air under pressure and covered in fuzzy felt. The felt slows the ball in the air and helps the racket's strings grip it for spin. Bright yellow balls came in during the 1970s, because they are easier to see on television.\n\nTap it and it is slammed onto the floor: it squashes hard, shoots up high with topspin, the fuzz fluffing out at each hit, and bounces a little lower each time. Pick the color of the felt in the Toy tab.",
+  },
+  baseball: {
+    howTo: "Tap it to pitch a curveball and hit it back.",
+    about:
+      "A baseball has a small cork and rubber center, wound with long strands of yarn and covered with two figure-eight pieces of white leather. They are sewn together with 108 double stitches of red thread.\n\nTap it and it is pitched as a curveball: it spins hard, and the spin makes the air push it down and to the side late in its flight, which is why curveballs are so hard to hit. Then the crack of a bat sends it looping back to its spot. A fast pitch reaches the batter in less than half a second.",
+  },
+  softball: {
+    howTo: "Tap it to pitch it underhand in a slow, high arc.",
+    about:
+      "A softball is bigger than a baseball, about 30 centimeters (12 inches) around, and in spite of its name it is not soft. The game was first played indoors in Chicago in 1887, and today it is played all over the world.\n\nIn softball the pitcher throws underhand, swinging the arm down and forward past the hip. Tap it and it is pitched just like that: a swing back and through, then a high, slow arc with a little backspin. It lands with a soft thud, hardly bounces, and a gentler toss brings it back.",
+  },
+  "beach-ball": {
+    howTo: "Tap it to toss it up and watch it float down.",
+    about:
+      "A beach ball is a thin plastic ball blown up with air, usually with bright stripes of color. It weighs so little for its size that the air slows it down almost at once, which makes it easy and safe to play with.\n\nTap it and it is punched up: it rises, slows, then floats down slowly, drifting and turning lazily, lands softly with a wobble and bobs to a stop. Pick its three colors in the Toy tab. Air pushes on every ball as it moves, but a light, big ball like this one feels it the most.",
+  },
+  "golf-ball": {
+    howTo: "Tap it to chip it; the backspin pulls it back.",
+    about:
+      "A golf ball is small and hard, covered in hundreds of little dents called dimples. The dimples help it fly: they stir up a thin layer of air around the ball, which lets it slip through the air more easily, so it flies about twice as far as a smooth ball would.\n\nTap it for a chip, a short, high shot played close to the hole. It pops up with heavy backspin, lands, checks with a tiny hop, and then the spin grips the ground and pulls it back to where it started.",
+  },
+  "rugby-ball": {
+    howTo: "Tap it to punt it end over end.",
+    about:
+      "A rugby ball is a big oval ball, rounder and larger than an American football. Rugby is named after Rugby School in England, where the game grew up in the 1800s. Players may only pass the ball backward or sideways with their hands, but they can kick it forward.\n\nTap it for a punt, a kick of the ball dropped from the hands: it tumbles end over end, up and down, lands on a point and takes an odd, awkward bounce before settling, as oval balls do. Pick the color of its bands in the Toy tab.",
+  },
+  volleyball: {
+    howTo: "Tap it to set it up and spike it down.",
+    about:
+      "A volleyball is a light ball of smooth leather panels. Volleyball was invented in 1895 by William G. Morgan, a teacher in Holyoke, Massachusetts. Each team may touch the ball three times before sending it back over the net.\n\nTap it for a set and a spike, the classic attack: a soft touch sends it straight up without spin, then a spike drives it down hard with topspin, so it slams into the floor, kicks up high and bounces out. Pick its two colors in the Toy tab.",
+  },
+  "water-polo-ball": {
+    howTo: "Tap it to toss it into the water and watch it bob.",
+    about:
+      "Water polo is a team game played in a swimming pool, often in water too deep to stand in, so the players tread water the whole time. Its ball is about the size of a soccer ball, with a grippy, bumpy rubber skin so it can be held in one wet hand.\n\nTap it and it is tossed up and plunges into the water with a splash. Because it is full of air it pops straight back up, then bobs on the surface, sending out rings of ripples that spread and fade.",
+  },
+  "ping-pong-ball": {
+    howTo: "Tap it to flick it up and let it bounce to a buzz.",
+    about:
+      "A ping-pong ball, used in table tennis, is a hollow plastic ball 40 millimeters across that weighs less than 3 grams, about as much as a small coin. The name ping-pong comes from the sound it makes on the bat and the table.\n\nTap it and it is flicked up, then bounces on and on, each bounce a little lower and quicker, with a tik for every one, until it buzzes to a stop. A light, springy ball keeps most of its speed at each bounce. Pick a white or an orange ball in the Toy tab.",
+  },
+  "cricket-ball": {
+    howTo: "Tap it to flick it seam up; it skids with backspin, then rolls home.",
+    about:
+      "A cricket ball is a hard ball with a cork center, wound tight with string and covered in leather. A raised seam of stitching runs around its middle. Red balls are used in long matches that can last days, and white ones in shorter games.\n\nBowlers hold the ball with the seam upright, because a seam that lands upright can jump sideways off the ground. Tap it for a seam-up flick: the seam stands tall while the ball spins backward, then it comes down, skids on with its backspin until the spin grips, and rolls home.",
+  },
+  "bowling-ball": {
+    howTo: "Tap it to bowl it down the lane with a hook.",
+    about:
+      "A bowling ball is a heavy ball with three finger holes, rolled down a long wooden or plastic lane at ten pins. The heaviest balls allowed weigh 16 pounds (about 7 kilograms).\n\nTap it to bowl it: it drops onto the lane with a thud, rolls away straight and then hooks across, the finger holes turning over as it goes; the pins crash far off, and it rolls back home. Good bowlers spin the ball so it curves into the pins from the side, which knocks down more of them. Pick its two colors in the Toy tab.",
+  },
+  "pool-ball": {
+    howTo: "Tap it for a draw shot: it slides out and spins back. Pick its number in the Toy tab.",
+    about:
+      "Pool is played on a cloth-covered table with pockets. A set has a white cue ball and 15 numbered balls: 1 to 8 are solid colors and 9 to 15 have stripes, and the 8 ball is black. Players hit the cue ball with a long stick, the cue, to knock the others into the pockets.\n\nTap it for a draw shot: struck low, it slides forward while spinning backward, stops, and the backspin pulls it back until it rolls home. Pick the cue ball or any of the 15 numbers in the Toy tab.",
+  },
+  pickleball: {
+    howTo: "Tap it to pop it up off a paddle.",
+    about:
+      "Pickleball is a game played with solid paddles and a light plastic ball full of holes, over a low net on a small court. It was invented in 1965 on Bainbridge Island, near Seattle in Washington, by three fathers looking for a game for their families.\n\nTap it and an unseen paddle pops it up twice. The holes make the ball slow down fast in the air, and it wobbles as it flies instead of spinning much. It lands with a hollow click and a small, dead bounce. Pick its color in the Toy tab.",
+  },
+  dodgeball: {
+    howTo: "Tap it to slam it down and watch it squash.",
+    about:
+      "A dodgeball is a soft, light ball of rubber or foam, made to be thrown at other players in a game of dodging, catching and throwing. It is soft so that it does not hurt when it hits.\n\nTap it and it is lifted and slammed down: the soft rubber squashes flat and wobbles, then it bounces up again and squashes at each landing. A soft ball squashes more than a hard one, and it loses more of its bounce while it is squashed. Pick its color in the Toy tab.",
+  },
+  "medicine-ball": {
+    howTo: "Tap it to heave it up and drop it with a thud.",
+    about:
+      "A medicine ball is a heavy ball for exercise, used for throwing, catching and lifting to build strength. Most weigh from about 1 to 10 kilograms (2 to 20 pounds), and they are made of leather, rubber or tough cloth, often with a grippy surface.\n\nTap it and it is heaved up just a little, slowly, because it is heavy. It drops with a heavy thud and a big, slow squash, does not bounce at all, and a puff of dust spreads out across the floor.",
+  },
+  "lacrosse-ball": {
+    howTo: "Tap it to slam it down; it bounces hard and fast.",
+    about:
+      "A lacrosse ball is a small ball of solid, hard rubber. In lacrosse, players catch, carry and throw it with a stick that has a net pocket on the end. The game began with the Indigenous peoples of North America, who played it long before Europeans arrived.\n\nTap it and it is slammed down: it rockets up and bounces hard and fast, keeping more of its speed at each bounce than any other ball on the shelf. Solid rubber stores the energy of a bounce and gives most of it back. Pick its color in the Toy tab.",
+  },
+  "squash-ball": {
+    howTo: "Tap it to warm it up; the warmer it gets, the higher it bounces.",
+    about:
+      "A squash ball is a small, hollow rubber ball that hardly bounces when it is cold. Players hit it against the walls of the court for a few minutes to warm it up: as the rubber and the air inside warm, the ball gets bouncier. The ball for the best players has two yellow dots and is the least bouncy of all.\n\nTap it and see: cold, it is dropped and barely bounces. Hit over and over, it warms, glows faintly and bounces higher and faster. Left alone, it bounces out and cools again.",
+  },
+  "bouncy-ball": {
+    howTo: "Tap it to throw it down and watch it ricochet.",
+    about:
+      "A bouncy ball is a small ball of very springy, hard rubber. It gives back almost all the energy of each bounce, so it can bounce nearly as high as it was dropped from. The first ones of this kind were made in the 1960s by a chemist experimenting with new rubbers.\n\nTap it and it is thrown down hard: it ricochets all over the floor, keeping nearly all its speed, its spin flipping at every bounce, then comes home and settles. Pick its three colors in the Toy tab.",
+  },
+  marble: {
+    howTo: "Tap it to roll it around a little circle.",
+    about:
+      "A marble is a small, hard ball, usually of glass, with twists of color inside. Children have played games with little balls of clay and stone for thousands of years; glass marbles became common in the 1800s. A twist of colored glass is set in the middle of the ball while the glass is hot and soft.\n\nTap it and it rolls around a little circle, turning the way it rolls, so the swirl inside turns too. After one lap it is back exactly as it was. Pick the color of the swirl in the Toy tab.",
+  },
+  "hockey-puck": {
+    howTo: "Tap it for a slap shot across the ice.",
+    about:
+      "A hockey puck is a flat disk of hard black rubber, 3 inches (about 7.6 centimeters) across and 1 inch thick. In ice hockey, pucks are frozen before a game, so they bounce less and slide better on the ice.\n\nTap it for a slap shot, the hardest shot in hockey, when the player swings the stick back high and slaps the puck. Sparkling ice chips spray from where the stick hit, and the puck glides flat across the ice, spinning fast, around a wide loop and back to its spot.",
+  },
+  shuttlecock: {
+    howTo: "Tap it to hit it up; it flips over and floats down cork first.",
+    about:
+      "A shuttlecock, or shuttle, is used in badminton instead of a ball. It has a rounded cork base with a skirt of 16 feathers, or a plastic skirt. The skirt drags on the air, so the shuttle always turns to fly cork first and slows down quickly.\n\nTap it and it is hit up: it flips over cork first and flies up spinning, turns over at the top and floats back down cork first, spinning slower as it falls. Even so, a hard smash can send a shuttle off the racket faster than 400 kilometers (250 miles) an hour.",
+  },
+  "flying-disc": {
+    howTo: "Tap it to throw it around a loop and back.",
+    about:
+      "A flying disc is a plastic disc with a curled rim, thrown with a flick of the wrist. It flies like a spinning wing: its curved shape makes the air lift it, and its spin keeps it flat and steady, just as a spinning top stays upright.\n\nTap it to throw it: it spins fast and flat, tilts into a curve and glides around a loop, like a throw that comes back to you, then settles in its place. Pick its color in the Toy tab. The first plastic flying discs were sold in the late 1940s.",
+  },
+
   // ---- Space --------------------------------------------------------------------------
   sun: {
     howTo: "Tap it to set off a solar flare.",
@@ -708,70 +835,392 @@ export const TOY_HELP = {
   // ---- Food -----------------------------------------------------------------------------
   "ice-cream": {
     howTo: "Tap to melt it and refreeze it. Pick scoops and flavors in the Toy tab.",
+    about:
+      "Ice cream is a frozen mix of milk or cream, sugar and flavors. It is stirred while it freezes, so the ice crystals stay tiny and air is whipped in: up to half of a scoop of soft ice cream can be air, which is why it feels light and smooth.\n\nTap it and it melts: the scoops slump and drips run down the cone, then it freezes firm again. The Warmth slider in the Toy tab melts it slowly by hand. You can also pick one, two or three scoops and their flavors, and add sprinkles and a cherry.",
+  },
+  watermelon: {
+    howTo: "Tap it to chop it into slices that fan open.",
+    about:
+      "A watermelon is a big fruit that grows on a vine along the ground. Under its hard green rind is sweet red flesh dotted with black seeds, and it is about 92 percent water, which makes it a favorite on hot days. Watermelons were first grown in Africa thousands of years ago.\n\nTap it and a big knife chops the whole melon five times, then the six slices fan open like an accordion, showing the red flesh, the pale rind and the seeds, and fold shut again. Pick a whole melon, a wedge, or both in the Toy tab.",
   },
   "birthday-cake": {
     howTo: "Tap to blow out the candles; tap again to light them. Choose how many in the Toy tab.",
+    about:
+      "A birthday cake is a sweet, frosted cake with candles on top, often one for each year. People sing to the birthday person, who makes a wish and tries to blow out all the candles in one breath.\n\nThis cake starts with its candles lit. Tap to blow them out, with a puff of smoke from each wick, and tap again to light them. In the Toy tab, choose from one to nine candles, the colors of the frosting and the drip, and a vanilla, chocolate, red velvet or strawberry sponge. A candle flame needs air: blowing hard pushes the hot, burning gas away from the wick, and the flame goes out.",
   },
-  pancakes: { howTo: "Tap to flip the top pancake. Set the stack and the syrup in the Toy tab." },
-  pizza: { howTo: "Tap to take a slice; tap again to go back." },
-  burger: { howTo: "Tap to spread out the layers; tap again to stack them up." },
-  egg: { howTo: "Tap to crack it open; tap again to go back." },
-  coffee: { howTo: "Tap it to stir. Pick the latte art and the steam in the Toy tab." },
-  apple: { howTo: "Tap to take a bite; tap again and a worm peeks out before it's whole again." },
+  popcorn: {
+    howTo: "Tap it to pop more kernels up out of the bucket.",
+    about:
+      "Popcorn is a kind of corn whose kernels puff up when they are heated. Each kernel has a hard shell with a little water inside. When it gets hot, the water turns to steam, the pressure builds until the shell bursts with a pop, and the soft starch inside puffs out into a white, crunchy foam.\n\nTap it and fresh kernels pop up out of the striped bucket, tumble and land on the heap. People in the Americas were popping corn thousands of years ago, long before movie theaters.",
+  },
+  jelly: {
+    howTo: "Tap it to poke it and watch it wobble.",
+    about:
+      "A jelly, or gelatin dessert, is fruit juice or sweet flavored water set with gelatin and turned out of a mold. Gelatin makes a fine, stretchy mesh that traps the water, so the jelly holds its shape but wobbles when you touch it.\n\nThis one always jiggles a little. Tap it to poke it: it squashes and wobbles hard, then settles down. In the Toy tab, pick strawberry, lime, orange, blueberry, grape or rainbow, and choose whether it has fruit set inside.",
+  },
+  pancakes: {
+    howTo: "Tap to flip the top pancake. Set the stack and the syrup in the Toy tab.",
+    about:
+      "Pancakes are flat, round cakes made from a runny batter of flour, eggs and milk, cooked on a hot pan. Baking powder in the batter makes bubbles of gas, so they puff up soft and fluffy. When bubbles pop on the top, it is time to flip.\n\nTap it to flip the top pancake: it hops up, turns a full somersault in the air and lands back on the stack. In the Toy tab, set how many pancakes are in the stack, from two to seven, and try the Syrup slider.",
+  },
+  cupcake: {
+    howTo: "Tap it to flick the cherry up; it plops back down.",
+    about:
+      "A cupcake is a small cake baked in a paper cup, called a liner, and topped with swirls of frosting. Because it is small, it bakes quickly, and each person gets a whole cake of their own.\n\nTap it and the springy frosting flicks the cherry up: it tumbles and drops back with a plop, the frosting squashes and wobbles, and the sprinkles jump off and rain back down. In the Toy tab, pick the colors of the frosting and the liner, a vanilla, chocolate or red velvet cake, and the topping.",
+  },
+  lollipop: {
+    howTo: "Tap it to spin it fast; the swirl seems to pour inward.",
+    about:
+      "A lollipop is a hard candy on a stick. Swirl lollipops are made by twisting long ropes of soft, warm candy in different colors together and coiling them into a flat spiral before the candy cools and sets hard.\n\nIt turns slowly by itself. Tap it and the swirl whirls up to nearly three turns a second, so the spiral seems to pour inward toward the middle, then slows again. That is a trick of the eye: a turning spiral looks as if it is moving in or out. Pick its colors in the Toy tab.",
+  },
+  "candy-cane": {
+    howTo: "Tap it to twist it until it snaps, then watch it mend.",
+    about:
+      "A candy cane is a stick of hard peppermint candy bent into a hook, with red and white stripes, and it is often hung on trees in the Christmas season. The stripes are made by twisting ropes of red and white candy together while they are warm and soft.\n\nTap it and each cane twists, the hook turning and the stripes winding tighter, until it snaps with a crack. The top half springs clear, sugar chips fly, then the halves come back together and mend with a glint. Pick a pair with a bow or a single cane, and the stripe color, in the Toy tab.",
+  },
+  macarons: {
+    howTo: "Tap it and the two in front hop up onto the stack.",
+    about:
+      "A macaron is a small French sweet: two light, round cookies made of ground almonds, egg whites and sugar, stuck together with a creamy filling. The tops are smooth and domed, and each cookie has a frilly edge at the bottom, called the foot, that rises as it bakes.\n\nTap it and the two macarons in front hop, one after the other, up onto the stack and land with a soft tap. The tower of five sways, then they hop back down. Pick a pastel mix or one flavor in the Toy tab.",
+  },
   "gummy-bear": {
     howTo: "Drag the bear to stretch it; let go and it springs back. Tap to squish it.",
+    about:
+      "A gummy bear is a small, chewy candy shaped like a bear, made of sugar, fruit flavors and gelatin. Gelatin is what makes it stretchy and springy: it forms a mesh that bends and then pulls back. Gummy bears were first made in Germany in the 1920s.\n\nDrag any part of the bear and it stretches, up to about a body length, then springs back with a few wobbles when you let go. A drag beside it turns the view instead. Tap it for a jelly squish. Pick its flavor in the Toy tab, from cherry red to a clear pineapple.",
+  },
+  pretzel: {
+    howTo: "Tap it to twist it like a knot and let it spring back.",
+    about:
+      "A pretzel is a baked bread shaped from a long rope of dough into a loop with a twist in the middle. Before baking, it is dipped in a special bath of water and an alkali, such as lye or baking soda, which gives it its shiny, dark brown crust. Then it is sprinkled with coarse salt.\n\nTap it and it twists like a knot, all in one piece: its two sides wring opposite ways and its loops fold a little toward you. Let go, and it springs a little past its shape into the opposite twist and wobbles to a stop.",
+  },
+  croissant: {
+    howTo: "Tap it to slice it open and melt a pat of butter inside.",
+    about:
+      "A croissant is a flaky, crescent-shaped pastry; its name is the French word for crescent. The dough is folded around a slab of butter again and again, making dozens of thin layers. In the hot oven, the water in the butter turns to steam and puffs the layers apart, so the inside is soft and full of holes and the outside is crisp.\n\nTap it and it is sliced open along its middle. The top lifts and tips back like a lid, showing the soft layers inside, where a pat of butter melts and spreads. Then the top settles back down.",
+  },
+  pizza: {
+    howTo: "Tap to take a slice; tap again to go back.",
+    about:
+      "Pizza is a flat, round bread topped with tomato sauce and cheese and baked in a very hot oven. It comes from Naples, in Italy, and is now eaten all over the world. The margherita pizza, with red tomato, white mozzarella and green basil, shows the colors of the Italian flag.\n\nTap it to take a slice: it slides out with strings of melted cheese stretching behind it. Warm mozzarella stretches because the proteins in it line up in long, stringy strands. Tap again to put the slice back. Pick pepperoni, margherita, veggie or cheese in the Toy tab.",
+  },
+  burger: {
+    howTo: "Tap to spread out the layers; tap again to stack them up.",
+    about:
+      "A burger is a round patty of ground meat, or of vegetables, cooked and served in a sliced bun with toppings. The name comes from the city of Hamburg, in Germany. This one has a sesame bun, a patty, a slice of cheese, lettuce and tomato.\n\nTap it to spread out the layers in the air, one above the other, so every part shows, and tap again to stack them back up. Engineers call a picture like this an exploded view: it shows how the parts of a machine fit together without taking the real thing apart.",
+  },
+  sushi: {
+    howTo: "Tap it: the chopsticks pick up a piece and dip it in soy sauce.",
+    about:
+      "Sushi is a Japanese dish of rice mixed with a little vinegar and sugar, served with fish, vegetables or egg. This board has nigiri, a pillow of rice with a slice of fish draped on top, and maki, rice and a filling rolled up in a sheet of dried seaweed called nori and cut into rounds.\n\nTap it and the chopsticks lift off the board as if held by an invisible hand, pinch a piece with a click, carry it to a little dish of soy sauce and dip it twice, then set it back and lie down again.",
+  },
+  taco: {
+    howTo: "Tap it to break the shell in half; then it closes up again.",
+    about:
+      "A taco is a Mexican dish: a tortilla, a thin, round flatbread of corn or wheat, folded around a filling such as meat, beans, cheese, lettuce and salsa. People in Mexico have made corn tortillas for thousands of years. This one has a crunchy, fried corn shell.\n\nTap it and the shell snaps across the middle with a crunch. The halves pull apart and swing open like a book, showing the filling in each break, and bits spill onto the plate and bounce. Then they hop back in and the halves close.",
+  },
+  egg: {
+    howTo: "Tap to crack it open; tap again to go back.",
+    about:
+      "A soft-boiled egg is cooked in its shell in boiling water for only a few minutes, so the white sets firm but the yolk stays runny. It is served in an egg cup, with strips of toast for dipping into the yolk.\n\nTap it to crack it open: the top of the shell pops off, and the runny yolk shows and drips down the side. Tap again to put the top back. In the Toy tab, pick a brown or a white shell and the color of the egg cup. The color of a shell depends on the kind of hen that laid it; the egg inside is the same.",
+  },
+  coffee: {
+    howTo: "Tap it to stir. Pick the latte art and the steam in the Toy tab.",
+    about:
+      "Coffee is made from the roasted seeds, called beans, of the coffee plant, which first grew wild in Ethiopia. A latte is a strong shot of coffee topped with a lot of steamed milk. Pouring the milk foam carefully draws a picture on top, called latte art: a heart, a leafy rosetta or a tulip.\n\nTap it to stir: the latte art twists into a swirl, the middle turning further than the edge, then relaxes back, with a thick curl of steam. In the Toy tab, pick the latte art and the color of the cup, and try the Steam slider.",
+  },
+  apple: {
+    howTo: "Tap to take a bite; tap again and a worm peeks out before it's whole again.",
+    about:
+      "Apples grow on trees and come in thousands of kinds, from sharp green ones to sweet red and golden ones. The wild apple that most of them come from still grows in the mountains of Central Asia.\n\nTap it to take a bite: a chunk comes away, leaving a scalloped bite of pale flesh, and the apple stays bitten. Tap again and a little worm pokes out of the bite, looks about, ducks back in, and the apple grows whole again. Pick a red, green or golden apple in the Toy tab. The flesh of a cut apple turns brown in the air, much as a sliced potato does.",
+  },
+  banana: {
+    howTo: "Tap it to pull the bananas apart and peel all three.",
+    about:
+      "Bananas grow in big hanging bunches on giant plants that look like trees but are not: the trunk is made of tightly rolled leaves. A banana is picked green and turns yellow as it ripens, and then brown spots appear as its starch turns to sugar and it gets sweeter.\n\nTap it and the three bananas pull apart. Each is peeled from its tip: its skin splits into three strips that curl back, showing the pale fruit. Then the strips fold back up and the bunch comes together. Pick green, just right or spotty bananas in the Toy tab.",
+  },
+  orange: {
+    howTo: "Tap it to open it into eight wedges, like a flower.",
+    about:
+      "An orange is a citrus fruit. Its bright peel is dotted with tiny pockets of fragrant oil, and inside, the fruit is divided into segments packed with little sacs of juice. Oranges are full of vitamin C, and they were first grown in southern China and Southeast Asia.\n\nTap it and the whole orange opens like a flower: eight wedges fall open outward, one just after another, showing their juicy faces, while juice squirts up out of the middle. Then it closes up again. Pick a whole orange, a half, or both in the Toy tab.",
+  },
+  kiwi: {
+    howTo: "Tap it to cut it open and show the green inside.",
+    about:
+      "A kiwifruit is a small fruit with thin, fuzzy brown skin and bright green flesh around a pale core ringed with tiny black seeds. It first grew wild in China. Farmers in New Zealand made it popular and named it after the kiwi, their fuzzy brown national bird.\n\nTap it and the whole kiwi is cut across the middle; the halves slide apart and turn to show their green faces and the ring of seeds, then close up again. Pick a whole kiwi, a half, or both in the Toy tab.",
+  },
+  pineapple: {
+    howTo: "Tap it to slice it into rings.",
+    about:
+      "A pineapple is a tropical fruit with a tough, scaly skin and a spiky crown of leaves. It is really many small fruits grown together: each scale on the skin comes from a single flower. Pineapples first grew in South America, and a crown twisted off and planted can grow a whole new plant.\n\nTap it for four chops, top first. With each chop, everything above lifts and leans toward you, until five rings stand apart in a leaning stack, showing their golden flesh and pale cores. Then they drop back onto each other.",
+  },
+  cherries: {
+    howTo: "Tap it to swing the cherries apart; they knock back together.",
+    about:
+      "Cherries are small, round fruits that grow on trees, often in pairs whose long stems are joined at the top. Each cherry has one hard stone in the middle with the seed inside, so it is called a stone fruit, like a plum or a peach.\n\nTap it and a flick swings the two cherries apart on their own stems. They swing back and knock together with a plink, bouncing apart again and again until they settle, while the joint of the stems bobs.",
+  },
+  grapes: {
+    howTo: "Tap it: grapes drop off the bunch, bounce and hop back.",
+    about:
+      "Grapes grow in bunches on woody vines, from a few dozen to a few hundred on a bunch. They come in purple, green and red, and people eat them fresh, dry them into raisins and press them for juice.\n\nTap it and ten grapes on the front come off one after another, drop and bounce on the table and roll a little, each on its own path, then hop back up to their places one by one. Pick purple, green or red grapes in the Toy tab. The Photoreal shelf has a real grape that peels.",
+  },
+  avocado: {
+    howTo: "Tap it to pop the stone into the other half and back.",
+    about:
+      "An avocado is a fruit with a bumpy green skin, soft, creamy green flesh and one big, round stone in the middle, which is its seed. It first grew in Mexico and Central America. Avocados are unusual: they do not ripen on the tree, only after they are picked.\n\nTap it and the stone pops out of its half, flies over and drops into the empty half with a thock, rocking it, then pops back home and the first half rocks. Pick both halves, or just the half with the stone, in the Toy tab.",
   },
 
   // ---- Toys -----------------------------------------------------------------------------
   bricks: {
     howTo: "Tap to build a model from the bricks; tap again to build another.",
+    about:
+      "Building bricks are small plastic blocks with round studs on top that press into tubes underneath the next brick, so they hold together firmly and can be pulled apart again. With enough of them you can build almost anything, and even six ordinary bricks can be stacked together in hundreds of millions of different ways.\n\nHere eighteen bricks lie spread out on the table. Each tap pops the last model apart and builds a new one in the middle, brick by brick from the bottom up, each clicking into place: a tower, a bridge, stairs, a dog or a tree. Pick a set of colors in the Toy tab.",
   },
-  dice: { howTo: "Tap to roll. Pick two six-sided dice or a d20 in the Toy tab." },
+  "rubber-duck": {
+    howTo: "Tap it to squeeze it: it squeaks, hops and bobs.",
+    about:
+      "A rubber duck is a little yellow bath toy that floats. The first ones were made of solid rubber; today most are hollow and made of soft plastic, with a small hole underneath. Squeeze one and the air rushes out through the hole with a squeak, and when you let go it sucks air back in.\n\nTap it to squeeze it: it squashes, squeaks and hops, then bobs and rocks as if it were floating in the bath, and settles down. Pick its color in the Toy tab.",
+  },
+  "spinning-top": {
+    howTo: "Tap it to spin it faster; it wobbles more, then steadies.",
+    about:
+      "A spinning top is one of the oldest toys in the world, played with in many lands for thousands of years. While it spins fast, it balances on its tiny point, because a spinning thing holds the direction of its spin. As it slows, it starts to wobble, and its handle traces a slow circle; scientists call that circling precession.\n\nThis top is always spinning. Tap it to spin it much faster: it tilts and circles more widely for a few seconds, then settles back to a steady spin. Pick one of three sets of colors in the Toy tab.",
+  },
+  dice: {
+    howTo: "Tap to roll. Pick two six-sided dice or a d20 in the Toy tab.",
+    about:
+      "Dice are small shapes with a number on each face, rolled to get a number by chance. A fair die lands on each face just as often as any other. On an ordinary six-sided die the opposite faces always add up to seven: 1 and 6, 2 and 5, 3 and 4.\n\nTap to roll: the dice tumble and land on new faces, so you can use them for a real game. In the Toy tab, pick two six-sided dice or a d20, a die with 20 triangle faces used in many tabletop games, and pick their color.",
+  },
   "newtons-cradle": {
     howTo: "Drag a ball out to the side and let go. Or tap to lift the end ball.",
     about:
       "Newton's cradle is a row of steel balls, each hung on two strings so it can only swing in one line. Lift the end ball and let go: it strikes the row, the ball at the far end flies out, and the balls in between barely move. Let go of two and two fly out.\n\nIt shows two rules of physics at once: in each knock both the momentum and the energy carry through the row, so the same number of balls leaves as arrived. Each clack turns a little energy into sound and heat, so the swings slowly die away. Drag any ball out (the balls beside it come too) and let go, or tap to lift the end ball.",
+  },
+  "teddy-bear": {
+    howTo: "Tap it and it waves hello.",
+    about:
+      "A teddy bear is a soft, stuffed toy bear. It is named after Theodore “Teddy” Roosevelt, a president of the United States: in 1902 a newspaper cartoon showed him sparing a young bear on a hunting trip, and soon toymakers in the United States and Germany were making stuffed bears.\n\nThis bear sways its head and arms a little. Tap it and it lifts one arm and waves hello, tipping its head, then puts its arm back down. Pick the color of its fur in the Toy tab.",
+  },
+  "yo-yo": {
+    howTo: "Tap it to throw it down; it spins down the string and climbs back up.",
+    about:
+      "A yo-yo is two disks joined by a short axle, with a string tied around the axle. Thrown down, it unwinds and spins fast; the spin keeps it steady, and a little tug on the string makes it wind itself back up into your hand. Children in ancient Greece played with yo-yos of wood, metal and clay.\n\nThis one bobs gently on its string. Tap it to throw it: it drops, spinning as the string unwinds, and then climbs back up the string to where it started. Pick its color in the Toy tab.",
   },
   "puzzle-cube": {
     howTo: "Drag across a face to turn a row or column. Tap to scramble or solve it.",
     about:
       "A twisting puzzle cube: 26 small cubes around a hidden core, with one color on each of its six faces. Each turn moves a whole row or column of nine cubes, and the puzzle is to bring every face back to one color.\n\nHere every little cube is its own piece, and the cube keeps track of each turn, so you can really solve it: drag across a face to turn that row or column. A tap scrambles a solved cube, or turns a scrambled one back to solved, one layer at a time, and solving it by hand earns a hop and a chime. The cube has about 43 quintillion arrangements, yet any of them can be solved in 20 moves or fewer.",
   },
+  "spring-toy": {
+    howTo: "Tap it to hurry it along; it flips end over end faster.",
+    about:
+      "A spring toy is a long, loose coil of metal or plastic that can walk down stairs by itself. Set one end on a lower step and it flips over, end over end, as each coil tips across in turn and the weight moves from one end to the other. It was invented in the 1940s by an engineer who saw a spring fall off a shelf and keep moving.\n\nThis one walks by itself, its coils flipping over from one side to the other. Tap it to hurry it along. Pick a rainbow, metal or pastel coil in the Toy tab.",
+  },
+  kite: {
+    howTo: "Tap it for a gust of wind: the kite loops and the tail whips.",
+    about:
+      "A kite is a light frame covered with paper or cloth that flies on the wind at the end of a long line. The wind pushing under the tilted kite lifts it up, and a tail helps keep it pointing the right way. Kites were first flown in China more than 2,000 years ago.\n\nTap it for a big gust: the kite climbs around a loop, turning once while it rises, and its tail whips behind it. The line stays tied on the whole time. Pick its two colors in the Toy tab.",
+  },
+  "paper-plane": {
+    howTo: "Tap it to do a barrel roll.",
+    about:
+      "A paper plane is a sheet of paper folded into a glider. It has no engine: once thrown, it slowly trades height for speed, and air flowing over its wings holds it up, while the weight at the pointed nose keeps it flying straight. Small folds at the back of the wings can make it climb, dive or turn.\n\nThis plane glides and bobs gently in place. Tap it and it does a barrel roll, one full turn around its long middle, while it lifts a little. In the Toy tab, pick the color of the paper, and choose lined paper or plain.",
+  },
+  "origami-crane": {
+    howTo: "Tap it to flap its wings.",
+    about:
+      "Origami is the Japanese art of folding a single square of paper into a shape, without cutting or gluing. The crane is its most famous model, folded with a long neck, a pointed tail and wide wings. In Japan, a string of a thousand folded cranes is a traditional wish for good health and for peace.\n\nTap it to flap its wings: they beat up and down a few times, as a real crane's do. Some paper cranes are folded so that the wings really flap when you pull the tail. Pick the color of the paper in the Toy tab.",
+  },
+  "balloon-dog": {
+    howTo: "Tap it to pop it; then it blows back up.",
+    about:
+      "A balloon dog is made from one long, thin balloon, twisted into a chain of bubbles and folded into a head, ears, a body, four legs and a tail. Each twist traps the air in its own bubble, so the shape holds.\n\nTap it and it pops: bits of rubber fly out and fall away. Then the dog blows back up, part by part, until it stands whole again. Pick the color of the balloon in the Toy tab.",
+  },
+  "soap-bubbles": {
+    howTo: "Tap it to blow a stream of bubbles.",
+    about:
+      "A soap bubble is a very thin skin of soapy water wrapped around some air. The skin pulls itself as small as it can, and the smallest skin that can hold the air is a sphere, so bubbles are round. The swirling colors come from light bouncing off the inside and outside of the skin, which is thinner than a hair.\n\nBubbles drift up slowly from the wand by themselves. Tap it to blow, and many more stream out faster, float away and fade. Pick the color of the wand in the Toy tab.",
+  },
+  robot: {
+    howTo: "Tap it to wind it up: its key whirs and its arms swing wide.",
+    about:
+      "A wind-up robot is a tin toy with a spring inside. Turning the key on its back winds the spring tight, and as the spring slowly unwinds, it turns little gears that swing the arms and move the legs. Wind-up tin robots were a favorite toy in the middle of the 1900s.\n\nThis robot always swings its arms a little, and its antenna light glows. Tap it to wind it up: the key spins fast, the arms swing wide and it rocks and bobs from side to side, then it slowly runs down again. Pick its color in the Toy tab.",
+  },
   "chess-set": {
     howTo: "Tap a piece, then a square, to move it. Or press play in the bar to watch a game.",
     about:
       "Chess is a game for two players on a board of 64 squares. Each side starts with 16 pieces (a king, a queen, two rooks, two bishops, two knights and eight pawns), and the goal is to checkmate the other king: to attack it so that it has no way out.\n\nThe board is set up for the Opera Game, played in Paris in 1858 at the opera house, where Paul Morphy beat the Duke of Brunswick and Count Isouard in 17 moves. Press play in the bar under the board to watch it, or tap a piece and then a square to play your own moves. In the Toy tab you can open or paste any game written in PGN, the usual way of writing down chess games.",
   },
-
   // ---- Open me --------------------------------------------------------------------------
-  chest: { howTo: "Tap to open the lid; tap again to close it." },
-  book: { howTo: "Tap to close the book; tap again to open it." },
+  chest: {
+    howTo: "Tap to open the lid; tap again to close it.",
+    about:
+      "A treasure chest is a strong wooden box with metal bands, a heavy lid and a lock, made to keep coins, jewels and other precious things safe. Long ago, before banks were common, people kept their valuables in chests like this, and ships carried money and goods in them.\n\nTap it to open the lid and see the heap of gold coins and bright jewels inside, and tap again to close it. Pick the color of the wood in the Toy tab.",
+  },
+  book: {
+    howTo: "Tap to close the book; tap again to open it.",
+    about:
+      "A storybook is a book of stories, with pages of words and often pictures. A book like this, with pages sewn together along one edge between two hard covers, is a way of keeping writing that people have used for about two thousand years. Printing with movable metal type, which made books much cheaper, began in Europe in the 1450s.\n\nThe book starts open. Tap to close it: the pages turn over one by one and the cover shuts. Tap again to open it. Pick the color of the cover in the Toy tab.",
+  },
   laptop: {
     howTo:
       "Tap the keys, or type on your keyboard. Drag on the trackpad. Tap elsewhere to close it.",
+    about:
+      "A laptop is a computer small enough to carry and use on your lap. Its screen is in the lid, and the base holds the keyboard, a touch pad called a trackpad, and a battery. The order of the letters on the keyboard, starting Q, W, E, R, T, Y, comes from typewriters of the 1870s.\n\nTap any key, or type on your own keyboard, and the key goes down and the letter appears on the screen. Tap or drag on the trackpad to move the pointer and click. Tap anywhere else on the laptop to close the lid, and again to open it. Pick the color of the case in the Toy tab.",
   },
-  "music-box": { howTo: "Tap to close the lid; tap again to open it." },
-  "gift-box": { howTo: "Tap to open the present; tap again to close it." },
-  umbrella: { howTo: "Tap to close the umbrella; tap again to open it." },
-  "desk-fan": { howTo: "Tap to switch it off or on. Turn its swing on or off in the Toy tab." },
-  lamp: { howTo: "Tap to switch the light off or on." },
-  telescope: { howTo: "Tap to collapse it; tap again to pull it out." },
+  "music-box": {
+    howTo: "Tap to close the lid; tap again to open it.",
+    about:
+      "A music box plays a tune all by itself. Inside, a spring turns a metal cylinder covered in tiny pins. As it turns, the pins pluck the teeth of a steel comb, and each tooth rings with its own note: the longer the tooth, the lower the note.\n\nThis music box starts open, with a little dancer twirling on its stand while the tune plays and music notes float up. Tap to close the lid and stop the music, and tap again to open it. Pick the color of the wood in the Toy tab.",
+  },
+  clock: {
+    howTo: "Tap it to ring the alarm.",
+    about:
+      "A wind-up alarm clock has two metal bells on top and a little hammer between them. At the set time a spring inside lets the hammer go, and it strikes the two bells back and forth very fast, loud enough to wake a sleeper. Before alarm clocks were common, some people were paid to go around town tapping on windows to wake others up.\n\nThe hands on this clock show the real time where you are. Tap it to ring the alarm: the hammer rattles between the bells and the whole clock shakes and hops. Pick its color in the Toy tab.",
+  },
+  "gift-box": {
+    howTo: "Tap to open the present; tap again to close it.",
+    about:
+      "A gift box is a present wrapped in bright paper and tied with a ribbon and a bow. People give wrapped presents for birthdays, holidays and other happy days, and the fun is not knowing what is inside until it is opened.\n\nTap it to open the present: the lid with its bow pops up and tips back, a golden star rises out of the box, and a burst of confetti fills the air. Tap again to close it. Pick the colors of the paper and the ribbon in the Toy tab.",
+  },
+  umbrella: {
+    howTo: "Tap to close the umbrella; tap again to open it.",
+    about:
+      "An umbrella is a folding shade of cloth stretched over thin metal ribs, held up on a stick. When it opens, a sliding ring pushes little struts that spread the ribs out, and the cloth pulls tight to keep off the rain or the sun. People in ancient Egypt, China and Greece used umbrellas as sunshades thousands of years ago.\n\nThe umbrella starts open. Tap to close it, folding the ribs down along the stick, and tap again to open it. Pick a rainbow, striped or plain canopy and its color in the Toy tab.",
+  },
+  "desk-fan": {
+    howTo: "Tap to switch it off or on. Turn its swing on or off in the Toy tab.",
+    about:
+      "A desk fan cools you by moving air: its angled blades push air forward as they spin, and moving air carries heat and sweat away from your skin faster. A fan does not make the air colder; it only makes you feel cooler.\n\nThis fan starts on, spinning and swinging slowly from side to side. Tap it to switch it off, and the blades slow to a stop; tap again to switch it on. In the Toy tab, turn the swing on or off and pick its color.",
+  },
+  lamp: {
+    howTo: "Tap to switch the light off or on.",
+    about:
+      "A desk lamp has a jointed arm that bends, so you can point its shade right where you need light, over a book or a drawing. The shade stops the light from shining in your eyes and sends it down onto the desk.\n\nThe lamp starts on, with a warm glow under the shade. Tap it to switch the light off, and tap again to switch it on. Pick its color in the Toy tab.",
+  },
+  "potion-bottle": {
+    howTo: "Tap it to pop the cork.",
+    about:
+      "A potion is a magic drink from fairy tales and wizard stories, said to make you fly, shrink or fall asleep. This one sits in a round glass flask with a long neck and a cork, the kind that chemists really use: the round bottom is strong and heats evenly.\n\nBubbles rise through the potion all the time. Tap it to pop the cork: it shoots up with a puff of glittering sparkles, then drops back into the neck. Pick the color of the potion in the Toy tab.",
+  },
+  telescope: {
+    howTo: "Tap to collapse it; tap again to pull it out.",
+    about:
+      "A telescope uses lenses or mirrors to make faraway things look nearer and bigger. This is a sliding spyglass, the kind sailors carried: its tubes slide inside one another, so it folds up short and pulls out long, with a big lens at the far end that gathers light. Galileo Galilei used a small telescope in 1610 to see the moons of Jupiter.\n\nThe telescope starts pulled out, on a three-legged stand. Tap to collapse it, sliding the tubes together, and tap again to pull it out.",
+  },
 
   // ---- Medieval -------------------------------------------------------------------------
-  "sword-in-stone": { howTo: "Tap to pull the sword from the stone; tap again to go back." },
-  "bow-and-target": { howTo: "Tap to shoot an arrow; tap again to go back." },
-  "knights-helmet": { howTo: "Tap to open the visor; tap again to close it." },
-  "dragon-egg": { howTo: "Tap to hatch the egg; tap again to go back." },
+  "sword-in-stone": {
+    howTo: "Tap to pull the sword from the stone; tap again to go back.",
+    about:
+      "The sword in the stone comes from the old legends of King Arthur of Britain. A sword was stuck fast in a great stone, and only the true king could pull it out. Many strong knights tried and failed, until the young Arthur drew it out easily and was made king.\n\nTap it to try: the sword sticks at first and wiggles, then slides free and rises in a shower of golden sparkles. Tap again to put it back in the stone. The Arthur stories have been told and retold for more than 800 years.",
+  },
+  shield: {
+    howTo: "Tap it and it blocks a blow: sparks fly and the emblem gleams.",
+    about:
+      "A heraldic shield carries a coat of arms, a painted design that showed who a knight was, even when a helmet hid the face. Heraldry has its own words: the background is the field, and a shape on it is a charge. A chevron is an upside-down V, a bend is a stripe from corner to corner, a saltire is an X-shaped cross, and per pale means split down the middle.\n\nTap it and it takes an unseen knock: it jolts and rocks, sparks spray off its iron rim, and a gleam sweeps across the emblem. Pick one of seven designs and the colors of the field and the charge in the Toy tab.",
+  },
+  "bow-and-target": {
+    howTo: "Tap to shoot an arrow; tap again to go back.",
+    about:
+      "Archery is the sport of shooting arrows with a bow at a target. Drawing back the string bends the bow's springy limbs, which store the energy of your pull; when the string is let go, the limbs spring back and send the arrow flying. A target has rings of color, with gold in the middle, and the closer to the center, the more points.\n\nTap to shoot: the string draws back, the arrow flies across and lands in the target, and a fresh arrow waits on the string. Tap again to go back. Archery was first part of the Olympic Games in 1900.",
+  },
+  trebuchet: {
+    howTo: "Tap it to launch: the weight drops and the long arm flings a stone.",
+    about:
+      "A trebuchet is a giant throwing machine from the Middle Ages. A long wooden arm swings on an axle, with a heavy weight on its short end and a sling on its long end. When the weight falls, the long end whips up and over, the sling swings out and lets go, and the stone flies a long way. Carpenters built them from great timbers, and the biggest could throw a stone as heavy as a person.\n\nTap it to launch: the weight drops, the arm swings up and the stone sails off, then the arm comes back down, ready for the next one. Today people build trebuchets for fun, to throw pumpkins in contests.",
+  },
+  crossbow: {
+    howTo: "Tap it to shoot a bolt; the string snaps and a new bolt loads.",
+    about:
+      "A crossbow is a short, strong bow fixed crosswise on a wooden stock. The drawn string is held back by a catch, so it can wait until the trigger lets it go. It shoots short, thick arrows called bolts. Crossbows were used in China more than 2,000 years ago and later all over medieval Europe, and today people shoot them at targets as a sport.\n\nTap it: the trigger lets the string go, the string snaps forward with a buzz and the bolt flies off along its groove. Then the string is drawn back and a new bolt appears.",
+  },
+  "knights-helmet": {
+    howTo: "Tap to open the visor; tap again to close it.",
+    about:
+      "A knight's helmet was made of steel, hammered into shape by a skilled craftsman called an armorer. The front piece, the visor, has narrow slits and holes to see and breathe through, and it swings up on pivots at the sides so the knight could show their face. Plumes of colored feathers on top made the knight easy to spot at a tournament.\n\nTap it to open the visor, and tap again to close it. Pick the color of the plume in the Toy tab. A full suit of steel plate armor weighed about 20 to 25 kilograms (45 to 55 pounds).",
+  },
+  crown: {
+    howTo: "Tap it: it rises and its jewels light up one by one.",
+    about:
+      "A crown is a ring of gold or silver worn on the head by a king or queen, a sign of their rule. Many crowns are set with jewels and lined with a soft velvet cap. Royal crowns are often kept with other treasures called the crown jewels, and some are hundreds of years old.\n\nTap it and the crown lifts and hovers. Its eight jewels light up one after another around the band, each flashing white, while golden sparkles drift up around it; then the jewels go out in turn and it settles back down. Pick the color of the velvet in the Toy tab.",
+  },
+  "dragon-egg": {
+    howTo: "Tap to hatch the egg; tap again to go back.",
+    about:
+      "Dragons are creatures of legend, told of all over the world. In many European tales they are winged, fire-breathing beasts that guard treasure; in Chinese stories they are wise, long, snake-like beings that bring rain and good luck. In stories, a dragon hatches from an egg, just as lizards and snakes do.\n\nTap it to hatch the egg: cracks run across the scaly shell, it breaks open and a baby dragon peeks out in a burst of golden sparkles. Tap again to go back. Pick an emerald, ruby, sapphire or gold egg in the Toy tab.",
+  },
+  "wizards-orb": {
+    howTo: "Tap it to cast a spell: sparks spiral out and runes circle the orb.",
+    about:
+      "A wizard's orb is a glass ball from stories of magic, where a wizard gazes into it to see faraway places or the future. This one sits on a stand, with glowing magic swirling inside. Runes, the letters of old alphabets once used in northern Europe, are often carved on magic things in stories.\n\nTap it to cast a spell: a flash of light fills the glass, the swirl spins up, sparks spiral out in five arms, and a ring of runes rises and circles the orb before it fades. Pick the color of the magic in the Toy tab.",
+  },
 
   // ---- Animals --------------------------------------------------------------------------
+  jellyfish: {
+    howTo: "Tap it to make it swim: one strong stroke jets it upward.",
+    about:
+      "A jellyfish is a soft sea animal with no brain, no heart and no bones; its body is mostly water. It swims by squeezing its bell-shaped body, which pushes water out behind it, and it trails long tentacles armed with tiny stingers to catch its food. Jellyfish have drifted in the oceans for more than 500 million years.\n\nTap it and one strong stroke squeezes the bell and jets it up, trailing its glowing tentacles, then it drifts slowly back down. Pick a moon jelly, a sea nettle or a blue one in the Toy tab.",
+  },
+  "fish-school": {
+    howTo: "Tap it: the school swirls into a ball, bursts apart and swims back.",
+    about:
+      "A school is a big group of fish swimming together, all turning at once. Each fish keeps pace with its neighbors by watching them and by feeling the water move along a line of special sense organs down its sides. Being one of many makes it much harder for a hunter to pick out any single fish.\n\nThese 48 fish each swim on their own. Tap it and the school tightens into a spinning bait ball, the shape small fish make when a hunter comes near, then bursts outward in every direction and swims back into place. Pick silver or tropical fish in the Toy tab.",
+  },
+  butterfly: {
+    howTo: "Tap it to make it flutter faster.",
+    about:
+      "A butterfly is an insect with four large wings covered in tiny, overlapping scales, and the scales make its colors and patterns. Every butterfly starts life as a caterpillar, which wraps itself in a case called a chrysalis and comes out as a butterfly. Some colors, like the shining blue of the blue morpho, come from the shape of the scales, not from any paint-like color in them.\n\nIt flaps its wings slowly all the time. Tap it to flutter, beating its wings faster and wider for a moment. Pick a monarch, a blue morpho, a swallowtail or a rose butterfly in the Toy tab.",
+  },
+  pufferfish: {
+    howTo: "Tap it to poke it. Try the Puff slider in the Toy tab.",
+    about:
+      "A pufferfish is a slow swimmer with a clever defense: when it is frightened, it gulps water and swells up into a ball several times its normal size, and in many kinds, spines stand out all over it. That makes it very hard for a hungry fish to swallow. Many pufferfish are also poisonous to eat.\n\nThis one rests slim. Tap it to poke it: it puffs up into a big, spiky ball, holds it, then lets the water out with a sputter and shrinks back. Try the Puff slider in the Toy tab too.",
+  },
+  nautilus: {
+    howTo: "Tap it to startle it: it hides its tentacles, then peeks out again.",
+    about:
+      "A nautilus is a sea animal related to the octopus and the squid, but it lives in a coiled, striped shell. Inside, the shell is split into chambers: the nautilus lives in the biggest, newest one and fills the older ones with gas and a little water to float up or sink down. It has up to 90 small tentacles and swims by squirting water. Animals like it have lived in the sea for about 500 million years.\n\nTap it and, startled, it jets back a little and pulls its tentacles in behind its hood. It waits, peeks out halfway, then slowly reaches out again.",
+  },
+  ladybug: {
+    howTo: "Tap to open the wings; tap again to close them.",
+    about:
+      "A ladybug is a small, round beetle. Its red, spotted back is really a pair of hard wing cases, and under them, thin flying wings lie folded up. Its bright colors warn birds that it tastes bad. Gardeners love ladybugs, because they eat the tiny aphids that harm plants.\n\nTap it to open the wings: the red wing cases lift and spread, and the thin wings unfold beneath them, ready to fly. Tap again to fold them away. Counting its spots will not tell you how old a ladybug is: the number depends on the kind of ladybug.",
+  },
+  snail: {
+    howTo: "Tap to make it hide in its shell; tap again to bring it out.",
+    about:
+      "A snail carries its home on its back: a coiled shell it can pull its whole body into. It glides along on one long, muscular foot over a thin layer of slime, and its eyes sit at the tips of its two long upper tentacles. In dry weather, a snail can seal its shell with a layer of dried slime and wait for rain.\n\nTap it and it hides, as a real snail does: the eye stalks roll in first, then the head and the foot are drawn in through the shell's opening, and the shell settles on the ground. Tap again and it slides back out, the eye stalks unrolling last.",
+  },
   octopus: {
     howTo: "Tap it to squirt ink.",
     about:
       "An octopus is a soft-bodied sea animal with eight arms lined with suckers. It has three hearts and blue blood, no bones at all, and it can change the color of its skin in a split second to hide or to signal.\n\nWhen something scares it, an octopus squirts a cloud of dark ink and jets away behind it. Tap this one and it does just that: the ink billows out while it shoots up and away with its arms streaming, then it drifts back as the ink thins. You can pick its color in the Toy tab.",
   },
-  pufferfish: { howTo: "Tap it to poke it. Try the Puff slider in the Toy tab." },
-  ladybug: { howTo: "Tap to open the wings; tap again to close them." },
-  snail: { howTo: "Tap to make it hide in its shell; tap again to bring it out." },
+  starfish: {
+    howTo: "Tap it to wave its arms.",
+    about:
+      "A starfish, or sea star, is not a fish at all but a relative of the sea urchin. It has no brain and no blood; seawater flows through its body instead. Under each arm are hundreds of tiny tube feet that let it creep along and grip rocks, and at the tip of each arm is a simple eye. If it loses an arm, it can grow a new one.\n\nTap it and its five arms lift and curl in turn, like a slow wave, then settle back. Pick an orange, red, purple or blue starfish in the Toy tab.",
+  },
+  "sea-urchin": {
+    howTo: "Tap it: its spines sweep in waves and it creeps along.",
+    about:
+      "A sea urchin is a round, spiny sea animal, a relative of the starfish. Its spines protect it, and between them it has long, thin tube feet with suckers that it uses to walk and to hold on. Its mouth is underneath, with five strong teeth for scraping seaweed off rocks.\n\nTap it and its spines sweep around it in waves, each tilting on its base, while pink tube feet reach out, and it creeps a little way to the side and back. Pick a purple, black, red or green urchin in the Toy tab.",
+  },
+  frog: {
+    howTo: "Tap it: a fly buzzes in and the frog catches it with its tongue.",
+    about:
+      "A frog is an amphibian: it starts life as a tadpole swimming in water and grows legs and lungs to live on land as well. It catches insects with a long, sticky tongue that flips out of its mouth in a flash. To swallow, a frog pulls its big eyes down into its head, and they help push the food down its throat.\n\nTap it: a fly buzzes in and hovers, the frog's tongue shoots out, catches it and snaps back, its eyes sink to swallow, and it croaks twice with a puff of its throat. Pick a green, red, blue or yellow frog in the Toy tab.",
+  },
+  penguin: {
+    howTo: "Tap it to flap its flippers.",
+    about:
+      "A penguin is a bird that cannot fly, but it is a superb swimmer: its wings are stiff, strong flippers that it uses to fly through the water. Almost all penguins live in the southern half of the world. The largest, the emperor penguin, stands about 1.1 meters (3.7 feet) tall.\n\nTap it and it flaps its flippers up and down. Its colors help it hide in the sea: from above, its black back blends with the dark water below, and from below, its white front blends with the bright surface.",
+  },
+  owl: {
+    howTo: "Tap it and it turns its head to look behind.",
+    about:
+      "Owls are birds that mostly hunt at night. Their big eyes cannot move in their sockets, so an owl turns its whole head instead, as far as about 270 degrees, three-quarters of the way around. Soft, fringed edges on its feathers let it fly almost without a sound.\n\nThis owl sits on a branch. Tap it and it turns its head far around to look behind it, holds there a moment, then turns back to face you.",
+  },
 
   // ---- Math -----------------------------------------------------------------------------
   lorenz: {
@@ -856,23 +1305,197 @@ export const TOY_HELP = {
       "In a right triangle, the two short sides a and b and the long side c always fit a rule: a² + b² = c². So a square drawn on the long side has the same area as the squares on the two short sides put together. It is named after Pythagoras, a Greek thinker of about 2,500 years ago, though people in Babylon knew it even earlier.\n\nThis is one of the oldest proofs. Four copies of the triangle fill a big square, leaving two empty squares, a² and b². Tap it and the triangles slide into the corners, and the empty space becomes one tilted square, c², so a² + b² must equal c². Then they slide back.",
   },
 
+  // ---- AI and computing ----------------------------------------------------------------
+  perceptron: {
+    howTo: "Tap it to watch it try an example, get it wrong, and learn.",
+    about:
+      "A perceptron is the simplest artificial neuron, invented by Frank Rosenblatt in 1958. It takes a few inputs, multiplies each by a weight (how much that input counts), and adds them up. If the sum passes a threshold, it fires: its answer is 1, otherwise 0. It learns by nudging its weights each time it gets an answer wrong.\n\nTap it: inputs X1 and X3 light up and send pulses along wires as thick as their weights. The sum fills the gauge but stays under the threshold line, so the lamp flashes red. The two live wires thicken, the pulses go again, the gauge passes the line and the lamp lights gold. Pick the flat poster or a 3D model in the Toy tab.",
+  },
+  "multilayer-perceptron": {
+    howTo: "Tap it to try all four inputs and fill in the XOR truth table.",
+    about:
+      "One perceptron can only split its inputs with a single straight line, so it cannot learn XOR, “exclusive or”, which is 1 when exactly one of two inputs is 1. Put neurons in layers and it can. Here an OR neuron and a NAND (“not both”) neuron feed an AND neuron, and together they give XOR. Blue wires add to a neuron's sum and red wires subtract.\n\nTap it and it tries the inputs 00, 01, 10 and 11 in turn, lighting each neuron that fires, and fills in the truth table: 0, 1, 1, 0. Pick the poster or a 3D model in the Toy tab.",
+  },
+  "neural-network": {
+    howTo: "Tap it to send signals forward, then learn backward. Set its size in the Toy tab.",
+    about:
+      "A neural network is made of simple artificial neurons in layers. Each neuron adds up the signals coming in, each multiplied by a weight, and passes on a signal of its own; the weights are what the network learns. In training, a forward pass makes a guess, and backpropagation sends the error back through the network, nudging every weight a little to do better next time.\n\nTap it: pulses run from the inputs through the hidden layer to the outputs, each neuron glowing as strongly as it fires, and one output wins. Then red pulses run back and the wires thicken or thin as the weights change. In the Toy tab, set the number of inputs, hidden layers, neurons and outputs, and pick the poster or a 3D model.",
+  },
+  cnn: {
+    howTo: "Tap it to read the digit. Draw your own digit in the Toy tab.",
+    about:
+      "A convolutional network, or CNN, is a neural network built for pictures. It slides small filters across the picture: each filter is a little grid of weights that lights up where it finds its pattern, such as a slanted stroke, and makes a feature map. Pooling shrinks the map, keeping the strongest signal in each patch, and later layers combine the features to recognize the whole shape.\n\nTap it: a glowing 3-by-3 filter slides over a handwritten 7, stamping a feature map tile by tile; the tiles pool into a smaller map, and the scores for the digits 0 to 9 rise with 7 on top. In the Toy tab, pick a 3D view, or draw a digit and a small trained network reads it.",
+  },
+  rnn: {
+    howTo: "Tap it to read a sentence one word at a time. Try the LSTM style in the Toy tab.",
+    about:
+      "A recurrent network, or RNN, reads a sequence, like the words of a sentence, one piece at a time. It keeps a memory called the hidden state: after each word, the state loops back in with the next word, so what it knows builds up as it reads. An LSTM (long short-term memory) adds gates that decide what to forget, what to take in and what to pass on.\n\nTap it: THE, CAT and SAT rise into the cell one at a time. The cell flashes, and the glowing orb, the hidden state, takes on the word's color mixed with what it carried and runs around the loop. In the Toy tab, pick the LSTM style to see its three gates open and shut like shutters, or a 3D model.",
+  },
+  transformer: {
+    howTo: "Tap it to predict the next word. Try the Encoder–decoder diagram in the Toy tab.",
+    about:
+      "A transformer is a neural network for language, first described in 2017. It splits text into tokens, and in each layer every token uses attention: it looks at all the others and weighs how much each one matters to it. After many layers, it predicts the next token. Tap it: arcs jump between THE CAT SAT ON, thicker where attention is stronger, one color for each of two heads; the tiles rise through the layers, and MAT drops in.\n\nThe Encoder–decoder diagram in the Toy tab is the classic design. Its key: an eye is attention; a lidded eye, masked attention (it only looks back); +, add and norm; », feed forward; a vector, embedding; a wave, positional encoding; a slash, linear; bars, softmax; N×, repeated N times. HELLO WORLD goes in, and given START HOLA, it predicts MUNDO.",
+  },
+  "looped-transformer": {
+    howTo: "Tap it: the tiles loop through one block, sharper each lap, until 3 + 4 = 7.",
+    about:
+      "A looped transformer runs the same transformer block again and again, feeding its output back in as its next input, instead of stacking many different layers. Each pass through the loop can refine the answer a little more, a bit like checking your work, so a small model can spend longer thinking about a harder problem.\n\nTap it: five tiles ride three laps around a track through one block. Each pass sharpens every tile one step, from noise to a blocky mosaic, to nearly right, to exact, until “3 + 4 = 7” settles with the 7 in gold. Pick the poster or a 3D model in the Toy tab.",
+  },
+  "diffusion-model": {
+    howTo: "Tap it: the noise clears, step by step, into a rubber duck.",
+    about:
+      "A diffusion model makes pictures out of noise. It is trained by taking real pictures, adding random noise to them a little at a time until only specks are left, and learning to undo each step. To make a new picture, it starts from pure noise and takes a little away at each of many steps, until a clear picture appears.\n\nTap it: a cloud of random specks clears in ten steps into a rubber duck while the STEP counter runs down from 50 to 0, then the noise washes back over it. It suits Splashery well: every toy here is drawn from many soft, blurry points too. Pick the poster or a 3D model in the Toy tab.",
+  },
+  "gradient-descent": {
+    howTo: "Tap it to roll the ball downhill. Try the Learning rate in the Toy tab.",
+    about:
+      "Gradient descent is how most neural networks learn. Picture the network's error as a hilly landscape: the lower the ground, the better its answers. At each step, it works out which way is downhill, the gradient, and steps that way. The learning rate sets how big each step is, and momentum lets it keep some speed from step to step.\n\nTap it: the ball takes 21 hopping steps downhill, leaving a trail of dots, overshoots the valley and settles in it. In the Toy tab, set the Learning rate: too low, and it creeps down the slope; too high, and it bounces from wall to wall; just right, and it settles.",
+  },
+  "word-vectors": {
+    howTo: "Tap it to work out king − man + woman. Type your own words in the Toy tab.",
+    about:
+      "Word vectors turn each word into a list of numbers, a point in a space with many directions, so that words used in similar ways land near each other. These have 50 numbers per word, learned from a huge amount of text. Directions in the space can carry meaning: the step from man to woman is much like the step from king to queen.\n\nTap it: an arrow runs out to KING, the step from MAN to WOMAN is added on from there, and it lands right next to QUEEN, which lights up. Type your own A − B + C in the Toy tab, with any of 24,000 common words, and it finds the nearest word to the answer.",
+  },
+  "sorting-machine": {
+    howTo: "Tap it to sort the bars. Pick one of eight ways to sort in the Toy tab.",
+    about:
+      "A sorting algorithm is a step-by-step recipe a computer follows to put things in order. There are many: bubble sort keeps swapping neighbors that are the wrong way around; quicksort picks one item and splits the rest into smaller and bigger piles; merge sort sorts small groups, then merges them. On a long list, some need far fewer steps than others.\n\nTap it: eight bars of different heights sort themselves, each bar gliding to its new place, while a counter counts the swaps; then they shuffle back. Pick one of eight algorithms in the Toy tab, from bubble sort to heap sort, and watch how differently they work.",
+  },
+  "half-adder": {
+    howTo: "Tap it to add 1 + 1 in binary: the answer is 10.",
+    about:
+      "A half adder is a tiny circuit that adds two bits, binary digits that are each 0 or 1. It uses two logic gates: an XOR gate gives the sum bit, which is 1 when exactly one input is 1, and an AND gate gives the carry bit, which is 1 when both are. Two half adders make a full adder, and a chain of full adders lets a computer add numbers of any size.\n\nTap it: switches A and B flip to 1, and light runs along the wires into the gates. The XOR gives 0, so the sum lamp stays dark, and the AND lights the carry lamp. The board reads 1 + 1 = 10, which is two in binary. Then the switches flip back.",
+  },
+
   // ---- Holidays -------------------------------------------------------------------------
-  "jack-o-lantern": { howTo: "Tap to lift the lid; tap again to put it back." },
-  snowman: { howTo: "Tap to melt it and build it again. Try the Warmth slider in the Toy tab." },
-  "decorated-tree": { howTo: "Tap to switch the lights on or off." },
-  diya: { howTo: "Tap to light the ring of diyas; tap again to put them out." },
-  menorah: { howTo: "Tap to put out the candles; tap again to light them one by one." },
+  "jack-o-lantern": {
+    howTo: "Tap to lift the lid; tap again to put it back.",
+    about:
+      "A jack-o'-lantern is a pumpkin carved with a face and lit from inside by a candle, a symbol of Halloween. The custom comes from Ireland and Britain, where people once carved faces into turnips and potatoes; in North America, the big, soft pumpkin turned out to be much easier to carve.\n\nThis one glows through its carved eyes and grin. Tap to lift the lid off the top, and tap again to put it back. The name comes from an old Irish tale of a man called Stingy Jack, who wandered the night carrying a lantern.",
+  },
+  snowman: {
+    howTo: "Tap to melt it and build it again. Try the Warmth slider in the Toy tab.",
+    about:
+      "A snowman is built from big balls of snow rolled across the ground, stacked up and given a face of coal, a carrot nose, stick arms, a scarf and a hat. Snow packs best when it is just at the melting point and a little wet, so the flakes stick together. Fresh snow is mostly air, which is why it is so light and fluffy.\n\nTap it and it melts: the snowballs shrink, the head first, drips fall, and the hat, nose, coals, arms and scarf drop off one by one into a spreading puddle. Then it builds itself again from the bottom up. The Warmth slider in the Toy tab melts it the same way.",
+  },
+  fireworks: {
+    howTo: "Tap it to launch a firework; each one is different.",
+    about:
+      "Fireworks were invented in China more than a thousand years ago. A firework shell is shot high into the air, where it bursts and throws out little pellets called stars, which burn in bright colors. The colors come from metals mixed in: strontium burns red, barium green, copper blue and sodium yellow.\n\nTap it to launch: a rocket rises from one of the tubes in the crate and bursts in that tube's color. Each tap fires a different tube and a different shell: a round peony, a ring, a drooping willow or a star, so no two in a row look alike.",
+  },
+  "decorated-tree": {
+    howTo: "Tap to switch the lights on or off.",
+    about:
+      "A decorated tree is an evergreen tree, such as a fir or a pine, brought indoors and hung with lights, ornaments and a star on top for the Christmas season. The custom began in Germany about 500 years ago and spread around the world. Evergreens stay green all winter, so they became a sign of life in the darkest time of the year.\n\nThe tree starts with its lights off. Tap to switch them on: they sweep up the tree, stay on and cycle through chasing, rippling and steady patterns, while the star glows. Tap again to switch them off. The first electric tree lights were made in 1882.",
+  },
+  "patterned-egg": {
+    howTo: "Tap it to spin it. Pick a pattern and its colors in the Toy tab.",
+    about:
+      "Decorating eggs with bright patterns is a spring tradition in many countries, especially at Easter. In Ukraine and nearby lands, painted eggs called pysanky are made by drawing lines in melted wax, dipping the egg in dye, and repeating with darker colors; the wax keeps each color where it was drawn.\n\nTap it to spin it. Pick a folk, striped, dotted, zigzag, flower or star pattern and its two colors in the Toy tab. Try spinning a real hard-boiled egg: it spins smoothly, while a raw one wobbles and stops, because the runny inside sloshes.",
+  },
+  "paper-lantern": {
+    howTo: "Tap it to set it swinging on its string.",
+    about:
+      "A paper lantern is a light made of thin paper stretched over a frame of ribs, glowing from a light inside. In China and many other places, red lanterns stand for luck and happiness, and thousands are hung up for the Lantern Festival, which ends the Lunar New Year celebrations on the first full moon of the year.\n\nTap it and it swings on its string like a pendulum, back and forth, slowing a little on each swing until it hangs still again. Pick a red, gold, teal or purple lantern in the Toy tab.",
+  },
+  diya: {
+    howTo: "Tap to light the ring of diyas; tap again to put them out.",
+    about:
+      "A diya is a small clay lamp that holds oil or butter and a cotton wick. Rows of diyas are lit for Diwali, the festival of lights celebrated by Hindus, Sikhs and Jains, to welcome light and good fortune. Homes are also decorated with rangoli, bright patterns of colored powder or flowers on the floor.\n\nThis diya sits on a rangoli. Tap it and its flame flares and grows, and eight small diyas around the pattern light one after another and stay lit. Tap again to put them out. In the Toy tab, set the size of the flame, or blow on it.",
+  },
+  menorah: {
+    howTo: "Tap to put out the candles; tap again to light them one by one.",
+    about:
+      "A Hanukkah menorah is a candle holder with nine branches, lit during Hanukkah, the Jewish festival of lights. Hanukkah lasts eight nights, and one more candle is lit each night. The ninth candle, the helper called the shamash, stands apart and is used to light the others. The festival remembers the rededication of the Temple in Jerusalem, when, the story says, one day's oil burned for eight days.\n\nThe menorah starts with every candle lit. Tap to put them out, and tap again to light them: the helper candle first, then the others one by one.",
+  },
 
   // ---- Music ----------------------------------------------------------------------------
+  guitar: {
+    howTo: "Tap it to strum a few chords.",
+    about:
+      "An acoustic guitar has six strings stretched over a hollow wooden body. Plucking a string makes it vibrate, and the body and the round soundhole make the sound bigger and warmer. Pressing a string down against the metal frets on the neck makes it shorter, and a shorter string plays a higher note.\n\nTap it to strum: the guitar rocks with the stroke, the strings bend and shake one after another, and rings of light pulse out of the soundhole as it plays four chords. Pick a sunburst, natural or cherry finish in the Toy tab. The six strings are usually tuned, from lowest to highest, to E, A, D, G, B and E.",
+  },
+  drum: {
+    howTo: "Tap it for a drum roll; tap again quickly for a faster, longer roll.",
+    about:
+      "A snare drum is a shallow drum with a skin, called a head, stretched across each side. Under the bottom head runs a set of thin metal wires, the snares, which rattle against it every time the top is hit, giving the drum its crisp, buzzing crack. A drum roll is many fast strokes, played one stick after the other so quickly that they blur into one sound.\n\nTap it and the sticks play a roll. Tap again quickly, and each tap steps the roll up to a faster speed and makes it last longer, through four speeds in all. Pick the color of the shell in the Toy tab.",
+  },
   xylophone: {
     howTo: "Tap a bar to play its note, or tap the mallet or frame to play a scale.",
     about:
       "A xylophone is a row of tuned wooden bars that you strike with a mallet. Each bar's length sets its note: the shorter the bar, the higher it sounds. The name comes from the Greek for “wood” and “sound”.\n\nThis toy one has eight colored bars, a scale from C up to the next C. Tap a bar and the mallet swings over and strikes it, and the bar jumps and plays its note, so you can play a tune. Tap the mallet, a wheel or the ends of the frame instead, and it plays the whole scale.",
   },
-
   // ---- Vehicles -------------------------------------------------------------------------
-  helicopter: { howTo: "Tap to take off; tap again to land." },
-  ufo: { howTo: "Tap to switch the beam off or on." },
+  rocket: {
+    howTo: "Tap it to launch the rocket.",
+    about:
+      "A rocket flies by pushing hot gas out of its engine very fast. As the gas rushes down, it pushes the rocket up, just as a balloon zooms off when you let its air out. A rocket carries its own oxygen to burn its fuel, so unlike a plane it can fly where there is no air at all, out in space.\n\nTap it to launch: the arm of the tower swings away, the engine lights, clouds of smoke billow across the pad, and the rocket shakes, lifts off and climbs faster and faster until it is gone. Then a new one stands ready on the pad. Pick its color in the Toy tab.",
+  },
+  helicopter: {
+    howTo: "Tap to take off; tap again to land.",
+    about:
+      "A helicopter lifts itself with a big rotor on top: its long blades are thin, spinning wings. By tilting the blades, the pilot can fly up, down, forward, backward or sideways, or hover in one place. The small rotor on the tail stops the body from spinning around the other way.\n\nIts rotors are always turning. Tap to take off: it lifts into the air, tips its nose down a little and hovers, bobbing gently. Tap again to land. Pick its color in the Toy tab. Helicopters can land in places planes cannot, so they are used for rescues at sea and in the mountains.",
+  },
+  "hot-air-balloon": {
+    howTo: "Tap it to fire the burner: the balloon swells and climbs.",
+    about:
+      "A hot-air balloon flies because hot air is lighter than the cool air around it. A burner under the big fabric envelope heats the air inside, and the balloon floats up; as the air cools, it sinks again. Pilots can only go up and down, so they steer by finding winds at different heights that blow the way they want to go. The first people to fly in a hot-air balloon took off in Paris in 1783.\n\nTap it to fire the burner: a big flame roars, the envelope swells and glows warm, and the balloon climbs well up, then drifts back down. Pick stripes or a rainbow, and two colors, in the Toy tab.",
+  },
+  "steam-train": {
+    howTo: "Tap it to blow the whistle.",
+    about:
+      "A steam locomotive burns coal or wood to boil water in a long boiler. The steam pushes pistons back and forth, and rods turn that push into the turning of the big driving wheels. The first steam locomotive to pull a train on rails ran in Wales in 1804, and for more than a hundred years steam trains carried people and goods around the world.\n\nThe engine puffs smoke from its chimney. Tap it to blow the whistle: a jet of white steam shoots up from the whistle and a big cloud billows from the chimney. Pick the color of the engine in the Toy tab.",
+  },
+  "ocean-liner": {
+    howTo: "Tap it to sound the horn.",
+    about:
+      "An ocean liner is a big passenger ship that sailed on a regular route, or line, across an ocean. Before airliners, liners were the way to cross the Atlantic, and the fastest took about five days. The largest carried thousands of people, with dining rooms, lounges and decks for walking.\n\nThe liner rocks gently on the waves, smoke drifting from its funnels. Tap it to sound the horn: steam blasts from the horn and the funnels smoke harder. Pick the color of the funnels in the Toy tab. A ship's horn is deep and loud so that other ships can hear it from miles away, even in fog.",
+  },
+  "sports-car": {
+    howTo: "Tap it to rev the engine.",
+    about:
+      "A sports car is a small, light car with a powerful engine, built for speed and for taking corners well. It sits low to the ground, which helps it stay steady, and the wing on its back works like an upside-down airplane wing: at speed, the air pushes the car down onto the road, so its tires grip better.\n\nTap it to rev the engine: the car rocks on its springs, the wheels spin and a puff of exhaust shoots out of the back. In the Toy tab, pick its color and turn its racing stripes on or off.",
+  },
+  bus: {
+    howTo: "Tap it to stop for passengers: the lights flash and the doors open.",
+    about:
+      "A bus carries many people along a set route, stopping to let them on and off. In the United States and Canada, school buses are painted a bright yellow that is easy to see, and when they stop, red lights flash and a stop sign swings out so that traffic waits while children cross. Double-decker buses have two floors, and they are a famous sight in London.\n\nTap it: the school bus stops, its warning lights flash, the stop sign swings out and the doors open onto the lit doorway, then everything folds away again. Pick the school bus or a double-decker, which flashes its lights and opens its middle door, in the Toy tab.",
+  },
+  "propeller-plane": {
+    howTo: "Tap it to loop the loop.",
+    about:
+      "This propeller plane is a biplane: it has two sets of wings, one above the other, held together by struts and wires. Two wings give a lot of lift for a light, slow plane. The spinning propeller at the front pulls it through the air. The first airplane to fly with a pilot, the Wright brothers' Flyer of 1903, was a biplane too.\n\nTap it to loop the loop: it climbs, flies up and over on its back in a big circle, and comes out level again. Pick the colors of the body and the wings in the Toy tab.",
+  },
+  jet: {
+    howTo: "Tap it to climb and bank left, then right.",
+    about:
+      "A jet airliner is a big passenger plane driven by jet engines. Each engine sucks in air, squeezes it, burns fuel in it and blasts it out of the back, pushing the plane forward. Airliners cruise about 10 to 12 kilometers (6 to 7 miles) high, where the thin air lets them fly fast while burning less fuel.\n\nTap it and it climbs nose up while banking hard to the left, then hard to the right. Banking means tilting the wings: a plane turns by leaning into the turn, just as a bicycle does. Pick the color of the tail in the Toy tab.",
+  },
+  sailboat: {
+    howTo: "Tap it for a gust of wind: it heels over, then rocks back upright.",
+    about:
+      "A sailboat is pushed along by the wind in its sails. A sail works like a wing, so a sailboat can even sail at an angle toward the wind. Under the water, a heavy fin called a keel stops the boat from sliding sideways and keeps it from tipping over.\n\nTap it for a big gust: the boat heels over, leaning far to one side, with spray flying at the bow and the stern, then it rocks back upright. Sailors lean out over the high side to help hold the boat up. Pick the colors of the sails and the stripe in the Toy tab.",
+  },
+  submarine: {
+    howTo: "Tap it to dive; then it surfaces and raises its periscope.",
+    about:
+      "A submarine is a ship that can travel underwater. To dive, it lets seawater into big tanks, making it heavy enough to sink; to come back up, it blows the water out with compressed air. A periscope, a long tube with mirrors inside, lets the crew see above the surface while the submarine stays hidden below.\n\nTap it to dive: the periscope drops, bubbles rush from the hull and it sinks under the water. Then it rises back to the surface and raises its periscope again. Pick its color in the Toy tab.",
+  },
+  bicycle: {
+    howTo: "Tap it to ring the bell and spin the wheels.",
+    about:
+      "A bicycle has two wheels, one behind the other, and pedals that turn a chain, which turns the back wheel. It stays up while it moves, because the rider keeps steering the front wheel a little under the bike, balancing it without thinking. The first bicycles with pedals were built in France in the 1860s.\n\nTap it: the bell shakes and rings, the wheels spin through five fast turns, and the pedals go around twice. Bicycles are among the most efficient ways to travel ever invented: a rider uses less energy to go a mile than a walker does. Pick the color of the frame in the Toy tab.",
+  },
+  tractor: {
+    howTo: "Tap it to make it chug: it shakes and puffs smoke.",
+    about:
+      "A tractor is a strong farm machine for pulling heavy things: plows, trailers and all kinds of tools. Its big back wheels have deep treads to grip soft, muddy ground, and its small front wheels steer. Tractors are built for pulling power, not speed.\n\nIts wheels turn slowly and smoke rises from its exhaust pipe. Tap it to make it chug: the engine shakes the tractor, the wheels turn faster and thick puffs of smoke rise from the pipe. Pick its color in the Toy tab. Before tractors, farmers used horses and oxen to pull their plows.",
+  },
+  ufo: {
+    howTo: "Tap to switch the beam off or on.",
+    about:
+      "A flying saucer is an imaginary spaceship from science fiction, shaped like a round, flat saucer. The name was first used in 1947, after a pilot said he had seen shiny objects skimming across the sky. Anything seen in the sky that no one can identify is called a UFO, an unidentified flying object; most turn out to be planes, balloons, birds or bright planets.\n\nThis saucer hovers over a field with its rim lights turning, and its glowing beam lifts a cow into the air. Tap to switch the beam off, and the cow settles back on the grass; tap again to switch it on.",
+  },
 
   // ---- Landmarks ------------------------------------------------------------------------
   "eiffel-tower": {
@@ -880,9 +1503,81 @@ export const TOY_HELP = {
     about:
       "The Eiffel Tower is an iron lattice tower in Paris, built by the engineer Gustave Eiffel's company for the World's Fair of 1889. It is about 330 meters (1,083 feet) tall, and it was the tallest structure in the world until 1930.\n\nTap it for a night show: the ironwork lights up gold, sparkling white lights climb the tower, and four fireworks burst around it. The real tower sparkles like this for five minutes every hour after dark.",
   },
-  lighthouse: { howTo: "Tap to switch the light off or on." },
-  castle: { howTo: "Tap to lower the drawbridge; tap again to raise it." },
-  "leaning-tower": { howTo: "Tap to drop two balls from the top. Set the lean in the Toy tab." },
+  "washington-monument": {
+    howTo: "Tap it for a day in a few seconds: the sun crosses and the shadow swings around.",
+    about:
+      "The Washington Monument is a tall stone obelisk in Washington, D.C., built to honor George Washington, the first president of the United States. It is about 169 meters (555 feet) tall. Building began in 1848, stopped for more than 20 years, and was finished in 1884; the stone above the point where work paused is a slightly different color.\n\nTap it for a whole day in a few seconds, like a giant sundial: the sun rises behind the monument, arcs over and sets, the obelisk's shadow swings around the lawn in front, and the flags ripple in the breeze.",
+  },
+  pyramids: {
+    howTo: "Tap it: a tiny flying saucer beams up a camel made of sand.",
+    about:
+      "The Pyramids of Giza stand at the edge of the desert near Cairo, in Egypt. They were built about 4,500 years ago as tombs for three kings, or pharaohs: Khufu, Khafre and Menkaure. The Great Pyramid of Khufu was first about 146 meters (481 feet) tall, and for almost 4,000 years it was the tallest building in the world. It is the only one of the Seven Wonders of the Ancient World still standing.\n\nTap it for a playful visitor: a tiny flying saucer glides in and switches on its beam, sand streams up into the shape of a camel, which floats up into the saucer, and the saucer wobbles happily and zips away.",
+  },
+  supertall: {
+    howTo: "Tap it to twist the tower further and send light up its glass.",
+    about:
+      "A supertall is a skyscraper more than 300 meters (about 1,000 feet) tall. Some are built to twist as they rise: each floor sits turned a little from the one below. The twist is not just for looks: wind flowing past a tall building makes it sway, and a twisted shape breaks the wind up, so the tower sways less.\n\nTap it and the floors wring around further, in twelve solid bands with the top turning most, while a ring of light runs up the glass; then they unwind with a little sway as a second ring runs up. Pick the color of the glass in the Toy tab.",
+  },
+  lighthouse: {
+    howTo: "Tap to switch the light off or on.",
+    about:
+      "A lighthouse is a tower with a bright light at the top that guides ships at night and warns them away from rocks and dangerous coasts. Each lighthouse flashes in its own pattern and is painted in its own stripes or colors, so sailors can tell which one they are looking at, by night or by day. Many use a special lens, invented by Augustin Fresnel in the 1820s, that gathers the light into a strong beam.\n\nThis lighthouse starts with its beam sweeping around. Tap to switch the light off, and tap again to switch it on. Pick the color of its stripes in the Toy tab.",
+  },
+  "statue-of-liberty": {
+    howTo: "Tap it to make the torch flare and send up golden sparks.",
+    about:
+      "The Statue of Liberty stands on Liberty Island in New York Harbor. It was a gift from the people of France to the United States and was dedicated in 1886. The sculptor Frédéric Auguste Bartholdi designed it, and Gustave Eiffel, the engineer of the Eiffel Tower, designed its iron frame. Its skin is thin copper, which slowly turned green in the weather.\n\nTap it and the torch flares: the flame leaps to twice its size in a halo of light, a warm glow spreads down the statue, and golden sparks drift up and away on the breeze and burn out.",
+  },
+  "white-house": {
+    howTo: "Tap it: the fountain shoots up and the windows light up one by one.",
+    about:
+      "The White House, in Washington, D.C., is the home and office of the president of the United States. It was designed by the architect James Hoban and built from 1792 to 1800, and John Adams was the first president to live there. It has 132 rooms, and its walls are painted white.\n\nTap it for an evening scene: the fountain on the south lawn shoots up a tall jet that falls back as spray, the lights come on in the windows one by one and the flag ripples at the top of its pole; then the jet sinks and the lights go out again.",
+  },
+  "leaning-tower": {
+    howTo: "Tap to drop two balls from the top. Set the lean in the Toy tab.",
+    about:
+      "The Leaning Tower of Pisa, in Italy, is the bell tower of the city's cathedral. Building began in 1173, and the tower started to lean while it was still being built, because the ground under it is soft; it took about 200 years to finish. Engineers straightened it a little from 1990 to 2001, and it now leans about 4 degrees.\n\nThe story goes that Galileo dropped two balls of different weights from the top to show that they fall together. Tap it and try it: a big iron ball and a small bronze one roll off the top and land at the same moment. Set the lean with the Lean slider in the Toy tab.",
+  },
+  colosseum: {
+    howTo: "Tap it for a chariot race around the arena.",
+    about:
+      "The Colosseum is a huge oval arena in Rome, Italy, built of stone and concrete about 2,000 years ago, and finished in the year 80. It could seat about 50,000 people, who came to watch shows and games. Much of it still stands, and it is one of the most visited places in the world.\n\nTap it for a chariot race: a crowd fills the seats, and four chariots in the old racing teams' colors, red, white, blue and green, race around the arena, swapping the lead, while the crowd jumps and cheers. In ancient Rome, the big chariot races were really held at the Circus Maximus, a long racetrack nearby.",
+  },
+  parthenon: {
+    howTo: "Tap it for a procession. Pick the temple today or as it was in the Toy tab.",
+    about:
+      "The Parthenon is a marble temple on the Acropolis, the rocky hill above Athens, in Greece. It was built from 447 to 432 BC for the goddess Athena, the city's protector. Its rows of columns look perfectly straight, but they bulge and lean very slightly, so that from a distance they look straighter.\n\nTap it for a procession like the great festival the people of Athens held for Athena: eight robed figures, some carrying baskets and jars on their heads, walk in single file along the temple and across its steps. In the Toy tab, see the temple as it stands today or as it looked when it was new.",
+  },
+  stonehenge: {
+    howTo: "Tap it for the midsummer sunrise shining through the stones.",
+    about:
+      "Stonehenge is a ring of great standing stones on Salisbury Plain, in England. It was built in stages from about 5,000 years ago; some of its smaller stones, the bluestones, were brought from Wales, more than 200 kilometers (140 miles) away. Its biggest stones stand in pairs with a stone laid across the top, called trilithons.\n\nStonehenge is lined up with the sun: on the summer solstice, the longest day of the year, the sun rises in line with its entrance. Tap it: the sun comes up over the far bank, framed by the great trilithon, a golden beam shines through the stones, and they glow gold.",
+  },
+  "big-ben": {
+    howTo: "Tap it: the hands spin around, the dials glow and the bell swings.",
+    about:
+      "Big Ben is the nickname of the great bell in the clock tower of the Houses of Parliament in London, England, and people often use it for the whole tower. The tower was finished in 1859 and, since 2012, has been called the Elizabeth Tower. The bell weighs about 13.7 tonnes, and the clock has four huge dials, one on each side.\n\nThe hands show the real time where you are. Tap it: the hands spin all the way around and land back on the right time, all four dials glow, and the bell swings in the open belfry.",
+  },
+  "taj-mahal": {
+    howTo: "Tap it for moonlight: night falls and the white dome glows.",
+    about:
+      "The Taj Mahal is a white marble tomb in Agra, in India. The emperor Shah Jahan had it built in memory of his wife, Mumtaz Mahal; the work took from about 1632 to 1653, and about 20,000 workers built it. Its white marble is inlaid with patterns of colored stone, and it stands in a garden with a long reflecting pool.\n\nTap it for moonlight: night falls over the garden and the buildings, the moon rises behind the Taj, the great dome glows white against the night sky, and moonlight shimmers on the rippling pool; then the day comes back.",
+  },
+  castle: {
+    howTo: "Tap to lower the drawbridge; tap again to raise it.",
+    about:
+      "A castle is a strong stone home for a lord or a king, built in the Middle Ages with thick walls, tall towers and a moat. The drawbridge across the moat could be pulled up on chains, so the gate was closed off. Castles were small towns inside: kitchens, stables, a hall for feasts and a well for water.\n\nThe drawbridge starts up. Tap to lower it, and five small knights march out, the leader carrying a banner; tap again and they march back in and the drawbridge rises. Pick the color of the roofs in the Toy tab.",
+  },
+  pagoda: {
+    howTo: "Tap it to ring the wind chimes; lanterns and doors light up.",
+    about:
+      "A pagoda is a tower of many roofs, one above the other, built at Buddhist temples across China, Korea, Japan and much of Asia. The idea came from the stupa, a mound that held holy relics in ancient India. Tall wooden pagodas in Japan have stood through many earthquakes for centuries, partly thanks to a great central pillar that helps them sway without falling.\n\nTap it: wind chimes at the corners of every roof swing, one tier after another, and two stone lanterns by the path light up while the doors glow. Pick the color of the timber in the Toy tab.",
+  },
+  windmill: {
+    howTo: "Tap it for a gust of wind that spins the sails hard.",
+    about:
+      "A windmill uses the wind to do work. The wind turns its big sails, and gears inside turn that into the turning of heavy millstones, which grind grain into flour; some windmills pump water instead. In the Netherlands, windmills pumped water out of low land for hundreds of years, so that people could live and farm there.\n\nIts sails always turn in the breeze. Tap it for a gust of wind that spins the sails up hard for three extra turns, then they slow back to their steady pace.",
+  },
 };
 
 // ---- What a toy has, read from its recipe -----------------------------------------
