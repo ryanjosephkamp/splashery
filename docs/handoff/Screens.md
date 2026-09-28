@@ -142,7 +142,7 @@ video, and a picture toy's prepare reads its media") adds the two small things t
 
 **The Screen's switching on.** Each style is its own build (the Style option rebuilds). A sheet's
 splats stand six of its own pixels in front of its center (lane Pictures' "lift"), so every cover
-sits well in front of the sheet (the sheet is set back 0.045 on the old TV and 0.08 on the flat TV).
+sits well in front of the sheet (the sheet is set back 0.09 on the old TV and 0.115 on the flat TV).
 The state (off, switching on, on) lives in the recipe, timed on the player's clock (`info.time`), so
 a pulse control ("power", 2 s) only keeps frames coming.
 

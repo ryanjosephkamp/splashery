@@ -391,7 +391,7 @@ function buildTV(k) {
   // center, so it sits back from the glass.)
   k.sheet({
     id: "screen",
-    center: [TV.cx, TV.cy, TV.z - 0.045],
+    center: [TV.cx, TV.cy, TV.z - 0.09],
     width: TV.hw * 2,
     height: TV.hh * 2,
     method: "screen",
@@ -556,7 +556,7 @@ function buildFlat(k) {
   const bw = 0.06; // bezel
   const W = FLAT.hw * 2 + bw * 2;
   const H = FLAT.hh * 2 + bw * 2 + 0.04;
-  const D = 0.13;
+  const D = 0.15;
   const cy = FLAT.cy;
   const by = cy - 0.02; // the panel's middle (a slightly deeper bottom bezel)
   k.add(roundBox(W, H, D, 0.02), {
@@ -577,7 +577,7 @@ function buildFlat(k) {
   // picture sits back from the panel's face: a screen sheet's splats stand
   // six of its pixels in front of its center.
   k.add(rect(FLAT.hw * 2 + 0.01, FLAT.hh * 2 + 0.01), {
-    pos: [0, cy, FLAT.z - 0.095],
+    pos: [0, cy, FLAT.z - 0.128],
     even: true,
     flat: 0.1,
     jitter: 0,
@@ -587,7 +587,7 @@ function buildFlat(k) {
   });
   k.sheet({
     id: "screen",
-    center: [0, cy, FLAT.z - 0.08],
+    center: [0, cy, FLAT.z - 0.115],
     width: FLAT.hw * 2,
     height: FLAT.hh * 2,
     method: "screen",

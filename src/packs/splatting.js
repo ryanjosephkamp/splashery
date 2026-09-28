@@ -623,7 +623,7 @@ const PALETTE = [
   "#d95cb4",
   "#f4f1e8",
 ];
-const SORT = { cam: [1.55, 0.3, 0.2], count: 300 };
+const SORT = { cam: [0.3, 1.1, 0.45], count: 300 };
 
 // The tap: every splat hides, then they come back one by one, the one
 // furthest from the camera first, as the renderer draws them.
@@ -639,7 +639,7 @@ function buildSorting(k) {
     let v;
     do v = [rand() * 2 - 1, rand() * 2 - 1, rand() * 2 - 1];
     while (Math.hypot(...v) > 1);
-    const p = v.map((x) => x * 0.72);
+    const p = v.map((x) => x * 0.62);
     const col = PALETTE[Math.floor(rand() * PALETTE.length)];
     pts.push({ p, col, d: Math.hypot(p[0] - SORT.cam[0], p[1] - SORT.cam[1], p[2] - SORT.cam[2]) });
   }
@@ -651,7 +651,7 @@ function buildSorting(k) {
     if (i >= pts.length) return null;
     return {
       p: pts[i].p,
-      size: 6.5,
+      size: 5.5,
       color: pts[i].col,
       opacity: 0.97,
       kind: "fade",
@@ -698,7 +698,7 @@ function buildSorting(k) {
   const eye = at(0, 0, 0.18);
   for (let j = 0; j < 4; j++) {
     const a = (j / 4) * TAU + 0.4;
-    const rim = [side[0] * Math.cos(a) * 0.72 + up[0] * Math.sin(a) * 0.72, side[1] * Math.cos(a) * 0.72 + up[1] * Math.sin(a) * 0.72, side[2] * Math.cos(a) * 0.72 + up[2] * Math.sin(a) * 0.72]; // prettier-ignore
+    const rim = [0, 1, 2].map((j) => (side[j] * Math.cos(a) + up[j] * Math.sin(a)) * 0.62); // prettier-ignore
     line(k, eye, rim, "#9aa3b0", 0.01, 70);
   }
 }

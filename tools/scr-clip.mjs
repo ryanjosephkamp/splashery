@@ -7,7 +7,7 @@
 // renderer is.
 //
 //   python3 -m http.server 4173 --bind 127.0.0.1 &
-//   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/scr-clip.mjs <out-dir> [--width=360] [--fps=12] [--dpr=1] [scene ...]
+//   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/scr-clip.mjs <out-dir> [--width=360] [--fps=12] [--dpr=1] [--crop=40,470] [scene ...]
 //
 // Scenes: screen-tv, screen-flat, screen-cinema, screen-hologram,
 // screen-gif (the old TV with the GIF sample), splat-training, splat-one,
@@ -30,6 +30,7 @@ const [outDir, ...scenes] = args.filter((a) => !a.startsWith("--"));
 if (!outDir) throw new Error("Usage: node tools/scr-clip.mjs <out-dir> [scene ...]");
 const width = Number(opt("width", 360));
 const fps = Number(opt("fps", 12));
+const crop = opt("crop", "40,470").split(",").map(Number);
 
 // Each scene: the toy, its options, seconds before the tap and after it,
 // and extra taps ([seconds after the first, ...]).
@@ -122,50 +123,64 @@ async function record(name) {
   const step = 1 / fps;
   const frames = [];
   const shot = async () => {
-    const url = await page.evaluate(async (step) => {
-      const { player } = window.__splashery;
-      const stage = player.stage;
-      const pics = player.pictures;
-      const clip = window.__clip;
-      const m = pics?.media;
-      // A video that the toy started is stepped by hand from then on.
-      if (m?.kind === "video") {
-        if (m.playing && clip.videoT === null) clip.videoT = m.video.currentTime;
-        if (m.playing) m.video.pause();
-        if (clip.videoT !== null) {
-          clip.videoT = (clip.videoT + step) % Math.max(0.1, m.duration);
-          await new Promise((r) => {
-            m.video.addEventListener("seeked", r, { once: true });
-            setTimeout(r, 1500);
-            m.seek(clip.videoT);
-          });
-          pics.frameDirty = true;
+    const url = await page.evaluate(
+      async ([step, crop]) => {
+        const { player } = window.__splashery;
+        const stage = player.stage;
+        const pics = player.pictures;
+        const clip = window.__clip;
+        const m = pics?.media;
+        // A video that the toy started is stepped by hand from then on.
+        if (m?.kind === "video") {
+          if (m.playing && clip.videoT === null) clip.videoT = m.video.currentTime;
+          if (m.playing) m.video.pause();
+          if (clip.videoT !== null) {
+            clip.videoT = (clip.videoT + step) % Math.max(0.1, m.duration);
+            await new Promise((r) => {
+              m.video.addEventListener("seeked", r, { once: true });
+              setTimeout(r, 1500);
+              m.seek(clip.videoT);
+            });
+            pics.frameDirty = true;
+          }
         }
-      }
-      clip.pending = 0;
-      await stage.captureFrame();
-      for (let i = 0; i < 40 && pics?.uploading; i++) await new Promise((r) => setTimeout(r, 25));
-      clip.pending = step;
-      await stage.captureFrame();
-      clip.pending = 0;
-      const c = await stage.captureFrame();
-      // The page's own background under the splats (the canvas is clear).
-      const out = document.createElement("canvas");
-      out.width = c.width;
-      out.height = c.height;
-      const g = out.getContext("2d");
-      g.fillStyle = getComputedStyle(document.body).backgroundColor || "#fff";
-      g.fillRect(0, 0, out.width, out.height);
-      g.drawImage(c, 0, 0);
-      return out.toDataURL("image/png");
-    }, step);
+        clip.pending = 0;
+        await stage.captureFrame();
+        for (let i = 0; i < 40 && pics?.uploading; i++) await new Promise((r) => setTimeout(r, 25));
+        clip.pending = step;
+        await stage.captureFrame();
+        clip.pending = 0;
+        const c = await stage.captureFrame();
+        // The page's own background under the splats (the canvas is clear).
+        // Cropped to the band the toy stands in (crop: top and height, in CSS
+        // pixels), so a clip fits the review page's square box.
+        const k = c.width / window.innerWidth;
+        const top = Math.round(crop[0] * k);
+        const out = document.createElement("canvas");
+        out.width = c.width;
+        out.height = Math.min(c.height - top, Math.round(crop[1] * k));
+        const g = out.getContext("2d");
+        g.fillStyle = getComputedStyle(document.body).backgroundColor || "#fff";
+        g.fillRect(0, 0, out.width, out.height);
+        g.drawImage(c, 0, -top);
+        return out.toDataURL("image/png");
+      },
+      [step, crop],
+    );
     const png = PNG.sync.read(Buffer.from(url.split(",")[1], "base64"));
     frames.push(shrink(png, width));
     if (process.env.SCR_DEBUG)
       console.log(name, frames.length, new Date().toISOString().slice(11, 19));
   };
   for (let t = 0; t < sc.before - 1e-6; t += step) await shot();
-  await page.evaluate(() => window.__splashery.player.act());
+  // The tap; a video is stepped by hand from here on (whether or not the
+  // browser has started playing it yet).
+  await page.evaluate(() => {
+    const { player } = window.__splashery;
+    player.act();
+    const m = player.pictures?.media;
+    if (m?.kind === "video") window.__clip.videoT = m.video.currentTime || 0;
+  });
   for (let t = 0; t < sc.after - 1e-6; t += step) await shot();
   await page.close();
   // One palette for the whole clip (from frames across it).
