@@ -99,6 +99,10 @@ How it works:
   panel) or "More in the Toy tab." (options or sliders). A file of your own says it stays on your
   device; a toy you made points to the Make tab. A shelf shape edited into another shape (its rig
   gone) never gets the shelf toy's entry.
+- In an automated browser (`navigator.webdriver`, as in the test suite) the line shows by itself
+  only with `?help=show`; "?" works everywhere. Without that, the older tests that compare stage
+  screenshots a few seconds apart (the lantern check in `tests/smoke.spec.mjs`) caught the line
+  fading between shots, and the standard screenshots would change with the fade's timing.
 - Nothing goes into links, scenes or storage. Embeds (`embed/index.html`) never load `ui.js`, so
   they have no line.
 
@@ -140,4 +144,7 @@ keyed by toy id. Only your own toys' entries.
 - No opt-in embed parameter: the embed page (`embed/index.html`, `src/embed.js`) isn't this lane's,
   and the brief asked for a clean embed by default. It can be added later in an embed PR.
 - No change to `tests/taps.spec.mjs` is needed.
+- The `?help=show` switch for automated browsers is a test accommodation. If you'd rather the suite
+  saw the line too, the stage-screenshot checks in `tests/smoke.spec.mjs` need to hide `#help-line`
+  first; then the switch can go.
 - The AI and computing toys (PR #52) get the default line until that lane adds its entries.

@@ -13,7 +13,8 @@ import { encodeSceneHash } from "../src/codec.js";
 import { TOY_HELP, toyHelp } from "../src/toy-help.js";
 
 const SHOTS = "tests/screenshots";
-const WEBGL = "/?renderer=webgl2&profile=weak";
+// The line shows by itself in an automated browser only with ?help=show.
+const WEBGL = "/?renderer=webgl2&profile=weak&help=show";
 
 async function loadApp(page, url = WEBGL) {
   await page.goto(url);
@@ -177,6 +178,15 @@ test.describe("toy help: the line", () => {
     await expect(lineText(page)).toHaveText(TOY_HELP["chess-set"].howTo);
     await expect(line(page)).toBeVisible();
     expect(problems).toEqual([]);
+  });
+
+  test("an automated browser without ?help=show gets only the '?' button", async ({ page }) => {
+    await loadApp(page, "/?renderer=webgl2&profile=weak");
+    await expect(page.locator("#help-toggle")).toBeVisible();
+    await expect(line(page)).toBeHidden();
+    await page.click("#help-toggle");
+    await expect(line(page)).toBeVisible();
+    await expect(lineText(page)).not.toBeEmpty();
   });
 
   test("loads its text after the first paint", async ({ page }) => {

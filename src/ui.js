@@ -1444,6 +1444,10 @@ export function createUI(app) {
   // from src/toy-help.js, loaded when the first toy opens so it never holds
   // up the first paint. Nothing here goes into links or saved scenes.
   const HELP_MS = 7000;
+  // Automated browsers (the test suite) show the line by itself only with
+  // ?help=show, so the older screenshot tests see the stage as before; "?"
+  // works everywhere.
+  const helpAuto = !navigator.webdriver || new URLSearchParams(location.search).get("help") === "show"; // prettier-ignore
   const help = {
     line: $("help-line"),
     text: $("help-line-text"),
@@ -1517,7 +1521,7 @@ export function createUI(app) {
     help.line.dataset.toy = key;
     renderToyAbout(h);
     help.toggle.hidden = false;
-    if (isNew) showHelpLine();
+    if (isNew && helpAuto) showHelpLine();
   }
   help.toggle.addEventListener("click", () =>
     help.line.classList.contains("show") ? hideHelpLine() : showHelpLine(),
