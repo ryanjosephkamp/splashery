@@ -16,6 +16,25 @@ had not settled 3 s after its tap) and "a scan rig moves a part of a captured to
 console warning, like the rare engine warning in HANDOFF.md). Keep `test-results/` if either comes
 back.
 
+### HelpTextA and HelpTextB: help text for every toy (PRs #60 and #59, merged 2026-09-28)
+
+- Two lanes, split by shelf, wrote a how-to line and an About text for every toy in
+  `src/toy-help.js`: HelpTextA the 149 toys from Photoreal to Math, HelpTextB the 154 from Balls to
+  Landmarks. The 88 lines and 13 About texts lane Help wrote were kept word for word.
+- Each line was checked against the recipe (`action`, `options`, `controls`, each toggle's
+  `default`), the toy's TOY-PLAN.md row and its lane's handoff; where the tap was unclear the lanes
+  read the drive code and rendered a filmstrip (`tools/effect-clip.mjs --strip=8`). Facts come from
+  science agencies, museums and encyclopedias; ones they couldn't confirm were left out. Where a toy
+  does something the real thing doesn't, the text says "the toy" does it.
+- The owner read every text on the Help Board and approved them all on September 28, 2026
+  ([review](../reviews/2026-09-28-help/review.md)).
+- `tests/hta.spec.mjs` and `tests/htb.spec.mjs` check that every toy on their shelves has both texts
+  of the right shape, and show a long About text whole at both sizes. `tests/help.spec.mjs` now
+  reads the current texts (#61), since no toy is left without an entry.
+- Known issues (BACKLOG.md): the star's tap runs a Sun-like life for every Type, and the pearl's tap
+  shows nothing with its shell switched off; the texts are written so they stay true. The effect
+  clip tool renders an almost empty strip for the butterfly, which looks fine in the app.
+
 ### AI: AI and computing (PRs #56 and #52, merged 2026-09-28)
 
 - A new "AI and computing" shelf of twelve kit toys in `src/packs/computing.js`, each a dark board

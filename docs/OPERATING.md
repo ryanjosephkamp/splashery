@@ -180,6 +180,8 @@ site.
 Every toy has a short "how to play" line and an About text in `src/toy-help.js` (the style guide is
 in `docs/handoff/Help.md`). The owner reads them on the Help Board: each toy's thumbnail, its line
 (or, under a "Built by the app" tag, the line the app builds from its recipe) and its About text.
+The owner approved all 303 toys' texts on September 28, 2026; a new or changed toy's texts go on the
+board with its lane's review.
 
 - The Operator builds the board with `node tools/help-board.mjs` (it writes
   `.cache/pages/help-board.html`) and republishes it to its link, from main after a merge or from a

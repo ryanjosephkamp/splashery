@@ -33,8 +33,10 @@ work is in [OPERATING.md](OPERATING.md).
   sorting algorithms. The owner approved every clip after four rounds.
 - Lane Help merged the same night (#57): when a toy opens, a short "how to play" line shows beside
   it and fades; a "?" button shows it again; "About this toy" heads the About tab. The texts live in
-  `src/toy-help.js` (88 how-to lines and 13 About texts so far); a toy without its own line gets one
-  built from its recipe. Two text lanes now write the rest (below).
+  `src/toy-help.js`; a toy without its own line would get one built from its recipe.
+- The two help text lanes merged the same day (HelpTextA #60, HelpTextB #59): every one of the 303
+  toys has its own how-to line and About text, and the owner approved them all on the Help Board.
+  From now on every lane writes its own toys' help as part of "done".
 - The shelf has 303 toys (32 scans, 4 shapes and 267 kit toys). The plan (`tools/toy-plan.json`,
   [TOY-PLAN.md](TOY-PLAN.md)): all 303 keep. Every planned new tap effect is built. Scene schema v3;
   v2 still loads.
@@ -51,29 +53,28 @@ work is in [OPERATING.md](OPERATING.md).
 
 The full table, with owned files, sessions, branches and PRs, is [WORKSTREAMS.md](WORKSTREAMS.md).
 
-| Lane                                         | Status                               | Handoff                                      |
-| -------------------------------------------- | ------------------------------------ | -------------------------------------------- |
-| Operator                                     | Running; runs the lanes              | —                                            |
-| HelpTextA: help text, science and nature     | Running (started September 28, 2026) | [handoff/HelpTextA.md](handoff/HelpTextA.md) |
-| HelpTextB: help text, everyday, play, places | Running (started September 28, 2026) | [handoff/HelpTextB.md](handoff/HelpTextB.md) |
-| Next (WORKSTREAMS.md, Next)                  | Sound review, pianos and songs…      | —                                            |
+| Lane                        | Status                                                             | Handoff |
+| --------------------------- | ------------------------------------------------------------------ | ------- |
+| Operator                    | Running; runs the lanes                                            | —       |
+| Next (WORKSTREAMS.md, Next) | Sound review (waits on the owner's sound notes), pianos and songs… | —       |
 
-E4-finish, E5, E6a, E6b, F, G, Math, Fix3, AI and Help are done (WORKSTREAMS.md, "Done"). On
-September 27, 2026 the owner approved the plan in Part 1 of the How Splashery Is Made page: the
-Operator runs the lanes, workers are Opus 5.5 only (at the default effort, a trial), new public text
-is in American English, and the work goes in the order in ROADMAP.md, "Now". Lanes AI and Math
-started that day, and the Sound Board has its review features, ready for the owner's sound notes.
+E4-finish, E5, E6a, E6b, F, G, Math, Fix3, AI, Help, HelpTextA and HelpTextB are done
+(WORKSTREAMS.md, "Done"). On September 27, 2026 the owner approved the plan in Part 1 of the How
+Splashery Is Made page: the Operator runs the lanes, workers are Opus 5.5 only (at the default
+effort, a trial), new public text is in American English, and the work goes in the order in
+ROADMAP.md, "Now". Lanes AI and Math started that day, and the Sound Board has its review features,
+ready for the owner's sound notes.
 
 The owner reviewed the AI and Math clips the same day
 ([reviews/2026-09-27-ai-math](reviews/2026-09-27-ai-math/review.md)): seven good, and extras for the
 rest (3D versions beside the 2D "poster" ones, a second transformer diagram, MLPs, a CNN you draw
 on, word vectors for any words, more sorting algorithms, your own settings and Fourier text). His
 notes on the bananas' stem and the ocean wave's collapse went to lane Fix3. He also asked for toy
-help (a how-to line when a toy opens and an About tab), now step 2 of the plan. Math and Fix3 merged
+help (a how-to line when a toy opens and an About tab), step 2 of the plan. Math and Fix3 merged
 after his later rounds; AI after its fourth, when its labels became readable and sharper and the
-classic transformer's key moved off the toy into the Toy tab. The two help text lanes write a how-to
-line and an About text for every toy; the owner reads and marks them on the Help Board (a new page,
-OPERATING.md, "Pages").
+classic transformer's key moved off the toy into the Toy tab. The two help text lanes then wrote a
+how-to line and an About text for every toy; the owner read them on the Help Board (a new page,
+OPERATING.md, "Pages") and approved every one on September 28, 2026.
 
 ## Where things are
 
