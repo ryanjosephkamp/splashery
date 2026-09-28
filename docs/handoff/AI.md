@@ -273,8 +273,10 @@ What each tap does now:
 
 ## For the Operator
 
-- Merge order: the engine PR #56 first, then #52 (the drawing pad needs it; without it the CNN's
-  "draw a digit" view still works from a typed digit).
+- The engine PR #56 (the drawing pad) merged on September 28; this branch has main merged in.
+- For the hands-on lane: the owner would like tapping a unit of the classic transformer diagram to
+  highlight it and show its name (so the Toy tab key is not needed), and later grabbing single
+  neurons of the 3D neural network (each neuron is already its own part, `n<layer><index>`).
 
 - Please confirm: the transformer and looped transformer were marked "fix" with no note. I read them
   as the same ask as the other models (an actual 3D version) and built that; if the owner meant
