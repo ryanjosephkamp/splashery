@@ -1864,8 +1864,8 @@ Proposals below are suggestions; the owner may change them.
   - Improved: AI: inputs X1 and X3 light and send pulses along wires as thick as their weights; the
     gauge fills to under the threshold and the lamp flashes red. The two live wires thicken (it
     learns), the pulses go again, the gauge passes the threshold and the lamp snaps on gold (4 s).
-    Owner's review: a 3D version too, so a View option adds a 3D model (bulbs on posts, a glass
-    gauge, an output bulb on a stand).
+    Owner's review: a 3D version too, so a View option adds a 3D model that floats in space (no
+    stand, after the third review): glass bulbs, wires, a glass gauge and an output bulb.
   - Sound: A blip for each input, a click as the lamp decides, a rising tone when it learns.
 - **Multilayer perceptron** (`multilayer-perceptron`). Now: tap: Try all four inputs. Plan: keep.
   - Owner: Owner's review of the perceptron (September 27, 2026): add 2D poster and 3D multilayer
@@ -1876,7 +1876,8 @@ Proposals below are suggestions; the owner may change them.
   - Improved: AI: XOR, one input pair at a time (00, 01, 10, 11): the inputs light, pulses run along
     blue (adding) and red (subtracting) wires to the OR and NAND neurons, the ones that fire send
     pulses to the AND neuron, the output lamp lights for 01 and 10 only, and each answer is written
-    into the truth table (5 s). A View option picks the poster or a 3D model.
+    into the truth table (5 s). A View option picks the poster or a 3D model, which floats in space
+    (no stand).
   - Sound: A blip for each input, a ding when the answer is 1, a knock when it is 0.
 - **Neural network** (`neural-network`). Now: tap: Forward and back. Plan: keep.
   - Owner: Approved on the Toy Ideas page (lane AI).
@@ -1885,10 +1886,11 @@ Proposals below are suggestions; the owner may change them.
     weights shift a little (4.5 s).
   - Improved: AI: a 3-4-2 network with a real forward pass: yellow pulses run layer by layer and
     each neuron glows as bright as it fires; red pulses run back and the wires thicken or thin a
-    little, easing back at the end (4.5 s). Owner's review: a View option adds a 3D model (glass
-    neurons in rings on a stand, pulses through the air). Its size is set by options: 2 to 4 inputs,
-    1 to 3 hidden layers of 2 to 5 neurons, 1 to 3 outputs (at most 14 neurons); networks with more
-    than 24 wires send waves of light along the wires.
+    little, easing back at the end (4.5 s). Owner's review: a View option adds a 3D model built like
+    a molecule (third review): solid neuron balls in rings, weights as bonds, floating with no
+    stand; a gold shell grows round each neuron as it fires. Its size is set by options: 2 to 4
+    inputs, 1 to 3 hidden layers of 2 to 5 neurons, 1 to 3 outputs (at most 14 neurons); networks
+    with more than 24 wires send waves of light along the wires.
   - Sound: A rising arpeggio going forward, a falling one coming back.
 - **Convolutional network** (`cnn`). Now: tap: Read the digit. Plan: keep.
   - Owner: Approved on the Toy Ideas page (lane AI).
@@ -1925,7 +1927,8 @@ Proposals below are suggestions; the owner may change them.
     encoder-decoder layout (from the 2017 paper's figure, with generic labels): a packet rises up
     the encoder, each box lighting as it passes, crosses into the decoder's middle attention, the
     decoder's packet meets it and goes on through the linear layer and softmax, and the next word
-    comes out of the top; both diagrams have a 3D model.
+    comes out of the top; both diagrams have a 3D model. After the third review the classic diagram
+    is spread out, each box carries an icon instead of its name, and a key names the icons.
   - Sound: A shimmering chord for each layer, a pop for the new token.
 - **Looped transformer** (`looped-transformer`). Now: tap: Loop until it's sure. Plan: keep.
   - Owner: Approved on the Toy Ideas page (lane AI).

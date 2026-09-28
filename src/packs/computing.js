@@ -198,6 +198,15 @@ const GLYPHS = {
   Σ: "11111 10000 01000 00100 01000 10000 11111",
   θ: "01110 10001 10001 11111 10001 10001 01110",
   "→": "00000 00100 00010 11111 00010 00100 00000",
+  // Icons for the classic transformer's boxes and its key.
+  "◉": "00000 01110 10001 10101 10001 01110 00000", // attention (an eye)
+  "◒": "00000 11111 11111 10101 10001 01110 00000", // masked attention
+  "»": "00000 10100 01010 00101 01010 10100 00000", // feed forward
+  "⁞": "01110 01010 01110 01010 01110 01010 01110", // embedding (a vector)
+  "∿": "00000 01000 10100 10101 00101 00010 00000", // positional encoding
+  "╱": "00001 00010 00010 00100 01000 01000 10000", // linear
+  "▥": "00000 00001 00001 00101 00101 10101 10101", // softmax
+  "×": "00000 10001 01010 00100 01010 10001 00000",
   " ": "00000 00000 00000 00000 00000 00000 00000",
 };
 const BITS = Object.fromEntries(
@@ -426,9 +435,10 @@ function makeNet(sizes) {
 }
 // Where the neurons sit: in columns on the poster, in rings in the 3D model
 // (the flow slanting toward the front right).
+const ringR = (n) => (n === 1 ? 0 : n === 2 ? 0.42 : n === 3 ? 0.5 : n === 4 ? 0.6 : 0.68);
 function netLayout(net, view) {
   const L = net.sizes.length;
-  const turn = (p) => [p[0] * Math.cos(0.7) - p[2] * Math.sin(0.7), p[1], p[0] * Math.sin(0.7) + p[2] * Math.cos(0.7)]; // prettier-ignore
+  const turn = (p) => [p[0] * Math.cos(0.3) - p[2] * Math.sin(0.3), p[1], p[0] * Math.sin(0.3) + p[2] * Math.cos(0.3)]; // prettier-ignore
   const pos = net.sizes.map((n, l) => {
     const x = -1 + (2 * l) / (L - 1);
     return Array.from({ length: n }, (_, i) => {
@@ -436,13 +446,16 @@ function netLayout(net, view) {
         const gap = n <= 2 ? 0.6 : n === 3 ? 0.5 : n === 4 ? 0.4 : 0.34;
         return [x * 0.95, ((n - 1) / 2 - i) * gap, 0];
       }
-      const r = n === 1 ? 0 : n === 2 ? 0.42 : n === 3 ? 0.55 : n === 4 ? 0.7 : 0.78;
-      const a = Math.PI / 2 + (i * TAU) / n + (n === 2 ? Math.PI / 2 : n === 4 ? Math.PI / 4 : 0);
-      return turn([x * 1.05, 0.25 + r * Math.sin(a), r * Math.cos(a)]);
+      // In 3D each layer is a ring of neurons across the flow, like a
+      // molecule's atoms: it reads from any side as you turn it.
+      const r = ringR(n);
+      const a = Math.PI / 2 + (i * TAU) / n + (n === 4 ? Math.PI / 4 : 0);
+      return turn([x * 1.35, r * Math.sin(a), r * Math.cos(a)]);
     });
   });
   const wires = net.wires.map((w) => ({ ...w, p0: pos[w.l][w.a], p1: pos[w.l + 1][w.b] }));
-  const foot = net.sizes.map((_, l) => add(turn([(-1 + (2 * l) / (L - 1)) * 1.05, -0.55, 0]), [0, 0, 0.75])); // prettier-ignore
+  // The 3D labels float over each ring.
+  const foot = net.sizes.map((n, l) => turn([(-1 + (2 * l) / (L - 1)) * 1.35, ringR(n) + 0.3, 0])); // prettier-ignore
   const labels = net.sizes.map((_, l) =>
     l === 0 ? "IN" : l === L - 1 ? "OUT" : L === 3 ? "HIDDEN" : `H${l}`,
   );
@@ -1219,10 +1232,10 @@ function buildNet(k, o) {
   const L = net.sizes.length;
   k.data = { view: model ? "model" : "poster", sizes: net.sizes, acts: net.acts, wires: lay.wires, beads }; // prettier-ignore
   const z = model ? 0 : 0.04;
-  const R = model ? 0.13 : 0.13;
+  const R = model ? 0.17 : 0.13;
   const maxN = Math.max(...net.sizes);
-  if (model) stand(k, 1.05, -0.72);
-  else board(k, 2.9, Math.max(1.8, maxN * 0.36 + 0.75));
+  // The 3D model floats in space (no stand), like the molecules.
+  if (!model) board(k, 2.9, Math.max(1.8, maxN * 0.36 + 0.75));
   const n = lay.wires.length;
   lay.wires.forEach((w, i) => {
     const dir = unit(sub(w.p1, w.p0));
@@ -1253,39 +1266,34 @@ function buildNet(k, o) {
     col.forEach((p, i) => {
       const part = k.part(`n${l}${i}`, { pivot: add(p, [0, 0, model ? 0 : z + 0.06]) });
       if (model) {
-        k.add(k.sphere(R), {
-          pos: p,
-          even: true,
-          flat: 0.35,
-          weight: 1.5,
-          opacity: 0.42,
-          pattern: false,
-          color: (c) => keep(lit("#3b4a74", c.n, { amb: 0.75, dif: 0.35, spec: 0.8, pow: 24 })),
-        });
+        // A neuron is a solid glossy ball (a piece of its own, like an atom
+        // of the molecule toy); a gold shell (the part) grows round it as it
+        // fires, with a soft halo.
+        const inCol = l === 0 ? "#2f8fb0" : l === L - 1 ? "#3a9a6a" : "#4a5a9a";
         k.add(k.sphere(R * 0.8), {
           pos: p,
-          flat: 0.4,
+          even: true,
+          flat: 0.3,
+          weight: 1.5,
+          pattern: false,
+          color: (c) => keep(lit(inCol, c.n, { amb: 0.65, dif: 0.45, spec: 0.8, pow: 24 })),
+        });
+        k.add(k.sphere(R), {
+          pos: p,
+          flat: 0.35,
           weight: 2,
           part,
           pattern: false,
-          color: (c) => keep(lit("#ffb400", c.n, { amb: 0.95, dif: 0.25, spec: 0.5 })),
+          color: (c) => keep(lit("#ffb400", c.n, { amb: 0.9, dif: 0.3, spec: 0.6, pow: 20 })),
         });
-        k.add(k.sphere(R * 1.25), {
+        k.add(k.sphere(R * 1.3), {
           pos: p,
           flat: 0.5,
           size: 1.5,
-          opacity: 0.25,
+          opacity: 0.22,
           part,
           pattern: false,
           color: () => keep("#ffe28a"),
-        });
-        const h = p[1] + 0.72;
-        k.add(k.cylinder(0.008, h - R), {
-          pos: [p[0], -0.72 + (h - R) / 2, p[2]],
-          flat: 0.4,
-          weight: 1.2,
-          pattern: false,
-          color: () => keep("#4a5778"),
         });
         return;
       }
@@ -1311,7 +1319,7 @@ function buildNet(k, o) {
   );
   const bottom = -Math.max(1.8, maxN * 0.36 + 0.75) / 2 + 0.1;
   lay.labels.forEach((label, l) => {
-    if (model) sign(k, label, lay.foot[l], 0.022, { color: "#9fb0d6" });
+    if (model) sign(k, label, lay.foot[l], 0.018, { color: "#9fb0d6" });
     else text(k, label, [lay.pos[l][0][0], bottom, 0.003], 0.02, "#9fb0d6");
   });
 }
@@ -1365,14 +1373,12 @@ function bulb(k, p, r, floor, { post = true } = {}) {
   }
 }
 
-// The perceptron as a 3D model on a round stand: glass bulbs on posts for
-// the inputs, wires through the air to a metal sum node, a glass gauge the
-// sum fills, and a bulb for the output.
+// The perceptron as a 3D model floating in space (turn it around to watch
+// it work): glass bulbs for the inputs, wires through the air to a metal sum
+// node, a glass gauge the sum fills, and a bulb for the output.
 function buildPerceptron3D(k) {
   const { P, node } = PERC3D;
   k.data = { view: "model" };
-  const floor = -0.62;
-  stand(k, 1.2, floor);
   const R = 0.11;
   P.forEach((p, i) => {
     const dir = unit(sub(node, p));
@@ -1386,7 +1392,7 @@ function buildPerceptron3D(k) {
       r0,
       r0 !== r1 ? { to: r1, channel: 0, color: "#6d7fa6" } : { color: "#6d7fa6" },
     );
-    bulb(k, p, R, floor);
+    bulb(k, p, R, 0, { post: false });
     glow3D(k, p, R * 0.75, "#3fd8ff", { part: k.part("in" + i, { pivot: p }) });
     bead(k, p, 0.075, "#3fd8ff", i);
     sign(k, "X" + (i + 1), add(p, [-0.26, 0, 0]), 0.018, { color: "#9fb0d6" });
@@ -1401,12 +1407,6 @@ function buildPerceptron3D(k) {
     color: (c) => keep(lit("#56648a", c.n, { amb: 0.6, dif: 0.45, spec: 0.7, pow: 20 })),
   });
   sign(k, "Σ", add(node, [0, 0, 0.2]), 0.03, { color: "#dfe8ff" });
-  k.add(k.cylinder(0.02, node[1] - 0.18 - floor), {
-    pos: [node[0], (node[1] - 0.18 + floor) / 2, node[2]],
-    flat: 0.35,
-    pattern: false,
-    color: () => keep("#4a5778"),
-  });
   k.add(k.sphere(0.27), {
     pos: node,
     flat: 0.5,
@@ -1418,11 +1418,11 @@ function buildPerceptron3D(k) {
     channel: 1,
     color: () => keep("#8ff0ff"),
   });
-  // The gauge: a glass tube standing on the stand; the liquid rises with
-  // the sum (out.grow); an orange ring marks the threshold.
+  // The gauge: a glass tube; the liquid rises with the sum (out.grow); an
+  // orange ring marks the threshold.
   const gx = 0.6;
   const gh = 1.0;
-  const g0 = floor + 0.02;
+  const g0 = -0.5;
   wire(k, [add(node, [0.18, 0, 0]), [gx - 0.12, 0, 0]], percRadius(0.6), { color: "#6d7fa6" });
   k.add(k.cylinder(0.11, gh, { caps: false }), {
     pos: [gx, g0 + gh / 2, 0],
@@ -1462,7 +1462,7 @@ function buildPerceptron3D(k) {
     percRadius(0.6),
     { color: "#6d7fa6" },
   );
-  bulb(k, out, 0.17, floor);
+  bulb(k, out, 0.17, 0, { post: false });
   glow3D(k, out, 0.13, "#ffc934", { channel: 2 });
   glow3D(k, out, 0.13, "#ff4d5e", { channel: 3 });
   sign(k, "OUT", add(out, [0, 0.32, 0]), 0.02, { color: "#9fb0d6" });
@@ -1903,43 +1903,66 @@ const xorWire = (w) => 0.014 + 0.016 * Math.abs(w);
 const xorWireColor = (w) => (w > 0 ? "#5d8fd6" : "#d66a6a");
 
 // The classic encoder-decoder transformer (the layout of the 2017 paper's
-// figure, with generic labels): the encoder column on the left, the decoder
-// on the right, each box lit as the data passes. Heights are recipe y.
+// figure): the encoder column on the left, the decoder on the right, each
+// box lit as the data passes. Each box carries an icon instead of its name,
+// and a key at the bottom names them. Heights are recipe y.
 const TFC = (() => {
-  const enc = -0.72;
-  const dec = 0.72;
-  const box = (col, y, label, color, h = 0.14) => ({ x: col, y, label, color, h });
+  const enc = -0.8;
+  const dec = 0.8;
+  const W = 0.9;
+  const box = (col, y, icon, color, h = 0.2) => ({ x: col, y, icon, color, h });
   const PINK = "#f2a7b8";
   const ORANGE = "#f5a45a";
   const YELLOW = "#f2d95c";
   const BLUE = "#7fb2ea";
   const encBoxes = [
-    box(enc, -0.84, "EMBED", PINK),
-    box(enc, -0.28, "ATTENTION", ORANGE),
-    box(enc, -0.1, "ADD+NORM", YELLOW, 0.1),
-    box(enc, 0.14, "FEED FWD", BLUE),
-    box(enc, 0.32, "ADD+NORM", YELLOW, 0.1),
+    box(enc, -1.2, "⁞", PINK),
+    box(enc, -0.4, "◉", ORANGE),
+    box(enc, -0.1, "+", YELLOW, 0.12),
+    box(enc, 0.2, "»", BLUE),
+    box(enc, 0.5, "+", YELLOW, 0.12),
   ];
   const decBoxes = [
-    box(dec, -0.84, "EMBED", PINK),
-    box(dec, -0.34, "MASKED ATTN", ORANGE),
-    box(dec, -0.17, "ADD+NORM", YELLOW, 0.1),
-    box(dec, 0.03, "ATTENTION", ORANGE),
-    box(dec, 0.2, "ADD+NORM", YELLOW, 0.1),
-    box(dec, 0.41, "FEED FWD", BLUE),
-    box(dec, 0.58, "ADD+NORM", YELLOW, 0.1),
-    box(dec, 0.84, "LINEAR", "#b9a7ec"),
-    box(dec, 1.03, "SOFTMAX", "#8fd9a0"),
+    box(dec, -1.2, "⁞", PINK),
+    box(dec, -0.4, "◒", ORANGE),
+    box(dec, -0.1, "+", YELLOW, 0.12),
+    box(dec, 0.2, "◉", ORANGE),
+    box(dec, 0.5, "+", YELLOW, 0.12),
+    box(dec, 0.8, "»", BLUE),
+    box(dec, 1.1, "+", YELLOW, 0.12),
+    box(dec, 1.55, "╱", "#b9a7ec"),
+    box(dec, 1.9, "▥", "#8fd9a0"),
   ];
+  const y0 = -1.58;
+  const encTop = 0.8;
+  const decTop = 2.1;
+  const attnY = 0.2; // the decoder's middle attention, where the encoder's output joins
+  const softY = 1.9;
   // The data's way up each column, and across from the encoder's top into
   // the decoder's middle attention.
-  const encPath = [[enc, -1.06, 0], [enc, 0.5, 0]]; // prettier-ignore
-  const decPath = [[dec, -1.06, 0], [dec, 1.2, 0]]; // prettier-ignore
-  const cross = [[enc, 0.5, 0], [enc, 0.66, 0], [0, 0.66, 0], [0, 0.03, 0], [dec - 0.3, 0.03, 0]]; // prettier-ignore
-  const y0 = -1.06;
-  const encTop = 0.5;
-  const decTop = 1.2;
-  return { enc, dec, encBoxes, decBoxes, encPath, decPath, cross, y0, encTop, decTop, PINK, ORANGE, YELLOW, BLUE }; // prettier-ignore
+  const encPath = [[enc, y0, 0], [enc, encTop, 0]]; // prettier-ignore
+  const decPath = [[dec, y0, 0], [dec, decTop, 0]]; // prettier-ignore
+  const cross = [[enc, encTop, 0], [enc, 1.0, 0], [0, 1.0, 0], [0, attnY, 0], [dec - W / 2, attnY, 0]]; // prettier-ignore
+  // The N× blocks round the repeated layers, and the residual loops (from
+  // below each sublayer round to its add & norm).
+  const blocks = [[enc, -0.62, 0.68], [dec, -0.62, 1.28]]; // prettier-ignore
+  const loops = [[enc, -0.56, -0.1], [enc, 0.06, 0.5], [dec, -0.56, -0.1], [dec, 0.06, 0.5], [dec, 0.66, 1.1]]; // prettier-ignore
+  const posY = -0.86;
+  const answerY = 2.32;
+  // The key: three rows of three, under the inputs.
+  const key = [
+    ["◉", "ATTENTION"],
+    ["◒", "MASKED"],
+    ["+", "ADD NORM"],
+    ["»", "FEED FWD"],
+    ["⁞", "EMBED"],
+    ["∿", "POSITION"],
+    ["╱", "LINEAR"],
+    ["▥", "SOFTMAX"],
+    ["N×", "REPEATED"],
+  ];
+  const keyAt = (i) => [-1.2 + (i % 3) * 1.15, -2.0 - Math.floor(i / 3) * 0.23];
+  return { enc, dec, W, encBoxes, decBoxes, encPath, decPath, cross, blocks, loops, y0, encTop, decTop, attnY, softY, posY, answerY, key, keyAt, PINK, ORANGE, YELLOW, BLUE }; // prettier-ignore
 })();
 // Where the packets are at time s: the encoder's (0.3 to 1.8 s), across to
 // the decoder (1.8 to 2.4 s), the decoder's (up to its middle attention by
@@ -1948,9 +1971,9 @@ function tfcPacket(s) {
   const T = TFC;
   const enc = ease(band(s, 0.3, 1.8));
   const cross = ease(band(s, 1.8, 2.4));
-  const midFrac = (0.03 - T.y0) / (T.decTop - T.y0);
+  const midFrac = (T.attnY - T.y0) / (T.decTop - T.y0);
   const decA = ease(band(s, 0.9, 2.4)) * midFrac;
-  const decB = ease(band(s, 2.5, 3.4)) * ((1.03 - T.y0) / (T.decTop - T.y0) - midFrac);
+  const decB = ease(band(s, 2.5, 3.4)) * ((T.softY - T.y0) / (T.decTop - T.y0) - midFrac);
   return { enc, cross, dec: decA + decB };
 }
 
@@ -1985,26 +2008,34 @@ function tfcDrive(s, out, info) {
 // The classic transformer, as a poster or a 3D model.
 function buildClassicTf(k, model) {
   const T = TFC;
+  const W = T.W;
   k.data = { view: model ? "model" : "poster", diagram: "classic" };
   const depth = model ? 0.24 : 0.04;
   const zf = model ? 0 : 0.03; // box centres
   const front = zf + depth / 2;
+  // A label: flat text on the poster, on a dark plate in 3D (so it reads
+  // against any background).
+  const label = (str, p, px, color = "#9fb0d6") =>
+    model ? sign(k, str, p, px, { color }) : text(k, str, [p[0], p[1], 0.003], px, color);
   if (model) {
-    k.add(k.box(2.7, 0.08, 1.0), {
-      pos: [0, T.y0 - 0.1, 0],
+    k.add(k.box(3.5, 0.08, 1.1), {
+      pos: [0, -2.62, 0],
       even: true,
       flat: 0.25,
       color: (c) =>
         c.n[1] > 0.5 ? keep(BOARD) : lit(BOARD_RIM, c.n, { amb: 0.75, dif: 0.3, spec: 0.1 }),
     });
-  } else board(k, 3.05, 2.62, { at: [0, 0.07] });
-  const W = 1.0;
+    // The key stands on the front of the base, on its own dark plate.
+    k.add(k.box(3.4, 0.72, 0.05), {
+      pos: [0, -2.22, 0.3],
+      even: true,
+      flat: 0.2,
+      pattern: false,
+      color: (c) => keep(Math.min(1.7 - Math.abs(c.p[0]), 0.36 - Math.abs(c.p[1] + 2.22)) < 0.02 ? BOARD_RIM : "#0b1020"), // prettier-ignore
+    });
+  } else board(k, 3.5, 5.3, { at: [0, -0.12] });
   // The two N× blocks behind the layers.
-  for (const [x, y0, y1] of [
-    [T.enc, -0.4, 0.42],
-    [T.dec, -0.44, 0.68],
-  ]) {
-    // prettier-ignore
+  for (const [x, y0, y1] of T.blocks) {
     const c = [x, (y0 + y1) / 2, model ? 0 : 0.008];
     if (model) wireBox(k, c, [W + 0.16, y1 - y0, 0.4], 0.012, "#8e9ab8");
     else
@@ -2020,10 +2051,10 @@ function buildClassicTf(k, model) {
           return keep(e < 0.012 ? "#8e9ab8" : "#232b40");
         },
       });
-    text(k, "N×".replace("×", "X"), [x - W / 2 - 0.2, (y0 + y1) / 2, model ? 0.2 : 0.003], 0.018, "#9fb0d6"); // prettier-ignore
+    label("N×", [x + (x < 0 ? -1 : 1) * (W / 2 + 0.3), (y0 + y1) / 2, model ? 0.2 : 0], 0.024);
   }
-  // The boxes: solid, their names on the front, and a lit overlay that
-  // glows as the packet passes (band on channel 0 or 1 by column).
+  // The boxes: solid, an icon on the front, and a lit overlay that glows as
+  // the packet passes (band on channel 0 or 1 by column).
   const boxes = [...T.encBoxes.map((b) => [b, 0, T.encTop]), ...T.decBoxes.map((b) => [b, 1, T.decTop])]; // prettier-ignore
   for (const [b, ch, top] of boxes) {
     const at = (b.y - T.y0) / (top - T.y0);
@@ -2045,64 +2076,83 @@ function buildClassicTf(k, model) {
       channel: ch,
       color: () => keep(b.color),
     });
-    const px = Math.min(b.h < 0.12 ? 0.015 : 0.018, (W - 0.08) / textWidth(b.label));
-    text(k, b.label, [b.x, b.y, front + 0.01], px, "#1a2030");
+    text(k, b.icon, [b.x, b.y, front + 0.01], b.h < 0.2 ? 0.015 : 0.027, "#1a2030");
   }
-  // Positional encoding: a ⊕ over each column's embedding, with a little
-  // sine-wave dial beside it.
+  // Positional encoding: a ⊕ over each column's embedding, with a sine icon
+  // beside it.
   for (const x of [T.enc, T.dec]) {
-    const c = [x, -0.62, front];
-    k.add(k.torus(0.07, 0.012), { pos: c, rot: [90, 0, 0], weight: 3, flat: 0.4, pattern: false, color: () => keep("#dfe8ff") }); // prettier-ignore
-    text(k, "+", add(c, [0, 0, 0.005]), 0.018, "#dfe8ff");
-    const d = [x + (x < 0 ? 0.34 : -0.34), -0.62, front];
-    k.add(k.torus(0.08, 0.01), { pos: d, rot: [90, 0, 0], weight: 3, flat: 0.4, pattern: false, color: () => keep("#dfe8ff") }); // prettier-ignore
-    wire(k, Array.from({ length: 17 }, (_, i) => [d[0] - 0.06 + (0.12 * i) / 16, d[1] + 0.035 * Math.sin((i / 16) * TAU), front]), 0.006, { color: "#dfe8ff" }); // prettier-ignore
-    wire(k, [add(d, [x < 0 ? -0.08 : 0.08, 0, 0]), add(c, [x < 0 ? 0.07 : -0.07, 0, 0])], 0.008, { color: "#9fb0d6" }); // prettier-ignore
-    text(k, "POS", add(d, [0, -0.14, 0]), 0.013, "#9fb0d6");
+    const c = [x, T.posY, front];
+    const ink = model ? "#5b6b8c" : "#dfe8ff";
+    k.add(k.torus(0.08, 0.013), { pos: c, rot: [90, 0, 0], weight: 3, flat: 0.4, pattern: false, color: () => keep(ink) }); // prettier-ignore
+    text(k, "+", add(c, [0, 0, 0.005]), 0.02, ink);
+    const d = [x + (x < 0 ? 0.36 : -0.36), T.posY, front];
+    k.add(k.torus(0.09, 0.011), { pos: d, rot: [90, 0, 0], weight: 3, flat: 0.4, pattern: false, color: () => keep(ink) }); // prettier-ignore
+    text(k, "∿", add(d, [0, 0, 0.005]), 0.02, ink);
+    wire(k, [add(d, [x < 0 ? -0.09 : 0.09, 0, 0]), add(c, [x < 0 ? 0.08 : -0.08, 0, 0])], 0.008, { color: "#9fb0d6" }); // prettier-ignore
   }
   // The lines the data follows: up each column, residual loops round each
   // sublayer, and the encoder's output across into the decoder.
   const Z = front + 0.002;
-  wire(
-    k,
-    T.encPath.map((p) => [p[0], p[1], Z - 0.01]),
-    0.01,
-    { color: "#9fb0d6" },
-  );
-  wire(
-    k,
-    T.decPath.map((p) => [p[0], Math.min(p[1], 1.1), Z - 0.01]),
-    0.01,
-    { color: "#9fb0d6" },
-  );
-  wire(k, T.cross.map((p, i) => [p[0], p[1], Z + (model ? 0.25 * Math.sin((Math.PI * i) / (T.cross.length - 1)) : 0)]), 0.012, { color: "#f5a45a" }); // prettier-ignore
-  for (const [x, ya, yb] of [
-    [T.enc, -0.42, -0.1],
-    [T.enc, 0.02, 0.32],
-    [T.dec, -0.47, -0.17],
-    [T.dec, -0.08, 0.2],
-    [T.dec, 0.3, 0.58],
+  // Each column's line runs only in the gaps between its boxes (and round
+  // the ⊕), so it never crosses a box's icon.
+  for (const [x, list, top] of [
+    [T.enc, T.encBoxes, T.encTop],
+    [T.dec, T.decBoxes, T.decTop - 0.08],
   ]) {
-    // prettier-ignore
-    const side = x + (x < 0 ? -1 : 1) * (W / 2 + 0.05);
+    const solid = [...list.map((b) => [b.y - b.h / 2, b.y + b.h / 2]), [T.posY - 0.08, T.posY + 0.08], [T.y0 - 0.09, T.y0 + 0.09]].sort((a, b) => a[0] - b[0]); // prettier-ignore
+    let y = T.y0;
+    for (const [a, b] of solid) {
+      if (a - y > 0.02)
+        wire(
+          k,
+          [
+            [x, y, Z],
+            [x, a, Z],
+          ],
+          0.01,
+          { color: "#9fb0d6" },
+        );
+      y = Math.max(y, b);
+    }
+    if (top - y > 0.02)
+      wire(
+        k,
+        [
+          [x, y, Z],
+          [x, top, Z],
+        ],
+        0.01,
+        { color: "#9fb0d6" },
+      );
+  }
+  wire(k, T.cross.map((p, i) => [p[0], p[1], Z + (model ? 0.25 * Math.sin((Math.PI * i) / (T.cross.length - 1)) : 0)]), 0.012, { color: "#f5a45a" }); // prettier-ignore
+  for (const [x, ya, yb] of T.loops) {
+    const side = x + (x < 0 ? -1 : 1) * (W / 2 + 0.07);
     wire(k, [[x, ya, Z], [side, ya, Z], [side, yb, Z], [x + (x < 0 ? -W / 2 : W / 2), yb, Z]], 0.007, { color: "#9fb0d6" }); // prettier-ignore
   }
   // Inputs, outputs (shifted right) and the answer.
   const tile = (word, p, color, token) =>
-    model ? block3D(k, word, p, color, token, { w: 0.48, h: 0.16, d: 0.1, px: 0.015 }) : wordTile(k, word, p, color, token, { w: 0.48, h: 0.16, px: 0.015 }); // prettier-ignore
-  tile("HELLO", [T.enc - 0.26, T.y0, zf + 0.02], "#e8eefc");
-  tile("WORLD", [T.enc + 0.26, T.y0, zf + 0.02], "#e8eefc");
-  tile("START", [T.dec - 0.26, T.y0, zf + 0.02], "#e8eefc");
-  tile("HOLA", [T.dec + 0.26, T.y0, zf + 0.02], "#e8eefc");
-  tile("MUNDO", [T.dec, 1.33, zf + 0.02], "#ffd34d", 3);
-  text(k, "INPUTS", [T.enc, T.y0 - 0.15, model ? 0.2 : 0.003], 0.015, "#9fb0d6");
-  text(k, "OUTPUTS", [T.dec, T.y0 - 0.15, model ? 0.2 : 0.003], 0.015, "#9fb0d6");
+    model ? block3D(k, word, p, color, token, { w: 0.5, h: 0.18, d: 0.1, px: 0.015 }) : wordTile(k, word, p, color, token, { w: 0.5, h: 0.18, px: 0.015 }); // prettier-ignore
+  tile("HELLO", [T.enc - 0.27, T.y0, zf + 0.02], "#e8eefc");
+  tile("WORLD", [T.enc + 0.27, T.y0, zf + 0.02], "#e8eefc");
+  tile("START", [T.dec - 0.27, T.y0, zf + 0.02], "#e8eefc");
+  tile("HOLA", [T.dec + 0.27, T.y0, zf + 0.02], "#e8eefc");
+  tile("MUNDO", [T.dec, T.answerY, zf + 0.02], "#ffd34d", 3);
+  // The key.
+  const kz = model ? 0.33 : 0.003;
+  if (!model)
+    k.add(k.box(3.2, 0.012, 0.01), { pos: [0, -1.82, 0.003], flat: 0.3, pattern: false, color: () => keep(BOARD_RIM) }); // prettier-ignore
+  T.key.forEach(([icon, name], i) => {
+    const [x, y] = T.keyAt(i);
+    text(k, icon, [x - 0.34, y, kz], 0.02, "#dfe8ff");
+    text(k, name, [x - 0.18, y, kz], 0.015, "#9fb0d6", { align: "left" });
+  });
   // The packets (tokens 0 to 2).
   const Zp = model ? 0.2 : 0.1;
   bead(k, [T.enc, T.y0, Zp], 0.07, "#57e0ff", 0);
-  bead(k, [T.enc, 0.5, Zp], 0.07, "#57e0ff", 1);
+  bead(k, [T.enc, T.encTop, Zp], 0.07, "#57e0ff", 1);
   bead(k, [T.dec, T.y0, Zp], 0.07, "#ffd34d", 2);
-  k.reach([T.dec, 1.45, 0]);
+  k.reach([T.dec, T.answerY + 0.12, 0]);
 }
 
 // The drawable network (the CNN's "3D, draw a digit" view): a small CNN
@@ -2446,9 +2496,8 @@ export const RECIPES = {
       const model = o.view === "model";
       const A = model ? XOR_AT.model : XOR_AT.poster;
       k.data = { view: model ? "model" : "poster" };
-      const floor = -0.62;
-      if (model) stand(k, 1.25, floor);
-      else board(k, 3.05, 1.6);
+      // The 3D model floats in space (no stand), so you can turn it round.
+      if (!model) board(k, 3.05, 1.6);
       const z = model ? 0 : 0.04;
       const R = 0.12;
       const lift = (p) => add(p, [0, 0, z]);
@@ -2469,10 +2518,11 @@ export const RECIPES = {
       A.P.forEach((p, i) => {
         const part = k.part("in" + i, { pivot: p });
         if (model) {
-          bulb(k, p, R, floor);
+          bulb(k, p, R, 0, { post: false });
           glow3D(k, p, R * 0.75, "#3fd8ff", { part });
         } else lamp(k, lift(p), R, { on: "#57e0ff", part });
-        text(k, "X" + (i + 1), [p[0] - 0.3, p[1], model ? p[2] : 0.003], 0.018, "#9fb0d6");
+        if (model) sign(k, "X" + (i + 1), add(p, [-0.38, 0, 0]), 0.018, { color: "#9fb0d6" });
+        else text(k, "X" + (i + 1), [p[0] - 0.3, p[1], 0.003], 0.018, "#9fb0d6");
         A.H.forEach((_, hh) => bead(k, lift(add(p, [0, 0, model ? 0 : 0.03])), 0.06, "#8af0ff", i * 2 + hh)); // prettier-ignore
       });
       // Hidden neurons (OR, NAND) and the output neuron (AND): discs with
@@ -2491,21 +2541,14 @@ export const RECIPES = {
         if (model) glow3D(k, p, 0.12, color, { part });
         else lampLight(k, add(lift(p), [0, 0, 0.035]), 0.14, color, { part });
         sign(k, label, add(p, [0, 0.27, model ? 0 : 0.003]), 0.017, { color: "#c7d3f0" });
-        if (model) {
-          k.add(k.cylinder(0.012, p[1] - 0.15 - floor), {
-            pos: [p[0], (p[1] - 0.15 + floor) / 2, p[2]],
-            flat: 0.35,
-            pattern: false,
-            color: () => keep("#4a5778"),
-          });
-        }
       };
       XOR.hidden.forEach((n, hh) => {
         neuron(A.H[hh], n.label, "h" + hh, "#ffd34d");
         bead(k, lift(add(A.H[hh], [0, 0, model ? 0 : 0.05])), 0.06, "#ffd34d", 4 + hh);
       });
       neuron(A.O, XOR.out.label, "out", "#7dff9a");
-      text(k, "XOR", [A.O[0], A.O[1] - 0.3, model ? A.O[2] + 0.1 : 0.003], 0.022, "#7dff9a");
+      if (model) sign(k, "XOR", add(A.O, [0, -0.3, 0.1]), 0.022, { color: "#7dff9a" });
+      else text(k, "XOR", [A.O[0], A.O[1] - 0.3, 0.003], 0.022, "#7dff9a");
       // The truth table: X1 X2 and the answer, a bar on the row being tried
       // (token 6), and each answer (tokens 7 to 10).
       const T = A.table;
@@ -2548,14 +2591,6 @@ export const RECIPES = {
           params: [7 + r, 0],
         });
       });
-      if (model) {
-        k.add(k.cylinder(0.02, T[1] - 0.51 - floor), {
-          pos: [T[0], (T[1] - 0.51 + floor) / 2, T[2]],
-          flat: 0.35,
-          pattern: false,
-          color: () => keep("#4a5778"),
-        });
-      }
     },
   },
   "neural-network": {
@@ -2594,7 +2629,10 @@ export const RECIPES = {
         const g = on ? ease(band(s, T.light[l], T.light[l] + 0.3)) * fade : 0;
         col.forEach((a, i) => {
           const v = g * (0.25 + 0.75 * a);
-          out.parts[`n${l}${i}`] = { scale: v, visible: v > 0.01 ? 1 : 0 };
+          // In 3D the gold shell grows out of the neuron's core: bigger and
+          // brighter the harder it fires.
+          const sc = info.data?.view === "model" ? 0.8 + 0.2 * v : v;
+          out.parts[`n${l}${i}`] = { scale: sc, visible: v > 0.01 ? 1 : 0 };
         });
       });
       const go = (x) => (x > 0 && x < 1 ? ease(x) : -1);

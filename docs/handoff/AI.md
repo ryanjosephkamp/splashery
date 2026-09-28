@@ -157,6 +157,26 @@ Second round (the Operator's notes on the owner's review, September 27, 2026;
   other toys; the embed transfer test stays green. Unknown words get one message: "\"xyz\" is not
   one of the 24,000 words it knows. Try a more common word."
 
+Round 3 (the owner's notes on round 2, September 27; everything else was marked good):
+
+- **3D perceptron and 3D multilayer perceptron** float in space: no base plate, no posts (the bulb
+  helper takes `post: false`; the gauge hangs free). The MLP's X1, X2 and XOR labels moved onto dark
+  plates. Cards `ai-perceptron-r3` and `ai-multilayer-perceptron-3d-r2`.
+- **3D neural network** is built like the molecule toy: each neuron a solid glossy ball (input blue,
+  hidden indigo, output green) and a gold shell (its own part) that grows round it as it fires; the
+  weights are bonds as thick as the weight; each layer is a ring across the flow, so it reads from
+  any side; no stand. All the size sliders work in 3D, capped at 14 neurons by the kit's 15-part
+  limit (each neuron is a part, which also keeps them ready for grabbing). Only the approach was
+  taken from `src/packs/atoms.js` (ball and stick); nothing of it was copied or edited. Card
+  `ai-neural-network-r3`.
+- **Classic transformer**, 2D and 3D: a bigger board with space between the boxes; each box carries
+  a pixel icon instead of its name (eye: attention, lidded eye: masked attention, +: add & norm, »:
+  feed forward, a vector: embedding, a wave: position, a slash: linear, bars: softmax); a key of
+  nine entries at the bottom names them (N× too); the column lines run only in the gaps between
+  boxes. In 3D the key stands on its own dark plate on the base and the N× labels are on plates.
+  INPUTS/OUTPUTS and POS labels were dropped. Cards `ai-transformer-classic-r2` and
+  `ai-transformer-classic-3d-r2`.
+
 What each tap does now:
 
 1. **Perceptron** (4 s): inputs X1 and X3 light (1, 0, 1) and send pulses along wires as thick as
