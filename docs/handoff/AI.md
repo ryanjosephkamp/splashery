@@ -177,6 +177,22 @@ Round 3 (the owner's notes on round 2, September 27; everything else was marked 
   INPUTS/OUTPUTS and POS labels were dropped. Cards `ai-transformer-classic-r2` and
   `ai-transformer-classic-3d-r2`.
 
+Round 4 (the owner's notes on round 3, September 28): "the labels are black rectangles, the writing
+too faint; higher fidelity, less blurry".
+
+- The 3D labels were far too small: at a font pixel of 0.018 a label letter is about one screen
+  pixel in a 320-pixel clip. A new `label3D()` draws labels about twice as big (font pixel 0.032 to
+  0.04), bright white on dark plates, with denser text splats (`sign`'s new `ink` weight). Used on
+  the 3D perceptron, multilayer perceptron (and a 1.6× truth table) and neural network, and for N×
+  on the classic transformer.
+- Spreading a model out does not make its labels bigger (the kit fits every toy to a sphere): keep
+  the model compact and put labels above or below their parts.
+- The classic transformer's key is off the toy: it is the recipe's `note` in the Toy tab (the owner
+  wants everything on the toy to be splats). Tapping a box to highlight and name it is for later.
+- Clips are now 480 pixels (320 looked blurry on the phone).
+- Cards `ai-perceptron-r4`, `ai-multilayer-perceptron-3d-r3`, `ai-neural-network-r4`,
+  `ai-transformer-classic-r3` and `ai-transformer-classic-3d-r3`.
+
 What each tap does now:
 
 1. **Perceptron** (4 s): inputs X1 and X3 light (1, 0, 1) and send pulses along wires as thick as

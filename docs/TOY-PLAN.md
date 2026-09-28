@@ -1928,7 +1928,8 @@ Proposals below are suggestions; the owner may change them.
     the encoder, each box lighting as it passes, crosses into the decoder's middle attention, the
     decoder's packet meets it and goes on through the linear layer and softmax, and the next word
     comes out of the top; both diagrams have a 3D model. After the third review the classic diagram
-    is spread out, each box carries an icon instead of its name, and a key names the icons.
+    is spread out, each box carries an icon instead of its name, and the key is the toy's note in
+    the panel (off the toy). Round 4: the 3D models' labels are about twice as big and bright.
   - Sound: A shimmering chord for each layer, a pop for the new token.
 - **Looped transformer** (`looped-transformer`). Now: tap: Loop until it's sure. Plan: keep.
   - Owner: Approved on the Toy Ideas page (lane AI).
