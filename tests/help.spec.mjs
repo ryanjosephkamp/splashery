@@ -145,7 +145,8 @@ test.describe("toy help: the line", () => {
     await loadApp(page, `${WEBGL}#s=${hash}`);
     await waitForToy(page, "Donut");
     await expect(line(page)).toBeVisible();
-    await expect(lineText(page)).toHaveText("Tap it: Break apart.");
+    // The donut's own line once it has one, or the line built from its tap.
+    await expect(lineText(page)).toHaveText(TOY_HELP.donut?.howTo ?? "Tap it: Break apart.");
     const s = await page.evaluate(() => window.__splashery.exportScene());
     expect(s.effects.twist).toMatchObject({ on: true, amount: 0.4 });
     // A new link (version 3) to the snail, then a refresh.
@@ -302,6 +303,13 @@ test.describe("toy help: About this toy", () => {
     test(`shows the toy's text, or the default, at ${w}x${h}`, async ({ browser }) => {
       const ctx = await browser.newContext({ viewport: { width: w, height: h } });
       const page = await ctx.newPage();
+      // Every shelf toy has an entry, so to show the default the page gets a
+      // toy-help.js without the basketball's (its module is loaded once).
+      await page.route("**/src/toy-help.js", async (route) => {
+        const res = await route.fetch();
+        const body = (await res.text()) + '\ndelete TOY_HELP["basketball"];\n';
+        await route.fulfill({ response: res, body });
+      });
       await loadApp(page);
       await pick(page, "puzzle-cube", "Puzzle cube");
       // The line's link opens the About tab (and the sheet on a phone).

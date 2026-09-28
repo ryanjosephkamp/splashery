@@ -22,7 +22,8 @@ coordinates. [docs/OPERATING.md](docs/OPERATING.md) has the rules. In short:
   owner's permission first. The Operator checks each worker's model at every check-in and stops one
   that has run on another model.
 - A lane edits only the files it owns (its row in WORKSTREAMS.md) and its own toys' entries in the
-  shared lists (`src/toy-sounds.js`, `tools/toy-plan.json`, `src/toys.js`, credits).
+  shared lists (`src/toy-sounds.js`, `src/toy-help.js`, `tools/toy-plan.json`, `src/toys.js`,
+  credits).
 - Regenerate TOY-PLAN.md; never merge it by hand.
 - No engine changes in a lane PR: a small, additive "Engine: …" PR, merged first.
 - Never edit `tests/taps.spec.mjs` (it finds every kit toy's tap by itself); a lane's extra tests go
@@ -117,7 +118,8 @@ new or changed effect against them before calling it done.
 - `docs/TOY-PLAN.md`: every toy's planned tap effect, sound and fixes, generated from
   `tools/toy-plan.json` by `node tools/toy-plan.mjs` (run it after adding or finishing a toy).
 - `tools/upkeep.mjs`: the Operator's upkeep after a merge (TOY-PLAN.md, the Sound Board page file,
-  the standard screenshots). `tools/sound-board.mjs` builds the Sound Board page.
+  the standard screenshots). `tools/sound-board.mjs` builds the Sound Board page and
+  `tools/help-board.mjs` the Help Board (every toy's how-to line and About text).
 - `docs/reviews/`: the owner's reviews, verbatim, with screenshots (sound notes too).
 - `tools/sound-review.json`: the sound review, per toy (notes, plans and new sounds to hear), shown
   on the Sound Board (OPERATING.md, "The sound review").

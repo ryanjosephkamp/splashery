@@ -16,6 +16,37 @@ had not settled 3 s after its tap) and "a scan rig moves a part of a captured to
 console warning, like the rare engine warning in HANDOFF.md). Keep `test-results/` if either comes
 back.
 
+### AI: AI and computing (PRs #56 and #52, merged 2026-09-28)
+
+- A new "AI and computing" shelf of twelve kit toys in `src/packs/computing.js`, each a dark board
+  where you watch the data move: perceptron, multilayer perceptron (it solves XOR), neural network,
+  CNN, RNN, transformer, looped transformer, diffusion model, gradient descent, word vectors,
+  sorting machine and half adder.
+- Extras from the owner's review: a Poster (2D) or 3D model view on eight of them, the 3D ones
+  floating and built like the molecules; a neural network you size yourself (up to 14 neurons); the
+  classic encoder-decoder transformer with icons on its boxes; a CNN you draw on (engine PR #56, a
+  drawing pad for a toy's input panel), trained by `tools/cnn-train.mjs` on the UCI handwritten
+  digits (CC BY 4.0) to 97% test accuracy; real GloVe word vectors (public domain) with "A - B + C";
+  eight sorting algorithms.
+- Review: four rounds. The last fixed the text at its root (text splats only on the ink, twice as
+  dense, the letters clear in front of their plates), doubled the density of the busiest toys, and
+  moved the classic transformer's key off the toy into the Toy tab note.
+- Lessons (in PACKS.md): text needs size / sqrt(weight) of 0.5 or more and splats only on the ink;
+  pieces gliding just in front of a board need `out.resort` during the glide; a long, thin model
+  comes out small (the kit fits a sphere), so lay it out as a compact block.
+
+### Help: toy help (PR #57, merged 2026-09-28)
+
+- When a toy opens (from the shelf, a link, a refresh or a scene file), a short "how to play" line
+  shows beside it (under the toy's name on a phone, at the top left of the stage on a wide screen)
+  and fades after 7 seconds; a "?" button shows it again. Embeds show no line. "About this toy"
+  heads the About tab: the toy's About text, how to play, and what you can do, read from its recipe.
+- The texts are a shared list, `src/toy-help.js` (88 how-to lines and 13 About texts to start),
+  loaded when the first toy opens. A toy without a line gets one built from its recipe. The style
+  guide for the text lanes is in `docs/handoff/Help.md`.
+- In an automated browser the line shows by itself only with `?help=show`, so the stage screenshots
+  in the smoke tests stay steady.
+
 ### Math: math you can type (PR #50, merged 2026-09-28)
 
 - A safe equation reader (`src/equation.js`) with no `eval` or `Function`: numbers, the letters each
