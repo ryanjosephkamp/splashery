@@ -43,10 +43,14 @@ work is in [OPERATING.md](OPERATING.md).
   size when zoomed. The engine lane, Pictures, merged the same evening (#64): PDF pages, photos, GIF
   and video frames become splats (PDF.js and omggif vendored), pages stream through a few sheets
   with near and far detail, the Toy tab can open a file or a web address, and the Picture lab test
-  toy sits behind the labs switch (`?labs=1`). The owner marked all eight clips good. The toy lanes
-  Books, Screens and Manual build on it now.
-- The shelf has 303 toys (32 scans, 4 shapes and 267 kit toys). The plan (`tools/toy-plan.json`,
-  [TOY-PLAN.md](TOY-PLAN.md)): all 303 keep. Every planned new tap effect is built. Scene schema v3;
+  toy sits behind the labs switch (`?labs=1`). The owner marked all eight clips good. Lane Manual
+  merged next (#65): the splat equation toy (type where splats go, in u, v and t; labs only) and the
+  public Tinkerer's Manual at `manual/`, with a 25-page PDF, linked from the About tab. Lanes Books
+  and Screens are still building; their first PRs (#67 and #66) merged early with only their handoff
+  files, so each opens a new PR for its toys.
+- The shelf has 303 toys (32 scans, 4 shapes and 267 kit toys), plus two labs toys hidden unless
+  `?labs=1` (the Picture lab and the splat equation). The plan (`tools/toy-plan.json`,
+  [TOY-PLAN.md](TOY-PLAN.md)): all 305 keep. Every planned new tap effect is built. Scene schema v3;
   v2 still loads.
 - Every kit toy's tap is checked by `tests/taps.spec.mjs`; its known exceptions (with reasons) are
   listed at its top. The full suite has 267 tests.
@@ -61,17 +65,16 @@ work is in [OPERATING.md](OPERATING.md).
 
 The full table, with owned files, sessions, branches and PRs, is [WORKSTREAMS.md](WORKSTREAMS.md).
 
-| Lane                                                     | Status                                                              | Handoff                                  |
-| -------------------------------------------------------- | ------------------------------------------------------------------- | ---------------------------------------- |
-| Operator                                                 | Running; runs the lanes                                             | —                                        |
-| Books: your book, the photo album and the picture frame  | Running (started September 28, 2026)                                | [handoff/Books.md](handoff/Books.md)     |
-| Screens: the screen and the Gaussian splat toy           | Running (started September 28, 2026)                                | [handoff/Screens.md](handoff/Screens.md) |
-| Manual: the splat equation toy and the Tinkerer's Manual | Running (started September 28, 2026)                                | [handoff/Manual.md](handoff/Manual.md)   |
-| Next (WORKSTREAMS.md, Next)                              | The sound review (when the owner's notes arrive); pianos and songs… | —                                        |
+| Lane                                                    | Status                                                              | Handoff                                  |
+| ------------------------------------------------------- | ------------------------------------------------------------------- | ---------------------------------------- |
+| Operator                                                | Running; runs the lanes                                             | —                                        |
+| Books: your book, the photo album and the picture frame | Running (started September 28, 2026)                                | [handoff/Books.md](handoff/Books.md)     |
+| Screens: the screen and the Gaussian splat toy          | Running (started September 28, 2026)                                | [handoff/Screens.md](handoff/Screens.md) |
+| Next (WORKSTREAMS.md, Next)                             | The sound review (when the owner's notes arrive); pianos and songs… | —                                        |
 
-E4-finish, E5, E6a, E6b, F, G, Math, Fix3, AI, Help, HelpTextA, HelpTextB and Pictures are done
-(WORKSTREAMS.md, "Done"). On September 27, 2026 the owner approved the plan in Part 1 of the How
-Splashery Is Made page: the Operator runs the lanes, workers are Opus 5.5 only (at the default
+E4-finish, E5, E6a, E6b, F, G, Math, Fix3, AI, Help, HelpTextA, HelpTextB, Pictures and Manual are
+done (WORKSTREAMS.md, "Done"). On September 27, 2026 the owner approved the plan in Part 1 of the
+How Splashery Is Made page: the Operator runs the lanes, workers are Opus 5.5 only (at the default
 effort, a trial), new public text is in American English, and the work goes in the order in
 ROADMAP.md, "Now". Lanes AI and Math started that day, and the Sound Board has its review features,
 ready for the owner's sound notes.
