@@ -263,6 +263,7 @@ for (const [w, h] of [
     const problems = watchConsole(page);
     await loadApp(page);
     const toys = [
+      ["cactus", "Cactus"],
       ["eiffel-tower", "Eiffel Tower"],
       ["puzzle-cube", "Puzzle cube"],
       ["chess-set", "Chess set"],
@@ -274,6 +275,10 @@ for (const [w, h] of [
       await pick(page, id, label);
       await page.waitForTimeout(1200);
       await expect(line(page)).toBeVisible();
+      // Clear of the toy's name line too (a scan's credit wraps it on a phone).
+      const status = await page.locator("#toy-status").boundingBox();
+      const own = await line(page).boundingBox();
+      if (w < 760) expect(own.y, id).toBeGreaterThanOrEqual(status.y + status.height);
       const { ink, bg, box } = await inkUnderLine(page);
       // The page's own background (light theme), and not a pixel of toy.
       expect(bg, id).toEqual([255, 255, 255]);

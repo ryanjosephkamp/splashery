@@ -1469,8 +1469,15 @@ export function createUI(app) {
     // Hidden once faded (the fade is off under reduced motion).
     helpTimer = setTimeout(() => (help.line.hidden = true), 500);
   }
+  // On a phone the line sits under the toy's name line, which wraps to two
+  // lines for a scan's credit.
+  function placeHelpLine() {
+    const r = els.toyStatus.getBoundingClientRect();
+    help.line.style.top = narrow.matches && r.height ? `${Math.round(r.bottom + 6)}px` : "";
+  }
   function showHelpLine() {
     clearTimeout(helpTimer);
+    placeHelpLine();
     help.line.hidden = false;
     void help.line.offsetWidth; // start the fade from the hidden state
     help.line.classList.add("show");
@@ -1681,6 +1688,7 @@ export function createUI(app) {
     },
     setStatus(text) {
       els.toyStatus.textContent = text || "";
+      placeHelpLine(); // Toy help (lane Help)
     },
     setCredits(nodes) {
       els.credits.replaceChildren(...nodes);
