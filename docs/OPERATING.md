@@ -25,16 +25,17 @@ around the toys; the rules below keep it apart.
 
 ## Pages
 
-| Page                      | Link                                              | Who changes it                                                               |
-| ------------------------- | ------------------------------------------------- | ---------------------------------------------------------------------------- |
-| Effect review             | https://claude.ai/artifact/NCsg9V5SzFY3Mnwuwgq7pi | Lanes add clips and cards (below); the owner marks; the Operator tidies      |
-| Sound Board               | https://claude.ai/artifact/VE9XCTxH3djST6dGb6ZAkj | The Operator (after merges and each sound-review round); the owner may mark  |
-| Help Board                | https://claude.ai/artifact/P1NCWsGRE3MFqYTWTnTuqN | The Operator (`node tools/help-board.mjs`, below); the owner marks           |
-| Toy Plan (owner's marks)  | https://claude.ai/artifact/PNGPx7REMdhxLMHDXARhw8 | The owner marks; the Operator republishes (`node tools/toy-plan.mjs --json`) |
-| Toy Ideas                 | https://claude.ai/artifact/5TukiuV3mCt3G3zk6Arx9S | The Operator adds three ideas each morning; the owner marks (below)          |
-| Splashery Parallel Plan   | https://claude.ai/artifact/KjJrfKxi4phzJmbgSyRbr7 | The Operator (the lane prompts)                                              |
-| Splashery Operator Manual | https://claude.ai/artifact/3WYMJxtZDR7m1ecTCN47ZB | The Operator (the owner's how-to)                                            |
-| How Splashery Is Made     | https://claude.ai/artifact/HHj9PBXUQck3kAHrHhdkjA | The Operator (the plan in Part 1, the public write-up's basis in Part 2)     |
+| Page                       | Link                                              | Who changes it                                                               |
+| -------------------------- | ------------------------------------------------- | ---------------------------------------------------------------------------- |
+| Effect review              | https://claude.ai/artifact/NCsg9V5SzFY3Mnwuwgq7pi | Lanes add clips and cards (below); the owner marks; the Operator tidies      |
+| Sound Board                | https://claude.ai/artifact/VE9XCTxH3djST6dGb6ZAkj | The Operator (after merges and each sound-review round); the owner may mark  |
+| Help Board                 | https://claude.ai/artifact/P1NCWsGRE3MFqYTWTnTuqN | The Operator (`node tools/help-board.mjs`, below); the owner marks           |
+| Toy Plan (owner's marks)   | https://claude.ai/artifact/PNGPx7REMdhxLMHDXARhw8 | The owner marks; the Operator republishes (`node tools/toy-plan.mjs --json`) |
+| Toy Ideas                  | https://claude.ai/artifact/5TukiuV3mCt3G3zk6Arx9S | The Operator adds three ideas each morning; the owner marks (below)          |
+| Splashery Parallel Plan    | https://claude.ai/artifact/KjJrfKxi4phzJmbgSyRbr7 | The Operator (the lane prompts)                                              |
+| Splashery Operator Manual  | https://claude.ai/artifact/3WYMJxtZDR7m1ecTCN47ZB | The Operator (the owner's how-to)                                            |
+| How Splashery Is Made      | https://claude.ai/artifact/HHj9PBXUQck3kAHrHhdkjA | The Operator (the plan in Part 1, the public write-up's basis in Part 2)     |
+| Pages into Splats (report) | https://claude.ai/artifact/9mrrJYPiZKbSD9s5gFBpaA | The Operator (the picture-and-page plan, accepted September 28, 2026)        |
 
 ## Lanes and file ownership
 
@@ -45,7 +46,7 @@ Only that lane edits them. Packs that no active lane owns (WORKSTREAMS.md, "Froz
 frozen: a change to them needs a lane that the Operator starts.
 
 Each lane has a **prefix**, the lane id in lower case, used for card ids, screenshot names and its
-test file: `e4f`, `e5`, `e6a`, `e6b`, `f`, `g`, `ai`, `math`, `help`, `hta`, `htb`.
+test file: `e4f`, `e5`, `e6a`, `e6b`, `f`, `g`, `ai`, `math`, `help`, `hta`, `htb`, `pic`.
 
 ### Shared files: edit only your own toys' lines
 

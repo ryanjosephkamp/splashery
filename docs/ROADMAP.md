@@ -2,23 +2,55 @@
 
 ## Now: the plan from September 27, 2026
 
-The owner approved this plan on September 27, 2026 (Part 1 of the How Splashery Is Made page). The
-Operator runs the lanes ([OPERATING.md](OPERATING.md), [WORKSTREAMS.md](WORKSTREAMS.md)); the
-current state is in [HANDOFF.md](HANDOFF.md).
+The owner approved this plan on September 27, 2026 (Part 1 of the How Splashery Is Made page), and
+added step 3 on September 28, 2026 (the Pages into Splats report,
+[review](reviews/2026-09-28-pictures/review.md)). The Operator runs the lanes
+([OPERATING.md](OPERATING.md), [WORKSTREAMS.md](WORKSTREAMS.md)); the current state is in
+[HANDOFF.md](HANDOFF.md).
 
-| Step | What                                                                                                                                                                                                                                                                           |
-| ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| 1    | Done on September 28, 2026: lane Math (#50), lane Fix3 (#54) and lane AI (#52, with its engine PR #56): twelve AI and computing toys.                                                                                                                                          |
-| 2    | Done on September 28, 2026: toy help (below). Lane Help (#57) built the line, the "?" button and the About section; the text lanes HelpTextA (#60) and HelpTextB (#59) wrote a how-to line and an About text for every toy, and the owner approved them all on the Help Board. |
-| 3    | The sound overhaul: the owner's notes go on the Sound Board, sound lanes build new sounds there, he approves them, and they go into the site. A "Sound preferences" section follows from his notes.                                                                            |
-| 4    | Pianos and songs: the five approved pianos, a song bar based on the chess bar, and MIDI files.                                                                                                                                                                                 |
-| 5    | A sound round for the new AI and Math toys.                                                                                                                                                                                                                                    |
-| 6    | Physics and hands-on play (below): the engine and four showcase toys, then a hands-on plan for every toy, then category lanes.                                                                                                                                                 |
-| 7    | The Toy Workshop, the "Take it to your AI" package, submissions and the gallery; the flag toy (it needs the cloth).                                                                                                                                                            |
-| 8    | Last: the American English sweep, `docs/HOW-IT-WORKS.md`, the blog post, a "How it's made" page and the homepage embeds.                                                                                                                                                       |
+| Step | What                                                                                                                                                                                                                                                                                       |
+| ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 1    | Done on September 28, 2026: lane Math (#50), lane Fix3 (#54) and lane AI (#52, with its engine PR #56): twelve AI and computing toys.                                                                                                                                                      |
+| 2    | Done on September 28, 2026: toy help (below). Lane Help (#57) built the line, the "?" button and the About section; the text lanes HelpTextA (#60) and HelpTextB (#59) wrote a how-to line and an About text for every toy, and the owner approved them all on the Help Board.             |
+| 3    | Pictures and pages (below), added on September 28, 2026: the engine lane Pictures turns PDF pages, photos, GIFs and videos into splats; then the toy lanes (Your book, Photo album, Picture frame, Screen), the Gaussian splat toy, and the splat equation toy with the Tinkerer's Manual. |
+| 4    | The sound overhaul, alongside step 3 from the day the owner's notes arrive: the notes go on the Sound Board, sound lanes build new sounds there, he approves them, and they go into the site. A "Sound preferences" section follows from his notes.                                        |
+| 5    | Pianos and songs: the five approved pianos, a song bar based on the chess bar, and MIDI files.                                                                                                                                                                                             |
+| 6    | A sound round for the new toys: AI and computing, Math, and the picture toys.                                                                                                                                                                                                              |
+| 7    | Physics and hands-on play (below): the engine and four showcase toys, then a hands-on plan for every toy, then category lanes.                                                                                                                                                             |
+| 8    | The Toy Workshop, the "Take it to your AI" package, submissions and the gallery; the flag toy (it needs the cloth). Code a toy builds on the Tinkerer's Manual.                                                                                                                            |
+| 9    | Last: the American English sweep, `docs/HOW-IT-WORKS.md`, the blog post, a "How it's made" page and the homepage embeds.                                                                                                                                                                   |
 
 Whenever a slot is free: a Real objects lane for the approved scans (historical figures, real
 vehicles, and the everyday objects as real captures), as brand-free sources turn up.
+
+### Pictures and pages
+
+The owner asked for this on September 28, 2026 ([his notes](reviews/2026-09-28-pictures/review.md))
+and accepted the plan in the Pages into Splats report the same day:
+
+- **Why it works.** The Operator's test turned an article page into 172k splats ("paper plus ink":
+  the paper is one sheet, and only inked pixels get splats). At phone size the title and headings
+  read on the whole page, and the body text reads zoomed in. A 640 × 400 photo became 256k splats
+  and looked like the photo. Video uses the laptop's live-screen method: a fixed sheet of splats
+  whose colors come from the current frame on the GPU, with the video's own sound. PlayCanvas skips
+  splats under about 2 screen pixels (`minPixelSize`), so far pages need coarser splats.
+- **Engine first** (lane Pictures, "Engine: …"): PDF pages (PDF.js, vendored, Apache 2.0), photos,
+  GIF frames (omggif, MIT, where the browser can't decode them) and video frames into splats; pages
+  that stream through a few sheets, so a book of any length costs the same; near and far detail;
+  **Open a file** in the Toy tab; a web address in scenes for links and embeds; a hidden labs switch
+  (`?labs=1`) until the owner has tried the toys on his phone; and one plain test toy, the Picture
+  lab. Files stay on the visitor's device; nothing is uploaded.
+- **Then the toys**, on a new shelf, "Pictures and pages": Your book (any PDF; hardcover, paperback,
+  magazine, stapled paper, spiral notebook; pages curl like paper), Photo album, Picture frame (and
+  a digital frame) and Screen (old TV, flat TV, cinema, hologram, with sound). Also the Gaussian
+  splat toy on the AI and computing shelf (one splat and its sliders, a toy shown as its splats, a
+  cloud of splats trained into a picture, the back-to-front sort), and the splat equation toy (type
+  where splats go and their colors, with u, v and t, read by lane Math's safe equation reader) with
+  a public Tinkerer's Manual that is also the book's default PDF.
+- **Rules.** Samples only under CC0, CC BY or public domain, with credits (our own manual, a CC BY
+  paper, a public-domain book, CC0 photos, a CC BY or public-domain film); no logos or insignia. The
+  laptop stays as it is. The fitted method (fewer, sharper splats fitted to a picture) is a later
+  upgrade (BACKLOG.md).
 
 ### Toy help
 
@@ -84,7 +116,7 @@ limit can go on phones.
 
 ### The public write-up
 
-Part 2 of the How Splashery Is Made page is the approved basis. At step 8 it is rewritten for
+Part 2 of the How Splashery Is Made page is the approved basis. At step 9 it is rewritten for
 readers in American English, checked against the code, and becomes `docs/HOW-IT-WORKS.md` and a
 draft post in the blog repository, framed as an experiment in building with Claude Opus 5.5.
 

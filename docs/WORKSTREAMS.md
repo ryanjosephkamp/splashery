@@ -4,15 +4,17 @@ The lanes: who is building what, in which files, on which branch. The Operator s
 file; a lane reads its own row before it starts. How lanes work together is in
 [OPERATING.md](OPERATING.md).
 
-Last updated: September 28, 2026, when the two help text lanes merged and every toy had its help
-text. Since September 27 the Operator starts and runs every lane (OPERATING.md, "How the Operator
-runs a lane"); the order of the lanes to come is under "Next" and in [ROADMAP.md](ROADMAP.md).
+Last updated: September 28, 2026, when the owner accepted the Pictures and pages plan and the
+Operator started its engine lane, Pictures. Since September 27 the Operator starts and runs every
+lane (OPERATING.md, "How the Operator runs a lane"); the order of the lanes to come is under "Next"
+and in [ROADMAP.md](ROADMAP.md).
 
 ## Lanes
 
-| Lane         | Scope and toys                                                                                                                                                                              | Owns                                                                                                                                                                          | Status  | Session      | Branch                    | PR  |
-| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- | ------------ | ------------------------- | --- |
-| **Operator** | Coordination: briefs, starting and running the worker sessions, reconciling their PRs, upkeep after merges, the Sound Board and its review, the daily digest and toy ideas. Builds no toys. | The files only the Operator edits (OPERATING.md), the standard screenshots, the review page's lane records, the Toy Ideas page and its daily routines, the sound review files | Running | this session | `claude/operator-<topic>` | —   |
+| Lane                                                       | Scope and toys                                                                                                                                                                                                                                                                                                                        | Owns                                                                                                                                                                                                                                                                                                                                                          | Status                               | Session                                                 | Branch                        | PR  |
+| ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------ | ------------------------------------------------------- | ----------------------------- | --- |
+| **Operator**                                               | Coordination: briefs, starting and running the worker sessions, reconciling their PRs, upkeep after merges, the Sound Board and its review, the daily digest and toy ideas. Builds no toys.                                                                                                                                           | The files only the Operator edits (OPERATING.md), the standard screenshots, the review page's lane records, the Toy Ideas page and its daily routines, the sound review files                                                                                                                                                                                 | Running                              | this session                                            | `claude/operator-<topic>`     | —   |
+| **Pictures** Pictures and pages: the engine (prefix `pic`) | PDF pages, photos, GIF and video frames into splats; pages that stream through a few sheets; near and far detail; Open a file in the Toy tab; a web address in scenes for links and embeds; the labs switch (`?labs=1`); one test toy, the Picture lab. PDF.js and omggif vendored. Brief: [handoff/Pictures.md](handoff/Pictures.md) | New: `src/media.js`, `src/pictures.js` and its worker, `src/packs/pictures.js`, `vendor/pdfjs/`, `vendor/omggif/`, `tests/pic.spec.mjs`, `tests/fixtures/pic/`, `assets/toys/picture-lab/`; its marked blocks in the engine files (stage, effects, kit, player, app, state, codec, ui, index.html, styles.css, embed); `docs/SCENE-SCHEMA.md` (the new field) | Running (started September 28, 2026) | https://claude.ai/code/session_012vWQFKrJXpFPjhzRqN3ZYV | `claude/lane-pictures-engine` | —   |
 
 ## Frozen packs
 
@@ -30,15 +32,19 @@ review, a new instrument) needs a lane that the Operator plans and starts.
 
 In order (details in ROADMAP.md, "Now"); the Operator starts each when a slot is free:
 
-1. **Sound review rounds**: when the owner's notes arrive, two sound lanes (split by shelf) build
-   new sounds on the Sound Board; approved ones go into the site.
-2. **Pianos and songs**: the five approved pianos, a song bar based on the chess bar, and MIDI
+1. **Pictures and pages** (step 3): the engine lane Pictures (above) first; then the toy lanes on
+   the new "Pictures and pages" shelf (Your book, Photo album and Picture frame; Screen with the
+   Gaussian splat toy; the splat equation toy and the Tinkerer's Manual).
+2. **Sound review rounds**, alongside: when the owner's notes arrive, two sound lanes (split by
+   shelf) build new sounds on the Sound Board; approved ones go into the site.
+3. **Pianos and songs**: the five approved pianos, a song bar based on the chess bar, and MIDI
    files.
-3. **New toys' sound round**: the AI and Math toys on the Sound Board after they merge.
-4. **Physics and hands-on**: an engine lane (the physics engine, the Hands-on switch and Reset, four
+4. **New toys' sound round**: the AI, Math and picture toys on the Sound Board.
+5. **Physics and hands-on**: an engine lane (the physics engine, the Hands-on switch and Reset, four
    showcase toys), then a hands-on plan for every toy, then category lanes.
-5. **Toy Workshop**: with the AI package, submissions, the gallery and the flag toy.
-6. **Last**: the American English sweep, HOW-IT-WORKS.md, the blog post, a "How it's made" page and
+6. **Toy Workshop**: with the AI package, submissions, the gallery and the flag toy; Code a toy
+   builds on the Tinkerer's Manual.
+7. **Last**: the American English sweep, HOW-IT-WORKS.md, the blog post, a "How it's made" page and
    the homepage embeds.
 
 Whenever a slot is free: **Real objects**, the approved scans (historical figures, real vehicles and

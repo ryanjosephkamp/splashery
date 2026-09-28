@@ -37,6 +37,10 @@ work is in [OPERATING.md](OPERATING.md).
 - The two help text lanes merged the same day (HelpTextA #60, HelpTextB #59): every one of the 303
   toys has its own how-to line and About text, and the owner approved them all on the Help Board.
   From now on every lane writes its own toys' help as part of "done".
+- On September 28, 2026 the owner accepted a new step 3, **Pictures and pages** (ROADMAP.md): open a
+  PDF, photos, a GIF or a video and see it made of splats, as a book, an album, a frame or a screen.
+  The Operator's test on the real engine turned an article page into 172k splats that read at phone
+  size when zoomed. The engine lane, Pictures, started the same day.
 - The shelf has 303 toys (32 scans, 4 shapes and 267 kit toys). The plan (`tools/toy-plan.json`,
   [TOY-PLAN.md](TOY-PLAN.md)): all 303 keep. Every planned new tap effect is built. Scene schema v3;
   v2 still loads.
@@ -53,10 +57,11 @@ work is in [OPERATING.md](OPERATING.md).
 
 The full table, with owned files, sessions, branches and PRs, is [WORKSTREAMS.md](WORKSTREAMS.md).
 
-| Lane                        | Status                                                             | Handoff |
-| --------------------------- | ------------------------------------------------------------------ | ------- |
-| Operator                    | Running; runs the lanes                                            | —       |
-| Next (WORKSTREAMS.md, Next) | Sound review (waits on the owner's sound notes), pianos and songs… | —       |
+| Lane                                     | Status                                                                                     | Handoff                                    |
+| ---------------------------------------- | ------------------------------------------------------------------------------------------ | ------------------------------------------ |
+| Operator                                 | Running; runs the lanes                                                                    | —                                          |
+| Pictures: pictures and pages, the engine | Running (started September 28, 2026)                                                       | [handoff/Pictures.md](handoff/Pictures.md) |
+| Next (WORKSTREAMS.md, Next)              | The picture toy lanes; the sound review (when the owner's notes arrive); pianos and songs… | —                                          |
 
 E4-finish, E5, E6a, E6b, F, G, Math, Fix3, AI, Help, HelpTextA and HelpTextB are done
 (WORKSTREAMS.md, "Done"). On September 27, 2026 the owner approved the plan in Part 1 of the How
@@ -164,6 +169,21 @@ Settled on September 27, 2026 (the How Splashery Is Made page, Part 1):
 - The blog post comes last, after the Workshop, physics, hands-on play and submissions.
 - The pencil defaults to yellow, the tin can to an original "Peaches" label, and both have a Look
   choice.
+
+Settled on September 28, 2026 (the Pages into Splats report,
+[review](reviews/2026-09-28-pictures/review.md)):
+
+- Pictures and pages is step 3, before pianos and the physics work. The sound lanes start whenever
+  the owner sends his sound notes, in parallel; the new toys' sounds join the later new-toys round.
+- The engine lane comes first. The new toys stay behind a hidden switch (`?labs=1`) until the owner
+  has tried them on his phone.
+- PDF.js (Apache 2.0) and omggif (MIT) may be vendored, loaded only when someone opens a PDF or a
+  GIF.
+- The new shelf is "Pictures and pages": Your book, Photo album, Picture frame and Screen (old TV,
+  flat TV, cinema, hologram, with sound). Also the Gaussian splat toy (AI and computing), and the
+  splat equation toy with a public Tinkerer's Manual that is also the book's default PDF.
+- Samples only under CC0, CC BY or public domain, with credits; no logos or insignia. The laptop
+  stays as it is. The fitted method comes later, as an upgrade.
 
 Still open (ask when it comes up, in Phase H):
 
