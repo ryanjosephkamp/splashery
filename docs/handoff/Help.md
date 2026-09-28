@@ -63,16 +63,81 @@ plan, and you don't touch tests/taps.spec.mjs.
 
 ## State
 
-September 28, 2026: started. Draft PR open; building the line, the "?" button and the About section.
+September 28, 2026: built and tested; draft PR
+[#57](https://github.com/ryanjosephkamp/splashery/pull/57). The line, the "?" button, "About this
+toy" in the About tab and `src/toy-help.js` with 88 entries: a how-to line for every toy on main
+that does more than a tap (drags, typing, a game, toggles, sliders and options that change play) and
+13 About texts across the shelves (grape, black hole, tardigrade, molecule, heart, volcano, puzzle
+cube, Newton's cradle, chess set, octopus, Fourier circles, xylophone, Eiffel Tower). Cards on the
+Effect review page: `help-line-phone`, `help-line-desktop`, `help-about` and the clip
+`help-line-clip`.
 
 ## Notes
 
-(To come.)
+How it works:
+
+- `src/ui.js` (the "Toy help" block): `setToyPanel(info)` calls `setToyHelp(info)`, which imports
+  `src/toy-help.js` the first time a toy opens (after the first paint) and fills the line and the
+  About section. The line shows when the toy is new (its kind and id changed): a pick, a link, a
+  refresh or an imported scene. A rebuild of the same toy (an option, the detail tier) only updates
+  the text. It fades after 7 seconds; "?" toggles it; its "About this toy" link opens the About tab
+  (and the sheet on a phone).
+- Where it sits: under the name at the top left of the stage. On a phone that is under the toy's
+  name line (top 74px), and it hides while the sheet is open, like the name. On a wide screen it is
+  under "Splashery" (top 62px). "?" sits left of the sound button. The toy sits in the middle of the
+  stage, so the corner stays clear; `tests/help.spec.mjs` checks six toys (the tall Eiffel Tower,
+  the wide chess set among them) at 390×844 and 1440×900 by hiding everything over the stage and
+  checking that the stage under the line's box is plain background.
+- Why the About tab: it already holds the toy's credits and the controls, "About" is where a visitor
+  looks for "what is this", and the Toy tab stays short for the controls. A new tab would not fit
+  the phone's tab row (six tabs already fill 390px). The line's "About this toy" link is the way in.
+- `toyHelp(info)` in `src/toy-help.js` returns the line, the About paragraphs and a short "what you
+  can do" list read from the recipe (the tap's label, a drag or stretch, the Toy tab's settings,
+  your own input), so the list is always right even for toys with no entry. A toy with no `howTo`
+  gets a line from its recipe: "Tap it: <the tap's label>." plus "Drag on the toy to play with it."
+  (a recipe drag), "Drag the toy to stretch it." (a grab), "Type your own in the Toy tab." (an input
+  panel) or "More in the Toy tab." (options or sliders). A file of your own says it stays on your
+  device; a toy you made points to the Make tab. A shelf shape edited into another shape (its rig
+  gone) never gets the shelf toy's entry.
+- Nothing goes into links, scenes or storage. Embeds (`embed/index.html`) never load `ui.js`, so
+  they have no line.
+
+## Style guide for the text lanes
+
+Each lane writes the entries for its own shelf's toys in `src/toy-help.js`, in that shelf's section,
+keyed by toy id. Only your own toys' entries.
+
+- **howTo**: one or two short sentences, at most about 90 characters (the test stops at 110). Start
+  with the action: "Tap", "Drag", "Type", "Pick". Say what happens in plain words ("Tap it to squirt
+  ink."), then the one thing beyond the tap if there is one ("Pick the kind of star in the Toy
+  tab."). For a toggle, say both ways: "Tap to open the lid; tap again to close it." Check which way
+  the first tap goes: a toggle's `default` in the recipe is where it starts (the book starts open,
+  so "Tap to close the book; tap again to open it."). Where the second tap's effect is unclear, "tap
+  again to go back" is always true. Name settings as the Toy tab shows them ("Try the Pupil slider
+  in the Toy tab."), and never guess what a slider does: if the recipe doesn't make it plain, name
+  the slider.
+- **about**: 60 to 140 words (the test allows 40 to 180), in two short paragraphs separated by a
+  blank line (`\n\n`). First what the thing is and what it shows or means; then what the toy does
+  (its tap, drags, options, typing) and a fact or two. Plain words a curious ten-year-old could
+  follow; no jokes that date, no brand names, no "we" or "you'll love".
+- **Check every line** against the toy: open it, tap it, drag it, try its options; read its recipe
+  (the comments above `action` describe the tap) and its row in `docs/TOY-PLAN.md` ("Improved:" says
+  what the tap really does now). Check every fact against a real source (an encyclopedia, a museum,
+  a science agency), and prefer round numbers with "about".
+- **American English**: color, center, gray, meter, math, -ize. Run
+  `node tools/us-english.mjs --diff`. Some of the Toy tab's own labels still use older British
+  spelling; quote them only when you name a control, and otherwise write "color".
+- Tests: `tests/help.spec.mjs` checks every entry (a shelf toy's id, the lengths, a capital and a
+  period) and that every toy gets a line. Run it after editing.
 
 ## Known issues
 
-(None yet.)
+- Some Toy tab labels still use British spelling (the color and flavor pickers); the About section's
+  "Toy tab" row shows them as they are until the English sweep.
 
 ## For the Operator
 
-(Nothing yet.)
+- No opt-in embed parameter: the embed page (`embed/index.html`, `src/embed.js`) isn't this lane's,
+  and the brief asked for a clean embed by default. It can be added later in an embed PR.
+- No change to `tests/taps.spec.mjs` is needed.
+- The AI and computing toys (PR #52) get the default line until that lane adds its entries.

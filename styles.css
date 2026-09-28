@@ -223,6 +223,128 @@ textarea {
   border-color: var(--ink);
 }
 
+/* Toy help (lane Help) ------------------------------------------------------ */
+/* The how-to-play line: under the name at the top left of the stage, clear of
+   the toy (which sits in the middle), fading after a few seconds; "?" beside
+   the sound button shows it again. On a phone it sits under the toy's name
+   and hides while the sheet is open, like the name. */
+
+.help-line {
+  position: fixed;
+  top: 62px;
+  left: 18px;
+  z-index: 4;
+  max-width: min(440px, calc(100% - var(--panel-w) - 60px));
+  padding: 7px 12px 8px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  font-size: 14px;
+  line-height: 1.35;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition:
+    opacity 450ms var(--ease),
+    transform 450ms var(--ease);
+}
+
+.help-line.show {
+  opacity: 1;
+  transform: none;
+}
+
+.help-line-about {
+  margin-left: 8px;
+  padding: 0;
+  background: none;
+  border: 0;
+  border-radius: 0;
+  color: var(--accent);
+  font-size: 13px;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  white-space: nowrap;
+}
+
+.help-toggle {
+  position: fixed;
+  top: 14px;
+  right: calc(var(--panel-w) + 36px + 44px);
+  z-index: 4;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  background: var(--paper);
+  color: var(--muted);
+  font-size: 17px;
+  font-weight: 650;
+}
+
+.help-toggle[aria-expanded="true"] {
+  color: var(--ink);
+  border-color: var(--ink);
+}
+
+.toy-about-name {
+  margin: 0 0 6px;
+  font-size: 15px;
+  font-weight: 650;
+}
+
+.toy-about-text p,
+#toy-about-howto {
+  margin: 0 0 8px;
+  font-size: 13.5px;
+  line-height: 1.5;
+}
+
+.toy-about-h {
+  margin: 12px 0 4px;
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.toy-about-can {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 4px 10px;
+  margin: 8px 0 0;
+  font-size: 13px;
+}
+
+.toy-about-can dt {
+  color: var(--muted);
+}
+
+.toy-about-can dd {
+  margin: 0;
+}
+
+@media (max-width: 760px) {
+  .help-line {
+    top: 74px;
+    left: 14px;
+    max-width: calc(100% - 28px);
+    padding: 6px 10px 7px;
+    font-size: 13.5px;
+  }
+
+  body.sheet-open .help-line,
+  body.shelf-grid .help-line {
+    display: none;
+  }
+
+  .help-toggle {
+    top: 10px;
+    right: 58px;
+  }
+}
+
+/* /Toy help */
+
 /* The game bar: under the board while the chess set is out. */
 
 .game-bar {
