@@ -35,7 +35,7 @@ export const TOY_HELP = {
     howTo: "Tap it to knock it into a spin. Pick its label under Look in the Toy tab.",
   },
 
-  // ---- Balls --------------------------------------------------------------------------
+  // ---- Balls ----------------------------------------------------------------------------
   basketball: {
     howTo: "Tap it to dribble it, then spin it on a fingertip.",
     about:
@@ -381,24 +381,84 @@ export const TOY_HELP = {
   // ---- Toys -----------------------------------------------------------------------------
   bricks: {
     howTo: "Tap to build a model from the bricks; tap again to build another.",
+    about:
+      "Building bricks are small plastic blocks with round studs on top that press into tubes underneath the next brick, so they hold together firmly and can be pulled apart again. With enough of them you can build almost anything, and even six ordinary bricks can be stacked together in hundreds of millions of different ways.\n\nHere eighteen bricks lie spread out on the table. Each tap pops the last model apart and builds a new one in the middle, brick by brick from the bottom up, each clicking into place: a tower, a bridge, stairs, a dog or a tree. Pick a set of colors in the Toy tab.",
   },
-  dice: { howTo: "Tap to roll. Pick two six-sided dice or a d20 in the Toy tab." },
+  "rubber-duck": {
+    howTo: "Tap it to squeeze it: it squeaks, hops and bobs.",
+    about:
+      "A rubber duck is a little yellow bath toy that floats. The first ones were made of solid rubber; today most are hollow and made of soft plastic, with a small hole underneath. Squeeze one and the air rushes out through the hole with a squeak, and when you let go it sucks air back in.\n\nTap it to squeeze it: it squashes, squeaks and hops, then bobs and rocks as if it were floating in the bath, and settles down. Pick its color in the Toy tab.",
+  },
+  "spinning-top": {
+    howTo: "Tap it to spin it faster; it wobbles more, then steadies.",
+    about:
+      "A spinning top is one of the oldest toys in the world, played with in many lands for thousands of years. While it spins fast, it balances on its tiny point, because a spinning thing holds the direction of its spin. As it slows, it starts to wobble, and its handle traces a slow circle; scientists call that circling precession.\n\nThis top is always spinning. Tap it to spin it much faster: it tilts and circles more widely for a few seconds, then settles back to a steady spin. Pick one of three sets of colors in the Toy tab.",
+  },
+  dice: {
+    howTo: "Tap to roll. Pick two six-sided dice or a d20 in the Toy tab.",
+    about:
+      "Dice are small shapes with a number on each face, rolled to get a number by chance. A fair die lands on each face just as often as any other. On an ordinary six-sided die the opposite faces always add up to seven: 1 and 6, 2 and 5, 3 and 4.\n\nTap to roll: the dice tumble and land on new faces, so you can use them for a real game. In the Toy tab, pick two six-sided dice or a d20, a die with 20 triangle faces used in many tabletop games, and pick their color.",
+  },
   "newtons-cradle": {
     howTo: "Drag a ball out to the side and let go. Or tap to lift the end ball.",
     about:
       "Newton's cradle is a row of steel balls, each hung on two strings so it can only swing in one line. Lift the end ball and let go: it strikes the row, the ball at the far end flies out, and the balls in between barely move. Let go of two and two fly out.\n\nIt shows two rules of physics at once: in each knock both the momentum and the energy carry through the row, so the same number of balls leaves as arrived. Each clack turns a little energy into sound and heat, so the swings slowly die away. Drag any ball out (the balls beside it come too) and let go, or tap to lift the end ball.",
+  },
+  "teddy-bear": {
+    howTo: "Tap it and it waves hello.",
+    about:
+      "A teddy bear is a soft, stuffed toy bear. It is named after Theodore “Teddy” Roosevelt, a president of the United States: in 1902 a newspaper cartoon showed him sparing a young bear on a hunting trip, and soon toymakers in the United States and Germany were making stuffed bears.\n\nThis bear sways its head and arms a little. Tap it and it lifts one arm and waves hello, tipping its head, then puts its arm back down. Pick the color of its fur in the Toy tab.",
+  },
+  "yo-yo": {
+    howTo: "Tap it to throw it down; it spins down the string and climbs back up.",
+    about:
+      "A yo-yo is two disks joined by a short axle, with a string tied around the axle. Thrown down, it unwinds and spins fast; the spin keeps it steady, and a little tug on the string makes it wind itself back up into your hand. Children in ancient Greece played with yo-yos of wood, metal and clay.\n\nThis one bobs gently on its string. Tap it to throw it: it drops, spinning as the string unwinds, and then climbs back up the string to where it started. Pick its color in the Toy tab.",
   },
   "puzzle-cube": {
     howTo: "Drag across a face to turn a row or column. Tap to scramble or solve it.",
     about:
       "A twisting puzzle cube: 26 small cubes around a hidden core, with one color on each of its six faces. Each turn moves a whole row or column of nine cubes, and the puzzle is to bring every face back to one color.\n\nHere every little cube is its own piece, and the cube keeps track of each turn, so you can really solve it: drag across a face to turn that row or column. A tap scrambles a solved cube, or turns a scrambled one back to solved, one layer at a time, and solving it by hand earns a hop and a chime. The cube has about 43 quintillion arrangements, yet any of them can be solved in 20 moves or fewer.",
   },
+  "spring-toy": {
+    howTo: "Tap it to hurry it along; it flips end over end faster.",
+    about:
+      "A spring toy is a long, loose coil of metal or plastic that can walk down stairs by itself. Set one end on a lower step and it flips over, end over end, as each coil tips across in turn and the weight moves from one end to the other. It was invented in the 1940s by an engineer who saw a spring fall off a shelf and keep moving.\n\nThis one walks by itself, its coils flipping over from one side to the other. Tap it to hurry it along. Pick a rainbow, metal or pastel coil in the Toy tab.",
+  },
+  kite: {
+    howTo: "Tap it for a gust of wind: the kite loops and the tail whips.",
+    about:
+      "A kite is a light frame covered with paper or cloth that flies on the wind at the end of a long line. The wind pushing under the tilted kite lifts it up, and a tail helps keep it pointing the right way. Kites were first flown in China more than 2,000 years ago.\n\nTap it for a big gust: the kite climbs around a loop, turning once while it rises, and its tail whips behind it. The line stays tied on the whole time. Pick its two colors in the Toy tab.",
+  },
+  "paper-plane": {
+    howTo: "Tap it to do a barrel roll.",
+    about:
+      "A paper plane is a sheet of paper folded into a glider. It has no engine: once thrown, it slowly trades height for speed, and air flowing over its wings holds it up, while the weight at the pointed nose keeps it flying straight. Small folds at the back of the wings can make it climb, dive or turn.\n\nThis plane glides and bobs gently in place. Tap it and it does a barrel roll, one full turn around its long middle, while it lifts a little. In the Toy tab, pick the color of the paper, and choose lined paper or plain.",
+  },
+  "origami-crane": {
+    howTo: "Tap it to flap its wings.",
+    about:
+      "Origami is the Japanese art of folding a single square of paper into a shape, without cutting or gluing. The crane is its most famous model, folded with a long neck, a pointed tail and wide wings. In Japan, a string of a thousand folded cranes is a traditional wish for good health and for peace.\n\nTap it to flap its wings: they beat up and down a few times, as a real crane's do. Some paper cranes are folded so that the wings really flap when you pull the tail. Pick the color of the paper in the Toy tab.",
+  },
+  "balloon-dog": {
+    howTo: "Tap it to pop it; then it blows back up.",
+    about:
+      "A balloon dog is made from one long, thin balloon, twisted into a chain of bubbles and folded into a head, ears, a body, four legs and a tail. Each twist traps the air in its own bubble, so the shape holds.\n\nTap it and it pops: bits of rubber fly out and fall away. Then the dog blows back up, part by part, until it stands whole again. Pick the color of the balloon in the Toy tab.",
+  },
+  "soap-bubbles": {
+    howTo: "Tap it to blow a stream of bubbles.",
+    about:
+      "A soap bubble is a very thin skin of soapy water wrapped around some air. The skin pulls itself as small as it can, and the smallest skin that can hold the air is a sphere, so bubbles are round. The swirling colors come from light bouncing off the inside and outside of the skin, which is thinner than a hair.\n\nBubbles drift up slowly from the wand by themselves. Tap it to blow, and many more stream out faster, float away and fade. Pick the color of the wand in the Toy tab.",
+  },
+  robot: {
+    howTo: "Tap it to wind it up: its key whirs and its arms swing wide.",
+    about:
+      "A wind-up robot is a tin toy with a spring inside. Turning the key on its back winds the spring tight, and as the spring slowly unwinds, it turns little gears that swing the arms and move the legs. Wind-up tin robots were a favorite toy in the middle of the 1900s.\n\nThis robot always swings its arms a little, and its antenna light glows. Tap it to wind it up: the key spins fast, the arms swing wide and it rocks and bobs from side to side, then it slowly runs down again. Pick its color in the Toy tab.",
+  },
   "chess-set": {
     howTo: "Tap a piece, then a square, to move it. Or press play in the bar to watch a game.",
     about:
       "Chess is a game for two players on a board of 64 squares. Each side starts with 16 pieces (a king, a queen, two rooks, two bishops, two knights and eight pawns), and the goal is to checkmate the other king: to attack it so that it has no way out.\n\nThe board is set up for the Opera Game, played in Paris in 1858 at the opera house, where Paul Morphy beat the Duke of Brunswick and Count Isouard in 17 moves. Press play in the bar under the board to watch it, or tap a piece and then a square to play your own moves. In the Toy tab you can open or paste any game written in PGN, the usual way of writing down chess games.",
   },
-
   // ---- Open me --------------------------------------------------------------------------
   chest: { howTo: "Tap to open the lid; tap again to close it." },
   book: { howTo: "Tap to close the book; tap again to open it." },
