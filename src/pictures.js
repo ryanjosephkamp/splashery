@@ -188,6 +188,14 @@ export class Pictures {
       prev: () => this.go(this.page - 1),
       go: (n) => this.go(n),
       togglePlay: () => this.togglePlay(),
+      // Lane Books: whether sheet `id` shows (or holds, hidden) the page it
+      // was last asked for, and a picture's shape (width over height).
+      ready: (id) => {
+        const sh = this.sheets.find((x) => x.def.id === id);
+        return !!sh && !!sh.want && sh.shown?.key === sh.want.key;
+      },
+      aspect: (n = this.page) => self.media?.aspect?.(n) ?? 0,
+      nameOf: (n) => self.media?.names?.[n] ?? self.media?.name ?? "",
     };
   }
 
@@ -260,13 +268,13 @@ export class Pictures {
   }
 
   // The picture width to build at for a sheet shown `px` pixels wide.
-  levelFor(sheet, aspect, px) {
+  levelFor(sheet, aspect, px, page = 0) {
     const method = this.methodFor(sheet);
     const b = this.budget;
     let cap;
     if (method === "ink") cap = b.width;
     else cap = Math.sqrt((method === "screen" ? b.screen : b.pixels) * aspect);
-    if (method !== "ink" && this.media?.size) cap = Math.min(cap, this.media.size().width);
+    if (method !== "ink" && this.media?.size) cap = Math.min(cap, this.media.size(page).width);
     const target = Math.min(cap, Math.max(64, px));
     let level = LADDER.find((w) => w >= target) ?? LADDER[LADDER.length - 1];
     level = Math.min(level, Math.floor(cap));
@@ -289,15 +297,18 @@ export class Pictures {
       const page = o?.page ?? this.page;
       const vis = o?.visible ?? 1;
       const count = m?.count ?? 0;
-      const has = m && page >= 0 && page < count && vis > 0;
-      if (sh.slot) sh.slot.entity.enabled = !!has && !!sh.shown;
+      // A hidden sheet asked for `ahead` is built all the same (after the
+      // ones on show) and stays hidden, ready for when it shows (lane Books).
+      sh.hidden = !(vis > 0);
+      const has = m && page >= 0 && page < count && (vis > 0 || !!o?.ahead);
+      if (sh.slot) sh.slot.entity.enabled = !!has && !!sh.shown && !sh.hidden;
       if (!has) {
         sh.want = null;
         continue;
       }
       const aspect = m.aspect(page);
       const px = this.screenWidth(sh, aspect);
-      const level = this.levelFor(sh, aspect, px);
+      const level = this.levelFor(sh, aspect, px, page);
       // A new level must hold for a moment (a pinch passes through many).
       if (level !== sh.wantLevel) {
         sh.wantLevel = level;
@@ -368,7 +379,9 @@ export class Pictures {
   // pages (a small cache).
   pump() {
     if (this.busy || !this.media) return;
-    for (const sh of this.sheets) {
+    // Sheets on show first, then the ones built ahead.
+    const order = this.sheets.filter((sh) => !sh.hidden).concat(this.sheets.filter((sh) => sh.hidden)); // prettier-ignore
+    for (const sh of order) {
       const w = sh.want;
       if (!w || sh.shown?.key === w.key || sh.failed === w.key) continue;
       const hit = this.cache.get(this.cacheKey(w));
@@ -525,7 +538,10 @@ export class Pictures {
     ct.aabb = aabb;
     ct.update(data.count, true);
     sheet.shown = { ...want, data, w: data.w, h: data.h };
-    slot.entity.enabled = true;
+    slot.entity.enabled = !sheet.hidden;
+    // A page on a leaf or a part arrives sorted in its built pose: sort it
+    // where it stands (Player.resortPose, lane Books).
+    if (sheet.def.leaf !== null || sheet.def.part) this.player.poseStale = true;
     this.stats.rendered.push({ page: want.page, level: want.level, count: data.count });
     if (this.stats.rendered.length > 50) this.stats.rendered.shift();
     // A new screen sheet needs its first frame now.

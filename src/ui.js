@@ -810,6 +810,7 @@ export function createUI(app) {
     file.hidden = true;
     file.id = "toy-media-file";
     file.accept = kinds.map((k) => MEDIA_TYPES[k]).join(",");
+    file.multiple = !!media.multiple; // a set of pictures at once (lane Books)
     const busy = (on) => {
       for (const b of wrap.querySelectorAll("button")) b.disabled = on;
     };
@@ -832,12 +833,13 @@ export function createUI(app) {
     open.type = "button";
     open.id = "toy-media-open";
     open.className = "primary";
-    open.textContent = "Open a file…";
+    open.textContent = media.button || "Open a file…";
     open.addEventListener("click", () => file.click());
     file.addEventListener("change", () => {
-      const f = file.files?.[0];
+      const list = [...(file.files || [])];
       file.value = "";
-      if (f) run(f);
+      if (list.length > 1) run(list);
+      else if (list[0]) run(list[0]);
     });
     const sample = document.createElement("button");
     sample.type = "button";
@@ -893,6 +895,9 @@ export function createUI(app) {
     wrap.append(openRow, form, now, pages, file);
     mediaPanel = { now, prev, next, play, pages, sample };
     refreshMedia();
+    // Again once the panel is in the page (lane Books): pages that arrived
+    // before it would otherwise leave it blank until the next page.
+    requestAnimationFrame(() => refreshMedia());
     return wrap;
   }
 
@@ -909,9 +914,10 @@ export function createUI(app) {
       return;
     }
     const what = { pdf: "a PDF", image: "a picture", gif: "a GIF", video: "a video" }[p.kind];
-    const where = p.kind === "pdf" ? `, page ${p.page + 1} of ${p.count}` : p.kind === "gif" ? `, ${p.count} frames` : ""; // prettier-ignore
-    m.now.textContent = `Showing ${p.name} (${what}${where}).`;
-    const paged = p.kind === "pdf" && p.count > 1;
+    const set = p.kind === "image" && p.count > 1; // a set of pictures (lane Books)
+    const where = p.kind === "pdf" ? `, page ${p.page + 1} of ${p.count}` : p.kind === "gif" ? `, ${p.count} frames` : set ? `, picture ${p.page + 1}` : ""; // prettier-ignore
+    m.now.textContent = set ? `Showing ${p.name}${where}.` : `Showing ${p.name} (${what}${where}).`;
+    const paged = (p.kind === "pdf" || set) && p.count > 1;
     m.prev.hidden = m.next.hidden = !paged;
     m.prev.disabled = p.page <= 0;
     m.next.disabled = p.page >= p.count - 1;

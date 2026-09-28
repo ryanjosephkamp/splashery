@@ -65,9 +65,10 @@ export class Viewer {
     // Pictures: a file from someone's device never comes with a link; the
     // toy shows its own sample (a web address opens as it is). Video stays
     // silent in embeds.
-    if (scene.toy.media?.file) {
+    if (scene.toy.media?.file || scene.toy.media?.files) {
+      const what = scene.toy.media.file?.name || `${scene.toy.media.files.length} pictures`;
       this.opts.onStatus?.(
-        `This toy showed ${scene.toy.media.file.name}, a file on someone's device; showing its sample.`,
+        `This toy showed ${what}, a file on someone's device; showing its sample.`,
       );
       delete scene.toy.media;
     }

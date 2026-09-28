@@ -1,0 +1,167 @@
+// Lane Books: your book, the photo album and the picture frame
+// (docs/handoff/Books.md). The engine parts first: a picture toy's media at
+// its build (k.media), a set of pictures as one media, pages built ahead
+// while hidden, and sorting leaves and parts where they stand (pose.js).
+
+import { test, expect } from "@playwright/test";
+import { posePass } from "../src/pose.js";
+import { KINDS } from "../src/effects.js";
+import { normalizeMedia, normalizeScene } from "../src/state.js";
+
+const APP = "/?renderer=webgl2&adapt=off&profile=mid";
+const FIX = "/tests/fixtures/pic/";
+
+async function ready(page, url = `${APP}&labs=1`) {
+  await page.goto(url);
+  await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
+}
+
+// Waits until every sheet shows (or holds) what the toy asked for.
+async function waitSheets(page) {
+  await page.waitForFunction(
+    () => {
+      const p = window.__splashery.player.pictures;
+      if (!p?.media) return false;
+      window.__splashery.player.stage.requestRender();
+      return p.sheets.every((s) => !s.want || s.shown?.key === s.want.key) && p.splats() > 0;
+    },
+    null,
+    { timeout: 120_000 },
+  );
+}
+
+test.describe("engine for books (no browser)", () => {
+  test("pose: a leaf turned over and a part turned half a turn land where the shader puts them", () => {
+    // Spine along -Y through the origin, pages toward +X: a leaf turns toward +Z.
+    const leaf = new Float32Array(32);
+    leaf.set([0, 0, 0], 0);
+    leaf.set([0, -1, 0], 4);
+    leaf.set([1, 0, 0], 8);
+    leaf[12 + 3 * 2] = Math.PI; // slot 3 turned over, no curl
+    const parts = new Float32Array(16 * 12);
+    for (let i = 0; i < 16; i++) parts[i * 12 + 3] = 1;
+    // Part 2: half a turn about Y through (0.5, 0, 0), moved up 0.1.
+    parts.set([0, 1, 0, 0], 24);
+    parts.set([0.5, 0, 0, 0], 28);
+    parts.set([0, 0.1, 0, 1], 32);
+    const pos = new Float32Array([0.8, 0.2, 0.01, 0.8, 0.2, 0.01, 0.3, 0.3, 0.3, 0.7, 0, 0]);
+    const anim = new Float32Array([
+      0, KINDS.leaf, 0.8, 3,
+      0, 0, 0, 0, // not on a part or a leaf: left alone
+      0, KINDS.token, 0, 0, // a token: left to resortTokens
+      2, 0, 0, 0,
+    ]); // prettier-ignore
+    const out = new Float32Array(12).fill(9);
+    expect(posePass(pos, anim, 4, out, leaf, parts)).toBe(2);
+    const near = (a, b) => a.forEach((v, i) => expect(v).toBeCloseTo(b[i], 5));
+    near(out.slice(0, 3), [-0.8, 0.2, -0.01]);
+    near(out.slice(3, 9), [9, 9, 9, 9, 9, 9]);
+    near(out.slice(9, 12), [0.3, 0.1, 0]);
+    // Curled: the page's far edge stays on its arc (length kept).
+    leaf[12 + 3 * 2] = Math.PI / 2;
+    leaf[13 + 3 * 2] = -1.5;
+    posePass(pos, anim, 1, out, leaf, parts);
+    const psi = Math.PI / 2 - 1.5 * 0.8;
+    // (The page's thickness, 0.01 up from it, turns with it.)
+    near(out.slice(0, 1), [(Math.sin(psi) - 1) / -1.5 - 0.01 * Math.sin(psi)]);
+  });
+
+  test("a set of pictures in a scene keeps only names and sizes; old media is unchanged", () => {
+    const m = normalizeMedia({ files: [{ name: "a.jpg", bytes: 10, pixels: "x" }, { name: 5 }], page: 1 }); // prettier-ignore
+    expect(m).toEqual({ files: [{ name: "a.jpg", bytes: 10 }, { name: "picture", bytes: 0 }], page: 1 }); // prettier-ignore
+    expect(normalizeMedia({ file: { name: "a.pdf", bytes: 3 } })).toEqual({ file: { name: "a.pdf", bytes: 3 } }); // prettier-ignore
+    expect(normalizeMedia({ files: [] })).toBe(null);
+    const s = normalizeScene({ version: 3, toy: { kind: "builtin", id: "picture-lab", media: { files: [{ name: "b.png", bytes: 4 }] } } }); // prettier-ignore
+    expect(s.toy.media).toEqual({ files: [{ name: "b.png", bytes: 4 }] });
+  });
+});
+
+test.describe("engine for books (in the app)", () => {
+  test.setTimeout(240_000);
+
+  test("a picture toy's build sees its media (k.media)", async ({ page }) => {
+    await ready(page);
+    await page.evaluate(() => window.__splashery.app.chooseToy("picture-lab"));
+    await waitSheets(page);
+    const m = await page.evaluate(() => window.__splashery.player.proc.ctx.kit.media);
+    expect(m.kind).toBe("pdf");
+    expect(m.count).toBe(2);
+    expect(m.aspect).toBeCloseTo(612 / 792, 3);
+    expect(m.names).toBe(null);
+  });
+
+  test("several pictures open as one set, page through, and stay settings-only in a link", async ({
+    page,
+  }) => {
+    await ready(page);
+    await page.evaluate(() => window.__splashery.app.chooseToy("picture-lab"));
+    await waitSheets(page);
+    const r = await page.evaluate(async (fix) => {
+      const app = window.__splashery.app;
+      const blob = await (await fetch(`${fix}photo.jpg`)).blob();
+      const files = ["one.jpg", "two.jpg", "three.jpg"].map((n) => new File([blob], n, { type: "image/jpeg" })); // prettier-ignore
+      const m = await app.openMedia(files);
+      const pl = window.__splashery.player;
+      return { kind: m.kind, count: m.count, names: m.names, media: pl.scene.toy.media, build: pl.proc.ctx.kit.media }; // prettier-ignore
+    }, FIX);
+    expect(r.kind).toBe("image");
+    expect(r.count).toBe(3);
+    expect(r.names).toEqual(["one.jpg", "two.jpg", "three.jpg"]);
+    expect(r.media.files.map((f) => f.name)).toEqual(["one.jpg", "two.jpg", "three.jpg"]);
+    expect(r.build.names).toEqual(["one.jpg", "two.jpg", "three.jpg"]);
+    expect(r.build.aspects.length).toBe(3);
+    await waitSheets(page);
+    // The Toy tab pages through the set.
+    await page.click("#tab-play");
+    await expect(page.locator("#toy-media-now")).toContainText("3 pictures, picture 1");
+    await expect(page.locator("#toy-media-next")).toBeVisible();
+    await page.evaluate(() => window.__splashery.app.pictureStep(1));
+    await waitSheets(page);
+    expect(await page.evaluate(() => window.__splashery.player.pictures.info().page)).toBe(1);
+    // A picture that is not one is refused with a message; the set stays.
+    const bad = await page.evaluate(async () => {
+      try {
+        await window.__splashery.app.openMedia([new File(["hello"], "a.txt", { type: "text/plain" }), new File(["x"], "b.txt")]); // prettier-ignore
+        return "opened";
+      } catch (err) {
+        return err.message;
+      }
+    });
+    expect(bad).toContain("not a picture");
+    expect(await page.evaluate(() => window.__splashery.player.pictures.info().count)).toBe(3);
+  });
+
+  test("a hidden sheet asked for ahead is built, stays hidden, and says it is ready", async ({
+    page,
+  }) => {
+    await ready(page);
+    await page.evaluate(async () => {
+      const { RECIPES } = await import("/src/packs/pictures.js");
+      const r = RECIPES["picture-lab"];
+      r.__drive = r.__drive || r.drive;
+      r.drive = (t, c, out, info) => {
+        r.__drive(t, c, out, info);
+        out.sheets = { page: { page: 1, visible: 0, ahead: 1 } };
+      };
+      await window.__splashery.app.chooseToy("picture-lab");
+    });
+    await page.waitForFunction(
+      () => {
+        const p = window.__splashery.player.pictures;
+        p && window.__splashery.player.stage.requestRender();
+        return p?.api.ready("page");
+      },
+      null,
+      { timeout: 120_000 },
+    );
+    const s = await page.evaluate(() => {
+      const sh = window.__splashery.player.pictures.sheets[0];
+      return { page: sh.shown.page, enabled: sh.slot.entity.enabled };
+    });
+    expect(s).toEqual({ page: 1, enabled: false });
+    await page.evaluate(async () => {
+      const { RECIPES } = await import("/src/packs/pictures.js");
+      RECIPES["picture-lab"].drive = RECIPES["picture-lab"].__drive;
+    });
+  });
+});
