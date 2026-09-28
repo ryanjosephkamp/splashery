@@ -594,7 +594,11 @@ Proposals below are suggestions; the owner may change them.
     end"): the whole wave moves as one sheet: a tap pitches the lip out and the face leans over
     after it until the lip crashes into the water in front; white water falls flat, spray bursts up
     and foam spreads; the wave collapses and flattens, then a new swell rises behind, steepens,
-    throws a lip and curls over into its resting curl (about 5.5 s). Seen from three quarters.
+    throws a lip and curls over into its resting curl (about 5.5 s). Seen from three quarters. Fix3
+    (the owner's note: "the collapse happens awkwardly; it should be smooth"): the lip plunges
+    without stopping, the barrel it closes shrinks as it rolls forward, white water froths up out of
+    the plunge and climbs over it as a foaming wall, then sinks into lace as the water flattens, all
+    on one smooth clock; the rebuild is unchanged.
   - Sound: Wave crash.
 - **Geyser** (`geyser`). Now: tap: Erupt. Plan: keep.
   - Owner: Pretty cool.
@@ -1289,7 +1293,9 @@ Proposals below are suggestions; the owner may change them.
   - Improved: E5 (r2, after the owner's note): the three bananas pull apart off their crown, then
     each is peeled from its tip, front first: its skin splits into three strips that curl back, each
     bending in two places, showing the pale fruit; then the strips fold back up and the bunch comes
-    together (about 4.3 s).
+    together (about 4.3 s). Fix3 (the owner's note on the middle banana's stem): the crown piece is
+    gone, so each banana ends in the same neck and stalk tip, and nothing is left behind as they
+    pull apart.
   - Sound: Peel.
 - **Orange** (`orange`). Now: tap: Open into wedges. Plan: keep.
   - Owner: Pick something.
