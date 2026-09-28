@@ -728,6 +728,9 @@ export const KINDS = {
   band: 18, // glow (uSpGlowC) where the channel passes z: w = channel + band width
   fade: 19, // fade out as the channel passes z: w = channel + width (negative: fade in)
   skin: 20, // follow two tokens' offsets: z = a + 64 * b, w = blend towards b
+  // Pictures (lane Pictures): a page that turns about a book's spine and curls
+  // like paper (uSpLeaf): z = distance from the spine along the page, w = leaf slot (0..9)
+  leaf: 21,
 };
 
 const GLSL_KIT_UNIFORMS = `uniform vec4 uSpKit;     // x time, y alive (0/1), z speed, w energy (melt 0..1)
@@ -738,7 +741,8 @@ uniform vec4 uSpParts[48];
 uniform vec4 uSpTokens[96]; // per token: xyz offset + w visibility, then a rotation
 uniform vec4 uSpMorph;   // the four channels of the morph, band and fade kinds
 uniform sampler2D uSpScreen; // a live screen picture (the laptop's)
-vec3 spScreenUV = vec3(0.0); // xy uv, z > 0 for a screen splat`;
+vec3 spScreenUV = vec3(0.0); // xy uv, z > 0 for a screen splat
+uniform vec4 uSpLeaf[8]; // Pictures: spine point, spine axis, page direction, then (angle, curl) per leaf`;
 
 const GLSL_KIT_FUNCTIONS = `
 float spBeat(float x) {
@@ -845,6 +849,25 @@ vec3 spKitCenter(vec3 p) {
   if (kind == 16 && int(an.z + 0.5) == int(floor(uSpKitB.w + 0.001)) && uSpKitB.w >= 0.0) {
     p -= up * fract(uSpKitB.w) * 0.012 * R;
   }
+  if (kind == 21) {
+    // Pictures: a leaf turns about the spine by its angle and curls along a
+    // circular arc (curl in radians per toy unit), each splat turning with
+    // the page at its place: tangent angle psi = angle + curl * s.
+    vec3 sp = uSpLeaf[0].xyz;
+    vec3 ax = uSpLeaf[1].xyz;
+    vec3 dr = uSpLeaf[2].xyz;
+    vec3 nm = cross(ax, dr);
+    int slot = clamp(int(an.w + 0.5), 0, 9);
+    vec4 pk = uSpLeaf[3 + slot / 2];
+    vec2 lf = (slot - (slot / 2) * 2) == 0 ? pk.xy : pk.zw;
+    vec3 rel = p - sp;
+    float s = an.z;
+    float psi = lf.x + lf.y * s;
+    float lx = abs(lf.y) < 1e-4 ? s * cos(lf.x) : (sin(psi) - sin(lf.x)) / lf.y;
+    float ly = abs(lf.y) < 1e-4 ? s * sin(lf.x) : (cos(lf.x) - cos(psi)) / lf.y;
+    p = sp + ax * dot(rel, ax) + dr * lx + nm * ly + (nm * cos(psi) - dr * sin(psi)) * dot(rel, nm);
+    spPartQ = vec4(ax * sin(psi * 0.5), cos(psi * 0.5));
+  }
   if (kind == 14) {
     // Game pieces move by uSpTokens even when the toy's own motion is off.
     int ti = clamp(int(an.z + 0.5), 0, 47);
@@ -887,7 +910,8 @@ uniform uSpTokens: array<vec4f, 96>;
 uniform uSpMorph: vec4f;
 var uSpScreen: texture_2d<f32>;
 var uSpScreenSampler: sampler;
-var<private> spScreenUV: vec3f = vec3f(0.0);`;
+var<private> spScreenUV: vec3f = vec3f(0.0);
+uniform uSpLeaf: array<vec4f, 8>;`;
 
 const WGSL_KIT_FUNCTIONS = `
 fn spBeat(x: f32) -> f32 {
@@ -990,6 +1014,23 @@ fn spKitCenter(p0: vec3f) -> vec3f {
   if (kind == 15) { spScreenUV = vec3f(an.z, an.w, 1.0); }
   if (kind == 16 && i32(an.z + 0.5) == i32(floor(uniform.uSpKitB.w + 0.001)) && uniform.uSpKitB.w >= 0.0) {
     p = p - up * fract(uniform.uSpKitB.w) * 0.012 * R;
+  }
+  if (kind == 21) {
+    let sp = uniform.uSpLeaf[0].xyz;
+    let ax = uniform.uSpLeaf[1].xyz;
+    let dr = uniform.uSpLeaf[2].xyz;
+    let nm = cross(ax, dr);
+    let slot = clamp(i32(an.w + 0.5), 0, 9);
+    let pk = uniform.uSpLeaf[3 + slot / 2];
+    let lf = select(pk.zw, pk.xy, (slot - (slot / 2) * 2) == 0);
+    let rel = p - sp;
+    let s = an.z;
+    let psi = lf.x + lf.y * s;
+    let straight = abs(lf.y) < 1e-4;
+    let lx = select((sin(psi) - sin(lf.x)) / lf.y, s * cos(lf.x), straight);
+    let ly = select((cos(lf.x) - cos(psi)) / lf.y, s * sin(lf.x), straight);
+    p = sp + ax * dot(rel, ax) + dr * lx + nm * ly + (nm * cos(psi) - dr * sin(psi)) * dot(rel, nm);
+    spPartQ = vec4f(ax * sin(psi * 0.5), cos(psi * 0.5));
   }
   if (kind == 14) {
     let ti = clamp(i32(an.z + 0.5), 0, 47);

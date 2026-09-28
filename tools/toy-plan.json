@@ -1975,6 +1975,12 @@
       "effect": "Two input switches flip; light flows along the wires through an XOR gate and an AND gate, whose shapes glow as they fire, and the sum and carry lamps show 1 + 1 = 10 in binary (3.5 s).",
       "sound": "Switch clicks, and a buzz through each gate.",
       "improved": "AI: both switches flip to 1, light fills the wires into the XOR and AND gates; the XOR flashes and gives 0, the AND lights the carry lamp, and 1+1=10 shows (3.5 s)."
+    },
+    "picture-lab": {
+      "v": "new",
+      "owner": "The Pictures engine lane's test toy (labs only), from the owner's notes of September 27 and 28, 2026.",
+      "effect": "A flat sheet showing what you open: a tap turns to the next page of a PDF, or plays and pauses a video.",
+      "sound": "A soft paper swish and a light tap."
     }
   }
 }

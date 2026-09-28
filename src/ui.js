@@ -4,7 +4,7 @@
 
 import { EFFECTS, AXES } from "./effects.js";
 import { SHAPES, PALETTES, PROFILES } from "./generators.js";
-import { TOYS, thumbURL, shelfCategories, searchToys } from "./toys.js";
+import { TOYS, thumbURL, shelfCategories, searchToys, onShelf } from "./toys.js";
 import { IDLE_EFFECTS, formatCount } from "./state.js";
 import { MOVES } from "./motion.js";
 import { PATTERNS, PROJECTIONS, loadFlags } from "./patterns.js";
@@ -180,6 +180,8 @@ export function createUI(app) {
     b.type = "button";
     b.className = "toy-card";
     b.dataset.toy = toy.id;
+    // Labs: a toy being tried out keeps its card, hidden, unless labs is on.
+    if (!onShelf(toy)) b.hidden = true;
     b.setAttribute("aria-pressed", "false");
     b.title = toy.note ? `${toy.label} (${toy.note})` : toy.label;
     const img = document.createElement("img");
@@ -305,8 +307,9 @@ export function createUI(app) {
     setSearching(!els.dock.classList.contains("searching")),
   );
   els.shelfSurprise.addEventListener("click", () => {
-    const pool = shelf.list.filter((t) => t.id !== shelf.current);
-    const from = pool.length ? pool : allToys.filter((t) => t.id !== shelf.current);
+    // Labs toys stay out of Surprise me unless labs is on.
+    const pool = shelf.list.filter((t) => t.id !== shelf.current && onShelf(t));
+    const from = pool.length ? pool : allToys.filter((t) => t.id !== shelf.current && onShelf(t)); // prettier-ignore
     if (from.length) app.chooseToy(from[Math.floor(Math.random() * from.length)].id);
   });
   // A mouse wheel scrolls the category chips sideways.
@@ -784,6 +787,140 @@ export function createUI(app) {
     return wrap;
   }
 
+  // ---- Pictures: open a file or a web address (lane Pictures) ------------------------
+  // A picture toy's input panel (input.media = { accept: ["pdf", "image",
+  // "gif", "video"] }): a button that opens a file of those kinds from this
+  // device, a field for a web address, what shows now, the page buttons (or
+  // play and pause for a video) and a way back to the toy's sample. Errors
+  // (a file this browser can't read, an address that refuses) show in the
+  // panel's warning.
+  let mediaPanel = null;
+  const MEDIA_TYPES = {
+    pdf: ".pdf,application/pdf",
+    image: "image/*",
+    gif: ".gif,image/gif",
+    video: "video/*,.mp4,.webm,.mov,.m4v",
+  };
+  function renderInputMedia(media, error) {
+    const wrap = document.createElement("div");
+    wrap.className = "input-media";
+    const kinds = media.accept || Object.keys(MEDIA_TYPES);
+    const file = document.createElement("input");
+    file.type = "file";
+    file.hidden = true;
+    file.id = "toy-media-file";
+    file.accept = kinds.map((k) => MEDIA_TYPES[k]).join(",");
+    const busy = (on) => {
+      for (const b of wrap.querySelectorAll("button")) b.disabled = on;
+    };
+    const run = async (source) => {
+      error.hidden = true;
+      busy(true);
+      try {
+        await app.openMedia(source);
+      } catch (err) {
+        error.textContent = err.message;
+        error.hidden = false;
+      } finally {
+        busy(false);
+        refreshMedia();
+      }
+    };
+    const openRow = document.createElement("div");
+    openRow.className = "button-row";
+    const open = document.createElement("button");
+    open.type = "button";
+    open.id = "toy-media-open";
+    open.className = "primary";
+    open.textContent = "Open a file…";
+    open.addEventListener("click", () => file.click());
+    file.addEventListener("change", () => {
+      const f = file.files?.[0];
+      file.value = "";
+      if (f) run(f);
+    });
+    const sample = document.createElement("button");
+    sample.type = "button";
+    sample.id = "toy-media-sample";
+    sample.textContent = "Back to the sample";
+    sample.addEventListener("click", async () => {
+      error.hidden = true;
+      await app.clearMedia();
+      refreshMedia();
+    });
+    openRow.append(open, sample);
+    const form = document.createElement("form");
+    form.className = "input-row";
+    const url = document.createElement("input");
+    url.type = "url";
+    url.id = "toy-media-url";
+    url.placeholder = "https://… a PDF, picture, GIF or video";
+    url.spellcheck = false;
+    url.autocomplete = "off";
+    url.setAttribute("aria-label", "A web address to open");
+    const go = document.createElement("button");
+    go.type = "submit";
+    go.id = "toy-media-go";
+    go.textContent = "Open";
+    form.append(url, go);
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (url.value.trim()) run(url.value.trim());
+    });
+    const now = document.createElement("p");
+    now.className = "note input-shown";
+    now.id = "toy-media-now";
+    const pages = document.createElement("div");
+    pages.className = "button-row";
+    const prev = document.createElement("button");
+    prev.type = "button";
+    prev.id = "toy-media-prev";
+    prev.textContent = "Previous";
+    prev.addEventListener("click", () => app.pictureStep(-1));
+    const next = document.createElement("button");
+    next.type = "button";
+    next.id = "toy-media-next";
+    next.textContent = "Next";
+    next.addEventListener("click", () => app.pictureStep(1));
+    const play = document.createElement("button");
+    play.type = "button";
+    play.id = "toy-media-play";
+    play.addEventListener("click", () => {
+      app.pictureTogglePlay();
+      refreshMedia();
+    });
+    pages.append(prev, next, play);
+    wrap.append(openRow, form, now, pages, file);
+    mediaPanel = { now, prev, next, play, pages, sample };
+    refreshMedia();
+    return wrap;
+  }
+
+  // What the picture panel shows: the name, the page or frame count, and
+  // the buttons that apply.
+  function refreshMedia(p = app.player?.pictures?.info() || null) {
+    const m = mediaPanel;
+    if (!m || !m.now.isConnected) return;
+    const own = !!app.player?.scene?.toy?.media;
+    m.sample.hidden = !own;
+    if (!p?.kind) {
+      m.now.textContent = "Opening…";
+      m.pages.hidden = true;
+      return;
+    }
+    const what = { pdf: "a PDF", image: "a picture", gif: "a GIF", video: "a video" }[p.kind];
+    const where = p.kind === "pdf" ? `, page ${p.page + 1} of ${p.count}` : p.kind === "gif" ? `, ${p.count} frames` : ""; // prettier-ignore
+    m.now.textContent = `Showing ${p.name} (${what}${where}).`;
+    const paged = p.kind === "pdf" && p.count > 1;
+    m.prev.hidden = m.next.hidden = !paged;
+    m.prev.disabled = p.page <= 0;
+    m.next.disabled = p.page >= p.count - 1;
+    m.play.hidden = p.kind !== "video";
+    m.play.textContent = p.playing ? "Pause" : "Play";
+    m.pages.hidden = !paged && p.kind !== "video";
+  }
+  // ---- End of pictures ---------------------------------------------------------------
+
   // A toy that takes something of yours (the molecule: a name, formula or
   // SMILES, or a file; the protein: a PDB or mmCIF file). The recipe's
   // input.read turns it into option values, or throws a message to show.
@@ -836,6 +973,7 @@ export function createUI(app) {
       box.append(row);
     }
     if (input.pad) box.append(renderInputPad(input.pad, apply));
+    if (input.media) box.append(renderInputMedia(input.media, error)); // Pictures
     const file = document.createElement("input");
     file.type = "file";
     file.accept = input.accept || "";
@@ -845,7 +983,7 @@ export function createUI(app) {
     fileRow.className = "button-row";
     // fileButton: false leaves the file button out (a toy that only takes
     // typing or drawing).
-    fileRow.hidden = input.fileButton === false;
+    fileRow.hidden = input.fileButton === false || !!input.media;
     const open = document.createElement("button");
     open.type = "button";
     open.id = "toy-input-open";
@@ -1598,6 +1736,10 @@ export function createUI(app) {
       els.paintColor.value = fx.paint.color;
       for (const b of els.swatches.children)
         b.setAttribute("aria-pressed", String(b.dataset.color === fx.paint.color));
+    },
+    // Pictures: the picture panel follows the pages (and media errors).
+    setPictures(p, media) {
+      refreshMedia(p);
     },
     setToyPanel(info) {
       renderToyPanel(info);

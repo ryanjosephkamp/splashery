@@ -1339,6 +1339,13 @@ export const TOY_SOUNDS = {
     { voice: "ding", at: 2.0, f: "G6", decay: 0.8 },
     { voice: "switch", at: 2.88, f: 2200, vol: 0.7 },
   ],
+
+  // ---- Pictures and pages (lane Pictures) -------------------------------------------
+  // A page turning: a soft paper swish, then a light tap as it lands.
+  "picture-lab": [
+    { voice: "whoosh", f: 1500, decay: 0.45, vol: 0.35 },
+    { voice: "click", at: 0.2, f: 1300, decay: 0.7, vol: 0.4 },
+  ],
 };
 
 // The toy's sound, or null when it has none (visitors' own splats).

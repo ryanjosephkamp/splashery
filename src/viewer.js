@@ -62,6 +62,15 @@ export class Viewer {
       );
       scene.toy = { kind: "builtin", id: TOYS[0].id };
     }
+    // Pictures: a file from someone's device never comes with a link; the
+    // toy shows its own sample (a web address opens as it is). Video stays
+    // silent in embeds.
+    if (scene.toy.media?.file) {
+      this.opts.onStatus?.(
+        `This toy showed ${scene.toy.media.file.name}, a file on someone's device; showing its sample.`,
+      );
+      delete scene.toy.media;
+    }
     // Page-level overrides.
     const look = { ...scene.look };
     if (this.opts.theme === "light" || this.opts.theme === "dark")
@@ -93,13 +102,17 @@ export class Viewer {
       },
       onOrbitStart: () => cam.begin(),
       onOrbit: (dx, dy, dt) => {
-        cam.rotateBy(dx, dy, dt);
+        // Pictures: close up on a page, a drag moves across it.
+        if (player.pansHere()) player.panBy(dx, dy);
+        else cam.rotateBy(dx, dy, dt);
         player.stage.requestRender();
       },
       onOrbitEnd: () => cam.end(),
       onPinchStart: () => cam.begin(),
       onPinch: ({ scale, dx, dy, twist, dt }) => {
-        cam.rotateBy(dx, dy, dt);
+        // Pictures: two fingers move a picture toy, as in a photo viewer.
+        if (player.pictures) player.panBy(dx, dy);
+        else cam.rotateBy(dx, dy, dt);
         if (scale > 0) cam.zoomBy(1 / scale);
         cam.rollBy(-twist);
         player.stage.requestRender();

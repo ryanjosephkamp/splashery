@@ -27,6 +27,7 @@ import {
 import { findToy, assetURL, lookOption, pickLook } from "./toys.js";
 import { createScene, THEMES } from "./state.js";
 import { mulberry32, mixSeed, hash32 } from "./noise.js";
+import { Pictures } from "./pictures.js"; // Pictures
 
 export { NoGPUError };
 
@@ -333,9 +334,12 @@ export class Player {
       Object.assign(info, { id: null, label: file.name, kind: "file", bytes: file.size });
     }
     this.toyInfo = info;
+    if (!this.pictures) this.closeMedia(); // Pictures
     this.patternOn = false;
     this.applyPattern();
     this.camera.fit(info.radius, info.center);
+    // Pictures: a page viewer comes close enough to read a page's small print.
+    if (this.pictures) this.camera.minDistance = info.radius * 0.3;
     this.time = 0;
     this.idle.pokeAt = 0;
     this.idle.pokes = 0;
@@ -466,6 +470,7 @@ export class Player {
       this.screen = { recipe, canvas, g: canvas.getContext("2d"), version: null };
       recipe.screen.reset?.();
     }
+    this.startPictures(ctx, toy, recipe, options); // Pictures
     const b = ctx.buf.bounds();
     for (const r of ctx.reaches || []) {
       for (let k = 0; k < 3; k++) {
@@ -624,7 +629,160 @@ export class Player {
 
   disposeProcedural() {
     this.proc = null;
+    // Pictures: the old toy's sheets go with it.
+    if (this.pictures) this.camera.setTurntable(this.scene.autoplay.turntable);
+    this.pictures?.destroy();
+    this.pictures = null;
+    this.stage.setPictureCulling(false);
   }
+
+  // ---- Pictures (lane Pictures) ----------------------------------------------------
+  // A kit toy with picture sheets (k.sheet) shows media on them: the scene's
+  // media web address (toy.media.url), a file opened on this device
+  // (this.mediaFile, never saved), or the recipe's own sample
+  // (recipe.pictures.sample(options), a path under the site). The media is
+  // opened once and kept while the same source shows.
+
+  startPictures(ctx, toy, recipe, options) {
+    const defs = ctx.kit?.sheets;
+    this.stage.setPictureCulling(!!defs?.length);
+    if (!defs?.length) {
+      this.closeMedia();
+      return;
+    }
+    const pics = new Pictures(this, {
+      defs,
+      transform: ctx.transform,
+      spine: ctx.kit.spineDef || null,
+      profile: this.profile,
+    });
+    pics.setSound(this.mediaSound);
+    this.pictures = pics;
+    ctx.kit.data ||= {};
+    ctx.kit.data.pictures = pics.api;
+    const src = this.mediaSource(toy, recipe, options);
+    if (!src) {
+      this.closeMedia();
+      return;
+    }
+    if (this.pictureMedia?.key === src.key) {
+      this.pictureMedia.ready.then((m) => {
+        if (this.pictures !== pics || !m) return;
+        pics.setMedia(m);
+        if (src.page) pics.go(src.page);
+      });
+      return;
+    }
+    this.closeMedia();
+    const entry = { key: src.key, media: null };
+    entry.ready = import("./media.js")
+      .then(({ openMedia }) => openMedia(src.source, { profile: this.profile }))
+      .then(
+        (m) => {
+          entry.media = m;
+          if (this.pictureMedia !== entry) {
+            m.close();
+            return null;
+          }
+          if (this.pictures === pics) {
+            pics.setMedia(m);
+            if (src.page) pics.go(src.page);
+          }
+          this.emit("media", { ok: true, kind: m.kind, name: m.name, count: m.count });
+          return m;
+        },
+        (err) => {
+          if (this.pictureMedia === entry) this.pictureMedia = null;
+          this.emit("media", { ok: false, error: err.message, source: src });
+          this.emit("message", err.message);
+          return null;
+        },
+      );
+    this.pictureMedia = entry;
+  }
+
+  // Where the toy's media comes from: { key, source, page }.
+  mediaSource(toy, recipe, options) {
+    const m = toy.media;
+    if (m?.file && this.mediaFile && this.mediaFile.name === m.file.name)
+      return { key: mediaKey(this.mediaFile), source: this.mediaFile, page: m.page || 0 };
+    if (m?.url) return { key: mediaKey(m.url), source: m.url, page: m.page || 0 };
+    const sample = recipe.pictures?.sample?.(options || {});
+    if (sample) {
+      const url = assetURL(sample);
+      return { key: `url:${url}`, source: url, page: 0 };
+    }
+    return null;
+  }
+
+  // Media the app has opened already (to show its errors before anything
+  // changes); the next build uses it.
+  adoptMedia(source, media) {
+    this.closeMedia();
+    this.pictureMedia = { key: mediaKey(source), media, ready: Promise.resolve(media) };
+  }
+
+  closeMedia() {
+    if (this.pictures?.media) this.pictures.setMedia(null);
+    const e = this.pictureMedia;
+    this.pictureMedia = null;
+    if (e) e.ready?.then(() => e.media?.close());
+  }
+
+  // Video sound follows the site's speaker button; embeds keep it off.
+  setMediaSound(on) {
+    this.mediaSound = !!on;
+    this.pictures?.setSound(this.mediaSound);
+  }
+
+  // The leaves' uniform (kind "leaf"): the spine's point, axis and page
+  // direction, then (angle, curl) for up to ten leaves from drive's
+  // out.leaves = [{ angle, curl }] (radians; curl per toy unit).
+  leafUniform() {
+    const d = (this.leafData ||= new Float32Array(32));
+    d.fill(0);
+    const sp = this.pictures?.spine;
+    if (sp) {
+      d.set(sp.at, 0);
+      d.set(sp.axis, 4);
+      d.set(sp.dir, 8);
+    }
+    const leaves = this.motion.out?.leaves || [];
+    for (let i = 0; i < Math.min(10, leaves.length); i++) {
+      const l = leaves[i] || {};
+      d[12 + i * 2] = Number.isFinite(l.angle) ? l.angle : 0;
+      d[13 + i * 2] = Number.isFinite(l.curl) ? l.curl / (this.pictures?.fitScale || 1) : 0;
+    }
+    return d;
+  }
+
+  // Moves the view across a picture toy (a page seen close up): the finger
+  // drags the picture. Stays within the toy.
+  panBy(dx, dy) {
+    const cam = this.camera;
+    const pose = cam.pose();
+    const k =
+      (2 * cam.cur.distance * Math.tan((19 * Math.PI) / 180)) / (this.canvas.clientHeight || 600);
+    const R = this.toyInfo?.radius || 1;
+    const c = this.toyInfo?.center || [0, 0, 0];
+    for (let i = 0; i < 3; i++) {
+      const v = cam.target[i] - pose.right[i] * dx * k + pose.up[i] * dy * k;
+      cam.target[i] = Math.min(c[i] + R, Math.max(c[i] - R, v));
+    }
+    this.stage.requestRender();
+  }
+
+  // A one-finger drag pans (instead of turning) on a picture toy seen close up.
+  pansHere() {
+    return !!this.pictures && this.camera.cur.distance < (this.toyInfo?.radius || 1) * 1.6;
+  }
+
+  // A container in the kit format for a picture sheet.
+  pictureContainer(capacity) {
+    return new pc.GSplatContainer(this.stage.device, capacity, this.format);
+  }
+
+  // ---- End of pictures ---------------------------------------------------------------
 
   // ---- Scene ----------------------------------------------------------------
 
@@ -698,6 +856,7 @@ export class Player {
   }
 
   resetCamera() {
+    if (this.pictures && this.toyInfo) this.camera.target = this.toyInfo.center.slice(); // Pictures
     this.camera.reset();
     this.stage.requestRender();
   }
@@ -833,6 +992,8 @@ export class Player {
       return;
     }
     if (!this.frozen) this.time += dt * this.timeScale;
+    // Pictures: a picture toy (turntable: false) keeps still, facing you.
+    if (this.pictures && this.toyInfo.recipe?.turntable === false) this.camera.turntable = false;
     const d = this.driver.drop;
     if (d.on && d.recallAt < 0) {
       const k = Math.min(1, (this.time - d.start) / 0.9) * d.floor * 0.5;
@@ -898,6 +1059,7 @@ export class Player {
       patternUniforms(this.scene.pattern, info.half, info.lum ?? 0.5, this.patternOn),
     );
     if (info.rig) u.uSpRigDbg = [this.rigDebug ? 1 : 0, 0, 0, 0];
+    if (info.kind === "kit") u["uSpLeaf[0]"] = this.leafUniform(); // Pictures
     this.stage.setUniforms(u);
     // Redraw a live screen when the recipe says its picture changed.
     const scr = this.screen;
@@ -909,6 +1071,7 @@ export class Player {
         this.stage.setScreenCanvas(scr.canvas);
       }
     }
+    this.pictures?.update(this.motion.out, this.time); // Pictures
     if (this.motion.addonU) {
       this.stage.setAddonUniforms({ ...u, ...this.motion.addonU, uSpPat: [0, 0, 0, 0] });
     }
@@ -1206,9 +1369,18 @@ export class Player {
 
   destroy() {
     this.loadToken++;
+    this.pictures?.destroy(); // Pictures
+    this.closeMedia();
     this.painter?.detach();
     this.stage?.destroy();
   }
+}
+
+// Pictures: which media a source is (a file on this device, or an address).
+export function mediaKey(source) {
+  return typeof source === "string"
+    ? `url:${source}`
+    : `file:${source.name}:${source.size}:${source.lastModified ?? 0}`;
 }
 
 // A kit recipe's options with the scene's values checked against their types.
