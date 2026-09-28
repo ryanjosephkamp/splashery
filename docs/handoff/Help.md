@@ -83,11 +83,12 @@ How it works:
   the text. It fades after 7 seconds; "?" toggles it; its "About this toy" link opens the About tab
   (and the sheet on a phone).
 - Where it sits: under the name at the top left of the stage. On a phone that is under the toy's
-  name line (top 74px), and it hides while the sheet is open, like the name. On a wide screen it is
-  under "Splashery" (top 62px). "?" sits left of the sound button. The toy sits in the middle of the
-  stage, so the corner stays clear; `tests/help.spec.mjs` checks six toys (the tall Eiffel Tower,
-  the wide chess set among them) at 390×844 and 1440×900 by hiding everything over the stage and
-  checking that the stage under the line's box is plain background.
+  name line (placed just below it, since a scan's credit can wrap it to two lines), and it hides
+  while the sheet is open, like the name. On a wide screen it is under "Splashery" (top 62px). "?"
+  sits left of the sound button. The toy sits in the middle of the stage, so the corner stays clear;
+  `tests/help.spec.mjs` checks seven toys (a scan whose credit wraps the name line, the tall Eiffel
+  Tower, the wide chess set among them) at 390×844 and 1440×900 by hiding everything over the stage
+  and checking that the stage under the line's box is plain background.
 - Why the About tab: it already holds the toy's credits and the controls, "About" is where a visitor
   looks for "what is this", and the Toy tab stays short for the controls. A new tab would not fit
   the phone's tab row (six tabs already fill 390px). The line's "About this toy" link is the way in.
