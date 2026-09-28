@@ -724,19 +724,63 @@ export const TOY_HELP = {
   },
 
   // ---- Holidays -------------------------------------------------------------------------
-  "jack-o-lantern": { howTo: "Tap to lift the lid; tap again to put it back." },
-  snowman: { howTo: "Tap to melt it and build it again. Try the Warmth slider in the Toy tab." },
-  "decorated-tree": { howTo: "Tap to switch the lights on or off." },
-  diya: { howTo: "Tap to light the ring of diyas; tap again to put them out." },
-  menorah: { howTo: "Tap to put out the candles; tap again to light them one by one." },
+  "jack-o-lantern": {
+    howTo: "Tap to lift the lid; tap again to put it back.",
+    about:
+      "A jack-o'-lantern is a pumpkin carved with a face and lit from inside by a candle, a symbol of Halloween. The custom comes from Ireland and Britain, where people once carved faces into turnips and potatoes; in North America, the big, soft pumpkin turned out to be much easier to carve.\n\nThis one glows through its carved eyes and grin. Tap to lift the lid off the top, and tap again to put it back. The name comes from an old Irish tale of a man called Stingy Jack, who wandered the night carrying a lantern.",
+  },
+  snowman: {
+    howTo: "Tap to melt it and build it again. Try the Warmth slider in the Toy tab.",
+    about:
+      "A snowman is built from big balls of snow rolled across the ground, stacked up and given a face of coal, a carrot nose, stick arms, a scarf and a hat. Snow packs best when it is just at the melting point and a little wet, so the flakes stick together. Fresh snow is mostly air, which is why it is so light and fluffy.\n\nTap it and it melts: the snowballs shrink, the head first, drips fall, and the hat, nose, coals, arms and scarf drop off one by one into a spreading puddle. Then it builds itself again from the bottom up. The Warmth slider in the Toy tab melts it the same way.",
+  },
+  fireworks: {
+    howTo: "Tap it to launch a firework; each one is different.",
+    about:
+      "Fireworks were invented in China more than a thousand years ago. A firework shell is shot high into the air, where it bursts and throws out little pellets called stars, which burn in bright colors. The colors come from metals mixed in: strontium burns red, barium green, copper blue and sodium yellow.\n\nTap it to launch: a rocket rises from one of the tubes in the crate and bursts in that tube's color. Each tap fires a different tube and a different shell: a round peony, a ring, a drooping willow or a star, so no two in a row look alike.",
+  },
+  "decorated-tree": {
+    howTo: "Tap to switch the lights on or off.",
+    about:
+      "A decorated tree is an evergreen tree, such as a fir or a pine, brought indoors and hung with lights, ornaments and a star on top for the Christmas season. The custom began in Germany about 500 years ago and spread around the world. Evergreens stay green all winter, so they became a sign of life in the darkest time of the year.\n\nThe tree starts with its lights off. Tap to switch them on: they sweep up the tree, stay on and cycle through chasing, rippling and steady patterns, while the star glows. Tap again to switch them off. The first electric tree lights were made in 1882.",
+  },
+  "patterned-egg": {
+    howTo: "Tap it to spin it. Pick a pattern and its colors in the Toy tab.",
+    about:
+      "Decorating eggs with bright patterns is a spring tradition in many countries, especially at Easter. In Ukraine and nearby lands, painted eggs called pysanky are made by drawing lines in melted wax, dipping the egg in dye, and repeating with darker colors; the wax keeps each color where it was drawn.\n\nTap it to spin it. Pick a folk, striped, dotted, zigzag, flower or star pattern and its two colors in the Toy tab. Try spinning a real hard-boiled egg: it spins smoothly, while a raw one wobbles and stops, because the runny inside sloshes.",
+  },
+  "paper-lantern": {
+    howTo: "Tap it to set it swinging on its string.",
+    about:
+      "A paper lantern is a light made of thin paper stretched over a frame of ribs, glowing from a light inside. In China and many other places, red lanterns stand for luck and happiness, and thousands are hung up for the Lantern Festival, which ends the Lunar New Year celebrations on the first full moon of the year.\n\nTap it and it swings on its string like a pendulum, back and forth, slowing a little on each swing until it hangs still again. Pick a red, gold, teal or purple lantern in the Toy tab.",
+  },
+  diya: {
+    howTo: "Tap to light the ring of diyas; tap again to put them out.",
+    about:
+      "A diya is a small clay lamp that holds oil or butter and a cotton wick. Rows of diyas are lit for Diwali, the festival of lights celebrated by Hindus, Sikhs and Jains, to welcome light and good fortune. Homes are also decorated with rangoli, bright patterns of colored powder or flowers on the floor.\n\nThis diya sits on a rangoli. Tap it and its flame flares and grows, and eight small diyas around the pattern light one after another and stay lit. Tap again to put them out. In the Toy tab, set the size of the flame, or blow on it.",
+  },
+  menorah: {
+    howTo: "Tap to put out the candles; tap again to light them one by one.",
+    about:
+      "A Hanukkah menorah is a candle holder with nine branches, lit during Hanukkah, the Jewish festival of lights. Hanukkah lasts eight nights, and one more candle is lit each night. The ninth candle, the helper called the shamash, stands apart and is used to light the others. The festival remembers the rededication of the Temple in Jerusalem, when, the story says, one day's oil burned for eight days.\n\nThe menorah starts with every candle lit. Tap to put them out, and tap again to light them: the helper candle first, then the others one by one.",
+  },
 
   // ---- Music ----------------------------------------------------------------------------
+  guitar: {
+    howTo: "Tap it to strum a few chords.",
+    about:
+      "An acoustic guitar has six strings stretched over a hollow wooden body. Plucking a string makes it vibrate, and the body and the round soundhole make the sound bigger and warmer. Pressing a string down against the metal frets on the neck makes it shorter, and a shorter string plays a higher note.\n\nTap it to strum: the guitar rocks with the stroke, the strings bend and shake one after another, and rings of light pulse out of the soundhole as it plays four chords. Pick a sunburst, natural or cherry finish in the Toy tab. The six strings are usually tuned, from lowest to highest, to E, A, D, G, B and E.",
+  },
+  drum: {
+    howTo: "Tap it for a drum roll; tap again quickly for a faster, longer roll.",
+    about:
+      "A snare drum is a shallow drum with a skin, called a head, stretched across each side. Under the bottom head runs a set of thin metal wires, the snares, which rattle against it every time the top is hit, giving the drum its crisp, buzzing crack. A drum roll is many fast strokes, played one stick after the other so quickly that they blur into one sound.\n\nTap it and the sticks play a roll. Tap again quickly, and each tap steps the roll up to a faster speed and makes it last longer, through four speeds in all. Pick the color of the shell in the Toy tab.",
+  },
   xylophone: {
     howTo: "Tap a bar to play its note, or tap the mallet or frame to play a scale.",
     about:
       "A xylophone is a row of tuned wooden bars that you strike with a mallet. Each bar's length sets its note: the shorter the bar, the higher it sounds. The name comes from the Greek for “wood” and “sound”.\n\nThis toy one has eight colored bars, a scale from C up to the next C. Tap a bar and the mallet swings over and strikes it, and the bar jumps and plays its note, so you can play a tune. Tap the mallet, a wheel or the ends of the frame instead, and it plays the whole scale.",
   },
-
   // ---- Vehicles -------------------------------------------------------------------------
   helicopter: { howTo: "Tap to take off; tap again to land." },
   ufo: { howTo: "Tap to switch the beam off or on." },
