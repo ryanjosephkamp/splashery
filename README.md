@@ -185,6 +185,16 @@ opens the panel, as before.
 The camera eases in and out, coasts after a flick, and turns slowly when you leave it alone (never
 when your system asks for reduced motion).
 
+## Pictures and pages (labs)
+
+Open a PDF, a picture, a GIF or a video and see it made of splats. PDF pages keep their ink as small
+splats on a smooth paper sheet and stream through a few sheets, so a book of any length stays light;
+photos get one splat per pixel; GIFs and videos recolor their splats every frame, with the video's
+sound on the speaker button. Pages grow sharper as you zoom in. Files stay in your browser; a scene
+can carry a web address instead, so a link or an embed opens the picture from your own site
+(docs/SCENE-SCHEMA.md). For now the toys are behind a labs switch: open the site with `?labs=1` to
+see the **Picture lab** on the "Pictures and pages" shelf (`?labs=0` hides it again).
+
 ## Bring your own splat
 
 Drop a file anywhere on the page, or use **Your own splat → Open a splat file…**:
@@ -404,12 +414,14 @@ src/font.js                     5x7 bitmap font (storybook pages, speech bubble)
 src/chess.js                    chess rules, SAN and PGN (the chess set's games)
 src/chem/                       elements, SMILES, 3D layout, molecule files, PDB/mmCIF proteins
 src/exports.js                  PNG, GIF, WebM, links and embed snippets
+src/media.js, pictures.js       pictures and pages: PDFs, pictures, GIFs and videos on splat sheets
+src/picture-splats.js           pixels to splats (ink, pixels, screen), run in src/pictures-worker.js
 src/viewer.js, embed.js, element.js   embed player and <splashery-toy>
 src/pc.js, toys.js              engine import, toy shelf
 assets/toys/                    captured toys (SOG) and thumbnails
 assets/flags/                   public-domain national flags (SVG) and their sources
 assets/proteins/                four PDB entries (CC0) for the protein toy
-vendor/                         PlayCanvas 2.22.3 and gifenc 1.0.3
+vendor/                         PlayCanvas 2.22.3, gifenc 1.0.3, PDF.js 6.3.289 and omggif 1.0.10
 tools/                          asset, flag, thumbnail, clip and sound tools; upkeep and page builders
 tests/                          Playwright tests and screenshots
 ```
@@ -418,5 +430,5 @@ tests/                          Playwright tests and screenshots
 
 Splashery's own code is under the [MIT License](LICENSE). The assets keep their own licenses: the
 captured and converted toys, flags and proteins are CC0, CC BY or public domain, each credited in
-[CREDITS.md](CREDITS.md) and in the app. The vendored libraries (PlayCanvas and gifenc, both MIT)
-and the build tools' licenses are listed in [LICENSES.md](LICENSES.md).
+[CREDITS.md](CREDITS.md) and in the app. The vendored libraries (PlayCanvas, gifenc and omggif, MIT;
+PDF.js, Apache 2.0) and the build tools' licenses are listed in [LICENSES.md](LICENSES.md).

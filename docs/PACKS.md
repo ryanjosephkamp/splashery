@@ -321,6 +321,72 @@ loads; `build` itself stays synchronous.
 **Credits**: `credits: [{ label, title, source, author, license, licenseUrl }]` adds the toy's own
 sources to the About tab (the protein toy's PDB entries).
 
+## 5b. Picture sheets
+
+From lane Pictures (PR #64, September 28, 2026; its design and measurements are in
+[handoff/Pictures.md](handoff/Pictures.md)).
+
+A recipe shows a PDF, a picture, a GIF or a video on **picture sheets**. The engine opens the media
+(the scene's web address, a file the visitor opened in the Toy tab, or the recipe's sample), builds
+each sheet's splats in a worker from the page or frame it shows, rebuilds it sharper or coarser as
+the view comes near or goes away, and frees pages that are left. Splats in a sheet move with the toy
+like any other splat (parts, the body, leaves).
+
+```js
+"your-book": {
+  turntable: false,            // keep still, facing the viewer (a page viewer)
+  pictures: {
+    sample: (o) => "assets/toys/your-book/sample.pdf", // shown until the visitor opens their own
+    accept: ["pdf", "image", "gif", "video"],
+  },
+  input: { title: "Your own book", media: { accept: ["pdf"] }, note: "…" }, // the Toy tab's panel
+  controls: [{ key: "turn", label: "Turn the page", type: "pulse", ease: 1.2 }],
+  action: { key: "turn", label: "Turn the page" },
+  drive(t, c, out, info) {
+    const pics = info.data.pictures; // { page, count, kind, name, playing, next(), prev(), go(n), togglePlay() }
+    out.sheets = {                    // which page each sheet shows (default: pics.page)
+      left: { page: pics.page - 1 },  // a page out of range shows nothing
+      right: { page: pics.page },
+      turning: { page: pics.page + 1, visible: c.turn > 0 ? 1 : 0 },
+    };
+    out.leaves = [{ angle: Math.PI * ease(c.turn), curl: -1.2 * Math.sin(Math.PI * c.turn) }];
+  },
+  build(k, o) {
+    k.spine({ at: [0, 0, 0], axis: [0, 1, 0], dir: [1, 0, 0] });
+    k.sheet({ id: "left", center: [-0.72, 0, 0.004], width: 1.4, height: 1.9, align: [1, 0] });
+    k.sheet({ id: "right", center: [0.72, 0, 0.004], width: 1.4, height: 1.9, align: [-1, 0] });
+    k.sheet({ id: "turning", center: [0.72, 0, 0.012], width: 1.4, height: 1.9, align: [-1, 0], leaf: 0 });
+    // …the cover, the binding and the other pages' edges as usual kit shapes
+  },
+},
+```
+
+- `k.sheet({ id, center, width, height, normal = [0, 0, 1], up = [0, 1, 0], part, method, fit, align, leaf, lift, opacity })`,
+  in recipe coordinates. The picture is fitted inside `width` × `height` keeping its shape
+  (`fit: "fill"` stretches it); `align` places a narrower picture ([-1, 0] against the left edge,
+  for a right-hand page). `method`: `"auto"` (a PDF uses "ink", a picture "pixels", a GIF or video
+  "screen"), or one of them. `part` rides the sheet on a part (a TV screen on a tilting stand, a
+  frame that spins). `lift` floats it in front of `center`. The corners count in the fit.
+- `out.sheets[id] = { page, visible }` from `drive` picks each sheet's page (0-based) and hides it
+  (`visible: 0`). A page below 0 or past the end shows nothing, so a book's first spread can have an
+  empty left page.
+- **Bending a page** (kind `leaf`, 21): `k.spine({ at, axis, dir })` gives the book's spine (a
+  point, its direction, and the direction from it along the pages at rest). A sheet with
+  `leaf: slot` (0 to 9) turns about the spine by `out.leaves[slot].angle` (radians, 0 at rest, π
+  turned over) and curls along a circular arc by `out.leaves[slot].curl` (radians per recipe unit of
+  page; negative lags the free edge behind, like paper). Every splat of the page turns with the
+  curve at its place, so the page stays a solid sheet at every angle (the skinned sheet's splats are
+  not turned, which is why a turning page needs its own kind). A leaf's sheet should be on part 0 (a
+  part's turn would replace the leaf's). The back of a turning page is a second sheet with the same
+  spine, `normal` reversed and its own page:
+  `k.sheet({ id: "back", …, normal: [0, 0, -1], leaf: 0 })`.
+- The video's sound follows the site's speaker button (embeds stay silent); `pics.togglePlay()`
+  plays and pauses it. A GIF plays by itself.
+- Budgets per sheet come from the device tier (`PICTURE_BUDGETS` in `src/pictures.js`). A book shows
+  three or four sheets at once, so the splats on show are three or four times one page's.
+- `tools/pic-clip.mjs` records clips of picture toys (pages are built in real time).
+- `tools/pic-samples.mjs` makes the samples and the test fixtures from our own text.
+
 ## 6. Behaviours
 
 A behaviour moves each splat on the GPU, every frame. Set `kind` and `params: [a, b]` on a shape or
