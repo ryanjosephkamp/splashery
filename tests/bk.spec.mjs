@@ -164,4 +164,32 @@ test.describe("engine for books (in the app)", () => {
       RECIPES["picture-lab"].drive = RECIPES["picture-lab"].__drive;
     });
   });
+
+  test("a recipe can draw on a picture before it becomes splats (pictures.decorate)", async ({
+    page,
+  }) => {
+    await ready(page);
+    await page.evaluate(async () => {
+      const { RECIPES } = await import("/src/packs/pictures.js");
+      const r = RECIPES["picture-lab"];
+      window.__deco = [];
+      r.pictures.decorate = (canvas, info) => {
+        window.__deco.push({ page: info.page, name: info.name, kind: info.kind, sample: info.options.sample }); // prettier-ignore
+        const g = canvas.getContext("2d");
+        g.fillStyle = "#ff0000";
+        g.fillRect(0, 0, canvas.width, canvas.height);
+      };
+      await window.__splashery.app.chooseToy("picture-lab");
+    });
+    await waitSheets(page);
+    const r = await page.evaluate(async () => {
+      const { RECIPES } = await import("/src/packs/pictures.js");
+      delete RECIPES["picture-lab"].pictures.decorate;
+      const d = window.__splashery.player.pictures.sheets[0].shown.data;
+      return { calls: window.__deco, count: d.count };
+    });
+    expect(r.calls[0]).toEqual({ page: 0, name: "article.pdf", kind: "pdf", sample: "article" });
+    // A page drawn all red has no ink: only its paper and its edge.
+    expect(r.count).toBeLessThan(20000);
+  });
 });

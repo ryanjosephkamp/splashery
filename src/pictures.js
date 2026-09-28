@@ -84,8 +84,9 @@ function buildOffThread(job) {
 export class Pictures {
   // defs: the recipe's sheets (k.sheets), transform: the kit's fit
   // ({ center, scale }), spine: k.spineDef or null.
-  constructor(player, { defs, transform, spine, profile }) {
+  constructor(player, { defs, transform, spine, profile, decorate = null }) {
     this.player = player;
+    this.decorate = decorate;
     this.stage = player.stage;
     this.profile = profile;
     this.budget = PICTURE_BUDGETS[profile] || PICTURE_BUDGETS.mid;
@@ -426,6 +427,7 @@ export class Pictures {
         h = Math.max(8, Math.round(w / a2));
         canvas = await media.draw(want.page, w, h);
       }
+      this.decorateCanvas(canvas, sheet, want.page, media);
       const t1 = performance.now();
       const pixels = canvas
         ? canvas.getContext("2d", { willReadFrequently: true }).getImageData(0, 0, w, h).data
@@ -439,6 +441,7 @@ export class Pictures {
         const h2 = Math.max(8, Math.round(w2 / media.aspect(want.page)));
         const c2 = await media.draw(want.page, w2, h2);
         if (this.destroyed || media !== this.media) return null;
+        this.decorateCanvas(c2, sheet, want.page, media);
         const px2 = c2.getContext("2d", { willReadFrequently: true }).getImageData(0, 0, w2, h2).data; // prettier-ignore
         data = await buildOffThread({ pixels: px2, w: w2, h: h2, method: want.method, ...this.geometry(sheet, media.aspect(want.page), w2, h2) }); // prettier-ignore
         w = w2;
@@ -463,6 +466,18 @@ export class Pictures {
     } finally {
       this.busy = false;
       this.stage.requestRender();
+    }
+  }
+
+  // Lane Books: the recipe's pictures.decorate(canvas, { page, name, sheet,
+  // kind, options }) draws on a page or picture (a copy the media made for
+  // this build) before it becomes splats; errors in it are ignored.
+  decorateCanvas(canvas, sheet, page, media) {
+    if (!this.decorate || !canvas) return;
+    try {
+      this.decorate(canvas, { page, sheet: sheet.def.id, kind: media.kind, name: media.names?.[page] ?? media.name ?? "" }); // prettier-ignore
+    } catch (err) {
+      console.warn("pictures.decorate:", err);
     }
   }
 
