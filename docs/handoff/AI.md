@@ -180,7 +180,15 @@ Round 3 (the owner's notes on round 2, September 27; everything else was marked 
 Round 4 (the owner's notes on round 3, September 28): "the labels are black rectangles, the writing
 too faint; higher fidelity, less blurry".
 
-- The 3D labels were far too small: at a font pixel of 0.018 a label letter is about one screen
+- Root cause, checked (the Operator's findings were right): `text()` spread its splats over the
+  whole label rectangle and dropped the ones off the ink, and its weight had been cut from 10 to 4,
+  so only a few faint specks landed on the letters; and `sign()` put the letters 0.002 in front of
+  their plate, so the plate could sort over them. Now `text()` samples only the ink (a custom shape,
+  one square per font pixel, evenly spread) at weight 8 with the splat size of weight 4 (twice as
+  dense, same splat size, so it does not vanish at low resolution), and signs lift their letters 0.8
+  font pixel in front of the plate. This changes every toy's text (it reads more solid), so the
+  approved cards' clips were re-rendered too (assets replaced, same cards).
+- The 3D labels were also far too small: at a font pixel of 0.018 a label letter is about one screen
   pixel in a 320-pixel clip. A new `label3D()` draws labels about twice as big (font pixel 0.032 to
   0.04), bright white on dark plates, with denser text splats (`sign`'s new `ink` weight). Used on
   the 3D perceptron, multilayer perceptron (and a 1.6× truth table) and neural network, and for N×
@@ -189,7 +197,9 @@ too faint; higher fidelity, less blurry".
   the model compact and put labels above or below their parts.
 - The classic transformer's key is off the toy: it is the recipe's `note` in the Toy tab (the owner
   wants everything on the toy to be splats). Tapping a box to highlight and name it is for later.
-- Clips are now 480 pixels (320 looked blurry on the phone).
+- Clips are now 480 pixels (320 looked blurry on the phone). The perceptron, multilayer perceptron,
+  neural network and transformer use `density: 2` (twice the splats), like the balls do.
+- Legibility was judged on the real app at 390 × 844 (phone-size screenshots), not only in clips.
 - Cards `ai-perceptron-r4`, `ai-multilayer-perceptron-3d-r3`, `ai-neural-network-r4`,
   `ai-transformer-classic-r3` and `ai-transformer-classic-3d-r3`.
 

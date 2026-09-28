@@ -202,7 +202,7 @@ const GLYPHS = {
   "◉": "00000 01110 10001 10101 10001 01110 00000", // attention (an eye)
   "◒": "00000 11111 11111 10101 10001 01110 00000", // masked attention
   "»": "00000 10100 01010 00101 01010 10100 00000", // feed forward
-  "⁞": "01110 01010 01110 01010 01110 01010 01110", // embedding (a vector)
+  "⁞": "00000 10101 00000 10101 00000 10101 00000", // embedding (a grid of numbers)
   "∿": "00000 01000 10100 10101 00101 00010 00000", // positional encoding
   "╱": "00001 00010 00010 00100 01000 01000 10000", // linear
   "▥": "00000 00001 00001 00101 00101 10101 10101", // softmax
@@ -224,25 +224,44 @@ function inkAt(line, s, t) {
 const textWidth = (str) => str.length * 6 - 1;
 
 // A line of text facing +Z, centred on `at`, `px` the size of one font pixel.
-// Dense, keep-coloured splats, so it stays crisp at phone size.
-function text(k, str, at, px, color, { weight = 4, align = "center", ...rest } = {}) {
+// Its splats go only where the letters' ink is (one square per font pixel,
+// sampled evenly), twice as dense as a plain surface at the same splat size,
+// so letters read solid at phone size.
+function inkShape(str, px) {
+  const cells = [];
+  const cols = textWidth(str);
+  for (let gy = 0; gy < 7; gy++)
+    for (let gx = 0; gx < cols; gx++) if (inkAt(str, gx + 0.5, gy + 0.5)) cells.push([gx, gy]);
+  const N = Math.max(1, cells.length);
+  const at = (k, fu, fv) => {
+    const [gx, gy] = cells[Math.min(N - 1, k)] || [0, 0];
+    return { p: [(gx + fu) * px, -(gy + fv) * px, 0], n: [0, 0, 1], u: (gx + fu) / cols, v: (gy + fv) / 7 };
+  };
+  return {
+    area: cells.length * px * px,
+    thick: px,
+    sample: (rand) => at(Math.floor(rand() * N), rand(), rand()),
+    sampleEven: (a, b) => {
+      const k = Math.floor(a * N);
+      return at(k, b, a * N - k);
+    },
+  };
+}
+function text(k, str, at, px, color, { weight = 8, align = "center", ...rest } = {}) {
   const W = textWidth(str) * px;
   const H = 7 * px;
   const x0 = align === "left" ? at[0] : align === "right" ? at[0] - W : at[0] - W / 2;
-  const y0 = at[1] - H / 2;
-  k.add(
-    k.param((u, v) => [x0 + u * W, y0 + (1 - v) * H, at[2]], {
-      grid: 48,
-      normal: () => [0, 0, 1],
-    }),
-    {
-      weight,
-      flat: 0.2,
-      pattern: false,
-      ...rest,
-      color: (c) => (inkAt(str, c.u * textWidth(str), c.v * 7) ? keep(color) : null),
-    },
-  );
+  const y0 = at[1] + H / 2;
+  k.add(inkShape(str, px), {
+    pos: [x0, y0, at[2]],
+    weight,
+    size: Math.sqrt(weight / 4),
+    even: true,
+    flat: 0.2,
+    pattern: false,
+    ...rest,
+    color: () => keep(color),
+  });
   return { w: W, h: H };
 }
 
@@ -268,12 +287,14 @@ function sign(
       return keep(edge < px * 0.8 ? BOARD_RIM : plate);
     },
   });
-  text(k, str, [at[0], at[1], at[2] + 0.002], px, color, ink ? { ...rest, weight: ink } : rest);
+  // The letters stand clear in front of the plate, so the plate never sorts
+  // over them.
+  text(k, str, [at[0], at[1], at[2] + px * 0.8], px, color, ink ? { ...rest, weight: ink } : rest);
 }
 // A label on a 3D model: big bright letters on a dark plate, dense enough
 // to read at phone size from any distance the toy is shown at.
 const label3D = (k, str, at, px, color = "#f4f7ff", opts = {}) =>
-  sign(k, str, at, px, { color, ink: 7, ...opts });
+  sign(k, str, at, px, { color, ink: 12, ...opts });
 
 // ---- Seven-segment digits -----------------------------------------------------------
 
@@ -2069,7 +2090,7 @@ function buildClassicTf(k, model) {
       channel: ch,
       color: () => keep(b.color),
     });
-    text(k, b.icon, [b.x, b.y, front + 0.01], b.h < 0.2 ? 0.018 : 0.03, "#141a28", { weight: 7 });
+    text(k, b.icon, [b.x, b.y, front + 0.01], b.h < 0.2 ? 0.022 : 0.036, "#141a28", { weight: 12 });
   }
   // Positional encoding: a ⊕ over each column's embedding, with a sine icon
   // beside it.
@@ -2294,6 +2315,8 @@ function buildCnnDraw(k, o) {
 
 export const RECIPES = {
   perceptron: {
+    // Twice the splats, so the 3D models' labels and edges read crisp.
+    density: 2,
     options: [VIEW_OPTION],
     controls: [{ key: "go", label: "Try", type: "pulse", ease: 4 }],
     action: { key: "go", label: "Try an example" },
@@ -2431,6 +2454,8 @@ export const RECIPES = {
     },
   },
   "multilayer-perceptron": {
+    // Twice the splats, so the 3D models' labels and edges read crisp.
+    density: 2,
     options: [VIEW_OPTION],
     controls: [{ key: "go", label: "Run", type: "pulse", ease: 5 }],
     action: { key: "go", label: "Try all four inputs" },
@@ -2543,14 +2568,15 @@ export const RECIPES = {
       const tz = model ? T[2] : 0.012;
       k.add(k.box(0.72 * S, 1.02 * S, model ? 0.06 : 0.02), {
         pos: [T[0], T[1], tz],
-        even: true,
-        flat: 0.2,
+        even: !model,
+        flat: model ? 0.3 : 0.2,
+        size: model ? 1.25 : 1,
         pattern: false,
         color: (c) => keep(c.s.face !== 4 && model ? BOARD_RIM : "#0b1020"),
       });
       const fz = tz + (model ? 0.035 : 0.014);
       const cols = [T[0] - 0.22 * S, T[0] - 0.02 * S, T[0] + 0.22 * S];
-      const ink = model ? { weight: 7 } : {};
+      const ink = model ? { weight: 12 } : {};
       ["X1", "X2", "Y"].forEach((h, i) => text(k, h, [cols[i], T[1] + 0.4 * S, fz], (model ? 0.015 : 0.017) * S, model ? "#c7d3f0" : "#9fb0d6", ink)); // prettier-ignore
       // The row marker: an outline round the row (so the row still shows).
       const mw = 0.66 * S;
@@ -2584,6 +2610,8 @@ export const RECIPES = {
     },
   },
   "neural-network": {
+    // Twice the splats, so the 3D models' labels and edges read crisp.
+    density: 2,
     options: [
       { key: "inputs", label: "Inputs", type: "slider", min: 2, max: 4, step: 1, default: 3 },
       {
@@ -2942,7 +2970,7 @@ export const RECIPES = {
       }
       track.push([-right[0], RNN.orbY, z], [-cell.w / 2, RNN.orbY, z]);
       wire(k, track, 0.028, { color: "#56688f" });
-      text(k, "→", [0, RNN.loop.c[1] + RNN.loop.ry, z + 0.035], 0.02, "#c7d3f0", { weight: 5 });
+      text(k, "→", [0, RNN.loop.c[1] + RNN.loop.ry, z + 0.035], 0.02, "#c7d3f0");
       // The cell: a raised block that flashes (channel 0) as a word goes in.
       const cy = cell.c[1];
       k.add(k.box(cell.w, cell.h, 0.14), {
@@ -3037,6 +3065,8 @@ export const RECIPES = {
     },
   },
   transformer: {
+    // Twice the splats, so the 3D models' labels and edges read crisp.
+    density: 2,
     options: [
       {
         key: "diagram",
@@ -3053,7 +3083,7 @@ export const RECIPES = {
     controls: [{ key: "go", label: "Predict", type: "pulse", ease: 5 }],
     action: { key: "go", label: "Predict the next word" },
     // The encoder-decoder diagram's key sits here in the panel, off the toy.
-    note: "Encoder–decoder key: ◉ attention · ◒ masked attention · + add & norm · » feed forward · ⁞ embedding · ∿ positional encoding · ╱ linear · ▁▃▇ softmax · N× repeated N times. HELLO WORLD goes in, and the decoder, given START HOLA, predicts MUNDO.", // prettier-ignore
+    note: "Encoder–decoder key: ◉ attention · ◒ masked attention · + add & norm · » feed forward · ⠿ embedding · ∿ positional encoding · ╱ linear · ▁▃▇ softmax · N× repeated N times. HELLO WORLD goes in, and the decoder, given START HOLA, predicts MUNDO.", // prettier-ignore
     // Arcs of light jump between the word tiles (thicker where attention is
     // stronger, a colour for each head); the tiles rise through the
     // feed-forward block to the next layer, where new arcs jump, then up
