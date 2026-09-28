@@ -119,7 +119,8 @@ September 28, 2026: all ten shelves written; draft PR
 | **Total**      | 149  | 148          | 149         |
 
 The one missing how-to line is the donut's (below, "For the Operator"). The owner's marks on the
-Help Board: none read yet (the board's link has not arrived).
+[Help Board](https://claude.ai/artifact/P1NCWsGRE3MFqYTWTnTuqN): none yet (checked September 28,
+2026, 04:30 UTC).
 
 ## Notes
 
