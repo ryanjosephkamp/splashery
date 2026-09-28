@@ -859,9 +859,81 @@ export const TOY_HELP = {
     about:
       "The Eiffel Tower is an iron lattice tower in Paris, built by the engineer Gustave Eiffel's company for the World's Fair of 1889. It is about 330 meters (1,083 feet) tall, and it was the tallest structure in the world until 1930.\n\nTap it for a night show: the ironwork lights up gold, sparkling white lights climb the tower, and four fireworks burst around it. The real tower sparkles like this for five minutes every hour after dark.",
   },
-  lighthouse: { howTo: "Tap to switch the light off or on." },
-  castle: { howTo: "Tap to lower the drawbridge; tap again to raise it." },
-  "leaning-tower": { howTo: "Tap to drop two balls from the top. Set the lean in the Toy tab." },
+  "washington-monument": {
+    howTo: "Tap it for a day in a few seconds: the sun crosses and the shadow swings around.",
+    about:
+      "The Washington Monument is a tall stone obelisk in Washington, D.C., built to honor George Washington, the first president of the United States. It is about 169 meters (555 feet) tall. Building began in 1848, stopped for more than 20 years, and was finished in 1884; the stone above the point where work paused is a slightly different color.\n\nTap it for a whole day in a few seconds, like a giant sundial: the sun rises behind the monument, arcs over and sets, the obelisk's shadow swings around the lawn in front, and the flags ripple in the breeze.",
+  },
+  pyramids: {
+    howTo: "Tap it: a tiny flying saucer beams up a camel made of sand.",
+    about:
+      "The Pyramids of Giza stand at the edge of the desert near Cairo, in Egypt. They were built about 4,500 years ago as tombs for three kings, or pharaohs: Khufu, Khafre and Menkaure. The Great Pyramid of Khufu was first about 146 meters (481 feet) tall, and for almost 4,000 years it was the tallest building in the world. It is the only one of the Seven Wonders of the Ancient World still standing.\n\nTap it for a playful visitor: a tiny flying saucer glides in and switches on its beam, sand streams up into the shape of a camel, which floats up into the saucer, and the saucer wobbles happily and zips away.",
+  },
+  supertall: {
+    howTo: "Tap it to twist the tower further and send light up its glass.",
+    about:
+      "A supertall is a skyscraper more than 300 meters (about 1,000 feet) tall. Some are built to twist as they rise: each floor sits turned a little from the one below. The twist is not just for looks: wind flowing past a tall building makes it sway, and a twisted shape breaks the wind up, so the tower sways less.\n\nTap it and the floors wring around further, in twelve solid bands with the top turning most, while a ring of light runs up the glass; then they unwind with a little sway as a second ring runs up. Pick the color of the glass in the Toy tab.",
+  },
+  lighthouse: {
+    howTo: "Tap to switch the light off or on.",
+    about:
+      "A lighthouse is a tower with a bright light at the top that guides ships at night and warns them away from rocks and dangerous coasts. Each lighthouse flashes in its own pattern and is painted in its own stripes or colors, so sailors can tell which one they are looking at, by night or by day. Many use a special lens, invented by Augustin Fresnel in the 1820s, that gathers the light into a strong beam.\n\nThis lighthouse starts with its beam sweeping around. Tap to switch the light off, and tap again to switch it on. Pick the color of its stripes in the Toy tab.",
+  },
+  "statue-of-liberty": {
+    howTo: "Tap it to make the torch flare and send up golden sparks.",
+    about:
+      "The Statue of Liberty stands on Liberty Island in New York Harbor. It was a gift from the people of France to the United States and was dedicated in 1886. The sculptor Frédéric Auguste Bartholdi designed it, and Gustave Eiffel, the engineer of the Eiffel Tower, designed its iron frame. Its skin is thin copper, which slowly turned green in the weather.\n\nTap it and the torch flares: the flame leaps to twice its size in a halo of light, a warm glow spreads down the statue, and golden sparks drift up and away on the breeze and burn out.",
+  },
+  "white-house": {
+    howTo: "Tap it: the fountain shoots up and the windows light up one by one.",
+    about:
+      "The White House, in Washington, D.C., is the home and office of the president of the United States. It was designed by the architect James Hoban and built from 1792 to 1800, and John Adams was the first president to live there. It has 132 rooms, and its walls are painted white.\n\nTap it for an evening scene: the fountain on the south lawn shoots up a tall jet that falls back as spray, the lights come on in the windows one by one and the flag ripples at the top of its pole; then the jet sinks and the lights go out again.",
+  },
+  "leaning-tower": {
+    howTo: "Tap to drop two balls from the top. Set the lean in the Toy tab.",
+    about:
+      "The Leaning Tower of Pisa, in Italy, is the bell tower of the city's cathedral. Building began in 1173, and the tower started to lean while it was still being built, because the ground under it is soft; it took about 200 years to finish. Engineers straightened it a little from 1990 to 2001, and it now leans about 4 degrees.\n\nThe story goes that Galileo dropped two balls of different weights from the top to show that they fall together. Tap it and try it: a big iron ball and a small bronze one roll off the top and land at the same moment. Set the lean with the Lean slider in the Toy tab.",
+  },
+  colosseum: {
+    howTo: "Tap it for a chariot race around the arena.",
+    about:
+      "The Colosseum is a huge oval arena in Rome, Italy, built of stone and concrete about 2,000 years ago, and finished in the year 80. It could seat about 50,000 people, who came to watch shows and games. Much of it still stands, and it is one of the most visited places in the world.\n\nTap it for a chariot race: a crowd fills the seats, and four chariots in the old racing teams' colors, red, white, blue and green, race around the arena, swapping the lead, while the crowd jumps and cheers. In ancient Rome, the big chariot races were really held at the Circus Maximus, a long racetrack nearby.",
+  },
+  parthenon: {
+    howTo: "Tap it for a procession. Pick the temple today or as it was in the Toy tab.",
+    about:
+      "The Parthenon is a marble temple on the Acropolis, the rocky hill above Athens, in Greece. It was built from 447 to 432 BC for the goddess Athena, the city's protector. Its rows of columns look perfectly straight, but they bulge and lean very slightly, so that from a distance they look straighter.\n\nTap it for a procession like the great festival the people of Athens held for Athena: eight robed figures, some carrying baskets and jars on their heads, walk in single file along the temple and across its steps. In the Toy tab, see the temple as it stands today or as it looked when it was new.",
+  },
+  stonehenge: {
+    howTo: "Tap it for the midsummer sunrise shining through the stones.",
+    about:
+      "Stonehenge is a ring of great standing stones on Salisbury Plain, in England. It was built in stages from about 5,000 years ago; some of its smaller stones, the bluestones, were brought from Wales, more than 200 kilometers (140 miles) away. Its biggest stones stand in pairs with a stone laid across the top, called trilithons.\n\nStonehenge is lined up with the sun: on the summer solstice, the longest day of the year, the sun rises in line with its entrance. Tap it: the sun comes up over the far bank, framed by the great trilithon, a golden beam shines through the stones, and they glow gold.",
+  },
+  "big-ben": {
+    howTo: "Tap it: the hands spin around, the dials glow and the bell swings.",
+    about:
+      "Big Ben is the nickname of the great bell in the clock tower of the Houses of Parliament in London, England, and people often use it for the whole tower. The tower was finished in 1859 and, since 2012, has been called the Elizabeth Tower. The bell weighs about 13.7 tonnes, and the clock has four huge dials, one on each side.\n\nThe hands show the real time where you are. Tap it: the hands spin all the way around and land back on the right time, all four dials glow, and the bell swings in the open belfry.",
+  },
+  "taj-mahal": {
+    howTo: "Tap it for moonlight: night falls and the white dome glows.",
+    about:
+      "The Taj Mahal is a white marble tomb in Agra, in India. The emperor Shah Jahan had it built in memory of his wife, Mumtaz Mahal; the work took from about 1632 to 1653, and about 20,000 workers built it. Its white marble is inlaid with patterns of colored stone, and it stands in a garden with a long reflecting pool.\n\nTap it for moonlight: night falls over the garden and the buildings, the moon rises behind the Taj, the great dome glows white against the night sky, and moonlight shimmers on the rippling pool; then the day comes back.",
+  },
+  castle: {
+    howTo: "Tap to lower the drawbridge; tap again to raise it.",
+    about:
+      "A castle is a strong stone home for a lord or a king, built in the Middle Ages with thick walls, tall towers and a moat. The drawbridge across the moat could be pulled up on chains, so the gate was closed off. Castles were small towns inside: kitchens, stables, a hall for feasts and a well for water.\n\nThe drawbridge starts up. Tap to lower it, and five small knights march out, the leader carrying a banner; tap again and they march back in and the drawbridge rises. Pick the color of the roofs in the Toy tab.",
+  },
+  pagoda: {
+    howTo: "Tap it to ring the wind chimes; lanterns and doors light up.",
+    about:
+      "A pagoda is a tower of many roofs, one above the other, built at Buddhist temples across China, Korea, Japan and much of Asia. The idea came from the stupa, a mound that held holy relics in ancient India. Tall wooden pagodas in Japan have stood through many earthquakes for centuries, partly thanks to a great central pillar that helps them sway without falling.\n\nTap it: wind chimes at the corners of every roof swing, one tier after another, and two stone lanterns by the path light up while the doors glow. Pick the color of the timber in the Toy tab.",
+  },
+  windmill: {
+    howTo: "Tap it for a gust of wind that spins the sails hard.",
+    about:
+      "A windmill uses the wind to do work. The wind turns its big sails, and gears inside turn that into the turning of heavy millstones, which grind grain into flour; some windmills pump water instead. In the Netherlands, windmills pumped water out of low land for hundreds of years, so that people could live and farm there.\n\nIts sails always turn in the breeze. Tap it for a gust of wind that spins the sails up hard for three extra turns, then they slow back to their steady pace.",
+  },
 };
 
 // ---- What a toy has, read from its recipe -----------------------------------------
