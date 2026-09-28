@@ -46,7 +46,8 @@ Only that lane edits them. Packs that no active lane owns (WORKSTREAMS.md, "Froz
 frozen: a change to them needs a lane that the Operator starts.
 
 Each lane has a **prefix**, the lane id in lower case, used for card ids, screenshot names and its
-test file: `e4f`, `e5`, `e6a`, `e6b`, `f`, `g`, `ai`, `math`, `help`, `hta`, `htb`, `pic`.
+test file: `e4f`, `e5`, `e6a`, `e6b`, `f`, `g`, `ai`, `math`, `help`, `hta`, `htb`, `pic`, `bk`,
+`scr`, `man`.
 
 ### Shared files: edit only your own toys' lines
 
