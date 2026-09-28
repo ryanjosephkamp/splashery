@@ -65,6 +65,50 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
 OR OTHER DEALINGS IN THE SOFTWARE.
 ```
 
+## PDF.js 6.3.289 (lane Pictures)
+
+- Package: `pdfjs-dist@6.3.289`. Files in `vendor/pdfjs/`: the legacy build's `pdf.min.mjs` and
+  `pdf.worker.min.mjs` (`legacy/build/`; the modern build needs JavaScript features many phones
+  lack), and the package's `standard_fonts/`, `cmaps/`, `iccs/` and three decoders from `wasm/`
+  (`openjpeg.wasm`, `jbig2.wasm`, `qcms_bg.wasm`, with their license files), all unmodified. The
+  license is copied to `vendor/pdfjs/LICENSE`.
+- Loaded only when someone opens a PDF (a dynamic import in `src/media.js`).
+- Source: https://github.com/mozilla/pdf.js
+- License: Apache License 2.0 (the full text is in `vendor/pdfjs/LICENSE`). The wasm decoders are
+  under their own licenses, in `vendor/pdfjs/wasm/LICENSE_*` (OpenJPEG: BSD 2-clause; jbig2 from
+  PDFium: BSD 3-clause and Apache 2.0; qcms: MIT).
+
+## omggif 1.0.10 (lane Pictures)
+
+- Package: `omggif@1.0.10` (file: `vendor/omggif/omggif.js`, the package's `omggif.js` with two
+  comment lines added at the top and one `export { GifWriter, GifReader };` line at the end, so it
+  loads as an ES module; the license notice is copied to `vendor/omggif/LICENSE`).
+- Loaded only when someone opens a GIF in a browser without ImageDecoder (Safari).
+- Source: https://github.com/deanm/omggif
+- License: MIT
+
+```
+(c) Dean McNamee <dean@gmail.com>, 2013.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to
+deal in the Software without restriction, including without limitation the
+rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+sell copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+IN THE SOFTWARE.
+```
+
 ## Development tools (not shipped)
 
 These are `devDependencies` used to prepare assets and run tests; nothing from them is served.

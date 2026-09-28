@@ -154,6 +154,20 @@ code or weights were taken from it.
 The molecule toy's built-in list and the structures you open yourself are read in your browser
 (`src/chem/`); nothing is fetched from anywhere else.
 
+## Pictures and pages
+
+The Picture lab (a labs toy) opens with two samples:
+
+- The article "Pictures Made of Splats" (`assets/toys/picture-lab/article.pdf`): our own text,
+  written for Splashery and printed with Chromium by `tools/pic-samples.mjs`. The same tool makes
+  the test fixtures in `tests/fixtures/pic/` from our own drawings.
+- The photo "Tulip field" (`assets/toys/picture-lab/photo.jpg`) by
+  [DennisM2](https://www.flickr.com/photos/14674348@N04/13825345834) on Flickr,
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (checked on the live page on
+  September 28, 2026). Unchanged (Flickr's 1024 by 768 copy).
+
+Files and web addresses people open in the Picture lab are read in their browser and never uploaded.
+
 ## National flags
 
 The pattern layer can wrap a national flag around any toy. The flags are SVG files from
@@ -168,3 +182,5 @@ rather than a public-domain or Creative Commons licence (see [docs/BACKLOG.md](d
 
 Splashery is built on the [PlayCanvas engine](https://github.com/playcanvas/engine) (MIT) and uses
 [gifenc](https://github.com/mattdesl/gifenc) (MIT) for GIF export. See [LICENSES.md](LICENSES.md).
+Pictures and pages use [PDF.js](https://github.com/mozilla/pdf.js) (Apache 2.0) and
+[omggif](https://github.com/deanm/omggif) (MIT), loaded only when someone opens a PDF or a GIF.

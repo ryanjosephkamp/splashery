@@ -32,6 +32,16 @@ export const RECIPES = {
         o.sample === "photo" ? "assets/toys/picture-lab/photo.jpg" : "assets/toys/picture-lab/article.pdf", // prettier-ignore
       accept: ["pdf", "image", "gif", "video"],
     },
+    credits: [
+      {
+        label: "Picture lab",
+        title: "Tulip field (the photo sample)",
+        source: "https://www.flickr.com/photos/14674348@N04/13825345834",
+        author: "DennisM2",
+        license: "CC0 1.0",
+        licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/",
+      },
+    ],
     input: {
       title: "Your own picture",
       media: { accept: ["pdf", "image", "gif", "video"] },

@@ -439,7 +439,8 @@ export class Pictures {
       return data;
     } catch (err) {
       // Said once; the same page is not tried again until something changes.
-      if (!this.destroyed) this.player.emit("message", err.message);
+      // (Media replaced meanwhile is closed under it: nothing to say.)
+      if (!this.destroyed && media === this.media) this.player.emit("message", err.message);
       sheet.failed = want.key;
       return null;
     } finally {

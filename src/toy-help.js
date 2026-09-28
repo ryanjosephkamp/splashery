@@ -1367,6 +1367,13 @@ export const TOY_HELP = {
       "A half adder is a tiny circuit that adds two bits, binary digits that are each 0 or 1. It uses two logic gates: an XOR gate gives the sum bit, which is 1 when exactly one input is 1, and an AND gate gives the carry bit, which is 1 when both are. Two half adders make a full adder, and a chain of full adders lets a computer add numbers of any size.\n\nTap it: switches A and B flip to 1, and light runs along the wires into the gates. The XOR gives 0, so the sum lamp stays dark, and the AND lights the carry lamp. The board reads 1 + 1 = 10, which is two in binary. Then the switches flip back.",
   },
 
+  // ---- Pictures and pages ---------------------------------------------------------------
+  "picture-lab": {
+    howTo: "Tap for the next page, or to play and pause a video. Open your own in the Toy tab.",
+    about:
+      "The Picture lab shows a page, a photo, a GIF or a video as Gaussian splats: thousands of small, flat, colored discs, the same stuff every toy here is made of. A document's paper becomes a smooth sheet of large splats in the paper's own color, and every pixel of ink becomes one small splat of its own color, a hair in front. A photo gets one splat per pixel.\n\nZoom in and the page is rebuilt sharper; zoom out and it gets coarser, so nothing vanishes. Open a PDF, a photo, a GIF or a video of your own in the Toy tab, or paste a web address. Your files stay on your device: nothing is uploaded.",
+  },
+
   // ---- Holidays -------------------------------------------------------------------------
   "jack-o-lantern": {
     howTo: "Tap to lift the lid; tap again to put it back.",

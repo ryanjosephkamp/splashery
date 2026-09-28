@@ -10,10 +10,10 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 303 toys. 303 have a tap action today; the other 0 only hop.
+- 304 toys. 304 have a tap action today; the other 0 only hop.
 - **keep** (the effect is right: the owner liked it, or C2 finished it): 303.
 - **more** (has an effect; make it clearer or more dramatic): 0.
-- **new** (needs its own effect): 0.
+- **new** (needs its own effect): 1.
 - Visual fixes: 0 open, 28 done. Touch or drag interaction asked for: 4.
 
 ## By phase
@@ -60,7 +60,7 @@ Proposals below are suggestions; the owner may change them.
 - **E3, new effects: tiny things, anatomy and maths.** None.
 - **E4, new effects: nature and weather.** None.
 - **E5, new effects: food.** None.
-- **E6, new effects: balls and the rest.** None.
+- **E6, new effects: balls and the rest.** Picture lab
 - **F, touch and drag interaction.** Gummy bear, Building bricks, Newton's cradle, Puzzle cube.
 
 ## Scans (32)
@@ -2049,3 +2049,12 @@ Proposals below are suggestions; the owner may change them.
   - Improved: AI: both switches flip to 1, light fills the wires into the XOR and AND gates; the XOR
     flashes and gives 0, the AND lights the carry lamp, and 1+1=10 shows (3.5 s).
   - Sound: Switch clicks, and a buzz through each gate.
+
+## Pictures (1)
+
+- **Picture lab** (`picture-lab`). Now: tap: Next page, or play and pause. Plan: new effect (E6).
+  - Owner: The Pictures engine lane's test toy (labs only), from the owner's notes of September 27
+    and 28, 2026.
+  - Effect: A flat sheet showing what you open: a tap turns to the next page of a PDF, or plays and
+    pauses a video.
+  - Sound: A soft paper swish and a light tap.

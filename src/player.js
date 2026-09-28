@@ -721,6 +721,7 @@ export class Player {
   }
 
   closeMedia() {
+    if (this.pictures?.media) this.pictures.setMedia(null);
     const e = this.pictureMedia;
     this.pictureMedia = null;
     if (e) e.ready?.then(() => e.media?.close());
@@ -730,6 +731,27 @@ export class Player {
   setMediaSound(on) {
     this.mediaSound = !!on;
     this.pictures?.setSound(this.mediaSound);
+  }
+
+  // The leaves' uniform (kind "leaf"): the spine's point, axis and page
+  // direction, then (angle, curl) for up to ten leaves from drive's
+  // out.leaves = [{ angle, curl }] (radians; curl per toy unit).
+  leafUniform() {
+    const d = (this.leafData ||= new Float32Array(32));
+    d.fill(0);
+    const sp = this.pictures?.spine;
+    if (sp) {
+      d.set(sp.at, 0);
+      d.set(sp.axis, 4);
+      d.set(sp.dir, 8);
+    }
+    const leaves = this.motion.out?.leaves || [];
+    for (let i = 0; i < Math.min(10, leaves.length); i++) {
+      const l = leaves[i] || {};
+      d[12 + i * 2] = Number.isFinite(l.angle) ? l.angle : 0;
+      d[13 + i * 2] = Number.isFinite(l.curl) ? l.curl / (this.pictures?.fitScale || 1) : 0;
+    }
+    return d;
   }
 
   // A container in the kit format for a picture sheet.
@@ -1013,6 +1035,7 @@ export class Player {
       patternUniforms(this.scene.pattern, info.half, info.lum ?? 0.5, this.patternOn),
     );
     if (info.rig) u.uSpRigDbg = [this.rigDebug ? 1 : 0, 0, 0, 0];
+    if (info.kind === "kit") u["uSpLeaf[0]"] = this.leafUniform(); // Pictures
     this.stage.setUniforms(u);
     // Redraw a live screen when the recipe says its picture changed.
     const scr = this.screen;

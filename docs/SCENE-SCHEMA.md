@@ -83,7 +83,21 @@ One of three kinds:
     recipe checks their meaning when it builds, so unknown options are ignored.
   - `clay`: clay edits, as for generated toys below.
 
-  Both are left out when empty.
+  - `media` (picture toys, such as the Picture lab; added September 28, 2026): what the toy's
+    picture sheets show, instead of the toy's own sample. One of:
+    - `{ "url": "https://example.com/paper.pdf", "page": 3 }`: a web address of a PDF, a picture, a
+      GIF or a video. Only `https://` addresses are kept (and `http://127.0.0.1` or
+      `http://localhost`, for the tests). A link or an embed opens the address again, so the site
+      must allow other sites to read it (CORS).
+    - `{ "file": { "name": "mine.pdf", "bytes": 123456 }, "page": 3 }`: a file from the visitor's
+      device. As with splat files, the file itself is never saved or uploaded, so the scene carries
+      the settings only; whoever opens it is asked to open the same file, and sees the toy's sample
+      meanwhile.
+
+    `page` is the page showing, counted from 0 (left out on the first page). Scenes without `media`
+    load exactly as before.
+
+  All three are left out when empty.
 
 - `{ "kind": "procedural", "id": null, "generator": {…}, "clay": […] }`: a generated toy.
   - `generator.shape`: `sphere`, `blob`, `torus`, `capsule` or `knot`.
