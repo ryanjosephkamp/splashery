@@ -4,7 +4,7 @@ Where Splashery stands, in short. The Operator session keeps this file; each lan
 in [handoff/](handoff/). The ground rules are in [CLAUDE.md](../CLAUDE.md); how the parallel lanes
 work is in [OPERATING.md](OPERATING.md).
 
-## State of main (2026-09-27)
+## State of main (2026-09-28)
 
 - Phases A to E4 are merged: A (splashery PR #13, homepage PR #33 in
   `ryanjosephkamp/ryanjosephkamp.github.io`), B (#17), C1 (#18), C2 (#19), D (#20), E1 (#21), E1b
@@ -21,11 +21,20 @@ work is in [OPERATING.md](OPERATING.md).
   free image-to-3D model (TRELLIS on Hugging Face). They default to a yellow pencil and a "Peaches"
   label, and the owner approved both. Their Look choice followed (#47, an engine PR for looks on
   captured toys, then #48): seven pencil looks and four can looks, the bare scan included.
-- The shelf has 286 toys (32 scans, 4 shapes and 250 kit toys; with the protein toy). The plan
-  (`tools/toy-plan.json`, [TOY-PLAN.md](TOY-PLAN.md)): all 286 keep. Every planned new tap effect is
-  built. Scene schema v3; v2 still loads.
+- Lane Math merged on 2026-09-28 (#50): a safe equation reader, the graph and surface plotters you
+  can type into, circle and waves, Fourier circles (with words and a 3D view), the Pythagoras proof,
+  and the snail and American football fixes. Lane Fix3 merged the same night (#54): the bananas
+  without the loose crown and the ocean wave's smooth collapse. The owner approved every clip of
+  both. Lane AI's drawing pad for a toy's input panel is merged too (#56, an engine PR).
+- The shelf has 291 toys (32 scans, 4 shapes and 255 kit toys). The plan (`tools/toy-plan.json`,
+  [TOY-PLAN.md](TOY-PLAN.md)): all 291 keep. Every planned new tap effect is built. Scene schema v3;
+  v2 still loads.
 - Every kit toy's tap is checked by `tests/taps.spec.mjs`; its known exceptions (with reasons) are
   listed at its top. The full suite has 164 tests.
+- The governance from September 27 is merged (#53): the Operator runs the lanes, workers are Opus
+  5.5 only, new public text is in American English (`tools/us-english.mjs`), and the sound review
+  runs on the Sound Board. Splashery's own code is MIT licensed (#51, `LICENSE`); assets keep their
+  own licenses and credits.
 - Locked (owner approved, do not change its look or behaviour): the laptop. Its smoke test guards
   it.
 
@@ -37,23 +46,24 @@ The full table, with owned files, sessions, branches and PRs, is [WORKSTREAMS.md
 | --------------------------- | ------------------------------------ | ---------------------------------- |
 | Operator                    | Running; runs the lanes              | —                                  |
 | AI: AI and computing        | Running (started September 27, 2026) | [handoff/AI.md](handoff/AI.md)     |
-| Math: math you can type     | Running (started September 27, 2026) | [handoff/Math.md](handoff/Math.md) |
-| Fix3: two fixes             | Running (started September 27, 2026) | [handoff/Fix3.md](handoff/Fix3.md) |
-| Next (WORKSTREAMS.md, Next) | Toy help, sound review, pianos…      | —                                  |
+| Help: toy help              | Running (started September 28, 2026) | [handoff/Help.md](handoff/Help.md) |
+| Next (WORKSTREAMS.md, Next) | Help text, sound review, pianos…     | —                                  |
 
-E4-finish, E5, E6a, E6b, F and G are done (WORKSTREAMS.md, "Done"). On September 27, 2026 the owner
-approved the plan in Part 1 of the How Splashery Is Made page: the Operator runs the lanes, workers
-are Opus 5.5 only (at the default effort, a trial), new public text is in American English, and the
-work goes in the order in ROADMAP.md, "Now". Lanes AI and Math started that day, and the Sound Board
-has its review features, ready for the owner's sound notes.
+E4-finish, E5, E6a, E6b, F, G, Math and Fix3 are done (WORKSTREAMS.md, "Done"). On September 27,
+2026 the owner approved the plan in Part 1 of the How Splashery Is Made page: the Operator runs the
+lanes, workers are Opus 5.5 only (at the default effort, a trial), new public text is in American
+English, and the work goes in the order in ROADMAP.md, "Now". Lanes AI and Math started that day,
+and the Sound Board has its review features, ready for the owner's sound notes.
 
 The owner reviewed the AI and Math clips the same day
 ([reviews/2026-09-27-ai-math](reviews/2026-09-27-ai-math/review.md)): seven good, and extras for the
 rest (3D versions beside the 2D "poster" ones, a second transformer diagram, MLPs, a CNN you draw
-on, word vectors for any words, more sorting algorithms, your own settings and Fourier text). Both
-lanes are building them in their PRs, which merge when he approves the new clips. His notes on the
-bananas' stem and the ocean wave's collapse went to lane Fix3. He also asked for toy help (a how-to
-line when a toy opens and an About tab), now step 2 of the plan.
+on, word vectors for any words, more sorting algorithms, your own settings and Fourier text). His
+notes on the bananas' stem and the ocean wave's collapse went to lane Fix3. He also asked for toy
+help (a how-to line when a toy opens and an About tab), now step 2 of the plan. Math and Fix3 merged
+after his later rounds. Lane AI is on its fourth round: its floating 3D models and the classic
+transformer need readable, sharper labels, and the transformer's key moves off the toy into the
+panel (his notes of September 28 on the Effect review page).
 
 ## Where things are
 

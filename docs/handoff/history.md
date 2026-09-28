@@ -16,6 +16,34 @@ had not settled 3 s after its tap) and "a scan rig moves a part of a captured to
 console warning, like the rare engine warning in HANDOFF.md). Keep `test-results/` if either comes
 back.
 
+### Math: math you can type (PR #50, merged 2026-09-28)
+
+- A safe equation reader (`src/equation.js`) with no `eval` or `Function`: numbers, the letters each
+  plotter uses, the parameters a and b, the usual functions, implicit products, a 120-character cap,
+  one friendly error message, and breaks instead of spikes where a value is not finite. Its unit
+  tests include hostile input and 4,000 random strings.
+- Five toys on the math shelf: the graph plotter (42 famous curves, or type your own; a pen draws
+  the curve and the a slider bends it in real time), the surface plotter (16 surfaces, or type z =
+  …), circle and waves (2D and a 3D helix, with its own paths), Fourier circles (shapes, your own
+  curve, words up to six letters or digits, hearts and stars, and a 3D view) and the Pythagoras
+  proof.
+- Two fixes: the snail pulls its whole body into its shell, eye stalks first, and comes out foot
+  first; the American football spirals six whole turns, built twice so the laces never show through.
+- Review: the owner marked the first five good and asked for extras on circle and waves and Fourier
+  circles (3D versions, your own settings, words); the second round was approved as it stood.
+- Lessons (in PACKS.md): copies that morph into each other bend a curve through any keyframes; a
+  `fade` channel draws ink behind a pen; `out.cues` can make a sound follow the effect; thin ribbons
+  need bigger splats; the cull flag suits round bodies only.
+
+### Fix3: two fixes (PR #54, merged 2026-09-28)
+
+- The bananas: the loose "stem" was the bunch's crown, left behind when the bananas pulled apart. At
+  the owner's word it is gone, so each banana ends in the same neck and stalk tip.
+- The ocean wave's collapse: one smooth clock through the falling keys (no stop at each key), a
+  barrel that shrinks as it rolls forward, and white water as a foam wall that fades in and sinks
+  into lace. The white sheet that flashed at impact is gone. The rebuild is unchanged.
+- Lesson (in PACKS.md): run one monotone clock through keyframes for motion that should flow.
+
 ### G AI image-to-3D trial (PR #43, merged 2026-09-27)
 
 - A free image-to-3D Space on Hugging Face (TRELLIS, MIT) turns one photo into Gaussian splats in

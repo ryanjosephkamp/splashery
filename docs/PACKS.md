@@ -389,6 +389,20 @@ Channel tricks from the lanes (2026-09-26):
 - **A frayed edge**: a colour function that returns `null` for more splats towards an edge makes a
   surface fade into its surroundings instead of stopping at a straight line (the ocean wave).
 
+From lanes Math and Fix3 (September 27–28, 2026):
+
+- **Real-time bending through keyframes of any shape**: build a set of copies, each morphing exactly
+  into the next on one channel, and show the copy for the slider's place (the graph and surface
+  plotters; each copy is a part, so at most 15).
+- **Drawing behind a pen**: give the ink `kind: "fade"` on a channel with `at = 1.002 − s` (s is the
+  arc fraction), so the line appears crisply right behind the moving pen (the graph plotter).
+- **Motion that flows through keyframes**: easing each segment on its own stops the motion at every
+  key. Run one clock through all of them instead: a monotone curve from time to key index, still
+  only at the start and the end, then Catmull-Rom between the keys (Fix3's ocean wave, `owFallIndex`
+  in `src/packs/elements.js`).
+- **A sound that follows the effect**: `out.cues` from `drive()` can push short tones whose pitch
+  follows what the toy is doing, so the sound fits any typed input (the graph plotter's pen).
+
 ## 7. House rules
 
 - **Deterministic**: only `k.rand()`, `c.rand()` and the kit's noise. No `Math.random`, no dates.
@@ -463,7 +477,9 @@ form is in CLAUDE.md.
      black hole's star is built where it plunges, the solar system's Mercury in front of the Sun).
   8. Turning about the view direction keeps the order (Uranus rolls that way).
   9. A single spinning body can use its part's `cull` flag instead of a second copy: cull while it
-     turns, hide its inside, and show its splats about 1.15 times bigger (E6a's balls).
+     turns, hide its inside, and show its splats about 1.15 times bigger (E6a's balls). The cull
+     flag suits round bodies only: it hides by direction from the center, so a long body (the
+     American football) loses its ends. Build a long one twice instead (rule 1; lane Math).
   10. Don't bore holes into a body that turns: dark tubes inside it (a bowling ball's finger holes)
       draw through the shell once it turns. Paint them on the surface.
   11. Figures that walk towards the camera are built at the point of their path nearest the camera
@@ -474,6 +490,9 @@ form is in CLAUDE.md.
 - **Glossy things that spin.** Baked light turns with a spinning body, so a rolling pool ball looks
   like glass. Spin an unlit copy built tiny at the centre (it sorts behind everything, from any
   camera) under a fixed see-through layer of light (`glossSpin()` in `src/packs/balls.js`).
+- **Thin ribbons need bigger splats.** A thin ribbon with a high weight gets splats too small to see
+  below about 300 px, and the curve vanishes. Use fewer, bigger splats (weight 2 to 2.5, size 1.5;
+  lane Math's plotters).
 - **Fading by size makes speckle.** `visible` and `kind: "grow"` both shrink splats, so a whole
   layer shrinking away turns into dots. Clear a layer as a moving front instead (run `out.grow` back
   down: the Mars dust storm), and give glow overlays bigger, fainter splats than the surface under
