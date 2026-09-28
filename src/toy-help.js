@@ -244,18 +244,138 @@ export const TOY_HELP = {
   // ---- Food -----------------------------------------------------------------------------
   "ice-cream": {
     howTo: "Tap to melt it and refreeze it. Pick scoops and flavors in the Toy tab.",
+    about:
+      "Ice cream is a frozen mix of milk or cream, sugar and flavors. It is stirred while it freezes, so the ice crystals stay tiny and air is whipped in: up to half of a scoop of soft ice cream can be air, which is why it feels light and smooth.\n\nTap it and it melts: the scoops slump and drips run down the cone, then it freezes firm again. The Warmth slider in the Toy tab melts it slowly by hand. You can also pick one, two or three scoops and their flavors, and add sprinkles and a cherry.",
+  },
+  watermelon: {
+    howTo: "Tap it to chop it into slices that fan open.",
+    about:
+      "A watermelon is a big fruit that grows on a vine along the ground. Under its hard green rind is sweet red flesh dotted with black seeds, and it is about 92 percent water, which makes it a favorite on hot days. Watermelons were first grown in Africa thousands of years ago.\n\nTap it and a big knife chops the whole melon five times, then the six slices fan open like an accordion, showing the red flesh, the pale rind and the seeds, and fold shut again. Pick a whole melon, a wedge, or both in the Toy tab.",
   },
   "birthday-cake": {
     howTo: "Tap to blow out the candles; tap again to light them. Choose how many in the Toy tab.",
+    about:
+      "A birthday cake is a sweet, frosted cake with candles on top, often one for each year. People sing to the birthday person, who makes a wish and tries to blow out all the candles in one breath.\n\nThis cake starts with its candles lit. Tap to blow them out, with a puff of smoke from each wick, and tap again to light them. In the Toy tab, choose from one to nine candles, the colors of the frosting and the drip, and a vanilla, chocolate, red velvet or strawberry sponge. A candle flame needs air: blowing hard pushes the hot, burning gas away from the wick, and the flame goes out.",
   },
-  pancakes: { howTo: "Tap to flip the top pancake. Set the stack and the syrup in the Toy tab." },
-  pizza: { howTo: "Tap to take a slice; tap again to go back." },
-  burger: { howTo: "Tap to spread out the layers; tap again to stack them up." },
-  egg: { howTo: "Tap to crack it open; tap again to go back." },
-  coffee: { howTo: "Tap it to stir. Pick the latte art and the steam in the Toy tab." },
-  apple: { howTo: "Tap to take a bite; tap again and a worm peeks out before it's whole again." },
+  popcorn: {
+    howTo: "Tap it to pop more kernels up out of the bucket.",
+    about:
+      "Popcorn is a kind of corn whose kernels puff up when they are heated. Each kernel has a hard shell with a little water inside. When it gets hot, the water turns to steam, the pressure builds until the shell bursts with a pop, and the soft starch inside puffs out into a white, crunchy foam.\n\nTap it and fresh kernels pop up out of the striped bucket, tumble and land on the heap. People in the Americas were popping corn thousands of years ago, long before movie theaters.",
+  },
+  jelly: {
+    howTo: "Tap it to poke it and watch it wobble.",
+    about:
+      "A jelly, or gelatin dessert, is fruit juice or sweet flavored water set with gelatin and turned out of a mold. Gelatin makes a fine, stretchy mesh that traps the water, so the jelly holds its shape but wobbles when you touch it.\n\nThis one always jiggles a little. Tap it to poke it: it squashes and wobbles hard, then settles down. In the Toy tab, pick strawberry, lime, orange, blueberry, grape or rainbow, and choose whether it has fruit set inside.",
+  },
+  pancakes: {
+    howTo: "Tap to flip the top pancake. Set the stack and the syrup in the Toy tab.",
+    about:
+      "Pancakes are flat, round cakes made from a runny batter of flour, eggs and milk, cooked on a hot pan. Baking powder in the batter makes bubbles of gas, so they puff up soft and fluffy. When bubbles pop on the top, it is time to flip.\n\nTap it to flip the top pancake: it hops up, turns a full somersault in the air and lands back on the stack. In the Toy tab, set how many pancakes are in the stack, from two to seven, and try the Syrup slider.",
+  },
+  cupcake: {
+    howTo: "Tap it to flick the cherry up; it plops back down.",
+    about:
+      "A cupcake is a small cake baked in a paper cup, called a liner, and topped with swirls of frosting. Because it is small, it bakes quickly, and each person gets a whole cake of their own.\n\nTap it and the springy frosting flicks the cherry up: it tumbles and drops back with a plop, the frosting squashes and wobbles, and the sprinkles jump off and rain back down. In the Toy tab, pick the colors of the frosting and the liner, a vanilla, chocolate or red velvet cake, and the topping.",
+  },
+  lollipop: {
+    howTo: "Tap it to spin it fast; the swirl seems to pour inward.",
+    about:
+      "A lollipop is a hard candy on a stick. Swirl lollipops are made by twisting long ropes of soft, warm candy in different colors together and coiling them into a flat spiral before the candy cools and sets hard.\n\nIt turns slowly by itself. Tap it and the swirl whirls up to nearly three turns a second, so the spiral seems to pour inward toward the middle, then slows again. That is a trick of the eye: a turning spiral looks as if it is moving in or out. Pick its colors in the Toy tab.",
+  },
+  "candy-cane": {
+    howTo: "Tap it to twist it until it snaps, then watch it mend.",
+    about:
+      "A candy cane is a stick of hard peppermint candy bent into a hook, with red and white stripes, and it is often hung on trees in the Christmas season. The stripes are made by twisting ropes of red and white candy together while they are warm and soft.\n\nTap it and each cane twists, the hook turning and the stripes winding tighter, until it snaps with a crack. The top half springs clear, sugar chips fly, then the halves come back together and mend with a glint. Pick a pair with a bow or a single cane, and the stripe color, in the Toy tab.",
+  },
+  macarons: {
+    howTo: "Tap it and the two in front hop up onto the stack.",
+    about:
+      "A macaron is a small French sweet: two light, round cookies made of ground almonds, egg whites and sugar, stuck together with a creamy filling. The tops are smooth and domed, and each cookie has a frilly edge at the bottom, called the foot, that rises as it bakes.\n\nTap it and the two macarons in front hop, one after the other, up onto the stack and land with a soft tap. The tower of five sways, then they hop back down. Pick a pastel mix or one flavor in the Toy tab.",
+  },
   "gummy-bear": {
     howTo: "Drag the bear to stretch it; let go and it springs back. Tap to squish it.",
+    about:
+      "A gummy bear is a small, chewy candy shaped like a bear, made of sugar, fruit flavors and gelatin. Gelatin is what makes it stretchy and springy: it forms a mesh that bends and then pulls back. Gummy bears were first made in Germany in the 1920s.\n\nDrag any part of the bear and it stretches, up to about a body length, then springs back with a few wobbles when you let go. A drag beside it turns the view instead. Tap it for a jelly squish. Pick its flavor in the Toy tab, from cherry red to a clear pineapple.",
+  },
+  pretzel: {
+    howTo: "Tap it to twist it like a knot and let it spring back.",
+    about:
+      "A pretzel is a baked bread shaped from a long rope of dough into a loop with a twist in the middle. Before baking, it is dipped in a special bath of water and an alkali, such as lye or baking soda, which gives it its shiny, dark brown crust. Then it is sprinkled with coarse salt.\n\nTap it and it twists like a knot, all in one piece: its two sides wring opposite ways and its loops fold a little toward you. Let go, and it springs a little past its shape into the opposite twist and wobbles to a stop.",
+  },
+  croissant: {
+    howTo: "Tap it to slice it open and melt a pat of butter inside.",
+    about:
+      "A croissant is a flaky, crescent-shaped pastry; its name is the French word for crescent. The dough is folded around a slab of butter again and again, making dozens of thin layers. In the hot oven, the water in the butter turns to steam and puffs the layers apart, so the inside is soft and full of holes and the outside is crisp.\n\nTap it and it is sliced open along its middle. The top lifts and tips back like a lid, showing the soft layers inside, where a pat of butter melts and spreads. Then the top settles back down.",
+  },
+  pizza: {
+    howTo: "Tap to take a slice; tap again to go back.",
+    about:
+      "Pizza is a flat, round bread topped with tomato sauce and cheese and baked in a very hot oven. It comes from Naples, in Italy, and is now eaten all over the world. The margherita pizza, with red tomato, white mozzarella and green basil, shows the colors of the Italian flag.\n\nTap it to take a slice: it slides out with strings of melted cheese stretching behind it. Warm mozzarella stretches because the proteins in it line up in long, stringy strands. Tap again to put the slice back. Pick pepperoni, margherita, veggie or cheese in the Toy tab.",
+  },
+  burger: {
+    howTo: "Tap to spread out the layers; tap again to stack them up.",
+    about:
+      "A burger is a round patty of ground meat, or of vegetables, cooked and served in a sliced bun with toppings. The name comes from the city of Hamburg, in Germany. This one has a sesame bun, a patty, a slice of cheese, lettuce and tomato.\n\nTap it to spread out the layers in the air, one above the other, so every part shows, and tap again to stack them back up. Engineers call a picture like this an exploded view: it shows how the parts of a machine fit together without taking the real thing apart.",
+  },
+  sushi: {
+    howTo: "Tap it: the chopsticks pick up a piece and dip it in soy sauce.",
+    about:
+      "Sushi is a Japanese dish of rice mixed with a little vinegar and sugar, served with fish, vegetables or egg. This board has nigiri, a pillow of rice with a slice of fish draped on top, and maki, rice and a filling rolled up in a sheet of dried seaweed called nori and cut into rounds.\n\nTap it and the chopsticks lift off the board as if held by an invisible hand, pinch a piece with a click, carry it to a little dish of soy sauce and dip it twice, then set it back and lie down again.",
+  },
+  taco: {
+    howTo: "Tap it to break the shell in half; then it closes up again.",
+    about:
+      "A taco is a Mexican dish: a tortilla, a thin, round flatbread of corn or wheat, folded around a filling such as meat, beans, cheese, lettuce and salsa. People in Mexico have made corn tortillas for thousands of years. This one has a crunchy, fried corn shell.\n\nTap it and the shell snaps across the middle with a crunch. The halves pull apart and swing open like a book, showing the filling in each break, and bits spill onto the plate and bounce. Then they hop back in and the halves close.",
+  },
+  egg: {
+    howTo: "Tap to crack it open; tap again to go back.",
+    about:
+      "A soft-boiled egg is cooked in its shell in boiling water for only a few minutes, so the white sets firm but the yolk stays runny. It is served in an egg cup, with strips of toast for dipping into the yolk.\n\nTap it to crack it open: the top of the shell pops off, and the runny yolk shows and drips down the side. Tap again to put the top back. In the Toy tab, pick a brown or a white shell and the color of the egg cup. The color of a shell depends on the kind of hen that laid it; the egg inside is the same.",
+  },
+  coffee: {
+    howTo: "Tap it to stir. Pick the latte art and the steam in the Toy tab.",
+    about:
+      "Coffee is made from the roasted seeds, called beans, of the coffee plant, which first grew wild in Ethiopia. A latte is a strong shot of coffee topped with a lot of steamed milk. Pouring the milk foam carefully draws a picture on top, called latte art: a heart, a leafy rosetta or a tulip.\n\nTap it to stir: the latte art twists into a swirl, the middle turning further than the edge, then relaxes back, with a thick curl of steam. In the Toy tab, pick the latte art and the color of the cup, and try the Steam slider.",
+  },
+  apple: {
+    howTo: "Tap to take a bite; tap again and a worm peeks out before it's whole again.",
+    about:
+      "Apples grow on trees and come in thousands of kinds, from sharp green ones to sweet red and golden ones. The wild apple that most of them come from still grows in the mountains of Central Asia.\n\nTap it to take a bite: a chunk comes away, leaving a scalloped bite of pale flesh, and the apple stays bitten. Tap again and a little worm pokes out of the bite, looks about, ducks back in, and the apple grows whole again. Pick a red, green or golden apple in the Toy tab. The flesh of a cut apple turns brown in the air, much as a sliced potato does.",
+  },
+  banana: {
+    howTo: "Tap it to pull the bananas apart and peel all three.",
+    about:
+      "Bananas grow in big hanging bunches on giant plants that look like trees but are not: the trunk is made of tightly rolled leaves. A banana is picked green and turns yellow as it ripens, and then brown spots appear as its starch turns to sugar and it gets sweeter.\n\nTap it and the three bananas pull apart. Each is peeled from its tip: its skin splits into three strips that curl back, showing the pale fruit. Then the strips fold back up and the bunch comes together. Pick green, just right or spotty bananas in the Toy tab.",
+  },
+  orange: {
+    howTo: "Tap it to open it into eight wedges, like a flower.",
+    about:
+      "An orange is a citrus fruit. Its bright peel is dotted with tiny pockets of fragrant oil, and inside, the fruit is divided into segments packed with little sacs of juice. Oranges are full of vitamin C, and they were first grown in southern China and Southeast Asia.\n\nTap it and the whole orange opens like a flower: eight wedges fall open outward, one just after another, showing their juicy faces, while juice squirts up out of the middle. Then it closes up again. Pick a whole orange, a half, or both in the Toy tab.",
+  },
+  kiwi: {
+    howTo: "Tap it to cut it open and show the green inside.",
+    about:
+      "A kiwifruit is a small fruit with thin, fuzzy brown skin and bright green flesh around a pale core ringed with tiny black seeds. It first grew wild in China. Farmers in New Zealand made it popular and named it after the kiwi, their fuzzy brown national bird.\n\nTap it and the whole kiwi is cut across the middle; the halves slide apart and turn to show their green faces and the ring of seeds, then close up again. Pick a whole kiwi, a half, or both in the Toy tab.",
+  },
+  pineapple: {
+    howTo: "Tap it to slice it into rings.",
+    about:
+      "A pineapple is a tropical fruit with a tough, scaly skin and a spiky crown of leaves. It is really many small fruits grown together: each scale on the skin comes from a single flower. Pineapples first grew in South America, and a crown twisted off and planted can grow a whole new plant.\n\nTap it for four chops, top first. With each chop, everything above lifts and leans toward you, until five rings stand apart in a leaning stack, showing their golden flesh and pale cores. Then they drop back onto each other.",
+  },
+  cherries: {
+    howTo: "Tap it to swing the cherries apart; they knock back together.",
+    about:
+      "Cherries are small, round fruits that grow on trees, often in pairs whose long stems are joined at the top. Each cherry has one hard stone in the middle with the seed inside, so it is called a stone fruit, like a plum or a peach.\n\nTap it and a flick swings the two cherries apart on their own stems. They swing back and knock together with a plink, bouncing apart again and again until they settle, while the joint of the stems bobs.",
+  },
+  grapes: {
+    howTo: "Tap it: grapes drop off the bunch, bounce and hop back.",
+    about:
+      "Grapes grow in bunches on woody vines, from a few dozen to a few hundred on a bunch. They come in purple, green and red, and people eat them fresh, dry them into raisins and press them for juice.\n\nTap it and ten grapes on the front come off one after another, drop and bounce on the table and roll a little, each on its own path, then hop back up to their places one by one. Pick purple, green or red grapes in the Toy tab. The Photoreal shelf has a real grape that peels.",
+  },
+  avocado: {
+    howTo: "Tap it to pop the stone into the other half and back.",
+    about:
+      "An avocado is a fruit with a bumpy green skin, soft, creamy green flesh and one big, round stone in the middle, which is its seed. It first grew in Mexico and Central America. Avocados are unusual: they do not ripen on the tree, only after they are picked.\n\nTap it and the stone pops out of its half, flies over and drops into the empty half with a thock, rocking it, then pops back home and the first half rocks. Pick both halves, or just the half with the stone, in the Toy tab.",
   },
 
   // ---- Toys -----------------------------------------------------------------------------
