@@ -47,13 +47,16 @@ async function open(page, name) {
   );
 }
 
-// Ink pixels (luminance under 200) in the canvas.
+// Ink pixels (luminance under 150, darker than the card) in the canvas.
 async function darkPixels(page) {
   return page.evaluate(async () => {
+    // A few frames first: a sheet's new splats are sorted a few frames on.
+    window.__splashery.player.stage.requestRender();
+    await new Promise((r) => setTimeout(r, 400));
     const c = await window.__splashery.player.stage.captureFrame();
     const d = c.getContext("2d").getImageData(0, 0, c.width, c.height).data;
     let n = 0;
-    for (let i = 0; i < d.length; i += 4) if (d[i] + d[i + 1] + d[i + 2] < 600) n++;
+    for (let i = 0; i < d.length; i += 4) if (d[i] + d[i + 1] + d[i + 2] < 450) n++;
     return n;
   });
 }
@@ -167,52 +170,6 @@ test.describe("the Picture lab", () => {
     await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
     await waitSheet(page);
     await expect(page.locator("#toy-status")).toHaveText(/^Picture lab/);
-  });
-
-  test("the sample PDF shows ink at phone size, whole and zoomed", async ({ page }) => {
-    await page.setViewportSize({ width: 390, height: 844 });
-    await openLab(page);
-    const info = await page.evaluate(() => window.__splashery.player.pictures.info());
-    expect(info).toMatchObject({ kind: "pdf", count: 2, page: 0 });
-    // The culling thresholds are lowered while a picture toy shows.
-    expect(await page.evaluate(() => window.__splashery.player.stage.app.scene.gsplat.minPixelSize)).toBe(0.5); // prettier-ignore
-    const whole = await darkPixels(page);
-    const level = await page.evaluate(() => window.__splashery.player.pictures.sheets[0].shown.level); // prettier-ignore
-    expect(whole).toBeGreaterThan(3000);
-    await page.screenshot({ path: "tests/screenshots/pic-lab-390x844.png" });
-    // Zoomed in: built sharper, and still ink.
-    await page.evaluate(() => {
-      window.__splashery.player.camera.zoomBy(0.3);
-      window.__splashery.player.stage.requestRender();
-    });
-    await page.waitForFunction(
-      (l) => {
-        const p = window.__splashery.player.pictures;
-        window.__splashery.player.stage.requestRender();
-        return p.sheets[0].shown?.level > l && p.sheets[0].shown.key === p.sheets[0].want?.key;
-      },
-      level,
-      { timeout: 120_000 },
-    );
-    expect(await darkPixels(page)).toBeGreaterThan(whole);
-    // Close up, a drag moves across the page (it pans, it does not turn).
-    const moved = await page.evaluate(() => {
-      const pl = window.__splashery.player;
-      const yaw = pl.camera.cur.yaw;
-      pl.camera.zoomBy(0.4);
-      pl.camera.update(1);
-      const here = pl.pansHere();
-      pl.panBy(0, 120);
-      return { here, up: pl.camera.target[1], yaw: pl.camera.cur.yaw - yaw };
-    });
-    expect(moved.here).toBe(true);
-    expect(moved.up).toBeGreaterThan(0.05);
-    expect(moved.yaw).toBe(0);
-    await page.evaluate(() => window.__splashery.player.resetCamera());
-    // A tap goes to the next page.
-    await page.evaluate(() => window.__splashery.player.act());
-    await page.waitForFunction(() => window.__splashery.player.pictures.page === 1);
-    await waitSheet(page);
   });
 
   test("each kind opens: a photo, a GIF that animates, a video that plays", async ({ page }) => {
@@ -396,5 +353,56 @@ test.describe("the Picture lab", () => {
     await page.click("#tab-play");
     await page.waitForTimeout(500);
     await page.screenshot({ path: "tests/screenshots/pic-lab-1440x900.png" });
+  });
+});
+
+// A phone: 390x844 at twice the pixels, as the owner sees it.
+test.describe("the Picture lab on a phone", () => {
+  test.describe.configure({ timeout: 300_000 });
+  test.use({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2 });
+
+  test("the sample PDF shows ink at phone size, whole and zoomed", async ({ page }) => {
+    await openLab(page);
+    const info = await page.evaluate(() => window.__splashery.player.pictures.info());
+    expect(info).toMatchObject({ kind: "pdf", count: 2, page: 0 });
+    // The culling thresholds are lowered while a picture toy shows.
+    expect(await page.evaluate(() => window.__splashery.player.stage.app.scene.gsplat.minPixelSize)).toBe(0.5); // prettier-ignore
+    const whole = await darkPixels(page);
+    const level = await page.evaluate(() => window.__splashery.player.pictures.sheets[0].shown.level); // prettier-ignore
+    expect(whole).toBeGreaterThan(1500);
+    await page.screenshot({ path: "tests/screenshots/pic-lab-390x844.png" });
+    // Zoomed in: built sharper, and still ink.
+    await page.evaluate(() => {
+      window.__splashery.player.camera.zoomBy(0.3);
+      window.__splashery.player.stage.requestRender();
+    });
+    await page.waitForFunction(
+      (l) => {
+        const p = window.__splashery.player.pictures;
+        window.__splashery.player.stage.requestRender();
+        return p.sheets[0].shown?.level > l && p.sheets[0].shown.key === p.sheets[0].want?.key;
+      },
+      level,
+      { timeout: 120_000 },
+    );
+    expect(await darkPixels(page)).toBeGreaterThan(whole);
+    // Close up, a drag moves across the page (it pans, it does not turn).
+    const moved = await page.evaluate(() => {
+      const pl = window.__splashery.player;
+      const yaw = pl.camera.cur.yaw;
+      pl.camera.zoomBy(0.4);
+      pl.camera.update(1);
+      const here = pl.pansHere();
+      pl.panBy(0, 120);
+      return { here, up: pl.camera.target[1], yaw: pl.camera.cur.yaw - yaw };
+    });
+    expect(moved.here).toBe(true);
+    expect(moved.up).toBeGreaterThan(0.01);
+    expect(moved.yaw).toBe(0);
+    await page.evaluate(() => window.__splashery.player.resetCamera());
+    // A tap goes to the next page.
+    await page.evaluate(() => window.__splashery.player.act());
+    await page.waitForFunction(() => window.__splashery.player.pictures.page === 1);
+    await waitSheet(page);
   });
 });

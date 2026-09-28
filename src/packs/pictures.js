@@ -11,6 +11,8 @@ export const RECIPES = {
     // A flat sheet that shows whatever you open, and nothing else. It keeps
     // still (no turntable), facing you.
     turntable: false,
+    // Few splats of its own (the card); the picture's are the sheet's.
+    density: 0.12,
     options: [
       {
         key: "sample",
@@ -63,6 +65,26 @@ export const RECIPES = {
     build(k) {
       LAB.tapN = 0;
       k.sheet({ id: "page", center: [0, 0, 0], width: 2, height: 2, normal: [0, 0, 1] });
+      // A thin gray card behind it, so a white page has an edge on a white
+      // background (and the picture a back): two staggered lattices of flat
+      // discs, like a sheet's paper, so it is smooth with no speckle.
+      const W = 2.08;
+      k.cloud({ share: 1, pattern: false }, (rand, i, n) => {
+        const g = Math.max(8, Math.floor(Math.sqrt(n / 2)));
+        const step = W / g;
+        const second = i >= g * g;
+        const j = second ? i - g * g : i;
+        if (j >= g * g || (second && (j % g === g - 1 || j >= g * (g - 1)))) return null;
+        const off = second ? step : step / 2;
+        return {
+          p: [-W / 2 + off + (j % g) * step, -W / 2 + off + Math.floor(j / g) * step, -0.03],
+          n: [0, 0, 1],
+          flat: 0.05,
+          size: (0.5 * step) / 0.01,
+          color: "#c3c7ce",
+          opacity: 0.99,
+        };
+      });
     },
   },
 };

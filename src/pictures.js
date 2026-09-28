@@ -126,6 +126,7 @@ export class Pictures {
     this.gifTime = 0;
     this.frameDirty = false;
     this.sound = false;
+    this.retiring = []; // sheets swapped for bigger ones, freed a few frames on
     this.stats = { builds: 0, lastMs: 0, lastCount: 0, rendered: [] };
     this.destroyed = false;
     this.api = this.makeAPI();
@@ -278,6 +279,9 @@ export class Pictures {
   // is missing (one at a time) and uploads new video and GIF frames.
   update(out, time) {
     if (this.destroyed) return;
+    for (const r of this.retiring) if (--r.frames <= 0) this.stage.removeSheet(r.slot);
+    this.retiring = this.retiring.filter((r) => r.frames > 0);
+    if (this.retiring.length) this.stage.requestRender(200);
     const m = this.media;
     const now = performance.now();
     for (const sh of this.sheets) {
@@ -493,7 +497,9 @@ export class Pictures {
     if (!st.toy) return;
     let slot = sheet.slot;
     if (!slot || slot.container.maxSplats < data.count) {
-      if (slot) st.removeSheet(slot);
+      // The old sheet stays on show for a few frames: a new container
+      // draws nothing until the engine has sorted it.
+      if (slot) this.retiring.push({ slot, frames: 6 });
       const cap = Math.ceil(data.count * 1.25);
       slot = st.addSheet(this.player.pictureContainer(cap));
       if (!slot) return;

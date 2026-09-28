@@ -3102,7 +3102,7 @@ export const TOYS = [
     pack: "pictures",
     labs: true,
     tags: "pdf page document article photo picture image gif video open file",
-    camera: { yaw: 0, pitch: 0, roll: 0, distance: 2.3 },
+    camera: { yaw: 0, pitch: 0, roll: 0, distance: 3.2 },
   },
 ];
 
