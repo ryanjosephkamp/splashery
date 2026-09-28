@@ -518,10 +518,51 @@ export const TOY_HELP = {
   },
 
   // ---- Medieval -------------------------------------------------------------------------
-  "sword-in-stone": { howTo: "Tap to pull the sword from the stone; tap again to go back." },
-  "bow-and-target": { howTo: "Tap to shoot an arrow; tap again to go back." },
-  "knights-helmet": { howTo: "Tap to open the visor; tap again to close it." },
-  "dragon-egg": { howTo: "Tap to hatch the egg; tap again to go back." },
+  "sword-in-stone": {
+    howTo: "Tap to pull the sword from the stone; tap again to go back.",
+    about:
+      "The sword in the stone comes from the old legends of King Arthur of Britain. A sword was stuck fast in a great stone, and only the true king could pull it out. Many strong knights tried and failed, until the young Arthur drew it out easily and was made king.\n\nTap it to try: the sword sticks at first and wiggles, then slides free and rises in a shower of golden sparkles. Tap again to put it back in the stone. The Arthur stories have been told and retold for more than 800 years.",
+  },
+  shield: {
+    howTo: "Tap it and it blocks a blow: sparks fly and the emblem gleams.",
+    about:
+      "A heraldic shield carries a coat of arms, a painted design that showed who a knight was, even when a helmet hid the face. Heraldry has its own words: the background is the field, and a shape on it is a charge. A chevron is an upside-down V, a bend is a stripe from corner to corner, a saltire is an X-shaped cross, and per pale means split down the middle.\n\nTap it and it takes an unseen knock: it jolts and rocks, sparks spray off its iron rim, and a gleam sweeps across the emblem. Pick one of seven designs and the colors of the field and the charge in the Toy tab.",
+  },
+  "bow-and-target": {
+    howTo: "Tap to shoot an arrow; tap again to go back.",
+    about:
+      "Archery is the sport of shooting arrows with a bow at a target. Drawing back the string bends the bow's springy limbs, which store the energy of your pull; when the string is let go, the limbs spring back and send the arrow flying. A target has rings of color, with gold in the middle, and the closer to the center, the more points.\n\nTap to shoot: the string draws back, the arrow flies across and lands in the target, and a fresh arrow waits on the string. Tap again to go back. Archery was first part of the Olympic Games in 1900.",
+  },
+  trebuchet: {
+    howTo: "Tap it to launch: the weight drops and the long arm flings a stone.",
+    about:
+      "A trebuchet is a giant throwing machine from the Middle Ages. A long wooden arm swings on an axle, with a heavy weight on its short end and a sling on its long end. When the weight falls, the long end whips up and over, the sling swings out and lets go, and the stone flies a long way. Carpenters built them from great timbers, and the biggest could throw a stone as heavy as a person.\n\nTap it to launch: the weight drops, the arm swings up and the stone sails off, then the arm comes back down, ready for the next one. Today people build trebuchets for fun, to throw pumpkins in contests.",
+  },
+  crossbow: {
+    howTo: "Tap it to shoot a bolt; the string snaps and a new bolt loads.",
+    about:
+      "A crossbow is a short, strong bow fixed crosswise on a wooden stock. The drawn string is held back by a catch, so it can wait until the trigger lets it go. It shoots short, thick arrows called bolts. Crossbows were used in China more than 2,000 years ago and later all over medieval Europe, and today people shoot them at targets as a sport.\n\nTap it: the trigger lets the string go, the string snaps forward with a buzz and the bolt flies off along its groove. Then the string is drawn back and a new bolt appears.",
+  },
+  "knights-helmet": {
+    howTo: "Tap to open the visor; tap again to close it.",
+    about:
+      "A knight's helmet was made of steel, hammered into shape by a skilled craftsman called an armorer. The front piece, the visor, has narrow slits and holes to see and breathe through, and it swings up on pivots at the sides so the knight could show their face. Plumes of colored feathers on top made the knight easy to spot at a tournament.\n\nTap it to open the visor, and tap again to close it. Pick the color of the plume in the Toy tab. A full suit of steel plate armor weighed about 20 to 25 kilograms (45 to 55 pounds).",
+  },
+  crown: {
+    howTo: "Tap it: it rises and its jewels light up one by one.",
+    about:
+      "A crown is a ring of gold or silver worn on the head by a king or queen, a sign of their rule. Many crowns are set with jewels and lined with a soft velvet cap. Royal crowns are often kept with other treasures called the crown jewels, and some are hundreds of years old.\n\nTap it and the crown lifts and hovers. Its eight jewels light up one after another around the band, each flashing white, while golden sparkles drift up around it; then the jewels go out in turn and it settles back down. Pick the color of the velvet in the Toy tab.",
+  },
+  "dragon-egg": {
+    howTo: "Tap to hatch the egg; tap again to go back.",
+    about:
+      "Dragons are creatures of legend, told of all over the world. In many European tales they are winged, fire-breathing beasts that guard treasure; in Chinese stories they are wise, long, snake-like beings that bring rain and good luck. In stories, a dragon hatches from an egg, just as lizards and snakes do.\n\nTap it to hatch the egg: cracks run across the scaly shell, it breaks open and a baby dragon peeks out in a burst of golden sparkles. Tap again to go back. Pick an emerald, ruby, sapphire or gold egg in the Toy tab.",
+  },
+  "wizards-orb": {
+    howTo: "Tap it to cast a spell: sparks spiral out and runes circle the orb.",
+    about:
+      "A wizard's orb is a glass ball from stories of magic, where a wizard gazes into it to see faraway places or the future. This one sits on a stand, with glowing magic swirling inside. Runes, the letters of old alphabets once used in northern Europe, are often carved on magic things in stories.\n\nTap it to cast a spell: a flash of light fills the glass, the swirl spins up, sparks spiral out in five arms, and a ring of runes rises and circles the orb before it fades. Pick the color of the magic in the Toy tab.",
+  },
 
   // ---- Animals --------------------------------------------------------------------------
   octopus: {
