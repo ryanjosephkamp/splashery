@@ -22,8 +22,6 @@ const SHELVES = [
   "weather",
   "maths",
 ];
-// tests/help.spec.mjs checks the donut's default line, so its howTo waits.
-const NO_HOWTO = new Set(["donut"]);
 
 test("every toy on these shelves has a how-to line and an About text", () => {
   const toys = TOYS.filter((t) => SHELVES.includes(t.category));
@@ -31,10 +29,8 @@ test("every toy on these shelves has a how-to line and an About text", () => {
   for (const t of toys) {
     const e = TOY_HELP[t.id];
     expect(e, t.id).toBeTruthy();
-    if (!NO_HOWTO.has(t.id)) {
-      expect(e.howTo, t.id).toMatch(/^[A-Z].*\.$/);
-      expect(e.howTo.length, `${t.id}: ${e.howTo}`).toBeLessThanOrEqual(95);
-    }
+    expect(e.howTo, t.id).toMatch(/^[A-Z].*\.$/);
+    expect(e.howTo.length, `${t.id}: ${e.howTo}`).toBeLessThanOrEqual(95);
     const paras = e.about.split("\n\n");
     expect(paras.length, t.id).toBe(2);
     for (const p of paras) expect(p, t.id).toMatch(/^[A-Z"].*[.!"]$/);

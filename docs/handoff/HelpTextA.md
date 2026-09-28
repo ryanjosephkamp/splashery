@@ -107,7 +107,7 @@ September 28, 2026: all ten shelves written; draft PR
 | Shelf          | Toys | How-to lines | About texts |
 | -------------- | ---- | ------------ | ----------- |
 | Photoreal      | 32   | 32           | 32          |
-| Shapes         | 4    | 3            | 4           |
+| Shapes         | 4    | 4            | 4           |
 | Space          | 23   | 23           | 23          |
 | Tiny world     | 18   | 18           | 18          |
 | Atoms          | 5    | 5            | 5           |
@@ -116,12 +116,14 @@ September 28, 2026: all ten shelves written; draft PR
 | Nature         | 23   | 23           | 23          |
 | Weather & fire | 13   | 13           | 13          |
 | Maths          | 16   | 16           | 16          |
-| **Total**      | 149  | 148          | 149         |
+| **Total**      | 149  | 149          | 149         |
 
-The one missing how-to line is the donut's (below, "For the Operator"). The owner's marks on the
-[Help Board](https://claude.ai/artifact/P1NCWsGRE3MFqYTWTnTuqN): on September 28, 2026 he approved
-every how-to line that was on the board at 04:32 UTC (all 148 of mine). No "fix" marks so far; he is
-reading the About texts. An approved how-to line stays as it is unless he marks it "fix".
+The donut's how-to line went in after the Operator's PR #61 fixed `tests/help.spec.mjs` (September
+28, 2026). The owner's marks on the [Help Board](https://claude.ai/artifact/P1NCWsGRE3MFqYTWTnTuqN):
+on September 28, 2026 he approved every how-to line that was on the board at 04:32 UTC (all 148 of
+mine then). No "fix" marks so far; he is reading the About texts. At 05:40 UTC the Operator reported
+that he approved every help text, the About texts included. An approved how-to line stays as it is
+unless he marks it "fix".
 
 ## Notes
 
@@ -143,13 +145,11 @@ reading the About texts. An approved how-to line stays as it is unless he marks 
   the scratchpad, with a source for each fact; every line was checked and several were changed (less
   certain facts cut or softened, a match-and-candle fact swapped for the round candle flame in
   space).
-- `tests/hta.spec.mjs`: every toy on these shelves has an entry of the right shape (the donut's
-  how-to line excepted), and the About tab shows the saguaro's long text whole at 390x844 and
-  1440x900 (`hta-about-*.png`).
+- `tests/hta.spec.mjs`: every toy on these shelves has an entry of the right shape and the About tab
+  shows the saguaro's long text whole at 390x844 and 1440x900 (`hta-about-*.png`).
 
 ## Known issues
 
-- The donut has no how-to line yet (below).
 - The star's Type option (red dwarf, yellow, blue giant, white dwarf) changes the look, but the tap
   runs the same Sun-like life for every type: a red giant, a shell and a white dwarf. The About text
   says "the life of a star like the Sun" so it stays true.
@@ -158,13 +158,7 @@ reading the About texts. An approved how-to line stays as it is unless he marks 
 
 ## For the Operator
 
-- **The donut's how-to line**: `tests/help.spec.mjs` (line 148) expects the donut's default line,
-  "Tap it: Break apart.", in the old-link test. With my line ("Tap it to break it apart and put it
-  back together.") that test fails, and this lane may not edit the file, so the donut has no `howTo`
-  for now (the line waits in a comment in `src/toy-help.js`). The same test (line 325) expects the
-  basketball's default line, which lane HelpTextB will hit. Suggested fix, in an Ops PR or lane
-  Help's file: compare with `toyHelp(...)` for the toy instead of a fixed string, or use a toy that
-  will never get an entry. Then add the donut's line and drop `NO_HOWTO` in `tests/hta.spec.mjs`.
+- The donut's how-to line: done after PR #61; `NO_HOWTO` is gone from `tests/hta.spec.mjs`.
 - Recipe follow-ups for a later lane (not text): the star's tap for the other types, and the pearl's
   tap without its shell.
 - Two approved lines say "round" (Möbius strip, Circle and waves: "send the rider round", "send the

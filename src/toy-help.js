@@ -189,9 +189,8 @@ export const TOY_HELP = {
     about:
       "A wobbly jelly blob, built by the computer from a few rules rather than from photos. Thousands of splats, tiny soft blobs of color, are scattered over a lumpy round shape, and a pattern called noise gives it its bumps and swirls of candy color.\n\nTap it and it splits into three smaller blobs that wobble apart, then merge back with a jelly bounce. Real jelly wobbles because it is mostly water, held in a loose net of gelatin strands. In the Make tab you can pick a shape, a palette and a seed to build a blob of your own.",
   },
-  // No howTo yet: tests/help.spec.mjs checks the donut's default line.
-  // To come: "Tap it to break it apart and put it back together."
   donut: {
+    howTo: "Tap it to break it apart and put it back together.",
     about:
       "A frosted donut with sprinkles, built by the computer from a simple ring shape. To a mathematician, a ring like this is a torus. In topology, the math of shapes that can stretch but not tear, a donut and a coffee mug count as the same shape, because each has exactly one hole.\n\nTap it and it snaps into chunks that fly apart and tumble, showing the dough inside, while the sprinkles spray off. Then it all flies back together. The Make tab builds shapes like this from a shape, a palette and a seed.",
   },
