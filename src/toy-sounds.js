@@ -876,6 +876,8 @@ export const TOY_SOUNDS = {
   "fourier-circles": { voice: "pad", notes: "C3 G3 C4 E4 G4 C5", step: 0.35, at: 0.3, decay: 1.6 },
   // A wooden slide; drive() adds a slide and a click for each piece.
   "pythagoras-proof": { voice: "scrape", at: 0.3, f: 700, rate: 9, decay: 0.35, vol: 0.35 },
+  // Lane Manual: a soft tone that rises an octave as t plays (4 s).
+  "splat-equation": { voice: "pad", f: "G3", to: 2, decay: 2, vol: 0.9 },
   // Three hushing waves, each at its loudest as a swell reaches the mouth
   // (0.7, 1.8, 2.9 s).
   "seashell-spiral": [
