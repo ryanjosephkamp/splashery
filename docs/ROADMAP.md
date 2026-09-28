@@ -6,16 +6,16 @@ The owner approved this plan on September 27, 2026 (Part 1 of the How Splashery 
 Operator runs the lanes ([OPERATING.md](OPERATING.md), [WORKSTREAMS.md](WORKSTREAMS.md)); the
 current state is in [HANDOFF.md](HANDOFF.md).
 
-| Step | What                                                                                                                                                                                                |
-| ---- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1    | Running: lane AI (12 AI and computing toys, in its fourth review round). Done on September 28, 2026: lane Math (#50) and lane Fix3 (#54).                                                           |
-| 2    | Toy help (below): running since September 28, 2026 as lane Help (the line, the "?" button, the About section and the first text); then two lanes write the text for every toy.                      |
-| 3    | The sound overhaul: the owner's notes go on the Sound Board, sound lanes build new sounds there, he approves them, and they go into the site. A "Sound preferences" section follows from his notes. |
-| 4    | Pianos and songs: the five approved pianos, a song bar based on the chess bar, and MIDI files.                                                                                                      |
-| 5    | A sound round for the new AI and Math toys.                                                                                                                                                         |
-| 6    | Physics and hands-on play (below): the engine and four showcase toys, then a hands-on plan for every toy, then category lanes.                                                                      |
-| 7    | The Toy Workshop, the "Take it to your AI" package, submissions and the gallery; the flag toy (it needs the cloth).                                                                                 |
-| 8    | Last: the American English sweep, `docs/HOW-IT-WORKS.md`, the blog post, a "How it's made" page and the homepage embeds.                                                                            |
+| Step | What                                                                                                                                                                                                                                                  |
+| ---- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1    | Done on September 28, 2026: lane Math (#50), lane Fix3 (#54) and lane AI (#52, with its engine PR #56): twelve AI and computing toys.                                                                                                                 |
+| 2    | Toy help (below): lane Help merged on September 28, 2026 (#57: the line, the "?" button, the About section and the first texts); two text lanes, HelpTextA and HelpTextB, now write the text for every toy, and the owner marks it on the Help Board. |
+| 3    | The sound overhaul: the owner's notes go on the Sound Board, sound lanes build new sounds there, he approves them, and they go into the site. A "Sound preferences" section follows from his notes.                                                   |
+| 4    | Pianos and songs: the five approved pianos, a song bar based on the chess bar, and MIDI files.                                                                                                                                                        |
+| 5    | A sound round for the new AI and Math toys.                                                                                                                                                                                                           |
+| 6    | Physics and hands-on play (below): the engine and four showcase toys, then a hands-on plan for every toy, then category lanes.                                                                                                                        |
+| 7    | The Toy Workshop, the "Take it to your AI" package, submissions and the gallery; the flag toy (it needs the cloth).                                                                                                                                   |
+| 8    | Last: the American English sweep, `docs/HOW-IT-WORKS.md`, the blog post, a "How it's made" page and the homepage embeds.                                                                                                                              |
 
 Whenever a slot is free: a Real objects lane for the approved scans (historical figures, real
 vehicles, and the everyday objects as real captures), as brand-free sources turn up.

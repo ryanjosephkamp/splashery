@@ -29,6 +29,7 @@ around the toys; the rules below keep it apart.
 | ------------------------- | ------------------------------------------------- | ---------------------------------------------------------------------------- |
 | Effect review             | https://claude.ai/artifact/NCsg9V5SzFY3Mnwuwgq7pi | Lanes add clips and cards (below); the owner marks; the Operator tidies      |
 | Sound Board               | https://claude.ai/artifact/VE9XCTxH3djST6dGb6ZAkj | The Operator (after merges and each sound-review round); the owner may mark  |
+| Help Board                | https://claude.ai/artifact/P1NCWsGRE3MFqYTWTnTuqN | The Operator (`node tools/help-board.mjs`, below); the owner marks           |
 | Toy Plan (owner's marks)  | https://claude.ai/artifact/PNGPx7REMdhxLMHDXARhw8 | The owner marks; the Operator republishes (`node tools/toy-plan.mjs --json`) |
 | Toy Ideas                 | https://claude.ai/artifact/5TukiuV3mCt3G3zk6Arx9S | The Operator adds three ideas each morning; the owner marks (below)          |
 | Splashery Parallel Plan   | https://claude.ai/artifact/KjJrfKxi4phzJmbgSyRbr7 | The Operator (the lane prompts)                                              |
@@ -44,7 +45,7 @@ Only that lane edits them. Packs that no active lane owns (WORKSTREAMS.md, "Froz
 frozen: a change to them needs a lane that the Operator starts.
 
 Each lane has a **prefix**, the lane id in lower case, used for card ids, screenshot names and its
-test file: `e4f`, `e5`, `e6a`, `e6b`, `f`, `g`, `ai`, `math`.
+test file: `e4f`, `e5`, `e6a`, `e6b`, `f`, `g`, `ai`, `math`, `help`, `hta`, `htb`.
 
 ### Shared files: edit only your own toys' lines
 
@@ -52,6 +53,7 @@ These files list every toy. A lane edits only its own toys' entries, in place: d
 or reformat anyone else's lines, so git can merge the lanes line by line.
 
 - `src/toy-sounds.js` (each toy's sound spec)
+- `src/toy-help.js` (each toy's how-to line and About text, in its shelf's section)
 - `tools/toy-plan.json` (each toy's plan entry: `"v": "keep"` and `improved` when finished)
 - `src/toys.js` (the shelf catalogue: only new toys add rows)
 - `src/rigs.js` (a scan's rig)
@@ -172,6 +174,21 @@ site.
    status to `site`, and posts no clips unless an effect changed.
 6. **Preferences.** From the owner's notes the Operator drafts a "Sound preferences" section for
    PACKS.md (general guidance, not strict rules). The owner OKs it, and every lane follows it.
+
+## The help review
+
+Every toy has a short "how to play" line and an About text in `src/toy-help.js` (the style guide is
+in `docs/handoff/Help.md`). The owner reads them on the Help Board: each toy's thumbnail, its line
+(or, under a "Built by the app" tag, the line the app builds from its recipe) and its About text.
+
+- The Operator builds the board with `node tools/help-board.mjs` (it writes
+  `.cache/pages/help-board.html`) and republishes it to its link, from main after a merge or from a
+  checkout with the text lanes' branches merged in while they run.
+- The owner's marks are in the board's `verdicts` collection, one document per toy id:
+  `{ verdict: "good" | "fix" | "", note, at }`. A lane reads them (never writes them), fixes every
+  "fix" on its toys, and the Operator republishes the board.
+- From the text lanes on, every lane writes its own toys' entries as part of "done", and they go on
+  the board with the lane's review.
 
 ## Handoffs
 
@@ -346,7 +363,8 @@ writes the lane's brief from them (like any new lane) and sets each idea's `lane
    refreshes the standard screenshots (`--full` runs the whole suite instead; `--no-shots` skips
    them).
 3. Republish the Sound Board: Artifact tool, `url` the Sound Board's link, `file_path`
-   `.cache/pages/sound-board.html`.
+   `.cache/pages/sound-board.html`. If toy help changed, rebuild and republish the Help Board too
+   (`node tools/help-board.mjs`).
 4. Update WORKSTREAMS.md and HANDOFF.md, add the lane's summary to `docs/handoff/history.md`, move
    its "For the Operator" items (PACKS.md lessons, backlog, README), and set its review lane
    `finished` once the owner has approved its clips.

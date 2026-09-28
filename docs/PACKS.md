@@ -487,12 +487,23 @@ form is in CLAUDE.md.
   12. Tokens that move far (a cube's cubies, a model's bricks) set `out.resort` on the frame they
       land, and the player sorts them again where they stand. Do it once per landing, not every
       frame (lane F).
+  13. Pieces that glide just in front of a flat board (tokens along a diagram) fall behind the board
+      between sorts. Set `out.resort` a few times during the glide, not only when it lands (lane
+      AI).
 - **Glossy things that spin.** Baked light turns with a spinning body, so a rolling pool ball looks
   like glass. Spin an unlit copy built tiny at the centre (it sorts behind everything, from any
   camera) under a fixed see-through layer of light (`glossSpin()` in `src/packs/balls.js`).
 - **Thin ribbons need bigger splats.** A thin ribbon with a high weight gets splats too small to see
   below about 300 px, and the curve vanishes. Use fewer, bigger splats (weight 2 to 2.5, size 1.5;
   lane Math's plotters).
+- **Text and small details.** Letters vanish on a phone below about size / sqrt(weight) = 0.5
+  (weight 10 did). Put text splats only on the ink, one square per font pixel, rather than over the
+  whole label with most thrown away, and stand the letters clearly in front of their plate, not
+  0.002 in front, or the plate sorts over them (lane AI's `text()` and `label3D()` in
+  `src/packs/computing.js`). Busy diagrams can raise the recipe's `density`.
+- **Long, thin models come out small.** The kit fits a toy to a sphere around its bounds, so a row
+  of layers ends up small in the frame whatever its scale. Lay it out as a compact block (lane AI's
+  CNN in two rows).
 - **Fading by size makes speckle.** `visible` and `kind: "grow"` both shrink splats, so a whole
   layer shrinking away turns into dots. Clear a layer as a moving front instead (run `out.grow` back
   down: the Mars dust storm), and give glow overlays bigger, fainter splats than the surface under

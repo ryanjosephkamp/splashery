@@ -1,0 +1,589 @@
+<title>Splashery Help Board</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&display=swap"
+/>
+<style>
+  :root {
+    --page: #f5f7fb;
+    --card: #ffffff;
+    --ink: #141821;
+    --muted: #5a6273;
+    --line: #dce1eb;
+    --accent: #0b4f9c;
+    --accent-soft: #e6eef9;
+    --good: #1f7a4d;
+    --good-soft: #e3f3ea;
+    --warn: #9a4b12;
+    --warn-soft: #fbeee3;
+    --display: "Fredoka", ui-rounded, "Nunito", system-ui, sans-serif;
+    --body: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --page: #0f1218;
+      --card: #181c25;
+      --ink: #eef1f7;
+      --muted: #9aa3b5;
+      --line: #2a3140;
+      --accent: #8db8ff;
+      --accent-soft: #1b2638;
+      --good: #6fd3a0;
+      --good-soft: #16291f;
+      --warn: #f0a86a;
+      --warn-soft: #2d2116;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --page: #0f1218;
+    --card: #181c25;
+    --ink: #eef1f7;
+    --muted: #9aa3b5;
+    --line: #2a3140;
+    --accent: #8db8ff;
+    --accent-soft: #1b2638;
+    --good: #6fd3a0;
+    --good-soft: #16291f;
+    --warn: #f0a86a;
+    --warn-soft: #2d2116;
+  }
+  [hidden] {
+    display: none !important;
+  }
+  body {
+    background: var(--page);
+    color: var(--ink);
+    font: 15px/1.5 var(--body);
+    padding-inline: 16px;
+    padding-block: 20px 120px;
+  }
+  .wrap {
+    max-width: 860px;
+    margin: 0 auto;
+    display: grid;
+    gap: 16px;
+  }
+  h1 {
+    font: 600 30px/1.1 var(--display);
+    margin: 0;
+    letter-spacing: 0.2px;
+    text-wrap: balance;
+  }
+  h1 span {
+    color: var(--accent);
+  }
+  .lede {
+    margin: 6px 0 0;
+    color: var(--muted);
+    max-width: 64ch;
+  }
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 8px;
+  }
+  .stat {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 8px 10px;
+  }
+  .stat b {
+    display: block;
+    font: 600 20px/1.2 var(--display);
+    font-variant-numeric: tabular-nums;
+  }
+  .stat span {
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .stat.good b {
+    color: var(--good);
+  }
+  .stat.warn b {
+    color: var(--warn);
+  }
+  .bar {
+    position: sticky;
+    top: env(safe-area-inset-top, 0px);
+    z-index: 2;
+    background: var(--page);
+    padding-block: 10px;
+    display: grid;
+    gap: 8px;
+    border-bottom: 1px solid var(--line);
+  }
+  #q {
+    width: 100%;
+    box-sizing: border-box;
+    font: inherit;
+    color: var(--ink);
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 9px 12px;
+  }
+  #q:focus-visible,
+  button:focus-visible,
+  textarea:focus-visible,
+  a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  .row {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .chipbtn {
+    font: 600 13px/1 var(--body);
+    color: var(--ink);
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 8px 12px;
+    min-height: 34px;
+    cursor: pointer;
+  }
+  .chipbtn[aria-pressed="true"] {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--page);
+  }
+  #filters {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  #filters .chipbtn {
+    flex: none;
+  }
+  .cats {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding-bottom: 2px;
+  }
+  .cats a {
+    flex: none;
+    text-decoration: none;
+    color: var(--ink);
+    font-size: 13px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 5px 11px;
+    background: var(--card);
+  }
+  section h2 {
+    font: 600 19px/1.2 var(--display);
+    margin: 18px 0 10px;
+    display: flex;
+    gap: 8px;
+    align-items: baseline;
+    scroll-margin-top: 190px;
+  }
+  section h2 small {
+    font: 13px var(--body);
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+  .list {
+    display: grid;
+    gap: 10px;
+  }
+  .toy {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 12px;
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: 10px 12px;
+    align-items: start;
+  }
+  .toy.m-good {
+    border-color: var(--good);
+  }
+  .toy.m-fix {
+    border-color: var(--warn);
+  }
+  .toy img,
+  .toy .noimg {
+    width: 64px;
+    height: 64px;
+    max-width: 100%;
+    border-radius: 10px;
+    background: var(--page);
+    object-fit: cover;
+  }
+  .toy .body {
+    display: grid;
+    gap: 8px;
+    min-width: 0;
+  }
+  .toy .head {
+    display: flex;
+    gap: 8px;
+    align-items: baseline;
+    flex-wrap: wrap;
+  }
+  .toy .name {
+    font: 600 17px/1.2 var(--display);
+  }
+  .toy .meta {
+    font-size: 12px;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+  .howto {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 8px 11px;
+    background: var(--page);
+    font-size: 14px;
+  }
+  .howto.auto {
+    border-style: dashed;
+    color: var(--muted);
+  }
+  .tag {
+    display: inline-block;
+    font: 600 10px/1 var(--body);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    border-radius: 5px;
+    padding: 3px 6px;
+    margin-right: 6px;
+    vertical-align: 1px;
+    background: var(--accent-soft);
+    color: var(--accent);
+  }
+  .tag.none {
+    background: var(--warn-soft);
+    color: var(--warn);
+  }
+  .about {
+    display: grid;
+    gap: 6px;
+    max-width: 66ch;
+    font-size: 14px;
+  }
+  .about p {
+    margin: 0;
+  }
+  .about.none {
+    justify-items: start;
+    color: var(--muted);
+    font-size: 13px;
+  }
+  .mk {
+    grid-column: 1 / -1;
+    display: grid;
+    gap: 6px;
+    border-top: 1px solid var(--line);
+    padding-top: 10px;
+  }
+  .mk .row button {
+    font: 600 13px/1 var(--body);
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: var(--card);
+    color: var(--ink);
+    padding: 8px 12px;
+    min-height: 34px;
+    cursor: pointer;
+  }
+  .mk .row button[data-v="good"][aria-pressed="true"] {
+    background: var(--good-soft);
+    border-color: var(--good);
+    color: var(--good);
+  }
+  .mk .row button[data-v="fix"][aria-pressed="true"] {
+    background: var(--warn-soft);
+    border-color: var(--warn);
+    color: var(--warn);
+  }
+  .mk textarea {
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 38px;
+    resize: vertical;
+    font: 14px/1.4 var(--body);
+    color: var(--ink);
+    background: var(--page);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 8px 10px;
+  }
+  .mk .saved {
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .empty {
+    color: var(--muted);
+    padding: 20px 0;
+  }
+  footer {
+    color: var(--muted);
+    font-size: 12px;
+  }
+  @media (max-width: 480px) {
+    .toy {
+      grid-template-columns: 48px 1fr;
+      padding: 10px;
+    }
+    .toy img,
+    .toy .noimg {
+      width: 48px;
+      height: 48px;
+    }
+  }
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>Splashery <span>Help Board</span></h1>
+    <p class="lede">
+      Every toy's "how to play" line and its About text, just as the app shows them. Read each one,
+      then mark it: <b>Reads right</b>, or <b>Needs work</b> with a note for the writer. The text
+      lanes read your marks within the hour and fix them.
+    </p>
+  </header>
+
+  <div class="stats" id="stats"></div>
+
+  <div class="bar">
+    <input
+      id="q"
+      type="search"
+      placeholder="Find a toy"
+      autocomplete="off"
+      aria-label="Find a toy"
+    />
+    <div class="row" id="filters" role="group" aria-label="Show">
+      <button class="chipbtn" data-f="all" aria-pressed="true">All</button>
+      <button class="chipbtn" data-f="open" aria-pressed="false">Not marked</button>
+      <button class="chipbtn" data-f="fix" aria-pressed="false">Needs work</button>
+      <button class="chipbtn" data-f="good" aria-pressed="false">Reads right</button>
+      <button class="chipbtn" data-f="missing" aria-pressed="false">No About yet</button>
+    </div>
+    <nav class="cats" id="cats" aria-label="Shelves"></nav>
+  </div>
+
+  <main id="shelves"></main>
+  <p class="empty" id="empty" hidden>No toys match.</p>
+  <footer>Built from the site's code on @@BUILT@@.</footer>
+</div>
+
+<script>
+  // @@HELP-DATA@@
+
+  const $ = (id) => document.getElementById(id);
+  const el = (tag, cls, text) => {
+    const n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
+  };
+  const marks = {};
+  const cards = new Map();
+  let db = null;
+  let filter = "all";
+
+  // ---- The shelves -----------------------------------------------------------------------
+  const nav = $("cats");
+  const main = $("shelves");
+  const sections = new Map();
+  for (const c of CATS) {
+    const list = TOYS.filter((t) => t.c === c.id);
+    const a = el("a", "", c.label);
+    a.href = `#shelf-${c.id}`;
+    nav.append(a);
+    const sec = el("section");
+    const h2 = el("h2", "", c.label);
+    h2.id = `shelf-${c.id}`;
+    const small = el("small");
+    h2.append(" ", small);
+    const box = el("div", "list");
+    sec.append(h2, box);
+    main.append(sec);
+    sections.set(c.id, { sec, small, list });
+    for (const t of list) box.append(card(t));
+  }
+
+  function card(t) {
+    const art = el("article", "toy");
+    art.dataset.id = t.id;
+    if (t.img) {
+      const img = el("img");
+      img.src = t.img;
+      img.alt = "";
+      img.loading = "lazy";
+      art.append(img);
+    } else art.append(el("div", "noimg"));
+
+    const body = el("div", "body");
+    const head = el("div", "head");
+    head.append(el("span", "name", t.label));
+    head.append(el("span", "meta", t.words ? `About: ${t.words} words` : ""));
+    body.append(head);
+
+    const how = el("div", t.howTo ? "howto" : "howto auto");
+    if (!t.howTo) how.append(el("span", "tag none", "Built by the app"));
+    how.append(t.howTo || t.auto);
+    body.append(how);
+
+    const about = el("div", t.about.length ? "about" : "about none");
+    if (t.about.length) for (const p of t.about) about.append(el("p", "", p));
+    else about.append(el("span", "tag none", "No About text yet"));
+    body.append(about);
+    art.append(body);
+
+    const mk = el("div", "mk");
+    mk.hidden = true;
+    const row = el("div", "row");
+    for (const [v, label] of [
+      ["good", "Reads right"],
+      ["fix", "Needs work"],
+    ]) {
+      const b = el("button", "", label);
+      b.type = "button";
+      b.dataset.v = v;
+      b.setAttribute("aria-pressed", "false");
+      b.addEventListener("click", () => {
+        const same = (marks[t.id] || {}).verdict === v;
+        save(t.id, { verdict: same ? "" : v });
+      });
+      row.append(b);
+    }
+    const saved = el("span", "saved");
+    row.append(saved);
+    const ta = el("textarea");
+    ta.id = `note-${t.id}`;
+    ta.rows = 1;
+    ta.placeholder = "Note for the writer (what to change)";
+    ta.setAttribute("aria-label", `Note about ${t.label}`);
+    let timer = 0;
+    ta.addEventListener("input", () => {
+      clearTimeout(timer);
+      timer = setTimeout(() => save(t.id, { note: ta.value.trim() }), 1200);
+    });
+    ta.addEventListener("change", () => {
+      clearTimeout(timer);
+      if ((marks[t.id]?.note || "") !== ta.value.trim()) save(t.id, { note: ta.value.trim() });
+    });
+    mk.append(row, ta);
+    art.append(mk);
+    cards.set(t.id, art);
+    return art;
+  }
+
+  // ---- Filters and counts --------------------------------------------------------------
+  const byId = Object.fromEntries(TOYS.map((t) => [t.id, t]));
+  function state(id) {
+    return marks[id]?.verdict || "open";
+  }
+  function show() {
+    const q = $("q").value.trim().toLowerCase();
+    let any = false;
+    for (const [cid, s] of sections) {
+      let n = 0;
+      for (const t of s.list) {
+        const st = state(t.id);
+        const ok =
+          (!q || t.label.toLowerCase().includes(q) || t.id.includes(q)) &&
+          (filter === "all" ||
+            (filter === "missing" ? !t.about.length || !t.howTo : st === filter));
+        cards.get(t.id).hidden = !ok;
+        if (ok) n++;
+      }
+      s.sec.hidden = !n;
+      const written = s.list.filter((t) => t.howTo && t.about.length).length;
+      s.small.textContent = `${written} of ${s.list.length} written`;
+      if (n) any = true;
+    }
+    $("empty").hidden = any;
+  }
+  function stats() {
+    const n = TOYS.length;
+    const how = TOYS.filter((t) => t.howTo).length;
+    const about = TOYS.filter((t) => t.about.length).length;
+    const good = TOYS.filter((t) => state(t.id) === "good").length;
+    const fix = TOYS.filter((t) => state(t.id) === "fix").length;
+    const tiles = [
+      ["", how, `of ${n} have their own how-to line`],
+      ["", about, `of ${n} have an About text`],
+      ["good", good, "marked Reads right"],
+      ["warn", fix, "marked Needs work"],
+    ];
+    if (!db) tiles.splice(2);
+    $("stats").replaceChildren(
+      ...tiles.map(([cls, num, label]) => {
+        const d = el("div", `stat ${cls}`);
+        d.append(el("b", "", String(num)), el("span", "", label));
+        return d;
+      }),
+    );
+  }
+  $("q").addEventListener("input", show);
+  $("filters").addEventListener("click", (e) => {
+    const b = e.target.closest("button[data-f]");
+    if (!b) return;
+    filter = b.dataset.f;
+    for (const x of $("filters").children) x.setAttribute("aria-pressed", String(x === b));
+    show();
+  });
+  show();
+  stats();
+
+  // ---- Marks (saved in this page's database; only Ryan marks) ----------------------------
+  function showMark(id) {
+    const art = cards.get(id);
+    if (!art) return;
+    const m = marks[id] || {};
+    art.classList.toggle("m-good", m.verdict === "good");
+    art.classList.toggle("m-fix", m.verdict === "fix");
+    art.querySelectorAll(".mk .row button").forEach((b) => {
+      b.setAttribute("aria-pressed", String(m.verdict === b.dataset.v));
+    });
+    const ta = art.querySelector(".mk textarea");
+    if (ta && document.activeElement !== ta) ta.value = m.note || "";
+  }
+  async function save(id, patch) {
+    marks[id] = { ...(marks[id] || {}), ...patch, at: new Date().toISOString().slice(0, 10) };
+    showMark(id);
+    stats();
+    const saved = cards.get(id)?.querySelector(".mk .saved");
+    try {
+      await db.doc(`verdicts/${id}`).set(marks[id]);
+      if (saved) saved.textContent = "Saved";
+    } catch (e) {
+      if (saved) saved.textContent = "Couldn't save. Try again in a moment.";
+    }
+  }
+  (async () => {
+    db = (await window.claude?.use?.("db")) || null;
+    if (!db) return;
+    for (const art of cards.values()) art.querySelector(".mk").hidden = false;
+    stats();
+    // The list is filtered again only when the reader changes a filter, so a
+    // card marked under "Not marked" stays in view while its note is written.
+    let first = true;
+    db.collection("verdicts").onSnapshot(
+      (snap) => {
+        for (const k of Object.keys(marks)) delete marks[k];
+        for (const d of snap.docs) if (byId[d.id]) marks[d.id] = { ...d.data() };
+        for (const id of cards.keys()) showMark(id);
+        stats();
+        if (first) show();
+        first = false;
+      },
+      () => {},
+    );
+  })();
+</script>
