@@ -265,7 +265,7 @@ function bookLayout(st, N, time, uAt = null) {
     leaf(right + 1, { ahead: 1 });
     if (K >= 3) leaf(K - 2, { angle: Math.PI, ahead: 1 });
     if (K >= 2) leaf(K - 1, { angle: Math.PI, bv: 1 });
-    leaf(right, { fv: 1, bv: 1 });
+    leaf(right, { fv: 1, ahead: 1 });
     L.cover = K >= 1 ? Math.PI : 0;
     L.open = K >= 1 ? 1 : 0;
     L.block = L.cover;
@@ -275,7 +275,7 @@ function bookLayout(st, N, time, uAt = null) {
   if (a.type === "open" || a.type === "shut") {
     const w = a.type === "open" ? v : 1 - v;
     leaf(2, { ahead: 1 });
-    leaf(1, { fv: 1, bv: 1 });
+    leaf(1, { fv: 1, ahead: 1 });
     L.cover = Math.PI * w;
     L.coverCurl = (a.type === "open" ? -1 : 1) * st.coverCurl * bend;
     L.open = w;

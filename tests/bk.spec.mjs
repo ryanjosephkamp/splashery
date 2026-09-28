@@ -220,3 +220,362 @@ test.describe("engine for books (in the app)", () => {
     expect(r.count).toBeLessThan(20000);
   });
 });
+
+// ---- The toys ----------------------------------------------------------------------
+
+// Builds a toy in Node and plays it: tap(n) taps, run(s) steps the clock.
+async function play(id, options = {}, pics = null) {
+  const { buildRecipe } = await import("../src/kit.js");
+  const { RECIPES } = await import("../src/packs/pictures.js");
+  const r = RECIPES[id];
+  const opts = { ...Object.fromEntries((r.options || []).map((o) => [o.key, o.default])), ...options }; // prettier-ignore
+  const it = buildRecipe(r, { seed: 5, count: 8000, options: opts }, () => {});
+  let b = it.next();
+  while (!b.done) b = it.next();
+  const data = { ...(b.value.kit.data || {}), pictures: pics };
+  let time = 1;
+  let n = 0;
+  let out = null;
+  const frame = () => {
+    out = { parts: {}, glow: [1, 1, 1, 0], amount: 1, grow: 1, cues: [], fx: {}, tokens: null };
+    r.drive(time, { turn: 0, swing: 0 }, out, { time, R: 1, tap: n ? { n } : null, data });
+    return out;
+  };
+  const run = (s) => {
+    for (let t = 0; t < s; t += 1 / 30) {
+      time += 1 / 30;
+      frame();
+    }
+    return out;
+  };
+  return { kit: b.value.kit, tap: () => (n++, frame()), run, frame, get out() { return out; } }; // prettier-ignore
+}
+
+// A stand-in for info.data.pictures: every page is ready at once.
+function fakePics(count) {
+  return {
+    page: 0,
+    count,
+    kind: "pdf",
+    go(p) {
+      this.page = Math.max(0, Math.min(count - 1, Math.round(p)));
+      return this.page;
+    },
+    next() {
+      return this.go(this.page + 1);
+    },
+    prev() {
+      return this.go(this.page - 1);
+    },
+    ready: () => true,
+  };
+}
+
+const shownSheets = (out) => Object.entries(out.sheets || {}).filter(([, s]) => s.visible > 0);
+
+test.describe("your book, the album and the frame (no browser)", () => {
+  test("a book turns spread by spread with a tap, and closes at the end", async () => {
+    for (const style of ["hardcover", "paperback", "magazine", "spiral"]) {
+      const pics = fakePics(9);
+      const b = await play("your-book", { style }, pics);
+      const pages = [];
+      for (let i = 0; i < 6; i++) {
+        b.tap();
+        b.run(1.3);
+        pages.push(pics.page);
+        // At rest only the open pages show (and the cover, closed or open).
+        expect(shownSheets(b.out).filter(([id]) => id !== "cover").length, style).toBeLessThanOrEqual(2); // prettier-ignore
+      }
+      expect(pages, style).toEqual([1, 3, 5, 7, 8, 0]);
+    }
+  });
+
+  test("while a leaf turns, both its sides and the page under it show, and nothing else", async () => {
+    const pics = fakePics(20);
+    const b = await play("your-book", {}, pics);
+    for (let i = 0; i < 3; i++) {
+      b.tap();
+      b.run(1.3);
+    }
+    b.tap();
+    const mid = b.run(0.5);
+    const ids = shownSheets(mid).map(([id, s]) => `${id}:${s.page}`);
+    // Spread 3 (pages 4 | 5) turning to spread 4 (pages 6 | 7).
+    expect(ids.sort()).toEqual(["b2:4", "b3:6", "cover:0", "f0:7", "f3:5"].sort());
+    expect(mid.leaves[3].angle).toBeGreaterThan(0.3);
+    expect(mid.leaves[3].angle).toBeLessThan(Math.PI - 0.3);
+    expect(mid.resortPose || b.frame().resortPose).toBe(true);
+    // Pages the next turns need are built ahead, hidden.
+    expect(Object.values(mid.sheets).some((s) => s.ahead && !s.visible)).toBe(true);
+  });
+
+  test("the Toy tab's Previous and Next step a spread; a jump opens the spread with that page", async () => {
+    const pics = fakePics(40);
+    const b = await play("your-book", {}, pics);
+    b.frame();
+    pics.next(); // 0 -> 1: open the cover
+    b.run(1.4);
+    expect(pics.page).toBe(1);
+    pics.next(); // 1 -> 2: the next spread, whose right page is 3
+    b.run(1.2);
+    expect(pics.page).toBe(3);
+    pics.prev(); // 3 -> 2: back a spread
+    b.run(1.2);
+    expect(pics.page).toBe(1);
+    pics.go(30); // a jump (a link): the spread that shows page 30
+    b.run(0.2);
+    expect(pics.page).toBe(31);
+  });
+
+  test("stapled paper flips one sheet at a time over the top, then starts again", async () => {
+    const pics = fakePics(4);
+    const b = await play("your-book", { style: "stapled" }, pics);
+    const pages = [];
+    for (let i = 0; i < 4; i++) {
+      b.tap();
+      b.run(0.5);
+      if (i === 0) expect(b.out.leaves[0].angle).toBeGreaterThan(1);
+      b.run(0.8);
+      pages.push(pics.page);
+    }
+    expect(pages).toEqual([1, 2, 3, 0]);
+  });
+
+  test("the album puts two wide or two tall photos on a side, and the sample fills four sides", async () => {
+    const b = await play("photo-album", {}, null);
+    expect(b.kit.sheets.length).toBe(40);
+    const { RECIPES } = await import("../src/packs/pictures.js");
+    const pics = fakePics(6);
+    const a = await play("photo-album", {}, pics);
+    a.tap();
+    a.run(1.4);
+    // Spread 1: the cover's inside, and the sailboat above the tulips.
+    const ids = shownSheets(a.out).map(([id, s]) => `${id.slice(2)}:${s.page}`);
+    expect(ids.sort()).toEqual(["ft:0", "fu:1"]);
+    a.tap();
+    a.run(1.3);
+    const ids2 = shownSheets(a.out).map(([id, s]) => `${id.slice(2)}:${s.page}`);
+    expect(ids2.sort()).toEqual(["bo:2", "ft:3", "fu:4"]);
+    expect(pics.page).toBe(3);
+    expect(RECIPES["photo-album"].pictures.sample({}).length).toBe(6);
+  });
+
+  test("the frame swings about its nail and comes to rest in about three seconds", async () => {
+    const b = await play("picture-frame", {}, fakePics(1));
+    b.frame();
+    expect(b.out.parts.frame.angle).toBe(0);
+    b.tap();
+    const angles = [];
+    for (let i = 0; i < 95; i++) angles.push(b.run(1 / 30).parts.frame.angle);
+    expect(Math.max(...angles.map(Math.abs))).toBeGreaterThan(0.08);
+    // It swings both ways, less each time.
+    expect(angles.some((a) => a > 0.03) && angles.some((a) => a < -0.03)).toBe(true);
+    expect(b.run(0.2).parts.frame.angle).toBe(0);
+  });
+
+  test("the digital frame fades to black, steps to the next photo and fades back in", async () => {
+    const pics = fakePics(3);
+    const b = await play("picture-frame", { frame: "digital" }, pics);
+    b.run(1);
+    expect(b.out.morph[0]).toBe(0);
+    let dark = 0;
+    for (let i = 0; i < 180 && pics.page === 0; i++) dark = Math.max(dark, b.run(1 / 30).morph[0]);
+    expect(dark).toBeGreaterThan(0.9);
+    expect(pics.page).toBe(1);
+    b.run(1);
+    expect(b.out.morph[0]).toBe(0);
+  });
+});
+
+test.describe("your book, the album and the frame (in the app)", () => {
+  test.setTimeout(300_000);
+  const BK = "http://127.0.0.1:4173/tests/fixtures/bk/";
+
+  // Opens a toy (and a file), waits for its sheets, and plays it with the
+  // clock stepped by hand.
+  async function open(page, id, url = null, options = {}) {
+    await ready(page);
+    await page.evaluate(
+      async ([id, url, options]) => {
+        const app = window.__splashery.app;
+        await app.chooseToy(id);
+        for (const [k, v] of Object.entries(options)) await app.setToyOption(k, v);
+        if (url) await app.openMedia(url);
+      },
+      [id, url, options],
+    );
+    await waitSheets(page);
+    await page.evaluate(() => (window.__splashery.player.frozen = true));
+  }
+  async function step(page, seconds) {
+    for (let t = 0; t < seconds; t += 0.1) {
+      await page.evaluate(() => {
+        const pl = window.__splashery.player;
+        pl.time += 0.1;
+        pl.stage.requestRender();
+      });
+      await page.waitForTimeout(40);
+    }
+    await waitSheets(page);
+  }
+  const tap = (page) => page.evaluate(() => window.__splashery.player.act());
+  // Taps, then steps the clock until the turn has landed (a turn waits for
+  // its pages, which are built in real time).
+  async function turn(page) {
+    const before = await page.evaluate(() => window.__splashery.player.pictures.page);
+    await tap(page);
+    for (let i = 0; i < 60; i++) {
+      await step(page, 0.3);
+      const moved = await page.evaluate((b) => window.__splashery.player.pictures.page !== b, before); // prettier-ignore
+      if (moved && i > 4) break;
+    }
+    await step(page, 1.2);
+  }
+
+  test("a 300-page PDF is as light as a 3-page one: pages not reached are never built", async ({
+    page,
+  }) => {
+    await open(page, "your-book", `${BK}pages3.pdf`);
+    await turn(page);
+    const small = await page.evaluate(() => {
+      const p = window.__splashery.player.pictures;
+      return { splats: p.splats(), slots: p.sheets.filter((s) => s.slot).length };
+    });
+    await page.evaluate(() => (window.__splashery.player.frozen = false));
+    await page.evaluate((u) => window.__splashery.app.openMedia(u), `${BK}pages300.pdf`);
+    await waitSheets(page);
+    await page.evaluate(() => (window.__splashery.player.frozen = true));
+    for (let i = 0; i < 3; i++) await turn(page);
+    await page.evaluate(() => window.__splashery.player.pictures.go(249));
+    await step(page, 1);
+    const big = await page.evaluate(() => {
+      const p = window.__splashery.player.pictures;
+      return {
+        splats: p.splats(),
+        slots: p.sheets.filter((s) => s.slot).length,
+        built: [...new Set(p.stats.rendered.map((r) => r.page))].sort((a, b) => a - b),
+        page: p.page,
+        count: p.info().count,
+      };
+    });
+    expect(big.count).toBe(300);
+    expect(big.page).toBe(249);
+    // The splats on show are about one spread's either way.
+    expect(big.splats).toBeLessThan(small.splats * 2);
+    expect(big.slots).toBeLessThanOrEqual(9);
+    // Built: the first spreads, the pages the next turn needs, and around
+    // page 250; nothing else of the 300.
+    expect(big.built.filter((p) => p > 12 && p < 240)).toEqual([]);
+    expect(big.built.length).toBeLessThan(26);
+  });
+
+  test("the page shape follows the PDF: wide slides make a wide book", async ({ page }) => {
+    await open(page, "your-book", `${BK}slides.pdf`);
+    const r = await page.evaluate(() => {
+      const pl = window.__splashery.player;
+      const f = pl.pictures.sheets.find((s) => s.def.id === "f0").def;
+      return { aspect: pl.proc.ctx.kit.media.aspect, w: f.width, h: f.height };
+    });
+    expect(r.aspect).toBeCloseTo(16 / 9, 2);
+    expect(r.w / r.h).toBeCloseTo(16 / 9, 2);
+  });
+
+  test("a turned page and the open cover are sorted where they lie, on the left", async ({
+    page,
+  }) => {
+    await open(page, "your-book", `${BK}booklet.pdf`);
+    for (let i = 0; i < 2; i++) await turn(page);
+    const r = await page.evaluate(() => {
+      const pl = window.__splashery.player;
+      const p = pl.pictures;
+      // The left page's sheet: its sort centers now lie left of the spine.
+      const left = p.sheets.filter((s) => s.slot?.entity.enabled && s.def.normal[2] < 0);
+      const xs = left.map((s) => {
+        const c = s.slot.container.centers;
+        let sum = 0;
+        for (let i = 0; i < s.shown.data.count; i++) sum += c[i * 3];
+        return sum / s.shown.data.count;
+      });
+      // The kit's cover too.
+      const { buf, parts } = pl.proc.ctx;
+      const cover = parts.findIndex((q) => q.name === "cover");
+      const cc = pl.proc.container.centers;
+      let sx = 0;
+      let n = 0;
+      for (let i = 0; i < buf.count; i++)
+        if ((Math.round(buf.anim[i * 4]) & 15) === cover) {
+          sx += cc[i * 3];
+          n++;
+        }
+      return { page: p.page, xs, cover: sx / n };
+    });
+    expect(r.page).toBe(3);
+    expect(r.xs.length).toBe(1);
+    expect(r.xs[0]).toBeLessThan(-0.1);
+    expect(r.cover).toBeLessThan(-0.1);
+  });
+
+  test("the album shows the sample photos mounted with captions, and turns", async ({ page }) => {
+    await open(page, "photo-album");
+    await turn(page);
+    const r = await page.evaluate(() => {
+      const p = window.__splashery.player.pictures;
+      return { kind: p.info().kind, count: p.info().count, shown: p.sheets.filter((s) => s.slot?.entity.enabled).map((s) => s.shown.page) }; // prettier-ignore
+    });
+    expect(r.kind).toBe("image");
+    expect(r.count).toBe(6);
+    expect(r.shown.sort()).toEqual([0, 1]);
+  });
+
+  test("the frame swings and settles; the digital frame steps on", async ({ page }) => {
+    // In real time (the swing keeps frames coming by itself), measured on
+    // the player's own clock: rendering here is slow.
+    await open(page, "picture-frame");
+    await page.evaluate(() => {
+      const pl = window.__splashery.player;
+      pl.frozen = false;
+    });
+    await tap(page);
+    const t0 = await page.evaluate(() => window.__splashery.player.time);
+    let mid = 0;
+    for (let n = 0; n < 200; n++) {
+      const [t, a] = await page.evaluate(() => {
+        const pl = window.__splashery.player;
+        return [pl.time, pl.motion.out.parts.frame.angle];
+      });
+      mid = Math.max(mid, Math.abs(a));
+      if (t - t0 > 1.2) break;
+      await page.waitForTimeout(100);
+    }
+    expect(mid).toBeGreaterThan(0.02);
+    await page.waitForFunction((t0) => window.__splashery.player.time > t0 + 3.3, t0, { timeout: 120_000 }); // prettier-ignore
+    expect(await page.evaluate(() => window.__splashery.player.motion.out.parts.frame.angle)).toBe(0); // prettier-ignore
+    await page.evaluate(async () => {
+      window.__splashery.player.frozen = false;
+      await window.__splashery.app.setToyOption("frame", "digital");
+    });
+    await waitSheets(page);
+    await page.evaluate(() => (window.__splashery.player.frozen = true));
+    expect(await page.evaluate(() => window.__splashery.player.pictures.info().count)).toBe(7);
+    await step(page, 6.5);
+    expect(await page.evaluate(() => window.__splashery.player.pictures.page)).toBe(1);
+  });
+
+  for (const [w, h] of [
+    [390, 844],
+    [1440, 900],
+  ])
+    test(`screenshots of the three toys at ${w}x${h}`, async ({ page }) => {
+      await page.setViewportSize({ width: w, height: h });
+      for (const [id, name, taps] of [
+        ["your-book", "book", 2],
+        ["photo-album", "album", 2],
+        ["picture-frame", "frame", 0],
+      ]) {
+        await open(page, id, id === "your-book" ? `${BK}booklet.pdf` : null);
+        for (let i = 0; i < taps; i++) await turn(page);
+        await page.waitForTimeout(500);
+        await page.screenshot({ path: `tests/screenshots/bk-${name}-${w}x${h}.png` });
+      }
+    });
+});
