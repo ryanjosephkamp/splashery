@@ -103,38 +103,72 @@ HOW THIS LANE RUNS
   screenshots, merging), docs/handoff/Help.md (the style guide), docs/TOY-PLAN.md and
   docs/WORKSTREAMS.md.
 - Your handoff file: create it. Start it with this brief, word for word, under "## Brief", then keep
-  "## State" (which shelves are done), "## Notes", "## Known issues" and "## For the Operator"
-  current, like the other lanes' files.
-- Never edit tests/taps.spec.mjs.
-- Engine changes: none. If the help UI needs a change, say so in your final message; don't make it.
-- Sounds: this lane changes no toy's sound.
-- Before every push:
-  `SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium npx playwright test tests/help.spec.mjs` (it checks
-  every entry's shape and lengths), `npx prettier --check .`, and
-  `node tools/us-english.mjs --diff`. Before you say READY, and after merging main: the full suite
-  (`SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium npx playwright test`), then put back the standard
-  screenshots (`node tools/upkeep.mjs --restore-shots`) and any other lane's screenshots your branch
-  didn't change (`git checkout -- tests/screenshots/`). Add two screenshots of the About tab for one
-  of your toys with a long About text: `<prefix>-about-390x844.png` and
-  `<prefix>-about-1440x900.png`.
-- PR: one draft PR against main with the five sections (Summary, Verification, Deviations, Known
-  issues, What was cut). In Summary, list your shelves with a count of how-to lines and About texts
-  each. Never merge anything. When main moves, merge it into your branch (never rebase a pushed
-  branch).
-- Finish every working turn with a short final message that starts with "READY:" (PR link, counts,
-  test results, anything for the Operator), "WORKING:" (what's left), or "BLOCKED:" (exactly what
-  you need).
+  "## State
 
-Start now: read the docs and the style guide, create your handoff file, open your draft PR early,
-then write shelf by shelf, pushing each shelf. When every toy on your shelves has both texts and the
-checks pass, finish with "READY:".
+September 28, 2026: all eleven shelves are written and pushed, one commit per shelf, on draft PR
+[#59](https://github.com/ryanjosephkamp/splashery/pull/59). Every one of the 154 toys has a how-to
+line and an About text.
 
-## State
+| Shelf            | Toys | New how-to lines | Kept how-to lines | About texts (new) |
+| ---------------- | ---: | ---------------: | ----------------: | ----------------: |
+| Balls            |   25 |               25 |                 0 |                25 |
+| Food             |   27 |               18 |                 9 |                27 |
+| Toys             |   16 |               11 |                 5 |                13 |
+| Open me          |   11 |                2 |                 9 |                11 |
+| Medieval         |    9 |                5 |                 4 |                 9 |
+| Animals          |   13 |                9 |                 4 |                12 |
+| AI and computing |   12 |               12 |                 0 |                12 |
+| Holidays         |    8 |                3 |                 5 |                 8 |
+| Music            |    3 |                2 |                 1 |                 2 |
+| Vehicles         |   14 |               12 |                 2 |                14 |
+| Landmarks        |   16 |               12 |                 4 |                15 |
+| **All**          |  154 |              111 |                43 |               148 |
 
-September 28, 2026: started. Shelves done: none yet.
+The six approved About texts (Newton's cradle, puzzle cube, chess set, octopus, xylophone, Eiffel
+Tower) and all 43 approved how-to lines are kept word for word (checked by script against main). No
+approved entry needed a change.
 
 ## Notes
 
+- How each line was checked: every recipe's `action`, `options` and `controls` (read by a script
+  from the packs), each toggle's `default` for the first tap, the toy's TOY-PLAN.md row
+  ("Improved:") and its lane's handoff (E-lanes, F, AI). Where the recipe left the tap unclear, I
+  rendered a filmstrip with `tools/effect-clip.mjs --strip=8` and read the drive code: about 45 toys
+  (popcorn, jelly, pizza, burger, egg, most of the Toys shelf, the Open me and Medieval toys, five
+  animals, seven vehicles). Sliders are named, never guessed (Puff, Warmth, Syrup, Steam, Lean,
+  Flame, Learning rate).
+- Two facts the code taught me: the alarm clock and Big Ben show the viewer's own local time, so the
+  texts say "the real time where you are".
+- The classic transformer's key is in its About text, as the brief asked, in words matching the
+  pixel icons on the boxes (an eye, a lidded eye, +, », a vector, a wave, a slash, bars, N×). To fit
+  the key within 140 words, its first paragraph also carries the tap (the Token flow diagram) and
+  the second the Encoder–decoder diagram and the key.
+- Toy tab labels in British spelling are only quoted where a control is named; none of my texts
+  quote one ("Pick its color in the Toy tab" otherwise).
+- Medieval toys stay about craft and legend: the trebuchet's text is about carpenters and pumpkin
+  contests, the crossbow and bow texts about target sport and how the bow stores energy.
+- Landmarks: each says where it is and when it was built. Where a toy's scene is not history, the
+  text says so plainly (the Colosseum's chariot race: the real races were at the Circus Maximus; the
+  pyramids' flying saucer is "a playful visitor").
+- About texts run 77 to 139 words; how-to lines 21 to 88 characters.
+
 ## Known issues
 
+- `tests/help.spec.mjs` ("About this toy … shows the toy's text, or the default") fails at both
+  sizes on this branch: it uses the basketball as its example of a toy with no entry, and the
+  basketball now has one. Every shelf toy will have an entry once both text lanes merge, so the test
+  needs another example of the default. I may not edit that file (see For the Operator).
+- The About texts are checked against the toys as they are on main today; a later change to a toy's
+  tap needs its text updated too.
+
 ## For the Operator
+
+- **Needs a change in `tests/help.spec.mjs`** (Lane Help's file; I may not edit it): the default
+  About check at line 317 picks the basketball. Suggested patch: check the default with a toy you
+  made in the Make tab (`toyHelp({ id: null, label: "Your toy", kind: "procedural" })` is already
+  covered in the list test), or pick a toy that still has no entry at merge time, or drop the UI
+  half of that check and keep the unit check. Until then, those two tests fail on this branch (and
+  will on HelpTextA's once the basketball has text on main).
+- `tools/effect-clip.mjs` renders an empty strip for the butterfly (only a few specks); the toy
+  itself renders and flutters fine in the app (checked at 1440×900). Not this lane's to fix.
+- No engine or help UI change is needed for these texts.
