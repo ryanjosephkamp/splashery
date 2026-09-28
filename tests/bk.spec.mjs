@@ -5,6 +5,7 @@
 
 import { test, expect } from "@playwright/test";
 import { posePass } from "../src/pose.js";
+import { buildSheet } from "../src/picture-splats.js";
 import { KINDS } from "../src/effects.js";
 import { normalizeMedia, normalizeScene } from "../src/state.js";
 
@@ -31,6 +32,32 @@ async function waitSheets(page) {
 }
 
 test.describe("engine for books (no browser)", () => {
+  test("ink: a block of one flat color (a chart's bar) keeps its color", () => {
+    // White paper with a solid blue bar: every splat's color is a number,
+    // and the bar gets detail splats in its own blue.
+    const w = 96;
+    const h = 64;
+    const px = new Uint8ClampedArray(w * h * 4);
+    for (let y = 0; y < h; y++)
+      for (let x = 0; x < w; x++) {
+        const bar = x >= 20 && x < 76 && y >= 16 && y < 48;
+        px.set(bar ? [31, 95, 168, 255] : [252, 252, 252, 255], (y * w + x) * 4);
+      }
+    const out = buildSheet({ pixels: px, w, h, method: "ink", origin: [0, 0, 0], right: [1 / w, 0, 0], down: [0, -1 / w, 0], normal: [0, 0, 1] }); // prettier-ignore
+    const f16 = (v) => {
+      const e = (v >> 10) & 31;
+      const m = v & 1023;
+      return (v & 0x8000 ? -1 : 1) * (e ? 2 ** (e - 15) * (1 + m / 1024) : 2 ** -14 * (m / 1024));
+    };
+    let blue = 0;
+    for (let i = 0; i < out.count; i++) {
+      const c = [0, 1, 2].map((k) => f16(out.color[i * 4 + k]));
+      expect(c.every((v) => Number.isFinite(v) && v >= 0 && v <= 1)).toBe(true);
+      if (Math.abs(c[0] - 31 / 255) < 0.01 && Math.abs(c[2] - 168 / 255) < 0.01) blue++;
+    }
+    expect(blue).toBeGreaterThan(56 * 32 * 0.9);
+  });
+
   test("pose: a leaf turned over and a part turned half a turn land where the shader puts them", () => {
     // Spine along -Y through the origin, pages toward +X: a leaf turns toward +Z.
     const leaf = new Float32Array(32);

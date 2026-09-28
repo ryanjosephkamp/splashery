@@ -146,13 +146,16 @@ function paperBlocks(px, w, h) {
       for (let y = y0; y < y1; y++)
         for (let x = x0; x < x1; x++) {
           const o = (y * w + x) * 4;
-          if (px[o] * 0.3 + px[o + 1] * 0.59 + px[o + 2] * 0.11 < med) continue;
+          // (Compared as stored: in a block of one flat color, the value
+          // rounded to 32 bits can sit above every pixel's own, and none
+          // would count; lane Books.)
+          if (Math.fround(px[o] * 0.3 + px[o + 1] * 0.59 + px[o + 2] * 0.11) < med) continue;
           r += px[o];
           g += px[o + 1];
           b += px[o + 2];
           k++;
         }
-      const c = [r / k / 255, g / k / 255, b / k / 255];
+      const c = k ? [r / k / 255, g / k / 255, b / k / 255] : mode.slice();
       // Much darker than the page's paper: not paper (a figure, a photo).
       const dark = mode[0] + mode[1] + mode[2] - (c[0] + c[1] + c[2]) > 0.45;
       out.set(dark ? mode : c, (by * bw + bx) * 3);
