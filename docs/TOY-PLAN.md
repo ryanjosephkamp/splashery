@@ -10,8 +10,8 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 291 toys. 291 have a tap action today; the other 0 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 291.
+- 303 toys. 303 have a tap action today; the other 0 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 303.
 - **more** (has an effect; make it clearer or more dramatic): 0.
 - **new** (needs its own effect): 0.
 - Visual fixes: 0 open, 28 done. Touch or drag interaction asked for: 4.
@@ -50,7 +50,9 @@ Proposals below are suggestions; the owner may change them.
   Diya, Acoustic guitar, Snare drum, Xylophone, Hot-air balloon, Bus, Jet airliner, Sailboat,
   Submarine, Bicycle, Eiffel Tower, Washington Monument, Pyramids of Giza, Twisting supertall,
   Statue of Liberty, White House, Leaning Tower of Pisa, Colosseum, Parthenon, Stonehenge, Big Ben,
-  Taj Mahal, Castle, Pagoda, Windmill.
+  Taj Mahal, Castle, Pagoda, Windmill, Perceptron, Multilayer perceptron, Neural network,
+  Convolutional network, Recurrent network, Transformer, Looped transformer, Diffusion model,
+  Gradient descent, Word vectors, Sorting machine, Half adder.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -1918,3 +1920,132 @@ Proposals below are suggestions; the owner may change them.
   - Improved: C2: the sails turn faster at rest, and a gust spins them up hard for three extra turns
     (4 s).
   - Sound: Creaking sails and wind.
+
+## Computing (12)
+
+- **Perceptron** (`perceptron`). Now: tap: Try an example. Plan: keep.
+  - Owner: Approved on the Toy Ideas page (lane AI).
+  - Effect: Three input lights send pulses along wires whose thickness shows their weights into one
+    node; the sum fills a gauge, and if it passes the threshold the output lamp snaps on. On a wrong
+    answer the wires thicken or thin, so you watch it learn (4 s).
+  - Improved: AI: inputs X1 and X3 light and send pulses along wires as thick as their weights; the
+    gauge fills to under the threshold and the lamp flashes red. The two live wires thicken (it
+    learns), the pulses go again, the gauge passes the threshold and the lamp snaps on gold (4 s).
+    Owner's review: a 3D version too, so a View option adds a 3D model that floats in space (no
+    stand, after the third review): glass bulbs, wires, a glass gauge and an output bulb.
+  - Sound: A blip for each input, a click as the lamp decides, a rising tone when it learns.
+- **Multilayer perceptron** (`multilayer-perceptron`). Now: tap: Try all four inputs. Plan: keep.
+  - Owner: Owner's review of the perceptron (September 27, 2026): add 2D poster and 3D multilayer
+    perceptrons (MLPs).
+  - Effect: A two-layer perceptron solving XOR, which a single perceptron cannot: each input pair
+    lights in turn, pulses run through an OR and a NAND neuron to an AND neuron, and the truth table
+    fills in.
+  - Improved: AI: XOR, one input pair at a time (00, 01, 10, 11): the inputs light, pulses run along
+    blue (adding) and red (subtracting) wires to the OR and NAND neurons, the ones that fire send
+    pulses to the AND neuron, the output lamp lights for 01 and 10 only, and each answer is written
+    into the truth table (5 s). A View option picks the poster or a 3D model, which floats in space
+    (no stand).
+  - Sound: A blip for each input, a ding when the answer is 1, a knock when it is 0.
+- **Neural network** (`neural-network`). Now: tap: Forward and back. Plan: keep.
+  - Owner: Approved on the Toy Ideas page (lane AI).
+  - Effect: A forward pass: a wave of light runs left to right through three layers, each neuron
+    glowing as bright as its activation; then a red backprop pulse runs right to left and the
+    weights shift a little (4.5 s).
+  - Improved: AI: a 3-4-2 network with a real forward pass: yellow pulses run layer by layer and
+    each neuron glows as bright as it fires; red pulses run back and the wires thicken or thin a
+    little, easing back at the end (4.5 s). Owner's review: a View option adds a 3D model built like
+    a molecule (third review): solid neuron balls in rings, weights as bonds, floating with no
+    stand; a gold shell grows round each neuron as it fires. Its size is set by options: 2 to 4
+    inputs, 1 to 3 hidden layers of 2 to 5 neurons, 1 to 3 outputs (at most 14 neurons); networks
+    with more than 24 wires send waves of light along the wires.
+  - Sound: A rising arpeggio going forward, a falling one coming back.
+- **Convolutional network** (`cnn`). Now: tap: Read the digit. Plan: keep.
+  - Owner: Approved on the Toy Ideas page (lane AI).
+  - Effect: A glowing 3×3 filter slides across a pixel picture of a handwritten 7, stamping a
+    feature map tile by tile; pooling shrinks the map, and a bar chart of the digits 0 to 9 rises
+    with 7 on top (5 s).
+  - Improved: AI: a gold 3×3 filter slides over a handwritten 7, stamping a 5×5 feature map tile by
+    tile (a real convolution); the tiles slide together into a 3×3 pooled map and the digit scores
+    rise, 7 on top (5 s). Owner's review: a View option adds a 3D model (slabs of cubes, the
+    filter's receptive field as lines to the tile it stamps). A third View, "3D, draw a digit": a
+    small CNN trained on the UCI handwritten digits (CC BY 4.0) reads a digit you draw on a pad in
+    the Toy tab; every cell of every layer lights as bright as it fires, the layers light in order
+    and the scores rise.
+  - Sound: A tick at each step of the filter, a chime at the answer.
+- **Recurrent network** (`rnn`). Now: tap: Read a sentence. Plan: keep.
+  - Owner: Approved on the Toy Ideas page (lane AI).
+  - Effect: Word blocks feed in one at a time; the hidden state, a glowing orb, loops back through
+    the cell after each one and changes color as it carries what came before. An LSTM style (an
+    option) shows its three gates opening and closing like shutters (4.5 s).
+  - Improved: AI: THE, CAT and SAT rise into the cell one at a time; the orb (the hidden state)
+    takes on each word's color mixed with what it carried and runs round the loop. The LSTM style
+    adds forget, input and output gates whose slats turn like shutters (4.5 s). Owner's review: a
+    View option adds a 3D model (a cell with lit edges, the loop arching over it on a slant).
+  - Sound: A pulse for each word, the loop humming higher as the memory builds.
+- **Transformer** (`transformer`). Now: tap: Predict the next word. Plan: keep.
+  - Owner: Approved on the Toy Ideas page (lane AI).
+  - Effect: A row of token tiles; arcs of light jump between them, thicker where attention is
+    stronger and a different color for each head; the tiles rise through a feed-forward block and up
+    the stack of layers, and a new token tile appears at the end of the row (5 s).
+  - Improved: AI: two heads of attention arcs (cyan and magenta, thicker where stronger) draw
+    between THE CAT SAT ON at each of two layers; the tiles rise through the feed-forward blocks,
+    and MAT drops into the end of the row (5 s). A View option adds a 3D model (word blocks,
+    box-outline blocks, arcs upright and leaning back). A Diagram option adds the classic
+    encoder-decoder layout (from the 2017 paper's figure, with generic labels): a packet rises up
+    the encoder, each box lighting as it passes, crosses into the decoder's middle attention, the
+    decoder's packet meets it and goes on through the linear layer and softmax, and the next word
+    comes out of the top; both diagrams have a 3D model. After the third review the classic diagram
+    is spread out, each box carries an icon instead of its name, and the key is the toy's note in
+    the panel (off the toy). Round 4: the 3D models' labels are about twice as big and bright.
+  - Sound: A shimmering chord for each layer, a pop for the new token.
+- **Looped transformer** (`looped-transformer`). Now: tap: Loop until it's sure. Plan: keep.
+  - Owner: Approved on the Toy Ideas page (lane AI).
+  - Effect: One transformer block with a track looping through it: the row of tokens rides round the
+    loop several times, going from blurry to sharp on each pass, until the answer settles (5 s).
+  - Improved: AI: five tiles ride three laps through one block; each pass sharpens every mark one
+    step (noise, a coarse mosaic, nearly right, exact) until 3 + 4 = 7 settles (5 s). A View option
+    adds a 3D model (the loop leans back through a box-outline block).
+  - Sound: A tone that climbs a step on each loop, then resolves.
+- **Diffusion model** (`diffusion-model`). Now: tap: Denoise. Plan: keep.
+  - Owner: Approved on the Toy Ideas page (lane AI).
+  - Effect: A cloud of random specks clears step by step into a crisp small toy (a rubber duck)
+    while a step counter runs down from 50 to 0; then the noise washes back over it (5 s).
+  - Improved: AI: a cloud of specks clears in ten steps into a rubber duck while the STEP counter
+    runs from 50 to 0; then the noise washes back (5 s). Owner's review: a View option adds a 3D
+    model (a round cloud clears into a duck over a stand).
+  - Sound: A white-noise hiss that settles into a clean chord.
+- **Gradient descent** (`gradient-descent`). Now: tap: Roll downhill. Plan: keep.
+  - Owner: Approved on the Toy Ideas page (lane AI).
+  - Effect: A ball rolls down a hilly loss landscape, overshoots and settles into a valley. A
+    "Learning rate" option makes it creep, or bounce right out of the valley when it's too high (4.5
+    s).
+  - Improved: AI: the ball takes 21 hops of gradient descent with momentum, leaving a trail of dots;
+    just right, it overshoots and settles in the valley; too low, it creeps; too high, it bounces
+    wall to wall (4.5 s).
+  - Sound: A rolling tone that falls in pitch as the loss drops.
+- **Word vectors** (`word-vectors`). Now: tap: A − B + C. Plan: keep.
+  - Owner: Approved on the Toy Ideas page (lane AI).
+  - Effect: Word points float in 3D, each with a small sign; arrows add up, king minus man plus
+    woman, and land right next to queen, which lights up (4 s).
+  - Improved: AI: an arrow runs to KING, another from MAN to WOMAN, and the same step runs on from
+    KING, landing next to QUEEN, which lights up (4 s). Owner's review: real GloVe word vectors;
+    type your own A - B + C and the nearest common word lights up.
+  - Sound: Three chimes, then a bright ding at the answer.
+- **Sorting machine** (`sorting-machine`). Now: tap: Sort the bars. Plan: keep.
+  - Owner: Approved on the Toy Ideas page (lane AI).
+  - Effect: A row of colored bars of different heights sorts itself, the bars swapping as solid
+    pieces, by bubble sort, quicksort or merge sort (an option), with a swap counter; then it
+    shuffles again (5 s).
+  - Improved: AI: eight bars sort by bubble sort, quicksort or merge sort, each a solid bar gliding
+    past the others, with a SWAPS (or MOVES) counter; then they shuffle back (5 s). Owner's review:
+    the algorithm's name is on the toy, and eight algorithms (insertion, selection, cocktail shaker,
+    Shell and heap sort added).
+  - Sound: Each bar plays its height as a note, so you hear the sort rise into a scale.
+- **Half adder** (`half-adder`). Now: tap: Add 1 + 1. Plan: keep.
+  - Owner: Approved on the Toy Ideas page (lane AI).
+  - Effect: Two input switches flip; light flows along the wires through an XOR gate and an AND
+    gate, whose shapes glow as they fire, and the sum and carry lamps show 1 + 1 = 10 in binary (3.5
+    s).
+  - Improved: AI: both switches flip to 1, light fills the wires into the XOR and AND gates; the XOR
+    flashes and gives 0, the AND lights the carry lamp, and 1+1=10 shows (3.5 s).
+  - Sound: Switch clicks, and a buzz through each gate.

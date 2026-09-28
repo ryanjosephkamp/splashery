@@ -1237,6 +1237,108 @@ export const TOY_SOUNDS = {
     { voice: "scrape", f: 260, rate: 3, decay: 2.4 },
     { voice: "wind", f: 550, rate: 0.6, decay: 1.2, vol: 0.7 },
   ],
+
+  // ---- AI and computing -----------------------------------------------------------
+  // Blips as the two live inputs fire (0.3 s, then again at 2.1 s), a click as
+  // the lamp decides wrong (1.4 s), a rising tone as it learns, a click as the
+  // lamp snaps on (3.15 s).
+  perceptron: [
+    { voice: "blip", at: 0.3, f: 660, to: 1.3 },
+    { voice: "blip", at: 0.36, f: 880, to: 1.3 },
+    { voice: "click", at: 1.4, f: 900 },
+    { voice: "tone", at: 1.55, f: 330, to: 2, decay: 1.2, vol: 0.8 },
+    { voice: "blip", at: 2.1, f: 660, to: 1.3 },
+    { voice: "blip", at: 2.16, f: 880, to: 1.3 },
+    { voice: "click", at: 3.15, f: 2200 },
+    { voice: "ding", at: 3.17, f: "E6", decay: 0.6, vol: 0.5 },
+  ],
+  // XOR, one input pair at a time (every 1.15 s from 0.15 s): a blip for
+  // each lit input, a tick as the hidden layer fires, and a ding only when
+  // the answer is 1 (01 and 10), a low knock when it is 0.
+  "multilayer-perceptron": [
+    { voice: "wood", at: 1.08, f: 300, decay: 0.8 },
+    { voice: "blip", at: 1.33, f: 700, to: 1.3 },
+    { voice: "ding", at: 2.14, f: "E6", decay: 0.5, vol: 0.6 },
+    { voice: "blip", at: 2.48, f: 700, to: 1.3 },
+    { voice: "ding", at: 3.29, f: "G6", decay: 0.5, vol: 0.6 },
+    { voice: "blip", at: 3.63, f: 700, to: 1.3 },
+    { voice: "blip", at: 3.67, f: 880, to: 1.3 },
+    { voice: "wood", at: 4.38, f: 300, decay: 0.8 },
+  ],
+  // A rising arpeggio as each layer lights (0.05, 1.1, 2.1 s), a falling one
+  // as the red pulses run back (2.5 to 3.55 s).
+  "neural-network": [
+    { voice: "tine", at: 0.05, notes: "C5 E5", step: 0.45, decay: 0.7 },
+    { voice: "tine", at: 1.1, notes: "G5 B5", step: 0.45, decay: 0.7 },
+    { voice: "tine", at: 2.1, f: "D6", decay: 0.9 },
+    { voice: "glass", at: 2.5, notes: "D6 B5 G5 E5", step: 0.35, decay: 0.6, vol: 0.7 },
+  ],
+  // A tick at each of the filter's 25 steps, a chime as the answer rises.
+  cnn: [
+    { voice: "click", at: 0.28, f: 2600, notes: "C7 C7 C7 C7 C7 C7 C7 C7 C7 C7 C7 C7 C7 C7 C7 C7 C7 C7 C7 C7 C7 C7 C7 C7 C7", step: 0.084 }, // prettier-ignore
+    { voice: "glass", at: 3.5, notes: "C6 E6 G6", step: 0.09, decay: 1.2 },
+  ],
+  // A pulse as each word goes in (0.55, 1.75, 2.95 s), and the loop's hum
+  // climbing as the memory builds.
+  rnn: [
+    { voice: "blip", at: 0.55, f: 520, to: 0.7 },
+    { voice: "hum", at: 0.62, f: 110, to: 1.06, decay: 1.1, vol: 0.6 },
+    { voice: "blip", at: 1.75, f: 620, to: 0.7 },
+    { voice: "hum", at: 1.82, f: 139, to: 1.06, decay: 1.1, vol: 0.6 },
+    { voice: "blip", at: 2.95, f: 740, to: 0.7 },
+    { voice: "hum", at: 3.02, f: 175, to: 1.06, decay: 1.1, vol: 0.6 },
+  ],
+  // A shimmering chord for each layer's attention (0.05, 1.6 s), a pop for
+  // the next word (3.1 s) and a knock as it lands.
+  transformer: [
+    { voice: "shimmer", at: 0.05, f: 784, decay: 0.9 },
+    { voice: "shimmer", at: 1.6, f: 988, decay: 0.9 },
+    { voice: "pop", at: 3.1, f: 900 },
+    { voice: "wood", at: 3.95, f: 600, decay: 0.8 },
+  ],
+  // A tone a step higher as the tiles pass through the block on each lap,
+  // then the chord resolves as the answer settles.
+  "looped-transformer": [
+    { voice: "tone", at: 0.75, f: "C5", decay: 1.4, vol: 0.7 },
+    { voice: "tone", at: 2.0, f: "E5", decay: 1.4, vol: 0.7 },
+    { voice: "tone", at: 3.2, f: "G5", decay: 1.4, vol: 0.7 },
+    { voice: "tine", at: 3.85, notes: "C5+E5+G5+C6", strum: 0.04, decay: 0.55 },
+  ],
+  // A white-noise hiss that fades as the specks clear, and a clean chord at
+  // step 0.
+  "diffusion-model": [
+    { voice: "hiss", f: 3000, decay: 5, vol: 1.2 },
+    { voice: "pad", at: 2.9, notes: "C4+E4+G4+C5", decay: 0.9 },
+  ],
+  // A rolling tone that falls as the loss drops, and a whoosh back to the
+  // start.
+  "gradient-descent": [
+    { voice: "tone", at: 0.3, f: 720, to: 0.4, decay: 8.5, vol: 0.55 },
+    { voice: "whoosh", at: 3.95, f: 500, decay: 0.8, vol: 0.6 },
+  ],
+  // Three chimes as the arrows run (0.15, 0.85, 1.55 s), a bright ding as
+  // QUEEN lights.
+  "word-vectors": [
+    { voice: "chimes", at: 0.15, f: 1047, n: 1, decay: 0.8 },
+    { voice: "chimes", at: 0.85, f: 1175, n: 1, decay: 0.8 },
+    { voice: "chimes", at: 1.55, f: 1319, n: 1, decay: 0.8 },
+    { voice: "ding", at: 2.25, f: "C7", decay: 1.2 },
+  ],
+  // Each swap plays the height of the bar moving right (bubble sort, a swap
+  // every 0.225 s), then the sorted bars play their rising scale.
+  "sorting-machine": [
+    { voice: "marimba", at: 0.44, notes: "A4 C5 C5 C5 C5 C5 A4 B4 B4 B4 E4 A4 A4 A4 F4 E4", step: 0.225, decay: 0.6 }, // prettier-ignore
+    { voice: "marimba", at: 3.95, notes: "C4 D4 E4 F4 G4 A4 B4 C5", step: 0.06, decay: 0.8 },
+  ],
+  // Two switch clicks, a buzz as the gates fire, a ding as the carry lamp
+  // lights, and the switches flipping back.
+  "half-adder": [
+    { voice: "switch", at: 0.1, f: 2800 },
+    { voice: "switch", at: 0.35, f: 2500 },
+    { voice: "buzz", at: 1.2, f: 180, decay: 0.5, vol: 0.6 },
+    { voice: "ding", at: 2.0, f: "G6", decay: 0.8 },
+    { voice: "switch", at: 2.88, f: 2200, vol: 0.7 },
+  ],
 };
 
 // The toy's sound, or null when it has none (visitors' own splats).
