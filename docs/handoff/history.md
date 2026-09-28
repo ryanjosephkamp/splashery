@@ -16,6 +16,24 @@ had not settled 3 s after its tap) and "a scan rig moves a part of a captured to
 console warning, like the rare engine warning in HANDOFF.md). Keep `test-results/` if either comes
 back.
 
+### Pictures: pictures and pages, the engine (PR #64, merged 2026-09-28)
+
+- PDFs (PDF.js 6.3.289, the legacy build, with `isEvalSupported: false`), pictures, animated GIFs
+  (ImageDecoder, or omggif where a browser lacks it) and videos become flat splat sheets, built in a
+  worker: "ink" for documents (a smooth paper sheet and one splat per inked pixel), "pixels" for
+  photos, and "screen" for GIFs and video (splats recolored from the frame on the GPU each frame).
+  Files stay in the browser; a scene can carry a media web address (`toy.media`).
+- A book of any length streams through a few sheets: 200 pages kept about 19k splats on show and a
+  steady heap. Each page is built at about one picture pixel per screen pixel on a ladder of widths,
+  within per-tier budgets, and PlayCanvas's small-splat culling is lowered only while a picture toy
+  shows (with the defaults, a page built three times finer than the screen went blank).
+- The kit gained `k.sheet`, `k.spine` and the `leaf` kind (a page that turns and curls as a solid
+  sheet); the Toy tab gained Open a file and a web address; toys can be `labs: true`, hidden unless
+  `?labs=1`. The Picture lab is the test toy. The owner marked all eight clips good.
+- Lessons (in PACKS.md, 5b): a leaf's sheet belongs on part 0; a toy that shows three or four sheets
+  shows three or four times a page's splats; GIF clips for review need one palette per clip, or flat
+  colors split into blocks (it was the clip, not the toy).
+
 ### HelpTextA and HelpTextB: help text for every toy (PRs #60 and #59, merged 2026-09-28)
 
 - Two lanes, split by shelf, wrote a how-to line and an About text for every toy in
