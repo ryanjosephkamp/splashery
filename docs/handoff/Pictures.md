@@ -207,34 +207,15 @@ September 28, 2026: everything in the brief is built and pushed on `claude/lane-
   speaker button, the labs switch, and the Picture lab (labs only) with its samples, help, sound,
   plan entry, thumbnail and credits. Close up, a drag moves across a page.
 - Tests: `tests/pic.spec.mjs` (13 tests) and the smoke, unit, help, kit and taps specs pass.
-- Clips on the Effect review page: `pic-pdf-phone`, `pic-pages`, `pic-photo`, `pic-gif`,
-  `pic-video`, `pic-desktop`.
-
-## Design" section in your handoff and push it.
-
-Cover the page architecture you chose and why, the near and far detail, the splat budgets per tier,
-the minPixelSize approach, the file and web-address flow, and the labs switch, with your measured
-numbers. Keep working; the Operator reads it at his check-in and messages you if he disagrees.
-
-- Clips for the owner on the Effect review page (https://claude.ai/artifact/NCsg9V5SzFY3Mnwuwgq7pi;
-  lane record "Pictures", which the Operator has made), as OPERATING.md's "Steps for a lane" says.
-  Cards:
-  - `pic-pdf-phone`: the sample PDF whole and zoomed at 390×844;
-  - `pic-pages`: paging through a long PDF;
-  - `pic-photo`: a photo;
-  - `pic-gif`: a GIF;
-  - `pic-video`: a video playing;
-  - `pic-desktop`: a desktop view at 1440×900.
-
-  tools/effect-clip.mjs may not open files; write your own clip script and keep it in tools/ if it's
-  reusable. The owner then tries the Picture lab on his phone with ?labs=1 after the merge.
-
-## State
-
-September 28, 2026: the prototype works end to end in the app (Picture lab with `?labs=1`): the
-sample PDF, a photo, a GIF, a WebM video, a 200-page PDF, a web address, and the messages for a
-password-protected PDF and a refused address. Next: the page bend (kind "leaf"), links and embeds,
-tests, the help and sound entries, the thumbnail, clips.
+- Clips on the Effect review page: `pic-pdf-phone`, `pic-pages`, `pic-photo`, `pic-desktop` (all
+  marked "Looks right" by the owner), and `pic-gif-r2` and `pic-video-r2` (after the Operator's
+  note: the blocks behind the video's first frame were the clip's per-frame GIF palettes, not the
+  toy; the clip tool now uses one palette per clip).
+- After the owner's marks: the Picture lab got a thin gray card behind its picture (smooth lattices
+  of flat discs: a white page has an edge on a white background, and `kit.spec` needs a kit toy to
+  build splats of its own), and its camera starts at 3.2 radii so a landscape picture fits a phone.
+  A sheet moving to a bigger container keeps the old one on show for six frames while the new splats
+  are sorted (no blank frame).
 
 ## Design
 

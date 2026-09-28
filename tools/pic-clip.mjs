@@ -191,9 +191,16 @@ async function record(scene) {
     }
   }
   await page.close();
+  // One palette for the whole clip (from every frame's pixels, sampled):
+  // a palette per frame spreads a flat background over several close
+  // colors that change from frame to frame, which shows as blocks.
+  const step = Math.max(1, Math.floor(frames.length / 12));
+  const sample = frames.filter((f, i) => i % step === 0).map((f) => f.img.data);
+  const all = new Uint8Array(sample.reduce((n, d) => n + d.length, 0));
+  sample.reduce((o, d) => (all.set(d, o), o + d.length), 0);
+  const palette = quantize(all, 256, { format: "rgb565" });
   const gif = GIFEncoder();
   for (const f of frames) {
-    const palette = quantize(f.img.data, 256, { format: "rgb565" });
     gif.writeFrame(applyPalette(f.img.data, palette, "rgb565"), f.img.w, f.img.h, { palette, delay: f.delay, repeat: 0 }); // prettier-ignore
   }
   gif.finish();
