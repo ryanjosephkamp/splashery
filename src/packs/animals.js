@@ -188,6 +188,32 @@ const JELLY = {
   blue: { bell: "#7fc4ff", rim: "#5d7dff", glow: "#e0fbff", arms: "#4f66e8", gonad: "#2f45c9" },
 };
 
+// A path through points, by length: at(s) (clamped to its ends), near(p)
+// (the length along it of the point nearest p) and its length (the snail).
+function polyPath(pts) {
+  const cum = [0];
+  for (let i = 1; i < pts.length; i++) cum.push(cum[i - 1] + vec.len(vec.sub(pts[i], pts[i - 1])));
+  const length = cum[cum.length - 1];
+  const at = (s) => {
+    const x = clamp(s, 0, length);
+    let i = 1;
+    while (i < cum.length - 1 && cum[i] < x) i++;
+    const f = (x - cum[i - 1]) / (cum[i] - cum[i - 1] || 1);
+    return vec.add(pts[i - 1], vec.mul(vec.sub(pts[i], pts[i - 1]), f));
+  };
+  const near = (p) => {
+    let best = 0;
+    let bd = Infinity;
+    for (let j = 0; j <= 400; j++) {
+      const s = (length * j) / 400;
+      const d = vec.len(vec.sub(at(s), p));
+      if (d < bd) [bd, best] = [d, s];
+    }
+    return best;
+  };
+  return { at, near, length };
+}
+
 export const RECIPES = {
   // ---- Jellyfish -------------------------------------------------------------------------
   jellyfish: {
@@ -1176,161 +1202,203 @@ export const RECIPES = {
   // ---- Snail ------------------------------------------------------------------------------
   snail: {
     alive: true,
-    controls: [{ key: "hide", label: "Hide", type: "toggle", default: 0, ease: 2.4 }],
+    controls: [{ key: "hide", label: "Hide", type: "toggle", default: 0, ease: 3.2 }],
     action: { key: "hide", label: "Hide in the shell" },
-    drive(t, c, out) {
-      // Slowly: the eye stalks pull in, the head glides back under the
-      // shell's mouth, the foot draws in and the shell settles onto it with
-      // a little rock. The shell stays where it was, in full view.
-      const h = c.hide;
-      const s = easeInOut(band(h, 0, 0.35));
-      const hb = easeInOut(band(h, 0.12, 0.85));
-      const b = easeInOut(band(h, 0.35, 1));
-      const head = [-0.85 * hb, -0.26 * hb, 0];
-      out.parts.stalks = { offset: [head[0], head[1] - 0.25 * s, 0], visible: 1 - s };
-      out.parts.head = { offset: head, visible: 1 - easeInOut(band(h, 0.72, 0.95)) };
-      // The foot draws together under the shell from both ends.
-      const pull = easeInOut(band(h, 0.2, 0.9));
-      out.parts.body = { offset: [-0.55 * pull, -0.01 * pull, 0] };
-      out.parts.tailEnd = { offset: [0.45 * pull, -0.01 * pull, 0] };
+    // Like a real snail: the eye stalks roll in first (each shortens from
+    // its tip down into the head), then the head and neck slide down and
+    // back, and the whole foot, front and tail, is drawn in through the
+    // shell's opening; the shell settles onto the ground with nothing soft
+    // showing. Coming out runs the other way: the foot slides out, then the
+    // head, then the stalks unroll. Every piece of the body (eight slices of
+    // the foot, the head, four pieces of neck, and each stalk in four pieces
+    // with its eye) is a solid token; each vanishes once it is inside the
+    // shell, and the tokens are sorted again as they move, so the shell
+    // hides them.
+    drive(t, c, out, info) {
+      const S = info?.data?.snail;
+      if (!S) return;
+      const h = clamp(c.hide, 0, 1);
+      const R = S.stalkLen * easeInOut(band(h, 0, 0.3));
+      const Dh = S.headRun * easeInOut(band(h, 0.14, 0.78));
+      const Df = S.frontRun * easeInOut(band(h, 0.3, 0.9));
+      const Dt = S.tailRun * easeInOut(band(h, 0.36, 0.9));
+      const tokens = [];
+      const hideFront = (x) => 1 - band(-x, 0.26, 0.36);
+      for (const sl of S.slices) {
+        const d = sl.front ? -Df : Dt;
+        const x = sl.x + d;
+        tokens[sl.i] = { offset: [d, 0, 0], visible: sl.front ? hideFront(x) : 1 - band(x, -0.36, -0.26) }; // prettier-ignore
+      }
+      let headOff = [0, 0, 0];
+      for (const pc of S.path.pieces) {
+        const off = vec.sub(S.path.at(pc.s + Dh), S.path.at(pc.s));
+        if (pc.head) headOff = off;
+        tokens[pc.i] = { offset: off, visible: hideFront(pc.x + off[0]) };
+      }
+      const stalkVis = band(S.stalkLen - R, 0, 0.05);
+      for (const st of S.stalks)
+        for (const pc of st.pieces) {
+          const slide = vec.sub(st.at(Math.min(pc.a, S.stalkLen - R)), st.at(pc.a));
+          tokens[pc.i] = { offset: vec.add(headOff, slide), visible: stalkVis * hideFront(0.9 + headOff[0]) }; // prettier-ignore
+        }
+      out.tokens = tokens;
+      // The shell settles once the body is in, with a little rock.
+      const sett = easeInOut(band(h, 0.78, 1));
       out.parts.shell = {
-        offset: [0, -0.1 * b, 0],
-        angle: 0.07 * Math.sin(Math.PI * band(h, 0.55, 1)) * (1 - band(h, 0.9, 1)),
+        offset: [0, -0.05 * sett, 0],
+        angle: 0.05 * Math.sin(Math.PI * band(h, 0.7, 1)),
       };
+      // Sorted again every sixteenth of the way, in or out.
+      const m = S.mem.get(c) || { step: -1 };
+      S.mem.set(c, m);
+      const step = Math.round(h * 16);
+      if (step !== m.step) {
+        if (m.step >= 0) out.resort = true;
+        m.step = step;
+      }
       out.amount = 1;
     },
     build(k) {
       const ground = -0.62;
-      const body = k.part("body", { pivot: [0, ground, 0] });
-      const head = k.part("head", { pivot: [0.6, ground, 0] });
-      const stalks = k.part("stalks", { pivot: [0.95, 0, 0] });
-      const shellPart = k.part("shell", { pivot: [-0.12, ground + 0.1, 0], axis: [0, 0, 1] });
+      const shellPart = k.part("shell", { pivot: [-0.12, ground, 0], axis: [0, 0, 1] });
       const skinCol = (c) => {
         const n = c.noise(c.p[0] * 30, c.p[1] * 30, c.p[2] * 30);
         const edge = c.p[1] < ground + 0.06 ? 0.3 : 0;
         return lit(c, mix(mix("#b0a07a", "#8a7a58", 0.5 + 0.5 * n), "#d8ccaa", edge), 0.35, 0.6);
       };
-      // The foot (in two halves, so it can draw together), neck and head.
-      const tailEnd = k.part("tailEnd", { pivot: [-0.5, ground, 0] });
-      const cut = Math.acos(-0.07 / 0.85);
-      for (const front of [true, false]) {
-        const phi = (v) => (front ? v * cut : cut + v * (Math.PI - cut));
-        k.add(
-          k.param(
-            (u, v) => {
-              const f = phi(v);
-              const w = u * TAU;
-              return [
-                0.85 * Math.cos(f),
-                0.12 * Math.sin(f) * Math.cos(w),
-                0.2 * Math.sin(f) * Math.sin(w),
-              ];
-            },
-            {
-              grid: 48,
-              normal: (u, v) => {
-                const f = phi(v);
-                const w = u * TAU;
-                return vec.unit([
-                  Math.cos(f) / 0.85,
-                  (Math.sin(f) * Math.cos(w)) / 0.12,
-                  (Math.sin(f) * Math.sin(w)) / 0.2,
-                ]);
-              },
-            },
-          ),
-          {
-            pos: [-0.05, ground + 0.1, 0],
-            part: front ? body : tailEnd,
-            flat: 0.2,
-            color: skinCol,
-          },
-        );
-        // Round off the cut end (hidden inside the other half at rest), so a
-        // drawn-in foot still looks like a foot.
-        const xc = 0.85 * Math.cos(cut);
-        const rc = Math.sin(cut);
-        const sx = front ? -1 : 1;
-        const dome = (u, v) => {
-          const q = (v * Math.PI) / 2;
-          const w = u * TAU;
-          return [Math.cos(q), Math.sin(q) * Math.cos(w), Math.sin(q) * Math.sin(w)];
-        };
-        k.add(
-          k.param(
-            (u, v) => {
-              const d = dome(u, v);
-              return [xc + sx * 0.16 * d[0], 0.12 * rc * d[1], 0.2 * rc * d[2]];
-            },
-            {
-              grid: 24,
-              normal: (u, v) => {
-                const d = dome(u, v);
-                return vec.unit([(sx * d[0]) / 0.16, d[1] / 0.12, d[2] / 0.2]);
-              },
-            },
-          ),
-          {
-            pos: [-0.05, ground + 0.1, 0],
-            part: front ? body : tailEnd,
-            flat: 0.2,
-            color: skinCol,
-          },
-        );
-      }
+      const tok = (i) => ({ kind: "token", params: [i, 0] });
+      // The foot: one long ellipsoid cut into eight slices across its
+      // length (tokens 0 to 7). The front five slide back into the shell's
+      // opening, the tail three forward under the shell.
+      const cuts = [-0.9, -0.7, -0.5, -0.3, -0.08, 0.14, 0.36, 0.58, 0.9];
+      const slices = cuts.slice(0, -1).map((x0, i) => ({ i, x: (x0 + cuts[i + 1]) / 2, front: x0 >= -0.3 })); // prettier-ignore
+      const sliceOf = (x) => {
+        let i = 0;
+        while (i < slices.length - 1 && x > cuts[i + 1]) i++;
+        return i;
+      };
+      const footC = [-0.05, ground + 0.1, 0];
       k.add(
-        k.tube(
-          spline([
-            [0.3, ground + 0.12, 0],
-            [0.62, ground + 0.18, 0],
-            [0.82, ground + 0.36, 0],
-            [0.9, ground + 0.5, 0],
-          ]),
-          (t) => 0.14 - 0.03 * t,
+        k.param(
+          (u, v) => {
+            const f = v * Math.PI;
+            const w = u * TAU;
+            return [0.85 * Math.cos(f), 0.12 * Math.sin(f) * Math.cos(w), 0.2 * Math.sin(f) * Math.sin(w)]; // prettier-ignore
+          },
           {
-            grid: 32,
-            samples: 64,
+            grid: 64,
+            normal: (u, v) => {
+              const f = v * Math.PI;
+              const w = u * TAU;
+              return vec.unit([Math.cos(f) / 0.85, (Math.sin(f) * Math.cos(w)) / 0.12, (Math.sin(f) * Math.sin(w)) / 0.2]); // prettier-ignore
+            },
           },
         ),
-        { part: head, flat: 0.2, color: skinCol },
+        {
+          pos: footC,
+          flat: 0.2,
+          kind: "token",
+          params: (c) => [sliceOf(c.p[0]), 0],
+          color: skinCol,
+        },
       );
-      k.add(k.sphere(0.12), {
-        pos: [0.92, ground + 0.52, 0],
-        part: head,
-        flat: 0.2,
-        color: skinCol,
-      });
-      for (const s of [-1, 1]) {
+      // The head's way in: down the neck to the foot, then back along the
+      // foot into the shell.
+      const neckPts = [
+        [0.3, ground + 0.12, 0],
+        [0.62, ground + 0.18, 0],
+        [0.82, ground + 0.36, 0],
+        [0.9, ground + 0.5, 0],
+      ];
+      const neckCurve = spline(neckPts);
+      const headC = [0.92, ground + 0.52, 0];
+      const way = [headC];
+      for (let j = 20; j >= 0; j--) way.push(neckCurve(j / 20));
+      way.push([-0.1, ground + 0.1, 0], [-0.6, ground + 0.1, 0]);
+      const path = polyPath(way);
+      // Head (token 8) and four pieces of neck (tokens 9 to 12).
+      const pieces = [{ i: 8, s: 0, x: headC[0], head: true }];
+      for (let j = 0; j < 4; j++) {
+        const p = neckCurve((3.5 - j) / 4);
+        pieces.push({ i: 9 + j, s: path.near(p), x: p[0] });
+      }
+      k.add(
+        k.tube(neckCurve, (t) => 0.14 - 0.03 * t, { grid: 32, samples: 64 }),
+        {
+          flat: 0.2,
+          kind: "token",
+          params: (c) => [9 + Math.min(3, Math.floor((1 - c.t) * 4)), 0],
+          color: skinCol,
+        },
+      );
+      k.add(k.sphere(0.12), { pos: headC, flat: 0.2, ...tok(8), color: skinCol });
+      // The eye stalks, each in four pieces with its eye (tokens 13 to 22).
+      const stalks = [];
+      let next = 13;
+      for (const sd of [-1, 1]) {
         k.add(
           k.tube(
             spline([
-              [0.98, ground + 0.48, s * 0.06],
-              [1.08, ground + 0.44, s * 0.12],
-              [1.14, ground + 0.42, s * 0.14],
+              [0.98, ground + 0.48, sd * 0.06],
+              [1.08, ground + 0.44, sd * 0.12],
+              [1.14, ground + 0.42, sd * 0.14],
             ]),
             (t) => 0.025 - 0.01 * t,
-            {
-              grid: 12,
-              samples: 24,
-              caps: true,
-            },
+            { grid: 12, samples: 24, caps: true },
           ),
-          { part: head, flat: 0.2, color: skinCol },
+          { flat: 0.2, ...tok(8), color: skinCol },
         );
-        const top = [1.08, ground + 0.98, s * 0.16];
+        const top = [1.08, ground + 0.98, sd * 0.16];
+        const curve = spline([
+          [0.94, ground + 0.6, sd * 0.05],
+          [1.0, ground + 0.78, sd * 0.1],
+          top,
+        ]);
+        const st = polyPath(Array.from({ length: 21 }, (_, j) => curve(j / 20)));
+        const first = next;
+        const stPieces = [0, 1, 2, 3].map((j) => ({
+          i: first + j,
+          a: (st.length * (j + 0.5)) / 4,
+        }));
+        stPieces.push({ i: first + 4, a: st.length });
+        next += 5;
         k.add(
-          k.tube(
-            spline([[0.94, ground + 0.6, s * 0.05], [1.0, ground + 0.78, s * 0.1], top]),
-            (t) => 0.026 - 0.008 * t,
-            {
-              grid: 12,
-              samples: 32,
-            },
-          ),
-          { part: stalks, flat: 0.2, kind: "sway", params: [0.4, ground + 0.6], color: skinCol },
+          k.tube(curve, (t) => 0.026 - 0.008 * t, { grid: 12, samples: 32 }),
+          {
+            flat: 0.2,
+            kind: "token",
+            params: (c) => [first + Math.min(3, Math.floor(c.t * 4)), 0],
+            color: skinCol,
+          },
         );
-        eye(k, top, 0.036, [1, 0.2, s * 0.4], { part: stalks, pupil: -1, weight: 3 });
+        // The eye (a shiny dark bead with a highlight).
+        const L = vec.unit([1, 0.2, sd * 0.4]);
+        const H = vec.unit(vec.add(L, [0.35, 0.55, 0.2]));
+        k.add(k.sphere(0.036), {
+          pos: top,
+          weight: 3,
+          flat: 0.3,
+          pattern: false,
+          ...tok(first + 4),
+          color: (c) => (dot(c.ln, H) > 0.94 ? "#ffffff" : lit(c, "#0f0f12", 0.2)),
+        });
+        stalks.push({ at: st.at, pieces: stPieces, len: st.length });
       }
+      const stalkLen = stalks[0].len;
+      // How far each part travels to be inside.
+      const headRun = path.length - 0.05;
+      k.data = {
+        snail: {
+          slices,
+          path: { at: path.at, pieces },
+          stalks,
+          stalkLen,
+          headRun,
+          frontRun: 1.15,
+          tailRun: 0.62,
+          mem: new WeakMap(),
+        },
+      };
       // A glistening trail.
       k.add(k.roundedBox(0.45, 0.01, 0.18, 4), {
         pos: [-0.95, ground + 0.005, 0],
@@ -1342,20 +1410,30 @@ export const RECIPES = {
       // The shell: a coiled tube, growing 2.4 times each turn.
       const b = Math.log(2.4) / TAU;
       const t1 = -Math.PI / 2 + 3 * TAU;
-      const S = 0.44;
+      const SR = 0.44;
       const cen = [-0.12, 0.02, 0];
-      const rr = (t) => S * Math.exp(b * (t - t1));
+      const rr = (t) => SR * Math.exp(b * (t - t1));
       const shellAt = (t, phi) => {
         const r = rr(t);
         const rho = 0.52 * r;
-        const h = 0.32 * (S - r);
+        const hh = 0.32 * (SR - r);
         const dir = [Math.cos(t), Math.sin(t), 0];
         return vec.add(
           cen,
-          vec.add(vec.mul(dir, r + rho * Math.cos(phi)), [0, 0, h + rho * Math.sin(phi)]),
+          vec.add(vec.mul(dir, r + rho * Math.cos(phi)), [0, 0, hh + rho * Math.sin(phi)]),
         );
       };
       const tA = t1 - 3.2 * TAU;
+      // The drawn-in body, seen deep in the opening once it hides.
+      k.add(k.disc(0.2), {
+        pos: [-0.24, cen[1] - SR, 0],
+        rot: [0, 0, 90],
+        part: shellPart,
+        weight: 1.5,
+        flat: 0.2,
+        pattern: false,
+        color: (c) => mix("#4a4032", "#6b5d45", 0.5 + 0.5 * c.noise(c.p[1] * 20, c.p[2] * 20, 0)),
+      });
       k.add(
         k.param((u, v) => shellAt(tA + u * (t1 - tA), v * TAU), {
           grid: 110,
