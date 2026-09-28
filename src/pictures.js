@@ -188,7 +188,31 @@ export class Pictures {
       prev: () => this.go(this.page - 1),
       go: (n) => this.go(n),
       togglePlay: () => this.togglePlay(),
+      // A video's time and length (s), and a jump to a time (lane Screens:
+      // the Screen's scrubbing). 0 and a no-op for other media.
+      get time() {
+        return self.media?.kind === "video" ? self.media.video.currentTime || 0 : 0;
+      },
+      get duration() {
+        return self.media?.kind === "video" ? self.media.duration || 0 : 0;
+      },
+      seek: (s) => this.seek(s),
     };
+  }
+
+  // Jumps a video to time s; its new frame goes up once the seek is done.
+  seek(s) {
+    const m = this.media;
+    if (m?.kind !== "video" || !Number.isFinite(s)) return;
+    m.video.addEventListener(
+      "seeked",
+      () => {
+        this.frameDirty = true;
+        this.stage.requestRender();
+      },
+      { once: true },
+    );
+    m.seek(s);
   }
 
   go(n) {
