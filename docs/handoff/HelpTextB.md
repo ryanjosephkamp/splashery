@@ -172,7 +172,7 @@ approved entry needed a change.
 - September 28, 2026: the owner approved every text on the Help Board, this lane's included. The fix
   for the two `tests/help.spec.mjs` examples (the basketball's default About, the donut's default
   line) is in the Operator's upkeep PR #61, which merges first; this PR never touched that file.
-  After #61 lands: merge main in and rerun `tests/help.spec.mjs`.
+  Main with #61 was merged in at 06:35 UTC; all 14 help tests pass.
 - `tools/effect-clip.mjs` renders an empty strip for the butterfly (only a few specks); the toy
   itself renders and flutters fine in the app (checked at 1440×900). Not this lane's to fix.
 - No engine or help UI change is needed for these texts.
