@@ -460,18 +460,62 @@ export const TOY_HELP = {
       "Chess is a game for two players on a board of 64 squares. Each side starts with 16 pieces (a king, a queen, two rooks, two bishops, two knights and eight pawns), and the goal is to checkmate the other king: to attack it so that it has no way out.\n\nThe board is set up for the Opera Game, played in Paris in 1858 at the opera house, where Paul Morphy beat the Duke of Brunswick and Count Isouard in 17 moves. Press play in the bar under the board to watch it, or tap a piece and then a square to play your own moves. In the Toy tab you can open or paste any game written in PGN, the usual way of writing down chess games.",
   },
   // ---- Open me --------------------------------------------------------------------------
-  chest: { howTo: "Tap to open the lid; tap again to close it." },
-  book: { howTo: "Tap to close the book; tap again to open it." },
+  chest: {
+    howTo: "Tap to open the lid; tap again to close it.",
+    about:
+      "A treasure chest is a strong wooden box with metal bands, a heavy lid and a lock, made to keep coins, jewels and other precious things safe. Long ago, before banks were common, people kept their valuables in chests like this, and ships carried money and goods in them.\n\nTap it to open the lid and see the heap of gold coins and bright jewels inside, and tap again to close it. Pick the color of the wood in the Toy tab.",
+  },
+  book: {
+    howTo: "Tap to close the book; tap again to open it.",
+    about:
+      "A storybook is a book of stories, with pages of words and often pictures. A book like this, with pages sewn together along one edge between two hard covers, is a way of keeping writing that people have used for about two thousand years. Printing with movable metal type, which made books much cheaper, began in Europe in the 1450s.\n\nThe book starts open. Tap to close it: the pages turn over one by one and the cover shuts. Tap again to open it. Pick the color of the cover in the Toy tab.",
+  },
   laptop: {
     howTo:
       "Tap the keys, or type on your keyboard. Drag on the trackpad. Tap elsewhere to close it.",
+    about:
+      "A laptop is a computer small enough to carry and use on your lap. Its screen is in the lid, and the base holds the keyboard, a touch pad called a trackpad, and a battery. The order of the letters on the keyboard, starting Q, W, E, R, T, Y, comes from typewriters of the 1870s.\n\nTap any key, or type on your own keyboard, and the key goes down and the letter appears on the screen. Tap or drag on the trackpad to move the pointer and click. Tap anywhere else on the laptop to close the lid, and again to open it. Pick the color of the case in the Toy tab.",
   },
-  "music-box": { howTo: "Tap to close the lid; tap again to open it." },
-  "gift-box": { howTo: "Tap to open the present; tap again to close it." },
-  umbrella: { howTo: "Tap to close the umbrella; tap again to open it." },
-  "desk-fan": { howTo: "Tap to switch it off or on. Turn its swing on or off in the Toy tab." },
-  lamp: { howTo: "Tap to switch the light off or on." },
-  telescope: { howTo: "Tap to collapse it; tap again to pull it out." },
+  "music-box": {
+    howTo: "Tap to close the lid; tap again to open it.",
+    about:
+      "A music box plays a tune all by itself. Inside, a spring turns a metal cylinder covered in tiny pins. As it turns, the pins pluck the teeth of a steel comb, and each tooth rings with its own note: the longer the tooth, the lower the note.\n\nThis music box starts open, with a little dancer twirling on its stand while the tune plays and music notes float up. Tap to close the lid and stop the music, and tap again to open it. Pick the color of the wood in the Toy tab.",
+  },
+  clock: {
+    howTo: "Tap it to ring the alarm.",
+    about:
+      "A wind-up alarm clock has two metal bells on top and a little hammer between them. At the set time a spring inside lets the hammer go, and it strikes the two bells back and forth very fast, loud enough to wake a sleeper. Before alarm clocks were common, some people were paid to go around town tapping on windows to wake others up.\n\nThe hands on this clock show the real time where you are. Tap it to ring the alarm: the hammer rattles between the bells and the whole clock shakes and hops. Pick its color in the Toy tab.",
+  },
+  "gift-box": {
+    howTo: "Tap to open the present; tap again to close it.",
+    about:
+      "A gift box is a present wrapped in bright paper and tied with a ribbon and a bow. People give wrapped presents for birthdays, holidays and other happy days, and the fun is not knowing what is inside until it is opened.\n\nTap it to open the present: the lid with its bow pops up and tips back, a golden star rises out of the box, and a burst of confetti fills the air. Tap again to close it. Pick the colors of the paper and the ribbon in the Toy tab.",
+  },
+  umbrella: {
+    howTo: "Tap to close the umbrella; tap again to open it.",
+    about:
+      "An umbrella is a folding shade of cloth stretched over thin metal ribs, held up on a stick. When it opens, a sliding ring pushes little struts that spread the ribs out, and the cloth pulls tight to keep off the rain or the sun. People in ancient Egypt, China and Greece used umbrellas as sunshades thousands of years ago.\n\nThe umbrella starts open. Tap to close it, folding the ribs down along the stick, and tap again to open it. Pick a rainbow, striped or plain canopy and its color in the Toy tab.",
+  },
+  "desk-fan": {
+    howTo: "Tap to switch it off or on. Turn its swing on or off in the Toy tab.",
+    about:
+      "A desk fan cools you by moving air: its angled blades push air forward as they spin, and moving air carries heat and sweat away from your skin faster. A fan does not make the air colder; it only makes you feel cooler.\n\nThis fan starts on, spinning and swinging slowly from side to side. Tap it to switch it off, and the blades slow to a stop; tap again to switch it on. In the Toy tab, turn the swing on or off and pick its color.",
+  },
+  lamp: {
+    howTo: "Tap to switch the light off or on.",
+    about:
+      "A desk lamp has a jointed arm that bends, so you can point its shade right where you need light, over a book or a drawing. The shade stops the light from shining in your eyes and sends it down onto the desk.\n\nThe lamp starts on, with a warm glow under the shade. Tap it to switch the light off, and tap again to switch it on. Pick its color in the Toy tab.",
+  },
+  "potion-bottle": {
+    howTo: "Tap it to pop the cork.",
+    about:
+      "A potion is a magic drink from fairy tales and wizard stories, said to make you fly, shrink or fall asleep. This one sits in a round glass flask with a long neck and a cork, the kind that chemists really use: the round bottom is strong and heats evenly.\n\nBubbles rise through the potion all the time. Tap it to pop the cork: it shoots up with a puff of glittering sparkles, then drops back into the neck. Pick the color of the potion in the Toy tab.",
+  },
+  telescope: {
+    howTo: "Tap to collapse it; tap again to pull it out.",
+    about:
+      "A telescope uses lenses or mirrors to make faraway things look nearer and bigger. This is a sliding spyglass, the kind sailors carried: its tubes slide inside one another, so it folds up short and pulls out long, with a big lens at the far end that gathers light. Galileo Galilei used a small telescope in 1610 to see the moons of Jupiter.\n\nThe telescope starts pulled out, on a three-legged stand. Tap to collapse it, sliding the tubes together, and tap again to pull it out.",
+  },
 
   // ---- Medieval -------------------------------------------------------------------------
   "sword-in-stone": { howTo: "Tap to pull the sword from the stone; tap again to go back." },
