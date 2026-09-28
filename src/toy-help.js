@@ -565,14 +565,71 @@ export const TOY_HELP = {
   },
 
   // ---- Animals --------------------------------------------------------------------------
+  jellyfish: {
+    howTo: "Tap it to make it swim: one strong stroke jets it upward.",
+    about:
+      "A jellyfish is a soft sea animal with no brain, no heart and no bones; its body is mostly water. It swims by squeezing its bell-shaped body, which pushes water out behind it, and it trails long tentacles armed with tiny stingers to catch its food. Jellyfish have drifted in the oceans for more than 500 million years.\n\nTap it and one strong stroke squeezes the bell and jets it up, trailing its glowing tentacles, then it drifts slowly back down. Pick a moon jelly, a sea nettle or a blue one in the Toy tab.",
+  },
+  "fish-school": {
+    howTo: "Tap it: the school swirls into a ball, bursts apart and swims back.",
+    about:
+      "A school is a big group of fish swimming together, all turning at once. Each fish keeps pace with its neighbors by watching them and by feeling the water move along a line of special sense organs down its sides. Being one of many makes it much harder for a hunter to pick out any single fish.\n\nThese 48 fish each swim on their own. Tap it and the school tightens into a spinning bait ball, the shape small fish make when a hunter comes near, then bursts outward in every direction and swims back into place. Pick silver or tropical fish in the Toy tab.",
+  },
+  butterfly: {
+    howTo: "Tap it to make it flutter faster.",
+    about:
+      "A butterfly is an insect with four large wings covered in tiny, overlapping scales, and the scales make its colors and patterns. Every butterfly starts life as a caterpillar, which wraps itself in a case called a chrysalis and comes out as a butterfly. Some colors, like the shining blue of the blue morpho, come from the shape of the scales, not from any paint-like color in them.\n\nIt flaps its wings slowly all the time. Tap it to flutter, beating its wings faster and wider for a moment. Pick a monarch, a blue morpho, a swallowtail or a rose butterfly in the Toy tab.",
+  },
+  pufferfish: {
+    howTo: "Tap it to poke it. Try the Puff slider in the Toy tab.",
+    about:
+      "A pufferfish is a slow swimmer with a clever defense: when it is frightened, it gulps water and swells up into a ball several times its normal size, and in many kinds, spines stand out all over it. That makes it very hard for a hungry fish to swallow. Many pufferfish are also poisonous to eat.\n\nThis one rests slim. Tap it to poke it: it puffs up into a big, spiky ball, holds it, then lets the water out with a sputter and shrinks back. Try the Puff slider in the Toy tab too.",
+  },
+  nautilus: {
+    howTo: "Tap it to startle it: it hides its tentacles, then peeks out again.",
+    about:
+      "A nautilus is a sea animal related to the octopus and the squid, but it lives in a coiled, striped shell. Inside, the shell is split into chambers: the nautilus lives in the biggest, newest one and fills the older ones with gas and a little water to float up or sink down. It has up to 90 small tentacles and swims by squirting water. Animals like it have lived in the sea for about 500 million years.\n\nTap it and, startled, it jets back a little and pulls its tentacles in behind its hood. It waits, peeks out halfway, then slowly reaches out again.",
+  },
+  ladybug: {
+    howTo: "Tap to open the wings; tap again to close them.",
+    about:
+      "A ladybug is a small, round beetle. Its red, spotted back is really a pair of hard wing cases, and under them, thin flying wings lie folded up. Its bright colors warn birds that it tastes bad. Gardeners love ladybugs, because they eat the tiny aphids that harm plants.\n\nTap it to open the wings: the red wing cases lift and spread, and the thin wings unfold beneath them, ready to fly. Tap again to fold them away. Counting its spots will not tell you how old a ladybug is: the number depends on the kind of ladybug.",
+  },
+  snail: {
+    howTo: "Tap to make it hide in its shell; tap again to bring it out.",
+    about:
+      "A snail carries its home on its back: a coiled shell it can pull its whole body into. It glides along on one long, muscular foot over a thin layer of slime, and its eyes sit at the tips of its two long upper tentacles. In dry weather, a snail can seal its shell with a layer of dried slime and wait for rain.\n\nTap it and it hides, as a real snail does: the eye stalks roll in first, then the head and the foot are drawn in through the shell's opening, and the shell settles on the ground. Tap again and it slides back out, the eye stalks unrolling last.",
+  },
   octopus: {
     howTo: "Tap it to squirt ink.",
     about:
       "An octopus is a soft-bodied sea animal with eight arms lined with suckers. It has three hearts and blue blood, no bones at all, and it can change the color of its skin in a split second to hide or to signal.\n\nWhen something scares it, an octopus squirts a cloud of dark ink and jets away behind it. Tap this one and it does just that: the ink billows out while it shoots up and away with its arms streaming, then it drifts back as the ink thins. You can pick its color in the Toy tab.",
   },
-  pufferfish: { howTo: "Tap it to poke it. Try the Puff slider in the Toy tab." },
-  ladybug: { howTo: "Tap to open the wings; tap again to close them." },
-  snail: { howTo: "Tap to make it hide in its shell; tap again to bring it out." },
+  starfish: {
+    howTo: "Tap it to wave its arms.",
+    about:
+      "A starfish, or sea star, is not a fish at all but a relative of the sea urchin. It has no brain and no blood; seawater flows through its body instead. Under each arm are hundreds of tiny tube feet that let it creep along and grip rocks, and at the tip of each arm is a simple eye. If it loses an arm, it can grow a new one.\n\nTap it and its five arms lift and curl in turn, like a slow wave, then settle back. Pick an orange, red, purple or blue starfish in the Toy tab.",
+  },
+  "sea-urchin": {
+    howTo: "Tap it: its spines sweep in waves and it creeps along.",
+    about:
+      "A sea urchin is a round, spiny sea animal, a relative of the starfish. Its spines protect it, and between them it has long, thin tube feet with suckers that it uses to walk and to hold on. Its mouth is underneath, with five strong teeth for scraping seaweed off rocks.\n\nTap it and its spines sweep around it in waves, each tilting on its base, while pink tube feet reach out, and it creeps a little way to the side and back. Pick a purple, black, red or green urchin in the Toy tab.",
+  },
+  frog: {
+    howTo: "Tap it: a fly buzzes in and the frog catches it with its tongue.",
+    about:
+      "A frog is an amphibian: it starts life as a tadpole swimming in water and grows legs and lungs to live on land as well. It catches insects with a long, sticky tongue that flips out of its mouth in a flash. To swallow, a frog pulls its big eyes down into its head, and they help push the food down its throat.\n\nTap it: a fly buzzes in and hovers, the frog's tongue shoots out, catches it and snaps back, its eyes sink to swallow, and it croaks twice with a puff of its throat. Pick a green, red, blue or yellow frog in the Toy tab.",
+  },
+  penguin: {
+    howTo: "Tap it to flap its flippers.",
+    about:
+      "A penguin is a bird that cannot fly, but it is a superb swimmer: its wings are stiff, strong flippers that it uses to fly through the water. Almost all penguins live in the southern half of the world. The largest, the emperor penguin, stands about 1.1 meters (3.7 feet) tall.\n\nTap it and it flaps its flippers up and down. Its colors help it hide in the sea: from above, its black back blends with the dark water below, and from below, its white front blends with the bright surface.",
+  },
+  owl: {
+    howTo: "Tap it and it turns its head to look behind.",
+    about:
+      "Owls are birds that mostly hunt at night. Their big eyes cannot move in their sockets, so an owl turns its whole head instead, as far as about 270 degrees, three-quarters of the way around. Soft, fringed edges on its feathers let it fly almost without a sound.\n\nThis owl sits on a branch. Tap it and it turns its head far around to look behind it, holds there a moment, then turns back to face you.",
+  },
 
   // ---- Math -----------------------------------------------------------------------------
   lorenz: { howTo: "Tap to race along the path. Set the glow in the Toy tab." },
