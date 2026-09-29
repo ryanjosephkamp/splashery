@@ -3118,6 +3118,17 @@ export const TOYS = [
     tags: "logic gates xor and binary addition circuit bits carry computer",
     camera: { yaw: 0.18, pitch: 0.1, roll: 0, distance: 3.4 },
   },
+  // ---- Pack: computing-history (lane Machines A) ----
+  {
+    id: "turing-machine",
+    label: "Turing machine",
+    category: "computing",
+    kind: "kit",
+    pack: "computing-history",
+    tags: "alan turing tape head state binary add one busy beaver program rules computer science",
+    camera: { yaw: 0.1, pitch: 0.1, roll: 0, distance: 2.95 },
+  },
+  // ---- End of pack: computing-history ----
   // ---- Pack: pictures ----
   {
     id: "picture-lab",
