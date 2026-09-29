@@ -253,6 +253,7 @@ const WB = {
   gravity: 6,
   speed: 0.3, // how fast the water leaves the mouth
   pour: 1.15, // seconds of pouring
+  fallTime: 0.4, // about how long the water takes from the mouth to the glass
   level: 0.52, // the glass fills to this share of its height
 };
 WB.glassTop = WB.floor + WB.glass.h;
@@ -287,7 +288,7 @@ function wbPose(s) {
 // The pour's own clock: forward while pouring, then backward (everything runs back).
 function wbClock(s) {
   const P0 = 1.6;
-  const D = WB.pour + WB.flight;
+  const D = WB.pour + WB.fallTime;
   const R0 = 2.85;
   if (s < R0) return clamp(s - P0, 0, D);
   return D * (1 - ease(seg(s, R0, 3.3)));
