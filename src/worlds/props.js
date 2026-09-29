@@ -277,19 +277,32 @@ function buildBush(count, seed, o = {}) {
     blobs.push([Math.cos(a) * d, 0.45 + r() * 0.3, Math.sin(a) * d, 0.35 + r() * 0.15]);
   }
   blobs.push([0, 0.7, 0, 0.45]);
-  k.cloud({ count: count * 1.6, size: 1.1 }, (rand) => {
-    const b = blobs[Math.floor(rand() * blobs.length)];
+  // Leaves on the outside of each clump (a dense shell reads as solid
+  // foliage; leaves spread through the inside read as speckle), a darker
+  // layer just under them so no sky shows through.
+  const inside = (p, skip) =>
+    blobs.some((b, j) => j !== skip && Math.hypot(p[0] - b[0], (p[1] - b[1]) / 0.85, p[2] - b[2]) < b[3] * 0.92); // prettier-ignore
+  // (A kit with only clouds has a base splat size of 1 cm, so sizes
+  // here are in centimeters.)
+  k.cloud({ count: count * 1.6, size: 4.2 }, (rand) => {
+    const bi = Math.floor(rand() * blobs.length);
+    const b = blobs[bi];
     const d = randDir(rand);
-    const rr = b[3] * Math.cbrt(0.55 + 0.45 * rand());
+    const deep = rand() < 0.3;
+    const rr = b[3] * (deep ? 0.8 : 0.95 + 0.08 * rand());
     const p = [b[0] + d[0] * rr, b[1] + d[1] * rr * 0.85, b[2] + d[2] * rr];
-    if (p[1] < 0.02) return null;
-    const out = Math.hypot(p[0], (p[1] - 0.5) * 1.2, p[2]);
-    const col = mix(
-      shade(green, 0.55),
-      mix(green, "#9fcf62", rand() * 0.6),
-      clamp(out / 0.8, 0, 1),
-    );
-    return { p, n: d, color: lit(col, d, 0.5), flat: 0.2, size: 0.9 + rand() * 0.5 };
+    if (p[1] < 0.02 || inside(p, bi)) return null;
+    const lift = clamp(0.5 + d[1] * 0.5, 0, 1);
+    let col = mix(shade(green, 0.7), mix(green, "#a4d468", rand() * 0.5), lift);
+    if (deep) col = shade(green, 0.55);
+    return {
+      p,
+      n: d,
+      color: lit(col, d, 0.55),
+      flat: 0.35,
+      size: deep ? 1.6 : 1 + rand() * 0.4,
+      opacity: 0.97,
+    };
   });
   const it = k.emit();
   while (!it.next().done);

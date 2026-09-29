@@ -61,14 +61,16 @@ const SCENES = {
   // The phone controls: the thumb stick walks, a drag on the right looks,
   // a tap on a sign opens its card.
   touch: [
-    { place: [5, 17, 75], touch: true },
+    { place: [7, 19.5, 125], touch: true },
     { hold: 0.6 },
-    { stick: [0, 1], secs: 1.8 },
-    { stick: [-0.5, 0.85], secs: 1.2 },
-    { stick: [0, 0], drag: [-60, 0], secs: 1.0 },
-    { hold: 0.4 },
+    { stick: [0, 0.7], secs: 1.4 },
+    { stick: [0.45, 0.6], secs: 0.8 },
+    { stick: [0, 0], drag: [110, 0], secs: 1.0 },
+    { drag: [-110, 0], secs: 1.0 },
+    { hold: 0.3 },
     { tapSign: "boulders", hold: 2.4 },
   ],
+
   // The start screen over the wide view, the plain list, and "Go there".
   list: [
     { start: true, hold: 2.2 },

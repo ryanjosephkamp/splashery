@@ -134,6 +134,13 @@ Model: Opus 5.5 (default effort).
   its own small PlayCanvas setup (`src/worlds/render.js`) and reuses the kit, the noise, the font
   and the pack recipes as they are.
 
+- Full suite: 318 passed after merging main (then the bush fix and the touch clip's script changed;
+  `tests/wd.spec.mjs` passed again, 14 of 14). Splats drawn on the Test island, at the spawn and by
+  the lighthouse: low 195,700 / 215,395 of 220k; mid 353,387 / 371,298 of 380k; high 564,883 /
+  559,405 of 650k; max 967,745 / 855,802 of 1M.
+- Cards on the Effect review page (September 29, 2026): `wd-walk`, `wd-landmark`, `wd-touch`,
+  `wd-list`.
+
 ## Notes
 
 - PlayCanvas 2.22.3's `lodDistances` and per-component `splatBudget` are no-ops now; the scene's
