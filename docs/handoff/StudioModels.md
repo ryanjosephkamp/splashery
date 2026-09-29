@@ -106,7 +106,12 @@ Model: Sonnet 5.5 (default effort). Started September 29, 2026. Draft PR #86.
 - Full suite (346 tests) on this branch: the only failures were mine (About text over 180 words,
   missing thumbnail; both fixed and re-run green) and one in lane Studio Sound's
   `tests/sts.spec.mjs` (see For the Operator).
-- Still to do: the clips and cards (`stm-sample`, `stm-open`, `stm-compare`).
+- Cards posted on the Effect review page (lane StudioModels): `stm-sample` (burger tap),
+  `stm-sample-vase`, `stm-open`, `stm-compare` (vase) and `stm-compare-burger`. Made with
+  `tools/effect-clip.mjs`, `tools/stm-open-clip.mjs` and `tools/stm-compare.mjs` (the compare pair
+  is drawn by a small test renderer, not the live one; the open clip is real time on a slow
+  renderer, so it has few frames).
+- Still to do: read the owner's marks (ids starting `stm`) and fix any "fix".
 
 ## Notes
 
