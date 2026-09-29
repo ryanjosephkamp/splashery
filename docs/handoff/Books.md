@@ -329,6 +329,9 @@ What r3 does:
 - The left page block is a fixed thickness (it doesn't grow as you read).
 - r2: a faint haze of a few pixels can still show beside an edge seen almost edge-on (a face's own
   splats, seen from the side).
+- r3: a set on the digital frame takes photos only: a GIF in a set shows as a still and a video is
+  turned away (a set's items would need their own playing media in the engine). One GIF or video
+  plays in any frame.
 - The rig test in `tests/smoke.spec.mjs` (line 730) fails on main too (the same numbers); not this
   lane's.
 

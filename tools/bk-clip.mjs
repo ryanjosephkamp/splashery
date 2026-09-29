@@ -13,7 +13,9 @@
 //
 // Scenes: book (opening, turning, one style change), book-styles (the five
 // styles), book-long (paging through a 300-page PDF), album, frame (the
-// swing), frame-digital. Writes <out-dir>/bk-<scene>.gif and a strip of six
+// swing), frame-digital; and round 3: book-taps, book-pull, stapled-taps,
+// album-pull, lab-taps, lab-edges, frame-gold, frame-gif, frame-video,
+// frame-order. Writes <out-dir>/bk-<scene>.gif and a strip of six
 // frames, bk-<scene>-strip.png. Uses the fixtures in tests/fixtures/bk/
 // (tools/bk-samples.mjs).
 
@@ -32,6 +34,7 @@ const opt = (name, def) => {
 const [outDir, ...scenes] = args.filter((a) => !a.startsWith("--"));
 if (!outDir) throw new Error("Usage: node tools/bk-clip.mjs <out-dir> [scene ...]");
 const ALL = ["book", "book-styles", "book-long", "album", "frame", "frame-digital"];
+const PIC = `${base}tests/fixtures/pic/`;
 const list = scenes.length ? scenes : ALL;
 fs.mkdirSync(outDir, { recursive: true });
 const FIX = `${base}tests/fixtures/bk/`;
@@ -137,6 +140,35 @@ async function record(scene) {
     await draw();
   };
   const tap = () => run(() => window.__splashery.player.act());
+  // A tap where it lands (a point in the toy's own units).
+  const tapAt = (p) => run((p) => window.__splashery.player.act(window.__splashery.player.fromRecipe(p)), p); // prettier-ignore
+  // A pull by hand: the toy's own drag, a frame each step (steps of 1/12 s).
+  const pull = async (id, from, to, steps, hold = 0) => {
+    await run(async ([id, from]) => {
+      const { RECIPES } = await import("/src/packs/pictures.js");
+      const d = RECIPES[id].drag;
+      if (d.at(from)) d.start(from, window.__splashery.player.time);
+    }, [id, from]); // prettier-ignore
+    for (let i = 1; i <= steps + hold; i++) {
+      const f = Math.min(1, i / steps);
+      const p = from.map((v, k) => v + (to[k] - v) * f);
+      await run(async ([id, p, dt]) => {
+        const { RECIPES } = await import("/src/packs/pictures.js");
+        const pl = window.__splashery.player;
+        pl.time += dt;
+        RECIPES[id].drag.move(p, pl.time);
+        pl.stage.requestRender();
+      }, [id, p, STEP]); // prettier-ignore
+      await draw();
+      await settle();
+      await draw();
+      await shot(Math.round(STEP * 1000));
+    }
+    await run(async (id) => {
+      const { RECIPES } = await import("/src/packs/pictures.js");
+      RECIPES[id].drag.end(window.__splashery.player.time);
+    }, id);
+  };
 
   if (scene === "book") {
     await open("your-book", {}, `${FIX}booklet.pdf`);
@@ -205,6 +237,97 @@ async function record(scene) {
     await tap();
     await play(3.2);
     await hold(800);
+  } else if (scene === "book-taps") {
+    await open("your-book", {}, `${FIX}booklet.pdf`);
+    await hold(900);
+    for (const x of [-0.3, 0.4, 0.4, -0.4, 0.4]) {
+      await tapAt([x, 0, 0.02]);
+      await play(1.25);
+      await hold(700);
+    }
+    // The last spread: forward closes the book.
+    await run(() => window.__splashery.player.pictures.go(11));
+    await play(0.4);
+    await hold(900);
+    await tapAt([0.4, 0, 0.02]);
+    await play(1.3);
+    await hold(1200);
+  } else if (scene === "book-pull") {
+    await open("your-book", {}, `${FIX}booklet.pdf`);
+    await tapAt([0.3, 0, 0.02]);
+    await play(1.25);
+    await hold(900);
+    // A short pull: let go before halfway, and it falls back.
+    await pull("your-book", [0.62, -0.15, 0.02], [0.3, -0.1, 0.02], 10, 2);
+    await play(0.9);
+    await hold(800);
+    // A long pull, over the spine: it turns.
+    await pull("your-book", [0.62, -0.15, 0.02], [-0.55, -0.1, 0.02], 18, 2);
+    await play(0.9);
+    await hold(1100);
+  } else if (scene === "stapled-taps") {
+    await open("your-book", { style: "stapled" }, `${FIX}booklet.pdf`);
+    await hold(900);
+    for (const y of [-0.25, -0.1, 0.4, -0.2]) {
+      await tapAt([0, y, 0.02]);
+      await play(1.2);
+      await hold(700);
+    }
+  } else if (scene === "album-pull") {
+    await open("photo-album");
+    await tapAt([0.3, 0, 0.02]);
+    await play(1.3);
+    await hold(900);
+    await pull("photo-album", [0.8, -0.2, 0.02], [0.45, -0.15, 0.02], 10, 3);
+    await play(1.1);
+    await hold(800);
+    await pull("photo-album", [0.8, -0.2, 0.02], [-0.6, -0.15, 0.02], 20, 4);
+    await play(1.4);
+    await hold(1100);
+  } else if (scene === "lab-taps") {
+    await open("picture-lab");
+    await hold(900);
+    for (const x of [0.6, 0.6, -0.6, -0.6]) {
+      await tapAt([x, 0, 0]);
+      await play(0.6);
+      await hold(800);
+    }
+  } else if (scene === "lab-edges") {
+    await open("picture-lab");
+    await hold(2500);
+  } else if (scene === "frame-gold") {
+    await open("picture-frame", { frame: "gold" });
+    await hold(900);
+    await tap();
+    await play(3.2);
+    await hold(900);
+  } else if (scene === "frame-gif") {
+    await open("picture-frame", {}, `${PIC}anim.gif`);
+    await play(3);
+    await tap();
+    await play(3.2);
+  } else if (scene === "frame-video") {
+    await open("picture-frame", { frame: "modern" }, `${PIC}clip.webm`);
+    await play(3);
+    await tap();
+    await play(3.2);
+  } else if (scene === "frame-order") {
+    await open("picture-frame", { frame: "digital" });
+    // The list in the Toy tab: the first photo moved down, twice.
+    await run(() => {
+      window.__splashery.app.ui.showTab("toy");
+      document.querySelector("#toy-media-list")?.scrollIntoView({ block: "center" });
+    });
+    await hold(1500);
+    for (let i = 0; i < 2; i++) {
+      await run((i) => document.querySelectorAll("#toy-media-list li")[i].querySelectorAll("button")[1].click(), i); // prettier-ignore
+      await hold(1100);
+    }
+    await run(() => window.__splashery.app.ui.collapseSheet?.());
+    await play(10);
+    // Order: Random.
+    await open("picture-frame", { frame: "digital", order: "random" });
+    await play(10);
   } else if (scene === "frame-digital") {
     await open("picture-frame", { frame: "digital" });
     await play(15);
