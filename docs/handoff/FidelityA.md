@@ -465,6 +465,9 @@ detail reads as blue noise); the planet's cloud shell has a ragged edge.
   splats smaller, so it looks sharper on a phone but thins out in 256 px thumbnails and small embeds
   (the kite at density 0.6 lost its bows in its thumbnail). Prefer even placement to more density,
   and check a 256 px render (`profile=high`) as well as the phone view.
+- See-through surfaces placed exactly evenly (the Klein bottle's glass) show a moiré where front and
+  back layers overlap. Nudge each even point by about half a cell (`nudgedEven()` in
+  `src/packs/maths.js`, a fixed hash) to keep the coverage without the pattern.
 - Interior splats fill the whole shape, so a face built just inside a solid (the clock's dial) has
   core splats in front of it: put the face at or outside the surface.
 - Faint clouds: splats under about 1/255 alpha are dropped, so very faint big splats turn into
