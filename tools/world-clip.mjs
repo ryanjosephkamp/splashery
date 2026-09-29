@@ -1,0 +1,271 @@
+#!/usr/bin/env node
+// Records clips of a world (worlds/index.html) as looping GIFs, page text
+// and all (the start screen, cards, the list and the thumb stick are part
+// of the page, so every frame is a screenshot of the whole page). The
+// world's clock is stepped by hand (?clock=manual), so a clip moves at real
+// speed however slow the renderer is.
+//
+//   python3 -m http.server 4173 --bind 127.0.0.1 &
+//   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/world-clip.mjs <out-dir> [--world=test-island] [--size=390x844] [--fps=10] [--dpr=2] [--scale=0.5] [--profile=mid] [--strip=8] walk landmark touch list
+//
+// Writes <out-dir>/wd-<name>.gif (and -strip.png with --strip). The
+// scenes are scripted below; each is a list of steps: walk with an input
+// for some seconds, drag to look, tap, press buttons, hold still.
+
+import { chromium } from "@playwright/test";
+import fs from "node:fs";
+import path from "node:path";
+import { PNG } from "pngjs";
+import gifenc from "gifenc";
+
+const { GIFEncoder, quantize, applyPalette } = gifenc;
+const base = process.env.SPLASHERY_URL || "http://127.0.0.1:4173/";
+const args = process.argv.slice(2);
+const opt = (name, def) => {
+  const a = args.find((x) => x.startsWith(`--${name}=`));
+  return a ? a.slice(name.length + 3) : def;
+};
+const [outDir, ...names] = args.filter((a) => !a.startsWith("--"));
+if (!outDir || !names.length)
+  throw new Error("Usage: node tools/world-clip.mjs <out-dir> scene ...");
+const [W, H] = opt("size", "390x844").split("x").map(Number);
+const fps = Number(opt("fps", 10));
+const dpr = Number(opt("dpr", 2));
+const scale = Number(opt("scale", 1 / dpr));
+const world = opt("world", "test-island");
+const profile = opt("profile", "mid");
+const stripN = Number(opt("strip", 0));
+
+// ---- Scenes ---------------------------------------------------------------------
+
+const SCENES = {
+  // Walking round the island: a walk, a look round, a run along the beach,
+  // then the camera pulls back for a wide view.
+  walk: [
+    { place: [-4, 14, 180] },
+    { hold: 0.6 },
+    { move: { y: 1 }, secs: 2.2 },
+    { move: { y: 1 }, look: [0.9, 0], secs: 1.4 },
+    { move: { y: 1, run: true }, secs: 2.4 },
+    { move: { y: 1, x: -0.5, run: true }, secs: 1.2 },
+    { hold: 0.8 },
+    { camera: { distance: 13, pitch: 0.75 }, secs: 1.6 },
+  ],
+  // Walking up to a sign: its card opens as page text.
+  landmark: [
+    { place: [-11, 6, 270] },
+    { hold: 0.5 },
+    { move: { y: 1 }, until: "card", secs: 6 },
+    { move: { y: 0.5 }, secs: 0.5 },
+    { hold: 2.4 },
+  ],
+  // The phone controls: the thumb stick walks, a drag on the right looks,
+  // a tap on a sign opens its card.
+  touch: [
+    { place: [7, 19.5, 125], touch: true },
+    { hold: 0.6 },
+    { stick: [0, 0.7], secs: 1.4 },
+    { stick: [0.45, 0.6], secs: 0.8 },
+    { stick: [0, 0], drag: [110, 0], secs: 1.0 },
+    { drag: [-110, 0], secs: 1.0 },
+    { hold: 0.3 },
+    { tapSign: "boulders", hold: 2.4 },
+  ],
+
+  // The character close up: a walk and a run seen from the side, then
+  // standing (idle) while the camera comes round to its face.
+  character: [
+    { place: [-7, 3, 180], camera: { distance: 1.55, pitch: 0.06 } },
+    { hold: 0.6 },
+    { move: { x: 1 }, secs: 2.4 },
+    { move: { x: 1, run: true }, secs: 1.8 },
+    { hold: 1.0 },
+    { look: [1.6, 0], secs: 2.2 },
+    { hold: 1.2 },
+  ],
+
+  // The start screen over the wide view, the plain list, and "Go there".
+  list: [
+    { start: true, hold: 2.2 },
+    { click: "#start-list", hold: 2.4 },
+    { scroll: "#places", hold: 1.2 },
+    { clickGo: "lookout", hold: 2.6 },
+  ],
+};
+
+// ---- Recording ------------------------------------------------------------------
+
+fs.mkdirSync(outDir, { recursive: true });
+const browser = await chromium.launch({
+  executablePath: process.env.SPLASHERY_CHROMIUM || undefined,
+  args: ["--use-angle=swiftshader", "--enable-unsafe-swiftshader", "--ignore-gpu-blocklist", "--enable-webgl"], // prettier-ignore
+});
+
+for (const name of names) {
+  const scene = SCENES[name];
+  if (!scene) throw new Error(`No scene "${name}" (${Object.keys(SCENES).join(", ")}).`);
+  const touch = scene.some((s) => s.touch);
+  // Drawn at twice the size and shrunk, like a phone's sharp screen.
+  const ctx = await browser.newContext({ viewport: { width: W, height: H }, deviceScaleFactor: dpr, hasTouch: touch, isMobile: touch }); // prettier-ignore
+  const page = await ctx.newPage();
+  page.on("pageerror", (e) => console.error("page error:", e.message));
+  await page.goto(
+    `${base}worlds/?labs=1&renderer=webgl2&profile=${profile}&clock=manual&world=${world}`,
+  );
+  await page.waitForFunction(() => document.body.dataset.ready === "true", null, { timeout: 240_000 }); // prettier-ignore
+  const gif = GIFEncoder();
+  const delay = Math.round(1000 / fps);
+  const dt = 1 / fps;
+  const frames = [];
+  let finger = null;
+  const shoot = async () => {
+    const png = PNG.sync.read(await page.screenshot());
+    const w = Math.round(png.width * scale);
+    const h = Math.round(png.height * scale);
+    const rgba = shrink(png, w, h);
+    frames.push({ rgba, w, h });
+    const palette = quantize(rgba, 256, { format: "rgb565" });
+    gif.writeFrame(applyPalette(rgba, palette, "rgb565"), w, h, { palette, delay, repeat: 0 });
+  };
+  // One frame: the world steps dt with this input, then a screenshot.
+  const tick = async (input = null) => {
+    await page.evaluate(({ dt, input }) => window.__world.tick(dt, input), { dt, input });
+    await page.evaluate(() => window.__world.tick(0));
+    await shoot();
+  };
+  const setFinger = async (p) => {
+    finger = p;
+    await page.evaluate((p) => {
+      let f = document.getElementById("clip-finger");
+      if (!f) {
+        f = document.createElement("div");
+        f.id = "clip-finger";
+        f.style.cssText =
+          "position:fixed;width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:50%;background:rgba(255,255,255,.55);border:2px solid rgba(0,0,0,.35);pointer-events:none;z-index:99";
+        document.body.append(f);
+      }
+      f.hidden = !p;
+      if (p) {
+        f.style.left = `${p[0]}px`;
+        f.style.top = `${p[1]}px`;
+      }
+    }, p);
+  };
+  // A scene that shows the start screen enters only through its buttons.
+  let started = scene.some((s) => s.start);
+  for (const s of scene) {
+    if (!started) {
+      await page.evaluate(() => window.__world.enter());
+      started = true;
+    }
+    // The camera's distance and tilt first, so a new place starts with them.
+    if (s.camera)
+      await page.evaluate((c) => Object.assign(window.__world.world.camera, c), s.camera);
+    if (s.place) {
+      await page.evaluate((p) => {
+        window.__world.place(p[0], p[1], p[2]);
+        window.__world.world.camera.snap(
+          window.__world.world.focus(),
+          window.__world.world.char.facing,
+        );
+      }, s.place);
+      // Let the level of detail catch up before the first frame.
+      for (let i = 0; i < 12; i++) await page.evaluate(() => window.__world.tick(0));
+    }
+    if (s.touch) {
+      await page.evaluate(() => {
+        document.getElementById("stick").hidden = false;
+        const h = document.querySelector(".only-keys");
+        if (h) h.style.display = "none";
+        const t = document.querySelector(".only-touch");
+        if (t) t.style.display = "inline";
+      });
+    }
+    if (s.click) await page.click(s.click);
+    if (s.scroll) await page.evaluate((sel) => document.querySelector(sel).scrollBy(0, 400), s.scroll); // prettier-ignore
+    if (s.clickGo) await page.click(`#places-list li[data-landmark="${s.clickGo}"] button`);
+    if (s.tapSign) {
+      const pt = await page.evaluate((id) => {
+        const w = window.__world.world;
+        const sgn = w.signs.find((x) => x.landmark.id === id);
+        const p = w.view.toScreen([sgn.pos[0], sgn.pos[1] + 1.6, sgn.pos[2]]);
+        return [p[0], p[1]];
+      }, s.tapSign);
+      await setFinger(pt);
+      await page.touchscreen.tap(pt[0], pt[1]);
+    }
+    const secs = s.secs ?? s.hold ?? 0;
+    const n = Math.max(1, Math.round(secs * fps));
+    for (let i = 0; i < n; i++) {
+      if (s.look) await page.evaluate(([a, b]) => window.__world.world.camera.look(a, b), [s.look[0] / n, s.look[1] / n]); // prettier-ignore
+      if (s.drag) {
+        const x = W * 0.72 + (s.drag[0] * i) / n;
+        await setFinger([x, H * 0.45]);
+        await page.evaluate((d) => window.__world.world.camera.look(-d * 0.0065, 0), s.drag[0] / n);
+      }
+      if (s.stick) {
+        const on = s.stick[0] || s.stick[1];
+        await page.evaluate((v) => {
+          const c = window.__world.page.controls;
+          c.stickVec = v;
+          const R = 64;
+          c.knob.style.transform = `translate(${v[0] * R * 0.55}px, ${-v[1] * R * 0.55}px)`;
+        }, s.stick);
+        if (on) {
+          const r = await page.evaluate(() => document.getElementById("stick").getBoundingClientRect().toJSON()); // prettier-ignore
+          await setFinger([
+            r.x + r.width / 2 + s.stick[0] * 35,
+            r.y + r.height / 2 - s.stick[1] * 35,
+          ]);
+        } else if (!s.drag) await setFinger(null);
+      }
+      const input = s.move || (s.stick && (s.stick[0] || s.stick[1]) ? { x: s.stick[0], y: s.stick[1], run: Math.hypot(...s.stick) > 0.92 } : null); // prettier-ignore
+      await tick(input);
+      if (s.until === "card" && (await page.evaluate(() => window.__world.card()))) break;
+    }
+    if (s.tapSign) await setFinger(null);
+  }
+  gif.finish();
+  const file = path.join(outDir, `wd-${name}.gif`);
+  fs.writeFileSync(file, gif.bytes());
+  console.log(`${file}: ${frames.length} frames, ${(fs.statSync(file).size / 1e6).toFixed(1)} MB`);
+  if (stripN > 1) writeStrip(frames, stripN, path.join(outDir, `wd-${name}-strip.png`));
+  await ctx.close();
+}
+await browser.close();
+
+// Box-filters an RGBA PNG down to w x h.
+function shrink(png, w, h) {
+  const out = new Uint8ClampedArray(w * h * 4);
+  const sx = png.width / w;
+  const sy = png.height / h;
+  for (let y = 0; y < h; y++)
+    for (let x = 0; x < w; x++) {
+      const acc = [0, 0, 0, 0];
+      let n = 0;
+      for (let yy = Math.floor(y * sy); yy < Math.floor((y + 1) * sy); yy++)
+        for (let xx = Math.floor(x * sx); xx < Math.floor((x + 1) * sx); xx++) {
+          const i = (yy * png.width + xx) * 4;
+          for (let k = 0; k < 4; k++) acc[k] += png.data[i + k];
+          n++;
+        }
+      const o = (y * w + x) * 4;
+      for (let k = 0; k < 4; k++) out[o + k] = acc[k] / Math.max(1, n);
+    }
+  return out;
+}
+
+function writeStrip(frames, n, file) {
+  const { w, h } = frames[0];
+  const pick = Array.from({ length: n }, (_, i) => frames[Math.round((i / (n - 1)) * (frames.length - 1))]); // prettier-ignore
+  const png = new PNG({ width: w * n, height: h });
+  pick.forEach((f, i) => {
+    for (let y = 0; y < h; y++)
+      for (let x = 0; x < w; x++) {
+        const s = (y * w + x) * 4;
+        const d = (y * w * n + i * w + x) * 4;
+        for (let k = 0; k < 4; k++) png.data[d + k] = f.rgba[s + k];
+      }
+  });
+  fs.writeFileSync(file, PNG.sync.write(png));
+}
