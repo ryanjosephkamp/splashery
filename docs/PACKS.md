@@ -671,3 +671,60 @@ Look at the contact sheet: every toy should be recognisable at 200 px, fill its 
 viewer. `make-thumbs` renders with motion off, so behaviours show their resting pose. Check a tap
 effect with `effect-strip`: it should last at least 1.5 s, move at least about a tenth of the toy
 (or change its light clearly), and be obvious within the first half second.
+
+## 9. Models to splats
+
+From lane Studio Models (September 29, 2026). The converter behind the "Model to splats" toy
+(`model-splats`, Studio shelf, labs) is one pure module, `src/packs/studio-models-core.js`, that the
+toy (`src/packs/studio-models.js`) and a Node tool share, so a model looks the same in both.
+
+**What it does.** `parseModel(bytes, fileName, { files })` reads glTF 2.0 (`.glb`, `.gltf`), OBJ
+with its MTL and STL (binary and ASCII). `prepareModel(raw, { decodeImage })` decodes and mip-maps
+the base-color textures, welds vertices, finds every triangle's edge neighbors (folds sharper than
+32 degrees are hard edges) and makes crease-smoothed normals when the file has none.
+`sampleSurface(prep, count, options)` then:
+
+- places points by area, weighted up where the surface bends sharply or its triangles are small (the
+  detail), on an even low-discrepancy pattern per triangle;
+- sizes each splat from the mean distance to its nearest neighbors on the same surface, so the
+  surface closes (`FILL`), and shrinks it a little beside a hard edge so the edge stays crisp;
+- lays it flat on the surface, oriented by the face normal;
+- colors it from the texture at its UV (at the mip level that matches the splat), the vertex colors
+  and the material color, with the soft key light of the other kit toys baked in (`light: false`
+  leaves it out); a cut-out (an alpha mask) leaves a hole and glass is left out;
+- turns the model upright (`up: "z"` for STL and CAD), centers it and scales it to a sphere of
+  radius 1.
+
+The renderer draws a splat as exp(-r²/σ²), which is narrower than the usual Gaussian, so a splat is
+sized about one neighbor distance (`FILL`, 1.05) to close. `wireGeometry` and `wireSplats` draw the
+mesh's edges as thin streaks (a mesh with more than 1,800 edges is first simplified by vertex
+clustering so the net stays readable).
+
+**Not supported** (the toy says so): Draco- or meshopt-compressed glTF, morph targets, skinning
+(shown in its bind pose), animations, lights, emissive colors, any texture but the base color.
+
+**Budgets.** The toy sets `density: 1.5`, so the kit's count is 90k, 210k, 300k and 400k splats on
+the low, mid, high and max tiers (`MODEL_BUDGETS`, capped by each tier's `maxCount`), and the panel
+shows the count.
+
+**The tap** uses the morph channels: every splat has its own place in a loose cloud (out along its
+normal, a little to the side) and goes there and back in a straight line in about 3 s. Its channel
+is set by its height, so the lift rises through the model like a wave.
+
+**Files that come with a model.** The input sets `multiple: true`, so the Toy tab's file dialog
+takes several files at once (engine PR #87): a `.gltf` with its `.bin` and textures, or an `.obj`
+with its `.mtl` and pictures. `read(text, fileName, file, files)` picks the model among them (a
+`.glb`, `.gltf`, `.obj` or `.stl`) and hands the rest to the parser by name. A `.gltf` opened alone
+says which files it needs; a missing texture only leaves its color out, with a note.
+
+**The tool.**
+
+```sh
+node tools/model-to-splats.mjs path/to/model.glb [--id name] [--splats 200000] [--up auto|y|z] [--no-light] [--out file.ply]
+```
+
+writes `.cache/models/<id>/<id>.ply`, the format `tools/mesh-to-splats.mjs` writes (position,
+normal, SH color, opacity, log scales, rotation). To make a toy from a CC0 model: check its license
+on the live page, run this, add an entry for the PLY to `tools/assets.json` like the other scans
+(and its credit to `CREDITS.md`), then `node tools/prepare-assets.mjs`. `tools/stm-fixtures.mjs`
+makes the test models and `tools/stm-samples.mjs` the two samples.
