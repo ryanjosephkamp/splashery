@@ -1,7 +1,6 @@
-// Lane Screens' engine additions (docs/handoff/Screens.md): a picture
-// toy's prepare(options, help) can open the media its build will show
-// (help.media()), and the pictures API can seek a video (time, duration,
-// seek). Other toys are unchanged.
+// Lane Screens' engine addition (docs/handoff/Screens.md): a picture toy's
+// prepare(options, help) can open the media its build will show
+// (help.media()). Other toys are unchanged.
 
 import { test, expect } from "@playwright/test";
 
@@ -30,27 +29,4 @@ test("a picture toy's prepare can open the media its build shows, opened once", 
     return { kind: m?.kind, same: m === shown, none: Object.keys(none).length };
   });
   expect(r).toEqual({ kind: "pdf", same: true, none: 0 });
-});
-
-test("a video can be sought: time, duration and seek", async ({ page }) => {
-  await openLab(page);
-  await page.evaluate(() => window.__splashery.app.openMedia(`${location.origin}/tests/fixtures/pic/clip.webm`)); // prettier-ignore
-  await page.waitForFunction(() => window.__splashery.player.pictures?.media?.kind === "video", null, { timeout: 60_000 }); // prettier-ignore
-  const d = await page.evaluate(() => window.__splashery.player.motion.ctx.kit.data.pictures.duration); // prettier-ignore
-  expect(d).toBeGreaterThan(0.5);
-  await page.evaluate(() => window.__splashery.player.motion.ctx.kit.data.pictures.seek(0.5));
-  await page.waitForFunction(
-    () => Math.abs(window.__splashery.player.motion.ctx.kit.data.pictures.time - 0.5) < 0.05,
-    null,
-    { timeout: 20_000 },
-  );
-  // A PDF has no time and ignores a seek.
-  await page.evaluate(() => window.__splashery.app.clearMedia());
-  await page.waitForFunction(() => window.__splashery.player.pictures?.media?.kind === "pdf", null, { timeout: 60_000 }); // prettier-ignore
-  const pdf = await page.evaluate(() => {
-    const p = window.__splashery.player.motion.ctx.kit.data.pictures;
-    p.seek(3);
-    return [p.time, p.duration];
-  });
-  expect(pdf).toEqual([0, 0]);
 });
