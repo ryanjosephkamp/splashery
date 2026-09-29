@@ -336,8 +336,12 @@ function addGem(k, planes, base, opts = {}) {
     weight: opts.weight ?? 1,
     interior: 0.06,
     core: mix(base, "#ffffff", 0.25),
+    // (opts.size, glint, opacity and jitter: lane Fidelity B's calmer stones.)
+    size: opts.size,
+    opacity: opts.opacity,
+    jitter: opts.jitter,
     kind: "glint",
-    params: (c) => [c.rand() < 0.12 ? 0.8 : 0.05, 0],
+    params: (c) => [c.rand() < 0.12 ? (opts.glint ?? 0.8) : 0.05, 0],
     color: (c) => gemColor(c, base, opts),
     part: opts.part,
   });
@@ -621,6 +625,10 @@ export const RECIPES = {
     },
     build(k, o) {
       const shape = addGem(k, stepCut(), o.color, {
+        size: 1.3,
+        glint: 0.25,
+        opacity: 1,
+        jitter: 0.015,
         quat: quatEuler(24, 22, 0),
         fire: 0.04,
         dark: 0.3,
@@ -680,6 +688,10 @@ export const RECIPES = {
       const table = 0.55;
       const crown = 35 * DEG;
       addGem(k, brilliant(cushion, { table, crown: 35, pavilion: 42 }), o.color, {
+        size: 1.3,
+        glint: 0.25,
+        opacity: 1,
+        jitter: 0.015,
         quat: SAPPHIRE_Q,
         fire: 0.08,
         dark: 0.22,
@@ -1192,6 +1204,9 @@ export const RECIPES = {
       const pearlAt = o.shell ? [0, -0.02, 0.1] : [0, 0, 0];
       const pr = o.shell ? 0.31 : 1;
       k.add(k.sphere(pr), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: pearlAt,
         flat: 0.15,
         weight: o.shell ? 2 : 1,
@@ -1255,8 +1270,22 @@ export const RECIPES = {
         [true, lidOpen, true],
       ]) {
         // Inside (pearly) and outside (rough) of the same shell.
-        k.add(valve(up, 0, open), { part, flat: 0.2, color: nacre });
-        k.add(valve(up, up ? 0.025 : -0.025, open), { part, flat: 0.2, color: outside });
+        k.add(valve(up, 0, open), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
+          part,
+          flat: 0.2,
+          color: nacre,
+        });
+        k.add(valve(up, up ? 0.025 : -0.025, open), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
+          part,
+          flat: 0.2,
+          color: outside,
+        });
       }
     },
   },

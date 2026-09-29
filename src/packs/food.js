@@ -20,7 +20,7 @@ import {
   rgb,
   vec,
 } from "../kit.js";
-import { evenCylinder, evenTorus, evenTube } from "./even.js";
+import { evenBox, evenCylinder, evenEllipsoid, evenTorus, evenTube } from "./even.js";
 
 const TAU = Math.PI * 2;
 const { add, sub, mul, dot, len, cross, unit } = vec;
@@ -2567,6 +2567,8 @@ export const RECIPES = {
         return Math.hypot(x, y - 0.5) < 0.03 && z > 0.3;
       };
       k.add(shape, {
+        even: true,
+        jitter: 0.015,
         flat: 0.2,
         opacity: 0.42,
         color: (c) => {
@@ -2577,10 +2579,12 @@ export const RECIPES = {
         },
       });
       k.add(shape, {
-        share: 0.03,
+        even: true,
+        jitter: 0.015,
+        share: 0.12,
         flat: 0.2,
-        size: 0.8,
-        opacity: 0.9,
+        size: 1.6,
+        opacity: 0.45,
         color: (c) => (spec(c, 30) > 0.42 ? keep(mix("#ffffff", base, 0.1)) : null),
       });
       k.cloud({ share: 0.22, size: 1.8 }, (rand) => {
@@ -2753,6 +2757,8 @@ export const RECIPES = {
       const yc = CRO_CUT;
       const lid = k.part("lid", { pivot: [0, yc, -0.12], axis: [1, 0, 0] });
       k.add(shape, {
+        opacity: 1,
+        jitter: 0.015,
         part: (c) => (c.p[1] > yc ? lid : 0),
         flat: 0.25,
         interior: 0.1,
@@ -2809,6 +2815,9 @@ export const RECIPES = {
             { grid: 64, normal: () => [0, up, 0] },
           ),
           {
+            even: true,
+            opacity: 1,
+            jitter: 0.015,
             part,
             flat: 0.2,
             weight: up > 0 ? 1.3 : 0.5,
@@ -2821,6 +2830,9 @@ export const RECIPES = {
       // (channel 0) while the top is up.
       const pat = [0.02, yc + 0.03, 0.36];
       k.add(k.roundedBox(0.28, 0.055, 0.19, 3), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: pat,
         rot: [0, 12, 0],
         flat: 0.3,
@@ -2831,11 +2843,15 @@ export const RECIPES = {
           return add(pat, [d[0] * 1.9, -0.024 + (d[1] + 0.028) * 0.25, d[2] * 1.7]);
         },
         channel: 0,
-        color: (c) => keep(glossy(c, mix("#fbe38a", "#f6d466", 0.3 + 0.3 * c.rand()), 0.8, 30, 0.84, 0.3)), // prettier-ignore
+        color: (c) =>
+          keep(glossy(c, mix("#fbe38a", "#f6d466", 0.3 + 0.3 * c.rand()), 0.8, 30, 0.84, 0.3)),
       });
       // A baking tray lined with paper.
       const trayY = -0.33;
-      k.add(k.box(2.3, 0.05, 1.5), {
+      k.add(evenBox(2.3, 0.05, 1.5), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: [0, trayY - 0.03, -0.1],
         flat: 0.2,
         weight: 0.6,
@@ -2847,6 +2863,9 @@ export const RECIPES = {
           normal: () => [0, 1, 0],
         }),
         {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           flat: 0.15,
           weight: 0.7,
           color: (c) => {
@@ -3897,6 +3916,8 @@ export const RECIPES = {
       const egg = revolve(k, eggPts, null, { grid: 96, thick: 0.45 });
       const cutY = 0.27;
       k.add(egg, {
+        opacity: 1,
+        jitter: 0.015,
         flat: 0.2,
         interior: 0.1,
         core: (c) =>
@@ -3908,14 +3929,26 @@ export const RECIPES = {
         color: (c) => shellColor(c, true),
       });
       const cap = k.part("cap", { pivot: [0, 0.3, -0.44], axis: [1, 0, 0] });
-      k.add(egg, { part: cap, flat: 0.2, color: (c) => shellColor(c, false) });
+      k.add(egg, {
+        opacity: 1,
+        jitter: 0.015,
+        part: cap,
+        flat: 0.2,
+        color: (c) => shellColor(c, false),
+      });
       // Inside: the white and a runny golden yolk, and the cap's white underside.
       k.add(topDisc(k, eggR(cutY) - 0.012), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: [0, cutY, 0],
         flat: 0.2,
         color: (c) => lit(c, "#fbf8f0", 0.85, 0.2),
       });
-      k.add(k.ellipsoid(0.21, 0.11, 0.21), {
+      k.add(evenEllipsoid(k, 0.21, 0.11, 0.21), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: [0, cutY, 0],
         flat: 0.25,
         weight: 1.5,
@@ -3923,6 +3956,9 @@ export const RECIPES = {
         color: (c) => (c.lp[1] < 0 ? null : glossy(c, "#ffb21a", 0.9, 30, 0.82, 0.3)),
       });
       k.add(topDisc(k, eggR(0.31) - 0.01), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: [0, 0.31, 0],
         rot: [180, 0, 0],
         part: cap,
@@ -3932,7 +3968,8 @@ export const RECIPES = {
       // A drip of yolk down the shell once it is open.
       const dripA = 0.5;
       k.add(
-        k.tube(
+        evenTube(
+          k,
           (t) => {
             const y = cutY + 0.02 - t * 0.3;
             const r = eggR(y) + 0.015;
@@ -3942,6 +3979,9 @@ export const RECIPES = {
           { caps: true, samples: 64, grid: 32 },
         ),
         {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           flat: 0.3,
           weight: 2,
           pattern: false,
@@ -3966,6 +4006,9 @@ export const RECIPES = {
           [0.54, -0.04],
         ]),
         {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           flat: 0.2,
           color: (c) => {
             // White polka dots on the glaze.
@@ -3983,6 +4026,9 @@ export const RECIPES = {
       // Toast soldiers.
       for (let i = 0; i < 2; i++) {
         k.add(k.roundedBox(0.22, 0.86, 0.2, 6), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           pos: [0.8 + i * 0.28, -0.56 + i * 0.02, 0.2 - i * 0.25],
           rot: [0, 20 + i * 15, -16 + i * 7],
           flat: 0.25,
@@ -4321,6 +4367,9 @@ export const RECIPES = {
       k.add(
         revolve(k, pts, (a) => 1 + 0.012 * Math.sin(a * 5 + 0.5), { grid: 96, thick: 0.6 }),
         {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           flat: 0.2,
           interior: 0.12,
           core: (c) => (inBite(c.p) ? null : coreColor(c)),
@@ -4349,6 +4398,9 @@ export const RECIPES = {
           },
         ),
         {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           part: bite,
           kind: "fade",
           params: [0.2, 0.5],
@@ -4366,6 +4418,8 @@ export const RECIPES = {
       // apple, pale flesh with a thin line of skin at its rim.
       for (const t of teeth) {
         k.add(k.sphere(t.r), {
+          even: true,
+          opacity: 1,
           pos: t.at,
           share: 0.04,
           size: 1.25,
@@ -4406,13 +4460,24 @@ export const RECIPES = {
         worm.push({ at, home });
         const r = i === 0 ? 0.06 : 0.048 - 0.003 * i;
         k.add(k.sphere(r), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           pos: home,
           share: i === 0 ? 0.006 : 0.003,
           flat: 0.3,
           pattern: false,
           kind: "token",
           params: [token, 0],
-          color: (c) => keep(glossy(c, mix("#9fd35a", "#6fae33", 0.5 + 0.5 * c.noise(c.p[0] * 60, c.p[1] * 60, 0)), 0.6, 20)), // prettier-ignore
+          color: (c) =>
+            keep(
+              glossy(
+                c,
+                mix("#9fd35a", "#6fae33", 0.5 + 0.5 * c.noise(c.p[0] * 60, c.p[1] * 60, 0)),
+                0.6,
+                20,
+              ),
+            ),
         });
         if (i === 0) {
           // Eyes and a smile, facing out of the bite.
@@ -4420,6 +4485,9 @@ export const RECIPES = {
           for (const sd of [-1, 1]) {
             const eye = add(add(home, mul(face, 0.05)), add(mul(tang, sd * 0.025), [0, 0.02, 0]));
             k.add(k.sphere(0.018), {
+              even: true,
+              opacity: 1,
+              jitter: 0.015,
               pos: eye,
               share: 0.0015,
               pattern: false,
@@ -4437,7 +4505,8 @@ export const RECIPES = {
       }
       k.data = { worm, path, side: tang, out: nOut };
       k.add(
-        k.tube(
+        evenTube(
+          k,
           spline([
             [0, 0.32, 0],
             [0.015, 0.45, 0],
@@ -4446,9 +4515,20 @@ export const RECIPES = {
           (t) => 0.03 - 0.01 * t,
           { caps: true },
         ),
-        { flat: 0.3, weight: 2.5, pattern: false, color: (c) => lit(c, "#6b4524") },
+        {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
+          flat: 0.3,
+          weight: 2.5,
+          pattern: false,
+          color: (c) => lit(c, "#6b4524"),
+        },
       );
       k.add(leafShape(k, 0.56, 0.17, 0.35), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: [0.03, 0.52, 0],
         rot: [8, -40, 20],
         flat: 0.2,

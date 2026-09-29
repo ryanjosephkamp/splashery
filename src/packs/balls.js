@@ -2163,7 +2163,9 @@ export const RECIPES = {
         // Matte rubber grip: low, even bumps and no shine.
         return grip(c, "#34343a", { f: 45, depth: 0.5, crevice: 0.2 });
       });
-      rim(k, k.sphere(1.035));
+      // A thinner, even rim shell: a crisp edge of light without the gray
+      // haze over the face.
+      rim(k, k.sphere(1.012), { even: true, size: 1, opacity: 0.012 });
       // A puff of dust where it lands: a ring of soft puffs under the ball,
       // built small (inside the ball) and spread by its part, fading out on
       // channel 1.
@@ -2218,7 +2220,9 @@ export const RECIPES = {
         // always on: the glow's strength does the work).
         { core: "#202020", kind: "band", params: [0, 4], channel: 3 },
       );
-      rim(k, k.sphere(1.035));
+      // A thinner, even rim shell: a crisp edge of light without the gray
+      // haze over the face.
+      rim(k, k.sphere(1.012), { even: true, size: 1, opacity: 0.012 });
     },
   },
 

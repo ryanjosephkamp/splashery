@@ -11,6 +11,7 @@ import {
   quatAxisAngle,
   quatMul,
 } from "../kit.js";
+import { evenEllipsoid, evenTube } from "./even.js";
 
 const TAU = Math.PI * 2;
 const add = (a, b) => [a[0] + b[0], a[1] + b[1], a[2] + b[2]];
@@ -527,6 +528,9 @@ export const RECIPES = {
         });
         let lastG = null;
         k.add(k.radial(radius, { grid: 96, thick: 0.3 }), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           pos: [0, 0, cz],
           flat: 0.2,
           interior: 0.1,
@@ -568,6 +572,9 @@ export const RECIPES = {
           (lp[1] + 0.25 * lp[0] * lp[0]) * 70 + k.noise(lp[0] * 4, lp[1] * 4, lp[2] * 4) * 2,
         );
       k.add(k.radial(cereb, { grid: 72, thick: 0.22 }), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: cerebAt,
         flat: 0.2,
         interior: 0.1,
@@ -587,7 +594,8 @@ export const RECIPES = {
       k.data = { hubs, reach };
       // Brainstem: the pons and the medulla reaching down.
       k.add(
-        k.tube(
+        evenTube(
+          k,
           spline([
             [0.18, -0.2, 0],
             [0.2, -0.55, 0],
@@ -598,6 +606,9 @@ export const RECIPES = {
           { grid: 40, samples: 64, caps: true },
         ),
         {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           flat: 0.2,
           color: (c) => {
             const stripe = Math.abs(Math.sin(c.u * TAU * 5)) > 0.9;
@@ -605,7 +616,10 @@ export const RECIPES = {
           },
         },
       );
-      k.add(k.ellipsoid(0.18, 0.16, 0.22), {
+      k.add(evenEllipsoid(k, 0.18, 0.16, 0.22), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: [0.12, -0.52, 0],
         flat: 0.2,
         color: (c) => lit(mix(PAL.stem, "#ffffff", 0.1), c.n, 0.62, 0.45),
@@ -1075,6 +1089,9 @@ export const RECIPES = {
         return Math.hypot(q[0] / 0.26, q[1] / 0.22, q[2] / 0.22) < 1;
       };
       k.add(k.radial(crown, { grid: 96, thick: 0.4 }), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: [0, cy, 0],
         flat: 0.2,
         interior: 0.18,
@@ -1110,6 +1127,8 @@ export const RECIPES = {
             caps: true,
           }),
           {
+            opacity: 1,
+            jitter: 0.015,
             scale: [1, 1, 1.35],
             flat: 0.2,
             interior: 0.15,

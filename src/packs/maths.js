@@ -142,9 +142,49 @@ function polyShape(pts) {
     tris.push({ b: pts[i], c: pts[i + 1], cum: total });
   }
   const a = pts[0];
+  // For even: true (lane Fidelity B): a fan of triangles from the centre;
+  // a runs round the fan by area and b out from the centre.
+  const m = pts.length;
+  const ctr = [0, 1, 2].map((i) => pts.reduce((s, p) => s + p[i], 0) / m);
+  const fan = [];
+  let fanTotal = 0;
+  for (let i = 0; i < m; i++) {
+    const p0 = pts[i];
+    const p1 = pts[(i + 1) % m];
+    fanTotal += 0.5 * len(cross(sub(p0, ctr), sub(p1, ctr)));
+    fan.push({ p0, p1, cum: fanTotal });
+  }
+  const edgeAt = (p) => {
+    let edge = Infinity;
+    for (let i = 0; i < m; i++) {
+      const e0 = pts[i];
+      const e1 = pts[(i + 1) % m];
+      const d = sub(e1, e0);
+      const q = clamp(dot(sub(p, e0), d) / dot(d, d), 0, 1);
+      edge = Math.min(edge, len(sub(p, add(e0, mul(d, q)))));
+    }
+    return edge;
+  };
   return {
     area: total,
     thick: 0.05,
+    sampleEven(ea, eb) {
+      const x = Math.min(ea, 1 - 1e-9) * fanTotal;
+      let t = fan[fan.length - 1];
+      let start = 0;
+      for (const tr of fan) {
+        if (x < tr.cum) {
+          t = tr;
+          break;
+        }
+        start = tr.cum;
+      }
+      const g = clamp((x - start) / (t.cum - start || 1), 0, 1);
+      const r = Math.sqrt(eb);
+      const rim = add(t.p0, mul(sub(t.p1, t.p0), g));
+      const p = add(ctr, mul(sub(rim, ctr), r));
+      return { p, n, u: r, v: g, edge: edgeAt(p) };
+    },
     sample(rand) {
       const x = rand() * total;
       let t = tris[tris.length - 1];
@@ -1826,6 +1866,9 @@ export const RECIPES = {
         const part = k.part(o.solid + groups[i], { pivot: [0, 0, 0] });
         const tint = ramp(pal.slice(1), (i * 0.618 + 0.1) % 1);
         k.add(polyShape(f.pts), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           part,
           flat: 0.12,
           color: (c) => {
