@@ -103,8 +103,26 @@ Photo to 3D and the Integrator run at the same time; leave their files alone. Th
   docs/OPERATING.md, docs/PACKS.md, docs/WORKSTREAMS.md and docs/handoff/history.md (lessons from
   earlier lanes).
 - Your handoff file: create it. Start it with this brief, word for word, under "## Brief", then keep
-  "## State", "## Notes", "## Known issues" and "## For the Operator" current. Note your model at
-  the top of "## State" (the blog post compares the two models).
+  "## State
+
+Model: Opus 5.5 (claude-opus-5-5), default effort.
+
+- September 29, 2026: all five parts built. The periodic table (`periodic-table`,
+  src/packs/chemistry.js), the atom toy's 118 elements and "Every nucleon" nucleus, 19 PubChem
+  molecules plus two DNA base pairs and a four-pair double helix (PDB 1BNA), seven new crystals, and
+  the orbitals through n = 4 (30 in all). One small engine addition in its own PR, #99, first (a tap
+  can switch a kit toy's options; `turntable: false` keeps any kit toy still). Lane PR #100.
+- Cards on the Effect review page (lane Chemistry): `chs-table`, `chs-table-still`,
+  `chs-atom-elements`, `chs-molecules`, `chs-lattices`, `chs-orbitals`, waiting for the owner's
+  marks.
+- Full suite: the first run found the missing thumbnail (now made), a timing race in the lane's own
+  tile test (fixed) and the book tests' video seek, which the engine's first turntable change broke
+  (fixed on #99: picture toys keep their old rule). A second full run is under way.
+
+## Notes", "## Known issues" and "## For the Operator" current. Note your model at
+
+the top of "## State" (the blog post compares the two models).
+
 - Shared lists: edit only your own entries in src/toys.js, src/toy-sounds.js, src/toy-help.js (a
   how-to line and an About text per toy, following docs/handoff/Help.md), tools/toy-plan.json,
   CREDITS.md and tools/assets.json. Regenerate docs/TOY-PLAN.md with `node tools/toy-plan.mjs`;
@@ -169,7 +187,11 @@ Model: Opus 5.5 (claude-opus-5-5), default effort.
 
 ## Known issues
 
-- None yet beyond the notes.
+- A tile tap rebuilds the whole toy (about half a second at 200,000 splats on a phone), so the new
+  atom starts to rise a moment after the tap.
+- The molecules' 3D shapes are PubChem's conformers; the DNA is the crystal structure with its
+  hydrogens placed by rule (bond lengths and angles), not refined.
+- Neon's photon is its strongest single line (692.9 nm, deep red), not a neon sign's orange blend.
 
 ## For the Operator
 
