@@ -176,8 +176,9 @@ opens the panel, as before.
 | Drag, one finger                      | Turn the toy (or use the picked tool on the toy) |
 | Right-drag, Space + drag, two fingers | Always turn the toy                              |
 | Wheel, pinch                          | Zoom, within limits around the toy               |
-| Two-finger twist                      | Roll                                             |
+| A clear two-finger twist              | Roll (not when the tilt is locked)               |
 | Double-click, double-tap              | Reset the view                                   |
+| Top-bar buttons                       | Reset view, Tilt lock and Turntable              |
 | 1 to 5                                | Orbit, Poke, Paint, Magnet, Clay                 |
 | P / R                                 | Poke a random spot / reset the view              |
 | Arrows, + and −                       | Turn and zoom from the keyboard (canvas focused) |
