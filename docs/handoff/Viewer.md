@@ -195,14 +195,15 @@ Post at 390×844 (tools/effect-clip.mjs, or tools/pic-clip.mjs for picture toys)
 
 ## Known issues
 
-- The shelf-wide default: only the Picture lab sets `tiltLock` now. The Books and Screens toys need
-  one line each when they merge (below).
+- The shelf-wide default: the Picture lab and the Screen set `tiltLock`; the Books toys need one
+  line each when they merge (below).
 
 ## For the Operator
 
-- The Books and Screens toys need `tiltLock: true,` in their recipes, next to `turntable: false`:
-  `your-book`, `photo-album`, `picture-frame` (src/packs/pictures.js, lane Books) and `screen`
-  (src/packs/screens.js, lane Screens). The Gaussian splat toy (AI shelf) stays free.
+- The Screen (`screen`, lane Screens, merged) now has `tiltLock: true` (merged main on September
+  29). The Books toys (`your-book`, `photo-album`, `picture-frame`) need the same line: a vw test
+  checks that every toy on the Pictures and pages shelf starts locked (Gaussian splatting, on the AI
+  shelf, stays free), so lane Books' PR will fail that test until it adds the line.
 - README's Controls table: "Two-finger twist | Roll" could read "A clear two-finger twist | Roll
   (not when the tilt is locked)", and a row for the top-bar buttons. I only added the terms there.
 - The moved flag label now reads "Flag colors" (American English); the older British labels
