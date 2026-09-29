@@ -90,7 +90,7 @@ function rect(
   k.cloud({ share, pattern: false, flat: 0.06 }, (rand, i, total) => {
     const half = Math.max(2, Math.floor(total / 2));
     const gu = Math.max(1, Math.round(Math.sqrt((half * lu) / lv)));
-    const gv = Math.max(1, Math.floor(half / gu));
+    const gv = Math.max(1, Math.round(half / gu));
     const step = Math.max(lu / gu, lv / gv);
     const second = i >= gu * gv;
     const j = second ? i - gu * gv : i;
@@ -121,6 +121,14 @@ function rect(
     }
     return s;
   });
+}
+
+// Spreads the whole splat budget over the toy's shapes, keeping their
+// proportions (every shape here has a share of its own).
+function useBudget(k, total = 0.95) {
+  const items = k.items.filter((it) => it.opts.share !== undefined);
+  const sum = items.reduce((a, it) => a + it.opts.share, 0);
+  if (sum > 0) for (const it of items) it.opts.share *= total / sum;
 }
 
 // A box's faces as rects (only the listed ones): x0..x1, y0..y1, z0..z1.
@@ -282,14 +290,14 @@ function bookLayout(st, N, time, uAt = null) {
   } else if (a.type === "fwd") {
     if (K >= 3) leaf(K - 2, { angle: Math.PI, ahead: 1 });
     if (K >= 2) leaf(K - 1, { angle: Math.PI, bv: u < 0.97 ? 1 : 0 });
-    leaf(K + 1, { fv: u > 0.28 ? 1 : 0, ahead: 1 });
+    leaf(K + 1, { fv: u > 0.12 ? 1 : 0, ahead: 1 });
     leaf(K, { angle: Math.PI * v, curl: -st.curl * bend, fv: 1, bv: 1 });
     L.cover = Math.PI;
     L.open = 1;
   } else if (a.type === "back") {
     leaf(K + 1, { ahead: 1 });
     leaf(K, { fv: u < 0.97 ? 1 : 0, ahead: 1 });
-    if (K >= 3) leaf(K - 2, { angle: Math.PI, bv: u > 0.28 ? 1 : 0, ahead: 1 });
+    if (K >= 3) leaf(K - 2, { angle: Math.PI, bv: u > 0.12 ? 1 : 0, ahead: 1 });
     leaf(K - 1, { angle: Math.PI * (1 - v), curl: st.curl * bend, fv: 1, bv: 1 });
     L.cover = Math.PI;
     L.open = 1;
@@ -439,8 +447,9 @@ const BOOK_RECIPE = {
     const cover = o.color || "#2f4b6e";
     const paper = "#fcfbf7";
     Object.assign(BOOK, { K: 0, anim: null, queue: 0, tapN: 0, lastPage: 0, style: st, frame: 0, landed: 3, sides: null, sideOf: null, sheetsOf: null }); // prettier-ignore
-    if (st.bound === "top") return buildStapled(k, st, W, H);
-    buildSideBound(k, st, o, { W, H, cover, paper });
+    if (st.bound === "top") buildStapled(k, st, W, H);
+    else buildSideBound(k, st, o, { W, H, cover, paper });
+    useBudget(k);
   },
 };
 
@@ -874,6 +883,7 @@ const ALBUM_RECIPE = {
         }
       },
     });
+    useBudget(k);
   },
 };
 
@@ -1082,6 +1092,7 @@ const FRAME_RECIPE = {
       k.cloud({ share: 0.0008, pattern: false }, () => ({ p: [X - fw * 0.5, -Y + fw * 0.5, d + 0.002], n: [0, 0, 1], color: "#5dd67a", size: 0.5, opacity: 1, part: fp })); // prettier-ignore
     }
     k.sheet({ id: "photo", center: [0, 0, 0], width: W, height: H, method: "pixels", part: fp });
+    useBudget(k);
   },
 };
 

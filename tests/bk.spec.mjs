@@ -424,12 +424,19 @@ test.describe("your book, the album and the frame (in the app)", () => {
   async function turn(page) {
     const before = await page.evaluate(() => window.__splashery.player.pictures.page);
     await tap(page);
-    for (let i = 0; i < 60; i++) {
-      await step(page, 0.3);
-      const moved = await page.evaluate((b) => window.__splashery.player.pictures.page !== b, before); // prettier-ignore
-      if (moved && i > 4) break;
+    // Until the page has changed and every leaf lies flat again (no curl,
+    // turned 0 or half a turn), twice in a row.
+    let still = 0;
+    for (let i = 0; i < 120 && still < 2; i++) {
+      await step(page, 0.2);
+      const done = await page.evaluate((b) => {
+        const pl = window.__splashery.player;
+        const flat = (pl.motion.out.leaves || []).every((l) => !l || (!l.curl && (Math.abs(l.angle) < 1e-6 || Math.abs(l.angle - Math.PI) < 1e-6 || Math.abs(l.angle - 2 * Math.PI + 0.06) < 1e-6))); // prettier-ignore
+        return pl.pictures.page !== b && flat;
+      }, before);
+      still = done ? still + 1 : 0;
     }
-    await step(page, 1.2);
+    await step(page, 0.5);
   }
 
   test("a 300-page PDF is as light as a 3-page one: pages not reached are never built", async ({
@@ -555,10 +562,11 @@ test.describe("your book, the album and the frame (in the app)", () => {
       await window.__splashery.app.setToyOption("frame", "digital");
     });
     await waitSheets(page);
-    await page.evaluate(() => (window.__splashery.player.frozen = true));
     expect(await page.evaluate(() => window.__splashery.player.pictures.info().count)).toBe(7);
-    await step(page, 6.5);
-    expect(await page.evaluate(() => window.__splashery.player.pictures.page)).toBe(1);
+    // On the player's own clock, in real time: the next photo within about
+    // six seconds.
+    const t1 = await page.evaluate(() => window.__splashery.player.time);
+    await page.waitForFunction((t1) => window.__splashery.player.pictures.page === 1 && window.__splashery.player.time < t1 + 7.5, t1, { timeout: 180_000 }); // prettier-ignore
   });
 
   for (const [w, h] of [
