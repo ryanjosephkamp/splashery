@@ -711,12 +711,13 @@ export const RECIPES = {
       const tap = info.tap;
       if (tap && tap.n !== m.tap) {
         m.tap = tap.n;
-        if (now - tap.time < 0.5) {
+        const t0 = tap.time ?? now;
+        if (now - t0 < 0.5) {
           if (tap.key === "strike" && tap.pick >= 0 && tap.pick < P.keys.length) {
-            m.hits[tap.pick].push(tap.time + TP_LEAD);
+            m.hits[tap.pick].push(t0 + TP_LEAD);
           } else if (tap.key === "play") {
             m.hits = m.hits.map((h) => h.filter((x) => x <= now));
-            m.song = { t0: tap.time + TP_LEAD, fired: 0 };
+            m.song = { t0: t0 + TP_LEAD, fired: 0 };
             for (const s of TP_SONG) m.hits[s.n].push(m.song.t0 + s.t);
           }
         }

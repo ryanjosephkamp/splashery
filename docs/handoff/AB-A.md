@@ -74,10 +74,41 @@ Operator reveals it). After the cards are posted, check the owner's marks about 
 
 ## State
 
-Started September 29, 2026. Reading the docs and planning the recipe.
+Built and posted (September 29, 2026). PR #89 (draft). Cards `aba-toy-piano-keys`,
+`aba-toy-piano-song` and `aba-toy-piano-still` are on the Effect review page in lane AB-A.
+
+- Toy: `toy-piano` (Music shelf), recipe in `src/packs/music.js` (constants `TP`, `TP_SONG`,
+  `TP_LEAD`, `TP_NOTES`, `TP_VOICE` next to the xylophone's). Twenty keys (C to G, twelve white and
+  eight black). Entries in `src/toys.js`, `src/toy-sounds.js`, `src/toy-help.js`,
+  `tools/toy-plan.json`; thumbnail in `assets/toys/toy-piano/`; test `tests/aba.spec.mjs`;
+  screenshots `tests/screenshots/aba-toy-piano-*.png`.
+- Full test run, prettier, `us-english --diff`, `check-packs`, `sound-check`: see the PR body.
 
 ## Notes
 
+- **Piece budget.** The kit allows 15 parts and 48 tokens, and 20 keys with a hammer and a rod each
+  need 60 moving pieces. So every key (tokens 0 to 19) and hammer (tokens 20 to 39) is a token, the
+  first twelve rods are parts (`rod0` to `rod11`) and the last eight rods are tokens 40 to 47. All
+  of it is used; a 21st key would not fit.
+- **Timing.** `drive` keeps a list of hit times per key (`mem(c).hits`), read from `info.tap` (a key
+  tap adds one hit 0.11 s ahead; the song schedules 14 hits). Key press, hammer flight (hits the rod
+  at the hit time), rebound and the rod's shiver (13 to 20 Hz, fading over about 1 s) are all
+  functions of `info.time - hit`, so overlapping notes and quick taps on different keys ring
+  independently.
+- **Sound.** A key tap plays the `tine` voice (a clamped-rod mode: partials at 1, 6.27 and 17.55)
+  through the spec in `src/toy-sounds.js` with `pickAt` timed to the hammer. The spec's twenty notes
+  are the keys, so it cannot also hold the song. The song's notes are cues from `drive` (the action
+  is `quiet: ["play"]`), sounding as each hammer lands. No new voice was needed.
+- **Look.** Case pieces are boxes with their edges rounded over by thin tubes (a plain box gives
+  ragged edges, and a rounded box at power 6 shows seams). The upper front of the case is open, not
+  the back, so the works show from the default camera.
+
 ## Known issues
 
+- Key tops show slight streaking from splat layering at very close zoom.
+- The open side is the front of the upper case, not the back (see Notes).
+
 ## For the Operator
+
+- `tests/taps.spec.mjs` plays the song tap as a pulse; see the PR for its result.
+- Nothing else outside my files.
