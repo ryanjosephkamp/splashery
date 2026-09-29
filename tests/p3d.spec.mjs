@@ -116,7 +116,9 @@ test.describe("the conversion", () => {
         expect(info.splats).toBeGreaterThan(budget * 0.85);
         expect(info.pieces).toBeGreaterThan(1);
         const b = ctx.kit.buf;
-        for (let i = 0; i < b.count * 3; i++) expect(Number.isFinite(b.pos[i])).toBe(true);
+        let bad = 0;
+        for (let i = 0; i < b.count * 3; i++) if (!Number.isFinite(b.pos[i])) bad++;
+        expect(bad, `${s.id} on ${tier}: non-finite positions`).toBe(0);
       }
   });
 
