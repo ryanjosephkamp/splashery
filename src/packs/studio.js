@@ -18,6 +18,28 @@ import { spectrogram, landscapePlan, toMono, DB_FLOOR, F_MIN, F_MAX } from "./st
 // that sum; a real plate's differ a little). Sand hops where |w| is large and
 // stays where it is small, so it drifts to the nodal lines.
 
+// A flat, smooth sheet of splats facing up: two staggered lattices of flat
+// discs that overlap, so it reads as a solid surface (not a grid of dots).
+// `cells` is the number of splats to spend; color(x, z) gives each one's color.
+function sheet(k, { x0, x1, z0, z1, y, cells, color, part = 0, opacity = 1 }) {
+  const w = x1 - x0;
+  const d = z1 - z0;
+  const gx = Math.max(4, Math.round(Math.sqrt((cells / 2) * (w / d))));
+  const gz = Math.max(4, Math.round(cells / 2 / gx));
+  const sx = w / gx;
+  const sz = d / gz;
+  const size = (0.66 * Math.max(sx, sz)) / 0.01; // a splat reads about 2.5 sizes across
+  const list = [];
+  for (let layer = 0; layer < 2; layer++)
+    for (let i = 0; i < gx - layer; i++)
+      for (let j = 0; j < gz - layer; j++) {
+        const x = x0 + (i + 0.5 + layer * 0.5) * sx;
+        const z = z0 + (j + 0.5 + layer * 0.5) * sz;
+        list.push({ p: [x, y, z], n: [0, 1, 0], flat: 0.02, size, opacity, color: color(x, z), part, pattern: false }); // prettier-ignore
+      }
+  k.cloud({ share: list.length / k.count, pattern: false }, (rand, i) => list[i] || null);
+}
+
 export const F0 = 60; // Hz per unit of n² + m²
 
 // The modes on offer: each names its (n, m) and sign.
@@ -143,7 +165,7 @@ function chladniCue(mode, on) {
 const CHLADNI = {
   alive: (c) => c.bow > 0.001 && c.bow < 0.999,
   // Sand grains take most of the budget (in twelve copies of which one shows).
-  density: 1,
+  density: 2,
   options: [
     {
       key: "mode",
@@ -181,10 +203,6 @@ const CHLADNI = {
   },
   build(k, o) {
     const mode = modeById(o.mode);
-    const steel = (c) => {
-      const f = 0.86 + 0.14 * c.n[1] - 0.1 * Math.abs(c.lp[0]) * 0;
-      return shade(mix("#5b6672", "#7d8896", 0.5 + 0.4 * c.fbm(c.p[0] * 5, 0, c.p[2] * 5, 2)), f);
-    };
     // The stand: a base, a post, and the plate clamped on top.
     const plate = k.part("plate", { pivot: [0, 0, 0], axis: [0, 1, 0] });
     k.add(k.cylinder(0.5, 0.1, { caps: true }), {
@@ -199,13 +217,24 @@ const CHLADNI = {
       share: 0.04,
       even: true,
     });
+    // The plate: its top a smooth sheet of overlapping flat discs (brushed
+    // steel, a soft light across it), its edge a thin box.
     k.add(k.box(2 * PLATE, PLATE_T, 2 * PLATE), {
-      pos: [0, -PLATE_T / 2, 0],
-      color: steel,
+      pos: [0, -PLATE_T / 2 - 0.002, 0],
+      color: (c) => shade("#56606c", 0.75 + 0.25 * Math.abs(c.n[1])),
       part: plate,
-      share: 0.14,
+      share: 0.04,
       even: true,
-      jitter: 0.01,
+    });
+    sheet(k, {
+      x0: -PLATE,
+      x1: PLATE,
+      z0: -PLATE,
+      z1: PLATE,
+      y: 0.001,
+      cells: k.count * 0.16,
+      part: plate,
+      color: (x, z) => mix("#5d6874", "#7a8593", clamp(0.5 + (0.28 * (x - z)) / PLATE, 0, 1)),
     });
     // The bow: a slim stick with a pale ribbon of hair against the front edge.
     const bow = k.part("bow");
@@ -224,7 +253,7 @@ const CHLADNI = {
     });
     // The sand: one splat per grain in each of the twelve copies.
     const copies = KEYS;
-    const n = Math.max(200, Math.floor((k.count * 0.7) / copies));
+    const n = Math.max(200, Math.floor((k.count * 0.6) / copies));
     const snaps = settle(mode, n, () => k.rand());
     const at = (s, i) => [
       (s[i * 3] * 2 - 1) * PLATE,
@@ -234,12 +263,12 @@ const CHLADNI = {
     const tone = Array.from({ length: n }, () => k.rand());
     for (let j = 0; j < copies; j++) {
       const part = k.part(`sand${j}`);
-      k.cloud({ share: n / k.count, size: 0.7, pattern: false }, (rand, i) => ({
+      k.cloud({ share: n / k.count, size: 0.5, pattern: false }, (rand, i) => ({
         p: at(snaps[j], i),
         to: at(snaps[j + 1], i),
         channel: 0,
         color: mix("#e9d8ac", "#f8efd2", tone[i]),
-        size: 0.7 + 0.5 * tone[i],
+        size: 0.5 + 0.4 * tone[i],
         opacity: 0.98,
         part,
         pattern: false,
@@ -336,7 +365,7 @@ function landscapeLength(duration) {
 function songColor(look, f, nf, h) {
   if (look === "loudness") return ramp(["#16224f", "#2b63c9", "#2fc2b8", "#f4e25c", "#ffffff"], h);
   const c = ramp(["#3b6cff", "#22c3d6", "#5ee27a", "#f2d43c", "#ff8a3c", "#ff4f7b"], f / (nf - 1));
-  return shade(c, 0.32 + 0.68 * h);
+  return shade(c, 0.5 + 0.5 * h);
 }
 
 // Where the song is (for the tests): playing or not, and the second.
@@ -453,13 +482,13 @@ const SONG_LANDSCAPE = {
   build(k, o) {
     const song = SONG.want || SONG.sample;
     SONG.current = song;
-    const budget = Math.floor(k.count * 0.5); // cells rise in up to three layers
+    const budget = Math.floor(k.count * 0.3); // cells rise in up to three layers
     const d = landscapeData(song.samples, song.rate, budget);
     const D = landscapeLength(d.duration);
     const { nf, nt } = d;
     const cw = W / nf;
     const cd = D / nt;
-    const sizeOf = (span) => (span * 1.1) / 0.025;
+    const sizeOf = (span) => (span * 1.5) / 0.025;
     const x = (f) => (f / (nf - 1) - 0.5) * W;
     const z = (t) => D / 2 - ((t + 0.5) / nt) * D;
     const hAt = (t, f) => d.height[Math.min(nt - 1, Math.max(0, t)) * nf + Math.min(nf - 1, Math.max(0, f))]; // prettier-ignore
@@ -473,7 +502,7 @@ const SONG_LANDSCAPE = {
         const sx = ((hAt(t, f + 1) - hAt(t, f - 1)) * H) / (2 * cw);
         const sz = ((hAt(t - 1, f) - hAt(t + 1, f)) * H) / (2 * cd);
         const nl = Math.hypot(sx, 1, sz);
-        const nrm = [-sx / nl, 1 / nl, -sz / nl];
+        const nrm = [(-sx * 0.4) / nl, 1 / nl, (-sz * 0.4) / nl];
         const col = songColor(o.look, f, nf, h);
         const layers = h > 0.06 ? 1 + Math.min(2, Math.floor((h * H) / 0.12)) : 1;
         for (let l = 0; l < layers; l++) {
@@ -483,14 +512,13 @@ const SONG_LANDSCAPE = {
             n: l === 0 ? nrm : [0, 0, 1],
             color: l === 0 ? col : shade(col, 0.8),
             size: sizeOf(Math.max(cw, cd * (l === 0 ? 1 : 1.5))),
-            flat: 0.15,
+            flat: 0.05,
             opacity: 0.98,
             part: 0,
           });
         }
       }
-    const floor = k.part("floor");
-    k.add(k.box(W + 0.16, 0.03, D + 0.16), { pos: [0, -0.02, 0], color: "#20242c", share: 0.06, even: true, part: floor, }); // prettier-ignore
+    sheet(k, { x0: -W / 2 - 0.08, x1: W / 2 + 0.08, z0: -D / 2 - 0.08, z1: D / 2 + 0.08, y: -0.005, cells: k.count * 0.08, color: () => "#2a303a" }); // prettier-ignore
     const share = Math.min(0.85, cells.length / k.count);
     k.cloud({ share, pattern: false }, (rand, i) => cells[i] || null);
     // The waveform runs along the left edge: the song's swing (from where
@@ -508,8 +536,8 @@ const SONG_LANDSCAPE = {
       const zz = D / 2 - ((t + 0.5) / wave.length) * D;
       const a = (wave[t] / wmax) * 0.3;
       for (const sgn of [1, -1])
-        wcells.push({ p: [-W / 2 - 0.18, 0.4 + sgn * a, zz], color: "#f4f0e6", size: sizeOf(cd * 2), opacity: 0.95, part: 0, pattern: false }); // prettier-ignore
-      wcells.push({ p: [-W / 2 - 0.18, 0.4, zz], color: "#8a93a6", size: sizeOf(cd * 1.2), opacity: 0.8, part: 0, pattern: false }); // prettier-ignore
+        wcells.push({ p: [-W / 2 - 0.18, 0.4 + sgn * a, zz], color: "#d9a520", size: sizeOf(cd * 3), opacity: 1, part: 0, pattern: false }); // prettier-ignore
+      wcells.push({ p: [-W / 2 - 0.18, 0.4, zz], color: "#8a93a6", size: sizeOf(cd * 2), opacity: 1, part: 0, pattern: false }); // prettier-ignore
     }
     k.cloud({ share: wcells.length / k.count, pattern: false }, (rand, i) => wcells[i] || null);
     // The marker: a glowing line across the landscape at the start of the song.

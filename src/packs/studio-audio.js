@@ -125,7 +125,7 @@ export function spectrogram(samples, rate, { frames = 200, perOctave = 12, size 
 
 // How the landscape is sized to a splat budget: the bands (12 per octave
 // unless the budget is small) and the slices, at most `perSecond` a second.
-export function landscapePlan(duration, budget, { perSecond = 24, maxFrames = 1200 } = {}) {
+export function landscapePlan(duration, budget, { perSecond = 40, maxFrames = 1600 } = {}) {
   let perOctave = 12;
   let nf = bands(perOctave).nf;
   if (budget / nf < 60) {
