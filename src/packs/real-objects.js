@@ -164,6 +164,10 @@ export const ease = (t) => t * t * (3 - 2 * t);
 export const seg = (t, a, b) => clamp((t - a) / (b - a), 0, 1);
 export const bump = (t, a, b, c, d) => smoothstep(a, b, t) * (1 - smoothstep(c, d, t));
 
+// An angle wrapped into -π..π: a full turn ends exactly where it started (the same quaternion,
+// not its negative).
+const wrap = (a) => a - 2 * Math.PI * Math.round(a / (2 * Math.PI));
+
 // Rotates v about the z axis by a (radians).
 const rotZ = (v, a) => {
   const c = Math.cos(a);
@@ -265,7 +269,7 @@ const WATER_BOTTLE = {
       WB.capRest[2] * hop,
     ];
     out.parts.cap = {
-      quat: quatAxisAngle([0, 1, 0], 4 * Math.PI * unscrew + 1.2 * Math.PI * hop),
+      quat: quatAxisAngle([0, 1, 0], wrap(4 * Math.PI * unscrew + 1.2 * Math.PI * hop)),
       offset: capOff,
     };
     const pose = wbPose(s);
@@ -440,7 +444,7 @@ const SUNGLASSES = {
     const lift = 0.12 * Math.sin(Math.PI * seg(s, 0.75, 1.55));
     const qF = quatMul(
       quatAxisAngle([0, 1, 0], SG.rest * (1 - face)),
-      quatAxisAngle([1, 0, 0], -2 * Math.PI * flip),
+      quatAxisAngle([1, 0, 0], wrap(-2 * Math.PI * flip)),
     );
     const o = [0, lift, 0];
     out.parts.front = childOf(qF, o, SG.center);
@@ -558,8 +562,8 @@ const BASEBALL_CAP = {
     const wob = 0.12 * Math.sin(Math.PI * glide) * Math.sin(9 * glide);
     const tilt = -0.3 * Math.sin(Math.PI * hop2) ** 2;
     const q = quatMul(
-      quatAxisAngle([0, 1, 0], yaw),
-      quatMul(quatAxisAngle([1, 0, 0], -flip + tilt), quatAxisAngle([0, 0, 1], wob)),
+      quatAxisAngle([0, 1, 0], wrap(yaw)),
+      quatMul(quatAxisAngle([1, 0, 0], wrap(-flip + tilt)), quatAxisAngle([0, 0, 1], wob)),
     );
     out.parts.cap = { quat: q, offset: off };
     sortWhileMoving(out, info, s, on && s < BC.T, 0.04);

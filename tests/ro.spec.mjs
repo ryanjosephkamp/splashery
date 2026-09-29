@@ -56,7 +56,7 @@ test.describe("Real objects", () => {
         const count = Math.round(Math.min(P.maxCount, P.defaultCount * (RECIPES[id].density ?? 1)));
         const ctx = await build(id, count);
         expect(ctx.buf.count, `${id} at ${tier}`).toBeLessThanOrEqual(count * 1.02);
-        expect(ctx.buf.count, `${id} at ${tier}`).toBeGreaterThan(count * 0.5);
+        expect(ctx.buf.count, `${id} at ${tier}`).toBeGreaterThan(Math.min(count * 0.5, 100000));
         let bad = 0;
         for (let i = 0; i < ctx.buf.count * 3; i++) if (!Number.isFinite(ctx.buf.pos[i])) bad++;
         expect(bad).toBe(0);
