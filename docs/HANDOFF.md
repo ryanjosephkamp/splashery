@@ -40,12 +40,16 @@ work is in [OPERATING.md](OPERATING.md).
 - On September 28, 2026 the owner accepted a new step 3, **Pictures and pages** (ROADMAP.md): open a
   PDF, photos, a GIF or a video and see it made of splats, as a book, an album, a frame or a screen.
   The Operator's test on the real engine turned an article page into 172k splats that read at phone
-  size when zoomed. The engine lane, Pictures, started the same day.
+  size when zoomed. The engine lane, Pictures, merged the same evening (#64): PDF pages, photos, GIF
+  and video frames become splats (PDF.js and omggif vendored), pages stream through a few sheets
+  with near and far detail, the Toy tab can open a file or a web address, and the Picture lab test
+  toy sits behind the labs switch (`?labs=1`). The owner marked all eight clips good. The toy lanes
+  Books, Screens and Manual build on it now.
 - The shelf has 303 toys (32 scans, 4 shapes and 267 kit toys). The plan (`tools/toy-plan.json`,
   [TOY-PLAN.md](TOY-PLAN.md)): all 303 keep. Every planned new tap effect is built. Scene schema v3;
   v2 still loads.
 - Every kit toy's tap is checked by `tests/taps.spec.mjs`; its known exceptions (with reasons) are
-  listed at its top. The full suite has 253 tests.
+  listed at its top. The full suite has 267 tests.
 - The governance from September 27 is merged (#53): the Operator runs the lanes, workers are Opus
   5.5 only, new public text is in American English (`tools/us-english.mjs`), and the sound review
   runs on the Sound Board. Splashery's own code is MIT licensed (#51, `LICENSE`); assets keep their
@@ -57,13 +61,15 @@ work is in [OPERATING.md](OPERATING.md).
 
 The full table, with owned files, sessions, branches and PRs, is [WORKSTREAMS.md](WORKSTREAMS.md).
 
-| Lane                                     | Status                                                                                     | Handoff                                    |
-| ---------------------------------------- | ------------------------------------------------------------------------------------------ | ------------------------------------------ |
-| Operator                                 | Running; runs the lanes                                                                    | —                                          |
-| Pictures: pictures and pages, the engine | Running (started September 28, 2026)                                                       | [handoff/Pictures.md](handoff/Pictures.md) |
-| Next (WORKSTREAMS.md, Next)              | The picture toy lanes; the sound review (when the owner's notes arrive); pianos and songs… | —                                          |
+| Lane                                                     | Status                                                              | Handoff                                  |
+| -------------------------------------------------------- | ------------------------------------------------------------------- | ---------------------------------------- |
+| Operator                                                 | Running; runs the lanes                                             | —                                        |
+| Books: your book, the photo album and the picture frame  | Running (started September 28, 2026)                                | [handoff/Books.md](handoff/Books.md)     |
+| Screens: the screen and the Gaussian splat toy           | Running (started September 28, 2026)                                | [handoff/Screens.md](handoff/Screens.md) |
+| Manual: the splat equation toy and the Tinkerer's Manual | Running (started September 28, 2026)                                | [handoff/Manual.md](handoff/Manual.md)   |
+| Next (WORKSTREAMS.md, Next)                              | The sound review (when the owner's notes arrive); pianos and songs… | —                                        |
 
-E4-finish, E5, E6a, E6b, F, G, Math, Fix3, AI, Help, HelpTextA and HelpTextB are done
+E4-finish, E5, E6a, E6b, F, G, Math, Fix3, AI, Help, HelpTextA, HelpTextB and Pictures are done
 (WORKSTREAMS.md, "Done"). On September 27, 2026 the owner approved the plan in Part 1 of the How
 Splashery Is Made page: the Operator runs the lanes, workers are Opus 5.5 only (at the default
 effort, a trial), new public text is in American English, and the work goes in the order in

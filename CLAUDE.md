@@ -36,7 +36,7 @@ coordinates. [docs/OPERATING.md](docs/OPERATING.md) has the rules. In short:
 
 - Static files and ES modules only. No bundler, CDN, server, or API keys in the page. PlayCanvas
   2.22.3 is vendored in `vendor/` and imported only through `src/pc.js`. PDF.js and omggif (approved
-  September 28, 2026) may be vendored there too, loaded only when someone opens a PDF or a GIF.
+  September 28, 2026) are vendored there too, loaded only when someone opens a PDF or a GIF.
 - Build tools in `tools/` may use pinned devDependencies. List each one in `LICENSES.md`.
 - Assets must be CC0, CC BY or public domain. Never BY-SA or NC. Check the licence on the live
   source page. Record it in `CREDITS.md`, in `tools/assets.json` or `tools/models.json`, and in the

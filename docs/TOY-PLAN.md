@@ -10,8 +10,8 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 304 toys. 304 have a tap action today; the other 0 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 303.
+- 305 toys. 305 have a tap action today; the other 0 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 304.
 - **more** (has an effect; make it clearer or more dramatic): 0.
 - **new** (needs its own effect): 1.
 - Visual fixes: 0 open, 28 done. Touch or drag interaction asked for: 4.
@@ -45,14 +45,14 @@ Proposals below are suggestions; the owner may change them.
   Pineapple, Cherries, Grapes, Avocado, Building bricks, Rubber duck, Newton's cradle, Puzzle cube,
   Kite, Chess set, Lorenz attractor, Möbius strip, Klein bottle, Menger sponge, Hypercube, Torus
   knot, Gyroid, Mandelbulb, Seashell spiral, Graph plotter, Surface plotter, Circle and waves,
-  Fourier circles, Pythagoras proof, Heraldic shield, Crown, Wizard's orb, Jellyfish, School of
-  fish, Pufferfish, Nautilus, Snail, Octopus, Sea urchin, Frog, Snowman, Fireworks, Decorated tree,
-  Diya, Acoustic guitar, Snare drum, Xylophone, Hot-air balloon, Bus, Jet airliner, Sailboat,
-  Submarine, Bicycle, Eiffel Tower, Washington Monument, Pyramids of Giza, Twisting supertall,
-  Statue of Liberty, White House, Leaning Tower of Pisa, Colosseum, Parthenon, Stonehenge, Big Ben,
-  Taj Mahal, Castle, Pagoda, Windmill, Perceptron, Multilayer perceptron, Neural network,
-  Convolutional network, Recurrent network, Transformer, Looped transformer, Diffusion model,
-  Gradient descent, Word vectors, Sorting machine, Half adder.
+  Fourier circles, Pythagoras proof, Splat equation, Heraldic shield, Crown, Wizard's orb,
+  Jellyfish, School of fish, Pufferfish, Nautilus, Snail, Octopus, Sea urchin, Frog, Snowman,
+  Fireworks, Decorated tree, Diya, Acoustic guitar, Snare drum, Xylophone, Hot-air balloon, Bus, Jet
+  airliner, Sailboat, Submarine, Bicycle, Eiffel Tower, Washington Monument, Pyramids of Giza,
+  Twisting supertall, Statue of Liberty, White House, Leaning Tower of Pisa, Colosseum, Parthenon,
+  Stonehenge, Big Ben, Taj Mahal, Castle, Pagoda, Windmill, Perceptron, Multilayer perceptron,
+  Neural network, Convolutional network, Recurrent network, Transformer, Looped transformer,
+  Diffusion model, Gradient descent, Word vectors, Sorting machine, Half adder.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -1430,7 +1430,7 @@ Proposals below are suggestions; the owner may change them.
     over). The Play button, the game bar and a tap beside the board still play the Opera Game.
   - Sound: Wooden piece clacks.
 
-## Maths (16)
+## Maths (17)
 
 - **Lorenz attractor** (`lorenz`). Now: tap: Race along the path. Plan: keep.
   - Owner: Spin a little more or be more dynamic; looks good when still.
@@ -1558,6 +1558,19 @@ Proposals below are suggestions; the owner may change them.
     a² + b² = c² below; then they slide back (4.5 s). In this classic arrangement the pieces slide
     without turning, and one stays put.
   - Sound: Wooden slides, and a click as each piece lands.
+- **Splat equation** (`splat-equation`). Now: tap: Play t. Plan: keep.
+  - Owner: The owner's notes and the Pages into Splats plan (accepted September 28, 2026): people
+    type their own Gaussian splat equations and play with them, with a Tinkerer's Manual that
+    explains the language.
+  - Effect: One cycle of time t plays, so the shape moves in real time: a torus rolls, a sphere
+    ripples, a galaxy turns.
+  - Improved: Manual: new toy (labs). You type where every splat goes and what color it is, as
+    equations in u, v and t (x, y and z, the ranges of u and v, hue or r, g and b, size, count and
+    spread), read by lane Math's safe reader. Eight programs to start from: sphere, torus, Möbius
+    strip, seashell, trefoil knot, wave, spiral galaxy and Klein bottle. A tap plays t from 0 to 2π
+    (4 s) through twelve copies, each morphing into the next; a program without t draws its splats
+    again in order.
+  - Sound: A soft rising tone as t plays.
 
 ## Medieval (9)
 

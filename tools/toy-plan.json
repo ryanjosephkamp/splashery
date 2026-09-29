@@ -1488,6 +1488,13 @@
       "sound": "Wooden slides, and a click as each piece lands.",
       "improved": "Math: new toy. A tap slides the wooden triangles one at a time from two rectangles into the four corners: the empty squares a² and b² fade and the tilted square c² lights up, with a² + b² = c² below; then they slide back (4.5 s). In this classic arrangement the pieces slide without turning, and one stays put."
     },
+    "splat-equation": {
+      "v": "keep",
+      "owner": "The owner's notes and the Pages into Splats plan (accepted September 28, 2026): people type their own Gaussian splat equations and play with them, with a Tinkerer's Manual that explains the language.",
+      "effect": "One cycle of time t plays, so the shape moves in real time: a torus rolls, a sphere ripples, a galaxy turns.",
+      "sound": "A soft rising tone as t plays.",
+      "improved": "Manual: new toy (labs). You type where every splat goes and what color it is, as equations in u, v and t (x, y and z, the ranges of u and v, hue or r, g and b, size, count and spread), read by lane Math's safe reader. Eight programs to start from: sphere, torus, Möbius strip, seashell, trefoil knot, wave, spiral galaxy and Klein bottle. A tap plays t from 0 to 2π (4 s) through twelve copies, each morphing into the next; a program without t draws its splats again in order."
+    },
     "seashell-spiral": {
       "v": "keep",
       "owner": "Something to do with hearing the ocean in a seashell.",
