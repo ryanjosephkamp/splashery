@@ -50,13 +50,20 @@ work is in [OPERATING.md](OPERATING.md).
   splatting toy. Lane Viewer merged the same night (#75): whole PDF figures (the black boxes were a
   rounding bug, not censorship), pinch that only zooms, a tilt lock for flat toys, Reset view, Tilt
   lock and Turntable in the top bar, flag colors per toy, and the terms of use. The owner marked all
-  five clips good. Lane Books is finishing (#73, with engine PR #74).
-- The shelf has 303 toys (32 scans, 4 shapes and 267 kit toys), plus four labs toys hidden unless
-  `?labs=1` (the Picture lab, the splat equation, the Screen and Gaussian splatting). The plan
-  (`tools/toy-plan.json`, [TOY-PLAN.md](TOY-PLAN.md)): all 307 keep. Every planned new tap effect is
-  built. Scene schema v3; v2 still loads.
+  five clips good. Later that morning three Universe lanes merged: Studio Sound (#80, with the
+  Operator's engine PR #81), a new Studio shelf with the song landscape and the Chladni plate, built
+  by Sonnet 5.5; Lab (#83, with engine PR #85), a sharper splat kernel as a labs option and splat
+  fields on the GPU, built by Opus 5.5; and Learn (#84), the Tinkerer's Manual audited and brought
+  up to date (34 pages now) and the lab notebook backfilled, built by Sonnet 5.5. The Operator's
+  engine PR #87 lets a recipe take several files at once, for lane Studio Models. Lane Books is
+  finishing (#73, with engine PR #74).
+- The shelf has 303 toys (32 scans, 4 shapes and 267 kit toys), plus seven labs toys hidden unless
+  `?labs=1` (the Picture lab, the splat equation, the Screen, Gaussian splatting, the song
+  landscape, the Chladni plate and the splat field). The plan (`tools/toy-plan.json`,
+  [TOY-PLAN.md](TOY-PLAN.md)): all 310 keep. Every planned new tap effect is built. Scene schema v3;
+  v2 still loads.
 - Every kit toy's tap is checked by `tests/taps.spec.mjs`; its known exceptions (with reasons) are
-  listed at its top. The full suite has 304 tests.
+  listed at its top. The full suite has 356 tests.
 - The governance from September 27 is merged (#53): the Operator runs the lanes, workers are Opus
   5.5 only, new public text is in American English (`tools/us-english.mjs`), and the sound review
   runs on the Sound Board. Splashery's own code is MIT licensed (#51, `LICENSE`); assets keep their
@@ -75,24 +82,24 @@ work is in [OPERATING.md](OPERATING.md).
 
 The full table, with owned files, sessions, branches and PRs, is [WORKSTREAMS.md](WORKSTREAMS.md).
 
-| Lane                                                    | Status                                                                                        | Handoff                                          |
-| ------------------------------------------------------- | --------------------------------------------------------------------------------------------- | ------------------------------------------------ |
-| Operator                                                | Running; runs the lanes                                                                       | —                                                |
-| Books: your book, the photo album and the picture frame | Running (started September 28, 2026)                                                          | [handoff/Books.md](handoff/Books.md)             |
-| Worlds: the world engine and a sandbox island           | Running, Opus 5.5 (September 29, 2026)                                                        | [handoff/Worlds.md](handoff/Worlds.md)           |
-| Fidelity A: the grainy-toy audit                        | Running, Opus 5.5 (September 29, 2026)                                                        | [handoff/FidelityA.md](handoff/FidelityA.md)     |
-| Studio Sound: the song landscape and the Chladni plate  | Running, Sonnet 5.5 (September 29, 2026)                                                      | [handoff/StudioSound.md](handoff/StudioSound.md) |
-| Learn: the Manual audit and the lab notebook            | Running, Sonnet 5.5 (September 29, 2026)                                                      | [handoff/Learn.md](handoff/Learn.md)             |
-| Lab: sharper kernels and splat fields                   | Running, Opus 5.5 (September 29, 2026)                                                        | [handoff/Lab.md](handoff/Lab.md)                 |
-| Integrator: combined test runs                          | Running, Sonnet 5.5 (September 29, 2026)                                                      | —                                                |
-| Next (WORKSTREAMS.md, Next)                             | Sound A and B (when the owner's notes arrive), Fidelity B, Studio: 3D models, the pilot game… | —                                                |
+| Lane                                                    | Status                                                                                    | Handoff                                                                |
+| ------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| Operator                                                | Running; runs the lanes                                                                   | —                                                                      |
+| Books: your book, the photo album and the picture frame | Running (started September 28, 2026)                                                      | [handoff/Books.md](handoff/Books.md)                                   |
+| Worlds: the world engine and a sandbox island           | Running, Opus 5.5 (September 29, 2026)                                                    | [handoff/Worlds.md](handoff/Worlds.md)                                 |
+| Fidelity A: the grainy-toy audit                        | Running, Opus 5.5 (September 29, 2026)                                                    | [handoff/FidelityA.md](handoff/FidelityA.md)                           |
+| Studio Models: 3D model files to splats                 | Running, Sonnet 5.5 (September 29, 2026)                                                  | [handoff/StudioModels.md](handoff/StudioModels.md)                     |
+| Fidelity B: the rest of the grainy toys                 | Running, Opus 5.5 (September 29, 2026)                                                    | [handoff/FidelityB.md](handoff/FidelityB.md)                           |
+| A/B: the toy piano, makers A and B                      | Running, one on each model, hidden until the owner marks them (September 29, 2026)        | [handoff/AB-A.md](handoff/AB-A.md), [handoff/AB-B.md](handoff/AB-B.md) |
+| Integrator: combined test runs                          | Running, Sonnet 5.5 (September 29, 2026)                                                  | —                                                                      |
+| Next (WORKSTREAMS.md, Next)                             | Sound A and B (when the owner's notes arrive), the pilot game, the Forest trail template… | —                                                                      |
 
 E4-finish, E5, E6a, E6b, F, G, Math, Fix3, AI, Help, HelpTextA, HelpTextB, Pictures, Manual and
-Screens are done, and so is Viewer (WORKSTREAMS.md, "Done"). On September 27, 2026 the owner
-approved the plan in Part 1 of the How Splashery Is Made page: the Operator runs the lanes, workers
-are Opus 5.5 only (at the default effort, a trial), new public text is in American English, and the
-work goes in the order in ROADMAP.md, "Now". Lanes AI and Math started that day, and the Sound Board
-has its review features, ready for the owner's sound notes.
+Screens are done, and so are Viewer, Studio Sound, Learn and Lab (WORKSTREAMS.md, "Done"). On
+September 27, 2026 the owner approved the plan in Part 1 of the How Splashery Is Made page: the
+Operator runs the lanes, workers are Opus 5.5 only (at the default effort, a trial), new public text
+is in American English, and the work goes in the order in ROADMAP.md, "Now". Lanes AI and Math
+started that day, and the Sound Board has its review features, ready for the owner's sound notes.
 
 The owner reviewed the AI and Math clips the same day
 ([reviews/2026-09-27-ai-math](reviews/2026-09-27-ai-math/review.md)): seven good, and extras for the
