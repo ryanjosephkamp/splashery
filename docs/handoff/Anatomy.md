@@ -115,55 +115,71 @@ HOW THIS LANE RUNS
   docs/OPERATING.md, docs/PACKS.md, docs/WORKSTREAMS.md and docs/handoff/history.md (lessons from
   earlier lanes).
 - Your handoff file: create it. Start it with this brief, word for word, under "## Brief", then keep
-  "## State", "## Notes", "## Known issues" and "## For the Operator" current. Note your model at
-  the top of "## State" (the blog post compares the two models).
-- Shared lists: edit only your own entries in src/toys.js, src/toy-sounds.js, src/toy-help.js (a
-  how-to line and an About text per toy, following docs/handoff/Help.md), tools/toy-plan.json,
-  CREDITS.md and tools/assets.json. Regenerate docs/TOY-PLAN.md with `node tools/toy-plan.mjs`;
-  never merge it by hand.
-- Never edit tests/taps.spec.mjs. Your own tests go in tests/<prefix>.spec.mjs. If a finished lane's
-  test breaks because of a count or a list your work changes, don't edit it: say which test and why
-  in your message, and the Operator fixes it.
-- Assets: CC0, CC BY or public domain only, checked on the live source page and credited
-  (CREDITS.md, tools/assets.json and the toy's in-app credit). Never BY-SA or NC. No logos, brand
-  names or insignia.
-- Review: post clips and cards to the Effect review page,
-  https://claude.ai/artifact/NCsg9V5SzFY3Mnwuwgq7pi, as OPERATING.md's "Steps for a lane" says.
-  Judge every effect as motion at phone size against the effect quality rules before you post it.
-  The Operator has made your lane's record. Don't republish the page, and never write to "verdicts".
-- Push your work in progress to your branch about every hour, so it isn't only in your container,
-  and open your draft PR early. Many lanes run at once now, so main moves often: merge it into your
-  branch before each push (never rebase a pushed branch) and keep both sides of any conflict.
-- Before every push, follow "Before every push" in CLAUDE.md: the full Playwright suite
-  (SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium npx playwright test), prettier,
-  `node tools/us-english.mjs --diff`, `node tools/check-packs.mjs <pack>` for new or changed toys, a
-  contact sheet and thumbnails, and your own screenshots at 390×844 and 1440×900. Then put back the
-  standard screenshots (`node tools/upkeep.mjs --restore-shots`) and any other lane's screenshots
-  your branch didn't change.
-- PR: one draft PR against main with the five sections (Summary, Verification, Deviations, Known
-  issues, What was cut), and the model that built it in the Summary. When main moves, merge it into
-  your branch.
-- After you post your cards, check the owner's marks (the "verdicts" collection, ids starting with
-  your prefix) about once an hour with a scheduled check-in (send_later). Fix every "fix" in the
-  same PR, post the new clip as a "-r2" card, and set replacedBy on the old one. Stop the check-ins
-  once your PR is merged or closed.
-- Finish every working turn with a short final message that starts with "READY:" (PR link, card ids,
-  test results, anything for the Operator), "WORKING:" (what's left), or "BLOCKED:" (exactly what
-  you need).
+  "## State
 
-## State
+Model: Opus 5.5 (default effort). Started September 29, 2026. Draft PR #92; engine PR #93 (merge it
+first).
 
-Model: Opus 5.5 (default effort). Started September 29, 2026.
-
-- Planning: a kit-built figure (no registered, layered full-body model under CC0/CC BY/PD was found;
-  see Notes), with our heart, brain, lungs and kidney recipes placed inside it.
+- Built: `anatomy-atlas` (labs, Body shelf) in `src/packs/anatomy-atlas.js`, with its sound, help
+  text, plan entry, thumbnail and `tests/an.spec.mjs` (7 tests, all pass).
+- Engine PR #93: `out.legend`, a list of names beside the stage (the Labels switch). The lane branch
+  carries it until it merges.
+- Cards on the Effect review page (lane Anatomy): `an-peel`, `an-layers`, `an-labels`.
+- Still to do: read the owner's marks (ids starting `an`) about hourly and fix any "fix".
 
 ## Notes
 
-- Sources checked: the Smithsonian open access 3D API answers but lists no human anatomy; its GLBs
-  are Draco-compressed (the converter doesn't read Draco). NIH 3D answers. BodyParts3D and Z-Anatomy
-  are CC BY-SA: not used.
+- Sources checked: the Smithsonian open access 3D API answers but lists no human anatomy, and its
+  GLBs are Draco-compressed (the converter doesn't read Draco). NIH 3D answers, but I found no full,
+  layered body (skin, muscles, bones and organs registered together) under CC0, CC BY or public
+  domain; separate organ models from different sources wouldn't line up in one body without hand
+  fitting. BodyParts3D and Z-Anatomy are CC BY-SA: not used. So the atlas is kit-built, with our own
+  brain, lungs, heart and kidney recipes placed inside it (no converted model files, no new
+  credits).
+- The body: about 55 primitives (ellipsoids and round cones) joined by a smooth minimum. The join is
+  order-independent (the nearest primitive's distance, less the largest fillet any neighbor makes
+  with it), so the surface is smooth where the nearest primitive changes; a chained smin left steps
+  that made dark specks.
+- Each primitive's surface is sampled evenly, pushed onto the joined surface, and kept only where
+  that primitive is the nearest, so overlaps don't double up. Points are made all at once, and each
+  splat is sized from its four nearest neighbors, so a primitive whose visible part is stretched by
+  the join still closes (this removed the last cracks). The muscles reuse the skin's points, 4.5 mm
+  in.
+- Muscle groups, tendons, fibers and the grooves between groups are colored by rules on position
+  (`muscleAt`); the skin's seams by `skinPiece`.
+- Pieces are tokens (48 at most: 13 skin, 19 muscle, 16 bone). Each layer is a part, so the inner
+  layers are hidden while covered. Skin pieces swing open on hinges at their seams, then fly off
+  sideways, up or back (never toward the viewer); muscles and bones tilt and lift, then fly off, one
+  group after another. `out.resort` is set eight times per peel (PACKS.md 7b, rules 12 and 13).
+- The organ recipes are built through a placement proxy (`placed()`): it moves, turns and scales
+  their shapes, gives their color functions their own coordinates, drops their moving effects and
+  lowers their shapes' grids.
+- The tap count (`info.tap.n`) and the Layer option decide the layer, so drive() keeps no state but
+  the resort step, the chime and the highlight.
+- Budget: `density: 1.5` (like the model converter), so 90k, 210k, 300k and 400k splats on the four
+  tiers. At 200k: skin about 55k, muscles 55k, bones 67k, organs 24k.
+- Clips were made with a phone-shaped copy of `tools/effect-clip.mjs` (288×624, a slow turn) kept
+  outside the repo.
 
 ## Known issues
 
+- Build time: `node tools/check-packs.mjs anatomy-atlas` reports 1.3 to 1.5 s at 200,000 splats in
+  this container, sometimes just over the 1.5 s line when the machine is busy. The atlas builds four
+  organ recipes plus a body; the heart, lungs and brain toys alone take 0.5 to 0.9 s each here.
+- The organs are small when the whole figure is framed; zoom in to see them.
+- The knee-cap tendons are small squares on the muscle layer.
+- A few bones sit within a millimeter or two of the muscle surface (the cheekbones, the hands); it
+  only matters while the muscles fly off.
+
 ## For the Operator
+
+- Merge engine PR #93 before #92.
+- The Effect review lane note says the atlas is made from converted models; it is kit-built (see
+  Notes). Please correct the note if you like; I only wrote the cards.
+- A lesson for PACKS.md: a smooth body from primitives (`bodyShape()`, `fieldAt()`): sample each
+  primitive, project onto an order-independent smooth union, keep only the owner's points, size each
+  splat from its neighbors.
+- A lesson for PACKS.md: another recipe can be placed inside a toy through a proxy kit (`placed()`),
+  which keeps its colors right by giving its color functions their own coordinates.
+- If the owner wants converted anatomy later: a registered, layered body under CC0 or CC BY would be
+  needed (none found); organs from different sources would need fitting by hand.
