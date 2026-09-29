@@ -15,6 +15,7 @@ import {
   quatMul,
   quatRotate,
 } from "../kit.js";
+import { evenBox, evenCylinder } from "./even.js";
 
 const TAU = Math.PI * 2;
 const PHI = (1 + Math.sqrt(5)) / 2;
@@ -141,9 +142,49 @@ function polyShape(pts) {
     tris.push({ b: pts[i], c: pts[i + 1], cum: total });
   }
   const a = pts[0];
+  // For even: true (lane Fidelity B): a fan of triangles from the centre;
+  // a runs round the fan by area and b out from the centre.
+  const m = pts.length;
+  const ctr = [0, 1, 2].map((i) => pts.reduce((s, p) => s + p[i], 0) / m);
+  const fan = [];
+  let fanTotal = 0;
+  for (let i = 0; i < m; i++) {
+    const p0 = pts[i];
+    const p1 = pts[(i + 1) % m];
+    fanTotal += 0.5 * len(cross(sub(p0, ctr), sub(p1, ctr)));
+    fan.push({ p0, p1, cum: fanTotal });
+  }
+  const edgeAt = (p) => {
+    let edge = Infinity;
+    for (let i = 0; i < m; i++) {
+      const e0 = pts[i];
+      const e1 = pts[(i + 1) % m];
+      const d = sub(e1, e0);
+      const q = clamp(dot(sub(p, e0), d) / dot(d, d), 0, 1);
+      edge = Math.min(edge, len(sub(p, add(e0, mul(d, q)))));
+    }
+    return edge;
+  };
   return {
     area: total,
     thick: 0.05,
+    sampleEven(ea, eb) {
+      const x = Math.min(ea, 1 - 1e-9) * fanTotal;
+      let t = fan[fan.length - 1];
+      let start = 0;
+      for (const tr of fan) {
+        if (x < tr.cum) {
+          t = tr;
+          break;
+        }
+        start = tr.cum;
+      }
+      const g = clamp((x - start) / (t.cum - start || 1), 0, 1);
+      const r = Math.sqrt(eb);
+      const rim = add(t.p0, mul(sub(t.p1, t.p0), g));
+      const p = add(ctr, mul(sub(rim, ctr), r));
+      return { p, n, u: r, v: g, edge: edgeAt(p) };
+    },
     sample(rand) {
       const x = rand() * total;
       let t = tris[tris.length - 1];
@@ -1844,6 +1885,9 @@ export const RECIPES = {
         const part = k.part(o.solid + groups[i], { pivot: [0, 0, 0] });
         const tint = ramp(pal.slice(1), (i * 0.618 + 0.1) % 1);
         k.add(polyShape(f.pts), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           part,
           flat: 0.12,
           color: (c) => {
@@ -1897,6 +1941,9 @@ export const RECIPES = {
         ];
       };
       k.add(k.param(f, { grid: 140 }), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         rot: [0, 40, 0],
         flat: 0.15,
         // A swell of light passes as channel 0 runs from the tip (u = 0) to
@@ -2443,7 +2490,10 @@ function gridLines(lines, width, z) {
 const SLIDER_LEN = 1.1;
 function plotSlider(k, at, { part = null } = {}) {
   const [x, y, z] = at;
-  k.add(k.cylinder(0.018, SLIDER_LEN, { caps: true }), {
+  k.add(evenCylinder(0.018, 0.018, SLIDER_LEN), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     pos: [x, y, z],
     rot: [0, 0, 90],
     weight: 1.5,
@@ -2451,11 +2501,22 @@ function plotSlider(k, at, { part = null } = {}) {
   });
   // Tick marks at the ends and the middle.
   for (const f of [-0.5, 0, 0.5])
-    k.add(k.box(0.012, 0.07, 0.012), { pos: [x + f * SLIDER_LEN, y, z - 0.01], weight: 2, color: "#8b97ad" }); // prettier-ignore
+    k.add(evenBox(0.012, 0.07, 0.012),
+{
+even: true,
+opacity: 1,
+jitter: 0.015,
+pos: [x + f * SLIDER_LEN, y, z - 0.01],
+weight: 2,
+color: "#8b97ad",
+}); // prettier-ignore
   const label = textPixels("a", [x - SLIDER_LEN / 2 - 0.16, y, z], 0.09);
   textCloud(k, label.pixels, {}, () => ({ color: "#ffd166" }));
   const knob = part ?? k.part("knob", { pivot: [x, y, z] });
-  k.add(k.cylinder(0.055, 0.05, { caps: true }), {
+  k.add(evenCylinder(0.055, 0.055, 0.05), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     pos: [x, y, z + 0.03],
     rot: [90, 0, 0],
     part: knob,
@@ -2472,10 +2533,54 @@ function plotPen(k, tip, part) {
   const dir = unit([0.32, 0.62, 0.72]);
   const q = quatFromDir(dir);
   const at = (d) => add(tip, mul(dir, d));
-  k.add(k.cone(0.004, 0.02, 0.05, { caps: false }), { pos: at(0.025), quat: q, part, weight: 3, pattern: false, color: "#ff6b6b" }); // prettier-ignore
-  k.add(k.cone(0.02, 0.032, 0.05, { caps: false }), { pos: at(0.075), quat: q, part, weight: 3, pattern: false, color: (c) => lit("#e8e8ee", c.n) }); // prettier-ignore
-  k.add(k.cylinder(0.033, 0.3, { caps: "top" }), { pos: at(0.25), quat: q, part, weight: 2, pattern: false, color: (c) => lit("#3d6fd6", c.n, { spec: 0.4 }) }); // prettier-ignore
-  k.add(k.cylinder(0.036, 0.09, { caps: "top" }), { pos: at(0.43), quat: q, part, weight: 2, pattern: false, color: (c) => lit("#ff6b6b", c.n, { spec: 0.4 }) }); // prettier-ignore
+  k.add(evenCylinder(0.004, 0.02, 0.05, false),
+{
+even: true,
+opacity: 1,
+jitter: 0.015,
+pos: at(0.025),
+quat: q,
+part,
+weight: 3,
+pattern: false,
+color: "#ff6b6b",
+}); // prettier-ignore
+  k.add(evenCylinder(0.02, 0.032, 0.05, false),
+{
+even: true,
+opacity: 1,
+jitter: 0.015,
+pos: at(0.075),
+quat: q,
+part,
+weight: 3,
+pattern: false,
+color: (c) => lit("#e8e8ee", c.n),
+}); // prettier-ignore
+  k.add(evenCylinder(0.033, 0.033, 0.3, "top"),
+{
+even: true,
+opacity: 1,
+jitter: 0.015,
+pos: at(0.25),
+quat: q,
+part,
+weight: 2,
+pattern: false,
+color: (c) => lit("#3d6fd6", c.n, { spec: 0.4 }),
+}); // prettier-ignore
+  k.add(evenCylinder(0.036, 0.036, 0.09, "top"),
+{
+even: true,
+opacity: 1,
+jitter: 0.015,
+pos: at(0.43),
+quat: q,
+part,
+weight: 2,
+pattern: false,
+color: (c) => lit("#ff6b6b", c.n, { spec: 0.4 }),
+}); // prettier-ignore
 }
 function quatFromDir(d) {
   // The rotation taking +Y to d.
@@ -4168,12 +4273,17 @@ Object.assign(RECIPES, {
       const z0 = 0;
       // The board and a raised wooden frame round the big square.
       const wood = (c, base) => lit(mix(base, shade(base, 0.85), 0.5 + 0.5 * Math.sin(c.p[0] * 40 + 3 * c.noise(c.p[0] * 3, c.p[1] * 8, 0))), c.n, { amb: 0.7, dif: 0.35, spec: 0.15 }); // prettier-ignore
-      k.add(k.box(2, 2, 0.04), {
+      k.add(evenBox(2, 2, 0.04), {
+        even: true,
+        opacity: 1,
         pos: [0, 0, z0 - 0.02],
         weight: 0.7,
         flat: 0.15,
         jitter: 0.01,
-        color: (c) => (c.s.face === 4 ? mix("#f4ecd8", "#efe3c6", 0.5 + 0.5 * c.noise(c.p[0] * 4, c.p[1] * 4, 0)) : "#c9b48a"), // prettier-ignore
+        color: (c) =>
+          c.s.face === 4
+            ? mix("#f4ecd8", "#efe3c6", 0.5 + 0.5 * c.noise(c.p[0] * 4, c.p[1] * 4, 0))
+            : "#c9b48a",
       });
       const F = 0.09;
       for (const [w, h, x, y] of [
@@ -4182,18 +4292,30 @@ Object.assign(RECIPES, {
         [F, 2, 1 + F / 2, 0],
         [F, 2, -1 - F / 2, 0],
       ])
-        k.add(k.box(w, h, 0.12), { pos: [x, y, z0 + 0.02], weight: 1.2, flat: 0.2, jitter: 0.01, even: true, color: (c) => wood(c, "#8b5a2b") }); // prettier-ignore
+        k.add(evenBox(w, h, 0.12),
+{
+opacity: 1,
+pos: [x, y, z0 + 0.02],
+weight: 1.2,
+flat: 0.2,
+jitter: 0.01,
+even: true,
+color: (c) => wood(c, "#8b5a2b"),
+}); // prettier-ignore
       // The empty squares, tinted: a² and b² (fading on channel 1), and
       // the tilted c² (appearing on channel 2).
       const zt = z0 + 0.003;
       k.add(polyShape([pyP(0, 0, zt), pyP(PY_A, 0, zt), pyP(PY_A, PY_A, zt), pyP(0, PY_A, zt)]), {
+        even: true,
+        opacity: 1,
         weight: 1.2,
         flat: 0.15,
         jitter: 0.01,
         kind: "fade",
         params: [0.5, 0.3],
         channel: 1,
-        pattern: false, // prettier-ignore
+        pattern: false,
+        // prettier-ignore
         color: (c) => (c.s.edge < 0.015 ? "#3d6fb0" : "#b9d3f2"),
       });
       k.add(
@@ -4204,6 +4326,8 @@ Object.assign(RECIPES, {
           pyP(PY_A, PY_S, zt),
         ]),
         {
+          even: true,
+          opacity: 1,
           // prettier-ignore
           weight: 1.2,
           flat: 0.15,
@@ -4211,7 +4335,8 @@ Object.assign(RECIPES, {
           kind: "fade",
           params: [0.5, 0.3],
           channel: 1,
-          pattern: false, // prettier-ignore
+          pattern: false,
+          // prettier-ignore
           color: (c) => (c.s.edge < 0.015 ? "#3f8f4a" : "#c3e6c3"),
         },
       );
@@ -4223,6 +4348,8 @@ Object.assign(RECIPES, {
           pyP(0, PY_A, zt + 0.002),
         ]),
         {
+          even: true,
+          opacity: 1,
           // prettier-ignore
           weight: 1.2,
           flat: 0.15,
@@ -4230,7 +4357,8 @@ Object.assign(RECIPES, {
           kind: "fade",
           params: [0.4, -0.3],
           channel: 2,
-          pattern: false, // prettier-ignore
+          pattern: false,
+          // prettier-ignore
           color: (c) => (c.s.edge < 0.015 ? "#b8860b" : "#ffe7a3"),
         },
       );
@@ -4264,6 +4392,8 @@ Object.assign(RECIPES, {
         const n = cross(sub(top[1], top[0]), sub(top[2], top[0]));
         const topPts = n[2] > 0 ? top : [top[0], top[2], top[1]];
         k.add(polyShape(topPts), {
+          even: true,
+          opacity: 1,
           ...part,
           weight: 2,
           flat: 0.15,
@@ -4281,7 +4411,16 @@ Object.assign(RECIPES, {
           const p = P[j];
           const q = P[(j + 1) % 3];
           const quad = [pyP(p[0], p[1], zb), pyP(q[0], q[1], zb), pyP(q[0], q[1], zt2), pyP(p[0], p[1], zt2)]; // prettier-ignore
-          k.add(polyShape(quad), { ...part, weight: 2, flat: 0.15, jitter: 0.01, color: shade(tri.col, 0.7) }); // prettier-ignore
+          k.add(polyShape(quad),
+{
+even: true,
+opacity: 1,
+...part,
+weight: 2,
+flat: 0.15,
+jitter: 0.01,
+color: shade(tri.col, 0.7),
+}); // prettier-ignore
         }
         // Side letters, just inside each side's middle.
         const place = (u, v, text) => {

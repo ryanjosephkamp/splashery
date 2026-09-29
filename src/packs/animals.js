@@ -15,6 +15,7 @@ import {
   quatMul,
   vec,
 } from "../kit.js";
+import { evenEllipsoid, evenTube } from "./even.js";
 
 const TAU = Math.PI * 2;
 const DEG = Math.PI / 180;
@@ -681,6 +682,9 @@ export const RECIPES = {
             { grid: 48, normal: () => [0, 0, 1] },
           );
           k.add(shape, {
+            even: true,
+            opacity: 1,
+            jitter: 0.015,
             part,
             flat: 0.12,
             weight: 1,
@@ -929,6 +933,9 @@ export const RECIPES = {
           normal: (u, v) => outward(t0 + u * span, v * TAU),
         }),
         {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           flat: 0.18,
           color: (c) => {
             const tt = t0 + c.u * span;
@@ -956,7 +963,13 @@ export const RECIPES = {
           grid: 24,
           normal: () => [-Math.sin(N.tMax), Math.cos(N.tMax), 0],
         }),
-        { flat: 0.3, color: (c) => mix("#2a1a12", "#5a3a28", c.u * 0.6) },
+        {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
+          flat: 0.3,
+          color: (c) => mix("#2a1a12", "#5a3a28", c.u * 0.6),
+        },
       );
       // Chambers inside: pearly walls every step, and the siphuncle
       // threading through them (Slice to see them).
@@ -971,6 +984,9 @@ export const RECIPES = {
             { grid: 20, normal: () => back },
           ),
           {
+            even: true,
+            opacity: 1,
+            jitter: 0.015,
             flat: 0.3,
             weight: 0.8,
             color: (c) =>
@@ -989,7 +1005,14 @@ export const RECIPES = {
           (t) => 0.004 + 0.012 * t,
           { grid: 16, samples: 128 },
         ),
-        { flat: 0.3, weight: 2, color: "#b98a78" },
+        {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
+          flat: 0.3,
+          weight: 2,
+          color: "#b98a78",
+        },
       );
       // The animal: a mottled hood, an eye and a bunch of short tentacles.
       const tm = N.tMax;
@@ -997,7 +1020,10 @@ export const RECIPES = {
       const dir = [Math.cos(tm), Math.sin(tm), 0];
       const tan = [-Math.sin(tm), Math.cos(tm), 0];
       const at = (rad, fwd, z) => vec.add(vec.add(vec.mul(dir, rad), vec.mul(tan, fwd)), [0, 0, z]);
-      k.add(k.ellipsoid(0.22, 0.13, 0.25), {
+      k.add(evenEllipsoid(k, 0.22, 0.13, 0.25), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: at(s.rc - 0.3 * s.hw, 0.02, 0),
         quat: quatFromTo([1, 0, 0], dir),
         flat: 0.25,
@@ -1037,7 +1063,10 @@ export const RECIPES = {
         // bunch up), keeping its thickness.
         const curve = spline(pts);
         const rad = (t) => 0.02 * (1 - 0.55 * t);
-        k.add(k.tube(curve, rad, { grid: 16, samples: 32, caps: true }), {
+        k.add(evenTube(k, curve, rad, { grid: 16, samples: 32, caps: true }), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           part: arms,
           flat: 0.35,
           weight: 1.4,
@@ -1098,6 +1127,9 @@ export const RECIPES = {
           axis: [0, 0, 1],
         });
         k.add(shell(sgn), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           part,
           flat: 0.18,
           color: (c) => {
@@ -1128,6 +1160,8 @@ export const RECIPES = {
             { grid: 24 },
           ),
           {
+            even: true,
+            jitter: 0.015,
             part: wing,
             flat: 0.15,
             opacity: 0.55,
@@ -1137,12 +1171,18 @@ export const RECIPES = {
         );
       }
       // Underside, pronotum and head.
-      k.add(k.ellipsoid(0.45, 0.16, 0.56), {
+      k.add(evenEllipsoid(k, 0.45, 0.16, 0.56), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: [0, -0.08, cz],
         flat: 0.2,
         color: (c) => lit(c, "#1a1a1a", 0.3),
       });
-      k.add(k.ellipsoid(0.33, 0.2, 0.2), {
+      k.add(evenEllipsoid(k, 0.33, 0.2, 0.2), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: [0, 0.05, 0.44],
         flat: 0.2,
         color: (c) =>
@@ -1151,6 +1191,9 @@ export const RECIPES = {
             : lit(c, "#161616", 0.3, 0.5),
       });
       k.add(k.sphere(0.17), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: [0, -0.02, 0.62],
         flat: 0.2,
         color: (c) => {
@@ -1172,9 +1215,21 @@ export const RECIPES = {
             0.008,
             { grid: 10, samples: 24 },
           ),
-          { weight: 3, pattern: false, kind: "sway", params: [0.25, 0.05], color: "#141414" },
+          {
+            even: true,
+            opacity: 1,
+            jitter: 0.015,
+            weight: 3,
+            pattern: false,
+            kind: "sway",
+            params: [0.25, 0.05],
+            color: "#141414",
+          },
         );
         k.add(k.sphere(0.02), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           pos: [s * 0.18, 0.26, 0.88],
           weight: 3,
           pattern: false,
@@ -1182,7 +1237,8 @@ export const RECIPES = {
         });
         for (const z of [0.25, -0.05, -0.35]) {
           k.add(
-            k.tube(
+            evenTube(
+              k,
               spline([
                 [s * 0.2, -0.12, z],
                 [s * 0.42, -0.2, z + 0.06],
@@ -1191,7 +1247,14 @@ export const RECIPES = {
               0.02,
               { grid: 10, samples: 24, caps: true },
             ),
-            { weight: 2, pattern: false, color: (c) => lit(c, "#1a1a1a", 0.3) },
+            {
+              even: true,
+              opacity: 1,
+              jitter: 0.015,
+              weight: 2,
+              pattern: false,
+              color: (c) => lit(c, "#1a1a1a", 0.3),
+            },
           );
         }
       }
@@ -1516,7 +1579,10 @@ export const RECIPES = {
       };
       // Mantle and head.
       const octo = k.part("octo", { pivot: [0, 0.2, 0] });
-      k.add(k.ellipsoid(0.44, 0.5, 0.44), {
+      k.add(evenEllipsoid(k, 0.44, 0.5, 0.44), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         part: octo,
         pos: [0, 0.4, -0.1],
         rot: [-18, 0, 0],
@@ -1527,7 +1593,10 @@ export const RECIPES = {
         params: [0.03, 0],
         color: skinCol,
       });
-      k.add(k.ellipsoid(0.36, 0.28, 0.32), {
+      k.add(evenEllipsoid(k, 0.36, 0.28, 0.32), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         part: octo,
         pos: [0, 0.08, 0.08],
         flat: 0.2,
@@ -1566,8 +1635,11 @@ export const RECIPES = {
         ]);
         const arm = k.part(`a${i}`, { pivot: P(0.1, 0), axis: [d[2], 0, -d[0]] });
         k.add(
-          k.tube(curl, (t) => 0.1 * (1 - t) + 0.018, { grid: 32, samples: 96, caps: true }),
+          evenTube(k, curl, (t) => 0.1 * (1 - t) + 0.018, { grid: 32, samples: 96, caps: true }),
           {
+            even: true,
+            opacity: 1,
+            jitter: 0.015,
             part: arm,
             flat: 0.2,
             kind: "sway",
