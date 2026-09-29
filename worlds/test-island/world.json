@@ -167,15 +167,8 @@
   ],
   "scatter": [
     {
-      "type": "fern",
-      "count": 16,
-      "on": "grass",
-      "size": [0.6, 1.0],
-      "spacing": 3
-    },
-    {
       "type": "bush",
-      "count": 12,
+      "count": 14,
       "on": "grass",
       "size": [0.8, 1.4],
       "spacing": 4

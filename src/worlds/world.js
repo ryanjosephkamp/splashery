@@ -33,6 +33,8 @@ export class World {
     this.terrain = new Terrain(terrainDef, def.colors, def.seed);
     this.physics = new Physics(this.terrain);
     this.camera = new FollowCamera(this.terrain, { reducedMotion });
+    this.viewBlockers = [];
+    this.camera.blocked = (p) => this.viewBlocked(p);
     this.items = []; // LOD items: chunks and props
     this.itemById = new Map();
     this.props = [];
@@ -212,6 +214,8 @@ export class World {
       };
       this.addItem(item);
       this.props.push(item);
+      // Tall props (trees) keep the camera out of their crowns.
+      if (p.size > 2.5 && (p.collider === null ? b.collider : p.collider)) this.viewBlockers.push({ x: p.at[0], z: p.at[1], y0: y + p.size * 0.45, y1: y + p.size * 1.05, r: b.reach * p.size * 0.8 }); // prettier-ignore
       // Its invisible collider.
       const col = p.collider === null ? b.collider : p.collider;
       if (col) {
@@ -297,6 +301,21 @@ export class World {
     return [p[0], p[1] + 1.45, p[2]];
   }
 
+  // Is a point inside a prop (its collider, or a tree's crown), for the
+  // camera? Props are upright cylinders here, a little larger than they are.
+  viewBlocked(p) {
+    for (const c of this.physics.near(p[0], p[2])) {
+      if (p[1] < c.y0 || p[1] > c.y1 + 0.3) continue;
+      const r = (c.shape === "box" ? Math.max(c.hx, c.hz) : c.radius) + 0.3;
+      if (Math.hypot(p[0] - c.x, p[2] - c.z) < r) return true;
+    }
+    for (const b of this.viewBlockers) {
+      if (p[1] < b.y0 || p[1] > b.y1) continue;
+      if (Math.hypot(p[0] - b.x, p[2] - b.z) < b.r) return true;
+    }
+    return false;
+  }
+
   // ---- Level of detail ---------------------------------------------------------------
 
   plan(force = false) {
@@ -339,19 +358,24 @@ export class World {
     const water = it.wet
       ? buildWater(this.terrain, ch, lv, { density: this.budget.density })
       : null;
-    // One entity per chunk and level: ground and water together.
-    const buf = merge(ground, water);
-    if (!buf || !buf.count) {
-      it.built[lv] = { container: null, count: 0 };
-      it.counts[lv] = 0;
-      return;
+    // One group per chunk and level: its ground, and its water (whose
+    // near levels ripple, see waves() in render.js).
+    const n = (ground?.count || 0) + (water?.count || 0);
+    it.built[lv] = { count: n };
+    it.counts[lv] = n;
+    if (!n) return;
+    const g = this.view.group(`chunk-${ch.id}-${lv}`);
+    g.setLocalPosition(ch.x0, this.terrain.water, ch.z0);
+    g.enabled = false;
+    if (ground?.count) this.view.entity("ground", this.view.container(ground), { parent: g });
+    if (water?.count) {
+      const e = this.view.entity("water", this.view.container(water), { parent: g });
+      if (lv <= 1 && !this.reducedMotion) {
+        this.view.waves(e, [ch.x0, ch.z0]);
+        (this.waterEntities ||= []).push(e);
+      }
     }
-    const ct = this.view.container(buf);
-    const e = this.view.entity(`chunk-${ch.id}-${lv}`, ct, { pos: [ch.x0, this.terrain.water, ch.z0] }); // prettier-ignore
-    e.enabled = false;
-    it.built[lv] = { container: ct, count: ct.splatCount };
-    it.entities[lv] = e;
-    it.counts[lv] = ct.splatCount;
+    it.entities[lv] = g;
   }
 
   applyPlan() {
@@ -413,6 +437,7 @@ export class World {
     this.plan();
     this.buildQueued(1);
     this.applyPlan();
+    for (const e of this.waterEntities || []) if (e.parent.enabled) e.gsplat.setParameter("uWdWave", [this.time, 1, 0, 0]); // prettier-ignore
   }
 
   // The wide view behind the start screen: the whole island from the air,
@@ -425,14 +450,17 @@ export class World {
     const c = [t.center[0], this.terrain.water + 2, t.center[1]];
     const d = R * 1.75;
     const pos = [c[0] - Math.sin(yaw) * d, c[1] + d * 0.55, c[2] - Math.cos(yaw) * d];
-    return { pos, target: c };
+    // Aimed past the island's near shore, so it shows above the start box.
+    const k = this.view.canvas.width < this.view.canvas.height ? 0.55 : 0.3;
+    const target = [c[0] - Math.sin(yaw) * R * k, c[1] - R * k * 0.9, c[2] - Math.cos(yaw) * R * k];
+    return { pos, target };
   }
 
   stepCharacter(dt, input) {
     const c = this.char;
     const amt = input?.amount || 0;
     let speed = 0;
-    if (amt > 0.05) {
+    if (amt > 0.05 && dt > 0) {
       const { forward, right } = this.camera.axes();
       const dx = forward[0] * input.y + right[0] * input.x;
       const dz = forward[1] * input.y + right[1] * input.x;
@@ -450,7 +478,8 @@ export class World {
       c.blocked = null;
     }
     c.moving = speed > 0.1;
-    stepGait(c.gait, speed, dt);
+    // A frame with no time (a paused clock) keeps the gait as it is.
+    if (dt > 0) stepGait(c.gait, speed, dt);
     this.placeCharacter();
     this.checkLandmarks();
   }

@@ -244,11 +244,16 @@ class Page {
       stats: () => world.stats(),
       char: () => ({ pos: world.char.pos.slice(), facing: world.char.facing, speed: world.char.gait.speed, blocked: world.char.blocked }), // prettier-ignore
       ground: (x, z) => world.terrain.heightAt(x, z),
-      // Steps the world by hand, `seconds` long at 30 steps a second,
-      // with a fixed input ({ x, y, run }).
+      // Steps the world by hand (without drawing), `seconds` long at 30
+      // steps a second,
+      // with a fixed input ({ x, y, run }), or "keys" for what the keys and
+      // the stick say.
       step: (input, seconds = 1) => {
         const n = Math.round(seconds * 30);
-        for (let i = 0; i < n; i++) world.update(1 / 30, { amount: Math.min(1, Math.hypot(input.x || 0, input.y || 0)), x: 0, y: 0, run: false, ...input }); // prettier-ignore
+        for (let i = 0; i < n; i++) {
+          const inp = input === "keys" ? this.controls.read() : { amount: Math.min(1, Math.hypot(input.x || 0, input.y || 0)), x: 0, y: 0, run: false, ...input }; // prettier-ignore
+          world.update(1 / 30, inp);
+        }
         return window.__world.char();
       },
       place: (x, z, facing = 0) => world.spawn([x, z], facing),
@@ -258,6 +263,13 @@ class Page {
         this.forced = input ? { amount: Math.min(1, Math.hypot(input.x || 0, input.y || 0)), x: 0, y: 0, run: false, ...input } : null; // prettier-ignore
         await this.view.nextFrame();
         this.forced = null;
+      },
+      // Builds every chunk the level of detail wants now, without drawing.
+      catchUp: () => {
+        world.plan(true);
+        while (world.queue.length) world.buildQueued(8);
+        world.applyPlan();
+        return world.stats();
       },
       card: () => ($("card").hidden ? null : $("card").dataset.landmark),
     };

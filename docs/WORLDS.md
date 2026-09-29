@@ -60,7 +60,7 @@ know, so a typo can't break the page.
   "spawn": { "at": [-4, 14], "facing": 180 },
   "character": { "shirt": "#e0533d", "trousers": "#35507a" },
   "props": [{ "id": "palm-1", "type": "palm", "at": [-26, 2], "size": 6.2, "turn": 20 }],
-  "scatter": [{ "type": "fern", "count": 16, "on": "grass", "size": [0.6, 1.0] }],
+  "scatter": [{ "type": "bush", "count": 14, "on": "grass", "size": [0.8, 1.4] }],
   "landmarks": [{ "id": "welcome", "title": "Welcome", "words": "…", "at": [-2.5, 9] }]
 }
 ```
@@ -129,7 +129,7 @@ builds the toy's recipe with the kit, puts it in its rest pose (parts and loose 
 at rest shows them), leaves out its looping particles (flames, falling snow) and its ground base
 (the grass mound under a toy tree, the patch of sea round the lighthouse), and scales it to stand 1
 m tall with its foot at the origin. Copies of the same type, seed and options share their splats, so
-twenty ferns cost one bake.
+twenty bushes cost one bake.
 
 | Field      | Meaning                                                                                    |
 | ---------- | ------------------------------------------------------------------------------------------ |
@@ -148,9 +148,8 @@ twenty ferns cost one bake.
 
 ### Prop types
 
-`palm`, `pine`, `oak`, `pebbles`, `mushroom`, `fern`, `tulip`, `sunflower` and `lighthouse` are toy
-recipes; `boulder` and `bush` are world props built in `props.js`. To add a type, add a line to
-`PROP_TYPES`:
+`palm`, `pine`, `oak`, `pebbles`, `mushroom`, `tulip`, `sunflower` and `lighthouse` are toy recipes;
+`boulder` and `bush` are world props built in `props.js`. To add a type, add a line to `PROP_TYPES`:
 
 ```js
 cactus: { pack: "nature", recipe: "cactus", count: 20000, collider: "auto" },
@@ -158,12 +157,12 @@ cactus: { pack: "nature", recipe: "cactus", count: 20000, collider: "auto" },
 
 `count` is the near level's splats at the high tier (the tier's `props` factor scales it).
 `collider: "auto"` puts a capsule around the lowest quarter of the prop (a tree's trunk, a rock's
-body), which suits most things; `false` means walk-through (ferns, flowers). Then look at it: open
-the Test island with the new prop placed near the spawn point and walk round it. A recipe whose rest
-pose shows something odd in a world (a toy's own floor that the "ground base" rule doesn't catch)
-gets `base: false` or a world-only builder instead. A world-only prop is a
-`build(count, seed, options)` function that returns `{ buf, foot }` (a `SplatBuffer` and the point
-it stands on), like `buildBoulder`.
+body), which suits most things; `false` means walk-through (flowers). Then look at it: open the Test
+island with the new prop placed near the spawn point and walk round it. A recipe whose rest pose
+shows something odd in a world (a toy's own floor that the "ground base" rule doesn't catch) gets
+`base: false` or a world-only builder instead. A world-only prop is a `build(count, seed, options)`
+function that returns `{ buf, foot }` (a `SplatBuffer` and the point it stands on), like
+`buildBoulder`.
 
 ### Colliders
 

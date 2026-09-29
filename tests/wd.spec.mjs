@@ -29,7 +29,8 @@ async function open(page, tier = "mid", extra = "") {
 
 // Steps the manual clock a few frames with no input (the level of detail
 // builds what it needs).
-async function settle(page, n = 10) {
+async function settle(page, n = 2) {
+  await page.evaluate(() => window.__world.catchUp());
   for (let i = 0; i < n; i++) await page.evaluate(() => window.__world.tick(1 / 30));
 }
 
@@ -66,7 +67,7 @@ test.describe("worlds", () => {
     await page.click("#enter");
     const start = await page.evaluate(() => window.__world.char());
     await page.keyboard.down("KeyW");
-    for (let i = 0; i < 45; i++) await page.evaluate(() => window.__world.tick(1 / 30));
+    await page.evaluate(() => window.__world.step("keys", 1.5));
     await page.keyboard.up("KeyW");
     const walked = await page.evaluate(() => window.__world.char());
     const d = Math.hypot(walked.pos[0] - start.pos[0], walked.pos[2] - start.pos[2]);
@@ -79,7 +80,7 @@ test.describe("worlds", () => {
     const before = walked;
     await page.keyboard.down("ShiftLeft");
     await page.keyboard.down("ArrowUp");
-    for (let i = 0; i < 45; i++) await page.evaluate(() => window.__world.tick(1 / 30));
+    await page.evaluate(() => window.__world.step("keys", 1.5));
     await page.keyboard.up("ArrowUp");
     await page.keyboard.up("ShiftLeft");
     const ran = await page.evaluate(() => window.__world.char());
@@ -89,12 +90,17 @@ test.describe("worlds", () => {
       const g = await page.evaluate(([x, z]) => window.__world.ground(x, z), [c.pos[0], c.pos[2]]);
       expect(Math.abs(c.pos[1] - g)).toBeLessThan(0.01);
     }
-    // And the legs swing: the thighs turn while walking, not at rest.
+    // And the legs swing while walking: the thighs turn on their hips.
+    await page.keyboard.down("KeyW");
     const swing = await page.evaluate(() => {
+      window.__world.step("keys", 0.4);
       const j = window.__world.world.joints;
-      return Math.abs(j.thighL.getLocalEulerAngles().x);
+      return (
+        Math.abs(j.thighL.getLocalEulerAngles().x) + Math.abs(j.thighR.getLocalEulerAngles().x)
+      );
     });
-    expect(swing).toBeGreaterThanOrEqual(0);
+    await page.keyboard.up("KeyW");
+    expect(swing).toBeGreaterThan(10);
   });
 
   test("collision stops the character at a prop and at the water", async ({ page }) => {
@@ -146,7 +152,7 @@ test.describe("worlds", () => {
     // A click on a sign from afar opens that sign's card.
     const bl = ISLAND.landmarks.find((l) => l.id === "boulders");
     await page.evaluate(([x, z]) => window.__world.place(x - 1, z + 11, 175), bl.at);
-    await settle(page, 6);
+    await settle(page);
     const pt = await page.evaluate((id) => {
       const w = window.__world.world;
       const s = w.signs.find((x) => x.landmark.id === id);
@@ -182,11 +188,11 @@ test.describe("worlds", () => {
     for (const tier of TIERS) {
       await open(page, tier);
       await page.click("#enter");
-      await settle(page, 20);
+      await settle(page);
       const a = await page.evaluate(() => window.__world.stats());
       // Somewhere else: across the island, by the lighthouse.
       await page.evaluate(() => window.__world.place(-5, -19, 0));
-      await settle(page, 30);
+      await settle(page);
       const b = await page.evaluate(() => window.__world.stats());
       for (const s of [a, b]) {
         expect(s.tier).toBe(tier);
@@ -207,9 +213,9 @@ test.describe("worlds", () => {
       const page = await browser.newPage({ viewport: { width: w, height: h } });
       await open(page);
       await page.click("#enter");
-      await settle(page, 12);
+      await settle(page);
       await page.evaluate(() => window.__world.step({ y: 1 }, 1.2));
-      await settle(page, 12);
+      await settle(page);
       await page.screenshot({ path: `tests/screenshots/wd-island-${w}x${h}.png` });
       await page.close();
     }

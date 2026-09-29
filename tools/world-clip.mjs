@@ -52,24 +52,22 @@ const SCENES = {
   ],
   // Walking up to a sign: its card opens as page text.
   landmark: [
-    { place: [-13, 8, 270] },
-    { look: [0.25, -0.02], secs: 0.1 },
+    { place: [-11, 6, 270] },
     { hold: 0.5 },
     { move: { y: 1 }, until: "card", secs: 6 },
-    { move: { y: 0.4 }, secs: 0.4 },
+    { move: { y: 0.5 }, secs: 0.5 },
     { hold: 2.4 },
   ],
   // The phone controls: the thumb stick walks, a drag on the right looks,
   // a tap on a sign opens its card.
   touch: [
-    { place: [10, 20, 160], touch: true },
+    { place: [5, 17, 75], touch: true },
     { hold: 0.6 },
     { stick: [0, 1], secs: 1.8 },
-    { stick: [0.6, 0.8], secs: 1.2 },
-    { stick: [0, 0], drag: [-90, 0], secs: 1.2 },
-    { stick: [0, 1], secs: 1.4 },
-    { stick: [0, 0], hold: 0.4 },
-    { tapSign: "boulders", hold: 2.2 },
+    { stick: [-0.5, 0.85], secs: 1.2 },
+    { stick: [0, 0], drag: [-60, 0], secs: 1.0 },
+    { hold: 0.4 },
+    { tapSign: "boulders", hold: 2.4 },
   ],
   // The start screen over the wide view, the plain list, and "Go there".
   list: [
@@ -187,7 +185,8 @@ for (const name of names) {
         const x = W * 0.72 + (s.drag[0] * i) / n;
         await setFinger([x, H * 0.45]);
         await page.evaluate((d) => window.__world.world.camera.look(-d * 0.0065, 0), s.drag[0] / n);
-      } else if (s.stick) {
+      }
+      if (s.stick) {
         const on = s.stick[0] || s.stick[1];
         await page.evaluate((v) => {
           const c = window.__world.page.controls;
@@ -201,7 +200,7 @@ for (const name of names) {
             r.x + r.width / 2 + s.stick[0] * 35,
             r.y + r.height / 2 - s.stick[1] * 35,
           ]);
-        } else if (!s.tapSign) await setFinger(null);
+        } else if (!s.drag) await setFinger(null);
       }
       const input = s.move || (s.stick && (s.stick[0] || s.stick[1]) ? { x: s.stick[0], y: s.stick[1], run: Math.hypot(...s.stick) > 0.92 } : null); // prettier-ignore
       await tick(input);

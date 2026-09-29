@@ -121,50 +121,45 @@ index.html change to the one marked block.
   docs/OPERATING.md, docs/PACKS.md, docs/WORKSTREAMS.md and docs/handoff/history.md (lessons from
   earlier lanes).
 - Your handoff file: create it. Start it with this brief, word for word, under "## Brief", then keep
-  "## State", "## Notes", "## Known issues" and "## For the Operator" current. Note your model at
-  the top of "## State" (the blog post compares the two models).
-- Shared lists: edit only your own entries in src/toys.js, src/toy-sounds.js, src/toy-help.js (a
-  how-to line and an About text per toy, following docs/handoff/Help.md), tools/toy-plan.json,
-  CREDITS.md and tools/assets.json. Regenerate docs/TOY-PLAN.md with `node tools/toy-plan.mjs`;
-  never merge it by hand.
-- Never edit tests/taps.spec.mjs. Your own tests go in tests/<prefix>.spec.mjs. If a finished lane's
-  test breaks because of a count or a list your work changes, don't edit it: say which test and why
-  in your message, and the Operator fixes it.
-- Assets: CC0, CC BY or public domain only, checked on the live source page and credited
-  (CREDITS.md, tools/assets.json and the toy's in-app credit). Never BY-SA or NC. No logos, brand
-  names or insignia.
-- Review: post clips and cards to the Effect review page,
-  https://claude.ai/artifact/NCsg9V5SzFY3Mnwuwgq7pi, as OPERATING.md's "Steps for a lane" says.
-  Judge every effect as motion at phone size against the effect quality rules before you post it.
-  The Operator has made your lane's record. Don't republish the page, and never write to "verdicts".
-- Push your work in progress to your branch about every hour, so it isn't only in your container,
-  and open your draft PR early. Many lanes run at once now, so main moves often: merge it into your
-  branch before each push (never rebase a pushed branch) and keep both sides of any conflict.
-- Before every push, follow "Before every push" in CLAUDE.md: the full Playwright suite
-  (SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium npx playwright test), prettier,
-  `node tools/us-english.mjs --diff`, `node tools/check-packs.mjs <pack>` for new or changed toys, a
-  contact sheet and thumbnails, and your own screenshots at 390×844 and 1440×900. Then put back the
-  standard screenshots (`node tools/upkeep.mjs --restore-shots`) and any other lane's screenshots
-  your branch didn't change.
-- PR: one draft PR against main with the five sections (Summary, Verification, Deviations, Known
-  issues, What was cut), and the model that built it in the Summary. When main moves, merge it into
-  your branch.
-- After you post your cards, check the owner's marks (the "verdicts" collection, ids starting with
-  your prefix) about once an hour with a scheduled check-in (send_later). Fix every "fix" in the
-  same PR, post the new clip as a "-r2" card, and set replacedBy on the old one. Stop the check-ins
-  once your PR is merged or closed.
-- Finish every working turn with a short final message that starts with "READY:" (PR link, card ids,
-  test results, anything for the Operator), "WORKING:" (what's left), or "BLOCKED:" (exactly what
-  you need).
-
-## State
+  "## State
 
 Model: Opus 5.5 (default effort).
 
-- September 29, 2026: lane started. Handoff file and draft PR first; the engine next.
+- September 29, 2026: lane started; draft PR #78 opened with this file.
+- The engine is built: `worlds/index.html` with its app in `src/worlds/` (13 modules, listed in
+  [WORLDS.md](../WORLDS.md)), the world file format, the Test island (`worlds/test-island/`), the
+  labs-only link in the toy box (one marked block in `index.html`), `docs/WORLDS.md`,
+  `tools/world-clip.mjs` (review clips) and `tests/wd.spec.mjs`.
+- No shared engine file changed (`src/kit.js`, `src/stage.js`, `src/pc.js` untouched): the world has
+  its own small PlayCanvas setup (`src/worlds/render.js`) and reuses the kit, the noise, the font
+  and the pack recipes as they are.
 
 ## Notes
 
+- PlayCanvas 2.22.3's `lodDistances` and per-component `splatBudget` are no-ops now; the scene's
+  `gsplat.splatBudget` and LOD work only on streamed octree (SOG with LOD) resources. A world is
+  built on the device, so it has its own chunked levels (`lod.js`) and budgets (`tiers.js`), and
+  uses the engine's unified splat mode (the default) so chunks, props and the character's parts all
+  sort together.
+- Props reuse toy recipes baked into their rest pose (`props.js`): parts and tokens where the toy's
+  drive puts them at rest, looping particles and hidden pieces left out, and the toy's own ground
+  (the grass mound, the lighthouse's patch of sea) found and dropped. Copies share splats.
+- The character is nine joints, each a rigid kit-built part on its own entity; walking and running
+  only turn joints (no bending). The knees fold on the forward swing.
+- Clips and tests run the world on a manual clock (`?clock=manual`) and step it by hand.
+
 ## Known issues
 
+- The water is still (no waves): moving water needs a work-buffer modifier on its own entities; left
+  for a later engine step.
+- Frame times in the test browser are software rendering (about 0.3 s a frame at 390×844, 1.3 s at
+  1440×900) and mean nothing for a phone; the owner's phone is the real test.
+- Building the Test island takes about 12 s in the test browser (most of it baking the toy recipes);
+  on a phone it should be a few seconds.
+
 ## For the Operator
+
+- ROADMAP/README: Worlds lives at `worlds/?labs=1`; `docs/WORLDS.md` is the guide for the Sonnet
+  world lanes (Toy Hunt Island, the Forest trail template).
+- The site layout the owner asked for (Studio, Worlds, Lab and Learn sections behind the labs
+  switch) is not in this lane: the toy box only gets a labs-only link to Worlds in its About tab.

@@ -18,6 +18,9 @@ export class FollowCamera {
     this.pos = null;
     this.clearance = 0.45;
     this.sway = 0;
+    // blocked(p): true when a point is inside a prop (set by the world), so
+    // the camera comes in front of a trunk, a rock or a crown of leaves.
+    this.blocked = null;
   }
 
   // Turns the view by a drag (radians).
@@ -61,7 +64,7 @@ export class FollowCamera {
     for (let i = 1; i <= steps; i++) {
       const d = (i / steps) * this.distance;
       const p = [tg[0] + dir[0] * d, tg[1] + dir[1] * d, tg[2] + dir[2] * d];
-      if (p[1] < this.terrain.heightAt(p[0], p[2]) + this.clearance) {
+      if (p[1] < this.terrain.heightAt(p[0], p[2]) + this.clearance || this.blocked?.(p)) {
         dist = Math.max(0.9, ((i - 1) / steps) * this.distance);
         break;
       }

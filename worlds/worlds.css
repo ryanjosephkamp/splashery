@@ -131,6 +131,8 @@ a {
   font-size: 14px;
   text-align: center;
   transition: opacity 0.6s ease;
+  /* Taps go through to the world (a sign may be behind it). */
+  pointer-events: none;
 }
 
 .hint.fade {
@@ -328,9 +330,9 @@ a {
   position: fixed;
   inset: 0;
   display: grid;
-  place-items: center;
-  padding: 18px;
-  background: linear-gradient(rgba(220, 239, 255, 0.35), rgba(16, 40, 60, 0.35));
+  place-items: end center;
+  padding: 18px 18px max(22px, env(safe-area-inset-bottom));
+  background: linear-gradient(rgba(220, 239, 255, 0) 40%, rgba(16, 40, 60, 0.3));
 }
 
 .start[hidden] {

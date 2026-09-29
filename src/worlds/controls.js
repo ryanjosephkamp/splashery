@@ -56,7 +56,7 @@ export class Controls {
     if (!this.enabled) return;
     if (e.pointerType === "touch") this.showStick();
     this.canvas.setPointerCapture?.(e.pointerId);
-    this.pointers.set(e.pointerId, { x: e.clientX, y: e.clientY, x0: e.clientX, y0: e.clientY, t0: performance.now(), moved: 0 }); // prettier-ignore
+    this.pointers.set(e.pointerId, { x: e.clientX, y: e.clientY, x0: e.clientX, y0: e.clientY, t0: e.timeStamp, moved: 0 }); // prettier-ignore
   }
 
   moveP(e) {
@@ -86,7 +86,8 @@ export class Controls {
     if (!p) return;
     this.pointers.delete(e.pointerId);
     if (this.pointers.size < 2) this.pinch = 0;
-    if (!cancel && p.moved < 8 && performance.now() - p.t0 < 450) {
+    // Event times, not handler times: a slow frame can delay the handlers.
+    if (!cancel && p.moved < 8 && e.timeStamp - p.t0 < 450) {
       const r = this.canvas.getBoundingClientRect();
       this.onTap?.(e.clientX - r.left, e.clientY - r.top);
     }

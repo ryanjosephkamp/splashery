@@ -28,7 +28,6 @@ export const PROP_TYPES = {
   oak: { pack: "nature", recipe: "oak", count: 50000, collider: "auto" },
   pebbles: { pack: "nature", recipe: "rocks", count: 16000, collider: "auto" },
   mushroom: { pack: "nature", recipe: "mushroom", count: 16000, collider: "auto" },
-  fern: { pack: "nature", recipe: "fern", count: 12000, collider: false },
   tulip: { pack: "nature", recipe: "tulip", count: 6000, collider: false },
   sunflower: { pack: "nature", recipe: "sunflower", count: 9000, collider: false },
   lighthouse: { pack: "landmarks", recipe: "lighthouse", count: 60000, collider: "auto" },

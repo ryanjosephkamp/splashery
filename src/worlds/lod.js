@@ -51,6 +51,8 @@ function assign(items, cam, tier, scale) {
       const dd = d / big;
       lv = dd < near * 0.7 ? 0 : dd < mid * 1.1 ? 1 : 2;
       if (dd > mid * 4) lv = -1;
+      // Small things (flowers, pebbles) would only be specks far away.
+      if (it.size < 1 && d > mid) lv = -1;
     } else {
       lv = d < near ? 0 : d < mid ? 1 : d < mid * 2.2 ? 2 : 3;
     }

@@ -187,6 +187,18 @@ export class WorldView {
     return e;
   }
 
+  // Gentle waves on a water entity: its splats rise and fall a few
+  // centimeters and catch the light on the crests, moving over the whole
+  // sea as one (origin: the chunk's corner, so neighbors line up). Its
+  // uWdWave uniform carries the time (x); the world sets it every frame.
+  waves(entity, origin) {
+    const g = entity.gsplat;
+    g.setWorkBufferModifier(WAVES);
+    g.workBufferUpdate = pc.WORKBUFFER_UPDATE_ALWAYS;
+    g.setParameter("uWdOrigin", [origin[0], origin[1], 0, 0]);
+    g.setParameter("uWdWave", [0, 1, 0, 0]);
+  }
+
   // An empty entity (a joint of the character, say).
   group(name, parent = null) {
     const e = new pc.Entity(name);
@@ -212,3 +224,46 @@ export class WorldView {
     this.app.destroy();
   }
 }
+
+const WAVE_GLSL = /* glsl */ `
+uniform vec4 uWdWave;   // x time (s)
+uniform vec4 uWdOrigin; // xy the chunk's corner (x, z)
+float wdWave(vec3 c) {
+  vec2 p = c.xz + uWdOrigin.xy;
+  float t = uWdWave.x;
+  return 0.55 * sin(p.x * 0.55 + p.y * 0.21 + t * 1.25) + 0.45 * sin(p.y * 0.83 - p.x * 0.34 - t * 1.6);
+}
+void modifySplatCenter(inout vec3 center) {
+  center.y += 0.035 * wdWave(center);
+}
+void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter, inout vec4 rotation, inout vec3 scale) {
+}
+void modifySplatColor(vec3 center, inout vec4 color) {
+  float w = wdWave(center);
+  color.rgb *= 1.0 + 0.07 * w;
+  color.rgb += vec3(0.05) * smoothstep(0.75, 1.0, w);
+}
+`;
+
+const WAVE_WGSL = /* wgsl */ `
+uniform uWdWave: vec4f;
+uniform uWdOrigin: vec4f;
+fn wdWave(c: vec3f) -> f32 {
+  let p = c.xz + uniform.uWdOrigin.xy;
+  let t = uniform.uWdWave.x;
+  return 0.55 * sin(p.x * 0.55 + p.y * 0.21 + t * 1.25) + 0.45 * sin(p.y * 0.83 - p.x * 0.34 - t * 1.6);
+}
+fn modifySplatCenter(center: ptr<function, vec3f>) {
+  (*center).y = (*center).y + 0.035 * wdWave(*center);
+}
+fn modifySplatRotationScale(originalCenter: vec3f, modifiedCenter: vec3f, rotation: ptr<function, vec4f>, scale: ptr<function, vec3f>) {
+}
+fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {
+  let w = wdWave(center);
+  var rgb = (*color).rgb * (1.0 + 0.07 * w);
+  rgb = rgb + vec3f(0.05) * smoothstep(0.75, 1.0, w);
+  *color = vec4f(rgb, (*color).a);
+}
+`;
+
+const WAVES = { glsl: WAVE_GLSL, wgsl: WAVE_WGSL };
