@@ -804,6 +804,16 @@ export function createUI(app) {
     gif: ".gif,image/gif",
     video: "video/*,.mp4,.webm,.mov,.m4v",
   };
+  // The web-address box names only what this toy opens, in its accept order:
+  // "https://… a video, GIF or picture" (the owner's review, September 29, 2026).
+  const MEDIA_WORDS = { pdf: "PDF", image: "picture", gif: "GIF", video: "video" };
+  function mediaPlaceholder(kinds) {
+    const words = kinds.map((k) => MEDIA_WORDS[k]).filter(Boolean);
+    if (!words.length) return "https://…";
+    const list =
+      words.length > 1 ? `${words.slice(0, -1).join(", ")} or ${words.at(-1)}` : words[0];
+    return `https://… a ${list}`;
+  }
   function renderInputMedia(media, error) {
     const wrap = document.createElement("div");
     wrap.className = "input-media";
@@ -859,7 +869,7 @@ export function createUI(app) {
     const url = document.createElement("input");
     url.type = "url";
     url.id = "toy-media-url";
-    url.placeholder = "https://… a PDF, picture, GIF or video";
+    url.placeholder = mediaPlaceholder(kinds);
     url.spellcheck = false;
     url.autocomplete = "off";
     url.setAttribute("aria-label", "A web address to open");
