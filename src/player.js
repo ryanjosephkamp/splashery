@@ -12,6 +12,7 @@ import { generate, normalizeGenerator, applyClay, PROFILES } from "./generators.
 import { buildRecipe, meanLuminance, Kit } from "./kit.js";
 import { MotionDriver } from "./motion.js";
 import { rigLayout, tagRig } from "./rig.js";
+import { posePass } from "./pose.js";
 import { fxTable } from "./rig-fx.js";
 import { RIGS } from "./rigs.js";
 import { drawPattern, patternUniforms } from "./patterns.js";
@@ -442,10 +443,17 @@ export class Player {
       await recipe.prepare(options, this.prepareHelp(toy, recipe, options)); // Pictures
       if (token !== this.loadToken) return null;
     }
+    // Pictures (lane Books): a picture toy's media opens first, so the
+    // build can size itself from it (k.media).
+    let media = null;
+    if (recipe.pictures) {
+      media = await this.pictureMediaFor(toy, recipe, options);
+      if (token !== this.loadToken) return null;
+    }
     const clay = toy.clay || [];
     const it = buildRecipe(
       recipe,
-      { seed: recipe.seed ?? hash32(def.id), count, options, clay },
+      { seed: recipe.seed ?? hash32(def.id), count, options, clay, media: mediaInfo(media) },
       applyClay,
     );
     let r = it.next();
@@ -634,6 +642,34 @@ export class Player {
     return n;
   }
 
+  // Lane Books: splats sort in the pose they were built in, so a part or a
+  // leaf (a book's page) turned past a quarter turn draws its far side over
+  // its near side, and a turned cover over the pages it lies under. This
+  // sorts the kit toy's splats on parts and leaves, and the picture sheets
+  // on them, again where the current uniforms put them (the kit shader's
+  // leaf turn, then its part move; tokens keep resortTokens). The recipe
+  // asks for it with out.resortPose, a few times while things turn and once
+  // when they land; each call costs a pass over those splats.
+  resortPose() {
+    const proc = this.proc;
+    if (!proc?.kit || !proc.ctx?.buf?.anim) return 0;
+    const leaf = this.leafUniform();
+    const parts = this.motion.partsData;
+    let n = 0;
+    const { buf } = proc.ctx;
+    n += posePass(buf.pos, buf.anim, buf.count, proc.container.centers, leaf, parts);
+    if (n) proc.container.update(buf.count, true);
+    for (const sh of this.pictures?.sheets || []) {
+      const d = sh.shown?.data;
+      if (!sh.slot || !d || (sh.def.leaf === null && !sh.def.part)) continue;
+      const m = posePass(d.centers, d.anim, d.count, sh.slot.container.centers, leaf, parts);
+      if (m) sh.slot.container.update(d.count, true);
+      n += m;
+    }
+    if (n) this.stage.requestRender();
+    return n;
+  }
+
   disposeProcedural() {
     this.proc = null;
     // Pictures: the old toy's sheets go with it.
@@ -662,6 +698,11 @@ export class Player {
       transform: ctx.transform,
       spine: ctx.kit.spineDef || null,
       profile: this.profile,
+      // Lane Books: the recipe may draw on each page or picture before it
+      // becomes splats (a photo album's photo corners and captions).
+      decorate: recipe.pictures?.decorate
+        ? (canvas, info) => recipe.pictures.decorate(canvas, { ...info, options: options || {} })
+        : null,
     });
     pics.setSound(this.mediaSound);
     this.pictures = pics;
@@ -672,14 +713,21 @@ export class Player {
       this.closeMedia();
       return;
     }
-    if (this.pictureMedia?.key === src.key) {
-      this.pictureMedia.ready.then((m) => {
-        if (this.pictures !== pics || !m) return;
-        pics.setMedia(m);
-        if (src.page) pics.go(src.page);
-      });
-      return;
-    }
+    this.openPictureMedia(src).ready.then((m) => {
+      if (this.pictures !== pics || !m) return;
+      pics.setMedia(m);
+      if (src.page) pics.go(src.page);
+    });
+  }
+
+  // Opens a picture toy's media once and keeps it while the same source
+  // shows: { key, media, ready } (ready resolves to the media, or null when
+  // it could not be opened, after saying why).
+  // A build tries again after a failure (retry); the toy it builds keeps
+  // that answer, so a message is said once.
+  openPictureMedia(src, { retry = false } = {}) {
+    const had = this.pictureMedia;
+    if (had?.key === src.key && !(retry && had.failed)) return had;
     this.closeMedia();
     const entry = { key: src.key, media: null };
     entry.ready = import("./media.js")
@@ -691,21 +739,27 @@ export class Player {
             m.close();
             return null;
           }
-          if (this.pictures === pics) {
-            pics.setMedia(m);
-            if (src.page) pics.go(src.page);
-          }
           this.emit("media", { ok: true, kind: m.kind, name: m.name, count: m.count });
           return m;
         },
         (err) => {
-          if (this.pictureMedia === entry) this.pictureMedia = null;
+          entry.failed = true;
           this.emit("media", { ok: false, error: err.message, source: src });
           this.emit("message", err.message);
           return null;
         },
       );
     this.pictureMedia = entry;
+    return entry;
+  }
+
+  // The media a picture toy will show, opened before its build (lane
+  // Books), or null.
+  async pictureMediaFor(toy, recipe, options) {
+    const src = this.mediaSource(toy, recipe, options);
+    if (!src) return null;
+    const entry = this.openPictureMedia(src, { retry: true });
+    return (await entry.ready) || null;
   }
 
   // Where the toy's media comes from: { key, source, page }.
@@ -713,8 +767,23 @@ export class Player {
     const m = toy.media;
     if (m?.file && this.mediaFile && this.mediaFile.name === m.file.name)
       return { key: mediaKey(this.mediaFile), source: this.mediaFile, page: m.page || 0 };
+    // A set of pictures from this device (lane Books): the same files, by name.
+    const own = this.mediaFile;
+    if (
+      m?.files &&
+      Array.isArray(own) &&
+      own.length === m.files.length &&
+      own.every((f, i) => f.name === m.files[i].name)
+    )
+      // prettier-ignore
+      return { key: mediaKey(own), source: own, page: m.page || 0 };
     if (m?.url) return { key: mediaKey(m.url), source: m.url, page: m.page || 0 };
     const sample = recipe.pictures?.sample?.(options || {});
+    if (Array.isArray(sample) && sample.length) {
+      // A sample may be a set of pictures (lane Books).
+      const urls = sample.map((p) => assetURL(p));
+      return { key: mediaKey(urls), source: urls, page: 0 };
+    }
     if (sample) {
       const url = assetURL(sample);
       return { key: `url:${url}`, source: url, page: 0 };
@@ -1139,6 +1208,12 @@ export class Player {
     // A recipe's pieces moved far from where they were built (a cube's
     // turned layer): sort them again where they stand now.
     if (this.motion.out?.resort) this.resortTokens();
+    // Lane Books: also when a page on a leaf or a part was just rebuilt (it
+    // arrives sorted in its built pose).
+    if (this.motion.out?.resortPose || this.poseStale) {
+      this.poseStale = false;
+      this.resortPose();
+    }
     // Sounds a recipe asks for mid-effect (a chess move's clack).
     const cues = this.motion.out?.cues;
     if (cues?.length && !this.frozen) this.emit("cue", cues.slice());
@@ -1427,7 +1502,25 @@ export class Player {
 }
 
 // Pictures: which media a source is (a file on this device, or an address).
+// What a picture toy's build knows of its media (k.media, lane Books):
+// its kind, page or picture count, name, the first page's shape (width over
+// height) and, for a set of pictures, each one's shape and name.
+export function mediaInfo(m) {
+  if (!m) return null;
+  const n = Math.min(m.count || 0, 500);
+  const set = (m.names?.length ?? 0) > 1;
+  return {
+    kind: m.kind,
+    count: m.count || 0,
+    name: m.name || "",
+    aspect: m.aspect?.(0) || 1,
+    aspects: set ? Array.from({ length: n }, (_, i) => m.aspect(i) || 1) : null,
+    names: set ? m.names.slice(0, n) : null,
+  };
+}
+
 export function mediaKey(source) {
+  if (Array.isArray(source)) return `set:${source.map(mediaKey).join("|")}`;
   return typeof source === "string"
     ? `url:${source}`
     : `file:${source.name}:${source.size}:${source.lastModified ?? 0}`;

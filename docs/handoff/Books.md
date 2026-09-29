@@ -142,93 +142,131 @@ insignia. The laptop stays exactly as it is.
   - docs/handoff/Pictures.md;
   - docs/WORKSTREAMS.md and docs/handoff/history.md (lessons from earlier lanes).
 - Your handoff file: create it. Start it with this brief, word for word, under "## Brief", then keep
-  "## State", "## Notes", "## Known issues" and "## For the Operator" current, like the other lanes'
-  files.
-- Shared lists: edit only your own toys' entries in src/toys.js, src/toy-sounds.js, src/toy-help.js
-  (a how-to line and an About text for each toy, following the style guide in docs/handoff/Help.md),
-  tools/toy-plan.json, CREDITS.md and tools/assets.json. Regenerate docs/TOY-PLAN.md with
-  `node tools/toy-plan.mjs`; never merge it by hand (on a conflict, take main's copy and run the
-  tool again).
-- Never edit tests/taps.spec.mjs. If one of your toys needs an exception there, say so in your final
-  message, and the Operator adds it. Your own tests go in tests/<prefix>.spec.mjs.
-- Engine changes: if you truly need one (media, pictures, player, stage, effects, kit, UI), keep it
-  small, additive and tested, on its own branch (<your branch>-engine) with its own draft PR titled
-  "Engine: …", which merges first. Say so in your final message. Two other picture lanes run beside
-  you, so tell the Operator before you start one, in case another lane needs the same thing.
-- Sounds: give each toy the sound its idea describes (src/toy-sounds.js, existing voices in
-  src/voices.js). Don't polish them: the new toys get their own sound round later, and sound lanes
-  may be editing other toys' lines at the same time (keep both sides when you merge).
-- Review: post a clip of every toy's tap and its main play to the Effect review page,
-  https://claude.ai/artifact/NCsg9V5SzFY3Mnwuwgq7pi, as OPERATING.md's "Steps for a lane" says. The
-  Operator has made your lane's record. tools/pic-clip.mjs records picture toys. Judge every effect
-  as motion at phone size against the effect quality rules before you post it. Don't republish the
-  page, and never write to "verdicts".
-- Before every push, follow "Before every push" in CLAUDE.md:
-  - the full Playwright suite (SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium npx playwright test);
-  - prettier and `node tools/us-english.mjs --diff`;
-  - `node tools/check-packs.mjs <pack>`, a contact sheet and thumbnails;
-  - your own screenshots at 390×844 and 1440×900.
+  "## State
 
-  Then put back the standard screenshots (`node tools/upkeep.mjs --restore-shots`) and any other
-  lane's screenshots your branch didn't change (`git checkout -- tests/screenshots/`, then re-add
-  your own).
+September 29, 2026: all three toys are built, labs only, on the "Pictures and pages" shelf, with
+their sounds, help texts, plan entries (`"v": "keep"`), credits and tests. The engine changes they
+need are on `claude/lane-books-engine` (its own draft PR, to merge first); `claude/lane-books`
+carries them too until then.
 
-- PR: one draft PR against main with the five sections (Summary, Verification, Deviations, Known
-  issues, What was cut). Never merge anything. When main moves, merge it into your branch (never
-  rebase a pushed branch).
-- After you post your cards, check the owner's marks (the "verdicts" collection, ids starting with
-  your prefix) about once an hour with a scheduled check-in (send_later). Fix every "fix" in the
-  same PR, post the new clip as a "-r2" card, and set replacedBy on the old one. Stop the check-ins
-  once your PR is merged or closed.
-- Finish every working turn with a short final message that starts with "READY:" (PR link, card ids,
-  test results, anything for the Operator), "WORKING:" (what's left), or "BLOCKED:" (exactly what
-  you need).
-
-Start now: read the docs and the Picture lab recipe, create docs/handoff/Books.md, open your draft
-PR early, then build the book first (it is the owner's main ask), then the album and the frame. Post
-clips as you finish each toy. When all three are done and the checks pass, finish with "READY:".
-
-## State
-
-September 28, 2026: lane started. Docs and the picture engine read; the book's design is below
-(Notes); an engine proposal is under "For the Operator". Nothing built yet.
+- **Your book** (`your-book`): opens the Tinkerer's Manual (`manual/tinkerers-manual.pdf`, 25 Letter
+  pages; the switch from the Picture lab's article was handed to this lane after Manual merged), or
+  any PDF from a file or an https address. A tap opens the cover, then turns one leaf at a time
+  (about 1 s); at the end a tap closes the book. Previous and Next in the Toy tab step a spread; a
+  link's page (or any jump) opens the spread with that page. Five styles: hardcover (cloth boards, a
+  square spine, head and tail bands, the first page as a panel on the cover), paperback (a card
+  cover that flexes), magazine (thin, a flexing cover, two staples in the fold), stapled paper (one
+  page a sheet, a staple in the corner, the sheets flip over the top) and spiral notebook (a wire
+  coil). The page shape follows the PDF's first page.
+- **Photo album** (`photo-album`): six CC0 sample photos; open several of your own at once. Leather,
+  linen or scrapbook covers; thick card pages; each side holds one photo, or two wide ones stacked
+  or two tall ones side by side; photo corners and (a switch) the file name as a caption.
+- **Picture frame** (`picture-frame`): a CC0 photo on a wall, hung from a nail by a wire; wood,
+  gold, modern (with a mat) or digital (steps through a set of photos with a fade to black). A tap
+  swings the frame as a damped pendulum (3 s).
+- Turning pages by dragging a corner is not built (see "What was cut" in the PR): the tap, Previous
+  and Next turn the pages.
 
 ## Notes
 
-### The book's design (first plan)
+### How the book works
 
-- The book stands facing the viewer, the spine up the middle (`k.spine` along Y), so a spread reads
-  face-on at phone size; the closed book slides to the middle (`out.body`) and slides back as it
-  opens.
-- Leaves cycle through four leaf slots, each a front and a back sheet. At rest on a spread only the
-  two open pages show; the pages a turn will uncover (the back of the right-hand leaf and the page
-  under it, and the same for a turn back) are built ahead, hidden, so a turn never waits for a build
-  and never shows a stale page.
-- Tap, Next and Previous turn one leaf (two pages); the Toy tab's page buttons step the spread, not
-  single pages. At the end, a tap closes the book.
+- The book stands facing you, its spine up the middle (`k.spine` along -Y, so a leaf turns toward
+  the viewer), and slides to the middle while closed (`out.body`).
+- Leaves cycle through four leaf slots. Leaf j (j >= 1) carries pages 2j - 1 (front) and 2j (back)
+  in slot j % 4, each a picture sheet on that leaf; page 0 is the front cover's. On spread K only
+  the left page (leaf K - 1's back) and the right page (leaf K's front) show; the pages the next
+  turn and the turn back need are asked for hidden with `ahead`, and a turn waits (up to 1.5 s)
+  until `pics.ready()` says its pages are built, so it never shows a blank or an old page.
+- The cover is a board that turns as one piece (a part) for the hardcover, or a card on leaf slot 8
+  that flexes (its kit splats use the `leaf` kind too, with their distance from the spine in toy
+  units: the recipe fixes the fit with a box of reach points so it knows the fit's scale).
+- Draw order: splats sort in the pose they were built in, so everything that turns over drew inside
+  out (the cover over the left page, a leaf's front over its back, the page under a turning leaf
+  through it). The engine's `out.resortPose` sorts the parts' and leaves' splats where they stand;
+  the book asks for it every second frame while something turns and for three frames after it lands.
+- Layers sit well apart (pages 0.003 off the leaf's middle, the cover 0.014 above, the page blocks'
+  tops 0.014 below): splats sort by their centers, so a page too close over a surface with big
+  splats mixes with it where the view is tilted (it showed as diagonal stripes on the hardcover's
+  panel).
+- The left page block appears under the first page as it lands and goes as that page lifts off; in a
+  close it swings over with the cover (riding the cover's free edge, so a flexing cover stays
+  outside it).
+- Splats on show: two pages at rest, four while a leaf turns, plus the kit (about 50k at "mid"). A
+  whole spread on a 390-wide phone builds each page at about 362 to 512 px wide (30k to 60k splats a
+  page for the sample).
+
+### The album and the frame
+
+- The album shares the book's leaves (`BOOK.sides`: the photos on each side of each leaf) and its
+  own sheets per side: five boxes (one, top, under, left, right) on each side of each slot. The
+  photo corners and captions are drawn on each photo before it becomes splats (`pictures.decorate`),
+  since a slot shows a different photo each time it comes round; the mount is drawn in the card's
+  own lit color, so it doesn't show.
+- The frame is one part (frame, photo sheet, wire and shadow) turning about the nail in the wall's
+  plane, so no re-sort is needed. The digital frame's fade is a black layer on channel 0 (`fade`
+  kind with a negative width).
+
+### Tools
+
+- `tools/bk-samples.mjs` makes the fixtures in `tests/fixtures/bk/` (3 and 300 numbered pages, wide
+  slides, a 12-page booklet about books) from our own text.
+- `tools/bk-clip.mjs` records the review clips at 390x844 with the clock stepped by hand (each step
+  waits for the pages it shows).
+- With the clock frozen at the test's default viewport, the app may draw no frames at all; the
+  frame's test runs in real time on the player's clock instead.
 
 ## Known issues
 
-(None yet.)
+- Early in a turn, a thin band of the page underneath can show through the turning page next to the
+  spine (both are close together there, and the ink sits in front of its paper). The page underneath
+  shows once the turning page has lifted about 17 degrees (a pale strip of the page block shows at
+  the fore-edge until then); showing it sooner mixes the two pages' text.
+- A page with a much finer build than the screen (zoomed out after zooming in) is rebuilt after a
+  quarter second, as in the Picture lab.
+- The left page block is a fixed thickness (it doesn't grow as you read).
+- The rig test in `tests/smoke.spec.mjs` (line 730) fails on main too (the same numbers); not this
+  lane's.
 
 ## For the Operator
 
-### Engine proposal (not started: waiting for a go-ahead)
+### The engine PR (`claude/lane-books-engine`, "Engine: …")
 
-A small additive "Engine: …" PR on `claude/lane-books-engine`, for all three toys. The book can be
-built without it for the sample's page shape, but three things need it:
+Started without an answer, because the book could not work without it (the draw order), and told in
+the final message. It is additive, and every other toy behaves as before:
 
-1. **The page shape at build.** The book's covers, boards and page edges are kit splats built before
-   the PDF opens, so a book can't follow the PDF's own page size (A4, Letter, slides) without it.
-   Proposal: a picture toy's media is opened before its build (the player already opens a file
-   first), and `build(k, o)` sees `k.media = { kind, count, name, aspect }` (the first page's width
-   over height), or nothing in the Node tools. Also `pics.aspect(n)` in `info.data.pictures`.
-2. **Several pictures as one set** (the album, and the digital frame): `input.media.multiple: true`
-   lets the file picker take several pictures at once; `src/media.js` opens them as one media
-   (`kind: "images"`, `count` pictures, `aspect(i)`, `draw(i)`), the Previous and Next buttons page
-   through them, a link says "settings only" as for one file, and `pictures.sample` may return a
-   list of addresses.
-3. **Pages built ahead, hidden**: `out.sheets[id] = { page, visible: 0, ahead: true }` builds that
-   page while the sheet stays hidden (after every visible sheet), and `pics.ready(id)` says whether
-   a sheet shows the page it was asked for. Without it a turn either waits for its pages (a blank or
-   a stale page for a moment) or keeps them all on show underneath.
+1. `k.media`: a picture toy's media opens before its build (`Player.pictureMediaFor`), so the build
+   sees `{ kind, count, name, aspect, aspects, names }` (null in the Node tools). One open is shared
+   with `startPictures`; a failed open is said once and retried on the next build.
+2. Sets of pictures: `input.media.multiple` (and `button`) in a recipe's panel; `openMedia(list)` in
+   `src/media.js` (`kind: "image"`, `count`, `names`, `aspect(i)`, `size(i)`, `draw(i)`; decoded on
+   demand, two at a time); `toy.media.files` in scenes (settings only, like `file`;
+   docs/SCENE-SCHEMA.md); `pictures.sample` may return a list; Previous and Next page through a set.
+3. `out.sheets[id] = { page, visible: 0, ahead: 1 }` builds a hidden sheet's page after the ones on
+   show; `pics.ready(id)`, `pics.aspect(n)` and `pics.nameOf(n)` in `info.data.pictures`.
+4. `out.resortPose` (src/pose.js): sorts the kit's splats on parts and leaves, and the picture
+   sheets on them, where they stand now; a page rebuilt on a leaf or a part is re-sorted by itself.
+5. `pictures.decorate(canvas, { page, name, sheet, kind, options })`: a recipe draws on a page or
+   picture before it becomes splats.
+6. Two fixes: the Toy tab's picture panel refreshes once it is in the page (it could stay blank);
+   flat colored areas of a PDF page (a chart's bars) kept a NaN paper color and drew black.
+
+### For PACKS.md (picture sheets)
+
+- A book's pages: use the leaf slots as a ring (four is enough) and `ahead` for the pages the next
+  turn needs; wait for `pics.ready` before a turn starts.
+- Anything turned more than a quarter turn (a leaf, a cover on a part) needs `out.resortPose` while
+  it turns and once it lands (draw order rule 1 applies to picture sheets too).
+- Kit splats can ride a leaf (`kind: "leaf"`, params
+  `[distance from the spine in toy units, slot]`); fix the fit with reach points to know the toy
+  units at build time.
+- Keep layers at least about 0.01 of the toy apart where big splats lie under a picture sheet.
+
+### For the backlog
+
+- Turning a page by dragging its corner (the input path would need a drag that feeds a leaf's angle;
+  `drag` in a recipe could do it without an engine change, but it needs its own design with the
+  ready-check and the re-sort).
+- A left page block that grows as you read (a part per few leaves).
+- A plain cover with the file's name for the hardcover and the spiral (the name is in `k.media` now;
+  it needs a small pixel font in the kit).
