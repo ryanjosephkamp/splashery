@@ -1579,7 +1579,10 @@ export const RECIPES = {
       };
       // Mantle and head.
       const octo = k.part("octo", { pivot: [0, 0.2, 0] });
-      k.add(k.ellipsoid(0.44, 0.5, 0.44), {
+      k.add(evenEllipsoid(k, 0.44, 0.5, 0.44), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         part: octo,
         pos: [0, 0.4, -0.1],
         rot: [-18, 0, 0],
@@ -1590,7 +1593,10 @@ export const RECIPES = {
         params: [0.03, 0],
         color: skinCol,
       });
-      k.add(k.ellipsoid(0.36, 0.28, 0.32), {
+      k.add(evenEllipsoid(k, 0.36, 0.28, 0.32), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         part: octo,
         pos: [0, 0.08, 0.08],
         flat: 0.2,
@@ -1629,8 +1635,11 @@ export const RECIPES = {
         ]);
         const arm = k.part(`a${i}`, { pivot: P(0.1, 0), axis: [d[2], 0, -d[0]] });
         k.add(
-          k.tube(curl, (t) => 0.1 * (1 - t) + 0.018, { grid: 32, samples: 96, caps: true }),
+          evenTube(k, curl, (t) => 0.1 * (1 - t) + 0.018, { grid: 32, samples: 96, caps: true }),
           {
+            even: true,
+            opacity: 1,
+            jitter: 0.015,
             part: arm,
             flat: 0.2,
             kind: "sway",

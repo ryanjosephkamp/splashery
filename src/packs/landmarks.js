@@ -1349,6 +1349,7 @@ function libertyBuild(k) {
   // The island, the water and the star-shaped fort.
   ground(k, 0.84, 0, (c) => grass(c, "#5f9e48"), { edge: "#7c705c" });
   water(k, -0.01, 1.12, 1.12, {
+    even: true,
     share: 0.08,
     deep: "#2a6a8e",
     light: "#6db6d4",
@@ -1374,6 +1375,9 @@ function libertyBuild(k) {
     const nn = unit([z1 - z0, 0, -(x1 - x0)]);
     const n = dot(nn, [x0, 0, z0]) < 0 ? mul(nn, -1) : nn;
     k.add(quad(k, [x0, 0, z0], [x1, 0, z1], [x1, fortH, z1], [x0, fortH, z0], n), {
+      even: true,
+      opacity: 1,
+      jitter: 0.015,
       flat: 0.2,
       color: fortCol,
     });
@@ -1382,6 +1386,9 @@ function libertyBuild(k) {
       k.add(
         quad(k, [xa, fortH, za], [x1, fortH, z1], [x0, fortH, z0], [x0, fortH, z0], [0, 1, 0]),
         {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           flat: 0.2,
           color: fortCol,
         },
@@ -1389,6 +1396,8 @@ function libertyBuild(k) {
     }
   }
   k.add(k.disc(0.46), {
+    opacity: 1,
+    jitter: 0.015,
     pos: [0, fortH, 0],
     flat: 0.2,
     color: (c) => (c.n[1] < 0 ? null : grass(c, "#6aa851")),
@@ -1396,7 +1405,14 @@ function libertyBuild(k) {
   // The pedestal.
   const plain = (c) =>
     lit(shade(granite, 0.94 + 0.08 * c.noise(c.p[0] * 25, c.p[1] * 25, c.p[2] * 25)), c, 0.62);
-  k.add(k.box(0.52, 0.09, 0.52), { pos: [0, fortH + 0.045, 0], flat: 0.2, color: plain });
+  k.add(evenBox(0.52, 0.09, 0.52), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
+    pos: [0, fortH + 0.045, 0],
+    flat: 0.2,
+    color: plain,
+  });
   const y0 = fortH + 0.09;
   const y1 = 0.53;
   prism(
@@ -1422,8 +1438,22 @@ function libertyBuild(k) {
     },
     { a0: Math.PI / 4 },
   );
-  k.add(k.box(0.43, 0.035, 0.43), { pos: [0, y1 + 0.0175, 0], flat: 0.2, color: plain });
-  k.add(k.box(0.3, 0.06, 0.3), { pos: [0, y1 + 0.065, 0], flat: 0.2, color: plain });
+  k.add(evenBox(0.43, 0.035, 0.43), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
+    pos: [0, y1 + 0.0175, 0],
+    flat: 0.2,
+    color: plain,
+  });
+  k.add(evenBox(0.3, 0.06, 0.3), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
+    pos: [0, y1 + 0.065, 0],
+    flat: 0.2,
+    color: plain,
+  });
   // The statue, modelled facing +Z and turned towards the viewer. Its
   // copper carries a warm light from the torch (channel 2: brightest near
   // the torch, see drive()).
@@ -1460,15 +1490,31 @@ function libertyBuild(k) {
     },
     { grid: 110, thick: 0.08 },
   );
-  k.add(robe, { ...P, interior: 0.04, core: "#4b6e62", color: (c) => patina(c) });
+  k.add(robe, {
+    opacity: 1,
+    jitter: 0.015,
+    ...P,
+    interior: 0.04,
+    core: "#4b6e62",
+    color: (c) => patina(c),
+  });
   // A drape falling from the left shoulder across the body.
   const drape = k.tube(
     (t) => F.p([0.1 - 0.2 * t, 0.49 - 0.2 * t, 0.075 + 0.02 * Math.sin(t * Math.PI)]),
     (t) => 0.022 + 0.01 * Math.sin(t * Math.PI),
   );
-  k.add(drape, { ...P, weight: 1.5, color: (c) => patina(c) });
+  k.add(drape, {
+    opacity: 1,
+    jitter: 0.015,
+    ...P,
+    weight: 1.5,
+    color: (c) => patina(c),
+  });
   // Head, crown and rays.
-  k.add(k.cylinder(0.032, 0.08), {
+  k.add(evenCylinder(0.032, 0.032, 0.08), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     ...P,
     pos: F.p([0, 0.575, 0]),
     quat: F.q(),
@@ -1476,6 +1522,9 @@ function libertyBuild(k) {
     color: (c) => patina(c),
   });
   k.add(k.sphere(0.058), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     ...P,
     pos: F.p([0, 0.625, 0.006]),
     scale: S,
@@ -1483,13 +1532,19 @@ function libertyBuild(k) {
     color: (c) => patina(c, 0.58),
   });
   k.add(k.sphere(0.034), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     ...P,
     pos: F.p([0, 0.635, -0.04]),
     scale: S,
     weight: 1.6,
     color: (c) => patina(c),
   });
-  k.add(k.torus(0.057, 0.012), {
+  k.add(evenTorus(k, 0.057, 0.012), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     ...P,
     pos: F.p([0, 0.66, 0]),
     quat: F.q(quatAxisAngle([1, 0, 0], -0.2)),
@@ -1532,9 +1587,19 @@ function libertyBuild(k) {
       (t) => F.p(armR(t)),
       (t) => (0.036 - 0.014 * t) * S,
     ),
-    { ...P, weight: 1.6, color: (c) => patina(c) },
+    {
+      even: true,
+      opacity: 1,
+      jitter: 0.015,
+      ...P,
+      weight: 1.6,
+      color: (c) => patina(c),
+    },
   );
-  k.add(k.ellipsoid(0.055, 0.1, 0.05), {
+  k.add(evenEllipsoid(k, 0.055, 0.1, 0.05), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     ...P,
     pos: F.p([-0.13, 0.54, 0]),
     quat: F.q(quatAxisAngle([0, 0, 1], -0.25)),
@@ -1542,6 +1607,9 @@ function libertyBuild(k) {
     color: (c) => patina(c),
   });
   k.add(k.sphere(0.03), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     ...P,
     pos: F.p([-0.135, 0.855, 0.03]),
     scale: S,
@@ -1549,7 +1617,10 @@ function libertyBuild(k) {
     color: (c) => patina(c),
   });
   const tb = [-0.135, 0.86, 0.03];
-  k.add(k.cylinder(0.018, 0.09), {
+  k.add(evenCylinder(0.018, 0.018, 0.09), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     ...P,
     pos: F.p(add(tb, [0, 0.04, 0])),
     quat: F.q(),
@@ -1557,7 +1628,10 @@ function libertyBuild(k) {
     weight: 2,
     color: (c) => patina(c),
   });
-  k.add(k.cone(0.022, 0.052, 0.055), {
+  k.add(evenCylinder(0.022, 0.052, 0.055), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     ...P,
     pos: F.p(add(tb, [0, 0.11, 0])),
     quat: F.q(),
@@ -1565,7 +1639,10 @@ function libertyBuild(k) {
     weight: 2,
     color: (c) => patina(c, 0.6),
   });
-  k.add(k.torus(0.06, 0.007), {
+  k.add(evenTorus(k, 0.06, 0.007), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     ...P,
     pos: F.p(add(tb, [0, 0.135, 0])),
     quat: F.q(),
@@ -1588,6 +1665,8 @@ function libertyBuild(k) {
   // are hidden at rest.
   const flame = k.part("flame", { pivot: F.p(fb) });
   k.add(flameShape, {
+    opacity: 1,
+    jitter: 0.015,
     part: flame,
     pos: F.p(fb),
     quat: F.q(),
@@ -1653,9 +1732,19 @@ function libertyBuild(k) {
       (t) => F.p(armL(t)),
       (t) => (0.034 - 0.01 * t) * S,
     ),
-    { ...P, weight: 1.6, color: (c) => patina(c) },
+    {
+      even: true,
+      opacity: 1,
+      jitter: 0.015,
+      ...P,
+      weight: 1.6,
+      color: (c) => patina(c),
+    },
   );
-  k.add(k.box(0.075, 0.125, 0.022), {
+  k.add(evenBox(0.075, 0.125, 0.022), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     ...P,
     pos: F.p([0.12, 0.43, 0.08]),
     quat: F.q(quatMul(quatAxisAngle([0, 0, 1], -0.3), quatAxisAngle([1, 0, 0], -0.25))),
@@ -1664,7 +1753,10 @@ function libertyBuild(k) {
     color: (c) =>
       c.s.face === 4 && Math.abs(c.lp[1]) < 0.01 ? keep(shade(deep, 0.8)) : patina(c, 0.6),
   });
-  k.add(k.box(0.26, 0.03, 0.22), {
+  k.add(evenBox(0.26, 0.03, 0.22), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     ...P,
     pos: F.p([0, 0.0, 0]),
     quat: F.q(),
