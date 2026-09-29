@@ -9,6 +9,8 @@
 // `node tools/sound-audit.mjs` lists the toys and their voices;
 // `node tools/sound-check.mjs` renders each one and checks its level.
 
+const TOY_PIANO_SONG = "C5 C5 G5 G5 A5 A5 G5 - F5 F5 E5 E5 D5 D5 C5";
+
 export const TOY_SOUNDS = {
   // ---- Scans ------------------------------------------------------------------------
   cactus: [
@@ -542,6 +544,12 @@ export const TOY_SOUNDS = {
     { voice: "drip", at: 2.25, f: 1200, n: 1 },
     { voice: "wave", at: 2.3, f: 200, decay: 0.45, vol: 0.4 },
     { voice: "drip", at: 3.4, f: 1100, n: 1 },
+  ],
+  // Lane Anatomy: a soft paper-and-cloth slide for each peel (the low chime as
+  // the layers return is a cue from the recipe).
+  "anatomy-atlas": [
+    { voice: "breath", f: 1300, to: 0.55, decay: 1.5, vol: 0.5 },
+    { voice: "flutter", f: 900, rate: 12, decay: 1.4, vol: 0.22, at: 0.12 },
   ],
 
   // ---- Nature -----------------------------------------------------------------------
@@ -1116,6 +1124,22 @@ export const TOY_SOUNDS = {
     at: 0.3,
     pickAt: 0.12,
   },
+  // Twinkle, Twinkle, Little Star on struck steel rods: a bright tine a hair
+  // out of tune with itself (the rod shimmers) and each hammer's tick. A tap
+  // on one key plays that key's note as a cue from the recipe instead.
+  "toy-piano": [
+    { voice: "tine", notes: TOY_PIANO_SONG, step: 0.28, at: 0.29, decay: 0.45, bright: 0.85 },
+    { voice: "tine", notes: TOY_PIANO_SONG, step: 0.28, at: 0.29, pitch: 1.004, decay: 0.38, bright: 0.6, vol: 0.45 }, // prettier-ignore
+    {
+      voice: "clack",
+      notes: TOY_PIANO_SONG,
+      step: 0.28,
+      at: 0.29,
+      pitch: 6.5,
+      decay: 0.6,
+      vol: 0.18,
+    },
+  ],
 
   // ---- Vehicles ---------------------------------------------------------------------
   rocket: [

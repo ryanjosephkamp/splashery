@@ -647,6 +647,11 @@ export const TOY_HELP = {
     about:
       "The kidneys are two bean-shaped organs, each about the size of a fist, tucked in the back just below the ribs. They clean the blood: they filter out waste and extra water, which leave the body as urine, and send the clean blood back.\n\nTap it to pump three pulses of blood through: each comes in along the artery as light, spreads through the kidney as it swells a little, leaves along the vein, and a drop runs down the ureter, the tube to the bladder. Together, the kidneys filter all the body's blood many times a day.",
   },
+  "anatomy-atlas": {
+    howTo: "Tap to peel off a layer; after the organs, tap to put them all back. Try Labels.",
+    about:
+      "An anatomy atlas shows the body in layers, the way a medical textbook does. Under the skin lie the muscles that move us, red with pale tendons at their ends; under them is the skeleton, which in an adult has about 206 bones; and inside are the organs: the brain, lungs, heart, liver, stomach, intestines and kidneys.\n\nTap to peel the outer layer: the skin opens along its seams, then the muscles and the bones lift off group by group. After the organs, a tap puts every layer back. Pick a Layer in the Toy tab to go straight to one, and switch on Labels to list the parts beside the body; the part you tap is highlighted.",
+  },
 
   // ---- Nature ---------------------------------------------------------------------------
   oak: {
@@ -1489,6 +1494,11 @@ export const TOY_HELP = {
     howTo: "Tap a bar to play its note, or tap the mallet or frame to play a scale.",
     about:
       "A xylophone is a row of tuned wooden bars that you strike with a mallet. Each bar's length sets its note: the shorter the bar, the higher it sounds. The name comes from the Greek for “wood” and “sound”.\n\nThis toy one has eight colored bars, a scale from C up to the next C. Tap a bar and the mallet swings over and strikes it, and the bar jumps and plays its note, so you can play a tune. Tap the mallet, a wheel or the ends of the frame instead, and it plays the whole scale.",
+  },
+  "toy-piano": {
+    howTo: "Tap a key to play its note, or tap the case to play Twinkle, Twinkle.",
+    about:
+      "A toy piano is a small piano with no strings. Each key works a tiny hammer, and the hammer strikes a metal rod held at one end, which rings like a little bell. Shorter rods sound higher, so the rods get shorter from left to right. Toy pianos were first made in the 1800s, and the composer John Cage wrote a whole suite for one in 1948.\n\nThis one has 18 keys, from C up to the F an octave and a half higher, and its back and lid are open so you can see inside. Tap a key and its hammer swings up and strikes its rod, which shivers as the note rings. Tap anywhere else to hear “Twinkle, Twinkle, Little Star.” Pick its color in the Toy tab.",
   },
   // ---- Vehicles -------------------------------------------------------------------------
   rocket: {

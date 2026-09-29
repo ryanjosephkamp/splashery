@@ -1466,6 +1466,17 @@ export const TOYS = [
     pack: "anatomy",
     tags: "organ body bean urine filter renal",
   },
+  // Lane Anatomy: the anatomy atlas (labs).
+  {
+    id: "anatomy-atlas",
+    label: "Anatomy atlas",
+    category: "anatomy",
+    kind: "kit",
+    pack: "anatomy-atlas",
+    labs: true,
+    tags: "body human anatomy atlas layers peel skin muscles skeleton bones organs labels",
+    camera: { yaw: 0.35, pitch: 0.1, roll: 0, distance: 3.0 },
+  },
 
   // ---- Pack: nature ----
   // (entries for src/packs/nature.js go here)
@@ -2721,6 +2732,15 @@ export const TOYS = [
     pack: "music",
     tags: "instrument rainbow bars mallet toy glockenspiel",
     camera: { yaw: 0.45, pitch: 0.5, roll: 0, distance: 4.1 },
+  },
+  {
+    id: "toy-piano",
+    label: "Toy piano",
+    category: "music",
+    kind: "kit",
+    pack: "music",
+    tags: "instrument keys keyboard hammers rods twinkle little star lullaby",
+    camera: { yaw: 0.45, pitch: 0.42, roll: 0, distance: 4.7 },
   },
 
   // ---- Pack: vehicles ----

@@ -1704,6 +1704,13 @@
       "sound": "The scale it already plays, as mallet tones.",
       "improved": "D: a tap on one bar lifts the mallet over that bar, strikes it and plays its note; a tap anywhere else plays the scale. Each bar dips as the mallet hits it. E1c: any tap over the row of bars strikes the nearest bar (easy to hit on a phone). The mallet swings over from wherever it is, lands 0.12 s after the tap with the bar's note, bounces off, and the bar jumps. A tap off the bars still plays the scale."
     },
+    "toy-piano": {
+      "v": "keep",
+      "owner": "The owner's idea on the Toy Ideas page, for the blind A/B toy (September 29, 2026): \"Tap a key: a tiny hammer strikes a metal rod inside the open back, and the rod shivers as it rings. Tap elsewhere: Twinkle, Twinkle, Little Star, the rods shimmering in turn.\"",
+      "effect": "Tap a key: it dips, its hammer swings up and strikes its rod, and the rod shivers as the note rings. Tap elsewhere: the opening line of Twinkle, Twinkle, Little Star, each key, hammer and rod moving with its note (5 s).",
+      "sound": "The plinky, bell-like tone of struck metal rods, made in the page.",
+      "improved": "A/B (maker B): new kit toy. An upright toy piano with 18 keys (C5 to F6, black keys raised), a red lacquer case (Color in the Toy tab) with an open back and a raised lid. Every key, hammer and steel rod is its own solid piece: a key turns on its balance rail, its hammer swings up through a sixth of a turn to strike, and the rod shivers sideways as the note rings (1.5 s). A tap on a key, a hammer or a rod plays that key; its note sounds as the hammer lands. A tap anywhere else plays Twinkle, Twinkle."
+    },
     "rocket": {
       "v": "keep",
       "owner": "Basically perfect.",
@@ -2028,6 +2035,13 @@
       "owner": "Approved on the Splashery Universe page (lane Studio Sound), September 29, 2026.",
       "effect": "A song's real spectrogram as a landscape of splats; a tap plays the song while a glowing marker and the camera glide along it.",
       "sound": "The song itself."
+    },
+    "anatomy-atlas": {
+      "v": "keep",
+      "owner": "Approved on the Splashery Universe page (lane Anatomy), September 29, 2026.",
+      "effect": "A standing figure in four layers (a smooth mannequin skin, the superficial muscles, the skeleton and the organs); each tap peels the outer layer in solid pieces (the skin opens along its seams, the muscles and bones lift off group by group) in about 3 s, and after the organs a tap brings every layer back. Layer picks a layer; Labels lists the parts beside the toy.",
+      "sound": "A soft paper-and-cloth slide for each peel, and a low chime as the layers settle back.",
+      "improved": "Anatomy: a kit-built body (smoothly joined primitives, so the skin has no seams but its cut lines), 13 skin pieces, 19 muscle groups and 16 bones or bone groups as tokens, and our brain, lungs, heart and kidney recipes placed inside with a kit-built liver, stomach and intestines."
     },
     "model-splats": {
       "v": "keep",

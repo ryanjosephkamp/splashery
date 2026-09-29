@@ -10,8 +10,8 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 314 toys. 314 have a tap action today; the other 0 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 311.
+- 316 toys. 316 have a tap action today; the other 0 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 313.
 - **more** (has an effect; make it clearer or more dramatic): 0.
 - **new** (needs its own effect): 3.
 - Visual fixes: 0 open, 28 done. Touch or drag interaction asked for: 4.
@@ -37,23 +37,23 @@ Proposals below are suggestions; the owner may change them.
   Neuron, Astrocyte, Animal cell, DNA, White blood cell, Microglia, Diatom, Pollen grain, Snowflake,
   Chromosome, Mitochondrion, Paramecium, Amoeba, Electron orbital, Atom, Molecule, Protein, Crystal
   lattice, Diamond, Ruby, Emerald, Amethyst geode, Sapphire, Quartz cluster, Opal, Crystal ball,
-  Brain, Eye, Lungs, Tooth, Kidney, Oak tree, Pine tree, Palm tree, Cherry blossom, Maple tree,
-  Bonsai, Weeping willow, Sunflower, Rose, Tulips, Daisies, Lotus, Toadstool, Fern, Saguaro cactus,
-  Coral reef, Pinecone, Acorns, Succulent, Bamboo, Pebbles, Kelp, Lava lamp, Ice swan, Tornado,
-  Rainbow, Iceberg, Waterfall, Ocean wave, Ice cream, Watermelon, Cupcake, Lollipop, Candy cane,
-  Macarons, Gummy bear, Pretzel, Croissant, Sushi, Taco, Coffee, Apple, Bananas, Orange, Kiwi,
-  Pineapple, Cherries, Grapes, Avocado, Building bricks, Rubber duck, Newton's cradle, Puzzle cube,
-  Kite, Chess set, Lorenz attractor, Möbius strip, Klein bottle, Menger sponge, Hypercube, Torus
-  knot, Gyroid, Mandelbulb, Seashell spiral, Graph plotter, Surface plotter, Circle and waves,
+  Brain, Eye, Lungs, Tooth, Kidney, Anatomy atlas, Oak tree, Pine tree, Palm tree, Cherry blossom,
+  Maple tree, Bonsai, Weeping willow, Sunflower, Rose, Tulips, Daisies, Lotus, Toadstool, Fern,
+  Saguaro cactus, Coral reef, Pinecone, Acorns, Succulent, Bamboo, Pebbles, Kelp, Lava lamp, Ice
+  swan, Tornado, Rainbow, Iceberg, Waterfall, Ocean wave, Ice cream, Watermelon, Cupcake, Lollipop,
+  Candy cane, Macarons, Gummy bear, Pretzel, Croissant, Sushi, Taco, Coffee, Apple, Bananas, Orange,
+  Kiwi, Pineapple, Cherries, Grapes, Avocado, Building bricks, Rubber duck, Newton's cradle, Puzzle
+  cube, Kite, Chess set, Lorenz attractor, Möbius strip, Klein bottle, Menger sponge, Hypercube,
+  Torus knot, Gyroid, Mandelbulb, Seashell spiral, Graph plotter, Surface plotter, Circle and waves,
   Fourier circles, Pythagoras proof, Splat equation, Heraldic shield, Crown, Wizard's orb,
   Jellyfish, School of fish, Pufferfish, Nautilus, Snail, Octopus, Sea urchin, Frog, Snowman,
-  Fireworks, Decorated tree, Diya, Acoustic guitar, Snare drum, Xylophone, Hot-air balloon, Bus, Jet
-  airliner, Sailboat, Submarine, Bicycle, Eiffel Tower, Washington Monument, Pyramids of Giza,
-  Twisting supertall, Statue of Liberty, White House, Leaning Tower of Pisa, Colosseum, Parthenon,
-  Stonehenge, Big Ben, Taj Mahal, Castle, Pagoda, Windmill, Perceptron, Multilayer perceptron,
-  Neural network, Convolutional network, Recurrent network, Transformer, Looped transformer,
-  Diffusion model, Gradient descent, Gaussian splatting, Word vectors, Sorting machine, Half adder,
-  Your book, Photo album, Picture frame, Model to splats, Splat field, Screen.
+  Fireworks, Decorated tree, Diya, Acoustic guitar, Snare drum, Xylophone, Toy piano, Hot-air
+  balloon, Bus, Jet airliner, Sailboat, Submarine, Bicycle, Eiffel Tower, Washington Monument,
+  Pyramids of Giza, Twisting supertall, Statue of Liberty, White House, Leaning Tower of Pisa,
+  Colosseum, Parthenon, Stonehenge, Big Ben, Taj Mahal, Castle, Pagoda, Windmill, Perceptron,
+  Multilayer perceptron, Neural network, Convolutional network, Recurrent network, Transformer,
+  Looped transformer, Diffusion model, Gradient descent, Gaussian splatting, Word vectors, Sorting
+  machine, Half adder, Your book, Photo album, Picture frame, Model to splats, Splat field, Screen.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -480,7 +480,7 @@ Proposals below are suggestions; the owner may change them.
     returning throw and settles back (3 s).
   - Sound: Whirring whoosh.
 
-## Anatomy (6)
+## Anatomy (7)
 
 - **Beating heart** (`heart`). Now: tap: Race and calm. Plan: keep.
   - Owner: Needs a special effect.
@@ -523,6 +523,17 @@ Proposals below are suggestions; the owner may change them.
     through the kidney as a soft flush while it swells a little, leaves along the vein, and a drop
     runs down the ureter (about 4.5 s).
   - Sound: Gentle trickle.
+- **Anatomy atlas** (`anatomy-atlas`). Now: tap: Peel a layer. Plan: keep.
+  - Owner: Approved on the Splashery Universe page (lane Anatomy), September 29, 2026.
+  - Effect: A standing figure in four layers (a smooth mannequin skin, the superficial muscles, the
+    skeleton and the organs); each tap peels the outer layer in solid pieces (the skin opens along
+    its seams, the muscles and bones lift off group by group) in about 3 s, and after the organs a
+    tap brings every layer back. Layer picks a layer; Labels lists the parts beside the toy.
+  - Improved: Anatomy: a kit-built body (smoothly joined primitives, so the skin has no seams but
+    its cut lines), 13 skin pieces, 19 muscle groups and 16 bones or bone groups as tokens, and our
+    brain, lungs, heart and kidney recipes placed inside with a kit-built liver, stomach and
+    intestines.
+  - Sound: A soft paper-and-cloth slide for each peel, and a low chime as the layers settle back.
 
 ## Weather (13)
 
@@ -1734,7 +1745,7 @@ Proposals below are suggestions; the owner may change them.
   - Owner: Pretty much perfect.
   - Sound: Match strike and a bell.
 
-## Music (3)
+## Music (4)
 
 - **Acoustic guitar** (`guitar`). Now: tap: Strum. Plan: keep.
   - Owner: Looks fine; add the music.
@@ -1756,6 +1767,20 @@ Proposals below are suggestions; the owner may change them.
     wherever it is, lands 0.12 s after the tap with the bar's note, bounces off, and the bar jumps.
     A tap off the bars still plays the scale.
   - Sound: The scale it already plays, as mallet tones.
+- **Toy piano** (`toy-piano`). Now: tap: Play Twinkle, Twinkle. Plan: keep.
+  - Owner: The owner's idea on the Toy Ideas page, for the blind A/B toy (September 29, 2026): "Tap
+    a key: a tiny hammer strikes a metal rod inside the open back, and the rod shivers as it rings.
+    Tap elsewhere: Twinkle, Twinkle, Little Star, the rods shimmering in turn."
+  - Effect: Tap a key: it dips, its hammer swings up and strikes its rod, and the rod shivers as the
+    note rings. Tap elsewhere: the opening line of Twinkle, Twinkle, Little Star, each key, hammer
+    and rod moving with its note (5 s).
+  - Improved: A/B (maker B): new kit toy. An upright toy piano with 18 keys (C5 to F6, black keys
+    raised), a red lacquer case (Color in the Toy tab) with an open back and a raised lid. Every
+    key, hammer and steel rod is its own solid piece: a key turns on its balance rail, its hammer
+    swings up through a sixth of a turn to strike, and the rod shivers sideways as the note rings
+    (1.5 s). A tap on a key, a hammer or a rod plays that key; its note sounds as the hammer lands.
+    A tap anywhere else plays Twinkle, Twinkle.
+  - Sound: The plinky, bell-like tone of struck metal rods, made in the page.
 
 ## Vehicles (14)
 
