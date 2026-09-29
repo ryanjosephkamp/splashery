@@ -2070,6 +2070,9 @@ export const RECIPES = {
         [0, 0.92],
       ];
       k.add(k.lathe(prof, { grid: 80 }), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         flat: 0.2,
         interior: 0.08,
         core: "#c8c8c8",
@@ -2099,6 +2102,9 @@ export const RECIPES = {
       for (const s of [-1, 1]) {
         eye(k, [s * 0.1, 0.65, 0.29], 0.04, [s * 0.3, 0.1, 1], { pupil: -1, weight: 3 });
         k.add(k.sphere(0.045), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           pos: [s * 0.2, 0.55, 0.28],
           scale: [1, 0.6, 0.4],
           weight: 2,
@@ -2110,6 +2116,9 @@ export const RECIPES = {
           axis: [0, 0, 1],
         });
         k.add(k.ellipsoid(0.06, 0.34, 0.16), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           pos: [s * 0.5, -0.02, 0],
           rot: [0, 0, s * 12],
           part: flip,
@@ -2117,6 +2126,9 @@ export const RECIPES = {
           color: (c) => lit(c, c.n[0] * s < -0.2 ? "#f4f4f0" : black, 0.3, 0.3),
         });
         k.add(k.ellipsoid(0.14, 0.05, 0.22), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           pos: [s * 0.18, -0.88, 0.14],
           rot: [0, s * -12, 0],
           flat: 0.2,
@@ -2125,6 +2137,9 @@ export const RECIPES = {
         });
       }
       k.add(k.cone(0.075, 0.0, 0.2), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: [0, 0.56, 0.38],
         rot: [80, 0, 0],
         weight: 2,
@@ -2176,6 +2191,9 @@ export const RECIPES = {
           { grid: 72 },
         ),
         {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           flat: 0.2,
           interior: 0.08,
           core: "#b88a5a",
@@ -2191,6 +2209,9 @@ export const RECIPES = {
       );
       for (const s of [-1, 1]) {
         k.add(k.ellipsoid(0.14, 0.4, 0.3), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           pos: [s * 0.42, -0.14, -0.06],
           rot: [8, 0, s * -8],
           flat: 0.2,
@@ -2198,6 +2219,9 @@ export const RECIPES = {
         });
         for (let j = -1; j <= 1; j++)
           k.add(k.cylinder(0.025, 0.12), {
+            even: true,
+            opacity: 1,
+            jitter: 0.015,
             pos: [s * 0.16 + j * 0.05, -0.74, 0.14],
             rot: [70, 0, 0],
             weight: 2,
@@ -2207,6 +2231,9 @@ export const RECIPES = {
       }
       // The branch.
       k.add(rod(k, [-0.95, -0.8, 0.12], [0.95, -0.84, 0.04], 0.075, { caps: true }), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         flat: 0.2,
         color: (c) =>
           lit(
@@ -2221,6 +2248,9 @@ export const RECIPES = {
         [0.7, -0.05, -60],
       ])
         k.add(k.ellipsoid(0.12, 0.012, 0.06), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           pos: [x, -0.74, z],
           rot: [0, r, 15],
           weight: 2,
@@ -2234,6 +2264,9 @@ export const RECIPES = {
         [0.15, 0.52, 0.34],
       ];
       k.add(k.ellipsoid(0.44, 0.38, 0.4), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: [0, 0.52, 0.02],
         part: head,
         flat: 0.2,
@@ -2256,6 +2289,9 @@ export const RECIPES = {
           irisEdge: -1,
         });
         k.add(k.sphere(0.106), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           pos: e,
           part: lids,
           weight: 2,
@@ -2264,6 +2300,8 @@ export const RECIPES = {
         });
       }
       k.add(k.cone(0.05, 0, 0.12), {
+        opacity: 1,
+        jitter: 0.015,
         pos: [0, 0.42, 0.42],
         rot: [150, 0, 0],
         part: head,
@@ -2273,6 +2311,8 @@ export const RECIPES = {
       });
       for (const s of [-1, 1])
         k.add(k.cone(0.09, 0.0, 0.24), {
+          opacity: 1,
+          jitter: 0.015,
           pos: [s * 0.24, 0.86, 0],
           rot: [0, 0, s * -25],
           part: head,

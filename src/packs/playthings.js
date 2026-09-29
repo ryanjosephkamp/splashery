@@ -124,6 +124,8 @@ function triShape(a, b, c) {
   return {
     area: 0.5 * len(cr),
     thick: 0.02,
+    // Two random numbers per point, so even: true spreads points evenly.
+    dims: 2,
     sample(rand) {
       const r1 = Math.sqrt(rand());
       const r2 = rand();
@@ -1525,6 +1527,8 @@ export const RECIPES = {
       const wood = "#5b3a24";
       // Base.
       k.add(roundBox(2.1, 0.13, 0.98, 0.04, { bottom: false }), {
+        opacity: 1,
+        jitter: 0.015,
         pos: [0, yb - 0.065, 0],
         flat: 0.2,
         color: (c) => {
@@ -1547,12 +1551,17 @@ export const RECIPES = {
           [0.95, yb, z],
         ]);
         k.add(k.tube(path, 0.024, { samples: 400 }), {
+          opacity: 1,
+          jitter: 0.015,
           flat: 0.2,
           weight: 1.5,
           color: (c) => chrome(c.n),
         });
         for (const x of [-0.95, 0.95])
           k.add(k.cylinder(0.05, 0.03, { caps: "top" }), {
+            even: true,
+            opacity: 1,
+            jitter: 0.015,
             pos: [x, yb + 0.015, z],
             flat: 0.2,
             weight: 2,
@@ -1564,6 +1573,9 @@ export const RECIPES = {
         const x = (i - 2) * rb * 2;
         const part = k.part("ball" + i, { pivot: [x, top, 0], axis: [0, 0, 1] });
         k.add(k.sphere(rb), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           pos: [x, yc, 0],
           part,
           flat: 0.2,
@@ -1572,6 +1584,9 @@ export const RECIPES = {
           color: (c) => chrome(c.n),
         });
         k.add(k.cylinder(0.025, 0.03, { caps: "top" }), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           pos: [x, yc + rb + 0.005, 0],
           part,
           flat: 0.2,
@@ -1590,7 +1605,16 @@ export const RECIPES = {
                 grid: 16,
               },
             ),
-            { part, share: 0.004, size: 0.7, flat: 0.5, pattern: false, color: "#e9e6de" },
+            {
+              opacity: 1,
+              jitter: 0.015,
+              part,
+              share: 0.004,
+              size: 0.7,
+              flat: 0.5,
+              pattern: false,
+              color: "#e9e6de",
+            },
           );
         }
       }
@@ -1926,7 +1950,7 @@ export const RECIPES = {
 
   kite: {
     alive: true,
-    density: 0.16,
+    density: 0.6,
     options: [
       { key: "c1", label: "Colour 1", type: "color", default: "#e8413c" },
       { key: "c2", label: "Colour 2", type: "color", default: "#f7c948" },
@@ -1976,6 +2000,9 @@ export const RECIPES = {
       ];
       for (const [a, b, cc, col] of sail) {
         k.add(triShape(a, b, cc), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           part: kite,
           flat: 0.15,
           weight: 1.2,
@@ -1998,6 +2025,8 @@ export const RECIPES = {
         R([-0.86, -1.08, 0]),
       ]);
       k.add(k.tube(tail, 0.022, { samples: 200 }), {
+        opacity: 1,
+        jitter: 0.015,
         part: kite,
         share: 0.04,
         flat: 0.4,
@@ -2016,6 +2045,9 @@ export const RECIPES = {
           const tip = add(p, add(mul(side, 0.09 * s), mul(dir, 0.03 * s)));
           const tip2 = add(p, add(mul(side, 0.09 * s), mul(dir, -0.03 * s)));
           k.add(triShape(p, tip, tip2), {
+            even: true,
+            opacity: 1,
+            jitter: 0.015,
             part: kite,
             weight: 2.5,
             flat: 0.2,
@@ -2040,6 +2072,8 @@ export const RECIPES = {
           { samples: 64, grid: 24 },
         ),
         {
+          opacity: 1,
+          jitter: 0.015,
           part: line,
           share: 0.02,
           flat: 0.5,
@@ -2057,6 +2091,8 @@ export const RECIPES = {
         k.add(
           k.tube((t) => add(q0, mul(sub(q1, q0), t)), 0.012, { samples: 32, grid: 24 }),
           {
+            opacity: 1,
+            jitter: 0.015,
             part: kite,
             weight: 1.5,
             flat: 0.3,
@@ -2069,7 +2105,7 @@ export const RECIPES = {
 
   "paper-plane": {
     alive: true,
-    density: 0.5,
+    density: 0.8,
     options: [
       { key: "color", label: "Paper", type: "color", default: "#cfe6f7" },
       { key: "lines", label: "Lined paper", type: "switch", default: true },
@@ -2109,6 +2145,9 @@ export const RECIPES = {
             ? mul(sh.sample(() => 0.3).n, -1)
             : sh.sample(() => 0.3).n;
         k.add(sh, {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           part: plane,
           flat: 0.12,
           color: (c) => {
@@ -2133,7 +2172,7 @@ export const RECIPES = {
 
   "origami-crane": {
     alive: true,
-    density: 0.18,
+    density: 0.6,
     options: [{ key: "color", label: "Paper", type: "color", default: "#e2474f" }],
     controls: [{ key: "flap", label: "Flap", type: "pulse", ease: 1.8 }],
     action: { key: "flap", label: "Flap the wings" },
@@ -2153,6 +2192,9 @@ export const RECIPES = {
         const n0 = sh.sample(() => 0.4).n;
         const n = dot(n0, out) < 0 ? mul(n0, -1) : n0;
         k.add(sh, {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           part,
           flat: 0.12,
           color: (c) => {

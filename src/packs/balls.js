@@ -2355,9 +2355,7 @@ export const RECIPES = {
             const g2 = Math.cos(TAU * ((a / TAU) * 90 - c.lp[1] * 14));
             const band = smoothstep(0.125, 0.11, y);
             const k1 = band * 0.5 * (smoothstep(0.2, 0.8, g1) + smoothstep(0.2, 0.8, g2));
-            return keep(
-              lit(mix("#1c1c1e", "#29292c", k1), c.n, { sheen: 0.14, tight: 8 }),
-            );
+            return keep(lit(mix("#1c1c1e", "#29292c", k1), c.n, { sheen: 0.14, tight: 8 }));
           }
           const r = c.s.radial ?? 0;
           if (r > 0.975) return keep(lit("#3a3a3d", c.n, { sheen: 0.25, tight: 6 }));
@@ -2388,6 +2386,9 @@ export const RECIPES = {
     build(k) {
       // The cork: a rounded base under a short band.
       k.add(k.sphere(0.3), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: [0, -0.62, 0],
         scale: [1, 0.85, 1],
         flat: 0.25,
@@ -2395,14 +2396,29 @@ export const RECIPES = {
         color: (c) => (c.lp[1] > 0 ? null : pebble(c, "#e9dcc2", 0.1, 30)),
       });
       k.add(k.cylinder(0.3, 0.14, { caps: "top" }), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: [0, -0.55, 0],
         flat: 0.25,
         color: (c) => (c.s.cap ? "#f1ece3" : keep("#233a8f")),
       });
       // The skirt of sixteen feathers, scalloped at the top.
       const H = 1.25;
-      k.add(k.cone(0.27, 0.66, H, { caps: false }), {
+      // A lathe rather than k.cone: its even placement has no lattice.
+      const skirt = k.lathe(
+        [
+          [0.27, -H / 2],
+          [0.465, 0],
+          [0.66, H / 2],
+        ],
+        { grid: 96 },
+      );
+      k.add(skirt, {
+        opacity: 1,
+        jitter: 0.015,
         pos: [0, -0.48 + H / 2, 0],
+        even: true,
         flat: 0.25,
         color: (c) => {
           const a = Math.atan2(c.lp[0], c.lp[2]);
