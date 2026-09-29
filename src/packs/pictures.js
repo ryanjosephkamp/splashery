@@ -1458,7 +1458,8 @@ const FRAME_RECIPE = {
   ],
   input: {
     title: "Your own photo",
-    media: { accept: ["image", "gif", "video"], multiple: true, button: "Open photos…" },
+    // (list: the digital frame's photos, to put in order; engine PR 2.)
+    media: { accept: ["image", "gif", "video"], multiple: true, list: true, button: "Open photos…" }, // prettier-ignore
     note: "Open a photo, a GIF or a video to frame it, or several photos for the digital frame to step through. Your files stay on this device; nothing is uploaded.",
   },
   drive(t, c, out, info) {
@@ -1473,6 +1474,11 @@ const FRAME_RECIPE = {
     const st = time - FRAME.t0;
     if (st > FRAME_SWING) FRAME.t0 = -99;
     out.parts.frame = { angle: FRAME.t0 > -99 ? frameAngle(st) : 0 };
+    // A video starts playing by itself, once (a tap swings the frame).
+    if (pics?.kind === "video" && FRAME.video !== pics.name) {
+      FRAME.video = pics.name;
+      if (!pics.playing) pics.togglePlay();
+    }
     let fade = 0;
     if (FRAME.digital && pics?.count > 1) {
       // Show a photo, fade to black, turn to the next, and fade back in
@@ -1501,7 +1507,7 @@ const FRAME_RECIPE = {
   build(k, o) {
     const style = FRAME_STYLES[o.frame] ? o.frame : "wood";
     const fs = FRAME_STYLES[style];
-    Object.assign(FRAME, { tapN: 0, t0: -99, digital: style === "digital", random: o.order === "random", next: -1, since: 0 }); // prettier-ignore
+    Object.assign(FRAME, { tapN: 0, t0: -99, digital: style === "digital", random: o.order === "random", next: -1, since: 0, video: null }); // prettier-ignore
     // The opening follows the photo's shape (a digital frame is 4:3).
     const aspect = style === "digital" ? 4 / 3 : Math.max(0.5, Math.min(2, k.media?.aspect || 900 / 675)); // prettier-ignore
     const H = 1;
