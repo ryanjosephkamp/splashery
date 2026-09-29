@@ -221,7 +221,13 @@ export function normalizeMedia(m) {
   const out = {};
   const url = normalizeMediaURL(m.url);
   if (url) out.url = url;
-  else if (m.file && typeof m.file === "object") {
+  else if (Array.isArray(m.files) && m.files.length) {
+    // A set of pictures from the visitor's device (lane Books).
+    out.files = m.files.slice(0, 200).map((f) => ({
+      name: typeof f?.name === "string" ? f.name.slice(0, 200) : "picture",
+      bytes: num(f?.bytes, 0, 0, 1e12),
+    }));
+  } else if (m.file && typeof m.file === "object") {
     out.file = {
       name: typeof m.file.name === "string" ? m.file.name.slice(0, 200) : "file",
       bytes: num(m.file.bytes, 0, 0, 1e12),

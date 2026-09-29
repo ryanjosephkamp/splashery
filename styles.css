@@ -498,6 +498,19 @@ textarea {
   margin: 0;
   overflow-wrap: anywhere;
 }
+/* A video's scrub bar (lane Books) */
+.input-media .media-scrub {
+  align-items: center;
+}
+.input-media .media-scrub input[type="range"] {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.input-media .media-scrub .note {
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
 /* End of pictures */
 
 /* Panel ------------------------------------------------------------------- */
