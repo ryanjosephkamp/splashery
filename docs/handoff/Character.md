@@ -111,50 +111,55 @@ locked.
   docs/OPERATING.md, docs/PACKS.md, docs/WORKSTREAMS.md and docs/handoff/history.md (lessons from
   earlier lanes).
 - Your handoff file: create it. Start it with this brief, word for word, under "## Brief", then keep
-  "## State", "## Notes", "## Known issues" and "## For the Operator" current. Note your model at
-  the top of "## State" (the blog post compares the two models).
-- Shared lists: edit only your own entries in src/toys.js, src/toy-sounds.js, src/toy-help.js (a
-  how-to line and an About text per toy, following docs/handoff/Help.md), tools/toy-plan.json,
-  CREDITS.md and tools/assets.json. Regenerate docs/TOY-PLAN.md with `node tools/toy-plan.mjs`;
-  never merge it by hand.
-- Never edit tests/taps.spec.mjs. Your own tests go in tests/<prefix>.spec.mjs. If a finished lane's
-  test breaks because of a count or a list your work changes, don't edit it: say which test and why
-  in your message, and the Operator fixes it.
-- Assets: CC0, CC BY or public domain only, checked on the live source page and credited
-  (CREDITS.md, tools/assets.json and the toy's in-app credit). Never BY-SA or NC. No logos, brand
-  names or insignia.
-- Review: post clips and cards to the Effect review page,
-  https://claude.ai/artifact/NCsg9V5SzFY3Mnwuwgq7pi, as OPERATING.md's "Steps for a lane" says.
-  Judge every effect as motion at phone size against the effect quality rules before you post it.
-  The Operator has made your lane's record. Don't republish the page, and never write to "verdicts".
-- Push your work in progress to your branch about every hour, so it isn't only in your container,
-  and open your draft PR early. Many lanes run at once now, so main moves often: merge it into your
-  branch before each push (never rebase a pushed branch) and keep both sides of any conflict.
-- Before every push, follow "Before every push" in CLAUDE.md: the full Playwright suite
-  (SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium npx playwright test), prettier,
-  `node tools/us-english.mjs --diff`, `node tools/check-packs.mjs <pack>` for new or changed toys, a
-  contact sheet and thumbnails, and your own screenshots at 390×844 and 1440×900. Then put back the
-  standard screenshots (`node tools/upkeep.mjs --restore-shots`) and any other lane's screenshots
-  your branch didn't change.
-- PR: one draft PR against main with the five sections (Summary, Verification, Deviations, Known
-  issues, What was cut), and the model that built it in the Summary. When main moves, merge it into
-  your branch.
-- After you post your cards, check the owner's marks (the "verdicts" collection, ids starting with
-  your prefix) about once an hour with a scheduled check-in (send_later). Fix every "fix" in the
-  same PR, post the new clip as a "-r2" card, and set replacedBy on the old one. Stop the check-ins
-  once your PR is merged or closed.
-- Finish every working turn with a short final message that starts with "READY:" (PR link, card ids,
-  test results, anything for the Operator), "WORKING:" (what's left), or "BLOCKED:" (exactly what
-  you need).
-
-## State
+  "## State
 
 Built by Opus 5.5 (default effort).
 
-- September 29, 2026: lane started. Reading the Worlds code; the draft PR is open.
+- September 29, 2026: lane started; draft PR #110 open.
+- The new character is in: 21 rigid joints, a sculpted person, a foot-led gait, per-tier budgets.
+  The Worlds tests (`tests/wd.spec.mjs`) pass with it; `tests/chr.spec.mjs` is new.
+- Next: the review cards (`chr-closeup`, `chr-walk`, `chr-run`, `chr-idle`, `chr-before-after`,
+  `chr-colors`), the full test run, then READY.
 
 ## Notes
 
+- **Source: (a), sculpted with the kit.** Why: every color must come from the world file's five
+  colors, which is simple when each surface is ours (a scanned or converted mesh would need its
+  texture split and recolored by region); the joints have to be designed to hide (a cap centered on
+  each pivot, sleeves and trouser legs over the next part), which a mesh cut at the bones doesn't
+  give without its own fills; the sculpt costs no download, keeps the page small and has no license
+  to track. I also checked (b): this container can't reach MakeHuman's pages or GitHub (the proxy
+  answers 403/404), so its license couldn't be checked on the live page as the rules require.
+- **Modules.** `character.js` (the API and the build), `character-rig.js` (sizes, joints, rotation
+  math, `solve()`), `character-body.js` (the sculpt), `character-motion.js` (the gait). The public
+  API is unchanged; `pose()` adds `hips` (a sideways sway) and `feet`; `CHARACTER_SPLATS` is new.
+- **world.js** (two marked, additive changes in the character block): `buildCharacter()` takes the
+  count from `CHARACTER_SPLATS[tier]`, and `placeCharacter()` applies `pose().hips` as the hips'
+  sideways shift.
+- **Budget measured** (`buildCharacter` at each tier, the Test island's seed): low 37,942 of 40,000;
+  mid 60,682 of 64,000; high 85,337 of 90,000; max 113,784 of 120,000. The Worlds lane's budget test
+  still passes on every tier. The old character was 60,000 times the tier's prop factor (about
+  54,000 on mid).
+- **Build time.** About 1 s in Node on this container (the head's distance field is sampled once on
+  a grid; the first version took 15 s).
+- **Lessons** (for PACKS.md, see below): hidden surfaces of another color show through a dark
+  surface as speckle; rings of a loft must go one way along its axis (a ring that doubles back makes
+  loops that speckle); fine ribbing or folds shorter than about two splats speckle, so keep folds
+  broad.
+- Tools: `tools/chr-view.mjs` (stills from named views, or a strip through a stride),
+  `tools/chr-clip.mjs` (the review clips), `tools/chr-page.mjs` (the page both load).
+
 ## Known issues
 
+- The hair is a smooth sculpted shape with strand shading, not loose strands; at a close-up it reads
+  as a neat short cut, a little helmet-like at the back.
+- Baked light turns with a part (an arm swung forward keeps its light), as for every kit toy.
+- The fingers curl as one group (the brief's minimum); the thumb doesn't move.
+
 ## For the Operator
+
+- PACKS.md lessons (section 7c): "Hidden surfaces of another color inside a solid show through as
+  speckle: leave them out (return null) or give them the outer color. Loft rings must go one way
+  along the axis. Folds and ribs finer than two splat widths speckle."
+- No change needed in `tiers.js`: the character's counts live in `character.js`
+  (`CHARACTER_SPLATS`).

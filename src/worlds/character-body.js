@@ -320,7 +320,6 @@ function buildShirt(k, x, which) {
       let col = c.shirt;
       // The hem band and the side seams.
       if (y < 0.972) col = shade(col, 0.92);
-      if (s.n[1] < -0.5) col = shade(col, 0.8); // the hem's underside
       // Shade under the chest.
       const ao =
         1 - 0.08 * smoothstep(1.25, 1.17, y) * smoothstep(1.1, 1.16, y) * Math.max(0, s.n[2]);
@@ -399,10 +398,10 @@ function buildThigh(k, { c, pivot }, side) {
     { y: hy - 0.36, x: 0.066, f: 0.071, b: 0.068 },
     { y: hy - 0.24, x: 0.076, f: 0.079, b: 0.082 },
     { y: hy - 0.11, x: 0.087, f: 0.086, b: 0.093 },
-    { y: hy - 0.02, x: 0.092, f: 0.089, b: 0.097 },
-    { y: hy + 0.03, x: 0.088, f: 0.085, b: 0.092 },
-    { y: hy + 0.06, x: 0.06, f: 0.06, b: 0.06 },
-  ].map((r) => ({ ...r, cx: hx + side * 0.006 }));
+    { y: hy - 0.02, x: 0.088, f: 0.087, b: 0.094 },
+    { y: hy + 0.012, x: 0.078, f: 0.08, b: 0.086 },
+    { y: hy + 0.03, x: 0.05, f: 0.055, b: 0.06 },
+  ].map((r) => ({ ...r, cx: hx + side * 0.004 }));
   // The creases behind the knee and across the lap.
   const disp = (a, y) => {
     const back = Math.max(0, -Math.cos(a));
@@ -744,10 +743,10 @@ function hairAmount(q) {
   const [x, y, z] = q;
   const ax = Math.abs(x);
   const front = 0.137 - 0.03 * smoothstep(0.02, 0.068, ax) - 0.003 * Math.cos(x * 70);
-  const back = 0.098 - 0.074 * smoothstep(-0.03, -0.085, z);
+  const back = 0.098 - 0.09 * smoothstep(-0.03, -0.085, z);
   const wF = smoothstep(0.018, 0.05, z);
   const yb = wF * front + (1 - wF) * Math.min(0.099, back + (0.099 - back) * smoothstep(-0.03, 0.0, z)); // prettier-ignore
-  const band = wF * 0.0035 + (1 - wF) * 0.011;
+  const band = wF * 0.0035 + (1 - wF) * (0.011 + 0.008 * smoothstep(-0.03, -0.08, z));
   return smoothstep(yb - band, yb + band, y);
 }
 
@@ -761,7 +760,8 @@ function buildHair(k, { c, at, seed }) {
   const thick = (p) => {
     const top = smoothstep(0.09, 0.15, p[1]);
     const front = smoothstep(0.0, 0.06, p[2]) * smoothstep(0.11, 0.15, p[1]);
-    return 0.0035 + 0.015 * top + 0.007 * front;
+    // Thinning to nothing where the hair fades at the sides and nape.
+    return (0.0035 + 0.018 * top + 0.007 * front) * smoothstep(0.25, 0.95, hairAmount(p));
   };
   const clumps = (p) => 0.0028 * smoothstep(0.1, 0.16, p[1]) * n.fbm(p[0] * 38, p[1] * 38, p[2] * 38, 2); // prettier-ignore
   const hairSdf = (pad) => (p) => headSdf(p) - thick(p) - pad - clumps(p);
@@ -980,6 +980,9 @@ function buildShoe(k, { c, pivot, jointAt }, side, which) {
     jitter: 0.003,
     color: (s) => {
       const py = s.p[1];
+      // The sole's top under the upper is hidden: leave it out, or it
+      // shows through the dark upper as pale speckle.
+      if (s.n[1] > 0.3 && Math.abs(s.p[0] - fx) < soleHalf(s.p[2]) - 0.007) return null;
       const edge = Math.abs(py - 0.012) < 0.0012 && Math.abs(s.n[1]) < 0.5;
       return lit(shade(c.sole, edge ? 0.84 : s.n[1] < -0.5 ? 0.72 : 1), s.n, 1, 0.6);
     },
@@ -1070,6 +1073,14 @@ function buildShoe(k, { c, pivot, jointAt }, side, which) {
       color: (s) => lit(c.shoes, s.n),
     });
   }
+}
+
+// The sole's half-width at z (its outline, without the center shift).
+function soleHalf(z) {
+  return interp(
+    SOLE.map((r) => [r.y, r.x]),
+    z,
+  );
 }
 
 function interp(list, z) {

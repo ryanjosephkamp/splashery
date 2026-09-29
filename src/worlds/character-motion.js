@@ -215,9 +215,9 @@ export function pose(state, t = 0) {
 
   // ---- Hips ----
   const yaw = w * mix(5, 9, run) * -Math.cos(TAU * fL); // the left side forward as the left leg reaches
-  const roll = w * (1 - run) * 2.5 * Math.sin(TAU * (fL - 0.05)) - idle * 1.6 * shift;
+  const roll = w * (1 - run) * 2.5 * Math.sin(TAU * (fL - 0.05)) - idle * 2.4 * shift;
   const pitch = w * mix(0.5, 6, run); // tipped forward a little, more running
-  const sway = w * (1 - run) * 0.018 * Math.cos(TAU * (fL - g.duty / 2)) + idle * 0.022 * shift;
+  const sway = w * (1 - run) * 0.018 * Math.cos(TAU * (fL - g.duty / 2)) + idle * 0.03 * shift;
   const Rh = mul(rotY(yaw), mul(rotZ(roll), rotX(pitch)));
   // As high as the legs allow: a walk dips as the legs spread; a run
   // sinks into each landing and floats between.

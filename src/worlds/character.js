@@ -48,7 +48,9 @@ export function buildCharacter(look, { count = CHARACTER_SPLATS.mid, seed = 7 } 
   const out = {};
   for (const name in kits) {
     const { k, area } = kits[name];
-    k.count = Math.max(200, Math.round((count * area) / total));
+    // About a tenth of the kit's splats are holes (outside the hairline,
+    // the eyes' hidden backs), so ask for a little more.
+    k.count = Math.max(200, Math.round((count * 1.1 * area) / total));
     const it = k.emit();
     while (!it.next().done);
     out[name] = centered(k.buf, rest[name]);

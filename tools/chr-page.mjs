@@ -60,6 +60,13 @@ window.__chr = {
   advance(dt, speeds) {
     figs.forEach((f, i) => f.M.stepGait(f.gait, speeds[i] ?? 0, dt));
   },
+  // Words along the top, one per figure from left to right.
+  labels(words) {
+    const bar = document.createElement("div");
+    bar.style.cssText = "position:fixed;top:24px;left:0;right:0;display:flex;justify-content:space-around;font:600 22px system-ui,sans-serif;color:#1d2a36";
+    for (const w of words) bar.append(Object.assign(document.createElement("span"), { textContent: w }));
+    document.body.append(bar);
+  },
   cam(pos, target) { view.setCameraPose(pos, target); },
   frame() { return view.nextFrame(); },
 };
