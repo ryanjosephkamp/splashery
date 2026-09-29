@@ -97,67 +97,40 @@ HOW THIS LANE RUNS
   docs/OPERATING.md, docs/PACKS.md, docs/WORKSTREAMS.md and docs/handoff/history.md (lessons from
   earlier lanes).
 - Your handoff file: create it. Start it with this brief, word for word, under "## Brief", then keep
-  "## State", "## Notes", "## Known issues" and "## For the Operator" current. Note your model at
-  the top of "## State" (the blog post compares the two models).
-- Shared lists: edit only your own entries in src/toys.js, src/toy-sounds.js, src/toy-help.js (a
-  how-to line and an About text per toy, following docs/handoff/Help.md), tools/toy-plan.json,
-  CREDITS.md and tools/assets.json. Regenerate docs/TOY-PLAN.md with `node tools/toy-plan.mjs`;
-  never merge it by hand.
-- Never edit tests/taps.spec.mjs. Your own tests go in tests/<prefix>.spec.mjs. If a finished lane's
-  test breaks because of a count or a list your work changes, don't edit it: say which test and why
-  in your message, and the Operator fixes it.
-- Assets: CC0, CC BY or public domain only, checked on the live source page and credited
-  (CREDITS.md, tools/assets.json and the toy's in-app credit). Never BY-SA or NC. No logos, brand
-  names or insignia.
-- Review: post clips and cards to the Effect review page,
-  https://claude.ai/artifact/NCsg9V5SzFY3Mnwuwgq7pi, as OPERATING.md's "Steps for a lane" says.
-  Judge every effect as motion at phone size against the effect quality rules before you post it.
-  The Operator has made your lane's record. Don't republish the page, and never write to "verdicts".
-- Push your work in progress to your branch about every hour, so it isn't only in your container,
-  and open your draft PR early. Many lanes run at once now, so main moves often: merge it into your
-  branch before each push (never rebase a pushed branch) and keep both sides of any conflict.
-- Before every push, follow "Before every push" in CLAUDE.md: the full Playwright suite
-  (SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium npx playwright test), prettier,
-  `node tools/us-english.mjs --diff`, `node tools/check-packs.mjs <pack>` for new or changed toys, a
-  contact sheet and thumbnails, and your own screenshots at 390×844 and 1440×900. Then put back the
-  standard screenshots (`node tools/upkeep.mjs --restore-shots`) and any other lane's screenshots
-  your branch didn't change.
-- PR: one draft PR against main with the five sections (Summary, Verification, Deviations, Known
-  issues, What was cut), and the model that built it in the Summary. When main moves, merge it into
-  your branch.
-- After you post your cards, check the owner's marks (the "verdicts" collection, ids starting with
-  your prefix) about once an hour with a scheduled check-in (send_later). Fix every "fix" in the
-  same PR, post the new clip as a "-r2" card, and set replacedBy on the old one. Stop the check-ins
-  once your PR is merged or closed.
-- Finish every working turn with a short final message that starts with "READY:" (PR link, card ids,
-  test results, anything for the Operator), "WORKING:" (what's left), or "BLOCKED:" (exactly what
-  you need).
+  "## State
 
-## State
+Model: Sonnet 5.5 (default effort). Started September 29, 2026. Draft PR #86.
 
-Model: Sonnet 5.5 (default effort). Started September 29, 2026.
-
-- Merged `origin/main` and `origin/claude/lane-studio-sound` into the branch (for the `studio`
-  category; #80 was not on main yet).
-- Working out the design (see Notes). Nothing built yet.
+- Built: the converter core, the toy, the Node tool, two CC0 samples, fixtures, `tests/stm.spec.mjs`
+  (20 tests, all pass), PACKS.md section 9, credits, help, sound, plan entry, thumbnail.
+- Full suite (346 tests) on this branch: the only failures were mine (About text over 180 words,
+  missing thumbnail; both fixed and re-run green) and one in lane Studio Sound's
+  `tests/sts.spec.mjs` (see For the Operator).
+- Still to do: the clips and cards (`stm-sample`, `stm-open`, `stm-compare`).
 
 ## Notes
 
-Design, so far:
-
-- One pure module, `src/packs/studio-models-core.js` (no DOM), does everything the toy and the Node
-  tool share: the glTF/GLB, OBJ+MTL and STL parsers, the mesh preparation (crease-smoothed normals,
-  edge adjacency, detail weights), the surface sampler and the wireframe. Image decoding is passed
-  in (the browser uses `createImageBitmap`; Node uses pngjs and jpeg-js).
-- `src/packs/studio-models.js` is the toy (recipe, input panel, samples).
-  `tools/model-to-splats.mjs` writes a PLY like `tools/mesh-to-splats.mjs` does.
-- The tap uses the kit's morph channel: each splat has its own loose-cloud target and goes there and
-  back in a straight line.
+- One pure module, `src/packs/studio-models-core.js` (no DOM), does what the toy and the Node tool
+  share. Image decoding is passed in (browser: `createImageBitmap`; Node: pngjs and jpeg-js).
+- The renderer draws a splat as about exp(-r²/σ²), narrower than a standard Gaussian, so a splat is
+  sized about one neighbor distance (`FILL` 1.05). A first try at 0.72 left visible slits.
+- A splat next to a fold shrinks to no less than 0.8 of its size: shrinking more punched dark holes.
+- The tap uses the morph channels, four of them by height, so the lift rises through the model like
+  a wave. The default camera is 4.5 radii back so the cloud stays in frame.
+- Samples are single GLBs made by `tools/stm-samples.mjs`; fixtures by `tools/stm-fixtures.mjs`.
 
 ## Known issues
 
-(none yet)
+- A `.gltf` with separate files or an `.obj` with a `.mtl` cannot be opened whole (one-file picker);
+  the toy asks for a `.glb`.
+- Not read: Draco/meshopt glTF, animation, lights, emissive colors, non-base-color textures.
 
 ## For the Operator
 
-(none yet)
+- Engine request: `multiple` on the Toy tab's file input, passing the picked files as a fourth
+  argument `read(text, name, file, files)` (`src/ui.js`, `file.files?.[0]`). My `read` already
+  accepts it.
+- `tests/sts.spec.mjs` "opening a sound file … a tap plays it" failed once in my full run (`a.on`
+  was true after the pause tap); it is Studio Sound's test on their code, which this branch carries;
+  not touched.
+- Prettier flags nothing of mine now; `us-english --diff` lists only older TOY-PLAN.md lines.
