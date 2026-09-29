@@ -2722,6 +2722,15 @@ export const TOYS = [
     tags: "instrument rainbow bars mallet toy glockenspiel",
     camera: { yaw: 0.45, pitch: 0.5, roll: 0, distance: 4.1 },
   },
+  {
+    id: "toy-piano",
+    label: "Toy piano",
+    category: "music",
+    kind: "kit",
+    pack: "music",
+    tags: "instrument keys keyboard hammers rods twinkle little star lullaby",
+    camera: { yaw: 0.45, pitch: 0.42, roll: 0, distance: 4.2 },
+  },
 
   // ---- Pack: vehicles ----
   {

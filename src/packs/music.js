@@ -1,5 +1,5 @@
-// Music pack: an acoustic guitar to strum, a snare drum with sticks and a toy
-// xylophone with a mallet.
+// Music pack: an acoustic guitar to strum, a snare drum with sticks, a toy
+// xylophone with a mallet and a toy piano with hammers and metal rods.
 
 import {
   mix,
@@ -118,6 +118,160 @@ const XYLO = (() => {
   for (let i = 0; i < 8; i++) bars.push({ x: -0.77 + i * 0.22, len: 1.1 - i * 0.065 });
   return { bars, top: 0.08, rest: [0.55, 0.42, 0.55] };
 })();
+
+// ---- Toy piano -----------------------------------------------------------------------
+//
+// An upright toy piano: 18 keys (C5 to F6, black keys raised), and behind
+// them, seen through the open back and the raised lid, a hammer and a steel
+// rod for each key. A key goes down, its hammer swings up and back and
+// strikes its rod, and the rod shivers as the note rings. Keys and hammers
+// are tokens 0-17 and 18-35, rods 0-11 are tokens 36-47 and rods 12-17 are
+// parts (a toy has 48 tokens and 15 parts).
+
+// The notes of "Twinkle, Twinkle, Little Star" (the opening line), as key
+// indices from C5; -1 is a rest. src/toy-sounds.js plays the same notes.
+export const TOY_PIANO_SONG = [0, 0, 7, 7, 9, 9, 7, -1, 5, 5, 4, 4, 2, 2, 0];
+const TP_SONG = TOY_PIANO_SONG;
+const TP_NAMES = "C5 C#5 D5 D#5 E5 F5 F#5 G5 G#5 A5 A#5 B5 C6 C#6 D6 D#6 E6 F6".split(" ");
+const TP = (() => {
+  const W = 0.108; // white key pitch
+  const keys = [];
+  let white = 0;
+  for (let i = 0; i < 18; i++) {
+    const black = [1, 3, 6, 8, 10].includes(i % 12);
+    const x = black ? (white - 0.5 - 5) * W : (white - 5) * W;
+    if (!black) white++;
+    keys.push({ i, black, x, note: TP_NAMES[i] });
+  }
+  const RS = 0.064; // rod spacing
+  const rods = keys.map((k) => ({ x: (k.i - 8.5) * RS, len: 0.44 * 2 ** (-k.i / 24) }));
+  return {
+    W,
+    keys,
+    rods,
+    keyTop: 0.46, // white key top
+    keyFront: 0.44,
+    fulcrum: [0.43, 0.02], // y, z of the balance rail
+    rodZ: -0.2, // rods stand on a steel block at the back
+    rodBase: 0.5,
+    rodR: 0.0115,
+    // Each hammer leans forward on its rail at rest and swings up and back
+    // through about a sixth of a turn to meet its rod.
+    hamPivot: [0.52, -0.13], // y, z
+    hamHead: [0.632, -0.002], // the head's centre at rest
+    headR: 0.025,
+    step: 0.32, // seconds between the song's notes
+    songAt: 0.25, // the first key starts down
+    hit: 0.09, // seconds from a key starting down to its hammer striking
+  };
+})();
+// How far the hammer turns (about X) to bring its head against the rod.
+TP.hamHit = (() => {
+  const dy = TP.hamHead[0] - TP.hamPivot[0];
+  const dz = TP.hamHead[1] - TP.hamPivot[1];
+  const target = TP.rodZ + TP.rodR + TP.headR - TP.hamPivot[1];
+  return Math.asin(target / Math.hypot(dy, dz)) - Math.atan2(dz, dy);
+})();
+const TP_ROD_AXIS = vec.unit([0.6, 0, 1]);
+TP.songLen = TP.songAt + TP.step * (TP_SONG.length - 1) + 1.6;
+
+// One key's struck note, as a cue: two tine partial sets a hair apart (the
+// rod rings in two planes, so it shimmers) and the hammer's tick.
+const tpNote = (note) => [
+  { voice: "tine", f: note, decay: 0.55, bright: 0.85 },
+  { voice: "tine", f: note, pitch: 1.004, decay: 0.45, bright: 0.6, vol: 0.45 },
+  { voice: "clack", f: note, pitch: 6.5, decay: 0.6, vol: 0.18 },
+];
+
+// One key's press at s seconds after it starts down: how far the key has
+// turned, the hammer's turn, and the rod's shiver (radians).
+function tpPress(s) {
+  if (!(s >= 0) || s > 1.6) return { key: 0, ham: 0, rod: 0 };
+  const key = 0.13 * (s < 0.06 ? easeInOut(s / 0.06) : s < 0.24 ? 1 : 1 - easeInOut((s - 0.24) / 0.14)); // prettier-ignore
+  let ham = 0;
+  const h = TP.hamHit;
+  if (s < TP.hit) ham = h * ((s - 0.01) / (TP.hit - 0.01)) ** 2 * (s > 0.01 ? 1 : 0);
+  else if (s < 0.34) ham = h * (1 - easeInOut((s - TP.hit) / (0.34 - TP.hit)) * 1.08);
+  else if (s < 0.46) ham = h * -0.08 * (1 - easeInOut((s - 0.34) / 0.12));
+  const r = s - TP.hit;
+  const rod =
+    r > 0 ? 0.06 * Math.exp(-r * 3.2) * Math.sin(TAU * 11 * r) * (1 - band(r, 1.1, 1.45)) : 0;
+  return { key, ham, rod };
+}
+
+// A flat rectangle in the XY plane facing +Z, sampled evenly (two random
+// numbers per splat, so even: true spreads it without a lattice).
+// A long, thin rectangle folds the even square into m strips laid end to
+// end, so its splats stay evenly spaced both ways (a plain stretch spaces
+// them m² times closer along the short side, which shows as a hatch).
+function rect(w, h) {
+  const n = [0, 0, 1];
+  const long = w >= h;
+  const m = Math.max(1, Math.round(Math.sqrt(long ? w / h : h / w)));
+  return {
+    area: w * h,
+    thick: 0.01,
+    dims: 2,
+    sample(rand) {
+      const a = rand();
+      const b = rand() * m;
+      const j = Math.min(m - 1, Math.floor(b));
+      const along = (j + a) / m;
+      const across = b - j;
+      const u = long ? along : across;
+      const v = long ? across : along;
+      return { p: [(u - 0.5) * w, (v - 0.5) * h, 0], n, u, v };
+    },
+  };
+}
+// A box as six even rectangles; `skip` names faces to leave out ("x" +X,
+// "X" -X, "y" top, "Y" bottom, "z" front, "Z" back).
+const FACES = [
+  ["x", [1, 0, 0], [0, 90, 0]],
+  ["X", [-1, 0, 0], [0, -90, 0]],
+  ["y", [0, 1, 0], [-90, 0, 0]],
+  ["Y", [0, -1, 0], [90, 0, 0]],
+  ["z", [0, 0, 1], [0, 0, 0]],
+  ["Z", [0, 0, -1], [0, 180, 0]],
+];
+// `opts.quat` turns the whole box about its centre.
+function box6(k, at, size, opts = {}, skip = "") {
+  const [sx, sy, sz] = size;
+  const q = opts.quat || [0, 0, 0, 1];
+  for (const [id, n, rot] of FACES) {
+    if (skip.includes(id)) continue;
+    const w = n[0] ? sz : sx;
+    const h = n[1] ? sz : sy;
+    const d = quatRotate(q, [(n[0] * sx) / 2, (n[1] * sy) / 2, (n[2] * sz) / 2]);
+    const quat = quatMul(q, quatEuler(...rot));
+    k.add(rect(w, h), { even: true, opacity: 1, ...opts, pos: vec.add(at, d), quat });
+  }
+}
+// A rod standing up from its base: an even parametric tube with a round top.
+function rodShape(k, base, r, len, opts) {
+  k.add(
+    k.param((u, v) => [base[0] + r * Math.cos(TAU * u), base[1] + v * len, base[2] + r * Math.sin(TAU * u)], { grid: 48, thick: r }), // prettier-ignore
+    { even: true, opacity: 1, ...opts },
+  );
+  k.add(
+    k.param(
+      (u, v) => {
+        const a = TAU * u;
+        const b = (Math.PI / 2) * v;
+        return [base[0] + r * Math.cos(b) * Math.cos(a), base[1] + len + r * Math.sin(b), base[2] + r * Math.cos(b) * Math.sin(a)]; // prettier-ignore
+      },
+      { grid: 16, thick: r },
+    ),
+    { even: true, opacity: 1, ...opts },
+  );
+}
+// Softly lit steel: a smooth gradient with the light and one broad sheen, so
+// a thin rod reads as polished metal without per-splat speckle.
+function steel(c) {
+  const d = dot(c.n, LIGHT);
+  const h = Math.pow(Math.max(0, dot(c.n, HALF)), 6);
+  return mix(mix("#6f7780", "#e2e7ec", 0.5 + 0.5 * d), "#ffffff", 0.7 * h);
+}
 
 export const RECIPES = {
   // ---- Acoustic guitar ------------------------------------------------------------------
@@ -615,6 +769,224 @@ export const RECIPES = {
         color: (c) => lit(c, "#d8262e", 0.35, 0.8),
       });
       k.reach([-0.8, 0.45, 0]);
+    },
+  },
+  // ---- Toy piano ----------------------------------------------------------------------
+  "toy-piano": {
+    alive: true,
+    options: [{ key: "case", label: "Color", type: "color", default: "#c8202e" }],
+    controls: [
+      { key: "play", label: "Play", type: "pulse", ease: TP.songLen },
+      // A tap on one key (or its hammer or rod) plays just that key; its
+      // note is a cue, so it sounds as the hammer lands.
+      { key: "strike", label: "Strike", type: "pulse", ease: 1.6 },
+    ],
+    action: {
+      key: "play",
+      label: "Play Twinkle, Twinkle",
+      quiet: ["strike"],
+      // A tap on a key, a hammer or a rod strikes that key; a tap anywhere
+      // else on the piano plays the song.
+      at(p) {
+        const [x, y, z] = p;
+        let best = -1;
+        let far = Infinity;
+        if (z > 0.09 && z < 0.5 && y > TP.keyTop - 0.1 && y < TP.keyTop + 0.1) {
+          // The black keys stand higher and end sooner.
+          if (z < 0.32 && y > TP.keyTop - 0.01)
+            TP.keys.forEach((k) => {
+              const d = Math.abs(x - k.x);
+              if (k.black && d < 0.036 && d < far) [best, far] = [k.i, d];
+            });
+          if (best < 0)
+            TP.keys.forEach((k) => {
+              const d = Math.abs(x - k.x);
+              if (!k.black && d < TP.W / 2 + 0.02 && d < far) [best, far] = [k.i, d];
+            });
+        } else if (z > -0.32 && z < 0.08 && y > 0.44 && y < 1.02 && Math.abs(x) < 0.62) {
+          TP.rods.forEach((r, i) => {
+            const d = Math.abs(x - r.x);
+            if (d < far) [best, far] = [i, d];
+          });
+        }
+        return best < 0 ? null : { key: "strike", pick: best };
+      },
+    },
+    drive(t, c, out, info) {
+      const m = mem(c);
+      if (!m.hits) m.hits = new Map();
+      const now = info?.time ?? 0;
+      const tap = info?.tap;
+      if (tap && tap.n !== m.n) {
+        m.n = tap.n;
+        if (tap.key === "strike" && tap.pick !== null && c.strike > 0)
+          m.hits.set(tap.pick, { at: now, sounded: false });
+      }
+      // How long ago each key started down (the latest press wins).
+      const since = TP.keys.map(() => Infinity);
+      if (c.play > 0) {
+        const e = (1 - c.play) * TP.songLen;
+        TP_SONG.forEach((k, j) => {
+          const s = e - (TP.songAt + j * TP.step);
+          if (k >= 0 && s >= 0 && s < since[k]) since[k] = s;
+        });
+      }
+      for (const [k, h] of m.hits) {
+        const s = now - h.at;
+        if (s > 1.6 || s < 0) {
+          m.hits.delete(k);
+          continue;
+        }
+        if (s < since[k]) since[k] = s;
+        if (!h.sounded && s >= TP.hit) {
+          h.sounded = true;
+          out.cues.push(tpNote(TP.keys[k].note));
+        }
+      }
+      const tokens = [];
+      TP.keys.forEach((k, i) => {
+        const p = tpPress(since[i]);
+        const rod = TP.rods[i];
+        tokens[i] = { base: [k.x, TP.fulcrum[0], TP.fulcrum[1]], quat: quatAxisAngle([1, 0, 0], p.key) }; // prettier-ignore
+        tokens[18 + i] = { base: [rod.x, TP.hamPivot[0], TP.hamPivot[1]], quat: quatAxisAngle([1, 0, 0], p.ham) }; // prettier-ignore
+        if (i < 12)
+          tokens[36 + i] = { base: [rod.x, TP.rodBase, TP.rodZ], quat: quatAxisAngle(TP_ROD_AXIS, p.rod) }; // prettier-ignore
+        else out.parts[`rod${i}`] = { angle: p.rod };
+      });
+      out.tokens = tokens;
+    },
+    build(k, o) {
+      const body = o.case;
+      const lacquer = (c) => lit(c, body, 0.32, 0.55);
+      const inside = (c) => lit(c, wood(c, "#e2c192", c.p, 0, 0.88), 0.25, 0.1);
+      const gold = "#e9c35a";
+      // Ivory keys, their top edges a touch darker so neighbours stay apart.
+      const ivory = (c) => {
+        const edge = c.n[1] > 0.9 ? Math.min(c.u, 1 - c.u) * 0.096 : 1;
+        return lit(c, edge < 0.005 ? "#d9d2c2" : "#f8f4ea", 0.16, 0.35);
+      };
+      const ebony = (c) => lit(c, "#1c1b20", 0.5, 0.6);
+      // A lacquered panel with a gold pinstripe inset from its edge (only on
+      // the face that looks out along `face`).
+      const striped =
+        (face, w, h, inset = 0.035) =>
+        (c) => {
+          if (dot(c.n, face) < 0.9) return lacquer(c);
+          const du = Math.min(c.u, 1 - c.u) * w;
+          const dv = Math.min(c.v, 1 - c.v) * h;
+          const d = Math.min(du, dv);
+          if (Math.abs(d - inset) < 0.008) return keep(lit(c, gold, 0.2, 0.6));
+          return lacquer(c);
+        };
+
+      // Plinth, cheeks, the lower front board and the keybed.
+      box6(k, [0, 0.025, -0.08], [1.44, 0.05, 0.54], { color: lacquer, flat: 0.15 });
+      for (const s of [-1, 1]) {
+        box6(k, [s * 0.655, 0.525, -0.09], [0.05, 0.95, 0.42], {
+          flat: 0.15,
+          color: (c) => (dot(c.n, [-s, 0, 0]) > 0.9 ? inside(c) : lacquer(c)),
+        });
+        // The arms beside the keys.
+        box6(k, [s * 0.655, 0.265, 0.28], [0.05, 0.43, 0.32], { flat: 0.15, color: lacquer }, "Z");
+      }
+      box6(k, [0, 0.19, 0.06], [1.26, 0.3, 0.03], { flat: 0.15, color: striped([0, 0, 1], 1.26, 0.3) }); // prettier-ignore
+      box6(k, [0, 0.37, 0.12], [1.26, 0.06, 0.64], {
+        flat: 0.15,
+        color: (c) => (c.n[1] > 0.9 ? lit(c, "#4a1418", 0.2) : lacquer(c)),
+      });
+      // The fallboard over the keys: a gold stripe and a painted star.
+      box6(k, [0, 0.545, 0.09], [1.26, 0.09, 0.035], {
+        flat: 0.15,
+        color: (c) => {
+          if (c.n[2] > 0.9) {
+            const x = (c.u - 0.5) * 1.26;
+            const y = (c.v - 0.5) * 0.09;
+            const a = Math.atan2(y, x);
+            const r = Math.hypot(x, y);
+            const star = 0.03 * (0.55 + 0.45 * Math.cos(5 * (a - Math.PI / 2)));
+            if (r < star + 0.004) return keep(lit(c, gold, 0.2, 0.6));
+          }
+          if (c.n[2] < -0.9) return inside(c);
+          return striped([0, 0, 1], 1.26, 0.09, 0.02)(c);
+        },
+      });
+      // The lid, raised: hinged at the back of the top, standing up behind.
+      const hinge = [0, 1.0, -0.3];
+      const lidQ = quatEuler(-145, 0, 0);
+      box6(k, vec.add(hinge, quatRotate(lidQ, [0, 0.015, 0.23])), [1.36, 0.03, 0.46], {
+        quat: lidQ,
+        flat: 0.15,
+        color: striped(quatRotate(lidQ, [0, -1, 0]), 1.36, 0.46, 0.04),
+      });
+      // Where the rods stand, and the rail the hammers turn on.
+      box6(k, [0, 0.47, TP.rodZ], [1.26, 0.06, 0.08], {
+        flat: 0.15,
+        color: (c) => lit(c, "#474b52", 0.35, 0.4),
+      });
+      box6(k, [0, TP.hamPivot[0] - 0.012, TP.hamPivot[1]], [1.26, 0.024, 0.045], { flat: 0.15, color: inside }); // prettier-ignore
+
+      // The keys: tokens 0-17, each turning about the balance rail.
+      TP.keys.forEach((key) => {
+        const tok = { kind: "token", params: [key.i, 0], pattern: false, flat: 0.15 };
+        if (key.black) {
+          box6(k, [key.x, TP.keyTop + 0.022, 0.21], [0.058, 0.05, 0.2], { ...tok, weight: 1.6, color: ebony }, "Y"); // prettier-ignore
+          box6(k, [key.x, TP.keyTop - 0.02, -0.02], [0.028, 0.024, 0.34], { ...tok, color: inside }, "Y"); // prettier-ignore
+        } else {
+          box6(k, [key.x, TP.keyTop - 0.022, 0.275], [0.096, 0.044, 0.33], { ...tok, weight: 1.6, color: ivory }, "Y"); // prettier-ignore
+          box6(k, [key.x, TP.keyTop - 0.03, -0.02], [0.03, 0.024, 0.26], { ...tok, color: inside }, "Y"); // prettier-ignore
+        }
+      });
+      // The hammers (tokens 18-35) and the rods (tokens 36-47, then parts).
+      TP.rods.forEach((rod, i) => {
+        const tok = { kind: "token", params: [18 + i, 0], pattern: false };
+        const a = [rod.x, TP.hamPivot[0], TP.hamPivot[1]];
+        const b = [rod.x, TP.hamHead[0], TP.hamHead[1]];
+        k.add(k.tube(line(a, b), 0.0065, { grid: 8, samples: 16 }), {
+          ...tok,
+          flat: 0.3,
+          weight: 3,
+          size: 1.3,
+          opacity: 1,
+          color: (c) => lit(c, "#e8cf9c", 0.25),
+        });
+        k.add(
+          k.param(
+            (u, v) => {
+              const r = TP.headR;
+              const w = 0.044;
+              // A felt head: a short cylinder along X with flat ends.
+              const ang = TAU * u;
+              const q = v * 4;
+              const rr = q < 1 ? r * q : q > 3 ? r * (4 - q) : r;
+              const xx = q < 1 ? -w / 2 : q > 3 ? w / 2 : -w / 2 + (w * (q - 1)) / 2;
+              return [b[0] + xx, b[1] + rr * Math.cos(ang), b[2] + rr * Math.sin(ang)];
+            },
+            { grid: 32, thick: TP.headR },
+          ),
+          { ...tok, even: true, opacity: 1, flat: 0.25, weight: 3, color: (c) => lit(c, "#e3a93a", 0.3, 0.15) }, // prettier-ignore
+        );
+        const base = [rod.x, TP.rodBase, TP.rodZ];
+        const rodOpt =
+          i < 12
+            ? { kind: "token", params: [36 + i, 0] }
+            : { part: k.part(`rod${i}`, { pivot: base, axis: TP_ROD_AXIS }) };
+        rodShape(k, base, TP.rodR, rod.len, {
+          ...rodOpt,
+          pattern: false,
+          flat: 0.3,
+          weight: 3,
+          color: steel,
+        });
+        // The screw that holds it.
+        k.add(k.sphere(0.012), {
+          pos: [rod.x, TP.rodBase, TP.rodZ + 0.042],
+          even: true,
+          weight: 3,
+          pattern: false,
+          color: steel,
+        });
+      });
+      k.reach([0, 1.46, -0.4]);
     },
   },
 };
