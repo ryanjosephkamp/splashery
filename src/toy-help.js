@@ -1356,6 +1356,11 @@ export const TOY_HELP = {
     about:
       "Gradient descent is how most neural networks learn. Picture the network's error as a hilly landscape: the lower the ground, the better its answers. At each step, it works out which way is downhill, the gradient, and steps that way. The learning rate sets how big each step is, and momentum lets it keep some speed from step to step.\n\nTap it: the ball takes 21 hopping steps downhill, leaving a trail of dots, overshoots the valley and settles in it. In the Toy tab, set the Learning rate: too low, and it creeps down the slope; too high, and it bounces from wall to wall; just right, and it settles.",
   },
+  "gaussian-splatting": {
+    howTo: "Tap it: random splats learn the photo. Pick another View in the Toy tab.",
+    about:
+      "Gaussian splatting draws a scene with many soft, colored blobs called splats. Each one has a place, a size in three directions, a turn, a color and an opacity. A scan's splats are trained the way a network learns: start from a random cloud, compare the picture it makes with the photos, and nudge every splat a little, again and again, until they match.\n\nTap it: a cloud of random splats slides, stretches and recolors into the strawberry photo, a real fit of 2,400 splats, while its error falls on the chart. Other views show one splat with its three axes, a duck whose splats shrink to dots, and the back-to-front order splats are drawn in.",
+  },
   "word-vectors": {
     howTo: "Tap it to work out king − man + woman. Type your own words in the Toy tab.",
     about:
@@ -1377,6 +1382,11 @@ export const TOY_HELP = {
     howTo: "Tap for the next page, or to play and pause a video. Open your own in the Toy tab.",
     about:
       "The Picture lab shows a page, a photo, a GIF or a video as Gaussian splats: thousands of small, flat, colored discs, the same stuff every toy here is made of. A document's paper becomes a smooth sheet of large splats in the paper's own color, and every pixel of ink becomes one small splat of its own color, a hair in front. A photo gets one splat per pixel.\n\nZoom in and the page is rebuilt sharper; zoom out and it gets coarser, so nothing vanishes. Open a PDF, a photo, a GIF or a video of your own in the Toy tab, or paste a web address. Your files stay on your device: nothing is uploaded.",
+  },
+  screen: {
+    howTo: "Tap to switch it on, then to play and pause. Pick a Style in the Toy tab.",
+    about:
+      "A screen made of splats shows a video or a GIF: every pixel of the picture is a small splat whose color changes with each frame. It comes in four styles: an old TV with a wooden cabinet and a curved glass face, a flat TV on a stand, a cinema with red curtains and rows of seats, and a hologram floating above its projector.\n\nTap it to switch it on: the old TV's picture opens from a bright line, the flat TV fades up, the curtains part, or the hologram flickers up from its beam. Tap again to pause and play. Turn on the sound with the speaker button, and open your own video or GIF in the Toy tab.",
   },
 
   // ---- Holidays -------------------------------------------------------------------------

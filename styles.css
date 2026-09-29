@@ -1743,3 +1743,109 @@ body.embed #stage {
   border: 1px solid var(--line);
   border-radius: 999px;
 }
+
+/* View settings (lane Viewer) ---------------------------------------------- */
+/* The turntable, the tilt lock and Reset view: round buttons in a row with
+   the sound button and "?", at the top right of the stage. */
+
+.view-button {
+  position: fixed;
+  top: 14px;
+  z-index: 4;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  background: var(--paper);
+  color: var(--muted);
+}
+
+.view-button[aria-pressed="true"] {
+  color: var(--ink);
+  border-color: var(--ink);
+}
+
+#turntable-toggle {
+  right: calc(var(--panel-w) + 36px + 88px);
+}
+
+#tilt-toggle {
+  right: calc(var(--panel-w) + 36px + 132px);
+}
+
+#view-reset {
+  right: calc(var(--panel-w) + 36px + 176px);
+}
+
+#turntable-toggle[aria-pressed="true"] .off,
+#tilt-toggle[aria-pressed="true"] .open,
+#tilt-toggle[aria-pressed="false"] .shut {
+  display: none;
+}
+
+#turntable-toggle:disabled {
+  opacity: 0.45;
+}
+
+.terms {
+  margin: 8px 0;
+  padding-left: 16px;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+.terms li {
+  margin: 3px 0;
+}
+
+@media (max-width: 760px) {
+  .view-button {
+    top: 10px;
+  }
+
+  #turntable-toggle {
+    right: 102px;
+  }
+
+  #tilt-toggle {
+    right: 146px;
+  }
+
+  #view-reset {
+    right: 190px;
+  }
+}
+
+@media (max-width: 380px) {
+  /* Five round buttons fit beside the name on the narrowest phones. */
+  .view-button,
+  .sound-toggle,
+  .help-toggle {
+    width: 32px;
+    height: 32px;
+    top: 12px;
+  }
+
+  .sound-toggle {
+    right: 12px;
+  }
+
+  .help-toggle {
+    right: 50px;
+  }
+
+  #turntable-toggle {
+    right: 88px;
+  }
+
+  #tilt-toggle {
+    right: 126px;
+  }
+
+  #view-reset {
+    right: 164px;
+  }
+}
+
+/* /View settings */

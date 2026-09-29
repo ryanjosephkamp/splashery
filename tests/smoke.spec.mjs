@@ -1038,7 +1038,7 @@ test.describe("Settings panel (WebGL2)", () => {
     expect(await cssPx("--shelf-h")).toBe(436);
   });
 
-  test("flag colours lie gently over the chess board, and the next toy gets the usual look back", async ({
+  test("flag colours lie gently over the chess board, and stay with the toy they were chosen on", async ({
     page,
   }) => {
     const problems = watchConsole(page);
@@ -1049,13 +1049,16 @@ test.describe("Settings panel (WebGL2)", () => {
     await waitForToy(page, "Jelly blob");
     await page.evaluate(() => window.__splashery.app.setPattern({ id: "flag", flag: "fr" }));
     expect(await pattern()).toMatchObject({ projection: "wrap", amount: 1 });
-    // The chess set lays it on from above at 30%, keeping its squares.
+    // Flags stay with their toy (lane Viewer): the chess set comes out plain.
     await page.click(".chip[data-category='toys']");
     await page.click(".toy-card[data-toy='chess-set']");
     await waitForToy(page, "Chess set");
+    await expect.poll(pattern).toMatchObject({ id: "none" });
+    // Picked on the chess set, it lays on from above at 30%, keeping its squares.
+    await page.evaluate(() => window.__splashery.app.setPattern({ id: "flag", flag: "fr" }));
     await expect.poll(pattern).toMatchObject({ projection: "top", amount: 0.3, detail: 1 });
     await expect(page.locator("#toy-status")).toContainText("in the colours of France");
-    // The next toy gets the usual look back.
+    // The blob gets its own flag back, the usual way.
     await page.click(".chip[data-category='all']");
     await page.click(".toy-card[data-toy='blob']");
     await waitForToy(page, "Jelly blob");

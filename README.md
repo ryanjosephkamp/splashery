@@ -440,3 +440,15 @@ Splashery's own code is under the [MIT License](LICENSE). The assets keep their 
 captured and converted toys, flags and proteins are CC0, CC BY or public domain, each credited in
 [CREDITS.md](CREDITS.md) and in the app. The vendored libraries (PlayCanvas, gifenc and omggif, MIT;
 PDF.js, Apache 2.0) and the build tools' licenses are listed in [LICENSES.md](LICENSES.md).
+
+## Terms of use
+
+- Splashery is free and runs in your browser. Files you open stay on your device; nothing is
+  uploaded to us or anyone else.
+- You are responsible for what you open, show, link to or share with Splashery. Only use files and
+  web addresses you have the right to use. Splashery doesn't inspect, filter or censor what you
+  open, and isn't responsible for how people use it.
+- A link you share carries your settings and, if you choose, the web address of media hosted
+  elsewhere; whoever hosts that media is responsible for it.
+- Splashery's code is MIT licensed; each toy's assets keep their own licenses (see Credits). It is
+  provided as is, without warranty.

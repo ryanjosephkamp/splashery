@@ -568,8 +568,8 @@ export class Pictures {
       // The old sheet stays on show for a few frames: a new container
       // draws nothing until the engine has sorted it.
       if (slot) this.retiring.push({ slot, frames: 6 });
-      // Room for pages with more ink than this one (lane Books: a PDF's
-      // flat colored areas are ink now), so paging rarely needs a new one.
+      // Room for pages with more ink than this one (text pages vary by
+      // about a quarter), so paging through a book keeps one container.
       const cap = Math.ceil(data.count * 1.5);
       slot = st.addSheet(this.player.pictureContainer(cap));
       if (!slot) return;

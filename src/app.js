@@ -64,6 +64,35 @@ const sameLook = (p, look) =>
   Math.abs(p.detail - look.detail) < 1e-6 &&
   Math.abs(p.amount - look.amount) < 1e-6;
 
+// ---- View settings (lane Viewer) -------------------------------------------------
+// The turntable is one setting for every toy, remembered on this device; the
+// tilt lock and flag colours belong to each toy, remembered for the visit.
+
+const TURNTABLE_KEY = "splashery.turntable";
+
+// The device's turntable choice: true, false, or null (never chosen).
+function turntablePref() {
+  try {
+    const v = localStorage.getItem(TURNTABLE_KEY);
+    return v === "on" ? true : v === "off" ? false : null;
+  } catch {
+    return null;
+  }
+}
+
+function rememberTurntable(on) {
+  try {
+    localStorage.setItem(TURNTABLE_KEY, on ? "on" : "off");
+  } catch {
+    // Private windows may refuse; the choice holds for this visit.
+  }
+}
+
+// Which toy a per-toy choice belongs to.
+const toyKey = (toy) => (toy.id ? `${toy.kind}:${toy.id}` : toy.kind);
+
+// ---- End of view settings -----------------------------------------------------------
+
 class App {
   constructor() {
     this.player = null;
@@ -79,6 +108,8 @@ class App {
     this.generator = null;
     this.toolState = null;
     this.sound = new Sound();
+    this.tiltLocks = new Map(); // toy key -> locked (lane Viewer)
+    this.toyFlags = new Map(); // toy key -> its flag colours, or null (lane Viewer)
   }
 
   async start() {
@@ -152,6 +183,8 @@ class App {
   async applyScene(scene, { file = null } = {}) {
     const player = this.player;
     const ui = this.ui;
+    // The device's turntable choice holds for links too (lane Viewer).
+    if (turntablePref() === false) scene.autoplay = { ...scene.autoplay, turntable: false };
     player.scene = scene;
     player.applyLook();
     ui.setEffects(scene.effects);
@@ -250,6 +283,13 @@ class App {
       clayOK ? "" : "Clay works on generated toys. Pick one or make one.",
     );
     ui.setToyPanel(info);
+    // The tilt lock (lane Viewer): the toy's own start, or the choice made
+    // for it earlier in this visit. A link's saved pose still wins (the
+    // scene's camera is set after this).
+    const key = toyKey(scene.toy);
+    const lock = this.tiltLocks.has(key) ? this.tiltLocks.get(key) : !!info.recipe?.tiltLock;
+    player.camera.setTiltLock(lock);
+    ui.setTiltLock(lock);
     // A toy that lays flag colours on its own way (the chess board: from
     // above, gently) gets that way when it comes out with a flag on, and
     // the next toy gets the usual way back, unless the look was changed.
@@ -394,6 +434,14 @@ class App {
     if (!toy) return;
     const player = this.player;
     const scene = player.scene;
+    // Flag colours belong to the toy they were chosen on (lane Viewer): keep
+    // this toy's, and bring back the next toy's own (none if it had none).
+    const pat = scene.pattern;
+    this.toyFlags.set(toyKey(scene.toy), pat.id === "flag" ? { ...pat } : null);
+    const flag = this.toyFlags.get(toyKey({ kind: "builtin", id }));
+    if (flag) scene.pattern = flag;
+    else if (pat.id === "flag") scene.pattern = { ...DEFAULT_PATTERN };
+    if (scene.pattern !== pat) this.ui.setPattern(scene.pattern);
     scene.toy = { kind: "builtin", id };
     scene.paint.stamps = [];
     scene.motion = { ...scene.motion, controls: {} };
@@ -490,6 +538,32 @@ class App {
     this.player.resetCamera();
   }
 
+  // ---- Top-bar settings (lane Viewer) -----------------------------------------------
+
+  // The turntable, on or off for every toy; remembered on this device.
+  toggleTurntable() {
+    const on = !this.player.scene.autoplay.turntable;
+    this.setAutoplay({ turntable: on });
+  }
+
+  // The tilt lock for the toy on show; remembered for it during the visit.
+  toggleTiltLock() {
+    const player = this.player;
+    const lock = !player.camera.tiltLock;
+    this.tiltLocks.set(toyKey(player.scene.toy), lock);
+    player.camera.setTiltLock(lock);
+    this.ui.setTiltLock(lock);
+    this.ui.toast(
+      lock
+        ? "Tilt locked: dragging spins it left and right."
+        : "Tilt free: drag to turn it any way.",
+      2500,
+    );
+    player.stage.requestRender();
+  }
+
+  // ---- End of top-bar settings --------------------------------------------------------
+
   bindGestures() {
     const player = this.player;
     const cam = player.camera;
@@ -526,10 +600,12 @@ class App {
         canvas.classList.remove("orbiting");
       },
       onPinchStart: () => cam.begin(),
-      onPinch: ({ scale, dx, dy, twist, dt }) => {
+      onPinch: ({ scale, dx, dy, twist, mode, dt }) => {
         // Pictures: two fingers move a picture toy, as in a photo viewer.
         if (player.pictures) player.panBy(dx, dy);
-        else cam.rotateBy(dx, dy, dt);
+        // A pinch only zooms: two fingers turn the toy only when they move
+        // together first (lane Viewer).
+        else if (mode === "drag") cam.rotateBy(dx, dy, dt);
         if (scale > 0) cam.zoomBy(1 / scale);
         cam.rollBy(-twist);
         player.stage.requestRender();
@@ -962,6 +1038,7 @@ class App {
 
   setAutoplay(partial) {
     const player = this.player;
+    if ("turntable" in partial) rememberTurntable(partial.turntable); // lane Viewer
     player.scene.autoplay = { ...player.scene.autoplay, ...partial };
     player.camera.setTurntable(player.scene.autoplay.turntable);
     this.ui.setAutoplay(player.scene.autoplay, player.reducedMotion);

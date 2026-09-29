@@ -25,8 +25,9 @@ const SHELVES = [
 
 test("every toy on these shelves has a how-to line and an About text", () => {
   const toys = TOYS.filter((t) => SHELVES.includes(t.category));
-  // The 149 toys this lane wrote; new labs toys on these shelves bring their own entries.
-  expect(toys.filter((t) => !t.labs).length).toBe(149);
+  // At least the 149 toys this lane wrote; toys added later bring their own entries, and
+  // the loop below checks every toy on these shelves.
+  expect(toys.length).toBeGreaterThanOrEqual(149);
   for (const t of toys) {
     const e = TOY_HELP[t.id];
     expect(e, t.id).toBeTruthy();
