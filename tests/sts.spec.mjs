@@ -218,10 +218,18 @@ test.describe("your own song and the speaker button", () => {
     });
     expect(st.on).toBe(true);
     expect(st.audio).toBe(true);
-    // Tap again to pause: the position holds.
+    // Tap again to pause: the position holds. (Polled too: the pause lands on
+    // the next frame, which a busy software renderer may draw late.)
     await page.evaluate(() => window.__splashery.app.act());
-    await page.waitForTimeout(600);
-    const a = await page.evaluate(async () => (await import("/src/packs/studio.js")).playState());
+    const a = await page.evaluate(async () => {
+      const { playState } = await import("/src/packs/studio.js");
+      for (let i = 0; i < 100; i++) {
+        const s = playState();
+        if (!s.on) return s;
+        await new Promise((r) => setTimeout(r, 50));
+      }
+      return playState();
+    });
     await page.waitForTimeout(600);
     const b = await page.evaluate(async () => (await import("/src/packs/studio.js")).playState());
     expect(a.on).toBe(false);
