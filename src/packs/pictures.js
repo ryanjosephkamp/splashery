@@ -330,6 +330,7 @@ function bookLayout(st, N, time, uAt = null) {
 const BOOK_RECIPE = {
   // A book you page through: it keeps still, facing you.
   turntable: false,
+  tiltLock: true, // a drag only spins it left and right (PACKS.md 5c)
   density: 0.35,
   // Frames keep coming while a page turns (a turn can start from the Toy
   // tab's page buttons, not only from a tap).
@@ -795,6 +796,7 @@ const ALBUM_BOXES = (W, H) => ({
 
 const ALBUM_RECIPE = {
   turntable: false,
+  tiltLock: true, // a drag only spins it left and right (PACKS.md 5c)
   density: 0.35,
   alive: BOOK_RECIPE.alive,
   options: [
@@ -921,6 +923,7 @@ function frameAngle(t) {
 
 const FRAME_RECIPE = {
   turntable: false,
+  tiltLock: true, // a drag only spins it left and right (PACKS.md 5c)
   density: 0.3,
   alive: () => FRAME.digital || FRAME.t0 > -99,
   options: [
