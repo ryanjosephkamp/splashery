@@ -201,7 +201,13 @@ test.describe("engine for books (in the app)", () => {
     await page.click("#tab-play");
     // Not for a PDF.
     await expect(page.locator("#toy-media-scrub")).toBeHidden();
-    await page.evaluate((u) => window.__splashery.app.openMedia(u), `http://127.0.0.1:4173${FIX}clip.webm`); // prettier-ignore
+    // Opened as a file: the test server (python's http.server) doesn't
+    // answer range requests, and Chromium then can't always seek a video it
+    // streamed from an address (it held at 0 about one run in two).
+    await page.evaluate(async (u) => {
+      const blob = await (await fetch(u)).blob();
+      await window.__splashery.app.openMedia(new File([blob], "clip.webm", { type: "video/webm" }));
+    }, `${FIX}clip.webm`);
     await waitSheets(page);
     await expect(page.locator("#toy-media-scrub")).toBeVisible();
     const d = await page.evaluate(() => window.__splashery.player.pictures.api.duration);
