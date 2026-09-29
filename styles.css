@@ -195,6 +195,62 @@ textarea {
   text-shadow: 0 1px 0 var(--page);
 }
 
+/* A toy's labels (lane Anatomy): a list of names beside the stage, set by
+   the toy's drive() as out.legend. Taps pass through it to the stage. */
+
+.toy-legend {
+  position: fixed;
+  top: 112px;
+  left: 18px;
+  z-index: 3;
+  max-width: 190px;
+  max-height: calc(100% - 180px);
+  overflow: hidden;
+  padding: 7px 10px 8px;
+  background: color-mix(in srgb, var(--paper) 86%, transparent);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  font-size: 12.5px;
+  line-height: 1.3;
+  pointer-events: none;
+}
+
+.toy-legend-title {
+  margin: 0 0 3px;
+  font-weight: 650;
+}
+
+.toy-legend ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.toy-legend li {
+  padding: 1px 5px;
+  border-radius: 5px;
+}
+
+.toy-legend li.head {
+  margin-top: 4px;
+  padding-left: 0;
+  font-size: 11px;
+  font-weight: 650;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.toy-legend li.dim {
+  color: var(--muted);
+}
+
+.toy-legend li.on {
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-weight: 600;
+}
+
 .sound-toggle {
   position: fixed;
   top: 14px;
@@ -1463,6 +1519,20 @@ button.danger.armed {
     bottom: auto;
     left: 14px;
     max-width: calc(100% - 28px);
+  }
+
+  .toy-legend {
+    top: 104px;
+    left: 10px;
+    max-width: 150px;
+    max-height: calc(100% - var(--dock-h, 200px) - 110px);
+    padding: 5px 7px 6px;
+    font-size: 11px;
+  }
+
+  body.sheet-open .toy-legend,
+  body.shelf-grid .toy-legend {
+    display: none;
   }
 
   body.sheet-open .toy-status,
