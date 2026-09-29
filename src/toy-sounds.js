@@ -1319,8 +1319,8 @@ export const TOY_SOUNDS = {
   // Lane Screens: a soft rising chime as the picture forms (each view plays
   // its own cues; this is the training view's).
   "gaussian-splatting": [
-    { voice: "shimmer", f: 523, to: 2, decay: 4, vol: 0.35 },
-    { voice: "glass", notes: "C5 E5 G5 B5 D6", step: 1.1, at: 0.5, vol: 0.3 },
+    { voice: "shimmer", f: 523, to: 2, decay: 3.3, vol: 0.35 },
+    { voice: "glass", notes: "C5 E5 G5 B5 D6", step: 0.7, at: 0.4, vol: 0.3 },
   ],
   // Three chimes as the arrows run (0.15, 0.85, 1.55 s), a bright ding as
   // QUEEN lights.

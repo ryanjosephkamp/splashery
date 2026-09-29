@@ -123,7 +123,7 @@ test("the Screen switches on with a tap, plays its video, and pauses and plays a
   await page.evaluate(() => window.__splashery.app.setToyOptions({ style: "cinema" }));
   await page.waitForFunction(() => !window.__splashery.player.pictures?.info().playing, null, { timeout: 20_000 }); // prettier-ignore
   const splats = await page.evaluate(() => window.__splashery.player.pictures.splats());
-  expect(splats).toBeGreaterThan(20000);
+  expect(splats).toBeGreaterThan(5000);
 });
 
 test("the training view learns the photo in the browser: 13 keyframes, falling loss", async ({

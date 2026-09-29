@@ -137,8 +137,8 @@ const VIEWS = ["training", "one", "many", "sorting"];
 // Each view's sound, played as cues (so each view has its own).
 const CUES = {
   training: [
-    { voice: "shimmer", f: 523, to: 2, decay: 4, vol: 0.35 },
-    { voice: "glass", notes: "C5 E5 G5 B5 D6", step: 1.1, at: 0.5, vol: 0.3 },
+    { voice: "shimmer", f: 523, to: 2, decay: 3.3, vol: 0.35 },
+    { voice: "glass", notes: "C5 E5 G5 B5 D6", step: 0.7, at: 0.4, vol: 0.3 },
   ],
   one: [{ voice: "pad", f: "A3", to: 1.5, decay: 0.9, vol: 0.5 }],
   many: [
@@ -274,7 +274,7 @@ function driveTraining(p, out, data) {
   const L = data?.loss;
   if (L) {
     const at = lossAt(L, u);
-    out.parts.pen = { offset: [at[0] - L.x0, at[1] - L.y0, 0], visible: p < 1 ? 1 : 0.7 };
+    out.parts.pen = { offset: [at[0] - L.x0, at[1] - L.y0, 0] };
   }
 }
 
@@ -667,7 +667,7 @@ function buildSorting(k) {
   const up = cross(side, look);
   const at = (a, b, c) => [cam[0] + side[0] * a + up[0] * b + look[0] * c, cam[1] + side[1] * a + up[1] * b + look[1] * c, cam[2] + side[2] * a + up[2] * b + look[2] * c]; // prettier-ignore
   const body = [];
-  for (let i = 0; i < 900; i++) {
+  for (let i = 0; i < 3400; i++) {
     const f = Math.floor(rand() * 6);
     const u = rand() * 2 - 1;
     const v = rand() * 2 - 1;
@@ -681,7 +681,7 @@ function buildSorting(k) {
   }
   k.cloud({ count: (body.length * 160000) / k.count + 1, pattern: false }, (r, i) => {
     if (i >= body.length) return null;
-    return { p: body[i].p, size: 2.2, color: shade("#3a3f48", body[i].shade), opacity: 1 };
+    return { p: body[i].p, size: 1.6, color: shade("#3a3f48", body[i].shade), opacity: 1 };
   });
   // The lens: a short barrel towards the ball.
   const lens = [];
