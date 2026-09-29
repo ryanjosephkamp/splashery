@@ -394,6 +394,9 @@ export const RECIPES = {
       ];
       balls.forEach((b, i) =>
         k.add(k.sphere(b.r), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           part: k.part(`ball${i}`, { pivot: [0, b.y, 0] }),
           pos: [0, b.y, 0],
           flat: 0.25,
@@ -415,6 +418,9 @@ export const RECIPES = {
       const coal = (c) => lit(c, "#1d1c1f", 0.3, 0.4);
       for (const s of [-1, 1])
         k.add(k.sphere(0.035), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           pos: [s * 0.1, 0.94, 0.26],
           weight: 3,
           pattern: false,
@@ -425,6 +431,9 @@ export const RECIPES = {
         const a = (i - 2) * 0.22;
         const home = [Math.sin(a) * 0.16, 0.76 - Math.cos(a) * 0.04 + 0.03, 0.26];
         k.add(k.sphere(0.022), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           pos: home,
           weight: 3,
           pattern: false,
@@ -436,6 +445,9 @@ export const RECIPES = {
         const z = Math.sqrt(0.4 * 0.4 - (y - 0.3) ** 2);
         const home = [0, y, z - 0.01];
         k.add(k.sphere(0.04), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           pos: home,
           weight: 3,
           pattern: false,
@@ -444,6 +456,9 @@ export const RECIPES = {
         });
       });
       k.add(k.cone(0.045, 0.0, 0.26), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: [0, 0.86, 0.38],
         rot: [90, 0, 0],
         weight: 2.5,
@@ -486,6 +501,9 @@ export const RECIPES = {
       // Scarf (ring and tail together) and the top hat.
       const scarf = piece([0, 0.6, 0.001], 1, 0.66, 0.02, 0.25, 1);
       k.add(k.torus(0.27, 0.06), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: [0, 0.6, 0],
         scale: [1, 0.8, 1],
         flat: 0.3,
@@ -495,6 +513,9 @@ export const RECIPES = {
           lit(c, fract(Math.atan2(c.p[0], c.p[2]) * 1.6) < 0.5 ? "#d8262e" : "#f4f0e6", 0.3),
       });
       k.add(k.roundedBox(0.12, 0.34, 0.04, 4), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: [0.14, 0.42, 0.3],
         rot: [-15, 0, 10],
         flat: 0.3,
@@ -504,6 +525,9 @@ export const RECIPES = {
       });
       const hat = piece([0.01, 1.16, 0], 2, 0.2, 0.95, 1.5, 13, 0.17);
       k.add(k.cylinder(0.26, 0.02), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: [0, 1.08, 0],
         rot: [0, 0, -8],
         pattern: false,
@@ -511,6 +535,9 @@ export const RECIPES = {
         color: (c) => lit(c, "#222026", 0.3, 0.3),
       });
       k.add(k.cylinder(0.17, 0.3), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: [0.02, 1.24, 0],
         rot: [0, 0, -8],
         pattern: false,
@@ -521,6 +548,8 @@ export const RECIPES = {
       k.data = { balls, pieces };
       // A puddle spreads as it melts.
       k.add(k.disc(1), {
+        even: true,
+        jitter: 0.015,
         pos: [0, -0.965, 0],
         pattern: false,
         opacity: 0.6,
