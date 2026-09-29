@@ -567,6 +567,41 @@ textarea {
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
+/* A set's pictures, to reorder (lane Books) */
+.input-media .media-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-height: 240px;
+  overflow-y: auto;
+}
+.input-media .media-list li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+.input-media .media-list canvas {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+}
+.input-media .media-list span {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 13px;
+}
+.input-media .media-list button {
+  flex: none;
+  min-width: 36px;
+}
 /* End of pictures */
 
 /* Panel ------------------------------------------------------------------- */

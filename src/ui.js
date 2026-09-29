@@ -930,8 +930,14 @@ export function createUI(app) {
       requestAnimationFrame(tick);
     };
     requestAnimationFrame(tick);
-    wrap.append(openRow, form, now, pages, scrubRow, file);
-    mediaPanel = { now, prev, next, play, pages, sample, scrubRow };
+    // A set's pictures in their order, to move up and down (lane Books:
+    // `media.list`, the digital frame).
+    const list = document.createElement("ol");
+    list.className = "media-list";
+    list.id = "toy-media-list";
+    list.hidden = true;
+    wrap.append(openRow, form, now, pages, scrubRow, list, file);
+    mediaPanel = { now, prev, next, play, pages, sample, scrubRow, list: media.list ? list : null, listKey: "" }; // prettier-ignore
     refreshMedia();
     // Again once the panel is in the page (lane Books): pages that arrived
     // before it would otherwise leave it blank until the next page.
@@ -963,6 +969,52 @@ export function createUI(app) {
     m.play.textContent = p.playing ? "Pause" : "Play";
     m.scrubRow.hidden = p.kind !== "video";
     m.pages.hidden = !paged && p.kind !== "video";
+    if (m.list) refreshMediaList(m, set);
+  }
+
+  // The set's list (lane Books): a small picture and the name of each, with
+  // buttons to move it up or down. Rebuilt when the set or its order
+  // changes.
+  function refreshMediaList(m, set) {
+    const api = app.player?.pictures?.api;
+    const names = set && api ? api.names : [];
+    m.list.hidden = names.length < 2;
+    const key = names.join("\n");
+    if (key === m.listKey) return;
+    m.listKey = key;
+    m.list.textContent = "";
+    const move = (j, d) => {
+      const order = names.map((_, i) => i);
+      [order[j], order[j + d]] = [order[j + d], order[j]];
+      if (api.reorder(order)) refreshMedia();
+    };
+    names.forEach((name, j) => {
+      const li = document.createElement("li");
+      const pic = document.createElement("canvas");
+      pic.width = pic.height = 40;
+      pic.setAttribute("aria-hidden", "true");
+      api.thumb(j, 40).then((c) => {
+        if (!c || !pic.isConnected) return;
+        const g = pic.getContext("2d");
+        g.drawImage(c, (40 - c.width) / 2, (40 - c.height) / 2);
+      });
+      const label = document.createElement("span");
+      label.textContent = name;
+      const up = document.createElement("button");
+      up.type = "button";
+      up.textContent = "↑";
+      up.disabled = j === 0;
+      up.setAttribute("aria-label", `Move ${name} up`);
+      up.addEventListener("click", () => move(j, -1));
+      const down = document.createElement("button");
+      down.type = "button";
+      down.textContent = "↓";
+      down.disabled = j === names.length - 1;
+      down.setAttribute("aria-label", `Move ${name} down`);
+      down.addEventListener("click", () => move(j, 1));
+      li.append(pic, label, up, down);
+      m.list.append(li);
+    });
   }
   // ---- End of pictures ---------------------------------------------------------------
 
