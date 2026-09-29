@@ -902,19 +902,61 @@ function albumDecorate(canvas, { name, options }) {
   }
 }
 
-// The cover's look: leather with a soft grain, woven linen, or kraft card.
-// Colors stay smooth (a fine grain or weave at about the splats' spacing
-// reads as speckle on a phone); the leather's stitches and groove and the
-// scrapbook's label are their own splats, in front (albumTrim).
-function albumCloth(style) {
+// Smooth value noise, 0..1 (a fixed hash on a grid, eased between).
+function bkHash(x, y) {
+  const h = Math.sin(x * 127.1 + y * 311.7) * 43758.5453;
+  return h - Math.floor(h);
+}
+function bkNoise(x, y) {
+  const xi = Math.floor(x);
+  const yi = Math.floor(y);
+  const fx = x - xi;
+  const fy = y - yi;
+  const sx = fx * fx * (3 - 2 * fx);
+  const sy = fy * fy * (3 - 2 * fy);
+  const a = bkHash(xi, yi) + (bkHash(xi + 1, yi) - bkHash(xi, yi)) * sx;
+  const b = bkHash(xi, yi + 1) + (bkHash(xi + 1, yi + 1) - bkHash(xi, yi + 1)) * sx;
+  return a + (b - a) * sy;
+}
+
+// The cover's look: leather, woven linen, or kraft card. Every texture is
+// at least three splats across (a finer one reads as speckle on a phone);
+// the leather's stitches and groove and the scrapbook's label are their own
+// splats, in front (albumTrim). `bx` and `by` bound the cover.
+function albumCloth(style, bx, by) {
   const look = ALBUM_STYLES[style] || ALBUM_STYLES.leather;
   return (n) => (a, b, p) => {
     let col = look.cover;
+    const face = n[2] > 0.5;
     if (style === "leather") {
-      const grain = Math.sin(p[0] * 31 + Math.sin(p[1] * 17) * 2) * Math.sin(p[1] * 27 + Math.sin(p[0] * 13) * 2); // prettier-ignore
-      col = shade(col, 0.985 + 0.025 * grain);
+      // Pebbled grain (little rounded bumps, lit from the upper left), a
+      // broad mottle, and on the front a soft sheen and darker, worn edges.
+      // (Two layers turned apart, so the noise's grid doesn't show.)
+      const pebble = (x, y) =>
+        0.5 * bkNoise(26 * (0.8 * x + 0.6 * y), 26 * (0.8 * y - 0.6 * x)) +
+        0.5 * bkNoise(29 * (0.28 * x - 0.96 * y) + 5, 29 * (0.28 * y + 0.96 * x) + 9);
+      const g = pebble(p[0], p[1]);
+      const gl = pebble(p[0] - 0.012, p[1] + 0.012);
+      const mottle = bkNoise(4 * (0.8 * p[0] + 0.6 * p[1]) + 7, 4 * (0.8 * p[1] - 0.6 * p[0]) + 3);
+      let f = 0.9 + 0.12 * g + 0.25 * (g - gl) + 0.1 * (mottle - 0.5);
+      if (face) {
+        const cx = bx[0] + 0.3 * (bx[1] - bx[0]);
+        const cy = by[1] - 0.3 * (by[1] - by[0]);
+        f += 0.24 * Math.exp(-((p[0] - cx) ** 2 + (p[1] - cy) ** 2) / 0.12);
+        const d = Math.min(p[0] - bx[0], bx[1] - p[0], p[1] - by[0], by[1] - p[1]);
+        f -= 0.14 * Math.max(0, 1 - d / 0.03);
+      }
+      col = shade(col, f);
     } else if (style === "linen") {
-      col = shade(col, 0.99 + 0.012 * Math.sin(p[0] * 60) * Math.sin(p[1] * 60));
+      // Threads across and down in a plain weave: the gaps between them
+      // show as fine darker lines, and each thread is a little thicker or
+      // thinner along its length (slubs).
+      const q = 19;
+      const gap = (t, w) => Math.pow(Math.abs(Math.cos(t * q * Math.PI)), 6) * (0.6 + 0.8 * w);
+      const across = gap(p[1], bkNoise(p[0] * 3, p[1] * q));
+      const down = gap(p[0], bkNoise(p[1] * 3 + 11, p[0] * q));
+      const slub = bkNoise(p[0] * 2.5, p[1] * q * 2) + bkNoise(p[0] * q * 2 + 5, p[1] * 2.5) - 1;
+      col = shade(col, 1.0 - 0.06 * across - 0.06 * down + 0.035 * slub);
     } else {
       col = shade(col, 0.97 + 0.03 * Math.sin(p[0] * 61 + p[1] * 37) * Math.sin(p[1] * 83));
     }
@@ -974,9 +1016,9 @@ function albumTrim(style, k, cp, { bx, by, z }) {
       const j = Math.floor(i / 2);
       if (j >= dashes) return null;
       const len = stitch.L / dashes;
-      const t = (j + 0.5 + ((i % 2) - 0.5) * 0.24) / dashes;
+      const t = (j + 0.5 + ((i % 2) - 0.5) * 0.34) / dashes;
       const [[x, y], dir] = stitch.at(t);
-      return { p: [x, y, z + 0.004], dir, stretch: (0.1 * len) / 0.0032, color: thread, size: 0.32, opacity: 1, part: cp }; // prettier-ignore
+      return { p: [x, y, z + 0.004], dir, stretch: (0.14 * len) / 0.0032, color: thread, size: 0.32, opacity: 1, part: cp }; // prettier-ignore
     });
     const groove = ring(0.07);
     const dark = bkLit(shade(look.cover, 0.78), [0, 0, 1]);
@@ -1070,7 +1112,7 @@ const ALBUM_RECIPE = {
       inside: look.page,
       bands: false,
       coverSheet: false,
-      cloth: albumCloth(o.cover),
+      cloth: albumCloth(o.cover, [0, W + st.ov], [-H / 2 - st.ov, H / 2 + st.ov]),
       onCover: (k, cp, at) => albumTrim(o.cover, k, cp, at),
       leaves(k, leafOf) {
         const boxes = ALBUM_BOXES(W, H);
