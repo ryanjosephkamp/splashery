@@ -3128,6 +3128,15 @@ export const TOYS = [
     tags: "alan turing tape head state binary add one busy beaver program rules computer science",
     camera: { yaw: 0.1, pitch: 0.1, roll: 0, distance: 2.95 },
   },
+  {
+    id: "difference-engine",
+    label: "Difference engine",
+    category: "computing",
+    kind: "kit",
+    pack: "computing-history",
+    tags: "charles babbage method of differences polynomial wheels crank carry brass calculator mechanical",
+    camera: { yaw: 0.15, pitch: 0.1, roll: 0, distance: 3.1 },
+  },
   // ---- End of pack: computing-history ----
   // ---- Pack: pictures ----
   {

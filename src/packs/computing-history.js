@@ -9,6 +9,7 @@
 import { mix, shade, clamp } from "../kit.js";
 import { evenBox, evenCylinder } from "./even.js";
 import { FONT } from "../font.js";
+import { compile } from "../equation.js";
 
 const TAU = Math.PI * 2;
 const add = (a, b) => [a[0] + b[0], a[1] + b[1], a[2] + b[2]];
@@ -68,6 +69,10 @@ const GLYPHS = {
   "←": "00000 00100 01000 11111 01000 00100 00000",
   "·": "00000 00000 00000 01100 01100 00000 00000",
   "²": "01100 10010 00100 01000 11110 00000 00000",
+  "Δ": "00100 00100 01110 01110 11111 11111 00000",
+  "(": "00010 00100 01000 01000 01000 00100 00010",
+  ")": "01000 00100 00010 00010 00010 00100 01000",
+  "/": "00001 00010 00010 00100 01000 01000 10000",
   "³": "11100 00010 01100 00010 11100 00000 00000",
   "+": "00000 00100 00100 11111 00100 00100 00000",
   "=": "00000 00000 11111 00000 11111 00000 00000",
@@ -584,6 +589,355 @@ function tmCommit(data) {
   data.run = null;
 }
 
+// ---- The difference engine -----------------------------------------------------------
+
+// Columns of figure wheels on upright shafts, units at the bottom as in
+// Babbage's Difference Engine No. 2: the x counter (two wheels), the value
+// p(x) and the differences Δ1, Δ2 and Δ3 (five wheels each, so values
+// count modulo 100,000; a negative one shows as its ten's complement, as in
+// Babbage's design). A turn of the crank adds in two phases: first Δ1 into
+// the value and Δ3 into Δ2, then Δ2 into Δ1. Like the real engine, the
+// columns are set up a half step apart for this (Δ2 holds the second
+// difference less the third), so every turn gives the next p(x) exactly.
+const DE = { digits: 5, mod: 100000, turn: 4, E: 12, r: 0.13, wh: 0.1, gap: 0.03 };
+DE.cols = [
+  { id: "x", label: "X", digits: 2, x: -0.98 },
+  { id: "v", label: "P(X)", digits: 5, x: -0.5 },
+  { id: "d1", label: "Δ1", digits: 5, x: -0.08 },
+  { id: "d2", label: "Δ2", digits: 5, x: 0.34 },
+  { id: "d3", label: "Δ3", digits: 5, x: 0.76 },
+];
+DE.pitch = DE.wh + DE.gap;
+// Tokens: the wheels (column by column, units first), then the carry
+// levers of the three columns that take carries (four each).
+{
+  let t = 0;
+  for (const c of DE.cols) {
+    c.token = t;
+    t += c.digits;
+  }
+  DE.leverToken = t;
+}
+DE.carryCols = ["v", "d1", "d2"];
+const DE_EQ_DEFAULT = "x^2";
+const DE_SHOWN = { label: "p(x) = x², from x = 1" };
+
+// Reads a polynomial of x (or n) up to x³ with the safe equation reader,
+// and checks it gives whole numbers and is of degree 3 at most.
+function deRead(text, start = 1) {
+  const src = String(text ?? "")
+    .trim()
+    .replace(/^(p\(x\)|y|f\(x\)|p\(n\)|f\(n\))\s*=/i, "")
+    .replace(/(^|[^a-z])n(?![a-z])/gi, "$1x");
+  if (!src.trim()) throw new Error("Type a polynomial, like x² or 2x³ − x + 5.");
+  const c = compile(src, ["x"]);
+  const f = (x) => c.f({ x, a: 1, b: 1 });
+  const vals = [];
+  for (let i = 0; i < 8; i++) {
+    const v = f(start + i);
+    if (!Number.isFinite(v)) throw new Error("It has no value at some whole numbers.");
+    if (Math.abs(v - Math.round(v)) > 1e-6)
+      throw new Error("It gives fractions: the engine only adds whole numbers. Use whole-number coefficients."); // prettier-ignore
+    vals.push(Math.round(v));
+  }
+  // The fourth differences of a polynomial of degree 3 or less are 0.
+  let d = vals.slice();
+  for (let k = 0; k < 4; k++) d = d.slice(1).map((v, i) => v - d[i]);
+  if (d.some((v) => v !== 0))
+    throw new Error("The engine takes polynomials up to x³ (like x³ − 2x + 1).");
+  return { f, vals };
+}
+const deMod = (v) => ((v % DE.mod) + DE.mod) % DE.mod;
+// The starting columns for p and the start value.
+function deSetup(f, start) {
+  const v = [0, 1, 2, 3].map((i) => Math.round(f(start + i)));
+  const d1 = v[1] - v[0];
+  const d2 = v[2] - 2 * v[1] + v[0];
+  const d3 = v[3] - 3 * v[2] + 3 * v[1] - v[0];
+  return { x: start, v: v[0], d1, d2: d2 - d3, d3 };
+}
+const deDigits = (value, n) => Array.from({ length: n }, (_, j) => Math.floor(deMod(value) / 10 ** j) % 10); // prettier-ignore
+
+// One addition of `src` into `dst` (five wheels): each wheel of dst turns
+// on by its digit of src (all at once, one step every ADD/9 seconds); a wheel
+// passing 9 to 0 sets its carry lever, and the carries then run up the
+// column one wheel at a time. Returns the wheels' moves over time.
+const DE_ADD = 0.8;
+const DE_CARRY = 0.12;
+function deAdd(dst, src) {
+  const t = deDigits(dst, DE.digits);
+  const s = deDigits(src, DE.digits);
+  const warn = t.map((d, j) => d + s[j] >= 10);
+  const after = t.map((d, j) => (d + s[j]) % 10);
+  const carries = []; // [wheel that steps, order]
+  const carried = after.slice();
+  const pending = warn.slice();
+  for (let j = 0; j < DE.digits - 1; j++) {
+    if (!pending[j]) continue;
+    carried[j + 1] = (carried[j + 1] + 1) % 10;
+    if (carried[j + 1] === 0) pending[j + 1] = true;
+    carries.push(j + 1);
+  }
+  return { from: t, steps: s, warn, pending, carries, result: deMod(dst + src) };
+}
+// A turn from state st: the two phases and the new state.
+function deTurn(st) {
+  const a1 = deAdd(st.v, st.d1);
+  const a2 = deAdd(st.d2, st.d3);
+  const mid = { ...st, v: a1.result, d2: a2.result };
+  const b1 = deAdd(mid.d1, mid.d2);
+  const next = { x: st.x + 1, v: a1.result, d1: b1.result, d2: a2.result, d3: st.d3 };
+  return { st, phases: [{ at: 0.35, adds: { v: a1, d2: a2 } }, { at: 1.95, adds: { d1: b1 } }], next }; // prettier-ignore
+}
+// Where every wheel stands (in digit steps, a float) and every lever, at
+// time s of a turn.
+function dePose(turn, s) {
+  const wheels = {};
+  const levers = {};
+  for (const c of DE.cols) wheels[c.id] = deDigits(turn.st[c.id], c.digits);
+  for (const id of DE.carryCols) levers[id] = [0, 0, 0, 0];
+  for (const ph of turn.phases) {
+    for (const [id, a] of Object.entries(ph.adds)) {
+      const w = wheels[id];
+      // Adding: each wheel turns on by its digit of the source.
+      const u = clamp01((s - ph.at) / DE_ADD) * 9;
+      for (let j = 0; j < DE.digits; j++) w[j] = a.from[j] + Math.min(a.steps[j], u);
+      // Warning: a lever sets as its wheel passes 9 to 0 ...
+      const c0 = ph.at + DE_ADD + 0.08;
+      for (let j = 0; j < DE.digits - 1; j++) {
+        const setAt = ph.at + (DE_ADD * Math.max(0.5, 10 - a.from[j])) / 9;
+        let lv = a.warn[j] ? band(s, setAt, setAt + 0.08) : 0;
+        levers[id][j] = Math.max(levers[id][j], lv);
+      }
+      // ... and the carries run up: each steps the wheel above on by one
+      // and knocks its lever back.
+      a.carries.forEach((wheel, i) => {
+        const at = c0 + i * DE_CARRY;
+        const f = ease(band(s, at, at + DE_CARRY * 0.8));
+        w[wheel] += f;
+        levers[id][wheel - 1] = Math.max(0, levers[id][wheel - 1] * (1 - f));
+        // A carry into a wheel that passes 9 sets that wheel's lever too.
+        if (wheel < DE.digits - 1 && a.pending[wheel] && !a.warn[wheel]) levers[id][wheel] = Math.max(levers[id][wheel], band(s, at + 0.05, at + 0.1)); // prettier-ignore
+      });
+    }
+  }
+  // The x counter moves on one at the end of the turn.
+  const xs = ease(band(s, 3.3, 3.6));
+  const x0 = deDigits(turn.st.x, 2);
+  const x1 = deDigits(turn.next.x, 2);
+  wheels.x = x0.map((d, j) => d + (((x1[j] - d + 10) % 10) * xs));
+  return { wheels, levers, crank: TAU * ease(band(s, 0.05, 3.7)), bell: Math.sin(Math.PI * band(s, 3.55, 3.8)) }; // prettier-ignore
+}
+
+const DE_OPTIONS = [
+  { key: "start", label: "Start at x =", type: "slider", min: 0, max: 20, step: 1, default: 1 },
+  // Your polynomial, as typed (set from the panel, not shown).
+  { key: "eq", label: "Your polynomial", type: "text", default: DE_EQ_DEFAULT, hidden: true },
+];
+
+// A figure wheel: a brass drum with its ten digits round the rim (digit k
+// at -36k degrees, so turning it by 36k degrees brings k to the front) and
+// a darker band top and bottom.
+function deWheel(k, p, token, big = false) {
+  const { r, wh } = DE;
+  const tok = { kind: "token", params: [token, 0] };
+  k.add(evenCylinder(r, r, wh, true), {
+    pos: p,
+    even: true,
+    flat: 0.25,
+    weight: 1.4,
+    pattern: false,
+    ...tok,
+    color: (c) => {
+      const band = Math.abs(c.p[1] - p[1]) > wh * 0.38;
+      const col = c.s.cap ? shade(BRASS, 0.82) : band ? shade(BRASS, 0.78) : "#dcc27a";
+      return keep(lit(col, c.n, { amb: 0.66, dif: 0.4, spec: 0.45, pow: 20 }));
+    },
+  });
+  for (let d = 0; d < 10; d++) {
+    const phi = (-d * 36 * Math.PI) / 180;
+    const rr = r + 0.006;
+    text(k, String(d), [p[0] + rr * Math.sin(phi), p[1], p[2] + rr * Math.cos(phi)], big ? 0.0115 : 0.0105, "#2a1c0c", { weight: 12, rot: [0, (phi * 180) / Math.PI, 0], ...tok }); // prettier-ignore
+  }
+}
+
+function buildDifference(k, o) {
+  const start = Math.round(clamp(Number(o.start ?? 1), 0, 20));
+  let eq = String(o.eq || DE_EQ_DEFAULT);
+  let read;
+  try {
+    read = deRead(eq, start);
+  } catch {
+    eq = DE_EQ_DEFAULT;
+    read = deRead(eq, start);
+  }
+  const st = deSetup(read.f, start);
+  const pretty = deShowEq(eq);
+  DE_SHOWN.label = `p(x) = ${pretty.toLowerCase()}, from x = ${start}`;
+  k.data = { st, m: {}, queue: 0, clock: 0, turn: null };
+  const { r, wh, pitch } = DE;
+  const y0 = 0.02;
+  const topY = y0 + (DE.digits - 1) * pitch + wh / 2 + 0.05;
+  const xl = -1.2;
+  const xr = 0.98;
+  // The frame: a wooden base, brass bottom and top plates and steel
+  // pillars at the corners.
+  block(k, [xr - xl + 0.3, 0.1, 0.62], [(xl + xr) / 2, y0 - wh / 2 - 0.12, 0], wood());
+  block(k, [xr - xl + 0.1, 0.035, 0.46], [(xl + xr) / 2, y0 - wh / 2 - 0.05, 0], brass, { weight: 1.2 }); // prettier-ignore
+  block(k, [xr - xl + 0.1, 0.035, 0.46], [(xl + xr) / 2, topY, 0], brass, { weight: 1.2 });
+  for (const px of [xl - 0.02, xr + 0.02])
+    for (const pz of [-0.19, 0.19])
+      k.add(evenCylinder(0.018, 0.018, topY - y0 + wh / 2 + 0.05, false), { pos: [px, (topY + y0 - wh / 2 - 0.05) / 2, pz], even: true, weight: 1.5, pattern: false, color: steel }); // prettier-ignore
+  // The columns: a steel shaft each, its wheels, a label on the top plate
+  // and an index mark at the front of each wheel.
+  for (const col of DE.cols) {
+    const h = col.digits * pitch + 0.08;
+    k.add(evenCylinder(0.014, 0.014, h + 0.06, false), { pos: [col.x, y0 + (col.digits - 1) * pitch / 2, 0], even: true, weight: 1.5, pattern: false, color: steel }); // prettier-ignore
+    for (let j = 0; j < col.digits; j++) deWheel(k, [col.x, y0 + j * pitch, 0], col.token + j, col.id === "v"); // prettier-ignore
+    text(k, col.label, [col.x, topY + 0.06, 0.2], col.id === "v" ? 0.016 : 0.02, "#2a1c0c", { weight: 10 }); // prettier-ignore
+    // A brass shield in front of the column with a window at each wheel's
+    // front digit, so each wheel shows one digit, like an odometer.
+    const sw = 0.28;
+    const sh = col.digits * pitch + 0.02;
+    const sy = y0 + ((col.digits - 1) * pitch) / 2;
+    k.add(evenBox(sw, sh, 0.012), {
+      pos: [col.x, sy, r + 0.03],
+      even: true,
+      flat: 0.2,
+      weight: 1.3,
+      pattern: false,
+      color: (c) => {
+        const j = Math.round((c.p[1] - y0) / pitch);
+        const dy = c.p[1] - (y0 + j * pitch);
+        const win = Math.abs(c.p[0] - col.x) < 0.035 && Math.abs(dy) < 0.048 && j >= 0 && j < col.digits;
+        if (win && (c.s.face === 4 || c.s.face === 5)) return null;
+        return keep(lit(BRASS, c.n, { amb: 0.62, dif: 0.42, spec: 0.5, pow: 22 })); // prettier-ignore
+      },
+    });
+  }
+  // The carry levers: a small steel arm to the right of each wheel that
+  // takes a carry, pivoting about an upright pin (tokens).
+  DE.carryCols.forEach((id, ci) => {
+    const col = DE.cols.find((c) => c.id === id);
+    for (let j = 0; j < 4; j++) {
+      const y = y0 + j * pitch + pitch / 2;
+      const px = col.x + 0.15;
+      const tok = { kind: "token", params: [DE.leverToken + ci * 4 + j, 0] };
+      k.add(evenBox(0.07, 0.016, 0.016), { pos: [px + 0.03, y, r + 0.05], even: true, weight: 3, pattern: false, color: steel, ...tok }); // prettier-ignore
+      k.add(evenCylinder(0.012, 0.012, 0.03, true), { pos: [px, y, r + 0.05], even: true, weight: 3, pattern: false, color: darkSteel, ...tok }); // prettier-ignore
+    }
+  });
+  // The polynomial on a plate at the front of the base.
+  const eqText = `P(X) = ${pretty}`;
+  block(k, [Math.max(0.6, textWidth(eqText) * 0.014 + 0.1), 0.1, 0.01], [-0.12, y0 - wh / 2 - 0.12, 0.315], brass, { weight: 1.2 }); // prettier-ignore
+  text(k, eqText, [-0.12, y0 - wh / 2 - 0.12, 0.33], 0.012, "#2a1c0c", { weight: 10 });
+  // The crank on the right side (a part turning about x), and the bell on
+  // the top plate with its hammer (a part).
+  const crank = k.part("crank", { pivot: [xr + 0.1, y0 + pitch, 0], axis: [1, 0, 0] });
+  k.add(evenCylinder(0.02, 0.02, 0.14, true), { pos: [xr + 0.08, y0 + pitch, 0], rot: [0, 0, 90], even: true, weight: 2, pattern: false, color: steel }); // prettier-ignore
+  k.add(evenBox(0.03, 0.26, 0.04), { pos: [xr + 0.16, y0 + pitch + 0.11, 0], even: true, weight: 2, part: crank, pattern: false, color: steel }); // prettier-ignore
+  k.add(evenCylinder(0.024, 0.024, 0.12, true), { pos: [xr + 0.23, y0 + pitch + 0.22, 0], rot: [0, 0, 90], even: true, weight: 2.5, part: crank, pattern: false, color: wood(DARK_WOOD) }); // prettier-ignore
+  const bx = xr - 0.12;
+  k.add(k.lathe([[0.001, 0.08], [0.03, 0.078], [0.05, 0.05], [0.062, 0.015], [0.075, 0]], { grid: 40 }), {
+    pos: [bx, topY + 0.02, -0.08],
+    even: true,
+    weight: 2,
+    pattern: false,
+    color: (c) => keep(lit("#d8b24e", c.n, { amb: 0.6, dif: 0.45, spec: 0.7, pow: 18 })),
+  }); // prettier-ignore
+  const hammer = k.part("hammer", { pivot: [bx - 0.12, topY + 0.02, -0.08], axis: [0, 0, 1] });
+  k.add(evenCylinder(0.007, 0.007, 0.1, true), { pos: [bx - 0.12, topY + 0.07, -0.08], even: true, weight: 3, part: hammer, pattern: false, color: darkSteel }); // prettier-ignore
+  k.add(k.sphere(0.018), { pos: [bx - 0.12, topY + 0.12, -0.08], even: true, weight: 3, part: hammer, pattern: false, color: darkSteel }); // prettier-ignore
+}
+// A typed polynomial in the engine's own letters (the pixel font).
+function deShowEq(eq) {
+  return String(eq)
+    .replace(/\s+/g, "")
+    .replace(/\*\*/g, "^")
+    .replace(/\^2/g, "²")
+    .replace(/\^3/g, "³")
+    .replace(/\*/g, "·")
+    .replace(/[−–]/g, "-")
+    .toUpperCase()
+    .replace(/([+-])/g, " $1 ")
+    .replace(/^ - /, "-")
+    .slice(0, 28);
+}
+
+function driveDifference(t, c, out, info) {
+  const data = info?.data;
+  if (!data) return;
+  const m = data.m;
+  const go = c.go ?? 0;
+  // Each tap queues a turn; the engine turns them one after another.
+  if (go > (m.lastGo ?? 0) + 0.02) data.queue++;
+  m.lastGo = go;
+  const now = info.time ?? 0;
+  const dt = m.lastTime === undefined ? 0 : clamp(now - m.lastTime, 0, 0.1);
+  m.lastTime = now;
+  if (data.queue > 0 && !data.turn) {
+    data.turn = deTurn(data.st);
+    data.clock = 0;
+    m.cue = -1;
+  }
+  let s = -1;
+  if (data.turn) {
+    data.clock += dt;
+    s = data.clock;
+    // The last frames of the tap: finish every queued turn.
+    if (go <= 0) s = DE.turn;
+    if (s >= DE.turn) {
+      data.st = data.turn.next;
+      data.turn = null;
+      data.queue = go <= 0 ? 0 : data.queue - 1;
+      s = -1;
+    }
+  }
+  const pose = data.turn ? dePose(data.turn, s) : null;
+  out.tokens = [];
+  for (const col of DE.cols) {
+    const digits = pose ? pose.wheels[col.id] : deDigits(data.st[col.id], col.digits);
+    for (let j = 0; j < col.digits; j++) {
+      const y = 0.02 + j * DE.pitch;
+      out.tokens[col.token + j] = { base: [col.x, y, 0], quat: quatY((digits[j] * TAU) / 10), visible: 1 }; // prettier-ignore
+    }
+  }
+  DE.carryCols.forEach((id, ci) => {
+    const col = DE.cols.find((cc) => cc.id === id);
+    for (let j = 0; j < 4; j++) {
+      const lv = pose ? pose.levers[id][j] : 0;
+      out.tokens[DE.leverToken + ci * 4 + j] = { base: [col.x + 0.15, 0.02 + j * DE.pitch + DE.pitch / 2, DE.r + 0.05], quat: quatZ(0.6 * lv), visible: 1 }; // prettier-ignore
+    }
+  });
+  out.parts.crank = { angle: pose ? -pose.crank : 0 };
+  out.parts.hammer = { angle: pose ? -0.6 * pose.bell : 0 };
+  // Turned wheels are sorted again where they stand, a few times a turn.
+  // (Also on the first frame: a wheel at rest may be turned past a quarter
+  // turn from where it was built.)
+  const key = pose ? Math.floor(s / 0.4) : -1;
+  out.resort = key !== m.sortKey;
+  out.resortPose = out.resort;
+  m.sortKey = key;
+  // Sounds: the crank's ratchet, a brass click for each wheel step, a
+  // sharper snap for each carry, and the bell when the new value is ready.
+  if (data.turn && s >= 0) {
+    if (m.cuesFor !== data.turn) {
+      const list = [[0.05, { voice: "ratchet", f: 900, n: 6, rate: 9, vol: 0.5 }]];
+      for (const ph of data.turn.phases) {
+        const most = Math.max(...Object.values(ph.adds).flatMap((a) => a.steps));
+        for (let i = 0; i < most; i++) list.push([ph.at + (DE_ADD * (i + 0.5)) / 9, { voice: "click", f: 3400, decay: 0.4, vol: 0.45 }]); // prettier-ignore
+        const n = Math.max(...Object.values(ph.adds).map((a) => a.carries.length));
+        for (let i = 0; i < n; i++) list.push([ph.at + DE_ADD + 0.08 + i * DE_CARRY, { voice: "crack", f: 2600, decay: 0.3, vol: 0.5 }]); // prettier-ignore
+      }
+      list.push([3.55, { voice: "bell", f: "A6", decay: 0.9, vol: 0.6 }]);
+      m.cues = list;
+      m.cuesFor = data.turn;
+      m.cue = -1;
+    }
+    cuesAt(m, "cue", s, m.cues, out);
+  }
+}
+
 // ---- Recipes -------------------------------------------------------------------------
 
 export const RECIPES = {
@@ -604,8 +958,27 @@ export const RECIPES = {
     drive: driveTuring,
     build: buildTuring,
   },
+  "difference-engine": {
+    options: DE_OPTIONS,
+    input: {
+      title: "Your own polynomial",
+      placeholder: "x², 2x³ − x + 5, or n(n+1)/2",
+      button: "Set up the engine",
+      note: "Type a polynomial in x (or n) up to x³ that gives whole numbers, like x², x³ or n(n + 1)/2. The engine works out its differences and then finds each next value by adding alone. Set the starting x in the Toy tab. Each tap turns the crank once; tap again to keep cranking.",
+      read(text) {
+        deRead(text, 1);
+        return { eq: text.trim().slice(0, 60) };
+      },
+      shown: () => DE_SHOWN.label,
+    },
+    controls: [{ key: "go", label: "Turn the crank", type: "pulse", ease: DE.E }],
+    action: { key: "go", label: "Turn the crank" },
+    drive: driveDifference,
+    build: buildDifference,
+  },
 };
 
 // Exposed for the lane's tests.
+export const DIFFERENCE = { read: deRead, setup: deSetup, turn: deTurn, digits: deDigits, DE };
 export const TURING = { PROGRAMS: TM_PROGRAMS, run: tmRun, tape: tmTape, readBits: tmReadBits, rows: tmRows, times: tmTimes }; // prettier-ignore
 export { clamp, quatY, quatZ };
