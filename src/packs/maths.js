@@ -15,6 +15,7 @@ import {
   quatMul,
   quatRotate,
 } from "../kit.js";
+import { evenBox, evenCylinder } from "./even.js";
 
 const TAU = Math.PI * 2;
 const PHI = (1 + Math.sqrt(5)) / 2;
@@ -1878,6 +1879,9 @@ export const RECIPES = {
         ];
       };
       k.add(k.param(f, { grid: 140 }), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         rot: [0, 40, 0],
         flat: 0.15,
         // A swell of light passes as channel 0 runs from the tip (u = 0) to
@@ -2424,7 +2428,10 @@ function gridLines(lines, width, z) {
 const SLIDER_LEN = 1.1;
 function plotSlider(k, at, { part = null } = {}) {
   const [x, y, z] = at;
-  k.add(k.cylinder(0.018, SLIDER_LEN, { caps: true }), {
+  k.add(evenCylinder(0.018, 0.018, SLIDER_LEN), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     pos: [x, y, z],
     rot: [0, 0, 90],
     weight: 1.5,
@@ -2432,11 +2439,22 @@ function plotSlider(k, at, { part = null } = {}) {
   });
   // Tick marks at the ends and the middle.
   for (const f of [-0.5, 0, 0.5])
-    k.add(k.box(0.012, 0.07, 0.012), { pos: [x + f * SLIDER_LEN, y, z - 0.01], weight: 2, color: "#8b97ad" }); // prettier-ignore
+    k.add(evenBox(0.012, 0.07, 0.012),
+{
+even: true,
+opacity: 1,
+jitter: 0.015,
+pos: [x + f * SLIDER_LEN, y, z - 0.01],
+weight: 2,
+color: "#8b97ad",
+}); // prettier-ignore
   const label = textPixels("a", [x - SLIDER_LEN / 2 - 0.16, y, z], 0.09);
   textCloud(k, label.pixels, {}, () => ({ color: "#ffd166" }));
   const knob = part ?? k.part("knob", { pivot: [x, y, z] });
-  k.add(k.cylinder(0.055, 0.05, { caps: true }), {
+  k.add(evenCylinder(0.055, 0.055, 0.05), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     pos: [x, y, z + 0.03],
     rot: [90, 0, 0],
     part: knob,
@@ -2453,10 +2471,54 @@ function plotPen(k, tip, part) {
   const dir = unit([0.32, 0.62, 0.72]);
   const q = quatFromDir(dir);
   const at = (d) => add(tip, mul(dir, d));
-  k.add(k.cone(0.004, 0.02, 0.05, { caps: false }), { pos: at(0.025), quat: q, part, weight: 3, pattern: false, color: "#ff6b6b" }); // prettier-ignore
-  k.add(k.cone(0.02, 0.032, 0.05, { caps: false }), { pos: at(0.075), quat: q, part, weight: 3, pattern: false, color: (c) => lit("#e8e8ee", c.n) }); // prettier-ignore
-  k.add(k.cylinder(0.033, 0.3, { caps: "top" }), { pos: at(0.25), quat: q, part, weight: 2, pattern: false, color: (c) => lit("#3d6fd6", c.n, { spec: 0.4 }) }); // prettier-ignore
-  k.add(k.cylinder(0.036, 0.09, { caps: "top" }), { pos: at(0.43), quat: q, part, weight: 2, pattern: false, color: (c) => lit("#ff6b6b", c.n, { spec: 0.4 }) }); // prettier-ignore
+  k.add(evenCylinder(0.004, 0.02, 0.05, false),
+{
+even: true,
+opacity: 1,
+jitter: 0.015,
+pos: at(0.025),
+quat: q,
+part,
+weight: 3,
+pattern: false,
+color: "#ff6b6b",
+}); // prettier-ignore
+  k.add(evenCylinder(0.02, 0.032, 0.05, false),
+{
+even: true,
+opacity: 1,
+jitter: 0.015,
+pos: at(0.075),
+quat: q,
+part,
+weight: 3,
+pattern: false,
+color: (c) => lit("#e8e8ee", c.n),
+}); // prettier-ignore
+  k.add(evenCylinder(0.033, 0.033, 0.3, "top"),
+{
+even: true,
+opacity: 1,
+jitter: 0.015,
+pos: at(0.25),
+quat: q,
+part,
+weight: 2,
+pattern: false,
+color: (c) => lit("#3d6fd6", c.n, { spec: 0.4 }),
+}); // prettier-ignore
+  k.add(evenCylinder(0.036, 0.036, 0.09, "top"),
+{
+even: true,
+opacity: 1,
+jitter: 0.015,
+pos: at(0.43),
+quat: q,
+part,
+weight: 2,
+pattern: false,
+color: (c) => lit("#ff6b6b", c.n, { spec: 0.4 }),
+}); // prettier-ignore
 }
 function quatFromDir(d) {
   // The rotation taking +Y to d.

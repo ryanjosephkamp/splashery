@@ -14,6 +14,7 @@ import {
   quatEuler,
   quatRotate,
 } from "../kit.js";
+import { evenEllipsoid } from "./even.js";
 
 const TAU = Math.PI * 2;
 const DEG = Math.PI / 180;
@@ -1297,6 +1298,8 @@ export const RECIPES = {
       const mist = o.color;
       // The glass: nearly clear, bright at the rim, with a window highlight.
       k.add(k.sphere(R), {
+        even: true,
+        jitter: 0.015,
         pos: [0, cy, 0],
         flat: 0.1,
         opacity: 0.22,
@@ -1313,12 +1316,14 @@ export const RECIPES = {
         },
       });
       k.add(k.sphere(R * 1.002), {
+        even: true,
+        jitter: 0.015,
         pos: [0, cy, 0],
         share: 0.02,
         opacity: 0.9,
         pattern: false,
         kind: "glint",
-        params: [1, 0],
+        params: [0.3, 0],
         color: (c) => {
           const hl = Math.pow(Math.max(0, dot(c.n, unit([-0.35, 0.6, 0.72]))), 50);
           const rim = Math.pow(1 - Math.abs(dot(c.n, VIEW)), 6);
@@ -1435,6 +1440,9 @@ export const RECIPES = {
         { grid: 72, thick: 0.12 },
       );
       k.add(stand, {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         flat: 0.2,
         color: (c) => {
           const b = Math.abs(Math.sin(c.p[1] * 40)) > 0.9;
@@ -1456,13 +1464,22 @@ export const RECIPES = {
           },
           { grid: 32, thick: 0.02 },
         ),
-        { flat: 0.2, color: (c) => lit("#5b2a86", mul(c.n, -1), 0.7, 0.3) },
+        {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
+          flat: 0.2,
+          color: (c) => lit("#5b2a86", mul(c.n, -1), 0.7, 0.3),
+        },
       );
       // Little claws holding the ball.
       for (let i = 0; i < 4; i++) {
         const a = (i / 4) * TAU + TAU / 8;
         const d = [Math.cos(a), 0, Math.sin(a)];
-        k.add(k.ellipsoid(0.07, 0.2, 0.05), {
+        k.add(evenEllipsoid(k, 0.07, 0.2, 0.05), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           pos: [d[0] * 0.8, -0.28, d[2] * 0.8],
           quat: quatFromTo([0, 1, 0], unit([-d[0] * 0.4, 1, -d[2] * 0.4])),
           weight: 1.5,

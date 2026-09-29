@@ -5664,6 +5664,9 @@ export const RECIPES = {
         const part = k.part(name, { pivot, axis });
         halves[name] = { pivot, axis, seat: add(pos, quatRotate(q, [0, pitY, 0.02])), q };
         k.add(revolve(k, pts, null, { grid: 80, arc: [Math.PI / 2, (3 * Math.PI) / 2] }), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           quat: q,
           pos,
           part,
@@ -5680,6 +5683,9 @@ export const RECIPES = {
             { grid: 64, normal: () => [0, 0, 1], thick: 0.35 },
           ),
           {
+            even: true,
+            opacity: 1,
+            jitter: 0.015,
             quat: q,
             pos,
             part,
@@ -5703,6 +5709,9 @@ export const RECIPES = {
         if (!h) continue;
         stones[name === "stone" ? "a" : "b"] = h.seat;
         k.add(k.sphere(0.235), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           quat: halves.a.q,
           pos: h.seat,
           part: k.part(name, { pivot: h.seat }),

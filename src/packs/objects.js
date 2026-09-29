@@ -11,7 +11,7 @@ import {
   quatFromTo,
   quatRotate,
 } from "../kit.js";
-import { evenBox } from "./even.js";
+import { evenBox, evenCylinder, evenEllipsoid, evenTube } from "./even.js";
 import { inked } from "../font.js";
 
 const easeInOut = (x) => (x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2);
@@ -112,7 +112,7 @@ function integrate(m, key, t, rate) {
 // for +X, -X, +Y, -Y, +Z, -Z) and face u, v; rounded parts carry face -1.
 // `top: false` / `bottom: false` leave out those flat faces (open boxes,
 // things on the floor).
-function roundBox(sx, sy, sz, r, { top = true, bottom = true } = {}) {
+function roundBox(sx, sy, sz, r, { top = true, bottom = true, even2d = false } = {}) {
   const h = [sx / 2 - r, sy / 2 - r, sz / 2 - r];
   const L = [h[0] * 2, h[1] * 2, h[2] * 2];
   const parts = [];
@@ -138,9 +138,50 @@ function roundBox(sx, sy, sz, r, { top = true, bottom = true } = {}) {
       for (const c of [-1, 1]) parts.push({ area: (Math.PI / 2) * r * r, kind: 2, sg: [a, b, c] });
   let total = 0;
   for (const q of parts) q.cum = total += q.area;
+  // even2d: a 2D even layout for even: true (a is spread over the pieces by
+  // area, b across each), so the faces don't hatch.
+  const sampleEven = (a, b) => {
+    const x = Math.min(a, 1 - 1e-9) * total;
+    let q = parts[parts.length - 1];
+    for (const it of parts)
+      if (x < it.cum) {
+        q = it;
+        break;
+      }
+    const f = Math.min(1, Math.max(0, (x - (q.cum - q.area)) / q.area));
+    const p = [0, 0, 0];
+    if (q.kind === 0) {
+      const a1 = (q.ax + 1) % 3;
+      const a2 = (q.ax + 2) % 3;
+      p[q.ax] = q.n[q.ax] * (h[q.ax] + r);
+      p[a1] = (f - 0.5) * L[a1];
+      p[a2] = (b - 0.5) * L[a2];
+      return { p, n: q.n, u: f, v: b, face: q.f };
+    }
+    if (q.kind === 1) {
+      const a1 = (q.ax + 1) % 3;
+      const a2 = (q.ax + 2) % 3;
+      const an = b * (Math.PI / 2);
+      const n = [0, 0, 0];
+      n[a1] = q.s1 * Math.cos(an);
+      n[a2] = q.s2 * Math.sin(an);
+      p[q.ax] = (f - 0.5) * L[q.ax];
+      p[a1] = q.s1 * h[a1] + n[a1] * r;
+      p[a2] = q.s2 * h[a2] + n[a2] * r;
+      return { p, n, u: 0, v: 0, face: -1 };
+    }
+    const z = f;
+    const ph = b * (Math.PI / 2);
+    const w = Math.sqrt(Math.max(0, 1 - z * z));
+    const d = [w * Math.cos(ph), w * Math.sin(ph), z];
+    const n = [0, 1, 2].map((i) => d[i] * q.sg[i]);
+    for (let i = 0; i < 3; i++) p[i] = q.sg[i] * h[i] + n[i] * r;
+    return { p, n, u: 0, v: 0, face: -1 };
+  };
   return {
     area: total,
     thick: Math.min(sx, sy, sz) / 2,
+    sampleEven: even2d ? sampleEven : undefined,
     sample(rand) {
       const x = rand() * total;
       let q = parts[parts.length - 1];
@@ -1200,7 +1241,10 @@ export const RECIPES = {
           spec: 0.35,
         });
       };
-      k.add(roundBox(W, H, D, 0.03, { top: false, bottom: false }), {
+      k.add(roundBox(W, H, D, 0.03, { top: false, bottom: false, even2d: true }), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: [0, H / 2, 0],
         flat: 0.15,
         color: (c) => {
@@ -1210,7 +1254,10 @@ export const RECIPES = {
         },
       });
       // Velvet lining and the floor the dancer stands on.
-      k.add(k.box(W - 0.07, H - 0.06, D - 0.07), {
+      k.add(evenBox(W - 0.07, H - 0.06, D - 0.07), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: [0, H / 2 + 0.03, 0],
         flat: 0.3,
         color: (c) => (c.s.face === 2 ? null : shade(velvet, 0.7 + 0.25 * c.rand())),
@@ -1220,7 +1267,10 @@ export const RECIPES = {
       // (splats keep the order of the closed box).
       const lid = k.part("lid", { pivot: [0, top, -D / 2], axis: [1, 0, 0] });
       const lidTop = k.part("lidTop", { pivot: [0, top, -D / 2], axis: [1, 0, 0] });
-      k.add(roundBox(W, 0.1, D, 0.03, { top: false }), {
+      k.add(roundBox(W, 0.1, D, 0.03, { top: false, even2d: true }), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: [0, top + 0.05, 0],
         part: lid,
         flat: 0.15,
@@ -1235,6 +1285,8 @@ export const RECIPES = {
         },
       });
       k.add(quad(W - 0.06, D - 0.06), {
+        opacity: 1,
+        jitter: 0.015,
         pos: [0, top + 0.1, 0],
         part: lidTop,
         flat: 0.15,
@@ -1256,7 +1308,15 @@ export const RECIPES = {
       const skin = "#f3cfb3";
       const pink = "#ff8fb8";
       const d = (shape, opts) =>
-        k.add(shape, { part: dancer, flat: 0.25, weight: 2.2, pattern: false, ...opts });
+        k.add(shape, {
+          opacity: 1,
+          jitter: 0.015,
+          part: dancer,
+          flat: 0.25,
+          weight: 2.2,
+          pattern: false,
+          ...opts,
+        });
       d(k.cylinder(0.12, 0.02), {
         pos: [0, top - 0.05, 0.02],
         color: (c) => lit(gold, c.n, { spec: 0.5 }),
@@ -1291,20 +1351,29 @@ export const RECIPES = {
       );
       // The crank on the side.
       const crank = k.part("crank", { pivot: [W / 2 + 0.03, H / 2, 0], axis: [1, 0, 0] });
-      k.add(k.cylinder(0.02, 0.06), {
+      k.add(evenCylinder(0.02, 0.02, 0.06), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: [W / 2 + 0.03, H / 2, 0],
         rot: [0, 0, 90],
         part: crank,
         weight: 2,
         color: (c) => lit(gold, c.n, { spec: 0.5 }),
       });
-      k.add(k.cylinder(0.015, 0.14), {
+      k.add(evenCylinder(0.015, 0.015, 0.14), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: [W / 2 + 0.06, H / 2 + 0.06, 0],
         part: crank,
         weight: 2,
         color: (c) => lit(gold, c.n, { spec: 0.5 }),
       });
       k.add(k.sphere(0.03), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: [W / 2 + 0.06, H / 2 + 0.13, 0],
         part: crank,
         weight: 2,
@@ -1315,7 +1384,10 @@ export const RECIPES = {
         const part = k.part("note" + i, { pivot: [n.x, top + 0.2, n.z] });
         const col = ["#f2c14e", "#ff8fb8", "#8ecae6"][i];
         const at = [n.x, top + 0.25, n.z];
-        k.add(k.ellipsoid(0.04, 0.03, 0.02), {
+        k.add(evenEllipsoid(k, 0.04, 0.03, 0.02), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           pos: at,
           rot: [0, 0, 25],
           part,
@@ -1323,14 +1395,20 @@ export const RECIPES = {
           pattern: false,
           color: (c) => keep(lit(col, c.n, { spec: 0.5 })),
         });
-        k.add(k.cylinder(0.008, 0.14, { caps: false }), {
+        k.add(evenCylinder(0.008, 0.008, 0.14, false), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           pos: [at[0] + 0.035, at[1] + 0.07, at[2]],
           part,
           weight: 3,
           pattern: false,
           color: col,
         });
-        k.add(k.ellipsoid(0.035, 0.012, 0.01), {
+        k.add(evenEllipsoid(k, 0.035, 0.012, 0.01), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           pos: [at[0] + 0.06, at[1] + 0.125, at[2]],
           rot: [0, 0, -30],
           part,
@@ -1697,7 +1775,6 @@ export const RECIPES = {
 
   umbrella: {
     alive: true,
-    density: 0.65,
     options: [
       {
         key: "style",
@@ -1753,6 +1830,9 @@ export const RECIPES = {
           { grid: 40 },
         );
         k.add(panel, {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           part,
           flat: 0.12,
           color: (c) => {
@@ -1778,22 +1858,37 @@ export const RECIPES = {
             0.009,
             { samples: 32, grid: 16 },
           ),
-          { part, weight: 1.5, flat: 0.3, color: "#3b3b40" },
+          {
+            even: true,
+            opacity: 1,
+            jitter: 0.015,
+            part,
+            weight: 1.5,
+            flat: 0.3,
+            color: "#3b3b40",
+          },
         );
       }
       // Shaft, tip and a crook handle.
-      k.add(k.cylinder(0.022, top + 0.95), {
+      k.add(evenCylinder(0.022, 0.022, top + 0.95), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: [0, (top - 0.95) / 2, 0],
         weight: 1.5,
         color: (c) => chrome(c.n),
       });
-      k.add(k.cone(0.03, 0.005, 0.12), {
+      k.add(evenCylinder(0.03, 0.005, 0.12), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: [0, top + 0.06, 0],
         weight: 2,
         color: (c) => chrome(c.n),
       });
       k.add(
-        k.tube(
+        evenTube(
+          k,
           (tt) => {
             if (tt < 0.45) return [0, -0.95 - tt * 0.5, 0];
             const a = ((tt - 0.45) / 0.55) * Math.PI;
@@ -1802,7 +1897,14 @@ export const RECIPES = {
           0.04,
           { samples: 96, grid: 32, caps: true },
         ),
-        { flat: 0.2, weight: 1.3, color: (c) => lit(handleCol, c.n, { spec: 0.45 }) },
+        {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
+          flat: 0.2,
+          weight: 1.3,
+          color: (c) => lit(handleCol, c.n, { spec: 0.45 }),
+        },
       );
     },
   },

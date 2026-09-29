@@ -16,7 +16,7 @@ import {
   quatMul,
   vec,
 } from "../kit.js";
-import { evenCylinder } from "./even.js";
+import { evenBox, evenCylinder, evenTube } from "./even.js";
 
 const TAU = Math.PI * 2;
 const DEG = Math.PI / 180;
@@ -1727,6 +1727,9 @@ export const RECIPES = {
           { grid: 72 },
         ),
         {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           flat: 0.2,
           interior: 0,
           core: "#4a3320",
@@ -1737,7 +1740,10 @@ export const RECIPES = {
       for (let i = 0; i < 12; i++) {
         const a = (i / 12) * TAU;
         const rr = 0.5;
-        k.add(k.box(0.035, 0.035, 0.012), {
+        k.add(evenBox(0.035, 0.035, 0.012), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           pos: [Math.sin(a) * rr, -0.87, Math.cos(a) * rr],
           rot: [-18, (a * 180) / Math.PI, i % 2 ? 45 : 0],
           weight: 6,
@@ -1752,7 +1758,8 @@ export const RECIPES = {
         const a = (i / 4) * TAU + TAU / 8;
         const pt = (r, y) => [Math.sin(a) * r, y, Math.cos(a) * r];
         k.add(
-          k.tube(
+          evenTube(
+            k,
             spline([
               pt(0.28, -0.32),
               pt(0.46, -0.22),
@@ -1763,11 +1770,20 @@ export const RECIPES = {
             (t) => 0.035 - 0.022 * t,
             { caps: true },
           ),
-          { flat: 0.2, weight: 1.6, color: (c) => metal(c, bronze, 0.35) },
+          {
+            even: true,
+            opacity: 1,
+            jitter: 0.015,
+            flat: 0.2,
+            weight: 1.6,
+            color: (c) => metal(c, bronze, 0.35),
+          },
         );
       }
       // The glass: faint, brighter at the rim, with a highlight.
       k.add(k.sphere(R), {
+        even: true,
+        jitter: 0.015,
         pos: C,
         flat: 0.2,
         opacity: 0.2,
