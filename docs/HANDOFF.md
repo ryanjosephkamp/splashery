@@ -93,6 +93,7 @@ The full table, with owned files, sessions, branches and PRs, is [WORKSTREAMS.md
 | Fidelity B: the rest of the grainy toys       | Running, Opus 5.5 (September 29, 2026)                                                    | [handoff/FidelityB.md](handoff/FidelityB.md)                           |
 | A/B: the toy piano, makers A and B            | Running, one on each model, hidden until the owner marks them (September 29, 2026)        | [handoff/AB-A.md](handoff/AB-A.md), [handoff/AB-B.md](handoff/AB-B.md) |
 | Anatomy: the anatomy atlas                    | Running, Opus 5.5 (September 29, 2026)                                                    | [handoff/Anatomy.md](handoff/Anatomy.md)                               |
+| Pianos: pianos and songs                      | Running, Opus 5.5 (September 29, 2026)                                                    | [handoff/Pianos.md](handoff/Pianos.md)                                 |
 | Integrator: combined test runs                | Running, Sonnet 5.5 (September 29, 2026)                                                  | —                                                                      |
 | Next (WORKSTREAMS.md, Next)                   | Sound A and B (when the owner's notes arrive), the pilot game, the Forest trail template… | —                                                                      |
 
