@@ -91,7 +91,7 @@ async function record(scene) {
       })); // prettier-ignore
   };
   const shot = async (holdMs) => {
-    const png = PNG.sync.read(await page.screenshot());
+    const png = PNG.sync.read(await page.screenshot({ timeout: 180_000 }));
     frames.push({ img: shrink(png, width), delay: holdMs });
   };
   // Steps the clock `seconds` on, a frame each 1/12 s.
