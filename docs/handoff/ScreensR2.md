@@ -131,9 +131,13 @@ the owner's marks about hourly and fix every "fix" as a "-r2" card; end every tu
 
 Model: Opus 5.5 (claude-opus-5-5), default effort.
 
-September 29, 2026: started. Engine PR "Engine: hold a GIF on its frame" on
+September 29, 2026: started. Engine PR #109 "Engine: hold a GIF on its frame" on
 `claude/lane-screens-r2-engine` (`pics.hold(on)` and `pics.held`, with
-`tests/scr2-engine.spec.mjs`).
+`tests/scr2-engine.spec.mjs`); its full test run passed 403 of 406, and the three that failed
+(timing checks, run while clips rendered on the same machine) passed on their own. Lane PR #111
+(draft). Built: the off state, the switches, the sharp sets, sounds, help and plan. Clips recorded:
+`scr2-power`, `scr2-off`, `scr2-curtains`. Still to do: `scr2-sets`, `scr2-stills`, the full test
+run on the lane, thumbnail, contact sheet, screenshots, cards.
 
 ## Design
 

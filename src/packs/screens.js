@@ -1058,7 +1058,7 @@ function driveCinema(on, p, q, out) {
   }
   out.tokens = tokens;
   out.morph[0] = on ? ease(win(p, 0.3, 1)) : 1 - ease(win(q, 0, 0.7));
-  out.glow = [-0.4, -0.4, -0.4, 1];
+  out.glow = [-0.16, -0.16, -0.16, 1];
   return s > 0.002;
 }
 
