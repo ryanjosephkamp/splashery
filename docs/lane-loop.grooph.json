@@ -1,0 +1,291 @@
+{
+  "grooph": 0,
+  "id": "splashery-lane-loop",
+  "name": "Splashery lane loop",
+  "version": 1,
+  "description": "How one Splashery lane runs from the owner's approved queue to the public site (the owner's rules of September 29, 2026). The Operator starts a worker on the lane's assigned model; the worker builds, the full test run and the Operator's clip review send it back until the work is right. Work behind the labs switch, Ops PRs and additive engine PRs are merged by the Operator once the full test run passes: nothing the public sees changes, and a revert undoes it, so the graph treats those merges as reversible. Changes to toys the public already sees wait for the owner's good marks, and going public is the owner's decision alone: those two steps are the irreversible ones, and each sits behind a human gate.",
+  "goal": "Every lane's work reaches main tested and reviewed, and reaches the public only with the owner's approval.",
+  "target": {
+    "harness": "claude-code"
+  },
+  "nodes": [
+    {
+      "id": "plan",
+      "kind": "agent",
+      "name": "Operator: brief and start",
+      "role": "lead",
+      "model": {
+        "tier": "frontier"
+      },
+      "effort": "medium",
+      "brief": "Take the next lane from the owner's approved queue (ROADMAP.md, WORKSTREAMS.md). Write its brief, its owned files, branch and PR title, and its review-page record. Start the worker on the lane's assigned model (Opus 5.5 for the engine, toys, sounds and fidelity; Sonnet 5.5 for Worlds content, Studio converters and docs), at most 8 workers at once, paced by the 5-hour limit. Check every worker hourly, including its model.",
+      "outputs": [
+        "the lane's brief",
+        "the lane's record on the Effect review page",
+        "the WORKSTREAMS.md row"
+      ],
+      "allow": ["read-files", "write-outputs", "spawn-agents"]
+    },
+    {
+      "id": "build",
+      "kind": "agent",
+      "name": "Worker builds the lane",
+      "role": "builder",
+      "model": {
+        "tier": "strong"
+      },
+      "effort": "medium",
+      "brief": "Build the lane's toys, tools or engine change in the files the brief says it owns, and nothing else. Post a clip of every effect at phone size on the Effect review page, keep the handoff file current, push every hour and keep one draft PR mergeable with main. Never merge.",
+      "inputs": ["the lane's brief", "review notes, when sent back"],
+      "outputs": [
+        "the draft PR",
+        "the clips and cards on the Effect review page",
+        "docs/handoff/<lane>.md"
+      ],
+      "allow": ["read-files", "edit-files", "run-commands", "run-tests", "write-outputs"],
+      "owns": ["the lane's files"]
+    },
+    {
+      "id": "suite",
+      "kind": "check",
+      "name": "Full test run (Integrator)",
+      "check": {
+        "kind": "tests",
+        "run": "main plus the PR, then: npx playwright test",
+        "pass": "every test passes; a failure that also fails on main alone is fixed in its own Ops PR first"
+      }
+    },
+    {
+      "id": "review",
+      "kind": "agent",
+      "name": "Operator reviews clips and diff",
+      "role": "critic",
+      "model": {
+        "tier": "frontier"
+      },
+      "effort": "medium",
+      "brief": "Watch every clip as motion at phone size against the effect quality rules, and read the diff for work outside the lane's files, engine changes that aren't additive, and the locked laptop. Emit fail with notes to send it back; otherwise emit labs when everything is behind the labs switch or is an Ops or additive engine PR, and public when it changes toys the public already sees.",
+      "inputs": ["the clips", "the PR diff", "the full test run"],
+      "outputs": ["REVIEW.md: the verdict and the notes"],
+      "allow": ["read-files", "write-outputs"],
+      "deny": ["edit-files"]
+    },
+    {
+      "id": "marks",
+      "kind": "human-gate",
+      "name": "Owner marks the public clips",
+      "prompt": "These changes touch toys the public already sees. Mark each clip on the Effect review page: good, or fix with a note.",
+      "options": ["good", "fix"]
+    },
+    {
+      "id": "merge-labs",
+      "kind": "agent",
+      "name": "Operator merges (labs, Ops, engine)",
+      "role": "builder",
+      "model": {
+        "tier": "frontier"
+      },
+      "effort": "low",
+      "brief": "Merge the PR with a merge commit, once, only when the full test run passed on main with it and it is behind the labs switch, an Ops PR, or an additive engine PR. Then do the upkeep: the docs, the Help and Sound Boards, the lab notebook, and the next lane from the queue.",
+      "inputs": ["the green full test run", "REVIEW.md"],
+      "outputs": ["the merge commit", "the upkeep PR"],
+      "allow": ["read-files", "run-commands", "write-outputs"]
+    },
+    {
+      "id": "merge-public",
+      "kind": "agent",
+      "name": "Operator merges a public change",
+      "role": "builder",
+      "model": {
+        "tier": "frontier"
+      },
+      "effort": "low",
+      "brief": "Merge the PR with a merge commit, once, after the owner marked every clip good and the full test run passed. Then do the upkeep.",
+      "inputs": ["the owner's good marks", "the green full test run"],
+      "outputs": ["the merge commit", "the upkeep PR"],
+      "allow": ["read-files", "run-commands", "write-outputs"],
+      "irreversible": ["merge"]
+    },
+    {
+      "id": "graduate",
+      "kind": "human-gate",
+      "name": "Owner: leave labs?",
+      "prompt": "The owner has tried the new toys on his phone with ?labs=1. Should they leave the labs switch and go public?",
+      "options": ["go public", "stay in labs"]
+    },
+    {
+      "id": "publish",
+      "kind": "agent",
+      "name": "Operator takes it out of labs",
+      "role": "builder",
+      "model": {
+        "tier": "frontier"
+      },
+      "effort": "low",
+      "brief": "In a small Ops PR, take exactly the toys the owner named out of the labs switch, and merge it once the full test run passes.",
+      "inputs": ["the owner's go-ahead"],
+      "outputs": ["the Ops PR and its merge"],
+      "allow": ["read-files", "edit-files", "run-commands", "write-outputs"],
+      "irreversible": ["publish"]
+    },
+    {
+      "id": "live",
+      "kind": "stop",
+      "name": "On the public site",
+      "outcome": "success"
+    },
+    {
+      "id": "in-labs",
+      "kind": "stop",
+      "name": "Stays in labs",
+      "outcome": "success"
+    },
+    {
+      "id": "halted",
+      "kind": "stop",
+      "name": "Stopped: the owner decides",
+      "outcome": "halt"
+    }
+  ],
+  "edges": [
+    {
+      "id": "e-plan-build",
+      "from": "plan",
+      "to": "build",
+      "evidence": ["the lane's brief"]
+    },
+    {
+      "id": "e-build-suite",
+      "from": "build",
+      "to": "suite"
+    },
+    {
+      "id": "e-suite-fail",
+      "from": "suite",
+      "to": "build",
+      "when": "fail",
+      "evidence": ["the full test run"]
+    },
+    {
+      "id": "e-suite-review",
+      "from": "suite",
+      "to": "review",
+      "when": "pass",
+      "evidence": ["the clips", "the PR diff", "the full test run"]
+    },
+    {
+      "id": "e-review-fail",
+      "from": "review",
+      "to": "build",
+      "when": "fail",
+      "evidence": ["REVIEW.md"]
+    },
+    {
+      "id": "e-review-labs",
+      "from": "review",
+      "to": "merge-labs",
+      "when": {
+        "verdict": "labs"
+      },
+      "evidence": ["REVIEW.md", "the full test run"]
+    },
+    {
+      "id": "e-review-public",
+      "from": "review",
+      "to": "marks",
+      "when": {
+        "verdict": "public"
+      }
+    },
+    {
+      "id": "e-marks-fix",
+      "from": "marks",
+      "to": "build",
+      "when": "fail",
+      "evidence": ["the owner's fix notes"]
+    },
+    {
+      "id": "e-marks-good",
+      "from": "marks",
+      "to": "merge-public",
+      "when": "pass",
+      "evidence": ["the owner's good marks", "the full test run"]
+    },
+    {
+      "id": "e-merge-public-live",
+      "from": "merge-public",
+      "to": "live"
+    },
+    {
+      "id": "e-merge-labs-graduate",
+      "from": "merge-labs",
+      "to": "graduate",
+      "label": "after the owner's phone test"
+    },
+    {
+      "id": "e-graduate-publish",
+      "from": "graduate",
+      "to": "publish",
+      "when": "pass"
+    },
+    {
+      "id": "e-graduate-stay",
+      "from": "graduate",
+      "to": "in-labs",
+      "when": "fail"
+    },
+    {
+      "id": "e-publish-live",
+      "from": "publish",
+      "to": "live"
+    }
+  ],
+  "loops": [
+    {
+      "id": "lane",
+      "name": "Build until it's right",
+      "members": ["build", "suite", "review", "marks"],
+      "back": ["e-suite-fail", "e-review-fail", "e-marks-fix"],
+      "mode": "judgment",
+      "bar": {
+        "name": "The effect quality rules and a green run",
+        "inspects": [
+          {
+            "kind": "file",
+            "ref": "CLAUDE.md",
+            "note": "Effect quality rules"
+          },
+          {
+            "kind": "artifact",
+            "ref": "the clips on the Effect review page"
+          },
+          {
+            "kind": "artifact",
+            "ref": "the full test run"
+          }
+        ],
+        "acceptance": "Every clip meets the effect quality rules at phone size, the full test run passes on main with the PR, and for toys the public already sees, the owner marked every card good.",
+        "aspiration": "People don't realize they're looking at splats."
+      },
+      "stops": [
+        {
+          "kind": "bar-passed"
+        },
+        {
+          "kind": "max-iterations",
+          "n": 4,
+          "then": "halted"
+        },
+        {
+          "kind": "budget",
+          "measure": "dispatches",
+          "limit": 24,
+          "then": "halted"
+        },
+        {
+          "kind": "human"
+        }
+      ]
+    }
+  ]
+}

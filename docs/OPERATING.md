@@ -16,8 +16,9 @@ ground rules and the effect quality rules in [CLAUDE.md](../CLAUDE.md) apply to 
   daily digest; and runs the daily toy-ideas routine (both are routines that wake the Operator
   session each morning: the ideas at 7:43 and the digest at 7:54, Eastern time). Governance
   questions go to it. It also keeps the owner's pages (below) and the Sound Board.
-- **The owner** (Ryan) talks only to the Operator, reviews clips on the Effect review page, sends
-  notes (sound reviews as files) and merges PRs. Only the owner merges.
+- **The owner** (Ryan) talks only to the Operator, reviews clips on the Effect review page and sends
+  notes (sound reviews as files). Since September 29, 2026 the Operator merges by tiers ("Merging
+  and conflicts" below); the owner decides what leaves labs, rule changes and the homepage.
 
 Every cloud session has its own container, clone and branch, so sessions never share a working tree.
 Worktrees are only for helpers inside one session. What can still collide is the shared material
@@ -104,14 +105,14 @@ reconciles the worker sessions and brings him finished work.
 1. **Brief.** The Operator writes the lane's brief (its toys or job, its files, its branch and PR
    title, and the rules below) and adds the lane's row to WORKSTREAMS.md.
 2. **Start.** The Operator starts the worker session with the brief as its first prompt, pinned to
-   Opus 5.5, on the lane's branch. The worker copies the brief into `docs/handoff/<lane>.md` and
-   opens its draft PR early.
-3. **Model and effort.** Workers run Opus 5.5 only; any other model needs the owner's permission
-   first. At every check-in the Operator reads the worker's session record, and if it has run on
-   another model (a fallback), the Operator stops it and tells the owner. Effort is the default for
-   now, a trial the owner chose. If either of them thinks it isn't enough, the owner adds
-   `CLAUDE_CODE_EFFORT_LEVEL=xhigh` to the environment's variables, and every new session runs at
-   Extra High. Helpers use the worker's own model.
+   the lane's model (Opus 5.5 or Sonnet 5.5, per the owner's split in CLAUDE.md), on the lane's
+   branch. The worker copies the brief into `docs/handoff/<lane>.md` and opens its draft PR early.
+3. **Model and effort.** Each worker runs its lane's assigned model (Opus 5.5 or Sonnet 5.5); any
+   other model needs the owner's permission first. At every check-in the Operator reads the worker's
+   session record, and if it has run on another model (a fallback), the Operator stops it and tells
+   the owner. Effort is the default for now, a trial the owner chose. If either of them thinks it
+   isn't enough, the owner adds `CLAUDE_CODE_EFFORT_LEVEL=xhigh` to the environment's variables, and
+   every new session runs at Extra High. Helpers use the worker's own model.
 4. **Messages.** A worker never asks the owner. It ends each working turn with a short final
    message: "READY:" (PR link, card ids, test results, anything for the Operator), "WORKING:" (what
    is left) or "BLOCKED:" (exactly what it needs). The Operator reads it from the session record,
@@ -303,7 +304,20 @@ writes the lane's brief from them (like any new lane) and sets each idea's `lane
 
 ## Merging and conflicts
 
-- The owner merges lane PRs in any order with "Create a merge commit". Never merge yourself.
+The lane loop and its merge gates are drawn as a grooph graph in
+[lane-loop.grooph.json](lane-loop.grooph.json) (the owner's answer of September 29, 2026). It passes
+`grooph validate` with no issues: every loop has a stop, and the two irreversible steps (merging a
+change to public toys, and taking toys out of labs) each sit behind the owner's gate. Open it on a
+phone with `grooph share docs/lane-loop.grooph.json`. Update it when these rules change.
+
+- Merge tiers (the owner's rules of September 29, 2026), always with "Create a merge commit":
+  - The Operator merges its own Ops PRs, anything behind the labs switch, and additive engine PRs,
+    once the full test run passes on main with the PR merged in (the Integrator runs it once 6 or
+    more lanes run).
+  - Changes to toys the public already sees wait for the owner's "good" marks on every card; then
+    the Operator merges them.
+  - The owner alone decides what leaves labs, changes to the rules, and the homepage.
+  - Workers never merge.
 - When main moves, every open lane merges it into its branch: `git fetch origin main` then
   `git merge origin/main`, resolves any conflict, runs the tests and pushes. Never rebase, amend or
   force-push a branch that has been pushed. The session's PR watcher does this when a merge-conflict
@@ -320,8 +334,11 @@ writes the lane's brief from them (like any new lane) and sets each idea's `lane
 
 ## Concurrency and usage
 
-- Three lanes at once by default, four when one of them is small (a sound-only lane, say), plus the
-  Operator. CLAUDE.md records that seven parallel builders once used a week's usage in one go.
+- Up to 8 workers at once (the owner's choice of September 29, 2026), paced by the 5-hour limit:
+  each session record shows it, and the owner reports the weekly usage morning and evening. Once 6
+  or more lanes run, an Integrator worker (Sonnet 5.5) builds the combinations the Operator names
+  and runs the full test run, so merges don't queue behind the Operator. CLAUDE.md records that
+  seven parallel builders once used a week's usage in one go.
 - While lanes run in parallel, a lane uses at most one helper subagent at a time. The Operator uses
   none.
 - The Operator starts the next lane when a slot is free, in the order in ROADMAP.md.

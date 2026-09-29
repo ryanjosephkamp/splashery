@@ -16,6 +16,43 @@ had not settled 3 s after its tap) and "a scan rig moves a part of a captured to
 console warning, like the rare engine warning in HANDOFF.md). Keep `test-results/` if either comes
 back.
 
+### Viewer: whole PDF figures, tilt lock and top-bar settings (PR #75, merged 2026-09-29)
+
+- Built by Opus 5.5, from the owner's September 28 notes on the Picture lab. The black boxes over
+  PDF figures were a bug, not censorship: `paperBlocks` compared each pixel in double precision with
+  a median stored as a Float32, so in a flat-colored block no pixel counted and the paper color
+  became NaN, which the GPU draws black. Lightness is now a whole number and an empty block falls
+  back to the page's paper color. A fixture PDF of our own fails on the old code and passes now.
+- Pinch zooms, twist rolls and drag turns, by whichever passes its threshold first, so a normal
+  pinch never turns a toy. A recipe's `tiltLock: true` keeps a flat toy upright (drag only spins
+  it); the Pictures and pages shelf starts locked. Reset view, Tilt lock and Turntable sit in the
+  top bar. Flag colors moved to a Look section in the Toy tab and stay with the toy they were chosen
+  on. The terms of use are in the About tab and README.
+- The owner marked all five clips good the first time. About 2 hours.
+- Lessons: a shared smoke test (the chess flag carrying over to the next toy) had to change with the
+  owner's note; the 200-page test passed on main only because the bug hid some ink, so whole pages
+  needed a larger sheet container.
+
+### Screens: the screen and the Gaussian splat toy (PRs #72 and #71, merged 2026-09-29)
+
+- Built by Opus 5.5. The Screen (`screen`, labs): your video or GIF on one picture sheet (method
+  "screen"), with its sound on the speaker button, in four styles that switch on as solid parts: an
+  old TV (knobs turn, a bright line opens into the picture), a flat TV (the standby light goes out
+  and the picture fades up), a cinema (sixteen curtain pleats part) and a hologram (a beam rises and
+  the picture flickers on). Samples: a Big Buck Bunny scene (CC BY 3.0, no title card or logo) and
+  Muybridge's galloping horse (public domain).
+- Gaussian splatting (`gaussian-splatting`, labs, AI and computing): Training, a real fit of 2,400
+  flat Gaussians to a CC0 strawberry photo by gradient descent (Adam, 140 steps) in a worker, drawn
+  with the renderer's own kernel and played as 13 keyframes; One splat, with sliders for its sizes,
+  turn, color and opacity; Many splats, a duck whose splats shrink to dots; and Sorting, 300 crisp
+  splats that reappear furthest first. Engine PR #71: a picture toy's `prepare(options, help)` can
+  open the media its build will show, so "Open your own photo" trains on your photo.
+- The owner marked seven clips good; the blurry sorting clip was redone (the toy itself was soft:
+  big soft splats blurred together) and recorded at full phone resolution.
+- Lessons: #66 merged early with only the handoff, so the toys came in a new PR; a lane test that
+  counts a shelf's toys exactly breaks when another lane adds one (fixed in #76 by counting lane
+  AI's own pack); the kit gives each splat a random size, so an exact fit divides it out.
+
 ### Manual: the splat equation toy and the Tinkerer's Manual (PR #65, merged 2026-09-28)
 
 - The splat equation toy (`splat-equation`, math shelf, labs only): you type where every splat goes
