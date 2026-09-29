@@ -113,7 +113,11 @@ Post at 390×844 (tools/effect-clip.mjs, or tools/pic-clip.mjs for picture toys)
 ## State
 
 - September 29, 2026: all five notes and the terms are built and tested (`tests/vw.spec.mjs`, 14
-  tests). Draft PR #75. Clips and cards: see "Clips" below.
+  tests). Draft PR #75.
+- Cards on the Effect review page (lane `Viewer`): `vw-pdf-figures` (a still pair), `vw-pinch`,
+  `vw-tilt-lock`, `vw-top-bar`, `vw-flag`. Waiting for the owner's marks.
+- Full suite: 292 passed, 2 failed on the first run; both fixed (the 200-page test: sheet containers
+  get 1.5x room; the smoke chess flag test follows flags per toy).
 
 ## Notes
 
