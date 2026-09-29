@@ -16,11 +16,13 @@ coordinates. [docs/OPERATING.md](docs/OPERATING.md) has the rules. In short:
 
 - The Operator runs the lanes (since September 27, 2026). It writes each lane's brief, starts the
   worker session with it, checks and steers it, reconciles the PRs and brings the owner finished
-  work. The owner talks only to the Operator, reviews the clips and merges. A worker puts its
-  questions in its final message ("READY:", "WORKING:" or "BLOCKED:"), not to the owner.
-- Workers run Opus 5.5 only, at the default effort for now (a trial). Any other model needs the
-  owner's permission first. The Operator checks each worker's model at every check-in and stops one
-  that has run on another model.
+  work. The owner talks only to the Operator and reviews the clips. A worker puts its questions in
+  its final message ("READY:", "WORKING:" or "BLOCKED:"), not to the owner.
+- Each worker runs the model its lane is assigned, at the default effort (the owner's split of
+  September 29, 2026): Opus 5.5 for the engine, the toys, sounds, fidelity and the Operator; Sonnet
+  5.5 for the Worlds content (games, templates), the Studio converters, the docs and the Integrator.
+  Any other model needs the owner's permission first. Every lane, PR and clip names its model. The
+  Operator checks each worker's model at every check-in and stops one that has run on another.
 - A lane edits only the files it owns (its row in WORKSTREAMS.md) and its own toys' entries in the
   shared lists (`src/toy-sounds.js`, `src/toy-help.js`, `tools/toy-plan.json`, `src/toys.js`,
   credits).
@@ -42,7 +44,14 @@ coordinates. [docs/OPERATING.md](docs/OPERATING.md) has the rules. In short:
   source page. Record it in `CREDITS.md`, in `tools/assets.json` or `tools/models.json`, and in the
   toy's in-app credit.
 - Old `#s=` links and saved scene JSON (schema v2 and v3) must keep loading.
-- No firearms, no logos or brand names, no gore. Flags stay respectful.
+- No modern real-world firearms, no logos or brand names, no gore. Flags stay respectful. Since
+  September 29, 2026, historical, fantasy and sci-fi weapons are fine where a world calls for them
+  (a cutlass, a flintlock, ship cannons, a space blaster, a bow), and so are an inspector for those
+  designs and a butterfly-knife toy. Targets are objects, never people or animals.
+- Anatomy is shown as a clinical atlas (the skin layer smooth like an anatomical mannequin, organs
+  as in a textbook). Ask the owner before using any CC BY-SA source.
+- Splashery doesn't inspect, filter or censor what people open. Files stay on their device, and the
+  terms of use in the About tab say they are responsible for what they open and share.
 - American English for every new public-facing text: the docs, the words on the site (toy names,
   descriptions, buttons, credits) and PR titles and bodies. So color, center, gray, math, license,
   toward, catalog, -ize endings, and dates like "September 27, 2026". Code identifiers, file names
@@ -94,7 +103,11 @@ new or changed effect against them before calling it done.
 
 - Open draft PRs against `main`. The body has five sections: Summary, Verification, Deviations,
   Known issues, What was cut.
-- The owner merges, using "Create a merge commit", in any order. Never merge yourself.
+- Merging (the owner's rules of September 29, 2026): the Operator merges its own Ops PRs, anything
+  behind the labs switch, and additive engine PRs once the full test run passes. Changes to toys the
+  public already sees wait for the owner's "good" marks, then the Operator merges them. The owner
+  alone decides what leaves labs, rule changes and the homepage. Always use "Create a merge commit".
+  Workers never merge.
 - Use the branch the session assigns. For stacked PRs, add `-<part>` suffixes and merge them in
   order.
 - A lane opens one PR titled "Phase <lane>: …". The Operator's PRs are "Ops: …" on
@@ -103,9 +116,12 @@ new or changed effect against them before calling it done.
 
 ## Working style
 
-- Run at most 2 or 3 subagents at once. Seven parallel builders used up a week's usage in one go.
-  Lanes run three at once by default (four when one is small), plus the Operator, and a lane uses at
-  most one helper at a time.
+- Pace (the owner's choice of September 29, 2026): up to 8 workers at once, paced by the 5-hour
+  limit; the owner reports the weekly usage morning and evening. Once 6 or more lanes run, an
+  Integrator worker runs the combined test runs. A lane uses at most one helper at a time. (Seven
+  parallel builders once used up a week's usage in one go, so the Operator watches the limits.)
+- New parts of the site (Studio, Worlds, Lab and Learn) open behind the labs switch; the owner
+  decides when each goes public.
 - The owner works from the phone app. Keep replies short and plain, and give step-by-step
   instructions whenever the owner has to do something.
 

@@ -151,6 +151,92 @@
       </svg>
     </button>
 
+    <!-- View settings (lane Viewer): the turntable (every toy, remembered on this device), the
+         tilt lock (each toy) and Reset view, beside the sound and "?" buttons. -->
+    <button
+      id="turntable-toggle"
+      type="button"
+      class="view-button"
+      aria-pressed="true"
+      title="Turntable: spins when idle"
+      aria-label="Turntable"
+    >
+      <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+        <ellipse
+          cx="12"
+          cy="15.5"
+          rx="9"
+          ry="3.6"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+        />
+        <path d="M12 15.5V6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+        <path
+          d="M5 9.2a8.2 3.4 0 0 1 12.4-2"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+        />
+        <path d="M19.4 5.4l-.6 4-3.9-1.6z" fill="currentColor" />
+        <path
+          class="off"
+          d="M4 3.5l16 17"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+        />
+      </svg>
+    </button>
+    <button
+      id="tilt-toggle"
+      type="button"
+      class="view-button"
+      aria-pressed="false"
+      title="Tilt lock: off (drag turns any way)"
+      aria-label="Tilt lock"
+    >
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+        <rect x="6" y="11" width="12" height="9" rx="2" fill="currentColor" />
+        <path
+          class="shut"
+          d="M8.5 11V8a3.5 3.5 0 0 1 7 0v3"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+        />
+        <path
+          class="open"
+          d="M8.5 11V8a3.5 3.5 0 0 1 6.8-1.2"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+        />
+      </svg>
+    </button>
+    <button
+      id="view-reset"
+      type="button"
+      class="view-button"
+      title="Reset view (R, or double-tap)"
+      aria-label="Reset view"
+    >
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+        <path
+          d="M5.5 9a7.2 7.2 0 1 1-.4 5.5"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+        />
+        <path d="M4.2 4.6l.9 5.4 5.2-1.6z" fill="currentColor" />
+        <circle cx="12" cy="12" r="1.8" fill="currentColor" />
+      </svg>
+    </button>
+    <!-- /View settings -->
+
     <!-- Toy help (lane Help): the how-to-play line that shows when a toy opens, and the
          "?" button that shows it again. Filled in by src/ui.js from src/toy-help.js. -->
     <div id="help-line" class="help-line" role="status" hidden>
@@ -358,6 +444,20 @@
               <p id="toy-note" class="note"></p>
             </section>
 
+            <!-- Look (lane Viewer): this toy's flag colors. A flag belongs to the toy it was
+                 chosen on; switching toys shows the next toy's own. -->
+            <section class="group" id="toy-look-group" aria-labelledby="h-toy-look">
+              <h2 id="h-toy-look">Look</h2>
+              <label class="row">
+                <span>Flag colors</span>
+                <select id="toy-flag" aria-label="Flag colors">
+                  <option value="">None</option>
+                </select>
+              </label>
+              <p class="note">Flag colors stay with this toy.</p>
+            </section>
+            <!-- /Look -->
+
             <section class="group" id="motion-group" aria-labelledby="h-motion">
               <h2 id="h-motion">Motion</h2>
               <label class="check-row" id="toy-alive-row" hidden>
@@ -390,12 +490,6 @@
 
             <section class="group" id="quick-group" aria-labelledby="h-quick">
               <h2 id="h-quick">Quick settings</h2>
-              <label class="row">
-                <span>Flag colours</span>
-                <select id="toy-flag" aria-label="Flag colours">
-                  <option value="">None</option>
-                </select>
-              </label>
               <div class="row">
                 <span>Detail</span>
                 <div class="segmented" role="group" aria-label="Detail" id="look-detail">
@@ -832,8 +926,11 @@
               <ul class="keys">
                 <li><b>Drag</b> turns the toy; with a tool picked, drag on the toy uses it</li>
                 <li><b>Right-drag</b>, <b>Space</b> + drag or two fingers always orbit</li>
-                <li><b>Wheel</b> or pinch zooms; two-finger twist rolls</li>
-                <li><b>Double-click</b> or double-tap resets the view</li>
+                <li>
+                  <b>Wheel</b> or pinch zooms; a clear two-finger twist rolls (unless the tilt is
+                  locked)
+                </li>
+                <li><b>Double-click</b>, double-tap or the ↺ button resets the view</li>
                 <li>
                   <b>1</b>–<b>5</b> pick tools, <b>P</b> pokes, <b>R</b> resets, <b>Arrows</b> and
                   <b>+</b> / <b>−</b> move the camera
@@ -864,6 +961,30 @@
                 · Built on the PlayCanvas engine (MIT)
               </p>
             </section>
+            <!-- Terms of use (lane Viewer) -->
+            <section class="group" id="terms-group" aria-labelledby="h-terms">
+              <h2 id="h-terms">Terms of use</h2>
+              <ul class="terms">
+                <li>
+                  Splashery is free and runs in your browser. Files you open stay on your device;
+                  nothing is uploaded to us or anyone else.
+                </li>
+                <li>
+                  You are responsible for what you open, show, link to or share with Splashery. Only
+                  use files and web addresses you have the right to use. Splashery doesn't inspect,
+                  filter or censor what you open, and isn't responsible for how people use it.
+                </li>
+                <li>
+                  A link you share carries your settings and, if you choose, the web address of
+                  media hosted elsewhere; whoever hosts that media is responsible for it.
+                </li>
+                <li>
+                  Splashery's code is MIT licensed; each toy's assets keep their own licenses (see
+                  Credits). It is provided as is, without warranty.
+                </li>
+              </ul>
+            </section>
+            <!-- /Terms of use -->
           </div>
         </div>
       </div>
