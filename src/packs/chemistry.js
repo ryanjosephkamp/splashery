@@ -191,7 +191,7 @@ const FAMILY = {
 const INK = "#171b26";
 // A text splat's size per unit of font pixel, against the kit's base size
 // (about 0.05 recipe units here).
-const INK_SIZE = 6;
+const INK_SIZE = 5;
 const BOARD = "#232a38";
 
 // Every tile's place: the elements, and the two markers in group 3 that
@@ -270,7 +270,7 @@ export function atomLayout(el) {
 // The share of the budget each piece of the atom gets: whole splat counts
 // that always add up to the same total, so the table itself is built
 // exactly the same for every element.
-const ATOM_SHARE = 0.22;
+const ATOM_SHARE = 0.25;
 function atomCounts(N, layout) {
   const total = Math.round(ATOM_SHARE * N);
   const A = layout.nucleus.balls.length;
@@ -278,7 +278,7 @@ function atomCounts(N, layout) {
   const nShells = layout.shellR.length;
   const ball = Math.max(1, Math.min(Math.round(0.0045 * N), Math.floor((0.13 * N) / A)));
   const electron = Math.max(1, Math.min(Math.round(0.0012 * N), Math.floor((0.035 * N) / Z)));
-  const ring = Math.round(0.006 * N);
+  const ring = Math.round(0.009 * N);
   const ghost = Math.round(0.004 * N);
   const photon = Math.round(0.004 * N);
   const used = ball * A + electron * Z + ring * nShells + ghost + photon;
@@ -293,7 +293,7 @@ export const RECIPES = {
   "periodic-table": {
     alive: true,
     turntable: false,
-    density: 1.4,
+    density: 1.7,
     options: [
       {
         key: "element",
@@ -497,7 +497,7 @@ export const RECIPES = {
             even: true,
             flat: 0.2,
             opacity: 1,
-            jitter: 0.008,
+            jitter: 0.004,
             weight: 1.3,
             part: mine ? tile : undefined,
             color: (c) => {
@@ -533,7 +533,7 @@ export const RECIPES = {
       // All the lettering is one shape, so it is placed the same whatever
       // the element; the chosen tile's letters ride on its part.
       k.add(inkShape(cells), {
-        share: 0.244,
+        share: 0.27,
         even: true,
         flat: 0.15,
         opacity: 1,
@@ -584,6 +584,7 @@ export const RECIPES = {
           quat: quatFromTo([0, 1, 0], nrm),
           share: n.ring / N,
           fit: false,
+          size: 0.55,
           even: true,
           flat: 0.35,
           opacity: 0.9,

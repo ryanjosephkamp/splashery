@@ -146,6 +146,8 @@ const ORBITALS = {
   },
 };
 
+const ORIGINAL_ORBITALS = new Set(Object.keys(ORBITALS));
+
 // Lane Chemistry: the full set through n = 4 (and the n = 5 shapes a tap
 // can excite them to), from the real hydrogen wave functions: the radial
 // part r^l e^(-r/n) L(2r/n), with L the associated Laguerre polynomial, and
@@ -403,9 +405,22 @@ function ballStick(
   k,
   atoms,
   bonds,
-  { bondR = 0.09, vibrate = 0.02, glint = 0, grey = null, token, part, overlap = 0 } = {},
+  {
+    bondR = 0.09,
+    vibrate = 0.02,
+    glint = 0,
+    grey = null,
+    token,
+    part,
+    overlap = 0,
+    crisp = false,
+  } = {},
 ) {
   const phase = atoms.map(() => k.rand() * TAU);
+  // Lane Chemistry: the new choices are built crisp (Fidelity A's method:
+  // even placement, fully opaque, little color noise); the older ones stay
+  // exactly as they were.
+  const finish = crisp ? { even: true, opacity: 1, jitter: 0.01 } : {};
   const motion = (i, own) =>
     token ? { kind: "token", params: [token(i), 0] } : { ...own, part: part ? part(i) : undefined };
   atoms.forEach((a, i) => {
@@ -414,6 +429,7 @@ function ballStick(
     k.add(k.sphere(a.r ?? el.r), {
       pos: a.p,
       flat: 0.3,
+      ...finish,
       ...motion(i, {
         kind: glint ? "glint" : "breathe",
         params: glint ? [glint, 0] : [vibrate, phase[i]],
@@ -450,6 +466,7 @@ function ballStick(
           pos: add(lerp(from, to, 0.5), shift),
           quat: q,
           flat: 0.3,
+          ...finish,
           ...motion(idx, { kind: "breathe", params: [vibrate, phase[idx]] }),
           color: (c) => lit(atom.el === "H" && !grey ? "#dcdcdc" : col, c.n, 0.65, 0.4),
         });
@@ -981,13 +998,13 @@ function bondsAt(atoms, pairs) {
 function ironLattice() {
   const a = 2.8665;
   const atoms = cubicBlock(a, [["Fe", 0, 0, 0], ["Fe", 0.5, 0.5, 0.5]], 3, { Fe: { color: "#a9b0b8", r: 0.55 } }); // prettier-ignore
-  return { atoms, bonds: bondsAt(atoms, [["Fe", "Fe", (a * Math.sqrt(3)) / 2]]), bondR: 0.07, grey: "#7d848c" }; // prettier-ignore
+  return { atoms, bonds: bondsAt(atoms, [["Fe", "Fe", (a * Math.sqrt(3)) / 2]]), bondR: 0.07, grey: "#7d848c", crisp: true }; // prettier-ignore
 }
 // Copper: face-centred cubic, a = 3.615 Å; each atom touches twelve.
 function copperLattice() {
   const a = 3.615;
   const atoms = cubicBlock(a, [["Cu", 0, 0, 0], ["Cu", 0, 0.5, 0.5], ["Cu", 0.5, 0, 0.5], ["Cu", 0.5, 0.5, 0]], 2, { Cu: { color: "#d9854a", r: 0.6 } }); // prettier-ignore
-  return { atoms, bonds: bondsAt(atoms, [["Cu", "Cu", a / Math.SQRT2]]), bondR: 0.07, grey: "#a8663a" }; // prettier-ignore
+  return { atoms, bonds: bondsAt(atoms, [["Cu", "Cu", a / Math.SQRT2]]), bondR: 0.07, grey: "#a8663a", crisp: true }; // prettier-ignore
 }
 // Caesium chloride: a caesium ion in the middle of each cube of chloride
 // ions (a = 4.12 Å).
@@ -1005,7 +1022,7 @@ function cesiumChlorideLattice() {
       Cs: { color: "#9b59e8", r: 0.78 },
     },
   );
-  return { atoms, bonds: bondsAt(atoms, [["Cs", "Cl", (a * Math.sqrt(3)) / 2]]), bondR: 0.06, grey: "#c9c9c9" }; // prettier-ignore
+  return { atoms, bonds: bondsAt(atoms, [["Cs", "Cl", (a * Math.sqrt(3)) / 2]]), bondR: 0.06, grey: "#c9c9c9", crisp: true }; // prettier-ignore
 }
 // Fluorite (CaF2): calcium ions face-centred, a fluoride ion in each of the
 // eight small cubes between them (a = 5.46 Å).
@@ -1022,7 +1039,7 @@ function fluoriteLattice() {
     Ca: { color: "#f0ead6", r: 0.62 },
     F: { color: "#9be05a", r: 0.5 },
   });
-  return { atoms, bonds: bondsAt(atoms, [["Ca", "F", (a * Math.sqrt(3)) / 4]]), bondR: 0.07, grey: "#c9c9c9" }; // prettier-ignore
+  return { atoms, bonds: bondsAt(atoms, [["Ca", "F", (a * Math.sqrt(3)) / 4]]), bondR: 0.07, grey: "#c9c9c9", crisp: true }; // prettier-ignore
 }
 // Perovskite (strontium titanate, SrTiO3): titanium in the middle of each
 // cube, an octahedron of oxygens round it, strontium at the corners
@@ -1046,7 +1063,7 @@ function perovskiteLattice() {
       O: { color: "#e3322b", r: 0.48 },
     },
   );
-  return { atoms, bonds: bondsAt(atoms, [["Ti", "O", a / 2]]), bondR: 0.08, grey: "#c9c9c9" }; // prettier-ignore
+  return { atoms, bonds: bondsAt(atoms, [["Ti", "O", a / 2]]), bondR: 0.08, grey: "#c9c9c9", crisp: true }; // prettier-ignore
 }
 // Quartz (alpha, SiO2): each silicon joined to four oxygens and each oxygen
 // to two silicons, the tetrahedra spiralling round the c axis (space group
@@ -1091,6 +1108,7 @@ function quartzLattice() {
     atoms: out,
     bonds: bonds.filter(([i, j]) => keepIdx[i] && keepIdx[j]).map(([i, j]) => [remap[i], remap[j]]),
     bondR: 0.11,
+    crisp: true,
   };
 }
 // Graphene: one sheet of carbon hexagons (C–C 1.42 Å).
@@ -1116,7 +1134,7 @@ function grapheneLattice() {
   bonds = bonds
     .filter(([i, j]) => deg[i] >= 2 && deg[j] >= 2)
     .map(([i, j]) => [remap[i], remap[j]]);
-  return { atoms: kept, bonds, bondR: 0.12, grey: "#8d939e", tilt: true };
+  return { atoms: kept, bonds, bondR: 0.12, grey: "#8d939e", tilt: true, crisp: true };
 }
 
 function iceLattice(rand) {
@@ -1183,7 +1201,7 @@ function iceLattice(rand) {
 function orbitalLook(
   k,
   orb,
-  { part, plus, minus, lobes, cloudShare, weight = 1, fit = 1, glow = 0 },
+  { part, plus, minus, lobes, cloudShare, weight = 1, fit = 1, glow = 0, crisp = false },
 ) {
   const radial = radialSampler(orb.R, orb.rmax);
   const E = radial.extent;
@@ -1239,6 +1257,8 @@ function orbitalLook(
     weight,
     part,
     flat: 0.15,
+    // Lane Chemistry: the new orbitals are placed evenly, with little noise.
+    ...(crisp ? { even: true, jitter: 0.01 } : {}),
     opacity: lobes ? 0.92 : 0.28,
     pattern: false,
     kind: "breathe",
@@ -1252,7 +1272,8 @@ function orbitalLook(
       return gloss(lit(base, c.n, 0.55, 0.55), c.n, 0.45, 16);
     },
   });
-  k.cloud({ share: cloudShare, size: 1.1, pattern: false, part }, (rand) => {
+  // (The new orbitals' cloud has bigger, fainter splats: a smoother haze.)
+  k.cloud({ share: cloudShare, size: crisp ? 1.5 : 1.1, pattern: false, part }, (rand) => {
     // Rejection sampling from |psi|², keeping the cloud mostly inside the
     // boundary surface so its shape reads clearly.
     let r;
@@ -1271,7 +1292,7 @@ function orbitalLook(
     return {
       p: mul(toToy(d), (r / E) * fit),
       color: col,
-      opacity: lobes ? 0.35 : 0.1 + 0.55 * Math.pow(t, 0.6),
+      opacity: (lobes ? 0.35 : 0.1 + 0.55 * Math.pow(t, 0.6)) * (crisp ? 0.7 : 1),
       size: 0.7 + 0.6 * rand(),
       kind: "twinkle",
       params: [0.5, rand() * TAU],
@@ -1527,7 +1548,9 @@ export const RECIPES = {
       const orb = ORBITALS[o.orbital] || ORBITALS["3dz2"];
       const ground = k.part("ground");
       const lobes = o.look === "lobes";
-      const look = { plus: o.plus, minus: o.minus, lobes };
+      // Lane Chemistry: the orbitals added to the list are built crisp.
+      const crisp = !ORIGINAL_ORBITALS.has(o.orbital);
+      const look = { plus: o.plus, minus: o.minus, lobes, crisp };
       orbitalLook(k, orb, { ...look, part: ground, cloudShare: lobes ? 0.2 : 0.46 });
       // The nucleus: a tiny bright dot at the centre, with a soft glow.
       k.add(k.sphere(0.03), { share: 0.01, color: (c) => gloss("#fff3c4", c.n, 0.6, 8) });
@@ -1661,11 +1684,16 @@ export const RECIPES = {
         }
       }
       const nucR = pts.reduce((m, p) => Math.max(m, len(p)), 0) + rb;
+      // Lane Chemistry: the new choices (every nucleon, the 74 new elements)
+      // are built crisp: even placement, fully opaque, little color noise.
+      const crisp = o.nucleus === "real" || !ELEMENTS.some((e) => e[0] === o.element);
+      const finish = crisp ? { even: true, opacity: 1, jitter: 0.01 } : {};
       pts.forEach((p, i) => {
         const proton = kinds[i];
         k.add(k.sphere(rb), {
           pos: p,
           flat: 0.3,
+          ...finish,
           weight: 1.5,
           kind: "beat",
           params: [0.03, 0],
@@ -1709,6 +1737,7 @@ export const RECIPES = {
           part,
           weight: 2.2,
           flat: 0.35,
+          ...finish,
           color: (c) => lit(mix("#8fb4ff", "#c7d6ff", 0.5 + 0.5 * c.n[1]), c.n, 0.75, 0.3),
         });
         const [e1, e2] = basis(nrm);
@@ -1719,6 +1748,7 @@ export const RECIPES = {
             pos: p,
             part,
             weight: 2.5,
+            ...finish,
             pattern: false,
             color: (c) => keep(gloss(lit("#36c9ff", c.n, 0.8, 0.3), c.n, 0.7, 10)),
           });
@@ -1902,6 +1932,7 @@ export const RECIPES = {
         bondR: c60 ? 0.08 : 0.1,
         token: (i) => tokenOf[i],
         overlap: 0.09,
+        crisp: !!shelf,
       });
       // Lane Chemistry: hydrogen bonds (DNA's base pairs) as dotted lines
       // from each hydrogen to the atom it is drawn to, riding with the
@@ -2026,6 +2057,7 @@ export const RECIPES = {
         grey: lat.grey || null,
         part: (i) => slabs[slabAt(lat.atoms[i].p)],
         overlap: 0.02,
+        crisp: !!lat.crisp,
       });
       if (lat.hbonds) {
         // Hydrogen bonds: dotted lines from each hydrogen to its neighbour's oxygen.

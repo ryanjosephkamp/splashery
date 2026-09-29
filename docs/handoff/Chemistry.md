@@ -179,7 +179,7 @@ Model: Opus 5.5 (claude-opus-5-5), default effort.
 - The periodic table's tap: `action.at` returns `{ options: { element }, key: "up" }` for another
   tile; the player rebuilds the toy (about half a second at 200,000 splats) and raises the new atom.
   The table is built exactly the same for every element (the atom's splat counts always add up to
-  22% of the budget, and the lettering is one shape), so only the atom changes.
+  25% of the budget, and the lettering is one shape), so only the atom changes.
 - The atom is left out of the fit (`fit: false`) and stays within the table's own half-width, so the
   table is framed the same whichever atom it holds.
 - `tools/chs-clip.mjs` records the lane's clips at phone size, through a script of taps, waiting out
