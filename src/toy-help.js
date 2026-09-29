@@ -1379,6 +1379,20 @@ export const TOY_HELP = {
       "The Picture lab shows a page, a photo, a GIF or a video as Gaussian splats: thousands of small, flat, colored discs, the same stuff every toy here is made of. A document's paper becomes a smooth sheet of large splats in the paper's own color, and every pixel of ink becomes one small splat of its own color, a hair in front. A photo gets one splat per pixel.\n\nZoom in and the page is rebuilt sharper; zoom out and it gets coarser, so nothing vanishes. Open a PDF, a photo, a GIF or a video of your own in the Toy tab, or paste a web address. Your files stay on your device: nothing is uploaded.",
   },
 
+  // ---- Studio ---------------------------------------------------------------------------
+  "chladni-plate": {
+    howTo:
+      "Tap to bow the plate and watch the sand find its still lines. Pick a mode in the Toy tab.",
+    about:
+      "In 1787 Ernst Chladni sprinkled sand on a metal plate and drew a violin bow along its edge. The plate shook, and the sand jumped away from the places that moved and gathered on the lines that stayed still, a different picture for each pitch. Those still lines are called nodal lines.\n\nTap to bow the plate: it hums at the mode's pitch and every grain of sand, a splat of its own, hops and slides until the figure appears. Tap again to stir the sand up. The Mode choice picks the pitch and the pattern. This toy uses the classic square-plate model, cos(nπx)·cos(mπy) ± cos(mπx)·cos(nπy) = 0, with a pitch that grows with n² + m².",
+  },
+  "song-landscape": {
+    howTo:
+      "Tap to play the song and watch its sound rise as a landscape. Open your own song in the Toy tab.",
+    about:
+      "A song is a wave, but you can also see what it is made of. This toy cuts the sound into short slices, measures how loud each pitch is in every slice (a short-time Fourier transform) and stands the answer up as a landscape of splats: time runs away from you, pitch runs across from low to high, and loudness is height.\n\nTap to play it: a glowing line and the camera glide along the landscape in time with the music. Open a song of your own in the Toy tab; it is read on your device and never uploaded. Long songs make longer, coarser landscapes.",
+  },
+
   // ---- Holidays -------------------------------------------------------------------------
   "jack-o-lantern": {
     howTo: "Tap to lift the lid; tap again to put it back.",

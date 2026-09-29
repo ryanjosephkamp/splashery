@@ -1988,6 +1988,18 @@
       "owner": "The Pictures engine lane's test toy (labs only), from the owner's notes of September 27 and 28, 2026.",
       "effect": "A flat sheet showing what you open: a tap turns to the next page of a PDF, or plays and pauses a video.",
       "sound": "A soft paper swish and a light tap."
+    },
+    "chladni-plate": {
+      "v": "new",
+      "owner": "Approved on the Splashery Universe page (lane Studio Sound), September 29, 2026.",
+      "effect": "A tap bows a square metal plate: every sand grain hops where the plate swings and slides to the still lines, and in about 3.6 s the mode's figure appears; tap again to stir it up.",
+      "sound": "A steady hum at the mode's pitch, with sand pattering."
+    },
+    "song-landscape": {
+      "v": "new",
+      "owner": "Approved on the Splashery Universe page (lane Studio Sound), September 29, 2026.",
+      "effect": "A song's real spectrogram as a landscape of splats; a tap plays the song while a glowing marker and the camera glide along it.",
+      "sound": "The song itself."
     }
   }
 }
