@@ -1385,19 +1385,19 @@ export const TOY_HELP = {
   // ---- Pictures and pages ---------------------------------------------------------------
   "picture-lab": {
     howTo:
-      "Tap the right of the page for the next one, the left to go back; tap a video to play or pause it. Open your own in the Toy tab.",
+      "Tap the right of the page to go on, the left to go back; tap a video to play it. Open your own in the Toy tab.",
     about:
       "The Picture lab shows a page, a photo, a GIF or a video as Gaussian splats: thousands of small, flat, colored discs, the same stuff every toy here is made of. A document's paper becomes a smooth sheet of large splats in the paper's own color, and every pixel of ink becomes one small splat of its own color, a hair in front. A photo gets one splat per pixel.\n\nZoom in and the page is rebuilt sharper; zoom out and it gets coarser, so nothing vanishes. Open a PDF, a photo, a GIF or a video of your own in the Toy tab, or paste a web address. Your files stay on your device: nothing is uploaded.",
   },
   "your-book": {
     howTo:
-      "Tap the right page to turn forward, the left to go back, or pull a page across by its edge. Open your own PDF in the Toy tab.",
+      "Tap the right page to turn on, the left to go back, or pull a page over by hand. Open a PDF in the Toy tab.",
     about:
       "A book is a stack of pages bound along one edge, so you can turn them one at a time. People have bound pages this way for about two thousand years; before that, long texts were rolled up as scrolls.\n\nOpen any PDF of your own in the Toy tab, as long as you like, and tap to turn its pages (the right page turns forward, the left goes back), or take a page by its edge and pull it over: let go past halfway and it turns, otherwise it falls back. Each page curls as it goes over and shows the next page on its back. Stapled paper flips up over the top: tap near the top of the page to go back. Only the pages you reach are made into splats, so a long book stays light. Pick hardcover, paperback, magazine, stapled paper or spiral notebook in the Toy tab. Your file stays on your device.",
   },
   "photo-album": {
     howTo:
-      "Tap the right page to turn forward, the left to go back, or pull a heavy page over by its edge. Open your own photos in the Toy tab.",
+      "Tap the right page to turn on, the left to go back, or pull a page over. Open your own photos in the Toy tab.",
     about:
       "A photo album keeps printed photos on thick pages. Small paper corners hold each photo by its four corners, so nothing is glued to the picture and it can be slipped out again. Albums like this were common from the late 1800s, when cameras first let families take their own pictures.\n\nPick several photos of your own at once in the Toy tab and turn through them with a tap, or pull a page over by hand (the thick pages are heavier than a book's): two wide photos share a page, one above the other, and two tall ones sit side by side. Pick a leather, linen or scrapbook cover, and turn the file names under the photos on or off. Your photos stay on your device.",
   },
