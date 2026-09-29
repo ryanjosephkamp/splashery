@@ -938,6 +938,323 @@ function driveDifference(t, c, out, info) {
   }
 }
 
+// ---- The Enigma machine --------------------------------------------------------------
+
+// The Enigma I with rotors I, II and III (left to right), reflector B and a
+// plugboard: the historical wirings and stepping, including the middle
+// rotor's double step. Letters are 0..25.
+const AZ = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const EN_ROTORS = {
+  I: { wiring: "EKMFLGDQVZNTOWYHXUSPAIBRCJ", notch: "Q" },
+  II: { wiring: "AJDKSIRUXBLHWTMCQGZNPYFVOE", notch: "E" },
+  III: { wiring: "BDFHJLCPRTXVZNYEIWGAKMUSQO", notch: "V" },
+};
+const EN_REFLECTOR_B = "YRUHQSLDPXNGOKMIEBFZCWVJAT";
+const EN_PLUGS = "AR GK OX";
+const EN_DEFAULT = "HELLO";
+const EN_MAX = 20;
+const idx = (ch) => AZ.indexOf(ch);
+const mod26 = (n) => ((n % 26) + 26) % 26;
+
+// A machine: rotor names left to right, ring settings, plugboard pairs.
+function enigmaMachine({ rotors = ["I", "II", "III"], rings = [0, 0, 0], plugs = EN_PLUGS } = {}) {
+  const fwd = rotors.map((r) => [...EN_ROTORS[r].wiring].map(idx));
+  const back = fwd.map((w) => {
+    const b = [];
+    w.forEach((o, i) => (b[o] = i));
+    return b;
+  });
+  const notch = rotors.map((r) => idx(EN_ROTORS[r].notch));
+  const refl = [...EN_REFLECTOR_B].map(idx);
+  const plug = [...AZ].map((_, i) => i);
+  for (const pair of String(plugs).toUpperCase().split(/\s+/).filter(Boolean)) {
+    const a = idx(pair[0]);
+    const b = idx(pair[1]);
+    plug[a] = b;
+    plug[b] = a;
+  }
+  // The rotors step before each letter: the right one always; the middle
+  // one when the right one is at its notch, and again (with the left one)
+  // when it is at its own notch itself: the double step.
+  const step = (p) => {
+    const q = p.slice();
+    if (q[1] === notch[1]) {
+      q[0] = mod26(q[0] + 1);
+      q[1] = mod26(q[1] + 1);
+    } else if (q[2] === notch[2]) q[1] = mod26(q[1] + 1);
+    q[2] = mod26(q[2] + 1);
+    return q;
+  };
+  const through = (c, i, p, table) => mod26(table[i][mod26(c + p[i] - rings[i])] - p[i] + rings[i]);
+  const letter = (c, p) => {
+    let x = plug[c];
+    for (let i = 2; i >= 0; i--) x = through(x, i, p, fwd);
+    x = refl[x];
+    for (let i = 0; i < 3; i++) x = through(x, i, p, back);
+    return plug[x];
+  };
+  // Types a message from start positions p; returns every key's letter,
+  // the rotor positions after it steps, and the lamp that lights.
+  const type = (text, start) => {
+    let p = start.slice();
+    return [...text].map((ch) => {
+      p = step(p);
+      const k = idx(ch);
+      return { key: k, pos: p.slice(), lamp: letter(k, p) };
+    });
+  };
+  return { step, letter, type, plug, notch };
+}
+const enClean = (text) => String(text ?? "").toUpperCase().replace(/[^A-Z]/g, "").slice(0, EN_MAX); // prettier-ignore
+const EN_SHOWN = { label: "HELLO" };
+
+// Keyboard and lampboard rows (the Enigma's own layout).
+const EN_ROWS = ["QWERTZUIO", "ASDFGHJK", "PYXCVBNML"];
+const EN = { key: 0.155, E: 9, rotorR: 0.2, step: TAU / 26, index: (35 * Math.PI) / 180 };
+function enKeyAt(ch, y, z0, dz) {
+  for (let r = 0; r < 3; r++) {
+    const i = EN_ROWS[r].indexOf(ch);
+    if (i >= 0) return [(i - (EN_ROWS[r].length - 1) / 2) * EN.key + (r === 1 ? 0.02 : 0), y, z0 + r * dz];
+  }
+  return [0, y, z0];
+}
+const enKeyPos = (ch) => enKeyAt(ch, 0.035, 0.18, 0.15);
+const enLampPos = (ch) => enKeyAt(ch, 0.02, -0.4, 0.14);
+const EN_ROTOR_X = [-0.22, 0, 0.22];
+const EN_ROTOR_C = [0, 0.02, -0.72];
+
+// The timeline of a tap: each letter's key goes down (the rotors step as
+// it goes), the lamp lights, the key comes up; then the operator turns the
+// rotors back to the start.
+function enTimes(n) {
+  const dt = Math.min(0.5, 6.4 / Math.max(1, n));
+  const t0 = 0.2;
+  const end = t0 + n * dt;
+  return { dt, t0, end, back: end + 0.25, done: end + 1.05 };
+}
+
+function buildEnigma(k, o) {
+  const msg = enClean(o.message) || EN_DEFAULT;
+  EN_SHOWN.label = msg;
+  const mach = enigmaMachine();
+  const start = [0, 0, 0];
+  const enc = mach.type(msg, start);
+  const coded = enc.map((e) => AZ[e.lamp]).join("");
+  const dec = mach.type(coded, start);
+  k.data = { msg, coded, runs: [enc, dec], mode: 0, m: {}, shown: [0, 0], run: null };
+  // The box: a wooden case with a dark crackle-finish top plate.
+  const W = 1.62;
+  const D = 1.72;
+  block(k, [W + 0.12, 0.36, D + 0.12], [0, -0.2, -0.22], wood());
+  block(k, [W, 0.02, D], [0, -0.01, -0.22], (c) => keep(lit(mix("#2a2c2f", "#34373b", 0.5 + 0.5 * c.noise(c.p[0] * 60, 0, c.p[2] * 60)), c.n, { amb: 0.75, dif: 0.3, spec: 0.15 }))); // prettier-ignore
+  // The keys: a black cap with a metal rim and a white letter on a short
+  // stem (tokens 0..25, by letter).
+  for (const ch of AZ) {
+    const p = enKeyPos(ch);
+    const tok = { kind: "token", params: [idx(ch), 0] };
+    k.add(evenCylinder(0.012, 0.012, 0.05, false), { pos: [p[0], p[1] - 0.03, p[2]], even: true, weight: 2, pattern: false, color: darkSteel, ...tok }); // prettier-ignore
+    k.add(evenCylinder(0.058, 0.058, 0.03, true), {
+      pos: p,
+      even: true,
+      weight: 1.6,
+      flat: 0.25,
+      pattern: false,
+      ...tok,
+      color: (c) => {
+        const rr = Math.hypot(c.p[0] - p[0], c.p[2] - p[2]);
+        const col = rr > 0.051 || !c.s.cap ? "#b9bec4" : "#161617";
+        return keep(lit(col, c.n, { amb: 0.65, dif: 0.4, spec: 0.5, pow: 24 }));
+      },
+    });
+    text(k, ch, [p[0], p[1] + 0.03, p[2]], 0.0115, "#f4f1e8", { weight: 16, size: 0.9, rot: [-90, 0, 0], ...tok }); // prettier-ignore
+  }
+  // The lampboard: frosted glass windows with stenciled letters, and one
+  // glow (token 26) that moves under the lamp that lights.
+  for (const ch of AZ) {
+    const p = enLampPos(ch);
+    k.add(evenCylinder(0.052, 0.052, 0.02, true), { pos: p, even: true, weight: 1.4, flat: 0.25, pattern: false, color: (c) => keep(lit(c.s.cap ? "#d9d6c8" : "#7c7f84", c.n, { amb: 0.8, dif: 0.25, spec: 0.3 })) }); // prettier-ignore
+    text(k, ch, [p[0], p[1] + 0.03, p[2]], 0.011, "#2b2a27", { weight: 16, size: 0.85, rot: [-90, 0, 0] });
+  }
+  const g0 = enLampPos("A");
+  k.add(k.disc(0.056), { pos: [g0[0], g0[1] + 0.016, g0[2]], even: true, weight: 2, flat: 0.2, pattern: false, kind: "token", params: [26, 0], color: (c) => keep(mix("#fff3b0", "#ffb83a", Math.hypot(c.p[0] - g0[0], c.p[2] - g0[2]) / 0.056)) }); // prettier-ignore
+  // The rotors in their well behind the lampboard: three drums on one axle
+  // (parts, turning about x), each with its letter ring and a ridged thumb
+  // wheel, the reflector to their left and the entry wheel to their right.
+  const [rcx, rcy, rcz] = EN_ROTOR_C;
+  const R = EN.rotorR;
+  block(k, [0.95, 0.03, 0.5], [0, -0.1, rcz], darkSteel);
+  k.add(evenCylinder(0.02, 0.02, 0.9, true), { pos: [rcx, rcy, rcz], rot: [0, 0, 90], even: true, weight: 1.5, pattern: false, color: steel }); // prettier-ignore
+  for (const [x, w] of [[-0.4, 0.07], [0.37, 0.05]]) // prettier-ignore
+    k.add(evenCylinder(R * 0.9, R * 0.9, w, true), { pos: [x, rcy, rcz], rot: [0, 0, 90], even: true, weight: 1.2, pattern: false, color: darkSteel }); // prettier-ignore
+  EN_ROTOR_X.forEach((x, i) => {
+    const part = k.part(["rotorL", "rotorM", "rotorR"][i], { pivot: [x, rcy, rcz], axis: [1, 0, 0] });
+    const ride = { part, pattern: false, even: true };
+    // The letter ring: an ivory band with the 26 letters round it.
+    k.add(evenCylinder(R, R, 0.1, false), { pos: [x, rcy, rcz], rot: [0, 0, 90], weight: 1.3, flat: 0.25, ...ride, color: (c) => keep(lit("#e8e0c8", c.n, { amb: 0.7, dif: 0.35, spec: 0.3 })) }); // prettier-ignore
+    for (let l = 0; l < 26; l++) {
+      const phi = EN.index - l * EN.step;
+      const rr = R + 0.004;
+      text(k, AZ[l], [x, rcy + rr * Math.cos(phi), rcz + rr * Math.sin(phi)], 0.0085, "#1c1a17", { weight: 16, size: 0.7, rot: [(phi * 180) / Math.PI - 90, 0, 0], ...ride }); // prettier-ignore
+    }
+    // The ridged thumb wheel on its left side, and the drum's dark faces.
+    k.add(evenCylinder(R + 0.035, R + 0.035, 0.035, true), {
+      pos: [x - 0.07, rcy, rcz],
+      rot: [0, 0, 90],
+      weight: 1.2,
+      flat: 0.25,
+      ...ride,
+      color: (c) => {
+        const a = Math.atan2(c.p[2] - rcz, c.p[1] - rcy);
+        const ridge = c.s.side && Math.sin(a * 26) > 0.2;
+        return keep(lit(ridge ? "#3c3f44" : "#2a2c30", c.n, { amb: 0.7, dif: 0.35, spec: 0.35 }));
+      },
+    });
+    k.add(k.disc(R, 0.02), { pos: [x + 0.05, rcy, rcz], rot: [0, 0, -90], even: true, weight: 0.8, ...ride, color: (c) => keep(lit("#3a3d42", [1, 0, 0], { amb: 0.8 })) }); // prettier-ignore
+  });
+  // The index marks: a small brass pointer at each rotor's reading place.
+  EN_ROTOR_X.forEach((x) => {
+    const phi = EN.index;
+    const rr = R + 0.04;
+    k.add(k.cone(0.012, 0, 0.03, { caps: true }), { pos: [x, rcy + rr * Math.cos(phi), rcz + rr * Math.sin(phi)], rot: [(phi * 180) / Math.PI + 180, 0, 0], even: true, weight: 3, pattern: false, color: brass }); // prettier-ignore
+  });
+  // The plugboard on the front: two sockets per letter, and a cable for
+  // each plugged pair.
+  const pz = -0.22 + D / 2 + 0.065;
+  const plugAt = (ch) => {
+    const kp = enKeyAt(ch, 0, 0, 0.0);
+    const r = EN_ROWS.findIndex((row) => row.includes(ch));
+    return [kp[0], -0.1 - r * 0.1, pz];
+  };
+  for (const ch of AZ) {
+    const p = plugAt(ch);
+    for (const dy of [0.018, -0.018])
+      k.add(k.disc(0.011), { pos: [p[0], p[1] + dy, pz + 0.002], rot: [90, 0, 0], even: true, weight: 3, pattern: false, color: () => keep("#0d0d0e") }); // prettier-ignore
+    text(k, ch, [p[0] - 0.035, p[1], pz + 0.003], 0.006, "#e8e2d0", { weight: 16, size: 0.7 });
+  }
+  const pairs = EN_PLUGS.split(" ");
+  pairs.forEach((pair, i) => {
+    const a = plugAt(pair[0]);
+    const b = plugAt(pair[1]);
+    const sag = 0.1 + 0.03 * i;
+    const curve = (t) => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t - sag * Math.sin(Math.PI * t), pz + 0.03 + 0.04 * Math.sin(Math.PI * t)]; // prettier-ignore
+    k.add(k.tube(curve, 0.011, { grid: 48 }), { even: true, weight: 2, flat: 0.35, pattern: false, color: (c) => keep(lit("#2b2b2e", c.n, { amb: 0.7, dif: 0.35, spec: 0.4 })) }); // prettier-ignore
+    for (const p of [a, b])
+      k.add(evenCylinder(0.017, 0.017, 0.04, true), { pos: [p[0], p[1], pz + 0.02], rot: [90, 0, 0], even: true, weight: 3, pattern: false, color: darkSteel }); // prettier-ignore
+  });
+  // A plain brass name plate on the front of the case (no insignia).
+  block(k, [0.36, 0.08, 0.01], [0, -0.1 + 0.14, pz - 0.002], brass, { weight: 1.2 });
+  // The lid, opened back, with the operator's pad on its inside: the
+  // message, the coded letters as they light (fade channel 0) and the
+  // decoded letters on the second tap (channel 1).
+  const lz = -0.22 - D / 2 - 0.06;
+  const lidH = 0.98;
+  block(k, [W + 0.12, lidH, 0.05], [0, lidH / 2 - 0.02, lz], wood(DARK_WOOD));
+  const padW = 1.3;
+  const padH = 0.74;
+  const pcy = lidH / 2 + 0.02;
+  block(k, [padW, padH, 0.01], [0, pcy, lz + 0.03], (c) => keep(lit("#f3ecd8", c.n, { amb: 0.85, dif: 0.2, spec: 0 }))); // prettier-ignore
+  const px = 0.022;
+  const lines = [
+    ["MESSAGE", msg, null],
+    ["CODED", coded, 0],
+    ["DECODED", dec.map((e) => AZ[e.lamp]).join(""), 1],
+  ];
+  lines.forEach(([label, str, ch], li) => {
+    const y = pcy + padH / 2 - 0.16 - li * 0.235;
+    text(k, label, [-padW / 2 + 0.06, y + 0.105, lz + 0.05], 0.007, "#8a6d4c", { weight: 8, align: "left" }); // prettier-ignore
+    [...str].forEach((l, i) => {
+      const x = -padW / 2 + 0.08 + i * px * 6 + (px * 5) / 2;
+      const opts = ch === null ? {} : { kind: "fade", params: [(i + 0.5) / str.length, -0.3 / str.length], channel: ch }; // prettier-ignore
+      text(k, l, [x, y, lz + 0.05], px * 0.92, ch === 1 ? "#1d4f8a" : ch === 0 ? "#8a1d1d" : "#1f1c18", { weight: 10, ...opts }); // prettier-ignore
+    });
+  });
+}
+
+function driveEnigma(t, c, out, info) {
+  const data = info?.data;
+  if (!data) return;
+  const m = data.m;
+  const s = since(c.go, EN.E);
+  // A new tap: type the message (or, the next time, the coded text).
+  if (s >= 0 && (m.lastS === undefined || m.lastS < 0 || s < m.lastS)) {
+    if (data.run) enCommit(data);
+    data.run = { mode: data.mode, list: data.runs[data.mode] };
+    if (data.mode === 0) data.shown = [0, 0];
+    m.cue = -1;
+  }
+  m.lastS = s;
+  let pose = null;
+  if (data.run) {
+    const T = enTimes(data.run.list.length);
+    if (s < 0 || s >= T.done) enCommit(data);
+    else pose = enPose(data.run, T, s);
+  }
+  out.tokens = [];
+  for (let i = 0; i < 26; i++) out.tokens[i] = { offset: [0, pose && pose.key === i ? -0.03 * pose.down : 0, 0], visible: 1 }; // prettier-ignore
+  const g0 = enLampPos("A");
+  const lampAt = pose && pose.lamp >= 0 ? enLampPos(AZ[pose.lamp]) : g0;
+  out.tokens[26] = { offset: [lampAt[0] - g0[0], 0, lampAt[2] - g0[2]], visible: pose && pose.lamp >= 0 ? 1 : 0 }; // prettier-ignore
+  const pos = pose ? pose.rotors : [0, 0, 0];
+  ["rotorL", "rotorM", "rotorR"].forEach((n, i) => (out.parts[n] = { angle: pos[i] * EN.step }));
+  const shown = pose ? pose.shown : data.shown;
+  out.morph = [shown[0], shown[1], 0, 0];
+  // The lamp's glow and the turned rotors are sorted again where they are.
+  const key = pose ? `${pose.lamp}:${pos.map((v) => Math.round(v * 4)).join(",")}` : "rest";
+  out.resort = key !== m.sortKey;
+  out.resortPose = out.resort;
+  m.sortKey = key;
+  // Sounds: a heavy clack for each key, the ratchet of the rotors stepping
+  // and a faint click as each lamp lights.
+  if (data.run && s >= 0) {
+    if (m.cuesFor !== data.run) {
+      const T = enTimes(data.run.list.length);
+      const list = [];
+      data.run.list.forEach((e, i) => {
+        const a = T.t0 + i * T.dt;
+        list.push([a, { voice: "clack", f: 420, decay: 0.5, vol: 0.8 }]);
+        list.push([a + 0.03, { voice: "ratchet", f: 1500, n: 1, vol: 0.35 }]);
+        list.push([a + 0.1, { voice: "click", f: 4200, decay: 0.3, vol: 0.25 }]);
+      });
+      list.push([T.back, { voice: "ratchet", f: 1200, n: 5, rate: 10, vol: 0.4 }]);
+      m.cues = list;
+      m.cuesFor = data.run;
+    }
+    cuesAt(m, "cue", s, m.cues, out);
+  }
+}
+// Where the keys, lamp, rotors and pad are at time s of a tap.
+function enPose(run, T, s) {
+  const n = run.list.length;
+  const shownCh = run.mode;
+  const base = run.mode === 0 ? [0, 0] : [1, 0];
+  if (s < T.end) {
+    const i = Math.max(0, Math.min(n - 1, Math.floor((s - T.t0) / T.dt)));
+    const f = s < T.t0 ? 0 : clamp01((s - T.t0) / T.dt - i);
+    const e = run.list[i];
+    const prev = i > 0 ? run.list[i - 1].pos : [0, 0, 0];
+    const stepF = ease(band(f, 0.0, 0.25));
+    const rotors = [0, 1, 2].map((j) => prev[j] + mod26(e.pos[j] - prev[j]) * stepF);
+    const lampOn = s >= T.t0 && f > 0.22 && f < 0.85;
+    const shown = base.slice();
+    shown[shownCh] = (i + (f > 0.22 ? 1 : 0)) / n;
+    if (s < T.t0) shown[shownCh] = 0;
+    return { key: s < T.t0 ? -1 : e.key, down: Math.sin(Math.PI * band(f, 0, 0.8)), lamp: lampOn ? e.lamp : -1, rotors, shown }; // prettier-ignore
+  }
+  // Turned back to the start: each rotor turns the short way home.
+  const last = run.list[n - 1].pos;
+  const b = ease(band(s, T.back, T.done - 0.1));
+  const rotors = last.map((p) => (p > 13 ? p + (26 - p) * b : p * (1 - b)));
+  const shown = base.slice();
+  shown[shownCh] = 1;
+  return { key: -1, down: 0, lamp: -1, rotors, shown };
+}
+function enCommit(data) {
+  if (!data.run) return;
+  data.shown = data.run.mode === 0 ? [1, 0] : [1, 1];
+  data.mode = 1 - data.run.mode;
+  data.run = null;
+}
+
 // ---- Recipes -------------------------------------------------------------------------
 
 export const RECIPES = {
@@ -976,9 +1293,32 @@ export const RECIPES = {
     drive: driveDifference,
     build: buildDifference,
   },
+  "enigma-machine": {
+    options: [
+      // Your message, as typed (set from the panel, not shown).
+      { key: "message", label: "Your message", type: "text", default: EN_DEFAULT, hidden: true },
+    ],
+    input: {
+      title: "Your own message",
+      placeholder: "HELLO",
+      button: "Put it on the pad",
+      note: "Type a message of up to 20 letters (spaces and anything that isn't a letter are left out, as Enigma operators did). The first tap types it and the lamps give the coded letters; the second tap types the coded text back, and your message comes out again.",
+      read(text) {
+        const msg = enClean(text);
+        if (!msg) throw new Error("Type a message with some letters in it, like HELLO.");
+        return { message: msg };
+      },
+      shown: () => EN_SHOWN.label,
+    },
+    controls: [{ key: "go", label: "Type it", type: "pulse", ease: EN.E }],
+    action: { key: "go", label: "Type the message" },
+    drive: driveEnigma,
+    build: buildEnigma,
+  },
 };
 
 // Exposed for the lane's tests.
 export const DIFFERENCE = { read: deRead, setup: deSetup, turn: deTurn, digits: deDigits, DE };
+export const ENIGMA = { machine: enigmaMachine, clean: enClean, AZ };
 export const TURING = { PROGRAMS: TM_PROGRAMS, run: tmRun, tape: tmTape, readBits: tmReadBits, rows: tmRows, times: tmTimes }; // prettier-ignore
 export { clamp, quatY, quatZ };

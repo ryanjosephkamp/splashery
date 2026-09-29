@@ -3137,6 +3137,15 @@ export const TOYS = [
     tags: "charles babbage method of differences polynomial wheels crank carry brass calculator mechanical",
     camera: { yaw: 0.15, pitch: 0.1, roll: 0, distance: 3.1 },
   },
+  {
+    id: "enigma-machine",
+    label: "Enigma machine",
+    category: "computing",
+    kind: "kit",
+    pack: "computing-history",
+    tags: "cipher code secret message rotors plugboard lamps keyboard cryptography bletchley park turing history",
+    camera: { yaw: 0.25, pitch: 0.55, roll: 0, distance: 3 },
+  },
   // ---- End of pack: computing-history ----
   // ---- Pack: pictures ----
   {
