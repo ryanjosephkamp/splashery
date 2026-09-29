@@ -129,7 +129,7 @@ function videoSample() {
 
 // One toy is shown at a time: whether it is on, since when, and the tap
 // count it has seen. build() starts it switched off.
-const SCR = { style: "tv", on: false, onAt: 0, tapN: 0, fresh: true, wasPlaying: false, scrub: null, seekAt: -1 }; // prettier-ignore
+const SCR = { style: "tv", on: false, onAt: 0, tapN: 0, fresh: true, wasPlaying: false };
 
 // How long each style takes to switch on (s).
 const ON_TIME = { tv: 1.5, flat: 1.4, cinema: 1.9, hologram: 1.5 };
@@ -211,11 +211,7 @@ export const RECIPES = {
         ],
       },
     ],
-    controls: [
-      { key: "power", label: "Switch on, play or pause", type: "pulse", ease: 2 },
-      // Moves through the video (with the pictures API's seek).
-      { key: "scrub", label: "Scrub through the video", type: "slider", default: 0 },
-    ],
+    controls: [{ key: "power", label: "Switch on, play or pause", type: "pulse", ease: 2 }],
     action: { key: "power", label: "Switch on, then play or pause", quiet: ["power"] },
     pictures: {
       sample: (o) => (o.sample === "gif" ? "assets/toys/screen/horse.gif" : videoSample()),
@@ -274,15 +270,6 @@ export const RECIPES = {
         out.cues.push(ON_SOUND[style]);
       }
       SCR.wasPlaying = !!(video && pics.playing);
-      // The scrub slider: a move of it jumps the video there (a few times a
-      // second while it moves).
-      const scrub = c.scrub ?? 0;
-      if (SCR.scrub === null) SCR.scrub = scrub;
-      if (video && pics.seek && Math.abs(scrub - SCR.scrub) > 0.002 && time - SCR.seekAt > 0.1) {
-        SCR.scrub = scrub;
-        SCR.seekAt = time;
-        pics.seek(scrub * (pics.duration || 0));
-      }
       // p: 0 off, 0..1 switching on, 1 on.
       const p = SCR.on ? clamp((time - SCR.onAt) / ON_TIME[style], 0, 1) : 0;
       out.sheets = { screen: { page: 0, visible: 1 } };
@@ -299,7 +286,6 @@ export const RECIPES = {
       SCR.tapN = 0;
       SCR.fresh = true;
       SCR.wasPlaying = false;
-      SCR.scrub = null;
       if (style === "tv") buildTV(k);
       else if (style === "flat") buildFlat(k);
       else if (style === "cinema") buildCinema(k);

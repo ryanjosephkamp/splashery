@@ -139,9 +139,8 @@ test("the training view learns the photo in the browser: 13 keyframes, falling l
   expect(d.values[0]).toBeGreaterThan(d.values[d.values.length - 1]);
   // The tap starts again from the random cloud: the first keyframe shows.
   await page.evaluate(() => window.__splashery.player.act());
-  await page.waitForTimeout(150);
-  const shown = await page.evaluate(() => window.__splashery.player.motion.out.parts.k0.visible);
-  expect(shown).toBe(1);
+  // (Read on a frame after the tap: a slow renderer may not have drawn one yet.)
+  await page.waitForFunction(() => window.__splashery.player.motion.out?.parts?.k0?.visible === 1, null, { timeout: 10_000 }); // prettier-ignore
 });
 
 test("lane Screens screenshots at 390x844 and 1440x900", async ({ page }) => {

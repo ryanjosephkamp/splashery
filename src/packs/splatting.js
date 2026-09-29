@@ -16,7 +16,7 @@
 // - Sorting: the splats of a small ball appear one by one in the back-to-
 //   front order a camera draws them in.
 
-import { mix, shade, clamp, quatAxisAngle, rgb } from "../kit.js";
+import { mix, shade, clamp, quatAxisAngle, quatRotate, rgb } from "../kit.js";
 import { mulberry32, mixSeed } from "../noise.js";
 import { fitSplats, FIT_KEYS } from "./splat-fit.js";
 
@@ -623,7 +623,7 @@ const PALETTE = [
   "#d95cb4",
   "#f4f1e8",
 ];
-const SORT = { cam: [0.3, 1.1, 0.45], count: 300 };
+const SORT = { cam: [0.3, 1.1, 0.45], count: 300, bead: 220 };
 
 // The tap: every splat hides, then they come back one by one, the one
 // furthest from the camera first, as the renderer draws them.
@@ -633,7 +633,9 @@ function driveSorting(p, out) {
 
 function buildSorting(k) {
   const rand = mulberry32(mixSeed(k.seed, "sorting-ball"));
-  // A ball of big, overlapping splats in bands of color.
+  // A ball of splats, each drawn as what a splat is: a small colored
+  // ellipsoid, turned its own way. Each is a bead of tiny opaque splats, so
+  // it stays crisp at phone size (big soft splats read as a blur).
   const pts = [];
   for (let i = 0; i < SORT.count; i++) {
     let v;
@@ -641,22 +643,40 @@ function buildSorting(k) {
     while (Math.hypot(...v) > 1);
     const p = v.map((x) => x * 0.62);
     const col = PALETTE[Math.floor(rand() * PALETTE.length)];
-    pts.push({ p, col, d: Math.hypot(p[0] - SORT.cam[0], p[1] - SORT.cam[1], p[2] - SORT.cam[2]) });
+    // Its three axes: a random turn (a unit quaternion) and three sizes.
+    const q = norm4([rand() - 0.5, rand() - 0.5, rand() - 0.5, rand() - 0.5]);
+    const r = [0.095 + 0.03 * rand(), 0.06 + 0.02 * rand(), 0.028 + 0.01 * rand()];
+    pts.push({ p, col, q, r, d: Math.hypot(p[0] - SORT.cam[0], p[1] - SORT.cam[1], p[2] - SORT.cam[2]) }); // prettier-ignore
   }
   // Back to front from the camera: furthest first.
   const order = pts.map((_, i) => i).sort((a, b) => pts[b].d - pts[a].d);
   const rank = new Float32Array(pts.length);
   order.forEach((i, r) => (rank[i] = r / (pts.length - 1)));
-  k.cloud({ count: (pts.length * 160000) / k.count + 1, pattern: false }, (r, i) => {
-    if (i >= pts.length) return null;
+  const per = SORT.bead;
+  const light = norm([0.4, 0.85, 0.55]);
+  k.cloud({ count: (pts.length * per * 160000) / k.count + 1, pattern: false }, (rnd, i) => {
+    if (i >= pts.length * per) return null;
+    const b = pts[Math.floor(i / per)];
+    // An even spread over the bead (a Fibonacci sphere), squashed to its sizes.
+    const j = i % per;
+    const z = 1 - (2 * (j + 0.5)) / per;
+    const a = j * 2.399963;
+    const rr = Math.sqrt(1 - z * z);
+    const u = [rr * Math.cos(a), rr * Math.sin(a), z];
+    const local = [u[0] * b.r[0], u[1] * b.r[1], u[2] * b.r[2]];
+    const n = norm(quatRotate(b.q, [u[0] / b.r[0], u[1] / b.r[1], u[2] / b.r[2]]));
+    const w = quatRotate(b.q, local);
+    const lit = 0.62 + 0.45 * Math.max(0, n[0] * light[0] + n[1] * light[1] + n[2] * light[2]);
     return {
-      p: pts[i].p,
-      size: 5.5,
-      color: pts[i].col,
-      opacity: 0.97,
+      p: [b.p[0] + w[0], b.p[1] + w[1], b.p[2] + w[2]],
+      n,
+      flat: 0.4,
+      size: 1.25,
+      color: shade(b.col, lit),
+      opacity: 1,
       kind: "fade",
       channel: 0,
-      params: [0.02 + 0.96 * rank[i], -0.012],
+      params: [0.02 + 0.96 * rank[Math.floor(i / per)], -0.012],
     };
   });
   // The camera that draws them, looking at the ball, and its lines of
@@ -667,7 +687,7 @@ function buildSorting(k) {
   const up = cross(side, look);
   const at = (a, b, c) => [cam[0] + side[0] * a + up[0] * b + look[0] * c, cam[1] + side[1] * a + up[1] * b + look[1] * c, cam[2] + side[2] * a + up[2] * b + look[2] * c]; // prettier-ignore
   const body = [];
-  for (let i = 0; i < 3400; i++) {
+  for (let i = 0; i < 6500; i++) {
     const f = Math.floor(rand() * 6);
     const u = rand() * 2 - 1;
     const v = rand() * 2 - 1;
@@ -681,18 +701,18 @@ function buildSorting(k) {
   }
   k.cloud({ count: (body.length * 160000) / k.count + 1, pattern: false }, (r, i) => {
     if (i >= body.length) return null;
-    return { p: body[i].p, size: 1.6, color: shade("#3a3f48", body[i].shade), opacity: 1 };
+    return { p: body[i].p, size: 0.7, color: shade("#3a3f48", body[i].shade), opacity: 1 };
   });
   // The lens: a short barrel towards the ball.
   const lens = [];
-  for (let i = 0; i < 500; i++) {
+  for (let i = 0; i < 1500; i++) {
     const a = rand() * TAU;
     const z = rand() * 0.16;
     lens.push(at(0.055 * Math.cos(a), 0.055 * Math.sin(a), 0.07 + z * 0.6));
   }
   k.cloud({ count: (lens.length * 160000) / k.count + 1, pattern: false }, (r, i) => {
     if (i >= lens.length) return null;
-    return { p: lens[i], size: 1.8, color: "#1d2026", opacity: 1 };
+    return { p: lens[i], size: 0.9, color: "#1d2026", opacity: 1 };
   });
   // Lines of sight: faint dotted lines from the lens to the ball's rim.
   const eye = at(0, 0, 0.18);
@@ -703,6 +723,10 @@ function buildSorting(k) {
   }
 }
 
+function norm4(v) {
+  const l = Math.hypot(v[0], v[1], v[2], v[3]) || 1;
+  return [v[0] / l, v[1] / l, v[2] / l, v[3] / l];
+}
 function norm(v) {
   const l = Math.hypot(v[0], v[1], v[2]) || 1;
   return [v[0] / l, v[1] / l, v[2] / l];

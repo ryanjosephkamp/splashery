@@ -117,17 +117,18 @@ insignia. The laptop stays exactly as it is.
 
 PRs: #66 was merged on September 28, 2026 at its first commit (this file and the video and GIF
 samples). The toys are in #72 ("Phase Screens: the screen and the Gaussian splat toy"), which needs
-the engine PR #71 merged first.
+the engine PR #71 ("Engine: a picture toy's prepare reads its media") for "Open your own photo".
+Video scrubbing comes from lane Books' engine PR (the Operator's call on September 28): its scrub
+bar in the Toy tab's picture panel serves the Screen, so the Screen has no slider of its own.
 
 September 28, 2026: both toys are built (labs only), with their sounds, help, plan entries, credits,
-tests (`tests/scr.spec.mjs`) and clips; an engine PR (`claude/lane-screens-engine`, "Engine: seek a
-video, and a picture toy's prepare reads its media") adds the two small things they need.
+tests (`tests/scr.spec.mjs`) and clips; an engine PR (#71, "Engine: a picture toy's prepare reads
+its media") lets the splat toy learn your own photo.
 
 - **Screen** (`src/packs/screens.js`, "Pictures and pages"): Style (Old TV, Flat TV, Cinema,
   Hologram) and Sample (the video or the GIF). The video or GIF is one picture sheet with method
   "screen". The tap switches it on, then plays and pauses; Play in the Toy tab's picture panel
-  switches it on too. A "Scrub through the video" slider jumps the video (needs the engine PR's
-  `seek`; without it the slider does nothing).
+  switches it on too.
 - **Gaussian splatting** (`src/packs/splatting.js`, AI and computing, beside gradient descent): View
   (Training, One splat, Many splats, Sorting). The fit is `src/packs/splat-fit.js`, run in
   `src/packs/splat-fit-worker.js`.
@@ -193,6 +194,13 @@ picture). Without it, the fit always learns the sample.
 
 ## Notes
 
+- The owner's review (September 28): seven cards "good"; `scr-splat-sorting` "fix": "This seems
+  basically perfect, but the demo GIF here looks blurry. If it isn't actually blurry in the site,
+  then it's fine, but as it appears here, it isn't as detailed as I'd prefer." The toy itself was
+  soft (300 big soft splats overlapping into a blur), so each splat is now drawn as what it is, a
+  small colored ellipsoid turned its own way, made of 220 tiny opaque splats: crisp at phone size.
+  The clip `scr-splat-sorting-r2` is recorded at full phone resolution (780 pixels wide).
+
 - Page screenshots stall in the stepped-clock clip tool once a toy animates, so `tools/scr-clip.mjs`
   captures the stage canvas instead (like `tools/effect-clip.mjs`), at 390×844.
 - Kit clouds are sized from a base of 0.01 when a view gives every piece a fixed count; the "many"
@@ -205,15 +213,14 @@ picture). Without it, the fit always learns the sample.
   every splat (antialiasing), and depth sorting in buckets can swap two nearby splats.
 - The hologram's sheet is see-through, but its two layers (a base and the pixels) make it about 85%
   opaque.
-- The Scrub slider doesn't follow the video as it plays (a recipe can't move a slider); it jumps the
-  video when moved.
 
 ## For the Operator
 
-- Engine PR #71: "Engine: seek a video, and a picture toy's prepare reads its media"
-  (`claude/lane-screens-engine`). It adds `time`, `duration` and `seek(s)` to the pictures API, and
-  a second argument to a picture toy's `prepare`: `help.media()`. Both are additive; tests in
-  `tests/scr-engine.spec.mjs`. Merge it before this lane's PR.
+- Engine PR #71: "Engine: a picture toy's prepare reads its media" (`claude/lane-screens-engine`).
+  It adds a second argument to a picture toy's `prepare`: `help.media()`. It is additive, with a
+  test in `tests/scr-engine.spec.mjs`. Video seeking was taken out of it on September 29 (lane
+  Books' engine PR has it). Keep #71, fold it into Books' engine PR, or close it: your call. Without
+  it, the training view always learns its sample photo.
 - Two shared tests count toys exactly and fail with this lane's toys (they would with any new labs
   or computing toy): `tests/pic.spec.mjs:138` expects the Picture lab to be the only labs toy, and
   `tests/ai.spec.mjs:52` expects exactly twelve computing toys (it could count the `computing`
