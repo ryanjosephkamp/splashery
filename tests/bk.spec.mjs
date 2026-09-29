@@ -220,6 +220,32 @@ test.describe("engine for books (in the app)", () => {
     expect(await page.evaluate(() => { const a = window.__splashery.player.pictures.api; return [a.time, a.duration, a.seek(3)]; })).toEqual([0, 0, false]); // prettier-ignore
   });
 
+  test("a set of pictures can be put in a new order (pics.reorder, names, thumb)", async ({
+    page,
+  }) => {
+    await ready(page);
+    await page.evaluate(() => window.__splashery.app.chooseToy("photo-album"));
+    await waitSheets(page);
+    const r = await page.evaluate(async () => {
+      const api = window.__splashery.player.pictures.api;
+      const names = api.names;
+      api.go(2);
+      const shown = api.nameOf(api.page);
+      const bad = [api.reorder([0, 0, 1, 2, 3, 4]), api.reorder([0, 1]), api.reorder(null)];
+      const ok = api.reorder(names.map((_, i) => names.length - 1 - i));
+      const thumb = await api.thumb(0, 40);
+      return { names, bad, ok, now: api.names, shown, still: api.nameOf(api.page), thumb: thumb && [thumb.width, thumb.height] }; // prettier-ignore
+    });
+    expect(r.names.length).toBe(6);
+    expect(r.bad).toEqual([false, false, false]);
+    expect(r.ok).toBe(true);
+    expect(r.now).toEqual([...r.names].reverse());
+    // The picture on show stays on show, and its pages are built again.
+    expect(r.still).toBe(r.shown);
+    expect(Math.max(...r.thumb)).toBe(40);
+    await waitSheets(page);
+  });
+
   test("a recipe can draw on a picture before it becomes splats (pictures.decorate)", async ({
     page,
   }) => {
