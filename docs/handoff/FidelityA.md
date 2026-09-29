@@ -116,54 +116,55 @@ Scans: none needs a better capture to pass at phone size except the Mandelbrot t
 detail reads as blue noise); the planet's cloud shell has a ragged edge.
 
 1. Klein bottle (`klein-bottle`, kit, 5): Heavy dark speckle all over the tube and see-through gaps;
-   density 0.8 and random placement.
+   **Fixed in this lane.** density 0.8 and random placement.
 2. Desk lamp (`lamp`, kit, 5): Base and shade speckled with see-through holes, blotchy light beam;
-   built at density 0.45. **Fixed in this lane.**
+   **Fixed in this lane.** built at density 0.45. **Fixed in this lane.**
 3. Alarm clock (`clock`, kit, 5): White dial covered in dark speckle and gray blobs from the case's
-   inside; chrome rim speckled. **Fixed in this lane.**
+   **Fixed in this lane.** inside; chrome rim speckled. **Fixed in this lane.**
 4. Kite (`kite`, kit, 5): Sail heavily speckled and sparse (density 0.16). **Fixed in this lane.**
 5. Penguin (`penguin`, kit, 5): White belly and face heavily speckled with dark flecks from the
-   black back. **Fixed in this lane.**
+   **Fixed in this lane.** black back. **Fixed in this lane.**
 6. Hockey puck (`hockey-puck`, kit, 5): Gray see-through haze around the outline, mottled top, harsh
-   stripe knurling; small in its frame. **Fixed in this lane.**
+   **Fixed in this lane.** stripe knurling; small in its frame. **Fixed in this lane.**
 7. Snow globe (`snow-globe`, kit, 4): Base heavily speckled; the dome's snow reads as noise; the
-   tree and snowman are fine.
+   **Fixed in this lane.** tree and snowman are fine.
 8. White blood cell (`white-blood-cell`, kit, 4): Membrane (k.radial) mottled and see-through in
    places; nucleus shows as blur.
 9. Desk fan (`desk-fan`, kit, 4): Chrome cage wires speckled black and white; blades speckled.
-   **Fixed in this lane.**
+   **Fixed in this lane.** **Fixed in this lane.**
 10. Sailboat (`sailboat`, kit, 4): White sails and hull heavily speckled with dark flecks; the sea
-    is grainy. **Fixed in this lane.**
+    **Fixed in this lane.** is grainy. **Fixed in this lane.**
 11. Paper plane (`paper-plane`, kit, 4): Lined paper speckled with dark flecks; density 0.5. **Fixed
-    in this lane.**
+    **Fixed in this lane.** in this lane.**
 12. Ocean liner (`ocean-liner`, kit, 4): White superstructure and hull speckled; the sea around it
     grainy.
 13. Marble (`marble`, kit, 4): Glass marble reads as white speckle over the blue swirl.
 14. Washington Monument (`washington-monument`, kit, 4): Marble shaft speckled dark; flag ring busy.
+    **Fixed in this lane.**
 15. Jet airliner (`jet`, kit, 4): White fuselage speckled with dark flecks. **Fixed in this lane.**
 16. Shuttlecock (`shuttlecock`, kit, 4): White feathers speckled with dark flecks; the blue band
-    grainy. **Fixed in this lane.**
+    **Fixed in this lane.** grainy. **Fixed in this lane.**
 17. Coffee (`coffee`, kit, 4): White saucer and cup speckled dark; the foam art speckled. **Fixed in
-    this lane.**
+    **Fixed in this lane.** this lane.**
 18. Jelly (`jelly`, kit, 4): White plate heavily speckled; the jelly's highlights are blotchy.
-    **Fixed in this lane.**
+    **Fixed in this lane.** **Fixed in this lane.**
 19. Newton's cradle (`newtons-cradle`, kit, 4): Chrome balls speckled black and white; the rails a
-    little speckled. **Fixed in this lane.**
+    **Fixed in this lane.** little speckled. **Fixed in this lane.**
 20. Taco (`taco`, kit, 4): White plate heavily speckled. **Fixed in this lane.**
 21. Owl (`owl`, kit, 4): Cream belly and face speckled with dark flecks. **Fixed in this lane.**
 22. Snowman (`snowman`, kit, 4): White snowballs speckled; the scarf speckled. **Fixed in this
-    lane.**
+    **Fixed in this lane.** lane.**
 23. Pancakes (`pancakes`, kit, 4): White plate heavily speckled. **Fixed in this lane.**
 24. Origami crane (`origami-crane`, kit, 4): Paper speckled and sparse (density 0.18); small in its
-    frame. **Fixed in this lane.**
+    **Fixed in this lane.** frame. **Fixed in this lane.**
 25. American football (`american-football`, kit, 4): Pebbled leather reads as grain; the laces
-    speckled. **Fixed in this lane.**
+    **Fixed in this lane.** speckled. **Fixed in this lane.**
 26. Butterfly (`butterfly`, kit, 3): Wing pattern reads as fine noise at phone size; white rim dots
     speckle.
 27. Soap bubbles (`soap-bubbles`, kit, 3): See-through by design, but the film looks blotchy and
     grainy rather than smooth; density 0.7.
 28. Flying saucer (`ufo`, kit, 3): Saucer speckled with dark flecks; the beam is soft but blotchy.
-    **Fixed in this lane.**
+    **Fixed in this lane.** **Fixed in this lane.**
 29. Paramecium (`paramecium`, kit, 3): Cilia fringe reads as fuzz (by design); body speckled.
 30. Amoeba (`amoeba`, kit, 3): Body translucent by design but its surface is speckled white.
 31. Storybook (`book`, kit, 3): Paper pages speckled; letters fine.
@@ -217,7 +218,7 @@ detail reads as blue noise); the planet's cloud shell has a ragged edge.
 76. Gummy bear (`gummy-bear`, kit, 3): Translucent red body reads as speckle.
 77. Apple (`apple`, kit, 3): Red skin flecked with white.
 78. Tooth (`tooth`, kit, 3): White enamel flecked with yellow.
-79. Candle (`candle`, kit, 3): White wax speckled.
+79. Candle (`candle`, kit, 3): White wax speckled. **Fixed in this lane.**
 80. Boiled egg (`egg`, kit, 3): Egg cup and shell flecked with white.
 81. Squash ball (`squash-ball`, kit, 3): A gray see-through haze around the outline (the rim shell)
     makes it look blurred.
