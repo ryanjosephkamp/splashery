@@ -1732,6 +1732,9 @@ function jetBuild(k, o) {
     { grid: 80 },
   );
   k.add(fus, {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     rot: [0, 0, -90],
     flat: 0.2,
     interior: 0.05,
@@ -1796,19 +1799,35 @@ function jetBuild(k, o) {
     // Engines on pylons.
     const e = [0.18, -0.42, 0.88 * s];
     k.add(k.cylinder(0.16, 0.66, { caps: false }), {
+      even: true,
+      opacity: 1,
+      jitter: 0.015,
       pos: e,
       rot: [0, 0, -90],
       flat: 0.2,
       color: (c) => lit(c.p[0] > 0.45 ? "#c9ccd1" : white, c),
     });
-    k.add(k.disc(0.155), { pos: add(e, [0.33, 0, 0]), rot: [0, 0, -90], color: "#1d1f24" });
+    k.add(k.disc(0.155), {
+      even: true,
+      opacity: 1,
+      jitter: 0.015,
+      pos: add(e, [0.33, 0, 0]),
+      rot: [0, 0, -90],
+      color: "#1d1f24",
+    });
     k.add(k.cone(0.06, 0.0, 0.1), {
+      even: true,
+      opacity: 1,
+      jitter: 0.015,
       pos: add(e, [0.36, 0, 0]),
       rot: [0, 0, -90],
       weight: 3,
       color: "#b9bcc2",
     });
     k.add(k.cone(0.12, 0.08, 0.14, { caps: false }), {
+      even: true,
+      opacity: 1,
+      jitter: 0.015,
       pos: add(e, [-0.39, 0, 0]),
       rot: [0, 0, 90],
       color: "#6d7078",
@@ -1871,6 +1890,9 @@ function sailboatBuild(k, o) {
   });
   // A little cabin with portholes, and a lifebuoy.
   k.add(roundBox(0.85, 0.24, 0.56, 0.072), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     ...S,
     pos: [-0.1, top(0.45) + 0.1, 0],
     color: (c) => {
@@ -1882,6 +1904,9 @@ function sailboatBuild(k, o) {
     },
   });
   k.add(k.torus(0.1, 0.03), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     ...S,
     pos: [-0.72, top(0.2) + 0.2, 0.43],
     rot: [90, 0, 0],
@@ -1913,7 +1938,7 @@ function sailboatBuild(k, o) {
     },
     { grid: 48, thick: 0.01 },
   );
-  k.add(main, { ...S, color: sailColor });
+  k.add(main, { even: true, opacity: 1, jitter: 0.015, ...S, color: sailColor });
   const tack = [1.22, top(1) + 0.05, 0];
   const head = [mx + 0.05, 2.8, 0];
   const clew = [-0.1, 0.62, 0.3];
@@ -1926,7 +1951,7 @@ function sailboatBuild(k, o) {
     },
     { grid: 40, thick: 0.01 },
   );
-  k.add(jib, { ...S, color: sailColor });
+  k.add(jib, { even: true, opacity: 1, jitter: 0.015, ...S, color: sailColor });
   // A pennant at the masthead.
   k.add(
     quad(
@@ -1937,6 +1962,9 @@ function sailboatBuild(k, o) {
       [mx - 0.4, mTop - 0.08, 0],
     ),
     {
+      even: true,
+      opacity: 1,
+      jitter: 0.015,
       ...S,
       weight: 2,
       kind: "sway",
@@ -2492,6 +2520,9 @@ function ufoBuild(k) {
     { grid: 96, thick: 0.14 },
   );
   k.add(hull, {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     ...S,
     interior: 0.05,
     core: "#6c7078",
@@ -2509,9 +2540,20 @@ function ufoBuild(k) {
     },
   });
   // The pilot: a small green friend under a glass dome.
-  k.add(k.sphere(0.17), { ...S, pos: [0, 0.47, 0], weight: 1.5, color: (c) => lit("#6fd35a", c) });
+  k.add(k.sphere(0.17), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
+    ...S,
+    pos: [0, 0.47, 0],
+    weight: 1.5,
+    color: (c) => lit("#6fd35a", c),
+  });
   for (const s of [-1, 1]) {
     k.add(k.ellipsoid(0.045, 0.06, 0.03), {
+      even: true,
+      opacity: 1,
+      jitter: 0.015,
       ...S,
       pos: [Math.sin(0.55 + s * 0.35) * 0.15, 0.5, Math.cos(0.55 + s * 0.35) * 0.15],
       rot: [0, ((0.55 + s * 0.35) * 180) / Math.PI, 0],
@@ -2521,6 +2563,9 @@ function ufoBuild(k) {
     });
     rod(k, [s * 0.06, 0.6, 0], [s * 0.12, 0.75, 0], 0.01, { ...S, weight: 4, color: "#5fbf4c" });
     k.add(k.sphere(0.03), {
+      even: true,
+      opacity: 1,
+      jitter: 0.015,
       ...S,
       pos: [s * 0.12, 0.76, 0],
       weight: 4,
@@ -2529,6 +2574,8 @@ function ufoBuild(k) {
     });
   }
   k.add(k.sphere(0.46), {
+    even: true,
+    jitter: 0.015,
     ...S,
     pos: [0, 0.3, 0],
     scale: [1, 0.95, 1],
@@ -2538,6 +2585,8 @@ function ufoBuild(k) {
   });
   // A glowing ring underneath.
   k.add(k.torus(0.5, 0.06), {
+    opacity: 1,
+    jitter: 0.015,
     ...S,
     pos: [0, -0.28, 0],
     weight: 2,
@@ -2552,6 +2601,9 @@ function ufoBuild(k) {
   for (let i = 0; i < 16; i++) {
     const a = (i / 16) * TAU;
     k.add(k.sphere(0.055), {
+      even: true,
+      opacity: 1,
+      jitter: 0.015,
       part: lights,
       pos: [Math.sin(a) * 1.46, 0.035, Math.cos(a) * 1.46],
       weight: 4,
@@ -2581,6 +2633,7 @@ function ufoBuild(k) {
     };
   });
   k.add(k.disc(1.08), {
+    jitter: 0.015,
     part: beam,
     pos: [0, ground + 0.012, 0],
     pattern: false,
@@ -2588,6 +2641,9 @@ function ufoBuild(k) {
     color: (c) => (c.n[1] < 0 ? null : mix("#e8fff9", "#8ff0d4", c.v)),
   });
   k.add(k.cylinder(1.45, 0.08), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     pos: [0, ground - 0.04, 0],
     flat: 0.2,
     color: (c) => {
@@ -2599,24 +2655,40 @@ function ufoBuild(k) {
   const C = { part: cow, flat: 0.25, weight: 1.6 };
   const spots = (c) => (c.noise(c.p[0] * 9, c.p[1] * 9, c.p[2] * 9) > 0.25 ? "#1d1d1d" : "#f7f5f0");
   k.add(roundBox(0.5, 0.26, 0.26, 0.117), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     ...C,
     pos: [0, -1.45, 0],
     color: (c) => lit(spots(c), c),
   });
   k.add(roundBox(0.16, 0.15, 0.14, 0.063), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     ...C,
     pos: [0.3, -1.36, 0],
     color: (c) => lit(c.p[0] > 0.36 ? "#f2a7a7" : "#f7f5f0", c),
   });
   for (const s of [-1, 1]) {
     k.add(k.sphere(0.022), {
+      even: true,
+      opacity: 1,
+      jitter: 0.015,
       ...C,
       pos: [0.34, -1.31, 0.07 * s],
       weight: 4,
       pattern: false,
       color: "#111",
     });
-    k.add(k.ellipsoid(0.05, 0.02, 0.03), { ...C, pos: [0.27, -1.3, 0.1 * s], color: "#f7f5f0" });
+    k.add(k.ellipsoid(0.05, 0.02, 0.03), {
+      even: true,
+      opacity: 1,
+      jitter: 0.015,
+      ...C,
+      pos: [0.27, -1.3, 0.1 * s],
+      color: "#f7f5f0",
+    });
     for (const x of [-0.17, 0.17])
       rod(k, [x, -1.55, 0.08 * s], [x, -1.72, 0.08 * s], 0.03, { ...C, color: "#f7f5f0" });
   }

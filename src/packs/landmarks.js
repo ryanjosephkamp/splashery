@@ -594,9 +594,19 @@ function monumentBuild(k) {
     const b = r([hb, y0, hb]);
     const c = r([ht, y0 + H, ht]);
     const d = r([-ht, y0 + H, ht]);
-    k.add(quad(k, a, b, c, d), { flat: 0.2, weight: 2.2, color: face });
+    k.add(quad(k, a, b, c, d), {
+      even: true,
+      opacity: 1,
+      jitter: 0.015,
+      flat: 0.2,
+      weight: 2.2,
+      color: face,
+    });
     const apex = [0, y0 + tip, 0];
     k.add(quad(k, d, c, apex, apex), {
+      even: true,
+      opacity: 1,
+      jitter: 0.015,
       flat: 0.2,
       weight: 2.2,
       color: (cc) => lit(marble, cc, 0.62),
@@ -616,12 +626,17 @@ function monumentBuild(k) {
     },
   };
   k.add(k.box(0.26, 0.03, 0.26), {
+    opacity: 1,
+    jitter: 0.015,
     ...shadow,
     pos: [0, y0 - 0.015, 0],
     flat: 0.2,
     color: (c) => lit("#d9d2c2", c),
   });
   k.add(k.cylinder(0.46, 0.02), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     ...shadow,
     pos: [0, y0 - 0.04, 0],
     flat: 0.2,
@@ -640,7 +655,15 @@ function monumentBuild(k) {
       ],
       { grid: 64, thick: 0.05 },
     ),
-    { ...shadow, flat: 0.2, pattern: false, color: (c) => grass(c, "#62a34a") },
+    {
+      even: true,
+      opacity: 1,
+      jitter: 0.015,
+      ...shadow,
+      flat: 0.2,
+      pattern: false,
+      color: (c) => grass(c, "#62a34a"),
+    },
   );
   // The sun that casts it, built at noon behind the monument (hidden at
   // rest; drive() carries it along its arc, and it fades in and out by
@@ -648,6 +671,9 @@ function monumentBuild(k) {
   const sun = k.part("sun", { pivot: monSun(0.5) });
   const sunFade = { kind: "fade", channel: 1, params: [0.02, -0.4] };
   k.add(k.sphere(0.065), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     part: sun,
     pos: monSun(0.5),
     weight: 4,
