@@ -195,6 +195,14 @@ can carry a web address instead, so a link or an embed opens the picture from yo
 (docs/SCENE-SCHEMA.md). For now the toys are behind a labs switch: open the site with `?labs=1` to
 see the **Picture lab** on the "Pictures and pages" shelf (`?labs=0` hides it again).
 
+## The Tinkerer's Manual
+
+[The Tinkerer's Manual](https://ryanjosephkamp.github.io/splashery/manual/) (`manual/`, linked from
+the About tab) explains how to program splats, level by level: what one splat is (the Gaussian and
+its covariance), how a toy's recipe is built, and the splat equation language, with a gallery of
+programs that open in the **Splat equation** toy (math shelf, labs). `node tools/manual-pdf.mjs`
+prints it to `manual/tinkerers-manual.pdf` (letter size, numbered pages).
+
 ## Bring your own splat
 
 Drop a file anywhere on the page, or use **Your own splat → Open a splat file…**:

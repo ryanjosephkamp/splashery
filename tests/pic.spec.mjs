@@ -131,11 +131,12 @@ test.describe("scenes: toy.media", () => {
     expect(v2.toy).toEqual({ kind: "builtin", id: "cactus" });
   });
 
-  test("the Picture lab is a labs toy on its own shelf, and only it", () => {
+  test("the Picture lab is a labs toy on its own shelf", () => {
     const t = findToy("picture-lab");
     expect(t.labs).toBe(true);
     expect(t.category).toBe("pictures");
-    expect(TOYS.filter((x) => x.labs).map((x) => x.id)).toEqual(["picture-lab"]);
+    // Other picture toys join it behind the labs switch.
+    expect(TOYS.filter((x) => x.labs).map((x) => x.id)).toContain("picture-lab");
     for (const f of fs.readdirSync(new URL("./fixtures/pic/", import.meta.url)))
       expect(fs.statSync(new URL(`./fixtures/pic/${f}`, import.meta.url)).size, f).toBeLessThan(200_000); // prettier-ignore
   });
