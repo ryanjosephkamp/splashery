@@ -810,6 +810,16 @@ export function createUI(app) {
     gif: ".gif,image/gif",
     video: "video/*,.mp4,.webm,.mov,.m4v",
   };
+  // The web-address box names only what this toy opens, in its accept order:
+  // "https://… a video, GIF or picture" (the owner's review, September 29, 2026).
+  const MEDIA_WORDS = { pdf: "PDF", image: "picture", gif: "GIF", video: "video" };
+  function mediaPlaceholder(kinds) {
+    const words = kinds.map((k) => MEDIA_WORDS[k]).filter(Boolean);
+    if (!words.length) return "https://…";
+    const list =
+      words.length > 1 ? `${words.slice(0, -1).join(", ")} or ${words.at(-1)}` : words[0];
+    return `https://… a ${list}`;
+  }
   function renderInputMedia(media, error) {
     const wrap = document.createElement("div");
     wrap.className = "input-media";
@@ -865,7 +875,7 @@ export function createUI(app) {
     const url = document.createElement("input");
     url.type = "url";
     url.id = "toy-media-url";
-    url.placeholder = "https://… a PDF, picture, GIF or video";
+    url.placeholder = mediaPlaceholder(kinds);
     url.spellcheck = false;
     url.autocomplete = "off";
     url.setAttribute("aria-label", "A web address to open");
@@ -1813,6 +1823,40 @@ export function createUI(app) {
   );
   els.panes.addEventListener("touchend", () => (pull = null), { passive: true });
   applySheet();
+
+  // ---- A toy's labels (lane Anatomy) ------------------------------------------------
+  // A kit toy's drive() may set out.legend = { title, items: [{ text, head,
+  // on, dim }] }: a list of names shown as page text beside the stage while
+  // it is set (the anatomy atlas's parts). `head` makes an item a heading,
+  // `on` highlights it and `dim` grays it. The list is rebuilt only when it
+  // changes, and hidden as soon as a frame leaves it unset.
+  const legendBox = $("toy-legend");
+  let legendKey = "";
+  app.player?.on("frame", () => {
+    const lg = app.player.motion?.out?.legend || null;
+    const key = lg ? JSON.stringify(lg) : "";
+    if (key === legendKey) return;
+    legendKey = key;
+    legendBox.textContent = "";
+    legendBox.hidden = !lg;
+    if (!lg) return;
+    if (lg.title) {
+      const title = document.createElement("p");
+      title.className = "toy-legend-title";
+      title.textContent = lg.title;
+      legendBox.appendChild(title);
+    }
+    const list = document.createElement("ul");
+    for (const it of lg.items || []) {
+      const li = document.createElement("li");
+      li.textContent = it.text;
+      if (it.head) li.classList.add("head");
+      if (it.on) li.classList.add("on");
+      if (it.dim) li.classList.add("dim");
+      list.appendChild(li);
+    }
+    legendBox.appendChild(list);
+  });
 
   // ---- Toy help (lane Help) ---------------------------------------------------------
   // A short how-to-play line when a new toy opens (picked from the shelf,
