@@ -220,8 +220,8 @@ carries them too until then.
 
 - Early in a turn, a thin band of the page underneath can show through the turning page next to the
   spine (both are close together there, and the ink sits in front of its paper). The page underneath
-  shows from about a quarter of the way through the turn; before that its margin is blank paper
-  anyway.
+  shows once the turning page has lifted about 17 degrees (a pale strip of the page block shows at
+  the fore-edge until then); showing it sooner mixes the two pages' text.
 - A page with a much finer build than the screen (zoomed out after zooming in) is rebuilt after a
   quarter second, as in the Picture lab.
 - The left page block is a fixed thickness (it doesn't grow as you read).

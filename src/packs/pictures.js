@@ -240,6 +240,9 @@ function bookLayout(st, N, time, uAt = null) {
   const u = uAt ?? (a ? (a.t0 === null ? 0 : clamp01((time - a.t0) / a.dur)) : 1);
   const v = easeIO(u);
   const bend = Math.sin(Math.PI * u);
+  // The page under a turning leaf shows once the leaf has lifted clear of it
+  // (about 17 degrees): before that the two lie too close and mix.
+  const lifted = Math.PI * v > 0.3;
   const K = a ? a.from : BOOK.K;
   if (st.bound === "top") {
     // Leaf j here is sheet j; sheet 0 sits in slot 0 like the others.
@@ -256,7 +259,7 @@ function bookLayout(st, N, time, uAt = null) {
       sheet(K - 1, { angle: OVER, fv: 0, ahead: 1 });
       sheet(K, { fv: 1 });
     } else if (a.type === "fwd") {
-      sheet(K + 1, { fv: u > 0.06 ? 1 : 0, ahead: 1 });
+      sheet(K + 1, { fv: lifted ? 1 : 0, ahead: 1 });
       sheet(K, { angle: OVER * v, curl: -st.curl * bend, fv: u < 1 ? 1 : 0 });
     } else if (a.type === "back") {
       sheet(K, { fv: u < 0.97 ? 1 : 0 });
@@ -290,14 +293,14 @@ function bookLayout(st, N, time, uAt = null) {
   } else if (a.type === "fwd") {
     if (K >= 3) leaf(K - 2, { angle: Math.PI, ahead: 1 });
     if (K >= 2) leaf(K - 1, { angle: Math.PI, bv: u < 0.97 ? 1 : 0 });
-    leaf(K + 1, { fv: u > 0.12 ? 1 : 0, ahead: 1 });
+    leaf(K + 1, { fv: lifted ? 1 : 0, ahead: 1 });
     leaf(K, { angle: Math.PI * v, curl: -st.curl * bend, fv: 1, bv: 1 });
     L.cover = Math.PI;
     L.open = 1;
   } else if (a.type === "back") {
     leaf(K + 1, { ahead: 1 });
     leaf(K, { fv: u < 0.97 ? 1 : 0, ahead: 1 });
-    if (K >= 3) leaf(K - 2, { angle: Math.PI, bv: u > 0.12 ? 1 : 0, ahead: 1 });
+    if (K >= 3) leaf(K - 2, { angle: Math.PI, bv: lifted ? 1 : 0, ahead: 1 });
     leaf(K - 1, { angle: Math.PI * (1 - v), curl: st.curl * bend, fv: 1, bv: 1 });
     L.cover = Math.PI;
     L.open = 1;
