@@ -101,53 +101,54 @@ mid and high tiers, adapt on drag): don't touch those blocks. The laptop is lock
   docs/OPERATING.md, docs/PACKS.md, docs/WORKSTREAMS.md and docs/handoff/history.md (lessons from
   earlier lanes).
 - Your handoff file: create it. Start it with this brief, word for word, under "## Brief", then keep
-  "## State", "## Notes", "## Known issues" and "## For the Operator" current. Note your model at
-  the top of "## State" (the blog post compares the two models).
-- Shared lists: edit only your own entries in src/toys.js, src/toy-sounds.js, src/toy-help.js (a
-  how-to line and an About text per toy, following docs/handoff/Help.md), tools/toy-plan.json,
-  CREDITS.md and tools/assets.json. Regenerate docs/TOY-PLAN.md with `node tools/toy-plan.mjs`;
-  never merge it by hand.
-- Never edit tests/taps.spec.mjs. Your own tests go in tests/<prefix>.spec.mjs. If a finished lane's
-  test breaks because of a count or a list your work changes, don't edit it: say which test and why
-  in your message, and the Operator fixes it.
-- Assets: CC0, CC BY or public domain only, checked on the live source page and credited
-  (CREDITS.md, tools/assets.json and the toy's in-app credit). Never BY-SA or NC. No logos, brand
-  names or insignia.
-- Review: post clips and cards to the Effect review page,
-  https://claude.ai/artifact/NCsg9V5SzFY3Mnwuwgq7pi, as OPERATING.md's "Steps for a lane" says.
-  Judge every effect as motion at phone size against the effect quality rules before you post it.
-  The Operator has made your lane's record. Don't republish the page, and never write to "verdicts".
-- Push your work in progress to your branch about every hour, so it isn't only in your container,
-  and open your draft PR early. Many lanes run at once now, so main moves often: merge it into your
-  branch before each push (never rebase a pushed branch) and keep both sides of any conflict.
-- Before every push, follow "Before every push" in CLAUDE.md: the full Playwright suite
-  (SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium npx playwright test), prettier,
-  `node tools/us-english.mjs --diff`, `node tools/check-packs.mjs <pack>` for new or changed toys, a
-  contact sheet and thumbnails, and your own screenshots at 390×844 and 1440×900. Then put back the
-  standard screenshots (`node tools/upkeep.mjs --restore-shots`) and any other lane's screenshots
-  your branch didn't change. Container restarts can kill a long run: run the suite in three parts
-  (`--shard=1/3`, `2/3`, `3/3`, each started with setsid nohup and logged to its own file) and note
-  each part's result as it finishes, so a restart only repeats one part.
-- PR: one draft PR against main with the five sections (Summary, Verification, Deviations, Known
-  issues, What was cut), and the model that built it in the Summary. When main moves, merge it into
-  your branch.
-- After you post your cards, check the owner's marks (the "verdicts" collection, ids starting with
-  your prefix) about once an hour with a scheduled check-in (send_later). Fix every "fix" in the
-  same PR, post the new clip as a "-r2" card, and set replacedBy on the old one. Stop the check-ins
-  once your PR is merged or closed.
-- Finish every working turn with a short final message that starts with "READY:" (PR link, card ids,
-  test results, anything for the Operator), "WORKING:" (what's left), or "BLOCKED:" (exactly what
-  you need).
-
-## State
+  "## State
 
 Model: Opus 5.5 (claude-opus-5-5), default effort.
 
-- September 29, 2026: started. Reading the engine (stage, player, kit, effects, the Lab lane's
-  `gpuField`) and planning the design.
+- September 29, 2026: the fluid engine and the Fluid lab are built and on the branch (draft PR
+  #121). Clips and cards next.
+- Engine (`src/fluids/`, docs/FLUIDS.md): position-based fluids with a wall density term, cohesion
+  and XSPH viscosity (water, soda, syrup, honey, lava), diffuse spray, foam and bubbles (soda fizz
+  and a foam head), curl-field smoke and steam, flames with a real color ramp, sparks and a smoke
+  hand-off, SDF colliders (floor, box, sphere, cylinder, glass, bowl), and a glass drawn with the
+  view (`kind: "vessel"`). Liquids are drawn as anisotropic splats (Yu and Turk 2013) in a fluid
+  layer with its own work-buffer program. The solver runs in a Web Worker on people's devices and on
+  the page for the tools and tests (automated browsers); `?fluids=worker|sync` picks.
+- Recipe API: `k.fluid(spec)` in build, `out.fluid[name]` in drive; docs/PACKS.md "5d. Fluids".
+- Toy: Fluid lab (labs, Lab shelf) with a Scene choice (Glass, Splash, Candle, Hot cup) and a Liquid
+  choice (Water, Soda, Honey, Lava); sounds through cues, a how-to and an About text, a plan entry,
+  a thumbnail.
+- Tests: `tests/fl.spec.mjs` (8 tests).
 
 ## Notes
 
+- Engine hooks (small, additive, marked "Fluids"): `src/stage.js` (`addLayer`, `setLayerUniforms`,
+  `removeLayer`, `destroyLayer`, layers in `setUniforms`, `clearToy` and `buryToys`),
+  `src/player.js` (`startFluids`, a line in the frame loop, two lines in `disposeProcedural`),
+  `src/kit.js` (`k.fluid`). No change to any other toy's path: without `k.fluid` nothing runs.
+- The solver costs about 4.4 µs per particle per 1/120 s step on this container's CPU. Budgets are
+  per tier (low 0.35, mid 0.45, high 1, max 1.35 of the recipe's budget); a liquid on a lower tier
+  gets fewer, larger particles so the same volume pours. `tools/fl-measure.mjs` measures it with
+  Chromium's CPU throttling as the phone stand-in.
+- Lessons: a kit-built glass shows its wall as grain or moiré (kit splats can't depend on the view),
+  so the engine draws glass itself with a Fresnel falloff. Without a wall density term, particles
+  pack against a wall a third tighter and the level drops. Emitting in flat layers draws a stream as
+  a stack of pancakes; staggering along the flow and drawing fast particles along their velocity
+  fixes it. Soda foam must float above the liquid's top layer or the opaque surface hides it. Smoke
+  wants the Gaussian kernel, liquids the sharp one (the toy picks per scene).
+
 ## Known issues
 
+- Colliders don't move with parts yet (no tipping jug, no stirring spoon).
+- On the mid tier's stand-in (4× CPU throttling) the glass pour's solver takes a little more than a
+  30 fps frame; it runs in the worker, so the drawing keeps its rate and the pour runs a little
+  slower than real time.
+- The soda's foam head covers the middle of the glass more than its edge.
+
 ## For the Operator
+
+- PACKS.md: I added my own section "5d. Fluids" (the brief assigns it to this lane).
+- New tools: `tools/fl-clip.mjs` (the cards' clips) and `tools/fl-measure.mjs` (the phone budget
+  card). Neither needs a new dependency.
+- README line (for you to add): "Fluids: liquids, smoke and flames simulated as particles and drawn
+  as splats (`src/fluids/`, docs/FLUIDS.md)."
