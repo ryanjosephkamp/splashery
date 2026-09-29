@@ -1376,6 +1376,29 @@ export const TOY_HELP = {
     about:
       "A half adder is a tiny circuit that adds two bits, binary digits that are each 0 or 1. It uses two logic gates: an XOR gate gives the sum bit, which is 1 when exactly one input is 1, and an AND gate gives the carry bit, which is 1 when both are. Two half adders make a full adder, and a chain of full adders lets a computer add numbers of any size.\n\nTap it: switches A and B flip to 1, and light runs along the wires into the gates. The XOR gives 0, so the sum lamp stays dark, and the AND lights the carry lamp. The board reads 1 + 1 = 10, which is two in binary. Then the switches flip back.",
   },
+  // ---- Machines that compute (lane Machines A) ----
+  "turing-machine": {
+    howTo: "Tap it to run the program on the tape. Type your own number in the Toy tab.",
+    about:
+      "In 1936 the mathematician Alan Turing imagined the simplest possible computer: a long tape of squares, a head that reads and writes one square at a time, and a short table of rules. Each rule says: in this state, reading this symbol, write this, move left or right, and switch to that state. Anything a modern computer can work out, a machine like this can too, given enough tape and time.\n\nTap it: the head reads a tile, flips it to write, and the tape slides, following the lit row of the rule card, until the machine halts with a bell. Add one turns 1011 into 1100 as the carry ripples left; tap again to count on. The busy beavers write as many 1s as a machine of their size can and still halt.",
+  },
+  "difference-engine": {
+    howTo:
+      "Tap to turn the crank once; tap again to keep cranking. Type your own polynomial in the Toy tab.",
+    about:
+      "Charles Babbage designed his Difference Engine No. 2 in the 1840s to print mathematical tables without human mistakes. It was never built in his lifetime. In 1991, a team at a museum in London finished its calculating section from his drawings, and it worked. It uses the method of differences: for a polynomial, the differences between neighboring values settle into a pattern, so each new value needs nothing but addition.\n\nTap it: the crank turns, each difference is added into its neighbor, the wheels click round, and carries ripple up with little levers. For n², the value column shows 1, 4, 9, 16 and 25 in turn. Type your own polynomial, up to x³, and pick the starting x.",
+  },
+  "enigma-machine": {
+    howTo:
+      "Tap to type your message in code; tap again to decode it. Type your own message in the Toy tab.",
+    about:
+      "The Enigma was a cipher machine that German forces used to keep radio messages secret in World War II. Each key press steps the rotors on like an odometer, and an electric current runs through the plugboard, three wired rotors and a reflector, lighting a different letter on the lampboard. Because the rotors keep turning, the same letter comes out differently each time. Polish mathematicians first broke it in 1932.\n\nTap it: each key goes down, the rotors step (with the middle rotor's real double step), and the coded letter lights up and is written on the pad. Tap again: the coded letters, typed from the same start, give your message back. It uses the historical wirings of rotors I, II and III and reflector B.",
+  },
+  bombe: {
+    howTo: "Tap it to search for the Enigma setting. Type a message to break in the Toy tab.",
+    about:
+      "The Bombe was the codebreaking machine of Bletchley Park in England. Alan Turing designed it in 1939, building on a Polish machine, and Gordon Welchman added the diagonal board that made it far faster. Its rows of drums copy Enigma rotors. From a crib, a few words the codebreakers guessed were in a message, it tried rotor settings at great speed and stopped when the logic held. About 200 were built, run day and night mostly by members of the Women's Royal Naval Service, the Wrens.\n\nTap it: the drums spin through the settings, stop, and the lamp lights; then the message reads out. Simplified here: the plugboard is taken as known, and the drums turn far slower than the real ones.",
+  },
 
   // ---- Pictures and pages ---------------------------------------------------------------
   "picture-lab": {

@@ -104,51 +104,56 @@ locked.
   docs/OPERATING.md, docs/PACKS.md, docs/WORKSTREAMS.md and docs/handoff/history.md (lessons from
   earlier lanes).
 - Your handoff file: create it. Start it with this brief, word for word, under "## Brief", then keep
-  "## State", "## Notes", "## Known issues" and "## For the Operator" current. Note your model at
-  the top of "## State" (the blog post compares the two models).
-- Shared lists: edit only your own entries in src/toys.js, src/toy-sounds.js, src/toy-help.js (a
-  how-to line and an About text per toy, following docs/handoff/Help.md), tools/toy-plan.json,
-  CREDITS.md and tools/assets.json. Regenerate docs/TOY-PLAN.md with `node tools/toy-plan.mjs`;
-  never merge it by hand.
-- Never edit tests/taps.spec.mjs. Your own tests go in tests/<prefix>.spec.mjs. If a finished lane's
-  test breaks because of a count or a list your work changes, don't edit it: say which test and why
-  in your message, and the Operator fixes it.
-- Assets: CC0, CC BY or public domain only, checked on the live source page and credited
-  (CREDITS.md, tools/assets.json and the toy's in-app credit). Never BY-SA or NC. No logos, brand
-  names or insignia.
-- Review: post clips and cards to the Effect review page,
-  https://claude.ai/artifact/NCsg9V5SzFY3Mnwuwgq7pi, as OPERATING.md's "Steps for a lane" says.
-  Judge every effect as motion at phone size against the effect quality rules before you post it.
-  The Operator has made your lane's record. Don't republish the page, and never write to "verdicts".
-- Push your work in progress to your branch about every hour, so it isn't only in your container,
-  and open your draft PR early. Many lanes run at once now, so main moves often: merge it into your
-  branch before each push (never rebase a pushed branch) and keep both sides of any conflict.
-- Before every push, follow "Before every push" in CLAUDE.md: the full Playwright suite
-  (SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium npx playwright test), prettier,
-  `node tools/us-english.mjs --diff`, `node tools/check-packs.mjs <pack>` for new or changed toys, a
-  contact sheet and thumbnails, and your own screenshots at 390×844 and 1440×900. Then put back the
-  standard screenshots (`node tools/upkeep.mjs --restore-shots`) and any other lane's screenshots
-  your branch didn't change.
-- PR: one draft PR against main with the five sections (Summary, Verification, Deviations, Known
-  issues, What was cut), and the model that built it in the Summary. When main moves, merge it into
-  your branch.
-- After you post your cards, check the owner's marks (the "verdicts" collection, ids starting with
-  your prefix) about once an hour with a scheduled check-in (send_later). Fix every "fix" in the
-  same PR, post the new clip as a "-r2" card, and set replacedBy on the old one. Stop the check-ins
-  once your PR is merged or closed.
-- Finish every working turn with a short final message that starts with "READY:" (PR link, card ids,
-  test results, anything for the Operator), "WORKING:" (what's left), or "BLOCKED:" (exactly what
-  you need).
-
-## State
+  "## State
 
 Model: Opus 5.5 (default effort).
 
-- September 29, 2026: lane started. Handoff file written, draft PR opened. Building the Turing
-  machine first.
+- September 29, 2026: lane started; draft PR #102 opened.
+- All four toys built in `src/packs/computing-history.js` (public, AI and computing shelf): the
+  Turing machine, the difference engine, the Enigma machine and the Turing-Welchman Bombe. Each has
+  its sound (a tap sound in `src/toy-sounds.js`, then cues from `drive()` that follow what it does),
+  its how-to line and About text, a plan entry (`keep`), a thumbnail and tests in
+  `tests/mca.spec.mjs`.
 
 ## Notes
 
+- **Turing machine.** 17 tile slots (15 show; the end ones sit inside the reel housings, where a
+  tile leaving one end wraps round to the other). Each slot is two tokens, the tile showing 0 and
+  the tile showing 1: a flip turns the shown tile edge-on, then brings the other round from edge-on,
+  so no tile ever turns past a quarter turn. Tiles are re-sorted every half tile of tape travel
+  (`out.resort`), or a wrapped tile draws behind the back panel. Programs: Add one (the result stays
+  on the tape, so each tap adds one more and it counts up), Busy beaver 2 states (6 steps, four 1s)
+  and 3 states (13 steps, six 1s). The rule card is built per program, its rows lit by parts; a step
+  counter (seven-segment tokens). Your number: binary up to 12 digits, or a whole number up to 4095.
+- **Difference engine.** Columns X, P(X), Δ1, Δ2, Δ3 of figure wheels (tokens turning about upright
+  shafts, units at the bottom), read through windows in a brass shield. A turn adds in two phases
+  (Δ1 into the value and Δ3 into Δ2, then Δ2 into Δ1), so, as in Babbage's engine, the Δ2 column is
+  set up half a step ahead (it holds the second difference less the third). Carries: a wheel passing
+  9 to 0 sets its lever; the carries then ripple up one wheel at a time. Five digits per column;
+  negatives show as ten's complements. Wheels turned past a quarter turn are re-sorted on the first
+  frame and a few times per turn.
+- **Long press.** The engine has no long press, so the difference engine queues one turn per tap
+  instead: tap three times and it cranks three turns in a row (it keeps its own clock from
+  `info.time`; the pulse lasts 12 s so frames keep coming).
+- **Enigma machine.** Kit-built: no CC0 or CC BY scan was found (the one museum scan on Sketchfab is
+  BY-NC-SA; the CC BY models found are static meshes whose keys and rotors couldn't move as solid
+  parts). Rotors I, II, III, reflector B, rings AAA, start AAA, plugboard AR GK OX. Test vectors
+  pass (AAAAA gives BDZGO; ADU steps to ADV, AEW, BFX). Rotors are parts, re-sorted in their pose
+  after each step (`out.resortPose`). One glow token moves under the lamp that lights. The pad on
+  the lid shows the message, the coded letters (fade channel 0) and the decoded ones (channel 1).
+- **Bombe.** One bank of 12 drum sets (36 drum tokens turning face-on, so draw order holds). The
+  message is coded at a setting taken from the message; its first 12 letters are the crib. The
+  search really tries all 17,576 settings (with the plugboard taken as known) and stops at the first
+  where the crib fits; it may stop on an equivalent setting (WEATHERREPORT stops at BEA for the
+  secret CFA, the same machine state because of the double step). The top drums are shown turning 12
+  times, far slower than the search; the middle and bottom drums step as the search does.
+
 ## Known issues
 
+- The rotor ring letters on the Enigma and the drum faces on the Bombe are too small to read at
+  phone size (the drums show 26 ticks and a red mark at A instead of letters); the setting reads on
+  the Bombe's readout.
+
 ## For the Operator
+
+- No engine change needed. A long press would need one (the difference engine queues taps instead).

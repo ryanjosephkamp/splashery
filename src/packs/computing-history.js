@@ -69,7 +69,7 @@ const GLYPHS = {
   "←": "00000 00100 01000 11111 01000 00100 00000",
   "·": "00000 00000 00000 01100 01100 00000 00000",
   "²": "01100 10010 00100 01000 11110 00000 00000",
-  "Δ": "00100 00100 01110 01110 11111 11111 00000",
+  Δ: "00100 00100 01110 01110 11111 11111 00000",
   "(": "00010 00100 01000 01000 01000 00100 00010",
   ")": "01000 00100 00010 00010 00010 00100 01000",
   "/": "00001 00010 00010 00100 01000 01000 10000",
@@ -380,11 +380,17 @@ function buildTuring(k, o) {
     const x = TM.x(TM.lo + j);
     [TM_ZERO, TM_ONE].forEach((look, b) => {
       const tok = { kind: "token", params: [2 * j + b, 0] };
-      block(k, [w, h, d], [x, 0, 0], (c) => {
-        const edge = Math.min(w / 2 - Math.abs(c.p[0] - x), h / 2 - Math.abs(c.p[1]));
-        const col = c.s.face === 4 || c.s.face === 5 ? look.face : shade(look.face, 0.85);
-        return keep(lit(edge < 0.008 ? shade(col, 0.9) : col, c.n, { amb: 0.7, dif: 0.35, spec: 0.3 })); // prettier-ignore
-      }, { weight: 1.3, ...tok });
+      block(
+        k,
+        [w, h, d],
+        [x, 0, 0],
+        (c) => {
+          const edge = Math.min(w / 2 - Math.abs(c.p[0] - x), h / 2 - Math.abs(c.p[1]));
+          const col = c.s.face === 4 || c.s.face === 5 ? look.face : shade(look.face, 0.85);
+          return keep(lit(edge < 0.008 ? shade(col, 0.9) : col, c.n, { amb: 0.7, dif: 0.35, spec: 0.3 })); // prettier-ignore
+        },
+        { weight: 1.3, ...tok },
+      );
       text(k, String(b), [x, 0, d / 2 + 0.012], 0.019, look.ink, { weight: 10, ...tok });
     });
   }
@@ -409,7 +415,7 @@ function buildTuring(k, o) {
       color: (c) => {
         const a = Math.atan2(c.p[1], c.p[0] - hx);
         const r = Math.hypot(c.p[1], c.p[0] - hx);
-        const spoke = Math.abs(((a / TAU) * 3 + 10) % 1 - 0.5) > 0.36 && r < 0.12 && r > 0.05;
+        const spoke = Math.abs((((a / TAU) * 3 + 10) % 1) - 0.5) > 0.36 && r < 0.12 && r > 0.05;
         if (spoke) return null;
         return keep(lit(r > 0.13 ? shade(BRASS, 0.8) : BRASS, [0, 0, 1], { amb: 0.7, dif: 0.35, spec: 0.5 })); // prettier-ignore
       },
@@ -725,7 +731,7 @@ function dePose(turn, s) {
   const xs = ease(band(s, 3.3, 3.6));
   const x0 = deDigits(turn.st.x, 2);
   const x1 = deDigits(turn.next.x, 2);
-  wheels.x = x0.map((d, j) => d + (((x1[j] - d + 10) % 10) * xs));
+  wheels.x = x0.map((d, j) => d + ((x1[j] - d + 10) % 10) * xs);
   return { wheels, levers, crank: TAU * ease(band(s, 0.05, 3.7)), bell: Math.sin(Math.PI * band(s, 3.55, 3.8)) }; // prettier-ignore
 }
 
@@ -809,7 +815,8 @@ function buildDifference(k, o) {
       color: (c) => {
         const j = Math.round((c.p[1] - y0) / pitch);
         const dy = c.p[1] - (y0 + j * pitch);
-        const win = Math.abs(c.p[0] - col.x) < 0.035 && Math.abs(dy) < 0.048 && j >= 0 && j < col.digits;
+        const win =
+          Math.abs(c.p[0] - col.x) < 0.035 && Math.abs(dy) < 0.048 && j >= 0 && j < col.digits;
         if (win && (c.s.face === 4 || c.s.face === 5)) return null;
         return keep(lit(BRASS, c.n, { amb: 0.62, dif: 0.42, spec: 0.5, pow: 22 })); // prettier-ignore
       },
@@ -869,8 +876,11 @@ function driveDifference(t, c, out, info) {
   if (!data) return;
   const m = data.m;
   const go = c.go ?? 0;
-  // Each tap queues a turn; the engine turns them one after another.
-  if (go > (m.lastGo ?? 0) + 0.02) data.queue++;
+  // Each tap queues a turn; the engine turns them one after another. A tap
+  // is a new tap number, or the pulse jumping back up.
+  const n = info.tap?.n;
+  if (n !== undefined && n !== null ? n !== m.lastN && go > 0 : go > (m.lastGo ?? 0) + 1e-4) data.queue++; // prettier-ignore
+  m.lastN = n;
   m.lastGo = go;
   const now = info.time ?? 0;
   const dt = m.lastTime === undefined ? 0 : clamp(now - m.lastTime, 0, 0.1);
@@ -1014,7 +1024,8 @@ const EN = { key: 0.155, E: 9, rotorR: 0.2, step: TAU / 26, index: (35 * Math.PI
 function enKeyAt(ch, y, z0, dz) {
   for (let r = 0; r < 3; r++) {
     const i = EN_ROWS[r].indexOf(ch);
-    if (i >= 0) return [(i - (EN_ROWS[r].length - 1) / 2) * EN.key + (r === 1 ? 0.02 : 0), y, z0 + r * dz];
+    if (i >= 0)
+      return [(i - (EN_ROWS[r].length - 1) / 2) * EN.key + (r === 1 ? 0.02 : 0), y, z0 + r * dz];
   }
   return [0, y, z0];
 }
@@ -1073,7 +1084,11 @@ function buildEnigma(k, o) {
   for (const ch of AZ) {
     const p = enLampPos(ch);
     k.add(evenCylinder(0.052, 0.052, 0.02, true), { pos: p, even: true, weight: 1.4, flat: 0.25, pattern: false, color: (c) => keep(lit(c.s.cap ? "#d9d6c8" : "#7c7f84", c.n, { amb: 0.8, dif: 0.25, spec: 0.3 })) }); // prettier-ignore
-    text(k, ch, [p[0], p[1] + 0.03, p[2]], 0.011, "#2b2a27", { weight: 16, size: 0.85, rot: [-90, 0, 0] });
+    text(k, ch, [p[0], p[1] + 0.03, p[2]], 0.011, "#2b2a27", {
+      weight: 16,
+      size: 0.85,
+      rot: [-90, 0, 0],
+    });
   }
   const g0 = enLampPos("A");
   k.add(k.disc(0.056), { pos: [g0[0], g0[1] + 0.016, g0[2]], even: true, weight: 2, flat: 0.2, pattern: false, kind: "token", params: [26, 0], color: (c) => keep(mix("#fff3b0", "#ffb83a", Math.hypot(c.p[0] - g0[0], c.p[2] - g0[2]) / 0.056)) }); // prettier-ignore
@@ -1087,7 +1102,10 @@ function buildEnigma(k, o) {
   for (const [x, w] of [[-0.4, 0.07], [0.37, 0.05]]) // prettier-ignore
     k.add(evenCylinder(R * 0.9, R * 0.9, w, true), { pos: [x, rcy, rcz], rot: [0, 0, 90], even: true, weight: 1.2, pattern: false, color: darkSteel }); // prettier-ignore
   EN_ROTOR_X.forEach((x, i) => {
-    const part = k.part(["rotorL", "rotorM", "rotorR"][i], { pivot: [x, rcy, rcz], axis: [1, 0, 0] });
+    const part = k.part(["rotorL", "rotorM", "rotorR"][i], {
+      pivot: [x, rcy, rcz],
+      axis: [1, 0, 0],
+    });
     const ride = { part, pattern: false, even: true };
     // The letter ring: an ivory band with the 26 letters round it.
     k.add(evenCylinder(R, R, 0.1, false), { pos: [x, rcy, rcz], rot: [0, 0, 90], weight: 1.3, flat: 0.25, ...ride, color: (c) => keep(lit("#e8e0c8", c.n, { amb: 0.7, dif: 0.35, spec: 0.3 })) }); // prettier-ignore
@@ -1280,10 +1298,18 @@ function bombeCase(message) {
   for (const ch of msg) h = Math.imul(h ^ ch.charCodeAt(0), 16777619) >>> 0;
   const secret = [1 + (h % 2), (h >>> 3) % 26, (h >>> 9) % 26];
   const mach = enigmaMachine();
-  const coded = mach.type(msg, secret).map((e) => AZ[e.lamp]).join("");
+  const coded = mach
+    .type(msg, secret)
+    .map((e) => AZ[e.lamp])
+    .join("");
   const crib = msg.slice(0, Math.min(BO.sets, msg.length));
   const found = bombeSearch(mach, crib, coded);
-  const plain = found ? mach.type(coded, found.pos).map((e) => AZ[e.lamp]).join("") : "";
+  const plain = found
+    ? mach
+        .type(coded, found.pos)
+        .map((e) => AZ[e.lamp])
+        .join("")
+    : "";
   return { msg, secret, coded, crib, found, plain };
 }
 // Tries every setting from AAA on, the fast rotor first, and stops at the
@@ -1328,7 +1354,9 @@ function buildBombe(k, o) {
   const fz = BO.front;
   // The cabinet: a dark painted steel case on a plinth, with brass edges.
   block(k, [W, H, D], [0, H / 2, 0], (c) => keep(lit(mix("#2b2f33", "#33383d", 0.5 + 0.5 * c.noise(c.p[0] * 40, c.p[1] * 40, c.p[2] * 40)), c.n, { amb: 0.72, dif: 0.35, spec: 0.12 }))); // prettier-ignore
-  block(k, [W + 0.08, 0.08, D + 0.08], [0, 0.04, 0], (c) => keep(lit("#1d2023", c.n, { amb: 0.75 })));
+  block(k, [W + 0.08, 0.08, D + 0.08], [0, 0.04, 0], (c) =>
+    keep(lit("#1d2023", c.n, { amb: 0.75 })),
+  );
   block(k, [W - 0.1, 0.9, 0.012], [-0.08 + 0.02, 1.34, fz + 0.006], (c) => keep(lit("#1f2226", c.n, { amb: 0.8, dif: 0.25 }))); // prettier-ignore
   // The drums (tokens 0..35): a coloured drum with a cream letter ring, a
   // steel hub and a white index notch, turning about its own axle.
@@ -1356,7 +1384,8 @@ function buildBombe(k, o) {
             const f = ((Math.PI / 2 - ang) / TAU) * 26;
             const d = Math.abs(f - Math.round(f));
             const isA = ((Math.round(f) % 26) + 26) % 26 === 0;
-            col = rr > BO.r * 0.7 && d < (isA ? 0.3 : 0.12) ? (isA ? "#c21d12" : "#3a332a") : "#e9dfc6";
+            col =
+              rr > BO.r * 0.7 && d < (isA ? 0.3 : 0.12) ? (isA ? "#c21d12" : "#3a332a") : "#e9dfc6";
           }
           if (face && rr < BO.r * 0.22) col = STEEL;
           return keep(lit(col, face ? [0, 0, 1] : c.n, { amb: 0.66, dif: 0.4, spec: 0.35 }));
@@ -1505,7 +1534,13 @@ export const RECIPES = {
   bombe: {
     options: [
       // The message to break, as typed (set from the panel, not shown).
-      { key: "message", label: "Message to break", type: "text", default: BO_DEFAULT, hidden: true },
+      {
+        key: "message",
+        label: "Message to break",
+        type: "text",
+        default: BO_DEFAULT,
+        hidden: true,
+      },
     ],
     input: {
       title: "A message to break",
@@ -1514,7 +1549,8 @@ export const RECIPES = {
       note: "Type a message of up to 20 letters. The Enigma codes it at a setting the Bombe isn't told; its first 12 letters are the crib, the words the codebreakers guessed. The Bombe searches every rotor setting for the one where the crib fits, then reads the whole message.",
       read(text) {
         const msg = enClean(text);
-        if (msg.length < 4) throw new Error("Type a message of at least 4 letters, like WEATHERREPORT.");
+        if (msg.length < 4)
+          throw new Error("Type a message of at least 4 letters, like WEATHERREPORT.");
         return { message: msg };
       },
       shown: () => BO_SHOWN.label,
@@ -1531,4 +1567,3 @@ export const DIFFERENCE = { read: deRead, setup: deSetup, turn: deTurn, digits: 
 export const ENIGMA = { machine: enigmaMachine, clean: enClean, AZ };
 export const BOMBE = { crack: bombeCase, search: bombeSearch };
 export const TURING = { PROGRAMS: TM_PROGRAMS, run: tmRun, tape: tmTape, readBits: tmReadBits, rows: tmRows, times: tmTimes }; // prettier-ignore
-export { clamp, quatY, quatZ };
