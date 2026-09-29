@@ -2349,7 +2349,9 @@ export const RECIPES = {
         {
           quat: q,
           flat: 0.1,
-          glint: 0.3,
+          glint: 0.15,
+          even: true,
+          size: 1.35,
           part: k.part("rings", { axis: quatRotate(q, [0, 1, 0]) }),
         },
       );

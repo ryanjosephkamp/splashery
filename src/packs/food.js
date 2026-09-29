@@ -855,6 +855,9 @@ export const RECIPES = {
               },
             ),
             {
+              even: true,
+              opacity: 1,
+              jitter: 0.015,
               pos,
               quat: q,
               flat: 0.2,
@@ -882,7 +885,17 @@ export const RECIPES = {
                 },
                 { grid: 40, normal: () => [sgn, 0, 0] },
               ),
-              { pos, quat: q, flat: 0.15, weight: 1.3, ...piece, color: flesh },
+              {
+                even: true,
+                opacity: 1,
+                jitter: 0.015,
+                pos,
+                quat: q,
+                flat: 0.15,
+                weight: 1.3,
+                ...piece,
+                color: flesh,
+              },
             );
           }
         }
@@ -900,6 +913,7 @@ export const RECIPES = {
               normal: () => [1, 0, 0],
             }),
             {
+              even: true,
               pos,
               quat: q,
               part,
@@ -918,7 +932,10 @@ export const RECIPES = {
               },
             },
           );
-          k.add(k.cylinder(0.055, 0.45), {
+          k.add(evenCylinder(0.055, 0.055, 0.45), {
+            even: true,
+            opacity: 1,
+            jitter: 0.015,
             pos: add(pos, quatRotate(q, [x, -B + H * 0.75, 1.2])),
             quat: quatMul(q, quatEuler(90, 0, 0)),
             part,
@@ -972,6 +989,9 @@ export const RECIPES = {
               { grid: 48, normal: () => [0, 0, side], thick: T },
             ),
             {
+              even: true,
+              opacity: 1,
+              jitter: 0.015,
               ...place,
               flat: 0.15,
               interior: side > 0 ? 0.12 : 0,
@@ -989,7 +1009,14 @@ export const RECIPES = {
             },
             { grid: 48, normal: (u) => [Math.sin(a0 + u * span), -Math.cos(a0 + u * span), 0] },
           ),
-          { ...place, flat: 0.2, color: (c) => melonSkin(c, (a0 + c.u * span) * 1.6, 0) },
+          {
+            even: true,
+            opacity: 1,
+            jitter: 0.015,
+            ...place,
+            flat: 0.2,
+            color: (c) => melonSkin(c, (a0 + c.u * span) * 1.6, 0),
+          },
         );
         // The two cut sides.
         for (const [a, s] of [
@@ -1001,7 +1028,14 @@ export const RECIPES = {
               grid: 32,
               normal: () => [s * Math.cos(a), s * Math.sin(a), 0],
             }),
-            { ...place, flat: 0.15, color: (c) => melonFlesh(c.u, c) },
+            {
+              even: true,
+              opacity: 1,
+              jitter: 0.015,
+              ...place,
+              flat: 0.15,
+              color: (c) => melonFlesh(c.u, c),
+            },
           );
         }
       };
@@ -1066,6 +1100,9 @@ export const RECIPES = {
           [0, 0.0],
         ]),
         {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           flat: 0.2,
           color: (c) => glossy(c, "#f3f1ee", 0.8, 50, 0.76, 0.3),
         },
@@ -1091,7 +1128,10 @@ export const RECIPES = {
         }
         return false;
       };
-      k.add(k.cylinder(R, H), {
+      k.add(evenCylinder(R, R, H), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: [0, H / 2, 0],
         flat: 0.2,
         interior: 0.12,
@@ -1133,6 +1173,8 @@ export const RECIPES = {
       for (let i = 0; i < ros; i++) {
         const a = (i / ros) * TAU;
         k.add(rosette, {
+          opacity: 1,
+          jitter: 0.015,
           pos: [Math.sin(a) * (R - 0.1), H - 0.005, Math.cos(a) * (R - 0.1)],
           rot: [0, i * 23, 0],
           flat: 0.3,
@@ -1147,7 +1189,14 @@ export const RECIPES = {
           (t) => 0.035 + 0.018 * Math.abs(Math.sin(t * Math.PI * 34)),
           { closed: true },
         ),
-        { flat: 0.3, weight: 1.4, color: (c) => lit(c, "#fff8f0", 0.8, 0.3) },
+        {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
+          flat: 0.3,
+          weight: 1.4,
+          color: (c) => lit(c, "#fff8f0", 0.8, 0.3),
+        },
       );
       // Sprinkles on the top.
       sprinkles(k, 0.02, (rand) => {
@@ -1167,7 +1216,10 @@ export const RECIPES = {
         const x = Math.sin(a) * rr;
         const z = Math.cos(a) * rr;
         const stripe = colours[i % colours.length];
-        k.add(k.cylinder(0.032, ch), {
+        k.add(evenCylinder(0.032, 0.032, ch), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           pos: [x, H + ch / 2, z],
           flat: 0.3,
           weight: 2.5,
@@ -1177,7 +1229,10 @@ export const RECIPES = {
           },
         });
         const wick = [x, H + ch + 0.02, z];
-        k.add(k.cylinder(0.007, 0.04), {
+        k.add(evenCylinder(0.007, 0.007, 0.04), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           pos: wick,
           weight: 3,
           pattern: false,
@@ -3445,7 +3500,10 @@ export const RECIPES = {
     build(k) {
       // A wooden board.
       // (A plain box: the rounded box left a thin band across its middle.)
-      k.add(k.box(2.6, 0.12, 1.3), {
+      k.add(evenBox(2.6, 0.12, 1.3), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: [0, -0.06, 0],
         flat: 0.2,
         color: (c) => {
@@ -3460,6 +3518,9 @@ export const RECIPES = {
       // Nigiri: a pillow of rice and a draped slice of fish.
       const nigiri = (x, z, yaw, fish) => {
         k.add(k.roundedBox(0.52, 0.2, 0.3, 3.2), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           pos: [x, 0.1, z],
           rot: [0, yaw, 0],
           flat: 0.35,
@@ -3469,6 +3530,8 @@ export const RECIPES = {
         });
         const slab = bentSlab(k, 0.66, 0.06, 0.36, 3.5, 0.28);
         k.add(slab, {
+          opacity: 1,
+          jitter: 0.015,
           pos: [x, 0.225, z],
           rot: [0, yaw, 0],
           flat: 0.25,
@@ -3500,7 +3563,10 @@ export const RECIPES = {
         [1.08, 0.16],
       ].forEach(([x, z], i) => {
         const [f1, f2] = fills[i];
-        k.add(k.cylinder(0.18, 0.22), {
+        k.add(evenCylinder(0.18, 0.18, 0.22), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           pos: [x, 0.11, z],
           rot: [0, i * 50, 0],
           part: i === 0 ? rollPart : 0,
@@ -3534,6 +3600,9 @@ export const RECIPES = {
           (a, y) => 1 + 0.12 * Math.sin(a * 3 + y * 20),
         ),
         {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           pos: [1.0, 0, -0.38],
           flat: 0.3,
           weight: 1.5,
@@ -3551,6 +3620,7 @@ export const RECIPES = {
           { grid: 20 },
         );
         k.add(petal, {
+          jitter: 0.015,
           pos: [0.55 + (i % 3) * 0.07, 0.01 + i * 0.012, -0.38 + (i % 2) * 0.06],
           rot: [0, i * 70, 0],
           flat: 0.2,
@@ -3575,6 +3645,9 @@ export const RECIPES = {
           { flip: true, grid: 64 },
         ),
         {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           pos: dish,
           flat: 0.2,
           weight: 1.2,
@@ -3582,6 +3655,9 @@ export const RECIPES = {
         },
       );
       k.add(topDisc(k, 0.2), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: add(dish, [0, 0.045, 0]),
         flat: 0.15,
         weight: 1.5,
@@ -3592,7 +3668,10 @@ export const RECIPES = {
       for (const dz of [0, 0.07]) {
         const center = [0.42, 0.025, 0.5 + dz];
         sticks.push({ center, len: 2.0 });
-        k.add(k.cone(0.024, 0.013, 2.0), {
+        k.add(evenCylinder(0.024, 0.013, 2.0), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           pos: center,
           part: k.part(`stick${sticks.length - 1}`, { pivot: center }),
           rot: [0, 0, -90],

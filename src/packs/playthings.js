@@ -1282,6 +1282,9 @@ export const RECIPES = {
         { grid: 96 },
       );
       k.add(body, {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         part: top,
         flat: 0.2,
         color: (c) => {
@@ -1304,7 +1307,10 @@ export const RECIPES = {
         },
       });
       // The rim ring.
-      k.add(k.torus(0.62, 0.035), {
+      k.add(evenTorus(k, 0.62, 0.035), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: [0, 0.56, 0],
         part: top,
         flat: 0.2,
@@ -1312,7 +1318,10 @@ export const RECIPES = {
         color: (c) => lit(pal[3], c.n, { spec: 0.5 }),
       });
       // Handle and knob.
-      k.add(k.cylinder(0.055, 0.34, { caps: false }), {
+      k.add(evenCylinder(0.055, 0.055, 0.34, false), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: [0, 0.9, 0],
         part: top,
         flat: 0.2,
@@ -1320,6 +1329,9 @@ export const RECIPES = {
         color: (c) => lit("#b07a45", c.n, { spec: 0.3 }),
       });
       k.add(k.sphere(0.09), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: [0, 1.08, 0],
         part: top,
         flat: 0.2,
@@ -1911,6 +1923,9 @@ export const RECIPES = {
       const lightOf = (col, n) => lit(col, n, { amb: 0.8, dif: 0.22, spec: 0.3, pow: 30 });
       CUBIES.forEach((home, i) => {
         k.add(roundBox(0.97, 0.97, 0.97, 0.09), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           pos: home,
           kind: "token",
           params: [i, 0],

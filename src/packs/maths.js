@@ -4273,12 +4273,17 @@ Object.assign(RECIPES, {
       const z0 = 0;
       // The board and a raised wooden frame round the big square.
       const wood = (c, base) => lit(mix(base, shade(base, 0.85), 0.5 + 0.5 * Math.sin(c.p[0] * 40 + 3 * c.noise(c.p[0] * 3, c.p[1] * 8, 0))), c.n, { amb: 0.7, dif: 0.35, spec: 0.15 }); // prettier-ignore
-      k.add(k.box(2, 2, 0.04), {
+      k.add(evenBox(2, 2, 0.04), {
+        even: true,
+        opacity: 1,
         pos: [0, 0, z0 - 0.02],
         weight: 0.7,
         flat: 0.15,
         jitter: 0.01,
-        color: (c) => (c.s.face === 4 ? mix("#f4ecd8", "#efe3c6", 0.5 + 0.5 * c.noise(c.p[0] * 4, c.p[1] * 4, 0)) : "#c9b48a"), // prettier-ignore
+        color: (c) =>
+          c.s.face === 4
+            ? mix("#f4ecd8", "#efe3c6", 0.5 + 0.5 * c.noise(c.p[0] * 4, c.p[1] * 4, 0))
+            : "#c9b48a",
       });
       const F = 0.09;
       for (const [w, h, x, y] of [
@@ -4287,18 +4292,30 @@ Object.assign(RECIPES, {
         [F, 2, 1 + F / 2, 0],
         [F, 2, -1 - F / 2, 0],
       ])
-        k.add(k.box(w, h, 0.12), { pos: [x, y, z0 + 0.02], weight: 1.2, flat: 0.2, jitter: 0.01, even: true, color: (c) => wood(c, "#8b5a2b") }); // prettier-ignore
+        k.add(evenBox(w, h, 0.12),
+{
+opacity: 1,
+pos: [x, y, z0 + 0.02],
+weight: 1.2,
+flat: 0.2,
+jitter: 0.01,
+even: true,
+color: (c) => wood(c, "#8b5a2b"),
+}); // prettier-ignore
       // The empty squares, tinted: a² and b² (fading on channel 1), and
       // the tilted c² (appearing on channel 2).
       const zt = z0 + 0.003;
       k.add(polyShape([pyP(0, 0, zt), pyP(PY_A, 0, zt), pyP(PY_A, PY_A, zt), pyP(0, PY_A, zt)]), {
+        even: true,
+        opacity: 1,
         weight: 1.2,
         flat: 0.15,
         jitter: 0.01,
         kind: "fade",
         params: [0.5, 0.3],
         channel: 1,
-        pattern: false, // prettier-ignore
+        pattern: false,
+        // prettier-ignore
         color: (c) => (c.s.edge < 0.015 ? "#3d6fb0" : "#b9d3f2"),
       });
       k.add(
@@ -4309,6 +4326,8 @@ Object.assign(RECIPES, {
           pyP(PY_A, PY_S, zt),
         ]),
         {
+          even: true,
+          opacity: 1,
           // prettier-ignore
           weight: 1.2,
           flat: 0.15,
@@ -4316,7 +4335,8 @@ Object.assign(RECIPES, {
           kind: "fade",
           params: [0.5, 0.3],
           channel: 1,
-          pattern: false, // prettier-ignore
+          pattern: false,
+          // prettier-ignore
           color: (c) => (c.s.edge < 0.015 ? "#3f8f4a" : "#c3e6c3"),
         },
       );
@@ -4328,6 +4348,8 @@ Object.assign(RECIPES, {
           pyP(0, PY_A, zt + 0.002),
         ]),
         {
+          even: true,
+          opacity: 1,
           // prettier-ignore
           weight: 1.2,
           flat: 0.15,
@@ -4335,7 +4357,8 @@ Object.assign(RECIPES, {
           kind: "fade",
           params: [0.4, -0.3],
           channel: 2,
-          pattern: false, // prettier-ignore
+          pattern: false,
+          // prettier-ignore
           color: (c) => (c.s.edge < 0.015 ? "#b8860b" : "#ffe7a3"),
         },
       );
@@ -4369,6 +4392,8 @@ Object.assign(RECIPES, {
         const n = cross(sub(top[1], top[0]), sub(top[2], top[0]));
         const topPts = n[2] > 0 ? top : [top[0], top[2], top[1]];
         k.add(polyShape(topPts), {
+          even: true,
+          opacity: 1,
           ...part,
           weight: 2,
           flat: 0.15,
@@ -4386,7 +4411,16 @@ Object.assign(RECIPES, {
           const p = P[j];
           const q = P[(j + 1) % 3];
           const quad = [pyP(p[0], p[1], zb), pyP(q[0], q[1], zb), pyP(q[0], q[1], zt2), pyP(p[0], p[1], zt2)]; // prettier-ignore
-          k.add(polyShape(quad), { ...part, weight: 2, flat: 0.15, jitter: 0.01, color: shade(tri.col, 0.7) }); // prettier-ignore
+          k.add(polyShape(quad),
+{
+even: true,
+opacity: 1,
+...part,
+weight: 2,
+flat: 0.15,
+jitter: 0.01,
+color: shade(tri.col, 0.7),
+}); // prettier-ignore
         }
         // Side letters, just inside each side's middle.
         const place = (u, v, text) => {

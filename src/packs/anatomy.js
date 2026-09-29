@@ -674,6 +674,9 @@ export const RECIPES = {
       const iris = o.iris;
       // The white of the eye, with fine vessels towards the back.
       k.add(k.sphere(1), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         part: ball,
         flat: 0.15,
         color: (c) => {
@@ -700,6 +703,9 @@ export const RECIPES = {
           { grid: 64, thick: 0.02 },
         ),
         {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           part: ball,
           weight: 2.2,
           flat: 0.1,
@@ -718,6 +724,8 @@ export const RECIPES = {
       );
       // The pupil, and a ring of black that grows as the pupil opens.
       k.add(k.disc(0.14), {
+        opacity: 1,
+        jitter: 0.015,
         part: ball,
         pos: [0, 0, iz + 0.06],
         rot: [90, 0, 0],
@@ -726,6 +734,8 @@ export const RECIPES = {
         color: "#070707",
       });
       k.add(k.disc(0.4, 0.13), {
+        opacity: 1,
+        jitter: 0.015,
         part: ball,
         pos: [0, 0, iz + 0.062],
         rot: [90, 0, 0],
@@ -755,6 +765,8 @@ export const RECIPES = {
           { grid: 40, thick: 0.02 },
         ),
         {
+          even: true,
+          jitter: 0.015,
           part: ball,
           flat: 0.1,
           opacity: 0.1,
@@ -763,7 +775,9 @@ export const RECIPES = {
         },
       );
       // Inside (Slice): the lens behind the iris and the orange retina.
-      k.add(k.ellipsoid(0.3, 0.3, 0.13), {
+      k.add(evenEllipsoid(k, 0.3, 0.3, 0.13), {
+        even: true,
+        jitter: 0.015,
         part: ball,
         pos: [0, 0, iz - 0.2],
         weight: 1.2,
@@ -786,6 +800,9 @@ export const RECIPES = {
           { grid: 48, thick: 0.02 },
         ),
         {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           part: ball,
           pattern: false,
           color: (c) =>
@@ -794,7 +811,8 @@ export const RECIPES = {
       );
       // The optic nerve at the back.
       k.add(
-        k.tube(
+        evenTube(
+          k,
           spline([
             [0.08, -0.05, -0.9],
             [0.12, -0.08, -1.2],
@@ -804,6 +822,9 @@ export const RECIPES = {
           { grid: 32, samples: 32, caps: true },
         ),
         {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           part: ball,
           flat: 0.2,
           color: (c) => lit(mix("#f2d59a", "#e9c27a", 0.5 + 0.5 * Math.sin(c.u * TAU * 8)), c.n),
@@ -811,6 +832,8 @@ export const RECIPES = {
       );
       // A window highlight on the cornea (it stays put as the eye moves).
       k.add(k.sphere(0.07), {
+        even: true,
+        jitter: 0.015,
         pos: [-0.2, 0.26, iz + 0.14],
         scale: [1.2, 0.8, 0.3],
         weight: 3,
@@ -819,6 +842,8 @@ export const RECIPES = {
         color: (c) => keep("#ffffff"),
       });
       k.add(k.sphere(0.03), {
+        even: true,
+        jitter: 0.015,
         pos: [0.18, -0.2, iz + 0.12],
         weight: 3,
         opacity: 0.8,
@@ -845,6 +870,8 @@ export const RECIPES = {
           { grid: 32, normal: (u, v, q) => q },
         );
         k.add(shell, {
+          opacity: 1,
+          jitter: 0.015,
           part: lid,
           flat: 0.2,
           share: 0.05,

@@ -20,6 +20,7 @@ import {
   quatEuler,
   vec,
 } from "../kit.js";
+import { evenCylinder, evenDisc, evenEllipsoid } from "./even.js";
 
 const TAU = Math.PI * 2;
 const OAK_SECS = 6.6;
@@ -1094,6 +1095,9 @@ export const RECIPES = {
         (1 + 0.5 * Math.exp(-t * 14)) *
         (1 + 0.05 * Math.abs(Math.sin(t * Math.PI * 26)));
       k.add(k.tube(trunk, trunkR, { samples: 128, grid: 40 }), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         flat: 0.3,
         ...SW,
         color: (c) => {
@@ -1107,7 +1111,10 @@ export const RECIPES = {
       });
       const top = trunk(1);
       // The crown: a knob where the fronds spring from.
-      k.add(k.ellipsoid(0.11, 0.12, 0.11), {
+      k.add(evenEllipsoid(k, 0.11, 0.12, 0.11), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: [top[0], top[1] + 0.03, top[2]],
         ...CW,
         color: (c) => lit(mix("#6f6a36", "#8a7a44", c.rand()), c.n, 0.4),
@@ -1140,13 +1147,23 @@ export const RECIPES = {
               0.5,
             ),
         };
-        k.add(k.ellipsoid(0.085, 0.095, 0.085), {
+        k.add(evenEllipsoid(k, 0.085, 0.095, 0.085), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           ...look,
           pos: home,
           kind: "token",
           params: [i, 0],
         });
-        k.add(k.ellipsoid(0.085, 0.095, 0.085), { ...look, pos: home, part: regrow });
+        k.add(evenEllipsoid(k, 0.085, 0.095, 0.085), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
+          ...look,
+          pos: home,
+          part: regrow,
+        });
         nuts.push(planCoconut(k, home, i, a));
       }
       k.data = { nuts };
@@ -1172,6 +1189,9 @@ export const RECIPES = {
         k.add(
           k.tube(f.at, (t) => 0.018 * (1 - 0.8 * t), { samples: 24, grid: 8 }),
           {
+            even: true,
+            opacity: 1,
+            jitter: 0.015,
             ...CW,
             color: f.old ? "#8a7a44" : "#7c8a38",
           },
@@ -2849,9 +2869,11 @@ export const RECIPES = {
       const C = [0.05, 0.05, 0.05];
       // Still water; rings of light run out over it from the flower (a band
       // on channel 1, by distance).
-      k.add(k.disc(0.9), {
+      k.add(evenDisc(k, 0.9), {
+        even: true,
+        jitter: 0.015,
         pos: [0, 0, 0],
-        opacity: 0.6,
+        opacity: 0.8,
         flat: 0.3,
         pattern: false,
         kind: "band",
@@ -2882,6 +2904,8 @@ export const RECIPES = {
         [-0.42, 0.45, 0.22, 80, 1],
       ]) {
         k.add(pad(R, 0.4), {
+          opacity: 1,
+          jitter: 0.015,
           pos: [x, 0.012, z],
           rot: [0, rot, 0],
           flat: 0.2,
@@ -2927,6 +2951,8 @@ export const RECIPES = {
             layer: li,
           });
           k.add(shape, {
+            opacity: 1,
+            jitter: 0.015,
             pos: C,
             rot: [tilt, th, 0],
             flat: 0.22,
@@ -2942,7 +2968,10 @@ export const RECIPES = {
           });
         }
       });
-      k.add(k.cone(0.07, 0.1, 0.1), {
+      k.add(evenCylinder(0.07, 0.1, 0.1), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: [C[0], C[1] + 0.12, C[2]],
         weight: 2,
         part: bloom,
@@ -2975,7 +3004,10 @@ export const RECIPES = {
       // The stalk it rises on: built full length, squashed flat under the
       // flower at rest (a morph on channel 0) and hidden.
       const stalk = k.part("stalk");
-      k.add(k.cylinder(0.022, LOTUS_RISE, { caps: false }), {
+      k.add(evenCylinder(0.022, 0.022, LOTUS_RISE, false), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: [C[0], LOTUS_RISE / 2 + 0.02, C[2]],
         weight: 2,
         part: stalk,
@@ -2989,6 +3021,9 @@ export const RECIPES = {
       k.add(
         k.tube(spline([[-0.4, 0, 0.18], [-0.44, 0.2, 0.2], bud]), 0.014, { samples: 24, grid: 8 }),
         {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           ...WV,
           color: "#4f7a2a",
         },
@@ -3002,6 +3037,9 @@ export const RECIPES = {
           [0, 0.26],
         ]),
         {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           pos: bud,
           ...WV,
           color: (c) =>
@@ -5014,7 +5052,10 @@ export const RECIPES = {
       for (let i = 0; i < 7; i++) {
         const a = rand() * TAU;
         const s = 0.07 + rand() * 0.08;
-        k.add(k.ellipsoid(s * 1.3, s * 0.7, s), {
+        k.add(evenEllipsoid(k, s * 1.3, s * 0.7, s), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           pos: [Math.sin(a) * (0.25 + rand() * 0.45), 0.04, Math.cos(a) * (0.25 + rand() * 0.45)],
           rot: [0, rand() * 180, 0],
           color: (c) => {
@@ -5052,6 +5093,9 @@ export const RECIPES = {
         k.add(
           k.tube(stem, (t) => 0.014 * (1 - 0.4 * t), { samples: 48, grid: 8 }),
           {
+            even: true,
+            opacity: 1,
+            jitter: 0.015,
             ...SW,
             color: (c) => lit(amber[2], c.n, 0.3),
           },
@@ -5065,7 +5109,12 @@ export const RECIPES = {
             add(b, [Math.sin(a) * 0.05, 0.02, Math.cos(a) * 0.05]),
             add(b, [Math.sin(a) * 0.11, -0.01, Math.cos(a) * 0.11]),
           ]);
-          k.add(k.tube(root, 0.011, { samples: 8, grid: 6 }), { color: amber[1] });
+          k.add(k.tube(root, 0.011, { samples: 8, grid: 6 }), {
+            even: true,
+            opacity: 1,
+            jitter: 0.015,
+            color: amber[1],
+          });
         }
         // Blades along the stipe, each on a gas float, streaming with the
         // current; a spray of them at the top floats in the canopy.
@@ -5083,7 +5132,10 @@ export const RECIPES = {
             W: 0.09 + 0.04 * rand(),
             g,
           });
-          k.add(k.ellipsoid(0.02, 0.028, 0.02), {
+          k.add(evenEllipsoid(k, 0.02, 0.028, 0.02), {
+            even: true,
+            opacity: 1,
+            jitter: 0.015,
             pos: add(p, mul(out, 0.018)),
             weight: 2,
             ...SW,
@@ -5109,6 +5161,7 @@ export const RECIPES = {
           { grid: 14 },
         );
         k.add(shape, {
+          jitter: 0.015,
           opacity: 0.9,
           flat: 0.2,
           channel: b.g,
@@ -5146,13 +5199,21 @@ export const RECIPES = {
           ["#ff5a8a", "#ffe0e8"],
         ][i];
         const tok = { kind: "token", params: [i, 0], pattern: false, weight: 3, fit: false };
-        k.add(k.ellipsoid(0.085, 0.052, 0.028), {
+        k.add(evenEllipsoid(k, 0.085, 0.052, 0.028), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           ...tok,
           pos: nib,
           color: (c) =>
-            c.lp[0] > 0.058 && Math.abs(c.lp[1]) < 0.01 && Math.abs(c.lp[2]) > 0.012 ? "#111111" : lit(cols[0], c.n, 0.3), // prettier-ignore
+            c.lp[0] > 0.058 && Math.abs(c.lp[1]) < 0.01 && Math.abs(c.lp[2]) > 0.012
+              ? "#111111"
+              : lit(cols[0], c.n, 0.3),
         });
-        k.add(k.ellipsoid(0.034, 0.042, 0.009), {
+        k.add(evenEllipsoid(k, 0.034, 0.042, 0.009), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           ...tok,
           pos: add(nib, [-0.098, 0, 0]),
           color: cols[1],
@@ -5168,14 +5229,20 @@ export const RECIPES = {
         const p = [Math.sin(a) * rr, 0.9 + f * 0.55, Math.cos(a) * rr];
         const q = quatFromTo([1, 0, 0], [Math.cos(a), 0, -Math.sin(a)]);
         const fish = { kind: "orbit", params: [0.35, 0], pattern: false, weight: 3 };
-        k.add(k.ellipsoid(0.07, 0.045, 0.025), {
+        k.add(evenEllipsoid(k, 0.07, 0.045, 0.025), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           pos: p,
           quat: q,
           ...fish,
           color: (c) =>
             c.lp[0] > 0.05 && Math.abs(c.lp[1]) < 0.01 ? "#1a1a1a" : lit("#ff7a1a", c.n, 0.3),
         });
-        k.add(k.ellipsoid(0.028, 0.035, 0.008), {
+        k.add(evenEllipsoid(k, 0.028, 0.035, 0.008), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           pos: add(p, quatRotate(q, [-0.08, 0, 0])),
           quat: q,
           ...fish,
