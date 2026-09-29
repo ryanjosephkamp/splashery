@@ -31,6 +31,7 @@ export const CATEGORIES = [
   { id: "computing", label: "AI and computing" },
   { id: "pictures", label: "Pictures and pages" },
   { id: "studio", label: "Studio" },
+  { id: "lab", label: "Lab" },
   { id: "holidays", label: "Holidays" },
   { id: "music", label: "Music" },
   { id: "vehicles", label: "Vehicles" },
@@ -3159,6 +3160,17 @@ export const TOYS = [
     labs: true,
     tags: "3d model glb gltf obj stl mesh triangles convert converter wireframe texture cad print",
     camera: { yaw: 0.5, pitch: 0.28, roll: 0, distance: 4.5 },
+  },
+  // ---- Pack: lab (lane Lab) ----
+  {
+    id: "splat-field",
+    label: "Splat field",
+    category: "lab",
+    kind: "kit",
+    pack: "lab",
+    labs: true,
+    tags: "gpu field galaxy spiral ocean waves sea knot flow particles shader lab experiment",
+    camera: { yaw: 0.3, pitch: 0.85, roll: 0, distance: 3.0 },
   },
   // ---- Pack: screens ----
   {
