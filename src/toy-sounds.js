@@ -1360,6 +1360,26 @@ export const TOY_SOUNDS = {
     { voice: "whoosh", f: 1500, decay: 0.45, vol: 0.35 },
     { voice: "click", at: 0.2, f: 1300, decay: 0.7, vol: 0.4 },
   ],
+
+  // ---- Pictures and pages (lane Books) ----------------------------------------------
+  // A page turning over (a paper swish and a flutter) and a soft thud as it
+  // lands (the cover's thud when it opens).
+  "your-book": [
+    { voice: "whoosh", f: 2000, decay: 0.55, vol: 0.28 },
+    { voice: "flutter", at: 0.08, decay: 0.4, vol: 0.12 },
+    { voice: "thud", at: 0.82, f: 150, decay: 0.35, vol: 0.3 },
+  ],
+  // A thick card page: a lower swish and a firmer thud.
+  "photo-album": [
+    { voice: "whoosh", f: 900, decay: 0.7, vol: 0.3 },
+    { voice: "thud", at: 0.88, f: 115, decay: 0.45, vol: 0.45 },
+  ],
+  // The frame knocks the wall, the wire creaks on the nail, and a softer knock.
+  "picture-frame": [
+    { voice: "wood", f: 250, decay: 0.35, vol: 0.5 },
+    { voice: "scrape", at: 0.12, f: 1500, decay: 0.3, vol: 0.12 },
+    { voice: "wood", at: 0.55, f: 225, decay: 0.3, vol: 0.28 },
+  ],
   // ---- Studio (lane Studio Sound) ---------------------------------------------------
   // The plate's real hum follows its mode and is a cue from drive(); this is
   // the sample the Sound Board plays (the default mode's 780 Hz).

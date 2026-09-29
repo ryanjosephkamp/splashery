@@ -615,9 +615,13 @@ function kindOf(k) {
 }
 
 export class Kit {
-  constructor(seed, { count = 120000, options = {}, fit = true } = {}) {
+  constructor(seed, { count = 120000, options = {}, fit = true, media = null } = {}) {
     this.seed = seed >>> 0;
     this.count = count;
+    // Pictures (lane Books): a picture toy's media, opened before the build
+    // ({ kind, count, name, aspect, aspects, names }), or null (not open, or
+    // the Node tools). A book sizes its pages from it.
+    this.media = media;
     this.fitOn = fit; // false keeps the recipe's coordinates (scan rig add-ons)
     this.options = options;
     this.rand = mulberry32(mixSeed(seed, "kit-recipe"));
@@ -1221,8 +1225,12 @@ export function nearestColoring(buf) {
 
 // Builds a recipe into a toy context the player can show. Yields progress;
 // returns { g, buf, base, coloring, parts, recipe, lum }.
-export function* buildRecipe(recipe, { seed, count, options = {}, clay = [] }, applyClay) {
-  const k = new Kit(seed, { count, options });
+export function* buildRecipe(
+  recipe,
+  { seed, count, options = {}, clay = [], media = null },
+  applyClay,
+) {
+  const k = new Kit(seed, { count, options, media });
   recipe.build(k, options);
   const it = k.emit();
   let r = it.next();
