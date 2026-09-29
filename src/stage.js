@@ -268,7 +268,10 @@ export class Stage {
   // (euler degrees), scale } normalises it around the origin. `kit` marks a
   // generated toy whose format carries the per-splat splatAnim stream; `rig`
   // a captured toy with moving parts (a splatPart stream, see src/rig.js).
-  setToy({ resource, asset = null, owned = false, transform = null, kit = false, rig = false }) {
+  // Lab: `modifier` ({ glsl, wgsl }) replaces a kit toy's work-buffer program
+  // (a splat field computed on the GPU every frame, src/packs/lab.js).
+  // prettier-ignore
+  setToy({ resource, asset = null, owned = false, transform = null, kit = false, rig = false, modifier = null }) {
     this.clearToy();
     const entity = new pc.Entity("toy");
     if (transform) {
@@ -302,7 +305,7 @@ export class Stage {
         parts.unlock();
       }
     }
-    entity.gsplat.setWorkBufferModifier(kit ? MODIFIER_KIT : rig ? MODIFIER_RIG : MODIFIER);
+    entity.gsplat.setWorkBufferModifier(modifier || (kit ? MODIFIER_KIT : rig ? MODIFIER_RIG : MODIFIER)); // prettier-ignore
     entity.gsplat.workBufferUpdate = pc.WORKBUFFER_UPDATE_ALWAYS;
     // The pattern sampler always needs a texture, even with no pattern on
     // (and kit toys' screen sampler too).
