@@ -86,7 +86,7 @@ export function addScan(k, scan, { share = 0.86, parts = [], color, keep } = {})
       size: (scan.sig[i] * grow) / BASE,
       flat: 0.14,
       color: c,
-      opacity: 0.97,
+      opacity: 1,
       part: parts[fp] ?? 0,
     };
   });
@@ -187,6 +187,56 @@ function sortWhileMoving(out, info, s, moving, step = 0.08) {
   }
 }
 
+// ---- Liquids ---------------------------------------------------------------------------------
+// A stream or a spray is a row of tokens, each a short piece of liquid: splats stretched along the
+// piece, built along +Y about a shared base and turned by drive() to follow the flow. Pieces
+// overlap, so a stream reads as one continuous rope, and a droplet is a short streak along its
+// motion, never a round bead.
+
+// Adds `count` pieces (tokens first..first+count-1) of length `len` and radius `r` at `base`.
+export function addLiquidPieces(
+  k,
+  first,
+  count,
+  { base, len, r, color, shine, streak, opacity = 0.95, per, fine = 0.9 },
+) {
+  // prettier-ignore
+  const n = per ?? Math.max(24, Math.round((k.count * 0.0006 * len) / r / (fine / 0.9) ** 2));
+  addCloud(k, count * n, (i) => {
+    const d = Math.floor(i / n);
+    const j = i % n;
+    const f = (j + 0.5) / n;
+    const a = ((j * 0.6180339887498949) % 1) * 2 * Math.PI;
+    // A capsule: full width in the middle, rounded at the ends.
+    const along = (f - 0.5) * len;
+    const w = r * Math.sqrt(Math.max(0.15, 1 - (2 * f - 1) ** 6));
+    const x = w * Math.cos(a);
+    const z = w * Math.sin(a);
+    // Light from the upper left: a bright streak down one side, a darker far side.
+    const lit = Math.cos(a - 2.4);
+    let c = lit > 0.82 ? shine : color.map((v) => Math.min(1, v * (0.86 + 0.18 * lit)));
+    // Optional streaks of a second color along the piece (amber in foam).
+    if (streak && lit <= 0.82 && Math.sin(a * 5 + d * 1.7) > 0.72) c = streak;
+    return {
+      p: [base[0] + x, base[1] + along, base[2] + z],
+      dir: [0, 1, 0],
+      stretch: 2.2,
+      size: r * fine,
+      color: c,
+      opacity,
+      kind: "token",
+      params: [first + d, 0],
+    };
+  });
+}
+
+// A token that puts a piece built along +Y about `base` at `p`, pointing along `v`.
+export function pieceToken(base, p, v, visible = 1) {
+  const l = Math.hypot(v[0], v[1], v[2]) || 1;
+  const q = quatFromTo([0, 1, 0], [v[0] / l, v[1] / l, v[2] / l]);
+  return { base, quat: q, offset: [p[0] - base[0], p[1] - base[1], p[2] - base[2]], visible };
+}
+
 // ---- Water bottle ----------------------------------------------------------------------------
 // The baked bottle stands on y = -0.944 with radius 0.233; its neck (r 0.15) runs up to its
 // lip at y 0.6, and the cap (part 1 of the file) covers the neck from y 0.376.
@@ -198,25 +248,31 @@ const WB = {
   pivot: [0, -0.2, 0],
   glass: { x: 0.74, r0: 0.165, r1: 0.2, h: 0.6 },
   tip: (115 * Math.PI) / 180,
-  drops: 40,
-  flight: 0.32, // seconds from the mouth to the water
+  pieces: 18, // the stream: tokens 0..17
+  splash: 26, // splash droplets: tokens 18..43
+  gravity: 6,
+  speed: 0.3, // how fast the water leaves the mouth
   pour: 1.15, // seconds of pouring
   level: 0.52, // the glass fills to this share of its height
 };
 WB.glassTop = WB.floor + WB.glass.h;
 // Where the mouth goes while it pours: just over the glass's rim, a little in from its middle.
-WB.pourMouth = [WB.glass.x - 0.06, WB.glassTop + 0.22, 0];
+WB.pourMouth = [WB.glass.x - 0.1, WB.glassTop + 0.22, 0];
 {
   const rel = rotZ([0, WB.mouth[1] - WB.pivot[1], 0], -WB.tip);
   WB.pourOffset = [WB.pourMouth[0] - rel[0] - WB.pivot[0], WB.pourMouth[1] - rel[1] - WB.pivot[1], 0]; // prettier-ignore
 }
 // The cap rests on the table to the left of the bottle while it pours.
 WB.capRest = [-0.62, WB.floor - 0.376 + 0.004, 0.1];
-// A drop's time of emission (seconds into the pour): five glugs of eight drops.
-WB.emit = (i) => {
-  const glug = Math.floor(i / 8);
-  return glug * 0.17 + (i % 8) * 0.022 + 0.03 * Math.sin(i * 2.3);
-};
+// The water leaves the mouth along the tipped bottle's axis.
+WB.dir = rotZ([0, 1, 0], -WB.tip);
+
+// Seconds for water leaving `mouth` at `v0` to fall to height y.
+function wbFall(mouth, v0, y) {
+  const h = mouth[1] - y;
+  const G = WB.gravity;
+  return (v0[1] + Math.sqrt(Math.max(0, v0[1] * v0[1] + 2 * G * h))) / G;
+}
 
 // The bottle's pose (offset from its pivot, angle about z) at tap time s.
 function wbPose(s) {
@@ -239,6 +295,7 @@ function wbClock(s) {
 
 const WATER_BOTTLE = {
   alive: false,
+  density: 1.5, // as the Model to splats toy: 300,000 splats on the high tier
   turntable: true,
   controls: [{ key: "pour", label: "Pour", type: "pulse", ease: WB.T }],
   action: { key: "pour", label: "Unscrew and pour" },
@@ -274,28 +331,55 @@ const WATER_BOTTLE = {
     };
     const pose = wbPose(s);
     out.parts.bottle = { angle: pose.angle, offset: pose.offset };
-    // The drops, from the mouth to the water, on the pour's clock.
+    // The water, on the pour's clock u: every bit leaves the mouth at its own time e (0 to the
+    // pour's length) and falls; the stream is the bits in the air, drawn as overlapping pieces.
     const u = wbClock(s);
     const mouthRel = rotZ([0, WB.mouth[1] - WB.pivot[1], 0], pose.angle);
-    const mouth = [WB.pivot[0] + pose.offset[0] + mouthRel[0], WB.pivot[1] + pose.offset[1] + mouthRel[1], 0]; // prettier-ignore
-    let landed = 0;
-    const surf = WB.floor + 0.035 + WB.glass.h * WB.level;
+    const mouth = [WB.pivot[0] + pose.offset[0] + mouthRel[0] + 0.02 * WB.dir[0], WB.pivot[1] + pose.offset[1] + mouthRel[1] - 0.03, 0]; // prettier-ignore
+    const v0 = [WB.dir[0] * WB.speed, WB.dir[1] * WB.speed, 0];
+    const G = WB.gravity;
+    const full = WB.glass.h * WB.level;
+    const fillAt = (uu) => clamp((uu - wbFall(mouth, v0, WB.floor + 0.035 + full * 0.5)) / WB.pour, 0, 1); // prettier-ignore
+    const level = u > 0 ? fillAt(u) : 0;
+    const surf = WB.floor + 0.035 + full * level;
+    const T = wbFall(mouth, v0, surf); // seconds from the mouth to the water now
+    const at = (tau) => [mouth[0] + v0[0] * tau, mouth[1] + v0[1] * tau - 0.5 * G * tau * tau, 0];
+    const vel = (tau) => [v0[0], v0[1] - G * tau, 0];
+    const base = info.data?.pieceBase || [0, 0, 0];
     const tokens = [];
-    for (let i = 0; i < WB.drops; i++) {
-      const e = WB.emit(i);
+    const eLo = Math.max(0, u - T);
+    const eHi = Math.min(WB.pour, u);
+    for (let i = 0; i < WB.pieces; i++) {
+      if (!(u > 0 && eHi > eLo)) {
+        tokens.push({ base, offset: [0, 0, 0], visible: 0 });
+        continue;
+      }
+      const e = eLo + ((eHi - eLo) * (i + 0.5)) / WB.pieces;
       const tau = u - e;
-      const g = (2 * (mouth[1] - surf)) / (WB.flight * WB.flight);
-      const x = mouth[0] + 0.12 * tau + 0.015 * Math.sin(i * 1.7);
-      const y = mouth[1] - 0.02 - 0.5 * g * tau * tau;
-      const z = 0.02 * Math.sin(i * 2.9);
-      const inAir = tau > 0 && tau < WB.flight;
-      if (tau >= WB.flight) landed++;
-      const b = info.data?.dropBase || [0, 0, 0];
-      tokens.push({ base: b, offset: [x - b[0], y - b[1], z - b[2]], visible: inAir ? 1 : 0 });
+      // A gentle glug: the stream thickens and thins a little as air bubbles back in.
+      const glug = 1 + 0.12 * Math.sin(2 * Math.PI * (e * 5.5));
+      tokens.push(pieceToken(base, at(tau), vel(tau), glug));
+    }
+    // The splash where the stream meets the water: droplets that hop up and fall back, over and
+    // over while it pours.
+    const hitting = u > T && u - T < WB.pour + 0.05;
+    const hit = at(T);
+    for (let j = 0; j < WB.splash; j++) {
+      const ph = (j * 0.618034) % 1;
+      const w = (u - T + ph * 0.34) % 0.34;
+      const a = (j * 2.39996) % (2 * Math.PI);
+      const vy = 0.55 + 0.35 * ((j * 0.7548) % 1);
+      const vh = 0.18 + 0.2 * ((j * 0.5698) % 1);
+      const vj = [Math.cos(a) * vh, vy - G * w, Math.sin(a) * vh];
+      const pj = [
+        hit[0] + Math.cos(a) * vh * w,
+        surf + vy * w - 0.5 * G * w * w,
+        Math.sin(a) * vh * w,
+      ];
+      const up = pj[1] > surf - 0.005;
+      tokens.push(pieceToken(base, pj, vj, hitting && up && w > 0.01 ? 0.55 : 0));
     }
     out.tokens = tokens;
-    // The water in the glass rises with the drops that have landed.
-    const level = landed / WB.drops;
     out.morph = [level, 0, 0, 0];
     out.parts.water = { visible: level > 0.002 ? 1 : 0 };
     sortWhileMoving(out, info, s, on && s < 4.5);
@@ -363,25 +447,24 @@ const WATER_BOTTLE = {
         },
       },
     );
-    // The drops: each a token, a small round bead built at the middle of its fall.
-    const base = [WB.pourMouth[0] + 0.05, (WB.pourMouth[1] + WB.floor) / 2, 0];
-    const per = Math.max(8, Math.round((k.count * 0.012) / WB.drops));
-    addCloud(k, WB.drops * per, (i) => {
-      const d = Math.floor(i / per);
-      const j = i % per;
-      const a = j * 2.39996;
-      const r = 0.022 * Math.sqrt((j + 0.5) / per);
-      const y = (j / per - 0.5) * 0.05;
-      return {
-        p: [base[0] + r * Math.cos(a), base[1] + y, base[2] + r * Math.sin(a)],
-        size: 0.014,
-        color: j % 5 === 0 ? [0.9, 0.96, 1] : [0.55, 0.76, 0.92],
-        opacity: 0.85,
-        kind: "token",
-        params: [d, 0],
-      };
-    });
-    k.data.dropBase = base;
+    // The stream's pieces and the splash's droplets: tokens built beside the glass.
+    const base = [WB.glass.x, WB.floor + 0.3, 0];
+    const liquid = { color: [0.66, 0.82, 0.94], shine: [0.97, 0.99, 1] };
+    addLiquidPieces(k, 0, WB.pieces, { base, len: 0.075, r: 0.024, ...liquid });
+    addLiquidPieces(k, WB.pieces, WB.splash, { base, len: 0.03, r: 0.009, per: 14, ...liquid });
+    k.data.pieceBase = base;
+    // The cap's underside, closed with a dark disc (its plug is left out), and the dark opening
+    // of the bottle's mouth.
+    for (const [y, r, part] of [
+      [0.6, 0.162, cap],
+      [0.585, 0.128, bottle],
+    ]) {
+      addCloud(k, Math.round(k.count * 0.004), (i, n) => {
+        const rr = r * Math.sqrt((i + 0.5) / n);
+        const a = i * 2.39996323;
+        return { p: [rr * Math.cos(a), y, rr * Math.sin(a)], n: [0, 1, 0], size: Math.sqrt((r * r) / n) * 1.3, color: [0.07, 0.065, 0.06], part }; // prettier-ignore
+      });
+    }
     // What the tap reaches: the cap's hop and the tipped bottle's base.
     k.reach([WB.capRest[0] - 0.18, WB.floor, 0]);
     k.reach([-0.75, 0.62, 0]);
@@ -417,6 +500,7 @@ function childOf(qF, o, h, qH) {
 
 const SUNGLASSES = {
   alive: false,
+  density: 1.5, // as the Model to splats toy: 300,000 splats on the high tier
   controls: [{ key: "flip", label: "Fold and flip", type: "pulse", ease: SG.T }],
   action: { key: "flip", label: "Fold, flip and darken" },
   credits: [
@@ -449,8 +533,8 @@ const SUNGLASSES = {
     const o = [0, lift, 0];
     out.parts.front = childOf(qF, o, SG.center);
     // Folded, the right arm lies just behind the front and the left arm just behind it.
-    out.parts.armR = childOf(qF, o, SG.hingeR, quatAxisAngle([0, 1, 0], 1.5 * foldR));
-    out.parts.armL = childOf(qF, o, SG.hingeL, quatAxisAngle([0, 1, 0], -1.46 * foldL));
+    out.parts.armR = childOf(qF, o, SG.hingeR, quatAxisAngle([0, 1, 0], 1.53 * foldR));
+    out.parts.armL = childOf(qF, o, SG.hingeL, quatAxisAngle([0, 1, 0], -1.36 * foldL));
     out.morph = [ease(seg(s, 1.35, 2.05)) * (1 - ease(seg(s, 2.6, 3.3))), 0, 0, 0];
     sortWhileMoving(out, info, s, on && s < SG.T, 0.06);
   },
@@ -517,6 +601,7 @@ const BC = { T: 3, pivot: [0, -0.05, -0.2], rim: -0.37, base: -1.3 };
 
 const BASEBALL_CAP = {
   alive: false,
+  density: 1.5, // as the Model to splats toy: 300,000 splats on the high tier
   controls: [{ key: "toss", label: "Toss", type: "pulse", ease: BC.T }],
   action: { key: "toss", label: "Flip and spin" },
   credits: [
@@ -656,6 +741,7 @@ function fpPen(s) {
 
 const FOUNTAIN_PEN = {
   alive: false,
+  density: 1.5, // as the Model to splats toy: 300,000 splats on the high tier
   controls: [{ key: "write", label: "Write", type: "pulse", ease: FP.T }],
   action: { key: "write", label: "Uncap and write" },
   credits: [
@@ -785,27 +871,27 @@ const SC = {
   lid: 0.787,
   rivet: [0, 0.787, 0],
   mouth: [0, 0.79, 0.17],
-  clumps: 48,
+  jet: 22, // the jet: tokens 0..21
+  drops: 26, // the spatter: tokens 22..47
   coaster: 0.95,
+  spray: [1.0, 1.95], // the jet runs between these tap times
 };
-// Each foam clump's launch: time (s into the tap), speed up, spread direction and speed.
-function scLaunch(i) {
-  const h = (k) => {
-    const x = Math.sin(i * 127.1 + k * 311.7) * 43758.5453;
-    return x - Math.floor(x);
-  };
-  return {
-    t0: 1.02 + 0.95 * (i / SC.clumps) ** 1.3 + 0.03 * h(1),
-    up: 3.1 - 1.4 * (i / SC.clumps) + 0.5 * h(2),
-    dir: 2 * Math.PI * h(3),
-    out: 0.35 + 0.55 * h(4),
-    size: 0.7 + 0.6 * h(5),
-  };
+const hash = (i, k) => {
+  const x = Math.sin(i * 127.1 + k * 311.7) * 43758.5453;
+  return x - Math.floor(x);
+};
+// The jet's speed and its lean for a bit of foam that leaves the opening at time e: fast at
+// first, weakening as the pressure goes, and swaying a little as the foam surges.
+function scJet(e) {
+  const f = clamp((e - SC.spray[0]) / (SC.spray[1] - SC.spray[0]), 0, 1);
+  const up = 3.3 * Math.sqrt(1 - 0.85 * f);
+  return [0.25 * Math.sin(e * 9.1) + 0.12, up, 0.2 * Math.sin(e * 7.3 + 1) + 0.18];
 }
 const SC_G = 7.5;
 
 const SODA_CAN = {
   alive: false,
+  density: 1.5, // as the Model to splats toy: 300,000 splats on the high tier
   controls: [{ key: "open", label: "Shake and open", type: "pulse", ease: SC.T }],
   action: { key: "open", label: "Shake and open" },
   credits: [
@@ -843,35 +929,70 @@ const SODA_CAN = {
     out.parts.tab = { quat: qTab, offset: canOff };
     // The opening shows as the tab's nose pushes the panel in, and closes up again at the end.
     out.morph = [ease(seg(s, 0.95, 1.08)) * (1 - ease(seg(s, 3.0, 3.4))), 0, 0, 0];
-    // The foam: clumps shoot up from the opening, fall round the can and fizz away.
+    // The jet: foam leaves the opening from spray[0] to spray[1]; every bit flies on its own arc,
+    // and the bits in the air are drawn as overlapping pieces along the flow.
     const tokens = [];
     const base = info.data?.clumpBase || [0, 0, 0];
-    for (let i = 0; i < SC.clumps; i++) {
-      const L = scLaunch(i);
-      const tau = s - L.t0;
-      let p = SC.mouth;
-      let vis = 0;
-      if (on && tau > 0) {
-        // Up, out and down to the coaster (or the can's lid), then it lies there.
-        const vx = Math.cos(L.dir) * L.out;
-        const vz = Math.sin(L.dir) * L.out;
-        let y = SC.mouth[1] + L.up * tau - 0.5 * SC_G * tau * tau;
-        let x = SC.mouth[0] + vx * tau;
-        let z = SC.mouth[2] + vz * tau;
-        const r = Math.hypot(x, z);
-        const ground = r < 0.43 ? SC.lid : SC.floor;
-        if (y < ground && L.up * tau - 0.5 * SC_G * tau * tau < 0) {
-          // Landed: find when, and stay there.
-          const disc = L.up * L.up + 2 * SC_G * (SC.mouth[1] - SC.floor);
-          const tl = (L.up + Math.sqrt(disc)) / SC_G;
-          x = SC.mouth[0] + vx * tl;
-          z = SC.mouth[2] + vz * tl;
-          y = Math.hypot(x, z) < 0.43 ? SC.lid : SC.floor;
-        }
-        p = [x, y, z];
-        vis = L.size * (1 - smoothstep(2.75, 3.4, s)) * smoothstep(0, 0.06, tau);
+    const M = SC.mouth;
+    const arc = (e, tau) => {
+      const v = scJet(e);
+      return {
+        p: [M[0] + v[0] * tau, M[1] + v[1] * tau - 0.5 * SC_G * tau * tau, M[2] + v[2] * tau],
+        v: [v[0], v[1] - SC_G * tau, v[2]],
+      };
+    };
+    // A bit is in the air until it falls back to the lid's height.
+    const air = (e) => (2 * scJet(e)[1]) / SC_G;
+    const eHi = Math.min(SC.spray[1], s);
+    let eLo = SC.spray[0];
+    while (eLo < eHi && s - eLo > air(eLo)) eLo += 0.005;
+    for (let i = 0; i < SC.jet; i++) {
+      if (!(on && eHi > eLo)) {
+        tokens.push({ base, offset: [0, 0, 0], visible: 0 });
+        continue;
       }
-      tokens.push({ base, offset: [p[0] - base[0], p[1] - base[1], p[2] - base[2]], visible: vis });
+      const e = eHi - ((eHi - eLo) * (i + 0.5)) / SC.jet;
+      const { p, v } = arc(e, s - e);
+      tokens.push(pieceToken(base, p, v, 1));
+    }
+    // The spatter: drops thrown out wider, landing on the coaster (or the lid) as small flat
+    // splashes that fade away at the end.
+    for (let j = 0; j < SC.drops; j++) {
+      const e = SC.spray[0] + 0.05 + 0.85 * hash(j, 1);
+      const tau = s - e;
+      const a = 2 * Math.PI * hash(j, 2);
+      const vh = 0.35 + 0.5 * hash(j, 3);
+      const vy = 1.6 + 1.4 * hash(j, 4);
+      const v = [Math.cos(a) * vh, vy, Math.sin(a) * vh];
+      if (!on || tau <= 0) {
+        tokens.push({ base, offset: [0, 0, 0], visible: 0 });
+        continue;
+      }
+      // When it lands: on the lid inside the can's rim, else on the coaster.
+      const land = (y) => (v[1] + Math.sqrt(v[1] * v[1] + 2 * SC_G * (M[1] - y))) / SC_G;
+      let tl = land(SC.floor);
+      const xz = (t) => [M[0] + v[0] * t, M[2] + v[2] * t];
+      let ground = SC.floor;
+      if (Math.hypot(...xz(land(SC.lid))) < 0.4) {
+        tl = land(SC.lid);
+        ground = SC.lid;
+      }
+      const fade = 1 - smoothstep(2.7, 3.35, s);
+      if (tau < tl) {
+        const p = [
+          M[0] + v[0] * tau,
+          M[1] + v[1] * tau - 0.5 * SC_G * tau * tau,
+          M[2] + v[2] * tau,
+        ];
+        tokens.push(pieceToken(base, p, [v[0], v[1] - SC_G * tau, v[2]], 1));
+      } else {
+        // Landed: it splats flat where it hit and soaks away in a moment.
+        const [x, z] = xz(tl);
+        const gone = 1 - smoothstep(0, 0.22, tau - tl);
+        tokens.push(
+          pieceToken(base, [x, ground + 0.006, z], [v[0], 0.02, v[2]], fade * gone * 1.2),
+        );
+      }
     }
     out.tokens = tokens;
     sortWhileMoving(out, info, s, on && s < SC.T, 0.1);
@@ -912,25 +1033,10 @@ const SODA_CAN = {
       const col = lit([0.74 * g, 0.55 * g, 0.36 * g], nn);
       return { p, n: nn, size: Math.sqrt((Math.PI * R * R * 1.2) / (n * Math.PI)) * 1.3, color: col, flat: 0.2 }; // prettier-ignore
     });
-    // The foam clumps: tokens, each a small heap of bubbles, built beside the can's top.
+    // The jet's pieces (foam: cream with a faint amber) and the spatter's drops (the soda itself).
     const base = [0, SC.lid + 0.3, 0.2];
-    const per = Math.max(10, Math.round((k.count * 0.03) / SC.clumps));
-    addCloud(k, SC.clumps * per, (i) => {
-      const d = Math.floor(i / per);
-      const j = i % per;
-      const a = j * 2.39996;
-      const r = 0.032 * Math.sqrt((j + 0.5) / per);
-      const y = 0.03 * Math.cos((j / per) * Math.PI);
-      const w = 0.93 + 0.07 * Math.sin(j * 3.1 + d);
-      return {
-        p: [base[0] + r * Math.cos(a), base[1] + y, base[2] + r * Math.sin(a)],
-        size: 0.016 + 0.01 * ((j * 0.618) % 1),
-        color: [w, w * 0.97, w * 0.9],
-        opacity: 0.92,
-        kind: "token",
-        params: [d, 0],
-      };
-    });
+    addLiquidPieces(k, 0, SC.jet, { base, len: 0.12, r: 0.032, color: [0.97, 0.92, 0.8], shine: [1, 0.99, 0.95], streak: [0.95, 0.72, 0.38], fine: 0.55, opacity: 1 }); // prettier-ignore
+    addLiquidPieces(k, SC.jet, SC.drops, { base, len: 0.03, r: 0.009, per: 24, color: [0.97, 0.86, 0.66], shine: [1, 0.97, 0.9], fine: 0.7, opacity: 1 }); // prettier-ignore
     k.data.clumpBase = base;
     k.reach([0, 1.72, 0]);
   },
@@ -947,7 +1053,7 @@ const RS = {
   joints: 22,
   heel: [0.8, -0.48, 0],
   mid: -0.05,
-  cord: 0.0115,
+  cord: 0.0085,
   color: [0.17, 0.16, 0.13],
 };
 // The lace from eyelet A (z -0.29) in each pose; lace B is its mirror across the middle, and
@@ -1062,6 +1168,7 @@ function rsLace(which, s) {
 
 const RUNNING_SHOE = {
   alive: false,
+  density: 1.5, // as the Model to splats toy: 300,000 splats on the high tier
   controls: [{ key: "tie", label: "Tie the laces", type: "pulse", ease: RS.T }],
   action: { key: "tie", label: "Untie and tie again" },
   credits: [
@@ -1119,7 +1226,7 @@ const RUNNING_SHOE = {
     addScan(k, scan, { share: 0.82, parts: [shoe, shoe], keep: (fp) => fp === 0 });
     // The laces: round splats along each chain, each following the two joints it lies between.
     const n = RS.joints;
-    const per = Math.max(20, Math.round((k.count * 0.035) / (2 * (n - 1))));
+    const per = Math.max(30, Math.round((k.count * 0.05) / (2 * (n - 1))));
     for (const [w, key] of [
       [0, "A"],
       [1, "B"],
@@ -1131,13 +1238,25 @@ const RUNNING_SHOE = {
         const a = P[j];
         const b = P[j + 1];
         const g = ((i * 0.618034) % 1) * 2 * Math.PI;
-        const r = RS.cord * 0.55;
-        const p = [0, 1, 2].map((k2) => a[k2] + (b[k2] - a[k2]) * f);
-        p[0] += r * Math.cos(g);
-        p[1] += r * Math.sin(g) * 0.7;
-        p[2] += r * Math.sin(g) * 0.7;
-        const shade = 0.85 + 0.3 * Math.max(0, Math.sin(g));
-        return { p, size: RS.cord * 0.9, color: RS.color.map((v) => v * shade), skin: [w * n + j, w * n + j + 1, f] }; // prettier-ignore
+        // Round the cord: a frame across the segment, so the splats ring it evenly.
+        const t = [b[0] - a[0], b[1] - a[1], b[2] - a[2]];
+        const tl = Math.hypot(...t) || 1;
+        const tn = t.map((v) => v / tl);
+        let u = [tn[1] * 0 - tn[2] * 1, tn[2] * 0 - tn[0] * 0, tn[0] * 1 - tn[1] * 0]; // t x y
+        const ul = Math.hypot(...u) || 1;
+        u = u.map((v) => v / ul);
+        const v = [
+          tn[1] * u[2] - tn[2] * u[1],
+          tn[2] * u[0] - tn[0] * u[2],
+          tn[0] * u[1] - tn[1] * u[0],
+        ];
+        const r = RS.cord * 0.6;
+        const p = [0, 1, 2].map((k2) => a[k2] + (b[k2] - a[k2]) * f + r * (Math.cos(g) * u[k2] + Math.sin(g) * v[k2])); // prettier-ignore
+        // A braided cord: fine twisted strands, lit from above.
+        const along = (j + f) * tl;
+        const braid = Math.sin(2 * g + along * 260) > 0.2 ? 1.18 : 0.92;
+        const shade = (0.82 + 0.3 * Math.max(0, Math.sin(g))) * braid;
+        return { p, size: RS.cord * 0.7, color: RS.color.map((c) => Math.min(1, c * shade)), skin: [w * n + j, w * n + j + 1, f] }; // prettier-ignore
       });
     }
     k.reach([0.1, 0.6, 0]);
@@ -1153,12 +1272,15 @@ const RUNNING_SHOE = {
 
 const HD = {
   T: 4.5,
-  neck: [0, 0.3, -0.13], // the hood's hinge, at the back of the neck
+  // The hood's hinge runs across the neck's sides: nodding forward tucks its low front edge into
+  // the chest and opens only a small gap at the back of the neck.
+  neck: [0, 0.33, 0],
+  hoodNod: 0.4, // how far the hood flops forward (radians)
   shoulderL: [-0.36, 0.17, -0.06],
   shoulderR: [0.36, 0.17, -0.06],
   // Where each sleeve points when crossed (the left one over the right).
-  crossL: [0.56, -0.5, 0.66],
-  crossR: [-0.57, -0.6, 0.56],
+  crossL: [0.47, 0.28, 0.84],
+  crossR: [-0.45, 0.05, 0.89],
   strings: [
     { top: [-0.024, 0.342, 0.172], len: 0.26 },
     { top: [0.022, 0.337, 0.158], len: 0.24 },
@@ -1171,6 +1293,7 @@ const swing = (s, a, amp, w = 11, k = 2.2) =>
 
 const HOODIE = {
   alive: false,
+  density: 1.5, // as the Model to splats toy: 300,000 splats on the high tier
   controls: [{ key: "flip", label: "Flip the hood", type: "pulse", ease: HD.T }],
   action: { key: "flip", label: "Hood flip and cross the sleeves" },
   credits: [
@@ -1189,15 +1312,17 @@ const HOODIE = {
   drive(t, c, out, info) {
     const on = c.flip > 0;
     const s = on ? (1 - c.flip) * HD.T : 0;
-    // The hood flips back off the head and down, then up again with a little overshoot.
+    // The hood flops forward, then flips back up with a little overshoot.
     const down = ease(seg(s, 0, 0.55));
     const up = seg(s, 0.6, 1.25);
     const over = 0.14 * Math.sin(Math.PI * seg(s, 1.05, 1.55));
-    out.parts.hood = { angle: -1.95 * down * (1 - ease(up)) + over * (s > 1.05 ? 1 : 0) };
+    out.parts.hood = { angle: HD.hoodNod * down * (1 - ease(up)) - over * (s > 1.05 ? 1 : 0) };
     // The sleeves swing in and cross, hold, and swing back out with a little sway.
     const inL = ease(seg(s, 1.2, 2.05)) * (1 - ease(seg(s, 2.95, 3.75)));
     const inR = ease(seg(s, 1.35, 2.2)) * (1 - ease(seg(s, 2.85, 3.65)));
     const sway = swing(s, 3.7, 0.12, 9, 3);
+    // Fabric caps fill the shoulders while the sleeves are raised (channel 1).
+    out.morph = [0, smoothstep(0.55, 0.85, Math.max(inL, inR)), 0, 0];
     const toward = (dir, f) =>
       quatFromTo([0, -1, 0], [dir[0] * f, -1 + (dir[1] + 1) * f, dir[2] * f]);
     out.parts.sleeveL = { quat: quatMul(quatAxisAngle([0, 0, 1], sway), toward(HD.crossL, inL)) };
@@ -1216,6 +1341,21 @@ const HOODIE = {
     const stringL = k.part("stringL", { pivot: HD.strings[0].top });
     const stringR = k.part("stringR", { pivot: HD.strings[1].top });
     addScan(k, scan, { share: 0.86, parts: [0, hood, sleeveL, sleeveR], keep: (fp) => fp < 4 });
+    // The shoulder caps: fabric the color of the hoodie filling each shoulder where its sleeve
+    // meets the body, shown (by alpha, on channel 1) only while the sleeves are raised.
+    for (const P of [HD.shoulderL, HD.shoulderR]) {
+      const side = Math.sign(P[0]);
+      addCloud(k, Math.round(k.count * 0.012), (i, n) => {
+        const t = 1 - (2 * (i + 0.5)) / n;
+        const ph = Math.acos(t);
+        const th = i * 2.39996323;
+        const nn = [Math.sin(ph) * Math.cos(th), t, Math.sin(ph) * Math.sin(th)];
+        const R = [0.075, 0.08, 0.09];
+        const p = [P[0] - 0.035 * side + R[0] * nn[0], P[1] + R[1] * nn[1], P[2] + R[2] * nn[2]];
+        const col = lit([0.8, 0.685, 0.215], nn, { soft: 0.3 });
+        return { p, n: nn, size: 0.016, color: col, kind: "fade", params: [0, -0.3], channel: 1 };
+      });
+    }
     // The drawstrings: flat cotton cords hanging from the neck, with plastic tips.
     for (const [j, part] of [
       [0, stringL],

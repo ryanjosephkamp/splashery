@@ -671,7 +671,7 @@ Proposals below are suggestions; the owner may change them.
   - Improved: Real objects: a detailed CC BY model of a green fountain pen (maker's marks painted
     out) on a kit-built notepad. The cap slides off and posts on the back end, the pen tilts and
     writes a looping swirl in bright wet ink that dries to dark navy from its start, the cap goes
-    back on and the ink runs back into the nib (4 s).
+    back on and the ink runs back into the nib (4 s). Round 2: denser, sharper model.
   - Sound: A cap click, a smooth nib scratch, another click.
 - **Water bottle** (`water-bottle`). Now: tap: Unscrew and pour. Plan: keep.
   - Owner: From the owner's approved ideas on the Toy Ideas page (lane Real objects, September 29,
@@ -680,10 +680,12 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Its cap (cut out of the scan as a solid piece) spins off in two turns and hops up. The
     bottle tips and water glugs out as a stream of drops into a glass beside it; then it all runs
     back and the cap screws on (4.5 s).
-  - Improved: Real objects: a detailed CC BY model of an orange steel bottle. The cap unscrews in
-    two turns along the thread and hops to the table, the bottle lifts and tips, 40 drops glug in
-    five glugs into a kit-built glass whose water rises; then it all runs back, the bottle stands
-    and the cap screws on (4.5 s).
+  - Improved: Real objects: a detailed CC BY model of an orange steel bottle. The cap (cut from the
+    model above its plug, its underside closed) unscrews in two turns and hops to the table, the
+    bottle lifts and tips, and a continuous stream of water, drawn as overlapping pieces that follow
+    the pour's arc, glugs into a kit-built glass with a splash where it lands while the water rises;
+    then it all runs back, the bottle stands and the cap screws on (4.5 s). Round 2: denser model,
+    cap plug left out, a stream instead of drops.
   - Sound: Cap clicks, then a glug-glug pour that rises in pitch as the glass fills.
 - **Soda can** (`soda-can`). Now: tap: Shake and open. Plan: keep.
   - Owner: From the owner's approved ideas on the Toy Ideas page (lane Real objects, September 29,
@@ -694,8 +696,9 @@ Proposals below are suggestions; the owner may change them.
     back and the foam fades (3.5 s).
   - Improved: Real objects: a detailed CC BY model of a can with an original plain orange label (no
     brand) on a kit-built cork coaster. It shakes, its own ring pull (cut from the model as a solid
-    piece) levers up, the opening shows, 48 foam clumps shoot up and land around it, then the tab
-    folds back and the foam fizzes away (3.5 s).
+    piece) levers up, the opening shows, a continuous jet of cream foam streaked with amber shoots
+    up and falls back while fine drops spatter onto the lid and the coaster and soak away, then the
+    tab folds back (3.5 s). Round 2: denser model, a foamy jet instead of clumps.
   - Sound: A rattle, the sharp pssht of the can opening, then a fizz that dies away.
 
 ## Space (23)
@@ -1631,7 +1634,8 @@ Proposals below are suggestions; the owner may change them.
     through the eyelets and tie themselves into a bow, and the shoe taps its toe twice (4 s).
   - Improved: Real objects: a CC BY photogrammetry scan of a trail running shoe, its own bow swapped
     for two kit-built laces of 22 joints each. The bow comes undone and the laces flop loose, lift
-    and cross over the tongue, tie back into a bow, and the shoe taps its toe twice (4 s).
+    and cross over the tongue, tie back into a bow, and the shoe taps its toe twice (4 s). Round 2:
+    denser scan, thinner braided laces.
   - Sound: Laces zipping through the eyelets, a soft tug, two toe taps.
 - **Hoodie** (`hoodie`). Now: tap: Hood flip and cross the sleeves. Plan: keep.
   - Owner: From the owner's approved ideas on the Toy Ideas page (lane Real objects, September 29,
@@ -1640,9 +1644,10 @@ Proposals below are suggestions; the owner may change them.
   - Effect: The hood (cut out of the scan as a solid piece) flips up and its drawstrings swing, then
     the sleeves (cut at the shoulders) swing in and cross, and it all settles back (4.5 s).
   - Improved: Real objects: a detailed CC BY model of a yellow hoodie, cut along its own seams (the
-    hood's panels) and by a hard plane at each shoulder. The hood flips back off the head and up
-    again as the kit-built drawstrings swing, the sleeves swing in and cross in front, then swing
-    back out and settle (4.5 s).
+    hood's panels) and by a hard plane at each shoulder. The hood flops forward on a hinge across
+    the neck and flips back up as the kit-built drawstrings swing; the sleeves swing up and cross in
+    front of the chest, clear of the body, with fabric filling the shoulders, then swing back down
+    and settle (4.5 s). Round 2: attached hood and shoulders, sleeves clear of the body.
   - Sound: Soft fabric swishes and a zip-like flick.
 - **Sunglasses** (`sunglasses`). Now: tap: Fold, flip and darken. Plan: keep.
   - Owner: From the owner's approved ideas on the Toy Ideas page (lane Real objects, September 29,
@@ -1651,8 +1656,9 @@ Proposals below are suggestions; the owner may change them.
   - Effect: The arms fold in on their hinges one after the other, the glasses flip to face you and
     the lenses darken from clear to deep gray like light-changing lenses; then they unfold (3.5 s).
   - Improved: Real objects: Poly Haven's CC0 round spectacles with kit-built lenses. The arms fold
-    in one after the other, the glasses turn head over heels to face you, the lenses darken from the
-    rim inward to deep gray, then clear as the arms unfold (3.5 s).
+    in one after the other, both behind the lenses and the second behind the first, the glasses turn
+    head over heels to face you, the lenses darken from the rim inward to deep gray, then clear as
+    the arms unfold (3.5 s). Round 2: denser model, arms kept behind the lenses.
   - Sound: Two hinge clicks and a soft shimmer as the lenses darken.
 - **Baseball cap** (`baseball-cap`). Now: tap: Flip and spin. Plan: keep.
   - Owner: From the owner's approved ideas on the Toy Ideas page (lane Real objects, September 29,
@@ -1662,7 +1668,8 @@ Proposals below are suggestions; the owner may change them.
     second flip turns it round the right way (3 s).
   - Improved: Real objects: a detailed CC BY model of a gray six-panel cap on a kit-built walnut
     stand. It flips up off the stand, spins flat three and a half turns round a small loop like a
-    flying disc, lands brim backward, then hops and turns round the right way (3 s).
+    flying disc, lands brim backward, then hops and turns round the right way (3 s). Round 2:
+    denser, sharper model.
   - Sound: A flick, a whoosh, a soft landing.
 
 ## Medieval (9)

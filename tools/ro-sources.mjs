@@ -5,14 +5,15 @@
 
 export const SOURCES = {
   // An orange steel bottle with a screw cap on a loop. The file shows the cap beside the bottle,
-  // so the cap's four pieces are moved onto the neck first. Parts: 0 bottle, 1 cap.
+  // so the cap's four pieces are moved onto the neck first. Parts: 0 bottle, 1 cap (its plug left
+  // out).
   "water-bottle": {
     source: { objaverse: "glbs/000-135/42827e2ce39145eda296e6d6524f4c3d.glb" },
     title: "Water bottle",
     author: "danny_p3d",
     url: "https://sketchfab.com/3d-models/water-bottle-42827e2ce39145eda296e6d6524f4c3d",
     license: "CC BY 4.0",
-    count: 130000,
+    count: 280000,
     pose({ raw, islands, moveTris }) {
       const I = islands(raw.pos, raw.idx);
       const body = I.list.reduce((a, b) => (b.area > a.area ? b : a));
@@ -20,7 +21,9 @@ export const SOURCES = {
       for (const x of I.list) if (x !== body) moveTris(raw, x.tris, ([a, b, c]) => [a, b, c + dz]);
       raw.capY = 0.39;
     },
-    part: (s) => (s.island === s.bodyIsland ? 0 : 1),
+    // The cap is a stopper: the plug below its rim (and the plug's seal) sits inside the neck,
+    // so it is left out; the toy closes the cap's underside with a dark disc.
+    part: (s) => (s.island === s.bodyIsland ? 0 : s.p[1] < 0.604 ? -1 : 1),
   },
   // Vintage round spectacles (Poly Haven, CC0), lenses left out (kit-built lenses that
   // darken). Parts: 0 the front (rims, bridge, nose pads, hinges), 1 left arm, 2 right arm.
@@ -30,7 +33,7 @@ export const SOURCES = {
     author: "Sean Buckley",
     url: "https://polyhaven.com/a/round_spectacles",
     license: "CC0 1.0",
-    count: 90000,
+    count: 280000,
     pose({ raw, islands, dropTris }) {
       const I = islands(raw.pos, raw.idx);
       const lens = new Set();
@@ -65,7 +68,7 @@ export const SOURCES = {
     author: "Scott VanArsdale",
     url: "https://sketchfab.com/3d-models/baseball-cap-1c1d34d73fd94e6b9e8f82b1eb7194a0",
     license: "CC BY 4.0",
-    count: 130000,
+    count: 280000,
   },
   // A green fountain pen with a steel nib and a piston knob. The file lays the cap beside the
   // barrel; it is cut out by its pieces (everything beside the barrel, z < -0.1 in the file) and
@@ -77,7 +80,7 @@ export const SOURCES = {
     author: "chemicalX",
     url: "https://sketchfab.com/3d-models/af3606f31c4343859d887049a1908fb0",
     license: "CC BY 4.0",
-    count: 110000,
+    count: 280000,
     part: (s) => (s.isl.list[s.island].center[2] < -0.1 ? 1 : 0),
     // Cap: top against the nib's tip, its axis on the barrel's (in the file's units).
     place: (s, part) => (part === 1 ? [-2.42, -0.117, 1.3] : null),
@@ -96,7 +99,7 @@ export const SOURCES = {
     author: "RoutineStudio",
     url: "https://sketchfab.com/3d-models/soda-can-f3560f1b73a1498d9313a0f10fd11ef6",
     license: "CC BY 4.0",
-    count: 120000,
+    count: 280000,
     part: (s) => {
       const I = s.isl.list[s.island];
       return I.area > 1 && I.area < 50 ? 1 : 0;
@@ -146,7 +149,7 @@ export const SOURCES = {
     author: "SCANIMAT",
     url: "https://sketchfab.com/3d-models/pb158-sneaker-low-d1bb68aebb1b4532b026d8eb824d4c15",
     license: "CC BY 4.0",
-    count: 130000,
+    count: 280000,
     part: (s) => {
       const I = s.isl.list[s.island];
       return I.hi[1] > 18 && I.area > 20 && I.area < 100 ? 1 : 0;
@@ -165,7 +168,7 @@ export const SOURCES = {
     author: "Virtual Pandora",
     url: "https://sketchfab.com/3d-models/hoodie-97611a53e3b846f69e0655b210f72b2f",
     license: "CC BY 4.0",
-    count: 150000,
+    count: 280000,
     pose({ raw, dropTris }) {
       const label = raw.materials.findIndex((m) => m.name.startsWith("Material125269"));
       dropTris(raw, (t) => raw.mat[t] === label);

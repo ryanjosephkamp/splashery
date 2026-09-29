@@ -112,14 +112,30 @@ Photo to 3D and the Integrator run at the same time; leave their files alone. Th
 
 Model: Opus 5.5 (default effort), for the whole lane.
 
-September 29, 2026: ready for the owner's marks. Cards on the Effect review page (lane
-`RealObjects`): `ro-fountain-pen`, `ro-water-bottle`, `ro-soda-can`, `ro-running-shoe`, `ro-hoodie`,
-`ro-sunglasses`, `ro-baseball-cap` and `ro-stills`. Full test run on main 60b775d merged in: 408
-passed; the two failures (the kit test's fit check, which caught glass colors just above 1, and
-lane's app test, broken by a second test run started in the same folder) were fixed and both files
-pass again (14 of 14). All seven toys are built, in `src/packs/real-objects.js`, from real models
-baked by a new lane tool (`tools/ro-bake.mjs`, sources and cuts in `tools/ro-sources.mjs`). Draft PR
-#97.
+Round 2 (September 29, 2026, evening): the owner marked all eight cards "fix" (notes kept on the
+Effect review page; the Operator added that pours use what the engine has until a Fluids lane
+exists, and that parts must stay attached). What changed:
+
+- **Sharpness, every toy:** each model baked at about 276,000 splats (it was 110,000 to 130,000) and
+  each recipe given `density: 1.5`, like the Model to splats toy the owner marked good, so the high
+  tier shows about 300,000; the model's splats at full opacity.
+- **Water bottle:** the cap is a stopper whose plug (and its seal) sat inside the neck and swung out
+  through it; the plug is now left out at bake time (a hard cut at the cap's rim) and the cap's
+  underside closed with a dark disc. The drops became a continuous stream: 18 overlapping pieces of
+  stretched splats that follow the pour's arc, plus a splash of 26 streak droplets where it lands.
+- **Soda can:** the foam clumps became a continuous jet of cream foam streaked with amber (22
+  pieces), with fine drops spattering onto the lid and the coaster and soaking away.
+- **Sunglasses:** the arms were checked in the front's own frame and stay behind the lenses; the
+  second arm folds a little less so it lies behind the first. (The first clips were rendered before
+  the parts were sorted where they stand, so a folded arm drew over a lens.)
+- **Hoodie:** the hood now flops forward on a hinge across the neck's sides (its low front edge
+  tucks into the chest) and flips back up, instead of swinging off the head. The sleeves swing up
+  and forward to cross in front of the chest on paths checked to stay out of the body (about 3% of
+  their splats, all at the shoulder joint, pass inside), and small fabric caps fill the shoulders
+  while the sleeves are raised.
+- **Running shoe:** the kit laces are thinner, rounder and braided.
+
+Round 1:
 
 | Toy          | Source (license checked on the live page)                           | Kind of model                       | Moving pieces                                                                          |
 | ------------ | ------------------------------------------------------------------- | ----------------------------------- | -------------------------------------------------------------------------------------- |

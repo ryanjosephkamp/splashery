@@ -1122,12 +1122,12 @@ export const TOY_HELP = {
   "water-bottle": {
     howTo: "Tap it to unscrew the cap and pour water into the glass.",
     about:
-      "A reusable steel bottle closes with a screw cap. The cap's thread is a ramp wrapped around a cylinder, so turning it twice pulls it down tight against the bottle's mouth and keeps the water in.\n\nThis bottle is made from a detailed 3D model of a real one. Tap it and the cap spins off in two turns and hops aside, the bottle tips and water glugs into the glass, then it all runs back and the cap screws on. The glug comes from air: bubbles have to push back into the bottle to take the place of the water that leaves.",
+      "A reusable steel bottle closes with a screw cap. The cap's thread is a ramp wrapped around a cylinder, so turning it twice pulls it down tight against the bottle's mouth and keeps the water in.\n\nThis bottle is made from a detailed 3D model of a real one. Tap it and the cap spins off in two turns and hops aside, the bottle tips and a stream of water glugs into the glass, then it all runs back and the cap screws on. The glug comes from air: bubbles have to push back into the bottle to take the place of the water that leaves.",
   },
   "soda-can": {
     howTo: "Tap it to shake the can and pop it open.",
     about:
-      "A soda can holds a drink with carbon dioxide gas dissolved in it under pressure. Shaking the can makes lots of tiny bubbles, and when the ring pull opens it the pressure drops at once, so the gas rushes out of the drink and carries foam with it.\n\nThis can is made from a detailed 3D model of a real one, with a plain orange label. Tap it and it shakes, the ring pull levers up with a crack, and foam sprays out and spatters around it, then the tab folds back and the foam fizzes away.",
+      "A soda can holds a drink with carbon dioxide gas dissolved in it under pressure. Shaking the can makes lots of tiny bubbles, and when the ring pull opens it the pressure drops at once, so the gas rushes out of the drink and carries foam with it.\n\nThis can is made from a detailed 3D model of a real one, with a plain orange label. Tap it and it shakes, the ring pull levers up with a crack, and a jet of foam sprays out while drops spatter around it, then the tab folds back and the foam fizzes away.",
   },
   "running-shoe": {
     howTo: "Tap it to untie the laces and tie them again, then watch it tap its toe.",
@@ -1137,7 +1137,7 @@ export const TOY_HELP = {
   hoodie: {
     howTo: "Tap it to flip the hood and cross the sleeves.",
     about:
-      "A hoodie is a sweatshirt with a hood, first made in the 1930s for people working in cold places. Its soft fleece is knitted cotton brushed on the inside, and a drawstring runs through the edge of the hood to pull it snug. This one has raglan sleeves, whose seams run from the armpit up to the collar.\n\nIt is made from a detailed 3D model of a real hoodie. Tap it and the hood flips back and up again as the drawstrings swing, then the sleeves swing in, cross and settle back.",
+      "A hoodie is a sweatshirt with a hood, first made in the 1930s for people working in cold places. Its soft fleece is knitted cotton brushed on the inside, and a drawstring runs through the edge of the hood to pull it snug. This one has raglan sleeves, whose seams run from the armpit up to the collar.\n\nIt is made from a detailed 3D model of a real hoodie. Tap it and the hood flops forward and flips back up as the drawstrings swing, then the sleeves swing up, cross in front and settle back.",
   },
   sunglasses: {
     howTo: "Tap them to fold the arms, flip the glasses round and darken the lenses.",

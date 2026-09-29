@@ -259,6 +259,7 @@ async function bake(id) {
   const flat = sampleSurface(prep, cfg.count, { seed: 1, up: "y", light: false });
   const n = s.n;
   const part = new Uint8Array(n);
+  const drop = new Uint8Array(n); // a part of -1 leaves the splat out (a piece hidden inside)
   const rgb = new Float32Array(s.rgb);
   const info = {
     i: 0,
@@ -286,7 +287,9 @@ async function bake(id) {
     info.matName = prep.materials[info.mat].name;
     info.island = isl.of[info.tri];
     if (charts) info.chart = charts.list[charts.of[info.tri]];
-    part[i] = cfg.part ? cfg.part(info) : 0;
+    const pi = cfg.part ? cfg.part(info) : 0;
+    if (pi < 0) drop[i] = 1;
+    part[i] = Math.max(0, pi);
     // A piece moved after it was cut (in the file's units, turned into baked units).
     if (cfg.place) {
       const d = cfg.place(info, part[i]);
@@ -328,8 +331,10 @@ async function bake(id) {
   }
   // Shuffle, so any first m splats are an even sample.
   const rand = mulberry32(1234);
-  const order = new Int32Array(n).map((_, i) => i);
-  for (let i = n - 1; i > 0; i--) {
+  const kept = [];
+  for (let i = 0; i < n; i++) if (!drop[i]) kept.push(i);
+  const order = Int32Array.from(kept);
+  for (let i = order.length - 1; i > 0; i--) {
     const j = Math.floor(rand() * (i + 1));
     [order[i], order[j]] = [order[j], order[i]];
   }
@@ -348,9 +353,9 @@ async function bake(id) {
   let nParts = 1;
   for (let i = 0; i < n; i++) nParts = Math.max(nParts, part[i] + 1);
   const head = 4 + 4 + 4 + 4 * 8;
-  const buf = Buffer.alloc(head + n * 14);
+  const buf = Buffer.alloc(head + order.length * 14);
   buf.write("ROS1", 0, "ascii");
-  buf.writeUInt32LE(n, 4);
+  buf.writeUInt32LE(order.length, 4);
   buf.writeUInt32LE(nParts, 8);
   [...lo, ...hi, sLo, sHi].forEach((v, k) => buf.writeFloatLE(v, 12 + k * 4));
   let o = head;
@@ -368,7 +373,7 @@ async function bake(id) {
   fs.mkdirSync(path.dirname(out), { recursive: true });
   fs.writeFileSync(out, buf);
   const counts = new Array(nParts).fill(0);
-  for (const p of part) counts[p]++;
+  for (const i of order) counts[part[i]]++;
   console.log(
     `${id}: ${prep.triangles} triangles, ${isl.list.length} pieces, ${n} splats, parts [${counts.join(", ")}], ${(buf.length / 1e6).toFixed(2)} MB, ${((Date.now() - t0) / 1000).toFixed(1)} s`, // prettier-ignore
   );
