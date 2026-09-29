@@ -3180,6 +3180,17 @@ export const TOYS = [
     tags: "chladni plate sand sound vibration frequency resonance mode nodal lines pattern bow physics",
     camera: { yaw: 0.2, pitch: 0.95, roll: 0, distance: 4.1 },
   },
+  // ---- Pack: studio-models (lane Studio Models) ----
+  {
+    id: "model-splats",
+    label: "Model to splats",
+    category: "studio",
+    kind: "kit",
+    pack: "studio-models",
+    labs: true,
+    tags: "3d model glb gltf obj stl mesh triangles convert converter wireframe texture cad print",
+    camera: { yaw: 0.5, pitch: 0.28, roll: 0, distance: 4.5 },
+  },
   // ---- Pack: lab (lane Lab) ----
   {
     id: "splat-field",
