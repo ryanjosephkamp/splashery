@@ -401,6 +401,29 @@ like any other splat (parts, the body, leaves).
 - `tools/pic-clip.mjs` records clips of picture toys (pages are built in real time).
 - `tools/pic-samples.mjs` makes the samples and the test fixtures from our own text.
 
+## 5c. The tilt lock
+
+From lane Viewer (September 29, 2026). A flat toy (a page, a photo, a screen, a frame) reads best
+face-on, so it can start with its **tilt locked**: a drag only spins it left and right (yaw), while
+pitch and roll stay at the toy's starting pose. Zoom, pan, pinch and Reset view work as usual.
+
+```js
+"your-book": {
+  turntable: false,
+  tiltLock: true, // a drag only spins it left and right
+  // …
+},
+```
+
+- Every toy on the Pictures and pages shelf sets `tiltLock: true`; every other toy leaves it out
+  (free, as before).
+- The top bar's lock button shows the lock for the toy on show and toggles it. A visitor's choice
+  stays with that toy for the visit.
+- A link's saved pose wins: a scene's camera still loads exactly, and the lock then keeps that pitch
+  and roll.
+- A normal two-finger pinch never turns a toy: two fingers zoom, roll only after a clear twist
+  (about 17 degrees) and turn only when they move together first (`PINCH_*` in `src/camera.js`).
+
 ## 6. Behaviours
 
 A behaviour moves each splat on the GPU, every frame. Set `kind` and `params: [a, b]` on a shape or

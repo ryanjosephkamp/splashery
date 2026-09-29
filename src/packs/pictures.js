@@ -11,6 +11,7 @@ export const RECIPES = {
     // A flat sheet that shows whatever you open, and nothing else. It keeps
     // still (no turntable), facing you.
     turntable: false,
+    tiltLock: true, // a drag only spins it left and right (lane Viewer)
     // Few splats of its own (the card); the picture's are the sheet's.
     density: 0.12,
     options: [
