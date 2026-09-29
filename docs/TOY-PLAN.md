@@ -10,8 +10,8 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 309 toys. 309 have a tap action today; the other 0 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 306.
+- 310 toys. 310 have a tap action today; the other 0 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 307.
 - **more** (has an effect; make it clearer or more dramatic): 0.
 - **new** (needs its own effect): 3.
 - Visual fixes: 0 open, 28 done. Touch or drag interaction asked for: 4.
@@ -53,7 +53,7 @@ Proposals below are suggestions; the owner may change them.
   Stonehenge, Big Ben, Taj Mahal, Castle, Pagoda, Windmill, Perceptron, Multilayer perceptron,
   Neural network, Convolutional network, Recurrent network, Transformer, Looped transformer,
   Diffusion model, Gradient descent, Gaussian splatting, Word vectors, Sorting machine, Half adder,
-  Screen.
+  Splat field, Screen.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -2104,3 +2104,18 @@ Proposals below are suggestions; the owner may change them.
   - Effect: A tap bows a square metal plate: every sand grain hops where the plate swings and slides
     to the still lines, and in about 3.6 s the mode's figure appears; tap again to stir it up.
   - Sound: A steady hum at the mode's pitch, with sand pattering.
+
+## Lab (1)
+
+- **Splat field** (`splat-field`). Now: tap: Send a pulse. Plan: keep.
+  - Owner: The owner's note "big new Splashery ideas" and his answer of September 29, 2026 (lane
+    Lab; labs only): splat fields on the GPU.
+  - Effect: Nearly 300,000 splats placed and colored by a program on the GPU every frame: a spiral
+    galaxy, an ocean or a knotted flow. A tap sends a bright ring out through the galaxy, drops a
+    stone in the sea, or pushes the flow once more around the knot (3 s).
+  - Improved: Lab: new test toy on the new Lab shelf (labs). Each splat stores only its (u, v); the
+    toy's work-buffer program (a recipe's gpuField, an additive engine hook) computes its place,
+    tilt and color from them and the time. Three fields: a galaxy whose stars orbit on turning
+    ellipses (a density wave keeps two arms), an ocean of four Gerstner waves, a flow along a (2, 3)
+    torus knot.
+  - Sound: A soft rising swell.
