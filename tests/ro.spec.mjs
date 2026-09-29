@@ -43,7 +43,9 @@ test.describe("Real objects", () => {
       expect(["objects", "clothing"]).toContain(def.category);
       const scan = decodeSplats(new Uint8Array(fs.readFileSync(`assets/toys/${id}/${id}.splats`)));
       expect(scan.n).toBeGreaterThan(80000);
-      for (let i = 0; i < scan.n * 3; i++) expect(Number.isFinite(scan.pos[i])).toBe(true);
+      let bad = 0;
+      for (let i = 0; i < scan.n * 3; i++) if (!Number.isFinite(scan.pos[i])) bad++;
+      expect(bad).toBe(0);
     }
   });
 
@@ -70,10 +72,12 @@ test.describe("Real objects", () => {
       const item = ctx.kit.data.scanItem;
       expect(item.end - item.start).toBeGreaterThan(40000);
       const partsUsed = new Set();
+      let moving = 0;
       for (let i = item.start; i < item.end; i++) {
-        expect(ctx.buf.anim[i * 4 + 1]).toBe(KINDS.none ?? 0);
+        if (ctx.buf.anim[i * 4 + 1] !== (KINDS.none ?? 0)) moving++;
         partsUsed.add(Math.round(ctx.buf.anim[i * 4]) & 15);
       }
+      expect(moving, `${id}: model splats with a behaviour`).toBe(0);
       // Every part the model's splats ride on is only turned and moved, never scaled or hidden.
       const ease = recipe.controls.find((c) => c.key === recipe.action.key).ease;
       let moved = 0;
