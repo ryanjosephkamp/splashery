@@ -222,3 +222,79 @@ export function evenTube(k, curve, radius, opts = {}) {
     },
   };
 }
+
+// A box with rounded edges, like the roundBox() of vehicles.js and
+// landmarks.js (the same face numbers, u and v), with an even 2D layout for
+// even: true.
+export function evenRoundBox(sx, sy, sz, r) {
+  r = Math.max(1e-4, Math.min(r, sx / 2, sy / 2, sz / 2));
+  const h = [sx / 2 - r, sy / 2 - r, sz / 2 - r];
+  // Pieces: 6 faces, 12 edges, 8 corners, each with its own signs.
+  const pieces = [];
+  for (let i = 0; i < 3; i++)
+    for (const s of [1, -1]) {
+      const j = (i + 1) % 3;
+      const k2 = (i + 2) % 3;
+      pieces.push({ kind: 0, i, s, area: 4 * h[j] * h[k2] });
+    }
+  for (let ax = 0; ax < 3; ax++)
+    for (const sj of [1, -1])
+      for (const sk of [1, -1]) pieces.push({ kind: 1, ax, sj, sk, area: Math.PI * r * h[ax] });
+  for (const a of [1, -1])
+    for (const b of [1, -1])
+      for (const c of [1, -1]) pieces.push({ kind: 2, s: [a, b, c], area: (Math.PI / 2) * r * r });
+  let area = 0;
+  for (const q of pieces) q.cum = area += q.area;
+  const at = (q, f, g) => {
+    let n = [0, 0, 0];
+    const base = [0, 0, 0];
+    let face = -1;
+    if (q.kind === 0) {
+      const j = (q.i + 1) % 3;
+      const k2 = (q.i + 2) % 3;
+      n[q.i] = q.s;
+      base[q.i] = q.s * h[q.i];
+      base[j] = (f * 2 - 1) * h[j];
+      base[k2] = (g * 2 - 1) * h[k2];
+      face = q.i * 2 + (q.s > 0 ? 0 : 1);
+    } else if (q.kind === 1) {
+      const j = (q.ax + 1) % 3;
+      const k2 = (q.ax + 2) % 3;
+      const a = g * Math.PI * 0.5;
+      n[j] = q.sj * Math.cos(a);
+      n[k2] = q.sk * Math.sin(a);
+      base[q.ax] = (f * 2 - 1) * h[q.ax];
+      base[j] = q.sj * h[j];
+      base[k2] = q.sk * h[k2];
+    } else {
+      const a = g * Math.PI * 0.5;
+      const w = Math.sqrt(1 - f * f);
+      n = [q.s[0] * w * Math.cos(a), q.s[1] * f, q.s[2] * w * Math.sin(a)];
+      for (let i = 0; i < 3; i++) base[i] = q.s[i] * h[i];
+    }
+    const p = [base[0] + n[0] * r, base[1] + n[1] * r, base[2] + n[2] * r];
+    return { p, n, u: p[0] / sx + 0.5, v: p[1] / sy + 0.5, face };
+  };
+  const pick = (a) => {
+    const x = Math.min(a, 1 - 1e-9) * area;
+    let q = pieces[pieces.length - 1];
+    for (const it of pieces)
+      if (x < it.cum) {
+        q = it;
+        break;
+      }
+    return [q, clamp01((x - (q.cum - q.area)) / q.area)];
+  };
+  return {
+    area,
+    thick: Math.min(sx, sy, sz) / 2,
+    sample(rand) {
+      const [q] = pick(rand());
+      return at(q, rand(), rand());
+    },
+    sampleEven(a, b) {
+      const [q, f] = pick(a);
+      return at(q, f, b);
+    },
+  };
+}

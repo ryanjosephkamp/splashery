@@ -14,7 +14,7 @@ import {
   quatRotate,
   quatMul,
 } from "../kit.js";
-import { evenBox, evenCylinder, evenEllipsoid, evenTorus } from "./even.js";
+import { evenBox, evenCylinder, evenEllipsoid, evenRoundBox, evenTorus } from "./even.js";
 
 const TAU = Math.PI * 2;
 const DEG = 180 / Math.PI;
@@ -182,11 +182,20 @@ function water(k, y, rx, rz, o = {}) {
     z0 = 0,
     rect = false,
   } = o;
-  k.cloud({ share, size: 1.6, pattern: false }, (rand) => {
+  // even: true lays a round patch out on a sunflower spiral (no thin spots)
+  // with less random color, for a smooth sea at phone size.
+  const even = o.even === true && !rect;
+  k.cloud({ share, size: 1.6, pattern: false }, (rand, i, n) => {
     let x;
     let z;
     let edge;
-    if (rect) {
+    if (even) {
+      const a = i * 2.399963229728653;
+      const r = Math.sqrt((i + 0.5) / n);
+      x = Math.cos(a) * r * rx;
+      z = Math.sin(a) * r * rz;
+      edge = smoothstep(0.85, 1, r);
+    } else if (rect) {
       x = (rand() * 2 - 1) * rx;
       z = (rand() * 2 - 1) * rz;
       edge = 0;
@@ -201,9 +210,9 @@ function water(k, y, rx, rz, o = {}) {
     z += z0;
     if (o.mask && !o.mask(x, z)) return null;
     const ripple = 0.5 + 0.5 * Math.sin(x * 11 + z * 7 + Math.sin(z * 4 + x * 2) * 2);
-    let col = mix(deep, light, 0.25 + 0.5 * ripple * ripple + 0.15 * rand());
+    let col = mix(deep, light, 0.25 + 0.5 * ripple * ripple + (even ? 0.04 : 0.15) * rand());
     const f = foam ? foam(x, z) : 0;
-    if (f > 0) col = mix(col, "#f4fbff", clamp(f, 0, 1) * (0.6 + 0.4 * rand()));
+    if (f > 0) col = mix(col, "#f4fbff", clamp(f, 0, 1) * (even ? 0.85 : 0.6 + 0.4 * rand()));
     return {
       p: [x, y + (rand() - 0.5) * 0.003, z],
       n: [0, 1, 0],
@@ -996,7 +1005,9 @@ function supertallBuild(k, o) {
     };
   };
   const tint = o.glass;
-  const floors = 44;
+  // (Fewer, bolder floor lines than the first 44, which broke into dashes
+  // at phone size.)
+  const floors = 30;
   const skin = k.param((u, v) => at(u, v).p, { grid: 128, normal: (u, v) => at(u, v).n, thick: 0.2 }); // prettier-ignore
   const glassColor = (c) => {
     const v = (c.p[1] - y0) / H;
@@ -1009,13 +1020,15 @@ function supertallBuild(k, o) {
       clamp(0.08 + 0.62 * Math.max(0, face) + 0.18 * v, 0, 0.85),
     );
     if (v > 0.965) return keep(shade("#e8eef2", 0.8 + 0.2 * face));
-    if (f < 0.2) return keep(shade(mix(tint, "#1c2833", 0.6), 0.8 + 0.3 * Math.max(0, face)));
+    if (f < 0.24) return keep(shade(mix(tint, "#1c2833", 0.6), 0.8 + 0.3 * Math.max(0, face)));
     if (mull) return keep(mix(glassC, "#d7dee3", 0.22));
     return glassC;
   };
   // The glass carries the running light (channel 0 passing its height); a
   // thin second layer keeps the glints.
   k.add(skin, {
+    even: true,
+    opacity: 1,
     flat: 0.15,
     jitter: 0.015,
     interior: 0.05,
@@ -1027,18 +1040,22 @@ function supertallBuild(k, o) {
     color: glassColor,
   });
   k.add(skin, {
+    opacity: 1,
     share: 0.008,
     flat: 0.15,
     jitter: 0.015,
     part: (c) => bandOf(c.p[1]),
     kind: "glint",
-    params: [0.5, 0],
+    params: [0.2, 0],
     color: glassColor,
   });
   // The crown and spire with a beacon.
   const topY = y0 + H;
   const ts = size(1);
-  k.add(k.cone(ts * 0.9, ts * 0.35, 0.18), {
+  k.add(evenCylinder(ts * 0.9, ts * 0.35, 0.18), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     part: topPart,
     pos: [0, topY + 0.09, 0],
     flat: 0.2,
@@ -1053,6 +1070,9 @@ function supertallBuild(k, o) {
     0.006,
   );
   k.add(k.sphere(0.02), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     part: topPart,
     pos: [0, topY + 0.73, 0],
     weight: 4,
@@ -1062,7 +1082,10 @@ function supertallBuild(k, o) {
     color: "#ff3b30",
   });
   // A podium with a dark glass lobby.
-  k.add(roundBox(1.05, 0.14, 1.05, 0.02), {
+  k.add(evenRoundBox(1.05, 0.14, 1.05, 0.02), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     pos: [0, 0.07, 0],
     flat: 0.2,
     color: (c) => {
@@ -1072,7 +1095,10 @@ function supertallBuild(k, o) {
   });
   // Neighbours for scale, a plaza and trees.
   const block = (x, z, w, d, h, col) =>
-    k.add(k.box(w, h, d), {
+    k.add(evenBox(w, h, d), {
+      even: true,
+      opacity: 1,
+      jitter: 0.015,
       pos: [x, h / 2, z],
       pattern: false,
       flat: 0.2,
@@ -1111,7 +1137,10 @@ function lighthouseBuild(k, o) {
     const d = 0.55 + k.rand() * 0.55;
     const s = 0.2 + k.rand() * 0.22;
     const g = 0.4 + k.rand() * 0.2;
-    k.add(k.ellipsoid(s * 1.3, s * 0.8, s), {
+    k.add(evenEllipsoid(k, s * 1.3, s * 0.8, s), {
+      even: true,
+      opacity: 1,
+      jitter: 0.015,
       pos: [Math.sin(a) * d, 0.05 + s * 0.25, Math.cos(a) * d],
       rot: [k.rand() * 20, a * DEG, k.rand() * 20],
       pattern: false,
@@ -1122,7 +1151,10 @@ function lighthouseBuild(k, o) {
       },
     });
   }
-  k.add(k.ellipsoid(0.95, 0.3, 0.85), {
+  k.add(evenEllipsoid(k, 0.95, 0.3, 0.85), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     pos: [0, 0.12, 0],
     pattern: false,
     flat: 0.25,
@@ -1135,7 +1167,10 @@ function lighthouseBuild(k, o) {
   const t0 = 0.34;
   const t1 = 2.3;
   const face = 0.55;
-  k.add(k.cone(0.34, 0.21, t1 - t0, { caps: false }), {
+  k.add(evenCylinder(0.34, 0.21, t1 - t0, false), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     pos: [0, (t0 + t1) / 2, 0],
     flat: 0.2,
     interior: 0.05,
@@ -1157,18 +1192,31 @@ function lighthouseBuild(k, o) {
     },
   });
   // Gallery, railing, lantern and roof.
-  k.add(k.cylinder(0.32, 0.05), {
+  k.add(evenCylinder(0.32, 0.32, 0.05), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     pos: [0, t1 + 0.02, 0],
     flat: 0.2,
     color: (c) => lit("#2d2f33", c),
   });
-  k.add(k.torus(0.31, 0.007), { pos: [0, t1 + 0.14, 0], weight: 3, color: "#2d2f33" });
+  k.add(evenTorus(k, 0.31, 0.007), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
+    pos: [0, t1 + 0.14, 0],
+    weight: 3,
+    color: "#2d2f33",
+  });
   for (let i = 0; i < 20; i++) {
     const a = (i / 20) * TAU;
     const p = [Math.sin(a) * 0.31, t1 + 0.04, Math.cos(a) * 0.31];
     rod(k, p, add(p, [0, 0.1, 0]), 0.005, { weight: 3, color: "#2d2f33" });
   }
-  k.add(k.cylinder(0.17, 0.3, { caps: false }), {
+  k.add(evenCylinder(0.17, 0.17, 0.3, false), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     pos: [0, t1 + 0.2, 0],
     flat: 0.2,
     pattern: false,
@@ -1178,6 +1226,9 @@ function lighthouseBuild(k, o) {
     },
   });
   k.add(k.sphere(0.1), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     pos: LIGHT.lamp,
     weight: 3,
     pattern: false,
@@ -1185,16 +1236,29 @@ function lighthouseBuild(k, o) {
     params: [0.25, 0],
     color: "#fffbe0",
   });
-  k.add(k.cone(0.23, 0.02, 0.24), {
+  k.add(evenCylinder(0.23, 0.02, 0.24), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     pos: [0, t1 + 0.47, 0],
     flat: 0.2,
     color: (c) => lit(red, c, 0.6),
   });
-  k.add(k.sphere(0.035), { pos: [0, t1 + 0.61, 0], weight: 3, color: (c) => lit("#2d2f33", c) });
+  k.add(k.sphere(0.035), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
+    pos: [0, t1 + 0.61, 0],
+    weight: 3,
+    color: (c) => lit("#2d2f33", c),
+  });
   // The keeper's cottage.
   const hx = 0.62;
   const hz = 0.28;
-  k.add(k.box(0.46, 0.28, 0.34), {
+  k.add(evenBox(0.46, 0.28, 0.34), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     pos: [hx, 0.52, hz],
     flat: 0.2,
     color: (c) => {
@@ -1213,7 +1277,12 @@ function lighthouseBuild(k, o) {
         [hx + 0.26, 0.82, hz],
         [hx - 0.26, 0.82, hz],
       ),
-      { flat: 0.2, color: (c) => lit(red, c, 0.62) },
+      {
+        opacity: 1,
+        jitter: 0.015,
+        flat: 0.2,
+        color: (c) => lit(red, c, 0.62),
+      },
     );
   for (const s of [-1, 1])
     k.add(
@@ -1224,7 +1293,12 @@ function lighthouseBuild(k, o) {
         [hx + s * 0.23, 0.8, hz],
         [hx + s * 0.23, 0.8, hz],
       ),
-      { flat: 0.2, color: (c) => lit(white, c) },
+      {
+        opacity: 1,
+        jitter: 0.015,
+        flat: 0.2,
+        color: (c) => lit(white, c),
+      },
     );
   // The beam: two cones of faint light that sweep round.
   const beam = k.part("beam", { pivot: LIGHT.lamp, axis: [0, 1, 0] });
@@ -1242,6 +1316,7 @@ function lighthouseBuild(k, o) {
   });
   // The sea.
   water(k, 0.06, 2.0, 2.0, {
+    even: true,
     share: 0.18,
     deep: "#1e5f86",
     light: "#5cb1d4",
@@ -1628,19 +1703,28 @@ function whiteHouseBuild(k) {
     if (yy < 0.16 && Math.abs((yy / 0.03) % 1) < 0.1) return lit(shade(white, 0.9), c);
     return lit(white, c);
   };
-  k.add(k.box(2 * X, 0.52, 2 * Z), {
+  k.add(evenBox(2 * X, 0.52, 2 * Z), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     pos: [0, g + 0.26, 0],
     flat: 0.2,
     interior: 0.04,
     core: "#bbb",
     color: facade,
   });
-  k.add(k.box(2 * X + 0.05, 0.03, 2 * Z + 0.05), {
+  k.add(evenBox(2 * X + 0.05, 0.03, 2 * Z + 0.05), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     pos: [0, top + 0.015, 0],
     flat: 0.2,
     color: (c) => lit(white, c),
   });
-  k.add(k.box(2 * X + 0.02, 0.05, 2 * Z + 0.02), {
+  k.add(evenBox(2 * X + 0.02, 0.05, 2 * Z + 0.02), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     pos: [0, top + 0.055, 0],
     flat: 0.2,
     color: (c) => {
@@ -1665,12 +1749,28 @@ function whiteHouseBuild(k) {
   const c1 = corners(R1, ry + 0.11);
   for (let i = 0; i < 4; i++) {
     const j = (i + 1) % 4;
-    k.add(quad(k, c0[i], c0[j], c1[j], c1[i]), { flat: 0.2, color: roof });
+    k.add(quad(k, c0[i], c0[j], c1[j], c1[i]), {
+      even: true,
+      opacity: 1,
+      jitter: 0.015,
+      flat: 0.2,
+      color: roof,
+    });
   }
-  k.add(k.box(2 * R1[0], 0.01, 2 * R1[1]), { pos: [0, ry + 0.11, 0], flat: 0.2, color: roof });
+  k.add(evenBox(2 * R1[0], 0.01, 2 * R1[1]), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
+    pos: [0, ry + 0.11, 0],
+    flat: 0.2,
+    color: roof,
+  });
   for (const x of [-0.45, -0.2, 0.2, 0.45])
     for (const z of [-0.1, 0.1])
-      k.add(k.box(0.05, 0.1, 0.04), {
+      k.add(evenBox(0.05, 0.1, 0.04), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: [x, ry + 0.1, z],
         flat: 0.2,
         color: (c) => lit(white, c),
@@ -1691,12 +1791,17 @@ function whiteHouseBuild(k) {
     const x = Math.sin(a) * pr;
     const z = pz + Math.cos(a) * pr;
     k.add(colShape, {
+      opacity: 1,
+      jitter: 0.015,
       pos: [x, g + 0.18, z],
       flat: 0.2,
       weight: 1.8,
       color: (c) => lit(shade(white, 0.92 + 0.08 * Math.abs(Math.cos(c.u * TAU * 8))), c),
     });
-    k.add(k.box(0.06, 0.02, 0.06), {
+    k.add(evenBox(0.06, 0.02, 0.06), {
+      even: true,
+      opacity: 1,
+      jitter: 0.015,
       pos: [x, g + 0.53, z],
       flat: 0.2,
       weight: 2,
@@ -1713,7 +1818,13 @@ function whiteHouseBuild(k) {
         },
         { grid },
       ),
-      { flat: 0.2, color },
+      {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
+        flat: 0.2,
+        color,
+      },
     );
   halfRing(pr + 0.04, pr + 0.04, g, g + 0.18, (c) => {
     const a = Math.atan2(c.p[0], c.p[2] - pz);
@@ -1731,7 +1842,10 @@ function whiteHouseBuild(k) {
   halfRing(pr - 0.04, pr - 0.04, g + 0.34, g + 0.38, (c) => lit(shade(white, 0.85), c));
   // The east and west wings.
   for (const s of [-1, 1]) {
-    k.add(k.box(0.72, 0.22, 0.3), {
+    k.add(evenBox(0.72, 0.22, 0.3), {
+      even: true,
+      opacity: 1,
+      jitter: 0.015,
       pos: [s * (X + 0.36), g + 0.11, -0.12],
       flat: 0.2,
       color: (c) => {
@@ -1746,7 +1860,10 @@ function whiteHouseBuild(k) {
   // The flag on the roof.
   flag(k, [0, ry + 0.11, 0], 0.2, 0.13, 0.075, usFlag, { dir: [-0.8, 0, -0.6], poleR: 0.004 });
   // The south lawn with a fountain, a drive and trees.
-  k.add(k.box(3.3, g, 2.4), {
+  k.add(evenBox(3.3, g, 2.4), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     pos: [0, g / 2, 0.45],
     pattern: false,
     flat: 0.2,
@@ -1758,7 +1875,10 @@ function whiteHouseBuild(k) {
       return grass(c, "#63a34b");
     },
   });
-  k.add(k.torus(0.13, 0.015), {
+  k.add(evenTorus(k, 0.13, 0.015), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     pos: [0, g + 0.012, 1.05],
     weight: 2,
     color: (c) => lit("#e3ded2", c),
@@ -1887,7 +2007,10 @@ function pisaBuild(k) {
   const marble = "#f1ece0";
   const shadowC = "#d2cab8";
   // The lawn, paths and a round step.
-  k.add(k.box(2.7, 0.04, 2.7), {
+  k.add(evenBox(2.7, 0.04, 2.7), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     pos: [0, 0.0, 0],
     pattern: false,
     flat: 0.2,
@@ -1898,13 +2021,23 @@ function pisaBuild(k) {
       return grass(c, "#5fa148");
     },
   });
-  k.add(k.cylinder(0.64, 0.06), { pos: [0, 0.05, 0], flat: 0.2, color: (c) => lit("#e3ddd0", c) });
+  k.add(evenCylinder(0.64, 0.64, 0.06), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
+    pos: [0, 0.05, 0],
+    flat: 0.2,
+    color: (c) => lit("#e3ddd0", c),
+  });
   const tower = k.part("tower", { pivot: PISA.base, axis: PISA.axis });
   const T = { part: tower, flat: 0.2 };
   const y0 = PISA.base[1];
   const face = 0.55;
   // The ground storey: a solid drum with blind arches and a door.
-  k.add(k.cylinder(0.5, 0.74, { caps: false }), {
+  k.add(evenCylinder(0.5, 0.5, 0.74, false), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     ...T,
     pos: [0, y0 + 0.37, 0],
     interior: 0.04,
@@ -1924,7 +2057,10 @@ function pisaBuild(k) {
   });
   for (let i = 0; i < 15; i++) {
     const a = (i / 15) * TAU;
-    k.add(k.cylinder(0.022, 0.62), {
+    k.add(evenCylinder(0.022, 0.022, 0.62), {
+      even: true,
+      opacity: 1,
+      jitter: 0.015,
       ...T,
       pos: [Math.sin(a) * 0.505, y0 + 0.36, Math.cos(a) * 0.505],
       weight: 2,
@@ -1935,12 +2071,18 @@ function pisaBuild(k) {
   const colShape = k.cylinder(0.016, 0.3, { caps: false });
   for (let j = 0; j < 6; j++) {
     const yb = y0 + 0.74 + j * 0.42;
-    k.add(k.cylinder(0.535, 0.035), {
+    k.add(evenCylinder(0.535, 0.535, 0.035), {
+      even: true,
+      opacity: 1,
+      jitter: 0.015,
       ...T,
       pos: [0, yb + 0.0175, 0],
       color: (c) => (c.s.side ? lit(shade(marble, 0.9), c) : lit(marble, c)),
     });
-    k.add(k.cylinder(0.41, 0.385, { caps: false }), {
+    k.add(evenCylinder(0.41, 0.41, 0.385, false), {
+      even: true,
+      opacity: 1,
+      jitter: 0.015,
       ...T,
       pos: [0, yb + 0.2275, 0],
       color: (c) => {
@@ -1953,13 +2095,18 @@ function pisaBuild(k) {
     for (let i = 0; i < 30; i++) {
       const a = ((i + (j % 2) * 0.5) / 30) * TAU;
       k.add(colShape, {
+        opacity: 1,
+        jitter: 0.015,
         ...T,
         pos: [Math.sin(a) * 0.49, yb + 0.185, Math.cos(a) * 0.49],
         weight: 2.4,
         color: (c) => lit(marble, c),
       });
     }
-    k.add(k.cylinder(0.505, 0.055, { caps: false }), {
+    k.add(evenCylinder(0.505, 0.505, 0.055, false), {
+      even: true,
+      opacity: 1,
+      jitter: 0.015,
       ...T,
       pos: [0, yb + 0.3625, 0],
       color: (c) => {
@@ -1973,8 +2120,18 @@ function pisaBuild(k) {
   }
   // The belfry.
   const yb = y0 + 0.74 + 6 * 0.42;
-  k.add(k.cylinder(0.535, 0.035), { ...T, pos: [0, yb + 0.0175, 0], color: (c) => lit(marble, c) });
-  k.add(k.cylinder(0.33, 0.3), {
+  k.add(evenCylinder(0.535, 0.535, 0.035), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
+    ...T,
+    pos: [0, yb + 0.0175, 0],
+    color: (c) => lit(marble, c),
+  });
+  k.add(evenCylinder(0.33, 0.33, 0.3), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     ...T,
     pos: [0, yb + 0.185, 0],
     color: (c) => {
@@ -1985,7 +2142,10 @@ function pisaBuild(k) {
       return lit(marble, c);
     },
   });
-  k.add(k.torus(0.33, 0.015), {
+  k.add(evenTorus(k, 0.33, 0.015), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     ...T,
     pos: [0, yb + 0.34, 0],
     weight: 2,
@@ -2001,6 +2161,9 @@ function pisaBuild(k) {
     const land = pisaLedge(i, 0.35 * PISA.max + 0.07);
     const at = [land[0], 0.02 + r, land[2]];
     k.add(k.sphere(r), {
+      even: true,
+      opacity: 1,
+      jitter: 0.015,
       part: k.part(`ball${i}`, { pivot: at }),
       pos: at,
       weight: 6,
@@ -2150,7 +2313,13 @@ function colosseumBuild(k) {
           },
         },
       ),
-      { flat: 0.2, color: colorFn },
+      {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
+        flat: 0.2,
+        color: colorFn,
+      },
     );
   // The outer wall (two faces and a top) with its ruined side.
   ellipse(1.0, 0.0, H, true, wallColor(true, 1));
@@ -2164,7 +2333,13 @@ function colosseumBuild(k) {
       },
       { grid: 160, normal: () => [0, 1, 0] },
     ),
-    { flat: 0.2, color: (c) => lit(grime(c, shade(trav, 0.95)), c) },
+    {
+      even: true,
+      opacity: 1,
+      jitter: 0.015,
+      flat: 0.2,
+      color: (c) => lit(grime(c, shade(trav, 0.95)), c),
+    },
   );
   // The inner ring, the vaults between, the seating and the arena.
   const inner = 0.86;
@@ -2190,7 +2365,13 @@ function colosseumBuild(k) {
         },
         { grid: 120, normal: () => [0, 1, 0] },
       ),
-      { flat: 0.2, color: (c) => (c.p[1] > hmax(c.u) ? null : lit("#7e6a52", c)) },
+      {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
+        flat: 0.2,
+        color: (c) => (c.p[1] > hmax(c.u) ? null : lit("#7e6a52", c)),
+      },
     );
   const aIn = 0.86;
   const bIn = 0.54;
@@ -2207,6 +2388,9 @@ function colosseumBuild(k) {
       { grid: 160, normal: (u) => [-Math.sin(u * TAU) * 0.3, 1, -Math.cos(u * TAU) * 0.3] },
     ),
     {
+      even: true,
+      opacity: 1,
+      jitter: 0.015,
       flat: 0.2,
       color: (c) => {
         const step = Math.floor(c.v * 18) % 2;
@@ -2227,9 +2411,17 @@ function colosseumBuild(k) {
       },
       { grid: 64, normal: (u) => [-Math.sin(u * TAU), 0, -Math.cos(u * TAU)] },
     ),
-    { flat: 0.2, color: (c) => lit("#e3d9c3", c) },
+    {
+      even: true,
+      opacity: 1,
+      jitter: 0.015,
+      flat: 0.2,
+      color: (c) => lit("#e3d9c3", c),
+    },
   );
   k.add(k.disc(1), {
+    opacity: 1,
+    jitter: 0.015,
     pos: [0, 0.035, 0],
     scale: [aIn, 1, bIn],
     flat: 0.2,
@@ -2273,7 +2465,10 @@ function colosseumBuild(k) {
     };
   });
   // A paved plaza round it all.
-  k.add(k.cylinder(1, 0.04), {
+  k.add(evenCylinder(1, 1, 0.04), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     pos: [0, -0.02, 0],
     scale: [A * 1.18, 1, B * 1.2],
     pattern: false,

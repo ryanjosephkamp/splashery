@@ -13,7 +13,7 @@ import {
   quatAxisAngle,
   quatRotate,
 } from "../kit.js";
-import { evenBox, evenCylinder } from "./even.js";
+import { evenBox, evenCylinder, evenEllipsoid, evenRoundBox, evenTorus } from "./even.js";
 
 const TAU = Math.PI * 2;
 const add = (a, b) => [a[0] + b[0], a[1] + b[1], a[2] + b[2]];
@@ -151,9 +151,13 @@ function wheel(k, pos, r, w, opts = {}) {
     spokes = 5,
     tread = true,
     rimR = 0.62,
+    even = false,
   } = opts;
   const tr = r * (1 - rimR) * 0.62;
-  k.add(k.torus(r - tr, tr), {
+  // even: an even, solid tyre and rim (lane Fidelity B's toys).
+  const E = even ? { even: true, opacity: 1, jitter: 0.015 } : {};
+  k.add(even ? evenTorus(k, r - tr, tr) : k.torus(r - tr, tr), {
+    ...E,
     pos,
     rot: [90, 0, 0],
     scale: [1, w / (2 * tr), 1],
@@ -169,7 +173,9 @@ function wheel(k, pos, r, w, opts = {}) {
   });
   const rw = w * 0.7;
   // The wheel stays metal and rubber under a flag or pattern.
-  k.add(k.cylinder(r * rimR + tr * 0.4, rw), {
+  const hubR = r * rimR + tr * 0.4;
+  k.add(even ? evenCylinder(hubR, hubR, rw) : k.cylinder(hubR, rw), {
+    ...E,
     pos,
     rot: [90, 0, 0],
     part,
@@ -292,7 +298,10 @@ function rocketBuild(k, o) {
   const white = "#f4f1ea";
   const padTop = 0.18;
   // The pad: a concrete disc with hazard stripes round its edge.
-  k.add(k.cylinder(1.3, padTop), {
+  k.add(evenCylinder(1.3, 1.3, padTop), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     pos: [0, padTop / 2, 0],
     flat: 0.2,
     interior: 0.08,
@@ -333,6 +342,9 @@ function rocketBuild(k, o) {
     [1.6, 0.085],
   ];
   k.add(body, {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     part: rocket,
     flat: 0.2,
     interior: 0.06,
@@ -363,6 +375,9 @@ function rocketBuild(k, o) {
     const d = [Math.sin(a), 0, Math.cos(a)];
     const at = (r, y) => add(mul(d, r), [0, y, 0]);
     slab(k, [at(0.27, 0.62), at(0.8, padTop + 0.01), at(0.78, 0.58), at(0.38, 1.4)], 0.07, {
+      even: true,
+      opacity: 1,
+      jitter: 0.015,
       part: rocket,
       flat: 0.2,
       weight: 1.4,
@@ -370,7 +385,10 @@ function rocketBuild(k, o) {
     });
   }
   // The nozzle.
-  k.add(k.cone(0.24, 0.16, 0.22, { caps: false }), {
+  k.add(evenCylinder(0.24, 0.16, 0.22, false), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     pos: [0, 0.45, 0],
     part: rocket,
     flat: 0.2,
@@ -434,7 +452,10 @@ function rocketBuild(k, o) {
     [-hw, hw],
   ];
   for (const [cx, cz] of corners)
-    k.add(k.box(0.05, top - padTop, 0.05), {
+    k.add(evenBox(0.05, top - padTop, 0.05), {
+      even: true,
+      opacity: 1,
+      jitter: 0.015,
       ...member,
       pos: [tx + cx, (top + padTop) / 2, tz + cz],
     });
@@ -447,7 +468,10 @@ function rocketBuild(k, o) {
       const [bx, bz] = corners[(s + 1) % 4];
       const A = [tx + ax, y0, tz + az];
       const B = [tx + bx, y0, tz + bz];
-      k.add(k.box(0.032, 2 * hw, 0.032), {
+      k.add(evenBox(0.032, 2 * hw, 0.032), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         ...member,
         pos: mul(add(A, B), 0.5),
         quat: quatFromTo([0, 1, 0], sub(B, A)),
@@ -456,7 +480,10 @@ function rocketBuild(k, o) {
         const flip = (i + s) % 2 === 0;
         const P = [tx + (flip ? ax : bx), y0, tz + (flip ? az : bz)];
         const Q = [tx + (flip ? bx : ax), y1, tz + (flip ? bz : az)];
-        k.add(k.box(0.022, len(sub(Q, P)), 0.022), {
+        k.add(evenBox(0.022, len(sub(Q, P)), 0.022), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           ...member,
           pos: mul(add(P, Q), 0.5),
           quat: quatFromTo([0, 1, 0], sub(Q, P)),
@@ -464,15 +491,33 @@ function rocketBuild(k, o) {
       }
     }
   }
-  k.add(k.box(0.52, 0.05, 0.52), { ...member, weight: 1.2, pos: [tx, top + 0.02, tz] });
+  k.add(evenBox(0.52, 0.05, 0.52), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
+    ...member,
+    weight: 1.2,
+    pos: [tx, top + 0.02, tz],
+  });
   rod(k, [tx, top, tz], [tx, top + 0.55, tz], 0.018, { ...member, weight: 2 });
-  k.add(k.sphere(0.04), { pos: [tx, top + 0.57, tz], weight: 3, pattern: false, color: "#ff3b30" });
+  k.add(k.sphere(0.04), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
+    pos: [tx, top + 0.57, tz],
+    weight: 3,
+    pattern: false,
+    color: "#ff3b30",
+  });
   // The swing arm, which swings away at ignition.
   const armY = 2.28;
   const pv = [tx + hw, armY, tz];
   const arm = k.part("arm", { pivot: pv, axis: [0, 1, 0] });
   const tip = [-0.36, armY, -0.05];
-  k.add(k.box(len(sub(tip, pv)), 0.08, 0.12), {
+  k.add(evenBox(len(sub(tip, pv)), 0.08, 0.12), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     part: arm,
     flat: 0.2,
     weight: 1.6,
@@ -480,7 +525,10 @@ function rocketBuild(k, o) {
     quat: quatFromTo([1, 0, 0], sub(tip, pv)),
     color: (c) => lit(steel, c, 0.62),
   });
-  k.add(roundBox(0.16, 0.2, 0.2, 0.048), {
+  k.add(evenRoundBox(0.16, 0.2, 0.2, 0.048), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     part: arm,
     pos: add(tip, [-0.04, 0.03, 0]),
     flat: 0.2,
@@ -1276,6 +1324,9 @@ function carBuild(k, o) {
   ]);
   const stripe = (c) => o.stripes && Math.abs(Math.abs(c.p[2]) - 0.085) < 0.045 && c.n[1] > 0.2;
   k.add(shell(k, -hl, hl, top, bottom, width, { e: 0.62, end: 4 }), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     flat: 0.2,
     interior: 0.06,
     core: "#333",
@@ -1313,6 +1364,9 @@ function carBuild(k, o) {
     { grid: 72 },
   );
   k.add(cabin, {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     flat: 0.2,
     color: (c) => {
       const s = Math.sin(c.v * Math.PI);
@@ -1329,7 +1383,10 @@ function carBuild(k, o) {
   });
   // Headlights, spoiler, mirrors and exhausts.
   for (const z of [-0.29, 0.29])
-    k.add(k.ellipsoid(0.05, 0.035, 0.09), {
+    k.add(evenEllipsoid(k, 0.05, 0.035, 0.09), {
+      even: true,
+      opacity: 1,
+      jitter: 0.015,
       pos: [1.1, 0.4, z],
       rot: [0, 0, -30],
       weight: 3,
@@ -1348,19 +1405,28 @@ function carBuild(k, o) {
     { flat: 0.2, weight: 1.4, color: (c) => lit(shade(col, 0.9), c) },
   );
   for (const z of [-0.32, 0.32])
-    k.add(k.box(0.06, 0.2, 0.03), {
+    k.add(evenBox(0.06, 0.2, 0.03), {
+      even: true,
+      opacity: 1,
+      jitter: 0.015,
       pos: [-1.08, 0.7, z],
       flat: 0.2,
       color: (c) => lit("#2a2a2c", c),
     });
   for (const z of [-0.5, 0.5])
-    k.add(k.ellipsoid(0.06, 0.035, 0.04), {
+    k.add(evenEllipsoid(k, 0.06, 0.035, 0.04), {
+      even: true,
+      opacity: 1,
+      jitter: 0.015,
       pos: [0.36, 0.6, z * 1.04],
       weight: 2,
       color: (c) => lit(col, c),
     });
   for (const z of [-0.2, 0.2])
-    k.add(k.cylinder(0.045, 0.12), {
+    k.add(evenCylinder(0.045, 0.045, 0.12), {
+      even: true,
+      opacity: 1,
+      jitter: 0.015,
       pos: [-1.18, 0.2, z],
       rot: [0, 0, 90],
       weight: 2,
@@ -1373,7 +1439,13 @@ function carBuild(k, o) {
   ]) {
     const part = k.part(name, { pivot: w, axis: [0, 0, 1] });
     for (const z of [-0.5, 0.5])
-      wheel(k, [w[0], w[1], z], CAR.r, 0.22, { part, rim: "#d9dadd", hub: "#8e9096", spokes: 5 });
+      wheel(k, [w[0], w[1], z], CAR.r, 0.22, {
+        part,
+        rim: "#d9dadd",
+        hub: "#8e9096",
+        spokes: 5,
+        even: true,
+      });
   }
   const puff = k.part("puff", { pivot: [-1.25, 0.2, 0] });
   for (const z of [-0.2, 0.2])
@@ -1435,7 +1507,10 @@ function busBuild(k, o) {
     const yellow = "#f5b400";
     const x0 = -1.72;
     const x1 = 1.0;
-    k.add(roundBox(x1 - x0, 1.22, 1.04, 0.16), {
+    k.add(evenRoundBox(x1 - x0, 1.22, 1.04, 0.16), {
+      even: true,
+      opacity: 1,
+      jitter: 0.015,
       ...P,
       pos: [(x0 + x1) / 2, 0.92, 0],
       interior: 0.05,
@@ -1468,7 +1543,10 @@ function busBuild(k, o) {
       },
     });
     // The bonnet, grille, lights and bumpers.
-    k.add(roundBox(0.72, 0.6, 0.92, 0.096), {
+    k.add(evenRoundBox(0.72, 0.6, 0.92, 0.096), {
+      even: true,
+      opacity: 1,
+      jitter: 0.015,
       ...P,
       pos: [1.33, 0.64, 0],
       color: (c) => {
@@ -1479,13 +1557,31 @@ function busBuild(k, o) {
       },
     });
     for (const z of [-0.36, 0.36])
-      k.add(k.sphere(0.07), { pos: [1.68, 0.74, z], weight: 3, pattern: false, color: "#fff8d8" });
+      k.add(k.sphere(0.07), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
+        pos: [1.68, 0.74, z],
+        weight: 3,
+        pattern: false,
+        color: "#fff8d8",
+      });
     for (const x of [1.74, -1.76])
-      k.add(k.box(0.08, 0.13, 1.04), { ...P, pos: [x, 0.38, 0], color: (c) => lit(dark, c) });
+      k.add(evenBox(0.08, 0.13, 1.04), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
+        ...P,
+        pos: [x, 0.38, 0],
+        color: (c) => lit(dark, c),
+      });
     // Warning lights on the roof corners.
     for (const x of [0.96, -1.66])
       for (const z of [-0.34, 0.34])
         k.add(k.sphere(0.05), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           pos: [x, 1.5, z],
           weight: 4,
           pattern: false,
@@ -1496,13 +1592,21 @@ function busBuild(k, o) {
     for (const z of [-0.6, 0.6])
       rod(k, [0.98, 1.2, z * 0.85], [1.08, 1.2, z], 0.012, { weight: 3, color: dark });
     for (const z of [-0.6, 0.6])
-      k.add(k.box(0.04, 0.16, 0.08), { pos: [1.08, 1.2, z], color: dark });
+      k.add(evenBox(0.04, 0.16, 0.08), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
+        pos: [1.08, 1.2, z],
+        color: dark,
+      });
     busDoors(k, 0.55, 0.91, 0.44, 1.33, 0.52);
     // The stop arm lies folded against the side, behind the door; it swings
     // out to face the traffic.
     const stop = k.part("stop", { pivot: [0.44, 0.73, 0.535], axis: [0, 1, 0] });
     rod(k, [0.44, 0.73, 0.54], [0.4, 0.73, 0.54], 0.012, { part: stop, weight: 3, color: dark });
     k.add(k.disc(0.2), {
+      opacity: 1,
+      jitter: 0.015,
       part: stop,
       pos: [0.22, 0.73, 0.545],
       rot: [90, 0, 0],
@@ -1519,7 +1623,16 @@ function busBuild(k, o) {
     });
     // Flashing warning lights: a bright halo over each roof light.
     const halo = (part, pos, col) =>
-      k.add(k.sphere(0.1), { part, pos, weight: 2, opacity: 0.75, pattern: false, color: col });
+      k.add(k.sphere(0.1), {
+        even: true,
+        jitter: 0.015,
+        part,
+        pos,
+        weight: 2,
+        opacity: 0.75,
+        pattern: false,
+        color: col,
+      });
     const fa = k.part("flashA", { pivot: [0, 1.5, 0] });
     const fb = k.part("flashB", { pivot: [0, 1.5, 0] });
     for (const z of [-0.34, 0.34]) {
@@ -1530,7 +1643,10 @@ function busBuild(k, o) {
     const red = "#cc2229";
     const x0 = -1.55;
     const x1 = 1.55;
-    k.add(roundBox(x1 - x0, 1.85, 0.98, 0.16), {
+    k.add(evenRoundBox(x1 - x0, 1.85, 0.98, 0.16), {
+      even: true,
+      opacity: 1,
+      jitter: 0.015,
       ...P,
       pos: [0, 1.23, 0],
       interior: 0.05,
@@ -1564,17 +1680,42 @@ function busBuild(k, o) {
       },
     });
     for (const z of [-0.36, 0.36])
-      k.add(k.sphere(0.065), { pos: [1.55, 0.55, z], weight: 3, pattern: false, color: "#fff8d8" });
+      k.add(k.sphere(0.065), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
+        pos: [1.55, 0.55, z],
+        weight: 3,
+        pattern: false,
+        color: "#fff8d8",
+      });
     for (const x of [1.58, -1.58])
-      k.add(k.box(0.06, 0.12, 0.98), { ...P, pos: [x, 0.36, 0], color: (c) => lit(dark, c) });
+      k.add(evenBox(0.06, 0.12, 0.98), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
+        ...P,
+        pos: [x, 0.36, 0],
+        color: (c) => lit(dark, c),
+      });
     busDoors(k, 0.15, 0.55, 0.4, 1.18, 0.49);
     // Hazard lights at the corners, and their flashing halos.
     const fa = k.part("flashA", { pivot: [0, 0.6, 0] });
     const fb = k.part("flashB", { pivot: [0, 0.6, 0] });
     for (const x of [1.555, -1.555])
       for (const z of [-0.42, 0.42]) {
-        k.add(k.sphere(0.045), { pos: [x, 0.62, z], weight: 4, pattern: false, color: "#ffa21a" });
+        k.add(k.sphere(0.045), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
+          pos: [x, 0.62, z],
+          weight: 4,
+          pattern: false,
+          color: "#ffa21a",
+        });
         k.add(k.sphere(0.1), {
+          even: true,
+          jitter: 0.015,
           part: x * z > 0 ? fa : fb,
           pos: [x, 0.62, z],
           weight: 2,
@@ -1590,7 +1731,13 @@ function busBuild(k, o) {
   ]) {
     const part = k.part(name, { pivot: w, axis: [0, 0, 1] });
     for (const z of [-0.47, 0.47])
-      wheel(k, [w[0], w[1], z], 0.3, 0.22, { part, rim: "#3b3c40", hub: "#d3d5d9", spokes: 0 });
+      wheel(k, [w[0], w[1], z], 0.3, 0.22, {
+        part,
+        rim: "#3b3c40",
+        hub: "#d3d5d9",
+        spokes: 0,
+        even: true,
+      });
   }
   shadow(k, 0.004, isSchool ? 1.95 : 1.75, 0.72);
 }
