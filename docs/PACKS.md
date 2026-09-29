@@ -149,6 +149,10 @@ k.cloud({ share: 0.2, size: 1 }, (rand, i, n) => ({
 }));
 ```
 
+A cloud splat's `size` multiplies the kit's base size, which the toy's surfaces set. A recipe with
+only clouds has no surface, so its base size is 0.01: there a `size` of 1 is 0.01 recipe units, and
+a splat reads about 2.5 sizes across on screen (lane Manual).
+
 `k.rand()` gives recipe-level random numbers (where to put the stones, how many petals).
 
 ## 5. Parts, controls, actions and options
