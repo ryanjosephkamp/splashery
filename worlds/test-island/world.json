@@ -1,0 +1,260 @@
+{
+  "version": 1,
+  "id": "test-island",
+  "title": "Test island",
+  "welcome": "A small island made entirely of splats, for trying out Splashery Worlds. Walk around, visit the five signs, and see how the world is made.",
+  "enter": "Enter",
+  "seed": 20260929,
+  "colors": {},
+  "terrain": {
+    "shape": "island",
+    "size": 128,
+    "chunk": 16,
+    "center": [0, 0],
+    "radius": [34, 28],
+    "height": 3.5,
+    "roughness": 0.45,
+    "coast": 0.3,
+    "seaDepth": 6,
+    "beachHeight": 0.6,
+    "beach": 1.5,
+    "waterLevel": 0,
+    "rockSlope": 0.85,
+    "hills": [
+      {
+        "at": [10, -8],
+        "radius": 11,
+        "height": 6
+      },
+      {
+        "at": [-17, -9],
+        "radius": 4.5,
+        "height": 4.5
+      }
+    ]
+  },
+  "spawn": {
+    "at": [-4, 14],
+    "facing": 180
+  },
+  "props": [
+    {
+      "id": "palm-1",
+      "type": "palm",
+      "at": [-26, 2],
+      "size": 6.2,
+      "turn": 20
+    },
+    {
+      "id": "palm-2",
+      "type": "palm",
+      "at": [-24.5, 10.5],
+      "size": 5.4,
+      "turn": 140,
+      "seed": 2
+    },
+    {
+      "id": "palm-3",
+      "type": "palm",
+      "at": [-19, 13],
+      "size": 6.6,
+      "turn": 250,
+      "seed": 3
+    },
+    {
+      "id": "palm-4",
+      "type": "palm",
+      "at": [-28, 7],
+      "size": 5.0,
+      "turn": 300,
+      "seed": 2
+    },
+    {
+      "id": "pine-1",
+      "type": "pine",
+      "at": [4, -15],
+      "size": 6.5
+    },
+    {
+      "id": "pine-2",
+      "type": "pine",
+      "at": [15, -17],
+      "size": 7.2,
+      "seed": 2
+    },
+    {
+      "id": "pine-3",
+      "type": "pine",
+      "at": [20, -5],
+      "size": 5.8,
+      "seed": 3
+    },
+    {
+      "id": "pine-4",
+      "type": "pine",
+      "at": [1, -4],
+      "size": 5.2,
+      "seed": 2
+    },
+    {
+      "id": "oak-1",
+      "type": "oak",
+      "at": [7, 9],
+      "size": 5.5
+    },
+    {
+      "id": "oak-2",
+      "type": "oak",
+      "at": [-11, -4],
+      "size": 6,
+      "turn": 90,
+      "seed": 2
+    },
+    {
+      "id": "boulder-1",
+      "type": "boulder",
+      "at": [13, 10],
+      "size": 1.5,
+      "turn": 30
+    },
+    {
+      "id": "boulder-2",
+      "type": "boulder",
+      "at": [18.5, 15],
+      "size": 1.9,
+      "turn": 80,
+      "seed": 2
+    },
+    {
+      "id": "boulder-3",
+      "type": "boulder",
+      "at": [20.5, 9],
+      "size": 1.1,
+      "turn": 200,
+      "seed": 3
+    },
+    {
+      "id": "boulder-4",
+      "type": "boulder",
+      "at": [15, 16.5],
+      "size": 0.9,
+      "turn": 10,
+      "seed": 4
+    },
+    {
+      "id": "mushroom-1",
+      "type": "mushroom",
+      "at": [-9.5, -1.5],
+      "size": 0.45
+    },
+    {
+      "id": "mushroom-2",
+      "type": "mushroom",
+      "at": [-8.8, -2.3],
+      "size": 0.32,
+      "turn": 60,
+      "seed": 2
+    },
+    {
+      "id": "lighthouse",
+      "type": "lighthouse",
+      "at": [-9, -30],
+      "size": 10,
+      "turn": 0,
+      "y": -0.25,
+      "detail": 1.8
+    }
+  ],
+  "scatter": [
+    {
+      "type": "fern",
+      "count": 16,
+      "on": "grass",
+      "size": [0.6, 1.0],
+      "spacing": 3
+    },
+    {
+      "type": "bush",
+      "count": 12,
+      "on": "grass",
+      "size": [0.8, 1.4],
+      "spacing": 4
+    },
+    {
+      "type": "tulip",
+      "count": 10,
+      "on": "grass",
+      "size": [0.35, 0.5],
+      "spacing": 1.2,
+      "within": {
+        "at": [-8, 13],
+        "radius": 5
+      }
+    },
+    {
+      "type": "pebbles",
+      "count": 6,
+      "on": "sand",
+      "size": [0.5, 0.8],
+      "spacing": 6
+    }
+  ],
+  "landmarks": [
+    {
+      "id": "welcome",
+      "title": "Welcome to the Test island",
+      "label": "Welcome",
+      "at": [-7, 9.5],
+      "facing": 40,
+      "words": "You found your first sign. Walking up to a sign opens its card; tapping or clicking a sign does too. Walk with W, A, S and D or the arrow keys (Shift runs), or with the thumb stick on a phone, and drag to look around. The Places button lists every place on the island."
+    },
+    {
+      "id": "palm-beach",
+      "title": "Palm beach",
+      "label": "Palm beach",
+      "at": [-21.5, 6],
+      "facing": 80,
+      "words": "These palms, and every tree, rock and flower here, are toys from the Splashery shelf, built from their recipes on your device and placed by the world file. Walk into a trunk: you can't pass through it. Collision uses invisible simple shapes around each prop.",
+      "picture": {
+        "src": "../assets/toys/palm/thumb.webp",
+        "alt": "The palm tree toy on the Splashery shelf"
+      },
+      "link": {
+        "href": "../",
+        "label": "Open the toy box"
+      }
+    },
+    {
+      "id": "lookout",
+      "title": "Lookout hill",
+      "label": "Lookout",
+      "at": [9.5, -7.5],
+      "facing": 190,
+      "words": "The whole island from its highest point. Near things are drawn with many small splats and far things with fewer, larger ones, so the view fits your device's splat budget. Try walking down the steep rocks to the west: the character stops where the slope is too steep."
+    },
+    {
+      "id": "boulders",
+      "title": "Boulder garden",
+      "label": "Boulders",
+      "at": [16.5, 12],
+      "facing": 250,
+      "words": "Boulders to walk around. Each has an invisible collider, so the character slides along it instead of walking through."
+    },
+    {
+      "id": "lighthouse",
+      "title": "The lighthouse",
+      "label": "Lighthouse",
+      "at": [-6, -21],
+      "facing": 10,
+      "words": "A big prop, still sharp from across the island. Worlds are made from a world file: its title, colors, terrain, props, landmarks and spawn point. The format is written up for anyone building a world.",
+      "picture": {
+        "src": "../assets/toys/lighthouse/thumb.webp",
+        "alt": "The lighthouse toy on the Splashery shelf"
+      },
+      "link": {
+        "href": "https://github.com/ryanjosephkamp/splashery/blob/main/docs/WORLDS.md",
+        "label": "Read how worlds are made"
+      }
+    }
+  ]
+}
