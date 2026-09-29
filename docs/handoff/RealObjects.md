@@ -112,6 +112,27 @@ Photo to 3D and the Integrator run at the same time; leave their files alone. Th
 
 Model: Opus 5.5 (default effort), for the whole lane.
 
+Round 3 (September 29, 2026, night): the owner marked the running shoe "good"; the soda can and the
+water bottle wait for the Fluids lane (left as they are); five cards were "fix". What changed:
+
+- **Sunglasses:** the arms fold on hinges moved back behind the rims (z 0.575), so each folded arm
+  lies behind the lenses, the right one just behind the frame and the left one behind it. They are
+  no longer sorted again where they stand: in their built order they already draw behind the lenses
+  (re-sorted, they drew over them).
+- **Sharpness (pen, hoodie, sunglasses, cap):** `tools/ro-bake.mjs` now samples each model at twice
+  the count and keeps an even (blue-noise) set in a coarse-to-fine order, so any first m splats
+  cover the surface evenly (the scan's share on a tier is a prefix). Before, the file was shuffled,
+  and a random subset left clumps and holes (docs/PACKS.md 7c, "even placement").
+- **Baseball cap:** the stand is one smooth turned walnut piece (an even lathe) instead of joined
+  kit shapes with grainy edges.
+- **Fountain pen:** the pen gets 80% of the splats (was 72%), the notepad 10%, and the notepad's
+  rules and margin are fine unbroken lines instead of colored dots in the sheet.
+- **Hoodie:** the shoulder balls are gone. Each armhole is closed with fabric that follows the
+  opening's own outline (the sleeve's splats that touch the body, laid on the plane that fits them
+  best), one patch on the body and one on the sleeve's top, so a raised sleeve shows cloth at the
+  shoulder and under the arm, not the inside of the garment.
+- **Clips** are rendered at a phone's real density (1170 px, a 390 px wide phone at 3x).
+
 Round 2 (September 29, 2026, evening): the owner marked all eight cards "fix" (notes kept on the
 Effect review page; the Operator added that pours use what the engine has until a Fluids lane
 exists, and that parts must stay attached). What changed:
@@ -160,9 +181,9 @@ Round 1:
   tagged with its piece, and a kit recipe that loads it. `tools/ro-bake.mjs` uses the same converter
   (`sampleSurface` in `src/packs/studio-models-core.js`), then cuts parts by the mesh's own separate
   pieces (islands), its texture charts (a garment's panels come apart along their seams) or a hard
-  plane, and writes a compact `.splats` file (14 bytes a splat, about 1.2 to 2.1 MB a toy, in a
-  shuffled order so any first m splats are an even sample for the lower tiers). A painted color
-  keeps the model's baked light (the tool samples twice, lit and flat, and uses the ratio).
+  plane, and writes a compact `.splats` file (14 bytes a splat, about 1.2 to 2.1 MB a toy, in an
+  even order so any first m splats spread evenly over the surface for the lower tiers). A painted
+  color keeps the model's baked light (the tool samples twice, lit and flat, and uses the ratio).
 - Every model piece is a kit part: turned and moved, never scaled or bent. Parts turned past a
   quarter turn are sorted again where they stand (`out.resortPose`, every 0.04 to 0.1 s while they
   move); tokens (drops, foam, lace joints) set `out.resort`.
@@ -177,8 +198,8 @@ Round 1:
   model is of a branded pen, with its marks painted out.
 - The fountain pen at rest sits low in its frame: the frame holds the writing pose (the pen tilted
   up with its cap posted).
-- The hoodie's cut shoulders show a ragged edge while the sleeves are crossed, and the sleeves pass
-  a little into the chest (rigid sleeves cannot bend at the elbow).
+- The hoodie's sleeves pass a little into the chest while crossed (rigid sleeves cannot bend at the
+  elbow), and a raised sleeve's cuff shows its inside.
 - The running shoe is dark; its laces read best on a light background.
 - The brief above is quoted word for word, so its one British spelling stays.
 
