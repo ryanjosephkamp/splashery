@@ -3147,7 +3147,7 @@ export const TOYS = [
     pack: "studio",
     labs: true,
     tags: "chladni plate sand sound vibration frequency resonance mode nodal lines pattern bow physics",
-    camera: { yaw: 0.2, pitch: 0.95, roll: 0, distance: 3.6 },
+    camera: { yaw: 0.2, pitch: 0.95, roll: 0, distance: 4.1 },
   },
   // ---- Pack: screens ----
   {

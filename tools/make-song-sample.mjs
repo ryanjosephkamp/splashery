@@ -32,10 +32,15 @@ for (let bar = 0; bar < 10; bar++) {
   const shift = bar % 4 === 3 ? 2 : 0;
   for (const [b, semi] of melody.slice(bar % 2 ? 8 : 0, bar % 2 ? 16 : 8)) {
     const f = hz(semi + shift);
-    add(at0 + (b % 4) * beat, 1.1, (t) => {
-      const e = Math.exp(-t * 4.5);
-      return e * (Math.sin(2 * Math.PI * f * t) + 0.4 * Math.sin(4 * Math.PI * f * t) + 0.2 * Math.sin(6 * Math.PI * f * t) * Math.exp(-t * 6)); // prettier-ignore
-    }, 0.22);
+    add(
+      at0 + (b % 4) * beat,
+      1.1,
+      (t) => {
+        const e = Math.exp(-t * 4.5);
+        return e * (Math.sin(2 * Math.PI * f * t) + 0.4 * Math.sin(4 * Math.PI * f * t) + 0.2 * Math.sin(6 * Math.PI * f * t) * Math.exp(-t * 6)); // prettier-ignore
+      },
+      0.22,
+    );
   }
   for (let q = 0; q < 4; q++) {
     const f = hz(-24 + bass[(bar * 4 + q) % 8]);
