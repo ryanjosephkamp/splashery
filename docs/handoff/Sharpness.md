@@ -128,5 +128,22 @@ Proposal for the owner (nothing is on by default; he decides what leaves labs):
 7. **What is left is the toys' build**: the Chladni plate's sand, the white blood cell's membrane,
    the Klein bottle's textured tube, the American football's leather noise, the marble's glass, the
    sailboat's dark hull flecks and the book's frayed cover edge. Items for a fidelity lane.
-8. For the backlog: a toy recipe's `render: { cull, dpr, adapt, aa }` (labs only) lets a lane try
+8. **The owner's marks of September 29, 2026**: 18 of 22 cards "good" (the summary included); four
+   "fix". None is the renderer's; each needs the lane that owns the toy (not this lane's files), so
+   they wait on the Operator:
+   - `shp-clock`, "The minute and hour hands on the clock aren't fully visible": the hands sit 1 to
+     3 cm above the dial (`hand()` in src/packs/objects.js: `zf + 0.01`, `0.02`, `0.03`), so from
+     the home view the dial's big, flat splats sort in front of a hand pointing up and to the right.
+     Reproduced at 1:52 (the hour hand vanishes, both at 2x and 3x). Lifting them to `0.04`, `0.055`
+     and `0.07` shows the hand (tested locally, not committed). A small fix in the clock's recipe
+     for whichever lane owns objects.js now; this lane can make it if the Operator says so.
+   - `shp-marble`, "I can barely see the marble's glass spherical shape": the glass shell is a
+     faint, nearly white cloud on a white background at any ratio; the build needs a visible rim (a
+     brighter, more opaque edge where the shell turns away).
+   - `shp-your-book`, "Background rectangle still looks too grainy. The border/edges aren't
+     straight": the cover's edge splats are placed loosely (a frayed edge at any ratio). A build fix
+     for the book's cover (lane Books or Pictures).
+   - `shp-test-island`, "The person, however, doesn't look right … a polished video game character":
+     the character's build (lane Worlds or its Character lane).
+9. For the backlog: a toy recipe's `render: { cull, dpr, adapt, aa }` (labs only) lets a lane try
    the levers per toy.
