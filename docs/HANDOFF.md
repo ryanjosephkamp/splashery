@@ -88,21 +88,24 @@ work is in [OPERATING.md](OPERATING.md).
 
 The full table, with owned files, sessions, branches and PRs, is [WORKSTREAMS.md](WORKSTREAMS.md).
 
-| Lane                                          | Status                                                                                    | Handoff                                                                |
-| --------------------------------------------- | ----------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| Operator                                      | Running; runs the lanes                                                                   | —                                                                      |
-| Worlds: the world engine and a sandbox island | Running, Opus 5.5 (September 29, 2026)                                                    | [handoff/Worlds.md](handoff/Worlds.md)                                 |
-| A/B: the toy piano, makers A and B            | Running, one on each model, hidden until the owner marks them (September 29, 2026)        | [handoff/AB-A.md](handoff/AB-A.md), [handoff/AB-B.md](handoff/AB-B.md) |
-| Anatomy: the anatomy atlas                    | Running, Opus 5.5 (September 29, 2026)                                                    | [handoff/Anatomy.md](handoff/Anatomy.md)                               |
-| Pianos: pianos and songs                      | Running, Opus 5.5 (September 29, 2026)                                                    | [handoff/Pianos.md](handoff/Pianos.md)                                 |
-| Sharpness: grain out of the renderer          | Running, Opus 5.5 (September 29, 2026)                                                    | [handoff/Sharpness.md](handoff/Sharpness.md)                           |
-| Chemistry: the chemistry set                  | Running, Opus 5.5 (September 29, 2026)                                                    | [handoff/Chemistry.md](handoff/Chemistry.md)                           |
-| Real objects: everyday things, for real       | Running, Opus 5.5 (September 29, 2026)                                                    | [handoff/RealObjects.md](handoff/RealObjects.md)                       |
-| Photo to 3D: your photo, in depth             | Running, Sonnet 5.5 (September 29, 2026)                                                  | [handoff/Photo3D.md](handoff/Photo3D.md)                               |
-| Machines A: machines that compute             | Running, Opus 5.5 (September 29, 2026)                                                    | [handoff/MachinesA.md](handoff/MachinesA.md)                           |
-| Integrator: combined test runs                | Running, Sonnet 5.5 (September 29, 2026)                                                  | —                                                                      |
-| Integrator 2: a second runner                 | Running, Sonnet 5.5 (September 29, 2026)                                                  | —                                                                      |
-| Next (WORKSTREAMS.md, Next)                   | Sound A and B (when the owner's notes arrive), the pilot game, the Forest trail template… | —                                                                      |
+| Lane                                                         | Status                                                                                    | Handoff                                                                |
+| ------------------------------------------------------------ | ----------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| Operator                                                     | Running; runs the lanes                                                                   | —                                                                      |
+| Worlds: the world engine and a sandbox island                | Running, Opus 5.5 (September 29, 2026)                                                    | [handoff/Worlds.md](handoff/Worlds.md)                                 |
+| A/B: the toy piano, makers A and B                           | Running, one on each model, hidden until the owner marks them (September 29, 2026)        | [handoff/AB-A.md](handoff/AB-A.md), [handoff/AB-B.md](handoff/AB-B.md) |
+| Anatomy: the anatomy atlas                                   | Running, Opus 5.5 (September 29, 2026)                                                    | [handoff/Anatomy.md](handoff/Anatomy.md)                               |
+| Pianos: pianos and songs                                     | Running, Opus 5.5 (September 29, 2026)                                                    | [handoff/Pianos.md](handoff/Pianos.md)                                 |
+| Sharpness: grain out of the renderer                         | Running, Opus 5.5 (September 29, 2026)                                                    | [handoff/Sharpness.md](handoff/Sharpness.md)                           |
+| Chemistry: the chemistry set                                 | Running, Opus 5.5 (September 29, 2026)                                                    | [handoff/Chemistry.md](handoff/Chemistry.md)                           |
+| Real objects: everyday things, for real                      | Running, Opus 5.5 (September 29, 2026)                                                    | [handoff/RealObjects.md](handoff/RealObjects.md)                       |
+| Photo to 3D: your photo, in depth                            | Running, Sonnet 5.5 (September 29, 2026)                                                  | [handoff/Photo3D.md](handoff/Photo3D.md)                               |
+| Machines A: machines that compute                            | Running, Opus 5.5 (September 29, 2026)                                                    | [handoff/MachinesA.md](handoff/MachinesA.md)                           |
+| Books r2 and r3: a sharper book body; pages you tap and pull | Running, Opus 5.5 (the owner's reviews of September 29, 2026)                             | [handoff/Books.md](handoff/Books.md)                                   |
+| Screens r2: sharp sets and a real off switch                 | Running, Opus 5.5 (September 29, 2026)                                                    | [handoff/ScreensR2.md](handoff/ScreensR2.md)                           |
+| Lab r2: the galaxy tap and a sharp Splat equation            | Running, Opus 5.5 (September 29, 2026)                                                    | [handoff/Lab.md](handoff/Lab.md)                                       |
+| Integrator: combined test runs                               | Running, Sonnet 5.5 (September 29, 2026)                                                  | —                                                                      |
+| Integrator 2: a second runner                                | Running, Sonnet 5.5 (September 29, 2026)                                                  | —                                                                      |
+| Next (WORKSTREAMS.md, Next)                                  | Sound A and B (when the owner's notes arrive), the pilot game, the Forest trail template… | —                                                                      |
 
 E4-finish, E5, E6a, E6b, F, G, Math, Fix3, AI, Help, HelpTextA, HelpTextB, Pictures, Manual and
 Screens are done, and so are Viewer, Studio Sound, Learn, Lab, Studio Models, Books, Fidelity A and
@@ -111,6 +114,16 @@ the How Splashery Is Made page: the Operator runs the lanes, workers are Opus 5.
 default effort, a trial), new public text is in American English, and the work goes in the order in
 ROADMAP.md, "Now". Lanes AI and Math started that day, and the Sound Board has its review features,
 ready for the owner's sound notes.
+
+On September 29, 2026 the owner reviewed the new labs toys
+([reviews/2026-09-29-new-toys](reviews/2026-09-29-new-toys/review.md)): "very impressed", the
+picture frame "nearly perfect" and the Screen "very close to perfect". Books takes his notes on the
+Picture lab, Your book, the photo album and the frame (taps that go back or forward by where they
+land, pages you pull with real physics, sharper covers and a gilded frame, GIFs and videos in
+frames, the slideshow's order); Screens r2 takes the Screen (nothing of the picture shows while it's
+off, a real off switch, sharper sets); Lab r2 takes the galaxy tap and the Splat equation's grain;
+the Song landscape gets a Live view that moves with the music (the Photo to 3D session, after its
+own toy); and an Operator engine PR makes the web-address box name only what each toy opens.
 
 The owner reviewed the AI and Math clips the same day
 ([reviews/2026-09-27-ai-math](reviews/2026-09-27-ai-math/review.md)): seven good, and extras for the
