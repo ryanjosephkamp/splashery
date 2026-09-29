@@ -1,0 +1,85 @@
+# Lab: a short literature check
+
+Lane Lab, September 29, 2026 (Opus 5.5). What other kernels, anti-aliasing methods and time-varying
+splats the research offers, what each would change in our renderer, what it costs and whether it
+fits Splashery. Summaries are in our words, from each paper's abstract or project page; follow the
+links for the real thing.
+
+## Where the kernel lives in our engine
+
+Splashery draws every toy with PlayCanvas 2.22.3's unified gsplat renderer (vendored). Three places
+matter:
+
+1. **The work buffer** (per splat, once a frame). Our modifiers (`MODIFIER`, `MODIFIER_KIT`,
+   `MODIFIER_RIG` in `src/effects.js`, set in `src/stage.js`) move, turn, scale and recolor every
+   splat on the GPU here. This is already a per-frame GPU pass over every splat.
+2. **The corner shader** (per splat, per view; `gsplatCornerVS`). It projects the 3D covariance to a
+   2D ellipse, adds a fixed **0.3 px² dilation** (the classic 3DGS low-pass), and sizes a quad at
+   2√2 standard deviations. Two built-in switches change it: `scene.gsplat.antiAlias` (the
+   `GSPLAT_AA` define: scales opacity by √(det Σ / det(Σ + 0.3 I)), the Mip-Splatting 2D-filter
+   idea) and `scene.gsplat.twoDimensional` (`GSPLAT_2DGS`: flat surfel quads).
+3. **The fragment shader** (per pixel; `gsplatPS`). With `A = |uv|²` over the quad it computes
+   `alpha = (exp(−4A) − e⁻⁴) / (1 − e⁻⁴) · opacity`, then calls a hook,
+   `modifySplatColor(uv, color)` (the `gsplatModifyPS` chunk, empty by default). **Any radial kernel
+   can go in that hook** by rescaling `color.a`, without touching the vendored engine: we override
+   the chunk on the scene's source material (`scene.gsplat.material`), and the engine copies it into
+   the unified material. The quad stays the same size, so a kernel can only be the same width or
+   narrower than the Gaussian it replaces, never wider.
+
+Our toys are kit-built (we place the splats) or captured scans (trained with Gaussians). A trained
+scan's opacities and sizes were fitted to the Gaussian, so a different kernel changes how it looks;
+kit toys have no such tie, which is why a kernel switch is plausible for them and for picture pages.
+
+## Other kernels
+
+| Method                                                                                                                     | What it is                                                                                                                                                                  | What it changes in a renderer                                                               | Cost                                                                                          | Fit for Splashery                                                                                                                                                                                                                     |
+| -------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **GES**, Generalized Exponential Splatting (Hamdi et al., CVPR 2024), [arXiv:2402.10128](https://arxiv.org/abs/2402.10128) | The Gaussian's `exp(−r²)` becomes `exp(−\|r\|^β)` with a learned shape β per primitive. β > 2 gives a flatter top and a steeper edge, so sharp edges need fewer primitives. | The fragment falloff, plus a per-splat β (and a frequency-modulated loss in training).      | A pow per fragment. They report under half the memory of 3DGS and up to 39% faster rendering. | **Good fit, the lead candidate.** A fixed β for a whole toy needs no training and goes in the `modifySplatColor` hook. A per-splat β would need a new work-buffer stream (an engine change we don't need yet).                        |
+| **Deformable Beta Splatting** (Liu et al., 2025), [arXiv:2501.18630](https://arxiv.org/abs/2501.18630)                     | A Beta kernel, `(1 − r²)^β`, with bounded support and a learned β that ranges from soft to near-flat, plus a spherical Beta color model.                                    | The falloff (bounded, so no tail to clip) and the color model.                              | Cheaper than exp. They report 45% of the parameters and about 1.5× faster rendering.          | **Good fit.** `(1 − A)^β` is a one-line change in the hook and ends exactly at the quad's edge. Same story as GES for a per-splat β.                                                                                                  |
+| **Student Splatting and Scooping** (Zhu et al., CVPR 2025), [arXiv:2503.10148](https://arxiv.org/abs/2503.10148)           | Student's t kernels (heavier tails than a Gaussian) with positive and negative densities ("scooping").                                                                      | Heavier tails need bigger quads; negative splats need order-independent or signed blending. | Up to 82% fewer components, but more work per component and a different blend.                | **Poor fit.** Our quads are sized for a Gaussian and blending is standard back-to-front; heavier tails would be clipped, and negative splats don't exist in the engine. Its lesson (fewer, smarter primitives) is for trained scenes. |
+| **Deformable Radial Kernel** (Huang et al., CVPR 2025), [arXiv:2412.11752](https://arxiv.org/abs/2412.11752)               | A learned radial profile with several bases per primitive, so one splat can be a sharp-edged, non-elliptical shape.                                                         | A new fragment kernel with several parameters per splat and its own quad bounds.            | More parameters per splat, far fewer splats.                                                  | **Later, if at all.** Would need new per-splat streams and quads; for hand-placed kit splats the gain is small.                                                                                                                       |
+| **3D Convex Splatting** (Held et al., CVPR 2025), [arXiv:2411.14974](https://arxiv.org/abs/2411.14974)                     | Smooth convex polytopes instead of ellipsoids, good at hard edges and flat faces.                                                                                           | A new primitive: per-splat point sets, a different projection and a different rasterizer.   | A custom rasterizer.                                                                          | **No.** It replaces the renderer, not a kernel. (Our kit toys get hard edges by placing more, smaller splats.)                                                                                                                        |
+| **2D Gaussian Splatting** (Huang et al., SIGGRAPH 2024), [arXiv:2403.17888](https://arxiv.org/abs/2403.17888)              | Flat, oriented Gaussian disks (surfels) with a ray-splat intersection, for accurate surfaces and normals.                                                                   | The projection (no 3D-to-2D covariance; an exact intersection per pixel).                   | Similar to 3DGS.                                                                              | **Already in the engine, partly:** `scene.gsplat.twoDimensional` draws flat quads. Useful for flat things (pages, labels, screens), but the built-in path is not perspective-correct in the paper's sense. Worth one test on pages.   |
+
+Also worth knowing: **3D Half-Gaussian Splatting** (Li et al., 2024,
+[arXiv:2406.02720](https://arxiv.org/abs/2406.02720)) splits each Gaussian with a plane so one half
+can be cut off, for sharp edges from few primitives; it needs a per-splat plane stream and a changed
+fragment test.
+
+## Anti-aliasing
+
+| Method                                                                                                                                                        | What it is                                                                                                                                                                                     | What it changes                                                       | Fit                                                                                                                                                                                                                                                           |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **EWA splatting** (Zwicker, Pfister, van Baar and Gross, IEEE TVCG 2002), [paper (PDF)](https://www.cs.umd.edu/~zwicker/publications/EWASplatting-TVCG02.pdf) | The classic: each splat is convolved with a screen-space low-pass filter so small splats don't alias.                                                                                          | The 0.3 px² dilation our engine already has is a fixed version of it. | Already there.                                                                                                                                                                                                                                                |
+| **Mip-Splatting** (Yu et al., CVPR 2024), [arXiv:2311.16493](https://arxiv.org/abs/2311.16493)                                                                | A 3D smoothing filter that caps how small a Gaussian may be (from the training views), and a 2D Mip filter in place of the plain dilation that compensates opacity so zooming out stays right. | The corner shader (opacity factor), and training.                     | **The 2D half is in the engine** (`scene.gsplat.antiAlias`). It keeps zoomed-out splats from getting fat and bright; on dense, opaque kit surfaces it can make them look thinner or see-through. One switch to measure.                                       |
+| **Analytic-Splatting** (Liang et al., ECCV 2024), [arXiv:2403.11056](https://arxiv.org/abs/2403.11056)                                                        | Integrates each Gaussian over the pixel's area (approximated with a logistic function) instead of sampling it at the pixel center.                                                             | The fragment kernel, using the pixel footprint.                       | **The idea fits the hook**: with screen-space derivatives (`fwidth`) a fragment knows how big a pixel is in splat units, so a sharp kernel can soften itself to exactly one pixel of edge. That is how our candidate avoids shimmering when splats get small. |
+| **Multi-Scale 3D Gaussian Splatting** (Yan et al., CVPR 2024), [arXiv:2311.17089](https://arxiv.org/abs/2311.17089)                                           | Keeps several levels of Gaussians and picks by screen size.                                                                                                                                    | Level of detail.                                                      | Our picture engine already has near and far detail for pages; the engine's octree LOD covers scans.                                                                                                                                                           |
+| **StopThePop** (Radl et al., SIGGRAPH 2024), [arXiv:2402.00525](https://arxiv.org/abs/2402.00525)                                                             | Sorts per pixel (hierarchically) instead of per splat, which stops "popping" as the view turns.                                                                                                | The rasterizer (tile-based, compute).                                 | **No** for now: the engine sorts per splat. Popping is rare on our kit toys, which are mostly opaque surfaces.                                                                                                                                                |
+
+## 4D and time-varying splats
+
+| Method                                                                                                   | What it is                                                                                                                                     | Fit                                                                                                                                                                                                                                                                                                  |
+| -------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **4D-GS** (Wu et al., CVPR 2024), [arXiv:2310.08528](https://arxiv.org/abs/2310.08528)                   | Canonical 3D Gaussians plus a deformation field (neural voxels and a small MLP) that moves them over time; 82 fps at 800×800 on a desktop GPU. | The deformation is a per-splat function of (position, time) evaluated every frame: exactly the shape of our work-buffer modifiers, which already move every splat on the GPU each frame. We write the field by hand instead of training it.                                                          |
+| **4D Gaussian Splatting** (Yang et al., ICLR 2024), [arXiv:2310.10642](https://arxiv.org/abs/2310.10642) | True 4D Gaussians (space and time) sliced at the current time, so each splat fades in and out and moves along its own line.                    | Slicing a 4D Gaussian gives a 3D one whose center moves linearly with time and whose opacity is a Gaussian in time. That is a few lines in a work-buffer modifier with two extra per-splat values (a velocity and a time window): cheap, and a good fit for effects like sparks, rain and fireworks. |
+| **Spacetime Gaussians** (Li et al., CVPR 2024), [arXiv:2312.16812](https://arxiv.org/abs/2312.16812)     | Each splat has a polynomial path, a rotation that changes with time and a temporal opacity; 8K at 60 fps (lite) on a desktop GPU.              | Same fit as above; a polynomial path is a cubic per splat in the modifier.                                                                                                                                                                                                                           |
+
+For Splashery the takeaway is that "4D" does not need training or a new renderer: a splat whose
+position and color are a formula of time, run in the work-buffer pass, is a 4D splat. That is step 3
+of this lane (splat fields on the GPU).
+
+## What we test
+
+1. **Sharp kernels in the fragment hook** (step 2), off by default:
+   - `sharp`: a generalized exponential (GES-style, `exp(−c·A^β)` with β = 2, so a flatter top and a
+     steeper edge), scaled so each splat covers about the same area as today's Gaussian.
+   - `disc`: an energy-matched disc whose edge is softened to about one screen pixel with `fwidth`
+     (the Analytic-Splatting idea, simplified). The crispest possible edge that doesn't shimmer.
+   - Both fall back toward the Gaussian when a splat covers only a pixel or two on screen, where a
+     sharper kernel can only alias.
+2. **The engine's own switches** as controls: `antiAlias` (the Mip-Splatting 2D filter) and
+   `twoDimensional` (flat surfels).
+3. **Fields** (step 3): positions and colors from a formula of (u, v, t) in the work-buffer pass.
+
+Not tested: trained kernels (Student's t, DRK, convexes, half-Gaussians) and per-pixel sorting. They
+need training or a new rasterizer, and our toys are placed, not trained.
