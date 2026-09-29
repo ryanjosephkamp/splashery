@@ -113,10 +113,11 @@ Model: Sonnet 5.5 (default effort). Started September 29, 2026.
 - **Budgets:** the same as the Model to splats toy: density 1.5, so 90k, 210k, 300k and 400k splats
   on the low, mid, high and max tiers (the picture sheets' `PICTURE_BUDGETS` are per page and
   larger, but a kit toy is capped by `maxCount`).
-- **The tap** is a toggle (`rise`, ease 3.2 s). Splats are built in the relief pose (so the draw
-  order is right when it is risen) and morph to the flat plane; the toy rests flat (rise 0 morphs
-  everything to flat). The four layers are the four morph channels, staggered far to near. The body
-  yaws 0.3 rad and back as it rises or falls.
+- **The tap** is a toggle (`flat`, on at first, ease 3.2 s; the test in taps.spec.mjs needs the
+  morph channels at 0 at rest, so the control is "flat" and the splats are built with their depth).
+  Splats are built in the relief pose (so the draw order is right when it is risen) and morph to the
+  flat plane; the toy rests flat (rise 0 morphs everything to flat). The four layers are the four
+  morph channels, staggered far to near. The body yaws 0.3 rad and back as it rises or falls.
 - **Layers** is a second toggle: each depth band is a kit part, moved along z by its offset.
 - Sample photos are the 1,280 px versions Commons serves. Depth maps: `<id>.depth`, u16 with a small
   header (`packDepth` in `photo-3d.js`), made in Chromium with the same model and runtime by

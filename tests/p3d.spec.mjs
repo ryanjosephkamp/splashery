@@ -156,11 +156,11 @@ test.describe("in the browser", () => {
     expect(requests.filter(heavy)).toEqual([]);
     // the tap raises the depth, a second lays it flat
     await page.evaluate(() => window.__splashery.app.act());
-    await page.waitForFunction(() => window.__splashery.player.motion.state.rise > 0.15, null, { timeout: 90_000 }); // prettier-ignore
-    expect(await page.evaluate(() => window.__splashery.player.motion.targets.rise)).toBe(1);
+    await page.waitForFunction(() => window.__splashery.player.motion.state.flat < 0.85, null, { timeout: 90_000 }); // prettier-ignore
+    expect(await page.evaluate(() => window.__splashery.player.motion.targets.flat)).toBe(0);
     await page.evaluate(() => window.__splashery.app.act());
-    expect(await page.evaluate(() => window.__splashery.player.motion.targets.rise)).toBe(0);
-    await page.waitForFunction(() => window.__splashery.player.motion.state.rise < 0.05, null, { timeout: 90_000 }); // prettier-ignore
+    expect(await page.evaluate(() => window.__splashery.player.motion.targets.flat)).toBe(1);
+    await page.waitForFunction(() => window.__splashery.player.motion.state.flat > 0.95, null, { timeout: 90_000 }); // prettier-ignore
     // your own photo, through the panel
     await page.locator("#toy-input-file").setInputFiles(`${FIX}/scene.jpg`);
     await page.waitForFunction(() => window.__splashery.player.proc?.ctx?.kit?.data?.photo?.custom === true, null, { timeout: 150_000 }); // prettier-ignore
@@ -186,7 +186,7 @@ test.describe("in the browser", () => {
       await page.evaluate(() => window.__splashery.app.chooseToy("photo-3d"));
       await page.waitForFunction(() => window.__splashery.player.proc?.ctx?.kit?.data?.photo?.splats > 5000, null, { timeout: 90_000 }); // prettier-ignore
       await page.evaluate(() =>
-        window.__splashery.player.motion.setControl("rise", 1, { snap: true }),
+        window.__splashery.player.motion.setControl("flat", 0, { snap: true }),
       );
       await page.waitForTimeout(1200);
       await page.screenshot({ path: `tests/screenshots/p3d-photo-3d-${w}x${h}.png` });

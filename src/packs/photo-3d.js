@@ -209,10 +209,11 @@ const PHOTO_3D = {
     { key: "photoName", label: "Photo name", type: "text", default: "", hidden: true },
   ],
   controls: [
-    { key: "rise", label: "Depth", type: "toggle", default: 0, ease: 3.2 },
+    // "Flat" is on at first (the picture lies flat); the tap switches it off and the depth rises.
+    { key: "flat", label: "Flat picture", type: "toggle", default: 1, ease: 3.2 },
     { key: "layers", label: "Layers", type: "toggle", default: 0, ease: 1 },
   ],
-  action: { key: "rise", label: "Raise or flatten the depth" },
+  action: { key: "flat", label: "Raise or flatten the depth" },
   input: {
     title: "Your own photo",
     accept: ".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp",
@@ -247,7 +248,8 @@ const PHOTO_3D = {
     else P3D.want = await loadSample(o.source === "custom" ? SAMPLES[0].id : o.source);
   },
   drive(t, c, out) {
-    const r = c.rise ?? 0;
+    const r = 1 - (c.flat ?? 1); // how far the depth has risen (0 flat, 1 with its depth)
+    // The splats are built with their depth (so they sort right) and morph to the flat picture.
     out.morph = [0, 1, 2, 3].map((b) => layerMorph(r, b));
     // The toy sways as the depth rises (and falls), so the parallax shows: one slow swing each way.
     const yaw = 0.3 * Math.sin(2 * Math.PI * r) * Math.sin(Math.PI * r) ** 0.5;

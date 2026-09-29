@@ -55,7 +55,7 @@ for (const id of samples) {
       await app.setToyOptions({ source: id, depth });
       player.idle.weight = 0;
       await new Promise((r) => setTimeout(r, 2500));
-      player.motion.setControl("rise", rise, { snap: true });
+      player.motion.setControl("flat", 1 - rise, { snap: true });
       player.motion.setControl("layers", layers, { snap: true });
       player.stage.setFixedSize([W, H]);
       const out = [];
