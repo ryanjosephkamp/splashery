@@ -1050,6 +1050,10 @@ export class Player {
   // `world` is where a tap on the toy landed (null from the Play button).
   act(world = null) {
     const r = this.motion.act(this.time, world ? this.toRecipe(world) : null);
+    if (r.options) {
+      this.switchTo(r);
+      return r;
+    }
     if (r.key !== "hop") {
       this.scene.motion.controls = {
         ...this.scene.motion.controls,
@@ -1059,6 +1063,33 @@ export class Player {
     this.stage.requestRender();
     this.emit("action", r);
     return r;
+  }
+
+  // A tap that switches the toy: the recipe's action.at returned
+  // { options, key, pick } (the periodic table's tiles pick the element).
+  // The tap's sound plays at once; the toy is rebuilt with those options
+  // (through `this.rebuild`, which the app sets to keep its panels in step),
+  // starting at rest, and then `key` fires on the new toy.
+  async switchTo(r) {
+    const toy = this.scene.toy;
+    const recipe = this.toyInfo?.recipe;
+    const controls = { ...this.scene.motion.controls };
+    for (const c of recipe?.controls || [])
+      if (c.type === "pulse" || c.type === "toggle") delete controls[c.key];
+    this.scene.motion.controls = controls;
+    this.emit("action", r);
+    const rebuild =
+      this.rebuild ||
+      ((options) => {
+        toy.options = { ...(toy.options || {}), ...options };
+        return this.loadToy(toy);
+      });
+    await rebuild(r.options);
+    if (this.scene.toy !== toy || !this.motion.controlDef(r.key)) return;
+    const next = this.motion.act(this.time, null, { key: r.key, pick: r.pick });
+    this.scene.motion.controls = { ...this.scene.motion.controls, [next.key]: this.motion.targets[next.key] }; // prettier-ignore
+    this.stage.requestRender();
+    this.emit("action", { ...next, echo: true });
   }
 
   // A world point in the current toy's recipe coordinates: a kit toy's
@@ -1114,8 +1145,11 @@ export class Player {
       return;
     }
     if (!this.frozen) this.time += dt * this.timeScale;
-    // Pictures: a picture toy (turntable: false) keeps still, facing you.
-    if (this.pictures && this.toyInfo.recipe?.turntable === false) this.camera.turntable = false;
+    // A toy whose recipe sets turntable: false keeps still, facing you: a
+    // picture toy while its pictures show (as before), any other kit toy
+    // always (lane Chemistry: the periodic table).
+    const still = this.toyInfo.recipe?.turntable === false;
+    if (still && (this.pictures || !this.toyInfo.recipe.pictures)) this.camera.turntable = false;
     const d = this.driver.drop;
     if (d.on && d.recallAt < 0) {
       const k = Math.min(1, (this.time - d.start) / 0.9) * d.floor * 0.5;
