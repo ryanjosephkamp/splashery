@@ -23,6 +23,40 @@ added step 3 on September 28, 2026 (the Pages into Splats report,
 Whenever a slot is free: a Real objects lane for the approved scans (historical figures, real
 vehicles, and the everyday objects as real captures), as brand-free sources turn up.
 
+### The Splashery Universe (accepted September 29, 2026)
+
+The owner's note of big ideas and his answers on the planning page "The Splashery Universe" are in
+[reviews/2026-09-29-universe/review.md](reviews/2026-09-29-universe/review.md). Splashery grows into
+five parts. New parts open behind the labs switch, and the owner decides when each goes public. The
+steps above continue alongside them. Until the weekly reset (September 30, 2026, 4 p.m. ET), up to 8
+workers run at once. Each lane names its model (the owner's split in CLAUDE.md).
+
+- **Toys** (Opus 5.5): the sound overhaul (step 4, two lanes from the owner's notes); two fidelity
+  lanes (Fidelity A audits every toy at phone size and fixes the worst, starting with the desk lamp,
+  the American football and the hockey puck; Fidelity B fixes the rest of its list); pianos and
+  songs (step 5); the new toys' sound round (step 6); the Viewer fixes (whole PDF figures, pinch, a
+  tilt lock, top-bar settings, flags per toy, terms of use).
+- **Studio**, splats from anything (Sonnet 5.5 for the converters, Opus 5.5 for any engine part):
+  sound first (a song as a landscape you fly over, and a Chladni plate), then 3D model files to
+  splats (glTF, OBJ, STL, plus a build tool for CC0 models), then photo to 3D (an on-device depth
+  model). Later: typed words, spreadsheet charts, real terrain and a camera mirror.
+- **Worlds** (Opus 5.5 for the engine, Sonnet 5.5 for games and templates): the world engine as a
+  sandbox first; then the pilot game, Toy Hunt Island; then the first portfolio template, Forest
+  trail, with a World maker page; then more templates, two at a time. Templates are free forever
+  under MIT, with a small "World template by Ryan Kamp · Splashery" credit people may keep or move.
+  Everything you see is splats; menus and text are page text, and collision uses invisible shapes. A
+  second Operator takes Worlds once it has three or more lanes.
+- **Lab** (Opus 5.5): a short literature check, then sharper splat kernels on pages and grainy toys,
+  then splat fields on the GPU. Keep only what beats today's clips. Later, an open format for splat
+  objects with moving parts.
+- **Learn** (Sonnet 5.5): an audit of the Tinkerer's Manual, and a running lab notebook
+  ([NOTEBOOK.md](NOTEBOOK.md): what each model built, numbers, lessons) that becomes the blog post
+  at step 9.
+- **Also**: one blind A/B toy, the same small toy built by each model, for the blog; the human
+  anatomy atlas once the 3D model converter works (built from CC0, CC BY or public-domain models,
+  with our own organ toys as the fallback; the owner decides on any CC BY-SA source); the owner's
+  own phone scans as they arrive; and a grooph graph of the Operator's loop for the owner's phone.
+
 ### Pictures and pages
 
 The owner asked for this on September 28, 2026 ([his notes](reviews/2026-09-28-pictures/review.md))

@@ -191,6 +191,24 @@ on September 28, 2026), made smaller (900 pixels on the long side):
 
 Photos and PDFs people open in these toys are read in their browser and never uploaded.
 
+The Screen (a labs toy, lane Screens) opens with two samples:
+
+- A six-second scene from [Big Buck Bunny](https://peach.blender.org/) (the bunny and the butterfly,
+  1:44.5 to 1:50.5, with no title card or logo), © Blender Foundation,
+  [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/) (checked on peach.blender.org's "About"
+  page on September 28, 2026). Cut from the 640 by 360 download at download.blender.org/peach and
+  saved as `assets/toys/screen/bunny.mp4` (H.264) and `bunny.webm` (VP9).
+- A race horse galloping (`assets/toys/screen/horse.gif`), from Eadweard Muybridge's photographs of
+  1887, public domain
+  ([Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Muybridge_race_horse_animated.gif),
+  checked on September 28, 2026). Unchanged.
+
+The Gaussian splatting toy (a labs toy, lane Screens) learns the photo "Strawberry on white
+background" by Joselodos
+([Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Strawberry_on_white_background.jpg)),
+[CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (checked on the live page on September
+28, 2026), cropped and scaled to 800 by 600 (`assets/toys/gaussian-splatting/strawberry.jpg`).
+
 ## National flags
 
 The pattern layer can wrap a national flag around any toy. The flags are SVG files from

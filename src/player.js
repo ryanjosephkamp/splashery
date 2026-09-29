@@ -436,7 +436,7 @@ export class Player {
     const options = resolveOptions(recipe, toy.options);
     // A recipe may read a data file first (the protein toy's structure).
     if (recipe.prepare) {
-      await recipe.prepare(options);
+      await recipe.prepare(options, this.prepareHelp(toy, recipe, options)); // Pictures
       if (token !== this.loadToken) return null;
     }
     // Pictures (lane Books): a picture toy's media opens first, so the
@@ -782,6 +782,43 @@ export class Player {
       return { key: `url:${url}`, source: url, page: 0 };
     }
     return null;
+  }
+
+  // What a picture toy's prepare(options, help) may use (lane Screens: the
+  // Gaussian splatting toy learns the photo it shows): help.media() opens
+  // the media this build will show (the scene's address, the file opened on
+  // this device, or the recipe's sample) and resolves with it, or with null
+  // when it can't be read; the build then shows the same media, opened once.
+  prepareHelp(toy, recipe, options) {
+    if (!recipe.pictures) return {};
+    return {
+      media: () => {
+        const src = this.mediaSource(toy, recipe, options);
+        if (!src) return Promise.resolve(null);
+        if (this.pictureMedia?.key !== src.key) {
+          this.closeMedia();
+          const entry = { key: src.key, media: null };
+          entry.ready = import("./media.js")
+            .then(({ openMedia }) => openMedia(src.source, { profile: this.profile }))
+            .then(
+              (m) => {
+                entry.media = m;
+                if (this.pictureMedia !== entry) {
+                  m.close();
+                  return null;
+                }
+                return m;
+              },
+              () => {
+                if (this.pictureMedia === entry) this.pictureMedia = null;
+                return null;
+              },
+            );
+          this.pictureMedia = entry;
+        }
+        return this.pictureMedia.ready;
+      },
+    };
   }
 
   // Media the app has opened already (to show its errors before anything

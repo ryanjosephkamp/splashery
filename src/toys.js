@@ -3077,6 +3077,18 @@ export const TOYS = [
     tags: "loss landscape optimization learning rate momentum valley ball ai machine learning",
     camera: { yaw: 0.35, pitch: 0.5, roll: 0, distance: 5 },
   },
+  // ---- Pack: splatting (lane Screens) ----
+  {
+    id: "gaussian-splatting",
+    label: "Gaussian splatting",
+    category: "computing",
+    kind: "kit",
+    pack: "splatting",
+    labs: true,
+    tags: "gaussian splat splats 3dgs training fit gradient descent sorting point cloud rendering ai",
+    camera: { yaw: 0, pitch: 0.08, roll: 0, distance: 3.2 },
+  },
+  // ---- End of pack: splatting ----
   {
     id: "word-vectors",
     label: "Word vectors",
@@ -3144,6 +3156,17 @@ export const TOYS = [
     labs: true,
     tags: "picture frame photo wall nail swing wood gold modern digital",
     camera: { yaw: 0.1, pitch: 0.06, roll: 0, distance: 2.9 },
+  },
+  // ---- Pack: screens ----
+  {
+    id: "screen",
+    label: "Screen",
+    category: "pictures",
+    kind: "kit",
+    pack: "screens",
+    labs: true,
+    tags: "tv television video gif movie cinema theater hologram screen curtains play watch",
+    camera: { yaw: 0.25, pitch: 0.12, roll: 0, distance: 3.2 },
   },
 ];
 

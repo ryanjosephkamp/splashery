@@ -1318,6 +1318,12 @@ export const TOY_SOUNDS = {
     { voice: "tone", at: 0.3, f: 720, to: 0.4, decay: 8.5, vol: 0.55 },
     { voice: "whoosh", at: 3.95, f: 500, decay: 0.8, vol: 0.6 },
   ],
+  // Lane Screens: a soft rising chime as the picture forms (each view plays
+  // its own cues; this is the training view's).
+  "gaussian-splatting": [
+    { voice: "shimmer", f: 523, to: 2, decay: 3.3, vol: 0.35 },
+    { voice: "glass", notes: "C5 E5 G5 B5 D6", step: 0.7, at: 0.4, vol: 0.3 },
+  ],
   // Three chimes as the arrows run (0.15, 0.85, 1.55 s), a bright ding as
   // QUEEN lights.
   "word-vectors": [
@@ -1367,6 +1373,14 @@ export const TOY_SOUNDS = {
     { voice: "wood", f: 250, decay: 0.35, vol: 0.5 },
     { voice: "scrape", at: 0.12, f: 1500, decay: 0.3, vol: 0.12 },
     { voice: "wood", at: 0.55, f: 225, decay: 0.3, vol: 0.28 },
+  ],
+  // Lane Screens: the old TV's click and hum (each style plays its own
+  // cues as it switches on: the flat TV's soft tone, the cinema's curtains,
+  // the hologram's shimmer).
+  screen: [
+    { voice: "switch", f: 1800, vol: 0.9 },
+    { voice: "zap", at: 0.1, f: 5200, to: 0.9, decay: 0.5, vol: 0.18 },
+    { voice: "hum", at: 0.12, f: 60, to: 1.02, decay: 1.6, bright: 0.15, vol: 0.5 },
   ],
 };
 

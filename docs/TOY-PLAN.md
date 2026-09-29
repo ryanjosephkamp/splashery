@@ -10,8 +10,8 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 308 toys. 308 have a tap action today; the other 0 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 307.
+- 310 toys. 310 have a tap action today; the other 0 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 309.
 - **more** (has an effect; make it clearer or more dramatic): 0.
 - **new** (needs its own effect): 1.
 - Visual fixes: 0 open, 28 done. Touch or drag interaction asked for: 4.
@@ -52,8 +52,8 @@ Proposals below are suggestions; the owner may change them.
   Twisting supertall, Statue of Liberty, White House, Leaning Tower of Pisa, Colosseum, Parthenon,
   Stonehenge, Big Ben, Taj Mahal, Castle, Pagoda, Windmill, Perceptron, Multilayer perceptron,
   Neural network, Convolutional network, Recurrent network, Transformer, Looped transformer,
-  Diffusion model, Gradient descent, Word vectors, Sorting machine, Half adder, Your book, Photo
-  album, Picture frame.
+  Diffusion model, Gradient descent, Gaussian splatting, Word vectors, Sorting machine, Half adder,
+  Your book, Photo album, Picture frame, Screen.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -1935,7 +1935,7 @@ Proposals below are suggestions; the owner may change them.
     (4 s).
   - Sound: Creaking sails and wind.
 
-## Computing (12)
+## Computing (13)
 
 - **Perceptron** (`perceptron`). Now: tap: Try an example. Plan: keep.
   - Owner: Approved on the Toy Ideas page (lane AI).
@@ -2037,6 +2037,16 @@ Proposals below are suggestions; the owner may change them.
     just right, it overshoots and settles in the valley; too low, it creeps; too high, it bounces
     wall to wall (4.5 s).
   - Sound: A rolling tone that falls in pitch as the loss drops.
+- **Gaussian splatting** (`gaussian-splatting`). Now: tap: Train, or play the view. Plan: keep.
+  - Owner: From the owner's notes of September 28, 2026 (lane Screens; labs only).
+  - Effect: Training: a cloud of random splats slides, stretches and recolors, step by step, into a
+    photo (a real fit of 2D Gaussians by gradient descent), while the loss falls on a chart (7 s).
+    Other views: one splat with its axes, many splats shrinking to dots, and the back-to-front sort.
+  - Improved: Screens: 2,400 splats fitted to a CC0 strawberry photo in a worker, shown through 13
+    keyframes as each splat slides to its next place; views One splat (sizes, opacity and color
+    sliders, a Turn control), Many splats (a duck shrinks to dots and back) and Sorting (splats
+    appear far to near from a camera).
+  - Sound: A soft rising chime as the picture forms.
 - **Word vectors** (`word-vectors`). Now: tap: A − B + C. Plan: keep.
   - Owner: Approved on the Toy Ideas page (lane AI).
   - Effect: Word points float in 3D, each with a small sign; arrows add up, king minus man plus
@@ -2064,7 +2074,7 @@ Proposals below are suggestions; the owner may change them.
     flashes and gives 0, the AND lights the carry lamp, and 1+1=10 shows (3.5 s).
   - Sound: Switch clicks, and a buzz through each gate.
 
-## Pictures (4)
+## Pictures (5)
 
 - **Picture lab** (`picture-lab`). Now: tap: Next page, or play and pause. Plan: new effect (E6).
   - Owner: The Pictures engine lane's test toy (labs only), from the owner's notes of September 27
@@ -2098,3 +2108,12 @@ Proposals below are suggestions; the owner may change them.
   - Improved: Books: a tap swings the frame, its wire and photo about the nail like a damped
     pendulum, smaller each swing, until it hangs straight again (3 s).
   - Sound: A knock on the wall, the wire creaking on the nail, and a softer knock.
+- **Screen** (`screen`). Now: tap: Switch on, then play or pause. Plan: keep.
+  - Owner: From the owner's notes of September 28, 2026 (lane Screens; labs only).
+  - Effect: Your video or GIF on a screen of splats, as an old TV, a flat TV, a cinema or a
+    hologram; the tap switches it on (the TV's bright line opens, the flat TV fades up, the curtains
+    part, the hologram flickers up), then plays and pauses.
+  - Improved: Screens: four styles on a picture sheet with method "screen", a Big Buck Bunny scene
+    (CC BY 3.0) and Muybridge's horse GIF (public domain) as samples, video sound on the speaker
+    button.
+  - Sound: The TV's click and hum; each style its own (a soft tone, the curtains' swish, a shimmer).

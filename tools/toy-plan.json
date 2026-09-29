@@ -1962,6 +1962,13 @@
       "sound": "A rolling tone that falls in pitch as the loss drops.",
       "improved": "AI: the ball takes 21 hops of gradient descent with momentum, leaving a trail of dots; just right, it overshoots and settles in the valley; too low, it creeps; too high, it bounces wall to wall (4.5 s)."
     },
+    "gaussian-splatting": {
+      "v": "keep",
+      "owner": "From the owner's notes of September 28, 2026 (lane Screens; labs only).",
+      "effect": "Training: a cloud of random splats slides, stretches and recolors, step by step, into a photo (a real fit of 2D Gaussians by gradient descent), while the loss falls on a chart (7 s). Other views: one splat with its axes, many splats shrinking to dots, and the back-to-front sort.",
+      "sound": "A soft rising chime as the picture forms.",
+      "improved": "Screens: 2,400 splats fitted to a CC0 strawberry photo in a worker, shown through 13 keyframes as each splat slides to its next place; views One splat (sizes, opacity and color sliders, a Turn control), Many splats (a duck shrinks to dots and back) and Sorting (splats appear far to near from a camera)."
+    },
     "word-vectors": {
       "v": "keep",
       "owner": "Approved on the Toy Ideas page (lane AI).",
@@ -2009,6 +2016,13 @@
       "effect": "A photo in a frame hung on a nail by a wire: a tap swings it about the nail as one solid piece, and it settles like a pendulum (about 3 s). Wood, gold, modern or digital frames; the digital one fades through a set of photos.",
       "sound": "A knock on the wall, the wire creaking on the nail, and a softer knock.",
       "improved": "Books: a tap swings the frame, its wire and photo about the nail like a damped pendulum, smaller each swing, until it hangs straight again (3 s)."
+    },
+    "screen": {
+      "v": "keep",
+      "owner": "From the owner's notes of September 28, 2026 (lane Screens; labs only).",
+      "effect": "Your video or GIF on a screen of splats, as an old TV, a flat TV, a cinema or a hologram; the tap switches it on (the TV's bright line opens, the flat TV fades up, the curtains part, the hologram flickers up), then plays and pauses.",
+      "sound": "The TV's click and hum; each style its own (a soft tone, the curtains' swish, a shimmer).",
+      "improved": "Screens: four styles on a picture sheet with method \"screen\", a Big Buck Bunny scene (CC BY 3.0) and Muybridge's horse GIF (public domain) as samples, video sound on the speaker button."
     }
   }
 }
