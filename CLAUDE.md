@@ -117,10 +117,11 @@ new or changed effect against them before calling it done.
 
 ## Working style
 
-- Pace (the owner's choice of September 29, 2026): up to 8 workers at once, paced by the 5-hour
-  limit; the owner reports the weekly usage morning and evening. Once 6 or more lanes run, an
-  Integrator worker runs the combined test runs. A lane uses at most one helper at a time. (Seven
-  parallel builders once used up a week's usage in one go, so the Operator watches the limits.)
+- Pace (the owner's choice of September 29, 2026): up to 12 workers at once until the weekly reset
+  (September 30, 4 p.m. ET; it was 8 until that morning), paced by the 5-hour limit; the owner
+  reports the weekly usage morning and evening. Once 6 or more lanes run, an Integrator worker runs
+  the combined test runs. A lane uses at most one helper at a time. (Seven parallel builders once
+  used up a week's usage in one go, so the Operator watches the limits.)
 - New parts of the site (Studio, Worlds, Lab and Learn) open behind the labs switch; the owner
   decides when each goes public.
 - The owner works from the phone app. Keep replies short and plain, and give step-by-step
