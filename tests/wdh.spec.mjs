@@ -123,10 +123,10 @@ test.describe("worlds hybrid", () => {
     expect(errors).toEqual([]);
   });
 
-  test("splats hide behind the models' depth in both modes: a bush behind a hill leaves the frame as it is", async ({
-    page,
-  }) => {
-    for (const mode of ["hybrid", "splats"]) {
+  for (const mode of ["hybrid", "splats"])
+    test(`splats hide behind the models' depth (${mode} mode): a bush behind a hill leaves the frame as it is`, async ({
+      page,
+    }) => {
       await open(page, `&render=${mode}`);
       await page.click("#enter");
       // North of the rocky hill, looking south; a bush stands behind it.
@@ -182,8 +182,7 @@ test.describe("worlds hybrid", () => {
       const noMe = await patch(page, probe.me);
       await toggle("me", true);
       expect(noMe).not.toBe(withMe);
-    }
-  });
+    });
 
   test("frames per second, sampled in both modes", async ({ page }) => {
     const out = {};
