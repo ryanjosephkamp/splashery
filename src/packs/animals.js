@@ -681,6 +681,9 @@ export const RECIPES = {
             { grid: 48, normal: () => [0, 0, 1] },
           );
           k.add(shape, {
+            even: true,
+            opacity: 1,
+            jitter: 0.015,
             part,
             flat: 0.12,
             weight: 1,

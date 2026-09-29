@@ -2255,13 +2255,35 @@ export const RECIPES = {
       const glass = k.part("glass");
       const ball = k.part("ball");
       k.add(k.sphere(1), {
+        even: true,
+        jitter: 0.01,
         part: glass,
         flat: 0.15,
         opacity: 0.16,
         kind: "glint",
-        params: [0.9, 0],
+        params: [0.2, 0],
         pattern: false,
         color: (c) => mix("#e8f4ff", "#ffffff", Math.max(0, c.n[1])),
+      });
+      // A soft highlight on the glass, up and to the left: a spiral of
+      // splats that fade toward its edge.
+      const L = unit([0.21, 0.68, 1]);
+      const e1 = unit(cross(L, [0, 1, 0]));
+      const e2 = cross(e1, L);
+      k.cloud({ count: 700, part: glass, pattern: false, flat: 0.15 }, (rand, i, n) => {
+        const f = (i + 0.5) / n;
+        const th = 0.13 * Math.sqrt(f);
+        const ph = i * 2.399963229728653;
+        const d = [0, 1, 2].map(
+          (j) => L[j] * Math.cos(th) + (e1[j] * Math.cos(ph) + e2[j] * Math.sin(ph)) * Math.sin(th),
+        );
+        return {
+          p: d.map((x) => x * 1.004),
+          n: d,
+          color: "#ffffff",
+          size: 0.9,
+          opacity: 0.55 * (1 - f) ** 1.5,
+        };
       });
       for (let v = 0; v < 3; v++) {
         const base = (v / 3) * TAU;
@@ -2275,6 +2297,9 @@ export const RECIPES = {
           { grid: 48 },
         );
         k.add(vane, {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           part: ball,
           weight: 1.6,
           flat: 0.3,

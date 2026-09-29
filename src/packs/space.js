@@ -504,8 +504,35 @@ function ovalDist(d, lat0, lon0, a, b) {
 // Flat rings in the XZ plane (turned by quat): each ring is [r0, r1,
 // opacity, colour(r, c) -> colour or null for a gap, share]. Toys with no
 // weighted surfaces get splats sized to cover each ring.
-function rings(k, list, { quat, part, pos, flat = 0.12, size = 1, glint = 0 }) {
+function rings(k, list, { quat, part, pos, flat = 0.12, size = 1, glint = 0, even = false }) {
   for (const [r0, r1, opacity, col, share, own] of list) {
+    if (even) {
+      // A sunflower spiral across the ring: even, with no thin spots.
+      const area = Math.PI * (r1 * r1 - r0 * r0);
+      const q = quat || [0, 0, 0, 1];
+      const n = quatRotate(q, [0, 1, 0]);
+      k.cloud(
+        { share, part: own ?? part, pattern: false, size: coverSize(k, area, share) * size },
+        (rand, i, count) => {
+          const r = Math.sqrt(r0 * r0 + ((i + 0.5) / count) * (r1 * r1 - r0 * r0));
+          const a = i * 2.399963229728653;
+          const lp = [r * Math.cos(a), 0, r * Math.sin(a)];
+          const color = col(r, { lp, rand });
+          if (color === null) return null;
+          const p = quatRotate(q, lp);
+          return {
+            p: pos ? add(p, pos) : p,
+            n,
+            flat,
+            color,
+            opacity,
+            kind: glint ? "glint" : undefined,
+            params: glint ? [glint, 0] : undefined,
+          };
+        },
+      );
+      continue;
+    }
     const item = k.add(k.disc(r1, r0), {
       quat,
       pos,
@@ -664,7 +691,17 @@ function saturnSurface(noise) {
 function saturnRings(
   k,
   noise,
-  { R = 1, quat, part, pos, shares = [0.05, 0.15, 0.09, 0.008], glint = 0, parts = [], features },
+  {
+    R = 1,
+    quat,
+    part,
+    pos,
+    shares = [0.05, 0.15, 0.09, 0.008],
+    glint = 0,
+    parts = [],
+    features,
+    even = false,
+  },
 ) {
   const fine = (r, f, a) => 1 + a * Math.sin(r * f) + a * 0.6 * noise(r * 60, 0.5, 0.5);
   const az = (c) => Math.atan2(c.lp[2], c.lp[0]);
@@ -732,7 +769,7 @@ function saturnRings(
         parts[3],
       ],
     ],
-    { quat, part, pos, glint },
+    { quat, part, pos, glint, even, size: even ? 1.35 : 1 },
   );
 }
 
@@ -2224,9 +2261,10 @@ export const RECIPES = {
       saturnRings(k, noise, {
         quat: q,
         shares: [0.06, 0.2, 0.12, 0.01],
-        glint: 0.3,
+        glint: 0.15,
         parts,
         features: true,
+        even: true,
       });
       // The waves (hidden until a tap): thin bright rings of sparkling ice,
       // built at the outer edge and grown out from the inner edge.

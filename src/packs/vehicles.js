@@ -13,6 +13,7 @@ import {
   quatAxisAngle,
   quatRotate,
 } from "../kit.js";
+import { evenBox, evenCylinder } from "./even.js";
 
 const TAU = Math.PI * 2;
 const add = (a, b) => [a[0] + b[0], a[1] + b[1], a[2] + b[2]];
@@ -253,13 +254,16 @@ const tilt = (x, z) => quatMulLocal(quatAxisAngle([0, 0, 1], z), quatAxisAngle([
 // A patch of water that ripples, with foam where `foam(x, z)` says.
 function water(k, y, rx, rz, o = {}) {
   const { share = 0.12, deep = "#1d5f8a", light = "#5fb3d6", foam = null, amount = 0.012 } = o;
-  k.cloud({ share, size: 1.6, pattern: false }, (rand) => {
-    const a = rand() * TAU;
-    const r = Math.sqrt(rand());
+  // even: true lays the splats out on a sunflower spiral (no thin spots)
+  // with less random color, for a smooth sea at phone size.
+  const even = o.even === true;
+  k.cloud({ share, size: 1.6, pattern: false }, (rand, i, n) => {
+    const a = even ? i * 2.399963229728653 : rand() * TAU;
+    const r = Math.sqrt(even ? (i + 0.5) / n : rand());
     const x = Math.cos(a) * r * rx;
     const z = Math.sin(a) * r * rz;
     const ripple = 0.5 + 0.5 * Math.sin(x * 9 + z * 6 + Math.sin(z * 3 + x) * 2);
-    let col = mix(deep, light, 0.25 + 0.5 * ripple * ripple + 0.15 * rand());
+    let col = mix(deep, light, 0.25 + 0.5 * ripple * ripple + (even ? 0.04 : 0.15) * rand());
     const f = foam ? foam(x, z) : 0;
     if (f > 0) col = mix(col, "#f4fbff", clamp(f, 0, 1) * (0.6 + 0.4 * rand()));
     const edge = smoothstep(0.82, 1, r);
@@ -1049,13 +1053,15 @@ function linerBuild(k, o) {
   const { L, B, D } = LINER;
   const ship = k.part("ship", { pivot: LINER.centre });
   const S = { part: ship, flat: 0.2 };
+  // Even, solid surfaces (rods stay as they are: cones lattice when even).
+  const E = { ...S, even: true, opacity: 1, jitter: 0.015 };
   const wl = LINER.water;
   const { top } = hull(
     k,
     { L, B, D, bow: 0.2, stern: 0.09, boxy: 0.22, sheer: 0.05, rise: 0.3 },
     {
       side: {
-        ...S,
+        ...E,
         interior: 0.04,
         core: "#222",
         color: (c) => {
@@ -1073,7 +1079,7 @@ function linerBuild(k, o) {
           return lit("#1c1c20", c);
         },
       },
-      deck: { ...S, color: (c) => lit(shade("#c9a36b", 0.9 + 0.1 * Math.sin(c.p[2] * 90)), c) },
+      deck: { ...E, color: (c) => lit(shade("#c9a36b", 0.9 + 0.1 * Math.sin(c.p[2] * 90)), c) },
     },
   );
   // The superstructure: white decks stepping up, with rows of windows.
@@ -1104,14 +1110,14 @@ function linerBuild(k, o) {
     { x0: -1.6, x1: 1.45, w: 0.62, y0: 0.52, h: 0.2 },
   ];
   for (const t of tiers)
-    k.add(k.box(t.x1 - t.x0, t.h, t.w), {
-      ...S,
+    k.add(evenBox(t.x1 - t.x0, t.h, t.w), {
+      ...E,
       pos: [(t.x0 + t.x1) / 2, t.y0 + t.h / 2 + top(0.5), 0],
       color: windows(t.x0, t.x1, { y0: t.y0 + top(0.5), h: t.h }, [0.5]),
     });
   // The bridge.
-  k.add(k.box(0.3, 0.16, 0.78), {
-    ...S,
+  k.add(evenBox(0.3, 0.16, 0.78), {
+    ...E,
     pos: [1.55, 0.8, 0],
     color: (c) => (c.s.face === 0 && c.p[1] > 0.8 ? keep("#27313d") : lit(white, c)),
   });
@@ -1122,7 +1128,7 @@ function linerBuild(k, o) {
       const x = -1.45 + i * 0.36;
       if (Math.abs(x - 0.02) < 0.1) continue;
       k.add(k.ellipsoid(0.12, 0.045, 0.05), {
-        ...S,
+        ...E,
         pos: [x, deckTop + 0.05, z],
         weight: 1.5,
         color: (c) => lit(c.p[1] > deckTop + 0.06 ? "#f7f5ef" : "#d8d2c4", c),
@@ -1135,8 +1141,8 @@ function linerBuild(k, o) {
   const rake = 8;
   const rk = (rake * Math.PI) / 180;
   funnelX.forEach((fx) => {
-    k.add(k.cylinder(0.17, fh), {
-      ...S,
+    k.add(evenCylinder(0.17, 0.17, fh), {
+      ...E,
       pos: [fx - Math.sin(rk) * fh * 0.5, deckTop + fh / 2 - 0.05, 0],
       rot: [0, 0, rake],
       scale: [1, 1, 0.8],
@@ -1192,6 +1198,7 @@ function linerBuild(k, o) {
     });
   // The sea: a patch of rippling water with a bow wave and a wake.
   water(k, wl, L / 2 + 0.55, 1.5, {
+    even: true,
     share: 0.2,
     deep: "#1b4f7a",
     light: "#4e9cc7",

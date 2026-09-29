@@ -11,6 +11,7 @@ import {
   quatFromTo,
   quatRotate,
 } from "../kit.js";
+import { evenBox } from "./even.js";
 import { inked } from "../font.js";
 
 const easeInOut = (x) => (x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2);
@@ -811,13 +812,13 @@ export const RECIPES = {
       const PH = H - 0.05;
       const block = BOOK.pb - leaves * lt;
       const sides = (face) => (face === 2 || face === 3 ? null : keep(shade(paper, 0.84)));
-      k.add(k.box(PW, block, PH), {
+      k.add(evenBox(PW, block, PH), {
         pos: [PW / 2 + 0.005, ct + block / 2, 0],
         flat: 0.15,
         weight: 1.8,
         even: true,
         jitter: 0,
-        size: 0.7,
+        size: 1.1,
         color: (c) => {
           if (c.s.face === 2 || c.s.face === 3) return null;
           if (c.s.face === 1) return shade(paper, 0.8);
@@ -830,6 +831,7 @@ export const RECIPES = {
         weight: 6,
         even: true,
         jitter: 0.01,
+        size: 1.25,
         color: (c) => pageCol(c, c.p[0], c.p[2], 3, true),
       });
       // Leaves that flip one after another.
@@ -837,7 +839,7 @@ export const RECIPES = {
         const part = k.part("leaf" + i, { pivot, axis: [0, 0, 1] });
         const y = T - ct - (i + 0.5) * lt;
         const pos = [PW / 2 + 0.005, y, 0];
-        k.add(k.box(PW, lt * 0.8, PH), {
+        k.add(evenBox(PW, lt * 0.8, PH), {
           pos,
           part,
           flat: 0.15,
@@ -860,20 +862,21 @@ export const RECIPES = {
             weight: shown ? 6 : 0.35,
             even: true,
             jitter: 0.01,
+            size: 1.25,
             color: (c) => pageCol(c, c.p[0], c.p[2], i * 2 + (up < 0 ? 1 : 0), false, up < 0),
           });
         }
       }
       // The left pile's edges, shown once the leaves under the top one hide.
       const pileH = (leaves - 1) * lt;
-      k.add(k.box(PW, pileH, PH), {
+      k.add(evenBox(PW, pileH, PH), {
         pos: [-PW / 2 - 0.005, ct + pileH / 2, 0],
         part: k.part("pile"),
         flat: 0.15,
         weight: 1,
         even: true,
         jitter: 0,
-        size: 0.7,
+        size: 1.1,
         color: (c) => {
           if (c.s.face === 2 || c.s.face === 3) return null;
           return keep(pageEdge(c.p[1]));

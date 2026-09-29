@@ -14,6 +14,7 @@ import {
   quatFromTo,
   quatRotate,
 } from "../kit.js";
+import { evenTorus, capPoint } from "./even.js";
 
 const TAU = Math.PI * 2;
 const add = (a, b) => [a[0] + b[0], a[1] + b[1], a[2] + b[2]];
@@ -2333,7 +2334,6 @@ export const RECIPES = {
 
   "soap-bubbles": {
     alive: true,
-    density: 0.7,
     options: [{ key: "color", label: "Wand", type: "color", default: "#8e5bd9" }],
     controls: [{ key: "blow", label: "Blow", type: "pulse", ease: 2.5 }],
     action: { key: "blow", label: "Blow bubbles" },
@@ -2355,7 +2355,10 @@ export const RECIPES = {
       const ringN = WAND.n;
       // The wand: a ring on a handle, with a soap film in it.
       const q = quatFromTo([0, 1, 0], ringN);
-      k.add(k.torus(WAND.r, 0.022), {
+      k.add(evenTorus(k, WAND.r, 0.022), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: ringC,
         quat: q,
         flat: 0.25,
@@ -2371,23 +2374,33 @@ export const RECIPES = {
           grid: 32,
         }),
         {
+          opacity: 1,
+          jitter: 0.015,
           flat: 0.25,
           weight: 1.5,
           color: (c) => lit(wand, c.n, { spec: 0.5 }),
         },
       );
-      k.add(k.disc(WAND.r - 0.01), {
-        pos: ringC,
-        quat: q,
-        flat: 0.1,
-        opacity: 0.35,
-        pattern: false,
-        color: (c) => film(c.lp, c.n, c),
+      // The film: a sunflower spiral of splats, so it has no thin spots.
+      const fc = { fbm: (x, y, z, n) => k.noise.fbm(x, y, z, n) };
+      k.cloud({ share: 0.035, pattern: false }, (rand, i, n) => {
+        const r = (WAND.r - 0.01) * Math.sqrt((i + 0.5) / n);
+        const a = i * 2.399963229728653;
+        const lp = [r * Math.sin(a), 0, r * Math.cos(a)];
+        return {
+          p: add(ringC, quatRotate(q, lp)),
+          n: ringN,
+          flat: 0.1,
+          opacity: 0.42,
+          color: film(lp, ringN, fc),
+        };
       });
       // The bubbles.
       BUBBLES.forEach((b, i) => {
         const part = k.part("b" + i, { pivot: b.rest });
         k.add(k.sphere(b.r), {
+          even: true,
+          jitter: 0.01,
           pos: b.rest,
           part,
           flat: 0.1,
@@ -2395,21 +2408,22 @@ export const RECIPES = {
           pattern: false,
           color: (c) => film(c.lp, c.n, c),
         });
-        k.cloud({ share: 0.0015 + b.r * 0.004, size: 0.8, part, pattern: false }, (rand) => {
-          const big = rand() < 0.7;
-          const d = unit(
-            add(
-              big ? [-0.45, 0.62, 0.64] : [0.5, -0.55, 0.66],
-              mul([rand() - 0.5, rand() - 0.5, rand() - 0.5], big ? 0.3 : 0.18),
-            ),
-          );
+        // Two soft window highlights: a big one up and to the left and a
+        // small one below, each a spiral of splats that fade to its edge.
+        const lights = [unit([-0.45, 0.62, 0.64]), unit([0.5, -0.55, 0.66])];
+        k.cloud({ share: 0.0015 + b.r * 0.004, size: 0.8, part, pattern: false }, (rand, i, n) => {
+          const nBig = Math.round(n * 0.7);
+          const big = i < nBig;
+          const { p: d, f } = big
+            ? capPoint(lights[0], 0.2, i, nBig)
+            : capPoint(lights[1], 0.12, i - nBig, n - nBig);
           return {
             p: add(b.rest, mul(d, b.r * 1.01)),
             n: d,
             color: "#ffffff",
-            opacity: big ? 0.85 : 0.5,
+            opacity: (big ? 0.85 : 0.5) * (1 - f * f),
             kind: "glint",
-            params: [0.6, 0],
+            params: [0.25, 0],
           };
         });
       });
