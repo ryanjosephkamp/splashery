@@ -108,50 +108,67 @@ Photo to 3D and the Integrator run at the same time; leave their files alone. Th
   docs/OPERATING.md, docs/PACKS.md, docs/WORKSTREAMS.md and docs/handoff/history.md (lessons from
   earlier lanes).
 - Your handoff file: create it. Start it with this brief, word for word, under "## Brief", then keep
-  "## State", "## Notes", "## Known issues" and "## For the Operator" current. Note your model at
-  the top of "## State" (the blog post compares the two models).
-- Shared lists: edit only your own entries in src/toys.js, src/toy-sounds.js, src/toy-help.js (a
-  how-to line and an About text per toy, following docs/handoff/Help.md), tools/toy-plan.json,
-  CREDITS.md and tools/assets.json. Regenerate docs/TOY-PLAN.md with `node tools/toy-plan.mjs`;
-  never merge it by hand.
-- Never edit tests/taps.spec.mjs. Your own tests go in tests/<prefix>.spec.mjs. If a finished lane's
-  test breaks because of a count or a list your work changes, don't edit it: say which test and why
-  in your message, and the Operator fixes it.
-- Assets: CC0, CC BY or public domain only, checked on the live source page and credited
-  (CREDITS.md, tools/assets.json and the toy's in-app credit). Never BY-SA or NC. No logos, brand
-  names or insignia.
-- Review: post clips and cards to the Effect review page,
-  https://claude.ai/artifact/NCsg9V5SzFY3Mnwuwgq7pi, as OPERATING.md's "Steps for a lane" says.
-  Judge every effect as motion at phone size against the effect quality rules before you post it.
-  The Operator has made your lane's record. Don't republish the page, and never write to "verdicts".
-- Push your work in progress to your branch about every hour, so it isn't only in your container,
-  and open your draft PR early. Many lanes run at once now, so main moves often: merge it into your
-  branch before each push (never rebase a pushed branch) and keep both sides of any conflict.
-- Before every push, follow "Before every push" in CLAUDE.md: the full Playwright suite
-  (SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium npx playwright test), prettier,
-  `node tools/us-english.mjs --diff`, `node tools/check-packs.mjs <pack>` for new or changed toys, a
-  contact sheet and thumbnails, and your own screenshots at 390×844 and 1440×900. Then put back the
-  standard screenshots (`node tools/upkeep.mjs --restore-shots`) and any other lane's screenshots
-  your branch didn't change.
-- PR: one draft PR against main with the five sections (Summary, Verification, Deviations, Known
-  issues, What was cut), and the model that built it in the Summary. When main moves, merge it into
-  your branch.
-- After you post your cards, check the owner's marks (the "verdicts" collection, ids starting with
-  your prefix) about once an hour with a scheduled check-in (send_later). Fix every "fix" in the
-  same PR, post the new clip as a "-r2" card, and set replacedBy on the old one. Stop the check-ins
-  once your PR is merged or closed.
-- Finish every working turn with a short final message that starts with "READY:" (PR link, card ids,
-  test results, anything for the Operator), "WORKING:" (what's left), or "BLOCKED:" (exactly what
-  you need).
+  "## State
 
-## State
+Model: Opus 5.5 (default effort), for the whole lane.
 
-Model: Opus 5.5 (default effort).
+September 29, 2026: all seven toys are built, in `src/packs/real-objects.js`, from real models baked
+by a new lane tool (`tools/ro-bake.mjs`, sources and cuts in `tools/ro-sources.mjs`). Draft PR #97.
 
-Started September 29, 2026. Choosing the source models; nothing built yet.
+| Toy          | Source (license checked on the live page)                           | Kind of model                       | Moving pieces                                                                          |
+| ------------ | ------------------------------------------------------------------- | ----------------------------------- | -------------------------------------------------------------------------------------- |
+| Fountain pen | Sketchfab "Pelikan M205 … Translucent Green", chemicalX (CC BY 4.0) | detailed photoreal model            | cap (its own pieces, moved onto the nib), pen; kit notepad and ink                     |
+| Water bottle | Sketchfab "Water bottle", danny_p3d (CC BY 4.0)                     | detailed photoreal model            | cap (its own pieces, moved onto the neck), bottle; kit glass, water and 40 drops       |
+| Soda can     | Sketchfab "Soda Can", RoutineStudio (CC BY 4.0)                     | detailed model, label painted by us | its own ring pull (cut as a solid piece), can; kit coaster, opening and 48 foam clumps |
+| Running shoe | Sketchfab "PB158 Sneaker Low", SCANIMAT (CC BY 4.0)                 | photogrammetry scan                 | shoe (toe taps); its bow left out, two kit laces of 22 joints each                     |
+| Hoodie       | Sketchfab "Hoodie", Virtual Pandora (CC BY 4.0)                     | detailed garment model              | hood (its own panels), sleeves (hard plane at the shoulder); kit drawstrings           |
+| Sunglasses   | Poly Haven `round_spectacles`, Sean Buckley (CC0)                   | photoreal model                     | front, two arms (its own pieces); kit lenses that darken                               |
+| Baseball cap | Sketchfab "Baseball Cap", Scott VanArsdale (CC BY 4.0)              | detailed photoreal model            | the whole cap; kit walnut stand                                                        |
 
 ## Notes
 
+- Sources: Poly Haven had only the spectacles among these objects, and lane G's image-to-3D had
+  already failed on a fountain pen and found no usable photos of a can, a shoe or a hoodie
+  (docs/handoff/G.md). The Toy Ideas page names Sketchfab CC BY models as a source, so the rest come
+  from Sketchfab, downloaded through Allen AI's Objaverse mirror on Hugging Face (Sketchfab's own
+  downloads need an account). Each license was read from Sketchfab's API for the model on September
+  29, 2026. The shoe is the only true photo scan; the others are photoreal models with photo-like
+  textures, not cartoons. No image-to-3D runs were used (no GPU quota spent).
+- Why a new tool rather than `tools/model-to-splats.mjs`: a toy with moving parts needs each splat
+  tagged with its piece, and a kit recipe that loads it. `tools/ro-bake.mjs` uses the same converter
+  (`sampleSurface` in `src/packs/studio-models-core.js`), then cuts parts by the mesh's own separate
+  pieces (islands), its texture charts (a garment's panels come apart along their seams) or a hard
+  plane, and writes a compact `.splats` file (14 bytes a splat, about 1.2 to 2.1 MB a toy, in a
+  shuffled order so any first m splats are an even sample for the lower tiers). A painted color
+  keeps the model's baked light (the tool samples twice, lit and flat, and uses the ratio).
+- Every model piece is a kit part: turned and moved, never scaled or bent. Parts turned past a
+  quarter turn are sorted again where they stand (`out.resortPose`, every 0.04 to 0.1 s while they
+  move); tokens (drops, foam, lace joints) set `out.resort`.
+- The pen's ink: a wet layer fades in behind the nib on channel 0 and a darker dry layer on channel
+  1; to end at rest, both run back into the nib after the cap is on.
+- The hoodie's sleeves are cut at the shoulder by a plane across the raglan sleeve panels, so the
+  shoulder stays whole and only the sleeve's end opens.
+
 ## Known issues
 
+- The fountain pen and the water bottle are CG models of real products, not photo scans; the pen's
+  model is of a branded pen, with its marks painted out.
+- The fountain pen at rest sits low in its frame: the frame holds the writing pose (the pen tilted
+  up with its cap posted).
+- The hoodie's cut shoulders show a ragged edge while the sleeves are crossed, and the sleeves pass
+  a little into the chest (rigid sleeves cannot bend at the elbow).
+- The running shoe is dark; its laces read best on a light background.
+- The owner's word "grey" is kept in the brief above, as it is quoted word for word.
+
 ## For the Operator
+
+- New tool files: `tools/ro-bake.mjs` and `tools/ro-sources.mjs` (the lane's own build tool; no new
+  devDependency). The sources are recorded there and in CREDITS.md, not in `tools/models.json` or
+  `tools/assets.json`: those feed `tools/mesh-to-splats.mjs` and `tools/prepare-assets.mjs`, which
+  these kit toys don't use.
+- New shelf: the brief puts four toys on a Clothing shelf, which didn't exist, so the lane added
+  `{ id: "clothing", label: "Clothing" }` to `CATEGORIES` in `src/toys.js` (after "Open me").
+- Kit-built pieces the brief asked to be cut from the scan and vice versa: the soda can's ring pull
+  is the model's own (cut as a solid piece) rather than kit-built, since the model has one.
+- PACKS.md lesson: a garment exported from a cloth tool keeps its panels as separate texture charts,
+  so parts can be cut along its real seams (connectivity without welding by position).
