@@ -2,7 +2,8 @@
 
 ## Brief
 
-(Written by the Operator on September 29, 2026; copied word for word.)
+(Written by the Operator on September 29, 2026; copied word for word. The model line was left out
+until the Operator's reveal and restored after it.)
 
 You are a Splashery worker session, started by the Operator (the coordinating session). Repo:
 ryanjosephkamp/splashery. Your lane: the blind A/B toy, **maker B** (prefix `abb`). Branch:
@@ -70,9 +71,10 @@ HOW THIS LANE RUNS
   and marks them. Don't ask him anything or wait for him. Put questions and blockers in your final
   message, and the Operator answers or relays them. Messages that arrive in this session "From the
   Operator" come from the coordinator on the owner's behalf.
-- Model: [left out of this file until the Operator reveals it, as the brief asks for this blind
-  lane] only, at the default effort (the owner's assignment of September 29, 2026). Any helper you
-  start uses the same model. Use at most one helper at a time.
+- Model: Opus 5.5 only, at the default effort (the owner's assignment of September 29, 2026: Opus
+  5.5 builds the engine, the toys, sounds and fidelity; Sonnet 5.5 builds the Worlds content, the
+  Studio converters, the docs and the Integrator). Any helper you start uses the same model. Use at
+  most one helper at a time.
 - Merging (the owner's rules of September 29, 2026): the Operator merges Ops PRs, anything behind
   the labs switch, and additive engine PRs once the full test run passes. Changes to toys the public
   already sees wait for the owner's "good" marks. Never merge anything yourself.
@@ -83,20 +85,8 @@ HOW THIS LANE RUNS
   docs/OPERATING.md, docs/PACKS.md, docs/WORKSTREAMS.md and docs/handoff/history.md (lessons from
   earlier lanes).
 - Your handoff file: create it. Start it with this brief, word for word, under "## Brief", then keep
-  "## State
-
-September 29, 2026: built and marked. The owner marked all three cards "good" (no notes); the PR
-waits for the Operator's reveal and merge decision. The recipe is in `src/packs/music.js` ("Toy
-piano"), with its entries in `src/toys.js`, `src/toy-sounds.js`, `src/toy-help.js` and
-`tools/toy-plan.json`, its thumbnail, its own tests and screenshots in `tests/abb.spec.mjs`
-(`abb-toy-piano-390x844.png`, `…-1440x900.png`). PR #91 (draft). Cards on the Effect review page,
-lane record AB-B: `abb-toy-piano-keys`, `abb-toy-piano-song`, `abb-toy-piano-still`. An hourly
-check-in reads the marks.
-
-## Notes", "## Known issues" and "## For the Operator" current. For this blind lane,
-
-leave your model out of the handoff until the Operator reveals it.
-
+  "## State", "## Notes", "## Known issues" and "## For the Operator" current. For this blind lane,
+  leave your model out of the handoff until the Operator reveals it.
 - Shared lists: edit only your own entries in src/toys.js, src/toy-sounds.js, src/toy-help.js (a
   how-to line and an About text per toy, following docs/handoff/Help.md), tools/toy-plan.json,
   CREDITS.md and tools/assets.json. Regenerate docs/TOY-PLAN.md with `node tools/toy-plan.mjs`;
@@ -133,9 +123,13 @@ leave your model out of the handoff until the Operator reveals it.
 
 ## State
 
-September 29, 2026: building. The recipe is in `src/packs/music.js` ("Toy piano"), with its entries
-in `src/toys.js`, `src/toy-sounds.js`, `src/toy-help.js` and `tools/toy-plan.json`, and its own
-tests in `tests/abb.spec.mjs`. Clips, thumbnail and screenshots to come.
+September 29, 2026: built and marked; the one that merges. The owner marked all three cards "good"
+(no notes), and the Operator revealed the makers: maker B (this lane) was Opus 5.5, maker A Sonnet
+5.5. The recipe is in `src/packs/music.js` ("Toy piano"), with its entries in `src/toys.js`,
+`src/toy-sounds.js`, `src/toy-help.js` and `tools/toy-plan.json`, its thumbnail, its own tests and
+screenshots in `tests/abb.spec.mjs` (`abb-toy-piano-390x844.png`, `…-1440x900.png`). PR #91 (draft).
+Cards on the Effect review page, lane record AB-B: `abb-toy-piano-keys`, `abb-toy-piano-song`,
+`abb-toy-piano-still`. An hourly check-in reads the marks.
 
 ## Notes
 
