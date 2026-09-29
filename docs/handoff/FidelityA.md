@@ -76,18 +76,60 @@ HOW THIS LANE RUNS
   docs/OPERATING.md, docs/PACKS.md, docs/WORKSTREAMS.md and docs/handoff/history.md (lessons from
   earlier lanes).
 - Your handoff file: create it. Start it with this brief, word for word, under "## Brief", then keep
-  "## State
+  "## State", "## Notes", "## Known issues" and "## For the Operator" current. Note your model at
+  the top of "## State" (the blog post compares the two models).
+- Shared lists: edit only your own entries in src/toys.js, src/toy-sounds.js, src/toy-help.js (a
+  how-to line and an About text per toy, following docs/handoff/Help.md), tools/toy-plan.json,
+  CREDITS.md and tools/assets.json. Regenerate docs/TOY-PLAN.md with `node tools/toy-plan.mjs`;
+  never merge it by hand.
+- Never edit tests/taps.spec.mjs. Your own tests go in tests/<prefix>.spec.mjs. If a finished lane's
+  test breaks because of a count or a list your work changes, don't edit it: say which test and why
+  in your message, and the Operator fixes it.
+- Assets: CC0, CC BY or public domain only, checked on the live source page and credited
+  (CREDITS.md, tools/assets.json and the toy's in-app credit). Never BY-SA or NC. No logos, brand
+  names or insignia.
+- Review: post clips and cards to the Effect review page,
+  https://claude.ai/artifact/NCsg9V5SzFY3Mnwuwgq7pi, as OPERATING.md's "Steps for a lane" says.
+  Judge every effect as motion at phone size against the effect quality rules before you post it.
+  The Operator has made your lane's record. Don't republish the page, and never write to "verdicts".
+- Push your work in progress to your branch about every hour, so it isn't only in your container,
+  and open your draft PR early. Many lanes run at once now, so main moves often: merge it into your
+  branch before each push (never rebase a pushed branch) and keep both sides of any conflict.
+- Before every push, follow "Before every push" in CLAUDE.md: the full Playwright suite
+  (SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium npx playwright test), prettier,
+  `node tools/us-english.mjs --diff`, `node tools/check-packs.mjs <pack>` for new or changed toys, a
+  contact sheet and thumbnails, and your own screenshots at 390×844 and 1440×900. Then put back the
+  standard screenshots (`node tools/upkeep.mjs --restore-shots`) and any other lane's screenshots
+  your branch didn't change.
+- PR: one draft PR against main with the five sections (Summary, Verification, Deviations, Known
+  issues, What was cut), and the model that built it in the Summary. When main moves, merge it into
+  your branch.
+- After you post your cards, check the owner's marks (the "verdicts" collection, ids starting with
+  your prefix) about once an hour with a scheduled check-in (send_later). Fix every "fix" in the
+  same PR, post the new clip as a "-r2" card, and set replacedBy on the old one. Stop the check-ins
+  once your PR is merged or closed.
+- Finish every working turn with a short final message that starts with "READY:" (PR link, card ids,
+  test results, anything for the Operator), "WORKING:" (what's left), or "BLOCKED:" (exactly what
+  you need).
+
+## State
 
 Model: Opus 5.5 (claude-opus-5-5), default effort.
 
-- September 29, 2026: every toy audited at phone size (below). 20 toys fixed so far, starting with
-  the three the owner named: desk lamp, American football, hockey puck, then penguin, alarm clock,
-  desk fan, jet, sailboat, shuttlecock, snowman, coffee, jelly (its plate), taco, pancakes, Newton's
-  cradle, kite, owl, flying saucer, origami crane and paper plane. Their before-and-after cards are
-  on the Effect review page (`fa-<toy id>`, lane FidelityA, grouped by shelf). Thumbnails
-  re-rendered.
-- Draft PR: #77. Next: more toys from the top of the list (Klein bottle, snow globe, ocean liner,
-  Washington Monument, marble, white blood cell, and the grade-3 toys with speckled white parts).
+- September 29, 2026: every toy audited at phone size (below). 24 toys fixed, starting with the
+  three the owner named: desk lamp, American football, hockey puck, then penguin, alarm clock, desk
+  fan, jet, sailboat, shuttlecock, snowman, coffee, jelly (its plate), taco, pancakes, Newton's
+  cradle, kite, owl, flying saucer, origami crane, paper plane, Klein bottle, snow globe, Washington
+  Monument and candle. Their before-and-after cards are on the Effect review page (`fa-<toy id>`,
+  lane FidelityA, grouped by shelf). Thumbnails re-rendered.
+- Tried and left as they were (not clearly better): the ocean liner, the robot and the dice (their
+  rounded-box parts make a lattice with even placement; they need a better box sampler).
+- The owner's marks: 23 good at 06:27 UTC; the Klein bottle "fix" (no note). Its glass showed a fine
+  hatching at phone size (evenly placed see-through layers beating against each other); fixed by
+  nudging each even point a little within its cell, posted as `fa-klein-bottle-r2`, and marked good
+  at 12:47 UTC. **All 24 toys are approved.**
+- Draft PR: #77, mergeable, main merged in (1d28de0), full suite green. Ready for the Operator to
+  merge. The rest of the audit list is Fidelity B's.
 
 ## Audit
 
