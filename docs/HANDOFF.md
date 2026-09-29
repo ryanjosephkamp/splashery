@@ -73,11 +73,12 @@ work is in [OPERATING.md](OPERATING.md).
   own licenses and credits.
 - On September 29, 2026 the owner accepted the Splashery Universe plan
   ([review](reviews/2026-09-29-universe/review.md), ROADMAP.md): five parts (Toys, Studio, Worlds,
-  Lab, Learn), new parts behind the labs switch, up to 8 workers at once until the weekly reset
-  (September 30, 4 p.m. ET), Opus 5.5 for the engine and toys and Sonnet 5.5 for Worlds content,
-  Studio converters, docs and the Integrator, and the Operator merging by tiers (CLAUDE.md, "Pull
-  requests"). Weapons: historical, fantasy and sci-fi only, never aimed at people or animals.
-  Splashery doesn't police what people open; the terms of use say they're responsible.
+  Lab, Learn), new parts behind the labs switch, up to 12 workers at once until the weekly reset (8
+  until the owner raised it that morning) (September 30, 4 p.m. ET), Opus 5.5 for the engine and
+  toys and Sonnet 5.5 for Worlds content, Studio converters, docs and the Integrator, and the
+  Operator merging by tiers (CLAUDE.md, "Pull requests"). Weapons: historical, fantasy and sci-fi
+  only, never aimed at people or animals. Splashery doesn't police what people open; the terms of
+  use say they're responsible.
 - Locked (owner approved, do not change its look or behaviour): the laptop. Its smoke test guards
   it.
 
@@ -94,6 +95,10 @@ The full table, with owned files, sessions, branches and PRs, is [WORKSTREAMS.md
 | A/B: the toy piano, makers A and B            | Running, one on each model, hidden until the owner marks them (September 29, 2026)        | [handoff/AB-A.md](handoff/AB-A.md), [handoff/AB-B.md](handoff/AB-B.md) |
 | Anatomy: the anatomy atlas                    | Running, Opus 5.5 (September 29, 2026)                                                    | [handoff/Anatomy.md](handoff/Anatomy.md)                               |
 | Pianos: pianos and songs                      | Running, Opus 5.5 (September 29, 2026)                                                    | [handoff/Pianos.md](handoff/Pianos.md)                                 |
+| Sharpness: grain out of the renderer          | Running, Opus 5.5 (September 29, 2026)                                                    | [handoff/Sharpness.md](handoff/Sharpness.md)                           |
+| Chemistry: the chemistry set                  | Running, Opus 5.5 (September 29, 2026)                                                    | [handoff/Chemistry.md](handoff/Chemistry.md)                           |
+| Real objects: everyday things, for real       | Running, Opus 5.5 (September 29, 2026)                                                    | [handoff/RealObjects.md](handoff/RealObjects.md)                       |
+| Photo to 3D: your photo, in depth             | Running, Sonnet 5.5 (September 29, 2026)                                                  | [handoff/Photo3D.md](handoff/Photo3D.md)                               |
 | Integrator: combined test runs                | Running, Sonnet 5.5 (September 29, 2026)                                                  | —                                                                      |
 | Next (WORKSTREAMS.md, Next)                   | Sound A and B (when the owner's notes arrive), the pilot game, the Forest trail template… | —                                                                      |
 
