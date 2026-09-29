@@ -943,6 +943,16 @@
                 one splat to your own equations
               </p>
               <!-- /Tinkerer's Manual -->
+              <!-- Worlds (lane Worlds): a link shown only with the labs switch -->
+              <p class="note" id="worlds-link" hidden>
+                <a href="worlds/?labs=1">Splashery Worlds</a>: walk around a small world made of
+                splats (labs)
+              </p>
+              <script type="module">
+                import { labsOn } from "./src/toys.js";
+                if (labsOn()) document.getElementById("worlds-link").hidden = false;
+              </script>
+              <!-- /Worlds -->
               <p class="note">
                 <a href="https://github.com/ryanjosephkamp/splashery">Source on GitHub</a> ·
                 <a href="https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md"
