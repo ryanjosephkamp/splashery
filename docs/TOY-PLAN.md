@@ -10,8 +10,8 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 314 toys. 314 have a tap action today; the other 0 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 311.
+- 315 toys. 315 have a tap action today; the other 0 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 312.
 - **more** (has an effect; make it clearer or more dramatic): 0.
 - **new** (needs its own effect): 3.
 - Visual fixes: 0 open, 28 done. Touch or drag interaction asked for: 4.
@@ -37,14 +37,14 @@ Proposals below are suggestions; the owner may change them.
   Neuron, Astrocyte, Animal cell, DNA, White blood cell, Microglia, Diatom, Pollen grain, Snowflake,
   Chromosome, Mitochondrion, Paramecium, Amoeba, Electron orbital, Atom, Molecule, Protein, Crystal
   lattice, Diamond, Ruby, Emerald, Amethyst geode, Sapphire, Quartz cluster, Opal, Crystal ball,
-  Brain, Eye, Lungs, Tooth, Kidney, Oak tree, Pine tree, Palm tree, Cherry blossom, Maple tree,
-  Bonsai, Weeping willow, Sunflower, Rose, Tulips, Daisies, Lotus, Toadstool, Fern, Saguaro cactus,
-  Coral reef, Pinecone, Acorns, Succulent, Bamboo, Pebbles, Kelp, Lava lamp, Ice swan, Tornado,
-  Rainbow, Iceberg, Waterfall, Ocean wave, Ice cream, Watermelon, Cupcake, Lollipop, Candy cane,
-  Macarons, Gummy bear, Pretzel, Croissant, Sushi, Taco, Coffee, Apple, Bananas, Orange, Kiwi,
-  Pineapple, Cherries, Grapes, Avocado, Building bricks, Rubber duck, Newton's cradle, Puzzle cube,
-  Kite, Chess set, Lorenz attractor, Möbius strip, Klein bottle, Menger sponge, Hypercube, Torus
-  knot, Gyroid, Mandelbulb, Seashell spiral, Graph plotter, Surface plotter, Circle and waves,
+  Brain, Eye, Lungs, Tooth, Kidney, Anatomy atlas, Oak tree, Pine tree, Palm tree, Cherry blossom,
+  Maple tree, Bonsai, Weeping willow, Sunflower, Rose, Tulips, Daisies, Lotus, Toadstool, Fern,
+  Saguaro cactus, Coral reef, Pinecone, Acorns, Succulent, Bamboo, Pebbles, Kelp, Lava lamp, Ice
+  swan, Tornado, Rainbow, Iceberg, Waterfall, Ocean wave, Ice cream, Watermelon, Cupcake, Lollipop,
+  Candy cane, Macarons, Gummy bear, Pretzel, Croissant, Sushi, Taco, Coffee, Apple, Bananas, Orange,
+  Kiwi, Pineapple, Cherries, Grapes, Avocado, Building bricks, Rubber duck, Newton's cradle, Puzzle
+  cube, Kite, Chess set, Lorenz attractor, Möbius strip, Klein bottle, Menger sponge, Hypercube,
+  Torus knot, Gyroid, Mandelbulb, Seashell spiral, Graph plotter, Surface plotter, Circle and waves,
   Fourier circles, Pythagoras proof, Splat equation, Heraldic shield, Crown, Wizard's orb,
   Jellyfish, School of fish, Pufferfish, Nautilus, Snail, Octopus, Sea urchin, Frog, Snowman,
   Fireworks, Decorated tree, Diya, Acoustic guitar, Snare drum, Xylophone, Hot-air balloon, Bus, Jet
@@ -480,7 +480,7 @@ Proposals below are suggestions; the owner may change them.
     returning throw and settles back (3 s).
   - Sound: Whirring whoosh.
 
-## Anatomy (6)
+## Anatomy (7)
 
 - **Beating heart** (`heart`). Now: tap: Race and calm. Plan: keep.
   - Owner: Needs a special effect.
@@ -523,6 +523,17 @@ Proposals below are suggestions; the owner may change them.
     through the kidney as a soft flush while it swells a little, leaves along the vein, and a drop
     runs down the ureter (about 4.5 s).
   - Sound: Gentle trickle.
+- **Anatomy atlas** (`anatomy-atlas`). Now: tap: Peel a layer. Plan: keep.
+  - Owner: Approved on the Splashery Universe page (lane Anatomy), September 29, 2026.
+  - Effect: A standing figure in four layers (a smooth mannequin skin, the superficial muscles, the
+    skeleton and the organs); each tap peels the outer layer in solid pieces (the skin opens along
+    its seams, the muscles and bones lift off group by group) in about 3 s, and after the organs a
+    tap brings every layer back. Layer picks a layer; Labels lists the parts beside the toy.
+  - Improved: Anatomy: a kit-built body (smoothly joined primitives, so the skin has no seams but
+    its cut lines), 13 skin pieces, 19 muscle groups and 16 bones or bone groups as tokens, and our
+    brain, lungs, heart and kidney recipes placed inside with a kit-built liver, stomach and
+    intestines.
+  - Sound: A soft paper-and-cloth slide for each peel, and a low chime as the layers settle back.
 
 ## Weather (13)
 
