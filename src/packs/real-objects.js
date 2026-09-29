@@ -794,13 +794,24 @@ const FOUNTAIN_PEN = {
     addCloud(k, nPaper, (i, n) => {
       const x = -W / 2 + W * ((i * 0.7548776662466927) % 1);
       const z = pz - D / 2 + D * ((i * 0.5698402909980532) % 1);
-      const rule = Math.abs(((z - pz + 10) % 0.13) - 0.065) < 0.0045 && z > pz - D / 2 + 0.2;
-      const margin = Math.abs(x + W / 2 - 0.3) < 0.005;
-      let col = [0.96, 0.94, 0.88];
-      if (rule) col = [0.72, 0.8, 0.92];
-      if (margin) col = [0.9, 0.62, 0.62];
       const size = Math.sqrt((W * D) / (n * Math.PI)) * 1.3;
-      return { p: [x, FP.paper, z], n: [0, 1, 0], size, color: lit(col, [0, 1, 0]), flat: 0.15 };
+      return { p: [x, FP.paper, z], n: [0, 1, 0], size, color: lit([0.96, 0.94, 0.88], [0, 1, 0]), flat: 0.15 }; // prettier-ignore
+    });
+    // The rules and the margin: fine unbroken lines of small splats just above the sheet.
+    const rules = [];
+    for (let z = pz - D / 2 + 0.2 + 0.065; z < pz + D / 2 - 0.01; z += 0.13) rules.push(z);
+    const step = 0.0028;
+    const perRule = Math.floor(W / step);
+    const perMargin = Math.floor(D / step);
+    const nLines = rules.length * perRule + perMargin;
+    addCloud(k, nLines, (i) => {
+      const r = Math.floor(i / perRule);
+      if (r < rules.length) {
+        const x = -W / 2 + ((i % perRule) + 0.5) * step;
+        return { p: [x, FP.paper + 0.0015, rules[r]], n: [0, 1, 0], size: 0.0042, color: lit([0.72, 0.8, 0.92], [0, 1, 0]), flat: 0.15 }; // prettier-ignore
+      }
+      const z = pz - D / 2 + (i - rules.length * perRule + 0.5) * step;
+      return { p: [-W / 2 + 0.3, FP.paper + 0.0015, z], n: [0, 1, 0], size: 0.0045, color: lit([0.9, 0.62, 0.62], [0, 1, 0]), flat: 0.15 }; // prettier-ignore
     });
     // The sheets' edges below it.
     addCloud(k, Math.round(k.count * 0.03), (i, n) => {
@@ -1271,6 +1282,7 @@ const HD = {
   // the chest and opens only a small gap at the back of the neck.
   neck: [0, 0.33, 0],
   hoodNod: 0.4, // how far the hood flops forward (radians)
+  armpit: -0.1, // the lowest point of an armhole
   shoulderL: [-0.36, 0.17, -0.06],
   shoulderR: [0.36, 0.17, -0.06],
   // Where each sleeve points when crossed (the left one over the right).
@@ -1316,8 +1328,6 @@ const HOODIE = {
     const inL = ease(seg(s, 1.2, 2.05)) * (1 - ease(seg(s, 2.95, 3.75)));
     const inR = ease(seg(s, 1.35, 2.2)) * (1 - ease(seg(s, 2.85, 3.65)));
     const sway = swing(s, 3.7, 0.12, 9, 3);
-    // Fabric caps fill the shoulders while the sleeves are raised (channel 1).
-    out.morph = [0, smoothstep(0.55, 0.85, Math.max(inL, inR)), 0, 0];
     // Up and forward first, and inward only once raised, so a sleeve never cuts across the body.
     const toward = (dir, f) => {
       const up = smoothstep(0, 0.65, f);
@@ -1340,20 +1350,90 @@ const HOODIE = {
     const stringL = k.part("stringL", { pivot: HD.strings[0].top });
     const stringR = k.part("stringR", { pivot: HD.strings[1].top });
     addScan(k, scan, { share: 0.86, parts: [0, hood, sleeveL, sleeveR], keep: (fp) => fp < 4 });
-    // The shoulder caps: fabric the color of the hoodie filling each shoulder where its sleeve
-    // meets the body, shown (by alpha, on channel 1) only while the sleeves are raised.
-    for (const P of [HD.shoulderL, HD.shoulderR]) {
-      const side = Math.sign(P[0]);
-      addCloud(k, Math.round(k.count * 0.012), (i, n) => {
-        const t = 1 - (2 * (i + 0.5)) / n;
-        const ph = Math.acos(t);
-        const th = i * 2.39996323;
-        const nn = [Math.sin(ph) * Math.cos(th), t, Math.sin(ph) * Math.sin(th)];
-        const R = [0.075, 0.08, 0.09];
-        const p = [P[0] - 0.035 * side + R[0] * nn[0], P[1] + R[1] * nn[1], P[2] + R[2] * nn[2]];
-        const col = lit([0.8, 0.685, 0.215], nn, { soft: 0.3 });
-        return { p, n: nn, size: 0.016, color: col, kind: "fade", params: [0, -0.3], channel: 1 };
-      });
+    // The armholes: each is closed with fabric that follows the opening's own outline (the
+    // sleeve's splats that touch the body, above the armpit, laid flat on the plane that fits
+    // them best), one patch on the body and one on the sleeve's top, so a raised sleeve shows
+    // cloth at the shoulder and under the arm, not the inside of the garment.
+    const cell = 0.015;
+    const grid = new Map();
+    const key = (x, y, z) =>
+      `${Math.floor(x / cell)},${Math.floor(y / cell)},${Math.floor(z / cell)}`;
+    const P = (i) => [scan.pos[i * 3], scan.pos[i * 3 + 1], scan.pos[i * 3 + 2]];
+    for (let i = 0; i < scan.n; i++) {
+      const [x, y, z] = P(i);
+      if (scan.part[i] !== 0 || y < HD.armpit - 0.05 || Math.abs(x) < 0.15) continue;
+      const g = key(x, y, z);
+      if (!grid.has(g)) grid.set(g, []);
+      grid.get(g).push(i);
+    }
+    const touches = ([x, y, z]) => {
+      for (let dx = -1; dx <= 1; dx++)
+        for (let dy = -1; dy <= 1; dy++)
+          for (let dz = -1; dz <= 1; dz++)
+            for (const j of grid.get(key(x + dx * cell, y + dy * cell, z + dz * cell)) || []) {
+              const q = P(j);
+              if ((q[0] - x) ** 2 + (q[1] - y) ** 2 + (q[2] - z) ** 2 < 0.012 ** 2) return true;
+            }
+      return false;
+    };
+    for (const [side, sleeve, fp] of [
+      [-1, sleeveL, 2],
+      [1, sleeveR, 3],
+    ]) {
+      const rim = [];
+      for (let i = 0; i < scan.n; i++) {
+        if (scan.part[i] !== fp || scan.pos[i * 3 + 1] < HD.armpit) continue;
+        const p = P(i);
+        if (touches(p)) rim.push([p, i]);
+      }
+      if (rim.length < 20) continue;
+      // The best plane x = a y + b z + d (least squares), its normal toward the sleeve.
+      const c = [0, 1, 2].map((q) => rim.reduce((t, [p]) => t + p[q], 0) / rim.length);
+      let syy = 0;
+      let syz = 0;
+      let szz = 0;
+      let sxy = 0;
+      let sxz = 0;
+      for (const [p] of rim) {
+        const [x, y, z] = [p[0] - c[0], p[1] - c[1], p[2] - c[2]];
+        [syy, syz, szz, sxy, sxz] = [syy + y * y, syz + y * z, szz + z * z, sxy + x * y, sxz + x * z]; // prettier-ignore
+      }
+      const det = syy * szz - syz * syz || 1;
+      const ca = (sxy * szz - sxz * syz) / det;
+      const cb = (sxz * syy - sxy * syz) / det;
+      const nl = Math.hypot(1, ca, cb);
+      const nrm = [side / nl, (-ca * side) / nl, (-cb * side) / nl];
+      const z = [-nrm[2] * nrm[0], -nrm[2] * nrm[1], 1 - nrm[2] * nrm[2]]; // +Z, in the plane
+      const e2 = z.map((q) => q / Math.hypot(...z));
+      const e1 = [nrm[1] * e2[2] - nrm[2] * e2[1], nrm[2] * e2[0] - nrm[0] * e2[2], nrm[0] * e2[1] - nrm[1] * e2[0]]; // prettier-ignore
+      const bins = 48;
+      const rad = new Float32Array(bins);
+      const dot = (p, e) => (p[0] - c[0]) * e[0] + (p[1] - c[1]) * e[1] + (p[2] - c[2]) * e[2];
+      for (const [p] of rim) {
+        const u = dot(p, e1);
+        const v = dot(p, e2);
+        const k2 = Math.floor(((Math.atan2(v, u) / (2 * Math.PI) + 1) % 1) * bins);
+        rad[k2] = Math.max(rad[k2], Math.hypot(u, v));
+      }
+      for (let pass = 0; pass < bins; pass++)
+        for (let j = 0; j < bins; j++) if (!rad[j]) rad[j] = Math.max(rad[(j + bins - 1) % bins], rad[(j + 1) % bins]); // prettier-ignore
+      const col = [0, 1, 2].map((q) => rim.reduce((t, [, i]) => t + scan.rgb[i * 3 + q], 0) / rim.length); // prettier-ignore
+      const area = rad.reduce((t, r) => t + (Math.PI * r * r) / bins, 0);
+      const n = Math.round(k.count * 0.008);
+      const size = Math.sqrt(area / (n * Math.PI)) * 1.3;
+      for (const [part, off, face] of [
+        [0, -0.004, 1],
+        [sleeve, 0.004, -1],
+      ]) {
+        addCloud(k, n, (i) => {
+          const f = Math.sqrt((i + 0.5) / n);
+          const t = i * 2.39996323;
+          const r = f * rad[Math.floor(((t / (2 * Math.PI)) % 1) * bins)] * 0.97;
+          const [u, v] = [r * Math.cos(t), r * Math.sin(t)];
+          const p = [0, 1, 2].map((q) => c[q] + u * e1[q] + v * e2[q] + off * nrm[q]);
+          return { p, n: nrm.map((q) => q * face), size, color: col.map((q) => q * (0.86 + 0.1 * f)), part }; // prettier-ignore
+        });
+      }
     }
     // The drawstrings: flat cotton cords hanging from the neck, with plastic tips.
     for (const [j, part] of [
