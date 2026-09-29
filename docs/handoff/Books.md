@@ -190,6 +190,85 @@ kit parts changed (pages, the page engine and the turns as they were):
 - The picture frame (marked good) keeps the old lattice (`plainRect`), so its look is unchanged.
 - Before-and-after clips: `tools/bk-clip.mjs --intro=<png>` opens a clip on a still.
 
+## r3: pages you tap and pull (September 29, 2026)
+
+The owner reviewed the Pictures and pages shelf (docs/reviews/2026-09-29-new-toys/review.md). The
+Operator's brief for r3, word for word:
+
+> a. Taps that know where they land (action.at(point, c), PACKS.md "Action"):
+>
+> - Your book and the photo album, styles that turn sideways: a tap on the left page goes back a
+>   page; a tap on the right page, or exactly in the middle, goes forward; a tap anywhere on the
+>   closed front cover opens it (as now).
+> - Stapled paper (turns upward): a tap in the top quarter of a page goes back; a tap anywhere below
+>   it goes forward; the cover opens as now.
+> - Picture lab: a tap on the left of the page goes back, on the right (or the middle) goes forward.
+>   Its pages keep sliding without a flip: he likes that ("I like that the pages don't flip like a
+>   real book").
+> - On the last page, forward closes the book, as now.
+>
+> b. Your book's page turn: "it feels unnatural and awkward, like something incorrect happens before
+> the page actually turns." Find the glitch frame by frame (tools/effect-strip.mjs): a jump, a
+> re-sort, the content swapping or the page lifting wrong before the turn. Make the turn one
+> continuous motion, with no pop at the start or the end. The album's turn is "a bit better" and
+> needs little.
+>
+> c. Pull a page to turn it (recipe.drag, PACKS.md; drag.at claims only presses that land on a page,
+> so a drag anywhere else still turns the view). "A click without a drag should be an automatic page
+> turn, with the direction depending on where the user has clicked; a drag/pull of the page should
+> peel the page in a natural manner and require the user to actually move the page sufficiently far
+> for the page to turn, like a real physical book would." So: the grabbed corner or edge follows the
+> finger and the paper curls from it. Let go past about halfway, or with a quick flick, and it
+> finishes the turn; otherwise it falls back. The album's pages are heavier ("the manual drag/pull
+> page turning can feel slightly slower or otherwise subtly reflect that additional weight"): follow
+> the finger with a little lag, fall back more readily, and settle with less flutter. Stapled paper
+> pulls upward.
+>
+> d. The Picture lab's background rectangle "is a bit grainy, especially around the edges": Fidelity
+> A's method, clean edges.
+>
+> e. Picture frame:
+>
+> - The gold frame "is a little too basic and grainy and should look more realistic": a real molded
+>   profile (a bead, a cove and a flat, like a gilded frame), burnished highlights on the raised
+>   parts and darker recesses, sharp edges; not a flat yellow band.
+> - GIFs and videos in every frame style: "I can upload GIFs, but they just don't play." Add "gif"
+>   and "video" to the frame's accept list; a GIF plays on a loop, a video plays muted on a loop
+>   (sound with the speaker button, as on the Screen), and the tap still swings the frame on its
+>   nail.
+> - The digital frame: "allow users to see the uploaded images/GIFs/videos and rearrange them to be
+>   in their desired order, or choose random." A list in the Toy tab of what was opened (a small
+>   thumbnail and name each), to reorder (buttons to move up or down, and dragging if it's easy),
+>   plus an Order choice: In order or Random. If the list needs a change in src/ui.js, make that a
+>   small additive engine PR on claude/lane-books-engine-2 (titled "Engine: …"), merged first, as
+>   with #74.
+> - The web-address box that says "a PDF, picture, GIF or video" on a frame: I'm fixing that in the
+>   engine myself (the box will name only what the toy opens, from its accept list), so leave it.
+>
+> f. Your toys' toy-plan entries and how-to lines: say how to tap and pull.
+
+What r3 does:
+
+- Taps: `bookTapAt` (the book and the album) and the Picture lab's `action.at` return the turn with
+  `pick` 1 for back; drive queues the direction (`BOOK.queue` holds +1 or -1).
+- Pulls: `bookDrag(BOOK_PULL)` and `bookDrag(ALBUM_PULL)`. A press on the book claims the drag; once
+  it moves the way a page turns, a turn starts whose progress follows the finger (`a.pull`): the
+  point grabbed stays under the finger as the page swings about the spine (the closed cover and a
+  closing cover follow the finger's travel). Let go past halfway (the album 0.58) or with a flick
+  and it finishes; otherwise it falls back. The album lags the finger more (0.12 s against 0.035 s),
+  settles slower and curls less. A press that doesn't move is a tap. Both sides of the left leaf are
+  now built ahead, so a pull back never shows a blank page.
+- The turn: the angle eased with a slow cubic start while the curl followed `sin(πu)` at once, so
+  the page bent where it lay before it lifted, then snapped over. The curl now follows the page's
+  own angle, on a sine ease (`easeTurn`).
+- The Picture lab's card is a `rect` (clean edges).
+- The gold frame: `goldProfile` (a small bead at the sight edge, a flat, a cove, a big bead, a
+  rounded outer edge) built as 16 strips per side at their own heights and slopes, mitered at the
+  corners, lit by `goldAt` (burnished highlights on the raised parts, darker in the cove).
+- Frames take GIFs and videos (the sheet's method follows the media); a video starts playing by
+  itself, muted. The digital frame has an Order option (In order, Random) and lists its photos in
+  the Toy tab (`media.list`, engine PR 2: `claude/lane-books-engine-2`).
+
 ## Notes
 
 ### How the book works
