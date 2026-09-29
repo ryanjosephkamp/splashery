@@ -131,13 +131,14 @@ the owner's marks about hourly and fix every "fix" as a "-r2" card; end every tu
 
 Model: Opus 5.5 (claude-opus-5-5), default effort.
 
-September 29, 2026: started. Engine PR #109 "Engine: hold a GIF on its frame" on
-`claude/lane-screens-r2-engine` (`pics.hold(on)` and `pics.held`, with
-`tests/scr2-engine.spec.mjs`); its full test run passed 403 of 406, and the three that failed
-(timing checks, run while clips rendered on the same machine) passed on their own. Lane PR #111
-(draft). Built: the off state, the switches, the sharp sets, sounds, help and plan. Clips recorded:
-`scr2-power`, `scr2-off`, `scr2-curtains`. Still to do: `scr2-sets`, `scr2-stills`, the full test
-run on the lane, thumbnail, contact sheet, screenshots, cards.
+September 29, 2026: done. Engine PR #109 ("Engine: hold a GIF on its frame") merged. Lane PR #111
+(labs only). The owner marked all five cards good (`scr2-off`, `scr2-power`, `scr2-curtains`,
+`scr2-sets`, `scr2-stills`). Full suite on the lane head with main merged (#114): 440 passed, 2
+failed, both in lane Screens' `tests/scr.spec.mjs` for the reason under "For the Operator".
+
+Splats per style and tier (the set; the picture's own sheet budget is unchanged), all within each
+tier's maximum: old TV 109k, 218k, 273k, 363k; flat TV 95k, 191k, 238k, 318k; cinema 120k, 232k,
+288k, 382k; hologram 120k, 240k, 300k, 400k (low, mid, high, max). Builds take 0.2 to 1.3 s.
 
 ## Design
 
@@ -187,8 +188,8 @@ run on the lane, thumbnail, contact sheet, screenshots, cards.
 
 - **`tests/scr.spec.mjs` (lane Screens' finished tests) fails twice, because the Screen now starts
   with its picture hidden:** "the Screen switches on with a tap…" (line 107) and "lane Screens
-  screenshots…" (line 146). Its `openToy()` waits for `pictures.splats() > 0`, and `splats()`
-  counts only sheets on show, so it waits forever while the set is off. Line 126 also expects
+  screenshots…" (line 146). Its `openToy()` waits for `pictures.splats() > 0`, and `splats()` counts
+  only sheets on show, so it waits forever while the set is off. Line 126 also expects
   `splats() > 5000` right after the style changes to the cinema (which starts with the curtains
   closed). A fix that keeps what the tests mean: in `openToy()`, wait for
   `p.splats() > 0 || p.api.ready("screen")`, and at line 126 wait for `p.api.ready("screen")`
