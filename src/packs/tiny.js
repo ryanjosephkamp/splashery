@@ -14,6 +14,7 @@ import {
   quatMul,
   quatRotate,
 } from "../kit.js";
+import { evenCylinder, evenEllipsoid } from "./even.js";
 
 const TAU = Math.PI * 2;
 const PHI = (1 + Math.sqrt(5)) / 2;
@@ -242,6 +243,12 @@ function capsuleSurface(k, half, R, cutX = Infinity) {
   const inner = shape.sample;
   shape.sample = (rand) => {
     const s = inner(rand);
+    s.edge = Math.min(s.u, 1 - s.u);
+    return s;
+  };
+  const innerEven = shape.sampleEven;
+  shape.sampleEven = (a, b) => {
+    const s = innerEven(a, b);
     s.edge = Math.min(s.u, 1 - s.u);
     return s;
   };
@@ -1204,6 +1211,8 @@ export const RECIPES = {
       const radius = (d) => 1 + 0.035 * k.noise(d[0] * 2.2 + 3, d[1] * 2.2, d[2] * 2.2);
       // A translucent membrane; with the cutaway, a wedge is taken out.
       k.add(k.radial(radius, { grid: 64 }), {
+        even: true,
+        jitter: 0.015,
         ...pinch,
         flat: 0.3,
         opacity: 0.62,
@@ -1232,6 +1241,9 @@ export const RECIPES = {
       const { nc, NR } = CELL;
       const split = { channel: 0, to: (c) => nucleusSplit(c.p) };
       k.add(k.sphere(NR), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         ...split,
         pos: nc,
         weight: 1.5,
@@ -1251,6 +1263,9 @@ export const RECIPES = {
       // The nucleolus: each new nucleus gets one.
       const nco = add(nc, [0.1, 0.1, 0.1]);
       k.add(k.sphere(0.15), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         channel: 0,
         to: (c) => nucleolusSplit(c.p, nco, 0.15),
         pos: nco,
@@ -1278,6 +1293,9 @@ export const RECIPES = {
             { grid: 40, thick: 0.02 },
           ),
           {
+            even: true,
+            opacity: 1,
+            jitter: 0.015,
             channel: 0,
             to: (c) => erSplit(c.p),
             flat: 0.2,
@@ -1300,6 +1318,9 @@ export const RECIPES = {
           pts.push(p);
         }
         k.add(k.tube(spline(pts), 0.022, { grid: 16, samples: 64 }), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           ...shift(pts[2]),
           weight: 1.4,
           pattern: false,
@@ -1328,6 +1349,9 @@ export const RECIPES = {
             { grid: 24, thick: 0.02 },
           ),
           {
+            even: true,
+            opacity: 1,
+            jitter: 0.015,
             ...golgi,
             flat: 0.2,
             weight: 1.5,
@@ -1354,6 +1378,9 @@ export const RECIPES = {
         if (!p) continue;
         const q = quatFromTo([0, 1, 0], randDir(k.rand));
         k.add(k.lathe(capsuleProfile(0.085, 0.065, 6), { grid: 24 }), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           ...shift(p),
           pos: p,
           quat: q,
@@ -1372,6 +1399,9 @@ export const RECIPES = {
         const p = place(0.2, 0.86, r);
         if (!p) continue;
         k.add(k.sphere(r), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           ...shift(p),
           pos: p,
           weight: 1.6,
@@ -1391,7 +1421,10 @@ export const RECIPES = {
           [0.08, 0.02, 0],
         ],
       ]) {
-        k.add(k.cylinder(0.03, 0.12), {
+        k.add(evenCylinder(0.03, 0.03, 0.12), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           pos: add([-0.35, 0.55, 0.25], off),
           rot,
           weight: 2,
@@ -1562,8 +1595,10 @@ export const RECIPES = {
       k.add(
         k.radial((d) => 1 + lump(d), { grid: 72 }),
         {
+          even: true,
+          jitter: 0.015,
           flat: 0.3,
-          opacity: 0.5,
+          opacity: 0.62,
           share: 0.55,
           channel: 0,
           to: (c) => wbcCup(c.p),
@@ -1587,6 +1622,9 @@ export const RECIPES = {
       ];
       for (const p of lobes)
         k.add(k.sphere(0.28), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           pos: p,
           weight: 1.2,
           pattern: false,
@@ -1596,6 +1634,9 @@ export const RECIPES = {
         });
       for (let i = 0; i < 2; i++)
         k.add(k.tube(spline([lobes[i], lerp(lobes[i], lobes[i + 1], 0.5), lobes[i + 1]]), 0.11), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           weight: 1.2,
           pattern: false,
           color: (c) => lit("#6b3fb3", c.n),
@@ -1801,6 +1842,9 @@ export const RECIPES = {
           { grid: 96, flip: side < 0, thick: 0.1 },
         );
         k.add(face, {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           flat: 0.15,
           weight: 1.6,
           part: side > 0 ? lid : base,
@@ -1819,7 +1863,10 @@ export const RECIPES = {
         });
       }
       // The girdle band round the edge: the lid's half overlaps the base's.
-      k.add(k.cylinder(R, 2 * H, { caps: false }), {
+      k.add(evenCylinder(R, R, 2 * H, false), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         quat: q,
         flat: 0.15,
         part: (c) => (c.lp[1] > 0 ? lid : base),
@@ -1832,7 +1879,10 @@ export const RECIPES = {
       for (let i = 0; i < 12; i++) {
         const a = (i / 12) * TAU + k.rand() * 0.3;
         const r = 0.35 + 0.45 * k.rand();
-        k.add(k.ellipsoid(0.16, 0.06, 0.1), {
+        k.add(evenEllipsoid(k, 0.16, 0.06, 0.1), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           pos: W([r * Math.cos(a), 0, r * Math.sin(a)]),
           quat: quatMul(q, quatEuler(0, (-a * 180) / Math.PI, 0)),
           weight: 1.2,
@@ -2325,6 +2375,9 @@ export const RECIPES = {
       const cutY = 0.06;
       const open = (p) => cut && local(p)[0] > cutY;
       k.add(capsuleSurface(k, half, R, cut ? cutY : Infinity), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         quat: q,
         flat: 0.2,
         interior: cut ? 0 : 0.08,
@@ -2336,6 +2389,9 @@ export const RECIPES = {
       });
       // Inner membrane just inside, and the matrix floor seen from above.
       k.add(capsuleSurface(k, half - 0.04, R - 0.05, cut ? cutY : Infinity), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         quat: q,
         flat: 0.2,
         color: (c) =>
@@ -2359,11 +2415,13 @@ export const RECIPES = {
           { grid: 24, thick: 0.02 },
         );
         k.add(shelf, {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           quat: q,
           weight: 1.3,
           flat: 0.2,
-          pattern: false,
-          // Light runs along the cristae, end to end.
+          pattern: false, // Light runs along the cristae, end to end.
           kind: "band",
           channel: 0,
           params: (c) => [(c.lp[1] + half + 0.1) / (2 * half + 0.2), 0.09],
@@ -2461,10 +2519,13 @@ export const RECIPES = {
       const radius = (d) => shape(d);
       const viewL = quatRotate([-q[0], -q[1], -q[2], q[3]], VIEW);
       k.add(k.radial(radius, { grid: 72 }), {
+        even: true,
+        jitter: 0.015,
         quat: q,
         flat: 0.2,
-        opacity: 0.6,
+        opacity: 0.28,
         share: 0.3,
+        size: 1.8,
         color: (c) => {
           const d = unit(c.lp);
           const groove =
@@ -2480,7 +2541,10 @@ export const RECIPES = {
         },
       });
       // Inside: the macronucleus, food vacuoles and two star-shaped contractile vacuoles.
-      k.add(k.ellipsoid(0.3, 0.17, 0.18), {
+      k.add(evenEllipsoid(k, 0.3, 0.17, 0.18), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: W([0.08, 0.02, -0.06]),
         quat: q,
         weight: 1.3,
@@ -2488,6 +2552,9 @@ export const RECIPES = {
         color: (c) => litGloss("#7c4fc4", c.n, 0.3),
       });
       k.add(k.sphere(0.07), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: W([0.25, 0.1, 0.02]),
         weight: 1.5,
         pattern: false,
@@ -2496,6 +2563,9 @@ export const RECIPES = {
       for (let i = 0; i < 9; i++) {
         const p = [-0.75 + (1.35 * i) / 8, (k.rand() * 2 - 1) * 0.14, (k.rand() * 2 - 1) * 0.16];
         k.add(k.sphere(0.055 + 0.03 * k.rand()), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           pos: W(p),
           weight: 1.3,
           pattern: false,
@@ -2504,7 +2574,15 @@ export const RECIPES = {
       }
       for (const x of [-0.62, 0.6]) {
         const cvp = W([x, 0.18, 0]);
-        k.add(k.sphere(0.07), { pos: cvp, weight: 2, pattern: false, color: "#dff3ff" });
+        k.add(k.sphere(0.07), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
+          pos: cvp,
+          weight: 2,
+          pattern: false,
+          color: "#dff3ff",
+        });
         for (let j = 0; j < 7; j++) {
           const a = (j / 7) * TAU;
           const d = unit(W([Math.cos(a) * 0.9, 0.15, Math.sin(a)]));
@@ -2513,7 +2591,7 @@ export const RECIPES = {
               grid: 8,
               samples: 16,
             }),
-            { weight: 2, pattern: false, color: "#a8dcff" },
+            { even: true, opacity: 1, jitter: 0.015, weight: 2, pattern: false, color: "#a8dcff" },
           );
         }
       }
@@ -2611,12 +2689,15 @@ export const RECIPES = {
       };
       const side = (p) => (dot(p, AMOEBA_DIR) >= 0 ? 0 : 1);
       k.add(k.radial(radius, { grid: 96 }), {
+        even: true,
+        jitter: 0.015,
         channel: (c) => side(c.p),
         to: (c) => pod(c.p, side(c.p) ? -1 : 1),
         scale: [1, 0.42, 1],
         flat: 0.3,
-        opacity: 0.55,
+        opacity: 0.3,
         share: 0.4,
+        size: 2.4,
         color: (c) => {
           const d = unit(c.lp);
           const rim = smoothstep(0.75, 1.3, radius(d));
@@ -2643,7 +2724,10 @@ export const RECIPES = {
         };
       });
       // Inside: nucleus, a pulsing contractile vacuole and food vacuoles.
-      k.add(k.ellipsoid(0.24, 0.13, 0.24), {
+      k.add(evenEllipsoid(k, 0.24, 0.13, 0.24), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         ...breathe,
         pos: [-0.1, 0.02, 0.05],
         weight: 1.3,
@@ -2651,6 +2735,9 @@ export const RECIPES = {
         color: (c) => litGloss("#5b3fa8", c.n, 0.3),
       });
       k.add(k.sphere(0.13), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: [0.3, 0.05, -0.22],
         weight: 1.3,
         pattern: false,
@@ -2662,6 +2749,9 @@ export const RECIPES = {
         const a = (i / 7) * TAU + k.rand() * 0.5;
         const r = 0.3 + 0.3 * k.rand();
         k.add(k.sphere(0.06 + 0.03 * k.rand()), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           ...breathe,
           pos: [r * Math.cos(a), 0.02, r * Math.sin(a)],
           weight: 1.3,
