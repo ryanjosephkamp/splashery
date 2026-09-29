@@ -35,6 +35,31 @@ const easeOutBack = (x) => {
 };
 const bump = (x) => (x <= 0 || x >= 1 ? 0 : Math.sin(Math.PI * x));
 const window01 = (x, a, b) => clamp((x - a) / (b - a), 0, 1);
+// A torus in the XZ plane (like k.torus) as a parametric surface, so it
+// can take even: true (k.torus places its splats at random).
+function evenTorus(k, R, r, grid = 96) {
+  return k.param(
+    (u, v) => {
+      const a = TAU * u;
+      const b = TAU * v;
+      const w = R + r * Math.cos(b);
+      return [w * Math.cos(a), r * Math.sin(b), w * Math.sin(a)];
+    },
+    { grid, thick: r },
+  );
+}
+// The i-th point of an even (low-discrepancy) sequence in `dims` dimensions,
+// for clouds that should cover an area smoothly instead of in clumps.
+function evenPoint(i, dims) {
+  let g = 2;
+  for (let k = 0; k < 20; k++) g = Math.pow(1 + g, 1 / (dims + 1));
+  const out = [];
+  for (let k = 0; k < dims; k++) {
+    const v = 0.5 + i / Math.pow(g, k + 1);
+    out.push(v - Math.floor(v));
+  }
+  return out;
+}
 
 // Baked light from above, front and right, with a sheen towards the viewer.
 const LIGHT = unit([0.4, 0.85, 0.55]);
@@ -1351,13 +1376,19 @@ export const RECIPES = {
       const dial = "#fbf8f0";
       // Body: a drum facing the viewer.
       k.add(k.cylinder(R, Dp, { caps: "bottom" }), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         rot: [90, 0, 0],
         flat: 0.15,
         interior: 0.06,
         core: "#6a6f78",
         color: (c) => lit(body, c.n, { amb: 0.64, dif: 0.45, spec: 0.45, pow: 26 }),
       });
-      k.add(k.torus(R, 0.055), {
+      k.add(evenTorus(k, R, 0.055), {
+        opacity: 1,
+        jitter: 0.015,
+        even: true,
         pos: [0, 0, zf],
         rot: [90, 0, 0],
         flat: 0.2,
@@ -1365,13 +1396,21 @@ export const RECIPES = {
         color: (c) => chrome(c.n),
       });
       // The dial: ticks, numbers and a maker's line.
-      k.add(k.disc(R - 0.03), {
-        pos: [0, 0, zf - 0.01],
-        rot: [90, 0, 0],
+      // The dial: one face only, spread evenly, so no splats are wasted on
+      // its back and the case never shows through as speckle.
+      const dialR = R - 0.03;
+      const dialShape = k.param(
+        (u, v) => [dialR * v * Math.sin(TAU * u), dialR * v * Math.cos(TAU * u), 0],
+        { grid: 96 },
+      );
+      k.add(dialShape, {
+        opacity: 1,
+        jitter: 0.01,
+        even: true,
+        pos: [0, 0, zf + 0.002],
         flat: 0.12,
         pattern: false,
         color: (c) => {
-          if (c.n[2] < 0) return null;
           const x = c.p[0];
           const y = c.p[1];
           const r = Math.hypot(x, y);
@@ -1404,6 +1443,9 @@ export const RECIPES = {
         const part = k.part(name, { pivot: [0, 0, 0], axis: [0, 0, 1] });
         const z = zf + (name === "second" ? 0.03 : name === "minute" ? 0.02 : 0.01);
         k.add(roundBox(w, len + back, 0.008, w * 0.45), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           pos: [0, (len - back) / 2, z],
           part,
           flat: 0.15,
@@ -1417,6 +1459,9 @@ export const RECIPES = {
       hand("minute", 0.55, 0.04, "#1d1d22", 0.06);
       const sec = hand("second", 0.6, 0.012, "#d62828", 0.16);
       k.add(k.cylinder(0.035, 0.01), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: [0, -0.11, zf + 0.03],
         rot: [90, 0, 0],
         part: sec,
@@ -1425,6 +1470,9 @@ export const RECIPES = {
         color: "#d62828",
       });
       k.add(k.cylinder(0.04, 0.04), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: [0, 0, zf + 0.035],
         rot: [90, 0, 0],
         weight: 3,
@@ -1445,6 +1493,9 @@ export const RECIPES = {
             { grid: 64 },
           ),
           {
+            even: true,
+            opacity: 1,
+            jitter: 0.015,
             pos: [s * 0.46, 0.66, 0],
             rot: [0, 0, s * -32],
             flat: 0.15,
@@ -1452,6 +1503,9 @@ export const RECIPES = {
           },
         );
         k.add(k.cylinder(0.035, 0.18), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           pos: [s * 0.42, -0.83, 0],
           rot: [0, 0, s * 22],
           weight: 2,
@@ -1467,16 +1521,22 @@ export const RECIPES = {
           0.028,
           { samples: 64, grid: 32 },
         ),
-        { flat: 0.2, weight: 1.5, color: (c) => chrome(c.n) },
+        { opacity: 1, jitter: 0.015, flat: 0.2, weight: 1.5, color: (c) => chrome(c.n) },
       );
       const hammer = k.part("hammer", { pivot: [0, 0.8, 0], axis: [0, 0, 1] });
       k.add(k.cylinder(0.012, 0.22), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: [0, 0.9, 0.02],
         part: hammer,
         weight: 2,
         color: (c) => chrome(c.n),
       });
       k.add(k.sphere(0.04), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: [0, 1.01, 0.02],
         part: hammer,
         weight: 2,
@@ -1782,10 +1842,7 @@ export const RECIPES = {
           ],
           { grid: 64 },
         ),
-        {
-          flat: 0.15,
-          color: paint,
-        },
+        { even: true, opacity: 1, jitter: 0.015, flat: 0.15, color: paint },
       );
       for (const [x, col] of [
         [-0.12, "#f4f1ea"],
@@ -1793,36 +1850,77 @@ export const RECIPES = {
         [0.12, "#e05a47"],
       ])
         k.add(k.cylinder(0.03, 0.03), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           pos: [x, 0.09, 0.3],
           rot: [-15, 0, 0],
           weight: 2,
           color: (c) => lit(col, c.n),
         });
       k.add(k.cylinder(0.035, S[1] - 0.1), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: [0, (S[1] + 0.1) / 2, S[2]],
         color: (c) => chrome(c.n),
       });
       // The head: motor and cage turn together.
       const head = k.part("head", { pivot: S, axis: [0, 1, 0] });
       k.add(k.ellipsoid(0.16, 0.16, 0.2), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: [0, Hc[1], Hc[2] - 0.22],
         part: head,
         flat: 0.15,
         color: paint,
       });
-      k.add(k.sphere(0.06), { pos: [0, S[1], S[2]], part: head, color: paint });
+      k.add(k.sphere(0.06), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
+        pos: [0, S[1], S[2]],
+        part: head,
+        color: paint,
+      });
       const cz = Hc[2];
       const Rg = 0.5;
-      const wire = { part: head, flat: 0.35, weight: 1.2, color: (c) => chrome(c.n) };
-      k.add(k.torus(Rg, 0.016), {
+      // Thin wire: softly lit steel rather than mirror chrome, so a wire a
+      // few pixels wide reads as smooth metal, not black and white speckle.
+      const wire = {
+        part: head,
+        flat: 0.35,
+        weight: 1.2,
+        jitter: 0.01,
+        color: (c) => lit("#8a8f97", c.n, { amb: 0.72, dif: 0.35, spec: 0.3, pow: 10 }),
+      };
+      k.add(evenTorus(k, Rg, 0.016), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: [0, Hc[1], cz + 0.02],
         rot: [90, 0, 0],
         ...wire,
         weight: 2,
       });
       for (const r of [0.14, 0.26, 0.38])
-        k.add(k.torus(r, 0.006), { pos: [0, Hc[1], cz + 0.09], rot: [90, 0, 0], ...wire });
-      k.add(k.torus(Rg * 0.9, 0.008), { pos: [0, Hc[1], cz - 0.1], rot: [90, 0, 0], ...wire });
+        k.add(evenTorus(k, r, 0.006), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
+          pos: [0, Hc[1], cz + 0.09],
+          rot: [90, 0, 0],
+          ...wire,
+        });
+      k.add(evenTorus(k, Rg * 0.9, 0.008), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
+        pos: [0, Hc[1], cz - 0.1],
+        rot: [90, 0, 0],
+        ...wire,
+      });
       for (let i = 0; i < 16; i++) {
         const a = (i / 16) * TAU;
         const dx = Math.sin(a);
@@ -1851,6 +1949,9 @@ export const RECIPES = {
         );
       }
       k.add(k.cylinder(0.06, 0.02), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: [0, Hc[1], cz + 0.1],
         rot: [90, 0, 0],
         part: head,
@@ -1872,6 +1973,8 @@ export const RECIPES = {
             { grid: 24 },
           ),
           {
+            even: true,
+            jitter: 0.015,
             part: blades,
             flat: 0.12,
             opacity: 0.9,
@@ -1883,6 +1986,9 @@ export const RECIPES = {
         );
       }
       k.add(k.cylinder(0.07, 0.07), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: [0, Hc[1], cz - 0.02],
         rot: [90, 0, 0],
         part: blades,
@@ -1894,7 +2000,7 @@ export const RECIPES = {
 
   lamp: {
     alive: true,
-    density: 0.45,
+    density: 1,
     options: [{ key: "color", label: "Colour", type: "color", default: "#3c7fc4" }],
     controls: [{ key: "light", label: "Light", type: "toggle", default: 1, ease: 0.35 }],
     action: { key: "light", label: "Switch the light" },
@@ -1921,6 +2027,9 @@ export const RECIPES = {
         {
           pos: [0, 0, -0.1],
           flat: 0.15,
+          even: true,
+          opacity: 1,
+          jitter: 0.012,
           color: paint,
         },
       );
@@ -1935,6 +2044,8 @@ export const RECIPES = {
           {
             flat: 0.2,
             weight: 1.3,
+            opacity: 1,
+            jitter: 0.012,
             color: paint,
           },
         );
@@ -1988,44 +2099,58 @@ export const RECIPES = {
           pos: head,
           quat: q,
           flat: 0.15,
+          even: true,
+          opacity: 1,
+          jitter: 0.012,
           color: (c) =>
             dot(c.n, dir) > 0.2 ? lit("#f4efe2", mul(c.n, -1), { amb: 0.9, dif: 0.2 }) : paint(c),
         },
       );
       const bulbAt = add(head, mul(dir, 0.07));
-      k.add(k.sphere(0.085), { pos: bulbAt, weight: 2, color: "#e9e4d8" });
+      k.add(k.sphere(0.085), { pos: bulbAt, weight: 2, even: true, color: "#e9e4d8" });
       const glow = k.part("glow", { pivot: bulbAt });
       k.add(k.sphere(0.095), {
         pos: bulbAt,
         part: glow,
         weight: 2,
         pattern: false,
+        even: true,
+        jitter: 0.01,
         color: (c) => keep(mix("#fff7d6", "#ffffff", 0.6)),
       });
       // A faint cone of light and a warm pool on the desk.
       const beam = k.part("beam", { pivot: bulbAt });
       const floorT = (0 - bulbAt[1]) / dir[1];
       const pool = add(bulbAt, mul(dir, floorT));
-      k.cloud({ share: 0.08, size: 3.2, part: beam, pattern: false }, (rand) => {
-        const s = Math.sqrt(rand());
-        const rr = (0.08 + s * 0.5) * Math.sqrt(rand());
-        const a = rand() * TAU;
-        const ref = unit(cross(dir, [0, 0, 1]));
-        const ref2 = cross(dir, ref);
+      // Both are spread evenly (not at random), so the light reads as a
+      // smooth glow rather than blotches.
+      const ref = unit(cross(dir, [0, 0, 1]));
+      const ref2 = cross(dir, ref);
+      k.cloud({ share: 0.08, size: 2, part: beam, pattern: false }, (rand, i, n) => {
+        // Jittered within its cell, so the even points show no lattice.
+        const cell = 1 / Math.cbrt(n);
+        const [e0, e1, e2] = evenPoint(i, 3).map((e) => {
+          const v = e + (rand() - 0.5) * cell * 0.4;
+          return v - Math.floor(v);
+        });
+        const s = Math.sqrt(e0);
+        const rr = (0.08 + s * 0.5) * Math.sqrt(e1);
+        const a = e2 * TAU;
         const p = add(
-          add(bulbAt, mul(dir, s * floorT * 0.98)),
+          add(bulbAt, mul(dir, s * floorT * 0.9)),
           add(mul(ref, Math.cos(a) * rr), mul(ref2, Math.sin(a) * rr)),
         );
-        return { p, color: "#ffe9a8", opacity: 0.05 + 0.05 * (1 - s) };
+        return { p, dir, stretch: 6, color: "#ffe9a8", opacity: 0.025 + 0.035 * (1 - s) };
       });
-      k.cloud({ share: 0.06, size: 2.2, part: beam, pattern: false }, (rand) => {
-        const a = rand() * TAU;
-        const r = Math.sqrt(rand()) * 0.62;
+      k.cloud({ share: 0.06, size: 3, part: beam, pattern: false }, (rand, i, n) => {
+        // A sunflower spiral: the evenest way to fill a disc.
+        const a = i * 2.39996323;
+        const r = Math.sqrt((i + 0.5) / n) * 0.62;
         return {
           p: [pool[0] + Math.sin(a) * r, 0.003, pool[2] + Math.cos(a) * r],
           n: [0, 1, 0],
           color: "#ffe39a",
-          opacity: 0.45 * (1 - (r / 0.62) ** 2),
+          opacity: 0.4 * (1 - (r / 0.62) ** 2),
         };
       });
     },
