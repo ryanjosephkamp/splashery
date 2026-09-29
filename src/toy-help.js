@@ -1405,7 +1405,7 @@ export const TOY_HELP = {
   },
   screen: {
     howTo:
-      "Tap to switch it on, then tap the picture to play and pause. Tap the old TV's power knob, the flat TV's button, the curtains or the hologram's base to switch it off.",
+      "Tap to switch on, then the picture to play or pause. Tap the knob, button, curtains or base to switch off.",
     about:
       "A screen made of splats shows a video or a GIF: every pixel of the picture is a small splat whose color changes with each frame. It comes in four styles: an old TV with a walnut cabinet and a curved glass face, a flat TV on a stand, a cinema with velvet curtains and rows of seats, and a hologram floating above its projector.\n\nTap it to switch it on: the old TV's picture opens from a bright line, the flat TV fades up, the curtains part, or the hologram flickers up from its beam. Tap the picture to pause and play. To switch off, tap the old TV's power knob (the picture shrinks to a bright dot, as old tube sets did), the small button beside the flat TV's red light, the curtains (they close) or the hologram's base, or use the button in the Toy tab. Turn on the sound with the speaker button, and open your own video or GIF in the Toy tab.",
   },
