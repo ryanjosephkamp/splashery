@@ -85,6 +85,8 @@ export class Viewer {
     player.applyLook();
     await player.loadToy(scene.toy);
     player.applySettings(scene);
+    // A flat toy's tilt starts locked (lane Viewer).
+    player.camera.setTiltLock(!!player.toyInfo?.recipe?.tiltLock);
     this.bindGestures();
     return scene;
   }
@@ -109,10 +111,12 @@ export class Viewer {
       },
       onOrbitEnd: () => cam.end(),
       onPinchStart: () => cam.begin(),
-      onPinch: ({ scale, dx, dy, twist, dt }) => {
+      onPinch: ({ scale, dx, dy, twist, mode, dt }) => {
         // Pictures: two fingers move a picture toy, as in a photo viewer.
         if (player.pictures) player.panBy(dx, dy);
-        else cam.rotateBy(dx, dy, dt);
+        // A pinch only zooms: two fingers turn the toy only when they move
+        // together first (lane Viewer).
+        else if (mode === "drag") cam.rotateBy(dx, dy, dt);
         if (scale > 0) cam.zoomBy(1 / scale);
         cam.rollBy(-twist);
         player.stage.requestRender();
