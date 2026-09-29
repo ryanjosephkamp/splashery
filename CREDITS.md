@@ -246,11 +246,12 @@ checked on its live Wikimedia Commons page on September 29, 2026:
   program, [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/), on
   [Commons](https://commons.wikimedia.org/wiki/File:Still_Life_with_Cheese_MET_DT1989.jpg).
 
-The depth is worked out on the device by [Depth Anything V2 Small](https://huggingface.co/depth-anything/Depth-Anything-V2-Small)
-(Lihe Yang and others, Apache 2.0; the quantized ONNX build is by
+The depth is worked out on the device by
+[Depth Anything V2 Small](https://huggingface.co/depth-anything/Depth-Anything-V2-Small) (Lihe Yang
+and others, Apache 2.0; the quantized ONNX build is by
 [onnx-community](https://huggingface.co/onnx-community/depth-anything-v2-small)), run by
-[ONNX Runtime Web](https://github.com/microsoft/onnxruntime) (MIT). Photos people open are
-processed in their browser and never uploaded.
+[ONNX Runtime Web](https://github.com/microsoft/onnxruntime) (MIT). Photos people open are processed
+in their browser and never uploaded.
 
 ## National flags
 
@@ -268,5 +269,5 @@ Splashery is built on the [PlayCanvas engine](https://github.com/playcanvas/engi
 [gifenc](https://github.com/mattdesl/gifenc) (MIT) for GIF export. See [LICENSES.md](LICENSES.md).
 Pictures and pages use [PDF.js](https://github.com/mozilla/pdf.js) (Apache 2.0) and
 [omggif](https://github.com/deanm/omggif) (MIT), loaded only when someone opens a PDF or a GIF.
-Photo to 3D uses [ONNX Runtime Web](https://github.com/microsoft/onnxruntime) (MIT) and Depth Anything V2 Small
-(Apache 2.0), loaded only when someone opens a photo in that toy.
+Photo to 3D uses [ONNX Runtime Web](https://github.com/microsoft/onnxruntime) (MIT) and Depth
+Anything V2 Small (Apache 2.0), loaded only when someone opens a photo in that toy.

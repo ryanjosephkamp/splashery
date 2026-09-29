@@ -29,7 +29,7 @@ export const PHOTO_BUDGETS = Object.fromEntries(
 
 export const LAYERS = 4; // the depth bands a picture is split into (the four morph channels)
 export const FILL = 1.12; // a splat's size against the distance to its neighbors on its surface
-export const CUT = 0.03; // a step in the (0..1) disparity between neighbors that cuts the surface
+export const CUT = 0.015; // a step in the (0..1) disparity between neighbors that cuts the surface
 export const SPLAT_OPACITY = 1;
 export const SPLAT_FLAT = 0.14;
 const MIN_PIECE = 0.0006; // a piece of surface smaller than this share of the picture joins its neighbor
@@ -131,7 +131,8 @@ export function normalizeDepth(d) {
   if (!(hi > lo)) return out.fill(0.5);
   const bins = 1024;
   const hist = new Float64Array(bins);
-  for (let i = 0; i < n; i++) hist[Math.min(bins - 1, Math.floor(((d[i] - lo) / (hi - lo)) * bins))]++;
+  for (let i = 0; i < n; i++)
+    hist[Math.min(bins - 1, Math.floor(((d[i] - lo) / (hi - lo)) * bins))]++;
   const at = (q) => {
     let acc = 0;
     for (let b = 0; b < bins; b++) {
@@ -219,10 +220,10 @@ function smoothOnSurface(d, m, gx, gy, passes = 2) {
         const c = j * gx + i;
         let s = a[c] * 2;
         let w = 2;
-        if (i > 0 && linkedRight(m, c - 1)) (s += a[c - 1]), w++;
-        if (i + 1 < gx && linkedRight(m, c)) (s += a[c + 1]), w++;
-        if (j > 0 && linkedDown(m, c - gx)) (s += a[c - gx]), w++;
-        if (j + 1 < gy && linkedDown(m, c)) (s += a[c + gx]), w++;
+        if (i > 0 && linkedRight(m, c - 1)) ((s += a[c - 1]), w++);
+        if (i + 1 < gx && linkedRight(m, c)) ((s += a[c + 1]), w++);
+        if (j > 0 && linkedDown(m, c - gx)) ((s += a[c - gx]), w++);
+        if (j + 1 < gy && linkedDown(m, c)) ((s += a[c + gx]), w++);
         b[c] = s / w;
       }
     a = b;
@@ -289,10 +290,10 @@ function joinSmallPieces(d, pc, rgb, gx, gy, minCells, reach = 2) {
             (rgb[q * 3 + 1] - rgb[c * 3 + 1]) ** 2 +
             (rgb[q * 3 + 2] - rgb[c * 3 + 2]) ** 2 +
             0.002 * (di * di + dj * dj);
-          if (e < bd) (bd = e), (best = q);
+          if (e < bd) ((bd = e), (best = q));
         }
       }
-      if (best >= 0) (out[c] = d[best]), moved++;
+      if (best >= 0) ((out[c] = d[best]), moved++);
     }
   return { d: out, moved };
 }
@@ -395,6 +396,12 @@ export function buildPhotoSplats(photo, depthMap, { count = 100000, depth = 0.5,
     band,
     depth: d,
     gap: 0.16 * R + 0.06, // how far apart "Layers" pulls the depth bands, in picture heights
-    stats: { pieces: pc.count, bigPieces: big, cutEdges: cutCells, relief: R, joined: joined.moved },
+    stats: {
+      pieces: pc.count,
+      bigPieces: big,
+      cutEdges: cutCells,
+      relief: R,
+      joined: joined.moved,
+    },
   };
 }

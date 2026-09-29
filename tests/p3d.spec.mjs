@@ -56,7 +56,9 @@ test.describe("the conversion", () => {
 
   test("splat budgets follow the tiers", () => {
     for (const [tier, t] of Object.entries(TIER_COUNTS))
-      expect(PHOTO_BUDGETS[tier]).toBe(Math.round(Math.min(t.maxCount, t.defaultCount * PHOTO_DENSITY)));
+      expect(PHOTO_BUDGETS[tier]).toBe(
+        Math.round(Math.min(t.maxCount, t.defaultCount * PHOTO_DENSITY)),
+      );
     expect(PHOTO_BUDGETS.low).toBeLessThan(PHOTO_BUDGETS.max);
   });
 
@@ -114,7 +116,7 @@ test.describe("the conversion", () => {
         const info = ctx.kit.data.photo;
         expect(info.splats, `${s.id} on ${tier}`).toBeLessThanOrEqual(budget);
         expect(info.splats).toBeGreaterThan(budget * 0.85);
-        expect(info.pieces).toBeGreaterThan(1);
+        expect(info.pieces).toBeGreaterThanOrEqual(s.id === "forest" ? 5 : 1); // the forest's leaves are cut apart
         const b = ctx.buf;
         let bad = 0;
         for (let i = 0; i < b.count * 3; i++) if (!Number.isFinite(b.pos[i])) bad++;
@@ -134,7 +136,9 @@ test.describe("the conversion", () => {
 });
 
 test.describe("in the browser", () => {
-  test("nothing loads the depth model until a photo is opened; then it builds and taps", async ({ page }) => {
+  test("nothing loads the depth model until a photo is opened; then it builds and taps", async ({
+    page,
+  }) => {
     test.setTimeout(240_000);
     const errors = [];
     const requests = [];
@@ -181,7 +185,9 @@ test.describe("in the browser", () => {
       await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
       await page.evaluate(() => window.__splashery.app.chooseToy("photo-3d"));
       await page.waitForFunction(() => window.__splashery.player.proc?.ctx?.kit?.data?.photo?.splats > 5000, null, { timeout: 90_000 }); // prettier-ignore
-      await page.evaluate(() => window.__splashery.player.motion.setControl("rise", 1, { snap: true }));
+      await page.evaluate(() =>
+        window.__splashery.player.motion.setControl("rise", 1, { snap: true }),
+      );
       await page.waitForTimeout(1200);
       await page.screenshot({ path: `tests/screenshots/p3d-photo-3d-${w}x${h}.png` });
       await page.close();

@@ -32,9 +32,17 @@ fs.mkdirSync(outDir, { recursive: true });
 const base = process.env.SPLASHERY_URL || "http://127.0.0.1:4173/";
 const browser = await chromium.launch({
   executablePath: process.env.SPLASHERY_CHROMIUM || undefined,
-  args: ["--use-angle=swiftshader", "--enable-unsafe-swiftshader", "--ignore-gpu-blocklist", "--enable-webgl"],
+  args: [
+    "--use-angle=swiftshader",
+    "--enable-unsafe-swiftshader",
+    "--ignore-gpu-blocklist",
+    "--enable-webgl",
+  ],
 });
-const page = await browser.newPage({ viewport: { width: 1000, height: 700 }, reducedMotion: "reduce" });
+const page = await browser.newPage({
+  viewport: { width: 1000, height: 700 },
+  reducedMotion: "reduce",
+});
 page.on("pageerror", (e) => console.error("page error:", e.message));
 await page.goto(`${base}?renderer=webgl2&profile=${opt("profile", "mid")}&adapt=off&labs=1`);
 await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });

@@ -8,7 +8,9 @@
 import { chromium } from "@playwright/test";
 import fs from "node:fs";
 
-const IDS = process.argv.slice(2).length ? process.argv.slice(2) : ["forest", "street", "still-life"];
+const IDS = process.argv.slice(2).length
+  ? process.argv.slice(2)
+  : ["forest", "street", "still-life"];
 const dir = "assets/toys/photo-3d";
 const b = await chromium.launch({
   executablePath: process.env.SPLASHERY_CHROMIUM || undefined,

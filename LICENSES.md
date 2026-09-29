@@ -94,12 +94,13 @@ OR OTHER DEALINGS IN THE SOFTWARE.
 - File: `vendor/depth-anything-v2-small/model_quantized.onnx` (27,258,801 bytes), the int8 build
   from https://huggingface.co/onnx-community/depth-anything-v2-small, downloaded at build time,
   unmodified. Its model card is copied to `vendor/depth-anything-v2-small/MODEL-CARD.md` and the
-  Apache License 2.0 text (from the project's repository) to `vendor/depth-anything-v2-small/LICENSE`.
+  Apache License 2.0 text (from the project's repository) to
+  `vendor/depth-anything-v2-small/LICENSE`.
 - Loaded only when someone opens a photo in the Photo to 3D toy.
-- Source: https://github.com/DepthAnything/Depth-Anything-V2 (Lihe Yang, Bingyi Kang, Zilong
-  Huang, Zhen Zhao, Xiaogang Xu, Jiashi Feng, Hengshuang Zhao: "Depth Anything V2", 2024).
-- License: Apache License 2.0 for the Small model, checked on the live model cards on
-  September 29, 2026. The Base, Large and Giant sizes are CC BY-NC and are not used.
+- Source: https://github.com/DepthAnything/Depth-Anything-V2 (Lihe Yang, Bingyi Kang, Zilong Huang,
+  Zhen Zhao, Xiaogang Xu, Jiashi Feng, Hengshuang Zhao: "Depth Anything V2", 2024).
+- License: Apache License 2.0 for the Small model, checked on the live model cards on September
+  29, 2026. The Base, Large and Giant sizes are CC BY-NC and are not used.
 
 ## omggif 1.0.10 (lane Pictures)
 

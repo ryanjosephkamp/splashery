@@ -97,7 +97,10 @@ export async function decodePhoto(source) {
     return { w: p.width, h: p.height, data: new Uint8Array(p.data) };
   }
   const jpeg = (await import("jpeg-js")).default;
-  const j = jpeg.decode(globalThis.Buffer.from(bytes), { useTArray: true, maxMemoryUsageInMB: 1024 });
+  const j = jpeg.decode(globalThis.Buffer.from(bytes), {
+    useTArray: true,
+    maxMemoryUsageInMB: 1024,
+  });
   return { w: j.width, h: j.height, data: j.data };
 }
 
@@ -128,7 +131,8 @@ export function unpackDepth(bytes) {
   const lo = v.getFloat32(4, true);
   const hi = v.getFloat32(8, true);
   const d = new Float32Array(w * h);
-  for (let i = 0; i < d.length; i++) d[i] = lo + (v.getUint16(12 + i * 2, true) / 65535) * (hi - lo);
+  for (let i = 0; i < d.length; i++)
+    d[i] = lo + (v.getUint16(12 + i * 2, true) / 65535) * (hi - lo);
   return { w, h, d };
 }
 
@@ -217,7 +221,10 @@ const PHOTO_3D = {
     note: "Open a JPEG, PNG or WebP photo. A depth model that runs on this device (about 27 MB, loaded the first time) works out how far away each part of the picture is, and the photo is rebuilt as splats in 3D. Nothing is uploaded. It takes a few seconds, longer on a phone.",
     async read(_text, fileName, file) {
       if (!file) throw new Error("Open a photo.");
-      const p = await openPhoto(file, (file.name || fileName || "Your photo").replace(/\.[^.]+$/, ""));
+      const p = await openPhoto(
+        file,
+        (file.name || fileName || "Your photo").replace(/\.[^.]+$/, ""),
+      );
       return { source: "custom", photoName: p.name };
     },
     shown() {

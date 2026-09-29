@@ -26,6 +26,9 @@ function scene(w, h) {
   return { width: w, height: h, data };
 }
 const s = scene(96, 72);
-fs.writeFileSync(`${dir}/scene.png`, PNG.sync.write(Object.assign(new PNG({ width: 96, height: 72 }), { data: s.data })));
+fs.writeFileSync(
+  `${dir}/scene.png`,
+  PNG.sync.write(Object.assign(new PNG({ width: 96, height: 72 }), { data: s.data })),
+);
 fs.writeFileSync(`${dir}/scene.jpg`, jpeg.encode(s, 90).data);
 console.log("wrote", dir);
