@@ -184,6 +184,7 @@ export const RECIPES = {
   screen: {
     // A screen keeps still and faces you (walk the view round it by hand).
     turntable: false,
+    tiltLock: true, // a drag only spins it left and right (lane Viewer)
     alive: true,
     // Its own splats are the set; the picture is the sheet's.
     density: 0.8,

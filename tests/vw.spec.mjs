@@ -8,6 +8,10 @@ import { buildSheet } from "../src/picture-splats.js";
 import { OrbitCamera, Gestures, PINCH_TWIST } from "../src/camera.js";
 import { createScene } from "../src/state.js";
 import { encodeSceneHash } from "../src/codec.js";
+import { TOYS } from "../src/toys.js";
+import { RECIPES as PICTURES } from "../src/packs/pictures.js";
+import { RECIPES as SCREENS } from "../src/packs/screens.js";
+import { RECIPES as SPLATTING } from "../src/packs/splatting.js";
 
 const APP = "/?renderer=webgl2&adapt=off&profile=mid";
 const FIGURES = "http://127.0.0.1:4173/tests/fixtures/vw/figures.pdf";
@@ -189,6 +193,14 @@ test.describe("pinch zooms, not turns", () => {
 });
 
 test.describe("the tilt lock", () => {
+  test("every toy on the Pictures and pages shelf starts locked; others stay free", () => {
+    const recipes = { ...PICTURES, ...SCREENS, ...SPLATTING };
+    const shelf = TOYS.filter((t) => t.category === "pictures").map((t) => t.id);
+    expect(shelf.length).toBeGreaterThan(1);
+    for (const id of shelf) expect(recipes[id]?.tiltLock, id).toBe(true);
+    expect(SPLATTING["gaussian-splatting"].tiltLock).toBeFalsy();
+  });
+
   test("locked, a drag only spins the toy; pitch and roll stay home", () => {
     const cam = new OrbitCamera();
     cam.setState({ yaw: 0, pitch: 0.2, roll: 0, distance: 5 }, { asHome: true });
