@@ -201,6 +201,12 @@ button; embeds keep it off), through `info.sound.audio()` (the `AudioContext`) a
 `info.sound.master` (the site's limiter), and reads its playback time from the context's
 `currentTime`.
 
+**Labs only: kernels and GPU fields** (lane Lab, #85 and #83): `kernel: "sharp"` draws the toy with
+a sharper splat falloff while labs is on (also `?kernel=sharp`; docs/lab/KERNELS.md has the
+measurements). `gpuField(options, fit)` lets a recipe bring its own GPU program, returning
+`{ glsl, wgsl }` work-buffer hooks, so hundreds of thousands of splats can move every frame;
+`src/packs/lab.js` is the example (docs/lab/FIELDS.md).
+
 **Game pieces and loose pieces**: a splat with `kind: "token"` and `params: [i, 0]` belongs to token
 `i` (up to 48), which `out.tokens[i] = { base, offset, quat, visible }` moves and turns. A `params`
 function can pick the token per splat, so one shape can break into many pieces (the asteroid's 18
@@ -396,7 +402,11 @@ like any other splat (parts, the body, leaves).
   not turned, which is why a turning page needs its own kind). A leaf's sheet should be on part 0 (a
   part's turn would replace the leaf's). The back of a turning page is a second sheet with the same
   spine, `normal` reversed and its own page:
-  `k.sheet({ id: "back", …, normal: [0, 0, -1], leaf: 0 })`.
+  `k.sheet({ id: "back", …, normal: [0, 0, -1], leaf: 0 })`. Check the back in a clip: in the engine
+  of September 29, 2026 it drew as blank paper, because splats are sorted in the pose they were
+  built in, so its paper drew over its ink (lane Learn). A sheet whose `visible` is 0 isn't built
+  until it shows, so a page that first appears halfway through a turn waits for its build: keep the
+  pages you'll need visible, or hidden behind a part.
 - The video's sound follows the site's speaker button (embeds stay silent); `pics.togglePlay()`
   plays and pauses it. A GIF plays by itself.
 - Budgets per sheet come from the device tier (`PICTURE_BUDGETS` in `src/pictures.js`). A book shows
