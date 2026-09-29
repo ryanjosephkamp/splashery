@@ -24,7 +24,8 @@ import {
   parseSpz,
   resourceFromArrays,
 } from "./loaders.js";
-import { findToy, assetURL, lookOption, pickLook } from "./toys.js";
+import { findToy, assetURL, lookOption, pickLook, labsOn } from "./toys.js";
+import { pickKernel } from "./kernels.js"; // Lab
 import { createScene, THEMES } from "./state.js";
 import { mulberry32, mixSeed, hash32 } from "./noise.js";
 import { Pictures } from "./pictures.js"; // Pictures
@@ -334,6 +335,9 @@ export class Player {
       Object.assign(info, { id: null, label: file.name, kind: "file", bytes: file.size });
     }
     this.toyInfo = info;
+    // Lab: a sharper splat kernel, labs only (src/kernels.js).
+    const kernelParam = new URLSearchParams(location.search).get("kernel");
+    this.stage.setKernel(pickKernel({ labs: labsOn(), param: kernelParam, recipe: info.kernel }));
     if (!this.pictures) this.closeMedia(); // Pictures
     this.patternOn = false;
     this.applyPattern();
@@ -485,6 +489,7 @@ export class Player {
       radius: Math.max(...half),
       splats: ctx.buf.count,
       lum: ctx.lum,
+      kernel: recipe.kernel, // Lab
       recipe,
       options,
       credit: def.credit || null,
