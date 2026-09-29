@@ -118,8 +118,10 @@ Built by Opus 5.5 (default effort).
 - September 29, 2026: lane started; draft PR #110 open.
 - The new character is in: 21 rigid joints, a sculpted person, a foot-led gait, per-tier budgets.
   The Worlds tests (`tests/wd.spec.mjs`) pass with it; `tests/chr.spec.mjs` is new.
-- Next: the review cards (`chr-closeup`, `chr-walk`, `chr-run`, `chr-idle`, `chr-before-after`,
-  `chr-colors`), the full test run, then READY.
+- Cards posted on the Effect review page: `chr-closeup`, `chr-walk`, `chr-run`, `chr-idle`,
+  `chr-before-after`, `chr-colors`. Waiting on the owner's marks (hourly check-in).
+- Full test run: 441 passed, 1 failed (`tests/bk.spec.mjs:195`, a video seek timeout in the long
+  run; it passes on its own on this branch and on main). `tests/chr.spec.mjs` 7 of 7.
 
 ## Notes
 
