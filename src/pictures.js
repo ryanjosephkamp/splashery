@@ -196,6 +196,15 @@ export class Pictures {
         return !!sh && !!sh.want && sh.shown?.key === sh.want.key;
       },
       aspect: (n = this.page) => self.media?.aspect?.(n) ?? 0,
+      // A video's time and length (seconds), and a seek (lane Books, for
+      // lane Screens); 0 for anything else.
+      get time() {
+        return self.media?.kind === "video" ? self.media.video?.currentTime || 0 : 0;
+      },
+      get duration() {
+        return self.media?.kind === "video" ? self.media.duration || 0 : 0;
+      },
+      seek: (s) => self.seek(s),
       nameOf: (n) => self.media?.names?.[n] ?? self.media?.name ?? "",
     };
   }
@@ -209,6 +218,25 @@ export class Pictures {
       this.stage.requestRender();
     }
     return p;
+  }
+
+  // Moves a video to `s` seconds (clamped); the new frame is uploaded once
+  // the video has it, playing or paused.
+  seek(s) {
+    const m = this.media;
+    if (m?.kind !== "video" || !Number.isFinite(s)) return false;
+    m.video?.addEventListener?.(
+      "seeked",
+      () => {
+        if (this.media !== m) return;
+        this.frameDirty = true;
+        this.stage.requestRender();
+      },
+      { once: true },
+    );
+    m.seek(s);
+    this.player.emit("pictures", this.info());
+    return true;
   }
 
   togglePlay() {

@@ -192,6 +192,34 @@ test.describe("engine for books (in the app)", () => {
     });
   });
 
+  test("a video's time, length and seek, and the Toy tab's scrub bar (for lane Screens)", async ({
+    page,
+  }) => {
+    await ready(page);
+    await page.evaluate(() => window.__splashery.app.chooseToy("picture-lab"));
+    await waitSheets(page);
+    await page.click("#tab-play");
+    // Not for a PDF.
+    await expect(page.locator("#toy-media-scrub")).toBeHidden();
+    await page.evaluate((u) => window.__splashery.app.openMedia(u), `http://127.0.0.1:4173${FIX}clip.webm`); // prettier-ignore
+    await waitSheets(page);
+    await expect(page.locator("#toy-media-scrub")).toBeVisible();
+    const d = await page.evaluate(() => window.__splashery.player.pictures.api.duration);
+    expect(d).toBeGreaterThan(0.5);
+    await page.evaluate(() => window.__splashery.player.pictures.media.pause());
+    // The API seeks...
+    await page.evaluate((d) => window.__splashery.player.pictures.api.seek(d / 2), d);
+    await page.waitForFunction((d) => Math.abs(window.__splashery.player.pictures.api.time - d / 2) < 0.1, d); // prettier-ignore
+    // ...and so does the bar, which follows the time.
+    await page.locator("#toy-media-scrub").fill("100");
+    await page.waitForFunction((d) => Math.abs(window.__splashery.player.pictures.api.time - d / 10) < 0.1, d); // prettier-ignore
+    await expect(page.locator("#toy-media-time")).toContainText("/ 0:");
+    // Anything else answers 0 and does not seek.
+    await page.evaluate(() => window.__splashery.app.clearMedia());
+    await waitSheets(page);
+    expect(await page.evaluate(() => { const a = window.__splashery.player.pictures.api; return [a.time, a.duration, a.seek(3)]; })).toEqual([0, 0, false]); // prettier-ignore
+  });
+
   test("a recipe can draw on a picture before it becomes splats (pictures.decorate)", async ({
     page,
   }) => {
