@@ -167,6 +167,10 @@ export function createUI(app) {
     gameBarInfo: $("game-bar-info"),
     gameBarMove: $("game-bar-move"),
     gamePlay: $("game-play"),
+    songTitle: $("song-bar-title"),
+    songLoop: $("song-loop"),
+    songSpeed: $("song-speed"),
+    songSeek: $("song-seek"),
     progress: $("progress"),
     progressBar: $("progress-bar"),
     progressLabel: $("progress-label"),
@@ -514,6 +518,8 @@ export function createUI(app) {
     }
     barGame = recipe?.game || null;
     if (recipe?.game) renderGamePanel(recipe.game);
+    barSong = recipe?.song || null; // lane Pianos
+    if (recipe?.song) renderSongPanel(recipe.song);
     refreshGameBar();
     els.toyOptions.textContent = "";
     // A kit toy's options, or a scan's looks (info.optionDefs).
@@ -1064,10 +1070,19 @@ export function createUI(app) {
   // and details, where it has got to, and buttons to play, pause, step and
   // jump. Tapping the board also plays or pauses.
   let barGame = null;
+  let barSong = null; // the song bar's song (lane Pianos)
+  let seeking = false;
   const playing = () => (app.player?.motion?.targets?.play ?? 0) > 0.5;
   function refreshGameBar() {
     const game = barGame;
-    els.gameBar.hidden = !game;
+    const song = !game ? barSong : null;
+    els.gameBar.hidden = !game && !song;
+    // The song bar (lane Pianos) is the game bar with its song buttons.
+    els.gameBar.classList.toggle("song-bar", !!song);
+    for (const id of ["game-back", "game-next", "game-end", "game-bar-title"])
+      $(id).hidden = !!song;
+    for (const el of [els.songTitle, els.songLoop, els.songSpeed, els.songSeek]) el.hidden = !song;
+    if (song) return refreshSongBar(song);
     if (!game) return;
     const tags = game.tags();
     const known = (x) => (x && !/^[?.\s]*$/.test(x) ? x : "");
@@ -1091,6 +1106,7 @@ export function createUI(app) {
     els.gamePlay.setAttribute("aria-label", playing() ? "Pause" : "Play");
   }
   setInterval(() => {
+    if (barSong && !barGame && !document.hidden) refreshSongBar(barSong);
     if (!barGame || document.hidden) return;
     const p = panelRefresh;
     if (p && p.game === barGame && p.game.title() !== p.title) {
@@ -1100,6 +1116,10 @@ export function createUI(app) {
   }, 250);
   const pause = () => app.setControl("play", 0);
   $("game-start").addEventListener("click", () => {
+    if (barSong && !barGame) {
+      barSong.toStart();
+      return refreshSongBar(barSong);
+    }
     pause();
     barGame?.jump("start");
   });
@@ -1116,6 +1136,11 @@ export function createUI(app) {
     barGame?.jump("end");
   });
   els.gamePlay.addEventListener("click", () => {
+    if (barSong && !barGame) {
+      if (barSong.state().playing) barSong.pause();
+      else barSong.play();
+      return refreshSongBar(barSong);
+    }
     if (!barGame) return;
     if (playing()) pause();
     else {
@@ -1124,6 +1149,164 @@ export function createUI(app) {
     }
     refreshGameBar();
   });
+
+  // ---- The song bar (lane Pianos) ---------------------------------------------------
+  // The game bar for a keyboard toy's song (recipe.song, made by
+  // songControls in src/songs.js): a title you can edit, back to the start,
+  // play and pause, loop, speed, and a slider for where the song has got to
+  // (drag it to move there).
+  function refreshSongBar(song) {
+    const st = song.state();
+    if (document.activeElement !== els.songTitle) els.songTitle.value = song.title();
+    els.gameBarInfo.textContent = song.info?.() || "";
+    els.gameBarMove.textContent = `${songClock(st.pos)} / ${songClock(st.length)}`;
+    if (!seeking) els.songSeek.value = String(Math.round((1000 * st.pos) / Math.max(0.01, st.length))); // prettier-ignore
+    els.songLoop.setAttribute("aria-pressed", String(!!st.loop));
+    if (document.activeElement !== els.songSpeed) els.songSpeed.value = String(st.speed);
+    els.gamePlay.dataset.playing = String(!!st.playing);
+    els.gamePlay.setAttribute("aria-label", st.playing ? "Pause" : "Play");
+    els.gamePlay.title = st.playing ? "Pause" : "Play the song";
+  }
+  const songClock = (sec) => {
+    const x = Math.max(0, Math.floor(sec + 1e-6));
+    return `${Math.floor(x / 60)}:${String(x % 60).padStart(2, "0")}`;
+  };
+  els.songTitle.addEventListener("change", () => {
+    barSong?.setTitle(els.songTitle.value.trim());
+    songPanelRefresh?.();
+    if (barSong) refreshSongBar(barSong);
+  });
+  els.songTitle.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") els.songTitle.blur();
+  });
+  els.songLoop.addEventListener("click", () => {
+    if (!barSong) return;
+    barSong.setLoop(!barSong.state().loop);
+    refreshSongBar(barSong);
+  });
+  els.songSpeed.addEventListener("change", () => {
+    barSong?.setSpeed(Number(els.songSpeed.value));
+    if (barSong) refreshSongBar(barSong);
+  });
+  els.songSeek.addEventListener("input", () => {
+    if (!barSong) return;
+    seeking = true;
+    barSong.seek((Number(els.songSeek.value) / 1000) * barSong.state().length);
+    refreshSongBar(barSong);
+  });
+  els.songSeek.addEventListener("change", () => {
+    seeking = false;
+  });
+
+  // The Toy tab's song panel: the toy's own songs, a MIDI file of yours or a
+  // tune in ABC notation pasted as text.
+  let songPanelRefresh = null;
+  function renderSongPanel(song) {
+    const box = document.createElement("div");
+    box.className = "game-box song-box";
+    box.id = "toy-song";
+    const now = document.createElement("p");
+    now.className = "note game-title";
+    const pick = document.createElement("label");
+    pick.className = "row";
+    const pickName = document.createElement("span");
+    pickName.textContent = "Song";
+    const select = document.createElement("select");
+    select.id = "song-choice";
+    pick.append(pickName, select);
+    const error = document.createElement("div");
+    error.className = "warning";
+    error.setAttribute("role", "alert");
+    error.hidden = true;
+    const file = document.createElement("input");
+    file.type = "file";
+    file.accept = ".mid,.midi,.kar,.rmi,.abc,.txt,audio/midi,audio/x-midi,text/plain";
+    file.hidden = true;
+    file.id = "song-file";
+    const row = document.createElement("div");
+    row.className = "button-row";
+    const button = (label, id, fn) => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.id = id;
+      b.textContent = label;
+      b.addEventListener("click", fn);
+      row.appendChild(b);
+      return b;
+    };
+    const paste = document.createElement("div");
+    paste.className = "game-paste";
+    paste.hidden = true;
+    const text = document.createElement("textarea");
+    text.id = "song-text";
+    text.rows = 6;
+    text.spellcheck = false;
+    text.setAttribute("aria-label", "A tune in ABC notation");
+    text.placeholder = "X:1\nT:A folk tune\nM:4/4\nL:1/8\nK:G\n|:GABG DGBG|dcBA B2AB|…";
+    const go = document.createElement("button");
+    go.type = "button";
+    go.id = "song-play-text";
+    go.className = "primary";
+    go.textContent = "Play this tune";
+    const goRow = document.createElement("div");
+    goRow.className = "button-row";
+    goRow.appendChild(go);
+    paste.append(text, goRow);
+    const note = document.createElement("p");
+    note.className = "note";
+    note.textContent =
+      "A MIDI file (.mid) plays key for key; notes beyond the keyboard move up or down by octaves. ABC is a plain-text tune format (thousands of folk tunes are online). Your file stays on your device.";
+    const refresh = () => {
+      select.textContent = "";
+      for (const s of song.list()) select.add(new Option(s.title, s.id));
+      select.value = song.current();
+      now.textContent = `Playing: ${song.title()}`;
+    };
+    songPanelRefresh = refresh;
+    select.addEventListener("change", () => {
+      song.choose(select.value);
+      error.hidden = true;
+      refresh();
+      refreshSongBar(song);
+    });
+    const load = async (data, name) => {
+      error.hidden = true;
+      try {
+        const r = await song.load(data, name);
+        refresh();
+        refreshSongBar(song);
+        paste.hidden = true;
+        const moved = r.moved ? `; ${r.moved} note${r.moved === 1 ? "" : "s"} moved by octaves to fit` : ""; // prettier-ignore
+        ui.toast(`${r.title}: ${r.notes} notes, ${songClock(r.length)}${moved}`);
+        song.play();
+      } catch (err) {
+        error.textContent = `That song can't be played: ${err.message}`;
+        error.hidden = false;
+      }
+    };
+    button("Open a MIDI file…", "song-open", () => file.click());
+    button("Paste ABC", "song-paste", () => {
+      paste.hidden = !paste.hidden;
+      if (!paste.hidden) text.focus();
+    });
+    file.addEventListener("change", async () => {
+      const f = file.files?.[0];
+      file.value = "";
+      if (!f) return;
+      if (f.size > 2e6) {
+        error.textContent = "That file is too big for a song (over 2 MB).";
+        error.hidden = false;
+        return;
+      }
+      const bytes = new Uint8Array(await f.arrayBuffer());
+      const midi = String.fromCharCode(...bytes.subarray(0, 4));
+      load(midi === "MThd" || midi === "RIFF" ? bytes : new TextDecoder().decode(bytes), f.name);
+    });
+    go.addEventListener("click", () => load(text.value, ""));
+    box.append(now, pick, row, paste, error, note, file);
+    els.toyControls.appendChild(box);
+    refresh();
+  }
 
   function showMotion(m, controls = {}) {
     for (const b of els.toyMove.children)

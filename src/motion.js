@@ -5,6 +5,7 @@
 
 import { quatAxisAngle, quatMul, quatEuler, rgb } from "./kit.js";
 import { fxFrame, FX_SLOTS, FX_VEC4 } from "./rig-fx.js";
+import { MAX_LEVERS, MAX_LEVER_GROUPS } from "./effects.js";
 
 export const MOVES = [
   { id: "still", label: "Still" },
@@ -63,6 +64,8 @@ export class MotionDriver {
     this.partsData = new Float32Array(48 * 4);
     this.tintData = new Float32Array(16 * 4);
     this.tokenData = new Float32Array(MAX_TOKENS * 2 * 4);
+    this.leverGroupData = new Float32Array(MAX_LEVER_GROUPS * 3 * 4);
+    this.leverData = new Float32Array(MAX_LEVERS);
     this.addon = null; // { parts, data } of a rig's kit-built add-on
     this.addonU = null;
     this.out = null;
@@ -154,6 +157,8 @@ export class MotionDriver {
     if (motion.move !== "still") return true;
     if (hopAt(time - this.hopStart)) return true;
     if (motion.alive && this.hasBehaviours()) return true;
+    // A song playing (lane Pianos) keeps frames coming, even with motion off.
+    if (this.recipe?.song?.state?.().playing) return true;
     for (const k in this.targets) if (Math.abs(this.targets[k] - this.state[k]) > 1e-3) return true;
     return false;
   }
@@ -218,7 +223,7 @@ export class MotionDriver {
     const kt = this.tick(this.kitClock, time, rate, motion.alive !== false);
     // out.resort: true on a frame asks the player to sort the tokens again
     // where they stand (resortTokens in src/player.js).
-    const drive = { energy: 0, grow: 1, amount: 1, glow: [1, 1, 1, 0], parts: {}, body: null, fx: {}, addon: null, tokens: null, cues: [], morph: null, resort: false }; // prettier-ignore
+    const drive = { energy: 0, grow: 1, amount: 1, glow: [1, 1, 1, 0], parts: {}, body: null, fx: {}, addon: null, tokens: null, cues: [], morph: null, resort: false, levers: null }; // prettier-ignore
     // info.data is whatever the recipe's build left in k.data (which molecule
     // was built, say), for effects that depend on the build. info.sound is the
     // site's Sound (src/sound.js): a toy that plays its own audio checks
@@ -253,6 +258,10 @@ export class MotionDriver {
       // Always set (unset tokens are shown in place): the uniform keeps the
       // last toy's values otherwise.
       u["uSpTokens[0]"] = packTokens(this.tokenData, drive.tokens || [], this.ctx?.transform); // prettier-ignore
+      // Levers (lane Pianos): the kit's groups and drive's out.levers
+      // (always set, like the tokens).
+      u["uSpLever[0]"] = packLeverGroups(this.leverGroupData, this.ctx?.kit?.levers);
+      u["uSpLevers[0]"] = packLevers(this.leverData, drive.levers);
       if (this.ctx?.rig) {
         const td = this.tintData.fill(0);
         (this.ctx.parts || []).forEach((def, i) => {
@@ -314,6 +323,41 @@ function packParts(data, parts, driven, scale) {
     // kit shader reads visibility -w - 1 from a w of -1 or less).
     data.set([po[0], po[1], po[2], cull ? -1 - Math.max(0, vis) : vis], o + 8);
   }
+  return data;
+}
+
+// Lever groups for uSpLever (kind "lever"): per group the pivot and the
+// full amount, the axis or direction with mode * 4 + channel, and the glow
+// colour with its channel (-1: none). See Kit.lever().
+function packLeverGroups(data, groups = []) {
+  data.fill(0);
+  for (let g = 0; g < MAX_LEVER_GROUPS; g++) {
+    const l = groups?.[g];
+    const o = g * 12;
+    if (!l) {
+      data[o + 7] = 12; // mode 3: still
+      data[o + 11] = -1;
+      continue;
+    }
+    data.set([l.pivot[0], l.pivot[1], l.pivot[2], l.amount], o);
+    data.set([l.dir[0], l.dir[1], l.dir[2], l.mode * 4 + l.channel], o + 4);
+    if (l.glow) data.set([l.glow[0], l.glow[1], l.glow[2], l.glowChannel], o + 8);
+    else data[o + 11] = -1;
+  }
+  return data;
+}
+
+// Levers' amounts for uSpLevers: out.levers = [a, b, c], three lists of
+// amounts 0..1 per lever, each kept to 8 bits and packed in one float.
+function packLevers(data, levers) {
+  data.fill(0);
+  if (!levers) return data;
+  const q = (list, i) => {
+    const v = list ? list[i] : 0;
+    return v > 0 ? Math.min(255, Math.round(v * 255)) : 0;
+  };
+  for (let i = 0; i < MAX_LEVERS; i++)
+    data[i] = q(levers[0], i) + 256 * q(levers[1], i) + 65536 * q(levers[2], i);
   return data;
 }
 

@@ -18,7 +18,7 @@
 
 import { mulberry32, createNoise3, mixSeed } from "./noise.js";
 import { SplatBuffer, discRotation, randomDir, hexRgb, clayBudget, norm } from "./generators.js";
-import { KINDS, MORPH_RANGE } from "./effects.js";
+import { KINDS, MORPH_RANGE, MAX_LEVERS, MAX_LEVER_GROUPS } from "./effects.js";
 
 const TAU = Math.PI * 2;
 const DEG = Math.PI / 180;
@@ -720,6 +720,47 @@ export class Kit {
     return radialShape(radius, opts);
   }
 
+  // A group of levers (lane Pianos): many small pieces that each move by
+  // their own amount, beyond the 15 parts (a piano's keys, hammers and
+  // dampers). One of:
+  //   { pivot, axis, angle }  tips about an axis through pivot by up to angle (radians)
+  //   { dir, move }           slides along dir by up to move (recipe units)
+  //   { dir, vibrate }        quivers along dir by up to vibrate, most at
+  //                           the middle of its string (w = place along it)
+  // plus channel (0..2: which of each lever's three amounts moves it) and,
+  // optionally, glow: "#hex" with glowChannel (lights up by that amount).
+  // Returns the group's index; shapes join it with kind: "lever" and
+  // params: [k.leverParam(group, index), place along the string]. drive()
+  // sets out.levers = [amounts0, amounts1, amounts2] (0..1 per lever).
+  lever({
+    pivot = [0, 0, 0],
+    axis,
+    angle,
+    dir,
+    move,
+    vibrate,
+    channel = 0,
+    glow = null,
+    glowChannel = 1,
+  } = {}) {
+    // prettier-ignore
+    this.levers ||= [];
+    if (this.levers.length >= MAX_LEVER_GROUPS)
+      throw new Error(`A toy can have at most ${MAX_LEVER_GROUPS} lever groups.`);
+    const mode = angle !== undefined ? 0 : move !== undefined ? 1 : vibrate !== undefined ? 2 : 3;
+    const amount = mode === 0 ? angle : mode === 1 ? move : mode === 2 ? vibrate : 0;
+    const d = mode === 0 ? axis || [1, 0, 0] : dir || [0, 1, 0];
+    const c = glow ? rgb(glow) : null;
+    this.levers.push({ mode, channel, pivot: pivot.slice(), dir: unit(d), amount, glow: c, glowChannel }); // prettier-ignore
+    return this.levers.length - 1;
+  }
+  // The first behaviour value of a lever splat: its index in its group.
+  leverParam(group, index) {
+    if (index < 0 || index >= MAX_LEVERS)
+      throw new Error(`A lever index is 0 to ${MAX_LEVERS - 1}.`);
+    return index + 128 * group;
+  }
+
   // A rigid part (for hinges, spins and slides). Returns its index.
   part(name, { pivot = [0, 0, 0], axis = [0, 1, 0] } = {}) {
     if (this.partIndex.has(name)) return this.partIndex.get(name);
@@ -1083,6 +1124,10 @@ export class Kit {
     }
     this.baseSize *= s;
     for (const part of this.parts) part.pivot = mul3(sub3(part.pivot, c), s);
+    for (const l of this.levers || []) {
+      l.pivot = mul3(sub3(l.pivot, c), s);
+      if (l.mode === 1 || l.mode === 2) l.amount *= s;
+    }
     this.reaches = this.reaches.map((r) => mul3(sub3(r, c), s));
     this.transform = { center: c, scale: s };
   }
