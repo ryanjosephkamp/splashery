@@ -18,9 +18,10 @@ landmark, and the splat budgets. Worlds sit behind the labs switch for now:
 4. [Landmarks](#landmarks)
 5. [The modules](#the-modules)
 6. [Budgets and level of detail](#budgets-and-level-of-detail)
-7. [Controls](#controls)
-8. [Testing a world](#testing-a-world)
-9. [Rules that still apply](#rules-that-still-apply)
+7. [Rendering](#rendering)
+8. [Controls](#controls)
+9. [Testing a world](#testing-a-world)
+10. [Rules that still apply](#rules-that-still-apply)
 
 ## How a world works
 
@@ -76,6 +77,8 @@ know, so a typo can't break the page.
 | `colors`    | Named colors as `#rrggbb` (below)                                             | a sunny island |
 | `terrain`   | The ground (below)                                                            | an island      |
 | `water`     | `false` for a world without water                                             | `true`         |
+| `render`    | `"splats"` or `"hybrid"` ([Rendering](#rendering)); `?render=` overrides it   | `"splats"`     |
+| `light`     | The sun, shadows, haze and grade ([Rendering](#rendering))                    | a sunny day    |
 | `sky`       | `{ "clouds": 0..1 }`, how cloudy                                              | `0.5`          |
 | `spawn`     | `{ "at": [x, z], "facing": degrees }`, where the character starts             | `[0, 0]`, 0    |
 | `character` | The character's colors: `shirt`, `trousers`, `skin`, `hair`, `shoes`          | red shirt      |
@@ -226,7 +229,9 @@ Node.
 | `lod.js`        | The level-of-detail planner (pure)                                                                      |
 | `tiers.js`      | Device tiers and their budgets (pure)                                                                   |
 | `controls.js`   | Keys, mouse and touch: the thumb stick, drag to look, pinch or wheel to zoom, tap to pick               |
-| `render.js`     | The PlayCanvas side: the device, the camera, splat containers and entities                              |
+| `render.js`     | The PlayCanvas side: the device, the camera, the layers, splat containers and entities                  |
+| `lighting.js`   | Both modes: the sun and its shadows, the haze, the grade, and splats mode's shadow catcher              |
+| `hybrid.js`     | Hybrid mode's models: the ground tiles and their textures, the water, the sky dome and the sign boards  |
 
 ### The character
 
@@ -303,6 +308,84 @@ only relative; the owner's phone is the real test.
 A world's props all count: a world with many big props should give them lower `detail`, use scatter
 for small things, and check `window.__world.stats()` (below) at its busiest places.
 
+## Rendering
+
+A world is drawn in one of two modes. The world file's `render` picks one (`"splats"` by default;
+the Test island stays in splats mode); `?render=splats` or `?render=hybrid` overrides it for a
+visit, which is how the clips compare them side by side.
+
+| Drawn as             | Splats mode                       | Hybrid mode                                         |
+| -------------------- | --------------------------------- | --------------------------------------------------- |
+| Ground               | splats (a carpet, chunk by chunk) | a lit model of the same height field, textured      |
+| Near grass           | splats (blades)                   | splats (blades), on the model                       |
+| Water                | splats, with moving waves         | a lit model that knows the depth below it           |
+| Sky                  | a dome of splats                  | a dome with a photo of the sky, which lights models |
+| Signs                | splats                            | wooden boards with the title painted on             |
+| Props, the character | splats                            | splats                                              |
+
+Collision is the same in both: invisible shapes and the height field.
+
+### Light, shadows and haze (both modes)
+
+`light` in the world file (all optional):
+
+| Field          | Meaning                                                                    | Default   |
+| -------------- | -------------------------------------------------------------------------- | --------- |
+| `sun`          | `{ "azimuth", "elevation" }` in degrees (azimuth clockwise from north, -z) | 232, 48   |
+| `sunColor`     | The sunlight's color (lights hybrid mode's models)                         | `#fff3df` |
+| `sunIntensity` | How bright the sun is on the models                                        | 0.95      |
+| `shadow`       | How dark shadows are on splats mode's ground (0 to 1)                      | 0.42      |
+| `haze`         | The haze's density (exponential squared, per meter)                        | 0.0045    |
+| `hazeColor`    | The haze's color (hybrid mode uses the sky photo's horizon)                | `horizon` |
+| `exposure`     | The grade's exposure                                                       | 1         |
+
+- **One sun.** A directional light with soft (PCF) shadows. The character and the near props (levels
+  0 and 1) cast shadows; the shadow map's size and reach are set per tier (`shadows` and
+  `shadowDistance` in `WORLD_BUDGETS`: 1024 and 16 m on low, 1024 and 26 m on mid, 2048 and 36 m on
+  high, 2048 and 48 m on max). `?shadows=0` turns them off.
+- **Splats aren't lit** (their colors carry their own light), so they only cast shadows. In hybrid
+  mode the ground model receives them. In splats mode an invisible **shadow catcher** (a model of
+  the ground whose material only darkens where shadows fall) is drawn over the ground's splats and
+  under the props' and the character's.
+- **Haze.** The engine's fog, which it applies to splats (by their centers' distance) and models
+  alike, so far hills and the far sea fade into the same color. The splat sky has none.
+- **Grade.** A neutral tone map (it leaves colors below about 0.8 as they are, so splats keep their
+  colors, and rolls off the highlights) and an exposure.
+
+### Layers and depth
+
+Splats don't write depth, so the order matters. `render.js` draws, in order: the opaque models (the
+hybrid ground, the sign boards; in splats mode an invisible model of the ground that writes only
+depth, 12 cm under the surface), the sky, the ground's splats (`WdGround`: the carpet or the near
+grass), the surface (`WdSurface`: the shadow catcher, or the hybrid water, which writes depth), then
+the props and the character. Every splat tests against the models' depth, so a hill hides the bush
+behind it and the water's surface hides a wading character's legs, in both modes. Splats mode's
+water splats draw with the props and the character, sorted together, as before.
+
+### Hybrid mode's models (`hybrid.js`)
+
+- **Ground.** Tiles 16 m square with a vertex every 0.5 m (1 m on the low tier), from the same
+  height field. Each vertex carries the terrain's own color (`colorAt` without its baked light; the
+  engine lights the model). Four CC0 textures in one atlas (sand, grass, rock, wet sand) add the
+  detail: each pixel picks them by height and slope with the same rules as the splats, and each
+  texture is divided by its mean color, so it adds detail without changing the world's palette. The
+  detail fades out between 28 m and 70 m. Near grass stays splats (blades), so the ground isn't a
+  flat carpet.
+- **Water.** A grid over the world with the depth below each vertex, and a flat skirt to the
+  horizon. Its shader makes it pale and clear over the shallows and dark blue at depth, draws foam
+  at the shore, and moves gentle waves in its normals; the sky's reflection comes from the
+  image-based light, stronger at grazing angles (Fresnel).
+- **Sky.** A dome around the camera with the upper part of a CC0 HDRI, turned so its sun sits at the
+  world's sun. The same HDRI (with the sun's disk clamped, since the sun is a light of its own)
+  lights the models and gives the water its reflection.
+- **Signs.** Wooden posts and a board, the face painted in the `accent` color with the landmark's
+  title in cream. The same size as the splat sign, so taps and collision match.
+
+`tools/world-assets.mjs` fetches the textures and the HDRI from Poly Haven and builds
+`assets/worlds/ground/` (the atlases and `ground.json`: each texture's repeat, strength and mean
+color) and `assets/worlds/sky/` (the lighting HDRI, the dome image and `sky.json`: where its sun
+is). About 5 MB in all.
+
 ## Controls
 
 - **Phone:** the thumb stick (bottom left, shown after the first touch) walks, and pushed all the
@@ -323,9 +406,12 @@ for small things, and check `window.__world.stats()` (below) at its busiest plac
   `{ x, y, run }`, y forward), `tick(dt, input)` (one frame with the manual clock) and `card()` (the
   open card's landmark id).
 - `node tools/world-clip.mjs <out-dir> walk landmark touch list` records the review clips at 390×844
-  (the scenes are scripted at the top of the tool; add your own).
-- `tests/wd.spec.mjs` has the engine's tests. A world lane adds its own in
-  `tests/<prefix>.spec.mjs`.
+  (the scenes are scripted at the top of the tool; add your own). `--modes` records each scene in
+  splats mode (left) and hybrid mode (right); `--render=hybrid` records one mode.
+- `stats()` also gives the mode, the models drawn and the median frame time.
+- `tests/wd.spec.mjs` has the engine's tests and `tests/wdh.spec.mjs` the hybrid round's (the
+  switch, both modes, depth order, shadows, frames per second, the assets). A world lane adds its
+  own in `tests/<prefix>.spec.mjs`.
 
 ## Rules that still apply
 

@@ -249,3 +249,49 @@ Cards: `wd-island-r2`, `wd-ground-r2`, `wd-props-r2`, `wd-sky-r2`.
 
 - A bush seen from very close reads as a smooth green shape (solid, but plain).
 - The far sea under the aerial view is soft (large far-level splats), without grain.
+
+## Hybrid: model ground, water and sky with splat props
+
+Branch `claude/lane-worlds-hybrid` (from the r2 head; it merges after #108), PR "Phase Worlds hybrid:
+model ground, water and sky with splat props (Opus 5.5)". Built by Opus 5.5. Labs only.
+
+The owner's words on the r2 cards (September 29, 2026), word for word: "This continues to get
+better, but the quality is still not at the level of a real video game. Is that an unrealistic
+expectation for Gaussian splats? Are there other tools that we could integrate (i.e., by upgrading
+your tech stack, etc.) to make the graphics better while maintaining Gaussian splat functionality?
+Eventually, I do want to see how a hybrid approach would look, where we use Gaussian splats
+strategically and use better game tools for other parts, and then integrate these together to build
+games that can do things that are almost impossible without Gaussian splats. We can certainly
+continue to build out the splat-only world, but if it can't achieve ~AAA graphics and gameplay, then
+we can see if there's a way to do that with other tools." After the Operator's report, his answer:
+"Hybrid yes." and "I am very interested in making a hyper-realistic hybrid game or simulation world."
+
+The Operator's brief (the report's steps 1 and 2):
+
+1. Light, shadows and atmosphere in both modes: one sun, soft shadows from the character and the
+   props (a shadow catcher over the ground in splats mode), shared haze and a color grade.
+2. Hybrid mode: the ground as a lit, textured model of the same height field (near grass stays
+   splats), depth-aware water, an HDRI sky that also lights the models, sign boards as models, and
+   splats that hide correctly behind and in front of the models.
+3. Frames per second and counts per tier in both modes; textures small (under about 10 MB).
+4. Side-by-side clips (splats left, hybrid right): `wd-hybrid-walk`, `wd-hybrid-shore`,
+   `wd-hybrid-shadows`, `wd-hybrid-sky`.
+
+A world file's `render` (`"splats"` or `"hybrid"`) picks the mode and `?render=` overrides it; the
+Test island stays in splats mode until the owner picks. How it works is in docs/WORLDS.md,
+"Rendering".
+
+### Hybrid state
+
+- September 29, 2026: built. New modules `src/worlds/lighting.js` (sun, shadows, haze, grade, the
+  shadow catcher) and `src/worlds/hybrid.js` (ground tiles and their atlas shader, water, sky dome,
+  sign boards); `render.js` gained the mesh and light systems and three layers (`WdSky`, `WdGround`,
+  `WdSurface`). No engine files changed (`src/pc.js`, `src/kit.js`, `src/stage.js` are untouched),
+  so the toy box looks the same.
+- Assets: four Poly Haven texture sets and one HDRI, all CC0, packed by `tools/world-assets.mjs`
+  into `assets/worlds/` (about 5 MB); credited in CREDITS.md, `tools/assets.json` and the Worlds
+  page's list of places.
+- Depth: splats test against the models' depth. In splats mode an invisible depth-only ground model
+  keeps a hill in front of the props behind it now that the ground's splats draw in their own
+  layer. `tests/wdh.spec.mjs` checks it in both modes (taking away a bush behind the hill changes no
+  pixel).

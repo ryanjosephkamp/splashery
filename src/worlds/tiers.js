@@ -4,9 +4,13 @@
 // forces one. A world's budget is the most splats it draws at once (terrain,
 // water, sky, props, signs and the character together); the level-of-detail
 // planner (lod.js) keeps under it by coarsening the farthest chunks first.
+// `shadows` is the sun's shadow map size (0 turns shadows off) and
+// `shadowDistance` how far from the camera shadows reach, in meters.
 
 export const WORLD_BUDGETS = {
   low: {
+    shadows: 1024,
+    shadowDistance: 16,
     splats: 300e3,
     density: 0.5,
     near: 7,
@@ -17,6 +21,8 @@ export const WORLD_BUDGETS = {
     kernel: "sharp",
   },
   mid: {
+    shadows: 1024,
+    shadowDistance: 26,
     splats: 550e3,
     density: 0.75,
     near: 9,
@@ -27,6 +33,8 @@ export const WORLD_BUDGETS = {
     kernel: "sharp",
   },
   high: {
+    shadows: 2048,
+    shadowDistance: 36,
     splats: 900e3,
     density: 1,
     near: 12,
@@ -37,6 +45,8 @@ export const WORLD_BUDGETS = {
     kernel: "sharp",
   },
   max: {
+    shadows: 2048,
+    shadowDistance: 48,
     splats: 1.4e6,
     density: 1.3,
     near: 15,
