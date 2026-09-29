@@ -112,10 +112,94 @@ Post at 390×844 (tools/effect-clip.mjs, or tools/pic-clip.mjs for picture toys)
 
 ## State
 
-- September 29, 2026: lane started; handoff file created, draft PR opened.
+- September 29, 2026: all five notes and the terms are built and tested (`tests/vw.spec.mjs`, 14
+  tests). Draft PR #75. Clips and cards: see "Clips" below.
 
 ## Notes
 
+### 1. Black boxes over PDF figures: the cause and the fix
+
+- Reproduced with a PDF we made (`tests/fixtures/vw/figures.pdf`, made by
+  `tests/fixtures/vw/make-figures.py`: a JPEG, a CMYK JPEG, a JPEG 2000, a picture with a soft mask,
+  an indexed bar chart with flat colors, a 16-bit picture). PDF.js drew every page correctly at
+  every width (no black, no transparent pixels), so the fault was after the draw.
+- The cause was in `paperBlocks` (`src/picture-splats.js`), which finds the paper color of each 8×8
+  block as the mean of the pixels at or above the block's median lightness. The median was stored in
+  a `Float32Array`, but each pixel was compared against it in double precision. In a flat-colored
+  block (all pixels the same), the Float32 rounding could put the median just above every pixel, so
+  no pixel counted: 0 / 0 = NaN. The NaN spread through the 3×3 smoothing (about 5×5 blocks, 40 px
+  squares), no pixel counted as ink there (comparisons with NaN are false), and the base splats drew
+  with NaN colors, which the GPU shows as black.
+- This matches the owner's report: only raster figures with flat areas (a journal cover, a chart)
+  were hit, text and vector art never; and the boxes moved between builds, because a block's
+  contents change with the detail width.
+- 540 of 1,280 flat test colors hit it. The fix: lightness is a whole number
+  (`r * 30 + g * 59 + b * 11`), so the median and the test agree exactly, and a block with no
+  counted pixels falls back to the page's paper color. No path now yields a NaN color.
+- The tests fail before the fix (the unit test, every picture kind at five widths, and the Picture
+  lab on screen) and pass after.
+- Also seen, not a bug: when a page needs a bigger container, the old sheet stays on show for six
+  frames (by design, lane Pictures). In the slow test browser six frames can be a second, so a still
+  taken right after a page turn can show both pages.
+
+### 2. Pinch
+
+- `Gestures` (src/camera.js) reads a two-finger gesture by whichever it does first past a threshold:
+  a zoom (8% scale), a twist (0.3 rad, about 17°) or a two-finger drag (22 px). Only a twist rolls
+  (from past the dead zone, so there is no jump), only a drag turns the toy, and zoom works in every
+  mode. `onPinch` gets `mode` (the app and the embed viewer both use it).
+- Picture toys still pan with two fingers in any mode (as in a photo viewer).
+
+### 3. The tilt lock and Reset view
+
+- `OrbitCamera.setTiltLock(on)`: locked, `rotateBy` turns only the yaw (a sideways drag, with no
+  roll mix-in) and `rollBy` does nothing; locking eases pitch and roll back to the home pose.
+- Recipe flag `tiltLock: true` (PACKS.md 5c). Set for the Picture lab. The app's `onToy` applies the
+  toy's own default, or the choice made for it earlier in the visit (`App.tiltLocks`, keyed by toy).
+  A link's camera is set after `onToy`, so its pose wins and the lock keeps that pitch and roll. The
+  embed viewer applies the recipe's default too.
+- Reset view: a round button in the top bar (and still in the Tools tab, R and double-tap).
+
+### 4. The top bar
+
+- Three round buttons in a marked block in index.html (`view-button`): Reset view, Tilt lock (a
+  padlock, pressed when locked) and Turntable (a turntable, crossed out when off), left of "?" and
+  sound. Each has an aria-label, a title and a pressed state.
+- The turntable button and the Toy tab's "Turntable when idle" switch are one setting,
+  `scene.autoplay.turntable`, now remembered in `localStorage` (`splashery.turntable`). A device
+  that chose "off" keeps it off for links too; reduced motion still wins (the button is disabled).
+- At 390 px the five buttons sit in a row right of the name; at 380 px and under all five shrink to
+  32 px so they still clear "splats you can play with".
+
+### 5. Flags per toy
+
+- The "Flag colors" picker moved from Quick settings to a new Look section in the Toy tab. When a
+  toy is chosen, the old toy's flag (or none) is kept in `App.toyFlags` (memory, for the visit) and
+  the new toy gets its own: its remembered flag, or none. Other patterns carry over as before. Links
+  and saved scenes with a flag load as before.
+- The Look tab's Pattern section still offers the flag as a pattern (unchanged).
+
+### Terms of use
+
+- In the About tab (a marked block after Credits) and at the end of README.md, with every point of
+  the brief.
+
+### Clips
+
+- Rendered with a scratch recorder (`tools/_vwclip.mjs`, not committed: it drives real touch pinches
+  through the Chrome DevTools protocol and shows the fingers as dots).
+
 ## Known issues
 
+- The shelf-wide default: only the Picture lab sets `tiltLock` now. The Books and Screens toys need
+  one line each when they merge (below).
+
 ## For the Operator
+
+- The Books and Screens toys need `tiltLock: true,` in their recipes, next to `turntable: false`:
+  `your-book`, `photo-album`, `picture-frame` (src/packs/pictures.js, lane Books) and `screen`
+  (src/packs/screens.js, lane Screens). The Gaussian splat toy (AI shelf) stays free.
+- README's Controls table: "Two-finger twist | Roll" could read "A clear two-finger twist | Roll
+  (not when the tilt is locked)", and a row for the top-bar buttons. I only added the terms there.
+- The "Flag colours" label moved and is now "Flag colors"; other places keep "colours" for the
+  sweep.
