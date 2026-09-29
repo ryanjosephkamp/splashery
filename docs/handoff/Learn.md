@@ -139,8 +139,8 @@ Started September 29, 2026. Branch `claude/lane-learn`.
   already there, so Pictures got no second row); "Lessons" (5 groups, each item with its lane) and
   "The two models". The Operator's three rows (Manual, Pictures, Screens) are untouched.
 - Tests: `tests/ln.spec.mjs` (19 tests).
-- Cards: `ln-manual-phone` and `ln-manual-pdf`, both labeled "built by Sonnet 5.5" (posting status
-  in "Notes").
+- Cards: `ln-manual-phone` and `ln-manual-pdf`, both labeled "built by Sonnet 5.5". The owner marked
+  both good on September 29, 2026. The full suite passed (323 tests).
 
 ## Audit
 
