@@ -72,6 +72,18 @@ const SCENES = {
     { tapSign: "boulders", hold: 2.4 },
   ],
 
+  // The character close up: a walk and a run seen from the side, then
+  // standing (idle) while the camera comes round to its face.
+  character: [
+    { place: [-7, 3, 180], camera: { distance: 1.55, pitch: 0.06 } },
+    { hold: 0.6 },
+    { move: { x: 1 }, secs: 2.4 },
+    { move: { x: 1, run: true }, secs: 1.8 },
+    { hold: 1.0 },
+    { look: [1.6, 0], secs: 2.2 },
+    { hold: 1.2 },
+  ],
+
   // The start screen over the wide view, the plain list, and "Go there".
   list: [
     { start: true, hold: 2.2 },
@@ -146,6 +158,9 @@ for (const name of names) {
       await page.evaluate(() => window.__world.enter());
       started = true;
     }
+    // The camera's distance and tilt first, so a new place starts with them.
+    if (s.camera)
+      await page.evaluate((c) => Object.assign(window.__world.world.camera, c), s.camera);
     if (s.place) {
       await page.evaluate((p) => {
         window.__world.place(p[0], p[1], p[2]);
@@ -169,8 +184,6 @@ for (const name of names) {
     if (s.click) await page.click(s.click);
     if (s.scroll) await page.evaluate((sel) => document.querySelector(sel).scrollBy(0, 400), s.scroll); // prettier-ignore
     if (s.clickGo) await page.click(`#places-list li[data-landmark="${s.clickGo}"] button`);
-    if (s.camera)
-      await page.evaluate((c) => Object.assign(window.__world.world.camera, c), s.camera);
     if (s.tapSign) {
       const pt = await page.evaluate((id) => {
         const w = window.__world.world;

@@ -149,7 +149,8 @@ function restPose(k, recipe, type) {
       buf.color[i * 4],
       buf.color[i * 4 + 1],
       buf.color[i * 4 + 2],
-      buf.color[i * 4 + 3],
+      // Solids fully opaque, so nothing behind them shows through as flecks.
+      buf.color[i * 4 + 3] > 0.85 ? 1 : buf.color[i * 4 + 3],
     ]);
   }
   // The foot: the recipe's origin, where toys stand.
@@ -251,6 +252,8 @@ function buildBoulder(count, seed, o = {}) {
       scale: [1, 0.72, 0.9],
       flat: 0.25,
       even: true,
+      opacity: 1,
+      jitter: 0.015,
       color: (c) => {
         const g = c.fbm(c.p[0] * 5, c.p[1] * 5, c.p[2] * 5, 3);
         let col = mix(base, shade(base, 0.62), clamp(0.5 + g * 1.6, 0, 1));

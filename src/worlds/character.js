@@ -70,7 +70,7 @@ export function buildCharacter(look, { count = 60000, seed = 7 } = {}) {
     (k = 0.4) =>
     (s) =>
       lit(c.skin, s.n, k);
-  const smooth = { even: true, flat: 0.45, jitter: 0.01 };
+  const smooth = { even: true, flat: 0.45, jitter: 0.01, opacity: 1 };
   for (const name in SHARE) {
     const k = new Kit(mixSeed(seed, name), { count: Math.round(count * SHARE[name]), fit: false });
     const side = name.endsWith("L") ? 1 : -1;
@@ -83,20 +83,20 @@ export function buildCharacter(look, { count = 60000, seed = 7 } = {}) {
         ...smooth,
         color: cloth(c.shirt),
       });
-      k.add(k.cone(0.058, 0.05, 0.19), { pos: [0, -0.1, 0], ...smooth, color: cloth(c.shirt) });
+      k.add(limb(k, 0.058, 0.05, 0.19), { pos: [0, -0.1, 0], ...smooth, color: cloth(c.shirt) });
       k.add(k.torus(0.051, 0.008), { pos: [0, -0.195, 0], weight: 2, color: cloth(shade(c.shirt, 0.9)) }); // prettier-ignore
-      k.add(k.cone(0.045, 0.041, 0.11), { pos: [0, -0.24, 0], ...smooth, color: skin() });
+      k.add(limb(k, 0.045, 0.041, 0.11), { pos: [0, -0.24, 0], ...smooth, color: skin() });
       k.add(k.sphere(0.041), { pos: [0, -BODY.upperArm, 0], ...smooth, color: skin() });
     } else if (name.startsWith("fore")) {
       // Forearm, wrist and a hand with its thumb (palm facing in).
-      k.add(k.cone(0.041, 0.031, 0.23), { pos: [0, -0.115, 0], ...smooth, color: skin() });
+      k.add(limb(k, 0.041, 0.031, 0.23), { pos: [0, -0.115, 0], ...smooth, color: skin() });
       k.add(k.roundedBox(0.032, 0.09, 0.075, 4), { pos: [side * -0.004, -0.285, 0.006], ...smooth, weight: 1.6, color: skin(0.35) }); // prettier-ignore
       k.add(k.ellipsoid(0.012, 0.032, 0.013), { pos: [side * -0.012, -0.265, 0.042], rot: [-25, 0, 0], weight: 1.6, ...smooth, color: skin(0.35) }); // prettier-ignore
     } else if (name.startsWith("thigh")) {
-      k.add(k.cone(0.085, 0.062, BODY.thigh + 0.05), { pos: [0, -BODY.thigh / 2 + 0.02, 0], ...smooth, color: cloth(c.trousers) }); // prettier-ignore
+      k.add(limb(k, 0.085, 0.062, BODY.thigh + 0.05), { pos: [0, -BODY.thigh / 2 + 0.02, 0], ...smooth, color: cloth(c.trousers) }); // prettier-ignore
     } else if (name.startsWith("shin")) {
       k.add(k.sphere(0.058), { pos: [0, 0, 0], ...smooth, color: cloth(c.trousers) });
-      k.add(k.cone(0.06, 0.05, BODY.shin - 0.07), { pos: [0, -(BODY.shin - 0.07) / 2, 0], ...smooth, color: cloth(c.trousers) }); // prettier-ignore
+      k.add(limb(k, 0.06, 0.05, BODY.shin - 0.07), { pos: [0, -(BODY.shin - 0.07) / 2, 0], ...smooth, color: cloth(c.trousers) }); // prettier-ignore
       k.add(k.torus(0.05, 0.009), { pos: [0, -BODY.shin + 0.075, 0], weight: 2, color: cloth(shade(c.trousers, 0.85)) }); // prettier-ignore
       // A shoe: upper, toe cap and a pale sole.
       k.add(k.roundedBox(0.095, 0.07, 0.235, 5), {
@@ -121,7 +121,7 @@ export function buildCharacter(look, { count = 60000, seed = 7 } = {}) {
 // shirt over a tapered chest with a placket and buttons, a collar, the neck.
 function buildTorso(k, c, cloth, skin, smooth) {
   k.add(k.ellipsoid(0.165, 0.1, 0.105), { pos: [0, 0.02, 0], ...smooth, color: cloth(c.trousers) });
-  k.add(k.cylinder(0.153, 0.05), {
+  k.add(limb(k, 0.153, 0.153, 0.05), {
     pos: [0, 0.095, 0],
     scale: [1, 1, 0.68],
     ...smooth,
@@ -148,7 +148,11 @@ function buildTorso(k, c, cloth, skin, smooth) {
     },
   });
   k.add(k.torus(0.066, 0.016), { pos: [0, 0.575, 0.004], scale: [1, 0.8, 0.9], weight: 1.5, ...smooth, color: cloth(shade(c.shirt, 1.08)) }); // prettier-ignore
-  k.add(k.cylinder(0.047, 0.09), { pos: [0, BODY.neck + 0.005, 0.004], ...smooth, color: skin() });
+  k.add(limb(k, 0.047, 0.047, 0.09), {
+    pos: [0, BODY.neck + 0.005, 0.004],
+    ...smooth,
+    color: skin(),
+  });
 }
 
 // The head, from the neck: skull and jaw, hair with a side part and a
@@ -178,11 +182,23 @@ function buildHead(k, c, skin, smooth) {
   for (const sx of [-1, 1]) {
     k.add(k.ellipsoid(0.019, 0.013, 0.008), { pos: [sx * 0.037, 0.138, 0.097], weight: 5, flat: 0.4, color: "#f6f3ee" }); // prettier-ignore
     k.add(k.ellipsoid(0.009, 0.01, 0.004), { pos: [sx * 0.035, 0.137, 0.105], weight: 7, flat: 0.4, color: "#2a2320" }); // prettier-ignore
-    k.add(k.box(0.032, 0.007, 0.008), { pos: [sx * 0.037, 0.161, 0.1], rot: [0, 0, sx * 7], weight: 5, color: shade(c.hair, 0.8) }); // prettier-ignore
+    k.add(k.box(0.032, 0.007, 0.008), { pos: [sx * 0.037, 0.161, 0.1], rot: [0, 0, 0], weight: 5, color: shade(c.hair, 0.8) }); // prettier-ignore
     k.add(k.ellipsoid(0.013, 0.026, 0.02), { pos: [sx * 0.098, 0.128, -0.002], ...smooth, color: skin(0.4) }); // prettier-ignore
   }
   k.add(k.ellipsoid(0.011, 0.018, 0.012), { pos: [0, 0.115, 0.104], weight: 3, ...smooth, color: skin(0.5) }); // prettier-ignore
   k.add(k.ellipsoid(0.021, 0.005, 0.006), { pos: [0, 0.078, 0.094], weight: 5, flat: 0.4, color: "#9a5550" }); // prettier-ignore
+}
+
+// A tapered limb as a lathe, hanging down: radius rTop at the top, rBottom
+// at the bottom, h tall, centered, with rounded ends. (Even spreading draws
+// a lattice on k.cone; on a lathe it doesn't.)
+function limb(k, rTop, rBottom, h) {
+  return k.lathe([
+    [rBottom * 0.4, -h / 2],
+    [rBottom, -h / 2 + Math.min(rBottom, h) * 0.3],
+    [rTop, h / 2 - Math.min(rTop, h) * 0.3],
+    [rTop * 0.4, h / 2],
+  ]);
 }
 
 function plain(buf) {
