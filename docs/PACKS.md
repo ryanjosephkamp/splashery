@@ -422,7 +422,10 @@ like any other splat (parts, the body, leaves).
 - **A set of pictures.** `input: { media: { accept: ["image"], multiple: true } }` lets the visitor
   open several photos at once (the photo album); a recipe's `pictures.sample` may return a list, and
   Previous and Next page through the set. In a scene, `toy.media.files` keeps the settings (not the
-  files; docs/SCENE-SCHEMA.md).
+  files; docs/SCENE-SCHEMA.md). With `media.list: true` the Toy tab lists the set (a small picture
+  and the name of each) with buttons to move each up or down (the digital frame). `pics.names`,
+  `pics.reorder(order)` (order[j] is the picture, by its place now, that goes to place j; the
+  picture on show stays on show) and `pics.thumb(n, size)` are the same from a recipe.
 - **Drawing on a page.** `pictures.decorate(canvas, { page, name, sheet, kind, options })` draws on
   a page or photo before it becomes splats (the album's photo corners and captions).
 - The video's sound follows the site's speaker button (embeds stay silent); `pics.togglePlay()`
