@@ -58,6 +58,13 @@ work is in [OPERATING.md](OPERATING.md).
   5.5 only, new public text is in American English (`tools/us-english.mjs`), and the sound review
   runs on the Sound Board. Splashery's own code is MIT licensed (#51, `LICENSE`); assets keep their
   own licenses and credits.
+- On September 29, 2026 the owner accepted the Splashery Universe plan
+  ([review](reviews/2026-09-29-universe/review.md), ROADMAP.md): five parts (Toys, Studio, Worlds,
+  Lab, Learn), new parts behind the labs switch, up to 8 workers at once until the weekly reset
+  (September 30, 4 p.m. ET), Opus 5.5 for the engine and toys and Sonnet 5.5 for Worlds content,
+  Studio converters, docs and the Integrator, and the Operator merging by tiers (CLAUDE.md, "Pull
+  requests"). Weapons: historical, fantasy and sci-fi only, never aimed at people or animals.
+  Splashery doesn't police what people open; the terms of use say they're responsible.
 - Locked (owner approved, do not change its look or behaviour): the laptop. Its smoke test guards
   it.
 
@@ -65,12 +72,17 @@ work is in [OPERATING.md](OPERATING.md).
 
 The full table, with owned files, sessions, branches and PRs, is [WORKSTREAMS.md](WORKSTREAMS.md).
 
-| Lane                                                    | Status                                                              | Handoff                                  |
-| ------------------------------------------------------- | ------------------------------------------------------------------- | ---------------------------------------- |
-| Operator                                                | Running; runs the lanes                                             | —                                        |
-| Books: your book, the photo album and the picture frame | Running (started September 28, 2026)                                | [handoff/Books.md](handoff/Books.md)     |
-| Screens: the screen and the Gaussian splat toy          | Running (started September 28, 2026)                                | [handoff/Screens.md](handoff/Screens.md) |
-| Next (WORKSTREAMS.md, Next)                             | The sound review (when the owner's notes arrive); pianos and songs… | —                                        |
+| Lane                                                      | Status                                                                                                                | Handoff                                          |
+| --------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
+| Operator                                                  | Running; runs the lanes                                                                                               | —                                                |
+| Books: your book, the photo album and the picture frame   | Running (started September 28, 2026)                                                                                  | [handoff/Books.md](handoff/Books.md)             |
+| Screens: the screen and the Gaussian splat toy            | Running (started September 28, 2026)                                                                                  | [handoff/Screens.md](handoff/Screens.md)         |
+| Viewer: whole PDF figures, tilt lock and top-bar settings | Running, Opus 5.5 (September 29, 2026)                                                                                | [handoff/Viewer.md](handoff/Viewer.md)           |
+| Worlds: the world engine and a sandbox island             | Running, Opus 5.5 (September 29, 2026)                                                                                | [handoff/Worlds.md](handoff/Worlds.md)           |
+| Fidelity A: the grainy-toy audit                          | Running, Opus 5.5 (September 29, 2026)                                                                                | [handoff/FidelityA.md](handoff/FidelityA.md)     |
+| Studio Sound: the song landscape and the Chladni plate    | Running, Sonnet 5.5 (September 29, 2026)                                                                              | [handoff/StudioSound.md](handoff/StudioSound.md) |
+| Integrator: combined test runs                            | Running, Sonnet 5.5 (September 29, 2026)                                                                              | —                                                |
+| Next (WORKSTREAMS.md, Next)                               | Sound A and B (when the owner's notes arrive), the manual audit and lab notebook, Fidelity B, Studio: 3D models, Lab… | —                                                |
 
 E4-finish, E5, E6a, E6b, F, G, Math, Fix3, AI, Help, HelpTextA, HelpTextB, Pictures and Manual are
 done (WORKSTREAMS.md, "Done"). On September 27, 2026 the owner approved the plan in Part 1 of the
