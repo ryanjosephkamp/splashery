@@ -16,6 +16,8 @@ import { Terrain } from "../src/worlds/terrain.js";
 import { Physics } from "../src/worlds/physics.js";
 import { planLevels } from "../src/worlds/lod.js";
 import { pose } from "../src/worlds/character.js";
+import { buildSign } from "../src/worlds/props.js";
+import { BITMAP } from "../src/font.js";
 
 const ISLAND = JSON.parse(fs.readFileSync("worlds/test-island/world.json", "utf8"));
 const URL = (tier = "mid", extra = "") =>
@@ -236,7 +238,40 @@ test.describe("worlds", () => {
 
 // ---- The engine's pure parts, in Node ------------------------------------------------
 
+test.describe("worlds render (r2)", () => {
+  test("the sharp kernel and the tier's pixel ratio are on, and the URL overrides them", async ({
+    browser,
+  }) => {
+    const page = await browser.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 3 }); // prettier-ignore
+    await open(page, "mid");
+    let r = await page.evaluate(() => ({ kernel: window.__world.view.kernel, ratio: window.__world.view.device.maxPixelRatio })); // prettier-ignore
+    expect(r.kernel).toBe("sharp");
+    expect(r.ratio).toBe(2);
+    await open(page, "high");
+    r = await page.evaluate(() => window.__world.view.device.maxPixelRatio);
+    expect(r).toBe(3);
+    await open(page, "mid", "&kernel=gaussian&dpr=1.5");
+    r = await page.evaluate(() => ({ kernel: window.__world.view.kernel, ratio: window.__world.view.device.maxPixelRatio })); // prettier-ignore
+    expect(r.kernel).toBe("gaussian");
+    expect(r.ratio).toBe(1.5);
+    await page.close();
+  });
+});
+
 test.describe("worlds engine", () => {
+  test("a sign's letters are placed exactly: nine splats on every inked font pixel", () => {
+    const label = "HELLO";
+    let inked = 0;
+    for (const ch of label) for (const row of BITMAP[ch]) for (let b = 0; b < 5; b++) inked += (row >> b) & 1; // prettier-ignore
+    const plain = buildSign("", { count: 4000 });
+    const sign = buildSign(label, { count: 4000 });
+    // The board grows with the text; the letters add 9 splats per inked pixel.
+    expect(sign.width).toBeGreaterThanOrEqual(plain.width);
+    let front = 0;
+    for (let i = 0; i < sign.buf.count; i++) if (Math.abs(sign.buf.pos[i * 3 + 2] - 0.091) < 1e-6) front++; // prettier-ignore
+    expect(front).toBe(inked * 9);
+  });
+
   const def = normalizeWorld(ISLAND);
   const terrain = new Terrain(def.terrain, def.colors, def.seed);
 
