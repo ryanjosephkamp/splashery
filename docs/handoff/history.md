@@ -16,6 +16,25 @@ had not settled 3 s after its tap) and "a scan rig moves a part of a captured to
 console warning, like the rare engine warning in HANDOFF.md). Keep `test-results/` if either comes
 back.
 
+### Manual: the splat equation toy and the Tinkerer's Manual (PR #65, merged 2026-09-28)
+
+- The splat equation toy (`splat-equation`, math shelf, labs only): you type where every splat goes
+  and what color it is, as x, y and z in u, v and t, with ranges, a hue or r, g and b, a size, a
+  count (100 to 10,000) and a grid or random spread. It uses lane Math's safe reader unchanged (no
+  code runs, so a link with a program is safe to share). Eight programs to start from: sphere,
+  torus, Möbius strip, seashell, trefoil knot, wave, spiral galaxy and Klein bottle. The tap plays t
+  through one cycle in 4 s with lane Math's method: 12 copies, each morphing into the next.
+- The Tinkerer's Manual (`manual/`, linked from the About tab) and its 25-page letter PDF, printed
+  by `tools/manual-pdf.mjs`: what a splat is (the Gaussian, Σ = R S Sᵀ Rᵀ, the projection and
+  back-to-front blending), how a toy's recipe is built (a tested example), the splat equation
+  language with a grammar, and a gallery of 15 programs whose links open in the toy. The owner
+  marked all five cards good.
+- Lessons: the reader knows only x, y, t, r, θ, a and b, so the toy hands it u and v as θ and y
+  (BACKLOG has the engine idea); a recipe with only clouds has base size 0.01 (PACKS.md, clouds).
+  Two finished lanes' tests counted toys, so every new labs toy failed them; #69 made them count
+  only the toys they wrote. Your book's default (the manual's PDF) moved to lane Books, which had
+  not merged yet.
+
 ### Pictures: pictures and pages, the engine (PR #64, merged 2026-09-28)
 
 - PDFs (PDF.js 6.3.289, the legacy build, with `isEvalSupported: false`), pictures, animated GIFs

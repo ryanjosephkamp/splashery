@@ -2322,6 +2322,17 @@ export const TOYS = [
     tags: "pythagoras theorem proof right triangle square hypotenuse geometry",
     camera: { yaw: 0.2, pitch: 0.3, roll: 0, distance: 3.7 },
   },
+  // Lane Manual: the splat equation toy (its own pack, on the Maths shelf).
+  {
+    id: "splat-equation",
+    label: "Splat equation",
+    category: "maths",
+    kind: "kit",
+    pack: "splat-equation",
+    labs: true,
+    tags: "splat equation program parametric code u v time sphere torus mobius seashell trefoil knot wave galaxy klein bottle",
+    camera: { yaw: 0.35, pitch: 0.6, roll: 0, distance: 3.5 },
+  },
 
   // ---- Pack: objects ----
   {

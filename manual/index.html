@@ -1,0 +1,1366 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>The Tinkerer's Manual</title>
+    <meta
+      name="description"
+      content="How to program Gaussian splats in Splashery: the math of one splat, how a toy is built, and the splat equation language."
+    />
+    <link rel="stylesheet" href="manual.css" />
+  </head>
+  <body>
+    <main>
+      <!-- ---- Cover ---- -->
+      <section class="cover">
+        <p class="kicker">Splashery · September 28, 2026</p>
+        <h1>The Tinkerer's Manual</h1>
+        <p class="lead">
+          How to program Gaussian splats: what one splat is, how the toys are built, and a small
+          language for writing your own splat equations.
+        </p>
+        <div class="cover-art">
+          <img src="img/gallery-torus.jpg" alt="A torus made of splats, colored like a rainbow" />
+          <img src="img/gallery-trefoil.jpg" alt="A trefoil knot made of splats" />
+          <img src="img/gallery-seashell.jpg" alt="A seashell made of splats" />
+          <img src="img/gallery-galaxy.jpg" alt="A spiral galaxy made of splats" />
+        </div>
+        <p>
+          Every toy in <a href="https://ryanjosephkamp.github.io/splashery/">Splashery</a> is made
+          of Gaussian splats: tens of thousands of soft, colored blobs that blend into a
+          solid-looking thing. This manual is for anyone who knows some math and wants to make
+          splats do what they say. It goes level by level. You can stop after any level and still
+          have something to play with.
+        </p>
+        <nav class="toc" aria-label="Contents">
+          <strong>Contents</strong>
+          <ol>
+            <li><a href="#splat">Level 1: What a splat is</a></li>
+            <li><a href="#toy">Level 2: How a toy is built</a></li>
+            <li><a href="#language">Level 3: The splat equation language</a></li>
+            <li><a href="#gallery">Level 4: A gallery of programs</a></li>
+            <li><a href="#later">What comes later: Code a toy</a></li>
+            <li><a href="#card">Quick reference</a></li>
+          </ol>
+        </nav>
+        <p class="no-print">
+          <a href="tinkerers-manual.pdf">Download this manual as a PDF</a> ·
+          <a href="../">Back to Splashery</a>
+        </p>
+      </section>
+
+      <!-- ---- Level 1 ---- -->
+      <h2 id="splat"><span class="level">Level 1</span>What a splat is</h2>
+      <p>
+        A <b>splat</b> is a small cloud of color floating in space. Up close it looks like a soft
+        ellipse, bright in the middle and fading at the edges. On its own it is nothing much. Put
+        thousands side by side and they melt into surfaces: a torus, a seashell, a cat.
+      </p>
+      <figure>
+        <div class="shots">
+          <div>
+            <img src="img/splats-100.jpg" alt="A sphere of 100 separate splats" />
+            <p class="shot-label">100 splats</p>
+          </div>
+          <div>
+            <img src="img/splats-400.jpg" alt="A sphere of 400 splats, starting to join" />
+            <p class="shot-label">400 splats</p>
+          </div>
+          <div>
+            <img src="img/splats-6000.jpg" alt="A smooth sphere of 6,000 splats" />
+            <p class="shot-label">6,000 splats</p>
+          </div>
+        </div>
+        <figcaption>
+          The same sphere with more and more splats, made with the Splat equation toy. With few
+          splats you see each soft blob; with enough of them, they blend into one smooth surface.
+        </figcaption>
+      </figure>
+
+      <h3>The numbers in one splat</h3>
+      <p>Each splat is described by a handful of numbers:</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Part</th>
+              <th>Numbers</th>
+              <th>What it means</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Center <var>μ</var></td>
+              <td>3: <var>x</var>, <var>y</var>, <var>z</var></td>
+              <td>Where the middle of the splat is.</td>
+            </tr>
+            <tr>
+              <td>Sizes <var>s</var></td>
+              <td>
+                3: <var>s</var><sub>1</sub>, <var>s</var><sub>2</sub>, <var>s</var><sub>3</sub>
+              </td>
+              <td>
+                How far it spreads along each of its own three axes. Equal sizes make a ball; one
+                small size makes a flat disc.
+              </td>
+            </tr>
+            <tr>
+              <td>Rotation <var>q</var></td>
+              <td>4 (a quaternion)</td>
+              <td>Which way those three axes point.</td>
+            </tr>
+            <tr>
+              <td>Color</td>
+              <td>3: red, green, blue</td>
+              <td>Each from 0 to 1.</td>
+            </tr>
+            <tr>
+              <td>Opacity <var>α</var></td>
+              <td>1</td>
+              <td>How solid its middle is, from 0 (clear) to 1 (solid).</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>
+        That is 14 numbers per splat. A Splashery toy has between about 60,000 and 400,000 splats,
+        depending on how strong your device is. Many splat files also let a splat's color change a
+        little with the direction you look from; the toys you build here use one color per splat.
+      </p>
+
+      <h3>The Gaussian: a bell in three dimensions</h3>
+      <p>
+        The "Gaussian" in Gaussian splat is the bell curve, named after the mathematician Carl
+        Friedrich Gauss. In one dimension, a bell centered at <var>μ</var> with width <var>σ</var>
+        (sigma, the standard deviation) is
+      </p>
+      <p class="math">
+        <var>G</var>(<var>x</var>) = exp(−(<var>x</var> − <var>μ</var>)² / 2<var>σ</var>²)
+      </p>
+      <figure class="diagram">
+        <svg
+          viewBox="0 0 360 160"
+          width="360"
+          height="160"
+          role="img"
+          aria-label="A bell curve with marks at one and two sigma"
+        >
+          <line
+            x1="20"
+            y1="130"
+            x2="340"
+            y2="130"
+            stroke="currentColor"
+            stroke-width="1"
+            opacity="0.5"
+          />
+          <line
+            x1="134.3"
+            y1="130"
+            x2="134.3"
+            y2="66"
+            stroke="currentColor"
+            stroke-dasharray="3 3"
+            opacity="0.5"
+          />
+          <line
+            x1="225.7"
+            y1="130"
+            x2="225.7"
+            y2="66"
+            stroke="currentColor"
+            stroke-dasharray="3 3"
+            opacity="0.5"
+          />
+          <line
+            x1="88.6"
+            y1="130"
+            x2="88.6"
+            y2="116"
+            stroke="currentColor"
+            stroke-dasharray="3 3"
+            opacity="0.5"
+          />
+          <line
+            x1="271.4"
+            y1="130"
+            x2="271.4"
+            y2="116"
+            stroke="currentColor"
+            stroke-dasharray="3 3"
+            opacity="0.5"
+          />
+          <path
+            fill="none"
+            stroke="#e8384f"
+            stroke-width="2.5"
+            d="M20.0 129.8 L24.6 129.7 L29.1 129.5 L33.7 129.4 L38.3 129.1 L42.9 128.8 L47.4 128.4 L52.0 127.9 L56.6 127.3 L61.1 126.4 L65.7 125.4 L70.3 124.1 L74.9 122.5 L79.4 120.7 L84.0 118.4 L88.6 115.8 L93.1 112.7 L97.7 109.2 L102.3 105.2 L106.9 100.8 L111.4 95.9 L116.0 90.6 L120.6 84.9 L125.1 78.9 L129.7 72.7 L134.3 66.3 L138.9 60.0 L143.4 53.8 L148.0 47.8 L152.6 42.3 L157.1 37.3 L161.7 33.1 L166.3 29.6 L170.9 27.1 L175.4 25.5 L180.0 25.0 L184.6 25.5 L189.1 27.1 L193.7 29.6 L198.3 33.1 L202.9 37.3 L207.4 42.3 L212.0 47.8 L216.6 53.8 L221.1 60.0 L225.7 66.3 L230.3 72.7 L234.9 78.9 L239.4 84.9 L244.0 90.6 L248.6 95.9 L253.1 100.8 L257.7 105.2 L262.3 109.2 L266.9 112.7 L271.4 115.8 L276.0 118.4 L280.6 120.7 L285.1 122.5 L289.7 124.1 L294.3 125.4 L298.9 126.4 L303.4 127.3 L308.0 127.9 L312.6 128.4 L317.1 128.8 L321.7 129.1 L326.3 129.4 L330.9 129.5 L335.4 129.7 L340.0 129.8"
+          />
+          <g font-family="sans-serif" font-size="12" fill="currentColor" text-anchor="middle">
+            <text x="180" y="147">μ</text>
+            <text x="134.3" y="147">μ − σ</text>
+            <text x="225.7" y="147">μ + σ</text>
+            <text x="88.6" y="147">μ − 2σ</text>
+            <text x="271.4" y="147">μ + 2σ</text>
+            <text x="180" y="16">1 at the center</text>
+          </g>
+        </svg>
+        <figcaption>
+          The bell curve. At one σ from the center it has fallen to about 0.61, at two σ to about
+          0.14, and at three σ to about 0.01, so a splat fades out within about three of its sizes.
+        </figcaption>
+      </figure>
+      <p>
+        In three dimensions the width becomes a 3-by-3 matrix <var>Σ</var> (capital sigma), called
+        the <b>covariance</b>, and the squared distance becomes a quadratic form. For a point
+        <var>p</var> in space, the splat's strength there is
+      </p>
+      <p class="math">
+        <var>G</var>(<var>p</var>) = exp(−½ (<var>p</var> − <var>μ</var>)<sup>T</sup> <var>Σ</var
+        ><sup>−1</sup> (<var>p</var> − <var>μ</var>))
+      </p>
+      <p>
+        Where <var>G</var> is the same value, you are on the same "shell" around the center, and
+        those shells are ellipsoids: stretched and turned spheres.
+      </p>
+
+      <h3>The covariance, built from sizes and a rotation</h3>
+      <p>
+        Not every 3-by-3 matrix is a valid covariance. It has to be symmetric, and it has to be
+        positive definite (the bell must fall off in every direction). Instead of picking its nine
+        numbers directly, a splat builds it from its three sizes and its rotation:
+      </p>
+      <p class="math">
+        <var>Σ</var> = <var>R</var> <var>S</var> <var>S</var><sup>T</sup> <var>R</var><sup>T</sup>,
+        &nbsp; where &nbsp; <var>S</var> =
+        <span class="mat"
+          ><span><var>s</var><sub>1</sub></span
+          ><span>0</span><span>0</span><span>0</span><span><var>s</var><sub>2</sub></span
+          ><span>0</span><span>0</span><span>0</span><span><var>s</var><sub>3</sub></span></span
+        >
+      </p>
+      <p>
+        and <var>R</var> is the rotation matrix of the quaternion <var>q</var>. Read it right to
+        left, as a recipe for a shape: start with a round ball of size 1, stretch it by <var>s</var
+        ><sub>1</sub>, <var>s</var><sub>2</sub> and <var>s</var><sub>3</sub> along <var>x</var>,
+        <var>y</var> and <var>z</var>, then turn it by <var>R</var>. Any sizes above zero and any
+        rotation give a valid covariance, which is exactly what you want when a computer is nudging
+        millions of numbers.
+      </p>
+      <figure class="diagram">
+        <svg
+          viewBox="0 0 540 170"
+          width="540"
+          height="170"
+          role="img"
+          aria-label="A round splat, a stretched splat and a turned splat"
+        >
+          <defs>
+            <radialGradient id="blob">
+              <stop offset="0" stop-color="#1fb59a" stop-opacity="0.95" />
+              <stop offset="0.35" stop-color="#1fb59a" stop-opacity="0.75" />
+              <stop offset="0.65" stop-color="#1fb59a" stop-opacity="0.3" />
+              <stop offset="1" stop-color="#1fb59a" stop-opacity="0" />
+            </radialGradient>
+          </defs>
+          <g font-family="sans-serif" font-size="12" fill="currentColor" text-anchor="middle">
+            <circle cx="90" cy="78" r="46" fill="url(#blob)" />
+            <text x="90" y="150">sizes 1, 1</text>
+            <text x="90" y="165">(a ball)</text>
+            <text x="180" y="82" font-size="20">→</text>
+            <ellipse cx="270" cy="78" rx="70" ry="24" fill="url(#blob)" />
+            <line x1="270" y1="78" x2="340" y2="78" stroke="currentColor" stroke-width="1.2" />
+            <line x1="270" y1="78" x2="270" y2="54" stroke="currentColor" stroke-width="1.2" />
+            <text x="312" y="95">s₁</text>
+            <text x="258" y="64">s₂</text>
+            <text x="270" y="150">stretch by S</text>
+            <text x="360" y="82" font-size="20">→</text>
+            <g transform="rotate(-30 450 78)">
+              <ellipse cx="450" cy="78" rx="70" ry="24" fill="url(#blob)" />
+              <line x1="450" y1="78" x2="520" y2="78" stroke="currentColor" stroke-width="1.2" />
+              <line x1="450" y1="78" x2="450" y2="54" stroke="currentColor" stroke-width="1.2" />
+            </g>
+            <text x="450" y="150">turn by R (30°)</text>
+          </g>
+        </svg>
+        <figcaption>
+          A covariance from sizes and a rotation, drawn in two dimensions: a round splat is
+          stretched along its own axes, then turned.
+        </figcaption>
+      </figure>
+      <div class="tip">
+        <p>
+          <b>A worked example.</b> Take sizes 0.3, 0.1 and 0.1, turned 30° about the
+          <var>z</var> axis. Then <var>S</var><var>S</var><sup>T</sup> has 0.09, 0.01 and 0.01 on
+          its diagonal, and multiplying out <var>R</var> <var>S</var><var>S</var><sup>T</sup>
+          <var>R</var><sup>T</sup> gives
+        </p>
+        <p class="math">
+          <var>Σ</var> ≈
+          <span class="mat"
+            ><span>0.070</span><span>0.035</span><span>0</span><span>0.035</span><span>0.030</span
+            ><span>0</span><span>0</span><span>0</span><span>0.010</span></span
+          >
+        </p>
+        <p>
+          The top-left number is 0.09 cos²30° + 0.01 sin²30° = 0.07, and the ones beside it are
+          (0.09 − 0.01) sin 30° cos 30° ≈ 0.035. Those off-diagonal numbers are the tilt.
+        </p>
+      </div>
+
+      <h3>From 3D to the screen</h3>
+      <p>
+        To draw a splat, the renderer works out what its bell looks like from the camera. It first
+        turns the covariance into the camera's view, with the camera's rotation <var>W</var>. The
+        perspective of a camera is not a straight-line map, but close to one point it nearly is, and
+        its best straight-line stand-in there is a matrix <var>J</var> (the Jacobian of the
+        projection). Then the splat's covariance on the screen is
+      </p>
+      <p class="math">
+        <var>Σ′</var> = <var>J</var> <var>W</var> <var>Σ</var> <var>W</var><sup>T</sup> <var>J</var
+        ><sup>T</sup>
+      </p>
+      <p>
+        keeping only its top-left 2-by-2 block. That 2-by-2 matrix is a flat bell on the screen: an
+        ellipse. Its eigenvectors are the directions of the ellipse's axes, and the square roots of
+        its eigenvalues are how far it spreads along them. This trick comes from EWA splatting
+        (Zwicker, Pfister, van Baar and Gross, 2001).
+      </p>
+
+      <h3>Sorting and blending, back to front</h3>
+      <p>
+        Splats are see-through at their edges, so the order they are drawn in matters. Each frame,
+        the splats are sorted by how far they are from the camera, and painted from the farthest to
+        the nearest. At each pixel, a splat's strength there is its opacity times its bell,
+        <var>a</var> = <var>α</var> <var>G′</var>, and it is laid over what is already there:
+      </p>
+      <p class="math"><var>C</var> ← <var>a</var> <var>c</var> + (1 − <var>a</var>) <var>C</var></p>
+      <p>
+        where <var>c</var> is the splat's color and <var>C</var> the pixel's color so far. Written
+        out for all the splats at once, counting from the nearest (<var>i</var> = 1) to the
+        farthest, the pixel's color is
+      </p>
+      <p class="math">
+        <var>C</var> = Σ<sub><var>i</var></sub> <var>c</var><sub><var>i</var></sub> <var>a</var
+        ><sub><var>i</var></sub> Π<sub><var>j</var> &lt; <var>i</var></sub> (1 − <var>a</var
+        ><sub><var>j</var></sub
+        >)
+      </p>
+      <p>
+        Each splat shows as much as the splats in front of it let through. This is how the 2023
+        paper that started the craze, "3D Gaussian Splatting for Real-Time Radiance Field Rendering"
+        (Kerbl, Kopanas, Leimkühler and Drettakis), draws its scenes, and it is how Splashery draws
+        every toy.
+      </p>
+      <figure class="diagram">
+        <svg
+          viewBox="0 0 540 150"
+          width="540"
+          height="150"
+          role="img"
+          aria-label="Three splats sorted by distance from the camera"
+        >
+          <defs>
+            <radialGradient id="b1">
+              <stop offset="0" stop-color="#4dabf7" />
+              <stop offset="0.6" stop-color="#4dabf7" stop-opacity="0.55" />
+              <stop offset="1" stop-color="#4dabf7" stop-opacity="0" />
+            </radialGradient>
+            <radialGradient id="b2">
+              <stop offset="0" stop-color="#ffc233" />
+              <stop offset="0.6" stop-color="#ffc233" stop-opacity="0.55" />
+              <stop offset="1" stop-color="#ffc233" stop-opacity="0" />
+            </radialGradient>
+            <radialGradient id="b3">
+              <stop offset="0" stop-color="#e8384f" />
+              <stop offset="0.6" stop-color="#e8384f" stop-opacity="0.55" />
+              <stop offset="1" stop-color="#e8384f" stop-opacity="0" />
+            </radialGradient>
+          </defs>
+          <g font-family="sans-serif" font-size="12" fill="currentColor" text-anchor="middle">
+            <rect
+              x="18"
+              y="52"
+              width="34"
+              height="26"
+              rx="5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+            />
+            <path
+              d="M52 58 L64 50 L64 80 L52 72 Z"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+            />
+            <text x="40" y="100">camera</text>
+            <line
+              x1="70"
+              y1="65"
+              x2="520"
+              y2="65"
+              stroke="currentColor"
+              stroke-dasharray="4 4"
+              opacity="0.4"
+            />
+            <ellipse cx="450" cy="62" rx="60" ry="40" fill="url(#b1)" />
+            <ellipse cx="330" cy="70" rx="44" ry="32" fill="url(#b2)" />
+            <ellipse cx="215" cy="60" rx="40" ry="26" fill="url(#b3)" />
+            <text x="450" y="125">drawn 1st (farthest)</text>
+            <text x="330" y="125">2nd</text>
+            <text x="215" y="125">3rd (nearest)</text>
+          </g>
+        </svg>
+        <figcaption>
+          Splats are painted from the back to the front, each one laid over the ones behind it.
+        </figcaption>
+      </figure>
+      <div class="tip">
+        <p>
+          <b>Why the order matters in the toys.</b> Sorting every splat every frame costs time, so
+          when a toy moves a piece, Splashery may keep the order it worked out for the piece's
+          resting pose. Turn a solid thing too far and its back can be drawn over its front. The
+          toys work around it: the Splat equation toy, for one, builds its shape at twelve moments
+          and shows the copy nearest the moment you are at (Level 3).
+        </p>
+      </div>
+
+      <!-- ---- Level 2 ---- -->
+      <h2 id="toy"><span class="level">Level 2</span>How a toy is built</h2>
+      <p>
+        Nobody places Splashery's splats by hand. Most toys are <b>recipes</b>: short programs that
+        describe a toy with a kit of shapes, and the kit fills them with splats when you open the
+        toy. A recipe is a few kilobytes of code instead of megabytes of splats, and because every
+        random choice comes from a seed, it builds the same toy on every device.
+      </p>
+      <p>
+        Recipes are written in JavaScript. This level is a tour, so you can read one; the complete
+        guide is
+        <a href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/PACKS.md"
+          >docs/PACKS.md</a
+        >
+        in the source code.
+      </p>
+
+      <h3>Two places a toy lives</h3>
+      <p>
+        A toy's name and shelf go in a <b>catalog</b> entry (<code>src/toys.js</code>), and the toy
+        itself in a <b>recipe</b> in a pack file (<code>src/packs/…js</code>):
+      </p>
+      <pre><code>{
+  id: "little-windmill",       // lower-case words joined by hyphens
+  label: "Little windmill",    // its name on the shelf
+  category: "objects",         // which shelf
+  kind: "kit",
+  pack: "my-pack",             // loads src/packs/my-pack.js
+}</code></pre>
+      <p>A recipe has up to six parts, all optional except <code>build</code>:</p>
+      <div class="table-wrap">
+        <table>
+          <tbody>
+            <tr>
+              <td><code>build(k, o)</code></td>
+              <td>
+                Describes the toy with the kit <code>k</code>. <code>o</code> holds the chosen
+                options.
+              </td>
+            </tr>
+            <tr>
+              <td><code>options</code></td>
+              <td>
+                Choices that rebuild the toy: a color, a style, a number of petals. They are saved
+                in links.
+              </td>
+            </tr>
+            <tr>
+              <td><code>controls</code></td>
+              <td>
+                Live values from 0 to 1: sliders, toggles that ease on and off, and pulses that jump
+                to 1 and fall back.
+              </td>
+            </tr>
+            <tr>
+              <td><code>action</code></td>
+              <td>Which control a tap on the toy fires.</td>
+            </tr>
+            <tr>
+              <td><code>drive(t, c, out)</code></td>
+              <td>
+                Runs every frame: from the time <code>t</code> and the controls <code>c</code>, it
+                sets how the parts move.
+              </td>
+            </tr>
+            <tr>
+              <td><code>alive</code></td>
+              <td><code>true</code> when the toy moves by itself, so frames keep coming.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Shapes from the kit</h3>
+      <p>
+        <code>k.sphere(r)</code>, <code>k.box(w, h, d)</code>, <code>k.cylinder(r, h)</code>,
+        <code>k.cone(r0, r1, h)</code>, <code>k.torus(R, r)</code>, <code>k.disc(r)</code>,
+        <code>k.lathe(profile)</code> (a vase or a bottle, turned around an axis),
+        <code>k.tube(curve, radius)</code> (a stem, an arm, a knot) and
+        <code>k.param((u, v) =&gt; [x, y, z])</code>, any surface you can write in two variables
+        (the same idea as Level 3). Nothing is drawn until you add a shape:
+      </p>
+      <pre><code>k.add(k.sphere(0.2), { pos: [0, 1, 0], color: "#ffcc33", weight: 2 });</code></pre>
+      <p>
+        The kit shares the splats out between the shapes by their surface area, so the toy is evenly
+        dense; <code>weight</code> gives a small shape more. After <code>build</code>, the kit
+        centers the toy and scales it to fit the view, so you can model in any units.
+      </p>
+
+      <h3>Colors from functions</h3>
+      <p>
+        A color can be a fixed one (<code>"#9c3b2c"</code>) or a function that the kit asks for
+        every splat. It gets the splat's place <code>c.p</code>, its surface direction
+        <code>c.n</code>, its surface coordinates <code>c.u</code> and <code>c.v</code>, and a
+        random number and noise that come from the seed. Return <code>null</code> to leave a hole:
+      </p>
+      <pre><code>color: (c) =&gt; (c.p[1] &gt; 0.5 ? "#ffffff" : "#3a7d44"), // snow above, grass below</code></pre>
+
+      <h3>Parts that hinge, spin or slide</h3>
+      <p>
+        A <b>part</b> is a group of shapes that moves as one solid piece:
+        <code>k.part("lid", { pivot, axis })</code>. Every frame, <code>drive</code> tells each part
+        where to be: an <code>angle</code> about its axis (a lid on a hinge, a wheel that spins), an
+        <code>offset</code> (a drawer that slides), a <code>scale</code>, or <code>visible</code>. A
+        toy may have up to 15 parts. The treasure chest's lid is a part on a hinge.
+      </p>
+      <figure>
+        <div class="shots two">
+          <div>
+            <img src="img/toy-chest.jpg" alt="The treasure chest with its lid open" />
+            <p class="shot-label">The treasure chest: its lid is a part on a hinge.</p>
+          </div>
+          <div>
+            <img src="img/toy-graph-plotter.jpg" alt="The graph plotter drawing a sine wave" />
+            <p class="shot-label">The graph plotter: the a slider is a control.</p>
+          </div>
+        </div>
+      </figure>
+
+      <h3>Behaviors</h3>
+      <p>
+        Some motion is too fine for parts: a flame that flickers, snow that falls, grass that sways.
+        A <b>behavior</b> moves each splat on its own on the graphics card:
+        <code>kind: "flame"</code>, <code>"twinkle"</code>, <code>"sway"</code>,
+        <code>"orbit"</code>, <code>"fall"</code>, <code>"wave"</code> and more. <b>Morphs</b> give
+        each splat a second place, <code>to: (c) =&gt; [x, y, z]</code>, and slide it there as one
+        of four channels goes from 0 to 1. The Splat equation toy's motion is made of morphs.
+      </p>
+
+      <h3>A small, complete recipe</h3>
+      <p>
+        Here is a whole toy: a little windmill whose sails turn with a Wind slider, and a tap that
+        blows a gust, spinning them once more around.
+      </p>
+      <pre><code>import { mix } from "../src/kit.js";
+
+// A little windmill: a stone tower, a red cap, and four sails that turn in
+// the wind. A tap blows a gust that spins them once more around.
+export const RECIPES = {
+  "little-windmill": {
+    alive: true,
+    options: [{ key: "sails", label: "Sail color", type: "color", default: "#f2eee4" }],
+    controls: [
+      { key: "wind", label: "Wind", type: "slider", default: 0.4 },
+      { key: "gust", label: "Gust", type: "pulse", ease: 3 },
+    ],
+    action: { key: "gust", label: "Blow a gust" },
+    drive(t, c, out) {
+      // The wind turns the sails; a gust adds one extra turn, eased in and
+      // out, so they end where they would have been anyway.
+      const g = c.gust &gt; 0 ? 1 - c.gust : 0;
+      const extra = 2 * Math.PI * g * g * (3 - 2 * g);
+      out.parts.sails = { angle: t * (0.3 + 2 * c.wind) + extra };
+    },
+    build(k, o) {
+      // The tower: whitewashed stone, darker toward the ground.
+      k.add(k.cone(0.5, 0.3, 1.6), {
+        color: (c) =&gt; mix("#8b8f97", "#ece6d8", (c.p[1] + 0.8) / 1.6),
+        interior: 0.1,
+        core: "#6b5b4b",
+      });
+      // The cap.
+      k.add(k.cone(0.36, 0.02, 0.4), { pos: [0, 1.0, 0], color: "#9c3b2c" });
+      // The sails turn together, about an axis that points at you.
+      const sails = k.part("sails", { pivot: [0, 0.6, 0.42], axis: [0, 0, 1] });
+      k.add(k.sphere(0.07), { pos: [0, 0.6, 0.42], part: sails, color: "#4b3a2a" });
+      for (let i = 0; i &lt; 4; i++) {
+        const a = (i * Math.PI) / 2;
+        k.add(k.box(0.16, 0.9, 0.02), {
+          pos: [-0.5 * Math.sin(a), 0.6 + 0.5 * Math.cos(a), 0.44],
+          rot: [0, 0, (a * 180) / Math.PI],
+          part: sails,
+          color: o.sails,
+        });
+      }
+    },
+  },
+};</code></pre>
+      <figure>
+        <div class="shots two">
+          <div>
+            <img
+              src="img/toy-little-windmill.jpg"
+              alt="The little windmill built from the recipe above"
+            />
+            <p class="shot-label">This recipe, built by the kit.</p>
+          </div>
+          <div>
+            <img src="img/toy-windmill.jpg" alt="The Windmill toy on the shelf" />
+            <p class="shot-label">The Windmill on the shelf, a bigger toy built the same way.</p>
+          </div>
+        </div>
+      </figure>
+      <p>
+        Read it from the bottom up. <code>build</code> adds a cone for the tower (its color a
+        function of height), a smaller cone for the cap, and a part called "sails" with a hub and
+        four boxes, each turned a quarter turn more than the last. <code>drive</code> turns the
+        sails part: steadily with the wind, plus one extra turn while the gust pulse runs, eased
+        with the smoothstep curve 3<var>g</var>² − 2<var>g</var>³ so it starts and ends gently. A
+        full extra turn lands the sails where they would have been anyway, so nothing jumps when the
+        gust ends.
+      </p>
+
+      <!-- ---- Level 3 ---- -->
+      <h2 id="language"><span class="level">Level 3</span>The splat equation language</h2>
+      <p>
+        Recipes are powerful, but they are code, and code from a stranger can do things you did not
+        ask for. The <b>Splat equation</b> toy on the math shelf gives you a smaller language that
+        is only math. You write where every splat goes and what color it is, as equations, and
+        nothing else can happen. That is why a link with your equations in it is safe to share.
+      </p>
+      <p>
+        Open it with any link in the gallery (Level 4). Type in the box under
+        <b>Your own splat program</b> in the Toy tab and press <b>Splat it</b>. The Program list has
+        eight famous shapes to start from.
+      </p>
+
+      <h3>The idea: every splat gets its own u and v</h3>
+      <p>
+        The toy lays out its splats on a grid of two numbers, <var>u</var> and <var>v</var>, each
+        running over a range you choose. Your equations turn each splat's (<var>u</var>,
+        <var>v</var>) into a place in space, (<var>x</var>, <var>y</var>, <var>z</var>). If
+        <var>u</var> goes around a circle and <var>v</var> around a smaller circle, the grid wraps
+        into a torus:
+      </p>
+      <pre><code>x = (2 + cos v)·cos u
+y = sin v
+z = (2 + cos v)·sin u
+u = 0 .. 2pi
+v = 0 .. 2pi</code></pre>
+      <figure class="diagram">
+        <svg
+          viewBox="0 0 540 190"
+          width="540"
+          height="190"
+          role="img"
+          aria-label="A grid of u and v values becomes a torus"
+        >
+          <g font-family="sans-serif" font-size="12" fill="currentColor" text-anchor="middle">
+            <g stroke="currentColor" stroke-width="0.8" opacity="0.5">
+              <rect x="40" y="20" width="150" height="150" fill="none" />
+            </g>
+            <g fill="#1fb59a">
+              <circle cx="49.4" cy="29.4" r="3" />
+              <circle cx="68.1" cy="29.4" r="3" />
+              <circle cx="86.9" cy="29.4" r="3" />
+              <circle cx="105.6" cy="29.4" r="3" />
+              <circle cx="124.4" cy="29.4" r="3" />
+              <circle cx="143.1" cy="29.4" r="3" />
+              <circle cx="161.9" cy="29.4" r="3" />
+              <circle cx="180.6" cy="29.4" r="3" />
+              <circle cx="49.4" cy="48.1" r="3" />
+              <circle cx="68.1" cy="48.1" r="3" />
+              <circle cx="86.9" cy="48.1" r="3" />
+              <circle cx="105.6" cy="48.1" r="3" />
+              <circle cx="124.4" cy="48.1" r="3" />
+              <circle cx="143.1" cy="48.1" r="3" />
+              <circle cx="161.9" cy="48.1" r="3" />
+              <circle cx="180.6" cy="48.1" r="3" />
+              <circle cx="49.4" cy="66.9" r="3" />
+              <circle cx="68.1" cy="66.9" r="3" />
+              <circle cx="86.9" cy="66.9" r="3" />
+              <circle cx="105.6" cy="66.9" r="3" />
+              <circle cx="124.4" cy="66.9" r="3" />
+              <circle cx="143.1" cy="66.9" r="3" />
+              <circle cx="161.9" cy="66.9" r="3" />
+              <circle cx="180.6" cy="66.9" r="3" />
+              <circle cx="49.4" cy="85.6" r="3" />
+              <circle cx="68.1" cy="85.6" r="3" />
+              <circle cx="86.9" cy="85.6" r="3" />
+              <circle cx="105.6" cy="85.6" r="3" />
+              <circle cx="124.4" cy="85.6" r="3" />
+              <circle cx="143.1" cy="85.6" r="3" />
+              <circle cx="161.9" cy="85.6" r="3" />
+              <circle cx="180.6" cy="85.6" r="3" />
+              <circle cx="49.4" cy="104.4" r="3" />
+              <circle cx="68.1" cy="104.4" r="3" />
+              <circle cx="86.9" cy="104.4" r="3" />
+              <circle cx="105.6" cy="104.4" r="3" />
+              <circle cx="124.4" cy="104.4" r="3" />
+              <circle cx="143.1" cy="104.4" r="3" />
+              <circle cx="161.9" cy="104.4" r="3" />
+              <circle cx="180.6" cy="104.4" r="3" />
+              <circle cx="49.4" cy="123.1" r="3" />
+              <circle cx="68.1" cy="123.1" r="3" />
+              <circle cx="86.9" cy="123.1" r="3" />
+              <circle cx="105.6" cy="123.1" r="3" />
+              <circle cx="124.4" cy="123.1" r="3" />
+              <circle cx="143.1" cy="123.1" r="3" />
+              <circle cx="161.9" cy="123.1" r="3" />
+              <circle cx="180.6" cy="123.1" r="3" />
+              <circle cx="49.4" cy="141.9" r="3" />
+              <circle cx="68.1" cy="141.9" r="3" />
+              <circle cx="86.9" cy="141.9" r="3" />
+              <circle cx="105.6" cy="141.9" r="3" />
+              <circle cx="124.4" cy="141.9" r="3" />
+              <circle cx="143.1" cy="141.9" r="3" />
+              <circle cx="161.9" cy="141.9" r="3" />
+              <circle cx="180.6" cy="141.9" r="3" />
+              <circle cx="49.4" cy="160.6" r="3" />
+              <circle cx="68.1" cy="160.6" r="3" />
+              <circle cx="86.9" cy="160.6" r="3" />
+              <circle cx="105.6" cy="160.6" r="3" />
+              <circle cx="124.4" cy="160.6" r="3" />
+              <circle cx="143.1" cy="160.6" r="3" />
+              <circle cx="161.9" cy="160.6" r="3" />
+              <circle cx="180.6" cy="160.6" r="3" />
+            </g>
+            <circle cx="124.4" cy="66.9" r="6" fill="none" stroke="#e8384f" stroke-width="2" />
+            <text x="115" y="186">u, from 0 to 2π</text>
+            <text x="22" y="98" transform="rotate(-90 22 98)">v, from 0 to 2π</text>
+            <text x="270" y="92" font-size="13">x(u, v), y(u, v), z(u, v)</text>
+            <text x="270" y="112" font-size="22">→</text>
+          </g>
+          <image href="img/gallery-torus.jpg" x="360" y="15" width="165" height="165" />
+        </svg>
+        <figcaption>
+          Each dot on the grid is one splat with its own (<var>u</var>, <var>v</var>). The equations
+          carry every dot to its place on the torus.
+        </figcaption>
+      </figure>
+
+      <h3>The fields</h3>
+      <p>
+        A program is a list of <b>fields</b>, each written <code>name = value</code>. You can type
+        one field or several, split by <code>;</code> (a text file can put one on each line). Any
+        field you leave out keeps what is showing.
+      </p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Field</th>
+              <th>What it is</th>
+              <th>If left out</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>x</code>, <code>y</code>, <code>z</code></td>
+              <td>
+                Where each splat goes, as equations in <var>u</var>, <var>v</var> and <var>t</var>.
+                <var>y</var> points up.
+              </td>
+              <td>Needed</td>
+            </tr>
+            <tr>
+              <td><code>u</code></td>
+              <td>The range of <var>u</var>, like <code>0 .. 2pi</code>.</td>
+              <td>Needed</td>
+            </tr>
+            <tr>
+              <td><code>v</code></td>
+              <td>The range of <var>v</var>.</td>
+              <td><code>0 .. 1</code></td>
+            </tr>
+            <tr>
+              <td><code>hue</code></td>
+              <td>
+                Color as a place on the color wheel: 0 is red, 1/6 yellow, 1/3 green, 1/2 cyan, 2/3
+                blue, 5/6 magenta, and 1 is red again. Any number works; only the part after the
+                point counts.
+              </td>
+              <td>Use <var>r</var>, <var>g</var>, <var>b</var></td>
+            </tr>
+            <tr>
+              <td><code>r</code>, <code>g</code>, <code>b</code></td>
+              <td>
+                Color as red, green and blue, each from 0 to 1. Setting any of them turns
+                <var>hue</var> off; setting <var>hue</var> turns them off.
+              </td>
+              <td>0.5 each (gray)</td>
+            </tr>
+            <tr>
+              <td><code>size</code></td>
+              <td>
+                How big each splat is, in the same units as <var>x</var>, <var>y</var> and
+                <var>z</var>: about the σ of its bell. It may use <var>u</var>, <var>v</var> and
+                <var>t</var>.
+              </td>
+              <td><code>0.05</code></td>
+            </tr>
+            <tr>
+              <td><code>count</code></td>
+              <td>How many splats: 100 to 10,000.</td>
+              <td><code>4000</code></td>
+            </tr>
+            <tr>
+              <td><code>spread</code></td>
+              <td>
+                <code>grid</code> spaces the splats evenly; <code>random</code> scatters them at
+                random over the ranges (a galaxy, a firework).
+              </td>
+              <td><code>grid</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>
+        You can also write <code>color</code> for <code>hue</code>, <code>x(u,v,t)</code> for
+        <code>x</code>, and add notes after a <code>#</code>. Names can be in capitals or not.
+      </p>
+
+      <h3>Expressions</h3>
+      <p>
+        The equations are read by the same small, safe reader as the Graph and Surface plotters. It
+        understands:
+      </p>
+      <ul>
+        <li><b>Numbers</b>: <code>2</code>, <code>0.5</code>, <code>.25</code>.</li>
+        <li>
+          <b>Variables</b>: <var>u</var>, <var>v</var> and <var>t</var>. Range ends and the count
+          are numbers only.
+        </li>
+        <li><b>Constants</b>: <code>pi</code> (or π) and <code>e</code>.</li>
+        <li>
+          <b>Operators</b>: <code>+ − × ÷ ^</code>, written <code>+ - * / ^</code> (and
+          <code>**</code>, <code>·</code>, <code>²</code>, <code>³</code>), with brackets
+          <code>( )</code> and <code>|x|</code> for absolute value.
+        </li>
+        <li>
+          <b>Functions</b>: <code>sin cos tan asin acos atan sinh cosh tanh exp log</code> (natural;
+          <code>ln</code> too) <code>log10 sqrt</code> (or √) <code>abs floor</code>, and
+          <code>min</code> and <code>max</code> of two or more values.
+        </li>
+        <li>
+          <b>Shortcuts</b>: <code>2u</code> means 2 × <var>u</var>, <code>3sin(u)</code> and
+          <code>(u + 1)(v − 1)</code> multiply, and a function can skip its brackets on a simple
+          product: <code>sin 2u</code>, <code>cos v</code>.
+        </li>
+      </ul>
+      <p>
+        Powers go first, then × and ÷, then + and −, and a power binds to the right:
+        <code>2^3^2</code> is 2<sup>9</sup>, and <code>-u^2</code> is −(<var>u</var>²). Each field
+        can be up to 120 characters long.
+      </p>
+      <h4>The grammar</h4>
+      <p>For the curious, here is the whole grammar. Words in quotes are typed as they are.</p>
+      <pre><code>program    = field "=" value { ( ";" | new line ) field "=" value }
+field      = "x" | "y" | "z" | "u" | "v" | "hue" | "r" | "g" | "b"
+           | "size" | "count" | "spread"
+value      = sum                         (x, y, z, hue, r, g, b, size)
+           | sum ".." sum                (u, v: numbers only)
+           | sum                         (count: a number only)
+           | "grid" | "random"           (spread)
+sum        = product { ( "+" | "-" ) product }
+product    = signed { ( "*" | "/" ) signed | power }   (nothing between: 2u)
+signed     = { "-" | "+" } power
+power      = atom [ "^" signed ]
+atom       = number | "u" | "v" | "t" | "pi" | "e"
+           | function "(" sum { "," sum } ")"
+           | function atom { atom }      (sin 2u)
+           | "(" sum ")" | "|" sum "|"</code></pre>
+
+      <h3>Time</h3>
+      <p>
+        <var>t</var> is time. A tap on the toy plays it from 0 to 2π in about 4 seconds, and the
+        <b>t</b> slider in the Toy tab holds it anywhere in between. Anything with <var>t</var> in
+        it moves: <code>u + t</code> turns a shape, <code>sin(t)</code> breathes, and
+        <code>sin(3u − t)</code> sends a wave around.
+      </p>
+      <p>
+        Behind the scenes, the toy builds your shape at 12 moments, <var>t</var> = 0, π/6, 2π/6 and
+        so on, and each copy slides every splat in a straight line to its place in the next copy (a
+        morph, Level 2), so the motion is exact at those 12 moments and smooth in between. A shape
+        that turns dips very slightly inward between moments, about 3 percent.
+      </p>
+      <div class="tip">
+        <p>
+          <b>Make it loop.</b> Because <var>t</var> ends at 2π, a shape made of <code>sin(t)</code>,
+          <code>cos(t)</code> and angles like <code>u + t</code> ends exactly where it began. A
+          shape with plain <code>t</code> in it (like <code>y = t</code>) jumps back at the end.
+          <code>sin(t/2)</code> goes out and back once; <code>sin(2t)</code> twice.
+        </p>
+      </div>
+      <p>
+        A program without <var>t</var> stands still. Then a tap clears it and draws the splats again
+        one by one, in the order they are made: the first value of <var>u</var> with every
+        <var>v</var>, then the next <var>u</var>, and so on.
+      </p>
+
+      <h3>What the toy does for you</h3>
+      <ul>
+        <li>
+          <b>It fits the view.</b> The whole shape (at every moment of <var>t</var>) is scaled to
+          fit, so your units don't matter; only the sizes compared with the shape do.
+        </li>
+        <li>
+          <b>It spaces the grid.</b> With <code>spread = grid</code>, the side of the shape that is
+          longer gets more splats, so they sit about evenly apart. A shape that uses only
+          <var>u</var> is a curve, and all the splats go along it.
+        </li>
+        <li>
+          <b>It lights surfaces.</b> For a surface, each splat is a flat disc facing out from it
+          (along the cross product of its slopes in <var>u</var> and <var>v</var>), lit from above.
+          The <b>Light and shade</b> switch turns the lighting off, so you see your colors exactly.
+        </li>
+        <li>
+          <b>It skips impossible points.</b> Where an equation has no value (the square root of a
+          negative number, a division by zero), that splat is left out. So are points that shoot off
+          far beyond the rest.
+        </li>
+        <li>
+          <b>It explains mistakes.</b> Each field that can't be read gets one plain message, like
+          <i>“z: That can't be drawn: I don't know “q”.”</i>, and the shape on the stage stays as it
+          was.
+        </li>
+      </ul>
+
+      <h3>Why it is safe</h3>
+      <p>
+        The reader never runs what you type. It breaks the text into numbers, the letters
+        <var>u</var>, <var>v</var> and <var>t</var>, the names in the lists above and the signs, and
+        builds a small tree of arithmetic from them. There is no way to name anything else, so the
+        worst a program can do is draw a strange shape. Your program lives in the toy's link ("Copy
+        link" in the Share tab), so you can send it to anyone.
+      </p>
+
+      <!-- ---- Level 4 ---- -->
+      <h2 id="gallery"><span class="level">Level 4</span>A gallery of programs</h2>
+      <p>
+        The first eight are the toy's own programs; the rest are small ideas to copy and change.
+        Each button opens the toy with that program; then tap it to play <var>t</var>. While the toy
+        is being tried out, it is on the shelf only when Splashery is opened with
+        <code>?labs=1</code>, but these links always open it.
+      </p>
+      <div class="gallery">
+        <article class="card">
+          <img src="img/gallery-sphere.jpg" alt="Sphere, made of splats" />
+          <div class="body">
+            <h4>Sphere</h4>
+            <p>
+              A sphere from two angles, u around and v from pole to pole, spinning with u + t. Six
+              stripes from floor(6u/(2pi)).
+            </p>
+            <pre><code>x = sin(v)cos(u + t)
+y = cos(v)
+z = sin(v)sin(u + t)
+u = 0 .. 2pi
+v = 0 .. pi
+hue = floor(6u/(2pi))/6 + 0.04
+size = 0.035
+count = 7000</code></pre>
+            <a
+              class="button"
+              href="https://ryanjosephkamp.github.io/splashery/#s=d.dVLLctswDPyXzRXxyLKdB2_9hvbUTg4QBdusaZIlqThuRv_eIWW5GWeiCwkKwGIX-w4OAQopWE57iWcQXiUm4x3UiqCjcJb-W4ZC27QP983zffv0o21Vs1LL1eKxWf8EIYn0UKv1cr1eErI_Q73jYFwPhW4wNhsHgukvSPle_gycCwjBh3JJpSJESZJr0l6iYBwJ1vtD-dexPuyiH2rPwDsBIe_lKFDgIXsQWGtx-X9cob5rtgK1JMhb8GmIJRgJst2KzhOsP0g5C-ct2ySElKO4Xd5DNYsHwsl3XenSLDYj4VSJfZm_2RB6E0VXgqoZS5iSt6-fUEIU7ueaFKqKE0YffbjJ7vzgdB1iXbI15yxxzj_yzhXpvpzqkRC5N0OaGoyEfDLptoKPfigSNovNR9YrAr-ZBIUzRkKyRt9yCT6ZC2FCOomEWri5Vr6VysDGfZrS_JUL4mTDS6C99REKd_Kw6trJDdf6lPkYEtSvl5Gg-SiRy_OZT7OcwWRdW7VPhOitrZP1JmWuMhYJilGC5WrXPESXuRLOcZDZIVBw3sk0fFHcleRq5fpO2FreQQGEEP3vee04RQ4gRAnCxWfLC6MyNO629QNd2RHumm69fdZ4qcu1sybzSpaEXjIbWz1ZVu4npHewNa_XsY--3JGysRYfXVXwXY7eFtOP4_gP"
+              >Open it in the toy</a
+            >
+          </div>
+        </article>
+        <article class="card">
+          <img src="img/gallery-torus.jpg" alt="Torus, made of splats" />
+          <div class="body">
+            <h4>Torus</h4>
+            <p>
+              A tube around a ring. v + t rolls the tube around itself, so it turns inside out as
+              you watch.
+            </p>
+            <pre><code>x = (2 + cos(v + t))cos(u)
+y = sin(v + t)
+z = (2 + cos(v + t))sin(u)
+u = 0 .. 2pi
+v = 0 .. 2pi
+hue = v/(2pi)
+size = 0.09
+count = 6000</code></pre>
+            <a
+              class="button"
+              href="https://ryanjosephkamp.github.io/splashery/#s=d.dVLLctswDPyXzRXxyHLsOLz1G9pTOzlAFOywpkmWpPxoRv_eIW25GWeiCwkKwGIX-w4OAQopWE5vEs8gHCQm4x3UgqCjcJb-W4ZC27Srx-blsV3_aFvVLNR8MXterH-CkER6qHW7Xr-sCNmfod6xM66HQjcYm40DwfRXpPwofwbOBYTgQ7mkUhGiJClQ2cchYRwJ1vtd-dWx3m2jH2rLwFsBIb_JXqDAQ_YgsNbi8v-4In3XbAVqTpBT8GmIJRgJstmIzhdUv5NyFsobtkkIKUdx2_wG1cxWhKPvutKlmS1HwrHy-jJ_uST0Joqu_FQzljAlbw-fUEIU7qeaFKqIF4w--nCX3fnB6TrEU8nWnLPEKX_PW1eU-3KqZ0Lk3gzp0mAk5KNJ9xW890ORsJktP7JeEPhkEhTOGAnJGn3PJfhkroQJ6SgSauHyVnkqlYGN-zSl-StXxIsLr4H21kcoPMhq0bVS3XCrT5n3IUH9eh0JmvcSuTyf-TjJGUzWtVW7JkRvbZ2sNylzlbFIUIwSLFe35iG6zJVwjoNMDoGC804uwxfFXUmuTq7vhI3lLRRACNH_ntaOY-QAQpQgXHw2vzIqQ-NhUz_QjR3hoemeNi8ar3W5dtJkWsmc0EtmY6sny8r9BekdbM3hNvbelztSNtbio6sKvsvR22L6cRz_AQ"
+              >Open it in the toy</a
+            >
+          </div>
+        </article>
+        <article class="card">
+          <img src="img/gallery-mobius.jpg" alt="Möbius strip, made of splats" />
+          <div class="body">
+            <h4>Möbius strip</h4>
+            <p>
+              A band with a half twist: cos(u/2) turns the band over once as u goes around. The
+              colors flow along it.
+            </p>
+            <pre><code>x = (1 + v cos((u + t)/2))cos(u + t)
+y = v sin((u + t)/2)
+z = (1 + v cos((u + t)/2))sin(u + t)
+u = 0 .. 2pi
+v = -0.4 .. 0.4
+hue = u/(2pi)
+size = 0.035
+count = 4000</code></pre>
+            <a
+              class="button"
+              href="https://ryanjosephkamp.github.io/splashery/#s=d.dVJBctswDPzL-op4ZNmOE976hvbUTg4QBTusKZIlqThuRn_vkLbcTDLRhQQFYLGLfQOHAIUULKdniWcQXiQm4x3UmqCjcJb-W4ZC27T3d83jXfvwo21Vs1ar9XK3aX6CkER6qNXjbr1rCdmfod5wNK6HQjcam40DwfRXpHwnf0bOBYTgQ7mkUhGiJClQg-_MmDBNBOv9sfzrWB8P0Y-1Z-CDgJCfZRAo8Jg9CKy1uPw_rlDfNVuBWhHkNfg0xhJMBNnvRecLrD9KOQvnPdskhJSjuEN-hmqW94ST77rSpVluJ8KpEvsyf7sl9CaKrgRVM5UwJW9fPqGEKNzPNSlUFS8YffThQ3bnR6frEJuSrTlniXP-wAdXpPtyqh0hcl9UrQ0mQj6Z9LGCBz8WCZvl9j3rNYFfTYLCGRMhWaM_cgk-mSthQjqJhFq4vVW-lsrAxn2a0vyVK-LFhtdAe-sjFBZyv-5aqW641afMQ0hQv54mguZBIpfnM59mOYPJurZqHwjRW1sn603KXGUsEhSjBMvVrnmMLnMlnOMos0Og4LyTy_BFcVeSq5XrO2Fv-QAFEEL0v-e14xQ5gBAlCBefra6MytBY7OsHurEjLJpus3_UeKrLtbMm80pWhF4yG1s9WVbuL0hvYGtebmMPvtyRsrEW711V8F2O3hbTT9P0Dw"
+              >Open it in the toy</a
+            >
+          </div>
+        </article>
+        <article class="card">
+          <img src="img/gallery-seashell.jpg" alt="Seashell, made of splats" />
+          <div class="body">
+            <h4>Seashell</h4>
+            <p>
+              A tube that grows by exp(0.1u) as it winds three times around, turning with u + t. Its
+              splats grow too.
+            </p>
+            <pre><code>x = exp(0.1u)cos(u + t)(1.2 + cos v)
+y = exp(0.1u)(sin(v) - 2.4) + 3
+z = exp(0.1u)sin(u + t)(1.2 + cos v)
+u = 0 .. 6pi
+v = 0 .. 2pi
+hue = 0.02 + 0.1u/(6pi) + 0.03cos(4u)
+size = 0.14exp(0.1u)
+count = 10000</code></pre>
+            <a
+              class="button"
+              href="https://ryanjosephkamp.github.io/splashery/#s=d.dVLLctswDPyX9RXxSPIjCW_9hvbUTg4QBTusaZIlqThuRv_eIW25mWSiiwQKwD64b-AQoJCC5fQs8QzCi8RkvINaEXQUzjJ8y1Domm571zzedQ8_uk41K9Wulvfr9icISWSAemjbzf2WkP0Z6g0H4wYo9KOx2TgQzHBFynfyZ-RcQAg-lI9UJkKUJAUqSWFjLaaJYL0_lL8968M--rFuDbwXEPKzHAUKPGYPAmstLv-vK9h3zVagWoK8Bp_GWIqJILud6HwB9gcp76J6xzYJIeUobp-foZrllnDyfV-2NMvNRDhVaV_2bzaEwUTRVaJqplKm5O3LJ5QQhYd5JoXq4wVjiD586O796HQlsS7dmnOWOPcfee-KeV-yuidEHsyYLgsmQj6Z9HGCj34sFjbLzXvVKwK_mgSFMyZCskZ_1BJ8MlfBhHQSCXVwc5t8LZOBjfvE0vyVK-IliNdCe-sjFBayXfWd1DTc5lPmY0hQv54mguajRC7HZz7NdgaTdV3VPRCit7YyG0zKXG0sFpSgBMs1sHmMLnMVnOMoc0Kg4LyTC_niuCvNNcz1nLCzvIcCCCH63_O14xQ5gBAlCJectVdFhTQWu_qAbuoIi6Zf7x41nurl2tmT-UpawiCZja2ZLFfuL0hvYGtebrSPvnwjZWMt3qeq4LscvS2hn6bpHw"
+              >Open it in the toy</a
+            >
+          </div>
+        </article>
+        <article class="card">
+          <img src="img/gallery-trefoil.jpg" alt="Trefoil knot, made of splats" />
+          <div class="body">
+            <h4>Trefoil knot</h4>
+            <p>
+              The simplest real knot, a curve in u alone, turned about the vertical by the rotation
+              formulas in t.
+            </p>
+            <pre><code>x = (sin(u) + 2sin(2u))cos(t) - sin(3u)sin(t)
+y = cos(u) - 2cos(2u)
+z = -(sin(u) + 2sin(2u))sin(t) - sin(3u)cos(t)
+u = 0 .. 2pi
+v = 0 .. 1
+hue = u/(2pi)
+size = 0.16
+count = 2500</code></pre>
+            <a
+              class="button"
+              href="https://ryanjosephkamp.github.io/splashery/#s=d.dVLLctswDPyXzRXxyHKUB2_9hvbUTg4QBTmsaZIlqThuRv_eIW25GWeiCwkKwGIX-w4OAQopWE4vEo8gvEpMxjuoDUFH4SzDtwyFtmnvb5un2_bxR9uqZqPWm9XDXfsThCQyQHVN99B0hOyPUO_YGTdAoZ-MzcaBYIYzUr6VPxPnAkLwoVxSqQhRkhSoHGX0xmKeCdb7XfnZs95to59q08BbASG_yF6gwFP2ILDW4vL_uGJ912wFak2Qt-DTFEswE2QcRecTrt9JOQvpkW0SQspR3Da_QDWre8LB933p0qy6mXCozL7M7zrCYKLoylA1cwlT8vb1E0qIwsNSk0KV8YQxRB-usns_OV2HuCvZmnOWuOTveeuKdl9O9UCIPJgpnRrMhHww6bqC934qEjar7iPrDYHfTILCETMhWaOvuQSfzJkwIR1EQi3sLpVvpTKwcZ-mNH_ljHjy4TnQ3voIhRu53_StVDdc6lPmfUhQv55ngua9RC7PRz4scgaTdW3VPhKit7ZONpiUucpYJChGCZarX_MUXeZKOMdJFodAwXknp-GL4q4kVy_Xd8JoeQsFEEL0v5e14xA5gBAlCBefrc-MytC4GesHurAj3DT93fik8VyXaxdNlpWsCYNkNrZ6sqzcn5Dewda8Xsbe-3JHysZafHRVwXc5eltMP8_zPw"
+              >Open it in the toy</a
+            >
+          </div>
+        </article>
+        <article class="card">
+          <img src="img/gallery-wave.jpg" alt="Wave, made of splats" />
+          <div class="body">
+            <h4>Wave</h4>
+            <p>
+              A flat sheet in u and v with ripples running out from the middle: sin(distance − t).
+            </p>
+            <pre><code>x = u
+y = 0.45sin(2sqrt(u^2 + v^2) - t)
+z = v
+u = -3 .. 3
+v = -3 .. 3
+hue = 0.58 - 0.07sin(2sqrt(u^2 + v^2) - t)
+size = 0.07
+count = 6000</code></pre>
+            <a
+              class="button"
+              href="https://ryanjosephkamp.github.io/splashery/#s=d.dVLLctswDPyX9RXxyPIjCW_9hvbUTg4QBTusaZElKctuRv_eIWW5mWSiCwkKwGIX-wb2HgrRW46vEq4gnCVE4zqoNUEH4STttwSFuqp3D9XzQ_30o65VtVar9fJxs_kJQhRpobbrXb1bEZK7Qr3haLoWCk1vbDIdCKa9IaUH-dNzyiAE5_Ml5gofJEqGGvgsGEeCde6Y_zSsj4fg-tLR80FASK9yEihwnxwIrLV06X9cgL5rtgK1IsjFu9iHHIwE2e9FpwnUHSWfmfGebRRCTEG6Q3qFqpY7wuCaJnepltuRMBRaX-Zvt4TWBNGFnqrGHMbo7PkTig_C7VwTfdFwwmiD8x-yG9d3ugyxydmaU5Iw55_40GXhvpzqkRC4NX2cGoyENJj4sYJPrs8SVsvte9ZrAl9MhMIVIyFaoz9y8S6aG2FCHER8KdzeKy-50rPpPk1p_soNcTLhLdDOugCFhezWTT254V4fE598hPr1MhI0nyRwfr7yMMvpTdKlVf1ECM7aMllrYuIiY5YgG8VbLmZNfegSF8Ip9DI7BAqd62QaPive5eRi5PJO2Fs-QAEEH9zvee0YAnsQgnjh7LPVjVEeGot9-UB3doRF1Wz2zxovZbl21mReyYrQSmJjiyfzyt2E9Aa25nwf--TyHTEZa_HeVRm_S8HZbPpxHP8B"
+              >Open it in the toy</a
+            >
+          </div>
+        </article>
+        <article class="card">
+          <img src="img/gallery-galaxy.jpg" alt="Spiral galaxy, made of splats" />
+          <div class="body">
+            <h4>Spiral galaxy</h4>
+            <p>
+              Two arms from floor(v) (0 or 1, half a turn apart), scattered at random, turning once.
+              Colors from r, g and b.
+            </p>
+            <pre><code>x = u^1.5 cos(pi floor(v) + 5u + 1.2(v - floor(v)) - t)
+y = 0.06(1 - u)sin(91v + 37u)
+z = u^1.5 sin(pi floor(v) + 5u + 1.2(v - floor(v)) - t)
+u = 0.02 .. 1
+v = 0 .. 2
+r = 0.55 + 0.45(1 - u)^2
+g = 0.62 + 0.33(1 - u)^2
+b = 1 - 0.45(1 - u)^3
+size = 0.006 + 0.012(1 - u)^2
+count = 10000
+spread = random</code></pre>
+            <a
+              class="button"
+              href="https://ryanjosephkamp.github.io/splashery/#s=d.dVJBctswDPzL5op4ZDlyEt76hvbUTg4QBTusaZIlqdhuRn_vkLbcjDPRhQQFYLGLfQeHAIUULKdXiScQ3iQm4x3UiqCjcJbhW4ZC27Tr--b5vn360baqWanlavH40P0EIYkMUMv147pbErI_Qb1jZ9wAhX40NhsHghkuSPle_oycCwjBh3JJpSJESVKgtmz5eMI0Eaz3u_KvZ73bRj_WnoG3AkJ-lb1AgcfsQWCtxeX_cYX6rtkK1JIgx-DTGEswEWSzEZ3PsH4n5SycN2yTEFKO4rb5FapZrAkH3_elS7PoJsKhEvsyv-sIg4miK0HVTCVMydu3TyghCg9zTQpVxTPGEH24ye796HQd4qFka85Z4py_560r0n051SMh8mDGdG4wEfLBpNsK3vuxSNgsuo-sVwQ-mgSFEyZCskbfcgk-mQthQjqIhFrYXSuPpTKwcZ-mNH_lgni24SXQ3voIhTtZr_pWqhuu9SnzPiSoXy8TQfNeIpfnEx9mOYPJurZqnwjRW1snG0zKXGUsEhSjBMvVrnmMLnMlnOMos0Og4LyT8_BFcVeSq5XrO2FjeQsFEEL0v-e14xA5gBAlCBefLS-MytC429QPdGVHuGv6h82zxktdrp01mVeyJAyS2djqybJyf0Z6B1vzdh1778sdKRtr8dFVBd_l6G0x_TRN_wA"
+              >Open it in the toy</a
+            >
+          </div>
+        </article>
+        <article class="card">
+          <img src="img/gallery-klein.jpg" alt="Klein bottle (figure eight), made of splats" />
+          <div class="body">
+            <h4>Klein bottle (figure eight)</h4>
+            <p>
+              The figure-eight Klein bottle: a figure-eight tube around a ring, with a half twist,
+              so it has no inside or outside.
+            </p>
+            <pre><code>x = (2 + cos(u/2)sin(v + t) - sin(u/2)sin(2v + 2t))cos(u)
+y = sin(u/2)sin(v + t) + cos(u/2)sin(2v + 2t)
+z = (2 + cos(u/2)sin(v + t) - sin(u/2)sin(2v + 2t))sin(u)
+u = 0 .. 2pi
+v = 0 .. 2pi
+hue = v/(2pi)
+size = 0.13
+count = 8000</code></pre>
+            <a
+              class="button"
+              href="https://ryanjosephkamp.github.io/splashery/#s=d.dVLBctowEP2Xx3XDGBMg0a3f0J7ayWEtL0RFSKokQ2jG_96RwDRDJr5IK-_u2_f2vYNDgEIKltOrxDMIR4nJeAe1JOgonKX_lqHQNu36oXl-aJ9-tK1qlmqxnG8e1z9BSCI91GbZbjYbQvZnqHfsjeuh0A3GZuNAMP0VKT_In4FzASH4UC6pVIQoSQrU3opxGEeC9X5ffnWs97voh9oy8E5AyK9yECjwkD0IrLW4_D-uSN81W4FaEOQt-DTEEowE2W5F5wuq30s5C-Ut2ySElKO4XX6FauZrwsl3XenSzFcj4VR5fZm_WhF6E0VXfqoZS5iSt8dPKCEK91NNClXEC0YffbjL7vzgdB3isWRrzlnilH_gnSvKfTnVhhC5N0O6NBgJ-WTSfQUf_FAkbOarj6yXBH4zCQpnjIRkjb7nEnwyV8KEdBIJtXB1q3wrlYGN-zSl-StXxIsLr4H21kcozGS97FqpbrjVp8yHkKB-vYwEzQeJXJ7PfJrkDCbr2qp9IkRvbZ2sNylzlbFIUIwSLFe35iG6zJVwjoNMDoGC804uwxfFXUmuTq7vhK3lHRRACNH_ntaOU-QAQpQgXHy2uDIqQ2O2rR_oxo4wa7rH7bPGS12unTSZVrIg9JLZ2OrJsnJ_QXoHW3O8jX3w5Y6UjbX46KqC73L0tph-HMd_"
+              >Open it in the toy</a
+            >
+          </div>
+        </article>
+        <article class="card">
+          <img src="img/gallery-circle.jpg" alt="Hello, circle, made of splats" />
+          <div class="body">
+            <h4>Hello, circle</h4>
+            <p>The smallest program: one loop of u makes a ring of 200 splats. No v, no t.</p>
+            <pre><code>x = cos(u)
+y = sin(u)
+z = 0
+u = 0 .. 2pi
+hue = u/(2pi)
+size = 0.06
+count = 200</code></pre>
+            <a
+              class="button"
+              href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPLbtswEPyVYHJJgY0ry7GT8NZvaE8tcqCotc2aFlk-YjuB_r1Yyg6CBNGFWmIfM7PDV-gQoJCC02nL8QTCM8dk_QC1IJjIOnP_I0OhbdrVbfN42z78alvVLNR8Mbu_u_8NQmLuoRaLefuwJGR_gnrFzg49FLpiXbYDCLY_T8q3_K_oLEMIPshPkooQObGMMiVlvwfhKIFPN-UbCCcpt8MUvEChAaHIeTWbXbXBCngogLAtDIXy_aYNVrLjdL2Zjm46kn2RrGbWrEAwvgwTTWmbQmQteDGOBOf9TgB22uw20ZdKLOgNg5C3vJc2umQPgjaGa59zXPn-NNox1JzAx-BTiRKMBF6v2eSJu9-xnCL8WrvEhJQjD5u8hWpmK8LBd510aWbLkXCo6n6Zv1wSehvZVJVVM0qYknfPn6acmU41KdRVTjP66MOH7M6XwVQQd5JtdM4cL_l7vRlkf1-iuidE3duSpgYjIR9s-lih99MqmtnyPesFQR9tgsIJIyE5az5yCT7ZM2FCOjCHWrh8qzxKZdB2-ISyeqFOnN7COTDeeTHPNa8WXcvVDW_1Ket9SFB_nkaC0XuOWq5P-nCRM9hsaqv2gRC9cxVZb1PWVUaRQIwSnK5vJpc4ZF0J51j44hAoDH7gCbwoPkhyfU_1nrB2-mzuEP3fy9pxiDqI_TmwFp_Nz4wENK7X9QO9sSNcN93d-tHgqS7XXTS5rGRO6Dlr66onZeV-mvQK7ezzG-y9l3-kbJ3De1fJ_CFH78T04zj-Bw"
+              >Open it in the toy</a
+            >
+          </div>
+        </article>
+        <article class="card">
+          <img src="img/gallery-spring.jpg" alt="Bouncing spring, made of splats" />
+          <div class="body">
+            <h4>Bouncing spring</h4>
+            <p>Three turns of a helix whose height breathes with sin(t).</p>
+            <pre><code>x = cos(u)
+y = (0.09 + 0.035sin(t))u - 0.9
+z = sin(u)
+u = 0 .. 6pi
+hue = 0.08 + u/(6pi)/3
+size = 0.07
+count = 1500</code></pre>
+            <a
+              class="button"
+              href="https://ryanjosephkamp.github.io/splashery/#s=d.dVNBcuIwEPyKq3OBinAExCTotm_YPe1WDsIeQIuwtJIcICn_fWtkQ6WSii_ySDPq6enWO7T3UIje6rincIHAK4VoXAu1FKgD6UTNjwSFhVysZnI9Wzz_WiyUXKr5snx6XP-GQCRqoKrFo0ByF6h3HEzbQGHTGZtMCwHTjDBpRv86nRhBwHn-iVzhA0VinLqLyR0hcObAxUk3hcAFChNZynVxX8hSLqto2kmaTrtiVshyDYE3BjDtkN5BQRZlWay8YU5QgMC-I94v5XNxX3QPk5U304clBMJwvhuWzbBE8zamP0Ggdl3L7c0rKfnQB9LMCX0vYJ07MImNrg-74LpM3usdQSDt6cj36C45COi6pnzRGOeZ_Ky1Jai5AJ29i13goBeg7ZbqNMzHHYhXVmarbSSBmAK1u7SHkuVK4OQ2G75FllUvcMoKfJtfVQKNCVRnJZTsOYzR2dcvKCPToSb6rPWA0QTnP2VvXNfWuYlHzq51ShSu-Ue9a1njb7t6Egi6MV0cLugF0snEzxX6OGghy-oj66WAPpsIhQt6gWhN_ZmLd9GMhAXiicjnwupWeeZKr037pctshow4PJYxqJ117J47Wi03C8puuNXHpI8-Qv156QVqfaSgefuiT9dxepPqfNXiWSA4a3NnjYlJ5zHyCNgo3ur8rlIX2qQz4RQ6ujoECq1raWieJ95ycn5zeV9ga_Xobh_c36vsOAXt2f_kSbPP5iMjbhp32_xB3NgJ3MnN43Zd4yWLa68zuUoyF2goaWOzJ1lyNyC9Q1vzemv76PgfMRlr8dFVjN-m4Cybvu_7_w"
+              >Open it in the toy</a
+            >
+          </div>
+        </article>
+        <article class="card">
+          <img src="img/gallery-heart.jpg" alt="Beating heart, made of splats" />
+          <div class="body">
+            <h4>Beating heart</h4>
+            <p>
+              A famous heart curve, filled in by v from the middle out, beating twice per cycle.
+            </p>
+            <pre><code>x = v(1 + 0.08sin(2t))16sin(u)^3
+y = v(1 + 0.08sin(2t))(13cos(u) - 5cos(2u) - 2cos(3u) - cos(4u))
+z = 0
+u = 0 .. 2pi
+v = 0 .. 1
+hue = 0.97 + 0.04v
+size = 0.35
+count = 4000</code></pre>
+            <a
+              class="button"
+              href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPBbtswDP2V4PXSYEzg2Ema6rZv2E4bOkCRmVSrYmmSnDQt_O8D5aQY2tUXkgbJRz4-vUKHAIUUnE6PHM8gHDkm6zuohmAi68zt1wyFuqrXs-p-Vm--17WqGrVo5ner6gcIibmFqjfNerkhZH-GesWT7VoobHvrsu1AsO0FKc_4T6-zgBB8ECdJRYicWKBMn7I_gPAMhePtYvJlUs2rTbLdbZ2n08VavH76qwHh_N-U20VjfLrtp5PZZCVeXdxa3Ka44i376RSEFyhUIPRiJ_P5pA5WiLiGCxAee5Zwfn83Ii2PIEQogLAfzXY0yb6Mqc0KBOP7TlZaVpVApBBZCw8YBoLz_kkW32rztI--L4QFvWcQ8iMfpI_uswdBG8Ol0SUuPH4z2jHUgsDPwac-SjAQeLdjk0dO_ROLlYPutEtMSDlyt8-PUNV8TTj57Va6VPPVQDiVq32av1oRWhvZlOupapAwJe-OH1Aum441KRSJjBht9OFd9tb3nSlDLCXb6Jw5XvMPet-JLj6d6o4QdWv7NDYYCPlk0_sKfRhvUc1X_27dEPSzTVA4YyAkZ837XYJP9rIwIZ2YQylcvVU-S2XQtvswZRFDQRzf2CUw3nlRzw2vm23NRQ1v9SnrQ0hQPx8GgtEHjlp-n_XpSmew2ZRW9YYQvXNlstamrAuNQoEIJThd3mLuY5d1WTjHnq8KgULnOx6HF8Y7SS7vtPwn7Jy-qDtE__t6dpyiDqJ_DqxFZ4vLRjI0bnblA71tR7iptsvdvcFDOa67cnI9yYLQctbWFU3Kyf2I9Art7PFt7IMXHylb5_CvqgS_y9E7Ef0wDH8B"
+              >Open it in the toy</a
+            >
+          </div>
+        </article>
+        <article class="card">
+          <img src="img/gallery-ribbon.jpg" alt="Rainbow ribbon, made of splats" />
+          <div class="body">
+            <h4>Rainbow ribbon</h4>
+            <p>
+              Color from r, g and b: three cosines a third of a turn apart make a rainbow along u.
+            </p>
+            <pre><code>x = u
+y = 0.4sin(2u - t)
+z = v
+u = -3 .. 3
+v = -0.4 .. 0.4
+r = 0.5 + 0.5cos(u)
+g = 0.5 + 0.5cos(u - 2)
+b = 0.5 + 0.5cos(u + 2)
+size = 0.05
+count = 4000</code></pre>
+            <a
+              class="button"
+              href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPLbtswEPwVY3JJkbUgS5aT8NZvaE8tcqCptcOGFlmSiuME-vdiKTsoEsQXa7mv2Z3ZN-gQoJCC0-mR4wmEZ47J-gGqJZjIOnP_PUOhqZvNsr5fNnc_m0bVrVq11W23-gVCYu6h7jdt124I2Z-g3vBkhx4K29G6bAcQbH_ulJf8d9RZmhB8kI8kGSFyYmllxpT9AYQXKIwgnKBQV-tkh-tmXCwX-RsIr1B4BmGEwrJdVNWiFfhi1dVa7Lpag_A4MhRAiKVKt7hZ1FVnfLoepcz-0-tiuWjEs_3suZk9yb5ycdYdCMaPg8Be13UtzhBZy6yYJoLz_kmG22rztI9-LEsJes8g5Ec-SB09Zg-CNoZLobNddvXDaMdQKwK_BJ_GKMZE4N2OTZ735p9Y_oW0nXaJCSlHHvb5EaquNoSj326lSl11E-FYmPkyvusIvY1sCkOqnsRMybvnT13Ok845KRQZzD366MOH6K0fB1NArCXa6Jw5XuIPej8I91-iuiVE3dsxzQUmQj7a9DFDH2Yu6qr7f-qWoF9sgsIJEyE5az7OEnyy54EJ6cgcSmL3nvkimUHb4RPKIobScb6js2G88yK5K96024aLGt7zU9aHkKB-P0wEow8ctTyf9PGyzmCzKaWaO0L0zhVkvU1ZlzXKCkQowelyb3mMQ9Zl4BxHvigECoMfeAYvGx8kuNxieSfsnN7PBxKi_3OhHceogxwNB9ais9V5IgGNq135gd6nI1zV2_Xu3uChkOsuO7lQsiL0nLV1RZNCuZ87vUE7-_wO--DlGylb5_C_qqT_kKN3Ivppmv4B"
+              >Open it in the toy</a
+            >
+          </div>
+        </article>
+        <article class="card">
+          <img src="img/gallery-fireworks.jpg" alt="Firework, made of splats" />
+          <div class="body">
+            <h4>Firework</h4>
+            <p>
+              Splats scattered at random over a sphere (v is the height, from −1 to 1) fly out,
+              droop and come back.
+            </p>
+            <pre><code>x = (0.2 + sin(t/2))sqrt(1 - v^2)cos(u)
+y = (0.2 + sin(t/2))v - 0.35sin(t/2)^2
+z = (0.2 + sin(t/2))sqrt(1 - v^2)sin(u)
+u = 0 .. 2pi
+v = -1 .. 1
+hue = u/(2pi)
+size = 0.018
+count = 3000
+spread = random</code></pre>
+            <a
+              class="button"
+              href="https://ryanjosephkamp.github.io/splashery/#s=d.hVPLbtswEPwVY3JxUFqh5dhJeOs3tKcWCUBTa5sNLTIk5UcC_XuxlG0ESYPqQi61z5nZN-gQoJCC02lD8QiBHcVkfQs1EzCRdKbme4ZCLevFRD5M6vufda3kTE1n1d28_gWBRNRALeRicfcgkP0R6g3Ptm2gsOysy7aFgG1OlfKEXjqduYiAD3xJHBEiJeJSpkvZbyFwgMJYVvXo2yjZdpxv6uvr9BLzeDqajHZP9bXxadxdQ-D4D8_daDKS1Wx-fniqIfD6v5T8WlJ2UJCjqhrVwTIuUJhM2Z5CYNMRFLqbcR0sO0coQGA9HMvhSPaVvWQlp_cQML5rebyZlJL_hkiaMYm6bfwWfS_gvH9mKJbaPK-j7wqEQa8JAnlDW06nu-whoI2hku5kF2R_GO0IaipAh-BTF9noBWi1IpMHlP0z8ckUr7RLJJBypHadN1CyWgjs_XLJWWQ17wX2hccv_edzgcZGMoVPJXs2U_Ju96nKad4hJoUimqFGE3344L30XWtKE7fsbXTOFM_-W71uWSlfdnUnEHVjuzQk6AXy3qaPEXo7MCKr-fupZwL6YBMUjugFkrPm4yzBJ3saWCDtiUIJnF8iDxwZtG0_dVk0USoOW3cyjHeeRXRFi9mypqKGS3zKehsS1O_HXsDoLUXNz0e9P8MZbDYlVX0vEL1zpbPGpqwLjAwBCyU4XbYzd7HNugycY0dnhUCh9S0NzTPiLTuXzS3vAiunTyIP0f8504591IHXgAJp1tn0NBE3jatV-SAu0wlcyeXt6sHgsZDrzpicKZkKNJS1dUWTTLkfKr1BO7u7tL31fEfK1jm8VxXXb3P0jkXf9_1f"
+              >Open it in the toy</a
+            >
+          </div>
+        </article>
+        <article class="card">
+          <img src="img/gallery-flower.jpg" alt="Opening flower, made of splats" />
+          <div class="body">
+            <h4>Opening flower</h4>
+            <p>Five petals from cos(5u), and a cup that opens and closes with sin(t/2).</p>
+            <pre><code>x = v(0.6 + 0.4cos(5u))cos(u)
+y = (0.15 + 0.6sin(t/2))v^2
+z = v(0.6 + 0.4cos(5u))sin(u)
+u = 0 .. 2pi
+v = 0 .. 1
+hue = 0.92 - 0.12v
+size = 0.035
+count = 5000</code></pre>
+            <a
+              class="button"
+              href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPBbuM4DP2V4PXSYFmP4tSZVrf9hp3TLLqAIjOptoqlkeSkaeF_X1BOikFnxxeZEh_JRz6-w8QIjRy9yc-cziAcOWUXBug1wSY2hfs_CzRa1W7u1ONd-_CtbbVa69W6-dqtv4OQmXvo9ap7eHwglHCGfseLG3pobEfnixtAcP0lU7njH6MpkoQQovxkQcTEmSWVHXMJBxBeoXG8Vc1m8cdCNfc25NtuXC7lHJcgnKFxq5pVV9832Q235Uu7XB7_aUF4-3-0eFX0CA21aJpFG50Qv5orEJ5HFrN5bBd3C9Ws2iMICRog7OdjOx_Zvc2uat2BYMM4CIdOKSWvMbER4pgmgg_hRZhujX3ZpzDWDkWzZxDKMx8kkBlLAMFYyzXQxa6N-8saz9ArAr_GkMckxkTg3Y5tmZsYXlhOmeDO-MyEXBIP-_IMrZoN4RS2W4mimm4inOqYfuvfdYTeJbZ1XFpNYuYc_PGXLBemMybHqok5R59C_OS9DeNgaxH34m1NKZyu_gezH0QIv63qKyGZ3o15DjARysnlzwhzmGehmu5n1muCeXUZGmdMhOyd_cwlhuwuhAn5xBwrsPtAvgoyGjf8UmVVQ804L9XFsMEHkc8Nb9bblqsaPvC5mEPM0H8_TQRrDpyMXJ_N6drO6IqtodoHQgre18p6l4upbZQWiFCiN3X5ypiGYirhkka-KgQaQxh4Ll46PohzXcx6T9h5c5F3TOHf69hxSibKAnBkIzpbXRhJ0bjZ1Q_0wY5wo7b3u0eLpzpcf-3JdSQrQs_FOF81KSMPc6Z3GO-OH2UfgvwjF-c9flaV5B9KCl5EP03Tfw"
+              >Open it in the toy</a
+            >
+          </div>
+        </article>
+        <article class="card">
+          <img src="img/gallery-vase.jpg" alt="Vase (no t), made of splats" />
+          <div class="body">
+            <h4>Vase (no t)</h4>
+            <p>
+              A shape without t stands still, so a tap draws its splats again one by one, in the
+              order they are made.
+            </p>
+            <pre><code>x = (0.5 + 0.2sin(3v))cos(u)
+y = v
+z = (0.5 + 0.2sin(3v))sin(u)
+u = 0 .. 2pi
+v = 0 .. 2.2
+hue = 0.55 + 0.05sin(12u)
+size = 0.045
+count = 4000</code></pre>
+            <a
+              class="button"
+              href="https://ryanjosephkamp.github.io/splashery/#s=d.dVPLbtswEPwVY3JJUEagZSsP3voN7alFDhS1tlnTIktSfiTQvxdL2UaQNL5QS-_s7uwM36BDgEIKTqcNxRME9hST9T3UQsBE0pm67xkKtawf7uXzff30s66VXKj5onpslr8gkIg6qHo-r5tGIPsT1Bu2tu-g0A7WZdtDwHbnTvme_g46cxMBH_gjMSJESsStzJCy30HgCIVbWTWzbzNZ1cn2t4v93Z3x6Xa4g8AJCnsIvP43jc-SNkBBzqpqVgfLBK9hVUNgMxBfVM0Elw3j5nVBRihAYD0d7XQk-zoh5LKBgPFDz0MvpZT8b4ikmSnGUcB5v2VqrTbbdfRDWUnQa4JA3tCOC-khewhoY6gUOsdlUz-MdgQ1F6Bj8GmIHIwCtFqRydPW_Jb4ZMlW2iUSSDlSv84bKFk9CBx823IVWTWjwKHo8mU-K9jZSKboo-TIYUre7T91OTOdMCkUE0w9uujDh-zWD70pQyw52-icKV7yd3rds_JfTvUoEHVnhzQVGAXywaaPCL2btJBV8571QkAfbYLCCaNActZ85BJ8smfCAulAFAqwuSKPjAza9p-mLG4oHadXdA6Md57tc0MPi7am4oYrPmW9Cwnq98soYPSOoubrkz5c1hlsNqVU_SQQvXNlss6mrMsaeQVslOB0eW15iH3WhXCOA10cAoXe9zQNzxvvObm8xHIvsHL6bO8Q_Z-L7DhEHfgBUCDNPpufGfHQuFmVH8SVncCNbJerZ4OXIq677OQiyVygo6ytK55kyf3U6Q3a2f117J3nb6RsncN7V3H_Pkfv2PTjOP4D"
+              >Open it in the toy</a
+            >
+          </div>
+        </article>
+      </div>
+      <div class="tip">
+        <p>
+          <b>Things to try.</b> Change a number and see what moves. Swap <code>cos</code> and
+          <code>sin</code>. Put <var>t</var> somewhere new. Make <code>count</code> small and
+          <code>size</code> big to see the single splats. Try <code>spread = random</code> on a
+          surface. Give a sphere a <code>hue</code> of <code>floor(8v/pi)/8</code>.
+        </p>
+      </div>
+
+      <!-- ---- Later ---- -->
+      <h2 id="later">What comes later: Code a toy</h2>
+      <p>
+        The splat equation language can place and color splats, but it can't give a toy parts,
+        controls or a tap of its own. For that you need a full recipe (Level 2). Splashery's plan
+        includes a <b>Toy Workshop</b> where you will be able to write one: a <b>Code a toy</b>
+        editor that builds and shows your recipe as you type.
+      </p>
+      <p>
+        Sharing those toys will work differently from sharing equations. A recipe is real
+        JavaScript, and a page that ran a stranger's JavaScript straight from a link could be made
+        to do things its visitor never agreed to. So a coded toy will be shared as a
+        <b>submission</b>: it is checked and read by a person before it joins the shelf, the way
+        every toy in Splashery is today. Equations stay the quick way to share; recipes are the deep
+        one.
+      </p>
+      <p>
+        Until then, everything in Level 2 is in the source code, which is open under the MIT
+        license:
+        <a href="https://github.com/ryanjosephkamp/splashery">github.com/ryanjosephkamp/splashery</a
+        >.
+      </p>
+
+      <!-- ---- Quick reference ---- -->
+      <h2 id="card">Quick reference</h2>
+      <h3>One splat</h3>
+      <p class="math">
+        <var>G</var>(<var>p</var>) = exp(−½ (<var>p</var> − <var>μ</var>)<sup>T</sup> <var>Σ</var
+        ><sup>−1</sup> (<var>p</var> − <var>μ</var>)), &nbsp; <var>Σ</var> = <var>R</var>
+        <var>S</var> <var>S</var><sup>T</sup> <var>R</var><sup>T</sup>
+      </p>
+      <p class="math">
+        <var>Σ′</var> = <var>J</var> <var>W</var> <var>Σ</var> <var>W</var><sup>T</sup> <var>J</var
+        ><sup>T</sup>, &nbsp; <var>C</var> ← <var>a</var> <var>c</var> + (1 − <var>a</var>)
+        <var>C</var> (back to front)
+      </p>
+      <h3>A splat program</h3>
+      <pre><code>x = …        y = …        z = …        # in u, v and t (y is up)
+u = 0 .. 2pi                           # ranges: numbers only
+v = 0 .. pi                            # default 0 .. 1
+hue = …                                # 0 red, 1/3 green, 2/3 blue
+r = …   g = …   b = …                  # or colors from 0 to 1
+size = 0.05                            # about the bell's σ
+count = 4000                           # 100 to 10,000
+spread = grid                          # or random</code></pre>
+      <p>
+        <b>Functions</b>: sin, cos, tan, asin, acos, atan, sinh, cosh, tanh, exp, log (ln), log10,
+        sqrt, abs, floor, min, max. <b>Constants</b>: pi, e. <b>Time</b>: <var>t</var> runs from 0
+        to 2π per tap. At most 120 characters a field.
+      </p>
+
+      <footer>
+        <p>
+          The Tinkerer's Manual, September 28, 2026. Part of
+          <a href="https://ryanjosephkamp.github.io/splashery/">Splashery</a>, a toy box of 3D
+          Gaussian splats that runs in your browser. Every picture here was made with Splashery
+          itself.
+        </p>
+        <p class="no-print"><a href="../">Back to Splashery</a></p>
+      </footer>
+    </main>
+  </body>
+</html>
