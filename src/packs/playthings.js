@@ -1950,7 +1950,7 @@ export const RECIPES = {
 
   kite: {
     alive: true,
-    density: 0.6,
+    density: 0.3,
     options: [
       { key: "c1", label: "Colour 1", type: "color", default: "#e8413c" },
       { key: "c2", label: "Colour 2", type: "color", default: "#f7c948" },
@@ -2050,6 +2050,7 @@ export const RECIPES = {
             jitter: 0.015,
             part: kite,
             weight: 2.5,
+            size: 1.5,
             flat: 0.2,
             kind: "wave",
             params: [0.07 * tt, 0],
@@ -2105,7 +2106,7 @@ export const RECIPES = {
 
   "paper-plane": {
     alive: true,
-    density: 0.8,
+    density: 0.5,
     options: [
       { key: "color", label: "Paper", type: "color", default: "#cfe6f7" },
       { key: "lines", label: "Lined paper", type: "switch", default: true },
@@ -2172,7 +2173,7 @@ export const RECIPES = {
 
   "origami-crane": {
     alive: true,
-    density: 0.6,
+    density: 0.3,
     options: [{ key: "color", label: "Paper", type: "color", default: "#e2474f" }],
     controls: [{ key: "flap", label: "Flap", type: "pulse", ease: 1.8 }],
     action: { key: "flap", label: "Flap the wings" },
