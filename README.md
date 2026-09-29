@@ -239,9 +239,9 @@ Captured toys use their lighter file only at the low tier. While you drag the vi
 frames take more than about 24 ms, the canvas drops to a lower resolution, and the first still frame
 is drawn sharp again; a toy playing on its own keeps its full resolution. `?sharp=0` puts back the
 renderer from before September 29, 2026 (a cap of 2 on the mid and high tiers, and the drop whenever
-anything moves). If frames stay slow even then, an Auto tier steps down one level for the next toy. Detail is
-kept in this browser only (in `localStorage`); it is never part of a link or a scene file, so a
-shared link cannot force a heavy load on someone's phone.
+anything moves). If frames stay slow even then, an Auto tier steps down one level for the next toy.
+Detail is kept in this browser only (in `localStorage`); it is never part of a link or a scene file,
+so a shared link cannot force a heavy load on someone's phone.
 
 ## Sharing
 
