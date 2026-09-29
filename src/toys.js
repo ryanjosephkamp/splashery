@@ -3146,6 +3146,15 @@ export const TOYS = [
     tags: "cipher code secret message rotors plugboard lamps keyboard cryptography bletchley park turing history",
     camera: { yaw: 0.25, pitch: 0.55, roll: 0, distance: 3 },
   },
+  {
+    id: "bombe",
+    label: "Turing-Welchman Bombe",
+    category: "computing",
+    kind: "kit",
+    pack: "computing-history",
+    tags: "bombe bletchley park alan turing gordon welchman codebreaking enigma drums crib menu history",
+    camera: { yaw: 0.3, pitch: 0.12, roll: 0, distance: 3.5 },
+  },
   // ---- End of pack: computing-history ----
   // ---- Pack: pictures ----
   {

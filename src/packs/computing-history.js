@@ -1255,6 +1255,193 @@ function enCommit(data) {
   data.run = null;
 }
 
+// ---- The Turing-Welchman Bombe --------------------------------------------------------
+
+// One bank of the Bombe: 12 sets of three drums, one set for each letter of
+// the crib (the words the codebreakers guessed were in the message). Each
+// set stands for an Enigma at the crib letter's place in the message. The
+// drums run through the rotor settings like an odometer; at each setting
+// the machine checks the crib against the coded text, and it stops on the
+// setting where they agree. Simplified: the real Bombe also worked out the
+// plugboard from loops in its menu (with Welchman's diagonal board); here
+// the plugboard is taken as known (the Enigma toy's own: AR, GK, OX), and
+// the fast drums are shown turning far slower than the real ones.
+const BO = { sets: 12, E: 8, r: 0.095, dx: 0.19, rows: [1.58, 1.34, 1.1], front: 0.37 };
+const BO_DEFAULT = "WEATHERREPORT";
+const BO_DRUM_COLORS = ["#b8332a", "#7a2233", "#2f7a3b"];
+const BO_SHOWN = { label: "WEATHERREPORT" };
+const boX = (c) => (c - (BO.sets - 1) / 2) * BO.dx - 0.08;
+
+// The secret setting the message was sent at (from the message, so a link
+// always shows the same search), the coded text, the crib and the search.
+function bombeCase(message) {
+  const msg = enClean(message) || BO_DEFAULT;
+  let h = 2166136261;
+  for (const ch of msg) h = Math.imul(h ^ ch.charCodeAt(0), 16777619) >>> 0;
+  const secret = [1 + (h % 2), (h >>> 3) % 26, (h >>> 9) % 26];
+  const mach = enigmaMachine();
+  const coded = mach.type(msg, secret).map((e) => AZ[e.lamp]).join("");
+  const crib = msg.slice(0, Math.min(BO.sets, msg.length));
+  const found = bombeSearch(mach, crib, coded);
+  const plain = found ? mach.type(coded, found.pos).map((e) => AZ[e.lamp]).join("") : "";
+  return { msg, secret, coded, crib, found, plain };
+}
+// Tries every setting from AAA on, the fast rotor first, and stops at the
+// first where the crib enciphers to the start of the coded text.
+function bombeSearch(mach, crib, coded) {
+  for (let i = 0; i < 26 * 26 * 26; i++) {
+    const pos = [Math.floor(i / 676), Math.floor(i / 26) % 26, i % 26];
+    const out = mach.type(crib, pos);
+    if (out.every((e, j) => AZ[e.lamp] === coded[j])) return { i, pos };
+  }
+  return null;
+}
+
+// Drum rows: the top row is the fast rotor, then the middle, then the slow.
+// Each set's drums stand at the setting plus its crib letter's place.
+function boPose(data, s) {
+  const N = data.found ? data.found.i : 0;
+  if (s < 0) {
+    const i = data.done ? N : 0;
+    return { i, top: i % 26, lamp: data.done ? 1 : 0, shown: data.done ? [1, 1] : [0, 0], reset: 0 }; // prettier-ignore
+  }
+  // Set back to the start (if a search has run), spin, stop, read out.
+  const back = data.done ? ease(band(s, 0, 0.45)) : 1;
+  const u = ease(band(s, 0.5, 4.3));
+  let i = Math.floor(N * u);
+  let top = (N % 26) + 26 * 12 * u - 26 * 12; // turns 12 times, landing on its letter
+  if (data.done && back < 1) {
+    i = Math.round(N * (1 - back));
+    top = (N % 26) * (1 - back);
+  }
+  const lamp = s > 4.35 ? 1 : 0;
+  return { i, top, lamp, shown: [band(s, 4.7, 6.2), band(s, 4.45, 4.6)] }; // prettier-ignore
+}
+
+function buildBombe(k, o) {
+  const cs = bombeCase(o.message);
+  BO_SHOWN.label = cs.msg;
+  k.data = { ...cs, done: false, m: {}, run: false };
+  const W = 2.5;
+  const H = 2.05;
+  const D = 0.74;
+  const fz = BO.front;
+  // The cabinet: a dark painted steel case on a plinth, with brass edges.
+  block(k, [W, H, D], [0, H / 2, 0], (c) => keep(lit(mix("#2b2f33", "#33383d", 0.5 + 0.5 * c.noise(c.p[0] * 40, c.p[1] * 40, c.p[2] * 40)), c.n, { amb: 0.72, dif: 0.35, spec: 0.12 }))); // prettier-ignore
+  block(k, [W + 0.08, 0.08, D + 0.08], [0, 0.04, 0], (c) => keep(lit("#1d2023", c.n, { amb: 0.75 })));
+  block(k, [W - 0.1, 0.9, 0.012], [-0.08 + 0.02, 1.34, fz + 0.006], (c) => keep(lit("#1f2226", c.n, { amb: 0.8, dif: 0.25 }))); // prettier-ignore
+  // The drums (tokens 0..35): a coloured drum with a cream letter ring, a
+  // steel hub and a white index notch, turning about its own axle.
+  for (let set = 0; set < BO.sets; set++) {
+    const x = boX(set);
+    BO.rows.forEach((y, row) => {
+      const tok = { kind: "token", params: [set * 3 + row, 0] };
+      const z = fz + 0.05;
+      k.add(evenCylinder(BO.r, BO.r, 0.07, true), {
+        pos: [x, y, z],
+        rot: [90, 0, 0],
+        even: true,
+        weight: 1.3,
+        flat: 0.25,
+        pattern: false,
+        ...tok,
+        color: (c) => {
+          const rr = Math.hypot(c.p[0] - x, c.p[1] - y);
+          const face = c.s.cap === "top";
+          let col = BO_DRUM_COLORS[row];
+          if (face && rr > BO.r * 0.62 && rr < BO.r * 0.94) {
+            // The letter ring: a tick for each of the 26 letters, and a red
+            // mark at A, so the turn reads at a glance.
+            const ang = Math.atan2(c.p[1] - y, c.p[0] - x);
+            const f = ((Math.PI / 2 - ang) / TAU) * 26;
+            const d = Math.abs(f - Math.round(f));
+            const isA = ((Math.round(f) % 26) + 26) % 26 === 0;
+            col = rr > BO.r * 0.7 && d < (isA ? 0.3 : 0.12) ? (isA ? "#c21d12" : "#3a332a") : "#e9dfc6";
+          }
+          if (face && rr < BO.r * 0.22) col = STEEL;
+          return keep(lit(col, face ? [0, 0, 1] : c.n, { amb: 0.66, dif: 0.4, spec: 0.35 }));
+        },
+      });
+      // The notch at the top of the drum face shows which letter is set.
+      k.add(evenBox(0.012, 0.03, 0.01), { pos: [x, y + BO.r * 0.45, z + 0.04], even: true, weight: 3, pattern: false, color: () => keep("#ffffff"), ...tok }); // prettier-ignore
+    });
+    // The menu above each set: its crib letter over its coded letter.
+    const used = set < cs.crib.length;
+    text(k, used ? cs.crib[set] : "-", [x, BO.rows[0] + 0.28, fz + 0.02], 0.013, used ? "#f1e6c4" : "#5a6068", { weight: 12 }); // prettier-ignore
+    text(k, used ? cs.coded[set] : "-", [x, BO.rows[0] + 0.18, fz + 0.02], 0.013, used ? "#ff8d7a" : "#5a6068", { weight: 12 }); // prettier-ignore
+  }
+  text(k, "CRIB", [boX(0) - 0.17, BO.rows[0] + 0.28, fz + 0.02], 0.007, "#b9b09a", { weight: 8 });
+  text(k, "CODED", [boX(0) - 0.17, BO.rows[0] + 0.18, fz + 0.02], 0.007, "#b9b09a", { weight: 8 });
+  // The readout board below the drums: the coded text, and, when it stops,
+  // the setting found (fade channel 1) and the plain text (channel 0).
+  const ry = 0.62;
+  block(k, [2.1, 0.46, 0.02], [-0.08, ry, fz + 0.01], (c) => keep(lit("#efe6cc", c.n, { amb: 0.85, dif: 0.2, spec: 0 }))); // prettier-ignore
+  const px = 0.0155;
+  const lx = -0.08 - 1.0;
+  const line = (label, str, y, color, ch) => {
+    text(k, label, [lx + 0.03, y, fz + 0.035], 0.008, "#7c6a52", { weight: 8, align: "left" });
+    [...str].forEach((l, i) => {
+      const opts = ch === undefined ? {} : { kind: "fade", params: [(i + 0.5) / str.length, -0.4 / str.length], channel: ch }; // prettier-ignore
+      text(k, l, [lx + 0.42 + i * px * 6.4, y, fz + 0.035], px, color, { weight: 10, ...opts });
+    });
+  };
+  line("CODED", cs.coded, ry + 0.14, "#8a1d1d");
+  line("SETTING", cs.found ? cs.found.pos.map((p) => AZ[p]).join(" ") : "", ry, "#1f1c18", 1);
+  line("PLAIN", cs.plain, ry - 0.14, "#1d4f8a", 0);
+  // The stop lamp on the right side of the cabinet (a part that lights).
+  const lp = [W / 2 + 0.02, 1.62, 0.12];
+  k.add(evenCylinder(0.06, 0.06, 0.04, true), { pos: [lp[0], lp[1], lp[2]], rot: [0, 0, 90], even: true, weight: 1.5, pattern: false, color: brass }); // prettier-ignore
+  k.add(k.sphere(0.06), { pos: [lp[0] + 0.03, lp[1], lp[2]], scale: [0.6, 1, 1], even: true, weight: 1.5, pattern: false, color: (c) => keep(lit("#5b2a22", c.n, { amb: 0.7, spec: 0.5 })) }); // prettier-ignore
+  const lampPart = k.part("lamp", { pivot: lp });
+  k.add(k.sphere(0.064), { pos: [lp[0] + 0.032, lp[1], lp[2]], scale: [0.62, 1, 1], even: true, weight: 1.5, part: lampPart, pattern: false, color: (c) => keep(mix("#ffd76a", "#fff6d8", Math.max(0, c.n[0]) ** 2)) }); // prettier-ignore
+  // A lamp in the same place on the front, so the stop reads from the
+  // front too.
+  const fl = [W / 2 - 0.12, 1.84, fz + 0.01];
+  k.add(evenCylinder(0.045, 0.045, 0.02, true), { pos: fl, rot: [90, 0, 0], even: true, weight: 1.5, pattern: false, color: brass }); // prettier-ignore
+  k.add(k.sphere(0.042), { pos: [fl[0], fl[1], fl[2] + 0.02], scale: [1, 1, 0.6], even: true, weight: 1.5, part: lampPart, pattern: false, color: (c) => keep(mix("#ffd76a", "#fff6d8", Math.max(0, c.n[2]) ** 2)) }); // prettier-ignore
+  text(k, "STOP", [fl[0], fl[1] - 0.08, fz + 0.02], 0.007, "#b9b09a", { weight: 8 });
+}
+
+function driveBombe(t, c, out, info) {
+  const data = info?.data;
+  if (!data) return;
+  const m = data.m;
+  const s = since(c.go, BO.E);
+  if (s >= 0 && (m.lastS === undefined || m.lastS < 0 || s < m.lastS)) {
+    if (data.run) data.done = true;
+    data.run = true;
+    m.cue = -1;
+  }
+  if (data.run && (s < 0 || s >= BO.E - 0.3)) {
+    data.run = false;
+    data.done = !!data.found;
+  }
+  m.lastS = s;
+  const pose = boPose(data, data.run ? s : -1);
+  const fast = data.run ? pose.top : pose.i % 26;
+  const mid = Math.floor(pose.i / 26) % 26;
+  const slow = Math.floor(pose.i / 676);
+  out.tokens = [];
+  for (let set = 0; set < BO.sets; set++) {
+    const vals = [fast + set, mid, slow];
+    BO.rows.forEach((y, row) => {
+      out.tokens[set * 3 + row] = { base: [boX(set), y, BO.front + 0.05], quat: quatZ((-vals[row] * TAU) / 26), visible: 1 }; // prettier-ignore
+    });
+  }
+  out.parts.lamp = { visible: pose.lamp };
+  out.morph = [pose.shown[0], pose.shown[1], 0, 0];
+  // Sounds: a dense clatter of drums and the whirr of the motor while it
+  // searches, then a sharp stop and a bell when a setting is found.
+  if (data.run && s >= 0) {
+    cuesAt(m, "cue", s, [
+      [0.45, { voice: "engine", f: 70, decay: 3.8, vol: 0.45 }],
+      [0.5, { voice: "clatter", f: 900, n: 30, rate: 8, decay: 3.6, vol: 0.4 }],
+      [4.3, { voice: "crack", f: 1800, decay: 0.4, vol: 0.8 }],
+      [4.35, { voice: "bell", f: "C6", decay: 1.6, vol: 0.8 }],
+    ], out); // prettier-ignore
+  }
+}
+
 // ---- Recipes -------------------------------------------------------------------------
 
 export const RECIPES = {
@@ -1315,10 +1502,33 @@ export const RECIPES = {
     drive: driveEnigma,
     build: buildEnigma,
   },
+  bombe: {
+    options: [
+      // The message to break, as typed (set from the panel, not shown).
+      { key: "message", label: "Message to break", type: "text", default: BO_DEFAULT, hidden: true },
+    ],
+    input: {
+      title: "A message to break",
+      placeholder: "WEATHERREPORT",
+      button: "Code it and search",
+      note: "Type a message of up to 20 letters. The Enigma codes it at a setting the Bombe isn't told; its first 12 letters are the crib, the words the codebreakers guessed. The Bombe searches every rotor setting for the one where the crib fits, then reads the whole message.",
+      read(text) {
+        const msg = enClean(text);
+        if (msg.length < 4) throw new Error("Type a message of at least 4 letters, like WEATHERREPORT.");
+        return { message: msg };
+      },
+      shown: () => BO_SHOWN.label,
+    },
+    controls: [{ key: "go", label: "Search", type: "pulse", ease: BO.E }],
+    action: { key: "go", label: "Start the search" },
+    drive: driveBombe,
+    build: buildBombe,
+  },
 };
 
 // Exposed for the lane's tests.
 export const DIFFERENCE = { read: deRead, setup: deSetup, turn: deTurn, digits: deDigits, DE };
 export const ENIGMA = { machine: enigmaMachine, clean: enClean, AZ };
+export const BOMBE = { crack: bombeCase, search: bombeSearch };
 export const TURING = { PROGRAMS: TM_PROGRAMS, run: tmRun, tape: tmTape, readBits: tmReadBits, rows: tmRows, times: tmTimes }; // prettier-ignore
 export { clamp, quatY, quatZ };
