@@ -61,10 +61,12 @@ test("the song plays the opening of Twinkle, Twinkle in order", () => {
   const memo = rest();
   const tap = { n: 1, key: "play", pick: null, time: 5, point: null };
   const notes = [];
+  let finite = true;
   for (let t = 5; t < 14; t += 1 / 60) {
     const out = drive(memo, tap, t, memo);
     for (const cue of out.cues) notes.push(cue.f);
-    for (const tk of out.tokens) for (const v of tk?.quat || []) expect(Number.isFinite(v)).toBe(true); // prettier-ignore
+    for (const tk of out.tokens) for (const v of tk?.quat || []) finite &&= Number.isFinite(v);
   }
+  expect(finite).toBe(true);
   expect(notes.join(" ")).toBe("C5 C5 G5 G5 A5 A5 G5 F5 F5 E5 E5 D5 D5 C5");
 });
