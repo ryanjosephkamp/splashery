@@ -314,16 +314,19 @@ async function record(scene) {
   } else if (scene === "frame-order") {
     await open("picture-frame", { frame: "digital" });
     // The list in the Toy tab: the first photo moved down, twice.
+    // (On a phone: More opens the panel, then the Toy tab.)
     await run(() => {
+      document.getElementById("sheet-toggle")?.click();
       window.__splashery.app.ui.showTab("toy");
-      document.querySelector("#toy-media-list")?.scrollIntoView({ block: "center" });
     });
+    await page.waitForTimeout(600);
+    await run(() => document.querySelector("#toy-media-list")?.scrollIntoView({ block: "center" }));
     await hold(1500);
     for (let i = 0; i < 2; i++) {
       await run((i) => document.querySelectorAll("#toy-media-list li")[i].querySelectorAll("button")[1].click(), i); // prettier-ignore
       await hold(1100);
     }
-    await run(() => window.__splashery.app.ui.collapseSheet?.());
+    await run(() => document.getElementById("sheet-toggle")?.click()); // Done
     await play(10);
     // Order: Random.
     await open("picture-frame", { frame: "digital", order: "random" });
