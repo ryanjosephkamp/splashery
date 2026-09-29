@@ -6,10 +6,10 @@
 // planner (lod.js) keeps under it by coarsening the farthest chunks first.
 
 export const WORLD_BUDGETS = {
-  low: { splats: 220e3, density: 0.5, near: 14, mid: 34, props: 0.5, grass: 0 },
-  mid: { splats: 380e3, density: 0.75, near: 18, mid: 44, props: 0.75, grass: 0.6 },
-  high: { splats: 650e3, density: 1, near: 24, mid: 56, props: 1, grass: 1 },
-  max: { splats: 1e6, density: 1.3, near: 30, mid: 70, props: 1.25, grass: 1.3 },
+  low: { splats: 300e3, density: 0.5, near: 7, mid: 30, props: 0.6, grass: 0.4 },
+  mid: { splats: 550e3, density: 0.75, near: 9, mid: 38, props: 0.9, grass: 0.7 },
+  high: { splats: 900e3, density: 1, near: 12, mid: 50, props: 1.2, grass: 1 },
+  max: { splats: 1.4e6, density: 1.3, near: 15, mid: 64, props: 1.5, grass: 1.3 },
 };
 
 export const TIERS = Object.keys(WORLD_BUDGETS);

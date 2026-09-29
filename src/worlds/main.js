@@ -111,6 +111,7 @@ class Page {
     $("hud").hidden = false;
     this.world.overview = false;
     this.world.camera.snap(this.world.focus(), this.world.char.facing);
+    this.world.catchUp();
     $("world").focus();
     this.showHint(true);
   }
@@ -266,9 +267,7 @@ class Page {
       },
       // Builds every chunk the level of detail wants now, without drawing.
       catchUp: () => {
-        world.plan(true);
-        while (world.queue.length) world.buildQueued(8);
-        world.applyPlan();
+        world.catchUp();
         return world.stats();
       },
       card: () => ($("card").hidden ? null : $("card").dataset.landmark),

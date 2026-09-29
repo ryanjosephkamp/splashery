@@ -100,7 +100,7 @@ collision and the camera read it.
 | ------------- | --------------------------------------------------------------------------------- | ----------- |
 | `shape`       | `"island"` (land in the sea) or `"flat"` (level ground at `base`, plus hills)     | `"island"`  |
 | `size`        | The side of the square the world covers, in meters (chunks cover it; sea beyond)  | 160         |
-| `chunk`       | The side of a chunk, in meters                                                    | 16          |
+| `chunk`       | The side of a chunk, in meters                                                    | 8           |
 | `center`      | The island's middle, `[x, z]`                                                     | `[0, 0]`    |
 | `radius`      | The island's radius to the shore: one number, or `[east-west, north-south]`       | 36          |
 | `height`      | How high the inland rises above the beach                                         | 8           |
@@ -230,11 +230,13 @@ Node.
 
 ### The character
 
-Nine joints (`JOINTS` in `character.js`): the hips, the torso, the head, two arms, two thighs and
-two shins. Each part is a kit-built splat cloud around its own pivot, drawn by its own entity, and a
-joint only turns it: legs, arms and head swing as solid pieces, and nothing bends or stretches. The
-gait's phase moves with the distance walked, so the feet keep pace with the ground at any speed.
-Walking is 1.9 m/s and running (Shift, or the stick pushed all the way) 4.6 m/s.
+Eleven joints (`JOINTS` in `character.js`): the hips, the torso, the head, two upper arms, two
+forearms (elbows), two thighs and two shins (knees). The head has a face (eyes, brows, nose, mouth,
+ears) and hair; the clothes have a collar, short sleeves, a belt and shoes. Each part is a kit-built
+splat cloud around its own pivot, drawn by its own entity, and a joint only turns it: legs, arms and
+head swing as solid pieces, and nothing bends or stretches. The gait's phase moves with the distance
+walked, so the feet keep pace with the ground at any speed. Walking is 1.9 m/s and running (Shift,
+or the stick pushed all the way) 4.6 m/s.
 
 ### The camera
 
@@ -250,8 +252,9 @@ PlayCanvas 2.22.3 has its own level of detail and splat budget (`scene.gsplat.sp
 is built on the device from recipes, so it keeps its own levels and uses the engine's unified splat
 mode (on by default) to draw and sort every chunk, prop and body part together.
 
-- Ground and water chunks have four levels. Level 0 (near) has about 48 splats per square meter plus
-  grass blades; each level after has about a quarter as many, larger splats.
+- Ground and water chunks have five levels. Level 0 (near) has about 110 splats per square meter
+  plus 110 grass blades (both times the tier's factors); each level after has about a quarter as
+  many, larger splats. Chunks are 8 m square, so the rings of detail are fine-grained.
 - Props and signs have three levels: all their splats, one in 4 and one in 16 (each larger).
 - The sky, the open sea and the character are always drawn in full.
 - The planner (`lod.js`) gives each chunk and prop a level from its distance to the point between
@@ -265,10 +268,15 @@ The tier comes from the same rules as the toy player's (`?profile=low|mid|high|m
 
 | Tier   | Budget    | Ground density | Near / middle distance | Prop detail | Grass |
 | ------ | --------- | -------------- | ---------------------- | ----------- | ----- |
-| `low`  | 220,000   | 0.5            | 14 m / 34 m            | 0.5         | none  |
-| `mid`  | 380,000   | 0.75           | 18 m / 44 m            | 0.75        | 0.6   |
-| `high` | 650,000   | 1              | 24 m / 56 m            | 1           | 1     |
-| `max`  | 1,000,000 | 1.3            | 30 m / 70 m            | 1.25        | 1.3   |
+| `low`  | 300,000   | 0.5            | 7 m / 30 m             | 0.6         | 0.4   |
+| `mid`  | 550,000   | 0.75           | 9 m / 38 m             | 0.9         | 0.7   |
+| `high` | 900,000   | 1              | 12 m / 50 m            | 1.2         | 1     |
+| `max`  | 1,400,000 | 1.3            | 15 m / 64 m            | 1.5         | 1.3   |
+
+The ground is at level 0 within the near distance, 1 within 2.2 times it, 2 within the middle
+distance, 3 within 2.2 times that, and 4 beyond. Props (whose detail matters more) are at level 0
+within 0.6 times the middle distance, 1 within 1.5 times it, and 2 beyond; a prop taller than 4 m
+counts its distances in units of its height over 4.
 
 Measured on the Test island (the test "each tier stays within its splat budget" prints them): see
 the Worlds lane's PR for the numbers. Our test browser draws in software, so frame times there are

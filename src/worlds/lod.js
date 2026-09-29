@@ -49,12 +49,12 @@ function assign(items, cam, tier, scale) {
       // Big props keep their detail farther away.
       const big = Math.max(1, it.size / 4);
       const dd = d / big;
-      lv = dd < near * 0.7 ? 0 : dd < mid * 1.1 ? 1 : 2;
+      lv = dd < mid * 0.6 ? 0 : dd < mid * 1.5 ? 1 : 2;
       if (dd > mid * 4) lv = -1;
       // Small things (flowers, pebbles) would only be specks far away.
       if (it.size < 1 && d > mid) lv = -1;
     } else {
-      lv = d < near ? 0 : d < mid ? 1 : d < mid * 2.2 ? 2 : 3;
+      lv = d < near ? 0 : d < near * 2.2 ? 1 : d < mid ? 2 : d < mid * 2.2 ? 3 : 4;
     }
     lv = Math.min(lv, it.counts.length - 1);
     levels.set(it.id, lv);

@@ -38,7 +38,7 @@ export function normalizeTerrain(t = {}) {
   return {
     shape: t.shape === "flat" ? "flat" : "island",
     size: num(t.size, 160, 32, 1024),
-    chunk: num(t.chunk, 16, 8, 64),
+    chunk: num(t.chunk, 8, 4, 64),
     center: pair(t.center, [0, 0]),
     radius,
     height: num(t.height, 8, 0, 200),

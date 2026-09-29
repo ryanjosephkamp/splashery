@@ -6,7 +6,7 @@
 // speed however slow the renderer is.
 //
 //   python3 -m http.server 4173 --bind 127.0.0.1 &
-//   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/world-clip.mjs <out-dir> [--world=test-island] [--size=390x844] [--fps=10] [--scale=0.6] [--profile=mid] [--strip=8] walk landmark touch list
+//   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/world-clip.mjs <out-dir> [--world=test-island] [--size=390x844] [--fps=10] [--dpr=2] [--scale=0.5] [--profile=mid] [--strip=8] walk landmark touch list
 //
 // Writes <out-dir>/wd-<name>.gif (and -strip.png with --strip). The
 // scenes are scripted below; each is a list of steps: walk with an input
@@ -30,7 +30,8 @@ if (!outDir || !names.length)
   throw new Error("Usage: node tools/world-clip.mjs <out-dir> scene ...");
 const [W, H] = opt("size", "390x844").split("x").map(Number);
 const fps = Number(opt("fps", 10));
-const scale = Number(opt("scale", 0.6));
+const dpr = Number(opt("dpr", 2));
+const scale = Number(opt("scale", 1 / dpr));
 const world = opt("world", "test-island");
 const profile = opt("profile", "mid");
 const stripN = Number(opt("strip", 0));
@@ -92,7 +93,8 @@ for (const name of names) {
   const scene = SCENES[name];
   if (!scene) throw new Error(`No scene "${name}" (${Object.keys(SCENES).join(", ")}).`);
   const touch = scene.some((s) => s.touch);
-  const ctx = await browser.newContext({ viewport: { width: W, height: H }, hasTouch: touch, isMobile: touch }); // prettier-ignore
+  // Drawn at twice the size and shrunk, like a phone's sharp screen.
+  const ctx = await browser.newContext({ viewport: { width: W, height: H }, deviceScaleFactor: dpr, hasTouch: touch, isMobile: touch }); // prettier-ignore
   const page = await ctx.newPage();
   page.on("pageerror", (e) => console.error("page error:", e.message));
   await page.goto(

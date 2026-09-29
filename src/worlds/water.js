@@ -15,10 +15,11 @@ import { rgb, mix, smoothstep, clamp } from "../kit.js";
 const TAU = Math.PI * 2;
 
 export const WATER_LEVELS = [
-  { density: 5.5 },
-  { density: 1.6 },
-  { density: 0.45 },
-  { density: 0.12 },
+  { density: 9 },
+  { density: 3 },
+  { density: 1 },
+  { density: 0.3 },
+  { density: 0.1 },
 ];
 
 // Builds a chunk's water at a level, relative to (x0, water, z0).

@@ -14,13 +14,17 @@ import { rgb, mix, smoothstep, clamp } from "../kit.js";
 const TAU = Math.PI * 2;
 
 // Splats per square meter at each level of detail, before the tier's density.
-// Level 0 is the near ground (with grass blades), level 3 the far ground.
+// Level 0 is the near ground (with grass blades), level 4 the far ground.
 export const TERRAIN_LEVELS = [
-  { density: 48, size: 0.95 },
-  { density: 10, size: 1 },
+  { density: 110, size: 0.95 },
+  { density: 28, size: 1 },
+  { density: 7, size: 1 },
   { density: 1.9, size: 1 },
   { density: 0.5, size: 1 },
 ];
+
+// Grass blades per square meter on the near ground, before the tier's grass.
+export const BLADES = 110;
 
 export class Terrain {
   // t: the world's normalized terrain settings (world-file.js); colors: its
@@ -120,7 +124,7 @@ export class Terrain {
     // Sand: darker and wetter at the water's edge, darker still under it.
     let sand = mix(c.sand, c.wetSand, smoothstep(w + 0.35, w - 0.05, h));
     sand = mix(sand, c.seabed, smoothstep(w - 0.2, w - 2.2, h));
-    const grass = mix(mix(c.grass, c.grassDry, clamp(0.5 + big * 1.6, 0, 1)), c.grassDark, clamp(0.5 - v * 1.8, 0, 1) * 0.5); // prettier-ignore
+    const grass = mix(mix(c.grass, c.grassDry, clamp(0.25 + big * 1.2, 0, 0.6)), c.grassDark, clamp(0.5 - v * 1.8, 0, 1) * 0.4); // prettier-ignore
     const rock = mix(c.rock, c.rockDark, clamp(0.5 + v * 2, 0, 1));
     // The beach line wanders a little.
     const edge = w + t.beach + big * 0.8;
@@ -130,7 +134,7 @@ export class Terrain {
     // Fake light from the sun: the kit's toys bake their shading the same way.
     const sun = this.sun || (this.sun = unit3([-0.45, 0.8, 0.35]));
     const lit = 0.72 + 0.38 * Math.max(0, n[0] * sun[0] + n[1] * sun[1] + n[2] * sun[2]);
-    const j = (r() - 0.5) * 0.06;
+    const j = (r() - 0.5) * 0.02;
     return [
       clamp(col[0] * lit + j, 0, 1),
       clamp(col[1] * lit + j, 0, 1),
@@ -199,7 +203,7 @@ export class Terrain {
     const cells = Math.max(1, Math.round(C / spacing));
     const step = C / cells;
     const r = mulberry32(mixSeed(this.seed, `ground-${chunk.id}-${level}`));
-    const blades = level === 0 ? Math.round(C * C * 18 * grass) : 0;
+    const blades = level === 0 ? Math.round(C * C * BLADES * grass) : 0;
     const buf = new SplatBuffer(cells * cells + blades);
     const floor = this.water - t.clearDepth;
     const size = step * 0.72 * L.size;
@@ -226,10 +230,10 @@ export class Terrain {
       const x = chunk.x0 + r() * C;
       const z = chunk.z0 + r() * C;
       const h = this.heightAt(x, z);
-      if (h < this.water + t.beach + 0.3 || h > t.snowLine - 0.5) continue;
+      if (h < this.water + t.beach + 0.15 || h > t.snowLine - 0.5) continue;
       const n = this.normalAt(x, z);
       if (n[1] < 0.8) continue;
-      const tall = 0.07 + 0.09 * r();
+      const tall = 0.06 + 0.08 * r();
       const lean = r() * TAU;
       const dir = unit3([Math.cos(lean) * 0.35, 1, Math.sin(lean) * 0.35]);
       const col = mix(mix(c.grass, c.grassLight, r()), c.grassDark, r() * 0.5);
@@ -239,7 +243,7 @@ export class Terrain {
           h - this.water + dir[1] * tall,
           z - chunk.z0 + dir[2] * tall,
         ],
-        [tall, 0.012 + 0.01 * r(), 0.012],
+        [tall, 0.007 + 0.005 * r(), 0.007],
         fromTo([1, 0, 0], dir),
         [col[0], col[1], col[2], 0.95],
       );

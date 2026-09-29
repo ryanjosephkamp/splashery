@@ -4,7 +4,7 @@
 // when the character reaches a landmark. The page (main.js) owns the menus
 // and cards; this module owns what is drawn.
 
-import { Terrain, TERRAIN_LEVELS, groundShare } from "./terrain.js";
+import { Terrain, TERRAIN_LEVELS, BLADES, groundShare } from "./terrain.js";
 import { buildWater, buildSky, buildOcean, WATER_LEVELS } from "./water.js";
 import { bakeProp, thinOut, buildSign, PROP_TYPES, PROP_STRIDES } from "./props.js";
 import { buildCharacter, JOINTS, BODY, pose, stepGait, WALK_SPEED, RUN_SPEED } from "./character.js"; // prettier-ignore
@@ -79,7 +79,7 @@ export class World {
       const area = ch.size * ch.size;
       const counts = TERRAIN_LEVELS.map((L, k) => {
         let n = share * area * L.density * density;
-        if (k === 0) n += area * 18 * this.budget.grass * 0.6 * (ch.hi > this.terrain.water + 1 ? 1 : 0.3); // prettier-ignore
+        if (k === 0) n += area * BLADES * this.budget.grass * 0.6 * (ch.hi > this.terrain.water + 1 ? 1 : 0.3); // prettier-ignore
         if (wet) n += area * WATER_LEVELS[k].density * Math.sqrt(density) * waterShare(this.terrain, ch); // prettier-ignore
         return Math.round(n);
       });
@@ -268,7 +268,7 @@ export class World {
   }
 
   buildCharacter() {
-    const parts = buildCharacter(this.def.character, { count: Math.round(26000 * Math.min(1.2, this.budget.props + 0.25)), seed: this.def.seed }); // prettier-ignore
+    const parts = buildCharacter(this.def.character, { count: Math.round(60000 * Math.min(1.25, Math.max(0.6, this.budget.props))), seed: this.def.seed }); // prettier-ignore
     const view = this.view;
     const root = view.group("character");
     const joints = { root };
@@ -323,7 +323,11 @@ export class World {
     const moved = this.lastPlan ? Math.hypot(cam[0] - this.lastPlan[0], cam[2] - this.lastPlan[2]) : Infinity; // prettier-ignore
     if (!force && moved < 2.5 && this.time - this.planAt < 2) return;
     // The character's surroundings matter more than the camera's.
-    const at = [(cam[0] + this.char.pos[0]) / 2, 0, (cam[2] + this.char.pos[2]) / 2];
+    // (The aerial view behind the start screen looks at the whole island.)
+    const t = this.def.terrain;
+    const at = this.overview
+      ? [t.center[0], 0, t.center[1]]
+      : [(cam[0] + this.char.pos[0]) / 2, 0, (cam[2] + this.char.pos[2]) / 2];
     const budget = this.budget.splats - this.fixedCount();
     this.levels = planLevels(this.items, at, this.budget, budget);
     this.lastPlan = cam.slice();
@@ -336,6 +340,14 @@ export class World {
     }
     // Nearest first.
     this.queue.sort((a, b) => Math.hypot(a.x - at[0], a.z - at[2]) - Math.hypot(b.x - at[0], b.z - at[2])); // prettier-ignore
+  }
+
+  // Plans again now and builds everything the plan wants (a short pause:
+  // after Enter, and after a jump across the world).
+  catchUp() {
+    this.plan(true);
+    while (this.queue.length) this.buildQueued(8);
+    this.applyPlan();
   }
 
   // Splats that are always drawn: the sky and the character.
@@ -404,7 +416,7 @@ export class World {
 
   // Splats drawn now, by kind and level (for tests and the budget check).
   stats() {
-    const out = { tier: this.tier, budget: this.budget.splats, total: 0, fixed: this.fixedCount(), chunks: 0, props: 0, levels: [0, 0, 0, 0], hiddenProps: 0 }; // prettier-ignore
+    const out = { tier: this.tier, budget: this.budget.splats, total: 0, fixed: this.fixedCount(), chunks: 0, props: 0, levels: [0, 0, 0, 0, 0], hiddenProps: 0 }; // prettier-ignore
     out.total = out.fixed;
     for (const it of this.items) {
       if (it.shown < 0) {
@@ -548,7 +560,7 @@ export class World {
     this.spawn(at, l.facing + 180);
     this.near = null;
     if (s) this.checkLandmarks();
-    this.plan(true);
+    this.catchUp();
   }
 }
 

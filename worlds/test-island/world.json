@@ -9,7 +9,7 @@
   "terrain": {
     "shape": "island",
     "size": 128,
-    "chunk": 16,
+    "chunk": 8,
     "center": [0, 0],
     "radius": [34, 28],
     "height": 3.5,
@@ -17,7 +17,7 @@
     "coast": 0.3,
     "seaDepth": 6,
     "beachHeight": 0.6,
-    "beach": 1.5,
+    "beach": 1.1,
     "waterLevel": 0,
     "rockSlope": 0.85,
     "hills": [

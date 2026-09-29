@@ -288,13 +288,13 @@ function buildBush(count, seed, o = {}) {
     const bi = Math.floor(rand() * blobs.length);
     const b = blobs[bi];
     const d = randDir(rand);
-    const deep = rand() < 0.3;
+    const deep = rand() < 0.2;
     const rr = b[3] * (deep ? 0.8 : 0.95 + 0.08 * rand());
     const p = [b[0] + d[0] * rr, b[1] + d[1] * rr * 0.85, b[2] + d[2] * rr];
     if (p[1] < 0.02 || inside(p, bi)) return null;
     const lift = clamp(0.5 + d[1] * 0.5, 0, 1);
     let col = mix(shade(green, 0.7), mix(green, "#a4d468", rand() * 0.5), lift);
-    if (deep) col = shade(green, 0.55);
+    if (deep) col = shade(green, 0.72);
     return {
       p,
       n: d,
