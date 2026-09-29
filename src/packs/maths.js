@@ -1362,6 +1362,8 @@ export const RECIPES = {
       const glass = o.color;
       const violet = "#8a5cf6";
       k.add(k.param(f, { grid: 120 }), {
+        even: true,
+        jitter: 0.015,
         rot: [0, 0, 0],
         flat: 0.12,
         opacity: 0.28,
@@ -1402,6 +1404,8 @@ export const RECIPES = {
           { grid: 96 },
         ),
         {
+          even: true,
+          jitter: 0.015,
           part: k.part("water"),
           share: 0.14,
           flat: 0.3,
