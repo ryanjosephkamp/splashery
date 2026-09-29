@@ -304,6 +304,12 @@ writes the lane's brief from them (like any new lane) and sets each idea's `lane
 
 ## Merging and conflicts
 
+The lane loop and its merge gates are drawn as a grooph graph in
+[lane-loop.grooph.json](lane-loop.grooph.json) (the owner's answer of September 29, 2026). It passes
+`grooph validate` with no issues: every loop has a stop, and the two irreversible steps (merging a
+change to public toys, and taking toys out of labs) each sit behind the owner's gate. Open it on a
+phone with `grooph share docs/lane-loop.grooph.json`. Update it when these rules change.
+
 - Merge tiers (the owner's rules of September 29, 2026), always with "Create a merge commit":
   - The Operator merges its own Ops PRs, anything behind the labs switch, and additive engine PRs,
     once the full test run passes on main with the PR merged in (the Integrator runs it once 6 or
