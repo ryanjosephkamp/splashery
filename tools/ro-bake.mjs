@@ -329,6 +329,10 @@ async function bake(id) {
       if (best >= 0 && part[i] < 4) part[i] = part[best];
     }
   }
+  // A last word on each splat's part, from its place (fragments the rules above mislaid).
+  if (cfg.finalPart)
+    for (let i = 0; i < n; i++)
+      part[i] = cfg.finalPart([s.pos[i * 3], s.pos[i * 3 + 1], s.pos[i * 3 + 2]], part[i]);
   // Shuffle, so any first m splats are an even sample.
   const rand = mulberry32(1234);
   const kept = [];

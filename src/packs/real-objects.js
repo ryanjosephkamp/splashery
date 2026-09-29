@@ -1323,8 +1323,12 @@ const HOODIE = {
     const sway = swing(s, 3.7, 0.12, 9, 3);
     // Fabric caps fill the shoulders while the sleeves are raised (channel 1).
     out.morph = [0, smoothstep(0.55, 0.85, Math.max(inL, inR)), 0, 0];
-    const toward = (dir, f) =>
-      quatFromTo([0, -1, 0], [dir[0] * f, -1 + (dir[1] + 1) * f, dir[2] * f]);
+    // Up and forward first, and inward only once raised, so a sleeve never cuts across the body.
+    const toward = (dir, f) => {
+      const up = smoothstep(0, 0.65, f);
+      const inward = smoothstep(0.45, 1, f);
+      return quatFromTo([0, -1, 0], [dir[0] * inward, -1 + (dir[1] + 1) * up, dir[2] * up]);
+    };
     out.parts.sleeveL = { quat: quatMul(quatAxisAngle([0, 0, 1], sway), toward(HD.crossL, inL)) };
     out.parts.sleeveR = { quat: quatMul(quatAxisAngle([0, 0, 1], -sway), toward(HD.crossR, inR)) };
     // The drawstrings swing, kicked by the hood and again by the sleeves.

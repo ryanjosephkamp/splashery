@@ -175,6 +175,8 @@ export const SOURCES = {
     },
     charts: true,
     minChart: 2000,
+    // Beyond the torso's sides (|x| 0.345 in baked units) the body has nothing: a scrap of a cuff.
+    finalPart: (p, part) => (part === 0 && Math.abs(p[0]) > 0.345 ? (p[0] < 0 ? 2 : 3) : part),
     // In the file's units (meters): the garment's x is 0 at its middle; the hood's panels start
     // at y 0.6, and a sleeve's panels (raglan, running up to the neck) reach past |x| 0.093.
     part: (s) => {
