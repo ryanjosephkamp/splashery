@@ -115,19 +115,119 @@ insignia. The laptop stays exactly as it is.
 
 ## State
 
-September 28, 2026: started. Samples chosen and checked on their live source pages:
+PRs: #66 was merged on September 28, 2026 at its first commit (this file and the video and GIF
+samples). The toys are in #72 ("Phase Screens: the screen and the Gaussian splat toy"), which needs
+the engine PR #71 ("Engine: a picture toy's prepare reads its media") for "Open your own photo".
+Video scrubbing comes from lane Books' engine PR (the Operator's call on September 28): its scrub
+bar in the Toy tab's picture panel serves the Screen, so the Screen has no slider of its own.
 
-- Video: a 6-second scene of Big Buck Bunny (the bunny and the butterfly, 1:44.5 to 1:50.5; no title
-  card or logo), © Blender Foundation, CC BY 3.0 (peach.blender.org, "About": "licensed under the
-  Creative Commons Attribution 3.0 license"), from download.blender.org/peach. Shipped as
-  `assets/toys/screen/bunny.mp4` (H.264 and AAC, 378 KB) and `bunny.webm` (VP9 and Opus, 313 KB).
-- GIF: Eadweard Muybridge's galloping horse ("Annie G.", 1887), public domain on Wikimedia Commons
-  (File:Muybridge_race_horse_animated.gif), `assets/toys/screen/horse.gif` (300×200, 15 frames).
+September 28, 2026: both toys are built (labs only), with their sounds, help, plan entries, credits,
+tests (`tests/scr.spec.mjs`) and clips; an engine PR (#71, "Engine: a picture toy's prepare reads
+its media") lets the splat toy learn your own photo.
 
-Building the Screen next, then the Gaussian splat toy.
+- **Screen** (`src/packs/screens.js`, "Pictures and pages"): Style (Old TV, Flat TV, Cinema,
+  Hologram) and Sample (the video or the GIF). The video or GIF is one picture sheet with method
+  "screen". The tap switches it on, then plays and pauses; Play in the Toy tab's picture panel
+  switches it on too.
+- **Gaussian splatting** (`src/packs/splatting.js`, AI and computing, beside gradient descent): View
+  (Training, One splat, Many splats, Sorting). The fit is `src/packs/splat-fit.js`, run in
+  `src/packs/splat-fit-worker.js`.
+- Samples, checked on their live source pages:
+  - Video: a 6-second scene of Big Buck Bunny (the bunny and the butterfly, 1:44.5 to 1:50.5; no
+    title card or logo), © Blender Foundation, CC BY 3.0 (peach.blender.org, "About": "licensed
+    under the Creative Commons Attribution 3.0 license"), from download.blender.org/peach.
+    `assets/toys/screen/bunny.mp4` (H.264 and AAC, 378 KB) and `bunny.webm` (VP9 and Opus, 313 KB);
+    the toy picks the MP4 where the browser plays H.264.
+  - GIF: Eadweard Muybridge's galloping horse ("Annie G.", 1887), public domain on Wikimedia Commons
+    (File:Muybridge_race_horse_animated.gif), `assets/toys/screen/horse.gif` (300×200, 15 frames).
+  - Photo: "Strawberry on white background" by Joselodos, CC0 1.0 on Wikimedia Commons, cropped to
+    4:3 and scaled to 800×600 (`assets/toys/gaussian-splatting/strawberry.jpg`).
+
+## Design
+
+**The Screen's switching on.** Each style is its own build (the Style option rebuilds). A sheet's
+splats stand six of its own pixels in front of its center (lane Pictures' "lift"), so every cover
+sits well in front of the sheet (the sheet is set back 0.09 on the old TV and 0.115 on the flat TV).
+The state (off, switching on, on) lives in the recipe, timed on the player's clock (`info.time`), so
+a pulse control ("power", 2 s) only keeps frames coming.
+
+- Old TV (1.5 s): the power knob and the volume knob turn (parts); a bright line appears in the
+  middle, splits into two bars (parts, fading on channel 1) that run to the top and the bottom; the
+  dark curved glass (a bulged surface in front of the picture) clears row by row behind them (kind
+  "fade" on channel 0, each splat's `at` from its height).
+- Flat TV (1.4 s): the glossy black panel face fades (kind "fade", channel 0, one wide band) while
+  the red standby light goes out (channel 1).
+- Cinema (1.9 s): sixteen curtain pleats are tokens. The leading pleat is pulled to the side and
+  pushes the others along; each one turns as it is squeezed, so the curtains bunch into folds at the
+  sides. The seats darken (a band with negative glow) as the film starts.
+- Hologram (1.5 s): the beam (faint splats in a fan from the lens) rises on channel 0; the picture,
+  its edge glow and its scanlines are two parts that flicker on (on, off, on, off, on) and then
+  float gently. The sheet's opacity is 0.62: it is light.
+
+**Sounds.** Each style (and each splat view) has its own sound, played as cues from `drive`
+(`action.quiet`), so the tap is silent otherwise. `src/toy-sounds.js` holds the old TV's and the
+training view's sounds, for the Sound Board.
+
+**The fit.** `fitSplats` fits N flat Gaussians (2,400 by default) to a picture 96 pixels wide by
+Adam, 140 steps, keeping 13 keyframes (steps 0, 2, 5, 9, 14, 20, 28, 38, 50, 65, 85, 110, 140). It
+draws them exactly as the renderer draws splats: front to back (Gaussian 0 in front), each with
+PlayCanvas's kernel (a Gaussian cut where it falls to e^-4 and scaled to reach 0 there:
+`(exp(-q/2) - e^-4) / (1 - e^-4)` for q < 8), alpha capped at 0.99, over the picture's border color
+(the card's). The backward pass is the 3D Gaussian splatting one in 2D. Measured in Node: 1.5 s for
+the strawberry (per step about 11 ms), loss from 0.39 to 0.0004 (mean squared error per pixel).
+
+**Showing the fit.** Each keyframe is a copy of the 2,400 splats on its own part (13 parts), each
+splat morphing (channel 0) to its place in the next keyframe; the toy shows one copy at a time and
+runs one clock through all of them, so each splat slides on its own and stretches and recolors at
+each keyframe. Splat i stands 0.04 × i / N behind the first, so the draw order is the fit's.
+
+The kit gives every splat a random size factor, exp((r − 0.5) / 2). The fitted splats must keep
+their fitted sizes, so the recipe builds them first (the kit's random sequence starts with them, one
+number per splat) and divides the same factors out: `mulberry32(mixSeed(k.seed, "kit-splats"))`.
+With nothing weighted in that view, the kit's base size is 0.01, so a splat's size is exact. A test
+checks the sizes the kit gives (they match to 1e-7); if the kit changes its sequence, it fails.
+
+**Open your own photo.** The training view is a picture toy (a small sheet shows the photo it
+learns), so the Toy tab's media panel opens a photo. With the engine PR, `prepare(options, help)`
+calls `help.media()`, draws that photo at the fit's size and fits it in the worker (cached per
+picture). Without it, the fit always learns the sample.
 
 ## Notes
 
+- The owner's review (September 28): seven cards "good"; `scr-splat-sorting` "fix": "This seems
+  basically perfect, but the demo GIF here looks blurry. If it isn't actually blurry in the site,
+  then it's fine, but as it appears here, it isn't as detailed as I'd prefer." The toy itself was
+  soft (300 big soft splats overlapping into a blur), so each splat is now drawn as what it is, a
+  small colored ellipsoid turned its own way, made of 220 tiny opaque splats: crisp at phone size.
+  The clip `scr-splat-sorting-r2` is recorded at full phone resolution (780 pixels wide).
+
+- Page screenshots stall in the stepped-clock clip tool once a toy animates, so `tools/scr-clip.mjs`
+  captures the stage canvas instead (like `tools/effect-clip.mjs`), at 390×844.
+- Kit clouds are sized from a base of 0.01 when a view gives every piece a fixed count; the "many"
+  view sizes each piece's splats from its area.
+- `pkill -f` with a pattern that appears in the same command line kills that shell too.
+
 ## Known issues
 
+- The fitted picture is a little softer on screen than in the fit: the renderer adds a small blur to
+  every splat (antialiasing), and depth sorting in buckets can swap two nearby splats.
+- The hologram's sheet is see-through, but its two layers (a base and the pixels) make it about 85%
+  opaque.
+
 ## For the Operator
+
+- Engine PR #71: "Engine: a picture toy's prepare reads its media" (`claude/lane-screens-engine`).
+  It adds a second argument to a picture toy's `prepare`: `help.media()`. It is additive, with a
+  test in `tests/scr-engine.spec.mjs`. Video seeking was taken out of it on September 29 (lane
+  Books' engine PR has it). Keep #71, fold it into Books' engine PR, or close it: your call. Without
+  it, the training view always learns its sample photo.
+- Two shared tests count toys exactly and fail with this lane's toys (they would with any new labs
+  or computing toy): `tests/pic.spec.mjs:138` expects the Picture lab to be the only labs toy, and
+  `tests/ai.spec.mjs:52` expects exactly twelve computing toys (it could count the `computing`
+  pack's toys instead). Both are other lanes' files, so they are yours to change.
+- `tests/taps.spec.mjs`: no exception needed (both taps end where they rest; the Screen stays on,
+  but none of its parts or morph channels move at rest).
+- PACKS.md, picture toys: a screen sheet's splats stand six of its pixels in front of its center, so
+  anything meant to cover a sheet must be further in front than that at the coarsest level shown.
+- New tool: `tools/scr-clip.mjs` (clips of the Screen and the splat toy at 390×844, stepping a video
+  by seeking).
