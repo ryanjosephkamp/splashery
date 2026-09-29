@@ -16,6 +16,54 @@ had not settled 3 s after its tap) and "a scan rig moves a part of a captured to
 console warning, like the rare engine warning in HANDOFF.md). Keep `test-results/` if either comes
 back.
 
+### A/B: the toy piano, a blind test of two models (PR #91, merged 2026-09-29)
+
+- The owner's blind A/B: one brief (his toy piano idea: tap a key and its hammer strikes a ringing
+  rod; tap elsewhere for Twinkle, Twinkle) built twice, on its own branch each, by Sonnet 5.5 (maker
+  A) and Opus 5.5 (maker B). The cards named only "maker A" and "maker B"; the Operator kept which
+  was which in a private note until the owner had marked them.
+- He marked maker A's three cards "fix" ("too grainy") and maker B's three good. B was Opus 5.5, so
+  its toy piano merged (#91) and A's PR #89 was closed. This settled the owner's model split of
+  September 29, 2026: Opus 5.5 for the toys and engine, Sonnet 5.5 for Worlds content, converters,
+  docs and the Integrator.
+- About 5 hours to READY; it then waited for the blind marks and two Integrator runs (the first on
+  an older main; the second, on main + #91 + #106, passed 412 of 412).
+- Lessons (PACKS.md, section 7c): the kit's default color jitter (0.04) reads as grain on smooth
+  lacquer and ivory, and 0.01 is clean; smaller splats along a flat face's edge keep box edges
+  crisp; a long, thin even rectangle hatches, so fold the even square into strips laid end to end.
+
+### Anatomy: the anatomy atlas (PRs #92 and #93, merged 2026-09-29)
+
+- Built by Opus 5.5. A labs toy on the Body shelf: a clinical figure in four layers (a smooth
+  mannequin skin, muscles, skeleton, organs), each layer a set of solid pieces that a tap peels off
+  in turn, with a Layer choice and a Labels list. Its engine PR #93 adds `out.legend`, a list of
+  names beside the stage that a toy's drive() can set.
+- Kit-built: no layered body (skin, muscles, bones and organs registered together) exists under CC0,
+  CC BY or public domain, and the good anatomy sets are CC BY-SA, so it builds the body from about
+  55 smooth-joined shapes and places our own brain, lungs, heart and kidney toys inside.
+- The owner marked its three cards good the first time. About 6.5 hours from start to merge (it
+  waited on the Integrator); the Integrator's run on main + #93 + #92 passed 414 of 414.
+- Lessons (PACKS.md, section 7d): a smooth body from primitives with an order-independent join, and
+  placing another toy's recipe inside a toy through a proxy kit.
+
+### Worlds: the world engine and a sandbox island (PR #78, merged 2026-09-29)
+
+- Built by Opus 5.5. Splashery Worlds (`worlds/?labs=1`, linked from the About tab with labs on): a
+  small world made of splats that you walk around as a character, on a phone or a computer. Terrain,
+  water and sky, props baked from toy recipes, chunked level of detail with budgets per device tier,
+  a kit-built character on eleven rigid joints, a follow camera, collision, landmarks with cards, a
+  list view and a start screen, all from a documented world file (docs/WORLDS.md). The Test island
+  is its sandbox.
+- It needed no shared engine change: the world has its own small PlayCanvas setup
+  (`src/worlds/render.js`) and reuses the kit, the noise, the font and the pack recipes as they are.
+- The owner liked the mechanics but not the look: "still just a bit too grainy, and the
+  player/character looks way too low-poly and simplistic." So round 2 splits in two: Worlds r2 takes
+  the grain out of the island, and a new Character lane builds "a polished video game character".
+- About 14 hours from start to merge; the Integrator's run on main + #78 passed 413 of 413.
+- Lessons (WORLDS.md): PlayCanvas 2.22.3's level of detail and splat budget work only on streamed
+  octree files, so a world built on the device keeps its own levels and budgets; limbs built as
+  lathes, since even spreading draws a lattice on cones.
+
 ### Fidelity A and B: the grainy toys made sharp (PRs #77 and #90, merged 2026-09-29)
 
 - Built by Opus 5.5, in two lanes from the owner's words: "I almost want to make things so
