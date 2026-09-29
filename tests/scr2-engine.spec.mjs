@@ -16,25 +16,29 @@ test("a GIF held on its frame stays there, then plays on from it", async ({ page
     await app.setToyOptions({ sample: "gif" });
   });
   await page.waitForFunction(() => window.__splashery.player.pictures?.media?.kind === "gif", null, { timeout: 120_000 }); // prettier-ignore
-  const frames = async (ms) =>
-    page.evaluate(async (ms) => {
-      const p = window.__splashery.player.pictures;
+  // The frames shown over `sec` seconds of the player's clock (the GIF's
+  // clock), however slow the renderer is.
+  const frames = async (sec) =>
+    page.evaluate(async (sec) => {
+      const pl = window.__splashery.player;
+      const p = pl.pictures;
       const seen = new Set();
-      const t0 = performance.now();
-      while (performance.now() - t0 < ms) {
-        window.__splashery.player.stage.requestRender();
-        await new Promise((r) => setTimeout(r, 40));
+      const t0 = pl.time;
+      const w0 = performance.now();
+      while (pl.time - t0 < sec && performance.now() - w0 < 60_000) {
+        pl.stage.requestRender();
+        await new Promise((r) => setTimeout(r, 30));
         seen.add(p.gifFrame);
       }
       return [...seen];
-    }, ms);
+    }, sec);
   // It plays by itself (15 frames over about a second).
-  expect((await frames(1500)).length).toBeGreaterThan(3);
+  expect((await frames(1.5)).length).toBeGreaterThan(3);
   expect(await page.evaluate(() => window.__splashery.player.pictures.api.playing)).toBe(true);
   // Held: one frame only, and it says so.
   await page.evaluate(() => window.__splashery.player.pictures.api.hold(true));
   const held = await page.evaluate(() => window.__splashery.player.pictures.gifFrame);
-  expect(await frames(1500)).toEqual([held]);
+  expect(await frames(1.5)).toEqual([held]);
   expect(await page.evaluate(() => window.__splashery.player.pictures.api.held)).toBe(true);
   expect(await page.evaluate(() => window.__splashery.player.pictures.api.playing)).toBe(false);
   // Let go: it goes on from the frame it held.
@@ -45,6 +49,6 @@ test("a GIF held on its frame stays there, then plays on from it", async ({ page
     return p.gifFrame;
   });
   expect(next).toBe(held);
-  expect((await frames(1500)).length).toBeGreaterThan(3);
+  expect((await frames(1.5)).length).toBeGreaterThan(3);
   expect(await page.evaluate(() => window.__splashery.player.pictures.api.held)).toBe(false);
 });
