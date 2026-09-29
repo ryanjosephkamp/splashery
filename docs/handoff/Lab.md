@@ -92,7 +92,7 @@ HOW THIS LANE RUNS
 
 Model: Opus 5.5 (claude-opus-5-5), default effort.
 
-- September 29, 2026: lane started. Draft PR #83 (this lane) and the engine PR (branch
+- September 29, 2026: lane started. Draft PR #83 (this lane) and the engine PR #85 (branch
   `claude/lane-lab-engine`, "Engine: Lab, sharper splat kernels (off by default)") opened.
 - Step 1 done: [docs/lab/LITERATURE.md](../lab/LITERATURE.md), the literature check (other kernels,
   anti-aliasing, 4D splats; what each changes in our engine and whether it fits).
