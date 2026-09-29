@@ -8,6 +8,9 @@
 //   python3 -m http.server 4173 --bind 127.0.0.1 &
 //   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/bk-clip.mjs <out-dir> [scene ...]
 //
+// --intro=<png> opens the clip on that still (a before-and-after, the same
+// size as the page shot), held for --hold=<ms> (3000).
+//
 // Scenes: book (opening, turning, one style change), book-styles (the five
 // styles), book-long (paging through a 300-page PDF), album, frame (the
 // swing), frame-digital. Writes <out-dir>/bk-<scene>.gif and a strip of six
@@ -71,6 +74,9 @@ async function record(scene) {
   await page.goto(`${base}?renderer=webgl2&adapt=off&profile=mid&labs=1`);
   await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
   const frames = [];
+  const intro = opt("intro", "");
+  if (intro)
+    frames.push({ img: shrink(PNG.sync.read(fs.readFileSync(intro)), width), delay: Number(opt("hold", 3000)) }); // prettier-ignore
   const run = (fn, arg) => page.evaluate(fn, arg);
   const settle = () =>
     page.waitForFunction(

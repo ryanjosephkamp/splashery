@@ -167,6 +167,29 @@ carries them too until then.
 - Turning pages by dragging a corner is not built (see "What was cut" in the PR): the tap, Previous
   and Next turn the pages.
 
+## r2: a sharper book body (September 29, 2026)
+
+The owner's marks: the frame's two clips good; the book's three and the album's "fix", each with the
+note "Looks nearly perfect; mechanics seem perfect, basically. The book itself (not the pages) just
+seem a little bit blurry or grainy, especially around the edges." Branch `claude/lane-books`
+restarted from main; PR "Phase Books r2: a sharper book body". Only the book's and the album's own
+kit parts changed (pages, the page engine and the turns as they were):
+
+- `rect()` (every cover, board, spine, band, page block and card face) lays a staggered lattice of
+  flat discs that stops two splat widths short of the face's edges, a band of discs half the size
+  round it, and a line of thin splats along each edge, a little inside it, stopping short of the
+  corners. The old lattice ran to the edges, so its outer splats' soft glow spilled past them (the
+  fuzz). Opacity 1. It counts its layout before laying it out, and makes each splat as asked.
+- Full density (the recipes' `density` 1, was 0.35): about 140k kit splats at "mid", within the kit
+  budget; the pages keep their own budgets.
+- Colors from smooth functions: no weave, grain or page lines at about the splats' spacing (they
+  read as speckle on a phone). The leather's stitches and pressed groove are thin splats along their
+  lines in front of the cover (`albumTrim`), and the scrapbook's label its own rectangle.
+- The spiral's wire, the magazine's staples and the stapled paper's staple are thin splats along the
+  wire instead of round blobs.
+- The picture frame (marked good) keeps the old lattice (`plainRect`), so its look is unchanged.
+- Before-and-after clips: `tools/bk-clip.mjs --intro=<png>` opens a clip on a still.
+
 ## Notes
 
 ### How the book works
@@ -192,9 +215,9 @@ carries them too until then.
 - The left page block appears under the first page as it lands and goes as that page lifts off; in a
   close it swings over with the cover (riding the cover's free edge, so a flexing cover stays
   outside it).
-- Splats on show: two pages at rest, four while a leaf turns, plus the kit (about 50k at "mid"). A
-  whole spread on a 390-wide phone builds each page at about 362 to 512 px wide (30k to 60k splats a
-  page for the sample).
+- Splats on show: two pages at rest, four while a leaf turns, plus the kit (about 140k at "mid"
+  since r2). A whole spread on a 390-wide phone builds each page at about 362 to 512 px wide (30k to
+  60k splats a page for the sample).
 
 ### The album and the frame
 
@@ -225,6 +248,8 @@ carries them too until then.
 - A page with a much finer build than the screen (zoomed out after zooming in) is rebuilt after a
   quarter second, as in the Picture lab.
 - The left page block is a fixed thickness (it doesn't grow as you read).
+- r2: a faint haze of a few pixels can still show beside an edge seen almost edge-on (a face's own
+  splats, seen from the side).
 - The rig test in `tests/smoke.spec.mjs` (line 730) fails on main too (the same numbers); not this
   lane's.
 
