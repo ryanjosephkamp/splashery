@@ -77,8 +77,9 @@ Model: Sonnet 5.5 (claude-sonnet-5-5), default effort.
 Started September 29, 2026. Both toys are finished and on PR #80 (with the engine PR #81 merged in).
 
 - Chladni plate: eight modes, a bow, twelve sand copies, the hum at the mode's pitch.
-- Song landscape: real spectrogram, open your own song (Toy tab), the tap plays it through the
-  speaker button, the marker and the view glide along the time axis, waveform along the left edge.
+- Song landscape: real spectrogram (each tap plays or pauses; a song that ends resets, so the next
+  tap plays it again), open your own song (Toy tab), the tap plays it through the speaker button,
+  the marker and the view glide along the time axis, waveform along the left edge.
 - The owner's mark (September 29): all three cards "fix", "Looks great. Can we increase the
   resolution? ... the toy seems grainy." It was the toys, not the GIFs: the plate top and the floor
   were grids of dots and the landscape's splats left gaps. Fixed with solid sheets of overlapping
@@ -111,7 +112,6 @@ Started September 29, 2026. Both toys are finished and on PR #80 (with the engin
 
 ## Known issues
 
-- After the song ends the toggle stays on: one extra tap is needed before it plays again.
 - The Chladni sand's second tap plays its journey backwards (stirring it up again).
 - Only the sample plays silently in the clips (the clip tool has no sound); the sound itself is
   tested in `tests/sts.spec.mjs` (a file opened, the tap plays it, the second tap pauses).

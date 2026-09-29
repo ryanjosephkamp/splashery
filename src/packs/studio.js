@@ -294,7 +294,16 @@ const H = 0.75; // the loudest point's height
 const SONG = { current: null, sample: null, custom: null, want: null };
 // What playing needs from the page: the song's samples, and the sound
 // (src/sound.js's Sound, which the drive's info hands over as info.sound).
-const PLAY = { on: false, pos: 0, last: null, src: null, start: 0, ctx: null };
+const PLAY = {
+  on: false,
+  want: false,
+  pos: 0,
+  last: null,
+  src: null,
+  start: 0,
+  ctx: null,
+  taps: 0,
+};
 
 // A WAV file's samples (16 bit PCM, any channels), for the sample without Web
 // Audio (so the Node tools can build it too).
@@ -402,8 +411,10 @@ function playStep(song, sound, on, time) {
   } else if (PLAY.on) {
     PLAY.pos = PLAY.ctx ? PLAY.ctx.currentTime - PLAY.start : PLAY.pos + dt;
     if (PLAY.pos >= song.duration) {
+      // The song is over: play state resets, so the next tap plays it again.
       PLAY.pos = song.duration;
       PLAY.on = false;
+      PLAY.want = false;
       PLAY.src = null;
       PLAY.ctx = null;
     }
@@ -412,7 +423,7 @@ function playStep(song, sound, on, time) {
 }
 
 const SONG_LANDSCAPE = {
-  alive: (c) => c.play > 0.5,
+  alive: () => PLAY.on,
   density: 1,
   options: [
     {
@@ -428,7 +439,7 @@ const SONG_LANDSCAPE = {
     { key: "song", label: "Song", type: "text", default: "sample", hidden: true },
     { key: "songName", label: "Song name", type: "text", default: "", hidden: true },
   ],
-  controls: [{ key: "play", label: "Play", type: "toggle", default: 0, ease: 0.3 }],
+  controls: [{ key: "play", label: "Play", type: "pulse", ease: 0.3 }],
   action: { key: "play", label: "Play or pause the song", quiet: ["play"] },
   // Your own song: opened with the Toy tab's panel (a file the browser can
   // decode), read on this device.
@@ -469,8 +480,14 @@ const SONG_LANDSCAPE = {
   drive(t, c, out, info) {
     const g = info?.data?.song;
     if (!g) return;
-    const on = (c.play ?? 0) > 0.5;
-    const pos = playStep(g.song, info.sound, on, info.time);
+    // Each tap plays or pauses (a song that has ended plays again from the start).
+    const n = info.tap?.n ?? 0;
+    if (n < PLAY.taps) PLAY.taps = 0;
+    if (n > PLAY.taps) {
+      PLAY.taps = n;
+      PLAY.want = !PLAY.on;
+    }
+    const pos = playStep(g.song, info.sound, PLAY.want, info.time);
     const f = clamp01(pos / g.song.duration);
     // The marker glides along the time axis (from near to far), and the view
     // follows it: the whole landscape slides toward you by half as far as the
@@ -482,6 +499,21 @@ const SONG_LANDSCAPE = {
   build(k, o) {
     const song = SONG.want || SONG.sample;
     SONG.current = song;
+    // A new build (another song, a look) starts stopped.
+    try {
+      PLAY.src?.stop();
+    } catch {
+      // Already ended.
+    }
+    Object.assign(PLAY, {
+      on: false,
+      want: false,
+      pos: 0,
+      last: null,
+      src: null,
+      ctx: null,
+      taps: 0,
+    });
     const budget = Math.floor(k.count * 0.3); // cells rise in up to three layers
     const d = landscapeData(song.samples, song.rate, budget);
     const D = landscapeLength(d.duration);

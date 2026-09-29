@@ -226,6 +226,31 @@ test.describe("your own song and the speaker button", () => {
     const b = await page.evaluate(async () => (await import("/src/packs/studio.js")).playState());
     expect(a.on).toBe(false);
     expect(b.pos).toBe(a.pos);
+    // Play to the end: the state resets, and the next tap plays it again from the start.
+    await page.evaluate(() => window.__splashery.app.act());
+    const ended = await page.evaluate(async () => {
+      const { playState } = await import("/src/packs/studio.js");
+      for (let i = 0; i < 240; i++) {
+        const s = playState();
+        if (!s.on && s.pos >= 2.9) return s;
+        await new Promise((r) => setTimeout(r, 50));
+      }
+      return playState();
+    });
+    expect(ended.on).toBe(false);
+    expect(ended.pos).toBeGreaterThanOrEqual(2.9);
+    await page.evaluate(() => window.__splashery.app.act());
+    const again = await page.evaluate(async () => {
+      const { playState } = await import("/src/packs/studio.js");
+      for (let i = 0; i < 100; i++) {
+        const s = playState();
+        if (s.on && s.pos < 1) return s;
+        await new Promise((r) => setTimeout(r, 50));
+      }
+      return playState();
+    });
+    expect(again.on).toBe(true);
+    expect(again.pos).toBeLessThan(1);
     // A file that is not sound gives a message, not a crash.
     await page.locator("#toy-input-file").setInputFiles({ name: "x.mp3", mimeType: "audio/mpeg", buffer: Buffer.from("not sound") }); // prettier-ignore
     await expect(page.locator(".warning:visible")).toContainText("cannot read that sound file");
