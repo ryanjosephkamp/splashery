@@ -2008,14 +2008,16 @@
       "owner": "Lane Books, from the owner's notes of September 27 and 28, 2026 (Pages into Splats).",
       "effect": "Open a PDF of any length and turn its pages: each page turns over its spine as a solid sheet, curling as it goes, with the next page on its back. Five styles: hardcover, paperback, magazine, stapled paper and spiral notebook.",
       "sound": "A paper swish and flutter, and a soft thud as the page lands.",
-      "improved": "Books: a tap opens the cover, then turns each leaf over (about 1 s), the page curling as it goes with the next page on its back; at the end a tap closes the book. Previous and Next in the Toy tab turn back and forth. The page shape follows the PDF, and only the pages reached are built."
+      "improved": "Books: a tap opens the cover, then turns each leaf over (about 1 s), the page curling as it goes with the next page on its back; at the end a tap closes the book. Previous and Next in the Toy tab turn back and forth. The page shape follows the PDF, and only the pages reached are built.",
+      "fixed": "Books r2 (the owner's note of September 29, 2026: the book, not the pages, a little blurry or grainy around the edges): the covers, spine, bands and page blocks have clean, sharp edges (faces stop short of their edges, with finer splats and a line of thin splats along each), full density and smooth cloth colors; the spiral's wire and the staples are thin splats along the wire."
     },
     "photo-album": {
       "v": "keep",
       "owner": "Lane Books, from the owner's notes of September 27 and 28, 2026 (Pages into Splats).",
       "effect": "Open a set of photos and turn through them on thick album pages, each photo held by four photo corners, one or two to a page as fits their shapes, with the file names as captions.",
       "sound": "A lower card swish and a firm thud.",
-      "improved": "Books: a tap opens the leather, linen or scrapbook cover, then turns the thick pages (about 1 s each), the photos mounted in photo corners with their file names beneath; at the end a tap closes the album."
+      "improved": "Books: a tap opens the leather, linen or scrapbook cover, then turns the thick pages (about 1 s each), the photos mounted in photo corners with their file names beneath; at the end a tap closes the album.",
+      "fixed": "Books r2 (the owner's note of September 29, 2026: a little blurry or grainy around the edges): the covers and card pages have clean, sharp edges and full density; the leather's stitches and groove are thin splats in front of the cover, the scrapbook's label its own card, and the leather and linen smooth."
     },
     "picture-frame": {
       "v": "keep",
