@@ -10,10 +10,10 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 308 toys. 308 have a tap action today; the other 0 only hop.
+- 310 toys. 310 have a tap action today; the other 0 only hop.
 - **keep** (the effect is right: the owner liked it, or C2 finished it): 307.
 - **more** (has an effect; make it clearer or more dramatic): 0.
-- **new** (needs its own effect): 1.
+- **new** (needs its own effect): 3.
 - Visual fixes: 0 open, 28 done. Touch or drag interaction asked for: 4.
 
 ## By phase
@@ -61,7 +61,7 @@ Proposals below are suggestions; the owner may change them.
 - **E3, new effects: tiny things, anatomy and maths.** None.
 - **E4, new effects: nature and weather.** None.
 - **E5, new effects: food.** None.
-- **E6, new effects: balls and the rest.** Picture lab
+- **E6, new effects: balls and the rest.** Picture lab, Song landscape, Chladni plate
 - **F, touch and drag interaction.** Gummy bear, Building bricks, Newton's cradle, Puzzle cube.
 
 ## Scans (32)
@@ -2091,6 +2091,19 @@ Proposals below are suggestions; the owner may change them.
     (CC BY 3.0) and Muybridge's horse GIF (public domain) as samples, video sound on the speaker
     button.
   - Sound: The TV's click and hum; each style its own (a soft tone, the curtains' swish, a shimmer).
+
+## Studio (2)
+
+- **Song landscape** (`song-landscape`). Now: tap: Play or pause the song. Plan: new effect (E6).
+  - Owner: Approved on the Splashery Universe page (lane Studio Sound), September 29, 2026.
+  - Effect: A song's real spectrogram as a landscape of splats; a tap plays the song while a glowing
+    marker and the camera glide along it.
+  - Sound: The song itself.
+- **Chladni plate** (`chladni-plate`). Now: tap: Bow the plate. Plan: new effect (E6).
+  - Owner: Approved on the Splashery Universe page (lane Studio Sound), September 29, 2026.
+  - Effect: A tap bows a square metal plate: every sand grain hops where the plate swings and slides
+    to the still lines, and in about 3.6 s the mode's figure appears; tap again to stir it up.
+  - Sound: A steady hum at the mode's pitch, with sand pattering.
 
 ## Lab (1)
 

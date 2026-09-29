@@ -1389,6 +1389,20 @@ export const TOY_HELP = {
       "A screen made of splats shows a video or a GIF: every pixel of the picture is a small splat whose color changes with each frame. It comes in four styles: an old TV with a wooden cabinet and a curved glass face, a flat TV on a stand, a cinema with red curtains and rows of seats, and a hologram floating above its projector.\n\nTap it to switch it on: the old TV's picture opens from a bright line, the flat TV fades up, the curtains part, or the hologram flickers up from its beam. Tap again to pause and play. Turn on the sound with the speaker button, and open your own video or GIF in the Toy tab.",
   },
 
+  // ---- Studio ---------------------------------------------------------------------------
+  "chladni-plate": {
+    howTo:
+      "Tap to bow the plate and watch the sand find its still lines. Pick a mode in the Toy tab.",
+    about:
+      "In 1787 Ernst Chladni sprinkled sand on a metal plate and drew a violin bow along its edge. The plate shook, and the sand jumped away from the places that moved and gathered on the lines that stayed still, a different picture for each pitch. Those still lines are called nodal lines.\n\nTap to bow the plate: it hums at the mode's pitch and every grain of sand, a splat of its own, hops and slides until the figure appears. Tap again to stir the sand up. The Mode choice picks the pitch and the pattern. This toy uses the classic square-plate model, cos(nπx)·cos(mπy) ± cos(mπx)·cos(nπy) = 0, with a pitch that grows with n² + m².",
+  },
+  "song-landscape": {
+    howTo:
+      "Tap to play the song and watch its sound rise as a landscape. Open your own song in the Toy tab.",
+    about:
+      "A song is a wave, but you can also see what it is made of. This toy cuts the sound into short slices, measures how loud each pitch is in every slice (a short-time Fourier transform) and stands the answer up as a landscape of splats: time runs away from you, pitch runs across from low to high, and loudness is height.\n\nTap to play it: a glowing line and the camera glide along the landscape in time with the music. Open a song of your own in the Toy tab; it is read on your device and never uploaded. Long songs make longer, coarser landscapes.",
+  },
+
   // ---- Lab (lane Lab) -------------------------------------------------------------------
   "splat-field": {
     howTo: "Tap to send a pulse through it. Pick a Field in the Toy tab.",
