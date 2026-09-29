@@ -107,7 +107,9 @@ export class MotionDriver {
   // is where the tap landed, in the recipe's own coordinates (null for the
   // Play button and the keyboard). A recipe's `action.at(point, c)` may pick
   // another control to fire and an item: it returns a control key, or
-  // { key, pick }, or nothing for the usual action. drive() sees the last
+  // { key, pick }, or nothing for the usual action. It may also return
+  // { options, key, pick } to rebuild the toy with those options first
+  // (Player.switchTo). drive() sees the last
   // tap as info.tap = { point, key, pick, time, n }.
   act(time, point = null, forced = null) {
     const a = this.recipe?.action;
@@ -119,7 +121,15 @@ export class MotionDriver {
     } else if (a?.at && point) {
       const r = a.at(point, this.state);
       if (typeof r === "string") key = r;
-      else if (r) {
+      else if (r?.options) {
+        // A tap that switches the toy ({ options, key, pick }): the player
+        // rebuilds it with these options and then fires `key` on the new
+        // toy, so nothing changes here.
+        key = r.key ?? key;
+        pick = r.pick ?? null;
+        this.tap = { point, key, pick, time, n: (this.tap?.n ?? 0) + 1 };
+        return { key, value: 1, pick, point, options: r.options };
+      } else if (r) {
         key = r.key ?? key;
         pick = r.pick ?? null;
       }
