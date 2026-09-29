@@ -84,7 +84,14 @@ Model: Sonnet 5.5 (default effort). Started September 29, 2026.
   runner (`photo-3d-depth.js`), three CC0 samples with precomputed depth maps, sound, help, plan
   entry, credits, licenses, `tests/p3d.spec.mjs`, tools `p3d-depth.mjs`, `p3d-views.mjs`,
   `p3d-fixtures.mjs`.
-- Still to do: thumbnail, clips and cards, owner's marks.
+- Cards posted on the Effect review page (lane Photo3D, "built by Sonnet 5.5"): `p3d-sample`
+  (forest), `p3d-sample-street`, `p3d-sample-still-life`, `p3d-open` and `p3d-layers`. Made with
+  `tools/p3d-clip.mjs` and `tools/p3d-open-clip.mjs`.
+- Tests: `tests/p3d.spec.mjs` (10 tests) and `tests/smoke.spec.mjs` (49, with the embed-size test)
+  pass; `taps`, `unit`, `help` and `kit` pass (73 and the one fixed failure). The full 416-test run
+  stalled twice in this session's container restarts and did not finish: the Integrator's combined
+  run covers it.
+- Still to do: read the owner's marks (ids starting `p3d`) and fix any "fix".
 
 ## Notes
 
@@ -125,6 +132,8 @@ Model: Sonnet 5.5 (default effort). Started September 29, 2026.
 
 ## Known issues
 
+- The depth model runs on the page's main thread, so the page stops for a few seconds while it works
+  (3.5 to 5 s here, longer on a phone). A worker (`ort.env.wasm.proxy`) would fix it; not tried.
 - Behind a near object the far surface is missing (no data), so a big turn shows a dark gap there.
   That is the cost of cutting instead of stretching.
 - Thin near structures (leaves, twigs) come out ragged where the model's depth is coarse.
