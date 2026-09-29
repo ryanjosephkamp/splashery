@@ -37,14 +37,21 @@ const cam = opt("cam", "") ? opt("cam", "").split(",").map(Number) : null;
 const ui = opt("ui", "bar");
 const events = JSON.parse(opt("events", "[]"));
 const stripN = Number(opt("strip", 0));
+// --dpr: the phone's device scale (3 renders at its real density); --profile:
+// the detail tier; --crop=top,height keeps that band of the page (CSS px);
+// --scale: the GIF's pixels per CSS pixel (2 keeps it under 15 MB).
+const dpr = Number(opt("dpr", 1));
+const profile = opt("profile", "high");
+const crop = opt("crop", "") ? opt("crop", "").split(",").map(Number) : null;
+const outScale = Number(opt("scale", dpr));
 
 const browser = await chromium.launch({
   executablePath: process.env.SPLASHERY_CHROMIUM || undefined,
   args: ["--use-angle=swiftshader", "--enable-unsafe-swiftshader", "--ignore-gpu-blocklist", "--enable-webgl"], // prettier-ignore
 });
-const page = await browser.newPage({ viewport: { width: W, height: H } });
+const page = await browser.newPage({ viewport: { width: W, height: H }, deviceScaleFactor: dpr });
 page.on("pageerror", (e) => console.error("page error:", e.message));
-await page.goto(`${base}?renderer=webgl2&profile=high&adapt=off`);
+await page.goto(`${base}?renderer=webgl2&profile=${profile}&adapt=off`);
 await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
 await page.evaluate((id) => window.__splashery.app.chooseToy(id), toy);
 const hide = {
@@ -133,21 +140,25 @@ for (let n = 0; n < total; n++) {
     player.camera.tgt = { ...window.__clip.hold };
     await player.stage.captureFrame();
   }, step);
-  const png = await page.screenshot({ timeout: 240_000 });
+  const clip = crop ? { x: 0, y: crop[0], width: W, height: crop[1] } : undefined;
+  const png = await page.screenshot({ timeout: 600_000, clip });
   if (pick.has(n)) shots.push(png);
   await page.evaluate(
-    async ({ b64, delay }) => {
+    async ({ b64, delay, dpr, scale }) => {
       const { quantize, applyPalette } = await import("gifenc");
       const blob = await (await fetch(`data:image/png;base64,${b64}`)).blob();
       const bmp = await createImageBitmap(blob);
-      const cv = new OffscreenCanvas(bmp.width, bmp.height);
+      const ow = Math.round((bmp.width / dpr) * scale);
+      const oh = Math.round((bmp.height / dpr) * scale);
+      const cv = new OffscreenCanvas(ow, oh);
       const g = cv.getContext("2d");
-      g.drawImage(bmp, 0, 0);
-      const rgba = g.getImageData(0, 0, bmp.width, bmp.height).data;
+      g.imageSmoothingQuality = "high";
+      g.drawImage(bmp, 0, 0, ow, oh);
+      const rgba = g.getImageData(0, 0, ow, oh).data;
       const palette = quantize(rgba, 256, { format: "rgb565" });
-      window.__clip.gif.writeFrame(applyPalette(rgba, palette, "rgb565"), bmp.width, bmp.height, { palette, delay, repeat: 0 }); // prettier-ignore
+      window.__clip.gif.writeFrame(applyPalette(rgba, palette, "rgb565"), ow, oh, { palette, delay, repeat: 0 }); // prettier-ignore
     },
-    { b64: png.toString("base64"), delay: Math.round(1000 / fps) },
+    { b64: png.toString("base64"), delay: Math.round(1000 / fps), dpr, scale: outScale },
   );
 }
 const bytes = await page.evaluate(() => {
@@ -168,7 +179,7 @@ if (shots.length) {
       const b = await cv.convertToBlob({ type: "image/png" });
       return Array.from(new Uint8Array(await b.arrayBuffer()));
     },
-    { list: shots.map((s) => s.toString("base64")), W, H },
+    { list: shots.map((s) => s.toString("base64")), W, H: crop ? crop[1] : H },
   );
   fs.writeFileSync(out.replace(/\.gif$/, "-strip.png"), Buffer.from(strip));
 }
