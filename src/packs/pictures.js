@@ -1398,10 +1398,10 @@ function goldAt(n, gloss, hollow = 0) {
   const dif = Math.max(0, n[0] * L[0] + n[1] * L[1] + n[2] * L[2]);
   const hv = [L[0], L[1], L[2] + 1];
   const hl = Math.hypot(...hv);
-  const spec = Math.pow(Math.max(0, (n[0] * hv[0] + n[1] * hv[1] + n[2] * hv[2]) / hl), 18) * gloss;
-  let c = mix("#6a4a16", "#d9ae52", 0.3 + 0.7 * dif);
-  c = shade(c, 1 - 0.28 * hollow);
-  return mix(c, "#fff1c2", Math.min(1, spec * 0.9));
+  const spec = Math.pow(Math.max(0, (n[0] * hv[0] + n[1] * hv[1] + n[2] * hv[2]) / hl), 26) * gloss;
+  let c = mix("#4e3409", "#d6a94a", 0.12 + 0.88 * dif);
+  c = shade(c, 1 - 0.4 * hollow);
+  return mix(c, "#fff3cc", Math.min(1, spec * 1.15));
 }
 
 const FRAME_RECIPE = {
@@ -1619,7 +1619,7 @@ export const RECIPES = {
     turntable: false,
     tiltLock: true, // a drag only spins it left and right (lane Viewer)
     // Few splats of its own (the card); the picture's are the sheet's.
-    density: 0.12,
+    density: 0.3, // (r3: enough for the card's edges to stay sharp)
     options: [
       {
         key: "sample",
