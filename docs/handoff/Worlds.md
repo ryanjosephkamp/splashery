@@ -206,3 +206,29 @@ Model: Opus 5.5 (default effort).
 - Lessons: build limbs as lathes (even spreading draws a lattice on `k.cone`), keep solids at
   opacity 1 and color noise low, and judge it with `tools/world-clip.mjs … character` (a close-up at
   2x).
+
+## r2: a sharper island
+
+Branch `claude/lane-worlds-r2`, PR "Phase Worlds r2: a sharper island". Built by Opus 5.5.
+
+The owner's words (September 29, 2026), word for word: "My main criticism is about the worlds: still
+just a bit too grainy, and the player/character looks way too low-poly and simplistic. But, the
+mechanics are solid! So it primarily seems like design problems and sharpness, not physics and
+mechanics."
+
+The Operator's plan: the character goes to a new Character lane (it owns `src/worlds/character.js`
+and the character section of docs/WORLDS.md). This round takes the grain out of everything else:
+
+1. The ground, the grass, the sand and rocks, the water's surface, the sky and the signs, with
+   Fidelity A's method (even placement, full opacity, full density at each tier, flat splats on flat
+   ground, thin blades, clean colors with low noise).
+2. The props rebaked from the 97 toys Fidelity A and B sharpened, checked at walking distance.
+3. The render settings lane Sharpness measured (#107): the pixel-ratio cap, the resolution drop and
+   the sharp kernel, applied in `src/worlds/render.js` where they help.
+4. Within the tier budgets, measured.
+
+Cards: `wd-island-r2`, `wd-ground-r2`, `wd-props-r2`, `wd-sky-r2`.
+
+### r2 state
+
+- September 29, 2026: branch restarted from main after #78 merged.
