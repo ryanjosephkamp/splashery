@@ -85,8 +85,12 @@ Started September 29, 2026.
 - Waiting on an engine PR (see "For the Operator"): opening your own sound file, and playing the
   song through the speaker button. The toy is written against that interface; until it lands the
   sample plays silently (the marker still glides) and "Open a song" cannot read a file.
-- Not done yet: camera glide (the marker glides; the view does not follow), clips and cards, contact
-  sheet and thumbnails, the standard checks.
+- Also done: thumbnails, contact sheet, credits, `sts-*` screenshots, the full suite (305 of 307
+  passed; the two failures were the missing thumbnails, now added), prettier and us-english clean.
+  Cards on the Effect review page (lane StudioSound): `sts-chladni`, `sts-chladni-mode2`, `sts-song`
+  (all labeled built by Sonnet 5.5).
+- Not done yet: camera glide (the marker glides; the view does not follow), sound and file opening
+  (engine PR).
 
 ## Notes
 
