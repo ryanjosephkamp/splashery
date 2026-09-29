@@ -4,6 +4,7 @@
 
 import * as pc from "./pc.js";
 import { MODIFIER, MODIFIER_KIT, MODIFIER_RIG } from "./effects.js";
+import { kernelChunks, normalizeKernel } from "./kernels.js";
 
 export class NoGPUError extends Error {}
 
@@ -556,6 +557,20 @@ export class Stage {
     if (g.minPixelSize === v.minPixelSize && g.minContribution === v.minContribution) return;
     g.minPixelSize = v.minPixelSize;
     g.minContribution = v.minContribution;
+    this.requestRender();
+  }
+
+  // Lane Lab: the splat kernel (src/kernels.js). The Gaussian is the engine's
+  // own; the chunk is only touched once a toy asks for another kernel.
+  setKernel(name) {
+    const want = normalizeKernel(name);
+    if (want === (this.kernel || "gaussian")) return;
+    const mat = this.app.scene.gsplat.material;
+    const code = kernelChunks(want);
+    mat.shaderChunks.glsl.set("gsplatModifyPS", code.glsl);
+    mat.shaderChunks.wgsl.set("gsplatModifyPS", code.wgsl);
+    mat.update();
+    this.kernel = want;
     this.requestRender();
   }
 
