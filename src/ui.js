@@ -942,10 +942,12 @@ export function createUI(app) {
     error.className = "warning";
     error.setAttribute("role", "alert");
     error.hidden = true;
-    const apply = async (text, fileName = "") => {
+    // file: the File itself, for a recipe with input.binary (a sound file,
+    // say), which reads it itself; the text is then "".
+    const apply = async (text, fileName = "", file = null) => {
       error.hidden = true;
       try {
-        const options = await input.read(text, fileName);
+        const options = await input.read(text, fileName, file);
         await app.setToyOptions(options);
       } catch (err) {
         error.textContent = err.message;
@@ -1002,7 +1004,8 @@ export function createUI(app) {
         error.hidden = false;
         return;
       }
-      apply(await f.text(), f.name);
+      if (input.binary) apply("", f.name, f);
+      else apply(await f.text(), f.name);
     });
     const note = document.createElement("p");
     note.className = "note";
