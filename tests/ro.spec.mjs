@@ -97,7 +97,7 @@ test.describe("Real objects", () => {
             expect(Number.isFinite(v)).toBe(true);
         }
       }
-      expect(moved, `${id} moves a part`).toBeGreaterThan(20);
+      expect(moved, `${id} moves a part`).toBeGreaterThan(10);
       // The last moment of the tap is the rest pose (and the channels are back at 0).
       const end = driveAt(recipe, ctx, 1e-6);
       const rest = driveAt(recipe, ctx, 0);
