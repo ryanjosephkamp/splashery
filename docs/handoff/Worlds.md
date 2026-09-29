@@ -232,3 +232,20 @@ Cards: `wd-island-r2`, `wd-ground-r2`, `wd-props-r2`, `wd-sky-r2`.
 ### r2 state
 
 - September 29, 2026: branch restarted from main after #78 merged.
+- The grain, measured (`tools/world-grain.mjs`, 390×844 at 2x, mid): speckle on the ground view 0.07
+  → 0.03, the shore 0.09 → 0.05, the props 0.09 → 0.05 (lower is cleaner). Lab's sharp kernel alone
+  halved it; the ground, water and sign changes make the rest visible as cleaner texture (see the
+  before and after in `wd-island-r2`).
+- Changes: an even, flat, nearly uniform ground carpet (sizes within ±7%, nearly round, fully
+  opaque, color noise ±1%); grass blades in the ground's own color; round, even water splats with a
+  soft, isotropic sheen; sign boards with a flat front face and letters placed exactly (nine splats
+  per font pixel), kept at full detail to about 80 m; bushes as solid shells; the sharp kernel on
+  every tier; the pixel ratio capped per tier (1.5, 2, 3, 3), with `?dpr=` and `?kernel=` to
+  override.
+- Cards: `wd-island-r2` (before and after), `wd-ground-r2`, `wd-props-r2`, `wd-sky-r2`.
+- The props rebake from the packs on main, so they carry Fidelity A and B's fixes.
+
+### r2 known issues
+
+- A bush seen from very close reads as a smooth green shape (solid, but plain).
+- The far sea under the aerial view is soft (large far-level splats), without grain.

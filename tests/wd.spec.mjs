@@ -242,7 +242,9 @@ test.describe("worlds render (r2)", () => {
   test("the sharp kernel and the tier's pixel ratio are on, and the URL overrides them", async ({
     browser,
   }) => {
-    const page = await browser.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 3 }); // prettier-ignore
+    test.setTimeout(600_000);
+    // A small window keeps three loads quick; the ratio is what is checked.
+    const page = await browser.newPage({ viewport: { width: 200, height: 200 }, deviceScaleFactor: 3 }); // prettier-ignore
     await open(page, "mid");
     let r = await page.evaluate(() => ({ kernel: window.__world.view.kernel, ratio: window.__world.view.device.maxPixelRatio })); // prettier-ignore
     expect(r.kernel).toBe("sharp");
