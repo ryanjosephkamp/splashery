@@ -2108,15 +2108,23 @@ Proposals below are suggestions; the owner may change them.
   - Improved: Books: a tap swings the frame, its wire and photo about the nail like a damped
     pendulum, smaller each swing, until it hangs straight again (3 s).
   - Sound: A knock on the wall, the wire creaking on the nail, and a softer knock.
-- **Screen** (`screen`). Now: tap: Switch on, then play or pause. Plan: keep.
-  - Owner: From the owner's notes of September 28, 2026 (lane Screens; labs only).
+- **Screen** (`screen`). Now: tap: Switch on or off. Plan: keep.
+  - Owner: From the owner's notes of September 28, 2026 (lane Screens; labs only), and his review of
+    September 29, 2026: "very close to perfect"; sharper sets, nothing of the picture while off, and
+    a real off switch (lane Screens r2).
   - Effect: Your video or GIF on a screen of splats, as an old TV, a flat TV, a cinema or a
-    hologram; the tap switches it on (the TV's bright line opens, the flat TV fades up, the curtains
-    part, the hologram flickers up), then plays and pauses.
+    hologram. A tap switches it on (the TV's bright line opens, the flat TV fades up, the curtains
+    part, the hologram flickers up); a tap on the picture plays and pauses; a tap on its switch (the
+    old TV's power knob, the flat TV's button, the curtains, the hologram's base) switches it off:
+    the old TV's picture shrinks to a bright dot, the flat TV fades to black, the curtains close,
+    the hologram sinks into its beam.
   - Improved: Screens: four styles on a picture sheet with method "screen", a Big Buck Bunny scene
     (CC BY 3.0) and Muybridge's horse GIF (public domain) as samples, video sound on the speaker
-    button.
-  - Sound: The TV's click and hum; each style its own (a soft tone, the curtains' swish, a shimmer).
+    button. Screens r2: the picture's sheet is hidden while the set is off or the curtains are
+    closed (nothing shows through), a GIF holds its frame and a video pauses; an off switch on each
+    style; sharp sets (even placement in square tiles, walnut, velvet, brass and gold).
+  - Sound: The TV's click and hum, and on switching off its click and falling whine; each style its
+    own (a soft tone, the curtains' swish, a shimmer).
 
 ## Studio (3)
 
