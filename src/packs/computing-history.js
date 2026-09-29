@@ -117,6 +117,70 @@ function gear(k, pos, R, teeth, t, color, opts = {}) {
   k.add(evenCylinder(R * 0.2, R * 0.2, t * 1.6, true), { pos, rot: opts.rot, even: true, weight: 2, pattern: false, part: opts.part, color: steel }); // prettier-ignore
 }
 
+// A box built face by face, so the faces people see get the splats: each
+// face takes its own weight (0 leaves it out), keyed front (+z), back, left
+// (-x), right, top and bottom. Faces are placed evenly and lie flat, and a
+// darker band along each edge keeps the corners crisp.
+function panelBox(k, size, pos, color, weights, opts = {}) {
+  const [sx, sy, sz] = size;
+  const faces = {
+    front: { n: [0, 0, 1], u: [1, 0, 0], v: [0, 1, 0], w: sx, h: sy, d: sz / 2 },
+    back: { n: [0, 0, -1], u: [-1, 0, 0], v: [0, 1, 0], w: sx, h: sy, d: sz / 2 },
+    right: { n: [1, 0, 0], u: [0, 0, -1], v: [0, 1, 0], w: sz, h: sy, d: sx / 2 },
+    left: { n: [-1, 0, 0], u: [0, 0, 1], v: [0, 1, 0], w: sz, h: sy, d: sx / 2 },
+    top: { n: [0, 1, 0], u: [1, 0, 0], v: [0, 0, -1], w: sx, h: sz, d: sy / 2 },
+    bottom: { n: [0, -1, 0], u: [1, 0, 0], v: [0, 0, 1], w: sx, h: sz, d: sy / 2 },
+  };
+  const edge = opts.edge ?? 0.012;
+  for (const [name, f] of Object.entries(faces)) {
+    const weight = weights[name] ?? 0;
+    if (!weight) continue;
+    // One flat face with an even 2D layout (like evenBox's faces).
+    const at = (a, b) => ({
+      p: [0, 1, 2].map((i) => pos[i] + f.n[i] * f.d + f.u[i] * (a - 0.5) * f.w + f.v[i] * (b - 0.5) * f.h), // prettier-ignore
+      n: f.n,
+      u: a,
+      v: b,
+    });
+    // Each even point is nudged by about half a splat's spacing, so the
+    // exact lattice doesn't show as a fine hatch (docs/PACKS.md 7c).
+    const hash = (x, y) => {
+      const q = Math.sin(x * 12.9898 + y * 78.233) * 43758.5453;
+      return q - Math.floor(q) - 0.5;
+    };
+    const nudge = opts.nudge ?? 0.003;
+    const shape = {
+      area: f.w * f.h,
+      thick: Math.min(f.w, f.h) * 0.01,
+      sample: (rand) => at(rand(), rand()),
+      sampleEven: (a, b) =>
+        at(clamp01(a + (hash(a, b) * nudge) / f.w), clamp01(b + (hash(b + 0.37, a) * nudge) / f.h)),
+    };
+    k.add(shape, {
+      even: true,
+      flat: 0.12,
+      weight,
+      size: 1.2,
+      pattern: false,
+      color: (c) => {
+        const out = color(c, name);
+        const e = Math.min(f.w / 2 - Math.abs((c.u - 0.5) * f.w), f.h / 2 - Math.abs((c.v - 0.5) * f.h)); // prettier-ignore
+        if (!out || e > edge) return out;
+        return out.keep ? keep(shade(out.c, 0.8)) : shade(out, 0.8);
+      },
+    });
+  }
+}
+// Smooth wood: broad, soft grain bands along x (no fine noise, which reads
+// as blur at phone size).
+function cleanWood(col = WOOD, scale = 1) {
+  return (c) => {
+    const g =
+      0.5 + 0.5 * Math.sin((c.p[1] * 22 + c.p[2] * 9) * scale + Math.sin(c.p[0] * 3.1) * 1.4);
+    return keep(lit(mix(col, shade(col, 0.86), g), c.n, { amb: 0.66, dif: 0.4, spec: 0.14 }));
+  };
+}
+
 // ---- Pixel-font text -----------------------------------------------------------------
 
 const GLYPHS = {
@@ -1165,8 +1229,8 @@ function buildEnigma(k, o) {
   // The box: a wooden case with a dark crackle-finish top plate.
   const W = 1.62;
   const D = 1.72;
-  block(k, [W + 0.12, 0.36, D + 0.12], [0, -0.2, -0.22], wood());
-  block(k, [W, 0.02, D], [0, -0.01, -0.22], (c) => keep(lit(mix("#2a2c2f", "#34373b", 0.5 + 0.5 * c.noise(c.p[0] * 60, 0, c.p[2] * 60)), c.n, { amb: 0.75, dif: 0.3, spec: 0.15 }))); // prettier-ignore
+  panelBox(k, [W + 0.12, 0.36, D + 0.12], [0, -0.2, -0.22], cleanWood(), { front: 2.2, top: 1.2, left: 1.8, right: 1.8, back: 0.4 }); // prettier-ignore
+  panelBox(k, [W, 0.02, D], [0, -0.01, -0.22], (c) => keep(lit(mix("#2b2d31", "#36393e", clamp01(0.5 - c.p[2] * 0.3)), c.n, { amb: 0.75, dif: 0.3, spec: 0.15 })), { top: 1.6 }); // prettier-ignore
   // The keys: a black cap with a metal rim and a white letter on a short
   // stem (tokens 0..25, by letter).
   for (const ch of AZ) {
@@ -1287,14 +1351,14 @@ function buildEnigma(k, o) {
   // decoded letters on the second tap (channel 1).
   const lz = -0.22 - D / 2 - 0.06;
   const lidH = 0.98;
-  block(k, [W + 0.12, lidH, 0.05], [0, lidH / 2 - 0.02, lz], wood(DARK_WOOD));
+  panelBox(k, [W + 0.12, lidH, 0.05], [0, lidH / 2 - 0.02, lz], cleanWood(DARK_WOOD), { front: 1.8, top: 1.2, left: 1.2, right: 1.2, back: 0.3 }); // prettier-ignore
   // The lid's brass hinges.
   for (const sx of [-0.55, 0.55])
     k.add(evenCylinder(0.02, 0.02, 0.16, true), { pos: [sx, -0.01, lz + 0.03], rot: [0, 0, 90], even: true, weight: 2, pattern: false, color: brass }); // prettier-ignore
   const padW = 1.3;
   const padH = 0.74;
   const pcy = lidH / 2 + 0.02;
-  block(k, [padW, padH, 0.01], [0, pcy, lz + 0.03], (c) => keep(lit("#f3ecd8", c.n, { amb: 0.85, dif: 0.2, spec: 0 }))); // prettier-ignore
+  panelBox(k, [padW, padH, 0.01], [0, pcy, lz + 0.03], (c) => keep(lit("#f3ecd8", c.n, { amb: 0.85, dif: 0.2, spec: 0 })), { front: 1.4 }, { edge: 0.006 }); // prettier-ignore
   const px = 0.022;
   const lines = [
     ["MESSAGE", msg, null],
@@ -1477,11 +1541,11 @@ function buildBombe(k, o) {
   const D = 0.74;
   const fz = BO.front;
   // The cabinet: a dark painted steel case on a plinth, with brass edges.
-  block(k, [W, H, D], [0, H / 2, 0], (c) => keep(lit(mix("#2b2f33", "#33383d", 0.5 + 0.5 * c.noise(c.p[0] * 40, c.p[1] * 40, c.p[2] * 40)), c.n, { amb: 0.72, dif: 0.35, spec: 0.12 }))); // prettier-ignore
+  panelBox(k, [W, H, D], [0, H / 2, 0], (c) => keep(lit(mix("#2a2e33", "#353a40", clamp01(c.p[1] / H)), c.n, { amb: 0.72, dif: 0.35, spec: 0.12 })), { front: 2.2, left: 1.4, right: 1.4, top: 1.2, back: 0.3 }); // prettier-ignore
   block(k, [W + 0.08, 0.08, D + 0.08], [0, 0.04, 0], (c) =>
     keep(lit("#1d2023", c.n, { amb: 0.75 })),
   );
-  block(k, [W - 0.1, 0.72, 0.012], [-0.08 + 0.02, 1.34, fz + 0.006], (c) => keep(lit("#1f2226", c.n, { amb: 0.8, dif: 0.25 }))); // prettier-ignore
+  panelBox(k, [W - 0.1, 0.72, 0.012], [-0.08 + 0.02, 1.34, fz + 0.006], (c) => keep(lit("#1f2226", c.n, { amb: 0.8, dif: 0.25 })), { front: 1.6 }, { edge: 0 }); // prettier-ignore
   // Raised frames round the drum panel and the readout, rivets along the
   // cabinet's front edges, handles and vents on its sides.
   const frame = (w, h, cx, cy) => {
@@ -1545,7 +1609,7 @@ function buildBombe(k, o) {
   // The readout board below the drums: the coded text, and, when it stops,
   // the setting found (fade channel 1) and the plain text (channel 0).
   const ry = 0.62;
-  block(k, [2.1, 0.46, 0.02], [-0.08, ry, fz + 0.01], (c) => keep(lit("#efe6cc", c.n, { amb: 0.85, dif: 0.2, spec: 0 }))); // prettier-ignore
+  panelBox(k, [2.1, 0.46, 0.02], [-0.08, ry, fz + 0.01], (c) => keep(lit("#efe6cc", c.n, { amb: 0.85, dif: 0.2, spec: 0 })), { front: 1.6 }, { edge: 0 }); // prettier-ignore
   const px = 0.0155;
   const lx = -0.08 - 1.0;
   const line = (label, str, y, color, ch) => {
