@@ -186,6 +186,14 @@ background" by Joselodos
 [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (checked on the live page on September
 28, 2026), cropped and scaled to 800 by 600 (`assets/toys/gaussian-splatting/strawberry.jpg`).
 
+## Studio
+
+The song landscape (a labs toy) opens with a 20 second tune of our own, made by
+`tools/make-song-sample.mjs` (`assets/toys/song-landscape/sample.wav`) and released under
+[CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/). Songs people open are decoded in
+their browser and never uploaded. The Chladni plate uses the classic square-plate model; no data or
+code was taken from anywhere.
+
 ## National flags
 
 The pattern layer can wrap a national flag around any toy. The flags are SVG files from
