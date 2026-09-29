@@ -2729,7 +2729,7 @@ export const TOYS = [
     kind: "kit",
     pack: "music",
     tags: "instrument keys keyboard hammers rods twinkle little star lullaby",
-    camera: { yaw: 0.45, pitch: 0.42, roll: 0, distance: 4.2 },
+    camera: { yaw: 0.45, pitch: 0.42, roll: 0, distance: 4.7 },
   },
 
   // ---- Pack: vehicles ----
