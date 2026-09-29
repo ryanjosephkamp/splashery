@@ -116,10 +116,20 @@ Model: Opus 5.5 (default effort).
   (`keep`), a thumbnail and tests in `tests/mca.spec.mjs`.
 - Cards on the Effect review page (lane MachinesA): `mca-turing`, `mca-difference`, `mca-enigma`,
   `mca-bombe`, `mca-stills`. Waiting for the owner's marks; an hourly check-in reads them.
-- Full suite: 423 passed, 3 failed on the first run; the two Books tests timed out while two
-  orphaned test workers of mine held 12 GB (stopped; both pass alone), and the phone shelf test
-  caught the Bombe's long name (fixed). After the fixes and the merge of main: the lane's, taps,
-  help and AI tests pass (102), prettier and the spelling check are clean.
+- Owner's marks (September 29, 2026, 19:47 UTC check-in): all five "fix", with the same note:
+  "Basically everything (mechanics, etc.) looks perfect, but this could use just a bit more detail
+  and sharpness" ("needs more detail" for the difference engine). Done in the same PR: density 2 on
+  all four; even shapes on every part (the last `k.cylinder`, `k.disc`, `k.tube` and `k.cone` went);
+  screws, trim and feet (Turing); a gear train on the crank, engraved shields with window bezels,
+  carriage racks, finials and label plates (difference engine); a lampboard plate, latches, hinges
+  and screws (Enigma); clean drum faces, drum bolts, panel frames, rivets, handles and vents
+  (Bombe). The r2 clips are rendered at 520 to 560 px, nearer what a phone shows at its pixel ratio.
+  Cards `mca-turing-r2`, `mca-difference-r2`, `mca-enigma-r2`, `mca-bombe-r2`, `mca-stills-r2`
+  posted; the old cards marked replaced.
+- Full suite (first round): 423 passed, 3 failed on the first run; the two Books tests timed out
+  while two orphaned test workers of mine held 12 GB (stopped; both pass alone), and the phone shelf
+  test caught the Bombe's long name (fixed). After the fixes and the merge of main: the lane's,
+  taps, help and AI tests pass (102), prettier and the spelling check are clean.
 
 ## Notes
 
@@ -155,6 +165,9 @@ Model: Opus 5.5 (default effort).
   times, far slower than the search; the middle and bottom drums step as the search does.
 
 ## Known issues
+
+- Text can't get finer than it is: smaller splats for the letters fall under the engine's two-pixel
+  cull and vanish (tried and reverted). A sharper look for text needs the labs sharp kernel.
 
 - The rotor ring letters on the Enigma and the drum faces on the Bombe are too small to read at
   phone size (the drums show 26 ticks and a red mark at A instead of letters); the setting reads on
