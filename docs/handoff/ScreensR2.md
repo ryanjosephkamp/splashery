@@ -23,14 +23,14 @@ is "very close to perfect". His notes, word for word:
 >   perfect resolution, but the splat toys that we've constructed around them need better
 >   resolution. You could also try to make the hologram base less grainy or something, but it's
 >   already pretty sharp.
-> - I noticed something that might be an inherent limitation of Gaussian splats, but even if so,
->   I'd like to see if we can improve it enough to no longer be noticeable. I've attached some
+> - I noticed something that might be an inherent limitation of Gaussian splats, but even if so, I'd
+>   like to see if we can improve it enough to no longer be noticeable. I've attached some
 >   screenshots of this, and the effect is happening for both videos and GIFs on all three of the
 >   first styles for this toy (old TV, flat TV, and cinema). If you look closely at these
->   screenshots, you'll notice that you can actually see the GIF horse and the video frames when
->   the screens are off and when the cinema curtains are closed. For the video, only the current
->   still frame is present, but the GIF continues to move/play, so if you zoom in enough, you can
->   actually see the moving horse.
+>   screenshots, you'll notice that you can actually see the GIF horse and the video frames when the
+>   screens are off and when the cinema curtains are closed. For the video, only the current still
+>   frame is present, but the GIF continues to move/play, so if you zoom in enough, you can actually
+>   see the moving horse.
 > - Oh, can we see if there's a way to allow the user to turn the screens off? Like if they click a
 >   certain button or somewhere then the TV turns off, or if they click the curtains in the cinema
 >   then the curtains close?
@@ -45,18 +45,18 @@ Build, in this order:
 1. **Nothing of the picture while it's off.** The cause is in the recipe, not in splats as such:
    drive() always sets `out.sheets = { screen: { page: 0, visible: 1 } }`, and the "off" look is a
    separate layer drawn over the picture at opacity 0.99 (the flat TV's glossy panel, the old TV's
-   glass, the closed curtains). The picture's splats still draw underneath and leak through the
-   gaps and the soft edges. Hide the picture itself while off or closed (its sheet's visibility
-   follows the switch-on, so it's 0 when off and when the curtains are closed), keep the off-look
-   layers solid, and let the switch-on effects reveal the picture as they do now. A GIF must not
-   keep advancing behind a switched-off screen, and a video pauses when you switch off (and
-   remembers where it was). If this needs a change in the picture engine (for example, a way to
-   pause a GIF), make it a small additive "Engine: …" PR on claude/lane-screens-r2-engine, merged
-   first (as #74, #93 and #99 did). Check it zoomed in close at 1440×900 as well as at phone size:
-   not a pixel of the picture shows when off.
+   glass, the closed curtains). The picture's splats still draw underneath and leak through the gaps
+   and the soft edges. Hide the picture itself while off or closed (its sheet's visibility follows
+   the switch-on, so it's 0 when off and when the curtains are closed), keep the off-look layers
+   solid, and let the switch-on effects reveal the picture as they do now. A GIF must not keep
+   advancing behind a switched-off screen, and a video pauses when you switch off (and remembers
+   where it was). If this needs a change in the picture engine (for example, a way to pause a GIF),
+   make it a small additive "Engine: …" PR on claude/lane-screens-r2-engine, merged first (as #74,
+   #93 and #99 did). Check it zoomed in close at 1440×900 as well as at phone size: not a pixel of
+   the picture shows when off.
 2. **A real off switch.** Taps know where they land (`action.at(point, c)`, PACKS.md "Action").
-   Today a tap switches the set on, then only plays or pauses, so it can never be switched off.
-   Make it:
+   Today a tap switches the set on, then only plays or pauses, so it can never be switched off. Make
+   it:
    - Old TV: tap the power knob (the `power` part; it turns with a click) to switch off or on. The
      picture shrinks to a bright dot and fades, as old sets did.
    - Flat TV: tap the power button by the red light (the light goes red when off, white or off when
@@ -144,9 +144,9 @@ September 29, 2026: started. Engine PR "Engine: hold a GIF on its frame" on
   keeps the hidden sheet built, so it is there the moment the set comes on. The off-look layers (the
   old TV's glass, the flat TV's panel) are fully opaque now (they were 0.99).
 - **A GIF stops, a video pauses.** The engine PR adds `pics.hold(on)`: the GIF's clock stops while
-  held and goes on from the same frame. The Screen holds its GIF while off (or paused by a tap on the
-  picture). A video pauses when switched off and plays on from there when switched back on (unless
-  it was paused before).
+  held and goes on from the same frame. The Screen holds its GIF while off (or paused by a tap on
+  the picture). A video pauses when switched off and plays on from there when switched back on
+  (unless it was paused before).
 - **The switch.** `action.at(point)` returns `{ key: "power", pick: 1 }` on the style's switch and
   `pick: 2` anywhere else; `drive()` reads `info.tap`. While off, any tap switches on. While on, the
   switch (or the Toy tab's button, which has no point) switches off and anywhere else plays and
@@ -158,11 +158,11 @@ September 29, 2026: started. Engine PR "Engine: hold a GIF on its frame" on
     over from the top and the bottom (channel 0 falling).
   - Flat TV: a small power button (with the power mark) beside the red standby light, in a deeper
     chin; the panel fades back to glossy black and the light comes back red.
-  - Cinema: the curtains (any pleat, where it is, and the valance). They close over the screen;
-    the picture hides once they meet.
-  - Hologram: the projector's base; a small button on its rim glows cyan while on and red while
-    off. The picture sinks into the beam (its part now pivots at its lower edge) and the beam falls
-    back into the lens.
+  - Cinema: the curtains (any pleat, where it is, and the valance). They close over the screen; the
+    picture hides once they meet.
+  - Hologram: the projector's base; a small button on its rim glows cyan while on and red while off.
+    The picture sinks into the beam (its part now pivots at its lower edge) and the beam falls back
+    into the lens.
 - **Sharp sets.** The kit spreads even points over the unit square, so a long thin surface gets them
   far apart one way and crowded the other: diagonal hatching on the pleats, the valance, thin rims
   and the rounded edges of a rounded box (one shape for all its faces and edges). `strip()` cuts a
@@ -170,10 +170,10 @@ September 29, 2026: started. Engine PR "Engine: hold a GIF on its frame" on
   `softBox()` builds a rounded box as 26 such pieces (its edges at twice the density, so thinner
   splats, and its faces' splats thinner near their borders); `band()` is a rim round a rounded
   rectangle; `thinEdges()` shrinks splats near a surface's border so its edge is crisp. Colors are
-  functions with no per-splat noise: walnut with long soft stripes and a lacquer sheen, velvet
-  (deep where it faces you, a pale sheen where the pile turns away), brass, gold, satin black. The
-  old TV's bezel now slopes from the wood up to the glass (it floated in front before, so the dark
-  tube showed round it from the side). Density 2 (was 0.8).
+  functions with no per-splat noise: walnut with long soft stripes and a lacquer sheen, velvet (deep
+  where it faces you, a pale sheen where the pile turns away), brass, gold, satin black. The old
+  TV's bezel now slopes from the wood up to the glass (it floated in front before, so the dark tube
+  showed round it from the side). Density 2 (was 0.8).
 
 ## Notes
 
