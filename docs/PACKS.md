@@ -704,6 +704,22 @@ density, mirror chrome on thin parts, see-through `rim()` shells and faint cloud
 - **Faint clouds:** splats under about 1/255 alpha are dropped, so very faint big splats turn into
   blobs; water and rings drawn as clouds take `even: true` (a sunflower spiral).
 
+## 7d. Smooth bodies and placed recipes
+
+From lane Anatomy (September 29, 2026), whose atlas is a kit-built body with our own organ toys
+inside it (`src/packs/anatomy-atlas.js`):
+
+- **A smooth body from primitives.** Join ellipsoids and round cones with an order-independent
+  smooth union: the nearest primitive's distance, less the largest fillet any neighbor makes with
+  it. A chained smooth minimum depends on the order and leaves steps that show as dark specks.
+  Sample each primitive's surface evenly, push the points onto the joined surface, and keep only the
+  points where that primitive is the nearest, so overlaps don't double up. Make all the points at
+  once and size each splat from its four nearest neighbors, so a primitive the join stretches still
+  closes without cracks (`bodyShape()`, `fieldAt()`).
+- **Another toy's recipe inside a toy.** Build it through a proxy kit (`placed()`) that moves, turns
+  and scales its shapes and gives its color functions their own coordinates, so the colors stay
+  right. Drop its moving effects and lower its shapes' grids to fit the budget.
+
 ## 8. Checking your work
 
 ```sh
