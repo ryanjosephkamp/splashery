@@ -160,6 +160,18 @@ Model: Opus 5.5 (default effort), for the whole lane. No helpers used.
 - Build time: straight tubes need `{ samples: 4, grid: 12 }` and big curved surfaces an explicit
   `normal`, or a toy with hundreds of pieces is slow to build.
 
+- Review (September 29, 2026): the owner marked pno-grand-keys, pno-grand-song and pno-song-bar
+  "fix": mechanics perfect, needs more detail and sharpness. Fixed in the same PR with lanes
+  Fidelity A and B's method (PACKS.md 7c): even shapes from `src/packs/even.js` for every box,
+  cylinder, cone and rounded box, color jitter at most 0.01, density 1.7 (1.5 for the keyboard), and
+  the strings as continuous thin lines. All seven clips redone as `-r2` cards (the old ones marked
+  replaced).
+- Full suite (claude/lane-pianos with main 60b775d, in 12 shards): about 430 passed, 2 failed: this
+  lane's MIDI test (fixed) and `tests/bk.spec.mjs` "a video's time, length and seek", which fails
+  the same way on plain main 456e890.
+- The container is reclaimed while the session is idle, which kills background runs: a long run has
+  to be watched from an active turn (or run in shards that can resume).
+
 ## Known issues
 
 - Clair de lune and Gymnopédie are openings, not the whole pieces, to keep the pack small.
