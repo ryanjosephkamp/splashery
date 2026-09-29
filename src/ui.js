@@ -943,11 +943,12 @@ export function createUI(app) {
     error.setAttribute("role", "alert");
     error.hidden = true;
     // file: the File itself, for a recipe with input.binary (a sound file,
-    // say), which reads it itself; the text is then "".
-    const apply = async (text, fileName = "", file = null) => {
+    // say), which reads it itself; the text is then "". files: every file
+    // picked, for a recipe with input.multiple too (a model and its textures).
+    const apply = async (text, fileName = "", file = null, files = file ? [file] : []) => {
       error.hidden = true;
       try {
-        const options = await input.read(text, fileName, file);
+        const options = await input.read(text, fileName, file, files);
         await app.setToyOptions(options);
       } catch (err) {
         error.textContent = err.message;
@@ -982,6 +983,7 @@ export function createUI(app) {
     const file = document.createElement("input");
     file.type = "file";
     file.accept = input.accept || "";
+    file.multiple = !!input.multiple;
     file.hidden = true;
     file.id = "toy-input-file";
     const fileRow = document.createElement("div");
@@ -996,15 +998,16 @@ export function createUI(app) {
     open.addEventListener("click", () => file.click());
     fileRow.append(open);
     file.addEventListener("change", async () => {
-      const f = file.files?.[0];
+      const files = [...(file.files || [])];
+      const f = files[0];
       file.value = "";
       if (!f) return;
-      if (f.size > 40e6) {
+      if (files.reduce((sum, x) => sum + x.size, 0) > 40e6) {
         error.textContent = "That file is too big (over 40 MB).";
         error.hidden = false;
         return;
       }
-      if (input.binary) apply("", f.name, f);
+      if (input.binary) apply("", f.name, f, files);
       else apply(await f.text(), f.name);
     });
     const note = document.createElement("p");
