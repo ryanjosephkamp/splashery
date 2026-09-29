@@ -941,13 +941,13 @@ export const RECIPES = {
         const tok = { kind: "token", params: [18 + i, 0], pattern: false };
         const a = [rod.x, TP.hamPivot[0], TP.hamPivot[1]];
         const b = [rod.x, TP.hamHead[0], TP.hamHead[1]];
-        k.add(k.tube(line(a, b), 0.0065, { grid: 8, samples: 16 }), {
+        k.add(k.tube(line(a, b), 0.009, { grid: 8, samples: 16 }), {
           ...tok,
           flat: 0.3,
           weight: 3,
           size: 1.3,
           opacity: 1,
-          color: (c) => lit(c, "#e8cf9c", 0.25),
+          color: (c) => lit(c, "#6b3f22", 0.3, 0.2),
         });
         k.add(
           k.param(
