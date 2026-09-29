@@ -6,7 +6,7 @@
     <title>The Tinkerer's Manual</title>
     <meta
       name="description"
-      content="How to program Gaussian splats in Splashery: the math of one splat, how a toy is built, and the splat equation language."
+      content="How to program Gaussian splats in Splashery: the math of one splat, how a toy is built, the splat equation language, and pictures, screens and your own input."
     />
     <link rel="stylesheet" href="manual.css" />
   </head>
@@ -14,11 +14,12 @@
     <main>
       <!-- ---- Cover ---- -->
       <section class="cover">
-        <p class="kicker">Splashery · September 28, 2026</p>
+        <p class="kicker">Splashery · Updated September 29, 2026</p>
         <h1>The Tinkerer's Manual</h1>
         <p class="lead">
           How to program Gaussian splats: what one splat is, how the toys are built, and a small
-          language for writing your own splat equations.
+          language for writing your own splat equations, and toys that show pictures and read what
+          you type.
         </p>
         <div class="cover-art">
           <img src="img/gallery-torus.jpg" alt="A torus made of splats, colored like a rainbow" />
@@ -40,6 +41,7 @@
             <li><a href="#toy">Level 2: How a toy is built</a></li>
             <li><a href="#language">Level 3: The splat equation language</a></li>
             <li><a href="#gallery">Level 4: A gallery of programs</a></li>
+            <li><a href="#pictures">Level 5: Pictures, screens and your own input</a></li>
             <li><a href="#later">What comes later: Code a toy</a></li>
             <li><a href="#card">Quick reference</a></li>
           </ol>
@@ -124,9 +126,10 @@
         </table>
       </div>
       <p>
-        That is 14 numbers per splat. A Splashery toy has between about 60,000 and 400,000 splats,
-        depending on how strong your device is. Many splat files also let a splat's color change a
-        little with the direction you look from; the toys you build here use one color per splat.
+        That is 14 numbers per splat. A Splashery toy has about 60,000 splats on a small phone, up
+        to 280,000 on a strong computer, and up to 400,000 on the strongest devices (the site picks
+        for you). Many splat files also let a splat's color change a little with the direction you
+        look from; the toys you build here use one color per splat.
       </p>
 
       <h3>The Gaussian: a bell in three dimensions</h3>
@@ -419,11 +422,11 @@
       </figure>
       <div class="tip">
         <p>
-          <b>Why the order matters in the toys.</b> Sorting every splat every frame costs time, so
-          when a toy moves a piece, Splashery may keep the order it worked out for the piece's
-          resting pose. Turn a solid thing too far and its back can be drawn over its front. The
-          toys work around it: the Splat equation toy, for one, builds its shape at twelve moments
-          and shows the copy nearest the moment you are at (Level 3).
+          <b>Why the order matters in the toys.</b> Splashery sorts the splats in the pose a toy was
+          built in, so a piece that moves keeps the order it had at rest. Turn a solid thing more
+          than a quarter turn and its far side can be drawn over its near side. The toys work around
+          it: the Splat equation toy, for one, builds its shape at twelve moments and shows the copy
+          nearest the moment you are at (Level 3).
         </p>
       </div>
 
@@ -456,7 +459,12 @@
   kind: "kit",
   pack: "my-pack",             // loads src/packs/my-pack.js
 }</code></pre>
-      <p>A recipe has up to six parts, all optional except <code>build</code>:</p>
+      <p>
+        A recipe has six basic parts, all optional except <code>build</code> (Level 5 adds
+        <code>pictures</code>, <code>input</code> and <code>tiltLock</code>, and
+        <a href="https://github.com/ryanjosephkamp/splashery/blob/main/docs/PACKS.md">PACKS.md</a>
+        has more, such as <code>grab</code> and <code>drag</code> for touch play):
+      </p>
       <div class="table-wrap">
         <table>
           <tbody>
@@ -502,26 +510,32 @@
 
       <h3>Shapes from the kit</h3>
       <p>
-        <code>k.sphere(r)</code>, <code>k.box(w, h, d)</code>, <code>k.cylinder(r, h)</code>,
+        <code>k.sphere(r)</code>, <code>k.ellipsoid(a, b, c)</code>, <code>k.box(w, h, d)</code>,
+        <code>k.roundedBox(w, h, d)</code>, <code>k.cylinder(r, h)</code>,
         <code>k.cone(r0, r1, h)</code>, <code>k.torus(R, r)</code>, <code>k.disc(r)</code>,
         <code>k.lathe(profile)</code> (a vase or a bottle, turned around an axis),
         <code>k.tube(curve, radius)</code> (a stem, an arm, a knot) and
         <code>k.param((u, v) =&gt; [x, y, z])</code>, any surface you can write in two variables
-        (the same idea as Level 3). Nothing is drawn until you add a shape:
+        (the same idea as Level 3; here <var>u</var> and <var>v</var> each run from 0 to 1), and
+        <code>k.radial((dir) =&gt; r)</code>, a blobby surface given by its distance from the middle
+        in every direction. Nothing is drawn until you add a shape:
       </p>
       <pre><code>k.add(k.sphere(0.2), { pos: [0, 1, 0], color: "#ffcc33", weight: 2 });</code></pre>
       <p>
         The kit shares the splats out between the shapes by their surface area, so the toy is evenly
-        dense; <code>weight</code> gives a small shape more. After <code>build</code>, the kit
-        centers the toy and scales it to fit the view, so you can model in any units.
+        dense; <code>weight</code> gives a small shape more (or <code>share</code> a fixed fraction
+        of all the splats). For free-form splats, like stars, sparks and crumbs,
+        <code>k.cloud</code> places them one by one. After <code>build</code>, the kit centers the
+        toy and scales it to fit the view, so you can model in any units.
       </p>
 
       <h3>Colors from functions</h3>
       <p>
-        A color can be a fixed one (<code>"#9c3b2c"</code>) or a function that the kit asks for
-        every splat. It gets the splat's place <code>c.p</code>, its surface direction
-        <code>c.n</code>, its surface coordinates <code>c.u</code> and <code>c.v</code>, and a
-        random number and noise that come from the seed. Return <code>null</code> to leave a hole:
+        A color can be a fixed one (<code>"#9c3b2c"</code>, or <code>[r, g, b]</code> with each from
+        0 to 1; there are no color names) or a function that the kit asks for every splat. It gets
+        the splat's place <code>c.p</code>, its surface direction <code>c.n</code>, its surface
+        coordinates <code>c.u</code> and <code>c.v</code>, and a random number and noise that come
+        from the seed. Return <code>null</code> to leave a hole:
       </p>
       <pre><code>color: (c) =&gt; (c.p[1] &gt; 0.5 ? "#ffffff" : "#3a7d44"), // snow above, grass below</code></pre>
 
@@ -826,8 +840,11 @@ v = 0 .. 2pi</code></pre>
         </table>
       </div>
       <p>
-        You can also write <code>color</code> for <code>hue</code>, <code>x(u,v,t)</code> for
-        <code>x</code>, and add notes after a <code>#</code>. Names can be in capitals or not.
+        You can also write <code>color</code> for <code>hue</code>, <code>red</code>,
+        <code>green</code> and <code>blue</code> for <code>r</code>, <code>g</code> and
+        <code>b</code>, <code>splats</code> for <code>count</code>, <code>x(u,v,t)</code> for
+        <code>x</code>, and add notes after a <code>#</code>. Names can be in capitals or not. A
+        range can be written <code>0 .. 2pi</code>, <code>0 to 2pi</code> or <code>0, 2pi</code>.
       </p>
 
       <h3>Expressions</h3>
@@ -1301,6 +1318,376 @@ count = 4000</code></pre>
         </p>
       </div>
 
+      <!-- ---- Level 5 ---- -->
+      <h2 id="pictures"><span class="level">Level 5</span>Pictures, screens and your own input</h2>
+      <p>
+        The toys in Level 2 are built from shapes. Some toys show something that is not a shape: a
+        page of a PDF, a photo, a GIF, a video, or something you type or draw. Three additions to a
+        recipe make them: <b>picture sheets</b>, an <b>input panel</b> and a few
+        <b>view settings</b>. They are still Gaussian splats, all the way down. The toys on the
+        Pictures and pages shelf are being tried out, so they are on the shelf only when Splashery
+        is opened with <code>?labs=1</code>.
+      </p>
+
+      <h3>Picture sheets: a page, a photo, a GIF, a video</h3>
+      <p>
+        A <b>sheet</b> is a flat place in a toy where a picture shows:
+        <code>k.sheet({ id, center, width, height })</code>. The kit draws nothing there. After the
+        build, the site opens the picture and turns it into splats on the sheet, in a background
+        worker so the page stays smooth. A PDF page becomes a smooth sheet of large soft splats in
+        the paper's color, with a small splat of its own color wherever the page differs from the
+        paper, which is the ink (<code>method: "ink"</code>); in a photo, each pixel becomes a flat
+        splat (<code>"pixels"</code>); a GIF or a video becomes a screen that is redrawn on every
+        frame (<code>"screen"</code>). The site picks the method from the kind of file. It rebuilds
+        a sheet finer as you zoom in, and frees the pages you have left, so a book of 200 pages does
+        not need 200 pages of splats.
+      </p>
+      <figure>
+        <div class="shots two">
+          <div>
+            <img
+              src="img/toy-picture-lab.jpg"
+              alt="A page of an article, drawn with splats, with a sharp figure and a table"
+            />
+            <p class="shot-label">A PDF page (the Picture lab)</p>
+          </div>
+          <div>
+            <img
+              src="img/toy-little-frame.jpg"
+              alt="A photo of a tulip field in a wooden frame, built from the recipe below"
+            />
+            <p class="shot-label">The recipe below: a photo in a frame</p>
+          </div>
+        </div>
+        <figcaption>
+          Both pictures are made of splats. Photo: "Tulip field" by DennisM2, CC0. The article is
+          our own sample text.
+        </figcaption>
+      </figure>
+      <p>Three parts of a recipe work together:</p>
+      <ul>
+        <li>
+          <code>pictures: { sample, accept }</code> names what shows until you open your own (the
+          sample's address) and which kinds a visitor may open: <code>"pdf"</code>,
+          <code>"image"</code>, <code>"gif"</code>, <code>"video"</code>.
+        </li>
+        <li>
+          <code>drive</code> may choose the page of each sheet with
+          <code>out.sheets[id] = { page, visible }</code>. Pages count from 0, and a page that does
+          not exist shows nothing. A sheet that is not visible is not built. Without it, every sheet
+          shows the current page.
+        </li>
+        <li>
+          <code>info.data.pictures</code> is the toy's view of the media: <code>page</code>,
+          <code>count</code>, <code>kind</code>, <code>name</code>, <code>playing</code> and the
+          functions <code>next()</code>, <code>prev()</code>, <code>go(n)</code> and
+          <code>togglePlay()</code>.
+        </li>
+      </ul>
+      <p>
+        A whole picture toy, in a few lines. Its <code>input</code> gives the Toy tab a button that
+        opens a photo, a GIF or a video; the rest of the toy is a card and four wooden bars:
+      </p>
+      <pre><code>import { smoothstep } from "../src/kit.js";
+
+// Two small picture toys for Level 5 of the Tinkerer's Manual: a framed photo
+// that opens your own picture, and a little book whose page turns like paper.
+export const RECIPES = {
+  "little-frame": {
+    turntable: false,
+    tiltLock: true, // a drag only spins it left and right
+    pictures: {
+      sample: () =&gt; "assets/toys/picture-lab/photo.jpg", // shown until you open your own
+      accept: ["image", "gif", "video"],
+    },
+    input: {
+      title: "Your own picture",
+      media: { accept: ["image", "gif", "video"] },
+      note: "Open a photo, a GIF or a video. Files stay on this device.",
+    },
+    build(k) {
+      // The picture: a sheet, filled with splats after the build.
+      k.sheet({ id: "photo", center: [0, 0, 0.03], width: 1.5, height: 1 });
+      // A gray card behind it, and four wooden bars around it.
+      k.add(k.box(1.6, 1.1, 0.02), { pos: [0, 0, -0.02], color: "#9a9a9a" });
+      for (const [w, h, x, y] of [
+        [1.8, 0.1, 0, 0.6],
+        [1.8, 0.1, 0, -0.6],
+        [0.1, 1.1, -0.85, 0],
+        [0.1, 1.1, 0.85, 0],
+      ])
+        k.add(k.box(w, h, 0.1), { pos: [x, y, 0], color: "#8a5a34" });
+    },
+  },</code></pre>
+
+      <h3>Turning a page</h3>
+      <p>
+        A page that turns like paper is a sheet with <code>leaf: slot</code> (a slot from 0 to 9)
+        and a spine to turn about: <code>k.spine({ at, axis, dir })</code> gives the spine's place,
+        its direction, and the direction from it along the pages when they lie flat. Each frame,
+        <code>drive</code> sets <code>out.leaves[slot] = { angle, curl }</code>: the
+        <code>angle</code> in radians (0 lying flat, π turned all the way over) and the
+        <code>curl</code>, how much the page bends along a circular arc (a negative number lets the
+        free edge lag behind, like paper in air). Every splat of the page turns with the curve at
+        its place, so it stays a solid sheet at every angle, which a page bent with soft regions
+        would not.
+      </p>
+      <figure>
+        <div class="shots one">
+          <div>
+            <img
+              src="img/toy-little-book-turning.jpg"
+              alt="A page of a book swinging over from the right, curled at its free edge, with the next page under it"
+            />
+          </div>
+        </div>
+        <figcaption>
+          The little book below, halfway through a turn. The next page is already there under the
+          turning one.
+        </figcaption>
+      </figure>
+      <p>
+        The little book below uses a pulse control for the turn, the way Level 2's gust does. The
+        page under the turning one is built ahead of time (a sheet is built only while it is
+        visible, so a page that shows up halfway would make the turn wait), and the page number
+        moves on when the turn ends. Keep a turning sheet on the body (part 0), because a part's own
+        turn would replace the leaf's. The far side of the turning page shows the page in mirror
+        image, like tracing paper, until it lands.
+      </p>
+      <pre><code>  "little-book": {
+    turntable: false,
+    tiltLock: true,
+    pictures: { sample: () =&gt; "assets/toys/picture-lab/article.pdf", accept: ["pdf"] },
+    input: { title: "Your own book", media: { accept: ["pdf"] }, note: "Open a PDF." },
+    controls: [{ key: "turn", label: "Turn the page", type: "pulse", ease: 1.2 }],
+    action: { key: "turn", label: "Turn the page" },
+    drive(t, c, out, info) {
+      const pics = info.data?.pictures; // { page, count, go(n), next(), prev(), ... }
+      // The page changes when the turn ends, and the turning page lands on the left.
+      const turning = c.turn &gt; 0;
+      if (BOOK.turning &amp;&amp; !turning &amp;&amp; pics) pics.go(pics.page + 1);
+      BOOK.turning = turning;
+      const page = pics?.page ?? 0;
+      // The pulse falls from 1 to 0: the page swings from 0 to a half turn (pi)
+      // about the spine, and its free edge lags behind, like paper.
+      const s = turning ? smoothstep(0, 1, 1 - c.turn) : 0;
+      out.leaves = [{ angle: Math.PI * s, curl: -1.2 * Math.sin(Math.PI * s) }];
+      out.sheets = {
+        // Once the turn starts, the left page is the one that is about to land on it.
+        left: { page: turning ? page : page - 1 }, // a page out of range shows nothing
+        under: { page: page + 1 }, // built ahead, and uncovered as the page lifts
+        front: { page }, // the turning page (its far side shows in mirror image)
+      };
+      // It is built, but hidden, until the turning page lands on it.
+      out.parts.leftPage = { visible: turning ? 0 : 1 };
+    },
+    build(k) {
+      BOOK.turning = false;
+      k.spine({ at: [0, 0, 0], axis: [0, 1, 0], dir: [1, 0, 0] });
+      const W = 1.4;
+      const H = 1.9;
+      const leftPage = k.part("leftPage");
+      const page = { width: W, height: H };
+      k.sheet({ id: "left", ...page, part: leftPage, center: [-W / 2, 0, 0], align: [1, 0] });
+      k.sheet({ id: "under", ...page, center: [W / 2, 0, 0], align: [-1, 0] });
+      // The turning page: a sheet on leaf slot 0, a hair in front of the others.
+      k.sheet({ id: "front", ...page, center: [W / 2, 0, 0.008], align: [-1, 0], leaf: 0 });
+      // The cover, behind the pages.
+      k.add(k.box(2 * W + 0.1, H + 0.1, 0.03), { pos: [0, 0, -0.03], color: "#7a2f2f" });
+    },
+  },
+};
+
+// Whether the page was turning in the last frame.
+const BOOK = { turning: false };</code></pre>
+
+      <h3>Your own input: typing, drawing, opening a file</h3>
+      <p>
+        A recipe can ask for something from the visitor. Its <code>input</code> adds a panel to the
+        Toy tab, in one of three forms:
+      </p>
+      <ul>
+        <li>
+          <b>Typing</b>: a text box and a button, and maybe a button that opens a text file
+          (<code>fileButton</code>, <code>accept</code>). The Splat equation toy of Level 3 is one;
+          so is the Word vectors toy, where you type <i>king − man + woman</i>.
+        </li>
+        <li>
+          <b>Drawing</b>: <code>pad: { cols, rows, max, button }</code> adds a small grid you paint
+          with a soft brush, and a button that hands the drawing to <code>read</code> as the text
+          <code>"pad:…"</code> (one number for each cell, row by row). The CNN toy's "3D, draw a
+          digit" view reads the digit you draw.
+        </li>
+        <li>
+          <b>Opening a picture</b>: <code>media: { accept }</code> adds an <b>Open a file…</b>
+          button, a field for a web address, the page buttons (or play and pause for a video) and a
+          way back to the sample. Level 5's picture toys use it.
+        </li>
+      </ul>
+      <figure>
+        <img
+          class="ui"
+          src="img/ui-input-panel.jpg"
+          alt="The Toy tab's Your own picture panel: an Open a file button and a field for a web address"
+        />
+        <figcaption>
+          The input panel of a picture toy, in the Toy tab. Files are read on your device; nothing
+          is uploaded.
+        </figcaption>
+      </figure>
+      <p>
+        For typing and drawing, <code>read(text, fileName)</code> turns what came in into option
+        values, or throws an <code>Error</code> whose message the panel shows in place; and
+        <code>shown()</code> says what is showing now. Keep what goes into options small: options
+        are saved in the toy's link. Here is a whole toy with a typed input, a row of bars for the
+        numbers you give it:
+      </p>
+      <pre><code>// A small toy with its own typed input, for Level 5 of the Tinkerer's Manual:
+// type some numbers and the toy stands them up as bars.
+const LIMIT = 12;
+const COLORS = ["#e8384f", "#ffc233", "#1fb59a", "#4dabf7"];
+
+export const RECIPES = {
+  "little-bars": {
+    options: [
+      {
+        key: "numbers",
+        label: "Your numbers",
+        type: "text",
+        default: "3 1 4 1 5 9 2 6",
+        hidden: true,
+      },
+    ],
+    input: {
+      title: "Your own numbers",
+      placeholder: "3 1 4 1 5 9 2 6",
+      button: "Show them",
+      fileButton: "Open a text file…",
+      accept: ".txt,.csv",
+      note: `Type up to ${LIMIT} numbers from 0 to 20, separated by spaces or commas, or open a text file with them.`,
+      // Turns the typed text into option values, or throws a message that the panel shows.
+      async read(text) {
+        const list = String(text).match(/-?\d+(\.\d+)?/g) || [];
+        if (list.length === 0) throw new Error("Type some numbers, like 3 1 4 1 5.");
+        if (list.length &gt; LIMIT) throw new Error(`That is more than ${LIMIT} numbers.`);
+        if (list.some((n) =&gt; n &lt; 0 || n &gt; 20)) throw new Error("Use numbers from 0 to 20.");
+        return { numbers: list.join(" ") };
+      },
+      shown: () =&gt; "Your numbers",
+    },
+    build(k, o) {
+      const values = String(o.numbers).split(" ").map(Number);
+      values.forEach((v, i) =&gt; {
+        const h = 0.05 + v / 10;
+        k.add(k.box(0.14, h, 0.14), {
+          pos: [(i - (values.length - 1) / 2) * 0.2, h / 2, 0],
+          color: COLORS[i % COLORS.length],
+        });
+      });
+    },
+  },
+};</code></pre>
+
+      <h3>The Screen and the Gaussian splatting toy</h3>
+      <p>
+        Two more toys put these to work: the Screen on the Pictures and pages shelf, and Gaussian
+        splatting on the AI and computing shelf.
+      </p>
+      <p>
+        The <b>Screen</b> shows a video or a GIF on a screen in one of four styles: an old TV, a
+        flat TV, a cinema with curtains and a hologram. Its picture is one sheet with
+        <code>method: "screen"</code>; the knobs, the curtains and the glass are ordinary kit parts.
+        A tap switches it on, and then plays and pauses; the speaker button in the top bar turns the
+        sound on. You can open your own video or GIF.
+      </p>
+      <p>
+        The <b>Gaussian splatting</b> toy lets you watch how a photo becomes splats. Its
+        <b>Training</b> view fits 2,400 flat (two-dimensional) Gaussians to a photo (a strawberry,
+        or your own), by gradient descent in a background worker: the splats start as random specks
+        and, step by step, they slide, stretch and change color until together they are the picture.
+        It draws them exactly as the site's renderer does (front to back, with the bell of Level 1),
+        so what you see is the real fit. <b>One splat</b> lets you set the sizes, the opacity and
+        the color of a single splat and turn it (Level 1's numbers); <b>Many splats</b> builds a
+        small rubber duck from kit shapes and then shrinks every splat to a dot, so you see the
+        splats that make it; and <b>Sorting</b> shows the splats of a ball appearing one by one, in
+        the back-to-front order a camera draws them.
+      </p>
+      <figure>
+        <div class="shots two">
+          <div>
+            <img
+              src="img/toy-screen.jpg"
+              alt="A brown old television showing a frame of a video with a rabbit and a butterfly"
+            />
+            <p class="shot-label">The Screen (old TV)</p>
+          </div>
+          <div>
+            <img
+              src="img/toy-splatting-training.jpg"
+              alt="A strawberry drawn by splats that are still learning it, with the photo and a falling loss curve below"
+            />
+            <p class="shot-label">Gaussian splatting, training</p>
+          </div>
+        </div>
+        <figcaption>
+          Video frame from "Big Buck Bunny" © Blender Foundation, CC BY 3.0. Strawberry photo by
+          Joselodos, CC0.
+        </figcaption>
+      </figure>
+      <figure>
+        <div class="shots one">
+          <div>
+            <img
+              src="img/toy-splatting-one.jpg"
+              alt="One large red splat drawn as a cloud, with three colored axes showing its sizes"
+            />
+          </div>
+        </div>
+        <figcaption>
+          The One splat view: a single splat with its three sizes drawn as axes (Level 1's
+          <var>s</var><sub>1</sub>, <var>s</var><sub>2</sub> and <var>s</var><sub>3</sub>).
+        </figcaption>
+      </figure>
+
+      <h3>Steering the view: the top bar and the tilt lock</h3>
+      <p>
+        Three round buttons sit in the top bar, beside the sound and help buttons. They control how
+        you look at the toy on show, and none of them changes the toy.
+      </p>
+      <figure>
+        <img
+          class="ui"
+          src="img/ui-top-bar.jpg"
+          width="226"
+          height="46"
+          alt="The top bar: Reset view, Tilt lock (pressed), Turntable, help and sound buttons"
+        />
+      </figure>
+      <ul>
+        <li>
+          <b>Reset view</b> (the circular arrow) puts the camera back where the toy starts. The
+          <b>R</b> key and a double tap do the same, and so does the button in the Tools tab.
+        </li>
+        <li>
+          <b>Tilt lock</b> (the padlock) makes a drag turn a toy only left and right, so a flat toy
+          such as a page, a photo or a screen stays facing you. Zooming, panning and pinching still
+          work. Your choice is remembered for that toy for the rest of your visit. In a recipe, it
+          is the flag <code>tiltLock: true</code>, and every toy on the Pictures and pages shelf
+          sets it. A link keeps the camera it was saved with, and the lock then holds that tilt.
+        </li>
+        <li>
+          <b>Turntable</b> (the record player) switches the slow turn that a toy does when nobody is
+          touching it. It is the same setting as <b>Turntable when idle</b> in the Toy tab, and this
+          device remembers it. A recipe can opt out with <code>turntable: false</code>, as a page
+          does. If your device asks for less motion, the turn stays off and the button is disabled.
+        </li>
+      </ul>
+      <p>
+        Two fingers on a touch screen zoom. They roll the toy only after a clear twist (about 17
+        degrees) and turn it only when they move together, so a normal pinch never spins what you
+        are looking at.
+      </p>
+
       <!-- ---- Later ---- -->
       <h2 id="later">What comes later: Code a toy</h2>
       <p>
@@ -1351,10 +1738,21 @@ spread = grid                          # or random</code></pre>
         sqrt, abs, floor, min, max. <b>Constants</b>: pi, e. <b>Time</b>: <var>t</var> runs from 0
         to 2π per tap. At most 120 characters a field.
       </p>
+      <h3>A picture toy</h3>
+      <pre><code>pictures: { sample: () =&gt; "assets/…", accept: ["pdf", "image", "gif", "video"] },
+input: { title, media: { accept } },     // or placeholder, button, read, shown; or pad
+tiltLock: true,                          // a drag turns it only left and right
+build(k) { k.sheet({ id, center, width, height, leaf }); k.spine({ at, axis, dir }); },
+drive(t, c, out, info) {
+  out.sheets[id] = { page, visible };    // pages count from 0
+  out.leaves[slot] = { angle, curl };    // radians; 0 flat, pi turned over
+  info.data.pictures                     // page, count, go(n), next(), prev(), togglePlay()
+}</code></pre>
 
       <footer>
         <p>
-          The Tinkerer's Manual, September 28, 2026. Part of
+          The Tinkerer's Manual, first published September 28, 2026 and updated September 29, 2026.
+          Part of
           <a href="https://ryanjosephkamp.github.io/splashery/">Splashery</a>, a toy box of 3D
           Gaussian splats that runs in your browser. Every picture here was made with Splashery
           itself.
