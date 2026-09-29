@@ -194,6 +194,21 @@ The song landscape (a labs toy) opens with a 20 second tune of our own, made by
 their browser and never uploaded. The Chladni plate uses the classic square-plate model; no data or
 code was taken from anywhere.
 
+The Model to splats toy (a labs toy, lane Studio Models) ships two CC0 sample models, each a single
+GLB in `assets/toys/model-splats/` that the toy converts to splats in the browser:
+
+- "Burger" from the [Food Kit](https://kenney.nl/assets/food-kit) by Kenney,
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (checked on the live page and in the
+  kit's own license file on September 29, 2026). The color map is embedded in the GLB.
+- "Antique Ceramic Vase 01" by James Ray Cock on
+  [Poly Haven](https://polyhaven.com/a/antique_ceramic_vase_01),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (checked on the live page on
+  September 29, 2026). Its 1k glTF with only the color texture kept.
+
+`tools/stm-samples.mjs` fetches and packs them. The test models in `tests/fixtures/stm/` are made
+from numbers by `tools/stm-fixtures.mjs` and released under CC0 1.0. Models people open are
+converted in their browser and never uploaded.
+
 ## National flags
 
 The pattern layer can wrap a national flag around any toy. The flags are SVG files from
