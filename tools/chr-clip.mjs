@@ -210,6 +210,8 @@ async function recordIsland(isl) {
   await page.goto(`${base}worlds/?labs=1&renderer=webgl2&profile=${opt("profile", "mid")}&clock=manual`); // prettier-ignore
   await page.waitForFunction(() => document.body.dataset.ready === "true", null, { timeout: 300_000 }); // prettier-ignore
   await page.evaluate(() => window.__world.enter());
+  // The character is the subject: keep landmark cards closed.
+  await page.addStyleTag({ content: "#card { display: none !important; }" });
   await page.evaluate((p) => {
     window.__world.place(p[0], p[1], p[2]);
     window.__world.world.camera.snap(
