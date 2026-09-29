@@ -160,9 +160,13 @@ test.describe("the periodic table in the app", () => {
       const world = recipe.tileAt("Na").map((v, i) => (v - tf.center[i]) * tf.scale);
       player.act(world);
       const t0 = performance.now();
-      while (player.toyInfo.options?.element !== "Na" && performance.now() - t0 < 120_000)
+      // The new toy's tap fires once the rebuild has finished.
+      while (
+        (player.toyInfo.options?.element !== "Na" || player.motion.targets.up !== 1) &&
+        performance.now() - t0 < 120_000
+      )
+        // prettier-ignore
         await new Promise((ok) => setTimeout(ok, 100));
-      await new Promise((ok) => setTimeout(ok, 300));
       return {
         element: player.scene.toy.options.element,
         data: player.motion.ctx.kit.data,
