@@ -118,6 +118,10 @@ Model: Opus 5.5 (claude-opus-5-5), default effort.
 - The owner marked the first six cards "fix" (too grainy). Everything this lane added is now built
   crisp (Fidelity A's method), the table denser, the rings thin, the lettering finer; the new clips
   are the `-r2` cards (the first ones are marked replaced).
+- Second review: molecules and lattices "good"; the table, atom and orbitals still wanted more
+  sharpness. The tiles now have a backing of their own color behind the face, the new atoms'
+  electrons have no fuzzy halo, the new orbitals' haze holds still with bigger, fainter splats.
+  Cards `chs-table-r3`, `chs-table-still-r3`, `chs-atom-elements-r3`, `chs-orbitals-r3`.
 - Full suite on the final head (September 29, 2026): 440 passed, 0 failed. The engine PR #99 merged
   the same evening; main is merged into the lane branch. Next: the owner's marks on the `-r2` cards.
 
