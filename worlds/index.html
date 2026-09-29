@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Splashery Worlds</title>
+    <meta
+      name="description"
+      content="Splashery Worlds: walk a character around a small world made entirely of Gaussian splats, in your browser, on a phone or a computer."
+    />
+    <meta name="color-scheme" content="light dark" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg opacity='.92'%3E%3Cellipse cx='24' cy='26' rx='14' ry='11' fill='%23ff5fa2'/%3E%3Cellipse cx='40' cy='24' rx='12' ry='13' fill='%237bdff2'/%3E%3Cellipse cx='33' cy='41' rx='15' ry='11' fill='%23ffd166'/%3E%3C/g%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="./worlds.css" />
+    <link rel="modulepreload" href="../vendor/playcanvas/playcanvas.min.mjs" />
+    <script type="module" src="../src/worlds/main.js"></script>
+  </head>
+  <body class="worlds">
+    <canvas
+      id="world"
+      tabindex="0"
+      role="img"
+      aria-label="A small world made of splats. Walk with the arrow keys or W, A, S and D (hold Shift to run), or with the thumb stick on a phone. Drag to look around. The Places button lists every place in the world."
+    ></canvas>
+
+    <header class="hud" id="hud" hidden>
+      <p class="hud-title" id="hud-title">Worlds</p>
+      <div class="hud-buttons">
+        <button type="button" id="places-open" aria-haspopup="dialog">Places</button>
+        <button type="button" id="help-open" aria-expanded="false" aria-controls="hint">?</button>
+      </div>
+    </header>
+
+    <p id="hint" class="hint" hidden>
+      <span class="only-keys"
+        >Walk with <b>W A S D</b> or the arrow keys, <b>Shift</b> to run.</span
+      >
+      <span class="only-touch">Walk with the stick, drag on the right to look.</span>
+      Drag to look around. Walk up to a sign, or tap it, to read about the place.
+    </p>
+
+    <div id="stick" class="stick" hidden aria-hidden="true"><div class="knob"></div></div>
+
+    <aside id="card" class="card" role="dialog" aria-labelledby="card-title" hidden>
+      <button type="button" class="card-close" id="card-close" aria-label="Close">×</button>
+      <img id="card-picture" class="card-picture" alt="" hidden />
+      <h2 id="card-title"></h2>
+      <p id="card-words"></p>
+      <p class="card-link"><a id="card-link" hidden></a></p>
+    </aside>
+
+    <dialog id="places" class="places" aria-labelledby="places-title">
+      <div class="places-head">
+        <h2 id="places-title">Places in this world</h2>
+        <button type="button" id="places-close" class="places-close">Close</button>
+      </div>
+      <p class="places-note" id="places-note">Every place in the world, as a plain list.</p>
+      <ol id="places-list" class="places-list"></ol>
+    </dialog>
+
+    <section id="start" class="start" aria-labelledby="start-title">
+      <div class="start-box">
+        <p class="kicker">Splashery Worlds · labs</p>
+        <h1 id="start-title">Loading a world…</h1>
+        <p id="start-welcome" class="welcome"></p>
+        <div
+          class="progress"
+          id="progress"
+          role="progressbar"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-label="Building the world"
+        >
+          <div class="progress-bar" id="progress-bar"></div>
+        </div>
+        <p id="progress-label" class="progress-label" aria-live="polite">Starting…</p>
+        <div class="start-buttons">
+          <button type="button" id="enter" class="enter" disabled>Enter</button>
+          <button type="button" id="start-list" class="plain">See the places as a list</button>
+        </div>
+        <p class="start-foot"><a href="../">Back to the toys</a></p>
+      </div>
+    </section>
+
+    <section id="labs-off" class="start" hidden aria-labelledby="labs-off-title">
+      <div class="start-box">
+        <p class="kicker">Splashery Worlds</p>
+        <h1 id="labs-off-title">Worlds is being tried out</h1>
+        <p class="welcome">
+          Worlds is still being built, so it is behind the labs switch.
+          <a href="?labs=1">Turn on labs</a> to try it, or go <a href="../">back to the toys</a>.
+        </p>
+      </div>
+    </section>
+
+    <noscript>
+      <div class="start">
+        <div class="start-box">
+          <h1>Splashery Worlds needs JavaScript</h1>
+          <p>The worlds are drawn with WebGL or WebGPU, which need scripts turned on.</p>
+        </div>
+      </div>
+    </noscript>
+  </body>
+</html>

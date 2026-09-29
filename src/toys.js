@@ -1466,6 +1466,17 @@ export const TOYS = [
     pack: "anatomy",
     tags: "organ body bean urine filter renal",
   },
+  // Lane Anatomy: the anatomy atlas (labs).
+  {
+    id: "anatomy-atlas",
+    label: "Anatomy atlas",
+    category: "anatomy",
+    kind: "kit",
+    pack: "anatomy-atlas",
+    labs: true,
+    tags: "body human anatomy atlas layers peel skin muscles skeleton bones organs labels",
+    camera: { yaw: 0.35, pitch: 0.1, roll: 0, distance: 3.0 },
+  },
 
   // ---- Pack: nature ----
   // (entries for src/packs/nature.js go here)
