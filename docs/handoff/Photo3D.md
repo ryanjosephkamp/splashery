@@ -147,3 +147,23 @@ Model: Sonnet 5.5 (default effort). Started September 29, 2026.
   rely on that.
 - The street sample has parked cars with tiny, unreadable badges and one small license plate; no
   faces.
+
+## Sharper (the owner's marks, September 29, 2026)
+
+The owner marked all five p3d cards "fix": "Almost perfect. Can we try to make it sharper?" Changes
+in `photo-3d-core.js`:
+
+- **Adaptive placement, same budget.** The photo is put on a fine grid; a block of 2 × 2 fine cells
+  is drawn as one splat, or as four fine splats in the 28% of blocks that need them most: those with
+  a depth edge in them first, then by the photo's own color range in the block and how near it is.
+  Detail, near things and depth edges get splats about 0.66 as far apart as the old even grid; flat
+  far areas (sky, dark walls) get 1.3 times as far. Counts are 98% of each tier's budget: 88,199,
+  205,800, 293,999 and 392,000 splats on the low, mid, high and max tiers (90k, 210k, 300k and
+  400k), the same on all three samples.
+- **Smaller splats at depth edges** (0.85 of their size beside a cut), full opacity as before.
+- **Colors straight from the photo:** the area average on the fine grid, then a light unsharp mask
+  (`SHARPEN` 0.5) to put back what the splats' overlap softens. `FILL` went from 1.12 to 1.05.
+- **Measured:** 3x renders (1170 px wide, the phone's real density) of the forest and street, before
+  and after: after, the street's license plate, the bricks, window frames and cobbles read; before,
+  they were soft. Flat areas look a little smoother (larger splats), which is the trade.
+- Clips are rendered at 780 × 1040 (2x of 390 × 520) to keep the GIFs small enough to post.
