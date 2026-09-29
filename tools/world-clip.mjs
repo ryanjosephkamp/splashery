@@ -10,6 +10,9 @@
 //
 // --modes records each scene twice, splats mode on the left and hybrid
 // mode on the right (?render=); --render= picks one mode for a plain clip.
+// --left=<query> --right=<query> [--labels=A,B] records any two variants
+// side by side (the character A/B: --left=&render=hybrid&character=splats
+// --right=&render=hybrid&character=mesh --labels=Splats,Mesh).
 //
 // Writes <out-dir>/wd-<name>.gif (and -strip.png with --strip). The
 // scenes are scripted below; each is a list of steps: walk with an input
@@ -41,6 +44,9 @@ const stripN = Number(opt("strip", 0));
 const before = opt("before", "");
 const modes = args.includes("--modes");
 const render = opt("render", "");
+const left = opt("left", "");
+const right = opt("right", "");
+const labels = opt("labels", "A,B").split(",");
 
 // ---- Scenes ---------------------------------------------------------------------
 
@@ -151,6 +157,19 @@ const SCENES = {
     { hold: 0.4 },
     { look: [Math.PI * 1.2, 0], secs: 6 },
     { hold: 0.4 },
+  ],
+  // The character, the same walk (recorded with --left and --right): idle,
+  // a walk away, a walk across (its profile), a run, then it turns to face
+  // the camera.
+  "hybrid-character": [
+    { place: [-4, 14, 180], camera: { distance: 3.4, pitch: 0.16 } },
+    { hold: 1.0 },
+    { move: { y: 1 }, secs: 2.0 },
+    { move: { x: 1 }, secs: 2.2 },
+    { move: { x: 1, run: true }, secs: 1.6 },
+    { hold: 0.6 },
+    { look: [Math.PI * 0.75, 0], secs: 1.6 },
+    { hold: 0.8 },
   ],
   // Depth, close up: a bush half behind a hill, then the character wading.
   "hybrid-depth": [
@@ -322,7 +341,9 @@ for (const name of names) {
   const scene = SCENES[name];
   if (!scene) throw new Error(`No scene "${name}" (${Object.keys(SCENES).join(", ")}).`);
   let frames;
-  if (modes)
+  if (left && right)
+    frames = sideBySide(await record(scene, base, labels[0], left), await record(scene, base, labels[1], right)); // prettier-ignore
+  else if (modes)
     frames = sideBySide(await record(scene, base, "Splats", "&render=splats"), await record(scene, base, "Hybrid", "&render=hybrid")); // prettier-ignore
   else {
     const q = render ? `&render=${render}` : "";

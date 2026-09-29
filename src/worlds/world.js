@@ -14,6 +14,7 @@ import { planLevels } from "./lod.js";
 import { WORLD_BUDGETS } from "./tiers.js";
 import { Lighting } from "./lighting.js";
 import { loadHybridAssets, groundTiles, groundMaterial, groundColor, waterMaterial, waterMeshes, skyDome, skyMaterial, useHDRI, signBoard } from "./hybrid.js"; // prettier-ignore
+import { loadMeshCharacter, stepMeshCharacter } from "./mesh-character.js";
 import * as pc from "../pc.js";
 import { mulberry32, mixSeed } from "../noise.js";
 import { rgb } from "../kit.js";
@@ -23,13 +24,15 @@ const nextFrame = () => new Promise((r) => requestAnimationFrame(() => r()));
 
 export class World {
   // mode: "splats" or "hybrid" (docs/WORLDS.md, "Rendering").
-  constructor(view, def, tier, { reducedMotion = false, mode = def.render, shadows = true } = {}) {
+  // characterModel: "splats" or "mesh" (mesh-character.js).
+  constructor(view, def, tier, { reducedMotion = false, mode = def.render, shadows = true, characterModel = def.character.model } = {}) { // prettier-ignore
     this.view = view;
     this.def = def;
     this.tier = tier;
     this.mode = mode === "hybrid" ? "hybrid" : "splats";
     this.hybrid = this.mode === "hybrid";
     this.shadows = shadows;
+    this.characterModel = characterModel === "mesh" ? "mesh" : "splats";
     this.budget = WORLD_BUDGETS[tier] || WORLD_BUDGETS.mid;
     this.reducedMotion = reducedMotion;
     // Landmarks stand on level ground: each flattens a small circle.
@@ -119,7 +122,8 @@ export class World {
     progress(0.8, "Painting the signs…");
     this.buildSigns();
     progress(0.86, "Making your character…");
-    this.buildCharacter();
+    if (this.characterModel === "mesh") await this.buildMeshCharacter();
+    else this.buildCharacter();
     this.spawn();
     progress(0.9, "Growing the grass…");
     // The first view: everything the plan wants, built now.
@@ -361,11 +365,24 @@ export class World {
     this.joints = joints;
   }
 
+  // The lit, skinned character (mesh-character.js). In splats mode, where
+  // no sky lights the models, a soft ambient light stands in for it.
+  async buildMeshCharacter() {
+    const { model } = await loadMeshCharacter(this.view.app);
+    const root = this.view.group("character");
+    root.addChild(model);
+    this.joints = { root };
+    this.meshCharacter = model;
+    this.charCount = 0;
+    if (!this.hybrid) this.view.app.scene.ambientLight = new pc.Color(...this.def.light.hazeColor.map((v) => v * 0.55)); // prettier-ignore
+  }
+
   spawn(at = this.def.spawn.at, facing = this.def.spawn.facing) {
     const c = this.char;
     c.pos = [at[0], this.terrain.heightAt(at[0], at[1]), at[1]];
     c.facing = (facing * Math.PI) / 180;
     c.gait = { speed: 0, phase: 0 };
+    this.lastDt = 0;
     this.camera.snap(this.focus(), c.facing);
     this.placeCharacter();
   }
@@ -571,6 +588,7 @@ export class World {
     c.moving = speed > 0.1;
     // A frame with no time (a paused clock) keeps the gait as it is.
     if (dt > 0) stepGait(c.gait, speed, dt);
+    this.lastDt = dt;
     this.placeCharacter();
     this.checkLandmarks();
   }
@@ -581,6 +599,10 @@ export class World {
     if (!j) return;
     j.root.setPosition(c.pos[0], c.pos[1], c.pos[2]);
     j.root.setEulerAngles(0, c.facing * DEG, 0);
+    if (this.meshCharacter) {
+      stepMeshCharacter(this.meshCharacter, c.gait.speed, this.lastDt || 0);
+      return;
+    }
     const p = pose(c.gait, this.time);
     j.hips.setLocalPosition(0, BODY.hip + p.bob, 0);
     for (const name in p.joints) {

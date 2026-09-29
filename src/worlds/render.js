@@ -62,8 +62,8 @@ export class WorldView {
     const app = new pc.AppBase(canvas);
     const opts = new pc.AppOptions();
     opts.graphicsDevice = device;
-    opts.componentSystems = [pc.CameraComponentSystem, pc.GSplatComponentSystem, pc.RenderComponentSystem, pc.LightComponentSystem]; // prettier-ignore
-    opts.resourceHandlers = [pc.TextureHandler, pc.GSplatHandler];
+    opts.componentSystems = [pc.CameraComponentSystem, pc.GSplatComponentSystem, pc.RenderComponentSystem, pc.LightComponentSystem, pc.AnimComponentSystem]; // prettier-ignore
+    opts.resourceHandlers = [pc.TextureHandler, pc.GSplatHandler, pc.ContainerHandler, pc.AnimClipHandler, pc.AnimStateGraphHandler]; // prettier-ignore
     app.init(opts);
     // Three layers draw after the opaque models and before the world
     // layer's see-through pass (props and the character): the splat sky,
