@@ -419,8 +419,9 @@ test.describe("your book, the album and the frame (in the app)", () => {
   test.setTimeout(300_000);
   const BK = "http://127.0.0.1:4173/tests/fixtures/bk/";
 
-  // Opens a toy (and a file), waits for its sheets, and plays it with the
-  // clock stepped by hand.
+  // Opens a toy (and a file) and waits for its sheets. The toys play in
+  // real time: the tests wait on the player's own clock (rendering here is
+  // slow, and a clock stepped by hand can leave a turn half done).
   async function open(page, id, url = null, options = {}) {
     await ready(page);
     await page.evaluate(
@@ -433,38 +434,58 @@ test.describe("your book, the album and the frame (in the app)", () => {
       [id, url, options],
     );
     await waitSheets(page);
-    await page.evaluate(() => (window.__splashery.player.frozen = true));
   }
+  // Waits until the player's clock has moved `seconds` on.
   async function step(page, seconds) {
-    for (let t = 0; t < seconds; t += 0.1) {
-      await page.evaluate(() => {
+    const t0 = await page.evaluate(() => window.__splashery.player.time);
+    await page.waitForFunction(
+      (t) => {
         const pl = window.__splashery.player;
-        pl.time += 0.1;
         pl.stage.requestRender();
-      });
-      await page.waitForTimeout(40);
-    }
+        return pl.time >= t;
+      },
+      t0 + seconds,
+      { timeout: 120_000, polling: 100 },
+    );
     await waitSheets(page);
   }
   const tap = (page) => page.evaluate(() => window.__splashery.player.act());
-  // Taps, then steps the clock until the turn has landed (a turn waits for
-  // its pages, which are built in real time).
+  // Taps, then waits until the turn has landed: the page has changed and
+  // every leaf lies flat (no curl, turned 0 or half a turn), twice a
+  // quarter second apart.
   async function turn(page) {
     const before = await page.evaluate(() => window.__splashery.player.pictures.page);
     await tap(page);
-    // Until the page has changed and every leaf lies flat again (no curl,
-    // turned 0 or half a turn), twice in a row.
-    let still = 0;
-    for (let i = 0; i < 120 && still < 2; i++) {
-      await step(page, 0.2);
-      const done = await page.evaluate((b) => {
+    const landed = () =>
+      page.waitForFunction(
+        (b) => {
+          const pl = window.__splashery.player;
+          pl.stage.requestRender();
+          const cover = pl.motion.out.parts?.cover?.angle ?? 0;
+          if (cover > 1e-6 && cover < Math.PI - 1e-6) return false;
+          const flat = (pl.motion.out.leaves || []).every((l) => !l || (!l.curl && (Math.abs(l.angle) < 1e-6 || Math.abs(l.angle - Math.PI) < 1e-6 || Math.abs(l.angle - 2 * Math.PI + 0.06) < 1e-6))); // prettier-ignore
+          return flat;
+        },
+        before,
+        { timeout: 180_000, polling: 100 },
+      );
+    // First the turn starts (a leaf curls, or the page changes)...
+    await page.waitForFunction(
+      (b) => {
         const pl = window.__splashery.player;
-        const flat = (pl.motion.out.leaves || []).every((l) => !l || (!l.curl && (Math.abs(l.angle) < 1e-6 || Math.abs(l.angle - Math.PI) < 1e-6 || Math.abs(l.angle - 2 * Math.PI + 0.06) < 1e-6))); // prettier-ignore
-        return pl.pictures.page !== b && flat;
-      }, before);
-      still = done ? still + 1 : 0;
-    }
-    await step(page, 0.5);
+        pl.stage.requestRender();
+        const out = pl.motion.out;
+        const cover = out.parts?.cover?.angle ?? 0;
+        return pl.pictures.page !== b || (out.leaves || []).some((l) => l && l.curl) || (cover > 1e-3 && cover < Math.PI - 1e-3); // prettier-ignore
+      },
+      before,
+      { timeout: 180_000, polling: 50 },
+    );
+    // ...then it lands.
+    await landed();
+    await step(page, 0.25);
+    await landed();
+    await step(page, 0.3);
   }
 
   test("a 300-page PDF is as light as a 3-page one: pages not reached are never built", async ({
@@ -476,10 +497,8 @@ test.describe("your book, the album and the frame (in the app)", () => {
       const p = window.__splashery.player.pictures;
       return { splats: p.splats(), slots: p.sheets.filter((s) => s.slot).length };
     });
-    await page.evaluate(() => (window.__splashery.player.frozen = false));
     await page.evaluate((u) => window.__splashery.app.openMedia(u), `${BK}pages300.pdf`);
     await waitSheets(page);
-    await page.evaluate(() => (window.__splashery.player.frozen = true));
     for (let i = 0; i < 3; i++) await turn(page);
     await page.evaluate(() => window.__splashery.player.pictures.go(249));
     await step(page, 1);
@@ -520,6 +539,14 @@ test.describe("your book, the album and the frame (in the app)", () => {
   }) => {
     await open(page, "your-book", `${BK}booklet.pdf`);
     for (let i = 0; i < 2; i++) await turn(page);
+    // A page rebuilt at a new detail is sorted where it lies on the next
+    // frame (Player.poseStale): let that frame come.
+    await page.waitForFunction(() => {
+      const pl = window.__splashery.player;
+      pl.stage.requestRender();
+      return !pl.poseStale;
+    });
+    await page.evaluate(() => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)))); // prettier-ignore
     const r = await page.evaluate(() => {
       const pl = window.__splashery.player;
       const p = pl.pictures;
