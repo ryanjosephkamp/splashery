@@ -10,8 +10,8 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 315 toys. 315 have a tap action today; the other 0 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 312.
+- 316 toys. 316 have a tap action today; the other 0 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 313.
 - **more** (has an effect; make it clearer or more dramatic): 0.
 - **new** (needs its own effect): 3.
 - Visual fixes: 0 open, 28 done. Touch or drag interaction asked for: 4.
@@ -47,13 +47,13 @@ Proposals below are suggestions; the owner may change them.
   Torus knot, Gyroid, Mandelbulb, Seashell spiral, Graph plotter, Surface plotter, Circle and waves,
   Fourier circles, Pythagoras proof, Splat equation, Heraldic shield, Crown, Wizard's orb,
   Jellyfish, School of fish, Pufferfish, Nautilus, Snail, Octopus, Sea urchin, Frog, Snowman,
-  Fireworks, Decorated tree, Diya, Acoustic guitar, Snare drum, Xylophone, Hot-air balloon, Bus, Jet
-  airliner, Sailboat, Submarine, Bicycle, Eiffel Tower, Washington Monument, Pyramids of Giza,
-  Twisting supertall, Statue of Liberty, White House, Leaning Tower of Pisa, Colosseum, Parthenon,
-  Stonehenge, Big Ben, Taj Mahal, Castle, Pagoda, Windmill, Perceptron, Multilayer perceptron,
-  Neural network, Convolutional network, Recurrent network, Transformer, Looped transformer,
-  Diffusion model, Gradient descent, Gaussian splatting, Word vectors, Sorting machine, Half adder,
-  Your book, Photo album, Picture frame, Model to splats, Splat field, Screen.
+  Fireworks, Decorated tree, Diya, Acoustic guitar, Snare drum, Xylophone, Toy piano, Hot-air
+  balloon, Bus, Jet airliner, Sailboat, Submarine, Bicycle, Eiffel Tower, Washington Monument,
+  Pyramids of Giza, Twisting supertall, Statue of Liberty, White House, Leaning Tower of Pisa,
+  Colosseum, Parthenon, Stonehenge, Big Ben, Taj Mahal, Castle, Pagoda, Windmill, Perceptron,
+  Multilayer perceptron, Neural network, Convolutional network, Recurrent network, Transformer,
+  Looped transformer, Diffusion model, Gradient descent, Gaussian splatting, Word vectors, Sorting
+  machine, Half adder, Your book, Photo album, Picture frame, Model to splats, Splat field, Screen.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -1748,7 +1748,7 @@ Proposals below are suggestions; the owner may change them.
   - Owner: Pretty much perfect.
   - Sound: Match strike and a bell.
 
-## Music (3)
+## Music (4)
 
 - **Acoustic guitar** (`guitar`). Now: tap: Strum. Plan: keep.
   - Owner: Looks fine; add the music.
@@ -1770,6 +1770,20 @@ Proposals below are suggestions; the owner may change them.
     wherever it is, lands 0.12 s after the tap with the bar's note, bounces off, and the bar jumps.
     A tap off the bars still plays the scale.
   - Sound: The scale it already plays, as mallet tones.
+- **Toy piano** (`toy-piano`). Now: tap: Play Twinkle, Twinkle. Plan: keep.
+  - Owner: The owner's idea on the Toy Ideas page, for the blind A/B toy (September 29, 2026): "Tap
+    a key: a tiny hammer strikes a metal rod inside the open back, and the rod shivers as it rings.
+    Tap elsewhere: Twinkle, Twinkle, Little Star, the rods shimmering in turn."
+  - Effect: Tap a key: it dips, its hammer swings up and strikes its rod, and the rod shivers as the
+    note rings. Tap elsewhere: the opening line of Twinkle, Twinkle, Little Star, each key, hammer
+    and rod moving with its note (5 s).
+  - Improved: A/B (maker B): new kit toy. An upright toy piano with 18 keys (C5 to F6, black keys
+    raised), a red lacquer case (Color in the Toy tab) with an open back and a raised lid. Every
+    key, hammer and steel rod is its own solid piece: a key turns on its balance rail, its hammer
+    swings up through a sixth of a turn to strike, and the rod shivers sideways as the note rings
+    (1.5 s). A tap on a key, a hammer or a rod plays that key; its note sounds as the hammer lands.
+    A tap anywhere else plays Twinkle, Twinkle.
+  - Sound: The plinky, bell-like tone of struck metal rods, made in the page.
 
 ## Vehicles (14)
 
