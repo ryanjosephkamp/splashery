@@ -1401,6 +1401,14 @@ export const TOY_SOUNDS = {
       vol: 0.45,
     },
   ],
+  // Lane Photo to 3D: a soft whoosh that rises as the depth comes up, and one that falls as it lies flat.
+  "photo-3d": {
+    on: [
+      { voice: "whoosh", f: 240, to: 7, decay: 2.4, vol: 0.85 },
+      { voice: "glass", at: 1.5, notes: "E5 B5", step: 0.22, decay: 0.8, vol: 0.3 },
+    ],
+    off: { voice: "whoosh", f: 2600, to: 0.14, decay: 1.8, vol: 0.7 },
+  },
   // Lane Screens: the old TV's click and hum (each style plays its own
   // cues as it switches on: the flat TV's soft tone, the cinema's curtains,
   // the hologram's shimmer).

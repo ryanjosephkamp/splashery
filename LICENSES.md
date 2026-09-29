@@ -78,6 +78,29 @@ OR OTHER DEALINGS IN THE SOFTWARE.
   under their own licenses, in `vendor/pdfjs/wasm/LICENSE_*` (OpenJPEG: BSD 2-clause; jbig2 from
   PDFium: BSD 3-clause and Apache 2.0; qcms: MIT).
 
+## ONNX Runtime Web 1.30.0 (lane Photo to 3D)
+
+- Package: `onnxruntime-web@1.30.0`. Files in `vendor/onnxruntime-web/`: `ort.wasm.min.mjs`,
+  `ort-wasm-simd-threaded.mjs` and `ort-wasm-simd-threaded.wasm` (the WebAssembly build, without
+  WebGPU), all unmodified. The license is copied to `vendor/onnxruntime-web/LICENSE`.
+- Loaded only when someone opens a photo in the Photo to 3D toy (a dynamic import in
+  `src/packs/photo-3d-depth.js`); never on the shelf or in an embed.
+- Source: https://github.com/microsoft/onnxruntime
+- License: MIT (Copyright (c) Microsoft Corporation; the full text is in
+  `vendor/onnxruntime-web/LICENSE`).
+
+## Depth Anything V2 Small, quantized ONNX (lane Photo to 3D)
+
+- File: `vendor/depth-anything-v2-small/model_quantized.onnx` (27,258,801 bytes), the int8 build
+  from https://huggingface.co/onnx-community/depth-anything-v2-small, downloaded at build time,
+  unmodified. Its model card is copied to `vendor/depth-anything-v2-small/MODEL-CARD.md` and the
+  Apache License 2.0 text (from the project's repository) to `vendor/depth-anything-v2-small/LICENSE`.
+- Loaded only when someone opens a photo in the Photo to 3D toy.
+- Source: https://github.com/DepthAnything/Depth-Anything-V2 (Lihe Yang, Bingyi Kang, Zilong
+  Huang, Zhen Zhao, Xiaogang Xu, Jiashi Feng, Hengshuang Zhao: "Depth Anything V2", 2024).
+- License: Apache License 2.0 for the Small model, checked on the live model cards on
+  September 29, 2026. The Base, Large and Giant sizes are CC BY-NC and are not used.
+
 ## omggif 1.0.10 (lane Pictures)
 
 - Package: `omggif@1.0.10` (file: `vendor/omggif/omggif.js`, the package's `omggif.js` with two

@@ -3191,6 +3191,17 @@ export const TOYS = [
     tags: "3d model glb gltf obj stl mesh triangles convert converter wireframe texture cad print",
     camera: { yaw: 0.5, pitch: 0.28, roll: 0, distance: 4.5 },
   },
+  // ---- Pack: photo-3d (lane Photo to 3D) ----
+  {
+    id: "photo-3d",
+    label: "Photo to 3D",
+    category: "studio",
+    kind: "kit",
+    pack: "photo-3d",
+    labs: true,
+    tags: "photo picture image depth 3d parallax relief layers convert converter depth map jpeg png webp",
+    camera: { yaw: 0, pitch: 0, roll: 0, distance: 2.6 },
+  },
   // ---- Pack: lab (lane Lab) ----
   {
     id: "splat-field",

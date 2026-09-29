@@ -232,6 +232,26 @@ GLB in `assets/toys/model-splats/` that the toy converts to splats in the browse
 from numbers by `tools/stm-fixtures.mjs` and released under CC0 1.0. Models people open are
 converted in their browser and never uploaded.
 
+The Photo to 3D toy (a labs toy, lane Photo to 3D) ships three CC0 sample photos in
+`assets/toys/photo-3d/`, each with a depth map made by `tools/p3d-depth.mjs`. Each license was
+checked on its live Wikimedia Commons page on September 29, 2026:
+
+- "Forest Away Path" by Seaq68 (from Pixabay, 2017),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Forest_Away_Path.jpg).
+- "Carleton Street off Leeman Road, York" by Malcolmxl5,
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Carleton_Street_off_Leeman_Road_York_Jul25.jpg).
+- "Still Life with Cheese" by Antoine Vollon, from the Metropolitan Museum of Art's Open Access
+  program, [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Still_Life_with_Cheese_MET_DT1989.jpg).
+
+The depth is worked out on the device by [Depth Anything V2 Small](https://huggingface.co/depth-anything/Depth-Anything-V2-Small)
+(Lihe Yang and others, Apache 2.0; the quantized ONNX build is by
+[onnx-community](https://huggingface.co/onnx-community/depth-anything-v2-small)), run by
+[ONNX Runtime Web](https://github.com/microsoft/onnxruntime) (MIT). Photos people open are
+processed in their browser and never uploaded.
+
 ## National flags
 
 The pattern layer can wrap a national flag around any toy. The flags are SVG files from
@@ -248,3 +268,5 @@ Splashery is built on the [PlayCanvas engine](https://github.com/playcanvas/engi
 [gifenc](https://github.com/mattdesl/gifenc) (MIT) for GIF export. See [LICENSES.md](LICENSES.md).
 Pictures and pages use [PDF.js](https://github.com/mozilla/pdf.js) (Apache 2.0) and
 [omggif](https://github.com/deanm/omggif) (MIT), loaded only when someone opens a PDF or a GIF.
+Photo to 3D uses [ONNX Runtime Web](https://github.com/microsoft/onnxruntime) (MIT) and Depth Anything V2 Small
+(Apache 2.0), loaded only when someone opens a photo in that toy.

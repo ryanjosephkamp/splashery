@@ -2036,6 +2036,13 @@
       "sound": "A rising whoosh as the splats lift off, then four falling plucked notes as they settle back.",
       "improved": "Studio Models: a converter that samples the surface by area (more splats where it bends or is finely made), lays flat splats on it sized to their neighbors, colors them from the texture, vertex colors or material, and keeps hard edges hard; two CC0 samples (Kenney's burger, Poly Haven's vase)."
     },
+    "photo-3d": {
+      "v": "keep",
+      "owner": "Approved on the Splashery Universe page (\"photo yes\", September 29, 2026; lane Photo to 3D; labs only).",
+      "effect": "Your photo rebuilt as splats in 3D by an on-device depth model: each splat takes the photo's color at its place and sits at its depth, and the surface is cut where the depth jumps, so a near object stands as its own layer. The picture starts flat; the tap raises its depth layer by layer while the toy sways (about 3 s), and a second tap lays it flat. Depth sets how deep the relief is; Layers pulls the depth bands apart.",
+      "sound": "A soft whoosh that rises as the depth comes up, with two glassy notes; a falling whoosh as it lies flat.",
+      "improved": "Photo to 3D: Depth Anything V2 Small (Apache-2.0, quantized, 27 MB) on ONNX Runtime Web (MIT), both loaded only when a photo is opened; an even grid of splats sized to their neighbors on the same surface, cut at depth jumps; three CC0 samples (a forest path, a cobbled street, a still life)."
+    },
     "screen": {
       "v": "keep",
       "owner": "From the owner's notes of September 28, 2026 (lane Screens; labs only).",
