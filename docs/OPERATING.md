@@ -334,11 +334,12 @@ phone with `grooph share docs/lane-loop.grooph.json`. Update it when these rules
 
 ## Concurrency and usage
 
-- Up to 8 workers at once (the owner's choice of September 29, 2026), paced by the 5-hour limit:
-  each session record shows it, and the owner reports the weekly usage morning and evening. Once 6
-  or more lanes run, an Integrator worker (Sonnet 5.5) builds the combinations the Operator names
-  and runs the full test run, so merges don't queue behind the Operator. CLAUDE.md records that
-  seven parallel builders once used a week's usage in one go.
+- Up to 12 workers at once until the weekly reset (the owner's choice of September 29, 2026; it was
+  8 until that morning), paced by the 5-hour limit: each session record shows it, and the owner
+  reports the weekly usage morning and evening. Once 6 or more lanes run, an Integrator worker
+  (Sonnet 5.5) builds the combinations the Operator names and runs the full test run, so merges
+  don't queue behind the Operator. CLAUDE.md records that seven parallel builders once used a week's
+  usage in one go.
 - While lanes run in parallel, a lane uses at most one helper subagent at a time. The Operator uses
   none.
 - The Operator starts the next lane when a slot is free, in the order in ROADMAP.md.
