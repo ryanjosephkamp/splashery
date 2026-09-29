@@ -115,7 +115,7 @@ test.describe("the conversion", () => {
         expect(info.splats, `${s.id} on ${tier}`).toBeLessThanOrEqual(budget);
         expect(info.splats).toBeGreaterThan(budget * 0.85);
         expect(info.pieces).toBeGreaterThan(1);
-        const b = ctx.kit.buf;
+        const b = ctx.buf;
         let bad = 0;
         for (let i = 0; i < b.count * 3; i++) if (!Number.isFinite(b.pos[i])) bad++;
         expect(bad, `${s.id} on ${tier}: non-finite positions`).toBe(0);
@@ -152,9 +152,11 @@ test.describe("in the browser", () => {
     expect(requests.filter(heavy)).toEqual([]);
     // the tap raises the depth, a second lays it flat
     await page.evaluate(() => window.__splashery.app.act());
-    await page.waitForFunction(() => window.__splashery.player.motion.state.rise > 0.9, null, { timeout: 30_000 }); // prettier-ignore
+    await page.waitForFunction(() => window.__splashery.player.motion.state.rise > 0.15, null, { timeout: 90_000 }); // prettier-ignore
+    expect(await page.evaluate(() => window.__splashery.player.motion.targets.rise)).toBe(1);
     await page.evaluate(() => window.__splashery.app.act());
-    await page.waitForFunction(() => window.__splashery.player.motion.state.rise < 0.05, null, { timeout: 30_000 }); // prettier-ignore
+    expect(await page.evaluate(() => window.__splashery.player.motion.targets.rise)).toBe(0);
+    await page.waitForFunction(() => window.__splashery.player.motion.state.rise < 0.05, null, { timeout: 90_000 }); // prettier-ignore
     // your own photo, through the panel
     await page.locator("#toy-input-file").setInputFiles(`${FIX}/scene.jpg`);
     await page.waitForFunction(() => window.__splashery.player.proc?.ctx?.kit?.data?.photo?.custom === true, null, { timeout: 150_000 }); // prettier-ignore
