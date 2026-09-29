@@ -195,6 +195,12 @@ fire a control and pick an item, or nothing for the usual action. `drive` sees t
 **Build data**: `build(k, o)` may leave data in `k.data` for `drive`, which sees it as `info.data`
 (the molecule stores which atoms and bonds it built, so its vibration fits the molecule chosen).
 
+**Playing its own audio**: `info.sound` is the site's `Sound` (`src/sound.js`). A toy that plays
+audio of its own (the song landscape) plays only while `info.sound.enabled` is true (the speaker
+button; embeds keep it off), through `info.sound.audio()` (the `AudioContext`) and
+`info.sound.master` (the site's limiter), and reads its playback time from the context's
+`currentTime`.
+
 **Game pieces and loose pieces**: a splat with `kind: "token"` and `params: [i, 0]` belongs to token
 `i` (up to 48), which `out.tokens[i] = { base, offset, quat, visible }` moves and turns. A `params`
 function can pick the token per splat, so one shape can break into many pieces (the asteroid's 18
@@ -317,6 +323,10 @@ input: {
 Keep what goes into options small: it is saved in the scene and in `#s=` links. A big file (a
 protein) can stay in the module instead, with only its name in an option; a link to it then falls
 back to the toy's default.
+
+A binary file (a sound file) sets `binary: true` in `input`: `read("", fileName, file)` then gets
+the `File` itself and decodes it (with `decodeAudioData`, say), keeping the decoded data in the
+module like the protein. The 40 MB limit still applies.
 
 **Loading first**: `async prepare(options)` runs before each build (in the browser and in the Node
 tools), for toys that fetch a file (the protein toy reads `assets/proteins/*.pdb`). Cache what it
