@@ -7,7 +7,7 @@
 // (a token or a part). Loaded on demand.
 
 import { mix, shade, clamp } from "../kit.js";
-import { evenBox, evenCylinder } from "./even.js";
+import { evenBox, evenCylinder, evenDisc, evenTube } from "./even.js";
 import { FONT } from "../font.js";
 import { compile } from "../equation.js";
 
@@ -60,6 +60,62 @@ function wood(col = WOOD) {
 // A solid block, placed evenly (no hatching on its faces).
 const block = (k, size, pos, color, opts = {}) =>
   k.add(evenBox(size[0], size[1], size[2]), { pos, even: true, flat: 0.2, pattern: false, color, ...opts }); // prettier-ignore
+
+// ---- Hardware ------------------------------------------------------------------------
+
+// Rotations that turn a shape's +Y (its cap) to face +Z, +X or +Y.
+const FACE_ROT = { z: [90, 0, 0], x: [0, 0, -90], y: [0, 0, 0] };
+// A slotted screw head facing `face`, its slot across the head.
+function screw(k, p, r = 0.012, face = "z", opts = {}) {
+  k.add(evenCylinder(r, r * 0.8, r * 0.5, true), {
+    pos: p,
+    rot: FACE_ROT[face],
+    even: true,
+    weight: 3,
+    flat: 0.3,
+    pattern: false,
+    ...opts,
+    color: (c) => {
+      const slot = c.s.cap === "top" && Math.abs(c.lp[0]) < r * 0.16;
+      return keep(
+        lit(slot ? "#3b3326" : "#b8a26a", c.n, { amb: 0.62, dif: 0.4, spec: 0.6, pow: 20 }),
+      );
+    },
+  });
+}
+// A spur gear of radius R with `teeth` teeth, thickness t, lying in the XZ
+// plane (turned by `rot`): two toothed faces, the rim round the teeth and a
+// hub. Its teeth repeat every 1/teeth of a turn, so a part carrying it can
+// turn it by its angle modulo that and never stray far from its built pose.
+function gear(k, pos, R, teeth, t, color, opts = {}) {
+  const depth = R * 0.12;
+  const rOf = (a) => R - depth + depth * (Math.cos(a * teeth) > -0.1 ? 1 : 0);
+  const face = (sd) =>
+    k.param(
+      (u, v) => {
+        const a = TAU * u;
+        const r = rOf(a) * (0.18 + 0.82 * v);
+        return [r * Math.cos(a), (sd * t) / 2, r * Math.sin(a)];
+      },
+      { grid: 96, normal: () => [0, sd, 0] },
+    );
+  const rim = k.param(
+    (u, v) => {
+      const a = TAU * u;
+      const r = rOf(a);
+      return [r * Math.cos(a), (v - 0.5) * t, r * Math.sin(a)];
+    },
+    { grid: 128, normal: (u) => [Math.cos(TAU * u), 0, Math.sin(TAU * u)] },
+  );
+  // A turned groove round the face (round, so turning never shows a jump).
+  const col = (c) => {
+    const rr = Math.hypot(c.lp[0], c.lp[2]);
+    const groove = rr > R * 0.55 && rr < R * 0.62;
+    return keep(lit(groove ? shade(color, 0.72) : color, c.n, { amb: 0.62, dif: 0.42, spec: 0.5, pow: 22 })); // prettier-ignore
+  };
+  for (const sh of [face(1), face(-1), rim]) k.add(sh, { pos, even: true, weight: 1.6, flat: 0.25, pattern: false, ...opts, color: col }); // prettier-ignore
+  k.add(evenCylinder(R * 0.2, R * 0.2, t * 1.6, true), { pos, rot: opts.rot, even: true, weight: 2, pattern: false, part: opts.part, color: steel }); // prettier-ignore
+}
 
 // ---- Pixel-font text -----------------------------------------------------------------
 
@@ -363,7 +419,12 @@ function buildTuring(k, o) {
   const x1 = TM.x(7.9);
   block(k, [x1 - x0, 0.12, 0.5], [(x0 + x1) / 2, -0.24, 0], wood());
   block(k, [x1 - x0 - 0.1, 0.34, 0.05], [(x0 + x1) / 2, 0.0, -0.12], wood(DARK_WOOD));
-  k.add(k.cylinder(0.012, TM.x(16.5), { caps: true }), {
+  // A brass strip along the plinth's front, and four turned feet.
+  block(k, [x1 - x0, 0.022, 0.008], [(x0 + x1) / 2, -0.2, 0.254], brass, { weight: 1.2 });
+  for (const fx of [x0 + 0.12, x1 - 0.12])
+    for (const fz of [-0.17, 0.17])
+      k.add(evenCylinder(0.035, 0.028, 0.05, true), { pos: [fx, -0.325, fz], even: true, weight: 1.5, pattern: false, color: wood(DARK_WOOD) }); // prettier-ignore
+  k.add(evenCylinder(0.012, 0.012, TM.x(16.5), true), {
     pos: [TM.x(-2), 0, -0.035],
     rot: [0, 0, 90],
     even: true,
@@ -403,8 +464,9 @@ function buildTuring(k, o) {
   const hw = 0.4 + 0.04;
   for (const [hx, name] of housings) {
     block(k, [hw, 0.4, 0.24], [hx, 0, 0], (c) => keep(lit(c.s.face === 2 ? "#3a4048" : "#2c3138", c.n, { amb: 0.72, dif: 0.35, spec: 0.3 }))); // prettier-ignore
+    for (const sx of [-1, 1]) for (const sy of [-1, 1]) screw(k, [hx + sx * 0.18, sy * 0.16, 0.122], 0.011); // prettier-ignore
     const reel = k.part(name, { pivot: [hx, 0, 0.13], axis: [0, 0, 1] });
-    k.add(k.disc(0.15, 0.025), {
+    k.add(evenDisc(k, 0.15, 0.025, 64), {
       pos: [hx, 0, 0.125],
       rot: [90, 0, 0],
       even: true,
@@ -420,7 +482,7 @@ function buildTuring(k, o) {
         return keep(lit(r > 0.13 ? shade(BRASS, 0.8) : BRASS, [0, 0, 1], { amb: 0.7, dif: 0.35, spec: 0.5 })); // prettier-ignore
       },
     });
-    k.add(k.cylinder(0.025, 0.03), {
+    k.add(evenCylinder(0.025, 0.025, 0.03, true), {
       pos: [hx, 0, 0.14],
       rot: [90, 0, 0],
       even: true,
@@ -444,10 +506,11 @@ function buildTuring(k, o) {
     block(k, [sx, sy, 0.03], [px, py, 0.13], steel, { weight: 2 });
   for (const sd of [-1, 1]) block(k, [0.025, 0.03, 0.14], [sd * (fw / 2), fh / 2, 0.06], darkSteel, { weight: 2 }); // prettier-ignore
   block(k, [0.24, 0.14, 0.18], [0, fh / 2 + 0.085, 0.01], brass, { weight: 1.5 });
+  for (const sx of [-1, 1]) screw(k, [sx * 0.09, fh / 2 + 0.085, 0.102], 0.01);
   const pin = k.part("pin", { pivot: [0, 0.2, 0] });
-  k.add(k.cylinder(0.009, 0.07), { pos: [0, h / 2 + 0.05, 0], even: true, weight: 3, part: pin, pattern: false, color: steel }); // prettier-ignore
+  k.add(evenCylinder(0.009, 0.009, 0.07, true), { pos: [0, h / 2 + 0.05, 0], even: true, weight: 3, part: pin, pattern: false, color: steel }); // prettier-ignore
   const lampY = fh / 2 + 0.26;
-  k.add(k.cylinder(0.07, 0.04), { pos: [0, lampY - 0.07, 0.01], even: true, weight: 1.5, pattern: false, color: brass }); // prettier-ignore
+  k.add(evenCylinder(0.07, 0.07, 0.04, true), { pos: [0, lampY - 0.07, 0.01], even: true, weight: 1.5, pattern: false, color: brass }); // prettier-ignore
   for (const st of TM_STATES) {
     const part = k.part("lamp" + st, { pivot: [0, lampY, 0.01] });
     k.add(k.sphere(0.09), {
@@ -474,7 +537,7 @@ function buildTuring(k, o) {
     color: (c) => keep(lit("#d8b24e", c.n, { amb: 0.6, dif: 0.45, spec: 0.7, pow: 18 })),
   }); // prettier-ignore
   const hammer = k.part("hammer", { pivot: [bx + 0.16, 0.2, 0], axis: [0, 0, 1] });
-  k.add(k.cylinder(0.008, 0.13), { pos: [bx + 0.16, 0.265, 0], even: true, weight: 3, part: hammer, pattern: false, color: darkSteel }); // prettier-ignore
+  k.add(evenCylinder(0.008, 0.008, 0.13, true), { pos: [bx + 0.16, 0.265, 0], even: true, weight: 3, part: hammer, pattern: false, color: darkSteel }); // prettier-ignore
   k.add(k.sphere(0.022), { pos: [bx + 0.16, 0.33, 0], even: true, weight: 3, part: hammer, pattern: false, color: darkSteel }); // prettier-ignore
 
   // The rule card on its stand behind the tape: the program's name, the
@@ -487,9 +550,10 @@ function buildTuring(k, o) {
   const ctop = 0.84 + ch;
   const cy = ctop - ch / 2;
   for (const sx of [cx - cw / 2 + 0.2, cx + cw / 2 - 0.2])
-    k.add(k.cylinder(0.02, ctop - ch + 0.25), { pos: [sx, (ctop - ch + 0.25) / 2 - 0.15, -0.2], even: true, weight: 1.5, pattern: false, color: brass }); // prettier-ignore
+    k.add(evenCylinder(0.02, 0.02, ctop - ch + 0.25, true), { pos: [sx, (ctop - ch + 0.25) / 2 - 0.15, -0.2], even: true, weight: 1.5, pattern: false, color: brass }); // prettier-ignore
   block(k, [cw + 0.06, ch + 0.06, 0.03], [cx, cy, -0.22], wood(DARK_WOOD));
   block(k, [cw, ch, 0.01], [cx, cy, -0.2], (c) => keep(lit("#efe3c3", c.n, { amb: 0.8, dif: 0.25, spec: 0 }))); // prettier-ignore
+  for (const sx of [-1, 1]) for (const sy of [-1, 1]) screw(k, [cx + sx * (cw / 2 - 0.035), cy + sy * (ch / 2 - 0.035), -0.19], 0.012); // prettier-ignore
   const ink = "#2b241c";
   text(k, prog.title, [cx - cw / 2 + 0.08, ctop - 0.11, -0.17], 0.0155, "#7a2a1a", { align: "left", weight: 10 }); // prettier-ignore
   text(k, "STEP", [cx + cw / 2 - 0.42, ctop - 0.11, -0.17], 0.012, ink, { weight: 8 });
@@ -499,6 +563,8 @@ function buildTuring(k, o) {
   heads.forEach((s, i) => text(k, s, [cols[i], hy, -0.17], 0.0105, "#6b5d48", { weight: 7 }));
   rows.forEach(([st, r, wr, mv, nx], i) => {
     const y = hy - 0.19 - i * rowH;
+    // A ruled line under each row.
+    block(k, [cw - 0.12, 0.004, 0.004], [cx, y - rowH / 2, -0.192], () => keep("#b9a98a"), { weight: 1.5 }); // prettier-ignore
     const part = k.part("row" + i, { pivot: [cx, y, -0.19] });
     block(k, [cw - 0.08, rowH * 0.86, 0.006], [cx, y, -0.19], () => keep("#ffd46a"), { part, weight: 1.2 }); // prettier-ignore
     const cells = [st, String(r), "→", String(wr), mv < 0 ? "L" : mv > 0 ? "R" : "-", nx === "H" ? "HALT" : nx]; // prettier-ignore
@@ -800,8 +866,9 @@ function buildDifference(k, o) {
     const h = col.digits * pitch + 0.08;
     k.add(evenCylinder(0.014, 0.014, h + 0.06, false), { pos: [col.x, y0 + (col.digits - 1) * pitch / 2, 0], even: true, weight: 1.5, pattern: false, color: steel }); // prettier-ignore
     for (let j = 0; j < col.digits; j++) deWheel(k, [col.x, y0 + j * pitch, 0], col.token + j, col.id === "v"); // prettier-ignore
-    block(k, [0.26, 0.13, 0.012], [col.x, topY + 0.085, 0.19], brass, { weight: 1.2 });
-    text(k, col.label, [col.x, topY + 0.085, 0.21], col.id === "v" ? 0.016 : 0.02, "#2a1c0c", { weight: 10 }); // prettier-ignore
+    const lpx = col.id === "v" ? 0.016 : 0.02;
+    block(k, [Math.max(0.26, textWidth(col.label) * lpx + 0.07), 0.13, 0.012], [col.x, topY + 0.085, 0.19], brass, { weight: 1.2 }); // prettier-ignore
+    text(k, col.label, [col.x, topY + 0.085, 0.21], lpx, "#2a1c0c", { weight: 10 });
     // A brass shield in front of the column with a window at each wheel's
     // front digit, so each wheel shows one digit, like an odometer.
     const sw = 0.28;
@@ -819,12 +886,32 @@ function buildDifference(k, o) {
         const win =
           Math.abs(c.p[0] - col.x) < 0.035 && Math.abs(dy) < 0.048 && j >= 0 && j < col.digits;
         if (win && (c.s.face === 4 || c.s.face === 5)) return null;
-        return keep(lit(BRASS, c.n, { amb: 0.62, dif: 0.42, spec: 0.5, pow: 22 })); // prettier-ignore
+        // An engraved line round the plate, and a polished bezel round each
+        // window.
+        const ex = sw / 2 - Math.abs(c.p[0] - col.x);
+        const ey = sh / 2 - Math.abs(c.p[1] - sy);
+        const line = Math.min(ex, ey) < 0.014;
+        const bezel =
+          Math.abs(c.p[0] - col.x) < 0.046 && Math.abs(dy) < 0.059 && j >= 0 && j < col.digits;
+        const col2 = line ? shade(BRASS, 0.62) : bezel ? mix(BRASS, "#fff1c4", 0.35) : BRASS;
+        return keep(lit(col2, c.n, { amb: 0.62, dif: 0.42, spec: 0.5, pow: 22 })); // prettier-ignore
       },
-    }); // Side plates, so the wheels show only through the windows from any
+    });
+    // Side plates, so the wheels show only through the windows from any
     // side the camera looks.
     for (const sd of [-1, 1])
       block(k, [0.012, sh, r + 0.2], [col.x + (sd * sw) / 2, sy, (r + 0.03) / 2 - 0.08], brass, { weight: 1.1 }); // prettier-ignore
+  }
+  // The carriage racks behind the columns: toothed steel bars that the
+  // adding and carrying sectors run on.
+  for (let i = 0; i < DE.cols.length - 1; i++) {
+    const x = (DE.cols[i].x + DE.cols[i + 1].x) / 2;
+    const top = topY - 0.03;
+    const bot = y0 - wh / 2 - 0.03;
+    block(k, [0.03, top - bot, 0.03], [x, (top + bot) / 2, -0.14], (c) => {
+      const tooth = c.s.face === 4 && Math.sin((c.p[1] - bot) * 70) > 0.2 && Math.abs(c.p[0] - x) > 0.004;
+      return keep(lit(tooth ? "#6f7780" : STEEL, c.n, { amb: 0.66, dif: 0.4, spec: 0.45 }));
+    }, { weight: 1.6 }); // prettier-ignore
   }
   // The carry levers: a small steel arm to the right of each wheel that
   // takes a carry, pivoting about an upright pin (tokens).
@@ -848,6 +935,21 @@ function buildDifference(k, o) {
   k.add(evenCylinder(0.02, 0.02, 0.14, true), { pos: [xr + 0.08, y0 + pitch, 0], rot: [0, 0, 90], even: true, weight: 2, pattern: false, color: steel }); // prettier-ignore
   k.add(evenBox(0.03, 0.26, 0.04), { pos: [xr + 0.16, y0 + pitch + 0.11, 0], even: true, weight: 2, part: crank, pattern: false, color: steel }); // prettier-ignore
   k.add(evenCylinder(0.024, 0.024, 0.12, true), { pos: [xr + 0.23, y0 + pitch + 0.22, 0], rot: [0, 0, 90], even: true, weight: 2.5, part: crank, pattern: false, color: wood(DARK_WOOD) }); // prettier-ignore
+  // The gear train: a big gear on the crank's shaft drives a pinion above
+  // it (parts turning about x, each by its angle modulo one tooth).
+  const gy = y0 + pitch;
+  gear(k, [xr + 0.085, gy, 0], 0.13, 18, 0.025, BRASS, { rot: FACE_ROT.x, part: k.part("gearBig", { pivot: [xr + 0.085, gy, 0], axis: [1, 0, 0] }) }); // prettier-ignore
+  const py = gy + 0.13 + 0.075 - 0.02;
+  gear(k, [xr + 0.085, py, 0], 0.075, 10, 0.025, "#b08a3a", { rot: FACE_ROT.x, part: k.part("gearSmall", { pivot: [xr + 0.085, py, 0], axis: [1, 0, 0] }) }); // prettier-ignore
+  // Finials on the pillars and screws on each column's shield.
+  for (const px of [xl - 0.02, xr + 0.02])
+    for (const pz of [-0.19, 0.19])
+      k.add(k.sphere(0.03), { pos: [px, topY + 0.045, pz], even: true, weight: 2, pattern: false, color: brass }); // prettier-ignore
+  for (const col of DE.cols) {
+    const sh = col.digits * pitch + 0.02;
+    const sy = y0 + ((col.digits - 1) * pitch) / 2;
+    for (const sd of [-1, 1]) for (const tb of [-1, 1]) screw(k, [col.x + sd * 0.11, sy + tb * (sh / 2 - 0.02), r + 0.037], 0.008); // prettier-ignore
+  }
   const bx = xr + 0.06;
   k.add(k.lathe([[0.001, 0.08], [0.03, 0.078], [0.05, 0.05], [0.062, 0.015], [0.075, 0]], { grid: 40 }), {
     pos: [bx, topY + 0.02, -0.17],
@@ -924,6 +1026,9 @@ function driveDifference(t, c, out, info) {
     }
   });
   out.parts.crank = { angle: pose ? -pose.crank : 0 };
+  const crank = pose ? -pose.crank : 0;
+  out.parts.gearBig = { angle: crank % (TAU / 18) };
+  out.parts.gearSmall = { angle: ((-crank * 18) / 10) % (TAU / 10) };
   out.parts.hammer = { angle: pose ? -0.6 * pose.bell : 0 };
   // Turned wheels are sorted again where they stand, a few times a turn.
   // (Also on the first frame: a wheel at rest may be turned past a quarter
@@ -1094,8 +1199,15 @@ function buildEnigma(k, o) {
       rot: [-90, 0, 0],
     });
   }
+  // The lampboard's plate: black metal with a round window for each lamp.
+  const lampCenters = [...AZ].map((ch) => enLampPos(ch));
+  block(k, [W - 0.2, 0.006, 0.44], [0, 0.0, -0.26], (c) => {
+    if (c.s.face === 2 && lampCenters.some((q) => Math.hypot(c.p[0] - q[0], c.p[2] - q[2]) < 0.058)) return null; // prettier-ignore
+    return keep(lit("#1b1c1e", c.n, { amb: 0.8, dif: 0.3, spec: 0.3 }));
+  }, { weight: 1.2 }); // prettier-ignore
+  for (const sx of [-1, 1]) for (const sz of [-1, 1]) screw(k, [sx * (W / 2 - 0.05), 0.002, -0.22 + sz * (D / 2 - 0.05)], 0.014, "y"); // prettier-ignore
   const g0 = enLampPos("A");
-  k.add(k.disc(0.056), { pos: [g0[0], g0[1] + 0.016, g0[2]], even: true, weight: 2, flat: 0.2, pattern: false, kind: "token", params: [26, 0], color: (c) => keep(mix("#fff3b0", "#ffb83a", Math.hypot(c.p[0] - g0[0], c.p[2] - g0[2]) / 0.056)) }); // prettier-ignore
+  k.add(evenDisc(k, 0.056), { pos: [g0[0], g0[1] + 0.016, g0[2]], even: true, weight: 2, flat: 0.2, pattern: false, kind: "token", params: [26, 0], color: (c) => keep(mix("#fff3b0", "#ffb83a", Math.hypot(c.p[0] - g0[0], c.p[2] - g0[2]) / 0.056)) }); // prettier-ignore
   // The rotors in their well behind the lampboard: three drums on one axle
   // (parts, turning about x), each with its letter ring and a ridged thumb
   // wheel, the reflector to their left and the entry wheel to their right.
@@ -1131,13 +1243,13 @@ function buildEnigma(k, o) {
         return keep(lit(ridge ? "#3c3f44" : "#2a2c30", c.n, { amb: 0.7, dif: 0.35, spec: 0.35 }));
       },
     });
-    k.add(k.disc(R, 0.02), { pos: [x + 0.05, rcy, rcz], rot: [0, 0, -90], even: true, weight: 0.8, ...ride, color: (c) => keep(lit("#3a3d42", [1, 0, 0], { amb: 0.8 })) }); // prettier-ignore
+    k.add(evenDisc(k, R, 0.02, 64), { pos: [x + 0.05, rcy, rcz], rot: [0, 0, -90], even: true, weight: 0.8, ...ride, color: (c) => keep(lit("#3a3d42", [1, 0, 0], { amb: 0.8 })) }); // prettier-ignore
   });
   // The index marks: a small brass pointer at each rotor's reading place.
   EN_ROTOR_X.forEach((x) => {
     const phi = EN.index;
     const rr = R + 0.04;
-    k.add(k.cone(0.012, 0, 0.03, { caps: true }), { pos: [x, rcy + rr * Math.cos(phi), rcz + rr * Math.sin(phi)], rot: [(phi * 180) / Math.PI + 180, 0, 0], even: true, weight: 3, pattern: false, color: brass }); // prettier-ignore
+    k.add(evenCylinder(0.012, 0.0005, 0.03, true), { pos: [x, rcy + rr * Math.cos(phi), rcz + rr * Math.sin(phi)], rot: [(phi * 180) / Math.PI + 180, 0, 0], even: true, weight: 3, pattern: false, color: brass }); // prettier-ignore
   });
   // The plugboard on the front: two sockets per letter, and a cable for
   // each plugged pair.
@@ -1150,7 +1262,7 @@ function buildEnigma(k, o) {
   for (const ch of AZ) {
     const p = plugAt(ch);
     for (const dy of [0.018, -0.018])
-      k.add(k.disc(0.011), { pos: [p[0], p[1] + dy, pz + 0.002], rot: [90, 0, 0], even: true, weight: 3, pattern: false, color: () => keep("#0d0d0e") }); // prettier-ignore
+      k.add(evenDisc(k, 0.011, 0, 16), { pos: [p[0], p[1] + dy, pz + 0.002], rot: [90, 0, 0], even: true, weight: 3, pattern: false, color: () => keep("#0d0d0e") }); // prettier-ignore
     text(k, ch, [p[0] - 0.035, p[1], pz + 0.003], 0.006, "#e8e2d0", { weight: 16, size: 0.7 });
   }
   const pairs = EN_PLUGS.split(" ");
@@ -1159,10 +1271,15 @@ function buildEnigma(k, o) {
     const b = plugAt(pair[1]);
     const sag = 0.1 + 0.03 * i;
     const curve = (t) => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t - sag * Math.sin(Math.PI * t), pz + 0.03 + 0.04 * Math.sin(Math.PI * t)]; // prettier-ignore
-    k.add(k.tube(curve, 0.011, { grid: 48 }), { even: true, weight: 2, flat: 0.35, pattern: false, color: (c) => keep(lit("#2b2b2e", c.n, { amb: 0.7, dif: 0.35, spec: 0.4 })) }); // prettier-ignore
+    k.add(evenTube(k, curve, 0.011, { grid: 48 }), { even: true, weight: 2, flat: 0.35, pattern: false, color: (c) => keep(lit("#2b2b2e", c.n, { amb: 0.7, dif: 0.35, spec: 0.4 })) }); // prettier-ignore
     for (const p of [a, b])
       k.add(evenCylinder(0.017, 0.017, 0.04, true), { pos: [p[0], p[1], pz + 0.02], rot: [90, 0, 0], even: true, weight: 3, pattern: false, color: darkSteel }); // prettier-ignore
   });
+  // Brass latches at the front corners, where the lid closes.
+  for (const sx of [-1, 1]) {
+    block(k, [0.08, 0.1, 0.016], [sx * (W / 2 - 0.1), -0.07, pz - 0.004], brass, { weight: 1.6 });
+    screw(k, [sx * (W / 2 - 0.1), -0.09, pz + 0.006], 0.01);
+  }
   // A plain brass name plate on the front of the case (no insignia).
   block(k, [0.36, 0.08, 0.01], [0, -0.1 + 0.14, pz - 0.002], brass, { weight: 1.2 });
   // The lid, opened back, with the operator's pad on its inside: the
@@ -1171,6 +1288,9 @@ function buildEnigma(k, o) {
   const lz = -0.22 - D / 2 - 0.06;
   const lidH = 0.98;
   block(k, [W + 0.12, lidH, 0.05], [0, lidH / 2 - 0.02, lz], wood(DARK_WOOD));
+  // The lid's brass hinges.
+  for (const sx of [-0.55, 0.55])
+    k.add(evenCylinder(0.02, 0.02, 0.16, true), { pos: [sx, -0.01, lz + 0.03], rot: [0, 0, 90], even: true, weight: 2, pattern: false, color: brass }); // prettier-ignore
   const padW = 1.3;
   const padH = 0.74;
   const pcy = lidH / 2 + 0.02;
@@ -1361,7 +1481,21 @@ function buildBombe(k, o) {
   block(k, [W + 0.08, 0.08, D + 0.08], [0, 0.04, 0], (c) =>
     keep(lit("#1d2023", c.n, { amb: 0.75 })),
   );
-  block(k, [W - 0.1, 0.9, 0.012], [-0.08 + 0.02, 1.34, fz + 0.006], (c) => keep(lit("#1f2226", c.n, { amb: 0.8, dif: 0.25 }))); // prettier-ignore
+  block(k, [W - 0.1, 0.72, 0.012], [-0.08 + 0.02, 1.34, fz + 0.006], (c) => keep(lit("#1f2226", c.n, { amb: 0.8, dif: 0.25 }))); // prettier-ignore
+  // Raised frames round the drum panel and the readout, rivets along the
+  // cabinet's front edges, handles and vents on its sides.
+  const frame = (w, h, cx, cy) => {
+    for (const [sx, sy, px, py] of [[w + 0.04, 0.03, 0, h / 2], [w + 0.04, 0.03, 0, -h / 2], [0.03, h, w / 2, 0], [0.03, h, -w / 2, 0]]) // prettier-ignore
+      block(k, [sx, sy, 0.025], [cx + px, cy + py, fz + 0.012], (c) => keep(lit("#3d434a", c.n, { amb: 0.7, dif: 0.35, spec: 0.35 })), { weight: 1.4 }); // prettier-ignore
+  };
+  frame(W - 0.1, 0.72, -0.06, 1.34);
+  frame(2.1, 0.46, -0.08, 0.62);
+  for (let i = 0; i <= 12; i++) for (const sx of [-1, 1]) screw(k, [sx * (W / 2 - 0.035), 0.12 + (i * (H - 0.2)) / 12, fz + 0.002], 0.01); // prettier-ignore
+  for (const sx of [-1, 1]) {
+    for (const hy of [0.85, 1.25]) block(k, [0.03, 0.05, 0.03], [sx * (W / 2 + 0.015), hy, 0.12], darkSteel, { weight: 2 }); // prettier-ignore
+    block(k, [0.03, 0.03, 0.3], [sx * (W / 2 + 0.035), 1.05, 0.12], steel, { weight: 2 }); // handle bar
+    for (let v = 0; v < 8; v++) block(k, [0.006, 0.018, 0.4], [sx * (W / 2 + 0.003), 0.35 + v * 0.05, -0.1], () => keep("#15181b"), { weight: 1.5 }); // prettier-ignore
+  }
   // The drums (tokens 0..35): a coloured drum with a cream letter ring, a
   // steel hub and a white index notch, turning about its own axle.
   for (let set = 0; set < BO.sets; set++) {
@@ -1382,19 +1516,22 @@ function buildBombe(k, o) {
           const face = c.s.cap === "top";
           let col = BO_DRUM_COLORS[row];
           if (face && rr > BO.r * 0.62 && rr < BO.r * 0.94) {
-            // The letter ring: a tick for each of the 26 letters, and a red
-            // mark at A, so the turn reads at a glance.
+            // The letter ring, with a red mark at A so the turn reads at a
+            // glance (26 letters are too small to read at phone size).
             const ang = Math.atan2(c.p[1] - y, c.p[0] - x);
             const f = ((Math.PI / 2 - ang) / TAU) * 26;
-            const d = Math.abs(f - Math.round(f));
-            const isA = ((Math.round(f) % 26) + 26) % 26 === 0;
-            col =
-              rr > BO.r * 0.7 && d < (isA ? 0.3 : 0.12) ? (isA ? "#c21d12" : "#3a332a") : "#e9dfc6";
+            const isA = Math.abs((((f % 26) + 26) % 26) - 13) > 12.55;
+            col = isA && rr > BO.r * 0.68 ? "#c21d12" : "#e9dfc6";
           }
           if (face && rr < BO.r * 0.22) col = STEEL;
           return keep(lit(col, face ? [0, 0, 1] : c.n, { amb: 0.66, dif: 0.4, spec: 0.35 }));
         },
       });
+      // Three bolt heads round the hub.
+      for (let b = 0; b < 3; b++) {
+        const a = (b * TAU) / 3;
+        k.add(evenCylinder(0.008, 0.008, 0.008, true), { pos: [x + 0.035 * Math.cos(a), y + 0.035 * Math.sin(a), z + 0.04], rot: [90, 0, 0], even: true, weight: 3, pattern: false, color: darkSteel, ...tok }); // prettier-ignore
+      }
       // The notch at the top of the drum face shows which letter is set.
       k.add(evenBox(0.012, 0.03, 0.01), { pos: [x, y + BO.r * 0.45, z + 0.04], even: true, weight: 3, pattern: false, color: () => keep("#ffffff"), ...tok }); // prettier-ignore
     });
@@ -1479,6 +1616,7 @@ function driveBombe(t, c, out, info) {
 
 export const RECIPES = {
   "turing-machine": {
+    density: 2,
     options: TM_OPTIONS,
     input: {
       title: "Your own number",
@@ -1496,6 +1634,7 @@ export const RECIPES = {
     build: buildTuring,
   },
   "difference-engine": {
+    density: 2,
     options: DE_OPTIONS,
     input: {
       title: "Your own polynomial",
@@ -1514,6 +1653,7 @@ export const RECIPES = {
     build: buildDifference,
   },
   "enigma-machine": {
+    density: 2,
     options: [
       // Your message, as typed (set from the panel, not shown).
       { key: "message", label: "Your message", type: "text", default: EN_DEFAULT, hidden: true },
@@ -1536,6 +1676,7 @@ export const RECIPES = {
     build: buildEnigma,
   },
   bombe: {
+    density: 2,
     options: [
       // The message to break, as typed (set from the panel, not shown).
       {
