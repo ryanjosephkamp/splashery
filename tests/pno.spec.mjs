@@ -185,7 +185,8 @@ test.describe("pianos (in the app)", () => {
     await page.setInputFiles("#song-file", { name: "scale.mid", mimeType: "audio/midi", buffer: Buffer.from(midi) }); // prettier-ignore
     await expect(page.locator("#song-bar-title")).toHaveValue("Scale");
     await expect(page.locator("#toast")).toContainText("1 note moved by octaves");
-    await page.click("#game-play");
+    // Opening a file starts it playing; the bar's button then shows pause.
+    await expect(page.locator("#game-play")).toHaveAttribute("data-playing", "true");
     await page.waitForFunction(() => window.__splashery.player.toyInfo.recipe.song.state().pos > 0.5); // prettier-ignore
     expect(errors).toEqual([]);
   });
