@@ -45,8 +45,11 @@ its model (the owner's split in CLAUDE.md).
   sandbox first; then the pilot game, Toy Hunt Island; then the first portfolio template, Forest
   trail, with a World maker page; then more templates, two at a time. Templates are free forever
   under MIT, with a small "World template by Ryan Kamp · Splashery" credit people may keep or move.
-  Everything you see is splats; menus and text are page text, and collision uses invisible shapes. A
-  second Operator takes Worlds once it has three or more lanes.
+  Since the owner's "Hybrid yes" (September 29, 2026), worlds are a hybrid: ordinary lit models for
+  the ground, water, sky, collision and signs, and splats for the props, scans, effects, anything
+  that breaks or morphs, and the character. The splat-only look stays behind a `render` switch, and
+  the toy shelf stays pure splats. Menus and text are page text. A second Operator takes Worlds once
+  it has three or more lanes.
 - **Lab** (Opus 5.5): a short literature check, then sharper splat kernels on pages and grainy toys,
   then splat fields on the GPU. Keep only what beats today's clips. Later, an open format for splat
   objects with moving parts.
