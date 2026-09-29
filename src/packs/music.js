@@ -234,6 +234,19 @@ const FACES = [
   ["z", [0, 0, 1], [0, 0, 0]],
   ["Z", [0, 0, -1], [0, 180, 0]],
 ];
+// Smaller splats along a face's edges, so they stop at the edge instead of
+// spilling past it as a fuzzy rim.
+function crisp(color, w, h) {
+  const fn = typeof color === "function" ? color : () => color ?? "#cccccc";
+  return (c) => {
+    const col = fn(c);
+    if (col === null) return null;
+    const d = Math.min(c.u * w, (1 - c.u) * w, c.v * h, (1 - c.v) * h);
+    if (d >= 0.008) return col;
+    const size = 0.5 + (0.5 * d) / 0.008;
+    return col && typeof col === "object" && !Array.isArray(col) ? { ...col, size: (col.size ?? 1) * size } : { c: col, size }; // prettier-ignore
+  };
+}
 // `opts.quat` turns the whole box about its centre.
 function box6(k, at, size, opts = {}, skip = "") {
   const [sx, sy, sz] = size;
@@ -244,14 +257,14 @@ function box6(k, at, size, opts = {}, skip = "") {
     const h = n[1] ? sz : sy;
     const d = quatRotate(q, [(n[0] * sx) / 2, (n[1] * sy) / 2, (n[2] * sz) / 2]);
     const quat = quatMul(q, quatEuler(...rot));
-    k.add(rect(w, h), { even: true, opacity: 1, ...opts, pos: vec.add(at, d), quat });
+    k.add(rect(w, h), { even: true, opacity: 1, jitter: 0.01, ...opts, pos: vec.add(at, d), quat, color: crisp(opts.color, w, h) }); // prettier-ignore
   }
 }
 // A rod standing up from its base: an even parametric tube with a round top.
 function rodShape(k, base, r, len, opts) {
   k.add(
     k.param((u, v) => [base[0] + r * Math.cos(TAU * u), base[1] + v * len, base[2] + r * Math.sin(TAU * u)], { grid: 48, thick: r }), // prettier-ignore
-    { even: true, opacity: 1, ...opts },
+    { even: true, opacity: 1, jitter: 0.01, ...opts },
   );
   k.add(
     k.param(
@@ -262,7 +275,7 @@ function rodShape(k, base, r, len, opts) {
       },
       { grid: 16, thick: r },
     ),
-    { even: true, opacity: 1, ...opts },
+    { even: true, opacity: 1, jitter: 0.01, ...opts },
   );
 }
 // Softly lit steel: a smooth gradient with the light and one broad sheen, so
@@ -880,36 +893,55 @@ export const RECIPES = {
         };
 
       // Plinth, cheeks, the lower front board and the keybed.
-      box6(k, [0, 0.025, -0.08], [1.44, 0.05, 0.54], { color: lacquer, flat: 0.15 });
+      box6(k, [0, 0.025, -0.08], [1.44, 0.05, 0.54], { color: lacquer, flat: 0.15 }, "Y");
       for (const s of [-1, 1]) {
-        box6(k, [s * 0.655, 0.525, -0.09], [0.05, 0.95, 0.42], {
-          flat: 0.15,
-          color: (c) => (dot(c.n, [-s, 0, 0]) > 0.9 ? inside(c) : lacquer(c)),
-        });
+        box6(
+          k,
+          [s * 0.655, 0.525, -0.09],
+          [0.05, 0.95, 0.42],
+          {
+            flat: 0.15,
+            color: (c) => (dot(c.n, [-s, 0, 0]) > 0.9 ? inside(c) : lacquer(c)),
+          },
+          "Y",
+        );
         // The arms beside the keys.
-        box6(k, [s * 0.655, 0.265, 0.28], [0.05, 0.43, 0.32], { flat: 0.15, color: lacquer }, "Z");
+        box6(k, [s * 0.655, 0.265, 0.28], [0.05, 0.43, 0.32], { flat: 0.15, color: lacquer }, "ZY");
       }
-      box6(k, [0, 0.19, 0.06], [1.26, 0.3, 0.03], { flat: 0.15, color: striped([0, 0, 1], 1.26, 0.3) }); // prettier-ignore
-      box6(k, [0, 0.37, 0.12], [1.26, 0.06, 0.64], {
-        flat: 0.15,
-        color: (c) => (c.n[1] > 0.9 ? lit(c, "#4a1418", 0.2) : lacquer(c)),
-      });
-      // The fallboard over the keys: a gold stripe and a painted star.
-      box6(k, [0, 0.545, 0.09], [1.26, 0.09, 0.035], {
-        flat: 0.15,
-        color: (c) => {
-          if (c.n[2] > 0.9) {
-            const x = (c.u - 0.5) * 1.26;
-            const y = (c.v - 0.5) * 0.09;
-            const a = Math.atan2(y, x);
-            const r = Math.hypot(x, y);
-            const star = 0.03 * (0.55 + 0.45 * Math.cos(5 * (a - Math.PI / 2)));
-            if (r < star + 0.004) return keep(lit(c, gold, 0.2, 0.6));
-          }
-          if (c.n[2] < -0.9) return inside(c);
-          return striped([0, 0, 1], 1.26, 0.09, 0.02)(c);
+      box6(k, [0, 0.19, 0.06], [1.26, 0.3, 0.03], { flat: 0.15, color: striped([0, 0, 1], 1.26, 0.3) }, "xXYZ"); // prettier-ignore
+      box6(
+        k,
+        [0, 0.37, 0.12],
+        [1.26, 0.06, 0.64],
+        {
+          flat: 0.15,
+          color: (c) => (c.n[1] > 0.9 ? lit(c, "#4a1418", 0.2) : lacquer(c)),
         },
-      });
+        "xXYZ",
+      );
+      // The fallboard over the keys: a gold stripe and a painted star.
+      box6(
+        k,
+        [0, 0.545, 0.09],
+        [1.26, 0.09, 0.035],
+        {
+          flat: 0.15,
+          weight: 3,
+          color: (c) => {
+            if (c.n[2] > 0.9) {
+              const x = (c.u - 0.5) * 1.26;
+              const y = (c.v - 0.5) * 0.09;
+              const a = Math.atan2(y, x);
+              const r = Math.hypot(x, y);
+              const star = 0.03 * (0.55 + 0.45 * Math.cos(5 * (a - Math.PI / 2)));
+              if (r < star + 0.004) return keep(lit(c, gold, 0.2, 0.6));
+            }
+            if (c.n[2] < -0.9) return inside(c);
+            return striped([0, 0, 1], 1.26, 0.09, 0.02)(c);
+          },
+        },
+        "xXY",
+      );
       // The lid, raised: hinged at the back of the top, standing up behind.
       const hinge = [0, 1.0, -0.3];
       const lidQ = quatEuler(-145, 0, 0);
@@ -919,20 +951,26 @@ export const RECIPES = {
         color: striped(quatRotate(lidQ, [0, -1, 0]), 1.36, 0.46, 0.04),
       });
       // Where the rods stand, and the rail the hammers turn on.
-      box6(k, [0, 0.47, TP.rodZ], [1.26, 0.06, 0.08], {
-        flat: 0.15,
-        color: (c) => lit(c, "#474b52", 0.35, 0.4),
-      });
-      box6(k, [0, TP.hamPivot[0] - 0.012, TP.hamPivot[1]], [1.26, 0.024, 0.045], { flat: 0.15, color: inside }); // prettier-ignore
+      box6(
+        k,
+        [0, 0.47, TP.rodZ],
+        [1.26, 0.06, 0.08],
+        {
+          flat: 0.15,
+          color: (c) => lit(c, "#474b52", 0.35, 0.4),
+        },
+        "xXY",
+      );
+      box6(k, [0, TP.hamPivot[0] - 0.012, TP.hamPivot[1]], [1.26, 0.024, 0.045], { flat: 0.15, color: inside }, "xXY"); // prettier-ignore
 
       // The keys: tokens 0-17, each turning about the balance rail.
       TP.keys.forEach((key) => {
         const tok = { kind: "token", params: [key.i, 0], pattern: false, flat: 0.15 };
         if (key.black) {
-          box6(k, [key.x, TP.keyTop + 0.022, 0.21], [0.058, 0.05, 0.2], { ...tok, weight: 1.6, color: ebony }, "Y"); // prettier-ignore
+          box6(k, [key.x, TP.keyTop + 0.022, 0.21], [0.058, 0.05, 0.2], { ...tok, weight: 4, color: ebony }, "Y"); // prettier-ignore
           box6(k, [key.x, TP.keyTop - 0.02, -0.02], [0.028, 0.024, 0.34], { ...tok, color: inside }, "Y"); // prettier-ignore
         } else {
-          box6(k, [key.x, TP.keyTop - 0.022, 0.275], [0.096, 0.044, 0.33], { ...tok, weight: 1.6, color: ivory }, "Y"); // prettier-ignore
+          box6(k, [key.x, TP.keyTop - 0.022, 0.275], [0.096, 0.044, 0.33], { ...tok, weight: 4, color: ivory }, "Y"); // prettier-ignore
           box6(k, [key.x, TP.keyTop - 0.03, -0.02], [0.03, 0.024, 0.26], { ...tok, color: inside }, "Y"); // prettier-ignore
         }
       });
@@ -963,7 +1001,7 @@ export const RECIPES = {
             },
             { grid: 32, thick: TP.headR },
           ),
-          { ...tok, even: true, opacity: 1, flat: 0.25, weight: 3, color: (c) => lit(c, "#e3a93a", 0.3, 0.15) }, // prettier-ignore
+          { ...tok, even: true, opacity: 1, jitter: 0.01, flat: 0.25, weight: 3, color: (c) => lit(c, "#e3a93a", 0.3, 0.15) }, // prettier-ignore
         );
         const base = [rod.x, TP.rodBase, TP.rodZ];
         const rodOpt =
