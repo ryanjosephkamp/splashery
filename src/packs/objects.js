@@ -35,6 +35,18 @@ const easeOutBack = (x) => {
 };
 const bump = (x) => (x <= 0 || x >= 1 ? 0 : Math.sin(Math.PI * x));
 const window01 = (x, a, b) => clamp((x - a) / (b - a), 0, 1);
+// The i-th point of an even (low-discrepancy) sequence in `dims` dimensions,
+// for clouds that should cover an area smoothly instead of in clumps.
+function evenPoint(i, dims) {
+  let g = 2;
+  for (let k = 0; k < 20; k++) g = Math.pow(1 + g, 1 / (dims + 1));
+  const out = [];
+  for (let k = 0; k < dims; k++) {
+    const v = 0.5 + i / Math.pow(g, k + 1);
+    out.push(v - Math.floor(v));
+  }
+  return out;
+}
 
 // Baked light from above, front and right, with a sheen towards the viewer.
 const LIGHT = unit([0.4, 0.85, 0.55]);
@@ -1894,7 +1906,7 @@ export const RECIPES = {
 
   lamp: {
     alive: true,
-    density: 0.45,
+    density: 1,
     options: [{ key: "color", label: "Colour", type: "color", default: "#3c7fc4" }],
     controls: [{ key: "light", label: "Light", type: "toggle", default: 1, ease: 0.35 }],
     action: { key: "light", label: "Switch the light" },
@@ -1921,6 +1933,9 @@ export const RECIPES = {
         {
           pos: [0, 0, -0.1],
           flat: 0.15,
+          even: true,
+          opacity: 1,
+          jitter: 0.012,
           color: paint,
         },
       );
@@ -1935,6 +1950,8 @@ export const RECIPES = {
           {
             flat: 0.2,
             weight: 1.3,
+            opacity: 1,
+            jitter: 0.012,
             color: paint,
           },
         );
@@ -1988,44 +2005,58 @@ export const RECIPES = {
           pos: head,
           quat: q,
           flat: 0.15,
+          even: true,
+          opacity: 1,
+          jitter: 0.012,
           color: (c) =>
             dot(c.n, dir) > 0.2 ? lit("#f4efe2", mul(c.n, -1), { amb: 0.9, dif: 0.2 }) : paint(c),
         },
       );
       const bulbAt = add(head, mul(dir, 0.07));
-      k.add(k.sphere(0.085), { pos: bulbAt, weight: 2, color: "#e9e4d8" });
+      k.add(k.sphere(0.085), { pos: bulbAt, weight: 2, even: true, color: "#e9e4d8" });
       const glow = k.part("glow", { pivot: bulbAt });
       k.add(k.sphere(0.095), {
         pos: bulbAt,
         part: glow,
         weight: 2,
         pattern: false,
+        even: true,
+        jitter: 0.01,
         color: (c) => keep(mix("#fff7d6", "#ffffff", 0.6)),
       });
       // A faint cone of light and a warm pool on the desk.
       const beam = k.part("beam", { pivot: bulbAt });
       const floorT = (0 - bulbAt[1]) / dir[1];
       const pool = add(bulbAt, mul(dir, floorT));
-      k.cloud({ share: 0.08, size: 3.2, part: beam, pattern: false }, (rand) => {
-        const s = Math.sqrt(rand());
-        const rr = (0.08 + s * 0.5) * Math.sqrt(rand());
-        const a = rand() * TAU;
-        const ref = unit(cross(dir, [0, 0, 1]));
-        const ref2 = cross(dir, ref);
+      // Both are spread evenly (not at random), so the light reads as a
+      // smooth glow rather than blotches.
+      const ref = unit(cross(dir, [0, 0, 1]));
+      const ref2 = cross(dir, ref);
+      k.cloud({ share: 0.08, size: 2, part: beam, pattern: false }, (rand, i, n) => {
+        // Jittered within its cell, so the even points show no lattice.
+        const cell = 1 / Math.cbrt(n);
+        const [e0, e1, e2] = evenPoint(i, 3).map((e) => {
+          const v = e + (rand() - 0.5) * cell * 0.4;
+          return v - Math.floor(v);
+        });
+        const s = Math.sqrt(e0);
+        const rr = (0.08 + s * 0.5) * Math.sqrt(e1);
+        const a = e2 * TAU;
         const p = add(
-          add(bulbAt, mul(dir, s * floorT * 0.98)),
+          add(bulbAt, mul(dir, s * floorT * 0.9)),
           add(mul(ref, Math.cos(a) * rr), mul(ref2, Math.sin(a) * rr)),
         );
-        return { p, color: "#ffe9a8", opacity: 0.05 + 0.05 * (1 - s) };
+        return { p, dir, stretch: 6, color: "#ffe9a8", opacity: 0.025 + 0.035 * (1 - s) };
       });
-      k.cloud({ share: 0.06, size: 2.2, part: beam, pattern: false }, (rand) => {
-        const a = rand() * TAU;
-        const r = Math.sqrt(rand()) * 0.62;
+      k.cloud({ share: 0.06, size: 3, part: beam, pattern: false }, (rand, i, n) => {
+        // A sunflower spiral: the evenest way to fill a disc.
+        const a = i * 2.39996323;
+        const r = Math.sqrt((i + 0.5) / n) * 0.62;
         return {
           p: [pool[0] + Math.sin(a) * r, 0.003, pool[2] + Math.cos(a) * r],
           n: [0, 1, 0],
           color: "#ffe39a",
-          opacity: 0.45 * (1 - (r / 0.62) ** 2),
+          opacity: 0.4 * (1 - (r / 0.62) ** 2),
         };
       });
     },
