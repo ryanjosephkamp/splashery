@@ -14,7 +14,7 @@
 // tools/models.json.
 //
 // The file: "ROS1", then uint32 n, uint32 parts, float32 lo[3], hi[3], sLo, sHi, then per splat
-// (in a shuffled order, so the first m splats are an even sample of the whole): uint16 x3
+// (in an even order, so the first m splats spread evenly over the whole surface): uint16 x3
 // position (in lo..hi), int8 x3 normal, uint8 size (log between sLo and sHi), uint8 x3 color
 // (sRGB), uint8 part. Loaded by src/packs/real-objects.js.
 
@@ -239,6 +239,67 @@ export function dropTris(raw, drop) {
   raw.mat = Uint16Array.from(mat);
 }
 
+// ---- Even placement -----------------------------------------------------------------------------
+
+// How many times the file's count is sampled before it is thinned to an even set.
+const OVER = 2;
+
+// The splats `list` (indices into pos) in an even order, coarse to fine (a progressive Poisson
+// disc): a splat joins at the first radius, shrinking step by step, where no splat already in lies
+// closer than that radius. So any first m of the order cover the surface evenly, as the kit's
+// even shapes do (docs/PACKS.md, 7c), instead of a random subset's clumps and holes.
+function evenOrder(pos, list) {
+  const rand = mulberry32(1234);
+  const idx = Int32Array.from(list);
+  for (let i = idx.length - 1; i > 0; i--) {
+    const j = Math.floor(rand() * (i + 1));
+    [idx[i], idx[j]] = [idx[j], idx[i]];
+  }
+  const out = [];
+  const inSet = new Uint8Array(pos.length / 3);
+  const placed = [];
+  for (let r = 0.4; out.length < idx.length && r > 1e-4; r *= 0.8) {
+    // A grid of cell r holding every splat placed so far.
+    const grid = new Map();
+    const key = (x, y, z) => (x * 73856093) ^ (y * 19349663) ^ (z * 83492791);
+    const add = (i) => {
+      const k = key(Math.floor(pos[i * 3] / r), Math.floor(pos[i * 3 + 1] / r), Math.floor(pos[i * 3 + 2] / r)); // prettier-ignore
+      let c = grid.get(k);
+      if (!c) grid.set(k, (c = []));
+      c.push(i);
+    };
+    for (const i of placed) add(i);
+    const r2 = r * r;
+    for (const i of idx) {
+      if (inSet[i]) continue;
+      const x = pos[i * 3];
+      const y = pos[i * 3 + 1];
+      const z = pos[i * 3 + 2];
+      const cx = Math.floor(x / r);
+      const cy = Math.floor(y / r);
+      const cz = Math.floor(z / r);
+      let free = true;
+      for (let dx = -1; dx <= 1 && free; dx++)
+        for (let dy = -1; dy <= 1 && free; dy++)
+          for (let dz = -1; dz <= 1 && free; dz++)
+            for (const j of grid.get(key(cx + dx, cy + dy, cz + dz)) || []) {
+              const d = (pos[j * 3] - x) ** 2 + (pos[j * 3 + 1] - y) ** 2 + (pos[j * 3 + 2] - z) ** 2; // prettier-ignore
+              if (d < r2) {
+                free = false;
+                break;
+              }
+            }
+      if (!free) continue;
+      inSet[i] = 1;
+      out.push(i);
+      placed.push(i);
+      add(i);
+    }
+  }
+  for (const i of idx) if (!inSet[i]) out.push(i);
+  return Int32Array.from(out);
+}
+
 // ---- Baking ------------------------------------------------------------------------------------
 
 async function bake(id) {
@@ -254,9 +315,10 @@ async function bake(id) {
   // Charts: pieces connected through shared vertices without welding by position, so a garment's
   // panels (split at their seams in the file) come apart along the seams.
   const charts = cfg.charts ? chartsOf(prep.pos, prep.tri) : null;
-  const s = sampleSurface(prep, cfg.count, { seed: 1, up: "y", light: true });
+  // Sampled at OVER times the count, then thinned to an even (blue-noise) set: see evenOrder().
+  const s = sampleSurface(prep, cfg.count * OVER, { seed: 1, up: "y", light: true });
   // The same splats without the baked light: a painted color keeps the light (paint * lit / flat).
-  const flat = sampleSurface(prep, cfg.count, { seed: 1, up: "y", light: false });
+  const flat = sampleSurface(prep, cfg.count * OVER, { seed: 1, up: "y", light: false });
   const n = s.n;
   const part = new Uint8Array(n);
   const drop = new Uint8Array(n); // a part of -1 leaves the splat out (a piece hidden inside)
@@ -333,20 +395,17 @@ async function bake(id) {
   if (cfg.finalPart)
     for (let i = 0; i < n; i++)
       part[i] = cfg.finalPart([s.pos[i * 3], s.pos[i * 3 + 1], s.pos[i * 3 + 2]], part[i]);
-  // Shuffle, so any first m splats are an even sample.
-  const rand = mulberry32(1234);
+  // An even order: any first m splats are spread evenly over the surface (no clumps, no holes),
+  // and the file keeps the first cfg.count, each grown to the spacing of that many.
   const kept = [];
   for (let i = 0; i < n; i++) if (!drop[i]) kept.push(i);
-  const order = Int32Array.from(kept);
-  for (let i = order.length - 1; i > 0; i--) {
-    const j = Math.floor(rand() * (i + 1));
-    [order[i], order[j]] = [order[j], order[i]];
-  }
+  const order = evenOrder(s.pos, kept).slice(0, Math.round(kept.length / OVER));
+  for (const i of order) s.sigma[i] *= Math.sqrt(kept.length / order.length);
   const lo = [Infinity, Infinity, Infinity];
   const hi = [-Infinity, -Infinity, -Infinity];
   let sLo = Infinity;
   let sHi = -Infinity;
-  for (let i = 0; i < n; i++) {
+  for (const i of order) {
     for (let k = 0; k < 3; k++) {
       lo[k] = Math.min(lo[k], s.pos[i * 3 + k]);
       hi[k] = Math.max(hi[k], s.pos[i * 3 + k]);
@@ -355,7 +414,7 @@ async function bake(id) {
     sHi = Math.max(sHi, Math.log(s.sigma[i]));
   }
   let nParts = 1;
-  for (let i = 0; i < n; i++) nParts = Math.max(nParts, part[i] + 1);
+  for (const i of order) nParts = Math.max(nParts, part[i] + 1);
   const head = 4 + 4 + 4 + 4 * 8;
   const buf = Buffer.alloc(head + order.length * 14);
   buf.write("ROS1", 0, "ascii");
@@ -379,7 +438,7 @@ async function bake(id) {
   const counts = new Array(nParts).fill(0);
   for (const i of order) counts[part[i]]++;
   console.log(
-    `${id}: ${prep.triangles} triangles, ${isl.list.length} pieces, ${n} splats, parts [${counts.join(", ")}], ${(buf.length / 1e6).toFixed(2)} MB, ${((Date.now() - t0) / 1000).toFixed(1)} s`, // prettier-ignore
+    `${id}: ${prep.triangles} triangles, ${isl.list.length} pieces, ${order.length} splats, parts [${counts.join(", ")}], ${(buf.length / 1e6).toFixed(2)} MB, ${((Date.now() - t0) / 1000).toFixed(1)} s`, // prettier-ignore
   );
   if (cfg.report) cfg.report({ isl, prep, s, part });
 }

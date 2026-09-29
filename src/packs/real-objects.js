@@ -475,15 +475,15 @@ const WATER_BOTTLE = {
 
 // ---- Sunglasses ------------------------------------------------------------------------------
 // The baked spectacles face +Z: the front (rims, bridge, nose pads) at z 0.6 to 0.67, the arms
-// running back to z -0.67 from hinges at x ±0.505, z 0.623. The lenses are kit-built discs in
+// running back to z -0.67; the hinges turn at x ±0.505, z 0.575 (behind the rims). The lenses are kit-built discs in
 // the rims (centers x ±0.2996, radius 0.195): a faint clear layer, and a dark gray layer that
 // fades in on channel 0, from the rim inward, like light-changing lenses.
 
 const SG = {
   T: 3.5,
   center: [0, 0, 0.3],
-  hingeL: [-0.505, 0, 0.623],
-  hingeR: [0.505, 0, 0.623],
+  hingeL: [-0.505, 0, 0.575],
+  hingeR: [0.505, 0, 0.575],
   lens: { x: 0.2996, z: 0.652, r: 0.197 },
   rest: -0.5, // the glasses rest turned this far about Y (radians)
 };
@@ -537,7 +537,8 @@ const SUNGLASSES = {
     out.parts.armR = childOf(qF, o, SG.hingeR, quatAxisAngle([0, 1, 0], 1.53 * foldR));
     out.parts.armL = childOf(qF, o, SG.hingeL, quatAxisAngle([0, 1, 0], -1.36 * foldL));
     out.morph = [ease(seg(s, 1.35, 2.05)) * (1 - ease(seg(s, 2.6, 3.3))), 0, 0, 0];
-    sortWhileMoving(out, info, s, on && s < SG.T, 0.06);
+    // No re-sort here: the arms are built reaching back, so in their built order they already
+    // draw behind the lenses once folded (re-sorted where they stand, they drew over the lenses).
   },
   build(k) {
     const scan = SCANS.get("sunglasses");
@@ -559,7 +560,7 @@ const SUNGLASSES = {
         if (!dark) {
           // Clear: faint, with a soft sheen from the upper left.
           const sheen = Math.exp(-(((x - side * L.x + 0.075) ** 2 + (y - 0.085) ** 2) / 0.0012));
-          return { p: [x, y, z], n: [0, 0, 1], size, color: [0.9, 0.93, 0.95], opacity: 0.035 + 0.3 * sheen, part: front }; // prettier-ignore
+          return { p: [x, y, z], n: [0, 0, 1], size, color: [0.78, 0.82, 0.86], opacity: 0.1 + 0.3 * sheen, part: front }; // prettier-ignore
         }
         const edge = r / L.r;
         const g = 0.1 + 0.05 * (1 - edge) + 0.05 * Math.exp(-(((x - side * L.x + 0.07) ** 2 + (y - 0.08) ** 2) / 0.004)); // prettier-ignore
@@ -658,45 +659,38 @@ const BASEBALL_CAP = {
     const scan = SCANS.get("baseball-cap");
     const cap = k.part("cap", { pivot: BC.pivot });
     addScan(k, scan, { share: 0.78, parts: [cap] });
-    // The stand: a turned walnut dome that fills the crown, on a post and a round foot.
-    const wood = (c, f = 1) => {
-      const g = 0.5 + 0.5 * Math.sin(c.lp[1] * 90 + 6 * c.noise(c.lp[0] * 3, c.lp[1] * 3, c.lp[2] * 3)); // prettier-ignore
-      const base = [0.36 * f, 0.23 * f, 0.14 * f].map((v) => v * (0.88 + 0.12 * g));
-      return lit(base, c.n, { sheen: 0.25, tight: 24 });
+    // The stand: one turned walnut profile (a round foot, a slim post and a dome that fills the
+    // crown), placed evenly (a golden-angle spiral) so its edges stay crisp.
+    const zc = -0.2;
+    const foot = 0.36;
+    const postR = 0.055;
+    const H = BC.rim - BC.base;
+    // [radius, height] from the foot's middle underneath, round its rim, up the post and over the dome.
+    const prof = [
+      [0, BC.base - 0.03], [foot - 0.02, BC.base - 0.03], [foot, BC.base - 0.01], [foot, BC.base + 0.015],
+      [foot - 0.02, BC.base + 0.03], [postR + 0.05, BC.base + 0.035], [postR + 0.01, BC.base + 0.06],
+      [postR, BC.base + 0.1], [postR, BC.rim - 0.02], [postR + 0.03, BC.rim - 0.005], [0.44, BC.rim],
+      [0.43, BC.rim + 0.14], [0.38, BC.rim + 0.3], [0.27, BC.rim + 0.46], [0.14, BC.rim + 0.55], [0, BC.rim + 0.58],
+    ]; // prettier-ignore
+    const lens = [0];
+    for (let q = 1; q < prof.length; q++) lens.push(lens[q - 1] + Math.hypot(prof[q][0] - prof[q - 1][0], prof[q][1] - prof[q - 1][1])); // prettier-ignore
+    const at = (v) => {
+      const L = v * lens[lens.length - 1];
+      let q = 1;
+      while (q < prof.length - 1 && lens[q] < L) q++;
+      const f = (L - lens[q - 1]) / (lens[q] - lens[q - 1] || 1);
+      return [prof[q - 1][0] + (prof[q][0] - prof[q - 1][0]) * f, prof[q - 1][1] + (prof[q][1] - prof[q - 1][1]) * f]; // prettier-ignore
     };
-    const domeA = 2 * Math.PI * 0.48 * 0.5; // about the dome's area (a half ellipsoid)
-    addSolid(k, k.ellipsoid(0.47, 0.6, 0.5), domeA * 1.4, Math.round(k.count * 0.05), {
-      pos: [0, BC.rim, -0.2],
-      color: (c) => (c.lp[1] < 0 ? null : wood(c)),
-    });
-    addSolid(k, k.disc(0.47), Math.PI * 0.47 * 0.5, Math.round(k.count * 0.012), {
-      pos: [0, BC.rim, -0.2],
-      scale: [1, 1, 1.06],
-      color: (c) => wood(c, 0.8),
-    });
-    const postH = BC.rim - BC.base;
-    addSolid(
-      k,
-      k.cylinder(0.055, postH, { caps: false }),
-      2 * Math.PI * 0.055 * postH,
-      Math.round(k.count * 0.02),
-      {
-        // prettier-ignore
-        pos: [0, (BC.rim + BC.base) / 2, -0.2],
-        color: (c) => wood(c),
+    void H;
+    latheCloud(k, Math.round(k.count * 0.16), at, {
+      at: (b) => {
+        // Walnut: fine growth rings round the turned piece, lit from the upper left, a soft sheen.
+        const y = b.p[1];
+        const ring = 0.5 + 0.5 * Math.sin(y * 140 + 3 * Math.sin(b.a * 3 + y * 9));
+        const base = [0.37, 0.235, 0.14].map((v) => v * (0.9 + 0.1 * ring));
+        return { ...b, p: [b.p[0], y, b.p[2] + zc], color: lit(base, b.n, { sheen: 0.3, tight: 30 }), flat: 0.15 }; // prettier-ignore
       },
-    );
-    addSolid(
-      k,
-      k.cylinder(0.36, 0.06, { caps: true }),
-      2 * Math.PI * 0.36 * 0.42,
-      Math.round(k.count * 0.04),
-      {
-        // prettier-ignore
-        pos: [0, BC.base, -0.2],
-        color: (c) => wood(c),
-      },
-    );
+    });
     k.reach([0.5, 1.35, 0.9]);
     k.reach([-0.9, 1.1, -0.9]);
   },
@@ -791,12 +785,12 @@ const FOUNTAIN_PEN = {
     const scan = SCANS.get("fountain-pen");
     const pen = k.part("pen", { pivot: FP.nib });
     const cap = k.part("cap", { pivot: FP.capC });
-    addScan(k, scan, { share: 0.72, parts: [pen, cap] });
+    addScan(k, scan, { share: 0.8, parts: [pen, cap] });
     // The notepad: a cream sheet with faint blue rules and a red margin, on a thin block.
     const W = 2.3;
     const D = 1.45;
     const pz = 0.28;
-    const nPaper = Math.round(k.count * 0.16);
+    const nPaper = Math.round(k.count * 0.1);
     addCloud(k, nPaper, (i, n) => {
       const x = -W / 2 + W * ((i * 0.7548776662466927) % 1);
       const z = pz - D / 2 + D * ((i * 0.5698402909980532) % 1);
