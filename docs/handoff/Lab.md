@@ -88,50 +88,57 @@ HOW THIS LANE RUNS
   docs/OPERATING.md, docs/PACKS.md, docs/WORKSTREAMS.md and docs/handoff/history.md (lessons from
   earlier lanes).
 - Your handoff file: create it. Start it with this brief, word for word, under "## Brief", then keep
-  "## State", "## Notes", "## Known issues" and "## For the Operator" current. Note your model at
-  the top of "## State" (the blog post compares the two models).
-- Shared lists: edit only your own entries in src/toys.js, src/toy-sounds.js, src/toy-help.js (a
-  how-to line and an About text per toy, following docs/handoff/Help.md), tools/toy-plan.json,
-  CREDITS.md and tools/assets.json. Regenerate docs/TOY-PLAN.md with `node tools/toy-plan.mjs`;
-  never merge it by hand.
-- Never edit tests/taps.spec.mjs. Your own tests go in tests/<prefix>.spec.mjs. If a finished lane's
-  test breaks because of a count or a list your work changes, don't edit it: say which test and why
-  in your message, and the Operator fixes it.
-- Assets: CC0, CC BY or public domain only, checked on the live source page and credited
-  (CREDITS.md, tools/assets.json and the toy's in-app credit). Never BY-SA or NC. No logos, brand
-  names or insignia.
-- Review: post clips and cards to the Effect review page,
-  https://claude.ai/artifact/NCsg9V5SzFY3Mnwuwgq7pi, as OPERATING.md's "Steps for a lane" says.
-  Judge every effect as motion at phone size against the effect quality rules before you post it.
-  The Operator has made your lane's record. Don't republish the page, and never write to "verdicts".
-- Push your work in progress to your branch about every hour, so it isn't only in your container,
-  and open your draft PR early. Many lanes run at once now, so main moves often: merge it into your
-  branch before each push (never rebase a pushed branch) and keep both sides of any conflict.
-- Before every push, follow "Before every push" in CLAUDE.md: the full Playwright suite
-  (SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium npx playwright test), prettier,
-  `node tools/us-english.mjs --diff`, `node tools/check-packs.mjs <pack>` for new or changed toys, a
-  contact sheet and thumbnails, and your own screenshots at 390×844 and 1440×900. Then put back the
-  standard screenshots (`node tools/upkeep.mjs --restore-shots`) and any other lane's screenshots
-  your branch didn't change.
-- PR: one draft PR against main with the five sections (Summary, Verification, Deviations, Known
-  issues, What was cut), and the model that built it in the Summary. When main moves, merge it into
-  your branch.
-- After you post your cards, check the owner's marks (the "verdicts" collection, ids starting with
-  your prefix) about once an hour with a scheduled check-in (send_later). Fix every "fix" in the
-  same PR, post the new clip as a "-r2" card, and set replacedBy on the old one. Stop the check-ins
-  once your PR is merged or closed.
-- Finish every working turn with a short final message that starts with "READY:" (PR link, card ids,
-  test results, anything for the Operator), "WORKING:" (what's left), or "BLOCKED:" (exactly what
-  you need).
-
-## State
+  "## State
 
 Model: Opus 5.5 (claude-opus-5-5), default effort.
 
-- September 29, 2026: lane started. Handoff file written; the literature check is under way.
+- September 29, 2026: lane started. Draft PR #83 (this lane) and the engine PR (branch
+  `claude/lane-lab-engine`, "Engine: Lab, sharper splat kernels (off by default)") opened.
+- Step 1 done: [docs/lab/LITERATURE.md](../lab/LITERATURE.md), the literature check (other kernels,
+  anti-aliasing, 4D splats; what each changes in our engine and whether it fits).
+- Step 2 done: [docs/lab/KERNELS.md](../lab/KERNELS.md). Three sharper kernels built in the engine's
+  fragment hook and measured on the PDF page, the desk lamp, the American football, the hockey puck
+  and the splat equation toy. Only `sharp` (a generalized exponential, exp(−14.7·A²)) is kept, as a
+  labs option (`?kernel=sharp` or a recipe's `kernel: "sharp"`), off by default. It gives no clear
+  win on pages and grainy toys (their splats are a pixel or two on screen; their grain is in the
+  colors) and a real one on big, smooth splats (the splat equation torus: edges 3.70 → 2.70 px). The
+  disc and the steeper A³ kernel were dropped (they show each splat as a coin or a scale).
+- Step 3 done: [docs/lab/FIELDS.md](../lab/FIELDS.md). The "Splat field" test toy on a new labs-only
+  Lab shelf: about 297,000 splats placed and colored by a GPU program every frame (a galaxy, an
+  ocean, a knot), through a small engine hook (`gpuField`, labs only), measured.
+- Cards: `lab-kernel-equation`, `lab-kernel-pdf`, `lab-kernel-puck`, `lab-field-galaxy`,
+  `lab-field-ocean`, `lab-field-knot`.
 
 ## Notes
 
+- The kernel lives in PlayCanvas's `gsplatModifyPS` chunk (`modifySplatColor(uv, color)`, called
+  after the Gaussian falloff), set on `scene.gsplat.material`; the engine copies it into its unified
+  material. No vendored code changes. It applies to the whole scene, so the player sets it per toy,
+  and never touches the chunk while every toy is Gaussian.
+- A sharper kernel blends back to the Gaussian below about 3 pixels of half-width (`fwidth`), or it
+  aliases. That is also why it can't sharpen what is already a pixel wide: PDF text at phone size.
+- The field hook replaces a kit toy's work-buffer program; that pass already runs for every splat
+  every frame, so a field costs no extra pass. On WebGL2 the CPU sort uses the stored t = 0 places
+  (see FIELDS.md, "Sorting").
+- Measuring tools: `tools/lab-kernels.mjs` (edge width, speckle, shimmer, frame time per kernel),
+  `tools/lab-fields.mjs` (field frame time against the frozen toy and the CPU cost) and
+  `tools/lab-clip.mjs` (before-and-after clips at 390×844, clock stepped by hand).
+
 ## Known issues
 
+- Frame times come from Chromium's software renderer and are relative only; the owner's phone is the
+  real test.
+- Changing the Field option rebuilds the toy and resets the view to the app's default distance, not
+  the toy's own (true of every toy with options).
+- On WebGL2 a field's splats are sorted from their t = 0 places; fine for these three fields at
+  phone size, not for a field whose splats cross in depth.
+
 ## For the Operator
+
+- Merge order: the engine PR first (the kernel and the `gpuField` hook), then this lane's PR.
+- `src/toys.js`: the Lab category sits right after "pictures"; lane Studio Sound adds "studio" at
+  the same place, so a merge of both keeps both lines (Studio first, then Lab, as the brief says).
+- For PACKS.md: a recipe can bring its own GPU program with `gpuField(options, fit)` (labs only),
+  returning `{ glsl, wgsl }` work-buffer hooks; `src/packs/lab.js` is the example.
+- For the backlog: the splat equation toy's typed programs could compile to a GPU field (FIELDS.md,
+  "Typed programs"), which needs `src/equation.js` to hand back its parse tree.

@@ -57,6 +57,10 @@ const { gif, still } = await page.evaluate(
       if (toyOpt) {
         const [key, value] = toyOpt.split("=");
         await app.setToyOption(key, value);
+        // The rebuild resets the view: back to the toy's own.
+        const { findToy } = await import("/src/toys.js");
+        const def = findToy(id)?.camera;
+        if (def) player.camera.setState(def, { asHome: true, snap: true });
       }
       app.setLook({ background: "#ffffff" });
       player.opts.idleDelay = 1e9;

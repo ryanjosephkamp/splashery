@@ -3137,7 +3137,7 @@ export const TOYS = [
     pack: "lab",
     labs: true,
     tags: "gpu field galaxy spiral ocean waves sea knot flow particles shader lab experiment",
-    camera: { yaw: 0.3, pitch: 0.85, roll: 0, distance: 2.3 },
+    camera: { yaw: 0.3, pitch: 0.85, roll: 0, distance: 3.0 },
   },
   // ---- Pack: screens ----
   {

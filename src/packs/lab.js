@@ -501,8 +501,13 @@ export const RECIPES = {
       const look = LOOK[program];
       const n = Math.max(1, Math.floor(k.count * 0.99));
       const R = REACH[program];
-      for (const sx of [-1, 1])
-        for (const sy of [-1, 1]) for (const sz of [-1, 1]) k.reach([sx * R[0], sy * R[1], sz * R[2]]); // prettier-ignore
+      // On the axes (not the corners), so the fit centers the field and
+      // scales it by its real reach.
+      for (const s of [-1, 1]) {
+        k.reach([s * R[0], 0, 0]);
+        k.reach([0, s * R[1], 0]);
+        k.reach([0, 0, s * R[2]]);
+      }
       k.cloud({ share: n / k.count, size: 1 }, (rand, i) => {
         const u = (0.5 + i * A1) % 1;
         const v = (0.5 + i * A2) % 1;
