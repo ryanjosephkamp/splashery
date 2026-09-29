@@ -162,11 +162,11 @@ const SCENES = {
   // a walk away, a walk across (its profile), a run, then it walks back
   // toward the camera.
   "hybrid-character": [
-    { place: [-4, 14, 180], camera: { distance: 3.4, pitch: 0.16 } },
+    { place: [-4, 14, 180], camera: { distance: 3.4, pitch: 0.16 }, noCards: true },
     { hold: 1.0 },
     { move: { y: 1 }, secs: 2.0 },
-    { move: { x: -1 }, secs: 2.2 },
-    { move: { x: -1, run: true }, secs: 1.4 },
+    { move: { x: 1 }, secs: 2.2 },
+    { move: { x: 1, run: true }, secs: 1.4 },
     { move: { y: -1 }, secs: 1.6 },
     { hold: 1.0 },
   ],
@@ -252,6 +252,8 @@ async function record(scene, url, tag = null, query = "") {
       }
     }, p);
   };
+  // noCards: landmark cards stay closed (the scene is about something else).
+  if (scene.some((s) => s.noCards)) await page.evaluate(() => (window.__world.page.openCard = () => {})); // prettier-ignore
   // A scene that shows the start screen enters only through its buttons.
   let started = scene.some((s) => s.start);
   for (const s of scene) {
