@@ -10,10 +10,10 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 307 toys. 306 have a tap action today; the other 1 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 304.
+- 307 toys. 307 have a tap action today; the other 0 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 306.
 - **more** (has an effect; make it clearer or more dramatic): 0.
-- **new** (needs its own effect): 3.
+- **new** (needs its own effect): 1.
 - Visual fixes: 0 open, 28 done. Touch or drag interaction asked for: 4.
 
 ## By phase
@@ -52,7 +52,8 @@ Proposals below are suggestions; the owner may change them.
   Twisting supertall, Statue of Liberty, White House, Leaning Tower of Pisa, Colosseum, Parthenon,
   Stonehenge, Big Ben, Taj Mahal, Castle, Pagoda, Windmill, Perceptron, Multilayer perceptron,
   Neural network, Convolutional network, Recurrent network, Transformer, Looped transformer,
-  Diffusion model, Gradient descent, Word vectors, Sorting machine, Half adder.
+  Diffusion model, Gradient descent, Gaussian splatting, Word vectors, Sorting machine, Half adder,
+  Screen.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -60,7 +61,7 @@ Proposals below are suggestions; the owner may change them.
 - **E3, new effects: tiny things, anatomy and maths.** None.
 - **E4, new effects: nature and weather.** None.
 - **E5, new effects: food.** None.
-- **E6, new effects: balls and the rest.** Picture lab, Song landscape, Chladni plate
+- **E6, new effects: balls and the rest.** Picture lab
 - **F, touch and drag interaction.** Gummy bear, Building bricks, Newton's cradle, Puzzle cube.
 
 ## Scans (32)
@@ -1934,7 +1935,7 @@ Proposals below are suggestions; the owner may change them.
     (4 s).
   - Sound: Creaking sails and wind.
 
-## Computing (12)
+## Computing (13)
 
 - **Perceptron** (`perceptron`). Now: tap: Try an example. Plan: keep.
   - Owner: Approved on the Toy Ideas page (lane AI).
@@ -2036,6 +2037,16 @@ Proposals below are suggestions; the owner may change them.
     just right, it overshoots and settles in the valley; too low, it creeps; too high, it bounces
     wall to wall (4.5 s).
   - Sound: A rolling tone that falls in pitch as the loss drops.
+- **Gaussian splatting** (`gaussian-splatting`). Now: tap: Train, or play the view. Plan: keep.
+  - Owner: From the owner's notes of September 28, 2026 (lane Screens; labs only).
+  - Effect: Training: a cloud of random splats slides, stretches and recolors, step by step, into a
+    photo (a real fit of 2D Gaussians by gradient descent), while the loss falls on a chart (7 s).
+    Other views: one splat with its axes, many splats shrinking to dots, and the back-to-front sort.
+  - Improved: Screens: 2,400 splats fitted to a CC0 strawberry photo in a worker, shown through 13
+    keyframes as each splat slides to its next place; views One splat (sizes, opacity and color
+    sliders, a Turn control), Many splats (a duck shrinks to dots and back) and Sorting (splats
+    appear far to near from a camera).
+  - Sound: A soft rising chime as the picture forms.
 - **Word vectors** (`word-vectors`). Now: tap: A − B + C. Plan: keep.
   - Owner: Approved on the Toy Ideas page (lane AI).
   - Effect: Word points float in 3D, each with a small sign; arrows add up, king minus man plus
@@ -2063,7 +2074,7 @@ Proposals below are suggestions; the owner may change them.
     flashes and gives 0, the AND lights the carry lamp, and 1+1=10 shows (3.5 s).
   - Sound: Switch clicks, and a buzz through each gate.
 
-## Pictures (1)
+## Pictures (2)
 
 - **Picture lab** (`picture-lab`). Now: tap: Next page, or play and pause. Plan: new effect (E6).
   - Owner: The Pictures engine lane's test toy (labs only), from the owner's notes of September 27
@@ -2071,16 +2082,12 @@ Proposals below are suggestions; the owner may change them.
   - Effect: A flat sheet showing what you open: a tap turns to the next page of a PDF, or plays and
     pauses a video.
   - Sound: A soft paper swish and a light tap.
-
-## Studio (2)
-
-- **Song landscape** (`song-landscape`). Now: hops. Plan: new effect (E6).
-  - Owner: Approved on the Splashery Universe page (lane Studio Sound), September 29, 2026.
-  - Effect: A song's real spectrogram as a landscape of splats; a tap plays the song while a glowing
-    marker and the camera glide along it.
-  - Sound: The song itself.
-- **Chladni plate** (`chladni-plate`). Now: tap: Bow the plate. Plan: new effect (E6).
-  - Owner: Approved on the Splashery Universe page (lane Studio Sound), September 29, 2026.
-  - Effect: A tap bows a square metal plate: every sand grain hops where the plate swings and slides
-    to the still lines, and in about 3.6 s the mode's figure appears; tap again to stir it up.
-  - Sound: A steady hum at the mode's pitch, with sand pattering.
+- **Screen** (`screen`). Now: tap: Switch on, then play or pause. Plan: keep.
+  - Owner: From the owner's notes of September 28, 2026 (lane Screens; labs only).
+  - Effect: Your video or GIF on a screen of splats, as an old TV, a flat TV, a cinema or a
+    hologram; the tap switches it on (the TV's bright line opens, the flat TV fades up, the curtains
+    part, the hologram flickers up), then plays and pauses.
+  - Improved: Screens: four styles on a picture sheet with method "screen", a Big Buck Bunny scene
+    (CC BY 3.0) and Muybridge's horse GIF (public domain) as samples, video sound on the speaker
+    button.
+  - Sound: The TV's click and hum; each style its own (a soft tone, the curtains' swish, a shimmer).
