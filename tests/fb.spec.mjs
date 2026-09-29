@@ -6,6 +6,8 @@
 // placement.
 
 import { test, expect } from "@playwright/test";
+import fs from "node:fs";
+import path from "node:path";
 import { Kit, buildRecipe } from "../src/kit.js";
 import { PROFILES } from "../src/generators.js";
 import {
@@ -208,3 +210,35 @@ test("every toy the lane changed builds at the phone tier, within its budget", a
     }
   }
 });
+
+// Screenshots of three changed toys at rest, at phone and desktop size.
+const SHOTS = path.join(path.dirname(new URL(import.meta.url).pathname), "screenshots");
+for (const [id, label] of [
+  ["marble", "Marble"],
+  ["ocean-liner", "Ocean liner"],
+  ["supertall", "Twisting supertall"],
+]) {
+  test(`${id} screenshots at 390x844 and 1440x900`, async ({ browser }) => {
+    fs.mkdirSync(SHOTS, { recursive: true });
+    for (const [w, h, mobile] of [
+      [390, 844, true],
+      [1440, 900, false],
+    ]) {
+      const ctx = await browser.newContext({
+        viewport: { width: w, height: h },
+        ...(mobile ? { hasTouch: true, isMobile: true } : {}),
+      });
+      const page = await ctx.newPage();
+      const problems = [];
+      page.on("pageerror", (e) => problems.push(e.message));
+      await page.goto("/?renderer=webgl2&profile=weak");
+      await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
+      await page.evaluate((toy) => window.__splashery.app.chooseToy(toy), id);
+      await expect(page.locator("#toy-status")).toHaveText(new RegExp(`^${label}`), { timeout: 180_000 }); // prettier-ignore
+      await page.waitForTimeout(2000);
+      await page.screenshot({ path: path.join(SHOTS, `fb-${id}-${w}x${h}.png`) });
+      expect(problems).toEqual([]);
+      await ctx.close();
+    }
+  });
+}
