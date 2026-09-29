@@ -68,21 +68,65 @@ run at the same time; leave their files alone. The laptop is locked.
 
 Model: Opus 5.5 (claude-opus-5-5), default effort.
 
-- September 29, 2026: the switches are built (src/sharpness.js, read in src/player.js and applied in
-  src/stage.js), with tests in tests/shp.spec.mjs and the measuring tool tools/shp-measure.mjs.
-  Measuring on a local checkout of main with Fidelity A (#77), Fidelity B (#90), Worlds (#78) and
-  the toy piano (#91) merged in, so the toys are measured as they will be built.
+- September 29, 2026: done and posted. The switches (src/sharpness.js, read in src/player.js and
+  applied in src/stage.js), tests in tests/shp.spec.mjs, the measuring tool tools/shp-measure.mjs,
+  the card tool tools/shp-cards.mjs and the method and results in docs/lab/SHARPNESS.md. 14 toys and
+  the test island measured on a local checkout of main with Fidelity A (#77), Fidelity B (#90),
+  Worlds (#78) and the toy piano (maker B, #91) merged in (A and B have since merged to main).
+- Cards on the Effect review page, lane Sharpness: `shp-summary`, `shp-<toy id>` for the 14 toys,
+  `shp-<toy id>-turn` for the sailboat, ocean liner, penguin and Chladni plate, `shp-lamp-drop`,
+  `shp-klein-bottle-drop` and `shp-test-island`.
 
 ## Notes
 
 - The switches, all labs only: `?cull=low|off|<px>`, `?dpr=<1–3>|native`, `?adapt=drag`, `?aa=1`,
   and `?sharp=1` (cull low, dpr native, adapt drag together). A recipe's `render` field sets them
   for one toy; the URL wins. `?kernel=sharp` is lane Lab's and works alongside.
+- With every switch off, `Stage.setSharpness(null)` returns before touching anything, and
+  `setPictureCulling` works as before (it now goes through `applyCulling`, which gives the same
+  values when no lever is on).
+- `setBusy` takes a second argument, whether the view is being dragged (the camera or a paint
+  stroke); only `adapt=drag` reads it.
+- WebGPU works in this container's Chromium (SwiftShader): the Klein bottle and the lamp were
+  measured on it too.
+- The software renderer's frame times are relative only; the phone is the real test of cost.
 
 ## Known issues
 
-- None yet.
+- The CPU estimate of culled splats counts splats hidden under others too, so it overstates what the
+  cull takes off the screen (the Klein bottle: 23% estimated on WebGPU, no visible change).
+- The frame times come from SwiftShader, which is not fill-bound the way a phone GPU is; the 3x cost
+  on a real phone is likely higher for toys than measured here.
+- `?adapt=drag` means a slow phone may drop below 40 frames a second while a toy plays on its own.
 
 ## For the Operator
 
-- To come with the measurements.
+Proposal for the owner (nothing is on by default; he decides what leaves labs):
+
+1. **Lift the pixel-ratio cap to 3 on the mid and high tiers**
+   (`PIXEL_RATIO = { low: 1.5, mid: 3, high: 3, max: 3 }`, still capped by the device's own ratio).
+   The biggest and simplest win: every toy's edges about a third narrower on a 3x phone, speckle
+   down 10–60%, shimmer down 15–45%. Cost: 2.25 times the pixels on a 3x phone; a toy is mostly
+   per-splat work and stays smooth on a recent phone, and the adaptive drop still catches a phone
+   that can't keep up. Battery: more GPU work per frame, but the player renders on demand (nothing
+   is drawn while a toy is still), so it costs only while something moves.
+2. **Make `adapt=drag` the default.** Today a slow phone draws at two-thirds resolution whenever
+   anything moves, including the idle sway, which is where toys look grainiest (and on WebGPU the
+   cull then drops most of a toy's splats). Cost: a slow phone's frame rate while a toy plays on its
+   own; the tier step-down after slow frames still happens during drags.
+3. **Leave the cull as it is** globally (no visible gain at a toy's home view). Lane Pictures' lower
+   cull for pages stays.
+4. **The sharp kernel stays per toy**: `kernel: "sharp"` in a recipe for toys with big, smooth
+   splats (the splat equation toy, the math surfaces), and possibly the clock, the toy piano and the
+   book (small gains measured). Not the marble.
+5. **No budget change**: more splats per toy made nothing sharper and several toys shimmer more.
+6. **Worlds** (lane Worlds owns src/worlds/): `WorldView` caps the ratio at 2
+   (`Math.min(devicePixelRatio, 2)` in render.js). At 3x the test island's edges go 0.73 → 0.53 and
+   its ground speckle 0.16 → 0.10, but its frame time about doubles (a world is fill-bound). Adopt
+   3x only on the high and max world tiers, or with an adaptive drop during movement (the world page
+   has none today). The cull made no difference there.
+7. **What is left is the toys' build**: the Chladni plate's sand, the white blood cell's membrane,
+   the Klein bottle's textured tube, the American football's leather noise, the marble's glass, the
+   sailboat's dark hull flecks and the book's frayed cover edge. Items for a fidelity lane.
+8. For the backlog: a toy recipe's `render: { cull, dpr, adapt, aa }` (labs only) lets a lane try
+   the levers per toy.
