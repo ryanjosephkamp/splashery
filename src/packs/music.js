@@ -12,6 +12,7 @@ import {
   quatAxisAngle,
   vec,
 } from "../kit.js";
+import { evenCylinder, evenTorus, evenTube } from "./even.js";
 
 const TAU = Math.PI * 2;
 const LIGHT = vec.unit([0.3, 0.8, 0.55]);
@@ -390,15 +391,20 @@ export const RECIPES = {
       const R = 0.7;
       const H = 0.42;
       const shellCol = o.shell;
-      k.add(k.cylinder(R, H, { caps: false }), {
+      k.add(evenCylinder(R, R, H, false), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         flat: 0.2,
         color: (c) => {
           const sparkle = c.noise(c.p[0] * 90, c.p[1] * 90, c.p[2] * 90) > 0.55;
-          return lit(c, sparkle ? mix(shellCol, "#ffffff", 0.45) : shellCol, 0.35, 0.6);
+          return lit(c, sparkle ? mix(shellCol, "#ffffff", 0.16) : shellCol, 0.35, 0.6);
         },
       });
       // Heads: the top one ripples when hit.
       k.add(k.disc(R - 0.01), {
+        opacity: 1,
+        jitter: 0.015,
         pos: [0, H / 2 + 0.005, 0],
         flat: 0.2,
         kind: "wave",
@@ -417,9 +423,18 @@ export const RECIPES = {
           return shade("#f3f0e6", 0.93 + 0.05 * n + 0.04 * ring - 0.06 * band(r, 0.5, 0.7));
         },
       });
-      k.add(k.disc(R - 0.01), { pos: [0, -H / 2 - 0.005, 0], flat: 0.2, color: "#e8e4da" });
+      k.add(k.disc(R - 0.01), {
+        opacity: 1,
+        jitter: 0.015,
+        pos: [0, -H / 2 - 0.005, 0],
+        flat: 0.2,
+        color: "#e8e4da",
+      });
       for (const y of [H / 2 + 0.01, -H / 2 - 0.01])
-        k.add(k.torus(R + 0.012, 0.028), {
+        k.add(evenTorus(k, R + 0.012, 0.028), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           pos: [0, y, 0],
           weight: 1.6,
           pattern: false,
@@ -430,6 +445,9 @@ export const RECIPES = {
         const a = (i / 8) * TAU + TAU / 16;
         const d = [Math.sin(a), 0, Math.cos(a)];
         k.add(k.roundedBox(0.06, 0.13, 0.05, 4), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           pos: [d[0] * (R + 0.02), 0, d[2] * (R + 0.02)],
           rot: [0, (a * 180) / Math.PI, 0],
           weight: 2,
@@ -437,7 +455,10 @@ export const RECIPES = {
           color: (c) => chrome(c),
         });
         for (const s of [1, -1])
-          k.add(k.cylinder(0.009, 0.12), {
+          k.add(evenCylinder(0.009, 0.009, 0.12), {
+            even: true,
+            opacity: 1,
+            jitter: 0.015,
             pos: [d[0] * (R + 0.03), s * 0.14, d[2] * (R + 0.03)],
             weight: 3,
             pattern: false,
@@ -448,12 +469,15 @@ export const RECIPES = {
       STICKS.forEach((s, i) => {
         const part = k.part(`stick${i}`, { pivot: s.butt, axis: stickAxis(s) });
         k.add(
-          k.tube(line(s.butt, s.tip), (t) => 0.024 - 0.012 * t * t, {
+          evenTube(k, line(s.butt, s.tip), (t) => 0.024 - 0.012 * t * t, {
             grid: 16,
             samples: 32,
             caps: true,
           }),
           {
+            even: true,
+            opacity: 1,
+            jitter: 0.015,
             part,
             flat: 0.2,
             weight: 1.5,
@@ -462,6 +486,9 @@ export const RECIPES = {
           },
         );
         k.add(k.sphere(0.02), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           pos: s.tip,
           scale: [1, 0.8, 1],
           part,
@@ -559,13 +586,19 @@ export const RECIPES = {
       for (const s of [-1, 1]) {
         const a = [-0.95, 0, railZ(-0.95, s)];
         const b = [0.95, 0, railZ(0.95, s)];
-        k.add(k.tube(line(a, b), 0.05, { grid: 16, samples: 8, caps: true }), {
+        k.add(evenTube(k, line(a, b), 0.05, { grid: 16, samples: 8, caps: true }), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           flat: 0.2,
           color: (c) => lit(c, wood(c, "#d8a86a", c.p, 0), 0.3, 0.2),
         });
         // Little wheels, for pulling it along.
         for (const x of [-0.8, 0.8])
-          k.add(k.cylinder(0.11, 0.05), {
+          k.add(evenCylinder(0.11, 0.11, 0.05), {
+            even: true,
+            opacity: 1,
+            jitter: 0.015,
             pos: [x, -0.08, railZ(x, s) + s * 0.07],
             rot: [90, 0, 0],
             flat: 0.2,
@@ -580,6 +613,9 @@ export const RECIPES = {
         const half = (b.len / 2) * 0.86;
         const bar = k.part(`bar${i}`, { pivot: [b.x, X.top, 0] });
         k.add(k.roundedBox(0.17, 0.05, b.len * 0.86, 5), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           pos: [b.x, X.top, 0],
           part: bar,
           flat: 0.18,
@@ -589,6 +625,9 @@ export const RECIPES = {
         });
         for (const s of [-1, 1])
           k.add(k.sphere(0.022), {
+            even: true,
+            opacity: 1,
+            jitter: 0.015,
             pos: [b.x, X.top + 0.025, s * Math.min(half - 0.06, Math.abs(railZ(b.x, s)))],
             part: bar,
             weight: 3,
@@ -600,7 +639,10 @@ export const RECIPES = {
       const head = X.rest;
       const end = [1.05, 0.62, 0.95];
       const mallet = k.part("mallet", { pivot: head });
-      k.add(k.tube(line(head, end), 0.022, { grid: 16, samples: 16, caps: true }), {
+      k.add(evenTube(k, line(head, end), 0.022, { grid: 16, samples: 16, caps: true }), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         part: mallet,
         flat: 0.2,
         weight: 1.5,
@@ -608,6 +650,9 @@ export const RECIPES = {
         color: (c) => lit(c, wood(c, "#e8c08a", c.p, 0, 0.85), 0.3),
       });
       k.add(k.sphere(0.075), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: head,
         part: mallet,
         weight: 2,

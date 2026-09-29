@@ -673,6 +673,34 @@ form is in CLAUDE.md.
   speed), so it suits loops and repeats, not a front that must start at the tap: for that, use
   `kind: "grow"` and `out.grow` (the Moon's terminator, the Mars dust front, the ruby's glow).
 
+## 7c. Sharp kit toys
+
+From lanes Fidelity A and B (September 29, 2026), who made about a hundred grainy toys sharp; the
+owner marked every before-and-after card good. The five causes of grain were random placement, low
+density, mirror chrome on thin parts, see-through `rim()` shells and faint clouds. The fixes:
+
+- **Even placement.** `even: true` suits spheres, ellipsoids, lathes and `k.param` surfaces. On
+  `k.box`, `k.cylinder`, `k.cone`, `k.torus`, `k.disc` and `k.tube` it hatches, spirals or does
+  nothing, because those shapes take three random numbers per splat: use the even shapes in
+  `src/packs/even.js` instead (`evenBox`, `evenCylinder`, `evenTorus`, `evenDisc`, `evenEllipsoid`,
+  `evenTube`, `evenRoundBox`, and `capPoint` for highlights). They sample like the kit's shapes (the
+  same `face`, `side`, `cap`, `u` and `v`), so color functions work unchanged:
+  `k.add(evenBox(1, 2, 3), { even: true, … })`. A custom shape declares `dims: 2` or its own
+  `sampleEven(a, b)`.
+- **Solids at full opacity and full density**, with clean colors from functions and little noise.
+  Softly lit metal instead of mirror chrome on thin parts; solid shells instead of faint rims.
+- **The two-pixel cull.** The engine skips splats under about 2 screen pixels, so raising a toy's
+  density makes it sharper on a phone but thinner in 256 px thumbnails and small embeds. Prefer even
+  placement to more density, and check a 256 px render (`profile=high`) as well as the phone view.
+- **See-through surfaces** placed exactly evenly show a moiré where layers overlap: nudge each point
+  by about half a cell (`nudgedEven()` in `src/packs/maths.js`). Translucent bodies (the amoeba)
+  read as smooth jelly with fewer, larger, fainter splats (`size` 1.8 to 2.4, `opacity` about 0.3).
+- **Highlights** of a few splats show as dots on an even body: use more, larger and fainter splats
+  so they merge into one gloss. A face built just inside a solid (a clock's dial) has core splats in
+  front of it: put it at or outside the surface.
+- **Faint clouds:** splats under about 1/255 alpha are dropped, so very faint big splats turn into
+  blobs; water and rings drawn as clouds take `even: true` (a sunflower spiral).
+
 ## 8. Checking your work
 
 ```sh
