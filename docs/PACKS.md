@@ -247,6 +247,9 @@ function returns with `keep: true`, or with `pattern: false` on their shape, nev
 **Grab**: `grab: { radius: 0.55, max: 0.9 }` (in toy radii) makes a toy stretchy: with the Orbit
 tool, a drag that starts on it pulls the grabbed part (up to `max`) and it springs back when let go.
 
+**Keeping still**: `turntable: false` keeps any kit toy facing the viewer while the turntable is on
+(the picture toys, and the periodic table, whose tiles would turn away).
+
 **Drag**: `drag: { at, start, move, end, plane }` gives a toy its own touch play (the puzzle cube,
 Newton's cradle). `plane` is `"view"`, a normal, or `(point) => normal`; without it, a drag follows
 the horizontal plane it started on (the laptop). A drag that starts beside the toy still turns the

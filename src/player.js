@@ -1142,8 +1142,9 @@ export class Player {
       return;
     }
     if (!this.frozen) this.time += dt * this.timeScale;
-    // Pictures: a picture toy (turntable: false) keeps still, facing you.
-    if (this.pictures && this.toyInfo.recipe?.turntable === false) this.camera.turntable = false;
+    // A toy whose recipe sets turntable: false (a picture toy, the periodic
+    // table) keeps still, facing you.
+    if (this.toyInfo.recipe?.turntable === false) this.camera.turntable = false;
     const d = this.driver.drop;
     if (d.on && d.recallAt < 0) {
       const k = Math.min(1, (this.time - d.start) / 0.9) * d.floor * 0.5;
