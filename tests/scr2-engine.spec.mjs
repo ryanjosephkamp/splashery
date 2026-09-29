@@ -10,10 +10,11 @@ const APP = "/?renderer=webgl2&adapt=off&profile=mid&labs=1";
 test("a GIF held on its frame stays there, then plays on from it", async ({ page }) => {
   await page.goto(APP);
   await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
+  // The Picture lab (the Screen holds and lets go of its GIF by itself).
   await page.evaluate(async () => {
     const { app } = window.__splashery;
-    await app.chooseToy("screen");
-    await app.setToyOptions({ sample: "gif" });
+    await app.chooseToy("picture-lab");
+    await app.openMedia(`${location.origin}/assets/toys/screen/horse.gif`);
   });
   await page.waitForFunction(() => window.__splashery.player.pictures?.media?.kind === "gif", null, { timeout: 120_000 }); // prettier-ignore
   // The frames shown over `sec` seconds of the player's clock (the GIF's
