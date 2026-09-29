@@ -2723,6 +2723,44 @@ export const TOYS = [
     camera: { yaw: 0.45, pitch: 0.5, roll: 0, distance: 4.1 },
   },
 
+  // ---- Pack: pianos ----
+  {
+    id: "grand-piano",
+    label: "Grand piano",
+    category: "music",
+    kind: "kit",
+    pack: "pianos",
+    tags: "instrument piano keys hammers strings concert song midi beethoven debussy satie",
+    camera: { yaw: 0.55, pitch: 0.38, roll: 0, distance: 4.2 },
+  },
+  {
+    id: "upright-piano",
+    label: "Upright piano",
+    category: "music",
+    kind: "kit",
+    pack: "pianos",
+    tags: "instrument piano keys hammers strings ragtime saloon honky-tonk song midi joplin",
+    camera: { yaw: 0.42, pitch: 0.22, roll: 0, distance: 4.3 },
+  },
+  {
+    id: "harpsichord",
+    label: "Harpsichord",
+    category: "music",
+    kind: "kit",
+    pack: "pianos",
+    tags: "instrument keyboard baroque quill jacks plucked strings bach minuet song midi",
+    camera: { yaw: 0.6, pitch: 0.42, roll: 0, distance: 4.2 },
+  },
+  {
+    id: "electronic-keyboard",
+    label: "Electronic keyboard",
+    category: "music",
+    kind: "kit",
+    pack: "pianos",
+    tags: "instrument keyboard synth organ vibes drum pads lights learn song midi",
+    camera: { yaw: 0.3, pitch: 0.78, roll: 0, distance: 3.6 },
+  },
+
   // ---- Pack: vehicles ----
   {
     id: "rocket",

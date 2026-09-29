@@ -1490,6 +1490,27 @@ export const TOY_HELP = {
     about:
       "A xylophone is a row of tuned wooden bars that you strike with a mallet. Each bar's length sets its note: the shorter the bar, the higher it sounds. The name comes from the Greek for “wood” and “sound”.\n\nThis toy one has eight colored bars, a scale from C up to the next C. Tap a bar and the mallet swings over and strikes it, and the bar jumps and plays its note, so you can play a tune. Tap the mallet, a wheel or the ends of the frame instead, and it plays the whole scale.",
   },
+  "grand-piano": {
+    howTo: "Tap a key to play it. Tap anywhere else for a song; the song bar plays it all.",
+    about:
+      "A grand piano is a keyboard instrument whose strings lie flat under a lid shaped like a wing. Each of its 88 keys throws a felt hammer up against its strings, and a damper lifts off them so the note rings until the key comes up. The right pedal lifts every damper at once. Bartolomeo Cristofori built the first pianos in Italy around 1700.\n\nTap a key and it dips, its hammer strikes and its damper lifts. Tap anywhere else for the opening of Für Elise, or pick Clair de lune, Gymnopédie No. 1 or Ode to Joy in the Toy tab. The song bar plays, pauses, loops and slows a song, and you can open a MIDI file of your own or paste a tune in ABC notation.",
+  },
+  "upright-piano": {
+    howTo: "Tap a key to play it. Tap anywhere else for a ragtime; the song bar plays it all.",
+    about:
+      "An upright piano stands its strings on end, so a full piano fits against a wall. Its hammers swing forward onto the strings instead of flying up, and a spring brings them back. Uprights filled homes, schools and dance halls, and a slightly out-of-tune one gives the bright, jangly honky-tonk sound of ragtime.\n\nThis one has its upper front panel off, so you see the row of hammers, the dampers above them and the strings behind. Tap a key and its hammer strikes. Tap anywhere else for the opening of The Entertainer, a rag Scott Joplin published in 1902. Open a MIDI file of your own, or paste a tune in ABC notation, in the Toy tab.",
+  },
+  harpsichord: {
+    howTo: "Tap a key to pluck its string. Tap anywhere else for a minuet.",
+    about:
+      "A harpsichord plucks its strings instead of striking them. Each key lifts a thin wooden jack, and a small quill on the jack catches the string on the way up. Because a pluck sounds the same however hard you press, players shape their music by timing. Harpsichords were the main keyboard of the 1600s and 1700s.\n\nThis one is painted in the French style, with black naturals and pale sharps. Tap a key and its jack rises, plucks, and the string quivers until the jack's felt stops it. Tap anywhere else for the Minuet in G from the notebook Bach kept for his wife, Anna Magdalena. Open a MIDI file of your own in the Toy tab.",
+  },
+  "electronic-keyboard": {
+    howTo:
+      "Tap a key to play it, or a colored button to change the voice. Tap elsewhere for a song.",
+    about:
+      "An electronic keyboard makes its sounds with circuits instead of strings. It can sound like a piano, an organ, a synthesizer or vibes, and many can play a drum beat along with you. Learning keyboards light up the key to play next.\n\nThis one has 61 keys. The four colored buttons pick its voice: piano, organ, synth and vibes. Tap anywhere else and a song starts: each key lights up just before its note, the little screen scrolls the title and the drum pads flash with the beat. Pick Ode to Joy, Twinkle, Twinkle, Little Star or Frère Jacques in the Toy tab, or open a MIDI file of your own.",
+  },
   // ---- Vehicles -------------------------------------------------------------------------
   rocket: {
     howTo: "Tap it to launch the rocket.",
