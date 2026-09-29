@@ -16,6 +16,23 @@ had not settled 3 s after its tap) and "a scan rig moves a part of a captured to
 console warning, like the rare engine warning in HANDOFF.md). Keep `test-results/` if either comes
 back.
 
+### Viewer: whole PDF figures, tilt lock and top-bar settings (PR #75, merged 2026-09-29)
+
+- Built by Opus 5.5, from the owner's September 28 notes on the Picture lab. The black boxes over
+  PDF figures were a bug, not censorship: `paperBlocks` compared each pixel in double precision with
+  a median stored as a Float32, so in a flat-colored block no pixel counted and the paper color
+  became NaN, which the GPU draws black. Lightness is now a whole number and an empty block falls
+  back to the page's paper color. A fixture PDF of our own fails on the old code and passes now.
+- Pinch zooms, twist rolls and drag turns, by whichever passes its threshold first, so a normal
+  pinch never turns a toy. A recipe's `tiltLock: true` keeps a flat toy upright (drag only spins
+  it); the Pictures and pages shelf starts locked. Reset view, Tilt lock and Turntable sit in the
+  top bar. Flag colors moved to a Look section in the Toy tab and stay with the toy they were chosen
+  on. The terms of use are in the About tab and README.
+- The owner marked all five clips good the first time. About 2 hours.
+- Lessons: a shared smoke test (the chess flag carrying over to the next toy) had to change with the
+  owner's note; the 200-page test passed on main only because the bug hid some ink, so whole pages
+  needed a larger sheet container.
+
 ### Screens: the screen and the Gaussian splat toy (PRs #72 and #71, merged 2026-09-29)
 
 - Built by Opus 5.5. The Screen (`screen`, labs): your video or GIF on one picture sheet (method

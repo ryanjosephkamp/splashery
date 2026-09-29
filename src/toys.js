@@ -30,6 +30,7 @@ export const CATEGORIES = [
   { id: "maths", label: "Maths" },
   { id: "computing", label: "AI and computing" },
   { id: "pictures", label: "Pictures and pages" },
+  { id: "studio", label: "Studio" },
   { id: "holidays", label: "Holidays" },
   { id: "music", label: "Music" },
   { id: "vehicles", label: "Vehicles" },
@@ -3156,6 +3157,27 @@ export const TOYS = [
     labs: true,
     tags: "picture frame photo wall nail swing wood gold modern digital",
     camera: { yaw: 0.1, pitch: 0.06, roll: 0, distance: 2.9 },
+  },
+  // ---- Pack: studio (lane Studio Sound) ----
+  {
+    id: "song-landscape",
+    label: "Song landscape",
+    category: "studio",
+    kind: "kit",
+    pack: "studio",
+    labs: true,
+    tags: "song music audio sound spectrogram spectrum frequency pitch loudness fourier waveform mp3 wav landscape",
+    camera: { yaw: 0.3, pitch: 0.8, roll: 0, distance: 3.9 },
+  },
+  {
+    id: "chladni-plate",
+    label: "Chladni plate",
+    category: "studio",
+    kind: "kit",
+    pack: "studio",
+    labs: true,
+    tags: "chladni plate sand sound vibration frequency resonance mode nodal lines pattern bow physics",
+    camera: { yaw: 0.2, pitch: 0.95, roll: 0, distance: 4.1 },
   },
   // ---- Pack: screens ----
   {

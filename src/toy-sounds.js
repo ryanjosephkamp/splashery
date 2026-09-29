@@ -1374,6 +1374,20 @@ export const TOY_SOUNDS = {
     { voice: "scrape", at: 0.12, f: 1500, decay: 0.3, vol: 0.12 },
     { voice: "wood", at: 0.55, f: 225, decay: 0.3, vol: 0.28 },
   ],
+  // ---- Studio (lane Studio Sound) ---------------------------------------------------
+  // The plate's real hum follows its mode and is a cue from drive(); this is
+  // the sample the Sound Board plays (the default mode's 780 Hz).
+  "chladni-plate": {
+    on: [
+      { voice: "tone", f: 780, decay: 9, kind: "sine", vol: 0.9 },
+      { voice: "patter", at: 0.1, f: 2600, n: 40, decay: 2.2, vol: 0.3 },
+    ],
+    off: { voice: "hiss", f: 3000, decay: 0.7, vol: 0.3 },
+  },
+  // The song landscape plays the song itself; this is its tap's start chime.
+  "song-landscape": [
+    { voice: "pluck", notes: "C5 E5 G5", step: 0.09, decay: 0.5, bright: 0.4, vol: 0.6 },
+  ],
   // Lane Screens: the old TV's click and hum (each style plays its own
   // cues as it switches on: the flat TV's soft tone, the cinema's curtains,
   // the hologram's shimmer).

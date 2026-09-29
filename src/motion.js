@@ -57,6 +57,7 @@ export class MotionDriver {
     this.targets = {};
     this.hopStart = -100;
     this.tap = null;
+    this.sound = null; // the site's Sound (Player.setSound), as drive's info.sound
     this.kitClock = { t: 0, last: null, rate: 1 };
     this.moveClock = { t: 0, last: null, rate: 1 };
     this.partsData = new Float32Array(48 * 4);
@@ -219,8 +220,11 @@ export class MotionDriver {
     // where they stand (resortTokens in src/player.js).
     const drive = { energy: 0, grow: 1, amount: 1, glow: [1, 1, 1, 0], parts: {}, body: null, fx: {}, addon: null, tokens: null, cues: [], morph: null, resort: false }; // prettier-ignore
     // info.data is whatever the recipe's build left in k.data (which molecule
-    // was built, say), for effects that depend on the build.
-    const about = { time, R, tap: this.tap, data: this.ctx?.kit?.data };
+    // was built, say), for effects that depend on the build. info.sound is the
+    // site's Sound (src/sound.js): a toy that plays its own audio checks
+    // sound.enabled (the speaker button; embeds keep it off) and plays through
+    // sound.audio() and sound.master (the site's limiter).
+    const about = { time, R, tap: this.tap, data: this.ctx?.kit?.data, sound: this.sound };
     if (this.recipe?.drive) this.recipe.drive(kt, this.state, drive, about);
     if (drive.body) {
       if (drive.body.quat) q = quatMul(drive.body.quat, q);
