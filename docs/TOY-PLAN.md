@@ -10,8 +10,8 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 315 toys. 315 have a tap action today; the other 0 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 312.
+- 316 toys. 316 have a tap action today; the other 0 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 313.
 - **more** (has an effect; make it clearer or more dramatic): 0.
 - **new** (needs its own effect): 3.
 - Visual fixes: 0 open, 28 done. Touch or drag interaction asked for: 4.
