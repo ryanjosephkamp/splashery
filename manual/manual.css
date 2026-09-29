@@ -262,6 +262,16 @@ figcaption {
 .shots.two {
   grid-template-columns: repeat(2, 1fr);
 }
+.shots.one {
+  grid-template-columns: 1fr;
+  max-width: 320px;
+  margin: 0 auto;
+}
+figure img.ui {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  max-width: 100%;
+}
 .shot-label {
   font-size: 13px;
   text-align: center;
@@ -379,6 +389,9 @@ footer {
     grid-template-columns: repeat(3, 1fr);
     gap: 4px;
   }
+  .shots.two {
+    gap: 6px;
+  }
   .cover-art {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -441,6 +454,9 @@ footer {
     white-space: pre-wrap;
     word-break: break-word;
     break-inside: auto;
+    font-size: 7.8pt;
+    padding: 8px 10px;
+    line-height: 1.4;
   }
   .card pre {
     break-inside: avoid;
