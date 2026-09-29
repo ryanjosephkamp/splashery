@@ -190,7 +190,10 @@ A tap also knows where it landed. `action.at(point, c)` gets the tapped point in
 coordinates (never for the Play button) and may return another control to fire, `{ key, pick }` to
 fire a control and pick an item, or nothing for the usual action. `drive` sees the last tap as
 `info.tap = { point, key, pick, time, n }`. The xylophone uses it: a tap on bar `i` returns
-`{ key: "strike", pick: i }` and its drive moves the mallet to that bar.
+`{ key: "strike", pick: i }` and its drive moves the mallet to that bar. `at` may also return
+`{ options, key, pick }` to switch the toy (lane Chemistry's engine PR): the tap's sound plays, the
+toy is rebuilt with those options (its taps' controls back at rest, as after a pick in the Toy tab)
+and then `key` fires on the new toy. The periodic table's tiles pick the element this way.
 
 **Build data**: `build(k, o)` may leave data in `k.data` for `drive`, which sees it as `info.data`
 (the molecule stores which atoms and bonds it built, so its vibration fits the molecule chosen).
