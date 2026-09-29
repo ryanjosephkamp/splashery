@@ -151,3 +151,29 @@ test("pickAlpha: only a recipe that asks lowers the pick clip, and the next toy 
   expect(r.after).toBeCloseTo(0.3, 5);
   expect(errors).toEqual([]);
 });
+
+// Lab r2: a kit cloud's `jitter` (0 for exact sizes). The default keeps the
+// same sizes as before, from the same random draws.
+test("jitter: 0 gives every cloud splat its exact size; the default is unchanged", async () => {
+  const { buildRecipe } = await import("../src/kit.js");
+  const { applyClay } = await import("../src/generators.js");
+  const sizes = (jitter) => {
+    const recipe = {
+      build(k) {
+        const opts = { count: 200, size: 1 };
+        if (jitter !== undefined) opts.jitter = jitter;
+        k.cloud(opts, (rand, i) => ({ p: [i % 20, Math.floor(i / 20), 0] }));
+      },
+    };
+    const it = buildRecipe(recipe, { seed: 7, count: 160000, options: {} }, applyClay);
+    let r = it.next();
+    while (!r.done) r = it.next();
+    const buf = r.value.buf;
+    return Array.from(buf.scale.slice(0, buf.count * 3));
+  };
+  const exact = sizes(0);
+  expect(Math.max(...exact) - Math.min(...exact)).toBeLessThan(1e-9);
+  expect(sizes(undefined)).toEqual(sizes(0.5));
+  const jittered = sizes(undefined);
+  expect(Math.max(...jittered) / Math.min(...jittered)).toBeGreaterThan(1.1);
+});
