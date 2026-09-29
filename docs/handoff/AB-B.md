@@ -83,8 +83,19 @@ HOW THIS LANE RUNS
   docs/OPERATING.md, docs/PACKS.md, docs/WORKSTREAMS.md and docs/handoff/history.md (lessons from
   earlier lanes).
 - Your handoff file: create it. Start it with this brief, word for word, under "## Brief", then keep
-  "## State", "## Notes", "## Known issues" and "## For the Operator" current. For this blind lane,
-  leave your model out of the handoff until the Operator reveals it.
+  "## State
+
+September 29, 2026: built, clips posted, waiting for the owner's marks. The recipe is in
+`src/packs/music.js` ("Toy piano"), with its entries in `src/toys.js`, `src/toy-sounds.js`,
+`src/toy-help.js` and `tools/toy-plan.json`, its thumbnail, its own tests and screenshots in
+`tests/abb.spec.mjs` (`abb-toy-piano-390x844.png`, `…-1440x900.png`). PR #91 (draft). Cards on the
+Effect review page, lane record AB-B: `abb-toy-piano-keys`, `abb-toy-piano-song`,
+`abb-toy-piano-still`. An hourly check-in reads the marks.
+
+## Notes", "## Known issues" and "## For the Operator" current. For this blind lane,
+
+leave your model out of the handoff until the Operator reveals it.
+
 - Shared lists: edit only your own entries in src/toys.js, src/toy-sounds.js, src/toy-help.js (a
   how-to line and an About text per toy, following docs/handoff/Help.md), tools/toy-plan.json,
   CREDITS.md and tools/assets.json. Regenerate docs/TOY-PLAN.md with `node tools/toy-plan.mjs`;
@@ -151,8 +162,17 @@ tests in `tests/abb.spec.mjs`. Clips, thumbnail and screenshots to come.
 
 ## Known issues
 
-- (none yet)
+- The clips were rendered with a local copy of `tools/effect-clip.mjs` that takes a camera and a
+  390×844 frame (the tool itself renders square clips at the toy's shelf camera); it was not
+  committed.
+- The red lacquer shows a faint mottle at 2× on large panels (the lid); edges are clean.
 
 ## For the Operator
 
-- (none yet)
+- A PACKS.md lesson: the kit's default color jitter (0.04) reads as grain on smooth lacquer and
+  ivory; 0.01 is clean. Smaller splats along a flat face's edge (a color function returning
+  `{ c, size }`) keep box edges crisp instead of a fuzzy rim (`crisp()` in `src/packs/music.js`).
+- A PACKS.md lesson: a long, thin even rectangle spaces its splats unevenly (a hatch); folding the
+  even square into strips laid end to end fixes it (`rect()` in `src/packs/music.js`).
+- A tool idea: `tools/effect-clip.mjs` could take `--cam=yaw,pitch,distance` and `--h=` for phone
+  portrait clips, as the brief's 390×844 clips needed.

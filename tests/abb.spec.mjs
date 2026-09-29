@@ -2,6 +2,8 @@
 // drive() runs in Node, frame by frame, as the app plays it.
 
 import { test, expect } from "@playwright/test";
+import fs from "node:fs";
+import path from "node:path";
 import { buildRecipe, quatRotate, vec } from "../src/kit.js";
 import { RECIPES, TOY_PIANO_SONG } from "../src/packs/music.js";
 import { TOY_SOUNDS } from "../src/toy-sounds.js";
@@ -161,4 +163,32 @@ test("the song is Twinkle, Twinkle, and every key moves on its own note", async 
     // A strike shows on the frame after the hammer lands (two frames at most).
     expect(Math.abs(s - want[j][0])).toBeLessThan(0.04);
   });
+});
+
+const SHOTS = path.resolve("tests/screenshots");
+
+test("toy piano screenshots at 390x844 and 1440x900, mid-song", async ({ browser }) => {
+  fs.mkdirSync(SHOTS, { recursive: true });
+  for (const [w, h, mobile] of [
+    [390, 844, true],
+    [1440, 900, false],
+  ]) {
+    const ctx = await browser.newContext({
+      viewport: { width: w, height: h },
+      ...(mobile ? { hasTouch: true, isMobile: true } : {}),
+    });
+    const page = await ctx.newPage();
+    const problems = [];
+    page.on("pageerror", (e) => problems.push(e.message));
+    await page.goto("/?renderer=webgl2&profile=weak");
+    await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
+    await page.evaluate(() => window.__splashery.app.chooseToy("toy-piano"));
+    await expect(page.locator("#toy-status")).toHaveText(/^Toy piano/, { timeout: 180_000 });
+    await page.waitForTimeout(1500);
+    await page.evaluate(() => window.__splashery.player.act(null));
+    await page.waitForTimeout(700);
+    await page.screenshot({ path: path.join(SHOTS, `abb-toy-piano-${w}x${h}.png`) });
+    expect(problems).toEqual([]);
+    await ctx.close();
+  }
 });
