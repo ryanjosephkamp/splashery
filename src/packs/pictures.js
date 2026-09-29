@@ -350,7 +350,8 @@ const BOOK_RECIPE = {
   controls: [{ key: "turn", label: "Turn the page", type: "pulse", ease: 1.2 }],
   action: { key: "turn", label: "Turn the page" },
   pictures: {
-    sample: () => "assets/toys/picture-lab/article.pdf",
+    // The Tinkerer's Manual (lane Manual), 25 Letter pages.
+    sample: () => "manual/tinkerers-manual.pdf",
     accept: ["pdf"],
   },
   input: {

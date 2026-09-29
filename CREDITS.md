@@ -168,9 +168,10 @@ The Picture lab (a labs toy) opens with two samples:
 
 Files and web addresses people open in the Picture lab are read in their browser and never uploaded.
 
-Your book opens with the same article. The photo album and the picture frame (labs toys, lane Books)
-open with these photos, each [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) on Flickr
-(checked on the live pages on September 28, 2026), made smaller (900 pixels on the long side):
+Your book opens with the Tinkerer's Manual (`manual/tinkerers-manual.pdf`, lane Manual). The photo
+album and the picture frame (labs toys, lane Books) open with these photos, each
+[CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) on Flickr (checked on the live pages
+on September 28, 2026), made smaller (900 pixels on the long side):
 
 - `assets/toys/photo-album/lighthouse.jpg`: "The lighthouse" by
   [-anna--](https://www.flickr.com/photos/77532212@N07/16563630874).

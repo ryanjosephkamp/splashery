@@ -149,14 +149,15 @@ their sounds, help texts, plan entries (`"v": "keep"`), credits and tests. The e
 need are on `claude/lane-books-engine` (its own draft PR, to merge first); `claude/lane-books`
 carries them too until then.
 
-- **Your book** (`your-book`): opens the sample article (Lane Manual switches it to the Tinkerer's
-  Manual after this merges), or any PDF from a file or an https address. A tap opens the cover, then
-  turns one leaf at a time (about 1 s); at the end a tap closes the book. Previous and Next in the
-  Toy tab step a spread; a link's page (or any jump) opens the spread with that page. Five styles:
-  hardcover (cloth boards, a square spine, head and tail bands, the first page as a panel on the
-  cover), paperback (a card cover that flexes), magazine (thin, a flexing cover, two staples in the
-  fold), stapled paper (one page a sheet, a staple in the corner, the sheets flip over the top) and
-  spiral notebook (a wire coil). The page shape follows the PDF's first page.
+- **Your book** (`your-book`): opens the Tinkerer's Manual (`manual/tinkerers-manual.pdf`, 25 Letter
+  pages; the switch from the Picture lab's article was handed to this lane after Manual merged), or
+  any PDF from a file or an https address. A tap opens the cover, then turns one leaf at a time
+  (about 1 s); at the end a tap closes the book. Previous and Next in the Toy tab step a spread; a
+  link's page (or any jump) opens the spread with that page. Five styles: hardcover (cloth boards, a
+  square spine, head and tail bands, the first page as a panel on the cover), paperback (a card
+  cover that flexes), magazine (thin, a flexing cover, two staples in the fold), stapled paper (one
+  page a sheet, a staple in the corner, the sheets flip over the top) and spiral notebook (a wire
+  coil). The page shape follows the PDF's first page.
 - **Photo album** (`photo-album`): six CC0 sample photos; open several of your own at once. Leather,
   linen or scrapbook covers; thick card pages; each side holds one photo, or two wide ones stacked
   or two tall ones side by side; photo corners and (a switch) the file name as a caption.
