@@ -190,7 +190,10 @@ A tap also knows where it landed. `action.at(point, c)` gets the tapped point in
 coordinates (never for the Play button) and may return another control to fire, `{ key, pick }` to
 fire a control and pick an item, or nothing for the usual action. `drive` sees the last tap as
 `info.tap = { point, key, pick, time, n }`. The xylophone uses it: a tap on bar `i` returns
-`{ key: "strike", pick: i }` and its drive moves the mallet to that bar.
+`{ key: "strike", pick: i }` and its drive moves the mallet to that bar. `at` may also return
+`{ options, key, pick }` to switch the toy (lane Chemistry's engine PR): the tap's sound plays, the
+toy is rebuilt with those options (its taps' controls back at rest, as after a pick in the Toy tab)
+and then `key` fires on the new toy. The periodic table's tiles pick the element this way.
 
 **Build data**: `build(k, o)` may leave data in `k.data` for `drive`, which sees it as `info.data`
 (the molecule stores which atoms and bonds it built, so its vibration fits the molecule chosen).
@@ -243,6 +246,9 @@ function returns with `keep: true`, or with `pattern: false` on their shape, nev
 
 **Grab**: `grab: { radius: 0.55, max: 0.9 }` (in toy radii) makes a toy stretchy: with the Orbit
 tool, a drag that starts on it pulls the grabbed part (up to `max`) and it springs back when let go.
+
+**Keeping still**: `turntable: false` keeps any kit toy facing the viewer while the turntable is on
+(the picture toys, and the periodic table, whose tiles would turn away).
 
 **Drag**: `drag: { at, start, move, end, plane }` gives a toy its own touch play (the puzzle cube,
 Newton's cradle). `plane` is `"view"`, a normal, or `(point) => normal`; without it, a drag follows
