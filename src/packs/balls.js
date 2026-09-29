@@ -1864,7 +1864,6 @@ export const RECIPES = {
         prof.push([0.8 * Math.pow(Math.max(0, 1 - (y / L) ** 2), 0.6), y]);
       }
       k.add(k.lathe(prof, { grid: 80 }), {
-        opacity: 1,
         rot: [0, 0, 90],
         flat: 0.18,
         interior: 0.12,
