@@ -16,6 +16,7 @@ import {
   quatRotate,
   vec,
 } from "../kit.js";
+import { evenEllipsoid, evenTorus } from "./even.js";
 
 const TAU = Math.PI * 2;
 const { add, sub, mul, dot, cross, len, unit } = vec;
@@ -2579,7 +2580,10 @@ export const RECIPES = {
       const w = RB_W;
       // The arc: each splat fades out as channel 0 passes its place (its
       // band, then how far along it is).
-      k.add(k.torus(R, w), {
+      k.add(evenTorus(k, R, w), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         rot: [90, 0, 0],
         scale: [1, 0.3, 1],
         flat: 0.25,
@@ -2609,6 +2613,9 @@ export const RECIPES = {
             (k.rand() - 0.5) * 0.25,
           ];
           k.add(k.sphere(s), {
+            even: true,
+            opacity: 1,
+            jitter: 0.015,
             pos,
             size: 1.8,
             flat: 0.8,
@@ -3376,6 +3383,9 @@ export const RECIPES = {
         { thick: 0.1 },
       );
       k.add(mound, {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         flat: 0.25,
         interior: 0.08,
         core: "#b8a890",
@@ -3391,6 +3401,8 @@ export const RECIPES = {
         },
       });
       k.add(k.disc(0.3), {
+        opacity: 1,
+        jitter: 0.015,
         pos: [0, 0.185, 0],
         pattern: false,
         kind: "wave",
@@ -3429,7 +3441,10 @@ export const RECIPES = {
       for (let i = 0; i < 8; i++) {
         const a = (i / 8) * TAU + k.rand() * 0.5;
         const s = 0.05 + 0.05 * k.rand();
-        k.add(k.ellipsoid(s * 1.3, s * 0.7, s), {
+        k.add(evenEllipsoid(k, s * 1.3, s * 0.7, s), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           pos: [Math.sin(a) * 0.85, 0.05, Math.cos(a) * 0.85],
           color: (c) => lit(mix("#8a8070", "#b8ac98", c.rand()), c.n, 0.4),
         });
