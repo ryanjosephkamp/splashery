@@ -149,6 +149,14 @@ Model: Opus 5.5 (default effort).
   `sts.spec.mjs:189`). Splats drawn: low 254,719 / 281,578 of 300k; mid 456,801 / 527,797 of 550k;
   high 872,752 / 894,676 of 900k; max 1,318,315 / 1,214,354 of 1.4M.
 
+- The Operator's fidelity notes (September 29, 2026): applied Fidelity A's lessons (limbs as lathes,
+  since even spreading draws a lattice on cones; fully opaque solids, props included; clean colors),
+  looked at Lab's sharp kernel (a small measured gain that would need wiring into the toy stage: not
+  used). Posted `wd-character` (a close-up), `wd-walk-r3` and `wd-list-r3` (replacing the r2 cards,
+  whose character was older).
+- Full suite after merging main (#86): 391 passed. Splats drawn: low 254,719 / 281,578 of 300k; mid
+  456,797 / 527,793 of 550k; high 872,752 / 894,676 of 900k; max 1,318,306 / 1,214,345 of 1.4M.
+
 ## Notes
 
 - PlayCanvas 2.22.3's `lodDistances` and per-component `splatBudget` are no-ops now; the scene's
