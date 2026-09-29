@@ -135,11 +135,19 @@ Model: Opus 5.5 (default effort).
   and the pack recipes as they are.
 
 - Full suite: 318 passed after merging main (then the bush fix and the touch clip's script changed;
-  `tests/wd.spec.mjs` passed again, 14 of 14). Splats drawn on the Test island, at the spawn and by
-  the lighthouse: low 195,700 / 215,395 of 220k; mid 353,387 / 371,298 of 380k; high 564,883 /
-  559,405 of 650k; max 967,745 / 855,802 of 1M.
+  `tests/wd.spec.mjs` passed again, 14 of 14).
 - Cards on the Effect review page (September 29, 2026): `wd-walk`, `wd-landmark`, `wd-touch`,
-  `wd-list`.
+  `wd-list`. The owner marked `wd-landmark` and `wd-touch` good, `wd-walk` good with a note ("looks
+  extremely grainy and basic. This must be an impeccable and high-fidelity game") and `wd-list` fix
+  ("Needs better resolution and precision. Better character design").
+- Fidelity pass: 8 m chunks with five levels, a much denser near ground and about three times the
+  grass blades, less color noise, more detail per prop, raised budgets, the character redesigned
+  (eleven joints, elbows, hands, a face, hair, collar, belt, shoes), the aerial view planned around
+  the island, clips drawn at 2x. Posted `wd-walk-r2` and `wd-list-r2` (the old cards replaced).
+- Full suite after merging main again: 361 passed, 2 failed; both pass on a rerun and neither
+  touches worlds (a SwiftShader GL warning in `smoke.spec.mjs:1589`, a timing check in
+  `sts.spec.mjs:189`). Splats drawn: low 254,719 / 281,578 of 300k; mid 456,801 / 527,797 of 550k;
+  high 872,752 / 894,676 of 900k; max 1,318,315 / 1,214,354 of 1.4M.
 
 ## Notes
 
