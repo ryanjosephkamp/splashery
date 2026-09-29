@@ -418,11 +418,6 @@ textarea {
 /* The song bar (lane Pianos): the game bar for a keyboard toy's song, with a
    title you can edit, loop, speed and a slider for where the song is. */
 
-.game-bar [hidden],
-.game-buttons button[hidden] {
-  display: none;
-}
-
 .song-bar-title {
   display: block;
   width: 100%;
@@ -452,15 +447,17 @@ textarea {
 }
 
 .song-speed {
+  width: auto;
   height: 30px;
-  padding: 0 6px;
+  padding: 0 4px;
   font-size: 12.5px;
 }
 
 .song-seek {
   display: block;
   width: 100%;
-  margin: 6px 0 0;
+  height: 16px;
+  margin: 4px 0 0;
 }
 
 .game-details summary {
