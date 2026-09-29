@@ -14,6 +14,7 @@ import {
   quatFromTo,
   quatRotate,
 } from "../kit.js";
+import { capPoint, evenCylinder, evenEllipsoid, evenTorus } from "./even.js";
 
 const TAU = Math.PI * 2;
 const add = (a, b) => [a[0] + b[0], a[1] + b[1], a[2] + b[2]];
@@ -124,6 +125,8 @@ function triShape(a, b, c) {
   return {
     area: 0.5 * len(cr),
     thick: 0.02,
+    // Two random numbers per point, so even: true spreads points evenly.
+    dims: 2,
     sample(rand) {
       const r1 = Math.sqrt(rand());
       const r2 = rand();
@@ -197,6 +200,41 @@ function roundBox(sx, sy, sz, r, { bottom = true } = {}) {
   return {
     area: total,
     thick: Math.min(sx, sy, sz) / 2,
+    // For even: true (lane Fidelity B): a is spread over the pieces by
+    // area and b across each, so the faces take an even 2D layout.
+    sampleEven(a, b) {
+      const x = Math.min(a, 1 - 1e-9) * total;
+      let q = parts[parts.length - 1];
+      for (const it of parts)
+        if (x < it.cum) {
+          q = it;
+          break;
+        }
+      const f = Math.min(1, Math.max(0, (x - (q.cum - q.area)) / q.area));
+      const p = [0, 0, 0];
+      if (q.kind === "face") {
+        p[q.ax] = q.n[q.ax] * (h[q.ax] + r);
+        p[q.a1] = (f - 0.5) * L[q.a1];
+        p[q.a2] = (b - 0.5) * L[q.a2];
+        return { p, n: q.n, u: f, v: b, face: q.f };
+      }
+      if (q.kind === "edge") {
+        const an = b * (Math.PI / 2);
+        const n = [0, 0, 0];
+        n[q.a1] = q.s1 * Math.cos(an);
+        n[q.a2] = q.s2 * Math.sin(an);
+        p[q.ax] = (f - 0.5) * L[q.ax];
+        p[q.a1] = q.s1 * h[q.a1] + n[q.a1] * r;
+        p[q.a2] = q.s2 * h[q.a2] + n[q.a2] * r;
+        return { p, n, u: 0, v: 0, face: -1 };
+      }
+      const w = Math.sqrt(Math.max(0, 1 - f * f));
+      const ph = b * (Math.PI / 2);
+      const d = [w * Math.cos(ph), w * Math.sin(ph), f];
+      const n = [0, 1, 2].map((i) => d[i] * q.sg[i]);
+      for (let i = 0; i < 3; i++) p[i] = q.sg[i] * h[i] + n[i] * r;
+      return { p, n, u: 0, v: 0, face: -1 };
+    },
     sample(rand) {
       const x = rand() * total;
       let q = parts[parts.length - 1];
@@ -1244,6 +1282,9 @@ export const RECIPES = {
         { grid: 96 },
       );
       k.add(body, {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         part: top,
         flat: 0.2,
         color: (c) => {
@@ -1266,7 +1307,10 @@ export const RECIPES = {
         },
       });
       // The rim ring.
-      k.add(k.torus(0.62, 0.035), {
+      k.add(evenTorus(k, 0.62, 0.035), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: [0, 0.56, 0],
         part: top,
         flat: 0.2,
@@ -1274,7 +1318,10 @@ export const RECIPES = {
         color: (c) => lit(pal[3], c.n, { spec: 0.5 }),
       });
       // Handle and knob.
-      k.add(k.cylinder(0.055, 0.34, { caps: false }), {
+      k.add(evenCylinder(0.055, 0.055, 0.34, false), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: [0, 0.9, 0],
         part: top,
         flat: 0.2,
@@ -1282,6 +1329,9 @@ export const RECIPES = {
         color: (c) => lit("#b07a45", c.n, { spec: 0.3 }),
       });
       k.add(k.sphere(0.09), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: [0, 1.08, 0],
         part: top,
         flat: 0.2,
@@ -1381,6 +1431,9 @@ export const RECIPES = {
           const under = f.num === 6 || f.num === 9;
           const s = 0.1;
           k.add(triShape(A, B, C), {
+            even: true,
+            opacity: 1,
+            jitter: 0.015,
             quat: D20_REST,
             part: die,
             flat: 0.15,
@@ -1420,6 +1473,9 @@ export const RECIPES = {
       places.forEach((pos, i) => {
         const die = k.part(i ? "d6b" : "d6a", { pivot: pos });
         k.add(roundBox(1, 1, 1, 0.13), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           pos,
           quat: D6_REST[i],
           part: die,
@@ -1525,6 +1581,8 @@ export const RECIPES = {
       const wood = "#5b3a24";
       // Base.
       k.add(roundBox(2.1, 0.13, 0.98, 0.04, { bottom: false }), {
+        opacity: 1,
+        jitter: 0.015,
         pos: [0, yb - 0.065, 0],
         flat: 0.2,
         color: (c) => {
@@ -1547,12 +1605,17 @@ export const RECIPES = {
           [0.95, yb, z],
         ]);
         k.add(k.tube(path, 0.024, { samples: 400 }), {
+          opacity: 1,
+          jitter: 0.015,
           flat: 0.2,
           weight: 1.5,
           color: (c) => chrome(c.n),
         });
         for (const x of [-0.95, 0.95])
           k.add(k.cylinder(0.05, 0.03, { caps: "top" }), {
+            even: true,
+            opacity: 1,
+            jitter: 0.015,
             pos: [x, yb + 0.015, z],
             flat: 0.2,
             weight: 2,
@@ -1564,6 +1627,9 @@ export const RECIPES = {
         const x = (i - 2) * rb * 2;
         const part = k.part("ball" + i, { pivot: [x, top, 0], axis: [0, 0, 1] });
         k.add(k.sphere(rb), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           pos: [x, yc, 0],
           part,
           flat: 0.2,
@@ -1572,6 +1638,9 @@ export const RECIPES = {
           color: (c) => chrome(c.n),
         });
         k.add(k.cylinder(0.025, 0.03, { caps: "top" }), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           pos: [x, yc + rb + 0.005, 0],
           part,
           flat: 0.2,
@@ -1590,7 +1659,16 @@ export const RECIPES = {
                 grid: 16,
               },
             ),
-            { part, share: 0.004, size: 0.7, flat: 0.5, pattern: false, color: "#e9e6de" },
+            {
+              opacity: 1,
+              jitter: 0.015,
+              part,
+              share: 0.004,
+              size: 0.7,
+              flat: 0.5,
+              pattern: false,
+              color: "#e9e6de",
+            },
           );
         }
       }
@@ -1845,6 +1923,9 @@ export const RECIPES = {
       const lightOf = (col, n) => lit(col, n, { amb: 0.8, dif: 0.22, spec: 0.3, pow: 30 });
       CUBIES.forEach((home, i) => {
         k.add(roundBox(0.97, 0.97, 0.97, 0.09), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           pos: home,
           kind: "token",
           params: [i, 0],
@@ -1926,7 +2007,7 @@ export const RECIPES = {
 
   kite: {
     alive: true,
-    density: 0.16,
+    density: 0.3,
     options: [
       { key: "c1", label: "Colour 1", type: "color", default: "#e8413c" },
       { key: "c2", label: "Colour 2", type: "color", default: "#f7c948" },
@@ -1976,6 +2057,9 @@ export const RECIPES = {
       ];
       for (const [a, b, cc, col] of sail) {
         k.add(triShape(a, b, cc), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           part: kite,
           flat: 0.15,
           weight: 1.2,
@@ -1998,6 +2082,8 @@ export const RECIPES = {
         R([-0.86, -1.08, 0]),
       ]);
       k.add(k.tube(tail, 0.022, { samples: 200 }), {
+        opacity: 1,
+        jitter: 0.015,
         part: kite,
         share: 0.04,
         flat: 0.4,
@@ -2016,8 +2102,12 @@ export const RECIPES = {
           const tip = add(p, add(mul(side, 0.09 * s), mul(dir, 0.03 * s)));
           const tip2 = add(p, add(mul(side, 0.09 * s), mul(dir, -0.03 * s)));
           k.add(triShape(p, tip, tip2), {
+            even: true,
+            opacity: 1,
+            jitter: 0.015,
             part: kite,
             weight: 2.5,
+            size: 1.5,
             flat: 0.2,
             kind: "wave",
             params: [0.07 * tt, 0],
@@ -2040,6 +2130,8 @@ export const RECIPES = {
           { samples: 64, grid: 24 },
         ),
         {
+          opacity: 1,
+          jitter: 0.015,
           part: line,
           share: 0.02,
           flat: 0.5,
@@ -2057,6 +2149,8 @@ export const RECIPES = {
         k.add(
           k.tube((t) => add(q0, mul(sub(q1, q0), t)), 0.012, { samples: 32, grid: 24 }),
           {
+            opacity: 1,
+            jitter: 0.015,
             part: kite,
             weight: 1.5,
             flat: 0.3,
@@ -2109,6 +2203,9 @@ export const RECIPES = {
             ? mul(sh.sample(() => 0.3).n, -1)
             : sh.sample(() => 0.3).n;
         k.add(sh, {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           part: plane,
           flat: 0.12,
           color: (c) => {
@@ -2133,7 +2230,7 @@ export const RECIPES = {
 
   "origami-crane": {
     alive: true,
-    density: 0.18,
+    density: 0.3,
     options: [{ key: "color", label: "Paper", type: "color", default: "#e2474f" }],
     controls: [{ key: "flap", label: "Flap", type: "pulse", ease: 1.8 }],
     action: { key: "flap", label: "Flap the wings" },
@@ -2153,6 +2250,9 @@ export const RECIPES = {
         const n0 = sh.sample(() => 0.4).n;
         const n = dot(n0, out) < 0 ? mul(n0, -1) : n0;
         k.add(sh, {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           part,
           flat: 0.12,
           color: (c) => {
@@ -2290,7 +2390,6 @@ export const RECIPES = {
 
   "soap-bubbles": {
     alive: true,
-    density: 0.7,
     options: [{ key: "color", label: "Wand", type: "color", default: "#8e5bd9" }],
     controls: [{ key: "blow", label: "Blow", type: "pulse", ease: 2.5 }],
     action: { key: "blow", label: "Blow bubbles" },
@@ -2312,7 +2411,10 @@ export const RECIPES = {
       const ringN = WAND.n;
       // The wand: a ring on a handle, with a soap film in it.
       const q = quatFromTo([0, 1, 0], ringN);
-      k.add(k.torus(WAND.r, 0.022), {
+      k.add(evenTorus(k, WAND.r, 0.022), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: ringC,
         quat: q,
         flat: 0.25,
@@ -2328,23 +2430,33 @@ export const RECIPES = {
           grid: 32,
         }),
         {
+          opacity: 1,
+          jitter: 0.015,
           flat: 0.25,
           weight: 1.5,
           color: (c) => lit(wand, c.n, { spec: 0.5 }),
         },
       );
-      k.add(k.disc(WAND.r - 0.01), {
-        pos: ringC,
-        quat: q,
-        flat: 0.1,
-        opacity: 0.35,
-        pattern: false,
-        color: (c) => film(c.lp, c.n, c),
+      // The film: a sunflower spiral of splats, so it has no thin spots.
+      const fc = { fbm: (x, y, z, n) => k.noise.fbm(x, y, z, n) };
+      k.cloud({ share: 0.035, pattern: false }, (rand, i, n) => {
+        const r = (WAND.r - 0.01) * Math.sqrt((i + 0.5) / n);
+        const a = i * 2.399963229728653;
+        const lp = [r * Math.sin(a), 0, r * Math.cos(a)];
+        return {
+          p: add(ringC, quatRotate(q, lp)),
+          n: ringN,
+          flat: 0.1,
+          opacity: 0.42,
+          color: film(lp, ringN, fc),
+        };
       });
       // The bubbles.
       BUBBLES.forEach((b, i) => {
         const part = k.part("b" + i, { pivot: b.rest });
         k.add(k.sphere(b.r), {
+          even: true,
+          jitter: 0.01,
           pos: b.rest,
           part,
           flat: 0.1,
@@ -2352,21 +2464,22 @@ export const RECIPES = {
           pattern: false,
           color: (c) => film(c.lp, c.n, c),
         });
-        k.cloud({ share: 0.0015 + b.r * 0.004, size: 0.8, part, pattern: false }, (rand) => {
-          const big = rand() < 0.7;
-          const d = unit(
-            add(
-              big ? [-0.45, 0.62, 0.64] : [0.5, -0.55, 0.66],
-              mul([rand() - 0.5, rand() - 0.5, rand() - 0.5], big ? 0.3 : 0.18),
-            ),
-          );
+        // Two soft window highlights: a big one up and to the left and a
+        // small one below, each a spiral of splats that fade to its edge.
+        const lights = [unit([-0.45, 0.62, 0.64]), unit([0.5, -0.55, 0.66])];
+        k.cloud({ share: 0.0015 + b.r * 0.004, size: 0.8, part, pattern: false }, (rand, i, n) => {
+          const nBig = Math.round(n * 0.7);
+          const big = i < nBig;
+          const { p: d, f } = big
+            ? capPoint(lights[0], 0.2, i, nBig)
+            : capPoint(lights[1], 0.12, i - nBig, n - nBig);
           return {
             p: add(b.rest, mul(d, b.r * 1.01)),
             n: d,
             color: "#ffffff",
-            opacity: big ? 0.85 : 0.5,
+            opacity: (big ? 0.85 : 0.5) * (1 - f * f),
             kind: "glint",
-            params: [0.6, 0],
+            params: [0.25, 0],
           };
         });
       });
@@ -2429,6 +2542,9 @@ export const RECIPES = {
           : lit(metal, c.n, { amb: 0.75, dif: 0.3, spec: 0.3 });
       };
       k.add(roundBox(0.72, 0.62, 0.46, 0.07), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: [0, -0.12, 0],
         flat: 0.15,
         interior: 0.08,
@@ -2445,6 +2561,9 @@ export const RECIPES = {
       });
       // Head, eyes, mouth grille, ear bolts and antenna.
       k.add(roundBox(0.5, 0.36, 0.4, 0.07), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: [0, 0.42, 0],
         flat: 0.15,
         interior: 0.08,
@@ -2457,13 +2576,19 @@ export const RECIPES = {
           return tin(body)(c);
         },
       });
-      k.add(k.cylinder(0.09, 0.08, { caps: false }), {
+      k.add(evenCylinder(0.09, 0.09, 0.08, false), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: [0, 0.215, 0],
         flat: 0.2,
         color: tin(metal),
       });
       for (const s of [-1, 1]) {
-        k.add(k.cylinder(0.09, 0.03), {
+        k.add(evenCylinder(0.09, 0.09, 0.03), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           pos: [s * 0.12, 0.46, 0.205],
           rot: [90, 0, 0],
           flat: 0.15,
@@ -2477,7 +2602,10 @@ export const RECIPES = {
             return keep(mix("#ffe45c", "#ff9f1c", (r - 0.28) / 0.6));
           },
         });
-        k.add(k.cylinder(0.05, 0.06), {
+        k.add(evenCylinder(0.05, 0.05, 0.06), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           pos: [s * 0.28, 0.42, 0],
           rot: [0, 0, 90],
           flat: 0.2,
@@ -2485,13 +2613,19 @@ export const RECIPES = {
           color: tin(red),
         });
       }
-      k.add(k.cylinder(0.013, 0.2, { caps: false }), {
+      k.add(evenCylinder(0.013, 0.013, 0.2, false), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: [0, 0.7, 0],
         weight: 2,
         flat: 0.3,
         color: tin(metal),
       });
       k.add(k.sphere(0.05), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: [0, 0.82, 0],
         weight: 3,
         flat: 0.3,
@@ -2506,14 +2640,28 @@ export const RECIPES = {
           pivot: [s * 0.41, 0.04, 0],
           axis: [1, 0, 0],
         });
-        k.add(k.sphere(0.075), { pos: [s * 0.41, 0.04, 0], part, flat: 0.2, color: tin(metal) });
-        k.add(k.cylinder(0.052, 0.34, { caps: false }), {
+        k.add(k.sphere(0.075), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
+          pos: [s * 0.41, 0.04, 0],
+          part,
+          flat: 0.2,
+          color: tin(metal),
+        });
+        k.add(evenCylinder(0.052, 0.052, 0.34, false), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           pos: [s * 0.44, -0.15, 0],
           part,
           flat: 0.2,
           color: tin(body),
         });
-        k.add(k.torus(0.065, 0.024), {
+        k.add(evenTorus(k, 0.065, 0.024), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           pos: [s * 0.44, -0.39, 0],
           rot: [0, 0, 90],
           part,
@@ -2525,25 +2673,37 @@ export const RECIPES = {
       // Legs and feet.
       for (const s of [-1, 1]) {
         k.add(roundBox(0.18, 0.24, 0.22, 0.04), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           pos: [s * 0.15, -0.56, 0],
           flat: 0.15,
           color: tin(metal),
         });
         k.add(roundBox(0.24, 0.09, 0.34, 0.035, { bottom: false }), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           pos: [s * 0.15, -0.72, 0.05],
           flat: 0.15,
           color: tin(red),
         });
       }
       // The wind-up key on the back.
-      k.add(k.cylinder(0.022, 0.1), {
+      k.add(evenCylinder(0.022, 0.022, 0.1), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: [0, -0.1, -0.28],
         rot: [90, 0, 0],
         color: tin("#c9a548"),
       });
       const key = k.part("key", { pivot: [0, -0.1, -0.34], axis: [0, 0, 1] });
       for (const s of [-1, 1])
-        k.add(k.ellipsoid(0.1, 0.062, 0.018), {
+        k.add(evenEllipsoid(k, 0.1, 0.062, 0.018), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           pos: [s * 0.085, -0.1, -0.34],
           part: key,
           flat: 0.2,

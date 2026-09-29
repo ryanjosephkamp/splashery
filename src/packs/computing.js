@@ -8,6 +8,7 @@
 // seven-segment digits.
 
 import { mix, shade, clamp, ramp } from "../kit.js";
+import { evenBox } from "./even.js";
 import { FONT } from "../font.js";
 import { CNN_NET, CNN_SAMPLES, CNN_ACCURACY } from "./computing-cnn.js";
 
@@ -3605,9 +3606,11 @@ export const RECIPES = {
       const F = L.floor;
       // The floor: a dark plate with a grid, under all the words.
       const fw = Math.max(2.1, (L.span[0] * 1.25) / 1.25 + 0.9);
-      k.add(k.box(fw, 0.04, 1.7), {
+      k.add(evenBox(fw, 0.04, 1.7), {
         pos: [0, F - 0.02, 0],
         even: true,
+        opacity: 1,
+        jitter: 0.01,
         flat: 0.25,
         color: (cc) => {
           if (cc.s.face !== 2) return keep(BOARD_RIM);
