@@ -205,7 +205,7 @@ test.describe("engine for books (in the app)", () => {
     await waitSheets(page);
     await expect(page.locator("#toy-media-scrub")).toBeVisible();
     const d = await page.evaluate(() => window.__splashery.player.pictures.api.duration);
-    expect(d).toBeGreaterThan(0.5);
+    expect(Number.isFinite(d) && d > 0.5, `duration ${d}`).toBe(true);
     await page.evaluate(() => window.__splashery.player.pictures.media.pause());
     // The API seeks...
     await page.evaluate((d) => window.__splashery.player.pictures.api.seek(d / 2), d);
