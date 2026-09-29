@@ -115,9 +115,11 @@ Model: Opus 5.5 (claude-opus-5-5), default effort.
 - Cards on the Effect review page (lane Chemistry): `chs-table`, `chs-table-still`,
   `chs-atom-elements`, `chs-molecules`, `chs-lattices`, `chs-orbitals`, waiting for the owner's
   marks.
-- Full suite: the first run found the missing thumbnail (now made), a timing race in the lane's own
-  tile test (fixed) and the book tests' video seek, which the engine's first turntable change broke
-  (fixed on #99: picture toys keep their old rule). A second full run is under way.
+- The owner marked the first six cards "fix" (too grainy). Everything this lane added is now built
+  crisp (Fidelity A's method), the table denser, the rings thin, the lettering finer; the new clips
+  are the `-r2` cards (the first ones are marked replaced).
+- Full suite on the final head (September 29, 2026): 440 passed, 0 failed. The engine PR #99 merged
+  the same evening; main is merged into the lane branch. Next: the owner's marks on the `-r2` cards.
 
 ## Notes", "## Known issues" and "## For the Operator" current. Note your model at
 
@@ -195,4 +197,6 @@ Model: Opus 5.5 (claude-opus-5-5), default effort.
 
 ## For the Operator
 
-- The engine PR (`claude/lane-chemistry-engine`) must merge before the lane PR.
+- The engine PR #99 has merged. The lane PR #100 waits for the owner's marks on the `-r2` cards.
+- The old default choices (caffeine, salt, carbon, 3d z²) keep their original build, as the brief
+  asks; the same crisp method could be applied to them with their own cards if the owner wants.
