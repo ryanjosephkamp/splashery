@@ -462,7 +462,9 @@ export class Player {
     const ctx = r.value;
     const container = this.makeContainer(ctx.buf);
     this.disposeProcedural();
-    this.stage.setToy({ resource: container, owned: true, kit: true });
+    // Lab: a recipe may bring its own GPU program for its splats (a field).
+    const modifier = labsOn() ? recipe.gpuField?.(options, ctx.transform) || null : null;
+    this.stage.setToy({ resource: container, owned: true, kit: true, modifier });
     this.proc = { ctx, container, clay: clay.slice(), kit: true };
     this.motion.setToy(recipe, ctx, this.scene.motion?.controls || {});
     this.screen = null;
