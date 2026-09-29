@@ -137,7 +137,7 @@ Model: Opus 5.5 (claude-opus-5-5), default effort.
   (even bodies of larger, fainter splats: smooth jelly instead of speckle), animal cell,
   mitochondrion (its capsule helper takes `even`), diatom.
 - Vehicles: ocean liner (even hull, decks, boxes and funnels; a smooth sea), bus and sports car
-  (even rounded boxes, cabin and tyres), rocket (even body and fins).
+  (even rounded boxes, cabin and tires), rocket (even body and fins).
 - Balls: marble (even glass with a calmer glint and one soft window highlight instead of white
   speckle; solid vanes), squash ball and medicine ball (a thin, crisp rim shell instead of the gray
   haze).
