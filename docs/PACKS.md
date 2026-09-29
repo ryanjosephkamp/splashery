@@ -326,7 +326,10 @@ back to the toy's default.
 
 A binary file (a sound file) sets `binary: true` in `input`: `read("", fileName, file)` then gets
 the `File` itself and decodes it (with `decodeAudioData`, say), keeping the decoded data in the
-module like the protein. The 40 MB limit still applies.
+module like the protein. The 40 MB limit still applies. A recipe that also sets `multiple: true`
+lets people pick several files at once (a glTF model with its `.bin` and textures, an OBJ with its
+MTL): `read("", fileName, file, files)` then gets them all in `files` (the first is `file`), and the
+limit is for all of them together.
 
 **Loading first**: `async prepare(options)` runs before each build (in the browser and in the Node
 tools), for toys that fetch a file (the protein toy reads `assets/proteins/*.pdb`). Cache what it
