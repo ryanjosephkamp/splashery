@@ -206,7 +206,11 @@ test("difference engine: three taps turn n² to 16, the wheels showing it", () =
 test("Enigma machine: known test vectors, the double step, and decoding", () => {
   const { machine, AZ } = ENIGMA;
   const bare = machine({ plugs: "" });
-  const type = (m, text, pos) => m.type(text, pos).map((e) => AZ[e.lamp]).join("");
+  const type = (m, text, pos) =>
+    m
+      .type(text, pos)
+      .map((e) => AZ[e.lamp])
+      .join("");
   // Rotors I-II-III, reflector B, rings and start at AAA: AAAAA gives BDZGO.
   expect(type(bare, "AAAAA", [0, 0, 0])).toBe("BDZGO");
   // The double step: from ADU the rotors show ADV, AEW, then BFX.
@@ -264,7 +268,7 @@ for (const [id, label, wait] of [
   ["turing-machine", "Turing machine", 1500],
   ["difference-engine", "Difference engine", 1300],
   ["enigma-machine", "Enigma machine", 1600],
-  ["bombe", "Turing-Welchman Bombe", 5600],
+  ["bombe", "Bombe", 5600],
 ]) {
   test(`${id} mid-tap screenshots at 390x844 and 1440x900`, async ({ browser }) => {
     test.setTimeout(240_000);

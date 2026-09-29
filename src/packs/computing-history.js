@@ -800,7 +800,8 @@ function buildDifference(k, o) {
     const h = col.digits * pitch + 0.08;
     k.add(evenCylinder(0.014, 0.014, h + 0.06, false), { pos: [col.x, y0 + (col.digits - 1) * pitch / 2, 0], even: true, weight: 1.5, pattern: false, color: steel }); // prettier-ignore
     for (let j = 0; j < col.digits; j++) deWheel(k, [col.x, y0 + j * pitch, 0], col.token + j, col.id === "v"); // prettier-ignore
-    text(k, col.label, [col.x, topY + 0.06, 0.2], col.id === "v" ? 0.016 : 0.02, "#2a1c0c", { weight: 10 }); // prettier-ignore
+    block(k, [0.26, 0.13, 0.012], [col.x, topY + 0.085, 0.19], brass, { weight: 1.2 });
+    text(k, col.label, [col.x, topY + 0.085, 0.21], col.id === "v" ? 0.016 : 0.02, "#2a1c0c", { weight: 10 }); // prettier-ignore
     // A brass shield in front of the column with a window at each wheel's
     // front digit, so each wheel shows one digit, like an odometer.
     const sw = 0.28;
@@ -820,7 +821,10 @@ function buildDifference(k, o) {
         if (win && (c.s.face === 4 || c.s.face === 5)) return null;
         return keep(lit(BRASS, c.n, { amb: 0.62, dif: 0.42, spec: 0.5, pow: 22 })); // prettier-ignore
       },
-    });
+    }); // Side plates, so the wheels show only through the windows from any
+    // side the camera looks.
+    for (const sd of [-1, 1])
+      block(k, [0.012, sh, r + 0.2], [col.x + (sd * sw) / 2, sy, (r + 0.03) / 2 - 0.08], brass, { weight: 1.1 }); // prettier-ignore
   }
   // The carry levers: a small steel arm to the right of each wheel that
   // takes a carry, pivoting about an upright pin (tokens).
@@ -844,17 +848,17 @@ function buildDifference(k, o) {
   k.add(evenCylinder(0.02, 0.02, 0.14, true), { pos: [xr + 0.08, y0 + pitch, 0], rot: [0, 0, 90], even: true, weight: 2, pattern: false, color: steel }); // prettier-ignore
   k.add(evenBox(0.03, 0.26, 0.04), { pos: [xr + 0.16, y0 + pitch + 0.11, 0], even: true, weight: 2, part: crank, pattern: false, color: steel }); // prettier-ignore
   k.add(evenCylinder(0.024, 0.024, 0.12, true), { pos: [xr + 0.23, y0 + pitch + 0.22, 0], rot: [0, 0, 90], even: true, weight: 2.5, part: crank, pattern: false, color: wood(DARK_WOOD) }); // prettier-ignore
-  const bx = xr - 0.12;
+  const bx = xr + 0.06;
   k.add(k.lathe([[0.001, 0.08], [0.03, 0.078], [0.05, 0.05], [0.062, 0.015], [0.075, 0]], { grid: 40 }), {
-    pos: [bx, topY + 0.02, -0.08],
+    pos: [bx, topY + 0.02, -0.17],
     even: true,
     weight: 2,
     pattern: false,
     color: (c) => keep(lit("#d8b24e", c.n, { amb: 0.6, dif: 0.45, spec: 0.7, pow: 18 })),
   }); // prettier-ignore
-  const hammer = k.part("hammer", { pivot: [bx - 0.12, topY + 0.02, -0.08], axis: [0, 0, 1] });
-  k.add(evenCylinder(0.007, 0.007, 0.1, true), { pos: [bx - 0.12, topY + 0.07, -0.08], even: true, weight: 3, part: hammer, pattern: false, color: darkSteel }); // prettier-ignore
-  k.add(k.sphere(0.018), { pos: [bx - 0.12, topY + 0.12, -0.08], even: true, weight: 3, part: hammer, pattern: false, color: darkSteel }); // prettier-ignore
+  const hammer = k.part("hammer", { pivot: [bx - 0.12, topY + 0.02, -0.17], axis: [0, 0, 1] });
+  k.add(evenCylinder(0.007, 0.007, 0.1, true), { pos: [bx - 0.12, topY + 0.07, -0.17], even: true, weight: 3, part: hammer, pattern: false, color: darkSteel }); // prettier-ignore
+  k.add(k.sphere(0.018), { pos: [bx - 0.12, topY + 0.12, -0.17], even: true, weight: 3, part: hammer, pattern: false, color: darkSteel }); // prettier-ignore
 }
 // A typed polynomial in the engine's own letters (the pixel font).
 function deShowEq(eq) {

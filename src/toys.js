@@ -3148,7 +3148,7 @@ export const TOYS = [
   },
   {
     id: "bombe",
-    label: "Turing-Welchman Bombe",
+    label: "Bombe",
     category: "computing",
     kind: "kit",
     pack: "computing-history",
