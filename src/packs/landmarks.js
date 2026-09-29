@@ -14,6 +14,7 @@ import {
   quatRotate,
   quatMul,
 } from "../kit.js";
+import { evenBox, evenCylinder, evenEllipsoid, evenTorus } from "./even.js";
 
 const TAU = Math.PI * 2;
 const DEG = 180 / Math.PI;
@@ -2754,7 +2755,10 @@ function benBuild(k) {
     return lit(shade(base, rib ? 1.06 : band ? 0.82 : 0.95), c, 0.62);
   };
   // Ground and plinth.
-  k.add(k.box(2.2, 0.06, 2.2), {
+  k.add(evenBox(2.2, 0.06, 2.2), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     pos: [0, 0.03, 0],
     pattern: false,
     flat: 0.2,
@@ -2765,13 +2769,19 @@ function benBuild(k) {
           : lit("#bdb6a8", c)
         : lit("#6b5a44", c),
   });
-  k.add(k.box(1.14, 0.3, 1.14), {
+  k.add(evenBox(1.14, 0.3, 1.14), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     pos: [0, 0.21, 0],
     flat: 0.2,
     color: (c) => lit(shade(stoneC, 0.85), c),
   });
   // The shaft with corner buttresses.
-  k.add(k.box(1.0, 4.0, 1.0), {
+  k.add(evenBox(1.0, 4.0, 1.0), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     pos: [0, 2.36, 0],
     flat: 0.2,
     interior: 0.04,
@@ -2780,7 +2790,10 @@ function benBuild(k) {
   });
   for (const sx of [-1, 1])
     for (const sz of [-1, 1])
-      k.add(k.box(0.1, 4.0, 0.1), {
+      k.add(evenBox(0.1, 4.0, 0.1), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: [sx * 0.5, 2.36, sz * 0.5],
         flat: 0.2,
         weight: 1.3,
@@ -2788,7 +2801,10 @@ function benBuild(k) {
       });
   // The clock stage: four dials in gilded frames.
   const cy = BEN.dial;
-  k.add(k.box(2 * BEN.half, 1.2, 2 * BEN.half), {
+  k.add(evenBox(2 * BEN.half, 1.2, 2 * BEN.half), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     pos: [0, cy, 0],
     flat: 0.2,
     color: (c) => {
@@ -2807,6 +2823,8 @@ function benBuild(k) {
     const a = (j * Math.PI) / 2;
     const n = [Math.sin(a), 0, Math.cos(a)];
     k.add(k.disc(BEN.r), {
+      opacity: 1,
+      jitter: 0.015,
       pos: add(mul(n, BEN.half + 0.006), [0, cy, 0]),
       quat: quatFromTo([0, 1, 0], n),
       weight: 2,
@@ -2824,6 +2842,7 @@ function benBuild(k) {
     });
     // A warm glow over the dial, lit when the bell chimes (under the hands).
     k.add(k.disc(BEN.r * 0.97), {
+      jitter: 0.015,
       part: glow,
       pos: add(mul(n, BEN.half + 0.013), [0, cy, 0]),
       quat: quatFromTo([0, 1, 0], n),
@@ -2844,7 +2863,10 @@ function benBuild(k) {
     ]) {
       const part = k.part(`${name}${j}`, { pivot: pv, axis: n });
       const off = name === "minute" ? 0.006 : 0;
-      k.add(k.box(W, L, 0.012), {
+      k.add(evenBox(W, L, 0.012), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         part,
         pos: add(add(pv, mul(n, off)), [0, L / 2 - 0.04, 0]),
         rot: [0, a * DEG, 0],
@@ -2856,7 +2878,10 @@ function benBuild(k) {
   }
   // The belfry, corner pinnacles, the roof, the lantern and the spire.
   const by = cy + 0.6;
-  k.add(k.box(1.04, 0.8, 1.04), {
+  k.add(evenBox(1.04, 0.8, 1.04), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     pos: [0, by + 0.4, 0],
     flat: 0.2,
     color: (c) => {
@@ -2869,7 +2894,10 @@ function benBuild(k) {
     },
   });
   // The great bell hangs in the belfry, seen through the open arches.
-  k.add(k.box(0.98, 0.02, 0.98), {
+  k.add(evenBox(0.98, 0.02, 0.98), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     pos: [0, by + 0.02, 0],
     color: (c) => lit(shade(stoneC, 0.55), c),
   });
@@ -2887,6 +2915,9 @@ function benBuild(k) {
       { grid: 40 },
     ),
     {
+      even: true,
+      opacity: 1,
+      jitter: 0.015,
       part: bell,
       weight: 2.5,
       flat: 0.2,
@@ -2923,7 +2954,10 @@ function benBuild(k) {
     { flat: 0.2, color: roofC },
     { a0: Math.PI / 4 },
   );
-  k.add(k.box(0.34, 0.26, 0.34), {
+  k.add(evenBox(0.34, 0.26, 0.34), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     pos: [0, y1 + 0.13, 0],
     flat: 0.2,
     color: (c) =>
@@ -2947,7 +2981,14 @@ function benBuild(k) {
     { a0: Math.PI / 4, cap: false },
   );
   rod(k, [0, y1 + 0.9, 0], [0, y1 + 1.15, 0], 0.012, { weight: 3, color: gold });
-  k.add(k.sphere(0.03), { pos: [0, y1 + 1.0, 0], weight: 3, color: gold });
+  k.add(k.sphere(0.03), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
+    pos: [0, y1 + 1.0, 0],
+    weight: 3,
+    color: gold,
+  });
 }
 
 // ---- Taj Mahal ---------------------------------------------------------------------------------
@@ -3746,7 +3787,14 @@ function windmillBuild(k) {
       ],
       { grid: 64, thick: 0.06 },
     ),
-    { flat: 0.2, pattern: false, color: (c) => grass(c, "#62a048") },
+    {
+      even: true,
+      opacity: 1,
+      jitter: 0.015,
+      flat: 0.2,
+      pattern: false,
+      color: (c) => grass(c, "#62a048"),
+    },
   );
   const tulips = ["#e8332c", "#f5c02f", "#f06fa5", "#ff7a2a", "#e8332c"];
   k.cloud({ share: 0.05, size: 1.1, pattern: false }, (rand) => {
@@ -3795,12 +3843,22 @@ function windmillBuild(k) {
   });
   // The stage round the body.
   const sy = 0.95;
-  k.add(k.cylinder(0.9, 0.04), {
+  k.add(evenCylinder(0.9, 0.9, 0.04), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     pos: [0, sy, 0],
     flat: 0.2,
     color: (c) => lit(shade(wood, 1.3 + 0.2 * Math.sin((c.p[0] + c.p[2]) * 60)), c),
   });
-  k.add(k.torus(0.88, 0.01), { pos: [0, sy + 0.2, 0], weight: 3, color: wood });
+  k.add(evenTorus(k, 0.88, 0.01), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
+    pos: [0, sy + 0.2, 0],
+    weight: 3,
+    color: wood,
+  });
   for (let i = 0; i < 16; i++) {
     const a = (i / 16) * TAU;
     rod(
@@ -3820,7 +3878,10 @@ function windmillBuild(k) {
       );
   }
   // The cap and windshaft.
-  k.add(k.ellipsoid(0.46, 0.36, 0.5), {
+  k.add(evenEllipsoid(k, 0.46, 0.36, 0.5), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     pos: [0, 2.0, 0],
     flat: 0.2,
     color: (c) =>
@@ -3833,7 +3894,15 @@ function windmillBuild(k) {
   const sails = k.part("sails", { pivot: MILL.hub, axis: MILL.axis });
   const e1 = unit(cross(MILL.axis, [0, 1, 0]));
   const e2 = cross(e1, MILL.axis);
-  k.add(k.sphere(0.08), { part: sails, pos: MILL.hub, weight: 2, color: (c) => lit(wood, c) });
+  k.add(k.sphere(0.08), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
+    part: sails,
+    pos: MILL.hub,
+    weight: 2,
+    color: (c) => lit(wood, c),
+  });
   for (let i = 0; i < 4; i++) {
     const th = (i * Math.PI) / 2 + Math.PI / 4;
     const d = add(mul(e1, Math.cos(th)), mul(e2, Math.sin(th)));
@@ -3851,9 +3920,11 @@ function windmillBuild(k) {
       rod(k, at(r, 0.0), at(r, 0.31), 0.007, { part: sails, weight: 3, color: "#f4f1ea" });
     }
     k.add(quad(k, at(0.45, 0.03), at(1.55, 0.03), at(1.55, 0.3), at(0.45, 0.3)), {
+      even: true,
+      jitter: 0.015,
       part: sails,
       flat: 0.2,
-      opacity: 0.9,
+      opacity: 1,
       color: (c) => shade("#efe6d2", 0.85 + 0.15 * Math.abs(sunOf(c.n))),
     });
   }

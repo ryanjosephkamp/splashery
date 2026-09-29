@@ -16,6 +16,7 @@ import {
   quatMul,
   vec,
 } from "../kit.js";
+import { evenCylinder } from "./even.js";
 
 const TAU = Math.PI * 2;
 const DEG = Math.PI / 180;
@@ -628,6 +629,8 @@ export const RECIPES = {
       const ground = -0.74;
       // A patch of grass under both.
       k.add(k.disc(1), {
+        opacity: 1,
+        jitter: 0.015,
         pos: [0, ground, 0],
         scale: [1.5, 1, 0.78],
         flat: 0.3,
@@ -656,7 +659,10 @@ export const RECIPES = {
       // The target: a straw boss with painted rings, on an easel.
       const TC = G.target;
       const ringCols = ["#f5c93c", "#e0453a", "#3c8fdc", "#2a2a2a", "#f3efe4"];
-      k.add(k.cylinder(0.5, 0.16), {
+      k.add(evenCylinder(0.5, 0.5, 0.16), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: TC,
         rot: [0, 0, -90],
         flat: 0.2,
@@ -680,6 +686,9 @@ export const RECIPES = {
         k.add(
           k.tube((t) => vec.add(a, vec.mul(vec.sub(b, a), t)), 0.028, { grid: 16, samples: 8 }),
           {
+            even: true,
+            opacity: 1,
+            jitter: 0.015,
             flat: 0.2,
             color: (c) => lit(c, wood(c, "#7a5230", c.p, 1), 0.3),
           },
@@ -704,6 +713,8 @@ export const RECIPES = {
           caps: true,
         }),
         {
+          opacity: 1,
+          jitter: 0.015,
           flat: 0.2,
           weight: 1.6,
           color: (c) => {
@@ -721,12 +732,18 @@ export const RECIPES = {
       const str = { flat: 0.3, weight: 3, pattern: false, color: "#f1ead6" };
       const hu = G.half - G.nockY;
       const hd = G.half + G.nockY;
-      k.add(k.cylinder(0.01, hu, { caps: false }), {
+      k.add(evenCylinder(0.01, 0.01, hu, false), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         ...str,
         pos: [G.sx, G.nockY + hu / 2, 0],
         part: up,
       });
-      k.add(k.cylinder(0.01, hd, { caps: false }), {
+      k.add(evenCylinder(0.01, 0.01, hd, false), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         ...str,
         pos: [G.sx, G.nockY - hd / 2, 0],
         part: down,
@@ -735,7 +752,10 @@ export const RECIPES = {
       // The arrow, nocked: its tip is the pivot of its flight.
       const arrow = k.part("arrow", { pivot: G.tip });
       const len = G.sx - G.tip[0];
-      k.add(k.cylinder(0.016, len - 0.08, { caps: false }), {
+      k.add(evenCylinder(0.016, 0.016, len - 0.08, false), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         part: arrow,
         pos: [G.tip[0] + (len + 0.08) / 2, G.tip[1], 0],
         rot: [0, 0, 90],
@@ -744,7 +764,10 @@ export const RECIPES = {
         pattern: false,
         color: (c) => lit(c, wood(c, "#c79a5a", c.p, 0), 0.25),
       });
-      k.add(k.cone(0.034, 0, 0.1), {
+      k.add(evenCylinder(0.034, 0, 0.1), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         part: arrow,
         pos: [G.tip[0] + 0.05, G.tip[1], 0],
         rot: [0, 0, 90],
@@ -763,6 +786,8 @@ export const RECIPES = {
           { grid: 16 },
         );
         k.add(vane, {
+          opacity: 1,
+          jitter: 0.015,
           part: arrow,
           flat: 0.2,
           weight: 3,

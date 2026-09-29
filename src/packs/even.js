@@ -182,3 +182,43 @@ function norm(v) {
   const l = Math.hypot(v[0], v[1], v[2]) || 1;
   return [v[0] / l, v[1] / l, v[2] / l];
 }
+
+// A tube like k.tube(curve, radius, opts); with caps: true its end caps
+// are spread evenly too (the kit's capped tube places its splats at random
+// under even: true).
+export function evenTube(k, curve, radius, opts = {}) {
+  const body = k.tube(curve, radius, { ...opts, caps: false });
+  if (!opts.caps || opts.closed) return body;
+  const rad = typeof radius === "function" ? radius : () => radius;
+  const r0 = rad(0);
+  const r1 = rad(1);
+  const cap0 = Math.PI * r0 * r0;
+  const capA = cap0 + Math.PI * r1 * r1;
+  const bodyA = body.area;
+  const area = bodyA + capA;
+  const cap = (end, q, ang) => {
+    const f = body.frame(end);
+    const r = rad(end) * Math.sqrt(q);
+    const p = [0, 1, 2].map(
+      (i) => f.p[i] + f.n[i] * r * Math.cos(ang) + f.b[i] * r * Math.sin(ang),
+    );
+    const n = end ? f.t : f.t.map((x) => -x);
+    return { p, n, u: ang / TAU, v: end, t: end, tangent: f.t };
+  };
+  return {
+    ...body,
+    area,
+    sample(rand) {
+      if (rand() * area < bodyA) return body.sample(rand);
+      const end = rand() * capA < cap0 ? 0 : 1;
+      return cap(end, rand(), rand() * TAU);
+    },
+    sampleEven(a, b) {
+      const x = Math.min(a, 1 - 1e-9) * area;
+      if (x < bodyA) return body.sampleEven(x / bodyA, b);
+      const y = x - bodyA;
+      if (y < cap0) return cap(0, y / cap0, b * TAU);
+      return cap(1, (y - cap0) / (capA - cap0), b * TAU);
+    },
+  };
+}

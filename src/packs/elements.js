@@ -16,6 +16,7 @@ import {
   quatRotate,
   vec,
 } from "../kit.js";
+import { evenTorus } from "./even.js";
 
 const TAU = Math.PI * 2;
 const { add, sub, mul, dot, cross, len, unit } = vec;
@@ -2579,7 +2580,10 @@ export const RECIPES = {
       const w = RB_W;
       // The arc: each splat fades out as channel 0 passes its place (its
       // band, then how far along it is).
-      k.add(k.torus(R, w), {
+      k.add(evenTorus(k, R, w), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         rot: [90, 0, 0],
         scale: [1, 0.3, 1],
         flat: 0.25,
@@ -2609,6 +2613,9 @@ export const RECIPES = {
             (k.rand() - 0.5) * 0.25,
           ];
           k.add(k.sphere(s), {
+            even: true,
+            opacity: 1,
+            jitter: 0.015,
             pos,
             size: 1.8,
             flat: 0.8,

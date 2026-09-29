@@ -1148,6 +1148,9 @@ export const RECIPES = {
         }
       };
       k.add(k.lathe(prof, { grid: 96 }), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         part: egg,
         flat: 0.18,
         interior: 0.1,
@@ -1168,7 +1171,7 @@ export const RECIPES = {
           ],
           { grid: 64 },
         ),
-        { flat: 0.2, pattern: false, color: (c) => gold(c) },
+        { even: true, opacity: 1, jitter: 0.015, flat: 0.2, pattern: false, color: (c) => gold(c) },
       );
     },
   },

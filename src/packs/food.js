@@ -20,6 +20,7 @@ import {
   rgb,
   vec,
 } from "../kit.js";
+import { evenCylinder, evenTorus, evenTube } from "./even.js";
 
 const TAU = Math.PI * 2;
 const { add, sub, mul, dot, len, cross, unit } = vec;
@@ -2116,7 +2117,7 @@ export const RECIPES = {
         }
         return [-2 * Rh, -1.3 + L1 - (s - L1 - L2), 0];
       };
-      const shape = k.tube(path, 0.1, { caps: true, samples: 360, grid: 96 });
+      const shape = evenTube(k, path, 0.1, { caps: true, samples: 360, grid: 96 });
       const stripe = (u, t) => {
         const f = (((u + (t * total) / 0.42) % 1) + 1) % 1;
         if (f < 0.3) return o.stripe;
@@ -2162,6 +2163,9 @@ export const RECIPES = {
           return add(pos, quatRotate(quat, lq));
         };
         k.add(shape, {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           quat,
           pos,
           flat: 0.3,
@@ -2174,7 +2178,10 @@ export const RECIPES = {
         });
         // The mend's glint: a ring of splats just below the break, coloured
         // as the cane is there, that glows as channel 2 (or 3) passes 0.5.
-        k.add(k.cylinder(0.104, 0.03, { caps: false }), {
+        k.add(evenCylinder(0.104, 0.104, 0.03, false), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           quat,
           pos: add(pos, quatRotate(quat, [0, yb - 0.042, 0])),
           share: 0.004,
@@ -2207,6 +2214,9 @@ export const RECIPES = {
               { grid: 24, normal: () => [0, dir, 0] },
             ),
             {
+              even: true,
+              opacity: 1,
+              jitter: 0.015,
               quat,
               pos,
               part,
@@ -2259,7 +2269,10 @@ export const RECIPES = {
       const bowY = -0.62;
       const satin = (c) => glossy(c, "#23823a", 0.55, 14, 0.72, 0.42);
       for (const s of [-1, 1]) {
-        k.add(k.torus(0.16, 0.045), {
+        k.add(evenTorus(k, 0.16, 0.045), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           pos: [s * 0.17, bowY + 0.05, 0.16],
           rot: [90, 0, s * 22],
           scale: [1, 1, 0.55],
@@ -2277,10 +2290,27 @@ export const RECIPES = {
             ]),
             (t) => 0.045 * (1 - 0.3 * t),
           ),
-          { flat: 0.3, weight: 1.5, pattern: false, scale: [1, 1, 0.5], color: satin },
+          {
+            even: true,
+            opacity: 1,
+            jitter: 0.015,
+            flat: 0.3,
+            weight: 1.5,
+            pattern: false,
+            scale: [1, 1, 0.5],
+            color: satin,
+          },
         );
       }
-      k.add(k.sphere(0.07), { pos: [0, bowY, 0.18], weight: 2, pattern: false, color: satin });
+      k.add(k.sphere(0.07), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
+        pos: [0, bowY, 0.18],
+        weight: 2,
+        pattern: false,
+        color: satin,
+      });
     },
   },
 

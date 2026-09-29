@@ -4236,12 +4236,16 @@ export const RECIPES = {
             [0.29, 0.18],
           ]),
           {
+            even: true,
+            opacity: 1,
+            jitter: 0.015,
             pos,
             quat: q,
             scale: s,
             flat: 0.2,
             interior: 0.12,
-            core: "#f0e2c0",
+            // (None from the narrow tip, where they would poke out.)
+            core: (c) => (c.lp[1] < -0.36 ? null : "#f0e2c0"),
             color: (c) => {
               const y = c.lp[1];
               if (y < -0.5) return "#3a2412";
@@ -4262,6 +4266,9 @@ export const RECIPES = {
             [0, 0.38],
           ]),
           {
+            even: true,
+            opacity: 1,
+            jitter: 0.015,
             pos,
             quat: q,
             scale: s,
@@ -4284,6 +4291,9 @@ export const RECIPES = {
             grid: 8,
           }),
           {
+            even: true,
+            opacity: 1,
+            jitter: 0.015,
             weight: 2,
             part: cap,
             color: (c) => lit("#5a3e22", c.n, 0.4),
@@ -4297,6 +4307,9 @@ export const RECIPES = {
         k.add(
           k.tube(spline(sp), (t) => 0.035 * s * (1 - 0.5 * t), { samples: 24, grid: 10 }),
           {
+            even: true,
+            opacity: 1,
+            jitter: 0.015,
             part: sprout,
             weight: 2,
             color: (c) => lit(mix("#e8f0c0", "#8ac050", c.t), c.n, 0.4),
@@ -4313,13 +4326,18 @@ export const RECIPES = {
               { grid: 10 },
             ),
             {
+              even: true,
+              opacity: 1,
+              jitter: 0.015,
               pos: shootTip,
               quat: quatMul(q, quatEuler(-30, side * 50, side * 60)),
               part: sprout,
               weight: 2.5,
               flat: 0.2,
               color: (c) =>
-                Math.abs(c.u - 0.5) * 2 > oakLobes(c.v) ? null : lit(mix("#6aa83a", "#a8d060", c.v), c.n, 0.3), // prettier-ignore
+                Math.abs(c.u - 0.5) * 2 > oakLobes(c.v)
+                  ? null
+                  : lit(mix("#6aa83a", "#a8d060", c.v), c.n, 0.3),
             },
           );
         }
@@ -4340,6 +4358,9 @@ export const RECIPES = {
           { grid: 40 },
         ),
         {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           pos: [0.05, -0.5, -0.25],
           rot: [-72, 25, 0],
           flat: 0.2,
@@ -4371,6 +4392,9 @@ export const RECIPES = {
           { samples: 12, grid: 6 },
         ),
         {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           color: autumn ? "#8a5a22" : "#4f7a2a",
         },
       );
