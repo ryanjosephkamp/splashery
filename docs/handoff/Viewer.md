@@ -201,5 +201,8 @@ Post at 390×844 (tools/effect-clip.mjs, or tools/pic-clip.mjs for picture toys)
   (src/packs/screens.js, lane Screens). The Gaussian splat toy (AI shelf) stays free.
 - README's Controls table: "Two-finger twist | Roll" could read "A clear two-finger twist | Roll
   (not when the tilt is locked)", and a row for the top-bar buttons. I only added the terms there.
-- The "Flag colours" label moved and is now "Flag colors"; other places keep "colours" for the
-  sweep.
+- The moved flag label now reads "Flag colors" (American English); the older British labels
+  elsewhere wait for the sweep.
+- `tests/smoke.spec.mjs`: its chess flag test checked that a flag carries over to the next toy. Note
+  5 changes that, so I rewrote that one test (the chess board still lays a flag on from above; a
+  flag now stays with its toy). A shared file: please check it.
