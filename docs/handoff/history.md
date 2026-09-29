@@ -16,6 +16,22 @@ had not settled 3 s after its tap) and "a scan rig moves a part of a captured to
 console warning, like the rare engine warning in HANDOFF.md). Keep `test-results/` if either comes
 back.
 
+### A/B: the toy piano, a blind test of two models (PR #91, merged 2026-09-29)
+
+- The owner's blind A/B: one brief (his toy piano idea: tap a key and its hammer strikes a ringing
+  rod; tap elsewhere for Twinkle, Twinkle) built twice, on its own branch each, by Sonnet 5.5 (maker
+  A) and Opus 5.5 (maker B). The cards named only "maker A" and "maker B"; the Operator kept which
+  was which in a private note until the owner had marked them.
+- He marked maker A's three cards "fix" ("too grainy") and maker B's three good. B was Opus 5.5, so
+  its toy piano merged (#91) and A's PR #89 was closed. This settled the owner's model split of
+  September 29, 2026: Opus 5.5 for the toys and engine, Sonnet 5.5 for Worlds content, converters,
+  docs and the Integrator.
+- About 5 hours to READY; it then waited for the blind marks and two Integrator runs (the first on
+  an older main; the second, on main + #91 + #106, passed 412 of 412).
+- Lessons (PACKS.md, section 7c): the kit's default color jitter (0.04) reads as grain on smooth
+  lacquer and ivory, and 0.01 is clean; smaller splats along a flat face's edge keep box edges
+  crisp; a long, thin even rectangle hatches, so fold the even square into strips laid end to end.
+
 ### Anatomy: the anatomy atlas (PRs #92 and #93, merged 2026-09-29)
 
 - Built by Opus 5.5. A labs toy on the Body shelf: a clinical figure in four layers (a smooth

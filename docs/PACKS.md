@@ -701,6 +701,12 @@ density, mirror chrome on thin parts, see-through `rim()` shells and faint cloud
 - **Faint clouds:** splats under about 1/255 alpha are dropped, so very faint big splats turn into
   blobs; water and rings drawn as clouds take `even: true` (a sunflower spiral).
 
+- **Lacquer, ivory and flat faces** (lane A/B's toy piano): the kit's default color jitter (0.04)
+  reads as grain on smooth lacquer and ivory; 0.01 is clean. Smaller splats along a flat face's edge
+  (a color function returning `{ c, size }`) keep box edges crisp instead of a fuzzy rim, and a
+  long, thin even rectangle spaces its splats unevenly (a hatch): fold the even square into strips
+  laid end to end (`crisp()` and `rect()` in `src/packs/music.js`).
+
 ## 7d. Smooth bodies and placed recipes
 
 From lane Anatomy (September 29, 2026), whose atlas is a kit-built body with our own organ toys
