@@ -1102,6 +1102,27 @@ const SHELL_WAVES = [0.7, 1.8, 2.9];
 
 // ---- Recipes ------------------------------------------------------------------------
 
+// A surface's even placement with each point nudged a little within its
+// cell (a fixed hash, so it rebuilds the same): see-through layers placed
+// exactly evenly beat against each other as a fine hatching; nudged, they
+// stay even without the pattern.
+function nudgedEven(shape, amount) {
+  if (!shape.sampleEven) return shape;
+  const hash = (x, y) => {
+    const h = Math.sin(x * 12.9898 + y * 78.233) * 43758.5453;
+    return h - Math.floor(h);
+  };
+  const wrap = (v) => v - Math.floor(v);
+  return {
+    ...shape,
+    sampleEven(a, b) {
+      const da = (hash(a, b) - 0.5) * amount;
+      const db = (hash(b + 0.37, a) - 0.5) * amount;
+      return shape.sampleEven(wrap(a + da), wrap(b + db));
+    },
+  };
+}
+
 export const RECIPES = {
   lorenz: {
     alive: true,
@@ -1361,7 +1382,7 @@ export const RECIPES = {
       };
       const glass = o.color;
       const violet = "#8a5cf6";
-      k.add(k.param(f, { grid: 120 }), {
+      k.add(nudgedEven(k.param(f, { grid: 120 }), 0.0016), {
         even: true,
         jitter: 0.015,
         rot: [0, 0, 0],
@@ -1404,8 +1425,6 @@ export const RECIPES = {
           { grid: 96 },
         ),
         {
-          even: true,
-          jitter: 0.015,
           part: k.part("water"),
           share: 0.14,
           flat: 0.3,
