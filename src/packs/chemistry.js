@@ -499,12 +499,28 @@ export const RECIPES = {
             opacity: 1,
             jitter: 0.004,
             weight: 1.3,
+            size: 1.05,
             part: mine ? tile : undefined,
             color: (c) => {
               const edge = Math.min(0.5 - Math.abs(c.u - 0.5), 0.5 - Math.abs(c.v - 0.5)) * TILE;
               const face = mix(col, "#ffffff", 0.18 * c.v);
               return keep(edge < 0.03 ? shade(col, 0.8) : face);
             },
+          },
+        );
+        // A backing of the same color just behind the face, so any thin
+        // spot between its splats shows the tile, not the dark board.
+        k.add(
+          k.param((u, v) => [t.pos[0] + (u - 0.5) * TILE * 0.84, t.pos[1] + (v - 0.5) * TILE * 0.84, DEPTH - 0.03], { grid: 4 }), // prettier-ignore
+          {
+            even: true,
+            flat: 0.2,
+            opacity: 1,
+            jitter: 0.004,
+            weight: 0.35,
+            size: 1.15,
+            part: mine ? tile : undefined,
+            color: (c) => keep(mix(col, "#ffffff", 0.18 * c.v)),
           },
         );
         k.add(

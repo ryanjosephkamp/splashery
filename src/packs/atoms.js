@@ -1273,31 +1273,35 @@ function orbitalLook(
     },
   });
   // (The new orbitals' cloud has bigger, fainter splats: a smoother haze.)
-  k.cloud({ share: cloudShare, size: crisp ? 1.5 : 1.1, pattern: false, part }, (rand) => {
-    // Rejection sampling from |psi|², keeping the cloud mostly inside the
-    // boundary surface so its shape reads clearly.
-    let r;
-    let d;
-    let y;
-    let psi;
-    for (let tries = 0; tries < 12; tries++) {
-      r = radial.sample(rand);
-      ({ d, y } = drawDir(rand));
-      psi = orb.R(r) * y;
-      if (psi * psi > level * 0.6 || rand() < 0.08) break;
-    }
-    const t = clamp((psi * psi) / peak, 0, 1);
-    const base = mix(psi >= 0 ? plus : minus, "#fffbe8", glow);
-    const col = mix(shade(base, 0.8), mix(base, "#fffbe8", 0.7), Math.pow(t, 0.6));
-    return {
-      p: mul(toToy(d), (r / E) * fit),
-      color: col,
-      opacity: (lobes ? 0.35 : 0.1 + 0.55 * Math.pow(t, 0.6)) * (crisp ? 0.7 : 1),
-      size: 0.7 + 0.6 * rand(),
-      kind: "twinkle",
-      params: [0.5, rand() * TAU],
-    };
-  });
+  k.cloud(
+    { share: cloudShare * (crisp ? 1.3 : 1), size: crisp ? 1.9 : 1.1, pattern: false, part },
+    (rand) => {
+      // Rejection sampling from |psi|², keeping the cloud mostly inside the
+      // boundary surface so its shape reads clearly.
+      let r;
+      let d;
+      let y;
+      let psi;
+      for (let tries = 0; tries < 12; tries++) {
+        r = radial.sample(rand);
+        ({ d, y } = drawDir(rand));
+        psi = orb.R(r) * y;
+        if (psi * psi > level * 0.6 || rand() < 0.08) break;
+      }
+      const t = clamp((psi * psi) / peak, 0, 1);
+      const base = mix(psi >= 0 ? plus : minus, "#fffbe8", glow);
+      const col = mix(shade(base, 0.8), mix(base, "#fffbe8", 0.7), Math.pow(t, 0.6));
+      return {
+        p: mul(toToy(d), (r / E) * fit),
+        color: col,
+        opacity: (lobes ? 0.35 : 0.1 + 0.55 * Math.pow(t, 0.6)) * (crisp ? 0.45 : 1),
+        size: crisp ? 0.85 + 0.3 * rand() : 0.7 + 0.6 * rand(),
+        // (The new orbitals' haze holds still: a flicker reads as grain.)
+        kind: crisp ? undefined : "twinkle",
+        params: [0.5, rand() * TAU],
+      };
+    },
+  );
 }
 
 // ---- Proteins ------------------------------------------------------------------------
@@ -1752,14 +1756,16 @@ export const RECIPES = {
             pattern: false,
             color: (c) => keep(gloss(lit("#36c9ff", c.n, 0.8, 0.3), c.n, 0.7, 10)),
           });
-          k.cloud({ count: 60, size: 1.6, pattern: false }, (rand) => ({
-            p: add(p, mul(randDir(rand), 0.05 * Math.abs(gauss(rand)))),
-            color: "#9fe8ff",
-            opacity: 0.25,
-            part,
-            kind: "twinkle",
-            params: [0.7, rand() * TAU],
-          }));
+          // (The new choices leave out the fuzzy halo, which reads as grain.)
+          if (!crisp)
+            k.cloud({ count: 60, size: 1.6, pattern: false }, (rand) => ({
+              p: add(p, mul(randDir(rand), 0.05 * Math.abs(gauss(rand)))),
+              color: "#9fe8ff",
+              opacity: 0.25,
+              part,
+              kind: "twinkle",
+              params: [0.7, rand() * TAU],
+            }));
         }
         // The blur (hidden until a tap): the shell's electrons smeared
         // into a glowing ring round their orbit.
