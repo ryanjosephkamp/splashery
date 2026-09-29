@@ -30,6 +30,7 @@ export const CATEGORIES = [
   { id: "maths", label: "Maths" },
   { id: "computing", label: "AI and computing" },
   { id: "pictures", label: "Pictures and pages" },
+  { id: "lab", label: "Lab" },
   { id: "holidays", label: "Holidays" },
   { id: "music", label: "Music" },
   { id: "vehicles", label: "Vehicles" },
@@ -3126,6 +3127,17 @@ export const TOYS = [
     labs: true,
     tags: "pdf page document article photo picture image gif video open file",
     camera: { yaw: 0, pitch: 0, roll: 0, distance: 3.2 },
+  },
+  // ---- Pack: lab (lane Lab) ----
+  {
+    id: "splat-field",
+    label: "Splat field",
+    category: "lab",
+    kind: "kit",
+    pack: "lab",
+    labs: true,
+    tags: "gpu field galaxy spiral ocean waves sea knot flow particles shader lab experiment",
+    camera: { yaw: 0.3, pitch: 0.85, roll: 0, distance: 2.3 },
   },
   // ---- Pack: screens ----
   {

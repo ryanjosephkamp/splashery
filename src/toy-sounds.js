@@ -1362,6 +1362,9 @@ export const TOY_SOUNDS = {
     { voice: "zap", at: 0.1, f: 5200, to: 0.9, decay: 0.5, vol: 0.18 },
     { voice: "hum", at: 0.12, f: 60, to: 1.02, decay: 1.6, bright: 0.15, vol: 0.5 },
   ],
+  // ---- Lab (lane Lab) ----------------------------------------------------------------
+  // A soft rising swell as the pulse runs out through the field.
+  "splat-field": { voice: "pad", f: "D4", to: 1.5, decay: 2.5, vol: 0.7 },
 };
 
 // The toy's sound, or null when it has none (visitors' own splats).

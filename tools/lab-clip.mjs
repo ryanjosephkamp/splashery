@@ -7,7 +7,10 @@
 //   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/lab-clip.mjs <out.gif> <toy id> [--kernels=gaussian,sharp] [--zoom=1] [--secs=4] [--fps=12] [--turn=30] [--opt=key=value] [--strip=<out.png>]
 //
 // --turn is how far the view turns, in degrees, over the clip. --strip also
-// writes the middle frame of the pair as a PNG still.
+// writes the first frame of the pair as a PNG still. The toy's clock is
+// stepped by hand (1/fps a frame), so motion plays at its real speed however
+// slow the renderer is; --tap=<seconds> taps the toy that far into the clip.
+// With one kernel the clip is a single 390×844 view.
 
 import { chromium } from "@playwright/test";
 import fs from "node:fs";
@@ -27,6 +30,7 @@ const fps = Number(opt("fps", 12));
 const turn = Number(opt("turn", 30));
 const toyOpt = opt("opt", "");
 const strip = opt("strip", "");
+const tapAt = Number(opt("tap", -1));
 
 const browser = await chromium.launch({
   executablePath: process.env.SPLASHERY_CHROMIUM || undefined,
@@ -38,7 +42,7 @@ await page.goto(`${base}?renderer=webgl2&profile=high&adapt=off&labs=1`);
 await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
 
 const { gif, still } = await page.evaluate(
-  async ({ id, kernels, zoom, secs, fps, turn, toyOpt }) => {
+  async ({ id, kernels, zoom, secs, fps, turn, toyOpt, tapAt }) => {
     const { app, player } = window.__splashery;
     const { GIFEncoder, quantize, applyPalette } = await import("gifenc");
     const W = 390;
@@ -72,8 +76,19 @@ const { gif, still } = await page.evaluate(
         await stage.captureFrame();
         await new Promise((r) => setTimeout(r, 100));
       }
+      // Step the clock by hand from here on.
+      const handlers = stage.updateHandlers.slice();
+      let pending = 0;
+      stage.updateHandlers.length = 0;
+      stage.updateHandlers.push(() => {
+        const d = pending;
+        pending = 0;
+        for (const h of handlers) h(d);
+      });
       const frames = [];
       for (let k = 0; k < n; k++) {
+        if (tapAt >= 0 && k === Math.round(tapAt * fps)) player.act(null);
+        pending = 1 / fps;
         // Turn out and back, so the loop has no jump.
         const f = Math.sin((Math.PI * 2 * k) / n);
         put({ ...view, yaw: view.yaw + (f * turn * Math.PI) / 360 });
@@ -82,6 +97,8 @@ const { gif, still } = await page.evaluate(
         frames.push(c.getContext("2d").getImageData(0, 0, W, H));
       }
       stage.setFixedSize(null);
+      stage.updateHandlers.length = 0;
+      stage.updateHandlers.push(...handlers);
       runs.push(frames);
     }
     const gap = 6;
@@ -98,7 +115,8 @@ const { gif, still } = await page.evaluate(
       runs.forEach((frames, i) => g.putImageData(frames[k], i * (W + gap), 0));
       g.fillStyle = "rgba(0,0,0,0.6)";
       g.font = "bold 16px system-ui, sans-serif";
-      runs.forEach((_, i) => g.fillText(i === 0 ? "Before" : "After", i * (W + gap) + 12, 26));
+      if (runs.length > 1)
+        runs.forEach((_, i) => g.fillText(i === 0 ? "Before" : "After", i * (W + gap) + 12, 26));
       const rgba = g.getImageData(0, 0, cw, H).data;
       const palette = quantize(rgba, 256, { format: "rgb565" });
       enc.writeFrame(applyPalette(rgba, palette, "rgb565"), cw, H, { palette, delay: Math.round(1000 / fps), repeat: 0 }); // prettier-ignore
@@ -107,7 +125,7 @@ const { gif, still } = await page.evaluate(
     enc.finish();
     return { gif: Array.from(enc.bytes()), still };
   },
-  { id, kernels, zoom, secs, fps, turn, toyOpt },
+  { id, kernels, zoom, secs, fps, turn, toyOpt, tapAt },
 );
 fs.writeFileSync(out, Buffer.from(gif));
 if (strip) fs.writeFileSync(strip, Buffer.from(still.split(",")[1], "base64"));

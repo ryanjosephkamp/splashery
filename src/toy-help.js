@@ -1389,6 +1389,13 @@ export const TOY_HELP = {
       "A screen made of splats shows a video or a GIF: every pixel of the picture is a small splat whose color changes with each frame. It comes in four styles: an old TV with a wooden cabinet and a curved glass face, a flat TV on a stand, a cinema with red curtains and rows of seats, and a hologram floating above its projector.\n\nTap it to switch it on: the old TV's picture opens from a bright line, the flat TV fades up, the curtains part, or the hologram flickers up from its beam. Tap again to pause and play. Turn on the sound with the speaker button, and open your own video or GIF in the Toy tab.",
   },
 
+  // ---- Lab (lane Lab) -------------------------------------------------------------------
+  "splat-field": {
+    howTo: "Tap to send a pulse through it. Pick a Field in the Toy tab.",
+    about:
+      "Nearly 300,000 splats, and the graphics chip works out where every one of them is, and its color, again every frame. Each splat only knows its own two numbers, u and v; a small program turns them and the time into a place. That is why so many splats can move smoothly at once.\n\nThe galaxy's stars each follow an oval orbit, turned a little more the farther out it is, so the ovals crowd into two spiral arms that stay while every star keeps moving. The ocean is four waves added together, each splat tilted to the water's slope, and the knot is a flow along a knotted tube. Tap to send a bright ring out through the galaxy, drop a stone in the sea, or push the flow once more around the knot.",
+  },
+
   // ---- Holidays -------------------------------------------------------------------------
   "jack-o-lantern": {
     howTo: "Tap to lift the lid; tap again to put it back.",
