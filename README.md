@@ -231,13 +231,15 @@ a tier for the device:
 | Tier | Who gets it                               | Generated toys | Canvas pixel ratio |
 | ---- | ----------------------------------------- | -------------- | ------------------ |
 | low  | 2 GB of memory or less, or two cores      | 60k splats     | up to 1.5          |
-| mid  | phones, and machines with 4 GB or 4 cores | 140k           | up to 2            |
-| high | other desktops, and Detail: High          | 200k           | up to 2            |
+| mid  | phones, and machines with 4 GB or 4 cores | 140k           | up to 3            |
+| high | other desktops, and Detail: High          | 200k           | up to 3            |
 | max  | Detail: Max                               | 280k           | up to 3            |
 
-Captured toys use their lighter file only at the low tier. While the view moves and frames take more
-than about 24 ms, the canvas drops to a lower resolution, and the first still frame is drawn sharp
-again. If frames stay slow even then, an Auto tier steps down one level for the next toy. Detail is
+Captured toys use their lighter file only at the low tier. While you drag the view (or paint) and
+frames take more than about 24 ms, the canvas drops to a lower resolution, and the first still frame
+is drawn sharp again; a toy playing on its own keeps its full resolution. `?sharp=0` puts back the
+renderer from before September 29, 2026 (a cap of 2 on the mid and high tiers, and the drop whenever
+anything moves). If frames stay slow even then, an Auto tier steps down one level for the next toy. Detail is
 kept in this browser only (in `localStorage`); it is never part of a link or a scene file, so a
 shared link cannot force a heavy load on someone's phone.
 

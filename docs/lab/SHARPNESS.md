@@ -12,8 +12,9 @@ resolution, the falloff (kernel) and the tier's splat budget.
 ## The switches
 
 All in `src/sharpness.js`, read at each toy load in `src/player.js` and applied in `src/stage.js`.
-They work only while labs is on (`?labs=1`); with labs off, or with labs on and no switch, the
-renderer is exactly as before (tests/shp.spec.mjs checks the pixels are identical).
+They work only while labs is on (`?labs=1`). Since September 29, 2026 two levers are the default for
+everyone (see "The default since September 29, 2026" below); `?sharp=0` leaves the renderer exactly
+as before (tests/shp.spec.mjs checks the pixels match, labs on or off).
 
 | Switch                         | What it does                                                                                                                                                                         |
 | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -173,3 +174,13 @@ after 30 slow frames still happens during drags.
 ## Recommendation
 
 See "For the Operator" in [docs/handoff/Sharpness.md](../handoff/Sharpness.md).
+
+## The default since September 29, 2026
+
+The owner tried `?labs=1&sharp=1` and said "sharp yes – looks noticeably better". Two levers are now
+on for everyone: the pixel-ratio cap is 3 on the mid and high tiers (`PIXEL_RATIO` in
+`src/player.js`), and the adaptive drop happens only during a drag or a paint stroke (adapt "drag",
+`SHARP_DEFAULT` in `src/sharpness.js`). The cull and the anti-aliasing stay as they were, and the
+other switches stay labs only. `?sharp=0` puts the renderer back exactly as it was before, for
+anyone; in labs, `?adapt=off` turns off only the adapt lever. The Worlds page keeps its own cap of 2
+(lane Worlds decides).

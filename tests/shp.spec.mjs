@@ -1,7 +1,8 @@
 // Lane Sharpness (docs/handoff/Sharpness.md, docs/lab/SHARPNESS.md): the
-// render levers against grain (src/sharpness.js), labs only and off by
-// default. Each switch off leaves the renderer exactly as before; each switch
-// on changes what it should.
+// render levers against grain (src/sharpness.js). Since September 29, 2026
+// two are the default for everyone (the pixel-ratio cap of 3 on the mid and
+// high tiers, and adapt "drag"); ?sharp=0 leaves the renderer exactly as
+// before; the labs switches change what they should.
 
 import { test, expect } from "@playwright/test";
 
@@ -57,7 +58,9 @@ const DEFAULTS = {
   antiAlias: false,
 };
 
-test("picking the levers: labs only, the URL first, then the recipe, else none", async ({
+const DEFAULT = { cull: null, dpr: null, adapt: "drag", aa: false };
+
+test("picking the levers: the default, then labs switches (the URL first, then the recipe)", async ({
   page,
 }) => {
   await page.goto(APP);
@@ -79,24 +82,27 @@ test("picking the levers: labs only, the URL first, then the recipe, else none",
       presetOverride: pickSharpness({ labs: true, params: P("sharp=1&cull=off&dpr=2") }),
       recipe: pickSharpness({ labs: true, params: P(""), recipe: { cull: "low", aa: true } }),
       urlWins: pickSharpness({ labs: true, params: P("cull=off"), recipe: { cull: "low" } }),
+      adaptOff: pickSharpness({ labs: true, params: P("adapt=off&cull=low") }),
+      sharpOff: pickSharpness({ labs: true, params: P("sharp=0&cull=off&aa=1") }),
+      sharpOffPublic: pickSharpness({ labs: false, params: P("sharp=0") }),
     };
   });
   expect(r).toEqual({
-    off: null,
-    none: null,
+    off: DEFAULT,
+    none: DEFAULT,
     unknown: null,
-    cullLow: { cull: { minPixelSize: 1, minContribution: 1.5 }, dpr: null, adapt: null, aa: false },
-    cullOff: { cull: { minPixelSize: 0, minContribution: 0 }, dpr: null, adapt: null, aa: false },
+    cullLow: { cull: { minPixelSize: 1, minContribution: 1.5 }, dpr: null, adapt: "drag", aa: false }, // prettier-ignore
+    cullOff: { cull: { minPixelSize: 0, minContribution: 0 }, dpr: null, adapt: "drag", aa: false },
     cullPx: {
       cull: { minPixelSize: 0.5, minContribution: 0.75 },
       dpr: null,
-      adapt: null,
+      adapt: "drag",
       aa: false,
     },
-    dpr: { cull: null, dpr: 3, adapt: null, aa: false },
-    native: { cull: null, dpr: 3, adapt: null, aa: false },
+    dpr: { cull: null, dpr: 3, adapt: "drag", aa: false },
+    native: { cull: null, dpr: 3, adapt: "drag", aa: false },
     adapt: { cull: null, dpr: null, adapt: "drag", aa: false },
-    aa: { cull: null, dpr: null, adapt: null, aa: true },
+    aa: { cull: null, dpr: null, adapt: "drag", aa: true },
     preset: {
       cull: { minPixelSize: 1, minContribution: 1.5 },
       dpr: 2.625,
@@ -109,18 +115,25 @@ test("picking the levers: labs only, the URL first, then the recipe, else none",
       adapt: "drag",
       aa: false,
     },
-    recipe: { cull: { minPixelSize: 1, minContribution: 1.5 }, dpr: null, adapt: null, aa: true },
-    urlWins: { cull: { minPixelSize: 0, minContribution: 0 }, dpr: null, adapt: null, aa: false },
+    recipe: { cull: { minPixelSize: 1, minContribution: 1.5 }, dpr: null, adapt: "drag", aa: true }, // prettier-ignore
+    urlWins: { cull: { minPixelSize: 0, minContribution: 0 }, dpr: null, adapt: "drag", aa: false },
+    adaptOff: {
+      cull: { minPixelSize: 1, minContribution: 1.5 },
+      dpr: null,
+      adapt: null,
+      aa: false,
+    },
+    sharpOff: null,
+    sharpOffPublic: null,
   });
 });
 
-test("with every switch off the renderer is exactly as before, labs on or off", async ({
-  browser,
-}) => {
+test("with ?sharp=0 the renderer is exactly as before, labs on or off", async ({ browser }) => {
   const shots = {};
-  for (const q of ["&labs=0&adapt=off", "&labs=1&adapt=off"]) {
-    const page = await browser.newPage({ deviceScaleFactor: 2 });
+  for (const q of ["&labs=0&sharp=0", "&labs=1&sharp=0"]) {
+    const page = await browser.newPage({ deviceScaleFactor: 3 });
     const errors = await open(page, q);
+    // The old cap: 2 on the mid tier.
     expect(await state(page)).toMatchObject({ ...DEFAULTS, ratio: 2 });
     // The lever code never ran (it saves the engine's anti-aliasing first).
     expect(await page.evaluate(() => window.__splashery.player.stage.aaDefault)).toBeUndefined();
@@ -130,13 +143,17 @@ test("with every switch off the renderer is exactly as before, labs on or off", 
   }
   // Two page loads never draw bit for bit alike (the sort settles on its own
   // timing), so the same small tolerance as lane Lab's kernel test.
-  expect(diff(shots["&labs=0&adapt=off"], shots["&labs=1&adapt=off"])).toBeLessThan(0.5);
+  expect(diff(shots["&labs=0&sharp=0"], shots["&labs=1&sharp=0"])).toBeLessThan(0.5);
 });
 
-test("without labs no switch does anything", async ({ browser }) => {
+test("without labs only the default applies: the cap of 3 and adapt drag", async ({ browser }) => {
   const page = await browser.newPage({ deviceScaleFactor: 3 });
-  const errors = await open(page, "&labs=0&adapt=off&sharp=1&cull=off&dpr=3&aa=1");
-  expect(await state(page)).toMatchObject({ ...DEFAULTS, ratio: 2 });
+  const errors = await open(page, "&labs=0&sharp=1&cull=off&dpr=2&aa=1");
+  expect(await state(page)).toMatchObject({
+    ...DEFAULTS,
+    sharp: { cull: null, dpr: null, adapt: "drag", aa: false },
+    ratio: 3,
+  });
   expect(errors).toEqual([]);
 });
 
@@ -184,9 +201,11 @@ test("?cull=low draws the far, small splats the default cull drops", async ({ pa
   expect(errors).toEqual([]);
 });
 
-test("?dpr= lifts the tier's pixel-ratio cap", async ({ browser }) => {
+test("?dpr= sets the pixel-ratio cap, and the tier's cap comes back without it", async ({
+  browser,
+}) => {
   const page = await browser.newPage({ deviceScaleFactor: 3 });
-  const errors = await open(page, "&labs=1&adapt=off");
+  const errors = await open(page, "&labs=1&adapt=off&dpr=2");
   const before = await state(page);
   expect(before.ratio).toBe(2);
   await page.evaluate(async () => {
@@ -198,20 +217,22 @@ test("?dpr= lifts the tier's pixel-ratio cap", async ({ browser }) => {
   const after = await state(page);
   expect(after.ratio).toBe(3);
   expect(after.canvas[0]).toBeGreaterThan(before.canvas[0]);
-  // Back to the cap without it.
+  // Back to the mid tier's cap without it: 3 since the default.
   await page.evaluate(async () => {
     const url = new URL(location.href);
     url.searchParams.delete("dpr");
     history.replaceState(null, "", url);
     await window.__splashery.app.chooseToy("penguin");
   });
-  expect((await state(page)).ratio).toBe(2);
+  expect((await state(page)).ratio).toBe(3);
   expect(errors).toEqual([]);
 });
 
-test("?adapt=drag drops the resolution only during a drag", async ({ browser }) => {
-  // Slow frames while the toy plays on its own: the default drops the ratio,
-  // adapt=drag keeps it; during a drag both drop it.
+test("adapt drag (the default) drops the resolution only during a drag", async ({ browser }) => {
+  test.setTimeout(480_000); // three page loads
+  // Slow frames while the toy plays on its own: adapt drag keeps the ratio,
+  // the old behavior (adapt off, or ?sharp=0) drops it; during a drag both
+  // drop it.
   const run = async (q) => {
     const page = await browser.newPage({ deviceScaleFactor: 2 });
     const errors = await open(page, q);
@@ -237,9 +258,11 @@ test("?adapt=drag drops the resolution only during a drag", async ({ browser }) 
     await page.close();
     return r;
   };
-  expect(await run("&labs=1")).toEqual({ playing: true, dragging: true });
-  expect(await run("&labs=1&adapt=drag")).toEqual({ playing: false, dragging: true });
-  expect(await run("&labs=0&adapt=drag")).toEqual({ playing: true, dragging: true });
+  // The default (three page loads, like before, to stay inside the test's time).
+  expect(await run("&labs=0")).toEqual({ playing: false, dragging: true });
+  // Off: the old drop whenever anything moves.
+  expect(await run("&labs=1&adapt=off")).toEqual({ playing: true, dragging: true });
+  expect(await run("&labs=0&sharp=0")).toEqual({ playing: true, dragging: true });
 });
 
 test("?aa=1 turns on the engine's anti-aliased splats, and back", async ({ page }) => {
