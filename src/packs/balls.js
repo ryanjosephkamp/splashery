@@ -99,9 +99,13 @@ function pebbled(c, f, depth = 0.5) {
 }
 
 // A pebbled, lit surface colour.
-function grip(c, col, { f = 60, depth = 0.6, crevice = 0.18, sheen = 0, tight = 30 } = {}) {
+function grip(
+  c,
+  col,
+  { f = 60, depth = 0.6, crevice = 0.18, sheen = 0, tight = 30, soft = 0.22 } = {},
+) {
   const b = pebbled(c, f, depth);
-  return lit(shade(col, 1 - crevice * b.crevice), b.n, { sheen, tight });
+  return lit(shade(col, 1 - crevice * b.crevice), b.n, { sheen, tight, soft });
 }
 
 // A faint shell of round, see-through splats just outside a dark toy. Seen
@@ -1619,15 +1623,23 @@ export const RECIPES = {
         const d90 = Math.abs(a - Math.PI / 2);
         // Crisp white laces: a spine along the seam and eight cross bars.
         const lace = "#f5f2e8";
-        if (Math.abs(y) < 0.55 && d90 < 0.045) return keep(lit(lace, c.n, { sheen: 0.2 }), 0.6);
+        if (Math.abs(y) < 0.55 && d90 < 0.045) return keep(lit(lace, c.n, { sheen: 0.12 }), 0.85);
         if (Math.abs(y) < 0.48 && d90 < 0.19) {
           const bar = Math.abs((((y + 0.48) / 0.12) % 1) - 0.5) > 0.3;
-          if (bar) return keep(lit(lace, c.n, { sheen: 0.2 }), 0.6);
+          if (bar) return keep(lit(lace, c.n, { sheen: 0.12 }), 0.85);
         }
         // Darker, stitched seams between the four panels.
-        if (seamA < 0.022) return keep(lit(shade(o.color, 0.38), c.n), 0.7);
-        // Pebbled pigskin with a soft sheen.
-        return grip(c, o.color, { f: 70, depth: 0.65, crevice: 0.25, sheen: 0.1, tight: 14 });
+        if (seamA < 0.026) return keep(lit(shade(o.color, 0.34), c.n, { soft: 0.4 }), 0.8);
+        // Pebbled pigskin with a soft sheen: fine, shallow pebbles (at phone
+        // size they read as grain, not noise) and fuller light on its form.
+        return grip(c, o.color, {
+          f: 90,
+          depth: 0.28,
+          crevice: 0.1,
+          sheen: 0.16,
+          tight: 9,
+          soft: 0.4,
+        });
       };
       const shape = k.lathe(prof, { grid: 80 });
       const core = k.part("core");
@@ -2151,7 +2163,9 @@ export const RECIPES = {
         // Matte rubber grip: low, even bumps and no shine.
         return grip(c, "#34343a", { f: 45, depth: 0.5, crevice: 0.2 });
       });
-      rim(k, k.sphere(1.035));
+      // A thinner, even rim shell: a crisp edge of light without the gray
+      // haze over the face.
+      rim(k, k.sphere(1.012), { even: true, size: 1, opacity: 0.012 });
       // A puff of dust where it lands: a ring of soft puffs under the ball,
       // built small (inside the ball) and spread by its part, fading out on
       // channel 1.
@@ -2206,7 +2220,9 @@ export const RECIPES = {
         // always on: the glow's strength does the work).
         { core: "#202020", kind: "band", params: [0, 4], channel: 3 },
       );
-      rim(k, k.sphere(1.035));
+      // A thinner, even rim shell: a crisp edge of light without the gray
+      // haze over the face.
+      rim(k, k.sphere(1.012), { even: true, size: 1, opacity: 0.012 });
     },
   },
 
@@ -2243,13 +2259,35 @@ export const RECIPES = {
       const glass = k.part("glass");
       const ball = k.part("ball");
       k.add(k.sphere(1), {
+        even: true,
+        jitter: 0.01,
         part: glass,
         flat: 0.15,
         opacity: 0.16,
         kind: "glint",
-        params: [0.9, 0],
+        params: [0.2, 0],
         pattern: false,
         color: (c) => mix("#e8f4ff", "#ffffff", Math.max(0, c.n[1])),
+      });
+      // A soft highlight on the glass, up and to the left: a spiral of
+      // splats that fade toward its edge.
+      const L = unit([0.21, 0.68, 1]);
+      const e1 = unit(cross(L, [0, 1, 0]));
+      const e2 = cross(e1, L);
+      k.cloud({ count: 700, part: glass, pattern: false, flat: 0.15 }, (rand, i, n) => {
+        const f = (i + 0.5) / n;
+        const th = 0.13 * Math.sqrt(f);
+        const ph = i * 2.399963229728653;
+        const d = [0, 1, 2].map(
+          (j) => L[j] * Math.cos(th) + (e1[j] * Math.cos(ph) + e2[j] * Math.sin(ph)) * Math.sin(th),
+        );
+        return {
+          p: d.map((x) => x * 1.004),
+          n: d,
+          color: "#ffffff",
+          size: 0.9,
+          opacity: 0.55 * (1 - f) ** 1.5,
+        };
       });
       for (let v = 0; v < 3; v++) {
         const base = (v / 3) * TAU;
@@ -2263,6 +2301,9 @@ export const RECIPES = {
           { grid: 48 },
         );
         k.add(vane, {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           part: ball,
           weight: 1.6,
           flat: 0.3,
@@ -2273,6 +2314,7 @@ export const RECIPES = {
   },
 
   "hockey-puck": {
+    density: 2,
     // A slap shot: ice chips spray from the stick, and the puck glides flat
     // across the ice, spinning fast, runs round a wide loop as it slows and
     // slides back to its spot.
@@ -2320,28 +2362,36 @@ export const RECIPES = {
           params: [0.7, rand()],
         };
       });
+      // Vulcanized rubber: smooth, matte faces with a soft sheen, a knurled
+      // band round the side and a crisp lighter edge where the faces meet
+      // the side (no noise, and no see-through shell round the outline).
       k.add(k.cylinder(1, 0.34), {
-        flat: 0.2,
-        jitter: 0.012,
+        flat: 0.15,
+        jitter: 0.006,
         even: true,
+        opacity: 1,
         interior: 0.1,
-        core: "#0c0c0c",
+        core: "#19191b",
         color: (c) => {
           if (c.s.side) {
+            const y = Math.abs(c.lp[1]);
+            // The edge: a thin bevel that catches the light.
+            if (y > 0.155) return keep(lit("#3a3a3d", c.n, { sheen: 0.25, tight: 6 }));
             const a = Math.atan2(c.lp[0], c.lp[2]);
-            const knurl = ((a / TAU) * 120 + 10) % 1 < 0.5 && Math.abs(c.lp[1]) < 0.12;
-            return keep(lit(knurl ? "#303032" : "#18181a", c.n, { sheen: 0.12, tight: 8 }));
+            // A diamond knurl: two sets of fine grooves crossing, smoothed so
+            // they don't flicker at phone size.
+            const g1 = Math.cos(TAU * ((a / TAU) * 90 + c.lp[1] * 14));
+            const g2 = Math.cos(TAU * ((a / TAU) * 90 - c.lp[1] * 14));
+            const band = smoothstep(0.125, 0.11, y);
+            const k1 = band * 0.5 * (smoothstep(0.2, 0.8, g1) + smoothstep(0.2, 0.8, g2));
+            return keep(lit(mix("#1c1c1e", "#29292c", k1), c.n, { sheen: 0.14, tight: 8 }));
           }
           const r = c.s.radial ?? 0;
-          return Math.abs(r - 0.72) < 0.015
-            ? keep(lit("#343436", c.n))
-            : lit(shade("#1b1b1d", 0.95 + 0.1 * c.noise(c.lp[0] * 30, 0, c.lp[2] * 30)), c.n, {
-                sheen: 0.12,
-                tight: 10,
-              });
+          if (r > 0.975) return keep(lit("#3a3a3d", c.n, { sheen: 0.25, tight: 6 }));
+          if (Math.abs(r - 0.72) < 0.012) return keep(lit("#343436", c.n));
+          return lit(shade("#1c1c1e", 1 + 0.04 * r), c.n, { sheen: 0.14, tight: 10 });
         },
       });
-      rim(k, k.cylinder(1.035, 0.37));
     },
   },
 
@@ -2365,6 +2415,9 @@ export const RECIPES = {
     build(k) {
       // The cork: a rounded base under a short band.
       k.add(k.sphere(0.3), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: [0, -0.62, 0],
         scale: [1, 0.85, 1],
         flat: 0.25,
@@ -2372,14 +2425,29 @@ export const RECIPES = {
         color: (c) => (c.lp[1] > 0 ? null : pebble(c, "#e9dcc2", 0.1, 30)),
       });
       k.add(k.cylinder(0.3, 0.14, { caps: "top" }), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: [0, -0.55, 0],
         flat: 0.25,
         color: (c) => (c.s.cap ? "#f1ece3" : keep("#233a8f")),
       });
       // The skirt of sixteen feathers, scalloped at the top.
       const H = 1.25;
-      k.add(k.cone(0.27, 0.66, H, { caps: false }), {
+      // A lathe rather than k.cone: its even placement has no lattice.
+      const skirt = k.lathe(
+        [
+          [0.27, -H / 2],
+          [0.465, 0],
+          [0.66, H / 2],
+        ],
+        { grid: 96 },
+      );
+      k.add(skirt, {
+        opacity: 1,
+        jitter: 0.015,
         pos: [0, -0.48 + H / 2, 0],
+        even: true,
         flat: 0.25,
         color: (c) => {
           const a = Math.atan2(c.lp[0], c.lp[2]);
