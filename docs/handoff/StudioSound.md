@@ -74,23 +74,21 @@ clips to the Effect review page; check the owner's marks hourly.)
 
 Model: Sonnet 5.5 (claude-sonnet-5-5), default effort.
 
-Started September 29, 2026.
+Started September 29, 2026. Both toys are finished and on PR #80 (with the engine PR #81 merged in).
 
-- Done: the Studio shelf (`studio`, after "Pictures and pages"); the Chladni plate (`chladni-plate`,
-  complete: eight modes, a bow, twelve sand copies morphing into each other, the hum as a cue whose
-  pitch follows the mode); the spectrogram (`src/packs/studio-audio.js`: Hann-windowed FFT, musical
-  bands, dB, pooling for long songs) with tests on synthetic sounds; the song landscape
-  (`song-landscape`) on its sample tune, with a waveform along the left edge and a gliding marker;
-  help texts, sounds, plan entries; `tests/sts.spec.mjs`.
-- Waiting on an engine PR (see "For the Operator"): opening your own sound file, and playing the
-  song through the speaker button. The toy is written against that interface; until it lands the
-  sample plays silently (the marker still glides) and "Open a song" cannot read a file.
-- Also done: thumbnails, contact sheet, credits, `sts-*` screenshots, the full suite (305 of 307
-  passed; the two failures were the missing thumbnails, now added), prettier and us-english clean.
-  Cards on the Effect review page (lane StudioSound): `sts-chladni`, `sts-chladni-mode2`, `sts-song`
-  (all labeled built by Sonnet 5.5).
-- Not done yet: camera glide (the marker glides; the view does not follow), sound and file opening
-  (engine PR).
+- Chladni plate: eight modes, a bow, twelve sand copies, the hum at the mode's pitch.
+- Song landscape: real spectrogram, open your own song (Toy tab), the tap plays it through the
+  speaker button, the marker and the view glide along the time axis, waveform along the left edge.
+- The owner's mark (September 29): all three cards "fix", "Looks great. Can we increase the
+  resolution? ... the toy seems grainy." It was the toys, not the GIFs: the plate top and the floor
+  were grids of dots and the landscape's splats left gaps. Fixed with solid sheets of overlapping
+  flat discs (`sheet()` in `src/packs/studio.js`), 2.5 times the sand grains (recipe density 2,
+  still within the tier caps), overlapping landscape splats and 40 slices a second. r2 cards and
+  full-resolution stills are posted; the old cards are marked replaced.
+- Cards (lane StudioSound): `sts-chladni-r2`, `sts-chladni-mode2-r2`, `sts-song-r2`, `sts-song-own`,
+  and the stills `sts-chladni-still`, `sts-chladni-mode2-still`, `sts-song-still`.
+- Checks: the full suite (324 of 325 on the last run; the one failure was my own budget test, fixed
+  and passing), prettier, us-english, check-packs, contact sheet, thumbnails, `sts-*` screenshots.
 
 ## Notes
 
@@ -113,31 +111,18 @@ Started September 29, 2026.
 
 ## Known issues
 
-- The camera does not glide with the marker yet.
 - After the song ends the toggle stays on: one extra tap is needed before it plays again.
+- The Chladni sand's second tap plays its journey backwards (stirring it up again).
+- Only the sample plays silently in the clips (the clip tool has no sound); the sound itself is
+  tested in `tests/sts.spec.mjs` (a file opened, the tap plays it, the second tap pauses).
+- The sample tune is our own (Wikimedia Commons refused requests from the container).
 
 ## For the Operator
 
-**Engine request (Opus), small and additive.** Two things the song landscape needs, and nothing else
-in `src/` changes for it:
-
-1. **Opening a binary file in the input panel** (`src/ui.js`, `renderInputPanel`, the `file`
-   `change` handler, about line 1000). Now it always does `apply(await f.text(), f.name)`, which
-   mangles audio. Wanted: when the recipe's `input.binary` is true, skip `f.text()` and call
-   `input.read("", f.name, f)`, so `read(text, fileName, file)` gets the `File` (the same handler
-   otherwise; `accept` already sets the picker's filter). The toy decodes it itself with
-   `OfflineAudioContext.decodeAudioData` and keeps the samples in its module (like the protein toy),
-   returning small option values (`{ song: "custom", songName }`), which rebuilds the toy. Keep the
-   40 MB limit. Test: a recipe with `input.binary` receives the File.
-2. **The site's sound in the recipe's drive info** (`src/motion.js`, where `about` is built, about
-   line 222: `const about = { time, R, tap: this.tap, data: ... }`). Wanted: `sound` in it, the
-   app's `Sound` object (`src/sound.js`), so `drive` can read `info.sound.enabled` (the speaker
-   button) and use `info.sound.audio()` and `info.sound.master` to start a decoded
-   `AudioBufferSourceNode` through the site's limiter. Embeds already keep `enabled` off. Plumbing:
-   `Player` needs a `setSound(sound)` (like `setMediaSound`) that `App` calls once. The toy already
-   codes against `info.sound?.enabled`, `.audio()` and `.master`, and falls back to silence. Test:
-   `info.sound` is the same object as `app.sound`.
-
-Nothing else: the playback time is read from `AudioContext.currentTime` inside the toy.
-
-The Chladni plate needs no engine change and is complete.
+- Engine PR #81 (input.binary and info.sound) is used as built; nothing more needed.
+- `tools/sts-clip.mjs` is a copy of effect-clip.mjs that opens a made-up song first; a lesson for
+  PACKS.md: a flat surface made of a cloud of splats needs overlapping flat discs (two staggered
+  lattices, diameter about 1.3 times the spacing, `sheet()` in `src/packs/studio.js`); box surfaces
+  at a low share read as a grid of dots.
+- A lesson for PACKS.md: many separately moving grains can be twelve copies of the sand, one visible
+  at a time, each grain morphing into its next place (as the splat equation toy does).

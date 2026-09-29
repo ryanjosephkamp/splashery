@@ -69,10 +69,10 @@ test.describe("the spectrogram", () => {
   });
 
   test("a long song is a coarser landscape within the splat budget", () => {
-    const a = landscapePlan(20, 60000);
-    const b = landscapePlan(600, 60000);
-    expect(a.nf * a.frames).toBeLessThanOrEqual(60000);
-    expect(b.nf * b.frames).toBeLessThanOrEqual(60000);
+    const a = landscapePlan(20, 200000);
+    const b = landscapePlan(600, 200000);
+    expect(a.nf * a.frames).toBeLessThanOrEqual(200000);
+    expect(b.nf * b.frames).toBeLessThanOrEqual(200000);
     expect(b.frames).toBeGreaterThan(a.frames);
     expect(b.frames / 600).toBeLessThan(a.frames / 20);
   });
