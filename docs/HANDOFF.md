@@ -45,15 +45,15 @@ work is in [OPERATING.md](OPERATING.md).
   with near and far detail, the Toy tab can open a file or a web address, and the Picture lab test
   toy sits behind the labs switch (`?labs=1`). The owner marked all eight clips good. Lane Manual
   merged next (#65): the splat equation toy (type where splats go, in u, v and t; labs only) and the
-  public Tinkerer's Manual at `manual/`, with a 25-page PDF, linked from the About tab. Lanes Books
-  and Screens are still building; their first PRs (#67 and #66) merged early with only their handoff
-  files, so each opens a new PR for its toys.
-- The shelf has 303 toys (32 scans, 4 shapes and 267 kit toys), plus two labs toys hidden unless
-  `?labs=1` (the Picture lab and the splat equation). The plan (`tools/toy-plan.json`,
-  [TOY-PLAN.md](TOY-PLAN.md)): all 305 keep. Every planned new tap effect is built. Scene schema v3;
-  v2 still loads.
+  public Tinkerer's Manual at `manual/`, with a 25-page PDF, linked from the About tab. Lane Screens
+  merged on September 29 (#72, with engine PR #71): the Screen in four styles and the Gaussian
+  splatting toy. Lane Books is finishing (#73, with engine PR #74).
+- The shelf has 303 toys (32 scans, 4 shapes and 267 kit toys), plus four labs toys hidden unless
+  `?labs=1` (the Picture lab, the splat equation, the Screen and Gaussian splatting). The plan
+  (`tools/toy-plan.json`, [TOY-PLAN.md](TOY-PLAN.md)): all 307 keep. Every planned new tap effect is
+  built. Scene schema v3; v2 still loads.
 - Every kit toy's tap is checked by `tests/taps.spec.mjs`; its known exceptions (with reasons) are
-  listed at its top. The full suite has 280 tests.
+  listed at its top. The full suite has 289 tests.
 - The governance from September 27 is merged (#53): the Operator runs the lanes, workers are Opus
   5.5 only, new public text is in American English (`tools/us-english.mjs`), and the sound review
   runs on the Sound Board. Splashery's own code is MIT licensed (#51, `LICENSE`); assets keep their
@@ -76,7 +76,6 @@ The full table, with owned files, sessions, branches and PRs, is [WORKSTREAMS.md
 | --------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
 | Operator                                                  | Running; runs the lanes                                                                                               | —                                                |
 | Books: your book, the photo album and the picture frame   | Running (started September 28, 2026)                                                                                  | [handoff/Books.md](handoff/Books.md)             |
-| Screens: the screen and the Gaussian splat toy            | Running (started September 28, 2026)                                                                                  | [handoff/Screens.md](handoff/Screens.md)         |
 | Viewer: whole PDF figures, tilt lock and top-bar settings | Running, Opus 5.5 (September 29, 2026)                                                                                | [handoff/Viewer.md](handoff/Viewer.md)           |
 | Worlds: the world engine and a sandbox island             | Running, Opus 5.5 (September 29, 2026)                                                                                | [handoff/Worlds.md](handoff/Worlds.md)           |
 | Fidelity A: the grainy-toy audit                          | Running, Opus 5.5 (September 29, 2026)                                                                                | [handoff/FidelityA.md](handoff/FidelityA.md)     |
@@ -84,10 +83,10 @@ The full table, with owned files, sessions, branches and PRs, is [WORKSTREAMS.md
 | Integrator: combined test runs                            | Running, Sonnet 5.5 (September 29, 2026)                                                                              | —                                                |
 | Next (WORKSTREAMS.md, Next)                               | Sound A and B (when the owner's notes arrive), the manual audit and lab notebook, Fidelity B, Studio: 3D models, Lab… | —                                                |
 
-E4-finish, E5, E6a, E6b, F, G, Math, Fix3, AI, Help, HelpTextA, HelpTextB, Pictures and Manual are
-done (WORKSTREAMS.md, "Done"). On September 27, 2026 the owner approved the plan in Part 1 of the
-How Splashery Is Made page: the Operator runs the lanes, workers are Opus 5.5 only (at the default
-effort, a trial), new public text is in American English, and the work goes in the order in
+E4-finish, E5, E6a, E6b, F, G, Math, Fix3, AI, Help, HelpTextA, HelpTextB, Pictures, Manual and
+Screens are done (WORKSTREAMS.md, "Done"). On September 27, 2026 the owner approved the plan in Part
+1 of the How Splashery Is Made page: the Operator runs the lanes, workers are Opus 5.5 only (at the
+default effort, a trial), new public text is in American English, and the work goes in the order in
 ROADMAP.md, "Now". Lanes AI and Math started that day, and the Sound Board has its review features,
 ready for the owner's sound notes.
 

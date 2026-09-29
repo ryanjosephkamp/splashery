@@ -15,7 +15,8 @@ which is which) is planned for the blog.
 
 ## Entries
 
-| Date               | Lane     | Model    | What it built                                                               | Notes                                                                         |
-| ------------------ | -------- | -------- | --------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| September 28, 2026 | Manual   | Opus 5.5 | The splat equation toy and the Tinkerer's Manual with its 25-page PDF (#65) | About 2.5 hours; all five cards marked good the first time.                   |
-| September 28, 2026 | Pictures | Opus 5.5 | The picture engine: PDFs, photos, GIFs and videos into splats (#64)         | All eight clips marked good; a book of 200 pages kept about 19k splats shown. |
+| Date               | Lane     | Model    | What it built                                                                                          | Notes                                                                             |
+| ------------------ | -------- | -------- | ------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------- |
+| September 28, 2026 | Manual   | Opus 5.5 | The splat equation toy and the Tinkerer's Manual with its 25-page PDF (#65)                            | About 2.5 hours; all five cards marked good the first time.                       |
+| September 28, 2026 | Pictures | Opus 5.5 | The picture engine: PDFs, photos, GIFs and videos into splats (#64)                                    | All eight clips marked good; a book of 200 pages kept about 19k splats shown.     |
+| September 29, 2026 | Screens  | Opus 5.5 | The Screen in four styles and the Gaussian splatting toy with a real fit in a worker (#72, engine #71) | About 6 hours; seven of eight clips good the first time, the sorting clip redone. |
