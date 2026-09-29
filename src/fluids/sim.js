@@ -37,11 +37,11 @@ export const KIND = {
 // surface holds together), friction at walls, foam and fizz (soda), glow
 // (lava's own light) and the color.
 export const LIQUIDS = {
-  water: { color: "#8fc8ec", viscosity: 0.02, cohesion: 0.06, friction: 0.05, foam: 0.35, fizz: 0, glow: 0 }, // prettier-ignore
-  soda: { color: "#5a2a14", viscosity: 0.03, cohesion: 0.06, friction: 0.05, foam: 1, fizz: 1, glow: 0 }, // prettier-ignore
-  syrup: { color: "#b8641c", viscosity: 0.45, cohesion: 0.12, friction: 0.4, foam: 0, fizz: 0, glow: 0 }, // prettier-ignore
-  honey: { color: "#e0a019", viscosity: 0.75, cohesion: 0.16, friction: 0.7, foam: 0, fizz: 0, glow: 0 }, // prettier-ignore
-  lava: { color: "#ff5a12", viscosity: 0.9, cohesion: 0.2, friction: 0.85, foam: 0, fizz: 0, glow: 1 }, // prettier-ignore
+  water: { color: "#8fc8ec", viscosity: 0.02, cohesion: 0.06, friction: 0.05, foam: 0.15, fizz: 0, glow: 0 }, // prettier-ignore
+  soda: { color: "#3b190b", viscosity: 0.03, cohesion: 0.06, friction: 0.05, foam: 1, fizz: 1, glow: 0 }, // prettier-ignore
+  syrup: { color: "#b8641c", viscosity: 0.45, cohesion: 0.12, friction: 0.4, foam: 0, fizz: 0, glow: 0, stretch: 0.1 }, // prettier-ignore
+  honey: { color: "#e0a019", viscosity: 0.75, cohesion: 0.16, friction: 0.7, foam: 0, fizz: 0, glow: 0, stretch: 0.16 }, // prettier-ignore
+  lava: { color: "#ff5a12", viscosity: 0.9, cohesion: 0.12, friction: 0.85, foam: 0, fizz: 0, glow: 1, stretch: 0.16 }, // prettier-ignore
 };
 
 // ---- Colliders ----------------------------------------------------------------------------
@@ -328,7 +328,7 @@ export class Liquid {
     this.drain = 0;
     this.time = 0;
     // Diffuse particles: spray, foam and bubbles.
-    this.dcap = Math.round(cap * (this.foam > 0 || this.fizz > 0 ? 0.45 : 0.12));
+    this.dcap = Math.round(cap * (this.fizz > 0 ? 1.2 : this.foam > 0 ? 0.45 : 0.12));
     this.dn = 0;
     this.dpos = new Float32Array(this.dcap * 3);
     this.dvel = new Float32Array(this.dcap * 3);
@@ -425,42 +425,55 @@ export class Liquid {
     return made;
   }
 
-  // The emitter: a disc of radius `radius` at `at`, facing `dir`, that sends
-  // out a layer of particles each time the flow has moved one spacing.
+  // The emitter: a disc of radius `radius` at `at`, facing `dir`. It sends
+  // out a layer of particles (a hexagonal disc at least one particle wide)
+  // each time the flow has carried one layer's volume through the nozzle,
+  // so it pours the same volume on every tier.
   emit(dt) {
     const e = this.emitter;
     if (!e || !e.on || e.flow <= 0) return;
     const speed = (e.speed ?? 1) * e.flow;
-    e.travel += speed * dt;
     const d = this.d;
+    const R = Math.max(e.radius ?? d, 0.01);
+    if (!e.layer || e.layerR !== R || e.layerD !== d) {
+      const pts = [];
+      const Re = Math.max(R, d * 0.75);
+      const m = Math.ceil(Re / d);
+      for (let a = -m; a <= m; a++)
+        for (let b = -m; b <= m; b++) {
+          const ra = (a + (b & 1) * 0.5) * d;
+          const rb = b * d * 0.866;
+          if (ra * ra + rb * rb <= Re * Re + 1e-9) pts.push([ra, rb]);
+        }
+      e.layer = pts;
+      e.layerR = R;
+      e.layerD = d;
+      // How far the flow moves while one layer's volume passes.
+      e.gap = (pts.length * d ** 3) / (Math.PI * R * R);
+    }
+    e.travel += speed * dt;
     const dir = unit3(e.dir || [0, -1, 0]);
     const [ux, uy, uz] = perp(dir);
     const vx = dir[1] * uz - dir[2] * uy;
     const vy = dir[2] * ux - dir[0] * uz;
     const vz = dir[0] * uy - dir[1] * ux;
-    const R = Math.max(e.radius ?? d, d * 0.5);
     const at = e.at;
-    while (e.travel >= d) {
-      e.travel -= d;
+    while (e.travel >= e.gap) {
+      e.travel -= e.gap;
       const lag = e.travel; // how far this layer has already gone
       const spin = this.rand() * 6.283;
       const cs = Math.cos(spin);
       const sn = Math.sin(spin);
-      const m = Math.ceil(R / d);
-      for (let a = -m; a <= m; a++)
-        for (let b = -m; b <= m; b++) {
-          const ra = (a + (b & 1) * 0.5) * d;
-          const rb = b * d * 0.866;
-          if (ra * ra + rb * rb > R * R + 1e-9) continue;
-          const pa = ra * cs - rb * sn;
-          const pb = ra * sn + rb * cs;
-          // Staggered along the flow, so a stream isn't a stack of discs.
-          const l = lag + (this.rand() - 0.5) * d * 0.9;
-          const x = at[0] + ux * pa + vx * pb + dir[0] * l;
-          const y = at[1] + uy * pa + vy * pb + dir[1] * l;
-          const z = at[2] + uz * pa + vz * pb + dir[2] * l;
-          if (this.spawn(x, y, z, dir[0] * speed, dir[1] * speed, dir[2] * speed) < 0) return;
-        }
+      for (const [ra, rb] of e.layer) {
+        const pa = ra * cs - rb * sn;
+        const pb = ra * sn + rb * cs;
+        // Staggered along the flow, so a stream isn't a stack of discs.
+        const l = lag + (this.rand() - 0.5) * Math.min(d, e.gap) * 0.9;
+        const x = at[0] + ux * pa + vx * pb + dir[0] * l;
+        const y = at[1] + uy * pa + vy * pb + dir[1] * l;
+        const z = at[2] + uz * pa + vz * pb + dir[2] * l;
+        if (this.spawn(x, y, z, dir[0] * speed, dir[1] * speed, dir[2] * speed) < 0) return;
+      }
     }
   }
 
@@ -649,7 +662,9 @@ export class Liquid {
         pos[i3] += dp[i3];
         pos[i3 + 1] += dp[i3 + 1];
         pos[i3 + 2] += dp[i3 + 2];
-        if (wd[i] > 9e8) continue;
+        // Walls: every pass for particles touching one, the last pass for
+        // those near one (the wall term keeps the rest off).
+        if (wd[i] >= 1e8 || (!last && wd[i] > rad * 1.3)) continue;
         collide(this.colliders, pos, i, old[i3], old[i3 + 1], old[i3 + 2], rad, last ? this.friction : 0); // prettier-ignore
         this.wall(i);
       }
@@ -1036,19 +1051,22 @@ export class Liquid {
         const v = Math.hypot(vel[i * 3], vel[i * 3 + 1], vel[i * 3 + 2]);
         const e = v / vRef - 0.35;
         if (e <= 0) continue;
-        if (rand() > e * foam * dt * 14) continue;
+        if (rand() > e * foam * dt * (14 + 40 * fizz)) continue;
         const kind = count[i] < 8 ? KIND.spray : KIND.foam;
         const j = 0.5 * d;
-        this.spawnDiffuse(
-          kind,
-          pos[i * 3] + (rand() - 0.5) * j,
-          pos[i * 3 + 1] + (rand() - 0.5) * j,
-          pos[i * 3 + 2] + (rand() - 0.5) * j,
-          vel[i * 3] * 0.8,
-          vel[i * 3 + 1] * 0.8,
-          vel[i * 3 + 2] * 0.8,
-          kind === KIND.spray ? 0.8 : 1.5 + 2.5 * fizz,
-        );
+        // A soda traps more air: several flecks per splash, for a head.
+        const m = kind === KIND.foam ? 1 + Math.round(3 * fizz) : 1;
+        for (let k = 0; k < m; k++)
+          this.spawnDiffuse(
+            kind,
+            pos[i * 3] + (rand() - 0.5) * j * (1 + k),
+            pos[i * 3 + 1] + (rand() - 0.5) * j,
+            pos[i * 3 + 2] + (rand() - 0.5) * j * (1 + k),
+            vel[i * 3] * 0.8,
+            vel[i * 3 + 1] * 0.8,
+            vel[i * 3 + 2] * 0.8,
+            kind === KIND.spray ? 0.8 : (1.2 + 3.5 * fizz) * (0.6 + 0.8 * rand()),
+          );
       }
     }
     if (n && fizz > 0) {
@@ -1116,9 +1134,14 @@ export class Liquid {
       let kind = this.dkind[i];
       // Classify by how deep in the liquid it is.
       if (kind === KIND.bubble && c < 10) {
+        // At the top most bubbles pop; a few gather as a thin ring of foam.
+        if (rand() > 0.15) {
+          this.removeDiffuse(i);
+          continue;
+        }
         kind = KIND.foam;
         this.dage[i] = 0;
-        this.dlife[i] = 1.2 + 2.8 * fizz * rand() + foam;
+        this.dlife[i] = 0.6 + rand() * 0.9;
       } else if (kind === KIND.spray && c >= 10) kind = KIND.foam;
       else if (kind === KIND.foam && c < 2 && this.dvel[i3 + 1] < -rise) kind = KIND.spray;
       this.dkind[i] = kind;
@@ -1140,10 +1163,12 @@ export class Liquid {
           vy = ly + rise * (0.7 + 0.6 * this.dseed[i]);
           vz = lz + Math.cos(t * 1.3) * rise * 0.12;
         } else {
-          // Foam rides the surface: carried along, held at the top.
-          vx = lx;
-          vz = lz;
-          vy = ly + (c > 14 ? rise * 0.6 : c < 5 ? -rise * 0.5 : 0);
+          // Foam rides the surface: carried along, floated up until it sits
+          // on top of the liquid (few liquid neighbors, all below).
+          // (a little wander, so a head spreads over the whole top)
+          vx = lx + (rand() - 0.5) * rise * 0.5;
+          vz = lz + (rand() - 0.5) * rise * 0.5;
+          vy = ly + (c > 7 ? rise * 0.7 : c < 2 ? -rise * 0.4 : 0);
         }
       } else if (kind === KIND.foam) {
         vy += g[1] * dt;
@@ -1518,6 +1543,7 @@ const SHAPE_C = new Float64Array(9);
 const EIG = { val: new Float64Array(3), vec: new Float64Array(9) };
 const EA = new Float64Array(9);
 const EV = new Float64Array(9);
+const ORDER = [0, 1, 2];
 
 // Eigenvalues (largest first) and unit eigenvectors (rows of vec) of a
 // symmetric 3x3 matrix, by Jacobi rotations.
@@ -1530,11 +1556,9 @@ export function eigen3(m) {
   for (let sweep = 0; sweep < 8; sweep++) {
     const off = a[1] * a[1] + a[2] * a[2] + a[5] * a[5];
     if (off < 1e-22) break;
-    for (const [p, q] of [
-      [0, 1],
-      [0, 2],
-      [1, 2],
-    ]) {
+    for (let r = 0; r < 3; r++) {
+      const p = r === 2 ? 1 : 0;
+      const q = r === 0 ? 1 : 2;
       const apq = a[p * 3 + q];
       if (Math.abs(apq) < 1e-30) continue;
       const theta = (a[q * 3 + q] - a[p * 3 + p]) / (2 * apq);
@@ -1561,13 +1585,24 @@ export function eigen3(m) {
       }
     }
   }
-  const order = [0, 1, 2].sort((x, y) => a[y * 4] - a[x * 4]);
-  order.forEach((col, r) => {
+  // Largest first (a three-item sort).
+  let i0 = 0;
+  let i1 = 1;
+  let i2 = 2;
+  let t;
+  if (a[i1 * 4] > a[i0 * 4]) [t, i0, i1] = [i0, i1, i0];
+  if (a[i2 * 4] > a[i1 * 4]) [t, i1, i2] = [i1, i2, i1];
+  if (a[i1 * 4] > a[i0 * 4]) [t, i0, i1] = [i0, i1, i0];
+  ORDER[0] = i0;
+  ORDER[1] = i1;
+  ORDER[2] = i2;
+  for (let r = 0; r < 3; r++) {
+    const col = ORDER[r];
     EIG.val[r] = a[col * 4];
     EIG.vec[r * 3] = v[col];
     EIG.vec[r * 3 + 1] = v[3 + col];
     EIG.vec[r * 3 + 2] = v[6 + col];
-  });
+  }
   return EIG;
 }
 

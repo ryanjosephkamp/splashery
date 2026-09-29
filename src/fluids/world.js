@@ -9,7 +9,7 @@ import { mulberry32 } from "../noise.js";
 import { mixSeed } from "../noise.js";
 
 // How much of a recipe's budget each tier gets (the budget is for "high").
-export const TIER_SCALE = { low: 0.4, mid: 0.6, high: 1, max: 1.35 };
+export const TIER_SCALE = { low: 0.35, mid: 0.45, high: 1, max: 1.35 };
 
 // The longest liquid step (s), and the most steps per frame: a slow device
 // runs the liquid in slow motion rather than taking steps it can't keep.
@@ -289,7 +289,7 @@ export class FluidWorld {
         opacity: spec.opacity ?? (sys.kind === "gas" ? (spec.look === "steam" ? 0.22 : 0.3) : sys.kind === "vessel" ? 0.5 : 0.97), // prettier-ignore
         size: size * s,
         glow: spec.glow ?? preset.glow ?? 0,
-        stretch: spec.stretch ?? (sys.kind === "liquid" ? 0.06 : 0.04),
+        stretch: spec.stretch ?? preset.stretch ?? (sys.kind === "liquid" ? 0.06 : 0.04),
       };
     });
   }

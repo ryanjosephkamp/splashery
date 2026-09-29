@@ -19,10 +19,10 @@ const UNIT = 0.33;
 const TAP_SECS = 5;
 
 export const LIQUID_LOOKS = {
-  water: { preset: "water", nozzle: { speed: 1.6, radius: 0.055 }, pour: 2.4 },
-  soda: { preset: "soda", nozzle: { speed: 1.6, radius: 0.055 }, pour: 2.4 },
-  honey: { preset: "honey", nozzle: { speed: 0.75, radius: 0.085 }, pour: 3.2 },
-  lava: { preset: "lava", nozzle: { speed: 0.7, radius: 0.09 }, pour: 3.2 },
+  water: { preset: "water", nozzle: { speed: 1.6, radius: 0.08 }, pour: 2.4 },
+  soda: { preset: "soda", nozzle: { speed: 1.6, radius: 0.08 }, pour: 2.4 },
+  honey: { preset: "honey", nozzle: { speed: 0.75, radius: 0.1 }, pour: 3.2 },
+  lava: { preset: "lava", nozzle: { speed: 0.75, radius: 0.1 }, pour: 3.2 },
 };
 
 // The glass (recipe units, standing on y = 0).
@@ -41,8 +41,8 @@ function wood(c) {
 
 // A glass, drawn by the fluid engine (kind "vessel"): clear where you look
 // straight through it and bright toward its edges, as real glass is.
-function glass(k, g) {
-  k.fluid({ name: "glass", kind: "vessel", shape: g, budget: 9000, color: "#dcedf5" });
+function glass(k, g, budget = 9000) {
+  k.fluid({ name: "glass", kind: "vessel", shape: g, budget, color: "#dcedf5" });
   k.reach([g.at[0] + g.radius + g.wall, g.at[1] + g.height, g.at[2] + g.radius + g.wall]);
   k.reach([g.at[0] - g.radius - g.wall, g.at[1], g.at[2] - g.radius - g.wall]);
 }
@@ -87,8 +87,8 @@ function glassScene(k, o) {
     kind: "liquid",
     preset: look.preset,
     unit: UNIT,
-    spacing: 0.048,
-    budget: 1800,
+    spacing: 0.052,
+    budget: 1200,
     colliders: [GLASS, { type: "floor", y: 0 }],
     fill: { cylinder: { at: [0, 0.05, 0], radius: 0.3, height: 0.3 } },
     emitter: { at: NOZZLE, dir: [0, -1, 0], ...look.nozzle },
@@ -98,52 +98,34 @@ function glassScene(k, o) {
   k.data = { scene: "glass", pour: look.pour };
 }
 
-const BOWL = { type: "bowl", at: [0, 0.55, 0], radius: 0.85, wall: 0.05 };
+// A wide, shallow glass basin (seen through, so the pool shows from the side).
+const BASIN = { type: "glass", at: [0, 0, 0], radius: 0.78, height: 0.4, wall: 0.03, bottom: 0.04 };
 
 function splashScene(k, o) {
   const look = LIQUID_LOOKS[o.liquid] || LIQUID_LOOKS.water;
-  k.add(k.cylinder(1.15, 0.06), { pos: [0, -0.36, 0], color: wood, even: true });
-  // A glazed bowl: a half sphere open at the top, with a rolled rim.
-  const R = BOWL.radius + BOWL.wall / 2;
-  k.add(
-    k.param(
-      (u, v) => {
-        const th = u * Math.PI * 2;
-        const ph = (v * Math.PI) / 2;
-        return [
-          R * Math.cos(th) * Math.cos(ph),
-          -R * Math.sin(ph),
-          R * Math.sin(th) * Math.cos(ph),
-        ];
-      },
-      { grid: 64 },
-    ),
-    {
-      pos: BOWL.at,
-      color: (c) => mix("#f1ece2", "#2f6f8f", 0.85 * (c.p[1] < 0.5 ? 1 : 0.2)),
-      even: true,
-      flat: 0.3,
-    },
-  );
-  k.add(k.torus(R, BOWL.wall * 0.6), { pos: BOWL.at, color: "#f4efe5", share: 0.03, even: true });
-  k.add(k.cylinder(0.3, 0.08), { pos: [0, -0.31, 0], color: "#2f6f8f", even: true });
+  k.add(k.cylinder(1.05, 0.06), { pos: [0, -0.03, 0], color: wood, even: true });
+  glass(k, BASIN, 12000);
   k.fluid({
     name: "liquid",
     kind: "liquid",
     preset: look.preset,
     unit: UNIT,
-    spacing: 0.056,
-    budget: 1600,
-    colliders: [BOWL],
-    fill: { sphere: { at: BOWL.at, radius: BOWL.radius }, below: 0.02 },
+    spacing: 0.06,
+    budget: 1300,
+    colliders: [BASIN, { type: "floor", y: 0 }],
+    fill: { cylinder: { at: [0, 0.04, 0], radius: 0.76, height: 0.13 } },
   });
-  k.reach([0, 1.9, 0]);
+  k.reach([0, 1.75, 0]);
   k.data = { scene: "splash" };
 }
 
 function candleScene(k) {
   k.add(k.cylinder(0.5, 0.05), { pos: [0, 0.025, 0], color: "#c9b27c", even: true });
-  k.add(k.torus(0.5, 0.025), { pos: [0, 0.05, 0], color: "#d8c38c", share: 0.02, even: true });
+  k.add(k.cylinder(0.5, 0.03, { caps: false }), {
+    pos: [0, 0.05, 0],
+    color: "#d8c38c",
+    even: true,
+  });
   // Wax: warm cream, lighter at the top where the flame lights it.
   k.add(k.cylinder(0.17, 0.85), {
     pos: [0, 0.475, 0],
@@ -152,6 +134,8 @@ function candleScene(k) {
         ? mix("#f3e6c8", "#fff4d8", 0.5)
         : mix("#e8d7b0", "#fbf0d6", Math.min(1, Math.max(0, (c.p[1] - 0.3) / 0.6))),
     even: true,
+    weight: 2,
+    size: 1.2,
   });
   // The melted pool on top and the wick.
   k.add(k.disc(0.12), { pos: [0, 0.902, 0], color: "#f7e9c9", share: 0.01 });
@@ -168,7 +152,7 @@ function candleScene(k) {
     rise: 0.75,
     turbulence: 0.55,
     height: 0.7,
-    source: { at: [0, 1.3, 0], radius: 0.015, rate: 0, on: false },
+    source: { at: [0, 0.99, 0], radius: 0.012, rate: 260, speed: 0.5, on: false },
   });
   k.fluid({
     name: "flame",
@@ -190,7 +174,11 @@ function candleScene(k) {
 function cupScene(k) {
   // A saucer, a mug with a handle, and hot coffee with a light crema ring.
   k.add(k.cylinder(0.6, 0.04), { pos: [0, 0.02, 0], color: "#f2efe9", even: true });
-  k.add(k.torus(0.6, 0.02), { pos: [0, 0.04, 0], color: "#e6e1d8", share: 0.02, even: true });
+  k.add(k.cylinder(0.6, 0.03, { caps: false }), {
+    pos: [0, 0.03, 0],
+    color: "#e6e1d8",
+    even: true,
+  });
   k.add(
     k.lathe(
       [
@@ -203,8 +191,8 @@ function cupScene(k) {
     ),
     { color: (c) => shade("#c8553d", 0.85 + 0.25 * Math.max(0, c.n[0] * 0.5 + c.n[2] * 0.5)), even: true }, // prettier-ignore
   );
-  k.add(k.torus(0.36, 0.022), { pos: [0, 0.62, 0], color: "#d86a51", share: 0.02, even: true });
-  k.add(k.torus(0.15, 0.035), { pos: [0.47, 0.35, 0], rot: [90, 0, 0], color: "#c8553d", share: 0.03, even: true }); // prettier-ignore
+  k.add(k.disc(0.38, 0.34), { pos: [0, 0.62, 0], color: "#d86a51", share: 0.02, even: true });
+  k.add(k.torus(0.15, 0.035), { pos: [0.47, 0.35, 0], rot: [90, 0, 0], color: "#c8553d", share: 0.03 }); // prettier-ignore
   k.add(k.disc(0.345), {
     pos: [0, 0.56, 0],
     color: (c) => {
@@ -219,13 +207,13 @@ function cupScene(k) {
     look: "steam",
     unit: UNIT,
     budget: 800,
-    size: 0.065,
-    life: 3.0,
-    rise: 0.42,
-    turbulence: 0.85,
-    height: 0.6,
-    opacity: 0.2,
-    source: { at: [0, 0.58, 0], radius: 0.26, rate: 240 },
+    size: 0.04,
+    life: 2.8,
+    rise: 0.45,
+    turbulence: 0.9,
+    height: 0.5,
+    opacity: 0.085,
+    source: { at: [0, 0.58, 0], radius: 0.24, rate: 90 },
   });
   k.reach([0, 1.9, 0]);
   k.reach([0.6, 0, 0.6]);
@@ -251,9 +239,15 @@ export const RECIPES = {
   "fluid-lab": {
     alive: true,
     turntable: false,
+    // The props need fewer splats than a toy's whole budget; the rest is left
+    // for drawing the fluid.
+    density: 0.5,
     // Lab: the sharper splat edge (labs only, like this toy) keeps a liquid's
-    // surface crisp instead of cloudy.
-    kernel: "sharp",
+    // surface crisp instead of cloudy; smoke, steam and flames keep the soft
+    // Gaussian. Read after build, so it follows the scene just built.
+    get kernel() {
+      return LAB.scene === "glass" || LAB.scene === "splash" ? "sharp" : "gaussian";
+    },
     options: [
       {
         key: "scene",
@@ -306,14 +300,15 @@ export const RECIPES = {
         }
       } else if (d.scene === "splash") {
         out.fluid.liquid = {
-          once: { id: n, do: "drop", at: [0.05, 1.65, 0.03], radius: 0.2, vel: [0, -1.2, 0] },
+          once: { id: n, do: "drop", at: [0.05, 1.45, 0.03], radius: 0.19, vel: [0, -1.5, 0] },
         };
         if (fresh) out.cues.push(d.liquidId === "honey" || d.liquidId === "lava" ? THICK_SOUND : SPLASH_SOUND); // prettier-ignore
       } else if (d.scene === "candle") {
         // Blown out for three seconds, then it lights again.
         const out3 = e < 3;
         out.fluid.flame = { on: !out3, wind: e < 0.35 ? [2.5, 0, 0] : [0, 0, 0] };
-        out.fluid.smoke = { once: { id: n, do: "puff", count: 120, at: [0, 1.0, 0], speed: 0.5, heat: 1.2 } }; // prettier-ignore
+        // Put out, the hot wick sends up a thick ribbon of smoke that thins.
+        out.fluid.smoke = { on: e < 2.6, flow: e < 2.6 ? (1 - e / 2.6) ** 1.5 : 0 };
         if (fresh) out.cues.push(BLOW_SOUND);
       } else if (d.scene === "cup") {
         const w = e < 2.2 ? Math.sin((Math.PI * e) / 2.2) : 0;

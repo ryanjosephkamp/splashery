@@ -103,7 +103,7 @@ void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter, inout ve
   float base = m1.x * uSpClock.y;
   float speed = length(flV);
   vec3 vd = speed > 1e-5 ? flV / speed : vec3(0.0, 1.0, 0.0);
-  float ext = 1.0 + min(speed * m1.z / max(m1.x, 1e-5), 2.4);
+  float ext = 1.0 + min(speed * m1.z / max(m1.x, 1e-5), 4.0);
   vec3 a = vd;
   vec3 b = flAny(a);
   vec3 c = cross(a, b);
@@ -132,9 +132,9 @@ void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter, inout ve
     c = vec3(0.0, 1.0, 0.0);
     a = flAny(c);
     b = cross(c, a);
-    s = base * (0.62 - 0.25 * flF) * vec3(1.0, 1.0, 0.45);
+    s = base * (0.34 - 0.12 * flF) * vec3(1.0, 1.0, 0.5);
   } else if (flKind < 3.5) {
-    s = base * vec3(0.24);
+    s = base * vec3(0.13);
   } else if (flKind < 4.5) {
     s = base * 0.45 * vec3(min(ext, 2.2), 1.0, 1.0);
   } else if (flKind < 6.5) {
@@ -169,12 +169,12 @@ void modifySplatColor(vec3 center, inout vec4 color) {
     vec3 n = flSurf > 0.15 ? flN : V;
     float lit = 0.82 + 0.2 * max(dot(n, L), 0.0);
     float fres = pow(1.0 - max(dot(n, V), 0.0), 3.0);
-    float spec = pow(max(dot(reflect(-L, n), V), 0.0), 36.0);
+    float spec = pow(max(dot(reflect(-L, n), V), 0.0), 90.0);
     float sk = smoothstep(0.15, 0.6, flSurf);
     rgb = base * mix(0.93, lit, sk);
     // A bright rim where the surface turns away, toward the light.
     rgb += (vec3(1.0) - base) * fres * (0.35 + 0.35 * max(dot(n, L), 0.0)) * sk;
-    rgb += vec3(spec * 0.55 * sk);
+    rgb += vec3(spec * 0.4 * sk);
     // Where the flow thins to a stream or drops, a little lighter.
     rgb = mix(rgb, base * 1.12 + 0.05, 0.35 * smoothstep(0.4, 1.0, flF));
     if (m1.y > 0.0) {
@@ -185,8 +185,8 @@ void modifySplatColor(vec3 center, inout vec4 color) {
     }
   } else if (flKind < 2.5) {
     float lit = 0.86 + 0.14 * max(dot(vec3(0.0, 1.0, 0.0), L), 0.0);
-    rgb = mix(vec3(0.97, 0.95, 0.9), base, 0.12) * lit;
-    alpha = 0.92 * pow(1.0 - flF, 0.5);
+    rgb = mix(vec3(0.95, 0.9, 0.8), base, 0.18) * lit;
+    alpha = 0.8 * pow(1.0 - flF, 0.6);
   } else if (flKind < 3.5) {
     rgb = mix(base, vec3(1.0), 0.72);
     alpha = 0.85;
@@ -301,7 +301,7 @@ fn modifySplatRotationScale(originalCenter: vec3f, modifiedCenter: vec3f, rotati
   let speed = length(flV);
   var vd = vec3f(0.0, 1.0, 0.0);
   if (speed > 1e-5) { vd = flV / speed; }
-  let ext = 1.0 + min(speed * m1.z / max(m1.x, 1e-5), 2.4);
+  let ext = 1.0 + min(speed * m1.z / max(m1.x, 1e-5), 4.0);
   var a = vd;
   var b = flAny(a);
   var c = cross(a, b);
@@ -326,9 +326,9 @@ fn modifySplatRotationScale(originalCenter: vec3f, modifiedCenter: vec3f, rotati
     c = vec3f(0.0, 1.0, 0.0);
     a = flAny(c);
     b = cross(c, a);
-    s = base * (0.62 - 0.25 * flF) * vec3f(1.0, 1.0, 0.45);
+    s = base * (0.34 - 0.12 * flF) * vec3f(1.0, 1.0, 0.5);
   } else if (flKind < 3.5) {
-    s = base * vec3f(0.24);
+    s = base * vec3f(0.13);
   } else if (flKind < 4.5) {
     s = base * 0.45 * vec3f(min(ext, 2.2), 1.0, 1.0);
   } else if (flKind < 6.5) {
@@ -363,11 +363,11 @@ fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {
     if (flSurf > 0.15) { n = flN; }
     let lit = 0.82 + 0.2 * max(dot(n, L), 0.0);
     let fres = pow(1.0 - max(dot(n, V), 0.0), 3.0);
-    let spec = pow(max(dot(reflect(-L, n), V), 0.0), 36.0);
+    let spec = pow(max(dot(reflect(-L, n), V), 0.0), 90.0);
     let sk = smoothstep(0.15, 0.6, flSurf);
     rgb = base * mix(0.93, lit, sk);
     rgb = rgb + (vec3f(1.0) - base) * fres * (0.35 + 0.35 * max(dot(n, L), 0.0)) * sk;
-    rgb = rgb + vec3f(spec * 0.55 * sk);
+    rgb = rgb + vec3f(spec * 0.4 * sk);
     rgb = mix(rgb, base * 1.12 + 0.05, 0.35 * smoothstep(0.4, 1.0, flF));
     if (m1.y > 0.0) {
       let hot = mix(vec3f(1.0, 0.32, 0.04), vec3f(1.0, 0.78, 0.25), smoothstep(0.75, 1.0, flTone));
@@ -376,8 +376,8 @@ fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {
     }
   } else if (flKind < 2.5) {
     let lit = 0.86 + 0.14 * max(dot(vec3f(0.0, 1.0, 0.0), L), 0.0);
-    rgb = mix(vec3f(0.97, 0.95, 0.9), base, 0.12) * lit;
-    alpha = 0.92 * pow(1.0 - flF, 0.5);
+    rgb = mix(vec3f(0.95, 0.9, 0.8), base, 0.18) * lit;
+    alpha = 0.8 * pow(1.0 - flF, 0.6);
   } else if (flKind < 3.5) {
     rgb = mix(base, vec3f(1.0), 0.72);
     alpha = 0.85;
