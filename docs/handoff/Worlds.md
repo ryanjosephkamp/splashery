@@ -186,3 +186,23 @@ Model: Opus 5.5 (default effort).
   world lanes (Toy Hunt Island, the Forest trail template).
 - The site layout the owner asked for (Studio, Worlds, Lab and Learn sections behind the labs
   switch) is not in this lane: the toy box only gets a labs-only link to Worlds in its About tab.
+
+### For the Character lane
+
+- The rig lives in `src/worlds/character.js`: `JOINTS` (eleven joints: hips, torso, head, armL/R,
+  foreL/R, thighL/R, shinL/R, each with its parent and its pivot in meters, facing +z, feet at y 0)
+  and `BODY` (sizes, and `radius` for collision). `buildCharacter(look, { count, seed })` returns
+  one `SplatBuffer` per part name, each around its own pivot; `world.js` (`buildCharacter()`) makes
+  one entity per joint and one splat entity per part under it. A new joint needs a line in `JOINTS`
+  and a part of the same name.
+- The animation hooks: `pose(gait, time)` returns `{ joints: { name: [x, y, z] degrees }, bob }`
+  (positive x swings a hanging limb backward), and `stepGait(gait, speed, dt)` moves the phase with
+  the distance walked. `world.placeCharacter()` applies them every frame. Walk is 1.9 m/s, run 4.6.
+- The look comes from the world file's `character` colors (`shirt`, `trousers`, `skin`, `hair`,
+  `shoes`).
+- Budget: the character is always drawn in full, outside the level of detail. Today it is 60,000
+  splats times the tier's `props` factor (0.6 to 1.25), about 54,000 on mid. It counts against the
+  tier's budget (`fixedCount()` in `world.js`), so a bigger character leaves less for the ground.
+- Lessons: build limbs as lathes (even spreading draws a lattice on `k.cone`), keep solids at
+  opacity 1 and color noise low, and judge it with `tools/world-clip.mjs … character` (a close-up at
+  2x).
