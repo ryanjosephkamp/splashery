@@ -2008,6 +2008,13 @@
       "effect": "A song's real spectrogram as a landscape of splats; a tap plays the song while a glowing marker and the camera glide along it.",
       "sound": "The song itself."
     },
+    "model-splats": {
+      "v": "keep",
+      "owner": "Approved on the Splashery Universe page (lane Studio Models), September 29, 2026.",
+      "effect": "A 3D model file (glTF, OBJ or STL) turned into splats on the device; the tap lifts every splat off the surface into a loose cloud and lets each settle back into its own place in about 3 s. Show: Wireframe draws the mesh's edges as thin splats.",
+      "sound": "A rising whoosh as the splats lift off, then four falling plucked notes as they settle back.",
+      "improved": "Studio Models: a converter that samples the surface by area (more splats where it bends or is finely made), lays flat splats on it sized to their neighbors, colors them from the texture, vertex colors or material, and keeps hard edges hard; two CC0 samples (Kenney's burger, Poly Haven's vase)."
+    },
     "screen": {
       "v": "keep",
       "owner": "From the owner's notes of September 28, 2026 (lane Screens; labs only).",

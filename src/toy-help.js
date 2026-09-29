@@ -1403,6 +1403,13 @@ export const TOY_HELP = {
       "A song is a wave, but you can also see what it is made of. This toy cuts the sound into short slices, measures how loud each pitch is in every slice (a short-time Fourier transform) and stands the answer up as a landscape of splats: time runs away from you, pitch runs across from low to high, and loudness is height.\n\nTap to play it: a glowing line and the camera glide along the landscape in time with the music. Open a song of your own in the Toy tab; it is read on your device and never uploaded. Long songs make longer, coarser landscapes.",
   },
 
+  "model-splats": {
+    howTo:
+      "Tap to lift the splats off the model and watch them settle back. Open your own 3D model in the Toy tab.",
+    about:
+      "A 3D model is usually a mesh: a net of flat triangles with colors or a picture (a texture) painted on them. This toy turns a mesh into splats. It scatters points across the surface, more of them where the shape bends sharply or is finely made, and lays a small flat splat on each one, tilted to face the way the surface does. Each splat is sized to its neighbors so the surface closes with no gaps, and takes its color from the texture at that spot (or from the model's vertex colors or plain material color), with a little soft light baked in. Sharp edges stay sharp.\n\nTap to lift every splat off the surface into a loose cloud and watch each one settle back into its own place. Show: Wireframe draws the mesh's own edges as thin splats (a very fine mesh is simplified to a net you can read), so you can see what the splats were made from. Open a .glb, a .gltf with everything embedded, an .obj or an .stl in the Toy tab; it is converted on your device and never uploaded. Draco- or meshopt-compressed glTF and animation are not read.",
+  },
+
   // ---- Holidays -------------------------------------------------------------------------
   "jack-o-lantern": {
     howTo: "Tap to lift the lid; tap again to put it back.",
