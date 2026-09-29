@@ -672,6 +672,11 @@ class App {
     p.go(p.page + delta);
   }
 
+  // A video's place, from the Toy tab's scrub bar (lane Books).
+  pictureSeek(seconds) {
+    this.player.pictures?.seek(seconds);
+  }
+
   pictureTogglePlay() {
     this.player.pictures?.togglePlay();
   }

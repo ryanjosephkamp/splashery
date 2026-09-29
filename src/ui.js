@@ -892,8 +892,43 @@ export function createUI(app) {
       refreshMedia();
     });
     pages.append(prev, next, play);
-    wrap.append(openRow, form, now, pages, file);
-    mediaPanel = { now, prev, next, play, pages, sample };
+    // A video's scrub bar and its time (lane Books, for lane Screens).
+    const scrubRow = document.createElement("div");
+    scrubRow.className = "input-row media-scrub";
+    scrubRow.hidden = true;
+    const scrub = document.createElement("input");
+    scrub.type = "range";
+    scrub.id = "toy-media-scrub";
+    scrub.min = "0";
+    scrub.max = "1000";
+    scrub.step = "1";
+    scrub.value = "0";
+    scrub.setAttribute("aria-label", "Where the video is");
+    const clock = document.createElement("span");
+    clock.className = "note";
+    clock.id = "toy-media-time";
+    let dragging = false;
+    scrub.addEventListener("pointerdown", () => (dragging = true));
+    scrub.addEventListener("change", () => (dragging = false));
+    scrub.addEventListener("input", () => {
+      const d = app.player?.pictures?.api.duration || 0;
+      if (d) app.pictureSeek((Number(scrub.value) / 1000) * d);
+    });
+    scrubRow.append(scrub, clock);
+    const tick = () => {
+      if (!scrub.isConnected) return;
+      const api = app.player?.pictures?.api;
+      const d = api?.duration || 0;
+      if (!scrubRow.hidden && d) {
+        if (!dragging) scrub.value = String(Math.round((api.time / d) * 1000));
+        const fmt = (s) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, "0")}`;
+        clock.textContent = `${fmt(api.time)} / ${fmt(d)}`;
+      }
+      requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+    wrap.append(openRow, form, now, pages, scrubRow, file);
+    mediaPanel = { now, prev, next, play, pages, sample, scrubRow };
     refreshMedia();
     // Again once the panel is in the page (lane Books): pages that arrived
     // before it would otherwise leave it blank until the next page.
@@ -923,6 +958,7 @@ export function createUI(app) {
     m.next.disabled = p.page >= p.count - 1;
     m.play.hidden = p.kind !== "video";
     m.play.textContent = p.playing ? "Pause" : "Play";
+    m.scrubRow.hidden = p.kind !== "video";
     m.pages.hidden = !paged && p.kind !== "video";
   }
   // ---- End of pictures ---------------------------------------------------------------
