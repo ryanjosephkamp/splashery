@@ -119,6 +119,48 @@ const XYLO = (() => {
   return { bars, top: 0.08, rest: [0.55, 0.42, 0.55] };
 })();
 
+// ---- The toy piano's layout ---------------------------------------------------------------
+// Twenty keys (C to G, twelve white and eight black), each with a hammer and
+// a metal rod. Every key and hammer is a token and every rod a part or token
+// (the kit allows 15 parts and 48 tokens): keys 0-19, hammers 20-39, the
+// last eight rods 40-47, the first twelve rods parts rod0..rod11.
+const TP = (() => {
+  const W = 0.155;
+  const X0 = -0.93;
+  const white = [0, 2, 4, 5, 7, 9, 11, 12, 14, 16, 17, 19];
+  const black = [1, 3, 6, 8, 10, 13, 15, 18];
+  const between = [0, 1, 3, 4, 5, 7, 8, 10]; // the white key each black one follows
+  const keys = [];
+  white.forEach((n, j) => (keys[n] = { n, black: false, x: X0 + W * (j + 0.5), w: 0.138, len: 0.66, top: 0.54 })); // prettier-ignore
+  black.forEach((n, j) => (keys[n] = { n, black: true, x: X0 + W * (between[j] + 1), w: 0.09, len: 0.36, top: 0.64 })); // prettier-ignore
+  const rods = keys.map((k, n) => ({
+    n,
+    x: -0.85 + 0.0895 * n,
+    len: 0.86 - 0.014 * n,
+    f: 12 + 0.4 * n, // how fast the rod shivers on screen (Hz)
+  }));
+  return { keys, rods, white, black, W, hammerY: 0.74, hammerZ: -0.18, hammerLen: 0.43, rest: -0.6, rodY: 1.23, rodZ: -0.6 }; // prettier-ignore
+})();
+
+// The hammer reaches the rod this long after a tap (the note sounds then).
+const TP_LEAD = 0.11;
+// Twinkle, Twinkle, Little Star: key numbers (0 = C, 2 = D, 4 = E, 5 = F, 7 = G, 9 = A) and beats.
+const TP_SONG = (() => {
+  const line1 = [0, 0, 7, 7, 9, 9, 7];
+  const line2 = [5, 5, 4, 4, 2, 2, 0];
+  const out = [];
+  let t = 0;
+  for (const line of [line1, line2])
+    line.forEach((n, i) => {
+      out.push({ n, t });
+      t += i === 6 ? 2 * 0.4 : 0.4;
+    });
+  return out;
+})();
+const TP_NOTES = "C5 C#5 D5 D#5 E5 F5 F#5 G5 G#5 A5 A#5 B5 C6 C#6 D6 D#6 E6 F6 F#6 G6".split(" ");
+// The same voice as the tap sound in src/toy-sounds.js, for the song's cues.
+const TP_VOICE = { voice: "tine", decay: 0.55, bright: 0.75 };
+
 export const RECIPES = {
   // ---- Acoustic guitar ------------------------------------------------------------------
   guitar: {
@@ -615,6 +657,226 @@ export const RECIPES = {
         color: (c) => lit(c, "#d8262e", 0.35, 0.8),
       });
       k.reach([-0.8, 0.45, 0]);
+    },
+  },
+
+  // ---- Toy piano ----------------------------------------------------------------------
+  "toy-piano": {
+    options: [{ key: "lacquer", label: "Lacquer", type: "color", default: "#d8262e" }],
+    controls: [
+      { key: "play", label: "Play", type: "pulse", ease: 7.5 },
+      // A tap on one key (or its hammer or rod) strikes just that note.
+      { key: "strike", label: "Strike", type: "pulse", ease: 1.3 },
+    ],
+    action: {
+      key: "play",
+      label: "Play Twinkle, Twinkle",
+      // The song's notes sound through cues, timed to the hammers.
+      quiet: ["play"],
+      at(p) {
+        const P = TP;
+        // The keys (a black key wins where it sits over the white ones).
+        if (p[1] > 0.4 && p[1] < 0.8 && p[2] > -0.05 && p[2] < 0.75) {
+          const b = P.black.find((n) => {
+            const k = P.keys[n];
+            return Math.abs(p[0] - k.x) < k.w * 0.6 && p[2] < k.len + 0.06 && p[1] > 0.58;
+          });
+          if (b !== undefined) return { key: "strike", pick: b };
+          const w = P.white.find((n) => Math.abs(p[0] - P.keys[n].x) < P.W * 0.5);
+          if (w !== undefined) return { key: "strike", pick: w };
+        }
+        // A hammer or a rod strikes its own note.
+        if (p[1] > 0.7 && p[1] < 1.42 && p[2] > -0.75 && p[2] < 0.3) {
+          let best = 0.05;
+          let pick = null;
+          for (const r of P.rods) {
+            const d = Math.abs(p[0] - r.x);
+            if (d < best) [best, pick] = [d, r.n];
+          }
+          if (pick !== null) return { key: "strike", pick };
+        }
+        return null;
+      },
+    },
+    drive(t, c, out, info) {
+      const P = TP;
+      const m = mem(c);
+      const now = info.time;
+      if (!m.hits) {
+        m.hits = P.keys.map(() => []);
+        m.tap = 0;
+        m.song = null;
+      }
+      // A new tap: one key's hit, or the whole song scheduled from now.
+      const tap = info.tap;
+      if (tap && tap.n !== m.tap) {
+        m.tap = tap.n;
+        if (now - tap.time < 0.5) {
+          if (tap.key === "strike" && tap.pick >= 0 && tap.pick < P.keys.length) {
+            m.hits[tap.pick].push(tap.time + TP_LEAD);
+          } else if (tap.key === "play") {
+            m.hits = m.hits.map((h) => h.filter((x) => x <= now));
+            m.song = { t0: tap.time + TP_LEAD, fired: 0 };
+            for (const s of TP_SONG) m.hits[s.n].push(m.song.t0 + s.t);
+          }
+        }
+      }
+      // Each song note sounds the moment its hammer reaches the rod.
+      const song = m.song;
+      if (song) {
+        while (song.fired < TP_SONG.length && now >= song.t0 + TP_SONG[song.fired].t) {
+          const s = TP_SONG[song.fired++];
+          if (now - (song.t0 + s.t) < 0.3) out.cues.push({ ...TP_VOICE, f: TP_NOTES[s.n] });
+        }
+        if (song.fired >= TP_SONG.length) m.song = null;
+      }
+      const qx = (a) => quatAxisAngle([1, 0, 0], a);
+      const tokens = [];
+      P.keys.forEach((key, i) => {
+        const hits = (m.hits[i] = m.hits[i].filter((h) => h > now - 4));
+        let hk = null; // the hit whose key press is under way
+        let hr = null; // the last hit that reached the rod
+        for (const h of hits) {
+          if (h - TP_LEAD <= now && (hk === null || h > hk)) hk = h;
+          if (h <= now && (hr === null || h > hr)) hr = h;
+        }
+        let press = 0;
+        let hammer = P.rest;
+        if (hk !== null) {
+          const tau = now - hk;
+          // The key dips, its hammer flicks up to the rod (at tau = 0), springs
+          // back, and the key comes up.
+          if (tau < -0.04) press = easeInOut((tau + TP_LEAD) / 0.07);
+          else press = tau < 0.1 ? 1 : 1 - easeInOut((tau - 0.1) / 0.16);
+          if (tau < 0) hammer = P.rest * (1 - ((tau + TP_LEAD) / TP_LEAD) ** 2);
+          else if (tau < 0.06) hammer = P.rest * 0.55 * (1 - (1 - tau / 0.06) ** 2);
+          else if (tau < 0.26) hammer = P.rest * (0.55 + 0.45 * easeInOut((tau - 0.06) / 0.2));
+        }
+        tokens[i] = { base: [key.x, key.top - 0.05, 0], quat: qx(0.13 * clamp(press, 0, 1)) };
+        tokens[20 + i] = { base: [P.rods[i].x, P.hammerY, P.hammerZ], quat: qx(hammer - P.rest) };
+        // The rod shivers: a small, quick swing that fades.
+        const rod = P.rods[i];
+        const e = hr === null ? -1 : now - hr;
+        const swing = e < 0 ? 0 : 0.06 * Math.exp(-e * 3.2) * Math.sin(TAU * rod.f * e);
+        if (i < 12) out.parts[`rod${i}`] = { quat: qx(swing) };
+        else tokens[40 + i - 12] = { base: [rod.x, P.rodY, P.rodZ], quat: qx(swing) };
+      });
+      out.tokens = tokens;
+      out.amount = Math.max(c.play, c.strike);
+    },
+    build(k, o) {
+      const P = TP;
+      const laq = o.lacquer || "#d8262e";
+      const cream = "#f4ead0";
+      const dark = "#2a1a1c";
+      const look = { even: true, flat: 0.18, jitter: 0.008, opacity: 1 };
+      const tok = (i) => ({ kind: "token", params: [i, 0] });
+      // Lacquer with a cream pinstripe at height sy (on the sides that face out).
+      const paint = (sy) => (c) => {
+        const base = lit(c, laq, 0.26, 0.4);
+        if (sy === undefined || Math.abs(c.n[1]) > 0.3) return base;
+        const w = 1 - smoothstep(0.016, 0.03, Math.abs(c.p[1] - sy));
+        return w > 0 ? mix(base, lit(c, cream, 0.22, 0.1), w) : base;
+      };
+      // The case: a foot, the body under the keys, two sides, the lid. Each is a
+      // box with its twelve edges rounded over by thin tubes, so the lacquer has
+      // clean edges instead of ragged ones.
+      const shell = (sx, sy, sz, pos, color, weight = 1) => {
+        const r = 0.028;
+        const [hx, hy, hz] = [sx / 2 - r * 0.5, sy / 2 - r * 0.5, sz / 2 - r * 0.5];
+        k.add(k.box(sx, sy, sz), { pos, ...look, weight, color });
+        for (const a of [-1, 1])
+          for (const b of [-1, 1]) {
+            const add = (shape, off, rot) =>
+              k.add(shape, { pos: vec.add(pos, off), rot, ...look, weight: 2.5, color });
+            add(k.cylinder(r, sx - r, { caps: false }), [0, a * hy, b * hz], [0, 0, 90]);
+            add(k.cylinder(r, sy - r, { caps: false }), [a * hx, 0, b * hz], [0, 0, 0]);
+            add(k.cylinder(r, sz - r, { caps: false }), [a * hx, b * hy, 0], [90, 0, 0]);
+            for (const c2 of [-1, 1]) add(k.sphere(r), [a * hx, b * hy, c2 * hz], [0, 0, 0]);
+          }
+      };
+      shell(2.14, 0.1, 1.52, [0, 0.05, 0], paint(), 1.4);
+      // The top of the body behind the keys is dark felt.
+      shell(2.06, 0.34, 1.44, [0, 0.27, 0], (c) => (c.n[1] > 0.9 ? lit(c, dark, 0.2) : paint(0.3)(c)), 1.4); // prettier-ignore
+      for (const s of [-1, 1]) shell(0.1, 1.08, 1.44, [s * 0.98, 0.98, 0], paint(1.36));
+      shell(2.14, 0.1, 1.52, [0, 1.57, 0], paint(), 1.4);
+      // The open back: a dark board behind the rods and the rail they grow from.
+      k.add(k.box(1.86, 1.08, 0.04), {
+        pos: [0, 0.98, -0.68],
+        ...look,
+        color: (c) => lit(c, "#4a1a20", 0.25),
+      });
+      k.add(k.box(1.86, 0.12, 0.1), {
+        pos: [0, P.rodY, -0.62],
+        ...look,
+        weight: 3,
+        color: (c) => lit(c, wood(c, "#d8a86a", c.p, 0), 0.3, 0.3),
+      });
+      // The rail the hammers turn on.
+      k.add(k.box(1.86, 0.05, 0.07), {
+        pos: [0, P.hammerY - 0.02, P.hammerZ],
+        ...look,
+        weight: 3,
+        color: (c) => lit(c, wood(c, "#d8a86a", c.p, 0), 0.3, 0.3),
+      });
+      // The rods: bright steel, longest at the low end, with a bead at the tip.
+      P.rods.forEach((r, i) => {
+        const g = i < 12 ? { part: k.part(`rod${i}`, { pivot: [r.x, P.rodY, P.rodZ] }) } : tok(40 + i - 12); // prettier-ignore
+        k.add(k.cylinder(0.018, r.len, { caps: true }), {
+          pos: [r.x, P.rodY, P.rodZ + r.len / 2],
+          rot: [90, 0, 0],
+          ...look,
+          ...g,
+          weight: 7,
+          pattern: false,
+          jitter: 0,
+          color: (c) => chrome(c),
+        });
+        k.add(k.sphere(0.028), {
+          pos: [r.x, P.rodY, P.rodZ + r.len],
+          ...look,
+          ...g,
+          weight: 12,
+          pattern: false,
+          jitter: 0,
+          color: (c) => chrome(c),
+        });
+      });
+      // The hammers, drawn tipped back at rest: a thin wooden arm and a felt head.
+      P.rods.forEach((r, i) => {
+        const g = group(k, [r.x, P.hammerY, P.hammerZ], [(P.rest * 180) / Math.PI, 0, 0]);
+        g.add(k.box(0.026, P.hammerLen - 0.03, 0.02), {
+          pos: [0, (P.hammerLen - 0.03) / 2, 0],
+          ...look,
+          ...tok(20 + i),
+          weight: 7,
+          pattern: false,
+          jitter: 0,
+          color: (c) => lit(c, "#e9c48a", 0.3, 0.2),
+        });
+        g.add(k.sphere(0.042), {
+          pos: [0, P.hammerLen, 0],
+          ...look,
+          ...tok(20 + i),
+          weight: 9,
+          pattern: false,
+          jitter: 0,
+          color: (c) => lit(c, "#f3ead6", 0.4, 0.05),
+        });
+      });
+      // The keys: ivory and black lacquer, pressed at the front.
+      P.keys.forEach((key, i) => {
+        k.add(k.box(key.w, 0.1, key.len), {
+          pos: [key.x, key.top - 0.05, key.len / 2],
+          ...look,
+          ...tok(i),
+          weight: key.black ? 6 : 5,
+          pattern: false,
+          jitter: 0.004,
+          color: key.black ? (c) => lit(c, "#17171c", 0.5, 0.9) : (c) => lit(c, "#f7f1e1", 0.25, 0.35), // prettier-ignore
+        });
+      });
+      k.reach([0, 1.6, 0.8]);
     },
   },
 };

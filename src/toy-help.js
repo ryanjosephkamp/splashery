@@ -1468,6 +1468,11 @@ export const TOY_HELP = {
     about:
       "A xylophone is a row of tuned wooden bars that you strike with a mallet. Each bar's length sets its note: the shorter the bar, the higher it sounds. The name comes from the Greek for “wood” and “sound”.\n\nThis toy one has eight colored bars, a scale from C up to the next C. Tap a bar and the mallet swings over and strikes it, and the bar jumps and plays its note, so you can play a tune. Tap the mallet, a wheel or the ends of the frame instead, and it plays the whole scale.",
   },
+  "toy-piano": {
+    howTo: "Tap a key to strike its rod, or tap the case to hear Twinkle, Twinkle, Little Star.",
+    about:
+      "A toy piano has no strings. Under each key a tiny hammer strikes a short metal rod, and the rod rings with a bright, plinky, bell-like tone. Shorter rods sound higher, so the rods grow shorter from the low keys to the high ones. The first toy pianos were made in the 1800s, and composers have written serious music for them ever since.\n\nThis one has twenty keys, twelve white and eight black, with the front of the case left open so you can watch the works. Tap a key and it dips, its hammer flicks up and strikes the rod, and the rod shivers as it rings. Tap anywhere else on the case and the hammers play the opening of Twinkle, Twinkle, Little Star, an old lullaby tune in the public domain. Pick the color of the lacquer in the Toy tab.",
+  },
   // ---- Vehicles -------------------------------------------------------------------------
   rocket: {
     howTo: "Tap it to launch the rocket.",

@@ -1704,6 +1704,13 @@
       "sound": "The scale it already plays, as mallet tones.",
       "improved": "D: a tap on one bar lifts the mallet over that bar, strikes it and plays its note; a tap anywhere else plays the scale. Each bar dips as the mallet hits it. E1c: any tap over the row of bars strikes the nearest bar (easy to hit on a phone). The mallet swings over from wherever it is, lands 0.12 s after the tap with the bar's note, bounces off, and the bar jumps. A tap off the bars still plays the scale."
     },
+    "toy-piano": {
+      "v": "keep",
+      "owner": "The owner's own idea (Toy Ideas page).",
+      "effect": "Tap a key: the key dips, its hammer flicks up and strikes its metal rod, and the rod shivers as the note rings. Tap elsewhere: Twinkle, Twinkle, Little Star, with each key, hammer and rod moving in time with the notes.",
+      "sound": "The plinky, bell-like tone of struck metal rods, one pitch per key, made in the page.",
+      "improved": "New toy (maker A): twenty keys, each with its own hammer and rod, all solid pieces."
+    },
     "rocket": {
       "v": "keep",
       "owner": "Basically perfect.",
