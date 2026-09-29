@@ -62,12 +62,147 @@ function bkLit(col, n, amb = 0.72, dif = 0.3) {
   return shade(col, amb + dif * d);
 }
 
-// A flat rectangle of splats: two staggered lattices of flat discs (smooth,
+// A flat rectangle of splats with clean, sharp edges (the method of lane
+// Fidelity A: even placement, full opacity, flat splats on the face and thin
+// ones along its edges). A staggered lattice of flat discs fills the middle,
+// stopping short of the edges so no splat spills over them; a band of
+// discs half the size runs round it, and a line of thin splats along each
+// edge draws the edge itself. `at` is a corner, `u` and `v` its edges
+// (recipe units), `n` the side it faces; `color(a, b, p)` gets the place
+// along u and v (0..1). `leaf` = { slot, S, at, dir } makes every splat turn
+// with that leaf (its distance from the spine in toy units: S is the fit's
+// scale).
+function rect(
+  k,
+  {
+    share,
+    at,
+    u,
+    v,
+    n,
+    color,
+    part = 0,
+    leaf = null,
+    opacity = 1,
+    size = 1,
+    kind = null,
+    params = null,
+  },
+) {
+  const lu = Math.hypot(...u);
+  const lv = Math.hypot(...v);
+  const eu = u.map((x) => x / lu);
+  const ev = v.map((x) => x / lv);
+  const splat = (x, y, extra) => {
+    const a = x / lu;
+    const b = y / lv;
+    const p = [0, 1, 2].map((q) => at[q] + u[q] * a + v[q] * b);
+    const s = { p, color: color(a, b, p), opacity, part, ...extra };
+    if (kind) {
+      s.kind = kind;
+      s.params = params;
+      s.channel = 0;
+    }
+    if (leaf) {
+      s.kind = "leaf";
+      const d = (p[0] - leaf.at[0]) * leaf.dir[0] + (p[1] - leaf.at[1]) * leaf.dir[1] + (p[2] - leaf.at[2]) * leaf.dir[2]; // prettier-ignore
+      s.params = [d * leaf.S, leaf.slot];
+    }
+    return s;
+  };
+  // A staggered lattice of discs, spacing about h, inset from the edges,
+  // leaving out the points inside `core` ([cu, cv]: that far in from the
+  // edges) if given. With no list it only counts them.
+  const lattice = (list, h, inset, core) => {
+    const axis = (l, i0) => {
+      const g = Math.max(1, Math.round((l - 2 * i0) / h) + 1);
+      const s = g > 1 ? (l - 2 * i0) / (g - 1) : 0;
+      const a = [];
+      for (let i = 0; i < g; i++) a.push(g > 1 ? i0 + i * s : l / 2);
+      const b = [];
+      for (let i = 0; i < g - 1; i++) b.push(i0 + (i + 0.5) * s);
+      return { a, b, s };
+    };
+    const U = axis(lu, Math.min(lu / 2, inset));
+    const V = axis(lv, Math.min(lv / 2, inset));
+    const inU = (x) => core && x >= core[0] && x <= lu - core[0];
+    const inV = (y) => core && y >= core[1] && y <= lv - core[1];
+    if (!list) {
+      const n = (xs, ys) => xs.length * ys.length - (core ? xs.filter(inU).length * ys.filter(inV).length : 0); // prettier-ignore
+      return n(U.a, V.a) + n(U.b, V.b);
+    }
+    const sz = (0.55 * Math.max(U.s, V.s, h * 0.5) * size) / 0.01;
+    for (const [xs, ys] of [
+      [U.a, V.a],
+      [U.b, V.b],
+    ])
+      for (const y of ys)
+        for (const x of xs) if (!(inU(x) && inV(y))) list.push([x, y, { n, size: sz, flat: 0.06 }]);
+    return 0;
+  };
+  // The places of every splat for a spacing h (or, with no list, how many).
+  const layout = (h, list = null) => {
+    const sig = 0.55 * h;
+    // The middle: its outer splats' glow ends at the edge.
+    const ci = 2 * sig;
+    let count = lattice(list, h, ci, null);
+    // The band round it, finer.
+    count += lattice(list, h / 2, sig, [Math.min(lu / 2, ci), Math.min(lv / 2, ci)]);
+    // A line of thin splats along each edge, a little inside it. (Its
+    // ends stop short of the corners, so no thin splat pokes out.)
+    const e = 0.22 * h;
+    const line = (x0, y0, dir, len0) => {
+      const cut = Math.min(0.3 * h, len0 / 4);
+      const len = len0 - 2 * cut;
+      const m = Math.max(1, Math.round(len / (0.5 * h)));
+      count += m;
+      if (list)
+        for (let i = 0; i < m; i++) {
+          const d = cut + ((i + 0.5) / m) * len;
+          const x = x0 + (dir === eu ? d : 0);
+          const y = y0 + (dir === ev ? d : 0);
+          list.push([x, y, { dir, stretch: 2.4, size: (0.17 * h * size) / 0.01 }]);
+        }
+    };
+    if (lv > 3 * e && lu > 3 * e) {
+      line(e, e, eu, lu - 2 * e);
+      line(e, lv - e, eu, lu - 2 * e);
+      line(e, e, ev, lv - 2 * e);
+      line(lu - e, e, ev, lv - 2 * e);
+    } else if (lu >= lv) line(e, lv / 2, eu, lu - 2 * e);
+    else line(lu / 2, e, ev, lv - 2 * e);
+    return count;
+  };
+  let cache = null;
+  k.cloud({ share, pattern: false, flat: 0.06 }, (rand, i, total) => {
+    if (!cache || cache.total !== total) {
+      // The spacing that fills the share: start from the plain lattice's
+      // and adjust (counting only), then lay the splats out once; they are
+      // made as they are asked for.
+      let h = Math.sqrt((lu * lv) / Math.max(1, total / 2));
+      let c = layout(h);
+      for (let it = 0; it < 12 && (c > total || c < 0.92 * total); it++) {
+        h *= Math.sqrt(c / total) * (c > total ? 1.01 : 0.995);
+        c = layout(h);
+      }
+      for (let it = 0; it < 40 && c > total; it++) c = layout((h *= 1.02));
+      const list = [];
+      layout(h, list);
+      list.length = Math.min(list.length, total);
+      cache = { total, list };
+    }
+    const at = cache.list[i];
+    return at ? splat(...at) : null;
+  });
+}
+
+// The picture frame's flat rectangle (as it was when the owner marked the
+// frame good): two staggered lattices of flat discs (smooth,
 // no speckle, like a sheet's paper). `at` is a corner, `u` and `v` its edges
 // (recipe units), `n` the side it faces; `color(a, b)` gets the place along
 // u and v (0..1). `leaf` = { slot, S, at, dir } makes every splat turn with
 // that leaf (its distance from the spine in toy units: S is the fit's scale).
-function rect(
+function plainRect(
   k,
   {
     share,
@@ -331,7 +466,7 @@ const BOOK_RECIPE = {
   // A book you page through: it keeps still, facing you.
   turntable: false,
   tiltLock: true, // a drag only spins it left and right (PACKS.md 5c)
-  density: 0.35,
+  density: 1,
   // Frames keep coming while a page turns (a turn can start from the Toy
   // tab's page buttons, not only from a tap).
   alive: () => !!BOOK.anim || BOOK.queue > 0 || BOOK.landed > 0,
@@ -479,7 +614,9 @@ function buildSideBound(k, st, o, extra) {
   const leafOf = (slot) => ({ slot, S, at: [0, 0, 0], dir: [1, 0, 0] });
   // The page blocks: the right one, and the left one (a copy that turns
   // with the cover and lands under the left-hand pages).
-  const edge = (a, b, p) => shade(extra.edge || "#ece5d3", 0.97 + 0.03 * Math.sin(p[2] * 900));
+  // (Clean, flat colors: fine stripes or weaves at about the splats'
+  // spacing read as grain on a phone.)
+  const edge = () => extra.edge || "#ece5d3";
   const top = TOP;
   // The left block's top lands under the left-hand pages (and under a
   // card cover, which lies on it); it turns about zb to get there.
@@ -513,10 +650,7 @@ function buildSideBound(k, st, o, extra) {
         rect(k, { share: 0.003, at: [0.001, y, -T], u: [0, 0, T + top], v: [0.012, 0, 0], n: [0, Math.sign(y), 0], color: (a) => band(a), part }); // prettier-ignore
   }
   // The back cover.
-  const cloth =
-    extra.cloth ||
-    ((n) => (a, b, p) =>
-      bkLit(shade(cover, 0.985 + 0.02 * Math.sin(p[0] * 700) * Math.sin(p[1] * 700)), n));
+  const cloth = extra.cloth || ((n) => () => bkLit(cover, n));
   const inside = extra.inside || (st.cover === "board" ? mix(cover, "#f1e6cf", 0.75) : "#f2efe8");
   const bx = [st.cover === "board" ? 0 : g, X1 + ov];
   const by = [-H / 2 - ov, H / 2 + ov];
@@ -581,9 +715,11 @@ function buildSideBound(k, st, o, extra) {
       // Two staples through the fold.
       for (const y of [-0.25 * H, 0.25 * H])
         k.cloud({ share: 0.002, pattern: false }, (rand, i, n) => ({
-          p: [-sw - 0.001, y - 0.03 + (0.06 * i) / n, (z0 + z1) / 2],
-          color: mix("#8e959e", "#e7ebf0", 0.5 + 0.5 * Math.sin(i)),
-          size: 0.25,
+          p: [-sw - 0.001, y - 0.03 + (0.06 * (i + 0.5)) / n, (z0 + z1) / 2],
+          dir: [0, 1, 0],
+          stretch: 0.03 / n / 0.002,
+          color: mix("#8e959e", "#e7ebf0", 0.5 + 0.5 * Math.cos((i / n - 0.5) * 6)),
+          size: 0.2,
           opacity: 1,
           part: sp,
         }));
@@ -602,10 +738,15 @@ function buildSideBound(k, st, o, extra) {
       const nx = Math.cos(phi);
       const nz = Math.sin(phi);
       const shine = 0.5 + 0.5 * (nx * BK_LIGHT[0] + nz * BK_LIGHT[2]);
+      // Thin splats along the wire (not round blobs), each as long as
+      // the gap to the next.
+      const step = Math.hypot(2 * Math.PI * rc, 0.03) / per;
       return {
         p: [rc * nx, y, -T / 2 + rc * nz],
+        dir: [-2 * Math.PI * rc * nz, 0.03, 2 * Math.PI * rc * nx],
+        stretch: (0.6 * step) / 0.0028,
         color: mix("#3d4148", "#d9dde3", shine),
-        size: 0.35,
+        size: 0.4,
         opacity: 1,
       };
     });
@@ -623,7 +764,7 @@ function buildStapled(k, st, W, H) {
   k.reach([0, H / 2 + 0.3, 0.45]);
   k.reach([0, 0, 0.5]);
   const paper = "#fcfbf7";
-  const edge = (a, b, p) => shade("#ece5d3", 0.97 + 0.03 * Math.sin(p[2] * 900));
+  const edge = () => "#ece5d3";
   boxFaces(k, [-W / 2, W / 2], [-H / 2, H / 2], [-T, TOP], {
     front: { share: 0.2, color: () => bkLit(paper, [0, 0, 1]) },
     back: { share: 0.1, color: () => bkLit(paper, [0, 0, -1], 0.6) },
@@ -635,9 +776,11 @@ function buildStapled(k, st, W, H) {
   // The staple: a short silver bar across the corner, at 45 degrees.
   const c = [-W / 2 + 0.05, H / 2 - 0.05];
   k.cloud({ share: 0.003, pattern: false }, (rand, i, n) => {
-    const f = i / n - 0.5;
+    const f = (i + 0.5) / n - 0.5;
     return {
       p: [c[0] + f * 0.055 * Math.SQRT1_2, c[1] + f * 0.055 * Math.SQRT1_2, 0.03],
+      dir: [1, 1, 0],
+      stretch: (0.6 * 0.055) / n / 0.0021,
       color: mix("#8e959e", "#eef1f5", 0.5 + 0.5 * Math.cos(f * 9)),
       size: 0.3,
       opacity: 1,
@@ -759,31 +902,92 @@ function albumDecorate(canvas, { name, options }) {
   }
 }
 
-// The cover's look: leather with a grain and a stitched border, woven
-// linen, or kraft card with a label.
-function albumCloth(style, bx, by) {
+// The cover's look: leather with a soft grain, woven linen, or kraft card.
+// Colors stay smooth (a fine grain or weave at about the splats' spacing
+// reads as speckle on a phone); the leather's stitches and groove and the
+// scrapbook's label are their own splats, in front (albumTrim).
+function albumCloth(style) {
   const look = ALBUM_STYLES[style] || ALBUM_STYLES.leather;
   return (n) => (a, b, p) => {
     let col = look.cover;
     if (style === "leather") {
-      const grain = Math.sin(p[0] * 173 + Math.sin(p[1] * 91) * 2) * Math.sin(p[1] * 157 + Math.sin(p[0] * 67) * 2); // prettier-ignore
-      col = shade(col, 0.97 + 0.05 * grain);
-      if (n[2] > 0.5) {
-        const d = Math.min(p[0] - bx[0], bx[1] - p[0], p[1] - by[0], by[1] - p[1]);
-        if (Math.abs(d - 0.04) < 0.004 && Math.floor((p[0] + p[1]) * 90) % 2 === 0) col = "#d9c6a5";
-        else if (Math.abs(d - 0.07) < 0.003) col = shade(col, 0.8);
-      }
+      const grain = Math.sin(p[0] * 31 + Math.sin(p[1] * 17) * 2) * Math.sin(p[1] * 27 + Math.sin(p[0] * 13) * 2); // prettier-ignore
+      col = shade(col, 0.985 + 0.025 * grain);
     } else if (style === "linen") {
-      col = shade(col, 0.97 + 0.035 * Math.sin(p[0] * 520) * Math.sin(p[1] * 520) + 0.02 * Math.sin(p[1] * 1040)); // prettier-ignore
+      col = shade(col, 0.99 + 0.012 * Math.sin(p[0] * 60) * Math.sin(p[1] * 60));
     } else {
-      col = shade(col, 0.96 + 0.05 * Math.sin(p[0] * 61 + p[1] * 37) * Math.sin(p[1] * 83));
-      if (n[2] > 0.5) {
-        const lx = (bx[0] + bx[1]) / 2;
-        if (Math.abs(p[0] - lx) < 0.22 && Math.abs(p[1] - 0.08) < 0.1) col = "#f1e8d6";
-      }
+      col = shade(col, 0.97 + 0.03 * Math.sin(p[0] * 61 + p[1] * 37) * Math.sin(p[1] * 83));
     }
     return bkLit(col, n);
   };
+}
+
+// On the front cover (part cp, its face at z, bounds bx and by): the
+// leather's stitched border and pressed groove, as thin splats along their
+// lines, or the scrapbook's paper label.
+function albumTrim(style, k, cp, { bx, by, z }) {
+  const look = ALBUM_STYLES[style] || ALBUM_STYLES.leather;
+  if (style === "leather") {
+    // A path round the cover, `d` in from its edges: the point at t (0..1).
+    const ring = (d) => {
+      const x0 = bx[0] + d;
+      const x1 = bx[1] - d;
+      const y0 = by[0] + d;
+      const y1 = by[1] - d;
+      const w = x1 - x0;
+      const h = y1 - y0;
+      const L = 2 * (w + h);
+      return {
+        L,
+        at(t) {
+          let s = t * L;
+          if (s < w)
+            return [
+              [x0 + s, y0],
+              [1, 0, 0],
+            ];
+          s -= w;
+          if (s < h)
+            return [
+              [x1, y0 + s],
+              [0, 1, 0],
+            ];
+          s -= h;
+          if (s < w)
+            return [
+              [x1 - s, y1],
+              [-1, 0, 0],
+            ];
+          s -= w;
+          return [
+            [x0, y1 - s],
+            [0, -1, 0],
+          ];
+        },
+      };
+    };
+    const thread = bkLit("#d9c6a5", [0, 0, 1]);
+    const stitch = ring(0.04);
+    k.cloud({ share: 0.004, pattern: false }, (rand, i, n) => {
+      // Dashes of two thin splats each, a little longer than their gaps.
+      const dashes = Math.floor(n / 2);
+      const j = Math.floor(i / 2);
+      if (j >= dashes) return null;
+      const len = stitch.L / dashes;
+      const t = (j + 0.5 + ((i % 2) - 0.5) * 0.24) / dashes;
+      const [[x, y], dir] = stitch.at(t);
+      return { p: [x, y, z + 0.004], dir, stretch: (0.1 * len) / 0.0032, color: thread, size: 0.32, opacity: 1, part: cp }; // prettier-ignore
+    });
+    const groove = ring(0.07);
+    const dark = bkLit(shade(look.cover, 0.78), [0, 0, 1]);
+    k.cloud({ share: 0.004, pattern: false }, (rand, i, n) => {
+      const [[x, y], dir] = groove.at((i + 0.5) / n);
+      return { p: [x, y, z + 0.003], dir, stretch: (0.5 * groove.L) / n / 0.0028, color: dark, size: 0.28, opacity: 1, part: cp }; // prettier-ignore
+    });
+  } else if (style === "scrapbook") {
+    const lx = (bx[0] + bx[1]) / 2;
+    rect(k, { share: 0.012, at: [lx - 0.22, -0.02, z + 0.004], u: [0.44, 0, 0], v: [0, 0.2, 0], n: [0, 0, 1], part: cp, color: () => bkLit("#f1e8d6", [0, 0, 1]) }); // prettier-ignore
+  }
 }
 
 const ALBUM_BOXES = (W, H) => ({
@@ -797,7 +1001,7 @@ const ALBUM_BOXES = (W, H) => ({
 const ALBUM_RECIPE = {
   turntable: false,
   tiltLock: true, // a drag only spins it left and right (PACKS.md 5c)
-  density: 0.35,
+  density: 1,
   alive: BOOK_RECIPE.alive,
   options: [
     {
@@ -857,8 +1061,6 @@ const ALBUM_RECIPE = {
       const use = { o: kind === "one" ? ph[0] : -1, t: kind === "stack" ? ph[0] : -1, u: kind === "stack" ? ph[1] : -1, l: kind === "pair" ? ph[0] : -1, r: kind === "pair" ? ph[1] : -1 }; // prettier-ignore
       return names.map((n) => ({ id: `a${i}${fb}${n}`, page: use[n] ?? -1 }));
     };
-    const bx = [0, W + st.ov];
-    const by = [-H / 2 - st.ov, H / 2 + st.ov];
     buildSideBound(k, st, o, {
       W,
       H,
@@ -868,7 +1070,8 @@ const ALBUM_RECIPE = {
       inside: look.page,
       bands: false,
       coverSheet: false,
-      cloth: albumCloth(o.cover, bx, by),
+      cloth: albumCloth(o.cover),
+      onCover: (k, cp, at) => albumTrim(o.cover, k, cp, at),
       leaves(k, leafOf) {
         const boxes = ALBUM_BOXES(W, H);
         for (let s = 0; s < 4; s++) {
@@ -1022,8 +1225,8 @@ const FRAME_RECIPE = {
     // A patch of wall behind, and the frame's soft shadow on it (it swings
     // with the frame).
     const wallX = X + 0.35;
-    rect(k, { share: 0.26, at: [-wallX, -Y - 0.3, -0.09], u: [2 * wallX, 0, 0], v: [0, nailY + 0.18 + Y + 0.3, 0], n: [0, 0, 1], color: (a, b) => bkLit(shade("#ebe5da", 1.02 - 0.05 * b), [0, 0, 1]) }); // prettier-ignore
-    rect(k, { share: 0.03, at: [-X + 0.03, -Y - 0.04, -0.075], u: [2 * X, 0, 0], v: [0, 2 * Y, 0], n: [0, 0, 1], color: () => bkLit("#cfc8bc", [0, 0, 1]), part: fp }); // prettier-ignore
+    plainRect(k, { share: 0.26, at: [-wallX, -Y - 0.3, -0.09], u: [2 * wallX, 0, 0], v: [0, nailY + 0.18 + Y + 0.3, 0], n: [0, 0, 1], color: (a, b) => bkLit(shade("#ebe5da", 1.02 - 0.05 * b), [0, 0, 1]) }); // prettier-ignore
+    plainRect(k, { share: 0.03, at: [-X + 0.03, -Y - 0.04, -0.075], u: [2 * X, 0, 0], v: [0, 2 * Y, 0], n: [0, 0, 1], color: () => bkLit("#cfc8bc", [0, 0, 1]), part: fp }); // prettier-ignore
     // The nail: a round head and a little of its shank.
     k.cloud({ share: 0.004, pattern: false }, (rand, i, n) => {
       const r = Math.sqrt(i / n) * 0.022;
@@ -1063,7 +1266,7 @@ const FRAME_RECIPE = {
     ];
     for (const sd of sides) {
       // The face (mitered: the top and bottom run the full width).
-      rect(k, {
+      plainRect(k, {
         share: 0.06,
         at: sd.at,
         u: sd.u,
@@ -1077,15 +1280,15 @@ const FRAME_RECIPE = {
       });
       // The outer edge, down to the wall.
       const out = sd.s === 0 ? [[-X, Y, -0.045], [2 * X, 0, 0]] : sd.s === 1 ? [[-X, -Y, -0.045], [2 * X, 0, 0]] : sd.s === 2 ? [[-X, -Y, -0.045], [0, 2 * Y, 0]] : [[X, -Y, -0.045], [0, 2 * Y, 0]]; // prettier-ignore
-      rect(k, { share: 0.012, at: out[0], u: out[1], v: [0, 0, d + 0.045], n: sd.n, part: fp, color: () => bkLit(shade(faceColor(0.5, 1, sd.s), 0.85), sd.n) }); // prettier-ignore
+      plainRect(k, { share: 0.012, at: out[0], u: out[1], v: [0, 0, d + 0.045], n: sd.n, part: fp, color: () => bkLit(shade(faceColor(0.5, 1, sd.s), 0.85), sd.n) }); // prettier-ignore
       // The inner lip, down to the picture.
       const inn = sd.s === 0 ? [[-ow, oh, 0], [2 * ow, 0, 0]] : sd.s === 1 ? [[-ow, -oh, 0], [2 * ow, 0, 0]] : sd.s === 2 ? [[-ow, -oh, 0], [0, 2 * oh, 0]] : [[ow, -oh, 0], [0, 2 * oh, 0]]; // prettier-ignore
-      rect(k, { share: 0.006, at: inn[0], u: inn[1], v: [0, 0, d], n: [-sd.n[0], -sd.n[1], 0], part: fp, color: () => bkLit(shade(faceColor(0.5, 0, sd.s), 0.7), [0, 0, 1]) }); // prettier-ignore
+      plainRect(k, { share: 0.006, at: inn[0], u: inn[1], v: [0, 0, d], n: [-sd.n[0], -sd.n[1], 0], part: fp, color: () => bkLit(shade(faceColor(0.5, 0, sd.s), 0.7), [0, 0, 1]) }); // prettier-ignore
     }
     if (mat) {
       // A white mat with a beveled window, a little over the photo.
       const mz = 0.014;
-      const band = (at, u, v) => rect(k, { share: 0.035, at, u, v, n: [0, 0, 1], part: fp, color: () => bkLit("#f7f5f0", [0, 0, 1]) }); // prettier-ignore
+      const band = (at, u, v) => plainRect(k, { share: 0.035, at, u, v, n: [0, 0, 1], part: fp, color: () => bkLit("#f7f5f0", [0, 0, 1]) }); // prettier-ignore
       band([-ow, H / 2, mz], [2 * ow, 0, 0], [0, mat, 0]);
       band([-ow, -oh, mz], [2 * ow, 0, 0], [0, mat, 0]);
       band([-ow, -H / 2, mz], [mat, 0, 0], [0, H, 0]);
@@ -1094,8 +1297,8 @@ const FRAME_RECIPE = {
     if (style === "digital") {
       // A black screen behind the photo, a small light, and the fade: a
       // black layer over the photo that clears as channel 0 falls.
-      rect(k, { share: 0.03, at: [-W / 2, -H / 2, -0.012], u: [W, 0, 0], v: [0, H, 0], n: [0, 0, 1], part: fp, color: () => "#0b0b0d" }); // prettier-ignore
-      rect(k, { share: 0.05, at: [-W / 2, -H / 2, 0.022], u: [W, 0, 0], v: [0, H, 0], n: [0, 0, 1], part: fp, color: () => "#0b0b0d", kind: "fade", params: [0, -0.99] }); // prettier-ignore
+      plainRect(k, { share: 0.03, at: [-W / 2, -H / 2, -0.012], u: [W, 0, 0], v: [0, H, 0], n: [0, 0, 1], part: fp, color: () => "#0b0b0d" }); // prettier-ignore
+      plainRect(k, { share: 0.05, at: [-W / 2, -H / 2, 0.022], u: [W, 0, 0], v: [0, H, 0], n: [0, 0, 1], part: fp, color: () => "#0b0b0d", kind: "fade", params: [0, -0.99] }); // prettier-ignore
       k.cloud({ share: 0.0008, pattern: false }, () => ({ p: [X - fw * 0.5, -Y + fw * 0.5, d + 0.002], n: [0, 0, 1], color: "#5dd67a", size: 0.5, opacity: 1, part: fp })); // prettier-ignore
     }
     k.sheet({ id: "photo", center: [0, 0, 0], width: W, height: H, method: "pixels", part: fp });
