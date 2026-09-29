@@ -110,10 +110,16 @@ Model: Opus 5.5 (default effort).
 
 - September 29, 2026: lane started; draft PR #102 opened.
 - All four toys built in `src/packs/computing-history.js` (public, AI and computing shelf): the
-  Turing machine, the difference engine, the Enigma machine and the Turing-Welchman Bombe. Each has
-  its sound (a tap sound in `src/toy-sounds.js`, then cues from `drive()` that follow what it does),
-  its how-to line and About text, a plan entry (`keep`), a thumbnail and tests in
-  `tests/mca.spec.mjs`.
+  Turing machine, the difference engine, the Enigma machine and the Turing-Welchman Bombe (shelf
+  name "Bombe", so it fits a phone card). Each has its sound (a tap sound in `src/toy-sounds.js`,
+  then cues from `drive()` that follow what it does), its how-to line and About text, a plan entry
+  (`keep`), a thumbnail and tests in `tests/mca.spec.mjs`.
+- Cards on the Effect review page (lane MachinesA): `mca-turing`, `mca-difference`, `mca-enigma`,
+  `mca-bombe`, `mca-stills`. Waiting for the owner's marks; an hourly check-in reads them.
+- Full suite: 423 passed, 3 failed on the first run; the two Books tests timed out while two
+  orphaned test workers of mine held 12 GB (stopped; both pass alone), and the phone shelf test
+  caught the Bombe's long name (fixed). After the fixes and the merge of main: the lane's, taps,
+  help and AI tests pass (102), prettier and the spelling check are clean.
 
 ## Notes
 
@@ -155,5 +161,10 @@ Model: Opus 5.5 (default effort).
   the Bombe's readout.
 
 ## For the Operator
+
+- The lane record's note on the Effect review page says "photo-real Enigma machine"; the Enigma is
+  kit-built (see Notes). Please change the note (lanes only set their own groups).
+- The Bombe's shelf name is "Bombe": "Turing-Welchman Bombe" didn't fit a phone card in two lines
+  (`tests/smoke.spec.mjs`, "Long names wrap"). Its About text gives the full name.
 
 - No engine change needed. A long press would need one (the difference engine queues taps instead).
