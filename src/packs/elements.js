@@ -16,6 +16,7 @@ import {
   quatRotate,
   vec,
 } from "../kit.js";
+import { evenEllipsoid, evenTorus } from "./even.js";
 
 const TAU = Math.PI * 2;
 const { add, sub, mul, dot, cross, len, unit } = vec;
@@ -1628,6 +1629,9 @@ export const RECIPES = {
           { thick: 0.2 },
         ),
         {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           flat: 0.2,
           interior: 0.06,
           core: shade(o.base, 0.6),
@@ -1649,6 +1653,9 @@ export const RECIPES = {
           [0, floor + 0.08],
         ]),
         {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           flat: 0.3,
           color: (c) => lit(mix("#e6eef8", "#ffffff", c.rand() * 0.6), c.n, 0.25),
         },
@@ -1656,11 +1663,19 @@ export const RECIPES = {
       // A snowy fir tree.
       const tx = -0.2;
       const tz = -0.12;
-      k.add(k.cylinder(0.025, 0.1), { pos: [tx, floor + 0.1, tz], color: "#5a3a22" });
+      k.add(k.cylinder(0.025, 0.1), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
+        pos: [tx, floor + 0.1, tz],
+        color: "#5a3a22",
+      });
       for (let i = 0; i < 4; i++) {
         const y0 = floor + 0.12 + i * 0.1;
         const r0 = 0.17 - i * 0.035;
         k.add(k.cone(r0, 0.01, 0.16, { caps: "bottom" }), {
+          opacity: 1,
+          jitter: 0.015,
           pos: [tx, y0 + 0.08, tz],
           color: (c) => {
             if (c.s.cap) return "#1f4a2a";
@@ -1672,6 +1687,9 @@ export const RECIPES = {
         });
       }
       k.add(k.sphere(0.02), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: [tx, floor + 0.55, tz],
         weight: 3,
         pattern: false,
@@ -1681,18 +1699,54 @@ export const RECIPES = {
       const sx = 0.16;
       const sz = 0.12;
       const snow = (c) => lit(mix("#f2f6fb", "#ffffff", c.rand() * 0.5), c.n, 0.3);
-      k.add(k.sphere(0.1), { pos: [sx, floor + 0.15, sz], color: snow });
-      k.add(k.sphere(0.075), { pos: [sx, floor + 0.3, sz], color: snow });
-      k.add(k.sphere(0.055), { pos: [sx, floor + 0.42, sz], color: snow });
-      k.add(k.cylinder(0.04, 0.06), { pos: [sx, floor + 0.5, sz], weight: 2, color: "#1a1a1e" });
-      k.add(k.cylinder(0.06, 0.008), { pos: [sx, floor + 0.47, sz], weight: 2, color: "#1a1a1e" });
+      k.add(k.sphere(0.1), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
+        pos: [sx, floor + 0.15, sz],
+        color: snow,
+      });
+      k.add(k.sphere(0.075), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
+        pos: [sx, floor + 0.3, sz],
+        color: snow,
+      });
+      k.add(k.sphere(0.055), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
+        pos: [sx, floor + 0.42, sz],
+        color: snow,
+      });
+      k.add(k.cylinder(0.04, 0.06), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
+        pos: [sx, floor + 0.5, sz],
+        weight: 2,
+        color: "#1a1a1e",
+      });
+      k.add(k.cylinder(0.06, 0.008), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
+        pos: [sx, floor + 0.47, sz],
+        weight: 2,
+        color: "#1a1a1e",
+      });
       k.add(k.torus(0.062, 0.016), {
+        opacity: 1,
+        jitter: 0.015,
         pos: [sx, floor + 0.36, sz],
         weight: 2,
         pattern: false,
         color: (c) => (Math.sin(c.u * TAU * 8) > 0 ? "#c8202a" : "#f2f2f2"),
       });
       k.add(k.cone(0.012, 0.001, 0.07), {
+        opacity: 1,
+        jitter: 0.015,
         pos: [sx + 0.02, floor + 0.43, sz + 0.075],
         rot: [90, 0, 0],
         weight: 3,
@@ -1707,6 +1761,9 @@ export const RECIPES = {
         [0.0, 0.2],
       ]) {
         k.add(k.sphere(0.009), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           pos: [sx + dx, floor + dy, sz + (dy > 0.4 ? 0.05 : dy > 0.25 ? 0.074 : 0.098)],
           weight: 4,
           pattern: false,
@@ -1743,6 +1800,8 @@ export const RECIPES = {
       }));
       // The glass dome, with a bright reflection.
       k.add(k.sphere(RG), {
+        even: true,
+        jitter: 0.015,
         pos: G,
         opacity: 0.16,
         flat: 0.3,
@@ -2153,7 +2212,15 @@ export const RECIPES = {
           ],
           { thick: 0.1 },
         ),
-        { flat: 0.25, interior: 0.1, core: shade(wax, 0.92), color: waxCol },
+        {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
+          flat: 0.25,
+          interior: 0.1,
+          core: shade(wax, 0.92),
+          color: waxCol,
+        },
       );
       // Drips of wax down the side.
       for (let i = 0; i < 8; i++) {
@@ -2168,9 +2235,7 @@ export const RECIPES = {
             grid: 10,
             caps: true,
           }),
-          {
-            color: waxCol,
-          },
+          { opacity: 1, jitter: 0.015, color: waxCol },
         );
       }
       // The wick.
@@ -2184,10 +2249,7 @@ export const RECIPES = {
           0.008,
           { samples: 8, grid: 6 },
         ),
-        {
-          weight: 3,
-          color: "#1a1410",
-        },
+        { opacity: 1, jitter: 0.015, weight: 3, color: "#1a1410" },
       );
       // The flame: a steady core, flickering tongues and a warm halo.
       const flame = k.part("flame", { pivot: [0, H + 0.05, 0] });
@@ -2201,6 +2263,9 @@ export const RECIPES = {
           [0, 0.23],
         ]),
         {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           pos: [0, H + 0.03, 0],
           part: flame,
           weight: 3,
@@ -2264,9 +2329,15 @@ export const RECIPES = {
           [0.3, 0.0],
           [0, 0.0],
         ]),
-        { flat: 0.2, color: brass },
+        { even: true, opacity: 1, jitter: 0.015, flat: 0.2, color: brass },
       );
-      k.add(k.torus(0.08, 0.018), { pos: [0.55, 0.02, 0], rot: [90, 0, 0], color: brass });
+      k.add(k.torus(0.08, 0.018), {
+        opacity: 1,
+        jitter: 0.015,
+        pos: [0.55, 0.02, 0],
+        rot: [90, 0, 0],
+        color: brass,
+      });
       k.reach([0, H + 0.45, 0]);
     },
   },
@@ -2509,7 +2580,10 @@ export const RECIPES = {
       const w = RB_W;
       // The arc: each splat fades out as channel 0 passes its place (its
       // band, then how far along it is).
-      k.add(k.torus(R, w), {
+      k.add(evenTorus(k, R, w), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         rot: [90, 0, 0],
         scale: [1, 0.3, 1],
         flat: 0.25,
@@ -2539,6 +2613,9 @@ export const RECIPES = {
             (k.rand() - 0.5) * 0.25,
           ];
           k.add(k.sphere(s), {
+            even: true,
+            opacity: 1,
+            jitter: 0.015,
             pos,
             size: 1.8,
             flat: 0.8,
@@ -3306,6 +3383,9 @@ export const RECIPES = {
         { thick: 0.1 },
       );
       k.add(mound, {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         flat: 0.25,
         interior: 0.08,
         core: "#b8a890",
@@ -3321,6 +3401,8 @@ export const RECIPES = {
         },
       });
       k.add(k.disc(0.3), {
+        opacity: 1,
+        jitter: 0.015,
         pos: [0, 0.185, 0],
         pattern: false,
         kind: "wave",
@@ -3359,7 +3441,10 @@ export const RECIPES = {
       for (let i = 0; i < 8; i++) {
         const a = (i / 8) * TAU + k.rand() * 0.5;
         const s = 0.05 + 0.05 * k.rand();
-        k.add(k.ellipsoid(s * 1.3, s * 0.7, s), {
+        k.add(evenEllipsoid(k, s * 1.3, s * 0.7, s), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           pos: [Math.sin(a) * 0.85, 0.05, Math.cos(a) * 0.85],
           color: (c) => lit(mix("#8a8070", "#b8ac98", c.rand()), c.n, 0.4),
         });

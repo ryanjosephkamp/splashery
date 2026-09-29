@@ -20,6 +20,7 @@ import {
   quatEuler,
   vec,
 } from "../kit.js";
+import { evenCylinder, evenDisc, evenEllipsoid } from "./even.js";
 
 const TAU = Math.PI * 2;
 const OAK_SECS = 6.6;
@@ -2849,9 +2850,11 @@ export const RECIPES = {
       const C = [0.05, 0.05, 0.05];
       // Still water; rings of light run out over it from the flower (a band
       // on channel 1, by distance).
-      k.add(k.disc(0.9), {
+      k.add(evenDisc(k, 0.9), {
+        even: true,
+        jitter: 0.015,
         pos: [0, 0, 0],
-        opacity: 0.6,
+        opacity: 0.8,
         flat: 0.3,
         pattern: false,
         kind: "band",
@@ -2882,6 +2885,8 @@ export const RECIPES = {
         [-0.42, 0.45, 0.22, 80, 1],
       ]) {
         k.add(pad(R, 0.4), {
+          opacity: 1,
+          jitter: 0.015,
           pos: [x, 0.012, z],
           rot: [0, rot, 0],
           flat: 0.2,
@@ -2927,6 +2932,8 @@ export const RECIPES = {
             layer: li,
           });
           k.add(shape, {
+            opacity: 1,
+            jitter: 0.015,
             pos: C,
             rot: [tilt, th, 0],
             flat: 0.22,
@@ -2942,7 +2949,10 @@ export const RECIPES = {
           });
         }
       });
-      k.add(k.cone(0.07, 0.1, 0.1), {
+      k.add(evenCylinder(0.07, 0.1, 0.1), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: [C[0], C[1] + 0.12, C[2]],
         weight: 2,
         part: bloom,
@@ -2975,7 +2985,10 @@ export const RECIPES = {
       // The stalk it rises on: built full length, squashed flat under the
       // flower at rest (a morph on channel 0) and hidden.
       const stalk = k.part("stalk");
-      k.add(k.cylinder(0.022, LOTUS_RISE, { caps: false }), {
+      k.add(evenCylinder(0.022, 0.022, LOTUS_RISE, false), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: [C[0], LOTUS_RISE / 2 + 0.02, C[2]],
         weight: 2,
         part: stalk,
@@ -2989,6 +3002,9 @@ export const RECIPES = {
       k.add(
         k.tube(spline([[-0.4, 0, 0.18], [-0.44, 0.2, 0.2], bud]), 0.014, { samples: 24, grid: 8 }),
         {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           ...WV,
           color: "#4f7a2a",
         },
@@ -3002,6 +3018,9 @@ export const RECIPES = {
           [0, 0.26],
         ]),
         {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           pos: bud,
           ...WV,
           color: (c) =>
@@ -4236,12 +4255,16 @@ export const RECIPES = {
             [0.29, 0.18],
           ]),
           {
+            even: true,
+            opacity: 1,
+            jitter: 0.015,
             pos,
             quat: q,
             scale: s,
             flat: 0.2,
             interior: 0.12,
-            core: "#f0e2c0",
+            // (None from the narrow tip, where they would poke out.)
+            core: (c) => (c.lp[1] < -0.36 ? null : "#f0e2c0"),
             color: (c) => {
               const y = c.lp[1];
               if (y < -0.5) return "#3a2412";
@@ -4262,6 +4285,9 @@ export const RECIPES = {
             [0, 0.38],
           ]),
           {
+            even: true,
+            opacity: 1,
+            jitter: 0.015,
             pos,
             quat: q,
             scale: s,
@@ -4284,6 +4310,9 @@ export const RECIPES = {
             grid: 8,
           }),
           {
+            even: true,
+            opacity: 1,
+            jitter: 0.015,
             weight: 2,
             part: cap,
             color: (c) => lit("#5a3e22", c.n, 0.4),
@@ -4297,6 +4326,9 @@ export const RECIPES = {
         k.add(
           k.tube(spline(sp), (t) => 0.035 * s * (1 - 0.5 * t), { samples: 24, grid: 10 }),
           {
+            even: true,
+            opacity: 1,
+            jitter: 0.015,
             part: sprout,
             weight: 2,
             color: (c) => lit(mix("#e8f0c0", "#8ac050", c.t), c.n, 0.4),
@@ -4313,13 +4345,18 @@ export const RECIPES = {
               { grid: 10 },
             ),
             {
+              even: true,
+              opacity: 1,
+              jitter: 0.015,
               pos: shootTip,
               quat: quatMul(q, quatEuler(-30, side * 50, side * 60)),
               part: sprout,
               weight: 2.5,
               flat: 0.2,
               color: (c) =>
-                Math.abs(c.u - 0.5) * 2 > oakLobes(c.v) ? null : lit(mix("#6aa83a", "#a8d060", c.v), c.n, 0.3), // prettier-ignore
+                Math.abs(c.u - 0.5) * 2 > oakLobes(c.v)
+                  ? null
+                  : lit(mix("#6aa83a", "#a8d060", c.v), c.n, 0.3),
             },
           );
         }
@@ -4340,6 +4377,9 @@ export const RECIPES = {
           { grid: 40 },
         ),
         {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           pos: [0.05, -0.5, -0.25],
           rot: [-72, 25, 0],
           flat: 0.2,
@@ -4371,6 +4411,9 @@ export const RECIPES = {
           { samples: 12, grid: 6 },
         ),
         {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           color: autumn ? "#8a5a22" : "#4f7a2a",
         },
       );
