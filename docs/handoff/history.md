@@ -16,6 +16,38 @@ had not settled 3 s after its tap) and "a scan rig moves a part of a captured to
 console warning, like the rare engine warning in HANDOFF.md). Keep `test-results/` if either comes
 back.
 
+### Books: your book, the photo album and the picture frame (PRs #73 and #74, merged 2026-09-29)
+
+- Built by Opus 5.5, on the picture engine. Your book opens the Tinkerer's Manual or any PDF (a file
+  or an https address) in five styles (hardcover, paperback, magazine, stapled paper, spiral
+  notebook); a tap opens the cover and turns one leaf at a time, with pages that curl like paper.
+  The photo album holds a set of your own photos in photo corners, and the picture frame swings on
+  its nail (or steps through photos as a digital frame). All three are labs toys.
+- Its engine PR (#74) is additive: a picture toy's media opens before its build (`k.media`), sets of
+  pictures (`input.media.multiple`, `openMedia(list)`), pages built ahead while hidden
+  (`out.sheets[id].ahead`, `pics.ready`), `out.resortPose` for parts and leaves that turn over, and
+  `pictures.decorate` to draw on a page before it becomes splats. It also fixed a Toy tab panel that
+  could stay blank.
+- About 15 hours from start to merge. Merged behind the labs switch; its six cards wait for the
+  owner's marks.
+- Lessons (PACKS.md, section 5b): anything turned more than a quarter turn needs `out.resortPose`
+  while it turns and once it lands; a turn waits until its pages are built, so it never shows a
+  blank page; keep layers about 0.01 of the toy apart where big splats lie under a picture.
+
+### Studio Models: 3D model files to splats (PRs #86 and #87, merged 2026-09-29)
+
+- Built by Sonnet 5.5. A labs toy on the Studio shelf opens a glTF, OBJ or STL model with its
+  textures and rebuilds it as splats on the device, with two CC0 samples;
+  `tools/model-to-splats.mjs` makes toy assets from CC0 models (PACKS.md, section 9). The core is
+  one module with no DOM (`src/packs/studio-models-core.js`), shared by the toy and the Node tool.
+- The Operator's engine PR #87 lets a recipe take several files at once (a glTF with its .bin, an
+  OBJ with its .mtl).
+- About 5 hours from start to merge. Merged behind the labs switch; its five cards wait for the
+  owner's marks.
+- Lessons: size a splat to about one neighbor distance (the renderer's falloff is narrower than a
+  standard Gaussian, and smaller splats left slits); don't shrink splats near a fold below 0.8 of
+  their size, or dark holes show.
+
 ### Lab: sharper kernels and splat fields (PRs #83 and #85, merged 2026-09-29)
 
 - Built by Opus 5.5, the first Lab lane. A literature check (docs/lab/LITERATURE.md), then a sharper

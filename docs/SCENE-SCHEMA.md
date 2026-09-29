@@ -93,6 +93,9 @@ One of three kinds:
       device. As with splat files, the file itself is never saved or uploaded, so the scene carries
       the settings only; whoever opens it is asked to open the same file, and sees the toy's sample
       meanwhile.
+    - `{ "files": [{ "name": "beach.jpg", "bytes": 234567 }, …], "page": 2 }` (added September 28,
+      2026, lane Books): a set of pictures from the visitor's device, opened together (a photo
+      album, a digital frame), up to 200. Like `file`, the scene carries the settings only.
 
     `page` is the page showing, counted from 0 (left out on the first page). Scenes without `media`
     load exactly as before.
