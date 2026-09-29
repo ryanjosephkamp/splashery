@@ -582,6 +582,8 @@ export class Stage {
   // It only changes picking (and shadow and depth passes, unused here); every
   // other toy keeps the engine's 0.3.
   setPickAlpha(v) {
+    // Nothing to do (and the engine left alone) until a toy first asks.
+    if (!Number.isFinite(v) && this.pickAlphaDefault === undefined) return;
     const g = this.app.scene.gsplat;
     this.pickAlphaDefault ??= g.alphaClip;
     const want = Number.isFinite(v) ? v : this.pickAlphaDefault;
