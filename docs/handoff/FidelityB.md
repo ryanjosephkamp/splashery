@@ -127,7 +127,9 @@ Model: Opus 5.5 (claude-opus-5-5), default effort.
   by shelf), stills only: no tap's look changed (clips of seven taps were checked against the old
   ones).
 - Second batch: 16 grade-2 toys where a fix is clearly better (below), with their own cards.
-- Next: the owner's marks (checked about hourly); fix every "fix" as a `-r2` card.
+- September 29, 2026, 13:26 UTC: the owner marked all 73 cards "good" (no fixes). Main merged in
+  (Studio Models, Books, Ops); the full suite passed, 405 of 405. The PR waits only on the merge,
+  which the Operator makes.
 
 ### Toys changed (all kit toys; the fix in a few words)
 
