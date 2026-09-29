@@ -210,6 +210,10 @@ picture). Without it, the fit always learns the sample.
   (`claude/lane-screens-engine`). It adds `time`, `duration` and `seek(s)` to the pictures API, and
   a second argument to a picture toy's `prepare`: `help.media()`. Both are additive; tests in
   `tests/scr-engine.spec.mjs`. Merge it before this lane's PR.
+- Two shared tests count toys exactly and fail with this lane's toys (they would with any new labs
+  or computing toy): `tests/pic.spec.mjs:138` expects the Picture lab to be the only labs toy, and
+  `tests/ai.spec.mjs:52` expects exactly twelve computing toys (it could count the `computing`
+  pack's toys instead). Both are other lanes' files, so they are yours to change.
 - `tests/taps.spec.mjs`: no exception needed (both taps end where they rest; the Screen stays on,
   but none of its parts or morph channels move at rest).
 - PACKS.md, picture toys: a screen sheet's splats stand six of its pixels in front of its center, so
