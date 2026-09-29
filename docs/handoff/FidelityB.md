@@ -123,8 +123,11 @@ Model: Opus 5.5 (claude-opus-5-5), default effort.
   audit that it hadn't (all but the Mandeltorus scan), plus the medicine ball (grade 2, the same rim
   haze as the squash ball). Every toy's tap is unchanged. New shared helpers in `src/packs/even.js`.
   Lane tests in `tests/fb.spec.mjs`.
-- Next: the full suite, thumbnails, screenshots, the before-and-after cards, the draft PR; then the
-  grade-2 toys where a fix is clearly better.
+- Draft PR #90. The 57 cards are on the Effect review page (`fb-<toy id>`, lane FidelityB, grouped
+  by shelf), stills only: no tap's look changed (clips of seven taps were checked against the old
+  ones).
+- Second batch: 16 grade-2 toys where a fix is clearly better (below), with their own cards.
+- Next: the owner's marks (checked about hourly); fix every "fix" as a `-r2` card.
 
 ### Toys changed (all kit toys; the fix in a few words)
 
@@ -158,6 +161,15 @@ Model: Opus 5.5 (claude-opus-5-5), default effort.
 - Math: seashell spiral, platonic solids (the pack's `polyShape` takes `even`).
 - Music: xylophone, snare drum (even shell with finer sparkle).
 - Anatomy: brain, tooth.
+
+### Grade-2 toys changed (the second batch)
+
+Spinning top, puzzle cube (even bodies), octopus, biplane, helicopter, tractor and submarine (even
+rounded boxes and bodies), Statue of Liberty (a smooth sea), birthday cake, watermelon and sushi
+(clean plates, rind and board), eye (a clean white), paper lantern (smooth paper), Pythagoras proof
+(even polygons), lotus (smooth water), Uranus (even rings). Left as they are, grain by design or no
+clear gain: the Lorenz attractor, bicycle, cherry blossom, kelp, palm, rugby ball, Taj Mahal,
+Parthenon, pyramids, telescope and the glows, fur, sparks, glass and foliage.
 
 ## Notes
 
