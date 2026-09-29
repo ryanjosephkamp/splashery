@@ -28,8 +28,9 @@ vehicles, and the everyday objects as real captures), as brand-free sources turn
 The owner's note of big ideas and his answers on the planning page "The Splashery Universe" are in
 [reviews/2026-09-29-universe/review.md](reviews/2026-09-29-universe/review.md). Splashery grows into
 five parts. New parts open behind the labs switch, and the owner decides when each goes public. The
-steps above continue alongside them. Until the weekly reset (September 30, 2026, 4 p.m. ET), up to 8
-workers run at once. Each lane names its model (the owner's split in CLAUDE.md).
+steps above continue alongside them. Until the weekly reset (September 30, 2026, 4 p.m. ET), up to
+12 workers run at once (the owner raised it from 8 on the morning of September 29). Each lane names
+its model (the owner's split in CLAUDE.md).
 
 - **Toys** (Opus 5.5): the sound overhaul (step 4, two lanes from the owner's notes); two fidelity
   lanes (Fidelity A audits every toy at phone size and fixes the worst, starting with the desk lamp,
