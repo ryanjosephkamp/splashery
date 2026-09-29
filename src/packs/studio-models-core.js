@@ -82,8 +82,8 @@ export class NeedsFilesError extends Error {
   constructor(names, what) {
     super(
       `This ${what} uses separate files (${names.join(", ")}) that were not opened with it. ` +
-        "The file picker takes one file at a time, so save the model as a single .glb " +
-        "(Blender: File > Export > glTF 2.0, format glTF Binary) or as a .gltf with everything embedded, and open that.",
+        "In the file dialog, select the model together with those files (hold Shift or Ctrl, or Command, to pick several), " +
+        "or save the model as a single .glb (Blender: File > Export > glTF 2.0, format glTF Binary) and open that.",
     );
     this.names = names;
   }

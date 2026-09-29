@@ -701,10 +701,11 @@ shows the count.
 normal, a little to the side) and goes there and back in a straight line in about 3 s. Its channel
 is set by its height, so the lift rises through the model like a wave.
 
-**Files that come with a model.** The Toy tab's file picker takes one file, so a `.gltf` with a
-`.bin` and pictures, or an `.obj` with a `.mtl`, needs a single `.glb` (the panel says so). The
-input's `read(text, fileName, file, files)` also accepts a Map of the other files, for an engine
-change that lets the picker take several.
+**Files that come with a model.** The input sets `multiple: true`, so the Toy tab's file dialog
+takes several files at once (engine PR #87): a `.gltf` with its `.bin` and textures, or an `.obj`
+with its `.mtl` and pictures. `read(text, fileName, file, files)` picks the model among them (a
+`.glb`, `.gltf`, `.obj` or `.stl`) and hands the rest to the parser by name. A `.gltf` opened alone
+says which files it needs; a missing texture only leaves its color out, with a note.
 
 **The tool.**
 

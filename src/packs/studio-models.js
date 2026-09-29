@@ -182,14 +182,29 @@ const MODEL_SPLATS = {
   action: { key: "lift", label: "Lift off and settle back" },
   input: {
     title: "Your own 3D model",
-    accept: ".glb,.gltf,.obj,.stl,.mtl,model/gltf-binary,model/gltf+json",
+    accept:
+      ".glb,.gltf,.bin,.obj,.mtl,.stl,.png,.jpg,.jpeg,.webp,model/gltf-binary,model/gltf+json,image/*",
     binary: true,
+    multiple: true,
     fileButton: "Open a 3D model…",
-    note: "Open a .glb, a .gltf with everything embedded, an .obj or an .stl (binary or text). It is converted on this device; nothing is uploaded. Not read: Draco- or meshopt-compressed glTF, animation (a skinned model shows in its bind pose) and lights. A .gltf or .obj that needs other files (a .bin, a .mtl, pictures) works when you save it as a .glb.",
+    note: "Open a .glb, .gltf, .obj or .stl file (binary or text). A .gltf or .obj that comes with other files (a .bin, a .mtl, pictures) opens when you select them all together in the file dialog. It is converted on this device; nothing is uploaded. Not read: Draco- or meshopt-compressed glTF, animation (a skinned model shows in its bind pose) and lights.",
     async read(_text, fileName, file, files) {
-      if (!file) throw new Error("Open a 3D model file.");
-      const bytes = new Uint8Array(await file.arrayBuffer());
-      const prep = await openModel(bytes, fileName, files);
+      const picked = files?.length ? [...files] : file ? [file] : [];
+      if (!picked.length) throw new Error("Open a 3D model file.");
+      // The model is the .glb, .gltf, .obj or .stl among the files; the rest come with it.
+      const rank = (f) =>
+        ["glb", "gltf", "obj", "stl"].indexOf(f.name.toLowerCase().split(".").pop());
+      const main = picked.filter((f) => rank(f) >= 0).sort((a, b) => rank(a) - rank(b))[0];
+      if (!main) {
+        throw new Error(
+          "None of those files is a 3D model this toy reads. Pick a .glb, .gltf, .obj or .stl file, with the files that come with it.",
+        );
+      }
+      const others = new Map();
+      for (const f of picked)
+        if (f !== main) others.set(f.name, new Uint8Array(await f.arrayBuffer()));
+      const bytes = new Uint8Array(await main.arrayBuffer());
+      const prep = await openModel(bytes, main.name || fileName, others);
       return { source: "custom", modelName: prep.name };
     },
     shown: () => {

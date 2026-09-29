@@ -391,6 +391,18 @@ test.describe("the toy in the browser", () => {
     // The wireframe view.
     await page.evaluate(() => window.__splashery.app.setToyOptions({ show: "wire" }));
     await page.waitForFunction(() => window.__splashery.player.proc?.ctx?.kit?.data?.model?.wire === true, null, { timeout: 60_000 }); // prettier-ignore
+    // Several files at once: a .gltf with its .bin, and an .obj with its .mtl (picked mtl first).
+    await expect(page.locator("#toy-input-file")).toHaveAttribute("multiple", "");
+    await page.locator("#toy-input-file").setInputFiles([path.join(FIX, "quad-loose.gltf"), path.join(FIX, "quad-loose.bin")]); // prettier-ignore
+    await page.waitForFunction(() => window.__splashery.player.proc?.ctx?.kit?.data?.model?.name === "quad-loose", null, { timeout: 60_000 }); // prettier-ignore
+    await page.locator("#toy-input-file").setInputFiles([path.join(FIX, "pyramid.mtl"), path.join(FIX, "pyramid.obj")]); // prettier-ignore
+    await page.waitForFunction(() => window.__splashery.player.proc?.ctx?.kit?.data?.model?.name === "pyramid", null, { timeout: 60_000 }); // prettier-ignore
+    const pyr = await page.evaluate(() => window.__splashery.player.proc.ctx.kit.data.model);
+    expect(pyr.triangles).toBe(6);
+    expect(pyr.notes.join(" ")).not.toContain("pyramid.mtl"); // its colors came with it
+    // Only pictures or a .mtl: no model in them.
+    await page.locator("#toy-input-file").setInputFiles([path.join(FIX, "pyramid.mtl")]);
+    await expect(page.locator(".warning:visible")).toContainText("None of those files");
     // A file that is not a model gives a message, not a crash.
     await page.locator("#toy-input-file").setInputFiles({ name: "x.glb", mimeType: "model/gltf-binary", buffer: Buffer.from("not a model") }); // prettier-ignore
     await expect(page.locator(".warning:visible")).toBeVisible();

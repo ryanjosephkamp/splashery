@@ -2,7 +2,7 @@
 // Films opening a model file in the "Model to splats" toy (lane Studio Models): the toy shows its
 // sample, a file is opened with the Toy tab's panel, and the model appears as splats. Real time,
 // 390 x 844 phone screen, cropped to the stage. Usage:
-//   node tools/stm-open-clip.mjs <model file> <out.gif> [--secs 6] [--fps 8]
+//   node tools/stm-open-clip.mjs <model file[,other file,...]> <out.gif> [--secs 6] [--fps 8]
 import { chromium } from "@playwright/test";
 import fs from "node:fs";
 import path from "node:path";
@@ -45,7 +45,7 @@ const grab = async () => {
   frames.push(f);
 };
 for (let i = 0; i < 3; i++) await grab();
-await page.locator("#toy-input-file").setInputFiles(file);
+await page.locator("#toy-input-file").setInputFiles(file.split(","));
 const t0 = Date.now();
 while (Date.now() - t0 < secs * 1000) {
   await grab();
