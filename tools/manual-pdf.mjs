@@ -7,7 +7,9 @@
 //   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/manual-pdf.mjs [out.pdf]
 //
 // Writes manual/tinkerers-manual.pdf by default. With --pages=out-%d.png it
-// also saves the first two pages as pictures (for review).
+// also saves the first two pages as pictures (for review); --which=1,20,24
+// picks other pages (the file name's %d is the page number) and --scale=0.64
+// sets their size (1.5 by default).
 
 import { chromium } from "@playwright/test";
 import fs from "node:fs";
@@ -16,6 +18,8 @@ const base = process.env.SPLASHERY_URL || "http://127.0.0.1:4173/";
 const args = process.argv.slice(2);
 const out = args.find((a) => !a.startsWith("--")) || "manual/tinkerers-manual.pdf";
 const pagesArg = args.find((a) => a.startsWith("--pages="))?.slice(8);
+const scale = Number(args.find((a) => a.startsWith("--scale="))?.slice(8)) || 1.5;
+const which = (args.find((a) => a.startsWith("--which="))?.slice(8) || "1,2").split(",").map(Number); // prettier-ignore
 
 const browser = await chromium.launch({
   executablePath: process.env.SPLASHERY_CHROMIUM || undefined,
@@ -51,27 +55,30 @@ if (pagesArg) {
   const view = await browser.newPage({ viewport: { width: 900, height: 1200 } });
   await view.goto(`${base}manual/`);
   const shots = await view.evaluate(
-    async ({ b64, base }) => {
+    async ({ b64, base, which, scale }) => {
       const pdfjs = await import(`${base}vendor/pdfjs/pdf.min.mjs`);
       pdfjs.GlobalWorkerOptions.workerSrc = `${base}vendor/pdfjs/pdf.worker.min.mjs`;
       const data = Uint8Array.from(atob(b64), (c) => c.charCodeAt(0));
       const doc = await pdfjs.getDocument({ data }).promise;
       const urls = [];
-      for (let n = 1; n <= Math.min(2, doc.numPages); n++) {
+      const pages = [doc.numPages];
+      for (const n of which) {
+        if (n > doc.numPages) continue;
         const p = await doc.getPage(n);
-        const vp = p.getViewport({ scale: 1.5 });
+        const vp = p.getViewport({ scale });
         const c = document.createElement("canvas");
         c.width = vp.width;
         c.height = vp.height;
         await p.render({ canvasContext: c.getContext("2d"), viewport: vp }).promise;
         urls.push(c.toDataURL("image/png"));
       }
-      return urls;
+      return { urls, pages: pages[0], which: which.filter((n) => n <= doc.numPages) };
     },
-    { b64: pdf.toString("base64"), base },
+    { b64: pdf.toString("base64"), base, which, scale },
   );
-  shots.forEach((u, i) => {
-    const file = pagesArg.replace("%d", String(i + 1));
+  console.log(`${shots.pages} pages`);
+  shots.urls.forEach((u, i) => {
+    const file = pagesArg.replace("%d", String(shots.which[i]));
     fs.writeFileSync(file, Buffer.from(u.split(",")[1], "base64"));
     console.log(file);
   });
