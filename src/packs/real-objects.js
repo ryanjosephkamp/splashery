@@ -320,7 +320,7 @@ const WATER_BOTTLE = {
           const streak = Math.exp(-(((b.a - 2.2) / 0.1) ** 2)) + 0.6 * Math.exp(-(((b.a - 2.75) / 0.06) ** 2)); // prettier-ignore
           const edge = Math.abs(Math.sin(b.a));
           const w = 0.82 + 0.16 * streak;
-          return { ...b, p: gx(b.p), color: [w, w + 0.02, w + 0.04], opacity: 0.1 + 0.08 * (1 - edge) + 0.45 * streak, flat: 0.2 }; // prettier-ignore
+          return { ...b, p: gx(b.p), color: [w, w + 0.02, w + 0.04].map((v) => Math.min(1, v)), opacity: 0.1 + 0.08 * (1 - edge) + 0.45 * streak, flat: 0.2 }; // prettier-ignore
         },
       },
     );
