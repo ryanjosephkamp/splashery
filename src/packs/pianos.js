@@ -869,7 +869,7 @@ function buildGrand(k) {
           normal: () => (side ? [-Math.sin(a), Math.cos(a), 0] : [Math.sin(a), -Math.cos(a), 0]),
         },
       ),
-      { color: (c) => lacquer(c, side ? 0.6 : 0.3), even: true, weight: 0.55, flat: 0.1, jitter: 0.006 }, // prettier-ignore
+      { color: (c) => lacquer(c, side ? 0.6 : 0.3), even: true, weight: 0.9, flat: 0.1, jitter: 0.006 }, // prettier-ignore
     );
   const pz = -1.0;
   const px = rightX(pz) - 0.05;
@@ -1310,7 +1310,7 @@ function buildHarpsichord(k) {
           return edge > 0.04 && edge < 0.05 ? metal(c, GILT, "#6b5220") : lit(c, "#efe4c9", 0.2);
         },
         even: true,
-        weight: 0.6,
+        weight: 1.3,
         flat: 0.1,
         jitter: 0.006,
       },

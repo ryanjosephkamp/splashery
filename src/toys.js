@@ -2749,7 +2749,7 @@ export const TOYS = [
     kind: "kit",
     pack: "pianos",
     tags: "instrument keyboard baroque quill jacks plucked strings bach minuet song midi",
-    camera: { yaw: 0.6, pitch: 0.42, roll: 0, distance: 4.2 },
+    camera: { yaw: 0.6, pitch: 0.42, roll: 0, distance: 3.5 },
   },
   {
     id: "electronic-keyboard",
@@ -2758,7 +2758,7 @@ export const TOYS = [
     kind: "kit",
     pack: "pianos",
     tags: "instrument keyboard synth organ vibes drum pads lights learn song midi",
-    camera: { yaw: 0.3, pitch: 0.78, roll: 0, distance: 3.6 },
+    camera: { yaw: 0.3, pitch: 0.7, roll: 0, distance: 3.4 },
   },
 
   // ---- Pack: vehicles ----

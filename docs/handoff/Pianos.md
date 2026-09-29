@@ -122,13 +122,25 @@ entries of existing toys); keep to your own entries. The laptop is locked.
 
 ## State
 
-Model: Opus 5.5 (default effort), for the whole lane.
+Model: Opus 5.5 (default effort), for the whole lane. No helpers used.
 
-- Engine PR (claude/lane-pianos-engine): written and tested. `src/songs.js` (MIDI and ABC readers,
-  the song player, `songControls`), the lever kind (22) in `src/effects.js` (GLSL and WGSL),
-  `src/kit.js` and `src/motion.js`, the song bar in `src/ui.js`, `index.html` and `styles.css`, six
-  keyboard voices in `src/voices.js`, PACKS.md section 5d, tests/pno-engine.spec.mjs.
-- Toy PR (claude/lane-pianos): in progress.
+- Engine PR (claude/lane-pianos-engine): `src/songs.js` (MIDI and ABC readers, the song player,
+  `songControls`), the lever kind (22) in `src/effects.js` (GLSL and WGSL), `src/kit.js` and
+  `src/motion.js`, the song bar in `src/ui.js`, `index.html` and `styles.css`, six keyboard voices
+  in `src/voices.js` (grand, upright, harpsichord, organ, synth, vibes; the drum pads reuse kick,
+  snare, hat and tom), PACKS.md section 5d, tests/pno-engine.spec.mjs (14 tests).
+- Toy PR (claude/lane-pianos): `src/packs/pianos.js` with the four toys, their shared-list entries,
+  thumbnails, tests/pno.spec.mjs, `tools/pno-clip.mjs` (phone-sized clips with the song bar).
+- Keys: the grand and the upright have the full 88 (A0 to C8), the harpsichord 61 (F1 to F6), the
+  electronic keyboard 61 (C2 to C7). Every key, hammer, damper, jack and string that moves is its
+  own lever. Builds: about 190,000 splats at the high tier (density 1.4 for the pianos, 1.2 for the
+  keyboard), 0.5 to 1.4 s in `node tools/check-packs.mjs pianos`.
+- Built-in songs (written out from the public-domain scores, checked against the Mutopia Project's
+  public-domain editions): Für Elise (the A section twice with both endings, the middle part and the
+  theme again), Clair de lune (the first eight bars), Gymnopédie No. 1 (the first 26 bars), Ode to
+  Joy (the theme with a simple left hand, written by hand), The Entertainer (the introduction and
+  the first strain), the Minuet in G (both halves, each twice), Twinkle, Twinkle, Little Star and
+  Frère Jacques (by hand).
 
 ## Notes
 
@@ -136,7 +148,28 @@ Model: Opus 5.5 (default effort), for the whole lane.
   hammers and about 70 dampers moving one by one. The lever kind moves up to 96 pieces per group, in
   up to 6 groups, each by its own amount from three channels (key, hammer, damper), with two new
   uniform arrays (42 vec4 in all).
+- Song audio is scheduled by the recipe a quarter second ahead on the audio clock (the song player),
+  not through `out.cues` (cues play on the frame, 60 ms apart at best, which drops chord notes).
+  `src/voices.js` is imported only once the speaker is on, so embeds never load it.
+- A tapped key plays through the app with `pick` (the toy-sounds spec lists every key); the
+  electronic keyboard plays its keys from the recipe instead, in the voice chosen on its panel.
+- The drum beat: a MIDI file's own drums (channel 10) when it has them, else kick, snare, hi-hat and
+  a tom fill every four bars.
+- Built-in songs start after a half-second lead-in, so the first key can light (and the first hammer
+  rise) before it sounds.
+- Build time: straight tubes need `{ samples: 4, grid: 12 }` and big curved surfaces an explicit
+  `normal`, or a toy with hundreds of pieces is slow to build.
 
 ## Known issues
 
+- Clair de lune and Gymnopédie are openings, not the whole pieces, to keep the pack small.
+- The strings are one wire per key (a real grand has about 230), laid straight rather than
+  cross-strung.
+
 ## For the Operator
+
+- The brief suggested opening songs through the Toy tab's input panel; the song panel (like the
+  chess game panel) does it instead, with the built-in songs, "Open a MIDI file…" and "Paste ABC" (a
+  multi-line box, which the input panel doesn't have).
+- PACKS.md section 5d is written in the engine PR (the brief listed it as mine).
+- `tools/pno-clip.mjs` is new (phone-sized clips with the page's song bar).
