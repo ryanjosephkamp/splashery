@@ -1589,6 +1589,40 @@ export function createUI(app) {
   els.panes.addEventListener("touchend", () => (pull = null), { passive: true });
   applySheet();
 
+  // ---- A toy's labels (lane Anatomy) ------------------------------------------------
+  // A kit toy's drive() may set out.legend = { title, items: [{ text, head,
+  // on, dim }] }: a list of names shown as page text beside the stage while
+  // it is set (the anatomy atlas's parts). `head` makes an item a heading,
+  // `on` highlights it and `dim` grays it. The list is rebuilt only when it
+  // changes, and hidden as soon as a frame leaves it unset.
+  const legendBox = $("toy-legend");
+  let legendKey = "";
+  app.player?.on("frame", () => {
+    const lg = app.player.motion?.out?.legend || null;
+    const key = lg ? JSON.stringify(lg) : "";
+    if (key === legendKey) return;
+    legendKey = key;
+    legendBox.textContent = "";
+    legendBox.hidden = !lg;
+    if (!lg) return;
+    if (lg.title) {
+      const title = document.createElement("p");
+      title.className = "toy-legend-title";
+      title.textContent = lg.title;
+      legendBox.appendChild(title);
+    }
+    const list = document.createElement("ul");
+    for (const it of lg.items || []) {
+      const li = document.createElement("li");
+      li.textContent = it.text;
+      if (it.head) li.classList.add("head");
+      if (it.on) li.classList.add("on");
+      if (it.dim) li.classList.add("dim");
+      list.appendChild(li);
+    }
+    legendBox.appendChild(list);
+  });
+
   // ---- Toy help (lane Help) ---------------------------------------------------------
   // A short how-to-play line when a new toy opens (picked from the shelf,
   // opened from a link or after a refresh). It fades after a few seconds and
