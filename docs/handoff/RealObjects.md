@@ -125,7 +125,7 @@ water bottle wait for the Fluids lane (left as they are); five cards were "fix".
   and a random subset left clumps and holes (docs/PACKS.md 7c, "even placement").
 - **Baseball cap:** the stand is one smooth turned walnut piece (an even lathe) instead of joined
   kit shapes with grainy edges.
-- **Fountain pen:** the pen gets 80% of the splats (was 72%), the notepad 10%, and the notepad's
+- **Fountain pen:** the pen gets 75% of the splats (was 72%), the notepad 10%, and the notepad's
   rules and margin are fine unbroken lines instead of colored dots in the sheet.
 - **Hoodie:** the shoulder balls are gone. Each armhole is closed with fabric that follows the
   opening's own outline (the sleeve's splats that touch the body, laid on the plane that fits them

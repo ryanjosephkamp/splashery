@@ -785,7 +785,7 @@ const FOUNTAIN_PEN = {
     const scan = SCANS.get("fountain-pen");
     const pen = k.part("pen", { pivot: FP.nib });
     const cap = k.part("cap", { pivot: FP.capC });
-    addScan(k, scan, { share: 0.8, parts: [pen, cap] });
+    addScan(k, scan, { share: 0.75, parts: [pen, cap] });
     // The notepad: a cream sheet with faint blue rules and a red margin, on a thin block.
     const W = 2.3;
     const D = 1.45;
@@ -800,7 +800,7 @@ const FOUNTAIN_PEN = {
     // The rules and the margin: fine unbroken lines of small splats just above the sheet.
     const rules = [];
     for (let z = pz - D / 2 + 0.2 + 0.065; z < pz + D / 2 - 0.01; z += 0.13) rules.push(z);
-    const step = 0.0028;
+    const step = 0.0028 * Math.max(1, Math.sqrt(300000 / k.count)); // about 2.6% of the splats
     const perRule = Math.floor(W / step);
     const perMargin = Math.floor(D / step);
     const nLines = rules.length * perRule + perMargin;
@@ -808,10 +808,10 @@ const FOUNTAIN_PEN = {
       const r = Math.floor(i / perRule);
       if (r < rules.length) {
         const x = -W / 2 + ((i % perRule) + 0.5) * step;
-        return { p: [x, FP.paper + 0.0015, rules[r]], n: [0, 1, 0], size: 0.0042, color: lit([0.72, 0.8, 0.92], [0, 1, 0]), flat: 0.15 }; // prettier-ignore
+        return { p: [x, FP.paper + 0.0015, rules[r]], n: [0, 1, 0], size: 1.5 * step, color: lit([0.72, 0.8, 0.92], [0, 1, 0]), flat: 0.15 }; // prettier-ignore
       }
       const z = pz - D / 2 + (i - rules.length * perRule + 0.5) * step;
-      return { p: [-W / 2 + 0.3, FP.paper + 0.0015, z], n: [0, 1, 0], size: 0.0045, color: lit([0.9, 0.62, 0.62], [0, 1, 0]), flat: 0.15 }; // prettier-ignore
+      return { p: [-W / 2 + 0.3, FP.paper + 0.0015, z], n: [0, 1, 0], size: 1.6 * step, color: lit([0.9, 0.62, 0.62], [0, 1, 0]), flat: 0.15 }; // prettier-ignore
     });
     // The sheets' edges below it.
     addCloud(k, Math.round(k.count * 0.03), (i, n) => {
