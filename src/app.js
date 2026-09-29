@@ -210,6 +210,13 @@ class App {
         7000,
       );
     }
+    // Lane Books: the same for a set of pictures.
+    if (scene.toy.media?.files && !Array.isArray(player.mediaFile)) {
+      ui.toast(
+        `This link shows someone's own pictures (${scene.toy.media.files.length}) with these settings. Open them in the Toy tab to see them; the sample shows meanwhile.`,
+        7000,
+      );
+    }
     await this.loadToy(scene.toy, { file });
     player.applySettings(scene);
     ui.setLook(scene.look, player.resolvedTheme());
@@ -701,6 +708,10 @@ class App {
     if (typeof src === "string") {
       player.mediaFile = null;
       toy.media = { url: src };
+    } else if (Array.isArray(src)) {
+      // A set of pictures (lane Books): the settings only, as for one file.
+      player.mediaFile = src;
+      toy.media = { files: src.map((f) => ({ name: f.name, bytes: f.size })) };
     } else {
       player.mediaFile = src;
       toy.media = { file: { name: src.name, bytes: src.size }, ...(same && toy.media.page ? { page: toy.media.page } : {}) }; // prettier-ignore
@@ -711,7 +722,9 @@ class App {
     this.ui.toast(
       typeof src === "string"
         ? `${media.name} opened from the web.`
-        : `${media.name} opened. It stays on this device.`,
+        : Array.isArray(src)
+          ? `${media.name} opened. They stay on this device.`
+          : `${media.name} opened. It stays on this device.`,
     );
     if (this.ui.currentTab() === "share") this.updateEmbedSoon();
     return media;
@@ -734,6 +747,11 @@ class App {
     const p = this.player.pictures;
     if (!p) return;
     p.go(p.page + delta);
+  }
+
+  // A video's place, from the Toy tab's scrub bar (lane Books).
+  pictureSeek(seconds) {
+    this.player.pictures?.seek(seconds);
   }
 
   pictureTogglePlay() {
@@ -1177,7 +1195,7 @@ class App {
     const url = shareURL(res.hash);
     history.replaceState(null, "", `#s=${res.hash}`);
     // Pictures: a file from this device stays here; the link has the settings.
-    if (this.player.scene.toy.media?.file)
+    if (this.player.scene.toy.media?.file || this.player.scene.toy.media?.files)
       res.notes.push(
         "Your own file stays on this device: the link carries the settings only, and whoever opens it is asked to open the same file.",
       );

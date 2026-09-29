@@ -145,6 +145,7 @@ function tooBig(size, cap) {
 
 export async function openMedia(source, { profile = "mid" } = {}) {
   const limits = MEDIA_LIMITS[profile] || MEDIA_LIMITS.mid;
+  if (Array.isArray(source)) return openImageSet(source, limits); // lane Books
   const src = await readSource(source, limits);
   if (src.kind === "pdf") return openPDF(src, limits);
   if (src.kind === "gif") return openGIF(src, limits);
@@ -183,6 +184,71 @@ async function openImage(src, limits) {
     },
     close() {
       bmp.close();
+    },
+  };
+}
+
+// ---- A set of pictures (lane Books) ---------------------------------------------
+// Several pictures opened as one media (a photo album, a digital frame):
+// kind "image", count pictures, m.names (each file's name), m.aspect(i),
+// m.size(i) and m.draw(i, w, h). Each picture is read and checked when the
+// set opens, and decoded again when drawn (the last two stay decoded), so a
+// big set holds only its files, not every photo's pixels.
+export const MAX_SET = 200;
+
+async function openImageSet(sources, limits) {
+  if (sources.length > MAX_SET)
+    throw new MediaError(`That is ${sources.length} pictures; a set here takes up to ${MAX_SET}.`);
+  const items = [];
+  let bytes = 0;
+  for (const source of sources) {
+    const src = await readSource(source, limits);
+    if (src.kind !== "image" && src.kind !== "gif")
+      throw new MediaError(`${src.name} is not a picture. A set takes pictures only (PNG, JPEG, WebP, AVIF).`); // prettier-ignore
+    bytes += src.size || 0;
+    if (bytes > limits.bytes * 4) throw tooBig(bytes, limits.bytes * 4);
+    let bmp;
+    try {
+      bmp = await createImageBitmap(src.blob);
+    } catch {
+      throw new MediaError(`This browser can't read the picture ${src.name}.`);
+    }
+    const { width, height } = bmp;
+    bmp.close();
+    if (width * height > limits.pixels)
+      throw new MediaError(`The picture ${src.name} is too big for this device (${Math.round((width * height) / 1e6)} megapixels; up to ${Math.round(limits.pixels / 1e6)} here).`); // prettier-ignore
+    items.push({ name: src.name, blob: src.blob, width, height });
+  }
+  if (!items.length) throw new MediaError("Pick at least one picture.");
+  const decoded = new Map();
+  const bitmap = async (i) => {
+    if (decoded.has(i)) return decoded.get(i);
+    const b = await createImageBitmap(items[i].blob);
+    decoded.set(i, b);
+    for (const [k, v] of decoded)
+      if (decoded.size > 2 && k !== i) {
+        v.close();
+        decoded.delete(k);
+      }
+    return b;
+  };
+  const at = (i) => items[Math.max(0, Math.min(items.length - 1, i | 0))];
+  return {
+    kind: "image",
+    name: items.length === 1 ? items[0].name : `${items.length} pictures`,
+    names: items.map((it) => it.name),
+    url: null,
+    count: items.length,
+    aspect: (i = 0) => at(i).width / at(i).height,
+    size: (i = 0) => ({ width: at(i).width, height: at(i).height }),
+    async draw(i, w, h) {
+      const k = Math.max(0, Math.min(items.length - 1, i | 0));
+      const b = await bitmap(k);
+      return drawScaled(b, b.width, b.height, w, h);
+    },
+    close() {
+      for (const b of decoded.values()) b.close();
+      decoded.clear();
     },
   };
 }
