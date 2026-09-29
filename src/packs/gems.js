@@ -14,6 +14,7 @@ import {
   quatEuler,
   quatRotate,
 } from "../kit.js";
+import { evenEllipsoid } from "./even.js";
 
 const TAU = Math.PI * 2;
 const DEG = Math.PI / 180;
@@ -335,8 +336,12 @@ function addGem(k, planes, base, opts = {}) {
     weight: opts.weight ?? 1,
     interior: 0.06,
     core: mix(base, "#ffffff", 0.25),
+    // (opts.size, glint, opacity and jitter: lane Fidelity B's calmer stones.)
+    size: opts.size,
+    opacity: opts.opacity,
+    jitter: opts.jitter,
     kind: "glint",
-    params: (c) => [c.rand() < 0.12 ? 0.8 : 0.05, 0],
+    params: (c) => [c.rand() < 0.12 ? (opts.glint ?? 0.8) : 0.05, 0],
     color: (c) => gemColor(c, base, opts),
     part: opts.part,
   });
@@ -620,6 +625,10 @@ export const RECIPES = {
     },
     build(k, o) {
       const shape = addGem(k, stepCut(), o.color, {
+        size: 1.3,
+        glint: 0.25,
+        opacity: 1,
+        jitter: 0.015,
         quat: quatEuler(24, 22, 0),
         fire: 0.04,
         dark: 0.3,
@@ -679,6 +688,10 @@ export const RECIPES = {
       const table = 0.55;
       const crown = 35 * DEG;
       addGem(k, brilliant(cushion, { table, crown: 35, pavilion: 42 }), o.color, {
+        size: 1.3,
+        glint: 0.25,
+        opacity: 1,
+        jitter: 0.015,
         quat: SAPPHIRE_Q,
         fire: 0.08,
         dark: 0.22,
@@ -1191,6 +1204,9 @@ export const RECIPES = {
       const pearlAt = o.shell ? [0, -0.02, 0.1] : [0, 0, 0];
       const pr = o.shell ? 0.31 : 1;
       k.add(k.sphere(pr), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: pearlAt,
         flat: 0.15,
         weight: o.shell ? 2 : 1,
@@ -1254,8 +1270,22 @@ export const RECIPES = {
         [true, lidOpen, true],
       ]) {
         // Inside (pearly) and outside (rough) of the same shell.
-        k.add(valve(up, 0, open), { part, flat: 0.2, color: nacre });
-        k.add(valve(up, up ? 0.025 : -0.025, open), { part, flat: 0.2, color: outside });
+        k.add(valve(up, 0, open), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
+          part,
+          flat: 0.2,
+          color: nacre,
+        });
+        k.add(valve(up, up ? 0.025 : -0.025, open), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
+          part,
+          flat: 0.2,
+          color: outside,
+        });
       }
     },
   },
@@ -1297,6 +1327,8 @@ export const RECIPES = {
       const mist = o.color;
       // The glass: nearly clear, bright at the rim, with a window highlight.
       k.add(k.sphere(R), {
+        even: true,
+        jitter: 0.015,
         pos: [0, cy, 0],
         flat: 0.1,
         opacity: 0.22,
@@ -1313,12 +1345,14 @@ export const RECIPES = {
         },
       });
       k.add(k.sphere(R * 1.002), {
+        even: true,
+        jitter: 0.015,
         pos: [0, cy, 0],
         share: 0.02,
         opacity: 0.9,
         pattern: false,
         kind: "glint",
-        params: [1, 0],
+        params: [0.3, 0],
         color: (c) => {
           const hl = Math.pow(Math.max(0, dot(c.n, unit([-0.35, 0.6, 0.72]))), 50);
           const rim = Math.pow(1 - Math.abs(dot(c.n, VIEW)), 6);
@@ -1435,6 +1469,9 @@ export const RECIPES = {
         { grid: 72, thick: 0.12 },
       );
       k.add(stand, {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         flat: 0.2,
         color: (c) => {
           const b = Math.abs(Math.sin(c.p[1] * 40)) > 0.9;
@@ -1456,13 +1493,22 @@ export const RECIPES = {
           },
           { grid: 32, thick: 0.02 },
         ),
-        { flat: 0.2, color: (c) => lit("#5b2a86", mul(c.n, -1), 0.7, 0.3) },
+        {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
+          flat: 0.2,
+          color: (c) => lit("#5b2a86", mul(c.n, -1), 0.7, 0.3),
+        },
       );
       // Little claws holding the ball.
       for (let i = 0; i < 4; i++) {
         const a = (i / 4) * TAU + TAU / 8;
         const d = [Math.cos(a), 0, Math.sin(a)];
-        k.add(k.ellipsoid(0.07, 0.2, 0.05), {
+        k.add(evenEllipsoid(k, 0.07, 0.2, 0.05), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           pos: [d[0] * 0.8, -0.28, d[2] * 0.8],
           quat: quatFromTo([0, 1, 0], unit([-d[0] * 0.4, 1, -d[2] * 0.4])),
           weight: 1.5,

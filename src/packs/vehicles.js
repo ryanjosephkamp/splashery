@@ -13,6 +13,7 @@ import {
   quatAxisAngle,
   quatRotate,
 } from "../kit.js";
+import { evenBox, evenCylinder, evenEllipsoid, evenRoundBox, evenTorus, evenTube } from "./even.js";
 
 const TAU = Math.PI * 2;
 const add = (a, b) => [a[0] + b[0], a[1] + b[1], a[2] + b[2]];
@@ -150,9 +151,13 @@ function wheel(k, pos, r, w, opts = {}) {
     spokes = 5,
     tread = true,
     rimR = 0.62,
+    even = false,
   } = opts;
   const tr = r * (1 - rimR) * 0.62;
-  k.add(k.torus(r - tr, tr), {
+  // even: an even, solid tyre and rim (lane Fidelity B's toys).
+  const E = even ? { even: true, opacity: 1, jitter: 0.015 } : {};
+  k.add(even ? evenTorus(k, r - tr, tr) : k.torus(r - tr, tr), {
+    ...E,
     pos,
     rot: [90, 0, 0],
     scale: [1, w / (2 * tr), 1],
@@ -168,7 +173,9 @@ function wheel(k, pos, r, w, opts = {}) {
   });
   const rw = w * 0.7;
   // The wheel stays metal and rubber under a flag or pattern.
-  k.add(k.cylinder(r * rimR + tr * 0.4, rw), {
+  const hubR = r * rimR + tr * 0.4;
+  k.add(even ? evenCylinder(hubR, hubR, rw) : k.cylinder(hubR, rw), {
+    ...E,
     pos,
     rot: [90, 0, 0],
     part,
@@ -253,13 +260,16 @@ const tilt = (x, z) => quatMulLocal(quatAxisAngle([0, 0, 1], z), quatAxisAngle([
 // A patch of water that ripples, with foam where `foam(x, z)` says.
 function water(k, y, rx, rz, o = {}) {
   const { share = 0.12, deep = "#1d5f8a", light = "#5fb3d6", foam = null, amount = 0.012 } = o;
-  k.cloud({ share, size: 1.6, pattern: false }, (rand) => {
-    const a = rand() * TAU;
-    const r = Math.sqrt(rand());
+  // even: true lays the splats out on a sunflower spiral (no thin spots)
+  // with less random color, for a smooth sea at phone size.
+  const even = o.even === true;
+  k.cloud({ share, size: 1.6, pattern: false }, (rand, i, n) => {
+    const a = even ? i * 2.399963229728653 : rand() * TAU;
+    const r = Math.sqrt(even ? (i + 0.5) / n : rand());
     const x = Math.cos(a) * r * rx;
     const z = Math.sin(a) * r * rz;
     const ripple = 0.5 + 0.5 * Math.sin(x * 9 + z * 6 + Math.sin(z * 3 + x) * 2);
-    let col = mix(deep, light, 0.25 + 0.5 * ripple * ripple + 0.15 * rand());
+    let col = mix(deep, light, 0.25 + 0.5 * ripple * ripple + (even ? 0.04 : 0.15) * rand());
     const f = foam ? foam(x, z) : 0;
     if (f > 0) col = mix(col, "#f4fbff", clamp(f, 0, 1) * (0.6 + 0.4 * rand()));
     const edge = smoothstep(0.82, 1, r);
@@ -288,7 +298,10 @@ function rocketBuild(k, o) {
   const white = "#f4f1ea";
   const padTop = 0.18;
   // The pad: a concrete disc with hazard stripes round its edge.
-  k.add(k.cylinder(1.3, padTop), {
+  k.add(evenCylinder(1.3, 1.3, padTop), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     pos: [0, padTop / 2, 0],
     flat: 0.2,
     interior: 0.08,
@@ -329,6 +342,9 @@ function rocketBuild(k, o) {
     [1.6, 0.085],
   ];
   k.add(body, {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     part: rocket,
     flat: 0.2,
     interior: 0.06,
@@ -359,6 +375,9 @@ function rocketBuild(k, o) {
     const d = [Math.sin(a), 0, Math.cos(a)];
     const at = (r, y) => add(mul(d, r), [0, y, 0]);
     slab(k, [at(0.27, 0.62), at(0.8, padTop + 0.01), at(0.78, 0.58), at(0.38, 1.4)], 0.07, {
+      even: true,
+      opacity: 1,
+      jitter: 0.015,
       part: rocket,
       flat: 0.2,
       weight: 1.4,
@@ -366,7 +385,10 @@ function rocketBuild(k, o) {
     });
   }
   // The nozzle.
-  k.add(k.cone(0.24, 0.16, 0.22, { caps: false }), {
+  k.add(evenCylinder(0.24, 0.16, 0.22, false), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     pos: [0, 0.45, 0],
     part: rocket,
     flat: 0.2,
@@ -430,7 +452,10 @@ function rocketBuild(k, o) {
     [-hw, hw],
   ];
   for (const [cx, cz] of corners)
-    k.add(k.box(0.05, top - padTop, 0.05), {
+    k.add(evenBox(0.05, top - padTop, 0.05), {
+      even: true,
+      opacity: 1,
+      jitter: 0.015,
       ...member,
       pos: [tx + cx, (top + padTop) / 2, tz + cz],
     });
@@ -443,7 +468,10 @@ function rocketBuild(k, o) {
       const [bx, bz] = corners[(s + 1) % 4];
       const A = [tx + ax, y0, tz + az];
       const B = [tx + bx, y0, tz + bz];
-      k.add(k.box(0.032, 2 * hw, 0.032), {
+      k.add(evenBox(0.032, 2 * hw, 0.032), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         ...member,
         pos: mul(add(A, B), 0.5),
         quat: quatFromTo([0, 1, 0], sub(B, A)),
@@ -452,7 +480,10 @@ function rocketBuild(k, o) {
         const flip = (i + s) % 2 === 0;
         const P = [tx + (flip ? ax : bx), y0, tz + (flip ? az : bz)];
         const Q = [tx + (flip ? bx : ax), y1, tz + (flip ? bz : az)];
-        k.add(k.box(0.022, len(sub(Q, P)), 0.022), {
+        k.add(evenBox(0.022, len(sub(Q, P)), 0.022), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           ...member,
           pos: mul(add(P, Q), 0.5),
           quat: quatFromTo([0, 1, 0], sub(Q, P)),
@@ -460,15 +491,33 @@ function rocketBuild(k, o) {
       }
     }
   }
-  k.add(k.box(0.52, 0.05, 0.52), { ...member, weight: 1.2, pos: [tx, top + 0.02, tz] });
+  k.add(evenBox(0.52, 0.05, 0.52), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
+    ...member,
+    weight: 1.2,
+    pos: [tx, top + 0.02, tz],
+  });
   rod(k, [tx, top, tz], [tx, top + 0.55, tz], 0.018, { ...member, weight: 2 });
-  k.add(k.sphere(0.04), { pos: [tx, top + 0.57, tz], weight: 3, pattern: false, color: "#ff3b30" });
+  k.add(k.sphere(0.04), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
+    pos: [tx, top + 0.57, tz],
+    weight: 3,
+    pattern: false,
+    color: "#ff3b30",
+  });
   // The swing arm, which swings away at ignition.
   const armY = 2.28;
   const pv = [tx + hw, armY, tz];
   const arm = k.part("arm", { pivot: pv, axis: [0, 1, 0] });
   const tip = [-0.36, armY, -0.05];
-  k.add(k.box(len(sub(tip, pv)), 0.08, 0.12), {
+  k.add(evenBox(len(sub(tip, pv)), 0.08, 0.12), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     part: arm,
     flat: 0.2,
     weight: 1.6,
@@ -476,7 +525,10 @@ function rocketBuild(k, o) {
     quat: quatFromTo([1, 0, 0], sub(tip, pv)),
     color: (c) => lit(steel, c, 0.62),
   });
-  k.add(roundBox(0.16, 0.2, 0.2, 0.048), {
+  k.add(evenRoundBox(0.16, 0.2, 0.2, 0.048), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     part: arm,
     pos: add(tip, [-0.04, 0.03, 0]),
     flat: 0.2,
@@ -493,7 +545,10 @@ const HELI = { rotor: [0.05, 1.86, 0], tail: [-2.3, 1.42, 0.075], centre: [0, 1,
 function helicopterBuild(k, o) {
   const col = o.color;
   // A helipad.
-  k.add(k.cylinder(1.55, 0.06), {
+  k.add(evenCylinder(1.55, 1.55, 0.06), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     pos: [0, 0.03, 0],
     flat: 0.2,
     color: (c) => {
@@ -512,7 +567,10 @@ function helicopterBuild(k, o) {
   const heli = k.part("heli", { pivot: HELI.centre });
   const P = { part: heli, flat: 0.2 };
   // The cabin: a rounded body with a big glass bubble at the front.
-  k.add(k.ellipsoid(0.86, 0.62, 0.6), {
+  k.add(evenEllipsoid(k, 0.86, 0.62, 0.6), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     ...P,
     pos: [0.2, 0.95, 0],
     interior: 0.06,
@@ -550,12 +608,22 @@ function helicopterBuild(k, o) {
     { ...P, color: (c) => lit("#f5f3ee", c, 0.66) },
   );
   // Engine housing, mast and hub.
-  k.add(roundBox(0.95, 0.3, 0.52, 0.09), {
+  k.add(evenRoundBox(0.95, 0.3, 0.52, 0.09), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     ...P,
     pos: [-0.05, 1.56, 0],
     color: (c) => lit(shade(col, 0.82), c),
   });
-  k.add(k.cylinder(0.06, 0.2), { ...P, pos: [0.05, 1.76, 0], color: "#5a5a5e" });
+  k.add(evenCylinder(0.06, 0.06, 0.2), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
+    ...P,
+    pos: [0.05, 1.76, 0],
+    color: "#5a5a5e",
+  });
   // Skids on struts.
   for (const z of [-0.5, 0.5]) {
     const skid = (t) => {
@@ -563,17 +631,35 @@ function helicopterBuild(k, o) {
       const up = smoothstep(0.82, 1, t);
       return [x - up * 0.05, 0.1 + up * 0.18, z];
     };
-    k.add(k.tube(skid, 0.04, { caps: true }), { ...P, weight: 1.6, color: "#3d3f44" });
+    k.add(evenTube(k, skid, 0.04, { caps: true }), {
+      even: true,
+      opacity: 1,
+      jitter: 0.015,
+      ...P,
+      weight: 1.6,
+      color: "#3d3f44",
+    });
     for (const x of [-0.35, 0.55])
       rod(k, [x, 0.1, z], [x + 0.05, 0.6, z * 0.55], 0.03, { ...P, weight: 1.6, color: "#3d3f44" });
   }
   // The main rotor: four long blades on a hub.
   const rotor = k.part("rotor", { pivot: HELI.rotor, axis: [0, 1, 0] });
-  k.add(k.cylinder(0.13, 0.1), { part: rotor, pos: HELI.rotor, flat: 0.2, color: "#4a4a4e" });
+  k.add(evenCylinder(0.13, 0.13, 0.1), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
+    part: rotor,
+    pos: HELI.rotor,
+    flat: 0.2,
+    color: "#4a4a4e",
+  });
   for (let i = 0; i < 4; i++) {
     const a = (i * TAU) / 4 + 0.35;
     const d = [Math.cos(a), 0, Math.sin(a)];
-    k.add(k.box(1.62, 0.035, 0.14), {
+    k.add(evenBox(1.62, 0.035, 0.14), {
+      even: true,
+      opacity: 1,
+      jitter: 0.015,
       part: rotor,
       pos: add(HELI.rotor, mul(d, 0.9)),
       rot: [0, (-a * 180) / Math.PI, 0],
@@ -587,9 +673,20 @@ function helicopterBuild(k, o) {
   }
   // The tail rotor.
   const tail = k.part("tailRotor", { pivot: HELI.tail, axis: [0, 0, 1] });
-  k.add(k.cylinder(0.05, 0.06), { part: tail, pos: HELI.tail, rot: [90, 0, 0], color: "#4a4a4e" });
+  k.add(evenCylinder(0.05, 0.05, 0.06), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
+    part: tail,
+    pos: HELI.tail,
+    rot: [90, 0, 0],
+    color: "#4a4a4e",
+  });
   for (const s of [-1, 1])
-    k.add(k.box(0.06, 0.3, 0.02), {
+    k.add(evenBox(0.06, 0.3, 0.02), {
+      even: true,
+      opacity: 1,
+      jitter: 0.015,
       part: tail,
       pos: add(HELI.tail, [0, s * 0.16, 0.01]),
       flat: 0.2,
@@ -1049,13 +1146,15 @@ function linerBuild(k, o) {
   const { L, B, D } = LINER;
   const ship = k.part("ship", { pivot: LINER.centre });
   const S = { part: ship, flat: 0.2 };
+  // Even, solid surfaces (rods stay as they are: cones lattice when even).
+  const E = { ...S, even: true, opacity: 1, jitter: 0.015 };
   const wl = LINER.water;
   const { top } = hull(
     k,
     { L, B, D, bow: 0.2, stern: 0.09, boxy: 0.22, sheer: 0.05, rise: 0.3 },
     {
       side: {
-        ...S,
+        ...E,
         interior: 0.04,
         core: "#222",
         color: (c) => {
@@ -1073,7 +1172,7 @@ function linerBuild(k, o) {
           return lit("#1c1c20", c);
         },
       },
-      deck: { ...S, color: (c) => lit(shade("#c9a36b", 0.9 + 0.1 * Math.sin(c.p[2] * 90)), c) },
+      deck: { ...E, color: (c) => lit(shade("#c9a36b", 0.9 + 0.1 * Math.sin(c.p[2] * 90)), c) },
     },
   );
   // The superstructure: white decks stepping up, with rows of windows.
@@ -1104,14 +1203,14 @@ function linerBuild(k, o) {
     { x0: -1.6, x1: 1.45, w: 0.62, y0: 0.52, h: 0.2 },
   ];
   for (const t of tiers)
-    k.add(k.box(t.x1 - t.x0, t.h, t.w), {
-      ...S,
+    k.add(evenBox(t.x1 - t.x0, t.h, t.w), {
+      ...E,
       pos: [(t.x0 + t.x1) / 2, t.y0 + t.h / 2 + top(0.5), 0],
       color: windows(t.x0, t.x1, { y0: t.y0 + top(0.5), h: t.h }, [0.5]),
     });
   // The bridge.
-  k.add(k.box(0.3, 0.16, 0.78), {
-    ...S,
+  k.add(evenBox(0.3, 0.16, 0.78), {
+    ...E,
     pos: [1.55, 0.8, 0],
     color: (c) => (c.s.face === 0 && c.p[1] > 0.8 ? keep("#27313d") : lit(white, c)),
   });
@@ -1122,7 +1221,7 @@ function linerBuild(k, o) {
       const x = -1.45 + i * 0.36;
       if (Math.abs(x - 0.02) < 0.1) continue;
       k.add(k.ellipsoid(0.12, 0.045, 0.05), {
-        ...S,
+        ...E,
         pos: [x, deckTop + 0.05, z],
         weight: 1.5,
         color: (c) => lit(c.p[1] > deckTop + 0.06 ? "#f7f5ef" : "#d8d2c4", c),
@@ -1135,8 +1234,8 @@ function linerBuild(k, o) {
   const rake = 8;
   const rk = (rake * Math.PI) / 180;
   funnelX.forEach((fx) => {
-    k.add(k.cylinder(0.17, fh), {
-      ...S,
+    k.add(evenCylinder(0.17, 0.17, fh), {
+      ...E,
       pos: [fx - Math.sin(rk) * fh * 0.5, deckTop + fh / 2 - 0.05, 0],
       rot: [0, 0, rake],
       scale: [1, 1, 0.8],
@@ -1192,6 +1291,7 @@ function linerBuild(k, o) {
     });
   // The sea: a patch of rippling water with a bow wave and a wake.
   water(k, wl, L / 2 + 0.55, 1.5, {
+    even: true,
     share: 0.2,
     deep: "#1b4f7a",
     light: "#4e9cc7",
@@ -1269,6 +1369,9 @@ function carBuild(k, o) {
   ]);
   const stripe = (c) => o.stripes && Math.abs(Math.abs(c.p[2]) - 0.085) < 0.045 && c.n[1] > 0.2;
   k.add(shell(k, -hl, hl, top, bottom, width, { e: 0.62, end: 4 }), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     flat: 0.2,
     interior: 0.06,
     core: "#333",
@@ -1306,6 +1409,9 @@ function carBuild(k, o) {
     { grid: 72 },
   );
   k.add(cabin, {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     flat: 0.2,
     color: (c) => {
       const s = Math.sin(c.v * Math.PI);
@@ -1322,7 +1428,10 @@ function carBuild(k, o) {
   });
   // Headlights, spoiler, mirrors and exhausts.
   for (const z of [-0.29, 0.29])
-    k.add(k.ellipsoid(0.05, 0.035, 0.09), {
+    k.add(evenEllipsoid(k, 0.05, 0.035, 0.09), {
+      even: true,
+      opacity: 1,
+      jitter: 0.015,
       pos: [1.1, 0.4, z],
       rot: [0, 0, -30],
       weight: 3,
@@ -1341,19 +1450,28 @@ function carBuild(k, o) {
     { flat: 0.2, weight: 1.4, color: (c) => lit(shade(col, 0.9), c) },
   );
   for (const z of [-0.32, 0.32])
-    k.add(k.box(0.06, 0.2, 0.03), {
+    k.add(evenBox(0.06, 0.2, 0.03), {
+      even: true,
+      opacity: 1,
+      jitter: 0.015,
       pos: [-1.08, 0.7, z],
       flat: 0.2,
       color: (c) => lit("#2a2a2c", c),
     });
   for (const z of [-0.5, 0.5])
-    k.add(k.ellipsoid(0.06, 0.035, 0.04), {
+    k.add(evenEllipsoid(k, 0.06, 0.035, 0.04), {
+      even: true,
+      opacity: 1,
+      jitter: 0.015,
       pos: [0.36, 0.6, z * 1.04],
       weight: 2,
       color: (c) => lit(col, c),
     });
   for (const z of [-0.2, 0.2])
-    k.add(k.cylinder(0.045, 0.12), {
+    k.add(evenCylinder(0.045, 0.045, 0.12), {
+      even: true,
+      opacity: 1,
+      jitter: 0.015,
       pos: [-1.18, 0.2, z],
       rot: [0, 0, 90],
       weight: 2,
@@ -1366,7 +1484,13 @@ function carBuild(k, o) {
   ]) {
     const part = k.part(name, { pivot: w, axis: [0, 0, 1] });
     for (const z of [-0.5, 0.5])
-      wheel(k, [w[0], w[1], z], CAR.r, 0.22, { part, rim: "#d9dadd", hub: "#8e9096", spokes: 5 });
+      wheel(k, [w[0], w[1], z], CAR.r, 0.22, {
+        part,
+        rim: "#d9dadd",
+        hub: "#8e9096",
+        spokes: 5,
+        even: true,
+      });
   }
   const puff = k.part("puff", { pivot: [-1.25, 0.2, 0] });
   for (const z of [-0.2, 0.2])
@@ -1428,7 +1552,10 @@ function busBuild(k, o) {
     const yellow = "#f5b400";
     const x0 = -1.72;
     const x1 = 1.0;
-    k.add(roundBox(x1 - x0, 1.22, 1.04, 0.16), {
+    k.add(evenRoundBox(x1 - x0, 1.22, 1.04, 0.16), {
+      even: true,
+      opacity: 1,
+      jitter: 0.015,
       ...P,
       pos: [(x0 + x1) / 2, 0.92, 0],
       interior: 0.05,
@@ -1461,7 +1588,10 @@ function busBuild(k, o) {
       },
     });
     // The bonnet, grille, lights and bumpers.
-    k.add(roundBox(0.72, 0.6, 0.92, 0.096), {
+    k.add(evenRoundBox(0.72, 0.6, 0.92, 0.096), {
+      even: true,
+      opacity: 1,
+      jitter: 0.015,
       ...P,
       pos: [1.33, 0.64, 0],
       color: (c) => {
@@ -1472,13 +1602,31 @@ function busBuild(k, o) {
       },
     });
     for (const z of [-0.36, 0.36])
-      k.add(k.sphere(0.07), { pos: [1.68, 0.74, z], weight: 3, pattern: false, color: "#fff8d8" });
+      k.add(k.sphere(0.07), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
+        pos: [1.68, 0.74, z],
+        weight: 3,
+        pattern: false,
+        color: "#fff8d8",
+      });
     for (const x of [1.74, -1.76])
-      k.add(k.box(0.08, 0.13, 1.04), { ...P, pos: [x, 0.38, 0], color: (c) => lit(dark, c) });
+      k.add(evenBox(0.08, 0.13, 1.04), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
+        ...P,
+        pos: [x, 0.38, 0],
+        color: (c) => lit(dark, c),
+      });
     // Warning lights on the roof corners.
     for (const x of [0.96, -1.66])
       for (const z of [-0.34, 0.34])
         k.add(k.sphere(0.05), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           pos: [x, 1.5, z],
           weight: 4,
           pattern: false,
@@ -1489,13 +1637,21 @@ function busBuild(k, o) {
     for (const z of [-0.6, 0.6])
       rod(k, [0.98, 1.2, z * 0.85], [1.08, 1.2, z], 0.012, { weight: 3, color: dark });
     for (const z of [-0.6, 0.6])
-      k.add(k.box(0.04, 0.16, 0.08), { pos: [1.08, 1.2, z], color: dark });
+      k.add(evenBox(0.04, 0.16, 0.08), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
+        pos: [1.08, 1.2, z],
+        color: dark,
+      });
     busDoors(k, 0.55, 0.91, 0.44, 1.33, 0.52);
     // The stop arm lies folded against the side, behind the door; it swings
     // out to face the traffic.
     const stop = k.part("stop", { pivot: [0.44, 0.73, 0.535], axis: [0, 1, 0] });
     rod(k, [0.44, 0.73, 0.54], [0.4, 0.73, 0.54], 0.012, { part: stop, weight: 3, color: dark });
     k.add(k.disc(0.2), {
+      opacity: 1,
+      jitter: 0.015,
       part: stop,
       pos: [0.22, 0.73, 0.545],
       rot: [90, 0, 0],
@@ -1512,7 +1668,16 @@ function busBuild(k, o) {
     });
     // Flashing warning lights: a bright halo over each roof light.
     const halo = (part, pos, col) =>
-      k.add(k.sphere(0.1), { part, pos, weight: 2, opacity: 0.75, pattern: false, color: col });
+      k.add(k.sphere(0.1), {
+        even: true,
+        jitter: 0.015,
+        part,
+        pos,
+        weight: 2,
+        opacity: 0.75,
+        pattern: false,
+        color: col,
+      });
     const fa = k.part("flashA", { pivot: [0, 1.5, 0] });
     const fb = k.part("flashB", { pivot: [0, 1.5, 0] });
     for (const z of [-0.34, 0.34]) {
@@ -1523,7 +1688,10 @@ function busBuild(k, o) {
     const red = "#cc2229";
     const x0 = -1.55;
     const x1 = 1.55;
-    k.add(roundBox(x1 - x0, 1.85, 0.98, 0.16), {
+    k.add(evenRoundBox(x1 - x0, 1.85, 0.98, 0.16), {
+      even: true,
+      opacity: 1,
+      jitter: 0.015,
       ...P,
       pos: [0, 1.23, 0],
       interior: 0.05,
@@ -1557,17 +1725,42 @@ function busBuild(k, o) {
       },
     });
     for (const z of [-0.36, 0.36])
-      k.add(k.sphere(0.065), { pos: [1.55, 0.55, z], weight: 3, pattern: false, color: "#fff8d8" });
+      k.add(k.sphere(0.065), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
+        pos: [1.55, 0.55, z],
+        weight: 3,
+        pattern: false,
+        color: "#fff8d8",
+      });
     for (const x of [1.58, -1.58])
-      k.add(k.box(0.06, 0.12, 0.98), { ...P, pos: [x, 0.36, 0], color: (c) => lit(dark, c) });
+      k.add(evenBox(0.06, 0.12, 0.98), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
+        ...P,
+        pos: [x, 0.36, 0],
+        color: (c) => lit(dark, c),
+      });
     busDoors(k, 0.15, 0.55, 0.4, 1.18, 0.49);
     // Hazard lights at the corners, and their flashing halos.
     const fa = k.part("flashA", { pivot: [0, 0.6, 0] });
     const fb = k.part("flashB", { pivot: [0, 0.6, 0] });
     for (const x of [1.555, -1.555])
       for (const z of [-0.42, 0.42]) {
-        k.add(k.sphere(0.045), { pos: [x, 0.62, z], weight: 4, pattern: false, color: "#ffa21a" });
+        k.add(k.sphere(0.045), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
+          pos: [x, 0.62, z],
+          weight: 4,
+          pattern: false,
+          color: "#ffa21a",
+        });
         k.add(k.sphere(0.1), {
+          even: true,
+          jitter: 0.015,
           part: x * z > 0 ? fa : fb,
           pos: [x, 0.62, z],
           weight: 2,
@@ -1583,7 +1776,13 @@ function busBuild(k, o) {
   ]) {
     const part = k.part(name, { pivot: w, axis: [0, 0, 1] });
     for (const z of [-0.47, 0.47])
-      wheel(k, [w[0], w[1], z], 0.3, 0.22, { part, rim: "#3b3c40", hub: "#d3d5d9", spokes: 0 });
+      wheel(k, [w[0], w[1], z], 0.3, 0.22, {
+        part,
+        rim: "#3b3c40",
+        hub: "#d3d5d9",
+        spokes: 0,
+        even: true,
+      });
   }
   shadow(k, 0.004, isSchool ? 1.95 : 1.75, 0.72);
 }
@@ -1611,6 +1810,8 @@ function planeBuild(k, o) {
     { grid: 72 },
   );
   k.add(fus, {
+    opacity: 1,
+    jitter: 0.015,
     rot: [0, 0, -90],
     flat: 0.2,
     interior: 0.05,
@@ -1623,21 +1824,47 @@ function planeBuild(k, o) {
       return lit(col, c);
     },
   });
-  k.add(k.cylinder(0.25, 0.04), {
+  k.add(evenCylinder(0.25, 0.25, 0.04), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     pos: [1.13, 0, 0],
     rot: [0, 0, 90],
     color: (c) => (c.s.radial > 0.8 ? "#9a9da3" : "#2a2a2c"),
   });
   // The pilot, with goggles and a scarf that flutters.
-  k.add(k.sphere(0.1), { pos: [-0.2, 0.36, 0], weight: 2, color: (c) => lit("#6d4c33", c) });
+  k.add(k.sphere(0.1), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
+    pos: [-0.2, 0.36, 0],
+    weight: 2,
+    color: (c) => lit("#6d4c33", c),
+  });
   for (const z of [-0.045, 0.045])
-    k.add(k.sphere(0.035), { pos: [-0.12, 0.38, z], weight: 4, pattern: false, color: "#9fd8ff" });
+    k.add(k.sphere(0.035), {
+      even: true,
+      opacity: 1,
+      jitter: 0.015,
+      pos: [-0.12, 0.38, z],
+      weight: 4,
+      pattern: false,
+      color: "#9fd8ff",
+    });
   k.add(
     k.tube(
       (t) => [-0.28 - 0.5 * t, 0.29 + 0.05 * Math.sin(t * 4), 0.03 * Math.sin(t * 7)],
       (t) => 0.035 * (1 - 0.5 * t),
     ),
-    { weight: 2, kind: "sway", params: [0.4, 0.28], color: (c) => lit("#f4f1ea", c) },
+    {
+      even: true,
+      opacity: 1,
+      jitter: 0.015,
+      weight: 2,
+      kind: "sway",
+      params: [0.4, 0.28],
+      color: (c) => lit("#f4f1ea", c),
+    },
   );
   slab(
     k,
@@ -1657,8 +1884,22 @@ function planeBuild(k, o) {
     if (Math.abs(((z * 4) % 1) - 0.5) > 0.47) return keep(lit(shade(wing, 0.85), c));
     return lit(wing, c);
   };
-  k.add(roundBox(0.62, 0.07, 3.1, 0.021), { pos: [0.3, -0.2, 0], flat: 0.2, color: wingColor });
-  k.add(roundBox(0.62, 0.07, 3.3, 0.021), { pos: [0.45, 0.62, 0], flat: 0.2, color: wingColor });
+  k.add(evenRoundBox(0.62, 0.07, 3.1, 0.021), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
+    pos: [0.3, -0.2, 0],
+    flat: 0.2,
+    color: wingColor,
+  });
+  k.add(evenRoundBox(0.62, 0.07, 3.3, 0.021), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
+    pos: [0.45, 0.62, 0],
+    flat: 0.2,
+    color: wingColor,
+  });
   const strut = { weight: 2.5, color: (c) => lit(wood, c) };
   for (const s of [-1, 1]) {
     const z = 1.15 * s;
@@ -1671,7 +1912,14 @@ function planeBuild(k, o) {
     rod(k, [0.25, 0.59, 0.3 * s], [0.2, -0.17, z], 0.005, { weight: 4, color: "#3a3a3a" });
   }
   // Tail.
-  k.add(roundBox(0.45, 0.04, 1.15, 0.012), { pos: [-1.55, 0.06, 0], flat: 0.2, color: wingColor });
+  k.add(evenRoundBox(0.45, 0.04, 1.15, 0.012), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
+    pos: [-1.55, 0.06, 0],
+    flat: 0.2,
+    color: wingColor,
+  });
   slab(
     k,
     [
@@ -1694,14 +1942,20 @@ function planeBuild(k, o) {
   rod(k, [-1.6, -0.08, 0], [-1.72, -0.22, 0], 0.015, { weight: 3, color: "#2f2f31" });
   // The propeller and spinner.
   const prop = k.part("prop", { pivot: PLANE.prop, axis: [1, 0, 0] });
-  k.add(k.cone(0.11, 0.0, 0.22), {
+  k.add(evenCylinder(0.11, 0.0, 0.22), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     part: prop,
     pos: [1.28, 0, 0],
     rot: [0, 0, -90],
     color: (c) => lit(col, c),
   });
   for (const s of [-1, 1])
-    k.add(roundBox(0.04, 0.62, 0.1, 0.018), {
+    k.add(evenRoundBox(0.04, 0.62, 0.1, 0.018), {
+      even: true,
+      opacity: 1,
+      jitter: 0.015,
       part: prop,
       pos: add(PLANE.prop, [0, s * 0.33, 0]),
       rot: [s * 12, 0, 0],
@@ -2020,6 +2274,9 @@ function submarineBuild(k, o) {
     [0.0, 1.55],
   ];
   k.add(k.lathe(prof, { grid: 80 }), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     rot: [0, 0, -90],
     flat: 0.2,
     interior: 0.06,
@@ -2038,7 +2295,10 @@ function submarineBuild(k, o) {
   const rAt = curve(prof.map(([r, y]) => [y, r]));
   for (const px of [-0.55, 0, 0.55]) {
     const z = rAt(px) - 0.01;
-    k.add(k.torus(0.13, 0.03), {
+    k.add(evenTorus(k, 0.13, 0.03), {
+      even: true,
+      opacity: 1,
+      jitter: 0.015,
       pos: [px, 0.02, z],
       rot: [90, 0, 0],
       weight: 2,
@@ -2046,6 +2306,8 @@ function submarineBuild(k, o) {
       color: (c) => lit(brass, c),
     });
     k.add(k.disc(0.12), {
+      opacity: 1,
+      jitter: 0.015,
       pos: [px, 0.02, z - 0.005],
       rot: [90, 0, 0],
       weight: 2,
@@ -2057,7 +2319,10 @@ function submarineBuild(k, o) {
     });
   }
   // The conning tower with its planes.
-  k.add(roundBox(0.72, 0.46, 0.34, 0.102), {
+  k.add(evenRoundBox(0.72, 0.46, 0.34, 0.102), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     pos: [0.12, 0.62, 0],
     flat: 0.2,
     color: (c) => {
@@ -2085,12 +2350,17 @@ function submarineBuild(k, o) {
     weight: 2,
     color: (c) => lit("#8d9096", c),
   });
-  k.add(roundBox(0.16, 0.08, 0.08, 0.024), {
+  k.add(evenRoundBox(0.16, 0.08, 0.08, 0.024), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     part: scope,
     pos: [0.35, 1.22, 0],
     color: (c) => lit("#8d9096", c),
   });
   k.add(k.disc(0.03), {
+    opacity: 1,
+    jitter: 0.015,
     part: scope,
     pos: [0.435, 1.22, 0],
     rot: [0, 0, 90],
@@ -2099,8 +2369,19 @@ function submarineBuild(k, o) {
     color: "#9fe0ff",
   });
   // A lamp on the bow.
-  k.add(k.sphere(0.07), { pos: [1.28, 0.32, 0], weight: 3, pattern: false, color: "#fff6c9" });
-  k.add(k.cylinder(0.08, 0.08), {
+  k.add(k.sphere(0.07), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
+    pos: [1.28, 0.32, 0],
+    weight: 3,
+    pattern: false,
+    color: "#fff6c9",
+  });
+  k.add(evenCylinder(0.08, 0.08, 0.08), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     pos: [1.22, 0.3, 0],
     rot: [0, 0, 70],
     color: (c) => lit("#8d9096", c),
@@ -2125,7 +2406,10 @@ function submarineBuild(k, o) {
     );
   // The propeller.
   const prop = k.part("prop", { pivot: SUB.prop, axis: [1, 0, 0] });
-  k.add(k.cone(0.08, 0.02, 0.14), {
+  k.add(evenCylinder(0.08, 0.02, 0.14), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     part: prop,
     pos: add(SUB.prop, [-0.02, 0, 0]),
     rot: [0, 0, 90],
@@ -2133,7 +2417,10 @@ function submarineBuild(k, o) {
   });
   for (let i = 0; i < 4; i++) {
     const a = (i * 90 * Math.PI) / 180;
-    k.add(roundBox(0.04, 0.26, 0.1, 0.018), {
+    k.add(evenRoundBox(0.04, 0.26, 0.1, 0.018), {
+      even: true,
+      opacity: 1,
+      jitter: 0.015,
       part: prop,
       pos: add(SUB.prop, [0, Math.cos(a) * 0.16, Math.sin(a) * 0.16]),
       rot: [i * 90 + 20, 0, 0],
@@ -2347,7 +2634,10 @@ function tractorBuild(k, o) {
   // Wheels with deep chevron treads.
   const chevronTyre = (w, r, wid, part) => {
     const tr = r * 0.3;
-    k.add(k.torus(r - tr, tr), {
+    k.add(evenTorus(k, r - tr, tr), {
+      even: true,
+      opacity: 1,
+      jitter: 0.015,
       part,
       pos: w,
       rot: [90, 0, 0],
@@ -2362,7 +2652,10 @@ function tractorBuild(k, o) {
         return shade("#262628", lug ? 1.25 : 0.7 + 0.2 * Math.abs(c.ln[1]));
       },
     });
-    k.add(k.cylinder(r * 0.62, wid * 0.75), {
+    k.add(evenCylinder(r * 0.62, r * 0.62, wid * 0.75), {
+      even: true,
+      opacity: 1,
+      jitter: 0.015,
       part,
       pos: w,
       rot: [90, 0, 0],
@@ -2385,9 +2678,26 @@ function tractorBuild(k, o) {
     for (const z of [-zz, zz]) chevronTyre([w[0], w[1], z], r, wid, part);
   }
   // Chassis, bonnet and grille.
-  k.add(k.box(1.9, 0.26, 0.44), { ...P, pos: [0.25, 0.58, 0], color: (c) => lit(grey, c) });
-  k.add(k.box(0.14, 0.18, 0.8), { ...P, pos: [1.3, 0.55, 0], color: (c) => lit(grey, c) });
-  k.add(roundBox(1.28, 0.56, 0.56, 0.09), {
+  k.add(evenBox(1.9, 0.26, 0.44), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
+    ...P,
+    pos: [0.25, 0.58, 0],
+    color: (c) => lit(grey, c),
+  });
+  k.add(evenBox(0.14, 0.18, 0.8), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
+    ...P,
+    pos: [1.3, 0.55, 0],
+    color: (c) => lit(grey, c),
+  });
+  k.add(evenRoundBox(1.28, 0.56, 0.56, 0.09), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     ...P,
     pos: [0.62, 0.98, 0],
     interior: 0.05,
@@ -2409,7 +2719,15 @@ function tractorBuild(k, o) {
     },
   });
   for (const z of [-0.22, 0.22])
-    k.add(k.sphere(0.06), { pos: [1.22, 1.15, z], weight: 3, pattern: false, color: "#fff7d6" });
+    k.add(k.sphere(0.06), {
+      even: true,
+      opacity: 1,
+      jitter: 0.015,
+      pos: [1.22, 1.15, z],
+      weight: 3,
+      pattern: false,
+      color: "#fff7d6",
+    });
   // Exhaust stack and air intake.
   rod(k, [0.88, 1.22, 0.12], [0.88, 1.95, 0.12], 0.045, {
     weight: 2,
@@ -2419,7 +2737,13 @@ function tractorBuild(k, o) {
     weight: 2,
     color: (c) => lit("#bfc2c7", c),
   });
-  k.add(k.cylinder(0.06, 0.06), { pos: [0.5, 1.58, -0.12], color: (c) => lit("#bfc2c7", c) });
+  k.add(evenCylinder(0.06, 0.06, 0.06), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
+    pos: [0.5, 1.58, -0.12],
+    color: (c) => lit("#bfc2c7", c),
+  });
   // A light, thinning wisp of exhaust (it was a heavy cloud).
   plume(k, [0.88, 2.0, 0.12], [-0.55, 0.45, 0], {
     share: 0.007,
@@ -2433,7 +2757,10 @@ function tractorBuild(k, o) {
   // The cab: posts, roof, windows, a seat and a steering wheel.
   const cx0 = -1.05;
   const cx1 = -0.08;
-  k.add(k.box(cx1 - cx0 + 0.1, 0.08, 0.9), {
+  k.add(evenBox(cx1 - cx0 + 0.1, 0.08, 0.9), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     ...P,
     pos: [(cx0 + cx1) / 2, 0.94, 0],
     color: (c) => lit(grey, c),
@@ -2441,13 +2768,17 @@ function tractorBuild(k, o) {
   for (const x of [cx0 + 0.05, cx1 - 0.05])
     for (const z of [-0.42, 0.42])
       rod(k, [x, 0.95, z], [x, 2.0, z], 0.035, { weight: 2, color: (c) => lit(grey, c) });
-  k.add(roundBox(cx1 - cx0 + 0.25, 0.09, 1.02, 0.03), {
+  k.add(evenRoundBox(cx1 - cx0 + 0.25, 0.09, 1.02, 0.03), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     ...P,
     pos: [(cx0 + cx1) / 2, 2.04, 0],
     color: (c) => lit(col, c),
   });
   const pane = (a, b, cc, d) =>
     k.add(quad(k, a, b, cc, d), {
+      even: true,
       opacity: 0.2,
       pattern: false,
       even: true,
@@ -2471,8 +2802,17 @@ function tractorBuild(k, o) {
     [cx1 - 0.05, 1.96, 0.42],
     [cx0 + 0.05, 1.96, 0.42],
   );
-  k.add(roundBox(0.3, 0.35, 0.4, 0.09), { pos: [-0.72, 1.2, 0], color: (c) => lit("#1e1e20", c) });
-  k.add(k.torus(0.13, 0.018), {
+  k.add(evenRoundBox(0.3, 0.35, 0.4, 0.09), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
+    pos: [-0.72, 1.2, 0],
+    color: (c) => lit("#1e1e20", c),
+  });
+  k.add(evenTorus(k, 0.13, 0.018), {
+    even: true,
+    opacity: 1,
+    jitter: 0.015,
     pos: [-0.3, 1.45, 0],
     rot: [0, 0, 60],
     weight: 3,
@@ -2493,7 +2833,13 @@ function tractorBuild(k, o) {
       },
       { grid: 32, flip: s < 0 },
     );
-    k.add(guard, { ...P, weight: 1.2, color: (c) => lit(col, c) });
+    k.add(guard, {
+      opacity: 1,
+      jitter: 0.015,
+      ...P,
+      weight: 1.2,
+      color: (c) => lit(col, c),
+    });
   }
   shadow(k, 0.004, 1.45, 0.95);
 }

@@ -3,6 +3,7 @@
 // lantern, a diya and a menorah.
 
 import { mix, shade, smoothstep, clamp, spline, quatAxisAngle, quatMul, vec } from "../kit.js";
+import { evenTorus } from "./even.js";
 
 const TAU = Math.PI * 2;
 const LIGHT = vec.unit([0.3, 0.8, 0.55]);
@@ -1148,6 +1149,9 @@ export const RECIPES = {
         }
       };
       k.add(k.lathe(prof, { grid: 96 }), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         part: egg,
         flat: 0.18,
         interior: 0.1,
@@ -1168,7 +1172,7 @@ export const RECIPES = {
           ],
           { grid: 64 },
         ),
-        { flat: 0.2, pattern: false, color: (c) => gold(c) },
+        { even: true, opacity: 1, jitter: 0.015, flat: 0.2, pattern: false, color: (c) => gold(c) },
       );
     },
   },
@@ -1208,7 +1212,13 @@ export const RECIPES = {
       ];
       const hook = [0, 1.02, 0];
       const lantern = k.part("lantern", { pivot: hook, axis: [0, 0, 1] });
-      const L = (shape, opts) => k.add(shape, { part: lantern, ...opts });
+      const L = (shape, opts) =>
+        k.add(shape, {
+          opacity: 1,
+          jitter: 0.015,
+          part: lantern,
+          ...opts,
+        });
       // The glowing paper body with ribs.
       const prof = [];
       for (let i = 0; i <= 24; i++) {
@@ -1216,6 +1226,7 @@ export const RECIPES = {
         prof.push([0.72 * Math.pow(Math.max(0, 1 - t * t), 0.55) + 0.18, 0.05 + 0.55 * t]);
       }
       L(k.lathe(prof, { grid: 96 }), {
+        even: true,
         flat: 0.2,
         kind: "twinkle",
         params: [0.06, 0],
@@ -1282,7 +1293,10 @@ export const RECIPES = {
         };
       });
       // A little hook it hangs from.
-      k.add(k.torus(0.04, 0.012), {
+      k.add(evenTorus(k, 0.04, 0.012), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: hook,
         rot: [90, 0, 0],
         weight: 3,
