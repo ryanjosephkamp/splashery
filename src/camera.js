@@ -4,9 +4,18 @@
 // serialises cleanly. Motion is damped: input moves targets, the rendered
 // pose eases towards them, and a released drag coasts to a stop. An idle
 // turntable starts after a pause (never under prefers-reduced-motion).
+// With the tilt locked (lane Viewer), a drag only spins the toy around its
+// vertical axis: pitch and roll stay at the toy's home pose.
 
 const TAU = Math.PI * 2;
 const PITCH_LIMIT = 1.45;
+// Two fingers (lane Viewer): a gesture is read as a zoom, a twist or a
+// two-finger drag by whichever it does first past these, so a normal pinch
+// never turns the toy. The scale is a natural log (about 8%), the twist is
+// in radians (about 17 degrees) and the drag in CSS pixels.
+export const PINCH_ZOOM = 0.08;
+export const PINCH_TWIST = 0.3;
+export const PINCH_DRAG = 22;
 
 export const DEFAULT_CAMERA = Object.freeze({ yaw: 0.55, pitch: 0.28, roll: 0, distance: 5 });
 
@@ -24,6 +33,7 @@ export class OrbitCamera {
     this.follow = [0, 0, 0]; // extra target offset the camera eases towards
     this.offset = [0, 0, 0];
     this.turntable = !reducedMotion;
+    this.tiltLock = false;
     this.turntableSpeed = 0.18;
     this.idleDelay = 2.5;
     this.idleFor = 0;
@@ -36,6 +46,16 @@ export class OrbitCamera {
 
   setTurntable(on) {
     this.turntable = !!on && !this.reducedMotion;
+  }
+
+  // Locks or frees the tilt. Locking eases pitch and roll back home.
+  setTiltLock(on) {
+    this.tiltLock = !!on;
+    if (!this.tiltLock) return;
+    this.tgt.pitch = this.home.pitch;
+    this.tgt.roll = this.home.roll;
+    this.cur.roll = this.tgt.roll + wrapAngle(this.cur.roll - this.tgt.roll);
+    this.vel.pitch = 0;
   }
 
   // Fits limits around a toy of this bounding radius.
@@ -68,8 +88,9 @@ export class OrbitCamera {
     const k = (TAU * 1.4) / Math.max(200, this.viewportHeight);
     const c = Math.cos(-this.cur.roll);
     const s = Math.sin(-this.cur.roll);
-    const rx = dx * c - dy * s;
-    const ry = dx * s + dy * c;
+    // Locked, a sideways drag spins the toy and nothing tilts it.
+    const rx = this.tiltLock ? dx : dx * c - dy * s;
+    const ry = this.tiltLock ? 0 : dx * s + dy * c;
     const dYaw = -rx * k;
     const dPitch = ry * k;
     this.tgt.yaw += dYaw;
@@ -103,6 +124,7 @@ export class OrbitCamera {
   }
 
   rollBy(angle) {
+    if (this.tiltLock || !angle) return;
     this.tgt.roll = wrapAngle(this.tgt.roll + angle);
     this.interact();
   }
@@ -335,6 +357,8 @@ export class Gestures {
       else if (this.gesture === "orbit") this.h.onOrbitEnd?.(e);
       this.gesture = "pinch";
       this.pinch = this.pinchState();
+      this.pinchStart = this.pinch;
+      this.pinchKind = null;
       this.h.onPinchStart?.();
     }
   }
@@ -347,6 +371,20 @@ export class Gestures {
       cy: (a.y + b.y) / 2,
       ang: Math.atan2(b.y - a.y, b.x - a.x),
     };
+  }
+
+  // What a two-finger gesture is (lane Viewer): "zoom", "twist" or "drag",
+  // by whichever it does first past its threshold (null until then).
+  pinchMode(s) {
+    const st = this.pinchStart;
+    if (this.pinchKind || !st) return this.pinchKind;
+    const zoom = st.dist > 0 ? Math.abs(Math.log(s.dist / st.dist)) : 0;
+    const twist = Math.abs(wrapAngle(s.ang - st.ang));
+    const drag = Math.hypot(s.cx - st.cx, s.cy - st.cy);
+    if (zoom > PINCH_ZOOM) this.pinchKind = "zoom";
+    else if (twist > PINCH_TWIST) this.pinchKind = "twist";
+    else if (drag > PINCH_DRAG) this.pinchKind = "drag";
+    return this.pinchKind;
   }
 
   move(e) {
@@ -365,14 +403,22 @@ export class Gestures {
       p.t = e.timeStamp;
       const s = this.pinchState();
       const prev = this.pinch;
-      let dAng = s.ang - prev.ang;
-      if (dAng > Math.PI) dAng -= TAU;
-      if (dAng < -Math.PI) dAng += TAU;
+      const was = this.pinchKind;
+      const mode = this.pinchMode(s);
+      // A twist turns only past its dead zone: its first step is the part
+      // beyond it, so the toy doesn't jump.
+      let twist = 0;
+      if (mode === "twist") {
+        const total = wrapAngle(s.ang - this.pinchStart.ang);
+        twist =
+          was === "twist" ? wrapAngle(s.ang - prev.ang) : total - Math.sign(total) * PINCH_TWIST;
+      }
       this.h.onPinch?.({
         scale: prev.dist > 0 ? s.dist / prev.dist : 1,
         dx: s.cx - prev.cx,
         dy: s.cy - prev.cy,
-        twist: dAng,
+        twist,
+        mode,
         dt,
       });
       this.pinch = s;

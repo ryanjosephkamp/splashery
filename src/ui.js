@@ -81,6 +81,9 @@ export function createUI(app) {
     patDetailValue: $("pat-detail-value"),
     patNote: $("pat-note"),
     soundToggle: $("sound-toggle"),
+    turntableToggle: $("turntable-toggle"), // lane Viewer
+    tiltToggle: $("tilt-toggle"), // lane Viewer
+    viewReset: $("view-reset"), // lane Viewer
     tools: $("tools"),
     toolHint: $("tool-hint"),
     toolParams: $("tool-params"),
@@ -1184,6 +1187,11 @@ export function createUI(app) {
   // ---- Sound --------------------------------------------------------------------
   els.soundToggle.addEventListener("click", () => app.toggleSound());
 
+  // ---- View settings (lane Viewer) ----------------------------------------------
+  els.turntableToggle.addEventListener("click", () => app.toggleTurntable());
+  els.tiltToggle.addEventListener("click", () => app.toggleTiltLock());
+  els.viewReset.addEventListener("click", () => app.resetCamera());
+
   // ---- Make a toy -------------------------------------------------------------
   for (const s of SHAPES) els.genShape.add(new Option(s.label, s.id));
   for (const p of PALETTES) els.genPalette.add(new Option(p.label, p.id));
@@ -1814,6 +1822,22 @@ export function createUI(app) {
       els.autoEffect.value = a.effect;
       els.motionNote.hidden = !reducedMotion;
       els.autoTurntable.disabled = els.autoEffect.disabled = !!reducedMotion;
+      // The top-bar turntable button (lane Viewer); reduced motion wins.
+      const spin = !!a.turntable && !reducedMotion;
+      els.turntableToggle.setAttribute("aria-pressed", String(spin));
+      els.turntableToggle.disabled = !!reducedMotion;
+      els.turntableToggle.title = reducedMotion
+        ? "Turntable: off (your system asks for reduced motion)"
+        : spin
+          ? "Turntable: spins when idle, on every toy"
+          : "Turntable: off for every toy";
+    },
+    // The top-bar tilt lock button (lane Viewer).
+    setTiltLock(locked) {
+      els.tiltToggle.setAttribute("aria-pressed", String(!!locked));
+      els.tiltToggle.title = locked
+        ? "Tilt lock: on (drag spins it left and right)"
+        : "Tilt lock: off (drag turns it any way)";
     },
     setFileToy(isFile, flip) {
       els.byoFlipRow.hidden = !isFile;
