@@ -16,6 +16,23 @@ had not settled 3 s after its tap) and "a scan rig moves a part of a captured to
 console warning, like the rare engine warning in HANDOFF.md). Keep `test-results/` if either comes
 back.
 
+### Fidelity A and B: the grainy toys made sharp (PRs #77 and #90, merged 2026-09-29)
+
+- Built by Opus 5.5, in two lanes from the owner's words: "I almost want to make things so
+  incredible with this that people won't even realize that they're looking at Gaussian splats."
+  Fidelity A audited every toy at phone size (a ranked list with five causes of grain: random
+  placement, low density, mirror chrome on thin parts, see-through `rim()` shells, faint clouds) and
+  made the 24 worst sharp; Fidelity B built on its branch and did the other 73 on the list, adding
+  even versions of the kit's shapes (`src/packs/even.js`).
+- The owner marked 23 of Fidelity A's 24 cards good the first time (the Klein bottle was redone
+  once) and all 73 of Fidelity B's. Fidelity A took about 12 hours from start to merge (it waited on
+  one mark), Fidelity B about 8.5.
+- Lessons (PACKS.md, section 7c): even placement over more density, the even shapes for boxes and
+  cylinders, the two-pixel cull (check a 256 px render too), a half-cell nudge against moiré on
+  see-through surfaces, and fewer, fainter splats for jelly and highlights.
+- A merge after an outage: GitHub reported #90 as conflicting although it merged cleanly with main;
+  a main merge pushed to the branch cleared it.
+
 ### Books: your book, the photo album and the picture frame (PRs #73 and #74, merged 2026-09-29)
 
 - Built by Opus 5.5, on the picture engine. Your book opens the Tinkerer's Manual or any PDF (a file
