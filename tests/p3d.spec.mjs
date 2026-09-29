@@ -84,9 +84,17 @@ test.describe("the conversion", () => {
     const { photo, depth } = twoLevels();
     const s = buildPhotoSplats(photo, depth, { count: 2400, depth: 0.5 });
     expect(s.n).toBeLessThanOrEqual(2400);
+    // the splat nearest a point of the picture (the splats are on a fine grid, or merged in blocks of four)
     const at = (fx, fy) => {
-      const i = Math.floor(fy * s.gy) * s.gx + Math.floor(fx * s.gx);
-      return s.relief[i * 3 + 2];
+      const x = (fx - 0.5) * s.aspect;
+      const y = 0.5 - fy;
+      let best = 0;
+      let bd = Infinity;
+      for (let i = 0; i < s.n; i++) {
+        const dd = (s.relief[i * 3] - x) ** 2 + (s.relief[i * 3 + 1] - y) ** 2;
+        if (dd < bd) ((bd = dd), (best = i));
+      }
+      return s.relief[best * 3 + 2];
     };
     expect(at(0.5, 0.5) - at(0.1, 0.1)).toBeGreaterThan(0.15); // the square stands in front
     expect(s.stats.bigPieces).toBeGreaterThanOrEqual(2); // cut apart at the jump
@@ -96,11 +104,19 @@ test.describe("the conversion", () => {
     const deep = buildPhotoSplats(photo, depth, { count: 2400, depth: 1 });
     expect(deep.stats.relief).toBeGreaterThan(s.stats.relief);
     // no splat is stretched across the jump: every size stays within 1.7 grid cells (times FILL)
-    for (let i = 0; i < s.n; i++) expect(s.sigma[i]).toBeLessThan(2.1 / s.gy);
-    // colors follow the photo
-    const i = Math.floor(0.5 * s.gy) * s.gx + Math.floor(0.5 * s.gx);
-    expect(s.rgb[i * 3]).toBeGreaterThan(0.8);
-    expect(s.rgb[i * 3 + 2]).toBeLessThan(0.3);
+    for (let i = 0; i < s.n; i++) expect(s.sigma[i]).toBeLessThan(4.2 / s.gy); // a merged block is 2 fine cells across
+    // colors follow the photo: the splat at the middle of the red square is red
+    let mid = 0;
+    let md = Infinity;
+    for (let i = 0; i < s.n; i++) {
+      const dd = s.relief[i * 3] ** 2 + s.relief[i * 3 + 1] ** 2;
+      if (dd < md) ((md = dd), (mid = i));
+    }
+    expect(s.rgb[mid * 3]).toBeGreaterThan(0.8);
+    expect(s.rgb[mid * 3 + 2]).toBeLessThan(0.3);
+    // the splats are spent where they show: detail and depth edges are split into fine splats
+    expect(s.stats.splitBlocks).toBeGreaterThan(0);
+    expect(s.n).toBeGreaterThan(2400 * 0.85);
   });
 
   test("the layers rise one after another and end where they should", () => {
