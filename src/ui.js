@@ -813,6 +813,7 @@ export function createUI(app) {
     file.hidden = true;
     file.id = "toy-media-file";
     file.accept = kinds.map((k) => MEDIA_TYPES[k]).join(",");
+    file.multiple = !!media.multiple; // a set of pictures at once (lane Books)
     const busy = (on) => {
       for (const b of wrap.querySelectorAll("button")) b.disabled = on;
     };
@@ -835,12 +836,13 @@ export function createUI(app) {
     open.type = "button";
     open.id = "toy-media-open";
     open.className = "primary";
-    open.textContent = "Open a file…";
+    open.textContent = media.button || "Open a file…";
     open.addEventListener("click", () => file.click());
     file.addEventListener("change", () => {
-      const f = file.files?.[0];
+      const list = [...(file.files || [])];
       file.value = "";
-      if (f) run(f);
+      if (list.length > 1) run(list);
+      else if (list[0]) run(list[0]);
     });
     const sample = document.createElement("button");
     sample.type = "button";
@@ -893,9 +895,47 @@ export function createUI(app) {
       refreshMedia();
     });
     pages.append(prev, next, play);
-    wrap.append(openRow, form, now, pages, file);
-    mediaPanel = { now, prev, next, play, pages, sample };
+    // A video's scrub bar and its time (lane Books, for lane Screens).
+    const scrubRow = document.createElement("div");
+    scrubRow.className = "input-row media-scrub";
+    scrubRow.hidden = true;
+    const scrub = document.createElement("input");
+    scrub.type = "range";
+    scrub.id = "toy-media-scrub";
+    scrub.min = "0";
+    scrub.max = "1000";
+    scrub.step = "1";
+    scrub.value = "0";
+    scrub.setAttribute("aria-label", "Where the video is");
+    const clock = document.createElement("span");
+    clock.className = "note";
+    clock.id = "toy-media-time";
+    let dragging = false;
+    scrub.addEventListener("pointerdown", () => (dragging = true));
+    scrub.addEventListener("change", () => (dragging = false));
+    scrub.addEventListener("input", () => {
+      const d = app.player?.pictures?.api.duration || 0;
+      if (d) app.pictureSeek((Number(scrub.value) / 1000) * d);
+    });
+    scrubRow.append(scrub, clock);
+    const tick = () => {
+      if (!scrub.isConnected) return;
+      const api = app.player?.pictures?.api;
+      const d = api?.duration || 0;
+      if (!scrubRow.hidden && d) {
+        if (!dragging) scrub.value = String(Math.round((api.time / d) * 1000));
+        const fmt = (s) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, "0")}`;
+        clock.textContent = `${fmt(api.time)} / ${fmt(d)}`;
+      }
+      requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+    wrap.append(openRow, form, now, pages, scrubRow, file);
+    mediaPanel = { now, prev, next, play, pages, sample, scrubRow };
     refreshMedia();
+    // Again once the panel is in the page (lane Books): pages that arrived
+    // before it would otherwise leave it blank until the next page.
+    requestAnimationFrame(() => refreshMedia());
     return wrap;
   }
 
@@ -912,14 +952,16 @@ export function createUI(app) {
       return;
     }
     const what = { pdf: "a PDF", image: "a picture", gif: "a GIF", video: "a video" }[p.kind];
-    const where = p.kind === "pdf" ? `, page ${p.page + 1} of ${p.count}` : p.kind === "gif" ? `, ${p.count} frames` : ""; // prettier-ignore
-    m.now.textContent = `Showing ${p.name} (${what}${where}).`;
-    const paged = p.kind === "pdf" && p.count > 1;
+    const set = p.kind === "image" && p.count > 1; // a set of pictures (lane Books)
+    const where = p.kind === "pdf" ? `, page ${p.page + 1} of ${p.count}` : p.kind === "gif" ? `, ${p.count} frames` : set ? `, picture ${p.page + 1}` : ""; // prettier-ignore
+    m.now.textContent = set ? `Showing ${p.name}${where}.` : `Showing ${p.name} (${what}${where}).`;
+    const paged = (p.kind === "pdf" || set) && p.count > 1;
     m.prev.hidden = m.next.hidden = !paged;
     m.prev.disabled = p.page <= 0;
     m.next.disabled = p.page >= p.count - 1;
     m.play.hidden = p.kind !== "video";
     m.play.textContent = p.playing ? "Pause" : "Play";
+    m.scrubRow.hidden = p.kind !== "video";
     m.pages.hidden = !paged && p.kind !== "video";
   }
   // ---- End of pictures ---------------------------------------------------------------

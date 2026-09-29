@@ -10,8 +10,8 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 311 toys. 311 have a tap action today; the other 0 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 308.
+- 314 toys. 314 have a tap action today; the other 0 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 311.
 - **more** (has an effect; make it clearer or more dramatic): 0.
 - **new** (needs its own effect): 3.
 - Visual fixes: 0 open, 28 done. Touch or drag interaction asked for: 4.
@@ -53,7 +53,7 @@ Proposals below are suggestions; the owner may change them.
   Stonehenge, Big Ben, Taj Mahal, Castle, Pagoda, Windmill, Perceptron, Multilayer perceptron,
   Neural network, Convolutional network, Recurrent network, Transformer, Looped transformer,
   Diffusion model, Gradient descent, Gaussian splatting, Word vectors, Sorting machine, Half adder,
-  Model to splats, Splat field, Screen.
+  Your book, Photo album, Picture frame, Model to splats, Splat field, Screen.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -2074,7 +2074,7 @@ Proposals below are suggestions; the owner may change them.
     flashes and gives 0, the AND lights the carry lamp, and 1+1=10 shows (3.5 s).
   - Sound: Switch clicks, and a buzz through each gate.
 
-## Pictures (2)
+## Pictures (5)
 
 - **Picture lab** (`picture-lab`). Now: tap: Next page, or play and pause. Plan: new effect (E6).
   - Owner: The Pictures engine lane's test toy (labs only), from the owner's notes of September 27
@@ -2082,6 +2082,32 @@ Proposals below are suggestions; the owner may change them.
   - Effect: A flat sheet showing what you open: a tap turns to the next page of a PDF, or plays and
     pauses a video.
   - Sound: A soft paper swish and a light tap.
+- **Your book** (`your-book`). Now: tap: Turn the page. Plan: keep.
+  - Owner: Lane Books, from the owner's notes of September 27 and 28, 2026 (Pages into Splats).
+  - Effect: Open a PDF of any length and turn its pages: each page turns over its spine as a solid
+    sheet, curling as it goes, with the next page on its back. Five styles: hardcover, paperback,
+    magazine, stapled paper and spiral notebook.
+  - Improved: Books: a tap opens the cover, then turns each leaf over (about 1 s), the page curling
+    as it goes with the next page on its back; at the end a tap closes the book. Previous and Next
+    in the Toy tab turn back and forth. The page shape follows the PDF, and only the pages reached
+    are built.
+  - Sound: A paper swish and flutter, and a soft thud as the page lands.
+- **Photo album** (`photo-album`). Now: tap: Turn the page. Plan: keep.
+  - Owner: Lane Books, from the owner's notes of September 27 and 28, 2026 (Pages into Splats).
+  - Effect: Open a set of photos and turn through them on thick album pages, each photo held by four
+    photo corners, one or two to a page as fits their shapes, with the file names as captions.
+  - Improved: Books: a tap opens the leather, linen or scrapbook cover, then turns the thick pages
+    (about 1 s each), the photos mounted in photo corners with their file names beneath; at the end
+    a tap closes the album.
+  - Sound: A lower card swish and a firm thud.
+- **Picture frame** (`picture-frame`). Now: tap: Swing the frame. Plan: keep.
+  - Owner: Lane Books, from the owner's notes of September 27 and 28, 2026 (Pages into Splats).
+  - Effect: A photo in a frame hung on a nail by a wire: a tap swings it about the nail as one solid
+    piece, and it settles like a pendulum (about 3 s). Wood, gold, modern or digital frames; the
+    digital one fades through a set of photos.
+  - Improved: Books: a tap swings the frame, its wire and photo about the nail like a damped
+    pendulum, smaller each swing, until it hangs straight again (3 s).
+  - Sound: A knock on the wall, the wire creaking on the nail, and a softer knock.
 - **Screen** (`screen`). Now: tap: Switch on, then play or pause. Plan: keep.
   - Owner: From the owner's notes of September 28, 2026 (lane Screens; labs only).
   - Effect: Your video or GIF on a screen of splats, as an old TV, a flat TV, a cinema or a

@@ -402,11 +402,29 @@ like any other splat (parts, the body, leaves).
   not turned, which is why a turning page needs its own kind). A leaf's sheet should be on part 0 (a
   part's turn would replace the leaf's). The back of a turning page is a second sheet with the same
   spine, `normal` reversed and its own page:
-  `k.sheet({ id: "back", …, normal: [0, 0, -1], leaf: 0 })`. Check the back in a clip: in the engine
-  of September 29, 2026 it drew as blank paper, because splats are sorted in the pose they were
-  built in, so its paper drew over its ink (lane Learn). A sheet whose `visible` is 0 isn't built
-  until it shows, so a page that first appears halfway through a turn waits for its build: keep the
-  pages you'll need visible, or hidden behind a part.
+  `k.sheet({ id: "back", …, normal: [0, 0, -1], leaf: 0 })`. Splats are sorted in the pose they were
+  built in, so anything turned more than a quarter turn draws inside out (a back's paper over its
+  ink, a cover over the page under it): set `out.resortPose = true` from `drive` while it turns and
+  for a few frames after it lands, and the engine sorts the parts' and leaves' splats, and the
+  sheets on them, where they stand (lane Books). A sheet whose `visible` is 0 isn't built until it
+  shows; `out.sheets[id] = { page, visible: 0, ahead: 1 }` builds it hidden, after the pages on
+  show, and `pics.ready(id)` says when it's done. A book asks for the pages its next turn and the
+  turn back need with `ahead`, and a turn waits for `pics.ready` so it never shows a blank page.
+- A book's pages (lane Books, `your-book` in `src/packs/pictures.js`): the leaf slots used as a ring
+  (four are enough), kit splats riding a leaf (kind `leaf`, params
+  `[distance from the spine in toy units, slot]`; fix the fit with reach points to know the toy
+  units at build time), and layers kept at least about 0.01 of the toy apart where big splats lie
+  under a picture sheet (splats sort by their centers, so closer layers mix in stripes).
+- **Media before the build.** `k.media` is `{ kind, count, name, aspect, aspects, names }` for the
+  media the toy shows (null in the Node tools), so a build can shape itself to the pages (a book
+  takes the PDF's page shape). `pics.aspect(n)` and `pics.nameOf(n)` in `info.data.pictures` give
+  one page's shape and name.
+- **A set of pictures.** `input: { media: { accept: ["image"], multiple: true } }` lets the visitor
+  open several photos at once (the photo album); a recipe's `pictures.sample` may return a list, and
+  Previous and Next page through the set. In a scene, `toy.media.files` keeps the settings (not the
+  files; docs/SCENE-SCHEMA.md).
+- **Drawing on a page.** `pictures.decorate(canvas, { page, name, sheet, kind, options })` draws on
+  a page or photo before it becomes splats (the album's photo corners and captions).
 - The video's sound follows the site's speaker button (embeds stay silent); `pics.togglePlay()`
   plays and pauses it. A GIF plays by itself.
 - Budgets per sheet come from the device tier (`PICTURE_BUDGETS` in `src/pictures.js`). A book shows
