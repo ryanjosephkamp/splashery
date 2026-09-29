@@ -1106,7 +1106,17 @@ function grapheneLattice() {
         if (Math.hypot(x, z - 0.5 * b) > 7.4) continue;
         atoms.push({ el: "C", p: [x, 0, z - 0.5 * b], color: "#4b4f57", r: 0.36 });
       }
-  return { atoms, bonds: bondsAt(atoms, [["C", "C", b, 0.03]]), bondR: 0.12, grey: "#8d939e", tilt: true }; // prettier-ignore
+  // Keep only carbons with two or three neighbours (no loose ends at the rim).
+  let bonds = bondsAt(atoms, [["C", "C", b, 0.03]]);
+  const deg = atoms.map(() => 0);
+  for (const [i, j] of bonds) (deg[i]++, deg[j]++);
+  const remap = [];
+  const kept = [];
+  atoms.forEach((a, i) => deg[i] >= 2 && (remap[i] = kept.push(a) - 1));
+  bonds = bonds
+    .filter(([i, j]) => deg[i] >= 2 && deg[j] >= 2)
+    .map(([i, j]) => [remap[i], remap[j]]);
+  return { atoms: kept, bonds, bondR: 0.12, grey: "#8d939e", tilt: true };
 }
 
 function iceLattice(rand) {
@@ -1899,10 +1909,10 @@ export const RECIPES = {
       for (const [h, acc] of hbonds) {
         const a = atoms[h].p;
         const b = atoms[acc].p;
-        k.cloud({ count: 90, size: 1, pattern: false }, (rand) => {
+        k.cloud({ count: 160, size: 1.5, pattern: false }, (rand) => {
           const t = 0.22 + (0.56 * Math.floor(rand() * 5)) / 4;
           return {
-            p: add(lerp(a, b, t), mul(randDir(rand), 0.035)),
+            p: add(lerp(a, b, t), mul(randDir(rand), 0.05)),
             color: "#7fc4ff",
             opacity: 0.95,
             kind: "token",

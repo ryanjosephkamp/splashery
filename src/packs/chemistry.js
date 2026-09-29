@@ -260,7 +260,11 @@ export function atomLayout(el) {
   const outer = nShells - 1;
   const jumper = electrons.filter((e) => e.shell === outer).pop();
   const step = nShells > 1 ? (rOut - r1) / (nShells - 1) : 0.45;
-  return { nucleus, shellR, electrons, jumper, rHigh: rOut + Math.max(0.45, Math.min(0.6, step)) };
+  const rHigh = rOut + Math.max(0.45, Math.min(0.6, step));
+  // Small atoms are shown bigger when risen (their part's scale), so every
+  // atom reads at phone size; the biggest stay as built.
+  const show = Math.min(1.7, Math.max(1, 4.2 / rHigh));
+  return { nucleus, shellR, electrons, jumper, rHigh, show };
 }
 
 // The share of the budget each piece of the atom gets: whole splat counts
@@ -313,8 +317,8 @@ export const RECIPES = {
       at(p, c) {
         const up = (c.up ?? 0) > 0.35;
         const el = elementOf(SHOWN.symbol);
-        if (up && el && len(sub(p, ATOM_AT)) < atomLayout(el).rHigh + 0.3 && p[2] > 1)
-          return "shine";
+        const L = el && atomLayout(el);
+        if (up && L && len(sub(p, ATOM_AT)) < L.rHigh * L.show + 0.3 && p[2] > 1) return "shine";
         if (p[2] < DEPTH + 0.25) {
           const tile = TILES.find(
             (t) => Math.abs(p[0] - t.pos[0]) <= PITCH / 2 && Math.abs(p[1] - t.pos[1]) <= PITCH / 2,
@@ -375,7 +379,7 @@ export const RECIPES = {
         ele = band(u, 0.5, 0.97);
       }
       const vis = rise > 0.002 ? 1 : 0;
-      const sc = 0.12 + 0.88 * rise;
+      const sc = (0.12 + 0.88 * rise) * (rise > 0 ? 1 + (D.show - 1) * rise : 1);
       const off = mul(D.home, 1 - rise);
       out.morph = [nuc, ele, 0, 0];
       out.parts.tile = { offset: [0, 0, 0.28 * (m.dir === -1 ? rise : ease(band(u, 0, 0.12)))] };
@@ -641,7 +645,7 @@ export const RECIPES = {
       // The light it gives off: the line's color (white when no visible
       // line has been measured).
       const light = el.lineColor || "#eef2ff";
-      const flashOpacity = Math.min(0.2, 300 / n.flash);
+      const flashOpacity = Math.min(0.12, 180 / n.flash);
       k.cloud(
         {
           share: n.flash / N,
@@ -695,6 +699,7 @@ export const RECIPES = {
         jumpShell,
         rJump: L.shellR[jumpShell],
         rHigh: L.rHigh,
+        show: L.show,
         ping: { voice: "ding", f: pingNote(el), decay: 1.4, vol: 0.7 },
       };
     },
