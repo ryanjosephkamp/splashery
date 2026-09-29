@@ -10,11 +10,11 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 315 toys. 315 have a tap action today; the other 0 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 312.
+- 316 toys. 316 have a tap action today; the other 0 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 313.
 - **more** (has an effect; make it clearer or more dramatic): 0.
 - **new** (needs its own effect): 3.
-- Visual fixes: 0 open, 28 done. Touch or drag interaction asked for: 4.
+- Visual fixes: 0 open, 30 done. Touch or drag interaction asked for: 4.
 
 ## By phase
 
@@ -22,38 +22,38 @@ Proposals below are suggestions; the owner may change them.
   Vintage camera, Boombox, Horse statue, Basketball, Soccer ball, American football, Tennis ball,
   Baseball, Softball, Rugby ball, Volleyball, Cricket ball, Pool ball, Medicine ball, Squash ball,
   Hockey puck, Flying disc, Comet, Lava lamp, Storybook, Laptop, Decorated tree, Diya, Sports car,
-  Tractor, Statue of Liberty. Effects to make clearer or more dramatic, still open: none. Done in
-  C2: Cactus, Strawberry, Heart cookie, Honeybee, Jelly blob, Donut, Neon knot, Tiny planet, Cluster
-  fly, May beetle, Millipede, Carder bumblebee, Raspberry, Blackberry, Blueberry, Grape, Cinnamon
-  star cookie, Tomatoes, Mandeltorus, Basket, Real rubber duck, Garden gnome, Wooden elephant,
-  Marble bust, Ukulele, Alarm clock, Vintage camera, Boombox, Real croissant, Carrot cake,
-  Pomegranate, Lantern, Cat statue, Horse statue, Real pencil, Real tin can, Basketball, Soccer
-  ball, American football, Tennis ball, Baseball, Softball, Beach ball, Golf ball, Rugby ball,
-  Volleyball, Water polo ball, Ping-pong ball, Cricket ball, Bowling ball, Pool ball, Pickleball,
-  Dodgeball, Medicine ball, Lacrosse ball, Squash ball, Bouncy ball, Marble, Hockey puck,
-  Shuttlecock, Flying disc, Beating heart, Sun, Solar system, Mercury, Venus, Earth, Moon, Mars,
-  Jupiter, Saturn, Uranus, Neptune, Aurora world, Asteroid, Comet, Meteor, Star, Pulsar, Black hole,
-  Star cluster, Ring nebula, Nebula, Spiral galaxy, Virus, Bacteriophage, Bacterium, Red blood cell,
-  Neuron, Astrocyte, Animal cell, DNA, White blood cell, Microglia, Diatom, Pollen grain, Snowflake,
-  Chromosome, Mitochondrion, Paramecium, Amoeba, Electron orbital, Atom, Molecule, Protein, Crystal
-  lattice, Diamond, Ruby, Emerald, Amethyst geode, Sapphire, Quartz cluster, Opal, Crystal ball,
-  Brain, Eye, Lungs, Tooth, Kidney, Anatomy atlas, Oak tree, Pine tree, Palm tree, Cherry blossom,
-  Maple tree, Bonsai, Weeping willow, Sunflower, Rose, Tulips, Daisies, Lotus, Toadstool, Fern,
-  Saguaro cactus, Coral reef, Pinecone, Acorns, Succulent, Bamboo, Pebbles, Kelp, Lava lamp, Ice
-  swan, Tornado, Rainbow, Iceberg, Waterfall, Ocean wave, Ice cream, Watermelon, Cupcake, Lollipop,
-  Candy cane, Macarons, Gummy bear, Pretzel, Croissant, Sushi, Taco, Coffee, Apple, Bananas, Orange,
-  Kiwi, Pineapple, Cherries, Grapes, Avocado, Building bricks, Rubber duck, Newton's cradle, Puzzle
-  cube, Kite, Chess set, Lorenz attractor, Möbius strip, Klein bottle, Menger sponge, Hypercube,
-  Torus knot, Gyroid, Mandelbulb, Seashell spiral, Graph plotter, Surface plotter, Circle and waves,
-  Fourier circles, Pythagoras proof, Splat equation, Heraldic shield, Crown, Wizard's orb,
-  Jellyfish, School of fish, Pufferfish, Nautilus, Snail, Octopus, Sea urchin, Frog, Snowman,
-  Fireworks, Decorated tree, Diya, Acoustic guitar, Snare drum, Xylophone, Hot-air balloon, Bus, Jet
-  airliner, Sailboat, Submarine, Bicycle, Eiffel Tower, Washington Monument, Pyramids of Giza,
-  Twisting supertall, Statue of Liberty, White House, Leaning Tower of Pisa, Colosseum, Parthenon,
-  Stonehenge, Big Ben, Taj Mahal, Castle, Pagoda, Windmill, Perceptron, Multilayer perceptron,
-  Neural network, Convolutional network, Recurrent network, Transformer, Looped transformer,
-  Diffusion model, Gradient descent, Gaussian splatting, Word vectors, Sorting machine, Half adder,
-  Your book, Photo album, Picture frame, Model to splats, Splat field, Screen.
+  Tractor, Statue of Liberty, Your book, Photo album. Effects to make clearer or more dramatic,
+  still open: none. Done in C2: Cactus, Strawberry, Heart cookie, Honeybee, Jelly blob, Donut, Neon
+  knot, Tiny planet, Cluster fly, May beetle, Millipede, Carder bumblebee, Raspberry, Blackberry,
+  Blueberry, Grape, Cinnamon star cookie, Tomatoes, Mandeltorus, Basket, Real rubber duck, Garden
+  gnome, Wooden elephant, Marble bust, Ukulele, Alarm clock, Vintage camera, Boombox, Real
+  croissant, Carrot cake, Pomegranate, Lantern, Cat statue, Horse statue, Real pencil, Real tin can,
+  Basketball, Soccer ball, American football, Tennis ball, Baseball, Softball, Beach ball, Golf
+  ball, Rugby ball, Volleyball, Water polo ball, Ping-pong ball, Cricket ball, Bowling ball, Pool
+  ball, Pickleball, Dodgeball, Medicine ball, Lacrosse ball, Squash ball, Bouncy ball, Marble,
+  Hockey puck, Shuttlecock, Flying disc, Beating heart, Sun, Solar system, Mercury, Venus, Earth,
+  Moon, Mars, Jupiter, Saturn, Uranus, Neptune, Aurora world, Asteroid, Comet, Meteor, Star, Pulsar,
+  Black hole, Star cluster, Ring nebula, Nebula, Spiral galaxy, Virus, Bacteriophage, Bacterium, Red
+  blood cell, Neuron, Astrocyte, Animal cell, DNA, White blood cell, Microglia, Diatom, Pollen
+  grain, Snowflake, Chromosome, Mitochondrion, Paramecium, Amoeba, Electron orbital, Atom, Molecule,
+  Protein, Crystal lattice, Diamond, Ruby, Emerald, Amethyst geode, Sapphire, Quartz cluster, Opal,
+  Crystal ball, Brain, Eye, Lungs, Tooth, Kidney, Anatomy atlas, Oak tree, Pine tree, Palm tree,
+  Cherry blossom, Maple tree, Bonsai, Weeping willow, Sunflower, Rose, Tulips, Daisies, Lotus,
+  Toadstool, Fern, Saguaro cactus, Coral reef, Pinecone, Acorns, Succulent, Bamboo, Pebbles, Kelp,
+  Lava lamp, Ice swan, Tornado, Rainbow, Iceberg, Waterfall, Ocean wave, Ice cream, Watermelon,
+  Cupcake, Lollipop, Candy cane, Macarons, Gummy bear, Pretzel, Croissant, Sushi, Taco, Coffee,
+  Apple, Bananas, Orange, Kiwi, Pineapple, Cherries, Grapes, Avocado, Building bricks, Rubber duck,
+  Newton's cradle, Puzzle cube, Kite, Chess set, Lorenz attractor, Möbius strip, Klein bottle,
+  Menger sponge, Hypercube, Torus knot, Gyroid, Mandelbulb, Seashell spiral, Graph plotter, Surface
+  plotter, Circle and waves, Fourier circles, Pythagoras proof, Splat equation, Heraldic shield,
+  Crown, Wizard's orb, Jellyfish, School of fish, Pufferfish, Nautilus, Snail, Octopus, Sea urchin,
+  Frog, Snowman, Fireworks, Decorated tree, Diya, Acoustic guitar, Snare drum, Xylophone, Toy piano,
+  Hot-air balloon, Bus, Jet airliner, Sailboat, Submarine, Bicycle, Eiffel Tower, Washington
+  Monument, Pyramids of Giza, Twisting supertall, Statue of Liberty, White House, Leaning Tower of
+  Pisa, Colosseum, Parthenon, Stonehenge, Big Ben, Taj Mahal, Castle, Pagoda, Windmill, Perceptron,
+  Multilayer perceptron, Neural network, Convolutional network, Recurrent network, Transformer,
+  Looped transformer, Diffusion model, Gradient descent, Gaussian splatting, Word vectors, Sorting
+  machine, Half adder, Your book, Photo album, Picture frame, Model to splats, Splat field, Screen.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -1745,7 +1745,7 @@ Proposals below are suggestions; the owner may change them.
   - Owner: Pretty much perfect.
   - Sound: Match strike and a bell.
 
-## Music (3)
+## Music (4)
 
 - **Acoustic guitar** (`guitar`). Now: tap: Strum. Plan: keep.
   - Owner: Looks fine; add the music.
@@ -1767,6 +1767,20 @@ Proposals below are suggestions; the owner may change them.
     wherever it is, lands 0.12 s after the tap with the bar's note, bounces off, and the bar jumps.
     A tap off the bars still plays the scale.
   - Sound: The scale it already plays, as mallet tones.
+- **Toy piano** (`toy-piano`). Now: tap: Play Twinkle, Twinkle. Plan: keep.
+  - Owner: The owner's idea on the Toy Ideas page, for the blind A/B toy (September 29, 2026): "Tap
+    a key: a tiny hammer strikes a metal rod inside the open back, and the rod shivers as it rings.
+    Tap elsewhere: Twinkle, Twinkle, Little Star, the rods shimmering in turn."
+  - Effect: Tap a key: it dips, its hammer swings up and strikes its rod, and the rod shivers as the
+    note rings. Tap elsewhere: the opening line of Twinkle, Twinkle, Little Star, each key, hammer
+    and rod moving with its note (5 s).
+  - Improved: A/B (maker B): new kit toy. An upright toy piano with 18 keys (C5 to F6, black keys
+    raised), a red lacquer case (Color in the Toy tab) with an open back and a raised lid. Every
+    key, hammer and steel rod is its own solid piece: a key turns on its balance rail, its hammer
+    swings up through a sixth of a turn to strike, and the rod shivers sideways as the note rings
+    (1.5 s). A tap on a key, a hammer or a rod plays that key; its note sounds as the hammer lands.
+    A tap anywhere else plays Twinkle, Twinkle.
+  - Sound: The plinky, bell-like tone of struck metal rods, made in the page.
 
 ## Vehicles (14)
 
@@ -2095,6 +2109,11 @@ Proposals below are suggestions; the owner may change them.
   - Sound: A soft paper swish and a light tap.
 - **Your book** (`your-book`). Now: tap: Turn the page. Plan: keep.
   - Owner: Lane Books, from the owner's notes of September 27 and 28, 2026 (Pages into Splats).
+  - Fixed: Books r2 (the owner's note of September 29, 2026: the book, not the pages, a little
+    blurry or grainy around the edges): the covers, spine, bands and page blocks have clean, sharp
+    edges (faces stop short of their edges, with finer splats and a line of thin splats along each),
+    full density and smooth cloth colors; the spiral's wire and the staples are thin splats along
+    the wire.
   - Effect: Open a PDF of any length and turn its pages: each page turns over its spine as a solid
     sheet, curling as it goes, with the next page on its back. Five styles: hardcover, paperback,
     magazine, stapled paper and spiral notebook.
@@ -2105,6 +2124,10 @@ Proposals below are suggestions; the owner may change them.
   - Sound: A paper swish and flutter, and a soft thud as the page lands.
 - **Photo album** (`photo-album`). Now: tap: Turn the page. Plan: keep.
   - Owner: Lane Books, from the owner's notes of September 27 and 28, 2026 (Pages into Splats).
+  - Fixed: Books r2 (the owner's note of September 29, 2026: a little blurry or grainy around the
+    edges): the covers and card pages have clean, sharp edges and full density; the leather's
+    stitches and groove are thin splats in front of the cover, the scrapbook's label its own card,
+    and the leather and linen smooth.
   - Effect: Open a set of photos and turn through them on thick album pages, each photo held by four
     photo corners, one or two to a page as fits their shapes, with the file names as captions.
   - Improved: Books: a tap opens the leather, linen or scrapbook cover, then turns the thick pages

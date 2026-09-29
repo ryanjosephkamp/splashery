@@ -1704,6 +1704,13 @@
       "sound": "The scale it already plays, as mallet tones.",
       "improved": "D: a tap on one bar lifts the mallet over that bar, strikes it and plays its note; a tap anywhere else plays the scale. Each bar dips as the mallet hits it. E1c: any tap over the row of bars strikes the nearest bar (easy to hit on a phone). The mallet swings over from wherever it is, lands 0.12 s after the tap with the bar's note, bounces off, and the bar jumps. A tap off the bars still plays the scale."
     },
+    "toy-piano": {
+      "v": "keep",
+      "owner": "The owner's idea on the Toy Ideas page, for the blind A/B toy (September 29, 2026): \"Tap a key: a tiny hammer strikes a metal rod inside the open back, and the rod shivers as it rings. Tap elsewhere: Twinkle, Twinkle, Little Star, the rods shimmering in turn.\"",
+      "effect": "Tap a key: it dips, its hammer swings up and strikes its rod, and the rod shivers as the note rings. Tap elsewhere: the opening line of Twinkle, Twinkle, Little Star, each key, hammer and rod moving with its note (5 s).",
+      "sound": "The plinky, bell-like tone of struck metal rods, made in the page.",
+      "improved": "A/B (maker B): new kit toy. An upright toy piano with 18 keys (C5 to F6, black keys raised), a red lacquer case (Color in the Toy tab) with an open back and a raised lid. Every key, hammer and steel rod is its own solid piece: a key turns on its balance rail, its hammer swings up through a sixth of a turn to strike, and the rod shivers sideways as the note rings (1.5 s). A tap on a key, a hammer or a rod plays that key; its note sounds as the hammer lands. A tap anywhere else plays Twinkle, Twinkle."
+    },
     "rocket": {
       "v": "keep",
       "owner": "Basically perfect.",
@@ -2001,14 +2008,16 @@
       "owner": "Lane Books, from the owner's notes of September 27 and 28, 2026 (Pages into Splats).",
       "effect": "Open a PDF of any length and turn its pages: each page turns over its spine as a solid sheet, curling as it goes, with the next page on its back. Five styles: hardcover, paperback, magazine, stapled paper and spiral notebook.",
       "sound": "A paper swish and flutter, and a soft thud as the page lands.",
-      "improved": "Books: a tap opens the cover, then turns each leaf over (about 1 s), the page curling as it goes with the next page on its back; at the end a tap closes the book. Previous and Next in the Toy tab turn back and forth. The page shape follows the PDF, and only the pages reached are built."
+      "improved": "Books: a tap opens the cover, then turns each leaf over (about 1 s), the page curling as it goes with the next page on its back; at the end a tap closes the book. Previous and Next in the Toy tab turn back and forth. The page shape follows the PDF, and only the pages reached are built.",
+      "fixed": "Books r2 (the owner's note of September 29, 2026: the book, not the pages, a little blurry or grainy around the edges): the covers, spine, bands and page blocks have clean, sharp edges (faces stop short of their edges, with finer splats and a line of thin splats along each), full density and smooth cloth colors; the spiral's wire and the staples are thin splats along the wire."
     },
     "photo-album": {
       "v": "keep",
       "owner": "Lane Books, from the owner's notes of September 27 and 28, 2026 (Pages into Splats).",
       "effect": "Open a set of photos and turn through them on thick album pages, each photo held by four photo corners, one or two to a page as fits their shapes, with the file names as captions.",
       "sound": "A lower card swish and a firm thud.",
-      "improved": "Books: a tap opens the leather, linen or scrapbook cover, then turns the thick pages (about 1 s each), the photos mounted in photo corners with their file names beneath; at the end a tap closes the album."
+      "improved": "Books: a tap opens the leather, linen or scrapbook cover, then turns the thick pages (about 1 s each), the photos mounted in photo corners with their file names beneath; at the end a tap closes the album.",
+      "fixed": "Books r2 (the owner's note of September 29, 2026: a little blurry or grainy around the edges): the covers and card pages have clean, sharp edges and full density; the leather's stitches and groove are thin splats in front of the cover, the scrapbook's label its own card, and the leather and linen smooth."
     },
     "picture-frame": {
       "v": "keep",
