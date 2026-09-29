@@ -533,8 +533,8 @@ detail reads as blue noise); the planet's cloud shell has a ragged edge.
   canvas size, would let the Lab lane test sharper, denser toys without holes at small sizes.
 - The timing race in lane Studio Sound's song test is fixed on main ("Tests: the song test polls for
   the pause too"); the full suite on this branch with that main merged passed 356 of 356.
-- Also seen once, then not again with a fresh server: `tests/smoke.spec.mjs`, "rigs pick splats by
-  colour…" (the strawberry had not settled 3 s after its tap). It passed on this branch in two later
+- Also seen once, then not again with a fresh server: `tests/smoke.spec.mjs`, the strawberry rig
+  test (the strawberry had not settled 3 s after its tap). It passed on this branch in two later
   runs.
 - Seen twice on September 29 after merging Books, then not in 5 more runs: `tests/bk.spec.mjs`, "a
   video's time, length and seek, and the Toy tab's scrub bar" hung until its 4-minute timeout. This
