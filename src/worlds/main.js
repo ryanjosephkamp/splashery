@@ -7,7 +7,7 @@ import { loadWorld } from "./world-file.js";
 import { WorldView, NoGPUError } from "./render.js";
 import { World } from "./world.js";
 import { Controls } from "./controls.js";
-import { detectTier } from "./tiers.js";
+import { detectTier, WORLD_BUDGETS } from "./tiers.js";
 
 const $ = (id) => document.getElementById(id);
 const params = new URLSearchParams(location.search);
@@ -61,6 +61,10 @@ class Page {
       return;
     }
     this.tier = detectTier();
+    // Render settings per tier; ?dpr= and ?kernel= override them.
+    const tierBudget = WORLD_BUDGETS[this.tier];
+    this.view.setPixelRatio(Number(params.get("dpr")) || tierBudget.ratio);
+    this.view.setKernel(params.get("kernel") || tierBudget.kernel);
     const world = new World(this.view, def, this.tier, { reducedMotion });
     this.world = world;
     // A wide view behind the start screen.
