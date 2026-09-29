@@ -506,6 +506,26 @@ test.describe("your book, the album and the frame (no browser)", () => {
     expect(b.run(0.2).parts.frame.angle).toBe(0);
   });
 
+  test("the digital frame steps in order, or at random with Order: Random", async () => {
+    const seq = async (order) => {
+      const pics = fakePics(6);
+      const b = await play("picture-frame", { frame: "digital", order }, pics);
+      const pages = [0];
+      for (let i = 0; i < 40 * 30; i++) {
+        b.run(1 / 30);
+        if (pics.page !== pages[pages.length - 1]) pages.push(pics.page);
+      }
+      return pages;
+    };
+    const inOrder = await seq("inorder");
+    expect(inOrder.length).toBeGreaterThan(5);
+    expect(inOrder.every((p, i) => i === 0 || p === (inOrder[i - 1] + 1) % 6)).toBe(true);
+    const random = await seq("random");
+    expect(random.length).toBeGreaterThan(5);
+    expect(random.some((p, i) => i > 0 && p !== (random[i - 1] + 1) % 6)).toBe(true);
+    expect(random.every((p, i) => i === 0 || p !== random[i - 1])).toBe(true);
+  });
+
   test("the digital frame fades to black, steps to the next photo and fades back in", async () => {
     const pics = fakePics(3);
     const b = await play("picture-frame", { frame: "digital" }, pics);
@@ -727,6 +747,128 @@ test.describe("your book, the album and the frame (in the app)", () => {
     // six seconds.
     const t1 = await page.evaluate(() => window.__splashery.player.time);
     await page.waitForFunction((t1) => window.__splashery.player.pictures.page === 1 && window.__splashery.player.time < t1 + 7.5, t1, { timeout: 180_000 }); // prettier-ignore
+  });
+
+  // A pointer on the page, in recipe units (the spine at x = 0).
+  async function pointAt(page, p) {
+    return page.evaluate((p) => {
+      const pl = window.__splashery.player;
+      const [x, y] = pl.screenPoint(p);
+      const r = pl.stage.canvas.getBoundingClientRect();
+      return [r.left + x, r.top + y];
+    }, p);
+  }
+  async function pullBy(page, from, to, steps) {
+    const [x0, y0] = await pointAt(page, from);
+    const [x1, y1] = await pointAt(page, to);
+    await page.mouse.move(x0, y0);
+    await page.mouse.down();
+    for (let i = 1; i <= steps; i++) {
+      await page.mouse.move(x0 + ((x1 - x0) * i) / steps, y0 + ((y1 - y0) * i) / steps);
+      await page.waitForTimeout(40);
+    }
+    await page.mouse.up();
+  }
+  const pageNow = (page) => page.evaluate(() => window.__splashery.player.pictures.page);
+  // Waits until nothing turns (every leaf flat), on the player's clock.
+  async function landed(page) {
+    await page.waitForFunction(
+      () => {
+        const pl = window.__splashery.player;
+        pl.stage.requestRender();
+        const L = pl.motion.out?.leaves || [];
+        return L.every((l) => !l || l.curl === 0);
+      },
+      null,
+      { timeout: 120_000, polling: 200 },
+    );
+    await step(page, 0.5);
+  }
+
+  test("a pointer pulls a page over only when pulled far enough; a tap turns by where it lands", async ({
+    page,
+  }) => {
+    await open(page, "your-book", `${BK}booklet.pdf`);
+    await turn(page); // the cover opens
+    expect(await pageNow(page)).toBe(1);
+    // Pulled a little way and let go: it falls back.
+    await pullBy(page, [0.6, 0, 0.02], [0.4, 0, 0.02], 6);
+    await landed(page);
+    expect(await pageNow(page)).toBe(1);
+    // Pulled across the spine: it turns.
+    await pullBy(page, [0.6, 0, 0.02], [-0.5, 0, 0.02], 16);
+    await landed(page);
+    expect(await pageNow(page)).toBe(3);
+    // A click on the left page goes back.
+    const [x, y] = await pointAt(page, [-0.4, 0, 0.02]);
+    await page.mouse.click(x, y);
+    await page.waitForFunction(() => window.__splashery.player.pictures.page === 1, null, { timeout: 60_000 }); // prettier-ignore
+    await landed(page);
+    // A pull that starts off the book turns the view instead.
+    await pullBy(page, [0.2, 0.9, 0.02], [-0.3, 0.9, 0.02], 8);
+    await landed(page);
+    expect(await pageNow(page)).toBe(1);
+  });
+
+  test("a frame plays a GIF on a loop and a video by itself, muted", async ({ page }) => {
+    await open(page, "picture-frame", `http://127.0.0.1:4173${FIX}anim.gif`);
+    const frames = await page.evaluate(async () => {
+      const p = window.__splashery.player.pictures;
+      const seen = new Set();
+      const t0 = performance.now();
+      while (performance.now() - t0 < 2500) {
+        window.__splashery.player.stage.requestRender();
+        seen.add(p.gifFrame);
+        await new Promise((r) => setTimeout(r, 50));
+      }
+      return seen.size;
+    });
+    expect(frames).toBeGreaterThan(4);
+    await page.evaluate(
+      (u) => window.__splashery.app.openMedia(u),
+      `http://127.0.0.1:4173${FIX}clip.webm`,
+    );
+    await waitSheets(page);
+    await step(page, 0.5);
+    const v = await page.evaluate(async () => {
+      const m = window.__splashery.player.pictures.media;
+      const t = m.video.currentTime;
+      await new Promise((r) => setTimeout(r, 1200));
+      return { playing: m.playing, moved: m.video.currentTime - t, muted: m.video.muted };
+    });
+    expect(v).toMatchObject({ playing: true, muted: true });
+    // (A short clip loops: its time moved, forward or round again.)
+    expect(Math.abs(v.moved)).toBeGreaterThan(0.1);
+  });
+
+  test("the digital frame lists its photos in the Toy tab and keeps the order you set", async ({
+    page,
+  }) => {
+    await open(page, "picture-frame", null, { frame: "digital" });
+    const names = await page.evaluate(() => window.__splashery.player.pictures.api.names);
+    expect(names.length).toBe(7);
+    // The list, in the Toy tab.
+    await page.evaluate(() => window.__splashery.app.ui.showTab?.("toy"));
+    await page.waitForFunction(() => document.querySelectorAll("#toy-media-list li").length === 7, null, { timeout: 60_000 }); // prettier-ignore
+    // Move the first one down: the first two swap.
+    // (The phone's sheet may be folded away: press it from the page.)
+    await page.evaluate(() => document.querySelector("#toy-media-list li").querySelectorAll("button")[1].click()); // prettier-ignore
+    const after = await page.evaluate(() => window.__splashery.player.pictures.api.names);
+    expect(after.slice(0, 2)).toEqual([names[1], names[0]]);
+    await page.waitForFunction((n) => document.querySelector("#toy-media-list li span")?.textContent === n, names[1], { timeout: 30_000 }); // prettier-ignore
+    // A new order from a recipe's side: reversed; the photo on show stays.
+    const r = await page.evaluate(() => {
+      const api = window.__splashery.player.pictures.api;
+      const shown = api.nameOf(api.page);
+      const ok = api.reorder(api.names.map((_, i, a) => a.length - 1 - i));
+      return { ok, shown, now: api.nameOf(api.page), names: api.names };
+    });
+    expect(r.ok).toBe(true);
+    expect(r.now).toBe(r.shown);
+    expect(r.names).toEqual([...after].reverse());
+    // The frame steps on in the new order.
+    const p0 = await pageNow(page);
+    await page.waitForFunction((p0) => window.__splashery.player.pictures.page === (p0 + 1) % 7, p0, { timeout: 180_000 }); // prettier-ignore
   });
 
   for (const [w, h] of [
