@@ -16,6 +16,50 @@ had not settled 3 s after its tap) and "a scan rig moves a part of a captured to
 console warning, like the rare engine warning in HANDOFF.md). Keep `test-results/` if either comes
 back.
 
+### Lab: sharper kernels and splat fields (PRs #83 and #85, merged 2026-09-29)
+
+- Built by Opus 5.5, the first Lab lane. A literature check (docs/lab/LITERATURE.md), then a sharper
+  splat kernel as a labs option (#85): `src/kernels.js` swaps the splat falloff in the engine's
+  fragment hook without touching the vendored engine. It is on only with labs and `?kernel=sharp` or
+  a recipe's `kernel: "sharp"`. Of four candidates (the Gaussian, a generalized exponential, a
+  steeper one and a flat disc), only the generalized exponential was kept; each blends back to the
+  Gaussian as a splat shrinks to a pixel or two. Measurements are in docs/lab/KERNELS.md.
+- Splat fields on the GPU (#83): a recipe can bring its own work-buffer program (`gpuField`), so
+  hundreds of thousands of splats move every frame; the Lab shelf's field toy shows a galaxy, a knot
+  and an ocean (docs/lab/FIELDS.md).
+- The owner marked all six lab-\* cards good the first time. About 1.5 hours to READY.
+- Lessons: a kernel change can stay off by default and still be judged on real toys through a URL
+  switch; flat discs look like a pile of coins, and a too-steep falloff shows each splat as a scale.
+
+### Learn: the Manual audit and the lab notebook (PR #84, merged 2026-09-29)
+
+- Built by Sonnet 5.5. The Tinkerer's Manual was checked claim by claim against the code (the math,
+  the recipe API, the controls, the scene format and every splat equation program), fixed, and given
+  a new Level 5: picture sheets and turning pages, input panels, the Screen, Gaussian splatting, the
+  top bar and the tilt lock, with three new example recipes. The PDF is now 34 pages.
+  `tests/ln.spec.mjs` (19 tests) checks the page against the code.
+- The lab notebook (docs/NOTEBOOK.md) was backfilled with every lane from Phase A, plus "Lessons"
+  (grouped, each with its lane) and "The two models".
+- The owner marked both cards good the first time. About 1 hour to READY.
+
+### Studio Sound: the song landscape and the Chladni plate (PRs #80 and #81, merged 2026-09-29)
+
+- Built by Sonnet 5.5, the first Sonnet lane. A new Studio shelf (labs). The song landscape turns a
+  song you open (decoded on the device) into a real spectrogram of splats (Hann-windowed FFT, twelve
+  bands to the octave, 40 Hz to 16 kHz, loudness as height) that plays through the speaker button
+  while the marker and the view glide along it. The Chladni plate is bowed at one of eight modes,
+  and every sand grain hops and settles on the mode's nodal lines, from the classic square-plate
+  model.
+- The Operator's engine PR #81 added `input.binary` (the recipe gets the File) and `info.sound` (the
+  site's Sound for a toy's own audio).
+- The owner's first marks were "fix: the toy seems grainy". It was the toys: grids of dots for the
+  plate and floor, and gaps in the landscape. Solid sheets of overlapping flat discs, 2.5 times the
+  sand and overlapping landscape splats fixed it, and the r2 cards were marked good. About 2.5 hours
+  to READY, one fix round included.
+- Lessons: when the owner says "it could just be the GIF", check a full-resolution still first; it
+  was the toy. A pause test that reads the state after a fixed wait flaked under load (fixed in #87
+  by polling).
+
 ### Viewer: whole PDF figures, tilt lock and top-bar settings (PR #75, merged 2026-09-29)
 
 - Built by Opus 5.5, from the owner's September 28 notes on the Picture lab. The black boxes over

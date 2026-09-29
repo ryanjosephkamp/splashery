@@ -1368,6 +1368,19 @@ export const TOY_SOUNDS = {
   "song-landscape": [
     { voice: "pluck", notes: "C5 E5 G5", step: 0.09, decay: 0.5, bright: 0.4, vol: 0.6 },
   ],
+  // Lane Studio Models: the splats lift off in a rising whoosh and settle back as falling notes.
+  "model-splats": [
+    { voice: "zap", f: 420, to: 4, decay: 2.4, vol: 0.35 },
+    {
+      voice: "pluck",
+      at: 1.6,
+      notes: "B5 F#5 D5 B4",
+      step: 0.16,
+      decay: 0.7,
+      bright: 0.5,
+      vol: 0.45,
+    },
+  ],
   // Lane Screens: the old TV's click and hum (each style plays its own
   // cues as it switches on: the flat TV's soft tone, the cinema's curtains,
   // the hologram's shimmer).
@@ -1376,6 +1389,9 @@ export const TOY_SOUNDS = {
     { voice: "zap", at: 0.1, f: 5200, to: 0.9, decay: 0.5, vol: 0.18 },
     { voice: "hum", at: 0.12, f: 60, to: 1.02, decay: 1.6, bright: 0.15, vol: 0.5 },
   ],
+  // ---- Lab (lane Lab) ----------------------------------------------------------------
+  // A soft rising swell as the pulse runs out through the field.
+  "splat-field": { voice: "pad", f: "D4", to: 1.5, decay: 2.5, vol: 0.7 },
 };
 
 // The toy's sound, or null when it has none (visitors' own splats).

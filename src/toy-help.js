@@ -1403,6 +1403,20 @@ export const TOY_HELP = {
       "A song is a wave, but you can also see what it is made of. This toy cuts the sound into short slices, measures how loud each pitch is in every slice (a short-time Fourier transform) and stands the answer up as a landscape of splats: time runs away from you, pitch runs across from low to high, and loudness is height.\n\nTap to play it: a glowing line and the camera glide along the landscape in time with the music. Open a song of your own in the Toy tab; it is read on your device and never uploaded. Long songs make longer, coarser landscapes.",
   },
 
+  "model-splats": {
+    howTo:
+      "Tap to lift the splats off the model and watch them settle back. Open your own 3D model in the Toy tab.",
+    about:
+      "A 3D model is usually a mesh: a net of flat triangles with colors or a picture (a texture) painted on them. This toy turns a mesh into splats. It scatters points across the surface, more of them where the shape bends sharply or is finely made, and lays a small flat splat on each one, facing the way the surface does. Each splat is sized to its neighbors so the surface closes with no gaps, and takes its color from the texture at that spot. Sharp edges stay sharp.\n\nTap to lift every splat into a loose cloud and watch each one settle back into its own place. Show: Wireframe draws the mesh's own edges as thin splats, so you can see what the splats were made from. Open a .glb, .gltf, .obj or .stl in the Toy tab (select a model's other files with it); it is converted on your device and never uploaded.",
+  },
+
+  // ---- Lab (lane Lab) -------------------------------------------------------------------
+  "splat-field": {
+    howTo: "Tap to send a pulse through it. Pick a Field in the Toy tab.",
+    about:
+      "Nearly 300,000 splats, and the graphics chip works out where every one of them is, and its color, again every frame. Each splat only knows its own two numbers, u and v; a small program turns them and the time into a place. That is why so many splats can move smoothly at once.\n\nThe galaxy's stars each follow an oval orbit, turned a little more the farther out it is, so the ovals crowd into two spiral arms that stay while every star keeps moving. The ocean is four waves added together, each splat tilted to the water's slope, and the knot is a flow along a knotted tube. Tap to send a bright ring out through the galaxy, drop a stone in the sea, or push the flow once more around the knot.",
+  },
+
   // ---- Holidays -------------------------------------------------------------------------
   "jack-o-lantern": {
     howTo: "Tap to lift the lid; tap again to put it back.",

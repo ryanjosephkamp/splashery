@@ -2008,12 +2008,26 @@
       "effect": "A song's real spectrogram as a landscape of splats; a tap plays the song while a glowing marker and the camera glide along it.",
       "sound": "The song itself."
     },
+    "model-splats": {
+      "v": "keep",
+      "owner": "Approved on the Splashery Universe page (lane Studio Models), September 29, 2026.",
+      "effect": "A 3D model file (glTF, OBJ or STL) turned into splats on the device; the tap lifts every splat off the surface into a loose cloud and lets each settle back into its own place in about 3 s. Show: Wireframe draws the mesh's edges as thin splats.",
+      "sound": "A rising whoosh as the splats lift off, then four falling plucked notes as they settle back.",
+      "improved": "Studio Models: a converter that samples the surface by area (more splats where it bends or is finely made), lays flat splats on it sized to their neighbors, colors them from the texture, vertex colors or material, and keeps hard edges hard; two CC0 samples (Kenney's burger, Poly Haven's vase)."
+    },
     "screen": {
       "v": "keep",
       "owner": "From the owner's notes of September 28, 2026 (lane Screens; labs only).",
       "effect": "Your video or GIF on a screen of splats, as an old TV, a flat TV, a cinema or a hologram; the tap switches it on (the TV's bright line opens, the flat TV fades up, the curtains part, the hologram flickers up), then plays and pauses.",
       "sound": "The TV's click and hum; each style its own (a soft tone, the curtains' swish, a shimmer).",
       "improved": "Screens: four styles on a picture sheet with method \"screen\", a Big Buck Bunny scene (CC BY 3.0) and Muybridge's horse GIF (public domain) as samples, video sound on the speaker button."
+    },
+    "splat-field": {
+      "v": "keep",
+      "owner": "The owner's note \"big new Splashery ideas\" and his answer of September 29, 2026 (lane Lab; labs only): splat fields on the GPU.",
+      "effect": "Nearly 300,000 splats placed and colored by a program on the GPU every frame: a spiral galaxy, an ocean or a knotted flow. A tap sends a bright ring out through the galaxy, drops a stone in the sea, or pushes the flow once more around the knot (3 s).",
+      "sound": "A soft rising swell.",
+      "improved": "Lab: new test toy on the new Lab shelf (labs). Each splat stores only its (u, v); the toy's work-buffer program (a recipe's gpuField, an additive engine hook) computes its place, tilt and color from them and the time. Three fields: a galaxy whose stars orbit on turning ellipses (a density wave keeps two arms), an ocean of four Gerstner waves, a flow along a (2, 3) torus knot."
     }
   }
 }
