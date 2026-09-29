@@ -115,6 +115,10 @@ insignia. The laptop stays exactly as it is.
 
 ## State
 
+PRs: #66 was merged on September 28, 2026 at its first commit (this file and the video and GIF
+samples). The toys are in #72 ("Phase Screens: the screen and the Gaussian splat toy"), which needs
+the engine PR #71 merged first.
+
 September 28, 2026: both toys are built (labs only), with their sounds, help, plan entries, credits,
 tests (`tests/scr.spec.mjs`) and clips; an engine PR (`claude/lane-screens-engine`, "Engine: seek a
 video, and a picture toy's prepare reads its media") adds the two small things they need.
@@ -206,7 +210,7 @@ picture). Without it, the fit always learns the sample.
 
 ## For the Operator
 
-- Engine PR: "Engine: seek a video, and a picture toy's prepare reads its media"
+- Engine PR #71: "Engine: seek a video, and a picture toy's prepare reads its media"
   (`claude/lane-screens-engine`). It adds `time`, `duration` and `seek(s)` to the pictures API, and
   a second argument to a picture toy's `prepare`: `help.media()`. Both are additive; tests in
   `tests/scr-engine.spec.mjs`. Merge it before this lane's PR.
