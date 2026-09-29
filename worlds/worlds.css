@@ -1,0 +1,428 @@
+/* Splashery Worlds. The same tokens as the toy box (styles.css): page
+   #ffffff / #101010, ink #111111 / #f2f2f2, accent #0b4f9c / #b8ccff. */
+
+:root {
+  color-scheme: light;
+  --font-body: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --page: #ffffff;
+  --ink: #111111;
+  --muted: #3f3f3f;
+  --line: #dddddd;
+  --accent: #0b4f9c;
+  --accent-ink: #ffffff;
+  --paper: rgba(255, 255, 255, 0.94);
+  --shadow: 0 8px 28px rgba(0, 0, 0, 0.16);
+  --radius: 14px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --page: #101010;
+    --ink: #f2f2f2;
+    --muted: #d0d0d0;
+    --line: #363636;
+    --accent: #b8ccff;
+    --accent-ink: #101010;
+    --paper: rgba(16, 16, 16, 0.92);
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: #dcefff;
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.45;
+}
+
+#world {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  touch-action: none;
+  outline: none;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+a {
+  color: var(--accent);
+}
+
+/* ---- The heads-up bar ---- */
+
+.hud {
+  position: fixed;
+  top: max(10px, env(safe-area-inset-top));
+  left: 12px;
+  right: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  pointer-events: none;
+}
+
+.hud[hidden] {
+  display: none;
+}
+
+.hud-title {
+  margin: 0;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: var(--paper);
+  box-shadow: var(--shadow);
+  font-weight: 650;
+  font-size: 15px;
+}
+
+.hud-buttons {
+  display: flex;
+  gap: 8px;
+  pointer-events: auto;
+}
+
+.hud-buttons button {
+  min-width: 44px;
+  min-height: 40px;
+  padding: 6px 14px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: var(--shadow);
+  font-weight: 600;
+}
+
+.hud-buttons button:focus-visible,
+.start button:focus-visible,
+.card-close:focus-visible,
+.places button:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.hint {
+  position: fixed;
+  left: 50%;
+  top: calc(max(10px, env(safe-area-inset-top)) + 54px);
+  transform: translateX(-50%);
+  width: min(92vw, 520px);
+  margin: 0;
+  padding: 10px 14px;
+  border-radius: var(--radius);
+  background: var(--paper);
+  box-shadow: var(--shadow);
+  font-size: 14px;
+  text-align: center;
+  transition: opacity 0.6s ease;
+  /* Taps go through to the world (a sign may be behind it). */
+  pointer-events: none;
+}
+
+.hint.fade {
+  opacity: 0;
+}
+
+.only-touch {
+  display: none;
+}
+
+@media (pointer: coarse) {
+  .only-touch {
+    display: inline;
+  }
+  .only-keys {
+    display: none;
+  }
+}
+
+/* ---- The thumb stick ---- */
+
+.stick {
+  position: fixed;
+  left: max(22px, env(safe-area-inset-left));
+  bottom: max(28px, env(safe-area-inset-bottom));
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.28);
+  border: 2px solid rgba(255, 255, 255, 0.75);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.18);
+  touch-action: none;
+}
+
+.stick[hidden] {
+  display: none;
+}
+
+.stick .knob {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 56px;
+  height: 56px;
+  margin: -28px 0 0 -28px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  pointer-events: none;
+}
+
+/* ---- The landmark card ---- */
+
+.card {
+  position: fixed;
+  right: 14px;
+  bottom: max(18px, env(safe-area-inset-bottom));
+  width: min(360px, calc(100vw - 28px));
+  max-height: 60vh;
+  overflow: auto;
+  padding: 16px 18px 14px;
+  border-radius: var(--radius);
+  background: var(--paper);
+  box-shadow: var(--shadow);
+}
+
+.card[hidden] {
+  display: none;
+}
+
+.card h2 {
+  margin: 0 36px 6px 0;
+  font-size: 19px;
+  line-height: 1.25;
+}
+
+.card p {
+  margin: 0 0 8px;
+}
+
+.card-picture {
+  display: block;
+  width: 100%;
+  max-height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  background: var(--line);
+}
+
+.card-picture[hidden] {
+  display: none;
+}
+
+.card-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--ink);
+  font-size: 24px;
+  line-height: 1;
+}
+
+.card-link a {
+  font-weight: 600;
+}
+
+@media (max-width: 600px) {
+  .card {
+    left: 14px;
+    right: 14px;
+    width: auto;
+    bottom: calc(max(28px, env(safe-area-inset-bottom)) + 140px);
+  }
+}
+
+/* ---- The list of places ---- */
+
+.places {
+  width: min(640px, calc(100vw - 24px));
+  max-height: calc(100vh - 48px);
+  padding: 18px 20px;
+  border: 0;
+  border-radius: var(--radius);
+  background: var(--page);
+  color: var(--ink);
+  box-shadow: var(--shadow);
+}
+
+.places::backdrop {
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.places-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.places-head h2 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.places-close,
+.places-list button {
+  min-height: 38px;
+  padding: 6px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--page);
+  color: var(--ink);
+}
+
+.places-note {
+  color: var(--muted);
+  margin: 6px 0 12px;
+}
+
+.places-list {
+  margin: 0;
+  padding: 0 0 0 1.3em;
+}
+
+.places-list li {
+  padding: 10px 0;
+  border-top: 1px solid var(--line);
+}
+
+.places-list h3 {
+  margin: 0 0 4px;
+  font-size: 17px;
+}
+
+.places-list p {
+  margin: 0 0 6px;
+}
+
+.places-list .row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+/* ---- The start screen ---- */
+
+.start {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: end center;
+  padding: 18px 18px max(22px, env(safe-area-inset-bottom));
+  background: linear-gradient(rgba(220, 239, 255, 0) 40%, rgba(16, 40, 60, 0.3));
+}
+
+.start[hidden] {
+  display: none;
+}
+
+.start-box {
+  width: min(520px, 100%);
+  padding: 24px 24px 18px;
+  border-radius: 18px;
+  background: var(--paper);
+  box-shadow: var(--shadow);
+}
+
+.kicker {
+  margin: 0 0 4px;
+  color: var(--muted);
+  font-size: 13px;
+  letter-spacing: 0.02em;
+}
+
+.start h1 {
+  margin: 0 0 8px;
+  font-size: 28px;
+  line-height: 1.15;
+}
+
+.welcome {
+  margin: 0 0 14px;
+}
+
+.progress {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--line);
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0;
+  background: var(--accent);
+  transition: width 0.2s ease;
+}
+
+.progress-label {
+  margin: 6px 0 14px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.start-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.enter {
+  min-height: 46px;
+  padding: 10px 28px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-weight: 700;
+  font-size: 17px;
+}
+
+.enter:disabled {
+  opacity: 0.45;
+  cursor: progress;
+}
+
+.plain {
+  min-height: 46px;
+  padding: 10px 18px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink);
+}
+
+.start-foot {
+  margin: 14px 0 0;
+  font-size: 14px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hint,
+  .progress-bar {
+    transition: none;
+  }
+}

@@ -16,6 +16,38 @@ had not settled 3 s after its tap) and "a scan rig moves a part of a captured to
 console warning, like the rare engine warning in HANDOFF.md). Keep `test-results/` if either comes
 back.
 
+### Anatomy: the anatomy atlas (PRs #92 and #93, merged 2026-09-29)
+
+- Built by Opus 5.5. A labs toy on the Body shelf: a clinical figure in four layers (a smooth
+  mannequin skin, muscles, skeleton, organs), each layer a set of solid pieces that a tap peels off
+  in turn, with a Layer choice and a Labels list. Its engine PR #93 adds `out.legend`, a list of
+  names beside the stage that a toy's drive() can set.
+- Kit-built: no layered body (skin, muscles, bones and organs registered together) exists under CC0,
+  CC BY or public domain, and the good anatomy sets are CC BY-SA, so it builds the body from about
+  55 smooth-joined shapes and places our own brain, lungs, heart and kidney toys inside.
+- The owner marked its three cards good the first time. About 6.5 hours from start to merge (it
+  waited on the Integrator); the Integrator's run on main + #93 + #92 passed 414 of 414.
+- Lessons (PACKS.md, section 7d): a smooth body from primitives with an order-independent join, and
+  placing another toy's recipe inside a toy through a proxy kit.
+
+### Worlds: the world engine and a sandbox island (PR #78, merged 2026-09-29)
+
+- Built by Opus 5.5. Splashery Worlds (`worlds/?labs=1`, linked from the About tab with labs on): a
+  small world made of splats that you walk around as a character, on a phone or a computer. Terrain,
+  water and sky, props baked from toy recipes, chunked level of detail with budgets per device tier,
+  a kit-built character on eleven rigid joints, a follow camera, collision, landmarks with cards, a
+  list view and a start screen, all from a documented world file (docs/WORLDS.md). The Test island
+  is its sandbox.
+- It needed no shared engine change: the world has its own small PlayCanvas setup
+  (`src/worlds/render.js`) and reuses the kit, the noise, the font and the pack recipes as they are.
+- The owner liked the mechanics but not the look: "still just a bit too grainy, and the
+  player/character looks way too low-poly and simplistic." So round 2 splits in two: Worlds r2 takes
+  the grain out of the island, and a new Character lane builds "a polished video game character".
+- About 14 hours from start to merge; the Integrator's run on main + #78 passed 413 of 413.
+- Lessons (WORLDS.md): PlayCanvas 2.22.3's level of detail and splat budget work only on streamed
+  octree files, so a world built on the device keeps its own levels and budgets; limbs built as
+  lathes, since even spreading draws a lattice on cones.
+
 ### Fidelity A and B: the grainy toys made sharp (PRs #77 and #90, merged 2026-09-29)
 
 - Built by Opus 5.5, in two lanes from the owner's words: "I almost want to make things so
