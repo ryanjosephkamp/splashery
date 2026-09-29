@@ -62,7 +62,8 @@ test("the computing shelf: after Maths, with its twelve toys, sounds and plan en
     expect(PLAN[id], id).toBeTruthy();
     expect(RECIPES[id].build, id).toBeTruthy();
   }
-  expect(TOYS.filter((t) => t.category === "computing").length).toBe(IDS.length);
+  // Lane AI's own pack; later lanes may add toys to this shelf (the Gaussian splatting toy).
+  expect(TOYS.filter((t) => t.pack === "computing").length).toBe(IDS.length);
 });
 
 // Every option of every toy: the tap stays finite, uses at most the kit's
