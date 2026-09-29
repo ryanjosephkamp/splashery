@@ -339,6 +339,8 @@ export class Player {
     // Lab: a sharper splat kernel, labs only (src/kernels.js).
     const kernelParam = new URLSearchParams(location.search).get("kernel");
     this.stage.setKernel(pickKernel({ labs: labsOn(), param: kernelParam, recipe: info.kernel }));
+    // Lab r2: a recipe may lower the alpha a tap needs to find its splats.
+    this.stage.setPickAlpha(info.pickAlpha ?? null);
     if (!this.pictures) this.closeMedia(); // Pictures
     this.patternOn = false;
     this.applyPattern();
@@ -500,6 +502,7 @@ export class Player {
       splats: ctx.buf.count,
       lum: ctx.lum,
       kernel: recipe.kernel, // Lab
+      pickAlpha: recipe.pickAlpha, // Lab r2
       recipe,
       options,
       credit: def.credit || null,
