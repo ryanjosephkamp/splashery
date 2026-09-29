@@ -66,15 +66,19 @@ work is in [OPERATING.md](OPERATING.md).
   splats that you walk around as a character, with the Test island as its sandbox (docs/WORLDS.md).
   Then the anatomy atlas (#92, with engine PR #93 for a labels list beside the stage), built by Opus
   5.5: a clinical figure you peel layer by layer, kit-built because no layered CC0 or CC BY body
-  model exists. The owner marked its three cards good.
-- The shelf has 303 toys (32 scans, 4 shapes and 267 kit toys), plus twelve labs toys hidden unless
+  model exists. The owner marked its three cards good. Then the toy piano (#91), the winner of the
+  owner's blind A/B: the same brief built by Sonnet 5.5 and by Opus 5.5, marked without knowing
+  which was which; he marked Opus 5.5's three cards good and Sonnet 5.5's "too grainy". It is the
+  first new public toy since the Fidelity lanes. The Operator's engine PR #106 made the web-address
+  box name only what each picture toy opens (from the owner's review of the new toys).
+- The shelf has 304 toys (32 scans, 4 shapes and 268 kit toys), plus twelve labs toys hidden unless
   `?labs=1` (the Picture lab, the splat equation, the Screen, Gaussian splatting, the song
   landscape, the Chladni plate, the splat field, Model to splats, your book, the photo album, the
   picture frame and the anatomy atlas). The plan (`tools/toy-plan.json`,
-  [TOY-PLAN.md](TOY-PLAN.md)): all 315 keep. Every planned new tap effect is built. Scene schema v3;
+  [TOY-PLAN.md](TOY-PLAN.md)): all 316 keep. Every planned new tap effect is built. Scene schema v3;
   v2 still loads.
 - Every kit toy's tap is checked by `tests/taps.spec.mjs`; its known exceptions (with reasons) are
-  listed at its top. The full suite has 428 tests.
+  listed at its top. The full suite has 435 tests.
 - The governance from September 27 is merged (#53): the Operator runs the lanes, workers are Opus
   5.5 only, new public text is in American English (`tools/us-english.mjs`), and the sound review
   runs on the Sound Board. Splashery's own code is MIT licensed (#51, `LICENSE`); assets keep their
@@ -94,32 +98,31 @@ work is in [OPERATING.md](OPERATING.md).
 
 The full table, with owned files, sessions, branches and PRs, is [WORKSTREAMS.md](WORKSTREAMS.md).
 
-| Lane                                                         | Status                                                                                    | Handoff                                                                |
-| ------------------------------------------------------------ | ----------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| Operator                                                     | Running; runs the lanes                                                                   | —                                                                      |
-| Worlds r2: a sharper island                                  | Running, Opus 5.5 (the engine #78 merged September 29, 2026)                              | [handoff/Worlds.md](handoff/Worlds.md)                                 |
-| Character: a detailed person for Worlds                      | Running, Opus 5.5 (September 29, 2026)                                                    | [handoff/Character.md](handoff/Character.md)                           |
-| A/B: the toy piano, makers A and B                           | Running, one on each model, hidden until the owner marks them (September 29, 2026)        | [handoff/AB-A.md](handoff/AB-A.md), [handoff/AB-B.md](handoff/AB-B.md) |
-| Pianos: pianos and songs                                     | Running, Opus 5.5 (September 29, 2026)                                                    | [handoff/Pianos.md](handoff/Pianos.md)                                 |
-| Sharpness: grain out of the renderer                         | Running, Opus 5.5 (September 29, 2026)                                                    | [handoff/Sharpness.md](handoff/Sharpness.md)                           |
-| Chemistry: the chemistry set                                 | Running, Opus 5.5 (September 29, 2026)                                                    | [handoff/Chemistry.md](handoff/Chemistry.md)                           |
-| Real objects: everyday things, for real                      | Running, Opus 5.5 (September 29, 2026)                                                    | [handoff/RealObjects.md](handoff/RealObjects.md)                       |
-| Photo to 3D: your photo, in depth                            | Running, Sonnet 5.5 (September 29, 2026)                                                  | [handoff/Photo3D.md](handoff/Photo3D.md)                               |
-| Machines A: machines that compute                            | Running, Opus 5.5 (September 29, 2026)                                                    | [handoff/MachinesA.md](handoff/MachinesA.md)                           |
-| Books r2 and r3: a sharper book body; pages you tap and pull | Running, Opus 5.5 (the owner's reviews of September 29, 2026)                             | [handoff/Books.md](handoff/Books.md)                                   |
-| Screens r2: sharp sets and a real off switch                 | Running, Opus 5.5 (September 29, 2026)                                                    | [handoff/ScreensR2.md](handoff/ScreensR2.md)                           |
-| Lab r2: the galaxy tap and a sharp Splat equation            | Running, Opus 5.5 (September 29, 2026)                                                    | [handoff/Lab.md](handoff/Lab.md)                                       |
-| Integrator: combined test runs                               | Running, Sonnet 5.5 (September 29, 2026)                                                  | —                                                                      |
-| Integrator 2: a second runner                                | Running, Sonnet 5.5 (September 29, 2026)                                                  | —                                                                      |
-| Next (WORKSTREAMS.md, Next)                                  | Sound A and B (when the owner's notes arrive), the pilot game, the Forest trail template… | —                                                                      |
+| Lane                                                         | Status                                                                                    | Handoff                                          |
+| ------------------------------------------------------------ | ----------------------------------------------------------------------------------------- | ------------------------------------------------ |
+| Operator                                                     | Running; runs the lanes                                                                   | —                                                |
+| Worlds r2: a sharper island                                  | Running, Opus 5.5 (the engine #78 merged September 29, 2026)                              | [handoff/Worlds.md](handoff/Worlds.md)           |
+| Character: a detailed person for Worlds                      | Running, Opus 5.5 (September 29, 2026)                                                    | [handoff/Character.md](handoff/Character.md)     |
+| Pianos: pianos and songs                                     | Running, Opus 5.5 (September 29, 2026)                                                    | [handoff/Pianos.md](handoff/Pianos.md)           |
+| Sharpness: grain out of the renderer                         | Running, Opus 5.5 (September 29, 2026)                                                    | [handoff/Sharpness.md](handoff/Sharpness.md)     |
+| Chemistry: the chemistry set                                 | Running, Opus 5.5 (September 29, 2026)                                                    | [handoff/Chemistry.md](handoff/Chemistry.md)     |
+| Real objects: everyday things, for real                      | Running, Opus 5.5 (September 29, 2026)                                                    | [handoff/RealObjects.md](handoff/RealObjects.md) |
+| Photo to 3D: your photo, in depth                            | Running, Sonnet 5.5 (September 29, 2026)                                                  | [handoff/Photo3D.md](handoff/Photo3D.md)         |
+| Machines A: machines that compute                            | Running, Opus 5.5 (September 29, 2026)                                                    | [handoff/MachinesA.md](handoff/MachinesA.md)     |
+| Books r2 and r3: a sharper book body; pages you tap and pull | Running, Opus 5.5 (the owner's reviews of September 29, 2026)                             | [handoff/Books.md](handoff/Books.md)             |
+| Screens r2: sharp sets and a real off switch                 | Running, Opus 5.5 (September 29, 2026)                                                    | [handoff/ScreensR2.md](handoff/ScreensR2.md)     |
+| Lab r2: the galaxy tap and a sharp Splat equation            | Running, Opus 5.5 (September 29, 2026)                                                    | [handoff/Lab.md](handoff/Lab.md)                 |
+| Integrator: combined test runs                               | Running, Sonnet 5.5 (September 29, 2026)                                                  | —                                                |
+| Integrator 2: a second runner                                | Running, Sonnet 5.5 (September 29, 2026)                                                  | —                                                |
+| Next (WORKSTREAMS.md, Next)                                  | Sound A and B (when the owner's notes arrive), the pilot game, the Forest trail template… | —                                                |
 
 E4-finish, E5, E6a, E6b, F, G, Math, Fix3, AI, Help, HelpTextA, HelpTextB, Pictures, Manual and
 Screens are done, and so are Viewer, Studio Sound, Learn, Lab, Studio Models, Books, Fidelity A,
-Fidelity B, Worlds (the engine) and Anatomy (WORKSTREAMS.md, "Done"). On September 27, 2026 the
-owner approved the plan in Part 1 of the How Splashery Is Made page: the Operator runs the lanes,
-workers are Opus 5.5 only (at the default effort, a trial), new public text is in American English,
-and the work goes in the order in ROADMAP.md, "Now". Lanes AI and Math started that day, and the
-Sound Board has its review features, ready for the owner's sound notes.
+Fidelity B, Worlds (the engine), Anatomy and the A/B toy piano (WORKSTREAMS.md, "Done"). On
+September 27, 2026 the owner approved the plan in Part 1 of the How Splashery Is Made page: the
+Operator runs the lanes, workers are Opus 5.5 only (at the default effort, a trial), new public text
+is in American English, and the work goes in the order in ROADMAP.md, "Now". Lanes AI and Math
+started that day, and the Sound Board has its review features, ready for the owner's sound notes.
 
 On September 29, 2026 the owner reviewed the new labs toys
 ([reviews/2026-09-29-new-toys](reviews/2026-09-29-new-toys/review.md)): "very impressed", the
