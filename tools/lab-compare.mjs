@@ -5,7 +5,7 @@
 //
 //   python3 -m http.server 4173 --bind 127.0.0.1 &          (this branch)
 //   (cd <main checkout> && python3 -m http.server 4174 --bind 127.0.0.1 &)
-//   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/lab-compare.mjs <out.gif> <toy id> "preset=sphere" "preset=torus" … [--before=http://127.0.0.1:4174/] [--after=http://127.0.0.1:4173/] [--secs=2] [--fps=10] [--turn=24] [--strip=<out.png>]
+//   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/lab-compare.mjs <out.gif> <toy id> "preset=sphere" "preset=torus" … [--before=http://127.0.0.1:4174/] [--after=http://127.0.0.1:4173/] [--before-extra=key=value] [--after-extra=key=value] [--secs=2] [--fps=10] [--turn=24] [--strip=<out.png>]
 //
 // Each option set plays --secs, turning out and back by --turn degrees; the
 // toy's clock is stepped by hand. --strip writes one still per option set,
@@ -29,6 +29,9 @@ const secs = Number(opt("secs", 2));
 const fps = Number(opt("fps", 10));
 const turn = Number(opt("turn", 24));
 const strip = opt("strip", "");
+// Options added to every set on one side only (both sides may be one checkout).
+const beforeExtra = opt("before-extra", "");
+const afterExtra = opt("after-extra", "");
 const W = 390;
 const H = 844;
 
@@ -38,13 +41,14 @@ const browser = await chromium.launch({
 });
 
 // Frames (RGBA arrays) of every option set, from one checkout.
-async function render(base) {
+async function render(base, extra) {
   const page = await browser.newPage({ viewport: { width: 1000, height: 900 } });
   page.on("pageerror", (e) => console.error("page error:", e.message));
   await page.goto(`${base}?renderer=webgl2&profile=high&adapt=off&labs=1`);
   await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
   const all = [];
-  for (const set of sets) {
+  for (const set0 of sets) {
+    const set = extra ? `${set0},${extra}` : set0;
     const frames = await page.evaluate(
       async ({ id, set, W, H, n, turn }) => {
         const { app, player } = window.__splashery;
@@ -101,8 +105,8 @@ async function render(base) {
   return all;
 }
 
-const A = await render(before);
-const B = await render(after);
+const A = await render(before, beforeExtra);
+const B = await render(after, afterExtra);
 await browser.close();
 
 // Side by side, with a gray gap; one GIF through every option set.

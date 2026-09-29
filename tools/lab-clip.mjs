@@ -10,7 +10,8 @@
 // writes the first frame of the pair as a PNG still. The toy's clock is
 // stepped by hand (1/fps a frame), so motion plays at its real speed however
 // slow the renderer is; --tap=<seconds> taps the toy that far into the clip
-// (--canvas-tap: a tap on the middle of the canvas, through the app's pick).
+// (--canvas-tap: a tap on the canvas through the app's pick, in the middle,
+// or --canvas-tap=0.3,0.6 at those fractions of its width and height).
 // With one kernel the clip is a single 390×844 view.
 
 import { chromium } from "@playwright/test";
@@ -32,7 +33,9 @@ const turn = Number(opt("turn", 30));
 const toyOpt = opt("opt", "");
 const strip = opt("strip", "");
 const tapAt = Number(opt("tap", -1));
-const canvasTap = args.includes("--canvas-tap");
+const canvasTap = args.some((a) => a === "--canvas-tap" || a.startsWith("--canvas-tap="));
+// Where the canvas tap lands, as fractions of the canvas (the middle by default).
+const tapFrac = (opt("canvas-tap", "") || "0.5,0.5").split(",").map(Number);
 
 const browser = await chromium.launch({
   executablePath: process.env.SPLASHERY_CHROMIUM || undefined,
@@ -44,7 +47,7 @@ await page.goto(`${base}?renderer=webgl2&profile=high&adapt=off&labs=1`);
 await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
 
 const { gif, still } = await page.evaluate(
-  async ({ id, kernels, zoom, secs, fps, turn, toyOpt, tapAt, canvasTap }) => {
+  async ({ id, kernels, zoom, secs, fps, turn, toyOpt, tapAt, canvasTap, tapFrac }) => {
     const { app, player } = window.__splashery;
     const { GIFEncoder, quantize, applyPalette } = await import("gifenc");
     const W = 390;
@@ -97,7 +100,10 @@ const { gif, still } = await page.evaluate(
           // A real tap on the canvas, as a finger's: through the app's pick.
           if (canvasTap) {
             const r = player.canvas.getBoundingClientRect();
-            await app.tapToy({ clientX: r.left + r.width / 2, clientY: r.top + r.height / 2 });
+            await app.tapToy({
+              clientX: r.left + r.width * tapFrac[0],
+              clientY: r.top + r.height * tapFrac[1],
+            });
           } else player.act(null);
         }
         pending = 1 / fps;
@@ -137,7 +143,7 @@ const { gif, still } = await page.evaluate(
     enc.finish();
     return { gif: Array.from(enc.bytes()), still };
   },
-  { id, kernels, zoom, secs, fps, turn, toyOpt, tapAt, canvasTap },
+  { id, kernels, zoom, secs, fps, turn, toyOpt, tapAt, canvasTap, tapFrac },
 );
 fs.writeFileSync(out, Buffer.from(gif));
 if (strip) fs.writeFileSync(strip, Buffer.from(still.split(",")[1], "base64"));

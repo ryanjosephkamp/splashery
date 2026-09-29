@@ -12,7 +12,7 @@
 //           keeps orbiting (a density wave). A tap sends a bright ring out.
 //   ocean   a round patch of sea from four Gerstner waves, each splat tilted
 //           to the water's slope, with foam on the crests. A tap drops a
-//           stone in the middle.
+//           stone where it lands (the button: in the middle).
 //   knot    a flow along a (2, 3) torus knot, colored bands riding along.
 //           A tap sends the whole flow once more around the knot.
 //
@@ -265,14 +265,19 @@ vec3 lfField(float u, float v, float t, float p) {
     n.z -= w.y * w.w * cos(ph);
     crest += w.w * sin(ph);
   }
-  // The stone: a ring that runs out from the middle and dies away.
+  // The stone: a ring that runs out from where the tap landed (the middle
+  // for the button: uSpMorph.yz, when w is set) and dies away.
+  vec2 st = uSpMorph.w > 0.5 ? uSpMorph.yz : vec2(0.0);
+  float sx = x - st.x;
+  float sz = z - st.y;
+  float rs = sqrt(sx * sx + sz * sz);
   float glow = sin(3.1415927 * p);
   float tau = p * 3.0;
-  float front = smoothstep(tau * 0.55 + 0.05, tau * 0.55 - 0.05, r);
-  float ring = 0.035 * glow * front * exp(-1.6 * r) * sin(22.0 * r - 14.0 * tau);
+  float front = smoothstep(tau * 0.55 + 0.05, tau * 0.55 - 0.05, rs);
+  float ring = 0.035 * glow * front * exp(-1.6 * rs) * sin(22.0 * rs - 14.0 * tau);
   d.y += ring;
-  n.x -= 0.035 * glow * front * 22.0 * cos(22.0 * r - 14.0 * tau) * x / max(r, 1e-3);
-  n.z -= 0.035 * glow * front * 22.0 * cos(22.0 * r - 14.0 * tau) * z / max(r, 1e-3);
+  n.x -= 0.035 * glow * front * 22.0 * cos(22.0 * rs - 14.0 * tau) * sx / max(rs, 1e-3);
+  n.z -= 0.035 * glow * front * 22.0 * cos(22.0 * rs - 14.0 * tau) * sz / max(rs, 1e-3);
   n = normalize(n);
   vec3 L = normalize(vec3(0.4, 0.8, 0.45));
   float diff = clamp(dot(n, L), 0.0, 1.0);
@@ -369,13 +374,17 @@ fn lfField(u: f32, v: f32, t: f32, p: f32) -> vec3f {
     n.z -= w.y * w.w * cos(ph);
     crest += w.w * sin(ph);
   }
+  let st = select(vec2f(0.0), uniform.uSpMorph.yz, uniform.uSpMorph.w > 0.5);
+  let sx = x - st.x;
+  let sz = z - st.y;
+  let rs = sqrt(sx * sx + sz * sz);
   let glow = sin(3.1415927 * p);
   let tau = p * 3.0;
-  let front = smoothstep(tau * 0.55 + 0.05, tau * 0.55 - 0.05, r);
-  let ring = 0.035 * glow * front * exp(-1.6 * r) * sin(22.0 * r - 14.0 * tau);
+  let front = smoothstep(tau * 0.55 + 0.05, tau * 0.55 - 0.05, rs);
+  let ring = 0.035 * glow * front * exp(-1.6 * rs) * sin(22.0 * rs - 14.0 * tau);
   d.y += ring;
-  n.x -= 0.035 * glow * front * 22.0 * cos(22.0 * r - 14.0 * tau) * x / max(r, 1e-3);
-  n.z -= 0.035 * glow * front * 22.0 * cos(22.0 * r - 14.0 * tau) * z / max(r, 1e-3);
+  n.x -= 0.035 * glow * front * 22.0 * cos(22.0 * rs - 14.0 * tau) * sx / max(rs, 1e-3);
+  n.z -= 0.035 * glow * front * 22.0 * cos(22.0 * rs - 14.0 * tau) * sz / max(rs, 1e-3);
   n = normalize(n);
   let L = normalize(vec3f(0.4, 0.8, 0.45));
   let diff = clamp(dot(n, L), 0.0, 1.0);
@@ -491,9 +500,12 @@ export const RECIPES = {
     controls: [{ key: "pulse", label: "Pulse", type: "pulse", ease: PULSE_SECS }],
     action: { key: "pulse", label: "Send a pulse" },
     // The tap's progress (0..1) goes to the GPU program on channel 0.
-    drive(t, c, out) {
+    // Where a tap landed (field units) rides on channels 1 and 2, so the
+    // ocean's stone drops there; everything is 0 again at rest.
+    drive(t, c, out, info) {
       const p = c.pulse > 0 ? 1 - c.pulse : 0;
-      out.morph = [p, 0, 0, 0];
+      const at = info?.tap?.key === "pulse" ? info.tap.point : null;
+      out.morph = p > 0 && at ? [p, at[0], at[2], 1] : [p, 0, 0, 0];
     },
     gpuField(o, fit) {
       return fitOk(fit) ? fieldModifier(o.program, fitOf(fit)) : null;

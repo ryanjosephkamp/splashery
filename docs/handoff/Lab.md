@@ -217,6 +217,21 @@ Model: Opus 5.5 (claude-opus-5-5), default effort.
   - Every program keeps its own count and size, so old links, typed programs and the Manual's
     gallery build the same program; a program that sets size = … keeps it.
 
+- **The owner's marks (September 29, 2026), on both r2 cards, word for word:** "Looks basically
+  perfect right now. If we can safely increase sharpness even further, then I'd like to see what
+  that looks like. But if not, then the resolution seems fine as-is. For the ocean, I wonder if we
+  can make this interactive (perhaps in the upcoming interactivity work that we already have
+  planned, or now; I'm comfortable either way) such that clicking/tapping different parts of the
+  liquid surface sends the ripples from those locations?"
+  - **The ocean:** a tap now drops the stone where it lands (the tap's point, in field units, rides
+    on the pulse's channels 1 and 2; all 0 again at rest); the button still drops it in the middle.
+    Card `lab-field-tap-r2`.
+  - **Sharper still:** a third Splats choice, **Fine**: the same shape from up to four times the
+    splats (as far as the device's budget allows), each smaller in step. Smoother surfaces, the
+    torus's and the seashell's faint ridges gone; the trefoil and the spiral galaxy stay as they
+    are. Solid stays the default until he says otherwise. Card `lab-equation-sharp-r2` (Solid and
+    Fine side by side).
+
 ### Notes
 
 - Tests added: `tests/lab.spec.mjs` (a real canvas tap fires the pulse on every field at both sizes;

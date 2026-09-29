@@ -168,14 +168,14 @@ for (const [w, h] of [
 
 // "These splats seem really, really grainy": every built-in program builds
 // with every splat at full opacity and its exact size, in both looks.
-test("every Splat equation program builds at full opacity with exact sizes, Solid and Dots", async () => {
+test("every Splat equation program builds at full opacity with exact sizes, Solid, Fine and Dots", async () => {
   const { RECIPES, PRESETS } = await import("../src/packs/splat-equation.js");
   const { buildRecipe } = await import("../src/kit.js");
   const { applyClay } = await import("../src/generators.js");
   const recipe = RECIPES["splat-equation"];
   expect(recipe.kernel).toBe("sharp");
   expect(recipe.options.find((o) => o.key === "splats")?.default).toBe("solid");
-  for (const splats of ["solid", "dots"])
+  for (const splats of ["solid", "fine", "dots"])
     for (const p of PRESETS) {
       const it = buildRecipe(recipe, { seed: 1, count: 280000, options: { preset: p.id, shade: true, splats } }, applyClay); // prettier-ignore
       let r = it.next();
@@ -186,4 +186,20 @@ test("every Splat equation program builds at full opacity with exact sizes, Soli
         if (buf.color[i * 4 + 3] !== 1)
           throw new Error(`${p.id} ${splats}: splat ${i} is not opaque`);
     }
+});
+
+// The owner's note on lab-field-tap: "clicking/tapping different parts of
+// the liquid surface sends the ripples from those locations". The tap's point
+// rides on the pulse's channels; at rest they are all 0 again.
+test("the Splat field's pulse carries where the tap landed, and is 0 at rest", async () => {
+  const { RECIPES } = await import("../src/packs/lab.js");
+  const r = RECIPES["splat-field"];
+  const run = (pulse, tap) => {
+    const out = { parts: {}, morph: [0, 0, 0, 0] };
+    r.drive(0, { pulse }, out, { tap });
+    return out.morph;
+  };
+  expect(run(0.5, { key: "pulse", point: [0.3, 0.02, -0.4] })).toEqual([0.5, 0.3, -0.4, 1]);
+  expect(run(0.5, { key: "pulse", point: null })).toEqual([0.5, 0, 0, 0]);
+  expect(run(0, { key: "pulse", point: [0.3, 0.02, -0.4] })).toEqual([0, 0, 0, 0]);
 });

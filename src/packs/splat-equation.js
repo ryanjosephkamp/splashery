@@ -418,6 +418,7 @@ export const RECIPES = {
         default: "solid",
         choices: [
           { id: "solid", label: "Solid" },
+          { id: "fine", label: "Fine" },
           { id: "dots", label: "Dots" },
         ],
       },
@@ -463,7 +464,13 @@ export const RECIPES = {
       NOW.fields = fields;
       const copies = prog.usesT ? KNOTS : 1;
       k.data = { equation: { copies } };
-      const n = Math.max(1, Math.min(prog.count, Math.floor((k.count * 0.98) / copies)));
+      const budget = Math.floor((k.count * 0.98) / copies);
+      const n0 = Math.max(1, Math.min(prog.count, budget));
+      // Fine (Lab r2): the same shape from up to four times the splats (as
+      // many as the device's budget allows), each smaller in step, so the
+      // surface is finer grained. The program's own count stays in its text.
+      const n = o.splats === "fine" ? Math.max(n0, Math.min(prog.count * 4, budget)) : n0;
+      const fine = Math.sqrt(n0 / n);
       const uv = params(prog, n, () => k.rand());
       const times = Array.from({ length: copies + 1 }, (_, j) => (TAU * j) / copies);
       // Where each splat is at each time (NaN where the equations have no
@@ -526,6 +533,8 @@ export const RECIPES = {
           // along it, so they close into one clean shape. Dots: each splat
           // you program shows as its own round dot.
           const splat = { p, color: rgb, size: size / 0.01, opacity: 1, jitter: 0, part };
+          // Fine: smaller splats, except a curve's, whose size is its thickness.
+          if (!curve) splat.size *= fine;
           if (o.splats === "dots") {
             if (prog.spread === "grid") splat.size *= 0.45;
           } else if (nrm) {
