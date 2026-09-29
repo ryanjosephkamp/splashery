@@ -75,15 +75,17 @@ work is in [OPERATING.md](OPERATING.md).
 
 The full table, with owned files, sessions, branches and PRs, is [WORKSTREAMS.md](WORKSTREAMS.md).
 
-| Lane                                                    | Status                                                                                                                | Handoff                                          |
-| ------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
-| Operator                                                | Running; runs the lanes                                                                                               | —                                                |
-| Books: your book, the photo album and the picture frame | Running (started September 28, 2026)                                                                                  | [handoff/Books.md](handoff/Books.md)             |
-| Worlds: the world engine and a sandbox island           | Running, Opus 5.5 (September 29, 2026)                                                                                | [handoff/Worlds.md](handoff/Worlds.md)           |
-| Fidelity A: the grainy-toy audit                        | Running, Opus 5.5 (September 29, 2026)                                                                                | [handoff/FidelityA.md](handoff/FidelityA.md)     |
-| Studio Sound: the song landscape and the Chladni plate  | Running, Sonnet 5.5 (September 29, 2026)                                                                              | [handoff/StudioSound.md](handoff/StudioSound.md) |
-| Integrator: combined test runs                          | Running, Sonnet 5.5 (September 29, 2026)                                                                              | —                                                |
-| Next (WORKSTREAMS.md, Next)                             | Sound A and B (when the owner's notes arrive), the manual audit and lab notebook, Fidelity B, Studio: 3D models, Lab… | —                                                |
+| Lane                                                    | Status                                                                                        | Handoff                                          |
+| ------------------------------------------------------- | --------------------------------------------------------------------------------------------- | ------------------------------------------------ |
+| Operator                                                | Running; runs the lanes                                                                       | —                                                |
+| Books: your book, the photo album and the picture frame | Running (started September 28, 2026)                                                          | [handoff/Books.md](handoff/Books.md)             |
+| Worlds: the world engine and a sandbox island           | Running, Opus 5.5 (September 29, 2026)                                                        | [handoff/Worlds.md](handoff/Worlds.md)           |
+| Fidelity A: the grainy-toy audit                        | Running, Opus 5.5 (September 29, 2026)                                                        | [handoff/FidelityA.md](handoff/FidelityA.md)     |
+| Studio Sound: the song landscape and the Chladni plate  | Running, Sonnet 5.5 (September 29, 2026)                                                      | [handoff/StudioSound.md](handoff/StudioSound.md) |
+| Learn: the Manual audit and the lab notebook            | Running, Sonnet 5.5 (September 29, 2026)                                                      | [handoff/Learn.md](handoff/Learn.md)             |
+| Lab: sharper kernels and splat fields                   | Running, Opus 5.5 (September 29, 2026)                                                        | [handoff/Lab.md](handoff/Lab.md)                 |
+| Integrator: combined test runs                          | Running, Sonnet 5.5 (September 29, 2026)                                                      | —                                                |
+| Next (WORKSTREAMS.md, Next)                             | Sound A and B (when the owner's notes arrive), Fidelity B, Studio: 3D models, the pilot game… | —                                                |
 
 E4-finish, E5, E6a, E6b, F, G, Math, Fix3, AI, Help, HelpTextA, HelpTextB, Pictures, Manual and
 Screens are done, and so is Viewer (WORKSTREAMS.md, "Done"). On September 27, 2026 the owner
