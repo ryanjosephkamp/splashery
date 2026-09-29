@@ -489,5 +489,13 @@ detail reads as blue noise); the planet's cloud shell has a ragged edge.
 - Engine idea (not made): the two-pixel cull hurts every dense kit toy in thumbnails and embeds. A
   lower `minPixelSize` for kit toys (as picture toys already get), or one that scales with the
   canvas size, would let the Lab lane test sharper, denser toys without holes at small sizes.
+- A timing race in lane Studio Sound's test (not this lane's; not edited): `tests/sts.spec.mjs`,
+  "opening a sound file rebuilds the landscape from it, and a tap plays it", failed 2 of 8 runs here
+  (on this branch; it passed 3 of 3 on main). The song is 3 s long and the play check polls for up
+  to 5 s, so on a slow renderer the song can end before the pause tap, which then plays it again
+  (`a.on` is true). Waiting less, or a longer test song, would fix it.
+- Also seen once, then not again with a fresh server: `tests/smoke.spec.mjs`, "rigs pick splats by
+  colour…" (the strawberry had not settled 3 s after its tap). It passed on this branch in two later
+  runs.
 - A PACKS.md lesson: the `even: true` notes above (which shapes take it, the lattice, `dims: 2`) and
   the two-pixel cull.
