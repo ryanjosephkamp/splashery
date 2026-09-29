@@ -396,6 +396,8 @@ const dist = (a, b) => Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2]);
 export const RECIPES = {
   "splat-equation": {
     alive: true,
+    // Lab r2: the sharper splat kernel (src/kernels.js; labs only, like the toy).
+    kernel: "sharp",
     density: 2,
     options: [
       {
@@ -406,6 +408,17 @@ export const RECIPES = {
         choices: [
           ...PRESETS.map((p) => ({ id: p.id, label: p.label })),
           { id: "custom", label: "Your own (below)" },
+        ],
+      },
+      // Lab r2: Solid (clean surfaces) or Dots (each splat you program).
+      {
+        key: "splats",
+        label: "Splats",
+        type: "select",
+        default: "solid",
+        choices: [
+          { id: "solid", label: "Solid" },
+          { id: "dots", label: "Dots" },
         ],
       },
       { key: "shade", label: "Light and shade", type: "switch", default: true },
@@ -471,6 +484,8 @@ export const RECIPES = {
       const far = reach.length ? Math.max(1e-6, reach[Math.floor(reach.length * 0.98)] * 3) : 1;
       const ok = (p) => Number.isFinite(p[0] + p[1] + p[2]) && Math.hypot(...p) <= far;
       const surface = prog.usesU && prog.usesV && prog.spread === "grid";
+      // A curve: only one of u and v moves the splats (Lab r2's Solid look).
+      const curve = prog.spread === "grid" && prog.usesU !== prog.usesV ? (prog.usesU ? "u" : "v") : null; // prettier-ignore
       const [du, dv] = [(prog.u[1] - prog.u[0]) * 1e-3, (prog.v[1] - prog.v[0]) * 1e-3];
       for (let j = 0; j < copies; j++) {
         const t = times[j];
@@ -506,10 +521,26 @@ export const RECIPES = {
             const sp = 0.18 * Math.pow(d, 24);
             rgb = rgb.map((x) => clamp01(x * f + sp));
           }
-          const splat = { p, color: rgb, size: size / 0.01, opacity: 0.95, part };
-          if (nrm) {
+          // Every splat at full opacity and its exact size (Lab r2). Solid:
+          // a surface's splats lie flat along it, and a curve's are drawn out
+          // along it, so they close into one clean shape. Dots: each splat
+          // you program shows as its own round dot.
+          const splat = { p, color: rgb, size: size / 0.01, opacity: 1, jitter: 0, part };
+          if (o.splats === "dots") {
+            if (prog.spread === "grid") splat.size *= 0.45;
+          } else if (nrm) {
             splat.n = nrm;
-            splat.flat = 0.45;
+            splat.flat = 0.12;
+          } else if (curve) {
+            const a = curve === "u" ? place(u + du, v, t) : place(u, v + dv, t);
+            const d = [a[0] - p[0], a[1] - p[1], a[2] - p[2]];
+            if (Number.isFinite(d[0] + d[1] + d[2]) && Math.hypot(...d) > 0) {
+              // Stretched along the curve; 0.7 across (the kit's), so the
+              // tube keeps the program's size as its thickness.
+              splat.dir = d;
+              splat.stretch = 1.6;
+              splat.size /= 0.7;
+            }
           }
           if (copies > 1) {
             const q = P[j + 1][i];

@@ -113,3 +113,77 @@ test("the field compiles and moves on WebGPU too", async ({ page }) => {
   expect(diff(r.a, r.b)).toBeGreaterThan(0.3);
   expect(errors).toEqual([]);
 });
+
+// ---- Lab r2 ------------------------------------------------------------------------------
+
+// The owner's review of September 29, 2026: "The galaxy toy doesn't seem to
+// show it's effect when I click on it". A real tap on the canvas, on the
+// toy, fires the same pulse as the Toy tab's button, for every field.
+for (const [w, h] of [
+  [390, 844],
+  [1440, 900],
+]) {
+  test(`a tap on the Splat field fires its pulse, for every field (${w}×${h})`, async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: w, height: h });
+    const errors = await open(page, 1);
+    for (const program of ["galaxy", "ocean", "knot"]) {
+      // A point on the toy: the first of a few around the middle that picks it.
+      const at = await page.evaluate(async (program) => {
+        const { app, player } = window.__splashery;
+        await app.chooseToy("splat-field");
+        await app.setToyOption("program", program);
+        player.camera.setTurntable(false);
+        for (let i = 0; i < 3; i++) await player.stage.captureFrame();
+        const c = player.canvas.getBoundingClientRect();
+        for (const [i, j] of [
+          [0, 0],
+          [1, 0],
+          [-1, 0],
+          [0, 1],
+          [0, -1],
+          [2, 1],
+          [-2, -1],
+          [1, 2],
+        ]) {
+          const x = c.width / 2 + i * c.width * 0.06;
+          const y = c.height / 2 + j * c.width * 0.06;
+          player.pickDirty = true;
+          if (await player.pickAt(x, y)) return { x: c.left + x, y: c.top + y };
+        }
+        return null;
+      }, program);
+      expect(at, `${program}: a point on the toy`).not.toBeNull();
+      await page.mouse.click(at.x, at.y);
+      await expect
+        .poll(() => page.evaluate(() => window.__splashery.player.motion.tap?.key ?? null), {
+          message: `${program}: the tap fires the pulse`,
+        })
+        .toBe("pulse");
+    }
+    expect(errors).toEqual([]);
+  });
+}
+
+// "These splats seem really, really grainy": every built-in program builds
+// with every splat at full opacity and its exact size, in both looks.
+test("every Splat equation program builds at full opacity with exact sizes, Solid and Dots", async () => {
+  const { RECIPES, PRESETS } = await import("../src/packs/splat-equation.js");
+  const { buildRecipe } = await import("../src/kit.js");
+  const { applyClay } = await import("../src/generators.js");
+  const recipe = RECIPES["splat-equation"];
+  expect(recipe.kernel).toBe("sharp");
+  expect(recipe.options.find((o) => o.key === "splats")?.default).toBe("solid");
+  for (const splats of ["solid", "dots"])
+    for (const p of PRESETS) {
+      const it = buildRecipe(recipe, { seed: 1, count: 280000, options: { preset: p.id, shade: true, splats } }, applyClay); // prettier-ignore
+      let r = it.next();
+      while (!r.done) r = it.next();
+      const buf = r.value.buf;
+      expect(buf.count, `${p.id} ${splats}`).toBeGreaterThan(1000);
+      for (let i = 0; i < buf.count; i++)
+        if (buf.color[i * 4 + 3] !== 1)
+          throw new Error(`${p.id} ${splats}: splat ${i} is not opaque`);
+    }
+});

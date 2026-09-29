@@ -142,3 +142,100 @@ Model: Opus 5.5 (claude-opus-5-5), default effort.
   returning `{ glsl, wgsl }` work-buffer hooks; `src/packs/lab.js` is the example.
 - For the backlog: the splat equation toy's typed programs could compile to a GPU field (FIELDS.md,
   "Typed programs"), which needs `src/equation.js` to hand back its parse tree.
+
+## r2
+
+### Brief (the Operator's message of September 29, 2026, word for word)
+
+From the Operator: a follow-up for this lane from the owner's review of September 29, 2026
+(docs/reviews/2026-09-29-new-toys/review.md; Ops PR coming). Two small fixes, labs only, as "Lab
+r2". Your model stays Opus 5.5.
+
+His notes, word for word:
+
+"For the Lab category: The galaxy toy doesn't seem to show it's effect when I click on it... The
+"Send a pulse" button works, but clicking on the toy doesn't."
+
+"For the "Splat equation"... These splats seem really, really grainy. Is that on purpose? If not, or
+if it makes sense to also improve the sharpness, let's please improve the sharpness."
+
+1. The Splat field (`splat-field`, src/packs/lab.js): a tap on the toy must send the same pulse as
+   the Toy tab's "Send a pulse" button, for every field (galaxy, ocean, knot), at phone size and on
+   the desktop. Find why the tap misses (my guess: the tap's hit test looks for the toy's splats
+   where the CPU copy has them, not where the GPU program draws them, or a GPU field toy never
+   registers as hit). Fix it in your pack if you can. If the fix belongs in the player's tap code,
+   make it a small additive "Engine: …" PR on claude/lane-lab-r2-engine, merged first; the input
+   path in src/player.js is engine code (WORKSTREAMS.md, "Frozen packs").
+2. The Splat equation (`splat-equation`, src/packs/splat-equation.js; lane Manual built it, and it's
+   yours for this fix). Answer his question in your handoff and in the card note: how much of the
+   grain is on purpose (each dot is one splat you program, up to 10,000) and how much isn't. Then
+   make it sharp by default. Every built-in program should read as a clean, solid surface at phone
+   size: full opacity, splat sizes that overlap at the program's count, flat splats that lie along
+   the surface where the equation gives a surface, and clean colors (Fidelity A's method, PACKS.md
+   "Effect quality"). If seeing separate splats is worth keeping for learning, keep it as a "Dots"
+   look beside a new default "Solid" look. Old links and typed programs must keep working, and a
+   program that sets size = … keeps its size. Update the Manual's words only if they now say
+   something untrue; the Tinkerer's Manual PDF stays as it is, and if it's out of date, say so for
+   the Operator.
+
+Restart your branch from main (git fetch origin main && git checkout -B claude/lane-lab-r2
+origin/main), one draft PR "Phase Lab r2: the galaxy tap and a sharp Splat equation" with the five
+sections, and add an "r2" part to docs/handoff/Lab.md with these notes word for word. Tests in
+tests/lab.spec.mjs (your file; add to it): a canvas tap on the Splat field fires its pulse for each
+field, and each Splat equation program builds with every splat at full opacity. Cards (390×844,
+"built by Opus 5.5", lane record LabR2 on the Effect review page): lab-field-tap (a tap on each
+field) and lab-equation-sharp (each program before and after, turning slowly). Full suite, prettier
+and us-english before you push. Push about hourly and keep a check-in scheduled while long runs go.
+End with READY:, WORKING: or BLOCKED:. When it's merged, stand down.
+
+### State
+
+Model: Opus 5.5 (claude-opus-5-5), default effort.
+
+- **The galaxy tap: fixed.** A tap on the toy finds it with the engine's GPU picking, whose pick
+  pass drops any splat fragment under 0.3 opacity. The galaxy draws its stars faint on purpose (0.3
+  × an arm factor of 0.25 to 1), so no star was ever hit: 0 of 25 taps around the middle, at 390×844
+  and 1440×900; the ocean got 25 of 25. The work buffer is shared by the pick and draw passes, so
+  the pack can't make stars pickable without drawing them opaque (which turns the galaxy back into a
+  solid disc). The engine PR adds `pickAlpha`: a recipe may lower `scene.gsplat.alphaClip` (used
+  only by the pick, shadow and depth passes) while it shows; the next toy puts back 0.3. The splat
+  field sets 0.04. Now 25 of 25 on the galaxy at both sizes. (The knot's misses are the empty space
+  between its tubes, as for any toy.)
+- **The Splat equation's grain: his question answered.** Only a little of it was on purpose. Each
+  splat is one (u, v) you program (up to 10,000), and the spiral galaxy program scatters tiny splats
+  at random on purpose, so it is a field of stars, not a surface. The rest was not: every splat was
+  95% opaque, round-ish (flat 0.45) and 25% bigger or smaller at random (the kit's size jitter),
+  drawn with the soft Gaussian. Big half-clear blobs of uneven size overlap into a soft, blotchy
+  haze with ridges, which reads as grain at phone size.
+- **Sharp by default.** A new "Splats" choice: **Solid** (default) and **Dots**.
+  - Solid: every splat at full opacity and its exact size (a new `jitter: 0` for kit clouds, in the
+    engine PR); a surface's splats lie flat along it (flat 0.12); a curve's are drawn out along it
+    (the trefoil); the sharp kernel (`kernel: "sharp"`, which the owner marked good on this toy in
+    round 1).
+  - Dots: each programmed splat shows as its own round dot (a grid program's at 45% of its size),
+    for seeing what a splat is.
+  - Every program keeps its own count and size, so old links, typed programs and the Manual's
+    gallery build the same program; a program that sets size = … keeps it.
+
+### Notes
+
+- Tests added: `tests/lab.spec.mjs` (a real canvas tap fires the pulse on every field at both sizes;
+  every program at full opacity in both looks) and `tests/lab-engine.spec.mjs` (pickAlpha lowers and
+  restores the clip; jitter 0 gives exact sizes and the default is unchanged).
+
+### Known issues
+
+- The trefoil (a curve, one splat per step along it) is much smoother but its tube still has a
+  slightly soft edge: its thickness is the splat itself.
+- The spiral galaxy program stays a field of dots in Solid too (it is scattered at random on
+  purpose).
+
+### For the Operator
+
+- Merge the r2 engine PR first (pickAlpha and the cloud's jitter option; both change nothing for
+  other toys).
+- Lane Manual's screenshots `man-splat-equation-390x844.png` and `-1440x900.png` now show the old
+  look (I left them as they are, per the rules); refresh them on main.
+- The Tinkerer's Manual: its words are still true (size and count keep their meaning), but its
+  pictures of the toy (the gallery and "the same sphere with more and more splats") show the old,
+  softer look. The PDF is left as it is.

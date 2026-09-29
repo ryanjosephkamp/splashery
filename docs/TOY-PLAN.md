@@ -1570,7 +1570,10 @@ Proposals below are suggestions; the owner may change them.
     spread), read by lane Math's safe reader. Eight programs to start from: sphere, torus, Möbius
     strip, seashell, trefoil knot, wave, spiral galaxy and Klein bottle. A tap plays t from 0 to 2π
     (4 s) through twelve copies, each morphing into the next; a program without t draws its splats
-    again in order.
+    again in order. Lab r2 (the owner's review of September 29, 2026: "really, really grainy"):
+    every splat at full opacity and its exact size, the sharp kernel, and a Splats choice: Solid
+    (default; a surface's splats lie flat along it, a curve's are drawn out along it) or Dots (each
+    programmed splat its own dot).
   - Sound: A soft rising tone as t plays.
 
 ## Medieval (9)
@@ -2154,5 +2157,6 @@ Proposals below are suggestions; the owner may change them.
     toy's work-buffer program (a recipe's gpuField, an additive engine hook) computes its place,
     tilt and color from them and the time. Three fields: a galaxy whose stars orbit on turning
     ellipses (a density wave keeps two arms), an ocean of four Gerstner waves, a flow along a (2, 3)
-    torus knot.
+    torus knot. Lab r2: a tap on the toy now fires the pulse on every field (the galaxy's faint
+    stars were under the pick pass's alpha clip; the recipe's pickAlpha lowers it).
   - Sound: A soft rising swell.

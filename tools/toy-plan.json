@@ -1493,7 +1493,7 @@
       "owner": "The owner's notes and the Pages into Splats plan (accepted September 28, 2026): people type their own Gaussian splat equations and play with them, with a Tinkerer's Manual that explains the language.",
       "effect": "One cycle of time t plays, so the shape moves in real time: a torus rolls, a sphere ripples, a galaxy turns.",
       "sound": "A soft rising tone as t plays.",
-      "improved": "Manual: new toy (labs). You type where every splat goes and what color it is, as equations in u, v and t (x, y and z, the ranges of u and v, hue or r, g and b, size, count and spread), read by lane Math's safe reader. Eight programs to start from: sphere, torus, Möbius strip, seashell, trefoil knot, wave, spiral galaxy and Klein bottle. A tap plays t from 0 to 2π (4 s) through twelve copies, each morphing into the next; a program without t draws its splats again in order."
+      "improved": "Manual: new toy (labs). You type where every splat goes and what color it is, as equations in u, v and t (x, y and z, the ranges of u and v, hue or r, g and b, size, count and spread), read by lane Math's safe reader. Eight programs to start from: sphere, torus, Möbius strip, seashell, trefoil knot, wave, spiral galaxy and Klein bottle. A tap plays t from 0 to 2π (4 s) through twelve copies, each morphing into the next; a program without t draws its splats again in order. Lab r2 (the owner's review of September 29, 2026: \"really, really grainy\"): every splat at full opacity and its exact size, the sharp kernel, and a Splats choice: Solid (default; a surface's splats lie flat along it, a curve's are drawn out along it) or Dots (each programmed splat its own dot)."
     },
     "seashell-spiral": {
       "v": "keep",
@@ -2048,7 +2048,7 @@
       "owner": "The owner's note \"big new Splashery ideas\" and his answer of September 29, 2026 (lane Lab; labs only): splat fields on the GPU.",
       "effect": "Nearly 300,000 splats placed and colored by a program on the GPU every frame: a spiral galaxy, an ocean or a knotted flow. A tap sends a bright ring out through the galaxy, drops a stone in the sea, or pushes the flow once more around the knot (3 s).",
       "sound": "A soft rising swell.",
-      "improved": "Lab: new test toy on the new Lab shelf (labs). Each splat stores only its (u, v); the toy's work-buffer program (a recipe's gpuField, an additive engine hook) computes its place, tilt and color from them and the time. Three fields: a galaxy whose stars orbit on turning ellipses (a density wave keeps two arms), an ocean of four Gerstner waves, a flow along a (2, 3) torus knot."
+      "improved": "Lab: new test toy on the new Lab shelf (labs). Each splat stores only its (u, v); the toy's work-buffer program (a recipe's gpuField, an additive engine hook) computes its place, tilt and color from them and the time. Three fields: a galaxy whose stars orbit on turning ellipses (a density wave keeps two arms), an ocean of four Gerstner waves, a flow along a (2, 3) torus knot. Lab r2: a tap on the toy now fires the pulse on every field (the galaxy's faint stars were under the pick pass's alpha clip; the recipe's pickAlpha lowers it)."
     }
   }
 }

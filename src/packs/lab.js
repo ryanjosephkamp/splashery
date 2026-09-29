@@ -471,6 +471,9 @@ const A2 = 1 / (G2 * G2);
 export const RECIPES = {
   "splat-field": {
     alive: true,
+    // The galaxy's stars are faint (well under the pick pass's usual 0.3), so
+    // a tap needs a lower alpha to find them (Lab r2).
+    pickAlpha: 0.04,
     density: 1.5,
     options: [
       {
