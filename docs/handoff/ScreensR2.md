@@ -184,3 +184,21 @@ run on the lane, thumbnail, contact sheet, screenshots, cards.
 ## Known issues
 
 ## For the Operator
+
+- **`tests/scr.spec.mjs` (lane Screens' finished tests) fails twice, because the Screen now starts
+  with its picture hidden:** "the Screen switches on with a tap…" (line 107) and "lane Screens
+  screenshots…" (line 146). Its `openToy()` waits for `pictures.splats() > 0`, and `splats()`
+  counts only sheets on show, so it waits forever while the set is off. Line 126 also expects
+  `splats() > 5000` right after the style changes to the cinema (which starts with the curtains
+  closed). A fix that keeps what the tests mean: in `openToy()`, wait for
+  `p.splats() > 0 || p.api.ready("screen")`, and at line 126 wait for `p.api.ready("screen")`
+  instead of counting splats. The rest of that test (tap on, pause, play) passes as it is: the Toy
+  tab's button now switches off, which pauses the video, and on again, which plays it.
+- Engine PR #109 must be merged before #111. Its test now uses the Picture lab: the Screen holds and
+  lets go of its GIF by itself every frame, so a test can't drive `hold` through it.
+- New tool (not in this lane's files): `tools/scr2-clip.mjs`, this lane's clips.
+- PACKS.md lesson (section 7c): the kit spreads even points over the unit square, so a long thin
+  surface (a curtain pleat, a thin rim, a rounded box's edges as one shape) gets them far apart one
+  way and crowded the other, which shows as diagonal hatching. Cut the long side into near-square
+  tiles, each with its own square of the points (`strip()` in `src/packs/screens.js`), and build a
+  rounded box as its 26 pieces (`softBox()`).

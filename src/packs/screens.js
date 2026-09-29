@@ -594,7 +594,9 @@ function driveTV(on, p, q, out) {
   // The picture shrinks to a point (0.08..0.42 of the way) and whitens.
   const s = ease(win(q, 0.08, 0.42));
   const pic = q < 0.42;
-  out.parts.pic = { scale: Math.max(0.02, 1 - s), visible: pic ? 1 : 0 };
+  // (Full size again once hidden: a picture sheet on a part is sorted in
+  // the part's pose when it is rebuilt, so it must not be rebuilt shrunk.)
+  out.parts.pic = { scale: pic ? Math.max(0.02, 1 - s) : 1, visible: pic ? 1 : 0 };
   out.morph[2] = win(q, 0.1, 0.38);
   // The dot: bright as the picture reaches it, then fading to nothing.
   const d = q < 0.3 ? 0 : q < 0.42 ? win(q, 0.3, 0.42) : 1 - win(q, 0.42, 0.9);
@@ -1246,8 +1248,10 @@ function driveHologram(on, p, q, t, out) {
   }
   const s = ease(win(q, 0, 0.45));
   const vis = q < 0.45 ? 1 : 0;
-  out.parts.holo = { visible: vis, scale: Math.max(0.02, 1 - s), offset: [0, bob, 0] };
-  out.parts.lines = { visible: vis, scale: Math.max(0.02, 1 - s), offset: [0, bob + drift, 0] };
+  // (Full size again once hidden: see driveTV.)
+  const scale = vis ? Math.max(0.02, 1 - s) : 1;
+  out.parts.holo = { visible: vis, scale, offset: [0, bob, 0] };
+  out.parts.lines = { visible: vis, scale, offset: [0, bob + drift, 0] };
   out.morph[0] = 1 - ease(win(q, 0.2, 0.95));
   out.morph[1] = 1 - ease(win(q, 0, 0.2));
   return vis > 0;
