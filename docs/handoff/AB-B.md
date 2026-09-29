@@ -139,7 +139,7 @@ tests in `tests/abb.spec.mjs`. Clips, thumbnail and screenshots to come.
   key's press is timed from its own tap (in `drive`'s memory), so quick taps on several keys ring
   together.
 - The song ("Twinkle, Twinkle", the opening line: C C G G A A G, F F E E D D C) is the toy's sound
-  spec, timed to match the drive: a key starts down 0.25 s + 0.32 s × n after the tap and its hammer
+  spec, timed to match the drive: a key starts down 0.2 s + 0.28 s × n after the tap and its hammer
   lands 0.09 s later. `tests/abb.spec.mjs` checks that the spec's notes and the strikes agree.
 - The voice is the existing `tine` (partials at 1, 6.27 and 17.55 times the note: the modes of a bar
   clamped at one end, which is what a toy piano's rod is), layered with a second tine 0.4 % sharp

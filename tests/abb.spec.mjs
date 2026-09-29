@@ -158,6 +158,7 @@ test("the song is Twinkle, Twinkle, and every key moves on its own note", async 
   expect(strikes.length).toBe(want.length);
   strikes.forEach(([s, k], j) => {
     expect(k).toBe(want[j][1]);
-    expect(Math.abs(s - want[j][0])).toBeLessThan(0.03);
+    // A strike shows on the frame after the hammer lands (two frames at most).
+    expect(Math.abs(s - want[j][0])).toBeLessThan(0.04);
   });
 });

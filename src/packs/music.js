@@ -160,8 +160,8 @@ const TP = (() => {
     hamPivot: [0.52, -0.13], // y, z
     hamHead: [0.632, -0.002], // the head's centre at rest
     headR: 0.025,
-    step: 0.32, // seconds between the song's notes
-    songAt: 0.25, // the first key starts down
+    step: 0.28, // seconds between the song's notes
+    songAt: 0.2, // the first key starts down
     hit: 0.09, // seconds from a key starting down to its hammer striking
   };
 })();
@@ -178,8 +178,8 @@ TP.songLen = TP.songAt + TP.step * (TP_SONG.length - 1) + 1.6;
 // One key's struck note, as a cue: two tine partial sets a hair apart (the
 // rod rings in two planes, so it shimmers) and the hammer's tick.
 const tpNote = (note) => [
-  { voice: "tine", f: note, decay: 0.55, bright: 0.85 },
-  { voice: "tine", f: note, pitch: 1.004, decay: 0.45, bright: 0.6, vol: 0.45 },
+  { voice: "tine", f: note, decay: 0.45, bright: 0.85 },
+  { voice: "tine", f: note, pitch: 1.004, decay: 0.38, bright: 0.6, vol: 0.45 },
   { voice: "clack", f: note, pitch: 6.5, decay: 0.6, vol: 0.18 },
 ];
 

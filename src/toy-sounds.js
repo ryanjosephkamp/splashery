@@ -1122,13 +1122,13 @@ export const TOY_SOUNDS = {
   // out of tune with itself (the rod shimmers) and each hammer's tick. A tap
   // on one key plays that key's note as a cue from the recipe instead.
   "toy-piano": [
-    { voice: "tine", notes: TOY_PIANO_SONG, step: 0.32, at: 0.34, decay: 0.55, bright: 0.85 },
-    { voice: "tine", notes: TOY_PIANO_SONG, step: 0.32, at: 0.34, pitch: 1.004, decay: 0.45, bright: 0.6, vol: 0.45 }, // prettier-ignore
+    { voice: "tine", notes: TOY_PIANO_SONG, step: 0.28, at: 0.29, decay: 0.45, bright: 0.85 },
+    { voice: "tine", notes: TOY_PIANO_SONG, step: 0.28, at: 0.29, pitch: 1.004, decay: 0.38, bright: 0.6, vol: 0.45 }, // prettier-ignore
     {
       voice: "clack",
       notes: TOY_PIANO_SONG,
-      step: 0.32,
-      at: 0.34,
+      step: 0.28,
+      at: 0.29,
       pitch: 6.5,
       decay: 0.6,
       vol: 0.18,
