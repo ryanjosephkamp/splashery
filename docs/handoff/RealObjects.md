@@ -112,8 +112,14 @@ Photo to 3D and the Integrator run at the same time; leave their files alone. Th
 
 Model: Opus 5.5 (default effort), for the whole lane.
 
-September 29, 2026: all seven toys are built, in `src/packs/real-objects.js`, from real models baked
-by a new lane tool (`tools/ro-bake.mjs`, sources and cuts in `tools/ro-sources.mjs`). Draft PR #97.
+September 29, 2026: ready for the owner's marks. Cards on the Effect review page (lane
+`RealObjects`): `ro-fountain-pen`, `ro-water-bottle`, `ro-soda-can`, `ro-running-shoe`, `ro-hoodie`,
+`ro-sunglasses`, `ro-baseball-cap` and `ro-stills`. Full test run on main 60b775d merged in: 408
+passed; the two failures (the kit test's fit check, which caught glass colors just above 1, and
+lane's app test, broken by a second test run started in the same folder) were fixed and both files
+pass again (14 of 14). All seven toys are built, in `src/packs/real-objects.js`, from real models
+baked by a new lane tool (`tools/ro-bake.mjs`, sources and cuts in `tools/ro-sources.mjs`). Draft PR
+#97.
 
 | Toy          | Source (license checked on the live page)                           | Kind of model                       | Moving pieces                                                                          |
 | ------------ | ------------------------------------------------------------------- | ----------------------------------- | -------------------------------------------------------------------------------------- |
@@ -158,7 +164,7 @@ by a new lane tool (`tools/ro-bake.mjs`, sources and cuts in `tools/ro-sources.m
 - The hoodie's cut shoulders show a ragged edge while the sleeves are crossed, and the sleeves pass
   a little into the chest (rigid sleeves cannot bend at the elbow).
 - The running shoe is dark; its laces read best on a light background.
-- The owner's word "grey" is kept in the brief above, as it is quoted word for word.
+- The brief above is quoted word for word, so its one British spelling stays.
 
 ## For the Operator
 
