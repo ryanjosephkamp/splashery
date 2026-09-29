@@ -56,6 +56,7 @@ const CONFIGS = {
   sharp: { dsf: 2, q: "kernel=sharp" },
   high: { dsf: 2, q: "", profile: "high" },
   all: { dsf: 3, q: "sharp=1&kernel=sharp" },
+  aa: { dsf: 2, q: "aa=1" },
 };
 const configs = opt("configs", Object.keys(CONFIGS).join(",")).split(",");
 const renderer = opt("renderer", "webgl2");
@@ -287,7 +288,80 @@ async function renderToy({ id, zoom, shimmer }) {
   };
 }
 
+// A world (lane Worlds, /worlds/): its page has its own renderer, so the
+// levers are set on it by hand (the ratio and the cull), to show what the
+// world render should adopt. No shimmer (the camera follows the character).
+async function measureWorld(name, cfg, world) {
+  const page = await browser.newPage({
+    viewport: { width: 390, height: 844 },
+    deviceScaleFactor: cfg.dsf,
+  });
+  page.on("pageerror", (e) => console.error("page error:", e.message));
+  const prof = cfg.profile || "mid";
+  await page.goto(`${base}worlds/?labs=1&renderer=${renderer}&profile=${prof}&clock=manual&world=${world}`); // prettier-ignore
+  await page.waitForFunction(() => document.body.dataset.ready, null, { timeout: 200_000 });
+  await page.click("#enter");
+  const lever = { dpr: cfg.q.match(/dpr=([\d.]+)/)?.[1], cull: /cull=off|sharp=1/.test(cfg.q) };
+  const r = await page.evaluate(
+    async ({ lever }) => {
+      const w = window.__world;
+      const v = w.view;
+      if (lever.dpr) {
+        v.device.maxPixelRatio = Math.min(window.devicePixelRatio, Number(lever.dpr));
+        v.resize();
+      }
+      if (lever.cull) {
+        v.app.scene.gsplat.minPixelSize = lever.cull === true && lever.dpr ? 1 : 0;
+        v.app.scene.gsplat.minContribution = 0;
+      }
+      w.catchUp();
+      for (let i = 0; i < 6; i++) await w.tick(1 / 30);
+      let ms = 0;
+      for (let i = 0; i < 6; i++) {
+        const t0 = performance.now();
+        await w.tick(0);
+        ms += performance.now() - t0;
+      }
+      // The canvas's own pixels, read while the frame is still in the buffer.
+      const shot = new Promise((res) => (v.captureWaiters ||= []).push(() => res(v.canvas.toDataURL("image/png")))); // prettier-ignore
+      await w.tick(0);
+      const still = await shot;
+      return { ms: ms / 6, splats: w.stats().total, ratio: v.device.maxPixelRatio, dev: v.deviceType, still }; // prettier-ignore
+    },
+    { lever },
+  );
+  await page.close();
+  return { ...r, png: decode(r.still) };
+}
+
 const results = [];
+for (const name of configs) {
+  const worlds = specs.filter((s) => s.startsWith("world:"));
+  for (const spec of worlds) {
+    const cfg = CONFIGS[name];
+    if (!["base", "drop", "cap3", "dpr3", "cull", "all"].includes(name)) continue;
+    const r = await measureWorld(name, cfg, spec.slice(6));
+    fs.writeFileSync(path.join(outDir, `${spec.replace(":", "-")}-${name}.png`), PNG.sync.write(r.png)); // prettier-ignore
+    const img = lum(r.png);
+    // The ground and everything on it: below the top third (the sky).
+    const m = new Uint8Array(img.w * img.h).fill(1, Math.floor(img.h / 3) * img.w);
+    const row = {
+      toy: spec,
+      zoom: 1,
+      config: name,
+      ratio: +r.ratio.toFixed(2),
+      canvas: `${r.png.width}x${r.png.height}`,
+      edge: +(edgeWidth(img) / r.ratio).toFixed(2),
+      speck: +speckle(img, m).toFixed(2),
+      shim: null,
+      ms: +r.ms.toFixed(1),
+      splats: r.splats,
+      dev: r.dev,
+    };
+    results.push(row);
+    console.log(JSON.stringify(row));
+  }
+}
 for (const name of configs) {
   const cfg = CONFIGS[name];
   if (!cfg) throw new Error(`Unknown config ${name}`);
@@ -299,7 +373,7 @@ for (const name of configs) {
   const q = `renderer=${renderer}&profile=${cfg.profile || "mid"}&adapt=off&labs=1${cfg.q ? "&" + cfg.q : ""}`;
   await page.goto(`${base}?${q}`);
   await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
-  for (const spec of specs) {
+  for (const spec of specs.filter((x) => !x.startsWith("world:"))) {
     const [id, zoomText] = spec.split("@");
     const zoom = Number(zoomText || 1);
     let r;
