@@ -113,6 +113,7 @@ class App {
     // Pictures: video sound follows the speaker button; the Toy tab's
     // picture panel and the status line follow the pages.
     player.setMediaSound(this.sound.enabled);
+    player.setSound(this.sound);
     player.on("pictures", (p) => {
       ui.setPictures?.(p);
       this.updateStatus();

@@ -766,6 +766,12 @@ export class Player {
     if (e) e.ready?.then(() => e.media?.close());
   }
 
+  // The site's Sound, handed to recipes' drive as info.sound (a toy that
+  // plays its own audio, like the song landscape).
+  setSound(sound) {
+    this.motion.sound = sound || null;
+  }
+
   // Video sound follows the site's speaker button; embeds keep it off.
   setMediaSound(on) {
     this.mediaSound = !!on;
