@@ -2065,6 +2065,13 @@
       "effect": "Nearly 300,000 splats placed and colored by a program on the GPU every frame: a spiral galaxy, an ocean or a knotted flow. A tap sends a bright ring out through the galaxy, drops a stone in the sea, or pushes the flow once more around the knot (3 s).",
       "sound": "A soft rising swell.",
       "improved": "Lab: new test toy on the new Lab shelf (labs). Each splat stores only its (u, v); the toy's work-buffer program (a recipe's gpuField, an additive engine hook) computes its place, tilt and color from them and the time. Three fields: a galaxy whose stars orbit on turning ellipses (a density wave keeps two arms), an ocean of four Gerstner waves, a flow along a (2, 3) torus knot."
+    },
+    "fluid-lab": {
+      "v": "keep",
+      "owner": "The owner's notes on the water bottle and soda can of September 29, 2026 (\"a realistic fluid splat simulator\"; lane Fluids; labs only).",
+      "effect": "A sandbox for the fluid engine: a nozzle pours water, soda, honey or lava into a glass (the third tap empties it first), a ball of liquid splashes into a bowl, a candle is blown out and lights again, or a breath bends a hot cup's steam (about 3 to 5 s).",
+      "sound": "The pour's splash and glug (soda fizzes; honey and lava a thick gloop), a splash, a breath on the candle and the cup.",
+      "improved": "Fluids: new sandbox on the Lab shelf (labs). Liquids are position-based fluids with a viscosity from water to lava, drawn as stretched, lit surface splats; smoke and steam rise in a curl field; flames cool through a real color ramp with sparks; colliders keep the liquid in the glass and the bowl."
     }
   }
 }

@@ -360,6 +360,7 @@ export class Stage {
     t.entity.enabled = false;
     if (t.addon) t.addon.entity.enabled = false;
     for (const sh of t.sheets || []) sh.entity.enabled = false; // Pictures
+    for (const l of t.layers || []) l.entity.enabled = false; // Fluids
     t.frames = 3;
     this.graveyard.push(t);
     this.requestRender();
@@ -379,6 +380,7 @@ export class Stage {
         t.addon.resource.destroy?.();
       }
       for (const sh of t.sheets || []) this.destroySheet(sh); // Pictures
+      for (const l of t.layers || []) this.destroyLayer(l); // Fluids
       if (t.asset) {
         t.asset.unload();
         this.app.assets.remove(t.asset);
@@ -397,6 +399,11 @@ export class Stage {
     for (const sh of this.toy.sheets || []) {
       const sg = sh.entity.gsplat;
       for (const k in u) sg.setParameter(k, u[k]);
+    }
+    // Lane Fluids: a toy's fluid layers read the same uniforms.
+    for (const l of this.toy.layers || []) {
+      const lg = l.entity.gsplat;
+      for (const k in u) lg.setParameter(k, u[k]);
     }
   }
 
@@ -578,6 +585,48 @@ export class Stage {
   }
 
   // ---- End of picture sheets ------------------------------------------------------
+
+  // ---- Fluid layers (lane Fluids) ------------------------------------------------------
+  // A kit toy's fluids (src/fluids/): an extra gsplat entity with its own
+  // work-buffer program, drawn and sorted with the toy, reading the toy's
+  // uniforms (setUniforms) plus its own. Freed with the toy, or a few frames
+  // after removeLayer.
+
+  addLayer(container, modifier) {
+    const t = this.toy;
+    if (!t) return null;
+    const entity = new pc.Entity("fluid");
+    entity.addComponent("gsplat", { resource: container });
+    entity.gsplat.setWorkBufferModifier(modifier);
+    entity.gsplat.workBufferUpdate = pc.WORKBUFFER_UPDATE_ALWAYS;
+    this.app.root.addChild(entity);
+    const layer = { entity, container };
+    (t.layers ||= []).push(layer);
+    this.requestRender();
+    return layer;
+  }
+
+  setLayerUniforms(layer, u) {
+    if (!layer) return;
+    for (const k in u) layer.entity.gsplat.setParameter(k, u[k]);
+  }
+
+  removeLayer(layer) {
+    const t = this.toy;
+    const i = t?.layers ? t.layers.indexOf(layer) : -1;
+    if (i < 0) return;
+    t.layers.splice(i, 1);
+    layer.entity.enabled = false;
+    this.graveyard.push({ frames: 3, entity: { destroy: () => this.destroyLayer(layer) } });
+    this.requestRender();
+  }
+
+  destroyLayer(layer) {
+    layer.entity.destroy();
+    layer.container.destroy?.();
+  }
+
+  // ---- End of fluid layers ---------------------------------------------------------------
 
   // Model <-> world for the toy entity.
   worldToModel(p) {
