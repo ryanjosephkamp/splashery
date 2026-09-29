@@ -81,7 +81,7 @@ know, so a typo can't break the page.
 | `light`     | The sun, shadows, haze and grade ([Rendering](#rendering))                    | a sunny day    |
 | `sky`       | `{ "clouds": 0..1 }`, how cloudy                                              | `0.5`          |
 | `spawn`     | `{ "at": [x, z], "facing": degrees }`, where the character starts             | `[0, 0]`, 0    |
-| `character` | The character's colors: `shirt`, `trousers`, `skin`, `hair`, `shoes`          | red shirt      |
+| `character` | The character's colors: `shirt`, `trousers`, `skin`, `hair`, `shoes`; `model` | red shirt      |
 | `props`     | Things placed one by one ([Props](#props))                                    | none           |
 | `scatter`   | Many copies of a prop spread over a kind of ground ([Props](#props))          | none           |
 | `landmarks` | Places with a sign and a card ([Landmarks](#landmarks))                       | none           |
@@ -215,23 +215,24 @@ Everything is in `src/worlds/`. PlayCanvas is used only through `src/pc.js`, and
 with the kit (`src/kit.js`). The pure modules have no engine imports, so tests and tools use them in
 Node.
 
-| Module          | What it does                                                                                            |
-| --------------- | ------------------------------------------------------------------------------------------------------- |
-| `main.js`       | The page: labs check, start screen, list, cards, the frame loop, test hooks (`window.__world`)          |
-| `world-file.js` | Reads a world file and fills in every default (pure)                                                    |
-| `world.js`      | A running world: builds everything, moves the character, plans the levels, finds landmarks              |
-| `terrain.js`    | The height field, what covers the ground, and each chunk's ground splats at each level (pure)           |
-| `water.js`      | Water chunks, the open sea around the world and the sky dome (pure)                                     |
-| `props.js`      | Prop types, baking toy recipes into still props, thinner far copies, the boulder, bush and signs (pure) |
-| `character.js`  | The character's rigid parts and joints, and its gait: idle, walk and run angles (pure)                  |
-| `physics.js`    | Collision: the ground, water, steep slopes, and upright boxes, spheres and capsules (pure)              |
-| `camera.js`     | The follow camera: orbit, smoothing, never in the ground, sway when running (pure)                      |
-| `lod.js`        | The level-of-detail planner (pure)                                                                      |
-| `tiers.js`      | Device tiers and their budgets (pure)                                                                   |
-| `controls.js`   | Keys, mouse and touch: the thumb stick, drag to look, pinch or wheel to zoom, tap to pick               |
-| `render.js`     | The PlayCanvas side: the device, the camera, the layers, splat containers and entities                  |
-| `lighting.js`   | Both modes: the sun and its shadows, the haze, the grade, and splats mode's shadow catcher              |
-| `hybrid.js`     | Hybrid mode's models: the ground tiles and their textures, the water, the sky dome and the sign boards  |
+| Module              | What it does                                                                                            |
+| ------------------- | ------------------------------------------------------------------------------------------------------- |
+| `main.js`           | The page: labs check, start screen, list, cards, the frame loop, test hooks (`window.__world`)          |
+| `world-file.js`     | Reads a world file and fills in every default (pure)                                                    |
+| `world.js`          | A running world: builds everything, moves the character, plans the levels, finds landmarks              |
+| `terrain.js`        | The height field, what covers the ground, and each chunk's ground splats at each level (pure)           |
+| `water.js`          | Water chunks, the open sea around the world and the sky dome (pure)                                     |
+| `props.js`          | Prop types, baking toy recipes into still props, thinner far copies, the boulder, bush and signs (pure) |
+| `character.js`      | The character's rigid parts and joints, and its gait: idle, walk and run angles (pure)                  |
+| `physics.js`        | Collision: the ground, water, steep slopes, and upright boxes, spheres and capsules (pure)              |
+| `camera.js`         | The follow camera: orbit, smoothing, never in the ground, sway when running (pure)                      |
+| `lod.js`            | The level-of-detail planner (pure)                                                                      |
+| `tiers.js`          | Device tiers and their budgets (pure)                                                                   |
+| `controls.js`       | Keys, mouse and touch: the thumb stick, drag to look, pinch or wheel to zoom, tap to pick               |
+| `render.js`         | The PlayCanvas side: the device, the camera, the layers, splat containers and entities                  |
+| `lighting.js`       | Both modes: the sun and its shadows, the haze, the grade, and splats mode's shadow catcher              |
+| `mesh-character.js` | Hybrid round: the lit, skinned character and its idle, walk and run                                     |
+| `hybrid.js`         | Hybrid mode's models: the ground tiles and their textures, the water, the sky dome and the sign boards  |
 
 ### The character
 
@@ -380,6 +381,17 @@ water splats draw with the props and the character, sorted together, as before.
   lights the models and gives the water its reflection.
 - **Signs.** Wooden posts and a board, the face painted in the `accent` color with the landmark's
   title in cream. The same size as the splat sign, so taps and collision match.
+
+### The mesh character (`mesh-character.js`)
+
+To compare with the splat character, `?character=mesh` (or `"character": { "model": "mesh" }` in the
+world file) swaps in a lit, skinned model: Kenney's "Animated Characters: Protagonists" (CC0), as
+tall as the splat character, lit by the same sun and sky and casting the same shadows, in either
+mode. Its idle, walk and run blend by speed (a 1D blend tree) and advance with the world's clock, so
+manual-clock clips and tests move them exactly. The pack has no walk: `tools/world-character.mjs`
+makes one from the run (each joint half way back to the idle's pose, a lower bounce) and builds
+`assets/worlds/character/character.glb` with three.js at build time. Collision, the camera and the
+controls are the same for both characters.
 
 `tools/world-assets.mjs` fetches the textures and the HDRI from Poly Haven and builds
 `assets/worlds/ground/` (the atlases and `ground.json`: each texture's repeat, strength and mean

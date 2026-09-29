@@ -54,6 +54,7 @@ test.describe("worlds hybrid (file)", () => {
     const files = [
       ...fs.readdirSync("assets/worlds/ground").map((f) => `assets/worlds/ground/${f}`),
       ...fs.readdirSync("assets/worlds/sky").map((f) => `assets/worlds/sky/${f}`),
+      ...fs.readdirSync("assets/worlds/character").map((f) => `assets/worlds/character/${f}`),
     ];
     const bytes = files.reduce((t, f) => t + fs.statSync(f).size, 0);
     expect(bytes).toBeLessThan(10e6);
@@ -62,13 +63,15 @@ test.describe("worlds hybrid (file)", () => {
     const credits = fs.readFileSync("CREDITS.md", "utf8");
     const assets = JSON.parse(fs.readFileSync("tools/assets.json", "utf8"));
     const listed = JSON.stringify(assets.worlds || []);
-    for (const a of [...ground.cells, sky]) {
+    const character = JSON.parse(fs.readFileSync("assets/worlds/character/character.json", "utf8")); // prettier-ignore
+    for (const a of [...ground.cells, sky, character]) {
       expect(a.license).toBe("CC0 1.0");
       expect(credits).toContain(a.page);
       expect(listed).toContain(a.page);
     }
     const page = fs.readFileSync("worlds/index.html", "utf8");
     expect(page).toContain("polyhaven.com");
+    expect(page).toContain("kenney.nl");
   });
 });
 
@@ -183,6 +186,55 @@ test.describe("worlds hybrid", () => {
       await toggle("me", true);
       expect(noMe).not.toBe(withMe);
     });
+
+  test("?character=mesh swaps in the lit, skinned character: it casts shadows, stands on the ground and its clips follow the world's clock", async ({
+    page,
+  }) => {
+    const errors = [];
+    page.on("pageerror", (e) => errors.push(e.message));
+    await open(page, "&render=hybrid&character=mesh");
+    await page.click("#enter");
+    await settle(page);
+    const pose = () =>
+      page.evaluate(() => {
+        const m = window.__world.world.meshCharacter;
+        const bone = (n) => m.findByName(n).getPosition();
+        const l = bone("LeftFoot");
+        const r = bone("RightFoot");
+        return { gap: l.clone().sub(r).length(), head: bone("Head_end").y, foot: Math.min(l.y, r.y) }; // prettier-ignore
+      });
+    const s = await page.evaluate(() => {
+      const w = window.__world.world;
+      const m = w.meshCharacter;
+      const renders = m.findComponents("render");
+      return {
+        has: !!m,
+        shadows: renders.every((r) => r.castShadows),
+        splats: w.stats().fixed - (w.skyCount || 0),
+        state: m.anim.baseLayer.activeState,
+        y: w.char.pos[1],
+      };
+    });
+    expect(s.has).toBe(true);
+    expect(s.shadows).toBe(true);
+    expect(s.splats).toBe(0);
+    expect(s.state).toBe("Move");
+    // As tall as the splat character, feet on the ground.
+    const still = await pose();
+    expect(still.head - s.y).toBeGreaterThan(1.5);
+    expect(still.head - s.y).toBeLessThan(1.95);
+    expect(Math.abs(still.foot - s.y)).toBeLessThan(0.2);
+    // A paused clock leaves the pose as it is; walking swings the feet apart.
+    await page.evaluate(() => window.__world.tick(0));
+    expect((await pose()).gap).toBeCloseTo(still.gap, 3);
+    const gaps = [];
+    for (let i = 0; i < 8; i++) {
+      await page.evaluate(() => window.__world.tick(1 / 30, { y: 1 }));
+      gaps.push((await pose()).gap);
+    }
+    expect(Math.max(...gaps) - Math.min(...gaps)).toBeGreaterThan(0.05);
+    expect(errors).toEqual([]);
+  });
 
   test("frames per second, sampled in both modes", async ({ page }) => {
     const out = {};

@@ -250,6 +250,13 @@ places.
 | Rock              | [Rock Ground](https://polyhaven.com/a/rock_ground)                                                      | Rob Tuytel             | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | Wet sand          | [Damp Beach Sand](https://polyhaven.com/a/damp_beach_sand)                                              | Dimitrios Savva        | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 
+Its mesh character (to compare with the splat character; `?character=mesh`) is from
+[Animated Characters: Protagonists](https://kenney.nl/assets/animated-characters-protagonists) by
+Kenney, [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (checked on the live page and
+in the pack's own license file on September 29, 2026): the model, the "skaterMaleA" skin and the
+idle and run animations. The walk is made from the run. `tools/world-character.mjs` builds
+`assets/worlds/character/character.glb`.
+
 ## National flags
 
 The pattern layer can wrap a national flag around any toy. The flags are SVG files from

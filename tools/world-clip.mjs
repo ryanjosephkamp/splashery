@@ -159,17 +159,16 @@ const SCENES = {
     { hold: 0.4 },
   ],
   // The character, the same walk (recorded with --left and --right): idle,
-  // a walk away, a walk across (its profile), a run, then it turns to face
-  // the camera.
+  // a walk away, a walk across (its profile), a run, then it walks back
+  // toward the camera.
   "hybrid-character": [
     { place: [-4, 14, 180], camera: { distance: 3.4, pitch: 0.16 } },
     { hold: 1.0 },
     { move: { y: 1 }, secs: 2.0 },
-    { move: { x: 1 }, secs: 2.2 },
-    { move: { x: 1, run: true }, secs: 1.6 },
-    { hold: 0.6 },
-    { look: [Math.PI * 0.75, 0], secs: 1.6 },
-    { hold: 0.8 },
+    { move: { x: -1 }, secs: 2.2 },
+    { move: { x: -1, run: true }, secs: 1.4 },
+    { move: { y: -1 }, secs: 1.6 },
+    { hold: 1.0 },
   ],
   // Depth, close up: a bush half behind a hill, then the character wading.
   "hybrid-depth": [

@@ -376,6 +376,16 @@
       "license": "CC0 1.0",
       "out": "assets/worlds/ground/",
       "tool": "tools/world-assets.mjs"
+    },
+    {
+      "id": "kenney-animated-characters-protagonists",
+      "use": "hybrid mesh character (model, skaterMaleA skin, idle and run)",
+      "name": "Animated Characters: Protagonists",
+      "authors": ["Kenney"],
+      "page": "https://kenney.nl/assets/animated-characters-protagonists",
+      "license": "CC0 1.0",
+      "out": "assets/worlds/character/",
+      "tool": "tools/world-character.mjs"
     }
   ]
 }

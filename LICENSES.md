@@ -122,6 +122,9 @@ These are `devDependencies` used to prepare assets and run tests; nothing from t
 - `jpeg-js` 0.4.4 (BSD-3-Clause), https://github.com/eugeneware/jpeg-js, and `pngjs` 7.0.0 (MIT),
   https://github.com/pngjs/pngjs: decode those models' textures in `tools/mesh-to-splats.mjs`, and
   put the before-and-after sharpness crops side by side in `tools/sharpness-pairs.mjs`.
+- `three` 0.186.1 (MIT), https://github.com/mrdoob/three.js: its FBX loader and glTF exporter turn
+  the Worlds mesh character (Kenney, CC0) into one GLB in `tools/world-character.mjs`, run in
+  Chromium at build time. Nothing of three.js is served.
 - The TRELLIS Space on Hugging Face (not a package; `tools/image-to-3d.mjs` calls it over HTTPS with
   plain fetch): https://huggingface.co/spaces/trellis-community/TRELLIS (MIT), running the TRELLIS
   model https://huggingface.co/microsoft/TRELLIS-image-large (MIT) and rembg's u2net background
