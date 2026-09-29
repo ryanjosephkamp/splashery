@@ -85,12 +85,13 @@ HOW THIS LANE RUNS
 - Your handoff file: create it. Start it with this brief, word for word, under "## Brief", then keep
   "## State
 
-September 29, 2026: built, clips posted, waiting for the owner's marks. The recipe is in
-`src/packs/music.js` ("Toy piano"), with its entries in `src/toys.js`, `src/toy-sounds.js`,
-`src/toy-help.js` and `tools/toy-plan.json`, its thumbnail, its own tests and screenshots in
-`tests/abb.spec.mjs` (`abb-toy-piano-390x844.png`, `…-1440x900.png`). PR #91 (draft). Cards on the
-Effect review page, lane record AB-B: `abb-toy-piano-keys`, `abb-toy-piano-song`,
-`abb-toy-piano-still`. An hourly check-in reads the marks.
+September 29, 2026: built and marked. The owner marked all three cards "good" (no notes); the PR
+waits for the Operator's reveal and merge decision. The recipe is in `src/packs/music.js` ("Toy
+piano"), with its entries in `src/toys.js`, `src/toy-sounds.js`, `src/toy-help.js` and
+`tools/toy-plan.json`, its thumbnail, its own tests and screenshots in `tests/abb.spec.mjs`
+(`abb-toy-piano-390x844.png`, `…-1440x900.png`). PR #91 (draft). Cards on the Effect review page,
+lane record AB-B: `abb-toy-piano-keys`, `abb-toy-piano-song`, `abb-toy-piano-still`. An hourly
+check-in reads the marks.
 
 ## Notes", "## Known issues" and "## For the Operator" current. For this blind lane,
 
