@@ -202,7 +202,7 @@ export class Pictures {
         return self.media?.kind === "video" ? self.media.video?.currentTime || 0 : 0;
       },
       get duration() {
-        return self.media?.kind === "video" ? self.media.duration || 0 : 0;
+        return self.videoDuration();
       },
       seek: (s) => self.seek(s),
       nameOf: (n) => self.media?.names?.[n] ?? self.media?.name ?? "",
@@ -220,6 +220,18 @@ export class Pictures {
     return p;
   }
 
+  // A video's length in seconds: a WebM recorded in a browser can say
+  // Infinity until it has played through, so the end of what it can seek
+  // to stands in (lane Books).
+  videoDuration() {
+    const m = this.media;
+    if (m?.kind !== "video") return 0;
+    const d = m.duration;
+    if (Number.isFinite(d) && d > 0) return d;
+    const r = m.video?.seekable;
+    return r?.length ? r.end(r.length - 1) || 0 : 0;
+  }
+
   // Moves a video to `s` seconds (clamped); the new frame is uploaded once
   // the video has it, playing or paused.
   seek(s) {
@@ -234,7 +246,7 @@ export class Pictures {
       },
       { once: true },
     );
-    m.seek(s);
+    m.seek(Math.max(0, Math.min(this.videoDuration() || s, s)));
     this.player.emit("pictures", this.info());
     return true;
   }
@@ -556,7 +568,9 @@ export class Pictures {
       // The old sheet stays on show for a few frames: a new container
       // draws nothing until the engine has sorted it.
       if (slot) this.retiring.push({ slot, frames: 6 });
-      const cap = Math.ceil(data.count * 1.25);
+      // Room for pages with more ink than this one (lane Books: a PDF's
+      // flat colored areas are ink now), so paging rarely needs a new one.
+      const cap = Math.ceil(data.count * 1.5);
       slot = st.addSheet(this.player.pictureContainer(cap));
       if (!slot) return;
       sheet.slot = slot;
