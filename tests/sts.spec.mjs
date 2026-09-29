@@ -162,3 +162,73 @@ test.describe("the Studio shelf", () => {
     });
   }
 });
+
+test.describe("your own song and the speaker button", () => {
+  test.describe.configure({ timeout: 300_000 });
+
+  // A 3 second 880 Hz sine as a WAV file.
+  const wav = () => {
+    const n = 22050 * 3;
+    const b = Buffer.alloc(44 + n * 2);
+    b.write("RIFF", 0);
+    b.writeUInt32LE(36 + n * 2, 4);
+    b.write("WAVEfmt ", 8);
+    b.writeUInt32LE(16, 16);
+    b.writeUInt16LE(1, 20);
+    b.writeUInt16LE(1, 22);
+    b.writeUInt32LE(22050, 24);
+    b.writeUInt32LE(44100, 28);
+    b.writeUInt16LE(2, 32);
+    b.writeUInt16LE(16, 34);
+    b.write("data", 36);
+    b.writeUInt32LE(n * 2, 40);
+    for (let i = 0; i < n; i++) b.writeInt16LE(Math.round(16000 * Math.sin((2 * Math.PI * 880 * i) / 22050)), 44 + i * 2); // prettier-ignore
+    return b;
+  };
+
+  test("opening a sound file rebuilds the landscape from it, and a tap plays it", async ({
+    page,
+  }) => {
+    const errors = [];
+    page.on("pageerror", (e) => errors.push(e.message));
+    await page.addInitScript(() => localStorage.setItem("splashery.sound", "on"));
+    await page.goto(APP);
+    await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
+    await page.evaluate(() => window.__splashery.app.chooseToy("song-landscape"));
+    await page.waitForTimeout(1500);
+    await page.locator("#toy-input-file").setInputFiles({ name: "beep.wav", mimeType: "audio/wav", buffer: wav() }); // prettier-ignore
+    await page.waitForFunction(() => window.__splashery.player.proc?.ctx?.kit?.data?.song?.song?.name === "beep", null, { timeout: 60_000 }); // prettier-ignore
+    const d = await page.evaluate(() => {
+      const s = window.__splashery.player.proc.ctx.kit.data.song;
+      return { dur: s.song.duration, top: s.top };
+    });
+    expect(d.dur).toBeCloseTo(3, 1);
+    expect(d.top).toBeGreaterThan(-8);
+    // The speaker button is on: the tap starts the sound and the marker.
+    await page.evaluate(() => window.__splashery.app.act());
+    // (Polled: a slow renderer may take a moment; a short song may also end.)
+    const st = await page.evaluate(async () => {
+      const { playState } = await import("/src/packs/studio.js");
+      for (let i = 0; i < 100; i++) {
+        const s = playState();
+        if (s.on && s.pos > 0.05) return s;
+        await new Promise((r) => setTimeout(r, 50));
+      }
+      return playState();
+    });
+    expect(st.on).toBe(true);
+    expect(st.audio).toBe(true);
+    // Tap again to pause: the position holds.
+    await page.evaluate(() => window.__splashery.app.act());
+    await page.waitForTimeout(600);
+    const a = await page.evaluate(async () => (await import("/src/packs/studio.js")).playState());
+    await page.waitForTimeout(600);
+    const b = await page.evaluate(async () => (await import("/src/packs/studio.js")).playState());
+    expect(a.on).toBe(false);
+    expect(b.pos).toBe(a.pos);
+    // A file that is not sound gives a message, not a crash.
+    await page.locator("#toy-input-file").setInputFiles({ name: "x.mp3", mimeType: "audio/mpeg", buffer: Buffer.from("not sound") }); // prettier-ignore
+    await expect(page.locator(".warning:visible")).toContainText("cannot read that sound file");
+    expect(errors).toEqual([]);
+  });
+});

@@ -339,6 +339,9 @@ function songColor(look, f, nf, h) {
   return shade(c, 0.32 + 0.68 * h);
 }
 
+// Where the song is (for the tests): playing or not, and the second.
+export const playState = () => ({ on: PLAY.on, pos: PLAY.pos, audio: !!PLAY.src });
+
 // The song's sound and the moving marker: one frame's step.
 function playStep(song, sound, on, time) {
   const dt = PLAY.last === null ? 0 : Math.min(0.25, Math.max(0, time - PLAY.last));
@@ -440,11 +443,12 @@ const SONG_LANDSCAPE = {
     const on = (c.play ?? 0) > 0.5;
     const pos = playStep(g.song, info.sound, on, info.time);
     const f = clamp01(pos / g.song.duration);
-    // The marker glides along the time axis (from near to far).
+    // The marker glides along the time axis (from near to far), and the view
+    // follows it: the whole landscape slides toward you by half as far as the
+    // marker goes, so the marker sweeps only half the landscape's length on
+    // screen (the camera glide).
     out.parts.marker = { offset: [0, 0, -f * g.D] };
-    // Whatever the marker has passed brightens: the toy glows a little while
-    // it plays.
-    out.glow = [1, 0.95, 0.8, on ? 0.0 : 0];
+    out.body = { offset: [0, 0, ((f - 0.5) * 0.5 * g.D * g.fit) / (info.R || 1)] };
   },
   build(k, o) {
     const song = SONG.want || SONG.sample;
@@ -518,7 +522,11 @@ const SONG_LANDSCAPE = {
     }
     k.cloud({ share: mk.length / k.count, pattern: false }, (rand, i) => mk[i] || null);
     k.reach([0, H + 0.2, -D / 2 - 0.1]);
-    k.data = { song: { song, D, nf, nt, top: d.top } };
+    // The fit's scale (src/kit.js scales the toy to a sphere of radius 0.95
+    // about its middle), so drive can turn recipe lengths into toy lengths.
+    const yTop = H + 0.2;
+    const rmax = Math.hypot(W / 2 + 0.18, (yTop + 0.035) / 2, D / 2 + 0.1);
+    k.data = { song: { song, D, nf, nt, top: d.top, fit: 0.95 / rmax } };
   },
 };
 
