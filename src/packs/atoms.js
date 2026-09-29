@@ -15,6 +15,9 @@ import {
 import { element, covalentRadius, formulaOf } from "../chem/elements.js";
 import { moleculeFromText, readMoleculeFile } from "../chem/molfile.js";
 import { parseStructure, ribbonPath, centreStructure } from "../chem/protein.js";
+import { ELEMENT_LIST, packNucleus } from "../chem/atom-model.js"; // lane Chemistry
+import { GALLERY } from "../chem/gallery.js"; // lane Chemistry
+import { basePair, dnaStrand } from "../chem/dna.js"; // lane Chemistry
 
 const TAU = Math.PI * 2;
 const PHI = (1 + Math.sqrt(5)) / 2;
@@ -143,6 +146,93 @@ const ORBITALS = {
   },
 };
 
+// Lane Chemistry: the full set through n = 4 (and the n = 5 shapes a tap
+// can excite them to), from the real hydrogen wave functions: the radial
+// part r^l e^(-r/n) L(2r/n), with L the associated Laguerre polynomial, and
+// the real spherical harmonics (each shape's Y up to its normalization,
+// which the sampling takes out).
+const SHAPES = {
+  s: { l: 0, label: "", Y: () => 1 },
+  px: { l: 1, label: " (x)", Y: (x) => x },
+  py: { l: 1, label: " (y)", Y: (x, y) => y },
+  pz: { l: 1, label: " (z)", Y: (x, y, z) => z },
+  dz2: { l: 2, label: " (z²)", Y: (x, y, z) => 3 * z * z - 1 },
+  dxz: { l: 2, label: " (xz)", Y: (x, y, z) => x * z },
+  dyz: { l: 2, label: " (yz)", Y: (x, y, z) => y * z },
+  dxy: { l: 2, label: " (xy)", Y: (x, y) => x * y, face: true },
+  dx2y2: { l: 2, label: " (x²−y²)", Y: (x, y) => x * x - y * y, face: true },
+  fz3: { l: 3, label: " (z³)", Y: (x, y, z) => z * (5 * z * z - 3) },
+  fxz2: { l: 3, label: " (xz²)", Y: (x, y, z) => x * (5 * z * z - 1) },
+  fyz2: { l: 3, label: " (yz²)", Y: (x, y, z) => y * (5 * z * z - 1) },
+  fxyz: { l: 3, label: " (xyz)", Y: (x, y, z) => x * y * z },
+  fzx2y2: { l: 3, label: " (z(x²−y²))", Y: (x, y, z) => z * (x * x - y * y) },
+  fx3: { l: 3, label: " (x(x²−3y²))", Y: (x, y) => x * (x * x - 3 * y * y), face: true },
+  fy3: { l: 3, label: " (y(3x²−y²))", Y: (x, y) => y * (3 * x * x - y * y), face: true },
+};
+const LETTER = "spdfg";
+const RMAX = [0, 9, 18, 30, 44, 62];
+function laguerre(k, a, x) {
+  // L_k^a(x) = sum over i of (-1)^i C(k + a, k - i) x^i / i!
+  let sum = 0;
+  for (let i = 0; i <= k; i++) {
+    let binom = 1;
+    for (let j = 1; j <= k - i; j++) binom *= (a + i + j) / j;
+    let fact = 1;
+    for (let j = 2; j <= i; j++) fact *= j;
+    sum += ((i % 2 ? -1 : 1) * binom * x ** i) / fact;
+  }
+  return sum;
+}
+function hydrogenOrbital(n, shape, hidden = false) {
+  const sh = SHAPES[shape];
+  const l = sh.l;
+  // The largest |Y| on the unit sphere, found by sampling.
+  let ymax = 0;
+  const N = 4000;
+  for (let i = 0; i < N; i++) {
+    const z = 1 - (2 * (i + 0.5)) / N;
+    const r = Math.sqrt(1 - z * z);
+    const a = i * 2.399963;
+    ymax = Math.max(ymax, Math.abs(sh.Y(r * Math.cos(a), r * Math.sin(a), z)));
+  }
+  return {
+    label: `${n}${LETTER[l]}${sh.label}`,
+    R: (r) => r ** l * Math.exp(-r / n) * laguerre(n - l - 1, 2 * l + 1, (2 * r) / n),
+    Y: sh.Y,
+    ymax: ymax * 1.001,
+    rmax: RMAX[n],
+    face: !!sh.face,
+    hidden,
+  };
+}
+const NEW_ORBITALS = [
+  [2, "px"], [2, "py"],
+  [3, "s"], [3, "px"], [3, "py"], [3, "dxz"], [3, "dyz"], [3, "dx2y2"],
+  [4, "s"], [4, "px"], [4, "py"], [4, "pz"],
+  [4, "dz2"], [4, "dxz"], [4, "dyz"], [4, "dxy"], [4, "dx2y2"],
+  [4, "fxz2"], [4, "fyz2"], [4, "fzx2y2"], [4, "fx3"], [4, "fy3"],
+]; // prettier-ignore
+for (const [n, shape] of NEW_ORBITALS)
+  ORBITALS[`${n}${shape === "s" ? "s" : shape}`] = hydrogenOrbital(n, shape);
+// The shapes one step up that the new ones are excited to (hidden choices).
+for (const [
+  n,
+  shape,
+] of [[3, "dxz"], [3, "dyz"], [4, "dxz"], [4, "dyz"], [4, "dx2y2"], [5, "pz"], [5, "px"], [5, "py"], [5, "dz2"], [5, "dxz"], [5, "dyz"], [5, "dxy"], [5, "dx2y2"], [5, "fz3"], [5, "fxz2"], [5, "fyz2"], [5, "fxyz"], [5, "fzx2y2"]]) // prettier-ignore
+  ORBITALS[`${n}${shape}`] ??= hydrogenOrbital(n, shape, true);
+// The shape each takes when excited: n one higher, l one higher, the same
+// kind of lobe (a transition a photon allows: l up by one, m kept).
+const UP_SHAPE = { s: "pz", px: "dxz", py: "dyz", pz: "dz2", dz2: "fz3", dxz: "fxz2", dyz: "fyz2", dxy: "fxyz", dx2y2: "fzx2y2" }; // prettier-ignore
+// The order the orbitals are listed in: by n, then l.
+const ORBITAL_ORDER = [
+  "1s", "2s", "2p", "2px", "2py", "3s", "3p", "3px", "3py",
+  "3dz2", "3dxz", "3dyz", "3dxy", "3dx2y2",
+  "4s", "4pz", "4px", "4py", "4dz2", "4dxz", "4dyz", "4dxy", "4dx2y2",
+  "4fz3", "4fxz2", "4fyz2", "4fxyz", "4fzx2y2", "4fx3", "4fy3",
+]; // prettier-ignore
+ORBITALS["2p"].label = "2p (z)";
+ORBITALS["3p"].label = "3p (z)";
+
 // The orbital a tap excites each one to: one step up in energy, with the
 // angular momentum one higher (the rule for absorbing a photon).
 const EXCITE = {
@@ -156,6 +246,11 @@ const EXCITE = {
   "4fxyz": "5g",
   "5g": "4fz3",
 };
+// Lane Chemistry: the new ones (an f orbital goes to 5g, as 4f (z³) does).
+for (const [n, shape] of NEW_ORBITALS) {
+  const up = SHAPES[shape].l === 3 ? "5g" : `${n + 1}${UP_SHAPE[shape]}`;
+  EXCITE[`${n}${shape}`] = ORBITALS[up] ? up : "5g";
+}
 
 // A radius sampler for r² R(r)², cut at the 98.5% quantile so a few far
 // samples do not shrink the picture.
@@ -245,6 +340,12 @@ const ELEMENTS = [
 ];
 
 const zOf = (shells) => shells.reduce((s, n) => s + n, 0);
+
+// Lane Chemistry: every element, in order. The 44 above keep their own
+// rows; the rest come from src/chem/periodic.js (NIST and IUPAC numbers).
+const ALL_ELEMENTS = ELEMENT_LIST.map(
+  (e) => ELEMENTS.find((x) => x[0] === e.symbol) || [e.symbol, e.name, e.A, e.shells.slice()],
+);
 
 // The tilt of each electron shell's ring, and how fast it turns.
 const SHELL_TILT = [
@@ -486,6 +587,13 @@ function tokenGroups(atoms, bonds, max = 48) {
   }
   return atoms.map((a, i) => groupOf.get(owner[i]));
 }
+
+// Lane Chemistry: DNA from PDB 1BNA (src/chem/dna.js).
+const DNA_BUILDERS = {
+  "at-pair": () => basePair("AT"),
+  "gc-pair": () => basePair("GC"),
+  dna: dnaStrand,
+};
 
 // Molecule builders: each returns { atoms, bonds } in ångströms.
 const MOLECULES = {
@@ -826,6 +934,179 @@ function graphiteLattice() {
         if (Math.abs(len(sub(atoms[i].p, atoms[j].p)) - 1) < 0.02) bonds.push([i, j]);
   }
   return { atoms, bonds, bondR: 0.06, grey: "#8d939e", dotted: true };
+}
+
+// ---- Lane Chemistry: more crystals -------------------------------------------------
+// Each from its unit cell (lattice constants in ångströms, room temperature),
+// repeated and cut to a block; bonds join nearest neighbours.
+
+// Atoms of a cubic cell basis repeated n times along each axis, keeping
+// those inside the block (boundary included). basis: [[el, fx, fy, fz]].
+function cubicBlock(a, basis, n, look) {
+  const atoms = [];
+  const seen = new Set();
+  for (let i = -1; i <= n; i++)
+    for (let j = -1; j <= n; j++)
+      for (let l = -1; l <= n; l++)
+        for (const [el, fx, fy, fz] of basis) {
+          const f = [i + fx, j + fy, l + fz];
+          if (f.some((x) => x < -1e-6 || x > n + 1e-6)) continue;
+          const key = f.map((x) => x.toFixed(3)).join(",");
+          if (seen.has(key)) continue;
+          seen.add(key);
+          atoms.push({ el, p: f.map((x) => (x - n / 2) * a), ...look[el] });
+        }
+  return atoms;
+}
+// Bonds between atoms of the given kinds at the given length (±tol).
+function bondsAt(atoms, pairs) {
+  const bonds = [];
+  for (let i = 0; i < atoms.length; i++)
+    for (let j = i + 1; j < atoms.length; j++) {
+      const d = len(sub(atoms[i].p, atoms[j].p));
+      for (const [ea, eb, L, tol = 0.08] of pairs)
+        if (
+          ((atoms[i].el === ea && atoms[j].el === eb) ||
+            (atoms[i].el === eb && atoms[j].el === ea)) &&
+          Math.abs(d - L) < tol
+        ) {
+          bonds.push([i, j]);
+          break;
+        }
+    }
+  return bonds;
+}
+
+// Iron: body-centred cubic, a = 2.87 Å; each atom touches eight.
+function ironLattice() {
+  const a = 2.8665;
+  const atoms = cubicBlock(a, [["Fe", 0, 0, 0], ["Fe", 0.5, 0.5, 0.5]], 3, { Fe: { color: "#a9b0b8", r: 0.55 } }); // prettier-ignore
+  return { atoms, bonds: bondsAt(atoms, [["Fe", "Fe", (a * Math.sqrt(3)) / 2]]), bondR: 0.07, grey: "#7d848c" }; // prettier-ignore
+}
+// Copper: face-centred cubic, a = 3.615 Å; each atom touches twelve.
+function copperLattice() {
+  const a = 3.615;
+  const atoms = cubicBlock(a, [["Cu", 0, 0, 0], ["Cu", 0, 0.5, 0.5], ["Cu", 0.5, 0, 0.5], ["Cu", 0.5, 0.5, 0]], 2, { Cu: { color: "#d9854a", r: 0.6 } }); // prettier-ignore
+  return { atoms, bonds: bondsAt(atoms, [["Cu", "Cu", a / Math.SQRT2]]), bondR: 0.07, grey: "#a8663a" }; // prettier-ignore
+}
+// Caesium chloride: a caesium ion in the middle of each cube of chloride
+// ions (a = 4.12 Å).
+function cesiumChlorideLattice() {
+  const a = 4.123;
+  const atoms = cubicBlock(
+    a,
+    [
+      ["Cl", 0, 0, 0],
+      ["Cs", 0.5, 0.5, 0.5],
+    ],
+    3,
+    {
+      Cl: { color: "#5cd65c", r: 0.62 },
+      Cs: { color: "#9b59e8", r: 0.78 },
+    },
+  );
+  return { atoms, bonds: bondsAt(atoms, [["Cs", "Cl", (a * Math.sqrt(3)) / 2]]), bondR: 0.06, grey: "#c9c9c9" }; // prettier-ignore
+}
+// Fluorite (CaF2): calcium ions face-centred, a fluoride ion in each of the
+// eight small cubes between them (a = 5.46 Å).
+function fluoriteLattice() {
+  const a = 5.4626;
+  const basis = [
+    ["Ca", 0, 0, 0],
+    ["Ca", 0, 0.5, 0.5],
+    ["Ca", 0.5, 0, 0.5],
+    ["Ca", 0.5, 0.5, 0],
+  ];
+  for (const x of [0.25, 0.75]) for (const y of [0.25, 0.75]) for (const z of [0.25, 0.75]) basis.push(["F", x, y, z]); // prettier-ignore
+  const atoms = cubicBlock(a, basis, 2, {
+    Ca: { color: "#f0ead6", r: 0.62 },
+    F: { color: "#9be05a", r: 0.5 },
+  });
+  return { atoms, bonds: bondsAt(atoms, [["Ca", "F", (a * Math.sqrt(3)) / 4]]), bondR: 0.07, grey: "#c9c9c9" }; // prettier-ignore
+}
+// Perovskite (strontium titanate, SrTiO3): titanium in the middle of each
+// cube, an octahedron of oxygens round it, strontium at the corners
+// (a = 3.905 Å).
+function perovskiteLattice() {
+  const a = 3.905;
+  const atoms = cubicBlock(
+    a,
+    [
+      ["Sr", 0, 0, 0],
+      ["Ti", 0.5, 0.5, 0.5],
+      ["O", 0.5, 0.5, 0],
+      ["O", 0.5, 0, 0.5],
+      ["O", 0, 0.5, 0.5],
+    ],
+    2,
+    {
+      // prettier-ignore
+      Sr: { color: "#59c96b", r: 0.72 },
+      Ti: { color: "#bfc2c7", r: 0.5 },
+      O: { color: "#e3322b", r: 0.48 },
+    },
+  );
+  return { atoms, bonds: bondsAt(atoms, [["Ti", "O", a / 2]]), bondR: 0.08, grey: "#c9c9c9" }; // prettier-ignore
+}
+// Quartz (alpha, SiO2): each silicon joined to four oxygens and each oxygen
+// to two silicons, the tetrahedra spiralling round the c axis (space group
+// P3₂21, a = 4.913, c = 5.405 Å; positions after Le Page and Donnay, 1976).
+function quartzLattice() {
+  const a = 4.9134;
+  const c = 5.4052;
+  const ops = [
+    (x, y, z) => [x, y, z],
+    (x, y, z) => [-y, x - y, z + 2 / 3],
+    (x, y, z) => [-x + y, -x, z + 1 / 3],
+    (x, y, z) => [y, x, -z + 2 / 3],
+    (x, y, z) => [x - y, -y, -z],
+    (x, y, z) => [-x, -x + y, -z + 1 / 3],
+  ];
+  const frac = [];
+  for (const [el, p] of [
+    ["Si", [0.4697, 0, 0]],
+    ["O", [0.4135, 0.2669, 0.1191]],
+  ])
+    for (const op of ops) {
+      const f = op(...p).map((v) => v - Math.floor(v + 1e-9));
+      if (!frac.some((q) => q.el === el && q.f.every((v, k) => Math.abs(v - f[k]) < 1e-4))) frac.push({ el, f }); // prettier-ignore
+    }
+  const cart = ([u, v, w]) => [a * (u - v / 2), w * c, a * v * (Math.sqrt(3) / 2)];
+  const all = [];
+  for (let m = -2; m <= 2; m++)
+    for (let n = -2; n <= 2; n++)
+      for (let l = -1; l <= 1; l++)
+        for (const q of frac) all.push({ el: q.el, p: cart([q.f[0] + m, q.f[1] + n, q.f[2] + l]) });
+  const inside = all.filter((x) => Math.hypot(x.p[0], x.p[2]) < 6.2 && Math.abs(x.p[1]) < 5.2);
+  const atoms = inside.map((x) => ({ ...x, ...(x.el === "Si" ? { color: "#e8c89a", r: 0.5 } : { color: "#e3322b", r: 0.42 }) })); // prettier-ignore
+  const bonds = bondsAt(atoms, [["Si", "O", 1.61, 0.05]]);
+  // Keep only atoms with a bond (the block's loose ends go).
+  const deg = atoms.map(() => 0);
+  for (const [i, j] of bonds) (deg[i]++, deg[j]++);
+  const keepIdx = atoms.map((x, i) => deg[i] >= (x.el === "Si" ? 2 : 1));
+  const remap = [];
+  const out = [];
+  atoms.forEach((x, i) => keepIdx[i] && (remap[i] = out.push(x) - 1));
+  return {
+    atoms: out,
+    bonds: bonds.filter(([i, j]) => keepIdx[i] && keepIdx[j]).map(([i, j]) => [remap[i], remap[j]]),
+    bondR: 0.11,
+  };
+}
+// Graphene: one sheet of carbon hexagons (C–C 1.42 Å).
+function grapheneLattice() {
+  const atoms = [];
+  const s3 = Math.sqrt(3);
+  const b = 1.42;
+  for (let m = -9; m <= 9; m++)
+    for (let n = -9; n <= 9; n++)
+      for (const bz of [0, 1]) {
+        const x = (m * s3 + n * (s3 / 2)) * b;
+        const z = (n * 1.5 + bz) * b;
+        if (Math.hypot(x, z - 0.5 * b) > 7.4) continue;
+        atoms.push({ el: "C", p: [x, 0, z - 0.5 * b], color: "#4b4f57", r: 0.36 });
+      }
+  return { atoms, bonds: bondsAt(atoms, [["C", "C", b, 0.03]]), bondR: 0.12, grey: "#8d939e", tilt: true }; // prettier-ignore
 }
 
 function iceLattice(rand) {
@@ -1185,9 +1466,7 @@ export const RECIPES = {
         label: "Orbital",
         type: "select",
         default: "3dz2",
-        choices: Object.entries(ORBITALS)
-          .filter(([, o]) => !o.hidden)
-          .map(([id, o]) => ({ id, label: o.label })),
+        choices: ORBITAL_ORDER.map((id) => ({ id, label: ORBITALS[id].label })),
       },
       {
         key: "look",
@@ -1288,10 +1567,21 @@ export const RECIPES = {
         label: "Element",
         type: "select",
         default: "C",
-        choices: ELEMENTS.map(([sym, name, , shells]) => ({
+        choices: ALL_ELEMENTS.map(([sym, name, , shells]) => ({
           id: sym,
           label: `${zOf(shells)} ${name}`,
         })),
+      },
+      // Lane Chemistry: the nucleus with every proton and neutron.
+      {
+        key: "nucleus",
+        label: "Nucleus",
+        type: "select",
+        default: "simple",
+        choices: [
+          { id: "simple", label: "Simple" },
+          { id: "real", label: "Every nucleon" },
+        ],
       },
       {
         key: "style",
@@ -1309,6 +1599,18 @@ export const RECIPES = {
       { key: "energy", label: "Energise", type: "pulse", ease: 4.6 },
     ],
     action: { key: "energy", label: "Speed up the electrons" },
+    // Lane Chemistry: the numbers behind the 118 elements.
+    credits: [
+      {
+        label: "Element data",
+        title: "Atomic Weights and Isotopic Compositions; Atomic Spectra Database ground levels",
+        source: "https://www.nist.gov/pml/productsservices/physical-reference-data",
+        author: "NIST Physical Measurement Laboratory; PubChem; IUPAC (elements 95 to 118)",
+        license: "Public domain (facts)",
+        licenseUrl:
+          "https://www.nist.gov/open/copyright-fair-use-and-licensing-statements-srd-data-software-and-technical-series-publications",
+      },
+    ],
     // A tap energises the atom: the electrons whirl faster and faster until
     // each shell blurs into a glowing ring (as a fast electron is better
     // pictured, a cloud round its orbit), then slow down again.
@@ -1325,17 +1627,28 @@ export const RECIPES = {
       out.amount = 1 + 2 * blur;
     },
     build(k, o) {
-      const [, , A, shells] = ELEMENTS.find((e) => e[0] === o.element) || ELEMENTS[5];
+      const [, , A, shells] = ALL_ELEMENTS.find((e) => e[0] === o.element) || ELEMENTS[5];
       const Z = zOf(shells);
-      // The nucleus: every nucleon for light atoms, a representative ball for heavy ones.
-      const nd = A <= 40 ? A : Math.round(40 + (A - 40) * 0.3);
-      const np = Math.max(1, Math.round((nd * Z) / A));
       const rb = 0.075;
-      const pts = packBall(nd, rb, k.rand);
-      const kinds = pts.map((p, i) => i < np);
-      for (let i = kinds.length - 1; i > 0; i--) {
-        const j = Math.floor(k.rand() * (i + 1));
-        [kinds[i], kinds[j]] = [kinds[j], kinds[i]];
+      let pts;
+      let kinds;
+      if (o.nucleus === "real") {
+        // Lane Chemistry: all A nucleons of the commonest (or longest-lived)
+        // isotope, Z of them protons, packed as tight as balls go.
+        const nuc = packNucleus(A, Z, rb);
+        pts = nuc.balls;
+        kinds = nuc.proton;
+        k.data = { protons: Z, neutrons: A - Z, balls: pts.length, electrons: Z };
+      } else {
+        // The nucleus: every nucleon for light atoms, a representative ball for heavy ones.
+        const nd = A <= 40 ? A : Math.round(40 + (A - 40) * 0.3);
+        const np = Math.max(1, Math.round((nd * Z) / A));
+        pts = packBall(nd, rb, k.rand);
+        kinds = pts.map((p, i) => i < np);
+        for (let i = kinds.length - 1; i > 0; i--) {
+          const j = Math.floor(k.rand() * (i + 1));
+          [kinds[i], kinds[j]] = [kinds[j], kinds[i]];
+        }
       }
       const nucR = pts.reduce((m, p) => Math.max(m, len(p)), 0) + rb;
       pts.forEach((p, i) => {
@@ -1443,6 +1756,11 @@ export const RECIPES = {
           { id: "benzene", label: "Benzene" },
           { id: "caffeine", label: "Caffeine" },
           { id: "c60", label: "Buckyball (C60)" },
+          // Lane Chemistry: PubChem's 3D structures, and DNA from PDB 1BNA.
+          ...Object.entries(GALLERY).map(([id, g]) => ({ id, label: g.label })),
+          { id: "at-pair", label: "DNA base pair A·T" },
+          { id: "gc-pair", label: "DNA base pair G·C" },
+          { id: "dna", label: "DNA double helix (4 base pairs)" },
           { id: "custom", label: "Your own (below)" },
         ],
       },
@@ -1451,6 +1769,26 @@ export const RECIPES = {
       { key: "source", label: "Your molecule", type: "text", default: "", hidden: true },
     ],
     input: MOLECULE_INPUT,
+    // Lane Chemistry: the gallery's sources.
+    credits: [
+      {
+        label: "Molecule gallery",
+        title: "PubChem 3D conformers (glucose, aspirin, ATP and the rest)",
+        source: "https://pubchem.ncbi.nlm.nih.gov/",
+        author: "NCBI PubChem",
+        license: "Public domain",
+        licenseUrl: "https://www.ncbi.nlm.nih.gov/home/about/policies/",
+      },
+      {
+        label: "DNA",
+        title: "RCSB Protein Data Bank entry 1BNA (B-DNA dodecamer), hydrogens added",
+        source: "https://www.rcsb.org/structure/1BNA",
+        author:
+          "H. R. Drew, R. M. Wing, T. Takano, C. Broka, S. Tanaka, K. Itakura, R. E. Dickerson",
+        license: "CC0 1.0",
+        licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/",
+      },
+    ],
     controls: [{ key: "heat", label: "Heat", type: "pulse", ease: 4.4 }],
     action: { key: "heat", label: "Heat it up" },
     // The atoms always jiggle a little on their bonds. A tap heats the
@@ -1492,9 +1830,17 @@ export const RECIPES = {
           MOLECULE_SHOWN.label = `Caffeine (yours could not be read: ${err.message})`;
         }
       } else MOLECULE_SHOWN.label = "";
-      const { atoms, bonds } = mol
+      // Lane Chemistry: the gallery's molecules and DNA.
+      const shelf = GALLERY[o.molecule]
+        ? unpackMolecule(GALLERY[o.molecule].packed)
+        : DNA_BUILDERS[o.molecule]?.();
+      const {
+        atoms,
+        bonds,
+        hbonds = [],
+      } = mol
         ? { atoms: mol.atoms.map((a) => ({ ...a, p: a.p.slice() })), bonds: mol.bonds }
-        : (MOLECULES[o.molecule] || MOLECULES.caffeine)();
+        : shelf || (MOLECULES[o.molecule] || MOLECULES.caffeine)();
       // Any element: its colour and a size from its covalent radius.
       for (const a of atoms) {
         if (CPK[a.el]) continue;
@@ -1547,6 +1893,23 @@ export const RECIPES = {
         token: (i) => tokenOf[i],
         overlap: 0.09,
       });
+      // Lane Chemistry: hydrogen bonds (DNA's base pairs) as dotted lines
+      // from each hydrogen to the atom it is drawn to, riding with the
+      // hydrogen.
+      for (const [h, acc] of hbonds) {
+        const a = atoms[h].p;
+        const b = atoms[acc].p;
+        k.cloud({ count: 90, size: 1, pattern: false }, (rand) => {
+          const t = 0.22 + (0.56 * Math.floor(rand() * 5)) / 4;
+          return {
+            p: add(lerp(a, b, t), mul(randDir(rand), 0.035)),
+            color: "#7fc4ff",
+            opacity: 0.95,
+            kind: "token",
+            params: [tokenOf[t < 0.5 ? h : acc], 0],
+          };
+        });
+      }
     },
   },
 
@@ -1564,6 +1927,14 @@ export const RECIPES = {
           { id: "diamond", label: "Diamond" },
           { id: "graphite", label: "Graphite" },
           { id: "ice", label: "Ice" },
+          // Lane Chemistry.
+          { id: "iron", label: "Iron (body-centered cubic)" },
+          { id: "copper", label: "Copper (face-centered cubic)" },
+          { id: "cesium-chloride", label: "Cesium chloride (CsCl)" },
+          { id: "fluorite", label: "Fluorite (CaF₂)" },
+          { id: "perovskite", label: "Perovskite (SrTiO₃)" },
+          { id: "quartz", label: "Quartz (SiO₂)" },
+          { id: "graphene", label: "Graphene" },
         ],
       },
     ],
@@ -1590,8 +1961,20 @@ export const RECIPES = {
         diamond: diamondLattice,
         graphite: graphiteLattice,
         ice: () => iceLattice(k.rand),
+        iron: ironLattice,
+        copper: copperLattice,
+        "cesium-chloride": cesiumChlorideLattice,
+        fluorite: fluoriteLattice,
+        perovskite: perovskiteLattice,
+        quartz: quartzLattice,
+        graphene: grapheneLattice,
       }[o.crystal];
       const lat = (make || saltLattice)();
+      if (lat.tilt) {
+        // A flat sheet (graphene) tips toward the viewer.
+        const q = quatFromTo([0, 1, 0], unit(lerp([0, 1, 0], VIEW, 0.6)));
+        for (const a of lat.atoms) a.p = quatRotate(q, a.p);
+      }
       if (o.crystal === "ice") {
         // Tip ice towards the viewer so its six-sided channels show.
         const q = quatFromTo([0, 1, 0], unit(lerp([0, 1, 0], VIEW, 0.72)));

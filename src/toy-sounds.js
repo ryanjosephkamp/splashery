@@ -466,6 +466,20 @@ export const TOY_SOUNDS = {
   // A ping as the wave passes each part of the lattice.
   "crystal-lattice": { voice: "glass", notes: "C6 E6 G6 C7", step: 0.55, at: 0.3, decay: 0.6 },
 
+  // Lane Chemistry. On: the tile's soft click and a rising shimmer as the
+  // atom builds (each shell's note and the photon's ping are cues from the
+  // recipe). Off: a soft falling hush as it sinks back into its tile.
+  "periodic-table": {
+    on: [
+      { voice: "click", f: 2400, vol: 0.6 },
+      { voice: "shimmer", at: 0.15, f: 880, to: 2, decay: 2.2, vol: 0.45 },
+    ],
+    off: [
+      { voice: "whoosh", f: 700, to: 0.4, decay: 0.9, vol: 0.45 },
+      { voice: "click", at: 0.85, f: 1600, vol: 0.5 },
+    ],
+  },
+
   // ---- Gems -------------------------------------------------------------------------
   diamond: [
     { voice: "glass", f: 3520, decay: 1.2, bright: 0.9 },
