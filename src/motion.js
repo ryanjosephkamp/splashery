@@ -195,7 +195,8 @@ export class MotionDriver {
       }
       const cur = this.targets[key] ?? 0;
       this.setControl(key, cur > 0.5 ? 0 : 1);
-      return { key, value: this.targets[key], pick, point };
+      const toggle = this.controlDef(key).type === "toggle"; // UI r3
+      return { key, value: this.targets[key], pick, point, toggle };
     }
     this.hop(time);
     return { key: "hop", value: 1, pick, point };

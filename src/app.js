@@ -16,7 +16,7 @@ import {
 } from "./state.js";
 import { defaultEffects, effectDef } from "./effects.js";
 import { normalizePattern, flagInfo, loadFlags, DEFAULT_PATTERN } from "./patterns.js";
-import { Sound } from "./sound.js";
+import { Sound, soundEvents } from "./sound.js";
 import { specFor } from "./voices.js";
 import { toySound } from "./toy-sounds.js";
 import { normalizeGenerator, PROFILES } from "./generators.js";
@@ -695,7 +695,12 @@ class App {
     // A tap that picked an item (a xylophone bar) plays that item's note. A
     // long effect's sound (a tune) plays held, so it can pause and never
     // overlaps itself (UI r3).
-    if (r.long && r.pick === null) this.sound.playHeld(chosen, { key: "toy" });
+    // A toggle's long "on" tune (the music box's) plays held too, and stops
+    // when the toy is switched off (the lid closes, the tune stops).
+    const tune = r.pick === null && soundEvents(chosen).some((e) => e.t > 2);
+    if (r.toggle && !(r.value > 0.5)) this.sound.stopHeld("toy");
+    if ((r.long || (r.toggle && tune)) && r.pick === null)
+      this.sound.playHeld(chosen, { key: "toy" }); // prettier-ignore
     else this.sound.play(chosen, { key: "toy", pick: r.pick });
     this.ui.setMotion(player.scene.motion, player.motion.targets);
   }
