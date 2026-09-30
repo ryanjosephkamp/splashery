@@ -326,6 +326,68 @@
       "note": "Poly Haven's 1k glTF with only its color texture kept, as a GLB (tools/stm-samples.mjs). Not run through prepare-assets."
     }
   ],
+  "worlds": [
+    {
+      "id": "kloofendal_48d_partly_cloudy_puresky",
+      "use": "hybrid sky (dome and image-based light)",
+      "name": "Kloofendal 48d Partly Cloudy (Pure Sky)",
+      "authors": ["Greg Zaal", "Jarod Guest"],
+      "page": "https://polyhaven.com/a/kloofendal_48d_partly_cloudy_puresky",
+      "license": "CC0 1.0",
+      "out": "assets/worlds/sky/",
+      "tool": "tools/world-assets.mjs"
+    },
+    {
+      "id": "sand_01",
+      "use": "hybrid ground (sand)",
+      "name": "Sand 01",
+      "authors": ["Rob Tuytel"],
+      "page": "https://polyhaven.com/a/sand_01",
+      "license": "CC0 1.0",
+      "out": "assets/worlds/ground/",
+      "tool": "tools/world-assets.mjs"
+    },
+    {
+      "id": "rocky_terrain_02",
+      "use": "hybrid ground (grass)",
+      "name": "Rocky Terrain 02",
+      "authors": ["Amal Kumar"],
+      "page": "https://polyhaven.com/a/rocky_terrain_02",
+      "license": "CC0 1.0",
+      "out": "assets/worlds/ground/",
+      "tool": "tools/world-assets.mjs"
+    },
+    {
+      "id": "rock_ground",
+      "use": "hybrid ground (rock)",
+      "name": "Rock Ground",
+      "authors": ["Rob Tuytel"],
+      "page": "https://polyhaven.com/a/rock_ground",
+      "license": "CC0 1.0",
+      "out": "assets/worlds/ground/",
+      "tool": "tools/world-assets.mjs"
+    },
+    {
+      "id": "damp_beach_sand",
+      "use": "hybrid ground (wet)",
+      "name": "Damp Beach Sand",
+      "authors": ["Dimitrios Savva"],
+      "page": "https://polyhaven.com/a/damp_beach_sand",
+      "license": "CC0 1.0",
+      "out": "assets/worlds/ground/",
+      "tool": "tools/world-assets.mjs"
+    },
+    {
+      "id": "kenney-animated-characters-protagonists",
+      "use": "hybrid mesh character (model, skaterMaleA skin, idle and run)",
+      "name": "Animated Characters: Protagonists",
+      "authors": ["Kenney"],
+      "page": "https://kenney.nl/assets/animated-characters-protagonists",
+      "license": "CC0 1.0",
+      "out": "assets/worlds/character/",
+      "tool": "tools/world-character.mjs"
+    }
+  ],
   "photoSamples": [
     {
       "id": "forest",

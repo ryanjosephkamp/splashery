@@ -84,12 +84,12 @@ work is in [OPERATING.md](OPERATING.md).
   worlds wait until he has more information. He also asked to see the text layer the first page
   suggested: the Operator's #120 puts a PDF page's real words in the Toy tab, to read, copy and
   find.
-- The shelf has 304 toys (32 scans, 4 shapes and 268 kit toys), plus twelve labs toys hidden unless
-  `?labs=1` (the Picture lab, the splat equation, the Screen, Gaussian splatting, the song
-  landscape, the Chladni plate, the splat field, Model to splats, your book, the photo album, the
-  picture frame and the anatomy atlas). The plan (`tools/toy-plan.json`,
-  [TOY-PLAN.md](TOY-PLAN.md)): all 316 keep. Every planned new tap effect is built. Scene schema v3;
-  v2 still loads.
+- The shelf has 318 public toys (September 30, 2026), plus sixteen labs toys hidden unless `?labs=1`
+  (the Picture lab, the splat equation, the Screen, Gaussian splatting, the song landscape, the
+  Chladni plate, the splat field, Model to splats, your book, the photo album, the picture frame,
+  the anatomy atlas, Photo to 3D, the Fluid lab, and the soda can and water bottle waiting for the
+  Fluids engine). The plan (`tools/toy-plan.json`, [TOY-PLAN.md](TOY-PLAN.md)) has all 334. Scene
+  schema v3; v2 still loads.
 - Every kit toy's tap is checked by `tests/taps.spec.mjs`; its known exceptions (with reasons) are
   listed at its top. The full suite has 444 tests.
 - The governance from September 27 is merged (#53): the Operator runs the lanes, workers are Opus
@@ -123,6 +123,19 @@ work is in [OPERATING.md](OPERATING.md).
   Wikipedia book; Books r4 adds page focus. Machines B, the pilot game, the Forest template and new
   novelty toys are parked (BACKLOG.md). The toy ideas became weekly, and the digest and a new site
   patrol run as fresh Sonnet sessions.
+- The afternoon and evening of September 30, 2026: Fluids v1 merged (#121, the Fluid lab, labs),
+  then Worlds r2 (#108, a sharper island) and the hybrid round (#127: a lit ground model, water that
+  knows its depth, a photo sky, one sun with soft shadows, a mesh character to compare), both labs.
+  The owner's sound review (his notes of September 28) is filed (#139, #143):
+  `tools/sound-review.json` per toy, the rules in PACKS.md 7e, and since his call of September 30
+  new sounds go live before he hears them, with a Sonnet sound patrol. A helper's CC0 sound catalog
+  (#140) and a quality sweep of the 318 public toys (#149, `docs/audits/`) merged too. His other
+  calls that day: "shelves yes" (the crystal ball to Medieval, the donut to Food, a Torus in Shapes,
+  the tiny planet to Space; a Knots shelf later), "live input go", tap to pause long effects, and
+  the turntable off with the tilt lock on by default for the plotters, proofs, AI and computing,
+  Music, Open me, the chess set and the puzzle cube (lane UI r3). The Effect review page filled its
+  1 GB that evening, so new clips go on page 2 (OPERATING.md, "The Effect review page").
+  docs/WORLDS.md now words the hybrid mode's rule.
 - Locked (owner approved, do not change its look or behaviour): the laptop. Its smoke test guards
   it.
 
@@ -130,25 +143,34 @@ work is in [OPERATING.md](OPERATING.md).
 
 The full table, with owned files, sessions, branches and PRs, is [WORKSTREAMS.md](WORKSTREAMS.md).
 
-| Lane                                                                | Status                                                                                                                             | Handoff                                |
-| ------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
-| Operator                                                            | Running; runs the lanes                                                                                                            | —                                      |
-| Worlds r2 and hybrid: a sharper island, then a hybrid one           | Running, Opus 5.5 (r2 #108; the hybrid round from the owner's "Hybrid yes")                                                        | [handoff/Worlds.md](handoff/Worlds.md) |
-| Fluids: liquids, smoke and flames made of splats                    | Running, Opus 5.5 (September 29, 2026)                                                                                             | [handoff/Fluids.md](handoff/Fluids.md) |
-| Books r4: page focus, the turn's flash and the stapled paper's edge | Running, Opus 5.5 (r2 #112 and r3 #117/#123 merged; r4 #126 now)                                                                   | [handoff/Books.md](handoff/Books.md)   |
-| Integrator: combined test runs                                      | Running, Sonnet 5.5 (September 29, 2026)                                                                                           | —                                      |
-| Integrator 2: a second runner                                       | Running, Sonnet 5.5 (September 29, 2026)                                                                                           | —                                      |
-| Next (WORKSTREAMS.md, Next)                                         | Sound A and B, Science, Fix4, the real island, UI r2, the video-to-3D spike, Live input; later a web screen and the Wikipedia book | —                                      |
+| Lane                                                                            | Status                                                                                                 | Handoff                                |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ | -------------------------------------- |
+| Operator                                                                        | Running; runs the lanes                                                                                | —                                      |
+| Worlds r3: a premium character and a sharper island                             | Running, Opus 5.5 (r2 #108 and hybrid #127 merged; r3 #135)                                            | [handoff/Worlds.md](handoff/Worlds.md) |
+| Fluids r4: particle liquids, smoke and flames                                   | Running, Opus 5.5 (v1 #121 merged; r4 on its branch)                                                   | [handoff/Fluids.md](handoff/Fluids.md) |
+| Books r4: page focus, the turn's flash and the stapled paper's edge             | Running, Opus 5.5 (#126, in the combined test run)                                                     | [handoff/Books.md](handoff/Books.md)   |
+| Science: real science data as splats                                            | Running, Opus 5.5 (#132)                                                                               | `handoff/Science.md` (on its branch)   |
+| UI r2 and r3: focus, panels, pad and pan; tap to pause, quiet turntables        | Running, Opus 5.5 (#131 in the combined test run; #146)                                                | `handoff/UIr2.md` (on its branch)      |
+| Video 3D: a one-week spike                                                      | Running, Opus 5.5 (#133, engine #137)                                                                  | `handoff/Video3D.md` (on its branch)   |
+| Fix4 and Fix5: the owner's small fixes                                          | Running, Opus 5.5 (#134, engine #136 in the combined test run, #145)                                   | `handoff/Fix4.md` (on its branch)      |
+| Sound A: recorded samples, the sound lint and real sounds for the first shelves | Running, Opus 5.5 (engine #141, #142)                                                                  | `handoff/SoundA.md` (on its branch)    |
+| Sound B: real sounds for the other shelves                                      | Running, Opus 5.5 (#138)                                                                               | `handoff/SoundB.md` (on its branch)    |
+| Live input: microphone, camera and screen                                       | Running, Opus 5.5 (engine #144, #150)                                                                  | `handoff/LiveInput.md` (on its branch) |
+| Shelves: a torus, the donut in Food, the tiny planet in Space                   | Running, Opus 5.5 (engine #147, #148)                                                                  | `handoff/Shelves.md` (on its branch)   |
+| Integrator: combined test runs                                                  | Running, Sonnet 5.5 (September 29, 2026)                                                               | —                                      |
+| Integrator 2: a second runner                                                   | Running, Sonnet 5.5 (again since September 30, 2026)                                                   | —                                      |
+| Next (WORKSTREAMS.md, Next)                                                     | The real island, Quality (the sweep's list), Knots, Food r2; later a web screen and the Wikipedia book | —                                      |
 
 E4-finish, E5, E6a, E6b, F, G, Math, Fix3, AI, Help, HelpTextA, HelpTextB, Pictures, Manual and
 Screens are done, and so are Viewer, Studio Sound, Learn, Lab, Studio Models, Books, Fidelity A,
 Fidelity B, Worlds (the engine), Anatomy, the A/B toy piano and Character, and on September 30 the
 sharper default (Sharpness), the text layer, Chemistry, Machines A, Song live, Books r3, Photo to
-3D, Lab r2, Real objects, Screens r2 and Pianos (WORKSTREAMS.md, "Done"). On September 27, 2026 the
-owner approved the plan in Part 1 of the How Splashery Is Made page: the Operator runs the lanes,
-workers are Opus 5.5 only (at the default effort, a trial), new public text is in American English,
-and the work goes in the order in ROADMAP.md, "Now". Lanes AI and Math started that day, and the
-Sound Board has its review features, ready for the owner's sound notes.
+3D, Lab r2, Real objects, Screens r2, Pianos, Fluids v1, Worlds r2 and the hybrid round
+(WORKSTREAMS.md, "Done"). On September 27, 2026 the owner approved the plan in Part 1 of the How
+Splashery Is Made page: the Operator runs the lanes, workers are Opus 5.5 only (at the default
+effort, a trial), new public text is in American English, and the work goes in the order in
+ROADMAP.md, "Now". Lanes AI and Math started that day, and the Sound Board has its review features,
+ready for the owner's sound notes.
 
 On September 29, 2026 the owner reviewed the new labs toys
 ([reviews/2026-09-29-new-toys](reviews/2026-09-29-new-toys/review.md)): "very impressed", the

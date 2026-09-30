@@ -1,0 +1,28 @@
+{
+  "about": "Hybrid mode's mesh character (tools/world-character.mjs): the model, one skin and three clips (idle, walk made from the run, run) in one GLB.",
+  "name": "Animated Characters: Protagonists",
+  "skin": "skaterMaleA",
+  "authors": [
+    "Kenney"
+  ],
+  "page": "https://kenney.nl/assets/animated-characters-protagonists",
+  "license": "CC0 1.0",
+  "height": 376.469,
+  "clips": [
+    [
+      "idle",
+      1.07,
+      138
+    ],
+    [
+      "walk",
+      0.67,
+      138
+    ],
+    [
+      "run",
+      0.67,
+      138
+    ]
+  ]
+}
