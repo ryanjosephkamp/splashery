@@ -35,8 +35,9 @@ const LAB = { scene: "glass", tapN: 0 };
 // ---- Shared pieces ------------------------------------------------------------------------
 
 function wood(c) {
-  const g = 0.5 + 0.5 * Math.sin(c.p[0] * 40 + c.fbm(c.p[0] * 3, 0, c.p[2] * 12, 3) * 6);
-  return mix("#7a4f2c", "#a0703f", g * 0.7 + c.rand() * 0.05);
+  // A calm, low-frequency grain: fine noise reads as speckle at phone size.
+  const g = 0.5 + 0.5 * Math.sin(c.p[0] * 7 + c.fbm(c.p[0] * 1.2, 0, c.p[2] * 3, 2) * 2.5);
+  return mix("#7d5230", "#9a6a3c", g * 0.8);
 }
 
 // A glass, drawn by the fluid engine (kind "vessel"): clear where you look
@@ -241,7 +242,7 @@ export const RECIPES = {
     turntable: false,
     // The props need fewer splats than a toy's whole budget; the rest is left
     // for drawing the fluid.
-    density: 0.5,
+    density: 0.75,
     // Lab: the sharper splat edge (labs only, like this toy) keeps a liquid's
     // surface crisp instead of cloudy; smoke, steam and flames keep the soft
     // Gaussian. Read after build, so it follows the scene just built.
