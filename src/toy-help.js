@@ -1486,6 +1486,19 @@ export const TOY_HELP = {
     about:
       "In 1787 Ernst Chladni sprinkled sand on a metal plate and drew a violin bow along its edge. The plate shook, and the sand jumped away from the places that moved and gathered on the lines that stayed still, a different picture for each pitch. Those still lines are called nodal lines.\n\nTap to bow the plate: it hums at the mode's pitch and every grain of sand, a splat of its own, hops and slides until the figure appears. Tap again to stir the sand up. The Mode choice picks the pitch and the pattern. This toy uses the classic square-plate model, cos(nπx)·cos(mπy) ± cos(mπx)·cos(nπy) = 0, with a pitch that grows with n² + m².",
   },
+  // Lane Live input.
+  "room-echo": {
+    howTo:
+      "Tap “Use my microphone” in the Toy tab and clap once: the room's echo time shows on the back wall. A tap claps in a sample room.",
+    about:
+      "When a sound stops, a room keeps ringing for a moment as the sound bounces between its walls, fading a little at each bounce. The reverberation time, RT60, is how long it takes to fade by 60 dB, to a millionth of its energy. A living room with a sofa and curtains is around half a second; a stone church can be several seconds.\n\nTap “Use my microphone” and clap once, sharply. The page listens to your clap fade away, takes away the room's background hum, and fits a straight line to the decay (Schroeder's method, the one acousticians use), then shows the RT60 on the back wall. The rings on the floor are the sound spreading out, each as bright as the room still was at that moment, at half speed. If the room is too noisy for the clap to stand out, it says so. The sound stays on this device; nothing is recorded or sent.",
+  },
+  "splat-mirror": {
+    howTo:
+      "Tap “Use my camera” in the Toy tab to see yourself in splats, then turn the picture to see it in depth. Tap to flatten it.",
+    about:
+      "A mirror made of splats. Tap “Use my camera” and each splat takes the color of its place in the picture, so the mirror shows you, live.\n\nA depth model, Depth Anything V2 Small, then works out how near each part of the picture is, as often as your device can (several times a second on a computer), and each splat moves toward you by that much: your nose comes forward and the wall behind you stays back. Turn the picture to see the relief. It is a guess from one camera, so the depth is relative, like a sculptor's relief, not exact distances. The model (about 27 MB) loads only after you tap, and the pictures stay on this device; nothing is recorded or sent.",
+  },
   "song-landscape": {
     howTo:
       "Tap to play the song as a landscape. View: Live scrolls it with the music. Open your own song in the Toy tab.",

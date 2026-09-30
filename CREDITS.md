@@ -311,6 +311,11 @@ and others, Apache 2.0; the quantized ONNX build is by
 [ONNX Runtime Web](https://github.com/microsoft/onnxruntime) (MIT). Photos people open are processed
 in their browser and never uploaded.
 
+The Splat mirror (a labs toy, lane Live input) shows the same "Still Life with Cheese" (CC0 1.0)
+with its depth map until someone turns the camera on, and uses the same depth model, in a worker,
+for the camera's live depth. The live toys' test signals (claps, sung notes) are made by our own
+code; nothing from the microphone, the camera or a shared screen is recorded, stored or sent.
+
 ## National flags
 
 The pattern layer can wrap a national flag around any toy. The flags are SVG files from
@@ -328,4 +333,5 @@ Splashery is built on the [PlayCanvas engine](https://github.com/playcanvas/engi
 Pictures and pages use [PDF.js](https://github.com/mozilla/pdf.js) (Apache 2.0) and
 [omggif](https://github.com/deanm/omggif) (MIT), loaded only when someone opens a PDF or a GIF.
 Photo to 3D uses [ONNX Runtime Web](https://github.com/microsoft/onnxruntime) (MIT) and Depth
-Anything V2 Small (Apache 2.0), loaded only when someone opens a photo in that toy.
+Anything V2 Small (Apache 2.0), loaded only when someone opens a photo in that toy (or, in lane Live
+input's Splat mirror and Photo to 3D's live view, only after someone taps "Use my camera").
