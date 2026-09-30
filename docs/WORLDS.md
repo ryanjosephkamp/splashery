@@ -223,7 +223,7 @@ Node.
 | `terrain.js`        | The height field, what covers the ground, and each chunk's ground splats at each level (pure)           |
 | `water.js`          | Water chunks, the open sea around the world and the sky dome (pure)                                     |
 | `props.js`          | Prop types, baking toy recipes into still props, thinner far copies, the boulder, bush and signs (pure) |
-| `character.js`      | The character's rigid parts and joints, and its gait: idle, walk and run angles (pure)                  |
+| `character.js`      | The character: its API, the build shared out by area, and the splats per tier (pure; `character-*.js`)  |
 | `physics.js`        | Collision: the ground, water, steep slopes, and upright boxes, spheres and capsules (pure)              |
 | `camera.js`         | The follow camera: orbit, smoothing, never in the ground, sway when running (pure)                      |
 | `lod.js`            | The level-of-detail planner (pure)                                                                      |
@@ -236,13 +236,70 @@ Node.
 
 ### The character
 
-Eleven joints (`JOINTS` in `character.js`): the hips, the torso, the head, two upper arms, two
-forearms (elbows), two thighs and two shins (knees). The head has a face (eyes, brows, nose, mouth,
-ears) and hair; the clothes have a collar, short sleeves, a belt and shoes. Each part is a kit-built
-splat cloud around its own pivot, drawn by its own entity, and a joint only turns it: legs, arms and
-head swing as solid pieces, and nothing bends or stretches. The gait's phase moves with the distance
-walked, so the feet keep pace with the ground at any speed. Walking is 1.9 m/s and running (Shift,
-or the stick pushed all the way) 4.6 m/s.
+(Lane Character, September 29, 2026.) A person about 7.5 heads tall (1.74 m) in a long-sleeved crew
+neck top, straight-leg trousers and sneakers, sculpted with the kit in four modules:
+
+| Module                | What it holds                                                                                                    |
+| --------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `character.js`        | The public API (`JOINTS`, `BODY`, `buildCharacter`, `pose`, `stepGait`, `CHARACTER_SPLATS`) and the build        |
+| `character-rig.js`    | `BODY` (sizes, `radius` for collision, the shoe's heel and ball), `JOINTS`, and the rotation math (`solve`)      |
+| `character-body.js`   | The sculpt: lofts, rods and signed-distance shapes for every part, and the colors that follow from the look      |
+| `character-motion.js` | The gait: the feet's paths, the hips' height, two-bone reach for the legs, the spine, arms, head and idle motion |
+
+**Joints.** Twenty-one (`JOINTS`): the hips, the abdomen (`torso`), the chest, the neck, the head,
+the upper arms (`armL`, `armR`), forearms (`foreL`, `foreR`), hands, fingers (the four fingers of a
+hand curl together at the knuckles; the thumb is part of the hand), thighs, shins, feet and toes
+(the front of the shoe, hinged at the ball). `L` is the character's left, at +x. Each part is one
+rigid splat cloud around its own pivot, drawn by its own entity; a joint only turns it. The joints
+are hidden as real clothes hide them: a rounded cap of cloth centered on each pivot (the shoulders,
+elbows and knees, the same from every angle, so turning never opens a gap), sleeves over the wrists,
+trouser legs over the shoe tops, the top's hem over the waistband, and a short cylinder of shoe on
+the toes' hinge. `tests/chr.spec.mjs` looks at every joint from every side through a walk and a run
+and fails if a sight line gets through.
+
+**The look.** The world file's `character` colors (`shirt`, `trousers`, `skin`, `hair`, `shoes`) set
+everything; the soles, laces, lips, brows, socks and the eyes' color follow from them (`palette()`
+in `character-body.js`: blue-gray eyes with light hair, brown with dark). The head is one
+signed-distance shape (the skull, cheekbones, jaw, chin, brow ridge, eye sockets, nose and lips)
+with painted brows, nostrils and a little warmth on the cheeks; the eyes have whites, irises,
+pupils, a catch light and lids with a lash line. The hair is short at the sides (fading into the
+skin) and longer on top with a side-swept fringe: a dark inner layer and an outer layer of long
+splats laid along the hair's flow from the crown.
+
+**Sharpness.** Fidelity A's method: even placement on every surface, full opacity, flat splats,
+clean colors lit by one soft light, and one density over the whole figure (the splats are shared out
+by area; the head, hands and shoes get more per square meter). Surfaces hidden inside others are
+left out where their color differs (the sole's top under the upper), or they show through as
+speckle.
+
+**Motion.** The feet lead. A planted foot stays where it landed: it strikes with the heel (toes up),
+rolls flat, then rolls onto the ball as the heel lifts, the toes staying flat on the ground; a
+swinging foot leaves and lands at the ground's speed, and when running the heel folds up under the
+hips on the way through. The hips ride as high as both legs allow (they dip as the legs spread;
+running, they sink into each landing and float between), sway over the planted foot and turn with
+the leg that reaches forward, with the shoulders turning against them. Each leg reaches its foot by
+two-bone inverse kinematics (the knee bends forward), and the ankle and toes turn the shoe to match,
+so the feet don't slide (the tests hold drift under 5 mm). The arms swing opposite the legs with the
+elbows bent (about 90 degrees when running, with loose fists); the body leans a little into a run,
+and the head keeps level. Standing, the character breathes, shifts its weight from foot to foot
+every few seconds (the feet stay put) and now and then glances to one side. The phase moves with the
+distance walked (`strideAt(speed)`: 1.4 m per stride walking, 3 m running), so the feet keep pace
+with the ground at any speed. Walking is 1.9 m/s and running (Shift, or the stick pushed all the
+way) 4.6 m/s.
+
+`pose(gait, time)` returns `{ joints, bob, hips, feet }`: every joint's Euler angles in degrees (as
+PlayCanvas applies them, `R = Rz · Ry · Rx`), the hips' rise from standing, their sideways sway
+(`hips: [x, 0, z]`, which `world.placeCharacter()` applies) and each foot's state. `solve(pose)`
+gives every joint's place and rotation in the character's space.
+
+**Budget.** The character is always drawn in full, so its splats come from the tier
+(`CHARACTER_SPLATS`): 40,000 on low, 64,000 on mid, 90,000 on high and 120,000 on max (the build
+comes out about 5% under). Building it takes about a second on a computer.
+
+**Tools.** `node tools/chr-view.mjs out.png --views=front,side,face` renders the character on its
+own from named views (`--speed=1.9 --strip=8` for a strip through a stride), and
+`node tools/chr-clip.mjs <dir> closeup idle walk run colors before-after` records the review clips
+(the walk and run start on the Test island with the follow camera).
 
 ### The camera
 

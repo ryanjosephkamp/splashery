@@ -130,6 +130,40 @@ data files are in the public domain under
 | [1EMA](https://www.rcsb.org/structure/1EMA) | Green fluorescent protein from _Aequorea victoria_ (1996) | M. Ormö, S. J. Remington                                            |
 | [4HHB](https://www.rcsb.org/structure/4HHB) | Human deoxyhaemoglobin at 1.74 Å (1984)                   | G. Fermi, M. F. Perutz                                              |
 
+## Chemistry data (lane Chemistry)
+
+The periodic table, the atom toy's 118 elements, the molecule gallery and the DNA come from
+published data. Facts and numbers are not copyrightable; the sources are credited here and in each
+toy's About tab. `tools/chs-data.mjs` and `tools/chs-molecules.mjs` fetch them again.
+
+- Mass numbers (the most abundant isotope, or the longest-lived one in brackets): NIST,
+  [Atomic Weights and Isotopic Compositions](https://www.nist.gov/pml/atomic-weights-and-isotopic-compositions-relative-atomic-masses)
+  (Coursey, Schwab, Tsai and Dragoset), for elements 1 to 94; PubChem's
+  [Periodic Table](https://pubchem.ncbi.nlm.nih.gov/periodic-table/) for 95 to 108; the IUPAC
+  [Periodic Table of the Elements](https://iupac.org/what-we-do/periodic-table-of-elements/) (May
+  4, 2022) for 109 to 118.
+- Ground-state electron configurations: the
+  [NIST Atomic Spectra Database](https://physics.nist.gov/asd) (Kramida, Ralchenko, Reader and the
+  NIST ASD Team), ionization energies and ground levels, for 1 to 108; PubChem's predicted
+  configurations for 109 to 118.
+- Emission lines (the photon's color): the strongest visible line (380 to 750 nm) of each element's
+  neutral atom, or of its ion when the atom has none there, from the NIST
+  [Handbook of Basic Atomic Spectroscopic Data](https://www.nist.gov/pml/handbook-basic-atomic-spectroscopic-data)
+  (Sansonetti and Martin), elements 1 to 99. The color of a wavelength follows Dan Bruton's
+  approximation of the visible spectrum.
+- Element families: PubChem's Periodic Table (NCBI, public domain).
+- Molecule gallery: PubChem 3D conformers (public domain) of CIDs 5793 (glucose), 5988 (sucrose),
+  2244 (aspirin), 1983 (paracetamol), 3672 (ibuprofen), 5904 (penicillin G), 54670067 (vitamin C),
+  681 (dopamine), 5202 (serotonin), 5816 (adrenaline), 896 (melatonin), 6305 (tryptophan), 1548943
+  (capsaicin), 1183 (vanillin), 1254 (menthol), 311 (citric acid), 5997 (cholesterol), 6013
+  (testosterone) and 5957 (ATP).
+- DNA: base pairs 3 to 6 of [1BNA](https://www.rcsb.org/structure/1BNA), the B-DNA dodecamer (1981;
+  H. R. Drew, R. M. Wing, T. Takano, C. Broka, S. Tanaka, K. Itakura, R. E. Dickerson), wwPDB,
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/); its hydrogens are added at the
+  usual bond lengths.
+- Crystals: lattice constants at room temperature; alpha quartz's positions after Le Page and Donnay
+  (1976).
+
 ## Word vectors
 
 The word vectors toy uses [GloVe](https://nlp.stanford.edu/projects/glove/) word vectors (Wikipedia

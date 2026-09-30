@@ -136,6 +136,8 @@ class App {
     player.on("paint", (n) => ui.setPaintCount(n));
     player.on("toy", (info) => this.onToy(info));
     player.on("action", (r) => this.onAction(r));
+    // A tap that switches the toy's options rebuilds it the way the Toy tab does.
+    player.rebuild = (options) => this.setToyOptions(options);
     player.on("cue", (cues) => {
       for (const spec of cues) this.sound.play(spec, { key: "cue" });
     });
@@ -639,6 +641,12 @@ class App {
     // The toy's own sound (src/toy-sounds.js), else the recipe's, else a
     // plain hop or pop. A toggle plays its on or off half.
     const toy = player.scene.toy;
+    // The second half of a tap that switched the toy (Player.switchTo) has
+    // already sounded.
+    if (r.echo) {
+      this.ui.setMotion(player.scene.motion, player.motion.targets);
+      return;
+    }
     const own = toy.kind === "builtin" ? toySound(toy.id) : null;
     // Some taps (a laptop key) make their own sound through cues.
     if (recipe?.action?.quiet?.includes(r.key)) {
@@ -747,6 +755,11 @@ class App {
     const p = this.player.pictures;
     if (!p) return;
     p.go(p.page + delta);
+  }
+
+  // A page by its number (from 0), for the words box's search results.
+  pictureGo(n) {
+    this.player.pictures?.go(n);
   }
 
   // A video's place, from the Toy tab's scrub bar (lane Books).

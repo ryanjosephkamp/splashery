@@ -7,7 +7,7 @@
 import { Terrain, TERRAIN_LEVELS, BLADES, groundShare } from "./terrain.js";
 import { buildWater, buildSky, buildOcean, WATER_LEVELS } from "./water.js";
 import { bakeProp, thinOut, buildSign, PROP_TYPES, PROP_STRIDES } from "./props.js";
-import { buildCharacter, JOINTS, BODY, pose, stepGait, WALK_SPEED, RUN_SPEED } from "./character.js"; // prettier-ignore
+import { buildCharacter, JOINTS, BODY, pose, stepGait, WALK_SPEED, RUN_SPEED, CHARACTER_SPLATS } from "./character.js"; // prettier-ignore
 import { Physics } from "./physics.js";
 import { FollowCamera } from "./camera.js";
 import { planLevels } from "./lod.js";
@@ -357,7 +357,8 @@ export class World {
   }
 
   buildCharacter() {
-    const parts = buildCharacter(this.def.character, { count: Math.round(60000 * Math.min(1.25, Math.max(0.6, this.budget.props))), seed: this.def.seed }); // prettier-ignore
+    // Lane Character: the character's splats per tier (CHARACTER_SPLATS).
+    const parts = buildCharacter(this.def.character, { count: CHARACTER_SPLATS[this.tier] ?? CHARACTER_SPLATS.mid, seed: this.def.seed }); // prettier-ignore
     const view = this.view;
     const root = view.group("character");
     const joints = { root };
@@ -615,7 +616,9 @@ export class World {
       return;
     }
     const p = pose(c.gait, this.time);
-    j.hips.setLocalPosition(0, BODY.hip + p.bob, 0);
+    // Lane Character: the hips also sway sideways (p.hips).
+    const h = p.hips || [0, 0, 0];
+    j.hips.setLocalPosition(h[0], BODY.hip + p.bob, h[2]);
     for (const name in p.joints) {
       const a = p.joints[name];
       j[name].setLocalEulerAngles(a[0], a[1], a[2]);

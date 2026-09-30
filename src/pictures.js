@@ -13,11 +13,13 @@
 // - GIFs and videos use screen sheets: the splats are built once and take
 //   their colors from the sheet's own texture, which each new frame
 //   uploads.
+// - A PDF's words: pics.text(n) in the API reads a page's text layer, for
+//   the Toy tab's words box (to read, select, copy and find them).
 //
 // A recipe places sheets with k.sheet(...) and picks each one's page in
 // drive(): out.sheets[id] = { page, visible }. The pictures API is
 // info.data.pictures in drive (page, count, kind, next(), prev(), go(n),
-// togglePlay(), playing).
+// togglePlay(), playing, and hold(on) and held for a GIF held on its frame).
 
 import * as pc from "./pc.js";
 import { buildSheet } from "./picture-splats.js";
@@ -125,6 +127,11 @@ export class Pictures {
     this.busy = false;
     this.pending = null;
     this.gifTime = 0;
+    // A GIF held on its frame (lane Screens r2: the Screen holds it while
+    // switched off): its clock stops while held and goes on from there.
+    this.gifHeldAt = null; // the player's time when it was held, or null
+    this.gifLost = 0; // seconds of the player's time spent held
+    this.lastTime = 0;
     this.frameDirty = false;
     this.sound = false;
     this.retiring = []; // sheets swapped for bigger ones, freed a few frames on
@@ -141,6 +148,8 @@ export class Pictures {
     this.unwatch = null;
     this.media = media;
     this.page = 0;
+    this.gifHeldAt = null;
+    this.gifLost = 0;
     this.cache.clear();
     for (const sh of this.sheets) sh.shown = null;
     if (media?.kind === "video") {
@@ -183,12 +192,19 @@ export class Pictures {
         return self.media?.name ?? "";
       },
       get playing() {
-        return self.media?.kind === "video" ? self.media.playing : self.media?.kind === "gif";
+        const k = self.media?.kind;
+        return k === "video" ? self.media.playing : k === "gif" && self.gifHeldAt === null;
       },
       next: () => this.go(this.page + 1),
       prev: () => this.go(this.page - 1),
       go: (n) => this.go(n),
       togglePlay: () => this.togglePlay(),
+      // Holds a GIF on the frame it shows (true), or lets it play on from
+      // there (false); lane Screens r2. Nothing for other media.
+      hold: (on) => this.hold(on),
+      get held() {
+        return self.gifHeldAt !== null;
+      },
       // Lane Books: whether sheet `id` shows (or holds, hidden) the page it
       // was last asked for, and a picture's shape (width over height).
       ready: (id) => {
@@ -196,6 +212,9 @@ export class Pictures {
         return !!sh && !!sh.want && sh.shown?.key === sh.want.key;
       },
       aspect: (n = this.page) => self.media?.aspect?.(n) ?? 0,
+      // A PDF page's words, from its text layer (the Toy tab's words box):
+      // a promise of a string, "" for a page without one or other media.
+      text: (n = this.page) => self.text(n),
       // A video's time and length (seconds), and a seek (lane Books, for
       // lane Screens); 0 for anything else.
       get time() {
@@ -260,6 +279,17 @@ export class Pictures {
     return !m.playing;
   }
 
+  hold(on) {
+    const held = this.gifHeldAt !== null;
+    if (!!on === held) return;
+    if (on) this.gifHeldAt = this.lastTime;
+    else {
+      this.gifLost += Math.max(0, this.lastTime - this.gifHeldAt);
+      this.gifHeldAt = null;
+    }
+    this.stage.requestRender();
+  }
+
   info() {
     const m = this.media;
     return {
@@ -269,6 +299,15 @@ export class Pictures {
       page: this.page,
       playing: m?.kind === "video" ? m.playing : false,
     };
+  }
+
+  // Page n's words (from 0), or "" when the media has no text layer (a
+  // picture, a video, a scanned page) or the page can't be read.
+  text(n = this.page) {
+    const m = this.media;
+    const i = Math.round(n);
+    if (!m?.text || !(i >= 0 && i < m.count)) return Promise.resolve("");
+    return m.text(i).catch(() => "");
   }
 
   // ---- Geometry -----------------------------------------------------------------------
@@ -328,6 +367,7 @@ export class Pictures {
   // is missing (one at a time) and uploads new video and GIF frames.
   update(out, time) {
     if (this.destroyed) return;
+    this.lastTime = time;
     for (const r of this.retiring) if (--r.frames <= 0) this.stage.removeSheet(r.slot);
     this.retiring = this.retiring.filter((r) => r.frames > 0);
     if (this.retiring.length) this.stage.requestRender(200);
@@ -379,12 +419,12 @@ export class Pictures {
     this.pump();
     // Live frames for screen sheets.
     if (m?.kind === "gif") {
-      const f = m.frameAt(time);
+      const f = m.frameAt((this.gifHeldAt ?? time) - this.gifLost);
       if (f !== this.gifFrame) {
         this.gifFrame = f;
         this.uploadFrame(f);
       }
-      this.stage.requestRender();
+      if (this.gifHeldAt === null) this.stage.requestRender();
     } else if (m?.kind === "video" && this.frameDirty) {
       this.frameDirty = false;
       this.uploadFrame(0);
