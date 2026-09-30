@@ -105,8 +105,11 @@ mid and high tiers, adapt on drag): don't touch those blocks. The laptop is lock
 
 Model: Opus 5.5 (claude-opus-5-5), default effort.
 
-- September 29, 2026: the fluid engine and the Fluid lab are built and on the branch (draft PR
-  #121). Clips and cards next.
+- September 30, 2026: the fluid engine and the Fluid lab are on the branch (draft PR #121), the full
+  suite passes, and six cards are on the Effect review page in the lane record `Fluids`: `fl-pour`,
+  `fl-splash`, `fl-soda`, `fl-smoke`, `fl-flame`, `fl-phone` (clips by `tools/fl-clip.mjs` at
+  390×844, device scale 3, mid tier; the card by `tools/fl-measure.mjs`). Waiting on the owner's
+  marks; checking them hourly.
 - Engine (`src/fluids/`, docs/FLUIDS.md): position-based fluids with a wall density term, cohesion
   and XSPH viscosity (water, soda, syrup, honey, lava), diffuse spray, foam and bubbles (soda fizz
   and a foam head), curl-field smoke and steam, flames with a real color ramp, sparks and a smoke
@@ -140,10 +143,13 @@ Model: Opus 5.5 (claude-opus-5-5), default effort.
 ## Known issues
 
 - Colliders don't move with parts yet (no tipping jug, no stirring spoon).
-- On the mid tier's stand-in (4× CPU throttling) the glass pour's solver takes a little more than a
-  30 fps frame; it runs in the worker, so the drawing keeps its rate and the pour runs a little
-  slower than real time.
-- The soda's foam head covers the middle of the glass more than its edge.
+- Every scene fits a 30 fps frame on the mid tier's stand-in (4× CPU throttling; the soda pour is
+  the tightest at 29 ms). The high tier's 2× stand-in is over for the pours (34 to 48 ms), but it is
+  pessimistic for the desktops it covers; at 1× the high budget takes about 17 ms.
+- The soda's foam head covers the middle of the glass more than its edge, and the cola looks a
+  little muddy.
+- At the mid tier's particle budget, the splash basin's pool looks a little mottled and the falling
+  ball reads as an oval.
 
 ## For the Operator
 
