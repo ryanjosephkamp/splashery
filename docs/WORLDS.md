@@ -323,12 +323,30 @@ mode (on by default) to draw and sort every chunk, prop and body part together.
 The budget is the most splats drawn at once, set per device tier (`WORLD_BUDGETS` in `tiers.js`).
 The tier comes from the same rules as the toy player's (`?profile=low|mid|high|max` forces one):
 
-| Tier   | Budget    | Ground density | Near / middle distance | Prop detail | Grass |
-| ------ | --------- | -------------- | ---------------------- | ----------- | ----- |
-| `low`  | 300,000   | 0.5            | 7 m / 30 m             | 0.6         | 0.4   |
-| `mid`  | 550,000   | 0.75           | 9 m / 38 m             | 0.9         | 0.7   |
-| `high` | 900,000   | 1              | 12 m / 50 m            | 1.2         | 1     |
-| `max`  | 1,400,000 | 1.3            | 15 m / 64 m            | 1.5         | 1.3   |
+| Tier   | Budget    | Ground density | Near / middle distance | Prop detail | Grass | Pixel ratio |
+| ------ | --------- | -------------- | ---------------------- | ----------- | ----- | ----------- |
+| `low`  | 300,000   | 0.5            | 7 m / 30 m             | 0.6         | 0.4   | up to 1.5   |
+| `mid`  | 550,000   | 0.75           | 9 m / 38 m             | 0.9         | 0.7   | up to 2     |
+| `high` | 900,000   | 1              | 12 m / 50 m            | 1.2         | 1     | up to 3     |
+| `max`  | 1,400,000 | 1.3            | 15 m / 64 m            | 1.5         | 1.3   | up to 3     |
+
+### Render settings
+
+- **Pixel ratio.** The canvas draws at the device's pixel ratio, up to the tier's cap (the table).
+  Lane Sharpness measured (#107) that a 3x phone drawn at 3x has narrower edges and less speckle
+  than at 2x, at about twice the cost, so only the high and max tiers go to 3. `?dpr=1.5` (or any
+  number) overrides it.
+- **Kernel.** Every tier draws with lane Lab's sharp kernel (`src/kernels.js`: a flatter top and a
+  steeper edge than the Gaussian, blending back to the Gaussian for tiny splats). On the Test island
+  it halves the measured speckle at no cost in splats. `?kernel=gaussian` shows the engine's own.
+- **How the ground is built for sharpness.** An even, flat carpet: one splat per cell of a jittered
+  grid, all nearly the same size and nearly round, lying on the ground and fully opaque, colored by
+  smooth functions with almost no per-splat noise. Grass blades take the ground's own color, a
+  little lighter or darker, so they read as texture rather than flecks. Water splats are round and
+  even too, and the waves bring the moving light.
+- **Measuring grain.** `node tools/world-grain.mjs <out-dir> --label=<name>` renders four fixed
+  views (the ground, the shore, the props, the aerial view) at 390×844 and 2x and prints each one's
+  speckle, the way lanes Lab and Sharpness measure toys.
 
 The ground is at level 0 within the near distance, 1 within 2.2 times it, 2 within the middle
 distance, 3 within 2.2 times that, and 4 beyond. Props (whose detail matters more) are at level 0

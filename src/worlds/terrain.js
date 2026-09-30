@@ -9,7 +9,7 @@
 
 import { mulberry32, createNoise3, mixSeed } from "../noise.js";
 import { SplatBuffer, discRotation } from "../generators.js";
-import { rgb, mix, smoothstep, clamp } from "../kit.js";
+import { rgb, mix, shade, smoothstep, clamp } from "../kit.js";
 
 const TAU = Math.PI * 2;
 
@@ -215,10 +215,12 @@ export class Terrain {
         if (h < floor) continue;
         const n = this.normalAt(x, z);
         const col = this.colorAt(x, z, h, n, r);
-        const s = size * Math.exp((r() - 0.5) * 0.35);
+        // Flat, nearly round, nearly the same size: an even carpet reads
+        // as solid ground (uneven sizes and shapes read as grain).
+        const s = size * Math.exp((r() - 0.5) * 0.14);
         buf.push(
           [x - chunk.x0, h - this.water, z - chunk.z0],
-          [s, s * (0.8 + 0.3 * r()), s * 0.18],
+          [s, s * (0.92 + 0.1 * r()), s * 0.12],
           discRotation(n, r() * TAU),
           [col[0], col[1], col[2], 1],
         );
@@ -236,7 +238,11 @@ export class Terrain {
       const tall = 0.06 + 0.08 * r();
       const lean = r() * TAU;
       const dir = unit3([Math.cos(lean) * 0.35, 1, Math.sin(lean) * 0.35]);
-      const col = mix(mix(c.grass, c.grassLight, r()), c.grassDark, r() * 0.5);
+      // A blade takes the ground's own color, a little lighter or darker,
+      // so blades read as texture rather than as flecks.
+      const base = this.colorAt(x, z, h, n, r);
+      const col =
+        r() < 0.75 ? mix(base, c.grassLight, 0.12 + 0.22 * r()) : shade(base, 0.82 + 0.1 * r());
       buf.push(
         [
           x - chunk.x0 + dir[0] * tall,
