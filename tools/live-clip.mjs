@@ -314,6 +314,10 @@ for (let n = 0; n < total; n++) {
     },
     { step, audio: !!audio },
   );
+  // A clip starts once the toy is built (leading frames under the progress box are dropped).
+  if (!frames.length && n < total - 1 && !(await page.evaluate(() => document.getElementById("progress").hidden))) continue; // prettier-ignore
+  // The first screenshots can still show the page as it was before the clock was taken over.
+  if (n < 2) continue;
   const png = PNG.sync.read(await page.screenshot());
   frames.push({ png, t });
 }
