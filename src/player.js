@@ -503,6 +503,7 @@ export class Player {
       recipe.screen.reset?.();
     }
     this.startPictures(ctx, toy, recipe, options); // Pictures
+    this.startFluids(ctx, token); // Fluids
     const b = ctx.buf.bounds();
     for (const r of ctx.reaches || []) {
       for (let k = 0; k < 3; k++) {
@@ -691,11 +692,30 @@ export class Player {
 
   disposeProcedural() {
     this.proc = null;
+    // Fluids: the old toy's fluids stop with it.
+    this.fluids?.destroy();
+    this.fluids = null;
     // Pictures: the old toy's sheets go with it.
     if (this.pictures) this.camera.setTurntable(this.scene.autoplay.turntable);
     this.pictures?.destroy();
     this.pictures = null;
     this.stage.setPictureCulling(false);
+  }
+
+  // ---- Fluids (lane Fluids) -------------------------------------------------------------
+  // A kit toy whose recipe declared k.fluid(...) gets its fluids simulated
+  // and drawn (src/fluids/runtime.js). The module loads only then, so the
+  // shelf and embeds never fetch it.
+  async startFluids(ctx, token) {
+    const specs = ctx.kit?.fluids;
+    if (!specs?.length) return;
+    const { FluidRuntime } = await import("./fluids/runtime.js");
+    if (token !== this.loadToken || this.proc?.ctx !== ctx) return;
+    this.fluids = new FluidRuntime(this.stage, specs, {
+      profile: this.profile,
+      seed: ctx.g?.seed ?? 1,
+      transform: ctx.transform,
+    });
   }
 
   // ---- Pictures (lane Pictures) ----------------------------------------------------
@@ -1344,6 +1364,8 @@ export class Player {
     }
     this.pictures?.update(this.motion.out, this.time); // Pictures
     const gliding = this.followView(); // Page focus
+    // Fluids: step the toy's fluids on its own clock, steered by out.fluid.
+    if (this.fluids && info.kind === "kit") this.fluids.frame(u.uSpKit[0], this.motion.out?.fluid);
     if (this.motion.addonU) {
       this.stage.setAddonUniforms({ ...u, ...this.motion.addonU, uSpPat: [0, 0, 0, 0] });
     }
