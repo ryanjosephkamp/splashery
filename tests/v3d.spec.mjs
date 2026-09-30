@@ -115,6 +115,7 @@ test("the scene frame puts the cameras' up at +y and the video's view toward -z"
     opacity: new Float32Array([1, 1, 1]),
   };
   const f = sceneFrame(splats, [cam], { fit: 0.95 });
+  expect(f.around).toBe(false); // one camera: no point the views meet
   const c = toyCamera(f, cam);
   expect(c.pos.map((v) => +v.toFixed(3))).toEqual([0, 0, 4.75]);
   expect(c.forward.map((v) => +v.toFixed(3) + 0)).toEqual([0, 0, -1]);

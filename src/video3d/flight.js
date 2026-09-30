@@ -44,6 +44,20 @@ const forwardOf = (yaw, pitch) => [
   -Math.cos(pitch) * Math.cos(yaw),
 ];
 
+// Puts the orbit camera at a path camera: it looks at the point of its line of sight nearest the
+// scene's middle (so a turn goes around the scene), or just ahead when that is behind it or too
+// close.
+function place(cam, p) {
+  const f = forwardOf(p.yaw, p.pitch);
+  const along = -(p.pos[0] * f[0] + p.pos[1] * f[1] + p.pos[2] * f[2]);
+  const d = Math.max(cam.minDistance * 1.02, Math.min(cam.maxDistance * 0.98, along));
+  cam.target = [p.pos[0] + f[0] * d, p.pos[1] + f[1] * d, p.pos[2] + f[2] * d];
+  const pose = { yaw: p.yaw, pitch: p.pitch, roll: p.roll, distance: d };
+  cam.cur = { ...pose };
+  cam.tgt = { ...pose };
+  cam.vel.yaw = cam.vel.pitch = 0;
+}
+
 // The flight for one built scene. media: { file, start } for a video somebody opened (its sound
 // plays), or null (a sample: no sound). Returns drive's hook: fly(v, info), v the Replay toggle.
 export function makeFlight(cams, media) {
@@ -77,6 +91,12 @@ export function makeFlight(cams, media) {
   const fly = (v, info) => {
     const cam = cameraOf();
     if (!cam || !cams.length) return;
+    if (!st.homed) {
+      // The toy opens where the video starts: the first camera's place and view.
+      st.homed = true;
+      place(cam, path.at(path.start));
+      cam.home = { ...cam.cur };
+    }
     if (v > 0.001 && !st.active && !st.leaving) {
       st.active = true;
       st.done = false;
@@ -94,14 +114,7 @@ export function makeFlight(cams, media) {
         }
         return; // the camera stays at the path's end: a drag roams from there
       }
-      const p = path.at(time);
-      const d = cam.minDistance * 1.02;
-      const f = forwardOf(p.yaw, p.pitch);
-      cam.target = [p.pos[0] + f[0] * d, p.pos[1] + f[1] * d, p.pos[2] + f[2] * d];
-      const pose = { yaw: p.yaw, pitch: p.pitch, roll: p.roll, distance: d };
-      cam.cur = { ...pose };
-      cam.tgt = { ...pose };
-      cam.vel.yaw = cam.vel.pitch = 0;
+      place(cam, path.at(time));
       cam.turntable = false;
       cam.idleFor = 0;
       st.endTarget = cam.target.slice();

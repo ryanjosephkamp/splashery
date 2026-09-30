@@ -36,10 +36,11 @@ function quantile(values, q) {
 
 // The frame: { M (rows: the toy's x, y, z axes in the world), center, scale, keepRadius }.
 // splats: { count, pos, opacity }; cams: [{ R, t }].
-// fit: where the bulk of the scene (90% of its solid splats) ends up; keep: how far out splats are
-// kept, as a multiple of that (the default keeps everything inside the unit sphere, as the kit's
-// own toys are).
-export function sceneFrame(splats, cams, { fit = 0.7, keep = 0.995 / fit } = {}) {
+// The size: around something (the views meet), the cameras end up `orbit` from its middle; past
+// something, half of the solid splats end up within `fit` of the middle (far things, the sky and
+// the skyline, would otherwise shrink the near ones to nothing). Splats beyond `keep` (the unit
+// sphere, as the kit's own toys are) are left out.
+export function sceneFrame(splats, cams, { fit = 0.45, orbit = 1.6, keep = 0.995 } = {}) {
   let up = [0, 0, 0];
   let fwd = [0, 0, 0];
   for (const c of cams) {
@@ -70,10 +71,67 @@ export function sceneFrame(splats, cams, { fit = 0.7, keep = 0.995 / fit } = {})
     ys.push(splats.pos[i * 3 + 1]);
     zs.push(splats.pos[i * 3 + 2]);
   }
-  const center = xs.length ? [quantile(xs, 0.5), quantile(ys, 0.5), quantile(zs, 0.5)] : [0, 0, 0]; // prettier-ignore
+  // The middle: for a walk or flight around something, the point all the cameras look at; for a
+  // street or a flight past, where the views do not meet, the middle of the solid splats.
+  const look = lookAtPoint(cams);
+  const center =
+    look || (xs.length ? [quantile(xs, 0.5), quantile(ys, 0.5), quantile(zs, 0.5)] : [0, 0, 0]);
   const d = xs.map((_, i) => Math.hypot(xs[i] - center[0], ys[i] - center[1], zs[i] - center[2]));
-  const r90 = quantile(d, 0.9) || 1;
-  return { M, center, scale: fit / r90, keepRadius: keep * r90 };
+  let scale = fit / (quantile(d, 0.5) || 1);
+  if (look) {
+    const cd = cams.map((c) => {
+      const C = camCenter(c);
+      return Math.hypot(C[0] - center[0], C[1] - center[1], C[2] - center[2]);
+    });
+    scale = orbit / (quantile(cd, 0.5) || 1);
+  }
+  return { M, center, scale, keepRadius: keep / scale, around: !!look };
+}
+
+// The point closest to every camera's line of sight (least squares), or null when the views are
+// close to parallel (a street, a flight past) or the point is behind the cameras.
+export function lookAtPoint(cams) {
+  if (cams.length < 3) return null;
+  const A = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+  const b = [0, 0, 0];
+  let mean = [0, 0, 0];
+  for (const c of cams) {
+    const f = norm([c.R[6], c.R[7], c.R[8]]);
+    const C = camCenter(c);
+    mean = [mean[0] + f[0], mean[1] + f[1], mean[2] + f[2]];
+    for (let i = 0; i < 3; i++)
+      for (let j = 0; j < 3; j++) {
+        const m = (i === j ? 1 : 0) - f[i] * f[j];
+        A[i * 3 + j] += m;
+        b[i] += m * C[j];
+      }
+  }
+  // Views that all point the same way do not meet anywhere useful.
+  if (Math.hypot(...mean) / cams.length > 0.995) return null;
+  const det =
+    A[0] * (A[4] * A[8] - A[5] * A[7]) -
+    A[1] * (A[3] * A[8] - A[5] * A[6]) +
+    A[2] * (A[3] * A[7] - A[4] * A[6]);
+  if (Math.abs(det) < 1e-9) return null;
+  const inv = [
+    A[4] * A[8] - A[5] * A[7],
+    A[2] * A[7] - A[1] * A[8],
+    A[1] * A[5] - A[2] * A[4],
+    A[5] * A[6] - A[3] * A[8],
+    A[0] * A[8] - A[2] * A[6],
+    A[2] * A[3] - A[0] * A[5],
+    A[3] * A[7] - A[4] * A[6],
+    A[1] * A[6] - A[0] * A[7],
+    A[0] * A[4] - A[1] * A[3],
+  ].map((v) => v / det);
+  const X = [0, 1, 2].map((i) => inv[i * 3] * b[0] + inv[i * 3 + 1] * b[1] + inv[i * 3 + 2] * b[2]); // prettier-ignore
+  // In front of most cameras.
+  let ahead = 0;
+  for (const c of cams) {
+    const C = camCenter(c);
+    if (dot([c.R[6], c.R[7], c.R[8]], [X[0] - C[0], X[1] - C[1], X[2] - C[2]]) > 0) ahead++;
+  }
+  return ahead >= 0.8 * cams.length ? X : null;
 }
 
 // A world point in the toy's frame.
