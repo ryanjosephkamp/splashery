@@ -5,6 +5,7 @@
 // so chunks, props and the character's parts blend correctly.
 
 import * as pc from "../pc.js";
+import { kernelChunks, normalizeKernel } from "../kernels.js";
 
 export class NoGPUError extends Error {}
 
@@ -50,6 +51,7 @@ export class WorldView {
     this.canvas = canvas;
     this.device = device;
     device.maxPixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+    this.kernel = "gaussian";
     const app = new pc.AppBase(canvas);
     const opts = new pc.AppOptions();
     opts.graphicsDevice = device;
@@ -89,6 +91,27 @@ export class WorldView {
 
   get deviceType() {
     return this.device.isWebGPU ? "webgpu" : "webgl2";
+  }
+
+  // The most device pixels per CSS pixel (lane Sharpness, #107: a 3x phone
+  // drawn at 3x has narrower edges and less speckle, at about twice the
+  // cost, so the tiers choose; see WORLD_BUDGETS).
+  setPixelRatio(cap) {
+    this.device.maxPixelRatio = Math.min(window.devicePixelRatio || 1, cap);
+    this.resize();
+  }
+
+  // The splat falloff (lane Lab's kernels, src/kernels.js): "sharp" has a
+  // flatter top and a steeper edge, so near ground reads crisper.
+  setKernel(name) {
+    const want = normalizeKernel(name);
+    if (want === this.kernel) return;
+    const mat = this.app.scene.gsplat.material;
+    const code = kernelChunks(want);
+    mat.shaderChunks.glsl.set("gsplatModifyPS", code.glsl);
+    mat.shaderChunks.wgsl.set("gsplatModifyPS", code.wgsl);
+    mat.update();
+    this.kernel = want;
   }
 
   resize() {
