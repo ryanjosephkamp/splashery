@@ -122,6 +122,9 @@ Model: Opus 5.5 (claude-opus-5-5), default effort.
   sharpness. The tiles now have a backing of their own color behind the face, the new atoms'
   electrons have no fuzzy halo, the new orbitals' haze holds still with bigger, fainter splats.
   Cards `chs-table-r3`, `chs-table-still-r3`, `chs-atom-elements-r3`, `chs-orbitals-r3`.
+- September 30, 2026: the owner marked every current card "good" (`chs-table-r3`,
+  `chs-table-still-r3`, `chs-atom-elements-r3`, `chs-orbitals-r3`, `chs-molecules-r2`,
+  `chs-lattices-r2`). PR #100 is ready for the Operator to merge.
 - Full suite on the final head (September 29, 2026): 440 passed, 0 failed. The engine PR #99 merged
   the same evening; main is merged into the lane branch. Next: the owner's marks on the `-r2` cards.
 
@@ -201,6 +204,7 @@ Model: Opus 5.5 (claude-opus-5-5), default effort.
 
 ## For the Operator
 
-- The engine PR #99 has merged. The lane PR #100 waits for the owner's marks on the `-r2` cards.
+- The engine PR #99 has merged. The lane PR #100 has every card marked "good" and is up to date with
+  main: ready to merge.
 - The old default choices (caffeine, salt, carbon, 3d z²) keep their original build, as the brief
   asks; the same crisp method could be applied to them with their own cards if the owner wants.
