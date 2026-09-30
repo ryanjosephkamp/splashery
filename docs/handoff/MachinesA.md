@@ -126,6 +126,17 @@ Model: Opus 5.5 (default effort).
   (Bombe). The r2 clips are rendered at 520 to 560 px, nearer what a phone shows at its pixel ratio.
   Cards `mca-turing-r2`, `mca-difference-r2`, `mca-enigma-r2`, `mca-bombe-r2`, `mca-stills-r2`
   posted; the old cards marked replaced.
+- Owner's marks on the r2 cards (September 29, 2026, about 21:30 UTC): Turing machine and difference
+  engine **good**; Enigma "fix" ("make the wood and container sharper"), Bombe "fix" ("make the
+  background board rectangle sharper"), stills "fix" ("sharper overall"). Fixed: the Enigma's case,
+  lid, top plate and pad and the Bombe's cabinet, drum panel and readout are built face by face
+  (`panelBox`: visible faces get high weights, hidden bottoms none), with smooth wood and paint
+  instead of noise, and each even point nudged slightly so the lattice doesn't hatch. Cards
+  `mca-enigma-r3`, `mca-bombe-r3`, `mca-stills-r3` posted (September 30); the r2 ones replaced.
+- Full suite, second round: 36 of 39 spec files run file by file (the container restarts when the
+  session idles, so a background run dies), all passed; smoke passed 38 tests before its chunk ran
+  out, the Worlds logic tests pass, and the Worlds browser tests couldn't finish here. Books wasn't
+  rerun (it passed in the first round).
 - Full suite (first round): 423 passed, 3 failed on the first run; the two Books tests timed out
   while two orphaned test workers of mine held 12 GB (stopped; both pass alone), and the phone shelf
   test caught the Bombe's long name (fixed). After the fixes and the merge of main: the lane's,
