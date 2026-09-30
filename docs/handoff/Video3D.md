@@ -110,70 +110,48 @@ HOW THIS LANE RUNS
   docs/OPERATING.md, docs/PACKS.md, docs/WORKSTREAMS.md and docs/handoff/history.md (lessons from
   earlier lanes).
 - Your handoff file: create it. Start it with this brief, word for word, under "## Brief", then keep
-  "## State", "## Notes", "## Known issues" and "## For the Operator" current. Note your model at
-  the top of "## State" (the blog post compares the two models).
-- Shared lists: edit only your own entries in src/toys.js, src/toy-sounds.js, src/toy-help.js (a
-  how-to line and an About text per toy, following docs/handoff/Help.md), tools/toy-plan.json,
-  CREDITS.md and tools/assets.json. Regenerate docs/TOY-PLAN.md with `node tools/toy-plan.mjs`;
-  never merge it by hand.
-- Never edit tests/taps.spec.mjs. Your own tests go in tests/<prefix>.spec.mjs. If a finished lane's
-  test breaks because of a count or a list your work changes, don't edit it: say which test and why
-  in your message, and the Operator fixes it.
-- Assets: CC0, CC BY or public domain only, checked on the live source page and credited
-  (CREDITS.md, tools/assets.json and the toy's in-app credit). Never BY-SA or NC. No logos, brand
-  names or insignia.
-- Review: post clips and cards to the Effect review page,
-  https://claude.ai/artifact/NCsg9V5SzFY3Mnwuwgq7pi, as OPERATING.md's "Steps for a lane" says.
-  Judge every effect as motion at phone size against the effect quality rules before you post it.
-  The Operator has made your lane's record. Don't republish the page, and never write to "verdicts".
-- Push your work in progress to your branch about every hour, so it isn't only in your container,
-  and open your draft PR early. Many lanes run at once now, so main moves often: merge it into your
-  branch before each push (never rebase a pushed branch) and keep both sides of any conflict.
-- Before every push, follow "Before every push" in CLAUDE.md: the full Playwright suite
-  (SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium npx playwright test), prettier,
-  `node tools/us-english.mjs --diff`, `node tools/check-packs.mjs <pack>` for new or changed toys, a
-  contact sheet and thumbnails, and your own screenshots at 390×844 and 1440×900. Then put back the
-  standard screenshots (`node tools/upkeep.mjs --restore-shots`) and any other lane's screenshots
-  your branch didn't change.
-- PR: one draft PR against main with the five sections (Summary, Verification, Deviations, Known
-  issues, What was cut), and the model that built it in the Summary. When main moves, merge it into
-  your branch.
-- After you post your cards, check the owner's marks (the "verdicts" collection, ids starting with
-  your prefix) about once an hour with a scheduled check-in (send_later). Fix every "fix" in the
-  same PR, post the new clip as a "-r2" card, and set replacedBy on the old one. Stop the check-ins
-  once your PR is merged or closed.
-- Finish every working turn with a short final message that starts with "READY:" (PR link, card ids,
-  test results, anything for the Operator), "WORKING:" (what's left), or "BLOCKED:" (exactly what
-  you need).
-
-## State
+  "## State
 
 Model: Opus 5.5 (the lane's assigned model), default effort, the whole lane.
 
+- PRs: #137 "Engine: kit clouds take a trained splat's own sizes and rotation" (merge first) and
+  #133 "Phase Video 3D: the video-to-3D spike" (draft).
 - Splat.js vendored in `vendor/splatjs/` (MIT, commit 88efe9a, 20 modules, 544 KB; its own video
   reader, which needs Mediabunny under MPL-2.0, is left out). It needs WebGPU and nothing else: no
   SharedArrayBuffer, no cross-origin isolation, so GitHub Pages serves it as is.
 - `src/video3d/`: frames (the stretch, the frame rate and the sharpest frame of each window),
   extract (the frames through a `<video>` element), run (the pipeline, timed per stage), ply (the
-  trained PLY through `src/loaders.js`'s reader), scene (the toy's frame: up, the view, the camera
-  path), flight (Replay flight on the stage's own orbit camera), panel (the progress card and the
-  timing readout), samples.
-- `src/packs/video3d.js`: the labs toy "Video to 3D" on the Studio shelf.
-- Engine PR (`claude/lane-video-3d-engine`): kit clouds take a sample's own `scales` and `quat`.
+  trained PLY through `src/loaders.js`'s reader), scene (the toy's frame: up, the view, the middle
+  where an orbit's views meet), flight (Replay flight and the opening view, on the stage's own orbit
+  camera), panel (the progress card and the timing readout), samples.
+- `src/packs/video3d.js`: the labs toy "Video to 3D" on the Studio shelf, with three samples
+  (Liberty orbit, Edinburgh street, Nicosia drone) trained here by `tools/v3d-sample.mjs`.
+- Report: `docs/lab/VIDEO3D.md` (measurements, what fails, phones, recommendation, the Mac route).
+- Cards: `v3d-object`, `v3d-street` posted; `v3d-drone`, `v3d-progress` from the drone run.
 
 ## Notes
 
 - The container has no GPU. Chromium's WebGPU runs on SwiftShader here: Splat.js's synthetic set (12
-  photos) solved in 32 s and trained 212 steps in 518 s (about 2.4 s a step at 400 px, 20,000
-  splats). The samples are trained here with small settings; real devices are far faster.
+  photos) solved in 32 s and trained 212 steps in 518 s. The samples were trained with small
+  settings (360 px, 800 to 1,500 steps), one to one and a half hours each.
 - The Commons API rate-limits this container (HTTP 429); the file pages and upload.wikimedia.org
-  work.
+  work. Clips were trimmed with a pip-installed ffmpeg (imageio-ffmpeg) in the scratchpad only.
+- The first Nicosia stretch (0:45, a slow push over rooftops) failed the camera solve ("need more
+  parallax/overlap") after 33 minutes; a 19-second stretch at 1:04 (a steadier flight across the
+  city, 1.3 frames a second) solved.
+- Replay flight drives `player.camera` (target, yaw, pitch, roll, distance) from the recipe's drive
+  through `k.data.flight`; the toy opens at the video's first view until the visitor turns or zooms
+  (the app puts its own camera back after a load).
 
 ## Known issues
 
 - The Toy tab refuses files over 40 MB (ui.js, not this lane's): long drone clips must be trimmed
   first.
+- A stretch length must be one of the choices (5, 10, 20, 40 s).
+- Turning past the filmed arc shows soft splats and floaters (short training on a software GPU).
 
 ## For the Operator
 
-- (filled in at the end of the turn)
+- Merge #137 (engine) first, then #133 is labs-only.
+- The owner can run the real test on his computer and phone with `?labs=1`, Studio, Video to 3D, and
+  send the card's readout.
