@@ -189,8 +189,8 @@ export function stepMeshCharacter(model, speed, dt) {
 export async function loadSplatPerson(app, view, { tier = "mid", look = {}, count = 64000 } = {}) {
   const [{ model, meta }, info, bin] = await Promise.all([
     loadHuman(app, { tier: "low", look }),
-    fetch(new URL("human-splats.json", BASE)).then((r) => r.json()),
-    fetch(new URL("human-splats.bin", BASE)).then((r) => r.arrayBuffer()),
+    fetch(new URL("../person-splats/human-splats.json", BASE)).then((r) => r.json()),
+    fetch(new URL("../person-splats/human-splats.bin", BASE)).then((r) => r.arrayBuffer()),
   ]);
   const renders = model.findComponents("render");
   const skin = renders[0].meshInstances.find((mi) => mi.skinInstance)?.skinInstance.skin;

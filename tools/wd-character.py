@@ -793,8 +793,8 @@ def bake_splats(bpy, body, rig):
     """Samples the person's textured surface at rest into splats, each given
     to the bone that moves it most (docs/WORLDS.md, "The person as splats"):
 
-      assets/worlds/character/human-splats.bin   (15 bytes a splat)
-      assets/worlds/character/human-splats.json  (bones, counts, layout)
+      assets/worlds/person-splats/human-splats.bin   (15 bytes a splat)
+      assets/worlds/person-splats/human-splats.json  (bones, counts, layout)
 
     Each splat: its position at rest (float16 x3, the model's own axes, y up),
     its surface normal (int8 x3), its color (uint8 x3, sRGB, a little light
@@ -911,7 +911,9 @@ def bake_splats(bpy, body, rig):
     rec["f"] = shirt[order]
     rec["r"] = np.round(np.full(len(order), radius) * 10000)
     counts = np.bincount(owner, minlength=len(bones))
-    with open(os.path.join(OUT, "human-splats.bin"), "wb") as f:
+    splat_dir = os.path.join(ROOT, "assets/worlds/person-splats")
+    os.makedirs(splat_dir, exist_ok=True)
+    with open(os.path.join(splat_dir, "human-splats.bin"), "wb") as f:
         f.write(rec.tobytes())
     meta = {
         "about": "The realistic person as splats (tools/wd-character.py): its textured surface sampled at rest, each splat given to the bone that moves it most. 15 bytes a splat: position (float16 x3, y up), normal (int8 x3), color (uint8 x3, sRGB), flag (uint8, 1: T-shirt), radius (uint16, 0.1 mm).",
@@ -919,7 +921,7 @@ def bake_splats(bpy, body, rig):
         "count": int(len(order)),
         "bones": [{"name": bones[i], "count": int(counts[i])} for i in range(len(bones)) if counts[i]],
     }
-    with open(os.path.join(OUT, "human-splats.json"), "w") as f:
+    with open(os.path.join(splat_dir, "human-splats.json"), "w") as f:
         json.dump(meta, f, indent=1)
         f.write("\n")
     log("splats", len(order), "on", len(meta["bones"]), "bones, radius", round(radius * 1000, 2), "mm")
