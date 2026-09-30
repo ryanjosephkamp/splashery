@@ -510,7 +510,7 @@ export const TOY_SOUNDS = {
     {
       voice: "sample",
       file: "bowling-ball-roll.mp3",
-      at: 0.3,
+      at: 0.32,
       from: 0.1,
       len: 1.75,
       vol: 0.9,
@@ -550,16 +550,14 @@ export const TOY_SOUNDS = {
   ],
   "bouncy-ball": { voice: "boing", f: 260, to: 2.6, rate: 16 },
   // A glassy clink, and a soft whirr as it rolls.
-  marble: [
-    {
-      voice: "sample",
-      file: "marble-roll.mp3",
-      len: 1.3,
-      vol: 0.8,
-      fallback: { voice: "rumble", f: 380, rate: 28, decay: 1.2, vol: 0.18 },
-    },
-    { voice: "sample", file: "marble-roll.mp3", at: 1.22, from: 0.25, len: 1.2, vol: 0.75 },
-  ],
+  marble: {
+    voice: "sample",
+    file: "marble-roll.mp3",
+    len: 2.4,
+    vol: 0.8,
+    fallback: { voice: "rumble", f: 380, rate: 28, decay: 1.2, vol: 0.18 },
+  },
+
   "hockey-puck": [
     { voice: "slap", f: 1700, vol: 0.9 },
     { voice: "scrape", at: 0.08, f: 3000, rate: 40, decay: 1.9, vol: 0.5 },
