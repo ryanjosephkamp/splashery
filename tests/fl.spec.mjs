@@ -163,19 +163,23 @@ test("each scene builds within its tier's splat budget and draws its fluid", asy
           await app.chooseToy("fluid-lab");
           await app.setToyOption("scene", scene);
           const t0 = performance.now();
-          while (!(player.fluids?.stats?.particles > 0) && performance.now() - t0 < 20_000)
+          // (smoke, steam and flames run on the gas grid: cells, not particles)
+          const on = () =>
+            player.fluids?.stats?.particles > 0 || player.fluids?.stats?.gasCells > 0;
+          while (!on() && performance.now() - t0 < 20_000)
             await new Promise((r) => setTimeout(r, 100));
           const { PROFILES } = await import("/src/generators.js");
           return {
             splats: player.toyInfo.splats,
             slots: player.fluids?.stats?.slots ?? 0,
             particles: player.fluids?.stats?.particles ?? 0,
+            gasCells: player.fluids?.stats?.gasCells ?? 0,
             max: PROFILES[player.profile].maxCount,
           };
         },
         { scene },
       );
-      expect(r.particles, `${profile} ${scene}`).toBeGreaterThan(0);
+      expect(r.particles + r.gasCells, `${profile} ${scene}`).toBeGreaterThan(0);
       expect(r.splats + r.slots, `${profile} ${scene}`).toBeLessThanOrEqual(r.max);
     }
     expect(errors).toEqual([]);
