@@ -338,6 +338,11 @@ checked on the live source page on September 30, 2026.
   [10.5281/zenodo.5507427](https://doi.org/10.5281/zenodo.5507427),
   [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). A subset: the 170,401 localizations in
   a 12 µm square of the cell, cut by `tools/sci-samples.mjs` into the same .smlm format.
+- Super-resolution microscope: "Zola-3D NUP full nucleus" (nuclear pores over a whole nucleus, in
+  3D) by Andrey Aristov (Institut Pasteur), uploaded by Benoit Lelandais, on ShareLoc.XYZ,
+  [10.5281/zenodo.7233696](https://doi.org/10.5281/zenodo.7233696),
+  [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). A subset: a random half of the
+  localizations (149,633), cut by `tools/sci-samples.mjs` into the same .smlm format.
 - Galaxy in a box: the FIRE-2 cosmological zoom-in simulation m12i, snapshot 600 (z = 0), from the
   [FIRE-2 public data release](https://flathub.flatironinstitute.org/fire) on FlatHUB,
   [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). As the release asks: "We use the
@@ -348,6 +353,31 @@ checked on the live source page on September 30, 2026.
   cut by `tools/sci-galaxy.mjs`.
 
 Files people open in these toys are read in their browser and never uploaded.
+
+## Worlds
+
+Hybrid mode in Worlds (a labs page) lights its ground with four texture sets and its sky with one
+HDRI, all from [Poly Haven](https://polyhaven.com) under
+[CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (Poly Haven publishes every asset
+under CC0, [polyhaven.com/license](https://polyhaven.com/license); checked on the live pages on
+September 29, 2026). `tools/world-assets.mjs` fetches them and packs them into
+`assets/worlds/ground/` and `assets/worlds/sky/`; the Worlds page credits them in its list of
+places.
+
+| Used as           | Asset                                                                                                   | Authors                | License                                                       |
+| ----------------- | ------------------------------------------------------------------------------------------------------- | ---------------------- | ------------------------------------------------------------- |
+| Sky and its light | [Kloofendal 48d Partly Cloudy (Pure Sky)](https://polyhaven.com/a/kloofendal_48d_partly_cloudy_puresky) | Greg Zaal, Jarod Guest | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| Sand              | [Sand 01](https://polyhaven.com/a/sand_01)                                                              | Rob Tuytel             | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| Grass             | [Rocky Terrain 02](https://polyhaven.com/a/rocky_terrain_02)                                            | Amal Kumar             | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| Rock              | [Rock Ground](https://polyhaven.com/a/rock_ground)                                                      | Rob Tuytel             | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| Wet sand          | [Damp Beach Sand](https://polyhaven.com/a/damp_beach_sand)                                              | Dimitrios Savva        | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+
+Its mesh character (to compare with the splat character; `?character=mesh`) is from
+[Animated Characters: Protagonists](https://kenney.nl/assets/animated-characters-protagonists) by
+Kenney, [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (checked on the live page and
+in the pack's own license file on September 29, 2026): the model, the "skaterMaleA" skin and the
+idle and run animations. The walk is made from the run. `tools/world-character.mjs` builds
+`assets/worlds/character/character.glb`.
 
 ## National flags
 
