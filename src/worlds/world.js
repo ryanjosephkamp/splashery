@@ -506,7 +506,7 @@ export class World {
         if (lv === it.shown) continue;
         if (lv >= 0 && !it.entities[lv]) {
           const p = it.prop;
-          const e = this.view.entity(`prop-${p.id}-${lv}`, it.bake.levels[lv], { pos: [p.at[0], it.y, p.at[1]], yaw: p.turn, scale: p.size, shadows: this.shadows && lv <= 1 }); // prettier-ignore
+          const e = this.view.entity(`prop-${p.id}-${lv}`, it.bake.levels[lv], { pos: [p.at[0], it.y, p.at[1]], yaw: p.turn, scale: p.size, shadows: this.shadows && lv === 0 }); // prettier-ignore
           if (p.tilt) e.setLocalEulerAngles(p.tilt, p.turn, 0);
           it.entities[lv] = e;
         }
@@ -551,6 +551,7 @@ export class World {
       ? this.overviewPose(dt)
       : this.camera.update(this.focus(), dt, run, this.time);
     this.view.setCameraPose(pos, target);
+    this.lighting.update(pos);
     if (this.hybrid) this.sky.setPosition(pos[0], pos[1], pos[2]);
     else this.sky.setPosition(pos[0], this.terrain.water, pos[2]);
     this.waterMaterial?.setParameter("uWdWater", [this.reducedMotion ? 0 : this.time, 0, 0, 0]);

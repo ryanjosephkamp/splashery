@@ -9,7 +9,7 @@
 
 export const WORLD_BUDGETS = {
   low: {
-    shadows: 1024,
+    shadows: 0, // weak devices: no shadows
     shadowDistance: 16,
     splats: 300e3,
     density: 0.5,

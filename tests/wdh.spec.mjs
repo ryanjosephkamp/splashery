@@ -102,7 +102,9 @@ test.describe("worlds hybrid", () => {
       expect(s.stats.mode).toBe(mode);
       expect(s.sunShadows).toBe(true);
       expect(s.fog).toBe("exp2");
-      expect(s.tone).toBeGreaterThan(0);
+      // A tone map for hybrid mode's lit models; splats keep their colors.
+      if (mode === "hybrid") expect(s.tone).toBeGreaterThan(0);
+      else expect(s.tone).toBe(0);
       // The character casts shadows in both modes, and so do near props.
       expect(s.casters.filter((n) => n.startsWith("part-")).length).toBeGreaterThan(5);
       expect(s.casters.some((n) => n.startsWith("prop-"))).toBe(true);

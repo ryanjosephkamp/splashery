@@ -45,9 +45,9 @@ export class Lighting {
       castShadows: budget.shadows > 0,
       shadowResolution: budget.shadows || 1024,
       shadowDistance: budget.shadowDistance,
-      numCascades: budget.shadowDistance > 30 ? 2 : 1,
+      numCascades: budget.shadowDistance > 40 ? 2 : 1,
       cascadeDistribution: 0.55,
-      shadowType: pc.SHADOW_PCF5_16F,
+      shadowType: pc.SHADOW_PCF3_16F,
       shadowBias: 0.25,
       normalOffsetBias: 0.06,
       shadowIntensity: L.shadow,
@@ -67,8 +67,10 @@ export class Lighting {
     // The grade: a neutral tone map (it leaves colors below about 0.8 as
     // they are, so the splats keep their colors, and rolls off highlights),
     // with an exposure. (Engine colors are given in sRGB.)
+    // (Splats mode leaves the splats' colors exactly as they are: they
+    // carry their own light, and the tone map only costs time there.)
     const cam = view.camera.camera;
-    cam.toneMapping = pc.TONEMAP_NEUTRAL;
+    cam.toneMapping = mode === "hybrid" ? pc.TONEMAP_NEUTRAL : pc.TONEMAP_LINEAR;
     cam.gammaCorrection = pc.GAMMA_SRGB;
     app.scene.exposure = L.exposure;
     app.scene.ambientLight = new pc.Color(...L.ambient);
@@ -91,19 +93,40 @@ export class Lighting {
     catcher.useFog = false;
     catcher.diffuse = new pc.Color(0, 0, 0);
     catcher.update();
-    const tiles = groundTiles(view.device, terrain, { step: 1, above: terrain.water - 0.1 });
-    this.catchers = [];
-    for (const t of tiles) {
-      // The depth, 12 cm under the surface (the ground's splats lie on it).
+    const above = terrain.water - 0.1;
+    // The depth: a few big tiles (it writes no color, so it costs little).
+    for (const t of groundTiles(view.device, terrain, { tile: 64, step: 1, above })) {
+      // 12 cm under the surface (the ground's splats lie on it).
       const d = new pc.Entity("ground-depth");
       d.addComponent("render", { meshInstances: [new pc.MeshInstance(t.mesh, depth)], castShadows: false, receiveShadows: false, layers: [view.worldLayer.id] }); // prettier-ignore
       d.setLocalPosition(0, -0.12, 0);
       view.app.root.addChild(d);
+    }
+    // The catcher: small tiles, only those within the shadows' reach of the
+    // camera drawn (update()), since every pixel it covers looks up the
+    // shadow map.
+    this.catchers = [];
+    for (const t of groundTiles(view.device, terrain, { tile: 16, step: 1, above })) {
       const c = new pc.Entity("shadow-catcher");
       c.addComponent("render", { meshInstances: [new pc.MeshInstance(t.mesh, catcher)], castShadows: false, receiveShadows: true, layers: [view.surfaceLayer.id] }); // prettier-ignore
       c.setLocalPosition(0, 0.02, 0);
       view.app.root.addChild(c);
-      this.catchers.push(c);
+      this.catchers.push({
+        entity: c,
+        x: t.x0 + t.size / 2,
+        z: t.z0 + t.size / 2,
+        r: t.size * 0.71,
+      });
+    }
+  }
+
+  // Every frame: the catcher tiles within the shadows' reach of the camera.
+  update(cam) {
+    if (!this.catchers) return;
+    const reach = this.budget.shadows ? this.budget.shadowDistance : 0;
+    for (const c of this.catchers) {
+      const on = reach > 0 && Math.hypot(c.x - cam[0], c.z - cam[2]) < reach + c.r;
+      if (c.entity.enabled !== on) c.entity.enabled = on;
     }
   }
 }

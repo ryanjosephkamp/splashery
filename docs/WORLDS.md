@@ -397,18 +397,21 @@ Collision is the same in both: invisible shapes and the height field.
 | `hazeColor`    | The haze's color (hybrid mode uses the sky photo's horizon)                | `horizon` |
 | `exposure`     | The grade's exposure                                                       | 1         |
 
-- **One sun.** A directional light with soft (PCF) shadows. The character and the near props (levels
-  0 and 1) cast shadows; the shadow map's size and reach are set per tier (`shadows` and
-  `shadowDistance` in `WORLD_BUDGETS`: 1024 and 16 m on low, 1024 and 26 m on mid, 2048 and 36 m on
-  high, 2048 and 48 m on max). `?shadows=0` turns them off.
+- **One sun.** A directional light with soft (PCF) shadows. The character and the near props
+  (levels 0) cast shadows; the shadow map's size and reach are set per tier (`shadows` and
+  `shadowDistance` in `WORLD_BUDGETS`: none on low, 1024 and 26 m on mid, 2048 and 36 m on high,
+  2048 and 48 m in two cascades on max). `?shadows=0` turns them off. In splats mode the catcher is
+  drawn only within the shadows' reach of the camera, since every pixel it covers looks up the
+  shadow map.
 - **Splats aren't lit** (their colors carry their own light), so they only cast shadows. In hybrid
   mode the ground model receives them. In splats mode an invisible **shadow catcher** (a model of
   the ground whose material only darkens where shadows fall) is drawn over the ground's splats and
   under the props' and the character's.
 - **Haze.** The engine's fog, which it applies to splats (by their centers' distance) and models
   alike, so far hills and the far sea fade into the same color. The splat sky has none.
-- **Grade.** A neutral tone map (it leaves colors below about 0.8 as they are, so splats keep their
-  colors, and rolls off the highlights) and an exposure.
+- **Grade.** In hybrid mode, a neutral tone map (it leaves colors below about 0.8 as they are and
+  rolls off the highlights of the lit models and the sky) and an exposure. Splats mode has no tone
+  map: the splats' colors carry their own light and stay exactly as they are.
 
 ### Layers and depth
 
