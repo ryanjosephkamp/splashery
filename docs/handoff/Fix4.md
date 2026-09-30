@@ -77,8 +77,36 @@ HOW THIS LANE RUNS
   docs/OPERATING.md, docs/PACKS.md, docs/WORKSTREAMS.md and docs/handoff/history.md (lessons from
   earlier lanes).
 - Your handoff file: create it. Start it with this brief, word for word, under "## Brief", then keep
-  "## State", "## Notes", "## Known issues" and "## For the Operator" current. Note your model at
-  the top of "## State" (the blog post compares the two models).
+  "## State", "## Notes", "- **The Operator's grain note (September 30, 2026, 4:13 p.m. UTC)**: "a
+  fine grain: gray frosting on the light background, and thin radial streaks on the dark one … make
+  the face of the shell clear and smooth". Measured on the glass pixels of the face (0.45 to 0.85 of
+  the radius, mean |L − median 3×3|, as in tools/shp-measure.mjs's speckle) and the rim's peak
+  against the page, on the high tier, dark / light page:
+  - As posted (`fx4-marble`): face +60 / −19, grain 4.3 / 5.0, rim +113 / −94.
+  - Fainter tint (0.004): face +51 / −19, grain 4.5 / 5.1, rim +103 / −99.
+  - Twice the fins at 60% opacity: grain 2.6 / 2.7, but face +80 / −35.
+  - Fins stretched 3× along the radius: face +61, grain 4.9, and the rim turns hairy.
+  - Big fins (3 to 5× size, fewer): grain 1.0 to 1.7, but face +42 to +46 and a blurred rim (a
+    cloud).
+  - Culling the glass part (hides its far half): face +38, grain 3.2, rim +78, and its even rows
+    show as rings.
+  - Only the tint shell (no fins): face +38 with grain 1.2 and no rim to speak of. None is clearly
+    better, so no r2 cards were posted. The reason: the fins are 1 to 2 px on a phone, so the
+    renderer's minimum splat footprint makes each one a dot whatever its orientation, and the edge
+    only comes from dots stacking up along the line of sight. Rim and face film rise and fall
+    together (a rim-to-face ratio of about 2), and less grain costs a softer rim or more film.
+- **What would do it**: a view-dependent opacity, which the engine doesn't have. A small, additive
+  kit kind, say `rim` (z = face opacity, w = sharpness), would scale a splat's opacity by
+  `mix(z, 1, pow(1 - |fd|, w))`, with `fd` the same "facing" number the part cull already computes
+  in the kit shader (the direction from the part's center to the splat against the direction to the
+  camera, src/effects.js, GLSL and WGSL). The glass would then be one thin, even shell: nearly clear
+  face on, solid at the edge, with no grain. That is an "Engine: …" PR, merged first (not this
+  lane's files), and the marble would move to it in this PR.
+
+## Known issues" and "## For the Operator" current. Note your model at
+
+the top of "## State" (the blog post compares the two models).
+
 - Shared lists: edit only your own entries in src/toys.js, src/toy-sounds.js, src/toy-help.js (a
   how-to line and an About text per toy, following docs/handoff/Help.md), tools/toy-plan.json,
   CREDITS.md and tools/assets.json. Regenerate docs/TOY-PLAN.md with `node tools/toy-plan.mjs`;
