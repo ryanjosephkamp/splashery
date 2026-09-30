@@ -3,21 +3,24 @@
 // gpuField() with labs on. It replaces the kit's program for these toys, so
 // each splat's four splatAnim values are this program's own:
 //
-//   y (the kit's "kind"): what the splat is
-//     SCI_KIND.plain  a splat that only zooms (bonds, localizations, gas)
-//     SCI_KIND.bond   a bond: fades while the atoms jiggle
-//     SCI_KIND.atom   one of the splats of an atom's solid ellipsoid
-//     SCI_KIND.gauss  an atom drawn as one Gaussian: its turn and size are set
+//   x (the kit's part and flags) = 16 × (type + 8 × payload), a multiple of
+//   16, so the kit reads part 0 with no flags; y (the kit's behaviour kind)
+//   stays 0, "none". The type says what the splat is:
+//     SCI_TYPE.plain  a splat that only zooms (the slide, the box)
+//     SCI_TYPE.bond   a bond: fades while the atoms jiggle
+//     SCI_TYPE.atom   one of the splats of an atom's solid ellipsoid
+//     SCI_TYPE.gauss  an atom drawn as one Gaussian: its turn and size are set
 //                     here from the atom's principal axes (exactly its U)
-//     SCI_KIND.gas    a gas particle: z = log10 of its temperature (K), so
+//     SCI_TYPE.gas    a gas particle: z = log10 of its temperature (K), so
 //                     the hot gas can be peeled away
-//     SCI_KIND.loc    a localization: z, w = its true size across and deep
+//     SCI_TYPE.loc    a localization: z, w = its true size across and deep
 //                     (√2 σ, recipe units, times UNIT for toy units); the
 //                     stored splat is wider so it shows without labs
-//   for atoms: x, z, w pack the atom's principal axes as a quaternion (four
-//   bytes), its three standard deviations (three bytes, as fractions of the
-//   structure's largest, SIG_MAX toy units) and a seed (16 bits):
-//     z = q0 + 256 q1 + 65536 q2,  w = q3 + 256 s1 + 65536 s2,  x = s3 + 256 seed
+//   For atoms, x, z and w pack the atom's principal axes as a quaternion
+//   (four bytes), its three standard deviations (three bytes, as fractions of
+//   the structure's largest, SIG_MAX toy units) and a seed (9 bits, mixed
+//   with z and w on the GPU): z = q0 + 256 q1 + 65536 q2,
+//   w = q3 + 256 s1 + 65536 s2, payload = s3 + 256 seed.
 //
 // Uniforms (from the recipe's drive):
 //   uSpMorph = [jiggle 0..1 (bonds fade with it), magnification, size floor
@@ -38,16 +41,21 @@
 // brings the focus to the middle; a scaling keeps the depth order, so the
 // sort stays right.
 
-export const SCI_KIND = { plain: 1000, bond: 1001, atom: 1002, gauss: 1003, gas: 1004, loc: 1005 }; // prettier-ignore
+export const SCI_TYPE = { plain: 0, bond: 1, atom: 2, gauss: 3, gas: 4, loc: 5 };
+
+// A splat's first value (the kit's part, plus flags) for a type: a multiple
+// of 16, so the kit reads part 0 with no flags; its behaviour kind stays
+// "none". Without labs the kit's own program then draws these splats still.
+export const sciPart = (type) => 16 * type;
 
 // Packs an atom's frame for the program: quat [x, y, z, w], sigma (3, toy
 // units, largest first), sigMax (toy units), seed (0..65535) -> [x, z, w].
-export function packAtom(quat, sigma, sigMax, seed) {
+export function packAtom(type, quat, sigma, sigMax, seed) {
   const b = (v) => Math.max(0, Math.min(255, Math.round(((v + 1) / 2) * 255)));
   const s = (v) => Math.max(1, Math.min(255, Math.round((v / sigMax) * 255)));
   const q = quat[3] < 0 ? quat.map((v) => -v) : quat;
   return [
-    s(sigma[2]) + 256 * (seed & 0xffff),
+    16 * (type + 8 * (s(sigma[2]) + 256 * (seed & 511))),
     b(q[0]) + 256 * b(q[1]) + 65536 * b(q[2]),
     b(q[3]) + 256 * s(sigma[0]) + 65536 * s(sigma[1]),
   ];
@@ -55,17 +63,20 @@ export function packAtom(quat, sigma, sigMax, seed) {
 
 // The inverse (for the tests and the CPU copy): -> { quat, sigma, seed }.
 export function unpackAtom(x, z, w, sigMax) {
+  const pk = Math.round(x / 16);
+  const rest = Math.floor(pk / 8);
   const bytes = (v) => [v % 256, Math.floor(v / 256) % 256, Math.floor(v / 65536)];
   const [q0, q1, q2] = bytes(z);
   const [q3, s1, s2] = bytes(w);
-  const s3 = x % 256;
+  const s3 = rest % 256;
   const u = (b) => (b / 255) * 2 - 1;
   const quat = [u(q0), u(q1), u(q2), u(q3)];
   const l = Math.hypot(...quat) || 1;
   return {
     quat: quat.map((v) => v / l),
     sigma: [s1, s2, s3].map((v) => (v / 255) * sigMax),
-    seed: Math.floor(x / 256),
+    seed: Math.floor(rest / 256),
+    type: pk % 8,
   };
 }
 
@@ -149,7 +160,7 @@ float sciNoise(uint seed, uint axis, float t) {
 void sciUnpack() {
   float z = sciAn.z;
   float w = sciAn.w;
-  float x = sciAn.x;
+  float x = mod(floor(floor(sciAn.x / 16.0 + 0.5) / 8.0), 256.0);
   vec4 q = vec4(mod(z, 256.0), mod(floor(z / 256.0), 256.0), floor(z / 65536.0), mod(w, 256.0));
   q = q / 255.0 * 2.0 - 1.0;
   sciQ = normalize(q);
@@ -157,13 +168,15 @@ void sciUnpack() {
 }
 void modifySplatCenter(inout vec3 center) {
   sciAn = loadSplatAnim();
-  sciKind = int(sciAn.y + 0.5);
+  float pk = floor(sciAn.x / 16.0 + 0.5);
+  sciKind = int(mod(pk, 8.0) + 0.5);
   vec3 p = center;
-  if (sciKind == 1002 || sciKind == 1003) {
+  if (sciKind == 2 || sciKind == 3) {
     sciUnpack();
     float j = uSpMorph.x;
     if (j > 0.0) {
-      uint seed = uint(floor(sciAn.x / 256.0));
+      // The atom's seed (9 bits) mixed with its packed frame, so no two atoms share a path.
+      uint seed = uint(floor(pk / 2048.0)) ^ (uint(sciAn.z) * 2654435761u) ^ (uint(sciAn.w) * 40503u);
       float t = uSpKit.x;
       vec3 zz = vec3(sciNoise(seed, 0u, t), sciNoise(seed, 1u, t), sciNoise(seed, 2u, t));
       p += j * sciRot(sciQ, sciSig * zz);
@@ -173,19 +186,19 @@ void modifySplatCenter(inout vec3 center) {
   center = (p - uSpGlowC.xyz) * m + uSpGlowC.xyz * (1.0 - uSpGlowC.w);
 }
 void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter, inout vec4 rotation, inout vec3 scale) {
-  if (sciKind == 1003) {
+  if (sciKind == 3) {
     rotation = sciQ;
     scale = sciSig * 1.4142136;
   }
-  if (sciKind == 1005) scale = vec3(sciAn.z, sciAn.z, sciAn.w) * UNIT;
+  if (sciKind == 5) scale = vec3(sciAn.z, sciAn.z, sciAn.w) * UNIT;
   float m = max(uSpMorph.y, 1e-3);
   scale *= uSpClock.y * m;
   if (uSpMorph.z > 0.0) scale = max(scale, vec3(uSpMorph.z * length(uSpCam.xyz)));
 }
 void modifySplatColor(vec3 center, inout vec4 color) {
   float a = color.a;
-  if (sciKind == 1001) a *= 1.0 - 0.8 * uSpMorph.x;
-  if (sciKind == 1004) a *= 1.0 - (1.0 - clamp(uSpKitB.x, 0.0, 1.0)) * smoothstep(4.1, 4.6, sciAn.z);
+  if (sciKind == 1) a *= 1.0 - 0.8 * uSpMorph.x;
+  if (sciKind == 4) a *= 1.0 - (1.0 - clamp(uSpKitB.x, 0.0, 1.0)) * smoothstep(4.1, 4.6, sciAn.z);
   if (uSpMorph.w > 0.0) {
     float front = dot(center, normalize(uSpCam.xyz));
     a *= 1.0 - smoothstep(uSpMorph.w - 0.12, uSpMorph.w, front);
@@ -227,7 +240,7 @@ fn sciNoise(seed: u32, axis: u32, t: f32) -> f32 {
 fn sciUnpack() {
   let z = sciAn.z;
   let w = sciAn.w;
-  let x = sciAn.x;
+  let x = floor(floor(sciAn.x / 16.0 + 0.5) / 8.0) % 256.0;
   var q = vec4f(z % 256.0, floor(z / 256.0) % 256.0, floor(z / 65536.0), w % 256.0);
   q = q / 255.0 * 2.0 - 1.0;
   sciQ = normalize(q);
@@ -235,13 +248,14 @@ fn sciUnpack() {
 }
 fn modifySplatCenter(center: ptr<function, vec3f>) {
   sciAn = loadSplatAnim();
-  sciKind = i32(sciAn.y + 0.5);
+  let pk = floor(sciAn.x / 16.0 + 0.5);
+  sciKind = i32(pk % 8.0 + 0.5);
   var p = *center;
-  if (sciKind == 1002 || sciKind == 1003) {
+  if (sciKind == 2 || sciKind == 3) {
     sciUnpack();
     let j = uniform.uSpMorph.x;
     if (j > 0.0) {
-      let seed = u32(floor(sciAn.x / 256.0));
+      let seed = u32(floor(pk / 2048.0)) ^ (u32(sciAn.z) * 2654435761u) ^ (u32(sciAn.w) * 40503u);
       let t = uniform.uSpKit.x;
       let zz = vec3f(sciNoise(seed, 0u, t), sciNoise(seed, 1u, t), sciNoise(seed, 2u, t));
       p += j * sciRot(sciQ, sciSig * zz);
@@ -251,11 +265,11 @@ fn modifySplatCenter(center: ptr<function, vec3f>) {
   *center = (p - uniform.uSpGlowC.xyz) * m + uniform.uSpGlowC.xyz * (1.0 - uniform.uSpGlowC.w);
 }
 fn modifySplatRotationScale(originalCenter: vec3f, modifiedCenter: vec3f, rotation: ptr<function, vec4f>, scale: ptr<function, vec3f>) {
-  if (sciKind == 1003) {
+  if (sciKind == 3) {
     *rotation = sciQ;
     *scale = sciSig * 1.4142136;
   }
-  if (sciKind == 1005) { *scale = vec3f(sciAn.z, sciAn.z, sciAn.w) * UNIT; }
+  if (sciKind == 5) { *scale = vec3f(sciAn.z, sciAn.z, sciAn.w) * UNIT; }
   let m = max(uniform.uSpMorph.y, 1e-3);
   *scale = *scale * (uniform.uSpClock.y * m);
   if (uniform.uSpMorph.z > 0.0) {
@@ -264,8 +278,8 @@ fn modifySplatRotationScale(originalCenter: vec3f, modifiedCenter: vec3f, rotati
 }
 fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {
   var a = (*color).a;
-  if (sciKind == 1001) { a = a * (1.0 - 0.8 * uniform.uSpMorph.x); }
-  if (sciKind == 1004) { a = a * (1.0 - (1.0 - clamp(uniform.uSpKitB.x, 0.0, 1.0)) * smoothstep(4.1, 4.6, sciAn.z)); }
+  if (sciKind == 1) { a = a * (1.0 - 0.8 * uniform.uSpMorph.x); }
+  if (sciKind == 4) { a = a * (1.0 - (1.0 - clamp(uniform.uSpKitB.x, 0.0, 1.0)) * smoothstep(4.1, 4.6, sciAn.z)); }
   if (uniform.uSpMorph.w > 0.0) {
     let front = dot(center, normalize(uniform.uSpCam.xyz));
     a = a * (1.0 - smoothstep(uniform.uSpMorph.w - 0.12, uniform.uSpMorph.w, front));

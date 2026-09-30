@@ -186,9 +186,12 @@ test.describe("crystal files", () => {
       for (let k = 0; k < 3; k++) close(w[k], ref[k], 1e-9);
     }
     // Packed for the GPU program, the frame and sizes come back within a byte.
-    const packed = packAtom(q, e.sigma, e.sigma[0], 1234);
+    const packed = packAtom(2, q, e.sigma, e.sigma[0], 345);
     const back = unpackAtom(packed[0], packed[1], packed[2], e.sigma[0]);
-    expect(back.seed).toBe(1234);
+    expect(back.seed).toBe(345);
+    expect(back.type).toBe(2);
+    expect(packed[0] % 16).toBe(0); // the kit reads part 0 with no flags
+    expect(packed[0]).toBeLessThan(2 ** 24); // exact in a float32
     for (let i = 0; i < 3; i++) close(back.sigma[i], e.sigma[i], e.sigma[0] / 200);
     const dq = Math.abs(back.quat.reduce((s, x, i) => s + x * q[i], 0));
     expect(dq).toBeGreaterThan(0.999);
@@ -296,7 +299,8 @@ test.describe("localizations", () => {
     const a = start * 4;
     close(buf.anim[a + 2], Math.SQRT2 * t.sxy[0] * 1e-3, 1e-7);
     close(buf.anim[a + 3], Math.SQRT2 * t.sz[0] * 1e-3, 1e-7);
-    expect(buf.anim[a + 1]).toBe(1005);
+    expect(buf.anim[a]).toBe(16 * 5);
+    expect(buf.anim[a + 1]).toBe(0);
     close(buf.scale[start * 3] / s, Math.max(Math.SQRT2 * t.sxy[0] * 1e-3, 0.03), 1e-6);
   });
 

@@ -18,7 +18,14 @@ import { element } from "../chem/elements.js";
 import { perceiveBonds } from "../chem/molfile.js";
 import { readCrystal, probabilityScale, centerOf, eigenSym3 } from "../science/crystal.js";
 import { readSmlm, readLocalizations } from "../science/smlm.js";
-import { SCI_KIND, packAtom, quatFromAxes, sciModifier, unmagnify } from "../science/field.js";
+import {
+  SCI_TYPE,
+  sciPart,
+  packAtom,
+  quatFromAxes,
+  sciModifier,
+  unmagnify,
+} from "../science/field.js";
 
 // ---- Shared ------------------------------------------------------------------------------
 
@@ -298,7 +305,7 @@ const THERMAL = {
     const unit = evenEllipsoid(k, 1, 1, 1, 40);
     atoms.forEach((a, i) => {
       const quat = quatFromAxes(a.axes);
-      const [px, pz, pw] = packAtom(quat, a.sigma, sigMax, i);
+      const [px, pz, pw] = packAtom(SCI_TYPE.atom, quat, a.sigma, sigMax, i);
       const col = atomColor(a.el);
       if (gauss) return;
       const r = (a.draw ?? a.sigma).map((x) => x * P);
@@ -314,7 +321,6 @@ const THERMAL = {
         jitter: 0.008,
         opacity: 1,
         part: px,
-        kind: SCI_KIND.atom,
         params: [pz, pw],
         color: (cc) => {
           const lp = cc.lp;
@@ -329,7 +335,7 @@ const THERMAL = {
         const a = atoms[i];
         if (!a) return null;
         const quat = quatFromAxes(a.axes);
-        const [px, pz, pw] = packAtom(quat, a.draw ?? a.sigma, sigMax, i);
+        const [px, pz, pw] = packAtom(SCI_TYPE.gauss, quat, a.draw ?? a.sigma, sigMax, i);
         const base = k.baseSize || 0.01;
         return {
           p: pos[i],
@@ -339,7 +345,6 @@ const THERMAL = {
           color: atomColor(a.el),
           opacity: 1,
           part: px,
-          kind: SCI_KIND.gauss,
           params: [pz, pw],
         };
       });
@@ -363,7 +368,7 @@ const THERMAL = {
           jitter: 0.008,
           opacity: 1,
           weight: 0.6,
-          kind: SCI_KIND.bond,
+          part: sciPart(SCI_TYPE.bond),
           color: (cc) => ({ c: lit(shade(cc.lp[1] < 0 ? ci : cj, 0.85), cc.n, 0.2), keep: true }),
         });
       }
@@ -603,7 +608,7 @@ const MICROSCOPE = {
       jitter: 0,
       opacity: 1,
       flat: 0.3,
-      kind: SCI_KIND.plain,
+      part: sciPart(SCI_TYPE.plain),
     });
     const P = (i) => [(T.x[i] - cx) * UM, -(T.y[i] - cy) * UM, (T.z[i] - cz) * UM * stretch];
     const colorOf = (i) => {
@@ -628,7 +633,7 @@ const MICROSCOPE = {
         size: shown / base,
         color: colorOf(i),
         opacity: 0.55,
-        kind: SCI_KIND.loc,
+        part: sciPart(SCI_TYPE.loc),
         params: [asF32(sxy), asF32(sz)],
       };
     });
@@ -847,7 +852,7 @@ const GALAXY = {
         opacity: 1,
         flat: 0.3,
         weight: 0.5,
-        kind: SCI_KIND.plain,
+        part: sciPart(SCI_TYPE.plain),
       });
       for (const axis of [0, 1, 2]) {
         const edge = evenCylinder(0.05, 0.05, 2 * size[axis], false);
@@ -868,7 +873,7 @@ const GALAXY = {
               opacity: 0.9,
               flat: 0.4,
               weight: 3,
-              kind: SCI_KIND.plain,
+              part: sciPart(SCI_TYPE.plain),
             });
           }
       }
@@ -909,7 +914,7 @@ const GALAXY = {
         size: (Math.SQRT2 * sigma) / base,
         color,
         opacity: alpha,
-        kind: SCI_KIND.gas,
+        part: sciPart(SCI_TYPE.gas),
         params: [asF32(logT), 0],
       };
     });
