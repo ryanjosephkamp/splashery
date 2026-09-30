@@ -410,18 +410,6 @@
       "license": "CC BY 3.0",
       "checked": "September 30, 2026",
       "note": "10 seconds from 7:32 (the 480p transcode on Commons), trained by tools/v3d-sample.mjs. Only the trained splats and the camera path are shipped."
-    },
-    {
-      "id": "nicosia",
-      "file": "assets/toys/video-3d/nicosia.ply",
-      "path": "assets/toys/video-3d/nicosia.json",
-      "toy": "video-3d",
-      "name": "Central Nicosia drone footage overlooking UN buffer zone",
-      "author": "The Track Record - BTS",
-      "page": "https://commons.wikimedia.org/wiki/File:Central_Nicosia_drone_footage_overlooking_UN_buffer_zone.webm",
-      "license": "CC BY 3.0",
-      "checked": "September 30, 2026",
-      "note": "12 seconds from 0:45 (the 480p transcode on Commons), the bottom 12% with a credit line cropped off, trained by tools/v3d-sample.mjs. Only the trained splats and the camera path are shipped."
     }
   ],
   "splatTrainer": {
