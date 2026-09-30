@@ -12,6 +12,9 @@
 import { mix, shade, smoothstep, clamp, spline, quatAxisAngle, vec } from "../kit.js";
 import { evenCylinder, evenRoundBox } from "./even.js";
 import { SongPlayer, songControls, makeSong, midiOf, songFromText } from "../songs.js";
+// Lane Live input: the voice tuner (labs), from the microphone once tapped for.
+import { live } from "../live/live.js";
+import { labsOn } from "../toys.js";
 
 const TAU = Math.PI * 2;
 const LIGHT = vec.unit([0.3, 0.8, 0.55]);
@@ -675,12 +678,13 @@ function keyboardRuntime({ low, high, songs, voice, hold = 0.9, drums = false })
     player.update(now, sound?.enabled && rt.voices ? sound : null, sound ? play(sound) : null);
     const on = player.playing;
     const k = on ? player.keys() : null;
+    rt.sung = tunerKey(rt, now); // lane Live input
     for (let i = 0; i < n; i++) {
       const s = now - rt.strikes[i];
       rt.tapSince[i] = s;
       // A tapped key goes down at once and comes up after `hold`.
       const tapDown = s >= 0 && s < hold + 0.06 ? band(s, 0, 0.025) * (1 - band(s, hold, hold + 0.06)) : 0; // prettier-ignore
-      let d = tapDown;
+      let d = i === rt.sung ? 1 : tapDown; // lane Live input: a sung key stays down
       if (k) {
         // A song's key starts down just before its note sounds.
         const pre = k.next[i] < 0.03 ? 1 - k.next[i] / 0.03 : 0;
@@ -697,6 +701,74 @@ function keyboardRuntime({ low, high, songs, voice, hold = 0.9, drums = false })
   };
   return rt;
 }
+
+// ---- Live input (lane Live input): the voice tuner (labs) -----------------------------
+// With the microphone on, the note you sing or play (the analyser's pitch,
+// src/live/mic.js) finds its key: the key goes down and lights, and its
+// hammer (or jack) rises as the note starts, for as long as you hold it.
+// The piano stays silent (its sound would reach the microphone). A note
+// must hold for two of the analyser's frames (about 35 ms) to count, and a
+// key comes up about a tenth of a second after the note ends.
+const TUNER = { midi: null, cand: null, candN: 0, lost: 0, frames: -1 };
+
+export function tunerKey(rt, now) {
+  const mic = live.on("mic") ? live.mic : null;
+  if (!mic) {
+    TUNER.midi = null;
+    return -1;
+  }
+  if (mic.frames !== TUNER.frames) {
+    TUNER.frames = mic.frames;
+    const m = mic.pitch?.note?.midi ?? null;
+    if (m !== null && m >= rt.low && m <= rt.high) {
+      TUNER.lost = 0;
+      if (m === TUNER.cand) TUNER.candN++;
+      else {
+        TUNER.cand = m;
+        TUNER.candN = 1;
+      }
+      if (TUNER.candN >= 2 && TUNER.midi !== m) {
+        TUNER.midi = m;
+        rt.strikes[m - rt.low] = now; // the hammer rises
+      }
+    } else if (TUNER.midi !== null && ++TUNER.lost > 6) {
+      TUNER.midi = null;
+      TUNER.cand = null;
+    }
+  }
+  return TUNER.midi === null ? -1 : TUNER.midi - rt.low;
+}
+
+export const tunerState = () => ({ midi: TUNER.midi });
+
+// The keys glow by how far they are down while the tuner listens. The glow
+// is added to a key's color, so it takes blue away (ivory turns gold, ebony
+// warms), or a white key couldn't show it.
+const TUNER_GLOW = [0.25, 0, -0.65];
+const tunerGlow = () => (live.on("mic") ? { glow: TUNER_GLOW, glowChannel: 0 } : {});
+
+function tunerStatus() {
+  const p = live.mic?.pitch;
+  if (!live.on("mic")) return "";
+  if (!p) return "Sing or play a note.";
+  const n = p.note;
+  const off = n.cents > 10 ? `, ${n.cents} cents sharp` : n.cents < -10 ? `, ${-n.cents} cents flat` : ", in tune"; // prettier-ignore
+  return `${n.name} (${p.hz.toFixed(1)} Hz${off})`;
+}
+
+// The labs-only panel: the microphone button for the tuner.
+const tunerInput = () =>
+  labsOn()
+    ? {
+        input: {
+          title: "Voice tuner (labs)",
+          fileButton: false,
+          live: [{ kind: "mic", status: tunerStatus }],
+          note: "Sing or play a note near the piano, and its key goes down and lights. The piano stays silent while it listens.",
+        },
+      }
+    : {};
+// ---- End of live input ----------------------------------------------------------------
 
 // Shifts a song later by `lead` seconds.
 function leadIn(song, lead) {
@@ -810,7 +882,7 @@ function buildGrand(k) {
   const [y0, y1] = G.rim;
   // Levers: the keys tip about their balance rail, the hammers swing up
   // about their flange rail, the dampers lift off the strings.
-  const keys = k.lever({ pivot: [0, 0.69, -0.42], axis: [1, 0, 0], angle: 0.055 });
+  const keys = k.lever({ pivot: [0, 0.69, -0.42], axis: [1, 0, 0], angle: 0.055, ...tunerGlow() }); // lane Live input
   const hammers = k.lever({ pivot: [0, 0.8, -0.195], axis: [1, 0, 0], angle: 0.215, channel: 1 }); // prettier-ignore
   const dampers = k.lever({ dir: [0, 1, 0], move: 0.017, channel: 2 });
   const pedal = k.part("pedal", { pivot: [0.045, 0.1, -0.3], axis: [1, 0, 0] });
@@ -1108,7 +1180,7 @@ function buildUpright(k) {
   upright.player.pause();
   const { layout } = U;
   const half = layout.width / 2;
-  const keys = k.lever({ pivot: [0, 0.69, -0.38], axis: [1, 0, 0], angle: 0.058 });
+  const keys = k.lever({ pivot: [0, 0.69, -0.38], axis: [1, 0, 0], angle: 0.058, ...tunerGlow() }); // lane Live input
   // The hammers stand on their butts and swing back onto the strings.
   const hammers = k.lever({ pivot: [0, 0.86, -0.295], axis: [1, 0, 0], angle: -0.18, channel: 1 }); // prettier-ignore
   const dampers = k.lever({ dir: [0, 0, 1], move: 0.014, channel: 2 });
@@ -1318,7 +1390,7 @@ function buildHarpsichord(k) {
   const { layout, outline, rightX, backZ } = HC;
   const [y0, y1] = HC.rim;
   const half = layout.width / 2;
-  const keys = k.lever({ pivot: [0, 0.75, -0.36], axis: [1, 0, 0], angle: 0.05 });
+  const keys = k.lever({ pivot: [0, 0.75, -0.36], axis: [1, 0, 0], angle: 0.05, ...tunerGlow() }); // lane Live input
   const jacks = k.lever({ dir: [0, 1, 0], move: 0.013, channel: 1 });
   const hum = k.lever({ dir: [0.8, 0.6, 0], vibrate: 0.0028, channel: 2 });
 
@@ -1650,7 +1722,13 @@ function buildKeyboard(k) {
   const half = layout.width / 2;
   // Keys tip about a rail near their back and light up by their second
   // amount; the panel buttons and the drum pads press down and glow.
-  const keys = k.lever({ pivot: [0, 0.075, -0.2], axis: [1, 0, 0], angle: 0.045, glow: "#3fb6ff", glowChannel: 1 }); // prettier-ignore
+  const keys = k.lever({
+    pivot: [0, 0.075, -0.2],
+    axis: [1, 0, 0],
+    angle: 0.045,
+    glow: live.on("mic") ? TUNER_GLOW : "#3fb6ff",
+    glowChannel: 1,
+  }); // prettier-ignore (lane Live input: the tuner's gold)
   const buttons = k.lever({ dir: [0, -1, 0], move: 0.004, glow: "#fff4d0", glowChannel: 1 });
   const pads = k.lever({ dir: [0, -1, 0], move: 0.004, glow: "#ff8a3a", glowChannel: 1 });
 
@@ -1746,6 +1824,7 @@ function driveKeyboard(t, c, out, info) {
     dip[i] = r.down[i];
     const ahead = player.playing && r.next[i] < 0.7 ? Math.pow(1 - r.next[i] / 0.7, 1.4) : 0;
     light[i] = Math.max(ahead, player.playing ? 0.85 * r.down[i] : 0);
+    if (i === r.sung) light[i] = 1; // lane Live input: the sung key
   }
   // The voice buttons: the chosen one is lit; a press dips it.
   const since = info.time - (keyboardState.pressAt ?? -10);
@@ -1797,6 +1876,7 @@ function keyboardRecipe({ rt, keyAtPoint, drive, build, density = 2, opening = 6
     },
     drive,
     build,
+    ...tunerInput(), // lane Live input
   };
 }
 
@@ -1845,6 +1925,7 @@ export const RECIPES = {
       build: buildKeyboard,
       density: 1.7,
     }),
+    ...tunerInput(), // lane Live input
     controls: [
       { key: "song", label: "Play the opening", type: "pulse", ease: 6.5 },
       { key: "strike", label: "Play a key", type: "pulse", ease: 1.2 },

@@ -249,3 +249,9 @@ async function renderClapSetting() {
 }
 
 export const clapState = () => ({ on: clap.on, hooked: !!clap.off });
+
+// For tools that swap in their own analyser (tools/live-clip.mjs): listen
+// to the new one.
+export function rehookClap() {
+  clap.hook();
+}
