@@ -42,7 +42,9 @@ export class GasScene {
     Object.assign(g.params, {
       heatLift: 0.6 / c,
       smokeWeight: 0,
-      burn: 60,
+      // (slow enough that the fuel rises about three wick heights, the
+      // length of a real candle flame)
+      burn: 35,
       burnHeat: 4,
       vort: 1,
       noise: 0,
