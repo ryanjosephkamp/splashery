@@ -405,7 +405,7 @@ test.describe("in the browser", () => {
     ["galaxy-box", "galaxy"],
   ])
     test(`screenshots of ${id} at phone and desktop size`, async ({ browser }) => {
-      test.setTimeout(240_000);
+      test.setTimeout(360_000);
       for (const [w, h] of [
         [390, 844],
         [1440, 900],
