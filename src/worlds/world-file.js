@@ -175,8 +175,10 @@ export function normalizeWorld(w = {}) {
       skin: hex(w.character?.skin, "#c98e6a"),
       hair: hex(w.character?.hair, "#3a2a1e"),
       shoes: hex(w.character?.shoes, "#2e2e33"),
-      // "splats" (the kit-built character) or "mesh" (a lit, skinned model).
-      model: w.character?.model === "mesh" ? "mesh" : "splats",
+      // "splats" (the kit-built character), "mesh" (the realistic, lit,
+      // skinned person), "kenney" (the stylized one of the hybrid round) or
+      // "auto" (the default: the person in hybrid mode, splats otherwise).
+      model: ["splats", "mesh", "kenney"].includes(w.character?.model) ? w.character.model : "auto",
     },
     props: (Array.isArray(w.props) ? w.props : []).map(normalizeProp),
     scatter: (Array.isArray(w.scatter) ? w.scatter : []).map(normalizeScatter),

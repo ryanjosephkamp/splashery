@@ -68,8 +68,8 @@ class Page {
     // ?render=splats|hybrid overrides the world file's mode; ?shadows=0
     // turns the sun's shadows off.
     const mode = RENDER_MODES.includes(params.get("render")) ? params.get("render") : def.render;
-    // ?character=splats|mesh overrides the world file's character.
-    const characterModel = ["splats", "mesh"].includes(params.get("character")) ? params.get("character") : def.character.model; // prettier-ignore
+    // ?character=splats|mesh|kenney overrides the world file's character.
+    const characterModel = ["splats", "mesh", "kenney"].includes(params.get("character")) ? params.get("character") : def.character.model; // prettier-ignore
     const world = new World(this.view, def, this.tier, { reducedMotion, mode, shadows: params.get("shadows") !== "0", characterModel }); // prettier-ignore
     this.world = world;
     // A wide view behind the start screen.

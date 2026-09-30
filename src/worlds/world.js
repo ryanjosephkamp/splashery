@@ -14,7 +14,7 @@ import { planLevels } from "./lod.js";
 import { WORLD_BUDGETS } from "./tiers.js";
 import { Lighting } from "./lighting.js";
 import { loadHybridAssets, groundTiles, groundMaterial, groundColor, waterMaterial, waterMeshes, skyDome, skyMaterial, useHDRI, signBoard } from "./hybrid.js"; // prettier-ignore
-import { loadMeshCharacter, stepMeshCharacter } from "./mesh-character.js";
+import { loadMeshCharacter, loadHuman, stepMeshCharacter } from "./mesh-character.js";
 import * as pc from "../pc.js";
 import { mulberry32, mixSeed } from "../noise.js";
 import { rgb } from "../kit.js";
@@ -24,7 +24,7 @@ const nextFrame = () => new Promise((r) => requestAnimationFrame(() => r()));
 
 export class World {
   // mode: "splats" or "hybrid" (docs/WORLDS.md, "Rendering").
-  // characterModel: "splats" or "mesh" (mesh-character.js).
+  // characterModel: "splats", "mesh", "kenney" or "auto" (mesh-character.js).
   constructor(
     view,
     def,
@@ -43,7 +43,12 @@ export class World {
     this.mode = mode === "hybrid" ? "hybrid" : "splats";
     this.hybrid = this.mode === "hybrid";
     this.shadows = shadows;
-    this.characterModel = characterModel === "mesh" ? "mesh" : "splats";
+    // "auto": the realistic person in hybrid mode, the splat character in
+    // splats mode.
+    const cm = characterModel === "auto" ? (this.hybrid ? "mesh" : "splats") : characterModel;
+    this.characterModel = ["mesh", "kenney"].includes(cm) ? cm : "splats";
+    // Walking and running speeds (the realistic person's own are slower).
+    this.speeds = { walk: WALK_SPEED, run: RUN_SPEED };
     this.budget = WORLD_BUDGETS[tier] || WORLD_BUDGETS.mid;
     this.reducedMotion = reducedMotion;
     // Landmarks stand on level ground: each flattens a small circle.
@@ -133,7 +138,7 @@ export class World {
     progress(0.8, "Painting the signs…");
     this.buildSigns();
     progress(0.86, "Making your character…");
-    if (this.characterModel === "mesh") await this.buildMeshCharacter();
+    if (this.characterModel !== "splats") await this.buildMeshCharacter();
     else this.buildCharacter();
     this.spawn();
     progress(0.9, "Growing the grass…");
@@ -380,9 +385,16 @@ export class World {
   // The lit, skinned character (mesh-character.js). In splats mode, where
   // no sky lights the models, a soft ambient light stands in for it.
   async buildMeshCharacter() {
-    const { model } = await loadMeshCharacter(this.view.app);
+    const { model, meta } =
+      this.characterModel === "mesh"
+        ? await loadHuman(this.view.app, { tier: this.tier, look: this.def.character })
+        : await loadMeshCharacter(this.view.app);
+    if (this.characterModel === "mesh") this.speeds = { walk: meta.walkSpeed, run: meta.runSpeed };
     const root = this.view.group("character");
     root.addChild(model);
+    // The first pose now (idle), not the model's rest pose. (Only once it
+    // has a parent: the clips find their bones from there.)
+    if (this.characterModel === "mesh") model.anim.update(0.001);
     this.joints = { root };
     this.meshCharacter = model;
     this.charCount = 0;
@@ -546,7 +558,8 @@ export class World {
     dt = Math.min(dt, 0.1);
     this.time += dt;
     this.stepCharacter(dt, input);
-    const run = Math.max(0, Math.min(1, (this.char.gait.speed - WALK_SPEED) / (RUN_SPEED - WALK_SPEED))); // prettier-ignore
+    const { walk: ws, run: rs } = this.speeds;
+    const run = Math.max(0, Math.min(1, (this.char.gait.speed - ws) / (rs - ws)));
     const { pos, target } = this.overview
       ? this.overviewPose(dt)
       : this.camera.update(this.focus(), dt, run, this.time);
@@ -586,7 +599,7 @@ export class World {
       const dx = forward[0] * input.y + right[0] * input.x;
       const dz = forward[1] * input.y + right[1] * input.x;
       const l = Math.hypot(dx, dz) || 1;
-      speed = (input.run ? RUN_SPEED : WALK_SPEED) * Math.min(1, amt);
+      speed = (input.run ? this.speeds.run : this.speeds.walk) * Math.min(1, amt);
       const want = Math.atan2(dx / l, dz / l);
       c.facing = turnToward(c.facing, want, dt * 10);
       const res = this.physics.move(c.pos, (dx / l) * speed * dt, (dz / l) * speed * dt);
