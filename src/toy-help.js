@@ -1473,9 +1473,10 @@ export const TOY_HELP = {
       "A picture frame protects a photo and sets it apart from the wall. Many hang from a single nail on a wire stretched across the back, so the frame can tilt a little either way until it hangs straight.\n\nTap it and the frame swings on its wire like a pendulum, back and forth, smaller each time, until it settles. Pick a wood, gold, modern or digital frame in the Toy tab; the digital frame fades from one photo to the next, in order or at random. Open a photo, a GIF or a video of your own (a GIF or a video plays on a loop), or several photos for the digital frame. Your files stay on your device.",
   },
   screen: {
-    howTo: "Tap to switch it on, then to play and pause. Pick a Style in the Toy tab.",
+    howTo:
+      "Tap to switch on, then the picture to play or pause. Tap the knob, button, curtains or base to switch off.",
     about:
-      "A screen made of splats shows a video or a GIF: every pixel of the picture is a small splat whose color changes with each frame. It comes in four styles: an old TV with a wooden cabinet and a curved glass face, a flat TV on a stand, a cinema with red curtains and rows of seats, and a hologram floating above its projector.\n\nTap it to switch it on: the old TV's picture opens from a bright line, the flat TV fades up, the curtains part, or the hologram flickers up from its beam. Tap again to pause and play. Turn on the sound with the speaker button, and open your own video or GIF in the Toy tab.",
+      "A screen made of splats shows a video or a GIF: every pixel of the picture is a small splat whose color changes with each frame. It comes in four styles: an old TV with a walnut cabinet and a curved glass face, a flat TV on a stand, a cinema with velvet curtains and rows of seats, and a hologram floating above its projector.\n\nTap it to switch it on: the old TV's picture opens from a bright line, the flat TV fades up, the curtains part, or the hologram flickers up from its beam. Tap the picture to pause and play. To switch off, tap the old TV's power knob (the picture shrinks to a bright dot, as old tube sets did), the small button beside the flat TV's red light, the curtains (they close) or the hologram's base, or use the button in the Toy tab. Turn on the sound with the speaker button, and open your own video or GIF in the Toy tab.",
   },
 
   // ---- Studio ---------------------------------------------------------------------------

@@ -1519,11 +1519,21 @@ export const TOY_SOUNDS = {
   // Lane Screens: the old TV's click and hum (each style plays its own
   // cues as it switches on: the flat TV's soft tone, the cinema's curtains,
   // the hologram's shimmer).
-  screen: [
-    { voice: "switch", f: 1800, vol: 0.9 },
-    { voice: "zap", at: 0.1, f: 5200, to: 0.9, decay: 0.5, vol: 0.18 },
-    { voice: "hum", at: 0.12, f: 60, to: 1.02, decay: 1.6, bright: 0.15, vol: 0.5 },
-  ],
+  // The old TV: on, a click, a crackle and the hum; off, the knob's click
+  // and the whine falling away (lane Screens r2). The Screen plays each
+  // style's own sounds from its recipe (src/packs/screens.js).
+  screen: {
+    on: [
+      { voice: "switch", f: 1800, vol: 0.9 },
+      { voice: "zap", at: 0.1, f: 5200, to: 0.9, decay: 0.5, vol: 0.18 },
+      { voice: "hum", at: 0.12, f: 60, to: 1.02, decay: 1.6, bright: 0.15, vol: 0.5 },
+    ],
+    off: [
+      { voice: "switch", f: 1500, vol: 0.9 },
+      { voice: "zap", at: 0.05, f: 7800, to: 0.35, decay: 1.4, vol: 0.12 },
+      { voice: "hum", at: 0.02, f: 62, to: 0.6, decay: 0.7, bright: 0.12, vol: 0.35 },
+    ],
+  },
   // ---- Lab (lane Lab) ----------------------------------------------------------------
   // A soft rising swell as the pulse runs out through the field.
   "splat-field": { voice: "pad", f: "D4", to: 1.5, decay: 2.5, vol: 0.7 },
