@@ -11,8 +11,8 @@ Yes, for scenes that stand still, in the browser, with nothing uploaded. Splat.j
 one, and trains Gaussian splats on the graphics card through WebGPU. The labs toy "Video to 3D"
 (Studio shelf) does the whole thing and shows the result as the toy's own splats, with Replay flight
 along the video's camera path and a PLY to save. A walk around a statue and a walk down a street
-rebuilt well from the video's own angles; people who walk through the shot turn into ghosts, and a
-drone flight high over a city failed to find its camera path (too little parallax).
+rebuilt well from the video's own angles; people who walk through the shot turn into ghosts. A drone
+flight over a city first failed, because of a bug of ours (see "What fails"), now fixed.
 
 **Recommendation: keep it as a labs experiment for now**, and decide on a toy once the owner has run
 it on his own computer and phone (the readout on the page gives every number the report needs). If
@@ -75,9 +75,15 @@ container). WebGPU is on in current Chrome, Edge, Safari (iPhones included) and 
 
 - **Moving things.** People walking through the street became smeared ghosts; cars would too. The
   method assumes the scene stands still; true 4D needs a rented GPU (not this lane).
-- **Little parallax.** A drone high over a city, moving slowly, sees the city from nearly the same
-  angle in every frame, and the camera solve fails ("need more parallax/overlap"). Lower, faster or
-  circling flights work better; so does a longer stretch with fewer frames a second.
+- **A 2:1 picture (fixed).** Splat.js takes any picture within 5% of 2:1 for a 360-degree panorama
+  and slices it into six views. The drone clip, cropped to remove a credit line, came out at 2.02:1:
+  the first stretch failed the solve ("known-focal reconstruction failed — need more
+  parallax/overlap", after 33 minutes) and a second trained 144 "views" from 24 frames. A 2:1 video
+  from a visitor would do the same, so the toy now trims such frames to 1.9:1 before Splat.js sees
+  them (`panoSafeCrop`, tested).
+- **Little parallax.** A drone high over a city sees it from nearly the same angle in every frame;
+  expect a slow, high flight to solve poorly. Lower, faster or circling flights work better; so does
+  a longer stretch with fewer frames a second. (Not separated from the bug above in this spike.)
 - **Angles nobody filmed.** Turning past the filmed arc shows soft, blurry splats (the blue smear
   beside the statue, blobs in the sky). Floaters (loose splats in front of the camera) appear with
   short training.
@@ -146,7 +152,7 @@ own frame and the side-by-side cards here to mostly close for the parts that wer
 - Drone over a city: "Central Nicosia drone footage overlooking UN buffer zone" by The Track Record
   - BTS, CC BY 3.0,
     https://commons.wikimedia.org/wiki/File:Central_Nicosia_drone_footage_overlooking_UN_buffer_zone.webm
-    (0:45 to 0:57 failed; 19 seconds from 1:04 solved).
+    (19 seconds from 1:04; the 0:45 stretch failed on the panorama bug above).
 
 Each license was checked on the live Commons page on September 30, 2026.
 
