@@ -79,8 +79,8 @@ export class GpuFluids {
       p.color = [...look.color, look.scatter];
       p.absorb = [...look.absorb, look.glow];
     }
-    const gas = this.gas?.view() || null;
-    if (!liq && !gas && !glassSpec) return;
+    const gas = this.gas?.view() || [];
+    if (!liq && !gas.length && !glassSpec) return;
     surf.render(
       liq
         ? { texture: liq.texture, texWidth: liq.sim.texWidth, count: liq.n, simToToy: liq.simToRecipe(), radius: liq.d * 0.8, gas } // prettier-ignore

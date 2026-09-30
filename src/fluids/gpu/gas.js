@@ -231,10 +231,11 @@ const FORCES_SCAL = pass(
   float fb = 1.0 - smoothstep(uSrcB.w * 0.5, uSrcB.w, distance(p, uSrcB.xyz));
   s.rgb += (uAddA.rgb * fa + uAddB.rgb * fb) * uDt;
   // burning: fuel turns to heat and a little smoke where it is hot
-  float burn = min(s.b, uBuoy.z * s.b * smoothstep(0.2, 0.6, s.g) * uDt);
+  // a lit flame burns its fuel steadily (burning, not ignition, is modeled)
+  float burn = min(s.b, uBuoy.z * s.b * uDt);
   s.b -= burn;
   s.g += burn * uBuoy.w;
-  s.r += burn * 0.08;
+  s.r += burn * 0.01;
   // the top of the grid lets smoke out (it thins away instead of piling up)
   float top = smoothstep(0.7, 1.0, (float(c.y) + 0.5) / uDims.y);
   s *= 1.0 - top * min(1.0, uDt * 8.0);
@@ -244,10 +245,10 @@ const FORCES_SCAL = pass(
   let fa = 1.0 - smoothstep(uniform.uSrcA.w * 0.5, uniform.uSrcA.w, distance(p, uniform.uSrcA.xyz));
   let fb = 1.0 - smoothstep(uniform.uSrcB.w * 0.5, uniform.uSrcB.w, distance(p, uniform.uSrcB.xyz));
   s = vec4f(s.rgb + (uniform.uAddA.rgb * fa + uniform.uAddB.rgb * fb) * uniform.uDt, s.a);
-  let burn = min(s.b, uniform.uBuoy.z * s.b * smoothstep(0.2, 0.6, s.g) * uniform.uDt);
+  let burn = min(s.b, uniform.uBuoy.z * s.b * uniform.uDt);
   s.b -= burn;
   s.g += burn * uniform.uBuoy.w;
-  s.r += burn * 0.08;
+  s.r += burn * 0.01;
   let top = smoothstep(0.7, 1.0, (f32(c.y) + 0.5) / uniform.uDims.y);
   s = s * (1.0 - top * min(1.0, uniform.uDt * 8.0));
   out = clamp(s, vec4f(0.0), vec4f(8.0));`,
@@ -450,7 +451,7 @@ export class GasGrid {
     this.swap("scalA", "scalB");
     // project
     this.run("divergence", t.div, { uVel: t.velA.tex });
-    for (let i = 0; i < this.tier.jacobi; i++) {
+    for (let i = 0; i < (this.jacobi ?? this.tier.jacobi); i++) {
       this.run("jacobi", t.presB, { uPres: t.presA.tex, uDiv: t.div.tex });
       this.swap("presA", "presB");
     }
@@ -467,8 +468,8 @@ export class GasGrid {
 
   // Steps to catch up with dt at the tier's rate (at most 3 a frame).
   advance(dt) {
-    const h = 1 / this.tier.hz;
-    this.acc = Math.min(this.acc + dt, 3 * h);
+    const h = 1 / (this.hz ?? this.tier.hz);
+    this.acc = Math.min(this.acc + dt, (this.maxSteps ?? 3) * h);
     let n = 0;
     while (this.acc >= h - 1e-6) {
       this.acc -= h;

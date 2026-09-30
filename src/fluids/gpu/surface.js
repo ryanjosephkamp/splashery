@@ -252,6 +252,33 @@ vec4 gasSample(vec3 p) {
   vec4 d = mix(gasFetch(i + ivec3(0, 1, 1)), gasFetch(i + ivec3(1, 1, 1)), f.x);
   return mix(mix(a, b, f.y), mix(c, d, f.y), f.z);
 }
+uniform sampler2D uGas2;
+uniform vec4 uGas2A;        // xyz lower corner (toy), w cell size
+uniform vec4 uGas2B;        // xyz cells, w tiles across
+uniform vec4 uGas2C;        // rgb smoke color, w on
+uniform vec4 uGas2D;        // x smoke density, y flame gain, z steps, w scatter light
+
+ivec2 gas2Texel(ivec3 c) {
+  int nx = int(uGas2B.x);
+  int ny = int(uGas2B.y);
+  int tw = int(uGas2B.w);
+  int tz = c.z / tw;
+  return ivec2((c.z - tz * tw) * nx + c.x, tz * ny + c.y);
+}
+vec4 gas2Fetch(ivec3 c) {
+  c = clamp(c, ivec3(0), ivec3(uGas2B.xyz) - 1);
+  return texelFetch(uGas2, gas2Texel(c), 0);
+}
+vec4 gas2Sample(vec3 p) {
+  p = clamp(p - 0.5, vec3(0.0), uGas2B.xyz - 1.0);
+  vec3 f = fract(p);
+  ivec3 i = ivec3(floor(p));
+  vec4 a = mix(gas2Fetch(i), gas2Fetch(i + ivec3(1, 0, 0)), f.x);
+  vec4 b = mix(gas2Fetch(i + ivec3(0, 1, 0)), gas2Fetch(i + ivec3(1, 1, 0)), f.x);
+  vec4 c = mix(gas2Fetch(i + ivec3(0, 0, 1)), gas2Fetch(i + ivec3(1, 0, 1)), f.x);
+  vec4 d = mix(gas2Fetch(i + ivec3(0, 1, 1)), gas2Fetch(i + ivec3(1, 1, 1)), f.x);
+  return mix(mix(a, b, f.y), mix(c, d, f.y), f.z);
+}
 // A candle flame's colors by temperature: deep blue at the base where fuel
 // meets air, then the soot glowing yellow-white, yellow, orange, dull red.
 vec3 flameRamp(float t) {
@@ -393,12 +420,44 @@ void main() {
         vec4 g = gasSample((p - lo) / uGasA.w);
         float sigma = g.r * uGasD.x;
         // flame: glows where fuel burns hot
-        float glow = uGasD.y * g.b * smoothstep(0.15, 0.5, g.g);
-        vec3 e = flameRamp(clamp(g.g * 0.35, 0.0, 1.0)) * glow;
-        // blue base: fuel still cool
-        e += vec3(0.1, 0.25, 1.0) * uGasD.y * 0.35 * g.b * (1.0 - smoothstep(0.1, 0.4, g.g));
+        // glowing soot: bright by temperature; blue where fuel meets air
+        float heat = max(g.g, 0.0);
+        vec3 e = flameRamp(clamp(heat * 0.3, 0.0, 1.0)) * uGasD.y * heat * smoothstep(0.005, 0.08, g.b);
+        e += vec3(0.12, 0.3, 1.0) * uGasD.y * 0.25 * g.b * (1.0 - smoothstep(0.3, 1.2, heat));
         float light = uGasD.w * (0.55 + 0.45 * clamp(1.0 - gasSample((p - lo) / uGasA.w + vec3(0.0, 2.0, 0.0)).r * uGasD.x * uGasA.w * 6.0, 0.0, 1.0));
         acc += trans * (e + uGasC.rgb * light * sigma) * ds;
+        trans *= exp(-sigma * ds);
+      }
+      col = col * trans + acc;
+    }
+  }
+  // The second grid (a flame's fine grid, or the smoke's).
+  if (uGas2C.w > 0.5) {
+    vec3 lo = uGas2A.xyz;
+    vec3 hi = uGas2A.xyz + uGas2B.xyz * uGas2A.w;
+    vec3 inv = 1.0 / rd;
+    vec3 t0 = (lo - eye) * inv;
+    vec3 t1 = (hi - eye) * inv;
+    vec3 tmn = min(t0, t1);
+    vec3 tmx = max(t0, t1);
+    float ta = max(max(tmn.x, tmn.y), max(tmn.z, 0.0));
+    float tb = min(min(tmx.x, tmx.y), tmx.z);
+    if (tb > ta) {
+      int N = int(uGas2D.z);
+      float ds = (tb - ta) / float(N);
+      float trans = 1.0;
+      vec3 acc = vec3(0.0);
+      for (int k = 0; k < 96; k++) {
+        if (k >= N || trans < 0.01) break;
+        vec3 p = eye + rd * (ta + (float(k) + 0.5) * ds);
+        vec4 g = gas2Sample((p - lo) / uGas2A.w);
+        float sigma = g.r * uGas2D.x;
+        // flame: glows where fuel burns hot
+        float heat = max(g.g, 0.0);
+        vec3 e = flameRamp(clamp(heat * 0.3, 0.0, 1.0)) * uGas2D.y * heat * smoothstep(0.005, 0.08, g.b);
+        e += vec3(0.12, 0.3, 1.0) * uGas2D.y * 0.25 * g.b * (1.0 - smoothstep(0.3, 1.2, heat));
+        float light = uGas2D.w * (0.55 + 0.45 * clamp(1.0 - gas2Sample((p - lo) / uGas2A.w + vec3(0.0, 2.0, 0.0)).r * uGas2D.x * uGas2A.w * 6.0, 0.0, 1.0));
+        acc += trans * (e + uGas2C.rgb * light * sigma) * ds;
         trans *= exp(-sigma * ds);
       }
       col = col * trans + acc;
@@ -449,6 +508,32 @@ fn gasSample(p0: vec3f) -> vec4f {
   let b = mix(gasFetch(i + vec3i(0, 1, 0)), gasFetch(i + vec3i(1, 1, 0)), f.x);
   let c = mix(gasFetch(i + vec3i(0, 0, 1)), gasFetch(i + vec3i(1, 0, 1)), f.x);
   let d = mix(gasFetch(i + vec3i(0, 1, 1)), gasFetch(i + vec3i(1, 1, 1)), f.x);
+  return mix(mix(a, b, f.y), mix(c, d, f.y), f.z);
+}
+var uGas2: texture_2d<uff>;
+uniform uGas2A: vec4f;
+uniform uGas2B: vec4f;
+uniform uGas2C: vec4f;
+uniform uGas2D: vec4f;
+fn gas2Texel(c: vec3i) -> vec2i {
+  let nx = i32(uniform.uGas2B.x);
+  let ny = i32(uniform.uGas2B.y);
+  let tw = i32(uniform.uGas2B.w);
+  let tz = c.z / tw;
+  return vec2i((c.z - tz * tw) * nx + c.x, tz * ny + c.y);
+}
+fn gas2Fetch(c0: vec3i) -> vec4f {
+  let c = clamp(c0, vec3i(0), vec3i(uniform.uGas2B.xyz) - vec3i(1));
+  return textureLoad(uGas2, gas2Texel(c), 0);
+}
+fn gas2Sample(p0: vec3f) -> vec4f {
+  let p = clamp(p0 - 0.5, vec3f(0.0), uniform.uGas2B.xyz - 1.0);
+  let f = fract(p);
+  let i = vec3i(floor(p));
+  let a = mix(gas2Fetch(i), gas2Fetch(i + vec3i(1, 0, 0)), f.x);
+  let b = mix(gas2Fetch(i + vec3i(0, 1, 0)), gas2Fetch(i + vec3i(1, 1, 0)), f.x);
+  let c = mix(gas2Fetch(i + vec3i(0, 0, 1)), gas2Fetch(i + vec3i(1, 0, 1)), f.x);
+  let d = mix(gas2Fetch(i + vec3i(0, 1, 1)), gas2Fetch(i + vec3i(1, 1, 1)), f.x);
   return mix(mix(a, b, f.y), mix(c, d, f.y), f.z);
 }
 fn flameRamp(t: f32) -> vec3f {
@@ -597,11 +682,41 @@ fn fresnel(cosT: f32, f0: f32) -> f32 {
         let p = eye + rd * (ta + (f32(k) + 0.5) * ds);
         let g = gasSample((p - lo) / uniform.uGasA.w);
         let sigma = g.r * uniform.uGasD.x;
-        let glow = uniform.uGasD.y * g.b * smoothstep(0.15, 0.5, g.g);
-        var e = flameRamp(clamp(g.g * 0.35, 0.0, 1.0)) * glow;
-        e += vec3f(0.1, 0.25, 1.0) * uniform.uGasD.y * 0.35 * g.b * (1.0 - smoothstep(0.1, 0.4, g.g));
+        let heat = max(g.g, 0.0);
+        var e = flameRamp(clamp(heat * 0.3, 0.0, 1.0)) * uniform.uGasD.y * heat * smoothstep(0.005, 0.08, g.b);
+        e += vec3f(0.12, 0.3, 1.0) * uniform.uGasD.y * 0.25 * g.b * (1.0 - smoothstep(0.3, 1.2, heat));
         let light = uniform.uGasD.w * (0.55 + 0.45 * clamp(1.0 - gasSample((p - lo) / uniform.uGasA.w + vec3f(0.0, 2.0, 0.0)).r * uniform.uGasD.x * uniform.uGasA.w * 6.0, 0.0, 1.0));
         acc += trans * (e + uniform.uGasC.rgb * light * sigma) * ds;
+        trans *= exp(-sigma * ds);
+      }
+      col = col * trans + acc;
+    }
+  }
+  if (uniform.uGas2C.w > 0.5) {
+    let lo = uniform.uGas2A.xyz;
+    let hi = uniform.uGas2A.xyz + uniform.uGas2B.xyz * uniform.uGas2A.w;
+    let inv = 1.0 / rd;
+    let t0 = (lo - eye) * inv;
+    let t1 = (hi - eye) * inv;
+    let tmn = min(t0, t1);
+    let tmx = max(t0, t1);
+    let ta = max(max(tmn.x, tmn.y), max(tmn.z, 0.0));
+    let tb = min(min(tmx.x, tmx.y), tmx.z);
+    if (tb > ta) {
+      let N = i32(uniform.uGas2D.z);
+      let ds = (tb - ta) / f32(N);
+      var trans = 1.0;
+      var acc = vec3f(0.0);
+      for (var k = 0; k < 96; k++) {
+        if (k >= N || trans < 0.01) { break; }
+        let p = eye + rd * (ta + (f32(k) + 0.5) * ds);
+        let g = gas2Sample((p - lo) / uniform.uGas2A.w);
+        let sigma = g.r * uniform.uGas2D.x;
+        let heat = max(g.g, 0.0);
+        var e = flameRamp(clamp(heat * 0.3, 0.0, 1.0)) * uniform.uGas2D.y * heat * smoothstep(0.005, 0.08, g.b);
+        e += vec3f(0.12, 0.3, 1.0) * uniform.uGas2D.y * 0.25 * g.b * (1.0 - smoothstep(0.3, 1.2, heat));
+        let light = uniform.uGas2D.w * (0.55 + 0.45 * clamp(1.0 - gas2Sample((p - lo) / uniform.uGas2A.w + vec3f(0.0, 2.0, 0.0)).r * uniform.uGas2D.x * uniform.uGas2A.w * 6.0, 0.0, 1.0));
+        acc += trans * (e + uniform.uGas2C.rgb * light * sigma) * ds;
         trans *= exp(-sigma * ds);
       }
       col = col * trans + acc;
@@ -803,14 +918,16 @@ export class FluidSurface {
     scope.resolve("uGlassA").setValue(p.glassA);
     scope.resolve("uGlassB").setValue(p.glassB);
     scope.resolve("uMisc").setValue([p.refract, liquid ? 1 : 0, 0, 0]);
-    const gas = src.gas;
-    scope.resolve("uGas").setValue(gas ? gas.grid.scalars : this.blankGas());
-    scope.resolve("uGasA").setValue(gas ? [...gas.grid.lo, gas.grid.cell] : [0, 0, 0, 1]);
-    scope.resolve("uGasB").setValue(gas ? [...gas.grid.dims, gas.grid.tilesX] : [1, 1, 1, 1]);
-    scope.resolve("uGasC").setValue(gas ? [...gas.color, 1] : [0, 0, 0, 0]);
-    scope
-      .resolve("uGasD")
-      .setValue(gas ? [gas.density, gas.flame, gas.steps, gas.light] : [0, 0, 0, 0]);
+    // Up to two gas grids (gasscene.js: a flame's fine grid and the smoke's).
+    const gases = src.gas || [];
+    for (const [k, name] of [[0, "uGas"], [1, "uGas2"]]) {
+      const gas = gases[k];
+      scope.resolve(name).setValue(gas ? gas.grid.scalars : this.blankGas());
+      scope.resolve(`${name}A`).setValue(gas ? [...gas.grid.lo, gas.grid.cell] : [0, 0, 0, 1]);
+      scope.resolve(`${name}B`).setValue(gas ? [...gas.grid.dims, gas.grid.tilesX] : [1, 1, 1, 1]);
+      scope.resolve(`${name}C`).setValue(gas ? [...gas.color, 1] : [0, 0, 0, 0]);
+      scope.resolve(`${name}D`).setValue(gas ? [gas.density, gas.flame, gas.steps, gas.light] : [0, 0, 0, 0]);
+    }
     this.comp.render();
     this.stats.ms = performance.now() - t0;
   }
