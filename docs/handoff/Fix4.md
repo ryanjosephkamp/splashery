@@ -149,6 +149,10 @@ follow in this session.
   the right. The fins are scattered a little off the Fibonacci points so their rows never show as
   rings. The swirl is unchanged, and now shows at full color (the milky film was what washed it
   out).
+  - The fins keep the same physical size on every device tier (a smaller budget makes every splat
+    bigger, so their size is scaled back by the square root of the budget, and their opacity raised
+    to make up for fewer of them), and the marble now has `density: 2`, so the low tier builds it
+    from 120k splats: with fewer fins its edge showed as hatching.
   - Flat shells can't do this: face on and at the rim they add up about equally (tried at several
     opacities before the fins).
 
