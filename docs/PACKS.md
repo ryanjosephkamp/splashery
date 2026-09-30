@@ -855,6 +855,50 @@ inside it (`src/packs/anatomy-atlas.js`):
   and scales its shapes and gives its color functions their own coordinates, so the colors stay
   right. Drop its moving effects and lower its shapes' grids to fit the budget.
 
+## 7e. Sound preferences
+
+Drawn from the owner's sound review of September 28, 2026 (`docs/reviews/2026-09-28-sounds/`, filed
+September 30) and his summary that day. They are general guidance, not strict rules, but every new
+or changed sound follows them unless the owner asks otherwise. `tools/sound-review.json` has his
+notes per toy.
+
+- **Real things sound real.** A real-world object makes the sound the real thing makes, like a good
+  sound effect or "almost ASMR": a bite of an apple, a hard taco shell cracking, dice on a table,
+  bowling pins falling, a pool cue hitting the ball, a book's pages turning, popcorn popping dry.
+  Where synthesis can't get there, use a short recorded CC0 sample (see below).
+- **Animals make their own calls.** An elephant trumpets, a horse whinnies, a cat meows, an owl
+  hoots, a frog croaks, a fly buzzes like a fly. That goes for statues and toys of animals too.
+- **Fire, explosions and weather.** Fire crackles and roars like fire (the volcano's flame is the
+  reference). An explosion or a burst sounds like one: a supernova, a meteor's burst, fireworks.
+  Wind, waves and sand-like noise stay quiet and in the background. They are the most common
+  complaint: "overwhelming", "almost hurts the ears".
+- **Avoid, unless the thing really makes it:**
+  - clicks and ticking (the owner: "I don't like the clicking on almost anything");
+  - whistles, chirps and "a little bell" at the start of a sound;
+  - the rising "vroom" acceleration buzz used for spinning up;
+  - robotic, electronic or "digital" tones and jingles on anything that isn't electronic;
+  - instrument tones (xylophone runs, string plucks, chimes, chords) on things that aren't
+    instruments;
+  - bubbles for things that aren't liquid, and a zipper sound for anything that isn't a zipper.
+- **Sync to what you see.** Each visible event gets its sound at the moment it happens: petals
+  landing, a ball's bounces down a slope, a starfish's arms opening, each candle going out. One
+  sound for a sequence of separate events doesn't match.
+- **Music only where music belongs**, and then real music on a realistic instrument, not a jingle:
+  part of "Happy Birthday to You" on the birthday cake, a carol such as "Jingle Bells" on the
+  decorated tree. Choose public-domain melodies, perform them ourselves or use CC0 recordings, and
+  never add voices. Keep it respectful where a culture is involved.
+- **Subtle levels.** Nothing loud or harsh. The tap's main sound leads, and ambience stays under it.
+- **Exceptions he likes**, as references: the Mandelbulb (electronic, and it fits), the sorting
+  machine, the looped transformer, Newton's cradle, the ocean liner, the Pyramids and the whole
+  music shelf.
+- **Recorded samples.** Only CC0 or public domain first; CC BY only if nothing CC0 fits, credited
+  like any asset. Never BY-SA, NC or "royalty-free" custom licenses (Pixabay, Mixkit, Zapsplat,
+  Sonniss). Check the license on the live page of each sound, and record it in CREDITS.md and
+  `tools/assets.json`. Keep samples short, mono and small, loaded only when the toy is tapped.
+
+Since September 30, 2026, a new sound may go live before the owner has heard it. He says which ones
+to fix, and the sound patrol checks new toys against this section.
+
 ## 8. Checking your work
 
 ```sh

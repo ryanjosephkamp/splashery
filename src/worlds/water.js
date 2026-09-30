@@ -43,16 +43,18 @@ export function buildWater(terrain, chunk, level, { density = 1 } = {}) {
       const depth = w - h;
       // Pale and clear over the shallows, deep and solid out at sea.
       let col = mix(c.shallow, c.water, smoothstep(0.2, 3.5, depth));
-      const ripple = terrain.detail.fbm(x * 0.35, 9.1, z * 0.9, 3);
-      col = mix(col, c.horizon, clamp(0.12 + ripple * 0.5, 0, 0.35));
-      const foam = smoothstep(0.35, 0.02, depth) * (0.55 + 0.45 * terrain.detail(x * 1.7, 2.2, z * 1.7)); // prettier-ignore
-      col = mix(col, c.foam, clamp(foam, 0, 0.9));
-      const opacity = clamp(0.35 + depth * 0.28 + foam * 0.5, 0.35, 0.97);
-      const s = step * 0.8 * Math.exp((r() - 0.5) * 0.3);
+      // A soft, even sheen (no streaks); the waves add the moving light.
+      const ripple = terrain.detail.fbm(x * 0.22, 9.1, z * 0.22, 2);
+      col = mix(col, c.horizon, clamp(0.1 + ripple * 0.3, 0, 0.22));
+      const foam = smoothstep(0.35, 0.02, depth) * (0.6 + 0.4 * terrain.detail(x * 1.1, 2.2, z * 1.1)); // prettier-ignore
+      col = mix(col, c.foam, clamp(foam, 0, 0.85));
+      const opacity = clamp(0.5 + depth * 0.25 + foam * 0.4, 0.5, 0.97);
+      // Round, even, overlapping splats read as a smooth surface.
+      const s = step * 0.9 * Math.exp((r() - 0.5) * 0.1);
       buf.push(
         [x - chunk.x0, 0.015 + foam * 0.02, z - chunk.z0],
-        [s * 1.25, s * 0.75, s * 0.05],
-        discRotation(up, r() * 0.4 + (a % 2) * 0.1),
+        [s, s * (0.94 + 0.08 * r()), s * 0.04],
+        discRotation(up, r() * TAU),
         [col[0], col[1], col[2], opacity],
       );
     }
