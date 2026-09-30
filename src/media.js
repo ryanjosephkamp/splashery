@@ -12,7 +12,9 @@
 // picture, or the video's current frame); for a GIF, m.delays (ms per
 // frame) and m.duration (s); for a video, m.video (the element), m.play(),
 // m.pause(), m.seek(s), m.duration, m.playing, m.setMuted(muted) and
-// m.onFrame(fn) (called on each new video frame); m.close().
+// m.onFrame(fn) (called on each new video frame); for a PDF, await m.text(i)
+// -> page i's words from its text layer, a line per line of the page ("" for
+// a page with none, like a scan); m.close().
 
 import { LIMITS } from "./loaders.js";
 import { normalizeMediaURL } from "./state.js";
@@ -315,6 +317,35 @@ async function openPDF(src, limits) {
   };
   const first = await pageSize(0);
   let rendering = Promise.resolve();
+  // Each page's words, read once when first asked for (the Toy tab's words
+  // box, lane Pictures): the page's text items in order, a new line where
+  // the page's line ends, runs of spaces made one.
+  const texts = new Map();
+  const text = (i) => {
+    if (!texts.has(i)) {
+      const job = doc
+        .getPage(i + 1)
+        .then((page) => page.getTextContent())
+        .then(({ items }) => {
+          let s = "";
+          for (const it of items) {
+            if (typeof it.str !== "string") continue;
+            s += it.str;
+            if (it.hasEOL) s += "\n";
+          }
+          return s
+            .split("\n")
+            .map((line) => line.replace(/\s+/g, " ").trim())
+            .join("\n")
+            .replace(/\n{3,}/g, "\n\n")
+            .trim();
+        });
+      // A page that fails to read is asked again next time.
+      job.catch(() => texts.delete(i));
+      texts.set(i, job);
+    }
+    return texts.get(i);
+  };
   return {
     kind: "pdf",
     name: src.name,
@@ -326,6 +357,7 @@ async function openPDF(src, limits) {
       return s.width / s.height;
     },
     pageSize,
+    text,
     // Renders page i (0-based) to w x h on white paper. Renders one at a
     // time: PDF.js keeps one canvas busy per page.
     draw(i, w, h) {
