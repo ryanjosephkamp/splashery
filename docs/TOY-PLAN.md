@@ -10,8 +10,8 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 329 toys. 329 have a tap action today; the other 0 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 326.
+- 333 toys. 333 have a tap action today; the other 0 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 330.
 - **more** (has an effect; make it clearer or more dramatic): 0.
 - **new** (needs its own effect): 3.
 - Visual fixes: 0 open, 30 done. Touch or drag interaction asked for: 4.
@@ -49,13 +49,14 @@ Proposals below are suggestions; the owner may change them.
   pen, Water bottle, Soda can, Running shoe, Hoodie, Sunglasses, Baseball cap, Heraldic shield,
   Crown, Wizard's orb, Jellyfish, School of fish, Pufferfish, Nautilus, Snail, Octopus, Sea urchin,
   Frog, Snowman, Fireworks, Decorated tree, Diya, Acoustic guitar, Snare drum, Xylophone, Toy piano,
-  Hot-air balloon, Bus, Jet airliner, Sailboat, Submarine, Bicycle, Eiffel Tower, Washington
-  Monument, Pyramids of Giza, Twisting supertall, Statue of Liberty, White House, Leaning Tower of
-  Pisa, Colosseum, Parthenon, Stonehenge, Big Ben, Taj Mahal, Castle, Pagoda, Windmill, Perceptron,
-  Multilayer perceptron, Neural network, Convolutional network, Recurrent network, Transformer,
-  Looped transformer, Diffusion model, Gradient descent, Gaussian splatting, Word vectors, Sorting
-  machine, Half adder, Turing machine, Difference engine, Enigma machine, Bombe, Your book, Photo
-  album, Picture frame, Model to splats, Photo to 3D, Splat field, Screen.
+  Grand piano, Upright piano, Harpsichord, Electronic keyboard, Hot-air balloon, Bus, Jet airliner,
+  Sailboat, Submarine, Bicycle, Eiffel Tower, Washington Monument, Pyramids of Giza, Twisting
+  supertall, Statue of Liberty, White House, Leaning Tower of Pisa, Colosseum, Parthenon,
+  Stonehenge, Big Ben, Taj Mahal, Castle, Pagoda, Windmill, Perceptron, Multilayer perceptron,
+  Neural network, Convolutional network, Recurrent network, Transformer, Looped transformer,
+  Diffusion model, Gradient descent, Gaussian splatting, Word vectors, Sorting machine, Half adder,
+  Turing machine, Difference engine, Enigma machine, Bombe, Your book, Photo album, Picture frame,
+  Model to splats, Photo to 3D, Splat field, Screen.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -1847,7 +1848,7 @@ Proposals below are suggestions; the owner may change them.
   - Owner: Pretty much perfect.
   - Sound: Match strike and a bell.
 
-## Music (4)
+## Music (8)
 
 - **Acoustic guitar** (`guitar`). Now: tap: Strum. Plan: keep.
   - Owner: Looks fine; add the music.
@@ -1883,6 +1884,47 @@ Proposals below are suggestions; the owner may change them.
     (1.5 s). A tap on a key, a hammer or a rod plays that key; its note sounds as the hammer lands.
     A tap anywhere else plays Twinkle, Twinkle.
   - Sound: The plinky, bell-like tone of struck metal rods, made in the page.
+- **Grand piano** (`grand-piano`). Now: tap: Play the opening. Plan: keep.
+  - Owner: Lane Pianos, from the owner's idea on the Toy Ideas page (September 29, 2026).
+  - Effect: Tap a key: it dips, its hammer flies up under the open lid and strikes the strings, and
+    the damper lifts while the note rings. Tap anywhere else: it plays the opening of its song,
+    every key and hammer moving with the notes and the sustain pedal going down with the phrases
+    (about 5 s; the whole song plays from the song bar).
+  - Improved: Pianos: 88 keys, 88 hammers and 70 dampers, each its own solid piece (the lever kind).
+    A tapped key dips for about 0.9 s, its hammer strikes and falls back, its damper lifts. A tap
+    elsewhere plays the song's opening (about 5 s) with the keys, hammers, dampers and sustain pedal
+    following every note. The song bar plays the whole song, and a MIDI file or an ABC tune of your
+    own.
+  - Sound: A warm concert-grand voice made in the page (felt thump, ringing partials, the damper's
+    soft stop). Built-in songs: Für Elise, Clair de lune, Gymnopédie No. 1, Ode to Joy.
+- **Upright piano** (`upright-piano`). Now: tap: Play the opening. Plan: keep.
+  - Owner: Lane Pianos, from the owner's idea on the Toy Ideas page (September 29, 2026).
+  - Effect: Tap a key to play it: the front panel is off, so you see the row of hammers swing
+    forward onto the upright strings. Tap elsewhere for its song, a ragtime (The Entertainer), the
+    hammers rippling along the row.
+  - Improved: Pianos: a walnut upright with its upper front panel off; 88 keys, hammers that swing
+    back onto the strings and 66 dampers that pull away, each its own solid piece. A tap elsewhere
+    plays the opening of The Entertainer (about 5 s); the song bar plays the rest.
+  - Sound: A brighter, slightly honky-tonk upright voice, so it sounds different from the grand.
+- **Harpsichord** (`harpsichord`). Now: tap: Play the opening. Plan: keep.
+  - Owner: Lane Pianos, from the owner's idea on the Toy Ideas page (September 29, 2026).
+  - Effect: Tap a key: its jack rises and the quill plucks the string, which you see quiver. Tap
+    elsewhere: the Minuet in G from Bach's notebook, the jacks bobbing like a row of dancers.
+  - Improved: Pianos: a French-style harpsichord (black naturals, bone sharps) with 61 keys, jacks
+    and strings, each its own solid piece. A key lifts its jack, which plucks; the string quivers
+    until the key comes up. A tap elsewhere plays the opening of the Minuet in G (about 5 s); the
+    song bar plays both halves, each twice.
+  - Sound: A bright, plucked harpsichord voice, made in the page.
+- **Electronic keyboard** (`electronic-keyboard`). Now: tap: Play the opening. Plan: keep.
+  - Owner: Lane Pianos, from the owner's idea on the Toy Ideas page (September 29, 2026).
+  - Effect: Tap a key to play it. Tap elsewhere and the keys light up just ahead of each note, like
+    a learning keyboard, while the little screen scrolls the song's title and a beat starts on the
+    drum pads. Panel buttons switch the voice: piano, organ, synth, vibes.
+  - Improved: Pianos: 61 keys that light up just before each note of the song and stay lit while
+    held, a screen that scrolls the title and shows the voice, four colored voice buttons and four
+    drum pads that flash with the beat (kick, snare, hi-hat, tom). Songs: Ode to Joy, Twinkle,
+    Twinkle, Little Star and Frère Jacques, or your own MIDI file (its drums, or a simple beat).
+  - Sound: Four synth voices and a simple drum beat, all made in the page.
 
 ## Vehicles (14)
 

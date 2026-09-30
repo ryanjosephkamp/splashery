@@ -1711,6 +1711,34 @@
       "sound": "The scale it already plays, as mallet tones.",
       "improved": "D: a tap on one bar lifts the mallet over that bar, strikes it and plays its note; a tap anywhere else plays the scale. Each bar dips as the mallet hits it. E1c: any tap over the row of bars strikes the nearest bar (easy to hit on a phone). The mallet swings over from wherever it is, lands 0.12 s after the tap with the bar's note, bounces off, and the bar jumps. A tap off the bars still plays the scale."
     },
+    "grand-piano": {
+      "v": "keep",
+      "owner": "Lane Pianos, from the owner's idea on the Toy Ideas page (September 29, 2026).",
+      "effect": "Tap a key: it dips, its hammer flies up under the open lid and strikes the strings, and the damper lifts while the note rings. Tap anywhere else: it plays the opening of its song, every key and hammer moving with the notes and the sustain pedal going down with the phrases (about 5 s; the whole song plays from the song bar).",
+      "sound": "A warm concert-grand voice made in the page (felt thump, ringing partials, the damper's soft stop). Built-in songs: Für Elise, Clair de lune, Gymnopédie No. 1, Ode to Joy.",
+      "improved": "Pianos: 88 keys, 88 hammers and 70 dampers, each its own solid piece (the lever kind). A tapped key dips for about 0.9 s, its hammer strikes and falls back, its damper lifts. A tap elsewhere plays the song's opening (about 5 s) with the keys, hammers, dampers and sustain pedal following every note. The song bar plays the whole song, and a MIDI file or an ABC tune of your own."
+    },
+    "upright-piano": {
+      "v": "keep",
+      "owner": "Lane Pianos, from the owner's idea on the Toy Ideas page (September 29, 2026).",
+      "effect": "Tap a key to play it: the front panel is off, so you see the row of hammers swing forward onto the upright strings. Tap elsewhere for its song, a ragtime (The Entertainer), the hammers rippling along the row.",
+      "sound": "A brighter, slightly honky-tonk upright voice, so it sounds different from the grand.",
+      "improved": "Pianos: a walnut upright with its upper front panel off; 88 keys, hammers that swing back onto the strings and 66 dampers that pull away, each its own solid piece. A tap elsewhere plays the opening of The Entertainer (about 5 s); the song bar plays the rest."
+    },
+    "harpsichord": {
+      "v": "keep",
+      "owner": "Lane Pianos, from the owner's idea on the Toy Ideas page (September 29, 2026).",
+      "effect": "Tap a key: its jack rises and the quill plucks the string, which you see quiver. Tap elsewhere: the Minuet in G from Bach's notebook, the jacks bobbing like a row of dancers.",
+      "sound": "A bright, plucked harpsichord voice, made in the page.",
+      "improved": "Pianos: a French-style harpsichord (black naturals, bone sharps) with 61 keys, jacks and strings, each its own solid piece. A key lifts its jack, which plucks; the string quivers until the key comes up. A tap elsewhere plays the opening of the Minuet in G (about 5 s); the song bar plays both halves, each twice."
+    },
+    "electronic-keyboard": {
+      "v": "keep",
+      "owner": "Lane Pianos, from the owner's idea on the Toy Ideas page (September 29, 2026).",
+      "effect": "Tap a key to play it. Tap elsewhere and the keys light up just ahead of each note, like a learning keyboard, while the little screen scrolls the song's title and a beat starts on the drum pads. Panel buttons switch the voice: piano, organ, synth, vibes.",
+      "sound": "Four synth voices and a simple drum beat, all made in the page.",
+      "improved": "Pianos: 61 keys that light up just before each note of the song and stay lit while held, a screen that scrolls the title and shows the voice, four colored voice buttons and four drum pads that flash with the beat (kick, snare, hi-hat, tom). Songs: Ode to Joy, Twinkle, Twinkle, Little Star and Frère Jacques, or your own MIDI file (its drums, or a simple beat)."
+    },
     "toy-piano": {
       "v": "keep",
       "owner": "The owner's idea on the Toy Ideas page, for the blind A/B toy (September 29, 2026): \"Tap a key: a tiny hammer strikes a metal rod inside the open back, and the rod shivers as it rings. Tap elsewhere: Twinkle, Twinkle, Little Star, the rods shimmering in turn.\"",
