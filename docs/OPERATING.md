@@ -255,6 +255,14 @@ so lanes add clips and cards at the same time without republishing it. Its colle
 Card ids are `<prefix>-<toy id>`, with a variant after it (`e5-cherries-pair`). A clip redone after
 the owner's note gets the old card's id plus `-r2` (then `-r3`), in the old card's lane.
 
+The page's source is `tools/pages/effect-review.html`; only the Operator republishes it. Its clip
+box takes each clip's own shape (square, landscape or a tall 390×844 phone clip), capped at about
+three quarters of the screen's height, where the clip letterboxes. Never give `.clip` a fixed
+`aspect-ratio`: a clip taller than the box spills over the card's text and buttons (the owner's
+report of September 30, 2026). After any change to the page's layout, render a tall phone clip and a
+square one in a card at 390 pixels and at desktop width, and check that nothing overlaps before
+republishing.
+
 ### Steps for a lane
 
 1. Render each clip: `node tools/effect-clip.mjs --strip=8 --size=320 <toy id>:<seconds>` (the
