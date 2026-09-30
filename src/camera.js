@@ -410,6 +410,7 @@ export class Gestures {
       this.pinch = this.pinchState();
       this.pinchStart = this.pinch;
       this.pinchKind = null;
+      this.pinchHalf = false; // UI r2
       this.h.onPinchStart?.();
     }
   }
@@ -452,6 +453,11 @@ export class Gestures {
       p.x = e.clientX;
       p.y = e.clientY;
       p.t = e.timeStamp;
+      // UI r2: the browser sends each finger's move on its own, so after one
+      // finger's step the pair looks pinched. With pairPinch the gesture is
+      // read every second move (both fingers' steps, or one finger's two
+      // while the other rests), so a two-finger drag reads as a drag.
+      if (this.h.pairPinch && (this.pinchHalf = !this.pinchHalf)) return;
       const s = this.pinchState();
       const prev = this.pinch;
       const was = this.pinchKind;

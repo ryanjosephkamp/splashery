@@ -25,6 +25,9 @@ const SWATCHES = [
 ];
 const TOOL_HINTS = {
   orbit: "Drag to turn the toy, scroll or pinch to zoom, twist two fingers to roll.",
+  // UI r2 (the labs switch): moving the toy.
+  orbit2:
+    "Drag to turn the toy, scroll or pinch to zoom, twist two fingers to roll. Shift-drag or two fingers move it.",
   // The Orbit tool on a stretchy toy (a recipe with `grab`).
   stretch: "Drag the toy to stretch it; drag beside it to turn it. Scroll or pinch to zoom.",
   clay: "Drag on a generated toy to add lumps of clay, or switch to Erase to carve it away.",
@@ -455,7 +458,8 @@ export function createUI(app) {
     for (const [k, v] of [...sliders]) if (k.startsWith(`${tool}.`)) sliders.delete(k);
     const def = EFFECTS.find((e) => e.id === tool);
     const stretchy = tool === "orbit" && app.player?.toyInfo?.recipe?.grab;
-    els.toolHint.textContent = def ? def.hint : TOOL_HINTS[stretchy ? "stretch" : tool] || "";
+    const hint = stretchy ? "stretch" : tool === "orbit" && ui2On() ? "orbit2" : tool; // UI r2
+    els.toolHint.textContent = def ? def.hint : TOOL_HINTS[hint] || "";
     if (def) for (const p of def.params) makeSlider(def, p, els.toolParams);
     els.paintExtras.hidden = tool !== "paint";
     els.clayExtras.hidden = tool !== "clay";
@@ -482,7 +486,8 @@ export function createUI(app) {
   function renderToyPanel(info) {
     const recipe = info?.recipe || null;
     if (app.tool === "orbit")
-      els.toolHint.textContent = TOOL_HINTS[recipe?.grab ? "stretch" : "orbit"];
+      els.toolHint.textContent =
+        TOOL_HINTS[recipe?.grab ? "stretch" : ui2On() ? "orbit2" : "orbit"]; // UI r2
     els.toyActionRow.hidden = !recipe?.action;
     els.toyAction.textContent = recipe?.action?.label || "";
     els.toyAliveRow.hidden = !recipe?.alive;
@@ -732,6 +737,7 @@ export function createUI(app) {
   // and a button that hands the drawing to input.read as the text
   // "pad:v,v,..." (row by row, each cell 0..max). value() gives the drawing
   // to start from, in the same form.
+  let padPen = null; // UI r2: the pad's pen for this visit
   function renderInputPad(pad, apply) {
     const cols = pad.cols || 8;
     const rows = pad.rows || 8;
@@ -778,8 +784,11 @@ export function createUI(app) {
     // and each step inks every cell by how much of it the pen's disk covers.
     // Fine, medium and bold pens, and an eraser that takes ink away.
     const PENS = { fine: 0.5, medium: 0.75, bold: 1.05 };
-    const coarse = narrow.matches || matchMedia("(pointer: coarse)").matches;
-    const pen = { size: coarse ? "fine" : "medium", erase: false };
+    // The pen stays as chosen when the panel is drawn again (after a read).
+    const pen = (padPen ||= {
+      size: narrow.matches || matchMedia("(pointer: coarse)").matches ? "fine" : "medium",
+      erase: false,
+    });
     let last = null;
     const cellAt = (e) => {
       const r = canvas.getBoundingClientRect();

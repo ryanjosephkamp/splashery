@@ -607,6 +607,7 @@ class App {
         this.panDrag = false;
         canvas.classList.remove("orbiting", "panning");
       },
+      pairPinch: ui2On(), // UI r2: read two fingers' moves as pairs
       onPinchStart: () => cam.begin(),
       onPinch: ({ scale, dx, dy, twist, mode, dt }) => {
         // Pictures: two fingers move a picture toy, as in a photo viewer.

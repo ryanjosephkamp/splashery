@@ -2096,7 +2096,8 @@ body.embed #stage {
    fold and gallery page, and the drawing pad's pens. All of it shows only
    with body.ui2 (the labs switch until the owner's marks). */
 
-body:not(.ui2) .ui2-only {
+body:not(.ui2) .ui2-only,
+body.ui2 .ui2-hide {
   display: none !important;
 }
 
