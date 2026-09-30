@@ -738,6 +738,38 @@ class App {
     return media;
   }
 
+  // A live stream (lane Live input: a shared screen or a camera, from
+  // src/live/panel.js) on the picture toy that shows now. It is never saved
+  // in the scene or a link; closeLiveMedia() goes back to what showed before.
+  async openLiveMedia(stream, name) {
+    const player = this.player;
+    const toy = player.scene.toy;
+    if (toy.kind !== "builtin" || !player.pictures) throw new Error("Pick a picture toy first.");
+    const { openMedia } = await import("./media.js");
+    const source = { live: true, stream, name };
+    const media = await openMedia(source);
+    player.closeMedia();
+    const key = `live:${stream.id}`;
+    player.liveMedia = { toy: toy.id, source, key };
+    player.pictureMedia = { key, media, ready: Promise.resolve(media) };
+    const cam = player.camera.getState();
+    await this.loadToy(toy);
+    player.camera.setState(cam, { snap: true });
+    return media;
+  }
+
+  async closeLiveMedia() {
+    const player = this.player;
+    if (!player.liveMedia) return;
+    const same = player.liveMedia.toy === player.scene.toy.id;
+    player.liveMedia = null;
+    player.closeMedia();
+    if (!same) return;
+    const cam = player.camera.getState();
+    await this.loadToy(player.scene.toy);
+    player.camera.setState(cam, { snap: true });
+  }
+
   // Back to the toy's own sample.
   async clearMedia() {
     const player = this.player;

@@ -893,6 +893,7 @@ export class Kit {
     if (this.fitOn) this.fit();
     else this.transform = { center: [0, 0, 0], scale: 1 };
     this.encodeMorphs();
+    this.encodeReliefs();
     yield 1;
   }
 
@@ -920,6 +921,15 @@ export class Kit {
       return [pr[0] ?? 0, (w < 0 ? -1 : 1) * (c + width(Math.abs(w)))];
     }
     if (kind === KINDS.skin) return [(skin[0] | 0) + 64 * (skin[1] | 0), skin[2] ?? 0];
+    if (kind === KINDS.relief) {
+      // params [u, v, axis (0 x, 1 y, 2 z), lift at full height in recipe
+      // units]; the lift is kept aside until the fit (encodeReliefs).
+      if (!this.relief) this.relief = new Float32Array(this.buf.capacity);
+      const i = this.buf.count;
+      if (i < this.buf.capacity) this.relief[i] = Math.max(0, pr[3] ?? 0);
+      const axis = Math.max(0, Math.min(2, Math.round(pr[2] ?? 1)));
+      return [Math.max(0, Math.min(1, pr[0] ?? 0)) + 2 * axis, Math.max(0, Math.min(1, pr[1] ?? 0))]; // prettier-ignore
+    }
     return [pr[0] ?? 0, pr[1] ?? 0];
   }
 
@@ -938,6 +948,18 @@ export class Kit {
       const ch = buf.anim[i * 4 + 3];
       buf.anim[i * 4 + 2] = q(m[i * 3]) * 4096 + q(m[i * 3 + 1]);
       buf.anim[i * 4 + 3] = q(m[i * 3 + 2]) + 4096 * ch;
+    }
+  }
+
+  // Packs each relief splat's lift (lane Live input) in thousandths of a toy
+  // unit after the fit: w = v + 2 * lift (exact enough in a float32).
+  encodeReliefs() {
+    if (!this.relief) return;
+    const buf = this.buf;
+    const s = this.transform.scale;
+    for (let i = 0; i < buf.count; i++) {
+      if (buf.anim[i * 4 + 1] !== KINDS.relief) continue;
+      buf.anim[i * 4 + 3] += 2 * Math.min(4000, Math.round(this.relief[i] * s * 1000));
     }
   }
 

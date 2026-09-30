@@ -736,6 +736,13 @@ export const KINDS = {
   // says (uSpLever): z = lever index (0..95) + 128 * group (0..5), w = the
   // splat's place along a string (0..1) for the vibrate mode.
   lever: 22,
+  // Relief (lane Live input): a splat lifted from its place by a live
+  // height and coloured from a live picture, both drawn by the recipe into
+  // its screen canvas (recipe.screen): the colour at (u / 2, v), the height
+  // (red, 0..1) at (1 / 2 + u / 2, v). z = u + 2 * axis (0 x, 1 y, 2 z),
+  // w = v + 2 * lift at full height (thousandths of a toy unit; see
+  // Kit.encodeReliefs). A live spectrogram, a camera picture with depth.
+  relief: 23,
 };
 
 // Levers: 96 amounts (three 8-bit channels each) and 6 groups.
@@ -857,6 +864,15 @@ vec3 spKitCenter(vec3 p) {
     }
   }
   if (kind == 15) spScreenUV = vec3(an.z, an.w, 1.0);
+  if (kind == 23) {
+    float rax = floor(an.z * 0.5);
+    float rlq = floor(an.w * 0.5);
+    vec2 ruv = vec2(an.z - 2.0 * rax, an.w - 2.0 * rlq);
+    float rh = textureLod(uSpScreen, vec2(0.5 + 0.5 * ruv.x, ruv.y), 0.0).r;
+    vec3 rdir = rax < 0.5 ? vec3(1.0, 0.0, 0.0) : rax < 1.5 ? vec3(0.0, 1.0, 0.0) : vec3(0.0, 0.0, 1.0);
+    p += rdir * rh * rlq * 0.001;
+    spScreenUV = vec3(0.5 * ruv.x, ruv.y, 1.0);
+  }
   if (kind == 16 && int(an.z + 0.5) == int(floor(uSpKitB.w + 0.001)) && uSpKitB.w >= 0.0) {
     p -= up * fract(uSpKitB.w) * 0.012 * R;
   }
@@ -1057,6 +1073,16 @@ fn spKitCenter(p0: vec3f) -> vec3f {
     }
   }
   if (kind == 15) { spScreenUV = vec3f(an.z, an.w, 1.0); }
+  if (kind == 23) {
+    let rax = floor(an.z * 0.5);
+    let rlq = floor(an.w * 0.5);
+    let ruv = vec2f(an.z - 2.0 * rax, an.w - 2.0 * rlq);
+    let rh = textureSampleLevel(uSpScreen, uSpScreenSampler, vec2f(0.5 + 0.5 * ruv.x, ruv.y), 0.0).r;
+    var rdir = vec3f(0.0, 0.0, 1.0);
+    if (rax < 0.5) { rdir = vec3f(1.0, 0.0, 0.0); } else if (rax < 1.5) { rdir = vec3f(0.0, 1.0, 0.0); }
+    p = p + rdir * rh * rlq * 0.001;
+    spScreenUV = vec3f(0.5 * ruv.x, ruv.y, 1.0);
+  }
   if (kind == 16 && i32(an.z + 0.5) == i32(floor(uniform.uSpKitB.w + 0.001)) && uniform.uSpKitB.w >= 0.0) {
     p = p - up * fract(uniform.uSpKitB.w) * 0.012 * R;
   }
