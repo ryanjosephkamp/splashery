@@ -182,6 +182,10 @@ Model: Opus 5.5 (default effort), for the whole lane. No helpers used.
 - Full suite (claude/lane-pianos with main 60b775d, in 12 shards): about 430 passed, 2 failed: this
   lane's MIDI test (fixed) and `tests/bk.spec.mjs` "a video's time, length and seek", which fails
   the same way on plain main 456e890.
+- All seven -r4/-r3 cards "good" (September 30, 2026). Main 4242b98 merged into both branches (only
+  TOY-PLAN.md conflicted; regenerated). Full suite on claude/lane-pianos in three shards: 1/3 187
+  passed; 2/3 204 passed, 1 failed (smoke "the cat statue turns its head": the toy's clock reached
+  2.85 of 3 s in the 30 s wait; it passes when run again on its own, 18 s); 3/3 129 passed.
 - The container is reclaimed while the session is idle, which kills background runs: a long run has
   to be watched from an active turn (or run in shards that can resume).
 
