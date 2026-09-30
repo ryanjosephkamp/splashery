@@ -496,9 +496,10 @@ function makeColoring(paletteId, seed, noise, colorNoise) {
     const mantle = jupiter
       ? [hexRgb("#fff0c0"), hexRgb("#ffc36a"), hexRgb("#c9731f")]
       : [hexRgb("#e6f7ff"), hexRgb("#6ec3ff"), hexRgb("#1f4fb0")];
-    // The storm: an oval in the southern bands (the Great Red Spot, the Great Dark Spot).
+    // The storm: an oval in the southern bands (the Great Red Spot, the Great
+    // Dark Spot), on the side the home view faces.
     const sLat = jupiter ? -0.36 : -0.3;
-    const sLon = rand() * Math.PI * 2;
+    const sLon = Math.PI / 2 - 0.35; // toward the home view
     const storm = (n) => {
       let dl = Math.atan2(n[2], n[0]) - sLon;
       dl = Math.atan2(Math.sin(dl), Math.cos(dl));
