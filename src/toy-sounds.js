@@ -835,7 +835,9 @@ export const TOY_SOUNDS = {
     ],
     off: { voice: "clack", notes: "E6 E6", step: 0.15, decay: 1.2, bright: 0.2 },
   },
-  coffee: { voice: "glass", notes: "A6 C7 A6 C7 A6", step: 0.18, decay: 0.3 },
+  // Sound B (his Sound Board note): a simple "tap tap" of a spoon on the
+  // cup, as if asking for a refill.
+  coffee: { voice: "glass", notes: "E7 - E7", step: 0.13, decay: 0.12, bright: 0.3, vol: 0.6 },
   apple: {
     // Sound B: a real bite into a crisp apple.
     on: { voice: "bite", f: 3000 },
@@ -989,9 +991,9 @@ export const TOY_SOUNDS = {
   "fourier-circles": { voice: "pad", notes: "C3 G3 C4 E4 G4 C5", step: 0.35, at: 0.3, decay: 1.6 },
   // A wooden slide; drive() adds a slide and a click for each piece.
   "pythagoras-proof": { voice: "scrape", at: 0.3, f: 700, rate: 9, decay: 0.35, vol: 0.35 },
-  // Lane Manual, Sound B: a soft low chord that swells as t plays (4 s), with
-  // no rising sweep.
-  "splat-equation": { voice: "glow", notes: "G2+D3+G3", decay: 1.6, bright: 0.3, vol: 0.6 },
+  // Lane Manual, Sound B (his note: too robotic and loud, change entirely):
+  // the quiet scratch of chalk as t plays (4 s).
+  "splat-equation": { voice: "rustle", f: 2600, n: 30, decay: 2.6, bright: 0.3, vol: 0.3 },
   // Three hushing waves, each at its loudest as a swell reaches the mouth
   // (0.7, 1.8, 2.9 s).
   "seashell-spiral": [
@@ -1074,34 +1076,35 @@ export const TOY_SOUNDS = {
 
   // ---- Real objects (lane Real objects) ---------------------------------------------
   // A cap click, the posted cap's click, a smooth nib scratch, and the cap clicking back on.
-  // Sound B: the cap's clicks are small physical snaps, not electronic blips.
   "fountain-pen": [
-    { voice: "switch", f: 2600, vol: 0.7 },
-    { voice: "switch", at: 1.08, f: 2100, vol: 0.6 },
+    { voice: "click", f: 2600, vol: 0.9 },
+    { voice: "click", at: 1.08, f: 2100, vol: 0.8 },
     { voice: "scrape", at: 1.62, f: 2400, rate: 26, decay: 2.3, vol: 0.18 },
-    { voice: "switch", at: 3.97, f: 2600, vol: 0.7 },
+    { voice: "click", at: 3.97, f: 2600, vol: 0.9 },
   ],
-  // The cap ratchets off, then a glug-glug pour that rises in pitch as the glass fills.
+  // Sound B (his note: the clicks are weird, the water too bubbly): the cap
+  // twisted off, a real pour (a splashing stream and the water sloshing in
+  // the glass) and the cap twisted back on.
   "water-bottle": [
-    { voice: "ratchet", f: 1900, n: 7, rate: 12, vol: 0.5 },
-    { voice: "gloop", at: 1.66, notes: "G2 A2 C3 D3 E3 G3", step: 0.17, decay: 0.45, vol: 0.55 },
-    { voice: "drip", at: 1.95, f: 700, n: 4, rate: 5, vol: 0.4 },
-    { voice: "ratchet", at: 4.05, f: 1700, n: 7, rate: 14, vol: 0.45 },
+    { voice: "twist", f: 1400, vol: 0.4 },
+    { voice: "twist", at: 0.35, f: 1300, vol: 0.35 },
+    { voice: "roar", at: 1.66, f: 400, bright: 0.6, decay: 1.2, vol: 0.35 },
+    { voice: "slosh", at: 1.8, f: 700, rate: 3, n: 0, decay: 1, vol: 0.4 },
+    { voice: "twist", at: 4.05, f: 1400, vol: 0.4 },
   ],
-  // A rattle as it shakes, the sharp pssht of the can opening, then a fizz that dies away.
+  // Sound B (his Sound Board note: no bubbles; the pssht and fizz need
+  // work): the soda sloshing as it shakes, a sharp pssht as the tab opens,
+  // and a fine, soft fizz that dies away.
   "soda-can": [
-    // Sound B: the soda sloshing as it shakes, not a rattle.
     { voice: "slosh", f: 800, rate: 4, n: 0, decay: 0.6, vol: 0.5 },
-    { voice: "crack", at: 0.93, f: 2600, vol: 0.7 },
-    { voice: "hiss", at: 0.95, f: 3200, decay: 0.9, vol: 0.55 },
-    { voice: "bubbles", at: 1.1, f: 900, n: 16, decay: 2.2, vol: 0.4 },
-    { voice: "sizzle", at: 1.3, f: 6000, decay: 1.5, vol: 0.25 },
+    { voice: "crack", at: 0.93, f: 2600, decay: 0.5, vol: 0.5 },
+    { voice: "hiss", at: 0.94, f: 3800, decay: 0.7, vol: 0.6 },
+    { voice: "rustle", at: 1.05, f: 6000, n: 60, decay: 1.8, bright: 0.2, vol: 0.3 },
   ],
   // Laces zipping through the eyelets, a soft tug as the bow pulls tight, two toe taps.
-  // Sound B: the laces slide through with a soft rustle (not a zipper).
   "running-shoe": [
-    { voice: "rustle", f: 1800, n: 14, decay: 0.8, vol: 0.5 },
-    { voice: "rustle", at: 1.05, f: 1600, n: 12, decay: 0.7, vol: 0.45 },
+    { voice: "tear", f: 1100, to: 1.8, decay: 1.4, vol: 0.4 },
+    { voice: "tear", at: 1.05, f: 1300, to: 0.7, decay: 1.2, vol: 0.35 },
     { voice: "slap", at: 2.72, f: 900, vol: 0.5 },
     { voice: "thud", at: 3.34, f: 140, vol: 0.7 },
     { voice: "thud", at: 3.84, f: 150, vol: 0.7 },
@@ -1110,22 +1113,23 @@ export const TOY_SOUNDS = {
   hoodie: [
     { voice: "breath", f: 700, to: 0.6, decay: 0.8, vol: 0.5 },
     { voice: "breath", at: 0.62, f: 900, to: 1.4, decay: 0.8, vol: 0.45 },
-    { voice: "rustle", at: 1.2, f: 2000, n: 6, decay: 0.3, vol: 0.4 },
+    { voice: "tear", at: 1.2, f: 1600, to: 2.4, decay: 0.35, vol: 0.3 },
     { voice: "whoosh", at: 1.25, f: 250, to: 4, decay: 1.1, vol: 0.35 },
     { voice: "whoosh", at: 2.95, f: 300, to: 3, decay: 1.1, vol: 0.3 },
   ],
-  // Two hinge clicks, a soft shimmer as the lenses darken, and two clicks as they unfold.
-  // Sound B: the hinges' small physical snaps; the lenses darken silently.
+  // Sound B (his note: too robotic and tacky): each fold is a plastic hinge
+  // sliding shut and seating; the lenses darken silently.
   sunglasses: [
-    { voice: "switch", at: 0.4, f: 3200, vol: 0.6 },
-    { voice: "switch", at: 0.7, f: 2900, vol: 0.6 },
-    { voice: "switch", at: 2.95, f: 2900, vol: 0.5 },
-    { voice: "switch", at: 3.2, f: 3200, vol: 0.5 },
+    { voice: "twist", at: 0.4, f: 2200, vol: 0.5 },
+    { voice: "twist", at: 0.7, f: 2000, vol: 0.5 },
+    { voice: "twist", at: 2.95, f: 2000, vol: 0.45 },
+    { voice: "twist", at: 3.2, f: 2200, vol: 0.45 },
   ],
-  // A flick off the stand, the whoosh of the spin, a soft landing, and a second flip.
+  // A flick off the stand, a soft landing and a second flip (Sound B, his
+  // note "a bit too windy": fabric rustles instead of whooshes).
   "baseball-cap": [
     { voice: "slap", f: 1800, vol: 0.5 },
-    { voice: "whoosh", at: 0.35, f: 400, to: 5, decay: 1.6, vol: 0.4 },
+    { voice: "rustle", at: 0.35, f: 1600, n: 12, decay: 0.9, vol: 0.4 },
     { voice: "thud", at: 1.62, f: 180, vol: 0.5 },
     { voice: "rustle", at: 1.95, f: 1500, n: 8, decay: 0.5, vol: 0.4 },
     { voice: "thud", at: 2.55, f: 170, vol: 0.45 },
@@ -1487,12 +1491,13 @@ export const TOY_SOUNDS = {
     { voice: "hiss", at: 1.4, f: 6000, decay: 2.2, vol: 0.5 },
     { voice: "theremin", at: 4.3, f: 440, to: 2.2, decay: 0.5, vol: 0.6 },
   ],
-  // A rising lift tone as the floors wring round, and a ding each time the
-  // ring of light reaches the top.
+  // Sound B (his note: less cute): the lift's low whir as the floors wring
+  // round, and a soft low bell each time the ring of light reaches the top.
   supertall: [
-    { voice: "tone", f: "C5", to: 2, kind: "sine", decay: 1.4, vol: 0.5 },
-    { voice: "ding", at: 1.55, f: "E6" },
-    { voice: "ding", at: 3.55, f: "G6", vol: 0.7 },
+    { voice: "hum", f: 80, bright: 0.15, decay: 1.6, vol: 0.35 },
+    { voice: "whoom", at: 0.2, f: 300, decay: 1.2, vol: 0.3 },
+    { voice: "bell", at: 1.55, f: "G4", decay: 0.6, bright: 0.1, vol: 0.3 },
+    { voice: "bell", at: 3.55, f: "C5", decay: 0.6, bright: 0.1, vol: 0.25 },
   ],
   lighthouse: {
     on: { voice: "horn", f: 62, kind: "fog", decay: 1.4 },
@@ -1647,14 +1652,9 @@ export const TOY_SOUNDS = {
     { voice: "thud", at: 0.465, notes: "F3 F3 F3 F3 F3 F3 F3 F3 F3 F3 F3 F3 F3 F3 F3 F3 F3 F3 F3 F3 F3", step: 0.165, bright: 0.5, decay: 0.35, vol: 0.45 }, // prettier-ignore
     { voice: "thud", at: 4.45, f: 150, bright: 0.4, decay: 0.4, vol: 0.4 },
   ],
-  // Lane Screens: a soft rising chime as the picture forms (each view plays
-  // its own cues; this is the training view's).
-  // Sound B: a warm swell as the picture forms and a soft piano chord when
-  // it is there (no rising electronic shimmer or chimes).
-  "gaussian-splatting": [
-    { voice: "glow", notes: "C3+G3", decay: 1.4, bright: 0.35, vol: 0.5 },
-    { voice: "grand", at: 2.9, notes: "C4+E4+G4", strum: 0.05, hold: 1.4, vol: 0.35 },
-  ],
+  // Sound B (his note: no rising xylophone, not robotic): a soft patter of
+  // splats settling into place as the picture forms.
+  "gaussian-splatting": { voice: "patter", at: 0.3, f: 2400, n: 26, decay: 3.8, vol: 0.3 },
   // Three chimes as the arrows run (0.15, 0.85, 1.55 s), a bright ding as
   // QUEEN lights.
   "word-vectors": [
@@ -1684,13 +1684,12 @@ export const TOY_SOUNDS = {
   "turing-machine": { voice: "switch", f: 1900, decay: 0.8, vol: 0.6 },
   // The crank's catch; then drive() plays each turn: the ratchet, a brass
   // click for each wheel step, a snap for each carry and a small bell.
-  // Sound B: the catch as a brass clunk, not an electronic click.
-  "difference-engine": { voice: "metal", f: 900, decay: 0.15, bright: 0.3, vol: 0.4 },
+  "difference-engine": { voice: "click", f: 1100, decay: 0.7, vol: 0.5 },
   // The operator's hand on the first key; then drive() plays each letter:
   // a heavy key clack, the rotors' ratchet and a faint lamp click.
   "enigma-machine": { voice: "wood", f: 330, decay: 0.4, vol: 0.4 },
-  // The motor switch; then drive() plays the drums' clatter and the motor's
-  // whirr, and a sharp stop with a bell when a setting is found.
+  // The motor switch; then drive() plays the drums' clatter (Sound B: no
+  // motor buzz), and a sharp stop with a bell when a setting is found.
   bombe: { voice: "switch", f: 1200, decay: 1.2, vol: 0.7 },
 
   // ---- Pictures and pages (lane Pictures) -------------------------------------------
@@ -1723,39 +1722,50 @@ export const TOY_SOUNDS = {
   "chladni-plate": {
     on: [
       { voice: "tone", f: 780, decay: 9, kind: "sine", vol: 0.9 },
-      { voice: "patter", at: 0.1, f: 2600, n: 40, decay: 2.2, vol: 0.3 },
+      // Sound B (his note): the sand slides, it doesn't patter.
+      { voice: "breath", at: 0.1, f: 2600, to: 0.8, decay: 3, vol: 0.25 },
     ],
     off: { voice: "hiss", f: 3000, decay: 0.7, vol: 0.3 },
   },
   // The song landscape plays the song itself; this is its tap's start chime.
-  // Sound B: a soft swell as it starts (no jingle).
-  "song-landscape": { voice: "whoom", f: 500, decay: 0.5, vol: 0.3 },
-  // Lane Studio Models, Sound B: the splats lift off with a soft rush (no
-  // rising zap) and settle back as a light patter (no notes).
-  "model-splats": [
-    { voice: "whoom", f: 400, decay: 1.2, vol: 0.5 },
-    { voice: "patter", at: 1.6, f: 2400, n: 18, decay: 1, vol: 0.35 },
+  "song-landscape": [
+    { voice: "pluck", notes: "C5 E5 G5", step: 0.09, decay: 0.5, bright: 0.4, vol: 0.6 },
   ],
-  // Lane Photo to 3D, Sound B: a soft rush as the depth comes up and a low
-  // chord (no loud rising whoosh), and a rush as it lies flat.
+  // Lane Studio Models: the splats lift off in a rising whoosh and settle back as falling notes.
+  "model-splats": [
+    { voice: "zap", f: 420, to: 4, decay: 2.4, vol: 0.35 },
+    {
+      voice: "pluck",
+      at: 1.6,
+      notes: "B5 F#5 D5 B4",
+      step: 0.16,
+      decay: 0.7,
+      bright: 0.5,
+      vol: 0.45,
+    },
+  ],
+  // Lane Photo to 3D, Sound B (his note: no wind, no whoosh): the photo's
+  // paper lifting as the depth comes up and settling back as it lies flat.
   "photo-3d": {
     on: [
-      { voice: "whoom", f: 350, decay: 1.6, vol: 0.5 },
-      { voice: "glow", at: 0.3, notes: "E3+B3", decay: 0.9, bright: 0.4, vol: 0.45 },
+      { voice: "rustle", f: 2200, n: 10, decay: 0.8, vol: 0.35 },
+      { voice: "thud", at: 1.8, f: 130, bright: 0.2, decay: 0.4, vol: 0.25 },
     ],
-    off: { voice: "whoom", f: 300, decay: 1.2, vol: 0.4 },
+    off: [
+      { voice: "rustle", f: 2000, n: 8, decay: 0.7, vol: 0.3 },
+      { voice: "thud", at: 1.2, f: 120, bright: 0.2, decay: 0.4, vol: 0.25 },
+    ],
   },
   // Lane Screens: the old TV's click and hum (each style plays its own
   // cues as it switches on: the flat TV's soft tone, the cinema's curtains,
   // the hologram's shimmer).
-  // The old TV: on, a click, a crackle and the hum; off, the knob's click
+  // The old TV: on, a click and a crackle (Sound B: no hum, his note); off, the knob's click
   // and the whine falling away (lane Screens r2). The Screen plays each
   // style's own sounds from its recipe (src/packs/screens.js).
   screen: {
     on: [
       { voice: "switch", f: 1800, vol: 0.9 },
       { voice: "zap", at: 0.1, f: 5200, to: 0.9, decay: 0.5, vol: 0.18 },
-      { voice: "hum", at: 0.12, f: 60, to: 1.02, decay: 1.6, bright: 0.15, vol: 0.5 },
     ],
     off: [
       { voice: "switch", f: 1500, vol: 0.9 },
@@ -1763,13 +1773,9 @@ export const TOY_SOUNDS = {
       { voice: "hum", at: 0.02, f: 62, to: 0.6, decay: 0.7, bright: 0.12, vol: 0.35 },
     ],
   },
-  // ---- Lab (lane Lab) ----------------------------------------------------------------
-  // Sound B: a soft swell as the pulse runs out through the field (steady
-  // chord, no rising pitch).
-  "splat-field": [
-    { voice: "glow", notes: "D3+A3+D4", decay: 1.6, bright: 0.35, vol: 0.55 },
-    { voice: "whoom", at: 0.1, f: 350, decay: 1.4, vol: 0.3 },
-  ],
+  // Sound B (his note: too robotic): a soft ripple through the field, like
+  // grass stirring, as the pulse runs out.
+  "splat-field": { voice: "rustle", f: 3000, n: 30, decay: 2.4, bright: 0.3, vol: 0.35 },
   // ---- Fluid lab (lane Fluids) ------------------------------------------------------
   // A pour's splash and glug (each scene plays its own through cues: a pour,
   // a thick gloop for honey and lava, a splash, a breath on the candle).

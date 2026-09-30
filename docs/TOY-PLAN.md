@@ -678,8 +678,7 @@ Proposals below are suggestions; the owner may change them.
     out) on a kit-built notepad. The cap slides off and posts on the back end, the pen tilts and
     writes a looping swirl in bright wet ink that dries to dark navy from its start, the cap goes
     back on and the ink runs back into the nib (4 s). Round 2: denser, sharper model.
-  - Sound: The cap clicks are small physical snaps (not electronic blips); the nib scratch is
-    unchanged.
+  - Sound: A cap click, a smooth nib scratch, another click.
 - **Water bottle** (`water-bottle`). Now: tap: Unscrew and pour. Plan: keep.
   - Owner: From the owner's approved ideas on the Toy Ideas page (lane Real objects, September 29,
     2026): "This should be a real life splat if you can find it. I do not want this to be a cartoon
@@ -693,7 +692,8 @@ Proposals below are suggestions; the owner may change them.
     the pour's arc, glugs into a kit-built glass with a splash where it lands while the water rises;
     then it all runs back, the bottle stands and the cap screws on (4.5 s). Round 2: denser model,
     cap plug left out, a stream instead of drops.
-  - Sound: Cap clicks, then a glug-glug pour that rises in pitch as the glass fills.
+  - Sound: The cap twisted off, a real pour (a splashing stream and the water sloshing in the glass)
+    and the cap twisted back on (no clicks or bubbly glugs).
 - **Soda can** (`soda-can`). Now: tap: Shake and open. Plan: keep.
   - Owner: From the owner's approved ideas on the Toy Ideas page (lane Real objects, September 29,
     2026): "This should be a real life splat if you can find it. I do not want this to be a cartoon
@@ -706,7 +706,8 @@ Proposals below are suggestions; the owner may change them.
     piece) levers up, the opening shows, a continuous jet of cream foam streaked with amber shoots
     up and falls back while fine drops spatter onto the lid and the coaster and soak away, then the
     tab folds back (3.5 s). Round 2: denser model, a foamy jet instead of clumps.
-  - Sound: The soda sloshes as it is shaken (no rattle); the pssht and the fizz are unchanged.
+  - Sound: The soda sloshing as it shakes, a sharp pssht as the tab opens and a fine, soft fizz that
+    dies away (no bubbles).
 
 ## Space (23)
 
@@ -1360,7 +1361,7 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Latte art swirl spins; steam curls up.
   - Improved: C2: the latte art twists into a swirl (the middle turns further than the edge) and
     relaxes back, with a thick curl of steam.
-  - Sound: Spoon stir clink.
+  - Sound: A simple "tap tap" of a spoon on the cup.
 - **Apple** (`apple`). Now: tap: Take a bite. Plan: keep.
   - Owner: A bite taken out of it, or a worm comes out.
   - Effect: A bite appears (crunch); a second tap, a worm peeks out.
@@ -1659,7 +1660,7 @@ Proposals below are suggestions; the owner may change them.
     every splat at full opacity and its exact size, the sharp kernel, and a Splats choice: Solid
     (default; a surface's splats lie flat along it, a curve's are drawn out along it) or Dots (each
     programmed splat its own dot).
-  - Sound: A soft low chord that swells as t plays (no rising sweep).
+  - Sound: Changed entirely, the quiet scratch of chalk as t plays.
 
 ## Clothing (4)
 
@@ -1673,8 +1674,7 @@ Proposals below are suggestions; the owner may change them.
     for two kit-built laces of 22 joints each. The bow comes undone and the laces flop loose, lift
     and cross over the tongue, tie back into a bow, and the shoe taps its toe twice (4 s). Round 2:
     denser scan, thinner braided laces.
-  - Sound: The laces slide through with a soft rustle (not a zipper); the tug and toe taps are
-    unchanged.
+  - Sound: Laces zipping through the eyelets, a soft tug, two toe taps.
 - **Hoodie** (`hoodie`). Now: tap: Hood flip and cross the sleeves. Plan: keep.
   - Owner: From the owner's approved ideas on the Toy Ideas page (lane Real objects, September 29,
     2026): "This should be a real life splat if you can find it. I do not want this to be a cartoon
@@ -1686,7 +1686,7 @@ Proposals below are suggestions; the owner may change them.
     the neck and flips back up as the kit-built drawstrings swing; the sleeves swing up and cross in
     front of the chest, clear of the body, with fabric filling the shoulders, then swing back down
     and settle (4.5 s). Round 2: attached hood and shoulders, sleeves clear of the body.
-  - Sound: The flick is a fabric rustle (not a zipper); the swishes are unchanged.
+  - Sound: Soft fabric swishes and a zip-like flick.
 - **Sunglasses** (`sunglasses`). Now: tap: Fold, flip and darken. Plan: keep.
   - Owner: From the owner's approved ideas on the Toy Ideas page (lane Real objects, September 29,
     2026): "This should be a real life splat if you can find it. I do not want this to be a cartoon
@@ -1697,8 +1697,8 @@ Proposals below are suggestions; the owner may change them.
     in one after the other, both behind the lenses and the second behind the first, the glasses turn
     head over heels to face you, the lenses darken from the rim inward to deep gray, then clear as
     the arms unfold (3.5 s). Round 2: denser model, arms kept behind the lenses.
-  - Sound: The hinges are small physical snaps and the lenses darken silently (no electronic clicks
-    or shimmer).
+  - Sound: Each fold is a plastic hinge sliding shut and seating; the lenses darken silently (no
+    electronic clicks or shimmer).
 - **Baseball cap** (`baseball-cap`). Now: tap: Flip and spin. Plan: keep.
   - Owner: From the owner's approved ideas on the Toy Ideas page (lane Real objects, September 29,
     2026): "This should be a real life splat if you can find it. I do not want this to be a cartoon
@@ -1709,7 +1709,8 @@ Proposals below are suggestions; the owner may change them.
     stand. It flips up off the stand, spins flat three and a half turns round a small loop like a
     flying disc, lands brim backward, then hops and turns round the right way (3 s). Round 2:
     denser, sharper model.
-  - Sound: The second flip is a fabric rustle (no buzzy flutter); the rest is unchanged.
+  - Sound: Fabric rustles instead of whooshes as it flips; the flick and the soft landings are
+    unchanged.
 
 ## Medieval (9)
 
@@ -2054,7 +2055,8 @@ Proposals below are suggestions; the owner may change them.
   - Improved: E6: the floors wring round further in twelve rigid bands (the top turns most) while a
     ring of light runs up the glass, then they unwind with a little sway as a second ring runs up (4
     s).
-  - Sound: A rising lift tone and a ding each time the light reaches the top.
+  - Sound: The lift's low whir as the floors wring round and a soft low bell each time the light
+    reaches the top (no rising tone or bright dings).
 - **Lighthouse** (`lighthouse`). Now: tap: Light on or off. Plan: keep.
   - Owner: Basically perfect.
   - Sound: Foghorn.
@@ -2251,8 +2253,8 @@ Proposals below are suggestions; the owner may change them.
     keyframes as each splat slides to its next place; views One splat (sizes, opacity and color
     sliders, a Turn control), Many splats (a duck shrinks to dots and back) and Sorting (splats
     appear far to near from a camera).
-  - Sound: A warm swell as the picture forms and a soft piano chord when it is there (no rising
-    shimmer or chimes).
+  - Sound: A soft patter of splats settling into place as the picture forms (no rising notes or
+    tones).
 - **Word vectors** (`word-vectors`). Now: tap: A − B + C. Plan: keep.
   - Owner: Approved on the Toy Ideas page (lane AI).
   - Effect: Word points float in 3D, each with a small sign; arrows add up, king minus man plus
@@ -2299,8 +2301,8 @@ Proposals below are suggestions; the owner may change them.
     through a window), two-phase addition staggered as in Babbage's design, carry levers that set
     and knock back, the crank and a bell; each tap queues one more turn (4 s); your own polynomial
     up to x³ and start value in the Toy tab.
-  - Sound: The crank catch is a brass clunk (not an electronic click); its running sounds are
-    unchanged.
+  - Sound: The ratchet of the crank, a brass click for each wheel step, a sharper snap for each
+    carry, and a small bell when a new result is ready.
 - **Enigma machine** (`enigma-machine`). Now: tap: Type the message. Plan: keep.
   - Owner: The owner's own idea on the Toy Ideas page (lane Machines A).
   - Effect: An Enigma cipher machine in its wooden box: tap and it types your message, each key
@@ -2320,8 +2322,8 @@ Proposals below are suggestions; the owner may change them.
   - Improved: Machines A: one bank of 12 drum sets (36 drums), a menu from a 12-letter crib, a real
     search of all 17,576 settings (plugboard taken as known), the stop lamp, and a readout of the
     setting and the plain text; your own message in the Toy tab.
-  - Sound: A dense clatter of spinning drums, a whirr of motors, and a sharp stop with a bell when a
-    setting is found.
+  - Sound: The drums' clatter without the low motor buzz; the switch, the stop and the bell are
+    unchanged.
 
 ## Pictures (5)
 
@@ -2331,7 +2333,8 @@ Proposals below are suggestions; the owner may change them.
   - Effect: A flat sheet showing what you open: a tap on the right of the page turns to the next
     page of a PDF, on the left goes back (the pages slide, they don't flip), or a tap plays and
     pauses a video.
-  - Sound: A real paper page turning.
+  - Sound: A paper page turning (a recorded CC0 page flip will replace it with Sound A's sample
+    voice).
 - **Your book** (`your-book`). Now: tap: Turn the page. Plan: keep.
   - Owner: Lane Books, from the owner's notes of September 27 and 28, 2026 (Pages into Splats).
   - Fixed: Books r2 (the owner's note of September 29, 2026: the book, not the pages, a little
@@ -2349,7 +2352,8 @@ Proposals below are suggestions; the owner may change them.
     paper: the top quarter of the page goes back); a page can be pulled over by hand, turning if let
     go past halfway or flicked and falling back otherwise; the turn lifts at once, the page curling
     as it goes, with no bend before it moves.
-  - Sound: The swish is a real paper page turning; the landing thud is unchanged.
+  - Sound: A paper page turning and the landing thud (a recorded CC0 page flip will replace the
+    swish with Sound A's sample voice).
 - **Photo album** (`photo-album`). Now: tap: Turn the page. Plan: keep.
   - Owner: Lane Books, from the owner's notes of September 27 and 28, 2026 (Pages into Splats).
   - Fixed: Books r2 (the owner's note of September 29, 2026: a little blurry or grainy around the
@@ -2362,7 +2366,8 @@ Proposals below are suggestions; the owner may change them.
     (about 1 s each), the photos mounted in photo corners with their file names beneath; at the end
     a tap closes the album. Books r3: taps by where they land, as the book; a page pulled by hand
     lags the finger a little, falls back more readily and settles slowly, like a heavy card page.
-  - Sound: A thick card page turning; the thud is unchanged.
+  - Sound: A thick card page turning and the thud (a recorded CC0 page flip will replace the swish
+    with Sound A's sample voice).
 - **Picture frame** (`picture-frame`). Now: tap: Swing the frame. Plan: keep.
   - Owner: Lane Books, from the owner's notes of September 27 and 28, 2026 (Pages into Splats).
   - Effect: A photo in a frame hung on a nail by a wire: a tap swings it about the nail as one solid
@@ -2389,8 +2394,7 @@ Proposals below are suggestions; the owner may change them.
     button. Screens r2: the picture's sheet is hidden while the set is off or the curtains are
     closed (nothing shows through), a GIF holds its frame and a video pauses; an off switch on each
     style; sharp sets (even placement in square tiles, walnut, velvet, brass and gold).
-  - Sound: The TV's click and hum, and on switching off its click and falling whine; each style its
-    own (a soft tone, the curtains' swish, a shimmer).
+  - Sound: Switching on is the click and crackle without the hum; switching off is unchanged.
 
 ## Studio (4)
 
@@ -2400,12 +2404,12 @@ Proposals below are suggestions; the owner may change them.
     marker and the camera glide along it. View: Live scrolls the landscape with the music like a
     waterfall: the part playing now sits on a fixed line at the front, the next seconds come toward
     you, what has played fades away, and a row of caps rises with the loudness at the line.
-  - Sound: A soft swell as it starts (no plucked jingle); the song itself is unchanged.
+  - Sound: The song itself.
 - **Chladni plate** (`chladni-plate`). Now: tap: Bow the plate. Plan: new effect (E6).
   - Owner: Approved on the Splashery Universe page (lane Studio Sound), September 29, 2026.
   - Effect: A tap bows a square metal plate: every sand grain hops where the plate swings and slides
     to the still lines, and in about 3.6 s the mode's figure appears; tap again to stir it up.
-  - Sound: A steady hum at the mode's pitch, with sand pattering.
+  - Sound: The plate's hum with the sand sliding as it settles (no patter of clicks).
 - **Model to splats** (`model-splats`). Now: tap: Lift off and settle back. Plan: keep.
   - Owner: Approved on the Splashery Universe page (lane Studio Models), September 29, 2026.
   - Effect: A 3D model file (glTF, OBJ or STL) turned into splats on the device; the tap lifts every
@@ -2415,8 +2419,8 @@ Proposals below are suggestions; the owner may change them.
     bends or is finely made), lays flat splats on it sized to their neighbors, colors them from the
     texture, vertex colors or material, and keeps hard edges hard; two CC0 samples (Kenney's burger,
     Poly Haven's vase).
-  - Sound: The splats lift off with a soft rush and settle back as a light patter (no rising zap or
-    notes).
+  - Sound: A rising whoosh as the splats lift off, then four falling plucked notes as they settle
+    back.
 - **Photo to 3D** (`photo-3d`). Now: tap: Raise or flatten the depth. Plan: keep.
   - Owner: Approved on the Splashery Universe page ("photo yes", September 29, 2026; lane Photo to
     3D; labs only).
@@ -2429,8 +2433,8 @@ Proposals below are suggestions; the owner may change them.
     Web (MIT), both loaded only when a photo is opened; an even grid of splats sized to their
     neighbors on the same surface, cut at depth jumps; three CC0 samples (a forest path, a cobbled
     street, a still life).
-  - Sound: A soft rush and a low chord as the depth comes up, a rush as it lies flat (no loud rising
-    whoosh or chimes).
+  - Sound: The photo's paper lifting as the depth comes up and settling as it lies flat (no wind, no
+    whoosh).
 
 ## Lab (2)
 
@@ -2446,7 +2450,7 @@ Proposals below are suggestions; the owner may change them.
     ellipses (a density wave keeps two arms), an ocean of four Gerstner waves, a flow along a (2, 3)
     torus knot. Lab r2: a tap on the toy now fires the pulse on every field (the galaxy's faint
     stars were under the pick pass's alpha clip; the recipe's pickAlpha lowers it).
-  - Sound: A soft steady chord swelling as the pulse runs out (no rising pitch).
+  - Sound: A soft ripple through the field, like grass stirring, as the pulse runs out (no tones).
 - **Fluid lab** (`fluid-lab`). Now: tap: Pour, drop or blow. Plan: keep.
   - Owner: The owner's notes on the water bottle and soda can of September 29, 2026 ("a realistic
     fluid splat simulator"; lane Fluids; labs only).

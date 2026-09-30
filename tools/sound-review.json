@@ -1256,115 +1256,115 @@
       "candidates": []
     },
     "fountain-pen": {
-      "status": "site",
+      "status": "approved",
       "said": "",
-      "note": "A newer toy, added after his notes: PACKS.md 7e applied by lane Sound B.",
-      "plan": "Now: the cap clicks are small physical snaps (not electronic blips); the nib scratch is unchanged.",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
       "candidates": []
     },
     "soda-can": {
       "status": "site",
-      "said": "",
-      "note": "A newer toy, added after his notes: PACKS.md 7e applied by lane Sound B.",
-      "plan": "Now: the soda sloshes as it is shaken (no rattle); the pssht and the fizz are unchanged.",
+      "said": "(September 30, 2026, on the Sound Board) Doesn't sound realistic enough. Bubble sounds aren't really necessary, and the pssht and fizz need work.",
+      "note": "Doesn't sound realistic enough. Bubble sounds aren't really necessary, and the pssht and fizz need work.",
+      "plan": "Now: the soda sloshing as it shakes, a sharp pssht as the tab opens and a fine, soft fizz that dies away (no bubbles).",
       "candidates": []
     },
     "running-shoe": {
-      "status": "site",
-      "said": "",
-      "note": "A newer toy, added after his notes: PACKS.md 7e applied by lane Sound B.",
-      "plan": "Now: the laces slide through with a soft rustle (not a zipper); the tug and toe taps are unchanged.",
+      "status": "approved",
+      "said": "(September 30, 2026, on the Sound Board) marked good",
+      "note": "Approved as it is.",
+      "plan": "",
       "candidates": []
     },
     "hoodie": {
-      "status": "site",
-      "said": "",
-      "note": "A newer toy, added after his notes: PACKS.md 7e applied by lane Sound B.",
-      "plan": "Now: the flick is a fabric rustle (not a zipper); the swishes are unchanged.",
+      "status": "approved",
+      "said": "(September 30, 2026, on the Sound Board) marked good",
+      "note": "Approved as it is.",
+      "plan": "",
       "candidates": []
     },
     "sunglasses": {
       "status": "site",
-      "said": "",
-      "note": "A newer toy, added after his notes: PACKS.md 7e applied by lane Sound B.",
-      "plan": "Now: the hinges are small physical snaps and the lenses darken silently (no electronic clicks or shimmer).",
+      "said": "(September 30, 2026, on the Sound Board) Sounds too robotic and tacky.",
+      "note": "Sounds too robotic and tacky.",
+      "plan": "Now: each fold is a plastic hinge sliding shut and seating; the lenses darken silently (no electronic clicks or shimmer).",
       "candidates": []
     },
     "baseball-cap": {
       "status": "site",
-      "said": "",
-      "note": "A newer toy, added after his notes: PACKS.md 7e applied by lane Sound B.",
-      "plan": "Now: the second flip is a fabric rustle (no buzzy flutter); the rest is unchanged.",
+      "said": "(September 30, 2026, on the Sound Board) A bit too windy.",
+      "note": "A bit too windy.",
+      "plan": "Now: fabric rustles instead of whooshes as it flips; the flick and the soft landings are unchanged.",
       "candidates": []
     },
     "splat-equation": {
       "status": "site",
-      "said": "",
-      "note": "A newer toy, added after his notes: PACKS.md 7e applied by lane Sound B.",
-      "plan": "Now: a soft low chord that swells as t plays (no rising sweep).",
+      "said": "(September 30, 2026, on the Sound Board) Too robotic and loud; change entirely, please.",
+      "note": "Too robotic and loud; change entirely, please.",
+      "plan": "Now: changed entirely, the quiet scratch of chalk as t plays.",
       "candidates": []
     },
     "gaussian-splatting": {
       "status": "site",
-      "said": "",
-      "note": "A newer toy, added after his notes: PACKS.md 7e applied by lane Sound B.",
-      "plan": "Now: a warm swell as the picture forms and a soft piano chord when it is there (no rising shimmer or chimes).",
+      "said": "(September 30, 2026, on the Sound Board) Doesn't need the ascending xylophone notes; sounds too robotic; choose something else, please.",
+      "note": "Doesn't need the ascending xylophone notes; sounds too robotic; choose something else, please.",
+      "plan": "Now: a soft patter of splats settling into place as the picture forms (no rising notes or tones).",
       "candidates": []
     },
     "difference-engine": {
-      "status": "site",
-      "said": "",
-      "note": "A newer toy, added after his notes: PACKS.md 7e applied by lane Sound B.",
-      "plan": "Now: the crank catch is a brass clunk (not an electronic click); its running sounds are unchanged.",
+      "status": "approved",
+      "said": "(September 30, 2026, on the Sound Board) marked good",
+      "note": "Approved as it is.",
+      "plan": "",
       "candidates": []
     },
     "picture-lab": {
       "status": "site",
-      "said": "",
-      "note": "A newer toy, added after his notes: PACKS.md 7e applied by lane Sound B.",
-      "plan": "Now: a real paper page turning.",
+      "said": "(September 30, 2026, on the Sound Board) Sounds too much like suction or something.",
+      "note": "Sounds too much like suction or something.",
+      "plan": "Now: a paper page turning (a recorded CC0 page flip will replace it with Sound A's sample voice).",
       "candidates": []
     },
     "your-book": {
       "status": "site",
-      "said": "",
-      "note": "A newer toy, added after his notes: PACKS.md 7e applied by lane Sound B.",
-      "plan": "Now: the swish is a real paper page turning; the landing thud is unchanged.",
+      "said": "(September 30, 2026, on the Sound Board) Sounds too much like wind or sand, not pages turning.",
+      "note": "Sounds too much like wind or sand, not pages turning.",
+      "plan": "Now: a paper page turning and the landing thud (a recorded CC0 page flip will replace the swish with Sound A's sample voice).",
       "candidates": []
     },
     "photo-album": {
       "status": "site",
-      "said": "",
-      "note": "A newer toy, added after his notes: PACKS.md 7e applied by lane Sound B.",
-      "plan": "Now: a thick card page turning; the thud is unchanged.",
+      "said": "(September 30, 2026, on the Sound Board) Thud is fine, but page turn swish doesn't sound realistic.",
+      "note": "Thud is fine, but page turn swish doesn't sound realistic.",
+      "plan": "Now: a thick card page turning and the thud (a recorded CC0 page flip will replace the swish with Sound A's sample voice).",
       "candidates": []
     },
     "song-landscape": {
-      "status": "site",
-      "said": "",
-      "note": "A newer toy, added after his notes: PACKS.md 7e applied by lane Sound B.",
-      "plan": "Now: a soft swell as it starts (no plucked jingle); the song itself is unchanged.",
+      "status": "approved",
+      "said": "(September 30, 2026, on the Sound Board) marked good",
+      "note": "Approved as it is.",
+      "plan": "",
       "candidates": []
     },
     "model-splats": {
-      "status": "site",
-      "said": "",
-      "note": "A newer toy, added after his notes: PACKS.md 7e applied by lane Sound B.",
-      "plan": "Now: the splats lift off with a soft rush and settle back as a light patter (no rising zap or notes).",
+      "status": "approved",
+      "said": "(September 30, 2026, on the Sound Board) marked good",
+      "note": "Approved as it is.",
+      "plan": "",
       "candidates": []
     },
     "photo-3d": {
       "status": "site",
-      "said": "",
-      "note": "A newer toy, added after his notes: PACKS.md 7e applied by lane Sound B.",
-      "plan": "Now: a soft rush and a low chord as the depth comes up, a rush as it lies flat (no loud rising whoosh or chimes).",
+      "said": "(September 30, 2026, on the Sound Board) Doesn't need to sound like wind. No whoosh necessary.",
+      "note": "Doesn't need to sound like wind. No whoosh necessary.",
+      "plan": "Now: the photo's paper lifting as the depth comes up and settling as it lies flat (no wind, no whoosh).",
       "candidates": []
     },
     "splat-field": {
       "status": "site",
-      "said": "",
-      "note": "A newer toy, added after his notes: PACKS.md 7e applied by lane Sound B.",
-      "plan": "Now: a soft steady chord swelling as the pulse runs out (no rising pitch).",
+      "said": "(September 30, 2026, on the Sound Board) Too robotic",
+      "note": "Too robotic",
+      "plan": "Now: a soft ripple through the field, like grass stirring, as the pulse runs out (no tones).",
       "candidates": []
     },
     "anatomy-atlas": {
@@ -1374,39 +1374,25 @@
       "plan": "",
       "candidates": []
     },
-    "baseball-cap": {
-      "status": "change",
-      "said": "(September 30, 2026, on the Sound Board) A bit too windy.",
-      "note": "A bit too windy.",
-      "plan": "Less wind: a soft fabric rustle and the cap settling, with the wind taken out. (Sound B)",
-      "candidates": []
-    },
     "bombe": {
-      "status": "change",
+      "status": "site",
       "said": "(September 30, 2026, on the Sound Board) Doesn't need the low buzz motor sound.",
       "note": "Doesn't need the low buzz motor sound.",
-      "plan": "Drop the low motor buzz; keep the drums turning and the clack of the stop. (Sound B)",
+      "plan": "Now: the drums' clatter without the low motor buzz; the switch, the stop and the bell are unchanged.",
       "candidates": []
     },
     "chladni-plate": {
-      "status": "change",
+      "status": "site",
       "said": "(September 30, 2026, on the Sound Board) Should not have patters/clicks. Sand should sound like it's sliding, not crawling.",
       "note": "Should not have patters/clicks. Sand should sound like it's sliding, not crawling.",
-      "plan": "No patter or clicks: the sand slides and hisses into the figure as it settles. (Sound B)",
+      "plan": "Now: the plate's hum with the sand sliding as it settles (no patter of clicks).",
       "candidates": []
     },
     "coffee": {
-      "status": "change",
+      "status": "site",
       "said": "(September 30, 2026, on the Sound Board) Sounds a bit tacky. Could just be a simple \"tap tap\", like someone is signaling to a waiter/waitress to refill the coffee.",
       "note": "Sounds a bit tacky. Could just be a simple \"tap tap\", like someone is signaling to a waiter/waitress to refill the coffee.",
-      "plan": "A simple \"tap tap\" of a spoon or finger on the cup, like asking for a refill. (Sound B)",
-      "candidates": []
-    },
-    "difference-engine": {
-      "status": "approved",
-      "said": "(September 30, 2026, on the Sound Board) marked good",
-      "note": "Approved as it is.",
-      "plan": "",
+      "plan": "Now: a simple \"tap tap\" of a spoon on the cup.",
       "candidates": []
     },
     "electronic-keyboard": {
@@ -1430,13 +1416,6 @@
       "plan": "Pours, glugs and splashes in sync with the animation, from real recordings (lane Fluids, r4). (Fluids)",
       "candidates": []
     },
-    "gaussian-splatting": {
-      "status": "change",
-      "said": "(September 30, 2026, on the Sound Board) Doesn't need the ascending xylophone notes; sounds too robotic; choose something else, please.",
-      "note": "Doesn't need the ascending xylophone notes; sounds too robotic; choose something else, please.",
-      "plan": "Drop the rising xylophone notes and the robotic tones; a subtle, real sound for the splats settling. (Sound B)",
-      "candidates": []
-    },
     "grand-piano": {
       "status": "change",
       "said": "(September 30, 2026, on the Sound Board) Sounds too much like an electronic keyboard.",
@@ -1458,21 +1437,7 @@
       "plan": "",
       "candidates": []
     },
-    "hoodie": {
-      "status": "approved",
-      "said": "(September 30, 2026, on the Sound Board) marked good",
-      "note": "Approved as it is.",
-      "plan": "",
-      "candidates": []
-    },
     "hot-air-balloon": {
-      "status": "approved",
-      "said": "(September 30, 2026, on the Sound Board) marked good",
-      "note": "Approved as it is.",
-      "plan": "",
-      "candidates": []
-    },
-    "model-splats": {
       "status": "approved",
       "said": "(September 30, 2026, on the Sound Board) marked good",
       "note": "Approved as it is.",
@@ -1493,32 +1458,11 @@
       "plan": "Less robotic: soft, real sounds for picking and lighting up an element. (Sound A)",
       "candidates": []
     },
-    "photo-3d": {
-      "status": "change",
-      "said": "(September 30, 2026, on the Sound Board) Doesn't need to sound like wind. No whoosh necessary.",
-      "note": "Doesn't need to sound like wind. No whoosh necessary.",
-      "plan": "No wind or whoosh: a quiet, real sound as the photo rises into depth. (Sound B)",
-      "candidates": []
-    },
-    "photo-album": {
-      "status": "change",
-      "said": "(September 30, 2026, on the Sound Board) Thud is fine, but page turn swish doesn't sound realistic.",
-      "note": "Thud is fine, but page turn swish doesn't sound realistic.",
-      "plan": "Keep the thud; replace the page swish with a real page turn (a recorded CC0 page flip). (Sound B)",
-      "candidates": []
-    },
     "picture-frame": {
       "status": "approved",
       "said": "(September 30, 2026, on the Sound Board) marked good",
       "note": "Approved as it is.",
       "plan": "",
-      "candidates": []
-    },
-    "picture-lab": {
-      "status": "change",
-      "said": "(September 30, 2026, on the Sound Board) Sounds too much like suction or something.",
-      "note": "Sounds too much like suction or something.",
-      "plan": "Not suction-like: a clean, real sound for the picture changing. (Sound B)",
       "candidates": []
     },
     "pythagoras-proof": {
@@ -1528,60 +1472,18 @@
       "plan": "",
       "candidates": []
     },
-    "running-shoe": {
-      "status": "approved",
-      "said": "(September 30, 2026, on the Sound Board) marked good",
-      "note": "Approved as it is.",
-      "plan": "",
-      "candidates": []
-    },
     "screen": {
-      "status": "change",
+      "status": "site",
       "said": "(September 30, 2026, on the Sound Board) \"On\" sound doesn't need the hum; \"Off\" sound is good.",
       "note": "\"On\" sound doesn't need the hum; \"Off\" sound is good.",
-      "plan": "\"On\" without the hum (keep a short, real switch-on); keep the \"Off\" sound. (Sound B)",
-      "candidates": []
-    },
-    "soda-can": {
-      "status": "change",
-      "said": "(September 30, 2026, on the Sound Board) Doesn't sound realistic enough. Bubble sounds aren't really necessary, and the pssht and fizz need work.",
-      "note": "Doesn't sound realistic enough. Bubble sounds aren't really necessary, and the pssht and fizz need work.",
-      "plan": "A real can opening (pssht) and a real fizz, from recordings; no bubbling. (Sound B)",
-      "candidates": []
-    },
-    "song-landscape": {
-      "status": "approved",
-      "said": "(September 30, 2026, on the Sound Board) marked good",
-      "note": "Approved as it is.",
-      "plan": "",
-      "candidates": []
-    },
-    "splat-equation": {
-      "status": "change",
-      "said": "(September 30, 2026, on the Sound Board) Too robotic and loud; change entirely, please.",
-      "note": "Too robotic and loud; change entirely, please.",
-      "plan": "Change entirely: quiet, not robotic, a subtle real sound for the equation acting. (Sound B)",
-      "candidates": []
-    },
-    "splat-field": {
-      "status": "change",
-      "said": "(September 30, 2026, on the Sound Board) Too robotic",
-      "note": "Too robotic",
-      "plan": "Less robotic: a subtle, natural sound for the field. (Sound B)",
-      "candidates": []
-    },
-    "sunglasses": {
-      "status": "change",
-      "said": "(September 30, 2026, on the Sound Board) Sounds too robotic and tacky.",
-      "note": "Sounds too robotic and tacky.",
-      "plan": "Not robotic or tacky: the real click and slide of folding sunglasses and lenses. (Sound B)",
+      "plan": "Now: switching on is the click and crackle without the hum; switching off is unchanged.",
       "candidates": []
     },
     "supertall": {
-      "status": "change",
+      "status": "site",
       "said": "(September 30, 2026, on the Sound Board) Could be less tacky. Sounds too cute.",
       "note": "Could be less tacky. Sounds too cute.",
-      "plan": "Less cute and tacky: a grounded, real sound for the tower. (Sound B)",
+      "plan": "Now: the lift's low whir as the floors wring round and a soft low bell each time the light reaches the top (no rising tone or bright dings).",
       "candidates": []
     },
     "turing-machine": {
@@ -1599,17 +1501,10 @@
       "candidates": []
     },
     "water-bottle": {
-      "status": "change",
+      "status": "site",
       "said": "(September 30, 2026, on the Sound Board) Close, but not right yet. The clicking at the beginning is weird, and the water sounds too bubbly. Needs to be more realistic.",
       "note": "Close, but not right yet. The clicking at the beginning is weird, and the water sounds too bubbly. Needs to be more realistic.",
-      "plan": "No click at the start; real water sloshing and pouring, from recordings, not bubbly. (Sound B)",
-      "candidates": []
-    },
-    "your-book": {
-      "status": "change",
-      "said": "(September 30, 2026, on the Sound Board) Sounds too much like wind or sand, not pages turning.",
-      "note": "Sounds too much like wind or sand, not pages turning.",
-      "plan": "Real pages turning (a recorded CC0 page flip), not wind or sand. (Sound B)",
+      "plan": "Now: the cap twisted off, a real pour (a splashing stream and the water sloshing in the glass) and the cap twisted back on (no clicks or bubbly glugs).",
       "candidates": []
     },
     "cactus": {
@@ -2229,13 +2124,6 @@
       "candidates": []
     },
     "telescope": {
-      "status": "approved",
-      "said": "",
-      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
-      "plan": "",
-      "candidates": []
-    },
-    "fountain-pen": {
       "status": "approved",
       "said": "",
       "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
