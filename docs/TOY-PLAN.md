@@ -2404,8 +2404,8 @@ Proposals below are suggestions; the owner may change them.
   - Improved: Video to 3D (spike): Splat.js (MIT) vendored and loaded only when a video is opened;
     frames picked by sharpness; the result converted from Splat.js's PLY into kit splats with their
     own sizes and rotations; save as PLY; timing readout per stage.
-  - Sound: A rising whoosh as the flight takes off; a falling whoosh as the camera comes home (the
-    video's own sound plays during the flight).
+  - Sound: A soft, level breath of air as the flight sets off and as the camera comes home; during
+    the flight of a video you opened, the video's own sound.
 
 ## Lab (2)
 
