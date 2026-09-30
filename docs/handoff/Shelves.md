@@ -103,11 +103,16 @@ Model: Opus 5.5 (default effort).
 ## Known issues
 
 - `tests/smoke.spec.mjs:133` expects Shapes to be blob, donut, knot, planet; it is now torus, blob,
-  knot. The Operator updates that line.
+  knot. `tests/smoke.spec.mjs:102` expects the donut's thumbnail loaded at start; it is now far down
+  the All shelf. The Operator updates those lines.
 
 ## For the Operator
 
 - smoke.spec.mjs line 133: change the expected Shapes list to `["torus", "blob", "knot"]`.
+- smoke.spec.mjs line 102: its list of thumbnails loaded at start names the donut and the tiny
+  planet, which now sit far down the All shelf (Food, Space), so their lazy thumbnails haven't
+  loaded; swap them for `"torus"` (or drop them). The test's later check, which loads every
+  offscreen thumbnail, still covers them.
 - PACKS.md: a procedural shelf toy may now list `looks` with `generator` settings and a `lookLabel`
   (engine PR #147).
 - The four new palettes show in the Make tab too, labeled "(tribute)".
