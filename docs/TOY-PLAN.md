@@ -550,7 +550,7 @@ Proposals below are suggestions; the owner may change them.
     its cut lines), 13 skin pieces, 19 muscle groups and 16 bones or bone groups as tokens, and our
     brain, lungs, heart and kidney recipes placed inside with a kit-built liver, stomach and
     intestines.
-  - Sound: A soft peeling tear and a gentle whoosh as each layer lifts away.
+  - Sound: A soft paper-and-cloth slide for each peel, and a low chime as the layers settle back.
 
 ## Weather (13)
 

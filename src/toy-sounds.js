@@ -1203,8 +1203,8 @@ export const TOY_SOUNDS = {
   // Lane Anatomy: a soft paper-and-cloth slide for each peel (the low chime as
   // the layers return is a cue from the recipe).
   "anatomy-atlas": [
-    { voice: "tear", f: 700, to: 0.7, decay: 0.8, bright: 0.2, vol: 1.4 },
-    { voice: "whoosh", at: 0.1, f: 500, to: 0.7, decay: 1, vol: 0.25 },
+    { voice: "breath", f: 1300, to: 0.55, decay: 1.5, vol: 0.5 },
+    { voice: "flutter", f: 900, rate: 12, decay: 1.4, vol: 0.22, at: 0.12 },
   ],
   // ---- Nature -----------------------------------------------------------------------
   // E4: timed to the tap effects in src/packs/nature.js; later hits (the

@@ -150,13 +150,14 @@ at the same time; leave their files alone. The laptop is locked.
   Sound Board page (`tools/sound-board.mjs`), preloading in `tools/sound-check.mjs`,
   `tools/sound-lint.mjs`, docs in PACKS.md (section 5, "Recorded samples" and "The sound lint") and
   `tests/snda-engine.spec.mjs`.
-- Lane PR (`claude/lane-sound-a`, on top of the engine PR): 68 toys on the eight shelves have new
+- Lane PR (`claude/lane-sound-a`, on top of the engine PR): 67 toys on the eight shelves have new
   sounds (every toy the owner asked to change there, the carrot cake's optional one, and the
-  periodic table and anatomy atlas under 7e), with 34 CC0 samples in `assets/sounds/` (400 KB in
-  all, 1 to 30 KB each). Their entries in `tools/sound-review.json` are `"status": "site"` with a
-  `plan` saying what they are now; the eight toys he said to keep on these shelves are `keep`. The
-  toy plan's sound lines follow the plans; TOY-PLAN.md is regenerated.
-- `node tools/sound-lint.mjs --toy <the 68>`: no clear violation. `tests/snda.spec.mjs` checks it.
+  periodic table under 7e; he marked the anatomy atlas good on the Sound Board on September 30, so
+  it stays as it was), with 34 CC0 samples in `assets/sounds/` (400 KB in all, 1 to 30 KB each).
+  Their entries in `tools/sound-review.json` are `"status": "site"` with a `plan` saying what they
+  are now; the eight toys he said to keep on these shelves are `keep`. The toy plan's sound lines
+  follow the plans; TOY-PLAN.md is regenerated.
+- `node tools/sound-lint.mjs --toy <the 67>`: no clear violation. `tests/snda.spec.mjs` checks it.
 
 ## Notes
 
