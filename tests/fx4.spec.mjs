@@ -183,8 +183,16 @@ for (const [id, label] of [
       const page = await ctx.newPage();
       const problems = [];
       page.on("pageerror", (e) => problems.push(e.message));
-      await page.clock.install({ time: new Date(2026, 8, 30, 1, 52, 20) });
-      await page.clock.resume();
+      // The clock's hands at 1:52 (only Date is fixed; the page's timers run).
+      await page.addInitScript(() => {
+        const RealDate = Date;
+        const at = new RealDate(2026, 8, 30, 1, 52, 20).getTime() - RealDate.now();
+        window.Date = class extends RealDate {
+          constructor(...a) {
+            super(...(a.length ? a : [RealDate.now() + at]));
+          }
+        };
+      });
       await page.goto("/?renderer=webgl2&profile=weak");
       await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
       await page.evaluate((toy) => window.__splashery.app.chooseToy(toy), id);
