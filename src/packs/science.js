@@ -3,15 +3,21 @@
 //
 //   thermal-ellipsoids  each atom of a crystal structure is the Gaussian of
 //                       its measured displacement tensor U (src/science/crystal.js)
+//   smlm-microscope     each molecule a super-resolution microscope found is a
+//                       Gaussian as wide as its localization precision
+//                       (src/science/smlm.js)
+//   galaxy-box          each gas particle of a FIRE-2 galaxy is a Gaussian of
+//                       about half its smoothing length (an approximation)
 //
 // The toys bring their own GPU program (src/science/field.js, labs only): the
 // jiggle, the magnifier and the Gaussians' exact shapes.
 
 import { quatFromTo, mix, shade, smoothstep, vec } from "../kit.js";
-import { evenEllipsoid, evenCylinder } from "./even.js";
+import { evenEllipsoid, evenCylinder, evenBox } from "./even.js";
 import { element } from "../chem/elements.js";
 import { perceiveBonds } from "../chem/molfile.js";
 import { readCrystal, probabilityScale, centerOf, eigenSym3 } from "../science/crystal.js";
+import { readSmlm, readLocalizations } from "../science/smlm.js";
 import { SCI_KIND, packAtom, quatFromAxes, sciModifier, unmagnify } from "../science/field.js";
 
 // ---- Shared ------------------------------------------------------------------------------
@@ -30,6 +36,8 @@ async function readAsset(rel, binary = false) {
   return binary ? new Uint8Array(await r.arrayBuffer()) : r.text();
 }
 
+const f32 = new Float32Array(1);
+const asF32 = (x) => ((f32[0] = x), f32[0]);
 const fmt = (n) => Math.round(n).toLocaleString("en");
 const clean = (s, n = 80) =>
   String(s ?? "")
@@ -66,7 +74,7 @@ export const ELLIPSOID_SAMPLES = [
     id: "aspirin",
     label: "Aspirin, 300 K (small molecule)",
     file: "aspirin-cod-2104857.cif",
-    title: "Aspirin form I at 300 K (COD 2104857)",
+    title: "Aspirin form II at 300 K (COD 2104857)",
     author:
       "E. J. Chan, T. R. Welberry, A. P. Heerdegen and D. J. Goossens (Acta Crystallographica B 66, 696–707, 2010), via the Crystallography Open Database",
     source: "https://www.crystallography.net/cod/2104857.html",
@@ -393,6 +401,538 @@ THERMAL.gpuField = function (_o, fit) {
   return sciModifier(ELL.sigMaxToy);
 };
 
+// ---- Super-resolution microscope ---------------------------------------------------------
+
+export const MICROSCOPE_SAMPLE = {
+  file: "cos7-mt-clathrin.smlm",
+  label: "Microtubules and clathrin in a COS cell (a 12 µm square)",
+  title: "Microtubules and clathrin in a Cos cell (ShareLoc.XYZ, 10.5281/zenodo.5507427)",
+  author:
+    "Christophe Leterrier (Aix Marseille Université, CNRS, NeuroCyto), on ShareLoc.XYZ; a 12 µm square cut from the record (a subset)",
+  source: "https://doi.org/10.5281/zenodo.5507427",
+  license: "CC BY 4.0",
+  licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
+};
+
+const MIC = {
+  sample: null, // the sample's table
+  custom: null, // { name, table }
+  want: null,
+  info: null,
+  focus: focusState(),
+  toy: null,
+  grid: null, // localizations bucketed by x, y for the tap's depth
+};
+export const microscopeState = () => (MIC.info ? { ...MIC.info } : null);
+
+// Splat budgets by tier: the kit's count with density 1.4 (84k, 196k,
+// 280k and 392k localizations on the low, mid, high and max tiers), so the
+// sample's 170,401 are all drawn from the mid tier up.
+export const MICROSCOPE_DENSITY = 1.4;
+const MIC_ZOOM = 60; // the tap's magnification: a 12 µm field to about 200 nm
+const UM = 1e-3; // nm to µm (the recipe's units)
+
+// A perceptual rainbow for depth (Google's Turbo, a polynomial fit) and a
+// dark-to-bright one for time.
+function turbo(t) {
+  const x = Math.max(0, Math.min(1, t));
+  const r = 0.1357 + x * (4.5974 - x * (42.3277 - x * (130.5887 - x * (150.5666 - x * 58.1375))));
+  const g = 0.0914 + x * (2.1856 + x * (4.8052 - x * (14.0195 - x * (4.2109 + x * 2.7747))));
+  const b = 0.1067 + x * (12.5925 - x * (60.1097 - x * (109.0745 - x * (88.5066 - x * 26.8183))));
+  return [r, g, b].map((v) => Math.max(0, Math.min(1, v)));
+}
+const TIME_STOPS = ["#3b2a98", "#2f7fd0", "#23b8a8", "#8fd24a", "#f5e03c"];
+function timeColor(t) {
+  const x = Math.max(0, Math.min(1, t)) * (TIME_STOPS.length - 1);
+  const i = Math.min(TIME_STOPS.length - 2, Math.floor(x));
+  return mix(TIME_STOPS[i], TIME_STOPS[i + 1], x - i);
+}
+const CHANNEL_COLORS = ["#ff4a24", "#1ee8ff", "#ffe23a", "#b86bff"];
+
+// Robust ends of a column (the 1st and 99th percentiles, from a sample).
+function range(a, n) {
+  const step = Math.max(1, Math.floor(n / 20000));
+  const v = [];
+  for (let i = 0; i < n; i += step) if (Number.isFinite(a[i])) v.push(a[i]);
+  if (!v.length) return [0, 1];
+  v.sort((p, q) => p - q);
+  const lo = v[Math.floor(v.length * 0.01)];
+  const hi = v[Math.floor(v.length * 0.99)];
+  return hi > lo ? [lo, hi] : [lo - 1, lo + 1];
+}
+
+// Which localizations to draw when a file has more than the budget: an even
+// spread (every k-th after a fixed shuffle of blocks), the same on every build.
+function pickIndices(n, budget) {
+  if (n <= budget) return null;
+  const out = new Uint32Array(budget);
+  const step = n / budget;
+  for (let j = 0; j < budget; j++) out[j] = Math.min(n - 1, Math.floor(j * step + ((j * 0.618034) % 1) * step)); // prettier-ignore
+  return out;
+}
+
+const MICROSCOPE = {
+  alive: false,
+  density: MICROSCOPE_DENSITY,
+  options: [
+    {
+      key: "data",
+      label: "Data",
+      type: "select",
+      default: "sample",
+      choices: [
+        { id: "sample", label: "Microtubules and clathrin (sample)" },
+        { id: "custom", label: "Your file (open one below)" },
+      ],
+    },
+    {
+      key: "color",
+      label: "Color by",
+      type: "select",
+      default: "depth",
+      choices: [
+        { id: "depth", label: "Depth (z)" },
+        { id: "frame", label: "Time (frame)" },
+        { id: "channel", label: "Channel" },
+      ],
+    },
+    {
+      key: "stretch",
+      label: "Depth scale",
+      type: "select",
+      default: "1",
+      choices: [
+        { id: "1", label: "True (1×)" },
+        { id: "4", label: "Stretched 4×" },
+      ],
+    },
+    { key: "fileName", label: "File name", type: "text", default: "", hidden: true },
+  ],
+  controls: [{ key: "zoom", label: "Zoom in", type: "toggle", default: 0, ease: 2.6 }],
+  action: {
+    key: "zoom",
+    label: "Zoom in or out",
+    // A tap zooms in on the place you tap (at the depth of the molecules
+    // there) and a second tap zooms back out.
+    at(point, c) {
+      if ((c.zoom ?? 0) > 0.5 || !MIC.toy || !MIC.info) return undefined;
+      MIC.focus.goal = MIC.toy(focusPoint(point));
+      MIC.focus.at = MIC.focus.goal.slice();
+      return undefined;
+    },
+  },
+  input: {
+    title: "Your own localizations",
+    fileButton: "Open a .smlm or ThunderSTORM CSV file…",
+    accept: ".smlm,.csv,.txt,.zip",
+    binary: true,
+    note: "A .smlm file (ShareLoc.XYZ's format) or a CSV from ThunderSTORM with x, y (and z) in nanometers and the localization uncertainty. Each localization becomes a Gaussian as wide as its precision. The file stays on this device.",
+    async read(_text, fileName, file) {
+      if (!file) throw new Error("Open a .smlm or CSV file.");
+      const bytes = new Uint8Array(await file.arrayBuffer());
+      const table = await readLocalizations(bytes, fileName);
+      const name = clean(String(file.name || fileName || "Your localizations").replace(/\.[^.]+$/, ""), 60); // prettier-ignore
+      MIC.custom = { name, table };
+      return { data: "custom", fileName: clean(file.name || fileName) };
+    },
+    shown() {
+      const i = MIC.info;
+      if (!i) return "";
+      const some = i.drawn < i.n ? ` Drawing ${fmt(i.drawn)} of them (this device's budget).` : "";
+      return [`${i.name}: ${fmt(i.n)} localizations.${some}`, ...i.notes].join(" ");
+    },
+  },
+  credits: [
+    {
+      label: "Microscope sample",
+      title: MICROSCOPE_SAMPLE.title,
+      source: MICROSCOPE_SAMPLE.source,
+      author: MICROSCOPE_SAMPLE.author,
+      license: MICROSCOPE_SAMPLE.license,
+      licenseUrl: MICROSCOPE_SAMPLE.licenseUrl,
+    },
+  ],
+  async prepare(o) {
+    if (o.data === "custom" && MIC.custom) {
+      MIC.want = { name: MIC.custom.name, table: MIC.custom.table, custom: true };
+      return;
+    }
+    if (!MIC.sample) {
+      const bytes = await readAsset(`../../assets/toys/smlm-microscope/${MICROSCOPE_SAMPLE.file}`, true); // prettier-ignore
+      MIC.sample = await readSmlm(bytes);
+    }
+    MIC.want = { name: MICROSCOPE_SAMPLE.label, table: MIC.sample, custom: false };
+  },
+  drive(t, c, out, info) {
+    const z = smoothstep(0, 1, c.zoom ?? 0);
+    const m = Math.pow(MIC_ZOOM, z);
+    const u = smoothstep(0, 0.35, z);
+    easeFocus(MIC.focus, info.time);
+    const F = MIC.focus.at;
+    // Zoomed out, every localization is drawn at least about a pixel wide;
+    // zoomed in, a clipping slab shows a slice at the tapped depth.
+    const clip = z > 0.02 ? mixN(2.5, 0.35, u) : 0;
+    out.morph = [0, m, 0.0008, clip];
+    out.glow = [F[0], F[1], F[2], u];
+  },
+  build(k, o) {
+    const want = MIC.want;
+    if (!want) throw new Error("There are no localizations to show.");
+    const T = want.table;
+    const budget = Math.max(1000, Math.floor(k.count * 0.985));
+    const pick = pickIndices(T.n, budget);
+    const count = pick ? pick.length : T.n;
+    const at = (j) => (pick ? pick[j] : j);
+    const stretch = Number(o.stretch) || 1;
+    const [x0, x1] = range(T.x, T.n);
+    const [y0, y1] = range(T.y, T.n);
+    const [z0, z1] = T.has3D ? range(T.z, T.n) : [-1, 1];
+    const cx = (x0 + x1) / 2;
+    const cy = (y0 + y1) / 2;
+    const cz = T.has3D ? (z0 + z1) / 2 : 0;
+    const f0 = T.frames?.[0] ?? 0;
+    const fr = Math.max(1, (T.frames?.[1] ?? 1) - f0);
+    // The slide: a dark plate just behind the molecules, as big as the field.
+    const w = (x1 - x0) * UM * 1.06;
+    const h = (y1 - y0) * UM * 1.06;
+    const back = (z0 - cz) * UM * stretch - Math.max(w, h) * 0.02;
+    k.add(evenBox(w, h, Math.max(w, h) * 0.01), {
+      pos: [0, 0, back - Math.max(w, h) * 0.005],
+      even: true,
+      color: "#07080b",
+      jitter: 0,
+      opacity: 1,
+      flat: 0.3,
+      kind: SCI_KIND.plain,
+    });
+    const P = (i) => [(T.x[i] - cx) * UM, -(T.y[i] - cy) * UM, (T.z[i] - cz) * UM * stretch];
+    const colorOf = (i) => {
+      if (o.color === "frame") return timeColor((T.frame[i] - f0) / fr);
+      if (o.color === "channel") return CHANNEL_COLORS[T.channel[i] % CHANNEL_COLORS.length];
+      return turbo(T.has3D ? (T.z[i] - z0) / (z1 - z0) : 0.55);
+    };
+    k.cloud({ count: (count * 160000) / k.count, jitter: 0 }, (_r, j) => {
+      if (j >= count) return null;
+      const i = at(j);
+      const base = k.baseSize || 0.01;
+      // Its true size (√2 σ, for the renderer's exp(−r²/s²)), which the GPU
+      // program uses; the stored splat is at least 30 nm wide so the field
+      // shows without labs too (thumbnails, a link with labs off).
+      const sxy = T.sxy[i] * UM * Math.SQRT2;
+      const sz = T.sz[i] * UM * Math.SQRT2 * stretch;
+      const shown = Math.max(sxy, 0.03);
+      return {
+        p: P(i),
+        n: [0, 0, 1],
+        flat: Math.max(sz, 0.03) / shown,
+        size: shown / base,
+        color: colorOf(i),
+        opacity: 0.55,
+        kind: SCI_KIND.loc,
+        params: [asF32(sxy), asF32(sz)],
+      };
+    });
+    // For the tap: the localizations bucketed in 250 nm cells, to find the
+    // depth of the molecules where you tap.
+    const cell = 250;
+    const grid = new Map();
+    for (let j = 0; j < count; j += 1) {
+      const i = at(j);
+      const key = `${Math.floor(T.x[i] / cell)},${Math.floor(T.y[i] / cell)}`;
+      let g = grid.get(key);
+      if (!g) grid.set(key, (g = []));
+      if (g.length < 64) g.push(T.z[i]);
+    }
+    MIC.grid = { cell, grid, cx, cy, cz, stretch };
+    MIC.focus = focusState();
+    MIC.info = {
+      name: want.name,
+      custom: want.custom,
+      n: T.n,
+      drawn: count,
+      has3D: T.has3D,
+      channels: T.channels,
+      notes: T.notes,
+      size: [(x1 - x0) * UM, (y1 - y0) * UM],
+    };
+    k.data = { microscope: MIC.info };
+  },
+};
+
+const mixN = (a, b, t) => a + (b - a) * t;
+
+// The tapped point (recipe units, µm), moved to the depth of the molecules
+// there (the median z of the localizations within about 250 nm).
+function focusPoint(p) {
+  const G = MIC.grid;
+  if (!G) return p;
+  const x = p[0] / UM + G.cx;
+  const y = -p[1] / UM + G.cy;
+  const zs = [];
+  const cx = Math.floor(x / G.cell);
+  const cy = Math.floor(y / G.cell);
+  for (let dx = -1; dx <= 1; dx++)
+    for (let dy = -1; dy <= 1; dy++) zs.push(...(G.grid.get(`${cx + dx},${cy + dy}`) ?? []));
+  if (!zs.length) return [p[0], p[1], 0];
+  zs.sort((a, b) => a - b);
+  return [p[0], p[1], (zs[zs.length >> 1] - G.cz) * UM * G.stretch];
+}
+
+MICROSCOPE.gpuField = function (_o, fit) {
+  const s = fit?.scale ?? 1;
+  const c = fit?.center ?? [0, 0, 0];
+  MIC.toy = (p) => p.map((v, i) => (v - c[i]) * s);
+  MIC.recipe = (q) => q.map((v, i) => v / s + c[i]);
+  return sciModifier(1, s);
+};
+MICROSCOPE.sciFocus = function (xy) {
+  // For the clips: [x, y] in µm from the field's center.
+  if (!MIC.toy) return false;
+  MIC.focus.goal = MIC.toy(focusPoint([xy[0], xy[1], 0]));
+  MIC.focus.at = MIC.focus.goal.slice();
+  return true;
+};
+
+// ---- Galaxy in a box ---------------------------------------------------------------------
+
+export const GALAXY_SAMPLE = {
+  file: "m12i-gas.bin",
+  label: "FIRE-2 m12i, a Milky Way–mass galaxy today (z = 0)",
+  title: "FIRE-2 cosmological zoom-in simulation m12i, snapshot 600 (z = 0), gas",
+  author:
+    "The FIRE project: Wetzel et al. (2023, 2025), Hopkins (2015), Hopkins et al. (2018); m12i from Wetzel et al. (2016). A subset: 300,000 of the 2.45 million gas particles in a 40 kpc box round the galaxy",
+  source: "https://flathub.flatironinstitute.org/fire",
+  license: "CC BY 4.0",
+  licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
+};
+
+const GAL = { data: null, info: null, focus: focusState(), toy: null };
+const GAL_ZOOM = 8; // the tap's magnification
+export const galaxyState = () => (GAL.info ? { ...GAL.info } : null);
+// The gas's big see-through splats cost the most to draw (they overlap), so
+// the galaxy keeps the kit's plain counts: 60k, 140k, 200k and 280k by tier.
+export const GALAXY_DENSITY = 1;
+
+// The file tools/sci-galaxy.mjs writes (its header says how).
+export function readGalaxy(bytes) {
+  const dv = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
+  const len = dv.getUint32(0, true);
+  const head = JSON.parse(new TextDecoder().decode(bytes.subarray(4, 4 + len)));
+  if (head.format !== "splashery-sph-gas-1") throw new Error("This isn't a galaxy file.");
+  const n = head.n;
+  let o = 4 + len;
+  const pos = new Int16Array(bytes.buffer.slice(bytes.byteOffset + o, bytes.byteOffset + o + n * 6)); // prettier-ignore
+  o += n * 6;
+  const hq = new Uint16Array(bytes.buffer.slice(bytes.byteOffset + o, bytes.byteOffset + o + n * 2)); // prettier-ignore
+  o += n * 2;
+  const tq = new Uint16Array(bytes.buffer.slice(bytes.byteOffset + o, bytes.byteOffset + o + n * 2)); // prettier-ignore
+  const q = head.half / 32767;
+  return {
+    head,
+    n,
+    pos: (i) => [pos[i * 3] * q, pos[i * 3 + 1] * q, pos[i * 3 + 2] * q],
+    h: (i) => Math.pow(2, hq[i] / 4096 - 8),
+    logT: (i) => (tq[i] / 65535) * 8 + 1,
+  };
+}
+
+// Temperature colors: cold molecular gas deep blue, the warm disk pale,
+// hot gas orange to red.
+const TEMP_STOPS = [
+  [1.0, "#1a2a8a"],
+  [2.5, "#2a62d4"],
+  [3.7, "#4ab0e0"],
+  [4.2, "#b8d8f0"],
+  [4.8, "#ffd27a"],
+  [5.5, "#ff8a2a"],
+  [6.3, "#e0362a"],
+  [7.2, "#9a1a64"],
+];
+function tempColor(logT) {
+  const S = TEMP_STOPS;
+  if (logT <= S[0][0]) return S[0][1];
+  for (let i = 0; i < S.length - 1; i++)
+    if (logT <= S[i + 1][0]) return mix(S[i][1], S[i + 1][1], (logT - S[i][0]) / (S[i + 1][0] - S[i][0])); // prettier-ignore
+  return S[S.length - 1][1];
+}
+
+const GALAXY = {
+  alive: false,
+  density: GALAXY_DENSITY,
+  options: [
+    {
+      key: "color",
+      label: "Color by",
+      type: "select",
+      default: "temperature",
+      choices: [
+        { id: "temperature", label: "Temperature" },
+        { id: "density", label: "Density" },
+      ],
+    },
+    { key: "box", label: "The box", type: "switch", default: true },
+  ],
+  controls: [
+    { key: "zoom", label: "Zoom in", type: "toggle", default: 0, ease: 2.2 },
+    { key: "peel", label: "Only the cold gas", type: "toggle", default: 0, ease: 1.6 },
+  ],
+  action: {
+    key: "zoom",
+    label: "Zoom in or out",
+    // A tap zooms in on the gas you tap; a second tap zooms back out.
+    at(point, c) {
+      if ((c.zoom ?? 0) > 0.5 || !GAL.toy) return undefined;
+      GAL.focus.goal = GAL.toy(point);
+      GAL.focus.at = GAL.focus.goal.slice();
+      return undefined;
+    },
+  },
+  credits: [
+    {
+      label: "Galaxy",
+      title: GALAXY_SAMPLE.title,
+      source: GALAXY_SAMPLE.source,
+      author: GALAXY_SAMPLE.author,
+      license: GALAXY_SAMPLE.license,
+      licenseUrl: GALAXY_SAMPLE.licenseUrl,
+    },
+  ],
+  async prepare() {
+    if (!GAL.data) GAL.data = readGalaxy(await readAsset(`../../assets/toys/galaxy-box/${GALAXY_SAMPLE.file}`, true)); // prettier-ignore
+  },
+  drive(t, c, out, info) {
+    out.grow = 1 - smoothstep(0, 1, c.peel ?? 0);
+    const z = smoothstep(0, 1, c.zoom ?? 0);
+    const m = Math.pow(GAL_ZOOM, z);
+    const u = smoothstep(0, 0.35, z);
+    easeFocus(GAL.focus, info.time);
+    const F = GAL.focus.at;
+    out.morph = [0, m, 0.0006, z > 0.02 ? mixN(2.5, 0.6, u) : 0];
+    out.glow = [F[0], F[1], F[2], u];
+  },
+  gpuField(_o, fit) {
+    const s = fit?.scale ?? 1;
+    const c = fit?.center ?? [0, 0, 0];
+    GAL.toy = (p) => p.map((v, i) => (v - c[i]) * s);
+    return sciModifier(1);
+  },
+  // For the clips: [x, y, z] in kpc from the galaxy's center.
+  sciFocus(p) {
+    if (!GAL.toy) return false;
+    GAL.focus.goal = GAL.toy(p);
+    GAL.focus.at = GAL.focus.goal.slice();
+    return true;
+  },
+  build(k, o) {
+    const G = GAL.data;
+    if (!G) throw new Error("The galaxy hasn't loaded.");
+    const half = G.head.half;
+    const budget = Math.max(1000, Math.floor(k.count * 0.97));
+    const pick = pickIndices(G.n, budget);
+    const count = pick ? pick.length : G.n;
+    // Fewer particles (the file's subset, and a small budget's): each drawn
+    // wider by the cube root of the thinning, so the gas still closes (the
+    // same mass in fewer, bigger pieces).
+    const widen = (G.head.widen ?? 1) * (pick ? Math.cbrt(G.n / count) : 1);
+    // The box: its floor (dark, so the gas shows against it from above) and
+    // its twelve edges.
+    const hy = G.head.halfY ?? half;
+    const size = [half, hy, half];
+    if (o.box !== false) {
+      k.add(evenBox(2 * half, 0.08, 2 * half), {
+        pos: [0, -hy - 0.06, 0],
+        even: true,
+        color: "#090a10",
+        jitter: 0,
+        opacity: 1,
+        flat: 0.3,
+        weight: 0.5,
+        kind: SCI_KIND.plain,
+      });
+      for (const axis of [0, 1, 2]) {
+        const edge = evenCylinder(0.05, 0.05, 2 * size[axis], false);
+        const others = [0, 1, 2].filter((x) => x !== axis);
+        for (const a of [-1, 1])
+          for (const b of [-1, 1]) {
+            const p = [0, 0, 0];
+            p[others[0]] = a * size[others[0]];
+            p[others[1]] = b * size[others[1]];
+            const dir = [0, 0, 0];
+            dir[axis] = 1;
+            k.add(edge, {
+              pos: p,
+              quat: quatFromTo([0, 1, 0], dir),
+              even: true,
+              color: "#9aa3b8",
+              jitter: 0,
+              opacity: 0.9,
+              flat: 0.4,
+              weight: 3,
+              kind: SCI_KIND.plain,
+            });
+          }
+      }
+    }
+    k.reach([half, hy, half]);
+    k.reach([-half, -hy, -half]);
+    // The gas is cut round (a disk inside the box), so the galaxy doesn't
+    // end in a square.
+    const R = half * 0.96;
+    let emitted = 0;
+    let first = -1;
+    k.cloud({ count: (count * 160000) / k.count, jitter: 0 }, (_r, j) => {
+      if (j >= count) return null;
+      const i = pick ? pick[j] : j;
+      const p = G.pos(i);
+      if (p[0] * p[0] + p[2] * p[2] > R * R) return null;
+      if (first < 0) first = i;
+      emitted++;
+      const h = G.h(i) * widen;
+      const logT = G.logT(i);
+      // A Gaussian of about half the smoothing length (the simulation's
+      // kernel isn't a Gaussian; this is the look, not the physics).
+      const sigma = 0.5 * h;
+      const base = k.baseSize || 0.01;
+      // Denser gas (smaller h) is more opaque: the column through a
+      // particle goes as its mass over h², and the masses are nearly equal.
+      // Hot gas is thin and spread out; it is lifted a little so it shows.
+      const hot = 1 + 3 * smoothstep(4.3, 5.5, logT);
+      const alpha = Math.min(0.8, 0.8 * (0.07 / h) ** 2 * hot);
+      // Denser gas is brighter, so the spiral arms stand out.
+      const dense = Math.max(0, Math.min(1, (Math.log10(0.5 / h) + 0.1) / 1.4));
+      const color =
+        o.color === "density"
+          ? tempColor(1 + 7 * dense)
+          : shade(tempColor(logT), 0.6 + 0.95 * dense);
+      return {
+        p,
+        size: (Math.SQRT2 * sigma) / base,
+        color,
+        opacity: alpha,
+        kind: SCI_KIND.gas,
+        params: [asF32(logT), 0],
+      };
+    });
+    GAL.focus = focusState();
+    GAL.info = {
+      n: G.n,
+      drawn: count,
+      half,
+      widen,
+      simulation: G.head.simulation,
+      get emitted() {
+        return emitted;
+      },
+      get first() {
+        return first;
+      },
+    };
+    k.data = { galaxy: GAL.info };
+  },
+};
+
 export const RECIPES = {
   "thermal-ellipsoids": THERMAL,
+  "smlm-microscope": MICROSCOPE,
+  "galaxy-box": GALAXY,
 };

@@ -63,6 +63,26 @@ const CARDS = {
       { t: 0.8, ease: { key: "zoom", from: 0, to: 0.92, secs: 4 } },
     ],
   },
+  "sci-microscope": {
+    toy: "smlm-microscope",
+    options: { data: "sample", color: "depth" },
+    secs: 7.5,
+    near: 0.62,
+    steps: [
+      { t: 0, yaw: 0.05 },
+      { t: 1.2, focus: [-0.4, -0.4], tap: true },
+    ],
+  },
+  "sci-galaxy": {
+    toy: "galaxy-box",
+    options: { color: "temperature" },
+    secs: 8,
+    near: 0.85,
+    steps: [
+      { t: 0, yaw: 0.3 },
+      { t: 3.5, focus: [6, 0, 3], tap: true },
+    ],
+  },
   "sci-open": {
     toy: "thermal-ellipsoids",
     options: { structure: "aspirin", level: "50" },

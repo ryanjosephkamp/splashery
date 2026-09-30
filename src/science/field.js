@@ -9,6 +9,11 @@
 //     SCI_KIND.atom   one of the splats of an atom's solid ellipsoid
 //     SCI_KIND.gauss  an atom drawn as one Gaussian: its turn and size are set
 //                     here from the atom's principal axes (exactly its U)
+//     SCI_KIND.gas    a gas particle: z = log10 of its temperature (K), so
+//                     the hot gas can be peeled away
+//     SCI_KIND.loc    a localization: z, w = its true size across and deep
+//                     (√2 σ, recipe units, times UNIT for toy units); the
+//                     stored splat is wider so it shows without labs
 //   for atoms: x, z, w pack the atom's principal axes as a quaternion (four
 //   bytes), its three standard deviations (three bytes, as fractions of the
 //   structure's largest, SIG_MAX toy units) and a seed (16 bits):
@@ -22,6 +27,8 @@
 //   magnified structure doesn't hide the place you zoomed in on.
 //   uSpGlowC = [focus x, y, z (toy units), how far the focus has moved to
 //               the middle 0..1]
+//   uSpKitB.x (the kit's grow, 1 at rest) = 1 − how far the hot gas is
+//               peeled away
 //
 // The jiggle moves every splat of an atom by the same displacement,
 // d = R · diag(σ) · z(t), with each z a sum of three cosines of random
@@ -31,7 +38,7 @@
 // brings the focus to the middle; a scaling keeps the depth order, so the
 // sort stays right.
 
-export const SCI_KIND = { plain: 1000, bond: 1001, atom: 1002, gauss: 1003 };
+export const SCI_KIND = { plain: 1000, bond: 1001, atom: 1002, gauss: 1003, gas: 1004, loc: 1005 }; // prettier-ignore
 
 // Packs an atom's frame for the program: quat [x, y, z, w], sigma (3, toy
 // units, largest first), sigMax (toy units), seed (0..65535) -> [x, z, w].
@@ -109,13 +116,15 @@ function hash01(n, salt) {
   return h / 4294967296;
 }
 
-const GLSL = (sigMax) => `
+const GLSL = (sigMax, unit) => `
 uniform vec4 uSpClock;   // y splat scale, z exposure
 uniform vec4 uSpKit;     // x the toy's clock
 uniform vec4 uSpMorph;   // jiggle, magnification, size floor, near clip
 uniform vec4 uSpGlowC;   // focus xyz, how far it has moved to the middle
 uniform vec4 uSpCam;     // camera position
+uniform vec4 uSpKitB;    // x: 1 - the hot gas's peel
 const float SIG_MAX = ${num(sigMax)};
+const float UNIT = ${num(unit)};
 vec4 sciAn = vec4(0.0);
 int sciKind = 0;
 vec4 sciQ = vec4(0.0, 0.0, 0.0, 1.0);
@@ -168,6 +177,7 @@ void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter, inout ve
     rotation = sciQ;
     scale = sciSig * 1.4142136;
   }
+  if (sciKind == 1005) scale = vec3(sciAn.z, sciAn.z, sciAn.w) * UNIT;
   float m = max(uSpMorph.y, 1e-3);
   scale *= uSpClock.y * m;
   if (uSpMorph.z > 0.0) scale = max(scale, vec3(uSpMorph.z * length(uSpCam.xyz)));
@@ -175,6 +185,7 @@ void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter, inout ve
 void modifySplatColor(vec3 center, inout vec4 color) {
   float a = color.a;
   if (sciKind == 1001) a *= 1.0 - 0.8 * uSpMorph.x;
+  if (sciKind == 1004) a *= 1.0 - (1.0 - clamp(uSpKitB.x, 0.0, 1.0)) * smoothstep(4.1, 4.6, sciAn.z);
   if (uSpMorph.w > 0.0) {
     float front = dot(center, normalize(uSpCam.xyz));
     a *= 1.0 - smoothstep(uSpMorph.w - 0.12, uSpMorph.w, front);
@@ -183,13 +194,15 @@ void modifySplatColor(vec3 center, inout vec4 color) {
 }
 `;
 
-const WGSL = (sigMax) => `
+const WGSL = (sigMax, unit) => `
 uniform uSpClock: vec4f;
 uniform uSpKit: vec4f;
 uniform uSpMorph: vec4f;
 uniform uSpGlowC: vec4f;
 uniform uSpCam: vec4f;
+uniform uSpKitB: vec4f;
 const SIG_MAX: f32 = ${num(sigMax)};
+const UNIT: f32 = ${num(unit)};
 var<private> sciAn: vec4f = vec4f(0.0);
 var<private> sciKind: i32 = 0;
 var<private> sciQ: vec4f = vec4f(0.0, 0.0, 0.0, 1.0);
@@ -242,6 +255,7 @@ fn modifySplatRotationScale(originalCenter: vec3f, modifiedCenter: vec3f, rotati
     *rotation = sciQ;
     *scale = sciSig * 1.4142136;
   }
+  if (sciKind == 1005) { *scale = vec3f(sciAn.z, sciAn.z, sciAn.w) * UNIT; }
   let m = max(uniform.uSpMorph.y, 1e-3);
   *scale = *scale * (uniform.uSpClock.y * m);
   if (uniform.uSpMorph.z > 0.0) {
@@ -251,6 +265,7 @@ fn modifySplatRotationScale(originalCenter: vec3f, modifiedCenter: vec3f, rotati
 fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {
   var a = (*color).a;
   if (sciKind == 1001) { a = a * (1.0 - 0.8 * uniform.uSpMorph.x); }
+  if (sciKind == 1004) { a = a * (1.0 - (1.0 - clamp(uniform.uSpKitB.x, 0.0, 1.0)) * smoothstep(4.1, 4.6, sciAn.z)); }
   if (uniform.uSpMorph.w > 0.0) {
     let front = dot(center, normalize(uniform.uSpCam.xyz));
     a = a * (1.0 - smoothstep(uniform.uSpMorph.w - 0.12, uniform.uSpMorph.w, front));
@@ -260,10 +275,12 @@ fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {
 `;
 
 // The modifier for a toy; sigMax is the largest standard deviation packed
-// (toy units; any positive number for toys without atoms).
-export function sciModifier(sigMax = 1) {
+// (toy units; any positive number for toys without atoms) and unit the fit's
+// scale (toy units per recipe unit), for the localizations' true sizes.
+export function sciModifier(sigMax = 1, unit = 1) {
   const s = Number.isFinite(sigMax) && sigMax > 0 ? sigMax : 1;
-  return { glsl: GLSL(s), wgsl: WGSL(s) };
+  const u = Number.isFinite(unit) && unit > 0 ? unit : 1;
+  return { glsl: GLSL(s, u), wgsl: WGSL(s, u) };
 }
 
 // Where a displayed point came from: the inverse of the magnifier (toy

@@ -1569,6 +1569,40 @@ export const TOY_SOUNDS = {
   // ---- Lab (lane Lab) ----------------------------------------------------------------
   // A soft rising swell as the pulse runs out through the field.
   "splat-field": { voice: "pad", f: "D4", to: 1.5, decay: 2.5, vol: 0.7 },
+  // ---- Science (lane Science) ----------------------------------------------------------
+  // The atoms start to jiggle: a soft rattle of tiny ticks over a glassy shimmer; they
+  // settle with two falling glass notes.
+  "thermal-ellipsoids": {
+    on: [
+      { voice: "rattle", f: 3400, n: 14, rate: 22, decay: 1.2, vol: 0.35 },
+      { voice: "glass", at: 0.05, notes: "C6 G6", step: 0.09, decay: 0.8, vol: 0.25 },
+    ],
+    off: { voice: "glass", notes: "G6 C6", step: 0.12, decay: 0.9, vol: 0.3 },
+  },
+  // The microscope's objective turns (a detent click) and the view dives in with a
+  // rising whoosh; zooming out, the whoosh falls.
+  "smlm-microscope": {
+    on: [
+      { voice: "click", f: 2100, vol: 0.7 },
+      { voice: "whoosh", at: 0.08, f: 300, to: 5, decay: 2.2, vol: 0.6 },
+    ],
+    off: [
+      { voice: "click", f: 1700, vol: 0.6 },
+      { voice: "whoosh", at: 0.05, f: 1800, to: 0.2, decay: 2, vol: 0.55 },
+    ],
+  },
+  // The hot gas thins away with a falling hiss over a low hum; it comes back with a
+  // rising one.
+  "galaxy-box": {
+    on: [
+      { voice: "hiss", f: 5000, to: 0.3, decay: 1.6, vol: 0.4 },
+      { voice: "pad", f: "A2", to: 0.9, decay: 2.4, vol: 0.55 },
+    ],
+    off: [
+      { voice: "hiss", f: 1600, to: 3, decay: 1.4, vol: 0.35 },
+      { voice: "pad", f: "A2", to: 1.12, decay: 2, vol: 0.5 },
+    ],
+  },
 };
 
 // The toy's sound, or null when it has none (visitors' own splats).

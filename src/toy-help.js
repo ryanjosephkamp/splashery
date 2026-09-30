@@ -1514,6 +1514,25 @@ export const TOY_HELP = {
       "Nearly 300,000 splats, and the graphics chip works out where every one of them is, and its color, again every frame. Each splat only knows its own two numbers, u and v; a small program turns them and the time into a place. That is why so many splats can move smoothly at once.\n\nThe galaxy's stars each follow an oval orbit, turned a little more the farther out it is, so the ovals crowd into two spiral arms that stay while every star keeps moving. The ocean is four waves added together, each splat tilted to the water's slope, and the knot is a flow along a knotted tube. Tap to send a bright ring out through the galaxy, drop a stone in the sea, or push the flow once more around the knot.",
   },
 
+  // ---- Science (lane Science) -----------------------------------------------------------
+  "thermal-ellipsoids": {
+    howTo:
+      "Tap to make the atoms jiggle; tap again to still them. Zoom in with the slider, then tap an atom to look there. Open your own CIF, mmCIF or PDB file in the Toy tab.",
+    about:
+      "When a crystal is measured by X-ray diffraction, each atom comes out as a place and a spread: the atom jiggles with heat (and sits a little differently from one unit cell to the next), so it is smeared into a small cloud. That cloud is a 3D Gaussian, written in the file as six numbers, the displacement tensor U. So every atom here is exactly one Gaussian, a splat with the measured shape: the long axis is the way the atom moves most.\n\nCrystallographers draw it as an ellipsoid that holds the atom 50% of the time (ORTEP, Mercury and Olex2 do this); the dark lines are its three principal planes. Hydrogens are usually placed by rule, not measured, so they are small spheres. The samples are aspirin at room temperature (from the Crystallography Open Database) and crambin, a small protein measured to 0.54 Å (from the Protein Data Bank). Jiggle moves each atom through places drawn from its own Gaussian, slowed down about a trillion times. Probability sets the level; One Gaussian splat shows the soft cloud itself. For looking and sharing, not for measuring: the numbers are the file's, but the pictures are not a refinement.",
+  },
+  "smlm-microscope": {
+    howTo:
+      "Tap a spot to zoom in there, down to single molecules; tap again to zoom out. Open your own .smlm or ThunderSTORM CSV file in the Toy tab.",
+    about:
+      "A light microscope can't normally see anything smaller than about 250 nanometers, but super-resolution microscopy (STORM, PALM, PAINT) gets around that: the dye molecules blink on a few at a time, and each blink is fitted to find where the molecule is, to within a few nanometers. The result isn't a picture but a table of positions, each with its uncertainty. A localization is already a Gaussian, so here each one is a splat exactly as wide as its precision (and taller in depth, where 3D microscopes are less sure).\n\nThe sample is a 12 µm square of a cell with its microtubules and clathrin pits, a subset of a record by Christophe Leterrier on ShareLoc.XYZ (CC BY 4.0). Tap to dive in about 60 times: each fuzzy spot is then one blink of one molecule, and you see a thin slice at the depth you tapped. Color by depth, time or channel. Scientists use ThunderSTORM, napari and SMAP for this; this toy is for looking and sharing on any phone, not for measuring.",
+  },
+  "galaxy-box": {
+    howTo: "Tap to peel away the hot gas and see the cold disk; tap again to bring it back.",
+    about:
+      "Galaxy simulations follow gas as millions of particles, each carrying a bit of mass and a smoothing length, the size over which its gas is spread. This is the gas of a Milky Way–like galaxy today from the FIRE-2 simulations (Wetzel et al.; CC BY 4.0), cut to the box around it. Each particle is drawn as a Gaussian about half its smoothing length wide, colored by its temperature: cold gas blue, warm pale, hot orange and red.\n\nTap to peel away the hot gas and see the cold, dense disk where stars form. This is an approximation: the simulation's kernel isn't a Gaussian, and blending splats isn't the column-density integral that astronomers' tools (SPLASH, yt) compute. It shows the shape of the gas, not measurements.",
+  },
+
   // ---- Holidays -------------------------------------------------------------------------
   "jack-o-lantern": {
     howTo: "Tap to lift the lid; tap again to put it back.",

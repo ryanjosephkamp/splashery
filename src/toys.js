@@ -3399,6 +3399,26 @@ export const TOYS = [
     tags: "crystal crystallography cif mmcif pdb anisotropic displacement ellipsoid ortep atoms vibration uncertainty gaussian science",
     camera: { yaw: 0.35, pitch: 0.3, roll: 0, distance: 2.9 },
   },
+  {
+    id: "smlm-microscope",
+    label: "Super-resolution microscope",
+    category: "science",
+    kind: "kit",
+    pack: "science",
+    labs: true,
+    tags: "microscope super resolution smlm storm palm paint localization thunderstorm cell microtubules clathrin fluorescence nanometer science",
+    camera: { yaw: 0, pitch: 0.12, roll: 0, distance: 2.9 },
+  },
+  {
+    id: "galaxy-box",
+    label: "Galaxy in a box",
+    category: "science",
+    kind: "kit",
+    pack: "science",
+    labs: true,
+    tags: "galaxy simulation fire gizmo sph gas particles temperature dwarf cosmology astrophysics hot cold disk science",
+    camera: { yaw: 0.3, pitch: 1.0, roll: 0, distance: 3.0 },
+  },
   // ---- Pack: screens ----
   {
     id: "screen",
