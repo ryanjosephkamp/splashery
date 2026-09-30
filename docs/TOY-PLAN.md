@@ -10,8 +10,8 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 316 toys. 316 have a tap action today; the other 0 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 313.
+- 317 toys. 317 have a tap action today; the other 0 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 314.
 - **more** (has an effect; make it clearer or more dramatic): 0.
 - **new** (needs its own effect): 3.
 - Visual fixes: 0 open, 30 done. Touch or drag interaction asked for: 4.
@@ -53,7 +53,8 @@ Proposals below are suggestions; the owner may change them.
   Pisa, Colosseum, Parthenon, Stonehenge, Big Ben, Taj Mahal, Castle, Pagoda, Windmill, Perceptron,
   Multilayer perceptron, Neural network, Convolutional network, Recurrent network, Transformer,
   Looped transformer, Diffusion model, Gradient descent, Gaussian splatting, Word vectors, Sorting
-  machine, Half adder, Your book, Photo album, Picture frame, Model to splats, Splat field, Screen.
+  machine, Half adder, Your book, Photo album, Picture frame, Model to splats, Splat field, Fluid
+  lab, Screen.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -2176,7 +2177,7 @@ Proposals below are suggestions; the owner may change them.
   - Sound: A rising whoosh as the splats lift off, then four falling plucked notes as they settle
     back.
 
-## Lab (1)
+## Lab (2)
 
 - **Splat field** (`splat-field`). Now: tap: Send a pulse. Plan: keep.
   - Owner: The owner's note "big new Splashery ideas" and his answer of September 29, 2026 (lane
@@ -2190,3 +2191,15 @@ Proposals below are suggestions; the owner may change them.
     ellipses (a density wave keeps two arms), an ocean of four Gerstner waves, a flow along a (2, 3)
     torus knot.
   - Sound: A soft rising swell.
+- **Fluid lab** (`fluid-lab`). Now: tap: Pour, drop or blow. Plan: keep.
+  - Owner: The owner's notes on the water bottle and soda can of September 29, 2026 ("a realistic
+    fluid splat simulator"; lane Fluids; labs only).
+  - Effect: A sandbox for the fluid engine: a nozzle pours water, soda, honey or lava into a glass
+    (the third tap empties it first), a ball of liquid splashes into a bowl, a candle is blown out
+    and lights again, or a breath bends a hot cup's steam (about 3 to 5 s).
+  - Improved: Fluids: new sandbox on the Lab shelf (labs). Liquids are position-based fluids with a
+    viscosity from water to lava, drawn as stretched, lit surface splats; smoke and steam rise in a
+    curl field; flames cool through a real color ramp with sparks; colliders keep the liquid in the
+    glass and the bowl.
+  - Sound: The pour's splash and glug (soda fizzes; honey and lava a thick gloop), a splash, a
+    breath on the candle and the cup.
