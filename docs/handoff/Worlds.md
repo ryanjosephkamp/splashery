@@ -316,6 +316,12 @@ Test island stays in splats mode until the owner picks. How it works is in docs/
 
 ### Hybrid known issues
 
+- `tests/chr.spec.mjs:249` (the Character lane's island test, three tiers in one 240 s test) times
+  out on this branch: splats mode's shadows and haze cost more per frame in the software renderer,
+  and #108 alone already needs 3.9 of its 4 minutes. A proposed patch (`test.setTimeout(480_000)` in
+  that test) is on the PR for the Operator to decide. Splats mode's light was made cheaper first: no
+  tone map there, the catcher only within the shadows' reach, PCF3, only level-0 props cast, and no
+  shadows on the low tier.
 - Where the shore is steep, the hybrid sand picks up the gravel (rock) texture.
 - A thin gray band can show at the horizon, where the sky photo's haze meets the far water.
 - The grass texture (a meadow photo) shows small pale pebbles close up; its strength is lowered.
