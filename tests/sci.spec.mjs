@@ -375,29 +375,27 @@ test.describe("in the browser", () => {
     expect(errors).toEqual([]);
   });
 
-  test("screenshots at phone and desktop size", async ({ browser }) => {
-    test.setTimeout(240_000);
-    const shots = [
-      ["thermal-ellipsoids", "ellipsoids", (d) => d.ellipsoids],
-      ["smlm-microscope", "microscope", (d) => d.microscope],
-      ["galaxy-box", "galaxy", (d) => d.galaxy],
-    ];
-    for (const [w, h] of [
-      [390, 844],
-      [1440, 900],
-    ]) {
-      const page = await browser.newPage({ viewport: { width: w, height: h } });
-      await page.goto(APP);
-      await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
-      for (const [id, name] of shots) {
+  for (const [id, name] of [
+    ["thermal-ellipsoids", "ellipsoids"],
+    ["smlm-microscope", "microscope"],
+    ["galaxy-box", "galaxy"],
+  ])
+    test(`screenshots of ${id} at phone and desktop size`, async ({ browser }) => {
+      test.setTimeout(240_000);
+      for (const [w, h] of [
+        [390, 844],
+        [1440, 900],
+      ]) {
+        const page = await browser.newPage({ viewport: { width: w, height: h } });
+        await page.goto(APP);
+        await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
         await page.evaluate((id) => window.__splashery.app.chooseToy(id), id);
         await page.waitForFunction((id) => window.__splashery.player.toyInfo?.id === id && window.__splashery.player.proc?.ctx?.kit?.data, id, { timeout: 90_000 }); // prettier-ignore
         await page.waitForTimeout(1500);
         await page.screenshot({ path: `tests/screenshots/sci-${name}-${w}x${h}.png` });
+        await page.close();
       }
-      await page.close();
-    }
-  });
+    });
 });
 
 function invert3(m) {
