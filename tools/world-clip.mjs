@@ -268,7 +268,7 @@ async function record(scene, url, tag = null, query = "") {
   const frames = [];
   let finger = null;
   const shoot = async () => {
-    const png = PNG.sync.read(await page.screenshot());
+    const png = PNG.sync.read(await page.screenshot({ timeout: 180_000 }));
     const w = Math.round(png.width * scale);
     const h = Math.round(png.height * scale);
     const rgba = shrink(png, w, h);
