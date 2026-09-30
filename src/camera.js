@@ -153,6 +153,7 @@ export class OrbitCamera {
     for (let i = 0; i < 3; i++) {
       const v = this.aim[i] - pose.right[i] * dx * k + pose.up[i] * dy * k;
       this.aim[i] = Math.min(this.center[i] + R, Math.max(this.center[i] - R, v));
+      this.target[i] = this.aim[i]; // a drag moves the view at once; Reset eases back
     }
     this.interact();
   }

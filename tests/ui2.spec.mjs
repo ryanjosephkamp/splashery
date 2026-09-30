@@ -494,8 +494,11 @@ test.describe("computer", () => {
     const errors = watchErrors(page);
     await open(page);
     await page.click(".toy-card[data-toy='laptop']");
-    await page.waitForFunction(() => window.__splashery.app.player.scene.toy.id === "laptop");
-    await page.waitForTimeout(800);
+    await page.waitForFunction(
+      () => window.__splashery.player.toyInfo?.id === "laptop" && !!window.__splashery.player.toyInfo.recipe?.typeKey, // prettier-ignore
+      null,
+      { timeout: 120_000 },
+    );
     await page.locator("#stage").focus();
     await page.keyboard.press("f");
     await page.waitForTimeout(300);
