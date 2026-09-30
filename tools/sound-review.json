@@ -1,6 +1,6 @@
 {
-  "round": "2026-09-28 notes (filed September 30, 2026)",
-  "note": "He named only the toys to change, so any toy not listed stays as it is, and he called the whole Music category pretty much perfect. He wants realistic, subtle sound effects (often a real recorded sound \"from a sound pack\") and dislikes clicking on almost every toy, the \"vroom\" acceleration sound, whistles, robotic chimes and jingles, string or xylophone tones on things that aren't instruments, and wind that's too loud (it's fine on a few, like Venus and Neptune).",
+  "round": "2026-09-28 notes and the Sound Board marks of September 30, 2026",
+  "note": "He named only the toys to change, so any toy not listed stays as it is, and he called the whole Music category pretty much perfect. He wants realistic, subtle sound effects (often a real recorded sound \"from a sound pack\") and dislikes clicking on almost every toy, the \"vroom\" acceleration sound, whistles, robotic chimes and jingles, string or xylophone tones on things that aren't instruments, and wind that's too loud (it's fine on a few, like Venus and Neptune). On September 30 he marked the newer toys on the Sound Board and said everything he didn't mark or note is approved as it is.",
   "toys": {
     "raspberry": {
       "status": "change",
@@ -1067,7 +1067,7 @@
       "candidates": []
     },
     "cnn": {
-      "status": "keep",
+      "status": "approved",
       "said": "… the noise that takes place basically during the processing is the same noise. Like the sounds are the same for all three of the options: for the 2D poster, the 3D model, and the 3D draw digit. That's really cool. I appreciate that. I like how it's kind of synchronized such that people can understand what each part is. … Anyways, the sounds are fine. I think, yeah, I think that they're okay for this one.",
       "note": "The sounds are fine, and he likes that they match across the poster, the 3D model and the draw-a-digit view.",
       "plan": "Keep the current sounds, the same across all three views.",
@@ -1088,7 +1088,7 @@
       "candidates": []
     },
     "looped-transformer": {
-      "status": "keep",
+      "status": "approved",
       "said": "For the looped transformer, I actually really like the sounds here. Those are pretty awesome. … The sounds are fine, though.",
       "note": "He really likes the sounds.",
       "plan": "Keep the current sounds.",
@@ -1365,6 +1365,1091 @@
       "said": "",
       "note": "A newer toy, added after his notes: PACKS.md 7e applied by lane Sound B.",
       "plan": "Now: a soft steady chord swelling as the pulse runs out (no rising pitch).",
+      "candidates": []
+    },
+    "anatomy-atlas": {
+      "status": "approved",
+      "said": "(September 30, 2026, on the Sound Board) marked good",
+      "note": "Approved as it is.",
+      "plan": "",
+      "candidates": []
+    },
+    "baseball-cap": {
+      "status": "change",
+      "said": "(September 30, 2026, on the Sound Board) A bit too windy.",
+      "note": "A bit too windy.",
+      "plan": "Less wind: a soft fabric rustle and the cap settling, with the wind taken out. (Sound B)",
+      "candidates": []
+    },
+    "bombe": {
+      "status": "change",
+      "said": "(September 30, 2026, on the Sound Board) Doesn't need the low buzz motor sound.",
+      "note": "Doesn't need the low buzz motor sound.",
+      "plan": "Drop the low motor buzz; keep the drums turning and the clack of the stop. (Sound B)",
+      "candidates": []
+    },
+    "chladni-plate": {
+      "status": "change",
+      "said": "(September 30, 2026, on the Sound Board) Should not have patters/clicks. Sand should sound like it's sliding, not crawling.",
+      "note": "Should not have patters/clicks. Sand should sound like it's sliding, not crawling.",
+      "plan": "No patter or clicks: the sand slides and hisses into the figure as it settles. (Sound B)",
+      "candidates": []
+    },
+    "coffee": {
+      "status": "change",
+      "said": "(September 30, 2026, on the Sound Board) Sounds a bit tacky. Could just be a simple \"tap tap\", like someone is signaling to a waiter/waitress to refill the coffee.",
+      "note": "Sounds a bit tacky. Could just be a simple \"tap tap\", like someone is signaling to a waiter/waitress to refill the coffee.",
+      "plan": "A simple \"tap tap\" of a spoon or finger on the cup, like asking for a refill. (Sound B)",
+      "candidates": []
+    },
+    "difference-engine": {
+      "status": "approved",
+      "said": "(September 30, 2026, on the Sound Board) marked good",
+      "note": "Approved as it is.",
+      "plan": "",
+      "candidates": []
+    },
+    "electronic-keyboard": {
+      "status": "approved",
+      "said": "(September 30, 2026, on the Sound Board) marked good",
+      "note": "Approved as it is.",
+      "plan": "",
+      "candidates": []
+    },
+    "enigma-machine": {
+      "status": "approved",
+      "said": "(September 30, 2026, on the Sound Board) marked good",
+      "note": "Approved as it is.",
+      "plan": "",
+      "candidates": []
+    },
+    "fluid-lab": {
+      "status": "change",
+      "said": "(September 30, 2026, on the Sound Board) Isn't in sync with fluid pour animation, and needs to be more realistic.",
+      "note": "Isn't in sync with fluid pour animation, and needs to be more realistic.",
+      "plan": "Pours, glugs and splashes in sync with the animation, from real recordings (lane Fluids, r4). (Fluids)",
+      "candidates": []
+    },
+    "gaussian-splatting": {
+      "status": "change",
+      "said": "(September 30, 2026, on the Sound Board) Doesn't need the ascending xylophone notes; sounds too robotic; choose something else, please.",
+      "note": "Doesn't need the ascending xylophone notes; sounds too robotic; choose something else, please.",
+      "plan": "Drop the rising xylophone notes and the robotic tones; a subtle, real sound for the splats settling. (Sound B)",
+      "candidates": []
+    },
+    "grand-piano": {
+      "status": "change",
+      "said": "(September 30, 2026, on the Sound Board) Sounds too much like an electronic keyboard.",
+      "note": "Sounds too much like an electronic keyboard.",
+      "plan": "A real grand piano: a richer, sampled or better-modeled tone with hammer and string resonance, not an electronic keyboard. (Sound A)",
+      "candidates": []
+    },
+    "graph-plotter": {
+      "status": "approved",
+      "said": "(September 30, 2026, on the Sound Board) marked good",
+      "note": "Approved as it is.",
+      "plan": "",
+      "candidates": []
+    },
+    "harpsichord": {
+      "status": "approved",
+      "said": "(September 30, 2026, on the Sound Board) marked good",
+      "note": "Approved as it is.",
+      "plan": "",
+      "candidates": []
+    },
+    "hoodie": {
+      "status": "approved",
+      "said": "(September 30, 2026, on the Sound Board) marked good",
+      "note": "Approved as it is.",
+      "plan": "",
+      "candidates": []
+    },
+    "hot-air-balloon": {
+      "status": "approved",
+      "said": "(September 30, 2026, on the Sound Board) marked good",
+      "note": "Approved as it is.",
+      "plan": "",
+      "candidates": []
+    },
+    "model-splats": {
+      "status": "approved",
+      "said": "(September 30, 2026, on the Sound Board) marked good",
+      "note": "Approved as it is.",
+      "plan": "",
+      "candidates": []
+    },
+    "multilayer-perceptron": {
+      "status": "approved",
+      "said": "(September 30, 2026, on the Sound Board) marked good",
+      "note": "Approved as it is.",
+      "plan": "",
+      "candidates": []
+    },
+    "periodic-table": {
+      "status": "change",
+      "said": "(September 30, 2026, on the Sound Board) Too robotic",
+      "note": "Too robotic",
+      "plan": "Less robotic: soft, real sounds for picking and lighting up an element. (Sound A)",
+      "candidates": []
+    },
+    "photo-3d": {
+      "status": "change",
+      "said": "(September 30, 2026, on the Sound Board) Doesn't need to sound like wind. No whoosh necessary.",
+      "note": "Doesn't need to sound like wind. No whoosh necessary.",
+      "plan": "No wind or whoosh: a quiet, real sound as the photo rises into depth. (Sound B)",
+      "candidates": []
+    },
+    "photo-album": {
+      "status": "change",
+      "said": "(September 30, 2026, on the Sound Board) Thud is fine, but page turn swish doesn't sound realistic.",
+      "note": "Thud is fine, but page turn swish doesn't sound realistic.",
+      "plan": "Keep the thud; replace the page swish with a real page turn (a recorded CC0 page flip). (Sound B)",
+      "candidates": []
+    },
+    "picture-frame": {
+      "status": "approved",
+      "said": "(September 30, 2026, on the Sound Board) marked good",
+      "note": "Approved as it is.",
+      "plan": "",
+      "candidates": []
+    },
+    "picture-lab": {
+      "status": "change",
+      "said": "(September 30, 2026, on the Sound Board) Sounds too much like suction or something.",
+      "note": "Sounds too much like suction or something.",
+      "plan": "Not suction-like: a clean, real sound for the picture changing. (Sound B)",
+      "candidates": []
+    },
+    "pythagoras-proof": {
+      "status": "approved",
+      "said": "(September 30, 2026, on the Sound Board) marked good",
+      "note": "Approved as it is.",
+      "plan": "",
+      "candidates": []
+    },
+    "running-shoe": {
+      "status": "approved",
+      "said": "(September 30, 2026, on the Sound Board) marked good",
+      "note": "Approved as it is.",
+      "plan": "",
+      "candidates": []
+    },
+    "screen": {
+      "status": "change",
+      "said": "(September 30, 2026, on the Sound Board) \"On\" sound doesn't need the hum; \"Off\" sound is good.",
+      "note": "\"On\" sound doesn't need the hum; \"Off\" sound is good.",
+      "plan": "\"On\" without the hum (keep a short, real switch-on); keep the \"Off\" sound. (Sound B)",
+      "candidates": []
+    },
+    "soda-can": {
+      "status": "change",
+      "said": "(September 30, 2026, on the Sound Board) Doesn't sound realistic enough. Bubble sounds aren't really necessary, and the pssht and fizz need work.",
+      "note": "Doesn't sound realistic enough. Bubble sounds aren't really necessary, and the pssht and fizz need work.",
+      "plan": "A real can opening (pssht) and a real fizz, from recordings; no bubbling. (Sound B)",
+      "candidates": []
+    },
+    "song-landscape": {
+      "status": "approved",
+      "said": "(September 30, 2026, on the Sound Board) marked good",
+      "note": "Approved as it is.",
+      "plan": "",
+      "candidates": []
+    },
+    "splat-equation": {
+      "status": "change",
+      "said": "(September 30, 2026, on the Sound Board) Too robotic and loud; change entirely, please.",
+      "note": "Too robotic and loud; change entirely, please.",
+      "plan": "Change entirely: quiet, not robotic, a subtle real sound for the equation acting. (Sound B)",
+      "candidates": []
+    },
+    "splat-field": {
+      "status": "change",
+      "said": "(September 30, 2026, on the Sound Board) Too robotic",
+      "note": "Too robotic",
+      "plan": "Less robotic: a subtle, natural sound for the field. (Sound B)",
+      "candidates": []
+    },
+    "sunglasses": {
+      "status": "change",
+      "said": "(September 30, 2026, on the Sound Board) Sounds too robotic and tacky.",
+      "note": "Sounds too robotic and tacky.",
+      "plan": "Not robotic or tacky: the real click and slide of folding sunglasses and lenses. (Sound B)",
+      "candidates": []
+    },
+    "supertall": {
+      "status": "change",
+      "said": "(September 30, 2026, on the Sound Board) Could be less tacky. Sounds too cute.",
+      "note": "Could be less tacky. Sounds too cute.",
+      "plan": "Less cute and tacky: a grounded, real sound for the tower. (Sound B)",
+      "candidates": []
+    },
+    "turing-machine": {
+      "status": "approved",
+      "said": "(September 30, 2026, on the Sound Board) marked good",
+      "note": "Approved as it is.",
+      "plan": "",
+      "candidates": []
+    },
+    "upright-piano": {
+      "status": "approved",
+      "said": "(September 30, 2026, on the Sound Board) marked good",
+      "note": "Approved as it is.",
+      "plan": "",
+      "candidates": []
+    },
+    "water-bottle": {
+      "status": "change",
+      "said": "(September 30, 2026, on the Sound Board) Close, but not right yet. The clicking at the beginning is weird, and the water sounds too bubbly. Needs to be more realistic.",
+      "note": "Close, but not right yet. The clicking at the beginning is weird, and the water sounds too bubbly. Needs to be more realistic.",
+      "plan": "No click at the start; real water sloshing and pouring, from recordings, not bubbly. (Sound B)",
+      "candidates": []
+    },
+    "your-book": {
+      "status": "change",
+      "said": "(September 30, 2026, on the Sound Board) Sounds too much like wind or sand, not pages turning.",
+      "note": "Sounds too much like wind or sand, not pages turning.",
+      "plan": "Real pages turning (a recorded CC0 page flip), not wind or sand. (Sound B)",
+      "candidates": []
+    },
+    "cactus": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "strawberry": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "cookie": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "bee": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "blob": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "cluster-fly": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "may-beetle": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "millipede": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "bumblebee": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "blueberry": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "grape": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "tomatoes": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "basket": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "rubber-duck-real": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "marble-bust": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "ukulele": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "boombox": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "croissant-real": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "pomegranate": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "pencil-real": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "basketball": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "soccer-ball": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "american-football": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "rugby-ball": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "volleyball": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "water-polo-ball": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "ping-pong-ball": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "cricket-ball": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "dodgeball": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "medicine-ball": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "lacrosse-ball": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "squash-ball": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "bouncy-ball": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "hockey-puck": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "shuttlecock": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "flying-disc": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "chest": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "sun": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "moon": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "jupiter": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "bacteriophage": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "bacterium": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "animal-cell": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "microglia": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "diatom": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "tardigrade": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "pollen": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "snowflake": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "amoeba": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "palm": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "rose": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "dandelion": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "tulip": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "lotus": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "mushroom": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "saguaro": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "coral": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "pinecone": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "acorn": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "succulent": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "bamboo": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "kelp": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "storm-cloud": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "candle": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "tornado": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "rainbow": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "waterfall": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "ocean-wave": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "geyser": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "cupcake": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "macarons": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "sushi": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "egg": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "orange": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "kiwi": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "pineapple": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "grapes": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "avocado": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "rubber-duck": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "menger-sponge": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "sierpinski": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "platonic": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "seashell-spiral": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "music-box": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "gift-box": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "umbrella": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "lamp": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "potion-bottle": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "telescope": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "fountain-pen": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "sword-in-stone": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "dragon-egg": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "fish-school": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "butterfly": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "pufferfish": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "nautilus": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "sea-urchin": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "penguin": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "jack-o-lantern": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "snowman": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "patterned-egg": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "paper-lantern": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "diya": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "guitar": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "drum": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "xylophone": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "toy-piano": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "bus": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "sailboat": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "submarine": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "bicycle": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "lighthouse": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "leaning-tower": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "parthenon": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "stonehenge": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "big-ben": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "taj-mahal": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "castle": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "pagoda": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
+      "candidates": []
+    },
+    "windmill": {
+      "status": "approved",
+      "said": "",
+      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
+      "plan": "",
       "candidates": []
     }
   }
