@@ -150,6 +150,41 @@ own frame and the side-by-side cards here to mostly close for the parts that wer
 
 Each license was checked on the live Commons page on September 30, 2026.
 
+## How sharp each route can get
+
+The owner's second note (r2): "Still more blurry than I'd prefer." The r3 cards add the Lab lane's
+sharper splat falloff (`kernel: "sharp"`, labs only): edge sharpness (Laplacian variance of the same
+frames) +25% on the statue's turn and +61% on the street's flight, with round edges showing on the
+soft blobs where nothing was filmed. The camera poses are not the limit (reprojection error 0.56 px
+on both samples). What is left is training, and that depends on the device, not on the route:
+
+- **The method is the same quality as the Mac tools.** Splat.js's own benchmark (Tanks & Temples
+  Truck, 251 photos, every 8th held out, on an RTX 5080): 26.14 dB after 10 minutes and 26.55 dB
+  after 30, against Brush's 26.10 dB and LichtFeld Studio's 26.14 dB at comparable budgets, and its
+  camera path matches COLMAP's to 0.00% of the path length. So the difference between the browser
+  and the Mac is how many steps at what resolution each device can afford, not the algorithm.
+- **This container (no GPU)**: about 3 seconds a step at 360 px; the samples got 800 to 1,500 steps.
+  That is roughly 1/40 of the training a showcase scene gets, at a third of the resolution: the
+  softness on the cards.
+- **A computer with a graphics card, in the browser** (estimate): the "high" setting (60 frames at
+  960 px, 7,000 steps at 720 px) should take a few minutes on a laptop's GPU and give about what
+  Splat.js reports at that budget (around 25 dB on Truck: sharp where the video looked, soft where
+  it did not). Raising the steps to 30,000 (a "keep training" button) closes most of the gap to a
+  showcase scene. Not measured here: the owner's readout from his computer will say.
+- **A phone, in the browser** (estimate): memory caps it at 20 to 32 frames, 360 to 480 px and
+  60,000 to 120,000 splats, and a phone's GPU is several times slower than a laptop's. Expect a
+  recognizable scene that stays about as soft as these cards, in several minutes, with the phone
+  warm. Good for "look what my phone made", not for a showcase.
+- **The Mac route** (COLMAP 4.2.1 + msplat or Brush, from the original 4K frames): msplat reports a
+  full-resolution Mip-NeRF 360 scene in about 70 seconds on an M4 Max, so 30,000 steps at full
+  resolution take minutes on an Apple silicon Mac. Expect it to be as sharp as the video wherever
+  the video looked: the difference from these cards is about the same as between the left and right
+  halves of the side-by-side cards. Showcase scenes should go through the Mac.
+
+Brush was not run in this container: it trains on the GPU through wgpu, and on a software Vulkan
+device it would take days for one scene; its web build needs WebGPU like Splat.js, so it would be no
+faster here. The comparison above uses the tools' own published numbers instead.
+
 ## What it costs a phone
 
 Not measured on a phone. What is known: the low and mid settings keep 20 to 32 frames at 360 to 480

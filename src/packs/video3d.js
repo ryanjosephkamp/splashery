@@ -153,6 +153,9 @@ function buildFilmStrip(k) {
 const VIDEO_3D = {
   density: 1.6,
   turntable: false,
+  // The Lab lane's sharper falloff (labs only, docs/lab/KERNELS.md): trained splats read crisper
+  // with it, edge sharpness +20% to +63% on the samples' flights (docs/lab/VIDEO3D.md).
+  kernel: "sharp",
   options: [
     {
       key: "source",

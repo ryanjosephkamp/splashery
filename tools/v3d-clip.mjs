@@ -34,6 +34,7 @@ const settings = {
   bg: opt("bg", "#111111"),
   prune: opt("prune", "1") !== "0",
 };
+const kernel = opt("kernel", "");
 
 const browser = await chromium.launch({
   executablePath: process.env.SPLASHERY_CHROMIUM || undefined,
@@ -41,7 +42,7 @@ const browser = await chromium.launch({
 });
 const page = await browser.newPage({ viewport: { width: w, height: h } });
 page.on("pageerror", (e) => console.error("page error:", e.message));
-await page.goto(`${base}?labs=1&renderer=webgl2&profile=high&adapt=off`);
+await page.goto(`${base}?labs=1&renderer=webgl2&profile=high&adapt=off${kernel ? `&kernel=${kernel}` : ""}`);
 await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
 const res = await page.evaluate(
   async ({ s, w, h }) => {
