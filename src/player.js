@@ -27,7 +27,7 @@ import {
 } from "./loaders.js";
 import { findToy, assetURL, lookOption, pickLook, labsOn } from "./toys.js";
 import { pickKernel } from "./kernels.js"; // Lab
-import { pickSharpness } from "./sharpness.js"; // Sharpness
+import { pickSharpness, sharpOff } from "./sharpness.js"; // Sharpness
 import { createScene, THEMES } from "./state.js";
 import { mulberry32, mixSeed, hash32 } from "./noise.js";
 import { Pictures } from "./pictures.js"; // Pictures
@@ -35,9 +35,14 @@ import { Pictures } from "./pictures.js"; // Pictures
 export { NoGPUError };
 
 // Device tiers, lowest first. Each has a splat budget (PROFILES in
-// generators.js) and a pixel-ratio cap for the canvas.
+// generators.js) and a pixel-ratio cap for the canvas. The mid and high tiers
+// draw at up to 3 since September 29, 2026 (lane Sharpness, the owner's "sharp
+// yes"); ?sharp=0 puts back the caps from before.
 export const TIERS = ["low", "mid", "high", "max"];
-export const PIXEL_RATIO = { low: 1.5, mid: 2, high: 2, max: 3 };
+export const PIXEL_RATIO = { low: 1.5, mid: 3, high: 3, max: 3 };
+export const PIXEL_RATIO_BEFORE = { low: 1.5, mid: 2, high: 2, max: 3 };
+const pixelCap = (tier) =>
+  (sharpOff(new URLSearchParams(location.search)) ? PIXEL_RATIO_BEFORE : PIXEL_RATIO)[tier];
 const TIER_ALIASES = { weak: "low", strong: "high" };
 
 // The viewer's Detail preference: "auto", "high" or "max". It lives in this
@@ -146,7 +151,7 @@ export class Player {
     this.stage = await Stage.create(this.canvas, {
       prefer,
       weak: this.profile === "low",
-      pixelRatio: PIXEL_RATIO[this.profile],
+      pixelRatio: pixelCap(this.profile),
       adaptive: this.adaptive,
     });
     this.stage.onSlow = () => this.stepDown();
@@ -181,7 +186,7 @@ export class Player {
   setProfile(tier) {
     if (tier === this.profile) return false;
     this.profile = tier;
-    this.stage.setPixelRatio(PIXEL_RATIO[tier]);
+    this.stage.setPixelRatio(pixelCap(tier));
     this.emit("profile", tier);
     return true;
   }
@@ -340,7 +345,8 @@ export class Player {
     // Lab: a sharper splat kernel, labs only (src/kernels.js).
     const kernelParam = new URLSearchParams(location.search).get("kernel");
     this.stage.setKernel(pickKernel({ labs: labsOn(), param: kernelParam, recipe: info.kernel }));
-    // Sharpness: the render levers, labs only (src/sharpness.js).
+    // Sharpness: the render levers (src/sharpness.js): adapt "drag" for
+    // every toy, the rest labs only.
     this.stage.setSharpness(
       pickSharpness({
         labs: labsOn(),

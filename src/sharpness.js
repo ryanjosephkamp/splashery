@@ -1,4 +1,7 @@
-// Lane Sharpness: render levers against grain, labs only and off by default.
+// Lane Sharpness: render levers against grain. Two are on for everyone since
+// September 29, 2026 (the owner: "sharp yes – looks noticeably better"): the
+// pixel-ratio cap of 3 on the mid and high tiers (PIXEL_RATIO in player.js)
+// and adapt "drag". The rest are labs switches, off by default.
 //
 // Four settings every toy shares decide how much detail reaches the screen:
 //
@@ -22,7 +25,10 @@
 // ?sharp=1 turns on the first three together (cull low, dpr native, adapt
 // drag); single switches then override it. A recipe's `render` field
 // ({ cull, dpr, adapt, aa }) sets them for one toy; the URL wins. All of it
-// only while labs is on. docs/lab/SHARPNESS.md has the measurements.
+// only while labs is on, except the default: adapt "drag" for every toy, which
+// ?adapt=off turns off in labs. ?sharp=0 puts the renderer back exactly as it
+// was before the default, for anyone (the old caps too). docs/lab/SHARPNESS.md
+// has the measurements.
 
 const CULL = { low: 1, off: 0 };
 
@@ -40,17 +46,26 @@ function dprValue(v, native = 1) {
   return Math.min(3, n);
 }
 
+// The public default: the adaptive drop only during a drag.
+export const SHARP_DEFAULT = Object.freeze({ cull: null, dpr: null, adapt: "drag", aa: false });
+
+// ?sharp=0: the renderer as it was before the default (for anyone).
+export function sharpOff(params) {
+  return params?.get?.("sharp") === "0";
+}
+
 // The levers a toy gets, or null when every one is off (the renderer is then
 // exactly as it was before this lane). `params` is a URLSearchParams (or
 // anything with get()), `recipe` the toy recipe's `render` object.
 export function pickSharpness({ labs, params, recipe = null, native = 1 }) {
-  if (!labs) return null;
+  if (sharpOff(params)) return null;
+  if (!labs) return { ...SHARP_DEFAULT };
   const get = (k) => params?.get?.(k) ?? null;
   const preset = get("sharp") === "1";
   const pick = (k, def) => get(k) ?? recipe?.[k] ?? (preset ? def : null);
   const cull = cullValue(pick("cull", "low"));
   const dpr = dprValue(pick("dpr", "native"), native);
-  const adapt = pick("adapt", "drag") === "drag" ? "drag" : null;
+  const adapt = (get("adapt") ?? recipe?.adapt ?? "drag") === "drag" ? "drag" : null;
   const aaV = pick("aa", null);
   const aa = aaV === "1" || aaV === 1 || aaV === true;
   if (!cull && !dpr && !adapt && !aa) return null;

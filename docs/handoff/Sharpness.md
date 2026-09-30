@@ -76,6 +76,11 @@ Model: Opus 5.5 (claude-opus-5-5), default effort.
 - Cards on the Effect review page, lane Sharpness: `shp-summary`, `shp-<toy id>` for the 14 toys,
   `shp-<toy id>-turn` for the sailboat, ocean liner, penguin and Chladni plate, `shp-lamp-drop`,
   `shp-klein-bottle-drop` and `shp-test-island`.
+- September 29, 2026, evening: the owner tried `?labs=1&sharp=1` and said "sharp yes – looks
+  noticeably better". The Operator made items 1 and 2 of "For the Operator" the default for everyone
+  on its own branch, stacked on #107 (`claude/operator-sharp-defaults`): `PIXEL_RATIO` mid and high
+  3, adapt "drag" (`SHARP_DEFAULT`), `?sharp=0` for the renderer as before, and tests/shp.spec.mjs
+  updated. #107 merges first.
 
 ## Notes
 

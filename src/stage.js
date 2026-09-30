@@ -143,7 +143,7 @@ export class Stage {
 
   // The ratio frames render at now.
   pixelRatio() {
-    const cap = this.sharp?.dpr ?? this.pixelCap; // Sharpness (labs)
+    const cap = this.sharp?.dpr ?? this.pixelCap; // Sharpness (dpr is labs only)
     const full = Math.min(window.devicePixelRatio || 1, cap);
     return this.reduced ? Math.max(1, full / 1.5) : full;
   }
@@ -163,10 +163,10 @@ export class Stage {
 
   // The player reports each frame whether the view is moving (a drag, the
   // turntable, an effect), and whether that is a drag. Still views always
-  // get the full ratio (and, with the labs lever adapt "drag", every view
-  // but a drag).
+  // get the full ratio (and, with adapt "drag", the default since September
+  // 29, 2026, every view but a drag).
   setBusy(busy, drag = false) {
-    if (this.sharp?.adapt === "drag") busy = drag; // Sharpness (labs)
+    if (this.sharp?.adapt === "drag") busy = drag; // Sharpness
     this.busy = busy;
     if (busy) {
       clearTimeout(this.restoreTimer);
@@ -596,7 +596,8 @@ export class Stage {
     this.requestRender();
   }
 
-  // Lane Sharpness: the render levers (src/sharpness.js), labs only. null
+  // Lane Sharpness: the render levers (src/sharpness.js); only adapt "drag"
+  // is on by default, the rest are labs switches. null
   // (every lever off) leaves the renderer exactly as it was: nothing here is
   // touched until a toy asks for a lever, and a toy without one puts back
   // what the last one changed.
