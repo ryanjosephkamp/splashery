@@ -108,10 +108,12 @@ for (const renderer of ["webgl2", "webgpu"]) {
       const change = compare(shots[0][id], shots[1][id]);
       const noise = compare(shots[1][id], shots[2][id]);
       expect(change.drawn, `${id} drew something`).toBeGreaterThan(2000);
-      expect(change.mean, `${id}: mean change`).toBeLessThanOrEqual(2 * noise.mean + 0.05);
-      expect(change.big, `${id}: pixels that changed a lot`).toBeLessThanOrEqual(
-        2 * noise.big + 20,
-      );
+      // One pair of loads can come out nearly alike by chance, so the noise
+      // has a floor: a mean of 0.5 levels and 200 pixels that change a lot
+      // (0.06% of the frame). A shader that drew these toys differently
+      // would change far more.
+      expect(change.mean, `${id}: mean change`).toBeLessThanOrEqual(Math.max(2 * noise.mean, 0.5) + 0.05); // prettier-ignore
+      expect(change.big, `${id}: pixels that changed a lot`).toBeLessThanOrEqual(Math.max(2 * noise.big, 200) + 20); // prettier-ignore
     }
   });
 
