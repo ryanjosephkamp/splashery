@@ -92,17 +92,26 @@ await page.evaluate(async () => {
 });
 const every = Number(opt("every", 0));
 const shots = [];
+// Training keeps a software GPU busy, and a screenshot can then wait a long time: a slow one is
+// skipped, never fatal.
+const shot = () => page.screenshot({ timeout: 90000 }).catch(() => null);
 const finished = () =>
   page.evaluate(() => !!window.__v3d.video3dResult() || !!window.__v3d.video3dState().error);
 for (;;) {
-  if (every) shots.push(await page.screenshot());
+  if (every) {
+    const b = await shot();
+    if (b) shots.push(b);
+  }
   if (await finished()) break;
   await page.waitForTimeout(every ? every * 1000 : 5000);
 }
 if (every) {
   // The toy with its result, and the card's readout, as the last frames.
   await page.waitForTimeout(4000);
-  for (let i = 0; i < 3; i++) shots.push(await page.screenshot());
+  for (let i = 0; i < 3; i++) {
+    const b = await shot();
+    if (b) shots.push(b);
+  }
   const { GIFEncoder, quantize, applyPalette } = gifenc;
   const gif = GIFEncoder();
   for (const [i, b] of shots.entries()) {
