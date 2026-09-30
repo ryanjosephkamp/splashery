@@ -152,7 +152,7 @@ function candleScene(k) {
     size: 0.035,
     life: 3.2,
     rise: 0.75,
-    turbulence: 0.55,
+    turbulence: 0.25,
     height: 0.7,
     source: { at: [0, 0.99, 0], radius: 0.012, rate: 260, speed: 0.5, on: false },
   });
@@ -212,7 +212,7 @@ function cupScene(k) {
     size: 0.04,
     life: 2.8,
     rise: 0.45,
-    turbulence: 0.9,
+    turbulence: 0.33,
     height: 0.5,
     opacity: 0.085,
     source: { at: [0, 0.58, 0], radius: 0.24, rate: 90 },

@@ -73,8 +73,8 @@ Short-lived particles (about 0.4 s) that rise from a disc at the wick, accelerat
 the flame's height over their life, drawn in toward the axis into a tongue, swaying more near the
 tip with a whole-flame flicker. The renderer colors them by age through the ramp of a real candle
 flame: a blue base, yellow-white, yellow, orange, a dull red, fading out. Sparks now and then. A
-flame hands its dying particles to a smoke system (`smoke: "<name>"`): a thin wisp while it burns, a
-thick curl when it is put out.
+flame hands its dying particles to a smoke system (`smoke: "<name>"`): barely a trace while it burns
+(a clean candle flame makes almost no visible smoke), a thick curl when it is put out.
 
 ### Colliders
 
@@ -156,6 +156,34 @@ machine's CPU unthrottled. The high tier's stand-in (2×) is pessimistic for the
 at 1× the high budget takes about 17 ms. Drawing adds only the fluid's splats (at most a few
 thousand, plus the glass) to the toy's own, and the toy asks for three quarters of its tier's splats
 (`density: 0.75`).
+
+## Checked against physics
+
+`node tools/fl-physics.mjs` measures the solver in Node (real units: the Fluid lab's unit is 0.33 m)
+and compares it with published values. Measured on September 30, 2026:
+
+| Check                                      | Ours                        | Published                         | Source                                                              |
+| ------------------------------------------ | --------------------------- | --------------------------------- | ------------------------------------------------------------------- |
+| Candle flicker (the tip's height)          | 11 Hz                       | 10 to 12 Hz                       | Kitahata et al. 2009, J. Phys. Chem. A 113; Cetegen and Ahmed 1993  |
+| Plume spread (half-width per height)       | smoke 0.125, steam 0.122    | 0.10 to 0.14                      | Morton, Taylor and Turner 1956, Proc. R. Soc. A 234                 |
+| Bubble rise in soda                        | 14.1 cm/s                   | 10 to 20 cm/s (1 mm bubbles)      | Clift, Grace and Weber 1978, Bubbles, Drops and Particles           |
+| A water blob spreading on a floor          | radius ∝ t^0.54             | t^0.5 (inertial)                  | Huppert and Simpson 1980, J. Fluid Mech. 99                         |
+| Honey spreading                            | t^0.41, then stops at 22 cm | keeps creeping as t^1/8 (viscous) | Huppert 1982, J. Fluid Mech. 121                                    |
+| Dam-break front (column 2:1, wide channel) | about 63% as far by T = 5.3 | Table 2                           | Martin and Moyce 1952, Phil. Trans. R. Soc. A 244                   |
+| A falling stream narrows                   | keeps its width             | 64% of its width 26 cm down       | mass conservation (Eggers and Villermaux 2008, Rep. Prog. Phys. 71) |
+
+- Fixed in this round: the flame's flicker was a 1.7 Hz sway; it now puffs at 11 Hz (the upper flame
+  stretches and its tip pinches off, `flicker` and `pinch`). Smoke and steam spread twice too wide
+  (0.26 and 0.29): the Fluid lab's swirl is calmer. A burning candle trailed a gray wisp; a clean
+  flame now leaves only a trace (`smokeRate`, 0.01).
+- The dam break follows the measured front early (T = 1.2: 1.37 against 1.44) and then falls behind:
+  position-based fluids lose a little energy each step for stability. Eight solver passes instead of
+  three close part of the gap, at over twice the cost. A narrow channel (8 particles wide) drags the
+  front further on its walls, so the test uses a wide one.
+- Honey stops where real honey keeps creeping slowly: cohesion and wall friction hold it like a
+  paste. In a glass the difference is too small to see.
+- A stream only two or three particles wide can't thin as it falls; that needs more, smaller
+  particles than the phone budget allows.
 
 ## Limits and next steps
 

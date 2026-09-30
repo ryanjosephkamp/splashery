@@ -49,6 +49,9 @@ export class FluidWorld {
         // same volume of liquid pours.
         const spacing = (spec.spacing ?? 0.05) * Math.cbrt((spec.budget ?? 1500) / budget);
         full.iters = spec.iters ?? (this.profile === "low" ? 2 : 3);
+        // Phones get fewer foam flecks (a soda's head is the costliest part);
+        // each counts for more, so the head covers the same.
+        full.diffuse = spec.diffuse ?? (this.profile === "low" || this.profile === "mid" ? 0.7 : 1);
         sys = new Liquid(full, { cap: budget, spacing, gravity, seed: s });
       } else if (spec.kind === "gas") {
         sys = new Gas(full, { cap: budget, gravity, seed: s });
@@ -522,7 +525,7 @@ function sheetFoam(sys, sh, level) {
     cells[cz * G + cx] += 1 - sys.dage[i] / sys.dlife[i];
   }
   // Flecks per cell for a full head.
-  const full = (cell * cell) / (sys.d * sys.d * 0.16);
+  const full = ((cell * cell) / (sys.d * sys.d * 0.16)) * (sys.spec.diffuse ?? 1);
   const foam = (sh.foam ||= new Float32Array(sh.n));
   for (let i = 0; i < sh.n; i++) {
     const fx = (sh.pts[i * 2] - g.at[0] + R) / cell - 0.5;

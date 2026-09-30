@@ -329,7 +329,9 @@ export class Liquid {
     this.drain = 0;
     this.time = 0;
     // Diffuse particles: spray, foam and bubbles.
-    this.dcap = Math.round(cap * (this.fizz > 0 ? 3.5 : this.foam > 0 ? 0.45 : 0.12));
+    this.dcap = Math.round(
+      cap * (this.fizz > 0 ? 3.5 : this.foam > 0 ? 0.45 : 0.12) * (spec.diffuse ?? 1),
+    );
     this.dn = 0;
     this.dpos = new Float32Array(this.dcap * 3);
     this.dvel = new Float32Array(this.dcap * 3);
@@ -798,7 +800,7 @@ export class Liquid {
     const { vel, pos, nbr, nbrN, dp } = this;
     const { h2, poly6 } = this.K;
     // Per step, as a rate that doesn't depend on the step length.
-    const a = 1 - Math.exp(-dt * (4 + 900 * v * v));
+    const a = 1 - Math.exp(-dt * ((this.spec.xsph ?? 4) + 900 * v * v));
     const passes = v > 0.5 ? 3 : v > 0.2 ? 2 : 1;
     for (let pass = 0; pass < passes; pass++) {
       for (let i = 0; i < n; i++) {
@@ -1239,6 +1241,9 @@ export class Liquid {
     const { h2, poly6 } = this.K;
     const { start, sorted } = grid;
     const rise = Math.sqrt(Math.abs(g[1]) * d) * 1.8;
+    // Bubbles rise at their own terminal speed: about 0.1 to 0.2 m/s for a
+    // bubble of a millimeter or so in water (Clift, Grace and Weber 1978).
+    const bubbleRise = (this.spec.bubbleRise ?? 0.15) / (this.spec.unit ?? 0.1);
     for (let i = this.dn - 1; i >= 0; i--) {
       const i3 = i * 3;
       const x = this.dpos[i3];
@@ -1303,9 +1308,9 @@ export class Liquid {
         if (kind === KIND.bubble) {
           // Rise through the liquid, wobbling a little.
           const t = this.time * 9 + this.dseed[i] * 40;
-          vx = lx + Math.sin(t) * rise * 0.12;
-          vy = ly + rise * (0.7 + 0.6 * this.dseed[i]);
-          vz = lz + Math.cos(t * 1.3) * rise * 0.12;
+          vx = lx + Math.sin(t) * bubbleRise * 0.12;
+          vy = ly + bubbleRise * (0.7 + 0.6 * this.dseed[i]);
+          vz = lz + Math.cos(t * 1.3) * bubbleRise * 0.12;
         } else {
           // Foam rides the surface: carried along, floated up until it sits
           // on top of the liquid (few liquid neighbors, all below).
@@ -1598,8 +1603,16 @@ export class Flame {
     const acc = (2 * (H - v0 * life)) / (life * life);
     const [ux, uy, uz] = this.up;
     // A whole-flame flicker: the tip sways and the height breathes.
+    // A candle flame's flicker ("puffing") is near 10 to 12 Hz (Kitahata et
+    // al. 2009; Cetegen and Ahmed 1993, f = 1.5 / sqrt(D)); two close tones
+    // around 11 Hz beat slowly, with a slow breath under them.
+    const hz = this.spec.flicker ?? 11;
     const fl =
-      Math.sin(t * 7.1) * 0.5 + Math.sin(t * 12.7 + 1.3) * 0.3 + Math.sin(t * 23.3 + 0.4) * 0.2;
+      Math.sin(t * 2 * Math.PI * hz) * 0.65 + Math.sin(t * 2 * Math.PI * hz * 0.92 + 1.3) * 0.35;
+    // Each puff stretches the flame up and then pinches its tip off (the
+    // oldest flame particles end early on the pinch).
+    const puff = (this.spec.puffing ?? 0.2) * fl;
+    const pinch = 1 - (this.spec.pinch ?? 0.16) * (1 - fl);
     const sway = [
       (Math.sin(t * 3.3) * 0.6 + Math.sin(t * 8.9 + 2) * 0.4) * 0.35 + this.wind[0],
       0,
@@ -1621,7 +1634,7 @@ export class Flame {
           ux * v0,
           uy * v0 * (0.9 + 0.2 * rand()),
           uz * v0,
-          life * (0.7 + 0.45 * rand()) * (1 + 0.12 * fl) * Math.max(0.3, this.size),
+          life * (0.7 + 0.45 * rand()) * Math.max(0.3, this.size),
         );
       }
       if (rand() < this.sparks * dt * 2.2 * this.size) {
@@ -1643,18 +1656,18 @@ export class Flame {
     for (let i = this.n - 1; i >= 0; i--) {
       age[i] += dt;
       const i3 = i * 3;
-      if (age[i] >= ttl[i]) {
-        // The flame's last heat becomes smoke (a thin wisp when it burns
-        // cleanly, a lot when it is put out).
+      if (age[i] >= ttl[i] * (pkind[i] === KIND.flame ? pinch : 1)) {
+        // The flame's last heat becomes smoke (a trace when it burns
+        // cleanly, as a candle does; a lot when it is put out).
         if (this.smoke && pkind[i] === KIND.flame) {
-          const p = this.on ? (this.smokeRate ?? 0.05) : 0.6;
+          const p = this.on ? (this.spec.smokeRate ?? 0.01) : 0.6;
           if (rand() < p)
             this.smoke.spawn(pos[i3], pos[i3 + 1], pos[i3 + 2], vel[i3] * 0.5, vel[i3 + 1] * 0.5, vel[i3 + 2] * 0.5, 1.1); // prettier-ignore
         }
         this.remove(i);
         continue;
       }
-      const f = age[i] / ttl[i];
+      const f = Math.min(1, age[i] / ttl[i]);
       if (pkind[i] === KIND.spark) {
         vel[i3 + 1] += (-9.8 * 0.15 + acc * 0.05) * dt;
         vel[i3] *= 1 - dt * 0.8;
@@ -1663,7 +1676,7 @@ export class Flame {
         // Up, faster as it heats; drawn in toward the axis into a tongue,
         // swaying more near the tip.
         vel[i3] += (ux * acc + sway[0] * f * f * 6 - (pos[i3] - this.at[0]) * pull * (0.6 + f)) * dt; // prettier-ignore
-        vel[i3 + 1] += uy * acc * dt;
+        vel[i3 + 1] += uy * acc * (1 + puff * f * 2) * dt;
         vel[i3 + 2] += (uz * acc + sway[2] * f * f * 6 - (pos[i3 + 2] - this.at[2]) * pull * (0.6 + f)) * dt; // prettier-ignore
         vel[i3] *= 1 - dt * 2;
         vel[i3 + 2] *= 1 - dt * 2;

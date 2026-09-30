@@ -105,6 +105,17 @@ mid and high tiers, adapt on drag): don't touch those blocks. The laptop is lock
 
 Model: Opus 5.5 (claude-opus-5-5), default effort.
 
+- September 30, 2026 (r3, the evidence round): the owner asked for evidence that the liquids, smoke
+  and flame are realistic, and for the reasoning behind the phone targets. `tools/fl-physics.mjs`
+  now measures the solver against published physics (docs/FLUIDS.md, "Checked against physics"), and
+  `tools/fl-evidence.mjs` puts each clip beside real reference photos from Wikimedia Commons (CC0,
+  CC BY or public domain, checked on each file's page, credited on the card; the photos are not
+  committed). Fixed from the checks: the flame now flickers at 11 Hz (it swayed at 1.7), smoke and
+  steam spread at 0.125 and 0.122 (they were twice too wide), and a burning candle leaves only a
+  trace of smoke. Still off, and said so on the cards: the dam-break front runs at about 63% of
+  Martin and Moyce's, honey stops instead of creeping, and a thin stream doesn't narrow as it falls.
+  Phones get fewer, stronger soda foam flecks (headroom for the soda pour). Cards: `fl-pour-r3`,
+  `fl-splash-r3`, `fl-soda-r3`, `fl-flame-r2`, `fl-smoke-r2`, `fl-physics`, `fl-phone-r3`.
 - September 30, 2026 (r2): from the Operator's pre-review notes (and the owner's "fix" mark on
   `fl-pour`), the liquids were redrawn: four splats per particle, glassy streams with a rim and a
   highlight, discs on smoothed normals, a level sheet for a calm thin liquid in a glass, a soda head
@@ -169,7 +180,9 @@ Model: Opus 5.5 (claude-opus-5-5), default effort.
 ## For the Operator
 
 - PACKS.md: I added my own section "5d. Fluids" (the brief assigns it to this lane).
-- New tools: `tools/fl-clip.mjs` (the cards' clips) and `tools/fl-measure.mjs` (the phone budget
-  card). Neither needs a new dependency.
+- New tools: `tools/fl-clip.mjs` (the cards' clips; `--fps=30` for the flame),
+  `tools/fl-measure.mjs` (the phone budget card), `tools/fl-physics.mjs` (the physics checks, Node
+  only) and `tools/fl-evidence.mjs` (clips beside reference photos, and static cards). None needs a
+  new dependency.
 - README line (for you to add): "Fluids: liquids, smoke and flames simulated as particles and drawn
   as splats (`src/fluids/`, docs/FLUIDS.md)."

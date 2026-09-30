@@ -7,7 +7,7 @@
 // --width (360), with a small "built by Opus 5.5" label.
 //
 //   python3 -m http.server 4173 --bind 127.0.0.1 &
-//   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/fl-clip.mjs <out-dir> [pour splash soda smoke flame] [--ratio=3] [--profile=mid]
+//   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/fl-clip.mjs <out-dir> [pour splash soda smoke flame] [--ratio=3] [--profile=mid] [--fps=15]
 //
 // Writes <out-dir>/fl-<clip>.gif and fl-<clip>-strip.png (six frames).
 
@@ -27,7 +27,7 @@ const [outDir, ...clips] = args.filter((a) => !a.startsWith("--"));
 if (!outDir) throw new Error("Usage: node tools/fl-clip.mjs <out-dir> [clip ...]");
 const ALL = ["pour", "splash", "soda", "smoke", "flame"];
 const list = clips.length ? clips : ALL;
-const STEP = 1 / 15;
+const STEP = 1 / Number(opt("fps", 15));
 const WIDTH = Number(opt("width", 360));
 const PROFILE = opt("profile", "mid");
 // The canvas's pixel-ratio cap: 3, the mid tier's cap once PR #118 lands.
