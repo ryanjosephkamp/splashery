@@ -385,5 +385,315 @@
     "license": "MIT",
     "checked": "September 29, 2026",
     "note": "ort.wasm.min.mjs, ort-wasm-simd-threaded.mjs and ort-wasm-simd-threaded.wasm from the npm package onnxruntime-web@1.30.0, unmodified. Loaded only when someone opens a photo in the Photo to 3D toy."
-  }
+  },
+  "sounds": [
+    {
+      "id": "puzzle-cube-turn",
+      "file": "assets/sounds/puzzle-cube-turn.mp3",
+      "toy": "puzzle-cube",
+      "name": "Cube Turn - 9 (a puzzle cube turning)",
+      "author": "SpaceJoe",
+      "page": "https://freesound.org/s/486585/",
+      "license": "CC0 1.0",
+      "checked": "September 30, 2026",
+      "note": "Lane Sound B. Freesound's HQ preview, cut to 0.25 to 0.8 s, mono, faded, peak-normalized to -3 dBFS, 64 kbps MP3. Loaded only when the toy is tapped."
+    },
+    {
+      "id": "balloon-dog-pop",
+      "file": "assets/sounds/balloon-dog-pop.mp3",
+      "toy": "balloon-dog",
+      "name": "Balloon-Burst-07.wav",
+      "author": "Gniffelbaf",
+      "page": "https://freesound.org/s/82121/",
+      "license": "CC0 1.0",
+      "checked": "September 30, 2026",
+      "note": "Lane Sound B. Freesound's HQ preview, whole, mono, faded, peak-normalized to -3 dBFS, 64 kbps MP3. Loaded only when the toy is tapped."
+    },
+    {
+      "id": "book-page",
+      "file": "assets/sounds/book-page.mp3",
+      "toy": "book",
+      "name": "Book Turn Page 2.wav",
+      "author": "esperri",
+      "page": "https://freesound.org/s/119127/",
+      "license": "CC0 1.0",
+      "checked": "September 30, 2026",
+      "note": "Lane Sound B. Freesound's HQ preview, whole, mono, faded, peak-normalized to -3 dBFS, 64 kbps MP3. Loaded only when the toy is tapped."
+    },
+    {
+      "id": "apple-bite",
+      "file": "assets/sounds/apple-bite.mp3",
+      "toy": "apple",
+      "name": "Bite (Apple)",
+      "author": "wadaltmon",
+      "page": "https://freesound.org/s/275015/",
+      "license": "CC0 1.0",
+      "checked": "September 30, 2026",
+      "note": "Lane Sound B. Freesound's HQ preview, whole, mono, faded, peak-normalized to -3 dBFS, 64 kbps MP3. Loaded only when the toy is tapped."
+    },
+    {
+      "id": "popcorn-popping",
+      "file": "assets/sounds/popcorn-popping.mp3",
+      "toy": "popcorn",
+      "name": "popcorn.wav",
+      "author": "Mike888",
+      "page": "https://freesound.org/s/488722/",
+      "license": "CC0 1.0",
+      "checked": "September 30, 2026",
+      "note": "Lane Sound B. Freesound's HQ preview, cut to 6.0 to 8.5 s, mono, faded, peak-normalized to -3 dBFS, 64 kbps MP3. Loaded only when the toy is tapped."
+    },
+    {
+      "id": "taco-crack",
+      "file": "assets/sounds/taco-crack.mp3",
+      "toy": "taco",
+      "name": "chips crunch sound",
+      "author": "TomatoHater",
+      "page": "https://freesound.org/s/705360/",
+      "license": "CC0 1.0",
+      "checked": "September 30, 2026",
+      "note": "Lane Sound B. Freesound's HQ preview, cut to 0.25 to 1.25 s, mono, faded, peak-normalized to -3 dBFS, 64 kbps MP3. Loaded only when the toy is tapped."
+    },
+    {
+      "id": "fireworks-burst",
+      "file": "assets/sounds/fireworks-burst.mp3",
+      "toy": "fireworks",
+      "name": "Firework Explosion 3",
+      "author": "a deleted Freesound account (deleted_user_3544904)",
+      "page": "https://freesound.org/s/212683/",
+      "license": "CC0 1.0",
+      "checked": "September 30, 2026",
+      "note": "Lane Sound B. Freesound's HQ preview, whole, mono, faded, peak-normalized to -3 dBFS, 64 kbps MP3. Loaded only when the toy is tapped."
+    },
+    {
+      "id": "colosseum-crowd",
+      "file": "assets/sounds/colosseum-crowd.mp3",
+      "toy": "colosseum",
+      "name": "cheering and clapping crowd 1",
+      "author": "AlaskaRobotics",
+      "page": "https://freesound.org/s/221568/",
+      "license": "CC0 1.0",
+      "checked": "September 30, 2026",
+      "note": "Lane Sound B. Freesound's HQ preview, cut to 1.2 to 4.4 s, mono, faded, peak-normalized to -3 dBFS, 64 kbps MP3. Loaded only when the toy is tapped."
+    },
+    {
+      "id": "colosseum-hooves",
+      "file": "assets/sounds/colosseum-hooves.mp3",
+      "toy": "colosseum",
+      "name": "Horse and Carriage.mp3",
+      "author": "maadmacs",
+      "page": "https://freesound.org/s/388391/",
+      "license": "CC0 1.0",
+      "checked": "September 30, 2026",
+      "note": "Lane Sound B. Freesound's HQ preview, cut to 1.0 to 4.0 s, mono, faded, peak-normalized to -3 dBFS, 64 kbps MP3. Loaded only when the toy is tapped."
+    },
+    {
+      "id": "steam-train-chug",
+      "file": "assets/sounds/steam-train-chug.mp3",
+      "toy": "steam-train",
+      "name": "Steam Train In Motion 1.wav",
+      "author": "lolamadeus",
+      "page": "https://freesound.org/s/179349/",
+      "license": "CC0 1.0",
+      "checked": "September 30, 2026",
+      "note": "Lane Sound B. Freesound's HQ preview, cut to 3.0 to 6.2 s, mono, faded, peak-normalized to -3 dBFS, 64 kbps MP3. Loaded only when the toy is tapped."
+    },
+    {
+      "id": "sports-car-rev",
+      "file": "assets/sounds/sports-car-rev.mp3",
+      "toy": "sports-car",
+      "name": "Car Engine Revving.WAV",
+      "author": "DigPro120",
+      "page": "https://freesound.org/s/558844/",
+      "license": "CC0 1.0",
+      "checked": "September 30, 2026",
+      "note": "Lane Sound B. Freesound's HQ preview, cut to 0.9 to 4.2 s, mono, faded, peak-normalized to -3 dBFS, 64 kbps MP3. Loaded only when the toy is tapped."
+    },
+    {
+      "id": "tractor-engine",
+      "file": "assets/sounds/tractor-engine.mp3",
+      "toy": "tractor",
+      "name": "Tractor whirring",
+      "author": "vonis22",
+      "page": "https://freesound.org/s/339167/",
+      "license": "CC0 1.0",
+      "checked": "September 30, 2026",
+      "note": "Lane Sound B. Freesound's HQ preview, cut to 0.5 to 3.0 s, mono, faded, peak-normalized to -3 dBFS, 64 kbps MP3. Loaded only when the toy is tapped."
+    },
+    {
+      "id": "helicopter-rotor",
+      "file": "assets/sounds/helicopter-rotor.mp3",
+      "toy": "helicopter",
+      "name": "Helicopter.wav",
+      "author": "Mike_Leister",
+      "page": "https://freesound.org/s/488089/",
+      "license": "CC0 1.0",
+      "checked": "September 30, 2026",
+      "note": "Lane Sound B. Freesound's HQ preview, cut to 1.0 to 4.0 s, mono, faded, peak-normalized to -3 dBFS, 64 kbps MP3. Loaded only when the toy is tapped."
+    },
+    {
+      "id": "propeller-plane-engine",
+      "file": "assets/sounds/propeller-plane-engine.mp3",
+      "toy": "propeller-plane",
+      "name": "Aeroplane Passing Close.wav",
+      "author": "paulprit",
+      "page": "https://freesound.org/s/507446/",
+      "license": "CC0 1.0",
+      "checked": "September 30, 2026",
+      "note": "Lane Sound B. Freesound's HQ preview, cut to 1.0 to 4.0 s, mono, faded, peak-normalized to -3 dBFS, 64 kbps MP3. Loaded only when the toy is tapped."
+    },
+    {
+      "id": "bow-and-target-release",
+      "file": "assets/sounds/bow-and-target-release.mp3",
+      "toy": "bow-and-target",
+      "name": "Bow Release (Bow and Arrow) 3",
+      "author": "Ali_6868",
+      "page": "https://freesound.org/s/384918/",
+      "license": "CC0 1.0",
+      "checked": "September 30, 2026",
+      "note": "Lane Sound B. Freesound's HQ preview, cut to 0 to 0.5 s, mono, faded, peak-normalized to -3 dBFS, 64 kbps MP3. Loaded only when the toy is tapped."
+    },
+    {
+      "id": "owl-hoot",
+      "file": "assets/sounds/owl-hoot.mp3",
+      "toy": "owl",
+      "name": "Owl Hoot",
+      "author": "Breviceps",
+      "page": "https://freesound.org/s/465697/",
+      "license": "CC0 1.0",
+      "checked": "September 30, 2026",
+      "note": "Lane Sound B. Freesound's HQ preview, cut to 0 to 4.2 s, mono, faded, peak-normalized to -3 dBFS, 64 kbps MP3. Loaded only when the toy is tapped."
+    },
+    {
+      "id": "frog-croak",
+      "file": "assets/sounds/frog-croak.mp3",
+      "toy": "frog",
+      "name": "Frog croaking sound effect",
+      "author": "betterchinese",
+      "page": "https://freesound.org/s/354132/",
+      "license": "CC0 1.0",
+      "checked": "September 30, 2026",
+      "note": "Lane Sound B. Freesound's HQ preview, cut to 0.3 to 1.4 s, mono, faded, peak-normalized to -3 dBFS, 64 kbps MP3. Loaded only when the toy is tapped."
+    },
+    {
+      "id": "frog-fly",
+      "file": "assets/sounds/frog-fly.mp3",
+      "toy": "frog",
+      "name": "Fly_Buzzing_Edited.wav",
+      "author": "AmberdeMeillon",
+      "page": "https://freesound.org/s/443059/",
+      "license": "CC0 1.0",
+      "checked": "September 30, 2026",
+      "note": "Lane Sound B. Freesound's HQ preview, cut to 0.5 to 2.0 s, mono, faded, peak-normalized to -3 dBFS, 64 kbps MP3. Loaded only when the toy is tapped."
+    },
+    {
+      "id": "bonsai-snip",
+      "file": "assets/sounds/bonsai-snip.mp3",
+      "toy": "bonsai",
+      "name": "scissors cut.wav",
+      "author": "mywhats",
+      "page": "https://freesound.org/s/175522/",
+      "license": "CC0 1.0",
+      "checked": "September 30, 2026",
+      "note": "Lane Sound B. Freesound's HQ preview, whole, mono, faded, peak-normalized to -3 dBFS, 64 kbps MP3. Loaded only when the toy is tapped."
+    },
+    {
+      "id": "oak-leaves",
+      "file": "assets/sounds/oak-leaves.mp3",
+      "toy": "oak",
+      "name": "FallingLeaves",
+      "author": "falcospizaetus",
+      "page": "https://freesound.org/s/489911/",
+      "license": "CC0 1.0",
+      "checked": "September 30, 2026",
+      "note": "Lane Sound B. Freesound's HQ preview, whole, mono, faded, peak-normalized to -3 dBFS, 64 kbps MP3. Loaded only when the toy is tapped."
+    },
+    {
+      "id": "rocks-pebbles",
+      "file": "assets/sounds/rocks-pebbles.mp3",
+      "toy": "rocks",
+      "name": "Slow Pebble Tumble.wav",
+      "author": "bbrocer",
+      "page": "https://freesound.org/s/398698/",
+      "license": "CC0 1.0",
+      "checked": "September 30, 2026",
+      "note": "Lane Sound B. Freesound's HQ preview, whole, mono, faded, peak-normalized to -3 dBFS, 64 kbps MP3. Loaded only when the toy is tapped."
+    },
+    {
+      "id": "iceberg-crack",
+      "file": "assets/sounds/iceberg-crack.mp3",
+      "toy": "iceberg",
+      "name": "Ice Crack 1",
+      "author": "j_p_higgins",
+      "page": "https://freesound.org/s/262635/",
+      "license": "CC0 1.0",
+      "checked": "September 30, 2026",
+      "note": "Lane Sound B. Freesound's HQ preview, whole, mono, faded, peak-normalized to -3 dBFS, 64 kbps MP3. Loaded only when the toy is tapped."
+    },
+    {
+      "id": "klein-bottle-slosh",
+      "file": "assets/sounds/klein-bottle-slosh.mp3",
+      "toy": "klein-bottle",
+      "name": "Bottle Slosh 2",
+      "author": "alegemaate",
+      "page": "https://freesound.org/s/667273/",
+      "license": "CC0 1.0",
+      "checked": "September 30, 2026",
+      "note": "Lane Sound B. Freesound's HQ preview, whole, mono, faded, peak-normalized to -3 dBFS, 64 kbps MP3. Loaded only when the toy is tapped."
+    },
+    {
+      "id": "spinning-top-spin",
+      "file": "assets/sounds/spinning-top-spin.mp3",
+      "toy": "spinning-top",
+      "name": "Metallic Spinning Top (Dry Sound).wav",
+      "author": "Uzbazur",
+      "page": "https://freesound.org/s/334970/",
+      "license": "CC0 1.0",
+      "checked": "September 30, 2026",
+      "note": "Lane Sound B. Freesound's HQ preview, cut to 0.3 to 3.5 s, mono, faded, peak-normalized to -3 dBFS, 64 kbps MP3. Loaded only when the toy is tapped."
+    },
+    {
+      "id": "spring-toy-boing",
+      "file": "assets/sounds/spring-toy-boing.mp3",
+      "toy": "spring-toy",
+      "name": "battery compartment spring 01.wav",
+      "author": "denalwa",
+      "page": "https://freesound.org/s/472478/",
+      "license": "CC0 1.0",
+      "checked": "September 30, 2026",
+      "note": "Lane Sound B. Freesound's HQ preview, whole, mono, faded, peak-normalized to -3 dBFS, 64 kbps MP3. Loaded only when the toy is tapped."
+    },
+    {
+      "id": "chess-set-move",
+      "file": "assets/sounds/chess-set-move.mp3",
+      "toy": "chess-set",
+      "name": "Piece Placement.mp3",
+      "author": "el_boss",
+      "page": "https://freesound.org/s/546119/",
+      "license": "CC0 1.0",
+      "checked": "September 30, 2026",
+      "note": "Lane Sound B. Freesound's HQ preview, whole, mono, faded, peak-normalized to -3 dBFS, 64 kbps MP3. Loaded only when the toy is tapped."
+    },
+    {
+      "id": "robot-wind",
+      "file": "assets/sounds/robot-wind.mp3",
+      "toy": "robot",
+      "name": "Wind-up sound",
+      "author": "Breviceps",
+      "page": "https://freesound.org/s/445966/",
+      "license": "CC0 1.0",
+      "checked": "September 30, 2026",
+      "note": "Lane Sound B. Freesound's HQ preview, whole, mono, faded, peak-normalized to -3 dBFS, 64 kbps MP3. Loaded only when the toy is tapped."
+    },
+    {
+      "id": "dice-throw",
+      "file": "assets/sounds/dice-throw.mp3",
+      "toy": "dice",
+      "name": "Casino Audio 1.1: dice-throw-1.ogg and dice-throw-3.ogg",
+      "author": "Kenney (kenney.nl)",
+      "page": "https://kenney.nl/assets/casino-audio",
+      "license": "CC0 1.0",
+      "checked": "September 30, 2026",
+      "note": "Lane Sound B. Two throws mixed 0.11 s apart (two dice), mono, peak-normalized to -3 dBFS, 64 kbps MP3. The pack's License.txt says CC0. Loaded only when the toy is tapped."
+    }
+  ]
 }

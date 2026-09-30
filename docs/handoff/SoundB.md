@@ -141,24 +141,56 @@ at the same time; leave their files alone.
 
 Model: Opus 5.5 (default effort), all of it.
 
-- September 30, 2026: started. Branch made from main with the Ops sound-review branch merged in (the
-  review file and PACKS.md 7e). `tools/sound-review.json` is still empty on every branch, so this
-  lane works from the review's own words and fills in its own toys' entries.
-- Baseline: every toy on the lane's shelves rendered offline through the app's master chain, with
-  the tap and every cue the recipe fires, and measured (clicks, whistles, rising sweeps, noise
-  share, peak and loudness).
+- September 30, 2026: started. `tools/sound-review.json` reached main in #139 during the day and was
+  merged in.
+- **Synthesis done** for every toy on the lane's shelves that the owner asked to change (92 toys)
+  and 16 of the newer toys (section 7e), each marked `"status": "site"` in `tools/sound-review.json`
+  with a `plan` starting "Now:". Toys he said to keep, and toys he didn't mention, are unchanged
+  (the water bottle, the fluid lab, the picture frame, the Chladni plate, the Screen and the Turing,
+  Enigma and Bombe machines already fit 7e).
+- **43 new voices** in the "Sound B" block at the end of `src/voices.js` (fire, leaves, pages, a
+  bite, brittle cracks, popcorn, dice, steam chuffs, real engines, rotors, creaking wood, scissors,
+  a natural trumpet, bowstrings, water in a bottle, a firework's launch and burst, hooves, a crowd,
+  stones, a top, a yo-yo, a cube twist, a coil spring, a balloon, a fly, a frog, an owl, melting,
+  stretching, peeling, gurgling, swimming, keys, a fan, a cinematic hit, a warm pad, an electric
+  arc, a slow rush, an alarm bell, chess moves, clockwork and sleigh bells), each with a measured
+  level.
+- **Synced cues** (only the cue lines of the packs changed): the daisy's petals land one by one; the
+  pebbles knock as stones; each Möbius rider has its own sound; the puzzle cube's turns, the bricks'
+  landings, the chess moves, the laptop's keys, the banana's peels and the croissant's butter use
+  the new sounds. Timed layers in `src/toy-sounds.js` follow the starfish's arms, the menorah's
+  candles, the gradient-descent ball's 21 hops and the bonsai's growth, scissors and drop.
+- **28 recorded samples ready** in `assets/sounds/` (CC0, credited in CREDITS.md and
+  `tools/assets.json` `sounds`), waiting for Sound A's `sample` voice to be wired in.
 
 ## Notes
 
 - Cues: many toys' later sounds are pushed from the pack's `drive()` (`out.cues.push(spec)`), not
   from `src/toy-sounds.js`. Syncing a sound to an on-screen event means editing only those cue lines
   in the pack, nothing that changes the look, motion or tap.
+- Listening proxy: a scratch tool opened each toy in headless Chromium, recorded every sound the tap
+  and its cues played (with times), rendered them offline through the app's master chain and
+  measured sharp onsets (clicks), sustained narrow high tones (whistles), rising pitch (vroom), the
+  share of noise energy and the peak and loudness, before and after. Headless frames run slower than
+  real time, so cue times stretch in those renders; the numbers still compare.
+- Samples: Freesound's public search with the CC0 filter works without an API key, and its HQ
+  previews (128 kbps MP3) download without one; each sound's license was read on its own page.
+  Kenney's Casino Audio (CC0, License.txt in the pack) gave the dice. The files were cut and encoded
+  with a local ffmpeg (from the `imageio-ffmpeg` wheel, not a repo dependency), mono, faded,
+  peak-normalized to -3 dBFS, 64 kbps.
+- `hold` (the key's time down) keeps piano tunes (the cake, the tree, the diffusion model, the
+  splatting toy) inside the 5 s limit; `decay` alone rings too long.
 
 ## Known issues
 
-- None yet.
+- The owner's ears are the real test: every new sound was judged from renders and numbers, not
+  heard.
+- The samples are not played yet: they wait for Sound A's `sample` voice.
 
 ## For the Operator
 
-- `tools/sound-review.json` has no per-toy entries on any branch (only an empty `toys`); this lane
-  adds entries for the toys it changes (`status: "site"`, the owner's words in `said`, a `plan`).
+- The Klein bottle's tap is hard to hit (his note): that's the math pack's pick, not a sound.
+- The balloon dog's pieces ignore the flag color when it pops (his note): the toys pack's code.
+- The "Maoz Tzur" melody for the menorah was left out: the lane couldn't check the tune against a
+  public-domain score, so the menorah has each candle's sound in sync instead. "Sakura Sakura",
+  "Happy Birthday to You" and "Jingle Bells" are in.
