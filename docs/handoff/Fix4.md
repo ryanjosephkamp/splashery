@@ -117,12 +117,12 @@ HOW THIS LANE RUNS
 
 Model: Opus 5.5 (default effort).
 
-September 30, 2026: both fixes are built on `claude/lane-fix4`, draft PR #134. Cards `fx4-clock`,
-`fx4-clock-still`, `fx4-marble` and `fx4-marble-tap` are on the Effect review page (they replace
-`shp-clock` and `shp-marble`); the Operator passed the clock's. The Operator's grain note on the
-marble led to an engine PR (the `rim` kit kind, branch `claude/lane-fix4-engine`, "Engine: rim, a
-view-dependent opacity for glass"), approved by the Operator at 5:19 p.m. UTC. Once it merges, the
-marble's glass moves to one `rim` shell here, with `fx4-marble-r2` and `fx4-marble-tap-r2`.
+September 30, 2026: done, in draft PR #134 (the clock and the marble only). The owner marked
+`fx4-clock`, `fx4-clock-still` and `fx4-marble` good ("It looks acceptable to me" for the marble),
+so the marble stays as posted. The `rim` engine kind the grain work led to is its own PR, #136
+("Engine: rim, a view-dependent opacity for glass", branch `claude/lane-fix4-engine`), kept for
+later glass toys (the crystal ball, the wizard's orb, the soap bubbles, the snow globe); the marble
+doesn't move to it now. The Integrator tests #134, then the Operator merges it.
 
 ## Notes
 
