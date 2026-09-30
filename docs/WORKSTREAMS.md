@@ -4,12 +4,13 @@ The lanes: who is building what, in which files, on which branch. The Operator s
 file; a lane reads its own row before it starts. How lanes work together is in
 [OPERATING.md](OPERATING.md).
 
-Last updated: September 30, 2026 (the sharper rendering default, the text layer, Chemistry, Machines
-A and Song live merged), after the owner accepted the Splashery Universe plan (ROADMAP.md): up to 12
-workers at once until the weekly reset, each lane on its assigned model (Opus 5.5 or Sonnet 5.5),
-and the Operator merging by tiers (OPERATING.md, "Merging and conflicts"). Since September 27 the
-Operator starts and runs every lane (OPERATING.md, "How the Operator runs a lane"); the order of the
-lanes to come is under "Next" and in [ROADMAP.md](ROADMAP.md).
+Last updated: September 30, 2026 (the owner's calls of that morning: the pace after the reset, the
+new lanes and the parked ones; before that the sharper rendering default, the text layer, Chemistry,
+Machines A and Song live merged), after the owner accepted the Splashery Universe plan (ROADMAP.md):
+up to 12 workers at once until the weekly reset, each lane on its assigned model (Opus 5.5 or Sonnet
+5.5), and the Operator merging by tiers (OPERATING.md, "Merging and conflicts"). Since September 27
+the Operator starts and runs every lane (OPERATING.md, "How the Operator runs a lane"); the order of
+the lanes to come is under "Next" and in [ROADMAP.md](ROADMAP.md).
 
 ## Lanes
 
@@ -46,19 +47,45 @@ and starts.
 
 In order (details in ROADMAP.md, "Now"); the Operator starts each when a slot is free:
 
-The Splashery Universe plan (ROADMAP.md) runs alongside these, up to 12 workers at once until the
-weekly reset (the owner's choice of September 29, 2026, with lanes 1 to 9 of the Operator's list
-approved and photo to 3D approved). Queued, in order as slots free: the pilot game, Toy Hunt Island
-(Sonnet; the world engine is merged); the Forest trail template and World maker (Sonnet); Machines B
-(Opus: the typewriter, the pin tumbler lock, a wristwatch movement and the film projector, approved
-on the Toy Ideas page); Sound A and Sound B (Opus, after the owner's next sound review). The owner's
-answers of September 29, 2026 add, in order as slots free: **Science** (Opus, labs: real science
-data that already are Gaussians, shown exactly as splats: thermal ellipsoids from crystal files, a
-super-resolution microscope and an approximate galaxy; brief ready), the **real island** (the Worlds
-session after its hybrid round), and **Fix4** (Opus, small: the clock's hands hidden in the dial and
-the marble's glass barely visible, from lane Sharpness's cards). The Operator's engine PR #120 added
-a text layer to the PDF toys (the words of the page, to read, copy and find), merged September 30.
-AI-made worlds are deferred: the owner wants more information first.
+The Splashery Universe plan (ROADMAP.md) runs alongside these. From the weekly reset (September 30,
+2026, 4 p.m. ET) about six workers run at once (seven at most) plus an Integrator, the owner's call
+of September 30, 2026. The running rounds finish first; then, in order as slots free:
+
+- **Sound A and Sound B** (Opus, after the owner's sound review of September 30).
+- **Science** (Opus, labs: real science data that already are Gaussians, shown exactly as splats:
+  thermal ellipsoids from crystal files, a super-resolution microscope and an approximate galaxy;
+  brief ready).
+- **Fix4** (Opus, small: the clock's hands hidden in the dial and the marble's glass barely visible,
+  from lane Sharpness's cards).
+- **The real island** (the Worlds session, after its hybrid round).
+- **UI r2** (Opus; labs first, the default after the owner's marks): a focus mode (a top-bar button,
+  the F key, Escape, a swipe up); a phone sheet that can hide and go full height; a desktop panel
+  you can collapse and widen; the gallery as a full page; big inputs that open at full height; a
+  drawing pad with a finer, harder pen that inks by distance, a Pen size choice (fine, medium, bold;
+  fine on phones) and an eraser; a web-app manifest so Splashery opens full screen from an iPhone's
+  Home Screen; and moving the toy (pan): a two-finger drag on a phone, Shift or Option/Alt and drag
+  on a computer, kept near the toy, undone by Reset, and stored in links as an optional field so old
+  links still load. The laptop stays locked.
+- **Video to 3D** (Opus, a one-week spike): Splat.js (MIT) vendored behind labs and loaded only when
+  a video is opened, to rebuild a short video as splats on the device. The spike reports first; the
+  toy comes after. Showcase scenes can be built on a Mac (COLMAP, BSD; msplat or Brush, Apache 2.0).
+- **Live input** (Opus, labs): the microphone first (the song landscape live from the mic, singing
+  to the Chladni plate, a room echo meter, a voice tuner on the pianos, clap to tap), then the
+  camera (a splat mirror), then screen capture (computers only). Permission only on a tap
+  (CLAUDE.md).
+- **Web screen** (small, later): a new toy (the laptop stays locked) that shows real embeddable
+  pages on a splat screen, as a hybrid, plus the screen-capture mirror.
+- **Wikipedia book** (later): articles fetched live from Wikipedia's REST API as splat pages, never
+  stored, with their credit and license shown (CLAUDE.md, the one CC BY-SA exception).
+
+Books r4 (running) adds page focus: a double-tap focuses one page, and a Reading choice offers "Both
+pages" or "One page" (One page by default on portrait phones); on book and picture toys a double-tap
+no longer resets the view (Reset stays on ↺ and R).
+
+Parked on September 30, 2026 (BACKLOG.md): Machines B, the pilot game Toy Hunt Island, the Forest
+trail template and World maker, and new novelty toys. The Operator's engine PR #120 added a text
+layer to the PDF toys (the words of the page, to read, copy and find), merged September 30. AI-made
+worlds are deferred: the owner wants more information first.
 
 1. **Pictures and pages** (step 3): the engine (#64) and lane Manual (#65) merged; lanes Screens
    (#72), Viewer (#75) and Books (#73, engine #74) merged. The owner tries the new toys with

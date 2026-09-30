@@ -195,13 +195,15 @@ async function openImage(src, limits) {
 // kind "image", count pictures, m.names (each file's name), m.aspect(i),
 // m.size(i) and m.draw(i, w, h). Each picture is read and checked when the
 // set opens, and decoded again when drawn (the last two stay decoded), so a
-// big set holds only its files, not every photo's pixels.
+// big set holds only its files, not every photo's pixels. m.reorder(order)
+// puts the pictures in a new order (order[j] is the picture, by its place
+// now, that goes to place j).
 export const MAX_SET = 200;
 
 async function openImageSet(sources, limits) {
   if (sources.length > MAX_SET)
     throw new MediaError(`That is ${sources.length} pictures; a set here takes up to ${MAX_SET}.`);
-  const items = [];
+  let items = [];
   let bytes = 0;
   for (const source of sources) {
     const src = await readSource(source, limits);
@@ -222,7 +224,7 @@ async function openImageSet(sources, limits) {
     items.push({ name: src.name, blob: src.blob, width, height });
   }
   if (!items.length) throw new MediaError("Pick at least one picture.");
-  const decoded = new Map();
+  let decoded = new Map();
   const bitmap = async (i) => {
     if (decoded.has(i)) return decoded.get(i);
     const b = await createImageBitmap(items[i].blob);
@@ -238,7 +240,9 @@ async function openImageSet(sources, limits) {
   return {
     kind: "image",
     name: items.length === 1 ? items[0].name : `${items.length} pictures`,
-    names: items.map((it) => it.name),
+    get names() {
+      return items.map((it) => it.name);
+    },
     url: null,
     count: items.length,
     aspect: (i = 0) => at(i).width / at(i).height,
@@ -247,6 +251,15 @@ async function openImageSet(sources, limits) {
       const k = Math.max(0, Math.min(items.length - 1, i | 0));
       const b = await bitmap(k);
       return drawScaled(b, b.width, b.height, w, h);
+    },
+    reorder(order) {
+      const n = items.length;
+      if (!Array.isArray(order) || order.length !== n) return false;
+      if (new Set(order).size !== n || order.some((i) => !Number.isInteger(i) || i < 0 || i >= n)) return false; // prettier-ignore
+      items = order.map((i) => items[i]);
+      for (const b of decoded.values()) b.close();
+      decoded = new Map();
+      return true;
     },
     close() {
       for (const b of decoded.values()) b.close();

@@ -387,5 +387,65 @@
       "out": "assets/worlds/character/",
       "tool": "tools/world-character.mjs"
     }
-  ]
+  ],
+  "photoSamples": [
+    {
+      "id": "forest",
+      "file": "assets/toys/photo-3d/forest.jpg",
+      "depth": "assets/toys/photo-3d/forest.depth",
+      "toy": "photo-3d",
+      "name": "Forest Away Path",
+      "author": "Seaq68 (from Pixabay, 2017)",
+      "page": "https://commons.wikimedia.org/wiki/File:Forest_Away_Path.jpg",
+      "license": "CC0 1.0",
+      "checked": "September 29, 2026",
+      "note": "Marked CC0 on its Wikimedia Commons page. Reduced to 1,280 px wide by Commons. Its depth map is made by tools/p3d-depth.mjs."
+    },
+    {
+      "id": "street",
+      "file": "assets/toys/photo-3d/street.jpg",
+      "depth": "assets/toys/photo-3d/street.depth",
+      "toy": "photo-3d",
+      "name": "Carleton Street off Leeman Road, York",
+      "author": "Malcolmxl5",
+      "page": "https://commons.wikimedia.org/wiki/File:Carleton_Street_off_Leeman_Road_York_Jul25.jpg",
+      "license": "CC0 1.0",
+      "checked": "September 29, 2026",
+      "note": "Own work, CC0 on its Wikimedia Commons page. Reduced to 1,280 px wide by Commons. Its depth map is made by tools/p3d-depth.mjs."
+    },
+    {
+      "id": "still-life",
+      "file": "assets/toys/photo-3d/still-life.jpg",
+      "depth": "assets/toys/photo-3d/still-life.depth",
+      "toy": "photo-3d",
+      "name": "Still Life with Cheese",
+      "author": "Antoine Vollon (Metropolitan Museum of Art Open Access)",
+      "page": "https://commons.wikimedia.org/wiki/File:Still_Life_with_Cheese_MET_DT1989.jpg",
+      "license": "CC0 1.0",
+      "checked": "September 29, 2026",
+      "note": "A painting in the public domain, CC0 from the Met's Open Access program on its Wikimedia Commons page. Reduced to 1,280 px wide by Commons. Its depth map is made by tools/p3d-depth.mjs."
+    }
+  ],
+  "depthModel": {
+    "id": "depth-anything-v2-small",
+    "file": "vendor/depth-anything-v2-small/model_quantized.onnx",
+    "toy": "photo-3d",
+    "name": "Depth Anything V2 Small (quantized ONNX)",
+    "author": "Lihe Yang et al. (Depth Anything V2); ONNX conversion by onnx-community",
+    "page": "https://huggingface.co/onnx-community/depth-anything-v2-small",
+    "license": "Apache-2.0",
+    "checked": "September 29, 2026",
+    "note": "27,258,801 bytes. Base model https://huggingface.co/depth-anything/Depth-Anything-V2-Small (Apache-2.0; the Base, Large and Giant sizes are CC BY-NC and are not used). Loaded only when someone opens a photo in the Photo to 3D toy."
+  },
+  "depthRuntime": {
+    "id": "onnxruntime-web",
+    "file": "vendor/onnxruntime-web/",
+    "toy": "photo-3d",
+    "name": "ONNX Runtime Web 1.30.0 (WebAssembly build)",
+    "author": "Microsoft",
+    "page": "https://github.com/microsoft/onnxruntime",
+    "license": "MIT",
+    "checked": "September 29, 2026",
+    "note": "ort.wasm.min.mjs, ort-wasm-simd-threaded.mjs and ort-wasm-simd-threaded.wasm from the npm package onnxruntime-web@1.30.0, unmodified. Loaded only when someone opens a photo in the Photo to 3D toy."
+  }
 }

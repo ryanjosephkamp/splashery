@@ -123,6 +123,7 @@ export class Pictures {
     });
     this.media = null;
     this.page = 0;
+    this.order = 0; // a set's order: bumped when it changes, so its pages rebuild (lane Books)
     this.cache = new Map(); // key -> built sheet data (a few, by splat count)
     this.busy = false;
     this.pending = null;
@@ -225,7 +226,38 @@ export class Pictures {
       },
       seek: (s) => self.seek(s),
       nameOf: (n) => self.media?.names?.[n] ?? self.media?.name ?? "",
+      // Lane Books: a set's names in their order, a new order (order[j] is
+      // the picture, by its place now, that goes to place j; the picture
+      // on show stays on show), and a small picture of item n (a canvas
+      // `size` pixels on its longer side).
+      get names() {
+        return self.media?.names ?? [];
+      },
+      reorder: (order) => self.reorder(order),
+      thumb: (n, size = 48) => self.thumb(n, size),
     };
+  }
+
+  // Puts a set's pictures in a new order (lane Books): the pages built for
+  // the old order are dropped, and the picture on show keeps showing.
+  reorder(order) {
+    const m = this.media;
+    if (!m?.reorder || !m.reorder(order)) return false;
+    this.order++;
+    this.cache.clear();
+    this.page = Math.max(0, order.indexOf(this.page));
+    this.player.emit("pictures", this.info());
+    this.stage.requestRender();
+    return true;
+  }
+
+  async thumb(n, size) {
+    const m = this.media;
+    if (!m?.draw || m.kind !== "image") return null;
+    const a = m.aspect?.(n) || 1;
+    const w = Math.max(1, Math.round(a >= 1 ? size : size * a));
+    const h = Math.max(1, Math.round(a >= 1 ? size / a : size));
+    return m.draw(n, w, h);
   }
 
   go(n) {
@@ -413,7 +445,7 @@ export class Pictures {
         page,
         level: useLevel,
         method,
-        key: `${page}|${useLevel}|${method}`,
+        key: `${page}|${useLevel}|${method}|${this.order}`,
       };
     }
     this.pump();
@@ -480,7 +512,7 @@ export class Pictures {
     if (this.media.kind === "pdf" && first?.want && first.shown?.key === first.want.key) {
       const p = first.want.page + this.sheets.length;
       if (p < this.media.count) {
-        const w = { ...first.want, page: p, key: `${p}|${first.want.level}|${first.want.method}` };
+        const w = { ...first.want, page: p, key: `${p}|${first.want.level}|${first.want.method}|${this.order}` }; // prettier-ignore
         if (!this.cache.has(this.cacheKey(w))) this.build(first, w);
       }
     }

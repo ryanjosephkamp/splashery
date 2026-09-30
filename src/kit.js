@@ -994,7 +994,10 @@ export class Kit {
       const s = it.sample(rand, i, it.n);
       if (!s) continue;
       const col = rgb(s.color ?? o.color ?? "#ffffff");
-      const sz = base * (s.size ?? 1) * Math.exp((rand() - 0.5) * 0.5);
+      // Each splat's size varies a little (jitter 0.5), unless a sample or the
+      // cloud asks for exact sizes (jitter 0). The same random draws either way.
+      const jitter = s.jitter ?? o.jitter ?? 0.5;
+      const sz = base * (s.size ?? 1) * Math.exp((rand() - 0.5) * jitter);
       let scl;
       let q;
       if (s.n) {

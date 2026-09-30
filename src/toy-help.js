@@ -1313,7 +1313,7 @@ export const TOY_HELP = {
   "splat-equation": {
     howTo: "Tap to play time t. Pick a program, or type your own equations, in the Toy tab.",
     about:
-      "Every splat has a place and a color. Here you program them with math: each splat gets two numbers, u and v, and your equations x, y and z turn them into its place, while hue (or r, g and b) gives its color. Time t runs from 0 to 2π, so the shape can move.\n\nTap it to play one cycle of t and watch the shape move. Pick a sphere, a torus, a Möbius strip, a seashell, a trefoil knot, a wave, a spiral galaxy or a Klein bottle in the Toy tab, or type your own, such as z = sin(u + t). The Tinkerer's Manual explains the whole language.",
+      "Every splat has a place and a color. Here you program them with math: each splat gets two numbers, u and v, and your equations x, y and z turn them into its place, while hue (or r, g and b) gives its color. Time t runs from 0 to 2π, so the shape can move.\n\nTap it to play one cycle of t and watch the shape move. Pick a sphere, a torus, a Möbius strip, a seashell, a trefoil knot, a wave, a spiral galaxy or a Klein bottle in the Toy tab, or type your own, such as z = sin(u + t). Under Splats, Solid shows a clean surface, Fine a finer one, and Dots every splat on its own. The Tinkerer's Manual explains the whole language.",
   },
   "pythagoras-proof": {
     howTo: "Tap it to slide the triangles and show that a² + b² = c².",
@@ -1413,24 +1413,28 @@ export const TOY_HELP = {
 
   // ---- Pictures and pages ---------------------------------------------------------------
   "picture-lab": {
-    howTo: "Tap for the next page, or to play and pause a video. Open your own in the Toy tab.",
+    howTo:
+      "Tap the right of the page to go on, the left to go back; tap a video to play it. Open your own in the Toy tab.",
     about:
       "The Picture lab shows a page, a photo, a GIF or a video as Gaussian splats: thousands of small, flat, colored discs, the same stuff every toy here is made of. A document's paper becomes a smooth sheet of large splats in the paper's own color, and every pixel of ink becomes one small splat of its own color, a hair in front. A photo gets one splat per pixel.\n\nZoom in and the page is rebuilt sharper; zoom out and it gets coarser, so nothing vanishes. Open a PDF, a photo, a GIF or a video of your own in the Toy tab, or paste a web address. Your files stay on your device: nothing is uploaded.",
   },
   "your-book": {
-    howTo: "Tap to open the cover and turn the pages. Open your own PDF in the Toy tab.",
+    howTo:
+      "Tap the right page to turn on, the left to go back, or pull a page over by hand. Open a PDF in the Toy tab.",
     about:
-      "A book is a stack of pages bound along one edge, so you can turn them one at a time. People have bound pages this way for about two thousand years; before that, long texts were rolled up as scrolls.\n\nOpen any PDF of your own in the Toy tab, as long as you like, and tap to turn its pages: each page curls as it goes over and shows the next page on its back. Only the pages you reach are made into splats, so a long book stays light. Pick hardcover, paperback, magazine, stapled paper or spiral notebook in the Toy tab. Your file stays on your device.",
+      "A book is a stack of pages bound along one edge, so you can turn them one at a time. People have bound pages this way for about two thousand years; before that, long texts were rolled up as scrolls.\n\nOpen any PDF of your own in the Toy tab, as long as you like, and tap to turn its pages (the right page turns forward, the left goes back), or take a page by its edge and pull it over: let go past halfway and it turns, otherwise it falls back. Each page curls as it goes over and shows the next page on its back. Stapled paper flips up over the top: tap near the top of the page to go back. Only the pages you reach are made into splats, so a long book stays light. Pick hardcover, paperback, magazine, stapled paper or spiral notebook in the Toy tab. Your file stays on your device.",
   },
   "photo-album": {
-    howTo: "Tap to open the album and turn its pages. Open your own photos in the Toy tab.",
+    howTo:
+      "Tap the right page to turn on, the left to go back, or pull a page over. Open your own photos in the Toy tab.",
     about:
-      "A photo album keeps printed photos on thick pages. Small paper corners hold each photo by its four corners, so nothing is glued to the picture and it can be slipped out again. Albums like this were common from the late 1800s, when cameras first let families take their own pictures.\n\nPick several photos of your own at once in the Toy tab and turn through them: two wide photos share a page, one above the other, and two tall ones sit side by side. Pick a leather, linen or scrapbook cover, and turn the file names under the photos on or off. Your photos stay on your device.",
+      "A photo album keeps printed photos on thick pages. Small paper corners hold each photo by its four corners, so nothing is glued to the picture and it can be slipped out again. Albums like this were common from the late 1800s, when cameras first let families take their own pictures.\n\nPick several photos of your own at once in the Toy tab and turn through them with a tap, or pull a page over by hand (the thick pages are heavier than a book's): two wide photos share a page, one above the other, and two tall ones sit side by side. Pick a leather, linen or scrapbook cover, and turn the file names under the photos on or off. Your photos stay on your device.",
   },
   "picture-frame": {
-    howTo: "Tap the frame to set it swinging on its nail. Open your own photo in the Toy tab.",
+    howTo:
+      "Tap the frame to set it swinging on its nail. Open your own photo, GIF or video in the Toy tab.",
     about:
-      "A picture frame protects a photo and sets it apart from the wall. Many hang from a single nail on a wire stretched across the back, so the frame can tilt a little either way until it hangs straight.\n\nTap it and the frame swings on its wire like a pendulum, back and forth, smaller each time, until it settles. Pick a wood, gold, modern or digital frame in the Toy tab; the digital frame fades from one photo to the next. Open a photo of your own, or several for the digital frame. Your photos stay on your device.",
+      "A picture frame protects a photo and sets it apart from the wall. Many hang from a single nail on a wire stretched across the back, so the frame can tilt a little either way until it hangs straight.\n\nTap it and the frame swings on its wire like a pendulum, back and forth, smaller each time, until it settles. Pick a wood, gold, modern or digital frame in the Toy tab; the digital frame fades from one photo to the next, in order or at random. Open a photo, a GIF or a video of your own (a GIF or a video plays on a loop), or several photos for the digital frame. Your files stay on your device.",
   },
   screen: {
     howTo: "Tap to switch it on, then to play and pause. Pick a Style in the Toy tab.",
@@ -1457,6 +1461,13 @@ export const TOY_HELP = {
       "Tap to lift the splats off the model and watch them settle back. Open your own 3D model in the Toy tab.",
     about:
       "A 3D model is usually a mesh: a net of flat triangles with colors or a picture (a texture) painted on them. This toy turns a mesh into splats. It scatters points across the surface, more of them where the shape bends sharply or is finely made, and lays a small flat splat on each one, facing the way the surface does. Each splat is sized to its neighbors so the surface closes with no gaps, and takes its color from the texture at that spot. Sharp edges stay sharp.\n\nTap to lift every splat into a loose cloud and watch each one settle back into its own place. Show: Wireframe draws the mesh's own edges as thin splats, so you can see what the splats were made from. Open a .glb, .gltf, .obj or .stl in the Toy tab (select a model's other files with it); it is converted on your device and never uploaded.",
+  },
+
+  "photo-3d": {
+    howTo:
+      "Tap to lift the picture's depth out of it, then tap again to lay it flat. Open your own photo in the Toy tab.",
+    about:
+      "A photo is flat, but a computer can guess how far away each part of it is. A depth model, a small neural network trained on millions of pictures, looks at your photo and gives every spot a distance: the path is near, the trees are far. This toy runs that model right on your device, and then rebuilds the photo as splats. Each splat takes the photo's color at its place and sits at its guessed depth, so when you turn the toy, near things move across far ones, the way they do when you move your head.\n\nWhere the depth jumps, a near leaf against a far tree, the surface is cut, so the leaf stands as its own layer instead of being smeared to the background. Tap to raise the layers one after another and sway. Layers pulls them apart. Depth sets how deep the relief is. Open a JPEG, PNG or WebP in the Toy tab (the model, 27 MB, loads the first time). Your photo never leaves your device.",
   },
 
   // ---- Lab (lane Lab) -------------------------------------------------------------------

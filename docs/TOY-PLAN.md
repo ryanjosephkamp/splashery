@@ -10,8 +10,8 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 321 toys. 321 have a tap action today; the other 0 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 318.
+- 322 toys. 322 have a tap action today; the other 0 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 319.
 - **more** (has an effect; make it clearer or more dramatic): 0.
 - **new** (needs its own effect): 3.
 - Visual fixes: 0 open, 30 done. Touch or drag interaction asked for: 4.
@@ -54,7 +54,7 @@ Proposals below are suggestions; the owner may change them.
   Perceptron, Multilayer perceptron, Neural network, Convolutional network, Recurrent network,
   Transformer, Looped transformer, Diffusion model, Gradient descent, Gaussian splatting, Word
   vectors, Sorting machine, Half adder, Turing machine, Difference engine, Enigma machine, Bombe,
-  Your book, Photo album, Picture frame, Model to splats, Splat field, Screen.
+  Your book, Photo album, Picture frame, Model to splats, Photo to 3D, Splat field, Screen.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -1592,7 +1592,10 @@ Proposals below are suggestions; the owner may change them.
     spread), read by lane Math's safe reader. Eight programs to start from: sphere, torus, Möbius
     strip, seashell, trefoil knot, wave, spiral galaxy and Klein bottle. A tap plays t from 0 to 2π
     (4 s) through twelve copies, each morphing into the next; a program without t draws its splats
-    again in order.
+    again in order. Lab r2 (the owner's review of September 29, 2026: "really, really grainy"):
+    every splat at full opacity and its exact size, the sharp kernel, and a Splats choice: Solid
+    (default; a surface's splats lie flat along it, a curve's are drawn out along it) or Dots (each
+    programmed splat its own dot).
   - Sound: A soft rising tone as t plays.
 
 ## Medieval (9)
@@ -2158,7 +2161,8 @@ Proposals below are suggestions; the owner may change them.
 - **Picture lab** (`picture-lab`). Now: tap: Next page, or play and pause. Plan: new effect (E6).
   - Owner: The Pictures engine lane's test toy (labs only), from the owner's notes of September 27
     and 28, 2026.
-  - Effect: A flat sheet showing what you open: a tap turns to the next page of a PDF, or plays and
+  - Effect: A flat sheet showing what you open: a tap on the right of the page turns to the next
+    page of a PDF, on the left goes back (the pages slide, they don't flip), or a tap plays and
     pauses a video.
   - Sound: A soft paper swish and a light tap.
 - **Your book** (`your-book`). Now: tap: Turn the page. Plan: keep.
@@ -2174,7 +2178,10 @@ Proposals below are suggestions; the owner may change them.
   - Improved: Books: a tap opens the cover, then turns each leaf over (about 1 s), the page curling
     as it goes with the next page on its back; at the end a tap closes the book. Previous and Next
     in the Toy tab turn back and forth. The page shape follows the PDF, and only the pages reached
-    are built.
+    are built. Books r3: a tap on the right page turns forward and on the left goes back (stapled
+    paper: the top quarter of the page goes back); a page can be pulled over by hand, turning if let
+    go past halfway or flicked and falling back otherwise; the turn lifts at once, the page curling
+    as it goes, with no bend before it moves.
   - Sound: A paper swish and flutter, and a soft thud as the page lands.
 - **Photo album** (`photo-album`). Now: tap: Turn the page. Plan: keep.
   - Owner: Lane Books, from the owner's notes of September 27 and 28, 2026 (Pages into Splats).
@@ -2186,7 +2193,8 @@ Proposals below are suggestions; the owner may change them.
     photo corners, one or two to a page as fits their shapes, with the file names as captions.
   - Improved: Books: a tap opens the leather, linen or scrapbook cover, then turns the thick pages
     (about 1 s each), the photos mounted in photo corners with their file names beneath; at the end
-    a tap closes the album.
+    a tap closes the album. Books r3: taps by where they land, as the book; a page pulled by hand
+    lags the finger a little, falls back more readily and settles slowly, like a heavy card page.
   - Sound: A lower card swish and a firm thud.
 - **Picture frame** (`picture-frame`). Now: tap: Swing the frame. Plan: keep.
   - Owner: Lane Books, from the owner's notes of September 27 and 28, 2026 (Pages into Splats).
@@ -2194,7 +2202,10 @@ Proposals below are suggestions; the owner may change them.
     piece, and it settles like a pendulum (about 3 s). Wood, gold, modern or digital frames; the
     digital one fades through a set of photos.
   - Improved: Books: a tap swings the frame, its wire and photo about the nail like a damped
-    pendulum, smaller each swing, until it hangs straight again (3 s).
+    pendulum, smaller each swing, until it hangs straight again (3 s). Books r3: a molded gold frame
+    (a bead, a flat, a cove and a big bead, burnished on the raised parts); every frame plays a GIF
+    or a video on a loop; the digital frame lists its photos in the Toy tab to reorder, and steps
+    through them in order or at random.
   - Sound: A knock on the wall, the wire creaking on the nail, and a softer knock.
 - **Screen** (`screen`). Now: tap: Switch on, then play or pause. Plan: keep.
   - Owner: From the owner's notes of September 28, 2026 (lane Screens; labs only).
@@ -2206,7 +2217,7 @@ Proposals below are suggestions; the owner may change them.
     button.
   - Sound: The TV's click and hum; each style its own (a soft tone, the curtains' swish, a shimmer).
 
-## Studio (3)
+## Studio (4)
 
 - **Song landscape** (`song-landscape`). Now: tap: Play or pause the song. Plan: new effect (E6).
   - Owner: Approved on the Splashery Universe page (lane Studio Sound), September 29, 2026.
@@ -2231,6 +2242,20 @@ Proposals below are suggestions; the owner may change them.
     Poly Haven's vase).
   - Sound: A rising whoosh as the splats lift off, then four falling plucked notes as they settle
     back.
+- **Photo to 3D** (`photo-3d`). Now: tap: Raise or flatten the depth. Plan: keep.
+  - Owner: Approved on the Splashery Universe page ("photo yes", September 29, 2026; lane Photo to
+    3D; labs only).
+  - Effect: Your photo rebuilt as splats in 3D by an on-device depth model: each splat takes the
+    photo's color at its place and sits at its depth, and the surface is cut where the depth jumps,
+    so a near object stands as its own layer. The picture starts flat; the tap raises its depth
+    layer by layer while the toy sways (about 3 s), and a second tap lays it flat. Depth sets how
+    deep the relief is; Layers pulls the depth bands apart.
+  - Improved: Photo to 3D: Depth Anything V2 Small (Apache-2.0, quantized, 27 MB) on ONNX Runtime
+    Web (MIT), both loaded only when a photo is opened; an even grid of splats sized to their
+    neighbors on the same surface, cut at depth jumps; three CC0 samples (a forest path, a cobbled
+    street, a still life).
+  - Sound: A soft whoosh that rises as the depth comes up, with two glassy notes; a falling whoosh
+    as it lies flat.
 
 ## Lab (1)
 
@@ -2244,5 +2269,6 @@ Proposals below are suggestions; the owner may change them.
     toy's work-buffer program (a recipe's gpuField, an additive engine hook) computes its place,
     tilt and color from them and the time. Three fields: a galaxy whose stars orbit on turning
     ellipses (a density wave keeps two arms), an ocean of four Gerstner waves, a flow along a (2, 3)
-    torus knot.
+    torus knot. Lab r2: a tap on the toy now fires the pulse on every field (the galaxy's faint
+    stars were under the pick pass's alpha clip; the recipe's pickAlpha lowers it).
   - Sound: A soft rising swell.
