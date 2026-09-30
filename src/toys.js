@@ -3216,6 +3216,44 @@ export const TOYS = [
     tags: "logic gates xor and binary addition circuit bits carry computer",
     camera: { yaw: 0.18, pitch: 0.1, roll: 0, distance: 3.4 },
   },
+  // ---- Pack: computing-history (lane Machines A) ----
+  {
+    id: "turing-machine",
+    label: "Turing machine",
+    category: "computing",
+    kind: "kit",
+    pack: "computing-history",
+    tags: "alan turing tape head state binary add one busy beaver program rules computer science",
+    camera: { yaw: 0.1, pitch: 0.1, roll: 0, distance: 2.95 },
+  },
+  {
+    id: "difference-engine",
+    label: "Difference engine",
+    category: "computing",
+    kind: "kit",
+    pack: "computing-history",
+    tags: "charles babbage method of differences polynomial wheels crank carry brass calculator mechanical",
+    camera: { yaw: 0.15, pitch: 0.1, roll: 0, distance: 3.1 },
+  },
+  {
+    id: "enigma-machine",
+    label: "Enigma machine",
+    category: "computing",
+    kind: "kit",
+    pack: "computing-history",
+    tags: "cipher code secret message rotors plugboard lamps keyboard cryptography bletchley park turing history",
+    camera: { yaw: 0.25, pitch: 0.55, roll: 0, distance: 3 },
+  },
+  {
+    id: "bombe",
+    label: "Bombe",
+    category: "computing",
+    kind: "kit",
+    pack: "computing-history",
+    tags: "bombe bletchley park alan turing gordon welchman codebreaking enigma drums crib menu history",
+    camera: { yaw: 0.3, pitch: 0.12, roll: 0, distance: 3.5 },
+  },
+  // ---- End of pack: computing-history ----
   // ---- Pack: pictures ----
   {
     id: "picture-lab",
@@ -3288,6 +3326,17 @@ export const TOYS = [
     labs: true,
     tags: "3d model glb gltf obj stl mesh triangles convert converter wireframe texture cad print",
     camera: { yaw: 0.5, pitch: 0.28, roll: 0, distance: 4.5 },
+  },
+  // ---- Pack: photo-3d (lane Photo to 3D) ----
+  {
+    id: "photo-3d",
+    label: "Photo to 3D",
+    category: "studio",
+    kind: "kit",
+    pack: "photo-3d",
+    labs: true,
+    tags: "photo picture image depth 3d parallax relief layers convert converter depth map jpeg png webp",
+    camera: { yaw: 0, pitch: 0, roll: 0, distance: 2.6 },
   },
   // ---- Pack: lab (lane Lab) ----
   {

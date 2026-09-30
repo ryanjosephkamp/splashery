@@ -4,7 +4,7 @@ Where Splashery stands, in short. The Operator session keeps this file; each lan
 in [handoff/](handoff/). The ground rules are in [CLAUDE.md](../CLAUDE.md); how the parallel lanes
 work is in [OPERATING.md](OPERATING.md).
 
-## State of main (2026-09-29)
+## State of main (2026-09-30)
 
 - Phases A to E4 are merged: A (splashery PR #13, homepage PR #33 in
   `ryanjosephkamp/ryanjosephkamp.github.io`), B (#17), C1 (#18), C2 (#19), D (#20), E1 (#21), E1b
@@ -104,6 +104,20 @@ work is in [OPERATING.md](OPERATING.md).
   Operator merging by tiers (CLAUDE.md, "Pull requests"). Weapons: historical, fantasy and sci-fi
   only, never aimed at people or animals. Splashery doesn't police what people open; the terms of
   use say they're responsible.
+- Early on September 30, 2026 (UTC) six PRs merged after two combined runs: the sharper rendering
+  default (#107 and the Operator's #118, from the owner's "sharp yes"; `?sharp=0` for the old look),
+  the text layer for PDF toys (#120), Chemistry (#100), Machines A (#102) and Song live (#119). The
+  Sound Board and Help Board were rebuilt for the owner's sound review. The Effect review page now
+  keeps each clip's own shape (live; its source change is the Operator's #124).
+- On the morning of September 30, 2026 the owner answered the Operator's plan for after the weekly
+  reset (WORKSTREAMS.md, "Next"): about six workers at once plus an Integrator; the running rounds
+  finish first; Sound A and B, Science, Fix4 and the real island stay queued; new lanes for UI r2
+  (focus mode, sheet and panel sizes, the gallery as a page, a better drawing pad, pan with two
+  fingers or Shift-drag, the Home Screen app), a one-week video-to-3D spike (Splat.js, MIT, behind
+  labs), Live input (microphone, then camera, then screen capture), later a web screen and a
+  Wikipedia book; Books r4 adds page focus. Machines B, the pilot game, the Forest template and new
+  novelty toys are parked (BACKLOG.md). The toy ideas became weekly, and the digest and a new site
+  patrol run as fresh Sonnet sessions.
 - Locked (owner approved, do not change its look or behaviour): the laptop. Its smoke test guards
   it.
 
@@ -111,23 +125,20 @@ work is in [OPERATING.md](OPERATING.md).
 
 The full table, with owned files, sessions, branches and PRs, is [WORKSTREAMS.md](WORKSTREAMS.md).
 
-| Lane                                                         | Status                                                                                                                         | Handoff                                          |
-| ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------ |
-| Operator                                                     | Running; runs the lanes                                                                                                        | —                                                |
-| Worlds r2 and hybrid: a sharper island, then a hybrid one    | Running, Opus 5.5 (r2 #108; the hybrid round from the owner's "Hybrid yes")                                                    | [handoff/Worlds.md](handoff/Worlds.md)           |
-| Pianos: pianos and songs                                     | Running, Opus 5.5 (September 29, 2026)                                                                                         | [handoff/Pianos.md](handoff/Pianos.md)           |
-| Sharpness: grain out of the renderer                         | Stood down, Opus 5.5; #107 and the Operator's #118 (the new default) wait for a combined run                                   | [handoff/Sharpness.md](handoff/Sharpness.md)     |
-| Chemistry: the chemistry set                                 | Running, Opus 5.5 (September 29, 2026)                                                                                         | [handoff/Chemistry.md](handoff/Chemistry.md)     |
-| Real objects: everyday things, for real                      | Running, Opus 5.5 (September 29, 2026)                                                                                         | [handoff/RealObjects.md](handoff/RealObjects.md) |
-| Photo to 3D: your photo, in depth                            | Running, Sonnet 5.5 (#98; then the Song landscape's Live view and a sharper round)                                             | [handoff/Photo3D.md](handoff/Photo3D.md)         |
-| Fluids: liquids, smoke and flames made of splats             | Running, Opus 5.5 (September 29, 2026)                                                                                         | [handoff/Fluids.md](handoff/Fluids.md)           |
-| Machines A: machines that compute                            | Running, Opus 5.5 (September 29, 2026)                                                                                         | [handoff/MachinesA.md](handoff/MachinesA.md)     |
-| Books r2 and r3: a sharper book body; pages you tap and pull | Running, Opus 5.5 (r2 #112 merged; r3 and engine #117 now)                                                                     | [handoff/Books.md](handoff/Books.md)             |
-| Screens r2: sharp sets and a real off switch                 | Running, Opus 5.5 (September 29, 2026)                                                                                         | [handoff/ScreensR2.md](handoff/ScreensR2.md)     |
-| Lab r2: the galaxy tap and a sharp Splat equation            | Running, Opus 5.5 (September 29, 2026)                                                                                         | [handoff/Lab.md](handoff/Lab.md)                 |
-| Integrator: combined test runs                               | Running, Sonnet 5.5 (September 29, 2026)                                                                                       | —                                                |
-| Integrator 2: a second runner                                | Running, Sonnet 5.5 (September 29, 2026)                                                                                       | —                                                |
-| Next (WORKSTREAMS.md, Next)                                  | Science, the real island, Fix4, then Sound A and B (when the owner's notes arrive), the pilot game, the Forest trail template… | —                                                |
+| Lane                                                         | Status                                                                                                                             | Handoff                                          |
+| ------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
+| Operator                                                     | Running; runs the lanes                                                                                                            | —                                                |
+| Worlds r2 and hybrid: a sharper island, then a hybrid one    | Running, Opus 5.5 (r2 #108; the hybrid round from the owner's "Hybrid yes")                                                        | [handoff/Worlds.md](handoff/Worlds.md)           |
+| Pianos: pianos and songs                                     | Running, Opus 5.5 (September 29, 2026)                                                                                             | [handoff/Pianos.md](handoff/Pianos.md)           |
+| Real objects: everyday things, for real                      | Running, Opus 5.5 (September 29, 2026)                                                                                             | [handoff/RealObjects.md](handoff/RealObjects.md) |
+| Photo to 3D: your photo, in depth                            | Running, Sonnet 5.5 (#98, the sharper round; Song live #119 merged)                                                                | [handoff/Photo3D.md](handoff/Photo3D.md)         |
+| Fluids: liquids, smoke and flames made of splats             | Running, Opus 5.5 (September 29, 2026)                                                                                             | [handoff/Fluids.md](handoff/Fluids.md)           |
+| Books r2 and r3: a sharper book body; pages you tap and pull | Running, Opus 5.5 (r2 #112 merged; r3 and engine #117 now)                                                                         | [handoff/Books.md](handoff/Books.md)             |
+| Screens r2: sharp sets and a real off switch                 | Running, Opus 5.5 (September 29, 2026)                                                                                             | [handoff/ScreensR2.md](handoff/ScreensR2.md)     |
+| Lab r2: the galaxy tap and a sharp Splat equation            | Running, Opus 5.5 (September 29, 2026)                                                                                             | [handoff/Lab.md](handoff/Lab.md)                 |
+| Integrator: combined test runs                               | Running, Sonnet 5.5 (September 29, 2026)                                                                                           | —                                                |
+| Integrator 2: a second runner                                | Running, Sonnet 5.5 (September 29, 2026)                                                                                           | —                                                |
+| Next (WORKSTREAMS.md, Next)                                  | Sound A and B, Science, Fix4, the real island, UI r2, the video-to-3D spike, Live input; later a web screen and the Wikipedia book | —                                                |
 
 E4-finish, E5, E6a, E6b, F, G, Math, Fix3, AI, Help, HelpTextA, HelpTextB, Pictures, Manual and
 Screens are done, and so are Viewer, Studio Sound, Learn, Lab, Studio Models, Books, Fidelity A,
@@ -261,6 +272,17 @@ Settled on September 28, 2026 (the Pages into Splats report,
   splat equation toy with a public Tinkerer's Manual that is also the book's default PDF.
 - Samples only under CC0, CC BY or public domain, with credits; no logos or insignia. The laptop
   stays as it is. The fitted method comes later, as an upgrade.
+
+Settled on September 30, 2026 (the owner's answers to the Operator's plan after the reset):
+
+- About six workers at once after the weekly reset (seven at most), plus an Integrator.
+- New lanes: UI r2, the video-to-3D spike, Live input, then a web screen and the Wikipedia book
+  (WORKSTREAMS.md, "Next"). Splat.js (MIT) may be vendored for the spike, behind labs.
+- Live input asks for the microphone, camera or screen only on a tap and records nothing.
+- The Wikipedia book is the one CC BY-SA exception: fetched live, never stored, credited.
+- True 4D from video comes later (it needs a rented GPU). A MIDI keyboard goes to the pianos' next
+  round; tilt to steer, a live earthquake globe and hand tracking wait in BACKLOG.md.
+- Parked: Machines B, the pilot game, the Forest template and new novelty toys.
 
 Still open (ask when it comes up, in Phase H):
 

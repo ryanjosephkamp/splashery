@@ -1500,7 +1500,7 @@
       "owner": "The owner's notes and the Pages into Splats plan (accepted September 28, 2026): people type their own Gaussian splat equations and play with them, with a Tinkerer's Manual that explains the language.",
       "effect": "One cycle of time t plays, so the shape moves in real time: a torus rolls, a sphere ripples, a galaxy turns.",
       "sound": "A soft rising tone as t plays.",
-      "improved": "Manual: new toy (labs). You type where every splat goes and what color it is, as equations in u, v and t (x, y and z, the ranges of u and v, hue or r, g and b, size, count and spread), read by lane Math's safe reader. Eight programs to start from: sphere, torus, Möbius strip, seashell, trefoil knot, wave, spiral galaxy and Klein bottle. A tap plays t from 0 to 2π (4 s) through twelve copies, each morphing into the next; a program without t draws its splats again in order."
+      "improved": "Manual: new toy (labs). You type where every splat goes and what color it is, as equations in u, v and t (x, y and z, the ranges of u and v, hue or r, g and b, size, count and spread), read by lane Math's safe reader. Eight programs to start from: sphere, torus, Möbius strip, seashell, trefoil knot, wave, spiral galaxy and Klein bottle. A tap plays t from 0 to 2π (4 s) through twelve copies, each morphing into the next; a program without t draws its splats again in order. Lab r2 (the owner's review of September 29, 2026: \"really, really grainy\"): every splat at full opacity and its exact size, the sharp kernel, and a Splats choice: Solid (default; a surface's splats lie flat along it, a curve's are drawn out along it) or Dots (each programmed splat its own dot)."
     },
     "seashell-spiral": {
       "v": "keep",
@@ -2004,10 +2004,38 @@
       "sound": "Switch clicks, and a buzz through each gate.",
       "improved": "AI: both switches flip to 1, light fills the wires into the XOR and AND gates; the XOR flashes and gives 0, the AND lights the carry lamp, and 1+1=10 shows (3.5 s)."
     },
+    "turing-machine": {
+      "v": "keep",
+      "owner": "Approved on the Toy Ideas page (lane Machines A).",
+      "effect": "A tape of 0 and 1 tiles runs under a read-write head with a state lamp: the head reads, flips tiles to write and the tape slides, following the rule card, until it halts with a bell. Add one on your binary number; count up; the busy beaver (about 4.5 s).",
+      "sound": "A relay click as the head reads, a wooden clack as each tile flips, a short whir as the tape slides, and a bell at the halt.",
+      "improved": "Machines A: 17 tile slots (each a solid tile that flips edge-on and back), the rule card's row lit, a state lamp, a step counter and turning reels; programs Add one (each tap adds one more, so it counts up), Busy beaver 2 and 3 states; your own binary number in the Toy tab (about 4.5 s for 1011)."
+    },
+    "difference-engine": {
+      "v": "keep",
+      "owner": "Approved on the Toy Ideas page (lane Machines A).",
+      "effect": "Babbage's engine: columns of numbered wheels and a crank. Each turn adds every column into its neighbor, the wheels click round, carries ripple up with levers, and the value column shows the next value of your polynomial (about 4 s per turn).",
+      "sound": "The ratchet of the crank, a brass click for each wheel step, a sharper snap for each carry, and a small bell when a new result is ready.",
+      "improved": "Machines A: X, P(X), Δ1, Δ2 and Δ3 columns of figure wheels (each a solid wheel read through a window), two-phase addition staggered as in Babbage's design, carry levers that set and knock back, the crank and a bell; each tap queues one more turn (4 s); your own polynomial up to x³ and start value in the Toy tab."
+    },
+    "enigma-machine": {
+      "v": "keep",
+      "owner": "The owner's own idea on the Toy Ideas page (lane Machines A).",
+      "effect": "An Enigma cipher machine in its wooden box: tap and it types your message, each key going down, the rotors stepping like an odometer and the coded letter lighting on the lampboard; a second tap types the coded text back and gets the message again (about 4 s).",
+      "sound": "Heavy key clacks, the ratchet of the rotors stepping, and a faint click as each lamp lights.",
+      "improved": "Machines A: kit-built (no CC0 or CC BY scan found), rotors I, II, III with reflector B and a plugboard (the historical wirings and double step), 26 keys and a moving lamp glow, the operator's pad on the lid (coded letters in red, decoded in blue); your own message in the Toy tab."
+    },
+    "bombe": {
+      "v": "keep",
+      "owner": "The owner's own idea on the Toy Ideas page (lane Machines A).",
+      "effect": "The Bletchley Park codebreaking machine: rows of colored drums spin in their sets through rotor settings, stop together on a possible setting and a lamp lights; then the coded message reads out in plain text (about 5 s).",
+      "sound": "A dense clatter of spinning drums, a whirr of motors, and a sharp stop with a bell when a setting is found.",
+      "improved": "Machines A: one bank of 12 drum sets (36 drums), a menu from a 12-letter crib, a real search of all 17,576 settings (plugboard taken as known), the stop lamp, and a readout of the setting and the plain text; your own message in the Toy tab."
+    },
     "picture-lab": {
       "v": "new",
       "owner": "The Pictures engine lane's test toy (labs only), from the owner's notes of September 27 and 28, 2026.",
-      "effect": "A flat sheet showing what you open: a tap turns to the next page of a PDF, or plays and pauses a video.",
+      "effect": "A flat sheet showing what you open: a tap on the right of the page turns to the next page of a PDF, on the left goes back (the pages slide, they don't flip), or a tap plays and pauses a video.",
       "sound": "A soft paper swish and a light tap."
     },
     "your-book": {
@@ -2015,7 +2043,7 @@
       "owner": "Lane Books, from the owner's notes of September 27 and 28, 2026 (Pages into Splats).",
       "effect": "Open a PDF of any length and turn its pages: each page turns over its spine as a solid sheet, curling as it goes, with the next page on its back. Five styles: hardcover, paperback, magazine, stapled paper and spiral notebook.",
       "sound": "A paper swish and flutter, and a soft thud as the page lands.",
-      "improved": "Books: a tap opens the cover, then turns each leaf over (about 1 s), the page curling as it goes with the next page on its back; at the end a tap closes the book. Previous and Next in the Toy tab turn back and forth. The page shape follows the PDF, and only the pages reached are built.",
+      "improved": "Books: a tap opens the cover, then turns each leaf over (about 1 s), the page curling as it goes with the next page on its back; at the end a tap closes the book. Previous and Next in the Toy tab turn back and forth. The page shape follows the PDF, and only the pages reached are built. Books r3: a tap on the right page turns forward and on the left goes back (stapled paper: the top quarter of the page goes back); a page can be pulled over by hand, turning if let go past halfway or flicked and falling back otherwise; the turn lifts at once, the page curling as it goes, with no bend before it moves.",
       "fixed": "Books r2 (the owner's note of September 29, 2026: the book, not the pages, a little blurry or grainy around the edges): the covers, spine, bands and page blocks have clean, sharp edges (faces stop short of their edges, with finer splats and a line of thin splats along each), full density and smooth cloth colors; the spiral's wire and the staples are thin splats along the wire."
     },
     "photo-album": {
@@ -2023,7 +2051,7 @@
       "owner": "Lane Books, from the owner's notes of September 27 and 28, 2026 (Pages into Splats).",
       "effect": "Open a set of photos and turn through them on thick album pages, each photo held by four photo corners, one or two to a page as fits their shapes, with the file names as captions.",
       "sound": "A lower card swish and a firm thud.",
-      "improved": "Books: a tap opens the leather, linen or scrapbook cover, then turns the thick pages (about 1 s each), the photos mounted in photo corners with their file names beneath; at the end a tap closes the album.",
+      "improved": "Books: a tap opens the leather, linen or scrapbook cover, then turns the thick pages (about 1 s each), the photos mounted in photo corners with their file names beneath; at the end a tap closes the album. Books r3: taps by where they land, as the book; a page pulled by hand lags the finger a little, falls back more readily and settles slowly, like a heavy card page.",
       "fixed": "Books r2 (the owner's note of September 29, 2026: a little blurry or grainy around the edges): the covers and card pages have clean, sharp edges and full density; the leather's stitches and groove are thin splats in front of the cover, the scrapbook's label its own card, and the leather and linen smooth."
     },
     "picture-frame": {
@@ -2031,7 +2059,7 @@
       "owner": "Lane Books, from the owner's notes of September 27 and 28, 2026 (Pages into Splats).",
       "effect": "A photo in a frame hung on a nail by a wire: a tap swings it about the nail as one solid piece, and it settles like a pendulum (about 3 s). Wood, gold, modern or digital frames; the digital one fades through a set of photos.",
       "sound": "A knock on the wall, the wire creaking on the nail, and a softer knock.",
-      "improved": "Books: a tap swings the frame, its wire and photo about the nail like a damped pendulum, smaller each swing, until it hangs straight again (3 s)."
+      "improved": "Books: a tap swings the frame, its wire and photo about the nail like a damped pendulum, smaller each swing, until it hangs straight again (3 s). Books r3: a molded gold frame (a bead, a flat, a cove and a big bead, burnished on the raised parts); every frame plays a GIF or a video on a loop; the digital frame lists its photos in the Toy tab to reorder, and steps through them in order or at random."
     },
     "chladni-plate": {
       "v": "new",
@@ -2058,6 +2086,13 @@
       "effect": "A 3D model file (glTF, OBJ or STL) turned into splats on the device; the tap lifts every splat off the surface into a loose cloud and lets each settle back into its own place in about 3 s. Show: Wireframe draws the mesh's edges as thin splats.",
       "sound": "A rising whoosh as the splats lift off, then four falling plucked notes as they settle back.",
       "improved": "Studio Models: a converter that samples the surface by area (more splats where it bends or is finely made), lays flat splats on it sized to their neighbors, colors them from the texture, vertex colors or material, and keeps hard edges hard; two CC0 samples (Kenney's burger, Poly Haven's vase)."
+    },
+    "photo-3d": {
+      "v": "keep",
+      "owner": "Approved on the Splashery Universe page (\"photo yes\", September 29, 2026; lane Photo to 3D; labs only).",
+      "effect": "Your photo rebuilt as splats in 3D by an on-device depth model: each splat takes the photo's color at its place and sits at its depth, and the surface is cut where the depth jumps, so a near object stands as its own layer. The picture starts flat; the tap raises its depth layer by layer while the toy sways (about 3 s), and a second tap lays it flat. Depth sets how deep the relief is; Layers pulls the depth bands apart.",
+      "sound": "A soft whoosh that rises as the depth comes up, with two glassy notes; a falling whoosh as it lies flat.",
+      "improved": "Photo to 3D: Depth Anything V2 Small (Apache-2.0, quantized, 27 MB) on ONNX Runtime Web (MIT), both loaded only when a photo is opened; an even grid of splats sized to their neighbors on the same surface, cut at depth jumps; three CC0 samples (a forest path, a cobbled street, a still life)."
     },
     "screen": {
       "v": "keep",
@@ -2120,7 +2155,7 @@
       "owner": "The owner's note \"big new Splashery ideas\" and his answer of September 29, 2026 (lane Lab; labs only): splat fields on the GPU.",
       "effect": "Nearly 300,000 splats placed and colored by a program on the GPU every frame: a spiral galaxy, an ocean or a knotted flow. A tap sends a bright ring out through the galaxy, drops a stone in the sea, or pushes the flow once more around the knot (3 s).",
       "sound": "A soft rising swell.",
-      "improved": "Lab: new test toy on the new Lab shelf (labs). Each splat stores only its (u, v); the toy's work-buffer program (a recipe's gpuField, an additive engine hook) computes its place, tilt and color from them and the time. Three fields: a galaxy whose stars orbit on turning ellipses (a density wave keeps two arms), an ocean of four Gerstner waves, a flow along a (2, 3) torus knot."
+      "improved": "Lab: new test toy on the new Lab shelf (labs). Each splat stores only its (u, v); the toy's work-buffer program (a recipe's gpuField, an additive engine hook) computes its place, tilt and color from them and the time. Three fields: a galaxy whose stars orbit on turning ellipses (a density wave keeps two arms), an ocean of four Gerstner waves, a flow along a (2, 3) torus knot. Lab r2: a tap on the toy now fires the pulse on every field (the galaxy's faint stars were under the pick pass's alpha clip; the recipe's pickAlpha lowers it)."
     }
   }
 }

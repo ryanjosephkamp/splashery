@@ -249,6 +249,9 @@ test.describe("character", () => {
   test("on the Test island: the renderer turns the joints as the rig says, each tier holds its budget, and screenshots", async ({
     browser,
   }) => {
+    // Three world loads (one per tier), each allowed up to 200 s below, don't fit in the default
+    // 240 s test time on a slow machine; give the test time for all three.
+    test.setTimeout(720_000);
     for (const [tier, w, h] of [
       ["low", 390, 844],
       ["mid", 390, 844],

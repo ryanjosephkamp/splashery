@@ -38,11 +38,21 @@ coordinates. [docs/OPERATING.md](docs/OPERATING.md) has the rules. In short:
 
 - Static files and ES modules only. No bundler, CDN, server, or API keys in the page. PlayCanvas
   2.22.3 is vendored in `vendor/` and imported only through `src/pc.js`. PDF.js and omggif (approved
-  September 28, 2026) are vendored there too, loaded only when someone opens a PDF or a GIF.
+  September 28, 2026) are vendored there too, loaded only when someone opens a PDF or a GIF. ONNX
+  Runtime Web and the Depth Anything V2 Small model (approved September 29, 2026) are vendored there
+  too, loaded only when someone turns a photo into 3D. Splat.js (MIT; approved September 30, 2026,
+  for the video-to-3D spike) may join them, behind the labs switch, loaded only when someone opens a
+  video for it.
+- Live input (approved September 30, 2026): a toy asks for the microphone, the camera or screen
+  capture only when the person taps to start it. Nothing is requested or loaded before that, and
+  nothing is recorded, stored or sent anywhere.
 - Build tools in `tools/` may use pinned devDependencies. List each one in `LICENSES.md`.
 - Assets must be CC0, CC BY or public domain. Never BY-SA or NC. Check the licence on the live
   source page. Record it in `CREDITS.md`, in `tools/assets.json` or `tools/models.json`, and in the
-  toy's in-app credit.
+  toy's in-app credit. One exception (the owner's call of September 30, 2026): the Wikipedia book
+  fetches an article live from Wikipedia's REST API when the reader asks for it (CC BY-SA text). It
+  is never stored in the repo, shipped with the site or saved in a scene, and the article's credit
+  and license show beside it.
 - Old `#s=` links and saved scene JSON (schema v2 and v3) must keep loading.
 - No modern real-world firearms, no logos or brand names, no gore. Flags stay respectful. Since
   September 29, 2026, historical, fantasy and sci-fi weapons are fine where a world calls for them
@@ -116,11 +126,12 @@ new or changed effect against them before calling it done.
 
 ## Working style
 
-- Pace (the owner's choice of September 29, 2026): up to 12 workers at once until the weekly reset
-  (September 30, 4 p.m. ET; it was 8 until that morning), paced by the 5-hour limit; the owner
-  reports the weekly usage morning and evening. Once 6 or more lanes run, an Integrator worker runs
-  the combined test runs. A lane uses at most one helper at a time. (Seven parallel builders once
-  used up a week's usage in one go, so the Operator watches the limits.)
+- Pace (the owner's choice of September 30, 2026): from the weekly reset (September 30, 4 p.m. ET),
+  about six Splashery workers at once (seven at most) plus an Integrator, paced by the 5-hour limit;
+  the owner reports the weekly usage morning and evening. (Until then it was up to 12, and 8 before
+  the morning of September 29.) Once 6 or more lanes run, an Integrator worker runs the combined
+  test runs. A lane uses at most one helper at a time. (Seven parallel builders once used up a
+  week's usage in one go, so the Operator watches the limits.)
 - New parts of the site (Studio, Worlds, Lab and Learn) open behind the labs switch; the owner
   decides when each goes public.
 - The owner works from the phone app. Keep replies short and plain, and give step-by-step
