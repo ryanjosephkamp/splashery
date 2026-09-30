@@ -198,11 +198,10 @@ export async function loadSplatPerson(app, view, { tier = "mid", look = {}, coun
   const inv = new Map(skin.boneNames.map((n, i) => [n, skin.inverseBindPose[i]]));
   const dv = new DataView(bin);
   const half = (o) => pc.FloatPacking.half2Float?.(dv.getUint16(o, true)) ?? halfToFloat(dv.getUint16(o, true)); // prettier-ignore
-  const toLinear = (v) => {
-    v /= 255;
-    return v <= 0.04045 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4;
-  };
-  const shirt = look.shirt ? linear(look.shirt) : null;
+  // (Splat colors are sRGB, like the kit's.)
+  const byte = (v) => v / 255;
+  const tee = look.shirt ? parseInt(look.shirt.slice(1), 16) : null;
+  const shirt = tee === null ? null : { r: (tee >> 16) / 255, g: ((tee >> 8) & 255) / 255, b: (tee & 255) / 255 }; // prettier-ignore
   const frac = Math.min(1, count / info.count);
   const p = new pc.Vec3();
   const n = new pc.Vec3();
@@ -220,14 +219,14 @@ export async function loadSplatPerson(app, view, { tier = "mid", look = {}, coun
       m.transformPoint(p.set(half(o), half(o + 2), half(o + 4)), p);
       m.transformVector(n.set(dv.getInt8(o + 6), dv.getInt8(o + 7), dv.getInt8(o + 8)), n).normalize(); // prettier-ignore
       q.setFromDirections?.(zAxis, n) ?? fromTo(q, zAxis, n);
-      const c = [toLinear(dv.getUint8(o + 9)), toLinear(dv.getUint8(o + 10)), toLinear(dv.getUint8(o + 11)), 1]; // prettier-ignore
+      const c = [byte(dv.getUint8(o + 9)), byte(dv.getUint8(o + 10)), byte(dv.getUint8(o + 11)), 1]; // prettier-ignore
       if (dv.getUint8(o + 12) === 1 && shirt) {
         c[0] *= shirt.r;
         c[1] *= shirt.g;
         c[2] *= shirt.b;
       }
       const r = (dv.getUint16(o + 13, true) / 10000) * (1 / frac) ** 0.5;
-      buf.push([p.x, p.y, p.z], [r * 0.62, r * 0.62, r * 0.14], [q.x, q.y, q.z, q.w], c);
+      buf.push([p.x, p.y, p.z], [r * 0.85, r * 0.85, r * 0.18], [q.x, q.y, q.z, q.w], c);
     }
     at += b.count;
     total += take;

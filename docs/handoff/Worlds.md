@@ -100,8 +100,17 @@ character and a sharper island".
   (measured in the page). Two levels: high 30.8k triangles, 2.2 MB; low 17.2k, 1.2 MB. Default in
   hybrid mode (`character.model: "auto"`); `?character=kenney` keeps the old one; the person walks
   at 1.3 m/s and runs at 2.7 m/s (the splat character keeps 1.9 and 4.6).
-- **The person as splats** (`?character=splat-person`): 90k splats sampled from its textured
-  surface, one rigid piece per bone. Being judged against today's splat character.
+- **The person as splats** (`?character=splat-person`): 90k splats sampled from its textured surface
+  (hidden samples dropped by a ray test), one rigid piece per bone. At phone distance it reads as a
+  real person; close up it is grainier (specks on the face, a light band at the waist) than the
+  kit-built splat character, so that one stays splats mode's default. Card `wd-character-splats-r3`
+  lets the owner judge.
+- **Cards so far:** `wd-character-r3` (replaces `wd-hybrid-character`), `wd-character-walk-r3`
+  (replaces `wd-walk-r3` and `wd-list-r3`). The Effect review page's asset storage was full (1.06 of
+  1.07 GB) when I started posting: my cards are WebM videos (`tools/wd-webm.mjs`, under 1 MB each
+  instead of 10–20 MB GIFs).
+- **Clip speed:** a phone-size clip takes about 15 s a frame in this container's software renderer
+  (`--fast --dpr=1.5`), so a 10-second card takes 25–35 minutes.
 - **Model props** (`tools/wd-props.py`, `src/worlds/mesh-props.js`): Poly Haven boulders, stones, a
   shell, driftwood and a stump (CC0), three levels each; 220 stones and 28 shells instanced on the
   sand. 3.0 MB. Tree and bush leaves regraded in hybrid mode (`gradeFoliage`).

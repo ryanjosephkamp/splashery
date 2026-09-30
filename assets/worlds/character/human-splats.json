@@ -5,151 +5,151 @@
  "bones": [
   {
    "name": "pelvis",
-   "count": 5568
+   "count": 4127
   },
   {
    "name": "spine_01",
-   "count": 2678
+   "count": 3216
   },
   {
    "name": "spine_02",
-   "count": 2570
+   "count": 3062
   },
   {
    "name": "spine_03",
-   "count": 10245
+   "count": 11334
   },
   {
    "name": "clavicle_l",
-   "count": 749
+   "count": 524
   },
   {
    "name": "upperarm_l",
-   "count": 4179
+   "count": 3931
   },
   {
    "name": "lowerarm_l",
-   "count": 2127
+   "count": 2518
   },
   {
    "name": "hand_l",
-   "count": 713
+   "count": 838
   },
   {
    "name": "index_01_l",
-   "count": 74
+   "count": 84
   },
   {
    "name": "index_02_l",
-   "count": 54
+   "count": 65
   },
   {
    "name": "index_03_l",
-   "count": 40
+   "count": 53
   },
   {
    "name": "middle_01_l",
-   "count": 96
+   "count": 122
   },
   {
    "name": "middle_02_l",
-   "count": 80
+   "count": 73
   },
   {
    "name": "middle_03_l",
-   "count": 46
+   "count": 58
   },
   {
    "name": "pinky_01_l",
-   "count": 50
+   "count": 53
   },
   {
    "name": "pinky_02_l",
-   "count": 27
+   "count": 24
   },
   {
    "name": "pinky_03_l",
-   "count": 29
+   "count": 39
   },
   {
    "name": "ring_01_l",
-   "count": 62
+   "count": 72
   },
   {
    "name": "ring_02_l",
-   "count": 63
+   "count": 62
   },
   {
    "name": "ring_03_l",
-   "count": 37
+   "count": 51
   },
   {
    "name": "thumb_01_l",
-   "count": 66
+   "count": 87
   },
   {
    "name": "thumb_02_l",
-   "count": 98
+   "count": 115
   },
   {
    "name": "thumb_03_l",
-   "count": 69
+   "count": 78
   },
   {
    "name": "clavicle_r",
-   "count": 691
+   "count": 493
   },
   {
    "name": "upperarm_r",
-   "count": 4370
+   "count": 4106
   },
   {
    "name": "lowerarm_r",
-   "count": 2035
+   "count": 2446
   },
   {
    "name": "hand_r",
-   "count": 694
+   "count": 838
   },
   {
    "name": "index_01_r",
-   "count": 70
+   "count": 78
   },
   {
    "name": "index_02_r",
-   "count": 63
+   "count": 71
   },
   {
    "name": "index_03_r",
-   "count": 36
+   "count": 45
   },
   {
    "name": "middle_01_r",
-   "count": 77
+   "count": 84
   },
   {
    "name": "middle_02_r",
-   "count": 86
+   "count": 90
   },
   {
    "name": "middle_03_r",
-   "count": 43
+   "count": 52
   },
   {
    "name": "pinky_01_r",
-   "count": 40
+   "count": 50
   },
   {
    "name": "pinky_02_r",
-   "count": 32
+   "count": 39
   },
   {
    "name": "pinky_03_r",
-   "count": 37
+   "count": 41
   },
   {
    "name": "ring_01_r",
-   "count": 80
+   "count": 73
   },
   {
    "name": "ring_02_r",
@@ -157,59 +157,59 @@
   },
   {
    "name": "ring_03_r",
-   "count": 52
+   "count": 59
   },
   {
    "name": "thumb_01_r",
-   "count": 63
+   "count": 89
   },
   {
    "name": "thumb_02_r",
-   "count": 127
+   "count": 142
   },
   {
    "name": "thumb_03_r",
-   "count": 72
+   "count": 86
   },
   {
    "name": "neck_01",
-   "count": 1426
+   "count": 1433
   },
   {
    "name": "head",
-   "count": 8570
+   "count": 7101
   },
   {
    "name": "thigh_l",
-   "count": 8884
+   "count": 10112
   },
   {
    "name": "calf_l",
-   "count": 9407
+   "count": 8287
   },
   {
    "name": "foot_l",
-   "count": 737
+   "count": 356
   },
   {
    "name": "ball_l",
-   "count": 1866
+   "count": 2215
   },
   {
    "name": "thigh_r",
-   "count": 8192
+   "count": 9284
   },
   {
    "name": "calf_r",
-   "count": 9963
+   "count": 9208
   },
   {
    "name": "foot_r",
-   "count": 683
+   "count": 346
   },
   {
    "name": "ball_r",
-   "count": 1827
+   "count": 2133
   }
  ]
 }

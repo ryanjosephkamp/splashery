@@ -488,6 +488,15 @@ others. The world's `shirt` color dyes the white T-shirt.
   through), retargets the capture onto the rig bone by bone, decimates the lighter level and exports
   both GLBs and `human.json`. Its header has the commands.
 
+**The person as splats** (`?character=splat-person`, a trial for splats mode): the build tool
+samples the person's textured surface at rest into 90,000 splats (flat, 4 mm across, facing out of
+the surface), drops any sample with another surface just above it (skin under the T-shirt), and
+gives each splat to the bone that moves it most (`human-splats.bin` and `.json`). In the page each
+bone's splats are one rigid piece on that bone, driven by the same skeleton and clips (the model's
+meshes are hidden), so parts turn as solid pieces and nothing bends; the tier's character budget
+(`CHARACTER_SPLATS`) sets how many are drawn. At phone distance it reads as a real person; up close
+it is grainier than the kit-built splat character, which stays splats mode's default.
+
 The earlier mesh character (`?character=kenney`) is Kenney's "Animated Characters: Protagonists"
 (CC0), built by `tools/world-character.mjs` into `character.glb`, with a walk made from its run.
 Collision, the camera and the controls are the same for every character.

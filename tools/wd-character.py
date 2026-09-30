@@ -837,15 +837,16 @@ def bake_splats(bpy, body, rig):
     skip = np.isin(mats, [i for i, n in enumerate(names) if n in ("lashes", "hair")])
     area = np.where(skip, 0, area)
     n = SPLATS
-    pick = rng.choice(len(tris), size=n * 2, p=area / area.sum())
-    r1 = np.sqrt(rng.random(n * 2))
-    r2 = rng.random(n * 2)
+    pick = rng.choice(len(tris), size=n * 3, p=area / area.sum())
+    r1 = np.sqrt(rng.random(n * 3))
+    r2 = rng.random(n * 3)
     wa, wb, wc = 1 - r1, r1 * (1 - r2), r1 * r2
+    # (Sampled twice over: hidden and see-through samples are dropped below.)
     pos = wa[:, None] * a[pick] + wb[:, None] * b[pick] + wc[:, None] * c[pick]
     nrm = cross[pick] / np.maximum(np.linalg.norm(cross[pick], axis=1)[:, None], 1e-9)
     tuv = wa[:, None] * uvs[loops[pick, 0]] + wb[:, None] * uvs[loops[pick, 1]] + wc[:, None] * uvs[loops[pick, 2]]
-    col = np.zeros((n * 2, 3), np.float32)
-    alpha = np.ones(n * 2, np.float32)
+    col = np.zeros((n * 3, 3), np.float32)
+    alpha = np.ones(n * 3, np.float32)
     for mi, (kind, data) in enumerate(images):
         sel = mats[pick] == mi
         if not sel.any():
@@ -858,7 +859,30 @@ def bake_splats(bpy, body, rig):
         y = np.clip((tuv[sel, 1] % 1) * h, 0, h - 1).astype(int)
         col[sel] = data[y, x, :3]
         alpha[sel] = data[y, x, 3]
-    keep = alpha > 0.5
+    # Only what can be seen: a sample with another surface just above it
+    # (skin under the T-shirt, the tee under the hair) is dropped, since
+    # splats don't hide each other the way a model's depth test does.
+    from mathutils import Vector
+    from mathutils.bvhtree import BVHTree
+
+    # (Hair strands and lashes don't hide what is under them: the hair cap
+    # stands in for the strands.)
+    solid = [t.vertices[:] for t, sk in zip(tris, skip) if not sk]
+    tree = BVHTree.FromPolygons([v.co[:] for v in me.vertices], solid, all_triangles=True)
+    seen = np.ones(len(pos), bool)
+    for i in range(len(pos)):
+        if alpha[i] <= 0.5:
+            continue
+        o = Vector(pos[i]) + Vector(nrm[i]) * 0.0015
+        seen[i] = tree.ray_cast(o, Vector(nrm[i]), 0.03)[0] is None
+    keep = (alpha > 0.5) & seen
+    for mi, nm in enumerate(names):
+        sel = keep & (mats[pick] == mi)
+        if sel.any():
+            log(f"  {nm}: {int(sel.sum())} samples, mean color {np.round(col[sel].mean(0), 2)}")
+    low = keep & (pos[:, 2] > 0.93) & (pos[:, 2] < 1.03) & (col[:, 1] > col[:, 0] + 0.08)
+    log("  greenish at the waist, by material:", np.bincount(mats[pick][low], minlength=len(names)).tolist(), names)
+    log("splats: hidden samples dropped", int((~seen).sum()), "of", len(pos))
     pos, nrm, col, pick = pos[keep][:n], nrm[keep][:n], col[keep][:n], pick[keep][:n]
     # A little light baked in (splats aren't lit): the tops lighter.
     col = np.clip(col * (0.8 + 0.2 * nrm[:, 2:3]), 0, 1)

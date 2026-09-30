@@ -188,6 +188,23 @@ const SCENES = {
     { move: { x: 1, run: true }, secs: 1.6 },
     { hold: 1.0 },
   ],
+  // Walking through the boulder garden: the scanned boulders up close, the
+  // regraded trees behind.
+  "props-r3": [
+    { place: [7, 12.5, 90], camera: { distance: 4, pitch: 0.2 }, noCards: true },
+    { hold: 0.5 },
+    { move: { y: 1 }, secs: 3.2 },
+    { move: { y: 0.7 }, look: [0.9, 0], secs: 2.6 },
+    { hold: 0.8 },
+  ],
+  // The island wide (from the air), then near (a walk along the shore).
+  "island-r3": [
+    { start: true, overview: true, noCards: true, hold: 3 },
+    { overviewOff: true, place: [-23, -9, 0], camera: { distance: 5.2, pitch: 0.3 } },
+    { hold: 0.3 },
+    { move: { y: 1 }, secs: 3.2 },
+    { move: { y: 1 }, look: [-0.7, 0], secs: 1.6 },
+  ],
   // Following the character at the normal camera: along the west beach,
   // then up through the grass.
   "character-walk-r3": [
@@ -295,6 +312,12 @@ async function record(scene, url, tag = null, query = "") {
     // The camera's distance and tilt first, so a new place starts with them.
     if (s.camera)
       await page.evaluate((c) => Object.assign(window.__world.world.camera, c), s.camera);
+    if (s.overviewOff)
+      await page.evaluate(() => {
+        window.__world.world.overview = false;
+        window.__world.page.started = true;
+        document.getElementById("hud").hidden = false;
+      });
     if (s.place) {
       await page.evaluate((p) => {
         window.__world.place(p[0], p[1], p[2]);
