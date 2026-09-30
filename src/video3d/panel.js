@@ -146,6 +146,9 @@ export function progressCard() {
       err.textContent = message;
       err.hidden = false;
       preview.hidden = true;
+      const close = el("button", { type: "button", id: "v3d-close" }, "Hide");
+      close.addEventListener("click", () => (root.hidden = true));
+      buttons.replaceChildren(close);
     },
     // result: videoTo3D's; onSave(): saves the PLY.
     done(result, { onSave, onClose } = {}) {

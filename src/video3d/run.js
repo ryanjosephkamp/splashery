@@ -116,7 +116,19 @@ export async function videoTo3D(file, opts = {}) {
     await s.load(files);
     mark("decode");
     if (opts.signal?.aborted) throw new DOMException("Stopped", "AbortError");
-    const recon = await s.solve({ signal: opts.signal });
+    let recon;
+    try {
+      recon = await s.solve({ signal: opts.signal });
+    } catch (e) {
+      if (e?.name === "AbortError") throw e;
+      // Splat.js says why in its own words (kept in the log); the card says what to try.
+      log.push(`solve failed: ${e?.message || e}`);
+      throw new Error(
+        /parallax|overlap|initiali|register/i.test(e?.message || "")
+          ? "The camera path could not be worked out: the frames show the scene from too nearly the same place, or share too little. Try a stretch where the camera moves more (a walk, an orbit, a low flight), or a longer stretch at fewer frames a second."
+          : `The camera path could not be worked out (${e?.message || e}).`,
+      );
+    }
     mark("path");
     if (!recon?.cams?.length || recon.cams.length < 3)
       throw new Error(
