@@ -204,8 +204,10 @@ Model: Opus 5.5 (claude-opus-5-5), default effort.
 - A tap that re-aims the zoomed-in ellipsoids goes through the pick pass; it lands where the
   magnified splats are drawn, and the recipe maps it back.
 
-- The Effect review page's asset storage is full (1 GB). The galaxy r2 clip at 2× (14.7 MB) and the
-  nucleus clip didn't fit, so they were posted at 1.5×.
+- Page 1 of the Effect review filled its 1 GB of clip storage during the r2 round.
+  `sci-microscope-r2` and the source cards are on page 1; `sci-galaxy-r2` and
+  `sci-microscope-nucleus` are on page 2 (https://claude.ai/artifact/BSayVkzQ2FKESesrkrSUMK) as
+  MP4s, and page 1's `sci-galaxy` has `replacedBy: "page2:sci-galaxy-r2"`.
 
 ## For the Operator
 
