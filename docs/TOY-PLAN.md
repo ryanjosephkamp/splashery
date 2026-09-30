@@ -2158,7 +2158,8 @@ Proposals below are suggestions; the owner may change them.
 - **Picture lab** (`picture-lab`). Now: tap: Next page, or play and pause. Plan: new effect (E6).
   - Owner: The Pictures engine lane's test toy (labs only), from the owner's notes of September 27
     and 28, 2026.
-  - Effect: A flat sheet showing what you open: a tap turns to the next page of a PDF, or plays and
+  - Effect: A flat sheet showing what you open: a tap on the right of the page turns to the next
+    page of a PDF, on the left goes back (the pages slide, they don't flip), or a tap plays and
     pauses a video.
   - Sound: A soft paper swish and a light tap.
 - **Your book** (`your-book`). Now: tap: Turn the page. Plan: keep.
@@ -2174,7 +2175,10 @@ Proposals below are suggestions; the owner may change them.
   - Improved: Books: a tap opens the cover, then turns each leaf over (about 1 s), the page curling
     as it goes with the next page on its back; at the end a tap closes the book. Previous and Next
     in the Toy tab turn back and forth. The page shape follows the PDF, and only the pages reached
-    are built.
+    are built. Books r3: a tap on the right page turns forward and on the left goes back (stapled
+    paper: the top quarter of the page goes back); a page can be pulled over by hand, turning if let
+    go past halfway or flicked and falling back otherwise; the turn lifts at once, the page curling
+    as it goes, with no bend before it moves.
   - Sound: A paper swish and flutter, and a soft thud as the page lands.
 - **Photo album** (`photo-album`). Now: tap: Turn the page. Plan: keep.
   - Owner: Lane Books, from the owner's notes of September 27 and 28, 2026 (Pages into Splats).
@@ -2186,7 +2190,8 @@ Proposals below are suggestions; the owner may change them.
     photo corners, one or two to a page as fits their shapes, with the file names as captions.
   - Improved: Books: a tap opens the leather, linen or scrapbook cover, then turns the thick pages
     (about 1 s each), the photos mounted in photo corners with their file names beneath; at the end
-    a tap closes the album.
+    a tap closes the album. Books r3: taps by where they land, as the book; a page pulled by hand
+    lags the finger a little, falls back more readily and settles slowly, like a heavy card page.
   - Sound: A lower card swish and a firm thud.
 - **Picture frame** (`picture-frame`). Now: tap: Swing the frame. Plan: keep.
   - Owner: Lane Books, from the owner's notes of September 27 and 28, 2026 (Pages into Splats).
@@ -2194,7 +2199,10 @@ Proposals below are suggestions; the owner may change them.
     piece, and it settles like a pendulum (about 3 s). Wood, gold, modern or digital frames; the
     digital one fades through a set of photos.
   - Improved: Books: a tap swings the frame, its wire and photo about the nail like a damped
-    pendulum, smaller each swing, until it hangs straight again (3 s).
+    pendulum, smaller each swing, until it hangs straight again (3 s). Books r3: a molded gold frame
+    (a bead, a flat, a cove and a big bead, burnished on the raised parts); every frame plays a GIF
+    or a video on a loop; the digital frame lists its photos in the Toy tab to reorder, and steps
+    through them in order or at random.
   - Sound: A knock on the wall, the wire creaking on the nail, and a softer knock.
 - **Screen** (`screen`). Now: tap: Switch on, then play or pause. Plan: keep.
   - Owner: From the owner's notes of September 28, 2026 (lane Screens; labs only).
