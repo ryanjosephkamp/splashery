@@ -752,9 +752,9 @@ export const TOY_SOUNDS = {
   "birthday-cake": {
     on: [
       { voice: "breath", f: 1300, to: 0.5, decay: 0.5, vol: 0.7 },
-      { voice: "grand", at: 0.5, notes: "F5 - - F5 E5 - - - C5 - - - D5", step: 0.15, hold: 0.35, vol: 0.8 }, // prettier-ignore
-      { voice: "grand", at: 2.9, f: "C5", hold: 1.2, vol: 0.8 },
-      { voice: "grand", at: 0.5, notes: "- - - - F3+A3+C4 - - - - - - - G3+B3+F4 - - - C3+E3+G3", step: 0.15, hold: 1.2, vol: 0.45 }, // prettier-ignore
+      { voice: "grand", at: 0.5, notes: "F5 - - F5 E5 - - - C5 - - - D5", step: 0.15, hold: 0.35, vol: 0.6 }, // prettier-ignore
+      { voice: "grand", at: 2.9, f: "C5", hold: 1.2, vol: 0.6 },
+      { voice: "grand", at: 0.5, notes: "- - - - F3+A3+C4 - - - - - - - G3+B3+F4 - - - C3+E3+G3", step: 0.15, hold: 1.2, vol: 0.35 }, // prettier-ignore
     ],
     off: [
       { voice: "scrape", f: 2800, rate: 50, decay: 0.2, vol: 0.7 },
@@ -1301,9 +1301,9 @@ export const TOY_SOUNDS = {
   // domain) on the piano; off, the branches' soft rustle.
   "decorated-tree": {
     on: [
-      { voice: "grand", notes: "E5 E5 E5 - E5 E5 E5 - E5 G5 C5 D5", step: 0.2, hold: 0.3, vol: 0.7 }, // prettier-ignore
-      { voice: "grand", at: 2.4, f: "E5", hold: 1, vol: 0.7 },
-      { voice: "grand", notes: "C3+G3 - - - C3+G3 - - - C3+G3 - - - C3+E3+G3", step: 0.2, hold: 0.7, vol: 0.4 }, // prettier-ignore
+      { voice: "grand", notes: "E5 E5 E5 - E5 E5 E5 - E5 G5 C5 D5", step: 0.2, hold: 0.3, vol: 0.5 }, // prettier-ignore
+      { voice: "grand", at: 2.4, f: "E5", hold: 1, vol: 0.5 },
+      { voice: "grand", notes: "C3+G3 - - - C3+G3 - - - C3+G3 - - - C3+E3+G3", step: 0.2, hold: 0.7, vol: 0.3 }, // prettier-ignore
     ],
     off: { voice: "rustle", f: 2800, n: 10, decay: 0.6, vol: 0.4 },
   },

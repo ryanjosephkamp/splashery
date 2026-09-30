@@ -2395,14 +2395,15 @@ const SOUND_B = {
   },
 };
 Object.assign(VOICES, SOUND_B);
-// Each Sound B voice's level, measured like the others (`node tools/sound-check.mjs --voices`).
+// Each Sound B voice's level, measured like the others (`node tools/sound-check.mjs --voices`);
+// glow is set lower than measured (1.35), so a sustained pad stays under the tap's main sound.
 Object.assign(LEVEL, {
   flame: 2.79, rustle: 8.05, pageflip: 3.48, bite: 3.72, shellcrack: 2.97, kernel: 7.55,
   dice: 4.03, chug: 4.26, motor: 1.35, rotor: 3.37, creak: 12, snip: 10.38, trumpet: 2.3,
   bowstring: 1.54, slosh: 5.05, launch: 1.77, bang: 0.64, hooves: 4.51, crowd: 7.54,
   pebble: 6.5, spintop: 3.75, yoyo: 3.07, twist: 8.18, sproing: 3.62, balloonpop: 1.56,
   flybuzz: 1.34, croak: 3.78, owlhoot: 1.47, melt: 4.26, stretch: 12, peel: 10.92,
-  gurgle: 5.78, swim: 4.07, keytap: 7.55, fan: 6.84, hit: 0.75, glow: 1.35, arc: 5.73,
+  gurgle: 5.78, swim: 4.07, keytap: 7.55, fan: 6.84, hit: 0.75, glow: 0.75, arc: 5.73,
   whoom: 2.43, jingle: 5.71, chessmove: 2.82, clockwork: 6.53, alarmbell: 4.19,
 }); // prettier-ignore
 VOICE_NAMES.push(...Object.keys(SOUND_B));
