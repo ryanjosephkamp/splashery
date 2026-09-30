@@ -583,8 +583,8 @@ class App {
       onTap: (e) => {
         if (this.ui.sheetOpen()) this.ui.collapseSheet();
         else if (this.tool === "orbit" && !this.spaceHeld) {
-          if (player.canFocus())
-            this.tapOrFocus(e); // Page focus
+          // Page focus (lane Books r4): a toy with recipe.focus takes double-taps.
+          if (player.canFocus()) this.tapOrFocus(e);
           else this.tapToy(e);
         }
       },
@@ -623,7 +623,8 @@ class App {
         cam.zoomBy(Math.exp(e.deltaY * unit * (e.ctrlKey ? 0.01 : 0.0015)));
         player.stage.requestRender();
       },
-      // (A toy that focuses on a page takes its double-taps in tapOrFocus.)
+      // Page focus (lane Books r4): a toy that focuses on a page takes its
+      // double-taps in tapOrFocus (↺ and the R key still reset its view).
       onDoubleTap: () => player.canFocus() || player.resetCamera(),
       onToolStart: (e) => this.toolStart(e),
       onToolMove: (e) => this.toolMove(e),
@@ -640,7 +641,7 @@ class App {
     if (hit) player.act(hit);
   }
 
-  // Page focus (lane Books): on a toy that can focus on a page, a double-tap
+  // Page focus (lane Books r4): on a toy that can focus on a page, a double-tap
   // focuses (or lets go), so a single tap waits a moment to be sure.
   tapOrFocus(e) {
     const last = this.lastTap;

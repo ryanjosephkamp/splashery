@@ -933,20 +933,23 @@ export class Player {
     const recipe = this.toyInfo?.recipe;
     const v = recipe?.focus ? this.motion.out?.view : null;
     if (!v) {
-      this.pageView = null;
+      // (Kept while the same toy rebuilds; another toy starts afresh.)
+      if (!recipe?.focus) this.pageView = null;
       return false;
     }
     const was = this.pageView;
-    if (!was || was.recipe !== recipe || was.key !== v.key) {
+    if (!was || was.focus !== recipe.focus || was.key !== v.key) {
       // A toy that opens on its whole self keeps the view it opened with.
-      const first = !was || was.recipe !== recipe;
+      // (A rebuild, for a new option, is the same toy: its recipe object is
+      // new, its focus the same.)
+      const first = !was || was.focus !== recipe.focus;
       // (Leaving the whole toy, the view it had is kept to come back to.)
       const back = first
         ? null
         : was.center
           ? was.back
           : { target: cam.target.slice(), ...cam.tgt };
-      this.pageView = { recipe, key: v.key, dist: 0, center: !!v.center, back };
+      this.pageView = { focus: recipe.focus, key: v.key, dist: 0, center: !!v.center, back };
       if (v.center || !first) this.glideTo(v);
     }
     // A hand on the view stops the glide; a zoom out lets a page go.

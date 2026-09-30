@@ -1104,6 +1104,8 @@ test.describe("your book, the album and the frame (in the app)", () => {
     await waitSheets(page);
     await glided(page, "all");
     expect(await pageNow(page)).toBe(1);
+    const cam = await page.evaluate(() => { const c = window.__splashery.player.camera; return [c.tgt.distance, c.home.distance]; }); // prettier-ignore
+    expect(Math.abs(cam[0] - cam[1])).toBeLessThan(0.01);
   });
 
   for (const [w, h] of [
