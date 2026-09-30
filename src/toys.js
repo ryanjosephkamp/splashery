@@ -3420,11 +3420,13 @@ export function categoryLabel(id) {
 }
 
 // A scan's looks as a Toy tab option, and the look a scene's options pick
-// (null for a scan without looks). Only the look's id is saved.
+// (null for a scan without looks). Only the look's id is saved. A shelf
+// shape's looks carry generator settings instead of files, and `lookLabel`
+// names the choice ("Planet").
 export function lookOption(def) {
   return {
     key: "look",
-    label: "Look",
+    label: def.lookLabel || "Look",
     type: "select",
     default: def.looks[0].id,
     choices: def.looks.map((l) => ({ id: l.id, label: l.label })),
