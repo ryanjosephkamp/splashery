@@ -27,6 +27,7 @@ import {
 } from "./loaders.js";
 import { findToy, assetURL, lookOption, pickLook, labsOn } from "./toys.js";
 import { pickKernel } from "./kernels.js"; // Lab
+import { pickSharpness } from "./sharpness.js"; // Sharpness
 import { createScene, THEMES } from "./state.js";
 import { mulberry32, mixSeed, hash32 } from "./noise.js";
 import { Pictures } from "./pictures.js"; // Pictures
@@ -339,6 +340,15 @@ export class Player {
     // Lab: a sharper splat kernel, labs only (src/kernels.js).
     const kernelParam = new URLSearchParams(location.search).get("kernel");
     this.stage.setKernel(pickKernel({ labs: labsOn(), param: kernelParam, recipe: info.kernel }));
+    // Sharpness: the render levers, labs only (src/sharpness.js).
+    this.stage.setSharpness(
+      pickSharpness({
+        labs: labsOn(),
+        params: new URLSearchParams(location.search),
+        recipe: info.recipe?.render,
+        native: window.devicePixelRatio || 1,
+      }),
+    );
     if (!this.pictures) this.closeMedia(); // Pictures
     this.patternOn = false;
     this.applyPattern();
@@ -1238,7 +1248,8 @@ export class Player {
       this.pickDirty = this.pickDirty || animating;
       this.stage.requestRender();
     }
-    this.stage.setBusy(busy && !this.loading);
+    const drag = !!this.camera.dragging || !!this.stroke; // Sharpness
+    this.stage.setBusy(busy && !this.loading, drag && !this.loading);
     // A recipe's pieces moved far from where they were built (a cube's
     // turned layer): sort them again where they stand now.
     if (this.motion.out?.resort) this.resortTokens();
