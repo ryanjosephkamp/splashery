@@ -1657,10 +1657,10 @@ export class Flame {
       age[i] += dt;
       const i3 = i * 3;
       if (age[i] >= ttl[i] * (pkind[i] === KIND.flame ? pinch : 1)) {
-        // The flame's last heat becomes smoke (a trace when it burns
+        // The flame's last heat becomes smoke (none when it burns
         // cleanly, as a candle does; a lot when it is put out).
         if (this.smoke && pkind[i] === KIND.flame) {
-          const p = this.on ? (this.spec.smokeRate ?? 0.01) : 0.6;
+          const p = this.on ? (this.spec.smokeRate ?? 0) : 0.6;
           if (rand() < p)
             this.smoke.spawn(pos[i3], pos[i3 + 1], pos[i3 + 2], vel[i3] * 0.5, vel[i3 + 1] * 0.5, vel[i3 + 2] * 0.5, 1.1); // prettier-ignore
         }

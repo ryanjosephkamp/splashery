@@ -133,22 +133,27 @@ Chromium's CPU throttling as the stand-in phone (low 6×, mid 4×, high 2×, max
 
 ## Measured
 
-`node tools/fl-measure.mjs` on September 30, 2026 (after r2): the solver's time per 30 fps frame
+`node tools/fl-measure.mjs` on September 30, 2026 (after r3): the solver's time per 30 fps frame
 (ms, median over 4 s after a tap; stepping, packing and the splat shapes), in Chromium with its CPU
 slowed down as each tier's stand-in. A frame is 33 ms; the solver runs in a worker, so it doesn't
-slow the drawing.
+slow the drawing. The aim is about 22 ms on the stand-in (two thirds of a frame), leaving headroom.
 
 | Scene      | low (6×) | mid (4×) | high (2×) | max (1×) |
 | ---------- | -------- | -------- | --------- | -------- |
-| Pour water | 15       | 21       | 36        | 25       |
-| Pour soda  | 18       | 31       | 56        | 34       |
-| Pour honey | 12       | 18       | 31        | 21       |
-| Splash     | 14       | 15       | 33        | 9        |
-| Candle     | 0.9      | 0.5      | 0.4       | 0.2      |
-| Hot cup    | 0.2      | 0.1      | 0.1       | 0.1      |
+| Pour water | 16       | 20       | 37        | 21       |
+| Pour soda  | 19       | 30       | 59        | 33       |
+| Pour honey | 13       | 20       | 33        | 19       |
+| Splash     | 14       | 14       | 31        | 9        |
+| Candle     | 0.7      | 0.3      | 0.3       | 0.2      |
+| Hot cup    | 0.1      | 0.1      | 0.1       | 0.1      |
 
-Measured again after r2 (four splats per particle, the level sheet and the soda's denser foam). The
-soda pour is the tightest: its head takes up to 3.5 times the liquid's budget in foam flecks.
+The soda pour is the tightest (40 ms on its slowest tenth of frames on mid): its foam head is about
+a third of its cost. Since r3, phones (low and mid) get 0.7 times the foam flecks, each counting for
+more, so the head covers the same (`diffuse`); halving them would save about 3 ms more on mid.
+
+What the stand-ins mean: every phone gets the mid tier (touch and a small screen), and so do
+machines with 4 cores or 4 GB. Mid's stand-in, this build machine's processor slowed 4×, is roughly
+a budget Android phone from about 2019; most phones in use are faster, so it is a cautious test.
 
 Liquid particles at most (the glass, the splash): low 420 and 455, mid 540 and 585, high 1,200 and
 1,300, max 1,620 and 1,755. The solver costs about 4.4 µs per particle per 1/120 s step on this
@@ -175,7 +180,7 @@ and compares it with published values. Measured on September 30, 2026:
 - Fixed in this round: the flame's flicker was a 1.7 Hz sway; it now puffs at 11 Hz (the upper flame
   stretches and its tip pinches off, `flicker` and `pinch`). Smoke and steam spread twice too wide
   (0.26 and 0.29): the Fluid lab's swirl is calmer. A burning candle trailed a gray wisp; a clean
-  flame now leaves only a trace (`smokeRate`, 0.01).
+  flame now makes none (`smokeRate`, 0 by default).
 - The dam break follows the measured front early (T = 1.2: 1.37 against 1.44) and then falls behind:
   position-based fluids lose a little energy each step for stability. Eight solver passes instead of
   three close part of the gap, at over twice the cost. A narrow channel (8 particles wide) drags the

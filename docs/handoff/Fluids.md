@@ -111,11 +111,11 @@ Model: Opus 5.5 (claude-opus-5-5), default effort.
   `tools/fl-evidence.mjs` puts each clip beside real reference photos from Wikimedia Commons (CC0,
   CC BY or public domain, checked on each file's page, credited on the card; the photos are not
   committed). Fixed from the checks: the flame now flickers at 11 Hz (it swayed at 1.7), smoke and
-  steam spread at 0.125 and 0.122 (they were twice too wide), and a burning candle leaves only a
-  trace of smoke. Still off, and said so on the cards: the dam-break front runs at about 63% of
-  Martin and Moyce's, honey stops instead of creeping, and a thin stream doesn't narrow as it falls.
-  Phones get fewer, stronger soda foam flecks (headroom for the soda pour). Cards: `fl-pour-r3`,
-  `fl-splash-r3`, `fl-soda-r3`, `fl-flame-r2`, `fl-smoke-r2`, `fl-physics`, `fl-phone-r3`.
+  steam spread at 0.125 and 0.122 (they were twice too wide), and a burning candle makes no smoke.
+  Still off, and said so on the cards: the dam-break front runs at about 63% of Martin and Moyce's,
+  honey stops instead of creeping, and a thin stream doesn't narrow as it falls. Phones get fewer,
+  stronger soda foam flecks (headroom for the soda pour). Cards: `fl-pour-r3`, `fl-splash-r3`,
+  `fl-soda-r3`, `fl-flame-r2`, `fl-smoke-r2`, `fl-physics`, `fl-phone-r3`.
 - September 30, 2026 (r2): from the Operator's pre-review notes (and the owner's "fix" mark on
   `fl-pour`), the liquids were redrawn: four splats per particle, glassy streams with a rim and a
   highlight, discs on smoothed normals, a level sheet for a calm thin liquid in a glass, a soda head
@@ -169,9 +169,9 @@ Model: Opus 5.5 (claude-opus-5-5), default effort.
 
 - Colliders don't move with parts yet (no tipping jug, no stirring spoon).
 - Every scene fits a 30 fps frame on the mid tier's stand-in (4× CPU throttling; the soda pour is
-  the tightest at 31 ms after r2, and 34 ms on max at 1×, from its dense foam). The high tier's 2×
-  stand-in is over for the pours (34 to 48 ms), but it is pessimistic for the desktops it covers; at
-  1× the high budget takes about 17 ms.
+  the tightest at 30 ms after r3, 40 ms on its slowest tenth of frames, and 33 ms on max at 1×, from
+  its dense foam). The high tier's 2× stand-in is over for the pours (31 to 59 ms), but it is
+  pessimistic for the desktops it covers; at 1× the high budget takes about 17 ms.
 - The level sheet is for thin liquids in a `glass` collider only; a pool in a bowl, or on a floor,
   is drawn from its particles alone.
 - A soda's head thins into patches as it fades (as a real one does), and the very start of a pour
