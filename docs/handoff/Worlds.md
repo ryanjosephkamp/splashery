@@ -206,3 +206,46 @@ Model: Opus 5.5 (default effort).
 - Lessons: build limbs as lathes (even spreading draws a lattice on `k.cone`), keep solids at
   opacity 1 and color noise low, and judge it with `tools/world-clip.mjs … character` (a close-up at
   2x).
+
+## r2: a sharper island
+
+Branch `claude/lane-worlds-r2`, PR "Phase Worlds r2: a sharper island". Built by Opus 5.5.
+
+The owner's words (September 29, 2026), word for word: "My main criticism is about the worlds: still
+just a bit too grainy, and the player/character looks way too low-poly and simplistic. But, the
+mechanics are solid! So it primarily seems like design problems and sharpness, not physics and
+mechanics."
+
+The Operator's plan: the character goes to a new Character lane (it owns `src/worlds/character.js`
+and the character section of docs/WORLDS.md). This round takes the grain out of everything else:
+
+1. The ground, the grass, the sand and rocks, the water's surface, the sky and the signs, with
+   Fidelity A's method (even placement, full opacity, full density at each tier, flat splats on flat
+   ground, thin blades, clean colors with low noise).
+2. The props rebaked from the 97 toys Fidelity A and B sharpened, checked at walking distance.
+3. The render settings lane Sharpness measured (#107): the pixel-ratio cap, the resolution drop and
+   the sharp kernel, applied in `src/worlds/render.js` where they help.
+4. Within the tier budgets, measured.
+
+Cards: `wd-island-r2`, `wd-ground-r2`, `wd-props-r2`, `wd-sky-r2`.
+
+### r2 state
+
+- September 29, 2026: branch restarted from main after #78 merged.
+- The grain, measured (`tools/world-grain.mjs`, 390×844 at 2x, mid): speckle on the ground view 0.07
+  → 0.03, the shore 0.09 → 0.05, the props 0.09 → 0.05 (lower is cleaner). Lab's sharp kernel alone
+  halved it; the ground, water and sign changes make the rest visible as cleaner texture (see the
+  before and after in `wd-island-r2`).
+- Changes: an even, flat, nearly uniform ground carpet (sizes within ±7%, nearly round, fully
+  opaque, color noise ±1%); grass blades in the ground's own color; round, even water splats with a
+  soft, isotropic sheen; sign boards with a flat front face and letters placed exactly (nine splats
+  per font pixel), kept at full detail to about 80 m; bushes as solid shells; the sharp kernel on
+  every tier; the pixel ratio capped per tier (1.5, 2, 3, 3), with `?dpr=` and `?kernel=` to
+  override.
+- Cards: `wd-island-r2` (before and after), `wd-ground-r2`, `wd-props-r2`, `wd-sky-r2`.
+- The props rebake from the packs on main, so they carry Fidelity A and B's fixes.
+
+### r2 known issues
+
+- A bush seen from very close reads as a smooth green shape (solid, but plain).
+- The far sea under the aerial view is soft (large far-level splats), without grain.
