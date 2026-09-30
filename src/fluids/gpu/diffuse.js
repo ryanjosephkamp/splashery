@@ -12,6 +12,7 @@
 // Everything here is in the liquid's grid units (one cell = h).
 
 import * as pc from "../../pc.js";
+import { measure } from "../acoustic.js";
 
 export const DKIND = { spray: 1, foam: 2, bubble: 3 };
 const TEX_W = 256;
@@ -117,6 +118,24 @@ export class GpuDiffuse {
     }
     this.ready = true;
     this.spawn(d, n, elapsed);
+    // For the sound (acoustic.js), in recipe units.
+    const liq = this.liq;
+    const glass = this.glass;
+    let spray = 0;
+    let bubbles = 0;
+    for (let i = 0; i < this.n; i++) {
+      if (this.kind[i] === DKIND.spray) spray++;
+      else if (this.kind[i] === DKIND.bubble) bubbles++;
+    }
+    const a = measure(d, d.subarray(3), n, {
+      d: liq.d,
+      gravity: liq.gravity[1] * liq.h,
+      stride: 6,
+      scale: liq.h,
+      offset: liq.origin,
+      floorY: glass ? liq.origin[1] + (glass.at[1] + 1.2) * liq.h : liq.origin[1] + 2 * liq.h,
+    });
+    liq.acoustic = { ...a, spray, bubbles };
   }
 
   // The speed (cells/s) from which liquid hitting the pool traps air.

@@ -715,6 +715,8 @@ export class Player {
       profile: this.profile,
       seed: ctx.g?.seed ?? 1,
       transform: ctx.transform,
+      // Fluids r4: the liquid's sounds come from the simulation.
+      onCue: (cues) => !this.frozen && this.emit("cue", cues),
     });
   }
 

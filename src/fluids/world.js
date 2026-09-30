@@ -7,6 +7,7 @@
 import { Liquid, Gas, Flame, KIND, LIQUIDS, unit3, quatFromAxes } from "./sim.js";
 import { mulberry32 } from "../noise.js";
 import { mixSeed } from "../noise.js";
+import { measure } from "./acoustic.js";
 
 // How much of a recipe's budget each tier gets (the budget is for "high").
 export const TIER_SCALE = { low: 0.35, mid: 0.45, high: 1, max: 1.35 };
@@ -198,6 +199,33 @@ export class FluidWorld {
     this.stats.steps = steps;
     this.stats.simMs = performance.now() - t0;
     this.stats.particles = this.count();
+    this.stats.sound = this.listen(dt);
+  }
+
+  // Lane Fluids r4: what the first liquid is doing, for its sound (acoustic.js,
+  // runtime.js). The GPU liquid measures itself from its read-backs.
+  listen(dt) {
+    const sys = this.systems.find((s) => s.kind === "liquid");
+    if (!sys) return null;
+    let a = sys.acoustic;
+    if (!sys.gpu) {
+      // (every third frame is plenty for a sound)
+      this.listenAt = (this.listenAt || 0) + dt;
+      if (this.listenAt >= 0.05 || !this.lastSound) {
+        this.listenAt = 0;
+        const floor = (sys.spec.colliders || []).find((c) => c.type === "glass" || c.type === "floor"); // prettier-ignore
+        a = measure(sys.pos, sys.vel, sys.n, { d: sys.d, gravity: sys.gravity[1], stride: 3, floorY: floor ? (floor.at?.[1] ?? floor.y ?? 0) + (floor.bottom ?? 0) : 0 }); // prettier-ignore
+        let spray = 0;
+        let bubbles = 0;
+        for (let i = 0; i < (sys.dn || 0); i++) {
+          if (sys.dkind[i] === KIND.spray) spray++;
+          else if (sys.dkind[i] === KIND.bubble) bubbles++;
+        }
+        this.lastSound = { ...a, spray, bubbles };
+      }
+      a = this.lastSound;
+    }
+    return a ? { ...a, preset: sys.spec.preset || "water", d: sys.d } : null;
   }
 
   count() {

@@ -224,13 +224,6 @@ function cupScene(k) {
 
 // ---- The recipe -----------------------------------------------------------------------------
 
-const POUR_SOUND = [
-  { voice: "splash", f: 520, decay: 1.2, vol: 0.55 },
-  { voice: "bubbles", at: 0.25, n: 7, rate: 9, decay: 1.4, vol: 0.45 },
-];
-const SODA_SOUND = [...POUR_SOUND, { voice: "sizzle", at: 0.4, decay: 2.2, vol: 0.3 }];
-const THICK_SOUND = [{ voice: "gloop", f: 180, decay: 1.6, vol: 0.7 }];
-const SPLASH_SOUND = [{ voice: "splash", f: 700, decay: 1.4, vol: 0.8 }];
 const BLOW_SOUND = [
   { voice: "breath", decay: 0.8, vol: 0.8 },
   { voice: "hiss", at: 0.1, decay: 0.8, vol: 0.25 },
@@ -296,15 +289,12 @@ export const RECIPES = {
         // The red handle turns a quarter turn while it pours.
         const open = Math.min(1, Math.max(0, Math.min((e - start) / 0.25, (start + d.pour - e) / 0.25))); // prettier-ignore
         out.parts.valve = { angle: -1.35 * open };
-        if (fresh) {
-          const liquid = d.liquidId;
-          out.cues.push(liquid === "soda" ? SODA_SOUND : liquid === "honey" || liquid === "lava" ? THICK_SOUND : POUR_SOUND); // prettier-ignore
-        }
+        // (the pour's sound comes from the simulation: src/fluids/runtime.js)
       } else if (d.scene === "splash") {
         out.fluid.liquid = {
           once: { id: n, do: "drop", at: [0.05, 1.45, 0.03], radius: 0.19, vel: [0, -1.5, 0] },
         };
-        if (fresh) out.cues.push(d.liquidId === "honey" || d.liquidId === "lava" ? THICK_SOUND : SPLASH_SOUND); // prettier-ignore
+        // (its splash comes from the simulation, as it lands)
       } else if (d.scene === "candle") {
         // Blown out for three seconds, then it lights again.
         const out3 = e < 3;

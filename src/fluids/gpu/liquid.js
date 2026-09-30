@@ -136,10 +136,10 @@ export class GpuLiquid {
     // Spray and foam where it splashes; a soda's bubbles and head.
     const foam = spec.foam ?? preset.foam ?? 0;
     const fizz = spec.fizz ?? preset.fizz ?? 0;
-    if (foam > 0 || fizz > 0) {
-      const cap = Math.round((fizz > 0 ? 9000 : 2500) * (spec.diffuse ?? 1) * (tier.diffuse ?? 1));
-      this.diffuse = new GpuDiffuse(this, { foam, fizz, cap });
-    }
+    // (every liquid reads itself back for its sound, acoustic.js; one without
+    // foam keeps a token budget)
+    const cap = foam > 0 || fizz > 0 ? Math.round((fizz > 0 ? 9000 : 2500) * (spec.diffuse ?? 1) * (tier.diffuse ?? 1)) : 256; // prettier-ignore
+    this.diffuse = new GpuDiffuse(this, { foam, fizz, cap });
     if (spec.fill) this.fill(spec.fill);
   }
 

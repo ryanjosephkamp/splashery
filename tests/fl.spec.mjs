@@ -315,6 +315,29 @@ test("without WebGPU the CPU liquid runs as before, and the gas grid still draws
   expect(errors).toEqual([]);
 });
 
+test("the pour's sound follows the liquid: silent until the stream lands, then the level rises", async () => {
+  // (the owner's note: the sound "isn't in sync with fluid pour animation")
+  const { RECIPES } = await import("../src/packs/fluid-lab.js");
+  const { Kit } = await import("../src/kit.js");
+  const k = new Kit(1, { count: 20000 });
+  RECIPES["fluid-lab"].build(k, { scene: "glass", liquid: "water" });
+  const w = new FluidWorld(k.fluids, { profile: "mid", seed: 1 });
+  const rows = [];
+  for (let f = 0; f < 90; f++) {
+    w.command({ liquid: { on: f >= 15 } });
+    w.step(1 / 30);
+    rows.push({ t: f / 30, ...w.stats.sound });
+  }
+  // The tap opens the tap at 0.5 s; the stream takes a moment to fall.
+  const first = rows.find((r) => r.flux > 0);
+  expect(first.t).toBeGreaterThan(0.6);
+  expect(first.t).toBeLessThan(1.2);
+  // While it pours, liquid keeps landing, and the pool's top rises.
+  const pouring = rows.filter((r) => r.t > 1.3);
+  expect(pouring.filter((r) => r.flux > 0).length).toBeGreaterThan(pouring.length * 0.6);
+  expect(rows.at(-1).level).toBeGreaterThan(first.level + 0.05);
+});
+
 test("GPU budgets grow with the tier, and the phone tiers stay small", async () => {
   const { GPU_TIERS } = await import("../src/fluids/gpu/liquid.js");
   const { GAS_TIERS } = await import("../src/fluids/gpu/gas.js");

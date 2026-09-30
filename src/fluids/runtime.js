@@ -31,9 +31,11 @@ export class FluidRuntime {
   constructor(
     stage,
     specs,
-    { profile = "high", seed = 1, transform = null, mode = pickMode() } = {},
+    { profile = "high", seed = 1, transform = null, mode = pickMode(), onCue = null } = {},
   ) {
     this.stage = stage;
+    // r4: the liquid's own sounds, from what it does (sound(), below).
+    this.onCue = onCue;
     this.specs = specs;
     const d = stage.device;
     // Smoke, steam and flames on the gas grid (both WebGPU and WebGL2).
@@ -165,6 +167,7 @@ export class FluidRuntime {
     if (this.destroyed) return;
     const dt = this.lastT === null ? 0 : Math.max(0, Math.min(0.25, t - this.lastT));
     this.lastT = t;
+    this.sound(dt);
     if (this.fx) {
       this.fx.command(cmds);
       this.fx.step(dt);
@@ -204,6 +207,80 @@ export class FluidRuntime {
     this.pendingCmds = null;
     this.busy = true;
     this.worker.postMessage(msg, bufs ? [bufs.center.buffer, bufs.anim.buffer, bufs.shape.buffer, bufs.size.buffer] : []); // prettier-ignore
+  }
+
+  // ---- Sound (r4) ----------------------------------------------------------------------
+  // The owner's note (September 30, 2026): the Fluid lab's sound "isn't in
+  // sync with fluid pour animation, and needs to be more realistic". So it
+  // comes from the simulation (stats.sound, from acoustic.js), not the tap:
+  //   - while liquid lands in the pool: short bursts of bubbles (the sound of
+  //     water poured into water is its bubbles ringing) and a soft rush tuned
+  //     to the air above the liquid, a quarter-wave pipe that rises in pitch
+  //     as the glass fills; honey and lava land in slow gloops;
+  //   - a sudden landing (the dropped ball): one splash, sized by its flow;
+  //   - spray falling back: drips; a soda's rising bubbles: a quiet fizz.
+  // At most one cue a frame and 70 ms apart (the app's sound spaces repeats).
+  sound(dt) {
+    const s = this.stats.sound;
+    if (!this.onCue || !s || !(dt > 0)) return;
+    const st = (this.snd ||= { t: 0, next: 0, spray: 0, drips: 0, lastLoud: 0, lastSplash: -9, fizz: 0 }); // prettier-ignore
+    st.t += dt;
+    const spec = this.specs.find((x) => (x.kind || "liquid") === "liquid") || {};
+    const e = spec.emitter;
+    const thick = ["honey", "lava", "syrup"].includes(s.preset);
+    // The stream's own flow; a dropped blob lands much faster.
+    const ref = e ? Math.PI * (e.radius ?? 0.05) ** 2 * (e.speed ?? 1) : 0.05;
+    // (smoothed: quick to rise, a quarter second to fall, as the samples of
+    // a thin stream at the pool's top come and go)
+    const raw = s.flux / ref;
+    st.env = raw > (st.env || 0) ? raw : (st.env || 0) * Math.exp(-dt / 0.25);
+    const loud = Math.min(1.5, st.env);
+    const layers = [];
+    const res = this.resonance(s.level);
+    const burst = e ? 3.5 : 2; // (a pour never splashes like a dropped ball)
+    if (raw > burst && st.lastLoud <= burst && st.t - st.lastSplash > 0.6) {
+      // A sudden landing (the ball): one splash.
+      st.lastSplash = st.t;
+      layers.push(thick ? { voice: "gloop", f: 110, decay: 1.4, vol: 0.7 } : { voice: "splash", f: 900 + 400 * Math.random(), decay: 1.1, vol: Math.min(0.9, 0.35 + 0.1 * raw) }); // prettier-ignore
+    } else if (loud > 0.05 && st.t >= st.next) {
+      const v = Math.min(1, loud);
+      if (thick) {
+        st.next = st.t + 0.22 + 0.2 * Math.random();
+        layers.push({ voice: "gloop", f: 110 + 70 * Math.random(), decay: 0.7, vol: 0.35 * v });
+      } else {
+        st.next = st.t + 0.07 + 0.05 * Math.random();
+        layers.push({ voice: "bubbles", n: 2 + Math.round(3 * v), f: (res ? res * 1.6 : 900) * (0.8 + 0.4 * Math.random()), decay: 0.35, vol: 0.3 * v }); // prettier-ignore
+        if (res) layers.push({ voice: "breath", f: res, to: 1.03, decay: 0.25, vol: 0.14 * v });
+      }
+    }
+    st.lastLoud = raw;
+    // Drips: spray that has come back down.
+    st.drips += Math.max(0, st.spray - (s.spray || 0)) * 0.25;
+    st.spray = s.spray || 0;
+    if (!layers.length && st.drips >= 1 && st.t >= st.next) {
+      st.drips = Math.min(st.drips - 1, 3);
+      st.next = st.t + 0.09;
+      layers.push({ voice: "drip", n: 1, f: 800 + 700 * Math.random(), decay: 0.8, vol: 0.3 });
+    }
+    // A soda's fizz while its bubbles rise.
+    st.fizz -= dt;
+    if (!layers.length && (s.bubbles || 0) > 20 && st.fizz <= 0 && st.t >= st.next) {
+      st.fizz = 0.3;
+      st.next = st.t + 0.07;
+      layers.push({ voice: "sizzle", decay: 0.4, vol: Math.min(0.22, s.bubbles / 3000) });
+    }
+    if (layers.length) this.onCue([layers.length === 1 ? layers[0] : layers]);
+  }
+
+  // The air above the liquid in the glass rings as a pipe closed at the
+  // liquid: f = c / 4(L + 0.6 r), in Hz (the recipe's unit to meters).
+  resonance(level) {
+    const g = this.specs.flatMap((x) => x.colliders || []).find((c) => c.type === "glass");
+    if (!g) return null;
+    const unit = this.specs.find((x) => x.unit)?.unit ?? 0.33;
+    const top = (g.at?.[1] ?? 0) + (g.height ?? 1);
+    const L = Math.max(0.005, top - Math.max(level ?? 0, (g.at?.[1] ?? 0) + (g.bottom ?? 0))) * unit; // prettier-ignore
+    return Math.min(3000, Math.max(150, 343 / (4 * (L + 0.6 * (g.radius ?? 0.3) * unit))));
   }
 
   destroy() {
