@@ -50,3 +50,35 @@ HOW THIS LANE RUNS
 - PR: one draft PR against main with the five sections (Summary, Verification, Deviations, Known issues, What was cut), and the model that built it in the Summary. When main moves, merge it into your branch.
 - After you post your cards, check the owner's marks (the "verdicts" collection, ids starting with your prefix) about once an hour with a scheduled check-in (send_later). Fix every "fix" in the same PR, post the new clip as a "-r2" card, and set replacedBy on the old one. Stop the check-ins once your PR is merged or closed.
 - Finish every working turn with a short final message that starts with "READY:" (PR link, card ids, test results, anything for the Operator), "WORKING:" (what's left), or "BLOCKED:" (exactly what you need).
+
+## State
+
+Model: Opus 5.5 (the lane's assigned model), default effort, the whole lane.
+
+- Splat.js vendored in `vendor/splatjs/` (MIT, commit 88efe9a, 20 modules, 544 KB; its own video
+  reader, which needs Mediabunny under MPL-2.0, is left out). It needs WebGPU and nothing else: no
+  SharedArrayBuffer, no cross-origin isolation, so GitHub Pages serves it as is.
+- `src/video3d/`: frames (the stretch, the frame rate and the sharpest frame of each window),
+  extract (the frames through a `<video>` element), run (the pipeline, timed per stage), ply (the
+  trained PLY through `src/loaders.js`'s reader), scene (the toy's frame: up, the view, the camera
+  path), flight (Replay flight on the stage's own orbit camera), panel (the progress card and the
+  timing readout), samples.
+- `src/packs/video3d.js`: the labs toy "Video to 3D" on the Studio shelf.
+- Engine PR (`claude/lane-video-3d-engine`): kit clouds take a sample's own `scales` and `quat`.
+
+## Notes
+
+- The container has no GPU. Chromium's WebGPU runs on SwiftShader here: Splat.js's synthetic set
+  (12 photos) solved in 32 s and trained 212 steps in 518 s (about 2.4 s a step at 400 px, 20,000
+  splats). The samples are trained here with small settings; real devices are far faster.
+- The Commons API rate-limits this container (HTTP 429); the file pages and upload.wikimedia.org
+  work.
+
+## Known issues
+
+- The Toy tab refuses files over 40 MB (ui.js, not this lane's): long drone clips must be trimmed
+  first.
+
+## For the Operator
+
+- (filled in at the end of the turn)

@@ -80,14 +80,14 @@ export function makeFlight(cams, media) {
     if (v > 0.001 && !st.active && !st.leaving) {
       st.active = true;
       st.done = false;
-      st.clock = performance.now();
+      st.clock = info?.time ?? 0;
       st.home = { state: cam.getState(), target: cam.target.slice() };
       startAudio(info);
     }
     if (st.active && v >= 0.5) {
       const el = st.audio?.el;
       const time =
-        el && !el.paused ? el.currentTime : path.start + (performance.now() - st.clock) / 1000;
+        el && !el.paused ? el.currentTime : path.start + ((info?.time ?? 0) - st.clock);
       if (time >= path.end) {
         if (!st.done) {
           st.done = true;

@@ -36,7 +36,7 @@ function quantile(values, q) {
 
 // The frame: { M (rows: the toy's x, y, z axes in the world), center, scale, keepRadius }.
 // splats: { count, pos, opacity }; cams: [{ R, t }].
-export function sceneFrame(splats, cams, { fit = 0.95, keep = 2.5 } = {}) {
+export function sceneFrame(splats, cams, { fit = 0.95, keep = 1.6 } = {}) {
   let up = [0, 0, 0];
   let fwd = [0, 0, 0];
   for (const c of cams) {

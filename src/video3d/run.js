@@ -94,7 +94,7 @@ export async function videoTo3D(file, opts = {}) {
   const s = splatjs.createSession({
     maxIters: set.iters,
     lowMem: tier === "low" || tier === "mid",
-    initTarget: Math.min(60000, Math.round(set.splats / 3)),
+    initTarget: set.seed || Math.min(60000, Math.round(set.splats / 3)),
     evalHoldEvery: 1e9,
     sfm: tier === "low" || tier === "mid" ? { siftFeats: 3000, siftFirstOctave: 0, refineAspect: false } : {}, // prettier-ignore
     trainer: { shDeg: 0, maxSplats: set.splats },
