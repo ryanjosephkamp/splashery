@@ -297,9 +297,6 @@ export const RECIPES = {
       const dress = DRESS[o.dress] ? o.dress : "plain";
       k.data = { dress };
       DRESS[dress](k);
-      // The ring stands up to about 60 degrees and lifts a little.
-      const g = RINGS[dress];
-      k.reach([0, g.R * 1.55 + g.b, 0]);
     },
   },
 };
