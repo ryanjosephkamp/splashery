@@ -1548,6 +1548,11 @@ export const TOY_SOUNDS = {
     ],
     off: { voice: "whoosh", f: 2600, to: 0.14, decay: 1.8, vol: 0.7 },
   },
+  // Lane Video 3D: a rising whoosh as the flight takes off, and a falling one as the camera comes home.
+  "video-3d": {
+    on: { voice: "whoosh", f: 300, to: 5, decay: 1.6, vol: 0.6 },
+    off: { voice: "whoosh", f: 1800, to: 0.2, decay: 1.4, vol: 0.5 },
+  },
   // Lane Screens: the old TV's click and hum (each style plays its own
   // cues as it switches on: the flat TV's soft tone, the cinema's curtains,
   // the hologram's shimmer).
