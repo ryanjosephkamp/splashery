@@ -64,7 +64,7 @@ void main() {
   // falling stream reads as one continuous stream, not beads.
   vec3 vel = (uSimToView * vec4(texelFetch(uParticles, q + ivec2(0, int(uStretch.y)), 0).xyz, 0.0)).xyz;
   float sl = length(vel.xy);
-  float L = min(sl * uStretch.x, 12.0 * r);
+  float L = min(sl * uStretch.x, 24.0 * r);
   vec2 dir = sl > 1e-6 ? vel.xy / sl : vec2(1.0, 0.0);
   // stretched, it narrows as a thinning stream does (its cross-section keeps
   // the particle's volume)
@@ -102,7 +102,7 @@ varying vS: f32;
   let r = max(uniform.uRadius, uniform.uMinPx.x * max(-vp.z, 1e-3) / uniform.uMinPx.y);
   let vel = (uniform.uSimToView * vec4f(textureLoad(uParticles, q + vec2i(0, i32(uniform.uStretch.y)), 0).xyz, 0.0)).xyz;
   let sl = length(vel.xy);
-  let L = min(sl * uniform.uStretch.x, 12.0 * r);
+  let L = min(sl * uniform.uStretch.x, 24.0 * r);
   var dir = vec2f(1.0, 0.0);
   if (sl > 1e-6) { dir = vel.xy / sl; }
   let sq = sqrt(r / (r + 0.5 * L));
@@ -528,7 +528,7 @@ void main() {
     // Bubbles inside: bright specks, tinted by the liquid around them.
     float bub = clamp(thickAll(uv0).b * 1.2, 0.0, 1.0) * uFoam.w;
     liq = mix(liq, mix(uColor.rgb, vec3(1.0), 0.6) * (0.65 + 0.35 * max(dot(n, L), 0.0)) + 0.08, bub * 0.75);
-    float a = clamp(thick * 60.0, 0.0, 1.0);
+    float a = clamp(thick * 200.0, 0.0, 1.0);
     col = mix(col, liq, a);
   }
   // Foam and spray over the liquid.
@@ -826,7 +826,7 @@ fn fresnel(cosT: f32, f0: f32) -> f32 {
     // Bubbles inside: bright specks, tinted by the liquid around them.
     let bub = clamp(thickAll(uv0).b * 1.2, 0.0, 1.0) * uniform.uFoam.w;
     liq = mix(liq, mix(uniform.uColor.rgb, vec3f(1.0), 0.6) * (0.65 + 0.35 * max(dot(n, L), 0.0)) + vec3f(0.08), bub * 0.75);
-    let a = clamp(thick * 60.0, 0.0, 1.0);
+    let a = clamp(thick * 200.0, 0.0, 1.0);
     col = mix(col, liq, a);
   }
   // Foam and spray over the liquid.
@@ -1083,10 +1083,10 @@ export class FluidSurface {
       scope.resolve("uFar").setValue(cam.farClip);
       const projY = proj.data[5] * this.size[1] * 0.5;
       scope.resolve("uMinPx").setValue([1.6, projY]);
-      // velocities are cells/s; a 25th of a second of travel (a stream thins
+      // velocities are cells/s; a 15th of a second of travel (a stream thins
       // below a particle a cell as it falls and MPM breaks it into clumps:
       // drawn this long, it reads as the thread it is)
-      scope.resolve("uStretch").setValue([1 / 25, src.velRow ?? 0]);
+      scope.resolve("uStretch").setValue([1 / 15, src.velRow ?? 0]);
       this.depthPass.count = count;
       this.depthPass.render();
       this.thickPass.count = count;

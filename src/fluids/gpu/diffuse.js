@@ -108,14 +108,22 @@ export class GpuDiffuse {
       cvel[c * 3] /= k;
       cvel[c * 3 + 1] /= k;
       cvel[c * 3 + 2] /= k;
-      if (k >= 3 && Math.hypot(cvel[c * 3], cvel[c * 3 + 1], cvel[c * 3 + 2]) < slow) {
-        const x = c % gx;
-        const y = Math.floor(c / gx) % gy;
-        const z = Math.floor(c / (gx * gy));
-        const t = z * gx + x;
-        top[t] = Math.max(top[t], y + Math.min(1, k / 8));
-      }
     }
+    // Each column's pool: the first run of slow liquid up from the bottom
+    // (liquid just leaving a spout above is not a pool to float on).
+    for (let z = 0; z < gz; z++)
+      for (let x = 0; x < gx; x++) {
+        let started = false;
+        for (let y = 0; y < gy; y++) {
+          const c = (z * gy + y) * gx + x;
+          const k = count[c];
+          const still = k >= 3 && Math.hypot(cvel[c * 3], cvel[c * 3 + 1], cvel[c * 3 + 2]) < slow;
+          if (still) {
+            started = true;
+            top[z * gx + x] = y + Math.min(1, k / 8);
+          } else if (started && k < 2) break;
+        }
+      }
     this.ready = true;
     this.spawn(d, n, elapsed);
     // For the sound (acoustic.js), in recipe units.
