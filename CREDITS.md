@@ -316,6 +316,31 @@ with its depth map until someone turns the camera on, and uses the same depth mo
 for the camera's live depth. The live toys' test signals (claps, sung notes) are made by our own
 code; nothing from the microphone, the camera or a shared screen is recorded, stored or sent.
 
+## Worlds
+
+Hybrid mode in Worlds (a labs page) lights its ground with four texture sets and its sky with one
+HDRI, all from [Poly Haven](https://polyhaven.com) under
+[CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (Poly Haven publishes every asset
+under CC0, [polyhaven.com/license](https://polyhaven.com/license); checked on the live pages on
+September 29, 2026). `tools/world-assets.mjs` fetches them and packs them into
+`assets/worlds/ground/` and `assets/worlds/sky/`; the Worlds page credits them in its list of
+places.
+
+| Used as           | Asset                                                                                                   | Authors                | License                                                       |
+| ----------------- | ------------------------------------------------------------------------------------------------------- | ---------------------- | ------------------------------------------------------------- |
+| Sky and its light | [Kloofendal 48d Partly Cloudy (Pure Sky)](https://polyhaven.com/a/kloofendal_48d_partly_cloudy_puresky) | Greg Zaal, Jarod Guest | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| Sand              | [Sand 01](https://polyhaven.com/a/sand_01)                                                              | Rob Tuytel             | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| Grass             | [Rocky Terrain 02](https://polyhaven.com/a/rocky_terrain_02)                                            | Amal Kumar             | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| Rock              | [Rock Ground](https://polyhaven.com/a/rock_ground)                                                      | Rob Tuytel             | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| Wet sand          | [Damp Beach Sand](https://polyhaven.com/a/damp_beach_sand)                                              | Dimitrios Savva        | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+
+Its mesh character (to compare with the splat character; `?character=mesh`) is from
+[Animated Characters: Protagonists](https://kenney.nl/assets/animated-characters-protagonists) by
+Kenney, [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (checked on the live page and
+in the pack's own license file on September 29, 2026): the model, the "skaterMaleA" skin and the
+idle and run animations. The walk is made from the run. `tools/world-character.mjs` builds
+`assets/worlds/character/character.glb`.
+
 ## National flags
 
 The pattern layer can wrap a national flag around any toy. The flags are SVG files from

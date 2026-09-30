@@ -125,6 +125,31 @@ export function normalizeScatter(s = {}, i = 0) {
   };
 }
 
+const rgb01 = (v, d) => {
+  const h = hex(v, d);
+  return [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16) / 255);
+};
+
+// How a world is drawn (docs/WORLDS.md, "Rendering"): "splats" (everything
+// is splats) or "hybrid" (lit models for the ground, water, sky and signs;
+// splats for the rest). ?render= overrides it.
+export const RENDER_MODES = ["splats", "hybrid"];
+
+// The sun, shadows, haze and grade (both modes). Colors are sRGB.
+export function normalizeLight(l = {}, colors = DEFAULT_COLORS) {
+  const sun = l.sun && typeof l.sun === "object" ? l.sun : {};
+  return {
+    sun: { azimuth: num(sun.azimuth, 232, -360, 720), elevation: num(sun.elevation, 48, 5, 90) },
+    sunColor: rgb01(l.sunColor, "#fff3df"),
+    sunIntensity: num(l.sunIntensity, 0.95, 0, 10),
+    shadow: num(l.shadow, 0.42, 0, 1),
+    haze: num(l.haze, 0.0045, 0, 0.1),
+    hazeColor: rgb01(l.hazeColor, colors.horizon),
+    exposure: num(l.exposure, 1, 0.1, 4),
+    ambient: rgb01(l.ambient, "#000000"),
+  };
+}
+
 export function normalizeWorld(w = {}) {
   const colors = { ...DEFAULT_COLORS };
   for (const k in w.colors || {}) if (k in colors) colors[k] = hex(w.colors[k], colors[k]);
@@ -140,6 +165,8 @@ export function normalizeWorld(w = {}) {
     colors,
     terrain: normalizeTerrain(w.terrain),
     water: w.water === false ? false : true,
+    render: RENDER_MODES.includes(w.render) ? w.render : "splats",
+    light: normalizeLight(w.light && typeof w.light === "object" ? w.light : {}, colors),
     sky: { clouds: num(w.sky?.clouds, 0.5, 0, 1) },
     spawn: { at: pair(spawn.at, [0, 0]), facing: num(spawn.facing, 0) },
     character: {
@@ -148,6 +175,8 @@ export function normalizeWorld(w = {}) {
       skin: hex(w.character?.skin, "#c98e6a"),
       hair: hex(w.character?.hair, "#3a2a1e"),
       shoes: hex(w.character?.shoes, "#2e2e33"),
+      // "splats" (the kit-built character) or "mesh" (a lit, skinned model).
+      model: w.character?.model === "mesh" ? "mesh" : "splats",
     },
     props: (Array.isArray(w.props) ? w.props : []).map(normalizeProp),
     scatter: (Array.isArray(w.scatter) ? w.scatter : []).map(normalizeScatter),
