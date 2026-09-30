@@ -86,11 +86,11 @@ const CARDS = {
   "sci-microscope-nucleus": {
     toy: "smlm-microscope",
     options: { data: "nucleus", color: "depth" },
-    secs: 7.5,
+    secs: 6.5,
     near: 0.62,
     steps: [
       { t: 0, yaw: 0.12 },
-      { t: 1.4, focus: [3, 2], tap: true },
+      { t: 1.2, focus: [3, 2], tap: true },
     ],
   },
   "sci-open": {

@@ -127,6 +127,14 @@ Model: Opus 5.5 (claude-opus-5-5), default effort.
   `sci-ellipsoids`, `sci-jiggle`, `sci-protein`, `sci-open`, `sci-microscope` and `sci-galaxy` are
   on the Effect review page (lane record `Science`, three groups). Draft PR #132.
 
+- September 30, 2026 (evening): the owner marked `sci-ellipsoids`, `sci-jiggle`, `sci-open` and
+  `sci-protein` good, and asked for more sharpness on the microscope and the galaxy, whether there
+  are more microscope images, the file format, and to see the inputs. Done: `sci-microscope-r2`,
+  `sci-galaxy-r2`, a second microscope sample (a whole nucleus in 3D), a precision filter, and
+  source cards (`sci-source-microscope`, `sci-source-nucleus`, `sci-source-galaxy`). Sounds redone
+  to PACKS.md 7e (quiet, no clicks, whooshes, pads or notes). Main merged twice (Fluids, the sound
+  review).
+
 ## Notes
 
 - **Files.** `src/science/crystal.js` (CIF, mmCIF and PDB readers; the cell, U_cart = A·N·U·Nᵀ·Aᵀ,
@@ -167,6 +175,25 @@ Model: Opus 5.5 (claude-opus-5-5), default effort.
   ellipsoids 219 ms, microscope 528 ms, galaxy 807 ms, Lab's splat field 341 ms for comparison.
   Real-phone frame rates are not measured.
 
+- **Sharper microscope (r2).** Measured at 390×844 CSS, device pixel ratio 2, with a Tenengrad score
+  (mean squared gradient; `.cache/sci/sharp.mjs`, not committed): overview 2797 → 2965, zoomed on
+  the clathrin pit 10.0 → 22.8. What did it: each localization carries the same total light
+  (ThunderSTORM's normalized Gaussians: opacity ∝ (median σ / σ)²), a slice about the tapped depth
+  when zoomed (the clip value's sign asks for both sides), the most crowded depth near the tap, a
+  Precision filter (better than 5 or 3 nm), and clips rendered at 2× (the old 390-pixel GIFs were
+  enlarged on the phone). A smaller minimum splat size changed nothing measurable.
+- **Sharper galaxy (r2).** Overview 100 → 226. The file now keeps all of the dense gas (the 195,000
+  smallest smoothing lengths in the box, drawn at their own size) and a random 4.8% of the diffuse
+  gas (drawn 2.75 times wider); before, every particle was thinned 1 in 8 and drawn 2 times wider.
+  Keeping the thinned gas's column (opacity × widening) brought back a haze over the disk, so it
+  stays faint. Lower tiers keep 65% dense and 35% diffuse and thin each evenly.
+- **Microscope samples and formats.** Two samples (microtubules and clathrin; a whole nucleus in
+  3D), both CC BY 4.0 from ShareLoc.XYZ, cut by `tools/sci-samples.mjs`; people can open their own
+  .smlm (ShareLoc's zip of a JSON manifest and binary tables) or a ThunderSTORM CSV, read on the
+  device. The reader also takes Cramér–Rao bounds (crlbX, crlbY, crlbZ) as the precision. A
+  nuclear-pore record (gp210) was tried and dropped: it has no precision column, and the 20 nm
+  default width smears each pore's ring.
+
 ## Known issues
 
 - Frame rates on a real phone are unmeasured (no GPU here); the galaxy is the heaviest (overdraw).
@@ -176,6 +203,9 @@ Model: Opus 5.5 (claude-opus-5-5), default effort.
   against its carbon.
 - A tap that re-aims the zoomed-in ellipsoids goes through the pick pass; it lands where the
   magnified splats are drawn, and the recipe maps it back.
+
+- The Effect review page's asset storage is full (1 GB). The galaxy r2 clip at 2× (14.7 MB) and the
+  nucleus clip didn't fit, so they were posted at 1.5×.
 
 ## For the Operator
 
