@@ -388,6 +388,10 @@ function bookLayout(st, N, time, uAt = null) {
   // The page under a turning leaf shows once the leaf has lifted clear of it
   // (about 17 degrees): before that the two lie too close and mix.
   const lifted = Math.PI * v > 0.3;
+  // Likewise, the page a turning leaf lands on hides once the leaf is within
+  // about 17 degrees of it (shown until the very end, the two mixed for a
+  // few frames: the old page's figure showed through the new one).
+  const landing = Math.PI * v > Math.PI - 0.3;
   const K = a ? a.from : BOOK.K;
   if (st.bound === "top") {
     // Leaf j here is sheet j; sheet 0 sits in slot 0 like the others.
@@ -406,10 +410,10 @@ function bookLayout(st, N, time, uAt = null) {
       sheet(K + 1, { fv: lifted ? 1 : 0, ahead: 1 });
       sheet(K, { angle: OVER * v, curl: -st.curl * bend, fv: u < 1 ? 1 : 0 });
     } else if (a.type === "back") {
-      sheet(K, { fv: u < 0.97 ? 1 : 0 });
+      sheet(K, { fv: OVER * (1 - v) > 0.3 ? 1 : 0 });
       sheet(K - 1, { angle: OVER * (1 - v), curl: st.curl * bend, fv: 1 });
     } else {
-      sheet(K, { fv: u < 0.97 ? 1 : 0 });
+      sheet(K, { fv: OVER * (1 - v) > 0.3 ? 1 : 0 });
       sheet(0, { angle: OVER * (1 - v), curl: st.curl * bend, fv: 1 });
     }
     return L;
@@ -437,14 +441,14 @@ function bookLayout(st, N, time, uAt = null) {
     L.open = w;
   } else if (a.type === "fwd") {
     if (K >= 3) leaf(K - 2, { angle: Math.PI, ahead: 1 });
-    if (K >= 2) leaf(K - 1, { angle: Math.PI, bv: u < 0.97 ? 1 : 0 });
+    if (K >= 2) leaf(K - 1, { angle: Math.PI, bv: landing ? 0 : 1 });
     leaf(K + 1, { fv: lifted ? 1 : 0, ahead: 1 });
     leaf(K, { angle: Math.PI * v, curl: -st.curl * bend, fv: 1, bv: 1 });
     L.cover = Math.PI;
     L.open = 1;
   } else if (a.type === "back") {
     leaf(K + 1, { ahead: 1 });
-    leaf(K, { fv: u < 0.97 ? 1 : 0, ahead: 1 });
+    leaf(K, { fv: landing ? 0 : 1, ahead: 1 });
     if (K >= 3) leaf(K - 2, { angle: Math.PI, bv: lifted ? 1 : 0, ahead: 1 });
     leaf(K - 1, { angle: Math.PI * (1 - v), curl: st.curl * bend, fv: 1, bv: 1 });
     L.cover = Math.PI;
@@ -453,7 +457,7 @@ function bookLayout(st, N, time, uAt = null) {
     // "close": the whole left half (the cover, its page block and the page
     // on top) swings back over the right.
     const ang = Math.PI * (1 - v);
-    leaf(K, { fv: u < 0.97 ? 1 : 0 });
+    leaf(K, { fv: landing ? 0 : 1 });
     if (K >= 2) leaf(K - 1, { angle: ang, curl: st.coverCurl * 0.6 * bend, bv: 1 });
     L.cover = ang;
     L.coverCurl = st.coverCurl * 0.6 * bend;
@@ -466,7 +470,7 @@ function bookLayout(st, N, time, uAt = null) {
   // a close it swings over with the cover, riding its free edge so it stays
   // inside a cover that flexes.
   L.block = Math.max(0, Math.min(Math.PI, L.cover + L.coverCurl * BOOK.dims.W));
-  if (a.type === "fwd") L.blockOn = K >= 2 || u > 0.97 ? 1 : 0;
+  if (a.type === "fwd") L.blockOn = K >= 2 || landing ? 1 : 0;
   else if (a.type === "back") L.blockOn = K >= 3 || u < 0.03 ? 1 : 0;
   else if (a.type === "close") L.blockOn = 1;
   return L;
@@ -927,7 +931,23 @@ function buildStapled(k, st, W, H) {
   k.reach([0, H / 2 + 0.3, 0.45]);
   k.reach([0, 0, 0.5]);
   const paper = "#fcfbf7";
-  const edge = () => "#ece5d3";
+  // White paper on a white page needs its outline: darker edges, a soft
+  // shadow behind the stack, and a thin gray line round the top sheet.
+  const edge = () => "#d9d1bf";
+  rect(k, { share: 0.03, at: [-W / 2 - 0.006, -H / 2 - 0.03, -T - 0.012], u: [W + 0.034, 0, 0], v: [0, H + 0.036, 0], n: [0, 0, 1], color: () => "#8f8a82", opacity: 0.4 }); // prettier-ignore
+  k.cloud({ share: 0.006, pattern: false }, (rand, i, n) => {
+    // Round the rectangle, a thin splat every step, a little over the page.
+    const L = 2 * (W + H);
+    let d = ((i + 0.5) / n) * L;
+    const step = L / n;
+    let p;
+    let dir;
+    if (d < W) ((p = [-W / 2 + d, H / 2]), (dir = [1, 0, 0]));
+    else if ((d -= W) < H) ((p = [W / 2, H / 2 - d]), (dir = [0, 1, 0]));
+    else if ((d -= H) < W) ((p = [W / 2 - d, -H / 2]), (dir = [1, 0, 0]));
+    else ((d -= W), (p = [-W / 2, -H / 2 + d]), (dir = [0, 1, 0]));
+    return { p: [p[0], p[1], E + 0.004], dir, stretch: (0.6 * step) / 0.0022, color: "#b3aca0", size: 0.22, opacity: 1 }; // prettier-ignore
+  });
   boxFaces(k, [-W / 2, W / 2], [-H / 2, H / 2], [-T, TOP], {
     front: { share: 0.2, color: () => bkLit(paper, [0, 0, 1]) },
     back: { share: 0.1, color: () => bkLit(paper, [0, 0, -1], 0.6) },
