@@ -143,7 +143,8 @@ export class Stage {
 
   // The ratio frames render at now.
   pixelRatio() {
-    const full = Math.min(window.devicePixelRatio || 1, this.pixelCap);
+    const cap = this.sharp?.dpr ?? this.pixelCap; // Sharpness (dpr is labs only)
+    const full = Math.min(window.devicePixelRatio || 1, cap);
     return this.reduced ? Math.max(1, full / 1.5) : full;
   }
 
@@ -161,8 +162,11 @@ export class Stage {
   }
 
   // The player reports each frame whether the view is moving (a drag, the
-  // turntable, an effect). Still views always get the full ratio.
-  setBusy(busy) {
+  // turntable, an effect), and whether that is a drag. Still views always
+  // get the full ratio (and, with adapt "drag", the default since September
+  // 29, 2026, every view but a drag).
+  setBusy(busy, drag = false) {
+    if (this.sharp?.adapt === "drag") busy = drag; // Sharpness
     this.busy = busy;
     if (busy) {
       clearTimeout(this.restoreTimer);
@@ -554,9 +558,24 @@ export class Stage {
   // minContribution 3). A picture toy's far pages use splats near a pixel,
   // so while one shows it lowers both; every other toy gets the defaults.
   setPictureCulling(on) {
+    this.pictureCull = on;
+    this.applyCulling();
+  }
+
+  // Lane Sharpness: a labs lever may lower the cull too (the lower of the
+  // two wins while a picture shows).
+  applyCulling() {
     const g = this.app.scene.gsplat;
     this.cullDefaults ||= { minPixelSize: g.minPixelSize, minContribution: g.minContribution };
-    const v = on ? { minPixelSize: 0.5, minContribution: 0.5 } : this.cullDefaults;
+    const pic = this.pictureCull ? { minPixelSize: 0.5, minContribution: 0.5 } : null;
+    const lab = this.sharp?.cull || null;
+    const v =
+      pic && lab
+        ? {
+            minPixelSize: Math.min(pic.minPixelSize, lab.minPixelSize),
+            minContribution: Math.min(pic.minContribution, lab.minContribution),
+          }
+        : pic || lab || this.cullDefaults;
     if (g.minPixelSize === v.minPixelSize && g.minContribution === v.minContribution) return;
     g.minPixelSize = v.minPixelSize;
     g.minContribution = v.minContribution;
@@ -574,6 +593,24 @@ export class Stage {
     mat.shaderChunks.wgsl.set("gsplatModifyPS", code.wgsl);
     mat.update();
     this.kernel = want;
+    this.requestRender();
+  }
+
+  // Lane Sharpness: the render levers (src/sharpness.js); only adapt "drag"
+  // is on by default, the rest are labs switches. null
+  // (every lever off) leaves the renderer exactly as it was: nothing here is
+  // touched until a toy asks for a lever, and a toy without one puts back
+  // what the last one changed.
+  setSharpness(sharp) {
+    if (!sharp && !this.sharp) return;
+    const g = this.app.scene.gsplat;
+    this.aaDefault ??= g.antiAlias;
+    this.sharp = sharp;
+    this.applyCulling();
+    const aa = sharp?.aa ? true : this.aaDefault;
+    if (g.antiAlias !== aa) g.antiAlias = aa;
+    if (sharp?.adapt === "drag" && this.reduced && !this.busy) this.setBusy(false);
+    this.applyPixelRatio();
     this.requestRender();
   }
 

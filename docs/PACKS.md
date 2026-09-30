@@ -425,6 +425,8 @@ like any other splat (parts, the body, leaves).
   media the toy shows (null in the Node tools), so a build can shape itself to the pages (a book
   takes the PDF's page shape). `pics.aspect(n)` and `pics.nameOf(n)` in `info.data.pictures` give
   one page's shape and name.
+- **A PDF page's words.** `await pics.text(n)` gives page n's words from the PDF's text layer (""
+  for a scanned page, a picture or a video); the Toy tab shows them in its "Words on this page" box.
 - **A set of pictures.** `input: { media: { accept: ["image"], multiple: true } }` lets the visitor
   open several photos at once (the photo album); a recipe's `pictures.sample` may return a list, and
   Previous and Next page through the set. In a scene, `toy.media.files` keeps the settings (not the
