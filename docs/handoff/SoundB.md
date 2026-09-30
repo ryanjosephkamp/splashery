@@ -165,6 +165,9 @@ Model: Opus 5.5 (default effort), all of it.
   model splats) are back to main's sounds; the ten he marked get sounds that answer his notes; and
   six more on these shelves (bombe, Chladni plate, coffee, Screen, supertall, water bottle) are
   done. 108 toys are now `"site"` from this lane.
+- **Full suite green** on September 30, 2026 (all 572 tests; one run, finished after a container
+  restart by running the remaining spec files), then main merged in (the audit, Worlds r2, the
+  sound-sources catalog) with the unit, lane and sound checks green again.
 - **28 recorded samples ready** in `assets/sounds/` (CC0, credited in CREDITS.md and
   `tools/assets.json` `sounds`), waiting for Sound A's `sample` voice to be wired in.
 
