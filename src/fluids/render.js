@@ -73,8 +73,8 @@ vec3 flRamp(float f) {
   vec3 yellow = vec3(1.0, 0.72, 0.2);
   vec3 orange = vec3(1.0, 0.42, 0.07);
   vec3 red = vec3(0.55, 0.11, 0.03);
-  if (f < 0.1) return mix(blue, white, f / 0.1);
-  if (f < 0.35) return mix(white, yellow, (f - 0.1) / 0.25);
+  if (f < 0.14) return mix(blue, white, smoothstep(0.02, 0.14, f));
+  if (f < 0.35) return mix(white, yellow, (f - 0.14) / 0.21);
   if (f < 0.65) return mix(yellow, orange, (f - 0.35) / 0.3);
   return mix(orange, red, (f - 0.65) / 0.35);
 }
@@ -201,7 +201,7 @@ void modifySplatColor(vec3 center, inout vec4 color) {
     alpha = m0.a * smoothstep(0.0, 0.12, flF) * pow(1.0 - flF, 1.8);
   } else if (flKind < 7.5) {
     rgb = flRamp(flF) * (1.45 - 0.6 * flF);
-    alpha = mix(0.4, 0.9, smoothstep(0.02, 0.14, flF)) * pow(1.0 - flF, 1.2);
+    alpha = mix(0.6, 0.9, smoothstep(0.06, 0.16, flF)) * pow(1.0 - flF, 1.2);
   } else if (flKind < 8.5) {
     rgb = vec3(1.0, 0.72, 0.3) * 1.6;
     alpha = 1.0 - flF;
@@ -270,8 +270,8 @@ fn flRamp(f: f32) -> vec3f {
   let yellow = vec3f(1.0, 0.72, 0.2);
   let orange = vec3f(1.0, 0.42, 0.07);
   let red = vec3f(0.55, 0.11, 0.03);
-  if (f < 0.1) { return mix(blue, white, f / 0.1); }
-  if (f < 0.35) { return mix(white, yellow, (f - 0.1) / 0.25); }
+  if (f < 0.14) { return mix(blue, white, smoothstep(0.02, 0.14, f)); }
+  if (f < 0.35) { return mix(white, yellow, (f - 0.14) / 0.21); }
   if (f < 0.65) { return mix(yellow, orange, (f - 0.35) / 0.3); }
   return mix(orange, red, (f - 0.65) / 0.35);
 }
@@ -392,7 +392,7 @@ fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {
     alpha = m0.a * smoothstep(0.0, 0.12, flF) * pow(1.0 - flF, 1.8);
   } else if (flKind < 7.5) {
     rgb = flRamp(flF) * (1.45 - 0.6 * flF);
-    alpha = mix(0.4, 0.9, smoothstep(0.02, 0.14, flF)) * pow(1.0 - flF, 1.2);
+    alpha = mix(0.6, 0.9, smoothstep(0.06, 0.16, flF)) * pow(1.0 - flF, 1.2);
   } else if (flKind < 8.5) {
     rgb = vec3f(1.0, 0.72, 0.3) * 1.6;
     alpha = 1.0 - flF;

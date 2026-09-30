@@ -119,7 +119,9 @@ async function record(clip) {
         if (view) {
           const tf = player.motion.ctx.transform;
           cam.target = view.at.map((v, i) => (v - tf.center[i]) * tf.scale);
-          cam.home = { ...cam.home, distance: cam.home.distance * view.zoom };
+          if (!cam.__flBase || cam.__flBuilt !== player.proc) cam.__flBase = cam.home.distance;
+          cam.__flBuilt = player.proc;
+          cam.home = { ...cam.home, distance: cam.__flBase * view.zoom };
         }
         cam.cur = { ...cam.home };
         cam.tgt = { ...cam.home };
@@ -127,39 +129,43 @@ async function record(clip) {
       },
       [options, view],
     );
-    // Wait for the fluid, then let it settle a moment.
-    await page.waitForFunction(() => window.__splashery.player.fluids?.stats?.particles > 0, null, { timeout: 60_000 }); // prettier-ignore
+    // Step until the fluid shows (its module loads on the first build),
+    // then let it settle a moment.
+    for (let i = 0; i < 200; i++) {
+      await step(STEP);
+      if (await run(() => window.__splashery.player.fluids?.stats?.particles > 0)) break;
+    }
     for (let i = 0; i < 8; i++) await step(STEP);
   };
   const tap = () => run(() => window.__splashery.player.act(null));
 
   if (clip === "pour") {
-    await open({ scene: "glass", liquid: "water" });
+    await open({ scene: "glass", liquid: "water" }, { at: [-0.1, 0.85, 0], zoom: 0.62 });
     await play(0.6);
     await tap();
     await play(4.2);
-    await open({ liquid: "honey" });
+    await open({ liquid: "honey" }, { at: [-0.1, 0.85, 0], zoom: 0.62 });
     await play(0.6);
     await tap();
     await play(5.4);
   } else if (clip === "splash") {
-    await open({ scene: "splash", liquid: "water" });
+    await open({ scene: "splash", liquid: "water" }, { at: [0, 0.45, 0], zoom: 0.72 });
     await play(0.5);
     await tap();
     await play(3.2);
     await tap();
     await play(3.2);
   } else if (clip === "soda") {
-    await open({ scene: "glass", liquid: "soda" });
+    await open({ scene: "glass", liquid: "soda" }, { at: [0, 0.6, 0], zoom: 0.5 });
     await play(1.0);
     await tap();
     await play(6.0);
   } else if (clip === "smoke") {
-    await open({ scene: "candle" });
+    await open({ scene: "candle" }, { at: [0, 1.2, 0], zoom: 0.75 });
     await play(1.5);
     await tap();
     await play(4.2);
-    await open({ scene: "cup" });
+    await open({ scene: "cup" }, { at: [0, 0.9, 0], zoom: 0.75 });
     await play(1.5);
     await tap();
     await play(3.5);

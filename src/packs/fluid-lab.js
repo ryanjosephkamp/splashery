@@ -121,7 +121,7 @@ function splashScene(k, o) {
 }
 
 function candleScene(k) {
-  k.add(k.cylinder(0.5, 0.05), { pos: [0, 0.025, 0], color: "#c9b27c", even: true });
+  k.add(k.cylinder(0.5, 0.05), { pos: [0, 0.025, 0], color: "#c9b27c", even: true, size: 1.5 });
   k.add(k.cylinder(0.5, 0.03, { caps: false }), {
     pos: [0, 0.05, 0],
     color: "#d8c38c",
@@ -135,8 +135,9 @@ function candleScene(k) {
         ? mix("#f3e6c8", "#fff4d8", 0.5)
         : mix("#e8d7b0", "#fbf0d6", Math.min(1, Math.max(0, (c.p[1] - 0.3) / 0.6))),
     even: true,
-    weight: 2,
-    size: 1.2,
+    weight: 2.5,
+    size: 1.7,
+    flat: 0.35,
   });
   // The melted pool on top and the wick.
   k.add(k.disc(0.12), { pos: [0, 0.902, 0], color: "#f7e9c9", share: 0.01 });
