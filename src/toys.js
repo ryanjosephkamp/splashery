@@ -33,6 +33,7 @@ export const CATEGORIES = [
   { id: "pictures", label: "Pictures and pages" },
   { id: "studio", label: "Studio" },
   { id: "lab", label: "Lab" },
+  { id: "science", label: "Science" },
   { id: "holidays", label: "Holidays" },
   { id: "music", label: "Music" },
   { id: "vehicles", label: "Vehicles" },
@@ -3386,6 +3387,17 @@ export const TOYS = [
     labs: true,
     tags: "gpu field galaxy spiral ocean waves sea knot flow particles shader lab experiment",
     camera: { yaw: 0.3, pitch: 0.85, roll: 0, distance: 3.0 },
+  },
+  // ---- Pack: science (lane Science) ----
+  {
+    id: "thermal-ellipsoids",
+    label: "Thermal ellipsoids",
+    category: "science",
+    kind: "kit",
+    pack: "science",
+    labs: true,
+    tags: "crystal crystallography cif mmcif pdb anisotropic displacement ellipsoid ortep atoms vibration uncertainty gaussian science",
+    camera: { yaw: 0.35, pitch: 0.3, roll: 0, distance: 2.9 },
   },
   // ---- Pack: screens ----
   {
