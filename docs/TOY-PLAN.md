@@ -2168,7 +2168,9 @@ Proposals below are suggestions; the owner may change them.
 - **Song landscape** (`song-landscape`). Now: tap: Play or pause the song. Plan: new effect (E6).
   - Owner: Approved on the Splashery Universe page (lane Studio Sound), September 29, 2026.
   - Effect: A song's real spectrogram as a landscape of splats; a tap plays the song while a glowing
-    marker and the camera glide along it.
+    marker and the camera glide along it. View: Live scrolls the landscape with the music like a
+    waterfall: the part playing now sits on a fixed line at the front, the next seconds come toward
+    you, what has played fades away, and a row of caps rises with the loudness at the line.
   - Sound: The song itself.
 - **Chladni plate** (`chladni-plate`). Now: tap: Bow the plate. Plan: new effect (E6).
   - Owner: Approved on the Splashery Universe page (lane Studio Sound), September 29, 2026.

@@ -1424,9 +1424,9 @@ export const TOY_HELP = {
   },
   "song-landscape": {
     howTo:
-      "Tap to play the song and watch its sound rise as a landscape. Open your own song in the Toy tab.",
+      "Tap to play the song as a landscape. View: Live scrolls it with the music. Open your own song in the Toy tab.",
     about:
-      "A song is a wave, but you can also see what it is made of. This toy cuts the sound into short slices, measures how loud each pitch is in every slice (a short-time Fourier transform) and stands the answer up as a landscape of splats: time runs away from you, pitch runs across from low to high, and loudness is height.\n\nTap to play it: a glowing line and the camera glide along the landscape in time with the music. Open a song of your own in the Toy tab; it is read on your device and never uploaded. Long songs make longer, coarser landscapes.",
+      "A song is a wave, but you can also see what it is made of. This toy cuts the sound into short slices, measures how loud each pitch is in every slice (a short-time Fourier transform) and stands the answer up as a landscape of splats: time runs away from you, pitch runs across from low to high, and loudness is height.\n\nTap to play it: a glowing line and the camera glide along the landscape in time with the music. View: Live turns it into a scrolling waterfall like an audio tool's: the part playing now sits on a line at the front, the next seconds come toward you from the back, what has played fades away, and a row of small caps rises with the loudness at the line. Open a song of your own in the Toy tab; it is read on your device and never uploaded. Long songs make longer, coarser landscapes.",
   },
 
   "model-splats": {
