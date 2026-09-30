@@ -133,8 +133,8 @@ Model: Opus 5.5 (default effort), for the whole lane. No helpers used.
   thumbnails, tests/pno.spec.mjs, `tools/pno-clip.mjs` (phone-sized clips with the song bar).
 - Keys: the grand and the upright have the full 88 (A0 to C8), the harpsichord 61 (F1 to F6), the
   electronic keyboard 61 (C2 to C7). Every key, hammer, damper, jack and string that moves is its
-  own lever. Builds: about 190,000 splats at the high tier (density 1.4 for the pianos, 1.2 for the
-  keyboard), 0.5 to 1.4 s in `node tools/check-packs.mjs pianos`.
+  own lever. Builds: density 2 for the pianos and 1.7 for the keyboard (so the tier's most: 400,000
+  splats at max, 300,000 at high), 0.2 to 0.6 s in `node tools/check-packs.mjs pianos`.
 - Built-in songs (written out from the public-domain scores, checked against the Mutopia Project's
   public-domain editions): Für Elise (the A section twice with both endings, the middle part and the
   theme again), Clair de lune (the first eight bars), Gymnopédie No. 1 (the first 26 bars), Ode to
@@ -166,6 +166,19 @@ Model: Opus 5.5 (default effort), for the whole lane. No helpers used.
   cylinder, cone and rounded box, color jitter at most 0.01, density 1.7 (1.5 for the keyboard), and
   the strings as continuous thin lines. All seven clips redone as `-r2` cards (the old ones marked
   replaced).
+- Review r2 (September 29, 2026): all seven "fix", more sharpness, less grain. r3: every box built
+  from even strips (`stripBox`), smaller splats along each edge (`sharpen`), twice the splats on the
+  keys, density 2.
+- Review r3 (September 30, 2026): song bar, grand song and keyboard "good"; grand keys (can't tell
+  adjacent keys apart), upright (the parts above the keys grainy), harpsichord (outline blurry) and
+  stills "fix". r4: faces nobody can see (a key's bottom and back, the plate's back, the top's
+  underside) take no splats; keys (weight 8), hammers, dampers and rails get more and the big case
+  panels less; long box faces use narrow splats stretched along them (`STRETCH`), so key sides and
+  rails come out as straight lines; each white key's top has a fine dark edge; felt heads are their
+  own pieces; the tiny action parts drop the wood-grain noise; the curved rims and the lids take
+  small splats along their edges (`edged`) and each lid gets a solid edge band (`lidRim`). Posted as
+  `-r4` cards. How to find where the splats go: build the recipe at 400,000 and list each item's
+  `n`, `area` and weight (the biggest items are the case and the lid).
 - Full suite (claude/lane-pianos with main 60b775d, in 12 shards): about 430 passed, 2 failed: this
   lane's MIDI test (fixed) and `tests/bk.spec.mjs` "a video's time, length and seek", which fails
   the same way on plain main 456e890.
