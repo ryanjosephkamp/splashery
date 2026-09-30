@@ -47,6 +47,12 @@ const render = opt("render", "");
 const left = opt("left", "");
 const right = opt("right", "");
 const labels = opt("labels", "A,B").split(",");
+// --fast: one frame drawn per clip frame (the world steps and is shot in the
+// same frame), about half the time in the software renderer.
+const fast = args.includes("--fast");
+// --still-left: the left side (--left) is one still, held beside the right
+// side's clip (a before-and-after at half the cost).
+const stillLeft = args.includes("--still-left");
 
 // ---- Scenes ---------------------------------------------------------------------
 
@@ -173,13 +179,13 @@ const SCENES = {
   // Round 3: the realistic character close up. Behind it, the camera comes
   // round to its face (idle), then from the side it walks and runs.
   "character-r3": [
-    { place: [-7, 3, 180], camera: { distance: 1.45, pitch: 0.05 }, noCards: true },
-    { hold: 0.6 },
-    { look: [Math.PI, 0], secs: 2.4 },
-    { hold: 1.6 },
-    { camera: { distance: 2.9, pitch: 0.08 }, look: [-Math.PI / 2, 0], secs: 1.0 },
-    { move: { x: -1 }, secs: 2.6 },
-    { move: { x: -1, run: true }, secs: 2.0 },
+    { place: [-1, 15, 180], camera: { distance: 2.2, pitch: 0.08 }, noCards: true },
+    { hold: 0.5 },
+    { look: [Math.PI, 0], secs: 2.0 },
+    { hold: 1.4 },
+    { look: [-Math.PI / 2, 0], secs: 0.8 },
+    { move: { x: 1 }, secs: 2.4 },
+    { move: { x: 1, run: true }, secs: 1.6 },
     { hold: 1.0 },
   ],
   // Following the character at the normal camera: along the west beach,
@@ -256,7 +262,7 @@ async function record(scene, url, tag = null, query = "") {
   // One frame: the world steps dt with this input, then a screenshot.
   const tick = async (input = null) => {
     await page.evaluate(({ dt, input }) => window.__world.tick(dt, input), { dt, input });
-    await page.evaluate(() => window.__world.tick(0));
+    if (!fast) await page.evaluate(() => window.__world.tick(0));
     await shoot();
   };
   const setFinger = async (p) => {
@@ -367,7 +373,17 @@ for (const name of names) {
   const scene = SCENES[name];
   if (!scene) throw new Error(`No scene "${name}" (${Object.keys(SCENES).join(", ")}).`);
   let frames;
-  if (left && right)
+  if (left && right && stillLeft) {
+    // The scene up to its first look round (the camera comes round to
+    // the face), its last frame held.
+    const first = scene.slice(0, scene.findIndex((st) => st.look) + 1);
+    const still = (await record(first, base, labels[0], left)).at(-1);
+    const clip = await record(scene, base, labels[1], right);
+    frames = sideBySide(
+      clip.map(() => still),
+      clip,
+    );
+  } else if (left && right)
     frames = sideBySide(await record(scene, base, labels[0], left), await record(scene, base, labels[1], right)); // prettier-ignore
   else if (modes)
     frames = sideBySide(await record(scene, base, "Splats", "&render=splats"), await record(scene, base, "Hybrid", "&render=hybrid")); // prettier-ignore
