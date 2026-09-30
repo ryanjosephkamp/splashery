@@ -12,6 +12,17 @@ const STAGES = [
   ["export", "Export"],
 ];
 
+// Splat.js's steps while it works out the camera path, in plain words.
+const PATH_STEPS = {
+  features: "Finding features in each frame",
+  matching: "Matching frames to each other",
+  pass: "Starting from the best pair",
+  register: "Placing cameras",
+  ba: "Refining the whole path",
+  focal: "Trying lens widths",
+  solved: "Camera path done",
+};
+
 const CSS = `
 .v3d-card { position: fixed; z-index: 4; top: 84px; left: 18px; width: min(300px, calc(100% - 32px));
   box-sizing: border-box; padding: 12px 14px; background: var(--paper, #fff); color: var(--ink, #111);
@@ -125,7 +136,10 @@ export function progressCard() {
       fill.style.width = `${Math.round(part * 100)}%`;
       const count = e.total > 1 ? `${e.done} / ${e.total}` : "";
       rows[current].lastChild.textContent = count;
-      note.textContent = e.stage === "train" && e.note ? `Training: ${e.note}` : "";
+      if (e.stage === "train") note.textContent = e.note ? `Training: ${e.note}` : "";
+      else if (e.stage === "path")
+        note.textContent = `${PATH_STEPS[e.note] || "Solving"}${count ? `: ${count}` : ""}`; // prettier-ignore
+      else note.textContent = "";
     },
     fail(message) {
       if (current) rows[current].className = "done";
