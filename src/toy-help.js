@@ -1119,6 +1119,42 @@ export const TOY_HELP = {
       "A telescope uses lenses or mirrors to make faraway things look nearer and bigger. This is a sliding spyglass, the kind sailors carried: its tubes slide inside one another, so it folds up short and pulls out long, with a big lens at the far end that gathers light. Galileo Galilei used a small telescope in 1610 to see the moons of Jupiter.\n\nThe telescope starts pulled out, on a three-legged stand. Tap to collapse it, sliding the tubes together, and tap again to pull it out.",
   },
 
+  // ---- Real objects (lane Real objects) -------------------------------------------------
+  "fountain-pen": {
+    howTo: "Tap it to uncap the pen and write a swirl in wet blue ink.",
+    about:
+      "A fountain pen carries its own ink inside. The ink runs from the barrel through a thin channel called the feed to a split metal nib, and the slit draws it down to the paper by capillary action, the same pull that lets a paper towel soak up water.\n\nThis one is made from a detailed 3D model of a real green pen. Tap it and the cap slides off and clicks onto the back end, the nib writes a looping swirl that shines while it is wet and dries darker, and the cap goes back on.",
+  },
+  "water-bottle": {
+    howTo: "Tap it to unscrew the cap and pour water into the glass.",
+    about:
+      "A reusable steel bottle closes with a screw cap. The cap's thread is a ramp wrapped around a cylinder, so turning it twice pulls it down tight against the bottle's mouth and keeps the water in.\n\nThis bottle is made from a detailed 3D model of a real one. Tap it and the cap spins off in two turns and hops aside, the bottle tips and a stream of water glugs into the glass, then it all runs back and the cap screws on. The glug comes from air: bubbles have to push back into the bottle to take the place of the water that leaves.",
+  },
+  "soda-can": {
+    howTo: "Tap it to shake the can and pop it open.",
+    about:
+      "A soda can holds a drink with carbon dioxide gas dissolved in it under pressure. Shaking the can makes lots of tiny bubbles, and when the ring pull opens it the pressure drops at once, so the gas rushes out of the drink and carries foam with it.\n\nThis can is made from a detailed 3D model of a real one, with a plain orange label. Tap it and it shakes, the ring pull levers up with a crack, and a jet of foam sprays out while drops spatter around it, then the tab folds back and the foam fizzes away.",
+  },
+  "running-shoe": {
+    howTo: "Tap it to untie the laces and tie them again, then watch it tap its toe.",
+    about:
+      "A running shoe is laced through rows of eyelets, so the laces pull the shoe snug around the foot. The usual bow is a reef knot with two loops: if the second half is tied the wrong way round, it becomes a granny knot, which slips and comes undone much more easily.\n\nThis shoe is a photo scan of a real trail shoe. Tap it and its laces come undone, cross over and tie themselves into a bow again, and the shoe taps its toe twice.",
+  },
+  hoodie: {
+    howTo: "Tap it to flip the hood and cross the sleeves.",
+    about:
+      "A hoodie is a sweatshirt with a hood, first made in the 1930s for people working in cold places. Its soft fleece is knitted cotton brushed on the inside, and a drawstring runs through the edge of the hood to pull it snug. This one has raglan sleeves, whose seams run from the armpit up to the collar.\n\nIt is made from a detailed 3D model of a real hoodie. Tap it and the hood flops forward and flips back up as the drawstrings swing, then the sleeves swing up, cross in front and settle back.",
+  },
+  sunglasses: {
+    howTo: "Tap them to fold the arms, flip the glasses round and darken the lenses.",
+    about:
+      "These are round glasses with light-changing lenses. Special molecules in the lenses change shape in the sun's ultraviolet light and start to absorb light, so the lenses turn dark outdoors and clear again a few minutes after you go inside.\n\nThe frame comes from a detailed 3D model of real vintage spectacles. Tap them and the arms fold in on their hinges one after the other, the glasses flip over to face you and the lenses darken from clear to deep gray, then everything unfolds and clears.",
+  },
+  "baseball-cap": {
+    howTo: "Tap it to flip the cap off its stand and spin it like a flying disc.",
+    about:
+      "A baseball cap is a round crown sewn from six panels, with a button on top and a stiff brim that shades the eyes. Baseball players wore caps like it in the 1800s, and now people wear them everywhere.\n\nThis gray cap is made from a detailed 3D model of a real one, resting on a wooden stand. Tap it and it flips up off the stand, spins flat like a flying disc and lands brim backward, then a second flip turns it round the right way. A spinning disc stays level because its spin resists being tipped over.",
+  },
   // ---- Medieval -------------------------------------------------------------------------
   "sword-in-stone": {
     howTo: "Tap to pull the sword from the stone; tap again to go back.",
