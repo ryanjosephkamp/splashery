@@ -105,6 +105,9 @@ mid and high tiers, adapt on drag): don't touch those blocks. The laptop is lock
 
 Model: Opus 5.5 (claude-opus-5-5), default effort.
 
+- September 30, 2026: the owner marked all seven r3 cards "good" (`fl-pour-r3`, `fl-splash-r3`,
+  `fl-soda-r3`, `fl-flame-r2`, `fl-smoke-r2`, `fl-physics`, `fl-phone-r3`). PR #121 waits for the
+  Operator's merge (labs); main is merged into the branch.
 - September 30, 2026 (r3, the evidence round): the owner asked for evidence that the liquids, smoke
   and flame are realistic, and for the reasoning behind the phone targets. `tools/fl-physics.mjs`
   now measures the solver against published physics (docs/FLUIDS.md, "Checked against physics"), and
