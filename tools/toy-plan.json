@@ -2063,7 +2063,7 @@
     "picture-lab": {
       "v": "new",
       "owner": "The Pictures engine lane's test toy (labs only), from the owner's notes of September 27 and 28, 2026.",
-      "effect": "A flat sheet showing what you open: a tap turns to the next page of a PDF, or plays and pauses a video.",
+      "effect": "A flat sheet showing what you open: a tap on the right of the page turns to the next page of a PDF, on the left goes back (the pages slide, they don't flip), or a tap plays and pauses a video.",
       "sound": "A soft paper swish and a light tap."
     },
     "your-book": {
@@ -2071,7 +2071,7 @@
       "owner": "Lane Books, from the owner's notes of September 27 and 28, 2026 (Pages into Splats).",
       "effect": "Open a PDF of any length and turn its pages: each page turns over its spine as a solid sheet, curling as it goes, with the next page on its back. Five styles: hardcover, paperback, magazine, stapled paper and spiral notebook.",
       "sound": "A paper swish and flutter, and a soft thud as the page lands.",
-      "improved": "Books: a tap opens the cover, then turns each leaf over (about 1 s), the page curling as it goes with the next page on its back; at the end a tap closes the book. Previous and Next in the Toy tab turn back and forth. The page shape follows the PDF, and only the pages reached are built.",
+      "improved": "Books: a tap opens the cover, then turns each leaf over (about 1 s), the page curling as it goes with the next page on its back; at the end a tap closes the book. Previous and Next in the Toy tab turn back and forth. The page shape follows the PDF, and only the pages reached are built. Books r3: a tap on the right page turns forward and on the left goes back (stapled paper: the top quarter of the page goes back); a page can be pulled over by hand, turning if let go past halfway or flicked and falling back otherwise; the turn lifts at once, the page curling as it goes, with no bend before it moves.",
       "fixed": "Books r2 (the owner's note of September 29, 2026: the book, not the pages, a little blurry or grainy around the edges): the covers, spine, bands and page blocks have clean, sharp edges (faces stop short of their edges, with finer splats and a line of thin splats along each), full density and smooth cloth colors; the spiral's wire and the staples are thin splats along the wire."
     },
     "photo-album": {
@@ -2079,7 +2079,7 @@
       "owner": "Lane Books, from the owner's notes of September 27 and 28, 2026 (Pages into Splats).",
       "effect": "Open a set of photos and turn through them on thick album pages, each photo held by four photo corners, one or two to a page as fits their shapes, with the file names as captions.",
       "sound": "A lower card swish and a firm thud.",
-      "improved": "Books: a tap opens the leather, linen or scrapbook cover, then turns the thick pages (about 1 s each), the photos mounted in photo corners with their file names beneath; at the end a tap closes the album.",
+      "improved": "Books: a tap opens the leather, linen or scrapbook cover, then turns the thick pages (about 1 s each), the photos mounted in photo corners with their file names beneath; at the end a tap closes the album. Books r3: taps by where they land, as the book; a page pulled by hand lags the finger a little, falls back more readily and settles slowly, like a heavy card page.",
       "fixed": "Books r2 (the owner's note of September 29, 2026: a little blurry or grainy around the edges): the covers and card pages have clean, sharp edges and full density; the leather's stitches and groove are thin splats in front of the cover, the scrapbook's label its own card, and the leather and linen smooth."
     },
     "picture-frame": {
@@ -2087,7 +2087,7 @@
       "owner": "Lane Books, from the owner's notes of September 27 and 28, 2026 (Pages into Splats).",
       "effect": "A photo in a frame hung on a nail by a wire: a tap swings it about the nail as one solid piece, and it settles like a pendulum (about 3 s). Wood, gold, modern or digital frames; the digital one fades through a set of photos.",
       "sound": "A knock on the wall, the wire creaking on the nail, and a softer knock.",
-      "improved": "Books: a tap swings the frame, its wire and photo about the nail like a damped pendulum, smaller each swing, until it hangs straight again (3 s)."
+      "improved": "Books: a tap swings the frame, its wire and photo about the nail like a damped pendulum, smaller each swing, until it hangs straight again (3 s). Books r3: a molded gold frame (a bead, a flat, a cove and a big bead, burnished on the raised parts); every frame plays a GIF or a video on a loop; the digital frame lists its photos in the Toy tab to reorder, and steps through them in order or at random."
     },
     "chladni-plate": {
       "v": "new",
@@ -2114,6 +2114,13 @@
       "effect": "A 3D model file (glTF, OBJ or STL) turned into splats on the device; the tap lifts every splat off the surface into a loose cloud and lets each settle back into its own place in about 3 s. Show: Wireframe draws the mesh's edges as thin splats.",
       "sound": "A rising whoosh as the splats lift off, then four falling plucked notes as they settle back.",
       "improved": "Studio Models: a converter that samples the surface by area (more splats where it bends or is finely made), lays flat splats on it sized to their neighbors, colors them from the texture, vertex colors or material, and keeps hard edges hard; two CC0 samples (Kenney's burger, Poly Haven's vase)."
+    },
+    "photo-3d": {
+      "v": "keep",
+      "owner": "Approved on the Splashery Universe page (\"photo yes\", September 29, 2026; lane Photo to 3D; labs only).",
+      "effect": "Your photo rebuilt as splats in 3D by an on-device depth model: each splat takes the photo's color at its place and sits at its depth, and the surface is cut where the depth jumps, so a near object stands as its own layer. The picture starts flat; the tap raises its depth layer by layer while the toy sways (about 3 s), and a second tap lays it flat. Depth sets how deep the relief is; Layers pulls the depth bands apart.",
+      "sound": "A soft whoosh that rises as the depth comes up, with two glassy notes; a falling whoosh as it lies flat.",
+      "improved": "Photo to 3D: Depth Anything V2 Small (Apache-2.0, quantized, 27 MB) on ONNX Runtime Web (MIT), both loaded only when a photo is opened; an even grid of splats sized to their neighbors on the same surface, cut at depth jumps; three CC0 samples (a forest path, a cobbled street, a still life)."
     },
     "screen": {
       "v": "keep",

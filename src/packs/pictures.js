@@ -46,10 +46,13 @@ const BOOK_STYLES = {
   stapled: { bound: "top", T: 0.026, curl: 1.3 },
 };
 
-const BOOK = { K: 0, anim: null, queue: 0, tapN: 0, lastPage: 0, style: null, dims: null, frame: 0, landed: 0 }; // prettier-ignore
+const BOOK = { K: 0, anim: null, queue: [], tapN: 0, lastPage: 0, style: null, dims: null, frame: 0, landed: 0, press: null, N: 0 }; // prettier-ignore
 
 const clamp01 = (x) => (x < 0 ? 0 : x > 1 ? 1 : x);
 const easeIO = (x) => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2);
+// A page's turn: it lifts at once and lands softly (no pause at the start,
+// when the page would only bend where it lies).
+const easeTurn = (x) => 0.5 - 0.5 * Math.cos(Math.PI * x);
 
 // Baked light from the upper left, in front.
 const BK_LIGHT = (() => {
@@ -371,10 +374,17 @@ function bookLayout(st, N, time, uAt = null) {
     s.b = st.bound === "top" ? -1 : 2 * j;
   };
   const a = BOOK.anim;
-  // A turn waiting for its pages (t0 null) holds at its start.
-  const u = uAt ?? (a ? (a.t0 === null ? 0 : clamp01((time - a.t0) / a.dur)) : 1);
-  const v = easeIO(u);
-  const bend = Math.sin(Math.PI * u);
+  // A turn waiting for its pages (t0 null) holds at its start. A pulled
+  // page goes where the finger takes it (pullV). The curl follows the
+  // page's own angle, so it never bends before it lifts.
+  let u;
+  let v;
+  if (uAt === null && a?.pull) u = v = pullV(a, time);
+  else {
+    u = uAt ?? (a ? (a.t0 === null ? 0 : clamp01((time - a.t0) / a.dur)) : 1);
+    v = easeTurn(u);
+  }
+  const bend = Math.sin(Math.PI * v) * (a?.pull?.bendK ?? 1);
   // The page under a turning leaf shows once the leaf has lifted clear of it
   // (about 17 degrees): before that the two lie too close and mix.
   const lifted = Math.PI * v > 0.3;
@@ -388,7 +398,6 @@ function bookLayout(st, N, time, uAt = null) {
       s.f = j;
       s.b = -1;
     };
-    const OVER = 2 * Math.PI - 0.06; // turned over the top, hanging behind
     if (!a) {
       sheet(K + 1, { fv: 0, ahead: 1 });
       sheet(K - 1, { angle: OVER, fv: 0, ahead: 1 });
@@ -410,7 +419,8 @@ function bookLayout(st, N, time, uAt = null) {
   if (!a) {
     leaf(right + 1, { ahead: 1 });
     if (K >= 3) leaf(K - 2, { angle: Math.PI, ahead: 1 });
-    if (K >= 2) leaf(K - 1, { angle: Math.PI, bv: 1 });
+    // (Both sides of the left leaf are built: a pull back shows its front.)
+    if (K >= 2) leaf(K - 1, { angle: Math.PI, bv: 1, ahead: 1 });
     leaf(right, { fv: 1, ahead: 1 });
     L.cover = K >= 1 ? Math.PI : 0;
     L.open = K >= 1 ? 1 : 0;
@@ -462,6 +472,138 @@ function bookLayout(st, N, time, uAt = null) {
   return L;
 }
 
+// A pulled page's progress (0 flat where it was, 1 turned): it follows the
+// finger with a little lag (more for the album's heavy pages); let go, it
+// finishes the turn or falls back.
+function pullV(a, time) {
+  const P = a.pull;
+  if (!P.release) {
+    const dt = Math.max(0, time - P.tLast);
+    P.tLast = time;
+    P.v += (P.target - P.v) * (1 - Math.exp(-dt / P.lag));
+    return P.v;
+  }
+  const R = P.release;
+  const w = clamp01((time - R.t0) / R.dur);
+  P.v = R.v0 + (R.to - R.v0) * (1 - Math.pow(1 - w, 3));
+  return P.v;
+}
+
+// Where a tap lands says which way to turn: on a book that turns sideways,
+// the left page goes back and the right page (or the middle) forward; on
+// stapled paper, the top quarter of the page goes back. A closed book opens
+// wherever it's tapped. (The pick rides along with the tap; drive reads it.)
+function bookTapAt(p) {
+  const st = BOOK.style;
+  if (!st || !BOOK.dims) return null;
+  const K = BOOK.anim ? BOOK.anim.to : BOOK.K;
+  const { H } = BOOK.dims;
+  const back = st.bound === "top" ? p[1] > H / 4 : K >= 1 && p[0] < 0;
+  return { key: "turn", pick: back ? 1 : 0 };
+}
+
+// Pulling a page (recipe.drag). A press on a page claims the drag; once it
+// moves the way the page turns, the page follows the finger: the point
+// grabbed stays under it as the page swings about the spine, the paper
+// curling from it. Let go past halfway, or with a flick, and the page
+// finishes its turn; otherwise it falls back. A press that doesn't move is
+// a tap (the tap then turns the page by itself).
+const BOOK_PULL = { lag: 0.035, finish: 0.5, flick: 1.6, slow: 1, bendK: 1 };
+const ALBUM_PULL = { lag: 0.12, finish: 0.58, flick: 2.3, slow: 1.3, bendK: 0.7 };
+const OVER = 2 * Math.PI - 0.06; // a stapled sheet turned over the top, hanging behind
+function bookDrag(opts) {
+  const pullTarget = (P, p) => {
+    const { W, H } = BOOK.dims;
+    if (P.top) {
+      const A = Math.acos(Math.max(-1, Math.min(1, (H / 2 - p[1]) / P.r0)));
+      return A / OVER;
+    }
+    if (!P.r0) return clamp01((P.dir * (P.x0 - p[0])) / (1.6 * W));
+    return Math.acos(Math.max(-1, Math.min(1, (P.dir * p[0]) / P.r0))) / Math.PI;
+  };
+  return {
+    plane: "view",
+    at(p) {
+      const st = BOOK.style;
+      if (!st || !BOOK.dims || !BOOK.N || BOOK.anim || BOOK.queue.length) return false;
+      const { W, H, g } = BOOK.dims;
+      if (Math.abs(p[1]) > H / 2 + 0.06) return false;
+      if (st.bound === "top") return Math.abs(p[0]) <= W / 2 + 0.06;
+      // (The closed book has slid over to the middle: all of it is cover.)
+      return BOOK.K === 0 || Math.abs(p[0]) <= g + W + 0.06;
+    },
+    start(p, time) {
+      BOOK.press = { p0: p.slice(), t0: time };
+    },
+    move(p, time) {
+      const pr = BOOK.press;
+      const st = BOOK.style;
+      if (!pr || !st) return;
+      const { W, H } = BOOK.dims;
+      const N = BOOK.N;
+      const K = BOOK.K;
+      let a = BOOK.anim;
+      if (!a) {
+        // Which way: the page must move the way it turns.
+        const dx = p[0] - pr.p0[0];
+        const dy = p[1] - pr.p0[1];
+        let dir = 0;
+        let type = null;
+        let r0 = 0;
+        let top = false;
+        if (st.bound === "top") {
+          if (dy < 0.04 || K >= N - 1) return;
+          dir = 1;
+          type = "fwd";
+          top = true;
+          r0 = Math.max(0.1 * H, H / 2 - pr.p0[1]);
+        } else {
+          if (Math.abs(dx) < 0.04) return;
+          const onLeft = K >= 1 && pr.p0[0] < 0;
+          if (!onLeft && dx < 0 && K < lastSpread(st, N)) dir = 1;
+          else if (onLeft && dx > 0) dir = -1;
+          else return;
+          type = dir > 0 ? (K === 0 ? "open" : "fwd") : K === 1 ? "shut" : "back";
+          // The cover of a closed book (it has slid over) and a cover
+          // closing follow the finger's travel; a page, the point grabbed.
+          if (type === "fwd" || type === "back") r0 = Math.max(0.15 * W, Math.abs(pr.p0[0]));
+        }
+        const K2 = K + dir;
+        a = BOOK.anim = {
+          type,
+          from: K,
+          to: K2,
+          t0: time,
+          asked: time,
+          dur: 1,
+          go: spreadPage(st, K2, N),
+          pull: { v: 0, target: 0, tLast: time, lag: opts.lag, bendK: opts.bendK, r0, dir, top, x0: pr.p0[0], hist: [], release: null }, // prettier-ignore
+        };
+      }
+      const P = a.pull;
+      if (!P || P.release) return;
+      P.target = clamp01(pullTarget(P, p));
+      P.hist.push([P.target, time]);
+      if (P.hist.length > 6) P.hist.shift();
+    },
+    end(time) {
+      const a = BOOK.anim;
+      BOOK.press = null;
+      const P = a?.pull;
+      if (!P || P.release) return;
+      // How fast the page was going as it was let go (a flick).
+      const h = P.hist;
+      const old = h.find(([, t]) => time - t < 0.15) || h[0];
+      const last = h[h.length - 1];
+      const speed = old && last && last[1] > old[1] ? (last[0] - old[0]) / (last[1] - old[1]) : 0;
+      const half = (P.top ? Math.PI / 2 / OVER : 0.5) * (opts.finish / 0.5);
+      const go = P.v > half || speed > opts.flick;
+      const left = go ? 1 - P.v : P.v;
+      P.release = { t0: time, v0: P.v, to: go ? 1 : 0, dur: Math.max(0.2, left * (P.top ? 1.4 : 0.95) * opts.slow) }; // prettier-ignore
+    },
+  };
+}
+
 const BOOK_RECIPE = {
   // A book you page through: it keeps still, facing you.
   turntable: false,
@@ -469,7 +611,7 @@ const BOOK_RECIPE = {
   density: 1,
   // Frames keep coming while a page turns (a turn can start from the Toy
   // tab's page buttons, not only from a tap).
-  alive: () => !!BOOK.anim || BOOK.queue > 0 || BOOK.landed > 0,
+  alive: () => !!BOOK.anim || BOOK.queue.length > 0 || BOOK.landed > 0 || !!BOOK.press,
   options: [
     {
       key: "style",
@@ -487,7 +629,8 @@ const BOOK_RECIPE = {
     { key: "color", label: "Cover color", type: "color", default: "#2f4b6e" },
   ],
   controls: [{ key: "turn", label: "Turn the page", type: "pulse", ease: 1.2 }],
-  action: { key: "turn", label: "Turn the page" },
+  action: { key: "turn", label: "Turn the page", at: bookTapAt },
+  drag: bookDrag(BOOK_PULL),
   pictures: {
     // The Tinkerer's Manual (lane Manual), 25 Letter pages.
     sample: () => "manual/tinkerers-manual.pdf",
@@ -509,10 +652,29 @@ const BOOK_RECIPE = {
     if (n < BOOK.tapN) BOOK.tapN = 0;
     if (n > BOOK.tapN) {
       BOOK.tapN = n;
-      if (N) BOOK.queue = Math.min(3, BOOK.queue + 1);
+      if (N && BOOK.queue.length < 3) BOOK.queue.push(info.tap?.pick === 1 ? -1 : 1);
     }
+    BOOK.N = N;
     const a = BOOK.anim;
-    if (a && a.t0 === null) {
+    if (a?.go !== undefined) {
+      // A pull just began: show the pages it turns to.
+      BOOK.lastPage = a.go;
+      if (pics && pics.page !== a.go) pics.go(a.go);
+      delete a.go;
+    }
+    if (a?.pull) {
+      // A pull ends once the page has finished its turn, or fallen back.
+      const R = a.pull.release;
+      if (R && time - R.t0 >= R.dur) {
+        BOOK.K = R.to ? a.to : a.from;
+        BOOK.anim = null;
+        BOOK.landed = 3;
+        if (!R.to) {
+          BOOK.lastPage = spreadPage(st, BOOK.K, N);
+          if (pics && pics.page !== BOOK.lastPage) pics.go(BOOK.lastPage);
+        }
+      }
+    } else if (a && a.t0 === null) {
       // A turn starts once the pages it shows are built (at most a second
       // and a half on: a page that fails to build should not stop the book).
       const mid = bookLayout(st, N, time, 0.5);
@@ -527,7 +689,7 @@ const BOOK_RECIPE = {
       });
       if (!pics || time - a.asked > 1.5 || want.every((id) => pics.ready(id))) a.t0 = time;
     }
-    if (a && a.t0 !== null && time - a.t0 >= a.dur) {
+    if (a && !a.pull && a.t0 !== null && time - a.t0 >= a.dur) {
       BOOK.K = a.to;
       BOOK.anim = null;
       BOOK.landed = 3; // sorted again where everything came to rest
@@ -540,9 +702,10 @@ const BOOK_RECIPE = {
         const K2 = d === 1 ? BOOK.K + 1 : d === -1 ? BOOK.K - 1 : pageSpread(st, pics.page);
         BOOK.lastPage = pics.page;
         bookGo(K2, time, pics, N);
-      } else if (BOOK.queue > 0) {
-        BOOK.queue--;
-        bookGo(BOOK.K < lastSpread(st, N) ? BOOK.K + 1 : 0, time, pics, N);
+      } else if (BOOK.queue.length > 0) {
+        if (BOOK.queue.shift() > 0)
+          bookGo(BOOK.K < lastSpread(st, N) ? BOOK.K + 1 : 0, time, pics, N);
+        else if (BOOK.K > 0) bookGo(BOOK.K - 1, time, pics, N);
       }
     }
     const L = bookLayout(st, N, time);
@@ -586,7 +749,7 @@ const BOOK_RECIPE = {
     const W = H * Math.max(0.4, Math.min(2.2, aspect || SAMPLE_ASPECT));
     const cover = o.color || "#2f4b6e";
     const paper = "#fcfbf7";
-    Object.assign(BOOK, { K: 0, anim: null, queue: 0, tapN: 0, lastPage: 0, style: st, frame: 0, landed: 3, sides: null, sideOf: null, sheetsOf: null }); // prettier-ignore
+    Object.assign(BOOK, { K: 0, anim: null, queue: [], tapN: 0, lastPage: 0, style: st, frame: 0, landed: 3, sides: null, sideOf: null, sheetsOf: null, press: null }); // prettier-ignore
     if (st.bound === "top") buildStapled(k, st, W, H);
     else buildSideBound(k, st, o, { W, H, cover, paper });
     useBudget(k);
@@ -1060,7 +1223,10 @@ const ALBUM_RECIPE = {
     { key: "captions", label: "Captions", type: "switch", default: true },
   ],
   controls: [{ key: "turn", label: "Turn the page", type: "pulse", ease: 1.2 }],
-  action: { key: "turn", label: "Turn the page" },
+  action: { key: "turn", label: "Turn the page", at: bookTapAt },
+  // Heavier pages: they follow the finger with more lag and fall back more
+  // readily.
+  drag: bookDrag(ALBUM_PULL),
   pictures: {
     sample: () => ALBUM_SAMPLE.map((n) => `assets/toys/photo-album/${n}.jpg`),
     accept: ["image"],
@@ -1095,7 +1261,7 @@ const ALBUM_RECIPE = {
     const m = k.media;
     const aspects = m?.aspects || (m ? [m.aspect] : ALBUM_SAMPLE_ASPECTS);
     const { sides, kinds, sideOf } = albumSides(aspects);
-    Object.assign(BOOK, { K: 0, anim: null, queue: 0, tapN: 0, lastPage: 0, style: st, frame: 0, landed: 3, sides, sideOf }); // prettier-ignore
+    Object.assign(BOOK, { K: 0, anim: null, queue: [], tapN: 0, lastPage: 0, style: st, frame: 0, landed: 3, sides, sideOf, press: null }); // prettier-ignore
     const names = ["o", "t", "u", "l", "r"];
     BOOK.sheetsOf = (i, fb, side) => {
       const kind = kinds[side] || "";
@@ -1166,6 +1332,78 @@ function frameAngle(t) {
   return 0.2 * Math.exp(-t / 0.95) * Math.sin(w * t) * end;
 }
 
+// The gold frame's molded profile, across a side from the picture (0) to
+// the wall (1): its height off the wall's plane at a (recipe units), and how
+// burnished each part is (water gilding: the raised parts polished bright,
+// the flat and the hollow matte).
+// A small bead at the sight edge, a flat, a cove (a hollow), a big bead and
+// a rounded outer edge.
+function goldProfile(a, d) {
+  if (a < 0.1) return { z: d * (0.58 + 0.16 * Math.sin((Math.PI * a) / 0.1)), gloss: 1 };
+  if (a < 0.24) return { z: d * 0.58, gloss: 0.35 };
+  if (a < 0.58) {
+    const t = (a - 0.24) / 0.34;
+    return { z: d * (0.58 + 0.44 * t * t), gloss: 0.3, hollow: Math.sin(Math.PI * t) };
+  }
+  if (a < 0.84) {
+    const t = (a - 0.58) / 0.26;
+    return { z: d * (1.02 + 0.2 * Math.sin(Math.PI * t)), gloss: 1 };
+  }
+  const t = (a - 0.84) / 0.16;
+  return { z: d * (1.02 - 0.3 * t * t), gloss: 0.7 };
+}
+// One side of the gold frame: its profile as thin strips along the side,
+// each at its own height and slope, mitered at the corners (each strip is
+// as long as the frame is at its distance out), then its outer edge down to
+// the wall and its lip down to the picture. Side s: 0 top, 1 bottom, 2 left,
+// 3 right.
+function goldSide(k, s, { ow, oh, fw, d, fp }) {
+  const o = [
+    [0, 1],
+    [0, -1],
+    [-1, 0],
+    [1, 0],
+  ][s];
+  const t = [o[1], -o[0]];
+  const D0 = o[0] ? ow : oh; // the inner edge's distance from the middle
+  const L0 = o[0] ? oh : ow; // half the inner edge's length
+  const P = (a, l, z) => [o[0] * (D0 + a * fw) + t[0] * l, o[1] * (D0 + a * fw) + t[1] * l, z];
+  const M = 16;
+  for (let i = 0; i < M; i++) {
+    const a0 = i / M;
+    const a1 = (i + 1) / M;
+    const p0 = goldProfile(a0, d);
+    const p1 = goldProfile(a1, d);
+    const pm = goldProfile((a0 + a1) / 2, d);
+    const half = L0 + ((a0 + a1) / 2) * fw;
+    const dz = p1.z - p0.z;
+    const da = (a1 - a0) * fw;
+    const nl = Math.hypot(dz, da);
+    const n = [(o[0] * -dz) / nl, (o[1] * -dz) / nl, da / nl];
+    const col = bkLit(goldAt(n, pm.gloss, pm.hollow || 0), [0, 0, 1], 0.9, 0.1);
+    rect(k, { share: 0.012, at: P(a0, -half, p0.z), u: [t[0] * 2 * half, t[1] * 2 * half, 0], v: [o[0] * da, o[1] * da, dz], n, part: fp, color: () => col }); // prettier-ignore
+  }
+  // The outer edge, down to the wall, and the lip down to the picture.
+  const zOut = goldProfile(1, d).z;
+  const outer = mix("#7a5619", "#c79a44", 0.5);
+  rect(k, { share: 0.014, at: P(1, -(L0 + fw), -0.045), u: [t[0] * 2 * (L0 + fw), t[1] * 2 * (L0 + fw), 0], v: [0, 0, zOut + 0.045], n: [o[0], o[1], 0], part: fp, color: () => bkLit(outer, [o[0], o[1], 0]) }); // prettier-ignore
+  const zIn = goldProfile(0, d).z;
+  rect(k, { share: 0.006, at: P(0, -L0, 0), u: [t[0] * 2 * L0, t[1] * 2 * L0, 0], v: [0, 0, zIn], n: [-o[0], -o[1], 0], part: fp, color: () => "#5a3f12" }); // prettier-ignore
+}
+
+// Gilding lit by the baked light: darker where it faces away and in the
+// hollow, with a burnished highlight where a polished part faces the light.
+function goldAt(n, gloss, hollow = 0) {
+  const L = BK_LIGHT;
+  const dif = Math.max(0, n[0] * L[0] + n[1] * L[1] + n[2] * L[2]);
+  const hv = [L[0], L[1], L[2] + 1];
+  const hl = Math.hypot(...hv);
+  const spec = Math.pow(Math.max(0, (n[0] * hv[0] + n[1] * hv[1] + n[2] * hv[2]) / hl), 26) * gloss;
+  let c = mix("#4e3409", "#d6a94a", 0.12 + 0.88 * dif);
+  c = shade(c, 1 - 0.4 * hollow);
+  return mix(c, "#fff3cc", Math.min(1, spec * 1.15));
+}
+
 const FRAME_RECIPE = {
   turntable: false,
   tiltLock: true, // a drag only spins it left and right (PACKS.md 5c)
@@ -1184,6 +1422,17 @@ const FRAME_RECIPE = {
         { id: "digital", label: "Digital" },
       ],
     },
+    {
+      // The digital frame's order.
+      key: "order",
+      label: "Order",
+      type: "select",
+      default: "inorder",
+      choices: [
+        { id: "inorder", label: "In order" },
+        { id: "random", label: "Random" },
+      ],
+    },
   ],
   controls: [{ key: "swing", label: "Swing", type: "pulse", ease: FRAME_SWING }],
   action: { key: "swing", label: "Swing the frame" },
@@ -1192,7 +1441,9 @@ const FRAME_RECIPE = {
       o.frame === "digital"
         ? ["assets/toys/picture-frame/islands.jpg", ...ALBUM_SAMPLE.map((n) => `assets/toys/photo-album/${n}.jpg`)] // prettier-ignore
         : "assets/toys/picture-frame/islands.jpg",
-    accept: ["image"],
+    // A GIF plays on a loop; a video plays on a loop, muted (the speaker
+    // button turns its sound on, as on the Screen).
+    accept: ["image", "gif", "video"],
   },
   credits: [
     {
@@ -1207,8 +1458,9 @@ const FRAME_RECIPE = {
   ],
   input: {
     title: "Your own photo",
-    media: { accept: ["image"], multiple: true, button: "Open photos…" },
-    note: "Open a photo to frame it, or several for the digital frame to step through. Your photos stay on this device; nothing is uploaded.",
+    // (list: the digital frame's photos, to put in order; engine PR 2.)
+    media: { accept: ["image", "gif", "video"], multiple: true, list: true, button: "Open photos…" }, // prettier-ignore
+    note: "Open a photo, a GIF or a video to frame it, or several photos for the digital frame to step through. Your files stay on this device; nothing is uploaded.",
   },
   drive(t, c, out, info) {
     const pics = info.data?.pictures;
@@ -1222,12 +1474,18 @@ const FRAME_RECIPE = {
     const st = time - FRAME.t0;
     if (st > FRAME_SWING) FRAME.t0 = -99;
     out.parts.frame = { angle: FRAME.t0 > -99 ? frameAngle(st) : 0 };
+    // A video starts playing by itself, once (a tap swings the frame).
+    if (pics?.kind === "video" && FRAME.video !== pics.name) {
+      FRAME.video = pics.name;
+      if (!pics.playing) pics.togglePlay();
+    }
     let fade = 0;
     if (FRAME.digital && pics?.count > 1) {
       // Show a photo, fade to black, turn to the next, and fade back in
       // once it is built.
       if (FRAME.next < 0 && time - FRAME.since > FRAME_STEP) {
-        FRAME.next = (pics.page + 1) % pics.count;
+        // In order, or a random other one.
+        FRAME.next = FRAME.random ? (pics.page + 1 + Math.floor(Math.random() * (pics.count - 1))) % pics.count : (pics.page + 1) % pics.count; // prettier-ignore
         FRAME.asked = time;
       }
       if (FRAME.next >= 0) {
@@ -1249,7 +1507,7 @@ const FRAME_RECIPE = {
   build(k, o) {
     const style = FRAME_STYLES[o.frame] ? o.frame : "wood";
     const fs = FRAME_STYLES[style];
-    Object.assign(FRAME, { tapN: 0, t0: -99, digital: style === "digital", next: -1, since: 0 });
+    Object.assign(FRAME, { tapN: 0, t0: -99, digital: style === "digital", random: o.order === "random", next: -1, since: 0, video: null }); // prettier-ignore
     // The opening follows the photo's shape (a digital frame is 4:3).
     const aspect = style === "digital" ? 4 / 3 : Math.max(0.5, Math.min(2, k.media?.aspect || 900 / 675)); // prettier-ignore
     const H = 1;
@@ -1307,6 +1565,10 @@ const FRAME_RECIPE = {
       { at: [ow, -oh, d], u: [0, 2 * oh, 0], v: [fw, 0, 0], n: [1, 0, 0], s: 3 },
     ];
     for (const sd of sides) {
+      if (style === "gold") {
+        goldSide(k, sd.s, { ow, oh, fw, d, fp });
+        continue;
+      }
       // The face (mitered: the top and bottom run the full width).
       plainRect(k, {
         share: 0.06,
@@ -1343,7 +1605,9 @@ const FRAME_RECIPE = {
       plainRect(k, { share: 0.05, at: [-W / 2, -H / 2, 0.022], u: [W, 0, 0], v: [0, H, 0], n: [0, 0, 1], part: fp, color: () => "#0b0b0d", kind: "fade", params: [0, -0.99] }); // prettier-ignore
       k.cloud({ share: 0.0008, pattern: false }, () => ({ p: [X - fw * 0.5, -Y + fw * 0.5, d + 0.002], n: [0, 0, 1], color: "#5dd67a", size: 0.5, opacity: 1, part: fp })); // prettier-ignore
     }
-    k.sheet({ id: "photo", center: [0, 0, 0], width: W, height: H, method: "pixels", part: fp });
+    // (Its method follows the media: a photo's pixels, or a GIF's or video's
+    // screen, which plays.)
+    k.sheet({ id: "photo", center: [0, 0, 0], width: W, height: H, part: fp });
     useBudget(k);
   },
 };
@@ -1355,7 +1619,7 @@ export const RECIPES = {
     turntable: false,
     tiltLock: true, // a drag only spins it left and right (lane Viewer)
     // Few splats of its own (the card); the picture's are the sheet's.
-    density: 0.12,
+    density: 0.3, // (r3: enough for the card's edges to stay sharp)
     options: [
       {
         key: "sample",
@@ -1369,7 +1633,9 @@ export const RECIPES = {
       },
     ],
     controls: [{ key: "next", label: "Next page", type: "pulse", ease: 0.35 }],
-    action: { key: "next", label: "Next page, or play and pause" },
+    // A tap on the left of the page goes back, on the right (or the middle)
+    // forward; the pages slide, they don't flip.
+    action: { key: "next", label: "Next page, or play and pause", at: (p) => ({ key: "next", pick: p[0] < 0 ? 1 : 0 }) }, // prettier-ignore
     // What the toy opens before you open something of your own, and what
     // it accepts.
     pictures: {
@@ -1400,8 +1666,9 @@ export const RECIPES = {
       if (n < LAB.tapN) LAB.tapN = 0;
       if (n > LAB.tapN) {
         LAB.tapN = n;
+        const d = info.tap?.pick === 1 ? -1 : 1;
         if (pics?.kind === "video") pics.togglePlay();
-        else if (pics?.count > 1) pics.go(pics.page + 1 < pics.count ? pics.page + 1 : 0);
+        else if (pics?.count > 1) pics.go((pics.page + d + pics.count) % pics.count);
       }
       out.sheets = { page: { page: pics?.page ?? 0 } };
     },
@@ -1409,25 +1676,9 @@ export const RECIPES = {
       LAB.tapN = 0;
       k.sheet({ id: "page", center: [0, 0, 0], width: 2, height: 2, normal: [0, 0, 1] });
       // A thin gray card behind it, so a white page has an edge on a white
-      // background (and the picture a back): two staggered lattices of flat
-      // discs, like a sheet's paper, so it is smooth with no speckle.
+      // background (and the picture a back), with clean, sharp edges (rect).
       const W = 2.08;
-      k.cloud({ share: 1, pattern: false }, (rand, i, n) => {
-        const g = Math.max(8, Math.floor(Math.sqrt(n / 2)));
-        const step = W / g;
-        const second = i >= g * g;
-        const j = second ? i - g * g : i;
-        if (j >= g * g || (second && (j % g === g - 1 || j >= g * (g - 1)))) return null;
-        const off = second ? step : step / 2;
-        return {
-          p: [-W / 2 + off + (j % g) * step, -W / 2 + off + Math.floor(j / g) * step, -0.03],
-          n: [0, 0, 1],
-          flat: 0.05,
-          size: (0.5 * step) / 0.01,
-          color: "#c3c7ce",
-          opacity: 0.99,
-        };
-      });
+      rect(k, { share: 1, at: [-W / 2, -W / 2, -0.03], u: [W, 0, 0], v: [0, W, 0], n: [0, 0, 1], color: () => "#c3c7ce" }); // prettier-ignore
     },
   },
   "your-book": BOOK_RECIPE,
