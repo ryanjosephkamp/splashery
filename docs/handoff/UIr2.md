@@ -144,7 +144,9 @@ HOW THIS LANE RUNS
 
 - Model: Opus 5.5 (claude-opus-5-5), default effort.
 - September 30, 2026: all six parts built behind the labs switch, with tests (`tests/ui2.spec.mjs`,
-  12 tests, passing) and clips. Draft PR #131.
+  12 tests, passing) and clips. Draft PR #131. Full suite: 564 of 568 passed; the four failures were
+  fixed (the Picture lab's pan test, commit 2cf0745) or pass alone (three timing tests run while
+  clips rendered). Ready for the owner's marks.
   1. Focus mode: the top bar's focus button or F; Escape, the corner button or a swipe up from the
      bottom edge on a phone bring everything back; the Fullscreen API where there is one.
   2. The phone sheet's five stops: hidden (swipe the handle or the toy row down), row, grid, panel
