@@ -12,6 +12,10 @@ import { Physics } from "./physics.js";
 import { FollowCamera } from "./camera.js";
 import { planLevels } from "./lod.js";
 import { WORLD_BUDGETS } from "./tiers.js";
+import { Lighting } from "./lighting.js";
+import { loadHybridAssets, groundTiles, groundMaterial, groundColor, waterMaterial, waterMeshes, skyDome, skyMaterial, useHDRI, signBoard } from "./hybrid.js"; // prettier-ignore
+import { loadMeshCharacter, stepMeshCharacter } from "./mesh-character.js";
+import * as pc from "../pc.js";
 import { mulberry32, mixSeed } from "../noise.js";
 import { rgb } from "../kit.js";
 
@@ -19,10 +23,27 @@ const DEG = 180 / Math.PI;
 const nextFrame = () => new Promise((r) => requestAnimationFrame(() => r()));
 
 export class World {
-  constructor(view, def, tier, { reducedMotion = false } = {}) {
+  // mode: "splats" or "hybrid" (docs/WORLDS.md, "Rendering").
+  // characterModel: "splats" or "mesh" (mesh-character.js).
+  constructor(
+    view,
+    def,
+    tier,
+    {
+      reducedMotion = false,
+      mode = def.render,
+      shadows = true,
+      characterModel = def.character.model,
+    } = {},
+  ) {
+    // prettier-ignore
     this.view = view;
     this.def = def;
     this.tier = tier;
+    this.mode = mode === "hybrid" ? "hybrid" : "splats";
+    this.hybrid = this.mode === "hybrid";
+    this.shadows = shadows;
+    this.characterModel = characterModel === "mesh" ? "mesh" : "splats";
     this.budget = WORLD_BUDGETS[tier] || WORLD_BUDGETS.mid;
     this.reducedMotion = reducedMotion;
     // Landmarks stand on level ground: each flattens a small circle.
@@ -61,15 +82,24 @@ export class World {
     const view = this.view;
     view.setClearColor(rgb(def.colors.horizon));
     progress(0.02, "Laying out the ground…");
-    // The sky, around the camera.
-    const sky = view.container(buildSky(def.colors, { seed: def.seed, clouds: def.sky.clouds }));
-    this.sky = view.entity("sky", sky);
-    this.skyCount = sky.splatCount;
-    // The open sea beyond the chunks.
-    if (def.water) {
-      const ocean = view.container(buildOcean(this.terrain));
-      view.entity("ocean", ocean, { pos: [0, this.terrain.water, 0] });
-      this.skyCount += ocean.splatCount;
+    // One sun, shadows, haze and the grade, in both modes.
+    const budget = this.shadows ? this.budget : { ...this.budget, shadows: 0 };
+    this.lighting = new Lighting(view, def, budget, this.mode);
+    this.skyCount = 0;
+    if (this.hybrid) await this.buildModels(progress);
+    else {
+      // The sky, around the camera.
+      const sky = view.container(buildSky(def.colors, { seed: def.seed, clouds: def.sky.clouds }));
+      this.sky = view.entity("sky", sky, { layer: "sky" });
+      this.skyCount = sky.splatCount;
+      // The open sea beyond the chunks.
+      if (def.water) {
+        const ocean = view.container(buildOcean(this.terrain));
+        view.entity("ocean", ocean, { pos: [0, this.terrain.water, 0] });
+        this.skyCount += ocean.splatCount;
+      }
+      // The ground's depth and the shadow catcher.
+      this.lighting.buildCatcher(this.terrain);
     }
     // Chunks of ground and water.
     const density = this.budget.density;
@@ -77,10 +107,11 @@ export class World {
       const share = groundShare(this.terrain, ch);
       const wet = ch.lo < this.terrain.water + 0.04 && def.water;
       const area = ch.size * ch.size;
+      // (Hybrid mode draws only the near grass as splats.)
       const counts = TERRAIN_LEVELS.map((L, k) => {
-        let n = share * area * L.density * density;
+        let n = this.hybrid ? 0 : share * area * L.density * density;
         if (k === 0) n += area * BLADES * this.budget.grass * 0.6 * (ch.hi > this.terrain.water + 1 ? 1 : 0.3); // prettier-ignore
-        if (wet) n += area * WATER_LEVELS[k].density * Math.sqrt(density) * waterShare(this.terrain, ch); // prettier-ignore
+        if (wet && !this.hybrid) n += area * WATER_LEVELS[k].density * Math.sqrt(density) * waterShare(this.terrain, ch); // prettier-ignore
         return Math.round(n);
       });
       const item = {
@@ -102,7 +133,8 @@ export class World {
     progress(0.8, "Painting the signs…");
     this.buildSigns();
     progress(0.86, "Making your character…");
-    this.buildCharacter();
+    if (this.characterModel === "mesh") await this.buildMeshCharacter();
+    else this.buildCharacter();
     this.spawn();
     progress(0.9, "Growing the grass…");
     // The first view: everything the plan wants, built now.
@@ -119,6 +151,52 @@ export class World {
     }
     this.applyPlan();
     progress(1, "Ready");
+  }
+
+  // Hybrid mode's models: the sky dome and the HDRI's light, the ground and
+  // the water (hybrid.js).
+  async buildModels(progress) {
+    const view = this.view;
+    const app = view.app;
+    progress(0.03, "Painting the sky…");
+    const assets = await loadHybridAssets(app);
+    this.assets = assets;
+    // Turn the sky so its sun sits where the world's sun is.
+    const sunAz = this.def.light.sun.azimuth;
+    const turn = assets.sky.sun.u - sunAz / 360;
+    useHDRI(app, assets.hdr, this.hdriRotation(assets.sky.sun.u, sunAz), assets.sky.exposure || 1);
+    app.scene.fog.color = new pc.Color(...assets.sky.horizon);
+    this.lighting.sun.light.shadowIntensity = 1;
+    const dome = new pc.Entity("sky-dome");
+    dome.addComponent("render", { meshInstances: [new pc.MeshInstance(skyDome(view.device, { rows: assets.sky.domeRows, turn }), skyMaterial(assets))], castShadows: false, receiveShadows: false, layers: [view.app.scene.layers.getLayerByName("Skybox").id] }); // prettier-ignore
+    app.root.addChild(dome);
+    this.sky = dome;
+    progress(0.04, "Laying out the ground…");
+    await nextFrame();
+    const mat = groundMaterial(assets, this.terrain);
+    const step = this.tier === "low" ? 1 : 0.5;
+    this.groundTiles = groundTiles(view.device, this.terrain, { step, above: this.terrain.water - this.def.terrain.clearDepth - 4, color: groundColor(this.terrain) }); // prettier-ignore
+    for (const t of this.groundTiles) {
+      const e = new pc.Entity("ground-tile");
+      e.addComponent("render", { meshInstances: [new pc.MeshInstance(t.mesh, mat)], castShadows: false, receiveShadows: true, layers: [view.worldLayer.id] }); // prettier-ignore
+      app.root.addChild(e);
+    }
+    this.groundMaterial = mat;
+    if (this.def.water) {
+      const wm = waterMaterial(this.def);
+      for (const m of waterMeshes(view.device, this.terrain)) {
+        const e = new pc.Entity("water");
+        e.addComponent("render", { meshInstances: [new pc.MeshInstance(m, wm)], castShadows: false, receiveShadows: true, layers: [view.surfaceLayer.id] }); // prettier-ignore
+        app.root.addChild(e);
+      }
+      this.waterMaterial = wm;
+    }
+  }
+
+  // The skybox rotation (degrees about y) that puts the HDRI's sun, at `u`
+  // across the image, at the world's sun azimuth.
+  hdriRotation(u, azimuth) {
+    return (u - 0.5) * 360 - azimuth + (this.def.light.hdriTurn || 0);
   }
 
   addItem(item) {
@@ -239,7 +317,18 @@ export class World {
     for (const l of this.def.landmarks) {
       const y = this.terrain.heightAt(l.at[0], l.at[1]);
       const rec = { landmark: l, pos: [l.at[0], y, l.at[1]], top: y + 2.2 };
-      if (l.sign !== false) {
+      if (l.sign !== false && this.hybrid) {
+        // A model: a wooden board with the title painted on.
+        const width = buildSign(l.label, { count: 1 }).width;
+        const board = signBoard(this.view.device, { title: l.title, label: l.label, accent: this.def.colors.accent, width }); // prettier-ignore
+        board.setLocalPosition(l.at[0], y, l.at[1]);
+        board.setLocalEulerAngles(0, l.facing, 0);
+        this.view.app.root.addChild(board);
+        const a = (l.facing * Math.PI) / 180;
+        this.physics.add({ id: `sign-${l.id}`, shape: "box", x: l.at[0], z: l.at[1], y0: y - 1, y1: y + 2.1, hx: width / 2, hz: 0.12, yaw: l.facing }); // prettier-ignore
+        rec.front = [Math.sin(a), Math.cos(a)];
+        rec.board = board;
+      } else if (l.sign !== false) {
         const sign = buildSign(l.label, { seed: this.def.seed, color: this.def.colors.accent, count: Math.round(20000 * this.budget.props) }); // prettier-ignore
         // Signs have levels of detail like props (1 m tall, scaled up).
         const unit = { buf: scaleBuf(sign.buf, 1 / sign.height), foot: [0, 0, 0] };
@@ -281,11 +370,23 @@ export class World {
       joints[j.name] = g;
       if (parts[j.name]) {
         const ct = view.container(parts[j.name]);
-        view.entity(`part-${j.name}`, ct, { parent: g });
+        view.entity(`part-${j.name}`, ct, { parent: g, shadows: this.shadows });
         this.charCount += ct.splatCount;
       }
     }
     this.joints = joints;
+  }
+
+  // The lit, skinned character (mesh-character.js). In splats mode, where
+  // no sky lights the models, a soft ambient light stands in for it.
+  async buildMeshCharacter() {
+    const { model } = await loadMeshCharacter(this.view.app);
+    const root = this.view.group("character");
+    root.addChild(model);
+    this.joints = { root };
+    this.meshCharacter = model;
+    this.charCount = 0;
+    if (!this.hybrid) this.view.app.scene.ambientLight = new pc.Color(...this.def.light.hazeColor.map((v) => v * 0.55)); // prettier-ignore
   }
 
   spawn(at = this.def.spawn.at, facing = this.def.spawn.facing) {
@@ -293,6 +394,7 @@ export class World {
     c.pos = [at[0], this.terrain.heightAt(at[0], at[1]), at[1]];
     c.facing = (facing * Math.PI) / 180;
     c.gait = { speed: 0, phase: 0 };
+    this.lastDt = 0;
     this.camera.snap(this.focus(), c.facing);
     this.placeCharacter();
   }
@@ -367,10 +469,9 @@ export class World {
 
   buildChunk(it, lv) {
     const ch = it.chunk;
-    const ground = ch.ground ? this.terrain.buildGround(ch, lv, { density: this.budget.density, grass: this.budget.grass }) : null; // prettier-ignore
-    const water = it.wet
-      ? buildWater(this.terrain, ch, lv, { density: this.budget.density })
-      : null;
+    // Hybrid mode: only the near grass (the ground and water are models).
+    const ground = ch.ground && (!this.hybrid || lv === 0) ? this.terrain.buildGround(ch, lv, { density: this.budget.density, grass: this.budget.grass, carpet: !this.hybrid }) : null; // prettier-ignore
+    const water = it.wet && !this.hybrid ? buildWater(this.terrain, ch, lv, { density: this.budget.density }) : null; // prettier-ignore
     // One group per chunk and level: its ground, and its water (whose
     // near levels ripple, see waves() in render.js).
     const n = (ground?.count || 0) + (water?.count || 0);
@@ -380,7 +481,7 @@ export class World {
     const g = this.view.group(`chunk-${ch.id}-${lv}`);
     g.setLocalPosition(ch.x0, this.terrain.water, ch.z0);
     g.enabled = false;
-    if (ground?.count) this.view.entity("ground", this.view.container(ground), { parent: g });
+    if (ground?.count) this.view.entity("ground", this.view.container(ground), { parent: g, layer: "ground" }); // prettier-ignore
     if (water?.count) {
       const e = this.view.entity("water", this.view.container(water), { parent: g });
       if (lv <= 1 && !this.reducedMotion) {
@@ -405,7 +506,7 @@ export class World {
         if (lv === it.shown) continue;
         if (lv >= 0 && !it.entities[lv]) {
           const p = it.prop;
-          const e = this.view.entity(`prop-${p.id}-${lv}`, it.bake.levels[lv], { pos: [p.at[0], it.y, p.at[1]], yaw: p.turn, scale: p.size }); // prettier-ignore
+          const e = this.view.entity(`prop-${p.id}-${lv}`, it.bake.levels[lv], { pos: [p.at[0], it.y, p.at[1]], yaw: p.turn, scale: p.size, shadows: this.shadows && lv === 0 }); // prettier-ignore
           if (p.tilt) e.setLocalEulerAngles(p.tilt, p.turn, 0);
           it.entities[lv] = e;
         }
@@ -419,6 +520,10 @@ export class World {
   stats() {
     const out = { tier: this.tier, budget: this.budget.splats, total: 0, fixed: this.fixedCount(), chunks: 0, props: 0, levels: [0, 0, 0, 0, 0], hiddenProps: 0 }; // prettier-ignore
     out.total = out.fixed;
+    out.mode = this.mode;
+    // Models drawn (hybrid mode's ground tiles, water, sky and signs; splats
+    // mode's ground depth and shadow catcher).
+    out.models = this.view.app.root.findComponents("render").filter((r) => r.enabled && r.entity.enabled).length; // prettier-ignore
     for (const it of this.items) {
       if (it.shown < 0) {
         if (it.kind === "prop") out.hiddenProps++;
@@ -446,7 +551,10 @@ export class World {
       ? this.overviewPose(dt)
       : this.camera.update(this.focus(), dt, run, this.time);
     this.view.setCameraPose(pos, target);
-    this.sky.setPosition(pos[0], this.terrain.water, pos[2]);
+    this.lighting.update(pos);
+    if (this.hybrid) this.sky.setPosition(pos[0], pos[1], pos[2]);
+    else this.sky.setPosition(pos[0], this.terrain.water, pos[2]);
+    this.waterMaterial?.setParameter("uWdWater", [this.reducedMotion ? 0 : this.time, 0, 0, 0]);
     this.plan();
     this.buildQueued(1);
     this.applyPlan();
@@ -493,6 +601,7 @@ export class World {
     c.moving = speed > 0.1;
     // A frame with no time (a paused clock) keeps the gait as it is.
     if (dt > 0) stepGait(c.gait, speed, dt);
+    this.lastDt = dt;
     this.placeCharacter();
     this.checkLandmarks();
   }
@@ -503,6 +612,10 @@ export class World {
     if (!j) return;
     j.root.setPosition(c.pos[0], c.pos[1], c.pos[2]);
     j.root.setEulerAngles(0, c.facing * DEG, 0);
+    if (this.meshCharacter) {
+      stepMeshCharacter(this.meshCharacter, c.gait.speed, this.lastDt || 0);
+      return;
+    }
     const p = pose(c.gait, this.time);
     // Lane Character: the hips also sway sideways (p.hips).
     const h = p.hips || [0, 0, 0];
