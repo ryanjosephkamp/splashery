@@ -574,7 +574,7 @@ void main() {
         // flame: glows where fuel burns hot
         // glowing soot: bright by temperature; blue where fuel meets air
         float heat = max(g.g, 0.0);
-        vec3 e = flameRamp(clamp(heat * 0.3, 0.0, 1.0)) * uGasD.y * heat * smoothstep(0.005, 0.08, g.b);
+        vec3 e = flameRamp(clamp(heat * 0.22, 0.0, 1.0)) * uGasD.y * heat * smoothstep(0.005, 0.08, g.b);
         e += vec3(0.12, 0.3, 1.0) * uGasD.y * 0.25 * g.b * (1.0 - smoothstep(0.3, 1.2, heat));
         float light = uGasD.w * (0.55 + 0.45 * clamp(1.0 - gasSample((p - lo) / uGasA.w + vec3(0.0, 2.0, 0.0)).r * uGasD.x * uGasA.w * 6.0, 0.0, 1.0));
         acc += trans * (e + uGasC.rgb * light * sigma) * ds;
@@ -606,7 +606,7 @@ void main() {
         float sigma = g.r * uGas2D.x;
         // flame: glows where fuel burns hot
         float heat = max(g.g, 0.0);
-        vec3 e = flameRamp(clamp(heat * 0.3, 0.0, 1.0)) * uGas2D.y * heat * smoothstep(0.005, 0.08, g.b);
+        vec3 e = flameRamp(clamp(heat * 0.22, 0.0, 1.0)) * uGas2D.y * heat * smoothstep(0.005, 0.08, g.b);
         e += vec3(0.12, 0.3, 1.0) * uGas2D.y * 0.25 * g.b * (1.0 - smoothstep(0.3, 1.2, heat));
         float light = uGas2D.w * (0.55 + 0.45 * clamp(1.0 - gas2Sample((p - lo) / uGas2A.w + vec3(0.0, 2.0, 0.0)).r * uGas2D.x * uGas2A.w * 6.0, 0.0, 1.0));
         acc += trans * (e + uGas2C.rgb * light * sigma) * ds;
@@ -866,7 +866,7 @@ fn fresnel(cosT: f32, f0: f32) -> f32 {
         let g = gasSample((p - lo) / uniform.uGasA.w);
         let sigma = g.r * uniform.uGasD.x;
         let heat = max(g.g, 0.0);
-        var e = flameRamp(clamp(heat * 0.3, 0.0, 1.0)) * uniform.uGasD.y * heat * smoothstep(0.005, 0.08, g.b);
+        var e = flameRamp(clamp(heat * 0.22, 0.0, 1.0)) * uniform.uGasD.y * heat * smoothstep(0.005, 0.08, g.b);
         e += vec3f(0.12, 0.3, 1.0) * uniform.uGasD.y * 0.25 * g.b * (1.0 - smoothstep(0.3, 1.2, heat));
         let light = uniform.uGasD.w * (0.55 + 0.45 * clamp(1.0 - gasSample((p - lo) / uniform.uGasA.w + vec3f(0.0, 2.0, 0.0)).r * uniform.uGasD.x * uniform.uGasA.w * 6.0, 0.0, 1.0));
         acc += trans * (e + uniform.uGasC.rgb * light * sigma) * ds;
@@ -896,7 +896,7 @@ fn fresnel(cosT: f32, f0: f32) -> f32 {
         let g = gas2Sample((p - lo) / uniform.uGas2A.w);
         let sigma = g.r * uniform.uGas2D.x;
         let heat = max(g.g, 0.0);
-        var e = flameRamp(clamp(heat * 0.3, 0.0, 1.0)) * uniform.uGas2D.y * heat * smoothstep(0.005, 0.08, g.b);
+        var e = flameRamp(clamp(heat * 0.22, 0.0, 1.0)) * uniform.uGas2D.y * heat * smoothstep(0.005, 0.08, g.b);
         e += vec3f(0.12, 0.3, 1.0) * uniform.uGas2D.y * 0.25 * g.b * (1.0 - smoothstep(0.3, 1.2, heat));
         let light = uniform.uGas2D.w * (0.55 + 0.45 * clamp(1.0 - gas2Sample((p - lo) / uniform.uGas2A.w + vec3f(0.0, 2.0, 0.0)).r * uniform.uGas2D.x * uniform.uGas2A.w * 6.0, 0.0, 1.0));
         acc += trans * (e + uniform.uGas2C.rgb * light * sigma) * ds;
