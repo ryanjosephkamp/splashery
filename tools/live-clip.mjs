@@ -9,6 +9,7 @@
 //     [--audio=<wav>] [--video=<y4m>] [--press=<selector>[,<selector>…]]
 //     [--js=<code run before recording>] [--at=<js run at time t: "t:code;t:code">]
 //     [--depth] [--strip=8] [--sheet=full] [--report=<js whose result is printed after>]
+//     [--ready=<js: recording waits until it returns true>] [--screen-demo] [--opt=key=value]
 //
 // The page's clock is stepped by hand (as tools/effect-clip.mjs does), so a
 // clip shows the toy at its real speed however slow the renderer is.
@@ -106,6 +107,56 @@ if (audio) {
     };
   });
 }
+if (flag("screen-demo")) {
+  // "Share a screen" gets a drawn window instead of the fake device's test
+  // pattern: a plain notes window whose text types itself and a clock.
+  await page.addInitScript(() => {
+    navigator.mediaDevices.getDisplayMedia = async () => {
+      const c = document.createElement("canvas");
+      c.width = 960;
+      c.height = 600;
+      const g = c.getContext("2d");
+      const text =
+        "Notes for Saturday\n\n- Water the tomatoes\n- Call Grandma about the picnic\n- Fix the bike's back tire\n- Library books due Monday\n- Try the new bread recipe\n\nSplats on a screen, on a screen.";
+      const t0 = performance.now();
+      const draw = () => {
+        const t = (performance.now() - t0) / 1000;
+        g.fillStyle = "#2d6a8f";
+        g.fillRect(0, 0, 960, 600);
+        g.fillStyle = "#f7f4ec";
+        g.fillRect(70, 50, 820, 500);
+        g.fillStyle = "#d9d3c4";
+        g.fillRect(70, 50, 820, 40);
+        for (const [i, col] of ["#e0625a", "#e8b43c", "#5cb85c"].entries()) {
+          g.fillStyle = col;
+          g.beginPath();
+          g.arc(98 + i * 26, 70, 8, 0, Math.PI * 2);
+          g.fill();
+        }
+        g.fillStyle = "#333";
+        g.font = "20px sans-serif";
+        g.fillText("notes.txt", 440, 77);
+        const shown = text.slice(0, Math.floor(t * 14));
+        g.font = "30px sans-serif";
+        shown.split("\n").forEach((line, i) => g.fillText(line, 110, 140 + i * 40));
+        if (Math.floor(t * 2) % 2) {
+          const last = shown.split("\n");
+          const w = g.measureText(last[last.length - 1]).width;
+          g.fillRect(112 + w, 116 + (last.length - 1) * 40, 3, 30);
+        }
+        g.fillStyle = "#1c3f55";
+        g.fillRect(0, 570, 960, 30);
+        g.fillStyle = "#fff";
+        g.font = "18px sans-serif";
+        const s = Math.floor(t);
+        g.fillText(`10:4${Math.floor(s / 60) % 10}:${String(s % 60).padStart(2, "0")}`, 860, 591);
+        requestAnimationFrame(draw);
+      };
+      draw();
+      return c.captureStream(15);
+    };
+  });
+}
 await page.goto(`${base}?renderer=webgl2&profile=mid&adapt=off&labs=1`);
 await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
 await page.evaluate(async (toy) => {
@@ -115,6 +166,11 @@ await page.evaluate(async (toy) => {
   player.idle.weight = 0;
 }, toy);
 await page.waitForTimeout(1500);
+if (opt("opt", "")) {
+  const [key, value] = opt("opt", "").split("=");
+  await page.evaluate(([k, v]) => window.__splashery.app.setToyOption(k, v), [key, value]);
+  await page.waitForTimeout(1000);
+}
 if (opt("sheet", "") === "full") {
   await page.evaluate(() => document.getElementById("sheet-full")?.click());
   await page.waitForTimeout(600);
@@ -125,7 +181,7 @@ for (const sel of press) {
   await page.waitForTimeout(400);
 }
 // Wait for any rebuild the buttons started.
-await page.waitForFunction(() => window.__splashery.player.motion.recipe && !window.__splashery.player.loading, null, { timeout: 180_000 }); // prettier-ignore
+await page.waitForFunction(() => window.__splashery.player.motion.recipe && document.getElementById("progress").hidden, null, { timeout: 180_000 }); // prettier-ignore
 await page.waitForTimeout(800);
 if (audio) {
   const wav = readWav(audio);
@@ -203,6 +259,13 @@ if (audio) {
     };
   }, wav);
 }
+if (opt("ready", ""))
+  await page.waitForFunction(`(async () => { if (!document.getElementById("progress").hidden) return false; ${opt("ready", "")} })()`, null, { timeout: 180_000, polling: 250 }); // prettier-ignore
+// The toy must have finished building, and stayed built for a moment.
+for (let calm = 0; calm < 4; ) {
+  await page.waitForTimeout(400);
+  calm = (await page.evaluate(() => document.getElementById("progress").hidden)) ? calm + 1 : 0;
+}
 if (js) await page.evaluate(`(async () => { ${js} })()`);
 // Take over the clock.
 await page.evaluate(() => {
@@ -230,7 +293,7 @@ for (let n = 0; n < total; n++) {
     }
   if (waitDepth) {
     const ms = await page.evaluate(async () => {
-      const { MIRROR } = await import("/src/packs/live.js");
+      const { MIRROR } = await import("/src/live/relief.js");
       const cam = MIRROR.cam;
       if (!cam) return null;
       const n0 = cam.answers;

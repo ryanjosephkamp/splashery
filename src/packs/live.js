@@ -12,13 +12,13 @@
 //   the camera tap) a relief you can turn. Before the camera is on it shows
 //   a still life with its depth map. A tap flattens and raises the depth.
 //
-// It also holds what Photo to 3D's live view shares with the mirror
-// (liveView), so both look and behave the same.
+// Photo to 3D's live view shares the mirror's picture (src/live/relief.js),
+// so both look and behave the same.
 
 import { mix, shade, clamp, smoothstep, quatAxisAngle } from "../kit.js";
 import { live } from "../live/live.js";
-import { reliefGrid, drawStill, CameraDepth } from "../live/relief.js";
-import { decodePhoto, unpackDepth, SAMPLES as PHOTO_SAMPLES } from "./photo-3d.js";
+import { MIRROR, buildMirror, mirrorScreen, mirrorStatus } from "../live/relief.js";
+import { decodePhoto, unpackDepth } from "./photo-3d.js";
 
 const TAU = Math.PI * 2;
 
@@ -310,77 +310,6 @@ const ROOM_ECHO = {
 // wide, rising toward the viewer by up to `lift` where the depth says it is
 // near. Its canvas (the recipe's screen) holds the colors and the depth.
 
-export const MIRROR = {
-  cols: 128,
-  rows: 96,
-  cam: null, // CameraDepth while the camera is on
-  still: null, // { photo, depth } for the picture before the camera
-  gain: 0,
-  last: 0,
-  version: 0,
-};
-
-// The grid for a splat budget (4 : 3, like most cameras).
-export function mirrorGrid(count) {
-  const n = Math.max(3000, Math.min(60000, Math.floor(count * 0.8)));
-  const cols = Math.max(64, Math.round(Math.sqrt((n * 4) / 3)));
-  return { cols, rows: Math.round((cols * 3) / 4) };
-}
-
-// Builds the relief picture: width 2 (recipe units), lift up to `lift`.
-export function buildMirror(k, { width = 2, lift = 0.8, part = 0 } = {}) {
-  const { cols, rows } = mirrorGrid(k.count);
-  MIRROR.cols = cols;
-  MIRROR.rows = rows;
-  const height = (width * rows) / cols;
-  reliefGrid(k, {
-    cols,
-    rows,
-    at: (u, v) => [(u - 0.5) * width, (0.5 - v) * height, 0],
-    axis: 2,
-    lift,
-    n: [0, 0, 1],
-    size: width / cols,
-    part,
-  });
-  // Start (or stop) the camera's depth with this build.
-  MIRROR.cam?.close();
-  MIRROR.cam = null;
-  if (live.camera?.video) {
-    const tier = k.count > 200000 ? "high" : k.count > 90000 ? "mid" : "low";
-    MIRROR.cam = new CameraDepth(live.camera.video, { cols, rows, tier });
-  }
-  return { cols, rows, height };
-}
-
-// The screen a live view draws into: the camera and its depth, or the
-// still picture, with the depth scaled by MIRROR.gain.
-export const mirrorScreen = {
-  get width() {
-    return MIRROR.cols * 2;
-  },
-  get height() {
-    return MIRROR.rows;
-  },
-  version: (time) =>
-    MIRROR.cam ? Math.floor(time * 60) : `${MIRROR.still ? 1 : 0}|${MIRROR.gain.toFixed(3)}`,
-  draw(g, time) {
-    const dt = Math.max(0, Math.min(0.1, time - MIRROR.last));
-    MIRROR.last = time;
-    if (MIRROR.cam && live.camera) MIRROR.cam.draw(g, { gain: MIRROR.gain, dt });
-    else if (MIRROR.still) drawStill(g, MIRROR.cols, MIRROR.rows, MIRROR.still.photo, MIRROR.still.depth, { gain: MIRROR.gain }); // prettier-ignore
-  },
-};
-
-export function mirrorStatus() {
-  const cam = MIRROR.cam;
-  if (!cam || !live.on("camera")) return "";
-  if (cam.status) return cam.status;
-  return cam.answers ? `Depth ${Math.round(1000 / Math.max(1, cam.ms))} times a second or so (${Math.round(cam.ms)} ms each), on this device.` : "Working out the depth…"; // prettier-ignore
-}
-
-const STILL = PHOTO_SAMPLES.find((s) => s.id === "still-life");
-
 async function readBytes(rel) {
   const url = new URL(rel, import.meta.url);
   if (url.protocol === "file:") {
@@ -410,11 +339,11 @@ const SPLAT_MIRROR = {
   credits: [
     {
       label: "Splat mirror",
-      title: `${STILL.title} (the picture before the camera is on)`,
-      source: STILL.source,
-      author: STILL.author,
-      license: STILL.license,
-      licenseUrl: STILL.licenseUrl,
+      title: "Still Life with Cheese (the picture before the camera is on)",
+      source: "https://commons.wikimedia.org/wiki/File:Still_Life_with_Cheese_MET_DT1989.jpg",
+      author: "Antoine Vollon (Metropolitan Museum of Art Open Access)",
+      license: "CC0 1.0",
+      licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/",
     },
   ],
   screen: mirrorScreen,

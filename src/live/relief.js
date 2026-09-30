@@ -13,6 +13,8 @@
 //   drawStill(g, …)              a photo and its depth map, for a toy's
 //                                picture before the camera is on
 
+import { live } from "./live.js";
+
 // A grid of cols x rows relief splats. at(u, v) gives each one's place at
 // rest (u and v 0..1, the texel centers), `axis` (0 x, 1 y, 2 z) and `lift`
 // (recipe units at full height) where it rises to. `layers` > 1 adds
@@ -251,4 +253,78 @@ export class CameraDepth {
     this.worker?.terminate();
     this.worker = null;
   }
+}
+
+// ---- The live view (the splat mirror, Photo to 3D's live view) -------------------------
+// A picture of relief splats facing the viewer: `cols` by `rows`, `width`
+// wide, rising toward the viewer by up to `lift` where the depth says it is
+// near. Its canvas (the recipe's screen) holds the colors and the depth.
+
+export const MIRROR = {
+  cols: 128,
+  rows: 96,
+  cam: null, // CameraDepth while the camera is on
+  still: null, // { photo, depth } for the picture before the camera
+  gain: 0,
+  last: 0,
+  version: 0,
+};
+
+// The grid for a splat budget (4 : 3, like most cameras).
+export function mirrorGrid(count) {
+  const n = Math.max(3000, Math.min(60000, Math.floor(count * 0.8)));
+  const cols = Math.max(64, Math.round(Math.sqrt((n * 4) / 3)));
+  return { cols, rows: Math.round((cols * 3) / 4) };
+}
+
+// Builds the relief picture: width 2 (recipe units), lift up to `lift`.
+export function buildMirror(k, { width = 2, lift = 0.8, part = 0 } = {}) {
+  const { cols, rows } = mirrorGrid(k.count);
+  MIRROR.cols = cols;
+  MIRROR.rows = rows;
+  const height = (width * rows) / cols;
+  reliefGrid(k, {
+    cols,
+    rows,
+    at: (u, v) => [(u - 0.5) * width, (0.5 - v) * height, 0],
+    axis: 2,
+    lift,
+    n: [0, 0, 1],
+    size: width / cols,
+    part,
+  });
+  // Start (or stop) the camera's depth with this build.
+  MIRROR.cam?.close();
+  MIRROR.cam = null;
+  if (live.camera?.video) {
+    const tier = k.count > 200000 ? "high" : k.count > 90000 ? "mid" : "low";
+    MIRROR.cam = new CameraDepth(live.camera.video, { cols, rows, tier });
+  }
+  return { cols, rows, height };
+}
+
+// The screen a live view draws into: the camera and its depth, or the
+// still picture, with the depth scaled by MIRROR.gain.
+export const mirrorScreen = {
+  get width() {
+    return MIRROR.cols * 2;
+  },
+  get height() {
+    return MIRROR.rows;
+  },
+  version: (time) =>
+    MIRROR.cam ? Math.floor(time * 60) : `${MIRROR.still ? 1 : 0}|${MIRROR.gain.toFixed(3)}`,
+  draw(g, time) {
+    const dt = Math.max(0, Math.min(0.1, time - MIRROR.last));
+    MIRROR.last = time;
+    if (MIRROR.cam && live.camera) MIRROR.cam.draw(g, { gain: MIRROR.gain, dt });
+    else if (MIRROR.still) drawStill(g, MIRROR.cols, MIRROR.rows, MIRROR.still.photo, MIRROR.still.depth, { gain: MIRROR.gain }); // prettier-ignore
+  },
+};
+
+export function mirrorStatus() {
+  const cam = MIRROR.cam;
+  if (!cam || !live.on("camera")) return "";
+  if (cam.status) return cam.status;
+  return cam.answers ? `Depth ${Math.round(1000 / Math.max(1, cam.ms))} times a second or so (${Math.round(cam.ms)} ms each), on this device.` : "Working out the depth…"; // prettier-ignore
 }
