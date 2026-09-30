@@ -187,8 +187,10 @@ fn main(@builtin(global_invocation_id) id: vec3u) {
   }
   density = max(density, 1e-4);
   let volume = 1.0 / density;
-  // Tait equation of state (power 7), clamped so free surfaces don't pull.
-  let pressure = clamp(u.stiffness * (pow(min(density / u.rho0, 1.6), 7.0) - 1.0), -0.1 * u.stiffness, 32.0 * u.stiffness);
+  // Tait equation of state (power 7). Hardly any pull below rest density:
+  // a stronger pull acts as a surface tension without wetting, and water
+  // then stands in a glass as a dome, like mercury.
+  let pressure = clamp(u.stiffness * (pow(min(density / u.rho0, 1.6), 7.0) - 1.0), -0.01 * u.stiffness, 32.0 * u.stiffness);
   var stress = mat3x3f(-pressure, 0.0, 0.0, 0.0, -pressure, 0.0, 0.0, 0.0, -pressure);
   let strain = C + transpose(C);
   stress += u.viscosity * strain;
@@ -296,7 +298,10 @@ fn main(@builtin(global_invocation_id) id: vec3u) {
   let b = id.x * ${PARTICLE_VEC4}u;
   let x = particles[b].xyz;
   let v = particles[b + 1u].xyz;
-  textureStore(outTex, vec2i(i32(id.x % u.texWidth), i32(id.x / u.texWidth)), vec4f(x, length(v)));
+  let q = vec2i(i32(id.x % u.texWidth), i32(id.x / u.texWidth));
+  textureStore(outTex, q, vec4f(x, length(v)));
+  // the lower half: velocities (cells/s), for drawing fast flow stretched
+  textureStore(outTex, q + vec2i(0, i32(u.pad)), vec4f(v, 0.0));
 }
 `;
 
@@ -325,7 +330,9 @@ export function packColliders(colliders, toGrid, s) {
       out.set(at, o + 4);
     } else if (c.type === "glass" || c.type === "cylinder") {
       out[o] = 4;
-      out[o + 1] = (c.radius ?? 0.3) * s;
+      // (half a cell wider than drawn: the liquid stops about half a cell
+      // short of a solid, and should meet the drawn wall)
+      out[o + 1] = (c.radius ?? 0.3) * s + 0.5;
       out[o + 2] = (c.height ?? 1) * s;
       // At least three cells of wall: a thin wall lets particles through
       // (the drawn glass keeps its own wall).
@@ -359,10 +366,11 @@ export class GpuMpm {
     this.gridBuf = new pc.StorageBuffer(device, cells * 16, usage);
     this.gridV = new pc.StorageBuffer(device, cells * 16, usage);
     this.texHeight = Math.ceil(cap / texWidth);
+    // Rows 0..texHeight: places and speeds; texHeight..2 texHeight: velocities.
     this.outTex = new pc.Texture(device, {
       name: "flParticles",
       width: texWidth,
-      height: this.texHeight,
+      height: this.texHeight * 2,
       format: pc.PIXELFORMAT_RGBA32F,
       mipmaps: false,
       storage: true,
@@ -472,7 +480,7 @@ export class GpuMpm {
     c.setParameter("friction", p.friction);
     c.setParameter("texWidth", this.texWidth);
     c.setParameter("ncol", p.ncol);
-    c.setParameter("pad", 0);
+    c.setParameter("pad", this.texHeight); // the velocity rows start here
     c.setParameter("cols[0]", p.cols);
   }
 

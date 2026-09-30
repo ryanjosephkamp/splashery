@@ -15,7 +15,9 @@ export { GpuLiquid };
 // How each preset looks as a surface: body color, how much it scatters
 // (0 clear .. 1 opaque), absorption per recipe unit (rgb) and glow.
 const LOOKS = {
-  water: { color: [0.78, 0.9, 0.97], scatter: 0, absorb: [0.9, 0.28, 0.16], glow: 0 },
+  // (water: its real absorption, about 0.45, 0.07 and 0.02 per meter in red,
+  // green and blue, per 0.33 m unit, a little stronger so a deep glass tints)
+  water: { color: [0.78, 0.9, 0.97], scatter: 0, absorb: [0.25, 0.05, 0.02], glow: 0 },
   soda: {
     color: [0.2, 0.08, 0.03],
     scatter: 0.05,
@@ -90,7 +92,7 @@ export class GpuFluids {
     if (!liq && !gas.length && !glassSpec) return;
     surf.render(
       liq
-        ? { texture: liq.texture, texWidth: liq.sim.texWidth, count: liq.n, simToToy: liq.simToRecipe(), radius: liq.d * 0.8, cell: liq.h, diffuse: liq.diffuse, gas } // prettier-ignore
+        ? { texture: liq.texture, texWidth: liq.sim.texWidth, count: liq.n, simToToy: liq.simToRecipe(), radius: liq.d * 0.8, velRow: liq.sim.texHeight, cell: liq.h, diffuse: liq.diffuse, gas } // prettier-ignore
         : { count: 0, gas },
       { camera: this.stage.cameraEntity.camera, toyToWorld: this.toyToWorld() },
     );

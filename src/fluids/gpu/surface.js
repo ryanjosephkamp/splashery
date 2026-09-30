@@ -47,22 +47,33 @@ uniform mat4 uSimToView;
 uniform mat4 uProj;
 uniform float uRadius;
 uniform vec2 uMinPx;       // x the smallest radius in texels, y texels per unit at distance 1
+uniform vec2 uStretch;     // x seconds of travel to stretch by, y the velocity rows' start
 varying vec2 vUv;
 varying vec3 vCenter;
 varying float vR;
+varying float vS;
 void main() {
   int i = gl_InstanceID;
   int w = int(uTexWidth);
-  vec4 p = texelFetch(uParticles, ivec2(i - (i / w) * w, i / w), 0);
+  ivec2 q = ivec2(i - (i / w) * w, i / w);
+  vec4 p = texelFetch(uParticles, q, 0);
   vec4 vp = uSimToView * vec4(p.xyz, 1.0);
   // Never smaller than a texel or two, or a far liquid breaks into specks.
   float r = max(uRadius, uMinPx.x * max(-vp.z, 1e-3) / uMinPx.y);
-  vec3 corner = vp.xyz + vec3(aPosition * r, 0.0);
+  // Fast flow is drawn stretched along its motion (a frame's travel), so a
+  // falling stream reads as one continuous stream, not beads.
+  vec3 vel = (uSimToView * vec4(texelFetch(uParticles, q + ivec2(0, int(uStretch.y)), 0).xyz, 0.0)).xyz;
+  float sl = length(vel.xy);
+  float L = min(sl * uStretch.x, 5.0 * r);
+  vec2 dir = sl > 1e-6 ? vel.xy / sl : vec2(1.0, 0.0);
+  vec2 off = dir * aPosition.x * (r + 0.5 * L) + vec2(-dir.y, dir.x) * aPosition.y * r;
+  vec3 corner = vp.xyz + vec3(off, 0.0);
   vec4 c = uProj * vec4(corner, 1.0);
   gl_Position = vec4(c.xy, 0.5 * c.w, c.w);
   vUv = aPosition;
   vCenter = vp.xyz;
   vR = r;
+  vS = r / (r + 0.5 * L);
 }
 `;
 const SPRITE_VS_W = /* wgsl */ `
@@ -73,22 +84,32 @@ uniform uSimToView: mat4x4f;
 uniform uProj: mat4x4f;
 uniform uRadius: f32;
 uniform uMinPx: vec2f;
+uniform uStretch: vec2f;
 varying vUv: vec2f;
 varying vCenter: vec3f;
 varying vR: f32;
+varying vS: f32;
 @vertex fn vertexMain(input: VertexInput) -> VertexOutput {
   var output: VertexOutput;
   let i = i32(input.instanceIndex);
   let w = i32(uniform.uTexWidth);
-  let p = textureLoad(uParticles, vec2i(i % w, i / w), 0);
+  let q = vec2i(i % w, i / w);
+  let p = textureLoad(uParticles, q, 0);
   let vp = uniform.uSimToView * vec4f(p.xyz, 1.0);
   let r = max(uniform.uRadius, uniform.uMinPx.x * max(-vp.z, 1e-3) / uniform.uMinPx.y);
-  let corner = vp.xyz + vec3f(input.aPosition * r, 0.0);
+  let vel = (uniform.uSimToView * vec4f(textureLoad(uParticles, q + vec2i(0, i32(uniform.uStretch.y)), 0).xyz, 0.0)).xyz;
+  let sl = length(vel.xy);
+  let L = min(sl * uniform.uStretch.x, 5.0 * r);
+  var dir = vec2f(1.0, 0.0);
+  if (sl > 1e-6) { dir = vel.xy / sl; }
+  let off = dir * input.aPosition.x * (r + 0.5 * L) + vec2f(-dir.y, dir.x) * input.aPosition.y * r;
+  let corner = vp.xyz + vec3f(off, 0.0);
   let c = uniform.uProj * vec4f(corner, 1.0);
   output.position = vec4f(c.xy, 0.5 * c.w, c.w);
   output.vUv = input.aPosition;
   output.vCenter = vp.xyz;
   output.vR = r;
+  output.vS = r / (r + 0.5 * L);
   return output;
 }
 `;
@@ -170,6 +191,7 @@ uniform float uFar;
 varying vec2 vUv;
 varying vec3 vCenter;
 varying float vR;
+varying float vS;
 void main() {
   float r2 = dot(vUv, vUv);
   if (r2 > 1.0) discard;
@@ -183,6 +205,7 @@ uniform uFar: f32;
 varying vUv: vec2f;
 varying vCenter: vec3f;
 varying vR: f32;
+varying vS: f32;
 @fragment fn fragmentMain(input: FragmentInput) -> FragmentOutput {
   var output: FragmentOutput;
   let r2 = dot(input.vUv, input.vUv);
@@ -200,12 +223,13 @@ uniform float uRadius;
 varying vec2 vUv;
 varying vec3 vCenter;
 varying float vR;
+varying float vS;
 void main() {
   float r2 = dot(vUv, vUv);
   if (r2 > 1.0) discard;
-  // an enlarged sprite keeps the particle's volume (thinner, wider)
+  // an enlarged or stretched sprite keeps the particle's volume (thinner, wider)
   float k = uRadius / vR;
-  gl_FragColor = vec4(2.0 * sqrt(1.0 - r2) * vR * k * k * k, 0.0, 0.0, 1.0);
+  gl_FragColor = vec4(2.0 * sqrt(1.0 - r2) * vR * k * k * k * vS, 0.0, 0.0, 1.0);
 }
 `;
 const THICK_FS_W = /* wgsl */ `
@@ -213,12 +237,13 @@ uniform uRadius: f32;
 varying vUv: vec2f;
 varying vCenter: vec3f;
 varying vR: f32;
+varying vS: f32;
 @fragment fn fragmentMain(input: FragmentInput) -> FragmentOutput {
   var output: FragmentOutput;
   let r2 = dot(input.vUv, input.vUv);
   if (r2 > 1.0) { discard; }
   let k = uniform.uRadius / input.vR;
-  output.color = vec4f(2.0 * sqrt(1.0 - r2) * input.vR * k * k * k, 0.0, 0.0, 1.0);
+  output.color = vec4f(2.0 * sqrt(1.0 - r2) * input.vR * k * k * k * input.vS, 0.0, 0.0, 1.0);
   return output;
 }
 `;
@@ -472,6 +497,17 @@ void main() {
     vec3 nV = normalize(cross(ddx, ddy));
     if (dot(nV, P) > 0.0) nV = -nV;
     vec3 n = normalize((uViewToToy * vec4(nV, 0.0)).xyz);
+    // In a glass the liquid's sides are the glass's inner wall: take its
+    // normal there (the smoothed depth rounds the edge like a pudding).
+    if (uGlassB.w > 0.5) {
+      vec3 Pt = (uViewToToy * vec4(P, 1.0)).xyz;
+      vec2 rr = Pt.xz - uGlassA.xz;
+      float rl = length(rr);
+      if (rl > uGlassA.w - uMisc.z && n.y < 0.6 && Pt.y < uGlassA.y + uGlassB.x) {
+        n = vec3(rr.x, 0.0, rr.y) / max(rl, 1e-5);
+        nV = normalize((uToyToView * vec4(n, 0.0)).xyz);
+      }
+    }
     vec3 V = -rd;
     float thick = thickAll(uv0).r;
     // Refraction: what is behind, bent by the normal and seen through the thickness.
@@ -761,7 +797,16 @@ fn fresnel(cosT: f32, f0: f32) -> f32 {
     if (abs(ddy2.z) < abs(ddy.z)) { ddy = ddy2; }
     var nV = normalize(cross(ddx, ddy));
     if (dot(nV, P) > 0.0) { nV = -nV; }
-    let n = normalize((uniform.uViewToToy * vec4f(nV, 0.0)).xyz);
+    var n = normalize((uniform.uViewToToy * vec4f(nV, 0.0)).xyz);
+    if (uniform.uGlassB.w > 0.5) {
+      let Pt = (uniform.uViewToToy * vec4f(P, 1.0)).xyz;
+      let rr = Pt.xz - uniform.uGlassA.xz;
+      let rl = length(rr);
+      if (rl > uniform.uGlassA.w - uniform.uMisc.z && n.y < 0.6 && Pt.y < uniform.uGlassA.y + uniform.uGlassB.x) {
+        n = vec3f(rr.x, 0.0, rr.y) / max(rl, 1e-5);
+        nV = normalize((uniform.uToyToView * vec4f(n, 0.0)).xyz);
+      }
+    }
     let V = -rd;
     let thick = thickAll(uv0).r;
     let off = nV.xy * uniform.uMisc.x * clamp(thick * 4.0, 0.0, 1.0);
@@ -1034,6 +1079,8 @@ export class FluidSurface {
       scope.resolve("uFar").setValue(cam.farClip);
       const projY = proj.data[5] * this.size[1] * 0.5;
       scope.resolve("uMinPx").setValue([1.6, projY]);
+      // velocities are cells/s; a sixtieth of a second of travel
+      scope.resolve("uStretch").setValue([1 / 60, src.velRow ?? 0]);
       this.depthPass.count = count;
       this.depthPass.render();
       this.thickPass.count = count;
@@ -1047,15 +1094,18 @@ export class FluidSurface {
         this.diffPass.count = df.n;
         this.diffPass.render();
       }
-      scope.resolve("uWorldR").setValue(radius * 2.2);
+      scope.resolve("uWorldR").setValue(radius * 3.5);
       scope.resolve("uProjY").setValue(projY);
       scope.resolve("uEdge").setValue(radius * 3);
-      scope.resolve("uSrc").setValue(this.depthA);
-      scope.resolve("uDir").setValue([1 / this.size[0], 0]);
-      this.blurH.render();
-      scope.resolve("uSrc").setValue(this.depthB);
-      scope.resolve("uDir").setValue([0, 1 / this.size[1]]);
-      this.blurV.render();
+      // Twice over: one pass leaves each particle's bump as a speck of light.
+      for (let k = 0; k < (this.blurPasses ?? 2); k++) {
+        scope.resolve("uSrc").setValue(this.depthA);
+        scope.resolve("uDir").setValue([1 / this.size[0], 0]);
+        this.blurH.render();
+        scope.resolve("uSrc").setValue(this.depthB);
+        scope.resolve("uDir").setValue([0, 1 / this.size[1]]);
+        this.blurV.render();
+      }
     }
     const p = this.params;
     scope.resolve("uScene").setValue(this.scene);
@@ -1071,7 +1121,7 @@ export class FluidSurface {
     scope.resolve("uLight").setValue(p.light);
     scope.resolve("uGlassA").setValue(p.glassA);
     scope.resolve("uGlassB").setValue(p.glassB);
-    scope.resolve("uMisc").setValue([p.refract, liquid ? 1 : 0, 0, 0]);
+    scope.resolve("uMisc").setValue([p.refract, liquid ? 1 : 0, 2.5 * (src.cell || 0), 0]);
     scope.resolve("uFoam").setValue([...p.foam, liquid && src.diffuse?.n ? 1 : 0]);
     // Up to two gas grids (gasscene.js: a flame's fine grid and the smoke's).
     const gases = src.gas || [];
