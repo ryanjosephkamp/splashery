@@ -140,56 +140,51 @@ HOW THIS LANE RUNS
   docs/OPERATING.md, docs/PACKS.md, docs/WORKSTREAMS.md and docs/handoff/history.md (lessons from
   earlier lanes).
 - Your handoff file: create it. Start it with this brief, word for word, under "## Brief", then keep
-  "## State", "## Notes", "## Known issues" and "## For the Operator" current. Note your model at
-  the top of "## State" (the blog post compares the two models).
-- Shared lists: edit only your own entries in src/toys.js, src/toy-sounds.js, src/toy-help.js (a
-  how-to line and an About text per toy, following docs/handoff/Help.md), tools/toy-plan.json,
-  CREDITS.md and tools/assets.json. Regenerate docs/TOY-PLAN.md with `node tools/toy-plan.mjs`;
-  never merge it by hand.
-- Never edit tests/taps.spec.mjs. Your own tests go in tests/<prefix>.spec.mjs. If a finished lane's
-  test breaks because of a count or a list your work changes, don't edit it: say which test and why
-  in your message, and the Operator fixes it.
-- Assets: CC0, CC BY or public domain only, checked on the live source page and credited
-  (CREDITS.md, tools/assets.json and the toy's in-app credit). Never BY-SA or NC. No logos, brand
-  names or insignia.
-- Review: post clips and cards to the Effect review page,
-  https://claude.ai/artifact/NCsg9V5SzFY3Mnwuwgq7pi, as OPERATING.md's "Steps for a lane" says.
-  Judge every effect as motion at phone size against the effect quality rules before you post it.
-  The Operator has made your lane's record. Don't republish the page, and never write to "verdicts".
-- Push your work in progress to your branch about every hour, so it isn't only in your container,
-  and open your draft PR early. Many lanes run at once now, so main moves often: merge it into your
-  branch before each push (never rebase a pushed branch) and keep both sides of any conflict.
-- Before every push, follow "Before every push" in CLAUDE.md: the full Playwright suite
-  (SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium npx playwright test), prettier,
-  `node tools/us-english.mjs --diff`, `node tools/check-packs.mjs <pack>` for new or changed toys, a
-  contact sheet and thumbnails, and your own screenshots at 390×844 and 1440×900. Then put back the
-  standard screenshots (`node tools/upkeep.mjs --restore-shots`) and any other lane's screenshots
-  your branch didn't change.
-- PR: one draft PR against main with the five sections (Summary, Verification, Deviations, Known
-  issues, What was cut), and the model that built it in the Summary. When main moves, merge it into
-  your branch.
-- After you post your cards, check the owner's marks (the "verdicts" collection, ids starting with
-  your prefix) about once an hour with a scheduled check-in (send_later). Fix every "fix" in the
-  same PR, post the new clip as a "-r2" card, and set replacedBy on the old one. Stop the check-ins
-  once your PR is merged or closed.
-- Finish every working turn with a short final message that starts with "READY:" (PR link, card ids,
-  test results, anything for the Operator), "WORKING:" (what's left), or "BLOCKED:" (exactly what
-  you need).
-
-## State
+  "## State
 
 - Model: Opus 5.5 (claude-opus-5-5), default effort.
-- September 30, 2026: branch `claude/lane-ui-r2` started from main; handoff file and draft PR
-  opened. Building part 1 (focus mode).
+- September 30, 2026: all six parts built behind the labs switch, with tests (`tests/ui2.spec.mjs`,
+  12 tests, passing) and clips. Draft PR #131.
+  1. Focus mode: the top bar's focus button or F; Escape, the corner button or a swipe up from the
+     bottom edge on a phone bring everything back; the Fullscreen API where there is one.
+  2. The phone sheet's five stops: hidden (swipe the handle or the toy row down), row, grid, panel
+     and full (swipe up from the grid or the panel, or the square button in the toolbar). A toy with
+     a drawing pad (or an input panel taller than the sheet) opens its settings at the full stop.
+  3. The desktop panel: a tab on its edge (or `[`) folds it to a thin edge (remembered); its edge
+     still sets its width (that was already there, remembered); Gallery opens every toy as a page
+     over the stage (Escape, Close or a pick closes it).
+  4. The drawing pad: a pen that inks by distance (4×4 coverage of a disk, walked in 0.1-cell steps,
+     ink per unit length); Fine, Medium and Bold (fine on phones, medium on computers) and an
+     Eraser; the pen stays as chosen when the panel is drawn again after a read.
+  5. `manifest.webmanifest`, icons at 180, 192 and 512 px (the site's favicon splats on white), the
+     Apple meta tags. No service worker.
+  6. Pan: Shift or Option/Alt and a drag on a computer, two fingers moving together on a phone; the
+     view's aim stays within the toy's bounds (a box of its radius); ↺, R and a double-tap center
+     it; `camera.pan` in links and saved scenes, left out when centered.
 
 ## Notes
 
-- Everything new sits behind the labs switch (`?labs=1`) through one flag, `ui2On()` in `src/ui.js`;
-  flipping it to true makes it the default.
+- One flag, `ui2On()` in `src/player.js`, gates everything (it returns `labsOn()`); making it return
+  true makes all of it the default. `body.ui2` gates the CSS, and `.ui2-only` / `.ui2-hide` the
+  markup.
+- The camera now has `aim` (where the view is going) and `center` (the toy's), and `target` eases to
+  `aim` like the rest of the pose. `panBy`, `getPan`, `setPan` live in `src/camera.js`; the player's
+  `panBy` (the picture toys' pan) now calls it.
+- Two fingers: the browser sends each finger's move on its own, so after one finger's step the pair
+  looked pinched and a two-finger drag along the fingers' line read as a zoom. With `pairPinch`
+  (labs) the gesture is read every second move.
+- The CNN reads a drawn 3 and 7 with all three pens (tested with the fine pen at 390×844).
 
 ## Known issues
 
-- None yet.
+- On a phone the tagline "splats you can play with" hides (labs only) to make room for the sixth
+  round button.
+- The picture toys' pan now also goes into links (outside labs too): before, a link to a page seen
+  close up opened centered. Old links still open centered.
+- Toys whose own drag covers the whole toy (the puzzle cube, the bricks, stretchy toys) turn with a
+  one-finger drag beside the toy, as before; two fingers now move them instead of turning them.
+  Right-drag and Space-drag still turn on a computer.
+- The standalone launch (Home Screen) can't be emulated here: checked the manifest and icons only.
 
 ## For the Operator
 
