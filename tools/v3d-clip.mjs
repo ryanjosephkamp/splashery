@@ -42,7 +42,9 @@ const browser = await chromium.launch({
 });
 const page = await browser.newPage({ viewport: { width: w, height: h } });
 page.on("pageerror", (e) => console.error("page error:", e.message));
-await page.goto(`${base}?labs=1&renderer=webgl2&profile=high&adapt=off${kernel ? `&kernel=${kernel}` : ""}`);
+await page.goto(
+  `${base}?labs=1&renderer=webgl2&profile=high&adapt=off${kernel ? `&kernel=${kernel}` : ""}`,
+);
 await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
 const res = await page.evaluate(
   async ({ s, w, h }) => {
