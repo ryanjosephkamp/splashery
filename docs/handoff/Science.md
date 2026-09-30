@@ -137,6 +137,8 @@ Model: Opus 5.5 (claude-opus-5-5), default effort.
 
 ## Notes
 
+- **Owner's marks (23:07 UTC, September 30, 2026).** Every current card is marked good, including
+  `sci-galaxy-r3` on page 2. Nothing is left to fix.
 - **Latest main merge (September 30, 2026, evening).** Main's Worlds hybrid mode merged in; the
   CREDITS.md conflict kept both sections, and the nucleus sample (Zenodo 7233696, CC BY 4.0, checked
   on the live record) now has its own entry in CREDITS.md and `tools/assets.json`. After the merge,
