@@ -72,7 +72,7 @@ export function explain(kind, err) {
   const what = LABELS[kind]?.name || "device";
   const name = err?.name || "";
   if (name === "NotAllowedError" || name === "SecurityError" || name === "PermissionDeniedError") {
-    if (kind === "screen") return "Screen sharing was cancelled, so nothing is shared.";
+    if (kind === "screen") return "Screen sharing was canceled, so nothing is shared.";
     return `The ${what} wasn't allowed, so it stays off. To use it, allow the ${what} for this site in the browser's settings (often the icon beside the address), then tap again.`;
   }
   if (
