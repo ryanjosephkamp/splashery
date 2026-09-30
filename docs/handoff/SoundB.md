@@ -144,10 +144,10 @@ Model: Opus 5.5 (default effort), all of it.
 - September 30, 2026: started. `tools/sound-review.json` reached main in #139 during the day and was
   merged in.
 - **Synthesis done** for every toy on the lane's shelves that the owner asked to change (92 toys)
-  and 16 of the newer toys (section 7e), each marked `"status": "site"` in `tools/sound-review.json`
-  with a `plan` starting "Now:". Toys he said to keep, and toys he didn't mention, are unchanged
-  (the water bottle, the fluid lab, the picture frame, the Chladni plate, the Screen and the Turing,
-  Enigma and Bombe machines already fit 7e).
+  and 16 of the newer toys (section 7e; see the Sound Board marks below), each marked
+  `"status": "site"` in `tools/sound-review.json` with a `plan` starting "Now:". Toys he said to
+  keep, and toys he didn't mention, are unchanged (the water bottle, the fluid lab, the picture
+  frame, the Chladni plate, the Screen and the Turing, Enigma and Bombe machines already fit 7e).
 - **43 new voices** in the "Sound B" block at the end of `src/voices.js` (fire, leaves, pages, a
   bite, brittle cracks, popcorn, dice, steam chuffs, real engines, rotors, creaking wood, scissors,
   a natural trumpet, bowstrings, water in a bottle, a firework's launch and burst, hooves, a crowd,
@@ -160,6 +160,11 @@ Model: Opus 5.5 (default effort), all of it.
   landings, the chess moves, the laptop's keys, the banana's peels and the croissant's butter use
   the new sounds. Timed layers in `src/toy-sounds.js` follow the starfish's arms, the menorah's
   candles, the gradient-descent ball's 21 hops and the bonsai's growth, scissors and drop.
+- **The owner's Sound Board marks of September 30** (#143) reached main mid-lane: the six newer toys
+  he approved as they were (fountain pen, running shoe, hoodie, difference engine, song landscape,
+  model splats) are back to main's sounds; the ten he marked get sounds that answer his notes; and
+  six more on these shelves (bombe, Chladni plate, coffee, Screen, supertall, water bottle) are
+  done. 108 toys are now `"site"` from this lane.
 - **28 recorded samples ready** in `assets/sounds/` (CC0, credited in CREDITS.md and
   `tools/assets.json` `sounds`), waiting for Sound A's `sample` voice to be wired in.
 
