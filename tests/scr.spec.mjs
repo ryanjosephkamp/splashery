@@ -24,12 +24,29 @@ async function openToy(page, id, options = {}, size = { width: 390, height: 844 
     [id, options],
   );
   await page.waitForFunction(
-    () => {
+    (id) => {
       const p = window.__splashery.player.pictures;
       window.__splashery.player.stage.requestRender();
+      // The Screen starts switched off with its picture hidden but built
+      // (lane Screens r2): wait for the picture to be ready.
+      if (id === "screen") return !!p?.media && p.api.ready("screen");
       return !p || (p.media && p.sheets.every((s) => !s.want || s.shown?.key === s.want.key) && p.splats() > 0); // prettier-ignore
     },
-    null,
+    id,
+    { timeout: 120_000 },
+  );
+}
+
+// Waits until `s` seconds of the player's clock have passed since the last
+// tap (the Screen switches on on that clock).
+async function settle(page, s) {
+  await page.waitForFunction(
+    (s) => {
+      const pl = window.__splashery.player;
+      pl.stage.requestRender();
+      return pl.time - (pl.motion.tap?.time ?? 0) > s;
+    },
+    s,
     { timeout: 120_000 },
   );
 }
@@ -119,10 +136,12 @@ test("the Screen switches on with a tap, plays its video, and pauses and plays a
   await page.waitForFunction(() => !window.__splashery.player.pictures.info().playing, null, { timeout: 20_000 }); // prettier-ignore
   await page.evaluate(() => window.__splashery.player.act());
   await page.waitForFunction(() => window.__splashery.player.pictures.info().playing, null, { timeout: 20_000 }); // prettier-ignore
-  // A new style starts switched off again, the video stopped.
+  // A new style starts switched off again, the video stopped, its picture
+  // built but hidden behind the closed curtains (lane Screens r2).
   await page.evaluate(() => window.__splashery.app.setToyOptions({ style: "cinema" }));
   await page.waitForFunction(() => !window.__splashery.player.pictures?.info().playing, null, { timeout: 20_000 }); // prettier-ignore
-  const splats = await page.evaluate(() => window.__splashery.player.pictures.splats());
+  await page.waitForFunction(() => window.__splashery.player.pictures?.api.ready("screen"), null, { timeout: 120_000 }); // prettier-ignore
+  const splats = await page.evaluate(() => window.__splashery.player.pictures.sheets[0].slot.container.numSplats); // prettier-ignore
   expect(splats).toBeGreaterThan(5000);
 });
 
@@ -151,7 +170,7 @@ test("lane Screens screenshots at 390x844 and 1440x900", async ({ page }) => {
     const tag = `${size.width}x${size.height}`;
     await openToy(page, "screen", { style: "tv" }, size);
     await page.evaluate(() => window.__splashery.player.act());
-    await page.waitForTimeout(2500);
+    await settle(page, 2);
     await page.screenshot({ path: `tests/screenshots/scr-screen-${tag}.png` });
     await openToy(page, "gaussian-splatting", {}, size);
     await page.waitForTimeout(800);

@@ -10,8 +10,8 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 326 toys. 326 have a tap action today; the other 0 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 323.
+- 333 toys. 333 have a tap action today; the other 0 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 330.
 - **more** (has an effect; make it clearer or more dramatic): 0.
 - **new** (needs its own effect): 3.
 - Visual fixes: 0 open, 30 done. Touch or drag interaction asked for: 4.
@@ -45,12 +45,13 @@ Proposals below are suggestions; the owner may change them.
   Coffee, Apple, Bananas, Orange, Kiwi, Pineapple, Cherries, Grapes, Avocado, Building bricks,
   Rubber duck, Newton's cradle, Puzzle cube, Kite, Chess set, Lorenz attractor, Möbius strip, Klein
   bottle, Menger sponge, Hypercube, Torus knot, Gyroid, Mandelbulb, Seashell spiral, Graph plotter,
-  Surface plotter, Circle and waves, Fourier circles, Pythagoras proof, Splat equation, Heraldic
-  shield, Crown, Wizard's orb, Jellyfish, School of fish, Pufferfish, Nautilus, Snail, Octopus, Sea
-  urchin, Frog, Snowman, Fireworks, Decorated tree, Diya, Acoustic guitar, Snare drum, Xylophone,
-  Toy piano, Grand piano, Upright piano, Harpsichord, Electronic keyboard, Hot-air balloon, Bus, Jet
-  airliner, Sailboat, Submarine, Bicycle, Eiffel Tower, Washington Monument, Pyramids of Giza,
-  Twisting supertall, Statue of Liberty, White House, Leaning Tower of Pisa, Colosseum, Parthenon,
+  Surface plotter, Circle and waves, Fourier circles, Pythagoras proof, Splat equation, Fountain
+  pen, Water bottle, Soda can, Running shoe, Hoodie, Sunglasses, Baseball cap, Heraldic shield,
+  Crown, Wizard's orb, Jellyfish, School of fish, Pufferfish, Nautilus, Snail, Octopus, Sea urchin,
+  Frog, Snowman, Fireworks, Decorated tree, Diya, Acoustic guitar, Snare drum, Xylophone, Toy piano,
+  Grand piano, Upright piano, Harpsichord, Electronic keyboard, Hot-air balloon, Bus, Jet airliner,
+  Sailboat, Submarine, Bicycle, Eiffel Tower, Washington Monument, Pyramids of Giza, Twisting
+  supertall, Statue of Liberty, White House, Leaning Tower of Pisa, Colosseum, Parthenon,
   Stonehenge, Big Ben, Taj Mahal, Castle, Pagoda, Windmill, Perceptron, Multilayer perceptron,
   Neural network, Convolutional network, Recurrent network, Transformer, Looped transformer,
   Diffusion model, Gradient descent, Gaussian splatting, Word vectors, Sorting machine, Half adder,
@@ -620,7 +621,7 @@ Proposals below are suggestions; the owner may change them.
   - Owner: Pretty cool.
   - Sound: Hiss and a whoosh of steam.
 
-## Objects (11)
+## Objects (14)
 
 - **Treasure chest** (`chest`). Now: tap: Open or close. Plan: keep.
   - Owner: Perfect.
@@ -662,6 +663,45 @@ Proposals below are suggestions; the owner may change them.
 - **Telescope** (`telescope`). Now: tap: Extend or collapse. Plan: keep.
   - Owner: Perfect.
   - Sound: Brass slide and a twinkle.
+- **Fountain pen** (`fountain-pen`). Now: tap: Uncap and write. Plan: keep.
+  - Owner: From the owner's approved ideas on the Toy Ideas page (lane Real objects, September 29,
+    2026): "This should be a real life splat if you can find it. I do not want this to be a cartoon
+    or an illustration."
+  - Effect: The cap (cut out of the scan as a solid piece) slides off and clicks onto the end, and
+    the nib writes a swirl in wet blue ink that glistens, then dries darker; the cap goes back on (4
+    s).
+  - Improved: Real objects: a detailed CC BY model of a green fountain pen (maker's marks painted
+    out) on a kit-built notepad. The cap slides off and posts on the back end, the pen tilts and
+    writes a looping swirl in bright wet ink that dries to dark navy from its start, the cap goes
+    back on and the ink runs back into the nib (4 s). Round 2: denser, sharper model.
+  - Sound: A cap click, a smooth nib scratch, another click.
+- **Water bottle** (`water-bottle`). Now: tap: Unscrew and pour. Plan: keep.
+  - Owner: From the owner's approved ideas on the Toy Ideas page (lane Real objects, September 29,
+    2026): "This should be a real life splat if you can find it. I do not want this to be a cartoon
+    or an illustration."
+  - Effect: Its cap (cut out of the scan as a solid piece) spins off in two turns and hops up. The
+    bottle tips and water glugs out as a stream of drops into a glass beside it; then it all runs
+    back and the cap screws on (4.5 s).
+  - Improved: Real objects: a detailed CC BY model of an orange steel bottle. The cap (cut from the
+    model above its plug, its underside closed) unscrews in two turns and hops to the table, the
+    bottle lifts and tips, and a continuous stream of water, drawn as overlapping pieces that follow
+    the pour's arc, glugs into a kit-built glass with a splash where it lands while the water rises;
+    then it all runs back, the bottle stands and the cap screws on (4.5 s). Round 2: denser model,
+    cap plug left out, a stream instead of drops.
+  - Sound: Cap clicks, then a glug-glug pour that rises in pitch as the glass fills.
+- **Soda can** (`soda-can`). Now: tap: Shake and open. Plan: keep.
+  - Owner: From the owner's approved ideas on the Toy Ideas page (lane Real objects, September 29,
+    2026): "This should be a real life splat if you can find it. I do not want this to be a cartoon
+    or an illustration."
+  - Effect: It shakes in place, then the ring pull (a kit-built piece matched to the scan) levers up
+    with a crack, and a jet of foam and bubbles sprays up and spatters down around it; the tab folds
+    back and the foam fades (3.5 s).
+  - Improved: Real objects: a detailed CC BY model of a can with an original plain orange label (no
+    brand) on a kit-built cork coaster. It shakes, its own ring pull (cut from the model as a solid
+    piece) levers up, the opening shows, a continuous jet of cream foam streaked with amber shoots
+    up and falls back while fine drops spatter onto the lid and the coaster and soak away, then the
+    tab folds back (3.5 s). Round 2: denser model, a foamy jet instead of clumps.
+  - Sound: A rattle, the sharp pssht of the can opening, then a fizz that dies away.
 
 ## Space (23)
 
@@ -1593,8 +1633,59 @@ Proposals below are suggestions; the owner may change them.
     spread), read by lane Math's safe reader. Eight programs to start from: sphere, torus, Möbius
     strip, seashell, trefoil knot, wave, spiral galaxy and Klein bottle. A tap plays t from 0 to 2π
     (4 s) through twelve copies, each morphing into the next; a program without t draws its splats
-    again in order.
+    again in order. Lab r2 (the owner's review of September 29, 2026: "really, really grainy"):
+    every splat at full opacity and its exact size, the sharp kernel, and a Splats choice: Solid
+    (default; a surface's splats lie flat along it, a curve's are drawn out along it) or Dots (each
+    programmed splat its own dot).
   - Sound: A soft rising tone as t plays.
+
+## Clothing (4)
+
+- **Running shoe** (`running-shoe`). Now: tap: Untie and tie again. Plan: keep.
+  - Owner: From the owner's approved ideas on the Toy Ideas page (lane Real objects, September 29,
+    2026): "This should be a real life splat if you can find it. I do not want this to be a cartoon
+    or an illustration."
+  - Effect: Its laces (kit-built jointed cords over the scan's own laces) come undone, cross back
+    through the eyelets and tie themselves into a bow, and the shoe taps its toe twice (4 s).
+  - Improved: Real objects: a CC BY photogrammetry scan of a trail running shoe, its own bow swapped
+    for two kit-built laces of 22 joints each. The bow comes undone and the laces flop loose, lift
+    and cross over the tongue, tie back into a bow, and the shoe taps its toe twice (4 s). Round 2:
+    denser scan, thinner braided laces.
+  - Sound: Laces zipping through the eyelets, a soft tug, two toe taps.
+- **Hoodie** (`hoodie`). Now: tap: Hood flip and cross the sleeves. Plan: keep.
+  - Owner: From the owner's approved ideas on the Toy Ideas page (lane Real objects, September 29,
+    2026): "This should be a real life splat if you can find it. I do not want this to be a cartoon
+    or an illustration."
+  - Effect: The hood (cut out of the scan as a solid piece) flips up and its drawstrings swing, then
+    the sleeves (cut at the shoulders) swing in and cross, and it all settles back (4.5 s).
+  - Improved: Real objects: a detailed CC BY model of a yellow hoodie, cut along its own seams (the
+    hood's panels) and by a hard plane at each shoulder. The hood flops forward on a hinge across
+    the neck and flips back up as the kit-built drawstrings swing; the sleeves swing up and cross in
+    front of the chest, clear of the body, with fabric filling the shoulders, then swing back down
+    and settle (4.5 s). Round 2: attached hood and shoulders, sleeves clear of the body.
+  - Sound: Soft fabric swishes and a zip-like flick.
+- **Sunglasses** (`sunglasses`). Now: tap: Fold, flip and darken. Plan: keep.
+  - Owner: From the owner's approved ideas on the Toy Ideas page (lane Real objects, September 29,
+    2026): "This should be a real life splat if you can find it. I do not want this to be a cartoon
+    or an illustration."
+  - Effect: The arms fold in on their hinges one after the other, the glasses flip to face you and
+    the lenses darken from clear to deep gray like light-changing lenses; then they unfold (3.5 s).
+  - Improved: Real objects: Poly Haven's CC0 round spectacles with kit-built lenses. The arms fold
+    in one after the other, both behind the lenses and the second behind the first, the glasses turn
+    head over heels to face you, the lenses darken from the rim inward to deep gray, then clear as
+    the arms unfold (3.5 s). Round 2: denser model, arms kept behind the lenses.
+  - Sound: Two hinge clicks and a soft shimmer as the lenses darken.
+- **Baseball cap** (`baseball-cap`). Now: tap: Flip and spin. Plan: keep.
+  - Owner: From the owner's approved ideas on the Toy Ideas page (lane Real objects, September 29,
+    2026): "This should be a real life splat if you can find it. I do not want this to be a cartoon
+    or an illustration."
+  - Effect: It flips up off its stand, spins flat like a flying disc and lands brim backward; then a
+    second flip turns it round the right way (3 s).
+  - Improved: Real objects: a detailed CC BY model of a gray six-panel cap on a kit-built walnut
+    stand. It flips up off the stand, spins flat three and a half turns round a small loop like a
+    flying disc, lands brim backward, then hops and turns round the right way (3 s). Round 2:
+    denser, sharper model.
+  - Sound: A flick, a whoosh, a soft landing.
 
 ## Medieval (9)
 
@@ -2246,15 +2337,23 @@ Proposals below are suggestions; the owner may change them.
     or a video on a loop; the digital frame lists its photos in the Toy tab to reorder, and steps
     through them in order or at random.
   - Sound: A knock on the wall, the wire creaking on the nail, and a softer knock.
-- **Screen** (`screen`). Now: tap: Switch on, then play or pause. Plan: keep.
-  - Owner: From the owner's notes of September 28, 2026 (lane Screens; labs only).
+- **Screen** (`screen`). Now: tap: Switch on or off. Plan: keep.
+  - Owner: From the owner's notes of September 28, 2026 (lane Screens; labs only), and his review of
+    September 29, 2026: "very close to perfect"; sharper sets, nothing of the picture while off, and
+    a real off switch (lane Screens r2).
   - Effect: Your video or GIF on a screen of splats, as an old TV, a flat TV, a cinema or a
-    hologram; the tap switches it on (the TV's bright line opens, the flat TV fades up, the curtains
-    part, the hologram flickers up), then plays and pauses.
+    hologram. A tap switches it on (the TV's bright line opens, the flat TV fades up, the curtains
+    part, the hologram flickers up); a tap on the picture plays and pauses; a tap on its switch (the
+    old TV's power knob, the flat TV's button, the curtains, the hologram's base) switches it off:
+    the old TV's picture shrinks to a bright dot, the flat TV fades to black, the curtains close,
+    the hologram sinks into its beam.
   - Improved: Screens: four styles on a picture sheet with method "screen", a Big Buck Bunny scene
     (CC BY 3.0) and Muybridge's horse GIF (public domain) as samples, video sound on the speaker
-    button.
-  - Sound: The TV's click and hum; each style its own (a soft tone, the curtains' swish, a shimmer).
+    button. Screens r2: the picture's sheet is hidden while the set is off or the curtains are
+    closed (nothing shows through), a GIF holds its frame and a video pauses; an off switch on each
+    style; sharp sets (even placement in square tiles, walnut, velvet, brass and gold).
+  - Sound: The TV's click and hum, and on switching off its click and falling whine; each style its
+    own (a soft tone, the curtains' swish, a shimmer).
 
 ## Studio (4)
 
@@ -2308,5 +2407,6 @@ Proposals below are suggestions; the owner may change them.
     toy's work-buffer program (a recipe's gpuField, an additive engine hook) computes its place,
     tilt and color from them and the time. Three fields: a galaxy whose stars orbit on turning
     ellipses (a density wave keeps two arms), an ocean of four Gerstner waves, a flow along a (2, 3)
-    torus knot.
+    torus knot. Lab r2: a tap on the toy now fires the pulse on every field (the galaxy's faint
+    stars were under the pick pass's alpha clip; the recipe's pickAlpha lowers it).
   - Sound: A soft rising swell.
