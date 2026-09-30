@@ -11,6 +11,8 @@
 //     "every": 1, "refs": [{ "file": "water.jpg", "label": "...", "credit": "..." }],
 //     "checks": [{ "ok": "yes" | "partly" | "no", "text": "..." }], "note": "..." }
 // or a static page: { "id": "fl-physics-r1", "html": "<section>...</section>" }.
+// A reference can also be a video (r4): { "video": "candle.webm", "start": 2,
+// "label", "credit" }, played in step with the clip, frame by frame.
 // Reference photos are never committed: each card credits its photos (author,
 // license, Commons page), which must be CC0, CC BY or public domain.
 
@@ -37,7 +39,8 @@ const page = await browser.newPage({ viewport: { width: W, height: 400 }, device
 
 const dataUrl = (file) => {
   const ext = path.extname(file).slice(1).toLowerCase().replace("jpg", "jpeg");
-  return `data:image/${ext};base64,${fs.readFileSync(path.resolve(root, file)).toString("base64")}`;
+  const kind = ext === "webm" || ext === "mp4" ? "video" : "image";
+  return `data:${kind}/${ext};base64,${fs.readFileSync(path.resolve(root, file)).toString("base64")}`;
 };
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;");
 const MARK = { yes: ["✓", "#5fd08a"], partly: ["≈", "#f0c05a"], no: ["✗", "#ff7a6b"] };
@@ -71,11 +74,13 @@ const CSS = `
 function sideBySide(card, h) {
   const refH = Math.floor((h - (card.refs.length - 1) * 6) / card.refs.length);
   const refs = card.refs
-    .map(
-      (r) =>
-        `<figure class="pane" style="height:${refH}px"><img src="${dataUrl(r.file)}" style="object-position:${r.pos || "50% 50%"}"><figcaption>${esc(r.label)}</figcaption></figure>`,
+    .map((r, i) =>
+      r.video
+        ? `<figure class="pane" style="height:${refH}px"><video id="ref${i}" muted playsinline preload="auto" src="${dataUrl(r.video)}" style="display:block;width:100%;height:100%;object-fit:cover;object-position:${r.pos || "50% 50%"}"></video><figcaption>${esc(r.label)}</figcaption></figure>`
+        : `<figure class="pane" style="height:${refH}px"><img src="${dataUrl(r.file)}" style="object-position:${r.pos || "50% 50%"}"><figcaption>${esc(r.label)}</figcaption></figure>`,
     )
     .join("");
+  const videos = card.refs.some((r) => r.video);
   const checks = (card.checks || [])
     .map(
       (c) =>
@@ -87,11 +92,11 @@ function sideBySide(card, h) {
     <div class="row">
       <div class="col"><div class="lab">Splashery (simulated, phone tier)</div>
         <div class="pane" style="height:${h}px;position:relative"><img id="ours" style="object-fit:cover"><span class="tag" id="clock"></span></div></div>
-      <div class="col"><div class="lab">Real (reference ${card.refs.length > 1 ? "photos" : "photo"})</div><div class="refs">${refs}</div></div>
+      <div class="col"><div class="lab">Real (reference ${videos ? "video" : card.refs.length > 1 ? "photos" : "photo"})</div><div class="refs">${refs}</div></div>
     </div>
     <div class="checks">${checks}</div>
     ${card.note ? `<p class="note">${card.note}</p>` : ""}
-    <p class="credit">Reference ${card.refs.length > 1 ? "photos" : "photo"} from Wikimedia Commons: ${credits}. ${card.sources ? esc(card.sources) : ""}</p>`;
+    <p class="credit">Reference ${videos ? "video" : card.refs.length > 1 ? "photos" : "photo"} from Wikimedia Commons: ${credits}. ${card.sources ? esc(card.sources) : ""}</p>`;
 }
 
 // The frames of a GIF, fully composited, as RGBA buffers.
@@ -145,6 +150,22 @@ for (const card of cards) {
           document.getElementById("clock").textContent = clock;
         }),
       [cropPng(f, gif.w, crop), `${t.toFixed(1)} s`],
+    );
+    // Reference videos: the same moment (from each one's start, looping).
+    await page.evaluate(
+      async ([t, starts]) => {
+        for (const [i, start] of starts) {
+          const v = document.getElementById(`ref${i}`);
+          if (!v) continue;
+          if (v.readyState < 1) await new Promise((r) => (v.onloadedmetadata = r));
+          const at = (start + t) % Math.max(0.1, v.duration - 0.05);
+          await new Promise((r) => {
+            v.onseeked = () => r();
+            v.currentTime = at;
+          });
+        }
+      },
+      [t, card.refs.map((r, i) => [i, r.start || 0]).filter(([i]) => card.refs[i].video)],
     );
     t += (f.delay * every) / 1000;
     const png = PNG.sync.read(await page.screenshot());
