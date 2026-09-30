@@ -3,6 +3,284 @@
 Prefix `wd`. Branch `claude/lane-worlds-engine`, PR "Engine: Worlds, the world engine and a sandbox
 island". How lanes work: [OPERATING.md](../OPERATING.md). Earlier lessons: [history.md](history.md).
 
+## Start here (Worlds r3, a fresh session)
+
+Written on September 30, 2026 by the r1, r2 and hybrid session (Opus 5.5) for the session that runs
+Worlds r3: a premium character and a sharper island. The rest of this file is the lane's history
+(r1, r2, hybrid), kept as it was; this section is the current state.
+
+### Where things stand
+
+- #78 (r1, the engine) is merged. #108 (r2, a sharper island) and #127 (hybrid) are open. The
+  Integrator tests main plus #127, then the Operator merges #108 and then #127. Don't push to either
+  branch.
+- r3 starts from `claude/lane-worlds-r3`, made from #127's head (07ae6a6 plus this file). Merge main
+  in once #127 has merged.
+- Character lane (#110, merged) rebuilt the splat character into `character.js` (the API),
+  `character-rig.js` (21 joints and the rotation math), `character-body.js` (the parts and the
+  palette) and `character-motion.js` (the gait). The "For the Character lane" notes further down are
+  older than that.
+- The owner's marks (Effect review page, lane record "Worlds"):
+  - `wd-hybrid-walk`, `wd-hybrid-shore`, `wd-hybrid-shadows`, `wd-hybrid-sky` and `wd-hybrid-depth`
+    are good.
+  - `wd-hybrid-character` is fix (September 30, 2026), word for word: "This is looking much better.
+    It's still doesn't feel premium yet and while I know that I marked some of the other Island
+    scenes as looking right, the terrain was generally what I was referring to. The sand looks okay,
+    but the character and a lot of the other stuff in the environment could use some work. The
+    character in particular could use a lot of work. It looks way too simple and simplistic. I would
+    also like to try to improve the Fidelity or resolution or sharpness of the rest of the island."
+  - `wd-walk-r3` and `wd-list-r3` (September 29) were fix too: keep improving sharpness, and make
+    the character look much better, "the player looks far too low-poly".
+  - So for r3: the terrain passes; the character (both kinds) and the props don't.
+
+### How the engine and the hybrid layer fit together
+
+- **Page:** `worlds/index.html` loads `src/worlds/main.js`. It checks the labs switch, reads
+  `worlds/<id>/world.json` (`?world=`, Test island by default) through `world-file.js`
+  (`normalizeWorld`: every field defaulted and clamped), shows the start screen and the list of
+  places at once, then builds the world.
+- **Device tiers** (`tiers.js`): `detectTier()` picks low, mid, high or max (`?profile=` forces
+  one). Each tier's row in `WORLD_BUDGETS` has the splat budget, the ground density, the near and
+  middle distances, the props and grass factors, the pixel-ratio cap, the kernel, the shadow map
+  size and the shadow reach.
+- **The view** (`render.js`, `WorldView`):
+  - It has the device (WebGPU or WebGL2), the app with the camera, gsplat, render, light and anim
+    systems, and the texture, gsplat, container and anim handlers.
+  - Layers, in drawing order:
+    1. World opaque: the hybrid ground, the sign boards, splats mode's depth-only ground.
+    2. Skybox: the hybrid sky dome.
+    3. `WdSky`: the splat sky, with no fog; `material:created` sets `GSPLAT_NO_FOG`.
+    4. `WdGround`: the ground's splats, or the near grass.
+    5. `WdSurface`: the shadow catcher, or the hybrid water.
+    6. World transparent: the props, the character, splats mode's water splats.
+  - `container(buf)` turns a `SplatBuffer` into a `GSplatContainer`.
+  - `entity(name, ct, { layer, shadows })` places splats.
+  - `setPixelRatio`, `setKernel` (lane Lab's sharp kernel) and `waves()` (the splat water's
+    work-buffer modifier) are here too.
+- **The world** (`world.js`, `World`). `build()` runs in this order:
+  1. `Lighting` (`lighting.js`): the sun, shadows, fog and the grade.
+  2. Hybrid mode: `buildModels()` loads `hybrid.js` assets, with the HDRI as environment light and
+     the sky dome, then the ground tiles and the water meshes. Splats mode: the splat sky, the
+     ocean, and `lighting.buildCatcher()` (the depth-only ground and the catcher tiles).
+  3. Chunks: 8 m cells, 5 levels, planned by `lod.js` under the tier's budget.
+  4. Props: `props.js` bakes toy recipes, with three levels per prop.
+  5. Signs.
+  6. The character: `buildCharacter()` for splats, or `buildMeshCharacter()` (`mesh-character.js`).
+  7. Spawn.
+  8. The first plan.
+
+  Every frame, `update()` moves the character through `physics.js` (the height field plus invisible
+  shapes), runs the camera (`camera.js`), re-plans the levels, builds queued chunks, and updates the
+  catcher tiles and the water's time.
+
+- **Modes:**
+  - `def.render` (`"splats"` by default) or `?render=splats|hybrid` picks the mode.
+  - `def.character.model` or `?character=splats|mesh` picks the character.
+  - `?shadows=0`, `?dpr=` and `?kernel=` override the tier.
+  - `?clock=manual` puts the world on a manual clock, for tests and clips.
+- **Test hooks:** `window.__world` has `enter`, `stats`, `char`, `ground`, `place`, `step`, `tick`,
+  `catchUp`, `card`, `world`, `view` and `mode`. `stats()` gives the splats drawn by kind and level,
+  the models drawn, the mode and the median frame time.
+- **Pure modules**, safe in Node tests: `world-file`, `terrain`, `water`, `props`, `character*`,
+  `physics`, `camera`, `lod` and `tiers`.
+
+### How the character is built today
+
+- **Splat character** (default; lane Character, #110):
+  - Kit-built rigid parts, one splat cloud per joint (21 joints: hips, torso, chest, neck, head,
+    arms, forearms, hands, fingers, thighs, shins, feet, toes).
+  - Each part turns on its joint; nothing bends. The joints are hidden the way clothes do it.
+  - The gait: `pose()` and `stepGait()` in `character-motion.js`. Walk is 1.9 m/s, run 4.6 m/s.
+  - Splats: `CHARACTER_SPLATS` gives 40k on low, 64k on mid, 90k on high and 120k on max, always
+    drawn in full.
+  - Colors come from the world file's `character` field. It is ours and procedural, so no license is
+    involved.
+- **Mesh character** (`?character=mesh`, the hybrid round):
+  - Kenney's "Animated Characters: Protagonists" (CC0; checked on
+    kenney.nl/assets/animated-characters-protagonists and in the zip's License.txt).
+  - One model (`characterMedium.fbx`, 58 bones, one skinned mesh) with the `skaterMaleA` skin.
+  - `tools/world-character.mjs` runs three.js 0.186.1's FBX loader and glTF exporter in Chromium and
+    builds `assets/worlds/character/character.glb` (834 kB) and `character.json`.
+  - Clips:
+    - idle 1.07 s;
+    - run 0.67 s;
+    - a walk made from the run: each joint half way back to the idle's first frame, the bounce at
+      35%. Blending toward the rest pose instead gave a T-pose-armed walk.
+  - `mesh-character.js`:
+    - scales it to `BODY.height` (1.74 m) from its mesh bounds;
+    - blends idle, walk and run by speed in a 1D blend tree (walk played at 0.72×, run at 1.05×);
+    - advances the animation with the world's clock (`anim.playing = false`, then `anim.update(dt)`
+      each frame);
+    - makes it cast and receive shadows and take the fog.
+  - The owner's verdict: better, but "way too simple". It is a stylized, big-headed game figure, not
+    a realistic one.
+
+### What was tried, and what it did (with numbers)
+
+- **Splat grain (r2):**
+  - Fidelity A's method helped: an even, flat, fully opaque ground carpet, blades in the ground's
+    color, round water splats, sign letters at nine splats per font pixel.
+  - The sharp kernel alone halved the speckle.
+  - Speckle measured by `tools/world-grain.mjs`, before → after:
+    - ground 0.07 → 0.03;
+    - shore 0.09 → 0.05;
+    - props 0.09 → 0.05.
+  - The owner still found it grainy at phone size. Splats can't make flat ground or water look
+    finished; that's why hybrid mode exists.
+- **Hybrid (good marks):**
+  - The model ground: 64 tiles of 16 m, a vertex every 0.5 m. Four CC0 Poly Haven textures (sand
+    `sand_01`, grass `rocky_terrain_02`, rock `rock_ground`, wet sand `damp_beach_sand`) sit in a
+    2048² atlas with 32 px of wrapped padding, each divided by its mean color, so they add detail
+    over the terrain's own palette. Detail strength per texture: 0.85, 0.45, 0.9, 0.75.
+  - The water: depth in the vertex alpha, foam, normal waves and Fresnel reflection.
+  - The sky: an HDRI dome (the upper 60 percent of the 4K tone-mapped image, 468 kB JPEG). A
+    sun-clamped 1K HDR (1.4 MB) lights the models.
+  - Hybrid assets total about 6 MB, the character included.
+- **Lessons from the hybrid build:**
+  - An HDRI with its sun disk left in doubles the sun and washes out every shadow. Clamp the sun
+    (tool option `--sky-cap=2.5`).
+  - The environment light had to be scaled by the dome's exposure (1.6) to match it; without that
+    the water's reflection read dark.
+  - The fog color must match the dome's horizon (measured into `sky.json`).
+- **Splats mode's light:**
+  - Shadows through a multiplicative shadow catcher work well; the `wd-hybrid-shadows` card was
+    marked good.
+  - The cost in the test browser (mid tier, 390×844, per frame):
+
+    | Build                                                 | Per frame                    |
+    | ----------------------------------------------------- | ---------------------------- |
+    | main before r2                                        | 1.04 s                       |
+    | r2                                                    | 1.20 s                       |
+    | hybrid branch, shadows on (before the cuts)           | about 1.6 s                  |
+    | hybrid branch, splats and hybrid mode, after the cuts | about 2.0 s (in another run) |
+
+  - The cuts: no tone map in splats mode, the catcher only within the shadows' reach, PCF3, only
+    level-0 props cast, no shadows on low.
+  - The splat shadow casters themselves cost almost nothing. The shadow light cost about 0.1 s and
+    the catcher and depth models about 0.1 s.
+  - The high tier at 1440×900 is the slow one: 76 s to load in the test browser.
+  - `tests/chr.spec.mjs:249` needed #129's longer time limit.
+
+- **Splats per tier** (splats mode, two places each):
+
+  | Tier | Measured      | Budget |
+  | ---- | ------------- | ------ |
+  | low  | 273k / 297k   | 300k   |
+  | mid  | 516k / 503k   | 550k   |
+  | high | 815k / 808k   | 900k   |
+  | max  | 1.34M / 1.31M | 1.4M   |
+
+  Hybrid draws fewer, because only the near grass stays splats.
+
+- **Frame times in hybrid mode:** 1.8 to 2.0 s in the test browser, about the same as splats mode.
+  The owner's phone was never measured.
+- **Character sources:**
+  - Quaternius (CC0) was the first choice, but Google Drive answers "Quota exceeded" from these
+    containers.
+  - OpenGameArt has Quaternius's "Ultimate Animated Character Pack" (CC0; chibi, black faces: not
+    better).
+  - Kenney's `mini-characters` and `blocky-characters` are chibi or blocky.
+  - Poly Pizza returned 403.
+
+### Ideas for r3 (within the rules: CC0, CC BY or public domain; no BY-SA, NC or brands)
+
+- **A realistic character (mesh), the biggest lever:**
+  - **MakeHuman or MPFB2** (its Blender add-on): the base mesh and its bundled assets are CC0. Check
+    each asset's license, since user-contributed ones vary.
+    - Make a realistic adult with proper topology, skin and clothes textures and eyebrows, rigged
+      with the game-engine skeleton.
+    - Use Blender as a Python module in these containers (`pip install bpy==5.0.1`, the Operator's
+      note). Build it there, bake the textures to 1K–2K, decimate to about 15–30k triangles and
+      export a GLB.
+    - Keep it a build tool: `tools/wdh-*.py`, the pinned version in LICENSES.md.
+  - **Animations:**
+    - CC0 motion capture: the CMU Graphics Lab motion capture database lets anyone use its data
+      freely; check the terms on its live page before use. There are also CC0 BVH packs (for example
+      on OpenGameArt).
+    - Retarget walk, run and idle onto the rig in Blender.
+    - Quaternius's "Universal Animation Library" (CC0) is on itch.io and Google Drive. If the owner
+      or the Operator can fetch it into the repo's `.cache`, it fits a humanoid rig directly.
+  - **Look:** physically based materials for skin, cloth and hair cards, lit by the same sun and
+    HDRI. That is what reads as "premium" next to the lit ground. A soft rim light or skin
+    subsurface isn't in PlayCanvas's standard material; the sheen parameter helps cloth.
+  - **Faces:** keep the neutral expression, avoid anyone's likeness, and don't use scans of real
+    people unless they're CC0 with consent stated.
+- **Sharper props (the island's "other stuff"):**
+  - Trees, bushes and rocks are splat bakes of toy recipes. At walking distance they read as soft,
+    rounded blobs.
+  - Option A, splats: raise the near props' density (`budget.props`), bake rocks as scanned-style
+    splats with high-frequency color, and use the sharp kernel. Limited by the same grain problem.
+  - Option B, hybrid: CC0 models from Poly Haven, which has rocks, boulders, tree trunks, dead trees
+    and some plants (all CC0), as lit, shadowed meshes with LODs. Keep splats where they're special:
+    the lighthouse toy, breakable things, flowers that animate.
+  - Foliage: alpha-tested leaf cards on mesh trees look like games. Splat canopies can stay, but
+    need darker, more varied greens and shadowing inside the crown.
+- **Island detail:**
+  - Blend a second, larger-scale texture sample on the ground to break the tiling.
+  - Add parallax or height blending between sand and grass.
+  - Scatter pebbles and shells (instanced meshes) on the beach.
+  - Add shoreline foam as a textured strip.
+- **Grade:**
+  - The owner may want punchier contrast. A CameraFrame (bloom, color enhance, vignette) is in the
+    vendored engine but costs a render target; try it on the high and max tiers.
+  - Screen-space ambient occlusion would ground the props.
+
+### Tools, tests and cards to reuse
+
+- **Tools:**
+  - `tools/world-clip.mjs`:
+    - scenes include `hybrid-walk`, `-shore`, `-shadows`, `-sky`, `-depth` and `-character`;
+    - `--modes` records splats and hybrid side by side;
+    - `--left=`/`--right=` with `--labels=A,B` compares any two variants;
+    - `noCards: true` keeps the landmark cards closed.
+  - `tools/world-grain.mjs` measures speckle.
+  - `tools/world-assets.mjs` fetches the Poly Haven ground atlas and sky; see `tools/hdr.mjs`.
+  - `tools/world-character.mjs` builds the mesh character from FBX with three.js.
+- **Tests:**
+  - `tests/wd.spec.mjs`: the engine, the budgets and the r2 render settings.
+  - `tests/wdh.spec.mjs`, eight tests:
+    - the render switch;
+    - the assets are small and credited;
+    - both modes draw what they should;
+    - depth order in each mode;
+    - the mesh character;
+    - frames per second;
+    - the `wdh-*` screenshots.
+  - `tests/chr.spec.mjs`: the Character lane's; it now has a 720 s limit. Never edit
+    `tests/taps.spec.mjs`.
+- **Cards** (Effect review page https://claude.ai/artifact/NCsg9V5SzFY3Mnwuwgq7pi):
+  - Upload a GIF with the Artifact tool (`asset: true`), then set a `cards/<id>` document (asset,
+    at, lane "Worlds", name, now, order, said). Never write `verdicts`, and never republish the
+    page.
+  - Hybrid cards: `wd-hybrid-walk`, `-shore`, `-shadows`, `-sky`, `-depth` and `-character` (orders
+    60–65).
+  - r3 cards could be `wd-character-r3`, `wd-props-r3` and `wd-island-r3`.
+- **Running the suite:** about 2.7 h, 529 tests.
+  - Run it detached (`setsid nohup … &`) and keep the session active with waits under 10 minutes. An
+    idle session's container is reclaimed and the run dies.
+  - Tests expect port 4173 (embed URLs and cross-origin checks), so serve the worktree there, not on
+    another port.
+  - Killing a server with a `pkill -f` pattern kills your own shell. Kill it by PID.
+  - Run a clip or a test as its own job, one at a time. Parallel runs overload the 4 CPUs and cause
+    timing failures, such as `smoke.spec.mjs:694`, the cat statue's head turn.
+
+### Open risks
+
+- Phone performance is unmeasured in every mode. The owner's phone is the real test; hybrid adds
+  about 90 draw calls and 6 MB, and shadows cost a pass.
+- Two paragraphs of `docs/WORLDS.md` still describe splats-only worlds: "Rules that still apply" and
+  the intro. My edit was blocked by a permission check; the Operator should word the hybrid rule
+  there.
+- Google Drive downloads (Quaternius) fail from these containers; plan for other sources.
+- A higher-detail mesh character costs more per frame in the test browser. Watch
+  `tests/chr.spec.mjs` and the wd and wdh tests' time limits.
+- Known hybrid issues:
+  - gravel texture on steep sand;
+  - a faint gray horizon band;
+  - pale pebbles in the grass texture close up;
+  - the mesh walk made from the run.
+- Shadows are off on the low tier; the owner hasn't seen that trade-off yet.
+
 ## Brief
 
 (Written by the Operator on September 29, 2026, from the owner's note "big new Splashery ideas" and
