@@ -133,19 +133,22 @@ Chromium's CPU throttling as the stand-in phone (low 6×, mid 4×, high 2×, max
 
 ## Measured
 
-`node tools/fl-measure.mjs` on September 30, 2026: the solver's time per 30 fps frame (ms, median
-over 4 s after a tap; stepping, packing and the splat shapes), in Chromium with its CPU slowed down
-as each tier's stand-in. A frame is 33 ms; the solver runs in a worker, so it doesn't slow the
-drawing.
+`node tools/fl-measure.mjs` on September 30, 2026 (after r2): the solver's time per 30 fps frame
+(ms, median over 4 s after a tap; stepping, packing and the splat shapes), in Chromium with its CPU
+slowed down as each tier's stand-in. A frame is 33 ms; the solver runs in a worker, so it doesn't
+slow the drawing.
 
 | Scene      | low (6×) | mid (4×) | high (2×) | max (1×) |
 | ---------- | -------- | -------- | --------- | -------- |
-| Pour water | 15       | 23       | 38        | 23       |
-| Pour soda  | 17       | 29       | 48        | 28       |
-| Pour honey | 13       | 20       | 34        | 20       |
-| Splash     | 12       | 16       | 33        | 9        |
-| Candle     | 1        | 0.4      | 0.4       | 0.2      |
-| Hot cup    | 0.1      | 0.1      | 0.1       | 0.1      |
+| Pour water | 15       | 21       | 36        | 25       |
+| Pour soda  | 18       | 31       | 56        | 34       |
+| Pour honey | 12       | 18       | 31        | 21       |
+| Splash     | 14       | 15       | 33        | 9        |
+| Candle     | 0.9      | 0.5      | 0.4       | 0.2      |
+| Hot cup    | 0.2      | 0.1      | 0.1       | 0.1      |
+
+Measured again after r2 (four splats per particle, the level sheet and the soda's denser foam). The
+soda pour is the tightest: its head takes up to 3.5 times the liquid's budget in foam flecks.
 
 Liquid particles at most (the glass, the splash): low 420 and 455, mid 540 and 585, high 1,200 and
 1,300, max 1,620 and 1,755. The solver costs about 4.4 µs per particle per 1/120 s step on this

@@ -110,7 +110,9 @@ Model: Opus 5.5 (claude-opus-5-5), default effort.
   highlight, discs on smoothed normals, a level sheet for a calm thin liquid in a glass, a soda head
   colored onto the sheet, clean glass rims, and cola that keeps its color. Cards `fl-pour-r2`,
   `fl-splash-r2` and `fl-soda-r2` replace the first three (rendered at 3× density, the mid tier's
-  cap once PR #118 lands). `fl-flame`, `fl-smoke` and `fl-phone` stand.
+  cap once PR #118 lands), and `fl-phone-r2` replaces `fl-phone` with the budgets measured again
+  after r2 (every scene still fits a 30 fps frame on mid; soda is tightest at 31 ms). `fl-flame` and
+  `fl-smoke` stand.
 - September 30, 2026: the fluid engine and the Fluid lab are on the branch (draft PR #121), the full
   suite passes, and six cards are on the Effect review page in the lane record `Fluids`: `fl-pour`,
   `fl-splash`, `fl-soda`, `fl-smoke`, `fl-flame`, `fl-phone` (clips by `tools/fl-clip.mjs` at
@@ -156,8 +158,9 @@ Model: Opus 5.5 (claude-opus-5-5), default effort.
 
 - Colliders don't move with parts yet (no tipping jug, no stirring spoon).
 - Every scene fits a 30 fps frame on the mid tier's stand-in (4× CPU throttling; the soda pour is
-  the tightest at 29 ms). The high tier's 2× stand-in is over for the pours (34 to 48 ms), but it is
-  pessimistic for the desktops it covers; at 1× the high budget takes about 17 ms.
+  the tightest at 31 ms after r2, and 34 ms on max at 1×, from its dense foam). The high tier's 2×
+  stand-in is over for the pours (34 to 48 ms), but it is pessimistic for the desktops it covers; at
+  1× the high budget takes about 17 ms.
 - The level sheet is for thin liquids in a `glass` collider only; a pool in a bowl, or on a floor,
   is drawn from its particles alone.
 - A soda's head thins into patches as it fades (as a real one does), and the very start of a pour
