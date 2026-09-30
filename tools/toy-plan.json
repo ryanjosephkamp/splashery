@@ -2191,6 +2191,13 @@
       "effect": "Your video rebuilt as trained 3D Gaussian splats on this device: the sharpest frames of a chosen stretch, the camera path solved by Splat.js, splats trained through WebGPU. The tap flies the video's own camera path with its sound (Replay flight); a drag roams off it; the tap again brings the camera home.",
       "sound": "A rising whoosh as the flight takes off; a falling whoosh as the camera comes home (the video's own sound plays during the flight).",
       "improved": "Video to 3D (spike): Splat.js (MIT) vendored and loaded only when a video is opened; frames picked by sharpness; the result converted from Splat.js's PLY into kit splats with their own sizes and rotations; save as PLY; timing readout per stage."
+    },
+    "fluid-lab": {
+      "v": "keep",
+      "owner": "The owner's notes on the water bottle and soda can of September 29, 2026 (\"a realistic fluid splat simulator\"; lane Fluids; labs only).",
+      "effect": "A sandbox for the fluid engine: a nozzle pours water, soda, honey or lava into a glass (the third tap empties it first), a ball of liquid splashes into a bowl, a candle is blown out and lights again, or a breath bends a hot cup's steam (about 3 to 5 s).",
+      "sound": "The pour's splash and glug (soda fizzes; honey and lava a thick gloop), a splash, a breath on the candle and the cup.",
+      "improved": "Fluids: new sandbox on the Lab shelf (labs). Liquids are position-based fluids with a viscosity from water to lava, drawn as stretched, lit surface splats; smoke and steam rise in a curl field; flames cool through a real color ramp with sparks; colliders keep the liquid in the glass and the bowl."
     }
   }
 }
