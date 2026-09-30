@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fluid timing</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --bg: #f6f5f2;
+        --fg: #1d1d1b;
+        --line: #d8d5cf;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #17181a;
+          --fg: #ecebe8;
+          --line: #3a3b3e;
+        }
+      }
+      body {
+        margin: 0;
+        padding: 16px;
+        background: var(--bg);
+        color: var(--fg);
+        font:
+          15px/1.45 system-ui,
+          sans-serif;
+      }
+      h1 {
+        font-size: 20px;
+        margin: 0 0 8px;
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        margin: 12px 0;
+      }
+      td,
+      th {
+        border-bottom: 1px solid var(--line);
+        padding: 6px 4px;
+        text-align: left;
+      }
+      button {
+        font: inherit;
+        padding: 10px 16px;
+        border-radius: 10px;
+        border: 1px solid var(--line);
+        background: transparent;
+        color: inherit;
+      }
+      canvas {
+        width: 64px;
+        height: 64px;
+        opacity: 0;
+        position: absolute;
+      }
+      pre {
+        white-space: pre-wrap;
+        font-size: 13px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Lane Fluids r4 (docs/FLUIDS.md, "Measured, r4"): times the GPU liquid
+         (MLS-MPM, WebGPU) and the gas grid on this device, for each tier. -->
+    <h1>Fluid timing</h1>
+    <p>
+      Times the Fluid lab's GPU liquid and its smoke grid on this device, tier by tier (about a
+      minute). Keep the page open and the phone awake.
+    </p>
+    <button id="go">Start</button>
+    <table id="out"></table>
+    <pre id="text"></pre>
+    <canvas id="c" width="64" height="64"></canvas>
+    <script type="module">
+      import * as pc from "../src/pc.js";
+      import { FluidWorld } from "../src/fluids/world.js";
+      import { GpuLiquid } from "../src/fluids/gpu/liquid.js";
+      import { GasGrid } from "../src/fluids/gpu/gas.js";
+      import { RECIPES } from "../src/packs/fluid-lab.js";
+      import { Kit } from "../src/kit.js";
+
+      const out = document.getElementById("out");
+      const text = document.getElementById("text");
+      const row = (cells, head) => {
+        const tr = document.createElement("tr");
+        for (const c of cells) {
+          const td = document.createElement(head ? "th" : "td");
+          td.textContent = c;
+          tr.append(td);
+        }
+        out.append(tr);
+      };
+      const median = (a) => [...a].sort((x, y) => x - y)[Math.floor(a.length / 2)];
+
+      async function run() {
+        document.getElementById("go").disabled = true;
+        const canvas = document.getElementById("c");
+        let device;
+        try {
+          device = await pc.createGraphicsDevice(canvas, { deviceTypes: ["webgpu", "webgl2"] });
+        } catch (e) {
+          text.textContent = "No WebGPU or WebGL2 here: " + e.message;
+          return;
+        }
+        const lines = [`${navigator.userAgent}`, `device: ${device.deviceType}`];
+        row(["What", "Tier", "Particles or cells", "ms a frame (median)"], true);
+        const wait = () =>
+          device.isWebGPU
+            ? device.wgpu.queue.onSubmittedWorkDone()
+            : Promise.resolve(device.gl.finish());
+        if (device.isWebGPU && device.supportsCompute) {
+          for (const profile of ["low", "mid", "high", "max"]) {
+            const k = new Kit(1, { count: 20000 });
+            RECIPES["fluid-lab"].build(k, { scene: "glass", liquid: "water" });
+            const world = new FluidWorld(k.fluids, {
+              profile,
+              seed: 1,
+              gpu: { device, GpuLiquid },
+              surface: true,
+            });
+            const liq = world.systems.find((s) => s.gpu);
+            // Pour for three seconds, timing each frame's GPU work.
+            const ms = [];
+            for (let f = 0; f < 90; f++) {
+              device.frameStart?.();
+              world.command({ liquid: { on: true } });
+              const t0 = performance.now();
+              world.step(1 / 30);
+              device.submit?.();
+              await wait();
+              if (f >= 30) ms.push(performance.now() - t0);
+            }
+            const line = [
+              `liquid (pour)`,
+              profile,
+              `${liq.n} particles, ${liq.stats.substeps} substeps`,
+              median(ms).toFixed(1),
+            ];
+            row(line);
+            lines.push(line.join(" | "));
+            liq.destroy();
+          }
+        } else lines.push("no WebGPU compute: the liquid uses the CPU solver here");
+        for (const profile of ["low", "mid", "high", "max"]) {
+          const g = new GasGrid(device, { at: [0, 0, 0], size: [0.6, 1.3, 0.6], profile });
+          g.sources.a = { at: [0, 0.05, 0], radius: 0.05, smoke: 40, heat: 2, up: 0.4 };
+          const ms = [];
+          for (let f = 0; f < 60; f++) {
+            device.frameStart?.();
+            const t0 = performance.now();
+            g.advance(1 / 30);
+            device.submit?.();
+            await wait();
+            if (f >= 20) ms.push(performance.now() - t0);
+          }
+          const line = ["smoke grid", profile, `${g.dims.join("×")} cells`, median(ms).toFixed(1)];
+          row(line);
+          lines.push(line.join(" | "));
+          g.destroy();
+        }
+        text.textContent = lines.join("\n");
+        window.flBench = lines;
+      }
+      document.getElementById("go").onclick = run;
+      if (new URLSearchParams(location.search).has("auto")) run();
+    </script>
+  </body>
+</html>
