@@ -178,7 +178,18 @@ site.
    into `src/voices.js`, re-measuring levels with `node tools/sound-check.mjs --voices`), sets their
    status to `site`, and posts no clips unless an effect changed.
 6. **Preferences.** From the owner's notes the Operator drafts a "Sound preferences" section for
-   PACKS.md (general guidance, not strict rules). The owner OKs it, and every lane follows it.
+   PACKS.md (general guidance, not strict rules). The owner OKs it, and every lane follows it. The
+   first version is PACKS.md section 7e (September 30, 2026).
+
+**Since September 30, 2026 (the owner's call):**
+
+- **Sounds go live.** A sound lane puts new sounds straight into `src/toy-sounds.js`, without
+  waiting for the owner to hear them on the board first. The board shows each toy's current sound,
+  and the owner names any he wants fixed.
+- **The sound patrol.** A routine, run as a fresh Sonnet session, checks every new or changed toy's
+  sound against PACKS.md section 7e with `tools/sound-lint.mjs`. It reports to the Operator and
+  never merges.
+- **New toys' lanes** follow section 7e from the start, with no separate sound round.
 
 ## The help review
 
