@@ -201,7 +201,13 @@ test.describe("engine for books (in the app)", () => {
     await page.click("#tab-play");
     // Not for a PDF.
     await expect(page.locator("#toy-media-scrub")).toBeHidden();
-    await page.evaluate((u) => window.__splashery.app.openMedia(u), `http://127.0.0.1:4173${FIX}clip.webm`); // prettier-ignore
+    // Opened as a file: the test server (python's http.server) doesn't
+    // answer range requests, and Chromium then can't always seek a video it
+    // streamed from an address (it held at 0 about one run in two).
+    await page.evaluate(async (u) => {
+      const blob = await (await fetch(u)).blob();
+      await window.__splashery.app.openMedia(new File([blob], "clip.webm", { type: "video/webm" }));
+    }, `${FIX}clip.webm`);
     await waitSheets(page);
     await expect(page.locator("#toy-media-scrub")).toBeVisible();
     const d = await page.evaluate(() => window.__splashery.player.pictures.api.duration);
@@ -218,6 +224,32 @@ test.describe("engine for books (in the app)", () => {
     await page.evaluate(() => window.__splashery.app.clearMedia());
     await waitSheets(page);
     expect(await page.evaluate(() => { const a = window.__splashery.player.pictures.api; return [a.time, a.duration, a.seek(3)]; })).toEqual([0, 0, false]); // prettier-ignore
+  });
+
+  test("a set of pictures can be put in a new order (pics.reorder, names, thumb)", async ({
+    page,
+  }) => {
+    await ready(page);
+    await page.evaluate(() => window.__splashery.app.chooseToy("photo-album"));
+    await waitSheets(page);
+    const r = await page.evaluate(async () => {
+      const api = window.__splashery.player.pictures.api;
+      const names = api.names;
+      api.go(2);
+      const shown = api.nameOf(api.page);
+      const bad = [api.reorder([0, 0, 1, 2, 3, 4]), api.reorder([0, 1]), api.reorder(null)];
+      const ok = api.reorder(names.map((_, i) => names.length - 1 - i));
+      const thumb = await api.thumb(0, 40);
+      return { names, bad, ok, now: api.names, shown, still: api.nameOf(api.page), thumb: thumb && [thumb.width, thumb.height] }; // prettier-ignore
+    });
+    expect(r.names.length).toBe(6);
+    expect(r.bad).toEqual([false, false, false]);
+    expect(r.ok).toBe(true);
+    expect(r.now).toEqual([...r.names].reverse());
+    // The picture on show stays on show, and its pages are built again.
+    expect(r.still).toBe(r.shown);
+    expect(Math.max(...r.thumb)).toBe(40);
+    await waitSheets(page);
   });
 
   test("a recipe can draw on a picture before it becomes splats (pictures.decorate)", async ({
@@ -251,7 +283,9 @@ test.describe("engine for books (in the app)", () => {
 
 // ---- The toys ----------------------------------------------------------------------
 
-// Builds a toy in Node and plays it: tap(n) taps, run(s) steps the clock.
+// Builds a toy in Node and plays it: tap() taps (tap(point) where it lands,
+// in recipe units), pull(points) presses, moves along the points (a frame
+// each) and lets go, run(s) steps the clock.
 async function play(id, options = {}, pics = null) {
   const { buildRecipe } = await import("../src/kit.js");
   const { RECIPES } = await import("../src/packs/pictures.js");
@@ -263,11 +297,28 @@ async function play(id, options = {}, pics = null) {
   const data = { ...(b.value.kit.data || {}), pictures: pics };
   let time = 1;
   let n = 0;
+  let pick = null;
   let out = null;
   const frame = () => {
     out = { parts: {}, glow: [1, 1, 1, 0], amount: 1, grow: 1, cues: [], fx: {}, tokens: null };
-    r.drive(time, { turn: 0, swing: 0 }, out, { time, R: 1, tap: n ? { n } : null, data });
+    r.drive(time, { turn: 0, swing: 0 }, out, { time, R: 1, tap: n ? { n, pick } : null, data });
     return out;
+  };
+  const tap = (point = null) => {
+    pick = (point && r.action.at?.(point)?.pick) ?? null;
+    n++;
+    return frame();
+  };
+  const pull = (points) => {
+    if (!r.drag.at(points[0])) return false;
+    r.drag.start(points[0], time);
+    for (const p of points.slice(1)) {
+      time += 1 / 30;
+      r.drag.move(p, time);
+      frame();
+    }
+    r.drag.end(time);
+    return true;
   };
   const run = (s) => {
     for (let t = 0; t < s; t += 1 / 30) {
@@ -276,7 +327,7 @@ async function play(id, options = {}, pics = null) {
     }
     return out;
   };
-  return { kit: b.value.kit, tap: () => (n++, frame()), run, frame, get out() { return out; } }; // prettier-ignore
+  return { kit: b.value.kit, tap, pull, run, frame, get out() { return out; } }; // prettier-ignore
 }
 
 // A stand-in for info.data.pictures: every page is ready at once.
@@ -355,6 +406,92 @@ test.describe("your book, the album and the frame (no browser)", () => {
     expect(pics.page).toBe(31);
   });
 
+  test("a tap turns by where it lands: the right page forward, the left back; stapled paper's top quarter back", async () => {
+    // Points in recipe units: the spine is at x = 0; a page is 1 high.
+    const at = (x, y = 0) => [x, y, 0.02];
+    for (const id of ["your-book", "photo-album"]) {
+      const styles = id === "your-book" ? ["hardcover", "paperback", "magazine", "spiral"] : ["leather"]; // prettier-ignore
+      for (const style of styles) {
+        const pics = fakePics(12);
+        const b = await play(id, id === "your-book" ? { style } : { cover: style }, pics);
+        b.frame();
+        const seen = [];
+        // The closed cover opens wherever it's tapped (here on its left).
+        for (const x of [-0.2, 0.3, 0.3, -0.3, 0.001, -0.4]) {
+          b.tap(at(x));
+          b.run(1.6);
+          seen.push(pics.page);
+        }
+        if (id === "your-book") expect(seen, style).toEqual([1, 3, 5, 3, 5, 3]);
+        // (The album's pages are its photos: forward, forward, back, forward, back.)
+        else expect([seen[2] > seen[1], seen[1] > seen[0], seen[3], seen[4], seen[5]]).toEqual([true, true, seen[1], seen[2], seen[1]]); // prettier-ignore
+      }
+    }
+    const pics = fakePics(6);
+    const s = await play("your-book", { style: "stapled" }, pics);
+    s.frame();
+    const seen = [];
+    for (const y of [-0.3, 0.1, 0.4, 0.3, 0.2]) {
+      s.tap(at(0, y));
+      s.run(1.6);
+      seen.push(pics.page);
+    }
+    expect(seen).toEqual([1, 2, 1, 0, 1]);
+    // The Picture lab: left back, right (or the middle) forward.
+    const { RECIPES } = await import("../src/packs/pictures.js");
+    const lab = RECIPES["picture-lab"];
+    expect(lab.action.at([-0.5, 0, 0]).pick).toBe(1);
+    expect(lab.action.at([0, 0, 0]).pick).toBe(0);
+  });
+
+  test("a short pull falls back and a long one turns; the album's heavy pages lag the finger", async () => {
+    const line = (x0, x1, y = 0, n = 12) => Array.from({ length: n + 1 }, (_, i) => [x0 + ((x1 - x0) * i) / n, y, 0.02]); // prettier-ignore
+    const pics = fakePics(20);
+    const b = await play("your-book", {}, pics);
+    b.frame();
+    b.tap([0.3, 0, 0.02]);
+    b.run(1.6);
+    expect(pics.page).toBe(1);
+    // A tap anywhere off the book is not a pull.
+    expect(b.pull(line(0.3, 0.2, 0.9))).toBe(false);
+    // Pulled a little way and let go: the page falls back.
+    expect(b.pull(line(0.6, 0.4))).toBe(true);
+    const mid = b.run(0.1);
+    expect(mid.leaves.some((l) => l && l.angle > 0.05)).toBe(true);
+    b.run(1.5);
+    expect(pics.page).toBe(1);
+    expect(b.frame().leaves.every((l) => !l || l.angle < 0.01 || l.angle > Math.PI - 0.01)).toBe(true); // prettier-ignore
+    // Pulled past the spine: it turns.
+    b.pull(line(0.6, -0.4, 0, 20));
+    b.run(1.5);
+    expect(pics.page).toBe(3);
+    // The left page pulled over to the right goes back.
+    b.pull(line(-0.6, 0.4, 0, 20));
+    b.run(1.5);
+    expect(pics.page).toBe(1);
+    // Stapled paper pulls upward.
+    const sp = fakePics(6);
+    const s = await play("your-book", { style: "stapled" }, sp);
+    s.frame();
+    expect(s.pull(Array.from({ length: 21 }, (_, i) => [0, -0.3 + (0.9 * i) / 20, 0.02]))).toBe(true); // prettier-ignore
+    s.run(2);
+    expect(sp.page).toBe(1);
+    // The album's page lags the same quick pull more than the book's
+    // (its angle as the finger lets go).
+    const lag = async (id) => {
+      const t = await play(id, {}, fakePics(8));
+      t.frame();
+      t.tap([0.3, 0, 0.02]);
+      t.run(1.6);
+      t.pull(line(0.7, 0.1, 0, 5));
+      return Math.max(...t.out.leaves.filter(Boolean).map((l) => (l.angle < 3 ? l.angle : 0)));
+    };
+    const book = await lag("your-book");
+    const album = await lag("photo-album");
+    expect(book).toBeGreaterThan(0.5);
+    expect(album).toBeLessThan(book * 0.8);
+  });
+
   test("stapled paper flips one sheet at a time over the top, then starts again", async () => {
     const pics = fakePics(4);
     const b = await play("your-book", { style: "stapled" }, pics);
@@ -399,6 +536,26 @@ test.describe("your book, the album and the frame (no browser)", () => {
     // It swings both ways, less each time.
     expect(angles.some((a) => a > 0.03) && angles.some((a) => a < -0.03)).toBe(true);
     expect(b.run(0.2).parts.frame.angle).toBe(0);
+  });
+
+  test("the digital frame steps in order, or at random with Order: Random", async () => {
+    const seq = async (order) => {
+      const pics = fakePics(6);
+      const b = await play("picture-frame", { frame: "digital", order }, pics);
+      const pages = [0];
+      for (let i = 0; i < 40 * 30; i++) {
+        b.run(1 / 30);
+        if (pics.page !== pages[pages.length - 1]) pages.push(pics.page);
+      }
+      return pages;
+    };
+    const inOrder = await seq("inorder");
+    expect(inOrder.length).toBeGreaterThan(5);
+    expect(inOrder.every((p, i) => i === 0 || p === (inOrder[i - 1] + 1) % 6)).toBe(true);
+    const random = await seq("random");
+    expect(random.length).toBeGreaterThan(5);
+    expect(random.some((p, i) => i > 0 && p !== (random[i - 1] + 1) % 6)).toBe(true);
+    expect(random.every((p, i) => i === 0 || p !== random[i - 1])).toBe(true);
   });
 
   test("the digital frame fades to black, steps to the next photo and fades back in", async () => {
@@ -622,6 +779,128 @@ test.describe("your book, the album and the frame (in the app)", () => {
     // six seconds.
     const t1 = await page.evaluate(() => window.__splashery.player.time);
     await page.waitForFunction((t1) => window.__splashery.player.pictures.page === 1 && window.__splashery.player.time < t1 + 7.5, t1, { timeout: 180_000 }); // prettier-ignore
+  });
+
+  // A pointer on the page, in recipe units (the spine at x = 0).
+  async function pointAt(page, p) {
+    return page.evaluate((p) => {
+      const pl = window.__splashery.player;
+      const [x, y] = pl.screenPoint(p);
+      const r = pl.stage.canvas.getBoundingClientRect();
+      return [r.left + x, r.top + y];
+    }, p);
+  }
+  async function pullBy(page, from, to, steps) {
+    const [x0, y0] = await pointAt(page, from);
+    const [x1, y1] = await pointAt(page, to);
+    await page.mouse.move(x0, y0);
+    await page.mouse.down();
+    for (let i = 1; i <= steps; i++) {
+      await page.mouse.move(x0 + ((x1 - x0) * i) / steps, y0 + ((y1 - y0) * i) / steps);
+      await page.waitForTimeout(40);
+    }
+    await page.mouse.up();
+  }
+  const pageNow = (page) => page.evaluate(() => window.__splashery.player.pictures.page);
+  // Waits until nothing turns (every leaf flat), on the player's clock.
+  async function landed(page) {
+    await page.waitForFunction(
+      () => {
+        const pl = window.__splashery.player;
+        pl.stage.requestRender();
+        const L = pl.motion.out?.leaves || [];
+        return L.every((l) => !l || l.curl === 0);
+      },
+      null,
+      { timeout: 120_000, polling: 200 },
+    );
+    await step(page, 0.5);
+  }
+
+  test("a pointer pulls a page over only when pulled far enough; a tap turns by where it lands", async ({
+    page,
+  }) => {
+    await open(page, "your-book", `${BK}booklet.pdf`);
+    await turn(page); // the cover opens
+    expect(await pageNow(page)).toBe(1);
+    // Pulled a little way and let go: it falls back.
+    await pullBy(page, [0.6, 0, 0.02], [0.4, 0, 0.02], 6);
+    await landed(page);
+    expect(await pageNow(page)).toBe(1);
+    // Pulled across the spine: it turns.
+    await pullBy(page, [0.6, 0, 0.02], [-0.5, 0, 0.02], 16);
+    await landed(page);
+    expect(await pageNow(page)).toBe(3);
+    // A click on the left page goes back.
+    const [x, y] = await pointAt(page, [-0.4, 0, 0.02]);
+    await page.mouse.click(x, y);
+    await page.waitForFunction(() => window.__splashery.player.pictures.page === 1, null, { timeout: 60_000 }); // prettier-ignore
+    await landed(page);
+    // A pull that starts off the book turns the view instead.
+    await pullBy(page, [0.2, 0.9, 0.02], [-0.3, 0.9, 0.02], 8);
+    await landed(page);
+    expect(await pageNow(page)).toBe(1);
+  });
+
+  test("a frame plays a GIF on a loop and a video by itself, muted", async ({ page }) => {
+    await open(page, "picture-frame", `http://127.0.0.1:4173${FIX}anim.gif`);
+    const frames = await page.evaluate(async () => {
+      const p = window.__splashery.player.pictures;
+      const seen = new Set();
+      const t0 = performance.now();
+      while (performance.now() - t0 < 2500) {
+        window.__splashery.player.stage.requestRender();
+        seen.add(p.gifFrame);
+        await new Promise((r) => setTimeout(r, 50));
+      }
+      return seen.size;
+    });
+    expect(frames).toBeGreaterThan(4);
+    await page.evaluate(
+      (u) => window.__splashery.app.openMedia(u),
+      `http://127.0.0.1:4173${FIX}clip.webm`,
+    );
+    await waitSheets(page);
+    await step(page, 0.5);
+    const v = await page.evaluate(async () => {
+      const m = window.__splashery.player.pictures.media;
+      const t = m.video.currentTime;
+      await new Promise((r) => setTimeout(r, 1200));
+      return { playing: m.playing, moved: m.video.currentTime - t, muted: m.video.muted };
+    });
+    expect(v).toMatchObject({ playing: true, muted: true });
+    // (A short clip loops: its time moved, forward or round again.)
+    expect(Math.abs(v.moved)).toBeGreaterThan(0.1);
+  });
+
+  test("the digital frame lists its photos in the Toy tab and keeps the order you set", async ({
+    page,
+  }) => {
+    await open(page, "picture-frame", null, { frame: "digital" });
+    const names = await page.evaluate(() => window.__splashery.player.pictures.api.names);
+    expect(names.length).toBe(7);
+    // The list, in the Toy tab.
+    await page.evaluate(() => window.__splashery.app.ui.showTab("play"));
+    await page.waitForFunction(() => document.querySelectorAll("#toy-media-list li").length === 7, null, { timeout: 60_000 }); // prettier-ignore
+    // Move the first one down: the first two swap.
+    // (The phone's sheet may be folded away: press it from the page.)
+    await page.evaluate(() => document.querySelector("#toy-media-list li").querySelectorAll("button")[1].click()); // prettier-ignore
+    const after = await page.evaluate(() => window.__splashery.player.pictures.api.names);
+    expect(after.slice(0, 2)).toEqual([names[1], names[0]]);
+    await page.waitForFunction((n) => document.querySelector("#toy-media-list li span")?.textContent === n, names[1], { timeout: 30_000 }); // prettier-ignore
+    // A new order from a recipe's side: reversed; the photo on show stays.
+    const r = await page.evaluate(() => {
+      const api = window.__splashery.player.pictures.api;
+      const shown = api.nameOf(api.page);
+      const ok = api.reorder(api.names.map((_, i, a) => a.length - 1 - i));
+      return { ok, shown, now: api.nameOf(api.page), names: api.names };
+    });
+    expect(r.ok).toBe(true);
+    expect(r.now).toBe(r.shown);
+    expect(r.names).toEqual([...after].reverse());
+    // The frame steps on in the new order.
+    const p0 = await pageNow(page);
+    await page.waitForFunction((p0) => window.__splashery.player.pictures.page === (p0 + 1) % 7, p0, { timeout: 180_000 }); // prettier-ignore
   });
 
   for (const [w, h] of [
