@@ -880,7 +880,7 @@ test.describe("your book, the album and the frame (in the app)", () => {
     const names = await page.evaluate(() => window.__splashery.player.pictures.api.names);
     expect(names.length).toBe(7);
     // The list, in the Toy tab.
-    await page.evaluate(() => window.__splashery.app.ui.showTab?.("toy"));
+    await page.evaluate(() => window.__splashery.app.ui.showTab("play"));
     await page.waitForFunction(() => document.querySelectorAll("#toy-media-list li").length === 7, null, { timeout: 60_000 }); // prettier-ignore
     // Move the first one down: the first two swap.
     // (The phone's sheet may be folded away: press it from the page.)

@@ -317,7 +317,7 @@ async function record(scene) {
     // (On a phone: More opens the panel, then the Toy tab.)
     await run(() => {
       document.getElementById("sheet-toggle")?.click();
-      window.__splashery.app.ui.showTab("toy");
+      window.__splashery.app.ui.showTab("play");
     });
     await page.waitForTimeout(600);
     await run(() => document.querySelector("#toy-media-list")?.scrollIntoView({ block: "center" }));
