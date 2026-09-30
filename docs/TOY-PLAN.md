@@ -1929,8 +1929,9 @@ Proposals below are suggestions; the owner may change them.
     elsewhere plays the song's opening (about 5 s) with the keys, hammers, dampers and sustain pedal
     following every note. The song bar plays the whole song, and a MIDI file or an ABC tune of your
     own.
-  - Sound: A warm concert-grand voice made in the page (felt thump, ringing partials, the damper's
-    soft stop). Built-in songs: Für Elise, Clair de lune, Gymnopédie No. 1, Ode to Joy.
+  - Sound: A real acoustic piano: recorded CC0 notes (one every four semitones, each played at its
+    key's pitch), with the damper falling when a key comes up. The electronic keyboard's PIANO
+    button keeps the synth. Built-in songs: Für Elise, Clair de lune, Gymnopédie No. 1, Ode to Joy.
 - **Upright piano** (`upright-piano`). Now: tap: Play the opening. Plan: keep.
   - Owner: Lane Pianos, from the owner's idea on the Toy Ideas page (September 29, 2026).
   - Effect: Tap a key to play it: the front panel is off, so you see the row of hammers swing

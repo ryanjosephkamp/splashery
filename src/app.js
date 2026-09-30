@@ -385,10 +385,13 @@ class App {
       q.setAttribute("aria-current", "true");
       nodes.push(q);
     }
-    // Recorded samples in the toy's tap sound (src/sound-credits.js).
-    for (const file of samplesIn(info?.id ? toySound(info.id) : null)) {
+    // Recorded samples in the toy's tap sound (src/sound-credits.js), one
+    // line per source (a sampled instrument's notes share one).
+    const sources = new Set();
+    for (const file of samplesIn(info?.id ? toySound(info.id) : null, [], true)) {
       const c = SOUND_CREDITS[file];
-      if (!c) continue;
+      if (!c || sources.has(c.source)) continue;
+      sources.add(c.source);
       const q = document.createElement("p");
       q.className = "credit";
       const strong = document.createElement("strong");

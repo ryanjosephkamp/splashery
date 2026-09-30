@@ -1326,10 +1326,10 @@
       "candidates": []
     },
     "grand-piano": {
-      "status": "change",
+      "status": "site",
       "said": "(September 30, 2026, on the Sound Board) Sounds too much like an electronic keyboard.",
       "note": "Sounds too much like an electronic keyboard.",
-      "plan": "A real grand piano: a richer, sampled or better-modeled tone with hammer and string resonance, not an electronic keyboard. (Sound A)",
+      "plan": "A real acoustic piano: recorded CC0 notes (one every four semitones, each played at its key's pitch), with the damper falling when a key comes up. The electronic keyboard's PIANO button keeps the synth.",
       "candidates": []
     },
     "graph-plotter": {

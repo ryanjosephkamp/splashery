@@ -1715,7 +1715,7 @@
       "v": "keep",
       "owner": "Lane Pianos, from the owner's idea on the Toy Ideas page (September 29, 2026).",
       "effect": "Tap a key: it dips, its hammer flies up under the open lid and strikes the strings, and the damper lifts while the note rings. Tap anywhere else: it plays the opening of its song, every key and hammer moving with the notes and the sustain pedal going down with the phrases (about 5 s; the whole song plays from the song bar).",
-      "sound": "A warm concert-grand voice made in the page (felt thump, ringing partials, the damper's soft stop). Built-in songs: Für Elise, Clair de lune, Gymnopédie No. 1, Ode to Joy.",
+      "sound": "A real acoustic piano: recorded CC0 notes (one every four semitones, each played at its key's pitch), with the damper falling when a key comes up. The electronic keyboard's PIANO button keeps the synth. Built-in songs: Für Elise, Clair de lune, Gymnopédie No. 1, Ode to Joy.",
       "improved": "Pianos: 88 keys, 88 hammers and 70 dampers, each its own solid piece (the lever kind). A tapped key dips for about 0.9 s, its hammer strikes and falls back, its damper lifts. A tap elsewhere plays the song's opening (about 5 s) with the keys, hammers, dampers and sustain pedal following every note. The song bar plays the whole song, and a MIDI file or an ABC tune of your own."
     },
     "upright-piano": {

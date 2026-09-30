@@ -3,8 +3,41 @@
 // licenseUrl }. The About tab lists the ones the current toy's sound uses;
 // tools/assets.json ("soundSamples") keeps the full record of each file.
 
+// The grand piano's notes: one pack, one credit line.
+const GRAND = {
+  label: "Piano",
+  title: "88 piano keys, long reverb",
+  author: "TEDAgame",
+  source: "https://freesound.org/people/TEDAgame/packs/25405/",
+  license: "CC0 1.0",
+  licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/",
+};
+
 // Lane Sound A (September 30, 2026): CC0 recordings from Freesound and Kenney.
 export const SOUND_CREDITS = {
+  "grand-piano-a0.mp3": GRAND,
+  "grand-piano-cs1.mp3": GRAND,
+  "grand-piano-f1.mp3": GRAND,
+  "grand-piano-a1.mp3": GRAND,
+  "grand-piano-cs2.mp3": GRAND,
+  "grand-piano-f2.mp3": GRAND,
+  "grand-piano-a2.mp3": GRAND,
+  "grand-piano-cs3.mp3": GRAND,
+  "grand-piano-f3.mp3": GRAND,
+  "grand-piano-a3.mp3": GRAND,
+  "grand-piano-cs4.mp3": GRAND,
+  "grand-piano-f4.mp3": GRAND,
+  "grand-piano-a4.mp3": GRAND,
+  "grand-piano-cs5.mp3": GRAND,
+  "grand-piano-f5.mp3": GRAND,
+  "grand-piano-a5.mp3": GRAND,
+  "grand-piano-cs6.mp3": GRAND,
+  "grand-piano-f6.mp3": GRAND,
+  "grand-piano-a6.mp3": GRAND,
+  "grand-piano-cs7.mp3": GRAND,
+  "grand-piano-f7.mp3": GRAND,
+  "grand-piano-a7.mp3": GRAND,
+  "grand-piano-c8.mp3": GRAND,
   "alarm-clock-bell.mp3": {
     label: "Sound",
     title: "old alarm clock ringing",

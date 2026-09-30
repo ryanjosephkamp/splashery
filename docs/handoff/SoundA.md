@@ -157,6 +157,16 @@ at the same time; leave their files alone. The laptop is locked.
   Their entries in `tools/sound-review.json` are `"status": "site"` with a `plan` saying what they
   are now; the eight toys he said to keep on these shelves are `keep`. The toy plan's sound lines
   follow the plans; TOY-PLAN.md is regenerated.
+- The grand piano (the owner's Sound Board mark of September 30: "sounds too much like an electronic
+  keyboard"; relayed by the Operator): a new `concert` voice in `src/voices.js` plays recorded notes
+  of a real acoustic piano (23 CC0 notes from TEDAgame's "88 piano keys, long reverb" pack, one
+  every four semitones, 395 KB), each at its key's pitch, with the damper falling when the key comes
+  up. Its songs (`src/packs/pianos.js`, one line) and its tap use it; the electronic keyboard's
+  PIANO button keeps the synth `grand`, and no other piano changed. The voice fetches its notes on
+  its first note, playing the synth grand until they arrive (a song note scheduled far enough ahead
+  waits and plays on time). A better grand would be the University of Iowa Steinway samples, but
+  their terms are Iowa's own ("free ... without restrictions"), not CC0 or public domain, so they
+  need the owner's call.
 - `node tools/sound-lint.mjs --toy <the 67>`: no clear violation. `tests/snda.spec.mjs` checks it.
 
 ## Notes

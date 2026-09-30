@@ -30,7 +30,7 @@ test("the lane's toys are marked in the sound review, and their specs are sound"
 });
 
 test("every sample is used, credited (assets.json, CREDITS.md, the About tab), CC0 and small", () => {
-  const used = new Set([...samplesIn(Object.values(TOY_SOUNDS)), ...cueFiles]);
+  const used = new Set([...samplesIn(Object.values(TOY_SOUNDS), [], true), ...cueFiles]);
   const credits = fs.readFileSync("CREDITS.md", "utf8");
   for (const f of FILES) {
     expect(f, "an MP3 or M4A named <toy>-<what>").toMatch(/^[a-z0-9][a-z0-9-]*\.(mp3|m4a)$/);
@@ -42,12 +42,14 @@ test("every sample is used, credited (assets.json, CREDITS.md, the About tab), C
     expect(a.license).toBe("CC0 1.0");
     expect(a.page).toMatch(/^https:\/\/(freesound\.org|kenney\.nl)\//);
     expect(a.author && a.checked).toBeTruthy();
-    expect(SOUND_CREDITS[f]?.source, `${f} in src/sound-credits.js`).toBe(a.page);
-    expect(credits, `${f} in CREDITS.md`).toContain(`\`${f}\``);
+    const piano = f.startsWith("grand-piano-");
+    // The piano's notes share one credit (their pack); the others each have their own.
+    expect(SOUND_CREDITS[f]?.source, `${f} in src/sound-credits.js`).toBe(piano ? "https://freesound.org/people/TEDAgame/packs/25405/" : a.page); // prettier-ignore
+    expect(credits, `${f} in CREDITS.md`).toContain(piano ? "`grand-piano-*.mp3`" : `\`${f}\``);
   }
   for (const f of used) expect(FILES, `${f} exists`).toContain(f);
   const total = FILES.reduce((s, f) => s + fs.statSync(`assets/sounds/${f}`).size, 0);
-  expect(total).toBeLessThan(600 * 1024);
+  expect(total).toBeLessThan(1024 * 1024);
 });
 
 test("every changed toy's sound plays in the app without errors or warnings", async ({ page }) => {
@@ -110,4 +112,41 @@ test("the sound lint passes every changed toy (PACKS.md 7e)", () => {
     encoding: "utf8",
   });
   expect(out).toContain(`${CHANGED.length} toys, 0 with a clear violation`);
+});
+
+test("the grand piano plays recorded notes (the concert voice); the keyboard's PIANO keeps the synth", async ({
+  page,
+}) => {
+  expect(TOY_SOUNDS["grand-piano"].voice).toBe("concert");
+  const src = fs.readFileSync("src/packs/pianos.js", "utf8");
+  expect(src).toMatch(/voice: "concert"/);
+  expect(src).toMatch(/\{ voice: "grand", name: "PIANO"/);
+  await page.goto("/tools/");
+  const r = await page.evaluate(async () => {
+    const { playSpec, loadSamples, SAMPLES } = await import("/src/voices.js");
+    SAMPLES.base = "/assets/sounds/";
+    const render = async (spec) => {
+      const ctx = new OfflineAudioContext(1, 22050 * 2, 22050);
+      await loadSamples(ctx, spec);
+      playSpec(ctx, ctx.destination, 0.01, spec);
+      const d = (await ctx.startRendering()).getChannelData(0);
+      let peak = 0;
+      let after = 0;
+      for (let i = 0; i < d.length; i++) {
+        peak = Math.max(peak, Math.abs(d[i]));
+        if (i > 22050 * 0.9) after = Math.max(after, Math.abs(d[i]));
+      }
+      return { peak, after };
+    };
+    return {
+      low: await render({ voice: "concert", f: "A0", hold: 0.5 }),
+      mid: await render({ voice: "concert", f: "D4", hold: 0.5 }),
+      high: await render({ voice: "concert", f: "B7", hold: 0.5 }),
+    };
+  });
+  for (const k of ["low", "mid", "high"]) {
+    expect(r[k].peak, k).toBeGreaterThan(0.05);
+    // The damper stops the note soon after its key comes up (0.5 s).
+    expect(r[k].after, k).toBeLessThan(r[k].peak * 0.05);
+  }
 });
