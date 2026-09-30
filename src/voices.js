@@ -318,6 +318,120 @@ function formant(ctx, out, t, o) {
   return dur;
 }
 
+// ---- Keyboards (lane Pianos) ------------------------------------------------------
+// A piano, an upright, a harpsichord, an organ, a synth and vibes. Each note
+// is one or a few oscillators on a harmonic spectrum (a PeriodicWave, made
+// once per context), a filter that darkens as the note dies, and an
+// envelope. `hold` is how long the key is held (seconds): then the damper
+// stops the note (a piano's soft stop, an organ's quick release). Without
+// it a note rings for the voice's own time.
+
+const waveCache = new WeakMap();
+function spectrumWave(ctx, name, amps) {
+  let m = waveCache.get(ctx);
+  if (!m) waveCache.set(ctx, (m = new Map()));
+  if (!m.has(name)) {
+    const re = new Float32Array(amps.length + 1);
+    const im = new Float32Array(amps.length + 1);
+    amps.forEach((a, i) => (im[i + 1] = a));
+    m.set(name, ctx.createPeriodicWave(re, im));
+  }
+  return m.get(name);
+}
+
+// Harmonic amplitudes: a string struck (or plucked) at 1/strike of its
+// length loses the harmonics with a node there.
+function stringSpectrum(n, tilt, strike) {
+  const out = [];
+  for (let k = 1; k <= n; k++) out.push(Math.abs(Math.sin((Math.PI * k) / strike)) / k ** tilt);
+  return out;
+}
+const KEY_SPECTRA = {
+  grand: stringSpectrum(24, 1.05, 7.5),
+  upright: stringSpectrum(24, 0.85, 8),
+  harpsichord: stringSpectrum(32, 0.55, 9),
+  organ: [1, 0.85, 0.35, 0.55, 0, 0.3, 0, 0.35, 0, 0, 0, 0.12, 0, 0, 0, 0.1],
+  vibes: [1],
+};
+
+// One keyboard note. o: { f, vol, bright, decay, hold, spectrum, strings
+// (detunes in cents), ring (seconds to fade at the middle), fall (how much
+// faster high notes die), bright filter, thump, click, release, sustain }.
+function keyNote(ctx, out, t, o) {
+  const f = o.f;
+  const vol = o.vol ?? 0.5;
+  const bright = o.bright ?? 0.5;
+  // High notes die sooner, low ones later (C4 at `ring`).
+  const ring = Math.min(9, Math.max(0.5, o.ring * (o.decay ?? 1) * (262 / f) ** o.fall));
+  const stop = o.hold !== undefined ? Math.min(ring, Math.max(0.06, o.hold)) : ring;
+  const release = o.release ?? 0.12;
+  const end = t + stop + release;
+  const bus = ctx.createGain();
+  const peak = Math.max(TAIL * 4, vol);
+  const g = bus.gain;
+  g.setValueAtTime(TAIL, t);
+  g.exponentialRampToValueAtTime(peak, t + (o.attack ?? 0.004));
+  if (o.sustain) {
+    // An organ: steady while held.
+    g.linearRampToValueAtTime(peak * o.sustain, t + (o.attack ?? 0.004) + 0.05);
+  } else {
+    // A struck or plucked string: a quick first drop, then a long fade.
+    const knee = Math.min(stop, 0.08 + 0.1 * (262 / f) ** 0.3);
+    g.exponentialRampToValueAtTime(peak * (o.knee ?? 0.55), t + (o.attack ?? 0.004) + knee);
+    g.setTargetAtTime(TAIL, t + knee, ring / 6.9);
+  }
+  g.cancelScheduledValues(t + stop);
+  g.setTargetAtTime(TAIL, t + stop, release / 3);
+  // The filter: bright at the strike, darker as it rings.
+  const lp = ctx.createBiquadFilter();
+  lp.type = "lowpass";
+  lp.Q.value = o.q ?? 0.5;
+  const top = Math.min(ctx.sampleRate * 0.45, f * (o.open ?? 6) * (0.6 + 1.6 * bright));
+  lp.frequency.setValueAtTime(top, t);
+  if (!o.sustain)
+    lp.frequency.setTargetAtTime(Math.max(f * 1.5, top * (o.close ?? 0.3)), t + 0.01, ring / 4);
+  bus.connect(lp).connect(out);
+  const wave = spectrumWave(ctx, o.spectrum, KEY_SPECTRA[o.spectrum]);
+  const strings = o.strings || [0];
+  for (const cents of strings) {
+    const osc = ctx.createOscillator();
+    osc.setPeriodicWave(wave);
+    osc.frequency.value = f;
+    osc.detune.value = cents;
+    const a = ctx.createGain();
+    a.gain.value = 1 / Math.sqrt(strings.length);
+    osc.connect(a).connect(bus);
+    if (o.trem) {
+      // The vibes' motor: a slow swell and fade.
+      const lfo = ctx.createOscillator();
+      const depth = ctx.createGain();
+      lfo.frequency.value = o.trem;
+      depth.gain.value = 0.35;
+      a.gain.value *= 0.7;
+      lfo.connect(depth).connect(a.gain);
+      lfo.start(t);
+      lfo.stop(end + 0.05);
+    }
+    osc.start(t);
+    osc.stop(end + 0.05);
+  }
+  // The felt hammer's thump, a quill's click or an organ's key click.
+  if (o.thump)
+    noise(ctx, out, t, {
+      dur: 0.05,
+      vol: o.thump * vol,
+      f: Math.min(3000, f * 1.2 + 120),
+      q: 0.9,
+      type: "bandpass",
+    });
+  if (o.click)
+    noise(ctx, out, t, { dur: 0.012, vol: o.click * vol, f: 5200, q: 1.4, type: "bandpass" });
+  // A damper falling back on the strings: a very soft felt stop.
+  if (o.damp && o.hold !== undefined && o.hold < ring)
+    noise(ctx, out, t + stop, { dur: 0.04, vol: o.damp * vol, f: 400, q: 0.8, type: "lowpass" });
+  return stop + release;
+}
+
 // ---- Voices -----------------------------------------------------------------------
 //
 // Each voice: (ctx, out, t, p) -> seconds it lasts. p holds the spec's
@@ -326,6 +440,68 @@ function formant(ctx, out, t, o) {
 const rnd = (lo, hi) => lo + Math.random() * (hi - lo);
 
 export const VOICES = {
+  // Keyboards (lane Pianos): f is the note; hold is how long its key is down.
+  grand: {
+    // A warm concert grand: two strings a hair apart, a felt thump, a long
+    // ring that darkens, and the damper's soft stop.
+    f: 262,
+    bright: 0.45,
+    play: (c, o, t, p) =>
+      keyNote(c, o, t, { ...p, spectrum: "grand", strings: [-1.2, 1.3], ring: 3.2, fall: 0.75, thump: 0.25, damp: 0.05, release: 0.16, open: 5, close: 0.35 }), // prettier-ignore
+  },
+  upright: {
+    // A brighter bar-room upright: three strings a little out of tune with
+    // each other (the honky-tonk), a shorter ring and a woody knock.
+    f: 262,
+    bright: 0.7,
+    play: (c, o, t, p) =>
+      keyNote(c, o, t, { ...p, spectrum: "upright", strings: [-9, 0, 8], ring: 1.9, fall: 0.7, thump: 0.35, damp: 0.07, release: 0.1, open: 8, close: 0.45, knee: 0.45 }), // prettier-ignore
+  },
+  harpsichord: {
+    // A quill plucks a bright wire: a crisp click, a thin bright ring and a
+    // damper that stops it when the key comes up.
+    f: 262,
+    bright: 0.85,
+    play: (c, o, t, p) =>
+      keyNote(c, o, t, { ...p, spectrum: "harpsichord", strings: [0, 2.5], ring: 2.2, fall: 0.6, click: 0.5, damp: 0.08, release: 0.07, open: 14, close: 0.5, knee: 0.7, attack: 0.002 }), // prettier-ignore
+  },
+  organ: {
+    // Drawbars: steady while the key is held, a key click, a quick release.
+    f: 262,
+    bright: 0.5,
+    play: (c, o, t, p) =>
+      keyNote(c, o, t, { hold: 0.9, ...p, spectrum: "organ", strings: [0, 3], ring: 6, fall: 0, click: 0.25, sustain: 0.9, release: 0.06, open: 12, attack: 0.01 }), // prettier-ignore
+  },
+  synth: {
+    // Two detuned saws through a filter that opens with each note.
+    f: 262,
+    bright: 0.5,
+    play: (c, o, t, p) => {
+      const hold = p.hold ?? 0.7;
+      const dur = hold + 0.25;
+      const lp = filter(c, t, { f: p.f * (2 + 8 * p.bright), to: p.f * 2.5, q: 3, dur: 0.4 });
+      const g = envGain(c, t, { vol: 0.5 * p.vol, attack: 0.012, hold: hold * 0.9, dur });
+      lp.connect(g).connect(o);
+      for (const d of [-7, 7]) osc(c, t, { wave: "sawtooth", f: p.f, dur, detune: d }).connect(lp);
+      return dur;
+    },
+  },
+  vibes: {
+    // Metal bars tuned 1:4:10 over a tube, with the motor's slow tremolo.
+    f: 523,
+    bright: 0.4,
+    play: (c, o, t, p) => {
+      const end = keyNote(c, o, t, { ...p, spectrum: "vibes", ring: 3.5, fall: 0.35, knee: 0.8, release: 0.3, open: 3, close: 0.9, trem: 5.2 }); // prettier-ignore
+      tone(c, o, t, {
+        f: p.f * 4,
+        dur: 0.5 * (p.decay ?? 1),
+        vol: 0.12 * p.vol * (0.5 + p.bright),
+      });
+      tone(c, o, t, { f: p.f * 10, dur: 0.12, vol: 0.05 * p.vol * (0.5 + p.bright) });
+      return end;
+    },
+  },
+
   // Strings.
   pluck: { f: 196, bright: 0.5, play: (c, o, t, p) => pluck(c, o, t, { ...p, body: 0.6 }) },
   nylon: { f: 262, bright: 0.25, play: (c, o, t, p) => pluck(c, o, t, { ...p, body: 1 }) },
@@ -1160,6 +1336,12 @@ export const LEGACY_NAMES = Object.keys(LEGACY);
 // another: measured by `node tools/sound-check.mjs --voices` (a mix of its
 // loudest 50 ms and its peak). Re-measure after changing a voice.
 const LEVEL = {
+  grand: 0.43,
+  upright: 0.47,
+  harpsichord: 0.61,
+  organ: 0.44,
+  synth: 0.59,
+  vibes: 0.52,
   pluck: 0.78,
   nylon: 0.76,
   harp: 0.85,
@@ -1247,7 +1429,7 @@ export const VOICE_NAMES = Object.keys(VOICES);
 // ---- Specs ------------------------------------------------------------------------
 
 const PARAMS = new Set(
-  "voice pitch f decay vol bright at pickAt notes step strum n rate to kind".split(" "),
+  "voice pitch f decay vol bright at pickAt notes step strum n rate to kind hold".split(" "),
 );
 
 // Checks a spec and returns a list of problems (empty when it is fine).
@@ -1292,6 +1474,7 @@ export function specProblems(spec, where = "sound") {
     "n",
     "rate",
     "to",
+    "hold",
   ])
     if (k in spec && !(typeof spec[k] === "number" && Number.isFinite(spec[k])))
       out.push(`${where}: ${k} must be a number`);
