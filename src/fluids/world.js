@@ -16,6 +16,7 @@ export const TIER_SCALE = { low: 0.35, mid: 0.45, high: 1, max: 1.35 };
 const LIQUID_STEP = 1 / 120;
 const MAX_STEPS = { low: 2, mid: 3, high: 4, max: 4 };
 const GAS_STEP = 1 / 30;
+export const LIQUID_SUB = 4;
 
 export class FluidWorld {
   // specs: the recipe's k.fluid() calls. profile: the tier. transform: the
@@ -60,7 +61,21 @@ export class FluidWorld {
       }
       sys.index = i;
       sys.base = this.slots;
-      sys.slots = sys.cap + (sys.dcap || 0);
+      // A liquid particle is drawn as LIQUID_SUB smaller splats (a crisper
+      // edge and a smoother surface than one big one).
+      sys.slots = sys.cap * (sys.kind === "liquid" ? LIQUID_SUB : 1) + (sys.dcap || 0);
+      // A thin liquid in a glass also gets a level sheet (drawn once calm).
+      if (sys.kind === "liquid") {
+        sys.sheet = makeSheet(sys);
+        if (sys.sheet) sys.slots += sys.sheet.n;
+      }
+      if (sys.kind === "liquid") {
+        // The speed at which a particle is drawn as a stream (as the
+        // renderer's stretch reaches 1.4 times the splat).
+        const preset = LIQUIDS[spec.preset] || {};
+        const stretch = spec.stretch ?? preset.stretch ?? 0.06;
+        sys.fastSpeed = (0.4 * sys.d * (spec.splat ?? 0.72)) / stretch;
+      }
       this.slots += sys.slots;
       this.systems.push(sys);
       this.byName.set(name, sys);
@@ -164,8 +179,9 @@ export class FluidWorld {
 
   // Writes every slot for the renderer, in toy coordinates:
   //   center  xyz the drawn place, w 0
-  //   anim    xyz velocity, w kind + 0.999 * f (f: age 0..1, or for a
-  //           liquid how alone the particle is, 0 in the bulk .. 1 a drop)
+  //   anim    xyz velocity, w kind + 0.999 * f (f: age 0..1); for a
+  //           liquid, kind + sub / 4 + 0.2 * f (sub: which of its
+  //           LIQUID_SUB splats, f how alone it is, 0 in the bulk .. 1 a drop)
   //   shape   the splat's turn, a quaternion (x, y, z, w); for a liquid its
   //           z axis is the outward normal
   //   size    xyz its relative radii, w material + surface / 16 + tone / 256
@@ -199,24 +215,50 @@ export class FluidWorld {
       };
       if (sys.kind === "liquid") {
         const { vel, nrm, count, hot, seed } = sys;
-        sys.shape(sys.rp, sys.rq, sys.rs);
+        sys.shape(sys.rp, sys.rq, sys.rs, { fast: sys.fastSpeed });
         const { rp, rq, rs } = sys;
         const glow = LIQUIDS[sys.spec.preset]?.glow || sys.spec.glow;
-        shape.set(rq.subarray(0, sys.n * 4), o * 4);
-        for (let i = 0; i < sys.n; i++) {
-          const o4 = (o + i) * 4;
-          size[o4] = rs[i * 4];
-          size[o4 + 1] = rs[i * 4 + 1];
-          size[o4 + 2] = rs[i * 4 + 2];
-        }
         for (let i = 0; i < sys.n; i++) {
           const i3 = i * 3;
-          put(
-            rp[i3], rp[i3 + 1], rp[i3 + 2],
-            vel[i3], vel[i3 + 1], vel[i3 + 2],
-            KIND.liquid, 1 - Math.min(count[i], 16) / 16,
-            nrm[i * 4 + 3], glow ? hot[i] : seed[i],
-          ); // prettier-ignore
+          const i4 = i * 4;
+          const f = 1 - Math.min(count[i], 16) / 16;
+          for (let k = 0; k < LIQUID_SUB; k++) {
+            const o4 = o * 4;
+            shape[o4] = rq[i4];
+            shape[o4 + 1] = rq[i4 + 1];
+            shape[o4 + 2] = rq[i4 + 2];
+            shape[o4 + 3] = rq[i4 + 3];
+            size[o4] = rs[i4];
+            size[o4 + 1] = rs[i4 + 1];
+            size[o4 + 2] = rs[i4 + 2];
+            put(
+              rp[i3], rp[i3 + 1], rp[i3 + 2],
+              vel[i3], vel[i3 + 1], vel[i3 + 2],
+              KIND.liquid, 0, nrm[i4 + 3], glow ? hot[i] : seed[i],
+            ); // prettier-ignore
+            // A liquid's w: kind + sub-splat / 4 + 0.2 * how alone it is.
+            anim[o4 + 3] = KIND.liquid + 0.25 * k + 0.2 * f;
+          }
+        }
+        // The level sheet, then the unused particles' sub-splats.
+        if (sys.sheet) {
+          const sh = sys.sheet;
+          const lv = sheetLevel(sys, sh);
+          if (sys.foam > 0) sheetFoam(sys, sh, lv.y);
+          for (let i = 0; i < sh.n; i++) {
+            const o4 = o * 4;
+            // z up: x, then -z, then y.
+            shape[o4] = -Math.SQRT1_2;
+            shape[o4 + 1] = 0;
+            shape[o4 + 2] = 0;
+            shape[o4 + 3] = Math.SQRT1_2;
+            size[o4] = size[o4 + 1] = sh.r;
+            size[o4 + 2] = 0.3;
+            // Where the liquid has foam, the sheet is its head: foam colored
+            // and shown even while the surface is still stirred.
+            const fm = sh.foam ? sh.foam[i] : 0;
+            put(sh.pts[i * 2], lv.y + fm * sys.d * 0.4, sh.pts[i * 2 + 1], 0, 0, 0, KIND.sheet, Math.max(lv.alpha, Math.min(1, fm * 1.4)), 1, fm); // prettier-ignore
+          }
         }
         plain(o, o + sys.dn);
         for (let i = 0; i < sys.dn; i++) {
@@ -241,8 +283,9 @@ export class FluidWorld {
         shape.set(sys.rq.subarray(0, sys.n * 4), o * 4);
         for (let i = 0; i < sys.n; i++) {
           const o4 = (o + i) * 4;
-          size[o4] = size[o4 + 1] = 1;
-          size[o4 + 2] = 0.25;
+          size[o4] = sys.rr[i * 3];
+          size[o4 + 1] = sys.rr[i * 3 + 1];
+          size[o4 + 2] = sys.rr[i * 3 + 2] * 0.25;
         }
         for (let i = 0; i < sys.n; i++) {
           const i3 = i * 3;
@@ -316,19 +359,45 @@ class Vessel {
     const surfaces = [
       [2 * Math.PI * R * H, (u, v) => { const a = u * 2 * Math.PI; return [[x0 + R * Math.cos(a), y0 + v * H, z0 + R * Math.sin(a)], [Math.cos(a), 0, Math.sin(a)], 0]; }], // prettier-ignore
       [2 * Math.PI * r * (H - b), (u, v) => { const a = u * 2 * Math.PI; return [[x0 + r * Math.cos(a), y0 + b + v * (H - b), z0 + r * Math.sin(a)], [-Math.cos(a), 0, -Math.sin(a)], 0]; }], // prettier-ignore
-      [Math.PI * (R * R - r * r), (u, v) => { const a = u * 2 * Math.PI; const rr = Math.sqrt(r * r + v * (R * R - r * r)); return [[x0 + rr * Math.cos(a), y0 + H, z0 + rr * Math.sin(a)], [0, 1, 0], 1]; }], // prettier-ignore
+      [Math.PI * (R * R - r * r), (u, v) => { const a = u * 2 * Math.PI; const rr = Math.sqrt(r * r + v * (R * R - r * r)); return [[x0 + rr * Math.cos(a), y0 + H, z0 + rr * Math.sin(a)], [0, 1, 0], 0.3]; }], // prettier-ignore
       [Math.PI * r * r, (u, v) => { const a = u * 2 * Math.PI; const rr = r * Math.sqrt(v); return [[x0 + rr * Math.cos(a), y0 + b, z0 + rr * Math.sin(a)], [0, 1, 0], 0.4]; }], // prettier-ignore
       [Math.PI * R * R, (u, v) => { const a = u * 2 * Math.PI; const rr = R * Math.sqrt(v); return [[x0 + rr * Math.cos(a), y0 + 0.002, z0 + rr * Math.sin(a)], [0, -1, 0], 0.4]; }], // prettier-ignore
     ];
+    // A tenth of the splats draw the rims (the lip's two edges and the
+    // foot's) as clean lines: each splat long along the rim.
+    const rims = [
+      [R, y0 + H, 1],
+      [r, y0 + H, 1],
+      [R, y0 + 0.004, 0.6],
+    ];
+    const rimN = Math.round(cap * 0.1);
+    const body = cap - rimN;
     const total = surfaces.reduce((t, sf) => t + sf[0], 0);
-    this.spacing = Math.sqrt(total / cap);
+    this.spacing = Math.sqrt(total / body);
+    const size = this.spacing * 0.75;
     this.pos = new Float32Array(cap * 3);
     this.rq = new Float32Array(cap * 4);
+    this.rr = new Float32Array(cap * 3).fill(1);
     this.edge = new Float32Array(cap);
     const rand = mulberry32(seed);
     let n = 0;
+    const around = rims.reduce((t, c) => t + c[0], 0);
+    for (const [rad, y, edge] of rims) {
+      const m = Math.round((rimN * rad) / around);
+      const step = (2 * Math.PI * rad) / m;
+      for (let k = 0; k < m && n < cap; k++, n++) {
+        const a = (k / m) * 2 * Math.PI;
+        const ca = Math.cos(a);
+        const sa = Math.sin(a);
+        this.pos.set([x0 + rad * ca, y, z0 + rad * sa], n * 3);
+        // x along the rim, z outward.
+        quatFromAxes(-sa, 0, ca, 0, 1, 0, ca, 0, sa, this.rq, n * 4);
+        this.rr.set([(step * 0.8) / size, 0.32, 0.32], n * 3);
+        this.edge[n] = edge;
+      }
+    }
     for (const [area, sample] of surfaces) {
-      const m = Math.round((cap * area) / total);
+      const m = Math.round((body * area) / total);
       // An even R2 sequence over the surface's (u, v).
       const o1 = rand();
       const o2 = rand();
@@ -361,4 +430,112 @@ export function hexToRgb(c) {
   const h = String(c).replace("#", "");
   const v = parseInt(h.length === 3 ? h.replace(/./g, "$&$&") : h, 16);
   return [((v >> 16) & 255) / 255, ((v >> 8) & 255) / 255, (v & 255) / 255];
+}
+
+// ---- The level sheet --------------------------------------------------------------------
+
+// A settled thin liquid (water, soda) in a glass: its top drawn as one even,
+// level sheet of flat splats, so a still surface reads as a surface and not
+// as the tops of particles. It fades in as the surface calms and out while a
+// pour or a splash stirs it.
+function makeSheet(sys) {
+  if (sys.viscosity > 0.3) return null; // honey and lava keep their mounds
+  const g = (sys.spec.colliders || []).find((c) => c.type === "glass");
+  if (!g) return null;
+  // Small, dense splats, kept a splat's width inside the wall.
+  const step = sys.d * 0.45;
+  const sigma = step * 1.15;
+  const R = g.radius - sigma * 1.3;
+  const pts = [];
+  // A sunflower spiral: even points over the disc.
+  const n = Math.max(12, Math.round((Math.PI * R * R) / (step * step)));
+  for (let i = 0; i < n; i++) {
+    const r = R * Math.sqrt((i + 0.5) / n);
+    const a = i * 2.39996323;
+    pts.push(g.at[0] + r * Math.cos(a), g.at[2] + r * Math.sin(a));
+  }
+  return {
+    n,
+    pts,
+    glass: g,
+    R,
+    r: sigma / (sys.d * (sys.spec.splat ?? 0.72)),
+    level: null,
+    alpha: 0,
+  };
+}
+
+// The sheet's height (the top of the calm liquid in the glass) and how far
+// it has faded in.
+function sheetLevel(sys, sh) {
+  const g = sh.glass;
+  const ys = [];
+  let speed = 0;
+  let m = 0;
+  for (let i = 0; i < sys.n; i++) {
+    const x = sys.pos[i * 3] - g.at[0];
+    const z = sys.pos[i * 3 + 2] - g.at[2];
+    if (x * x + z * z > g.radius * g.radius) continue;
+    const y = sys.pos[i * 3 + 1];
+    if (y > g.at[1] + g.height) continue;
+    ys.push(y);
+  }
+  if (ys.length < 8) {
+    sh.alpha = 0;
+    return { y: g.at[1], alpha: 0 };
+  }
+  ys.sort((a, b) => a - b);
+  const top = ys[Math.floor(ys.length * 0.96)];
+  // How fast the top layer moves.
+  for (let i = 0; i < sys.n; i++) {
+    const y = sys.pos[i * 3 + 1];
+    if (Math.abs(y - top) > sys.d * 1.5) continue;
+    speed += Math.hypot(sys.vel[i * 3], sys.vel[i * 3 + 1], sys.vel[i * 3 + 2]);
+    m++;
+  }
+  speed /= Math.max(1, m);
+  const calm = Math.sqrt(Math.abs(sys.gravity[1]) * sys.d);
+  const want = Math.max(0, Math.min(1, (1.6 - speed / calm) / 0.8));
+  sh.alpha += (want - sh.alpha) * (want > sh.alpha ? 0.08 : 0.35);
+  const y = top + sys.rad * 0.35;
+  sh.level = sh.level === null ? y : sh.level + (y - sh.level) * 0.2;
+  return { y: sh.level, alpha: sh.alpha };
+}
+
+// How much foam covers each point of the sheet: the foam flecks near the
+// level counted on a coarse grid over the glass, read back smoothly and
+// eased over time, so the head is one fine, even layer.
+const FOAM_GRID = 10;
+function sheetFoam(sys, sh, level) {
+  const g = sh.glass;
+  const G = FOAM_GRID;
+  const cells = (sh.cells ||= new Float32Array(G * G));
+  cells.fill(0);
+  const R = g.radius;
+  const cell = (2 * R) / G;
+  for (let i = 0; i < sys.dn; i++) {
+    if (sys.dkind[i] !== KIND.foam) continue;
+    if (Math.abs(sys.dpos[i * 3 + 1] - level) > sys.d * 3) continue;
+    const cx = Math.floor((sys.dpos[i * 3] - g.at[0] + R) / cell);
+    const cz = Math.floor((sys.dpos[i * 3 + 2] - g.at[2] + R) / cell);
+    if (cx < 0 || cz < 0 || cx >= G || cz >= G) continue;
+    cells[cz * G + cx] += 1 - sys.dage[i] / sys.dlife[i];
+  }
+  // Flecks per cell for a full head.
+  const full = (cell * cell) / (sys.d * sys.d * 0.16);
+  const foam = (sh.foam ||= new Float32Array(sh.n));
+  for (let i = 0; i < sh.n; i++) {
+    const fx = (sh.pts[i * 2] - g.at[0] + R) / cell - 0.5;
+    const fz = (sh.pts[i * 2 + 1] - g.at[2] + R) / cell - 0.5;
+    const x0 = Math.max(0, Math.min(G - 2, Math.floor(fx)));
+    const z0 = Math.max(0, Math.min(G - 2, Math.floor(fz)));
+    const tx = Math.max(0, Math.min(1, fx - x0));
+    const tz = Math.max(0, Math.min(1, fz - z0));
+    const c = (x, z) => cells[z * G + x];
+    const v =
+      (c(x0, z0) * (1 - tx) + c(x0 + 1, z0) * tx) * (1 - tz) +
+      (c(x0, z0 + 1) * (1 - tx) + c(x0 + 1, z0 + 1) * tx) * tz;
+    const want = Math.min(1, v / full);
+    foam[i] += (want - foam[i]) * 0.15;
+  }
 }

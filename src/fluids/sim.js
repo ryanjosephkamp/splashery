@@ -31,13 +31,14 @@ export const KIND = {
   flame: 7,
   spark: 8,
   vessel: 9,
+  sheet: 10,
 };
 
 // Liquids by name. viscosity 0..1 (water to lava), cohesion (how much the
 // surface holds together), friction at walls, foam and fizz (soda), glow
 // (lava's own light) and the color.
 export const LIQUIDS = {
-  water: { color: "#8fc8ec", viscosity: 0.02, cohesion: 0.06, friction: 0.05, foam: 0.15, fizz: 0, glow: 0 }, // prettier-ignore
+  water: { color: "#6fbfe9", viscosity: 0.04, cohesion: 0.06, friction: 0.05, foam: 0.15, fizz: 0, glow: 0 }, // prettier-ignore
   soda: { color: "#3b190b", viscosity: 0.03, cohesion: 0.06, friction: 0.05, foam: 1, fizz: 1, glow: 0 }, // prettier-ignore
   syrup: { color: "#b8641c", viscosity: 0.45, cohesion: 0.12, friction: 0.4, foam: 0, fizz: 0, glow: 0, stretch: 0.1 }, // prettier-ignore
   honey: { color: "#e0a019", viscosity: 0.75, cohesion: 0.16, friction: 0.7, foam: 0, fizz: 0, glow: 0, stretch: 0.16 }, // prettier-ignore
@@ -328,7 +329,7 @@ export class Liquid {
     this.drain = 0;
     this.time = 0;
     // Diffuse particles: spray, foam and bubbles.
-    this.dcap = Math.round(cap * (this.fizz > 0 ? 1.2 : this.foam > 0 ? 0.45 : 0.12));
+    this.dcap = Math.round(cap * (this.fizz > 0 ? 3.5 : this.foam > 0 ? 0.45 : 0.12));
     this.dn = 0;
     this.dpos = new Float32Array(this.dcap * 3);
     this.dvel = new Float32Array(this.dcap * 3);
@@ -468,7 +469,7 @@ export class Liquid {
         const pa = ra * cs - rb * sn;
         const pb = ra * sn + rb * cs;
         // Staggered along the flow, so a stream isn't a stack of discs.
-        const l = lag + (this.rand() - 0.5) * Math.min(d, e.gap) * 0.9;
+        const l = lag + (this.rand() - 0.5) * Math.min(d, e.gap) * 0.4;
         const x = at[0] + ux * pa + vx * pb + dir[0] * l;
         const y = at[1] + uy * pa + vy * pb + dir[1] * l;
         const z = at[2] + uz * pa + vz * pb + dir[2] * l;
@@ -561,7 +562,7 @@ export class Liquid {
     // Artificial pressure (s_corr), scaled to this kernel.
     const dq = 0.25 * h;
     const wdq = poly6 * (h2 - dq * dq) ** 3;
-    const kCorr = 0.0015 / this.gradScale;
+    const kCorr = (this.spec.scorr ?? 0.0015) / this.gradScale;
     // Relaxation (the paper's epsilon): keeps a lone particle's step small.
     const relax = this.gradScale * 0.1;
     for (let it = 0; it < this.iters; it++) {
@@ -879,18 +880,49 @@ export class Liquid {
     }
   }
 
-  // The shape each particle is drawn with (Yu and Turk 2013): its place
-  // smoothed toward its neighbors' (so the surface is smooth, not beaded),
-  // and an ellipsoid from the spread of its neighbors, flat along a surface
-  // and long along a thin stream. Writes, per particle: `rp` the drawn
-  // place (xyz), `rq` the turn (a quaternion x, y, z, w whose z axis is the
-  // outward normal) and `rs` the three relative radii (w: how much of a
-  // surface it is on).
-  shape(rp, rq, rs, smooth = 0.6) {
+  // The shape each particle is drawn with. Writes, per particle: `rp` the
+  // drawn place (xyz), `rq` the turn (a quaternion x, y, z, w whose z axis is
+  // the outward normal, for the light) and `rs` the three relative radii
+  // (w: how much of a surface it is on). A negative first radius marks a
+  // fast stream, drawn long along its x axis (the flow) by the renderer.
+  //   - its place is smoothed toward its neighbors' (a smooth surface, not
+  //     beads), and its normal is the neighbors' average (no mottling);
+  //   - in the body and on its surface: a disc along that normal;
+  //   - in a fast stream: along the flow, with the normal across it (so a
+  //     stream gets a rim and a highlight like a glass rod);
+  //   - in thin parts (sheets, necks, threads): the ellipsoid of its neighbors
+  //     (Yu and Turk 2013), flat on a surface and long along a thread.
+  shape(rp, rq, rs, { smooth = 0.75, fast = Infinity } = {}) {
     const n = this.n;
-    const { pos, nbr, nbrN, nrm } = this;
+    const { pos, vel, nbr, nbrN, nrm } = this;
     const h = this.K.h;
     const C = SHAPE_C;
+    const sn = this.sn || (this.sn = new Float32Array(this.cap * 3));
+    // Smoothed normals: each surface normal averaged with its neighbors'.
+    for (let i = 0; i < n; i++) {
+      const o4 = i * 4;
+      let x = nrm[o4] * nrm[o4 + 3];
+      let y = nrm[o4 + 1] * nrm[o4 + 3];
+      let z = nrm[o4 + 2] * nrm[o4 + 3];
+      const base = i * MAXN;
+      for (let k = 0; k < nbrN[i]; k++) {
+        const j4 = nbr[base + k] * 4;
+        const w = nrm[j4 + 3];
+        x += nrm[j4] * w;
+        y += nrm[j4 + 1] * w;
+        z += nrm[j4 + 2] * w;
+      }
+      const l = Math.sqrt(x * x + y * y + z * z);
+      if (l > 1e-6) {
+        sn[i * 3] = x / l;
+        sn[i * 3 + 1] = y / l;
+        sn[i * 3 + 2] = z / l;
+      } else {
+        sn[i * 3] = nrm[o4];
+        sn[i * 3 + 1] = nrm[o4 + 1];
+        sn[i * 3 + 2] = nrm[o4 + 2];
+      }
+    }
     for (let i = 0; i < n; i++) {
       const i3 = i * 3;
       const xi = pos[i3];
@@ -898,7 +930,7 @@ export class Liquid {
       const zi = pos[i3 + 2];
       const nn = nbrN[i];
       const base = i * MAXN;
-      // Weighted mean, then weighted spread about it.
+      // Weighted mean of the neighborhood.
       let sw = 1;
       let mx = xi;
       let my = yi;
@@ -924,6 +956,66 @@ export class Liquid {
       rp[i3 + 1] = yi + (my - yi) * smooth;
       rp[i3 + 2] = zi + (mz - zi) * smooth;
       const surf = nrm[o4 + 3];
+      rs[o4 + 3] = surf;
+      const nx = sn[i3];
+      const ny = sn[i3 + 1];
+      const nz = sn[i3 + 2];
+      const vx = vel[i3];
+      const vy = vel[i3 + 1];
+      const vz = vel[i3 + 2];
+      const sp = Math.sqrt(vx * vx + vy * vy + vz * vz);
+      if (sp > fast && nn <= 8) {
+        // A thin, fast stream: x along the flow, z the normal across it.
+        // (A falling ball has more neighbors: it keeps its body's shape.)
+        const ex = vx / sp;
+        const ey = vy / sp;
+        const ez = vz / sp;
+        let px = nx;
+        let py = ny;
+        let pz = nz;
+        const d = px * ex + py * ey + pz * ez;
+        px -= d * ex;
+        py -= d * ey;
+        pz -= d * ez;
+        let pl = Math.sqrt(px * px + py * py + pz * pz);
+        if (pl < 1e-4) {
+          // No sideways normal: any direction across the flow.
+          px = Math.abs(ey) < 0.9 ? -ez : 0;
+          py = Math.abs(ey) < 0.9 ? 0 : ez;
+          pz = Math.abs(ey) < 0.9 ? ex : -ey;
+          pl = Math.sqrt(px * px + py * py + pz * pz) || 1;
+        }
+        px /= pl;
+        py /= pl;
+        pz /= pl;
+        const fx = py * ez - pz * ey;
+        const fy = pz * ex - px * ez;
+        const fz = px * ey - py * ex;
+        quatFromAxes(ex, ey, ez, fx, fy, fz, px, py, pz, rq, o4);
+        rs[o4] = -1;
+        rs[o4 + 1] = 1;
+        rs[o4 + 2] = 1;
+        rs[o4 + 3] = 1;
+        continue;
+      }
+      if (nn >= 10) {
+        // The body and its surface: a disc along the smoothed normal, flatter
+        // the more it is on the surface.
+        const t = Math.abs(ny) < 0.9 ? [0, 1, 0] : [1, 0, 0];
+        let ax = t[1] * nz - t[2] * ny;
+        let ay = t[2] * nx - t[0] * nz;
+        let az = t[0] * ny - t[1] * nx;
+        const al = Math.sqrt(ax * ax + ay * ay + az * az) || 1;
+        ax /= al;
+        ay /= al;
+        az /= al;
+        quatFromAxes(ax, ay, az, ny * az - nz * ay, nz * ax - nx * az, nx * ay - ny * ax, nx, ny, nz, rq, o4); // prettier-ignore
+        const sf = Math.min(1, surf * 1.5);
+        rs[o4] = 1.2 - 0.05 * sf;
+        rs[o4 + 1] = 1.2 - 0.05 * sf;
+        rs[o4 + 2] = 1 - 0.45 * sf;
+        continue;
+      }
       if (nn < 6) {
         // Too few neighbors to have a shape: a round drop.
         rq[o4] = rq[o4 + 1] = rq[o4 + 2] = 0;
@@ -955,32 +1047,61 @@ export class Liquid {
       C[7] = C[5];
       for (let k = 0; k < 9; k++) C[k] /= cw;
       const { val, vec } = eigen3(C);
-      // Largest first; the smallest is the normal.
+      // Largest first; the smallest axis is the normal.
       const s0 = Math.sqrt(Math.max(val[0], 1e-12));
       const s1 = Math.max(Math.sqrt(Math.max(val[1], 0)), s0 / 4);
       const s2 = Math.max(Math.sqrt(Math.max(val[2], 0)), s0 / 4);
       const g = Math.cbrt(s0 * s1 * s2);
-      // The normal points out of the liquid (the color field's side).
-      let ex = vec[0];
-      let ey = vec[1];
-      let ez = vec[2];
-      let nx = vec[6];
-      let ny = vec[7];
-      let nz = vec[8];
-      if (nx * nrm[o4] + ny * nrm[o4 + 1] + nz * nrm[o4 + 2] < 0) {
-        nx = -nx;
-        ny = -ny;
-        nz = -nz;
+      const ex = vec[0];
+      const ey = vec[1];
+      const ez = vec[2];
+      let cx = vec[6];
+      let cy = vec[7];
+      let cz = vec[8];
+      if (cx * nx + cy * ny + cz * nz < 0) {
+        cx = -cx;
+        cy = -cy;
+        cz = -cz;
       }
-      // A right-handed frame: e, n x e, n.
-      const fx = ny * ez - nz * ey;
-      const fy = nz * ex - nx * ez;
-      const fz = nx * ey - ny * ex;
-      quatFromAxes(ex, ey, ez, fx, fy, fz, nx, ny, nz, rq, o4);
+      quatFromAxes(ex, ey, ez, cy * ez - cz * ey, cz * ex - cx * ez, cx * ey - cy * ex, cx, cy, cz, rq, o4); // prettier-ignore
       rs[o4] = s0 / g;
       rs[o4 + 1] = s1 / g;
       rs[o4 + 2] = s2 / g;
-      rs[o4 + 3] = surf;
+    }
+    // A calm surface is even: each surface particle's drawn place moves
+    // along its normal to its surface neighbors' mean height (twice), more
+    // the slower it moves, so a settled pool reads as one level sheet.
+    const dq = this.dq || (this.dq = new Float32Array(this.cap));
+    const calmSpeed = Math.sqrt(Math.abs(this.gravity[1]) * this.d) * 0.6;
+    for (let pass = 0; pass < 2; pass++) {
+      for (let i = 0; i < n; i++) {
+        dq[i] = 0;
+        if (nrm[i * 4 + 3] < 0.45 || rs[i * 4] < 0) continue;
+        const i3 = i * 3;
+        const nx = sn[i3];
+        const ny = sn[i3 + 1];
+        const nz = sn[i3 + 2];
+        let sum = 0;
+        let cnt = 0;
+        const base = i * MAXN;
+        for (let k = 0; k < nbrN[i]; k++) {
+          const j = nbr[base + k];
+          if (nrm[j * 4 + 3] < 0.45) continue;
+          sum += (rp[j * 3] - rp[i3]) * nx + (rp[j * 3 + 1] - rp[i3 + 1]) * ny + (rp[j * 3 + 2] - rp[i3 + 2]) * nz; // prettier-ignore
+          cnt++;
+        }
+        if (!cnt) continue;
+        const sp = Math.sqrt(vel[i3] ** 2 + vel[i3 + 1] ** 2 + vel[i3 + 2] ** 2);
+        const k = Math.max(0, 1 - sp / calmSpeed);
+        dq[i] = (sum / cnt) * 0.8 * k;
+      }
+      for (let i = 0; i < n; i++) {
+        if (!dq[i]) continue;
+        const i3 = i * 3;
+        rp[i3] += sn[i3] * dq[i];
+        rp[i3 + 1] += sn[i3 + 1] * dq[i];
+        rp[i3 + 2] += sn[i3 + 2] * dq[i];
+      }
     }
   }
 
@@ -1055,7 +1176,7 @@ export class Liquid {
         const kind = count[i] < 8 ? KIND.spray : KIND.foam;
         const j = 0.5 * d;
         // A soda traps more air: several flecks per splash, for a head.
-        const m = kind === KIND.foam ? 1 + Math.round(3 * fizz) : 1;
+        const m = kind === KIND.foam ? 1 + Math.round(9 * fizz) : 1;
         for (let k = 0; k < m; k++)
           this.spawnDiffuse(
             kind,
@@ -1089,6 +1210,29 @@ export class Liquid {
       }
     }
     if (!this.dn) return;
+    // Foam spreads from where it gathers toward the walls (a head covers
+    // the whole top, not a patch where the pour lands): its centroid.
+    let fcx = 0;
+    let fcz = 0;
+    let fcn = 0;
+    for (let i = 0; i < this.dn; i++)
+      if (this.dkind[i] === KIND.foam) {
+        fcx += this.dpos[i * 3];
+        fcz += this.dpos[i * 3 + 2];
+        fcn++;
+      }
+    if (fcn) {
+      fcx /= fcn;
+      fcz /= fcn;
+    }
+    // How far the liquid reaches from there (the push fades out toward it,
+    // so the flecks even out instead of piling against the wall).
+    let reach = d * 4;
+    for (let i = 0; i < n; i++) {
+      const rx = pos[i * 3] - fcx;
+      const rz = pos[i * 3 + 2] - fcz;
+      reach = Math.max(reach, Math.sqrt(rx * rx + rz * rz));
+    }
     // Move them with the liquid around them.
     const grid = this.grid;
     if (!n) grid.build(pos, 0, this.K.h);
@@ -1166,8 +1310,12 @@ export class Liquid {
           // Foam rides the surface: carried along, floated up until it sits
           // on top of the liquid (few liquid neighbors, all below).
           // (a little wander, so a head spreads over the whole top)
-          vx = lx + (rand() - 0.5) * rise * 0.5;
-          vz = lz + (rand() - 0.5) * rise * 0.5;
+          const ox = x - fcx;
+          const oz = z - fcz;
+          const ol = Math.sqrt(ox * ox + oz * oz) + d;
+          const push = rise * 0.6 * Math.min(1, fcn / 300) * Math.max(0, 1 - ol / (reach * 0.85));
+          vx = lx + (ox / ol) * push + (rand() - 0.5) * rise * 0.8;
+          vz = lz + (oz / ol) * push + (rand() - 0.5) * rise * 0.8;
           vy = ly + (c > 7 ? rise * 0.7 : c < 2 ? -rise * 0.4 : 0);
         }
       } else if (kind === KIND.foam) {

@@ -7,7 +7,7 @@
 // --width (360), with a small "built by Opus 5.5" label.
 //
 //   python3 -m http.server 4173 --bind 127.0.0.1 &
-//   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/fl-clip.mjs <out-dir> [pour splash soda smoke flame]
+//   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/fl-clip.mjs <out-dir> [pour splash soda smoke flame] [--ratio=3] [--profile=mid]
 //
 // Writes <out-dir>/fl-<clip>.gif and fl-<clip>-strip.png (six frames).
 
@@ -30,6 +30,8 @@ const list = clips.length ? clips : ALL;
 const STEP = 1 / 15;
 const WIDTH = Number(opt("width", 360));
 const PROFILE = opt("profile", "mid");
+// The canvas's pixel-ratio cap: 3, the mid tier's cap once PR #118 lands.
+const RATIO = Number(opt("ratio", 3));
 fs.mkdirSync(outDir, { recursive: true });
 
 const browser = await chromium.launch({
@@ -71,6 +73,7 @@ async function record(clip) {
   const frames = [];
   const run = (fn, arg) => page.evaluate(fn, arg);
   // The stage's update handlers run only with the time this script gives.
+  await run((ratio) => (window.__flRatio = ratio), RATIO);
   await run(() => {
     const { player } = window.__splashery;
     const stage = player.stage;
@@ -84,6 +87,7 @@ async function record(clip) {
     });
     player.opts.idleDelay = 1e9;
     player.idle.weight = 0;
+    player.stage.setPixelRatio(window.__flRatio);
     const tag = document.createElement("div");
     tag.textContent = "Fluid lab · built by Opus 5.5";
     tag.style.cssText =
@@ -156,7 +160,7 @@ async function record(clip) {
     await tap();
     await play(3.2);
   } else if (clip === "soda") {
-    await open({ scene: "glass", liquid: "soda" }, { at: [0, 0.6, 0], zoom: 0.5 });
+    await open({ scene: "glass", liquid: "soda" }, { at: [-0.1, 0.85, 0], zoom: 0.62 });
     await play(1.0);
     await tap();
     await play(6.0);
