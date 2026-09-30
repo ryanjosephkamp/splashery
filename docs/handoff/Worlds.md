@@ -3,6 +3,96 @@
 Prefix `wd`. Branch `claude/lane-worlds-engine`, PR "Engine: Worlds, the world engine and a sandbox
 island". How lanes work: [OPERATING.md](../OPERATING.md). Earlier lessons: [history.md](history.md).
 
+## Brief (r3)
+
+(Written by the Operator on September 30, 2026, from the owner's marks of September 29 and 30)
+
+The owner's words on `wd-hybrid-character` (September 30, 2026): "This is looking much better. It's
+still doesn't feel premium yet and while I know that I marked some of the other Island scenes as
+looking right, the terrain was generally what I was referring to. The sand looks okay, but the
+character and a lot of the other stuff in the environment could use some work. The character in
+particular could use a lot of work. It looks way too simple and simplistic. I would also like to try
+to improve the Fidelity or resolution or sharpness of the rest of the island." And on `wd-walk-r3`
+and `wd-list-r3` (September 29): "make the character look much, much better; the player looks far
+too low-poly here. I know you're capable of incredible character design, so please see what more you
+can do here."
+
+So the terrain, water, sky, shadows and depth pass (those cards are good). The character and the
+props don't. Build, in this order, posting each part's cards as soon as it's done:
+
+1. **A realistic, premium character (the main job).** An adult of ordinary proportions, not a
+   big-headed game figure: believable face, hands and clothes, with proper materials lit by the
+   world's sun and HDRI. It must read as premium at phone size, walking and close up.
+   - The handoff's lead is MakeHuman or MPFB2. The base mesh and its bundled assets are CC0, but
+     check each asset you use (skin, eyes, eyebrows, hair, clothes) on its live page, because
+     contributed assets vary; record each in CREDITS.md and tools/assets.json. Build it in these
+     containers with Blender as a Python module (pin the version; a build tool in `tools/`, never
+     shipped; list it in LICENSES.md), bake textures to 1K–2K, keep it to roughly 15–30k triangles
+     on high and a lighter version for low and mid, and export a GLB.
+   - A neutral, invented face: no real person's likeness, no scans of real people unless CC0 with
+     consent stated.
+   - Animation: idle, walk and run that look like a real person moving, with feet that don't slide.
+     Sources must be CC0, CC BY or public domain. The CMU motion-capture database uses its own
+     custom terms, so it is not allowed. Good candidates to check on their live pages: the 100STYLE
+     locomotion dataset (said to be CC BY 4.0), CC0 BVH packs on OpenGameArt, and Quaternius's
+     Universal Animation Library (CC0, if you can reach a download that isn't Google Drive).
+     Retarget in Blender. If nothing usable is reachable, say so in your message with what you
+     tried.
+   - Hair: cards or a sculpted cap that reads well. No stringy transparency artifacts.
+   - Make it the default character in hybrid mode. In splats mode, try baking the same character
+     into splats as rigid parts (sample the textured surface; give each splat to its dominant bone;
+     hide the joints the way clothes do). Parts move as solid pieces: never skin or bend splats. If
+     it doesn't look better than today's splat character, keep today's and say so.
+2. **Sharper props.** The trees, bushes and rocks read as soft blobs at walking distance. In hybrid
+   mode, use CC0 Poly Haven models (rocks, boulders, trunks, dead trees and plants) as lit, shadowed
+   meshes with levels of detail, and give splat tree canopies darker, more varied greens and shade
+   inside the crown. Keep splats where they're special: the lighthouse toy, breakable things,
+   animated flowers. Scatter pebbles and shells on the beach, and add a foam strip at the shoreline.
+3. **Island detail and grade.** Break the ground textures' tiling with a second, larger-scale
+   sample; blend sand into grass by height. Try the vendored engine's CameraFrame (bloom, color
+   enhance, vignette) and ambient occlusion on the high and max tiers only. Fix the handoff's known
+   issues where cheap: gravel on steep sand, the gray horizon band, pale pebbles in the grass close
+   up.
+4. **A frame-rate readout for the owner's phone.** A small labs overlay (`?stats=1`) showing frames
+   per second, the tier, the mode, splats and draw calls, so the owner can test on his phone and
+   send the numbers. Measure your own frame times in the test browser as relative numbers, before
+   and after, and say plainly that the phone is the real test.
+
+Budgets: stay within each tier's splat budget; keep the hybrid assets for low and mid under about 10
+MB in total, and say what high and max download. Keep the "embed transfer ≤ 30 MB" test green and
+`tests/chr.spec.mjs` within its time limit.
+
+Cards (clips at 390×844 unless noted, each labeled "built by Opus 5.5", in the lane record `Worlds`
+on the Effect review page):
+
+- `wd-character-r3`: the new character close up, turning, then idle, walk and run (and one still,
+  side by side with the old one).
+- `wd-character-walk-r3`: following the character along the beach and through the grass at the
+  normal camera.
+- `wd-props-r3`: walking past the new rocks, trees and beach detail.
+- `wd-island-r3`: a wide view and a near view of the island, then the same at 1440×900.
+- `wd-character-splats-r3`: the splat version of the character, if you build it.
+
+Set `replacedBy` on `wd-hybrid-character`, `wd-walk-r3` and `wd-list-r3` to your new card ids.
+
+Tests in tests/wdr3.spec.mjs: the character loads in each tier with its triangle and texture
+budgets; the idle, walk and run clips play and the feet stay planted (measure foot slide against the
+ground while walking); the props' levels of detail switch by distance; the assets are credited and
+within the size budgets; the stats overlay shows; screenshots at 390×844 and 1440×900 (`wdr3-*`).
+Keep tests/wd.spec.mjs and tests/wdh.spec.mjs green; if one of their numbers has to change, say
+which and why in your message.
+
+Docs: update docs/WORLDS.md for the new character and props. The handoff notes that two paragraphs
+there ("Rules that still apply" and the intro) still describe splat-only worlds; leave those two to
+the Operator.
+
+## r3 state
+
+Model: Opus 5.5 (default effort). Branch `claude/lane-worlds-r3`, PR "Phase Worlds r3: a premium
+character and a sharper island".
+
+- September 30, 2026: lane started.
+
 ## Start here (Worlds r3, a fresh session)
 
 Written on September 30, 2026 by the r1, r2 and hybrid session (Opus 5.5) for the session that runs
