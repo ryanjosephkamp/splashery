@@ -118,51 +118,74 @@ HOW THIS LANE RUNS
   docs/OPERATING.md, docs/PACKS.md, docs/WORKSTREAMS.md and docs/handoff/history.md (lessons from
   earlier lanes).
 - Your handoff file: create it. Start it with this brief, word for word, under "## Brief", then keep
-  "## State", "## Notes", "## Known issues" and "## For the Operator" current. Note your model at
-  the top of "## State" (the blog post compares the two models).
-- Shared lists: edit only your own entries in src/toys.js, src/toy-sounds.js, src/toy-help.js (a
-  how-to line and an About text per toy, following docs/handoff/Help.md), tools/toy-plan.json,
-  CREDITS.md and tools/assets.json. Regenerate docs/TOY-PLAN.md with `node tools/toy-plan.mjs`;
-  never merge it by hand.
-- Never edit tests/taps.spec.mjs. Your own tests go in tests/<prefix>.spec.mjs. If a finished lane's
-  test breaks because of a count or a list your work changes, don't edit it: say which test and why
-  in your message, and the Operator fixes it.
-- Assets: CC0, CC BY or public domain only, checked on the live source page and credited
-  (CREDITS.md, tools/assets.json and the toy's in-app credit). Never BY-SA or NC. No logos, brand
-  names or insignia.
-- Review: post clips and cards to the Effect review page,
-  https://claude.ai/artifact/NCsg9V5SzFY3Mnwuwgq7pi, as OPERATING.md's "Steps for a lane" says.
-  Judge every effect as motion at phone size against the effect quality rules before you post it.
-  The Operator has made your lane's record. Don't republish the page, and never write to "verdicts".
-- Push your work in progress to your branch about every hour, so it isn't only in your container,
-  and open your draft PR early. Many lanes run at once now, so main moves often: merge it into your
-  branch before each push (never rebase a pushed branch) and keep both sides of any conflict.
-- Before every push, follow "Before every push" in CLAUDE.md: the full Playwright suite
-  (SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium npx playwright test), prettier,
-  `node tools/us-english.mjs --diff`, `node tools/check-packs.mjs <pack>` for new or changed toys, a
-  contact sheet and thumbnails, and your own screenshots at 390×844 and 1440×900. Then put back the
-  standard screenshots (`node tools/upkeep.mjs --restore-shots`) and any other lane's screenshots
-  your branch didn't change.
-- PR: one draft PR against main with the five sections (Summary, Verification, Deviations, Known
-  issues, What was cut), and the model that built it in the Summary. When main moves, merge it into
-  your branch.
-- After you post your cards, check the owner's marks (the "verdicts" collection, ids starting with
-  your prefix) about once an hour with a scheduled check-in (send_later). Fix every "fix" in the
-  same PR, post the new clip as a "-r2" card, and set replacedBy on the old one. Stop the check-ins
-  once your PR is merged or closed.
-- Finish every working turn with a short final message that starts with "READY:" (PR link, card ids,
-  test results, anything for the Operator), "WORKING:" (what's left), or "BLOCKED:" (exactly what
-  you need).
-
-## State
+  "## State
 
 Model: Opus 5.5 (claude-opus-5-5), default effort.
 
-- September 30, 2026: lane started on `claude/lane-science` from main. Reading the docs, fetching
-  the samples.
+- September 30, 2026: all three toys built on the new Science shelf (labs only), with their samples,
+  sounds, how-to and About texts, plan entries, credits, thumbnails and tests. Cards
+  `sci-ellipsoids`, `sci-jiggle`, `sci-protein`, `sci-open`, `sci-microscope` and `sci-galaxy` are
+  on the Effect review page (lane record `Science`, three groups). Draft PR #132.
 
 ## Notes
 
+- **Files.** `src/science/crystal.js` (CIF, mmCIF and PDB readers; the cell, U_cart = A·N·U·Nᵀ·Aᵀ,
+  eigenvalues, the probability scale), `src/science/smlm.js` (zip entries inflated with
+  `DecompressionStream("deflate-raw")`, .smlm tables, ThunderSTORM CSV), `src/science/field.js` (the
+  toys' GPU program), `src/packs/science.js` (the three recipes), `tools/sci-clip.mjs` (the cards,
+  labs on), `tools/sci-samples.mjs` (the microscope's sample), `tools/sci-galaxy.mjs` (the galaxy's
+  sample), `tests/sci.spec.mjs`.
+- **No engine change.** The toys use the labs GPU-field hook (`gpuField`, lane Lab). Their program
+  replaces the kit's for these toys, so each splat's four splatAnim values are its own: an atom's
+  principal frame (a quaternion in bytes), its three σ and a seed, so every splat of an atom jiggles
+  by the same `R·diag(σ)·z(t)` (z: three cosines per axis, unit variance); a localization's true
+  size; a gas particle's temperature. Uniforms come through `out.morph` (jiggle, magnification, a
+  size floor, a near clip), `out.glow` (the magnifier's focus) and `out.grow` (the hot-gas peel).
+  Without labs the toys still draw (the kit ignores the unknown kinds), only without the jiggle, the
+  zoom and the true localization sizes; the thumbnails are drawn that way.
+- **One marked change in `src/chem/`**: `eachCifToken` in `src/chem/protein.js` is now exported (one
+  word and a comment). `readCif` there groups tags by the dotted mmCIF style only, so small-molecule
+  CIF tags (`_cell_length_a`) need a reader by full tag names (`readCifBlocks`).
+- **Zoom.** The camera can't come nearer than 1.25 toy radii and can't pan, so the zoom is a
+  magnifier inside the toy (everything scales about a focus point, which moves to the middle); a
+  scaling keeps the depth order, so the CPU sort stays right. Zoomed in, a clipping slab fades
+  whatever is in front of the focus.
+- **Choices.** Hydrogens that ride on their atoms are drawn as small spheres by default (as ORTEP
+  plots do; "As refined" shows their refined Uiso). Each structure is turned to face the camera (its
+  flattest direction toward you). The aspirin sample is form II (the CIF's block is
+  "aspirin-form2"). Crambin's PDB file has 6 atoms whose U is not positive definite (real, in the
+  deposit); the toy says so.
+- **Galaxy.** m11i (a dwarf, 0.9 GB) read as an irregular blob, so the sample is m12i (Milky
+  Way–mass, four files, 7.2 GB, read one at a time): 300,000 of the 2.37 million gas particles in a
+  40 × 12 × 40 kpc box, each drawn wider by the cube root of the thinning; the gas is cut round
+  inside the box. Temperatures use a hydrogen fraction of 0.76 (jsfive can't hold the 11-column
+  metallicity array of a 14-million-particle file).
+- **Budgets and speed.** Microscope density 1.4 (84k, 196k, 280k, 392k localizations by tier; the
+  sample's 170,401 all show from mid up), galaxy density 1 (60k to 280k; its big see-through splats
+  overlap), ellipsoids the kit's count (atoms are few). Frame times in the container's SwiftShader
+  at 390×844, device pixel ratio 2, mid tier (a CPU renderer, so only the ratios mean anything):
+  ellipsoids 219 ms, microscope 528 ms, galaxy 807 ms, Lab's splat field 341 ms for comparison.
+  Real-phone frame rates are not measured.
+
 ## Known issues
 
+- Frame rates on a real phone are unmeasured (no GPU here); the galaxy is the heaviest (overdraw).
+- On WebGL2 the sort is the CPU's from the built places; the jiggle moves atoms by fractions of an
+  ångström, so it doesn't show.
+- The jiggle moves each atom independently (the data are per-atom Gaussians), so a hydrogen can move
+  against its carbon.
+- A tap that re-aims the zoomed-in ellipsoids goes through the pick pass; it lands where the
+  magnified splats are drawn, and the recipe maps it back.
+
 ## For the Operator
+
+- **package.json**: `jsfive` 0.4.2 (public domain, based on BSD-3 pyfive; depends on `pako` 2.2.0,
+  MIT AND Zlib) added as a pinned devDependency for `tools/sci-galaxy.mjs`, as the brief asked;
+  listed in LICENSES.md. package.json and package-lock.json are yours to accept.
+- **`src/chem/protein.js`**: one additive, marked change (`export` on `eachCifToken`).
+- **A new category** `science` ("Science") in `CATEGORIES` in `src/toys.js`, after Lab.
+- For PACKS.md: a lesson: `gpuField` can carry per-splat data for any purpose in the four splatAnim
+  floats (kind numbers of 1000 and up are safe in the kit's program), and uniforms can ride on
+  `out.morph`, `out.glow` and `out.grow` (`src/science/field.js` is an example).
+- For PACKS.md: rebuilding a toy with new options resets the camera's home to the app's default
+  distance, not the toy's own `camera.distance` (a clip tool that snaps to home sees it jump).

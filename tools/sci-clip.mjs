@@ -40,14 +40,14 @@ const CARDS = {
     toy: "thermal-ellipsoids",
     options: { structure: "aspirin", level: "50" },
     secs: 6,
-    near: 0.8,
+    near: 0.6,
     steps: [{ t: 0, yaw: 0.45 }],
   },
   "sci-jiggle": {
     toy: "thermal-ellipsoids",
     options: { structure: "aspirin", level: "50" },
     secs: 6,
-    near: 0.8,
+    near: 0.6,
     steps: [
       { t: 0, yaw: 0.12 },
       { t: 0.6, tap: true },
@@ -87,9 +87,10 @@ const CARDS = {
     toy: "thermal-ellipsoids",
     options: { structure: "aspirin", level: "50" },
     secs: 6,
+    near: 0.6,
     steps: [
       { t: 0, yaw: 0.35 },
-      { t: 1.2, file: "tests/fixtures/sci/paracetamol-cod-2104364.cif" },
+      { t: 1.2, file: "tests/fixtures/sci/sucrose-cod-2300557.cif" },
     ],
   },
 };
@@ -166,7 +167,11 @@ for (const name of cards) {
           if (s.tap) player.act(s.tap === true ? null : toWorld(s.tap));
           if (s.file) {
             const opts = await recipe().input.read(files[s.file], s.file.split("/").pop());
+            const keep = cam.home.distance;
             await app.setToyOptions(opts);
+            // The rebuild resets the camera's home to the app's default
+            // distance (the live view keeps its own); keep the card's framing.
+            cam.home.distance = keep;
             pending = 0.05;
             await stage.captureFrame();
           }

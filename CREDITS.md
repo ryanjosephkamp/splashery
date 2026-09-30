@@ -327,9 +327,12 @@ checked on the live source page on September 30, 2026.
   3171–3176, 2000), [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) under the
   [wwPDB data policy](https://www.rcsb.org/pages/usage-policy). The PDB file with its header, atom
   and ANISOU records kept and the water left out.
-- The test fixture `tests/fixtures/sci/paracetamol-cod-2104364.cif` is
-  [COD 2104364](https://www.crystallography.net/cod/2104364.html) (paracetamol at 100 K), public
-  domain, unchanged.
+- The test fixtures `tests/fixtures/sci/paracetamol-cod-2104364.cif` and
+  `tests/fixtures/sci/sucrose-cod-2300557.cif` are
+  [COD 2104364](https://www.crystallography.net/cod/2104364.html) (paracetamol at 100 K) and
+  [COD 2300557](https://www.crystallography.net/cod/2300557.html) (sucrose at 298 K, by A. O.
+  Dmitrienko and I. S. Bushmarinov, Journal of Applied Crystallography 48, 2015), public domain,
+  unchanged.
 - Super-resolution microscope: "Microtubules and clathrin in a Cos cell" by Christophe Leterrier
   (Aix Marseille Université, CNRS, NeuroCyto) on ShareLoc.XYZ,
   [10.5281/zenodo.5507427](https://doi.org/10.5281/zenodo.5507427),
