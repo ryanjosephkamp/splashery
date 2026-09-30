@@ -50,12 +50,37 @@ const forwardOf = (yaw, pitch) => [
 function place(cam, p) {
   const f = forwardOf(p.yaw, p.pitch);
   const along = -(p.pos[0] * f[0] + p.pos[1] * f[1] + p.pos[2] * f[2]);
+  // The far shell makes the toy's bounds large; let the camera come as close as the video's did.
+  if (along > 0.05 && along < cam.minDistance) cam.minDistance = along * 0.8;
   const d = Math.max(cam.minDistance * 1.02, Math.min(cam.maxDistance * 0.98, along));
   cam.target = [p.pos[0] + f[0] * d, p.pos[1] + f[1] * d, p.pos[2] + f[2] * d];
   const pose = { yaw: p.yaw, pitch: p.pitch, roll: p.roll, distance: d };
   cam.cur = { ...pose };
   cam.tgt = { ...pose };
   cam.vel.yaw = cam.vel.pitch = 0;
+}
+
+// The stage camera's lens matched to the video's (from the solved focal length), so the video's
+// picture covers the screen: its height fits a tall phone screen (the sides are cut), its width a
+// wide one. Returns the lens to put back.
+function setLens(c0) {
+  const stage = globalThis.window?.__splashery?.player?.stage;
+  const lens = stage?.cameraEntity?.camera;
+  if (!lens || !c0?.f || !c0?.w || !c0?.h) return null;
+  const was = { fov: lens.fov, horizontalFov: lens.horizontalFov };
+  const canvas = stage.app?.graphicsDevice?.canvas;
+  const aspect = canvas ? canvas.width / Math.max(1, canvas.height) : 1;
+  const wide = aspect > c0.w / c0.h; // the video covers the screen (its sides cut on a phone)
+  lens.horizontalFov = wide;
+  lens.fov = (2 * Math.atan((wide ? c0.w : c0.h) / 2 / c0.f) * 180) / Math.PI;
+  return was;
+}
+
+function putLens(was) {
+  const lens = globalThis.window?.__splashery?.player?.stage?.cameraEntity?.camera;
+  if (!lens || !was) return;
+  lens.fov = was.fov;
+  lens.horizontalFov = was.horizontalFov;
 }
 
 const samePose = (cam, p) =>
@@ -118,6 +143,7 @@ export function makeFlight(cams, media) {
       st.done = false;
       st.clock = info?.time ?? 0;
       st.home = { state: cam.getState(), target: cam.target.slice() };
+      st.lens = setLens(cams[0]);
       startAudio(info);
     }
     if (st.active && v >= prev) {
@@ -139,6 +165,8 @@ export function makeFlight(cams, media) {
     if (st.active && v < prev) {
       // Replay switched off: ease back home as the toggle falls.
       stopAudio();
+      putLens(st.lens);
+      st.lens = null;
       st.active = false;
       st.leaving = true;
       cam.setState(st.home.state, { snap: false });
@@ -156,6 +184,7 @@ export function makeFlight(cams, media) {
   };
   fly.dispose = () => {
     stopAudio();
+    putLens(st.lens);
     if (st.audio) URL.revokeObjectURL(st.audio.url);
     st.audio = null;
   };

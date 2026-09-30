@@ -10,7 +10,7 @@
 // samples (assets/toys/video-3d/) are results made the same way from three CC0 or CC BY clips.
 
 import { readSplatPly } from "../video3d/ply.js";
-import { sceneFrame, splatsInFrame, toyCamera } from "../video3d/scene.js";
+import { sceneFrame, splatsInFrame, toyCamera, pruneSplats } from "../video3d/scene.js";
 import { SAMPLES } from "../video3d/samples.js";
 import { makeFlight } from "../video3d/flight.js";
 
@@ -37,9 +37,19 @@ export const video3dResult = () => V3D.custom;
 export function sceneFromPly(bytes, cams, keep = 400000) {
   const raw = readSplatPly(bytes, keep);
   const frame = sceneFrame(raw, cams);
-  const scene = splatsInFrame(frame, raw);
-  const path = cams.map((c) => ({ time: c.time, ...toyCamera(frame, c) }));
-  return { scene, path };
+  const framed = splatsInFrame(frame, raw);
+  // globalThis.__v3dNoPrune (tools/v3d-clip.mjs --prune=0) shows the scene as trained, for a
+  // before-and-after.
+  const path = cams.map((c) => ({ time: c.time, f: c.f, w: c.w, h: c.h, ...toyCamera(frame, c) }));
+  const pruned = globalThis.__v3dNoPrune
+    ? null
+    : pruneSplats(
+        framed,
+        undefined,
+        path.map((c) => c.pos),
+      );
+  const scene = pruned ? pruned.scene : framed;
+  return { scene, path, pruned: pruned?.removed || null };
 }
 
 async function readBytes(rel) {
@@ -247,18 +257,28 @@ const VIDEO_3D = {
     const n = Math.min(s.count, budget);
     // A budget below the scene's size keeps an even share of it.
     const step = s.count / n;
-    k.cloud({ count: (n * 160000) / k.count, pattern: false }, (_r, j) => {
+    const picked = { near: [], far: [] };
+    for (let j = 0; j < n; j++) {
       const i = Math.floor(j * step);
-      if (i >= s.count) return null;
-      return {
-        p: [s.pos[i * 3], s.pos[i * 3 + 1], s.pos[i * 3 + 2]],
-        scales: [s.scales[i * 3], s.scales[i * 3 + 1], s.scales[i * 3 + 2]],
-        quat: [s.quat[i * 4], s.quat[i * 4 + 1], s.quat[i * 4 + 2], s.quat[i * 4 + 3]],
-        color: [s.color[i * 3], s.color[i * 3 + 1], s.color[i * 3 + 2]],
-        opacity: s.opacity[i],
-        pattern: false,
-      };
+      (s.outer?.[i] ? picked.far : picked.near).push(i);
+    }
+    const splat = (i) => ({
+      p: [s.pos[i * 3], s.pos[i * 3 + 1], s.pos[i * 3 + 2]],
+      scales: [s.scales[i * 3], s.scales[i * 3 + 1], s.scales[i * 3 + 2]],
+      quat: [s.quat[i * 4], s.quat[i * 4 + 1], s.quat[i * 4 + 2], s.quat[i * 4 + 3]],
+      color: [s.color[i * 3], s.color[i * 3 + 1], s.color[i * 3 + 2]],
+      opacity: s.opacity[i],
+      pattern: false,
     });
+    const per = 160000 / k.count; // a cloud's count is given per 160,000 of the budget
+    k.cloud({ count: picked.near.length * per, pattern: false }, (_r, j) =>
+      j < picked.near.length ? splat(picked.near[j]) : null,
+    );
+    // The far shell (water, skyline, sky, pulled in between radius 1 and 2) sits outside the fit.
+    if (picked.far.length)
+      k.cloud({ count: picked.far.length * per, pattern: false, fit: false }, (_r, j) =>
+        j < picked.far.length ? splat(picked.far[j]) : null,
+      );
     V3D.info = {
       name: src.name,
       uid: src.uid,

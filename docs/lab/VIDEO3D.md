@@ -89,6 +89,67 @@ container). WebGPU is on in current Chrome, Edge, Safari (iPhones included) and 
 - **Size.** The Toy tab refuses files over 40 MB (a limit in `src/ui.js`), so long drone clips must
   be trimmed first.
 
+## What limits sharpness, and what helped
+
+The owner's notes on the first cards (September 30, 2026): "WOW … is there any way to improve
+sharpness or the clarity of the darker/blurrier areas?" (the statue smeared into the sky, soft
+blobs), and on the street "quite a lot of this looks blurry, but the clearer/sharper parts … look
+excellent".
+
+What limits it in the browser pipeline, most important first:
+
+1. **Too little training.** The samples trained 800 to 1,500 steps at 360 px, on a software GPU
+   (about 3 seconds a step here). Splat.js reaches its published quality after 30,000 to 40,000
+   steps at full resolution; the median splat in these samples is still faint (opacity 0.1), which
+   reads as haze. On a laptop's GPU a few thousand steps at 640 to 960 px take minutes; this is the
+   single biggest lever, and it needs a real GPU.
+2. **Few, low-resolution frames.** 20 to 36 frames of a 480p transcode. Every detail finer than the
+   training pixels is guessed. The Mac route trains on the original 4K frames.
+3. **Angles nobody filmed.** A drone arc of about 30 degrees gives the statue's far side and the sky
+   behind it nothing to learn from; the splats there take on whatever color the few views allow (the
+   blue drape). More of the orbit (a longer stretch) is the only real cure.
+4. **Things that move.** People, cars, water and clouds are in a different place in every frame and
+   train into smears.
+5. **The solve's lens.** Splat.js searches the focal length when the video carries none; a wrong
+   guess bends the scene slightly and softens it everywhere. A video with its lens data (a phone's)
+   or COLMAP's more careful solve does better.
+
+What this lane changed (r2 cards, measured on the same samples, no retraining):
+
+- **Far things kept.** The water, the sky and the skyline were being cut off at the scene's edge;
+  they are now pulled in onto a shell behind the scene (as Mip-NeRF 360 contracts distant space), so
+  a flight shows them where the video did.
+- **Floaters and smears pruned** near the scene (not in the far shell): splats too faint to matter,
+  big faint ones, giants, and ones hanging right in front of the camera path. Liberty: 1,532 of
+  24,300 splats; oversized splats near the statue (wider than 3% of the scene) from 890 to 223, the
+  big faint ones among them from 658 to 0. Edinburgh: 3,801 of 23,236; oversized from 2,684 to 696.
+  Edge sharpness (Laplacian variance) of three of Liberty's flight views: 390 to 438 (+12%).
+- **The video's own lens.** The flight uses the solved focal length, so each view frames the scene
+  as the video did (the side-by-side cards compare them frame for frame).
+
+Not tried here, and worth trying on a real GPU: training longer and at 640 to 960 px; Splat.js's
+opacity and needle regularizers; masking the sky out of training; more frames from a longer part of
+the orbit. Each is a setting, not new code.
+
+What the Mac route does better: COLMAP solves the camera path from the original 4K frames with
+exhaustive matching and a careful focal and distortion model, and msplat or Brush train 30,000 or
+more steps at full resolution on the Mac's GPU in minutes. Expect the difference between the video's
+own frame and the side-by-side cards here to mostly close for the parts that were filmed.
+
+## The source videos
+
+- Statue (drone orbit): "Statue Of Liberty 4k Drone" by the Dronalist, CC BY 3.0,
+  https://commons.wikimedia.org/wiki/File:Statue_Of_Liberty_4k_Drone.webm (20 seconds from 3:18).
+- Street: "Walking in EDINBURGH - Scotland (UK) - 4K 60fps (UHD)" by POPtravel, CC BY 3.0,
+  https://commons.wikimedia.org/wiki/File:Walking_in_EDINBURGH_-_Scotland_(UK)_-_4K_60fps_(UHD).webm
+  (10 seconds from 7:32).
+- Drone over a city: "Central Nicosia drone footage overlooking UN buffer zone" by The Track Record
+  - BTS, CC BY 3.0,
+    https://commons.wikimedia.org/wiki/File:Central_Nicosia_drone_footage_overlooking_UN_buffer_zone.webm
+    (0:45 to 0:57 failed; 19 seconds from 1:04 solved).
+
+Each license was checked on the live Commons page on September 30, 2026.
+
 ## What it costs a phone
 
 Not measured on a phone. What is known: the low and mid settings keep 20 to 32 frames at 360 to 480

@@ -34,13 +34,12 @@ function quantile(values, q) {
   return s[Math.min(s.length - 1, Math.max(0, Math.floor(q * (s.length - 1))))];
 }
 
-// The frame: { M (rows: the toy's x, y, z axes in the world), center, scale, keepRadius }.
+// The frame: { M (rows: the toy's x, y, z axes in the world), center, scale, around }.
 // splats: { count, pos, opacity }; cams: [{ R, t }].
 // The size: around something (the views meet), the cameras end up `orbit` from its middle; past
 // something, half of the solid splats end up within `fit` of the middle (far things, the sky and
-// the skyline, would otherwise shrink the near ones to nothing). Splats beyond `keep` (the unit
-// sphere, as the kit's own toys are) are left out.
-export function sceneFrame(splats, cams, { fit = 0.45, orbit = 1.6, keep = 0.995 } = {}) {
+// the skyline, would otherwise shrink the near ones to nothing).
+export function sceneFrame(splats, cams, { fit = 0.45, orbit = 1.6 } = {}) {
   let up = [0, 0, 0];
   let fwd = [0, 0, 0];
   for (const c of cams) {
@@ -85,7 +84,7 @@ export function sceneFrame(splats, cams, { fit = 0.45, orbit = 1.6, keep = 0.995
     });
     scale = orbit / (quantile(cd, 0.5) || 1);
   }
-  return { M, center, scale, keepRadius: keep / scale, around: !!look };
+  return { M, center, scale, around: !!look };
 }
 
 // The point closest to every camera's line of sight (least squares), or null when the views are
@@ -205,17 +204,76 @@ export function toyCamera(frame, cam) {
   return { pos, forward, up, yaw, pitch, roll };
 }
 
-// The kit's splats in the toy's frame: splats beyond keepRadius (far floaters) are left out.
+// The kit's splats in the toy's frame. `outer` marks the far ones, pulled in beyond the unit
+// sphere (the pack builds them apart, outside the kit's fit).
 // Returns { count, pos, scales, quat, color, opacity } like readSplatPly.
 export function splatsInFrame(frame, s) {
   const q0 = frameQuat(frame.M);
+  const n = s.count;
+  const out = {
+    count: n,
+    pos: new Float32Array(n * 3),
+    scales: new Float32Array(n * 3),
+    quat: new Float32Array(n * 4),
+    color: new Float32Array(n * 3),
+    opacity: new Float32Array(n),
+    outer: new Uint8Array(n),
+  };
+  // Far things (water, the skyline, the sky) are pulled in onto a shell between the unit sphere
+  // and radius 2, nearer the farther they are, and shrink to match (the way Mip-NeRF 360 contracts
+  // distant space): seen from the cameras inside they keep their place and size in the picture.
+  const inner = 0.995;
+  for (let i = 0; i < n; i++) {
+    let p = toToy(frame, [s.pos[i * 3], s.pos[i * 3 + 1], s.pos[i * 3 + 2]]);
+    let size = frame.scale;
+    const r = Math.hypot(p[0], p[1], p[2]);
+    if (r > inner) {
+      const r2 = inner + (1 - inner / r) * inner;
+      p = [(p[0] * r2) / r, (p[1] * r2) / r, (p[2] * r2) / r];
+      size *= r2 / r;
+      out.outer[i] = 1;
+    }
+    out.pos.set(p, i * 3);
+    for (let k = 0; k < 3; k++) out.scales[i * 3 + k] = s.scales[i * 3 + k] * size;
+    out.quat.set(quatMul(q0, [s.quat[i * 4], s.quat[i * 4 + 1], s.quat[i * 4 + 2], s.quat[i * 4 + 3]]), i * 4); // prettier-ignore
+    out.color.set([s.color[i * 3], s.color[i * 3 + 1], s.color[i * 3 + 2]], i * 3);
+    out.opacity[i] = s.opacity[i];
+  }
+  return out;
+}
+
+// Cuts the haze and the floaters a short training leaves near the scene: splats too faint to
+// matter, big faint ones (the smears beside the subject), any giant, and floaters at the cameras
+// (`cams`: the camera path's positions in the toy's frame). Sizes are in the toy's frame (the unit sphere).
+// Returns { scene, removed: { faint, smear, giant } }.
+export const PRUNE = { faint: 0.008, smearSize: 0.03, smearOpacity: 0.25, giant: 0.12 };
+
+export function pruneSplats(s, rules = PRUNE, cams = []) {
+  const removed = { faint: 0, smear: 0, giant: 0, atCamera: 0 };
+  // Floaters: splats hanging right in front of the lens (within about one step of the camera
+  // path, which nothing real does in a walk or a flight).
+  const steps = [];
+  for (let i = 1; i < cams.length; i++)
+    steps.push(Math.hypot(...[0, 1, 2].map((k) => cams[i][k] - cams[i - 1][k])));
+  steps.sort((a, b) => a - b);
+  const near = steps.length ? Math.max(0.03, 1.2 * steps[steps.length >> 1]) : 0;
+  const atCamera = (i) => {
+    for (const c of cams)
+      if (Math.hypot(s.pos[i * 3] - c[0], s.pos[i * 3 + 1] - c[1], s.pos[i * 3 + 2] - c[2]) < near)
+        return true;
+    return false;
+  };
   const keep = [];
-  const k2 = frame.keepRadius ** 2;
   for (let i = 0; i < s.count; i++) {
-    const dx = s.pos[i * 3] - frame.center[0];
-    const dy = s.pos[i * 3 + 1] - frame.center[1];
-    const dz = s.pos[i * 3 + 2] - frame.center[2];
-    if (dx * dx + dy * dy + dz * dz <= k2) keep.push(i);
+    const big = Math.max(s.scales[i * 3], s.scales[i * 3 + 1], s.scales[i * 3 + 2]);
+    const o = s.opacity[i];
+    // The far shell (water, sky) is made of big faint splats that belong there: left alone.
+    if (s.outer?.[i]) keep.push(i);
+    else if (big > rules.giant) removed.giant++;
+    else if (near && atCamera(i)) removed.atCamera++;
+    else if (o < rules.faint) removed.faint++;
+    else if (big > rules.smearSize && o < rules.smearOpacity) removed.smear++;
+    else keep.push(i);
   }
   const n = keep.length;
   const out = {
@@ -225,13 +283,15 @@ export function splatsInFrame(frame, s) {
     quat: new Float32Array(n * 4),
     color: new Float32Array(n * 3),
     opacity: new Float32Array(n),
+    outer: new Uint8Array(n),
   };
   keep.forEach((i, j) => {
-    out.pos.set(toToy(frame, [s.pos[i * 3], s.pos[i * 3 + 1], s.pos[i * 3 + 2]]), j * 3);
-    for (let k = 0; k < 3; k++) out.scales[j * 3 + k] = s.scales[i * 3 + k] * frame.scale;
-    out.quat.set(quatMul(q0, [s.quat[i * 4], s.quat[i * 4 + 1], s.quat[i * 4 + 2], s.quat[i * 4 + 3]]), j * 4); // prettier-ignore
-    out.color.set([s.color[i * 3], s.color[i * 3 + 1], s.color[i * 3 + 2]], j * 3);
+    out.outer[j] = s.outer ? s.outer[i] : 0;
+    out.pos.set(s.pos.subarray(i * 3, i * 3 + 3), j * 3);
+    out.scales.set(s.scales.subarray(i * 3, i * 3 + 3), j * 3);
+    out.quat.set(s.quat.subarray(i * 4, i * 4 + 4), j * 4);
+    out.color.set(s.color.subarray(i * 3, i * 3 + 3), j * 3);
     out.opacity[j] = s.opacity[i];
   });
-  return out;
+  return { scene: out, removed };
 }

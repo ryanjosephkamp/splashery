@@ -32,6 +32,7 @@ const settings = {
   strip: Number(opt("strip", 0)),
   swing: Number(opt("swing", 0.9)),
   bg: opt("bg", "#111111"),
+  prune: opt("prune", "1") !== "0",
 };
 
 const browser = await chromium.launch({
@@ -46,6 +47,7 @@ const res = await page.evaluate(
   async ({ s, w, h }) => {
     const { app, player } = window.__splashery;
     const { GIFEncoder, quantize, applyPalette } = await import("gifenc");
+    globalThis.__v3dNoPrune = !s.prune;
     await app.chooseToy("video-3d");
     if (s.scene) await app.setToyOptions({ source: s.scene });
     app.setLook({ background: s.bg });
@@ -66,7 +68,13 @@ const res = await page.evaluate(
     stage.setFixedSize([W, H]);
     const cam = player.camera;
     cam.turntable = false;
-    const home = { ...cam.home };
+    // One frame so the toy opens at the video's first view, then this clip moves the camera as a
+    // visitor would (the flight stops holding the opening view).
+    pending = 0.05;
+    await stage.captureFrame();
+    const fl = player.proc?.ctx?.kit?.data?.flight;
+    if (fl?.state && s.mode === "turn") fl.state.userMoved = true;
+    const home = { ...cam.cur };
     const step = 1 / s.fps;
     const gif = GIFEncoder();
     const delay = Math.round(1000 / s.fps);
