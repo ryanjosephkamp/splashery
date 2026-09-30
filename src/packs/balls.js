@@ -2253,6 +2253,8 @@ export const RECIPES = {
   },
 
   marble: {
+    // The glass's fins need numbers to read as one clean edge (lane Fix4).
+    density: 2,
     options: [{ key: "color", label: "Swirl", type: "color", default: "#1e88e5" }],
     // It rolls round a little circle, the swirl inside turning as it goes,
     // and is back exactly as it was after one lap.
@@ -2279,6 +2281,10 @@ export const RECIPES = {
       // they add up to a solid edge from any side. A dark fin layer outside
       // (a thin dark line on a light page) and a bright one inside it (a
       // bright edge on a dark page).
+      // The same fine fins on every device: a smaller budget makes every
+      // splat bigger and gives fewer fins, so they are sized back down and
+      // made more opaque to add up to the same edge.
+      const tier = k.count / 200000;
       const fins = (r, col, opacity, count) => {
         let dirs = [];
         k.cloud({ count, part: glass, pattern: false, jitter: 0 }, (rand, i, n) => {
@@ -2294,9 +2300,9 @@ export const RECIPES = {
             p: d.map((x) => x * r),
             n: [0, 1, 2].map((j) => a[j] * Math.cos(t) + b[j] * Math.sin(t)),
             flat: GLASS.fin,
-            size: GLASS.size,
+            size: GLASS.size * Math.sqrt(Math.min(1, tier)),
             color: col,
-            opacity,
+            opacity: Math.min(0.6, opacity / Math.min(1, tier)),
           };
         });
       };

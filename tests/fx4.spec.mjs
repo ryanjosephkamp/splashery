@@ -141,15 +141,27 @@ test("the marble's glass shows a rim on a dark page and on a light one", async (
       const R = Math.min(x1 - x0, y1 - y0) / 2;
       // Mean brightness round a circle at a fraction of the radius, and
       // the brightest ring near the edge.
+      // Only the glass counts, not the blue swirl seen through it: pixels
+      // with little color (the glass is gray to white).
       const ring = (f) => {
-        let s = 0;
-        for (let k = 0; k < 360; k++)
-          s += lum(cx + Math.cos(k * 0.01745) * R * f, cy + Math.sin(k * 0.01745) * R * f);
-        return s / 360;
+        let [s, n] = [0, 0];
+        for (let k = 0; k < 360; k++) {
+          const x = Math.round(cx + Math.cos(k * 0.01745) * R * f);
+          const y = Math.round(cy + Math.sin(k * 0.01745) * R * f);
+          const i = (y * w + x) * 4;
+          if (Math.max(px[i], px[i + 1], px[i + 2]) - Math.min(px[i], px[i + 1], px[i + 2]) > 30)
+            continue;
+          s += lum(x, y);
+          n++;
+        }
+        return n > 20 ? s / n : NaN;
       };
       const rims = [];
-      for (let f = 0.88; f <= 1.0; f += 0.01) rims.push(ring(f));
-      return { bg: bgL, R, face: ring(0.84), hi: Math.max(...rims), lo: Math.min(...rims) };
+      for (let f = 0.9; f <= 1.0; f += 0.01) rims.push(ring(f));
+      const faces = [0.6, 0.65, 0.7, 0.75, 0.8].map(ring).filter((v) => v === v);
+      const face = faces.reduce((a, b) => a + b, 0) / faces.length;
+      const r = { bg: bgL, R, face, hi: Math.max(...rims), lo: Math.min(...rims) };
+      return r;
     }, bg);
   const dark = await profile("#111111");
   expect(dark.R).toBeGreaterThan(60);
