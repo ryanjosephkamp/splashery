@@ -1,0 +1,215 @@
+{
+ "about": "The realistic person as splats (tools/wd-character.py): its textured surface sampled at rest, each splat given to the bone that moves it most. 15 bytes a splat: position (float16 x3, y up), normal (int8 x3), color (uint8 x3, sRGB), flag (uint8, 1: T-shirt), radius (uint16, 0.1 mm).",
+ "stride": 15,
+ "count": 90000,
+ "bones": [
+  {
+   "name": "pelvis",
+   "count": 5568
+  },
+  {
+   "name": "spine_01",
+   "count": 2678
+  },
+  {
+   "name": "spine_02",
+   "count": 2570
+  },
+  {
+   "name": "spine_03",
+   "count": 10245
+  },
+  {
+   "name": "clavicle_l",
+   "count": 749
+  },
+  {
+   "name": "upperarm_l",
+   "count": 4179
+  },
+  {
+   "name": "lowerarm_l",
+   "count": 2127
+  },
+  {
+   "name": "hand_l",
+   "count": 713
+  },
+  {
+   "name": "index_01_l",
+   "count": 74
+  },
+  {
+   "name": "index_02_l",
+   "count": 54
+  },
+  {
+   "name": "index_03_l",
+   "count": 40
+  },
+  {
+   "name": "middle_01_l",
+   "count": 96
+  },
+  {
+   "name": "middle_02_l",
+   "count": 80
+  },
+  {
+   "name": "middle_03_l",
+   "count": 46
+  },
+  {
+   "name": "pinky_01_l",
+   "count": 50
+  },
+  {
+   "name": "pinky_02_l",
+   "count": 27
+  },
+  {
+   "name": "pinky_03_l",
+   "count": 29
+  },
+  {
+   "name": "ring_01_l",
+   "count": 62
+  },
+  {
+   "name": "ring_02_l",
+   "count": 63
+  },
+  {
+   "name": "ring_03_l",
+   "count": 37
+  },
+  {
+   "name": "thumb_01_l",
+   "count": 66
+  },
+  {
+   "name": "thumb_02_l",
+   "count": 98
+  },
+  {
+   "name": "thumb_03_l",
+   "count": 69
+  },
+  {
+   "name": "clavicle_r",
+   "count": 691
+  },
+  {
+   "name": "upperarm_r",
+   "count": 4370
+  },
+  {
+   "name": "lowerarm_r",
+   "count": 2035
+  },
+  {
+   "name": "hand_r",
+   "count": 694
+  },
+  {
+   "name": "index_01_r",
+   "count": 70
+  },
+  {
+   "name": "index_02_r",
+   "count": 63
+  },
+  {
+   "name": "index_03_r",
+   "count": 36
+  },
+  {
+   "name": "middle_01_r",
+   "count": 77
+  },
+  {
+   "name": "middle_02_r",
+   "count": 86
+  },
+  {
+   "name": "middle_03_r",
+   "count": 43
+  },
+  {
+   "name": "pinky_01_r",
+   "count": 40
+  },
+  {
+   "name": "pinky_02_r",
+   "count": 32
+  },
+  {
+   "name": "pinky_03_r",
+   "count": 37
+  },
+  {
+   "name": "ring_01_r",
+   "count": 80
+  },
+  {
+   "name": "ring_02_r",
+   "count": 57
+  },
+  {
+   "name": "ring_03_r",
+   "count": 52
+  },
+  {
+   "name": "thumb_01_r",
+   "count": 63
+  },
+  {
+   "name": "thumb_02_r",
+   "count": 127
+  },
+  {
+   "name": "thumb_03_r",
+   "count": 72
+  },
+  {
+   "name": "neck_01",
+   "count": 1426
+  },
+  {
+   "name": "head",
+   "count": 8570
+  },
+  {
+   "name": "thigh_l",
+   "count": 8884
+  },
+  {
+   "name": "calf_l",
+   "count": 9407
+  },
+  {
+   "name": "foot_l",
+   "count": 737
+  },
+  {
+   "name": "ball_l",
+   "count": 1866
+  },
+  {
+   "name": "thigh_r",
+   "count": 8192
+  },
+  {
+   "name": "calf_r",
+   "count": 9963
+  },
+  {
+   "name": "foot_r",
+   "count": 683
+  },
+  {
+   "name": "ball_r",
+   "count": 1827
+  }
+ ]
+}

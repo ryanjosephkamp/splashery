@@ -170,6 +170,29 @@ const SCENES = {
     { move: { y: -1 }, secs: 1.6 },
     { hold: 1.0 },
   ],
+  // Round 3: the realistic character close up. Behind it, the camera comes
+  // round to its face (idle), then from the side it walks and runs.
+  "character-r3": [
+    { place: [-7, 3, 180], camera: { distance: 1.45, pitch: 0.05 }, noCards: true },
+    { hold: 0.6 },
+    { look: [Math.PI, 0], secs: 2.4 },
+    { hold: 1.6 },
+    { camera: { distance: 2.9, pitch: 0.08 }, look: [-Math.PI / 2, 0], secs: 1.0 },
+    { move: { x: -1 }, secs: 2.6 },
+    { move: { x: -1, run: true }, secs: 2.0 },
+    { hold: 1.0 },
+  ],
+  // Following the character at the normal camera: along the west beach,
+  // then up through the grass.
+  "character-walk-r3": [
+    { place: [-26, -12, 10], noCards: true },
+    { hold: 0.5 },
+    { move: { y: 1 }, secs: 3.4 },
+    { move: { y: 1, x: 0.7 }, look: [-0.6, 0], secs: 2.6 },
+    { move: { y: 1, run: true }, secs: 2.0 },
+    { move: { y: 1 }, secs: 1.4 },
+    { hold: 0.6 },
+  ],
   // Depth, close up: a bush half behind a hill, then the character wading.
   "hybrid-depth": [
     { place: [-17.2, 0.8, 180], camera: { distance: 3.2, pitch: 0.08 } },
@@ -227,6 +250,8 @@ async function record(scene, url, tag = null, query = "") {
     const h = Math.round(png.height * scale);
     const rgba = shrink(png, w, h);
     frames.push({ rgba, w, h });
+    if (frames.length % fps === 0)
+      console.log(`  ${tag || "clip"}: ${frames.length / fps} s recorded`);
   };
   // One frame: the world steps dt with this input, then a screenshot.
   const tick = async (input = null) => {

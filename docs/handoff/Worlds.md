@@ -91,7 +91,24 @@ the Operator.
 Model: Opus 5.5 (default effort). Branch `claude/lane-worlds-r3`, PR "Phase Worlds r3: a premium
 character and a sharper island".
 
-- September 30, 2026: lane started.
+- September 30, 2026: lane started; draft PR #135.
+- **The person** (`tools/wd-character.py`, Blender 5.0.1 as a Python module with MPFB 2.0.17): a
+  MakeHuman adult (CC0 system assets; logos painted out of the tee), MPFB's game-engine rig, motion
+  capture from 100STYLE (CC BY 4.0: Neutral_FW walk, Proud_FR run, Neutral_ID idle) retargeted bone
+  by bone. Walk and run are one cycle each, resampled to 1 s, in place; the world plays them at
+  speed ÷ stride, so the standing foot slides 3–5% of the body's speed walking, 5–9% running
+  (measured in the page). Two levels: high 30.8k triangles, 2.2 MB; low 17.2k, 1.2 MB. Default in
+  hybrid mode (`character.model: "auto"`); `?character=kenney` keeps the old one; the person walks
+  at 1.3 m/s and runs at 2.7 m/s (the splat character keeps 1.9 and 4.6).
+- **The person as splats** (`?character=splat-person`): 90k splats sampled from its textured
+  surface, one rigid piece per bone. Being judged against today's splat character.
+- **Model props** (`tools/wd-props.py`, `src/worlds/mesh-props.js`): Poly Haven boulders, stones, a
+  shell, driftwood and a stump (CC0), three levels each; 220 stones and 28 shells instanced on the
+  sand. 3.0 MB. Tree and bush leaves regraded in hybrid mode (`gradeFoliage`).
+- **Island:** second rotated texture sample against tiling, patchy sand-to-grass edge, no gravel
+  near the water, grass pebbles held down, a shoreline foam strip, CameraFrame (bloom, color
+  enhance, vignette, SSAO) on high and max (`?frame=0|1`), and `?stats=1`.
+- Hybrid download: low and mid about 9.5 MB, high and max about 10.5 MB.
 
 ## Start here (Worlds r3, a fresh session)
 

@@ -13,12 +13,15 @@
 
 import * as pc from "../pc.js";
 import { WALK_SPEED, RUN_SPEED, BODY } from "./character.js";
+import { SplatBuffer } from "../generators.js";
 
 const BASE = new URL("../../assets/worlds/character/", import.meta.url);
 
 function loadContainer(app, url) {
   return new Promise((resolve, reject) =>
-    app.assets.loadFromUrl(url, "container", (err, a) => (err ? reject(new Error(err)) : resolve(a))),
+    app.assets.loadFromUrl(url, "container", (err, a) =>
+      err ? reject(new Error(err)) : resolve(a),
+    ),
   );
 }
 
@@ -175,4 +178,78 @@ export function stepMeshCharacter(model, speed, dt) {
   const info = model.wdCharacter;
   const rate = info?.kind === "mesh" ? humanRate(info, speed) : 1;
   if (dt > 0) model.anim.update(dt * rate);
+}
+
+// The same person as splats (?character=splat-person; docs/WORLDS.md, "The
+// person as splats"): its textured surface sampled at rest by
+// tools/wd-character.py, each splat given to the bone that moves it most.
+// Each bone's splats are one rigid piece on that bone's entity, so parts
+// turn and move as solid pieces; nothing bends. The model's skeleton and
+// clips drive them (its meshes are hidden). `count` is the tier's budget.
+export async function loadSplatPerson(app, view, { tier = "mid", look = {}, count = 64000 } = {}) {
+  const [{ model, meta }, info, bin] = await Promise.all([
+    loadHuman(app, { tier: "low", look }),
+    fetch(new URL("human-splats.json", BASE)).then((r) => r.json()),
+    fetch(new URL("human-splats.bin", BASE)).then((r) => r.arrayBuffer()),
+  ]);
+  const renders = model.findComponents("render");
+  const skin = renders[0].meshInstances.find((mi) => mi.skinInstance)?.skinInstance.skin;
+  for (const r of renders) r.enabled = false;
+  const inv = new Map(skin.boneNames.map((n, i) => [n, skin.inverseBindPose[i]]));
+  const dv = new DataView(bin);
+  const half = (o) => pc.FloatPacking.half2Float?.(dv.getUint16(o, true)) ?? halfToFloat(dv.getUint16(o, true)); // prettier-ignore
+  const toLinear = (v) => {
+    v /= 255;
+    return v <= 0.04045 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4;
+  };
+  const shirt = look.shirt ? linear(look.shirt) : null;
+  const frac = Math.min(1, count / info.count);
+  const p = new pc.Vec3();
+  const n = new pc.Vec3();
+  const q = new pc.Quat();
+  const zAxis = new pc.Vec3(0, 0, 1);
+  let at = 0;
+  let total = 0;
+  for (const b of info.bones) {
+    const take = Math.max(1, Math.round(b.count * frac));
+    const bone = model.findByName(b.name);
+    const m = inv.get(b.name);
+    const buf = new SplatBuffer(take);
+    for (let k = 0; k < take; k++) {
+      const o = (at + k) * info.stride;
+      m.transformPoint(p.set(half(o), half(o + 2), half(o + 4)), p);
+      m.transformVector(n.set(dv.getInt8(o + 6), dv.getInt8(o + 7), dv.getInt8(o + 8)), n).normalize(); // prettier-ignore
+      q.setFromDirections?.(zAxis, n) ?? fromTo(q, zAxis, n);
+      const c = [toLinear(dv.getUint8(o + 9)), toLinear(dv.getUint8(o + 10)), toLinear(dv.getUint8(o + 11)), 1]; // prettier-ignore
+      if (dv.getUint8(o + 12) === 1 && shirt) {
+        c[0] *= shirt.r;
+        c[1] *= shirt.g;
+        c[2] *= shirt.b;
+      }
+      const r = (dv.getUint16(o + 13, true) / 10000) * (1 / frac) ** 0.5;
+      buf.push([p.x, p.y, p.z], [r * 0.62, r * 0.62, r * 0.14], [q.x, q.y, q.z, q.w], c);
+    }
+    at += b.count;
+    total += take;
+    view.entity(`part-${b.name}`, view.container(buf), { parent: bone, shadows: true });
+  }
+  model.wdCharacter.splats = total;
+  return { model, meta, splats: total };
+}
+
+function fromTo(out, a, b) {
+  const d = a.dot(b);
+  if (d < -0.999999) return out.setFromAxisAngle(new pc.Vec3(1, 0, 0), 180);
+  const c = new pc.Vec3().cross(a, b);
+  out.set(c.x, c.y, c.z, 1 + d);
+  return out.normalize();
+}
+
+function halfToFloat(h) {
+  const s = h & 0x8000 ? -1 : 1;
+  const e = (h >> 10) & 0x1f;
+  const f = h & 0x3ff;
+  if (e === 0) return s * 2 ** -14 * (f / 1024);
+  if (e === 31) return f ? NaN : s * Infinity;
+  return s * 2 ** (e - 15) * (1 + f / 1024);
 }

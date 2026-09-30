@@ -11,7 +11,7 @@
 # Run it with Blender as a Python module (a build tool; nothing of Blender or
 # MPFB ships in the page):
 #
-#   python3 -m venv .cache/bpy && .cache/bpy/bin/pip install bpy==5.0.1 pillow==11.3.0
+#   python3 -m venv .cache/bpy && .cache/bpy/bin/pip install bpy==5.0.1 pillow==12.3.0
 #   .cache/bpy/bin/python tools/wd-character.py
 #
 # The sources are downloaded once into .cache/worlds/r3/ and checked against
@@ -752,6 +752,8 @@ def build(level):
     body = bpy.context.view_layer.objects.active
     body.name = "human"
     rig.name = "rig"
+    if level == "high":
+        bake_splats(bpy, body, rig)
     os.makedirs(OUT, exist_ok=True)
     path = os.path.join(OUT, f"human-{level}.glb")
     for s in bpy.context.selected_objects:
@@ -780,6 +782,123 @@ def build(level):
     patch_glb(path)
     log(level, "wrote", path, os.path.getsize(path), "bytes")
     return {"triangles": sum(tris.values()), "parts": tris, "bytes": os.path.getsize(path), "textures": sizes}, clips, height
+
+
+# ---- The person as splats (splats mode) --------------------------------------------------
+
+SPLATS = 90000
+
+
+def bake_splats(bpy, body, rig):
+    """Samples the person's textured surface at rest into splats, each given
+    to the bone that moves it most (docs/WORLDS.md, "The person as splats"):
+
+      assets/worlds/character/human-splats.bin   (15 bytes a splat)
+      assets/worlds/character/human-splats.json  (bones, counts, layout)
+
+    Each splat: its position at rest (float16 x3, the model's own axes, y up),
+    its surface normal (int8 x3), its color (uint8 x3, sRGB, a little light
+    baked in), a flag (1: the T-shirt, dyed by the world's shirt color) and
+    its radius (uint16, tenths of a millimeter). Grouped by bone, in random
+    order within a bone, so a tier can take the first part of each group."""
+    rng = np.random.default_rng(7)
+    me = body.data
+    me.calc_loop_triangles()
+    uv = me.uv_layers.active.data
+    # Each material's color texture, as an array.
+    images = []
+    for slot in body.material_slots:
+        m = slot.material
+        img = None
+        for n in m.node_tree.nodes:
+            if n.type == "TEX_IMAGE" and n.image and n.image.colorspace_settings.name != "Non-Color":
+                img = n.image
+                break
+        if img is None:
+            bsdf = m.node_tree.nodes["Principled BSDF"]
+            c = bsdf.inputs["Base Color"].default_value
+            # Linear to sRGB.
+            images.append(("flat", [x ** (1 / 2.2) for x in c[:3]]))
+        else:
+            w, h = img.size
+            px = np.array(img.pixels[:], dtype=np.float32).reshape(h, w, 4)
+            images.append(("tex", px))
+    names = [m.name for m in (s.material for s in body.material_slots)]
+    tris = me.loop_triangles
+    co = np.array([v.co[:] for v in me.vertices])
+    idx = np.array([t.vertices[:] for t in tris])
+    loops = np.array([t.loops[:] for t in tris])
+    mats = np.array([t.material_index for t in tris])
+    uvs = np.array([d.uv[:] for d in uv])
+    a, b, c = co[idx[:, 0]], co[idx[:, 1]], co[idx[:, 2]]
+    cross = np.cross(b - a, c - a)
+    area = np.linalg.norm(cross, axis=1) / 2
+    # Hidden parts (the lashes) and the strands of hair (the cap stands in).
+    skip = np.isin(mats, [i for i, n in enumerate(names) if n in ("lashes", "hair")])
+    area = np.where(skip, 0, area)
+    n = SPLATS
+    pick = rng.choice(len(tris), size=n * 2, p=area / area.sum())
+    r1 = np.sqrt(rng.random(n * 2))
+    r2 = rng.random(n * 2)
+    wa, wb, wc = 1 - r1, r1 * (1 - r2), r1 * r2
+    pos = wa[:, None] * a[pick] + wb[:, None] * b[pick] + wc[:, None] * c[pick]
+    nrm = cross[pick] / np.maximum(np.linalg.norm(cross[pick], axis=1)[:, None], 1e-9)
+    tuv = wa[:, None] * uvs[loops[pick, 0]] + wb[:, None] * uvs[loops[pick, 1]] + wc[:, None] * uvs[loops[pick, 2]]
+    col = np.zeros((n * 2, 3), np.float32)
+    alpha = np.ones(n * 2, np.float32)
+    for mi, (kind, data) in enumerate(images):
+        sel = mats[pick] == mi
+        if not sel.any():
+            continue
+        if kind == "flat":
+            col[sel] = data
+            continue
+        h, w = data.shape[:2]
+        x = np.clip((tuv[sel, 0] % 1) * w, 0, w - 1).astype(int)
+        y = np.clip((tuv[sel, 1] % 1) * h, 0, h - 1).astype(int)
+        col[sel] = data[y, x, :3]
+        alpha[sel] = data[y, x, 3]
+    keep = alpha > 0.5
+    pos, nrm, col, pick = pos[keep][:n], nrm[keep][:n], col[keep][:n], pick[keep][:n]
+    # A little light baked in (splats aren't lit): the tops lighter.
+    col = np.clip(col * (0.8 + 0.2 * nrm[:, 2:3]), 0, 1)
+    # The bone that moves each splat most (its triangle's weights, blended).
+    groups = {g.index: g.name for g in body.vertex_groups}
+    bones = [bn.name for bn in rig.data.bones if bn.use_deform]
+    bone_ix = {nm: i for i, nm in enumerate(bones)}
+    W = np.zeros((len(me.vertices), len(bones)), np.float32)
+    for v in me.vertices:
+        for g in v.groups:
+            nm = groups.get(g.group)
+            if nm in bone_ix:
+                W[v.index, bone_ix[nm]] = g.weight
+    tw = W[idx[pick, 0]] * wa[keep][:n, None] + W[idx[pick, 1]] * wb[keep][:n, None] + W[idx[pick, 2]] * wc[keep][:n, None]
+    owner = tw.argmax(1)
+    radius = np.sqrt(area.sum() / n / math.pi) * 1.35
+    shirt = np.isin(mats[pick], [i for i, nm in enumerate(names) if nm == "shirt"]).astype(np.uint8)
+    # Blender (z up, -y forward) to the model's axes (y up, +z forward).
+    P = np.stack([pos[:, 0], pos[:, 2], -pos[:, 1]], 1)
+    N = np.stack([nrm[:, 0], nrm[:, 2], -nrm[:, 1]], 1)
+    order = np.lexsort((rng.random(len(owner)), owner))
+    rec = np.zeros(len(order), dtype=[("p", "<f2", 3), ("n", "i1", 3), ("c", "u1", 3), ("f", "u1"), ("r", "<u2")])
+    rec["p"] = P[order]
+    rec["n"] = np.clip(np.round(N[order] * 127), -127, 127)
+    rec["c"] = np.clip(np.round(col[order] * 255), 0, 255)
+    rec["f"] = shirt[order]
+    rec["r"] = np.round(np.full(len(order), radius) * 10000)
+    counts = np.bincount(owner, minlength=len(bones))
+    with open(os.path.join(OUT, "human-splats.bin"), "wb") as f:
+        f.write(rec.tobytes())
+    meta = {
+        "about": "The realistic person as splats (tools/wd-character.py): its textured surface sampled at rest, each splat given to the bone that moves it most. 15 bytes a splat: position (float16 x3, y up), normal (int8 x3), color (uint8 x3, sRGB), flag (uint8, 1: T-shirt), radius (uint16, 0.1 mm).",
+        "stride": 15,
+        "count": int(len(order)),
+        "bones": [{"name": bones[i], "count": int(counts[i])} for i in range(len(bones)) if counts[i]],
+    }
+    with open(os.path.join(OUT, "human-splats.json"), "w") as f:
+        json.dump(meta, f, indent=1)
+        f.write("\n")
+    log("splats", len(order), "on", len(meta["bones"]), "bones, radius", round(radius * 1000, 2), "mm")
 
 
 def patch_glb(path):

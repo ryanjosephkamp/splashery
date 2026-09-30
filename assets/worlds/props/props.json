@@ -1,0 +1,285 @@
+{
+  "about": "Hybrid mode's model props (tools/wd-props.py): scanned models from Poly Haven (CC0), each with three levels of detail, 1 m tall (or long) with its foot at the origin.",
+  "kinds": {
+    "boulder": {
+      "fit": "height",
+      "variants": [
+        {
+          "source": "rock_moss_set_02",
+          "size": [
+            2.273,
+            1.0,
+            1.632
+          ],
+          "tris": [
+            3999,
+            898,
+            199
+          ],
+          "scanTris": 9826
+        },
+        {
+          "source": "rock_moss_set_02",
+          "size": [
+            2.867,
+            1.0,
+            2.019
+          ],
+          "tris": [
+            3999,
+            900,
+            199
+          ],
+          "scanTris": 8000
+        },
+        {
+          "source": "namaqualand_boulder_05",
+          "size": [
+            2.534,
+            1.0,
+            1.389
+          ],
+          "tris": [
+            4000,
+            900,
+            200
+          ],
+          "scanTris": 89618
+        }
+      ],
+      "bytes": 1722724
+    },
+    "stone": {
+      "fit": "long",
+      "variants": [
+        {
+          "source": "namaqualand_stones_01",
+          "size": [
+            1.0,
+            0.556,
+            0.535
+          ],
+          "tris": [
+            600,
+            160,
+            40
+          ],
+          "scanTris": 9086
+        },
+        {
+          "source": "namaqualand_stones_01",
+          "size": [
+            1.0,
+            0.322,
+            0.717
+          ],
+          "tris": [
+            599,
+            160,
+            40
+          ],
+          "scanTris": 5864
+        },
+        {
+          "source": "namaqualand_stones_01",
+          "size": [
+            0.99,
+            0.685,
+            1.0
+          ],
+          "tris": [
+            599,
+            160,
+            40
+          ],
+          "scanTris": 11160
+        },
+        {
+          "source": "namaqualand_stones_01",
+          "size": [
+            1.0,
+            0.55,
+            0.943
+          ],
+          "tris": [
+            599,
+            160,
+            40
+          ],
+          "scanTris": 19794
+        },
+        {
+          "source": "rock_moss_set_01",
+          "size": [
+            0.664,
+            0.437,
+            1.0
+          ],
+          "tris": [
+            600,
+            160,
+            40
+          ],
+          "scanTris": 11000
+        },
+        {
+          "source": "rock_moss_set_01",
+          "size": [
+            0.814,
+            0.387,
+            1.0
+          ],
+          "tris": [
+            600,
+            160,
+            60
+          ],
+          "scanTris": 10996
+        },
+        {
+          "source": "rock_moss_set_01",
+          "size": [
+            0.606,
+            0.402,
+            1.0
+          ],
+          "tris": [
+            600,
+            160,
+            40
+          ],
+          "scanTris": 16548
+        }
+      ],
+      "bytes": 358868
+    },
+    "shell": {
+      "fit": "long",
+      "variants": [
+        {
+          "source": "lambis_shell",
+          "size": [
+            1.0,
+            0.333,
+            0.534
+          ],
+          "tris": [
+            900,
+            239,
+            60
+          ],
+          "scanTris": 12498
+        }
+      ],
+      "bytes": 121112
+    },
+    "driftwood": {
+      "fit": "long",
+      "variants": [
+        {
+          "source": "dead_tree_trunk_02",
+          "size": [
+            1.0,
+            0.26,
+            0.261
+          ],
+          "tris": [
+            3000,
+            699,
+            160
+          ],
+          "scanTris": 83128
+        }
+      ],
+      "bytes": 416160
+    },
+    "stump": {
+      "fit": "height",
+      "variants": [
+        {
+          "source": "tree_stump_01",
+          "size": [
+            2.489,
+            1.0,
+            2.777
+          ],
+          "tris": [
+            2499,
+            600,
+            150
+          ],
+          "scanTris": 41046
+        }
+      ],
+      "bytes": 403892
+    }
+  },
+  "credits": [
+    {
+      "id": "rock_moss_set_02",
+      "name": "Rock Moss Set 02",
+      "authors": [
+        "Kless Gyzen"
+      ],
+      "page": "https://polyhaven.com/a/rock_moss_set_02",
+      "license": "CC0 1.0"
+    },
+    {
+      "id": "namaqualand_boulder_05",
+      "name": "Namaqualand Boulder 05",
+      "authors": [
+        "Dario Barresi",
+        "Jenelle van Heerden"
+      ],
+      "page": "https://polyhaven.com/a/namaqualand_boulder_05",
+      "license": "CC0 1.0"
+    },
+    {
+      "id": "namaqualand_stones_01",
+      "name": "Namaqualand Stones 01",
+      "authors": [
+        "Greg Zaal",
+        "Jenelle van Heerden"
+      ],
+      "page": "https://polyhaven.com/a/namaqualand_stones_01",
+      "license": "CC0 1.0"
+    },
+    {
+      "id": "rock_moss_set_01",
+      "name": "Rock Moss Set 01",
+      "authors": [
+        "Kless Gyzen"
+      ],
+      "page": "https://polyhaven.com/a/rock_moss_set_01",
+      "license": "CC0 1.0"
+    },
+    {
+      "id": "lambis_shell",
+      "name": "Lambis Shell",
+      "authors": [
+        "Kuutti Siitonen"
+      ],
+      "page": "https://polyhaven.com/a/lambis_shell",
+      "license": "CC0 1.0"
+    },
+    {
+      "id": "dead_tree_trunk_02",
+      "name": "Dead Tree Trunk 02",
+      "authors": [
+        "Jenelle van Heerden",
+        "Rico Cilliers"
+      ],
+      "page": "https://polyhaven.com/a/dead_tree_trunk_02",
+      "license": "CC0 1.0"
+    },
+    {
+      "id": "tree_stump_01",
+      "name": "Tree Stump 01",
+      "authors": [
+        "Rob Tuytel"
+      ],
+      "page": "https://polyhaven.com/a/tree_stump_01",
+      "license": "CC0 1.0"
+    }
+  ]
+}

@@ -386,6 +386,96 @@
       "license": "CC0 1.0",
       "out": "assets/worlds/character/",
       "tool": "tools/world-character.mjs"
+    },
+    {
+      "id": "makehuman-system-assets",
+      "use": "hybrid realistic character (body, skin, eyes, eyebrows, eyelashes, hair short02, clothes male_casualsuit06, shoes06)",
+      "name": "MakeHuman system assets",
+      "authors": ["The MakeHuman team"],
+      "page": "http://files.makehumancommunity.org/asset_packs/makehuman_system_assets/",
+      "license": "CC0 1.0",
+      "out": "assets/worlds/character/",
+      "tool": "tools/wd-character.py"
+    },
+    {
+      "id": "100style",
+      "use": "hybrid realistic character's idle, walk and run (motion capture: Neutral_ID, Neutral_FW, Proud_FR)",
+      "name": "100STYLE",
+      "authors": ["Ian Mason", "Sebastian Starke", "Taku Komura"],
+      "page": "https://zenodo.org/records/8127870",
+      "license": "CC BY 4.0",
+      "out": "assets/worlds/character/",
+      "tool": "tools/wd-character.py"
+    },
+    {
+      "id": "rock_moss_set_02",
+      "use": "hybrid model props (boulders)",
+      "name": "Rock Moss Set 02",
+      "authors": ["Kless Gyzen"],
+      "page": "https://polyhaven.com/a/rock_moss_set_02",
+      "license": "CC0 1.0",
+      "out": "assets/worlds/props/",
+      "tool": "tools/wd-props.py"
+    },
+    {
+      "id": "namaqualand_boulder_05",
+      "use": "hybrid model props (boulders)",
+      "name": "Namaqualand Boulder 05",
+      "authors": ["Dario Barresi", "Jenelle van Heerden"],
+      "page": "https://polyhaven.com/a/namaqualand_boulder_05",
+      "license": "CC0 1.0",
+      "out": "assets/worlds/props/",
+      "tool": "tools/wd-props.py"
+    },
+    {
+      "id": "namaqualand_stones_01",
+      "use": "hybrid model props (stones, pebbles)",
+      "name": "Namaqualand Stones 01",
+      "authors": ["Greg Zaal", "Jenelle van Heerden"],
+      "page": "https://polyhaven.com/a/namaqualand_stones_01",
+      "license": "CC0 1.0",
+      "out": "assets/worlds/props/",
+      "tool": "tools/wd-props.py"
+    },
+    {
+      "id": "rock_moss_set_01",
+      "use": "hybrid model props (stones, pebbles)",
+      "name": "Rock Moss Set 01",
+      "authors": ["Kless Gyzen"],
+      "page": "https://polyhaven.com/a/rock_moss_set_01",
+      "license": "CC0 1.0",
+      "out": "assets/worlds/props/",
+      "tool": "tools/wd-props.py"
+    },
+    {
+      "id": "lambis_shell",
+      "use": "hybrid model props (shells)",
+      "name": "Lambis Shell",
+      "authors": ["Kuutti Siitonen"],
+      "page": "https://polyhaven.com/a/lambis_shell",
+      "license": "CC0 1.0",
+      "out": "assets/worlds/props/",
+      "tool": "tools/wd-props.py"
+    },
+    {
+      "id": "dead_tree_trunk_02",
+      "use": "hybrid model props (driftwood)",
+      "name": "Dead Tree Trunk 02",
+      "authors": ["Jenelle van Heerden", "Rico Cilliers"],
+      "page": "https://polyhaven.com/a/dead_tree_trunk_02",
+      "license": "CC0 1.0",
+      "out": "assets/worlds/props/",
+      "tool": "tools/wd-props.py"
+    },
+    {
+      "id": "tree_stump_01",
+      "use": "hybrid model props (stumps)",
+      "name": "Tree Stump 01",
+      "authors": ["Rob Tuytel"],
+      "page": "https://polyhaven.com/a/tree_stump_01",
+      "license": "CC0 1.0",
+      "out": "assets/worlds/props/",
+      "tool": "tools/wd-props.py"
     }
   ],
   "photoSamples": [

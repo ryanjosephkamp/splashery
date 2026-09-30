@@ -312,6 +312,40 @@ in the pack's own license file on September 29, 2026): the model, the "skaterMal
 idle and run animations. The walk is made from the run. `tools/world-character.mjs` builds
 `assets/worlds/character/character.glb`.
 
+Round 3 (September 30, 2026) made a realistic person the hybrid mode's character
+(`tools/wd-character.py` builds `assets/worlds/character/human-high.glb` and `human-low.glb`), and
+the Kenney character moved to `?character=kenney`:
+
+- The body, face, skin ("middleage caucasian male"), eyes ("brown"), eyebrows ("eyebrow001"),
+  eyelashes ("eyelashes01"), hair ("short02"), T-shirt and jeans ("male_casualsuit06") and shoes
+  ("shoes06") are from
+  [MakeHuman's system assets](http://files.makehumancommunity.org/asset_packs/makehuman_system_assets/)
+  by the MakeHuman team, [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (each asset
+  marked CC0 on that page and in its own files, checked on September 30, 2026), put together with
+  MPFB 2.0.17 in Blender. The face is MakeHuman's average of its macro settings (no scan, no real
+  person). The T-shirt's printed logo, the jeans' label text and the site address in the texture
+  were painted out.
+- The idle, walk and run are motion capture from the
+  [100STYLE dataset](https://zenodo.org/records/8127870) by Ian Mason, Sebastian Starke and Taku
+  Komura (2022), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) (checked on its Zenodo
+  record on September 30, 2026): the takes Neutral_ID (idle), Neutral_FW (walk) and Proud_FR (run),
+  retargeted onto the character, cut to one loop each and played in place.
+
+Its model props (hybrid mode; `tools/wd-props.py` builds `assets/worlds/props/`) are scanned models
+from [Poly Haven](https://polyhaven.com), all
+[CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (checked on each live page on
+September 30, 2026), decimated into three levels of detail each:
+
+| Used as            | Asset                                                                    | Authors                            | License                                                       |
+| ------------------ | ------------------------------------------------------------------------ | ---------------------------------- | ------------------------------------------------------------- |
+| Boulders           | [Rock Moss Set 02](https://polyhaven.com/a/rock_moss_set_02)             | Kless Gyzen                        | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| Boulders           | [Namaqualand Boulder 05](https://polyhaven.com/a/namaqualand_boulder_05) | Dario Barresi, Jenelle van Heerden | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| Stones and pebbles | [Namaqualand Stones 01](https://polyhaven.com/a/namaqualand_stones_01)   | Greg Zaal, Jenelle van Heerden     | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| Stones and pebbles | [Rock Moss Set 01](https://polyhaven.com/a/rock_moss_set_01)             | Kless Gyzen                        | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| Shells             | [Lambis Shell](https://polyhaven.com/a/lambis_shell)                     | Kuutti Siitonen                    | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| Driftwood          | [Dead Tree Trunk 02](https://polyhaven.com/a/dead_tree_trunk_02)         | Jenelle van Heerden, Rico Cilliers | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| Stumps             | [Tree Stump 01](https://polyhaven.com/a/tree_stump_01)                   | Rob Tuytel                         | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+
 ## National flags
 
 The pattern layer can wrap a national flag around any toy. The flags are SVG files from

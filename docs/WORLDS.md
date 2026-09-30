@@ -148,11 +148,14 @@ twenty bushes cost one bake.
 | `options`  | The toy's options, as its recipe names them (the oak's `season`, say)                      |
 | `detail`   | More (up to 3) or fewer (down to 0.25) splats than the type's own count: 1.8 for a big one |
 | `collider` | `false` for none, or a shape (below); left out, the type's default                         |
+| `only`     | `"hybrid"` or `"splats"`: placed only in that mode (the model-only props need `"hybrid"`)  |
 
 ### Prop types
 
 `palm`, `pine`, `oak`, `pebbles`, `mushroom`, `tulip`, `sunflower` and `lighthouse` are toy recipes;
-`boulder` and `bush` are world props built in `props.js`. To add a type, add a line to `PROP_TYPES`:
+`boulder` and `bush` are world props built in `props.js`. In hybrid mode `boulder` and `pebbles` are
+drawn as scanned models instead, and `stone`, `shell`, `driftwood` and `stump` exist only as models
+(see "Model props" below; give them `"only": "hybrid"`). To add a type, add a line to `PROP_TYPES`:
 
 ```js
 cactus: { pack: "nature", recipe: "cactus", count: 20000, collider: "auto" },
@@ -184,7 +187,9 @@ Collision shapes are upright and invisible. In a prop's `collider`, sizes are in
 spreads `count` copies over one kind of ground (`"grass"`, `"sand"`, `"rock"`, `"snow"` or `"any"`),
 at random sizes, at least `spacing` meters apart, clear of landmarks and the spawn point, optionally
 only within a circle. Scattered props use three seeds, so they don't all look alike. They get the
-type's default collider.
+type's default collider. `"only": "hybrid"` or `"splats"` limits a scatter to one mode. Scatters are
+placed in the order they are listed, each clear of what is already placed, so list big things before
+the hundreds of small ones.
 
 ## Landmarks
 
@@ -231,7 +236,8 @@ Node.
 | `controls.js`       | Keys, mouse and touch: the thumb stick, drag to look, pinch or wheel to zoom, tap to pick               |
 | `render.js`         | The PlayCanvas side: the device, the camera, the layers, splat containers and entities                  |
 | `lighting.js`       | Both modes: the sun and its shadows, the haze, the grade, and splats mode's shadow catcher              |
-| `mesh-character.js` | Hybrid round: the lit, skinned character and its idle, walk and run                                     |
+| `mesh-character.js` | The lit, skinned characters (the realistic person, Kenney's) and their idle, walk and run               |
+| `mesh-props.js`     | Hybrid mode's model props: boulders, pebble heaps, driftwood and stumps with levels, instanced stones   |
 | `hybrid.js`         | Hybrid mode's models: the ground tiles and their textures, the water, the sky dome and the sign boards  |
 
 ### The character
@@ -372,14 +378,16 @@ A world is drawn in one of two modes. The world file's `render` picks one (`"spl
 the Test island stays in splats mode); `?render=splats` or `?render=hybrid` overrides it for a
 visit, which is how the clips compare them side by side.
 
-| Drawn as             | Splats mode                       | Hybrid mode                                         |
-| -------------------- | --------------------------------- | --------------------------------------------------- |
-| Ground               | splats (a carpet, chunk by chunk) | a lit model of the same height field, textured      |
-| Near grass           | splats (blades)                   | splats (blades), on the model                       |
-| Water                | splats, with moving waves         | a lit model that knows the depth below it           |
-| Sky                  | a dome of splats                  | a dome with a photo of the sky, which lights models |
-| Signs                | splats                            | wooden boards with the title painted on             |
-| Props, the character | splats                            | splats                                              |
+| Drawn as                                 | Splats mode                       | Hybrid mode                                         |
+| ---------------------------------------- | --------------------------------- | --------------------------------------------------- |
+| Ground                                   | splats (a carpet, chunk by chunk) | a lit model of the same height field, textured      |
+| Near grass                               | splats (blades)                   | splats (blades), on the model                       |
+| Water                                    | splats, with moving waves         | a lit model that knows the depth below it           |
+| Sky                                      | a dome of splats                  | a dome with a photo of the sky, which lights models |
+| Signs                                    | splats                            | wooden boards with the title painted on             |
+| Trees, bushes, flowers, the lighthouse   | splats                            | splats (the leaves in deeper, shaded greens)        |
+| Rocks, stones, shells, driftwood, stumps | splats (rocks)                    | scanned models with three levels of detail          |
+| The character                            | splats (the kit-built character)  | the realistic person, a lit, skinned model          |
 
 Collision is the same in both: invisible shapes and the height field.
 
@@ -412,6 +420,11 @@ Collision is the same in both: invisible shapes and the height field.
 - **Grade.** In hybrid mode, a neutral tone map (it leaves colors below about 0.8 as they are and
   rolls off the highlights of the lit models and the sky) and an exposure. Splats mode has no tone
   map: the splats' colors carry their own light and stay exactly as they are.
+- **The camera frame** (hybrid mode on the high and max tiers; `?frame=0` or `?frame=1` overrides
+  it): the engine's `CameraFrame` renders the scene to its own target and finishes it with a touch
+  of bloom, a little more depth in the colors (vibrance, softer highlights, a little dehaze), soft
+  ambient occlusion where models meet the ground, and a light vignette. It costs a pass and memory,
+  so the low and mid tiers (phones) go without.
 
 ### Layers and depth
 
@@ -429,13 +442,17 @@ water splats draw with the props and the character, sorted together, as before.
   height field. Each vertex carries the terrain's own color (`colorAt` without its baked light; the
   engine lights the model). Four CC0 textures in one atlas (sand, grass, rock, wet sand) add the
   detail: each pixel picks them by height and slope with the same rules as the splats, and each
-  texture is divided by its mean color, so it adds detail without changing the world's palette. The
-  detail fades out between 28 m and 70 m. Near grass stays splats (blades), so the ground isn't a
-  flat carpet.
+  texture is divided by its mean color, so it adds detail without changing the world's palette. Each
+  texture is sampled twice, the second time three times larger and turned, which breaks the repeat.
+  Sand gives way to grass in noisy patches rather than along a smooth line, steep sand by the water
+  stays sand (no gravel on the beach), and the grass photo's pale pebbles are held down. The detail
+  fades out between 28 m and 70 m. Near grass stays splats (blades), so the ground isn't a flat
+  carpet.
 - **Water.** A grid over the world with the depth below each vertex, and a flat skirt to the
   horizon. Its shader makes it pale and clear over the shallows and dark blue at depth, draws foam
-  at the shore, and moves gentle waves in its normals; the sky's reflection comes from the
-  image-based light, stronger at grazing angles (Fresnel).
+  at the shore (breaking bands, and a strip along the waterline that breathes in and out), and moves
+  gentle waves in its normals; the sky's reflection comes from the image-based light, stronger at
+  grazing angles (Fresnel).
 - **Sky.** A dome around the camera with the upper part of a CC0 HDRI, turned so its sun sits at the
   world's sun. The same HDRI (with the sun's disk clamped, since the sun is a light of its own)
   lights the models and gives the water its reflection.
@@ -444,14 +461,54 @@ water splats draw with the props and the character, sorted together, as before.
 
 ### The mesh character (`mesh-character.js`)
 
-To compare with the splat character, `?character=mesh` (or `"character": { "model": "mesh" }` in the
-world file) swaps in a lit, skinned model: Kenney's "Animated Characters: Protagonists" (CC0), as
-tall as the splat character, lit by the same sun and sky and casting the same shadows, in either
-mode. Its idle, walk and run blend by speed (a 1D blend tree) and advance with the world's clock, so
-manual-clock clips and tests move them exactly. The pack has no walk: `tools/world-character.mjs`
-makes one from the run (each joint half way back to the idle's pose, a lower bounce) and builds
-`assets/worlds/character/character.glb` with three.js at build time. Collision, the camera and the
-controls are the same for both characters.
+Hybrid mode's character is a realistic person: an adult of ordinary proportions made with MakeHuman
+(its base mesh and bundled assets are CC0: the body, an invented face, skin, eyes, eyebrows,
+eyelashes, short hair, a T-shirt, jeans and sneakers), lit by the same sun and sky and casting the
+same shadows. `"character": { "model": "mesh" }` in the world file, or `?character=mesh`, asks for
+it in either mode; `"auto"` (the default) means this person in hybrid mode and the splat character
+in splats mode; `"splats"` and `"kenney"` (the stylized character of the hybrid round) are the
+others. The world's `shirt` color dyes the white T-shirt.
+
+- **Levels.** The high and max tiers load `human-high.glb` (about 31k triangles, a 2K skin texture),
+  the low and mid tiers `human-low.glb` (about 17k, 1K). Both have the same skeleton (MPFB's
+  game-engine rig, 53 bones) and clips.
+- **Motion.** Motion capture from the 100STYLE dataset (CC BY 4.0): an idle, a walk (the neutral
+  style) and a run (the "proud" style: upright, the arms swinging). The walk and the run are one
+  gait cycle each, from one left heel strike to the next on a straight stretch, played in place and
+  resampled to one second, so they blend in step. The idle cross-fades in when the character stops.
+- **Planted feet.** `human.json` has each clip's stride (how far the standing foot travels in one
+  cycle). The world plays the clips at speed ÷ stride cycles a second (`humanRate()`), so the
+  standing foot stays put on the ground: it slides less than a tenth of the body's speed.
+- **Speeds.** The person walks at 1.3 m/s and runs at 2.7 m/s (`walkSpeed` and `runSpeed` in
+  `human.json`); the captured ones are about 0.9 and 1.9, played about 1.4 times faster. The splat
+  character keeps 1.9 and 4.6.
+- **Building it.** `tools/wd-character.py` runs in Blender as a Python module (`bpy` 5.0.1) with the
+  MPFB 2.0.17 add-on: it makes the person, paints the logos out of the clothes' texture, gives every
+  part a plain physically based material (the hair as strands over an opaque cap, so nothing shows
+  through), retargets the capture onto the rig bone by bone, decimates the lighter level and exports
+  both GLBs and `human.json`. Its header has the commands.
+
+The earlier mesh character (`?character=kenney`) is Kenney's "Animated Characters: Protagonists"
+(CC0), built by `tools/world-character.mjs` into `character.glb`, with a walk made from its run.
+Collision, the camera and the controls are the same for every character.
+
+### Model props (`mesh-props.js`)
+
+In hybrid mode, rocks and the things on the beach are scanned models from Poly Haven (CC0), built by
+`tools/wd-props.py` into `assets/worlds/props/<kind>.glb`: boulders (two sources, three shapes),
+stones (seven shapes), a shell, driftwood and a stump. Each shape is 1 m tall (or long) with its
+foot at the origin and has three levels of detail (for a boulder about 4,000, 900 and 200
+triangles), with its color, normal and roughness maps.
+
+- `boulder` props are one model each; `pebbles` are a heap of four to six stones; `driftwood` and
+  `stump` are one model each. They switch level by distance to the camera (`lodFor()`: level 0
+  within about 14 m, level 1 within about 40 m, farther by the square root of their size and the
+  tier's near distance), cast shadows and get colliders from their measured size.
+- `stone` and `shell` are scattered by the hundred (the Test island has 220 stones and 28 shells on
+  its sand) and drawn instanced, one draw per shape, half sunk in the sand.
+- Splats stay where they are special: trees, bushes and flowers (which move and break), and the
+  lighthouse toy. Their leaves are regraded in hybrid mode (`gradeFoliage()` in `props.js`): deeper,
+  varied greens in clusters, shade inside the crown and lighter leaves on top.
 
 `tools/world-assets.mjs` fetches the textures and the HDRI from Poly Haven and builds
 `assets/worlds/ground/` (the atlases and `ground.json`: each texture's repeat, strength and mean
@@ -480,10 +537,16 @@ is). About 5 MB in all.
 - `node tools/world-clip.mjs <out-dir> walk landmark touch list` records the review clips at 390×844
   (the scenes are scripted at the top of the tool; add your own). `--modes` records each scene in
   splats mode (left) and hybrid mode (right); `--render=hybrid` records one mode.
-- `stats()` also gives the mode, the models drawn and the median frame time.
-- `tests/wd.spec.mjs` has the engine's tests and `tests/wdh.spec.mjs` the hybrid round's (the
-  switch, both modes, depth order, shadows, frames per second, the assets). A world lane adds its
-  own in `tests/<prefix>.spec.mjs`.
+- `stats()` also gives the mode, the models drawn and the median frame time, and in hybrid mode
+  `meshProps` (the model props, how many show each level, and how many are scattered).
+- `?stats=1` shows a small readout on the page (frames per second, the tier, the mode, the
+  character, splats drawn and draw calls), for testing on a phone: a screenshot carries the numbers.
+- `?frame=0|1` turns hybrid mode's camera frame off or on; `?character=splats|mesh|kenney` picks the
+  character.
+- `tests/wd.spec.mjs` has the engine's tests, `tests/wdh.spec.mjs` the hybrid round's (the switch,
+  both modes, depth order, shadows, frames per second, the assets) and `tests/wdr3.spec.mjs` round
+  3's (the person in each tier, its clips and planted feet, the model props' levels, the stats
+  readout, the assets' budgets and credits). A world lane adds its own in `tests/<prefix>.spec.mjs`.
 
 ## Rules that still apply
 

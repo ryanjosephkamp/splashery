@@ -91,6 +91,8 @@ export function normalizeProp(p = {}, i = 0) {
     detail: num(p.detail, 1, 0.25, 3),
     options: p.options && typeof p.options === "object" ? { ...p.options } : {},
     collider: normalizeCollider(p.collider),
+    // "hybrid" or "splats": placed only in that mode (model-only props).
+    only: RENDER_MODES.includes(p.only) ? p.only : null,
   };
 }
 
@@ -122,6 +124,7 @@ export function normalizeScatter(s = {}, i = 0) {
     within: s.within ? { at: pair(s.within.at, [0, 0]), radius: num(s.within.radius, 20, 1, 1000) } : null, // prettier-ignore
     spacing: num(s.spacing, 2, 0, 100),
     options: s.options && typeof s.options === "object" ? { ...s.options } : {},
+    only: RENDER_MODES.includes(s.only) ? s.only : null,
   };
 }
 

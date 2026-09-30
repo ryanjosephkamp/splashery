@@ -106,6 +106,8 @@ export class WorldView {
       const now = performance.now();
       this.frameMs.push(now - this.lastFrame);
       if (this.frameMs.length > 120) this.frameMs.shift();
+      // Draw calls this frame (the stats overlay).
+      this.drawCalls = app.graphicsDevice._drawCallsPerFrame ?? 0;
       this.lastFrame = now;
       if (this.captureWaiters?.length) {
         const w = this.captureWaiters;
