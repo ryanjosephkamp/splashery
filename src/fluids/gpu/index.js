@@ -16,7 +16,13 @@ export { GpuLiquid };
 // (0 clear .. 1 opaque), absorption per recipe unit (rgb) and glow.
 const LOOKS = {
   water: { color: [0.78, 0.9, 0.97], scatter: 0, absorb: [0.9, 0.28, 0.16], glow: 0 },
-  soda: { color: [0.2, 0.08, 0.03], scatter: 0.05, absorb: [16, 26, 38], glow: 0 },
+  soda: {
+    color: [0.2, 0.08, 0.03],
+    scatter: 0.05,
+    absorb: [16, 26, 38],
+    glow: 0,
+    foam: [0.9, 0.83, 0.7],
+  },
   syrup: { color: [0.55, 0.25, 0.06], scatter: 0.1, absorb: [2, 6, 14], glow: 0 },
   honey: { color: [0.86, 0.55, 0.1], scatter: 0.18, absorb: [0.8, 3.2, 12], glow: 0 },
   lava: { color: [1.0, 0.36, 0.08], scatter: 1, absorb: [1, 1, 1], glow: 0.9 },
@@ -78,12 +84,13 @@ export class GpuFluids {
       const look = LOOKS[liq.spec.preset] || LOOKS.water;
       p.color = [...look.color, look.scatter];
       p.absorb = [...look.absorb, look.glow];
+      p.foam = look.foam || [0.95, 0.96, 0.97];
     }
     const gas = this.gas?.view() || [];
     if (!liq && !gas.length && !glassSpec) return;
     surf.render(
       liq
-        ? { texture: liq.texture, texWidth: liq.sim.texWidth, count: liq.n, simToToy: liq.simToRecipe(), radius: liq.d * 0.8, gas } // prettier-ignore
+        ? { texture: liq.texture, texWidth: liq.sim.texWidth, count: liq.n, simToToy: liq.simToRecipe(), radius: liq.d * 0.8, cell: liq.h, diffuse: liq.diffuse, gas } // prettier-ignore
         : { count: 0, gas },
       { camera: this.stage.cameraEntity.camera, toyToWorld: this.toyToWorld() },
     );

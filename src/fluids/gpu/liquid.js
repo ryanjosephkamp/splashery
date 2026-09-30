@@ -6,16 +6,17 @@
 import * as pc from "../../pc.js";
 import { GpuMpm, packColliders } from "./mpm.js";
 import { LIQUIDS, unit3 } from "../sim.js";
+import { GpuDiffuse } from "./diffuse.js";
 
 // Cell size (recipe units, for a recipe unit of 0.33 m) and the most
 // substeps a frame may take, per tier. The particle spacing is half a cell
 // (8 particles per cell at rest). A slower device runs in slow motion rather
 // than take longer steps.
 export const GPU_TIERS = {
-  low: { cell: 0.04, maxSub: 14, cap: 12000 },
-  mid: { cell: 0.03, maxSub: 24, cap: 40000 },
-  high: { cell: 0.022, maxSub: 36, cap: 120000 },
-  max: { cell: 0.018, maxSub: 44, cap: 200000 },
+  low: { cell: 0.04, maxSub: 14, cap: 12000, diffuse: 0.5 },
+  mid: { cell: 0.03, maxSub: 24, cap: 40000, diffuse: 0.7 },
+  high: { cell: 0.022, maxSub: 36, cap: 120000, diffuse: 1 },
+  max: { cell: 0.018, maxSub: 44, cap: 200000, diffuse: 1.3 },
 };
 
 function mulberry(seed) {
@@ -49,7 +50,21 @@ function domainOf(spec) {
       const R = (c.radius ?? 0.5) + (c.wall ?? 0.03);
       add([at[0] - R, at[1] - R, at[2] - R]);
       add([at[0] + R, at[1], at[2] + R]);
+    } else if (c.type === "box") {
+      const s = c.size || [1, 1, 1];
+      add(at, 0);
+      add([at[0] - s[0] / 2, at[1] - s[1] / 2, at[2] - s[2] / 2]);
+      add([at[0] + s[0] / 2, at[1] + s[1] / 2, at[2] + s[2] / 2]);
     }
+  }
+  const f = spec.fill;
+  if (f?.box) {
+    add(f.box[0]);
+    add(f.box[1]);
+  } else if (f?.cylinder) {
+    const c = f.cylinder;
+    add([c.at[0] - c.radius, c.at[1], c.at[2] - c.radius]);
+    add([c.at[0] + c.radius, c.at[1] + c.height, c.at[2] + c.radius]);
   }
   if (spec.emitter?.at) add(spec.emitter.at, (spec.emitter.radius ?? 0.05) * 2);
   if (spec.domain) {
@@ -109,11 +124,20 @@ export class GpuLiquid {
     const nuM = spec.nu ?? NU[spec.preset] ?? 1e-6 * Math.pow(10, 5 * vis);
     this.nu = Math.max(0.05, nuM / (hm * hm));
     this.sim.params.viscosity = rho0 * this.nu;
-    this.sim.params.friction = 0.15 + (spec.friction ?? preset.friction ?? 0.05) * 1.5;
+    // Friction along walls: water slides (a thin boundary layer, far below
+    // a cell), honey and lava hold back.
+    this.sim.params.friction = (spec.friction ?? preset.friction ?? 0.05) * 1.5;
     this.emitter = spec.emitter ? { on: false, flow: 1, travel: 0, ...spec.emitter } : null;
     this.drain = 0;
     this.time = 0;
     this.stats = { substeps: 0, dt: 0 };
+    // Spray and foam where it splashes; a soda's bubbles and head.
+    const foam = spec.foam ?? preset.foam ?? 0;
+    const fizz = spec.fizz ?? preset.fizz ?? 0;
+    if (foam > 0 || fizz > 0) {
+      const cap = Math.round((fizz > 0 ? 9000 : 2500) * (spec.diffuse ?? 1) * (tier.diffuse ?? 1));
+      this.diffuse = new GpuDiffuse(this, { foam, fizz, cap });
+    }
     if (spec.fill) this.fill(spec.fill);
   }
 
@@ -121,7 +145,10 @@ export class GpuLiquid {
     return this.sim.count;
   }
   set n(v) {
-    if (v === 0) this.sim.reset();
+    if (v === 0) {
+      this.sim.reset();
+      if (this.diffuse) this.diffuse.n = 0;
+    }
   }
 
   toGrid(p) {
@@ -286,7 +313,11 @@ export class GpuLiquid {
     }
     if (!this.n) return 0;
     this.sim.params.dt = sub;
+    // The CPU's share of a frame: encoding the dispatches (the GPU runs them).
+    const t0 = performance.now();
     this.sim.step(n);
+    this.stats.encodeMs = performance.now() - t0;
+    this.diffuse?.step(simDt);
     this.stats.substeps = n;
     this.stats.dt = sub;
     this.stats.slow = simDt / dt;
@@ -298,6 +329,7 @@ export class GpuLiquid {
   }
 
   destroy() {
+    this.diffuse?.destroy();
     this.sim.destroy();
   }
 }

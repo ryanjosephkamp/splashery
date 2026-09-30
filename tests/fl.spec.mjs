@@ -198,7 +198,8 @@ test("the worker runs the fluid off the page", async ({ page }) => {
 });
 
 test("the fluid program compiles on WebGPU too", async ({ page }) => {
-  const errors = await open(page, "/?renderer=webgpu&adapt=off&profile=low&labs=1");
+  // ?fluids=cpu: the splat liquid (spray, foam and the CPU path) on WebGPU.
+  const errors = await open(page, "/?renderer=webgpu&adapt=off&profile=low&labs=1&fluids=cpu");
   const dev = await page.evaluate(() => window.__splashery.player.stage?.deviceType);
   test.skip(dev !== "webgpu", "No WebGPU adapter in this browser.");
   await page.evaluate(() => window.__splashery.app.chooseToy("fluid-lab"));
@@ -214,6 +215,117 @@ test("the fluid program compiles on WebGPU too", async ({ page }) => {
   });
   expect(c).toBeGreaterThan(50);
   expect(errors).toEqual([]);
+});
+
+// Lane Fluids r4: the GPU solver (src/fluids/gpu/) against the CPU one, the
+// fallback without WebGPU, and the budgets per tier.
+
+test("the GPU liquid keeps the CPU liquid's volume in a glass and stays stable", async ({
+  page,
+}) => {
+  const errors = await open(page, "/?renderer=webgpu&adapt=off&profile=low&labs=1");
+  const dev = await page.evaluate(() => window.__splashery.player.stage?.deviceType);
+  test.skip(dev !== "webgpu", "No WebGPU adapter in this browser.");
+  const r = await page.evaluate(async (GLASS) => {
+    const { FluidWorld } = await import("/src/fluids/world.js");
+    const { GpuLiquid } = await import("/src/fluids/gpu/liquid.js");
+    const device = window.__splashery.player.stage.device;
+    const spec = {
+      name: "l",
+      kind: "liquid",
+      unit: 0.33,
+      preset: "water",
+      colliders: [GLASS],
+      fill: { cylinder: { at: [0, 0.05, 0], radius: 0.3, height: 0.45 } },
+    };
+    const level = (ys) => (ys.sort((a, b) => a - b), ys[Math.floor(ys.length * 0.97)]);
+    const cpu = new FluidWorld([{ ...spec, spacing: 0.048, budget: 1200 }], { profile: "low", seed: 7 }).systems[0]; // prettier-ignore
+    const gw = new FluidWorld([spec], { profile: "low", seed: 7, gpu: { device, GpuLiquid }, surface: true }); // prettier-ignore
+    const gpu = gw.systems[0];
+    const n0 = gpu.n;
+    // Let both settle for two seconds.
+    for (let f = 0; f < 60; f++) cpu.step(1 / 30);
+    let worst = 0;
+    let bad = 0;
+    const ys = [];
+    for (let f = 0; f < 60; f++) {
+      gw.step(1 / 30);
+      if (f % 20 !== 19) continue;
+      const d = await gpu.sim.readPositions();
+      const h = gpu.h;
+      ys.length = 0;
+      let out = 0;
+      for (let i = 0; i < gpu.n; i++) {
+        const x = gpu.origin[0] + d[i * 6] * h;
+        const y = gpu.origin[1] + d[i * 6 + 1] * h;
+        const z = gpu.origin[2] + d[i * 6 + 2] * h;
+        if (![x, y, z].every(Number.isFinite)) bad++;
+        else if (Math.hypot(x, z) > GLASS.radius + 0.02 || y > GLASS.height || y < -0.02) {
+          out++;
+        }
+        ys.push(y);
+      }
+      worst = Math.max(worst, out);
+    }
+    const cys = [];
+    for (let i = 0; i < cpu.n; i++) cys.push(cpu.pos[i * 3 + 1]);
+    // Each one's expected level: its particles' rest volume in the glass.
+    const cavity = Math.PI * GLASS.radius ** 2;
+    const want = (s) => GLASS.bottom + (s.n * s.d ** 3) / cavity;
+    const out = { n0, n: gpu.n, cpuN: cpu.n, bad, worst, gpu: level(ys) / want(gpu), cpu: level(cys) / want(cpu) }; // prettier-ignore
+    gpu.destroy();
+    return out;
+  }, GLASS);
+  // Far more particles than the CPU's, none lost, none outside, none broken.
+  expect(r.n0).toBeGreaterThan(r.cpuN * 4);
+  expect(r.n).toBe(r.n0);
+  expect(r.bad).toBe(0);
+  expect(r.worst).toBeLessThanOrEqual(Math.ceil(r.n * 0.002));
+  // The level its volume gives, as close as the CPU liquid comes to its own.
+  expect(Math.abs(r.gpu - 1)).toBeLessThan(Math.max(0.12, Math.abs(r.cpu - 1) + 0.05));
+  expect(errors).toEqual([]);
+});
+
+test("without WebGPU the CPU liquid runs as before, and the gas grid still draws", async ({
+  page,
+}) => {
+  const errors = await open(page, `${APP}&profile=low`);
+  const r = await page.evaluate(async () => {
+    const { app, player } = window.__splashery;
+    await app.chooseToy("fluid-lab");
+    const wait = async (f) => {
+      const t0 = performance.now();
+      while (!f() && performance.now() - t0 < 30_000) await new Promise((r) => setTimeout(r, 100));
+    };
+    await wait(() => player.fluids?.stats?.particles > 0);
+    const glass = { ...player.fluids.stats, device: player.stage.deviceType };
+    await app.setToyOption("scene", "candle");
+    await wait(() => player.fluids?.stats?.gasCells > 0);
+    return { glass, candle: { ...player.fluids.stats } };
+  });
+  expect(r.glass.device).toBe("webgl2");
+  expect(r.glass.mode).toBe("sync");
+  expect(r.glass.particles).toBeGreaterThan(100);
+  expect(r.candle.gasCells).toBeGreaterThan(1000);
+  expect(errors).toEqual([]);
+});
+
+test("GPU budgets grow with the tier, and the phone tiers stay small", async () => {
+  const { GPU_TIERS } = await import("../src/fluids/gpu/liquid.js");
+  const { GAS_TIERS } = await import("../src/fluids/gpu/gas.js");
+  const order = ["low", "mid", "high", "max"];
+  for (let i = 1; i < order.length; i++) {
+    const a = GPU_TIERS[order[i - 1]];
+    const b = GPU_TIERS[order[i]];
+    expect(b.cap).toBeGreaterThan(a.cap);
+    expect(b.cell).toBeLessThan(a.cell);
+    expect(GAS_TIERS[order[i]].n).toBeGreaterThanOrEqual(GAS_TIERS[order[i - 1]].n);
+  }
+  expect(GPU_TIERS.low.cap).toBeLessThanOrEqual(12_000);
+  expect(GAS_TIERS.low.n ** 3).toBeLessThanOrEqual(24 ** 3);
+  // Ten or more times the CPU's largest liquid on a computer.
+  const { TIER_SCALE } = await import("../src/fluids/world.js");
+  expect(GPU_TIERS.high.cap).toBeGreaterThanOrEqual(10 * 1300 * TIER_SCALE.max);
 });
 
 test("screenshots at phone and desktop size", async ({ browser }) => {

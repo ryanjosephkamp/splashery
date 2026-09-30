@@ -190,6 +190,10 @@ const FORCES_VEL = pass(
   // a little noise at the sources keeps them from being perfectly steady
   float nz = sin(p.x * 1.7 + uTime * 5.1) * sin(p.z * 1.3 - uTime * 4.3) * sin(p.y * 0.9 + uTime * 3.7);
   v.xz += uWind.w * nz * (fa + fb) * uDt * vec2(1.0, -1.0);
+  // a room's faint drafts: slow, smooth, stronger higher up, so a plume
+  // sways and meanders instead of standing straight
+  float hy = p.y / uDims.y;
+  v.xz += uWind.w * 0.3 * hy * uDt * vec2(sin(p.y * 0.35 + p.z * 0.21 + uTime * 1.3), cos(p.y * 0.31 - p.x * 0.23 - uTime * 1.1));
   // closed at the sides and the bottom, open at the top
   if (c.x == 0 || c.x == int(uDims.x) - 1) v.x = 0.0;
   if (c.z == 0 || c.z == int(uDims.z) - 1) v.z = 0.0;
@@ -215,6 +219,10 @@ const FORCES_VEL = pass(
   let dxz = uniform.uWind.w * nz * (fa + fb) * uniform.uDt;
   v.x += dxz;
   v.z -= dxz;
+  let hy = p.y / uniform.uDims.y;
+  let k = uniform.uWind.w * 0.3 * hy * uniform.uDt;
+  v.x += k * sin(p.y * 0.35 + p.z * 0.21 + uniform.uTime * 1.3);
+  v.z += k * cos(p.y * 0.31 - p.x * 0.23 - uniform.uTime * 1.1);
   if (c.x == 0 || c.x == i32(uniform.uDims.x) - 1) { v.x = 0.0; }
   if (c.z == 0 || c.z == i32(uniform.uDims.z) - 1) { v.z = 0.0; }
   if (c.y == 0) { v.y = max(v.y, 0.0); }

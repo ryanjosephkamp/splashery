@@ -62,18 +62,20 @@ export class GasScene {
     const g = new GasGrid(device, { at: [at[0], at[1] - 0.04, at[2]], size: [w, 1.3, w], profile: this.profile }); // prettier-ignore
     const c = g.cell;
     Object.assign(g.params, {
-      heatLift: (steam ? 5 : 9) / c,
+      heatLift: (steam ? 3 : 9) / c,
       smokeWeight: 0.3 / c,
       burn: 0,
       burnHeat: 0,
-      vort: steam ? 2.5 : 4,
-      noise: 0.8 / c,
-      decay: steam ? [0.975, 0.96, 0.9, 1] : [0.993, 0.96, 0.9, 1],
+      // Steam from a cup: faint wisps that curl and are gone within a
+      // cup's height or two; smoke: a thin ribbon that turns wavy as it rises.
+      vort: steam ? 6 : 6,
+      noise: (steam ? 2.5 : 1.8) / c,
+      decay: steam ? [0.955, 0.95, 0.9, 1] : [0.993, 0.96, 0.9, 1],
     });
     this.smokeGrid = g;
     this.smokeLook = {
       color: steam ? [0.93, 0.95, 0.97] : hex(this.gases[0]?.color || "#8f8f8f"),
-      density: steam ? 9 : 26,
+      density: steam ? 6 : 26,
       flame: 0,
       steps: this.steps,
       light: steam ? 1.15 : 0.9,
@@ -134,12 +136,13 @@ export class GasScene {
         list.push({
           at: src.at,
           radius: Math.max(src.radius ?? 0.03, g.cell * 1.5) * (steam ? 0.9 : 2.2),
-          smoke: (steam ? 3.2 : 44) * flow,
+          smoke: (steam ? 3.2 : 90) * flow,
           heat: (steam ? 0.9 : 2.2) * flow,
           up: (src.speed ?? s.rise ?? 0.4) * (steam ? 0.6 : 1),
         });
       }
-      if (this.flame) for (let k = 0; k < 3; k++) wind[k] += this.state.get(this.flame.name).wind[k];
+      if (this.flame)
+        for (let k = 0; k < 3; k++) wind[k] += this.state.get(this.flame.name).wind[k];
       g.sources.a = list[0] || null;
       g.sources.b = list[1] || null;
       g.params.wind = wind.map((w) => w * 3);

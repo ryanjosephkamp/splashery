@@ -46,18 +46,23 @@ uniform float uTexWidth;
 uniform mat4 uSimToView;
 uniform mat4 uProj;
 uniform float uRadius;
+uniform vec2 uMinPx;       // x the smallest radius in texels, y texels per unit at distance 1
 varying vec2 vUv;
 varying vec3 vCenter;
+varying float vR;
 void main() {
   int i = gl_InstanceID;
   int w = int(uTexWidth);
   vec4 p = texelFetch(uParticles, ivec2(i - (i / w) * w, i / w), 0);
   vec4 vp = uSimToView * vec4(p.xyz, 1.0);
-  vec3 corner = vp.xyz + vec3(aPosition * uRadius, 0.0);
+  // Never smaller than a texel or two, or a far liquid breaks into specks.
+  float r = max(uRadius, uMinPx.x * max(-vp.z, 1e-3) / uMinPx.y);
+  vec3 corner = vp.xyz + vec3(aPosition * r, 0.0);
   vec4 c = uProj * vec4(corner, 1.0);
   gl_Position = vec4(c.xy, 0.5 * c.w, c.w);
   vUv = aPosition;
   vCenter = vp.xyz;
+  vR = r;
 }
 `;
 const SPRITE_VS_W = /* wgsl */ `
@@ -67,47 +72,122 @@ uniform uTexWidth: f32;
 uniform uSimToView: mat4x4f;
 uniform uProj: mat4x4f;
 uniform uRadius: f32;
+uniform uMinPx: vec2f;
 varying vUv: vec2f;
 varying vCenter: vec3f;
+varying vR: f32;
 @vertex fn vertexMain(input: VertexInput) -> VertexOutput {
   var output: VertexOutput;
   let i = i32(input.instanceIndex);
   let w = i32(uniform.uTexWidth);
   let p = textureLoad(uParticles, vec2i(i % w, i / w), 0);
   let vp = uniform.uSimToView * vec4f(p.xyz, 1.0);
-  let corner = vp.xyz + vec3f(input.aPosition * uniform.uRadius, 0.0);
+  let r = max(uniform.uRadius, uniform.uMinPx.x * max(-vp.z, 1e-3) / uniform.uMinPx.y);
+  let corner = vp.xyz + vec3f(input.aPosition * r, 0.0);
   let c = uniform.uProj * vec4f(corner, 1.0);
   output.position = vec4f(c.xy, 0.5 * c.w, c.w);
   output.vUv = input.aPosition;
   output.vCenter = vp.xyz;
+  output.vR = r;
+  return output;
+}
+`;
+
+// Diffuse particles (diffuse.js): soft discs added into the thickness
+// texture's other channels, foam and spray in g, bubbles in b.
+const DIFF_VS = /* glsl */ `
+attribute vec2 aPosition;
+uniform sampler2D uDiffuse;
+uniform mat4 uSimToView;
+uniform mat4 uProj;
+uniform vec4 uDiffR;
+varying vec2 vUv;
+varying vec2 vKind;
+void main() {
+  int i = gl_InstanceID;
+  vec4 p = texelFetch(uDiffuse, ivec2(i - (i / 256) * 256, i / 256), 0);
+  float kind = floor(p.w);
+  float fade = fract(p.w);
+  float r = kind < 1.5 ? uDiffR.x : kind < 2.5 ? uDiffR.y : uDiffR.z;
+  vec4 vp = uSimToView * vec4(p.xyz, 1.0);
+  vec4 c = uProj * vec4(vp.xyz + vec3(aPosition * r, 0.0), 1.0);
+  gl_Position = vec4(c.xy, 0.5 * c.w, c.w);
+  vUv = aPosition;
+  vKind = vec2(kind, fade);
+}
+`;
+const DIFF_VS_W = /* wgsl */ `
+attribute aPosition: vec2f;
+var uDiffuse: texture_2d<uff>;
+uniform uSimToView: mat4x4f;
+uniform uProj: mat4x4f;
+uniform uDiffR: vec4f;
+varying vUv: vec2f;
+varying vKind: vec2f;
+@vertex fn vertexMain(input: VertexInput) -> VertexOutput {
+  var output: VertexOutput;
+  let i = i32(input.instanceIndex);
+  let p = textureLoad(uDiffuse, vec2i(i % 256, i / 256), 0);
+  let kind = floor(p.w);
+  let fade = fract(p.w);
+  var r = uniform.uDiffR.z;
+  if (kind < 2.5) { r = uniform.uDiffR.y; }
+  if (kind < 1.5) { r = uniform.uDiffR.x; }
+  let vp = uniform.uSimToView * vec4f(p.xyz, 1.0);
+  let c = uniform.uProj * vec4f(vp.xyz + vec3f(input.aPosition * r, 0.0), 1.0);
+  output.position = vec4f(c.xy, 0.5 * c.w, c.w);
+  output.vUv = input.aPosition;
+  output.vKind = vec2f(kind, fade);
+  return output;
+}
+`;
+const DIFF_FS = /* glsl */ `
+varying vec2 vUv;
+varying vec2 vKind;
+void main() {
+  float r2 = dot(vUv, vUv);
+  if (r2 > 1.0) discard;
+  float cov = (1.0 - r2) * (1.0 - r2) * (1.0 - vKind.y * vKind.y);
+  gl_FragColor = vKind.x > 2.5 ? vec4(0.0, 0.0, cov, 0.0) : vec4(0.0, cov, 0.0, 0.0);
+}
+`;
+const DIFF_FS_W = /* wgsl */ `
+varying vUv: vec2f;
+varying vKind: vec2f;
+@fragment fn fragmentMain(input: FragmentInput) -> FragmentOutput {
+  var output: FragmentOutput;
+  let r2 = dot(input.vUv, input.vUv);
+  if (r2 > 1.0) { discard; }
+  let cov = (1.0 - r2) * (1.0 - r2) * (1.0 - input.vKind.y * input.vKind.y);
+  if (input.vKind.x > 2.5) { output.color = vec4f(0.0, 0.0, cov, 0.0); } else { output.color = vec4f(0.0, cov, 0.0, 0.0); }
   return output;
 }
 `;
 
 // Depth: the sphere's front, as a distance from the camera (0 = empty).
 const DEPTH_FS = /* glsl */ `
-uniform float uRadius;
 uniform float uFar;
 varying vec2 vUv;
 varying vec3 vCenter;
+varying float vR;
 void main() {
   float r2 = dot(vUv, vUv);
   if (r2 > 1.0) discard;
-  float d = -(vCenter.z + sqrt(1.0 - r2) * uRadius);
+  float d = -(vCenter.z + sqrt(1.0 - r2) * vR);
   gl_FragColor = vec4(d, 0.0, 0.0, 1.0);
   gl_FragDepth = clamp(d / uFar, 0.0, 1.0);
 }
 `;
 const DEPTH_FS_W = /* wgsl */ `
-uniform uRadius: f32;
 uniform uFar: f32;
 varying vUv: vec2f;
 varying vCenter: vec3f;
+varying vR: f32;
 @fragment fn fragmentMain(input: FragmentInput) -> FragmentOutput {
   var output: FragmentOutput;
   let r2 = dot(input.vUv, input.vUv);
   if (r2 > 1.0) { discard; }
-  let d = -(input.vCenter.z + sqrt(1.0 - r2) * uniform.uRadius);
+  let d = -(input.vCenter.z + sqrt(1.0 - r2) * input.vR);
   output.color = vec4f(d, 0.0, 0.0, 1.0);
   output.fragDepth = clamp(d / uniform.uFar, 0.0, 1.0);
   return output;
@@ -119,21 +199,26 @@ const THICK_FS = /* glsl */ `
 uniform float uRadius;
 varying vec2 vUv;
 varying vec3 vCenter;
+varying float vR;
 void main() {
   float r2 = dot(vUv, vUv);
   if (r2 > 1.0) discard;
-  gl_FragColor = vec4(2.0 * sqrt(1.0 - r2) * uRadius, 0.0, 0.0, 1.0);
+  // an enlarged sprite keeps the particle's volume (thinner, wider)
+  float k = uRadius / vR;
+  gl_FragColor = vec4(2.0 * sqrt(1.0 - r2) * vR * k * k * k, 0.0, 0.0, 1.0);
 }
 `;
 const THICK_FS_W = /* wgsl */ `
 uniform uRadius: f32;
 varying vUv: vec2f;
 varying vCenter: vec3f;
+varying vR: f32;
 @fragment fn fragmentMain(input: FragmentInput) -> FragmentOutput {
   var output: FragmentOutput;
   let r2 = dot(input.vUv, input.vUv);
   if (r2 > 1.0) { discard; }
-  output.color = vec4f(2.0 * sqrt(1.0 - r2) * uniform.uRadius, 0.0, 0.0, 1.0);
+  let k = uniform.uRadius / input.vR;
+  output.color = vec4f(2.0 * sqrt(1.0 - r2) * input.vR * k * k * k, 0.0, 0.0, 1.0);
   return output;
 }
 `;
@@ -150,8 +235,10 @@ uniform float uEdge;      // depth difference that stops the filter
 void main() {
   float d0 = texture2D(uSrc, uv0).r;
   if (d0 <= 0.0) { gl_FragColor = vec4(0.0); return; }
-  float rpx = clamp(uWorldR * uProjY / d0, 1.0, 24.0);
+  float rpx = clamp(uWorldR * uProjY / d0, 4.0, 24.0);
   float step = rpx / 8.0;
+  // the edge grows with the texel's size, as the sprites do
+  float edge = max(uEdge, 5.0 * d0 / uProjY);
   float sum = d0;
   float wsum = 1.0;
   for (int k = 1; k <= 8; k++) {
@@ -160,7 +247,7 @@ void main() {
     for (int s = -1; s <= 1; s += 2) {
       float d = texture2D(uSrc, uv0 + uDir * x * float(s)).r;
       if (d <= 0.0) continue;
-      float dz = (d - d0) / uEdge;
+      float dz = (d - d0) / edge;
       float w = ws * exp(-dz * dz);
       sum += d * w;
       wsum += w;
@@ -185,8 +272,9 @@ fn texel(uv: vec2f) -> f32 {
   var output: FragmentOutput;
   let d0 = texel(input.uv0);
   if (d0 <= 0.0) { output.color = vec4f(0.0); return output; }
-  let rpx = clamp(uniform.uWorldR * uniform.uProjY / d0, 1.0, 24.0);
+  let rpx = clamp(uniform.uWorldR * uniform.uProjY / d0, 4.0, 24.0);
   let stp = rpx / 8.0;
+  let edge = max(uniform.uEdge, 5.0 * d0 / uniform.uProjY);
   var sum = d0;
   var wsum = 1.0;
   for (var k = 1; k <= 8; k++) {
@@ -195,7 +283,7 @@ fn texel(uv: vec2f) -> f32 {
     for (var s = -1; s <= 1; s += 2) {
       let d = texel(input.uv0 + uniform.uDir * x * f32(s));
       if (d <= 0.0) { continue; }
-      let dz = (d - d0) / uniform.uEdge;
+      let dz = (d - d0) / edge;
       let w = ws * exp(-dz * dz);
       sum += d * w;
       wsum += w;
@@ -224,6 +312,7 @@ uniform vec4 uLight;       // xyz light direction (toy space, toward the light)
 uniform vec4 uGlassA;      // xyz base center (toy), w inner radius
 uniform vec4 uGlassB;      // x height, y wall, z bottom, w on (0/1)
 uniform vec4 uMisc;        // x refraction strength, y liquid on
+uniform vec4 uFoam;        // rgb foam color, w on
 // The gas grid (gas.js): scalars atlas (r smoke, g heat, b fuel).
 uniform sampler2D uGas;
 uniform vec4 uGasA;        // xyz lower corner (toy), w cell size
@@ -242,15 +331,18 @@ vec4 gasFetch(ivec3 c) {
   c = clamp(c, ivec3(0), ivec3(uGasB.xyz) - 1);
   return texelFetch(uGas, gasTexel(c), 0);
 }
-vec4 gasSample(vec3 p) {
-  p = clamp(p - 0.5, vec3(0.0), uGasB.xyz - 1.0);
+vec4 gasSample(vec3 p0) {
+  vec3 p = clamp(p0 - 0.5, vec3(0.0), uGasB.xyz - 1.0);
   vec3 f = fract(p);
   ivec3 i = ivec3(floor(p));
   vec4 a = mix(gasFetch(i), gasFetch(i + ivec3(1, 0, 0)), f.x);
   vec4 b = mix(gasFetch(i + ivec3(0, 1, 0)), gasFetch(i + ivec3(1, 1, 0)), f.x);
   vec4 c = mix(gasFetch(i + ivec3(0, 0, 1)), gasFetch(i + ivec3(1, 0, 1)), f.x);
   vec4 d = mix(gasFetch(i + ivec3(0, 1, 1)), gasFetch(i + ivec3(1, 1, 1)), f.x);
-  return mix(mix(a, b, f.y), mix(c, d, f.y), f.z);
+  // soft edges: the grid's box never shows (the top thins away over its last quarter)
+  vec3 m = min(p0, uGasB.xyz - p0);
+  float edge = smoothstep(0.0, 3.0, min(m.x, m.z)) * smoothstep(0.0, 0.25 * uGasB.y, uGasB.y - p0.y);
+  return mix(mix(a, b, f.y), mix(c, d, f.y), f.z) * edge;
 }
 uniform sampler2D uGas2;
 uniform vec4 uGas2A;        // xyz lower corner (toy), w cell size
@@ -269,15 +361,18 @@ vec4 gas2Fetch(ivec3 c) {
   c = clamp(c, ivec3(0), ivec3(uGas2B.xyz) - 1);
   return texelFetch(uGas2, gas2Texel(c), 0);
 }
-vec4 gas2Sample(vec3 p) {
-  p = clamp(p - 0.5, vec3(0.0), uGas2B.xyz - 1.0);
+vec4 gas2Sample(vec3 p0) {
+  vec3 p = clamp(p0 - 0.5, vec3(0.0), uGas2B.xyz - 1.0);
   vec3 f = fract(p);
   ivec3 i = ivec3(floor(p));
   vec4 a = mix(gas2Fetch(i), gas2Fetch(i + ivec3(1, 0, 0)), f.x);
   vec4 b = mix(gas2Fetch(i + ivec3(0, 1, 0)), gas2Fetch(i + ivec3(1, 1, 0)), f.x);
   vec4 c = mix(gas2Fetch(i + ivec3(0, 0, 1)), gas2Fetch(i + ivec3(1, 0, 1)), f.x);
   vec4 d = mix(gas2Fetch(i + ivec3(0, 1, 1)), gas2Fetch(i + ivec3(1, 1, 1)), f.x);
-  return mix(mix(a, b, f.y), mix(c, d, f.y), f.z);
+  // soft edges: the grid's box never shows (the top thins away over its last quarter)
+  vec3 m = min(p0, uGas2B.xyz - p0);
+  float edge = smoothstep(0.0, 3.0, min(m.x, m.z)) * smoothstep(0.0, 0.25 * uGas2B.y, uGas2B.y - p0.y);
+  return mix(mix(a, b, f.y), mix(c, d, f.y), f.z) * edge;
 }
 // A candle flame's colors by temperature: deep blue at the base where fuel
 // meets air, then the soot glowing yellow-white, yellow, orange, dull red.
@@ -288,6 +383,19 @@ vec3 flameRamp(float t) {
   return c;
 }
 
+// The thickness texture's channels, filtered by hand (it is nearest).
+vec4 thickAll(vec2 uv) {
+  vec2 size = vec2(textureSize(uThick, 0));
+  vec2 p = uv * size - 0.5;
+  ivec2 i = ivec2(floor(p));
+  vec2 f = fract(p);
+  ivec2 m = ivec2(size) - 1;
+  vec4 a = texelFetch(uThick, clamp(i, ivec2(0), m), 0);
+  vec4 b = texelFetch(uThick, clamp(i + ivec2(1, 0), ivec2(0), m), 0);
+  vec4 c = texelFetch(uThick, clamp(i + ivec2(0, 1), ivec2(0), m), 0);
+  vec4 d = texelFetch(uThick, clamp(i + ivec2(1, 1), ivec2(0), m), 0);
+  return mix(mix(a, b, f.x), mix(c, d, f.x), f.y);
+}
 float sampleDepth(vec2 uv) {
   return texture2D(uDepth, uv).r;
 }
@@ -365,7 +473,7 @@ void main() {
     if (dot(nV, P) > 0.0) nV = -nV;
     vec3 n = normalize((uViewToToy * vec4(nV, 0.0)).xyz);
     vec3 V = -rd;
-    float thick = texture2D(uThick, uv0).r;
+    float thick = thickAll(uv0).r;
     // Refraction: what is behind, bent by the normal and seen through the thickness.
     vec2 off = nV.xy * uMisc.x * clamp(thick * 4.0, 0.0, 1.0);
     vec3 behind = texture2D(uScene, clamp(uv0 - off, vec2(0.001), vec2(0.999))).rgb;
@@ -377,8 +485,16 @@ void main() {
     vec3 H = normalize(L + V);
     float spec = pow(max(dot(n, H), 0.0), 180.0) * 1.6;
     vec3 liq = mix(body, refl, F) + spec + uColor.rgb * uAbsorb.a;
+    // Bubbles inside: bright specks, tinted by the liquid around them.
+    float bub = clamp(thickAll(uv0).b * 1.2, 0.0, 1.0) * uFoam.w;
+    liq = mix(liq, mix(uColor.rgb, vec3(1.0), 0.6) * (0.65 + 0.35 * max(dot(n, L), 0.0)) + 0.08, bub * 0.75);
     float a = clamp(thick * 60.0, 0.0, 1.0);
     col = mix(col, liq, a);
+  }
+  // Foam and spray over the liquid.
+  if (uFoam.w > 0.5) {
+    float fo = clamp(thickAll(uv0).g * 1.4, 0.0, 1.0);
+    col = mix(col, uFoam.rgb, fo);
   }
 
   // The glass wall over it all: a clear tint, bright at grazing angles, and
@@ -484,6 +600,7 @@ uniform uLight: vec4f;
 uniform uGlassA: vec4f;
 uniform uGlassB: vec4f;
 uniform uMisc: vec4f;
+uniform uFoam: vec4f;
 var uGas: texture_2d<uff>;
 uniform uGasA: vec4f;
 uniform uGasB: vec4f;
@@ -508,7 +625,10 @@ fn gasSample(p0: vec3f) -> vec4f {
   let b = mix(gasFetch(i + vec3i(0, 1, 0)), gasFetch(i + vec3i(1, 1, 0)), f.x);
   let c = mix(gasFetch(i + vec3i(0, 0, 1)), gasFetch(i + vec3i(1, 0, 1)), f.x);
   let d = mix(gasFetch(i + vec3i(0, 1, 1)), gasFetch(i + vec3i(1, 1, 1)), f.x);
-  return mix(mix(a, b, f.y), mix(c, d, f.y), f.z);
+  // soft edges: the grid's box never shows (the top thins away over its last quarter)
+  let m = min(p0, uniform.uGasB.xyz - p0);
+  let edge = smoothstep(0.0, 3.0, min(m.x, m.z)) * smoothstep(0.0, 0.25 * uniform.uGasB.y, uniform.uGasB.y - p0.y);
+  return mix(mix(a, b, f.y), mix(c, d, f.y), f.z) * edge;
 }
 var uGas2: texture_2d<uff>;
 uniform uGas2A: vec4f;
@@ -534,7 +654,10 @@ fn gas2Sample(p0: vec3f) -> vec4f {
   let b = mix(gas2Fetch(i + vec3i(0, 1, 0)), gas2Fetch(i + vec3i(1, 1, 0)), f.x);
   let c = mix(gas2Fetch(i + vec3i(0, 0, 1)), gas2Fetch(i + vec3i(1, 0, 1)), f.x);
   let d = mix(gas2Fetch(i + vec3i(0, 1, 1)), gas2Fetch(i + vec3i(1, 1, 1)), f.x);
-  return mix(mix(a, b, f.y), mix(c, d, f.y), f.z);
+  // soft edges: the grid's box never shows (the top thins away over its last quarter)
+  let m = min(p0, uniform.uGas2B.xyz - p0);
+  let edge = smoothstep(0.0, 3.0, min(m.x, m.z)) * smoothstep(0.0, 0.25 * uniform.uGas2B.y, uniform.uGas2B.y - p0.y);
+  return mix(mix(a, b, f.y), mix(c, d, f.y), f.z) * edge;
 }
 fn flameRamp(t: f32) -> vec3f {
   var c = mix(vec3f(0.5, 0.08, 0.02), vec3f(1.0, 0.45, 0.08), smoothstep(0.1, 0.35, t));
@@ -554,10 +677,17 @@ fn sampleDepth(uv: vec2f) -> f32 {
   let q = clamp(vec2i(flipUv(uv) * size), vec2i(0), vec2i(size) - vec2i(1));
   return textureLoad(uDepth, q, 0).r;
 }
-fn sampleThick(uv: vec2f) -> f32 {
+fn thickAll(uv: vec2f) -> vec4f {
   let size = vec2f(textureDimensions(uThick, 0));
-  let q = clamp(vec2i(flipUv(uv) * size), vec2i(0), vec2i(size) - vec2i(1));
-  return textureLoad(uThick, q, 0).r;
+  let p = flipUv(uv) * size - 0.5;
+  let i = vec2i(floor(p));
+  let f = fract(p);
+  let m = vec2i(size) - vec2i(1);
+  let a = textureLoad(uThick, clamp(i, vec2i(0), m), 0);
+  let b = textureLoad(uThick, clamp(i + vec2i(1, 0), vec2i(0), m), 0);
+  let c = textureLoad(uThick, clamp(i + vec2i(0, 1), vec2i(0), m), 0);
+  let d = textureLoad(uThick, clamp(i + vec2i(1, 1), vec2i(0), m), 0);
+  return mix(mix(a, b, f.x), mix(c, d, f.x), f.y);
 }
 fn viewPos(uv: vec2f, d: f32) -> vec3f {
   let r = uniform.uInvProj * vec4f(uv * 2.0 - 1.0, 1.0, 1.0);
@@ -633,7 +763,7 @@ fn fresnel(cosT: f32, f0: f32) -> f32 {
     if (dot(nV, P) > 0.0) { nV = -nV; }
     let n = normalize((uniform.uViewToToy * vec4f(nV, 0.0)).xyz);
     let V = -rd;
-    let thick = sampleThick(uv0);
+    let thick = thickAll(uv0).r;
     let off = nV.xy * uniform.uMisc.x * clamp(thick * 4.0, 0.0, 1.0);
     let behind = textureSampleLevel(uScene, uSceneSampler, flipUv(clamp(uv0 - off, vec2f(0.001), vec2f(0.999))), 0.0).rgb;
     let T = exp(-uniform.uAbsorb.rgb * thick);
@@ -643,9 +773,17 @@ fn fresnel(cosT: f32, f0: f32) -> f32 {
     let refl = sky(reflect(-V, n));
     let H = normalize(L + V);
     let spec = pow(max(dot(n, H), 0.0), 180.0) * 1.6;
-    let liq = mix(body, refl, F) + spec + uniform.uColor.rgb * uniform.uAbsorb.a;
+    var liq = mix(body, refl, F) + spec + uniform.uColor.rgb * uniform.uAbsorb.a;
+    // Bubbles inside: bright specks, tinted by the liquid around them.
+    let bub = clamp(thickAll(uv0).b * 1.2, 0.0, 1.0) * uniform.uFoam.w;
+    liq = mix(liq, mix(uniform.uColor.rgb, vec3f(1.0), 0.6) * (0.65 + 0.35 * max(dot(n, L), 0.0)) + vec3f(0.08), bub * 0.75);
     let a = clamp(thick * 60.0, 0.0, 1.0);
     col = mix(col, liq, a);
+  }
+  // Foam and spray over the liquid.
+  if (uniform.uFoam.w > 0.5) {
+    let fo = clamp(thickAll(uv0).g * 1.4, 0.0, 1.0);
+    col = mix(col, uniform.uFoam.rgb, fo);
   }
 
   if (tBack < 1e8) {
@@ -781,6 +919,7 @@ export class FluidSurface {
     this.sh = {
       depth: shader(device, "depth", SPRITE_VS, DEPTH_FS, SPRITE_VS_W, DEPTH_FS_W),
       thick: shader(device, "thick", SPRITE_VS, THICK_FS, SPRITE_VS_W, THICK_FS_W),
+      diff: shader(device, "diff", DIFF_VS, DIFF_FS, DIFF_VS_W, DIFF_FS_W),
       blur: shader(device, "blur", QUAD_VS, BLUR_FS, QUAD_VS_W, BLUR_FS_W),
       comp: shader(device, "comp", QUAD_VS, COMPOSITE_FS, QUAD_VS_W, COMPOSITE_FS_W),
     };
@@ -788,6 +927,9 @@ export class FluidSurface {
     this.thickPass = new SpritePass(device, this.sh.thick);
     this.thickPass.blendState = ADD;
     this.thickPass.depthState = pc.DepthState.NODEPTH;
+    this.diffPass = new SpritePass(device, this.sh.diff);
+    this.diffPass.blendState = ADD;
+    this.diffPass.depthState = pc.DepthState.NODEPTH;
     this.size = [0, 0];
     this.params = {
       color: [0.75, 0.87, 0.95, 0.0],
@@ -796,6 +938,7 @@ export class FluidSurface {
       glassA: [0, 0, 0, 0],
       glassB: [0, 0, 0, 0],
       refract: 0.035,
+      foam: [0.95, 0.96, 0.97],
     };
     this.stats = { ms: 0 };
   }
@@ -848,6 +991,7 @@ export class FluidSurface {
     this.depthPass.setClearDepth(1);
     this.thickPass.init(this.rtThick);
     this.thickPass.setClearColor(new pc.Color(0, 0, 0, 0));
+    this.diffPass.init(this.rtThick);
     this.blurH = quadPass(d, this.sh.blur, this.rtDepthB);
     this.blurV = quadPass(d, this.sh.blur, this.rtDepthA);
     this.comp = quadPass(d, this.sh.comp, null);
@@ -888,11 +1032,21 @@ export class FluidSurface {
       scope.resolve("uProj").setValue(proj.data);
       scope.resolve("uRadius").setValue(radius);
       scope.resolve("uFar").setValue(cam.farClip);
+      const projY = proj.data[5] * this.size[1] * 0.5;
+      scope.resolve("uMinPx").setValue([1.6, projY]);
       this.depthPass.count = count;
       this.depthPass.render();
       this.thickPass.count = count;
       this.thickPass.render();
-      const projY = proj.data[5] * this.size[1] * 0.5;
+      // Foam, spray and bubbles (grid units, as the liquid).
+      const df = src.diffuse;
+      if (df?.n) {
+        const k = toyScale * src.cell;
+        scope.resolve("uDiffuse").setValue(df.texture);
+        scope.resolve("uDiffR").setValue([0.3 * k, 0.55 * k, 0.22 * k, 0]);
+        this.diffPass.count = df.n;
+        this.diffPass.render();
+      }
       scope.resolve("uWorldR").setValue(radius * 2.2);
       scope.resolve("uProjY").setValue(projY);
       scope.resolve("uEdge").setValue(radius * 3);
@@ -918,15 +1072,21 @@ export class FluidSurface {
     scope.resolve("uGlassA").setValue(p.glassA);
     scope.resolve("uGlassB").setValue(p.glassB);
     scope.resolve("uMisc").setValue([p.refract, liquid ? 1 : 0, 0, 0]);
+    scope.resolve("uFoam").setValue([...p.foam, liquid && src.diffuse?.n ? 1 : 0]);
     // Up to two gas grids (gasscene.js: a flame's fine grid and the smoke's).
     const gases = src.gas || [];
-    for (const [k, name] of [[0, "uGas"], [1, "uGas2"]]) {
+    for (const [k, name] of [
+      [0, "uGas"],
+      [1, "uGas2"],
+    ]) {
       const gas = gases[k];
       scope.resolve(name).setValue(gas ? gas.grid.scalars : this.blankGas());
       scope.resolve(`${name}A`).setValue(gas ? [...gas.grid.lo, gas.grid.cell] : [0, 0, 0, 1]);
       scope.resolve(`${name}B`).setValue(gas ? [...gas.grid.dims, gas.grid.tilesX] : [1, 1, 1, 1]);
       scope.resolve(`${name}C`).setValue(gas ? [...gas.color, 1] : [0, 0, 0, 0]);
-      scope.resolve(`${name}D`).setValue(gas ? [gas.density, gas.flame, gas.steps, gas.light] : [0, 0, 0, 0]);
+      scope
+        .resolve(`${name}D`)
+        .setValue(gas ? [gas.density, gas.flame, gas.steps, gas.light] : [0, 0, 0, 0]);
     }
     this.comp.render();
     this.stats.ms = performance.now() - t0;
@@ -942,6 +1102,7 @@ export class FluidSurface {
     this.destroyTargets();
     this.depthPass.destroy();
     this.thickPass.destroy();
+    this.diffPass.destroy();
     for (const s of Object.values(this.sh)) s.destroy();
   }
 }

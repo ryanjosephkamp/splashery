@@ -97,7 +97,8 @@ fn sdCol(i: u32, p: vec3f) -> f32 {
     let outer = a.y + a.w;
     // solid = ring (inner..outer, 0..h) plus bottom disc (0..outer, 0..bottom)
     let dRing = max(max(inner - r, r - outer), max(-q.y, q.y - a.z));
-    let dBot = max(r - outer, max(-q.y, q.y - b.w));
+    // (the bottom reaches two cells below the base, so nothing leaks under)
+    let dBot = max(r - outer, max(-q.y - 2.0, q.y - b.w));
     return min(dRing, dBot);
   }
   if (t == 5u) {
@@ -326,13 +327,15 @@ export function packColliders(colliders, toGrid, s) {
       out[o] = 4;
       out[o + 1] = (c.radius ?? 0.3) * s;
       out[o + 2] = (c.height ?? 1) * s;
-      out[o + 3] = Math.max(1.2, (c.wall ?? 0.03) * s);
+      // At least three cells of wall: a thin wall lets particles through
+      // (the drawn glass keeps its own wall).
+      out[o + 3] = Math.max(3, (c.wall ?? 0.03) * s);
       out.set(at, o + 4);
       out[o + 7] = Math.max(1.2, (c.bottom ?? 0.05) * s);
     } else if (c.type === "bowl") {
       out[o] = 5;
       out[o + 1] = (c.radius ?? 0.5) * s;
-      out[o + 3] = Math.max(1.2, (c.wall ?? 0.03) * s);
+      out[o + 3] = Math.max(3, (c.wall ?? 0.03) * s);
       out.set(at, o + 4);
     } else continue;
     n++;
