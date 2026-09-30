@@ -148,7 +148,7 @@ design (edge 1.7).
 - **Fix PACKS.md suggests:** 7b, Fading by size makes speckle: denser, even splats with less size
   jitter; keep glow overlays bigger and fainter than the layer under them. Consider a sharper core.
 
-### 11. Lorenz attractor (`lorenz`, Maths) — total 5
+### 11. Lorenz attractor (`lorenz`, Math) — total 5
 
 Grain 2, soft 1, see-through 0, move –, read 2. Measured speck 1.97, edge 0.88. Thin curve speckle
 (measured 2.0).
@@ -365,7 +365,7 @@ Mean total per shelf (the higher, the more work), with the count of toys scoring
 | Tiny world       | 18   | 1.56       | 5                  |
 | Animals          | 13   | 1.54       | 3                  |
 | Open me          | 12   | 1.50       | 3                  |
-| Maths            | 16   | 1.50       | 5                  |
+| Math             | 16   | 1.50       | 5                  |
 | Medieval         | 9    | 1.44       | 3                  |
 | Nature           | 23   | 1.22       | 3                  |
 | Landmarks        | 16   | 1.13       | 0                  |
@@ -693,22 +693,22 @@ should be solid, and 9 of the 34 clipped toys have a move score of 2 or more.
 | Starfish (`starfish`)                           | Animals          | 0     | 0    | 0   | –    | 0    | 0     | 0.52  | 0.65 |                                                                                 |
 | Pufferfish (`pufferfish`)                       | Animals          | 0     | 0    | 0   | –    | 0    | 0     | 0.42  | 0.8  |                                                                                 |
 | Ladybug (`ladybug`)                             | Animals          | 0     | 0    | 0   | –    | 0    | 0     | 0.34  | 0.75 |                                                                                 |
-| Lorenz attractor (`lorenz`)                     | Maths            | 2     | 1    | 0   | –    | 2    | 5     | 1.97  | 0.88 | Thin curve speckle (measured 2.0)                                               |
-| Mandelbulb (`mandelbulb`)                       | Maths            | 2     | 1    | 0   | –    | 0    | 3     | 2.05  | 1.03 | Grain by design                                                                 |
-| Hypercube (`hypercube`)                         | Maths            | 1     | 0    | 0   | –    | 2    | 3     | 1.24  | 0.77 | Thin lines                                                                      |
-| Möbius strip (`mobius`)                         | Maths            | 1     | 2    | 0   | –    | 0    | 3     | 1.04  | 1.16 |                                                                                 |
-| Menger sponge (`menger-sponge`)                 | Maths            | 1     | 2    | 0   | –    | 0    | 3     | 0.69  | 1.19 | Soft edges (1.19) and hole grain                                                |
-| Surface plotter (`surface-plotter`)             | Maths            | 0     | 2    | 0   | –    | 0    | 2     | 0.19  | 1.46 | Soft surface edge (measured 1.46)                                               |
-| Sierpinski tetrahedron (`sierpinski`)           | Maths            | 1     | 0    | 0   | –    | 0    | 1     | 1.48  | 0.8  |                                                                                 |
-| Platonic solids (`platonic`)                    | Maths            | 0     | 1    | 0   | –    | 0    | 1     | 0.52  | 0.9  |                                                                                 |
-| Seashell spiral (`seashell-spiral`)             | Maths            | 1     | 0    | 0   | –    | 0    | 1     | 0.39  | 0.76 | Line noise                                                                      |
-| Pythagoras proof (`pythagoras-proof`)           | Maths            | 0     | 1    | 0   | –    | 0    | 1     | 0.34  | 1.01 |                                                                                 |
-| Fourier circles (`fourier-circles`)             | Maths            | 0     | 1    | 0   | –    | 0    | 1     | 0.27  | 0.88 |                                                                                 |
-| Klein bottle (`klein-bottle`)                   | Maths            | 0     | 0    | 0   | –    | 0    | 0     | 0.78  | 0.82 |                                                                                 |
-| Torus knot (`torus-knot`)                       | Maths            | 0     | 0    | 0   | –    | 0    | 0     | 0.44  | 0.77 |                                                                                 |
-| Circle and waves (`unit-circle`)                | Maths            | 0     | 0    | 0   | –    | 0    | 0     | 0.37  | 0.84 |                                                                                 |
-| Gyroid (`gyroid`)                               | Maths            | 0     | 0    | 0   | –    | 0    | 0     | 0.35  | 0.57 |                                                                                 |
-| Graph plotter (`graph-plotter`)                 | Maths            | 0     | 0    | 0   | –    | 0    | 0     | 0.23  | 0.79 |                                                                                 |
+| Lorenz attractor (`lorenz`)                     | Math             | 2     | 1    | 0   | –    | 2    | 5     | 1.97  | 0.88 | Thin curve speckle (measured 2.0)                                               |
+| Mandelbulb (`mandelbulb`)                       | Math             | 2     | 1    | 0   | –    | 0    | 3     | 2.05  | 1.03 | Grain by design                                                                 |
+| Hypercube (`hypercube`)                         | Math             | 1     | 0    | 0   | –    | 2    | 3     | 1.24  | 0.77 | Thin lines                                                                      |
+| Möbius strip (`mobius`)                         | Math             | 1     | 2    | 0   | –    | 0    | 3     | 1.04  | 1.16 |                                                                                 |
+| Menger sponge (`menger-sponge`)                 | Math             | 1     | 2    | 0   | –    | 0    | 3     | 0.69  | 1.19 | Soft edges (1.19) and hole grain                                                |
+| Surface plotter (`surface-plotter`)             | Math             | 0     | 2    | 0   | –    | 0    | 2     | 0.19  | 1.46 | Soft surface edge (measured 1.46)                                               |
+| Sierpinski tetrahedron (`sierpinski`)           | Math             | 1     | 0    | 0   | –    | 0    | 1     | 1.48  | 0.8  |                                                                                 |
+| Platonic solids (`platonic`)                    | Math             | 0     | 1    | 0   | –    | 0    | 1     | 0.52  | 0.9  |                                                                                 |
+| Seashell spiral (`seashell-spiral`)             | Math             | 1     | 0    | 0   | –    | 0    | 1     | 0.39  | 0.76 | Line noise                                                                      |
+| Pythagoras proof (`pythagoras-proof`)           | Math             | 0     | 1    | 0   | –    | 0    | 1     | 0.34  | 1.01 |                                                                                 |
+| Fourier circles (`fourier-circles`)             | Math             | 0     | 1    | 0   | –    | 0    | 1     | 0.27  | 0.88 |                                                                                 |
+| Klein bottle (`klein-bottle`)                   | Math             | 0     | 0    | 0   | –    | 0    | 0     | 0.78  | 0.82 |                                                                                 |
+| Torus knot (`torus-knot`)                       | Math             | 0     | 0    | 0   | –    | 0    | 0     | 0.44  | 0.77 |                                                                                 |
+| Circle and waves (`unit-circle`)                | Math             | 0     | 0    | 0   | –    | 0    | 0     | 0.37  | 0.84 |                                                                                 |
+| Gyroid (`gyroid`)                               | Math             | 0     | 0    | 0   | –    | 0    | 0     | 0.35  | 0.57 |                                                                                 |
+| Graph plotter (`graph-plotter`)                 | Math             | 0     | 0    | 0   | –    | 0    | 0     | 0.23  | 0.79 |                                                                                 |
 | Diffusion model (`diffusion-model`)             | AI and computing | 2     | 2    | 0   | –    | 2    | 6     | 0.28  | 1.39 | Noise field by design; soft edge 1.4; small label                               |
 | Word vectors (`word-vectors`)                   | AI and computing | 1     | 1    | 0   | –    | 2    | 4     | 0.36  | 0.86 | Small floating text                                                             |
 | Recurrent network (`rnn`)                       | AI and computing | 1     | 1    | 0   | –    | 2    | 4     | 0.1   | 1.14 | Small text on dark panel                                                        |
