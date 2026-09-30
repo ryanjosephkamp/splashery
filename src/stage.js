@@ -603,6 +603,21 @@ export class Stage {
     this.requestRender();
   }
 
+  // Lab r2: a toy whose splats are mostly faint (the splat field's galaxy)
+  // lowers the pick pass's alpha clip, so a tap on it still finds the toy.
+  // It only changes picking (and shadow and depth passes, unused here); every
+  // other toy keeps the engine's 0.3.
+  setPickAlpha(v) {
+    // Nothing to do (and the engine left alone) until a toy first asks.
+    if (!Number.isFinite(v) && this.pickAlphaDefault === undefined) return;
+    const g = this.app.scene.gsplat;
+    this.pickAlphaDefault ??= g.alphaClip;
+    const want = Number.isFinite(v) ? v : this.pickAlphaDefault;
+    if (g.alphaClip === want) return;
+    g.alphaClip = want;
+    this.requestRender();
+  }
+
   // Lane Sharpness: the render levers (src/sharpness.js); only adapt "drag"
   // is on by default, the rest are labs switches. null
   // (every lever off) leaves the renderer exactly as it was: nothing here is

@@ -109,6 +109,30 @@ peaches and tomatoes labels are painted over each scan's own shading by `tools/g
 labels are original designs drawn by that tool for Splashery, released as CC0; they copy no
 product's label.
 
+### Real objects: models baked into splats with moving parts (lane Real objects)
+
+Seven everyday objects made from real 3D models: a photogrammetry scan (the running shoe), detailed
+photoreal models (CC BY, from Sketchfab, downloaded through the Objaverse mirror on Hugging Face)
+and a Poly Haven model (CC0). Each license was checked on the model's live Sketchfab or Poly Haven
+page on September 29, 2026. `tools/ro-bake.mjs` samples each model into flat splats with the same
+converter as the Model to splats toy, and cuts it into the pieces its tap moves (the cap, the hood,
+the sleeves) with hard edges; `tools/ro-sources.mjs` lists each source and its cuts. Changes: the
+fountain pen's maker's marks are painted out and its cap moved onto the nib, the water bottle's cap
+moved onto its neck, the soda can wears an original plain label painted by the tool (released as
+CC0; no brand), the shoe's own bow and the hoodie's drawstrings and inside label are left out, and
+the spectacles' lenses are left out. The glass, the notepad, the coaster, the cap's stand, the
+laces, the drawstrings, the lenses, the ink, the water and the foam are kit-built.
+
+| Toy          | Model                                                                                                   | Author           | License                                                       |
+| ------------ | ------------------------------------------------------------------------------------------------------- | ---------------- | ------------------------------------------------------------- |
+| Fountain pen | [Fountain pen in translucent green](https://sketchfab.com/3d-models/af3606f31c4343859d887049a1908fb0)   | chemicalX        | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)     |
+| Water bottle | [Water bottle](https://sketchfab.com/3d-models/water-bottle-42827e2ce39145eda296e6d6524f4c3d)           | danny_p3d        | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)     |
+| Soda can     | [Soda Can](https://sketchfab.com/3d-models/soda-can-f3560f1b73a1498d9313a0f10fd11ef6)                   | RoutineStudio    | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)     |
+| Running shoe | [PB158 Sneaker Low](https://sketchfab.com/3d-models/pb158-sneaker-low-d1bb68aebb1b4532b026d8eb824d4c15) | SCANIMAT         | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)     |
+| Hoodie       | [Hoodie](https://sketchfab.com/3d-models/hoodie-97611a53e3b846f69e0655b210f72b2f)                       | Virtual Pandora  | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)     |
+| Sunglasses   | [Round Spectacles](https://polyhaven.com/a/round_spectacles)                                            | Sean Buckley     | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| Baseball cap | [Baseball Cap](https://sketchfab.com/3d-models/baseball-cap-1c1d34d73fd94e6b9e8f82b1eb7194a0)           | Scott VanArsdale | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)     |
+
 ## Procedural toys
 
 The Jelly blob, Donut, Neon knot and Tiny planet (a tribute to Splashery v1) are generated in the

@@ -966,6 +966,61 @@ export const TOY_SOUNDS = {
     off: { voice: "scrape", f: 1000, rate: 30, decay: 0.7, vol: 0.6 },
   },
 
+  // ---- Real objects (lane Real objects) ---------------------------------------------
+  // A cap click, the posted cap's click, a smooth nib scratch, and the cap clicking back on.
+  "fountain-pen": [
+    { voice: "click", f: 2600, vol: 0.9 },
+    { voice: "click", at: 1.08, f: 2100, vol: 0.8 },
+    { voice: "scrape", at: 1.62, f: 2400, rate: 26, decay: 2.3, vol: 0.18 },
+    { voice: "click", at: 3.97, f: 2600, vol: 0.9 },
+  ],
+  // The cap ratchets off, then a glug-glug pour that rises in pitch as the glass fills.
+  "water-bottle": [
+    { voice: "ratchet", f: 1900, n: 7, rate: 12, vol: 0.5 },
+    { voice: "gloop", at: 1.66, notes: "G2 A2 C3 D3 E3 G3", step: 0.17, decay: 0.45, vol: 0.55 },
+    { voice: "drip", at: 1.95, f: 700, n: 4, rate: 5, vol: 0.4 },
+    { voice: "ratchet", at: 4.05, f: 1700, n: 7, rate: 14, vol: 0.45 },
+  ],
+  // A rattle as it shakes, the sharp pssht of the can opening, then a fizz that dies away.
+  "soda-can": [
+    { voice: "rattle", f: 1600, n: 10, decay: 2.2, vol: 0.55 },
+    { voice: "crack", at: 0.93, f: 2600, vol: 0.7 },
+    { voice: "hiss", at: 0.95, f: 3200, decay: 0.9, vol: 0.55 },
+    { voice: "bubbles", at: 1.1, f: 900, n: 16, decay: 2.2, vol: 0.4 },
+    { voice: "sizzle", at: 1.3, f: 6000, decay: 1.5, vol: 0.25 },
+  ],
+  // Laces zipping through the eyelets, a soft tug as the bow pulls tight, two toe taps.
+  "running-shoe": [
+    { voice: "tear", f: 1100, to: 1.8, decay: 1.4, vol: 0.4 },
+    { voice: "tear", at: 1.05, f: 1300, to: 0.7, decay: 1.2, vol: 0.35 },
+    { voice: "slap", at: 2.72, f: 900, vol: 0.5 },
+    { voice: "thud", at: 3.34, f: 140, vol: 0.7 },
+    { voice: "thud", at: 3.84, f: 150, vol: 0.7 },
+  ],
+  // Soft fabric swishes as the hood flips and the sleeves swing, and a zip-like flick.
+  hoodie: [
+    { voice: "breath", f: 700, to: 0.6, decay: 0.8, vol: 0.5 },
+    { voice: "breath", at: 0.62, f: 900, to: 1.4, decay: 0.8, vol: 0.45 },
+    { voice: "tear", at: 1.2, f: 1600, to: 2.4, decay: 0.35, vol: 0.3 },
+    { voice: "whoosh", at: 1.25, f: 250, to: 4, decay: 1.1, vol: 0.35 },
+    { voice: "whoosh", at: 2.95, f: 300, to: 3, decay: 1.1, vol: 0.3 },
+  ],
+  // Two hinge clicks, a soft shimmer as the lenses darken, and two clicks as they unfold.
+  sunglasses: [
+    { voice: "click", at: 0.4, f: 3200, vol: 0.8 },
+    { voice: "click", at: 0.7, f: 2900, vol: 0.8 },
+    { voice: "shimmer", at: 1.35, f: "E6", decay: 0.8, vol: 0.35 },
+    { voice: "click", at: 2.95, f: 2900, vol: 0.7 },
+    { voice: "click", at: 3.2, f: 3200, vol: 0.7 },
+  ],
+  // A flick off the stand, the whoosh of the spin, a soft landing, and a second flip.
+  "baseball-cap": [
+    { voice: "slap", f: 1800, vol: 0.5 },
+    { voice: "whoosh", at: 0.35, f: 400, to: 5, decay: 1.6, vol: 0.4 },
+    { voice: "thud", at: 1.62, f: 180, vol: 0.5 },
+    { voice: "flutter", at: 1.95, f: 1500, decay: 0.9, vol: 0.25 },
+    { voice: "thud", at: 2.55, f: 170, vol: 0.45 },
+  ],
   // ---- Medieval ---------------------------------------------------------------------
   "sword-in-stone": {
     on: [
