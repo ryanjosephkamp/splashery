@@ -10,8 +10,8 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 317 toys. 317 have a tap action today; the other 0 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 314.
+- 322 toys. 322 have a tap action today; the other 0 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 319.
 - **more** (has an effect; make it clearer or more dramatic): 0.
 - **new** (needs its own effect): 3.
 - Visual fixes: 0 open, 30 done. Touch or drag interaction asked for: 4.
@@ -53,8 +53,8 @@ Proposals below are suggestions; the owner may change them.
   Tower of Pisa, Colosseum, Parthenon, Stonehenge, Big Ben, Taj Mahal, Castle, Pagoda, Windmill,
   Perceptron, Multilayer perceptron, Neural network, Convolutional network, Recurrent network,
   Transformer, Looped transformer, Diffusion model, Gradient descent, Gaussian splatting, Word
-  vectors, Sorting machine, Half adder, Your book, Photo album, Picture frame, Model to splats,
-  Splat field, Screen.
+  vectors, Sorting machine, Half adder, Turing machine, Difference engine, Enigma machine, Bombe,
+  Your book, Photo album, Picture frame, Model to splats, Photo to 3D, Splat field, Screen.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -1971,7 +1971,7 @@ Proposals below are suggestions; the owner may change them.
     (4 s).
   - Sound: Creaking sails and wind.
 
-## Computing (13)
+## Computing (17)
 
 - **Perceptron** (`perceptron`). Now: tap: Try an example. Plan: keep.
   - Owner: Approved on the Toy Ideas page (lane AI).
@@ -2109,6 +2109,49 @@ Proposals below are suggestions; the owner may change them.
   - Improved: AI: both switches flip to 1, light fills the wires into the XOR and AND gates; the XOR
     flashes and gives 0, the AND lights the carry lamp, and 1+1=10 shows (3.5 s).
   - Sound: Switch clicks, and a buzz through each gate.
+- **Turing machine** (`turing-machine`). Now: tap: Run the program. Plan: keep.
+  - Owner: Approved on the Toy Ideas page (lane Machines A).
+  - Effect: A tape of 0 and 1 tiles runs under a read-write head with a state lamp: the head reads,
+    flips tiles to write and the tape slides, following the rule card, until it halts with a bell.
+    Add one on your binary number; count up; the busy beaver (about 4.5 s).
+  - Improved: Machines A: 17 tile slots (each a solid tile that flips edge-on and back), the rule
+    card's row lit, a state lamp, a step counter and turning reels; programs Add one (each tap adds
+    one more, so it counts up), Busy beaver 2 and 3 states; your own binary number in the Toy tab
+    (about 4.5 s for 1011).
+  - Sound: A relay click as the head reads, a wooden clack as each tile flips, a short whir as the
+    tape slides, and a bell at the halt.
+- **Difference engine** (`difference-engine`). Now: tap: Turn the crank. Plan: keep.
+  - Owner: Approved on the Toy Ideas page (lane Machines A).
+  - Effect: Babbage's engine: columns of numbered wheels and a crank. Each turn adds every column
+    into its neighbor, the wheels click round, carries ripple up with levers, and the value column
+    shows the next value of your polynomial (about 4 s per turn).
+  - Improved: Machines A: X, P(X), Δ1, Δ2 and Δ3 columns of figure wheels (each a solid wheel read
+    through a window), two-phase addition staggered as in Babbage's design, carry levers that set
+    and knock back, the crank and a bell; each tap queues one more turn (4 s); your own polynomial
+    up to x³ and start value in the Toy tab.
+  - Sound: The ratchet of the crank, a brass click for each wheel step, a sharper snap for each
+    carry, and a small bell when a new result is ready.
+- **Enigma machine** (`enigma-machine`). Now: tap: Type the message. Plan: keep.
+  - Owner: The owner's own idea on the Toy Ideas page (lane Machines A).
+  - Effect: An Enigma cipher machine in its wooden box: tap and it types your message, each key
+    going down, the rotors stepping like an odometer and the coded letter lighting on the lampboard;
+    a second tap types the coded text back and gets the message again (about 4 s).
+  - Improved: Machines A: kit-built (no CC0 or CC BY scan found), rotors I, II, III with reflector B
+    and a plugboard (the historical wirings and double step), 26 keys and a moving lamp glow, the
+    operator's pad on the lid (coded letters in red, decoded in blue); your own message in the Toy
+    tab.
+  - Sound: Heavy key clacks, the ratchet of the rotors stepping, and a faint click as each lamp
+    lights.
+- **Bombe** (`bombe`). Now: tap: Start the search. Plan: keep.
+  - Owner: The owner's own idea on the Toy Ideas page (lane Machines A).
+  - Effect: The Bletchley Park codebreaking machine: rows of colored drums spin in their sets
+    through rotor settings, stop together on a possible setting and a lamp lights; then the coded
+    message reads out in plain text (about 5 s).
+  - Improved: Machines A: one bank of 12 drum sets (36 drums), a menu from a 12-letter crib, a real
+    search of all 17,576 settings (plugboard taken as known), the stop lamp, and a readout of the
+    setting and the plain text; your own message in the Toy tab.
+  - Sound: A dense clatter of spinning drums, a whirr of motors, and a sharp stop with a bell when a
+    setting is found.
 
 ## Pictures (5)
 
@@ -2177,7 +2220,7 @@ Proposals below are suggestions; the owner may change them.
     button.
   - Sound: The TV's click and hum; each style its own (a soft tone, the curtains' swish, a shimmer).
 
-## Studio (3)
+## Studio (4)
 
 - **Song landscape** (`song-landscape`). Now: tap: Play or pause the song. Plan: new effect (E6).
   - Owner: Approved on the Splashery Universe page (lane Studio Sound), September 29, 2026.
@@ -2202,6 +2245,20 @@ Proposals below are suggestions; the owner may change them.
     Poly Haven's vase).
   - Sound: A rising whoosh as the splats lift off, then four falling plucked notes as they settle
     back.
+- **Photo to 3D** (`photo-3d`). Now: tap: Raise or flatten the depth. Plan: keep.
+  - Owner: Approved on the Splashery Universe page ("photo yes", September 29, 2026; lane Photo to
+    3D; labs only).
+  - Effect: Your photo rebuilt as splats in 3D by an on-device depth model: each splat takes the
+    photo's color at its place and sits at its depth, and the surface is cut where the depth jumps,
+    so a near object stands as its own layer. The picture starts flat; the tap raises its depth
+    layer by layer while the toy sways (about 3 s), and a second tap lays it flat. Depth sets how
+    deep the relief is; Layers pulls the depth bands apart.
+  - Improved: Photo to 3D: Depth Anything V2 Small (Apache-2.0, quantized, 27 MB) on ONNX Runtime
+    Web (MIT), both loaded only when a photo is opened; an even grid of splats sized to their
+    neighbors on the same surface, cut at depth jumps; three CC0 samples (a forest path, a cobbled
+    street, a still life).
+  - Sound: A soft whoosh that rises as the depth comes up, with two glassy notes; a falling whoosh
+    as it lies flat.
 
 ## Lab (1)
 
