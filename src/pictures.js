@@ -13,6 +13,8 @@
 // - GIFs and videos use screen sheets: the splats are built once and take
 //   their colors from the sheet's own texture, which each new frame
 //   uploads.
+// - A PDF's words: pics.text(n) in the API reads a page's text layer, for
+//   the Toy tab's words box (to read, select, copy and find them).
 //
 // A recipe places sheets with k.sheet(...) and picks each one's page in
 // drive(): out.sheets[id] = { page, visible }. The pictures API is
@@ -210,6 +212,9 @@ export class Pictures {
         return !!sh && !!sh.want && sh.shown?.key === sh.want.key;
       },
       aspect: (n = this.page) => self.media?.aspect?.(n) ?? 0,
+      // A PDF page's words, from its text layer (the Toy tab's words box):
+      // a promise of a string, "" for a page without one or other media.
+      text: (n = this.page) => self.text(n),
       // A video's time and length (seconds), and a seek (lane Books, for
       // lane Screens); 0 for anything else.
       get time() {
@@ -294,6 +299,15 @@ export class Pictures {
       page: this.page,
       playing: m?.kind === "video" ? m.playing : false,
     };
+  }
+
+  // Page n's words (from 0), or "" when the media has no text layer (a
+  // picture, a video, a scanned page) or the page can't be read.
+  text(n = this.page) {
+    const m = this.media;
+    const i = Math.round(n);
+    if (!m?.text || !(i >= 0 && i < m.count)) return Promise.resolve("");
+    return m.text(i).catch(() => "");
   }
 
   // ---- Geometry -----------------------------------------------------------------------

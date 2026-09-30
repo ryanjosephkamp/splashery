@@ -599,6 +599,97 @@ textarea {
   margin: 0;
   overflow-wrap: anywhere;
 }
+/* The words on a PDF's page (its text layer): to read, select, copy and find. */
+.media-text-box {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+.media-text-box summary {
+  padding: 7px 10px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.media-text-box[open] summary {
+  border-bottom: 1px solid var(--line);
+}
+.media-text {
+  position: relative;
+  max-height: 40vh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 10px 12px;
+  background: var(--page);
+  color: var(--ink);
+  font-size: 14.5px;
+  line-height: 1.55;
+  overflow-wrap: break-word;
+  user-select: text;
+  -webkit-user-select: text;
+}
+.media-text p {
+  margin: 0 0 0.75em;
+}
+.media-text p:last-child {
+  margin-bottom: 0;
+}
+.media-text .note {
+  font-size: 13px;
+}
+.media-text mark,
+.media-found mark {
+  background: color-mix(in srgb, var(--accent) 20%, transparent);
+  color: inherit;
+  border-radius: 2px;
+  box-shadow: inset 0 -2px 0 var(--accent);
+}
+.media-text-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 10px 0;
+  border-top: 1px solid var(--line);
+}
+.media-text-tools .input-row {
+  flex: 1 1 200px;
+  min-width: 0;
+}
+.media-text-tools input[type="search"] {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 6px 10px;
+  background: var(--page);
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  font-size: 13px;
+}
+.media-text-box .media-find-note {
+  margin: 6px 10px 0;
+}
+.media-found {
+  display: grid;
+  gap: 4px;
+  max-height: 30vh;
+  overflow-y: auto;
+  margin: 6px 0 0;
+  padding: 0 10px;
+  list-style: none;
+}
+.media-found button {
+  width: 100%;
+  border-radius: 8px;
+  text-align: left;
+  white-space: normal;
+  font-family: var(--font-body);
+  line-height: 1.4;
+}
+.media-found-page {
+  font-weight: 600;
+}
+.media-text-box[open] {
+  padding-bottom: 10px;
+}
 /* A video's scrub bar (lane Books) */
 .input-media .media-scrub {
   align-items: center;

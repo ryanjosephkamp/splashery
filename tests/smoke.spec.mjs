@@ -1205,13 +1205,16 @@ test.describe("Sharpness and embeds (WebGL2)", () => {
   test.use({ reducedMotion: "reduce" });
 
   // Canvas backing pixels = CSS pixels x min(device pixel ratio, tier cap).
-  for (const [scale, tier, ratio] of [
-    [2, "high", 2],
-    [3, "mid", 2],
-    [3, "max", 3],
-    [3, "low", 1.5],
+  // The mid and high caps are 3 since September 29, 2026; ?sharp=0 puts back 2.
+  for (const [scale, tier, ratio, query] of [
+    [2, "high", 2, ""],
+    [3, "mid", 3, ""],
+    [3, "mid", 2, "&sharp=0"],
+    [3, "max", 3, ""],
+    [3, "low", 1.5, ""],
   ]) {
-    test(`the canvas renders at ${ratio}x on a ${scale}x screen at the ${tier} tier`, async ({
+    const how = query ? " with ?sharp=0" : "";
+    test(`the canvas renders at ${ratio}x on a ${scale}x screen at the ${tier} tier${how}`, async ({
       browser,
     }) => {
       const ctx = await browser.newContext({
@@ -1220,7 +1223,7 @@ test.describe("Sharpness and embeds (WebGL2)", () => {
         reducedMotion: "reduce",
       });
       const page = await ctx.newPage();
-      await page.goto(`/embed/?toy=blob&renderer=webgl2&profile=${tier}`);
+      await page.goto(`/embed/?toy=blob&renderer=webgl2&profile=${tier}${query}`);
       await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
       const size = () =>
         page.evaluate(() => {
@@ -1234,11 +1237,11 @@ test.describe("Sharpness and embeds (WebGL2)", () => {
         })
         .toBe(true);
       if (tier === "mid") {
-        // Slow frames while moving drop the ratio; the still view gets it back.
+        // Slow frames during a drag drop the ratio; the still view gets it back.
         const reduced = await page.evaluate(() => {
           const s = window.__splashery.player.stage;
           s.skipFrames = 0;
-          s.setBusy(true);
+          s.setBusy(true, true);
           for (let i = 0; i < 12; i++) s.timeFrame(40);
           return s.canvas.width / s.canvas.clientWidth;
         });
