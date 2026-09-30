@@ -6,7 +6,13 @@
 // speed however slow the renderer is.
 //
 //   python3 -m http.server 4173 --bind 127.0.0.1 &
-//   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/world-clip.mjs <out-dir> [--world=test-island] [--size=390x844] [--fps=10] [--dpr=2] [--scale=0.5] [--profile=mid] [--strip=8] [--before=http://127.0.0.1:4174/] walk landmark touch list character island ground props sky
+//   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/world-clip.mjs <out-dir> [--world=test-island] [--size=390x844] [--fps=10] [--dpr=2] [--scale=0.5] [--profile=mid] [--strip=8] [--before=http://127.0.0.1:4174/] [--modes] [--render=hybrid] walk landmark touch list character island ground props sky hybrid-walk hybrid-shore hybrid-shadows hybrid-sky hybrid-depth
+//
+// --modes records each scene twice, splats mode on the left and hybrid
+// mode on the right (?render=); --render= picks one mode for a plain clip.
+// --left=<query> --right=<query> [--labels=A,B] records any two variants
+// side by side (the character A/B: --left=&render=hybrid&character=splats
+// --right=&render=hybrid&character=mesh --labels=Splats,Mesh).
 //
 // Writes <out-dir>/wd-<name>.gif (and -strip.png with --strip). The
 // scenes are scripted below; each is a list of steps: walk with an input
@@ -36,6 +42,11 @@ const world = opt("world", "test-island");
 const profile = opt("profile", "mid");
 const stripN = Number(opt("strip", 0));
 const before = opt("before", "");
+const modes = args.includes("--modes");
+const render = opt("render", "");
+const left = opt("left", "");
+const right = opt("right", "");
+const labels = opt("labels", "A,B").split(",");
 
 // ---- Scenes ---------------------------------------------------------------------
 
@@ -111,6 +122,66 @@ const SCENES = {
   ],
   // The aerial view behind the start screen, without the screen.
   sky: [{ start: true, overview: true, hold: 5 }],
+
+  // Hybrid (lit models for the ground, water and sky; splats for the rest),
+  // recorded with --modes: the west beach walk.
+  "hybrid-walk": [
+    { place: [-26, -12, 10], camera: { distance: 5.2, pitch: 0.3 } },
+    { hold: 0.5 },
+    { move: { y: 1 }, secs: 3 },
+    { move: { y: 1 }, look: [-0.8, 0], secs: 2.4 },
+    { move: { y: 1, run: true }, secs: 1.6 },
+    { hold: 0.6 },
+  ],
+  // Water and sand up close: into the shallows and back out.
+  "hybrid-shore": [
+    { place: [-28, 1, 270], camera: { distance: 3.4, pitch: 0.34 } },
+    { hold: 0.5 },
+    { move: { y: 0.6 }, secs: 2.6 },
+    { look: [1.2, 0], secs: 1.8 },
+    { move: { y: -0.6 }, secs: 1.6 },
+    { hold: 0.6 },
+  ],
+  // The sun's shadows: the character and the props cast them.
+  "hybrid-shadows": [
+    { place: [-7, -1, 225], camera: { distance: 5.5, pitch: 0.62 } },
+    { hold: 0.5 },
+    { move: { y: 1 }, secs: 2.6 },
+    { move: { x: 1 }, secs: 1.8 },
+    { look: [1.1, 0], secs: 1.8 },
+    { hold: 0.6 },
+  ],
+  // A slow look round at the sky and the far hills.
+  "hybrid-sky": [
+    { place: [12, 14, 0], camera: { distance: 4.5, pitch: -0.12 } },
+    { hold: 0.4 },
+    { look: [Math.PI * 1.2, 0], secs: 6 },
+    { hold: 0.4 },
+  ],
+  // The character, the same walk (recorded with --left and --right): idle,
+  // a walk away, a walk across (its profile), a run, then it walks back
+  // toward the camera.
+  "hybrid-character": [
+    { place: [-4, 14, 180], camera: { distance: 3.4, pitch: 0.16 }, noCards: true },
+    { hold: 1.0 },
+    { move: { y: 1 }, secs: 2.0 },
+    { move: { x: 1 }, secs: 2.2 },
+    { move: { x: 1, run: true }, secs: 1.4 },
+    { move: { y: -1 }, secs: 1.6 },
+    { hold: 1.0 },
+  ],
+  // Depth, close up: a bush half behind a hill, then the character wading.
+  "hybrid-depth": [
+    { place: [-17.2, 0.8, 180], camera: { distance: 3.2, pitch: 0.08 } },
+    { hold: 0.4 },
+    { move: { y: 0.5 }, secs: 1.6 },
+    { hold: 0.4 },
+    { place: [-30.2, -2, 90], camera: { distance: 3, pitch: 0.22 } },
+    { hold: 0.4 },
+    { move: { y: -0.5 }, secs: 1.4 },
+    { look: [0.9, 0], secs: 1.6 },
+    { hold: 0.4 },
+  ],
   // The start screen over the wide view, the plain list, and "Go there".
   list: [
     { start: true, hold: 2.2 },
@@ -130,14 +201,14 @@ const browser = await chromium.launch({
 
 // Records a scene on the page at `url` (a Splashery root); returns its
 // frames. `tag` labels every frame ("Before", "After").
-async function record(scene, url, tag = null) {
+async function record(scene, url, tag = null, query = "") {
   const touch = scene.some((s) => s.touch);
   // Drawn at twice the size and shrunk, like a phone's sharp screen.
   const ctx = await browser.newContext({ viewport: { width: W, height: H }, deviceScaleFactor: dpr, hasTouch: touch, isMobile: touch }); // prettier-ignore
   const page = await ctx.newPage();
   page.on("pageerror", (e) => console.error("page error:", e.message));
   await page.goto(
-    `${url}worlds/?labs=1&renderer=webgl2&profile=${profile}&clock=manual&world=${world}`,
+    `${url}worlds/?labs=1&renderer=webgl2&profile=${profile}&clock=manual&world=${world}${query}`,
   );
   await page.waitForFunction(() => document.body.dataset.ready === "true", null, { timeout: 240_000 }); // prettier-ignore
   if (tag)
@@ -181,6 +252,8 @@ async function record(scene, url, tag = null) {
       }
     }, p);
   };
+  // noCards: landmark cards stay closed (the scene is about something else).
+  if (scene.some((s) => s.noCards)) await page.evaluate(() => (window.__world.page.openCard = () => {})); // prettier-ignore
   // A scene that shows the start screen enters only through its buttons.
   let started = scene.some((s) => s.start);
   for (const s of scene) {
@@ -268,9 +341,17 @@ async function record(scene, url, tag = null) {
 for (const name of names) {
   const scene = SCENES[name];
   if (!scene) throw new Error(`No scene "${name}" (${Object.keys(SCENES).join(", ")}).`);
-  let frames = await record(scene, base, before ? "After" : null);
-  // --before=<url>: the same scene on another build, side by side.
-  if (before) frames = sideBySide(await record(scene, before, "Before"), frames);
+  let frames;
+  if (left && right)
+    frames = sideBySide(await record(scene, base, labels[0], left), await record(scene, base, labels[1], right)); // prettier-ignore
+  else if (modes)
+    frames = sideBySide(await record(scene, base, "Splats", "&render=splats"), await record(scene, base, "Hybrid", "&render=hybrid")); // prettier-ignore
+  else {
+    const q = render ? `&render=${render}` : "";
+    frames = await record(scene, base, before ? "After" : null, q);
+    // --before=<url>: the same scene on another build, side by side.
+    if (before) frames = sideBySide(await record(scene, before, "Before", q), frames);
+  }
   const gif = GIFEncoder();
   const delay = Math.round(1000 / fps);
   for (const f of frames) {

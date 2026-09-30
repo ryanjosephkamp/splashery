@@ -114,7 +114,8 @@ export class Terrain {
   }
 
   // The ground's color at a point (h, n already known), with small variation.
-  colorAt(x, z, h, n, r) {
+  // `lit: false` leaves out the baked sunlight (hybrid mode's lit ground).
+  colorAt(x, z, h, n, r, { lit: bake = true } = {}) {
     const c = this.colors;
     const t = this.t;
     const w = this.water;
@@ -133,7 +134,7 @@ export class Terrain {
     col = mix(col, c.snow, smoothstep(t.snowLine - 0.5, t.snowLine + 0.5, h + v * 2));
     // Fake light from the sun: the kit's toys bake their shading the same way.
     const sun = this.sun || (this.sun = unit3([-0.45, 0.8, 0.35]));
-    const lit = 0.72 + 0.38 * Math.max(0, n[0] * sun[0] + n[1] * sun[1] + n[2] * sun[2]);
+    const lit = bake ? 0.72 + 0.38 * Math.max(0, n[0] * sun[0] + n[1] * sun[1] + n[2] * sun[2]) : 1; // prettier-ignore
     const j = (r() - 0.5) * 0.02;
     return [
       clamp(col[0] * lit + j, 0, 1),
@@ -194,13 +195,15 @@ export class Terrain {
   // Builds a chunk's ground splats at a level into a SplatBuffer.
   // Positions are relative to the chunk's corner (x0, water, z0), so the
   // numbers stay small; the renderer places the chunk there.
-  buildGround(chunk, level, { density = 1, grass = 1 } = {}) {
+  // `carpet: false` leaves out the ground itself and keeps the grass blades
+  // (hybrid mode draws the ground as a model).
+  buildGround(chunk, level, { density = 1, grass = 1, carpet = true } = {}) {
     const t = this.t;
     const L = TERRAIN_LEVELS[level];
     const d = L.density * density;
     const spacing = 1 / Math.sqrt(d);
     const C = chunk.size;
-    const cells = Math.max(1, Math.round(C / spacing));
+    const cells = carpet ? Math.max(1, Math.round(C / spacing)) : 0;
     const step = C / cells;
     const r = mulberry32(mixSeed(this.seed, `ground-${chunk.id}-${level}`));
     const blades = level === 0 ? Math.round(C * C * BLADES * grass) : 0;

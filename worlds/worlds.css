@@ -298,6 +298,13 @@ a {
   margin: 6px 0 12px;
 }
 
+.places-credits {
+  margin: 18px 0 4px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--muted, #5b6470);
+}
+
 .places-list {
   margin: 0;
   padding: 0 0 0 1.3em;
