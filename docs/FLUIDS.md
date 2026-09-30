@@ -282,6 +282,26 @@ The volume is ray-marched in the surface pass.
 | high | 44                        | 20                  | 45             |
 | max  | 56                        | 24                  | 60             |
 
+### Measured, r4
+
+`node tools/fl-gpu-physics.mjs --profile=mid` on September 30, 2026: the dam break of "Checked
+against physics" (a 2:1 water column in the same channel, real units) on the GPU solver, 32,000
+particles, against Martin and Moyce's Table 2 (front Z = x/a at time T = t√(2g/a)):
+
+| T    | Measured (1952) | GPU (r4) |
+| ---- | --------------- | -------- |
+| 1.19 | 1.44            | 1.24     |
+| 1.91 | 2.33            | 1.85     |
+| 2.58 | 3.22            | 2.61     |
+| 3.26 | 4.11            | 3.52     |
+| 3.92 | 5.00            | 4.51     |
+| 4.61 | 5.89            | 5.58     |
+| 5.32 | 6.76            | 6.64     |
+
+RMS difference 0.46 over all 13 points (the CPU solver: 1.23, about 63% as far by T = 5.3). The GPU
+front starts a little behind (the column needs a moment to collapse, as a real gate's lift does) and
+then runs at the measured speed, reaching 98% of the measured distance by T = 5.3.
+
 `?fluids=cpu` keeps the r3 path everywhere (the tests use it for the splat program on WebGPU).
 
 ## Limits and next steps
