@@ -115,6 +115,11 @@ export function normalizeCamera(c) {
     pitch: num(src.pitch, DEFAULT_CAMERA.pitch, -1.45, 1.45),
     roll: num(src.roll, 0, -Math.PI, Math.PI),
     distance: num(src.distance, DEFAULT_CAMERA.distance, 1.25, 10),
+    // UI r2: an optional pan (the view moved off the toy's center, in toy
+    // radii); scenes without it load centered, exactly as before.
+    ...(Array.isArray(src.pan) && src.pan.length === 3 && src.pan.every((v) => Number.isFinite(Number(v))) // prettier-ignore
+      ? { pan: src.pan.map((v) => round(num(v, 0, -1, 1), 4)) }
+      : {}),
   };
 }
 
