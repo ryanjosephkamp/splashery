@@ -137,6 +137,10 @@ Model: Opus 5.5 (claude-opus-5-5), default effort.
 
 ## Notes
 
+- **Latest main merge (September 30, 2026, evening).** Main's Worlds hybrid mode merged in; the
+  CREDITS.md conflict kept both sections, and the nucleus sample (Zenodo 7233696, CC BY 4.0, checked
+  on the live record) now has its own entry in CREDITS.md and `tools/assets.json`. After the merge,
+  `sci`, `kit`, `help` and `smoke` specs: 94 passed, 0 failed.
 - **Files.** `src/science/crystal.js` (CIF, mmCIF and PDB readers; the cell, U_cart = A·N·U·Nᵀ·Aᵀ,
   eigenvalues, the probability scale), `src/science/smlm.js` (zip entries inflated with
   `DecompressionStream("deflate-raw")`, .smlm tables, ThunderSTORM CSV), `src/science/field.js` (the
