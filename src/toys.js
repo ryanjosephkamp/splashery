@@ -1349,6 +1349,17 @@ export const TOYS = [
     tags: "salt diamond graphite ice crystal structure atoms chemistry",
   },
 
+  // ---- Pack: chemistry (lane Chemistry) ----
+  {
+    id: "periodic-table",
+    label: "Periodic table",
+    category: "atoms",
+    kind: "kit",
+    pack: "chemistry",
+    tags: "elements periodic table atom nucleus proton neutron electron shell spectrum emission line photon chemistry physics",
+    camera: { yaw: 0.1, pitch: 0.12, roll: 0, distance: 3.1 },
+  },
+
   // ---- Pack: gems ----
   // (entries for src/packs/gems.js go here)
   {

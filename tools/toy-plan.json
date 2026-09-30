@@ -915,6 +915,13 @@
       "sound": "Rippling ping.",
       "improved": "E2: a tap sends a wave of vibration (a phonon) through the crystal: a ripple runs across it from left to right, each slice of atoms rising and falling in turn with its bonds (3.8 s)."
     },
+    "periodic-table": {
+      "v": "keep",
+      "owner": "Lane Chemistry, from the owner's notes on the atoms toys (September 29, 2026).",
+      "effect": "Tap an element's tile and its atom rises out of the table and builds itself: every proton and neutron of its commonest isotope, then the electrons filling their shells in order. Tap the atom and an electron jumps up a shell and falls back with a flash in the element's strongest visible line (NIST).",
+      "sound": "A soft tile click and a rising shimmer as the shells fill (a note per shell), a bright ping for the photon.",
+      "improved": "Chemistry: all 118 elements in the standard layout, colored by family; the atom rises (5 s), a tap on it sends an electron up a shell and back (3.2 s), a tap on the table lowers it."
+    },
     "diamond": {
       "v": "keep",
       "owner": "Gems need effects.",
@@ -2035,7 +2042,7 @@
     "song-landscape": {
       "v": "new",
       "owner": "Approved on the Splashery Universe page (lane Studio Sound), September 29, 2026.",
-      "effect": "A song's real spectrogram as a landscape of splats; a tap plays the song while a glowing marker and the camera glide along it.",
+      "effect": "A song's real spectrogram as a landscape of splats; a tap plays the song while a glowing marker and the camera glide along it. View: Live scrolls the landscape with the music like a waterfall: the part playing now sits on a fixed line at the front, the next seconds come toward you, what has played fades away, and a row of caps rises with the loudness at the line.",
       "sound": "The song itself."
     },
     "anatomy-atlas": {
