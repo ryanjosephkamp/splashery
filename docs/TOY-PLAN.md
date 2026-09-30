@@ -2438,7 +2438,8 @@ Proposals below are suggestions; the owner may change them.
     mmCIF and PDB (ANISOU) readers; a GPU program (labs) moves each atom by its own U, sets the
     one-Gaussian look's exact shape, and magnifies about a focus with a clipping slab. Samples:
     aspirin form II at 300 K (COD 2104857, public domain) and crambin at 0.54 Å (PDB 1EJG, CC0).
-  - Sound: A soft rattle of tiny ticks over two glassy notes; two falling notes as the atoms settle.
+  - Sound: Quiet: a faint jostle of tiny taps under a soft breath as the atoms jiggle; a softer
+    breath as they settle.
 - **Super-resolution microscope** (`smlm-microscope`). Now: tap: Zoom in or out. Plan: keep.
   - Owner: The owner's question of September 29, 2026 (can splats be a real science tool?) and his
     answer "Science yes" (lane Science; labs only).
@@ -2450,7 +2451,8 @@ Proposals below are suggestions; the owner may change them.
     readers; tier budgets (84k to 392k localizations); a size floor so the whole field shows at any
     zoom. Sample: a 12 µm square of Christophe Leterrier's microtubules and clathrin record on
     ShareLoc.XYZ (CC BY 4.0, a subset).
-  - Sound: An objective's detent click and a rising whoosh; a falling whoosh zooming out.
+  - Sound: A microscope's focus knob turning smoothly as the view dives in, and turning back as it
+    zooms out.
 - **Galaxy in a box** (`galaxy-box`). Now: tap: Zoom in or out. Plan: keep.
   - Owner: The owner's question of September 29, 2026 (can splats be a real science tool?) and his
     answer "Science yes" (lane Science; labs only).
@@ -2462,4 +2464,5 @@ Proposals below are suggestions; the owner may change them.
     in a 40 × 12 × 40 kpc box round the galaxy from the CC BY 4.0 snapshot (FlatHUB), turns the disk
     face up and works out each temperature; the toy draws them approximately (not a column-density
     integral).
-  - Sound: A falling hiss over a low hum; a rising one coming back.
+  - Sound: Space is silent: a long, soft breath as the view glides in, and a lower one as it pulls
+    back.
