@@ -682,6 +682,19 @@ export class Kit {
 
   // ---- End of picture sheets ------------------------------------------------------
 
+  // ---- Fluids (lane Fluids) -----------------------------------------------------------
+  // A liquid, a gas (smoke, steam) or a flame, simulated while the toy is
+  // open (src/fluids/, docs/FLUIDS.md) and drawn as its own splats. In
+  // recipe coordinates; plain data only (it may go to a worker). drive()
+  // steers it through out.fluid[name]. Returns its index.
+  fluid(spec) {
+    const f = JSON.parse(JSON.stringify({ kind: "liquid", ...spec }));
+    f.name ||= `${f.kind}${(this.fluids || []).length}`;
+    (this.fluids ||= []).push(f);
+    for (const r of spec.reach || []) this.reach(r);
+    return this.fluids.length - 1;
+  }
+
   // Shapes.
   sphere(r = 0.8) {
     return sphereShape(r);

@@ -532,6 +532,66 @@ note numbers, velocity 0..1; `pedal` lists when the sustain pedal is down).
 - Keyboard voices in `src/voices.js`: `grand`, `upright`, `harpsichord`, `organ`, `synth` and
   `vibes`, each with `hold` (seconds the key is down; then the damper stops the note).
 
+## 5e. Fluids
+
+From lane Fluids (September 29, 2026; the design, the solvers and the measurements are in
+[FLUIDS.md](FLUIDS.md)). A kit toy can pour, splash, smoke and burn: `k.fluid(spec)` in `build`
+declares a liquid, a gas or a flame, simulated while the toy is open and drawn as its own splats
+(one per particle), sorted with the toy. The engine loads only when such a toy opens. Everything is
+in recipe coordinates, and a spec is plain data (it goes to a worker: no functions).
+
+```js
+build(k, o) {
+  const GLASS = { type: "glass", at: [0, 0, 0], radius: 0.32, height: 1, wall: 0.03, bottom: 0.05 };
+  k.fluid({ name: "glass", kind: "vessel", shape: GLASS, budget: 9000 }); // the glass itself
+  k.fluid({
+    name: "liquid", kind: "liquid", preset: "honey", // water, soda, syrup, honey, lava
+    unit: 0.33,              // meters per recipe unit (sets gravity), or gravity: 30
+    spacing: 0.048,          // particle size on the high tier
+    budget: 1800,            // particles on the high tier (the tiers scale it)
+    colliders: [GLASS, { type: "floor", y: 0 }],
+    fill: { cylinder: { at: [0, 0.05, 0], radius: 0.3, height: 0.3 } }, // or box, sphere; below, above
+    emitter: { at: [0, 1.7, 0], dir: [0, -1, 0], speed: 0.75, radius: 0.085 },
+  });
+  k.fluid({ name: "smoke", kind: "gas", look: "smoke", size: 0.035, life: 3.2, rise: 0.75, turbulence: 0.55, budget: 800, source: { at: [0, 1.3, 0], radius: 0.015, rate: 0 } }); // prettier-ignore
+  k.fluid({ name: "flame", kind: "flame", at: [0, 0.965, 0], height: 0.36, radius: 0.05, budget: 520, sparks: 0.25, smoke: "smoke" }); // prettier-ignore
+  k.reach([0, 2, 0]); // frame where the fluid goes
+}
+```
+
+- **Liquids** override any preset field: `viscosity` (0 water .. 0.9 lava), `cohesion`, `friction`,
+  `foam`, `fizz`, `glow`, `color`, `stretch` (how long a fast stream's splats are), `splat` (splat
+  size in particle sizes, 0.72).
+- **Gas**: `look` (`"smoke"` or `"steam"`), `color`, `opacity`, `size`, `life`, `rise`,
+  `turbulence`, `height` (where it turns turbulent), `source` (`at`, `radius`, `rate` per second,
+  `speed`, `on`).
+- **Flame**: `at` (the wick), `height`, `radius`, `life`, `sparks`, and `smoke` (a gas system's name
+  that gets its heat).
+- **Colliders**: `floor` (y), `box` (at, size), `sphere` (at, radius), `cylinder` (at, radius,
+  height), `glass` (an open-top glass or cup; `radius` inside), `bowl` (a half sphere; `at` its
+  rim's center). They don't move.
+- **Vessel**: `kind: "vessel"` with a `glass` collider as `shape` draws that glass with the view
+  (clear face-on, bright at its edges), which kit splats can't do. Use it for any glass the fluid is
+  seen through.
+
+`drive()` steers each system by name through `out.fluid` (set it every frame; leave a key out to
+leave it as it is):
+
+```js
+out.fluid = {
+  liquid: { on: c.pour > 0, flow: 1, at, dir, speed, drain: 0 }, // emitter; drain empties from the bottom
+  flame: { on: !blownOut, wind: [2.5, 0, 0] },
+  smoke: { once: { id: info.tap?.n ?? 0, do: "puff", count: 260 } }, // fires once per new id
+};
+```
+
+`once.do` is `"drop"` (a ball of liquid: `at`, `radius`, `vel`), `"puff"` (gas: `count`, `at`,
+`speed`), `"fill"` (`region`) or `"reset"`. The first id a system sees is only remembered, so an
+opened toy doesn't replay an old tap. Fluids work alongside parts and tokens (the Fluid lab's valve
+is a part); they follow the whole toy's move and turn, not a part's. A recipe with fluids should say
+`alive: true`. For crisp liquid, a labs toy can use `kernel: "sharp"`; smoke and flames look better
+with the Gaussian (the Fluid lab picks per scene with a getter).
+
 ## 6. Behaviours
 
 A behaviour moves each splat on the GPU, every frame. Set `kind` and `params: [a, b]` on a shape or
