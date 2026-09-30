@@ -468,6 +468,20 @@ export const TOY_SOUNDS = {
   // A ping as the wave passes each part of the lattice.
   "crystal-lattice": { voice: "glass", notes: "C6 E6 G6 C7", step: 0.55, at: 0.3, decay: 0.6 },
 
+  // Lane Chemistry. On: the tile's soft click and a rising shimmer as the
+  // atom builds (each shell's note and the photon's ping are cues from the
+  // recipe). Off: a soft falling hush as it sinks back into its tile.
+  "periodic-table": {
+    on: [
+      { voice: "click", f: 2400, vol: 0.6 },
+      { voice: "shimmer", at: 0.15, f: 880, to: 2, decay: 2.2, vol: 0.45 },
+    ],
+    off: [
+      { voice: "whoosh", f: 700, to: 0.4, decay: 0.9, vol: 0.45 },
+      { voice: "click", at: 0.85, f: 1600, vol: 0.5 },
+    ],
+  },
+
   // ---- Gems -------------------------------------------------------------------------
   diamond: [
     { voice: "glass", f: 3520, decay: 1.2, bright: 0.9 },
@@ -1371,6 +1385,20 @@ export const TOY_SOUNDS = {
     { voice: "ding", at: 2.0, f: "G6", decay: 0.8 },
     { voice: "switch", at: 2.88, f: 2200, vol: 0.7 },
   ],
+  // ---- Machines that compute (lane Machines A) ------------------------------------
+  // The start lever's relay; then drive() plays each step as it runs: a
+  // relay click as the feeler reads, a wooden clack as a tile flips, a
+  // short whir as the tape slides, and a bell at the halt.
+  "turing-machine": { voice: "switch", f: 1900, decay: 0.8, vol: 0.6 },
+  // The crank's catch; then drive() plays each turn: the ratchet, a brass
+  // click for each wheel step, a snap for each carry and a small bell.
+  "difference-engine": { voice: "click", f: 1100, decay: 0.7, vol: 0.5 },
+  // The operator's hand on the first key; then drive() plays each letter:
+  // a heavy key clack, the rotors' ratchet and a faint lamp click.
+  "enigma-machine": { voice: "wood", f: 330, decay: 0.4, vol: 0.4 },
+  // The motor switch; then drive() plays the drums' clatter and the motor's
+  // whirr, and a sharp stop with a bell when a setting is found.
+  bombe: { voice: "switch", f: 1200, decay: 1.2, vol: 0.7 },
 
   // ---- Pictures and pages (lane Pictures) -------------------------------------------
   // A page turning: a soft paper swish, then a light tap as it lands.

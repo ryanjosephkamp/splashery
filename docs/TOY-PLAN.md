@@ -10,8 +10,8 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 316 toys. 316 have a tap action today; the other 0 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 313.
+- 321 toys. 321 have a tap action today; the other 0 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 318.
 - **more** (has an effect; make it clearer or more dramatic): 0.
 - **new** (needs its own effect): 3.
 - Visual fixes: 0 open, 30 done. Touch or drag interaction asked for: 4.
@@ -36,24 +36,25 @@ Proposals below are suggestions; the owner may change them.
   Black hole, Star cluster, Ring nebula, Nebula, Spiral galaxy, Virus, Bacteriophage, Bacterium, Red
   blood cell, Neuron, Astrocyte, Animal cell, DNA, White blood cell, Microglia, Diatom, Pollen
   grain, Snowflake, Chromosome, Mitochondrion, Paramecium, Amoeba, Electron orbital, Atom, Molecule,
-  Protein, Crystal lattice, Diamond, Ruby, Emerald, Amethyst geode, Sapphire, Quartz cluster, Opal,
-  Crystal ball, Brain, Eye, Lungs, Tooth, Kidney, Anatomy atlas, Oak tree, Pine tree, Palm tree,
-  Cherry blossom, Maple tree, Bonsai, Weeping willow, Sunflower, Rose, Tulips, Daisies, Lotus,
-  Toadstool, Fern, Saguaro cactus, Coral reef, Pinecone, Acorns, Succulent, Bamboo, Pebbles, Kelp,
-  Lava lamp, Ice swan, Tornado, Rainbow, Iceberg, Waterfall, Ocean wave, Ice cream, Watermelon,
-  Cupcake, Lollipop, Candy cane, Macarons, Gummy bear, Pretzel, Croissant, Sushi, Taco, Coffee,
-  Apple, Bananas, Orange, Kiwi, Pineapple, Cherries, Grapes, Avocado, Building bricks, Rubber duck,
-  Newton's cradle, Puzzle cube, Kite, Chess set, Lorenz attractor, Möbius strip, Klein bottle,
-  Menger sponge, Hypercube, Torus knot, Gyroid, Mandelbulb, Seashell spiral, Graph plotter, Surface
-  plotter, Circle and waves, Fourier circles, Pythagoras proof, Splat equation, Heraldic shield,
-  Crown, Wizard's orb, Jellyfish, School of fish, Pufferfish, Nautilus, Snail, Octopus, Sea urchin,
-  Frog, Snowman, Fireworks, Decorated tree, Diya, Acoustic guitar, Snare drum, Xylophone, Toy piano,
-  Hot-air balloon, Bus, Jet airliner, Sailboat, Submarine, Bicycle, Eiffel Tower, Washington
-  Monument, Pyramids of Giza, Twisting supertall, Statue of Liberty, White House, Leaning Tower of
-  Pisa, Colosseum, Parthenon, Stonehenge, Big Ben, Taj Mahal, Castle, Pagoda, Windmill, Perceptron,
-  Multilayer perceptron, Neural network, Convolutional network, Recurrent network, Transformer,
-  Looped transformer, Diffusion model, Gradient descent, Gaussian splatting, Word vectors, Sorting
-  machine, Half adder, Your book, Photo album, Picture frame, Model to splats, Splat field, Screen.
+  Protein, Crystal lattice, Periodic table, Diamond, Ruby, Emerald, Amethyst geode, Sapphire, Quartz
+  cluster, Opal, Crystal ball, Brain, Eye, Lungs, Tooth, Kidney, Anatomy atlas, Oak tree, Pine tree,
+  Palm tree, Cherry blossom, Maple tree, Bonsai, Weeping willow, Sunflower, Rose, Tulips, Daisies,
+  Lotus, Toadstool, Fern, Saguaro cactus, Coral reef, Pinecone, Acorns, Succulent, Bamboo, Pebbles,
+  Kelp, Lava lamp, Ice swan, Tornado, Rainbow, Iceberg, Waterfall, Ocean wave, Ice cream,
+  Watermelon, Cupcake, Lollipop, Candy cane, Macarons, Gummy bear, Pretzel, Croissant, Sushi, Taco,
+  Coffee, Apple, Bananas, Orange, Kiwi, Pineapple, Cherries, Grapes, Avocado, Building bricks,
+  Rubber duck, Newton's cradle, Puzzle cube, Kite, Chess set, Lorenz attractor, Möbius strip, Klein
+  bottle, Menger sponge, Hypercube, Torus knot, Gyroid, Mandelbulb, Seashell spiral, Graph plotter,
+  Surface plotter, Circle and waves, Fourier circles, Pythagoras proof, Splat equation, Heraldic
+  shield, Crown, Wizard's orb, Jellyfish, School of fish, Pufferfish, Nautilus, Snail, Octopus, Sea
+  urchin, Frog, Snowman, Fireworks, Decorated tree, Diya, Acoustic guitar, Snare drum, Xylophone,
+  Toy piano, Hot-air balloon, Bus, Jet airliner, Sailboat, Submarine, Bicycle, Eiffel Tower,
+  Washington Monument, Pyramids of Giza, Twisting supertall, Statue of Liberty, White House, Leaning
+  Tower of Pisa, Colosseum, Parthenon, Stonehenge, Big Ben, Taj Mahal, Castle, Pagoda, Windmill,
+  Perceptron, Multilayer perceptron, Neural network, Convolutional network, Recurrent network,
+  Transformer, Looped transformer, Diffusion model, Gradient descent, Gaussian splatting, Word
+  vectors, Sorting machine, Half adder, Turing machine, Difference engine, Enigma machine, Bombe,
+  Your book, Photo album, Picture frame, Model to splats, Splat field, Screen.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -935,7 +936,7 @@ Proposals below are suggestions; the owner may change them.
     a little (5.2 s).
   - Sound: Gloopy ooze.
 
-## Atoms (5)
+## Atoms (6)
 
 - **Electron orbital** (`orbital`). Now: tap: Excite the electron. Plan: keep.
   - Owner: Chemistry toys need good effects.
@@ -974,6 +975,16 @@ Proposals below are suggestions; the owner may change them.
     across it from left to right, each slice of atoms rising and falling in turn with its bonds (3.8
     s).
   - Sound: Rippling ping.
+- **Periodic table** (`periodic-table`). Now: tap: Raise or lower the atom. Plan: keep.
+  - Owner: Lane Chemistry, from the owner's notes on the atoms toys (September 29, 2026).
+  - Effect: Tap an element's tile and its atom rises out of the table and builds itself: every
+    proton and neutron of its commonest isotope, then the electrons filling their shells in order.
+    Tap the atom and an electron jumps up a shell and falls back with a flash in the element's
+    strongest visible line (NIST).
+  - Improved: Chemistry: all 118 elements in the standard layout, colored by family; the atom rises
+    (5 s), a tap on it sends an electron up a shell and back (3.2 s), a tap on the table lowers it.
+  - Sound: A soft tile click and a rising shimmer as the shells fill (a note per shell), a bright
+    ping for the photon.
 
 ## Gems (9)
 
@@ -1960,7 +1971,7 @@ Proposals below are suggestions; the owner may change them.
     (4 s).
   - Sound: Creaking sails and wind.
 
-## Computing (13)
+## Computing (17)
 
 - **Perceptron** (`perceptron`). Now: tap: Try an example. Plan: keep.
   - Owner: Approved on the Toy Ideas page (lane AI).
@@ -2098,6 +2109,49 @@ Proposals below are suggestions; the owner may change them.
   - Improved: AI: both switches flip to 1, light fills the wires into the XOR and AND gates; the XOR
     flashes and gives 0, the AND lights the carry lamp, and 1+1=10 shows (3.5 s).
   - Sound: Switch clicks, and a buzz through each gate.
+- **Turing machine** (`turing-machine`). Now: tap: Run the program. Plan: keep.
+  - Owner: Approved on the Toy Ideas page (lane Machines A).
+  - Effect: A tape of 0 and 1 tiles runs under a read-write head with a state lamp: the head reads,
+    flips tiles to write and the tape slides, following the rule card, until it halts with a bell.
+    Add one on your binary number; count up; the busy beaver (about 4.5 s).
+  - Improved: Machines A: 17 tile slots (each a solid tile that flips edge-on and back), the rule
+    card's row lit, a state lamp, a step counter and turning reels; programs Add one (each tap adds
+    one more, so it counts up), Busy beaver 2 and 3 states; your own binary number in the Toy tab
+    (about 4.5 s for 1011).
+  - Sound: A relay click as the head reads, a wooden clack as each tile flips, a short whir as the
+    tape slides, and a bell at the halt.
+- **Difference engine** (`difference-engine`). Now: tap: Turn the crank. Plan: keep.
+  - Owner: Approved on the Toy Ideas page (lane Machines A).
+  - Effect: Babbage's engine: columns of numbered wheels and a crank. Each turn adds every column
+    into its neighbor, the wheels click round, carries ripple up with levers, and the value column
+    shows the next value of your polynomial (about 4 s per turn).
+  - Improved: Machines A: X, P(X), Δ1, Δ2 and Δ3 columns of figure wheels (each a solid wheel read
+    through a window), two-phase addition staggered as in Babbage's design, carry levers that set
+    and knock back, the crank and a bell; each tap queues one more turn (4 s); your own polynomial
+    up to x³ and start value in the Toy tab.
+  - Sound: The ratchet of the crank, a brass click for each wheel step, a sharper snap for each
+    carry, and a small bell when a new result is ready.
+- **Enigma machine** (`enigma-machine`). Now: tap: Type the message. Plan: keep.
+  - Owner: The owner's own idea on the Toy Ideas page (lane Machines A).
+  - Effect: An Enigma cipher machine in its wooden box: tap and it types your message, each key
+    going down, the rotors stepping like an odometer and the coded letter lighting on the lampboard;
+    a second tap types the coded text back and gets the message again (about 4 s).
+  - Improved: Machines A: kit-built (no CC0 or CC BY scan found), rotors I, II, III with reflector B
+    and a plugboard (the historical wirings and double step), 26 keys and a moving lamp glow, the
+    operator's pad on the lid (coded letters in red, decoded in blue); your own message in the Toy
+    tab.
+  - Sound: Heavy key clacks, the ratchet of the rotors stepping, and a faint click as each lamp
+    lights.
+- **Bombe** (`bombe`). Now: tap: Start the search. Plan: keep.
+  - Owner: The owner's own idea on the Toy Ideas page (lane Machines A).
+  - Effect: The Bletchley Park codebreaking machine: rows of colored drums spin in their sets
+    through rotor settings, stop together on a possible setting and a lamp lights; then the coded
+    message reads out in plain text (about 5 s).
+  - Improved: Machines A: one bank of 12 drum sets (36 drums), a menu from a 12-letter crib, a real
+    search of all 17,576 settings (plugboard taken as known), the stop lamp, and a readout of the
+    setting and the plain text; your own message in the Toy tab.
+  - Sound: A dense clatter of spinning drums, a whirr of motors, and a sharp stop with a bell when a
+    setting is found.
 
 ## Pictures (5)
 
@@ -2165,7 +2219,9 @@ Proposals below are suggestions; the owner may change them.
 - **Song landscape** (`song-landscape`). Now: tap: Play or pause the song. Plan: new effect (E6).
   - Owner: Approved on the Splashery Universe page (lane Studio Sound), September 29, 2026.
   - Effect: A song's real spectrogram as a landscape of splats; a tap plays the song while a glowing
-    marker and the camera glide along it.
+    marker and the camera glide along it. View: Live scrolls the landscape with the music like a
+    waterfall: the part playing now sits on a fixed line at the front, the next seconds come toward
+    you, what has played fades away, and a row of caps rises with the loudness at the line.
   - Sound: The song itself.
 - **Chladni plate** (`chladni-plate`). Now: tap: Bow the plate. Plan: new effect (E6).
   - Owner: Approved on the Splashery Universe page (lane Studio Sound), September 29, 2026.

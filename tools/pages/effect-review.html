@@ -133,19 +133,25 @@
     display: flex;
     flex-direction: column;
   }
+  /* The clip box takes each clip's own shape (square, landscape or a tall 390x844 phone clip), capped
+     at about three quarters of the screen's height, where the clip letterboxes instead. Never give
+     .clip a fixed aspect-ratio: a clip taller than the box then spills over the text and buttons
+     below it (fixed September 30, 2026; docs/OPERATING.md, "The Effect review page"). */
   .clip {
     background: var(--stage);
-    aspect-ratio: 1;
-    max-width: 100%;
-    display: grid;
-    place-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 120px;
+    overflow: hidden;
   }
   .clip img,
   .clip video {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
     display: block;
+    width: 100%;
+    height: auto;
+    max-height: min(76vh, 760px);
+    object-fit: contain;
   }
   .body {
     padding: 12px 14px 14px;
@@ -313,9 +319,9 @@
   <main id="list"><p class="msg">Loading the clips…</p></main>
 
   <footer id="status">
-    Clips are rendered in a headless browser at 320 pixels, so colours and sharpness are a little
-    softer than on a real screen. Lanes add their clips here as they finish them; a clip that has
-    been redone after your note is replaced by the new one.
+    Clips are rendered in a headless browser, most of them at phone size, so colors and sharpness
+    can look a little softer than on a real screen. Lanes add their clips here as they finish them;
+    a clip that has been redone after your note is replaced by the new one.
   </footer>
 </div>
 

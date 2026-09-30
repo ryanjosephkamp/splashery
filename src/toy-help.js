@@ -544,29 +544,35 @@ export const TOY_HELP = {
 
   // ---- Atoms ----------------------------------------------------------------------------
   orbital: {
-    howTo: "Tap it to excite the electron. Pick another orbital, or lobes, in the Toy tab.",
+    howTo: "Tap it to excite the electron. Pick any orbital up to 4f, or lobes, in the Toy tab.",
     about:
       "An electron does not circle the center of an atom like a planet. It spreads out as a cloud, called an orbital, that shows where it is most likely to be found. Orbitals come in set shapes: a ball, a dumbbell, a dumbbell with a ring, and more. The two colors show the two halves of the electron's wave.\n\nTap it and a tiny packet of light, a photon, comes in. The electron takes it in, jumps up to a bigger orbital and glows, then drops back with a flash and gives the light out again. This is how glowing gases give off light of their own colors.",
   },
   atom: {
-    howTo: "Tap it to speed up the electrons. Pick any of 44 elements in the Toy tab.",
+    howTo: "Tap it to speed up the electrons. Pick any of the 118 elements in the Toy tab.",
     about:
-      "Everything around you is made of atoms. Each one has a tiny heavy center, the nucleus, made of protons and neutrons, with electrons around it. The number of protons decides which element it is: carbon has 6, oxygen 8 and gold 79.\n\nThis model draws the electrons in rings called shells, an idea of Niels Bohr's from 1913; pick the Cloud style for a truer picture. Tap it and the electrons whirl faster until each shell blurs into a glowing ring, then slow down. The nucleus is tens of thousands of times smaller than the whole atom, which is mostly empty space.",
+      "Everything around you is made of atoms. Each one has a tiny heavy center, the nucleus, made of protons and neutrons, with electrons around it. The number of protons decides which element it is: carbon has 6, oxygen 8 and gold 79.\n\nThis model draws the electrons in rings called shells, an idea of Niels Bohr's from 1913; pick the Cloud style for a truer picture, or Every nucleon to see all its protons and neutrons. Tap it and the electrons whirl faster until each shell blurs into a glowing ring, then slow down. The nucleus is tens of thousands of times smaller than the whole atom, which is mostly empty space.",
   },
   molecule: {
     howTo: "Tap it to heat it up. Pick a molecule, or type your own, in the Toy tab.",
     about:
-      "A molecule is a group of atoms held together by chemical bonds. This one is a ball-and-stick model: each ball is an atom, colored by its element (carbon dark gray, hydrogen white, oxygen red, nitrogen blue), and each stick is a bond.\n\nIt starts as caffeine, C8H10N4O2, the stimulant in coffee and tea. The atoms always jiggle a little on their bonds, as real ones do; tap it to heat it up and they shake hard, the light hydrogens furthest, then it cools. In the Toy tab, pick another molecule, or type a name, a formula or a SMILES string (a way of writing a molecule on one line) to build your own.",
+      "A molecule is a group of atoms held together by chemical bonds. This one is a ball-and-stick model: each ball is an atom, colored by its element (carbon dark gray, hydrogen white, oxygen red, nitrogen blue), and each stick is a bond.\n\nIt starts as caffeine, C8H10N4O2, the stimulant in coffee and tea; the Toy tab has sugars, medicines, vitamins and DNA too. The atoms always jiggle a little on their bonds, as real ones do; tap it to heat it up and they shake hard, the light hydrogens furthest, then it cools. In the Toy tab, pick another molecule, or type a name, a formula or a SMILES string (a way of writing a molecule on one line) to build your own.",
   },
   protein: {
     howTo: "Tap it to pull it apart. Pick a protein, or open your own file, in the Toy tab.",
     about:
       "Proteins are the tiny machines of living things. Each is a long chain of building blocks called amino acids that folds up into its own shape: coils called helices, flat strands and loops. Hemoglobin carries oxygen in the blood, insulin helps control sugar, and a jellyfish protein, GFP, glows green.\n\nThese are real shapes from the Protein Data Bank, a free library of well over 200,000 structures that scientists share. Tap it to pull it apart into its pieces and put it back; in GFP the glowing part lights up while it is open. You can open any PDB or mmCIF file from the library in the Toy tab.",
   },
-  "crystal-lattice": {
-    howTo: "Tap to send a wave through it. Pick salt, diamond, graphite or ice in the Toy tab.",
+  "periodic-table": {
+    howTo:
+      "Tap an element to build its atom. Tap the atom to make it glow; tap the table to lower it.",
     about:
-      "In a crystal, atoms are lined up in a pattern that repeats over and over, like tiles on a floor. In table salt, sodium and chlorine take turns in rows of little cubes. Diamond and graphite are both pure carbon: in diamond each atom holds on to four others, which makes it very hard, while graphite's flat sheets slide apart, which is why a pencil writes.\n\nTap it to send a wave through it: a ripple runs across, each slice of atoms rising and falling in turn. Sound and heat travel through solids as waves like this. In ice, the water molecules spread out into an open pattern, so ice floats on water.",
+      "The periodic table lists all 118 elements in order of their protons, in rows that repeat their chemistry: each column's elements behave alike. The colors are the families, from the alkali metals on the left to the noble gases on the right.\n\nTap an element and its atom rises and builds itself: the protons (red) and neutrons (gray) of its commonest isotope, then the electrons, filling their shells in the real order. Tap the atom and an electron jumps up a shell and falls back, giving off light the color of the element's brightest visible line: red for hydrogen, yellow for sodium, green for copper. Elements with no visible line measured flash white. Numbers from NIST, PubChem and IUPAC.",
+  },
+  "crystal-lattice": {
+    howTo: "Tap to send a wave through it. Pick one of eleven crystals in the Toy tab.",
+    about:
+      "In a crystal, atoms are lined up in a pattern that repeats over and over, like tiles on a floor. In table salt, sodium and chlorine take turns in rows of little cubes. Diamond and graphite are both pure carbon: in diamond each atom holds on to four others, which makes it very hard, while graphite's flat sheets slide apart, which is why a pencil writes.\n\nTap it to send a wave through it: a ripple runs across, each slice of atoms rising and falling in turn. Sound and heat travel through solids as waves like this. In ice, the water molecules spread out into an open pattern, so ice floats on water. Metals, quartz and graphene are in the Toy tab too.",
   },
 
   // ---- Gems -----------------------------------------------------------------------------
@@ -1381,6 +1387,29 @@ export const TOY_HELP = {
     about:
       "A half adder is a tiny circuit that adds two bits, binary digits that are each 0 or 1. It uses two logic gates: an XOR gate gives the sum bit, which is 1 when exactly one input is 1, and an AND gate gives the carry bit, which is 1 when both are. Two half adders make a full adder, and a chain of full adders lets a computer add numbers of any size.\n\nTap it: switches A and B flip to 1, and light runs along the wires into the gates. The XOR gives 0, so the sum lamp stays dark, and the AND lights the carry lamp. The board reads 1 + 1 = 10, which is two in binary. Then the switches flip back.",
   },
+  // ---- Machines that compute (lane Machines A) ----
+  "turing-machine": {
+    howTo: "Tap it to run the program on the tape. Type your own number in the Toy tab.",
+    about:
+      "In 1936 the mathematician Alan Turing imagined the simplest possible computer: a long tape of squares, a head that reads and writes one square at a time, and a short table of rules. Each rule says: in this state, reading this symbol, write this, move left or right, and switch to that state. Anything a modern computer can work out, a machine like this can too, given enough tape and time.\n\nTap it: the head reads a tile, flips it to write, and the tape slides, following the lit row of the rule card, until the machine halts with a bell. Add one turns 1011 into 1100 as the carry ripples left; tap again to count on. The busy beavers write as many 1s as a machine of their size can and still halt.",
+  },
+  "difference-engine": {
+    howTo:
+      "Tap to turn the crank once; tap again to keep cranking. Type your own polynomial in the Toy tab.",
+    about:
+      "Charles Babbage designed his Difference Engine No. 2 in the 1840s to print mathematical tables without human mistakes. It was never built in his lifetime. In 1991, a team at a museum in London finished its calculating section from his drawings, and it worked. It uses the method of differences: for a polynomial, the differences between neighboring values settle into a pattern, so each new value needs nothing but addition.\n\nTap it: the crank turns, each difference is added into its neighbor, the wheels click round, and carries ripple up with little levers. For n², the value column shows 1, 4, 9, 16 and 25 in turn. Type your own polynomial, up to x³, and pick the starting x.",
+  },
+  "enigma-machine": {
+    howTo:
+      "Tap to type your message in code; tap again to decode it. Type your own message in the Toy tab.",
+    about:
+      "The Enigma was a cipher machine that German forces used to keep radio messages secret in World War II. Each key press steps the rotors on like an odometer, and an electric current runs through the plugboard, three wired rotors and a reflector, lighting a different letter on the lampboard. Because the rotors keep turning, the same letter comes out differently each time. Polish mathematicians first broke it in 1932.\n\nTap it: each key goes down, the rotors step (with the middle rotor's real double step), and the coded letter lights up and is written on the pad. Tap again: the coded letters, typed from the same start, give your message back. It uses the historical wirings of rotors I, II and III and reflector B.",
+  },
+  bombe: {
+    howTo: "Tap it to search for the Enigma setting. Type a message to break in the Toy tab.",
+    about:
+      "The Bombe was the codebreaking machine of Bletchley Park in England. Alan Turing designed it in 1939, building on a Polish machine, and Gordon Welchman added the diagonal board that made it far faster. Its rows of drums copy Enigma rotors. From a crib, a few words the codebreakers guessed were in a message, it tried rotor settings at great speed and stopped when the logic held. About 200 were built, run day and night mostly by members of the Women's Royal Naval Service, the Wrens.\n\nTap it: the drums spin through the settings, stop, and the lamp lights; then the message reads out. Simplified here: the plugboard is taken as known, and the drums turn far slower than the real ones.",
+  },
 
   // ---- Pictures and pages ---------------------------------------------------------------
   "picture-lab": {
@@ -1419,9 +1448,9 @@ export const TOY_HELP = {
   },
   "song-landscape": {
     howTo:
-      "Tap to play the song and watch its sound rise as a landscape. Open your own song in the Toy tab.",
+      "Tap to play the song as a landscape. View: Live scrolls it with the music. Open your own song in the Toy tab.",
     about:
-      "A song is a wave, but you can also see what it is made of. This toy cuts the sound into short slices, measures how loud each pitch is in every slice (a short-time Fourier transform) and stands the answer up as a landscape of splats: time runs away from you, pitch runs across from low to high, and loudness is height.\n\nTap to play it: a glowing line and the camera glide along the landscape in time with the music. Open a song of your own in the Toy tab; it is read on your device and never uploaded. Long songs make longer, coarser landscapes.",
+      "A song is a wave, but you can also see what it is made of. This toy cuts the sound into short slices, measures how loud each pitch is in every slice (a short-time Fourier transform) and stands the answer up as a landscape of splats: time runs away from you, pitch runs across from low to high, and loudness is height.\n\nTap to play it: a glowing line and the camera glide along the landscape in time with the music. View: Live turns it into a scrolling waterfall like an audio tool's: the part playing now sits on a line at the front, the next seconds come toward you from the back, what has played fades away, and a row of small caps rises with the loudness at the line. Open a song of your own in the Toy tab; it is read on your device and never uploaded. Long songs make longer, coarser landscapes.",
   },
 
   "model-splats": {

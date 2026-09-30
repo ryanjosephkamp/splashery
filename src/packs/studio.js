@@ -21,7 +21,7 @@ import { spectrogram, landscapePlan, toMono, DB_FLOOR, F_MIN, F_MAX } from "./st
 // A flat, smooth sheet of splats facing up: two staggered lattices of flat
 // discs that overlap, so it reads as a solid surface (not a grid of dots).
 // `cells` is the number of splats to spend; color(x, z) gives each one's color.
-function sheet(k, { x0, x1, z0, z1, y, cells, color, part = 0, opacity = 1 }) {
+function sheet(k, { x0, x1, z0, z1, y, cells, color, part = 0, opacity = 1, extra = null }) {
   const w = x1 - x0;
   const d = z1 - z0;
   const gx = Math.max(4, Math.round(Math.sqrt((cells / 2) * (w / d))));
@@ -35,7 +35,7 @@ function sheet(k, { x0, x1, z0, z1, y, cells, color, part = 0, opacity = 1 }) {
       for (let j = 0; j < gz - layer; j++) {
         const x = x0 + (i + 0.5 + layer * 0.5) * sx;
         const z = z0 + (j + 0.5 + layer * 0.5) * sz;
-        list.push({ p: [x, y, z], n: [0, 1, 0], flat: 0.02, size, opacity, color: color(x, z), part, pattern: false }); // prettier-ignore
+        list.push({ p: [x, y, z], n: [0, 1, 0], flat: 0.02, size, opacity, color: color(x, z), part, pattern: false, ...(extra ? extra(x, z) : null) }); // prettier-ignore
       }
   k.cloud({ share: list.length / k.count, pattern: false }, (rand, i) => list[i] || null);
 }
@@ -287,6 +287,13 @@ const CHLADNI = {
 // point of the song is the top and DB_RANGE below it is the floor. Along the
 // left edge runs the song's waveform, and a glowing marker line glides along
 // the time axis while the song plays.
+//
+// View: Live (lane Song live). The landscape scrolls like an audio tool's waterfall while
+// the song plays: the whole landscape slides toward you as one solid piece, so the part
+// playing now sits on a fixed line at the front and the next seconds come toward you from
+// the back. What has played fades away as it crosses the line (the fade kind, driven by
+// morph channel 0 = how far through the song). Loud bands rise at the line: 48 small
+// caps (tokens) ride the loudness the song has at that moment.
 
 export const DB_RANGE = 45;
 const W = 2; // width (pitch axis)
@@ -436,6 +443,16 @@ const SONG_LANDSCAPE = {
         { id: "loudness", label: "Loudness (dark to bright)" },
       ],
     },
+    {
+      key: "view",
+      label: "View",
+      type: "select",
+      default: "whole",
+      choices: [
+        { id: "whole", label: "Whole song" },
+        { id: "live", label: "Live (scrolls with the music)" },
+      ],
+    },
     { key: "song", label: "Song", type: "text", default: "sample", hidden: true },
     { key: "songName", label: "Song name", type: "text", default: "", hidden: true },
   ],
@@ -489,6 +506,23 @@ const SONG_LANDSCAPE = {
     }
     const pos = playStep(g.song, info.sound, PLAY.want, info.time);
     const f = clamp01(pos / g.song.duration);
+    if (g.live) {
+      // Live: the whole landscape slides toward you as one piece, by exactly as far as the song
+      // has gone, so the part playing now stays on the fixed line at the front. The marker and
+      // the loudness caps stay on that line (they move back by what the landscape moved).
+      out.body = { offset: [0, 0, (f * g.D * g.fit) / (info.R || 1)] };
+      out.morph = [f, 0, 0, 0]; // channel 0 clears what has played
+      out.parts.marker = { offset: [0, 0, -f * g.D] };
+      const tt = f * g.nt - 0.5;
+      const t0 = Math.floor(tt);
+      const u = tt - t0;
+      out.tokens = g.caps.map((cap) => {
+        let h = 0;
+        for (let b = cap.f0; b < cap.f1; b++) h = Math.max(h, (1 - u) * g.hAt(t0, b) + u * g.hAt(t0 + 1, b)); // prettier-ignore
+        return { offset: [0, h * H, -f * g.D] };
+      });
+      return;
+    }
     // The marker glides along the time axis (from near to far), and the view
     // follows it: the whole landscape slides toward you by half as far as the
     // marker goes, so the marker sweeps only half the landscape's length on
@@ -526,6 +560,10 @@ const SONG_LANDSCAPE = {
     const hAt = (t, f) => d.height[Math.min(nt - 1, Math.max(0, t)) * nf + Math.min(nf - 1, Math.max(0, f))]; // prettier-ignore
     // The landscape's splats: the top of every cell, and (for a cell that rises)
     // one or two lower down, so a ridge seen from the side is a wall.
+    const live = o.view === "live";
+    // Live: what has played clears as it crosses the front line, over about a second and a half.
+    const FADE = Math.min(0.12, 1.5 / d.duration);
+    const gone = (tf) => (live ? { kind: "fade", params: [clamp01(tf), FADE], channel: 0 } : null);
     const cells = [];
     for (let t = 0; t < nt; t++)
       for (let f = 0; f < nf; f++) {
@@ -547,10 +585,11 @@ const SONG_LANDSCAPE = {
             flat: 0.05,
             opacity: 0.98,
             part: 0,
+            ...gone((t + 0.5) / nt),
           });
         }
       }
-    sheet(k, { x0: -W / 2 - 0.08, x1: W / 2 + 0.08, z0: -D / 2 - 0.08, z1: D / 2 + 0.08, y: -0.005, cells: k.count * 0.08, color: () => "#2a303a" }); // prettier-ignore
+    sheet(k, { x0: -W / 2 - 0.08, x1: W / 2 + 0.08, z0: -D / 2 - 0.08, z1: D / 2 + 0.08, y: -0.005, cells: k.count * 0.08, color: () => "#2a303a", extra: live ? (xx, zz) => gone((D / 2 - zz) / D) : null }); // prettier-ignore
     const share = Math.min(0.85, cells.length / k.count);
     k.cloud({ share, pattern: false }, (rand, i) => cells[i] || null);
     // The waveform runs along the left edge: the song's swing (from where
@@ -568,8 +607,8 @@ const SONG_LANDSCAPE = {
       const zz = D / 2 - ((t + 0.5) / wave.length) * D;
       const a = (wave[t] / wmax) * 0.3;
       for (const sgn of [1, -1])
-        wcells.push({ p: [-W / 2 - 0.18, 0.4 + sgn * a, zz], color: "#d9a520", size: sizeOf(cd * 3), opacity: 1, part: 0, pattern: false }); // prettier-ignore
-      wcells.push({ p: [-W / 2 - 0.18, 0.4, zz], color: "#8a93a6", size: sizeOf(cd * 2), opacity: 1, part: 0, pattern: false }); // prettier-ignore
+        wcells.push({ p: [-W / 2 - 0.18, 0.4 + sgn * a, zz], color: "#d9a520", size: sizeOf(cd * 3), opacity: 1, part: 0, pattern: false, ...gone((D / 2 - zz) / D) }); // prettier-ignore
+      wcells.push({ p: [-W / 2 - 0.18, 0.4, zz], color: "#8a93a6", size: sizeOf(cd * 2), opacity: 1, part: 0, pattern: false, ...gone((D / 2 - zz) / D) }); // prettier-ignore
     }
     k.cloud({ share: wcells.length / k.count, pattern: false }, (rand, i) => wcells[i] || null);
     // The marker: a glowing line across the landscape at the start of the song.
@@ -581,12 +620,30 @@ const SONG_LANDSCAPE = {
       if (i % 4 === 0) mk.push({ p: [xx, 0.5 * H, D / 2], color: "#ffe680", size: 0.9, opacity: 0.55, part: marker, pattern: false }); // prettier-ignore
     }
     k.cloud({ share: mk.length / k.count, pattern: false }, (rand, i) => mk[i] || null);
+    // Live: the loudness caps. The bands are pooled into up to 48 groups (one token each); a cap is a
+    // short bright bar across its group, built on the floor at the front line and lifted by drive to
+    // the height the song has there, so the loud bands rise at the line as they play.
+    const caps = [];
+    if (live) {
+      const nc = Math.min(48, nf);
+      for (let i = 0; i < nc; i++) caps.push({ f0: Math.floor((i * nf) / nc), f1: Math.floor(((i + 1) * nf) / nc) }); // prettier-ignore
+      const cx = (i) => (x(caps[i].f0) + x(caps[i].f1 - 1)) / 2;
+      const capW = (W / nc) * 1.05;
+      const items = [];
+      caps.forEach((cap, i) => {
+        for (let j = 0; j < 4; j++) {
+          const xx = cx(i) + ((j + 0.5) / 4 - 0.5) * capW;
+          items.push({ p: [xx, 0.03, D / 2], n: [0, 1, 0], color: "#fff6c8", size: sizeOf(capW / 4) * 1.15, flat: 0.05, opacity: 1, kind: "token", params: [i, 0], pattern: false }); // prettier-ignore
+        }
+      });
+      k.cloud({ share: items.length / k.count, pattern: false }, (rand, i) => items[i] || null);
+    }
     k.reach([0, H + 0.2, -D / 2 - 0.1]);
     // The fit's scale (src/kit.js scales the toy to a sphere of radius 0.95
     // about its middle), so drive can turn recipe lengths into toy lengths.
     const yTop = H + 0.2;
     const rmax = Math.hypot(W / 2 + 0.18, (yTop + 0.035) / 2, D / 2 + 0.1);
-    k.data = { song: { song, D, nf, nt, top: d.top, fit: 0.95 / rmax } };
+    k.data = { song: { song, D, nf, nt, top: d.top, fit: 0.95 / rmax, live, caps, hAt } };
   },
 };
 

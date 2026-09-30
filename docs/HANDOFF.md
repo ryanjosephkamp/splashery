@@ -4,7 +4,7 @@ Where Splashery stands, in short. The Operator session keeps this file; each lan
 in [handoff/](handoff/). The ground rules are in [CLAUDE.md](../CLAUDE.md); how the parallel lanes
 work is in [OPERATING.md](OPERATING.md).
 
-## State of main (2026-09-29)
+## State of main (2026-09-30)
 
 - Phases A to E4 are merged: A (splashery PR #13, homepage PR #33 in
   `ryanjosephkamp/ryanjosephkamp.github.io`), B (#17), C1 (#18), C2 (#19), D (#20), E1 (#21), E1b
@@ -104,6 +104,11 @@ work is in [OPERATING.md](OPERATING.md).
   Operator merging by tiers (CLAUDE.md, "Pull requests"). Weapons: historical, fantasy and sci-fi
   only, never aimed at people or animals. Splashery doesn't police what people open; the terms of
   use say they're responsible.
+- Early on September 30, 2026 (UTC) six PRs merged after two combined runs: the sharper rendering
+  default (#107 and the Operator's #118, from the owner's "sharp yes"; `?sharp=0` for the old look),
+  the text layer for PDF toys (#120), Chemistry (#100), Machines A (#102) and Song live (#119). The
+  Sound Board and Help Board were rebuilt for the owner's sound review. The Effect review page now
+  keeps each clip's own shape (live; its source change is the Operator's #124).
 - Locked (owner approved, do not change its look or behaviour): the laptop. Its smoke test guards
   it.
 
@@ -116,12 +121,9 @@ The full table, with owned files, sessions, branches and PRs, is [WORKSTREAMS.md
 | Operator                                                     | Running; runs the lanes                                                                                                        | —                                                |
 | Worlds r2 and hybrid: a sharper island, then a hybrid one    | Running, Opus 5.5 (r2 #108; the hybrid round from the owner's "Hybrid yes")                                                    | [handoff/Worlds.md](handoff/Worlds.md)           |
 | Pianos: pianos and songs                                     | Running, Opus 5.5 (September 29, 2026)                                                                                         | [handoff/Pianos.md](handoff/Pianos.md)           |
-| Sharpness: grain out of the renderer                         | Stood down, Opus 5.5; #107 and the Operator's #118 (the new default) wait for a combined run                                   | [handoff/Sharpness.md](handoff/Sharpness.md)     |
-| Chemistry: the chemistry set                                 | Running, Opus 5.5 (September 29, 2026)                                                                                         | [handoff/Chemistry.md](handoff/Chemistry.md)     |
 | Real objects: everyday things, for real                      | Running, Opus 5.5 (September 29, 2026)                                                                                         | [handoff/RealObjects.md](handoff/RealObjects.md) |
-| Photo to 3D: your photo, in depth                            | Running, Sonnet 5.5 (#98; then the Song landscape's Live view and a sharper round)                                             | [handoff/Photo3D.md](handoff/Photo3D.md)         |
+| Photo to 3D: your photo, in depth                            | Running, Sonnet 5.5 (#98, the sharper round; Song live #119 merged)                                                            | [handoff/Photo3D.md](handoff/Photo3D.md)         |
 | Fluids: liquids, smoke and flames made of splats             | Running, Opus 5.5 (September 29, 2026)                                                                                         | [handoff/Fluids.md](handoff/Fluids.md)           |
-| Machines A: machines that compute                            | Running, Opus 5.5 (September 29, 2026)                                                                                         | [handoff/MachinesA.md](handoff/MachinesA.md)     |
 | Books r2 and r3: a sharper book body; pages you tap and pull | Running, Opus 5.5 (r2 #112 merged; r3 and engine #117 now)                                                                     | [handoff/Books.md](handoff/Books.md)             |
 | Screens r2: sharp sets and a real off switch                 | Running, Opus 5.5 (September 29, 2026)                                                                                         | [handoff/ScreensR2.md](handoff/ScreensR2.md)     |
 | Lab r2: the galaxy tap and a sharp Splat equation            | Running, Opus 5.5 (September 29, 2026)                                                                                         | [handoff/Lab.md](handoff/Lab.md)                 |
