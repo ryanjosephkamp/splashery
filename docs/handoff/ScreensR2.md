@@ -140,6 +140,12 @@ Splats per style and tier (the set; the picture's own sheet budget is unchanged)
 tier's maximum: old TV 109k, 218k, 273k, 363k; flat TV 95k, 191k, 238k, 318k; cinema 120k, 232k,
 288k, 382k; hologram 120k, 240k, 300k, 400k (low, mid, high, max). Builds take 0.2 to 1.3 s.
 
+September 30, 2026: at the Operator's request, `tests/scr.spec.mjs` now waits for the Screen's
+hidden picture to be built (`p.api.ready("screen")`) and switches the set on for its screenshots.
+Main 80715a7 merged. Full suite in shards (the container is reclaimed when the session idles, so
+long runs were split): shard 1/3 150 passed; shards 6/18 to 18/18 25, 27, 23, 31, 22, 22, 55, 0, 21,
+50, 0, 35 and 14 passed (13 and 16 hold no tests). Together they cover all 450 tests: none failed.
+
 ## Design
 
 - **Off means off.** The set's state (on or off, since when) lives in the recipe (`SCR`), timed on
