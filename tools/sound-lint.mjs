@@ -349,7 +349,7 @@ const measured = await page.evaluate(
       for (let k = 0; k < frames.length; k++) {
         const P = frames[k];
         const p = P && peakIn(P, hz, 50, 2000);
-        const ok = p && p.tonal > 30 && p.share > 0.2 && p.total > maxTotal * 0.01;
+        const ok = p && p.tonal > 60 && p.share > 0.25 && p.total > maxTotal * 0.01;
         const smooth = ok && prev && p.f / prev > 0.985 && p.f / prev < 1.12;
         if (smooth) {
           len++;
