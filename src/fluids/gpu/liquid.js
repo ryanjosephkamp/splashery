@@ -13,7 +13,7 @@ import { GpuDiffuse } from "./diffuse.js";
 // (8 particles per cell at rest). A slower device runs in slow motion rather
 // than take longer steps.
 export const GPU_TIERS = {
-  low: { cell: 0.04, maxSub: 14, cap: 12000, diffuse: 0.5 },
+  low: { cell: 0.04, maxSub: 16, cap: 12000, diffuse: 0.5 },
   mid: { cell: 0.03, maxSub: 24, cap: 40000, diffuse: 0.7 },
   high: { cell: 0.022, maxSub: 36, cap: 120000, diffuse: 1 },
   max: { cell: 0.018, maxSub: 44, cap: 200000, diffuse: 1.3 },
@@ -113,7 +113,9 @@ export class GpuLiquid {
     // pool's own speeds; viscosity from the preset (0 water .. 1 lava).
     const vis = spec.viscosity ?? preset.viscosity ?? 0.04;
     this.visc = vis;
-    const c = (spec.soundSpeed ?? 4) / h; // cells/s
+    // (8 recipe units/s: a column of water a glass deep compresses by a few
+    // percent, not a quarter; each doubling doubles the substeps)
+    const c = (spec.soundSpeed ?? 8) / h; // cells/s
     const rho0 = 8;
     this.sim.params.rho0 = rho0;
     this.sim.params.stiffness = (rho0 * c * c) / 7;

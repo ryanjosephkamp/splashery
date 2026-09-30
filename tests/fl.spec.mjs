@@ -264,7 +264,8 @@ test("the GPU liquid keeps the CPU liquid's volume in a glass and stays stable",
         const y = gpu.origin[1] + d[i * 6 + 1] * h;
         const z = gpu.origin[2] + d[i * 6 + 2] * h;
         if (![x, y, z].every(Number.isFinite)) bad++;
-        else if (Math.hypot(x, z) > GLASS.radius + 0.02 || y > GLASS.height || y < -0.02) {
+        // (past the glass's outer wall or under its foot: a leak)
+        else if (Math.hypot(x, z) > GLASS.radius + GLASS.wall || y > GLASS.height || y < -0.02) {
           out++;
         }
         ys.push(y);
