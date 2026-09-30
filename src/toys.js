@@ -2456,6 +2456,7 @@ export const TOYS = [
     category: "objects",
     kind: "kit",
     pack: "real-objects",
+    labs: true, // until its pour moves onto the Fluids engine
     tags: "real scan model steel bottle cap screw pour water glass drink drops",
     camera: { yaw: 0.35, pitch: 0.2, roll: 0, distance: 3.6 },
   },
@@ -2465,6 +2466,7 @@ export const TOYS = [
     category: "objects",
     kind: "kit",
     pack: "real-objects",
+    labs: true, // until its pour moves onto the Fluids engine
     tags: "real scan model drink can soda pop fizz foam ring pull tab shake open coaster",
     camera: { yaw: 0.35, pitch: 0.3, roll: 0, distance: 3.8 },
   },

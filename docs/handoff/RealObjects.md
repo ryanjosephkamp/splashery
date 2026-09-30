@@ -112,6 +112,11 @@ Photo to 3D and the Integrator run at the same time; leave their files alone. Th
 
 Model: Opus 5.5 (default effort), for the whole lane.
 
+Round 3 marks (September 30, 2026, 01:05 UTC, from the Operator): all five r3 cards are "good", and
+the running shoe was good at r2. The soda can and the water bottle stay "fix" (deferred to the
+Fluids engine), so both are behind the labs switch (`labs: true` in `src/toys.js`) until the round
+that moves their pours onto Fluids; their effects are unchanged.
+
 Round 3 (September 29, 2026, night): the owner marked the running shoe "good"; the soda can and the
 water bottle wait for the Fluids lane (left as they are); five cards were "fix". What changed:
 

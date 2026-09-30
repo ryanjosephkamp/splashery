@@ -12,7 +12,9 @@ import { KINDS } from "../src/effects.js";
 import fs from "node:fs";
 
 const IDS = ["fountain-pen", "water-bottle", "soda-can", "running-shoe", "hoodie", "sunglasses", "baseball-cap"]; // prettier-ignore
-const APP = "/?renderer=webgl2&adapt=off&profile=mid";
+const APP = "/?renderer=webgl2&adapt=off&profile=mid&labs=1";
+// Behind the labs switch until their pours move onto the Fluids engine.
+const LABS = ["water-bottle", "soda-can"];
 
 async function build(id, count) {
   const recipe = RECIPES[id];
@@ -41,6 +43,7 @@ test.describe("Real objects", () => {
       expect(def, id).toBeTruthy();
       expect(def.pack).toBe("real-objects");
       expect(["objects", "clothing"]).toContain(def.category);
+      expect(!!def.labs, id).toBe(LABS.includes(id));
       const scan = decodeSplats(new Uint8Array(fs.readFileSync(`assets/toys/${id}/${id}.splats`)));
       expect(scan.n).toBeGreaterThan(80000);
       let bad = 0;
