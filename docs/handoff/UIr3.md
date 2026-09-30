@@ -88,6 +88,12 @@ by a permission check, say exactly which edit it is, and I'll handle it.
 
 ## Notes
 
+- The music box and the birthday cake are toggles (open and close, light and blow out), not long
+  pulses, so their second tap keeps doing that. A toggle's long "on" tune (the music box's, 3.6 s)
+  now plays held and stops when the toy is switched off, so it never overlaps itself. The cake's
+  sounds are short.
+- Cards (page 2): ui3-pause, ui3-pause-more (the xylophone and the guitar, from the Toy tab's
+  button), ui3-turntable, ui3-flag, ui3-flag-desktop.
 - A tap on another control of the same toy while an effect is paused (a key of the toy piano)
   resumes the paused effect, so that control's own animation can play.
 - On a phone the tagline "splats you can play with" now hides for everyone (six round buttons).
