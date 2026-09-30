@@ -128,7 +128,7 @@ const fmt = (n) => Math.round(n).toLocaleString("en-US");
 function buildFilmStrip(k) {
   const W = 1.6;
   const H = 0.9;
-  k.cloud({ count: 60000, pattern: false }, (rand) => {
+  k.cloud({ share: 0.98, pattern: false }, (rand) => {
     const x = (rand() - 0.5) * W;
     const y = (rand() - 0.5) * H;
     const band = Math.abs(y) > H * 0.36;

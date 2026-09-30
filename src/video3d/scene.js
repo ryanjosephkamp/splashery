@@ -36,7 +36,10 @@ function quantile(values, q) {
 
 // The frame: { M (rows: the toy's x, y, z axes in the world), center, scale, keepRadius }.
 // splats: { count, pos, opacity }; cams: [{ R, t }].
-export function sceneFrame(splats, cams, { fit = 0.95, keep = 1.6 } = {}) {
+// fit: where the bulk of the scene (90% of its solid splats) ends up; keep: how far out splats are
+// kept, as a multiple of that (the default keeps everything inside the unit sphere, as the kit's
+// own toys are).
+export function sceneFrame(splats, cams, { fit = 0.7, keep = 0.995 / fit } = {}) {
   let up = [0, 0, 0];
   let fwd = [0, 0, 0];
   for (const c of cams) {

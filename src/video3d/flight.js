@@ -86,8 +86,7 @@ export function makeFlight(cams, media) {
     }
     if (st.active && v >= 0.5) {
       const el = st.audio?.el;
-      const time =
-        el && !el.paused ? el.currentTime : path.start + ((info?.time ?? 0) - st.clock);
+      const time = el && !el.paused ? el.currentTime : path.start + ((info?.time ?? 0) - st.clock);
       if (time >= path.end) {
         if (!st.done) {
           st.done = true;
