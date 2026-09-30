@@ -4,7 +4,7 @@
 //
 //   for i in 0 1 2 3; do curl -L -o .cache/sci/m12i_600.$i.hdf5 \
 //     https://users.flatironinstitute.org/~mgrudic/fire2_public_release/core/m12i_res7100/output/snapdir_600/snapshot_600.$i.hdf5; done
-//   node --max-old-space-size=12000 tools/sci-galaxy.mjs [--sim=m12i] [--in=a.hdf5,b.hdf5] [--half=20] [--half-y=20] [--out=…]
+//   node --max-old-space-size=12000 tools/sci-galaxy.mjs [--sim=m12i] [--in=a.hdf5,b.hdf5] [--half=20] [--half-y=20] [--out=…] [--map=source.png]
 //
 // (7.2 GB for m12i's four files; --sim=m11i reads a dwarf galaxy's single 0.9 GB file.)
 //
@@ -25,6 +25,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import * as hdf5 from "jsfive";
+import { PNG } from "pngjs";
 
 const args = process.argv.slice(2);
 const opt = (name, def) => {
@@ -54,6 +55,7 @@ const inPath = opt("in", SIM.files);
 const half = Number(opt("half", 10));
 const halfY = Number(opt("half-y", half)); // a flatter box: its half height
 const most = Number(opt("keep", 300000)); // at most this many particles (a random subset)
+const mapPath = opt("map", ""); // also draw the source: a face-on column-density picture
 const outPath = opt("out", `assets/toys/galaxy-box/${opt("sim", "m12i")}-gas.bin`);
 
 // A snapshot can be split over several files (snapdir_600/snapshot_600.0.hdf5, …).
@@ -175,6 +177,33 @@ for (const g of gas) {
   const p = rot(g.p);
   if (Math.abs(p[0]) < half && Math.abs(p[1]) < halfY && Math.abs(p[2]) < half) keep.push([g, p]);
 }
+// --map: the source data drawn directly, before any thinning: every gas
+// particle in the box binned face-on by its mass (the column density, log
+// scale, a dark-to-bright ramp), 1024 pixels square. No splats, no smoothing.
+if (mapPath) {
+  const N = 1024;
+  const grid = new Float64Array(N * N);
+  for (const [g, p] of keep) {
+    const x = Math.floor(((p[0] + half) / (2 * half)) * N);
+    const z = Math.floor(((p[2] + half) / (2 * half)) * N);
+    if (x >= 0 && x < N && z >= 0 && z < N) grid[z * N + x] += g.m;
+  }
+  let hi = 0;
+  for (const v of grid) hi = Math.max(hi, v);
+  const lo = hi * 1e-4;
+  const png = new PNG({ width: N, height: N });
+  const ramp = [[0, 0, 0], [40, 20, 90], [150, 40, 110], [240, 120, 50], [255, 240, 200]]; // prettier-ignore
+  for (let i = 0; i < N * N; i++) {
+    const t = grid[i] > lo ? Math.log(grid[i] / lo) / Math.log(hi / lo) : 0;
+    const f = Math.min(0.9999, t) * (ramp.length - 1);
+    const k = Math.floor(f);
+    const c = ramp[k].map((a, j) => a + (ramp[k + 1][j] - a) * (f - k));
+    png.data.set([...c.map(Math.round), 255], i * 4);
+  }
+  fs.writeFileSync(mapPath, PNG.sync.write(png));
+  console.log(`${mapPath}: every gas particle in the box, binned face-on (${keep.length})`);
+}
+
 // When there are more than --keep, the dense gas (where the spiral arms and
 // the star-forming clouds are) is all kept and only the diffuse gas is
 // thinned, at random (the same on every run): the file is the densest

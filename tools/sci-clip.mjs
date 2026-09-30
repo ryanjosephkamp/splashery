@@ -76,11 +76,21 @@ const CARDS = {
   "sci-galaxy": {
     toy: "galaxy-box",
     options: { color: "temperature" },
-    secs: 8,
+    secs: 6.5,
     near: 0.85,
     steps: [
       { t: 0, yaw: 0.3 },
-      { t: 3.5, focus: [6, 0, 3], tap: true },
+      { t: 2.5, focus: [6, 0, 3], tap: true },
+    ],
+  },
+  "sci-microscope-nucleus": {
+    toy: "smlm-microscope",
+    options: { data: "nucleus", color: "depth" },
+    secs: 7.5,
+    near: 0.62,
+    steps: [
+      { t: 0, yaw: 0.12 },
+      { t: 1.4, focus: [3, 2], tap: true },
     ],
   },
   "sci-open": {

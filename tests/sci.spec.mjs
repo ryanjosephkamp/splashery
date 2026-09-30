@@ -304,6 +304,22 @@ test.describe("localizations", () => {
     close(buf.scale[start * 3] / s, Math.max(Math.SQRT2 * t.sxy[0] * 1e-3, 0.03), 1e-6);
   });
 
+  test("the samples: a second (a nucleus in 3D, precision from its Cramér–Rao bounds) and a precision filter", async () => {
+    await build("smlm-microscope", 240000, { data: "nucleus" });
+    const nuc = microscopeState();
+    expect(nuc.n).toBe(149633);
+    expect(nuc.has3D).toBe(true);
+    expect(nuc.notes.join(" ")).not.toMatch(/no localization precision/);
+    await build("smlm-microscope", 240000, { data: "sample", precision: "5" });
+    const f = microscopeState();
+    expect(f.kept).toBeLessThan(f.n);
+    expect(f.kept).toBeGreaterThan(1000);
+    const t = await readSmlm(new Uint8Array(fs.readFileSync(SMLM)));
+    let under = 0;
+    for (let i = 0; i < t.n; i++) if (t.sxy[i] < 5) under++;
+    expect(f.kept).toBe(under);
+  });
+
   test("budgets per tier: the microscope and the galaxy keep within each tier's count", async () => {
     for (const [tier, prof] of Object.entries(PROFILES)) {
       if (tier === "weak" || tier === "strong") continue;

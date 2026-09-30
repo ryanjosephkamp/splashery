@@ -983,7 +983,8 @@ const GALAXY = {
       if (p[0] * p[0] + p[2] * p[2] > R * R) return null;
       if (first < 0) first = i;
       emitted++;
-      const h = G.h(i) * widenOf(i);
+      const w = widenOf(i);
+      const h = G.h(i) * w;
       const logT = G.logT(i);
       // A Gaussian of about half the smoothing length (the simulation's
       // kernel isn't a Gaussian; this is the look, not the physics).
@@ -993,6 +994,8 @@ const GALAXY = {
       // particle goes as its mass over h², and the masses are nearly equal.
       // Hot gas is thin and spread out; it is lifted a little so it shows.
       const hot = 1 + 3 * smoothstep(4.3, 5.5, logT);
+      // A widened piece is as faint as its size says: the thinned diffuse
+      // gas stays a faint haze, so the dense arms show through it.
       const alpha = Math.min(0.8, 0.8 * (0.07 / h) ** 2 * hot);
       // Denser gas is brighter, so the spiral arms stand out.
       const dense = Math.max(0, Math.min(1, (Math.log10(0.5 / h) + 0.1) / 1.4));
