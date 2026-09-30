@@ -153,6 +153,11 @@ A cloud splat's `size` multiplies the kit's base size, which the toy's surfaces 
 only clouds has no surface, so its base size is 0.01: there a `size` of 1 is 0.01 recipe units, and
 a splat reads about 2.5 sizes across on screen (lane Manual).
 
+A sample may instead give a trained splat's own shape (lane Video to 3D): `scales: [sx, sy, sz]`,
+its sizes on its three axes in recipe units (not multiplied by the base size or `size`), and
+`quat: [x, y, z, w]`, its rotation. The Video to 3D toy uses it for the splats it trains from a
+video.
+
 `k.rand()` gives recipe-level random numbers (where to put the stones, how many petals).
 
 ## 5. Parts, controls, actions and options
