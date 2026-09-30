@@ -151,6 +151,14 @@ export const TOY_SOUNDS = {
   ],
 
   // ---- Shapes -----------------------------------------------------------------------
+  // A soft pop onto its edge, a roll that circles faster as it leans lower, and a settle.
+  torus: [
+    { voice: "thud", f: 120, bright: 0.2, vol: 0.45 },
+    { voice: "rumble", at: 0.4, f: 150, rate: 6, decay: 0.8, vol: 0.35 },
+    { voice: "rumble", at: 1.35, f: 190, rate: 10, decay: 0.7, vol: 0.4 },
+    { voice: "rumble", at: 2.15, f: 230, rate: 16, decay: 0.5, vol: 0.42 },
+    { voice: "thud", at: 3.05, f: 100, bright: 0.25, vol: 0.65 },
+  ],
   blob: [
     { voice: "gloop", f: 140, decay: 1.2 },
     { voice: "gloop", at: 1.8, f: 110, decay: 0.9, vol: 0.7 },

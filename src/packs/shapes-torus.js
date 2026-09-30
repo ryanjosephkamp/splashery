@@ -8,7 +8,7 @@
 // light (splats are unlit). The wobble turns the whole toy by at most about
 // 60 degrees, well inside a quarter turn, so the draw order holds (7b).
 
-import { mix, shade, clamp, smoothstep, quatAxisAngle, quatMul } from "../kit.js";
+import { mix, shade, clamp, smoothstep, quatAxisAngle } from "../kit.js";
 
 const TAU = Math.PI * 2;
 const unit = (v) => {
@@ -75,13 +75,6 @@ function tangentDir(rand, n) {
   const ang = rand() * TAU;
   return add(mul(t1, Math.cos(ang)), mul(t2, Math.sin(ang)));
 }
-// Angles round the ring and the tube from a point on it.
-const angles = (p) => {
-  const A = Math.atan2(p[2], p[0]);
-  const w = Math.hypot(p[0], p[2]);
-  return { A, w };
-};
-
 // ---- The dressings ------------------------------------------------------------------
 
 // A clean ring in satin blue-gray porcelain.
@@ -101,7 +94,7 @@ function plain(k) {
 // middle, pink icing over the top with a soft wavy edge, and sprinkles.
 const ICING = "#ff8fc7";
 const SPRINKLES = ["#ff3b30", "#ffcc00", "#34c759", "#0a84ff", "#ffffff", "#af52de"];
-const icingEdge = (A) => -0.12 + 0.07 * Math.sin(3 * A + 0.6) + 0.05 * Math.sin(7 * A + 2.1) + 0.03 * Math.sin(13 * A); // prettier-ignore
+const icingEdge = (A) => -0.03 + 0.07 * Math.sin(3 * A + 0.6) + 0.05 * Math.sin(7 * A + 2.1) + 0.03 * Math.sin(13 * A); // prettier-ignore
 function donut(k) {
   const g = RINGS.donut;
   const iced = (A, B) => Math.sin(B) > icingEdge(A);
@@ -126,9 +119,9 @@ function donut(k) {
     },
   );
   // Sprinkles: little rods lying on the icing, each its own color.
-  k.cloud({ share: 0.035, size: 0.7, pattern: false }, (rand) => {
+  k.cloud({ share: 0.012, size: 1.25, pattern: false }, (rand) => {
     const A = rand() * TAU;
-    const B = Math.asin(clamp(icingEdge(A) + 0.06 + rand() * (1.06 - icingEdge(A)), -1, 1));
+    const B = Math.asin(clamp(icingEdge(A) + 0.06 + rand() * (0.94 - icingEdge(A)), -1, 1));
     const top = rand() < 0.5 ? B : Math.PI - B;
     const s = ringPoint({ ...g, a: g.a * 1.035, b: g.b * 1.035 }, A, top, 0.012);
     return {
@@ -161,11 +154,11 @@ function bagel(k) {
       col = mix(col, "#7d4518", 0.35 * top * f);
       // A pale seam where the dough was joined, and a paler inner wall.
       col = mix(col, "#e6c28a", 0.35 * smoothstep(0.2, 1, -Math.cos(B)) * (1 - top));
-      return lit(col, c.n, { sheen: 0.55 * top + 0.08, tight: 10, soft: 0.28 });
+      return lit(col, c.n, { sheen: 0.28 * top + 0.05, tight: 16, soft: 0.28 });
     },
   });
   // Sesame seeds: small pale ovals lying on the upper crust.
-  k.cloud({ share: 0.03, size: 0.62, pattern: false }, (rand) => {
+  k.cloud({ share: 0.007, size: 1.35, pattern: false }, (rand) => {
     const A = rand() * TAU;
     const B = Math.asin(0.05 + 0.95 * Math.sqrt(rand()));
     const top = rand() < 0.5 ? B : Math.PI - B;
@@ -267,7 +260,7 @@ export function torusPose(e, dress = "plain") {
   const lift = (g.R * Math.sin(th) + g.b * Math.cos(th) - g.b) * 0.62;
   // A hop onto the edge, and a bounce as it lands flat.
   const hop = 0.16 * Math.sin(Math.PI * band(e, 0.02, UP + 0.1));
-  const land = e > DOWN ? Math.exp(-(e - DOWN) * 9) * Math.sin((e - DOWN) * 26) : 0;
+  const land = e > DOWN ? Math.exp(-(e - DOWN) * 9) * Math.sin((e - DOWN) * 26) * (1 - band(e, SECS - 0.15, SECS)) : 0; // prettier-ignore
   return {
     quat: q,
     offset: [0, (lift / size) * 0.95 + hop * 0.5, 0],
