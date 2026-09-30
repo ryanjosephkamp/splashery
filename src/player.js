@@ -262,16 +262,20 @@ export class Player {
       (toy.kind === "builtin" && findToy(toy.id)?.kind === "procedural")
     ) {
       const preset = toy.kind === "builtin" ? findToy(toy.id) : null;
+      // A shelf shape may come in looks (the tiny planet's planets): the
+      // look's generator settings go over the shelf's. Only its id is saved.
+      const look = preset ? pickLook(preset, toy.options) : null;
       const generator = normalizeGenerator(
         preset
-          ? { ...preset.generator, count: PROFILES[this.profile].defaultCount }
+          ? { ...preset.generator, ...look?.generator, count: PROFILES[this.profile].defaultCount }
           : toy.generator,
         this.profile,
       );
       // A shelf shape keeps its rig (its tap effect) while its shape and
-      // colours are the shelf's, even when edited with clay.
+      // colours are the shelf's (any of its looks'), even when edited with clay.
       const shelf = preset || (toy.id ? findToy(toy.id) : null);
-      const same = shelf?.generator && generator.shape === shelf.generator.shape && generator.palette === shelf.generator.palette; // prettier-ignore
+      const palettes = shelf?.generator ? [shelf.generator.palette, ...(shelf.looks || []).map((l) => l.generator?.palette)] : []; // prettier-ignore
+      const same = shelf?.generator && generator.shape === shelf.generator.shape && palettes.includes(generator.palette); // prettier-ignore
       const rig = same ? RIGS[shelf.id] || null : null;
       info = await this.buildProcedural(generator, toy.clay || [], token, progress, rig);
       if (!info) return null;
@@ -281,6 +285,10 @@ export class Player {
       info.label = preset ? preset.label : shelf ? `${shelf.label}, edited` : "Your toy";
       info.kind = "procedural";
       info.generator = generator;
+      if (look) {
+        info.options = { look: look.id };
+        info.optionDefs = [lookOption(preset)];
+      }
     } else if (toy.kind === "builtin") {
       const def = findToy(toy.id) || findToy("blob");
       if (def.kind === "procedural")
