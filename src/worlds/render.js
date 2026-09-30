@@ -1,10 +1,18 @@
 // The PlayCanvas side of a world: the graphics device, the app, the camera,
-// and splat containers made from SplatBuffers. Everything drawn is a
-// Gaussian splat entity; nothing else is rendered. The engine's unified
-// splat mode (on by default in 2.22) sorts every entity's splats together,
-// so chunks, props and the character's parts blend correctly.
+// splat containers made from SplatBuffers, and (lighting.js, hybrid.js) the
+// sun, the haze and the lit models of hybrid mode. The engine's unified
+// splat mode (on by default in 2.22) sorts each layer's splats together, so
+// props and the character's parts blend correctly.
+//
+// Layers, drawn in this order: the world's opaque models (the hybrid
+// ground, sign boards, the depth-only ground of splats mode), the sky, the
+// ground layer's splats (ground, grass, splat water), the shadow catcher,
+// then the world layer's splats (props, the character) and see-through
+// models (the hybrid water). Splats test against the models' depth, so a
+// hill hides the tree behind it in both modes.
 
 import * as pc from "../pc.js";
+import { kernelChunks, normalizeKernel } from "../kernels.js";
 
 export class NoGPUError extends Error {}
 
@@ -50,12 +58,34 @@ export class WorldView {
     this.canvas = canvas;
     this.device = device;
     device.maxPixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+    this.kernel = "gaussian";
     const app = new pc.AppBase(canvas);
     const opts = new pc.AppOptions();
     opts.graphicsDevice = device;
-    opts.componentSystems = [pc.CameraComponentSystem, pc.GSplatComponentSystem];
-    opts.resourceHandlers = [pc.TextureHandler, pc.GSplatHandler];
+    opts.componentSystems = [pc.CameraComponentSystem, pc.GSplatComponentSystem, pc.RenderComponentSystem, pc.LightComponentSystem, pc.AnimComponentSystem]; // prettier-ignore
+    opts.resourceHandlers = [pc.TextureHandler, pc.GSplatHandler, pc.ContainerHandler, pc.AnimClipHandler, pc.AnimStateGraphHandler]; // prettier-ignore
     app.init(opts);
+    // Three layers draw after the opaque models and before the world
+    // layer's see-through pass (props and the character): the splat sky,
+    // the ground's splats, and the surface (the shadow catcher, or the
+    // hybrid water).
+    const layers = app.scene.layers;
+    const world = layers.getLayerByName("World");
+    this.skyLayer = new pc.Layer({ name: "WdSky" });
+    this.groundLayer = new pc.Layer({ name: "WdGround" });
+    this.surfaceLayer = new pc.Layer({ name: "WdSurface" });
+    const at = layers.getTransparentIndex(world);
+    layers.insertTransparent(this.skyLayer, at);
+    layers.insertTransparent(this.groundLayer, at + 1);
+    layers.insertTransparent(this.surfaceLayer, at + 2);
+    this.worldLayer = world;
+    // The splat sky is as far as it looks: no haze on it.
+    app.systems.gsplat.on("material:created", (mat, cam, layer) => {
+      if (layer === this.skyLayer) {
+        mat.setDefine("GSPLAT_NO_FOG", "");
+        mat.update();
+      }
+    });
     app.setCanvasFillMode(pc.FILLMODE_NONE);
     app.setCanvasResolution(pc.RESOLUTION_AUTO);
     this.app = app;
@@ -67,6 +97,7 @@ export class WorldView {
       fov: 55,
       nearClip: 0.1,
       farClip: 600,
+      layers: [world.id, layers.getLayerByName("Depth").id, layers.getLayerByName("Skybox").id, this.skyLayer.id, this.groundLayer.id, this.surfaceLayer.id, layers.getLayerByName("Immediate").id, layers.getLayerByName("UI").id], // prettier-ignore
     });
     app.root.addChild(this.camera);
     this.frameMs = [];
@@ -89,6 +120,27 @@ export class WorldView {
 
   get deviceType() {
     return this.device.isWebGPU ? "webgpu" : "webgl2";
+  }
+
+  // The most device pixels per CSS pixel (lane Sharpness, #107: a 3x phone
+  // drawn at 3x has narrower edges and less speckle, at about twice the
+  // cost, so the tiers choose; see WORLD_BUDGETS).
+  setPixelRatio(cap) {
+    this.device.maxPixelRatio = Math.min(window.devicePixelRatio || 1, cap);
+    this.resize();
+  }
+
+  // The splat falloff (lane Lab's kernels, src/kernels.js): "sharp" has a
+  // flatter top and a steeper edge, so near ground reads crisper.
+  setKernel(name) {
+    const want = normalizeKernel(name);
+    if (want === this.kernel) return;
+    const mat = this.app.scene.gsplat.material;
+    const code = kernelChunks(want);
+    mat.shaderChunks.glsl.set("gsplatModifyPS", code.glsl);
+    mat.shaderChunks.wgsl.set("gsplatModifyPS", code.wgsl);
+    mat.update();
+    this.kernel = want;
   }
 
   resize() {
@@ -177,9 +229,17 @@ export class WorldView {
   }
 
   // A splat entity showing a container. `parent` defaults to the scene root.
-  entity(name, container, { pos = [0, 0, 0], yaw = 0, scale = 1, parent = null } = {}) {
+  // `layer` is "world" (props, the character), "ground" or "sky";
+  // `shadows` makes it cast shadows.
+  entity(
+    name,
+    container,
+    { pos = [0, 0, 0], yaw = 0, scale = 1, parent = null, layer = "world", shadows = false } = {},
+  ) {
+    // prettier-ignore
     const e = new pc.Entity(name);
-    e.addComponent("gsplat", { resource: container });
+    const L = { world: this.worldLayer, ground: this.groundLayer, sky: this.skyLayer }[layer];
+    e.addComponent("gsplat", { resource: container, castShadows: shadows, layers: [L.id] });
     e.setLocalPosition(pos[0], pos[1], pos[2]);
     if (yaw) e.setLocalEulerAngles(0, yaw, 0);
     if (scale !== 1) e.setLocalScale(scale, scale, scale);
