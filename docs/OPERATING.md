@@ -13,9 +13,11 @@ ground rules and the effect quality rules in [CLAUDE.md](../CLAUDE.md) apply to 
 - **The Operator** is one long-lived session that coordinates and never builds toys. It keeps this
   file, WORKSTREAMS.md, [HANDOFF.md](HANDOFF.md) and CLAUDE.md; writes each lane's brief, starts its
   worker session and runs it (below); does the upkeep on main after each merge; sends the owner a
-  daily digest; and runs the daily toy-ideas routine (both are routines that wake the Operator
-  session each morning: the ideas at 7:43 and the digest at 7:54, Eastern time). Governance
-  questions go to it. It also keeps the owner's pages (below) and the Sound Board.
+  daily digest; and runs the weekly toy-ideas routine (Mondays at 7:43 a.m. Eastern, in the Operator
+  session). Since September 30, 2026 the digest (7:54 a.m.) and a site patrol (7:21 a.m.: the live
+  site at phone and desktop size, a sample of toys, errors) run each morning as fresh, read-only
+  Sonnet 5.5 sessions that report straight to the owner. Governance questions go to it. It also
+  keeps the owner's pages (below) and the Sound Board.
 - **The owner** (Ryan) talks only to the Operator, reviews clips on the Effect review page and sends
   notes (sound reviews as files). Since September 29, 2026 the Operator merges by tiers ("Merging
   and conflicts" below); the owner decides what leaves labs, rule changes and the homepage.
@@ -32,7 +34,7 @@ around the toys; the rules below keep it apart.
 | Sound Board                | https://claude.ai/artifact/VE9XCTxH3djST6dGb6ZAkj | The Operator (after merges and each sound-review round); the owner may mark  |
 | Help Board                 | https://claude.ai/artifact/P1NCWsGRE3MFqYTWTnTuqN | The Operator (`node tools/help-board.mjs`, below); the owner marks           |
 | Toy Plan (owner's marks)   | https://claude.ai/artifact/PNGPx7REMdhxLMHDXARhw8 | The owner marks; the Operator republishes (`node tools/toy-plan.mjs --json`) |
-| Toy Ideas                  | https://claude.ai/artifact/5TukiuV3mCt3G3zk6Arx9S | The Operator adds three ideas each morning; the owner marks (below)          |
+| Toy Ideas                  | https://claude.ai/artifact/5TukiuV3mCt3G3zk6Arx9S | The Operator adds three ideas each Monday; the owner marks (below)           |
 | Splashery Parallel Plan    | https://claude.ai/artifact/KjJrfKxi4phzJmbgSyRbr7 | The Operator (the lane prompts)                                              |
 | Splashery Operator Manual  | https://claude.ai/artifact/3WYMJxtZDR7m1ecTCN47ZB | The Operator (the owner's how-to)                                            |
 | How Splashery Is Made      | https://claude.ai/artifact/HHj9PBXUQck3kAHrHhdkjA | The Operator (the plan in Part 1, the public write-up's basis in Part 2)     |
@@ -294,8 +296,9 @@ the lane's `finished: true`, which folds it away on the page.
 ## The Toy Ideas page
 
 https://claude.ai/artifact/5TukiuV3mCt3G3zk6Arx9S (source: `tools/pages/toy-ideas.html`). Every
-morning the Operator's routine adds three new toy ideas that fit the ground rules, each with a tap
-effect and a sound. Its collections:
+Monday (daily until September 30, 2026) the Operator's routine adds three new toy ideas that fit the
+ground rules, each with a tap effect and a sound. Since September 29, 2026 they are useful tools and
+simulations, not novelty toys. Its collections:
 
 - `ideas/<idea id>`:
   `{ day, order, name, kind: "kit" | "scan", shelf, tap, sound, why, notes, source, lane, reply, revised, set, setNote, from }`.
