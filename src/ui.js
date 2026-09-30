@@ -952,6 +952,8 @@ export function createUI(app) {
     // Again once the panel is in the page (lane Books): pages that arrived
     // before it would otherwise leave it blank until the next page.
     requestAnimationFrame(() => refreshMedia());
+    // A toy that opens PDFs keeps the words of the page on show (the text layer).
+    if (kinds.includes("pdf")) wrap.insertBefore(renderMediaText(), file);
     return wrap;
   }
 
@@ -979,6 +981,308 @@ export function createUI(app) {
     m.play.textContent = p.playing ? "Pause" : "Play";
     m.scrubRow.hidden = p.kind !== "video";
     m.pages.hidden = !paged && p.kind !== "video";
+  }
+
+  // ---- Words on the page: a PDF's text layer ----------------------------------------
+  // A PDF's pages show as splats, pictures of text: a screen reader can't
+  // read them, and nobody can select, copy or search them. A toy that opens
+  // PDFs keeps the real words of the page on show (from the PDF's own text
+  // layer, read by PDF.js) in a box that folds open under the picture panel,
+  // to read, select, copy and find across the PDF. It doesn't protect the
+  // PDF; it makes the splat page as readable as the PDF itself. Words are
+  // read only while the box is open.
+  let mediaText = null;
+  let mediaTextOpen = false; // the box stays open when the panel is rebuilt
+  const NO_TEXT = "This page has no text layer (it may be a scan), so there are no words to show.";
+  const FIND_MAX = 50; // results listed
+
+  // A PDF's lines break where the page ran out of width, so they join into
+  // paragraphs. One ends at a blank line, after a line well short of the
+  // page's full ones (a paragraph's last line, a heading, a table's row),
+  // before a list item, and before a short line after a sentence's end (a
+  // heading). A word split at a line's end keeps its hyphen.
+  function textParagraphs(text) {
+    const lines = text.split("\n").map((l) => l.trim());
+    const lengths = lines
+      .filter(Boolean)
+      .map((l) => l.length)
+      .sort((a, b) => a - b);
+    const full = lengths[Math.floor(lengths.length * 0.8)] || 0;
+    const out = [];
+    let cur = "";
+    const end = () => {
+      if (cur) out.push(cur);
+      cur = "";
+    };
+    for (const line of lines) {
+      if (!line) {
+        end();
+        continue;
+      }
+      const short = line.length < full * 0.75;
+      const item = /^([•◦▪‣∙–—-]|\d{1,3}[.)])\s/.test(line);
+      if (item || (short && /[.!?:]["'”’)]?$/.test(cur))) end();
+      const hyphen = /\p{L}-$/u.test(cur) && /^\p{Ll}/u.test(line);
+      cur = !cur ? line : hyphen ? cur + line : `${cur} ${line}`;
+      if (short) end();
+    }
+    end();
+    return out;
+  }
+
+  // Finds what was typed, whatever its case, spaces made one.
+  function findPattern(q) {
+    const words = q.trim().replace(/\s+/g, " ");
+    return words ? new RegExp(`(${words.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`, "gi") : null;
+  }
+
+  // Text into el, with each match of the search marked.
+  function appendMarked(el, s, re) {
+    if (!re) {
+      el.append(s);
+      return;
+    }
+    s.split(re).forEach((part, i) => {
+      if (!part) return;
+      if (i % 2 === 0) {
+        el.append(part);
+        return;
+      }
+      const mark = document.createElement("mark");
+      mark.textContent = part;
+      el.append(mark);
+    });
+  }
+
+  // A few words either side of a match, cut at spaces.
+  function snippet(flat, at, len) {
+    let a = Math.max(0, at - 40);
+    let b = Math.min(flat.length, at + len + 60);
+    if (a > 0) {
+      const sp = flat.indexOf(" ", a);
+      if (sp >= 0 && sp < at) a = sp + 1;
+    }
+    if (b < flat.length) {
+      const sp = flat.lastIndexOf(" ", b);
+      if (sp > at + len) b = sp;
+    }
+    return `${a > 0 ? "…" : ""}${flat.slice(a, b)}${b < flat.length ? "…" : ""}`;
+  }
+
+  function renderMediaText() {
+    const box = document.createElement("details");
+    box.id = "toy-media-text-box";
+    box.className = "media-text-box";
+    box.hidden = true;
+    box.open = mediaTextOpen;
+    const summary = document.createElement("summary");
+    summary.textContent = "Words on this page";
+    const words = document.createElement("div");
+    words.id = "toy-media-text";
+    words.className = "media-text";
+    words.tabIndex = 0;
+    words.setAttribute("role", "region");
+    words.setAttribute("aria-label", "Words on this page");
+    const reading = document.createElement("p");
+    reading.className = "note";
+    reading.textContent = "Reading the page…";
+    words.append(reading);
+    // Select all (Ctrl or Cmd and A) takes this page's words, not the site.
+    words.addEventListener("keydown", (e) => {
+      if ((e.ctrlKey || e.metaKey) && (e.key === "a" || e.key === "A")) {
+        e.preventDefault();
+        getSelection()?.selectAllChildren(words);
+      }
+    });
+    const tools = document.createElement("div");
+    tools.className = "media-text-tools";
+    const copy = document.createElement("button");
+    copy.type = "button";
+    copy.id = "toy-media-copy";
+    copy.textContent = "Copy";
+    copy.title = "Copy the words on this page";
+    copy.disabled = true; // until the page's words are in
+    const form = document.createElement("form");
+    form.className = "input-row";
+    form.setAttribute("role", "search");
+    const find = document.createElement("input");
+    find.type = "search";
+    find.id = "toy-media-find";
+    find.placeholder = "Find words in this PDF";
+    find.spellcheck = false;
+    find.autocomplete = "off";
+    find.setAttribute("aria-label", "Find words in this PDF");
+    const go = document.createElement("button");
+    go.type = "submit";
+    go.id = "toy-media-find-go";
+    go.textContent = "Find";
+    form.append(find, go);
+    tools.append(copy, form);
+    const note = document.createElement("p");
+    note.className = "note media-find-note";
+    note.id = "toy-media-find-note";
+    note.setAttribute("role", "status");
+    note.hidden = true;
+    const found = document.createElement("ol");
+    found.id = "toy-media-found";
+    found.className = "media-found";
+    found.hidden = true;
+    box.append(summary, words, tools, note, found);
+    const t = { box, words, copy, find, note, found, media: null, page: -1, text: null, re: null, search: 0, copyTimer: 0 }; // prettier-ignore
+    mediaText = t;
+    box.addEventListener("toggle", () => {
+      mediaTextOpen = box.open;
+      refreshMediaText();
+    });
+    copy.addEventListener("click", async () => {
+      const text = textParagraphs(t.text || "").join("\n\n");
+      if (!text) return;
+      const say = (w) => {
+        copy.textContent = w;
+        clearTimeout(t.copyTimer);
+        t.copyTimer = setTimeout(() => (copy.textContent = "Copy"), 1600);
+      };
+      try {
+        await navigator.clipboard.writeText(text);
+        say("Copied");
+      } catch {
+        // No clipboard here (an older browser, or it was refused): the words
+        // are selected, for the device's own Copy.
+        getSelection()?.selectAllChildren(words);
+        let done = false;
+        try {
+          done = document.execCommand("copy");
+        } catch {}
+        say(done ? "Copied" : "Selected");
+      }
+    });
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      findInMedia(find.value);
+    });
+    requestAnimationFrame(() => refreshMediaText());
+    return box;
+  }
+
+  // Shows page n's words, marked where they match the search.
+  function showWords(t, text, n) {
+    t.words.replaceChildren();
+    t.words.removeAttribute("aria-busy");
+    t.words.setAttribute("aria-label", `Words on page ${n + 1}`);
+    t.copy.disabled = !text;
+    if (!text) {
+      const p = document.createElement("p");
+      p.className = "note";
+      p.textContent = NO_TEXT;
+      t.words.append(p);
+      return;
+    }
+    for (const para of textParagraphs(text)) {
+      const p = document.createElement("p");
+      appendMarked(p, para, t.re);
+      t.words.append(p);
+    }
+    // The top of the page, or down to the first match when it's further on.
+    const mark = t.words.querySelector("mark");
+    const below = mark && mark.offsetTop + mark.offsetHeight > t.words.clientHeight - 8;
+    t.words.scrollTop = below ? Math.max(0, mark.offsetTop - 24) : 0;
+  }
+
+  // Reads page n's words (from the PDF, or its cache) into the box.
+  function loadWords(t, n) {
+    t.page = n;
+    t.text = null;
+    t.words.setAttribute("aria-label", `Words on page ${n + 1}`);
+    t.words.setAttribute("aria-busy", "true");
+    // "Reading…" only for a page that takes a moment (not one read before).
+    const slow = setTimeout(() => {
+      if (t.page !== n || t.text !== null) return;
+      const p = document.createElement("p");
+      p.className = "note";
+      p.textContent = "Reading the page…";
+      t.words.replaceChildren(p);
+    }, 150);
+    app.player.pictures.api.text(n).then((text) => {
+      clearTimeout(slow);
+      if (mediaText !== t || t.page !== n || t.media !== app.player?.pictures?.media) return;
+      t.text = text;
+      showWords(t, text, n);
+    });
+  }
+
+  // The words box follows the page on show: shown for a PDF, and reading a
+  // new page's words while it is open.
+  function refreshMediaText(p = app.player?.pictures?.info() || null) {
+    const t = mediaText;
+    if (!t || !t.box.isConnected) return;
+    const media = app.player?.pictures?.media || null;
+    const pdf = p?.kind === "pdf" && media?.kind === "pdf" && !!media.text;
+    t.box.hidden = !pdf;
+    if (media !== t.media) {
+      // Other media: forget its page, the search and the results.
+      t.media = media;
+      t.page = -1;
+      t.text = null;
+      t.re = null;
+      t.search++;
+      t.note.hidden = t.found.hidden = true;
+      t.found.replaceChildren();
+    }
+    if (!pdf || !t.box.open || p.page === t.page) return;
+    loadWords(t, p.page);
+  }
+
+  // Finds words across the PDF, page by page: the pages' words are read
+  // once (the PDF keeps them), and the first FIND_MAX matches are listed,
+  // each a button to its page.
+  async function findInMedia(q) {
+    const t = mediaText;
+    const media = app.player?.pictures?.media;
+    const id = ++t.search;
+    t.re = findPattern(q);
+    t.found.replaceChildren();
+    t.found.hidden = true;
+    if (t.text !== null) showWords(t, t.text, t.page); // marks on the page on show
+    t.note.hidden = !t.re;
+    if (!t.re || !media?.text) return;
+    const hits = [];
+    let total = 0;
+    let pages = 0;
+    for (let n = 0; n < media.count; n++) {
+      if (n % 10 === 0) t.note.textContent = `Looking through page ${n + 1} of ${media.count}…`;
+      const flat = textParagraphs(await app.player.pictures.api.text(n)).join(" ");
+      // A newer search, other media or a new panel: this one stops.
+      if (mediaText !== t || t.search !== id || app.player?.pictures?.media !== media) return;
+      let on = 0;
+      for (const m of flat.matchAll(t.re)) {
+        on++;
+        if (hits.length < FIND_MAX) hits.push({ n, text: snippet(flat, m.index, m[0].length) });
+      }
+      total += on;
+      if (on) pages++;
+    }
+    const plural = (k, one, many) => `${k} ${k === 1 ? one : many}`;
+    t.note.textContent = !total
+      ? "No matches."
+      : `Found ${plural(total, "match", "matches")} on ${plural(pages, "page", "pages")}.${total > hits.length ? ` The first ${hits.length} are listed.` : ""}`; // prettier-ignore
+    for (const h of hits) {
+      const li = document.createElement("li");
+      const b = document.createElement("button");
+      b.type = "button";
+      const where = document.createElement("span");
+      where.className = "media-found-page";
+      where.textContent = `Page ${h.n + 1}:`;
+      b.append(where, " ");
+      appendMarked(b, h.text, t.re);
+      b.addEventListener("click", () => {
+        app.pictureGo(h.n);
+        // Already on that page: its first match comes into view again.
+        if (t.page === h.n && t.text !== null) showWords(t, t.text, h.n);
+      });
+      li.append(b);
+      t.found.append(li);
+    }
+    t.found.hidden = !hits.length;
   }
   // ---- End of pictures ---------------------------------------------------------------
 
@@ -2023,6 +2327,7 @@ export function createUI(app) {
     // Pictures: the picture panel follows the pages (and media errors).
     setPictures(p, media) {
       refreshMedia(p);
+      refreshMediaText(p); // the words box follows the page
     },
     setToyPanel(info) {
       renderToyPanel(info);
