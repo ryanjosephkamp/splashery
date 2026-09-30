@@ -58,6 +58,12 @@ function place(cam, p) {
   cam.vel.yaw = cam.vel.pitch = 0;
 }
 
+const samePose = (cam, p) =>
+  !!p &&
+  Math.abs(cam.cur.yaw - p.yaw) < 1e-6 &&
+  Math.abs(cam.cur.distance - p.distance) < 1e-6 &&
+  cam.target.every((v, i) => Math.abs(v - p.target[i]) < 1e-6);
+
 // The flight for one built scene. media: { file, start } for a video somebody opened (its sound
 // plays), or null (a sample: no sound). Returns drive's hook: fly(v, info), v the Replay toggle.
 export function makeFlight(cams, media) {
@@ -91,20 +97,30 @@ export function makeFlight(cams, media) {
   const fly = (v, info) => {
     const cam = cameraOf();
     if (!cam || !cams.length) return;
-    if (!st.homed) {
-      // The toy opens where the video starts: the first camera's place and view.
-      st.homed = true;
-      place(cam, path.at(path.start));
-      cam.home = { ...cam.cur };
+    // The toy opens where the video starts: the first camera's place and view. The app sets up
+    // its own camera when a toy loads (and puts the old one back when options change), so this
+    // keeps the video's view until the visitor first turns or zooms (which resets idleFor).
+    if (!st.active && !st.leaving && !st.userMoved) {
+      if (cam.dragging || (st.lastIdle != null && cam.idleFor < st.lastIdle)) st.userMoved = true;
+      else if (!samePose(cam, st.homePose)) {
+        place(cam, path.at(path.start));
+        cam.home = { ...cam.cur };
+        st.homePose = { ...cam.cur, target: cam.target.slice() };
+      }
+      st.lastIdle = cam.idleFor;
     }
-    if (v > 0.001 && !st.active && !st.leaving) {
+    const prev = st.prev ?? 0;
+    st.prev = v;
+    if (v > prev && v > 0.001 && !st.active) {
+      // Replay switched on (also while it was still easing home).
       st.active = true;
+      st.leaving = false;
       st.done = false;
       st.clock = info?.time ?? 0;
       st.home = { state: cam.getState(), target: cam.target.slice() };
       startAudio(info);
     }
-    if (st.active && v >= 0.5) {
+    if (st.active && v >= prev) {
       const el = st.audio?.el;
       const time = el && !el.paused ? el.currentTime : path.start + ((info?.time ?? 0) - st.clock);
       if (time >= path.end) {
@@ -120,7 +136,7 @@ export function makeFlight(cams, media) {
       st.endTarget = cam.target.slice();
       return;
     }
-    if (st.active && v < 0.5) {
+    if (st.active && v < prev) {
       // Replay switched off: ease back home as the toggle falls.
       stopAudio();
       st.active = false;
@@ -129,7 +145,7 @@ export function makeFlight(cams, media) {
       st.from = cam.target.slice();
     }
     if (st.leaving) {
-      const k = Math.max(0, Math.min(1, 1 - v * 2));
+      const k = Math.max(0, Math.min(1, 1 - v));
       const to = st.home.target;
       cam.target = [0, 1, 2].map((i) => st.from[i] + (to[i] - st.from[i]) * k);
       if (v <= 0.001) {
@@ -144,5 +160,6 @@ export function makeFlight(cams, media) {
     st.audio = null;
   };
   fly.path = path;
+  fly.state = st;
   return fly;
 }

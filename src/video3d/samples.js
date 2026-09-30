@@ -21,7 +21,7 @@ export const SAMPLES = [
   {
     id: "edinburgh",
     label: "Street, walked",
-    title: "Walking in EDINBURGH - Scotland (UK) - 4K 60fps (UHD) (15 s from 7:32)",
+    title: "Walking in EDINBURGH - Scotland (UK) - 4K 60fps (UHD) (10 s from 7:32)",
     author: "POPtravel",
     source:
       "https://commons.wikimedia.org/wiki/File:Walking_in_EDINBURGH_-_Scotland_(UK)_-_4K_60fps_(UHD).webm",

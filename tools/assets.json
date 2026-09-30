@@ -409,7 +409,7 @@
       "page": "https://commons.wikimedia.org/wiki/File:Walking_in_EDINBURGH_-_Scotland_(UK)_-_4K_60fps_(UHD).webm",
       "license": "CC BY 3.0",
       "checked": "September 30, 2026",
-      "note": "15 seconds from 7:32 (the 480p transcode on Commons), trained by tools/v3d-sample.mjs. Only the trained splats and the camera path are shipped."
+      "note": "10 seconds from 7:32 (the 480p transcode on Commons), trained by tools/v3d-sample.mjs. Only the trained splats and the camera path are shipped."
     },
     {
       "id": "nicosia",

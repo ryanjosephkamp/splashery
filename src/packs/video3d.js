@@ -272,6 +272,8 @@ const VIDEO_3D = {
     if (isBrowser() && src.path.length) {
       V3D.flight = makeFlight(src.path, src === V3D.custom ? { file: V3D.file } : null);
       k.data.flight = V3D.flight;
+      // A frame soon after, so the flight's drive can open the view where the video starts.
+      setTimeout(() => window.__splashery?.player?.stage?.requestRender?.(), 1000);
     }
   },
 };

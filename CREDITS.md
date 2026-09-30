@@ -319,7 +319,7 @@ license was checked on its live Commons page on September 30, 2026:
 - "Statue Of Liberty 4k Drone" by the Dronalist (20 seconds from 3:18),
   [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/), on
   [Commons](https://commons.wikimedia.org/wiki/File:Statue_Of_Liberty_4k_Drone.webm).
-- "Walking in EDINBURGH - Scotland (UK) - 4K 60fps (UHD)" by POPtravel (15 seconds from 7:32),
+- "Walking in EDINBURGH - Scotland (UK) - 4K 60fps (UHD)" by POPtravel (10 seconds from 7:32),
   [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/), on
   [Commons](<https://commons.wikimedia.org/wiki/File:Walking_in_EDINBURGH_-_Scotland_(UK)_-_4K_60fps_(UHD).webm>).
 - "Central Nicosia drone footage overlooking UN buffer zone" by The Track Record - BTS (12 seconds
