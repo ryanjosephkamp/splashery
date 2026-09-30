@@ -188,4 +188,11 @@ HOW THIS LANE RUNS
 
 ## For the Operator
 
-- Nothing yet.
+- Cards posted in lane UIr2 (groups "On a phone" and "On a computer"): ui2-focus, ui2-sheet,
+  ui2-cnn-pad, ui2-pan, ui2-homescreen, ui2-focus-desktop, ui2-desktop, ui2-pan-desktop.
+- To make it the default after the owner's marks: `ui2On()` in `src/player.js` returns true (one
+  line), and `tests/ui2.spec.mjs`'s last test ("without the labs switch …") goes.
+- For PACKS.md: a toy's drawing canvas in the settings no longer counts as a swipe on the phone
+  sheet.
+- A clip lesson: a background test run and clip rendering at the same time made two timing tests
+  fail (`chr.spec.mjs` "on the Test island", `chs-engine.spec.mjs`); both pass alone.
