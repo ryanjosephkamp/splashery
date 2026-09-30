@@ -280,32 +280,27 @@ function buildBush(count, seed, o = {}) {
     blobs.push([Math.cos(a) * d, 0.45 + r() * 0.3, Math.sin(a) * d, 0.35 + r() * 0.15]);
   }
   blobs.push([0, 0.7, 0, 0.45]);
-  // Leaves on the outside of each clump (a dense shell reads as solid
-  // foliage; leaves spread through the inside read as speckle), a darker
-  // layer just under them so no sky shows through.
+  // Each clump is a solid shell of leaves, spread evenly and fully opaque
+  // (a cloud of loose leaves read as speckle); where clumps overlap, the
+  // hidden part is left out. Leafy shading comes from smooth noise.
   const inside = (p, skip) =>
-    blobs.some((b, j) => j !== skip && Math.hypot(p[0] - b[0], (p[1] - b[1]) / 0.85, p[2] - b[2]) < b[3] * 0.92); // prettier-ignore
-  // (A kit with only clouds has a base splat size of 1 cm, so sizes
-  // here are in centimeters.)
-  k.cloud({ count: count * 1.6, size: 4.2 }, (rand) => {
-    const bi = Math.floor(rand() * blobs.length);
-    const b = blobs[bi];
-    const d = randDir(rand);
-    const deep = rand() < 0.2;
-    const rr = b[3] * (deep ? 0.8 : 0.95 + 0.08 * rand());
-    const p = [b[0] + d[0] * rr, b[1] + d[1] * rr * 0.85, b[2] + d[2] * rr];
-    if (p[1] < 0.02 || inside(p, bi)) return null;
-    const lift = clamp(0.5 + d[1] * 0.5, 0, 1);
-    let col = mix(shade(green, 0.7), mix(green, "#a4d468", rand() * 0.5), lift);
-    if (deep) col = shade(green, 0.72);
-    return {
-      p,
-      n: d,
-      color: lit(col, d, 0.55),
+    blobs.some((b, j) => j !== skip && Math.hypot(p[0] - b[0], (p[1] - b[1]) / 0.85, p[2] - b[2]) < b[3] * 0.97); // prettier-ignore
+  blobs.forEach((b, bi) => {
+    k.add(k.sphere(b[3]), {
+      pos: [b[0], b[1], b[2]],
+      scale: [1, 0.85, 1],
+      even: true,
       flat: 0.35,
-      size: deep ? 1.6 : 1 + rand() * 0.4,
-      opacity: 0.97,
-    };
+      opacity: 1,
+      jitter: 0.012,
+      color: (c) => {
+        if (c.p[1] < 0.02 || inside(c.p, bi)) return null;
+        const g = c.fbm(c.p[0] * 7, c.p[1] * 7, c.p[2] * 7, 3);
+        const lift = clamp(0.5 + c.n[1] * 0.5, 0, 1);
+        const col = mix(shade(green, 0.72), mix(green, "#a4d468", 0.35), clamp(lift * 0.7 + g * 1.2 + 0.15, 0, 1)); // prettier-ignore
+        return lit(col, c.n, 0.5);
+      },
+    });
   });
   const it = k.emit();
   while (!it.next().done);
@@ -352,34 +347,67 @@ export function buildSign(label, { count = 20000, seed = 1, color = "#1f6f8b" } 
     const g = c.fbm(c.p[0] * 2, c.p[1] * 9, c.p[2] * 2, 2);
     return lit(mix(wood, shade(wood, 0.78), clamp(0.5 + g * 1.2, 0, 1)), c.n, 0.35);
   };
-  // Two posts.
+  // Two posts (lathes: even spreading draws a lattice on boxes).
+  const post = k.lathe([
+    [0.03, 0],
+    [0.065, 0.02],
+    [0.065, top - 0.02],
+    [0.03, top],
+  ]);
   for (const sx of [-1, 1])
-    k.add(k.box(0.12, top, 0.12), { pos: [sx * (bw / 2 - 0.16), top / 2, -0.02], color: woodColor, flat: 0.3, even: true }); // prettier-ignore
-  // The board, painted in the world's accent color with pale letters.
+    k.add(post, { pos: [sx * (bw / 2 - 0.16), 0, -0.02], color: woodColor, flat: 0.35, even: true, opacity: 1, jitter: 0.01 }); // prettier-ignore
+  // The board: a wooden back and edges, and a flat front face painted in
+  // the world's accent color with a thin cream border.
   const paint = rgb(color);
   const cream = rgb("#fbf4e2");
-  const board = k.box(bw, bh, 0.08);
   const y0 = top - bh / 2 - 0.05;
-  k.add(board, {
-    pos: [0, y0, 0.05],
-    weight: 3.2,
-    flat: 0.2,
+  k.add(k.roundedBox(bw, bh, 0.07, 10), { pos: [0, y0, 0.05], color: woodColor, flat: 0.3, even: true, opacity: 1, jitter: 0.01 }); // prettier-ignore
+  const face = k.param((u, v) => [(u - 0.5) * (bw - 0.03), (v - 0.5) * (bh - 0.03), 0], { grid: 8, normal: () => [0, 0, 1] }); // prettier-ignore
+  k.add(face, {
+    pos: [0, y0, 0.0875],
+    weight: 5,
+    flat: 0.12,
     even: true,
+    opacity: 1,
+    jitter: 0.008,
     color: (c) => {
-      if (c.n[2] < 0.9) return woodColor(c);
       const x = c.p[0];
       const y = c.p[1] - y0;
-      // A thin cream border.
-      if (Math.abs(x) > bw / 2 - 0.05 || Math.abs(y) > bh / 2 - 0.05) return lit(cream, c.n, 0.2);
-      const s = (x + (chars * 6 * px) / 2) / px;
-      const t = (0.35 * 7 * px - y) / px + 0.3;
-      if (ink(text, s, t)) return { c: lit(cream, c.n, 0.15), size: 0.8 };
-      return lit(shade(paint, 0.95 + 0.1 * c.rand()), c.n, 0.2);
+      if (Math.abs(x) > bw / 2 - 0.06 || Math.abs(y) > bh / 2 - 0.06)
+        return lit(cream, [0, 0.3, 1], 0.2);
+      return lit(paint, [0, 0.3, 1], 0.2);
     },
   });
   const it = k.emit();
   while (!it.next().done);
-  return { buf: plain(k.buf), height: top, width: bw };
+  const buf = plain(k.buf);
+  // The letters: three by three splats on each inked font pixel, just in
+  // front of the face, placed exactly (crisp strokes, no dots).
+  const inked = [];
+  for (let col = 0; col < chars; col++)
+    for (let gy = 0; gy < 7; gy++)
+      for (let gx = 0; gx < 5; gx++) if (ink(text, col * 6 + gx + 0.5, gy + 0.5)) inked.push([col * 6 + gx, gy]); // prettier-ignore
+  const out = new SplatBuffer(buf.count + inked.length * 9);
+  for (let i = 0; i < buf.count; i++)
+    out.push(
+      [buf.pos[i * 3], buf.pos[i * 3 + 1], buf.pos[i * 3 + 2]],
+      [buf.scale[i * 3], buf.scale[i * 3 + 1], buf.scale[i * 3 + 2]],
+      [buf.rot[i * 4], buf.rot[i * 4 + 1], buf.rot[i * 4 + 2], buf.rot[i * 4 + 3]],
+      [buf.color[i * 4], buf.color[i * 4 + 1], buf.color[i * 4 + 2], buf.color[i * 4 + 3]],
+    );
+  const x0 = -(chars * 6 - 1) * px * 0.5;
+  const yTop = y0 + 3.5 * px;
+  const ink3 = lit(cream, [0, 0.3, 1], 0.15);
+  for (const [gx, gy] of inked)
+    for (let j = 0; j < 3; j++)
+      for (let i = 0; i < 3; i++)
+        out.push(
+          [x0 + (gx + (i + 0.5) / 3) * px, yTop - (gy + (j + 0.5) / 3) * px, 0.091],
+          [px * 0.26, px * 0.26, px * 0.03],
+          [0, 0, 0, 1],
+          [ink3[0], ink3[1], ink3[2], 1],
+        );
+  return { buf: out, height: top, width: bw };
 }
 
 function ink(text, s, t) {

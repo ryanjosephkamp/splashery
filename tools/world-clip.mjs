@@ -6,7 +6,7 @@
 // speed however slow the renderer is.
 //
 //   python3 -m http.server 4173 --bind 127.0.0.1 &
-//   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/world-clip.mjs <out-dir> [--world=test-island] [--size=390x844] [--fps=10] [--dpr=2] [--scale=0.5] [--profile=mid] [--strip=8] walk landmark touch list
+//   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/world-clip.mjs <out-dir> [--world=test-island] [--size=390x844] [--fps=10] [--dpr=2] [--scale=0.5] [--profile=mid] [--strip=8] [--before=http://127.0.0.1:4174/] walk landmark touch list character island ground props sky
 //
 // Writes <out-dir>/wd-<name>.gif (and -strip.png with --strip). The
 // scenes are scripted below; each is a list of steps: walk with an input
@@ -35,6 +35,7 @@ const scale = Number(opt("scale", 1 / dpr));
 const world = opt("world", "test-island");
 const profile = opt("profile", "mid");
 const stripN = Number(opt("strip", 0));
+const before = opt("before", "");
 
 // ---- Scenes ---------------------------------------------------------------------
 
@@ -84,6 +85,32 @@ const SCENES = {
     { hold: 1.2 },
   ],
 
+  // Round 2 (a sharper island): a walk along the shore.
+  island: [
+    { place: [-23, -9, 0], camera: { distance: 5.2, pitch: 0.3 } },
+    { hold: 0.5 },
+    { move: { y: 1 }, secs: 3.2 },
+    { move: { y: 1 }, look: [-0.7, 0], secs: 2.4 },
+    { hold: 0.6 },
+  ],
+  // The ground and grass up close.
+  ground: [
+    { place: [-6, 4, 150], camera: { distance: 2.6, pitch: 0.72 } },
+    { hold: 0.5 },
+    { move: { y: 0.6 }, secs: 3 },
+    { look: [0.8, -0.3], secs: 2 },
+    { hold: 0.5 },
+  ],
+  // Walking past the props: the oak, the mushrooms, a pine, bushes.
+  props: [
+    { place: [-16, 1, 90], camera: { distance: 4.2, pitch: 0.22 } },
+    { hold: 0.5 },
+    { move: { y: 1 }, secs: 4.5 },
+    { move: { y: 1 }, look: [0.6, 0], secs: 2.5 },
+    { hold: 0.5 },
+  ],
+  // The aerial view behind the start screen, without the screen.
+  sky: [{ start: true, overview: true, hold: 5 }],
   // The start screen over the wide view, the plain list, and "Go there".
   list: [
     { start: true, hold: 2.2 },
@@ -101,20 +128,25 @@ const browser = await chromium.launch({
   args: ["--use-angle=swiftshader", "--enable-unsafe-swiftshader", "--ignore-gpu-blocklist", "--enable-webgl"], // prettier-ignore
 });
 
-for (const name of names) {
-  const scene = SCENES[name];
-  if (!scene) throw new Error(`No scene "${name}" (${Object.keys(SCENES).join(", ")}).`);
+// Records a scene on the page at `url` (a Splashery root); returns its
+// frames. `tag` labels every frame ("Before", "After").
+async function record(scene, url, tag = null) {
   const touch = scene.some((s) => s.touch);
   // Drawn at twice the size and shrunk, like a phone's sharp screen.
   const ctx = await browser.newContext({ viewport: { width: W, height: H }, deviceScaleFactor: dpr, hasTouch: touch, isMobile: touch }); // prettier-ignore
   const page = await ctx.newPage();
   page.on("pageerror", (e) => console.error("page error:", e.message));
   await page.goto(
-    `${base}worlds/?labs=1&renderer=webgl2&profile=${profile}&clock=manual&world=${world}`,
+    `${url}worlds/?labs=1&renderer=webgl2&profile=${profile}&clock=manual&world=${world}`,
   );
   await page.waitForFunction(() => document.body.dataset.ready === "true", null, { timeout: 240_000 }); // prettier-ignore
-  const gif = GIFEncoder();
-  const delay = Math.round(1000 / fps);
+  if (tag)
+    await page.evaluate((tag) => {
+      const d = document.createElement("div");
+      d.textContent = tag;
+      d.style.cssText = "position:fixed;left:50%;bottom:14px;transform:translateX(-50%);padding:6px 16px;border-radius:999px;background:rgba(0,0,0,.62);color:#fff;font:600 17px system-ui,sans-serif;z-index:99"; // prettier-ignore
+      document.body.append(d);
+    }, tag);
   const dt = 1 / fps;
   const frames = [];
   let finger = null;
@@ -124,8 +156,6 @@ for (const name of names) {
     const h = Math.round(png.height * scale);
     const rgba = shrink(png, w, h);
     frames.push({ rgba, w, h });
-    const palette = quantize(rgba, 256, { format: "rgb565" });
-    gif.writeFrame(applyPalette(rgba, palette, "rgb565"), w, h, { palette, delay, repeat: 0 });
   };
   // One frame: the world steps dt with this input, then a screenshot.
   const tick = async (input = null) => {
@@ -181,6 +211,12 @@ for (const name of names) {
         if (t) t.style.display = "inline";
       });
     }
+    if (s.overview)
+      await page.evaluate(() => {
+        document.getElementById("start").hidden = true;
+        window.__world.world.overview = true;
+        window.__world.catchUp();
+      });
     if (s.click) await page.click(s.click);
     if (s.scroll) await page.evaluate((sel) => document.querySelector(sel).scrollBy(0, 400), s.scroll); // prettier-ignore
     if (s.clickGo) await page.click(`#places-list li[data-landmark="${s.clickGo}"] button`);
@@ -225,14 +261,48 @@ for (const name of names) {
     }
     if (s.tapSign) await setFinger(null);
   }
+  await ctx.close();
+  return frames;
+}
+
+for (const name of names) {
+  const scene = SCENES[name];
+  if (!scene) throw new Error(`No scene "${name}" (${Object.keys(SCENES).join(", ")}).`);
+  let frames = await record(scene, base, before ? "After" : null);
+  // --before=<url>: the same scene on another build, side by side.
+  if (before) frames = sideBySide(await record(scene, before, "Before"), frames);
+  const gif = GIFEncoder();
+  const delay = Math.round(1000 / fps);
+  for (const f of frames) {
+    const palette = quantize(f.rgba, 256, { format: "rgb565" });
+    gif.writeFrame(applyPalette(f.rgba, palette, "rgb565"), f.w, f.h, { palette, delay, repeat: 0 }); // prettier-ignore
+  }
   gif.finish();
   const file = path.join(outDir, `wd-${name}.gif`);
   fs.writeFileSync(file, gif.bytes());
   console.log(`${file}: ${frames.length} frames, ${(fs.statSync(file).size / 1e6).toFixed(1)} MB`);
   if (stripN > 1) writeStrip(frames, stripN, path.join(outDir, `wd-${name}-strip.png`));
-  await ctx.close();
 }
 await browser.close();
+
+// Two runs of a scene, frame by frame, left and right.
+function sideBySide(left, right) {
+  const n = Math.min(left.length, right.length);
+  const out = [];
+  for (let i = 0; i < n; i++) {
+    const a = left[i];
+    const b = right[i];
+    const w = a.w + b.w;
+    const h = Math.min(a.h, b.h);
+    const rgba = new Uint8ClampedArray(w * h * 4);
+    for (let y = 0; y < h; y++) {
+      rgba.set(a.rgba.subarray(y * a.w * 4, (y + 1) * a.w * 4), y * w * 4);
+      rgba.set(b.rgba.subarray(y * b.w * 4, (y + 1) * b.w * 4), (y * w + a.w) * 4);
+    }
+    out.push({ rgba, w, h });
+  }
+  return out;
+}
 
 // Box-filters an RGBA PNG down to w x h.
 function shrink(png, w, h) {
