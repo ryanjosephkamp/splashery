@@ -6,7 +6,16 @@
 import { mix, shade } from "../kit.js";
 
 // Each toy's tap state (one toy is shown at a time).
-const LAB = { tapN: 0 };
+const LAB = { tapN: 0, focus: false };
+
+// Page focus (see bookFocus) for a toy with one picture: a double-tap on it
+// fills the screen with it, and again (or off it) lets go.
+function focusToggle(S, p) {
+  if (S.focus) S.focus = false;
+  else if (p) S.focus = true;
+  else return false;
+  return true;
+}
 
 // ---- Your book (lane Books) -------------------------------------------------------
 //
@@ -46,7 +55,7 @@ const BOOK_STYLES = {
   stapled: { bound: "top", T: 0.026, curl: 1.3 },
 };
 
-const BOOK = { K: 0, anim: null, queue: [], tapN: 0, lastPage: 0, style: null, dims: null, frame: 0, landed: 0, press: null, N: 0 }; // prettier-ignore
+const BOOK = { K: 0, anim: null, queue: [], tapN: 0, lastPage: 0, style: null, dims: null, frame: 0, landed: 0, press: null, N: 0, focus: null, viewK: -1, one: false }; // prettier-ignore
 
 const clamp01 = (x) => (x < 0 ? 0 : x > 1 ? 1 : x);
 const easeIO = (x) => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2);
@@ -501,9 +510,114 @@ function bookTapAt(p) {
   const st = BOOK.style;
   if (!st || !BOOK.dims) return null;
   const K = BOOK.anim ? BOOK.anim.to : BOOK.K;
-  const { H } = BOOK.dims;
-  const back = st.bound === "top" ? p[1] > H / 4 : K >= 1 && p[0] < 0;
+  const { W, H, g } = BOOK.dims;
+  // (Seen close up, one page at a time: its left half goes back.)
+  const f = BOOK.focus;
+  const mid = f === "L" ? -(g + W / 2) : f === "R" ? g + W / 2 : 0;
+  const back = st.bound === "top" ? p[1] > H / 4 : K >= 1 && p[0] < mid;
   return { key: "turn", pick: back ? 1 : 0 };
+}
+
+// ---- Page focus (lane Books) --------------------------------------------------------
+//
+// A double-tap on a page glides the view to it, filling the screen (the
+// engine's out.view); a double-tap again, or a zoom out, shows the whole
+// book. While a page is in view, forward goes from a left page to the right
+// one, then turns the leaf and lands on the next left page (back the other
+// way). Reading "One page" keeps a page in view (the default on a phone
+// held upright). BOOK.focus: null (the whole book), "C" (the closed book's
+// cover, or stapled paper's top sheet), "L" or "R" (the spread's pages).
+const bkPortrait = () => typeof innerWidth === "number" && innerHeight > innerWidth;
+const READING = {
+  key: "reading",
+  label: "Reading",
+  type: "select",
+  // Old links and scenes have no reading: it follows the screen's shape.
+  get default() {
+    return bkPortrait() ? "one" : "both";
+  },
+  choices: [
+    { id: "both", label: "Both pages" },
+    { id: "one", label: "One page" },
+  ],
+};
+// Whether a side of a spread's leaves has a page (side 0 is the cover).
+function hasSide(side) {
+  if (BOOK.sides) return side >= 1 && !!BOOK.sides[side]?.length;
+  return side >= 1 && side < BOOK.N;
+}
+// The page a view lands on in spread K: going forward, its left page (the
+// right when the left is blank); going back, its right.
+function landSide(K, fwd) {
+  if (BOOK.style?.bound === "top" || K <= 0) return "C";
+  const L = hasSide(2 * K - 2);
+  const R = hasSide(2 * K - 1);
+  if (fwd) return L || !R ? "L" : "R";
+  return R || !L ? "R" : "L";
+}
+// The spread a view follows: where a turn goes (a pull, once it is let go
+// to finish), else where the book lies.
+function viewSpread() {
+  const a = BOOK.anim;
+  if (!a) return BOOK.K;
+  if (a.pull) return a.pull.release?.to ? a.to : a.from;
+  return a.to;
+}
+function bookFocus(p) {
+  const st = BOOK.style;
+  if (!st || !BOOK.dims) return false;
+  if (BOOK.focus) {
+    BOOK.focus = null;
+    return true;
+  }
+  // (A double-tap off the book resets the view, as on other toys.)
+  if (!p) return false;
+  const K = viewSpread();
+  if (st.bound === "top" || K <= 0) BOOK.focus = "C";
+  else {
+    const f = p[0] < 0 ? "L" : "R";
+    const other = f === "L" ? "R" : "L";
+    BOOK.focus = hasSide(2 * K - (f === "L" ? 2 : 1)) ? f : other;
+  }
+  return true;
+}
+// A book rebuilt with the same file (a new style, or Reading) opens where
+// it was: the build keeps the page, the drive opens its spread.
+function bookResume(k) {
+  const key = k.media ? `${k.media.name}:${k.media.count}` : null;
+  BOOK.resume = key && key === BOOK.mediaKey ? BOOK.lastPage : 0;
+  BOOK.mediaKey = key;
+}
+// Page focus for the drive: steps within a spread, follows turns, and says
+// what to show (out.view).
+function bookView(st, out) {
+  const K = viewSpread();
+  if (K !== BOOK.viewK) {
+    const fwd = K > BOOK.viewK;
+    BOOK.viewK = K;
+    if (BOOK.focus || BOOK.one) BOOK.focus = landSide(K, fwd);
+  }
+  const f = BOOK.focus;
+  if (!f) {
+    out.view = { key: "all" };
+    return;
+  }
+  const { W, H, g } = BOOK.dims;
+  const ov = st.ov || 0;
+  const x = f === "L" ? -(g + W / 2) : f === "R" ? g + W / 2 : 0;
+  out.view = { key: f, center: [x, 0, 0], size: f === "C" ? [W + 2 * ov, H + 2 * ov] : [W, H] };
+}
+// A tap forward on a left page in view (or back on a right one) glides to
+// the other page of the spread instead of turning.
+function bookStep(st) {
+  const f = BOOK.focus;
+  const d = BOOK.queue[0];
+  if (st.bound !== "side" || BOOK.K < 1 || !d) return false;
+  if (d > 0 && f === "L" && hasSide(2 * BOOK.K - 1)) BOOK.focus = "R";
+  else if (d < 0 && f === "R" && hasSide(2 * BOOK.K - 2)) BOOK.focus = "L";
+  else return false;
+  BOOK.queue.shift();
+  return true;
 }
 
 // Pulling a page (recipe.drag). A press on a page claims the drag; once it
@@ -631,9 +745,11 @@ const BOOK_RECIPE = {
       ],
     },
     { key: "color", label: "Cover color", type: "color", default: "#2f4b6e" },
+    READING,
   ],
   controls: [{ key: "turn", label: "Turn the page", type: "pulse", ease: 1.2 }],
   action: { key: "turn", label: "Turn the page", at: bookTapAt },
+  focus: bookFocus,
   drag: bookDrag(BOOK_PULL),
   pictures: {
     // The Tinkerer's Manual (lane Manual), 25 Letter pages.
@@ -659,6 +775,11 @@ const BOOK_RECIPE = {
       if (N && BOOK.queue.length < 3) BOOK.queue.push(info.tap?.pick === 1 ? -1 : 1);
     }
     BOOK.N = N;
+    if (BOOK.resume && pics && N) {
+      const K2 = Math.min(lastSpread(st, N), pageSpread(st, Math.min(N - 1, BOOK.resume)));
+      Object.assign(BOOK, { resume: 0, K: K2, lastPage: spreadPage(st, K2, N), landed: 3 });
+      if (pics.page !== BOOK.lastPage) pics.go(BOOK.lastPage);
+    }
     const a = BOOK.anim;
     if (a?.go !== undefined) {
       // A pull just began: show the pages it turns to.
@@ -706,12 +827,13 @@ const BOOK_RECIPE = {
         const K2 = d === 1 ? BOOK.K + 1 : d === -1 ? BOOK.K - 1 : pageSpread(st, pics.page);
         BOOK.lastPage = pics.page;
         bookGo(K2, time, pics, N);
-      } else if (BOOK.queue.length > 0) {
+      } else if (BOOK.queue.length > 0 && !bookStep(st)) {
         if (BOOK.queue.shift() > 0)
           bookGo(BOOK.K < lastSpread(st, N) ? BOOK.K + 1 : 0, time, pics, N);
         else if (BOOK.K > 0) bookGo(BOOK.K - 1, time, pics, N);
       }
     }
+    bookView(st, out);
     const L = bookLayout(st, N, time);
     out.sheets = BOOK.sides ? {} : { cover: { page: 0, visible: N ? 1 : 0 } };
     out.leaves = [];
@@ -753,7 +875,8 @@ const BOOK_RECIPE = {
     const W = H * Math.max(0.4, Math.min(2.2, aspect || SAMPLE_ASPECT));
     const cover = o.color || "#2f4b6e";
     const paper = "#fcfbf7";
-    Object.assign(BOOK, { K: 0, anim: null, queue: [], tapN: 0, lastPage: 0, style: st, frame: 0, landed: 3, sides: null, sideOf: null, sheetsOf: null, press: null }); // prettier-ignore
+    bookResume(k);
+    Object.assign(BOOK, { K: 0, anim: null, queue: [], tapN: 0, lastPage: 0, style: st, frame: 0, landed: 3, sides: null, sideOf: null, sheetsOf: null, press: null, focus: null, viewK: -1, one: o.reading === "one" }); // prettier-ignore
     if (st.bound === "top") buildStapled(k, st, W, H);
     else buildSideBound(k, st, o, { W, H, cover, paper });
     useBudget(k);
@@ -1241,9 +1364,11 @@ const ALBUM_RECIPE = {
       ],
     },
     { key: "captions", label: "Captions", type: "switch", default: true },
+    READING,
   ],
   controls: [{ key: "turn", label: "Turn the page", type: "pulse", ease: 1.2 }],
   action: { key: "turn", label: "Turn the page", at: bookTapAt },
+  focus: bookFocus,
   // Heavier pages: they follow the finger with more lag and fall back more
   // readily.
   drag: bookDrag(ALBUM_PULL),
@@ -1281,7 +1406,8 @@ const ALBUM_RECIPE = {
     const m = k.media;
     const aspects = m?.aspects || (m ? [m.aspect] : ALBUM_SAMPLE_ASPECTS);
     const { sides, kinds, sideOf } = albumSides(aspects);
-    Object.assign(BOOK, { K: 0, anim: null, queue: [], tapN: 0, lastPage: 0, style: st, frame: 0, landed: 3, sides, sideOf, press: null }); // prettier-ignore
+    bookResume(k);
+    Object.assign(BOOK, { K: 0, anim: null, queue: [], tapN: 0, lastPage: 0, style: st, frame: 0, landed: 3, sides, sideOf, press: null, focus: null, viewK: -1, one: o.reading === "one" }); // prettier-ignore
     const names = ["o", "t", "u", "l", "r"];
     BOOK.sheetsOf = (i, fb, side) => {
       const kind = kinds[side] || "";
@@ -1332,7 +1458,7 @@ const ALBUM_RECIPE = {
 // frame steps through a set of photos, fading through black while the next
 // one is built.
 
-const FRAME = { tapN: 0, t0: -99, digital: false, shown: -1, fade: 0, next: -1, since: 0, asked: 0 }; // prettier-ignore
+const FRAME = { tapN: 0, t0: -99, digital: false, shown: -1, fade: 0, next: -1, since: 0, asked: 0, focus: false, size: [1, 1] }; // prettier-ignore
 const FRAME_SWING = 3; // seconds
 const FRAME_STEP = 4.5; // seconds a photo shows on the digital frame
 const FRAME_FADE = 0.45; // seconds to fade out, and to fade in
@@ -1456,6 +1582,7 @@ const FRAME_RECIPE = {
   ],
   controls: [{ key: "swing", label: "Swing", type: "pulse", ease: FRAME_SWING }],
   action: { key: "swing", label: "Swing the frame" },
+  focus: (p) => focusToggle(FRAME, p),
   pictures: {
     sample: (o) =>
       o.frame === "digital"
@@ -1494,6 +1621,8 @@ const FRAME_RECIPE = {
     const st = time - FRAME.t0;
     if (st > FRAME_SWING) FRAME.t0 = -99;
     out.parts.frame = { angle: FRAME.t0 > -99 ? frameAngle(st) : 0 };
+    // Page focus: a double-tap fills the screen with the photo.
+    out.view = FRAME.focus ? { key: "photo", center: [0, 0, 0], size: FRAME.size } : { key: "all" };
     // A video starts playing by itself, once (a tap swings the frame).
     if (pics?.kind === "video" && FRAME.video !== pics.name) {
       FRAME.video = pics.name;
@@ -1527,11 +1656,12 @@ const FRAME_RECIPE = {
   build(k, o) {
     const style = FRAME_STYLES[o.frame] ? o.frame : "wood";
     const fs = FRAME_STYLES[style];
-    Object.assign(FRAME, { tapN: 0, t0: -99, digital: style === "digital", random: o.order === "random", next: -1, since: 0, video: null }); // prettier-ignore
+    Object.assign(FRAME, { tapN: 0, t0: -99, digital: style === "digital", random: o.order === "random", next: -1, since: 0, video: null, focus: false }); // prettier-ignore
     // The opening follows the photo's shape (a digital frame is 4:3).
     const aspect = style === "digital" ? 4 / 3 : Math.max(0.5, Math.min(2, k.media?.aspect || 900 / 675)); // prettier-ignore
     const H = 1;
     const W = H * aspect;
+    FRAME.size = [W, H];
     const mat = fs.mat || 0;
     const ow = W / 2 + mat; // the frame's inner edge, half width and height
     const oh = H / 2 + mat;
@@ -1656,6 +1786,7 @@ export const RECIPES = {
     // A tap on the left of the page goes back, on the right (or the middle)
     // forward; the pages slide, they don't flip.
     action: { key: "next", label: "Next page, or play and pause", at: (p) => ({ key: "next", pick: p[0] < 0 ? 1 : 0 }) }, // prettier-ignore
+    focus: (p) => focusToggle(LAB, p),
     // What the toy opens before you open something of your own, and what
     // it accepts.
     pictures: {
@@ -1691,9 +1822,14 @@ export const RECIPES = {
         else if (pics?.count > 1) pics.go((pics.page + d + pics.count) % pics.count);
       }
       out.sheets = { page: { page: pics?.page ?? 0 } };
+      // Page focus: a double-tap fills the screen with the page.
+      out.view = LAB.focus
+        ? { key: "page", center: [0, 0, 0], size: [2.08, 2.08] }
+        : { key: "all" };
     },
     build(k) {
       LAB.tapN = 0;
+      LAB.focus = false;
       k.sheet({ id: "page", center: [0, 0, 0], width: 2, height: 2, normal: [0, 0, 1] });
       // A thin gray card behind it, so a white page has an edge on a white
       // background (and the picture a back), with clean, sharp edges (rect).

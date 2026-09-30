@@ -907,6 +907,99 @@ export class Player {
     this.stage.requestRender();
   }
 
+  // ---- Page focus (lane Books) ----------------------------------------------------
+  // A recipe that can look closely at part of itself (a book's page) has
+  // `focus(point, time)`: a double-tap at a point (recipe coordinates; null
+  // off the toy, or when a zoom out lets go) focuses or lets go, and returns
+  // true when the recipe took it. The recipe says what to show in
+  // `out.view`: { key, center, size } (a rectangle facing the front, in
+  // recipe coordinates) or { key } alone for the whole toy; each new key
+  // glides the view there. Zooming out from a focused view lets it go.
+  canFocus() {
+    return !!this.toyInfo?.recipe?.focus;
+  }
+
+  focusAt(world) {
+    const f = this.toyInfo?.recipe?.focus;
+    if (!f) return false;
+    const took = f(world ? this.toRecipe(world) : null, this.time);
+    this.stage.requestRender();
+    return !!took;
+  }
+
+  // Follows the recipe's out.view; true while the view glides.
+  followView() {
+    const cam = this.camera;
+    const recipe = this.toyInfo?.recipe;
+    const v = recipe?.focus ? this.motion.out?.view : null;
+    if (!v) {
+      this.pageView = null;
+      return false;
+    }
+    const was = this.pageView;
+    if (!was || was.recipe !== recipe || was.key !== v.key) {
+      // A toy that opens on its whole self keeps the view it opened with.
+      const first = !was || was.recipe !== recipe;
+      // (Leaving the whole toy, the view it had is kept to come back to.)
+      const back = first
+        ? null
+        : was.center
+          ? was.back
+          : { target: cam.target.slice(), ...cam.tgt };
+      this.pageView = { recipe, key: v.key, dist: 0, center: !!v.center, back };
+      if (v.center || !first) this.glideTo(v);
+    }
+    // A hand on the view stops the glide; a zoom out lets a page go.
+    if (cam.dragging) this.glide = null;
+    const g = this.glide;
+    if (!g) {
+      if (this.pageView.dist && cam.tgt.distance > this.pageView.dist * 1.2) {
+        this.pageView.dist = 0;
+        recipe.focus(null, this.time);
+      }
+      return false;
+    }
+    // (On the toy's clock, so it keeps pace with a page's turn.)
+    const w = g.dur > 0 ? Math.min(1, Math.max(0, this.time - g.t0) / g.dur) : 1;
+    const e = w < 0.5 ? 4 * w * w * w : 1 - Math.pow(-2 * w + 2, 3) / 2;
+    const { from: a, to: b } = g;
+    const turn = (x) => x - 2 * Math.PI * Math.round(x / (2 * Math.PI));
+    for (let i = 0; i < 3; i++) cam.target[i] = a.target[i] + (b.target[i] - a.target[i]) * e;
+    for (const k of ["yaw", "pitch", "roll"]) cam.tgt[k] = a[k] + turn(b[k] - a[k]) * e;
+    cam.tgt.distance = a.distance + (b.distance - a.distance) * e;
+    cam.interact();
+    if (w >= 1) this.glide = null;
+    return true;
+  }
+
+  glideTo(v) {
+    const cam = this.camera;
+    const from = { target: cam.target.slice(), ...cam.tgt };
+    let to;
+    if (v.center && v.size) {
+      const [x, y, z] = v.center;
+      const c = this.fromRecipe(v.center);
+      const len = (p) => Math.hypot(p[0] - c[0], p[1] - c[1], p[2] - c[2]);
+      const hw = len(this.fromRecipe([x + v.size[0] / 2, y, z]));
+      const hh = len(this.fromRecipe([x, y + v.size[1] / 2, z]));
+      // (The stage's field of view, 38 degrees, spans the narrower side.)
+      const t = Math.tan((19 * Math.PI) / 180);
+      const aspect = (this.canvas.clientWidth || 1) / (this.canvas.clientHeight || 1);
+      const [th, tv] = aspect < 1 ? [t, t / aspect] : [t * aspect, t];
+      const d = Math.max(hh / tv, hw / th) * 1.05;
+      cam.minDistance = Math.min(cam.minDistance, d * 0.6);
+      to = { target: c, yaw: 0, pitch: 0, roll: 0, distance: d };
+      this.pageView.dist = d;
+    } else {
+      const back = this.pageView.back;
+      to = back ? { ...back, target: back.target.slice() } : { target: (this.toyInfo?.center || [0, 0, 0]).slice(), ...cam.home }; // prettier-ignore
+    }
+    cam.vel.yaw = cam.vel.pitch = 0;
+    this.glide = { from, to, t0: this.time, dur: cam.reducedMotion ? 0 : 0.7 };
+  }
+
+  // ---- End of page focus ------------------------------------------------------------
+
   // A one-finger drag pans (instead of turning) on a picture toy seen close up.
   pansHere() {
     return !!this.pictures && this.camera.cur.distance < (this.toyInfo?.radius || 1) * 1.6;
@@ -991,6 +1084,9 @@ export class Player {
   }
 
   resetCamera() {
+    // Page focus: no glide, and a page in view lets go to here.
+    this.glide = null;
+    if (this.pageView) this.pageView.back = null;
     if (this.pictures && this.toyInfo) this.camera.target = this.toyInfo.center.slice(); // Pictures
     this.camera.reset();
     this.stage.requestRender();
@@ -1241,6 +1337,7 @@ export class Player {
       }
     }
     this.pictures?.update(this.motion.out, this.time); // Pictures
+    const gliding = this.followView(); // Page focus
     if (this.motion.addonU) {
       this.stage.setAddonUniforms({ ...u, ...this.motion.addonU, uSpPat: [0, 0, 0, 0] });
     }
@@ -1249,7 +1346,7 @@ export class Player {
       this.driver.isAnimating(effects, this.time) ||
       this.motion.isAnimating(motion, this.time) ||
       this.idle.weight > 0;
-    const busy = moving || animating || dripping || !!this.stroke;
+    const busy = moving || animating || dripping || !!this.stroke || gliding;
     if (busy) {
       this.pickDirty = this.pickDirty || animating;
       this.stage.requestRender();
