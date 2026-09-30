@@ -187,7 +187,7 @@ export const TOY_HELP = {
   torus: {
     howTo: "Tap it to spin it on its edge. Dress it as a donut, bagel or swim ring in the Toy tab.",
     about:
-      "A torus is the shape of a ring: a circle swept around a line beside it, like a hoop made of tube. Donuts, bagels, swim rings and bicycle inner tubes are all tori. In topology, the math of shapes that can stretch but not tear, a torus has exactly one hole, so a coffee mug with its handle counts as one too.\n\nTap it and it pops up onto its edge and wobbles around like a coin spun on a table, leaning lower and circling faster until it drops flat. Real rings and coins do this: as one leans lower, the point where it touches the table runs around faster, which is why a settling coin whirs quicker just before it stops. Under Dress it as in the Toy tab, pick a plain torus, a donut, a bagel or a swim ring.",
+      "A torus is the shape of a ring: a circle swept around a line beside it, like a hoop made of tube. Donuts, bagels, swim rings and bicycle inner tubes are all tori. In topology, the math of shapes that can stretch but not tear, a torus has exactly one hole, so a coffee mug with its handle counts as one too.\n\nTap it and it pops up onto its edge and wobbles around like a coin spun on a table, leaning lower and circling faster until it drops flat. Real rings and coins do this: as one leans lower, its low point runs around faster, so a settling coin whirs quicker just before it stops. Under Dress it as in the Toy tab, pick a plain torus, a donut, a bagel or a swim ring.",
   },
   blob: {
     howTo: "Tap it to split it into three. Make a shape of your own in the Make tab.",
