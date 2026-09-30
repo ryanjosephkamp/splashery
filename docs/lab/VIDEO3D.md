@@ -4,7 +4,111 @@ Lane Video 3D (prefix `v3d`), built by Opus 5.5, September 30, 2026. The brief i
 [docs/handoff/Video3D.md](../handoff/Video3D.md). This is a one-week spike: it ends in this report
 and a decision, not a polished toy.
 
-MEASUREMENTS
+## The short answer
+
+Yes, for scenes that stand still, in the browser, with nothing uploaded. Splat.js (MIT, vendored in
+`vendor/splatjs/`) picks up the frames Splashery chooses, works out where the camera was for each
+one, and trains Gaussian splats on the graphics card through WebGPU. The labs toy "Video to 3D"
+(Studio shelf) does the whole thing and shows the result as the toy's own splats, with Replay flight
+along the video's camera path and a PLY to save. A walk around a statue and a walk down a street
+rebuilt well from the video's own angles; people who walk through the shot turn into ghosts, and a
+drone flight high over a city failed to find its camera path (too little parallax).
+
+**Recommendation: keep it as a labs experiment for now**, and decide on a toy once the owner has run
+it on his own computer and phone (the readout on the page gives every number the report needs). If
+those numbers hold (minutes on a laptop, a phone that finishes a short clip), it can become a toy
+with the changes listed at the end. It should not become the way showcase scenes are made: the Mac
+route below does that far better.
+
+## What was built
+
+- **Splat.js, checked and vendored.** MIT (Copyright (c) 2026 Stratum1 GmbH), commit `88efe9a`
+  (September 23, 2026), 20 modules, 544 KB. It needs WebGPU and nothing else: no SharedArrayBuffer,
+  no cross-origin isolation, so GitHub Pages serves it as it is. Its own video reader loads
+  Mediabunny (MPL-2.0), so it is left out and Splashery reads the video itself: a `<video>` element
+  seeks to each moment, and the sharpest of three frames in each window is kept (a Laplacian score).
+- **Loaded only here.** `src/video3d/run.js` imports Splat.js with `import()` when a video is opened
+  in this toy. The shelf, the other toys, this toy's samples and an embed never fetch it
+  (`tests/v3d.spec.mjs` checks).
+- **The toy.** Choose the stretch (start, length, frames a second) in the Toy tab, open a video, and
+  a card shows each stage as it runs (frames picked, decoded, camera path with each step named,
+  seeded, training with a live view, export), then a readout: each stage's seconds, frames picked
+  and placed, points, splats, training steps, the setting and the WebGPU adapter. "Save as PLY"
+  saves Splat.js's standard file. The splats become kit splats with their own sizes and rotations
+  (an additive engine change, `scales` and `quat` on cloud samples), in a frame where the cameras'
+  up is up, and the scene is centered on the point the cameras look at when they circle something.
+  The toy opens at the video's first view; Replay flight moves the stage's own camera along the path
+  at the video's speed, with the video's sound (the speaker on), and a drag roams off it at the end.
+- **Device settings** (`src/video3d/frames.js`, from the player's tier): a phone ("low" or "mid")
+  takes at most 20 or 32 frames at 480 or 640 px, trains at 360 or 480 px for 1,500 or 3,000 steps
+  up to 60,000 or 120,000 splats, and uses Splat.js's low-memory mode and quick solve; a computer
+  ("high" or "max") takes 60 or 90 frames and trains 7,000 or 12,000 steps up to 250,000 or 350,000
+  splats.
+
+## What was measured, and where
+
+Everything below ran in this lane's cloud container, **which has no GPU**: Chromium's WebGPU ran on
+SwiftShader (a software GPU on 4 CPU cores), about a hundred times slower than a laptop's graphics
+card, and for most runs it shared the CPU with the full test suite. The numbers show that the
+pipeline works end to end and how the stages compare; they are not the times anyone will see. The
+samples were trained with small settings to fit (360 px, 800 to 1,500 steps).
+
+| Video (CC BY 3.0, Wikimedia Commons)        | Frames picked / placed | Camera path | Training            | Splats | PLY     | Result                       |
+| ------------------------------------------- | ---------------------- | ----------- | ------------------- | ------ | ------- | ---------------------------- |
+| Splat.js's own test set (12 rendered views) | 12 / 12                | 32 s        | 212 steps, 518 s    | 20,325 | 1.1 MB  | Works                        |
+| Statue orbit (the Dronalist), 20 s at 3:18  | 36 / 24                | 528 s       | 1,504 steps, 88 min | 30,558 | 1.65 MB | Works from the filmed angles |
+| Edinburgh walk (POPtravel), 10 s at 7:32    | 20 / 20                | 62 s        | 800 steps, 59 min   | 30,135 | 1.58 MB | Works; walkers become ghosts |
+| Nicosia by drone (The Track Record), 0:45   | 20 / –                 | failed      | –                   | –      | –       | "Need more parallax/overlap" |
+| DRONE2                                      |                        |             |                     |        |         |                              |
+
+Picking the frames took 10 to 17 seconds (seeking a 480p WebM), decoding them under a second.
+
+**On a real device** the owner can run the same test: open
+https://ryanjosephkamp.github.io/splashery/?labs=1 (once merged), Studio shelf, Video to 3D, open a
+clip, and send the card's readout (it names the adapter, the setting and each stage's seconds). From
+Splat.js's own measurements on a desktop graphics card (an RTX 5080), a 251-photo scene solves in
+about 3 to 6 minutes and trains 40,000 steps in 10 minutes; a 20- to 60-frame clip at this toy's
+settings should take a few minutes on a laptop. Phones: not measured here (no phone in the
+container). WebGPU is on in current Chrome, Edge, Safari (iPhones included) and Firefox.
+
+## What fails
+
+- **Moving things.** People walking through the street became smeared ghosts; cars would too. The
+  method assumes the scene stands still; true 4D needs a rented GPU (not this lane).
+- **Little parallax.** A drone high over a city, moving slowly, sees the city from nearly the same
+  angle in every frame, and the camera solve fails ("need more parallax/overlap"). Lower, faster or
+  circling flights work better; so does a longer stretch with fewer frames a second.
+- **Angles nobody filmed.** Turning past the filmed arc shows soft, blurry splats (the blue smear
+  beside the statue, blobs in the sky). Floaters (loose splats in front of the camera) appear with
+  short training.
+- **Low texture, water, sky and night.** Blank walls, water and sky give the solve nothing to match,
+  and night footage is too noisy; the statue's water and sky trained as soft blurs. Not measured on
+  a night clip.
+- **Cuts.** A stretch that crosses a cut in the video cannot be solved as one path; choose a stretch
+  inside one shot.
+- **Size.** The Toy tab refuses files over 40 MB (a limit in `src/ui.js`), so long drone clips must
+  be trimmed first.
+
+## What it costs a phone
+
+Not measured on a phone. What is known: the low and mid settings keep 20 to 32 frames at 360 to 480
+px on the graphics card (a few tens of MB of training targets), 60,000 to 120,000 splats, and
+Splat.js's low-memory mode (it frees the CPU copies once the graphics card has them). Training keeps
+the GPU busy for the whole run, so the phone warms up and the battery drains; iOS takes the GPU away
+from a tab in the background, and Splat.js stops the run (the card says so). A phone run should stay
+on screen, plugged in, and short (5 to 10 seconds of video).
+
+## To become a toy
+
+- The owner's numbers from a laptop and a phone, from the readout.
+- A higher file limit for this toy (or reading only the chosen stretch), so a long drone clip can be
+  opened as it is.
+- Samples trained on a real GPU (the Mac route below, or a laptop), so the samples look like what a
+  visitor will get.
+- A "keep training" button (Splat.js can continue a run), and a warning before a long run on a
+  phone.
+- The effect-quality bar: the result is a scan, not a kit toy, so its tap is the camera flight;
+  decide whether that is enough of an effect for a public toy.
 
 ## The Mac route, for showcase scenes
 
