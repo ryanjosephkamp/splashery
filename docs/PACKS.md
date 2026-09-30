@@ -475,6 +475,67 @@ pitch and roll stay at the toy's starting pose. Zoom, pan, pinch and Reset view 
 - A normal two-finger pinch never turns a toy: two fingers zoom, roll only after a clear twist
   (about 17 degrees) and turn only when they move together first (`PINCH_*` in `src/camera.js`).
 
+## 5d. Songs and levers
+
+From lane Pianos (September 29, 2026; its notes are in [handoff/Pianos.md](handoff/Pianos.md)). A
+keyboard toy plays songs: its own, a MIDI file of yours, or a tune in ABC notation pasted as text.
+Every key, hammer, damper, jack and string moves as its own solid piece.
+
+**Levers** (kind `lever`, 22) move many small pieces, each by its own amount, beyond the 15 parts
+and 48 tokens: up to 96 levers in up to 6 groups.
+
+```js
+build(k) {
+  const tip = k.lever({ pivot: [0, 0.7, -0.1], axis: [1, 0, 0], angle: -0.07 }); // keys tip about a rail
+  const lift = k.lever({ dir: [0, 1, 0], move: 0.02, channel: 2 });            // dampers lift
+  const hum = k.lever({ dir: [0, 1, 0], vibrate: 0.003, channel: 2 });         // strings quiver
+  const lit = k.lever({ pivot, axis, angle, glow: "#6cf", glowChannel: 1 });    // keys that light up
+  k.add(k.box(0.022, 0.02, 0.15), { pos, kind: "lever", params: [k.leverParam(tip, i), 0] });
+  k.add(string, { kind: "lever", params: (c) => [k.leverParam(hum, i), c.t] }); // place along it
+},
+drive(t, c, out) {
+  out.levers = [keys, hammers, dampers]; // three lists of amounts 0..1, one per lever index
+},
+```
+
+- A group is one of `{ pivot, axis, angle }` (tips by up to `angle` radians), `{ dir, move }`
+  (slides) or `{ dir, vibrate }` (quivers fast, most at the middle of its string: the second param
+  is the splat's place along the string, 0..1; it runs on the toy's own clock, so only with motion
+  on). `channel` (0..2) says which of the three lists moves it; `glow` with `glowChannel` adds a
+  light by another list. Lever `i` of every group reads index `i` of the lists, so key `i`'s key,
+  hammer and damper share an index and each follows its own list.
+- Amounts are kept to 8 bits. Levers turn their splats with them, so flat splats stay on the face.
+- A lever splat can't also be on a part or a token.
+
+**Songs** (`src/songs.js`). A song is a plain list:
+`{ title, composer, notes: [{ t, d, n, v, ch, drum }], pedal: [[t0, t1]], length }` (seconds, MIDI
+note numbers, velocity 0..1; `pedal` lists when the sustain pedal is down).
+
+- `readMidi(bytes, fileName)` reads a Standard MIDI File (format 0 or 1; notes, velocity, tempo
+  changes, the sustain pedal, channel 10 as drums). `readAbc(text)` reads the first tune in ABC
+  (header, notes, chords, rests, ties, broken rhythm, triplets, repeats and endings; its first voice
+  only; decorations and grace notes are skipped). Both throw an `Error` with a message for people.
+- `fitNotes(song, low, high)` moves notes outside the keyboard in by octaves.
+- `songFromText({ title, composer, bpm, text })` writes a built-in song compactly:
+  `"E5/16 D#5/16 | P A4/8 … p && A2/16 E3/16 …"` (a note or a chord joined by `+`, then its length:
+  `/8` an eighth, `/16:3` three sixteenths; `r` a rest; `P` and `p` put the pedal down and lift it;
+  `v0.6` the loudness from there; `&&` starts another voice at 0). Write built-in songs from
+  public-domain scores (compositions only); `writeMidi(song)` makes sample `.mid` files from them.
+- `new SongPlayer({ low, high })` keeps the place, speed and loop. Call
+  `player.update(info.time, info.sound, (note, when, ring) => playSpec(…))` in `drive` every frame:
+  it moves the song on and schedules each note once, a quarter second ahead on the audio clock
+  (`ring` is how long it sounds, to the key's release or the pedal's). `player.keys()` then gives,
+  per key, `down` (held now), `since` (seconds since struck), `next` (seconds until struck next) and
+  `vel`; `player.pedal()` says whether the pedal is down. `play({ until })` plays to a point and
+  stops (a tap's opening).
+- A recipe's `song: songControls(player, { songs: [{ id, title, make }] })` shows the **song bar**
+  under the stage (the chess game bar made general: a title you can edit, back to the start, play
+  and pause, loop, speed and a slider for where the song is) and a song panel in the Toy tab (the
+  built-in songs, "Open a MIDI file…" and "Paste ABC"). A playing song keeps frames coming with
+  motion off. The chess set's bar is unchanged.
+- Keyboard voices in `src/voices.js`: `grand`, `upright`, `harpsichord`, `organ`, `synth` and
+  `vibes`, each with `hold` (seconds the key is down; then the damper stops the note).
+
 ## 6. Behaviours
 
 A behaviour moves each splat on the GPU, every frame. Set `kind` and `params: [a, b]` on a shape or

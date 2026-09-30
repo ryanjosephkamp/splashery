@@ -1500,7 +1500,7 @@
       "owner": "The owner's notes and the Pages into Splats plan (accepted September 28, 2026): people type their own Gaussian splat equations and play with them, with a Tinkerer's Manual that explains the language.",
       "effect": "One cycle of time t plays, so the shape moves in real time: a torus rolls, a sphere ripples, a galaxy turns.",
       "sound": "A soft rising tone as t plays.",
-      "improved": "Manual: new toy (labs). You type where every splat goes and what color it is, as equations in u, v and t (x, y and z, the ranges of u and v, hue or r, g and b, size, count and spread), read by lane Math's safe reader. Eight programs to start from: sphere, torus, Möbius strip, seashell, trefoil knot, wave, spiral galaxy and Klein bottle. A tap plays t from 0 to 2π (4 s) through twelve copies, each morphing into the next; a program without t draws its splats again in order."
+      "improved": "Manual: new toy (labs). You type where every splat goes and what color it is, as equations in u, v and t (x, y and z, the ranges of u and v, hue or r, g and b, size, count and spread), read by lane Math's safe reader. Eight programs to start from: sphere, torus, Möbius strip, seashell, trefoil knot, wave, spiral galaxy and Klein bottle. A tap plays t from 0 to 2π (4 s) through twelve copies, each morphing into the next; a program without t draws its splats again in order. Lab r2 (the owner's review of September 29, 2026: \"really, really grainy\"): every splat at full opacity and its exact size, the sharp kernel, and a Splats choice: Solid (default; a surface's splats lie flat along it, a curve's are drawn out along it) or Dots (each programmed splat its own dot)."
     },
     "seashell-spiral": {
       "v": "keep",
@@ -1710,6 +1710,34 @@
       "owner": "Incredible; basically perfect.",
       "sound": "The scale it already plays, as mallet tones.",
       "improved": "D: a tap on one bar lifts the mallet over that bar, strikes it and plays its note; a tap anywhere else plays the scale. Each bar dips as the mallet hits it. E1c: any tap over the row of bars strikes the nearest bar (easy to hit on a phone). The mallet swings over from wherever it is, lands 0.12 s after the tap with the bar's note, bounces off, and the bar jumps. A tap off the bars still plays the scale."
+    },
+    "grand-piano": {
+      "v": "keep",
+      "owner": "Lane Pianos, from the owner's idea on the Toy Ideas page (September 29, 2026).",
+      "effect": "Tap a key: it dips, its hammer flies up under the open lid and strikes the strings, and the damper lifts while the note rings. Tap anywhere else: it plays the opening of its song, every key and hammer moving with the notes and the sustain pedal going down with the phrases (about 5 s; the whole song plays from the song bar).",
+      "sound": "A warm concert-grand voice made in the page (felt thump, ringing partials, the damper's soft stop). Built-in songs: Für Elise, Clair de lune, Gymnopédie No. 1, Ode to Joy.",
+      "improved": "Pianos: 88 keys, 88 hammers and 70 dampers, each its own solid piece (the lever kind). A tapped key dips for about 0.9 s, its hammer strikes and falls back, its damper lifts. A tap elsewhere plays the song's opening (about 5 s) with the keys, hammers, dampers and sustain pedal following every note. The song bar plays the whole song, and a MIDI file or an ABC tune of your own."
+    },
+    "upright-piano": {
+      "v": "keep",
+      "owner": "Lane Pianos, from the owner's idea on the Toy Ideas page (September 29, 2026).",
+      "effect": "Tap a key to play it: the front panel is off, so you see the row of hammers swing forward onto the upright strings. Tap elsewhere for its song, a ragtime (The Entertainer), the hammers rippling along the row.",
+      "sound": "A brighter, slightly honky-tonk upright voice, so it sounds different from the grand.",
+      "improved": "Pianos: a walnut upright with its upper front panel off; 88 keys, hammers that swing back onto the strings and 66 dampers that pull away, each its own solid piece. A tap elsewhere plays the opening of The Entertainer (about 5 s); the song bar plays the rest."
+    },
+    "harpsichord": {
+      "v": "keep",
+      "owner": "Lane Pianos, from the owner's idea on the Toy Ideas page (September 29, 2026).",
+      "effect": "Tap a key: its jack rises and the quill plucks the string, which you see quiver. Tap elsewhere: the Minuet in G from Bach's notebook, the jacks bobbing like a row of dancers.",
+      "sound": "A bright, plucked harpsichord voice, made in the page.",
+      "improved": "Pianos: a French-style harpsichord (black naturals, bone sharps) with 61 keys, jacks and strings, each its own solid piece. A key lifts its jack, which plucks; the string quivers until the key comes up. A tap elsewhere plays the opening of the Minuet in G (about 5 s); the song bar plays both halves, each twice."
+    },
+    "electronic-keyboard": {
+      "v": "keep",
+      "owner": "Lane Pianos, from the owner's idea on the Toy Ideas page (September 29, 2026).",
+      "effect": "Tap a key to play it. Tap elsewhere and the keys light up just ahead of each note, like a learning keyboard, while the little screen scrolls the song's title and a beat starts on the drum pads. Panel buttons switch the voice: piano, organ, synth, vibes.",
+      "sound": "Four synth voices and a simple drum beat, all made in the page.",
+      "improved": "Pianos: 61 keys that light up just before each note of the song and stay lit while held, a screen that scrolls the title and shows the voice, four colored voice buttons and four drum pads that flash with the beat (kick, snare, hi-hat, tom). Songs: Ode to Joy, Twinkle, Twinkle, Little Star and Frère Jacques, or your own MIDI file (its drums, or a simple beat)."
     },
     "toy-piano": {
       "v": "keep",
@@ -2096,17 +2124,66 @@
     },
     "screen": {
       "v": "keep",
-      "owner": "From the owner's notes of September 28, 2026 (lane Screens; labs only).",
-      "effect": "Your video or GIF on a screen of splats, as an old TV, a flat TV, a cinema or a hologram; the tap switches it on (the TV's bright line opens, the flat TV fades up, the curtains part, the hologram flickers up), then plays and pauses.",
-      "sound": "The TV's click and hum; each style its own (a soft tone, the curtains' swish, a shimmer).",
-      "improved": "Screens: four styles on a picture sheet with method \"screen\", a Big Buck Bunny scene (CC BY 3.0) and Muybridge's horse GIF (public domain) as samples, video sound on the speaker button."
+      "owner": "From the owner's notes of September 28, 2026 (lane Screens; labs only), and his review of September 29, 2026: \"very close to perfect\"; sharper sets, nothing of the picture while off, and a real off switch (lane Screens r2).",
+      "effect": "Your video or GIF on a screen of splats, as an old TV, a flat TV, a cinema or a hologram. A tap switches it on (the TV's bright line opens, the flat TV fades up, the curtains part, the hologram flickers up); a tap on the picture plays and pauses; a tap on its switch (the old TV's power knob, the flat TV's button, the curtains, the hologram's base) switches it off: the old TV's picture shrinks to a bright dot, the flat TV fades to black, the curtains close, the hologram sinks into its beam.",
+      "sound": "The TV's click and hum, and on switching off its click and falling whine; each style its own (a soft tone, the curtains' swish, a shimmer).",
+      "improved": "Screens: four styles on a picture sheet with method \"screen\", a Big Buck Bunny scene (CC BY 3.0) and Muybridge's horse GIF (public domain) as samples, video sound on the speaker button. Screens r2: the picture's sheet is hidden while the set is off or the curtains are closed (nothing shows through), a GIF holds its frame and a video pauses; an off switch on each style; sharp sets (even placement in square tiles, walnut, velvet, brass and gold)."
+    },
+    "fountain-pen": {
+      "v": "keep",
+      "owner": "From the owner's approved ideas on the Toy Ideas page (lane Real objects, September 29, 2026): \"This should be a real life splat if you can find it. I do not want this to be a cartoon or an illustration.\"",
+      "effect": "The cap (cut out of the scan as a solid piece) slides off and clicks onto the end, and the nib writes a swirl in wet blue ink that glistens, then dries darker; the cap goes back on (4 s).",
+      "sound": "A cap click, a smooth nib scratch, another click.",
+      "improved": "Real objects: a detailed CC BY model of a green fountain pen (maker's marks painted out) on a kit-built notepad. The cap slides off and posts on the back end, the pen tilts and writes a looping swirl in bright wet ink that dries to dark navy from its start, the cap goes back on and the ink runs back into the nib (4 s). Round 2: denser, sharper model."
+    },
+    "water-bottle": {
+      "v": "keep",
+      "owner": "From the owner's approved ideas on the Toy Ideas page (lane Real objects, September 29, 2026): \"This should be a real life splat if you can find it. I do not want this to be a cartoon or an illustration.\"",
+      "effect": "Its cap (cut out of the scan as a solid piece) spins off in two turns and hops up. The bottle tips and water glugs out as a stream of drops into a glass beside it; then it all runs back and the cap screws on (4.5 s).",
+      "sound": "Cap clicks, then a glug-glug pour that rises in pitch as the glass fills.",
+      "improved": "Real objects: a detailed CC BY model of an orange steel bottle. The cap (cut from the model above its plug, its underside closed) unscrews in two turns and hops to the table, the bottle lifts and tips, and a continuous stream of water, drawn as overlapping pieces that follow the pour's arc, glugs into a kit-built glass with a splash where it lands while the water rises; then it all runs back, the bottle stands and the cap screws on (4.5 s). Round 2: denser model, cap plug left out, a stream instead of drops."
+    },
+    "soda-can": {
+      "v": "keep",
+      "owner": "From the owner's approved ideas on the Toy Ideas page (lane Real objects, September 29, 2026): \"This should be a real life splat if you can find it. I do not want this to be a cartoon or an illustration.\"",
+      "effect": "It shakes in place, then the ring pull (a kit-built piece matched to the scan) levers up with a crack, and a jet of foam and bubbles sprays up and spatters down around it; the tab folds back and the foam fades (3.5 s).",
+      "sound": "A rattle, the sharp pssht of the can opening, then a fizz that dies away.",
+      "improved": "Real objects: a detailed CC BY model of a can with an original plain orange label (no brand) on a kit-built cork coaster. It shakes, its own ring pull (cut from the model as a solid piece) levers up, the opening shows, a continuous jet of cream foam streaked with amber shoots up and falls back while fine drops spatter onto the lid and the coaster and soak away, then the tab folds back (3.5 s). Round 2: denser model, a foamy jet instead of clumps."
+    },
+    "running-shoe": {
+      "v": "keep",
+      "owner": "From the owner's approved ideas on the Toy Ideas page (lane Real objects, September 29, 2026): \"This should be a real life splat if you can find it. I do not want this to be a cartoon or an illustration.\"",
+      "effect": "Its laces (kit-built jointed cords over the scan's own laces) come undone, cross back through the eyelets and tie themselves into a bow, and the shoe taps its toe twice (4 s).",
+      "sound": "Laces zipping through the eyelets, a soft tug, two toe taps.",
+      "improved": "Real objects: a CC BY photogrammetry scan of a trail running shoe, its own bow swapped for two kit-built laces of 22 joints each. The bow comes undone and the laces flop loose, lift and cross over the tongue, tie back into a bow, and the shoe taps its toe twice (4 s). Round 2: denser scan, thinner braided laces."
+    },
+    "hoodie": {
+      "v": "keep",
+      "owner": "From the owner's approved ideas on the Toy Ideas page (lane Real objects, September 29, 2026): \"This should be a real life splat if you can find it. I do not want this to be a cartoon or an illustration.\"",
+      "effect": "The hood (cut out of the scan as a solid piece) flips up and its drawstrings swing, then the sleeves (cut at the shoulders) swing in and cross, and it all settles back (4.5 s).",
+      "sound": "Soft fabric swishes and a zip-like flick.",
+      "improved": "Real objects: a detailed CC BY model of a yellow hoodie, cut along its own seams (the hood's panels) and by a hard plane at each shoulder. The hood flops forward on a hinge across the neck and flips back up as the kit-built drawstrings swing; the sleeves swing up and cross in front of the chest, clear of the body, with fabric filling the shoulders, then swing back down and settle (4.5 s). Round 2: attached hood and shoulders, sleeves clear of the body."
+    },
+    "sunglasses": {
+      "v": "keep",
+      "owner": "From the owner's approved ideas on the Toy Ideas page (lane Real objects, September 29, 2026): \"This should be a real life splat if you can find it. I do not want this to be a cartoon or an illustration.\"",
+      "effect": "The arms fold in on their hinges one after the other, the glasses flip to face you and the lenses darken from clear to deep gray like light-changing lenses; then they unfold (3.5 s).",
+      "sound": "Two hinge clicks and a soft shimmer as the lenses darken.",
+      "improved": "Real objects: Poly Haven's CC0 round spectacles with kit-built lenses. The arms fold in one after the other, both behind the lenses and the second behind the first, the glasses turn head over heels to face you, the lenses darken from the rim inward to deep gray, then clear as the arms unfold (3.5 s). Round 2: denser model, arms kept behind the lenses."
+    },
+    "baseball-cap": {
+      "v": "keep",
+      "owner": "From the owner's approved ideas on the Toy Ideas page (lane Real objects, September 29, 2026): \"This should be a real life splat if you can find it. I do not want this to be a cartoon or an illustration.\"",
+      "effect": "It flips up off its stand, spins flat like a flying disc and lands brim backward; then a second flip turns it round the right way (3 s).",
+      "sound": "A flick, a whoosh, a soft landing.",
+      "improved": "Real objects: a detailed CC BY model of a gray six-panel cap on a kit-built walnut stand. It flips up off the stand, spins flat three and a half turns round a small loop like a flying disc, lands brim backward, then hops and turns round the right way (3 s). Round 2: denser, sharper model."
     },
     "splat-field": {
       "v": "keep",
       "owner": "The owner's note \"big new Splashery ideas\" and his answer of September 29, 2026 (lane Lab; labs only): splat fields on the GPU.",
       "effect": "Nearly 300,000 splats placed and colored by a program on the GPU every frame: a spiral galaxy, an ocean or a knotted flow. A tap sends a bright ring out through the galaxy, drops a stone in the sea, or pushes the flow once more around the knot (3 s).",
       "sound": "A soft rising swell.",
-      "improved": "Lab: new test toy on the new Lab shelf (labs). Each splat stores only its (u, v); the toy's work-buffer program (a recipe's gpuField, an additive engine hook) computes its place, tilt and color from them and the time. Three fields: a galaxy whose stars orbit on turning ellipses (a density wave keeps two arms), an ocean of four Gerstner waves, a flow along a (2, 3) torus knot."
+      "improved": "Lab: new test toy on the new Lab shelf (labs). Each splat stores only its (u, v); the toy's work-buffer program (a recipe's gpuField, an additive engine hook) computes its place, tilt and color from them and the time. Three fields: a galaxy whose stars orbit on turning ellipses (a density wave keeps two arms), an ocean of four Gerstner waves, a flow along a (2, 3) torus knot. Lab r2: a tap on the toy now fires the pulse on every field (the galaxy's faint stars were under the pick pass's alpha clip; the recipe's pickAlpha lowers it)."
     }
   }
 }

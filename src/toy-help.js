@@ -1119,6 +1119,42 @@ export const TOY_HELP = {
       "A telescope uses lenses or mirrors to make faraway things look nearer and bigger. This is a sliding spyglass, the kind sailors carried: its tubes slide inside one another, so it folds up short and pulls out long, with a big lens at the far end that gathers light. Galileo Galilei used a small telescope in 1610 to see the moons of Jupiter.\n\nThe telescope starts pulled out, on a three-legged stand. Tap to collapse it, sliding the tubes together, and tap again to pull it out.",
   },
 
+  // ---- Real objects (lane Real objects) -------------------------------------------------
+  "fountain-pen": {
+    howTo: "Tap it to uncap the pen and write a swirl in wet blue ink.",
+    about:
+      "A fountain pen carries its own ink inside. The ink runs from the barrel through a thin channel called the feed to a split metal nib, and the slit draws it down to the paper by capillary action, the same pull that lets a paper towel soak up water.\n\nThis one is made from a detailed 3D model of a real green pen. Tap it and the cap slides off and clicks onto the back end, the nib writes a looping swirl that shines while it is wet and dries darker, and the cap goes back on.",
+  },
+  "water-bottle": {
+    howTo: "Tap it to unscrew the cap and pour water into the glass.",
+    about:
+      "A reusable steel bottle closes with a screw cap. The cap's thread is a ramp wrapped around a cylinder, so turning it twice pulls it down tight against the bottle's mouth and keeps the water in.\n\nThis bottle is made from a detailed 3D model of a real one. Tap it and the cap spins off in two turns and hops aside, the bottle tips and a stream of water glugs into the glass, then it all runs back and the cap screws on. The glug comes from air: bubbles have to push back into the bottle to take the place of the water that leaves.",
+  },
+  "soda-can": {
+    howTo: "Tap it to shake the can and pop it open.",
+    about:
+      "A soda can holds a drink with carbon dioxide gas dissolved in it under pressure. Shaking the can makes lots of tiny bubbles, and when the ring pull opens it the pressure drops at once, so the gas rushes out of the drink and carries foam with it.\n\nThis can is made from a detailed 3D model of a real one, with a plain orange label. Tap it and it shakes, the ring pull levers up with a crack, and a jet of foam sprays out while drops spatter around it, then the tab folds back and the foam fizzes away.",
+  },
+  "running-shoe": {
+    howTo: "Tap it to untie the laces and tie them again, then watch it tap its toe.",
+    about:
+      "A running shoe is laced through rows of eyelets, so the laces pull the shoe snug around the foot. The usual bow is a reef knot with two loops: if the second half is tied the wrong way round, it becomes a granny knot, which slips and comes undone much more easily.\n\nThis shoe is a photo scan of a real trail shoe. Tap it and its laces come undone, cross over and tie themselves into a bow again, and the shoe taps its toe twice.",
+  },
+  hoodie: {
+    howTo: "Tap it to flip the hood and cross the sleeves.",
+    about:
+      "A hoodie is a sweatshirt with a hood, first made in the 1930s for people working in cold places. Its soft fleece is knitted cotton brushed on the inside, and a drawstring runs through the edge of the hood to pull it snug. This one has raglan sleeves, whose seams run from the armpit up to the collar.\n\nIt is made from a detailed 3D model of a real hoodie. Tap it and the hood flops forward and flips back up as the drawstrings swing, then the sleeves swing up, cross in front and settle back.",
+  },
+  sunglasses: {
+    howTo: "Tap them to fold the arms, flip the glasses round and darken the lenses.",
+    about:
+      "These are round glasses with light-changing lenses. Special molecules in the lenses change shape in the sun's ultraviolet light and start to absorb light, so the lenses turn dark outdoors and clear again a few minutes after you go inside.\n\nThe frame comes from a detailed 3D model of real vintage spectacles. Tap them and the arms fold in on their hinges one after the other, the glasses flip over to face you and the lenses darken from clear to deep gray, then everything unfolds and clears.",
+  },
+  "baseball-cap": {
+    howTo: "Tap it to flip the cap off its stand and spin it like a flying disc.",
+    about:
+      "A baseball cap is a round crown sewn from six panels, with a button on top and a stiff brim that shades the eyes. Baseball players wore caps like it in the 1800s, and now people wear them everywhere.\n\nThis gray cap is made from a detailed 3D model of a real one, resting on a wooden stand. Tap it and it flips up off the stand, spins flat like a flying disc and lands brim backward, then a second flip turns it round the right way. A spinning disc stays level because its spin resists being tipped over.",
+  },
   // ---- Medieval -------------------------------------------------------------------------
   "sword-in-stone": {
     howTo: "Tap to pull the sword from the stone; tap again to go back.",
@@ -1313,7 +1349,7 @@ export const TOY_HELP = {
   "splat-equation": {
     howTo: "Tap to play time t. Pick a program, or type your own equations, in the Toy tab.",
     about:
-      "Every splat has a place and a color. Here you program them with math: each splat gets two numbers, u and v, and your equations x, y and z turn them into its place, while hue (or r, g and b) gives its color. Time t runs from 0 to 2π, so the shape can move.\n\nTap it to play one cycle of t and watch the shape move. Pick a sphere, a torus, a Möbius strip, a seashell, a trefoil knot, a wave, a spiral galaxy or a Klein bottle in the Toy tab, or type your own, such as z = sin(u + t). The Tinkerer's Manual explains the whole language.",
+      "Every splat has a place and a color. Here you program them with math: each splat gets two numbers, u and v, and your equations x, y and z turn them into its place, while hue (or r, g and b) gives its color. Time t runs from 0 to 2π, so the shape can move.\n\nTap it to play one cycle of t and watch the shape move. Pick a sphere, a torus, a Möbius strip, a seashell, a trefoil knot, a wave, a spiral galaxy or a Klein bottle in the Toy tab, or type your own, such as z = sin(u + t). Under Splats, Solid shows a clean surface, Fine a finer one, and Dots every splat on its own. The Tinkerer's Manual explains the whole language.",
   },
   "pythagoras-proof": {
     howTo: "Tap it to slide the triangles and show that a² + b² = c².",
@@ -1437,9 +1473,10 @@ export const TOY_HELP = {
       "A picture frame protects a photo and sets it apart from the wall. Many hang from a single nail on a wire stretched across the back, so the frame can tilt a little either way until it hangs straight.\n\nTap it and the frame swings on its wire like a pendulum, back and forth, smaller each time, until it settles. Double-tap it to fill the screen with the photo, and again to step back. Pick a wood, gold, modern or digital frame in the Toy tab; the digital frame fades from one photo to the next, in order or at random. Open a photo, a GIF or a video of your own (a GIF or a video plays on a loop), or several photos for the digital frame. Your files stay on your device.",
   },
   screen: {
-    howTo: "Tap to switch it on, then to play and pause. Pick a Style in the Toy tab.",
+    howTo:
+      "Tap to switch on, then the picture to play or pause. Tap the knob, button, curtains or base to switch off.",
     about:
-      "A screen made of splats shows a video or a GIF: every pixel of the picture is a small splat whose color changes with each frame. It comes in four styles: an old TV with a wooden cabinet and a curved glass face, a flat TV on a stand, a cinema with red curtains and rows of seats, and a hologram floating above its projector.\n\nTap it to switch it on: the old TV's picture opens from a bright line, the flat TV fades up, the curtains part, or the hologram flickers up from its beam. Tap again to pause and play. Turn on the sound with the speaker button, and open your own video or GIF in the Toy tab.",
+      "A screen made of splats shows a video or a GIF: every pixel of the picture is a small splat whose color changes with each frame. It comes in four styles: an old TV with a walnut cabinet and a curved glass face, a flat TV on a stand, a cinema with velvet curtains and rows of seats, and a hologram floating above its projector.\n\nTap it to switch it on: the old TV's picture opens from a bright line, the flat TV fades up, the curtains part, or the hologram flickers up from its beam. Tap the picture to pause and play. To switch off, tap the old TV's power knob (the picture shrinks to a bright dot, as old tube sets did), the small button beside the flat TV's red light, the curtains (they close) or the hologram's base, or use the button in the Toy tab. Turn on the sound with the speaker button, and open your own video or GIF in the Toy tab.",
   },
 
   // ---- Studio ---------------------------------------------------------------------------
@@ -1534,6 +1571,27 @@ export const TOY_HELP = {
     howTo: "Tap a bar to play its note, or tap the mallet or frame to play a scale.",
     about:
       "A xylophone is a row of tuned wooden bars that you strike with a mallet. Each bar's length sets its note: the shorter the bar, the higher it sounds. The name comes from the Greek for “wood” and “sound”.\n\nThis toy one has eight colored bars, a scale from C up to the next C. Tap a bar and the mallet swings over and strikes it, and the bar jumps and plays its note, so you can play a tune. Tap the mallet, a wheel or the ends of the frame instead, and it plays the whole scale.",
+  },
+  "grand-piano": {
+    howTo: "Tap a key to play it. Tap anywhere else for a song; the song bar plays it all.",
+    about:
+      "A grand piano is a keyboard instrument whose strings lie flat under a lid shaped like a wing. Each of its 88 keys throws a felt hammer up against its strings, and a damper lifts off them so the note rings until the key comes up. The right pedal lifts every damper at once. Bartolomeo Cristofori built the first pianos in Italy around 1700.\n\nTap a key and it dips, its hammer strikes and its damper lifts. Tap anywhere else for the opening of Für Elise, or pick Clair de lune, Gymnopédie No. 1 or Ode to Joy in the Toy tab. The song bar plays, pauses, loops and slows a song, and you can open a MIDI file of your own or paste a tune in ABC notation.",
+  },
+  "upright-piano": {
+    howTo: "Tap a key to play it. Tap anywhere else for a ragtime; the song bar plays it all.",
+    about:
+      "An upright piano stands its strings on end, so a full piano fits against a wall. Its hammers swing forward onto the strings instead of flying up, and a spring brings them back. Uprights filled homes, schools and dance halls, and a slightly out-of-tune one gives the bright, jangly honky-tonk sound of ragtime.\n\nThis one has its upper front panel off, so you see the row of hammers, the dampers above them and the strings behind. Tap a key and its hammer strikes. Tap anywhere else for the opening of The Entertainer, a rag Scott Joplin published in 1902. Open a MIDI file of your own, or paste a tune in ABC notation, in the Toy tab.",
+  },
+  harpsichord: {
+    howTo: "Tap a key to pluck its string. Tap anywhere else for a minuet.",
+    about:
+      "A harpsichord plucks its strings instead of striking them. Each key lifts a thin wooden jack, and a small quill on the jack catches the string on the way up. Because a pluck sounds the same however hard you press, players shape their music by timing. Harpsichords were the main keyboard of the 1600s and 1700s.\n\nThis one is painted in the French style, with black naturals and pale sharps. Tap a key and its jack rises, plucks, and the string quivers until the jack's felt stops it. Tap anywhere else for the Minuet in G from the notebook Bach kept for his wife, Anna Magdalena. Open a MIDI file of your own in the Toy tab.",
+  },
+  "electronic-keyboard": {
+    howTo:
+      "Tap a key to play it, or a colored button to change the voice. Tap elsewhere for a song.",
+    about:
+      "An electronic keyboard makes its sounds with circuits instead of strings. It can sound like a piano, an organ, a synthesizer or vibes, and many can play a drum beat along with you. Learning keyboards light up the key to play next.\n\nThis one has 61 keys. The four colored buttons pick its voice: piano, organ, synth and vibes. Tap anywhere else and a song starts: each key lights up just before its note, the little screen scrolls the title and the drum pads flash with the beat. Pick Ode to Joy, Twinkle, Twinkle, Little Star or Frère Jacques in the Toy tab, or open a MIDI file of your own.",
   },
   "toy-piano": {
     howTo: "Tap a key to play its note, or tap the case to play Twinkle, Twinkle.",

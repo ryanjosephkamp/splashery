@@ -130,3 +130,50 @@ test("the sharp kernel compiles and draws on WebGPU too", async ({ page }) => {
   expect(px.some((v, i) => i % 4 !== 3 && v < 200)).toBe(true);
   expect(errors).toEqual([]);
 });
+
+// Lab r2: a recipe's pickAlpha lowers the pick pass's alpha clip while it
+// shows (the splat field's faint galaxy); every other toy keeps 0.3.
+test("pickAlpha: only a recipe that asks lowers the pick clip, and the next toy puts it back", async ({
+  page,
+}) => {
+  const errors = await open(page, "&labs=1");
+  const r = await page.evaluate(async () => {
+    const { app, player } = window.__splashery;
+    const g = player.stage.app.scene.gsplat;
+    const before = g.alphaClip;
+    player.stage.setPickAlpha(0.05);
+    const lowered = g.alphaClip;
+    await app.chooseToy("lamp");
+    return { before, lowered, after: g.alphaClip };
+  });
+  expect(r.before).toBeCloseTo(0.3, 5);
+  expect(r.lowered).toBeCloseTo(0.05, 5);
+  expect(r.after).toBeCloseTo(0.3, 5);
+  expect(errors).toEqual([]);
+});
+
+// Lab r2: a kit cloud's `jitter` (0 for exact sizes). The default keeps the
+// same sizes as before, from the same random draws.
+test("jitter: 0 gives every cloud splat its exact size; the default is unchanged", async () => {
+  const { buildRecipe } = await import("../src/kit.js");
+  const { applyClay } = await import("../src/generators.js");
+  const sizes = (jitter) => {
+    const recipe = {
+      build(k) {
+        const opts = { count: 200, size: 1 };
+        if (jitter !== undefined) opts.jitter = jitter;
+        k.cloud(opts, (rand, i) => ({ p: [i % 20, Math.floor(i / 20), 0] }));
+      },
+    };
+    const it = buildRecipe(recipe, { seed: 7, count: 160000, options: {} }, applyClay);
+    let r = it.next();
+    while (!r.done) r = it.next();
+    const buf = r.value.buf;
+    return Array.from(buf.scale.slice(0, buf.count * 3));
+  };
+  const exact = sizes(0);
+  expect(Math.max(...exact) - Math.min(...exact)).toBeLessThan(1e-9);
+  expect(sizes(undefined)).toEqual(sizes(0.5));
+  const jittered = sizes(undefined);
+  expect(Math.max(...jittered) / Math.min(...jittered)).toBeGreaterThan(1.1);
+});
