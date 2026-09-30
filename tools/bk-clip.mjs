@@ -327,10 +327,10 @@ async function record(scene) {
       await hold(1100);
     }
     await run(() => document.getElementById("sheet-toggle")?.click()); // Done
-    await play(10);
+    await play(5.5);
     // Order: Random.
     await open("picture-frame", { frame: "digital", order: "random" });
-    await play(10);
+    await play(5.5);
   } else if (scene === "frame-digital") {
     await open("picture-frame", { frame: "digital" });
     await play(15);
