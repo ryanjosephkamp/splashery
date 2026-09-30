@@ -1550,3 +1550,859 @@ export function playSpec(ctx, out, t, spec, { pitch = 1, raw = false, pick = nul
   const f = spec.f !== undefined ? noteFreq(spec.f) : v.f;
   return (spec.at || 0) + v.play(ctx, out, start, at(f));
 }
+
+// ---- Sound B (lane Sound B, September 30, 2026) -----------------------------------
+// Real-world sound effects, synthesised, for the owner's sound review of
+// September 28 (docs/PACKS.md 7e): fire like the volcano's, leaves, pages,
+// bites, dice, engines, rotors, creaking wood, scissors, fireworks, hooves, a
+// crowd, water in a bottle, a fly, a frog, an owl, keys and more. Each aims at
+// the sound the real thing makes: no clicks, whistles or rising "vroom"
+// unless the real thing makes them. Soft attacks (a few ms) keep grains from
+// reading as clicks.
+
+// A slow random wobble added to an AudioParam: noise low-passed to `rate` Hz,
+// scaled so it swings by about `depth` either way.
+function wander(ctx, param, t, dur, { rate = 3, depth = 1 }) {
+  const src = ctx.createBufferSource();
+  src.buffer = noiseBuffer(ctx);
+  src.loop = true;
+  const lp = ctx.createBiquadFilter();
+  lp.type = "lowpass";
+  lp.frequency.value = rate;
+  lp.Q.value = 0.5;
+  const g = ctx.createGain();
+  g.gain.value = depth / (0.577 * Math.sqrt((2 * rate) / ctx.sampleRate)) / 2;
+  src.connect(lp).connect(g).connect(param);
+  src.start(t, Math.random() * 1.5);
+  src.stop(t + dur + 0.1);
+}
+
+// A rich pulse wave (harmonics falling as 1/n^0.8): engines and brass.
+const pulseCache = new WeakMap();
+function pulseWave(ctx) {
+  let w = pulseCache.get(ctx);
+  if (!w) {
+    const n = 48;
+    const re = new Float32Array(n);
+    const im = new Float32Array(n);
+    for (let k = 1; k < n; k++) im[k] = 1 / k ** 0.8;
+    w = ctx.createPeriodicWave(re, im);
+    pulseCache.set(ctx, w);
+  }
+  return w;
+}
+
+// A bank of resonances (Hz, q, gain) that impulses excite: wood, dough, a
+// bow's limbs. Returns the node to feed.
+function body(ctx, out, t, dur, modes) {
+  const input = ctx.createGain();
+  for (const [f, q, a] of modes) {
+    const b = filter(ctx, t, { type: "bandpass", f, q });
+    const g = ctx.createGain();
+    g.gain.value = a;
+    input.connect(b).connect(g).connect(out);
+  }
+  return input;
+}
+
+// Stick-slip: irregular tiny impulses, `rate` a second rising by `to`, into
+// a resonant body. Creaking wood, stretching dough and cheese, a crawl.
+function stickSlip(ctx, into, t, dur, { rate, to = 1, vol, jitter = 0.35 }) {
+  let at = 0;
+  let i = 0;
+  while (at < dur && i < 400) {
+    const u = at / dur;
+    const env = Math.sin(Math.PI * Math.min(1, u * 1.1)) ** 0.6;
+    noise(ctx, into, t + at, { type: "highpass", f: 300, dur: 0.003, vol: vol * (0.4 + 0.6 * env) * rnd(0.5, 1), attack: 0.0005 }); // prettier-ignore
+    at += rnd(1 - jitter, 1 + jitter) / (rate * (1 + (to - 1) * u));
+    i++;
+  }
+  return dur;
+}
+
+const SOUND_B = {
+  flame: {
+    // Fire, from the volcano's flame: a low rush that flickers unevenly, and
+    // a few soft pops of wood (n). bright adds the flames' hiss.
+    f: 80,
+    rate: 5,
+    n: 3,
+    bright: 0.4,
+    play: (c, o, t, p) => {
+      const d = 1.6 * p.decay;
+      const flick = c.createGain();
+      flick.gain.value = 0.75;
+      wander(c, flick.gain, t, d, { rate: p.rate, depth: 0.3 });
+      flick.connect(o);
+      noise(c, flick, t, { type: "lowpass", f: p.f * 6, q: 0.5, dur: d, vol: 0.6 * p.vol, attack: 0.18, swell: true }); // prettier-ignore
+      noise(c, flick, t, { f: p.f * 22, q: 0.6, dur: d, vol: 0.14 * p.vol * p.bright, attack: 0.25, swell: true }); // prettier-ignore
+      for (let i = 0; i < p.n; i++) {
+        const at = t + rnd(0.15, 0.9) * d;
+        noise(c, o, at, { f: rnd(600, 1400), q: 1.4, dur: rnd(0.03, 0.06), vol: 0.22 * p.vol, attack: 0.003 }); // prettier-ignore
+        tone(c, o, at, { f: rnd(130, 170), to: 90, dur: 0.05, vol: 0.08 * p.vol, attack: 0.003 });
+      }
+      return d;
+    },
+  },
+  rustle: {
+    // Leaves, dry grass or paper: many soft brushes (n) over a faint bed.
+    f: 3000,
+    n: 30,
+    bright: 0.5,
+    play: (c, o, t, p) => {
+      const d = 1.2 * p.decay;
+      grains(c, o, t, {
+        n: p.n,
+        dur: d,
+        grain: (at, i, r) =>
+          noise(c, o, at, { f: p.f * (0.5 + r * (0.5 + p.bright)), q: 0.9, dur: 0.025 + 0.05 * r, vol: 0.13 * p.vol * (0.4 + r), attack: 0.008 }), // prettier-ignore
+      });
+      noise(c, o, t, { f: p.f * 0.7, q: 0.5, dur: d, vol: 0.05 * p.vol, attack: d * 0.4, swell: true }); // prettier-ignore
+      return d;
+    },
+  },
+  pageflip: {
+    // A book's page turning: a papery swish that lifts and settles, and the
+    // soft slap as it lands.
+    f: 1800,
+    play: (c, o, t, p) => {
+      const d = 0.45 * p.decay;
+      noise(c, o, t, { f: p.f, to: p.f * 2, q: 0.7, dur: d, vol: 0.3 * p.vol, attack: d * 0.6, swell: true, am: 17, amDepth: 0.35 }); // prettier-ignore
+      noise(c, o, t + d * 0.2, { type: "highpass", f: 3500, q: 0.5, dur: d * 0.7, vol: 0.06 * p.vol, attack: d * 0.3, swell: true }); // prettier-ignore
+      noise(c, o, t + d * 0.92, { type: "lowpass", f: 1400, q: 0.6, dur: 0.06, vol: 0.22 * p.vol, attack: 0.004 }); // prettier-ignore
+      return d + 0.06;
+    },
+  },
+  bite: {
+    // A bite of something crisp (an apple): a crunch of tiny fractures, the
+    // juicy snap as the piece comes away, then a few chews of the break.
+    f: 3000,
+    play: (c, o, t, p) => {
+      const k = p.f / 3000;
+      grains(c, o, t, {
+        n: 26,
+        dur: 0.14 * p.decay,
+        accel: 1,
+        grain: (at, i, r) =>
+          noise(c, o, at, { f: rnd(2000, 6500) * k, q: 1.2, dur: 0.004 + 0.01 * r, vol: 0.34 * p.vol * (1 - i / 30), attack: 0.0015 }), // prettier-ignore
+      });
+      noise(c, o, t, { type: "lowpass", f: 1600 * k, q: 0.6, dur: 0.12, vol: 0.3 * p.vol, attack: 0.002 }); // prettier-ignore
+      noise(c, o, t + 0.05, { f: 900 * k, to: 500 * k, q: 2, dur: 0.18, vol: 0.12 * p.vol, attack: 0.01 }); // prettier-ignore
+      grains(c, o, t + 0.2 * p.decay, {
+        n: 10,
+        dur: 0.12 * p.decay,
+        grain: (at, i, r) =>
+          noise(c, o, at, { f: rnd(1500, 4500) * k, q: 1.2, dur: 0.006 + 0.01 * r, vol: 0.18 * p.vol, attack: 0.002 }), // prettier-ignore
+      });
+      return 0.35 * p.decay;
+    },
+  },
+  shellcrack: {
+    // Something brittle breaking: the snap and its fragments (n). kind "ice"
+    // adds the deep groan and glassy tinkle of cracking ice.
+    f: 2500,
+    n: 5,
+    play: (c, o, t, p) => {
+      noise(c, o, t, { type: "highpass", f: p.f * 0.4, q: 0.5, dur: 0.03, vol: 0.55 * p.vol, attack: 0.001 }); // prettier-ignore
+      noise(c, o, t, { f: p.f, q: 2, dur: 0.08 * p.decay, vol: 0.28 * p.vol, attack: 0.001 });
+      noise(c, o, t, { type: "lowpass", f: 700, q: 0.7, dur: 0.06, vol: 0.25 * p.vol, attack: 0.002 }); // prettier-ignore
+      grains(c, o, t + 0.04, {
+        n: p.n,
+        dur: 0.35 * p.decay,
+        accel: 0.6,
+        grain: (at, i, r) =>
+          noise(c, o, at, { f: p.f * rnd(0.6, 1.6), q: 2.5, dur: 0.01 + 0.02 * r, vol: 0.28 * p.vol * (1 - i / (p.n + 1)), attack: 0.001 }), // prettier-ignore
+      });
+      if (p.kind === "ice") {
+        tone(c, o, t, { f: 95, to: 55, dur: 0.6 * p.decay, vol: 0.16 * p.vol, attack: 0.02, vib: 0.05, vibRate: 23 }); // prettier-ignore
+        for (let i = 0; i < 3; i++)
+          modal(c, o, t + 0.12 + i * rnd(0.07, 0.14), { f: rnd(2500, 4200), kind: "glass", decay: 0.25, vol: 0.06 * p.vol, bright: 0.4 }); // prettier-ignore
+      }
+      return 0.45 * p.decay;
+    },
+  },
+  kernel: {
+    // Dry popping corn: each pop a short papery bang with a little thump,
+    // spread over the time like a pan of kernels (n pops, faster in the middle).
+    f: 1400,
+    n: 1,
+    play: (c, o, t, p) => {
+      const d = p.n > 1 ? 1.4 * p.decay : 0.05;
+      for (let i = 0; i < p.n; i++) {
+        const u = p.n > 1 ? (i + Math.random() * 0.8) / p.n : 0;
+        const at = t + d * (0.5 - 0.5 * Math.cos(Math.PI * u));
+        noise(c, o, at, { f: p.f * rnd(0.7, 1.4), q: 0.9, dur: 0.018, vol: 0.42 * p.vol * rnd(0.6, 1), attack: 0.001 }); // prettier-ignore
+        noise(c, o, at, { type: "lowpass", f: 500, q: 0.7, dur: 0.03, vol: 0.22 * p.vol, attack: 0.001 }); // prettier-ignore
+        tone(c, o, at, { f: rnd(190, 260), to: 150, dur: 0.025, vol: 0.1 * p.vol, attack: 0.001 });
+      }
+      return d + 0.05;
+    },
+  },
+  dice: {
+    // Dice thrown on a wooden table: each die (n) bounces with quicker and
+    // quieter knocks, tumbles and settles.
+    f: 2300,
+    n: 2,
+    play: (c, o, t, p) => {
+      let end = 0;
+      for (let k = 0; k < p.n; k++) {
+        let at = rnd(0, 0.05);
+        let gap = rnd(0.1, 0.13);
+        for (let i = 0; i < 6; i++) {
+          const v = p.vol * 0.75 ** i;
+          modal(c, o, t + at, { f: p.f * rnd(0.85, 1.2), kind: "clack", decay: 0.7, vol: 0.32 * v, bright: 0.5 }); // prettier-ignore
+          noise(c, o, t + at, { type: "lowpass", f: 450, q: 0.8, dur: 0.035, vol: 0.28 * v, attack: 0.001 }); // prettier-ignore
+          at += gap;
+          gap *= rnd(0.55, 0.7);
+        }
+        for (let i = 0; i < 5; i++) {
+          noise(c, o, t + at, { f: p.f * rnd(0.8, 1.3), q: 3, dur: 0.01, vol: 0.08 * p.vol * (1 - i / 6), attack: 0.001 }); // prettier-ignore
+          at += rnd(0.025, 0.04);
+        }
+        end = Math.max(end, at);
+      }
+      return end + 0.1;
+    },
+  },
+  chug: {
+    // A steam engine: the chuffs of exhaust (n), two strong and two soft, over
+    // the rumble of the wheels. rate is chuffs a second.
+    f: 600,
+    n: 8,
+    rate: 4,
+    play: (c, o, t, p) => {
+      const d = p.n / p.rate;
+      for (let i = 0; i < p.n; i++) {
+        const acc = i % 2 ? 0.6 : 1;
+        const at = t + i / p.rate + rnd(-0.01, 0.01);
+        noise(c, o, at, { f: p.f, q: 0.8, dur: 0.2, vol: 0.45 * p.vol * acc, attack: 0.01 });
+        noise(c, o, at, { type: "lowpass", f: 260, q: 0.7, dur: 0.15, vol: 0.4 * p.vol * acc, attack: 0.008 }); // prettier-ignore
+        noise(c, o, at + 0.02, { type: "highpass", f: 2500, q: 0.5, dur: 0.12, vol: 0.05 * p.vol * acc, attack: 0.02 }); // prettier-ignore
+      }
+      noise(c, o, t, { type: "lowpass", f: 140, q: 0.7, dur: d + 0.3, vol: 0.25 * p.vol, attack: 0.2, am: p.rate / 2, amDepth: 0.4 }); // prettier-ignore
+      return d + 0.3;
+    },
+  },
+  motor: {
+    // A real piston engine: f is the firing rate (Hz); `to` revs it (a blip
+    // of the throttle: up and back, not a rising sweep). kind "car" (a sports
+    // car's growl), "tractor" (a slow diesel), "prop" (a plane's engine and
+    // propeller) or "idle".
+    f: 30,
+    to: 1,
+    bright: 0.5,
+    play: (c, o, t, p) => {
+      const d = 1.6 * p.decay;
+      const kind = p.kind || "idle";
+      const s = c.createOscillator();
+      s.setPeriodicWave(pulseWave(c));
+      s.frequency.setValueAtTime(p.f, t);
+      if (p.to !== 1) {
+        s.frequency.setTargetAtTime(p.f * p.to, t + 0.05, d * 0.12);
+        s.frequency.setTargetAtTime(p.f * 1.05, t + d * 0.45, d * 0.15);
+      }
+      wander(c, s.frequency, t, d, { rate: 9, depth: p.f * 0.025 });
+      const lp = filter(c, t, { f: (kind === "tractor" ? 500 : 900) + 2200 * p.bright, q: 0.7 });
+      const res = filter(c, t, { type: "peaking", f: kind === "car" ? 180 : 110, q: 1.2 });
+      res.gain.value = 6;
+      const g = envGain(c, t, { vol: 0.42 * p.vol, attack: 0.06, hold: d * 0.75, dur: d });
+      s.connect(res).connect(lp).connect(g).connect(o);
+      s.start(t);
+      s.stop(t + d + 0.05);
+      noise(c, o, t, { type: "lowpass", f: kind === "tractor" ? 700 : 1400, q: 0.6, dur: d, vol: 0.16 * p.vol, attack: 0.06, hold: d * 0.75, am: p.f * (p.to > 1 ? 1.3 : 1), amDepth: 0.8 }); // prettier-ignore
+      if (kind === "tractor")
+        for (let at = 0.05; at < d; at += 2 / p.f)
+          noise(c, o, t + at, { f: 1800, q: 2, dur: 0.012, vol: 0.05 * p.vol, attack: 0.002 });
+      if (kind === "prop")
+        noise(c, o, t, { type: "lowpass", f: 500, q: 0.8, dur: d, vol: 0.3 * p.vol, attack: 0.3, hold: d * 0.6, am: p.f * 0.75, amDepth: 0.7 }); // prettier-ignore
+      return d;
+    },
+  },
+  rotor: {
+    // Helicopter blades: the heavy whump of each blade (rate a second) over
+    // the turbine's hush.
+    f: 320,
+    rate: 9,
+    play: (c, o, t, p) => {
+      const d = 1.6 * p.decay;
+      for (let at = 0; at < d; at += 1 / p.rate) {
+        const u = at / d;
+        const env = Math.min(1, u * 5, (1 - u) * 5);
+        noise(c, o, t + at, { type: "lowpass", f: p.f, q: 1.2, dur: 0.1, vol: 0.55 * p.vol * env, attack: 0.012 }); // prettier-ignore
+        tone(c, o, t + at, { f: 75, to: 55, dur: 0.08, vol: 0.18 * p.vol * env, attack: 0.012 });
+      }
+      noise(c, o, t, { f: 1500, q: 0.6, dur: d, vol: 0.05 * p.vol, attack: 0.3, swell: true });
+      return d;
+    },
+  },
+  creak: {
+    // Wood under strain: a creak of stick-slip grating that tightens (to).
+    f: 380,
+    rate: 38,
+    to: 1.3,
+    play: (c, o, t, p) => {
+      const d = 0.8 * p.decay;
+      const into = body(c, o, t, d, [[p.f, 9, 1], [p.f * 2.3, 7, 0.6], [p.f * 4.1, 5, 0.25]]); // prettier-ignore
+      stickSlip(c, into, t, d, { rate: p.rate, to: p.to, vol: 0.9 * p.vol });
+      return d;
+    },
+  },
+  snip: {
+    // Scissors: the blades' short metal slide and the snap as they cut.
+    f: 5000,
+    play: (c, o, t, p) => {
+      noise(c, o, t, { f: p.f * 0.6, to: p.f, q: 3, dur: 0.07, vol: 0.2 * p.vol, attack: 0.01 });
+      noise(c, o, t + 0.065, { f: 1500, q: 1, dur: 0.025, vol: 0.28 * p.vol, attack: 0.001 });
+      noise(c, o, t + 0.07, { f: p.f, q: 6, dur: 0.02, vol: 0.35 * p.vol, attack: 0.001 });
+      tone(c, o, t + 0.07, { f: p.f * 0.5, dur: 0.05, vol: 0.03 * p.vol, attack: 0.001 });
+      return 0.12;
+    },
+  },
+  trumpet: {
+    // A natural trumpet (fanfares): the lips scoop up to the note, the tone
+    // brightens with the breath, and vibrato comes in late.
+    f: 523,
+    play: (c, o, t, p) => {
+      const d = 0.4 * p.decay;
+      const bus = filter(c, t, { f: p.f * 1.5, q: 1 });
+      bus.frequency.linearRampToValueAtTime(p.f * 7, t + 0.05);
+      bus.frequency.linearRampToValueAtTime(p.f * 4.5, t + d);
+      const form = filter(c, t, { type: "peaking", f: 1300, q: 1.4 });
+      form.gain.value = 5;
+      const g = envGain(c, t, { vol: 0.3 * p.vol, attack: 0.03, hold: d * 0.65, dur: d });
+      bus.connect(form).connect(g).connect(o);
+      const s = c.createOscillator();
+      s.setPeriodicWave(pulseWave(c));
+      s.frequency.setValueAtTime(p.f * 0.96, t);
+      s.frequency.exponentialRampToValueAtTime(p.f, t + 0.04);
+      wander(c, s.frequency, t, d, { rate: 6, depth: p.f * 0.004 });
+      s.connect(bus);
+      s.start(t);
+      s.stop(t + d + 0.05);
+      noise(c, g, t, { f: p.f * 3, q: 1, dur: 0.06, vol: 0.08, attack: 0.01 });
+      return d;
+    },
+  },
+  bowstring: {
+    // A bow let go: the string's thump against the limbs, a brief flutter
+    // and the arrow's hiss away. No note rings on.
+    f: 110,
+    play: (c, o, t, p) => {
+      tone(c, o, t, { f: p.f * 1.6, to: p.f * 0.7, glide: 0.05, dur: 0.12, vol: 0.55 * p.vol, attack: 0.002 }); // prettier-ignore
+      noise(c, o, t, { type: "lowpass", f: 900, q: 0.7, dur: 0.05, vol: 0.35 * p.vol, attack: 0.001 }); // prettier-ignore
+      noise(c, o, t, { f: 420, q: 2, dur: 0.15, vol: 0.12 * p.vol, attack: 0.002, am: 55, amDepth: 0.5 }); // prettier-ignore
+      noise(c, o, t + 0.02, { f: 900, to: 500, q: 1, dur: 0.3 * p.decay, vol: 0.12 * p.vol, attack: 0.03, swell: true }); // prettier-ignore
+      return 0.32 * p.decay;
+    },
+  },
+  slosh: {
+    // Water moving in a bottle: a wash swinging back and forth (rate a
+    // second), lapping, and a glug or two (n).
+    f: 500,
+    rate: 2.2,
+    n: 2,
+    play: (c, o, t, p) => {
+      const d = 1.4 * p.decay;
+      noise(c, o, t, { type: "lowpass", f: p.f, q: 0.9, dur: d, vol: 0.3 * p.vol, attack: d * 0.3, swell: true, am: p.rate, amDepth: 0.8 }); // prettier-ignore
+      noise(c, o, t, { f: p.f * 1.8, q: 2, dur: d, vol: 0.08 * p.vol, attack: d * 0.3, swell: true, am: p.rate * 2, amDepth: 0.8 }); // prettier-ignore
+      for (let i = 0; i < p.n; i++) {
+        const at = t + d * rnd(0.2, 0.8);
+        const f = p.f * rnd(0.45, 0.8);
+        tone(c, o, at, {
+          f,
+          to: f * 1.25,
+          glide: 0.05,
+          dur: 0.08,
+          vol: 0.16 * p.vol,
+          attack: 0.006,
+        });
+      }
+      return d;
+    },
+  },
+  launch: {
+    // A firework leaving its tube: the thump and a rushing trail (no whistle).
+    f: 90,
+    play: (c, o, t, p) => {
+      tone(c, o, t, { f: p.f, to: p.f * 0.55, dur: 0.12, vol: 0.45 * p.vol, attack: 0.002 });
+      noise(c, o, t, { type: "lowpass", f: 700, q: 0.7, dur: 0.07, vol: 0.3 * p.vol, attack: 0.001 }); // prettier-ignore
+      noise(c, o, t + 0.03, { f: 500, to: 1300, q: 0.7, dur: 0.8 * p.decay, vol: 0.2 * p.vol, attack: 0.2 * p.decay, swell: true }); // prettier-ignore
+      return 0.85 * p.decay;
+    },
+  },
+  bang: {
+    // A firework's burst (or any explosion): a deep boom with a rolling echo;
+    // n adds a soft crackling tail of stars.
+    f: 60,
+    n: 0,
+    bright: 0.5,
+    play: (c, o, t, p) => {
+      const d = 1.4 * p.decay;
+      tone(c, o, t, { f: p.f * 2, to: p.f * 0.6, glide: 0.15, dur: 0.9 * p.decay, vol: 0.85 * p.vol, attack: 0.003 }); // prettier-ignore
+      noise(c, o, t, { type: "lowpass", f: 700 + 1200 * p.bright, q: 0.6, dur: 0.5 * p.decay, vol: 0.75 * p.vol, attack: 0.002 }); // prettier-ignore
+      noise(c, o, t + 0.05, { type: "lowpass", f: 260, q: 0.7, dur: d, vol: 0.4 * p.vol, attack: 0.05 }); // prettier-ignore
+      noise(c, o, t + 0.28, { type: "lowpass", f: 400, q: 0.7, dur: 0.6 * p.decay, vol: 0.18 * p.vol, attack: 0.03 }); // prettier-ignore
+      if (p.n > 0)
+        grains(c, o, t + 0.3, {
+          n: p.n,
+          dur: 1.1 * p.decay,
+          grain: (at, i, r) =>
+            noise(c, o, at, { f: rnd(3000, 6000), q: 1, dur: 0.02, vol: 0.08 * p.vol * (1 - i / (p.n + 4)), attack: 0.004 }), // prettier-ignore
+        });
+      return d + 0.2;
+    },
+  },
+  hooves: {
+    // Horses' hooves on packed sand: a trot's two-beat clops (n strides,
+    // rate a second).
+    f: 520,
+    n: 6,
+    rate: 2.6,
+    play: (c, o, t, p) => {
+      for (let i = 0; i < p.n; i++)
+        for (const off of [0, 0.1]) {
+          const at = t + i / p.rate + off + rnd(-0.01, 0.01);
+          const v = p.vol * rnd(0.7, 1) * (off ? 0.75 : 1);
+          modal(c, o, at, { f: p.f * rnd(0.9, 1.1), kind: "hollow", decay: 0.35, vol: 0.3 * v, bright: 0.2 }); // prettier-ignore
+          noise(c, o, at, { type: "lowpass", f: 900, q: 0.7, dur: 0.04, vol: 0.28 * v, attack: 0.002 }); // prettier-ignore
+        }
+      return p.n / p.rate + 0.2;
+    },
+  },
+  crowd: {
+    // A crowd in the stands: a babble of many voices (n) over a broad murmur;
+    // `to` above 1 lifts it into a cheer.
+    f: 200,
+    n: 14,
+    to: 1,
+    play: (c, o, t, p) => {
+      const d = 2 * p.decay;
+      for (const [f, q, a] of [
+        [500, 2, 0.14],
+        [1400, 3, 0.07],
+        [2700, 3, 0.03],
+      ]) {
+        const g = c.createGain();
+        g.gain.value = 0.7;
+        wander(c, g.gain, t, d, { rate: 4, depth: 0.3 });
+        g.connect(o);
+        noise(c, g, t, { f, to: f * p.to, q, dur: d, vol: a * p.vol, attack: d * 0.3, swell: true }); // prettier-ignore
+      }
+      for (let i = 0; i < p.n; i++) {
+        const f = p.f * rnd(0.6, 1.9);
+        const len = rnd(0.2, 0.5);
+        formant(c, o, t + rnd(0.05, d - len), {
+          f,
+          to: f * rnd(0.85, 1.15) * p.to,
+          dur: len,
+          vol: (0.35 * p.vol) / Math.sqrt(p.n),
+          attack: 0.05,
+          formants: [[rnd(400, 850), 4, 1], [rnd(900, 1900), 5, 0.5], [2600, 4, 0.15]], // prettier-ignore
+          formantsTo: [[rnd(350, 800)], [rnd(900, 2100)], [2500]],
+          breath: 0.4,
+        });
+      }
+      return d;
+    },
+  },
+  pebble: {
+    // Stones knocking: a hard bright tock with a dull body (n knocks).
+    f: 2600,
+    n: 1,
+    play: (c, o, t, p) => {
+      let at = 0;
+      for (let i = 0; i < p.n; i++) {
+        const v = p.vol * (i ? rnd(0.5, 0.8) : 1);
+        noise(c, o, t + at, { f: p.f * rnd(0.8, 1.3), q: 4, dur: 0.02, vol: 0.45 * v, attack: 0.0008 }); // prettier-ignore
+        noise(c, o, t + at, { f: p.f * 0.35, q: 3, dur: 0.014, vol: 0.3 * v, attack: 0.0008 });
+        tone(c, o, t + at, { f: p.f * 0.23, dur: 0.018, vol: 0.14 * v, attack: 0.001 });
+        at += rnd(0.06, 0.12);
+      }
+      return at + 0.05;
+    },
+  },
+  spintop: {
+    // A spinning top on a table: a soft steady whirr that wobbles as it
+    // precesses (rate) and sinks slowly as it slows (to below 1).
+    f: 180,
+    rate: 5,
+    to: 0.85,
+    play: (c, o, t, p) => {
+      const d = 2.4 * p.decay;
+      const wob = c.createGain();
+      wob.gain.value = 0.7;
+      const lfo = c.createOscillator();
+      lfo.frequency.value = p.rate;
+      const dep = c.createGain();
+      dep.gain.value = 0.3;
+      lfo.connect(dep).connect(wob.gain);
+      lfo.start(t);
+      lfo.stop(t + d + 0.05);
+      wob.connect(o);
+      for (const [r, a] of [[1, 0.12], [2, 0.05], [3.01, 0.02]]) // prettier-ignore
+        tone(c, wob, t, { wave: "triangle", f: p.f * r, to: p.f * r * p.to, dur: d, vol: a * p.vol, attack: 0.25, hold: d * 0.6 }); // prettier-ignore
+      noise(c, wob, t, { f: 2200, q: 1.2, dur: d, vol: 0.05 * p.vol, attack: 0.25, hold: d * 0.6 });
+      return d;
+    },
+  },
+  yoyo: {
+    // A yo-yo: the string unwinding down, the whirr as it sleeps at the
+    // bottom and the soft smack as it winds back into the hand.
+    f: 140,
+    play: (c, o, t, p) => {
+      const d = p.decay;
+      noise(c, o, t, { f: 1800, to: 900, q: 2, dur: 0.35 * d, vol: 0.14 * p.vol, attack: 0.03 });
+      const wob = c.createGain();
+      wob.gain.value = 0.7;
+      wander(c, wob.gain, t, 1.2 * d, { rate: 20, depth: 0.25 });
+      wob.connect(o);
+      tone(c, wob, t + 0.3 * d, { wave: "triangle", f: p.f, dur: 0.7 * d, vol: 0.12 * p.vol, attack: 0.08, hold: 0.3 * d }); // prettier-ignore
+      noise(c, wob, t + 0.3 * d, { f: 700, q: 3, dur: 0.7 * d, vol: 0.06 * p.vol, attack: 0.08 });
+      noise(c, o, t + 0.85 * d, { f: 1200, to: 2200, q: 2, dur: 0.3 * d, vol: 0.1 * p.vol, attack: 0.03 }); // prettier-ignore
+      tone(c, o, t + 1.15 * d, { f: 170, to: 90, dur: 0.06, vol: 0.3 * p.vol, attack: 0.002 });
+      noise(c, o, t + 1.15 * d, { type: "lowpass", f: 1400, q: 0.7, dur: 0.035, vol: 0.28 * p.vol, attack: 0.001 }); // prettier-ignore
+      return 1.25 * d;
+    },
+  },
+  twist: {
+    // A puzzle cube's layer turning: a plastic slide over its ridges and the
+    // soft clack as it seats.
+    f: 1800,
+    play: (c, o, t, p) => {
+      const d = 0.09 * p.decay;
+      noise(c, o, t, { f: p.f, q: 1.5, dur: d, vol: 0.24 * p.vol, attack: 0.012, am: 90, amDepth: 0.5 }); // prettier-ignore
+      modal(c, o, t + d, {
+        f: p.f * 0.62,
+        kind: "clack",
+        decay: 0.8,
+        vol: 0.22 * p.vol,
+        bright: 0.3,
+      });
+      noise(c, o, t + d, { type: "lowpass", f: 900, q: 0.7, dur: 0.02, vol: 0.2 * p.vol, attack: 0.001 }); // prettier-ignore
+      return d + 0.06;
+    },
+  },
+  sproing: {
+    // A metal coil spring: the dispersive "pew" of the coil ringing back (n
+    // echoes) and a short metallic wobble. Not a rubber band.
+    f: 300,
+    n: 4,
+    play: (c, o, t, p) => {
+      for (let k = 0; k < p.n; k++)
+        tone(c, o, t + k * 0.085 * p.decay, { f: p.f * 9, to: p.f, glide: 0.06, dur: 0.08, vol: 0.2 * p.vol * 0.62 ** k, attack: 0.002 }); // prettier-ignore
+      modal(c, o, t, { f: p.f * 2.2, kind: "metal", decay: 0.45, vol: 0.12 * p.vol, bright: 0.3 });
+      tone(c, o, t, { wave: "triangle", f: p.f * 0.7, dur: 0.5 * p.decay, vol: 0.1 * p.vol, vib: 0.07, vibRate: 9 }); // prettier-ignore
+      return 0.5 * p.decay;
+    },
+  },
+  balloonpop: {
+    // A balloon bursting: a sharp bang, a low thump and the rubber flapping.
+    f: 90,
+    play: (c, o, t, p) => {
+      noise(c, o, t, { type: "highpass", f: 400, q: 0.5, dur: 0.045, vol: 0.8 * p.vol, attack: 0.0005 }); // prettier-ignore
+      noise(c, o, t, { type: "lowpass", f: 1800, q: 0.6, dur: 0.09, vol: 0.45 * p.vol, attack: 0.001 }); // prettier-ignore
+      tone(c, o, t, { f: p.f * 1.5, to: p.f, dur: 0.06, vol: 0.35 * p.vol, attack: 0.001 });
+      noise(c, o, t + 0.02, { f: 700, q: 2, dur: 0.06, vol: 0.1 * p.vol, attack: 0.003, am: 120, amDepth: 0.6 }); // prettier-ignore
+      return 0.12;
+    },
+  },
+  flybuzz: {
+    // A real fly: a raspy wingbeat hum (f) that wanders in pitch and loudness
+    // as it flies nearer and away.
+    f: 200,
+    bright: 0.6,
+    play: (c, o, t, p) => {
+      const d = 1.2 * p.decay;
+      const s = osc(c, t, { wave: "sawtooth", f: p.f, dur: d });
+      wander(c, s.frequency, t, d, { rate: 1.5, depth: p.f * 0.07 });
+      const near = c.createGain();
+      near.gain.value = 0.6;
+      wander(c, near.gain, t, d, { rate: 2, depth: 0.35 });
+      const b1 = filter(c, t, { type: "bandpass", f: p.f * (3 + 3 * p.bright), q: 1 });
+      const b2 = filter(c, t, { type: "bandpass", f: p.f * 9, q: 1.5 });
+      const g = swellGain(c, t, { vol: 0.8 * p.vol, attack: 0.1, dur: d });
+      s.connect(b1).connect(near);
+      s.connect(b2).connect(near);
+      near.connect(g).connect(o);
+      return d;
+    },
+  },
+  croak: {
+    // A frog's croak: a low rasp of fast vocal pulses (rate a second), n times.
+    f: 280,
+    n: 1,
+    rate: 32,
+    play: (c, o, t, p) => {
+      for (let i = 0; i < p.n; i++) {
+        const at = t + i * 0.55 * p.decay;
+        const d = 0.35 * p.decay;
+        const gate = c.createGain();
+        gate.gain.value = 0.5;
+        const lfo = c.createOscillator();
+        lfo.type = "triangle";
+        lfo.frequency.value = p.rate;
+        const dep = c.createGain();
+        dep.gain.value = 0.5;
+        lfo.connect(dep).connect(gate.gain);
+        lfo.start(at);
+        lfo.stop(at + d + 0.05);
+        gate.connect(o);
+        formant(c, gate, at, { f: p.f * 0.5, to: p.f * 0.44, dur: d, vol: 0.6 * p.vol, attack: 0.02, formants: [[p.f * 2, 3, 1], [p.f * 4.5, 4, 0.4]] }); // prettier-ignore
+      }
+      return p.n * 0.55 * p.decay;
+    },
+  },
+  owlhoot: {
+    // A great horned owl: "hoo, h-hoo, hooo, hoo", low and breathy.
+    f: 330,
+    play: (c, o, t, p) => {
+      const calls = [[0, 0.3, 0.8], [0.45, 0.12, 0.5], [0.62, 0.36, 0.9], [1.08, 0.38, 0.7], [1.55, 0.34, 0.6]]; // prettier-ignore
+      for (const [at, len, v] of calls) {
+        const d = len * p.decay;
+        tone(c, o, t + at * p.decay, { f: p.f * 1.02, to: p.f * 0.94, dur: d, vol: 0.4 * v * p.vol, attack: 0.05, hold: d * 0.4 }); // prettier-ignore
+        tone(c, o, t + at * p.decay, { f: p.f * 2.04, to: p.f * 1.88, dur: d, vol: 0.03 * v * p.vol, attack: 0.05, hold: d * 0.4 }); // prettier-ignore
+        noise(c, o, t + at * p.decay, { f: p.f * 2.5, q: 1.5, dur: d, vol: 0.05 * v * p.vol, attack: 0.05 }); // prettier-ignore
+      }
+      return 1.95 * p.decay;
+    },
+  },
+  melt: {
+    // Something soft melting: a thick slow ooze and heavy drops (n) that plop
+    // down, not bubbles.
+    f: 220,
+    n: 4,
+    play: (c, o, t, p) => {
+      const d = 1.8 * p.decay;
+      noise(c, o, t, { type: "lowpass", f: 650, q: 0.7, dur: d, vol: 0.09 * p.vol, attack: d * 0.4, swell: true, am: 1.5, amDepth: 0.5 }); // prettier-ignore
+      noise(c, o, t + d * 0.3, { f: 900, to: 500, q: 3, dur: 0.3, vol: 0.07 * p.vol, attack: 0.05 }); // prettier-ignore
+      for (let i = 0; i < p.n; i++) {
+        const at = t + d * (0.2 + (0.7 * (i + Math.random() * 0.5)) / p.n);
+        const f = p.f * rnd(0.8, 1.2);
+        tone(c, o, at, { f, to: f * 0.7, glide: 0.08, dur: 0.12, vol: 0.2 * p.vol, attack: 0.01 });
+        noise(c, o, at, { type: "lowpass", f: 600, q: 0.7, dur: 0.05, vol: 0.1 * p.vol, attack: 0.004 }); // prettier-ignore
+      }
+      return d;
+    },
+  },
+  stretch: {
+    // Dough or cheese pulled: a wet, squeaky stick-slip that slows as it
+    // gives (to below 1), over a soft sticky tearing.
+    f: 700,
+    rate: 55,
+    to: 0.75,
+    play: (c, o, t, p) => {
+      const d = 0.7 * p.decay;
+      const into = body(c, o, t, d, [
+        [p.f, 5, 0.8],
+        [p.f * 2.1, 4, 0.35],
+      ]);
+      stickSlip(c, into, t, d, { rate: p.rate, to: p.to, vol: 0.55 * p.vol, jitter: 0.45 });
+      noise(c, o, t, { f: p.f * 1.3, to: p.f * 0.8, q: 2, dur: d, vol: 0.07 * p.vol, attack: d * 0.4, swell: true }); // prettier-ignore
+      return d;
+    },
+  },
+  peel: {
+    // A fruit peel pulled back: soft fibrous tearing (n fibers) that
+    // deepens as it goes, then the flop of the loose peel. Not a zipper.
+    f: 1400,
+    n: 26,
+    play: (c, o, t, p) => {
+      const d = 0.45 * p.decay;
+      grains(c, o, t, {
+        n: p.n,
+        dur: d,
+        accel: -0.3,
+        grain: (at, i, r) =>
+          noise(c, o, at, { f: p.f * (1 - (0.4 * i) / p.n) * rnd(0.8, 1.2), q: 1.4, dur: 0.015 + 0.02 * r, vol: 0.18 * p.vol * (0.6 + 0.4 * r), attack: 0.003 }), // prettier-ignore
+      });
+      noise(c, o, t, { f: p.f * 0.8, to: p.f * 0.5, q: 1, dur: d, vol: 0.08 * p.vol, attack: d * 0.4, swell: true }); // prettier-ignore
+      noise(c, o, t + d, { type: "lowpass", f: 500, q: 0.7, dur: 0.06, vol: 0.14 * p.vol, attack: 0.004 }); // prettier-ignore
+      return d + 0.08;
+    },
+  },
+  gurgle: {
+    // Liquid bubbling: low soft bubbles in thick water (n), over a slosh.
+    f: 260,
+    n: 10,
+    play: (c, o, t, p) => {
+      const d = 1 * p.decay;
+      grains(c, o, t, {
+        n: p.n,
+        dur: d,
+        grain: (at, i, r) => {
+          const f = p.f * (0.6 + 0.7 * r);
+          tone(c, o, at, { f, to: f * 1.15, glide: 0.03, dur: 0.06 + 0.06 * r, vol: 0.14 * p.vol, attack: 0.008 }); // prettier-ignore
+          noise(c, o, at, { type: "lowpass", f: 500, q: 0.7, dur: 0.08, vol: 0.05 * p.vol, attack: 0.008 }); // prettier-ignore
+        },
+      });
+      noise(c, o, t, { type: "lowpass", f: 400, q: 0.7, dur: d, vol: 0.06 * p.vol, attack: d * 0.3, swell: true, am: 6, amDepth: 0.6 }); // prettier-ignore
+      return d + 0.1;
+    },
+  },
+  swim: {
+    // Swimming through water: each stroke (n, rate a second) a soft push of
+    // water and a low bloop.
+    f: 350,
+    n: 2,
+    rate: 1.2,
+    play: (c, o, t, p) => {
+      for (let i = 0; i < p.n; i++) {
+        const at = t + i / p.rate;
+        noise(c, o, at, { type: "lowpass", f: p.f, to: p.f * 0.6, q: 0.8, dur: 0.6 * p.decay, vol: 0.3 * p.vol, attack: 0.08, swell: true }); // prettier-ignore
+        tone(c, o, at + 0.05, { f: 95, to: 70, dur: 0.25, vol: 0.12 * p.vol, attack: 0.03 });
+      }
+      return (p.n - 1) / p.rate + 0.6 * p.decay;
+    },
+  },
+  keytap: {
+    // A real keyboard key: the keycap's light tick, the thock as it bottoms
+    // out and the quieter tick of its return.
+    f: 2400,
+    play: (c, o, t, p) => {
+      noise(c, o, t, { f: p.f, q: 2, dur: 0.006, vol: 0.2 * p.vol, attack: 0.0005 });
+      noise(c, o, t + 0.012, { type: "lowpass", f: 900, q: 0.7, dur: 0.025, vol: 0.32 * p.vol, attack: 0.001 }); // prettier-ignore
+      tone(c, o, t + 0.012, { f: 380, to: 300, dur: 0.02, vol: 0.1 * p.vol, attack: 0.001 });
+      noise(c, o, t + 0.09, { f: p.f * 0.8, q: 2, dur: 0.005, vol: 0.08 * p.vol, attack: 0.0005 });
+      return 0.1;
+    },
+  },
+  fan: {
+    // A fan or propeller: air thrumming at the blade rate (rate a second)
+    // that swells in as it starts, over a faint motor hum.
+    f: 600,
+    rate: 14,
+    play: (c, o, t, p) => {
+      const d = 1.6 * p.decay;
+      noise(c, o, t, { type: "lowpass", f: p.f, q: 0.5, dur: d, vol: 0.2 * p.vol, attack: d * 0.4, swell: true, am: p.rate, amDepth: 0.4 }); // prettier-ignore
+      tone(c, o, t, { wave: "triangle", f: 100, dur: d, vol: 0.03 * p.vol, attack: d * 0.3, hold: d * 0.4 }); // prettier-ignore
+      return d;
+    },
+  },
+  hit: {
+    // A deep cinematic impact: a sub drop, a dark rush and a long low tail.
+    f: 55,
+    play: (c, o, t, p) => {
+      const d = 1.6 * p.decay;
+      tone(c, o, t, { f: p.f * 1.6, to: p.f * 0.6, glide: 0.3, dur: d, vol: 0.7 * p.vol, attack: 0.004 }); // prettier-ignore
+      noise(c, o, t, { type: "lowpass", f: 900, to: 200, q: 0.6, dur: d * 0.8, vol: 0.4 * p.vol, attack: 0.005 }); // prettier-ignore
+      return d;
+    },
+  },
+  glow: {
+    // A warm, slowly moving pad (notes as a chord, "A2+E3+A3"): detuned tones
+    // through a filter that breathes, for the grand and mathematical.
+    f: 110,
+    bright: 0.4,
+    play: (c, o, t, p) => {
+      const d = 2.4 * p.decay;
+      const lp = filter(c, t, { f: 300 + 1200 * p.bright, q: 0.9 });
+      wander(c, lp.frequency, t, d, { rate: 0.8, depth: 200 + 600 * p.bright });
+      const g = swellGain(c, t, { vol: 0.3 * p.vol, attack: d * 0.35, dur: d });
+      lp.connect(g).connect(o);
+      for (const det of [-8, 0, 7]) {
+        const s = osc(c, t, { wave: "sawtooth", f: p.f, dur: d, detune: det });
+        s.connect(lp);
+      }
+      return d;
+    },
+  },
+  arc: {
+    // Electricity: a crackling arc that buzzes at mains-like rate (rate) and
+    // snaps; for neurons, circuits and sparks. Not a rising tone.
+    f: 2500,
+    rate: 90,
+    play: (c, o, t, p) => {
+      const d = 0.35 * p.decay;
+      noise(c, o, t, { f: p.f, q: 0.8, dur: d, vol: 0.28 * p.vol, attack: 0.004, am: p.rate, amDepth: 0.9, amWave: "sawtooth" }); // prettier-ignore
+      noise(c, o, t, { type: "lowpass", f: 400, q: 0.7, dur: d * 0.6, vol: 0.18 * p.vol, attack: 0.004, am: p.rate, amDepth: 0.8 }); // prettier-ignore
+      return d;
+    },
+  },
+  whoom: {
+    // A great slow pass through the air: a dark rush that swells and falls
+    // (a turning giant, a pass-by), without a rising pitch.
+    f: 250,
+    play: (c, o, t, p) => {
+      const d = 1.4 * p.decay;
+      noise(c, o, t, { type: "lowpass", f: p.f, q: 1.2, dur: d, vol: 0.4 * p.vol, attack: d * 0.5, swell: true }); // prettier-ignore
+      tone(c, o, t, { f: 55, dur: d, vol: 0.15 * p.vol, attack: d * 0.5, hold: 0 });
+      return d;
+    },
+  },
+  chessmove: {
+    // A chess piece set down on a wooden board: a felted, woody thock with
+    // the board's low knock. kind "lift" is the lighter tap of picking one up.
+    f: 520,
+    play: (c, o, t, p) => {
+      const lift = p.kind === "lift";
+      const v = p.vol * (lift ? 0.45 : 1);
+      noise(c, o, t, { type: "lowpass", f: lift ? 2200 : 1500, q: 0.7, dur: 0.03, vol: 0.4 * v, attack: 0.0015 }); // prettier-ignore
+      modal(c, o, t, {
+        f: p.f,
+        kind: "wood",
+        decay: lift ? 0.5 : 0.8,
+        vol: 0.35 * v,
+        bright: 0.25,
+      });
+      if (!lift) tone(c, o, t, { f: 170, to: 130, dur: 0.07, vol: 0.2 * v, attack: 0.002 });
+      return 0.12;
+    },
+  },
+  clockwork: {
+    // A wind-up toy running down: gears whirring as the spring unwinds and
+    // its tin feet clanking at `rate` steps a second, slowing as it goes.
+    f: 2600,
+    rate: 2.7,
+    play: (c, o, t, p) => {
+      const d = 2.6 * p.decay;
+      noise(c, o, t, { f: p.f, q: 2, dur: d, vol: 0.12 * p.vol, attack: 0.05, am: 38, amDepth: 0.5 }); // prettier-ignore
+      let at = 0.1;
+      for (let i = 0; at < d - 0.1; i++) {
+        modal(c, o, t + at, { f: 1300 * rnd(0.9, 1.1), kind: "metal", decay: 0.12, vol: 0.2 * p.vol * (1 - (0.5 * at) / d), bright: 0.3 }); // prettier-ignore
+        noise(c, o, t + at, { type: "lowpass", f: 800, q: 0.7, dur: 0.03, vol: 0.12 * p.vol, attack: 0.002 }); // prettier-ignore
+        at += 1 / (p.rate * (1 - (0.45 * at) / d));
+      }
+      return d;
+    },
+  },
+  alarmbell: {
+    // A wind-up alarm clock ringing: the hammer rattling between two bells
+    // (rate strikes a second).
+    f: 2100,
+    rate: 18,
+    play: (c, o, t, p) => {
+      const d = 0.9 * p.decay;
+      let i = 0;
+      for (let at = 0; at < d; at += 1 / p.rate, i++)
+        modal(c, o, t + at, { f: p.f * (i % 2 ? 1.09 : 1), kind: "bell", decay: 0.2, vol: 0.3 * p.vol, bright: 0.4 }); // prettier-ignore
+      return d + 0.4;
+    },
+  },
+  jingle: {
+    // Sleigh bells shaken: bursts (n) of tiny bright jingles.
+    f: 3200,
+    n: 2,
+    play: (c, o, t, p) => {
+      for (let k = 0; k < p.n; k++)
+        grains(c, o, t + k * 0.28 * p.decay, {
+          n: 7,
+          dur: 0.12,
+          grain: (at, i, r) =>
+            modal(c, o, at, { f: p.f * (0.8 + 0.5 * r), kind: "metal", decay: 0.18, vol: 0.18 * p.vol * (1 - i / 9), bright: 0.3 }), // prettier-ignore
+        });
+      return p.n * 0.28 * p.decay + 0.25;
+    },
+  },
+};
+Object.assign(VOICES, SOUND_B);
+// Each Sound B voice's level, measured like the others (`node tools/sound-check.mjs --voices`).
+Object.assign(LEVEL, {
+  flame: 2.79, rustle: 8.05, pageflip: 3.48, bite: 3.72, shellcrack: 2.97, kernel: 7.55,
+  dice: 4.03, chug: 4.26, motor: 1.35, rotor: 3.37, creak: 12, snip: 10.38, trumpet: 2.3,
+  bowstring: 1.54, slosh: 5.05, launch: 1.77, bang: 0.64, hooves: 4.51, crowd: 7.54,
+  pebble: 6.5, spintop: 3.75, yoyo: 3.07, twist: 8.18, sproing: 3.62, balloonpop: 1.56,
+  flybuzz: 1.34, croak: 3.78, owlhoot: 1.47, melt: 4.26, stretch: 12, peel: 10.92,
+  gurgle: 5.78, swim: 4.07, keytap: 7.55, fan: 6.84, hit: 0.75, glow: 1.35, arc: 5.73,
+  whoom: 2.43, jingle: 5.71, chessmove: 2.82, clockwork: 6.53, alarmbell: 4.19,
+}); // prettier-ignore
+VOICE_NAMES.push(...Object.keys(SOUND_B));

@@ -633,7 +633,7 @@ function bricksDrive(c, out, info) {
     // A click as each brick lands.
     while (s.clicks < s.order.length && e >= BUILD.pop + s.clicks * step + BUILD.fly) {
       s.clicks++;
-      out.cues.push({ voice: "click", f: 2100 + 90 * (s.clicks % 4), decay: 1.3, vol: 0.9 });
+      out.cues.push({ voice: "clack", f: 950 + 60 * (s.clicks % 4), decay: 0.9, bright: 0.3, vol: 0.8 }); // prettier-ignore
       out.resort = true;
     }
     if (!s.sorted && e >= BUILD.pop) {
@@ -991,7 +991,7 @@ function cubeDrive(c, out, info) {
   }
   const now = info.time;
   cube.lastTime = now;
-  const click = (vol = 1) => out.cues.push({ voice: "click", f: 1500 + 300 * Math.random(), decay: 1.4, vol }); // prettier-ignore
+  const click = (vol = 1) => out.cues.push({ voice: "twist", f: 1600 + 300 * Math.random(), vol }); // prettier-ignore
   // A tap: scramble a solved cube, or play its turns back to solved.
   if (fired(m, "twist", c.twist)) {
     if (cube.seq) for (const t of cube.seq.turns.slice(cube.seq.done)) cubeApply(t);

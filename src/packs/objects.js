@@ -1015,7 +1015,7 @@ export const RECIPES = {
           typeInto(st, k, ev.typed);
           st.pressKey = ev.pick;
           st.pressAt = info.time;
-          out.cues.push(k.id === "SPACE" ? { voice: "clack", f: 1300, decay: 0.8, vol: 0.7 } : { voice: "click", f: 1900 + 40 * (ev.pick % 7), decay: 1.2 }); // prettier-ignore
+          out.cues.push(k.id === "SPACE" ? { voice: "keytap", f: 1500, vol: 0.9 } : { voice: "keytap", f: 2200 + 60 * (ev.pick % 7) }); // prettier-ignore
         } else if (ev.pad) {
           // A tap on the trackpad: the pointer jumps to the matching spot
           // and clicks there.
