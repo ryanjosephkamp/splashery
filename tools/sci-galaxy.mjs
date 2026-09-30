@@ -11,7 +11,8 @@
 // It reads the snapshot with jsfive (a pinned devDependency; LICENSES.md),
 // finds the galaxy (a shrinking sphere on its stars), turns it so its gas
 // disk's spin points up (+y), keeps every gas particle in a cube of ±half
-// kpc round it (a random subset of --keep of them if there are more), and works out each one's temperature from its internal
+// kpc round it (the dense gas and a random share of the diffuse gas if there
+// are more than --keep), and works out each one's temperature from its internal
 // energy (T = (γ − 1) u μ m_p / k_B, with μ from a hydrogen fraction of 0.76
 // and the electron abundance).
 //
@@ -174,18 +175,30 @@ for (const g of gas) {
   const p = rot(g.p);
   if (Math.abs(p[0]) < half && Math.abs(p[1]) < halfY && Math.abs(p[2]) < half) keep.push([g, p]);
 }
-// A random subset when there are more (the same on every run): the toy draws
-// each kept particle wider by the cube root of the thinning, so the gas
-// still closes (the same mass in fewer, bigger pieces).
+// When there are more than --keep, the dense gas (where the spiral arms and
+// the star-forming clouds are) is all kept and only the diffuse gas is
+// thinned, at random (the same on every run): the file is the densest
+// DENSE_SHARE of --keep particles, sorted by smoothing length, then a random
+// share of the rest. The toy draws each kept diffuse particle wider by the
+// cube root of its thinning, so that gas still closes (the same mass in
+// fewer, bigger pieces), and the dense ones at their own size.
+const DENSE_SHARE = 0.65;
+let nDense = keep.length;
+let widenRest = 1;
 if (keep.length > most) {
+  keep.sort((p, q) => p[0].h - q[0].h);
+  nDense = Math.round(most * DENSE_SHARE);
+  const rest = keep.slice(nDense);
   let seed = 12345;
   const rnd = () => (seed = (Math.imul(seed, 1103515245) + 12345) >>> 0) / 4294967296;
-  for (let i = keep.length - 1; i > 0; i--) {
+  for (let i = rest.length - 1; i > 0; i--) {
     const j = Math.floor(rnd() * (i + 1));
-    [keep[i], keep[j]] = [keep[j], keep[i]];
+    [rest[i], rest[j]] = [rest[j], rest[i]];
   }
   inBox = keep.length;
-  keep.length = most;
+  widenRest = Math.cbrt(rest.length / (most - nDense));
+  keep.length = nDense;
+  keep.push(...rest.slice(0, most - nDense));
 }
 const n = keep.length;
 const pos = new Int16Array(n * 3);
@@ -210,7 +223,9 @@ const header = {
   halfY,
   n,
   inBox: inBox || n,
-  widen: Math.cbrt((inBox || n) / n),
+  nDense,
+  hCut: nDense < n ? keep[nDense - 1][0].h : null,
+  widenRest,
   of: n0,
   center: c.map((v) => v * toKpc),
   spin: ly,

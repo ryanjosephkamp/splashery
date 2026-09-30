@@ -100,6 +100,13 @@ function column(name) {
       localization_precision: "sxy",
       uncertainty_z: "sz",
       precision_z: "sz",
+      // Cramér–Rao lower bounds (the precision a fit can reach), as SMAP and
+      // ZOLA-3D write them.
+      crlbx: "sxy",
+      crlby: "sy",
+      crlbz: "sz",
+      amplitude_0_0: "intensity",
+      amplitude: "intensity",
       channel: "channel",
     }[s] ?? "";
   return { key, unit, name: s };
@@ -208,6 +215,12 @@ export async function readSmlm(bytes) {
       off += size;
     });
     if (!cols.x || !cols.y) fail(`"${f.name}" has no x and y columns.`);
+    // Separate x and y precisions: their mean (a round Gaussian across).
+    if (cols.sy) {
+      if (cols.sxy) for (let r = 0; r < rows; r++) cols.sxy[r] = (cols.sxy[r] + cols.sy[r]) / 2;
+      else cols.sxy = cols.sy;
+      delete cols.sy;
+    }
     const offX = Number(f.offset?.x) || 0;
     const offY = Number(f.offset?.y) || 0;
     if (offX || offY) for (let r = 0; r < rows; r++) ((cols.x[r] += offX), (cols.y[r] += offY));
@@ -305,6 +318,11 @@ export function readThunderstormCsv(text) {
   }
   if (!n) fail("This CSV has no localizations.");
   for (const k of keys) cols[k] = cols[k].slice(0, n);
+  if (cols.sy) {
+    if (cols.sxy) for (let i = 0; i < n; i++) cols.sxy[i] = (cols.sxy[i] + cols.sy[i]) / 2;
+    else cols.sxy = cols.sy;
+    delete cols.sy;
+  }
   if (chan) cols.channel = chan.slice(0, n);
   const notes = bad ? [`${bad} rows without x and y were skipped.`] : [];
   let names = ["Channel 1"];

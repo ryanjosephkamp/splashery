@@ -408,19 +408,37 @@ THERMAL.gpuField = function (_o, fit) {
 
 // ---- Super-resolution microscope ---------------------------------------------------------
 
-export const MICROSCOPE_SAMPLE = {
-  file: "cos7-mt-clathrin.smlm",
-  label: "Microtubules and clathrin in a COS cell (a 12 µm square)",
-  title: "Microtubules and clathrin in a Cos cell (ShareLoc.XYZ, 10.5281/zenodo.5507427)",
-  author:
-    "Christophe Leterrier (Aix Marseille Université, CNRS, NeuroCyto), on ShareLoc.XYZ; a 12 µm square cut from the record (a subset)",
-  source: "https://doi.org/10.5281/zenodo.5507427",
-  license: "CC BY 4.0",
-  licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
-};
+const CC_BY = { license: "CC BY 4.0", licenseUrl: "https://creativecommons.org/licenses/by/4.0/" };
+export const MICROSCOPE_SAMPLES = [
+  {
+    id: "sample",
+    choice: "Microtubules and clathrin",
+    file: "cos7-mt-clathrin.smlm",
+    zoom: 40, // down to a clathrin pit
+    label: "Microtubules and clathrin in a COS cell (a 12 µm square)",
+    title: "Microtubules and clathrin in a Cos cell (ShareLoc.XYZ, 10.5281/zenodo.5507427)",
+    author:
+      "Christophe Leterrier (Aix Marseille Université, CNRS, NeuroCyto), on ShareLoc.XYZ; a 12 µm square cut from the record (a subset)",
+    source: "https://doi.org/10.5281/zenodo.5507427",
+    ...CC_BY,
+  },
+  {
+    id: "nucleus",
+    choice: "A whole nucleus (3D)",
+    file: "nucleus-nup.smlm",
+    zoom: 8, // a patch of the envelope with its pores
+    label: "Nuclear pores over a whole nucleus, in 3D (half the localizations)",
+    title: "Zola-3D NUP full nucleus (ShareLoc.XYZ, 10.5281/zenodo.7233696)",
+    author:
+      "Andrey Aristov (Institut Pasteur), uploaded by Benoit Lelandais, on ShareLoc.XYZ; a random half of the localizations (a subset)",
+    source: "https://doi.org/10.5281/zenodo.7233696",
+    ...CC_BY,
+  },
+];
+export const MICROSCOPE_SAMPLE = MICROSCOPE_SAMPLES[0];
 
 const MIC = {
-  sample: null, // the sample's table
+  samples: new Map(), // sample id -> its table
   custom: null, // { name, table }
   want: null,
   info: null,
@@ -434,7 +452,9 @@ export const microscopeState = () => (MIC.info ? { ...MIC.info } : null);
 // 280k and 392k localizations on the low, mid, high and max tiers), so the
 // sample's 170,401 are all drawn from the mid tier up.
 export const MICROSCOPE_DENSITY = 1.4;
-const MIC_ZOOM = 60; // the tap's magnification: a 12 µm field to about 200 nm
+// The tap's magnification: each sample's own, or for a file of yours the
+// field down to a view about 250 nm across, between 8 and 40 times.
+const micZoom = (info) => info?.zoom ?? Math.max(8, Math.min(40, Math.max(...(info?.size ?? [12])) / 0.25)); // prettier-ignore
 const UM = 1e-3; // nm to µm (the recipe's units)
 
 // A perceptual rainbow for depth (Google's Turbo, a polynomial fit) and a
@@ -466,6 +486,15 @@ function range(a, n) {
   return hi > lo ? [lo, hi] : [lo - 1, lo + 1];
 }
 
+// The median of a column (from a sample of it).
+function median(a, n) {
+  const step = Math.max(1, Math.floor(n / 20000));
+  const v = [];
+  for (let i = 0; i < n; i += step) if (a[i] > 0) v.push(a[i]);
+  v.sort((p, q) => p - q);
+  return v.length ? v[v.length >> 1] : 1;
+}
+
 // Which localizations to draw when a file has more than the budget: an even
 // spread (every k-th after a fixed shuffle of blocks), the same on every build.
 function pickIndices(n, budget) {
@@ -486,7 +515,7 @@ const MICROSCOPE = {
       type: "select",
       default: "sample",
       choices: [
-        { id: "sample", label: "Microtubules and clathrin (sample)" },
+        ...MICROSCOPE_SAMPLES.map((d) => ({ id: d.id, label: d.choice })),
         { id: "custom", label: "Your file (open one below)" },
       ],
     },
@@ -509,6 +538,17 @@ const MICROSCOPE = {
       choices: [
         { id: "1", label: "True (1×)" },
         { id: "4", label: "Stretched 4×" },
+      ],
+    },
+    {
+      key: "precision",
+      label: "Precision",
+      type: "select",
+      default: "all",
+      choices: [
+        { id: "all", label: "All localizations" },
+        { id: "5", label: "Better than 5 nm" },
+        { id: "3", label: "Better than 3 nm" },
       ],
     },
     { key: "fileName", label: "File name", type: "text", default: "", hidden: true },
@@ -543,40 +583,41 @@ const MICROSCOPE = {
     shown() {
       const i = MIC.info;
       if (!i) return "";
-      const some = i.drawn < i.n ? ` Drawing ${fmt(i.drawn)} of them (this device's budget).` : "";
-      return [`${i.name}: ${fmt(i.n)} localizations.${some}`, ...i.notes].join(" ");
+      const kept = i.kept < i.n ? ` ${fmt(i.kept)} pass the precision filter.` : "";
+      const some = i.drawn < i.kept ? ` Drawing ${fmt(i.drawn)} of them (this device's budget).` : ""; // prettier-ignore
+      return [`${i.name}: ${fmt(i.n)} localizations.${kept}${some}`, ...i.notes].join(" ");
     },
   },
-  credits: [
-    {
-      label: "Microscope sample",
-      title: MICROSCOPE_SAMPLE.title,
-      source: MICROSCOPE_SAMPLE.source,
-      author: MICROSCOPE_SAMPLE.author,
-      license: MICROSCOPE_SAMPLE.license,
-      licenseUrl: MICROSCOPE_SAMPLE.licenseUrl,
-    },
-  ],
+  credits: MICROSCOPE_SAMPLES.map((d) => ({
+    label: d.choice,
+    title: d.title,
+    source: d.source,
+    author: d.author,
+    license: d.license,
+    licenseUrl: d.licenseUrl,
+  })),
   async prepare(o) {
     if (o.data === "custom" && MIC.custom) {
       MIC.want = { name: MIC.custom.name, table: MIC.custom.table, custom: true };
       return;
     }
-    if (!MIC.sample) {
-      const bytes = await readAsset(`../../assets/toys/smlm-microscope/${MICROSCOPE_SAMPLE.file}`, true); // prettier-ignore
-      MIC.sample = await readSmlm(bytes);
+    const def = MICROSCOPE_SAMPLES.find((d) => d.id === o.data) || MICROSCOPE_SAMPLES[0];
+    if (!MIC.samples.has(def.id)) {
+      const bytes = await readAsset(`../../assets/toys/smlm-microscope/${def.file}`, true);
+      MIC.samples.set(def.id, await readSmlm(bytes));
     }
-    MIC.want = { name: MICROSCOPE_SAMPLE.label, table: MIC.sample, custom: false };
+    MIC.want = { name: def.label, table: MIC.samples.get(def.id), custom: false, zoom: def.zoom };
   },
   drive(t, c, out, info) {
     const z = smoothstep(0, 1, c.zoom ?? 0);
-    const m = Math.pow(MIC_ZOOM, z);
+    const m = Math.pow(micZoom(MIC.info), z);
     const u = smoothstep(0, 0.35, z);
     easeFocus(MIC.focus, info.time);
     const F = MIC.focus.at;
     // Zoomed out, every localization is drawn at least about a pixel wide;
     // zoomed in, a clipping slab shows a slice at the tapped depth.
-    const clip = z > 0.02 ? mixN(2.5, 0.35, u) : 0;
+    // Zoomed in, a slice about the tapped depth (negative: both sides).
+    const clip = z > 0.02 ? -mixN(2.5, 0.35, u) : 0;
     out.morph = [0, m, 0.0008, clip];
     out.glow = [F[0], F[1], F[2], u];
   },
@@ -585,9 +626,23 @@ const MICROSCOPE = {
     if (!want) throw new Error("There are no localizations to show.");
     const T = want.table;
     const budget = Math.max(1000, Math.floor(k.count * 0.985));
-    const pick = pickIndices(T.n, budget);
-    const count = pick ? pick.length : T.n;
-    const at = (j) => (pick ? pick[j] : j);
+    // The precision filter keeps the localizations fitted better than a
+    // limit (as SMLM tools filter by uncertainty); then the budget.
+    const limit = Number(o.precision) || Infinity;
+    let pool = null;
+    if (limit < Infinity) {
+      pool = [];
+      for (let i = 0; i < T.n; i++) if (T.sxy[i] < limit) pool.push(i);
+      if (!pool.length) throw new Error(`No localization in this file is better than ${limit} nm.`);
+      pool = Uint32Array.from(pool);
+    }
+    const nPool = pool ? pool.length : T.n;
+    const pick = pickIndices(nPool, budget);
+    const count = pick ? pick.length : nPool;
+    const at = (j) => {
+      const q = pick ? pick[j] : j;
+      return pool ? pool[q] : q;
+    };
     const stretch = Number(o.stretch) || 1;
     const [x0, x1] = range(T.x, T.n);
     const [y0, y1] = range(T.y, T.n);
@@ -611,10 +666,18 @@ const MICROSCOPE = {
       part: sciPart(SCI_TYPE.plain),
     });
     const P = (i) => [(T.x[i] - cx) * UM, -(T.y[i] - cy) * UM, (T.z[i] - cz) * UM * stretch];
+    // Each localization carries the same total light, as ThunderSTORM's
+    // normalized Gaussians do: a spot twice as uncertain is a quarter as
+    // bright, so the precise ones stand out (the median's opacity is `base`).
+    const sMed = median(T.sxy, T.n);
+    const base = T.has3D ? 0.55 : 0.35;
+    const alphaOf = (i) => Math.max(0.05, Math.min(0.9, base * (sMed / T.sxy[i]) ** 2));
     const colorOf = (i) => {
       if (o.color === "frame") return timeColor((T.frame[i] - f0) / fr);
       if (o.color === "channel") return CHANNEL_COLORS[T.channel[i] % CHANNEL_COLORS.length];
-      return turbo(T.has3D ? (T.z[i] - z0) / (z1 - z0) : 0.55);
+      // A flat (2D) file has no depth to color by: one warm color, so the
+      // density shows instead.
+      return T.has3D ? turbo((T.z[i] - z0) / (z1 - z0)) : "#ffb347";
     };
     k.cloud({ count: (count * 160000) / k.count, jitter: 0 }, (_r, j) => {
       if (j >= count) return null;
@@ -632,7 +695,7 @@ const MICROSCOPE = {
         flat: Math.max(sz, 0.03) / shown,
         size: shown / base,
         color: colorOf(i),
-        opacity: 0.55,
+        opacity: alphaOf(i),
         part: sciPart(SCI_TYPE.loc),
         params: [asF32(sxy), asF32(sz)],
       };
@@ -654,10 +717,12 @@ const MICROSCOPE = {
       name: want.name,
       custom: want.custom,
       n: T.n,
+      kept: nPool,
       drawn: count,
       has3D: T.has3D,
       channels: T.channels,
       notes: T.notes,
+      zoom: want.zoom,
       size: [(x1 - x0) * UM, (y1 - y0) * UM],
     };
     k.data = { microscope: MIC.info };
@@ -667,7 +732,7 @@ const MICROSCOPE = {
 const mixN = (a, b, t) => a + (b - a) * t;
 
 // The tapped point (recipe units, µm), moved to the depth of the molecules
-// there (the median z of the localizations within about 250 nm).
+// there (the most crowded depth of the localizations within about 250 nm).
 function focusPoint(p) {
   const G = MIC.grid;
   if (!G) return p;
@@ -679,8 +744,19 @@ function focusPoint(p) {
   for (let dx = -1; dx <= 1; dx++)
     for (let dy = -1; dy <= 1; dy++) zs.push(...(G.grid.get(`${cx + dx},${cy + dy}`) ?? []));
   if (!zs.length) return [p[0], p[1], 0];
-  zs.sort((a, b) => a - b);
-  return [p[0], p[1], (zs[zs.length >> 1] - G.cz) * UM * G.stretch];
+  // The most crowded depth there (100 nm bins, the nearer one on a tie):
+  // the structure itself, not a middle that may be empty (a nucleus).
+  const bins = new Map();
+  for (const z of zs) {
+    const b = Math.floor(z / 100);
+    bins.set(b, (bins.get(b) ?? 0) + 1);
+  }
+  let best = null;
+  for (const [b, n] of bins)
+    if (!best || n > best[1] || (n === best[1] && b > best[0])) best = [b, n];
+  const inBin = zs.filter((z) => Math.floor(z / 100) === best[0]);
+  const zc = inBin.reduce((a, z) => a + z, 0) / inBin.length;
+  return [p[0], p[1], (zc - G.cz) * UM * G.stretch];
 }
 
 MICROSCOPE.gpuField = function (_o, fit) {
@@ -833,12 +909,27 @@ const GALAXY = {
     if (!G) throw new Error("The galaxy hasn't loaded.");
     const half = G.head.half;
     const budget = Math.max(1000, Math.floor(k.count * 0.97));
-    const pick = pickIndices(G.n, budget);
-    const count = pick ? pick.length : G.n;
-    // Fewer particles (the file's subset, and a small budget's): each drawn
-    // wider by the cube root of the thinning, so the gas still closes (the
-    // same mass in fewer, bigger pieces).
-    const widen = (G.head.widen ?? 1) * (pick ? Math.cbrt(G.n / count) : 1);
+    // The file holds the dense gas first (all of it, drawn at its own size),
+    // then a random share of the diffuse gas (drawn wider by the file's
+    // widenRest). A smaller budget keeps DENSE_SHARE of it for dense gas and
+    // thins each group evenly, widening by the cube root of its thinning, so
+    // the gas still closes (the same mass in fewer, bigger pieces).
+    const nDense = Math.min(G.n, G.head.nDense ?? G.n);
+    const nRest = G.n - nDense;
+    let dKeep = nDense;
+    let rKeep = nRest;
+    if (G.n > budget) {
+      rKeep = Math.min(nRest, Math.round(budget * 0.35));
+      dKeep = Math.min(nDense, budget - rKeep);
+      rKeep = Math.min(nRest, budget - dKeep);
+    }
+    const dPick = pickIndices(nDense, dKeep);
+    const rPick = pickIndices(nRest, rKeep);
+    const count = dKeep + rKeep;
+    const at = (j) => (j < dKeep ? (dPick ? dPick[j] : j) : nDense + (rPick ? rPick[j - dKeep] : j - dKeep)); // prettier-ignore
+    const widenD = dPick ? Math.cbrt(nDense / dKeep) : 1;
+    const widenR = (G.head.widenRest ?? G.head.widen ?? 1) * (rPick ? Math.cbrt(nRest / rKeep) : 1);
+    const widenOf = (i) => (i < nDense ? widenD : widenR);
     // The box: its floor (dark, so the gas shows against it from above) and
     // its twelve edges.
     const hy = G.head.halfY ?? half;
@@ -887,12 +978,12 @@ const GALAXY = {
     let first = -1;
     k.cloud({ count: (count * 160000) / k.count, jitter: 0 }, (_r, j) => {
       if (j >= count) return null;
-      const i = pick ? pick[j] : j;
+      const i = at(j);
       const p = G.pos(i);
       if (p[0] * p[0] + p[2] * p[2] > R * R) return null;
       if (first < 0) first = i;
       emitted++;
-      const h = G.h(i) * widen;
+      const h = G.h(i) * widenOf(i);
       const logT = G.logT(i);
       // A Gaussian of about half the smoothing length (the simulation's
       // kernel isn't a Gaussian; this is the look, not the physics).
@@ -923,7 +1014,9 @@ const GALAXY = {
       n: G.n,
       drawn: count,
       half,
-      widen,
+      widen: widenD,
+      widenRest: widenR,
+      nDense,
       simulation: G.head.simulation,
       get emitted() {
         return emitted;

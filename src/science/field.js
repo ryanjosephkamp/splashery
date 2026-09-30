@@ -27,7 +27,8 @@
 //               per unit of camera distance (0: none), near clip (0: none)]
 //   The near clip, like a molecular viewer's clipping plane, fades splats
 //   nearer the camera than that many toy units in front of the middle, so a
-//   magnified structure doesn't hide the place you zoomed in on.
+//   magnified structure doesn't hide the place you zoomed in on. A negative
+//   value clips behind as well: a slice that thick either side of the focus.
 //   uSpGlowC = [focus x, y, z (toy units), how far the focus has moved to
 //               the middle 0..1]
 //   uSpKitB.x (the kit's grow, 1 at rest) = 1 − how far the hot gas is
@@ -199,9 +200,11 @@ void modifySplatColor(vec3 center, inout vec4 color) {
   float a = color.a;
   if (sciKind == 1) a *= 1.0 - 0.8 * uSpMorph.x;
   if (sciKind == 4) a *= 1.0 - (1.0 - clamp(uSpKitB.x, 0.0, 1.0)) * smoothstep(4.1, 4.6, sciAn.z);
-  if (uSpMorph.w > 0.0) {
+  if (uSpMorph.w != 0.0) {
     float front = dot(center, normalize(uSpCam.xyz));
-    a *= 1.0 - smoothstep(uSpMorph.w - 0.12, uSpMorph.w, front);
+    if (uSpMorph.w < 0.0) front = abs(front);
+    float wc = abs(uSpMorph.w);
+    a *= 1.0 - smoothstep(wc - 0.12, wc, front);
   }
   color = vec4(color.rgb * uSpClock.z, a);
 }
@@ -280,9 +283,11 @@ fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {
   var a = (*color).a;
   if (sciKind == 1) { a = a * (1.0 - 0.8 * uniform.uSpMorph.x); }
   if (sciKind == 4) { a = a * (1.0 - (1.0 - clamp(uniform.uSpKitB.x, 0.0, 1.0)) * smoothstep(4.1, 4.6, sciAn.z)); }
-  if (uniform.uSpMorph.w > 0.0) {
-    let front = dot(center, normalize(uniform.uSpCam.xyz));
-    a = a * (1.0 - smoothstep(uniform.uSpMorph.w - 0.12, uniform.uSpMorph.w, front));
+  if (uniform.uSpMorph.w != 0.0) {
+    var front = dot(center, normalize(uniform.uSpCam.xyz));
+    if (uniform.uSpMorph.w < 0.0) { front = abs(front); }
+    let wc = abs(uniform.uSpMorph.w);
+    a = a * (1.0 - smoothstep(wc - 0.12, wc, front));
   }
   *color = vec4f((*color).rgb * uniform.uSpClock.z, a);
 }

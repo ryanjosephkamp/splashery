@@ -336,10 +336,18 @@ test.describe("the galaxy", () => {
     const ctx = await build("galaxy-box", 400000);
     const info = galaxyState();
     const s = ctx.transform.scale;
-    // The file's subset is drawn wider by the cube root of its thinning.
-    expect(info.widen).toBeCloseTo(Math.cbrt(G.head.inBox / G.n), 6);
+    // The dense gas is all in the file and drawn at its own size; the diffuse
+    // gas is a random share, drawn wider by the cube root of its thinning.
+    expect(G.head.nDense).toBeLessThan(G.n);
+    const hCut = G.h(G.head.nDense - 1);
+    let below = 0;
+    for (let i = G.head.nDense; i < G.n; i += 101) if (G.h(i) < hCut * 0.999) below++;
+    expect(below).toBe(0); // every diffuse particle is wider than the densest group's widest
+    expect(info.widen).toBe(1);
+    const thinned = (G.head.inBox - G.head.nDense) / (G.n - G.head.nDense);
+    expect(info.widenRest).toBeCloseTo(Math.cbrt(thinned), 6);
     const start = ctx.buf.count - info.emitted;
-    const want = Math.SQRT2 * 0.5 * G.h(info.first) * info.widen;
+    const want = Math.SQRT2 * 0.5 * G.h(info.first) * (info.first < G.head.nDense ? 1 : info.widenRest); // prettier-ignore
     close(ctx.buf.scale[start * 3] / s / want, 1, 2e-3);
   });
 });
