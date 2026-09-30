@@ -21,10 +21,24 @@ export const LIQUID_SUB = 4;
 export class FluidWorld {
   // specs: the recipe's k.fluid() calls. profile: the tier. transform: the
   // kit's fit ({ center, scale }), recipe -> toy coordinates.
-  constructor(specs, { profile = "high", seed = 1, transform = null } = {}) {
+  // Lane Fluids r4: `gpu` ({ device, GpuLiquid }) runs the liquids on the
+  // GPU instead (the page only, never the worker), and `surface` means the
+  // liquid surface pass draws the glass, so no vessel splats are made.
+  constructor(
+    specs,
+    {
+      profile = "high",
+      seed = 1,
+      transform = null,
+      gpu = null,
+      surface = false,
+      gridGas = false,
+    } = {},
+  ) {
     this.profile = TIER_SCALE[profile] ? profile : "high";
     const tier = TIER_SCALE[this.profile];
     this.transform = transform || { center: [0, 0, 0], scale: 1 };
+    this.specs = specs;
     this.systems = [];
     this.byName = new Map();
     this.slots = 0;
@@ -44,7 +58,15 @@ export class FluidWorld {
       const s = mixSeed(seed, name);
       let sys;
       const full = { ...spec, name };
-      if ((spec.kind || "liquid") === "liquid") {
+      if ((spec.kind || "liquid") === "liquid" && gpu) {
+        sys = new gpu.GpuLiquid(full, { device: gpu.device, profile: this.profile, gravity, seed: s, unit }); // prettier-ignore
+      } else if (
+        (spec.kind === "vessel" && surface) ||
+        (gridGas && (spec.kind === "gas" || spec.kind === "flame"))
+      ) {
+        // (`gridGas`: smoke, steam and flames run on the gas grid, on the page.)
+        return;
+      } else if ((spec.kind || "liquid") === "liquid") {
         // Fewer particles on a lower tier, each a little bigger, so the
         // same volume of liquid pours.
         const spacing = (spec.spacing ?? 0.05) * Math.cbrt((spec.budget ?? 1500) / budget);
@@ -62,17 +84,19 @@ export class FluidWorld {
       } else {
         throw new Error(`Unknown fluid kind "${spec.kind}".`);
       }
-      sys.index = i;
+      sys.index = this.systems.length; // its material (skipped specs make none)
       sys.base = this.slots;
       // A liquid particle is drawn as LIQUID_SUB smaller splats (a crisper
       // edge and a smoother surface than one big one).
-      sys.slots = sys.cap * (sys.kind === "liquid" ? LIQUID_SUB : 1) + (sys.dcap || 0);
+      sys.slots = sys.gpu
+        ? 0
+        : sys.cap * (sys.kind === "liquid" ? LIQUID_SUB : 1) + (sys.dcap || 0);
       // A thin liquid in a glass also gets a level sheet (drawn once calm).
-      if (sys.kind === "liquid") {
+      if (sys.kind === "liquid" && !sys.gpu) {
         sys.sheet = makeSheet(sys);
         if (sys.sheet) sys.slots += sys.sheet.n;
       }
-      if (sys.kind === "liquid") {
+      if (sys.kind === "liquid" && !sys.gpu) {
         // The speed at which a particle is drawn as a stream (as the
         // renderer's stretch reaches 1.4 times the splat).
         const preset = LIQUIDS[spec.preset] || {};
@@ -159,7 +183,9 @@ export class FluidWorld {
     this.time += dt;
     let steps = 0;
     for (const sys of this.systems) {
-      if (sys.kind === "liquid") {
+      if (sys.gpu) {
+        steps += sys.step(dt);
+      } else if (sys.kind === "liquid") {
         const n = Math.min(this.maxSteps, Math.max(1, Math.ceil(dt / LIQUID_STEP - 1e-6)));
         const h = Math.min(LIQUID_STEP, dt / n);
         for (let k = 0; k < n; k++) sys.step(h);
@@ -193,6 +219,7 @@ export class FluidWorld {
   pack(center, anim, shape, size) {
     const { center: tc, scale: s } = this.transform;
     for (const sys of this.systems) {
+      if (sys.gpu) continue;
       let o = sys.base;
       const mat = sys.index;
       const put = (x, y, z, vx, vy, vz, kind, f, surf, tone) => {

@@ -32,11 +32,23 @@ const WIDTH = Number(opt("width", 360));
 const PROFILE = opt("profile", "mid");
 // The canvas's pixel-ratio cap: 3, the mid tier's cap once PR #118 lands.
 const RATIO = Number(opt("ratio", 3));
+// The renderer (webgl2 or webgpu) and, for experiments, a module to install
+// once the toy is open (its install(stage) runs after the first build).
+const RENDERER = opt("renderer", "webgl2");
+const INJECT = opt("inject", "");
 fs.mkdirSync(outDir, { recursive: true });
 
 const browser = await chromium.launch({
   executablePath: process.env.SPLASHERY_CHROMIUM || undefined,
-  args: ["--use-angle=swiftshader", "--enable-unsafe-swiftshader", "--ignore-gpu-blocklist"],
+  args: [
+    "--use-angle=swiftshader",
+    "--enable-unsafe-swiftshader",
+    "--ignore-gpu-blocklist",
+    "--enable-unsafe-webgpu",
+    "--enable-features=Vulkan,WebGPU",
+    "--use-webgpu-adapter=swiftshader",
+    "--use-vulkan=swiftshader",
+  ],
 });
 
 // Box-filter shrink of a PNG to `w` pixels wide.
@@ -68,7 +80,7 @@ function shrink(png, w) {
 async function record(clip) {
   const page = await browser.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 3 }); // prettier-ignore
   page.on("pageerror", (e) => console.error("page error:", e.message));
-  await page.goto(`${base}?renderer=webgl2&adapt=off&profile=${PROFILE}&labs=1`);
+  await page.goto(`${base}?renderer=${RENDERER}&adapt=off&profile=${PROFILE}&labs=1`);
   await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
   const frames = [];
   const run = (fn, arg) => page.evaluate(fn, arg);
@@ -137,8 +149,18 @@ async function record(clip) {
     // then let it settle a moment.
     for (let i = 0; i < 200; i++) {
       await step(STEP);
-      if (await run(() => window.__splashery.player.fluids?.stats?.particles > 0)) break;
+      if (
+        await run(() => {
+          const st = window.__splashery.player.fluids?.stats;
+          return st?.particles > 0 || st?.gasCells > 0;
+        })
+      )
+        break;
     }
+    if (INJECT)
+      await run(async (path) => {
+        window.__flInjected ||= (await import(path)).install(window.__splashery.player.stage);
+      }, `/${INJECT}`);
     for (let i = 0; i < 8; i++) await step(STEP);
   };
   const tap = () => run(() => window.__splashery.player.act(null));
