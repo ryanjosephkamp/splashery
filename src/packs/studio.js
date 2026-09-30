@@ -787,6 +787,7 @@ function liveSongDraw(g, time) {
 export const SING_F0 = F0 / 4;
 export const singFreq = (mode) => SING_F0 * (mode.n * mode.n + mode.m * mode.m);
 const SING = { p: 0, want: null, since: 0, last: null, note: null, near: null, r: 0 };
+export const singState = () => ({ p: SING.p, note: SING.note, mode: SING.near?.mode.id ?? null }); // prettier-ignore
 
 // The mode nearest a sung frequency (keeping the sign of the one on show
 // when the pair shares a frequency), and how strongly it rings (0..1).
