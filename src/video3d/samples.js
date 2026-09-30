@@ -13,7 +13,7 @@ export const SAMPLES = [
   {
     id: "liberty",
     label: "Statue, flown around",
-    title: "Statue Of Liberty 4k Drone (20 s from 3:18)",
+    title: "Statue Of Liberty 4k Drone (14 s from 3:24)",
     author: "the Dronalist",
     source: "https://commons.wikimedia.org/wiki/File:Statue_Of_Liberty_4k_Drone.webm",
     ...CC_BY_3,

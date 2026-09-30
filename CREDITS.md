@@ -316,7 +316,7 @@ each trained by `tools/v3d-sample.mjs` from a stretch of a video on Wikimedia Co
 and the solved camera path only; the videos are not shipped). Each license was checked on its live
 Commons page on September 30, 2026:
 
-- "Statue Of Liberty 4k Drone" by the Dronalist (20 seconds from 3:18),
+- "Statue Of Liberty 4k Drone" by the Dronalist (14 seconds from 3:24),
   [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/), on
   [Commons](https://commons.wikimedia.org/wiki/File:Statue_Of_Liberty_4k_Drone.webm).
 - "Walking in EDINBURGH - Scotland (UK) - 4K 60fps (UHD)" by POPtravel (10 seconds from 7:32),

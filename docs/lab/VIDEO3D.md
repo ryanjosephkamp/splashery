@@ -53,13 +53,14 @@ card, and for most runs it shared the CPU with the full test suite. The numbers 
 pipeline works end to end and how the stages compare; they are not the times anyone will see. The
 samples were trained with small settings to fit (360 px, 800 to 1,500 steps).
 
-| Video (CC BY 3.0, Wikimedia Commons)        | Frames picked / placed | Camera path    | Training            | Splats | PLY     | Result                                    |
-| ------------------------------------------- | ---------------------- | -------------- | ------------------- | ------ | ------- | ----------------------------------------- |
-| Splat.js's own test set (12 rendered views) | 12 / 12                | 32 s           | 212 steps, 518 s    | 20,325 | 1.1 MB  | Works                                     |
-| Statue orbit (the Dronalist), 20 s at 3:18  | 36 / 24                | 528 s          | 1,504 steps, 88 min | 30,558 | 1.65 MB | Works from the filmed angles              |
-| Edinburgh walk (POPtravel), 10 s at 7:32    | 20 / 20                | 62 s           | 800 steps, 59 min   | 30,135 | 1.58 MB | Works; walkers become ghosts              |
-| Nicosia by drone (The Track Record), 0:45   | 20 / –                 | failed, 33 min | –                   | –      | –       | Frames taken for panoramas (a bug, fixed) |
-| Nicosia by drone, 19 s at 1:04 (fixed crop) | 24 / –                 | failed, 1 min  | –                   | –      | –       | Too little parallax (high, slow flight)   |
+| Video (CC BY 3.0, Wikimedia Commons)          | Frames picked / placed | Camera path    | Training             | Splats | PLY     | Result                                    |
+| --------------------------------------------- | ---------------------- | -------------- | -------------------- | ------ | ------- | ----------------------------------------- |
+| Splat.js's own test set (12 rendered views)   | 12 / 12                | 32 s           | 212 steps, 518 s     | 20,325 | 1.1 MB  | Works                                     |
+| Statue orbit (the Dronalist), 20 s at 3:18    | 36 / 24                | 528 s          | 1,504 steps, 88 min  | 30,558 | 1.65 MB | Works from the filmed angles              |
+| Statue orbit, 14 s at 3:24 (one shot), 480 px | 27 / 26                | 233 s          | 2,006 steps, 111 min | 38,621 | 2.2 MB  | Works; the r4 card (+44% edge sharpness)  |
+| Edinburgh walk (POPtravel), 10 s at 7:32      | 20 / 20                | 62 s           | 800 steps, 59 min    | 30,135 | 1.58 MB | Works; walkers become ghosts              |
+| Nicosia by drone (The Track Record), 0:45     | 20 / –                 | failed, 33 min | –                    | –      | –       | Frames taken for panoramas (a bug, fixed) |
+| Nicosia by drone, 19 s at 1:04 (fixed crop)   | 24 / –                 | failed, 1 min  | –                    | –      | –       | Too little parallax (high, slow flight)   |
 
 Picking the frames took 10 to 17 seconds (seeking a 480p WebM), decoding them under a second.
 
@@ -120,7 +121,7 @@ What limits it in the browser pipeline, most important first:
    guess bends the scene slightly and softens it everywhere. A video with its lens data (a phone's)
    or COLMAP's more careful solve does better.
 
-What this lane changed (r2 cards, measured on the same samples, no retraining):
+What this lane changed (r2 and r3 cards on the same samples; r4 retrained):
 
 - **Far things kept.** The water, the sky and the skyline were being cut off at the scene's edge;
   they are now pulled in onto a shell behind the scene (as Mip-NeRF 360 contracts distant space), so
@@ -132,6 +133,13 @@ What this lane changed (r2 cards, measured on the same samples, no retraining):
   Edge sharpness (Laplacian variance) of three of Liberty's flight views: 390 to 438 (+12%).
 - **The video's own lens.** The flight uses the solved focal length, so each view frames the scene
   as the video did (the side-by-side cards compare them frame for frame).
+
+- **Retraining at 480 px for 2,006 steps, from one shot** (r4): the statue's stretch began with 6
+  seconds of another shot (a close-up), which cost 12 of 36 frames; starting after the cut places 26
+  of 27. Edge sharpness in the statue region at phone size, averaged over the turn: 149 (r3) to 215
+  (r4), +44%: the skyline's buildings become readable, the blue drape beside the arm goes. This is
+  the lever that keeps paying: every doubling of steps and resolution shows. It took 1.9 hours here
+  and would take minutes on a laptop's GPU.
 
 Not tried here, and worth trying on a real GPU: training longer and at 640 to 960 px; Splat.js's
 opacity and needle regularizers; masking the sky out of training; more frames from a longer part of
