@@ -88,22 +88,38 @@ One splat per particle, in a layer with its own work-buffer program, reading fou
 textures a frame (place; velocity and kind; turn; radii and material) and the toy's uniforms (the
 camera, the whole-toy move and turn, the splat scale and exposure).
 
-- **Liquid.** Each splat is the ellipsoid of its neighbors (Yu and Turk, "Reconstructing Surfaces of
-  Particle-Based Fluids Using Anisotropic Kernels", 2013): the weighted spread of the neighbors
-  gives three axes, clamped to 4:1, so a splat lies flat along a surface and long along a thin
-  stream or sheet; its place is smoothed toward its neighbors' (60%), which takes the beads out of a
-  surface and keeps it off the glass. A fast stream is drawn along its flow, long by its speed
-  (longer for honey and lava, whose threads thin as they fall). A lone drop is round. Lit with a
-  soft key light, a bright rim where the surface turns away (Fresnel), a highlight, full opacity,
-  the preset's clean color; a thin stream a little lighter. The toy uses the Lab lane's sharper
-  splat edge (`kernel: "sharp"`), which keeps the surface crisp.
+- **Liquid.** Each particle draws four smaller splats (`LIQUID_SUB`), which gives a crisper edge
+  than one big one. Its place is smoothed toward its neighbors' (75%), and its normal is its
+  neighbors' average (no mottling). Then, by where it is:
+  - **A thin, fast stream** (few neighbors, fast): the four splats lie across the stream, each long
+    along the flow by its speed (longer for honey and lava, whose threads thin as they fall), with
+    the normal across the stream. A falling stream then reads as a glassy rod, with a rim and a
+    highlight.
+  - **The body and its surface:** a disc along the smoothed normal, flatter the more it is on the
+    surface.
+  - **Thin sheets, necks and threads:** the ellipsoid of its neighbors (Yu and Turk, "Reconstructing
+    Surfaces of Particle-Based Fluids Using Anisotropic Kernels", 2013), clamped to 4:1.
+  - **A lone drop:** round, stretched by its speed.
+
+  Lit with an even body color, a bright rim where the surface turns away (Fresnel, weaker for a dark
+  liquid such as cola, so it keeps its color), a highlight, full opacity. The toy uses the Lab
+  lane's sharper splat edge (`kernel: "sharp"`).
+
+- **The level sheet.** A thin liquid (viscosity up to 0.3) in a `glass` collider also draws its top
+  as one even sheet of small flat splats at the calm liquid's level (the 96th percentile of the
+  particles' heights in the glass). It fades in as the top layer calms and out while a pour or a
+  splash stirs it, so a settled pool reads as one surface, not as the tops of particles. Honey and
+  lava keep their mounds. Where the liquid has foam, the sheet is its head: the foam flecks near the
+  level, counted on a coarse grid over the glass, color the sheet a fine, even cream (shown even
+  while the surface is stirred), and foam spreads out from where it gathers, fading toward the wall.
 - **Foam, bubbles, spray.** Small flat pale flecks; tiny bright dots; small drops of the liquid.
 - **Smoke and steam.** Soft splats that grow and fade with age.
 - **Flames.** Emissive, colored by age through the ramp above, narrowing toward the tip.
 - **Glass** (`kind: "vessel"`): the engine can draw a `glass` collider itself, as even flat splats
-  over its walls, lip and foot, clear where you look straight through and brighter toward the edges
-  (Fresnel), with a highlight. Kit splats can't depend on the view, which is what makes glass read
-  as glass; a kit-built glass showed its wall as a grain or a moiré.
+  over its walls, lip and foot, and its rims as clean lines (splats long along each rim), clear
+  where you look straight through and brighter toward the edges (Fresnel), with a highlight. Kit
+  splats can't depend on the view, which is what makes glass read as glass; a kit-built glass showed
+  its wall as a grain or a moiré.
 
 WebGPU sorts the moved splats on the GPU. WebGL2 sorts on the CPU from stored places, so the layer
 gives it the particles' new places every other frame.

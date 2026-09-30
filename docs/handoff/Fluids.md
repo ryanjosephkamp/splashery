@@ -105,6 +105,12 @@ mid and high tiers, adapt on drag): don't touch those blocks. The laptop is lock
 
 Model: Opus 5.5 (claude-opus-5-5), default effort.
 
+- September 30, 2026 (r2): from the Operator's pre-review notes (and the owner's "fix" mark on
+  `fl-pour`), the liquids were redrawn: four splats per particle, glassy streams with a rim and a
+  highlight, discs on smoothed normals, a level sheet for a calm thin liquid in a glass, a soda head
+  colored onto the sheet, clean glass rims, and cola that keeps its color. Cards `fl-pour-r2`,
+  `fl-splash-r2` and `fl-soda-r2` replace the first three (rendered at 3× density, the mid tier's
+  cap once PR #118 lands). `fl-flame`, `fl-smoke` and `fl-phone` stand.
 - September 30, 2026: the fluid engine and the Fluid lab are on the branch (draft PR #121), the full
   suite passes, and six cards are on the Effect review page in the lane record `Fluids`: `fl-pour`,
   `fl-splash`, `fl-soda`, `fl-smoke`, `fl-flame`, `fl-phone` (clips by `tools/fl-clip.mjs` at
@@ -139,6 +145,12 @@ Model: Opus 5.5 (claude-opus-5-5), default effort.
   a stack of pancakes; staggering along the flow and drawing fast particles along their velocity
   fixes it. Soda foam must float above the liquid's top layer or the opaque surface hides it. Smoke
   wants the Gaussian kernel, liquids the sharp one (the toy picks per scene).
+- Lessons from r2: one big splat per particle leaves a feathered edge; four smaller ones are crisp.
+  Flat surface discs seen from a low camera leave gaps; discs along a smoothed normal, plus a level
+  sheet once calm, read as one surface. A fast-falling ball must not be drawn as a stream (only thin
+  flows with few neighbors are). The Fresnel whitening that makes water glassy makes cola pink;
+  scale it by the liquid's brightness. Water's "noise" was velocity, not position: judge by the
+  drawn surface, not the speed metric.
 
 ## Known issues
 
@@ -146,10 +158,10 @@ Model: Opus 5.5 (claude-opus-5-5), default effort.
 - Every scene fits a 30 fps frame on the mid tier's stand-in (4× CPU throttling; the soda pour is
   the tightest at 29 ms). The high tier's 2× stand-in is over for the pours (34 to 48 ms), but it is
   pessimistic for the desktops it covers; at 1× the high budget takes about 17 ms.
-- The soda's foam head covers the middle of the glass more than its edge, and the cola looks a
-  little muddy.
-- At the mid tier's particle budget, the splash basin's pool looks a little mottled and the falling
-  ball reads as an oval.
+- The level sheet is for thin liquids in a `glass` collider only; a pool in a bowl, or on a floor,
+  is drawn from its particles alone.
+- A soda's head thins into patches as it fades (as a real one does), and the very start of a pour
+  can look ragged for a frame or two.
 
 ## For the Operator
 
