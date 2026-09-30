@@ -2,7 +2,7 @@
 // the file from the device (an object URL: nothing is uploaded), seeks to each moment planFrames
 // chose, and a canvas copies the frame. In each window the sharpest of a few frames is kept.
 
-import { windowTimes, sharpness, fitSide } from "./frames.js";
+import { windowTimes, sharpness, fitSide, panoSafeCrop } from "./frames.js";
 
 // Opens the video: resolves { video, url, duration, width, height }. Throws a plain message when
 // the browser cannot play the file.
@@ -60,7 +60,8 @@ function seek(video, t) {
 // Resolves [{ blob, time, sharpness, width, height }].
 export async function grabFrames(opened, plan, { side = 960, tries = 3, onFrame, signal } = {}) {
   const { video } = opened;
-  const [w, h] = fitSide(opened.width, opened.height, side);
+  const crop = panoSafeCrop(opened.width, opened.height);
+  const [w, h] = fitSide(crop.sw, opened.height, side);
   const canvas = document.createElement("canvas");
   canvas.width = w;
   canvas.height = h;
@@ -78,13 +79,13 @@ export async function grabFrames(opened, plan, { side = 960, tries = 3, onFrame,
     let best = null;
     for (const t of windowTimes(plan.windows[i], tries)) {
       await seek(video, t);
-      gs.drawImage(video, 0, 0, sw, sh);
+      gs.drawImage(video, crop.sx, 0, crop.sw, opened.height, 0, 0, sw, sh);
       const px = gs.getImageData(0, 0, sw, sh).data;
       for (let k = 0; k < gray.length; k++)
         gray[k] = 0.299 * px[k * 4] + 0.587 * px[k * 4 + 1] + 0.114 * px[k * 4 + 2];
       const s = sharpness(gray, sw, sh);
       if (!best || s > best.sharpness) {
-        g.drawImage(video, 0, 0, w, h);
+        g.drawImage(video, crop.sx, 0, crop.sw, opened.height, 0, 0, w, h);
         best = { time: t, sharpness: s };
         best.blob = await new Promise((r) => canvas.toBlob(r, "image/jpeg", 0.92));
       }

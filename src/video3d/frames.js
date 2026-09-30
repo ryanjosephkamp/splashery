@@ -83,3 +83,13 @@ export function fitSide(w, h, side) {
   const f = Math.min(1, side / Math.max(w, h));
   return [Math.max(2, 2 * Math.round((w * f) / 2)), Math.max(2, 2 * Math.round((h * f) / 2))];
 }
+
+// Splat.js takes any picture close to 2:1 for a 360-degree panorama (a 2:1 video, or one cropped
+// to it) and slices it into six views. A frame that close is trimmed at the sides to 1.9:1.
+// Returns the part of the video frame to keep: { sx, sw } (sw of the video's width, from sx).
+export function panoSafeCrop(w, h) {
+  const a = w / h;
+  if (Math.abs(a - 2) >= 0.06) return { sx: 0, sw: w };
+  const sw = Math.round(h * 1.9);
+  return { sx: Math.round((w - sw) / 2), sw };
+}

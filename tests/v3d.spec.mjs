@@ -53,6 +53,21 @@ test("the stretch and frame rate pick the right frames", async () => {
   expect(windowTimes({ t: 1.5, from: 1, to: 2 }, 1)).toEqual([1.5]);
 });
 
+test("a frame close to 2:1 is trimmed, so it is not taken for a 360-degree panorama", async () => {
+  const { panoSafeCrop } = await import("../src/video3d/frames.js");
+  const { isEquirect } = await import("../vendor/splatjs/src/io/pano.js");
+  expect(panoSafeCrop(1920, 1080)).toEqual({ sx: 0, sw: 1920 }); // 16:9 stays whole
+  for (const [w, h] of [
+    [854, 422],
+    [2000, 1000],
+    [1024, 500],
+  ]) {
+    const c = panoSafeCrop(w, h);
+    expect(isEquirect(c.sw, h), `${w}x${h}`).toBe(false);
+    expect(c.sx * 2 + c.sw).toBeLessThanOrEqual(w + 1);
+  }
+});
+
 test("a sharp picture scores higher than the same picture blurred", async () => {
   const { sharpness } = await import("../src/video3d/frames.js");
   const w = 64;
