@@ -63,19 +63,23 @@ function fired(m, key, v) {
 // toy piano's rect(), lane A/B): a long thin face keeps its splats evenly
 // spaced both ways instead of hatching. Samples carry the kit box's face,
 // u and v, and `edge`, the distance to the face's nearest edge, which
-// sharpen() uses to draw smaller splats along every outline.
-function stripBox(sx, sy, sz) {
+// sharpen() uses to draw smaller splats along every outline. `skip` lists
+// faces that can never be seen (a key's bottom and back): they take no
+// splats, so the faces that show get them.
+function stripBox(sx, sy, sz, skip = []) {
+  // du and dv: the directions u and v run along each face.
   const faces = [
-    { n: [1, 0, 0], w: sz, h: sy, at: (u, v) => [sx / 2, (v - 0.5) * sy, (0.5 - u) * sz] },
-    { n: [-1, 0, 0], w: sz, h: sy, at: (u, v) => [-sx / 2, (v - 0.5) * sy, (u - 0.5) * sz] },
-    { n: [0, 1, 0], w: sx, h: sz, at: (u, v) => [(u - 0.5) * sx, sy / 2, (0.5 - v) * sz] },
-    { n: [0, -1, 0], w: sx, h: sz, at: (u, v) => [(u - 0.5) * sx, -sy / 2, (v - 0.5) * sz] },
-    { n: [0, 0, 1], w: sx, h: sy, at: (u, v) => [(u - 0.5) * sx, (v - 0.5) * sy, sz / 2] },
-    { n: [0, 0, -1], w: sx, h: sy, at: (u, v) => [(0.5 - u) * sx, (v - 0.5) * sy, -sz / 2] },
+    { n: [1, 0, 0], w: sz, h: sy, du: [0, 0, -1], dv: [0, 1, 0], at: (u, v) => [sx / 2, (v - 0.5) * sy, (0.5 - u) * sz] }, // prettier-ignore
+    { n: [-1, 0, 0], w: sz, h: sy, du: [0, 0, 1], dv: [0, 1, 0], at: (u, v) => [-sx / 2, (v - 0.5) * sy, (u - 0.5) * sz] }, // prettier-ignore
+    { n: [0, 1, 0], w: sx, h: sz, du: [1, 0, 0], dv: [0, 0, -1], at: (u, v) => [(u - 0.5) * sx, sy / 2, (0.5 - v) * sz] }, // prettier-ignore
+    { n: [0, -1, 0], w: sx, h: sz, du: [1, 0, 0], dv: [0, 0, 1], at: (u, v) => [(u - 0.5) * sx, -sy / 2, (v - 0.5) * sz] }, // prettier-ignore
+    { n: [0, 0, 1], w: sx, h: sy, du: [1, 0, 0], dv: [0, 1, 0], at: (u, v) => [(u - 0.5) * sx, (v - 0.5) * sy, sz / 2] }, // prettier-ignore
+    { n: [0, 0, -1], w: sx, h: sy, du: [-1, 0, 0], dv: [0, 1, 0], at: (u, v) => [(0.5 - u) * sx, (v - 0.5) * sy, -sz / 2] }, // prettier-ignore
   ];
   let total = 0;
+  faces.forEach((f, i) => (f.skip = skip.includes(i)));
   for (const f of faces) {
-    f.area = f.w * f.h;
+    f.area = f.skip ? 0 : f.w * f.h;
     f.start = total;
     total += f.area;
     f.long = f.w >= f.h;
@@ -84,7 +88,8 @@ function stripBox(sx, sy, sz) {
   const at = (a, b) => {
     const x = a * total;
     let i = 0;
-    while (i < 5 && x >= faces[i].start + faces[i].area) i++;
+    while (i < 5 && (faces[i].skip || x >= faces[i].start + faces[i].area)) i++;
+    while (faces[i].skip) i--;
     const f = faces[i];
     const fa = clamp((x - f.start) / f.area, 0, 1);
     const bb = b * f.m;
@@ -96,18 +101,38 @@ function stripBox(sx, sy, sz) {
     // The edge band is at most a tenth of the face's short side.
     const band = Math.min(EDGE, 0.1 * Math.min(f.w, f.h));
     const edge = Math.min(u * f.w, (1 - u) * f.w, v * f.h, (1 - v) * f.h) / band;
-    return { p: f.at(u, v), n: f.n, face: i, u, v, edge };
+    // tangent: along a long face's longer side; sharpen() stretches its
+    // splats that way, so the long edges come out straight.
+    const tangent = f.m > 1 ? (f.long ? f.du : f.dv) : undefined;
+    return { p: f.at(u, v), n: f.n, face: i, u, v, edge, tangent };
   };
   return {
     area: total,
     thick: Math.min(sx, sy, sz) / 2,
     dims: 2,
+    strip: true,
     sample: (rand) => at(rand(), rand()),
     sampleEven: (a, b) => at(a, b),
   };
 }
 
 const EDGE = 0.006;
+const STRETCH = 2.6;
+
+// A curved sheet (k.param) with the same crisp outline as a strip box:
+// dist(u, v) is the distance from (u, v) to the sheet's nearest edge, in
+// recipe units, and short its narrowest width.
+function edged(shape, dist, short) {
+  const band = Math.min(EDGE, 0.1 * short);
+  const tag = (s) => ((s.edge = dist(s.u, s.v) / band), s);
+  const { sample, sampleEven } = shape;
+  return {
+    ...shape,
+    edged: true,
+    sample: (rand) => tag(sample(rand)),
+    sampleEven: sampleEven && ((a, b) => tag(sampleEven(a, b))),
+  };
+}
 // Even placement and clean colours for every shape (docs/PACKS.md 7c): the
 // kit's default colour noise reads as grain on lacquer and ivory, and a
 // strip box's outlines take smaller splats so its edges stay crisp.
@@ -115,7 +140,10 @@ function sharpen(k) {
   const add = k.add.bind(k);
   k.add = (shape, o = {}) => {
     const opts = { even: true, opacity: 1, ...o, jitter: Math.min(o.jitter ?? 0.006, 0.01) };
-    if (shape.dims === 2 && typeof opts.color === "function") {
+    // A strip box's long faces take narrow splats stretched along them.
+    const stretched = shape.strip && o.stretch === undefined;
+    if (stretched) opts.stretch = STRETCH;
+    if ((shape.dims === 2 || shape.edged) && typeof opts.color === "function") {
       const fn = opts.color;
       opts.color = (c) => {
         const col = fn(c);
@@ -123,7 +151,8 @@ function sharpen(k) {
         if (col === null || e === undefined) return col;
         // Slightly larger splats close the gaps between them on a flat face;
         // smaller ones along its edges keep the outline crisp.
-        const size = e >= 1 ? 1.15 : 0.6 + 0.55 * e;
+        let size = e >= 1 ? 1.15 : 0.6 + 0.55 * e;
+        if (stretched && c.s.tangent) size *= 0.62;
         return col && typeof col === "object" && !Array.isArray(col) ? { ...col, size: (col.size ?? 1) * size } : { c: col, size }; // prettier-ignore
       };
     }
@@ -182,36 +211,38 @@ function buildKeys(k, layout, group, o) {
   layout.keys.forEach((key, i) => {
     const params = [k.leverParam(group, i), 0];
     if (!key.black) {
-      k.add(stripBox(w * 0.93, h, o.len), {
+      const kw = w * 0.9;
+      k.add(stripBox(kw, h, o.len, [3, 5]), {
         pos: [key.x, o.top - h / 2, -o.len / 2],
         color: (c) => {
           const f = c.s.face;
-          if (f === 3 || f === 5) return null;
-          const base = f === 2 ? o.white : shade(o.white, f === 4 ? 0.9 : 0.8);
+          // The top's long edges are rounded off, so each key shows a fine
+          // dark line along its sides and the keys read one by one.
+          const side = f === 2 ? Math.min(c.s.u, 1 - c.s.u) * kw : 1;
+          const base = f === 2 ? shade(o.white, side < 0.0013 ? 0.72 : 1) : shade(o.white, f === 4 ? 0.9 : 0.8); // prettier-ignore
           return lit(c, base, 0.18, o.whiteGloss ?? 0.15, 30);
         },
         kind: "lever",
         params,
         even: true,
-        weight: 4.5,
+        weight: 8,
         flat: 0.12,
         jitter: 0.008,
         pattern: false,
       });
     } else {
       const bl = o.blackLen;
-      k.add(stripBox(w * 0.55, bh + h * 0.5, bl), {
+      k.add(stripBox(w * 0.55, bh + h * 0.5, bl, [3, 5]), {
         pos: [key.x, o.top + bh / 2 - h * 0.25, -o.len + bl / 2],
         color: (c) => {
           const f = c.s.face;
-          if (f === 3 || f === 5) return null;
           const base = f === 2 ? o.black : shade(o.black, 0.85);
           return lit(c, base, 0.3, o.blackGloss ?? 0.35, 40);
         },
         kind: "lever",
         params,
         even: true,
-        weight: 5,
+        weight: 8,
         flat: 0.12,
         jitter: 0.008,
         pattern: false,
@@ -221,6 +252,39 @@ function buildKeys(k, layout, group, o) {
 }
 
 const UP = () => [0, 1, 0];
+
+// The raised lid's thickness: a band joining its two faces all round its
+// outline (the straight hinge side at x0, the back at zB, the curved side at
+// rightX(z) and the front at zF), so its outline is one crisp solid edge.
+function lidRim(k, { x0, zF, zB, rightX, lidPt, a, lift, color, weight = 3 }) {
+  const pts = [];
+  const N = 48;
+  for (let i = 0; i <= N; i++) pts.push([x0, 0, zF + ((zB - zF) * i) / N]);
+  for (let i = 1; i <= 8; i++) pts.push([x0 + ((rightX(zB) - x0) * i) / 8, 0, zB]);
+  for (let i = 1; i <= N; i++) {
+    const z = zB + ((zF - zB) * i) / N;
+    pts.push([rightX(z), 0, z]);
+  }
+  for (let i = 1; i <= 8; i++) pts.push([rightX(zF) + ((x0 - rightX(zF)) * i) / 8, 0, zF]);
+  const path = along(pts);
+  const mid = pts.reduce((m, q) => [m[0] + q[0] / pts.length, 0, m[2] + q[2] / pts.length], [0, 0, 0]); // prettier-ignore
+  const center = lidPt(mid[0], mid[2], lift / 2);
+  const up = [-Math.sin(a), Math.cos(a), 0];
+  const at = (u, v) => {
+    const q = path(u);
+    return lidPt(q[0], q[2], v * lift);
+  };
+  const shape = k.param(at, {
+    grid: 128,
+    normal: (u, v, p) => {
+      const t = vec.sub(at(Math.min(1, u + 0.002), v), at(Math.max(0, u - 0.002), v));
+      let n = vec.unit(vec.cross(t, up));
+      if (dot(n, vec.sub(p, center)) < 0) n = vec.mul(n, -1);
+      return n;
+    },
+  });
+  k.add(edged(shape, (u, v) => Math.min(v, 1 - v) * lift, lift), { color, even: true, weight, flat: 0.08 }); // prettier-ignore
+}
 // The outward normal of a case wall drawn along an outline (anticlockwise
 // seen from above) with tangent t.
 const outward = (t) => [t[2], 0, -t[0]];
@@ -761,24 +825,32 @@ function buildGrand(k) {
     return vec.unit([b[0] - a[0], 0, b[2] - a[2]]);
   };
   k.add(
-    k.param(
-      (u, v) => {
-        const p = outline(u);
-        return [p[0], y0 + v * (y1 - y0), p[2]];
-      },
-      { normal: (u) => outward(tangent(u)) },
+    edged(
+      k.param(
+        (u, v) => {
+          const p = outline(u);
+          return [p[0], y0 + v * (y1 - y0), p[2]];
+        },
+        { normal: (u) => outward(tangent(u)) },
+      ),
+      (u, v) => Math.min(v, 1 - v) * (y1 - y0),
+      y1 - y0,
     ),
     { color: (c) => lacquer(c), even: true, weight: 1.4, flat: 0.06, jitter: 0.006, interior: 0 },
   );
   // Its top edge, with the inside of the rim below it.
   k.add(
-    k.param(
-      (u, v) => {
-        const p = outline(u);
-        const t = tangent(u);
-        return [p[0] - t[2] * 0.04 * v, y1, p[2] + t[0] * 0.04 * v];
-      },
-      { grid: 96, normal: UP },
+    edged(
+      k.param(
+        (u, v) => {
+          const p = outline(u);
+          const t = tangent(u);
+          return [p[0] - t[2] * 0.04 * v, y1, p[2] + t[0] * 0.04 * v];
+        },
+        { grid: 96, normal: UP },
+      ),
+      (u, v) => Math.min(v, 1 - v) * 0.04,
+      0.04,
     ),
     { color: (c) => lacquer(c, 0.3), even: true, weight: 1.4, flat: 0.1, jitter: 0.006 },
   );
@@ -847,15 +919,25 @@ function buildGrand(k) {
   layout.keys.forEach((key, i) => {
     const x = key.x * 0.98;
     const params = [k.leverParam(hammers, i), 0];
-    k.add(stripBox(0.0115, 0.026, 0.03), {
-      pos: [x, 0.829, G.strike],
-      color: (c) => (c.lp[1] > -0.004 ? lit(c, FELT, 0.25) : wood(c, "#7a5534", c.p, 1)),
+    // The felt head on its wooden molding, two pieces so the line between
+    // them is a clean edge.
+    k.add(stripBox(0.0115, 0.017, 0.03), {
+      pos: [x, 0.829 + 0.0045, G.strike],
+      color: (c) => lit(c, FELT, 0.25),
       kind: "lever",
       params,
-      even: true,
-      weight: 2.2,
+      weight: 5,
+      stretch: 0,
       flat: 0.15,
-      jitter: 0.006,
+      pattern: false,
+    });
+    k.add(stripBox(0.0115, 0.009, 0.028), {
+      pos: [x, 0.829 - 0.0085, G.strike],
+      color: (c) => lit(c, "#7a5534", 0.3),
+      kind: "lever",
+      params,
+      weight: 5,
+      flat: 0.15,
       pattern: false,
     });
     k.add(
@@ -882,7 +964,8 @@ function buildGrand(k) {
       kind: "lever",
       params: [k.leverParam(dampers, i), 0],
       even: true,
-      weight: 2,
+      weight: 5,
+      stretch: 0,
       flat: 0.15,
       jitter: 0.006,
       pattern: false,
@@ -930,21 +1013,32 @@ function buildGrand(k) {
     const r = x - hinge[0];
     return [hinge[0] + r * Math.cos(a) - lift * Math.sin(a), hinge[1] + r * Math.sin(a) + lift * Math.cos(a), z]; // prettier-ignore
   };
+  const lidZ = [-0.2, zBack - 0.01];
+  const lidEdge = (u, v) => {
+    const z = lidZ[0] + (lidZ[1] - lidZ[0]) * u;
+    const wide = rightX(z) + 0.765;
+    return Math.min(Math.min(u, 1 - u) * (lidZ[0] - lidZ[1]), Math.min(v, 1 - v) * wide);
+  };
   for (const side of [0, 1])
     k.add(
-      k.param(
-        (u, v) => {
-          const z = -0.2 + (zBack - 0.01 + 0.2) * u;
-          const xr = rightX(z);
-          return lidPt(-0.765 + (xr + 0.765) * v, z, side * 0.022);
-        },
-        {
-          grid: 72,
-          normal: () => (side ? [-Math.sin(a), Math.cos(a), 0] : [Math.sin(a), -Math.cos(a), 0]),
-        },
+      edged(
+        k.param(
+          (u, v) => {
+            const z = lidZ[0] + (lidZ[1] - lidZ[0]) * u;
+            const xr = rightX(z);
+            return lidPt(-0.765 + (xr + 0.765) * v, z, side * 0.022);
+          },
+          {
+            grid: 72,
+            normal: () => (side ? [-Math.sin(a), Math.cos(a), 0] : [Math.sin(a), -Math.cos(a), 0]),
+          },
+        ),
+        lidEdge,
+        0.3,
       ),
-      { color: (c) => lacquer(c, side ? 0.6 : 0.3), even: true, weight: 1.2, flat: 0.1, jitter: 0.006 }, // prettier-ignore
+      { color: (c) => lacquer(c, side ? 0.6 : 0.3), even: true, weight: 0.9, flat: 0.1, jitter: 0.006 }, // prettier-ignore
     );
+  lidRim(k, { x0: -0.765, zF: lidZ[0], zB: lidZ[1], rightX, lidPt, a, lift: 0.022, color: (c) => lacquer(c, 0.5) }); // prettier-ignore
   const pz = -1.0;
   const px = rightX(pz) - 0.05;
   const top = lidPt(-0.765 + (rightX(pz) + 0.765) * 0.88, pz);
@@ -1026,24 +1120,24 @@ function buildUpright(k) {
   // front board, in walnut.
   const W = layout.width + 0.1;
   for (const s of [-1, 1]) {
-    k.add(stripBox(0.05, 1.28, 0.62), { pos: [s * (W / 2 + 0.025), 0.64, -0.31], color: (c) => walnut(c, c.p, 1), even: true, weight: 1.3, flat: 0.06 }); // prettier-ignore
+    k.add(stripBox(0.05, 1.28, 0.62), { pos: [s * (W / 2 + 0.025), 0.64, -0.31], color: (c) => walnut(c, c.p, 1), even: true, weight: 1, flat: 0.06 }); // prettier-ignore
     // The arm (cheek) beside the keys, with a rounded end.
     k.add(evenRoundBox(0.06, 0.1, 0.24, 0.018), { pos: [s * (half + 0.035), 0.72, -0.07], color: (c) => walnut(c, c.p, 2), even: true, weight: 1.2, flat: 0.1 }); // prettier-ignore
     // A turned leg under each arm, on a toe block.
     k.add(k.lathe([[0.022, 0], [0.03, 0.08], [0.02, 0.2], [0.032, 0.34], [0.026, 0.52], [0.03, 0.6]]), { pos: [s * (half + 0.035), 0.06, -0.02], color: (c) => walnut(c, c.p, 1), even: true, weight: 1.2 }); // prettier-ignore
     k.add(stripBox(0.07, 0.06, 0.34), { pos: [s * (half + 0.035), 0.03, -0.14], color: (c) => walnut(c, c.p, 2), even: true, weight: 1 }); // prettier-ignore
   }
-  k.add(stripBox(W + 0.12, 0.035, 0.66), { pos: [0, 1.3, -0.32], color: (c) => walnut(c, c.p, 0), even: true, weight: 1.2, flat: 0.06 }); // prettier-ignore
-  k.add(stripBox(W, 1.28, 0.03), { pos: [0, 0.64, -0.61], color: (c) => lit(c, "#3b2616", 0.3), even: true, weight: 0.4 }); // prettier-ignore
-  k.add(stripBox(W, 0.6, 0.03), { pos: [0, 0.32, -0.18], color: (c) => walnut(c, c.p, 0), even: true, weight: 1.2, flat: 0.06 }); // prettier-ignore
-  k.add(stripBox(W, 0.055, 0.2), { pos: [0, 0.665, -0.08], color: (c) => walnut(c, c.p, 0), even: true, weight: 1 }); // prettier-ignore
-  k.add(stripBox(layout.width + 0.01, 0.045, 0.018), { pos: [0, 0.683, 0.01], color: (c) => walnut(c, c.p, 0), even: true, weight: 1.4 }); // prettier-ignore
+  k.add(stripBox(W + 0.12, 0.035, 0.66, [3]), { pos: [0, 1.3, -0.32], color: (c) => walnut(c, c.p, 0), even: true, weight: 1, flat: 0.06 }); // prettier-ignore
+  k.add(stripBox(W, 1.28, 0.03), { pos: [0, 0.64, -0.61], color: (c) => lit(c, "#3b2616", 0.3), even: true, weight: 0.25 }); // prettier-ignore
+  k.add(stripBox(W, 0.6, 0.03, [5]), { pos: [0, 0.32, -0.18], color: (c) => walnut(c, c.p, 0), even: true, weight: 1, flat: 0.06 }); // prettier-ignore
+  k.add(stripBox(W, 0.055, 0.2), { pos: [0, 0.665, -0.08], color: (c) => walnut(c, c.p, 0), even: true, weight: 1.6 }); // prettier-ignore
+  k.add(stripBox(layout.width + 0.01, 0.045, 0.018), { pos: [0, 0.683, 0.01], color: (c) => walnut(c, c.p, 0), even: true, weight: 2.5 }); // prettier-ignore
   // The fallboard, folded back against the action's foot.
-  k.add(stripBox(layout.width + 0.01, 0.06, 0.016), { pos: [0, 0.76, -0.152], color: (c) => walnut(c, c.p, 0), even: true, weight: 1.2 }); // prettier-ignore
+  k.add(stripBox(layout.width + 0.01, 0.06, 0.016), { pos: [0, 0.76, -0.152], color: (c) => walnut(c, c.p, 0), even: true, weight: 2.5 }); // prettier-ignore
 
   // Behind the action: the golden plate with its tuning pins at the top,
   // and the spruce soundboard showing through its opening.
-  k.add(stripBox(W - 0.02, 0.9, 0.012), {
+  k.add(stripBox(W - 0.02, 0.9, 0.012, [5]), {
     pos: [0, 0.8, U.strings - 0.03],
     color: (c) => {
       const [x, y] = c.p;
@@ -1084,25 +1178,33 @@ function buildUpright(k) {
 
   // The action: the hammer rail, and per key a hammer (butt, shank and felt
   // head facing the strings) and a damper above it.
-  k.add(stripBox(layout.width, 0.02, 0.02), { pos: [0, 0.905, -0.29], color: (c) => lit(c, "#7b1f24", 0.25), even: true, weight: 1.2 }); // prettier-ignore
-  k.add(stripBox(layout.width, 0.025, 0.03), { pos: [0, 0.845, -0.3], color: (c) => wood(c, "#8a6440", c.p, 0), even: true, weight: 1.2 }); // prettier-ignore
-  k.add(stripBox(layout.width, 0.018, 0.02), { pos: [0, 1.105, -0.345], color: (c) => wood(c, "#8a6440", c.p, 0), even: true, weight: 1.2 }); // prettier-ignore
+  k.add(stripBox(layout.width, 0.02, 0.02), { pos: [0, 0.905, -0.29], color: (c) => lit(c, "#7b1f24", 0.25), even: true, weight: 4 }); // prettier-ignore
+  k.add(stripBox(layout.width, 0.025, 0.03), { pos: [0, 0.845, -0.3], color: (c) => lit(c, "#7d5a38", 0.3), even: true, weight: 4 }); // prettier-ignore
+  k.add(stripBox(layout.width, 0.018, 0.02), { pos: [0, 1.105, -0.345], color: (c) => lit(c, "#7d5a38", 0.3), even: true, weight: 4 }); // prettier-ignore
   for (const s of [-1, 1])
     k.add(stripBox(0.02, 0.4, 0.04), { pos: [s * (half + 0.005), 0.92, -0.32], color: (c) => metal(c, "#9aa0a8", "#3a3f46"), even: true, weight: 1.2 }); // prettier-ignore
   layout.keys.forEach((key, i) => {
     const x = key.x * 0.98;
     const params = [k.leverParam(hammers, i), 0];
-    k.add(stripBox(0.012, 0.03, 0.028), { pos: [x, 0.868, -0.297], color: (c) => wood(c, "#b58a5c", c.p, 1), kind: "lever", params, even: true, weight: 1.6, pattern: false }); // prettier-ignore
+    k.add(stripBox(0.012, 0.03, 0.028), { pos: [x, 0.868, -0.297], color: (c) => lit(c, "#b58a5c", 0.3), kind: "lever", params, even: true, weight: 5, stretch: 0, pattern: false }); // prettier-ignore
     k.add(k.tube((t) => [x, 0.88 + 0.1 * t, -0.3 - 0.02 * t], 0.0024, STRAIGHT), { color: (c) => wood(c, "#d1b184", c.p, 1), kind: "lever", params, weight: 3, size: 0.45, stretch: 3, pattern: false }); // prettier-ignore
-    k.add(stripBox(0.012, 0.036, 0.034), {
-      pos: [x, 0.99, -0.34],
-      color: (c) => (c.lp[1] > -0.012 ? lit(c, FELT, 0.25) : wood(c, "#7a5534", c.p, 1)),
+    k.add(stripBox(0.012, 0.03, 0.034), {
+      pos: [x, 0.993, -0.34],
+      color: (c) => lit(c, FELT, 0.25),
       kind: "lever",
       params,
-      even: true,
-      weight: 2.2,
+      weight: 5,
+      stretch: 0,
       flat: 0.15,
-      jitter: 0.006,
+      pattern: false,
+    });
+    k.add(stripBox(0.012, 0.006, 0.032), {
+      pos: [x, 0.975, -0.34],
+      color: (c) => lit(c, "#7a5534", 0.3),
+      kind: "lever",
+      params,
+      weight: 5,
+      flat: 0.15,
       pattern: false,
     });
     if (i < U.dampers)
@@ -1112,7 +1214,8 @@ function buildUpright(k) {
         kind: "lever",
         params: [k.leverParam(dampers, i), 0],
         even: true,
-        weight: 2,
+        weight: 5,
+        stretch: 0,
         flat: 0.15,
         pattern: false,
       });
@@ -1229,32 +1332,40 @@ function buildHarpsichord(k) {
     return vec.unit([b[0] - a[0], 0, b[2] - a[2]]);
   };
   k.add(
-    k.param(
-      (u, v) => {
-        const p = outline(u);
-        return [p[0], y0 + v * (y1 - y0), p[2]];
-      },
-      { normal: (u) => outward(tangent(u)) },
+    edged(
+      k.param(
+        (u, v) => {
+          const p = outline(u);
+          return [p[0], y0 + v * (y1 - y0), p[2]];
+        },
+        { normal: (u) => outward(tangent(u)) },
+      ),
+      (u, v) => Math.min(v, 1 - v) * (y1 - y0),
+      y1 - y0,
     ),
     {
       color: (c) =>
         c.p[1] > y1 - 0.035 && c.p[1] < y1 - 0.02 ? metal(c, GILT, "#6b5220") : painted(c),
       even: true,
-      weight: 1.3,
+      weight: 1.6,
       flat: 0.06,
       jitter: 0.006,
     },
   );
   k.add(
-    k.param(
-      (u, v) => {
-        const p = outline(u);
-        const t = tangent(u);
-        return [p[0] - t[2] * 0.03 * v, y1, p[2] + t[0] * 0.03 * v];
-      },
-      { grid: 96, normal: UP },
+    edged(
+      k.param(
+        (u, v) => {
+          const p = outline(u);
+          const t = tangent(u);
+          return [p[0] - t[2] * 0.03 * v, y1, p[2] + t[0] * 0.03 * v];
+        },
+        { grid: 96, normal: UP },
+      ),
+      (u, v) => Math.min(v, 1 - v) * 0.03,
+      0.03,
     ),
-    { color: (c) => metal(c, GILT, "#6b5220"), even: true, weight: 1.2, flat: 0.08 },
+    { color: (c) => metal(c, GILT, "#6b5220"), even: true, weight: 2.5, flat: 0.08 },
   );
   // The soundboard, with a gilded rose, and the wrest plank at the front.
   k.add(
@@ -1280,7 +1391,7 @@ function buildHarpsichord(k) {
       jitter: 0.008,
     },
   );
-  k.add(stripBox(0.9, 0.02, 0.1), { pos: [0, 0.86, -0.19], color: (c) => wood(c, "#9b7040", c.p, 0), even: true, weight: 1 }); // prettier-ignore
+  k.add(stripBox(0.9, 0.02, 0.1), { pos: [0, 0.86, -0.19], color: (c) => wood(c, "#9b7040", c.p, 0), even: true, weight: 1.6 }); // prettier-ignore
   // The bridge on the soundboard, curving with the bentside.
   k.add(
     k.tube(
@@ -1337,13 +1448,13 @@ function buildHarpsichord(k) {
     });
   });
   // The jack rail's ends, and the dark gap they stand in.
-  k.add(stripBox(0.88, 0.006, 0.03), { pos: [0, 0.846, HC.jacks], color: (c) => lit(c, "#1b140e", 0.2), even: true, weight: 0.8 }); // prettier-ignore
+  k.add(stripBox(0.88, 0.006, 0.03), { pos: [0, 0.846, HC.jacks], color: (c) => lit(c, "#1b140e", 0.2), even: true, weight: 2 }); // prettier-ignore
 
   // The keywell: the cheeks and the nameboard, painted and gilded.
   for (const s of [-1, 1])
-    k.add(stripBox(0.05, 0.13, 0.19), { pos: [s * (half + 0.03), 0.78, -0.06], color: (c) => painted(c), even: true, weight: 1.3, flat: 0.08 }); // prettier-ignore
-  k.add(stripBox(layout.width + 0.02, 0.06, 0.016), { pos: [0, 0.8, -0.135], color: (c) => (Math.abs(c.lp[1]) < 0.006 ? metal(c, GILT, "#6b5220") : painted(c)), even: true, weight: 1.4 }); // prettier-ignore
-  k.add(stripBox(layout.width + 0.1, 0.05, 0.2), { pos: [0, 0.725, -0.06], color: (c) => painted(c), even: true, weight: 1.1 }); // prettier-ignore
+    k.add(stripBox(0.05, 0.13, 0.19), { pos: [s * (half + 0.03), 0.78, -0.06], color: (c) => painted(c), even: true, weight: 2.2, flat: 0.08 }); // prettier-ignore
+  k.add(stripBox(layout.width + 0.02, 0.06, 0.016), { pos: [0, 0.8, -0.135], color: (c) => (Math.abs(c.lp[1]) < 0.006 ? metal(c, GILT, "#6b5220") : painted(c)), even: true, weight: 2.5 }); // prettier-ignore
+  k.add(stripBox(layout.width + 0.1, 0.05, 0.2), { pos: [0, 0.725, -0.06], color: (c) => painted(c), even: true, weight: 1.6 }); // prettier-ignore
   // The case's bottom.
   k.add(
     k.param(
@@ -1354,7 +1465,7 @@ function buildHarpsichord(k) {
       },
       { grid: 64, normal: UP },
     ),
-    { color: (c) => painted(c, "#173628", 0.1), even: true, weight: 0.35 },
+    { color: (c) => painted(c, "#173628", 0.1), even: true, weight: 0.2 },
   );
 
   // The lid, raised: green outside, painted cream inside with a gilded line.
@@ -1364,18 +1475,26 @@ function buildHarpsichord(k) {
     const r = x - hinge[0];
     return [hinge[0] + r * Math.cos(a) - lift * Math.sin(a), hinge[1] + r * Math.sin(a) + lift * Math.cos(a), z]; // prettier-ignore
   };
+  const lidEdge = (u, v) => {
+    const z = -0.16 + (-2.26 + 0.16) * u;
+    return Math.min(Math.min(u, 1 - u) * 2.1, Math.min(v, 1 - v) * (rightX(z) + 0.47));
+  };
   for (const side of [0, 1])
     k.add(
-      k.param(
-        (u, v) => {
-          const z = -0.16 + (-2.26 + 0.16) * u;
-          const xr = rightX(z);
-          return lidPt(-0.47 + (xr + 0.47) * v, z, side * 0.018);
-        },
-        {
-          grid: 72,
-          normal: () => (side ? [-Math.sin(a), Math.cos(a), 0] : [Math.sin(a), -Math.cos(a), 0]),
-        },
+      edged(
+        k.param(
+          (u, v) => {
+            const z = -0.16 + (-2.26 + 0.16) * u;
+            const xr = rightX(z);
+            return lidPt(-0.47 + (xr + 0.47) * v, z, side * 0.018);
+          },
+          {
+            grid: 72,
+            normal: () => (side ? [-Math.sin(a), Math.cos(a), 0] : [Math.sin(a), -Math.cos(a), 0]),
+          },
+        ),
+        lidEdge,
+        0.3,
       ),
       {
         color: (c) => {
@@ -1386,11 +1505,12 @@ function buildHarpsichord(k) {
           return edge > 0.04 && edge < 0.05 ? metal(c, GILT, "#6b5220") : lit(c, "#efe4c9", 0.2);
         },
         even: true,
-        weight: 1.3,
+        weight: 0.9,
         flat: 0.1,
         jitter: 0.006,
       },
     );
+  lidRim(k, { x0: -0.47, zF: -0.16, zB: -2.26, rightX, lidPt, a, lift: 0.018, color: (c) => painted(c, GREEN, 0.3) }); // prettier-ignore
   const pz = -1.05;
   const px = rightX(pz) - 0.04;
   const tip = lidPt(-0.47 + (rightX(pz) + 0.47) * 0.86, pz);
