@@ -2298,7 +2298,8 @@ export function createUI(app) {
     "touchstart",
     (e) => {
       const t = e.touches[0];
-      const onInput = e.target.closest?.("input, select, textarea");
+      // UI r2: a stroke on the drawing pad draws; it never closes the sheet.
+      const onInput = e.target.closest?.("input, select, textarea, canvas");
       pull =
         narrow.matches && mode === "panel" && e.touches.length === 1 && !onInput
           ? { x: t.clientX, y: t.clientY, top: els.panes.scrollTop }

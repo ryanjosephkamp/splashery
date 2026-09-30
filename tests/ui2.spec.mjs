@@ -247,6 +247,15 @@ test.describe("phone", () => {
       if (digit === "3")
         await page.screenshot({ path: new URL("ui2-cnn-pad-390x844.png", SHOTS).pathname });
     }
+    // A real downward stroke on the pad draws; it doesn't close the sheet.
+    const box = await page.locator("#toy-input-pad").boundingBox();
+    await touchDrag(page, [
+      [
+        [box.x + box.width * 0.5, box.y + box.height * 0.05],
+        [box.x + box.width * 0.5, box.y + box.height * 0.95],
+      ],
+    ]);
+    expect(await stop(page)).toBe("full");
     expect(errors).toEqual([]);
   });
 
