@@ -80,9 +80,34 @@ run at the same time; leave their files alone. The laptop is locked.
 Model: Opus 5.5 (default effort).
 
 - September 30, 2026: lane started on `claude/lane-shelves` from main at 0354a1f.
+- Engine PR #147 (`claude/lane-shelves-engine`): procedural shelf toys can offer looks (generator
+  settings), `lookOption()` takes `lookLabel`, and four tiny-planet palettes (mars, moon, jupiter,
+  neptune). Merged into this branch; it must merge first.
+- Lane PR #148: the crystal ball in Medieval (after the wizard's orb), the donut in Food (after the
+  macarons), the tiny planet in Space (after Neptune) with its Planet choice, and the new Torus in
+  Shapes (`src/packs/shapes-torus.js`) with four dressings, its wobble tap and its sound.
+- tests/shv.spec.mjs: 15/15 pass. Full suite: running.
+- Cards: `shv-torus`, `shv-planets`, `shv-shelves` (being posted).
 
 ## Notes
 
+- The torus's pack is `src/packs/shapes-torus.js` (a new pack; the other Shapes are procedural
+  generator presets with rigs in `src/rigs.js`, so there was no shapes pack to join).
+- The wobble is Euler's disk: the whole toy turns about a level axis that circles (`out.body.quat`),
+  tilting at most about 60°, so the draw order holds without a second copy. The center lifts by 0.62
+  of what a real table contact would give, which keeps the standing ring inside the frame without a
+  `k.reach` (a reach point shrank the resting toy and pushed it low in its thumbnail).
+- Clip tools: `tools/shv-clip.mjs` (a toy through several Toy tab choices as one labeled 390×844
+  clip) and `tools/shv-shelves.mjs` (shelf stills before and after, from two servers).
+
 ## Known issues
 
+- `tests/smoke.spec.mjs:133` expects Shapes to be blob, donut, knot, planet; it is now torus, blob,
+  knot. The Operator updates that line.
+
 ## For the Operator
+
+- smoke.spec.mjs line 133: change the expected Shapes list to `["torus", "blob", "knot"]`.
+- PACKS.md: a procedural shelf toy may now list `looks` with `generator` settings and a `lookLabel`
+  (engine PR #147).
+- The four new palettes show in the Make tab too, labeled "(tribute)".
