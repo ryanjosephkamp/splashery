@@ -3,7 +3,7 @@
 // 3D view), then builds the world and lets the visitor walk in it.
 // ?world=<id> picks worlds/<id>/world.json (the Test island by default).
 
-import { loadWorld } from "./world-file.js";
+import { loadWorld, RENDER_MODES } from "./world-file.js";
 import { WorldView, NoGPUError } from "./render.js";
 import { World } from "./world.js";
 import { Controls } from "./controls.js";
@@ -65,7 +65,12 @@ class Page {
     const tierBudget = WORLD_BUDGETS[this.tier];
     this.view.setPixelRatio(Number(params.get("dpr")) || tierBudget.ratio);
     this.view.setKernel(params.get("kernel") || tierBudget.kernel);
-    const world = new World(this.view, def, this.tier, { reducedMotion });
+    // ?render=splats|hybrid overrides the world file's mode; ?shadows=0
+    // turns the sun's shadows off.
+    const mode = RENDER_MODES.includes(params.get("render")) ? params.get("render") : def.render;
+    // ?character=splats|mesh overrides the world file's character.
+    const characterModel = ["splats", "mesh"].includes(params.get("character")) ? params.get("character") : def.character.model; // prettier-ignore
+    const world = new World(this.view, def, this.tier, { reducedMotion, mode, shadows: params.get("shadows") !== "0", characterModel }); // prettier-ignore
     this.world = world;
     // A wide view behind the start screen.
     world.overview = true;
@@ -245,6 +250,7 @@ class Page {
       world,
       view: this.view,
       tier: this.tier,
+      mode: world.mode,
       enter: () => this.enter(),
       stats: () => world.stats(),
       char: () => ({ pos: world.char.pos.slice(), facing: world.char.facing, speed: world.char.gait.speed, blocked: world.char.blocked }), // prettier-ignore
