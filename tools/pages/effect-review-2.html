@@ -1,4 +1,4 @@
-<title>Splashery Effect Review</title>
+<title>Splashery Effect Review 2</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link
@@ -300,17 +300,18 @@
 
 <div class="wrap">
   <header>
-    <h1>Splashery Effect Review</h1>
+    <h1>Splashery Effect Review, page 2</h1>
     <p>
       Clips of new and changed tap effects from every lane. Each clip starts a moment before the
       tap. Mark each one "Looks right" or "Needs work" and add a note; the lane that made it reads
       your marks.
     </p>
     <p>
-      This page filled its storage on September 30, 2026, so new clips now go on
-      <a href="https://claude.ai/artifact/BSayVkzQ2FKESesrkrSUMK" target="_blank" rel="noopener"
-        >page 2</a
-      >. A clip redone there leaves this page.
+      Page 1 filled its storage on September 30, 2026, so new clips come here. Clips from before
+      then, and your marks on them, stay on
+      <a href="https://claude.ai/artifact/NCsg9V5SzFY3Mnwuwgq7pi" target="_blank" rel="noopener"
+        >page 1</a
+      >.
     </p>
   </header>
 
@@ -424,8 +425,7 @@
   // lanes that are open, or all lanes when finished ones are shown.
   function current() {
     return Object.values(cards).filter((t) => {
-      // "page2:<id>" means the newer clip is on page 2.
-      if (t.replacedBy && (cards[t.replacedBy] || /^page2:/.test(t.replacedBy))) return false;
+      if (t.replacedBy && cards[t.replacedBy]) return false;
       const lane = lanes[String(t.lane || "other")];
       if (lane?.finished && !showFinished) return false;
       if (laneFilter !== "all" && String(t.lane || "other") !== laneFilter) return false;
