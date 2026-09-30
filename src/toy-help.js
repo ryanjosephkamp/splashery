@@ -1086,7 +1086,7 @@ export const TOY_HELP = {
   clock: {
     howTo: "Tap it to ring the alarm.",
     about:
-      "A wind-up alarm clock has two metal bells on top and a little hammer between them. At the set time a spring inside lets the hammer go, and it strikes the two bells back and forth very fast, loud enough to wake a sleeper. Before alarm clocks were common, some people were paid to go around town tapping on windows to wake others up.\n\nThe hands on this clock show the real time where you are. Tap it to ring the alarm: the hammer rattles between the bells and the whole clock shakes and hops. Pick its color in the Toy tab.",
+      "A wind-up alarm clock has two metal bells on top and a little hammer between them. At the set time a spring inside lets the hammer go, and it strikes the two bells back and forth very fast, loud enough to wake a sleeper. Before alarm clocks were common, some people were paid to go around town tapping on windows to wake others up.\n\nThe hands on this clock show the real time where you are, or in another time zone you pick in the Toy tab. Tap it to ring the alarm: the hammer rattles between the bells and the whole clock shakes and hops. Pick its color in the Toy tab.",
   },
   "gift-box": {
     howTo: "Tap to open the present; tap again to close it.",
