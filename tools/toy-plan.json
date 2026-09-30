@@ -184,7 +184,7 @@
       "v": "keep",
       "owner": "Interesting but underwhelming.",
       "effect": "A slice cuts out and lifts away, showing layers.",
-      "sound": "Soft knife slide.",
+      "sound": "A softer knife slide, a moist crumb as the slice lifts out, and the same soft plate thud.",
       "improved": "E1: a slice facing you lifts out of the ring, showing crumb and frosting layers on its cut faces and in the gap (3.2 s)."
     },
     "pomegranate": {
@@ -304,7 +304,7 @@
     "softball": {
       "v": "keep",
       "effect": "Underhand arc and a softer thud.",
-      "sound": "The same whoosh, then the real dull thump of a heavy ball landing (twice: away and home). Its motion has no bat, so the landing is what sounded like a hit.",
+      "sound": "The same whoosh, then the real dull thump of a heavy ball landing (away and back home). Its motion has no bat (an underhand pitch that lands), so the landing is what sounded like a hit; a bat crack would need a bat hit in the motion.",
       "fixed": "C1: smooth yellow leather with a soft sheen and crisp raised red stitches.",
       "improved": "E6a: an underhand pitch: a swing back and through, then a high, slow arc away with a little backspin; it lands with a soft thud and hardly bounces; a softer toss brings it back (3.0 s)."
     },
@@ -628,7 +628,7 @@
     "mercury": {
       "v": "keep",
       "effect": "Quick orbit-like spin and heat shimmer on the day side.",
-      "sound": "A low roar of heat and a soft searing sizzle while the day side glows, fading as it cools (no tone).",
+      "sound": "A quick spin whoosh, then a low roar of heat and a soft searing sizzle while the day side glows, fading as it cools (no tone).",
       "improved": "E2: a tap spins it once, fast, and the side facing the Sun glows red-hot and shimmers, then cools (3.4 s)."
     },
     "venus": {
@@ -640,7 +640,7 @@
     "earth": {
       "v": "keep",
       "effect": "Night side lights up with city lights as it turns; clouds move.",
-      "sound": "A softer ocean wash with only a faint breeze, and the same chime as the city lights come on.",
+      "sound": "The same ocean wash (a little softer) and chime, with the wind turned right down (softer, shorter and quieter).",
       "improved": "E2: a tap turns it through one day with the Sun to the left: night falls over the right half, the Earth turns once, city lights come on as the land turns into the dark and go out at dawn, then the night lifts (6.4 s). The clouds are painted on the globe now."
     },
     "moon": {

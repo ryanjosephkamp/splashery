@@ -165,7 +165,7 @@ Proposals below are suggestions; the owner may change them.
   - Owner: Interesting but underwhelming.
   - Effect: A slice cuts out and lifts away, showing layers.
   - Improved: E1: a slice facing you lifts out of the ring, showing crumb and frosting layers on its cut faces and in the gap (3.2 s).
-  - Sound: Soft knife slide.
+  - Sound: A softer knife slide, a moist crumb as the slice lifts out, and the same soft plate thud.
 - **Pomegranate** (`pomegranate`). Now: tap: Split open (rig). Plan: keep.
   - Owner: Underwhelming.
   - Effect: Splits open to show glowing red seeds that spill a little.
@@ -253,7 +253,7 @@ Proposals below are suggestions; the owner may change them.
   - Fixed: C1: smooth yellow leather with a soft sheen and crisp raised red stitches.
   - Effect: Underhand arc and a softer thud.
   - Improved: E6a: an underhand pitch: a swing back and through, then a high, slow arc away with a little backspin; it lands with a soft thud and hardly bounces; a softer toss brings it back (3.0 s).
-  - Sound: The same whoosh, then the real dull thump of a heavy ball landing (twice: away and home). Its motion has no bat, so the landing is what sounded like a hit.
+  - Sound: The same whoosh, then the real dull thump of a heavy ball landing (away and back home). Its motion has no bat (an underhand pitch that lands), so the landing is what sounded like a hit; a bat crack would need a bat hit in the motion.
 - **Beach ball** (`beach-ball`). Now: tap: Toss it up. Plan: keep.
   - Effect: Floats up slowly, drifts and bobs down.
   - Improved: E6a: punched up, the air slows it at once; it floats down slowly, drifting and turning lazily, lands soft with a wobble and bobs to a stop (2.9 s).
@@ -504,7 +504,7 @@ Proposals below are suggestions; the owner may change them.
 - **Mercury** (`mercury`). Now: tap: Spin in the sunlight. Plan: keep.
   - Effect: Quick orbit-like spin and heat shimmer on the day side.
   - Improved: E2: a tap spins it once, fast, and the side facing the Sun glows red-hot and shimmers, then cools (3.4 s).
-  - Sound: A low roar of heat and a soft searing sizzle while the day side glows, fading as it cools (no tone).
+  - Sound: A quick spin whoosh, then a low roar of heat and a soft searing sizzle while the day side glows, fading as it cools (no tone).
 - **Venus** (`venus`). Now: tap: Swirl the clouds. Plan: keep.
   - Effect: The thick clouds swirl fast around it.
   - Improved: E2: a tap whips the clouds round backwards (as Venus turns): the wide equatorial band twice and the polar caps once, so the chevrons shear where they meet, then lock together again (4 s).
@@ -512,7 +512,7 @@ Proposals below are suggestions; the owner may change them.
 - **Earth** (`earth`). Now: tap: Turn through a day. Plan: keep.
   - Effect: Night side lights up with city lights as it turns; clouds move.
   - Improved: E2: a tap turns it through one day with the Sun to the left: night falls over the right half, the Earth turns once, city lights come on as the land turns into the dark and go out at dawn, then the night lifts (6.4 s). The clouds are painted on the globe now.
-  - Sound: A softer ocean wash with only a faint breeze, and the same chime as the city lights come on.
+  - Sound: The same ocean wash (a little softer) and chime, with the wind turned right down (softer, shorter and quieter).
 - **Moon** (`moon`). Now: tap: Land or leave. Plan: keep.
   - Effect: A lunar module lands; an astronaut plants a flag.
   - Improved: E2 (redone after review): a tap lands a lunar module near the top of the Moon (it comes down slowing, leaning back, and throws a sheet of dust straight out); an astronaut climbs down the ladder, takes the rolled flag off the leg, bounds over in low-gravity hops, plants it, unrolls it along its crossbar (the flag is a toy option: any country) and waves. A second tap packs up: the flag is rolled and stowed, the astronaut climbs back in and the lander lifts off (10 s each way).

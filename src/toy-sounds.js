@@ -303,8 +303,17 @@ export const TOY_SOUNDS = {
     { voice: "hiss", at: 0.35, decay: 0.8, vol: 0.3 },
   ],
   "carrot-cake": [
-    { voice: "scrape", f: 1400, rate: 3, decay: 1.4, vol: 0.6 },
-    { voice: "thud", at: 2.5, f: 180, vol: 0.4 },
+    { voice: "scrape", f: 1100, rate: 3, decay: 1.4, vol: 0.5 },
+    {
+      voice: "sample",
+      file: "raspberry-squish.mp3",
+      at: 0.15,
+      len: 0.5,
+      pitch: 0.5,
+      vol: 0.3,
+      fallback: { voice: "squish", pitch: 0.5, vol: 0.3 },
+    },
+    { voice: "thud", at: 2.5, f: 180, vol: 0.45 },
   ],
   pomegranate: [
     { voice: "crack", f: 1600, bright: 0.4 },
@@ -578,15 +587,16 @@ export const TOY_SOUNDS = {
   ],
   // A bright tone as it spins, then the sizzle of the day side's heat.
   mercury: [
-    { voice: "roar", f: 120, bright: 0.35, decay: 2.2, vol: 0.6 },
-    { voice: "sizzle", at: 0.15, f: 2600, decay: 1.8, vol: 0.3 },
+    { voice: "whoosh", f: 400, to: 1.5, decay: 0.6, vol: 0.35 },
+    { voice: "roar", at: 0.1, f: 120, bright: 0.35, decay: 2.2, vol: 0.6 },
+    { voice: "sizzle", at: 0.25, f: 2600, decay: 1.8, vol: 0.3 },
   ],
   venus: { voice: "wind", f: 260, rate: 0.4, decay: 2.4 },
   // Surf and wind through the day, a soft chime as the city lights come on.
   earth: [
-    { voice: "wave", f: 420, decay: 1.4, vol: 0.6 },
-    { voice: "wind", f: 500, rate: 0.5, decay: 2, vol: 0.2 },
-    { voice: "ding", at: 1.6, f: "E6", decay: 1.2, vol: 0.4 },
+    { voice: "wave", f: 500, decay: 1.4, vol: 0.75 },
+    { voice: "wind", f: 700, rate: 0.6, decay: 1.4, vol: 0.18 },
+    { voice: "ding", at: 1.6, f: "E6", decay: 1.2, vol: 0.5 },
   ],
   // A hollow chime at full moon, a lower one at new moon (2.8 s).
   // The descent engine's rumble and hiss (the touchdown thud, the flag's
