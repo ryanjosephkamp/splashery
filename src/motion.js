@@ -69,6 +69,10 @@ export class MotionDriver {
     this.addon = null; // { parts, data } of a rig's kit-built add-on
     this.addonU = null;
     this.out = null;
+    // UI r3: a long tap effect pauses on the next tap and resumes on the one
+    // after (pausedAt is the clock time it paused at, pausedKey its control).
+    this.pausedAt = null;
+    this.pausedKey = null;
   }
 
   // Attaches a kit toy (recipe + build context) or clears it.
@@ -86,6 +90,8 @@ export class MotionDriver {
     this.tap = null;
     this.addon = null;
     this.addonU = null;
+    this.pausedAt = null; // UI r3
+    this.pausedKey = null;
   }
 
   // A rig's add-on (a small kit-built splat cloud with its own parts).
@@ -96,6 +102,37 @@ export class MotionDriver {
 
   controlDef(key) {
     return this.recipe?.controls?.find((c) => c.key === key) || null;
+  }
+
+  // UI r3: a pulse that runs longer than about two seconds (a tune, a long
+  // demo) pauses and resumes; shorter ones restart as before. A recipe can
+  // opt a control in or out with `pausable: true | false`.
+  isLong(def) {
+    if (!def || def.type !== "pulse") return false;
+    return def.pausable ?? (def.ease ?? 0.8) > 2;
+  }
+
+  // "running", "paused" or null for the action control (or `key`).
+  effectState(key = this.recipe?.action?.key) {
+    if (!key) return null;
+    if (this.pausedKey === key) return "paused";
+    return this.isLong(this.controlDef(key)) && (this.state[key] ?? 0) > 0.002 ? "running" : null;
+  }
+
+  pause(time, key) {
+    this.pausedAt = time;
+    this.pausedKey = key;
+  }
+
+  // Resumes where it paused: the tap's clock moves on by the time it was
+  // paused, so nothing jumps.
+  resume(time) {
+    if (this.pausedAt === null) return;
+    const d = Math.max(0, time - this.pausedAt);
+    if (this.tap) this.tap = { ...this.tap, time: this.tap.time + d };
+    this.hopStart += d;
+    this.pausedAt = null;
+    this.pausedKey = null;
   }
 
   // Sets a control's target; toggles ease there over their `ease` seconds.
@@ -137,12 +174,24 @@ export class MotionDriver {
         pick = r.pick ?? null;
       }
     }
+    // UI r3: a tap on a long effect that is running pauses it, and the next
+    // tap resumes it; once it has finished, a tap starts it again.
+    const state = forced ? null : this.effectState(key);
+    if (state === "running") {
+      this.pause(time, key);
+      return { key, value: 1, pick, point, paused: true, long: true };
+    }
+    if (state === "paused") {
+      this.resume(time);
+      return { key, value: 1, pick, point, resumed: true, long: true };
+    }
+    if (this.pausedKey) this.resume(time); // another control fires: carry on
     this.tap = { point, key: key || "hop", pick, time, n: (this.tap?.n ?? 0) + 1 };
     if (key && this.controlDef(key)) {
       if (this.controlDef(key).type === "pulse") {
         this.state[key] = 1;
         this.targets[key] = 0;
-        return { key, value: 1, pick, point };
+        return { key, value: 1, pick, point, long: this.isLong(this.controlDef(key)) };
       }
       const cur = this.targets[key] ?? 0;
       this.setControl(key, cur > 0.5 ? 0 : 1);
@@ -165,6 +214,7 @@ export class MotionDriver {
   // True while something moves by itself.
   isAnimating(motion, time) {
     if (motion.move !== "still") return true;
+    if (this.pausedAt !== null) return false; // UI r3: a paused effect holds still
     if (hopAt(time - this.hopStart)) return true;
     if (motion.alive && this.hasBehaviours()) return true;
     // A song playing (lane Pianos) keeps frames coming, even with motion off.
@@ -183,7 +233,11 @@ export class MotionDriver {
 
   // ctx: { time, dt, motion, info: { center, half, radius }, cameraPos,
   // reducedMotion }. Returns the uniforms.
-  compute({ time, dt, motion, info, cameraPos }) {
+  compute({ time: clock, dt, motion, info, cameraPos }) {
+    // UI r3: while a tap effect is paused, its controls and clocks hold still
+    // at the moment it paused (a whole-toy move from the Toy tab carries on).
+    const paused = this.pausedAt !== null;
+    const time = paused ? this.pausedAt : clock;
     const speed = clamp(motion.speed ?? 0.5, 0, 1);
     const rate = 0.25 + 1.5 * speed;
     const R = info.radius;
@@ -191,7 +245,7 @@ export class MotionDriver {
     const u = {};
 
     // Controls ease towards their targets.
-    for (const k in this.targets) {
+    for (const k in paused ? {} : this.targets) {
       const def = this.controlDef(k);
       const goal = this.targets[k];
       const cur = this.state[k] ?? goal;
@@ -204,7 +258,7 @@ export class MotionDriver {
     }
 
     // Whole-toy move.
-    const mt = this.tick(this.moveClock, time, rate, motion.move !== "still");
+    const mt = this.tick(this.moveClock, clock, rate, motion.move !== "still");
     let q = IDENTITY;
     let off = [0, 0, 0];
     let squash = 0;
@@ -230,7 +284,7 @@ export class MotionDriver {
     }
 
     // The kit toy's own frame: behaviours clock, recipe drive, parts.
-    const kt = this.tick(this.kitClock, time, rate, motion.alive !== false);
+    const kt = this.tick(this.kitClock, clock, rate, motion.alive !== false && !paused);
     // out.resort: true on a frame asks the player to sort the tokens again
     // where they stand (resortTokens in src/player.js).
     const drive = { energy: 0, grow: 1, amount: 1, glow: [1, 1, 1, 0], parts: {}, body: null, fx: {}, addon: null, tokens: null, cues: [], morph: null, resort: false, levers: null }; // prettier-ignore

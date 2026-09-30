@@ -51,6 +51,9 @@ export function createUI(app) {
     panelFold: $("panel-fold"), // UI r2
     galleryOpen: $("gallery-open"), // UI r2
     galleryClose: $("gallery-close"), // UI r2
+    flagToggle: $("flag-toggle"), // UI r3
+    flagPop: $("flag-pop"), // UI r3
+    flagGlobal: $("flag-global"), // UI r3
     tabs: $("tabs"),
     panes: $("panes"),
     shelf: $("shelf"),
@@ -1819,7 +1822,9 @@ export function createUI(app) {
       for (const f of sorted) {
         els.patFlag.add(new Option(f.name, f.code));
         els.toyFlag.add(new Option(f.name, f.code));
+        els.flagGlobal.add(new Option(f.name, f.code)); // UI r3
       }
+      els.flagGlobal.value = app.globalFlag || "";
       const p = app.player?.scene.pattern;
       els.patFlag.value = p?.flag || "";
       els.toyFlag.value = p?.id === "flag" ? p.flag : "";
@@ -1835,6 +1840,25 @@ export function createUI(app) {
   els.toyFlag.addEventListener("change", () => {
     const code = els.toyFlag.value;
     app.setPattern(code ? { id: "flag", flag: code } : { id: "none" });
+  });
+  // UI r3: the top bar's flag button, flag colors for every toy.
+  function showFlagPop(on) {
+    els.flagPop.hidden = !on;
+    els.flagToggle.setAttribute("aria-expanded", String(on));
+    if (on) listFlags().then(() => els.flagGlobal.focus({ preventScroll: true }));
+  }
+  els.flagToggle.addEventListener("click", () => showFlagPop(els.flagPop.hidden));
+  els.flagPop.addEventListener("keydown", (e) => {
+    if (e.key !== "Escape") return;
+    showFlagPop(false);
+    els.flagToggle.focus();
+  });
+  els.flagGlobal.addEventListener("change", () => {
+    app.setGlobalFlag(els.flagGlobal.value);
+    showFlagPop(false);
+  });
+  document.addEventListener("pointerdown", (e) => {
+    if (!els.flagPop.hidden && !e.target.closest?.("#flag-pop, #flag-toggle")) showFlagPop(false);
   });
   els.patId.addEventListener("change", () => app.setPattern({ id: els.patId.value }));
   els.patFlag.addEventListener("change", () => app.setPattern({ flag: els.patFlag.value }));
@@ -2448,6 +2472,17 @@ export function createUI(app) {
   }
   // /UI r2
 
+  // ---- UI r3: the action button pauses and resumes a long effect ---------------------
+  // While a long tap effect (a tune, a long demo) runs, the Toy tab's action
+  // button reads Pause; while it is paused, Resume.
+  app.player?.on("frame", () => {
+    const base = app.player.toyInfo?.recipe?.action?.label;
+    if (!base) return;
+    const st = app.player.motion?.effectState?.();
+    const label = st === "running" ? "Pause" : st === "paused" ? "Resume" : base;
+    if (els.toyAction.textContent !== label) els.toyAction.textContent = label;
+  });
+
   // ---- A toy's labels (lane Anatomy) ------------------------------------------------
   // A kit toy's drive() may set out.legend = { title, items: [{ text, head,
   // on, dim }] }: a list of names shown as page text beside the stage while
@@ -2840,11 +2875,18 @@ export function createUI(app) {
       else setMode(stop);
     },
     toggleFocus: () => setFocus(!focusOn),
+    // UI r3: the flag button shows whether a flag is set for every toy.
+    setGlobalFlag(code) {
+      els.flagToggle.setAttribute("aria-pressed", String(!!code));
+      els.flagGlobal.value = code || "";
+    },
     focusMode: () => focusOn,
     togglePanel: () => setFolded(!folded),
     // Escape: leave focus mode or the gallery page first (true when it did).
     escape() {
-      if (focusOn) setFocus(false);
+      if (!els.flagPop.hidden)
+        els.flagPop.hidden = true; // UI r3
+      else if (focusOn) setFocus(false);
       else if (galleryOn) setGallery(false);
       else return false;
       return true;

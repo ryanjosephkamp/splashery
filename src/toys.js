@@ -3506,3 +3506,30 @@ export function assetURL(path) {
 export function thumbURL(toy) {
   return assetURL(`assets/toys/${toy.id}/thumb.webp`);
 }
+
+// ---- UI r3: toys that hold still --------------------------------------------------
+// Toys that read like a chart, a diagram, a page or an instrument start the
+// way the picture toys do: the turntable off and the tilt locked (the
+// owner's request of September 30, 2026). A person can still switch the
+// turntable on for one; a link or a saved scene keeps its own settings.
+const STILL_SHELVES = new Set(["computing", "music", "objects"]);
+const STILL_TOYS = new Set([
+  // The owner's list.
+  "graph-plotter",
+  "surface-plotter",
+  "unit-circle",
+  "fourier-circles",
+  "pythagoras-proof",
+  "chess-set",
+  "puzzle-cube",
+  // Added: they read like a chart, a diagram or a page.
+  "periodic-table",
+  "splat-equation",
+  "chladni-plate",
+  "anatomy-atlas",
+  "song-landscape",
+]);
+
+export function holdsStill(toy) {
+  return !!toy && (STILL_SHELVES.has(toy.category) || STILL_TOYS.has(toy.id));
+}
