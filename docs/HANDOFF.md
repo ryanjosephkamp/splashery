@@ -109,6 +109,11 @@ work is in [OPERATING.md](OPERATING.md).
   the text layer for PDF toys (#120), Chemistry (#100), Machines A (#102) and Song live (#119). The
   Sound Board and Help Board were rebuilt for the owner's sound review. The Effect review page now
   keeps each clip's own shape (live; its source change is the Operator's #124).
+- Later on the morning of September 30, 2026 (UTC) nine more PRs merged after four combined runs,
+  each failure checked against main (a Character test's time, fixed in #129, and flaky frame waits):
+  Books r3 (#117, #123), Photo to 3D (#98), Lab r2 (#115, #116), Real objects (#97), Screens r2
+  (#111) and Pianos (#103, #104). The pianos are public; the rest are behind the labs switch. The
+  soda can and the water bottle stay in labs until the Fluids engine can pour them.
 - On the morning of September 30, 2026 the owner answered the Operator's plan for after the weekly
   reset (WORKSTREAMS.md, "Next"): about six workers at once plus an Integrator; the running rounds
   finish first; Sound A and B, Science, Fix4 and the real island stay queued; new lanes for UI r2
@@ -125,28 +130,25 @@ work is in [OPERATING.md](OPERATING.md).
 
 The full table, with owned files, sessions, branches and PRs, is [WORKSTREAMS.md](WORKSTREAMS.md).
 
-| Lane                                                         | Status                                                                                                                             | Handoff                                          |
-| ------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
-| Operator                                                     | Running; runs the lanes                                                                                                            | —                                                |
-| Worlds r2 and hybrid: a sharper island, then a hybrid one    | Running, Opus 5.5 (r2 #108; the hybrid round from the owner's "Hybrid yes")                                                        | [handoff/Worlds.md](handoff/Worlds.md)           |
-| Pianos: pianos and songs                                     | Running, Opus 5.5 (September 29, 2026)                                                                                             | [handoff/Pianos.md](handoff/Pianos.md)           |
-| Real objects: everyday things, for real                      | Running, Opus 5.5 (September 29, 2026)                                                                                             | [handoff/RealObjects.md](handoff/RealObjects.md) |
-| Photo to 3D: your photo, in depth                            | Running, Sonnet 5.5 (#98, the sharper round; Song live #119 merged)                                                                | [handoff/Photo3D.md](handoff/Photo3D.md)         |
-| Fluids: liquids, smoke and flames made of splats             | Running, Opus 5.5 (September 29, 2026)                                                                                             | [handoff/Fluids.md](handoff/Fluids.md)           |
-| Books r2 and r3: a sharper book body; pages you tap and pull | Running, Opus 5.5 (r2 #112 merged; r3 and engine #117 now)                                                                         | [handoff/Books.md](handoff/Books.md)             |
-| Screens r2: sharp sets and a real off switch                 | Running, Opus 5.5 (September 29, 2026)                                                                                             | [handoff/ScreensR2.md](handoff/ScreensR2.md)     |
-| Lab r2: the galaxy tap and a sharp Splat equation            | Running, Opus 5.5 (September 29, 2026)                                                                                             | [handoff/Lab.md](handoff/Lab.md)                 |
-| Integrator: combined test runs                               | Running, Sonnet 5.5 (September 29, 2026)                                                                                           | —                                                |
-| Integrator 2: a second runner                                | Running, Sonnet 5.5 (September 29, 2026)                                                                                           | —                                                |
-| Next (WORKSTREAMS.md, Next)                                  | Sound A and B, Science, Fix4, the real island, UI r2, the video-to-3D spike, Live input; later a web screen and the Wikipedia book | —                                                |
+| Lane                                                                | Status                                                                                                                             | Handoff                                |
+| ------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
+| Operator                                                            | Running; runs the lanes                                                                                                            | —                                      |
+| Worlds r2 and hybrid: a sharper island, then a hybrid one           | Running, Opus 5.5 (r2 #108; the hybrid round from the owner's "Hybrid yes")                                                        | [handoff/Worlds.md](handoff/Worlds.md) |
+| Fluids: liquids, smoke and flames made of splats                    | Running, Opus 5.5 (September 29, 2026)                                                                                             | [handoff/Fluids.md](handoff/Fluids.md) |
+| Books r4: page focus, the turn's flash and the stapled paper's edge | Running, Opus 5.5 (r2 #112 and r3 #117/#123 merged; r4 #126 now)                                                                   | [handoff/Books.md](handoff/Books.md)   |
+| Integrator: combined test runs                                      | Running, Sonnet 5.5 (September 29, 2026)                                                                                           | —                                      |
+| Integrator 2: a second runner                                       | Running, Sonnet 5.5 (September 29, 2026)                                                                                           | —                                      |
+| Next (WORKSTREAMS.md, Next)                                         | Sound A and B, Science, Fix4, the real island, UI r2, the video-to-3D spike, Live input; later a web screen and the Wikipedia book | —                                      |
 
 E4-finish, E5, E6a, E6b, F, G, Math, Fix3, AI, Help, HelpTextA, HelpTextB, Pictures, Manual and
 Screens are done, and so are Viewer, Studio Sound, Learn, Lab, Studio Models, Books, Fidelity A,
-Fidelity B, Worlds (the engine), Anatomy, the A/B toy piano and Character (WORKSTREAMS.md, "Done").
-On September 27, 2026 the owner approved the plan in Part 1 of the How Splashery Is Made page: the
-Operator runs the lanes, workers are Opus 5.5 only (at the default effort, a trial), new public text
-is in American English, and the work goes in the order in ROADMAP.md, "Now". Lanes AI and Math
-started that day, and the Sound Board has its review features, ready for the owner's sound notes.
+Fidelity B, Worlds (the engine), Anatomy, the A/B toy piano and Character, and on September 30 the
+sharper default (Sharpness), the text layer, Chemistry, Machines A, Song live, Books r3, Photo to
+3D, Lab r2, Real objects, Screens r2 and Pianos (WORKSTREAMS.md, "Done"). On September 27, 2026 the
+owner approved the plan in Part 1 of the How Splashery Is Made page: the Operator runs the lanes,
+workers are Opus 5.5 only (at the default effort, a trial), new public text is in American English,
+and the work goes in the order in ROADMAP.md, "Now". Lanes AI and Math started that day, and the
+Sound Board has its review features, ready for the owner's sound notes.
 
 On September 29, 2026 the owner reviewed the new labs toys
 ([reviews/2026-09-29-new-toys](reviews/2026-09-29-new-toys/review.md)): "very impressed", the

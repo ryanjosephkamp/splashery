@@ -1,7 +1,7 @@
 # Fluids: liquids, smoke and flames made of splats
 
 Lane Fluids, September 29, 2026 (Opus 5.5). The brief and the lane's state are in
-[handoff/Fluids.md](handoff/Fluids.md); the recipe API is also in [PACKS.md](PACKS.md), "5d.
+[handoff/Fluids.md](handoff/Fluids.md); the recipe API is also in [PACKS.md](PACKS.md), "5e.
 Fluids".
 
 This is graphics physics: it moves in a believable way at phone size. It is not a validated

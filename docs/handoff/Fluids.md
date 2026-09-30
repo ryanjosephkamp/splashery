@@ -136,7 +136,7 @@ Model: Opus 5.5 (claude-opus-5-5), default effort.
   view (`kind: "vessel"`). Liquids are drawn as anisotropic splats (Yu and Turk 2013) in a fluid
   layer with its own work-buffer program. The solver runs in a Web Worker on people's devices and on
   the page for the tools and tests (automated browsers); `?fluids=worker|sync` picks.
-- Recipe API: `k.fluid(spec)` in build, `out.fluid[name]` in drive; docs/PACKS.md "5d. Fluids".
+- Recipe API: `k.fluid(spec)` in build, `out.fluid[name]` in drive; docs/PACKS.md "5e. Fluids".
 - Toy: Fluid lab (labs, Lab shelf) with a Scene choice (Glass, Splash, Candle, Hot cup) and a Liquid
   choice (Water, Soda, Honey, Lava); sounds through cues, a how-to and an About text, a plan entry,
   a thumbnail.
@@ -179,7 +179,7 @@ Model: Opus 5.5 (claude-opus-5-5), default effort.
 
 ## For the Operator
 
-- PACKS.md: I added my own section "5d. Fluids" (the brief assigns it to this lane).
+- PACKS.md: I added my own section "5e. Fluids" (the brief assigns it to this lane).
 - New tools: `tools/fl-clip.mjs` (the cards' clips; `--fps=30` for the flame),
   `tools/fl-measure.mjs` (the phone budget card), `tools/fl-physics.mjs` (the physics checks, Node
   only) and `tools/fl-evidence.mjs` (clips beside reference photos, and static cards). None needs a
