@@ -212,7 +212,7 @@
       "v": "keep",
       "owner": "Ideally playable. At least: a tap plays a real game, white against black, as a long animation.",
       "effect": "Plays a famous public-domain game move by move; later, tap a piece then a square to move it.",
-      "sound": "Wooden piece clacks.",
+      "sound": "Pieces set down on a felted wooden board, a woody thock (a sharper one for captures), like a good online-chess theme.",
       "improved": "E1b: rebuilt as a kit toy (walnut board, 32 turned pieces). A tap plays Morphy's Opera Game (Paris, 1858) move by move: each piece slides to its square, knights jump, captured pieces go to trays beside the board, each move clacks, and at 17.Rd8# the black king tips over. Tap again and the pieces glide home. E1c: plays any game too. Open a PGN file or paste a game (all the rules: castling, en passant, promotion, disambiguation; a set-up position from FEN; a clear message for a bad file), set the move speed, or go back to the Opera Game (the default). A promoting pawn sinks away and a new queen rises; the loser's king tips over after mate or resignation. F: tap a piece whose turn it is (it lifts), then a square it can legally move to; the game goes on from there as your own (a queen for a pawn on the last rank; mate tips the king over). The Play button, the game bar and a tap beside the board still play the Opera Game."
     },
     "horse-statue": {
@@ -480,7 +480,7 @@
     "campfire": {
       "v": "keep",
       "owner": "Basically perfect.",
-      "sound": "Crackle and pop."
+      "sound": "The volcano's kind of fire, a low flickering rush with a few soft pops of wood (no clicks)."
     },
     "storm-cloud": {
       "v": "keep",
@@ -492,13 +492,13 @@
       "fixed": "C1: the glass now tapers into the cap and sits in rolled metal collars top and bottom.",
       "owner": "Moves really well. On tap: blobs move faster, light up or change colours.",
       "effect": "Blobs speed up, glow and shift colour for a few seconds.",
-      "sound": "Low bubbling blorp.",
+      "sound": "Only the gloops and bubbles (the rising hum is gone).",
       "improved": "E4: a tap heats the lamp: the wax blobs speed up to about three and a half times, smoothly with no jump, the wax glows and shifts through its colour set's glow (orange, magenta, gold for the classic lamp) and the liquid brightens, then it all eases back (about 4.5 s). The glow also shows with motion off. After the owner's review: a Colour set (Pick below, Ocean, Violet, Lime, Sunset, Midnight), Blobs (2 to 12), Blob size and Blob shape (mixed, round, tall), and Flow and Glow sliders."
     },
     "snow-globe": {
       "v": "keep",
       "owner": "Basically perfect.",
-      "sound": "Glassy shake and tinkle."
+      "sound": "The water sloshing as it is shaken, then the twinkle (no rattle of clicks)."
     },
     "volcano": {
       "v": "keep",
@@ -509,7 +509,7 @@
       "v": "keep",
       "owner": "Let the little white specks move. The swan could melt or break apart.",
       "effect": "Specks drift; tap melts the swan into drips, then it refreezes.",
-      "sound": "Ice crackle and drips.",
+      "sound": "The drips and the refreezing; the wind at the start is gone.",
       "improved": "E4, redone after the owner's review (\"it melts by dripping water and slowly breaking decomposing, with the melt speed accelerating\"): a tap melts the swan faster and faster: water beads and drips from the beak, the wings and the pedestal into a spreading puddle; the beak wears away, the wing tips crack off and fall into the water, then the head and the top of the neck; the tail, the neck and the wings wear away and the body wears down to a lump, each piece solid ice getting smaller; the fallen pieces melt away in the puddle. Then it refreezes piece by piece and a frosty white light sweeps up it (about 7.5 s). Temperature melts it to the same point and back."
     },
     "candle": {
@@ -534,7 +534,7 @@
     "iceberg": {
       "v": "keep",
       "effect": "A chunk calves off and splashes; the berg bobs.",
-      "sound": "Crack and splash.",
+      "sound": "Real ice breaking, a deep crack with its groan and splinters (no crackle of clicks), then the splash.",
       "improved": "E4: a tap cracks a chunk off the berg's front shoulder, showing pale fresh broken faces; it tips into the sea with a crown of spray and a ring of ripples, floats and bobs while the berg bobs and rocks, then melts away as one piece as the berg's chunk grows back in place (about 6 s)."
     },
     "waterfall": {
@@ -563,12 +563,12 @@
       "v": "keep",
       "fixed": "C1: readable words from a 5x7 bitmap font, more and smaller splats on the two open pages, a crisper cover, and no red strip (the cover's inside drew over the pages). E1b: the outside is crisp: evenly spread, denser splats on the cover, spine and page edges, a fine woven cloth and page lines splats can show.",
       "owner": "Blurry; try to make it more detailed so the writing looks like something.",
-      "sound": "Page flip."
+      "sound": "Real paper pages turning (no wind)."
     },
     "laptop": {
       "v": "keep",
       "owner": "Pretty awesome; keep it the same. After E1b: basically perfect, lock it in.",
-      "sound": "Keyboard clatter and a start-up chime.",
+      "sound": "Opening keeps only the screen-on sound (no twinkle), closing has no thunk, and the keys sound like a real keyboard (a tick and a thock).",
       "fixed": "E1b: a clean case (no speckle) and real keycaps with letters. Tap a key (or type on your own keyboard) and it goes down and types on the screen; tap or drag on the trackpad to move the pointer and click."
     },
     "music-box": {
@@ -579,7 +579,7 @@
     "clock": {
       "v": "keep",
       "owner": "Does roughly what the scan alarm clock should do; keep them slightly different.",
-      "sound": "Modern digital-ish ring (different from the scan's twin bells)."
+      "sound": "A real wind-up alarm clock, the hammer rattling between its two bells, in two rings."
     },
     "gift-box": {
       "v": "keep",
@@ -594,7 +594,7 @@
     "desk-fan": {
       "v": "keep",
       "owner": "Perfect.",
-      "sound": "Motor hum rising."
+      "sound": "The blades' soft thrum of air swelling in as it starts and fading as it stops (no rising motor hum)."
     },
     "lamp": {
       "v": "keep",
@@ -982,14 +982,14 @@
       "v": "keep",
       "owner": "Shake it and leaves come out.",
       "effect": "Shakes and leaves flutter down.",
-      "sound": "Leafy rustle.",
+      "sound": "A leafy rustle as the crown rocks, then soft rustles as the loose leaves land (synthesized; no flutter or patter).",
       "improved": "E4: a tap shakes the tree: the crown rocks on its trunk and forty leaves come loose one after another, each fluttering down on its own swinging path to lie on the grass; then they wither and fresh leaves open in their places (about 6.5 s). In winter a few dead brown leaves still cling to the twigs, and those fall."
     },
     "pine": {
       "v": "keep",
       "owner": "Christmas lights and a star appear.",
       "effect": "Shakes off a dusting of snow (approved instead of lights, which the decorated tree already has).",
-      "sound": "Soft jingle.",
+      "sound": "The needles rustle as it rocks, with a soft jingle of sleigh bells; the snow's hiss and thump stay (no chime).",
       "improved": "E4: a tap shakes off a dusting of snow: the tree rocks and the snow on its boughs drops a pair of tiers at a time, from the top down, in a puff of powder, lies on the ground and melts (about 5 s). On a snowless day a quick shower dusts the boughs first; with Snow on, fresh snow settles on them again afterwards."
     },
     "palm": {
@@ -1003,34 +1003,34 @@
       "v": "keep",
       "owner": "Really cool already. Maybe all the blossoms fall off when touched.",
       "effect": "All the petals fall in a flurry, then it blooms again.",
-      "sound": "Soft breeze and petal patter.",
+      "sound": "The opening of the traditional \"Sakura Sakura\" on a plucked koto-like string, over a faint rustle of petals (no wind).",
       "improved": "C2: a new tap action shakes the tree: the petals fall in a heavy flurry, the branches go bare, then it blooms again (about 4.5 s)."
     },
     "maple": {
       "v": "keep",
       "owner": "Same kind of thing as the cherry blossom.",
       "effect": "Leaves swirl down in a spiral gust (different from the cherry's gentle fall).",
-      "sound": "Crisp autumn rustle.",
+      "sound": "A soft gust and the leaves rustling as they swirl and land (no crunching clicks, much less wind).",
       "improved": "E4: a tap sends a whirling gust: the crown leans into it and forty leaves are torn off and carried round the tree in a widening spiral, tumbling, before they settle in a ring on the grass (the cherry's petals just drift down); then they wither and fresh leaves open (about 7 s)."
     },
     "bonsai": {
       "v": "keep",
       "owner": "Maybe shrink or grow.",
       "effect": "Grows a new branch, then the scissors snip it back.",
-      "sound": "Snip.",
+      "sound": "The branch creaks and its leaves rustle as it grows, the scissors open and snip, and the cut piece drops onto the moss.",
       "improved": "E4: a tap grows a new branch out of the trunk with a pad of leaves on its end; bonsai scissors slide in, open and snip it off at the cut, the piece tips onto the moss and is cleared away, and the stub heals over (about 5 s)."
     },
     "willow": {
       "v": "keep",
       "owner": "Pick anything.",
       "effect": "The long branches sway in a wave like a breeze passing.",
-      "sound": "Long soft sigh.",
+      "sound": "The same breath of wind, quieter, with the strands rustling.",
       "improved": "E4: a tap sends a breeze across the tree from the left: the hanging strands swing away with it a curtain at a time (they bend, most at their tips), swing back and settle, and the crown leans a little (about 5.5 s). The strands also sway gently at rest."
     },
     "sunflower": {
       "v": "keep",
       "effect": "The head turns to face the sun and petals open wide.",
-      "sound": "Warm rising tone.",
+      "sound": "A warm low swell as the sun comes out (no bouncing tone) and the petals rustling open.",
       "improved": "E4: a tap brings out the sun at the top left: the head turns up to face it and all 48 ray petals spread wide open, each turning about its root; then the sun goes in, the head turns back and the petals lift again (about 5.5 s). The head nods gently at rest."
     },
     "rose": {
@@ -1053,7 +1053,7 @@
     "daisy": {
       "v": "keep",
       "effect": "Petals spin like a pinwheel (loves me, loves me not).",
-      "sound": "Tick-tick petal plucks.",
+      "sound": "A soft whirr of the spin, and a soft brush as each petal lands on the grass, in sync (no ticks).",
       "improved": "E4: a tap spins the big head like a pinwheel, twice round (loves me, loves me not), and it flings off eight petals one after another, a tick each, which flutter down to the grass while the small heads bob; it slows to a stop, the fallen petals wither and new ones fill the gaps (about 5.5 s)."
     },
     "lotus": {
@@ -1071,7 +1071,7 @@
     "fern": {
       "v": "keep",
       "effect": "The fronds unroll from fiddleheads.",
-      "sound": "Unfurling rustle.",
+      "sound": "A soft leafy rustle and a gentle stem creak as each frond unrolls, and again as they roll back up (no sandy flutter).",
       "improved": "E4: a tap unrolls the two fiddleheads in the middle into two new fronds: each is a chain of six pieces that straighten one joint after another from the base to the tip, their leaflets spreading as they open; they hold, then roll back up into fiddleheads (about 5.5 s)."
     },
     "saguaro": {
@@ -1120,7 +1120,7 @@
       "v": "keep",
       "owner": "Should fall or drop.",
       "effect": "The pebbles drop and scatter, then stack into a cairn.",
-      "sound": "Pebble clatter.",
+      "sound": "Real stone-on-stone knocks as the pile shifts and tumbles home; the stacking knocks stay.",
       "improved": "E4: a tap tumbles the pebbles: each rolls out over the sand on its own path to lie clear of the others, then five hop one at a time onto a cairn, biggest at the bottom, with a clack each; at the end they all hop back (about 7 s). In the Cairn style the top four topple off and are stacked again."
     },
     "kelp": {
@@ -1134,35 +1134,35 @@
       "v": "keep",
       "owner": "Really neat; I like that you can melt it. Make melting part of the tap effect.",
       "effect": "Tap melts it: drips run down the cone, then it refreezes.",
-      "sound": "Drip-drip.",
+      "sound": "A slow, thick melt with heavy drops plopping down (no bubbles or drips).",
       "improved": "C2: a tap melts it (the scoops slump and drips run down the cone), then it refreezes (about 5 s). The Warmth slider still works."
     },
     "watermelon": {
       "v": "keep",
       "owner": "Cut it in half or into slices.",
       "effect": "Cuts into slices that fan out.",
-      "sound": "Juicy chop.",
+      "sound": "No whoosh at the start, only a soft settle; the chops and the fan are unchanged.",
       "improved": "E5: a big knife chops the whole melon five times, right to left, then the six slices fan open on their bottoms like an accordion, showing red flesh, pale rind and black seeds on their cut faces, and fold shut (about 3.6 s)."
     },
     "birthday-cake": {
       "v": "keep",
       "owner": "Pretty much perfect.",
-      "sound": "Party blower and a cheer-like chime."
+      "sound": "Blown out with a breath, then the last line of \"Happy Birthday to You\" on the piano with its chords (no voices); relighting keeps the match."
     },
     "popcorn": {
       "v": "keep",
       "owner": "Basically perfect.",
-      "sound": "Popping."
+      "sound": "Dry kernels popping, each a short papery bang with a little thump (no bubbly rising pops)."
     },
     "jelly": {
       "v": "keep",
       "owner": "Pretty much fine.",
-      "sound": "Wobbly boing."
+      "sound": "A wet, heavy wobble instead of a cartoon boing."
     },
     "pancakes": {
       "v": "keep",
       "owner": "Really neat.",
-      "sound": "Sizzle and a flip."
+      "sound": "A smooth sizzle in the pan, the flip and the soft slap as it lands (no crackling ticks)."
     },
     "cupcake": {
       "v": "keep",
@@ -1175,14 +1175,14 @@
       "v": "keep",
       "owner": "Maybe spins really fast.",
       "effect": "Spins fast and the swirl hypnotises.",
-      "sound": "Whirr.",
+      "sound": "Only the wind as it spins (the rising \"vroom\" hum is gone).",
       "improved": "E5: the swirl whirls up to nearly three turns a second, so the spiral seems to pour inwards, then slows back to its idle turn (about 3 s)."
     },
     "candy-cane": {
       "v": "keep",
       "owner": "Pick something.",
       "effect": "The stripes wind around like a barber pole, then it snaps in two and rejoins.",
-      "sound": "Crisp snap.",
+      "sound": "The sugar strains as it twists (no whistle); the snaps and the mends stay.",
       "improved": "E5: each cane twists (the hook turns and the stripes wind tighter) until it snaps with a crack; the top half springs clear showing the white candy in the break, sugar chips fly, then the halves come back together and mend with a glint (about 2.9 s)."
     },
     "macarons": {
@@ -1197,32 +1197,32 @@
       "interactive": true,
       "owner": "Underwhelming. Press, hold and drag to stretch its arm or body, and let go to spring back with realistic physics.",
       "effect": "Drag to stretch (like the Magnet, with springy release); tap does a jelly jiggle.",
-      "sound": "Rubbery stretch and boing.",
+      "sound": "Only the bounce (the whistle is gone).",
       "improved": "D: drag-to-stretch. With the Orbit tool, a drag that starts on the bear pulls the part you grabbed (up to about a body length) and it springs back with a few wobbles when you let go; a drag beside it still turns the view. A tap still does the jelly jiggle."
     },
     "pretzel": {
       "v": "keep",
       "owner": "Some sort of twisting, like the knots.",
       "effect": "Untwists into a rope and twists back.",
-      "sound": "Doughy stretch.",
+      "sound": "Soft dough squished and pulled, with a wet stretching sound.",
       "improved": "E5 (r3, after the owner's notes): the pretzel twists like a knot, all in one piece: its two sides wring opposite ways and its loops fold a little towards you, and wherever the rope crosses or rests on itself it stays joined; let go, it springs a little past its shape into the opposite twist and wobbles to a stop (about 3.8 s)."
     },
     "croissant": {
       "v": "keep",
       "owner": "Must differ from the real croissant.",
       "effect": "Puffs up in an oven glow (rising), then flakes fly off.",
-      "sound": "Oven ding.",
+      "sound": "The flaky layers shattering softly under the knife, and a smooth butter sizzle (no clicks).",
       "improved": "E5 (r2, after the owner's note): a tap slices it open along its middle: the top lifts and tips back like a lid, showing the soft layered inside, where a pat of butter melts and spreads; then the top settles back down (about 3.3 s). Unlike the real croissant scan, which tears in half."
     },
     "pizza": {
       "v": "keep",
       "owner": "Perfect.",
-      "sound": "Cheese stretch."
+      "sound": "The crust gives and the cheese stretches as the slice pulls away."
     },
     "burger": {
       "v": "keep",
       "owner": "Perfect.",
-      "sound": "Sizzle."
+      "sound": "The patty's smooth sizzle, no clicking."
     },
     "sushi": {
       "v": "keep",
@@ -1235,7 +1235,7 @@
       "v": "keep",
       "owner": "Break in half to show what is inside. Really cool taco.",
       "effect": "Shell cracks in half and the filling spills out, then it reassembles.",
-      "sound": "Crunch.",
+      "sound": "A hard shell cracking open; the filling dropping out is unchanged.",
       "improved": "E5: the shell snaps across the middle with a crunch; the halves pull apart and swing open like a book, showing the filling in each break, and bits spill onto a new plate and bounce; then they hop back in and the halves close (about 3.1 s)."
     },
     "egg": {
@@ -1254,14 +1254,14 @@
       "v": "keep",
       "owner": "A bite taken out of it, or a worm comes out.",
       "effect": "A bite appears (crunch); a second tap, a worm peeks out.",
-      "sound": "Crunch.",
+      "sound": "A crisp bite into an apple (a crunch of tiny fractures and a juicy snap), not a zipper.",
       "improved": "E5: a tap takes a bite: the chunk comes away and vanishes, leaving a scalloped bite of pale flesh (it stays bitten). The next tap brings a little worm out of the bite; it looks about, ducks back in, and the apple grows whole (about 2.9 s)."
     },
     "banana": {
       "v": "keep",
       "owner": "Peel open.",
       "effect": "One banana peels open.",
-      "sound": "Peel.",
+      "sound": "The peel pulled back in soft fibrous strips, for each banana (no tapping or zipper).",
       "improved": "E5 (r2, after the owner's note): the three bananas pull apart off their crown, then each is peeled from its tip, front first: its skin splits into three strips that curl back, each bending in two places, showing the pale fruit; then the strips fold back up and the bunch comes together (about 4.3 s). Fix3 (the owner's note on the middle banana's stem): the crown piece is gone, so each banana ends in the same neck and stalk tip, and nothing is left behind as they pull apart."
     },
     "orange": {
@@ -1289,7 +1289,7 @@
       "v": "keep",
       "owner": "No idea.",
       "effect": "The pair swings and bounces on its stems.",
-      "sound": "Double plink.",
+      "sound": "No string note, only the stems' soft swish; the knocking is unchanged.",
       "improved": "E5: a flick swings the two cherries apart on their own stems; they swing back and knock together (a plink each time), bouncing apart again until they settle, while the joint bobs (about 3.6 s)."
     },
     "grapes": {
@@ -1311,7 +1311,7 @@
       "interactive": true,
       "owner": "Build something random from the blocks.",
       "effect": "Bricks rearrange into a random small build (tower, bridge, animal), different each tap.",
-      "sound": "Brick clicks.",
+      "sound": "A lower plastic clack, for the tap and each brick landing.",
       "improved": "F: eighteen bricks lie poured out round the table. Each tap pops the last model apart and builds a new one in the middle, brick by brick from the bottom up, each clicking into place: a tower, a bridge, stairs, a dog or a tree (never the same twice running; about 5 s)."
     },
     "rubber-duck": {
@@ -1324,12 +1324,12 @@
     "spinning-top": {
       "v": "keep",
       "owner": "Perfect.",
-      "sound": "Whirring hum."
+      "sound": "A quiet, steady whirr that wobbles as it precesses and slowly sinks (no rising hum, no wind)."
     },
     "dice": {
       "v": "keep",
       "owner": "Maybe my favourite; rolls feel random like real dice. Keep it.",
-      "sound": "Dice rattle and clatter."
+      "sound": "Two dice thrown on a wooden table, bouncing with quicker, quieter knocks and settling."
     },
     "newtons-cradle": {
       "v": "keep",
@@ -1342,37 +1342,37 @@
     "teddy-bear": {
       "v": "keep",
       "owner": "Cute; fine.",
-      "sound": "Soft squeak."
+      "sound": "No whistle; only a soft plush rustle as it waves."
     },
     "yo-yo": {
       "v": "keep",
       "owner": "Fine.",
-      "sound": "String zip."
+      "sound": "The string unwinding, the whirr at the bottom and the smack back into the hand."
     },
     "puzzle-cube": {
       "v": "keep",
       "interactive": true,
       "owner": "Only the top row twists (very cool). Move more than the top row; ideally swipe any row or column to solve it; add a shuffle.",
       "effect": "Tap scrambles with several random layer turns. Later: swipe a face to turn that layer, with a solved check.",
-      "sound": "Plastic click per turn.",
+      "sound": "Each turn a plastic slide over the ridges and a soft clack as the layer seats.",
       "improved": "F: a real 3x3 cube of 26 cubies. Swipe across any face to turn that row or column: it follows your finger and snaps to the nearest quarter turn with a click. A tap scrambles it (14 quick turns), or turns a scrambled cube back to solved; solve it by hand and it hops, spins and chimes."
     },
     "spring-toy": {
       "v": "keep",
       "owner": "Basically perfect.",
-      "sound": "Springy slinky boing."
+      "sound": "A metal coil spring's ringing sproing, not a rubber band."
     },
     "kite": {
       "v": "keep",
       "owner": "Underwhelming; develop the animation further.",
       "effect": "A big gust: the kite loops the loop and the tail whips.",
-      "sound": "Wind gust and a fabric flap.",
+      "sound": "The same, with the wind dialed back.",
       "improved": "C2: a big gust loops the kite round while it rises, and the tail whips; the line stays attached (about 3 s)."
     },
     "paper-plane": {
       "v": "keep",
       "owner": "Fine.",
-      "sound": "Paper swish."
+      "sound": "A papery launch and a gentler, quieter glide."
     },
     "origami-crane": {
       "v": "keep",
@@ -1382,37 +1382,37 @@
     "balloon-dog": {
       "v": "keep",
       "owner": "Almost perfect.",
-      "sound": "Balloon squeak and pop."
+      "sound": "A real balloon bursting (no whistle first)."
     },
     "soap-bubbles": {
       "v": "keep",
       "owner": "Perfect.",
-      "sound": "Tiny pops."
+      "sound": "A soft breath blowing them and tiny wet pops (no pitched pops)."
     },
     "robot": {
       "v": "keep",
       "owner": "Perfect.",
-      "sound": "Wind-up ratchet and clockwork."
+      "sound": "A few clicks of the winding key, then clockwork whirring as it unwinds and its tin feet clanking along."
     },
     "lorenz": {
       "v": "keep",
       "owner": "Spin a little more or be more dynamic; looks good when still.",
       "effect": "A glowing point races along the trail, drawing a new path.",
-      "sound": "Chaotic warble.",
+      "sound": "Something epic, a deep hit, a dark slow rush and a wide low chord (no whistling howl).",
       "improved": "C2: a new tap action sends a bright spark racing along the whole path, drawing it again in light that then fades (about 3 s)."
     },
     "mobius": {
       "v": "keep",
       "owner": "Wow, really neat. Maybe twist a little.",
       "effect": "An ant-like dot walks the single side; the band twists.",
-      "sound": "Looping tone.",
+      "sound": "No step tune; each rider has its own sound on the ride: a race car's engine, a rolling beach ball, a bicycle with one soft quack, the ant's tiny feet.",
       "improved": "E3: a tap sends a rider on two laps along the middle of the band: after one lap it is underneath (the band has one side), after two it is back on top where it started, while the band twists a little and untwists (about 5 s). After the owner's review the rider is a choice (the Rider option): a blue race car (the default) with spinning wheels, a rolling beach ball, a duck riding a bicycle (wheels and pedals turning) or the ant."
     },
     "klein-bottle": {
       "v": "keep",
       "owner": "Not sure it has an effect. Maybe water flows through it; it already kind of does, make that dramatic.",
       "effect": "A clear surge of water flows through the neck and round.",
-      "sound": "Glug and flow.",
+      "sound": "Water moving in a bottle, sloshing and glugging (no bubbles or waterfall).",
       "improved": "C2: a new tap action sends a surge of rippling water along the tube and round, and the glass glows (about 4 s)."
     },
     "menger-sponge": {
@@ -1426,21 +1426,21 @@
       "v": "keep",
       "owner": "Possibly the favourite and homepage embed (see the Menger sponge).",
       "effect": "Rotates through the fourth dimension, turning inside out.",
-      "sound": "Phasing synth sweep.",
+      "sound": "No \"vroom\"; a great slow rush as it turns inside out and again as it turns home, over a low chord.",
       "improved": "E3: a tap turns the tesseract once round through the fourth dimension: the pink inner cube swells out to become the outer one while the blue one folds inside, holds a moment, then turns on back to where it started (about 5 s); at rest it rocks gently in 4D."
     },
     "torus-knot": {
       "v": "keep",
       "owner": "Contort a little; looks cool.",
       "effect": "Contorts through different knot shapes.",
-      "sound": "Stretchy twang.",
+      "sound": "It strains as it is pulled and lets go with a real thump and swish (no banjo or guitar notes).",
       "improved": "E3: a tap pulls the knot loose (its lobes stretch out and swirl) and lets go: it springs back past rest into a tight knot and wobbles to a stop like a plucked spring (about 4 s)."
     },
     "gyroid": {
       "v": "keep",
       "owner": "Really neat; needs an effect.",
       "effect": "The surface flows and shifts phase like a breathing sponge.",
-      "sound": "Watery hum.",
+      "sound": "Slow rushes one way and back over a low chord (no rising hum, no bubbles).",
       "improved": "E3: a tap makes the sponge breathe: the surface slides to a shifted level of its own equation, so the orange channels swell as the blue ones narrow, then the other way, and it settles (about 3.8 s)."
     },
     "mandelbulb": {
@@ -1471,14 +1471,14 @@
       "v": "keep",
       "owner": "Toy Ideas page (approved, 2026-09-27): type z = f(x, y), or pick a famous surface.",
       "effect": "The surface rises out of a flat sheet, colored by height, then its parameter plays so it ripples, twists or breathes, and it settles.",
-      "sound": "A low whoosh that rises with the surface.",
+      "sound": "Subtle, a soft low chord swelling as the surface rises (no wave, no \"vroom\").",
       "improved": "Math: new toy. A tap lays the surface flat, then it rises out of the sheet colored by height, overshoots a little, and its parameter a plays so it ripples, twists or breathes before settling (5 s). 16 famous surfaces (sombrero, saddle, monkey saddle, egg crate, Rosenbrock's banana valley and more), or your own z = … typed in the Toy tab."
     },
     "unit-circle": {
       "v": "keep",
       "owner": "Toy Ideas page (approved, 2026-09-27).",
       "effect": "A point runs round the unit circle while its shadows unroll as a sine wave and a cosine wave on two walls, and Euler's formula lights up term by term.",
-      "sound": "Two pure tones a quarter turn apart, swelling and fading with the waves.",
+      "sound": "Warmer, a soft low chord that swells with the turn and a gentle rush a quarter turn later (one option to try).",
       "improved": "Math: new toy. A tap sends the point once round the circle; dotted guides carry its height to the sine wave on the right wall and its left-right place down to the cosine wave on the lower wall, both drawn afresh, while e^(iθ) = cos θ + i sin θ lights up term by term in the waves' colors (5 s). After the owner's review (a 3D version, and your own equation or parameters): a View option adds a 3D helix (the point runs back along e^(iθ) while its shadows draw the cosine wave on the floor and the sine wave on a side wall); a Path option picks the circle, an ellipse, a figure eight, a cardioid, a rose or your own typed path (x = …, y = … or r = …); and a Turns option runs it one to three times."
     },
     "fourier-circles": {
@@ -1499,7 +1499,7 @@
       "v": "keep",
       "owner": "The owner's notes and the Pages into Splats plan (accepted September 28, 2026): people type their own Gaussian splat equations and play with them, with a Tinkerer's Manual that explains the language.",
       "effect": "One cycle of time t plays, so the shape moves in real time: a torus rolls, a sphere ripples, a galaxy turns.",
-      "sound": "A soft rising tone as t plays.",
+      "sound": "A soft low chord that swells as t plays (no rising sweep).",
       "improved": "Manual: new toy (labs). You type where every splat goes and what color it is, as equations in u, v and t (x, y and z, the ranges of u and v, hue or r, g and b, size, count and spread), read by lane Math's safe reader. Eight programs to start from: sphere, torus, Möbius strip, seashell, trefoil knot, wave, spiral galaxy and Klein bottle. A tap plays t from 0 to 2π (4 s) through twelve copies, each morphing into the next; a program without t draws its splats again in order. Lab r2 (the owner's review of September 29, 2026: \"really, really grainy\"): every splat at full opacity and its exact size, the sharp kernel, and a Splats choice: Solid (default; a surface's splats lie flat along it, a curve's are drawn out along it) or Dots (each programmed splat its own dot)."
     },
     "seashell-spiral": {
@@ -1518,23 +1518,23 @@
       "v": "keep",
       "owner": "Only bounces; find a better effect.",
       "effect": "Blocks an invisible hit: it jolts, sparks and the emblem gleams.",
-      "sound": "A clang, crackling sparks and a shimmer.",
+      "sound": "The clang and the gleam's shimmer, no crackling clicks.",
       "improved": "E6: it blocks an unseen blow near its top corner: it jolts back and rocks, sparks spray off the iron rim and burn out, a flash marks the spot, and a gleam of light sweeps across the emblem (about 2 s)."
     },
     "bow-and-target": {
       "v": "keep",
       "owner": "Unbelievably impressive.",
-      "sound": "Twang and thunk."
+      "sound": "A real bowstring's thump and the arrow's hiss, not a guitar-like note; the hit is unchanged."
     },
     "trebuchet": {
       "v": "keep",
       "owner": "Fine.",
-      "sound": "Creak and a whoosh."
+      "sound": "The timber beam creaks and strains, then a softer swing (much less wind)."
     },
     "crossbow": {
       "v": "keep",
       "owner": "Solid.",
-      "sound": "Click-thwack."
+      "sound": "No click; the string's real thump, then the bolt hitting as before."
     },
     "knights-helmet": {
       "v": "keep",
@@ -1545,7 +1545,7 @@
       "v": "keep",
       "owner": "Needs an effect.",
       "effect": "Jewels light up in turn and it rises with a glow.",
-      "sound": "A royal fanfare and a ping for each jewel.",
+      "sound": "The fanfare on a natural trumpet (a lip scoop, breath and late vibrato) instead of synthetic brass; the jewels' pings stay.",
       "improved": "E6: the crown lifts and hovers; its eight jewels light up one after another round the band, each flashing white, golden motes drift up round it, then the jewels go out in turn and it settles (about 4 s)."
     },
     "dragon-egg": {
@@ -1557,14 +1557,14 @@
       "v": "keep",
       "owner": "Looks really good; develop it further to be more impressive.",
       "effect": "A bigger spell: runes orbit, light bursts and sparks spiral out.",
-      "sound": "Magic whoosh and sparkle.",
+      "sound": "A deep, slow hum of power swelling in the glass (no wind or twinkles).",
       "improved": "C2: a bigger spell: a flash fills the glass, the swirl spins up, sparks spiral out in five arms and a ring of runes rises and circles the orb (about 3 s)."
     },
     "jellyfish": {
       "v": "keep",
       "owner": "Not sure what the effect does; make it more apparent.",
       "effect": "A strong pulse that jets it upward, trailing glowing tentacles.",
-      "sound": "Soft watery whoomp.",
+      "sound": "Two soft pushes of water as the bell pulses, with a low bloop.",
       "improved": "C2: one strong stroke squeezes the bell and jets it up about a third of its size, trailing glowing tentacles, then it drifts down (about 3 s)."
     },
     "fish-school": {
@@ -1596,26 +1596,26 @@
     "ladybug": {
       "v": "keep",
       "owner": "Perfect.",
-      "sound": "Tiny wing buzz."
+      "sound": "A beetle's real wingbeat that wanders in pitch and loudness, and a light landing."
     },
     "snail": {
       "v": "keep",
       "owner": "Perfect, but it disappears too much when hiding; make it more elegant.",
       "effect": "Keep hiding in the shell, but keep the shell clearly visible and ease in more gently.",
-      "sound": "Slurpy slide.",
+      "sound": "Wetter and slimier, a squish with a sticky stretch.",
       "improved": "C2: it hides more gently (2.4 s): eye stalks first, then the head glides under the shell and the foot slides in; the shell stays in view and rocks once. Math (owner: it \"looks weird while and after retracting\"): like a real snail, the eye stalks roll in first (each shortens from its tip into the head), then the head, neck and whole foot, front and tail, are drawn in through the shell's opening as solid pieces the shell hides, and the shell settles on the ground with nothing soft showing (3.2 s). Coming out, the foot slides out first, then the head, then the stalks unroll."
     },
     "octopus": {
       "v": "keep",
       "owner": "Underwhelming; the ink should be much bigger and more dramatic.",
       "effect": "A big ink cloud billows out while it jets away and back.",
-      "sound": "Squirt and whoosh.",
+      "sound": "A squirt, then the ink bubbling out as a liquid (no wind).",
       "improved": "C2: a big billowing ink cloud grows behind it while it jets up and away with its arms streaming, then drifts back as the ink thins (about 4.5 s)."
     },
     "starfish": {
       "v": "keep",
       "owner": "Fine.",
-      "sound": "Wet suction pop."
+      "sound": "The pop is kept, and each arm makes a soft wet lift as it rises and a soft pat as it settles, one after another."
     },
     "sea-urchin": {
       "v": "keep",
@@ -1628,7 +1628,7 @@
       "v": "keep",
       "owner": "Mouth opens and the tongue shoots out.",
       "effect": "Tongue shoots out to catch a fly.",
-      "sound": "A fly's buzz, a flick, a gulp and two croaks.",
+      "sound": "A real fly's wandering buzz, and real croaks after it eats the fly.",
       "improved": "E6: a fly buzzes in and hovers; the frog's jaw drops, its tongue shoots out, catches the fly and snaps back; the jaw shuts, its eyes sink to push the fly down (frogs swallow with their eyes), and it croaks twice with its throat sac (about 3.5 s)."
     },
     "penguin": {
@@ -1639,7 +1639,7 @@
     "owl": {
       "v": "keep",
       "owner": "Basically perfect.",
-      "sound": "Hoo-hoo."
+      "sound": "A great horned owl's call, \"hoo, h-hoo, hooo, hoo\", low and breathy."
     },
     "jack-o-lantern": {
       "v": "keep",
@@ -1657,7 +1657,7 @@
       "v": "keep",
       "owner": "Outstanding. Make each launch different (like the dice), and the burst match the colour of the cannon that fires it.",
       "effect": "Random shell types each tap; burst colour matches its tube.",
-      "sound": "Launch whistle and a boom.",
+      "sound": "A real firework, the launch's thump and rush (no whistle), a deep boom and the stars' soft crackle.",
       "improved": "C2: each tap fires a different tube and shell type (peony, ring, willow or star); the rocket rises from its tube and the burst takes that tube's colour."
     },
     "decorated-tree": {
@@ -1665,7 +1665,7 @@
       "fixed": "C1: a faceted gold star facing the viewer, with only a faint glow.",
       "owner": "Lights only show very briefly; make it more dramatic.",
       "effect": "Lights come on and chase in patterns and stay on; the star glows.",
-      "sound": "Sleigh-bell jingle.",
+      "sound": "The lights come on to the start of \"Jingle Bells\" on the piano (no clicking); off, the branches' soft rustle.",
       "improved": "C2: a tap switches the lights on in a sweep up the tree, and they stay on, cycling chase, ripple and steady patterns; the star gets a warm halo. A second tap turns them off."
     },
     "patterned-egg": {
@@ -1689,7 +1689,7 @@
     "menorah": {
       "v": "keep",
       "owner": "Pretty much perfect.",
-      "sound": "Match strike and a bell."
+      "sound": "A match struck, then each wick catching with a soft flame as it lights, one by one; going out, a small puff as each flame goes out in turn (no big gust)."
     },
     "guitar": {
       "v": "keep",
@@ -1749,12 +1749,12 @@
     "rocket": {
       "v": "keep",
       "owner": "Basically perfect.",
-      "sound": "Launch roar."
+      "sound": "The flickering roar of the exhaust over a deep rumble."
     },
     "helicopter": {
       "v": "keep",
       "owner": "Basically perfect.",
-      "sound": "Rotor chop."
+      "sound": "The heavy whump of real rotor blades over the turbine's hush."
     },
     "hot-air-balloon": {
       "v": "keep",
@@ -1766,7 +1766,7 @@
     "steam-train": {
       "v": "keep",
       "owner": "Basically perfect.",
-      "sound": "Whistle and chuff."
+      "sound": "A short steam whistle, then it chugs along with strong and soft chuffs over the wheels' rumble."
     },
     "ocean-liner": {
       "v": "keep",
@@ -1777,7 +1777,7 @@
       "v": "keep",
       "fixed": "C1: the home camera comes closer.",
       "owner": "Looks really good.",
-      "sound": "Engine rev."
+      "sound": "A real engine's growl, revved twice."
     },
     "bus": {
       "v": "keep",
@@ -1789,13 +1789,13 @@
     "propeller-plane": {
       "v": "keep",
       "owner": "Unbelievable; perfect.",
-      "sound": "Prop engine buzz."
+      "sound": "A real piston engine with the propeller's beat."
     },
     "jet": {
       "v": "keep",
       "owner": "Very solid; bank more to one side or the other.",
       "effect": "Climbs and banks hard left then right.",
-      "sound": "Jet roar.",
+      "sound": "No whistle; a softer, natural rush of the engines.",
       "improved": "C2: it climbs nose up while banking hard left, then hard right (about 50 degrees each way, 3.5 s)."
     },
     "sailboat": {
@@ -1823,25 +1823,25 @@
       "v": "keep",
       "fixed": "C1: a light wisp of exhaust; the cab glass is clear instead of static.",
       "owner": "Perfect.",
-      "sound": "Diesel putter."
+      "sound": "A slow diesel's putt-putt with its clatter."
     },
     "ufo": {
       "v": "keep",
       "owner": "Maybe my favourite; really cool.",
-      "sound": "Theremin warble."
+      "sound": "A deep pulsing hum and a heavy rush as it lifts (no whistling theremin)."
     },
     "eiffel-tower": {
       "v": "keep",
       "owner": "Fireworks burst around it.",
       "effect": "Sparkling lights run up the tower and fireworks burst around it.",
-      "sound": "Sparkle, and a boom for each burst.",
+      "sound": "Real fireworks, four bursts with booms and soft crackle (no twinkling).",
       "improved": "E6: a tap starts the night show: the ironwork lights up gold, a sparkle of white lights climbs the tower, and four fireworks burst round it one after another (blue, white, red and gold), each opening fast, drooping and burning out; then the lights go down (about 4 s)."
     },
     "washington-monument": {
       "v": "keep",
       "owner": "Something cool and not disrespectful.",
       "effect": "The reflecting pool shimmers and the flags wave.",
-      "sound": "A day's breeze and a soft chime at noon.",
+      "sound": "Only the soft chime at noon (no wind).",
       "improved": "E6: a day in a few seconds, like a sundial: the sun rises behind the monument, arcs over and sets, the obelisk's shadow swings round the lawn in front, and the flags ripple in the breeze (about 4.5 s). There is no reflecting pool in the model, so the shadow replaced the pool's shimmer."
     },
     "pyramids": {
@@ -1868,14 +1868,14 @@
       "fixed": "C1: the crown's seven rays rise higher and taper to sharp, lit points.",
       "owner": "Everything else looks fine. Make the effect a good one.",
       "effect": "The torch flame flares bright and sparkles drift from it.",
-      "sound": "Flame whoosh, crackling sparks and a harbour bell.",
+      "sound": "The whoosh and the bell, no crackling clicks.",
       "improved": "E6: the torch flares: the flame leaps to twice its size in a halo of light, a warm glow spreads down the statue, and a plume of golden sparks drifts up and away on the breeze and burns out (about 4 s)."
     },
     "white-house": {
       "v": "keep",
       "owner": "Nothing destructive or disrespectful.",
       "effect": "The fountain on the lawn sprays higher and the flag raises.",
-      "sound": "Fountain splash and patter.",
+      "sound": "The spray's splash and a soft, steady rush of water falling back (no patter of clicks).",
       "improved": "E6: the fountain on the south lawn shoots up a tall jet that falls back as spray, the lights come on in the windows one by one and the flag ripples; then the jet sinks and the lights go out one by one (about 4.5 s). The flag stays at the top of its pole, so it never looks like half-mast."
     },
     "leaning-tower": {
@@ -1889,7 +1889,7 @@
       "v": "keep",
       "owner": "Gladiators fighting inside?",
       "effect": "Non-violent: a tiny chariot race loops the arena while the crowd cheers (no fighting, per the no-gore rule).",
-      "sound": "Crowd cheers over drumming hooves.",
+      "sound": "A real crowd in the stands and horses' hooves trotting.",
       "improved": "E6: a chariot race (no fighting): a crowd fills the seats, and four chariots in the team colours (red, white, blue and green) race a lap and a quarter of the arena in two lanes, swapping the lead, while the crowd jumps and cheers; then they fade away (about 5 s)."
     },
     "parthenon": {
@@ -1959,7 +1959,7 @@
       "v": "keep",
       "owner": "Approved on the Toy Ideas page (lane AI).",
       "effect": "A forward pass: a wave of light runs left to right through three layers, each neuron glowing as bright as its activation; then a red backprop pulse runs right to left and the weights shift a little (4.5 s).",
-      "sound": "A rising arpeggio going forward, a falling one coming back.",
+      "sound": "More intense, an electric surge as each layer lights over a dark chord, a deep hit at the answer and crackling current as the pulses run back.",
       "improved": "AI: a 3-4-2 network with a real forward pass: yellow pulses run layer by layer and each neuron glows as bright as it fires; red pulses run back and the wires thicken or thin a little, easing back at the end (4.5 s). Owner's review: a View option adds a 3D model built like a molecule (third review): solid neuron balls in rings, weights as bonds, floating with no stand; a gold shell grows round each neuron as it fires. Its size is set by options: 2 to 4 inputs, 1 to 3 hidden layers of 2 to 5 neurons, 1 to 3 outputs (at most 14 neurons); networks with more than 24 wires send waves of light along the wires."
     },
     "cnn": {
@@ -1973,14 +1973,14 @@
       "v": "keep",
       "owner": "Approved on the Toy Ideas page (lane AI).",
       "effect": "Word blocks feed in one at a time; the hidden state, a glowing orb, loops back through the cell after each one and changes color as it carries what came before. An LSTM style (an option) shows its three gates opening and closing like shutters (4.5 s).",
-      "sound": "A pulse for each word, the loop humming higher as the memory builds.",
+      "sound": "A soft pulse of current as each word goes in and the loop's chord growing a note each time (no rising hum).",
       "improved": "AI: THE, CAT and SAT rise into the cell one at a time; the orb (the hidden state) takes on each word's color mixed with what it carried and runs round the loop. The LSTM style adds forget, input and output gates whose slats turn like shutters (4.5 s). Owner's review: a View option adds a 3D model (a cell with lit edges, the loop arching over it on a slant)."
     },
     "transformer": {
       "v": "keep",
       "owner": "Approved on the Toy Ideas page (lane AI).",
       "effect": "A row of token tiles; arcs of light jump between them, thicker where attention is stronger and a different color for each head; the tiles rise through a feed-forward block and up the stack of layers, and a new token tile appears at the end of the row (5 s).",
-      "sound": "A shimmering chord for each layer, a pop for the new token.",
+      "sound": "The first two sounds are warm swells of current instead of electronic shimmers; the last two are unchanged.",
       "improved": "AI: two heads of attention arcs (cyan and magenta, thicker where stronger) draw between THE CAT SAT ON at each of two layers; the tiles rise through the feed-forward blocks, and MAT drops into the end of the row (5 s). A View option adds a 3D model (word blocks, box-outline blocks, arcs upright and leaning back). A Diagram option adds the classic encoder-decoder layout (from the 2017 paper's figure, with generic labels): a packet rises up the encoder, each box lighting as it passes, crosses into the decoder's middle attention, the decoder's packet meets it and goes on through the linear layer and softmax, and the next word comes out of the top; both diagrams have a 3D model. After the third review the classic diagram is spread out, each box carries an icon instead of its name, and the key is the toy's note in the panel (off the toy). Round 4: the 3D models' labels are about twice as big and bright."
     },
     "looped-transformer": {
@@ -1994,21 +1994,21 @@
       "v": "keep",
       "owner": "Approved on the Toy Ideas page (lane AI).",
       "effect": "A cloud of random specks clears step by step into a crisp small toy (a rubber duck) while a step counter runs down from 50 to 0; then the noise washes back over it (5 s).",
-      "sound": "A white-noise hiss that settles into a clean chord.",
+      "sound": "A soft dark swell as the noise clears (no sandy hiss) and a chord rolled on the piano as the duck appears.",
       "improved": "AI: a cloud of specks clears in ten steps into a rubber duck while the STEP counter runs from 50 to 0; then the noise washes back (5 s). Owner's review: a View option adds a 3D model (a round cloud clears into a duck over a stand)."
     },
     "gradient-descent": {
       "v": "keep",
       "owner": "Approved on the Toy Ideas page (lane AI).",
       "effect": "A ball rolls down a hilly loss landscape, overshoots and settles into a valley. A \"Learning rate\" option makes it creep, or bounce right out of the valley when it's too high (4.5 s).",
-      "sound": "A rolling tone that falls in pitch as the loss drops.",
+      "sound": "A soft tap as the ball lands each of its 21 hops down, in sync, and one as it lands home (the falling tone and whoosh are gone).",
       "improved": "AI: the ball takes 21 hops of gradient descent with momentum, leaving a trail of dots; just right, it overshoots and settles in the valley; too low, it creeps; too high, it bounces wall to wall (4.5 s)."
     },
     "gaussian-splatting": {
       "v": "keep",
       "owner": "From the owner's notes of September 28, 2026 (lane Screens; labs only).",
       "effect": "Training: a cloud of random splats slides, stretches and recolors, step by step, into a photo (a real fit of 2D Gaussians by gradient descent), while the loss falls on a chart (7 s). Other views: one splat with its axes, many splats shrinking to dots, and the back-to-front sort.",
-      "sound": "A soft rising chime as the picture forms.",
+      "sound": "A warm swell as the picture forms and a soft piano chord when it is there (no rising shimmer or chimes).",
       "improved": "Screens: 2,400 splats fitted to a CC0 strawberry photo in a worker, shown through 13 keyframes as each splat slides to its next place; views One splat (sizes, opacity and color sliders, a Turn control), Many splats (a duck shrinks to dots and back) and Sorting (splats appear far to near from a camera)."
     },
     "word-vectors": {
@@ -2029,7 +2029,7 @@
       "v": "keep",
       "owner": "Approved on the Toy Ideas page (lane AI).",
       "effect": "Two input switches flip; light flows along the wires through an XOR gate and an AND gate, whose shapes glow as they fire, and the sum and carry lamps show 1 + 1 = 10 in binary (3.5 s).",
-      "sound": "Switch clicks, and a buzz through each gate.",
+      "sound": "The buzz near the end is gone; the rest is unchanged.",
       "improved": "AI: both switches flip to 1, light fills the wires into the XOR and AND gates; the XOR flashes and gives 0, the AND lights the carry lamp, and 1+1=10 shows (3.5 s)."
     },
     "turing-machine": {
@@ -2043,7 +2043,7 @@
       "v": "keep",
       "owner": "Approved on the Toy Ideas page (lane Machines A).",
       "effect": "Babbage's engine: columns of numbered wheels and a crank. Each turn adds every column into its neighbor, the wheels click round, carries ripple up with levers, and the value column shows the next value of your polynomial (about 4 s per turn).",
-      "sound": "The ratchet of the crank, a brass click for each wheel step, a sharper snap for each carry, and a small bell when a new result is ready.",
+      "sound": "The crank catch is a brass clunk (not an electronic click); its running sounds are unchanged.",
       "improved": "Machines A: X, P(X), Δ1, Δ2 and Δ3 columns of figure wheels (each a solid wheel read through a window), two-phase addition staggered as in Babbage's design, carry levers that set and knock back, the crank and a bell; each tap queues one more turn (4 s); your own polynomial up to x³ and start value in the Toy tab."
     },
     "enigma-machine": {
@@ -2064,13 +2064,13 @@
       "v": "new",
       "owner": "The Pictures engine lane's test toy (labs only), from the owner's notes of September 27 and 28, 2026.",
       "effect": "A flat sheet showing what you open: a tap on the right of the page turns to the next page of a PDF, on the left goes back (the pages slide, they don't flip), or a tap plays and pauses a video.",
-      "sound": "A soft paper swish and a light tap."
+      "sound": "A real paper page turning."
     },
     "your-book": {
       "v": "keep",
       "owner": "Lane Books, from the owner's notes of September 27 and 28, 2026 (Pages into Splats).",
       "effect": "Open a PDF of any length and turn its pages: each page turns over its spine as a solid sheet, curling as it goes, with the next page on its back. Five styles: hardcover, paperback, magazine, stapled paper and spiral notebook.",
-      "sound": "A paper swish and flutter, and a soft thud as the page lands.",
+      "sound": "The swish is a real paper page turning; the landing thud is unchanged.",
       "improved": "Books: a tap opens the cover, then turns each leaf over (about 1 s), the page curling as it goes with the next page on its back; at the end a tap closes the book. Previous and Next in the Toy tab turn back and forth. The page shape follows the PDF, and only the pages reached are built. Books r3: a tap on the right page turns forward and on the left goes back (stapled paper: the top quarter of the page goes back); a page can be pulled over by hand, turning if let go past halfway or flicked and falling back otherwise; the turn lifts at once, the page curling as it goes, with no bend before it moves.",
       "fixed": "Books r2 (the owner's note of September 29, 2026: the book, not the pages, a little blurry or grainy around the edges): the covers, spine, bands and page blocks have clean, sharp edges (faces stop short of their edges, with finer splats and a line of thin splats along each), full density and smooth cloth colors; the spiral's wire and the staples are thin splats along the wire."
     },
@@ -2078,7 +2078,7 @@
       "v": "keep",
       "owner": "Lane Books, from the owner's notes of September 27 and 28, 2026 (Pages into Splats).",
       "effect": "Open a set of photos and turn through them on thick album pages, each photo held by four photo corners, one or two to a page as fits their shapes, with the file names as captions.",
-      "sound": "A lower card swish and a firm thud.",
+      "sound": "A thick card page turning; the thud is unchanged.",
       "improved": "Books: a tap opens the leather, linen or scrapbook cover, then turns the thick pages (about 1 s each), the photos mounted in photo corners with their file names beneath; at the end a tap closes the album. Books r3: taps by where they land, as the book; a page pulled by hand lags the finger a little, falls back more readily and settles slowly, like a heavy card page.",
       "fixed": "Books r2 (the owner's note of September 29, 2026: a little blurry or grainy around the edges): the covers and card pages have clean, sharp edges and full density; the leather's stitches and groove are thin splats in front of the cover, the scrapbook's label its own card, and the leather and linen smooth."
     },
@@ -2099,7 +2099,7 @@
       "v": "new",
       "owner": "Approved on the Splashery Universe page (lane Studio Sound), September 29, 2026.",
       "effect": "A song's real spectrogram as a landscape of splats; a tap plays the song while a glowing marker and the camera glide along it. View: Live scrolls the landscape with the music like a waterfall: the part playing now sits on a fixed line at the front, the next seconds come toward you, what has played fades away, and a row of caps rises with the loudness at the line.",
-      "sound": "The song itself."
+      "sound": "A soft swell as it starts (no plucked jingle); the song itself is unchanged."
     },
     "anatomy-atlas": {
       "v": "keep",
@@ -2112,14 +2112,14 @@
       "v": "keep",
       "owner": "Approved on the Splashery Universe page (lane Studio Models), September 29, 2026.",
       "effect": "A 3D model file (glTF, OBJ or STL) turned into splats on the device; the tap lifts every splat off the surface into a loose cloud and lets each settle back into its own place in about 3 s. Show: Wireframe draws the mesh's edges as thin splats.",
-      "sound": "A rising whoosh as the splats lift off, then four falling plucked notes as they settle back.",
+      "sound": "The splats lift off with a soft rush and settle back as a light patter (no rising zap or notes).",
       "improved": "Studio Models: a converter that samples the surface by area (more splats where it bends or is finely made), lays flat splats on it sized to their neighbors, colors them from the texture, vertex colors or material, and keeps hard edges hard; two CC0 samples (Kenney's burger, Poly Haven's vase)."
     },
     "photo-3d": {
       "v": "keep",
       "owner": "Approved on the Splashery Universe page (\"photo yes\", September 29, 2026; lane Photo to 3D; labs only).",
       "effect": "Your photo rebuilt as splats in 3D by an on-device depth model: each splat takes the photo's color at its place and sits at its depth, and the surface is cut where the depth jumps, so a near object stands as its own layer. The picture starts flat; the tap raises its depth layer by layer while the toy sways (about 3 s), and a second tap lays it flat. Depth sets how deep the relief is; Layers pulls the depth bands apart.",
-      "sound": "A soft whoosh that rises as the depth comes up, with two glassy notes; a falling whoosh as it lies flat.",
+      "sound": "A soft rush and a low chord as the depth comes up, a rush as it lies flat (no loud rising whoosh or chimes).",
       "improved": "Photo to 3D: Depth Anything V2 Small (Apache-2.0, quantized, 27 MB) on ONNX Runtime Web (MIT), both loaded only when a photo is opened; an even grid of splats sized to their neighbors on the same surface, cut at depth jumps; three CC0 samples (a forest path, a cobbled street, a still life)."
     },
     "screen": {
@@ -2133,7 +2133,7 @@
       "v": "keep",
       "owner": "From the owner's approved ideas on the Toy Ideas page (lane Real objects, September 29, 2026): \"This should be a real life splat if you can find it. I do not want this to be a cartoon or an illustration.\"",
       "effect": "The cap (cut out of the scan as a solid piece) slides off and clicks onto the end, and the nib writes a swirl in wet blue ink that glistens, then dries darker; the cap goes back on (4 s).",
-      "sound": "A cap click, a smooth nib scratch, another click.",
+      "sound": "The cap clicks are small physical snaps (not electronic blips); the nib scratch is unchanged.",
       "improved": "Real objects: a detailed CC BY model of a green fountain pen (maker's marks painted out) on a kit-built notepad. The cap slides off and posts on the back end, the pen tilts and writes a looping swirl in bright wet ink that dries to dark navy from its start, the cap goes back on and the ink runs back into the nib (4 s). Round 2: denser, sharper model."
     },
     "water-bottle": {
@@ -2147,42 +2147,42 @@
       "v": "keep",
       "owner": "From the owner's approved ideas on the Toy Ideas page (lane Real objects, September 29, 2026): \"This should be a real life splat if you can find it. I do not want this to be a cartoon or an illustration.\"",
       "effect": "It shakes in place, then the ring pull (a kit-built piece matched to the scan) levers up with a crack, and a jet of foam and bubbles sprays up and spatters down around it; the tab folds back and the foam fades (3.5 s).",
-      "sound": "A rattle, the sharp pssht of the can opening, then a fizz that dies away.",
+      "sound": "The soda sloshes as it is shaken (no rattle); the pssht and the fizz are unchanged.",
       "improved": "Real objects: a detailed CC BY model of a can with an original plain orange label (no brand) on a kit-built cork coaster. It shakes, its own ring pull (cut from the model as a solid piece) levers up, the opening shows, a continuous jet of cream foam streaked with amber shoots up and falls back while fine drops spatter onto the lid and the coaster and soak away, then the tab folds back (3.5 s). Round 2: denser model, a foamy jet instead of clumps."
     },
     "running-shoe": {
       "v": "keep",
       "owner": "From the owner's approved ideas on the Toy Ideas page (lane Real objects, September 29, 2026): \"This should be a real life splat if you can find it. I do not want this to be a cartoon or an illustration.\"",
       "effect": "Its laces (kit-built jointed cords over the scan's own laces) come undone, cross back through the eyelets and tie themselves into a bow, and the shoe taps its toe twice (4 s).",
-      "sound": "Laces zipping through the eyelets, a soft tug, two toe taps.",
+      "sound": "The laces slide through with a soft rustle (not a zipper); the tug and toe taps are unchanged.",
       "improved": "Real objects: a CC BY photogrammetry scan of a trail running shoe, its own bow swapped for two kit-built laces of 22 joints each. The bow comes undone and the laces flop loose, lift and cross over the tongue, tie back into a bow, and the shoe taps its toe twice (4 s). Round 2: denser scan, thinner braided laces."
     },
     "hoodie": {
       "v": "keep",
       "owner": "From the owner's approved ideas on the Toy Ideas page (lane Real objects, September 29, 2026): \"This should be a real life splat if you can find it. I do not want this to be a cartoon or an illustration.\"",
       "effect": "The hood (cut out of the scan as a solid piece) flips up and its drawstrings swing, then the sleeves (cut at the shoulders) swing in and cross, and it all settles back (4.5 s).",
-      "sound": "Soft fabric swishes and a zip-like flick.",
+      "sound": "The flick is a fabric rustle (not a zipper); the swishes are unchanged.",
       "improved": "Real objects: a detailed CC BY model of a yellow hoodie, cut along its own seams (the hood's panels) and by a hard plane at each shoulder. The hood flops forward on a hinge across the neck and flips back up as the kit-built drawstrings swing; the sleeves swing up and cross in front of the chest, clear of the body, with fabric filling the shoulders, then swing back down and settle (4.5 s). Round 2: attached hood and shoulders, sleeves clear of the body."
     },
     "sunglasses": {
       "v": "keep",
       "owner": "From the owner's approved ideas on the Toy Ideas page (lane Real objects, September 29, 2026): \"This should be a real life splat if you can find it. I do not want this to be a cartoon or an illustration.\"",
       "effect": "The arms fold in on their hinges one after the other, the glasses flip to face you and the lenses darken from clear to deep gray like light-changing lenses; then they unfold (3.5 s).",
-      "sound": "Two hinge clicks and a soft shimmer as the lenses darken.",
+      "sound": "The hinges are small physical snaps and the lenses darken silently (no electronic clicks or shimmer).",
       "improved": "Real objects: Poly Haven's CC0 round spectacles with kit-built lenses. The arms fold in one after the other, both behind the lenses and the second behind the first, the glasses turn head over heels to face you, the lenses darken from the rim inward to deep gray, then clear as the arms unfold (3.5 s). Round 2: denser model, arms kept behind the lenses."
     },
     "baseball-cap": {
       "v": "keep",
       "owner": "From the owner's approved ideas on the Toy Ideas page (lane Real objects, September 29, 2026): \"This should be a real life splat if you can find it. I do not want this to be a cartoon or an illustration.\"",
       "effect": "It flips up off its stand, spins flat like a flying disc and lands brim backward; then a second flip turns it round the right way (3 s).",
-      "sound": "A flick, a whoosh, a soft landing.",
+      "sound": "The second flip is a fabric rustle (no buzzy flutter); the rest is unchanged.",
       "improved": "Real objects: a detailed CC BY model of a gray six-panel cap on a kit-built walnut stand. It flips up off the stand, spins flat three and a half turns round a small loop like a flying disc, lands brim backward, then hops and turns round the right way (3 s). Round 2: denser, sharper model."
     },
     "splat-field": {
       "v": "keep",
       "owner": "The owner's note \"big new Splashery ideas\" and his answer of September 29, 2026 (lane Lab; labs only): splat fields on the GPU.",
       "effect": "Nearly 300,000 splats placed and colored by a program on the GPU every frame: a spiral galaxy, an ocean or a knotted flow. A tap sends a bright ring out through the galaxy, drops a stone in the sea, or pushes the flow once more around the knot (3 s).",
-      "sound": "A soft rising swell.",
+      "sound": "A soft steady chord swelling as the pulse runs out (no rising pitch).",
       "improved": "Lab: new test toy on the new Lab shelf (labs). Each splat stores only its (u, v); the toy's work-buffer program (a recipe's gpuField, an additive engine hook) computes its place, tilt and color from them and the time. Three fields: a galaxy whose stars orbit on turning ellipses (a density wave keeps two arms), an ocean of four Gerstner waves, a flow along a (2, 3) torus knot. Lab r2: a tap on the toy now fires the pulse on every field (the galaxy's faint stars were under the pick pass's alpha clip; the recipe's pickAlpha lowers it)."
     },
     "fluid-lab": {
