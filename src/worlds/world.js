@@ -252,7 +252,7 @@ export class World {
           x: l.at[0],
           z: l.at[1],
           y,
-          size: 6, // readable from farther than its height says
+          size: 14, // letters stay whole: full detail to about 80 m
           radius: sign.width / 2,
           counts: levels.map((c) => c.splatCount),
           entities: [],
