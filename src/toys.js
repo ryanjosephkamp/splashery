@@ -3419,6 +3419,17 @@ export const TOYS = [
     tags: "galaxy simulation fire gizmo sph gas particles temperature dwarf cosmology astrophysics hot cold disk science",
     camera: { yaw: 0.3, pitch: 1.0, roll: 0, distance: 3.0 },
   },
+  // ---- Pack: fluid-lab (lane Fluids) ----
+  {
+    id: "fluid-lab",
+    label: "Fluid lab",
+    category: "lab",
+    kind: "kit",
+    pack: "fluid-lab",
+    labs: true,
+    tags: "fluid liquid water soda honey lava pour glass splash drops viscosity smoke steam candle flame fire physics simulation lab",
+    camera: { yaw: 0.45, pitch: 0.28, roll: 0, distance: 2.9 },
+  },
   // ---- Pack: screens ----
   {
     id: "screen",

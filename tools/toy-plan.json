@@ -2205,6 +2205,13 @@
       "effect": "The gas of the FIRE-2 Milky Way–mass galaxy m12i today, each particle a Gaussian of about half its smoothing length, colored by temperature and brighter where denser, in a box with a dark floor. The tap zooms about 8 times into the gas you tap (2.2 s); a second tap zooms out. Only the cold gas peels the hot gas away.",
       "sound": "A falling hiss over a low hum; a rising one coming back.",
       "improved": "Science: tools/sci-galaxy.mjs (jsfive) cuts 300,000 of the 2.4 million gas particles in a 40 × 12 × 40 kpc box round the galaxy from the CC BY 4.0 snapshot (FlatHUB), turns the disk face up and works out each temperature; the toy draws them approximately (not a column-density integral)."
+    },
+    "fluid-lab": {
+      "v": "keep",
+      "owner": "The owner's notes on the water bottle and soda can of September 29, 2026 (\"a realistic fluid splat simulator\"; lane Fluids; labs only).",
+      "effect": "A sandbox for the fluid engine: a nozzle pours water, soda, honey or lava into a glass (the third tap empties it first), a ball of liquid splashes into a bowl, a candle is blown out and lights again, or a breath bends a hot cup's steam (about 3 to 5 s).",
+      "sound": "The pour's splash and glug (soda fizzes; honey and lava a thick gloop), a splash, a breath on the candle and the cup.",
+      "improved": "Fluids: new sandbox on the Lab shelf (labs). Liquids are position-based fluids with a viscosity from water to lava, drawn as stretched, lit surface splats; smoke and steam rise in a curl field; flames cool through a real color ramp with sparks; colliders keep the liquid in the glass and the bowl."
     }
   }
 }

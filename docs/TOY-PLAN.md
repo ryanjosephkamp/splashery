@@ -10,8 +10,8 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 336 toys. 336 have a tap action today; the other 0 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 333.
+- 337 toys. 337 have a tap action today; the other 0 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 334.
 - **more** (has an effect; make it clearer or more dramatic): 0.
 - **new** (needs its own effect): 3.
 - Visual fixes: 0 open, 30 done. Touch or drag interaction asked for: 4.
@@ -57,7 +57,7 @@ Proposals below are suggestions; the owner may change them.
   Diffusion model, Gradient descent, Gaussian splatting, Word vectors, Sorting machine, Half adder,
   Turing machine, Difference engine, Enigma machine, Bombe, Your book, Photo album, Picture frame,
   Model to splats, Photo to 3D, Splat field, Thermal ellipsoids, Super-resolution microscope, Galaxy
-  in a box, Screen.
+  in a box, Fluid lab, Screen.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -2396,7 +2396,7 @@ Proposals below are suggestions; the owner may change them.
   - Sound: A soft whoosh that rises as the depth comes up, with two glassy notes; a falling whoosh
     as it lies flat.
 
-## Lab (1)
+## Lab (2)
 
 - **Splat field** (`splat-field`). Now: tap: Send a pulse. Plan: keep.
   - Owner: The owner's note "big new Splashery ideas" and his answer of September 29, 2026 (lane
@@ -2411,6 +2411,18 @@ Proposals below are suggestions; the owner may change them.
     torus knot. Lab r2: a tap on the toy now fires the pulse on every field (the galaxy's faint
     stars were under the pick pass's alpha clip; the recipe's pickAlpha lowers it).
   - Sound: A soft rising swell.
+- **Fluid lab** (`fluid-lab`). Now: tap: Pour, drop or blow. Plan: keep.
+  - Owner: The owner's notes on the water bottle and soda can of September 29, 2026 ("a realistic
+    fluid splat simulator"; lane Fluids; labs only).
+  - Effect: A sandbox for the fluid engine: a nozzle pours water, soda, honey or lava into a glass
+    (the third tap empties it first), a ball of liquid splashes into a bowl, a candle is blown out
+    and lights again, or a breath bends a hot cup's steam (about 3 to 5 s).
+  - Improved: Fluids: new sandbox on the Lab shelf (labs). Liquids are position-based fluids with a
+    viscosity from water to lava, drawn as stretched, lit surface splats; smoke and steam rise in a
+    curl field; flames cool through a real color ramp with sparks; colliders keep the liquid in the
+    glass and the bowl.
+  - Sound: The pour's splash and glug (soda fizzes; honey and lava a thick gloop), a splash, a
+    breath on the candle and the cup.
 
 ## Science (3)
 

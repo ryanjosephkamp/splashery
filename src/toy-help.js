@@ -1533,6 +1533,14 @@ export const TOY_HELP = {
       "Galaxy simulations follow gas as millions of particles, each with a bit of mass and a smoothing length, the size its gas is spread over. This is the gas of a Milky Way–mass galaxy today from the FIRE-2 simulations (CC BY 4.0), a subset cut to a box round it. Each particle is a Gaussian about half its smoothing length wide, colored by temperature (cold blue, hot orange and red) and brighter where denser, so the spiral arms stand out.\n\nTap to zoom into the gas; Only the cold gas peels away the hot. This is an approximation: the simulation's kernel isn't a Gaussian, and blended splats aren't the column density that tools like SPLASH and yt compute. It shows the shape of the gas, not measurements.",
   },
 
+  // ---- Fluid lab (lane Fluids) ---------------------------------------------------------
+  "fluid-lab": {
+    howTo:
+      "Tap to pour, drop a splash, or blow on the candle or the cup. Pick a Scene and a Liquid in the Toy tab.",
+    about:
+      "Everything that flows here is a crowd of small particles, each drawn as a splat. For the liquids, the computer keeps every particle from crowding its neighbors, so the crowd keeps its volume the way water does, and it evens out the particles' speeds to make them thick: a little for water, a lot for honey and lava. Where the flow is fast and breaks up, it throws off drops, foam and, for soda, rising bubbles. Smoke and steam are lighter particles that rise, swirl in a gently turning breeze, spread and fade. A flame is a stream of short-lived hot particles that rise, narrow to a tongue and cool from blue at the base to yellow, orange and a dull red.\n\nPick a Scene: pour into a glass (the third tap empties it first), splash into a basin, blow out a candle, or blow across a hot cup. Pick a Liquid to see how thickness changes a pour. This is graphics physics: it moves believably, but it is not a validated scientific simulation.",
+  },
+
   // ---- Holidays -------------------------------------------------------------------------
   "jack-o-lantern": {
     howTo: "Tap to lift the lid; tap again to put it back.",

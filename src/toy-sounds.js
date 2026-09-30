@@ -1603,6 +1603,13 @@ export const TOY_SOUNDS = {
       { voice: "pad", f: "A2", to: 1.12, decay: 2, vol: 0.5 },
     ],
   },
+  // ---- Fluid lab (lane Fluids) ------------------------------------------------------
+  // A pour's splash and glug (each scene plays its own through cues: a pour,
+  // a thick gloop for honey and lava, a splash, a breath on the candle).
+  "fluid-lab": [
+    { voice: "splash", f: 520, decay: 1.2, vol: 0.55 },
+    { voice: "bubbles", at: 0.25, n: 7, rate: 9, decay: 1.4, vol: 0.45 },
+  ],
 };
 
 // The toy's sound, or null when it has none (visitors' own splats).
