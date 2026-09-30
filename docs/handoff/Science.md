@@ -194,6 +194,12 @@ Model: Opus 5.5 (claude-opus-5-5), default effort.
   nuclear-pore record (gp210) was tried and dropped: it has no precision column, and the 20 nm
   default width smears each pore's ring.
 
+- **Galaxy r3** (the owner's note on `sci-galaxy-r2`: sharper box edges, and the spiral sharper if
+  possible): the edges are lines of splats stretched along them, and each particle is now the
+  Gaussian with the same spread as FIRE's cubic-spline kernel (σ = 0.274 h per axis, h being the
+  kernel's support radius; before, 0.5 h). Overview 226 → 672, zoomed 12 → 42. `sci-galaxy-r3` is on
+  page 2 and replaces `sci-galaxy-r2`.
+
 ## Known issues
 
 - Frame rates on a real phone are unmeasured (no GPU here); the galaxy is the heaviest (overdraw).

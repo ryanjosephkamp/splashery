@@ -2456,10 +2456,10 @@ Proposals below are suggestions; the owner may change them.
 - **Galaxy in a box** (`galaxy-box`). Now: tap: Zoom in or out. Plan: keep.
   - Owner: The owner's question of September 29, 2026 (can splats be a real science tool?) and his
     answer "Science yes" (lane Science; labs only).
-  - Effect: The gas of the FIRE-2 Milky Way–mass galaxy m12i today, each particle a Gaussian of
-    about half its smoothing length, colored by temperature and brighter where denser, in a box with
-    a dark floor. The tap zooms about 8 times into the gas you tap (2.2 s); a second tap zooms out.
-    Only the cold gas peels the hot gas away.
+  - Effect: The gas of the FIRE-2 Milky Way–mass galaxy m12i today, each particle the Gaussian with
+    the same spread as its smoothing kernel (0.27 of its smoothing length), colored by temperature
+    and brighter where denser, in a box with a dark floor. The tap zooms about 8 times into the gas
+    you tap (2.2 s); a second tap zooms out. Only the cold gas peels the hot gas away.
   - Improved: Science: tools/sci-galaxy.mjs (jsfive) cuts 300,000 of the 2.4 million gas particles
     in a 40 × 12 × 40 kpc box round the galaxy from the CC BY 4.0 snapshot (FlatHUB), turns the disk
     face up and works out each temperature; the toy draws them approximately (not a column-density

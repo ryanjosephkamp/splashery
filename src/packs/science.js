@@ -7,7 +7,7 @@
 //                       Gaussian as wide as its localization precision
 //                       (src/science/smlm.js)
 //   galaxy-box          each gas particle of a FIRE-2 galaxy is a Gaussian of
-//                       about half its smoothing length (an approximation)
+//                       the same spread as its smoothing kernel (an approximation)
 //
 // The toys bring their own GPU program (src/science/field.js, labs only): the
 // jiggle, the magnifier and the Gaussians' exact shapes.
@@ -788,6 +788,7 @@ export const GALAXY_SAMPLE = {
 };
 
 const GAL = { data: null, info: null, focus: focusState(), toy: null };
+export const KERNEL_SIGMA = 0.274; // the cubic spline's σ over its support radius
 const GAL_ZOOM = 8; // the tap's magnification
 export const galaxyState = () => (GAL.info ? { ...GAL.info } : null);
 // The gas's big see-through splats cost the most to draw (they overlap), so
@@ -945,29 +946,41 @@ const GALAXY = {
         weight: 0.5,
         part: sciPart(SCI_TYPE.plain),
       });
+    }
+    // Its twelve edges: thin lines of splats stretched along each edge, so
+    // they stay crisp.
+    if (o.box !== false) {
+      const SEG = 80;
+      const edges = [];
       for (const axis of [0, 1, 2]) {
-        const edge = evenCylinder(0.05, 0.05, 2 * size[axis], false);
         const others = [0, 1, 2].filter((x) => x !== axis);
         for (const a of [-1, 1])
-          for (const b of [-1, 1]) {
-            const p = [0, 0, 0];
-            p[others[0]] = a * size[others[0]];
-            p[others[1]] = b * size[others[1]];
-            const dir = [0, 0, 0];
-            dir[axis] = 1;
-            k.add(edge, {
-              pos: p,
-              quat: quatFromTo([0, 1, 0], dir),
-              even: true,
-              color: "#9aa3b8",
-              jitter: 0,
-              opacity: 0.9,
-              flat: 0.4,
-              weight: 3,
-              part: sciPart(SCI_TYPE.plain),
-            });
-          }
+          for (const b of [-1, 1])
+            for (let i = 0; i < SEG; i++) {
+              const p = [0, 0, 0];
+              p[others[0]] = a * size[others[0]];
+              p[others[1]] = b * size[others[1]];
+              p[axis] = -size[axis] + ((i + 0.5) / SEG) * 2 * size[axis];
+              const dir = [0, 0, 0];
+              dir[axis] = 1;
+              edges.push({ p, dir, len: (2 * size[axis]) / SEG });
+            }
       }
+      k.cloud({ count: (edges.length * 160000) / k.count, jitter: 0 }, (_r, j) => {
+        const e = edges[j];
+        if (!e) return null;
+        const base = k.baseSize || 0.01;
+        const across = 0.03 / 0.7; // about 0.03 kpc across
+        return {
+          p: e.p,
+          dir: e.dir,
+          size: across / base,
+          stretch: (0.8 * e.len) / across,
+          color: "#c4ccdc",
+          opacity: 1,
+          part: sciPart(SCI_TYPE.plain),
+        };
+      });
     }
     k.reach([half, hy, half]);
     k.reach([-half, -hy, -half]);
@@ -986,9 +999,11 @@ const GALAXY = {
       const w = widenOf(i);
       const h = G.h(i) * w;
       const logT = G.logT(i);
-      // A Gaussian of about half the smoothing length (the simulation's
-      // kernel isn't a Gaussian; this is the look, not the physics).
-      const sigma = 0.5 * h;
+      // The Gaussian with the same spread as the simulation's kernel: FIRE's
+      // cubic spline, whose smoothing length h is its support radius, has a
+      // standard deviation of 0.274 h along each axis (it isn't a Gaussian;
+      // this is the look, not the physics).
+      const sigma = KERNEL_SIGMA * h;
       const base = k.baseSize || 0.01;
       // Denser gas (smaller h) is more opaque: the column through a
       // particle goes as its mass over h², and the masses are nearly equal.

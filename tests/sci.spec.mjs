@@ -27,6 +27,7 @@ import {
   readGalaxy,
   MICROSCOPE_DENSITY,
   GALAXY_DENSITY,
+  KERNEL_SIGMA,
 } from "../src/packs/science.js";
 import { buildRecipe, quatRotate } from "../src/kit.js";
 import { applyClay, PROFILES } from "../src/generators.js";
@@ -339,7 +340,7 @@ test.describe("localizations", () => {
 });
 
 test.describe("the galaxy", () => {
-  test("the galaxy file reads, and each particle is about half its smoothing length", async () => {
+  test("the galaxy file reads, and each particle has its kernel's spread (0.274 of its smoothing length)", async () => {
     const G = readGalaxy(new Uint8Array(fs.readFileSync("assets/toys/galaxy-box/m12i-gas.bin")));
     expect(G.head.license).toBe("CC BY 4.0");
     expect(G.n).toBeGreaterThan(50000);
@@ -363,7 +364,7 @@ test.describe("the galaxy", () => {
     const thinned = (G.head.inBox - G.head.nDense) / (G.n - G.head.nDense);
     expect(info.widenRest).toBeCloseTo(Math.cbrt(thinned), 6);
     const start = ctx.buf.count - info.emitted;
-    const want = Math.SQRT2 * 0.5 * G.h(info.first) * (info.first < G.head.nDense ? 1 : info.widenRest); // prettier-ignore
+    const want = Math.SQRT2 * KERNEL_SIGMA * G.h(info.first) * (info.first < G.head.nDense ? 1 : info.widenRest); // prettier-ignore
     close(ctx.buf.scale[start * 3] / s / want, 1, 2e-3);
   });
 });

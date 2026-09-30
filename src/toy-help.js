@@ -1530,7 +1530,7 @@ export const TOY_HELP = {
   "galaxy-box": {
     howTo: "Tap the gas to zoom in; tap again to zoom out.",
     about:
-      "Galaxy simulations follow gas as millions of particles, each with a bit of mass and a smoothing length, the size its gas is spread over. This is the gas of a Milky Way–mass galaxy today from the FIRE-2 simulations (CC BY 4.0), a subset cut to a box round it. Each particle is a Gaussian about half its smoothing length wide, colored by temperature (cold blue, hot orange and red) and brighter where denser, so the spiral arms stand out.\n\nTap to zoom into the gas; Only the cold gas peels away the hot. This is an approximation: the simulation's kernel isn't a Gaussian, and blended splats aren't the column density that tools like SPLASH and yt compute. It shows the shape of the gas, not measurements.",
+      "Galaxy simulations follow gas as millions of particles, each with a bit of mass and a smoothing length, the size its gas is spread over. This is the gas of a Milky Way–mass galaxy today from the FIRE-2 simulations (CC BY 4.0), a subset cut to a box round it. Each particle is the Gaussian with the same spread as the simulation's smoothing kernel, colored by temperature (cold blue, hot orange and red) and brighter where denser, so the spiral arms stand out.\n\nTap to zoom into the gas; Only the cold gas peels away the hot. This is an approximation: the simulation's kernel isn't a Gaussian, and blended splats aren't the column density that tools like SPLASH and yt compute. It shows the shape of the gas, not measurements.",
   },
 
   // ---- Fluid lab (lane Fluids) ---------------------------------------------------------
