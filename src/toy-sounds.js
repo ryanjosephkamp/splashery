@@ -966,6 +966,61 @@ export const TOY_SOUNDS = {
     off: { voice: "scrape", f: 1000, rate: 30, decay: 0.7, vol: 0.6 },
   },
 
+  // ---- Real objects (lane Real objects) ---------------------------------------------
+  // A cap click, the posted cap's click, a smooth nib scratch, and the cap clicking back on.
+  "fountain-pen": [
+    { voice: "click", f: 2600, vol: 0.9 },
+    { voice: "click", at: 1.08, f: 2100, vol: 0.8 },
+    { voice: "scrape", at: 1.62, f: 2400, rate: 26, decay: 2.3, vol: 0.18 },
+    { voice: "click", at: 3.97, f: 2600, vol: 0.9 },
+  ],
+  // The cap ratchets off, then a glug-glug pour that rises in pitch as the glass fills.
+  "water-bottle": [
+    { voice: "ratchet", f: 1900, n: 7, rate: 12, vol: 0.5 },
+    { voice: "gloop", at: 1.66, notes: "G2 A2 C3 D3 E3 G3", step: 0.17, decay: 0.45, vol: 0.55 },
+    { voice: "drip", at: 1.95, f: 700, n: 4, rate: 5, vol: 0.4 },
+    { voice: "ratchet", at: 4.05, f: 1700, n: 7, rate: 14, vol: 0.45 },
+  ],
+  // A rattle as it shakes, the sharp pssht of the can opening, then a fizz that dies away.
+  "soda-can": [
+    { voice: "rattle", f: 1600, n: 10, decay: 2.2, vol: 0.55 },
+    { voice: "crack", at: 0.93, f: 2600, vol: 0.7 },
+    { voice: "hiss", at: 0.95, f: 3200, decay: 0.9, vol: 0.55 },
+    { voice: "bubbles", at: 1.1, f: 900, n: 16, decay: 2.2, vol: 0.4 },
+    { voice: "sizzle", at: 1.3, f: 6000, decay: 1.5, vol: 0.25 },
+  ],
+  // Laces zipping through the eyelets, a soft tug as the bow pulls tight, two toe taps.
+  "running-shoe": [
+    { voice: "tear", f: 1100, to: 1.8, decay: 1.4, vol: 0.4 },
+    { voice: "tear", at: 1.05, f: 1300, to: 0.7, decay: 1.2, vol: 0.35 },
+    { voice: "slap", at: 2.72, f: 900, vol: 0.5 },
+    { voice: "thud", at: 3.34, f: 140, vol: 0.7 },
+    { voice: "thud", at: 3.84, f: 150, vol: 0.7 },
+  ],
+  // Soft fabric swishes as the hood flips and the sleeves swing, and a zip-like flick.
+  hoodie: [
+    { voice: "breath", f: 700, to: 0.6, decay: 0.8, vol: 0.5 },
+    { voice: "breath", at: 0.62, f: 900, to: 1.4, decay: 0.8, vol: 0.45 },
+    { voice: "tear", at: 1.2, f: 1600, to: 2.4, decay: 0.35, vol: 0.3 },
+    { voice: "whoosh", at: 1.25, f: 250, to: 4, decay: 1.1, vol: 0.35 },
+    { voice: "whoosh", at: 2.95, f: 300, to: 3, decay: 1.1, vol: 0.3 },
+  ],
+  // Two hinge clicks, a soft shimmer as the lenses darken, and two clicks as they unfold.
+  sunglasses: [
+    { voice: "click", at: 0.4, f: 3200, vol: 0.8 },
+    { voice: "click", at: 0.7, f: 2900, vol: 0.8 },
+    { voice: "shimmer", at: 1.35, f: "E6", decay: 0.8, vol: 0.35 },
+    { voice: "click", at: 2.95, f: 2900, vol: 0.7 },
+    { voice: "click", at: 3.2, f: 3200, vol: 0.7 },
+  ],
+  // A flick off the stand, the whoosh of the spin, a soft landing, and a second flip.
+  "baseball-cap": [
+    { voice: "slap", f: 1800, vol: 0.5 },
+    { voice: "whoosh", at: 0.35, f: 400, to: 5, decay: 1.6, vol: 0.4 },
+    { voice: "thud", at: 1.62, f: 180, vol: 0.5 },
+    { voice: "flutter", at: 1.95, f: 1500, decay: 0.9, vol: 0.25 },
+    { voice: "thud", at: 2.55, f: 170, vol: 0.45 },
+  ],
   // ---- Medieval ---------------------------------------------------------------------
   "sword-in-stone": {
     on: [
@@ -1137,6 +1192,38 @@ export const TOY_SOUNDS = {
     step: 0.3214,
     at: 0.3,
     pickAt: 0.12,
+  },
+  // Pianos (lane Pianos): a tap on a key plays that key (pick), held for
+  // about as long as the key stays down; here, a run up every key. Their
+  // songs, and the electronic keyboard's keys (in the voice picked on its
+  // panel), are played by the recipes (src/packs/pianos.js).
+  "grand-piano": {
+    voice: "grand",
+    notes:
+      "A0 A#0 B0 C1 C#1 D1 D#1 E1 F1 F#1 G1 G#1 A1 A#1 B1 C2 C#2 D2 D#2 E2 F2 F#2 G2 G#2 A2 A#2 B2 C3 C#3 D3 D#3 E3 F3 F#3 G3 G#3 A3 A#3 B3 C4 C#4 D4 D#4 E4 F4 F#4 G4 G#4 A4 A#4 B4 C5 C#5 D5 D#5 E5 F5 F#5 G5 G#5 A5 A#5 B5 C6 C#6 D6 D#6 E6 F6 F#6 G6 G#6 A6 A#6 B6 C7 C#7 D7 D#7 E7 F7 F#7 G7 G#7 A7 A#7 B7 C8",
+    step: 0.028,
+    hold: 0.9,
+  },
+  "upright-piano": {
+    voice: "upright",
+    notes:
+      "A0 A#0 B0 C1 C#1 D1 D#1 E1 F1 F#1 G1 G#1 A1 A#1 B1 C2 C#2 D2 D#2 E2 F2 F#2 G2 G#2 A2 A#2 B2 C3 C#3 D3 D#3 E3 F3 F#3 G3 G#3 A3 A#3 B3 C4 C#4 D4 D#4 E4 F4 F#4 G4 G#4 A4 A#4 B4 C5 C#5 D5 D#5 E5 F5 F#5 G5 G#5 A5 A#5 B5 C6 C#6 D6 D#6 E6 F6 F#6 G6 G#6 A6 A#6 B6 C7 C#7 D7 D#7 E7 F7 F#7 G7 G#7 A7 A#7 B7 C8",
+    step: 0.028,
+    hold: 0.9,
+  },
+  harpsichord: {
+    voice: "harpsichord",
+    notes:
+      "F1 F#1 G1 G#1 A1 A#1 B1 C2 C#2 D2 D#2 E2 F2 F#2 G2 G#2 A2 A#2 B2 C3 C#3 D3 D#3 E3 F3 F#3 G3 G#3 A3 A#3 B3 C4 C#4 D4 D#4 E4 F4 F#4 G4 G#4 A4 A#4 B4 C5 C#5 D5 D#5 E5 F5 F#5 G5 G#5 A5 A#5 B5 C6 C#6 D6 D#6 E6 F6",
+    step: 0.036,
+    hold: 0.9,
+  },
+  "electronic-keyboard": {
+    voice: "synth",
+    notes:
+      "C2 C#2 D2 D#2 E2 F2 F#2 G2 G#2 A2 A#2 B2 C3 C#3 D3 D#3 E3 F3 F#3 G3 G#3 A3 A#3 B3 C4 C#4 D4 D#4 E4 F4 F#4 G4 G#4 A4 A#4 B4 C5 C#5 D5 D#5 E5 F5 F#5 G5 G#5 A5 A#5 B5 C6 C#6 D6 D#6 E6 F6 F#6 G6 G#6 A6 A#6 B6 C7",
+    step: 0.036,
+    hold: 0.5,
   },
   // Twinkle, Twinkle, Little Star on struck steel rods: a bright tine a hair
   // out of tune with itself (the rod shimmers) and each hammer's tick. A tap
@@ -1464,14 +1551,31 @@ export const TOY_SOUNDS = {
   // Lane Screens: the old TV's click and hum (each style plays its own
   // cues as it switches on: the flat TV's soft tone, the cinema's curtains,
   // the hologram's shimmer).
-  screen: [
-    { voice: "switch", f: 1800, vol: 0.9 },
-    { voice: "zap", at: 0.1, f: 5200, to: 0.9, decay: 0.5, vol: 0.18 },
-    { voice: "hum", at: 0.12, f: 60, to: 1.02, decay: 1.6, bright: 0.15, vol: 0.5 },
-  ],
+  // The old TV: on, a click, a crackle and the hum; off, the knob's click
+  // and the whine falling away (lane Screens r2). The Screen plays each
+  // style's own sounds from its recipe (src/packs/screens.js).
+  screen: {
+    on: [
+      { voice: "switch", f: 1800, vol: 0.9 },
+      { voice: "zap", at: 0.1, f: 5200, to: 0.9, decay: 0.5, vol: 0.18 },
+      { voice: "hum", at: 0.12, f: 60, to: 1.02, decay: 1.6, bright: 0.15, vol: 0.5 },
+    ],
+    off: [
+      { voice: "switch", f: 1500, vol: 0.9 },
+      { voice: "zap", at: 0.05, f: 7800, to: 0.35, decay: 1.4, vol: 0.12 },
+      { voice: "hum", at: 0.02, f: 62, to: 0.6, decay: 0.7, bright: 0.12, vol: 0.35 },
+    ],
+  },
   // ---- Lab (lane Lab) ----------------------------------------------------------------
   // A soft rising swell as the pulse runs out through the field.
   "splat-field": { voice: "pad", f: "D4", to: 1.5, decay: 2.5, vol: 0.7 },
+  // ---- Fluid lab (lane Fluids) ------------------------------------------------------
+  // A pour's splash and glug (each scene plays its own through cues: a pour,
+  // a thick gloop for honey and lava, a splash, a breath on the candle).
+  "fluid-lab": [
+    { voice: "splash", f: 520, decay: 1.2, vol: 0.55 },
+    { voice: "bubbles", at: 0.25, n: 7, rate: 9, decay: 1.4, vol: 0.45 },
+  ],
 };
 
 // The toy's sound, or null when it has none (visitors' own splats).

@@ -1,9 +1,12 @@
 # Splashery Worlds
 
-A world is a small place made entirely of Gaussian splats that you walk around in as a character, on
-a phone or a computer. The ground, the water, the sky, the trees, the signs and the character are
-all splats, built on the device from recipes and a seed. Only the menus and text (the start screen,
-the cards, the list of places) are page text, and collision uses invisible simple shapes.
+A world is a small place you walk around in as a character, on a phone or a computer, built on the
+device from recipes and a seed. It is drawn in one of two modes ([Rendering](#rendering)). In splats
+mode, everything you see is Gaussian splats: the ground, the water, the sky, the trees, the signs
+and the character. In hybrid mode (the owner's "Hybrid yes" of September 29, 2026), the ground, the
+water, the sky and the signs are lit models, and the props and the near grass stay splats. Only the
+menus and text (the start screen, the cards, the list of places) are page text, and collision uses
+invisible simple shapes.
 
 This page is for anyone building a world: the world file, the modules, how to add a prop or a
 landmark, and the splat budgets. Worlds sit behind the labs switch for now:
@@ -560,6 +563,11 @@ is). About 5 MB in all.
 ## Rules that still apply
 
 The ground rules and the effect quality rules in [CLAUDE.md](../CLAUDE.md) hold for worlds too:
-everything seen is splats (tell the Operator, with clips, before thinking of any mesh), assets are
-CC0, CC BY or public domain and credited, no logos or brand names, and new public text is in
-American English. A world is a folder under `worlds/`; it doesn't change the toy box.
+assets are CC0, CC BY or public domain and credited, no logos or brand names, and new public text is
+in American English. A world is a folder under `worlds/`; it doesn't change the toy box.
+
+In splats mode, everything seen is splats. Hybrid mode (September 29, 2026) may draw the ground, the
+water, the sky, the signs and the character as models, with the vendored PlayCanvas and no other
+render library; the props stay splats. Any other model, or a model in splats mode, needs the
+Operator's OK first, with clips. Models and their textures follow the same license and credit rules
+as everything else.

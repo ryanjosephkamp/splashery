@@ -731,7 +731,16 @@ export const KINDS = {
   // Pictures (lane Pictures): a page that turns about a book's spine and curls
   // like paper (uSpLeaf): z = distance from the spine along the page, w = leaf slot (0..9)
   leaf: 21,
+  // Levers (lane Pianos): keys, hammers, dampers, jacks, strings and lights
+  // by the hundred, each moved by its own amount (uSpLevers) as its group
+  // says (uSpLever): z = lever index (0..95) + 128 * group (0..5), w = the
+  // splat's place along a string (0..1) for the vibrate mode.
+  lever: 22,
 };
+
+// Levers: 96 amounts (three 8-bit channels each) and 6 groups.
+export const MAX_LEVERS = 96;
+export const MAX_LEVER_GROUPS = 6;
 
 const GLSL_KIT_UNIFORMS = `uniform vec4 uSpKit;     // x time, y alive (0/1), z speed, w energy (melt 0..1)
 uniform vec4 uSpKitB;    // x grow progress 0..1, y floor distance below the centre, z amount
@@ -742,7 +751,9 @@ uniform vec4 uSpTokens[96]; // per token: xyz offset + w visibility, then a rota
 uniform vec4 uSpMorph;   // the four channels of the morph, band and fade kinds
 uniform sampler2D uSpScreen; // a live screen picture (the laptop's)
 vec3 spScreenUV = vec3(0.0); // xy uv, z > 0 for a screen splat
-uniform vec4 uSpLeaf[8]; // Pictures: spine point, spine axis, page direction, then (angle, curl) per leaf`;
+uniform vec4 uSpLeaf[8]; // Pictures: spine point, spine axis, page direction, then (angle, curl) per leaf
+uniform vec4 uSpLever[18]; // Pianos: per lever group, pivot + amount, direction + mode, glow colour + channel
+uniform vec4 uSpLevers[24]; // Pianos: 96 levers' amounts, three 8-bit channels packed in each float`;
 
 const GLSL_KIT_FUNCTIONS = `
 float spBeat(float x) {
@@ -868,6 +879,38 @@ vec3 spKitCenter(vec3 p) {
     p = sp + ax * dot(rel, ax) + dr * lx + nm * ly + (nm * cos(psi) - dr * sin(psi)) * dot(rel, nm);
     spPartQ = vec4(ax * sin(psi * 0.5), cos(psi * 0.5));
   }
+  if (kind == 22) {
+    // Levers (lane Pianos): a key tips about its pivot, a damper or a jack
+    // lifts, a string quivers (most at its middle) and any of them can glow,
+    // each by its own amount from one of three channels.
+    int g = clamp(int(floor(an.z / 128.0)), 0, 5);
+    int li = clamp(int(an.z - float(g) * 128.0 + 0.5), 0, 95);
+    vec4 ga = uSpLever[g * 3];
+    vec4 gb = uSpLever[g * 3 + 1];
+    vec4 gc = uSpLever[g * 3 + 2];
+    float packed = uSpLevers[li / 4][li - (li / 4) * 4];
+    vec3 chans = vec3(mod(packed, 256.0), mod(floor(packed / 256.0), 256.0), floor(packed / 65536.0)) / 255.0;
+    int mode = int(gb.w + 0.5);
+    int mch = mode - (mode / 4) * 4;
+    mode = mode / 4;
+    float a = mch == 0 ? chans.x : mch == 1 ? chans.y : chans.z;
+    if (a > 0.0) {
+      if (mode == 0) {
+        float ang = a * ga.w;
+        p = ga.xyz + spRotate(p - ga.xyz, gb.xyz, ang);
+        spPartQ = vec4(gb.xyz * sin(ang * 0.5), cos(ang * 0.5));
+      } else if (mode == 1) {
+        p += gb.xyz * (a * ga.w);
+      } else if (mode == 2) {
+        p += gb.xyz * (a * ga.w * sin(3.14159 * clamp(an.w, 0.0, 1.0)) * sin(uSpKit.x * 47.0 + float(li) * 1.7));
+      }
+    }
+    if (gc.w > -0.5) {
+      int gch = int(gc.w + 0.5);
+      float gl = gch == 0 ? chans.x : gch == 1 ? chans.y : chans.z;
+      spTint += gc.rgb * gl;
+    }
+  }
   if (kind == 14) {
     // Game pieces move by uSpTokens even when the toy's own motion is off.
     int ti = clamp(int(an.z + 0.5), 0, 47);
@@ -911,7 +954,9 @@ uniform uSpMorph: vec4f;
 var uSpScreen: texture_2d<f32>;
 var uSpScreenSampler: sampler;
 var<private> spScreenUV: vec3f = vec3f(0.0);
-uniform uSpLeaf: array<vec4f, 8>;`;
+uniform uSpLeaf: array<vec4f, 8>;
+uniform uSpLever: array<vec4f, 18>;
+uniform uSpLevers: array<vec4f, 24>;`;
 
 const WGSL_KIT_FUNCTIONS = `
 fn spBeat(x: f32) -> f32 {
@@ -1031,6 +1076,35 @@ fn spKitCenter(p0: vec3f) -> vec3f {
     let ly = select((cos(lf.x) - cos(psi)) / lf.y, s * sin(lf.x), straight);
     p = sp + ax * dot(rel, ax) + dr * lx + nm * ly + (nm * cos(psi) - dr * sin(psi)) * dot(rel, nm);
     spPartQ = vec4f(ax * sin(psi * 0.5), cos(psi * 0.5));
+  }
+  if (kind == 22) {
+    let g = clamp(i32(floor(an.z / 128.0)), 0, 5);
+    let li = clamp(i32(an.z - f32(g) * 128.0 + 0.5), 0, 95);
+    let ga = uniform.uSpLever[g * 3];
+    let gb = uniform.uSpLever[g * 3 + 1];
+    let gc = uniform.uSpLever[g * 3 + 2];
+    let packed = uniform.uSpLevers[li / 4][li - (li / 4) * 4];
+    let chans = vec3f(packed - floor(packed / 256.0) * 256.0, floor(packed / 256.0) - floor(packed / 65536.0) * 256.0, floor(packed / 65536.0)) / 255.0;
+    let m4 = i32(gb.w + 0.5);
+    let mch = m4 - (m4 / 4) * 4;
+    let mode = m4 / 4;
+    let a = select(select(chans.z, chans.y, mch == 1), chans.x, mch == 0);
+    if (a > 0.0) {
+      if (mode == 0) {
+        let ang = a * ga.w;
+        p = ga.xyz + spRotate(p - ga.xyz, gb.xyz, ang);
+        spPartQ = vec4f(gb.xyz * sin(ang * 0.5), cos(ang * 0.5));
+      } else if (mode == 1) {
+        p = p + gb.xyz * (a * ga.w);
+      } else if (mode == 2) {
+        p = p + gb.xyz * (a * ga.w * sin(3.14159 * clamp(an.w, 0.0, 1.0)) * sin(uniform.uSpKit.x * 47.0 + f32(li) * 1.7));
+      }
+    }
+    if (gc.w > -0.5) {
+      let gch = i32(gc.w + 0.5);
+      let gl = select(select(chans.z, chans.y, gch == 1), chans.x, gch == 0);
+      spTint = spTint + gc.rgb * gl;
+    }
   }
   if (kind == 14) {
     let ti = clamp(i32(an.z + 0.5), 0, 47);
