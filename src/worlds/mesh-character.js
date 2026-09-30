@@ -16,7 +16,8 @@ const BASE = new URL("../../assets/worlds/character/", import.meta.url);
 
 export async function loadMeshCharacter(app) {
   const meta = await fetch(new URL("character.json", BASE)).then((r) => r.json());
-  const asset = await new Promise((resolve, reject) =>
+  const asset = await new Promise(
+    (resolve, reject) =>
     app.assets.loadFromUrl(new URL("character.glb", BASE).href, "container", (err, a) => (err ? reject(new Error(err)) : resolve(a))), // prettier-ignore
   );
   const res = asset.resource;

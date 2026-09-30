@@ -25,7 +25,18 @@ const nextFrame = () => new Promise((r) => requestAnimationFrame(() => r()));
 export class World {
   // mode: "splats" or "hybrid" (docs/WORLDS.md, "Rendering").
   // characterModel: "splats" or "mesh" (mesh-character.js).
-  constructor(view, def, tier, { reducedMotion = false, mode = def.render, shadows = true, characterModel = def.character.model } = {}) { // prettier-ignore
+  constructor(
+    view,
+    def,
+    tier,
+    {
+      reducedMotion = false,
+      mode = def.render,
+      shadows = true,
+      characterModel = def.character.model,
+    } = {},
+  ) {
+    // prettier-ignore
     this.view = view;
     this.def = def;
     this.tier = tier;

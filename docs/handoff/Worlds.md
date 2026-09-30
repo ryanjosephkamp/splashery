@@ -252,8 +252,8 @@ Cards: `wd-island-r2`, `wd-ground-r2`, `wd-props-r2`, `wd-sky-r2`.
 
 ## Hybrid: model ground, water and sky with splat props
 
-Branch `claude/lane-worlds-hybrid` (from the r2 head; it merges after #108), PR "Phase Worlds hybrid:
-model ground, water and sky with splat props (Opus 5.5)". Built by Opus 5.5. Labs only.
+Branch `claude/lane-worlds-hybrid` (from the r2 head; it merges after #108), PR "Phase Worlds
+hybrid: model ground, water and sky with splat props (Opus 5.5)". Built by Opus 5.5. Labs only.
 
 The owner's words on the r2 cards (September 29, 2026), word for word: "This continues to get
 better, but the quality is still not at the level of a real video game. Is that an unrealistic
@@ -264,7 +264,8 @@ strategically and use better game tools for other parts, and then integrate thes
 games that can do things that are almost impossible without Gaussian splats. We can certainly
 continue to build out the splat-only world, but if it can't achieve ~AAA graphics and gameplay, then
 we can see if there's a way to do that with other tools." After the Operator's report, his answer:
-"Hybrid yes." and "I am very interested in making a hyper-realistic hybrid game or simulation world."
+"Hybrid yes." and "I am very interested in making a hyper-realistic hybrid game or simulation
+world."
 
 The Operator's brief (the report's steps 1 and 2):
 
@@ -292,6 +293,34 @@ Test island stays in splats mode until the owner picks. How it works is in docs/
   into `assets/worlds/` (about 5 MB); credited in CREDITS.md, `tools/assets.json` and the Worlds
   page's list of places.
 - Depth: splats test against the models' depth. In splats mode an invisible depth-only ground model
-  keeps a hill in front of the props behind it now that the ground's splats draw in their own
-  layer. `tests/wdh.spec.mjs` checks it in both modes (taking away a bush behind the hill changes no
+  keeps a hill in front of the props behind it now that the ground's splats draw in their own layer.
+  `tests/wdh.spec.mjs` checks it in both modes (taking away a bush behind the hill changes no
   pixel).
+- The character A/B (the Operator's addendum of September 29, 2026, after the owner's marks on the
+  Character cards: "Better, but still looks too low-poly. We can stop trying to perfect this for
+  now. The hybrid simulation will hopefully enable better characters."): `?character=mesh` swaps in
+  a lit, skinned character, Kenney's "Animated Characters: Protagonists" (CC0, checked on the live
+  page and in the pack's license file), with idle, walk and run blended by speed and driven by the
+  world's clock. The pack has no walk; `tools/world-character.mjs` makes one from the run.
+  Quaternius packs were the first choice, but Google Drive refused the downloads here ("Quota
+  exceeded") and the one Quaternius pack on OpenGameArt is the older chibi style. My pick for hybrid
+  worlds: the mesh character (it reads as a finished game character at phone size), though it is
+  stylized, not realistic. The owner decides from `wd-hybrid-character`.
+- Cards (390×844, splats left, hybrid right, the same walk): `wd-hybrid-walk`, `wd-hybrid-shore`,
+  `wd-hybrid-shadows`, `wd-hybrid-sky`, plus `wd-hybrid-depth` (the depth close-up) and
+  `wd-hybrid-character` (splats and mesh characters in the hybrid island).
+- Frames, in our software renderer at 390×844, 2x, mid tier (relative only): splats mode about 1.9 s
+  a frame, hybrid about 1.8 s. Hybrid draws fewer splats (the ground is a model; only the near grass
+  stays splats) and adds about 90 models (64 ground tiles, the water, the sky dome, the signs). The
+  owner's phone is the real test.
+
+### Hybrid known issues
+
+- Where the shore is steep, the hybrid sand picks up the gravel (rock) texture.
+- A thin gray band can show at the horizon, where the sky photo's haze meets the far water.
+- The grass texture (a meadow photo) shows small pale pebbles close up; its strength is lowered.
+- The depth clip's bush is wholly behind the hill (the test checks it pixel by pixel); a bush only
+  half hidden was not found on the island.
+- The splat character is unchanged from main (#110 merges separately).
+- Not in this round (the brief): time of day, a PlayCanvas upgrade, photos or scans as places, the
+  pilot game.
