@@ -64,16 +64,19 @@ void main() {
   // falling stream reads as one continuous stream, not beads.
   vec3 vel = (uSimToView * vec4(texelFetch(uParticles, q + ivec2(0, int(uStretch.y)), 0).xyz, 0.0)).xyz;
   float sl = length(vel.xy);
-  float L = min(sl * uStretch.x, 5.0 * r);
+  float L = min(sl * uStretch.x, 12.0 * r);
   vec2 dir = sl > 1e-6 ? vel.xy / sl : vec2(1.0, 0.0);
-  vec2 off = dir * aPosition.x * (r + 0.5 * L) + vec2(-dir.y, dir.x) * aPosition.y * r;
+  // stretched, it narrows as a thinning stream does (its cross-section keeps
+  // the particle's volume)
+  float sq = sqrt(r / (r + 0.5 * L));
+  vec2 off = dir * aPosition.x * (r + 0.5 * L) + vec2(-dir.y, dir.x) * aPosition.y * r * sq;
   vec3 corner = vp.xyz + vec3(off, 0.0);
   vec4 c = uProj * vec4(corner, 1.0);
   gl_Position = vec4(c.xy, 0.5 * c.w, c.w);
   vUv = aPosition;
   vCenter = vp.xyz;
   vR = r;
-  vS = r / (r + 0.5 * L);
+  vS = sq;
 }
 `;
 const SPRITE_VS_W = /* wgsl */ `
@@ -99,17 +102,18 @@ varying vS: f32;
   let r = max(uniform.uRadius, uniform.uMinPx.x * max(-vp.z, 1e-3) / uniform.uMinPx.y);
   let vel = (uniform.uSimToView * vec4f(textureLoad(uParticles, q + vec2i(0, i32(uniform.uStretch.y)), 0).xyz, 0.0)).xyz;
   let sl = length(vel.xy);
-  let L = min(sl * uniform.uStretch.x, 5.0 * r);
+  let L = min(sl * uniform.uStretch.x, 12.0 * r);
   var dir = vec2f(1.0, 0.0);
   if (sl > 1e-6) { dir = vel.xy / sl; }
-  let off = dir * input.aPosition.x * (r + 0.5 * L) + vec2f(-dir.y, dir.x) * input.aPosition.y * r;
+  let sq = sqrt(r / (r + 0.5 * L));
+  let off = dir * input.aPosition.x * (r + 0.5 * L) + vec2f(-dir.y, dir.x) * input.aPosition.y * r * sq;
   let corner = vp.xyz + vec3f(off, 0.0);
   let c = uniform.uProj * vec4f(corner, 1.0);
   output.position = vec4f(c.xy, 0.5 * c.w, c.w);
   output.vUv = input.aPosition;
   output.vCenter = vp.xyz;
   output.vR = r;
-  output.vS = r / (r + 0.5 * L);
+  output.vS = sq;
   return output;
 }
 `;
@@ -1079,8 +1083,10 @@ export class FluidSurface {
       scope.resolve("uFar").setValue(cam.farClip);
       const projY = proj.data[5] * this.size[1] * 0.5;
       scope.resolve("uMinPx").setValue([1.6, projY]);
-      // velocities are cells/s; a sixtieth of a second of travel
-      scope.resolve("uStretch").setValue([1 / 60, src.velRow ?? 0]);
+      // velocities are cells/s; a 25th of a second of travel (a stream thins
+      // below a particle a cell as it falls and MPM breaks it into clumps:
+      // drawn this long, it reads as the thread it is)
+      scope.resolve("uStretch").setValue([1 / 25, src.velRow ?? 0]);
       this.depthPass.count = count;
       this.depthPass.render();
       this.thickPass.count = count;

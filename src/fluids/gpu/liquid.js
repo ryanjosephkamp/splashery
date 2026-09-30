@@ -126,10 +126,15 @@ export class GpuLiquid {
     const nuM = spec.nu ?? NU[spec.preset] ?? 1e-6 * Math.pow(10, 5 * vis);
     this.nu = Math.max(0.05, nuM / (hm * hm));
     this.sim.params.viscosity = rho0 * this.nu;
+    // How far below rest density the liquid may pull (0.01 of its stiffness
+    // for water: more stands it up as a dome in a glass). Honey and lava hold
+    // together, so a thinning thread of them stays one thread.
+    this.sim.params.tension = spec.tension ?? (vis > 0.3 ? 0.15 : 0.01);
     // Friction along walls: water slides (a thin boundary layer, far below
     // a cell), honey and lava hold back.
     this.sim.params.friction = (spec.friction ?? preset.friction ?? 0.05) * 1.5;
     this.emitter = spec.emitter ? { on: false, flow: 1, travel: 0, ...spec.emitter } : null;
+    if (this.emitter?.gpuRadius) this.emitter.radius = this.emitter.gpuRadius;
     this.drain = 0;
     this.time = 0;
     this.stats = { substeps: 0, dt: 0 };
@@ -270,6 +275,7 @@ export class GpuLiquid {
       e.gap = (pts.length * d ** 3) / (Math.PI * R * R);
     }
     e.travel += speed * dt;
+    const frame = speed * dt;
     const dir = unit3(e.dir || [0, -1, 0]);
     const a = Math.abs(dir[0]) < 0.9 ? [1, 0, 0] : [0, 1, 0];
     const u = unit3([a[1] * dir[2] - a[2] * dir[1], a[2] * dir[0] - a[0] * dir[2], a[0] * dir[1] - a[1] * dir[0]]); // prettier-ignore
@@ -285,7 +291,12 @@ export class GpuLiquid {
       for (const [ra, rb] of e.layer) {
         const pa = ra * cs - rb * sn;
         const pb = ra * sn + rb * cs;
-        const l = lag + (this.rand() - 0.5) * Math.min(d, e.gap) * 0.4;
+        // Placed upstream, in the spout, by the part of this frame still to
+        // come: the step then carries every layer out under gravity, so each
+        // frame's piece of stream meets the one before (placed downstream, a
+        // piece lags the one before by g dt² / 2 and a stream falls as a
+        // stack of blobs).
+        const l = lag - frame + (this.rand() - 0.5) * Math.min(d, e.gap) * 0.4;
         for (let k = 0; k < 3; k++) pts.push(e.at[k] + u[k] * pa + v[k] * pb + dir[k] * l);
         vs.push(dir[0] * speed, dir[1] * speed, dir[2] * speed);
       }

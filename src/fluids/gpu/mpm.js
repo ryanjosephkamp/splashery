@@ -41,6 +41,10 @@ struct U {
   texWidth: u32,
   ncol: u32,
   pad: u32,
+  tension: f32,
+  pad1: f32,
+  pad2: f32,
+  pad3: f32,
   cols: array<vec4f, ${MAX_COLLIDERS * 2}>,
 };
 @group(0) @binding(0) var<storage, read_write> particles: array<vec4f>;
@@ -190,7 +194,7 @@ fn main(@builtin(global_invocation_id) id: vec3u) {
   // Tait equation of state (power 7). Hardly any pull below rest density:
   // a stronger pull acts as a surface tension without wetting, and water
   // then stands in a glass as a dome, like mercury.
-  let pressure = clamp(u.stiffness * (pow(min(density / u.rho0, 1.6), 7.0) - 1.0), -0.01 * u.stiffness, 32.0 * u.stiffness);
+  let pressure = clamp(u.stiffness * (pow(min(density / u.rho0, 1.6), 7.0) - 1.0), -u.tension * u.stiffness, 32.0 * u.stiffness);
   var stress = mat3x3f(-pressure, 0.0, 0.0, 0.0, -pressure, 0.0, 0.0, 0.0, -pressure);
   let strain = C + transpose(C);
   stress += u.viscosity * strain;
@@ -391,6 +395,10 @@ export class GpuMpm {
       new pc.UniformFormat("texWidth", pc.UNIFORMTYPE_UINT),
       new pc.UniformFormat("ncol", pc.UNIFORMTYPE_UINT),
       new pc.UniformFormat("pad", pc.UNIFORMTYPE_UINT),
+      new pc.UniformFormat("tension", pc.UNIFORMTYPE_FLOAT),
+      new pc.UniformFormat("pad1", pc.UNIFORMTYPE_FLOAT),
+      new pc.UniformFormat("pad2", pc.UNIFORMTYPE_FLOAT),
+      new pc.UniformFormat("pad3", pc.UNIFORMTYPE_FLOAT),
       new pc.UniformFormat("cols", pc.UNIFORMTYPE_VEC4, MAX_COLLIDERS * 2),
     ]);
     this.bgFormat = new pc.BindGroupFormat(device, [
@@ -481,6 +489,10 @@ export class GpuMpm {
     c.setParameter("texWidth", this.texWidth);
     c.setParameter("ncol", p.ncol);
     c.setParameter("pad", this.texHeight); // the velocity rows start here
+    c.setParameter("tension", p.tension ?? 0.01);
+    c.setParameter("pad1", 0);
+    c.setParameter("pad2", 0);
+    c.setParameter("pad3", 0);
     c.setParameter("cols[0]", p.cols);
   }
 

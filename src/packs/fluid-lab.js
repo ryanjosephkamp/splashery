@@ -21,8 +21,10 @@ const TAP_SECS = 5;
 export const LIQUID_LOOKS = {
   water: { preset: "water", nozzle: { speed: 1.6, radius: 0.08 }, pour: 2.4 },
   soda: { preset: "soda", nozzle: { speed: 1.6, radius: 0.08 }, pour: 2.4 },
-  honey: { preset: "honey", nozzle: { speed: 0.75, radius: 0.1 }, pour: 3.2 },
-  lava: { preset: "lava", nozzle: { speed: 0.75, radius: 0.1 }, pour: 3.2 },
+  // (gpuRadius: the GPU liquid's particles are small enough for a real
+  // honey pour's thin thread)
+  honey: { preset: "honey", nozzle: { speed: 0.75, radius: 0.1, gpuRadius: 0.05 }, pour: 3.2 },
+  lava: { preset: "lava", nozzle: { speed: 0.75, radius: 0.1, gpuRadius: 0.05 }, pour: 3.2 },
 };
 
 // The glass (recipe units, standing on y = 0).
