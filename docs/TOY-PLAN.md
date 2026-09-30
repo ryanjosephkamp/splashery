@@ -10,8 +10,8 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 322 toys. 322 have a tap action today; the other 0 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 319.
+- 323 toys. 323 have a tap action today; the other 0 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 320.
 - **more** (has an effect; make it clearer or more dramatic): 0.
 - **new** (needs its own effect): 3.
 - Visual fixes: 0 open, 30 done. Touch or drag interaction asked for: 4.
@@ -54,7 +54,8 @@ Proposals below are suggestions; the owner may change them.
   Perceptron, Multilayer perceptron, Neural network, Convolutional network, Recurrent network,
   Transformer, Looped transformer, Diffusion model, Gradient descent, Gaussian splatting, Word
   vectors, Sorting machine, Half adder, Turing machine, Difference engine, Enigma machine, Bombe,
-  Your book, Photo album, Picture frame, Model to splats, Splat field, Fluid lab, Screen.
+  Your book, Photo album, Picture frame, Model to splats, Photo to 3D, Splat field, Fluid lab,
+  Screen.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -2214,7 +2215,7 @@ Proposals below are suggestions; the owner may change them.
     button.
   - Sound: The TV's click and hum; each style its own (a soft tone, the curtains' swish, a shimmer).
 
-## Studio (3)
+## Studio (4)
 
 - **Song landscape** (`song-landscape`). Now: tap: Play or pause the song. Plan: new effect (E6).
   - Owner: Approved on the Splashery Universe page (lane Studio Sound), September 29, 2026.
@@ -2239,6 +2240,20 @@ Proposals below are suggestions; the owner may change them.
     Poly Haven's vase).
   - Sound: A rising whoosh as the splats lift off, then four falling plucked notes as they settle
     back.
+- **Photo to 3D** (`photo-3d`). Now: tap: Raise or flatten the depth. Plan: keep.
+  - Owner: Approved on the Splashery Universe page ("photo yes", September 29, 2026; lane Photo to
+    3D; labs only).
+  - Effect: Your photo rebuilt as splats in 3D by an on-device depth model: each splat takes the
+    photo's color at its place and sits at its depth, and the surface is cut where the depth jumps,
+    so a near object stands as its own layer. The picture starts flat; the tap raises its depth
+    layer by layer while the toy sways (about 3 s), and a second tap lays it flat. Depth sets how
+    deep the relief is; Layers pulls the depth bands apart.
+  - Improved: Photo to 3D: Depth Anything V2 Small (Apache-2.0, quantized, 27 MB) on ONNX Runtime
+    Web (MIT), both loaded only when a photo is opened; an even grid of splats sized to their
+    neighbors on the same surface, cut at depth jumps; three CC0 samples (a forest path, a cobbled
+    street, a still life).
+  - Sound: A soft whoosh that rises as the depth comes up, with two glassy notes; a falling whoosh
+    as it lies flat.
 
 ## Lab (2)
 
