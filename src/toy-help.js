@@ -1508,6 +1508,13 @@ export const TOY_HELP = {
       "A photo is flat, but a computer can guess how far away each part of it is. A depth model, a small neural network trained on millions of pictures, looks at your photo and gives every spot a distance: the path is near, the trees are far. This toy runs that model right on your device, and then rebuilds the photo as splats. Each splat takes the photo's color at its place and sits at its guessed depth, so when you turn the toy, near things move across far ones, the way they do when you move your head.\n\nWhere the depth jumps, a near leaf against a far tree, the surface is cut, so the leaf stands as its own layer instead of being smeared to the background. Tap to raise the layers one after another and sway. Layers pulls them apart. Depth sets how deep the relief is. Open a JPEG, PNG or WebP in the Toy tab (the model, 27 MB, loads the first time). Your photo never leaves your device.",
   },
 
+  "video-3d": {
+    howTo:
+      "Tap to fly the video's own camera path, then drag to roam off it. Open your own video in the Toy tab.",
+    about:
+      "A video is a string of photos taken from a moving camera. If the scene stands still, each photo shows it from a slightly different place, and that is enough to rebuild it in 3D. This toy picks the sharpest frames of the stretch you choose, finds the same small features (corners, specks, edges) in many of them, and works out where the camera must have been for each frame so that they all line up. That is called structure from motion. Then it trains 3D Gaussian splats: it starts from the points it found and keeps nudging each splat's place, size, shape and color until the scene, seen from each camera, looks like the frame taken there.\n\nIt all runs on your device's graphics card (WebGPU), and nothing is uploaded. It takes minutes, longer on a phone. Things that move while the camera films (cars, people, water) blur or vanish, and blank walls or sky give it nothing to match. Tap Replay flight to fly the video's path with its sound, or save the splats as a PLY.",
+  },
+
   // ---- Lab (lane Lab) -------------------------------------------------------------------
   "splat-field": {
     howTo: "Tap to send a pulse through it. Pick a Field in the Toy tab.",

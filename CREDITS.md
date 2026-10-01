@@ -311,6 +311,22 @@ and others, Apache 2.0; the quantized ONNX build is by
 [ONNX Runtime Web](https://github.com/microsoft/onnxruntime) (MIT). Photos people open are processed
 in their browser and never uploaded.
 
+The Video to 3D toy (a labs toy, lane Video 3D) ships two sample scenes in `assets/toys/video-3d/`,
+each trained by `tools/v3d-sample.mjs` from a stretch of a video on Wikimedia Commons (the splats
+and the solved camera path only; the videos are not shipped). Each license was checked on its live
+Commons page on September 30, 2026:
+
+- "Statue Of Liberty 4k Drone" by the Dronalist (14 seconds from 3:24),
+  [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Statue_Of_Liberty_4k_Drone.webm).
+- "Walking in EDINBURGH - Scotland (UK) - 4K 60fps (UHD)" by POPtravel (10 seconds from 7:32),
+  [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/), on
+  [Commons](<https://commons.wikimedia.org/wiki/File:Walking_in_EDINBURGH_-_Scotland_(UK)_-_4K_60fps_(UHD).webm>).
+
+The camera path and the splats are worked out on the device by
+[Splat.js](https://github.com/arrival-space/splat.js) (Stratum1 GmbH, MIT). Videos people open are
+read in their browser and never uploaded.
+
 ## Worlds
 
 Hybrid mode in Worlds (a labs page) lights its ground with four texture sets and its sky with one
