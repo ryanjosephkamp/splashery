@@ -120,15 +120,19 @@ test.describe("the tiny planet", () => {
       expect(g.palette).toBe(look.generator?.palette ?? "planet");
       const ctx = generateSync(g);
       expect(ctx.buf.count, look.id).toBeGreaterThanOrEqual(30000);
+      // Plain loops over the splats, one assertion at the end (an expect per splat
+      // blocks the worker for minutes).
       let r = 0;
       let gg = 0;
       let b = 0;
+      let bad = 0;
       for (let i = 0; i < 30000; i++) {
-        expect(Number.isFinite(ctx.buf.pos[i * 3]), look.id).toBe(true);
+        if (!Number.isFinite(ctx.buf.pos[i * 3]) || !Number.isFinite(ctx.buf.pos[i * 3 + 1]) || !Number.isFinite(ctx.buf.pos[i * 3 + 2])) bad++; // prettier-ignore
         r += ctx.buf.color[i * 4];
         gg += ctx.buf.color[i * 4 + 1];
         b += ctx.buf.color[i * 4 + 2];
       }
+      expect(bad, `${look.id}: splats with non-finite positions`).toBe(0);
       seen.add([r, gg, b].map((v) => Math.round((v / 30000) * 20)).join());
     }
     // Five planets, five different mean colors.
