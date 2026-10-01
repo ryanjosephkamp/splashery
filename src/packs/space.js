@@ -3580,7 +3580,8 @@ export const RECIPES = {
       if (n !== m.n) {
         m.n = n;
         m.flashAt = info.time;
-        if (on && boost > 2) out.cues.push({ voice: "click", f: 2600 + 40 * boost, vol: 0.7 });
+        // A deep pulse with each flash (lane Sound A: no clicks).
+        if (on && boost > 2) out.cues.push({ voice: "thud", f: 50 + boost, bright: 0.15, decay: 0.5, vol: 0.45 }); // prettier-ignore
       }
       const flash = Math.exp(-Math.max(0, info.time - (m.flashAt ?? -9)) / 0.08);
       out.parts.flash = { visible: flash * (0.35 + 1.2 * band(boost, 0, 12)) };
