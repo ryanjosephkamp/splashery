@@ -385,6 +385,54 @@ listed in [assets/flags/flags.json](assets/flags/flags.json) (196 flags, checked
 2026). The flag of Oman is not included: its Commons file is under Oman's Open Government Licence
 rather than a public-domain or Creative Commons licence (see [docs/BACKLOG.md](docs/BACKLOG.md)).
 
+## Sounds
+
+Most tap sounds are synthesized in the browser (`src/voices.js`). Some use short recordings in
+`assets/sounds/`, fetched only when a toy that uses one is tapped. All are CC0 1.0 (public domain
+dedication), from [Freesound](https://freesound.org) and Kenney's
+[Impact Sounds](https://kenney.nl/assets/impact-sounds), checked on their live pages on September
+30, 2026. Each was cut, trimmed, faded, normalized and saved as a small mono MP3; the cut is
+recorded in `tools/assets.json` ("soundSamples"), and the About tab credits the ones the current toy
+uses.
+
+| File                                     | Toys                                                  | Source                                                                                                     | Author           |
+| ---------------------------------------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------- |
+| `alarm-clock-bell.mp3`                   | alarm-clock                                           | [old alarm clock ringing](https://freesound.org/people/tuberatanka/sounds/102435/)                         | tuberatanka      |
+| `asteroid-crumble.mp3`                   | asteroid                                              | [Rocks.wav](https://freesound.org/people/adamgryu/sounds/336023/)                                          | adamgryu         |
+| `baseball-bat.mp3`                       | baseball                                              | [Bat Hit 9 FF095.aif](https://freesound.org/people/martinimeniscus/sounds/162886/)                         | martinimeniscus  |
+| `beach-ball-bounce.mp3`                  | beach-ball                                            | [fotballPlast.wav](https://freesound.org/people/blindmanonacid/sounds/117111/)                             | blindmanonacid   |
+| `bowling-ball-pins.mp3`                  | bowling-ball                                          | [B_2 Bowling ball striking pins.wav](https://freesound.org/people/Yarmonics/sounds/441856/)                | Yarmonics        |
+| `bowling-ball-roll.mp3`                  | bowling-ball                                          | [Bowling Ball.wav](https://freesound.org/people/driftworks/sounds/128969/)                                 | driftworks       |
+| `cat-statue-meow.mp3`                    | cat-statue                                            | [cat meow short](https://freesound.org/people/skymary/sounds/412017/)                                      | skymary          |
+| `comet-fire.mp3`                         | comet, meteor                                         | [Torch.wav](https://freesound.org/people/DanielVega/sounds/479338/)                                        | DanielVega       |
+| `crystal-ball-ring.mp3`                  | crystal-ball                                          | [Wine glass clink deeper.wav](https://freesound.org/people/lmr9/sounds/178178/)                            | lmr9             |
+| `crystal-lattice-chain.mp3`              | crystal-lattice                                       | [Steel chain soft drop](https://freesound.org/people/ani_music/sounds/167913/)                             | ani_music        |
+| `diamond-tap.mp3`                        | diamond, ruby, emerald, sapphire, opal                | [Glass Tap.wav](https://freesound.org/people/Unicornaphobist/sounds/262958/)                               | Unicornaphobist  |
+| `dna-zipper.mp3`                         | dna                                                   | [Zipper Unzip 3 (Slow) .wav](https://freesound.org/people/RutgerMuller/sounds/51176/)                      | RutgerMuller     |
+| `grand-piano-*.mp3` (23 notes, A0 to C8) | grand-piano                                           | [88 piano keys, long reverb](https://freesound.org/people/TEDAgame/packs/25405/)                           | TEDAgame         |
+| `heart-beat.mp3`                         | heart                                                 | [Human Heartbeat (60 BPM)](https://freesound.org/people/FenrirFangs/sounds/213181/)                        | FenrirFangs      |
+| `horse-statue-whinny.mp3`                | horse-statue                                          | [Renill de cavall / Horse Neigh](https://freesound.org/people/Salsero_classic/sounds/826753/)              | Salsero_classic  |
+| `lantern-blow.mp3`                       | lantern                                               | [blowing out candle.wav](https://freesound.org/people/Reitanna/sounds/242867/)                             | Reitanna         |
+| `lantern-match.mp3`                      | garden-gnome, lantern                                 | [Match Lighting Candle](https://freesound.org/people/devilqube/sounds/370362/)                             | devilqube        |
+| `lungs-breath.mp3`                       | lungs                                                 | [Male breathing](https://freesound.org/people/zogmachine/sounds/202606/)                                   | zogmachine       |
+| `marble-roll.mp3`                        | marble                                                | [Marble (single) rolling on wooden floor.wav](https://freesound.org/people/LiezelDippenaar/sounds/707545/) | LiezelDippenaar  |
+| `meteor-boom.mp3`                        | asteroid, meteor, star, planetary-nebula, brain       | [Muffled Distant Explosion](https://freesound.org/people/NenadSimic/sounds/149966/)                        | NenadSimic       |
+| `meteor-fire.mp3`                        | meteor, nebula                                        | [Waving Torch.wav](https://freesound.org/people/spookymodem/sounds/249809/)                                | spookymodem      |
+| `neuron-arc.mp3`                         | knot, neuron, orbital                                 | [highvoltagearc.wav](https://freesound.org/people/Sclolex/sounds/210878/)                                  | Sclolex          |
+| `pool-ball-cue.mp3`                      | pool-ball                                             | [pool_break.wav](https://freesound.org/people/reg7783/sounds/204187/)                                      | reg7783          |
+| `protein-velcro.mp3`                     | chromosome, protein                                   | [Velcro](https://freesound.org/people/paulocorona/sounds/334991/)                                          | paulocorona      |
+| `raspberry-land-1.mp3`                   | raspberry, blackberry                                 | [Impact Sounds (impactSoft_medium_000.ogg)](https://kenney.nl/assets/impact-sounds)                        | Kenney           |
+| `raspberry-land-2.mp3`                   | raspberry, blackberry                                 | [Impact Sounds (impactSoft_medium_002.ogg)](https://kenney.nl/assets/impact-sounds)                        | Kenney           |
+| `raspberry-squish.mp3`                   | raspberry, blackberry, donut                          | [Squish impact](https://freesound.org/people/Bertsz/sounds/500912/)                                        | Bertsz           |
+| `star-cookie-crumble.mp3`                | star-cookie                                           | [Crisp Crunch.m4a](https://freesound.org/people/Yin_Yang_Jake007/sounds/443469/)                           | Yin_Yang_Jake007 |
+| `star-cookie-snap.mp3`                   | star-cookie                                           | [Crisp Crunch.m4a](https://freesound.org/people/Yin_Yang_Jake007/sounds/443469/)                           | Yin_Yang_Jake007 |
+| `supernova-boom.mp3`                     | star, pulsar, black-hole, planetary-nebula, supernova | [Deep Boom](https://freesound.org/people/Za-Games/sounds/539968/)                                          | Za-Games         |
+| `tennis-ball-bounce.mp3`                 | tennis-ball                                           | [bola de tenis caindo.wav](https://freesound.org/people/Negraovictor/sounds/394355/)                       | Negraovictor     |
+| `tennis-ball-slam.mp3`                   | tennis-ball, softball                                 | [ball_hit_ground.wav](https://freesound.org/people/Kyanite_/sounds/432912/)                                | Kyanite\_        |
+| `tin-can-spin.mp3`                       | tin-can-real                                          | [Spinning Coin](https://freesound.org/people/CassieTee/sounds/209462/)                                     | CassieTee        |
+| `vintage-camera-flash.mp3`               | vintage-camera                                        | [Vintage Camera Flash Powder and Shutter](https://freesound.org/people/Werra/sounds/232130/)               | Werra            |
+| `wooden-elephant-trumpet.mp3`            | wooden-elephant                                       | [Elephant Trumpets Growls.flac](https://freesound.org/people/D.jones/sounds/527845/)                       | D.jones          |
+
 ## Software
 
 Splashery is built on the [PlayCanvas engine](https://github.com/playcanvas/engine) (MIT) and uses
