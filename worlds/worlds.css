@@ -433,3 +433,23 @@ a {
     transition: none;
   }
 }
+
+/* ?stats=1: the frame-rate readout for testing on a phone. */
+.stats {
+  position: fixed;
+  top: calc(64px + env(safe-area-inset-top));
+  left: calc(10px + env(safe-area-inset-left));
+  z-index: 20;
+  padding: 6px 9px;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  font:
+    600 12px/1.35 ui-monospace,
+    "SF Mono",
+    Menlo,
+    Consolas,
+    monospace;
+  white-space: pre;
+  pointer-events: none;
+}

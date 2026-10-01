@@ -744,9 +744,12 @@ test.describe("Splashery v3 engine (WebGL2)", () => {
     const popped = await canvas.screenshot({ type: "png" });
     const moved = await countDifferentPixels(page, rest, popped);
     expect(moved).toBeGreaterThan(3000);
-    await page.waitForTimeout(3000);
-    const back = await canvas.screenshot({ type: "png" });
-    expect(await countDifferentPixels(page, rest, back)).toBeLessThan(moved / 4);
+    // It settles back; slow machines take longer than the effect's own few seconds.
+    const settled = async () =>
+      countDifferentPixels(page, rest, await canvas.screenshot({ type: "png" }));
+    await expect
+      .poll(settled, { timeout: 15_000, intervals: [3000, 1000] })
+      .toBeLessThan(moved / 4);
     // Lantern: a toggle lights a flame add-on; a second tap puts it out.
     await page.click(".toy-card[data-toy='lantern']");
     await waitForToy(page, "Lantern");

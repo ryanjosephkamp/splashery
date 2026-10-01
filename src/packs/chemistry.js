@@ -289,6 +289,26 @@ function atomCounts(N, layout) {
 // build data).
 const SHOWN = { symbol: "C" };
 
+// The tour (lane Fix6): a tap on the board's background walks through the
+// elements, each atom rising for about two seconds with its tile lit. It
+// lives here, outside the toy, because each element is its own build.
+const TOUR = { on: false, mode: "number", order: [], i: 0, symbol: null, at: null, from: 0 };
+const TOUR_BUILD = 1.6; // seconds for an atom to rise and fill
+const TOUR_HOLD = 2.2; // seconds before the next element
+function tourOrder(mode) {
+  const order = ELEMENT_LIST.map((e) => e.symbol);
+  if (mode !== "shuffle") return order;
+  for (let i = order.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [order[i], order[j]] = [order[j], order[i]];
+  }
+  return order;
+}
+function tourStart() {
+  TOUR.order = tourOrder(TOUR.mode);
+  Object.assign(TOUR, { on: true, i: 0, symbol: TOUR.order[0], at: null });
+}
+
 export const RECIPES = {
   "periodic-table": {
     alive: true,
@@ -302,29 +322,53 @@ export const RECIPES = {
         default: "C",
         choices: ELEMENT_LIST.map((e) => ({ id: e.symbol, label: `${e.z} ${e.name}` })),
       },
+      {
+        key: "tour",
+        label: "Tour order",
+        type: "select",
+        default: "number",
+        choices: [
+          { id: "number", label: "By atomic number" },
+          { id: "shuffle", label: "Shuffled" },
+        ],
+      },
     ],
     controls: [
       { key: "up", label: "Build the atom", type: "toggle", default: 0, ease: 5 },
       { key: "shine", label: "Excite an electron", type: "pulse", ease: 3.2 },
+      { key: "walk", label: "Tour", type: "pulse", ease: 0.3 },
     ],
     action: {
       key: "up",
       label: "Raise or lower the atom",
       // The electron's jump makes its own sound (cues from drive).
       quiet: ["shine"],
-      // A tile raises its element's atom (switching the table to it); a tap
-      // on the risen atom excites an electron; anywhere else lowers it.
+      // A tile raises its element's atom (switching the table to it), and
+      // the shown element's own tile raises or lowers it; a tap on the risen
+      // atom excites an electron; the board's background starts the tour.
+      // Any tap during the tour stops it.
       at(p, c) {
+        if (TOUR.on) {
+          TOUR.on = false;
+          return "walk";
+        }
         const up = (c.up ?? 0) > 0.35;
         const el = elementOf(SHOWN.symbol);
         const L = el && atomLayout(el);
         if (up && L && len(sub(p, ATOM_AT)) < L.rHigh * L.show + 0.3 && p[2] > 1) return "shine";
-        if (p[2] < DEPTH + 0.25) {
+        // (The shown tile stands 0.28 forward while its atom is up.)
+        if (p[2] < DEPTH + 0.4) {
           const tile = TILES.find(
             (t) => Math.abs(p[0] - t.pos[0]) <= PITCH / 2 && Math.abs(p[1] - t.pos[1]) <= PITCH / 2,
           );
           if (tile?.el && tile.el.symbol !== SHOWN.symbol)
             return { options: { element: tile.el.symbol }, key: "up" };
+          if (tile?.el) return "up";
+        }
+        // The board's background (not a tile, not the atom): the tour.
+        if (p[2] < DEPTH + 0.4) {
+          tourStart();
+          return "walk";
         }
         return "up";
       },
@@ -361,11 +405,43 @@ export const RECIPES = {
       const m = mem(c);
       // The toggle's way: up builds the atom as it rises; down shrinks it
       // back into its tile over the first part of the way.
-      const u = c.up ?? 0;
-      if (m.last === undefined) m.last = u;
-      if (u > m.last + 1e-6) m.dir = 1;
-      else if (u < m.last - 1e-6) m.dir = -1;
-      m.last = u;
+      const raw = c.up ?? 0;
+      if (m.last === undefined) m.last = raw;
+      // Lowering the atom (the Toy tab's button, or a tap beside the toy)
+      // stops the tour too.
+      if (TOUR.on && raw < m.last - 1e-6) TOUR.on = false;
+      if (raw > m.last + 1e-6) {
+        if (m.dir === -1) m.floor = 0;
+        m.dir = 1;
+      } else if (raw < m.last - 1e-6) {
+        // Lowered after a tour: from where the tour left it, all the way down.
+        if (m.dir !== -1 && m.floor) m.scale = m.floor / Math.max(1e-3, m.last);
+        m.dir = -1;
+      }
+      m.last = raw;
+      let u = raw;
+      if (m.floor) u = m.dir === -1 ? Math.min(1, raw * (m.scale || 1)) : Math.max(raw, m.floor);
+      // The tour: the shown element's atom rises faster, holds, and then
+      // the table moves on to the next element (out.next, a rebuild).
+      // (By this build's own element: while the next one builds, SHOWN
+      // already names it, and this toy is still the one on screen.)
+      const touring = TOUR.on && TOUR.symbol === D.element;
+      if (TOUR.on && !touring && !m.asked) {
+        m.asked = true;
+        out.next = { options: { element: TOUR.symbol }, key: "up" };
+      }
+      if (touring) {
+        if (TOUR.at === null) [TOUR.at, TOUR.from] = [t, m.dir === -1 ? 0 : u];
+        u = Math.max(TOUR.from, clamp01((t - TOUR.at) / TOUR_BUILD));
+        m.dir = 1;
+        m.floor = u;
+        m.scale = 0;
+        if (t - TOUR.at > TOUR_HOLD) {
+          TOUR.i++;
+          if (TOUR.i >= TOUR.order.length) TOUR.on = false;
+          else [TOUR.symbol, TOUR.at] = [TOUR.order[TOUR.i], null];
+        }
+      }
       let rise;
       let nuc;
       let ele;
@@ -382,16 +458,20 @@ export const RECIPES = {
       const sc = (0.12 + 0.88 * rise) * (rise > 0 ? 1 + (D.show - 1) * rise : 1);
       const off = mul(D.home, 1 - rise);
       out.morph = [nuc, ele, 0, 0];
-      out.parts.tile = { offset: [0, 0, 0.28 * (m.dir === -1 ? rise : ease(band(u, 0, 0.12)))] };
+      const lift = [0, 0, 0.28 * (m.dir === -1 ? rise : ease(band(u, 0, 0.12)))];
+      out.parts.tile = { offset: lift };
+      // The tour lights the shown element's tile.
+      out.parts.halo = { offset: lift, visible: touring ? 1 : 0 };
       out.parts.nucleus = {
         offset: off,
         scale: sc,
         visible: vis,
         quat: quatAxisAngle([0.2, 1, 0.1], 0.35 * Math.sin(t * 0.5)),
       };
-      D.shells.forEach((_, i) => {
-        out.parts[`shell${i}`] = { offset: off, scale: sc, visible: vis, angle: t * shellSpeed(i) };
-      });
+      for (let i = 0; i < 7; i++) {
+        const used = i < D.shells.length;
+        out.parts[`shell${i}`] = { offset: off, scale: sc, visible: used ? vis : 0, angle: t * shellSpeed(i) }; // prettier-ignore
+      }
       // A tap on the atom: its outermost electron jumps out to a higher
       // orbit (shown faintly), stays a moment, and falls back, giving off a
       // photon in the color of the element's strongest visible line.
@@ -441,8 +521,29 @@ export const RECIPES = {
     build(k, o) {
       const el = elementOf(o.element) || elementOf("C");
       SHOWN.symbol = el.symbol;
+      const mode = o.tour === "shuffle" ? "shuffle" : "number";
+      if (TOUR.mode !== mode) {
+        // The order changed during a tour: go on from here in the new order.
+        TOUR.mode = mode;
+        if (TOUR.on) {
+          TOUR.order = tourOrder(mode);
+          TOUR.i = Math.max(0, TOUR.order.indexOf(TOUR.symbol));
+        }
+      }
       const home = TILE_OF.get(el.symbol);
       const tile = k.part("tile");
+      // Every element has the same parts in the same order (all seven
+      // shells, used or not), so when the table switches elements the frame
+      // that still shows the old build with the new one's motion moves each
+      // piece as itself: nothing hidden flashes up.
+      const L0 = atomLayout(el);
+      k.part("nucleus", { pivot: ATOM_AT });
+      for (let i = 0; i < 7; i++) k.part(`shell${i}`, { pivot: ATOM_AT, axis: shellNormal(i) });
+      k.part("jumper", { pivot: ATOM_AT, axis: shellNormal(L0.jumper.shell) });
+      k.part("ghost", { pivot: ATOM_AT, axis: shellNormal(L0.jumper.shell) });
+      k.part("flash", { pivot: ATOM_AT });
+      k.part("photon", { pivot: ATOM_AT });
+      k.part("halo");
       // The board behind the tiles.
       const bc = mul(add(BOARD_LO, BOARD_HI), 0.5);
       const bs = sub(BOARD_HI, BOARD_LO);
@@ -719,6 +820,33 @@ export const RECIPES = {
         show: L.show,
         ping: { voice: "ding", f: pingNote(el), decay: 1.4, vol: 0.7 },
       };
+      // A lit frame round the shown tile, on during the tour (last, and the
+      // same size for every element, so the table is built the same).
+      const halo = k.part("halo");
+      k.add(
+        k.param(
+          (u, v) => {
+            const h = TILE / 2 + 0.015 + v * 0.085;
+            const q = u * 4;
+            const f = q - Math.floor(q);
+            const side = Math.min(3, Math.floor(q));
+            const xy = [[-h + 2 * h * f, -h], [h, -h + 2 * h * f], [h - 2 * h * f, h], [-h, h - 2 * h * f]][side]; // prettier-ignore
+            return [home.pos[0] + xy[0], home.pos[1] + xy[1], DEPTH + 0.02];
+          },
+          { grid: 32 },
+        ),
+        {
+          even: true,
+          flat: 0.2,
+          opacity: 1,
+          jitter: 0,
+          weight: 4,
+          size: 1.3,
+          part: halo,
+          pattern: false,
+          color: (c) => keep(mix("#ffffff", "#ffd23a", Math.min(1, c.v * 1.4))),
+        },
+      );
     },
   },
 };

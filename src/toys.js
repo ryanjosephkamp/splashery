@@ -3397,6 +3397,17 @@ export const TOYS = [
     tags: "photo picture image depth 3d parallax relief layers convert converter depth map jpeg png webp",
     camera: { yaw: 0, pitch: 0, roll: 0, distance: 2.6 },
   },
+  // ---- Pack: video3d (lane Video 3D) ----
+  {
+    id: "video-3d",
+    label: "Video to 3D",
+    category: "studio",
+    kind: "kit",
+    pack: "video3d",
+    labs: true,
+    tags: "video film clip drone flight walk street 3d scene camera path structure from motion gaussian splats train webgpu convert converter mp4 webm",
+    camera: { yaw: 0, pitch: 0, roll: 0, distance: 2.6 },
+  },
   // ---- Pack: lab (lane Lab) ----
   {
     id: "splat-field",
@@ -3528,4 +3539,31 @@ export function assetURL(path) {
 
 export function thumbURL(toy) {
   return assetURL(`assets/toys/${toy.id}/thumb.webp`);
+}
+
+// ---- UI r3: toys that hold still --------------------------------------------------
+// Toys that read like a chart, a diagram, a page or an instrument start the
+// way the picture toys do: the turntable off and the tilt locked (the
+// owner's request of September 30, 2026). A person can still switch the
+// turntable on for one; a link or a saved scene keeps its own settings.
+const STILL_SHELVES = new Set(["computing", "music", "objects"]);
+const STILL_TOYS = new Set([
+  // The owner's list.
+  "graph-plotter",
+  "surface-plotter",
+  "unit-circle",
+  "fourier-circles",
+  "pythagoras-proof",
+  "chess-set",
+  "puzzle-cube",
+  // Added: they read like a chart, a diagram or a page.
+  "periodic-table",
+  "splat-equation",
+  "chladni-plate",
+  "anatomy-atlas",
+  "song-landscape",
+]);
+
+export function holdsStill(toy) {
+  return !!toy && (STILL_SHELVES.has(toy.category) || STILL_TOYS.has(toy.id));
 }
