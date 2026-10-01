@@ -60,6 +60,7 @@ samples were trained with small settings to fit (360 px, 800 to 1,500 steps).
 | Statue orbit, 14 s at 3:24 (one shot), 480 px | 27 / 26                | 233 s          | 2,006 steps, 111 min | 38,621 | 2.2 MB  | Works; the r4 card (+44% edge sharpness)    |
 | Edinburgh walk (POPtravel), 10 s at 7:32      | 20 / 20                | 62 s           | 800 steps, 59 min    | 30,135 | 1.58 MB | Works; walkers become ghosts                |
 | Edinburgh walk, 28 frames, 480 px             | 28 / 28                | 112 s          | 2,006 steps, 109 min | 40,474 | 2.3 MB  | Works; the r4 card (edge sharpness doubled) |
+| Edinburgh walk, 28 frames, 640 px             | 28 / 28                | 143 s          | 3,000 steps, 251 min | 49,695 | 2.6 MB  | Works; the r5 card (+49% over r4)           |
 | Nicosia by drone (The Track Record), 0:45     | 20 / –                 | failed, 33 min | –                    | –      | –       | Frames taken for panoramas (a bug, fixed)   |
 | Nicosia by drone, 19 s at 1:04 (fixed crop)   | 24 / –                 | failed, 1 min  | –                    | –      | –       | Too little parallax (high, slow flight)     |
 

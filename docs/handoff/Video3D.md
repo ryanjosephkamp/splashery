@@ -128,9 +128,10 @@ Model: Opus 5.5 (the lane's assigned model), default effort, the whole lane.
   (Liberty orbit, Edinburgh street, Nicosia drone) trained here by `tools/v3d-sample.mjs`.
 - Report: `docs/lab/VIDEO3D.md` (measurements, what fails, phones, recommendation, the Mac route).
 - Cards (Effect review page 1, then page 2 from 20:26 UTC on September 30): `v3d-object` → r2 → r3 →
-  `v3d-object-r4` (page 2, good); `v3d-street` → r2 → r3 → `v3d-street-r4` (page 2);
-  `v3d-object-compare` and `v3d-street-compare` (the source video beside the splat flight, good);
-  `v3d-drone` (where it fails, page 2, good); `v3d-progress` (page 2, good).
+  `v3d-object-r4` (page 2, good); `v3d-street` → r2 → r3 → r4 → `v3d-street-r5` (page 2; 640 px,
+  3,000 steps, +49% over r4); `v3d-object-compare` and `v3d-street-compare` (the source video beside
+  the splat flight, good); `v3d-drone` (where it fails, page 2, good); `v3d-progress` (page 2,
+  good).
 - r2: the far water, sky and skyline kept (pulled in onto a shell between radius 1 and 2, built as a
   `fit: false` cloud); floaters and smears pruned near the subject; the flight uses the video's own
   lens. r3: the Lab lane's `kernel: "sharp"`. r4: both samples retrained at 480 px for 2,006 steps
