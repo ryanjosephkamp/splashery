@@ -28,10 +28,11 @@ import {
 import { findToy, assetURL, lookOption, pickLook, labsOn } from "./toys.js";
 
 // UI r2: focus mode, the sheet's extra stops, the desktop panel's fold and
-// gallery page, the finer drawing pad and moving (panning) a toy show behind
-// the labs switch until the owner's marks; then this returns true.
+// gallery page, the finer drawing pad and moving (panning) a toy. They showed
+// behind the labs switch until the owner's marks (all eight good); since
+// October 1, 2026 they are on for everyone.
 export function ui2On() {
-  return labsOn();
+  return true;
 }
 import { pickKernel } from "./kernels.js"; // Lab
 import { pickSharpness, sharpOff } from "./sharpness.js"; // Sharpness
@@ -259,7 +260,11 @@ export class Player {
     this.driver.clearPokes();
     let info;
     const shelfDef = toy.kind === "builtin" ? findToy(toy.id) : null;
-    this.motion.setToy(null, null);
+    // A kit toy that switches its own options (a periodic table tile,
+    // Player.switchTo) keeps moving as it was until the new build replaces
+    // it, so its hidden parts stay hidden while it stays on screen (lane Fix6).
+    const same = this.switching && shelfDef?.kind === "kit" && this.toyInfo?.kind === "kit" && this.toyInfo.id === shelfDef.id; // prettier-ignore
+    if (!same) this.motion.setToy(null, null);
     if (shelfDef?.kind === "kit") {
       info = await this.buildKit(shelfDef, toy, token, progress);
       if (!info) return null;
@@ -1228,7 +1233,12 @@ export class Player {
         toy.options = { ...(toy.options || {}), ...options };
         return this.loadToy(toy);
       });
-    await rebuild(r.options);
+    this.switching = true;
+    try {
+      await rebuild(r.options);
+    } finally {
+      this.switching = false;
+    }
     if (this.scene.toy !== toy || !this.motion.controlDef(r.key)) return;
     const next = this.motion.act(this.time, null, { key: r.key, pick: r.pick });
     this.scene.motion.controls = { ...this.scene.motion.controls, [next.key]: this.motion.targets[next.key] }; // prettier-ignore
@@ -1371,6 +1381,14 @@ export class Player {
         this.stage.setScreenCanvas(scr.canvas);
       }
     }
+    // A toy that moves on by itself (the periodic table's tour) names new
+    // options in out.next ({ options, key }): it is rebuilt as a tile tap
+    // rebuilds it, without the tap's sound, and then `key` fires (lane Fix6).
+    const next = this.motion.out?.next;
+    if (next?.options && !this.movingOn && info.kind === "kit") {
+      this.movingOn = true;
+      this.switchTo({ ...next, echo: true }).finally(() => (this.movingOn = false));
+    }
     this.pictures?.update(this.motion.out, this.time); // Pictures
     const gliding = this.followView(); // Page focus
     // Fluids: step the toy's fluids on its own clock, steered by out.fluid.
@@ -1496,6 +1514,9 @@ export class Player {
   // pointer follows the horizontal plane the drag started on, or the plane
   // `drag.plane` names: "view" (facing the camera) or a normal in recipe
   // coordinates (or `(point) => normal`, such as the face of a cube).
+  // Lane UI r4: `drag.start` and `drag.move` may return taps to fire, as a
+  // tap on the toy would ({ key, pick }, or a list of them in order): a
+  // glissando, a finger dragged across a keyboard's keys.
   dragStartsHere(world) {
     const d = this.toyInfo?.recipe?.drag;
     return !d || !!d.at(this.toRecipe(world));
@@ -1509,7 +1530,8 @@ export class Player {
       const p = this.toRecipe(world);
       const n = typeof drag.plane === "function" ? drag.plane(p) : drag.plane;
       this.dragPlane = n ? { point: p, normal: n === "view" ? this.recipeRay(x, y).dir : n } : null; // prettier-ignore
-      drag.start?.(p, this.time);
+      this.dragFired = false; // UI r4
+      this.fireDrag(drag.start?.(p, this.time));
       this.stage.requestRender();
       return;
     }
@@ -1530,9 +1552,11 @@ export class Player {
       if (Math.abs(den) < 1e-4) return;
       const t = ((o[0] - ray.origin[0]) * n[0] + (o[1] - ray.origin[1]) * n[1] + (o[2] - ray.origin[2]) * n[2]) / den; // prettier-ignore
       if (t < 0) return;
-      drag.move(
-        [0, 1, 2].map((i) => ray.origin[i] + ray.dir[i] * t),
-        this.time,
+      this.fireDrag(
+        drag.move(
+          [0, 1, 2].map((i) => ray.origin[i] + ray.dir[i] * t),
+          this.time,
+        ),
       );
       this.stage.requestRender();
       return;
@@ -1543,7 +1567,7 @@ export class Player {
       if (Math.abs(ray.dir[1]) < 1e-4) return;
       const t = (this.dragY - ray.origin[1]) / ray.dir[1];
       const w = [0, 1, 2].map((i) => ray.origin[i] + ray.dir[i] * t);
-      drag.move(this.toRecipe(w), this.time);
+      this.fireDrag(drag.move(this.toRecipe(w), this.time));
       this.stage.requestRender();
       return;
     }
@@ -1565,6 +1589,19 @@ export class Player {
     if (len > 1e-6) pull = pull.map((v) => (v / len) * max * Math.tanh(len / max));
     this.driver.grabTo(pull);
     this.stage.requestRender();
+  }
+
+  // UI r4: fires the taps a recipe's drag returned, in order, as taps on the
+  // toy would (each sounds and moves its key); `dragFired` tells the app the
+  // drag played, so letting go is not also a tap.
+  fireDrag(taps) {
+    if (!taps) return;
+    for (const t of Array.isArray(taps) ? taps : [taps]) {
+      if (!t?.key || !this.motion.controlDef(t.key)) continue;
+      const r = this.motion.act(this.time, null, { key: t.key, pick: t.pick ?? null });
+      this.dragFired = true;
+      this.emit("action", { ...r, drag: true });
+    }
   }
 
   // The pointer's ray in the current toy's recipe coordinates (the

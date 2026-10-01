@@ -335,7 +335,7 @@ function betweenMoves() {
 }
 // Whether the pieces stand still (not playing, stepping or gliding).
 const settled = (c) => c.play < 0.5 && play.target === null && play.jump === null && !play.glide && betweenMoves(); // prettier-ignore
-const tick = (f, vol) => touch.cues.push({ voice: "wood", f, decay: 1.2, vol });
+const tick = (f, vol) => touch.cues.push({ voice: "chessmove", f: f * 0.6, kind: "lift", vol });
 // A tap on the board while the game is paused: pick one of the pieces
 // whose turn it is, then tap a square it can legally move to (a pawn
 // reaching the last rank becomes a queen). Tapping the piece again, or a
@@ -457,7 +457,8 @@ function positionsAt(g) {
   });
 }
 
-const CLACK = (f, vol = 1) => ({ voice: "wood", f, decay: 0.8, vol });
+// Sound B: a piece set down on a felted wooden board.
+const CLACK = (f, vol = 1) => ({ voice: "sample", file: "chess-set-move.mp3", pitch: Math.min(1.25, Math.max(0.8, f / 620)), vol: 1.3 * vol, fallback: { voice: "chessmove", f: f * 0.8, vol } }); // prettier-ignore
 // Move speed: 0.4x to 2.5x (half way is the Opera Game's pace).
 const paceOf = (c) => Math.pow(2.5, ((c.pace ?? 0.5) - 0.5) * 2);
 

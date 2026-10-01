@@ -5,6 +5,10 @@
 
 import { mix, shade, clamp, smoothstep, ramp } from "../kit.js";
 import { spectrogram, landscapePlan, toMono, DB_FLOOR, F_MIN, F_MAX } from "./studio-audio.js";
+// Lane Live input: the microphone (src/live/), only once someone taps for it.
+import { live as liveIn } from "../live/live.js";
+import { bandLevels } from "../live/analysis.js";
+import { reliefGrid } from "../live/relief.js";
 
 // ---- The Chladni plate ----------------------------------------------------------------
 // The classic model of a square plate of side L = 1 (x, y from 0 to 1) in one
@@ -157,13 +161,14 @@ function chladniCue(mode, on) {
     return [
       { voice: "tone", f, decay: 9, kind: "sine", vol: 0.9 },
       { voice: "tone", f: f * 2, decay: 9, kind: "triangle", vol: 0.12 },
-      { voice: "patter", at: 0.1, f: 2600, n: 40, decay: 2.2, vol: 0.3 },
+      // Sound B: the sand slides as it settles, not a patter of clicks.
+      { voice: "breath", at: 0.1, f: 2600, to: 0.8, decay: 3, vol: 0.25 },
     ];
   return [{ voice: "hiss", f: 3000, decay: 0.7, vol: 0.3 }];
 }
 
 const CHLADNI = {
-  alive: (c) => c.bow > 0.001 && c.bow < 0.999,
+  alive: (c) => (c.bow > 0.001 && c.bow < 0.999) || liveIn.on("mic"), // lane Live input: sung to
   // Sand grains take most of the budget (in twelve copies of which one shows).
   density: 2,
   options: [
@@ -177,12 +182,22 @@ const CHLADNI = {
   ],
   controls: [{ key: "bow", label: "Bow the plate", type: "toggle", default: 0, ease: BOW_SECS }],
   action: { key: "bow", label: "Bow the plate", quiet: ["bow"] },
+  // Lane Live input: sing to the plate.
+  input: {
+    title: "Sing to the plate",
+    fileButton: false,
+    live: [{ kind: "mic", rebuild: false, status: singStatus }],
+    note: "Tap “Use my microphone” and sing a steady note. The plate listens as a thinner plate would, with its modes at 75, 150, 195, 255 and 375 Hz: the mode nearest your note rings, and the sand settles into its figure while you hold it. Change the note and another mode takes over.",
+  },
   drive(t, c, out, info) {
     const g = info?.data?.chladni;
     if (!g) return;
-    const p = clamp01(c.bow ?? 0);
+    // Lane Live input: while the microphone is on, your voice bows the plate.
+    const sung = liveIn.on("mic");
+    const p = sung ? singDrive(info.time ?? t, g.mode) : clamp01(c.bow ?? 0);
     // The sound: the hum when the bowing starts, a hiss when it is stirred.
-    if (CH.was <= 0.001 && p > 0.001) for (const s of chladniCue(g.mode, true)) out.cues.push(s);
+    if (sung) CH.was = p; // your voice is the sound
+    else if (CH.was <= 0.001 && p > 0.001) for (const s of chladniCue(g.mode, true)) out.cues.push(s);
     else if (CH.was >= 0.999 && p < 0.999) for (const s of chladniCue(g.mode, false)) out.cues.push(s); // prettier-ignore
     CH.was = p;
     // Which of the twelve copies of the sand shows, and how far it has
@@ -192,8 +207,8 @@ const CHLADNI = {
     for (let i = 0; i < KEYS; i++) out.parts[`sand${i}`] = { visible: i === j ? 1 : 0 };
     out.morph = [pos - j, 0, 0, 0];
     // The bow is drawn along the front edge while the sand moves.
-    const bowing = p > 0.001 && p < 0.999;
-    const ramp = Math.min(smoothstep(0, 0.06, p), 1 - smoothstep(0.94, 1, p));
+    const bowing = !sung && p > 0.001 && p < 0.999;
+    const ramp = sung ? SING.r : Math.min(smoothstep(0, 0.06, p), 1 - smoothstep(0.94, 1, p));
     out.parts.bow = {
       visible: bowing ? 1 : 0,
       offset: [0, 0.38 * Math.sin(t * 7) * ramp, 0],
@@ -203,6 +218,8 @@ const CHLADNI = {
   },
   build(k, o) {
     const mode = modeById(o.mode);
+    // Lane Live input: a new plate's sand starts scattered.
+    Object.assign(SING, { p: 0, want: null, asked: false, last: null });
     // The stand: a base, a post, and the plate clamped on top.
     const plate = k.part("plate", { pivot: [0, 0, 0], axis: [0, 1, 0] });
     k.add(k.cylinder(0.5, 0.1, { caps: true }), {
@@ -430,7 +447,7 @@ function playStep(song, sound, on, time) {
 }
 
 const SONG_LANDSCAPE = {
-  alive: () => PLAY.on,
+  alive: () => PLAY.on || liveIn.on("mic"), // lane Live input
   density: 1,
   options: [
     {
@@ -474,7 +491,20 @@ const SONG_LANDSCAPE = {
       return { song: "custom", songName: SONG.custom.name };
     },
     shown: () =>
-      SONG.current ? `${SONG.current.name} (${Math.round(SONG.current.duration)} s)` : "",
+      liveIn.on("mic") ? "Live: what the microphone hears now is at the front." : SONG.current ? `${SONG.current.name} (${Math.round(SONG.current.duration)} s)` : "", // prettier-ignore
+    // Lane Live input: the microphone instead of a file.
+    live: [{ kind: "mic" }],
+  },
+  // Lane Live input: the live landscape's heights and colors.
+  screen: {
+    get width() {
+      return LIVE_SONG.nf * 2;
+    },
+    get height() {
+      return LIVE_SONG.nt;
+    },
+    version: (time) => (liveIn.on("mic") ? Math.floor(time * LIVE_SONG.rate) : "off"),
+    draw: (g, time) => liveSongDraw(g, time),
   },
   credits: [
     {
@@ -496,7 +526,7 @@ const SONG_LANDSCAPE = {
   },
   drive(t, c, out, info) {
     const g = info?.data?.song;
-    if (!g) return;
+    if (!g || g.liveMic) return; // lane Live input: the microphone's landscape moves by itself
     // Each tap plays or pauses (a song that has ended plays again from the start).
     const n = info.tap?.n ?? 0;
     if (n < PLAY.taps) PLAY.taps = 0;
@@ -533,6 +563,7 @@ const SONG_LANDSCAPE = {
   build(k, o) {
     const song = SONG.want || SONG.sample;
     SONG.current = song;
+    if (liveIn.on("mic")) return liveSongBuild(k, o); // lane Live input
     // A new build (another song, a look) starts stopped.
     try {
       PLAY.src?.stop();
@@ -648,6 +679,170 @@ const SONG_LANDSCAPE = {
 };
 
 const clamp01 = (x) => (x < 0 ? 0 : x > 1 ? 1 : x);
+
+// ---- Live input (lane Live input): the microphone -------------------------------------
+// The song landscape, live: with the microphone on, the landscape is what
+// you hear now. The front row is this moment (the analyser's spectrum,
+// pooled into bands spaced evenly in pitch, low on the left); every
+// ROW_RATE-th of a second the rows move one step back, so the last few
+// seconds stretch away from you. Heights are loudness in dB (the loudest
+// band heard lately at full height, DB_RANGE below it at the floor). The
+// splats are relief splats (src/live/relief.js): they are built once and
+// take their height and color from a canvas drawn on each frame.
+const LIVE_RANGE = 36; // dB from the floor to the top
+const LIVE_SONG = {
+  nf: 96,
+  nt: 150,
+  rate: 30, // rows a second
+  top: -40, // dB of the loudest band heard lately
+  rows: 0, // rows written
+  last: null,
+  look: "pitch",
+  bands: new Float32Array(96),
+};
+
+function liveSongBuild(k, o) {
+  const { nf, nt } = LIVE_SONG;
+  const D = 3.2;
+  LIVE_SONG.look = o.look;
+  LIVE_SONG.rows = 0;
+  LIVE_SONG.last = null;
+  const cw = W / nf;
+  const cd = D / nt;
+  reliefGrid(k, {
+    cols: nf,
+    rows: nt,
+    at: (u, v) => [(u - 0.5) * W, 0.01, D / 2 - v * D],
+    axis: 1,
+    lift: H,
+    n: [0, 1, 0],
+    size: Math.max(cw, cd) * 0.8,
+    layers: 2,
+  });
+  sheet(k, { x0: -W / 2 - 0.08, x1: W / 2 + 0.08, z0: -D / 2 - 0.08, z1: D / 2 + 0.08, y: -0.005, cells: k.count * 0.06, color: () => "#2a303a" }); // prettier-ignore
+  // Now: a glowing line across the front.
+  const mk = [];
+  for (let i = 0; i < 160; i++) {
+    const xx = ((i + 0.5) / 160 - 0.5) * (W + 0.1);
+    mk.push({ p: [xx, 0.02, D / 2 + 0.03], color: "#fff3b0", size: 1.1, opacity: 1, pattern: false }); // prettier-ignore
+  }
+  k.cloud({ share: mk.length / k.count, pattern: false }, (rand, i) => mk[i] || null);
+  k.reach([0, H + 0.2, -D / 2 - 0.1]);
+  k.data = { song: { liveMic: true, nf, nt } };
+}
+
+// Writes the rows that are due into the landscape's canvas: its colors on
+// the left half, heights on the right.
+function liveSongDraw(g, time) {
+  const { nf, nt } = LIVE_SONG;
+  const mic = liveIn.mic;
+  const c = g.canvas;
+  if (LIVE_SONG.last === null) {
+    // Nothing heard yet: every row flat, in the colors of silence.
+    for (let f = 0; f < nf; f++) {
+      const [r, gg, bb] = songColor(LIVE_SONG.look, f, nf, 0);
+      g.fillStyle = `rgb(${Math.round(r * 255)},${Math.round(gg * 255)},${Math.round(bb * 255)})`;
+      g.fillRect(f, 0, 1, nt);
+    }
+    g.fillStyle = "#000";
+    g.fillRect(nf, 0, nf, nt);
+    LIVE_SONG.last = time;
+  }
+  let due = Math.min(nt, Math.floor((time - LIVE_SONG.last) * LIVE_SONG.rate));
+  if (due <= 0 || !mic) return;
+  LIVE_SONG.last += due / LIVE_SONG.rate;
+  const b = bandLevels(mic.spectrum, mic.rate, nf, F_MIN, Math.min(F_MAX, mic.rate / 2), LIVE_SONG.bands); // prettier-ignore
+  // The loudest band lately sets the top (it sinks 6 dB a second, never
+  // below −50 dB, so silence stays low).
+  let peak = -120;
+  for (const v of b) peak = Math.max(peak, v);
+  LIVE_SONG.top = Math.max(peak, LIVE_SONG.top - (6 * due) / LIVE_SONG.rate, -50);
+  // Move the old rows back.
+  g.drawImage(c, 0, 0, c.width, c.height - due, 0, due, c.width, c.height - due);
+  const img = g.createImageData(nf * 2, 1);
+  const px = img.data;
+  for (let f = 0; f < nf; f++) {
+    // A narrower range than a file's (the room's own hum sits under it).
+    const h = clamp01((b[f] - (LIVE_SONG.top - LIVE_RANGE)) / LIVE_RANGE) ** 1.5;
+    const [r, gg, bb] = songColor(LIVE_SONG.look, f, nf, h);
+    px[f * 4] = Math.round(r * 255);
+    px[f * 4 + 1] = Math.round(gg * 255);
+    px[f * 4 + 2] = Math.round(bb * 255);
+    px[f * 4 + 3] = 255;
+    px[(nf + f) * 4] = Math.round(h * 255);
+    px[(nf + f) * 4 + 3] = 255;
+  }
+  for (let j = 0; j < due; j++) g.putImageData(img, 0, j);
+  LIVE_SONG.rows += due;
+}
+
+// The Chladni plate, sung to: with the microphone on, the note you sing
+// drives the plate. A plate a quarter as thick as the one on show (a
+// plate's frequencies go with its thickness) has its modes where voices
+// are: 75, 150, 195, 255 and 375 Hz. The mode nearest your note is the one
+// that rings; how strongly follows a resonance curve (half as strong about
+// 60 cents away), times how loud you sing. While it rings the sand hops
+// and drifts to its still lines, as when it is bowed; when you stop, the
+// sand stays where it is. A different mode, held for a moment, gets its
+// own plate of scattered sand.
+export const SING_F0 = F0 / 4;
+export const singFreq = (mode) => SING_F0 * (mode.n * mode.n + mode.m * mode.m);
+const SING = { p: 0, want: null, since: 0, last: null, note: null, near: null, r: 0 };
+export const singState = () => ({ p: SING.p, note: SING.note, mode: SING.near?.mode.id ?? null }); // prettier-ignore
+
+// The mode nearest a sung frequency (keeping the sign of the one on show
+// when the pair shares a frequency), and how strongly it rings (0..1).
+export function singMode(hz, current) {
+  let best = null;
+  for (const m of MODES) {
+    const cents = 1200 * Math.log2(hz / singFreq(m));
+    const d = Math.abs(cents) - (current && m.n === current.n && m.m === current.m && m.s === current.s ? 1e-6 : 0); // prettier-ignore
+    if (!best || d < best.d) best = { mode: m, d, cents };
+  }
+  const x = best.cents / 60;
+  return { ...best, response: 1 / (1 + x * x) };
+}
+
+function singStatus() {
+  if (!liveIn.on("mic")) return "";
+  const n = SING.note;
+  if (!n) return "Sing a steady note (an “ooh” works best), low or high.";
+  const near = SING.near;
+  const hz = Math.round(singFreq(near.mode));
+  const side = near.cents > 25 ? " Sing a little lower." : near.cents < -25 ? " Sing a little higher." : ""; // prettier-ignore
+  return `You: ${n.name} (${Math.round(n.hz)} Hz). Nearest mode ${near.mode.n}, ${near.mode.m} rings at ${hz} Hz on this plate.${side}`; // prettier-ignore
+}
+
+// One frame of the sung plate: how far the sand has settled (0..1).
+function singDrive(time, mode) {
+  const dt = SING.last === null ? 0 : Math.min(0.1, Math.max(0, time - SING.last));
+  SING.last = time;
+  const pitch = liveIn.mic?.pitch;
+  const loud = clamp01((liveIn.mic?.db ?? -120) / 30 + 1.8); // −54 dBFS nothing, −24 full
+  if (pitch && loud > 0) {
+    SING.note = pitch.note && { name: pitch.note.name, hz: pitch.hz };
+    SING.near = singMode(pitch.hz, mode);
+    SING.r = SING.near.response * loud;
+    const other = SING.near.mode.id !== mode.id;
+    if (other && SING.near.response > 0.5) {
+      if (SING.want !== SING.near.mode.id) {
+        SING.want = SING.near.mode.id;
+        SING.since = time;
+      } else if (time - SING.since > 0.4 && !SING.asked) {
+        SING.asked = true;
+        liveIn.setOptions?.({ mode: SING.want });
+      }
+    } else if (!other) {
+      SING.want = null;
+      SING.p = Math.min(1, SING.p + (dt / BOW_SECS) * SING.r * 1.4);
+    }
+  } else {
+    SING.r = 0;
+    SING.want = null;
+  }
+  return SING.p;
+}
+// ---- End of live input ----------------------------------------------------------------
 
 export const RECIPES = {
   "song-landscape": SONG_LANDSCAPE,

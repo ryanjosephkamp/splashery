@@ -94,8 +94,9 @@ test.describe("worlds hybrid", () => {
         const app = window.__world.view.app;
         const names = app.root.findComponents("render").filter((r) => r.enabled && r.entity.enabled).map((r) => r.entity.name); // prettier-ignore
         const casters = app.root.findComponents("gsplat").filter((g) => g.castShadows && g.entity.enabled).map((g) => g.entity.name); // prettier-ignore
+        const person = w.meshCharacter ? w.meshCharacter.findComponents("render").every((r) => r.castShadows) : null; // prettier-ignore
         const sun = app.root.findByName("sun").light;
-        return { mode: window.__world.mode, stats: w.stats(), names, casters, sunShadows: sun.castShadows, envAtlas: !!app.scene.envAtlas, fog: app.scene.fog.type, tone: window.__world.view.camera.camera.toneMapping }; // prettier-ignore
+        return { mode: window.__world.mode, stats: w.stats(), names, casters, person, sunShadows: sun.castShadows, envAtlas: !!app.scene.envAtlas, fog: app.scene.fog.type, tone: window.__world.view.camera.camera.toneMapping }; // prettier-ignore
       });
       seen[mode] = s;
       expect(s.mode).toBe(mode);
@@ -105,8 +106,10 @@ test.describe("worlds hybrid", () => {
       // A tone map for hybrid mode's lit models; splats keep their colors.
       if (mode === "hybrid") expect(s.tone).toBeGreaterThan(0);
       else expect(s.tone).toBe(0);
-      // The character casts shadows in both modes, and so do near props.
-      expect(s.casters.filter((n) => n.startsWith("part-")).length).toBeGreaterThan(5);
+      // The character casts shadows in both modes (round 3: hybrid mode's
+      // character is the realistic person, a model), and so do near props.
+      if (mode === "hybrid") expect(s.person).toBe(true);
+      else expect(s.casters.filter((n) => n.startsWith("part-")).length).toBeGreaterThan(5);
       expect(s.casters.some((n) => n.startsWith("prop-"))).toBe(true);
       // Splats are drawn in both modes (props and the character).
       expect(s.stats.props).toBeGreaterThan(20_000);
@@ -189,54 +192,59 @@ test.describe("worlds hybrid", () => {
       expect(noMe).not.toBe(withMe);
     });
 
-  test("?character=mesh swaps in the lit, skinned character: it casts shadows, stands on the ground and its clips follow the world's clock", async ({
-    page,
-  }) => {
-    const errors = [];
-    page.on("pageerror", (e) => errors.push(e.message));
-    await open(page, "&render=hybrid&character=mesh");
-    await page.click("#enter");
-    await settle(page);
-    const pose = () =>
-      page.evaluate(() => {
-        const m = window.__world.world.meshCharacter;
-        const bone = (n) => m.findByName(n).getPosition();
-        const l = bone("LeftFoot");
-        const r = bone("RightFoot");
-        return { gap: l.clone().sub(r).length(), head: bone("Head_end").y, foot: Math.min(l.y, r.y) }; // prettier-ignore
+  // Round 3: "mesh" is the realistic person (hybrid mode's default) and
+  // "kenney" the stylized character of the hybrid round.
+  for (const who of ["mesh", "kenney"])
+    test(`?character=${who} swaps in a lit, skinned character: it casts shadows, stands on the ground and its clips follow the world's clock`, async ({
+      page,
+    }) => {
+      const errors = [];
+      page.on("pageerror", (e) => errors.push(e.message));
+      await open(page, `&render=hybrid&character=${who}`);
+      await page.click("#enter");
+      await settle(page);
+      const names = who === "mesh" ? ["foot_l", "foot_r", "head"] : ["LeftFoot", "RightFoot", "Head_end"]; // prettier-ignore
+      const pose = () =>
+        page.evaluate((names) => {
+          const m = window.__world.world.meshCharacter;
+          const bone = (n) => m.findByName(n).getPosition();
+          const l = bone(names[0]);
+          const r = bone(names[1]);
+          return { gap: l.clone().sub(r).length(), head: bone(names[2]).y, foot: Math.min(l.y, r.y) }; // prettier-ignore
+        }, names);
+      const s = await page.evaluate(() => {
+        const w = window.__world.world;
+        const m = w.meshCharacter;
+        const renders = m.findComponents("render");
+        return {
+          has: !!m,
+          shadows: renders.every((r) => r.castShadows),
+          splats: w.stats().fixed - (w.skyCount || 0),
+          state: m.anim.baseLayer.activeState,
+          y: w.char.pos[1],
+        };
       });
-    const s = await page.evaluate(() => {
-      const w = window.__world.world;
-      const m = w.meshCharacter;
-      const renders = m.findComponents("render");
-      return {
-        has: !!m,
-        shadows: renders.every((r) => r.castShadows),
-        splats: w.stats().fixed - (w.skyCount || 0),
-        state: m.anim.baseLayer.activeState,
-        y: w.char.pos[1],
-      };
+      expect(s.has).toBe(true);
+      expect(s.shadows).toBe(true);
+      expect(s.splats).toBe(0);
+      // (The person starts in its idle; Kenney's blend tree has idle in Move.)
+      expect(s.state).toBe(who === "mesh" ? "Idle" : "Move");
+      // As tall as the splat character, feet on the ground.
+      const still = await pose();
+      expect(still.head - s.y).toBeGreaterThan(1.5);
+      expect(still.head - s.y).toBeLessThan(1.95);
+      expect(Math.abs(still.foot - s.y)).toBeLessThan(0.2);
+      // A paused clock leaves the pose as it is; walking swings the feet apart.
+      await page.evaluate(() => window.__world.tick(0));
+      expect((await pose()).gap).toBeCloseTo(still.gap, 3);
+      const gaps = [];
+      for (let i = 0; i < 8; i++) {
+        await page.evaluate(() => window.__world.tick(1 / 30, { y: 1 }));
+        gaps.push((await pose()).gap);
+      }
+      expect(Math.max(...gaps) - Math.min(...gaps)).toBeGreaterThan(0.05);
+      expect(errors).toEqual([]);
     });
-    expect(s.has).toBe(true);
-    expect(s.shadows).toBe(true);
-    expect(s.splats).toBe(0);
-    expect(s.state).toBe("Move");
-    // As tall as the splat character, feet on the ground.
-    const still = await pose();
-    expect(still.head - s.y).toBeGreaterThan(1.5);
-    expect(still.head - s.y).toBeLessThan(1.95);
-    expect(Math.abs(still.foot - s.y)).toBeLessThan(0.2);
-    // A paused clock leaves the pose as it is; walking swings the feet apart.
-    await page.evaluate(() => window.__world.tick(0));
-    expect((await pose()).gap).toBeCloseTo(still.gap, 3);
-    const gaps = [];
-    for (let i = 0; i < 8; i++) {
-      await page.evaluate(() => window.__world.tick(1 / 30, { y: 1 }));
-      gaps.push((await pose()).gap);
-    }
-    expect(Math.max(...gaps) - Math.min(...gaps)).toBeGreaterThan(0.05);
-    expect(errors).toEqual([]);
-  });
 
   test("frames per second, sampled in both modes", async ({ page }) => {
     const out = {};

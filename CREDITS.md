@@ -311,6 +311,66 @@ and others, Apache 2.0; the quantized ONNX build is by
 [ONNX Runtime Web](https://github.com/microsoft/onnxruntime) (MIT). Photos people open are processed
 in their browser and never uploaded.
 
+The Splat mirror (a labs toy, lane Live input) shows the same "Still Life with Cheese" (CC0 1.0)
+with its depth map until someone turns the camera on, and uses the same depth model, in a worker,
+for the camera's live depth. The live toys' test signals (claps, sung notes) are made by our own
+code; nothing from the microphone, the camera or a shared screen is recorded, stored or sent.
+
+## Sound effects (lane Sound B)
+
+Recorded sound effects for some toys on the nature, weather, food, toys, Open me, medieval, animals,
+math, holidays, vehicles and landmarks shelves, in `assets/sounds/`. Every one is CC0 1.0 (public
+domain), checked on its live page on September 30, 2026. Each was cut, faded, made mono,
+peak-normalized and saved as a small MP3; it loads only when its toy is tapped. The details are in
+[tools/assets.json](tools/assets.json) (`sounds`).
+
+| File                         | Work                                                                                             | Author                                             | License                                                       |
+| ---------------------------- | ------------------------------------------------------------------------------------------------ | -------------------------------------------------- | ------------------------------------------------------------- |
+| `puzzle-cube-turn.mp3`       | [Cube Turn - 9 (a puzzle cube turning)](https://freesound.org/s/486585/)                         | SpaceJoe                                           | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `balloon-dog-pop.mp3`        | [Balloon-Burst-07.wav](https://freesound.org/s/82121/)                                           | Gniffelbaf                                         | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `book-page.mp3`              | [Book Turn Page 2.wav](https://freesound.org/s/119127/)                                          | esperri                                            | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `apple-bite.mp3`             | [Bite (Apple)](https://freesound.org/s/275015/)                                                  | wadaltmon                                          | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `popcorn-popping.mp3`        | [popcorn.wav](https://freesound.org/s/488722/)                                                   | Mike888                                            | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `taco-crack.mp3`             | [chips crunch sound](https://freesound.org/s/705360/)                                            | TomatoHater                                        | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `fireworks-burst.mp3`        | [Firework Explosion 3](https://freesound.org/s/212683/)                                          | a deleted Freesound account (deleted_user_3544904) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `colosseum-crowd.mp3`        | [cheering and clapping crowd 1](https://freesound.org/s/221568/)                                 | AlaskaRobotics                                     | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `colosseum-hooves.mp3`       | [Horse and Carriage.mp3](https://freesound.org/s/388391/)                                        | maadmacs                                           | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `steam-train-chug.mp3`       | [Steam Train In Motion 1.wav](https://freesound.org/s/179349/)                                   | lolamadeus                                         | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `sports-car-rev.mp3`         | [Car Engine Revving.WAV](https://freesound.org/s/558844/)                                        | DigPro120                                          | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `tractor-engine.mp3`         | [Tractor whirring](https://freesound.org/s/339167/)                                              | vonis22                                            | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `helicopter-rotor.mp3`       | [Helicopter.wav](https://freesound.org/s/488089/)                                                | Mike_Leister                                       | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `propeller-plane-engine.mp3` | [Aeroplane Passing Close.wav](https://freesound.org/s/507446/)                                   | paulprit                                           | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `bow-and-target-release.mp3` | [Bow Release (Bow and Arrow) 3](https://freesound.org/s/384918/)                                 | Ali_6868                                           | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `owl-hoot.mp3`               | [Owl Hoot](https://freesound.org/s/465697/)                                                      | Breviceps                                          | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `frog-croak.mp3`             | [Frog croaking sound effect](https://freesound.org/s/354132/)                                    | betterchinese                                      | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `frog-fly.mp3`               | [Fly_Buzzing_Edited.wav](https://freesound.org/s/443059/)                                        | AmberdeMeillon                                     | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `bonsai-snip.mp3`            | [scissors cut.wav](https://freesound.org/s/175522/)                                              | mywhats                                            | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `oak-leaves.mp3`             | [FallingLeaves](https://freesound.org/s/489911/)                                                 | falcospizaetus                                     | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `rocks-pebbles.mp3`          | [Slow Pebble Tumble.wav](https://freesound.org/s/398698/)                                        | bbrocer                                            | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `iceberg-crack.mp3`          | [Ice Crack 1](https://freesound.org/s/262635/)                                                   | j_p_higgins                                        | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `klein-bottle-slosh.mp3`     | [Bottle Slosh 2](https://freesound.org/s/667273/)                                                | alegemaate                                         | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `spinning-top-spin.mp3`      | [Metallic Spinning Top (Dry Sound).wav](https://freesound.org/s/334970/)                         | Uzbazur                                            | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `spring-toy-boing.mp3`       | [battery compartment spring 01.wav](https://freesound.org/s/472478/)                             | denalwa                                            | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `chess-set-move.mp3`         | [Piece Placement.mp3](https://freesound.org/s/546119/)                                           | el_boss                                            | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `robot-wind.mp3`             | [Wind-up sound](https://freesound.org/s/445966/)                                                 | Breviceps                                          | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `dice-throw.mp3`             | [Casino Audio 1.1: dice-throw-1.ogg and dice-throw-3.ogg](https://kenney.nl/assets/casino-audio) | Kenney (kenney.nl)                                 | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+
+The Video to 3D toy (a labs toy, lane Video 3D) ships two sample scenes in `assets/toys/video-3d/`,
+each trained by `tools/v3d-sample.mjs` from a stretch of a video on Wikimedia Commons (the splats
+and the solved camera path only; the videos are not shipped). Each license was checked on its live
+Commons page on September 30, 2026:
+
+- "Statue Of Liberty 4k Drone" by the Dronalist (14 seconds from 3:24),
+  [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Statue_Of_Liberty_4k_Drone.webm).
+- "Walking in EDINBURGH - Scotland (UK) - 4K 60fps (UHD)" by POPtravel (10 seconds from 7:32),
+  [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/), on
+  [Commons](<https://commons.wikimedia.org/wiki/File:Walking_in_EDINBURGH_-_Scotland_(UK)_-_4K_60fps_(UHD).webm>).
+
+The camera path and the splats are worked out on the device by
+[Splat.js](https://github.com/arrival-space/splat.js) (Stratum1 GmbH, MIT). Videos people open are
+read in their browser and never uploaded.
+
 ## Worlds
 
 Hybrid mode in Worlds (a labs page) lights its ground with four texture sets and its sky with one
@@ -335,6 +395,40 @@ Kenney, [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (checked o
 in the pack's own license file on September 29, 2026): the model, the "skaterMaleA" skin and the
 idle and run animations. The walk is made from the run. `tools/world-character.mjs` builds
 `assets/worlds/character/character.glb`.
+
+Round 3 (September 30, 2026) made a realistic person the hybrid mode's character
+(`tools/wd-character.py` builds `assets/worlds/character/human-high.glb` and `human-low.glb`), and
+the Kenney character moved to `?character=kenney`:
+
+- The body, face, skin ("middleage caucasian male"), eyes ("brown"), eyebrows ("eyebrow001"),
+  eyelashes ("eyelashes01"), hair ("short02"), T-shirt and jeans ("male_casualsuit06") and shoes
+  ("shoes06") are from
+  [MakeHuman's system assets](http://files.makehumancommunity.org/asset_packs/makehuman_system_assets/)
+  by the MakeHuman team, [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (each asset
+  marked CC0 on that page and in its own files, checked on September 30, 2026), put together with
+  MPFB 2.0.17 in Blender. The face is MakeHuman's average of its macro settings (no scan, no real
+  person). The T-shirt's printed logo, the jeans' label text and the site address in the texture
+  were painted out.
+- The idle, walk and run are motion capture from the
+  [100STYLE dataset](https://zenodo.org/records/8127870) by Ian Mason, Sebastian Starke and Taku
+  Komura (2022), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) (checked on its Zenodo
+  record on September 30, 2026): the takes Neutral_ID (idle), Neutral_FW (walk) and Proud_FR (run),
+  retargeted onto the character, cut to one loop each and played in place.
+
+Its model props (hybrid mode; `tools/wd-props.py` builds `assets/worlds/props/`) are scanned models
+from [Poly Haven](https://polyhaven.com), all
+[CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (checked on each live page on
+September 30, 2026), decimated into three levels of detail each:
+
+| Used as            | Asset                                                                    | Authors                            | License                                                       |
+| ------------------ | ------------------------------------------------------------------------ | ---------------------------------- | ------------------------------------------------------------- |
+| Boulders           | [Rock Moss Set 02](https://polyhaven.com/a/rock_moss_set_02)             | Kless Gyzen                        | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| Boulders           | [Namaqualand Boulder 05](https://polyhaven.com/a/namaqualand_boulder_05) | Dario Barresi, Jenelle van Heerden | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| Stones and pebbles | [Namaqualand Stones 01](https://polyhaven.com/a/namaqualand_stones_01)   | Greg Zaal, Jenelle van Heerden     | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| Stones and pebbles | [Rock Moss Set 01](https://polyhaven.com/a/rock_moss_set_01)             | Kless Gyzen                        | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| Shells             | [Lambis Shell](https://polyhaven.com/a/lambis_shell)                     | Kuutti Siitonen                    | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| Driftwood          | [Dead Tree Trunk 02](https://polyhaven.com/a/dead_tree_trunk_02)         | Jenelle van Heerden, Rico Cilliers | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| Stumps             | [Tree Stump 01](https://polyhaven.com/a/tree_stump_01)                   | Rob Tuytel                         | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 
 ## National flags
 
@@ -401,4 +495,5 @@ Splashery is built on the [PlayCanvas engine](https://github.com/playcanvas/engi
 Pictures and pages use [PDF.js](https://github.com/mozilla/pdf.js) (Apache 2.0) and
 [omggif](https://github.com/deanm/omggif) (MIT), loaded only when someone opens a PDF or a GIF.
 Photo to 3D uses [ONNX Runtime Web](https://github.com/microsoft/onnxruntime) (MIT) and Depth
-Anything V2 Small (Apache 2.0), loaded only when someone opens a photo in that toy.
+Anything V2 Small (Apache 2.0), loaded only when someone opens a photo in that toy (or, in lane Live
+input's Splat mirror and Photo to 3D's live view, only after someone taps "Use my camera").
