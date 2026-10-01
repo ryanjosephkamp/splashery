@@ -39,7 +39,7 @@ function packProp(s, angles) {
   t.set([box ? 2 : s.type === "cone" ? 3 : 1, s.r ?? s.ra ?? 0, s.rb ?? 0, (s.part && angles[s.part]) || 0], 0); // prettier-ignore
   t.set(box ? s.at : s.a, 4);
   t.set(box ? s.half : s.b, 8);
-  t.set([((n >> 16) & 255) / 255, ((n >> 8) & 255) / 255, (n & 255) / 255, s.look === "wax" ? 3 : s.look === "wood" ? 2 : s.look === "steel" ? 1 : 0], 12); // prettier-ignore
+  t.set([((n >> 16) & 255) / 255, ((n >> 8) & 255) / 255, (n & 255) / 255, s.look === "coffee" ? 4 : s.look === "wax" ? 3 : s.look === "wood" ? 2 : s.look === "steel" ? 1 : 0], 12); // prettier-ignore
   t.set(s.pivot || [0, 0, 0], 16);
   return { texels: t };
 }

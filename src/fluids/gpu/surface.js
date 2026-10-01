@@ -916,6 +916,13 @@ fn shadeProp(h: PropHit, ro: vec3f, rd: vec3f) -> vec3f {
       lit += I * vec3f(1.0, 0.75, 0.5) * 0.55 * exp(-below / 0.09);
     }
   }
+  if (c.w > 3.5) {
+    // coffee: dark, with a light crema ring at its edge, and a soft sheen
+    let r = length(p.xz - propTexel(h.i, 1).xz) / propTexel(h.i, 0).y;
+    let cof = mix(vec3f(0.23, 0.13, 0.08), vec3f(0.66, 0.47, 0.31), max(0.0, (r - 0.8) / 0.2) * 0.8);
+    let H = normalize(normalize(uniform.uLight.xyz) - rd);
+    return cof + vec3f(pow(max(dot(n, H), 0.0), 60.0) * 0.25);
+  }
   if (c.w > 2.5) {
     // wax: soft, matte and a little lighter toward the top
     return c.rgb * (0.78 + 0.22 * max(n.y, 0.0) + 0.08 * n.x) + c.rgb * lit;

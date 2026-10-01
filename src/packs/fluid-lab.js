@@ -236,11 +236,13 @@ function candleScene(k) {
 
 function cupScene(k) {
   // A saucer, a mug with a handle, and hot coffee with a light crema ring.
-  k.add(k.cylinder(0.6, 0.04), { pos: [0, 0.02, 0], color: "#f2efe9", even: true });
+  const stand = k.part("stand");
+  k.add(k.cylinder(0.6, 0.04), { pos: [0, 0.02, 0], color: "#f2efe9", even: true, part: stand });
   k.add(k.cylinder(0.6, 0.03, { caps: false }), {
     pos: [0, 0.03, 0],
     color: "#e6e1d8",
     even: true,
+    part: stand,
   });
   k.add(
     k.lathe(
@@ -252,9 +254,9 @@ function cupScene(k) {
       ],
       { grid: 64 },
     ),
-    { color: (c) => shade("#c8553d", 0.85 + 0.25 * Math.max(0, c.n[0] * 0.5 + c.n[2] * 0.5)), even: true }, // prettier-ignore
+    { color: (c) => shade("#c8553d", 0.85 + 0.25 * Math.max(0, c.n[0] * 0.5 + c.n[2] * 0.5)), even: true, part: stand }, // prettier-ignore
   );
-  k.add(k.disc(0.38, 0.34), { pos: [0, 0.62, 0], color: "#d86a51", share: 0.02, even: true });
+  k.add(k.disc(0.38, 0.34), { pos: [0, 0.62, 0], color: "#d86a51", share: 0.02, even: true, part: stand }); // prettier-ignore
   k.add(k.torus(0.15, 0.035), { pos: [0.47, 0.35, 0], rot: [90, 0, 0], color: "#c8553d", share: 0.03 }); // prettier-ignore
   k.add(k.disc(0.345), {
     pos: [0, 0.56, 0],
@@ -263,7 +265,15 @@ function cupScene(k) {
       return mix("#3b2014", "#a8784e", Math.max(0, (r - 0.8) / 0.2) * 0.8);
     },
     even: true,
+    part: stand,
   });
+  // Traced on WebGPU (the handle stays splats): the saucer, the mug and the
+  // coffee in it.
+  const traced = props(k, [
+    { type: "cyl", a: [0, 0, 0], b: [0, 0.04, 0], r: 0.6, color: "#d6d2ca" },
+    { type: "cone", a: [0, 0.04, 0], b: [0, 0.62, 0], ra: 0.31, rb: 0.36, color: "#c8553d", look: "steel" }, // prettier-ignore
+    { type: "cyl", a: [0, 0.6, 0], b: [0, 0.622, 0], r: 0.335, look: "coffee" },
+  ]);
   k.fluid({
     name: "steam",
     kind: "gas",
@@ -280,7 +290,7 @@ function cupScene(k) {
   });
   k.reach([0, 1.9, 0]);
   k.reach([0.6, 0, 0.6]);
-  k.data = { scene: "cup" };
+  k.data = { scene: "cup", props: traced };
 }
 
 // ---- The recipe -----------------------------------------------------------------------------

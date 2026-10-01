@@ -111,11 +111,14 @@ export class GasScene {
       const f = this.flame;
       const st = this.state.get(f.name);
       const g = this.flameGrid;
+      // A flame lit again grows back over about half a second (a full
+      // fuel jet into still air stands up as a thin rod first).
+      st.lit = st.on ? Math.min(1, (st.lit ?? 1) + dt / 0.6) : 0;
       g.sources.a = st.on
         ? {
             at: [f.at[0], f.at[1] + (f.height ?? 0.3) * 0.06, f.at[2]],
             radius: Math.max((f.radius ?? 0.05) * 0.8, g.cell * 3),
-            fuel: 60,
+            fuel: 60 * st.lit * st.lit,
             heat: 3,
             up: 0.1,
             ...this.srcTune,
