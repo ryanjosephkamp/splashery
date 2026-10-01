@@ -184,7 +184,9 @@ State (see docs/FLUIDS.md, "r4"):
   the board, faucet, handle and spout grainy) and fl-r4-soda-r3 (the liquid's top surface hard to
   see; the same grainy props). Redone (evening): fl-r4-pour-r3 and fl-r4-soda-r4 (props traced
   crisply on WebGPU, the foot behind the liquid at half strength, a meniscus), fl-r4-flame-r2 and
-  fl-r4-smoke-r2 (a traced candle lit by its flame, a taller yellow flame, paler smoke).
+  fl-r4-smoke-r2 (a traced candle lit by its flame, a taller yellow flame, paler smoke; a relit
+  flame grows back in still air; the hot cup traced too). All six r4 cards are redone on Effect
+  review page 2.
 - Sound: from the simulation (src/fluids/acoustic.js), after the owner's Sound Board note ("isn't in
   sync with fluid pour animation"); real recordings wait for Sound A's sample voice.
 - Lessons: a collider wall thinner than about three cells lets MPM particles through; a sprite
