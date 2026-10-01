@@ -2091,6 +2091,63 @@ body.embed #stage {
 
 /* /View settings */
 
+/* Live input (lane Live input): the pill that shows while the microphone,
+   the camera or a screen is on, with its Stop button. */
+.live-indicator {
+  position: fixed;
+  top: calc(env(safe-area-inset-top, 0px) + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 4px 4px 12px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: var(--paper);
+  box-shadow: var(--shadow);
+  color: var(--ink);
+  font-size: 13px;
+}
+
+.live-indicator[hidden] {
+  display: none;
+}
+
+.live-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #d0302f;
+  animation: live-blink 1.6s ease-in-out infinite;
+}
+
+@keyframes live-blink {
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .live-dot {
+    animation: none;
+  }
+}
+
+.live-indicator button {
+  padding: 3px 12px;
+  border-radius: 999px;
+}
+
+.input-live {
+  margin: 6px 0;
+}
+
+.input-live .live-note {
+  margin-top: 4px;
+}
+
 /* UI r2 --------------------------------------------------------------------- */
 /* Focus mode, the phone sheet's hidden and full stops, the desktop panel's
    fold and gallery page, and the drawing pad's pens. All of it shows only
@@ -2361,3 +2418,146 @@ body.ui2 .input-pad canvas {
 }
 
 /* /UI r2 */
+
+/* UI r3 --------------------------------------------------------------------- */
+/* The flag button: flag colors for every toy, in the row of round buttons
+   (after the focus button when that shows). */
+
+#flag-toggle {
+  right: calc(var(--panel-w) + 36px + 220px);
+}
+
+body.ui2 #flag-toggle {
+  right: calc(var(--panel-w) + 36px + 264px);
+}
+
+.flag-pop {
+  position: fixed;
+  top: 58px;
+  right: calc(var(--panel-w) + 36px);
+  z-index: 12;
+  display: grid;
+  gap: 6px;
+  width: 280px;
+  padding: 10px 12px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  font-size: 13.5px;
+}
+
+.flag-pop label {
+  font-weight: 600;
+}
+
+.flag-pop .note {
+  margin: 0;
+}
+
+@media (max-width: 760px) {
+  /* The round buttons beside the name: the tagline makes room. */
+  .brand p {
+    display: none;
+  }
+
+  #flag-toggle {
+    right: 234px;
+  }
+
+  .flag-pop {
+    top: 52px;
+    right: 14px;
+    width: min(300px, calc(100% - 28px));
+  }
+
+  /* Seven round buttons (with the focus button): a little closer together. */
+  body.ui2 .view-button,
+  body.ui2 .sound-toggle,
+  body.ui2 .help-toggle {
+    width: 34px;
+    height: 34px;
+    top: 11px;
+  }
+
+  body.ui2 .sound-toggle {
+    right: 14px;
+  }
+
+  body.ui2 .help-toggle {
+    right: 52px;
+  }
+
+  body.ui2 #turntable-toggle {
+    right: 90px;
+  }
+
+  body.ui2 #tilt-toggle {
+    right: 128px;
+  }
+
+  body.ui2 #view-reset {
+    right: 166px;
+  }
+
+  body.ui2 #focus-toggle {
+    right: 204px;
+  }
+
+  body.ui2 #flag-toggle {
+    right: 242px;
+  }
+}
+
+@media (max-width: 380px) {
+  #flag-toggle {
+    right: 202px;
+  }
+
+  body.ui2 .brand h1 {
+    font-size: 16px;
+  }
+
+  body.ui2 .view-button,
+  body.ui2 .sound-toggle,
+  body.ui2 .help-toggle {
+    width: 32px;
+    height: 32px;
+    top: 12px;
+  }
+
+  body.ui2 .sound-toggle {
+    right: 12px;
+  }
+
+  body.ui2 .help-toggle {
+    right: 48px;
+  }
+
+  body.ui2 #turntable-toggle {
+    right: 84px;
+  }
+
+  body.ui2 #tilt-toggle {
+    right: 120px;
+  }
+
+  body.ui2 #view-reset {
+    right: 156px;
+  }
+
+  body.ui2 #focus-toggle {
+    right: 192px;
+  }
+
+  body.ui2 #flag-toggle {
+    right: 228px;
+  }
+}
+
+body.focus #flag-toggle,
+body.focus .flag-pop {
+  display: none !important;
+}
+
+/* /UI r3 */

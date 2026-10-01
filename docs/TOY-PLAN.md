@@ -556,7 +556,8 @@ Proposals below are suggestions; the owner may change them.
 
 - **Campfire** (`campfire`). Now: tap: Stoke the fire. Plan: keep.
   - Owner: Basically perfect.
-  - Sound: Crackle and pop.
+  - Sound: The volcano's kind of fire, a low flickering rush with a few soft pops of wood (no
+    clicks).
 - **Storm cloud** (`storm-cloud`). Now: tap: Thunder. Plan: keep.
   - Owner: Basically perfect.
   - Sound: Thunder rumble.
@@ -570,10 +571,10 @@ Proposals below are suggestions; the owner may change them.
     glow also shows with motion off. After the owner's review: a Colour set (Pick below, Ocean,
     Violet, Lime, Sunset, Midnight), Blobs (2 to 12), Blob size and Blob shape (mixed, round, tall),
     and Flow and Glow sliders.
-  - Sound: Low bubbling blorp.
+  - Sound: Only the gloops and bubbles (the rising hum is gone).
 - **Snow globe** (`snow-globe`). Now: tap: Shake the globe. Plan: keep.
   - Owner: Basically perfect.
-  - Sound: Glassy shake and tinkle.
+  - Sound: The water sloshing as it is shaken, then the twinkle (no rattle of clicks).
 - **Volcano** (`volcano`). Now: tap: Erupt. Plan: keep.
   - Owner: Basically perfect.
   - Sound: Deep rumble and boom.
@@ -588,7 +589,7 @@ Proposals below are suggestions; the owner may change them.
     solid ice getting smaller; the fallen pieces melt away in the puddle. Then it refreezes piece by
     piece and a frosty white light sweeps up it (about 7.5 s). Temperature melts it to the same
     point and back.
-  - Sound: Ice crackle and drips.
+  - Sound: The drips and the refreezing; the wind at the start is gone.
 - **Candle** (`candle`). Now: tap: Blow out or light. Plan: keep.
   - Owner: Pretty good; OK as it is.
   - Sound: Soft blow and a match strike.
@@ -612,7 +613,9 @@ Proposals below are suggestions; the owner may change them.
     faces; it tips into the sea with a crown of spray and a ring of ripples, floats and bobs while
     the berg bobs and rocks, then melts away as one piece as the berg's chunk grows back in place
     (about 6 s).
-  - Sound: Crack and splash.
+  - Sound: Real ice breaking, a deep crack with its groan and splinters (no crackle of clicks), then
+    the splash; real CC0 recordings now (iceberg-crack.mp3), with the synthesized sound as a
+    fallback.
 - **Waterfall** (`waterfall`). Now: tap: Send a surge. Plan: keep.
   - Effect: A surge: the flow doubles and mist billows.
   - Improved: E4: a tap sends a surge: a white-water front runs along the river and over the lip, a
@@ -646,19 +649,21 @@ Proposals below are suggestions; the owner may change them.
     a crisper cover, and no red strip (the cover's inside drew over the pages). E1b: the outside is
     crisp: evenly spread, denser splats on the cover, spine and page edges, a fine woven cloth and
     page lines splats can show.
-  - Sound: Page flip.
+  - Sound: Real paper pages turning (no wind); real CC0 recordings now (book-page.mp3), with the
+    synthesized sound as a fallback.
 - **Laptop** (`laptop`). Now: tap: Open or close. Plan: keep.
   - Owner: Pretty awesome; keep it the same. After E1b: basically perfect, lock it in.
   - Fixed: E1b: a clean case (no speckle) and real keycaps with letters. Tap a key (or type on your
     own keyboard) and it goes down and types on the screen; tap or drag on the trackpad to move the
     pointer and click.
-  - Sound: Keyboard clatter and a start-up chime.
+  - Sound: Opening keeps only the screen-on sound (no twinkle), closing has no thunk, and the keys
+    sound like a real keyboard (a tick and a thock).
 - **Music box** (`music-box`). Now: tap: Open or close. Plan: keep.
   - Owner: Animation is basically perfect; it needs music.
   - Sound: A music-box melody (plucked comb tones) while open.
 - **Alarm clock** (`clock`). Now: tap: Ring the bell. Plan: keep.
   - Owner: Does roughly what the scan alarm clock should do; keep them slightly different.
-  - Sound: Modern digital-ish ring (different from the scan's twin bells).
+  - Sound: A real wind-up alarm clock, the hammer rattling between its two bells, in two rings.
 - **Gift box** (`gift-box`). Now: tap: Open the present. Plan: keep.
   - Owner: Outstanding.
   - Sound: Ribbon rustle and a ta-da.
@@ -667,7 +672,8 @@ Proposals below are suggestions; the owner may change them.
   - Sound: Fwump of the canopy opening.
 - **Desk fan** (`desk-fan`). Now: tap: Switch on or off. Plan: keep.
   - Owner: Perfect.
-  - Sound: Motor hum rising.
+  - Sound: The blades' soft thrum of air swelling in as it starts and fading as it stops (no rising
+    motor hum).
 - **Desk lamp** (`lamp`). Now: tap: Switch the light. Plan: keep.
   - Owner: Perfect.
   - Sound: Switch click.
@@ -702,7 +708,8 @@ Proposals below are suggestions; the owner may change them.
     the pour's arc, glugs into a kit-built glass with a splash where it lands while the water rises;
     then it all runs back, the bottle stands and the cap screws on (4.5 s). Round 2: denser model,
     cap plug left out, a stream instead of drops.
-  - Sound: Cap clicks, then a glug-glug pour that rises in pitch as the glass fills.
+  - Sound: The cap twisted off, a real pour (a splashing stream and the water sloshing in the glass)
+    and the cap twisted back on (no clicks or bubbly glugs).
 - **Soda can** (`soda-can`). Now: tap: Shake and open. Plan: keep.
   - Owner: From the owner's approved ideas on the Toy Ideas page (lane Real objects, September 29,
     2026): "This should be a real life splat if you can find it. I do not want this to be a cartoon
@@ -715,7 +722,8 @@ Proposals below are suggestions; the owner may change them.
     piece) levers up, the opening shows, a continuous jet of cream foam streaked with amber shoots
     up and falls back while fine drops spatter onto the lid and the coaster and soak away, then the
     tab folds back (3.5 s). Round 2: denser model, a foamy jet instead of clumps.
-  - Sound: A rattle, the sharp pssht of the can opening, then a fizz that dies away.
+  - Sound: The soda sloshing as it shakes, a sharp pssht as the tab opens and a fine, soft fizz that
+    dies away (no bubbles).
 
 ## Space (23)
 
@@ -1058,6 +1066,9 @@ Proposals below are suggestions; the owner may change them.
     strongest visible line (NIST).
   - Improved: Chemistry: all 118 elements in the standard layout, colored by family; the atom rises
     (5 s), a tap on it sends an electron up a shell and back (3.2 s), a tap on the table lowers it.
+    Fix6: a tile tap switches with no loading overlay; a tap on its own tile lowers the atom; a tap
+    on the empty board starts a tour of all 118 elements (about 2 s each, the tile lit; by atomic
+    number or shuffled), and any tap stops it.
   - Sound: A soft whoosh up and a soft thud as the atom rises; a whoosh down and a soft thud as it
     lowers (no clicks).
 
@@ -1121,7 +1132,9 @@ Proposals below are suggestions; the owner may change them.
     one after another, each fluttering down on its own swinging path to lie on the grass; then they
     wither and fresh leaves open in their places (about 6.5 s). In winter a few dead brown leaves
     still cling to the twigs, and those fall.
-  - Sound: Leafy rustle.
+  - Sound: A leafy rustle as the crown rocks, then soft rustles as the loose leaves land
+    (synthesized; no flutter or patter); real CC0 recordings now (oak-leaves.mp3), with the
+    synthesized sound as a fallback.
 - **Pine tree** (`pine`). Now: tap: Shake off the snow. Plan: keep.
   - Owner: Christmas lights and a star appear.
   - Effect: Shakes off a dusting of snow (approved instead of lights, which the decorated tree
@@ -1130,7 +1143,8 @@ Proposals below are suggestions; the owner may change them.
     drops a pair of tiers at a time, from the top down, in a puff of powder, lies on the ground and
     melts (about 5 s). On a snowless day a quick shower dusts the boughs first; with Snow on, fresh
     snow settles on them again afterwards.
-  - Sound: Soft jingle.
+  - Sound: The needles rustle as it rocks, with a soft jingle of sleigh bells; the snow's hiss and
+    thump stay (no chime).
 - **Palm tree** (`palm`). Now: tap: Shake down the coconuts. Plan: keep.
   - Owner: Tap it and the coconuts fall.
   - Effect: The coconuts fall and bounce, then regrow.
@@ -1143,34 +1157,38 @@ Proposals below are suggestions; the owner may change them.
   - Effect: All the petals fall in a flurry, then it blooms again.
   - Improved: C2: a new tap action shakes the tree: the petals fall in a heavy flurry, the branches
     go bare, then it blooms again (about 4.5 s).
-  - Sound: Soft breeze and petal patter.
+  - Sound: The opening of the traditional "Sakura Sakura" on a plucked koto-like string, over a
+    faint rustle of petals (no wind).
 - **Maple tree** (`maple`). Now: tap: Send a gust. Plan: keep.
   - Owner: Same kind of thing as the cherry blossom.
   - Effect: Leaves swirl down in a spiral gust (different from the cherry's gentle fall).
   - Improved: E4: a tap sends a whirling gust: the crown leans into it and forty leaves are torn off
     and carried round the tree in a widening spiral, tumbling, before they settle in a ring on the
     grass (the cherry's petals just drift down); then they wither and fresh leaves open (about 7 s).
-  - Sound: Crisp autumn rustle.
+  - Sound: A soft gust and the leaves rustling as they swirl and land (no crunching clicks, much
+    less wind).
 - **Bonsai** (`bonsai`). Now: tap: Grow a branch, then trim it. Plan: keep.
   - Owner: Maybe shrink or grow.
   - Effect: Grows a new branch, then the scissors snip it back.
   - Improved: E4: a tap grows a new branch out of the trunk with a pad of leaves on its end; bonsai
     scissors slide in, open and snip it off at the cut, the piece tips onto the moss and is cleared
     away, and the stub heals over (about 5 s).
-  - Sound: Snip.
+  - Sound: The branch creaks and its leaves rustle as it grows, the scissors open and snip, and the
+    cut piece drops onto the moss; real CC0 recordings now (bonsai-snip.mp3), with the synthesized
+    sound as a fallback.
 - **Weeping willow** (`willow`). Now: tap: Send a breeze through. Plan: keep.
   - Owner: Pick anything.
   - Effect: The long branches sway in a wave like a breeze passing.
   - Improved: E4: a tap sends a breeze across the tree from the left: the hanging strands swing away
     with it a curtain at a time (they bend, most at their tips), swing back and settle, and the
     crown leans a little (about 5.5 s). The strands also sway gently at rest.
-  - Sound: Long soft sigh.
+  - Sound: The same breath of wind, quieter, with the strands rustling.
 - **Sunflower** (`sunflower`). Now: tap: Bring out the sun. Plan: keep.
   - Effect: The head turns to face the sun and petals open wide.
   - Improved: E4: a tap brings out the sun at the top left: the head turns up to face it and all 48
     ray petals spread wide open, each turning about its root; then the sun goes in, the head turns
     back and the petals lift again (about 5.5 s). The head nods gently at rest.
-  - Sound: Warm rising tone.
+  - Sound: A warm low swell as the sun comes out (no bouncing tone) and the petals rustling open.
 - **Rose** (`rose`). Now: tap: Open the bloom. Plan: keep.
   - Effect: Blooms open further, a petal drops.
   - Improved: E4: a tap opens the bloom further (every petal turns out about its root, the outer
@@ -1192,7 +1210,8 @@ Proposals below are suggestions; the owner may change them.
     and it flings off eight petals one after another, a tick each, which flutter down to the grass
     while the small heads bob; it slows to a stop, the fallen petals wither and new ones fill the
     gaps (about 5.5 s).
-  - Sound: Tick-tick petal plucks.
+  - Sound: A soft whirr of the spin, and a soft brush as each petal lands on the grass, in sync (no
+    ticks).
 - **Lotus** (`lotus`). Now: tap: Rise and open. Plan: keep.
   - Effect: The flower rises and opens on the water with ripples.
   - Improved: E4: a tap folds the flower into a bud, lifts it out of the water on its stalk with a
@@ -1210,7 +1229,8 @@ Proposals below are suggestions; the owner may change them.
   - Improved: E4: a tap unrolls the two fiddleheads in the middle into two new fronds: each is a
     chain of six pieces that straighten one joint after another from the base to the tip, their
     leaflets spreading as they open; they hold, then roll back up into fiddleheads (about 5.5 s).
-  - Sound: Unfurling rustle.
+  - Sound: A soft leafy rustle and a gentle stem creak as each frond unrolls, and again as they roll
+    back up (no sandy flutter).
 - **Saguaro cactus** (`saguaro`). Now: tap: Spines out, then a look inside. Plan: keep.
   - Owner: The spines come out, or it is cut in half to show the cactus water inside.
   - Effect: The spines shoot out and back; a second tap shows a cut-away with the watery inside.
@@ -1263,7 +1283,8 @@ Proposals below are suggestions; the owner may change them.
     clear of the others, then five hop one at a time onto a cairn, biggest at the bottom, with a
     clack each; at the end they all hop back (about 7 s). In the Cairn style the top four topple off
     and are stacked again.
-  - Sound: Pebble clatter.
+  - Sound: Real stone-on-stone knocks as the pile shifts and tumbles home; the stacking knocks stay;
+    real CC0 recordings now (rocks-pebbles.mp3), with the synthesized sound as a fallback.
 - **Kelp** (`kelp`). Now: tap: Fish come to nibble. Plan: keep.
   - Owner: Maybe fish eat it; pick something.
   - Effect: Fish swim in and nibble; the kelp sways away.
@@ -1279,26 +1300,28 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Tap melts it: drips run down the cone, then it refreezes.
   - Improved: C2: a tap melts it (the scoops slump and drips run down the cone), then it refreezes
     (about 5 s). The Warmth slider still works.
-  - Sound: Drip-drip.
+  - Sound: A slow, thick melt with heavy drops plopping down (no bubbles or drips).
 - **Watermelon** (`watermelon`). Now: tap: Chop into slices. Plan: keep.
   - Owner: Cut it in half or into slices.
   - Effect: Cuts into slices that fan out.
   - Improved: E5: a big knife chops the whole melon five times, right to left, then the six slices
     fan open on their bottoms like an accordion, showing red flesh, pale rind and black seeds on
     their cut faces, and fold shut (about 3.6 s).
-  - Sound: Juicy chop.
+  - Sound: No whoosh at the start, only a soft settle; the chops and the fan are unchanged.
 - **Birthday cake** (`birthday-cake`). Now: tap: Blow out. Plan: keep.
   - Owner: Pretty much perfect.
-  - Sound: Party blower and a cheer-like chime.
+  - Sound: Blown out with a breath, then the last line of "Happy Birthday to You" on the piano with
+    its chords (no voices); relighting keeps the match.
 - **Popcorn** (`popcorn`). Now: tap: Pop!. Plan: keep.
   - Owner: Basically perfect.
-  - Sound: Popping.
+  - Sound: Dry kernels popping, each a short papery bang with a little thump (no bubbly rising
+    pops); real CC0 recordings now (popcorn-popping.mp3), with the synthesized sound as a fallback.
 - **Jelly** (`jelly`). Now: tap: Poke. Plan: keep.
   - Owner: Pretty much fine.
-  - Sound: Wobbly boing.
+  - Sound: A wet, heavy wobble instead of a cartoon boing.
 - **Pancakes** (`pancakes`). Now: tap: Flip the top one. Plan: keep.
   - Owner: Really neat.
-  - Sound: Sizzle and a flip.
+  - Sound: A smooth sizzle in the pan, the flip and the soft slap as it lands (no crackling ticks).
 - **Cupcake** (`cupcake`). Now: tap: Flick the cherry. Plan: keep.
   - Owner: Needs an effect.
   - Effect: A cherry drops on top and sprinkles rain down.
@@ -1311,14 +1334,14 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Spins fast and the swirl hypnotises.
   - Improved: E5: the swirl whirls up to nearly three turns a second, so the spiral seems to pour
     inwards, then slows back to its idle turn (about 3 s).
-  - Sound: Whirr.
+  - Sound: Only the wind as it spins (the rising "vroom" hum is gone).
 - **Candy cane** (`candy-cane`). Now: tap: Twist and snap. Plan: keep.
   - Owner: Pick something.
   - Effect: The stripes wind around like a barber pole, then it snaps in two and rejoins.
   - Improved: E5: each cane twists (the hook turns and the stripes wind tighter) until it snaps with
     a crack; the top half springs clear showing the white candy in the break, sugar chips fly, then
     the halves come back together and mend with a glint (about 2.9 s).
-  - Sound: Crisp snap.
+  - Sound: The sugar strains as it twists (no whistle); the snaps and the mends stay.
 - **Macarons** (`macarons`). Now: tap: Stack up. Plan: keep.
   - Owner: Maybe they do something.
   - Effect: They stack themselves into a tower.
@@ -1333,7 +1356,7 @@ Proposals below are suggestions; the owner may change them.
   - Improved: D: drag-to-stretch. With the Orbit tool, a drag that starts on the bear pulls the part
     you grabbed (up to about a body length) and it springs back with a few wobbles when you let go;
     a drag beside it still turns the view. A tap still does the jelly jiggle.
-  - Sound: Rubbery stretch and boing.
+  - Sound: Only the bounce (the whistle is gone).
   - Touch or drag interaction (phase F).
 - **Pretzel** (`pretzel`). Now: tap: Twist. Plan: keep.
   - Owner: Some sort of twisting, like the knots.
@@ -1342,7 +1365,7 @@ Proposals below are suggestions; the owner may change them.
     its two sides wring opposite ways and its loops fold a little towards you, and wherever the rope
     crosses or rests on itself it stays joined; let go, it springs a little past its shape into the
     opposite twist and wobbles to a stop (about 3.8 s).
-  - Sound: Doughy stretch.
+  - Sound: Soft dough squished and pulled, with a wet stretching sound.
 - **Croissant** (`croissant`). Now: tap: Open it. Plan: keep.
   - Owner: Must differ from the real croissant.
   - Effect: Puffs up in an oven glow (rising), then flakes fly off.
@@ -1350,13 +1373,14 @@ Proposals below are suggestions; the owner may change them.
     and tips back like a lid, showing the soft layered inside, where a pat of butter melts and
     spreads; then the top settles back down (about 3.3 s). Unlike the real croissant scan, which
     tears in half.
-  - Sound: Oven ding.
+  - Sound: The flaky layers shattering softly under the knife, and a smooth butter sizzle (no
+    clicks).
 - **Pizza** (`pizza`). Now: tap: Take a slice. Plan: keep.
   - Owner: Perfect.
-  - Sound: Cheese stretch.
+  - Sound: The crust gives and the cheese stretches as the slice pulls away.
 - **Burger** (`burger`). Now: tap: Explode view. Plan: keep.
   - Owner: Perfect.
-  - Sound: Sizzle.
+  - Sound: The patty's smooth sizzle, no clicking.
 - **Sushi** (`sushi`). Now: tap: Pick up and dip. Plan: keep.
   - Owner: Chopsticks lifted by an invisible hand pick up the sushi.
   - Effect: Chopsticks pick up a roll, dip it and put it back.
@@ -1370,7 +1394,8 @@ Proposals below are suggestions; the owner may change them.
   - Improved: E5: the shell snaps across the middle with a crunch; the halves pull apart and swing
     open like a book, showing the filling in each break, and bits spill onto a new plate and bounce;
     then they hop back in and the halves close (about 3.1 s).
-  - Sound: Crunch.
+  - Sound: A hard shell cracking open; the filling dropping out is unchanged; real CC0 recordings
+    now (taco-crack.mp3), with the synthesized sound as a fallback.
 - **Boiled egg** (`egg`). Now: tap: Crack. Plan: keep.
   - Owner: Perfect.
   - Sound: Shell tap.
@@ -1379,14 +1404,15 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Latte art swirl spins; steam curls up.
   - Improved: C2: the latte art twists into a swirl (the middle turns further than the edge) and
     relaxes back, with a thick curl of steam.
-  - Sound: Spoon stir clink.
+  - Sound: A simple "tap tap" of a spoon on the cup.
 - **Apple** (`apple`). Now: tap: Take a bite. Plan: keep.
   - Owner: A bite taken out of it, or a worm comes out.
   - Effect: A bite appears (crunch); a second tap, a worm peeks out.
   - Improved: E5: a tap takes a bite: the chunk comes away and vanishes, leaving a scalloped bite of
     pale flesh (it stays bitten). The next tap brings a little worm out of the bite; it looks about,
     ducks back in, and the apple grows whole (about 2.9 s).
-  - Sound: Crunch.
+  - Sound: A crisp bite into an apple (a crunch of tiny fractures and a juicy snap), not a zipper;
+    real CC0 recordings now (apple-bite.mp3), with the synthesized sound as a fallback.
 - **Bananas** (`banana`). Now: tap: Peel them. Plan: keep.
   - Owner: Peel open.
   - Effect: One banana peels open.
@@ -1396,7 +1422,7 @@ Proposals below are suggestions; the owner may change them.
     together (about 4.3 s). Fix3 (the owner's note on the middle banana's stem): the crown piece is
     gone, so each banana ends in the same neck and stalk tip, and nothing is left behind as they
     pull apart.
-  - Sound: Peel.
+  - Sound: The peel pulled back in soft fibrous strips, for each banana (no tapping or zipper).
 - **Orange** (`orange`). Now: tap: Open into wedges. Plan: keep.
   - Owner: Pick something.
   - Effect: Splits into segments that fan out.
@@ -1423,7 +1449,7 @@ Proposals below are suggestions; the owner may change them.
   - Improved: E5: a flick swings the two cherries apart on their own stems; they swing back and
     knock together (a plink each time), bouncing apart again until they settle, while the joint bobs
     (about 3.6 s).
-  - Sound: Double plink.
+  - Sound: No string note, only the stems' soft swish; the knocking is unchanged.
 - **Grapes** (`grapes`). Now: tap: Drop grapes. Plan: keep.
   - Owner: Could fall off the stem.
   - Effect: Grapes drop off the stem and bounce, then return.
@@ -1446,7 +1472,7 @@ Proposals below are suggestions; the owner may change them.
   - Improved: F: eighteen bricks lie poured out round the table. Each tap pops the last model apart
     and builds a new one in the middle, brick by brick from the bottom up, each clicking into place:
     a tower, a bridge, stairs, a dog or a tree (never the same twice running; about 5 s).
-  - Sound: Brick clicks.
+  - Sound: A lower plastic clack, for the tap and each brick landing.
   - Touch or drag interaction (phase F).
 - **Rubber duck** (`rubber-duck`). Now: tap: Squeak. Plan: keep.
   - Owner: Effect is OK; it needs a quack.
@@ -1456,10 +1482,13 @@ Proposals below are suggestions; the owner may change them.
   - Sound: Rubber duck quack.
 - **Spinning top** (`spinning-top`). Now: tap: Spin it. Plan: keep.
   - Owner: Perfect.
-  - Sound: Whirring hum.
+  - Sound: A quiet, steady whirr that wobbles as it precesses and slowly sinks (no rising hum, no
+    wind); real CC0 recordings now (spinning-top-spin.mp3), with the synthesized sound as a
+    fallback.
 - **Dice** (`dice`). Now: tap: Roll. Plan: keep.
   - Owner: Maybe my favourite; rolls feel random like real dice. Keep it.
-  - Sound: Dice rattle and clatter.
+  - Sound: Two dice thrown on a wooden table, bouncing with quicker, quieter knocks and settling;
+    real CC0 recordings now (dice-throw.mp3), with the synthesized sound as a fallback.
 - **Newton's cradle** (`newtons-cradle`). Now: tap: Lift and let go. Plan: keep.
   - Owner: Tapping has no noticeable effect. Make it more interactive.
   - Effect: Tap lifts and drops an end ball hard so the clacks are obvious; later, drag a ball back
@@ -1472,10 +1501,10 @@ Proposals below are suggestions; the owner may change them.
   - Touch or drag interaction (phase F).
 - **Teddy bear** (`teddy-bear`). Now: tap: Wave hello. Plan: keep.
   - Owner: Cute; fine.
-  - Sound: Soft squeak.
+  - Sound: No whistle; only a soft plush rustle as it waves.
 - **Yo-yo** (`yo-yo`). Now: tap: Throw. Plan: keep.
   - Owner: Fine.
-  - Sound: String zip.
+  - Sound: The string unwinding, the whirr at the bottom and the smack back into the hand.
 - **Puzzle cube** (`puzzle-cube`). Now: tap: Scramble or solve. Plan: keep.
   - Owner: Only the top row twists (very cool). Move more than the top row; ideally swipe any row or
     column to solve it; add a shuffle.
@@ -1485,32 +1514,37 @@ Proposals below are suggestions; the owner may change them.
     follows your finger and snaps to the nearest quarter turn with a click. A tap scrambles it (14
     quick turns), or turns a scrambled cube back to solved; solve it by hand and it hops, spins and
     chimes.
-  - Sound: Plastic click per turn.
+  - Sound: Each turn a plastic slide over the ridges and a soft clack as the layer seats; real CC0
+    recordings now (puzzle-cube-turn.mp3), with the synthesized sound as a fallback.
   - Touch or drag interaction (phase F).
 - **Spring toy** (`spring-toy`). Now: tap: Make it walk. Plan: keep.
   - Owner: Basically perfect.
-  - Sound: Springy slinky boing.
+  - Sound: A metal coil spring's ringing sproing, not a rubber band; real CC0 recordings now
+    (spring-toy-boing.mp3), with the synthesized sound as a fallback.
 - **Kite** (`kite`). Now: tap: Gust of wind. Plan: keep.
   - Owner: Underwhelming; develop the animation further.
   - Effect: A big gust: the kite loops the loop and the tail whips.
   - Improved: C2: a big gust loops the kite round while it rises, and the tail whips; the line stays
     attached (about 3 s).
-  - Sound: Wind gust and a fabric flap.
+  - Sound: The same, with the wind dialed back.
 - **Paper plane** (`paper-plane`). Now: tap: Barrel roll. Plan: keep.
   - Owner: Fine.
-  - Sound: Paper swish.
+  - Sound: A papery launch and a gentler, quieter glide.
 - **Origami crane** (`origami-crane`). Now: tap: Flap the wings. Plan: keep.
   - Owner: Solid as it is.
   - Sound: Paper flutter.
 - **Balloon dog** (`balloon-dog`). Now: tap: Pop. Plan: keep.
   - Owner: Almost perfect.
-  - Sound: Balloon squeak and pop.
+  - Sound: A real balloon bursting (no whistle first); real CC0 recordings now
+    (balloon-dog-pop.mp3), with the synthesized sound as a fallback.
 - **Soap bubbles** (`soap-bubbles`). Now: tap: Blow bubbles. Plan: keep.
   - Owner: Perfect.
-  - Sound: Tiny pops.
+  - Sound: A soft breath blowing them and tiny wet pops (no pitched pops).
 - **Wind-up robot** (`robot`). Now: tap: Wind it up. Plan: keep.
   - Owner: Perfect.
-  - Sound: Wind-up ratchet and clockwork.
+  - Sound: A few clicks of the winding key, then clockwork whirring as it unwinds and its tin feet
+    clanking along; real CC0 recordings now (robot-wind.mp3), with the synthesized sound as a
+    fallback.
 - **Chess set** (`chess-set`). Now: tap: Play the Opera Game. Plan: keep.
   - Owner: Ideally playable. At least: a tap plays a real game, white against black, as a long
     animation.
@@ -1526,7 +1560,9 @@ Proposals below are suggestions; the owner may change them.
     resignation. F: tap a piece whose turn it is (it lifts), then a square it can legally move to;
     the game goes on from there as your own (a queen for a pawn on the last rank; mate tips the king
     over). The Play button, the game bar and a tap beside the board still play the Opera Game.
-  - Sound: Wooden piece clacks.
+  - Sound: Pieces set down on a felted wooden board, a woody thock (a sharper one for captures),
+    like a good online-chess theme; real CC0 recordings now (chess-set-move.mp3), with the
+    synthesized sound as a fallback.
 
 ## Maths (17)
 
@@ -1535,7 +1571,7 @@ Proposals below are suggestions; the owner may change them.
   - Effect: A glowing point races along the trail, drawing a new path.
   - Improved: C2: a new tap action sends a bright spark racing along the whole path, drawing it
     again in light that then fades (about 3 s).
-  - Sound: Chaotic warble.
+  - Sound: Something epic, a deep hit, a dark slow rush and a wide low chord (no whistling howl).
 - **Möbius strip** (`mobius`). Now: tap: Send it round. Plan: keep.
   - Owner: Wow, really neat. Maybe twist a little.
   - Effect: An ant-like dot walks the single side; the band twists.
@@ -1544,14 +1580,16 @@ Proposals below are suggestions; the owner may change them.
     twists a little and untwists (about 5 s). After the owner's review the rider is a choice (the
     Rider option): a blue race car (the default) with spinning wheels, a rolling beach ball, a duck
     riding a bicycle (wheels and pedals turning) or the ant.
-  - Sound: Looping tone.
+  - Sound: No step tune; each rider has its own sound on the ride: a race car's engine, a rolling
+    beach ball, a bicycle with one soft quack, the ant's tiny feet.
 - **Klein bottle** (`klein-bottle`). Now: tap: Send water through. Plan: keep.
   - Owner: Not sure it has an effect. Maybe water flows through it; it already kind of does, make
     that dramatic.
   - Effect: A clear surge of water flows through the neck and round.
   - Improved: C2: a new tap action sends a surge of rippling water along the tube and round, and the
     glass glows (about 4 s).
-  - Sound: Glug and flow.
+  - Sound: Water moving in a bottle, sloshing and glugging (no bubbles or waterfall); real CC0
+    recordings now (klein-bottle-slosh.mp3), with the synthesized sound as a fallback.
 - **Menger sponge** (`menger-sponge`). Now: tap: Close and carve the holes. Plan: keep.
   - Owner: No idea for an effect; looks good. The owner calls one of these a favourite and a likely
     homepage embed (the transcript may refer to the next toy, the hypercube).
@@ -1567,21 +1605,23 @@ Proposals below are suggestions; the owner may change them.
   - Improved: E3: a tap turns the tesseract once round through the fourth dimension: the pink inner
     cube swells out to become the outer one while the blue one folds inside, holds a moment, then
     turns on back to where it started (about 5 s); at rest it rocks gently in 4D.
-  - Sound: Phasing synth sweep.
+  - Sound: No "vroom"; a great slow rush as it turns inside out and again as it turns home, over a
+    low chord.
 - **Torus knot** (`torus-knot`). Now: tap: Pull and let go. Plan: keep.
   - Owner: Contort a little; looks cool.
   - Effect: Contorts through different knot shapes.
   - Improved: E3: a tap pulls the knot loose (its lobes stretch out and swirl) and lets go: it
     springs back past rest into a tight knot and wobbles to a stop like a plucked spring (about 4
     s).
-  - Sound: Stretchy twang.
+  - Sound: It strains as it is pulled and lets go with a real thump and swish (no banjo or guitar
+    notes).
 - **Gyroid** (`gyroid`). Now: tap: Breathe in and out. Plan: keep.
   - Owner: Really neat; needs an effect.
   - Effect: The surface flows and shifts phase like a breathing sponge.
   - Improved: E3: a tap makes the sponge breathe: the surface slides to a shifted level of its own
     equation, so the orange channels swell as the blue ones narrow, then the other way, and it
     settles (about 3.8 s).
-  - Sound: Watery hum.
+  - Sound: Slow rushes one way and back over a low chord (no rising hum, no bubbles).
 - **Mandelbulb** (`mandelbulb`). Now: tap: Turn the discs. Plan: keep.
   - Owner: Like the Mandeltorus: twisting.
   - Effect: Morphs through powers (bulb shapes twist and bloom).
@@ -1621,7 +1661,7 @@ Proposals below are suggestions; the owner may change them.
     height, overshoots a little, and its parameter a plays so it ripples, twists or breathes before
     settling (5 s). 16 famous surfaces (sombrero, saddle, monkey saddle, egg crate, Rosenbrock's
     banana valley and more), or your own z = … typed in the Toy tab.
-  - Sound: A low whoosh that rises with the surface.
+  - Sound: Subtle, a soft low chord swelling as the surface rises (no wave, no "vroom").
 - **Circle and waves** (`unit-circle`). Now: tap: Go round. Plan: keep.
   - Owner: Toy Ideas page (approved, 2026-09-27).
   - Effect: A point runs round the unit circle while its shadows unroll as a sine wave and a cosine
@@ -1634,7 +1674,8 @@ Proposals below are suggestions; the owner may change them.
     draw the cosine wave on the floor and the sine wave on a side wall); a Path option picks the
     circle, an ellipse, a figure eight, a cardioid, a rose or your own typed path (x = …, y = … or r
     = …); and a Turns option runs it one to three times.
-  - Sound: Two pure tones a quarter turn apart, swelling and fading with the waves.
+  - Sound: Warmer, a soft low chord that swells with the turn and a gentle rush a quarter turn later
+    (one option to try).
 - **Fourier circles** (`fourier-circles`). Now: tap: Spin the circles. Plan: keep.
   - Owner: Toy Ideas page (approved, 2026-09-27).
   - Effect: A chain of spinning circles, each riding on the last, draws a shape with its tip; a
@@ -1671,7 +1712,7 @@ Proposals below are suggestions; the owner may change them.
     every splat at full opacity and its exact size, the sharp kernel, and a Splats choice: Solid
     (default; a surface's splats lie flat along it, a curve's are drawn out along it) or Dots (each
     programmed splat its own dot).
-  - Sound: A soft rising tone as t plays.
+  - Sound: Changed entirely, the quiet scratch of chalk as t plays.
 
 ## Clothing (4)
 
@@ -1708,7 +1749,8 @@ Proposals below are suggestions; the owner may change them.
     in one after the other, both behind the lenses and the second behind the first, the glasses turn
     head over heels to face you, the lenses darken from the rim inward to deep gray, then clear as
     the arms unfold (3.5 s). Round 2: denser model, arms kept behind the lenses.
-  - Sound: Two hinge clicks and a soft shimmer as the lenses darken.
+  - Sound: Each fold is a plastic hinge sliding shut and seating; the lenses darken silently (no
+    electronic clicks or shimmer).
 - **Baseball cap** (`baseball-cap`). Now: tap: Flip and spin. Plan: keep.
   - Owner: From the owner's approved ideas on the Toy Ideas page (lane Real objects, September 29,
     2026): "This should be a real life splat if you can find it. I do not want this to be a cartoon
@@ -1719,7 +1761,8 @@ Proposals below are suggestions; the owner may change them.
     stand. It flips up off the stand, spins flat three and a half turns round a small loop like a
     flying disc, lands brim backward, then hops and turns round the right way (3 s). Round 2:
     denser, sharper model.
-  - Sound: A flick, a whoosh, a soft landing.
+  - Sound: Fabric rustles instead of whooshes as it flips; the flick and the soft landings are
+    unchanged.
 
 ## Medieval (9)
 
@@ -1732,16 +1775,19 @@ Proposals below are suggestions; the owner may change them.
   - Improved: E6: it blocks an unseen blow near its top corner: it jolts back and rocks, sparks
     spray off the iron rim and burn out, a flash marks the spot, and a gleam of light sweeps across
     the emblem (about 2 s).
-  - Sound: A clang, crackling sparks and a shimmer.
+  - Sound: The clang and the gleam's shimmer, no crackling clicks.
 - **Bow and target** (`bow-and-target`). Now: tap: Shoot. Plan: keep.
   - Owner: Unbelievably impressive.
-  - Sound: Twang and thunk.
+  - Sound: A real bowstring's thump and the arrow's hiss, not a guitar-like note; the hit is
+    unchanged; real CC0 recordings now (bow-and-target-release.mp3), with the synthesized sound as a
+    fallback.
 - **Trebuchet** (`trebuchet`). Now: tap: Launch. Plan: keep.
   - Owner: Fine.
-  - Sound: Creak and a whoosh.
+  - Sound: The timber beam creaks and strains, then a softer swing (much less wind).
 - **Crossbow** (`crossbow`). Now: tap: Shoot. Plan: keep.
   - Owner: Solid.
-  - Sound: Click-thwack.
+  - Sound: No click; the string's real thump, then the bolt hitting as before; real CC0 recordings
+    now (bow-and-target-release.mp3), with the synthesized sound as a fallback.
 - **Knight's helmet** (`knights-helmet`). Now: tap: Open the visor. Plan: keep.
   - Owner: Really neat.
   - Sound: Visor clank.
@@ -1751,7 +1797,8 @@ Proposals below are suggestions; the owner may change them.
   - Improved: E6: the crown lifts and hovers; its eight jewels light up one after another round the
     band, each flashing white, golden motes drift up round it, then the jewels go out in turn and it
     settles (about 4 s).
-  - Sound: A royal fanfare and a ping for each jewel.
+  - Sound: The fanfare on a natural trumpet (a lip scoop, breath and late vibrato) instead of
+    synthetic brass; the jewels' pings stay.
 - **Dragon egg** (`dragon-egg`). Now: tap: Hatch. Plan: keep.
   - Owner: Cute and perfect.
   - Sound: Crack and a tiny roar.
@@ -1760,7 +1807,7 @@ Proposals below are suggestions; the owner may change them.
   - Effect: A bigger spell: runes orbit, light bursts and sparks spiral out.
   - Improved: C2: a bigger spell: a flash fills the glass, the swirl spins up, sparks spiral out in
     five arms and a ring of runes rises and circles the orb (about 3 s).
-  - Sound: Magic whoosh and sparkle.
+  - Sound: A deep, slow hum of power swelling in the glass (no wind or twinkles).
 
 ## Animals (13)
 
@@ -1769,7 +1816,7 @@ Proposals below are suggestions; the owner may change them.
   - Effect: A strong pulse that jets it upward, trailing glowing tentacles.
   - Improved: C2: one strong stroke squeezes the bell and jets it up about a third of its size,
     trailing glowing tentacles, then it drifts down (about 3 s).
-  - Sound: Soft watery whoomp.
+  - Sound: Two soft pushes of water as the bell pulses, with a low bloop.
 - **School of fish** (`fish-school`). Now: tap: Bait ball. Plan: keep.
   - Owner: Swim around more dynamically, like a swarm.
   - Effect: The school swirls into a bait ball and scatters.
@@ -1795,7 +1842,7 @@ Proposals below are suggestions; the owner may change them.
   - Sound: A jet of water, the hollow shell, a knock and bubbles.
 - **Ladybug** (`ladybug`). Now: tap: Open the wings. Plan: keep.
   - Owner: Perfect.
-  - Sound: Tiny wing buzz.
+  - Sound: A beetle's real wingbeat that wanders in pitch and loudness, and a light landing.
 - **Snail** (`snail`). Now: tap: Hide in the shell. Plan: keep.
   - Owner: Perfect, but it disappears too much when hiding; make it more elegant.
   - Effect: Keep hiding in the shell, but keep the shell clearly visible and ease in more gently.
@@ -1806,16 +1853,17 @@ Proposals below are suggestions; the owner may change them.
     drawn in through the shell's opening as solid pieces the shell hides, and the shell settles on
     the ground with nothing soft showing (3.2 s). Coming out, the foot slides out first, then the
     head, then the stalks unroll.
-  - Sound: Slurpy slide.
+  - Sound: Wetter and slimier, a squish with a sticky stretch.
 - **Octopus** (`octopus`). Now: tap: Squirt ink. Plan: keep.
   - Owner: Underwhelming; the ink should be much bigger and more dramatic.
   - Effect: A big ink cloud billows out while it jets away and back.
   - Improved: C2: a big billowing ink cloud grows behind it while it jets up and away with its arms
     streaming, then drifts back as the ink thins (about 4.5 s).
-  - Sound: Squirt and whoosh.
+  - Sound: A squirt, then the ink bubbling out as a liquid (no wind).
 - **Starfish** (`starfish`). Now: tap: Wave the arms. Plan: keep.
   - Owner: Fine.
-  - Sound: Wet suction pop.
+  - Sound: The pop is kept, and each arm makes a soft wet lift as it rises and a soft pat as it
+    settles, one after another.
 - **Sea urchin** (`sea-urchin`). Now: tap: Wave the spines. Plan: keep.
   - Owner: Needs an effect.
   - Effect: Spines ripple in waves and it creeps along.
@@ -1829,13 +1877,15 @@ Proposals below are suggestions; the owner may change them.
   - Improved: E6: a fly buzzes in and hovers; the frog's jaw drops, its tongue shoots out, catches
     the fly and snaps back; the jaw shuts, its eyes sink to push the fly down (frogs swallow with
     their eyes), and it croaks twice with its throat sac (about 3.5 s).
-  - Sound: A fly's buzz, a flick, a gulp and two croaks.
+  - Sound: A real fly's wandering buzz, and real croaks after it eats the fly; real CC0 recordings
+    now (frog-fly.mp3, frog-croak.mp3), with the synthesized sound as a fallback.
 - **Penguin** (`penguin`). Now: tap: Flap. Plan: keep.
   - Owner: Perfect and very cute.
   - Sound: Squawk.
 - **Owl** (`owl`). Now: tap: Turn the head. Plan: keep.
   - Owner: Basically perfect.
-  - Sound: Hoo-hoo.
+  - Sound: A great horned owl's call, "hoo, h-hoo, hooo, hoo", low and breathy; real CC0 recordings
+    now (owl-hoot.mp3), with the synthesized sound as a fallback.
 
 ## Holidays (8)
 
@@ -1856,14 +1906,17 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Random shell types each tap; burst colour matches its tube.
   - Improved: C2: each tap fires a different tube and shell type (peony, ring, willow or star); the
     rocket rises from its tube and the burst takes that tube's colour.
-  - Sound: Launch whistle and a boom.
+  - Sound: A real firework, the launch's thump and rush (no whistle), a deep boom and the stars'
+    soft crackle; real CC0 recordings now (fireworks-burst.mp3), with the synthesized sound as a
+    fallback.
 - **Decorated tree** (`decorated-tree`). Now: tap: Lights on or off. Plan: keep.
   - Owner: Lights only show very briefly; make it more dramatic.
   - Fixed: C1: a faceted gold star facing the viewer, with only a faint glow.
   - Effect: Lights come on and chase in patterns and stay on; the star glows.
   - Improved: C2: a tap switches the lights on in a sweep up the tree, and they stay on, cycling
     chase, ripple and steady patterns; the star gets a warm halo. A second tap turns them off.
-  - Sound: Sleigh-bell jingle.
+  - Sound: The lights come on to the start of "Jingle Bells" on the piano (no clicking); off, the
+    branches' soft rustle.
 - **Patterned egg** (`patterned-egg`). Now: tap: Spin. Plan: keep.
   - Owner: Pretty cool; keep.
   - Sound: Painted-shell tap.
@@ -1880,7 +1933,8 @@ Proposals below are suggestions; the owner may change them.
   - Sound: Soft flame whoosh.
 - **Menorah** (`menorah`). Now: tap: Light the candles. Plan: keep.
   - Owner: Pretty much perfect.
-  - Sound: Match strike and a bell.
+  - Sound: A match struck, then each wick catching with a soft flame as it lights, one by one; going
+    out, a small puff as each flame goes out in turn (no big gust).
 
 ## Music (8)
 
@@ -1889,6 +1943,8 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Keep the strum; strings vibrate visibly.
   - Improved: C2: the strum rocks the guitar about 13 degrees with a small hop, the strings bend and
     vibrate one after another, and rings of light pulse out of the soundhole. Music is Phase D.
+    Fix6: smooth lacquered wood (the top, sunburst, back, ribs and neck placed evenly with no color
+    noise or fine grain), a clean three-ring rosette, and thin strings drawn as clean lines.
   - Sound: A real strummed chord progression (synth plucks).
 - **Snare drum** (`drum`). Now: tap: Play a roll. Plan: keep.
   - Owner: Could be more dramatic. Fast taps could play longer and faster rolls.
@@ -1965,10 +2021,11 @@ Proposals below are suggestions; the owner may change them.
 
 - **Rocket** (`rocket`). Now: tap: Launch. Plan: keep.
   - Owner: Basically perfect.
-  - Sound: Launch roar.
+  - Sound: The flickering roar of the exhaust over a deep rumble.
 - **Helicopter** (`helicopter`). Now: tap: Take off or land. Plan: keep.
   - Owner: Basically perfect.
-  - Sound: Rotor chop.
+  - Sound: The heavy whump of real rotor blades over the turbine's hush; real CC0 recordings now
+    (helicopter-rotor.mp3), with the synthesized sound as a fallback.
 - **Hot-air balloon** (`hot-air-balloon`). Now: tap: Fire the burner. Plan: keep.
   - Owner: Could be more dramatic; maybe inflate more.
   - Effect: Burner roars, the envelope swells and it rises higher.
@@ -1977,14 +2034,17 @@ Proposals below are suggestions; the owner may change them.
   - Sound: Burner roar.
 - **Steam train** (`steam-train`). Now: tap: Blow the whistle. Plan: keep.
   - Owner: Basically perfect.
-  - Sound: Whistle and chuff.
+  - Sound: A short steam whistle, then it chugs along with strong and soft chuffs over the wheels'
+    rumble; real CC0 recordings now (steam-train-chug.mp3), with the synthesized sound as a
+    fallback.
 - **Ocean liner** (`ocean-liner`). Now: tap: Sound the horn. Plan: keep.
   - Owner: Almost perfect.
   - Sound: Deep ship horn.
 - **Sports car** (`sports-car`). Now: tap: Rev the engine. Plan: keep.
   - Owner: Looks really good.
   - Fixed: C1: the home camera comes closer.
-  - Sound: Engine rev.
+  - Sound: A real engine's growl, revved twice; real CC0 recordings now (sports-car-rev.mp3), with
+    the synthesized sound as a fallback.
 - **Bus** (`bus`). Now: tap: Stop for passengers. Plan: keep.
   - Owner: Not sure what the effect is.
   - Effect: Stop sign swings out, lights flash, doors open.
@@ -1994,13 +2054,14 @@ Proposals below are suggestions; the owner may change them.
   - Sound: Horn beep and door hiss.
 - **Propeller plane** (`propeller-plane`). Now: tap: Loop the loop. Plan: keep.
   - Owner: Unbelievable; perfect.
-  - Sound: Prop engine buzz.
+  - Sound: A real piston engine with the propeller's beat; real CC0 recordings now
+    (propeller-plane-engine.mp3), with the synthesized sound as a fallback.
 - **Jet airliner** (`jet`). Now: tap: Climb and bank. Plan: keep.
   - Owner: Very solid; bank more to one side or the other.
   - Effect: Climbs and banks hard left then right.
   - Improved: C2: it climbs nose up while banking hard left, then hard right (about 50 degrees each
     way, 3.5 s).
-  - Sound: Jet roar.
+  - Sound: No whistle; a softer, natural rush of the engines.
 - **Sailboat** (`sailboat`). Now: tap: A gust of wind. Plan: keep.
   - Owner: Pretty good; a bit more dramatic.
   - Effect: A big gust heels it over with spray.
@@ -2022,10 +2083,11 @@ Proposals below are suggestions; the owner may change them.
 - **Tractor** (`tractor`). Now: tap: Chug chug. Plan: keep.
   - Owner: Perfect.
   - Fixed: C1: a light wisp of exhaust; the cab glass is clear instead of static.
-  - Sound: Diesel putter.
+  - Sound: A slow diesel's putt-putt with its clatter; real CC0 recordings now (tractor-engine.mp3),
+    with the synthesized sound as a fallback.
 - **Flying saucer** (`ufo`). Now: tap: Beam on or off. Plan: keep.
   - Owner: Maybe my favourite; really cool.
-  - Sound: Theremin warble.
+  - Sound: A deep pulsing hum and a heavy rush as it lifts (no whistling theremin).
 
 ## Landmarks (16)
 
@@ -2035,7 +2097,8 @@ Proposals below are suggestions; the owner may change them.
   - Improved: E6: a tap starts the night show: the ironwork lights up gold, a sparkle of white
     lights climbs the tower, and four fireworks burst round it one after another (blue, white, red
     and gold), each opening fast, drooping and burning out; then the lights go down (about 4 s).
-  - Sound: Sparkle, and a boom for each burst.
+  - Sound: Real fireworks, four bursts with booms and soft crackle (no twinkling); real CC0
+    recordings now (fireworks-burst.mp3), with the synthesized sound as a fallback.
 - **Washington Monument** (`washington-monument`). Now: tap: Sun and shadow. Plan: keep.
   - Owner: Something cool and not disrespectful.
   - Effect: The reflecting pool shimmers and the flags wave.
@@ -2043,7 +2106,7 @@ Proposals below are suggestions; the owner may change them.
     over and sets, the obelisk's shadow swings round the lawn in front, and the flags ripple in the
     breeze (about 4.5 s). There is no reflecting pool in the model, so the shadow replaced the
     pool's shimmer.
-  - Sound: A day's breeze and a soft chime at noon.
+  - Sound: Only the soft chime at noon (no wind).
 - **Pyramids of Giza** (`pyramids`). Now: tap: A visitor from space. Plan: keep.
   - Owner: Neat. Maybe put a UFO there, as a joke.
   - Effect: A tiny UFO (the Flying saucer) hovers over the Great Pyramid and beams up a camel-shaped
@@ -2058,7 +2121,8 @@ Proposals below are suggestions; the owner may change them.
   - Improved: E6: the floors wring round further in twelve rigid bands (the top turns most) while a
     ring of light runs up the glass, then they unwind with a little sway as a second ring runs up (4
     s).
-  - Sound: A rising lift tone and a ding each time the light reaches the top.
+  - Sound: The lift's low whir as the floors wring round and a soft low bell each time the light
+    reaches the top (no rising tone or bright dings).
 - **Lighthouse** (`lighthouse`). Now: tap: Light on or off. Plan: keep.
   - Owner: Basically perfect.
   - Sound: Foghorn.
@@ -2069,7 +2133,7 @@ Proposals below are suggestions; the owner may change them.
   - Improved: E6: the torch flares: the flame leaps to twice its size in a halo of light, a warm
     glow spreads down the statue, and a plume of golden sparks drifts up and away on the breeze and
     burns out (about 4 s).
-  - Sound: Flame whoosh, crackling sparks and a harbour bell.
+  - Sound: The whoosh and the bell, no crackling clicks.
 - **White House** (`white-house`). Now: tap: Fountain and lights. Plan: keep.
   - Owner: Nothing destructive or disrespectful.
   - Effect: The fountain on the lawn sprays higher and the flag raises.
@@ -2077,7 +2141,7 @@ Proposals below are suggestions; the owner may change them.
     lights come on in the windows one by one and the flag ripples; then the jet sinks and the lights
     go out one by one (about 4.5 s). The flag stays at the top of its pole, so it never looks like
     half-mast.
-  - Sound: Fountain splash and patter.
+  - Sound: The spray's splash and a soft, steady rush of water falling back (no patter of clicks).
 - **Leaning Tower of Pisa** (`leaning-tower`). Now: tap: Drop two balls. Plan: keep.
   - Owner: Lean further and things fall off, like Galileo dropping objects.
   - Effect: Two balls of different sizes drop from the top and land together.
@@ -2092,7 +2156,8 @@ Proposals below are suggestions; the owner may change them.
   - Improved: E6: a chariot race (no fighting): a crowd fills the seats, and four chariots in the
     team colours (red, white, blue and green) race a lap and a quarter of the arena in two lanes,
     swapping the lead, while the crowd jumps and cheers; then they fade away (about 5 s).
-  - Sound: Crowd cheers over drumming hooves.
+  - Sound: A real crowd in the stands and horses' hooves trotting; real CC0 recordings now
+    (colosseum-crowd.mp3, colosseum-hooves.mp3), with the synthesized sound as a fallback.
 - **Parthenon** (`parthenon`). Now: tap: A procession. Plan: keep.
   - Owner: Little ancient people in it.
   - Effect: Tiny robed figures walk between the columns in procession.
@@ -2176,7 +2241,8 @@ Proposals below are suggestions; the owner may change them.
     stand; a gold shell grows round each neuron as it fires. Its size is set by options: 2 to 4
     inputs, 1 to 3 hidden layers of 2 to 5 neurons, 1 to 3 outputs (at most 14 neurons); networks
     with more than 24 wires send waves of light along the wires.
-  - Sound: A rising arpeggio going forward, a falling one coming back.
+  - Sound: More intense, an electric surge as each layer lights over a dark chord, a deep hit at the
+    answer and crackling current as the pulses run back.
 - **Convolutional network** (`cnn`). Now: tap: Read the digit. Plan: keep.
   - Owner: Approved on the Toy Ideas page (lane AI).
   - Effect: A glowing 3×3 filter slides across a pixel picture of a handwritten 7, stamping a
@@ -2199,7 +2265,8 @@ Proposals below are suggestions; the owner may change them.
     takes on each word's color mixed with what it carried and runs round the loop. The LSTM style
     adds forget, input and output gates whose slats turn like shutters (4.5 s). Owner's review: a
     View option adds a 3D model (a cell with lit edges, the loop arching over it on a slant).
-  - Sound: A pulse for each word, the loop humming higher as the memory builds.
+  - Sound: A soft pulse of current as each word goes in and the loop's chord growing a note each
+    time (no rising hum).
 - **Transformer** (`transformer`). Now: tap: Predict the next word. Plan: keep.
   - Owner: Approved on the Toy Ideas page (lane AI).
   - Effect: A row of token tiles; arcs of light jump between them, thicker where attention is
@@ -2215,7 +2282,8 @@ Proposals below are suggestions; the owner may change them.
     comes out of the top; both diagrams have a 3D model. After the third review the classic diagram
     is spread out, each box carries an icon instead of its name, and the key is the toy's note in
     the panel (off the toy). Round 4: the 3D models' labels are about twice as big and bright.
-  - Sound: A shimmering chord for each layer, a pop for the new token.
+  - Sound: The first two sounds are warm swells of current instead of electronic shimmers; the last
+    two are unchanged.
 - **Looped transformer** (`looped-transformer`). Now: tap: Loop until it's sure. Plan: keep.
   - Owner: Approved on the Toy Ideas page (lane AI).
   - Effect: One transformer block with a track looping through it: the row of tokens rides round the
@@ -2231,7 +2299,8 @@ Proposals below are suggestions; the owner may change them.
   - Improved: AI: a cloud of specks clears in ten steps into a rubber duck while the STEP counter
     runs from 50 to 0; then the noise washes back (5 s). Owner's review: a View option adds a 3D
     model (a round cloud clears into a duck over a stand).
-  - Sound: A white-noise hiss that settles into a clean chord.
+  - Sound: A soft dark swell as the noise clears (no sandy hiss) and a chord rolled on the piano as
+    the duck appears.
 - **Gradient descent** (`gradient-descent`). Now: tap: Roll downhill. Plan: keep.
   - Owner: Approved on the Toy Ideas page (lane AI).
   - Effect: A ball rolls down a hilly loss landscape, overshoots and settles into a valley. A
@@ -2240,7 +2309,8 @@ Proposals below are suggestions; the owner may change them.
   - Improved: AI: the ball takes 21 hops of gradient descent with momentum, leaving a trail of dots;
     just right, it overshoots and settles in the valley; too low, it creeps; too high, it bounces
     wall to wall (4.5 s).
-  - Sound: A rolling tone that falls in pitch as the loss drops.
+  - Sound: A soft tap as the ball lands each of its 21 hops down, in sync, and one as it lands home
+    (the falling tone and whoosh are gone).
 - **Gaussian splatting** (`gaussian-splatting`). Now: tap: Train, or play the view. Plan: keep.
   - Owner: From the owner's notes of September 28, 2026 (lane Screens; labs only).
   - Effect: Training: a cloud of random splats slides, stretches and recolors, step by step, into a
@@ -2250,7 +2320,8 @@ Proposals below are suggestions; the owner may change them.
     keyframes as each splat slides to its next place; views One splat (sizes, opacity and color
     sliders, a Turn control), Many splats (a duck shrinks to dots and back) and Sorting (splats
     appear far to near from a camera).
-  - Sound: A soft rising chime as the picture forms.
+  - Sound: A soft patter of splats settling into place as the picture forms (no rising notes or
+    tones).
 - **Word vectors** (`word-vectors`). Now: tap: A − B + C. Plan: keep.
   - Owner: Approved on the Toy Ideas page (lane AI).
   - Effect: Word points float in 3D, each with a small sign; arrows add up, king minus man plus
@@ -2276,7 +2347,7 @@ Proposals below are suggestions; the owner may change them.
     s).
   - Improved: AI: both switches flip to 1, light fills the wires into the XOR and AND gates; the XOR
     flashes and gives 0, the AND lights the carry lamp, and 1+1=10 shows (3.5 s).
-  - Sound: Switch clicks, and a buzz through each gate.
+  - Sound: The buzz near the end is gone; the rest is unchanged.
 - **Turing machine** (`turing-machine`). Now: tap: Run the program. Plan: keep.
   - Owner: Approved on the Toy Ideas page (lane Machines A).
   - Effect: A tape of 0 and 1 tiles runs under a read-write head with a state lamp: the head reads,
@@ -2307,7 +2378,8 @@ Proposals below are suggestions; the owner may change them.
   - Improved: Machines A: kit-built (no CC0 or CC BY scan found), rotors I, II, III with reflector B
     and a plugboard (the historical wirings and double step), 26 keys and a moving lamp glow, the
     operator's pad on the lid (coded letters in red, decoded in blue); your own message in the Toy
-    tab.
+    tab. Fix6: tap a key (or type on a keyboard) to code your own letters one by one; a tap off the
+    keys decodes them; a tap on the pad gives a clean sheet (the pad is a live picture).
   - Sound: Heavy key clacks, the ratchet of the rotors stepping, and a faint click as each lamp
     lights.
 - **Bombe** (`bombe`). Now: tap: Start the search. Plan: keep.
@@ -2318,8 +2390,8 @@ Proposals below are suggestions; the owner may change them.
   - Improved: Machines A: one bank of 12 drum sets (36 drums), a menu from a 12-letter crib, a real
     search of all 17,576 settings (plugboard taken as known), the stop lamp, and a readout of the
     setting and the plain text; your own message in the Toy tab.
-  - Sound: A dense clatter of spinning drums, a whirr of motors, and a sharp stop with a bell when a
-    setting is found.
+  - Sound: The drums' clatter without the low motor buzz; the switch, the stop and the bell are
+    unchanged.
 
 ## Pictures (5)
 
@@ -2329,7 +2401,8 @@ Proposals below are suggestions; the owner may change them.
   - Effect: A flat sheet showing what you open: a tap on the right of the page turns to the next
     page of a PDF, on the left goes back (the pages slide, they don't flip), or a tap plays and
     pauses a video.
-  - Sound: A soft paper swish and a light tap.
+  - Sound: A paper page turning; real CC0 recordings now (book-page.mp3), with the synthesized sound
+    as a fallback.
 - **Your book** (`your-book`). Now: tap: Turn the page. Plan: keep.
   - Owner: Lane Books, from the owner's notes of September 27 and 28, 2026 (Pages into Splats).
   - Fixed: Books r2 (the owner's note of September 29, 2026: the book, not the pages, a little
@@ -2351,7 +2424,8 @@ Proposals below are suggestions; the owner may change them.
     out) shows both pages; while a page is in view, forward goes from the left page to the right
     one, then turns the leaf and lands on the next left page (back the other way). Reading: One page
     (the default on a phone held upright) keeps a page in view.
-  - Sound: A paper swish and flutter, and a soft thud as the page lands.
+  - Sound: A paper page turning and the landing thud; real CC0 recordings now (book-page.mp3), with
+    the synthesized sound as a fallback.
 - **Photo album** (`photo-album`). Now: tap: Turn the page. Plan: keep.
   - Owner: Lane Books, from the owner's notes of September 27 and 28, 2026 (Pages into Splats).
   - Fixed: Books r2 (the owner's note of September 29, 2026: a little blurry or grainy around the
@@ -2365,7 +2439,8 @@ Proposals below are suggestions; the owner may change them.
     a tap closes the album. Books r3: taps by where they land, as the book; a page pulled by hand
     lags the finger a little, falls back more readily and settles slowly, like a heavy card page.
     Books r4: page focus and Reading: One page, as the book.
-  - Sound: A lower card swish and a firm thud.
+  - Sound: A thick card page turning and the thud; real CC0 recordings now (book-page.mp3), with the
+    synthesized sound as a fallback.
 - **Picture frame** (`picture-frame`). Now: tap: Swing the frame. Plan: keep.
   - Owner: Lane Books, from the owner's notes of September 27 and 28, 2026 (Pages into Splats).
   - Effect: A photo in a frame hung on a nail by a wire: a tap swings it about the nail as one solid
@@ -2393,8 +2468,7 @@ Proposals below are suggestions; the owner may change them.
     button. Screens r2: the picture's sheet is hidden while the set is off or the curtains are
     closed (nothing shows through), a GIF holds its frame and a video pauses; an off switch on each
     style; sharp sets (even placement in square tiles, walnut, velvet, brass and gold).
-  - Sound: The TV's click and hum, and on switching off its click and falling whine; each style its
-    own (a soft tone, the curtains' swish, a shimmer).
+  - Sound: Switching on is the click and crackle without the hum; switching off is unchanged.
 
 ## Studio (5)
 
@@ -2409,7 +2483,7 @@ Proposals below are suggestions; the owner may change them.
   - Owner: Approved on the Splashery Universe page (lane Studio Sound), September 29, 2026.
   - Effect: A tap bows a square metal plate: every sand grain hops where the plate swings and slides
     to the still lines, and in about 3.6 s the mode's figure appears; tap again to stir it up.
-  - Sound: A steady hum at the mode's pitch, with sand pattering.
+  - Sound: The plate's hum with the sand sliding as it settles (no patter of clicks).
 - **Model to splats** (`model-splats`). Now: tap: Lift off and settle back. Plan: keep.
   - Owner: Approved on the Splashery Universe page (lane Studio Models), September 29, 2026.
   - Effect: A 3D model file (glTF, OBJ or STL) turned into splats on the device; the tap lifts every
@@ -2433,8 +2507,8 @@ Proposals below are suggestions; the owner may change them.
     Web (MIT), both loaded only when a photo is opened; an even grid of splats sized to their
     neighbors on the same surface, cut at depth jumps; three CC0 samples (a forest path, a cobbled
     street, a still life).
-  - Sound: A soft whoosh that rises as the depth comes up, with two glassy notes; a falling whoosh
-    as it lies flat.
+  - Sound: The photo's paper lifting as the depth comes up and settling as it lies flat (no wind, no
+    whoosh).
 - **Video to 3D** (`video-3d`). Now: tap: Replay flight. Plan: new effect (E6).
   - Owner: Approved as a one-week labs spike (the owner's question and the Operator's answer, call
     18, September 30, 2026; lane Video 3D).
@@ -2462,7 +2536,7 @@ Proposals below are suggestions; the owner may change them.
     ellipses (a density wave keeps two arms), an ocean of four Gerstner waves, a flow along a (2, 3)
     torus knot. Lab r2: a tap on the toy now fires the pulse on every field (the galaxy's faint
     stars were under the pick pass's alpha clip; the recipe's pickAlpha lowers it).
-  - Sound: A soft rising swell.
+  - Sound: A soft ripple through the field, like grass stirring, as the pulse runs out (no tones).
 - **Fluid lab** (`fluid-lab`). Now: tap: Pour, drop or blow. Plan: keep.
   - Owner: The owner's notes on the water bottle and soda can of September 29, 2026 ("a realistic
     fluid splat simulator"; lane Fluids; labs only).
