@@ -26,6 +26,13 @@ import {
   resourceFromArrays,
 } from "./loaders.js";
 import { findToy, assetURL, lookOption, pickLook, labsOn } from "./toys.js";
+
+// UI r2: focus mode, the sheet's extra stops, the desktop panel's fold and
+// gallery page, the finer drawing pad and moving (panning) a toy show behind
+// the labs switch until the owner's marks; then this returns true.
+export function ui2On() {
+  return labsOn();
+}
 import { pickKernel } from "./kernels.js"; // Lab
 import { pickSharpness, sharpOff } from "./sharpness.js"; // Sharpness
 import { createScene, THEMES } from "./state.js";
@@ -925,18 +932,10 @@ export class Player {
   }
 
   // Moves the view across a picture toy (a page seen close up): the finger
-  // drags the picture. Stays within the toy.
+  // drags the picture. Stays within the toy. UI r2: any toy pans (the camera
+  // does the move and the clamp), and a picture toy's pan is the same one.
   panBy(dx, dy) {
-    const cam = this.camera;
-    const pose = cam.pose();
-    const k =
-      (2 * cam.cur.distance * Math.tan((19 * Math.PI) / 180)) / (this.canvas.clientHeight || 600);
-    const R = this.toyInfo?.radius || 1;
-    const c = this.toyInfo?.center || [0, 0, 0];
-    for (let i = 0; i < 3; i++) {
-      const v = cam.target[i] - pose.right[i] * dx * k + pose.up[i] * dy * k;
-      cam.target[i] = Math.min(c[i] + R, Math.max(c[i] - R, v));
-    }
+    this.camera.panBy(dx, dy);
     this.stage.requestRender();
   }
 
@@ -1123,8 +1122,7 @@ export class Player {
     // Page focus: no glide, and a page in view lets go to here.
     this.glide = null;
     if (this.pageView) this.pageView.back = null;
-    if (this.pictures && this.toyInfo) this.camera.target = this.toyInfo.center.slice(); // Pictures
-    this.camera.reset();
+    this.camera.reset(); // UI r2: Reset also centers a moved view (pictures too)
     this.stage.requestRender();
   }
 
