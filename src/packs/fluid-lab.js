@@ -117,6 +117,16 @@ function splashScene(k, o) {
     budget: 1300,
     colliders: [BASIN, { type: "floor", y: 0 }],
     fill: { cylinder: { at: [0, 0.04, 0], radius: 0.76, height: 0.13 } },
+    // The GPU liquid (r4): a shallow film and a smaller ball, so the ball
+    // throws up a crown as a drop does on a wet plate; low friction and no
+    // cohesion, so the film flows back in and settles.
+    gpu: {
+      fill: { cylinder: { at: [0, 0.04, 0], radius: 0.76, height: 0.065 } },
+      fillShare: 0.9,
+      drop: { at: [0.03, 0.95, 0.02], radius: 0.12, vel: [0, -1, 0] },
+      friction: 0.025,
+      tension: 0,
+    },
   });
   k.reach([0, 1.75, 0]);
   k.data = { scene: "splash" };

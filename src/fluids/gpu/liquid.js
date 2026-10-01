@@ -67,6 +67,8 @@ function domainOf(spec) {
     add([c.at[0] + c.radius, c.at[1] + c.height, c.at[2] + c.radius]);
   }
   if (spec.emitter?.at) add(spec.emitter.at, (spec.emitter.radius ?? 0.05) * 2);
+  // (a tap's dropped ball starts inside the grid)
+  if (spec.drop?.at) add(spec.drop.at, (spec.drop.radius ?? 0.1) + 0.05);
   if (spec.domain) {
     add(spec.domain[0]);
     add(spec.domain[1]);
@@ -82,7 +84,10 @@ function domainOf(spec) {
 }
 
 export class GpuLiquid {
-  constructor(spec, { device, profile = "high", gravity, seed = 1, unit = 0.1 }) {
+  constructor(recipeSpec, { device, profile = "high", gravity, seed = 1, unit = 0.1 }) {
+    // A recipe's `gpu` settings override the rest on this solver (a pool,
+    // ball or wall friction sized for its finer grid); the CPU keeps the rest.
+    const spec = recipeSpec.gpu ? { ...recipeSpec, ...recipeSpec.gpu } : recipeSpec;
     const preset = LIQUIDS[spec.preset] || LIQUIDS.water;
     const tier = GPU_TIERS[profile] || GPU_TIERS.high;
     this.spec = spec;
@@ -145,7 +150,9 @@ export class GpuLiquid {
     // foam keeps a token budget)
     const cap = foam > 0 || fizz > 0 ? Math.round((fizz > 0 ? 9000 : 2500) * (spec.diffuse ?? 1) * (tier.diffuse ?? 1)) : 256; // prettier-ignore
     this.diffuse = new GpuDiffuse(this, { foam, fizz, cap });
-    if (spec.fill) this.fill(spec.fill);
+    // (fillShare: how much of the budget the starting pool may take, leaving
+    // room for what a tap adds, such as the splash's dropped ball)
+    if (spec.fill) this.fill(spec.fill, { count: Math.floor(this.cap * (spec.fillShare ?? 1)) });
   }
 
   get n() {
@@ -245,6 +252,8 @@ export class GpuLiquid {
   }
 
   drop(at, radius, vel = [0, 0, 0]) {
+    const o = this.spec.drop;
+    if (o) [at, radius, vel] = [o.at ?? at, o.radius ?? radius, o.vel ?? vel];
     const want = Math.floor(((4 / 3) * Math.PI * radius ** 3) / this.d ** 3);
     if (this.cap - this.n < want) this.trimTop(want - (this.cap - this.n));
     return this.fill({ sphere: { at, radius } }, { vel });
