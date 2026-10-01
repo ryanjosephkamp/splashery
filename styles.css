@@ -2091,6 +2091,63 @@ body.embed #stage {
 
 /* /View settings */
 
+/* Live input (lane Live input): the pill that shows while the microphone,
+   the camera or a screen is on, with its Stop button. */
+.live-indicator {
+  position: fixed;
+  top: calc(env(safe-area-inset-top, 0px) + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 4px 4px 12px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: var(--paper);
+  box-shadow: var(--shadow);
+  color: var(--ink);
+  font-size: 13px;
+}
+
+.live-indicator[hidden] {
+  display: none;
+}
+
+.live-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #d0302f;
+  animation: live-blink 1.6s ease-in-out infinite;
+}
+
+@keyframes live-blink {
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .live-dot {
+    animation: none;
+  }
+}
+
+.live-indicator button {
+  padding: 3px 12px;
+  border-radius: 999px;
+}
+
+.input-live {
+  margin: 6px 0;
+}
+
+.input-live .live-note {
+  margin-top: 4px;
+}
+
 /* UI r2 --------------------------------------------------------------------- */
 /* Focus mode, the phone sheet's hidden and full stops, the desktop panel's
    fold and gallery page, and the drawing pad's pens. All of it shows only

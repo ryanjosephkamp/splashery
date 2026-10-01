@@ -10,10 +10,10 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 334 toys. 334 have a tap action today; the other 0 only hop.
+- 335 toys. 335 have a tap action today; the other 0 only hop.
 - **keep** (the effect is right: the owner liked it, or C2 finished it): 331.
 - **more** (has an effect; make it clearer or more dramatic): 0.
-- **new** (needs its own effect): 3.
+- **new** (needs its own effect): 4.
 - Visual fixes: 0 open, 30 done. Touch or drag interaction asked for: 4.
 
 ## By phase
@@ -56,7 +56,7 @@ Proposals below are suggestions; the owner may change them.
   Neural network, Convolutional network, Recurrent network, Transformer, Looped transformer,
   Diffusion model, Gradient descent, Gaussian splatting, Word vectors, Sorting machine, Half adder,
   Turing machine, Difference engine, Enigma machine, Bombe, Your book, Photo album, Picture frame,
-  Model to splats, Photo to 3D, Splat field, Fluid lab, Screen.
+  Model to splats, Photo to 3D, Video to 3D, Splat field, Fluid lab, Screen.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -64,7 +64,7 @@ Proposals below are suggestions; the owner may change them.
 - **E3, new effects: tiny things, anatomy and maths.** None.
 - **E4, new effects: nature and weather.** None.
 - **E5, new effects: food.** None.
-- **E6, new effects: balls and the rest.** Picture lab, Song landscape, Chladni plate
+- **E6, new effects: balls and the rest.** Picture lab, Song landscape, Chladni plate, Video to 3D
 - **F, touch and drag interaction.** Gummy bear, Building bricks, Newton's cradle, Puzzle cube.
 
 ## Scans (32)
@@ -2464,7 +2464,7 @@ Proposals below are suggestions; the owner may change them.
     style; sharp sets (even placement in square tiles, walnut, velvet, brass and gold).
   - Sound: Switching on is the click and crackle without the hum; switching off is unchanged.
 
-## Studio (4)
+## Studio (5)
 
 - **Song landscape** (`song-landscape`). Now: tap: Play or pause the song. Plan: new effect (E6).
   - Owner: Approved on the Splashery Universe page (lane Studio Sound), September 29, 2026.
@@ -2503,6 +2503,18 @@ Proposals below are suggestions; the owner may change them.
     street, a still life).
   - Sound: The photo's paper lifting as the depth comes up and settling as it lies flat (no wind, no
     whoosh).
+- **Video to 3D** (`video-3d`). Now: tap: Replay flight. Plan: new effect (E6).
+  - Owner: Approved as a one-week labs spike (the owner's question and the Operator's answer, call
+    18, September 30, 2026; lane Video 3D).
+  - Effect: Your video rebuilt as trained 3D Gaussian splats on this device: the sharpest frames of
+    a chosen stretch, the camera path solved by Splat.js, splats trained through WebGPU. The tap
+    flies the video's own camera path with its sound (Replay flight); a drag roams off it; the tap
+    again brings the camera home.
+  - Improved: Video to 3D (spike): Splat.js (MIT) vendored and loaded only when a video is opened;
+    frames picked by sharpness; the result converted from Splat.js's PLY into kit splats with their
+    own sizes and rotations; save as PLY; timing readout per stage.
+  - Sound: A soft, level breath of air as the flight sets off and as the camera comes home; during
+    the flight of a video you opened, the video's own sound.
 
 ## Lab (2)
 

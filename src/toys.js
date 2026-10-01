@@ -3376,6 +3376,17 @@ export const TOYS = [
     tags: "photo picture image depth 3d parallax relief layers convert converter depth map jpeg png webp",
     camera: { yaw: 0, pitch: 0, roll: 0, distance: 2.6 },
   },
+  // ---- Pack: video3d (lane Video 3D) ----
+  {
+    id: "video-3d",
+    label: "Video to 3D",
+    category: "studio",
+    kind: "kit",
+    pack: "video3d",
+    labs: true,
+    tags: "video film clip drone flight walk street 3d scene camera path structure from motion gaussian splats train webgpu convert converter mp4 webm",
+    camera: { yaw: 0, pitch: 0, roll: 0, distance: 2.6 },
+  },
   // ---- Pack: lab (lane Lab) ----
   {
     id: "splat-field",

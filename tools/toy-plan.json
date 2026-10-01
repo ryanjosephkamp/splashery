@@ -2185,6 +2185,13 @@
       "sound": "A soft ripple through the field, like grass stirring, as the pulse runs out (no tones).",
       "improved": "Lab: new test toy on the new Lab shelf (labs). Each splat stores only its (u, v); the toy's work-buffer program (a recipe's gpuField, an additive engine hook) computes its place, tilt and color from them and the time. Three fields: a galaxy whose stars orbit on turning ellipses (a density wave keeps two arms), an ocean of four Gerstner waves, a flow along a (2, 3) torus knot. Lab r2: a tap on the toy now fires the pulse on every field (the galaxy's faint stars were under the pick pass's alpha clip; the recipe's pickAlpha lowers it)."
     },
+    "video-3d": {
+      "v": "new",
+      "owner": "Approved as a one-week labs spike (the owner's question and the Operator's answer, call 18, September 30, 2026; lane Video 3D).",
+      "effect": "Your video rebuilt as trained 3D Gaussian splats on this device: the sharpest frames of a chosen stretch, the camera path solved by Splat.js, splats trained through WebGPU. The tap flies the video's own camera path with its sound (Replay flight); a drag roams off it; the tap again brings the camera home.",
+      "sound": "A soft, level breath of air as the flight sets off and as the camera comes home; during the flight of a video you opened, the video's own sound.",
+      "improved": "Video to 3D (spike): Splat.js (MIT) vendored and loaded only when a video is opened; frames picked by sharpness; the result converted from Splat.js's PLY into kit splats with their own sizes and rotations; save as PLY; timing readout per stage."
+    },
     "fluid-lab": {
       "v": "keep",
       "owner": "The owner's notes on the water bottle and soda can of September 29, 2026 (\"a realistic fluid splat simulator\"; lane Fluids; labs only).",

@@ -28,10 +28,11 @@ import {
 import { findToy, assetURL, lookOption, pickLook, labsOn } from "./toys.js";
 
 // UI r2: focus mode, the sheet's extra stops, the desktop panel's fold and
-// gallery page, the finer drawing pad and moving (panning) a toy show behind
-// the labs switch until the owner's marks; then this returns true.
+// gallery page, the finer drawing pad and moving (panning) a toy. They showed
+// behind the labs switch until the owner's marks (all eight good); since
+// October 1, 2026 they are on for everyone.
 export function ui2On() {
-  return labsOn();
+  return true;
 }
 import { pickKernel } from "./kernels.js"; // Lab
 import { pickSharpness, sharpOff } from "./sharpness.js"; // Sharpness
@@ -818,6 +819,9 @@ export class Player {
 
   // Where the toy's media comes from: { key, source, page }.
   mediaSource(toy, recipe, options) {
+    // A live stream (lane Live input) on the toy that started it; never saved in the scene.
+    const lv = this.liveMedia;
+    if (lv && lv.toy === toy.id) return { key: lv.key, source: lv.source, page: 0 };
     const m = toy.media;
     if (m?.file && this.mediaFile && this.mediaFile.name === m.file.name)
       return { key: mediaKey(this.mediaFile), source: this.mediaFile, page: m.page || 0 };
