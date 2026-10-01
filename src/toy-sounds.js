@@ -1800,7 +1800,7 @@ export const TOY_SOUNDS = {
   "soda-can": [
     { voice: "slosh", f: 800, rate: 4, n: 0, decay: 0.6, vol: 0.5 },
     { voice: "crack", at: 0.93, f: 2600, decay: 0.5, vol: 0.5 },
-    { voice: "hiss", at: 0.94, f: 3800, decay: 0.7, vol: 0.6 },
+    { voice: "hiss", at: 0.94, f: 3800, decay: 0.7, vol: 0.45 },
     { voice: "rustle", at: 1.05, f: 6000, n: 60, decay: 1.8, bright: 0.2, vol: 0.3 },
   ],
   // Laces zipping through the eyelets, a soft tug as the bow pulls tight, two toe taps.
