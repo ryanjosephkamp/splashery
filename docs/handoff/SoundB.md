@@ -168,8 +168,16 @@ Model: Opus 5.5 (default effort), all of it.
 - **Full suite green** on September 30, 2026 (all 572 tests; one run, finished after a container
   restart by running the remaining spec files), then main merged in (the audit, Worlds r2, the
   sound-sources catalog) with the unit, lane and sound checks green again.
-- **28 recorded samples ready** in `assets/sounds/` (CC0, credited in CREDITS.md and
-  `tools/assets.json` `sounds`), waiting for Sound A's `sample` voice to be wired in.
+- **28 recordings wired in** (October 1, 2026, once Sound A's engine #141 was on main) through the
+  `sample` voice, each layer keeping its synthesized sound as the `fallback`: 31 toys (dice, puzzle
+  cube and its turns, balloon dog, storybook, apple, popcorn, taco, fireworks, Eiffel Tower,
+  Colosseum, steam train, sports car, tractor, helicopter, propeller plane, bow and target,
+  crossbow, owl, frog, bonsai, oak, pebbles, iceberg, Klein bottle, spinning top, spring toy, chess
+  set and its moves, wind-up robot, picture lab, your book, photo album). Levels set by rendering
+  each recording against the synth layer it replaces (capped at vol 1.8).
+  `tools/sound-lint.mjs --changed`: the only clear violations left are what the owner asked for or
+  kept (the tunes, the laptop's screen-on pad, the crown's pings, the monument's chime, the half
+  adder's ding, the Screen's off sound, the sports car's real rev).
 
 ## Notes
 
@@ -193,7 +201,6 @@ Model: Opus 5.5 (default effort), all of it.
 
 - The owner's ears are the real test: every new sound was judged from renders and numbers, not
   heard.
-- The samples are not played yet: they wait for Sound A's `sample` voice.
 
 ## For the Operator
 

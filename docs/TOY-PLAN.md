@@ -600,7 +600,8 @@ Proposals below are suggestions; the owner may change them.
     the berg bobs and rocks, then melts away as one piece as the berg's chunk grows back in place
     (about 6 s).
   - Sound: Real ice breaking, a deep crack with its groan and splinters (no crackle of clicks), then
-    the splash.
+    the splash; real CC0 recordings now (iceberg-crack.mp3), with the synthesized sound as a
+    fallback.
 - **Waterfall** (`waterfall`). Now: tap: Send a surge. Plan: keep.
   - Effect: A surge: the flow doubles and mist billows.
   - Improved: E4: a tap sends a surge: a white-water front runs along the river and over the lip, a
@@ -634,7 +635,8 @@ Proposals below are suggestions; the owner may change them.
     a crisper cover, and no red strip (the cover's inside drew over the pages). E1b: the outside is
     crisp: evenly spread, denser splats on the cover, spine and page edges, a fine woven cloth and
     page lines splats can show.
-  - Sound: Real paper pages turning (no wind).
+  - Sound: Real paper pages turning (no wind); real CC0 recordings now (book-page.mp3), with the
+    synthesized sound as a fallback.
 - **Laptop** (`laptop`). Now: tap: Open or close. Plan: keep.
   - Owner: Pretty awesome; keep it the same. After E1b: basically perfect, lock it in.
   - Fixed: E1b: a clean case (no speckle) and real keycaps with letters. Tap a key (or type on your
@@ -1094,7 +1096,8 @@ Proposals below are suggestions; the owner may change them.
     wither and fresh leaves open in their places (about 6.5 s). In winter a few dead brown leaves
     still cling to the twigs, and those fall.
   - Sound: A leafy rustle as the crown rocks, then soft rustles as the loose leaves land
-    (synthesized; no flutter or patter).
+    (synthesized; no flutter or patter); real CC0 recordings now (oak-leaves.mp3), with the
+    synthesized sound as a fallback.
 - **Pine tree** (`pine`). Now: tap: Shake off the snow. Plan: keep.
   - Owner: Christmas lights and a star appear.
   - Effect: Shakes off a dusting of snow (approved instead of lights, which the decorated tree
@@ -1134,7 +1137,8 @@ Proposals below are suggestions; the owner may change them.
     scissors slide in, open and snip it off at the cut, the piece tips onto the moss and is cleared
     away, and the stub heals over (about 5 s).
   - Sound: The branch creaks and its leaves rustle as it grows, the scissors open and snip, and the
-    cut piece drops onto the moss.
+    cut piece drops onto the moss; real CC0 recordings now (bonsai-snip.mp3), with the synthesized
+    sound as a fallback.
 - **Weeping willow** (`willow`). Now: tap: Send a breeze through. Plan: keep.
   - Owner: Pick anything.
   - Effect: The long branches sway in a wave like a breeze passing.
@@ -1242,7 +1246,8 @@ Proposals below are suggestions; the owner may change them.
     clear of the others, then five hop one at a time onto a cairn, biggest at the bottom, with a
     clack each; at the end they all hop back (about 7 s). In the Cairn style the top four topple off
     and are stacked again.
-  - Sound: Real stone-on-stone knocks as the pile shifts and tumbles home; the stacking knocks stay.
+  - Sound: Real stone-on-stone knocks as the pile shifts and tumbles home; the stacking knocks stay;
+    real CC0 recordings now (rocks-pebbles.mp3), with the synthesized sound as a fallback.
 - **Kelp** (`kelp`). Now: tap: Fish come to nibble. Plan: keep.
   - Owner: Maybe fish eat it; pick something.
   - Effect: Fish swim in and nibble; the kelp sways away.
@@ -1273,7 +1278,7 @@ Proposals below are suggestions; the owner may change them.
 - **Popcorn** (`popcorn`). Now: tap: Pop!. Plan: keep.
   - Owner: Basically perfect.
   - Sound: Dry kernels popping, each a short papery bang with a little thump (no bubbly rising
-    pops).
+    pops); real CC0 recordings now (popcorn-popping.mp3), with the synthesized sound as a fallback.
 - **Jelly** (`jelly`). Now: tap: Poke. Plan: keep.
   - Owner: Pretty much fine.
   - Sound: A wet, heavy wobble instead of a cartoon boing.
@@ -1352,7 +1357,8 @@ Proposals below are suggestions; the owner may change them.
   - Improved: E5: the shell snaps across the middle with a crunch; the halves pull apart and swing
     open like a book, showing the filling in each break, and bits spill onto a new plate and bounce;
     then they hop back in and the halves close (about 3.1 s).
-  - Sound: A hard shell cracking open; the filling dropping out is unchanged.
+  - Sound: A hard shell cracking open; the filling dropping out is unchanged; real CC0 recordings
+    now (taco-crack.mp3), with the synthesized sound as a fallback.
 - **Boiled egg** (`egg`). Now: tap: Crack. Plan: keep.
   - Owner: Perfect.
   - Sound: Shell tap.
@@ -1368,7 +1374,8 @@ Proposals below are suggestions; the owner may change them.
   - Improved: E5: a tap takes a bite: the chunk comes away and vanishes, leaving a scalloped bite of
     pale flesh (it stays bitten). The next tap brings a little worm out of the bite; it looks about,
     ducks back in, and the apple grows whole (about 2.9 s).
-  - Sound: A crisp bite into an apple (a crunch of tiny fractures and a juicy snap), not a zipper.
+  - Sound: A crisp bite into an apple (a crunch of tiny fractures and a juicy snap), not a zipper;
+    real CC0 recordings now (apple-bite.mp3), with the synthesized sound as a fallback.
 - **Bananas** (`banana`). Now: tap: Peel them. Plan: keep.
   - Owner: Peel open.
   - Effect: One banana peels open.
@@ -1439,10 +1446,12 @@ Proposals below are suggestions; the owner may change them.
 - **Spinning top** (`spinning-top`). Now: tap: Spin it. Plan: keep.
   - Owner: Perfect.
   - Sound: A quiet, steady whirr that wobbles as it precesses and slowly sinks (no rising hum, no
-    wind).
+    wind); real CC0 recordings now (spinning-top-spin.mp3), with the synthesized sound as a
+    fallback.
 - **Dice** (`dice`). Now: tap: Roll. Plan: keep.
   - Owner: Maybe my favourite; rolls feel random like real dice. Keep it.
-  - Sound: Two dice thrown on a wooden table, bouncing with quicker, quieter knocks and settling.
+  - Sound: Two dice thrown on a wooden table, bouncing with quicker, quieter knocks and settling;
+    real CC0 recordings now (dice-throw.mp3), with the synthesized sound as a fallback.
 - **Newton's cradle** (`newtons-cradle`). Now: tap: Lift and let go. Plan: keep.
   - Owner: Tapping has no noticeable effect. Make it more interactive.
   - Effect: Tap lifts and drops an end ball hard so the clacks are obvious; later, drag a ball back
@@ -1468,11 +1477,13 @@ Proposals below are suggestions; the owner may change them.
     follows your finger and snaps to the nearest quarter turn with a click. A tap scrambles it (14
     quick turns), or turns a scrambled cube back to solved; solve it by hand and it hops, spins and
     chimes.
-  - Sound: Each turn a plastic slide over the ridges and a soft clack as the layer seats.
+  - Sound: Each turn a plastic slide over the ridges and a soft clack as the layer seats; real CC0
+    recordings now (puzzle-cube-turn.mp3), with the synthesized sound as a fallback.
   - Touch or drag interaction (phase F).
 - **Spring toy** (`spring-toy`). Now: tap: Make it walk. Plan: keep.
   - Owner: Basically perfect.
-  - Sound: A metal coil spring's ringing sproing, not a rubber band.
+  - Sound: A metal coil spring's ringing sproing, not a rubber band; real CC0 recordings now
+    (spring-toy-boing.mp3), with the synthesized sound as a fallback.
 - **Kite** (`kite`). Now: tap: Gust of wind. Plan: keep.
   - Owner: Underwhelming; develop the animation further.
   - Effect: A big gust: the kite loops the loop and the tail whips.
@@ -1487,14 +1498,16 @@ Proposals below are suggestions; the owner may change them.
   - Sound: Paper flutter.
 - **Balloon dog** (`balloon-dog`). Now: tap: Pop. Plan: keep.
   - Owner: Almost perfect.
-  - Sound: A real balloon bursting (no whistle first).
+  - Sound: A real balloon bursting (no whistle first); real CC0 recordings now
+    (balloon-dog-pop.mp3), with the synthesized sound as a fallback.
 - **Soap bubbles** (`soap-bubbles`). Now: tap: Blow bubbles. Plan: keep.
   - Owner: Perfect.
   - Sound: A soft breath blowing them and tiny wet pops (no pitched pops).
 - **Wind-up robot** (`robot`). Now: tap: Wind it up. Plan: keep.
   - Owner: Perfect.
   - Sound: A few clicks of the winding key, then clockwork whirring as it unwinds and its tin feet
-    clanking along.
+    clanking along; real CC0 recordings now (robot-wind.mp3), with the synthesized sound as a
+    fallback.
 - **Chess set** (`chess-set`). Now: tap: Play the Opera Game. Plan: keep.
   - Owner: Ideally playable. At least: a tap plays a real game, white against black, as a long
     animation.
@@ -1511,7 +1524,8 @@ Proposals below are suggestions; the owner may change them.
     the game goes on from there as your own (a queen for a pawn on the last rank; mate tips the king
     over). The Play button, the game bar and a tap beside the board still play the Opera Game.
   - Sound: Pieces set down on a felted wooden board, a woody thock (a sharper one for captures),
-    like a good online-chess theme.
+    like a good online-chess theme; real CC0 recordings now (chess-set-move.mp3), with the
+    synthesized sound as a fallback.
 
 ## Maths (17)
 
@@ -1537,7 +1551,8 @@ Proposals below are suggestions; the owner may change them.
   - Effect: A clear surge of water flows through the neck and round.
   - Improved: C2: a new tap action sends a surge of rippling water along the tube and round, and the
     glass glows (about 4 s).
-  - Sound: Water moving in a bottle, sloshing and glugging (no bubbles or waterfall).
+  - Sound: Water moving in a bottle, sloshing and glugging (no bubbles or waterfall); real CC0
+    recordings now (klein-bottle-slosh.mp3), with the synthesized sound as a fallback.
 - **Menger sponge** (`menger-sponge`). Now: tap: Close and carve the holes. Plan: keep.
   - Owner: No idea for an effect; looks good. The owner calls one of these a favourite and a likely
     homepage embed (the transcript may refer to the next toy, the hypercube).
@@ -1727,13 +1742,15 @@ Proposals below are suggestions; the owner may change them.
 - **Bow and target** (`bow-and-target`). Now: tap: Shoot. Plan: keep.
   - Owner: Unbelievably impressive.
   - Sound: A real bowstring's thump and the arrow's hiss, not a guitar-like note; the hit is
-    unchanged.
+    unchanged; real CC0 recordings now (bow-and-target-release.mp3), with the synthesized sound as a
+    fallback.
 - **Trebuchet** (`trebuchet`). Now: tap: Launch. Plan: keep.
   - Owner: Fine.
   - Sound: The timber beam creaks and strains, then a softer swing (much less wind).
 - **Crossbow** (`crossbow`). Now: tap: Shoot. Plan: keep.
   - Owner: Solid.
-  - Sound: No click; the string's real thump, then the bolt hitting as before.
+  - Sound: No click; the string's real thump, then the bolt hitting as before; real CC0 recordings
+    now (bow-and-target-release.mp3), with the synthesized sound as a fallback.
 - **Knight's helmet** (`knights-helmet`). Now: tap: Open the visor. Plan: keep.
   - Owner: Really neat.
   - Sound: Visor clank.
@@ -1823,13 +1840,15 @@ Proposals below are suggestions; the owner may change them.
   - Improved: E6: a fly buzzes in and hovers; the frog's jaw drops, its tongue shoots out, catches
     the fly and snaps back; the jaw shuts, its eyes sink to push the fly down (frogs swallow with
     their eyes), and it croaks twice with its throat sac (about 3.5 s).
-  - Sound: A real fly's wandering buzz, and real croaks after it eats the fly.
+  - Sound: A real fly's wandering buzz, and real croaks after it eats the fly; real CC0 recordings
+    now (frog-fly.mp3, frog-croak.mp3), with the synthesized sound as a fallback.
 - **Penguin** (`penguin`). Now: tap: Flap. Plan: keep.
   - Owner: Perfect and very cute.
   - Sound: Squawk.
 - **Owl** (`owl`). Now: tap: Turn the head. Plan: keep.
   - Owner: Basically perfect.
-  - Sound: A great horned owl's call, "hoo, h-hoo, hooo, hoo", low and breathy.
+  - Sound: A great horned owl's call, "hoo, h-hoo, hooo, hoo", low and breathy; real CC0 recordings
+    now (owl-hoot.mp3), with the synthesized sound as a fallback.
 
 ## Holidays (8)
 
@@ -1851,7 +1870,8 @@ Proposals below are suggestions; the owner may change them.
   - Improved: C2: each tap fires a different tube and shell type (peony, ring, willow or star); the
     rocket rises from its tube and the burst takes that tube's colour.
   - Sound: A real firework, the launch's thump and rush (no whistle), a deep boom and the stars'
-    soft crackle.
+    soft crackle; real CC0 recordings now (fireworks-burst.mp3), with the synthesized sound as a
+    fallback.
 - **Decorated tree** (`decorated-tree`). Now: tap: Lights on or off. Plan: keep.
   - Owner: Lights only show very briefly; make it more dramatic.
   - Fixed: C1: a faceted gold star facing the viewer, with only a faint glow.
@@ -1964,7 +1984,8 @@ Proposals below are suggestions; the owner may change them.
   - Sound: The flickering roar of the exhaust over a deep rumble.
 - **Helicopter** (`helicopter`). Now: tap: Take off or land. Plan: keep.
   - Owner: Basically perfect.
-  - Sound: The heavy whump of real rotor blades over the turbine's hush.
+  - Sound: The heavy whump of real rotor blades over the turbine's hush; real CC0 recordings now
+    (helicopter-rotor.mp3), with the synthesized sound as a fallback.
 - **Hot-air balloon** (`hot-air-balloon`). Now: tap: Fire the burner. Plan: keep.
   - Owner: Could be more dramatic; maybe inflate more.
   - Effect: Burner roars, the envelope swells and it rises higher.
@@ -1974,14 +1995,16 @@ Proposals below are suggestions; the owner may change them.
 - **Steam train** (`steam-train`). Now: tap: Blow the whistle. Plan: keep.
   - Owner: Basically perfect.
   - Sound: A short steam whistle, then it chugs along with strong and soft chuffs over the wheels'
-    rumble.
+    rumble; real CC0 recordings now (steam-train-chug.mp3), with the synthesized sound as a
+    fallback.
 - **Ocean liner** (`ocean-liner`). Now: tap: Sound the horn. Plan: keep.
   - Owner: Almost perfect.
   - Sound: Deep ship horn.
 - **Sports car** (`sports-car`). Now: tap: Rev the engine. Plan: keep.
   - Owner: Looks really good.
   - Fixed: C1: the home camera comes closer.
-  - Sound: A real engine's growl, revved twice.
+  - Sound: A real engine's growl, revved twice; real CC0 recordings now (sports-car-rev.mp3), with
+    the synthesized sound as a fallback.
 - **Bus** (`bus`). Now: tap: Stop for passengers. Plan: keep.
   - Owner: Not sure what the effect is.
   - Effect: Stop sign swings out, lights flash, doors open.
@@ -1991,7 +2014,8 @@ Proposals below are suggestions; the owner may change them.
   - Sound: Horn beep and door hiss.
 - **Propeller plane** (`propeller-plane`). Now: tap: Loop the loop. Plan: keep.
   - Owner: Unbelievable; perfect.
-  - Sound: A real piston engine with the propeller's beat.
+  - Sound: A real piston engine with the propeller's beat; real CC0 recordings now
+    (propeller-plane-engine.mp3), with the synthesized sound as a fallback.
 - **Jet airliner** (`jet`). Now: tap: Climb and bank. Plan: keep.
   - Owner: Very solid; bank more to one side or the other.
   - Effect: Climbs and banks hard left then right.
@@ -2019,7 +2043,8 @@ Proposals below are suggestions; the owner may change them.
 - **Tractor** (`tractor`). Now: tap: Chug chug. Plan: keep.
   - Owner: Perfect.
   - Fixed: C1: a light wisp of exhaust; the cab glass is clear instead of static.
-  - Sound: A slow diesel's putt-putt with its clatter.
+  - Sound: A slow diesel's putt-putt with its clatter; real CC0 recordings now (tractor-engine.mp3),
+    with the synthesized sound as a fallback.
 - **Flying saucer** (`ufo`). Now: tap: Beam on or off. Plan: keep.
   - Owner: Maybe my favourite; really cool.
   - Sound: A deep pulsing hum and a heavy rush as it lifts (no whistling theremin).
@@ -2032,7 +2057,8 @@ Proposals below are suggestions; the owner may change them.
   - Improved: E6: a tap starts the night show: the ironwork lights up gold, a sparkle of white
     lights climbs the tower, and four fireworks burst round it one after another (blue, white, red
     and gold), each opening fast, drooping and burning out; then the lights go down (about 4 s).
-  - Sound: Real fireworks, four bursts with booms and soft crackle (no twinkling).
+  - Sound: Real fireworks, four bursts with booms and soft crackle (no twinkling); real CC0
+    recordings now (fireworks-burst.mp3), with the synthesized sound as a fallback.
 - **Washington Monument** (`washington-monument`). Now: tap: Sun and shadow. Plan: keep.
   - Owner: Something cool and not disrespectful.
   - Effect: The reflecting pool shimmers and the flags wave.
@@ -2090,7 +2116,8 @@ Proposals below are suggestions; the owner may change them.
   - Improved: E6: a chariot race (no fighting): a crowd fills the seats, and four chariots in the
     team colours (red, white, blue and green) race a lap and a quarter of the arena in two lanes,
     swapping the lead, while the crowd jumps and cheers; then they fade away (about 5 s).
-  - Sound: A real crowd in the stands and horses' hooves trotting.
+  - Sound: A real crowd in the stands and horses' hooves trotting; real CC0 recordings now
+    (colosseum-crowd.mp3, colosseum-hooves.mp3), with the synthesized sound as a fallback.
 - **Parthenon** (`parthenon`). Now: tap: A procession. Plan: keep.
   - Owner: Little ancient people in it.
   - Effect: Tiny robed figures walk between the columns in procession.
@@ -2333,8 +2360,8 @@ Proposals below are suggestions; the owner may change them.
   - Effect: A flat sheet showing what you open: a tap on the right of the page turns to the next
     page of a PDF, on the left goes back (the pages slide, they don't flip), or a tap plays and
     pauses a video.
-  - Sound: A paper page turning (a recorded CC0 page flip will replace it with Sound A's sample
-    voice).
+  - Sound: A paper page turning; real CC0 recordings now (book-page.mp3), with the synthesized sound
+    as a fallback.
 - **Your book** (`your-book`). Now: tap: Turn the page. Plan: keep.
   - Owner: Lane Books, from the owner's notes of September 27 and 28, 2026 (Pages into Splats).
   - Fixed: Books r2 (the owner's note of September 29, 2026: the book, not the pages, a little
@@ -2356,8 +2383,8 @@ Proposals below are suggestions; the owner may change them.
     out) shows both pages; while a page is in view, forward goes from the left page to the right
     one, then turns the leaf and lands on the next left page (back the other way). Reading: One page
     (the default on a phone held upright) keeps a page in view.
-  - Sound: A paper page turning and the landing thud (a recorded CC0 page flip will replace the
-    swish with Sound A's sample voice).
+  - Sound: A paper page turning and the landing thud; real CC0 recordings now (book-page.mp3), with
+    the synthesized sound as a fallback.
 - **Photo album** (`photo-album`). Now: tap: Turn the page. Plan: keep.
   - Owner: Lane Books, from the owner's notes of September 27 and 28, 2026 (Pages into Splats).
   - Fixed: Books r2 (the owner's note of September 29, 2026: a little blurry or grainy around the
@@ -2371,8 +2398,8 @@ Proposals below are suggestions; the owner may change them.
     a tap closes the album. Books r3: taps by where they land, as the book; a page pulled by hand
     lags the finger a little, falls back more readily and settles slowly, like a heavy card page.
     Books r4: page focus and Reading: One page, as the book.
-  - Sound: A thick card page turning and the thud (a recorded CC0 page flip will replace the swish
-    with Sound A's sample voice).
+  - Sound: A thick card page turning and the thud; real CC0 recordings now (book-page.mp3), with the
+    synthesized sound as a fallback.
 - **Picture frame** (`picture-frame`). Now: tap: Swing the frame. Plan: keep.
   - Owner: Lane Books, from the owner's notes of September 27 and 28, 2026 (Pages into Splats).
   - Effect: A photo in a frame hung on a nail by a wire: a tap swings it about the nail as one solid

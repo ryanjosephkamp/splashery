@@ -134,7 +134,7 @@ export const TOY_SOUNDS = {
   // tap again and the pieces slide home.
   // Sound B: pieces set down on a felted wooden board (the moves are cues).
   "chess-set": {
-    on: { voice: "chessmove", f: 520 },
+    on: { voice: "sample", file: "chess-set-move.mp3", vol: 1.3, fallback: { voice: "chessmove", f: 520 } }, // prettier-ignore
     off: { voice: "scrape", f: 900, rate: 6, decay: 1.4, vol: 0.5 },
   },
   "horse-statue": [
@@ -575,7 +575,7 @@ export const TOY_SOUNDS = {
   // loose leaves land softly on the grass one by one (2.5 to 4.8 s).
   oak: [
     { voice: "rustle", f: 2800, n: 34, decay: 1.4, vol: 0.8 },
-    { voice: "rustle", at: 2.5, f: 2200, n: 16, decay: 1.9, vol: 0.4 },
+    { voice: "sample", file: "oak-leaves.mp3", at: 2.3, vol: 0.45, fallback: { voice: "rustle", f: 2200, n: 16, decay: 1.9, vol: 0.4 } }, // prettier-ignore
   ],
   // Sound B: the needles rustle as it rocks, with a soft jingle of sleigh
   // bells (the snow's hiss and thump are cues from the recipe).
@@ -604,7 +604,7 @@ export const TOY_SOUNDS = {
     { voice: "creak", f: 340, rate: 30, to: 1.3, decay: 1.5, vol: 0.5 },
     { voice: "rustle", at: 0.7, f: 3000, n: 12, decay: 0.6, vol: 0.4 },
     { voice: "snip", at: 1.6, f: 4200, vol: 0.35 },
-    { voice: "snip", at: 2.22, f: 5000, vol: 0.9 },
+    { voice: "sample", file: "bonsai-snip.mp3", at: 2.22, vol: 1.8, fallback: { voice: "snip", f: 5000, vol: 0.9 } }, // prettier-ignore
     { voice: "thud", at: 2.8, f: 110, bright: 0.2, decay: 0.5, vol: 0.35 },
   ],
   // Sound B: the same breath of wind, quieter, with the strands rustling.
@@ -661,7 +661,7 @@ export const TOY_SOUNDS = {
   bamboo: { voice: "hollow", f: "G3", decay: 0.7 },
   // Sound B: stones knocking as the pile shifts (the stacking knocks and the
   // tumble home are cues from the recipe).
-  rocks: { voice: "pebble", f: 2400, n: 4, vol: 0.8 },
+  rocks: { voice: "sample", file: "rocks-pebbles.mp3", vol: 0.9, fallback: { voice: "pebble", f: 2400, n: 4, vol: 0.8 } }, // prettier-ignore
   kelp: [
     { voice: "bubbles", f: 300, n: 12, decay: 1.4 },
     { voice: "click", at: 1.4, notes: "C7 - C7 - C7", step: 0.1, vol: 0.5 },
@@ -720,7 +720,7 @@ export const TOY_SOUNDS = {
   // cue from the recipe, when it hits the water.
   // Sound B: real ice breaking (a deep crack, its groan and splinters).
   iceberg: [
-    { voice: "shellcrack", f: 1800, n: 4, kind: "ice", decay: 1.4 },
+    { voice: "sample", file: "iceberg-crack.mp3", vol: 1.8, fallback: { voice: "shellcrack", f: 1800, n: 4, kind: "ice", decay: 1.4 } }, // prettier-ignore
     { voice: "rumble", at: 0.1, f: 60, rate: 4, decay: 0.8, vol: 0.7 },
   ],
   // A surge: a rush over the lip, the roar swelling, a thump in the pool.
@@ -763,14 +763,20 @@ export const TOY_SOUNDS = {
   },
   // Sound B: kernels popping dry, one papery bang each, at the same moments
   // as before.
-  popcorn: [
-    { voice: "kernel", f: 1300 },
-    { voice: "kernel", at: 0.18, f: 1500, vol: 0.8 },
-    { voice: "kernel", at: 0.27, f: 1150 },
-    { voice: "kernel", at: 0.54, f: 1600, vol: 0.9 },
-    { voice: "kernel", at: 0.63, f: 1250 },
-    { voice: "kernel", at: 0.81, f: 1450, vol: 0.8 },
-  ],
+  popcorn: {
+    voice: "sample",
+    file: "popcorn-popping.mp3",
+    len: 1.2,
+    vol: 0.9,
+    fallback: [
+      { voice: "kernel", f: 1300 },
+      { voice: "kernel", at: 0.18, f: 1500, vol: 0.8 },
+      { voice: "kernel", at: 0.27, f: 1150 },
+      { voice: "kernel", at: 0.54, f: 1600, vol: 0.9 },
+      { voice: "kernel", at: 0.63, f: 1250 },
+      { voice: "kernel", at: 0.81, f: 1450, vol: 0.8 },
+    ],
+  },
   // Sound B: a wet, heavy wobble instead of a cartoon boing.
   jelly: [
     { voice: "squish", pitch: 0.6, bright: 0.2, decay: 1.4 },
@@ -827,7 +833,7 @@ export const TOY_SOUNDS = {
   },
   sushi: { voice: "wood", notes: "B6 B6", step: 0.1, decay: 0.4 },
   // Sound B: a hard shell cracking open.
-  taco: { voice: "shellcrack", f: 2200, n: 6, decay: 1.2 },
+  taco: { voice: "sample", file: "taco-crack.mp3", vol: 1.3, fallback: { voice: "shellcrack", f: 2200, n: 6, decay: 1.2 } }, // prettier-ignore
   egg: {
     on: [
       { voice: "clack", f: 1700, decay: 1.2, bright: 0.2 },
@@ -840,7 +846,7 @@ export const TOY_SOUNDS = {
   coffee: { voice: "glass", notes: "E7 - E7", step: 0.13, decay: 0.12, bright: 0.3, vol: 0.6 },
   apple: {
     // Sound B: a real bite into a crisp apple.
-    on: { voice: "bite", f: 3000 },
+    on: { voice: "sample", file: "apple-bite.mp3", vol: 1.3, fallback: { voice: "bite", f: 3000 } }, // prettier-ignore
     off: { voice: "pop", f: 520, decay: 1.2, vol: 0.6 },
   },
   // Sound B: the peel pulled back in soft fibrous strips (each banana's peel
@@ -869,9 +875,9 @@ export const TOY_SOUNDS = {
   "rubber-duck": { voice: "quack", f: 250, n: 2 },
   // Sound B: a spun top's soft steady whirr that wobbles and slowly sinks
   // (no rising hum, no wind).
-  "spinning-top": { voice: "spintop", f: 170, rate: 4, to: 0.85, decay: 1.25 },
+  "spinning-top": { voice: "sample", file: "spinning-top-spin.mp3", vol: 0.9, fallback: { voice: "spintop", f: 170, rate: 4, to: 0.85, decay: 1.25 } }, // prettier-ignore
   // Sound B: two dice thrown on a wooden table, bouncing and settling.
-  dice: { voice: "dice", f: 2300, n: 2 },
+  dice: { voice: "sample", file: "dice-throw.mp3", vol: 1.7, fallback: { voice: "dice", f: 2300, n: 2 } }, // prettier-ignore
   // The lift is a soft tick; each strike clacks as it lands (cues from the recipe).
   "newtons-cradle": { voice: "clack", f: 5200, decay: 0.3, vol: 0.25 },
   // Sound B: no whistle; only the soft plush of its arm as it waves.
@@ -880,12 +886,12 @@ export const TOY_SOUNDS = {
   // into the hand (1.8 s).
   "yo-yo": { voice: "yoyo", f: 140, decay: 1.5 },
   // Sound B: a layer sliding round and seating (each turn is a cue too).
-  "puzzle-cube": { voice: "twist", f: 1800 },
+  "puzzle-cube": { voice: "sample", file: "puzzle-cube-turn.mp3", vol: 1.4, fallback: { voice: "twist", f: 1800 } }, // prettier-ignore
   // Sound B: a metal coil spring's ringing sproing, not a rubber band.
-  "spring-toy": { voice: "sproing", f: 260, n: 5, decay: 1.4 },
+  "spring-toy": { voice: "sample", file: "spring-toy-boing.mp3", vol: 1.4, fallback: { voice: "sproing", f: 260, n: 5, decay: 1.4 } }, // prettier-ignore
   // Sound B: the same, with the wind dialed back.
   kite: [
-    { voice: "wind", f: 600, rate: 1.5, decay: 0.8, vol: 0.45 },
+    { voice: "wind", f: 600, rate: 1.5, decay: 0.8, vol: 0.3 },
     { voice: "flutter", at: 0.2, f: 900, rate: 16, decay: 0.8, vol: 0.7 },
   ],
   // Sound B: a papery launch and a gentler glide.
@@ -895,7 +901,7 @@ export const TOY_SOUNDS = {
   ],
   "origami-crane": { voice: "flutter", f: 1500, rate: 9, decay: 1.4 },
   // Sound B: a real balloon bursting (no whistle first).
-  "balloon-dog": { voice: "balloonpop", at: 0.3, f: 90, vol: 0.8 },
+  "balloon-dog": { voice: "sample", file: "balloon-dog-pop.mp3", at: 0.3, vol: 0.45, fallback: { voice: "balloonpop", f: 90, vol: 0.8 } }, // prettier-ignore
   // Sound B: a soft breath blowing them, and tiny wet pops.
   "soap-bubbles": [
     { voice: "breath", f: 1500, to: 0.7, decay: 0.6, vol: 0.35 },
@@ -906,7 +912,7 @@ export const TOY_SOUNDS = {
   // Sound B: the key's few winding clicks, then clockwork whirring as it
   // unwinds and its tin feet clanking along.
   robot: [
-    { voice: "ratchet", f: 2600, n: 5, rate: 8, vol: 0.4 },
+    { voice: "sample", file: "robot-wind.mp3", vol: 0.45, fallback: { voice: "ratchet", f: 2600, n: 5, rate: 8, vol: 0.4 } }, // prettier-ignore
     { voice: "clockwork", at: 0.3, f: 2600, rate: 2.7, decay: 1.1 },
   ],
 
@@ -923,7 +929,7 @@ export const TOY_SOUNDS = {
   // rolling beach ball, a bicycle with one quack, the ant's feet).
   mobius: { voice: "whoosh", f: 400, to: 1.5, decay: 0.4, vol: 0.25 },
   // Sound B: water moving in a bottle, sloshing and glugging.
-  "klein-bottle": { voice: "slosh", f: 480, rate: 2.2, n: 3, decay: 1.6 },
+  "klein-bottle": { voice: "sample", file: "klein-bottle-slosh.mp3", vol: 0.8, fallback: { voice: "slosh", f: 480, rate: 2.2, n: 3, decay: 1.6 } }, // prettier-ignore
   // The plugs fly in, it closes (0.65 s), then each level is carved out,
   // falling blips a size down each time (1.05, 1.95, 2.75 s).
   "menger-sponge": [
@@ -1016,12 +1022,12 @@ export const TOY_SOUNDS = {
   // Sound B: real paper pages turning (no wind).
   book: {
     on: [
-      { voice: "pageflip", f: 1800 },
-      { voice: "pageflip", at: 0.3, f: 2000, decay: 0.9, vol: 0.6 },
+      { voice: "sample", file: "book-page.mp3", vol: 1.5, fallback: { voice: "pageflip", f: 1800 } }, // prettier-ignore
+      { voice: "sample", file: "book-page.mp3", at: 0.3, pitch: 1.1, vol: 0.9, fallback: { voice: "pageflip", f: 2000, decay: 0.9, vol: 0.6 } }, // prettier-ignore
     ],
     off: [
-      { voice: "pageflip", f: 1600, decay: 1.1 },
-      { voice: "pageflip", at: 0.35, f: 1500, decay: 0.9, vol: 0.5 },
+      { voice: "sample", file: "book-page.mp3", pitch: 0.9, vol: 1.5, fallback: { voice: "pageflip", f: 1600, decay: 1.1 } }, // prettier-ignore
+      { voice: "sample", file: "book-page.mp3", at: 0.35, pitch: 0.85, vol: 0.8, fallback: { voice: "pageflip", f: 1500, decay: 0.9, vol: 0.5 } }, // prettier-ignore
     ],
   },
   // Sound B (the laptop is locked: only these): opening keeps only the
@@ -1154,7 +1160,7 @@ export const TOY_SOUNDS = {
   "bow-and-target": {
     on: [
       // Sound B: a real bowstring's thump, not a note.
-      { voice: "bowstring", at: 0.42, f: 110 },
+      { voice: "sample", file: "bow-and-target-release.mp3", at: 0.42, vol: 0.95, fallback: { voice: "bowstring", f: 110 } }, // prettier-ignore
       { voice: "whoosh", at: 0.45, f: 900, to: 2, decay: 0.8, vol: 0.5 },
       { voice: "wood", at: 1.0, f: 180, decay: 1.4 },
     ],
@@ -1168,7 +1174,7 @@ export const TOY_SOUNDS = {
   ],
   // Sound B: no click; the string's real thump, then the bolt hitting.
   crossbow: [
-    { voice: "bowstring", at: 0.1, f: 130 },
+    { voice: "sample", file: "bow-and-target-release.mp3", at: 0.1, pitch: 0.85, vol: 1, fallback: { voice: "bowstring", f: 130 } }, // prettier-ignore
     { voice: "wood", at: 0.55, f: 240, decay: 1.2 },
   ],
   "knights-helmet": {
@@ -1270,15 +1276,15 @@ export const TOY_SOUNDS = {
   // The fly buzzes in, the tongue flicks out and back, a gulp, two croaks.
   // Sound B: a real fly's wandering buzz, and real croaks.
   frog: [
-    { voice: "flybuzz", f: 210, decay: 0.9, vol: 0.4 },
+    { voice: "sample", file: "frog-fly.mp3", len: 1.1, vol: 0.3, fallback: { voice: "flybuzz", f: 210, decay: 0.9, vol: 0.4 } }, // prettier-ignore
     { voice: "whoosh", at: 0.98, f: 1400, to: 2, decay: 0.25, vol: 0.6 },
     { voice: "pop", at: 1.56, f: 500, vol: 0.6 },
     { voice: "gloop", at: 1.82, f: 140, vol: 0.7 },
-    { voice: "croak", at: 2.55, f: 280, n: 2, rate: 30 },
+    { voice: "sample", file: "frog-croak.mp3", at: 2.55, vol: 1.4, fallback: { voice: "croak", f: 280, n: 2, rate: 30 } }, // prettier-ignore
   ],
   penguin: { voice: "squawk", f: 420 },
   // Sound B: a great horned owl's real call, "hoo, h-hoo, hooo, hoo".
-  owl: { voice: "owlhoot", f: 330 },
+  owl: { voice: "sample", file: "owl-hoot.mp3", vol: 1.1, fallback: { voice: "owlhoot", f: 330 } }, // prettier-ignore
 
   // ---- Holidays ---------------------------------------------------------------------
   "jack-o-lantern": {
@@ -1299,7 +1305,7 @@ export const TOY_SOUNDS = {
   // whistle), a deep boom as it bursts (0.82 s) and the stars' soft crackle.
   fireworks: [
     { voice: "launch", f: 90, decay: 0.9 },
-    { voice: "bang", at: 0.82, f: 55, n: 14, decay: 1.4 },
+    { voice: "sample", file: "fireworks-burst.mp3", at: 0.82, vol: 1.8, fallback: { voice: "bang", f: 55, n: 14, decay: 1.4 } }, // prettier-ignore
   ],
   // Sound B: the lights come on to the start of "Jingle Bells" (public
   // domain) on the piano; off, the branches' soft rustle.
@@ -1425,28 +1431,33 @@ export const TOY_SOUNDS = {
   ],
   // Sound B: the heavy whump of real rotor blades.
   helicopter: {
-    on: { voice: "rotor", f: 340, rate: 9, decay: 1.8 },
-    off: { voice: "rotor", f: 280, rate: 6, decay: 1.3, vol: 0.8 },
+    on: { voice: "sample", file: "helicopter-rotor.mp3", vol: 0.95, fallback: { voice: "rotor", f: 340, rate: 9, decay: 1.8 } }, // prettier-ignore
+    off: { voice: "sample", file: "helicopter-rotor.mp3", pitch: 0.8, len: 2, vol: 0.75, fallback: { voice: "rotor", f: 280, rate: 6, decay: 1.3, vol: 0.8 } }, // prettier-ignore
   },
   "hot-air-balloon": { voice: "roar", f: 250, bright: 0.35, decay: 1.2 },
   // Sound B: a short steam whistle, then it chugs along: chuffs of steam,
   // strong and soft, over the rumble of the wheels.
   "steam-train": [
     { voice: "whistle", f: 740, kind: "steam", decay: 0.8, vol: 0.6 },
-    { voice: "chug", at: 0.5, f: 600, n: 14, rate: 3.6 },
+    { voice: "sample", file: "steam-train-chug.mp3", at: 0.5, vol: 0.8, fallback: { voice: "chug", f: 600, n: 14, rate: 3.6 } }, // prettier-ignore
   ],
   "ocean-liner": { voice: "horn", f: 73, kind: "ship", decay: 1.3 },
   // Sound B: a real engine's growl, revved twice.
-  "sports-car": [
-    { voice: "motor", f: 40, to: 2.2, kind: "car", bright: 0.6, decay: 0.9 },
-    { voice: "motor", at: 1.35, f: 42, to: 2.6, kind: "car", bright: 0.65, decay: 1.2 },
-  ],
+  "sports-car": {
+    voice: "sample",
+    file: "sports-car-rev.mp3",
+    vol: 0.9,
+    fallback: [
+      { voice: "motor", f: 40, to: 2.2, kind: "car", bright: 0.6, decay: 0.9 },
+      { voice: "motor", at: 1.35, f: 42, to: 2.6, kind: "car", bright: 0.65, decay: 1.2 },
+    ],
+  },
   bus: [
     { voice: "horn", f: 330 },
     { voice: "hiss", at: 0.5, f: 2500, decay: 0.8 },
   ],
   // Sound B: a real piston engine and the propeller's beat.
-  "propeller-plane": { voice: "motor", f: 70, kind: "prop", bright: 0.5, decay: 2.4 },
+  "propeller-plane": { voice: "sample", file: "propeller-plane-engine.mp3", vol: 1.4, fallback: { voice: "motor", f: 70, kind: "prop", bright: 0.5, decay: 2.4 } }, // prettier-ignore
   // Sound B: no whistle; a softer, more natural rush of the engines.
   jet: [
     { voice: "roar", f: 260, bright: 0.45, decay: 2, vol: 0.6 },
@@ -1459,7 +1470,7 @@ export const TOY_SOUNDS = {
   submarine: { voice: "sonar", f: 1180 },
   bicycle: { voice: "bell", notes: "A6 - A6", step: 0.14, decay: 0.35, bright: 0.9 },
   // Sound B: a slow diesel's putt-putt and clatter.
-  tractor: { voice: "motor", f: 13, to: 1.3, kind: "tractor", bright: 0.25, decay: 1.8 },
+  tractor: { voice: "sample", file: "tractor-engine.mp3", vol: 1.5, fallback: { voice: "motor", f: 13, to: 1.3, kind: "tractor", bright: 0.25, decay: 1.8 } }, // prettier-ignore
   // Sound B: less childish: a deep pulsing hum and a heavy rush as it lifts
   // (no whistling theremin).
   ufo: {
@@ -1478,10 +1489,10 @@ export const TOY_SOUNDS = {
   // Sound B: real fireworks bursting, four of them (no twinkling lights).
   "eiffel-tower": [
     { voice: "launch", f: 85, decay: 0.4, vol: 0.4 },
-    { voice: "bang", at: 0.38, f: 50, n: 8, decay: 1, vol: 0.5 },
-    { voice: "bang", at: 0.93, f: 58, n: 6, decay: 1, vol: 0.45 },
-    { voice: "bang", at: 1.48, f: 46, n: 8, decay: 1, vol: 0.5 },
-    { voice: "bang", at: 2.13, f: 54, n: 10, decay: 1.2, vol: 0.45 },
+    { voice: "sample", file: "fireworks-burst.mp3", at: 0.38, len: 1.4, vol: 1.1, fallback: { voice: "bang", f: 50, n: 8, decay: 1, vol: 0.5 } }, // prettier-ignore
+    { voice: "sample", file: "fireworks-burst.mp3", at: 0.93, pitch: 1.12, len: 1.4, vol: 1, fallback: { voice: "bang", f: 58, n: 6, decay: 1, vol: 0.45 } }, // prettier-ignore
+    { voice: "sample", file: "fireworks-burst.mp3", at: 1.48, pitch: 0.9, len: 1.4, vol: 1.1, fallback: { voice: "bang", f: 46, n: 8, decay: 1, vol: 0.5 } }, // prettier-ignore
+    { voice: "sample", file: "fireworks-burst.mp3", at: 2.13, pitch: 1.05, vol: 1, fallback: { voice: "bang", f: 54, n: 10, decay: 1.2, vol: 0.45 } }, // prettier-ignore
   ],
   // Sound B: only the soft chime at noon (no wind).
   "washington-monument": { voice: "chimes", at: 2.2, f: "G5", n: 3, decay: 1.2, vol: 0.35 },
@@ -1525,9 +1536,9 @@ export const TOY_SOUNDS = {
   // The crowd cheers over the drumming hooves.
   // Sound B: a real crowd in the stands, and horses' hooves trotting.
   colosseum: [
-    { voice: "crowd", f: 200, n: 16, to: 1.15, decay: 1.4, vol: 0.8 },
-    { voice: "hooves", at: 0.3, f: 480, n: 8, rate: 2.6 },
-    { voice: "crowd", at: 2.3, f: 210, n: 14, to: 1.3, decay: 1.2, vol: 0.75 },
+    { voice: "sample", file: "colosseum-crowd.mp3", vol: 0.8, fallback: { voice: "crowd", f: 200, n: 16, to: 1.15, decay: 1.4, vol: 0.8 } }, // prettier-ignore
+    { voice: "sample", file: "colosseum-hooves.mp3", at: 0.3, vol: 1.6, fallback: { voice: "hooves", f: 480, n: 8, rate: 2.6 } }, // prettier-ignore
+    { voice: "sample", file: "colosseum-crowd.mp3", at: 2.3, from: 0.6, len: 2.3, vol: 0.6, fallback: { voice: "crowd", f: 210, n: 14, to: 1.3, decay: 1.2, vol: 0.75 } }, // prettier-ignore
   ],
   // A lyre plays a walking tune for the procession.
   parthenon: { voice: "harp", notes: "D4 A4 D5 F5 E5 D5 A4 D5", step: 0.45, decay: 0.9 },
@@ -1695,19 +1706,19 @@ export const TOY_SOUNDS = {
   // ---- Pictures and pages (lane Pictures) -------------------------------------------
   // A page turning: a soft paper swish, then a light tap as it lands.
   // Sound B: a real paper page turning.
-  "picture-lab": { voice: "pageflip", f: 1700, decay: 0.9, vol: 0.8 },
+  "picture-lab": { voice: "sample", file: "book-page.mp3", vol: 1.3, fallback: { voice: "pageflip", f: 1700, decay: 0.9, vol: 0.8 } }, // prettier-ignore
 
   // ---- Pictures and pages (lane Books) ----------------------------------------------
   // A page turning over (a paper swish and a flutter) and a soft thud as it
   // lands (the cover's thud when it opens).
   // Sound B: the swish is a real paper page turning.
   "your-book": [
-    { voice: "pageflip", f: 1900, decay: 1.4, vol: 0.7 },
+    { voice: "sample", file: "book-page.mp3", vol: 1.2, fallback: { voice: "pageflip", f: 1900, decay: 1.4, vol: 0.7 } }, // prettier-ignore
     { voice: "thud", at: 0.82, f: 150, decay: 0.35, vol: 0.3 },
   ],
   // A thick card page: a lower swish and a firmer thud.
   "photo-album": [
-    { voice: "pageflip", f: 1200, decay: 1.6, vol: 0.7 },
+    { voice: "sample", file: "book-page.mp3", pitch: 0.8, vol: 1.2, fallback: { voice: "pageflip", f: 1200, decay: 1.6, vol: 0.7 } }, // prettier-ignore
     { voice: "thud", at: 0.88, f: 115, decay: 0.45, vol: 0.45 },
   ],
   // The frame knocks the wall, the wire creaks on the nail, and a softer knock.

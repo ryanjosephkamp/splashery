@@ -991,7 +991,7 @@ function cubeDrive(c, out, info) {
   }
   const now = info.time;
   cube.lastTime = now;
-  const click = (vol = 1) => out.cues.push({ voice: "twist", f: 1600 + 300 * Math.random(), vol }); // prettier-ignore
+  const click = (vol = 1) => out.cues.push({ voice: "sample", file: "puzzle-cube-turn.mp3", pitch: 0.92 + 0.16 * Math.random(), vol: 1.4 * vol, fallback: { voice: "twist", f: 1600 + 300 * Math.random(), vol } }); // prettier-ignore
   // A tap: scramble a solved cube, or play its turns back to solved.
   if (fired(m, "twist", c.twist)) {
     if (cube.seq) for (const t of cube.seq.turns.slice(cube.seq.done)) cubeApply(t);

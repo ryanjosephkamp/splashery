@@ -212,7 +212,7 @@
       "v": "keep",
       "owner": "Ideally playable. At least: a tap plays a real game, white against black, as a long animation.",
       "effect": "Plays a famous public-domain game move by move; later, tap a piece then a square to move it.",
-      "sound": "Pieces set down on a felted wooden board, a woody thock (a sharper one for captures), like a good online-chess theme.",
+      "sound": "Pieces set down on a felted wooden board, a woody thock (a sharper one for captures), like a good online-chess theme; real CC0 recordings now (chess-set-move.mp3), with the synthesized sound as a fallback.",
       "improved": "E1b: rebuilt as a kit toy (walnut board, 32 turned pieces). A tap plays Morphy's Opera Game (Paris, 1858) move by move: each piece slides to its square, knights jump, captured pieces go to trays beside the board, each move clacks, and at 17.Rd8# the black king tips over. Tap again and the pieces glide home. E1c: plays any game too. Open a PGN file or paste a game (all the rules: castling, en passant, promotion, disambiguation; a set-up position from FEN; a clear message for a bad file), set the move speed, or go back to the Opera Game (the default). A promoting pawn sinks away and a new queen rises; the loser's king tips over after mate or resignation. F: tap a piece whose turn it is (it lifts), then a square it can legally move to; the game goes on from there as your own (a queen for a pawn on the last rank; mate tips the king over). The Play button, the game bar and a tap beside the board still play the Opera Game."
     },
     "horse-statue": {
@@ -534,7 +534,7 @@
     "iceberg": {
       "v": "keep",
       "effect": "A chunk calves off and splashes; the berg bobs.",
-      "sound": "Real ice breaking, a deep crack with its groan and splinters (no crackle of clicks), then the splash.",
+      "sound": "Real ice breaking, a deep crack with its groan and splinters (no crackle of clicks), then the splash; real CC0 recordings now (iceberg-crack.mp3), with the synthesized sound as a fallback.",
       "improved": "E4: a tap cracks a chunk off the berg's front shoulder, showing pale fresh broken faces; it tips into the sea with a crown of spray and a ring of ripples, floats and bobs while the berg bobs and rocks, then melts away as one piece as the berg's chunk grows back in place (about 6 s)."
     },
     "waterfall": {
@@ -563,7 +563,7 @@
       "v": "keep",
       "fixed": "C1: readable words from a 5x7 bitmap font, more and smaller splats on the two open pages, a crisper cover, and no red strip (the cover's inside drew over the pages). E1b: the outside is crisp: evenly spread, denser splats on the cover, spine and page edges, a fine woven cloth and page lines splats can show.",
       "owner": "Blurry; try to make it more detailed so the writing looks like something.",
-      "sound": "Real paper pages turning (no wind)."
+      "sound": "Real paper pages turning (no wind); real CC0 recordings now (book-page.mp3), with the synthesized sound as a fallback."
     },
     "laptop": {
       "v": "keep",
@@ -982,7 +982,7 @@
       "v": "keep",
       "owner": "Shake it and leaves come out.",
       "effect": "Shakes and leaves flutter down.",
-      "sound": "A leafy rustle as the crown rocks, then soft rustles as the loose leaves land (synthesized; no flutter or patter).",
+      "sound": "A leafy rustle as the crown rocks, then soft rustles as the loose leaves land (synthesized; no flutter or patter); real CC0 recordings now (oak-leaves.mp3), with the synthesized sound as a fallback.",
       "improved": "E4: a tap shakes the tree: the crown rocks on its trunk and forty leaves come loose one after another, each fluttering down on its own swinging path to lie on the grass; then they wither and fresh leaves open in their places (about 6.5 s). In winter a few dead brown leaves still cling to the twigs, and those fall."
     },
     "pine": {
@@ -1017,7 +1017,7 @@
       "v": "keep",
       "owner": "Maybe shrink or grow.",
       "effect": "Grows a new branch, then the scissors snip it back.",
-      "sound": "The branch creaks and its leaves rustle as it grows, the scissors open and snip, and the cut piece drops onto the moss.",
+      "sound": "The branch creaks and its leaves rustle as it grows, the scissors open and snip, and the cut piece drops onto the moss; real CC0 recordings now (bonsai-snip.mp3), with the synthesized sound as a fallback.",
       "improved": "E4: a tap grows a new branch out of the trunk with a pad of leaves on its end; bonsai scissors slide in, open and snip it off at the cut, the piece tips onto the moss and is cleared away, and the stub heals over (about 5 s)."
     },
     "willow": {
@@ -1120,7 +1120,7 @@
       "v": "keep",
       "owner": "Should fall or drop.",
       "effect": "The pebbles drop and scatter, then stack into a cairn.",
-      "sound": "Real stone-on-stone knocks as the pile shifts and tumbles home; the stacking knocks stay.",
+      "sound": "Real stone-on-stone knocks as the pile shifts and tumbles home; the stacking knocks stay; real CC0 recordings now (rocks-pebbles.mp3), with the synthesized sound as a fallback.",
       "improved": "E4: a tap tumbles the pebbles: each rolls out over the sand on its own path to lie clear of the others, then five hop one at a time onto a cairn, biggest at the bottom, with a clack each; at the end they all hop back (about 7 s). In the Cairn style the top four topple off and are stacked again."
     },
     "kelp": {
@@ -1152,7 +1152,7 @@
     "popcorn": {
       "v": "keep",
       "owner": "Basically perfect.",
-      "sound": "Dry kernels popping, each a short papery bang with a little thump (no bubbly rising pops)."
+      "sound": "Dry kernels popping, each a short papery bang with a little thump (no bubbly rising pops); real CC0 recordings now (popcorn-popping.mp3), with the synthesized sound as a fallback."
     },
     "jelly": {
       "v": "keep",
@@ -1235,7 +1235,7 @@
       "v": "keep",
       "owner": "Break in half to show what is inside. Really cool taco.",
       "effect": "Shell cracks in half and the filling spills out, then it reassembles.",
-      "sound": "A hard shell cracking open; the filling dropping out is unchanged.",
+      "sound": "A hard shell cracking open; the filling dropping out is unchanged; real CC0 recordings now (taco-crack.mp3), with the synthesized sound as a fallback.",
       "improved": "E5: the shell snaps across the middle with a crunch; the halves pull apart and swing open like a book, showing the filling in each break, and bits spill onto a new plate and bounce; then they hop back in and the halves close (about 3.1 s)."
     },
     "egg": {
@@ -1254,7 +1254,7 @@
       "v": "keep",
       "owner": "A bite taken out of it, or a worm comes out.",
       "effect": "A bite appears (crunch); a second tap, a worm peeks out.",
-      "sound": "A crisp bite into an apple (a crunch of tiny fractures and a juicy snap), not a zipper.",
+      "sound": "A crisp bite into an apple (a crunch of tiny fractures and a juicy snap), not a zipper; real CC0 recordings now (apple-bite.mp3), with the synthesized sound as a fallback.",
       "improved": "E5: a tap takes a bite: the chunk comes away and vanishes, leaving a scalloped bite of pale flesh (it stays bitten). The next tap brings a little worm out of the bite; it looks about, ducks back in, and the apple grows whole (about 2.9 s)."
     },
     "banana": {
@@ -1324,12 +1324,12 @@
     "spinning-top": {
       "v": "keep",
       "owner": "Perfect.",
-      "sound": "A quiet, steady whirr that wobbles as it precesses and slowly sinks (no rising hum, no wind)."
+      "sound": "A quiet, steady whirr that wobbles as it precesses and slowly sinks (no rising hum, no wind); real CC0 recordings now (spinning-top-spin.mp3), with the synthesized sound as a fallback."
     },
     "dice": {
       "v": "keep",
       "owner": "Maybe my favourite; rolls feel random like real dice. Keep it.",
-      "sound": "Two dice thrown on a wooden table, bouncing with quicker, quieter knocks and settling."
+      "sound": "Two dice thrown on a wooden table, bouncing with quicker, quieter knocks and settling; real CC0 recordings now (dice-throw.mp3), with the synthesized sound as a fallback."
     },
     "newtons-cradle": {
       "v": "keep",
@@ -1354,13 +1354,13 @@
       "interactive": true,
       "owner": "Only the top row twists (very cool). Move more than the top row; ideally swipe any row or column to solve it; add a shuffle.",
       "effect": "Tap scrambles with several random layer turns. Later: swipe a face to turn that layer, with a solved check.",
-      "sound": "Each turn a plastic slide over the ridges and a soft clack as the layer seats.",
+      "sound": "Each turn a plastic slide over the ridges and a soft clack as the layer seats; real CC0 recordings now (puzzle-cube-turn.mp3), with the synthesized sound as a fallback.",
       "improved": "F: a real 3x3 cube of 26 cubies. Swipe across any face to turn that row or column: it follows your finger and snaps to the nearest quarter turn with a click. A tap scrambles it (14 quick turns), or turns a scrambled cube back to solved; solve it by hand and it hops, spins and chimes."
     },
     "spring-toy": {
       "v": "keep",
       "owner": "Basically perfect.",
-      "sound": "A metal coil spring's ringing sproing, not a rubber band."
+      "sound": "A metal coil spring's ringing sproing, not a rubber band; real CC0 recordings now (spring-toy-boing.mp3), with the synthesized sound as a fallback."
     },
     "kite": {
       "v": "keep",
@@ -1382,7 +1382,7 @@
     "balloon-dog": {
       "v": "keep",
       "owner": "Almost perfect.",
-      "sound": "A real balloon bursting (no whistle first)."
+      "sound": "A real balloon bursting (no whistle first); real CC0 recordings now (balloon-dog-pop.mp3), with the synthesized sound as a fallback."
     },
     "soap-bubbles": {
       "v": "keep",
@@ -1392,7 +1392,7 @@
     "robot": {
       "v": "keep",
       "owner": "Perfect.",
-      "sound": "A few clicks of the winding key, then clockwork whirring as it unwinds and its tin feet clanking along."
+      "sound": "A few clicks of the winding key, then clockwork whirring as it unwinds and its tin feet clanking along; real CC0 recordings now (robot-wind.mp3), with the synthesized sound as a fallback."
     },
     "lorenz": {
       "v": "keep",
@@ -1412,7 +1412,7 @@
       "v": "keep",
       "owner": "Not sure it has an effect. Maybe water flows through it; it already kind of does, make that dramatic.",
       "effect": "A clear surge of water flows through the neck and round.",
-      "sound": "Water moving in a bottle, sloshing and glugging (no bubbles or waterfall).",
+      "sound": "Water moving in a bottle, sloshing and glugging (no bubbles or waterfall); real CC0 recordings now (klein-bottle-slosh.mp3), with the synthesized sound as a fallback.",
       "improved": "C2: a new tap action sends a surge of rippling water along the tube and round, and the glass glows (about 4 s)."
     },
     "menger-sponge": {
@@ -1524,7 +1524,7 @@
     "bow-and-target": {
       "v": "keep",
       "owner": "Unbelievably impressive.",
-      "sound": "A real bowstring's thump and the arrow's hiss, not a guitar-like note; the hit is unchanged."
+      "sound": "A real bowstring's thump and the arrow's hiss, not a guitar-like note; the hit is unchanged; real CC0 recordings now (bow-and-target-release.mp3), with the synthesized sound as a fallback."
     },
     "trebuchet": {
       "v": "keep",
@@ -1534,7 +1534,7 @@
     "crossbow": {
       "v": "keep",
       "owner": "Solid.",
-      "sound": "No click; the string's real thump, then the bolt hitting as before."
+      "sound": "No click; the string's real thump, then the bolt hitting as before; real CC0 recordings now (bow-and-target-release.mp3), with the synthesized sound as a fallback."
     },
     "knights-helmet": {
       "v": "keep",
@@ -1628,7 +1628,7 @@
       "v": "keep",
       "owner": "Mouth opens and the tongue shoots out.",
       "effect": "Tongue shoots out to catch a fly.",
-      "sound": "A real fly's wandering buzz, and real croaks after it eats the fly.",
+      "sound": "A real fly's wandering buzz, and real croaks after it eats the fly; real CC0 recordings now (frog-fly.mp3, frog-croak.mp3), with the synthesized sound as a fallback.",
       "improved": "E6: a fly buzzes in and hovers; the frog's jaw drops, its tongue shoots out, catches the fly and snaps back; the jaw shuts, its eyes sink to push the fly down (frogs swallow with their eyes), and it croaks twice with its throat sac (about 3.5 s)."
     },
     "penguin": {
@@ -1639,7 +1639,7 @@
     "owl": {
       "v": "keep",
       "owner": "Basically perfect.",
-      "sound": "A great horned owl's call, \"hoo, h-hoo, hooo, hoo\", low and breathy."
+      "sound": "A great horned owl's call, \"hoo, h-hoo, hooo, hoo\", low and breathy; real CC0 recordings now (owl-hoot.mp3), with the synthesized sound as a fallback."
     },
     "jack-o-lantern": {
       "v": "keep",
@@ -1657,7 +1657,7 @@
       "v": "keep",
       "owner": "Outstanding. Make each launch different (like the dice), and the burst match the colour of the cannon that fires it.",
       "effect": "Random shell types each tap; burst colour matches its tube.",
-      "sound": "A real firework, the launch's thump and rush (no whistle), a deep boom and the stars' soft crackle.",
+      "sound": "A real firework, the launch's thump and rush (no whistle), a deep boom and the stars' soft crackle; real CC0 recordings now (fireworks-burst.mp3), with the synthesized sound as a fallback.",
       "improved": "C2: each tap fires a different tube and shell type (peony, ring, willow or star); the rocket rises from its tube and the burst takes that tube's colour."
     },
     "decorated-tree": {
@@ -1754,7 +1754,7 @@
     "helicopter": {
       "v": "keep",
       "owner": "Basically perfect.",
-      "sound": "The heavy whump of real rotor blades over the turbine's hush."
+      "sound": "The heavy whump of real rotor blades over the turbine's hush; real CC0 recordings now (helicopter-rotor.mp3), with the synthesized sound as a fallback."
     },
     "hot-air-balloon": {
       "v": "keep",
@@ -1766,7 +1766,7 @@
     "steam-train": {
       "v": "keep",
       "owner": "Basically perfect.",
-      "sound": "A short steam whistle, then it chugs along with strong and soft chuffs over the wheels' rumble."
+      "sound": "A short steam whistle, then it chugs along with strong and soft chuffs over the wheels' rumble; real CC0 recordings now (steam-train-chug.mp3), with the synthesized sound as a fallback."
     },
     "ocean-liner": {
       "v": "keep",
@@ -1777,7 +1777,7 @@
       "v": "keep",
       "fixed": "C1: the home camera comes closer.",
       "owner": "Looks really good.",
-      "sound": "A real engine's growl, revved twice."
+      "sound": "A real engine's growl, revved twice; real CC0 recordings now (sports-car-rev.mp3), with the synthesized sound as a fallback."
     },
     "bus": {
       "v": "keep",
@@ -1789,7 +1789,7 @@
     "propeller-plane": {
       "v": "keep",
       "owner": "Unbelievable; perfect.",
-      "sound": "A real piston engine with the propeller's beat."
+      "sound": "A real piston engine with the propeller's beat; real CC0 recordings now (propeller-plane-engine.mp3), with the synthesized sound as a fallback."
     },
     "jet": {
       "v": "keep",
@@ -1823,7 +1823,7 @@
       "v": "keep",
       "fixed": "C1: a light wisp of exhaust; the cab glass is clear instead of static.",
       "owner": "Perfect.",
-      "sound": "A slow diesel's putt-putt with its clatter."
+      "sound": "A slow diesel's putt-putt with its clatter; real CC0 recordings now (tractor-engine.mp3), with the synthesized sound as a fallback."
     },
     "ufo": {
       "v": "keep",
@@ -1834,7 +1834,7 @@
       "v": "keep",
       "owner": "Fireworks burst around it.",
       "effect": "Sparkling lights run up the tower and fireworks burst around it.",
-      "sound": "Real fireworks, four bursts with booms and soft crackle (no twinkling).",
+      "sound": "Real fireworks, four bursts with booms and soft crackle (no twinkling); real CC0 recordings now (fireworks-burst.mp3), with the synthesized sound as a fallback.",
       "improved": "E6: a tap starts the night show: the ironwork lights up gold, a sparkle of white lights climbs the tower, and four fireworks burst round it one after another (blue, white, red and gold), each opening fast, drooping and burning out; then the lights go down (about 4 s)."
     },
     "washington-monument": {
@@ -1889,7 +1889,7 @@
       "v": "keep",
       "owner": "Gladiators fighting inside?",
       "effect": "Non-violent: a tiny chariot race loops the arena while the crowd cheers (no fighting, per the no-gore rule).",
-      "sound": "A real crowd in the stands and horses' hooves trotting.",
+      "sound": "A real crowd in the stands and horses' hooves trotting; real CC0 recordings now (colosseum-crowd.mp3, colosseum-hooves.mp3), with the synthesized sound as a fallback.",
       "improved": "E6: a chariot race (no fighting): a crowd fills the seats, and four chariots in the team colours (red, white, blue and green) race a lap and a quarter of the arena in two lanes, swapping the lead, while the crowd jumps and cheers; then they fade away (about 5 s)."
     },
     "parthenon": {
@@ -2064,13 +2064,13 @@
       "v": "new",
       "owner": "The Pictures engine lane's test toy (labs only), from the owner's notes of September 27 and 28, 2026.",
       "effect": "A flat sheet showing what you open: a tap on the right of the page turns to the next page of a PDF, on the left goes back (the pages slide, they don't flip), or a tap plays and pauses a video.",
-      "sound": "A paper page turning (a recorded CC0 page flip will replace it with Sound A's sample voice)."
+      "sound": "A paper page turning; real CC0 recordings now (book-page.mp3), with the synthesized sound as a fallback."
     },
     "your-book": {
       "v": "keep",
       "owner": "Lane Books, from the owner's notes of September 27 and 28, 2026 (Pages into Splats).",
       "effect": "Open a PDF of any length and turn its pages: each page turns over its spine as a solid sheet, curling as it goes, with the next page on its back. Five styles: hardcover, paperback, magazine, stapled paper and spiral notebook.",
-      "sound": "A paper page turning and the landing thud (a recorded CC0 page flip will replace the swish with Sound A's sample voice).",
+      "sound": "A paper page turning and the landing thud; real CC0 recordings now (book-page.mp3), with the synthesized sound as a fallback.",
       "improved": "Books: a tap opens the cover, then turns each leaf over (about 1 s), the page curling as it goes with the next page on its back; at the end a tap closes the book. Previous and Next in the Toy tab turn back and forth. The page shape follows the PDF, and only the pages reached are built. Books r3: a tap on the right page turns forward and on the left goes back (stapled paper: the top quarter of the page goes back); a page can be pulled over by hand, turning if let go past halfway or flicked and falling back otherwise; the turn lifts at once, the page curling as it goes, with no bend before it moves. Books r4 (page focus, approved September 30, 2026): a double-tap on a page glides the view in until the page fills the screen, and again (or a zoom out) shows both pages; while a page is in view, forward goes from the left page to the right one, then turns the leaf and lands on the next left page (back the other way). Reading: One page (the default on a phone held upright) keeps a page in view.",
       "fixed": "Books r2 (the owner's note of September 29, 2026: the book, not the pages, a little blurry or grainy around the edges): the covers, spine, bands and page blocks have clean, sharp edges (faces stop short of their edges, with finer splats and a line of thin splats along each), full density and smooth cloth colors; the spiral's wire and the staples are thin splats along the wire."
     },
@@ -2078,7 +2078,7 @@
       "v": "keep",
       "owner": "Lane Books, from the owner's notes of September 27 and 28, 2026 (Pages into Splats).",
       "effect": "Open a set of photos and turn through them on thick album pages, each photo held by four photo corners, one or two to a page as fits their shapes, with the file names as captions.",
-      "sound": "A thick card page turning and the thud (a recorded CC0 page flip will replace the swish with Sound A's sample voice).",
+      "sound": "A thick card page turning and the thud; real CC0 recordings now (book-page.mp3), with the synthesized sound as a fallback.",
       "improved": "Books: a tap opens the leather, linen or scrapbook cover, then turns the thick pages (about 1 s each), the photos mounted in photo corners with their file names beneath; at the end a tap closes the album. Books r3: taps by where they land, as the book; a page pulled by hand lags the finger a little, falls back more readily and settles slowly, like a heavy card page. Books r4: page focus and Reading: One page, as the book.",
       "fixed": "Books r2 (the owner's note of September 29, 2026: a little blurry or grainy around the edges): the covers and card pages have clean, sharp edges and full density; the leather's stitches and groove are thin splats in front of the cover, the scrapbook's label its own card, and the leather and linen smooth."
     },

@@ -19,7 +19,7 @@
 import { test, expect } from "@playwright/test";
 import fs from "node:fs";
 import { TOY_SOUNDS } from "../src/toy-sounds.js";
-import { specFor, specProblems } from "../src/voices.js";
+import { specFor, specProblems, samplesIn } from "../src/voices.js";
 
 const REVIEW = JSON.parse(fs.readFileSync(new URL("../tools/sound-review.json", import.meta.url), "utf8")); // prettier-ignore
 const ASSETS = JSON.parse(fs.readFileSync(new URL("../tools/assets.json", import.meta.url), "utf8")); // prettier-ignore
@@ -188,4 +188,38 @@ test("each of the lane's sound files is credited and small", () => {
     expect(credited, f).toContain(`assets/sounds/${f}`);
     expect(fs.statSync(new URL(f, dir)).size, f).toBeLessThanOrEqual(60 * 1024);
   }
+});
+
+test("every recording the lane's toys name exists, is credited, and has a synth fallback", () => {
+  const credited = JSON.stringify(ASSETS);
+  const missing = [];
+  for (const id of CHANGED) {
+    for (const f of samplesIn(TOY_SOUNDS[id])) {
+      if (!fs.existsSync(new URL(`../assets/sounds/${f}`, import.meta.url)))
+        missing.push(`${id}: ${f}`);
+      if (!credited.includes(`assets/sounds/${f}`)) missing.push(`${id}: ${f} not credited`);
+    }
+    for (const l of layers(TOY_SOUNDS[id]))
+      if (l.voice === "sample" && !l.fallback) missing.push(`${id}: ${l.file} has no fallback`);
+  }
+  expect(missing).toEqual([]);
+});
+
+test("a tap fetches its recording, and only then", async ({ page }) => {
+  test.setTimeout(300_000);
+  const fetched = [];
+  page.on("request", (r) => {
+    if (/\/assets\/sounds\//.test(r.url())) fetched.push(r.url().split("/").pop());
+  });
+  await page.goto("/?renderer=webgl2&profile=weak");
+  await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
+  await page.evaluate(() => window.__splashery.app.chooseToy("dice"));
+  await page.waitForFunction(() => window.__splashery.player.scene?.toy?.id === "dice" && window.__splashery.player.toyInfo, null, { timeout: 120_000 }); // prettier-ignore
+  expect(fetched).toEqual([]);
+  await page.evaluate(() => {
+    const s = window.__splashery.app.sound;
+    s.setEnabled(true);
+    window.__splashery.app.act();
+  });
+  await expect.poll(() => fetched, { timeout: 30_000 }).toContain("dice-throw.mp3");
 });

@@ -524,7 +524,7 @@
       "status": "site",
       "said": "The oak tree is close, but the leaves falling don't really sound like leaves.",
       "note": "Close, but the falling leaves don't sound like leaves.",
-      "plan": "Now: a leafy rustle as the crown rocks, then soft rustles as the loose leaves land (synthesized; no flutter or patter).",
+      "plan": "Now: a leafy rustle as the crown rocks, then soft rustles as the loose leaves land (synthesized; no flutter or patter); real CC0 recordings now (oak-leaves.mp3), with the synthesized sound as a fallback.",
       "candidates": []
     },
     "pine": {
@@ -552,7 +552,7 @@
       "status": "site",
       "said": "For the bonsai tree, the branch should actually sound like something growing, and then the scissors when they cut it off should sound like cutting. Right now it just sounds like a bounce or a rubber band when it grows, and then just, like a little click or something when the scissors cut, and that's just not right.",
       "note": "The branch should sound like it's growing and the scissors like real cutting, not a rubber-band bounce and a click.",
-      "plan": "Now: the branch creaks and its leaves rustle as it grows, the scissors open and snip, and the cut piece drops onto the moss.",
+      "plan": "Now: the branch creaks and its leaves rustle as it grows, the scissors open and snip, and the cut piece drops onto the moss; real CC0 recordings now (bonsai-snip.mp3), with the synthesized sound as a fallback.",
       "candidates": []
     },
     "willow": {
@@ -587,7 +587,7 @@
       "status": "site",
       "said": "The pebbles don't really sound like pebbles at the beginning. They sound okay when they're being stacked towards the end, but they don't sound so much like stones, and they probably should. So if you could make it sound a little bit more like stones and less like building blocks or something, that would make sense.",
       "note": "At the start they sound like building blocks, not stones; the stacking at the end is okay.",
-      "plan": "Now: real stone-on-stone knocks as the pile shifts and tumbles home; the stacking knocks stay.",
+      "plan": "Now: real stone-on-stone knocks as the pile shifts and tumbles home; the stacking knocks stay; real CC0 recordings now (rocks-pebbles.mp3), with the synthesized sound as a fallback.",
       "candidates": []
     },
     "campfire": {
@@ -629,7 +629,7 @@
       "status": "site",
       "said": "The iceberg, it uses too much clicking. So I think the clicking is supposed to be, like, the ice breaking off the iceberg, right? We can actually find, like, a sound of something breaking, like ice breaking or something like that, and use that. That would probably be a little bit better.",
       "note": "Too much clicking; use a real ice-breaking sound for the ice breaking off.",
-      "plan": "Now: real ice breaking, a deep crack with its groan and splinters (no crackle of clicks), then the splash.",
+      "plan": "Now: real ice breaking, a deep crack with its groan and splinters (no crackle of clicks), then the splash; real CC0 recordings now (iceberg-crack.mp3), with the synthesized sound as a fallback.",
       "candidates": []
     },
     "ice-cream": {
@@ -657,7 +657,7 @@
       "status": "site",
       "said": "The popcorn just sounds like bubbles popping, and that's close to being correct, but it needs to sound more dry, like actual popcorn would.",
       "note": "Close, but it sounds like bubbles popping; it should be drier, like real popcorn.",
-      "plan": "Now: dry kernels popping, each a short papery bang with a little thump (no bubbly rising pops).",
+      "plan": "Now: dry kernels popping, each a short papery bang with a little thump (no bubbly rising pops); real CC0 recordings now (popcorn-popping.mp3), with the synthesized sound as a fallback.",
       "candidates": []
     },
     "jelly": {
@@ -727,14 +727,14 @@
       "status": "site",
       "said": "The taco doesn't really sound, like, it's breaking apart. It sounds like a zipper unzipping. So it should sound more like a hard taco shell cracking or breaking open. When the food dropped out of it or whatever, that sounds okay.",
       "note": "It sounds like a zipper; it should sound like a hard shell cracking open (the filling dropping out is okay).",
-      "plan": "Now: a hard shell cracking open; the filling dropping out is unchanged.",
+      "plan": "Now: a hard shell cracking open; the filling dropping out is unchanged; real CC0 recordings now (taco-crack.mp3), with the synthesized sound as a fallback.",
       "candidates": []
     },
     "apple": {
       "status": "site",
       "said": "The apple is almost perfect, but when the user first clicks on it and, like, the bite is taken out of it, it should sound like an apple is having a bite actually taken out of it. There is a characteristic sound. You can probably find that in a sound pack of somebody taking a bite of an apple. That's what it should sound like. Right now, it sounds kind of like a zipper or something, and that's not how it sounds when you bite into an apple.",
       "note": "Almost perfect, but the bite sounds like a zipper; it should be a real apple bite.",
-      "plan": "Now: a crisp bite into an apple (a crunch of tiny fractures and a juicy snap), not a zipper.",
+      "plan": "Now: a crisp bite into an apple (a crunch of tiny fractures and a juicy snap), not a zipper; real CC0 recordings now (apple-bite.mp3), with the synthesized sound as a fallback.",
       "candidates": []
     },
     "banana": {
@@ -762,14 +762,14 @@
       "status": "site",
       "said": "The spinning top accelerates and has that acceleration noise. I don't really like that, and I don't want it to be, like, really windy either. You can probably find a sound pack with a spinning top noise. It has a certain sound to it, and it's usually not that overwhelming of a sound either.",
       "note": "No acceleration noise and not windy; it should sound like a real spinning top, which is quiet.",
-      "plan": "Now: a quiet, steady whirr that wobbles as it precesses and slowly sinks (no rising hum, no wind).",
+      "plan": "Now: a quiet, steady whirr that wobbles as it precesses and slowly sinks (no rising hum, no wind); real CC0 recordings now (spinning-top-spin.mp3), with the synthesized sound as a fallback.",
       "candidates": []
     },
     "dice": {
       "status": "site",
       "said": "The dice should sound like somebody rolling dice in a casino. Like if you throw dice down and roll them on the ground or on the table or something, there is actually a characteristic sound of that. This is not it. This is kind of like a plinking, twinkling sound that's not realistic.",
       "note": "It's a plinking, twinkling sound; it should sound like real dice thrown on a table.",
-      "plan": "Now: two dice thrown on a wooden table, bouncing with quicker, quieter knocks and settling.",
+      "plan": "Now: two dice thrown on a wooden table, bouncing with quicker, quieter knocks and settling; real CC0 recordings now (dice-throw.mp3), with the synthesized sound as a fallback.",
       "candidates": []
     },
     "newtons-cradle": {
@@ -797,14 +797,14 @@
       "status": "site",
       "said": "I appreciate the sound that you're using for the puzzle cube, but there actually is a sound that you can hopefully find for, like, a typical Rubik's cube. … This is really neat. I love how it is here. But there is a certain sound. This is kind of like almost... Again, I really appreciate the sound here, because it's like when you move it in different directions, or just... I don't know, sometimes the sounds are different. I'm not sure exactly why or how. But I think that the sounds could be just a little bit less like a toy and more like real SFX, almost like ASMR. Not exactly ASMR, but just, like, a little bit more realistic. I don't know how to explain that. You can maybe find, like, a Rubik's cube sound. Sorry to make that so vague.",
       "note": "He likes it, but it should sound less like a toy and more like a real puzzle cube turning, almost ASMR-like.",
-      "plan": "Now: each turn a plastic slide over the ridges and a soft clack as the layer seats.",
+      "plan": "Now: each turn a plastic slide over the ridges and a soft clack as the layer seats; real CC0 recordings now (puzzle-cube-turn.mp3), with the synthesized sound as a fallback.",
       "candidates": []
     },
     "spring-toy": {
       "status": "site",
       "said": "For the spring toy, there actually is a sound that a spring toy makes. This sounds more like a rubber band. So if we could fix that, I'd appreciate it.",
       "note": "It sounds like a rubber band; it should sound like a real spring toy.",
-      "plan": "Now: a metal coil spring's ringing sproing, not a rubber band.",
+      "plan": "Now: a metal coil spring's ringing sproing, not a rubber band; real CC0 recordings now (spring-toy-boing.mp3), with the synthesized sound as a fallback.",
       "candidates": []
     },
     "kite": {
@@ -832,7 +832,7 @@
       "status": "site",
       "said": "The balloon dog doesn't really sound like balloons popping. It has, like, a whistle at the beginning, which shouldn't be there. And then when it pops, it's close, but it's not exactly like a balloon popping. You can definitely find a sound pack or something with balloons popping and use those.",
       "note": "Remove the whistle at the start, and the pop should be a real balloon pop.",
-      "plan": "Now: a real balloon bursting (no whistle first).",
+      "plan": "Now: a real balloon bursting (no whistle first); real CC0 recordings now (balloon-dog-pop.mp3), with the synthesized sound as a fallback.",
       "candidates": []
     },
     "soap-bubbles": {
@@ -846,21 +846,21 @@
       "status": "site",
       "said": "The wind-up robot is kind of awkward. It should sound more realistic. You can probably find a sound pack for that.",
       "note": "Awkward; it should sound like a real wind-up toy.",
-      "plan": "Now: a few clicks of the winding key, then clockwork whirring as it unwinds and its tin feet clanking along.",
+      "plan": "Now: a few clicks of the winding key, then clockwork whirring as it unwinds and its tin feet clanking along; real CC0 recordings now (robot-wind.mp3), with the synthesized sound as a fallback.",
       "candidates": []
     },
     "chess-set": {
       "status": "site",
       "said": "The chess set, the sounds are, I guess, okay, but as somebody who has played quite a bit of online chess, I know that there are better sound themes than others. And, like, this one is not that good, in my opinion. You could probably find some sound packs for chess pieces and use those.",
       "note": "Okay, but not a good chess sound; use better chess-piece sounds, like the good online-chess themes.",
-      "plan": "Now: pieces set down on a felted wooden board, a woody thock (a sharper one for captures), like a good online-chess theme.",
+      "plan": "Now: pieces set down on a felted wooden board, a woody thock (a sharper one for captures), like a good online-chess theme; real CC0 recordings now (chess-set-move.mp3), with the synthesized sound as a fallback.",
       "candidates": []
     },
     "book": {
       "status": "site",
       "said": "For the storybook, I feel like we should have it so that the pages, you can kind of hear the pages flip, but I don't want it to sound like wind. It should sound like a realistic book's pages, you know, flipping. You know, you can probably find a sound pack for that.",
       "note": "We should hear the pages flip like a real book's, not wind.",
-      "plan": "Now: real paper pages turning (no wind).",
+      "plan": "Now: real paper pages turning (no wind); real CC0 recordings now (book-page.mp3), with the synthesized sound as a fallback.",
       "candidates": []
     },
     "laptop": {
@@ -895,7 +895,7 @@
       "status": "site",
       "said": "For now, though, I mean, it's pretty good. I think that the string sound is a little bit too much like a string instrument, like a guitar. So maybe we could change that.",
       "note": "Pretty good, but the string sounds like a guitar.",
-      "plan": "Now: a real bowstring's thump and the arrow's hiss, not a guitar-like note; the hit is unchanged.",
+      "plan": "Now: a real bowstring's thump and the arrow's hiss, not a guitar-like note; the hit is unchanged; real CC0 recordings now (bow-and-target-release.mp3), with the synthesized sound as a fallback.",
       "candidates": []
     },
     "trebuchet": {
@@ -909,7 +909,7 @@
       "status": "site",
       "said": "For the crossbow, there's, like, kind of a clicking noise. We can get rid of that. The actual bow sound also sounds too much like an instrument, kind of like the bow and target, so we should change that. But when the arrow hits the target, it's fine.",
       "note": "Remove the click and change the instrument-like bow sound; the hit on the target is fine.",
-      "plan": "Now: no click; the string's real thump, then the bolt hitting as before.",
+      "plan": "Now: no click; the string's real thump, then the bolt hitting as before; real CC0 recordings now (bow-and-target-release.mp3), with the synthesized sound as a fallback.",
       "candidates": []
     },
     "knights-helmet": {
@@ -972,14 +972,14 @@
       "status": "site",
       "said": "For the frog, I think it just sounds a little too robotic. So the fly is just a little too robotic in how it buzzes. The frog, the noise that plays after the frog consumes the fly, we could have the frog, like, croak or do, like, a ribbit type of thing. I don't know if that's what a frog does. I know, of course, toads do that. I don't know if it makes a difference. As it is now, it's okay, though. It's more like a cartoon, but we could perhaps change the fly to, like, a more realistic sound.",
       "note": "Okay but cartoonish: a more realistic fly buzz, and a real croak or ribbit after it eats the fly.",
-      "plan": "Now: a real fly's wandering buzz, and real croaks after it eats the fly.",
+      "plan": "Now: a real fly's wandering buzz, and real croaks after it eats the fly; real CC0 recordings now (frog-fly.mp3, frog-croak.mp3), with the synthesized sound as a fallback.",
       "candidates": []
     },
     "owl": {
       "status": "site",
       "said": "I think the owl is pretty close. Maybe we could use a real owl sound, though. Like, the hoot could be more realistic.",
       "note": "Pretty close, but the hoot could be a real owl's.",
-      "plan": "Now: a great horned owl's call, \"hoo, h-hoo, hooo, hoo\", low and breathy.",
+      "plan": "Now: a great horned owl's call, \"hoo, h-hoo, hooo, hoo\", low and breathy; real CC0 recordings now (owl-hoot.mp3), with the synthesized sound as a fallback.",
       "candidates": []
     },
     "lorenz": {
@@ -1000,7 +1000,7 @@
       "status": "site",
       "said": "The other part of this is the sound effect. So it sounds like bubbles, and then it sounds like wind, or like a waterfall. Let's change this so it actually sounds like water moving in a bottle. You can probably find a sound pack for that. … and then we need to make the sound more like water or liquid in a bottle.",
       "note": "It sounds like bubbles, then wind or a waterfall; it should sound like water moving in a bottle.",
-      "plan": "Now: water moving in a bottle, sloshing and glugging (no bubbles or waterfall).",
+      "plan": "Now: water moving in a bottle, sloshing and glugging (no bubbles or waterfall); real CC0 recordings now (klein-bottle-slosh.mp3), with the synthesized sound as a fallback.",
       "candidates": []
     },
     "hypercube": {
@@ -1133,7 +1133,7 @@
       "status": "site",
       "said": "So for the fireworks, there's like a whistling noise when the firework is shot, and there's like some clicking noise, and the firework kind of like thuds when it explodes. I want it to actually sound like a real firework. You can probably find a sound pack for that.",
       "note": "The whistle, clicks and thud should become a real firework.",
-      "plan": "Now: a real firework, the launch's thump and rush (no whistle), a deep boom and the stars' soft crackle.",
+      "plan": "Now: a real firework, the launch's thump and rush (no whistle), a deep boom and the stars' soft crackle; real CC0 recordings now (fireworks-burst.mp3), with the synthesized sound as a fallback.",
       "candidates": []
     },
     "decorated-tree": {
@@ -1161,14 +1161,14 @@
       "status": "site",
       "said": "The helicopter could sound a little bit more realistic, like the blades.",
       "note": "The blades could sound more realistic.",
-      "plan": "Now: the heavy whump of real rotor blades over the turbine's hush.",
+      "plan": "Now: the heavy whump of real rotor blades over the turbine's hush; real CC0 recordings now (helicopter-rotor.mp3), with the synthesized sound as a fallback.",
       "candidates": []
     },
     "steam-train": {
       "status": "site",
       "said": "The steam train should actually chug along and sound like a real steam engine.",
       "note": "It should chug along like a real steam engine.",
-      "plan": "Now: a short steam whistle, then it chugs along with strong and soft chuffs over the wheels' rumble.",
+      "plan": "Now: a short steam whistle, then it chugs along with strong and soft chuffs over the wheels' rumble; real CC0 recordings now (steam-train-chug.mp3), with the synthesized sound as a fallback.",
       "candidates": []
     },
     "ocean-liner": {
@@ -1182,14 +1182,14 @@
       "status": "site",
       "said": "So for the race car, it should actually have a race car sound, and we'll get to the race car when we actually hit vehicles and go to the vehicles section here. But the race car should sound kind of like a real race car. … The sports car, I like the sound, but we need to change it to something that sounds like an actual sports car kind of revving its engine or moving or something.",
       "note": "He likes it, but it should sound like a real sports car revving or driving.",
-      "plan": "Now: a real engine's growl, revved twice.",
+      "plan": "Now: a real engine's growl, revved twice; real CC0 recordings now (sports-car-rev.mp3), with the synthesized sound as a fallback.",
       "candidates": []
     },
     "propeller-plane": {
       "status": "site",
       "said": "The propeller plane is almost perfect. It could sound a little more realistic. Right now it sounds just a little too, like, digital or robotic.",
       "note": "Almost perfect, but a little too digital or robotic.",
-      "plan": "Now: a real piston engine with the propeller's beat.",
+      "plan": "Now: a real piston engine with the propeller's beat; real CC0 recordings now (propeller-plane-engine.mp3), with the synthesized sound as a fallback.",
       "candidates": []
     },
     "jet": {
@@ -1203,7 +1203,7 @@
       "status": "site",
       "said": "The tractor should change to, like, an actual tractor-sounding engine.",
       "note": "It should sound like a real tractor engine.",
-      "plan": "Now: a slow diesel's putt-putt with its clatter.",
+      "plan": "Now: a slow diesel's putt-putt with its clatter; real CC0 recordings now (tractor-engine.mp3), with the synthesized sound as a fallback.",
       "candidates": []
     },
     "ufo": {
@@ -1217,7 +1217,7 @@
       "status": "site",
       "said": "For the Eiffel Tower, the fireworks should actually sound like real fireworks going off. We can remove the lights, like the light sounds, the twinkling, or we could at least tone it down a little bit. I think we should remove the twinkling.",
       "note": "The fireworks should sound like real fireworks, and the twinkling for the lights should go.",
-      "plan": "Now: real fireworks, four bursts with booms and soft crackle (no twinkling).",
+      "plan": "Now: real fireworks, four bursts with booms and soft crackle (no twinkling); real CC0 recordings now (fireworks-burst.mp3), with the synthesized sound as a fallback.",
       "candidates": []
     },
     "washington-monument": {
@@ -1252,7 +1252,7 @@
       "status": "site",
       "said": "The Colosseum sound effects could use a lot of work. I'll try to break this down. So maybe remove all of the sounds, or let's just say I don't like any of the sounds, but I think directionally they're fairly correct. We just have to be careful about this. We can use, like, a crowd or, like, an audience sound pack, okay? And then we can just have, like, hooves of a horse kind of moving or something like that for the gladiators, and I think that that would be enough.",
       "note": "He doesn't like any of the current sounds: a real crowd and horse hooves would be enough.",
-      "plan": "Now: a real crowd in the stands and horses' hooves trotting.",
+      "plan": "Now: a real crowd in the stands and horses' hooves trotting; real CC0 recordings now (colosseum-crowd.mp3, colosseum-hooves.mp3), with the synthesized sound as a fallback.",
       "candidates": []
     },
     "fountain-pen": {
@@ -1322,21 +1322,21 @@
       "status": "site",
       "said": "(September 30, 2026, on the Sound Board) Sounds too much like suction or something.",
       "note": "Sounds too much like suction or something.",
-      "plan": "Now: a paper page turning (a recorded CC0 page flip will replace it with Sound A's sample voice).",
+      "plan": "Now: a paper page turning; real CC0 recordings now (book-page.mp3), with the synthesized sound as a fallback.",
       "candidates": []
     },
     "your-book": {
       "status": "site",
       "said": "(September 30, 2026, on the Sound Board) Sounds too much like wind or sand, not pages turning.",
       "note": "Sounds too much like wind or sand, not pages turning.",
-      "plan": "Now: a paper page turning and the landing thud (a recorded CC0 page flip will replace the swish with Sound A's sample voice).",
+      "plan": "Now: a paper page turning and the landing thud; real CC0 recordings now (book-page.mp3), with the synthesized sound as a fallback.",
       "candidates": []
     },
     "photo-album": {
       "status": "site",
       "said": "(September 30, 2026, on the Sound Board) Thud is fine, but page turn swish doesn't sound realistic.",
       "note": "Thud is fine, but page turn swish doesn't sound realistic.",
-      "plan": "Now: a thick card page turning and the thud (a recorded CC0 page flip will replace the swish with Sound A's sample voice).",
+      "plan": "Now: a thick card page turning and the thud; real CC0 recordings now (book-page.mp3), with the synthesized sound as a fallback.",
       "candidates": []
     },
     "song-landscape": {

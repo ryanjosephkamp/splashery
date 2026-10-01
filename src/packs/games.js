@@ -458,7 +458,7 @@ function positionsAt(g) {
 }
 
 // Sound B: a piece set down on a felted wooden board.
-const CLACK = (f, vol = 1) => ({ voice: "chessmove", f: f * 0.8, vol });
+const CLACK = (f, vol = 1) => ({ voice: "sample", file: "chess-set-move.mp3", pitch: Math.min(1.25, Math.max(0.8, f / 620)), vol: 1.3 * vol, fallback: { voice: "chessmove", f: f * 0.8, vol } }); // prettier-ignore
 // Move speed: 0.4x to 2.5x (half way is the Opera Game's pace).
 const paceOf = (c) => Math.pow(2.5, ((c.pace ?? 0.5) - 0.5) * 2);
 
