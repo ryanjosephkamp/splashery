@@ -133,8 +133,8 @@ October 1, 2026, morning (UTC): **round 2 ready for the Operator.**
   `live-clap`, `live-screen`. The mirror and Photo to 3D live got a second "fix" (still moving):
   `live-mirror-r3` and `live-photo3d-r3` hold the view still (no turn, a still test camera, no tap
   at the end).
-- Round 2 is built, tested and posted: cards `live2-*` on page 2, its engine PR and lane PR open as
-  drafts (stacked on #144 and #150).
+- Round 2 is built, tested and posted: cards `live2-*` on page 2, engine PR #162 and lane PR #163
+  open as drafts (stacked on #144 and #150).
 - Start time (Chromium, SwiftShader, this container; the software renderer itself takes about two of
   the four cores, so runs vary). Before: file chosen to the landscape built (it could play only
   after that, on a tap). After: file chosen to playing (a long song plays as it opens).
