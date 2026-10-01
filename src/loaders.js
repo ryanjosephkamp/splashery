@@ -48,8 +48,10 @@ export async function fetchBytes(url, onProgress) {
     if (done) break;
     chunks.push(value);
     got += value.length;
-    onProgress?.(Math.min(1, got / total));
+    // A compressed response's content-length is smaller than what streams (lane Fix6).
+    onProgress?.(Math.min(0.99, got / total));
   }
+  onProgress?.(1);
   const out = new Uint8Array(got);
   let o = 0;
   for (const c of chunks) {
