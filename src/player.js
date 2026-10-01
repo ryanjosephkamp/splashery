@@ -260,7 +260,11 @@ export class Player {
     this.driver.clearPokes();
     let info;
     const shelfDef = toy.kind === "builtin" ? findToy(toy.id) : null;
-    this.motion.setToy(null, null);
+    // A kit toy that switches its own options (a periodic table tile,
+    // Player.switchTo) keeps moving as it was until the new build replaces
+    // it, so its hidden parts stay hidden while it stays on screen (lane Fix6).
+    const same = this.switching && shelfDef?.kind === "kit" && this.toyInfo?.kind === "kit" && this.toyInfo.id === shelfDef.id; // prettier-ignore
+    if (!same) this.motion.setToy(null, null);
     if (shelfDef?.kind === "kit") {
       info = await this.buildKit(shelfDef, toy, token, progress);
       if (!info) return null;
@@ -1231,7 +1235,12 @@ export class Player {
         toy.options = { ...(toy.options || {}), ...options };
         return this.loadToy(toy);
       });
-    await rebuild(r.options);
+    this.switching = true;
+    try {
+      await rebuild(r.options);
+    } finally {
+      this.switching = false;
+    }
     if (this.scene.toy !== toy || !this.motion.controlDef(r.key)) return;
     const next = this.motion.act(this.time, null, { key: r.key, pick: r.pick });
     this.scene.motion.controls = { ...this.scene.motion.controls, [next.key]: this.motion.targets[next.key] }; // prettier-ignore
@@ -1373,6 +1382,14 @@ export class Player {
         scr.recipe.screen.draw(scr.g, this.time);
         this.stage.setScreenCanvas(scr.canvas);
       }
+    }
+    // A toy that moves on by itself (the periodic table's tour) names new
+    // options in out.next ({ options, key }): it is rebuilt as a tile tap
+    // rebuilds it, without the tap's sound, and then `key` fires (lane Fix6).
+    const next = this.motion.out?.next;
+    if (next?.options && !this.movingOn && info.kind === "kit") {
+      this.movingOn = true;
+      this.switchTo({ ...next, echo: true }).finally(() => (this.movingOn = false));
     }
     this.pictures?.update(this.motion.out, this.time); // Pictures
     const gliding = this.followView(); // Page focus
