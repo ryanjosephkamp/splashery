@@ -2699,8 +2699,9 @@ export const RECIPES = {
         c,
         "daisy",
         on ? s : 0,
-        d.plucked.map((_, i) => 0.55 + 0.28 * i),
-        (i) => out.cues.push({ voice: "switch", f: i % 2 ? "E6" : "C6", decay: 0.5, vol: 0.6 }),
+        // Sound B: a soft brush as each petal lands on the grass.
+        d.plucked.map((_, i) => 0.55 + 0.28 * i + 1.9),
+        () => out.cues.push({ voice: "rustle", f: 2600, n: 3, decay: 0.12, vol: 0.5 }),
       );
     },
     build(k) {
@@ -4832,7 +4833,7 @@ export const RECIPES = {
       crossing(c, "rocks", on ? s : 0, [0.5, ...clacks, STONE_BACK + 0.6], (n) =>
         out.cues.push(
           n === 0 || n === clacks.length + 1
-            ? { voice: "clatter", f: 1400, n: 8, vol: 0.8 }
+            ? { voice: "pebble", f: 2300, n: 5, vol: 0.8 }
             : { voice: "stone", f: 380 + 40 * n, decay: 0.8, vol: 0.8 },
         ),
       );

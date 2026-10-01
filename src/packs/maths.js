@@ -1320,6 +1320,8 @@ export const RECIPES = {
         });
       });
       out.tokens = tokens;
+      // Sound B: each rider's own sound as it sets off round the band.
+      cuesAt(c, p, MOB_RIDER_SOUNDS[info?.data?.riderKind] || [], out);
     },
     build(k, o) {
       const pal = PALETTES[o.colors] || PALETTES.sunset;
@@ -1365,7 +1367,10 @@ export const RECIPES = {
       });
       // The rider, twice: each piece (body, wheels, legs) a token of its own.
       const rider = RIDERS[o.rider] || RIDERS.car;
-      k.data = { rider: rider.map(({ hub, roll, swing }) => ({ hub, roll, swing })) };
+      k.data = {
+        rider: rider.map(({ hub, roll, swing }) => ({ hub, roll, swing })),
+        riderKind: RIDERS[o.rider] ? o.rider : "car",
+      };
       [MOB_ANT_FRONT, MOB_ANT_BACK].forEach((base, copy) => {
         rider.forEach((pc, i) => {
           // Left out of the fit: the band keeps its size whatever rides it.
@@ -2014,6 +2019,18 @@ function mem(c) {
 }
 // Seconds since the tap of pulse `key` lasting `secs`, or -1 at rest.
 const since = (c, key, secs) => (c[key] > 0 ? (1 - c[key]) * secs : -1);
+// Sound B: what each Möbius rider sounds like on its ride (0.35 to 4.55 s of
+// the effect): a race car's engine revving, a beach ball rolling, a bicycle's
+// tires with one soft quack from the duck, and the ant's tiny feet.
+const MOB_RIDER_SOUNDS = {
+  car: [[0.3, { voice: "motor", f: 55, to: 1.5, kind: "car", bright: 0.6, decay: 2.6, vol: 0.55 }]], // prettier-ignore
+  ball: [[0.3, { voice: "rumble", f: 70, rate: 2.5, decay: 2.3, vol: 0.45 }]],
+  bike: [
+    [0.3, { voice: "roar", f: 180, bright: 0.2, decay: 3, vol: 0.3 }],
+    [2.2, { voice: "quack", f: 260, n: 1, vol: 0.45 }],
+  ],
+  ant: [[0.3, { voice: "patter", f: 3200, n: 70, decay: 7, vol: 0.35 }]],
+};
 // Plays each [at, spec] once as the effect's clock e passes `at`.
 function cuesAt(c, e, list, out, slot = "cue") {
   const m = mem(c);
