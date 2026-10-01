@@ -226,10 +226,8 @@ function cupScene(k) {
 
 // ---- The recipe -----------------------------------------------------------------------------
 
-const BLOW_SOUND = [
-  { voice: "breath", decay: 0.8, vol: 0.8 },
-  { voice: "hiss", at: 0.1, decay: 0.8, vol: 0.25 },
-];
+// A short, soft puff (a real blow-out is quick and quiet; tools/sound-lint.mjs).
+const BLOW_SOUND = { voice: "breath", decay: 0.6, vol: 0.45 };
 const STEAM_SOUND = [{ voice: "breath", decay: 1.1, vol: 0.7 }];
 
 export const RECIPES = {

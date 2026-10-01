@@ -218,7 +218,9 @@ export class FluidRuntime {
   //     to the air above the liquid, a quarter-wave pipe that rises in pitch
   //     as the glass fills; honey and lava land in slow gloops;
   //   - a sudden landing (the dropped ball): one splash, sized by its flow;
-  //   - spray falling back: drips; a soda's rising bubbles: a quiet fizz.
+  //   - spray falling back: drips; a soda's rising bubbles: a quiet fizz of
+  //     tiny high bubbles (not a crackle: the owner's no-clicks rule, PACKS.md
+  //     7e, which tools/sound-lint.mjs checks).
   // At most one cue a frame and 70 ms apart (the app's sound spaces repeats).
   sound(dt) {
     const s = this.stats.sound;
@@ -267,7 +269,13 @@ export class FluidRuntime {
     if (!layers.length && (s.bubbles || 0) > 20 && st.fizz <= 0 && st.t >= st.next) {
       st.fizz = 0.3;
       st.next = st.t + 0.07;
-      layers.push({ voice: "sizzle", decay: 0.4, vol: Math.min(0.22, s.bubbles / 3000) });
+      layers.push({
+        voice: "bubbles",
+        n: 6,
+        f: 1800,
+        decay: 0.4,
+        vol: Math.min(0.12, s.bubbles / 2500),
+      });
     }
     if (layers.length) this.onCue([layers.length === 1 ? layers[0] : layers]);
   }
