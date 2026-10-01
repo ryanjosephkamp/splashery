@@ -1436,6 +1436,16 @@ export const RECIPES = {
       out.parts.hour = { angle: (-h / 12) * TAU };
       out.parts.minute = { angle: (-m / 60) * TAU };
       out.parts.second = { angle: (-tick / 60) * TAU };
+      // Splats sort in the pose they were built in (the hands at 12), so a
+      // hand turned round would sort as if it still pointed up and the dial
+      // could draw over it. Sort the hands where they stand each time the
+      // second hand has ticked (lane Fix4).
+      const kd = info?.data;
+      const now = Math.floor(h * 3600 - 0.2);
+      if (kd && now !== kd.handsSorted) {
+        kd.handsSorted = now;
+        out.resortPose = true;
+      }
       const r = c.ring;
       const time = info?.time ?? t;
       out.parts.hammer = { angle: r > 0 ? 0.5 * Math.sin(time * 70) * Math.min(1, r * 2) : 0 };
@@ -1450,6 +1460,7 @@ export const RECIPES = {
       };
     },
     build(k, o) {
+      k.data = {}; // drive() keeps when it last sorted the hands here
       const body = o.color;
       const R = 0.8;
       const Dp = 0.34;
@@ -1519,46 +1530,74 @@ export const RECIPES = {
           return keep(shade(dial, 0.97 + 0.03 * (1 - r)));
         },
       });
-      // Hands (parts turning about the centre).
-      const hand = (name, len, w, col, back = 0) => {
+      // Hands (parts turning about the centre). Each is a thin, flat blade
+      // with a round boss, stacked on a visible arbor a few millimetres apart
+      // like a real clock's: high enough above the dial that the dial's big,
+      // flat splats never sort in front of a hand (lane Fix4).
+      const HAND_Z = { hour: 0.04, minute: 0.055, second: 0.07 };
+      const hand = (name, len, w, col, back = 0, tip = 0.5) => {
         const part = k.part(name, { pivot: [0, 0, 0], axis: [0, 0, 1] });
-        const z = zf + (name === "second" ? 0.03 : name === "minute" ? 0.02 : 0.01);
-        k.add(roundBox(w, len + back, 0.008, w * 0.45), {
+        const z = zf + HAND_Z[name];
+        const look = {
           even: true,
           opacity: 1,
           jitter: 0.015,
-          pos: [0, (len - back) / 2, z],
           part,
           flat: 0.15,
           weight: 3,
           pattern: false,
-          color: (c) => keep(lit(col, c.n, { spec: 0.4 })),
-        });
+          color: (c) => keep(lit(col, [0, 0, 1], { spec: 0.4 })),
+        };
+        // The blade: full width at the centre, tapering to a point.
+        const blade = k.param(
+          (u, v) => {
+            const y = -back + v * (len + back);
+            const f = y < 0 ? 1 : 1 - (1 - tip) * (y / len);
+            const pt = y > len - w ? (len - y) / w : 1;
+            return [(u - 0.5) * w * f * Math.max(0, pt), y, 0];
+          },
+          { grid: 48 },
+        );
+        k.add(blade, { ...look, pos: [0, 0, z] });
+        // The boss round the arbor.
+        k.add(k.disc(w * 0.85 + 0.012), { ...look, pos: [0, 0, z + 0.001], rot: [90, 0, 0] });
         return part;
       };
-      hand("hour", 0.36, 0.055, "#1d1d22", 0.05);
-      hand("minute", 0.55, 0.04, "#1d1d22", 0.06);
-      const sec = hand("second", 0.6, 0.012, "#d62828", 0.16);
-      k.add(k.cylinder(0.035, 0.01), {
+      hand("hour", 0.36, 0.055, "#1d1d22", 0.05, 0.55);
+      hand("minute", 0.55, 0.04, "#1d1d22", 0.06, 0.45);
+      const sec = hand("second", 0.6, 0.012, "#d62828", 0.16, 0.8);
+      k.add(k.disc(0.035), {
         even: true,
         opacity: 1,
         jitter: 0.015,
-        pos: [0, -0.11, zf + 0.03],
+        pos: [0, -0.11, zf + HAND_Z.second + 0.001],
         rot: [90, 0, 0],
         part: sec,
         weight: 3,
         pattern: false,
-        color: "#d62828",
+        color: (c) => keep(lit("#d62828", [0, 0, 1], { spec: 0.4 })),
       });
-      k.add(k.cylinder(0.04, 0.04), {
+      // The arbor the hands turn on, from the dial up through them, and the
+      // little cap nut that holds them on.
+      k.add(k.cylinder(0.014, HAND_Z.second + 0.01, { caps: false }), {
         even: true,
         opacity: 1,
         jitter: 0.015,
-        pos: [0, 0, zf + 0.035],
+        pos: [0, 0, zf + (HAND_Z.second + 0.01) / 2],
         rot: [90, 0, 0],
         weight: 3,
         pattern: false,
-        color: (c) => chrome(c.n),
+        color: (c) => chrome(c.n, "#c9a45c"),
+      });
+      k.add(k.sphere(0.022), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
+        pos: [0, 0, zf + HAND_Z.second + 0.008],
+        scale: [1, 1, 0.55],
+        weight: 3,
+        pattern: false,
+        color: (c) => chrome(c.n, "#c9a45c"),
       });
       // Bells, a handle and a hammer between them.
       for (const s of [-1, 1]) {
