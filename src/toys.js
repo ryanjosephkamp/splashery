@@ -450,7 +450,7 @@ export const TOYS = [
   },
   {
     id: "alarm-clock",
-    label: "Alarm clock",
+    label: "Real alarm clock",
     category: "scans",
     tags: "photoreal model time bell",
     kind: "captured",

@@ -26,13 +26,13 @@ Proposals below are suggestions; the owner may change them.
   still open: none. Done in C2: Cactus, Strawberry, Heart cookie, Honeybee, Torus, Jelly blob, Neon
   knot, Cluster fly, May beetle, Millipede, Carder bumblebee, Raspberry, Blackberry, Blueberry,
   Grape, Cinnamon star cookie, Tomatoes, Mandeltorus, Basket, Real rubber duck, Garden gnome, Wooden
-  elephant, Marble bust, Ukulele, Alarm clock, Vintage camera, Boombox, Real croissant, Carrot cake,
-  Pomegranate, Lantern, Cat statue, Horse statue, Real pencil, Real tin can, Basketball, Soccer
-  ball, American football, Tennis ball, Baseball, Softball, Beach ball, Golf ball, Rugby ball,
-  Volleyball, Water polo ball, Ping-pong ball, Cricket ball, Bowling ball, Pool ball, Pickleball,
-  Dodgeball, Medicine ball, Lacrosse ball, Squash ball, Bouncy ball, Marble, Hockey puck,
-  Shuttlecock, Flying disc, Beating heart, Sun, Solar system, Mercury, Venus, Earth, Moon, Mars,
-  Jupiter, Saturn, Uranus, Neptune, Tiny planet, Aurora world, Asteroid, Comet, Meteor, Star,
+  elephant, Marble bust, Ukulele, Real alarm clock, Vintage camera, Boombox, Real croissant, Carrot
+  cake, Pomegranate, Lantern, Cat statue, Horse statue, Real pencil, Real tin can, Basketball,
+  Soccer ball, American football, Tennis ball, Baseball, Softball, Beach ball, Golf ball, Rugby
+  ball, Volleyball, Water polo ball, Ping-pong ball, Cricket ball, Bowling ball, Pool ball,
+  Pickleball, Dodgeball, Medicine ball, Lacrosse ball, Squash ball, Bouncy ball, Marble, Hockey
+  puck, Shuttlecock, Flying disc, Beating heart, Sun, Solar system, Mercury, Venus, Earth, Moon,
+  Mars, Jupiter, Saturn, Uranus, Neptune, Tiny planet, Aurora world, Asteroid, Comet, Meteor, Star,
   Pulsar, Black hole, Star cluster, Ring nebula, Nebula, Spiral galaxy, Virus, Bacteriophage,
   Bacterium, Red blood cell, Neuron, Astrocyte, Animal cell, DNA, White blood cell, Microglia,
   Diatom, Pollen grain, Snowflake, Chromosome, Mitochondrion, Paramecium, Amoeba, Electron orbital,
@@ -205,7 +205,7 @@ Proposals below are suggestions; the owner may change them.
   - Improved: E1b: played like a real ukulele: a pick sweeps across the strings on each of four
     strums and the strings shake in a standing wave between the nut and the bridge (2.2 s).
   - Sound: Plucked ukulele chord (synth, bright, nylon).
-- **Alarm clock** (`alarm-clock`). Now: tap: Ring (rig). Plan: keep.
+- **Real alarm clock** (`alarm-clock`). Now: tap: Ring (rig). Plan: keep.
   - Owner: Hands should move. On tap it should jump up and down and ring like an alarm clock.
   - Effect: Hands tick all the time; tap rattles it off the table while it rings.
   - Improved: E1: the red second hand ticks all the time. A tap rings the twin bells and the clock
