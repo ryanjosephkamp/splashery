@@ -61,9 +61,22 @@ for (const [name, size] of [
       if (name === "390x844")
         await page.screenshot({ path: new URL(`ui4-grand-${name}.png`, SHOTS).pathname });
       const fired = await page.evaluate(() => window.__fired);
-      const up = keys;
-      const down = keys.slice(0, -1).reverse();
-      expect(fired).toEqual([...up, ...down]);
+      // Up, then back down: each key once per crossing, in order. Where the
+      // finger slides decides whether the black keys play too (in front of
+      // them only the white ones do), so the test checks the order and that
+      // no white key along the run was skipped.
+      const peak = fired.indexOf(Math.max(...fired));
+      const up = fired.slice(0, peak + 1);
+      const down = fired.slice(peak);
+      expect(up.length, JSON.stringify(fired)).toBeGreaterThan(5);
+      expect(down.length, JSON.stringify(fired)).toBeGreaterThan(5);
+      for (let i = 1; i < up.length; i++) expect(up[i], JSON.stringify(fired)).toBeGreaterThan(up[i - 1]); // prettier-ignore
+      for (let i = 1; i < down.length; i++) expect(down[i], JSON.stringify(fired)).toBeLessThan(down[i - 1]); // prettier-ignore
+      for (const run of [up, down])
+        for (const w of whites(Math.min(...run), Math.max(...run)))
+          expect(run, `white key ${w} in ${JSON.stringify(fired)}`).toContain(w);
+      expect(Math.abs(up[0] - keys[0])).toBeLessThanOrEqual(2);
+      expect(Math.abs(up[up.length - 1] - keys[keys.length - 1])).toBeLessThanOrEqual(2);
       // The camera did not turn.
       expect(await page.evaluate(() => window.__splashery.player.camera.tgt.yaw)).toBe(yaw0);
       expect(errors).toEqual([]);
