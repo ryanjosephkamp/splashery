@@ -14,14 +14,15 @@ loads `src/fluids/` (never before: the shelf and embeds don't fetch it), simulat
 toy's own clock and draws them as one extra splat layer, one splat per particle, sorted with the
 toy. The recipe's `drive()` steers them through `out.fluid`.
 
-| File                     | What it does                                                                                                                                         |
-| ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `src/fluids/sim.js`      | The solvers: `Liquid` (position-based fluids), `Gas` (smoke, steam), `Flame`, the colliders (signed distances) and the splat-shape pass.             |
-| `src/fluids/world.js`    | `FluidWorld`: builds a toy's systems at its tier's budget, applies `out.fluid`, steps them and packs every particle for the renderer.                |
-| `src/fluids/render.js`   | `FluidLayer`: the splat layer and its work-buffer program (GLSL and WGSL) that shapes, turns, lights and colors each splat.                          |
-| `src/fluids/runtime.js`  | `FluidRuntime`: runs the world in a Web Worker (people's devices) or on the page (the tools and tests, which step the clock by hand) and uploads it. |
-| `src/fluids/worker.js`   | The worker.                                                                                                                                          |
-| `src/packs/fluid-lab.js` | The Fluid lab (labs, Lab shelf): a glass to pour into, a splash bowl, a candle and a hot cup.                                                        |
+| File                     | What it does                                                                                                                                                                                                                            |
+| ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `src/fluids/sim.js`      | The solvers: `Liquid` (position-based fluids), `Gas` (smoke, steam), `Flame`, the colliders (signed distances) and the splat-shape pass.                                                                                                |
+| `src/fluids/world.js`    | `FluidWorld`: builds a toy's systems at its tier's budget, applies `out.fluid`, steps them and packs every particle for the renderer.                                                                                                   |
+| `src/fluids/render.js`   | `FluidLayer`: the splat layer and its work-buffer program (GLSL and WGSL) that shapes, turns, lights and colors each splat.                                                                                                             |
+| `src/fluids/runtime.js`  | `FluidRuntime`: runs the world in a Web Worker (people's devices) or on the page (the tools and tests, which step the clock by hand) and uploads it.                                                                                    |
+| `src/fluids/worker.js`   | The worker.                                                                                                                                                                                                                             |
+| `src/packs/fluid-lab.js` | The Fluid lab (labs, Lab shelf): a glass to pour into, a splash bowl, a candle and a hot cup.                                                                                                                                           |
+| `src/fluids/gpu/`        | r4 (below): the GPU liquid (`mpm.js`, `liquid.js`), its foam and bubbles (`diffuse.js`), the liquid surface (`surface.js`) and the gas grid (`gas.js`, `gasscene.js`), tied together in `index.js`. Loaded only when a fluid toy opens. |
 
 ## The solvers
 
@@ -190,6 +191,160 @@ and compares it with published values. Measured on September 30, 2026:
 - A stream only two or three particles wide can't thin as it falls; that needs more, smaller
   particles than the phone budget allows.
 
+## r4: a GPU solver, a liquid surface and a gas grid
+
+The owner's note of September 30, 2026, after r3: the fluids "still don't seem realistic enough". r4
+changes three things. Browsers without WebGPU keep everything above, unchanged.
+
+### Many more particles: MLS-MPM on the GPU
+
+On a WebGPU device the liquid runs on the GPU with MLS-MPM (Hu et al., "A Moving Least Squares
+Material Point Method", SIGGRAPH 2018, as in its compact "MLS-MPM88" form): particles carry mass,
+velocity and an affine matrix (APIC); each substep scatters them to a grid (quadratic B-splines),
+solves forces on the grid and gathers back. Fluid pressure is a Tait equation of state (power 7,
+clamped so a free surface doesn't pull), viscosity a stress `μ(C + Cᵀ)` from each preset's real
+kinematic viscosity (water and soda 1e-6 m²/s, syrup 1e-3, honey 4e-3, lava 1e-2). Colliders are the
+same shapes as on the CPU, as signed distances on the grid (a glass's wall is at least three cells
+thick for the solver, so nothing leaks through; the drawn glass keeps its own wall).
+
+Why MLS-MPM and not position-based fluids on the GPU: MPM needs no neighbor search (a scatter with
+atomic adds and a gather over a 3×3×3 stencil), so it maps directly onto compute shaders, and in a
+short measurement (the dam break below, on the same harness) it followed Martin and Moyce more
+closely than the CPU solver did.
+
+| Tier | Cell (cm) | Particles at most | Substeps a frame | Foam and bubble budget |
+| ---- | --------- | ----------------- | ---------------- | ---------------------- |
+| low  | 1.3       | 12,000            | 14               | 0.5×                   |
+| mid  | 1.0       | 40,000            | 24               | 0.7×                   |
+| high | 0.73      | 120,000           | 36               | 1×                     |
+| max  | 0.59      | 200,000           | 44               | 1.3×                   |
+
+The CPU liquid has at most 1,755 particles (max) and 455 to 585 on phones, so the GPU path has 25 to
+110 times as many. The substep is sized by the fastest motion (the sound speed of the equation of
+state plus the fastest fall); a frame that would need more than its tier's substeps runs in slow
+motion, and the emitter and drain follow the simulated time.
+
+**How it talks to PlayCanvas.** The solver uses PlayCanvas's own WebGPU device (`pc.StorageBuffer`,
+`pc.Compute`, `device.computeDispatch`), so its buffers never leave the GPU. Each frame the page
+encodes the substeps (five compute dispatches each: clear, particle-to-grid mass, particle-to-grid
+stress, grid update, grid-to-particle) and one more that writes every particle's place and speed
+into a float texture. The surface pass reads that texture directly: no copy back to the CPU and no
+upload. The page's cost is encoding the dispatches, about 1 ms a frame for 24 substeps (measured in
+Chromium on this machine); the GPU's cost is the dispatches themselves (see "Measured, r4"). The
+only read-back is for foam and bubbles (below), asynchronous and ten times a second, so a frame
+never waits on it.
+
+**Foam, bubbles and spray** stay particles (after Ihmsen et al. 2012, as on the CPU). Ten times a
+second the liquid is read back into a coarse picture (how full each cell is, its mean velocity and
+the top of the slow pool in each column). Foam forms where fast liquid plunges into the pool (not
+along a falling stream), rides the pool's top and spreads; a soda nucleates bubbles deep in the
+liquid that rise at their terminal speed and mostly pop at the top; spray is ballistic. They move on
+the CPU every frame (a few thousand at most) and are drawn by the surface pass: foam and spray over
+the liquid, bubbles inside it, tinted by it.
+
+**The splash** (fl-r4-splash-r2, October 1, 2026). A recipe's `gpu` settings override the rest on
+the GPU solver only, so the CPU splash the owner marked good stays as it was. The GPU splash drops a
+smaller ball (0.24 units across, about 8 cm) from lower down onto a shallow film (about 2 cm deep),
+as a drop lands on a wet plate: the impact throws up a crown, a thin sheet that leans outward and
+breaks into drops at its rim, which fall back; the film rushes back over the dry crater and meets in
+a small central mound, then settles flat in about a second and a half. The walls have low friction
+and the water no cohesion, or the crater stays dry for seconds. Before this, the ball started above
+the GPU grid's top and arrived flattened; the grid now always contains the ball's start (`drop`). On
+the low tier the film is two particles deep and the crater takes about a second to close. It is
+drawn barely stretched along its motion and with larger sprites (the recipe's `stretch` and
+`sprite`), so the ball and the drops stay round, and thin liquid in flight shows the bright room
+above it as a real drop does (`drops`). A second wooden layer under the basin fills gaps between the
+board's splats that showed through the clear water.
+
+Round 3 (fl-r4-splash-r3): the ball lands faster (a smaller ball, thrown down), and where the
+crown's sheet thins to a particle or two a cell and moves fast above the pool, it sheds fine
+droplets as spray (`breakup` in the recipe, `shed` in `diffuse.js`), smaller than the grid can hold,
+as a real rim breaks into drops. They fly on along ballistic paths and join the pool when they fall
+back. The sheet itself stays coarse: it reads as a ring of spray more than a clear wall.
+
+### A real liquid surface
+
+Screen-space fluid rendering (Green, "Screen Space Fluid Rendering for Games", GDC 2010; van der
+Laan, Green and Sainz, I3D 2009), after PlayCanvas has drawn the frame (`postrender`):
+
+1. Each particle is drawn as a sphere into a depth texture and, added up, into a thickness texture,
+   at half or three fifths of the screen's resolution. A sphere is never drawn smaller than 1.6
+   texels (a far or small liquid would break into specks), keeping its volume in the thickness.
+2. A bilateral filter (two passes) smooths the depth across particles but not across edges, so they
+   merge into one surface.
+3. The last pass rebuilds normals from the smoothed depth and shades the liquid over a copy of the
+   frame: refraction of what is behind (offset by the normal), Beer–Lambert absorption by the
+   thickness (so a deep cola is dark and its thin edges amber, and water tints only where it is
+   deep), a Fresnel reflection of a soft studio sky, a specular highlight, and glow for lava.
+4. The glass is traced analytically in the same pass (a cylinder: the front wall's Fresnel
+   reflection and highlight, crisp silhouette edges, the far wall's faint reflection, and its rim
+   and foot as clean lines about a pixel wide), so the liquid is seen through it and the glass reads
+   at a glance.
+
+### Real smoke and flames: a grid gas solver
+
+Smoke, steam and flames run on a 3D grid on both WebGPU and WebGL2 (fragment shaders over a 3D grid
+laid out as tiles in 2D half-float textures, so phones get it too): stable fluids (Stam, "Stable
+Fluids", SIGGRAPH 1999) with semi-Lagrangian advection, buoyancy from temperature and smoke weight,
+vorticity confinement (Fedkiw, Stam and Jensen, "Visual Simulation of Smoke", SIGGRAPH 2001), Jacobi
+pressure iterations and an open top. A flame is fuel that burns into heat; its light comes from the
+heat, through the color ramp (blue base where fuel meets air, then yellow-white, orange, dull red).
+The volume is ray-marched in the surface pass.
+
+- A flame gets its own fine grid (a candle flame is about a centimeter wide) stepped at 120 Hz;
+  smoke and steam share a coarser one.
+- A room's faint drafts (slow, smooth, stronger higher up) make a plume sway and meander instead of
+  standing straight; the grid's edges fade out, so its box never shows.
+- A candle's flame lights the scene (October 1, 2026, after the owner's "can look more realistic"):
+  the candle and its dish are traced props (below), lit warmly by the flame, and the wax glows from
+  within near its top, as wax does; the flame has a soft halo and a faint, slow flicker of its
+  light. Its fuel burns more slowly, so it stands taller, and its body is yellow with a white core.
+- The smoke from a blown-out wick is paler (the room's light catches it) and comes from a thinner
+  source, so it rises as a thread.
+
+### Crisp props
+
+The owner found the objects around the glass grainy (the board, the stand, the faucet, its handle
+and the spout). A recipe may list its props as simple shapes (`kind: "props"`: cylinders, boxes with
+a turning part, cones), and on WebGPU the surface pass traces them exactly, as it does the glass,
+with a wood grain for the board and a soft highlight on steel. The recipe hides their splats while
+the GPU draws them (the props spec's `drawn`), so phones without WebGPU keep the splats. Refraction
+through the liquid sees the traced props too. The glass's foot behind the liquid shows at half
+strength, and a liquid's top gets the room's light and a thin bright meniscus at the glass, so a
+dark liquid's top still reads.
+
+| Tier | Smoke grid (cells a side) | Pressure iterations | Steps a second |
+| ---- | ------------------------- | ------------------- | -------------- |
+| low  | 24                        | 12                  | 30             |
+| mid  | 32                        | 16                  | 30             |
+| high | 44                        | 20                  | 45             |
+| max  | 56                        | 24                  | 60             |
+
+### Measured, r4
+
+`node tools/fl-gpu-physics.mjs --profile=mid` on September 30, 2026: the dam break of "Checked
+against physics" (a 2:1 water column in the same channel, real units) on the GPU solver, 32,000
+particles, against Martin and Moyce's Table 2 (front Z = x/a at time T = t√(2g/a)):
+
+| T    | Measured (1952) | GPU (r4) |
+| ---- | --------------- | -------- |
+| 1.19 | 1.44            | 1.32     |
+| 1.91 | 2.33            | 2.00     |
+| 2.58 | 3.22            | 2.83     |
+| 3.26 | 4.11            | 3.77     |
+| 3.92 | 5.00            | 4.75     |
+| 4.61 | 5.89            | 5.77     |
+| 5.32 | 6.76            | 6.80     |
+
+RMS difference 0.27 over all 13 points (the CPU solver: 1.23, about 63% as far by T = 5.3). The GPU
+front starts a little behind (the column needs a moment to collapse, as with a real gate's lift) and
+then runs slightly faster than measured, reaching the measured distance by T = 5.3. With a softer
+liquid (sound speed 4 instead of 8 recipe units a second) the rms was 0.46, and water compressed by
+a quarter at the bottom of a glass; the test "the GPU liquid keeps the CPU liquid's volume" caught
+it.
+
+`?fluids=cpu` keeps the r3 path everywhere (the tests use it for the splat program on WebGPU).
+
 ## Limits and next steps
 
 - Colliders don't move with a part yet (a tipping jug, a stirring spoon). The runtime would need the
@@ -197,5 +352,4 @@ and compares it with published values. Measured on September 30, 2026:
 - No two-way coupling: liquid doesn't push kit parts, tokens or floating objects.
 - One liquid per system; two liquids in one glass would be two systems that don't feel each other.
 - Honey coils only as far as the particle size allows; a finer thread needs more particles.
-- A GPU solver (WebGL2 ping-pong textures) would allow many more particles, but neighbor search
-  without compute shaders is its own project; the worker solver meets the phone budget today.
+- The GPU liquid needs WebGPU compute; on WebGL2 the liquid is the CPU solver's splats (r3).
