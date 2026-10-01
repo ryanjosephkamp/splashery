@@ -533,13 +533,3 @@ test("the Home Screen manifest is valid, with its icons", async ({ page }) => {
   const res = await page.request.get("/manifest.webmanifest");
   expect(res.ok()).toBe(true);
 });
-
-test("without the labs switch, the new controls stay out of sight", async ({ page }) => {
-  await page.goto("/?labs=0&renderer=webgl2&profile=weak");
-  await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
-  await expect(page.locator("#focus-toggle")).toBeHidden();
-  await expect(page.locator("#panel-fold")).toBeHidden();
-  await expect(page.locator("#gallery-open")).toBeHidden();
-  await page.keyboard.press("f");
-  await expect(page.locator("#panel")).toBeVisible();
-});

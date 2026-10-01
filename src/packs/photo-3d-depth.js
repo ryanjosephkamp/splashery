@@ -21,22 +21,33 @@ let session = null;
 let loading = null;
 
 // Fetches a file with progress (0..1) so the panel can say how far the model has come.
-async function fetchBytes(url, onProgress) {
+export async function fetchBytes(url, onProgress) {
   const r = await fetch(url);
   if (!r.ok) throw new Error("Could not load the depth model.");
+  // content-length is only a guide for the progress figure: a server that compresses the
+  // file (GitHub Pages sends the model gzipped) gives the compressed size, while the body
+  // streams the full, decompressed bytes. So the chunks are collected as they come and
+  // joined at the end, never written into a buffer sized from the header (lane Fix6).
   const total = Number(r.headers.get("content-length")) || 0;
-  if (!r.body || !total) return new Uint8Array(await r.arrayBuffer());
-  const out = new Uint8Array(total);
+  if (!r.body) return new Uint8Array(await r.arrayBuffer());
   const reader = r.body.getReader();
-  let at = 0;
+  const chunks = [];
+  let got = 0;
   for (;;) {
     const { done, value } = await reader.read();
     if (done) break;
-    out.set(value, at);
-    at += value.length;
-    onProgress?.(at / total);
+    chunks.push(value);
+    got += value.length;
+    if (total) onProgress?.(Math.min(0.99, got / total));
   }
-  return at === total ? out : out.slice(0, at);
+  const out = new Uint8Array(got);
+  let at = 0;
+  for (const c of chunks) {
+    out.set(c, at);
+    at += c.length;
+  }
+  onProgress?.(1);
+  return out;
 }
 
 // Loads the runtime and the model once. `onStatus(text)` reports what it is doing.

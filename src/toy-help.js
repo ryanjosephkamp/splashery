@@ -1513,6 +1513,13 @@ export const TOY_HELP = {
       "A photo is flat, but a computer can guess how far away each part of it is. A depth model, a small neural network trained on millions of pictures, looks at your photo and gives every spot a distance: the path is near, the trees are far. This toy runs that model right on your device, and then rebuilds the photo as splats. Each splat takes the photo's color at its place and sits at its guessed depth, so when you turn the toy, near things move across far ones, the way they do when you move your head.\n\nWhere the depth jumps, a near leaf against a far tree, the surface is cut, so the leaf stands as its own layer instead of being smeared to the background. Tap to raise the layers one after another and sway. Layers pulls them apart. Depth sets how deep the relief is. Open a JPEG, PNG or WebP in the Toy tab (the model, 27 MB, loads the first time). Your photo never leaves your device.",
   },
 
+  "video-3d": {
+    howTo:
+      "Tap to fly the video's own camera path, then drag to roam off it. Open your own video in the Toy tab.",
+    about:
+      "A video is a string of photos taken from a moving camera. If the scene stands still, each photo shows it from a slightly different place, and that is enough to rebuild it in 3D. This toy picks the sharpest frames of the stretch you choose, finds the same small features (corners, specks, edges) in many of them, and works out where the camera must have been for each frame so that they all line up. That is called structure from motion. Then it trains 3D Gaussian splats: it starts from the points it found and keeps nudging each splat's place, size, shape and color until the scene, seen from each camera, looks like the frame taken there.\n\nIt all runs on your device's graphics card (WebGPU), and nothing is uploaded. It takes minutes, longer on a phone. Things that move while the camera films (cars, people, water) blur or vanish, and blank walls or sky give it nothing to match. Tap Replay flight to fly the video's path with its sound, or save the splats as a PLY.",
+  },
+
   // ---- Lab (lane Lab) -------------------------------------------------------------------
   "splat-field": {
     howTo: "Tap to send a pulse through it. Pick a Field in the Toy tab.",
@@ -1582,33 +1589,36 @@ export const TOY_HELP = {
       "A snare drum is a shallow drum with a skin, called a head, stretched across each side. Under the bottom head runs a set of thin metal wires, the snares, which rattle against it every time the top is hit, giving the drum its crisp, buzzing crack. A drum roll is many fast strokes, played one stick after the other so quickly that they blur into one sound.\n\nTap it and the sticks play a roll. Tap again quickly, and each tap steps the roll up to a faster speed and makes it last longer, through four speeds in all. Pick the color of the shell in the Toy tab.",
   },
   xylophone: {
-    howTo: "Tap a bar to play its note, or tap the mallet or frame to play a scale.",
+    howTo:
+      "Tap a bar, or drag across the bars for a glissando. Tap the mallet or frame to play a scale.",
     about:
       "A xylophone is a row of tuned wooden bars that you strike with a mallet. Each bar's length sets its note: the shorter the bar, the higher it sounds. The name comes from the Greek for “wood” and “sound”.\n\nThis toy one has eight colored bars, a scale from C up to the next C. Tap a bar and the mallet swings over and strikes it, and the bar jumps and plays its note, so you can play a tune. Tap the mallet, a wheel or the ends of the frame instead, and it plays the whole scale.",
   },
   "grand-piano": {
-    howTo: "Tap a key to play it. Tap anywhere else for a song; the song bar plays it all.",
+    howTo:
+      "Tap or drag along the keys to play them. Tap elsewhere for a song; the song bar plays it all.",
     about:
       "A grand piano is a keyboard instrument whose strings lie flat under a lid shaped like a wing. Each of its 88 keys throws a felt hammer up against its strings, and a damper lifts off them so the note rings until the key comes up. The right pedal lifts every damper at once. Bartolomeo Cristofori built the first pianos in Italy around 1700.\n\nTap a key and it dips, its hammer strikes and its damper lifts. Tap anywhere else for the opening of Für Elise, or pick Clair de lune, Gymnopédie No. 1 or Ode to Joy in the Toy tab. The song bar plays, pauses, loops and slows a song, and you can open a MIDI file of your own or paste a tune in ABC notation.",
   },
   "upright-piano": {
-    howTo: "Tap a key to play it. Tap anywhere else for a ragtime; the song bar plays it all.",
+    howTo:
+      "Tap or drag along the keys to play them. Tap elsewhere for a ragtime; the song bar plays it all.",
     about:
       "An upright piano stands its strings on end, so a full piano fits against a wall. Its hammers swing forward onto the strings instead of flying up, and a spring brings them back. Uprights filled homes, schools and dance halls, and a slightly out-of-tune one gives the bright, jangly honky-tonk sound of ragtime.\n\nThis one has its upper front panel off, so you see the row of hammers, the dampers above them and the strings behind. Tap a key and its hammer strikes. Tap anywhere else for the opening of The Entertainer, a rag Scott Joplin published in 1902. Open a MIDI file of your own, or paste a tune in ABC notation, in the Toy tab.",
   },
   harpsichord: {
-    howTo: "Tap a key to pluck its string. Tap anywhere else for a minuet.",
+    howTo: "Tap a key to pluck its string, or drag along the keys. Tap anywhere else for a minuet.",
     about:
       "A harpsichord plucks its strings instead of striking them. Each key lifts a thin wooden jack, and a small quill on the jack catches the string on the way up. Because a pluck sounds the same however hard you press, players shape their music by timing. Harpsichords were the main keyboard of the 1600s and 1700s.\n\nThis one is painted in the French style, with black naturals and pale sharps. Tap a key and its jack rises, plucks, and the string quivers until the jack's felt stops it. Tap anywhere else for the Minuet in G from the notebook Bach kept for his wife, Anna Magdalena. Open a MIDI file of your own in the Toy tab.",
   },
   "electronic-keyboard": {
     howTo:
-      "Tap a key to play it, or a colored button to change the voice. Tap elsewhere for a song.",
+      "Tap or drag along the keys; a colored button changes the voice. Tap elsewhere for a song.",
     about:
       "An electronic keyboard makes its sounds with circuits instead of strings. It can sound like a piano, an organ, a synthesizer or vibes, and many can play a drum beat along with you. Learning keyboards light up the key to play next.\n\nThis one has 61 keys. The four colored buttons pick its voice: piano, organ, synth and vibes. Tap anywhere else and a song starts: each key lights up just before its note, the little screen scrolls the title and the drum pads flash with the beat. Pick Ode to Joy, Twinkle, Twinkle, Little Star or Frère Jacques in the Toy tab, or open a MIDI file of your own.",
   },
   "toy-piano": {
-    howTo: "Tap a key to play its note, or tap the case to play Twinkle, Twinkle.",
+    howTo: "Tap or drag along the keys to play them, or tap the case to play Twinkle, Twinkle.",
     about:
       "A toy piano is a small piano with no strings. Each key works a tiny hammer, and the hammer strikes a metal rod held at one end, which rings like a little bell. Shorter rods sound higher, so the rods get shorter from left to right. Toy pianos were first made in the 1800s, and the composer John Cage wrote a whole suite for one in 1948.\n\nThis one has 18 keys, from C up to the F an octave and a half higher, and its back and lid are open so you can see inside. Tap a key and its hammer swings up and strikes its rod, which shivers as the note rings. Tap anywhere else to hear “Twinkle, Twinkle, Little Star.” Pick its color in the Toy tab.",
   },

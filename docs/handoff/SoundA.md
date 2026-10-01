@@ -141,9 +141,46 @@ at the same time; leave their files alone. The laptop is locked.
   docs/OPERATING.md, docs/PACKS.md, docs/WORKSTREAMS.md and docs/handoff/history.md (lessons from
   earlier lanes).
 - Your handoff file: create it. Start it with this brief, word for word, under "## Brief", then keep
-  "## State
+  "## State", "## Notes", "## Known issues" and "## For the Operator" current. Note your model at
+  the top of "## State" (the blog post compares the two models).
+- Shared lists: edit only your own entries in src/toys.js, src/toy-sounds.js, src/toy-help.js (a
+  how-to line and an About text per toy, following docs/handoff/Help.md), tools/toy-plan.json,
+  CREDITS.md and tools/assets.json. Regenerate docs/TOY-PLAN.md with `node tools/toy-plan.mjs`;
+  never merge it by hand.
+- Never edit tests/taps.spec.mjs. Your own tests go in tests/<prefix>.spec.mjs. If a finished lane's
+  test breaks because of a count or a list your work changes, don't edit it: say which test and why
+  in your message, and the Operator fixes it.
+- Assets: CC0, CC BY or public domain only, checked on the live source page and credited
+  (CREDITS.md, tools/assets.json and the toy's in-app credit). Never BY-SA or NC. No logos, brand
+  names or insignia.
+- Review: the owner reviews sounds on the Sound Board, not the Effect review page; post clips there
+  only if an effect changes. Don't republish either page, and never write to "verdicts".
+- Push your work in progress to your branch about every hour, so it isn't only in your container,
+  and open your draft PR early. Many lanes run at once now, so main moves often: merge it into your
+  branch before each push (never rebase a pushed branch) and keep both sides of any conflict.
+- Before every push, follow "Before every push" in CLAUDE.md: the full Playwright suite
+  (SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium npx playwright test), prettier,
+  `node tools/us-english.mjs --diff`, and your own screenshots only if a Toy tab changed. Then put
+  back the standard screenshots (`node tools/upkeep.mjs --restore-shots`) and any other lane's
+  screenshots your branch didn't change.
+- PR: a draft PR against main with the five sections (Summary, Verification, Deviations, Known
+  issues, What was cut), and the model that built it in the Summary. When main moves, merge it into
+  your branch.
+- While you work, keep a check-in scheduled about an hour out (send_later), so a container restart
+  can't stall you. Stop the check-ins once your PR is merged or closed.
+- Finish every working turn with a short final message that starts with "READY:" (PR link, test
+  results, the list of changed toys, anything for the Operator), "WORKING:" (what's left), or
+  "BLOCKED:" (exactly what you need).
+
+## State
 
 - Model: Opus 5.5 (claude-opus-5-5), default effort.
+- Merged (October 1, 2026): the engine PR #141 and the lane PR #142 (main ae1e5c2). Integrator 1 ran
+  #142 at 615/616; its one failure came from Sound B's samples, not this lane. The lane's scope is
+  done.
+- Since the lane PR opened: 57 CC0 sample files in all (the 34 above plus the grand piano's 23
+  notes); an offline render that didn't load its samples plays each layer's synth fallback (a fix
+  for `smoke.spec`'s every-toy sound test).
 - Engine PR (`claude/lane-sound-a-engine`): the `sample` voice in `src/voices.js` (marked block
   "Recorded samples (lane Sound A)"), the first-play wait in `src/sound.js`, sample credits in the
   About tab (`src/sound-credits.js`, `renderCredits` in `src/app.js`), samples carried inside the
