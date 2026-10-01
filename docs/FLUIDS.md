@@ -250,7 +250,11 @@ breaks into drops at its rim, which fall back; the film rushes back over the dry
 a small central mound, then settles flat in about a second and a half. The walls have low friction
 and the water no cohesion, or the crater stays dry for seconds. Before this, the ball started above
 the GPU grid's top and arrived flattened; the grid now always contains the ball's start (`drop`). On
-the low tier the film is two particles deep and the crater takes about a second to close.
+the low tier the film is two particles deep and the crater takes about a second to close. It is
+drawn barely stretched along its motion and with larger sprites (the recipe's `stretch` and
+`sprite`), so the ball and the drops stay round, and thin liquid in flight shows the bright room
+above it as a real drop does (`drops`). A second wooden layer under the basin fills gaps between the
+board's splats that showed through the clear water.
 
 ### A real liquid surface
 
