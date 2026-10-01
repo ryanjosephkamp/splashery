@@ -35,6 +35,15 @@
         <button type="button" data-slow="0.25" aria-pressed="false">¼×</button>
         <button type="button" data-slow="0.1" aria-pressed="false">⅒×</button>
       </div>
+      <button
+        type="button"
+        class="lab-tune-toggle"
+        id="tune-toggle"
+        aria-pressed="false"
+        aria-controls="tune"
+      >
+        Tune
+      </button>
       <label class="lab-speed"
         >Speed <input id="speed" type="range" min="0" max="3.2" step="0.05" value="1.3" />
         <output id="speed-out">1.3 m/s</output></label
@@ -49,6 +58,33 @@
     >
       <canvas id="chart" width="360" height="560"></canvas>
       <p class="lab-note" id="lab-note"></p>
+      <section class="lab-tune" id="tune" hidden aria-labelledby="tune-title">
+        <h2 id="tune-title">Tune: <span id="tune-gait">Walking</span></h2>
+        <p class="tune-help">
+          Each control changes the measured gait; the chart keeps the measured people in blue.
+          Stand, Walk and Run each have their own settings. They stay in this browser; Copy or Save
+          sends them on.
+        </p>
+        <div id="tune-fields"></div>
+        <p class="tune-help" id="tune-stride"></p>
+        <h3>The person</h3>
+        <div id="tune-look"></div>
+        <div class="tune-buttons">
+          <button type="button" id="tune-reset">Reset this gait</button>
+          <button type="button" id="tune-reset-all">Reset all</button>
+          <button type="button" id="tune-copy">Copy</button>
+          <button type="button" id="tune-save">Save file</button>
+          <label class="tune-file"
+            >Open file<input id="tune-open" type="file" accept=".json,application/json"
+          /></label>
+        </div>
+        <label class="tune-paste" for="tune-text">Or paste settings here</label>
+        <textarea id="tune-text" rows="3" spellcheck="false"></textarea>
+        <div class="tune-buttons">
+          <button type="button" id="tune-load">Load pasted settings</button>
+        </div>
+        <p class="tune-help" id="tune-msg" role="status"></p>
+      </section>
     </aside>
 
     <section id="labs-off" class="start" hidden aria-labelledby="labs-off-title">

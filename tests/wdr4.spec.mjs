@@ -199,6 +199,92 @@ test.describe("worlds r4 (the character lab)", () => {
     expect(await page.evaluate(() => window.__lab.state().anim)).toBe("Idle");
   });
 
+  test("the tuning controls change the gait, keep the feet down, and export and load back", async ({
+    page,
+  }) => {
+    await open(page, "&gait=walk&tuning=default");
+    const ticks = async (n) => {
+      for (let i = 0; i < n; i++) await page.evaluate(() => window.__lab.tick(1 / 60));
+    };
+    const lowest = () =>
+      page.evaluate(() => {
+        const m = window.__lab.lab.model;
+        return Math.min(...["foot_l", "foot_r", "ball_l", "ball_r"].map((n) => m.findByName(n).getPosition().dot(m.up))); // prettier-ignore
+      });
+    const trunk = () =>
+      page.evaluate(() => {
+        const m = window.__lab.lab.model;
+        const d = m.findByName("spine_03").getWorldTransform().getY().normalize();
+        return (Math.atan2(d.dot(m.forward.clone().mulScalar(-1)), d.dot(m.up)) * 180) / Math.PI;
+      });
+    await ticks(70);
+    // The defaults are the measured gait: the tuner does nothing.
+    expect(await page.evaluate(() => window.__lab.lab.tuner.idle)).toBe(true);
+    const before = await trunk();
+    const knee0 = await page.evaluate(() => window.__lab.curves().knee);
+    // The controls: one per setting, for the gait on show, and the look.
+    await page.locator("#tune-toggle").click();
+    await expect(page.locator("#tune")).toBeVisible();
+    expect(await page.locator("#tune-fields input[type=range]").count()).toBe(16);
+    expect(await page.locator("#tune-look input").count()).toBe(4);
+    // A slider: the torso leans further.
+    await page.locator("#t-walk-lean").fill("13");
+    await ticks(2);
+    expect((await trunk()) - before).toBeGreaterThan(8);
+    // Bigger knee swing: a bigger knee range, and the feet stay on the ground.
+    await page.evaluate(() => {
+      const t = window.__lab.tuning();
+      t.walk.knee.scale = 1.3;
+      window.__lab.setTuning(t);
+    });
+    let low = [Infinity, -Infinity];
+    for (let i = 0; i < 70; i++) {
+      await ticks(1);
+      const y = await lowest();
+      low = [Math.min(low[0], y), Math.max(low[1], y)];
+    }
+    expect(low[0]).toBeGreaterThan(-0.02);
+    expect(low[1]).toBeLessThan(0.09);
+    const knee1 = await page.evaluate(() => window.__lab.curves().knee);
+    expect(span(knee1)).toBeGreaterThan(span(knee0) * 1.15);
+    // Export, then load back: the same settings; out-of-range values are
+    // clamped; Reset all goes back to the measured gait.
+    const text = await page.evaluate(() => window.__lab.exportText());
+    const json = JSON.parse(text);
+    expect(json.format).toBe("splashery-gait");
+    expect(json.version).toBe(1);
+    expect(json.walk.lean).toBe(13);
+    expect(json.walk.knee.scale).toBe(1.3);
+    await page.locator("#tune-reset-all").click();
+    expect(await page.evaluate(() => window.__lab.tuning().walk.lean)).toBe(3);
+    await page.locator("#tune-text").fill(JSON.stringify({ ...json, run: { lean: 99 } }));
+    await page.locator("#tune-load").click();
+    const back = await page.evaluate(() => window.__lab.tuning());
+    expect(back.walk.lean).toBe(13);
+    expect(back.run.lean).toBe(25);
+    await expect(page.locator("#tune-msg")).toContainText("Loaded");
+  });
+
+  test("Worlds' tuning file is the measured gait, in the lab's format", () => {
+    const t = JSON.parse(fs.readFileSync("assets/worlds/character/tuning.json", "utf8"));
+    expect(t.format).toBe("splashery-gait");
+    expect(t.version).toBe(1);
+    const base = META.gait.base;
+    for (const [g, b] of [
+      ["stand", base.idle],
+      ["walk", base.walk],
+      ["run", base.run],
+    ]) {
+      expect(t[g].lean).toBe(b.lean);
+      expect(t[g].shoulder.center).toBe(b.shoulder[0]);
+      expect(t[g].elbow.center).toBe(b.elbow[0]);
+      expect(t[g].armOut).toBe(b.abduct);
+    }
+    for (const g of ["walk", "run"])
+      for (const k of ["bob", "sway", "stride"]) expect(t[g][k]).toBe(1);
+    expect(t.look.height).toBe(1.74);
+  });
+
   test("screenshots at 390x844 and 1440x900", async ({ browser }) => {
     for (const [w, h] of [
       [390, 844],
@@ -208,6 +294,10 @@ test.describe("worlds r4 (the character lab)", () => {
       await open(page, "&gait=walk");
       for (let i = 0; i < 40; i++) await page.evaluate(() => window.__lab.tick(1 / 60));
       await page.screenshot({ path: `tests/screenshots/wdr4-lab-${w}x${h}.png`, timeout: 180_000 });
+      // With the tuning controls open.
+      await page.locator("#tune-toggle").click();
+      await page.evaluate(() => window.__lab.tick(1 / 60));
+      await page.screenshot({ path: `tests/screenshots/wdr4-lab-tune-${w}x${h}.png`, timeout: 180_000 }); // prettier-ignore
       await page.close();
     }
   });

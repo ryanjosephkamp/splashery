@@ -29,7 +29,23 @@ a character lab, and a character who moves like a person":
   reference), then the character on the island (walk and run on the beach, the boulder garden) as
   `-r4` cards, each naming the r3 card it replaces in its note.
 
-## r4 state
+### Brief (r4, part 2: tuning)
+
+(The Operator's message of October 1, 2026, 19:20 UTC.) The owner marked the three lab cards "fix",
+but his note is a yes: "This is fantastic. The lab seems excellent to me. We could expand the
+characters (more customizable, etc.) and make them a bit sharper, but this seems nearly perfect. I'd
+like to be able to control all of the movement parameters (hip, knee, ankle, shoulder, elbow, maybe
+even more?) in the lab, find a config that looks the best, and then export a JSON or something to
+give you (or save/upload it somewhere and have you use it) to implement in the Worlds, etc."
+
+1. Every gait parameter as a lab control (per joint, torso lean, pelvis sway and bob, stride and
+   cadence, arm swing; stand, walk and run separately), Reset to the measured reference, the
+   reference overlay kept on.
+2. Export and import as a small JSON (Copy, file save, paste or file open; files stay on the
+   device). Worlds reads that config. The format in docs/WORLDS.md and here.
+3. A bit sharper, and a first step toward a more customizable character (proportions, clothing
+   colors), as far as fits this round.
+4. Post the new lab clip, controls visible, as `wd-lab-controls-r5` on page 2.
 
 Model: Opus 5.5 (default effort). Branch `claude/lane-worlds-r4`.
 
@@ -56,8 +72,25 @@ Model: Opus 5.5 (default effort). Branch `claude/lane-worlds-r4`.
   `wd-character-walk-r3` and `wd-character-r3`) and `wd-props-r4` (replaces `wd-props-r3`), from
   `tools/world-clip.mjs`'s `beach-r4` and `props-r4` scenes. `wd-character-splats-r3` was not
   redone: the splat person plays the same clips, so it moves the same way now.
-- `tests/wdr4.spec.mjs`: 7 tests (the reference and credits, the built clips against it, the lab
-  behind the switch, its live curves, hands by the thighs, controls, screenshots `wdr4-lab-*`).
+- **Tuning** (part 2; docs/WORLDS.md, "Tuning the gait"): `src/worlds/gait-tuner.js` changes the
+  baked gait on the bones every frame (legs: swing × scale + offset about the measured range's
+  middle; arms: shoulder and elbow middle and swing, arms out; torso lean, head tilt; pelvis bob and
+  sway ×; stride ×, so cadence = speed ÷ stride; standing: arms, torso, hip and knee offsets), then
+  puts the lowest foot back on the ground. Defaults = the measured gait = no change. The lab's
+  **Tune** panel has a slider per setting (16 for walk and run, 7 for stand) and the look (height
+  1.5–2.0 m, shirt, jeans and shoe colors), Reset this gait and Reset all, Copy, Save file, Open
+  file and paste. The format is
+  `{ "format": "splashery-gait", "version": 1, look, stand, walk, run }`. Worlds reads
+  `assets/worlds/character/tuning.json` (shipped as the measured gait): to use the owner's settings,
+  replace that file with his export. It takes the gait, height and jeans and shoe tints; each world
+  keeps its shirt. `?tuning=0` ignores it. `human.json` now records the baked arm and torso values
+  (`gait.base`), which the tuner starts from.
+- **Sharper:** the lab loads the detailed body (2K) on every tier; textures are filtered
+  anisotropically (8×) in the lab and the world.
+- `tests/wdr4.spec.mjs`: 9 tests (r4's 7, the tuning controls with export and import, and the
+  shipped tuning file). Before part 2: 7 tests (the reference and credits, the built clips against
+  it, the lab behind the switch, its live curves, hands by the thighs, controls, screenshots
+  `wdr4-lab-*`).
 - **Fixed on the way:** the r3 clips' keys started at frame 1, so every loop held its first pose for
   a frame and lasted 1.033 s (a small hitch each stride, and the feet slid 3% more). Keys now start
   at 0; each loop is exactly 1 s. The lab found it: its measured curves drifted against the build's.

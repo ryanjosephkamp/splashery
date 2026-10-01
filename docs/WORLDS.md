@@ -516,8 +516,9 @@ with it. A chart beside the person draws, for one stride of the left leg and arm
 ankle, shoulder and elbow angles measured from its bones as it moves (red) over measured people
 (blue: the mean dashed, one standard deviation as a band), and a note gives its arm ranges and the
 pelvis's bob and sway beside the published ones. Parameters: `?gait=stand|walk|run`, `?speed=<m/s>`,
-`?slow=`, `?view=side|front|three`, `?level=low|high`, `?chart=0` and `?clock=manual` (tests and
-clips; `window.__lab`).
+`?slow=`, `?view=side|front|three`, `?level=low|high` (high by default), `?chart=0`,
+`?tuning=default` (start from the measured gait) and `?clock=manual` (tests and clips;
+`window.__lab`).
 
 **The reference** (`assets/worlds/lab/gait-reference.json`, built by `tools/wd-gait-refs.py`; 4 KB
 of numbers; both datasets CC BY 4.0, checked on their figshare pages on October 1, 2026, credited in
@@ -551,6 +552,84 @@ The angles, the same in the tool and in the lab: each limb's angle from straight
 view, positive forward; hip = thigh angle + the pelvis tilt the reference is measured against (10°
 walking, 15° running); knee = thigh − shank; ankle = foot − shank − the foot's rest angle; shoulder
 = upper arm − trunk lean; elbow = forearm − upper arm.
+
+### Tuning the gait (`gait-tuner.js`, `assets/worlds/character/tuning.json`)
+
+The lab's **Tune** button opens a control for every gait setting, for the gait on show (Stand, Walk
+and Run each have their own), and for the person's look. The chart keeps the measured people in
+blue, so a change shows against them. The settings stay in the browser (local storage) until **Reset
+this gait** or **Reset all** (back to the measured gait). **Copy** puts them on the clipboard and
+**Save file** downloads `splashery-gait.json`; **Open file** or a paste loads them back. Files stay
+on the device.
+
+Each setting changes the baked, measured motion; the defaults are that motion exactly, and then the
+tuner does nothing. It runs on the bones every frame after the clips play (bones only: every part
+turns as one solid piece):
+
+- **Legs** (walk, run): `hip`, `knee` and `ankle`, each `{ "scale", "offset" }`: the joint's swing
+  about the middle of its measured range, times `scale` (1 = as measured), plus `offset` degrees.
+  The knee never bends backward.
+- **Arms**: `shoulder` `{ "center", "swing" }` (degrees: the middle of the arm's swing, forward
+  positive, and how far it swings from there), `elbow` `{ "center", "swing" }` (the bend and how
+  much it changes), and `armOut` (degrees out from the body). The swing keeps the measured timing,
+  opposite the legs.
+- **Torso and head**: `lean` (degrees forward) and `head` (degrees, chin down).
+- **Pelvis**: `bob` and `sway`, times the measured up-and-down and side-to-side motion.
+- **Stride**: `stride`, times the measured stride. The clips play at speed ÷ stride, so at a set
+  speed the cadence follows (steps a minute = 120 × speed ÷ stride); the hip swing scales the stride
+  too, so the feet stay planted. The lab shows both under the controls.
+- **Standing** (`stand`): `lean`, `head`, `shoulder.center`, `elbow.center`, `armOut`, and
+  `hip.offset` and `knee.offset`.
+- After the limbs move, the body moves up or down so the lowest foot stays where the measured pose
+  had it: the feet stay on the ground.
+
+**The person** (`look`): `height` in meters (1.5–2.0; the world's character is 1.74), and `shirt`,
+`pants` and `shoes` colors (`"#rrggbb"`; the jeans and shoes take a tint over their textures, so
+white leaves them as they are).
+
+The file (version 1; every number is clamped to its control's range when loaded, and missing keys
+take the measured values):
+
+```json
+{
+  "format": "splashery-gait",
+  "version": 1,
+  "look": { "height": 1.74, "shirt": "#e0533d", "pants": "#ffffff", "shoes": "#ffffff" },
+  "stand": {
+    "lean": 0,
+    "head": 0,
+    "shoulder": { "center": -3 },
+    "elbow": { "center": 12 },
+    "armOut": 8,
+    "hip": { "offset": 0 },
+    "knee": { "offset": 0 }
+  },
+  "walk": {
+    "hip": { "scale": 1, "offset": 0 },
+    "knee": { "scale": 1, "offset": 0 },
+    "ankle": { "scale": 1, "offset": 0 },
+    "shoulder": { "center": -5, "swing": 22 },
+    "elbow": { "center": 22, "swing": 15 },
+    "armOut": 9,
+    "lean": 3,
+    "head": 0,
+    "bob": 1,
+    "sway": 1,
+    "stride": 1
+  },
+  "run": { "…": "as walk; measured: shoulder -22 and 28, elbow 85 and 16, armOut 12, lean 8" }
+}
+```
+
+**In Worlds**: the world reads `assets/worlds/character/tuning.json` (the measured gait as shipped)
+for the realistic person in hybrid mode. To use settings from the lab, replace that file with the
+exported one. The world takes the gait, the height and the jeans' and shoes' tints; each world keeps
+its own shirt color (`character.shirt` in the world file). With the measured gait the file changes
+nothing and the gait reference isn't loaded. `?tuning=0` ignores the file.
+
+**Sharper**: the lab shows the detailed body (`human-high.glb`, 2K textures) on every tier, and the
+person's textures are filtered anisotropically (up to 8×) in the lab and the world, so the cloth and
+skin stay crisp seen at a slant.
 
 ### Model props (`mesh-props.js`)
 

@@ -1219,7 +1219,13 @@ def main():
             "runSpeed": RUN_SPEED,
             "clips": {c["name"]: {"duration": c["duration"], "stride": c["stride"], "measured": c.get("measured") or None} for c in levels["high"]["clips"]},
             # How the character lab measures the angles (worlds/lab/, src/worlds/lab.js).
-            "gait": {"tilt": {k: GAIT[k]["tilt"] for k in ("walk", "run")}, "foot0": levels["high"]["clips"][0]["foot0"]},
+            # The baked arm and torso settings, which the lab's tuner changes
+            # (src/worlds/gait-tuner.js).
+            "gait": {
+                "tilt": {k: GAIT[k]["tilt"] for k in ("walk", "run")},
+                "foot0": levels["high"]["clips"][0]["foot0"],
+                "base": {k: {f: GAIT[k][f] for f in ("lean", "shoulder", "elbow", "abduct")} for k in ("walk", "run", "idle")},
+            },
             "levels": {lv: levels[lv]["level"] for lv in LEVELS},
             "credits": [
                 {"what": "Body, face, skin, eyes, eyebrows, eyelashes, hair, T-shirt, jeans and shoes", "name": "MakeHuman system assets", "authors": ["The MakeHuman team"], "page": "http://files.makehumancommunity.org/asset_packs/makehuman_system_assets/", "license": "CC0 1.0"},

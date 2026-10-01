@@ -16,7 +16,8 @@
 // ?view=side|front|three  ?profile=low|mid|high|max  ?clock=manual
 
 import * as pc from "../pc.js";
-import { loadHuman, stepMeshCharacter } from "./mesh-character.js";
+import { loadHuman, stepMeshCharacter, tuneHuman } from "./mesh-character.js";
+import { LOOK_FIELDS, TUNING_FIELDS, defaultTuning, normalizeTuning, tuningJSON } from "./gait-tuner.js"; // prettier-ignore
 import { useHDRI } from "./hybrid.js";
 import { detectTier } from "./tiers.js";
 
@@ -25,6 +26,8 @@ const $ = (id) => document.getElementById(id);
 const ASSETS = new URL("../../assets/worlds/", import.meta.url);
 const DEG = 180 / Math.PI;
 const BINS = 51;
+const TUNING_KEY = "splashery.lab.tuning";
+const fmt = (v, unit) => (unit === "×" ? `${Number(v).toFixed(2)}×` : unit === "m" ? `${Number(v).toFixed(2)} m` : `${Number(v).toFixed(1)}°`); // prettier-ignore
 
 function labsOn() {
   const v = params.get("labs");
@@ -132,7 +135,8 @@ class Lab {
     this.beltOffset = 0;
 
     // The person (the tier's level).
-    const { model, meta } = await loadHuman(app, { tier: params.get("level") || this.tier, look: { shirt: "#e0533d" } }); // prettier-ignore
+    // The detailed body (2K textures): the lab shows one person, close up.
+    const { model, meta } = await loadHuman(app, { tier: params.get("level") || "high", look: { shirt: "#e0533d" } }); // prettier-ignore
     const root = new pc.Entity("character");
     root.addChild(model);
     app.root.addChild(root);
@@ -140,6 +144,15 @@ class Lab {
     this.model = model;
     this.meta = meta;
     this.ref = await fetch(new URL("lab/gait-reference.json", ASSETS)).then((r) => r.json());
+    // The gait tuning: the last settings in this browser, else the measured
+    // gait (docs/WORLDS.md, "Tuning the gait"). ?tuning=default starts fresh.
+    let saved = null;
+    try {
+      saved = JSON.parse(localStorage.getItem(TUNING_KEY) || "null");
+    } catch {}
+    this.tuning = normalizeTuning(params.get("tuning") === "default" ? null : saved, meta);
+    this.tuner = tuneHuman(model, this.ref, this.tuning);
+    this.applyLook();
     this.gaitMeta = meta.gait || { tilt: { walk: 10, run: 15 }, foot0: 0 };
     this.bones = {};
     for (const n of ["pelvis", "spine_03", "neck_01", "thigh_l", "calf_l", "foot_l", "ball_l", "upperarm_l", "lowerarm_l", "hand_l"]) // prettier-ignore
@@ -181,6 +194,7 @@ class Lab {
   }
 
   bindUi() {
+    this.buildTune();
     for (const b of document.querySelectorAll("[data-gait]")) b.addEventListener("click", () => this.setGait(b.dataset.gait)); // prettier-ignore
     for (const b of document.querySelectorAll("[data-view]")) b.addEventListener("click", () => this.setView(b.dataset.view)); // prettier-ignore
     for (const b of document.querySelectorAll("[data-slow]")) b.addEventListener("click", () => this.setSlow(Number(b.dataset.slow))); // prettier-ignore
@@ -205,6 +219,8 @@ class Lab {
     const m = this.meta;
     const g = this.state.speed < 0.1 ? "stand" : this.state.speed < (m.walkSpeed + m.runSpeed) / 2 ? "walk" : "run"; // prettier-ignore
     if (g !== this.curveGait) this.resetCurves(g);
+    if (this.tuneShown && this.tuneShown !== this.tuneGait()) this.renderTune();
+    this.writeTuneNote();
     this.pressed("gait", g);
     this.state.gait = g;
   }
@@ -227,7 +243,8 @@ class Lab {
   frame() {
     const narrow = matchMedia("(max-width: 600px)").matches;
     const c = $("chart");
-    const ch = narrow ? 300 : 560;
+    const tuning = document.body.classList.contains("tuning");
+    const ch = narrow ? (tuning ? 230 : 300) : 560;
     if (c.height !== ch) c.height = ch;
     const W = innerWidth;
     const H = innerHeight;
@@ -237,15 +254,18 @@ class Lab {
     const room = { left: 0, top: bar + 8, right: W, bottom: H };
     if (chart && narrow) room.bottom = chart.top - 4;
     else if (chart) room.right = chart.left - 4;
+    if (tuning && !narrow) room.left = $("tune").getBoundingClientRect().right + 4;
+    // The person's height and a little more; at most 1.5 m of stride across.
+    const tall = (this.tuning?.look.height || 1.74) * 1.12 + 0.12;
     const ppm = Math.max(
       40,
-      Math.min((room.bottom - room.top) / 2.05, (room.right - room.left) / 1.5),
+      Math.min((room.bottom - room.top) / tall, (room.right - room.left) / 1.5),
     );
     const tan = Math.tan(this.camera.camera.fov / 2 / DEG);
     const d = H / ppm / (2 * tan);
     const xc = (room.left + room.right) / 2;
     const yc = (room.top + room.bottom) / 2;
-    const y = 0.9 + (yc - H / 2) / ppm;
+    const y = (tall - 0.12) / 2 + (yc - H / 2) / ppm;
     const off = (W / 2 - xc) / ppm;
     const a = { side: 90, front: 0, three: 40 }[this.state.view] / DEG;
     // The camera's right, seen from where it stands.
@@ -370,8 +390,10 @@ class Lab {
       g.font = "600 13px system-ui, sans-serif";
       g.fillText(label, 34, y0 - 4);
       g.font = "11px system-ui, sans-serif";
-      g.fillText(`${hi}°`, 2, y0 + 9);
-      g.fillText(`${lo}°`, 2, y0 + h);
+      if (h >= 40) {
+        g.fillText(`${hi}°`, 2, y0 + 9);
+        g.fillText(`${lo}°`, 2, y0 + h);
+      }
       const r = ref?.joints?.[key];
       if (r) {
         g.fillStyle = "rgba(30,120,220,0.18)";
@@ -431,6 +453,155 @@ class Lab {
     }
   }
 
+  // ---- Tuning (docs/WORLDS.md, "Tuning the gait") -------------------------
+
+  // The controls for the gait on show, the person's look, and the file
+  // buttons, built from gait-tuner.js's field lists.
+  buildTune() {
+    $("tune-toggle").addEventListener("click", () => {
+      const open = $("tune").hidden;
+      $("tune").hidden = !open;
+      $("tune-toggle").setAttribute("aria-pressed", String(open));
+      document.body.classList.toggle("tuning", open);
+      this.frame();
+    });
+    $("tune-reset").addEventListener("click", () => {
+      const g = this.tuneGait();
+      this.tuning[g] = defaultTuning(this.meta)[g];
+      this.tuningChanged();
+      this.say(`${$("tune-gait").textContent}: back to the measured gait.`);
+    });
+    $("tune-reset-all").addEventListener("click", () => {
+      this.loadTuning(null);
+      this.say("All back to the measured gait.");
+    });
+    $("tune-copy").addEventListener("click", async () => {
+      const text = tuningJSON(this.tuning);
+      try {
+        await navigator.clipboard.writeText(text);
+        this.say("Copied the settings.");
+      } catch {
+        $("tune-text").value = text;
+        $("tune-text").select();
+        this.say("Copy the settings from the box below.");
+      }
+    });
+    $("tune-save").addEventListener("click", () => {
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(new Blob([tuningJSON(this.tuning)], { type: "application/json" })); // prettier-ignore
+      a.download = "splashery-gait.json";
+      a.click();
+      setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+    });
+    $("tune-open").addEventListener("change", async (e) => {
+      const f = e.target.files?.[0];
+      if (f) this.loadText(await f.text());
+      e.target.value = "";
+    });
+    $("tune-load").addEventListener("click", () => this.loadText($("tune-text").value));
+    this.renderTune();
+  }
+
+  tuneGait() {
+    return this.curveGait === "run" ? "run" : this.curveGait === "walk" ? "walk" : "stand";
+  }
+
+  renderTune() {
+    const g = this.tuneGait();
+    this.tuneShown = g;
+    $("tune-gait").textContent = { stand: "Standing", walk: "Walking", run: "Running" }[g];
+    const rows = (fields, src, prefix) =>
+      fields
+        .map(([path, label, unit, lo, hi, step]) => {
+          const id = `t-${prefix}-${path.replace(".", "-")}`;
+          const v = path.split(".").reduce((o, k) => o[k], src);
+          if (unit === "color") return `<label class="tune-row" for="${id}"><span>${label}</span><input id="${id}" type="color" value="${v}" data-path="${prefix}:${path}" /></label>`; // prettier-ignore
+          return `<label class="tune-row" for="${id}"><span>${label}</span><input id="${id}" type="range" min="${lo}" max="${hi}" step="${step}" value="${v}" data-path="${prefix}:${path}" /><output>${fmt(v, unit)}</output></label>`; // prettier-ignore
+        })
+        .join("");
+    $("tune-fields").innerHTML = rows(TUNING_FIELDS[g], this.tuning[g], g);
+    $("tune-look").innerHTML = rows(LOOK_FIELDS, this.tuning.look, "look");
+    for (const input of document.querySelectorAll("#tune input[data-path]"))
+      input.addEventListener("input", () => {
+        const [where, path] = input.dataset.path.split(":");
+        const color = input.type === "color";
+        const v = color ? input.value : Number(input.value);
+        const ks = path.split(".");
+        const o = ks.slice(0, -1).reduce((t, k) => t[k], this.tuning[where]);
+        o[ks.at(-1)] = v;
+        const out = input.parentElement.querySelector("output");
+        const fields = where === "look" ? LOOK_FIELDS : TUNING_FIELDS[where];
+        if (out) out.textContent = fmt(v, fields.find((f) => f[0] === path)[2]);
+        this.tuningChanged(false);
+      });
+    this.writeTuneNote();
+  }
+
+  tuningChanged(rerender = true) {
+    this.tuner.set(this.tuning);
+    this.applyLook();
+    this.frame();
+    try {
+      localStorage.setItem(TUNING_KEY, JSON.stringify(this.tuning));
+    } catch {}
+    if (rerender) this.renderTune();
+    this.writeTuneNote();
+  }
+
+  loadText(text) {
+    try {
+      this.loadTuning(JSON.parse(text));
+      this.say("Loaded the settings.");
+    } catch {
+      this.say("That isn't a settings file (JSON).");
+    }
+  }
+
+  loadTuning(json) {
+    this.tuning = normalizeTuning(json, this.meta);
+    this.tuningChanged();
+  }
+
+  say(text) {
+    $("tune-msg").textContent = text;
+  }
+
+  // The person's height and colors, live.
+  applyLook() {
+    const look = this.tuning.look;
+    const info = this.model.wdCharacter;
+    const s = look.height / this.meta.height;
+    this.model.setLocalScale(s, s, s);
+    info.scale = s;
+    const lin = (hex) => {
+      const n = parseInt(hex.slice(1), 16);
+      const c = (v) => ((v /= 255) <= 0.04045 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4);
+      return new pc.Color(c(n >> 16), c((n >> 8) & 255), c(n & 255));
+    };
+    const tint = { shirt: look.shirt, trousers: look.pants, shoes: look.shoes };
+    for (const r of this.model.findComponents("render"))
+      for (const mi of r.meshInstances)
+        if (tint[mi.material.name]) {
+          mi.material.diffuse = lin(tint[mi.material.name]);
+          mi.material.update();
+        }
+  }
+
+  // Stride and cadence at the speed shown, under the controls.
+  writeTuneNote() {
+    const el = $("tune-stride");
+    if (!el || !this.tuner) return;
+    const sp = this.state.speed;
+    if (sp < 0.1) {
+      el.textContent = "";
+      return;
+    }
+    const m = this.meta;
+    const w = Math.max(0, Math.min(1, (sp - m.walkSpeed) / (m.runSpeed - m.walkSpeed)));
+    const stride = ((1 - w) * m.clips.walk.stride + w * m.clips.run.stride) * this.model.wdCharacter.scale * this.tuner.strideScale(sp); // prettier-ignore
+    el.textContent = `Stride ${stride.toFixed(2)} m, ${Math.round((120 * sp) / stride)} steps a minute at ${sp.toFixed(2)} m/s.`; // prettier-ignore
+  }
+
   expose() {
     window.__lab = {
       lab: this,
@@ -452,6 +623,9 @@ class Lab {
         phase: this.phase,
         anim: this.model.anim.baseLayer.activeState,
       }),
+      tuning: () => JSON.parse(JSON.stringify(this.tuning)),
+      setTuning: (json) => this.loadTuning(json),
+      exportText: () => tuningJSON(this.tuning),
     };
   }
 }

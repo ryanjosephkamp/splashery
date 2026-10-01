@@ -381,7 +381,45 @@
       "walk": 10,
       "run": 15
     },
-    "foot0": 64.82
+    "foot0": 64.82,
+    "base": {
+      "walk": {
+        "lean": 3,
+        "shoulder": [
+          -5,
+          22
+        ],
+        "elbow": [
+          22,
+          15
+        ],
+        "abduct": 9
+      },
+      "run": {
+        "lean": 8,
+        "shoulder": [
+          -22,
+          28
+        ],
+        "elbow": [
+          85,
+          16
+        ],
+        "abduct": 12
+      },
+      "idle": {
+        "lean": 0,
+        "shoulder": [
+          -3,
+          0
+        ],
+        "elbow": [
+          12,
+          0
+        ],
+        "abduct": 8
+      }
+    }
   },
   "levels": {
     "high": {

@@ -1,0 +1,85 @@
+{
+  "format": "splashery-gait",
+  "version": 1,
+  "look": {
+    "height": 1.74,
+    "shirt": "#e0533d",
+    "pants": "#ffffff",
+    "shoes": "#ffffff"
+  },
+  "stand": {
+    "lean": 0,
+    "head": 0,
+    "shoulder": {
+      "center": -3,
+      "swing": 0
+    },
+    "elbow": {
+      "center": 12,
+      "swing": 0
+    },
+    "armOut": 8,
+    "hip": {
+      "offset": 0
+    },
+    "knee": {
+      "offset": 0
+    }
+  },
+  "walk": {
+    "lean": 3,
+    "head": 0,
+    "shoulder": {
+      "center": -5,
+      "swing": 22
+    },
+    "elbow": {
+      "center": 22,
+      "swing": 15
+    },
+    "armOut": 9,
+    "hip": {
+      "scale": 1,
+      "offset": 0
+    },
+    "knee": {
+      "scale": 1,
+      "offset": 0
+    },
+    "ankle": {
+      "scale": 1,
+      "offset": 0
+    },
+    "bob": 1,
+    "sway": 1,
+    "stride": 1
+  },
+  "run": {
+    "lean": 8,
+    "head": 0,
+    "shoulder": {
+      "center": -22,
+      "swing": 28
+    },
+    "elbow": {
+      "center": 85,
+      "swing": 16
+    },
+    "armOut": 12,
+    "hip": {
+      "scale": 1,
+      "offset": 0
+    },
+    "knee": {
+      "scale": 1,
+      "offset": 0
+    },
+    "ankle": {
+      "scale": 1,
+      "offset": 0
+    },
+    "bob": 1,
+    "sway": 1,
+    "stride": 1
+  }
+}

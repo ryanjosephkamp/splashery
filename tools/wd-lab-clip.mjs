@@ -6,7 +6,7 @@
 // however slow the renderer is. tools/wd-webm.mjs turns a GIF into WebM.
 //
 //   python3 -m http.server 4173 --bind 127.0.0.1 &
-//   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/wd-lab-clip.mjs <out-dir> [--size=390x844] [--fps=10] [--dpr=1.5] [--level=low] [--suffix=-r4] stand walk run
+//   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/wd-lab-clip.mjs <out-dir> [--size=390x844] [--fps=10] [--dpr=1.5] [--level=low] [--suffix=-r4] stand walk run controls
 //
 // Writes <out-dir>/wd-lab-<name><suffix>.gif. Each scene is a list of
 // steps: a gait, a view, a slow-motion factor and how long to hold them.
@@ -33,7 +33,9 @@ const dpr = Number(opt("dpr", 1.5));
 const level = opt("level", "low");
 const suffix = opt("suffix", "");
 
-// Each step: { gait, view, slow, s } (s: seconds of the clip).
+// Each step: { gait, view, slow, s } (s: seconds of the clip); the
+// "controls" scene also opens the tuning panel (open), moves a slider to a
+// value over the step (slide: [input id, value]) and resets (reset).
 const SCENES = {
   stand: [
     { gait: "stand", view: "front", slow: 1, s: 2 },
@@ -45,6 +47,16 @@ const SCENES = {
     { slow: 0.25, s: 3 },
     { view: "front", slow: 1, s: 2 },
     { view: "three", s: 2 },
+  ],
+  controls: [
+    { gait: "walk", view: "side", slow: 1, s: 1.5 },
+    { open: true, s: 1 },
+    { slide: ["t-walk-knee-scale", 1.4], s: 2 },
+    { slide: ["t-walk-hip-scale", 1.3], s: 2 },
+    { slide: ["t-walk-shoulder-swing", 40], s: 2 },
+    { slide: ["t-walk-lean", 14], s: 2 },
+    { s: 1.5 },
+    { reset: true, s: 2 },
   ],
   run: [
     { gait: "run", view: "side", slow: 1, s: 3 },
@@ -70,7 +82,7 @@ for (const name of names) {
   const page = await ctx.newPage();
   page.on("pageerror", (e) => console.error("page error:", e.message));
   await page.goto(
-    `${base}worlds/lab/?labs=1&renderer=webgl2&level=${level}&clock=manual&gait=${scene[0].gait}`,
+    `${base}worlds/lab/?labs=1&renderer=webgl2&level=${level}&clock=manual&tuning=default&gait=${scene[0].gait}`,
   );
   await page.waitForFunction(() => document.body.dataset.ready === "true", null, {
     timeout: 240_000,
@@ -83,7 +95,19 @@ for (const name of names) {
       (st) => window.__lab.set({ gait: st.gait, view: st.view, slow: st.slow }),
       st,
     );
-    for (let i = 0; i < st.s * fps; i++) {
+    if (st.open) await page.click("#tune-toggle");
+    if (st.reset) await page.click("#tune-reset");
+    const from = st.slide ? Number(await page.locator(`#${st.slide[0]}`).inputValue()) : 0;
+    if (st.slide) await page.locator(`#${st.slide[0]}`).scrollIntoViewIfNeeded();
+    const n = st.s * fps;
+    for (let i = 0; i < n; i++) {
+      // The slider moves over the first two thirds of the step.
+      if (st.slide) {
+        const k = Math.min(1, (i + 1) / Math.max(1, Math.round(n * 0.66)));
+        const step = Number(await page.locator(`#${st.slide[0]}`).getAttribute("step"));
+        const v = Math.round((from + (st.slide[1] - from) * k) / step) * step;
+        await page.locator(`#${st.slide[0]}`).fill(String(Number(v.toFixed(2))));
+      }
       await page.evaluate((dt) => window.__lab.tick(dt), 1 / fps);
       const png = PNG.sync.read(await page.screenshot({ timeout: 180_000 }));
       const w = Math.round(png.width / dpr);
