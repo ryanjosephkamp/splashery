@@ -4,7 +4,7 @@
 
 import { EFFECTS, AXES } from "./effects.js";
 import { SHAPES, PALETTES, PROFILES } from "./generators.js";
-import { TOYS, thumbURL, shelfCategories, searchToys, onShelf } from "./toys.js";
+import { TOYS, thumbURL, shelfCategories, searchToys, onShelf, holdsStill } from "./toys.js";
 import { IDLE_EFFECTS, formatCount } from "./state.js";
 import { MOVES } from "./motion.js";
 import { PATTERNS, PROJECTIONS, loadFlags } from "./patterns.js";
@@ -2554,6 +2554,58 @@ export function createUI(app) {
   function placeHelpLine() {
     const r = els.toyStatus.getBoundingClientRect();
     help.line.style.top = narrow.matches && r.height ? `${Math.round(r.bottom + 6)}px` : "";
+    help.line.style.bottom = "";
+    // UI r3: on a computer a toy that holds still, facing you (a chart, a
+    // page), can reach up under the line; then the line sits at the bottom
+    // left instead, above the toy's name, when the toy is clear of it there.
+    const toy = app.player?.scene?.toy;
+    const still = toy?.kind === "builtin" && holdsStill(TOYS.find((t) => t.id === toy.id));
+    if (narrow.matches || !still) return;
+    const box = toyScreenBox();
+    if (!box) return;
+    const line = help.line.getBoundingClientRect();
+    const h = line.height || 60;
+    if (box.left > 18 + (line.width || 440) + 4) return;
+    // How far the toy's box reaches under the line at the top and at the
+    // bottom (the box is a little larger than the toy): the side it reaches
+    // less far wins.
+    const lowTop = r.top - h - 8;
+    const atTop = 62 + h + 4 - box.top;
+    const atBottom = box.bottom - (lowTop - 4);
+    if (atTop > 0 && atBottom < atTop) {
+      help.line.style.top = "auto";
+      help.line.style.bottom = `${Math.round(window.innerHeight - r.top + 8)}px`;
+    }
+  }
+  // UI r3: where the toy's bounding box falls on the stage (CSS pixels).
+  function toyScreenBox() {
+    const p = app.player;
+    const info = p?.toyInfo;
+    const canvas = $("stage");
+    if (!info?.half || !canvas) return null;
+    // Where the view is going (it may still be easing there).
+    const cam = p.camera;
+    const cur = cam.cur;
+    cam.cur = { ...cam.tgt };
+    const pose = cam.pose();
+    cam.cur = cur;
+    const W = canvas.clientWidth;
+    const H = canvas.clientHeight;
+    const f = H / 2 / Math.tan((19 * Math.PI) / 180);
+    const dot = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+    const box = { left: Infinity, right: -Infinity, top: Infinity, bottom: -Infinity };
+    for (let i = 0; i < 8; i++) {
+      const c = [0, 1, 2].map((k) => info.center[k] + ((i >> k) & 1 ? 1 : -1) * info.half[k] - pose.position[k]); // prettier-ignore
+      const z = dot(c, pose.forward);
+      if (z < 0.01) return null;
+      const x = W / 2 + (dot(c, pose.right) / z) * f;
+      const y = H / 2 - (dot(c, pose.up) / z) * f;
+      box.left = Math.min(box.left, x);
+      box.right = Math.max(box.right, x);
+      box.top = Math.min(box.top, y);
+      box.bottom = Math.max(box.bottom, y);
+    }
+    return box;
   }
   function showHelpLine() {
     clearTimeout(helpTimer);
@@ -2563,6 +2615,8 @@ export function createUI(app) {
     help.line.classList.add("show");
     help.toggle.setAttribute("aria-expanded", "true");
     helpTimer = setTimeout(hideHelpLine, HELP_MS);
+    // UI r3: placed again once the new toy's view is set (it may move).
+    for (const ms of [250, 800]) setTimeout(() => !help.line.hidden && placeHelpLine(), ms);
   }
   function renderToyAbout(h) {
     help.name.textContent = h.label;
