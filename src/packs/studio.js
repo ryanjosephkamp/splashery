@@ -659,7 +659,7 @@ const SONG_LANDSCAPE = {
     accept: "audio/*,.mp3,.wav,.ogg,.m4a,.flac,.aac,.opus",
     binary: true,
     fileButton: "Open a song…",
-    note: "Open an MP3, WAV, OGG, M4A or FLAC file. It plays at once, exactly as the file sounds, while its picture is measured on this device (the line under it shows how far); nothing is uploaded. A long song makes a longer landscape at lower detail.",
+    note: "Open an MP3, WAV, OGG, M4A or FLAC file. A long song starts playing at once, exactly as the file sounds, while its picture is measured on this device (the line under it shows how far); nothing is uploaded. Tap to pause or play.",
     maxBytes: MAX_BYTES, // lane Live input r2: a long song streams from the file
     async read(_text, fileName, file) {
       if (!file) throw new Error("Open a sound file.");
@@ -681,6 +681,9 @@ const SONG_LANDSCAPE = {
         if (duration > SHORT && Number.isFinite(duration)) {
           if (SONG.custom?.url) SONG.custom.track?.close();
           SONG.custom = { long: true, file, url, track, name, duration };
+          // It plays now, while the landscape is built around it (a browser
+          // that wants a fresh tap first gets it: the next tap plays it).
+          track.play(R2.sound);
           return { song: "custom", songName: name };
         }
         track.close();

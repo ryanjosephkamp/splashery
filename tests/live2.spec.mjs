@@ -151,8 +151,7 @@ test.describe("in the browser", () => {
   }) => {
     const { browser, page, errors } = await songPage(playwright);
     await page.locator("#toy-input-file").setInputFiles(CLICK_WAV);
-    await until(page, () => window.__splashery.player.proc?.ctx?.kit?.data?.song?.song?.long);
-    await page.evaluate(() => window.__splashery.app.act());
+    // It plays as soon as it opens, without a tap.
     const st = await until(page, async (m) => {
       const s = (await import(m)).playState();
       return s.on && s.pos > 0.2 ? s : null;
@@ -214,8 +213,15 @@ test.describe("in the browser", () => {
     );
     await page.locator("#toy-input-file").setInputFiles(CLICK_WAV);
     await until(page, () => window.__splashery.player.proc?.ctx?.kit?.data?.song?.song?.long);
-    // Measured up to the clicks first (the worker starts at the playhead).
+    // It plays as it opens: a tap pauses it; once measured past the clicks,
+    // it goes back to the start and a tap plays it.
+    await until(page, async (m) => (await import(m)).playState().on, studio);
+    await page.evaluate(() => window.__splashery.app.act());
     await until(page, async (m) => (await import(m)).songAnalysisState().progress > 0.5, studio);
+    await page.evaluate(
+      async (m) => ((await import(m)).songTest().track.el.currentTime = 0),
+      studio,
+    );
     await page.evaluate(() => window.__splashery.app.act());
     // While it plays, two records on the page's clock (performance.now):
     // - heard: when each click comes out, found by an analyser on the
