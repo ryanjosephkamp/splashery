@@ -570,6 +570,102 @@ test.describe("your book, the album and the frame (no browser)", () => {
     b.run(1);
     expect(b.out.morph[0]).toBe(0);
   });
+
+  test("page focus: a double-tap focuses a page; forward goes on to the right page, then turns", async () => {
+    const { RECIPES } = await import("../src/packs/pictures.js");
+    const at = (x, y = 0) => [x, y, 0.02];
+    const r = RECIPES["your-book"];
+    const pics = fakePics(12);
+    const b = await play("your-book", { reading: "both" }, pics);
+    const view = () => b.frame().view;
+    expect(view().key).toBe("all");
+    // A double-tap off the book isn't the book's (the view resets instead).
+    expect(r.focus(null)).toBe(false);
+    b.tap(at(0.3));
+    b.run(1.6);
+    expect(pics.page).toBe(1);
+    // A double-tap on the right page: the view fills with it.
+    expect(r.focus(at(0.3))).toBe(true);
+    const v = view();
+    expect(v.key).toBe("R");
+    expect(v.center[0]).toBeGreaterThan(0.3);
+    expect(v.size[1]).toBe(1);
+    // Taps go by the page in view: its right half forward, its left half back.
+    const seen = [];
+    for (const x of [0.55, -0.2, 0.25, -0.55, 0.55]) {
+      b.tap(at(x));
+      b.run(1.6);
+      seen.push(`${pics.page}${b.out.view.key}`);
+    }
+    // Forward turns onto the next left page, then goes on to its right page;
+    // back goes to the left page, then turns back onto the right page.
+    expect(seen).toEqual(["3L", "3R", "3L", "1R", "3L"]);
+    // A double-tap again shows the whole book.
+    expect(r.focus(at(-0.4))).toBe(true);
+    expect(view().key).toBe("all");
+    b.tap(at(0.4));
+    b.run(1.6);
+    expect([pics.page, b.out.view.key]).toEqual([5, "all"]);
+  });
+
+  test("One page keeps a page in view (a phone held upright opens that way); old scenes still load", async () => {
+    const { RECIPES } = await import("../src/packs/pictures.js");
+    const { resolveOptions } = await import("../src/player.js").catch(() => ({}));
+    const at = (x, y = 0) => [x, y, 0.02];
+    const pics = fakePics(12);
+    const b = await play("your-book", { reading: "one" }, pics);
+    expect(b.frame().view.key).toBe("C");
+    const seen = [];
+    for (const x of [0.3, 0.55, -0.2, 0.55]) {
+      b.tap(at(x));
+      b.run(1.6);
+      seen.push(`${pics.page}${b.out.view.key}`);
+    }
+    expect(seen).toEqual(["1R", "3L", "3R", "5L"]);
+    // Let go (a double-tap, or a zoom out): the next turn brings a page back.
+    RECIPES["your-book"].focus(null);
+    expect(b.frame().view.key).toBe("all");
+    b.tap(at(0.4));
+    b.run(1.6);
+    expect(`${pics.page}${b.out.view.key}`).toBe("7L");
+    // The album and stapled paper read the same way.
+    const a = await play("photo-album", { reading: "one" }, fakePics(12));
+    expect(a.frame().view.key).toBe("C");
+    a.tap(at(0.5));
+    a.run(1.6);
+    expect(a.out.view.key).toBe("R");
+    const s = await play("your-book", { reading: "one", style: "stapled" }, fakePics(4));
+    s.tap(at(0, -0.2));
+    s.run(1.6);
+    expect(s.out.view.key).toBe("C");
+    // The default follows the screen's shape; a scene without the choice
+    // (every old link) gets it.
+    const opt = RECIPES["your-book"].options.find((o) => o.key === "reading");
+    const had = [globalThis.innerWidth, globalThis.innerHeight];
+    try {
+      Object.assign(globalThis, { innerWidth: 390, innerHeight: 844 });
+      expect(opt.default).toBe("one");
+      if (resolveOptions) expect(resolveOptions(RECIPES["your-book"], { style: "paperback" }).reading).toBe("one"); // prettier-ignore
+      Object.assign(globalThis, { innerWidth: 1440, innerHeight: 900 });
+      expect(opt.default).toBe("both");
+    } finally {
+      Object.assign(globalThis, { innerWidth: had[0], innerHeight: had[1] });
+    }
+  });
+
+  test("a double-tap fills the view with the frame's photo or the lab's page, and again lets go", async () => {
+    const { RECIPES } = await import("../src/packs/pictures.js");
+    for (const id of ["picture-frame", "picture-lab"]) {
+      const b = await play(id, {}, fakePics(2));
+      expect(b.frame().view.key, id).toBe("all");
+      expect(RECIPES[id].focus([0, 0, 0])).toBe(true);
+      const v = b.frame().view;
+      expect(v.center, id).toEqual([0, 0, 0]);
+      expect(v.size[0] > 0.5 && v.size[1] > 0.5, id).toBe(true);
+      expect(RECIPES[id].focus(null)).toBe(true);
+      expect(b.frame().view.key, id).toBe("all");
+    }
+  });
 });
 
 test.describe("your book, the album and the frame (in the app)", () => {
@@ -901,6 +997,115 @@ test.describe("your book, the album and the frame (in the app)", () => {
     // The frame steps on in the new order.
     const p0 = await pageNow(page);
     await page.waitForFunction((p0) => window.__splashery.player.pictures.page === (p0 + 1) % 7, p0, { timeout: 180_000 }); // prettier-ignore
+  });
+
+  // Waits until the view has stopped gliding (page focus).
+  async function glided(page, key) {
+    await page.waitForFunction(
+      (key) => {
+        const pl = window.__splashery.player;
+        pl.stage.requestRender();
+        return pl.pageView?.key === key && !pl.glide;
+      },
+      key,
+      { timeout: 120_000, polling: 100 },
+    );
+    await step(page, 0.3);
+  }
+  // The page's corners on the screen, as fractions of the canvas.
+  const pageBox = (page, x0, x1) =>
+    page.evaluate(
+      ([x0, x1]) => {
+        const pl = window.__splashery.player;
+        const r = pl.stage.canvas.getBoundingClientRect();
+        const a = pl.screenPoint([x0, -0.5, 0.02]);
+        const b = pl.screenPoint([x1, 0.5, 0.02]);
+        return { w: Math.abs(b[0] - a[0]) / r.width, h: Math.abs(b[1] - a[1]) / r.height, cx: (a[0] + b[0]) / 2 / r.width, cy: (a[1] + b[1]) / 2 / r.height }; // prettier-ignore
+      },
+      [x0, x1],
+    );
+
+  test("a double-tap on a page glides the view to it; taps page through; again shows both pages", async ({
+    page,
+  }) => {
+    await open(page, "your-book", `${BK}booklet.pdf`);
+    await turn(page); // the cover opens
+    const home = await page.evaluate(() => window.__splashery.player.camera.tgt.distance);
+    // A double-tap on the right page: it fills the screen (the page isn't turned).
+    let [x, y] = await pointAt(page, [0.4, 0, 0.02]);
+    await page.mouse.dblclick(x, y);
+    await glided(page, "R");
+    expect(await pageNow(page)).toBe(1);
+    const c = await page.evaluate(() => window.__splashery.player.motion.out.view.center[0]);
+    let box = await pageBox(page, c - 0.3, c + 0.3);
+    expect(Math.abs(box.cx - 0.5)).toBeLessThan(0.05);
+    expect(Math.abs(box.cy - 0.5)).toBeLessThan(0.05);
+    // (Landscape: the page's height fills the screen's.)
+    expect(box.h).toBeGreaterThan(0.85);
+    expect(box.h).toBeLessThan(1.01);
+    // A tap on its right half turns the leaf, landing on the next left page.
+    [x, y] = await pointAt(page, [c + 0.2, 0, 0.02]);
+    await page.mouse.click(x, y);
+    await glided(page, "L");
+    await landed(page);
+    expect(await pageNow(page)).toBe(3);
+    // Forward again goes on to the right page, without a turn.
+    [x, y] = await pointAt(page, [-c + 0.2, 0, 0.02]);
+    await page.mouse.click(x, y);
+    await glided(page, "R");
+    expect(await pageNow(page)).toBe(3);
+    // A double-tap again: both pages, the view back where it was.
+    [x, y] = await pointAt(page, [c, 0, 0.02]);
+    await page.mouse.dblclick(x, y);
+    await glided(page, "all");
+    expect(await pageNow(page)).toBe(3);
+    const d = await page.evaluate(() => window.__splashery.player.camera.tgt.distance);
+    expect(Math.abs(d - home)).toBeLessThan(0.01);
+  });
+
+  test("a zoom out lets a page in view go, and Reset still resets the view", async ({ page }) => {
+    await open(page, "your-book", `${BK}booklet.pdf`);
+    await turn(page); // the cover opens
+    const [x, y] = await pointAt(page, [0.4, 0, 0.02]);
+    await page.mouse.dblclick(x, y);
+    await glided(page, "R");
+    await page.mouse.move(x, y);
+    await page.mouse.wheel(0, 500);
+    await glided(page, "all");
+    await page.mouse.dblclick(x, y);
+    await glided(page, "R");
+    await page.keyboard.press("r");
+    await glided(page, "all");
+    const c = await page.evaluate(() => {
+      const cam = window.__splashery.player.camera;
+      return [cam.tgt.distance - cam.home.distance, cam.tgt.yaw - cam.home.yaw];
+    });
+    expect(Math.abs(c[0]) + Math.abs(c[1])).toBeLessThan(0.01);
+    expect(await pageNow(page)).toBe(1);
+  });
+
+  test("on a phone held upright the book opens reading one page at a time", async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await open(page, "your-book", `${BK}booklet.pdf`);
+    await glided(page, "C");
+    // (No choice is stored: the link and saved scene are as before.)
+    expect(await page.evaluate(() => "reading" in (window.__splashery.player.scene.toy.options || {}))).toBe(false); // prettier-ignore
+    await turn(page);
+    await glided(page, "R");
+    const c = await page.evaluate(() => window.__splashery.player.motion.out.view.center[0]);
+    // (Upright: the page's width fills the screen's.)
+    const box = await pageBox(page, c - 0.3, c + 0.3);
+    expect(Math.abs(box.cx - 0.5)).toBeLessThan(0.05);
+    const W = await page.evaluate(() => window.__splashery.player.motion.out.view.size[0]);
+    expect((box.w * W) / 0.6).toBeGreaterThan(0.85);
+    expect((box.w * W) / 0.6).toBeLessThan(1.01);
+    // Both pages, chosen in the Toy tab: the whole book again.
+    await page.evaluate(() => window.__splashery.app.setToyOption("reading", "both"));
+    await waitSheets(page);
+    await glided(page, "all");
+    expect(await pageNow(page)).toBe(1);
+    const cam = await page.evaluate(() => { const c = window.__splashery.player.camera; return [c.tgt.distance, c.home.distance]; }); // prettier-ignore
+    expect(Math.abs(cam[0] - cam[1])).toBeLessThan(0.01);
   });
 
   for (const [w, h] of [

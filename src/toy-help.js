@@ -1086,7 +1086,7 @@ export const TOY_HELP = {
   clock: {
     howTo: "Tap it to ring the alarm.",
     about:
-      "A wind-up alarm clock has two metal bells on top and a little hammer between them. At the set time a spring inside lets the hammer go, and it strikes the two bells back and forth very fast, loud enough to wake a sleeper. Before alarm clocks were common, some people were paid to go around town tapping on windows to wake others up.\n\nThe hands on this clock show the real time where you are. Tap it to ring the alarm: the hammer rattles between the bells and the whole clock shakes and hops. Pick its color in the Toy tab.",
+      "A wind-up alarm clock has two metal bells on top and a little hammer between them. At the set time a spring inside lets the hammer go, and it strikes the two bells back and forth very fast, loud enough to wake a sleeper. Before alarm clocks were common, some people were paid to go around town tapping on windows to wake others up.\n\nThe hands on this clock show the real time where you are, or in another time zone you pick in the Toy tab. Tap it to ring the alarm: the hammer rattles between the bells and the whole clock shakes and hops. Pick its color in the Toy tab.",
   },
   "gift-box": {
     howTo: "Tap to open the present; tap again to close it.",
@@ -1296,7 +1296,8 @@ export const TOY_HELP = {
       "A hypercube, or tesseract, is a cube in four dimensions. A square has 4 corners and a cube has 8; a tesseract has 16 corners and 32 edges, and its sides are 8 cubes. We can't see four dimensions, so this toy shows its shadow in our three: a cube inside a cube, with their corners joined.\n\nAt rest it rocks gently in 4D. Tap it to turn it once around through the fourth dimension: the pink inner cube swells out to become the outer one while the blue one folds inside, then it turns on back to where it started. Every edge stays perfectly straight the whole time.",
   },
   "torus-knot": {
-    howTo: "Tap to pull it and let go. Pick another knot in the Toy tab.",
+    howTo:
+      "Tap it: the knot pulls loose and springs back. Drag to turn it. Pick a knot in the Toy tab.",
     about:
       "A torus knot is a knot that winds around the surface of a donut shape, called a torus. It goes around the hole a few times one way while it loops through it a few times the other way. The simplest is the trefoil, which winds 2 and 3 times; it is the simplest true knot, one that can never be untied without cutting it.\n\nTap it and the knot is pulled loose, its loops stretching and swirling; then it is let go and springs back past its rest shape and wobbles to a stop, like a spring. Pick a trefoil, a cinquefoil or another knot in the Toy tab.",
   },
@@ -1376,7 +1377,7 @@ export const TOY_HELP = {
   cnn: {
     howTo: "Tap it to read the digit. Draw your own digit in the Toy tab.",
     about:
-      "A convolutional network, or CNN, is a neural network built for pictures. It slides small filters across the picture: each filter is a little grid of weights that lights up where it finds its pattern, such as a slanted stroke, and makes a feature map. Pooling shrinks the map, keeping the strongest signal in each patch, and later layers combine the features to recognize the whole shape.\n\nTap it: a glowing 3-by-3 filter slides over a handwritten 7, stamping a feature map tile by tile; the tiles pool into a smaller map, and the scores for the digits 0 to 9 rise with 7 on top. In the Toy tab, pick a 3D view, or draw a digit and a small trained network reads it.",
+      "A convolutional network, or CNN, is a neural network built for pictures. It slides small filters across the picture: each filter is a little grid of weights that lights up where it finds its pattern, such as a slanted stroke, and makes a feature map. Pooling shrinks the map, keeping the strongest signal in each patch, and later layers combine the features to recognize the whole shape.\n\nTap it: a glowing 3-by-3 filter slides over a handwritten 7, stamping a feature map tile by tile; the tiles pool into a smaller map, and the scores for the digits 0 to 9 rise with 7 on top. In the Toy tab, pick a 3D view, or draw a digit and a small trained network reads it. Each square on the drawing pad is one pixel of the small 8-by-8 picture the network reads: the lighter its gray, the more ink it holds, and the pad starts with the sample 7.",
   },
   rnn: {
     howTo: "Tap it to read a sentence one word at a time. Try the LSTM style in the Toy tab.",
@@ -1452,25 +1453,25 @@ export const TOY_HELP = {
     howTo:
       "Tap the right of the page to go on, the left to go back; tap a video to play it. Open your own in the Toy tab.",
     about:
-      "The Picture lab shows a page, a photo, a GIF or a video as Gaussian splats: thousands of small, flat, colored discs, the same stuff every toy here is made of. A document's paper becomes a smooth sheet of large splats in the paper's own color, and every pixel of ink becomes one small splat of its own color, a hair in front. A photo gets one splat per pixel.\n\nZoom in and the page is rebuilt sharper; zoom out and it gets coarser, so nothing vanishes. Open a PDF, a photo, a GIF or a video of your own in the Toy tab, or paste a web address. Your files stay on your device: nothing is uploaded.",
+      "The Picture lab shows a page, a photo, a GIF or a video as Gaussian splats: thousands of small, flat, colored discs, the same stuff every toy here is made of. A document's paper becomes a smooth sheet of large splats in the paper's own color, and every pixel of ink becomes one small splat of its own color, a hair in front. A photo gets one splat per pixel.\n\nDouble-tap the page to fill the screen with it. Zoom in and the page is rebuilt sharper; zoom out and it gets coarser, so nothing vanishes. Open a PDF, a photo, a GIF or a video of your own in the Toy tab, or paste a web address. Your files stay on your device: nothing is uploaded.",
   },
   "your-book": {
     howTo:
-      "Tap the right page to turn on, the left to go back, or pull a page over by hand. Open a PDF in the Toy tab.",
+      "Tap the right page to turn on, the left to go back, or pull one over. Double-tap a page to read it up close.",
     about:
-      "A book is a stack of pages bound along one edge, so you can turn them one at a time. People have bound pages this way for about two thousand years; before that, long texts were rolled up as scrolls.\n\nOpen any PDF of your own in the Toy tab, as long as you like, and tap to turn its pages (the right page turns forward, the left goes back), or take a page by its edge and pull it over: let go past halfway and it turns, otherwise it falls back. Each page curls as it goes over and shows the next page on its back. Stapled paper flips up over the top: tap near the top of the page to go back. Only the pages you reach are made into splats, so a long book stays light. Pick hardcover, paperback, magazine, stapled paper or spiral notebook in the Toy tab. Your file stays on your device.",
+      "A book is a stack of pages bound along one edge, so you can turn them one at a time. People have bound pages this way for about two thousand years; before that, long texts were rolled up as scrolls.\n\nOpen any PDF of your own in the Toy tab, as long as you like, and tap to turn its pages (the right page turns forward, the left goes back), or take a page by its edge and pull it over: let go past halfway and it turns, otherwise it falls back. Each page curls as it goes over. Stapled paper flips up over the top: tap near the top of the page to go back. Double-tap a page to fill the screen with it, and again to see both; Reading: One page goes a page at a time. Only the pages you reach are made into splats, so a long book stays light. Pick hardcover, paperback, magazine, stapled paper or spiral notebook in the Toy tab. Your file stays on your device.",
   },
   "photo-album": {
     howTo:
-      "Tap the right page to turn on, the left to go back, or pull a page over. Open your own photos in the Toy tab.",
+      "Tap the right page to turn on, the left to go back, or pull one over. Double-tap a page to see it up close.",
     about:
-      "A photo album keeps printed photos on thick pages. Small paper corners hold each photo by its four corners, so nothing is glued to the picture and it can be slipped out again. Albums like this were common from the late 1800s, when cameras first let families take their own pictures.\n\nPick several photos of your own at once in the Toy tab and turn through them with a tap, or pull a page over by hand (the thick pages are heavier than a book's): two wide photos share a page, one above the other, and two tall ones sit side by side. Pick a leather, linen or scrapbook cover, and turn the file names under the photos on or off. Your photos stay on your device.",
+      "A photo album keeps printed photos on thick pages. Small paper corners hold each photo by its four corners, so nothing is glued to the picture and it can be slipped out again. Albums like this were common from the late 1800s, when cameras first let families take their own pictures.\n\nPick several photos of your own at once in the Toy tab and turn through them with a tap, or pull a page over by hand (the thick pages are heavier than a book's): two wide photos share a page, one above the other, and two tall ones sit side by side. Double-tap a page to fill the screen with it, or set Reading to One page to go through a page at a time. Pick a leather, linen or scrapbook cover, and turn the file names under the photos on or off. Your photos stay on your device.",
   },
   "picture-frame": {
     howTo:
       "Tap the frame to set it swinging on its nail. Open your own photo, GIF or video in the Toy tab.",
     about:
-      "A picture frame protects a photo and sets it apart from the wall. Many hang from a single nail on a wire stretched across the back, so the frame can tilt a little either way until it hangs straight.\n\nTap it and the frame swings on its wire like a pendulum, back and forth, smaller each time, until it settles. Pick a wood, gold, modern or digital frame in the Toy tab; the digital frame fades from one photo to the next, in order or at random. Open a photo, a GIF or a video of your own (a GIF or a video plays on a loop), or several photos for the digital frame. Your files stay on your device.",
+      "A picture frame protects a photo and sets it apart from the wall. Many hang from a single nail on a wire stretched across the back, so the frame can tilt a little either way until it hangs straight.\n\nTap it and the frame swings on its wire like a pendulum, back and forth, smaller each time, until it settles. Double-tap it to fill the screen with the photo, and again to step back. Pick a wood, gold, modern or digital frame in the Toy tab; the digital frame fades from one photo to the next, in order or at random. Open a photo, a GIF or a video of your own (a GIF or a video plays on a loop), or several photos for the digital frame. Your files stay on your device.",
   },
   screen: {
     howTo:

@@ -50,6 +50,11 @@ export const PALETTES = [
     core: "#ffffff",
   },
   { id: "planet", label: "Planet (tribute)", stops: [], core: "#ff7b00" },
+  // The tiny planet's other planets (lane Shelves), in the same style.
+  { id: "mars", label: "Mars (tribute)", stops: [], core: "#ff7b00" },
+  { id: "moon", label: "Moon (tribute)", stops: [], core: "#ff9a3c" },
+  { id: "jupiter", label: "Jupiter (tribute)", stops: [], core: "#ffd27a" },
+  { id: "neptune", label: "Neptune (tribute)", stops: [], core: "#9fd6ff" },
   { id: "frosting", label: "Frosting", stops: [], core: "#f6dfa4" },
 ];
 
@@ -403,6 +408,128 @@ function makeColoring(paletteId, seed, noise, colorNoise) {
         return jitter(gradient(mantle, clamp01(depth * 1.1)), r, colorNoise * 0.3);
       },
       clouds: true,
+    };
+  }
+
+  // The tiny planet's other planets (lane Shelves): the same noisy little
+  // world as the tribute planet, in each planet's own colors.
+  if (pal.id === "mars") {
+    const low = [hexRgb("#4a2418"), hexRgb("#6e3320"), hexRgb("#8f4527")];
+    const high = [hexRgb("#a8502b"), hexRgb("#c46a3a"), hexRgb("#dd9660")];
+    const mantle = [hexRgb("#ffd07a"), hexRgb("#ff7b00"), hexRgb("#8f1a0c")];
+    const elev = (p) => noise.fbm(p[0] * 1.6 + off[0], p[1] * 1.6 + off[1], p[2] * 1.6 + off[2], 5);
+    return {
+      displace(p, n) {
+        const e = elev(p);
+        return e > -0.05 ? (e + 0.05) * 0.07 : 0;
+      },
+      surface(p, n, r) {
+        const e = elev(p);
+        const lat = Math.abs(n[1]);
+        let c;
+        if (lat > 0.9 - 0.06 * noise(p[0] * 5, p[1] * 5, p[2] * 5)) c = [0.94, 0.9, 0.86];
+        else if (e < -0.05) c = gradient(low, clamp01((e + 0.45) / 0.4));
+        else c = gradient(high, clamp01((e + 0.05) / 0.4));
+        return jitter(c, r, colorNoise * 0.25);
+      },
+      core(p, depth, r) {
+        return jitter(gradient(mantle, clamp01(depth * 1.1)), r, colorNoise * 0.3);
+      },
+    };
+  }
+
+  if (pal.id === "moon") {
+    const maria = [hexRgb("#3e3d3b"), hexRgb("#55534f")];
+    const land = [hexRgb("#7d7b76"), hexRgb("#9a9892"), hexRgb("#b2b0a9")];
+    const mantle = [hexRgb("#c9c2b4"), hexRgb("#ff9a3c"), hexRgb("#a8320c")];
+    const craters = [];
+    for (let i = 0; i < 46; i++) {
+      const z = rand() * 2 - 1;
+      const a = rand() * Math.PI * 2;
+      const q = Math.sqrt(1 - z * z);
+      craters.push({ d: [q * Math.cos(a), z, q * Math.sin(a)], r: 0.06 + 0.2 * rand() ** 2.2 });
+    }
+    // How far into the nearest crater (0 at its center, 1 on its rim) and
+    // whether a point is inside one.
+    const crater = (n) => {
+      let best = 9;
+      let rad = 0;
+      for (const c of craters) {
+        const d = Math.acos(Math.max(-1, Math.min(1, n[0] * c.d[0] + n[1] * c.d[1] + n[2] * c.d[2]))); // prettier-ignore
+        const f = d / c.r;
+        if (f < best) {
+          best = f;
+          rad = c.r;
+        }
+      }
+      return { f: best, r: rad };
+    };
+    const sea = (p) => noise.fbm(p[0] * 1.1 + off[0], p[1] * 1.1 + off[1], p[2] * 1.1 + off[2], 4);
+    return {
+      displace(p, n) {
+        const { f, r } = crater(n);
+        if (f < 1) return -0.35 * r * (1 - f * f) + 0.05;
+        if (f < 1.35) return 0.05 + 0.25 * r * (1 - (f - 1) / 0.35);
+        return 0.05;
+      },
+      surface(p, n, r) {
+        const { f } = crater(n);
+        const m = sea(p);
+        let c = m < -0.08 ? gradient(maria, clamp01((m + 0.5) / 0.42)) : gradient(land, clamp01((m + 0.08) / 0.5)); // prettier-ignore
+        if (f < 1) c = c.map((x) => x * (0.78 + 0.12 * f));
+        else if (f < 1.3) c = c.map((x) => Math.min(1, x * 1.18));
+        return jitter(c, r, colorNoise * 0.2);
+      },
+      core(p, depth, r) {
+        return jitter(gradient(mantle, clamp01(depth * 1.1)), r, colorNoise * 0.3);
+      },
+    };
+  }
+
+  if (pal.id === "jupiter" || pal.id === "neptune") {
+    const jupiter = pal.id === "jupiter";
+    const belts = jupiter
+      ? ["#ecdcbc", "#c99a6a", "#e3cfa8", "#a8683f", "#efdfc2", "#b87a4c", "#dcc39a", "#9c7a5c"].map(hexRgb) // prettier-ignore
+      : ["#3558c8", "#2c49b0", "#4a74dc", "#3a60cc", "#5a86e4", "#2d4ab4"].map(hexRgb);
+    const spot = hexRgb(jupiter ? "#c2573a" : "#1a2a78");
+    const pole = hexRgb(jupiter ? "#8f8374" : "#2a3f9c");
+    const mantle = jupiter
+      ? [hexRgb("#fff0c0"), hexRgb("#ffc36a"), hexRgb("#c9731f")]
+      : [hexRgb("#e6f7ff"), hexRgb("#6ec3ff"), hexRgb("#1f4fb0")];
+    // The storm: an oval in the southern bands (the Great Red Spot, the Great
+    // Dark Spot), on the side the home view faces.
+    const sLat = jupiter ? -0.36 : -0.3;
+    const sLon = Math.PI / 2 - 0.35; // toward the home view
+    const storm = (n) => {
+      let dl = Math.atan2(n[2], n[0]) - sLon;
+      dl = Math.atan2(Math.sin(dl), Math.cos(dl));
+      return (dl / 0.42) ** 2 + ((n[1] - sLat) / 0.13) ** 2;
+    };
+    return {
+      displace() {
+        return 0;
+      },
+      surface(p, n, r) {
+        const swirl = 0.05 * noise.fbm(p[0] * 3 + off[0], p[1] * 9 + off[1], p[2] * 3 + off[2], 3);
+        const lat = n[1] + swirl;
+        const k = belts.length;
+        const t = clamp01((lat + 1) / 2) * k * 1.9;
+        const i = Math.floor(t);
+        let c = belts[((i % k) + k) % k];
+        const next = belts[(((i + 1) % k) + k) % k];
+        const f = t - i;
+        if (f > 0.8) c = c.map((x, j) => lerp(x, next[j], (f - 0.8) / 0.2));
+        const s = storm(n);
+        if (s < 1) c = c.map((x, j) => lerp(spot[j], x, s * s));
+        // Neptune's bright high clouds, streaked beside its storm.
+        if (!jupiter && s > 1.3 && s < 3.2 && noise(p[0] * 7, p[1] * 20, p[2] * 7) > 0.35)
+          c = [0.95, 0.97, 1];
+        if (Math.abs(n[1]) > 0.86) c = c.map((x, j) => lerp(x, pole[j], clamp01((Math.abs(n[1]) - 0.86) / 0.1))); // prettier-ignore
+        return jitter(c, r, colorNoise * 0.2);
+      },
+      core(p, depth, r) {
+        return jitter(gradient(mantle, clamp01(depth * 1.1)), r, colorNoise * 0.3);
+      },
     };
   }
 

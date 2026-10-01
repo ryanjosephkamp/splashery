@@ -26,7 +26,7 @@ Proposals below are suggestions; the owner may change them.
   still open: none. Done in C2: Cactus, Strawberry, Heart cookie, Honeybee, Jelly blob, Donut, Neon
   knot, Tiny planet, Cluster fly, May beetle, Millipede, Carder bumblebee, Raspberry, Blackberry,
   Blueberry, Grape, Cinnamon star cookie, Tomatoes, Mandeltorus, Basket, Real rubber duck, Garden
-  gnome, Wooden elephant, Marble bust, Ukulele, Alarm clock, Vintage camera, Boombox, Real
+  gnome, Wooden elephant, Marble bust, Ukulele, Real alarm clock, Vintage camera, Boombox, Real
   croissant, Carrot cake, Pomegranate, Lantern, Cat statue, Horse statue, Real pencil, Real tin can,
   Basketball, Soccer ball, American football, Tennis ball, Baseball, Softball, Beach ball, Golf
   ball, Rugby ball, Volleyball, Water polo ball, Ping-pong ball, Cricket ball, Bowling ball, Pool
@@ -205,7 +205,7 @@ Proposals below are suggestions; the owner may change them.
   - Improved: E1b: played like a real ukulele: a pick sweeps across the strings on each of four
     strums and the strings shake in a standing wave between the nut and the bridge (2.2 s).
   - Sound: Plucked ukulele chord (synth, bright, nylon).
-- **Alarm clock** (`alarm-clock`). Now: tap: Ring (rig). Plan: keep.
+- **Real alarm clock** (`alarm-clock`). Now: tap: Ring (rig). Plan: keep.
   - Owner: Hands should move. On tap it should jump up and down and ring like an alarm clock.
   - Effect: Hands tick all the time; tap rattles it off the table while it rings.
   - Improved: E1: the red second hand ticks all the time. A tap rings the twin bells and the clock
@@ -2311,7 +2311,11 @@ Proposals below are suggestions; the owner may change them.
     are built. Books r3: a tap on the right page turns forward and on the left goes back (stapled
     paper: the top quarter of the page goes back); a page can be pulled over by hand, turning if let
     go past halfway or flicked and falling back otherwise; the turn lifts at once, the page curling
-    as it goes, with no bend before it moves.
+    as it goes, with no bend before it moves. Books r4 (page focus, approved September 30, 2026): a
+    double-tap on a page glides the view in until the page fills the screen, and again (or a zoom
+    out) shows both pages; while a page is in view, forward goes from the left page to the right
+    one, then turns the leaf and lands on the next left page (back the other way). Reading: One page
+    (the default on a phone held upright) keeps a page in view.
   - Sound: A paper swish and flutter, and a soft thud as the page lands.
 - **Photo album** (`photo-album`). Now: tap: Turn the page. Plan: keep.
   - Owner: Lane Books, from the owner's notes of September 27 and 28, 2026 (Pages into Splats).
@@ -2325,6 +2329,7 @@ Proposals below are suggestions; the owner may change them.
     (about 1 s each), the photos mounted in photo corners with their file names beneath; at the end
     a tap closes the album. Books r3: taps by where they land, as the book; a page pulled by hand
     lags the finger a little, falls back more readily and settles slowly, like a heavy card page.
+    Books r4: page focus and Reading: One page, as the book.
   - Sound: A lower card swish and a firm thud.
 - **Picture frame** (`picture-frame`). Now: tap: Swing the frame. Plan: keep.
   - Owner: Lane Books, from the owner's notes of September 27 and 28, 2026 (Pages into Splats).
@@ -2335,7 +2340,8 @@ Proposals below are suggestions; the owner may change them.
     pendulum, smaller each swing, until it hangs straight again (3 s). Books r3: a molded gold frame
     (a bead, a flat, a cove and a big bead, burnished on the raised parts); every frame plays a GIF
     or a video on a loop; the digital frame lists its photos in the Toy tab to reorder, and steps
-    through them in order or at random.
+    through them in order or at random. Books r4: a double-tap fills the screen with the photo, and
+    again steps back.
   - Sound: A knock on the wall, the wire creaking on the nail, and a softer knock.
 - **Screen** (`screen`). Now: tap: Switch on or off. Plan: keep.
   - Owner: From the owner's notes of September 28, 2026 (lane Screens; labs only), and his review of

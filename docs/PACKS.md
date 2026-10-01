@@ -237,6 +237,47 @@ be the same (the unit tests check). Old shared names ("chime", "pop" and so on) 
 Check a new sound with `node tools/sound-check.mjs <id> --sheet=out.png`. Voice names can mislead:
 `chop` is a helicopter rotor, not a knife; E5's knife chops are `slap` plus `crack`.
 
+**Recorded samples** (since September 30, 2026): where synthesis can't sound real (an animal's call,
+fire, an explosion, dice, bowling pins), a layer can be the `sample` voice, a short recording in
+`assets/sounds/`:
+
+```js
+"cat-statue": { voice: "sample", file: "cat-statue-meow.mp3", fallback: { voice: "mew" } },
+dice: { voice: "sample", file: ["dice-roll-1.mp3", "dice-roll-2.mp3"], vol: 0.8 }, // one at random
+bat: [
+  { voice: "sample", file: "baseball-bat.mp3", pitch: 0.95, from: 0.02, len: 0.6, at: 0.4 },
+  { voice: "thud", f: 80 },
+],
+```
+
+- `file` is one name or a list (one is picked at random on each play). `pitch` is the playback rate
+  (and pitch), `from` starts that far into the file, `len` cuts it short with a fade, `decay`
+  multiplies the length; `vol` and `at` work as for any voice. A sample takes no `f`.
+- `fallback` is a synth spec played instead if the file can't load (or nothing without one).
+- A file is fetched on the first tap that plays it, never on page load or when the toy opens, then
+  decoded once and kept for the session. The app waits up to 0.6 s for a sound's files on its first
+  play, so the sample stays in time with its other layers. The Sound Board carries the files inside
+  the page.
+- The files: `assets/sounds/<toy id>-<what>.mp3` (or `.m4a`), mono, trimmed, about 44.1 or 22.05
+  kHz, usually under 40 KB. Normalize each one to the kit's levels (its loudest 50 ms near 0.25 RMS
+  and its peak near 0.85, so `vol: 1` sits with the synth voices). CC0 or public domain first, CC BY
+  only when nothing CC0 fits; record each file in `tools/assets.json` (source page, author, license,
+  date checked), `CREDITS.md` and `src/sound-credits.js` (the About tab lists the samples the
+  current toy's sound uses).
+- Offline tools call `loadSamples(ctx, spec)` from `src/voices.js` before rendering;
+  `tools/sound-check.mjs` and `tools/sound-lint.mjs` do.
+
+**The sound lint**: `node tools/sound-lint.mjs` renders sounds offline and checks them against
+section 7e: sharp transients (clicks), a narrow tone held above about 1.4 kHz (a whistle), a rising
+pitch sweep or a tonal voice gliding up (the "vroom"), wind, wave or hiss louder than the main sound
+(or loud on its own), tunes and chords from instrument voices on a toy off the music shelf, and the
+peak and loudness. `--toy <id>`, `--shelf <category>`, `--changed` (toys whose spec differs from
+`origin/main`, or `--base=<ref>`), `--all`, and `--spec '<json>'` for a spec not yet in a toy. Each
+toy gets a line: `!` is a clear violation (the run exits 1), `~` a warning worth a listen. The
+owner's exceptions (7e), the music shelf and toys marked `keep` in `tools/sound-review.json` only
+warn. The thresholds (`LINT` at the top) were set on September 30, 2026, so that the toys the owner
+complained about fail and the ones he likes pass; they are a guide, and his ears are the real test.
+
 **Flag colours**: `patternProjection: "top"` makes a toy lay flag colours on from above (a flat toy:
 the chess board) when a flag is picked; `patternAmount: 0.3` lays them on gently and
 `patternDetail: 1` keeps each splat's own light and dark under them (the chess board's light and
@@ -259,6 +300,15 @@ tool, a drag that starts on it pulls the grabbed part (up to `max`) and it sprin
 Newton's cradle). `plane` is `"view"`, a normal, or `(point) => normal`; without it, a drag follows
 the horizontal plane it started on (the laptop). A drag that starts beside the toy still turns the
 view. `tools/drag-clip.mjs` renders drags and taps as clips for review.
+
+**Focus** (lane Books, page focus): `focus(point, time)` lets a double-tap look closely at part of
+the toy (a book's page). The app calls it with the tapped point in recipe units (null off the toy,
+or when a zoom out lets go); it returns true when it took the double-tap (false: the view resets, as
+on other toys). A toy with `focus` waits about 0.3 s before a single tap, to tell it from a
+double-tap. The drive says what to show in `out.view`: `{ key, center, size }` (a rectangle facing
+the front, in recipe units) or `{ key }` for the whole toy. Each new key glides the view there (0.7
+s on the toy's clock): face-on, centered, the rectangle filling the screen; the whole toy goes back
+to the toy's home view. Zooming out past a focused view calls `focus(null)`.
 
 **Image-to-3D scans** (lane G): the side the photo can't see is a guess (the pencil's underside came
 out dark), so pick taps that keep the photographed side toward the camera.

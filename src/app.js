@@ -17,8 +17,9 @@ import {
 import { defaultEffects, effectDef } from "./effects.js";
 import { normalizePattern, flagInfo, loadFlags, DEFAULT_PATTERN } from "./patterns.js";
 import { Sound } from "./sound.js";
-import { specFor } from "./voices.js";
+import { specFor, samplesIn } from "./voices.js";
 import { toySound } from "./toy-sounds.js";
+import { SOUND_CREDITS } from "./sound-credits.js";
 import { normalizeGenerator, PROFILES } from "./generators.js";
 import { decodeSceneHash, parseHash } from "./codec.js";
 import { TOYS, findToy } from "./toys.js";
@@ -384,6 +385,25 @@ class App {
       q.setAttribute("aria-current", "true");
       nodes.push(q);
     }
+    // Recorded samples in the toy's tap sound (src/sound-credits.js).
+    for (const file of samplesIn(info?.id ? toySound(info.id) : null)) {
+      const c = SOUND_CREDITS[file];
+      if (!c) continue;
+      const q = document.createElement("p");
+      q.className = "credit";
+      const strong = document.createElement("strong");
+      strong.textContent = c.label || "Sound";
+      const a = document.createElement("a");
+      a.href = c.source;
+      a.textContent = c.title;
+      const lic = document.createElement("a");
+      lic.href = c.licenseUrl;
+      lic.textContent = c.license;
+      q.append(strong, ": “", a, `” by ${c.author}, `, lic, ".");
+      q.setAttribute("aria-current", "true");
+      q.dataset.sample = file;
+      nodes.push(q);
+    }
     const f = document.createElement("p");
     f.className = "credit";
     const flags = document.createElement("a");
@@ -582,7 +602,11 @@ class App {
       },
       onTap: (e) => {
         if (this.ui.sheetOpen()) this.ui.collapseSheet();
-        else if (this.tool === "orbit" && !this.spaceHeld) this.tapToy(e);
+        else if (this.tool === "orbit" && !this.spaceHeld) {
+          // Page focus (lane Books r4): a toy with recipe.focus takes double-taps.
+          if (player.canFocus()) this.tapOrFocus(e);
+          else this.tapToy(e);
+        }
       },
       onInteract: () => {
         player.interact();
@@ -619,7 +643,9 @@ class App {
         cam.zoomBy(Math.exp(e.deltaY * unit * (e.ctrlKey ? 0.01 : 0.0015)));
         player.stage.requestRender();
       },
-      onDoubleTap: () => player.resetCamera(),
+      // Page focus (lane Books r4): a toy that focuses on a page takes its
+      // double-taps in tapOrFocus (↺ and the R key still reset its view).
+      onDoubleTap: () => player.canFocus() || player.resetCamera(),
       onToolStart: (e) => this.toolStart(e),
       onToolMove: (e) => this.toolMove(e),
       onToolEnd: (e) => this.toolEnd(e),
@@ -633,6 +659,37 @@ class App {
     player.pickDirty = true;
     const hit = await player.pickAt(x, y);
     if (hit) player.act(hit);
+  }
+
+  // Page focus (lane Books r4): on a toy that can focus on a page, a double-tap
+  // focuses (or lets go), so a single tap waits a moment to be sure.
+  tapOrFocus(e) {
+    const last = this.lastTap;
+    const at = { clientX: e.clientX, clientY: e.clientY };
+    if (
+      last &&
+      e.timeStamp - last.time < 320 &&
+      Math.hypot(e.clientX - last.x, e.clientY - last.y) < 30
+    ) {
+      clearTimeout(last.timer);
+      this.lastTap = null;
+      this.focusToy(at);
+      return;
+    }
+    const timer = setTimeout(() => {
+      this.lastTap = null;
+      this.tapToy(at);
+    }, 300);
+    this.lastTap = { time: e.timeStamp, x: e.clientX, y: e.clientY, timer };
+  }
+
+  async focusToy(e) {
+    const player = this.player;
+    const [x, y] = player.canvasPoint(e);
+    player.pickDirty = true;
+    const hit = await player.pickAt(x, y);
+    // (A double-tap the toy doesn't take resets the view, as elsewhere.)
+    if (!player.focusAt(hit || null)) player.resetCamera();
   }
 
   onAction(r) {
