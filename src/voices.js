@@ -1367,13 +1367,16 @@ function playSample(c, o, t, p) {
   const fallback = () => (p.fallback ? playSpec(c, o, t, p.fallback, { pitch: p.f }) : 0);
   if (!e || !e.buf) {
     if (!file || e?.failed) return fallback();
+    // An offline render that didn't load its samples first (loadSamples)
+    // hears the fallback.
+    if (typeof OfflineAudioContext !== "undefined" && c instanceof OfflineAudioContext)
+      return fallback();
     // Not loaded yet (a page that plays specs directly): load it, then play
-    // it late if it arrives within a second. Offline renders load first.
-    if (typeof OfflineAudioContext === "undefined" || !(c instanceof OfflineAudioContext))
-      loadSample(c, file).then((buf) => {
-        const late = c.currentTime - t;
-        if (late < 1) (buf ? playSample : fallback)(c, o, Math.max(t, c.currentTime + 0.01), p);
-      });
+    // it late if it arrives within a second.
+    loadSample(c, file).then((buf) => {
+      const late = c.currentTime - t;
+      if (late < 1) (buf ? playSample : fallback)(c, o, Math.max(t, c.currentTime + 0.01), p);
+    });
     return 0.5;
   }
   const rate = Math.max(0.25, Math.min(4, p.f || 1));
