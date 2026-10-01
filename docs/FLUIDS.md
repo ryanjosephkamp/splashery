@@ -257,8 +257,9 @@ Laan, Green and Sainz, I3D 2009), after PlayCanvas has drawn the frame (`postren
    thickness (so a deep cola is dark and its thin edges amber, and water tints only where it is
    deep), a Fresnel reflection of a soft studio sky, a specular highlight, and glow for lava.
 4. The glass is traced analytically in the same pass (a cylinder: the front wall's Fresnel
-   reflection and highlight, its silhouette lines, the far wall's faint reflection), so the liquid
-   is seen through it.
+   reflection and highlight, crisp silhouette edges, the far wall's faint reflection, and its rim
+   and foot as clean lines about a pixel wide), so the liquid is seen through it and the glass reads
+   at a glance.
 
 ### Real smoke and flames: a grid gas solver
 

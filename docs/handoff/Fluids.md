@@ -165,6 +165,14 @@ State (see docs/FLUIDS.md, "r4"):
   grid. `?fluids=cpu`: r3 everywhere.
 - Tools: `tools/fl-gpu-physics.mjs` (the dam break on the GPU solver), `tools/fl-bench.html` (frame
   times on a real device, tier by tier; served by Pages once merged).
+- Cards on Effect review page 2 (October 1, 2026): fl-r4-flame and fl-r4-smoke marked "good";
+  fl-r4-pour and fl-r4-soda "fix" (the owner: the glass's rim and outline were hard to make out;
+  "the liquid itself is definitely getting better"), redone as fl-r4-pour-r2 and fl-r4-soda-r2 with
+  a crisp traced glass (rim ring, edges, foot); fl-r4-splash (honest: no crown yet, clear water hard
+  to see on a dark background); fl-r4-phone (tools/fl-bench.html gives a phone's real numbers once
+  merged).
+- Sound: from the simulation (src/fluids/acoustic.js), after the owner's Sound Board note ("isn't in
+  sync with fluid pour animation"); real recordings wait for Sound A's sample voice.
 - Lessons: a collider wall thinner than about three cells lets MPM particles through; a sprite
   smaller than a texel breaks a far liquid into specks (the surface pass enlarges it and keeps its
   volume); foam must spawn only where a stream plunges into the slow pool, or it coats the stream; a
