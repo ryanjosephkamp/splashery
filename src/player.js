@@ -1499,6 +1499,9 @@ export class Player {
   // pointer follows the horizontal plane the drag started on, or the plane
   // `drag.plane` names: "view" (facing the camera) or a normal in recipe
   // coordinates (or `(point) => normal`, such as the face of a cube).
+  // Lane UI r4: `drag.start` and `drag.move` may return taps to fire, as a
+  // tap on the toy would ({ key, pick }, or a list of them in order): a
+  // glissando, a finger dragged across a keyboard's keys.
   dragStartsHere(world) {
     const d = this.toyInfo?.recipe?.drag;
     return !d || !!d.at(this.toRecipe(world));
@@ -1512,7 +1515,8 @@ export class Player {
       const p = this.toRecipe(world);
       const n = typeof drag.plane === "function" ? drag.plane(p) : drag.plane;
       this.dragPlane = n ? { point: p, normal: n === "view" ? this.recipeRay(x, y).dir : n } : null; // prettier-ignore
-      drag.start?.(p, this.time);
+      this.dragFired = false; // UI r4
+      this.fireDrag(drag.start?.(p, this.time));
       this.stage.requestRender();
       return;
     }
@@ -1533,9 +1537,11 @@ export class Player {
       if (Math.abs(den) < 1e-4) return;
       const t = ((o[0] - ray.origin[0]) * n[0] + (o[1] - ray.origin[1]) * n[1] + (o[2] - ray.origin[2]) * n[2]) / den; // prettier-ignore
       if (t < 0) return;
-      drag.move(
-        [0, 1, 2].map((i) => ray.origin[i] + ray.dir[i] * t),
-        this.time,
+      this.fireDrag(
+        drag.move(
+          [0, 1, 2].map((i) => ray.origin[i] + ray.dir[i] * t),
+          this.time,
+        ),
       );
       this.stage.requestRender();
       return;
@@ -1546,7 +1552,7 @@ export class Player {
       if (Math.abs(ray.dir[1]) < 1e-4) return;
       const t = (this.dragY - ray.origin[1]) / ray.dir[1];
       const w = [0, 1, 2].map((i) => ray.origin[i] + ray.dir[i] * t);
-      drag.move(this.toRecipe(w), this.time);
+      this.fireDrag(drag.move(this.toRecipe(w), this.time));
       this.stage.requestRender();
       return;
     }
@@ -1568,6 +1574,19 @@ export class Player {
     if (len > 1e-6) pull = pull.map((v) => (v / len) * max * Math.tanh(len / max));
     this.driver.grabTo(pull);
     this.stage.requestRender();
+  }
+
+  // UI r4: fires the taps a recipe's drag returned, in order, as taps on the
+  // toy would (each sounds and moves its key); `dragFired` tells the app the
+  // drag played, so letting go is not also a tap.
+  fireDrag(taps) {
+    if (!taps) return;
+    for (const t of Array.isArray(taps) ? taps : [taps]) {
+      if (!t?.key || !this.motion.controlDef(t.key)) continue;
+      const r = this.motion.act(this.time, null, { key: t.key, pick: t.pick ?? null });
+      this.dragFired = true;
+      this.emit("action", { ...r, drag: true });
+    }
   }
 
   // The pointer's ray in the current toy's recipe coordinates (the
