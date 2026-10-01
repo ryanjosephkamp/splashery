@@ -473,7 +473,7 @@ export const TOYS = [
   },
   {
     id: "alarm-clock",
-    label: "Alarm clock",
+    label: "Real alarm clock",
     category: "scans",
     tags: "photoreal model time bell",
     kind: "captured",
@@ -3376,6 +3376,17 @@ export const TOYS = [
     tags: "photo picture image depth 3d parallax relief layers convert converter depth map jpeg png webp",
     camera: { yaw: 0, pitch: 0, roll: 0, distance: 2.6 },
   },
+  // ---- Pack: video3d (lane Video 3D) ----
+  {
+    id: "video-3d",
+    label: "Video to 3D",
+    category: "studio",
+    kind: "kit",
+    pack: "video3d",
+    labs: true,
+    tags: "video film clip drone flight walk street 3d scene camera path structure from motion gaussian splats train webgpu convert converter mp4 webm",
+    camera: { yaw: 0, pitch: 0, roll: 0, distance: 2.6 },
+  },
   // ---- Pack: lab (lane Lab) ----
   {
     id: "splat-field",
@@ -3420,11 +3431,13 @@ export function categoryLabel(id) {
 }
 
 // A scan's looks as a Toy tab option, and the look a scene's options pick
-// (null for a scan without looks). Only the look's id is saved.
+// (null for a scan without looks). Only the look's id is saved. A shelf
+// shape's looks carry generator settings instead of files, and `lookLabel`
+// names the choice ("Planet").
 export function lookOption(def) {
   return {
     key: "look",
-    label: "Look",
+    label: def.lookLabel || "Look",
     type: "select",
     default: def.looks[0].id,
     choices: def.looks.map((l) => ({ id: l.id, label: l.label })),

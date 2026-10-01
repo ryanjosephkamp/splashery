@@ -71,6 +71,17 @@ Saving always writes version 3.
 | `pattern`   | object | A design wrapped around the toy (version 3); see below.                                                     |
 | `motion`    | object | How the toy moves (version 3); see below.                                                                   |
 
+### `camera`
+
+`{ "yaw": 0.55, "pitch": 0.32, "roll": 0, "distance": 4.5 }`: the orbit pose, in radians (yaw, pitch
+between −1.45 and 1.45, roll) and toy radii (distance, 1.25 to 10).
+
+- `pan` (optional; added September 30, 2026, lane UI r2): `[x, y, z]`, how far the view was moved
+  across the toy (a two-finger drag, or Shift or Option/Alt and a drag), from the toy's center in
+  multiples of its radius, each between −1 and 1. It is left out when the toy is centered, and a
+  scene without it (every scene of version 2 or 3 saved before) shows the toy centered, exactly as
+  before. Reset (↺, R or a double-tap) clears it.
+
 ### `toy`
 
 One of three kinds:

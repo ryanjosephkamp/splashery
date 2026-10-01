@@ -135,7 +135,7 @@ export const TOY_HELP = {
   "vintage-camera": {
     howTo: "Tap it to take a photo with a flash.",
     about:
-      "An old film camera. Inside, a roll of film coated with chemicals that change when light hits them sits behind the lens. Pressing the button opens a shutter for a split second, the lens lets in a picture of the world, and the film keeps it. Then a lever winds the film on to a fresh frame.\n\nTap it and the flash bursts, the whole scene whites out for a moment, and you hear the shutter click and the film wind on. Early cameras needed people to sit still for minutes; a modern shutter can open for less than a thousandth of a second.",
+      "An old film camera. Inside, a roll of film coated with chemicals that change when light hits them sits behind the lens. Pressing the button opens a shutter for a split second, the lens lets in a picture of the world, and the film keeps it. Then a lever winds the film on to a fresh frame.\n\nTap it and the flash bursts, the whole scene whites out for a moment, and you hear the shutter and the whoomph of the flash powder. Early cameras needed people to sit still for minutes; a modern shutter can open for less than a thousandth of a second.",
   },
   boombox: {
     howTo: "Tap it to play a beat.",
@@ -417,7 +417,7 @@ export const TOY_HELP = {
   pulsar: {
     howTo: "Tap it to spin it up. Set its spin speed in the Toy tab.",
     about:
-      "A pulsar is a neutron star, the crushed core left after a giant star explodes. It is only about 20 kilometers across, the size of a city, yet it holds more matter than the Sun. It spins fast and sends out two beams of light from its magnetic poles.\n\nLike a lighthouse, it seems to flash each time a beam sweeps past. Tap it to spin it up until the flashes blur into a strobe, each with a tick, then it winds down. Set its spin speed in the Toy tab. The first pulsar was found by Jocelyn Bell Burnell in 1967, and the fastest spin hundreds of times a second.",
+      "A pulsar is a neutron star, the crushed core left after a giant star explodes. It is only about 20 kilometers across, the size of a city, yet it holds more matter than the Sun. It spins fast and sends out two beams of light from its magnetic poles.\n\nLike a lighthouse, it seems to flash each time a beam sweeps past. Tap it to spin it up until the flashes blur into a strobe, each with a deep pulse, then it winds down. Set its spin speed in the Toy tab. The first pulsar was found by Jocelyn Bell Burnell in 1967, and the fastest spin hundreds of times a second.",
   },
   "black-hole": {
     howTo: "Tap it to feed it a star.",
@@ -1086,7 +1086,7 @@ export const TOY_HELP = {
   clock: {
     howTo: "Tap it to ring the alarm.",
     about:
-      "A wind-up alarm clock has two metal bells on top and a little hammer between them. At the set time a spring inside lets the hammer go, and it strikes the two bells back and forth very fast, loud enough to wake a sleeper. Before alarm clocks were common, some people were paid to go around town tapping on windows to wake others up.\n\nThe hands on this clock show the real time where you are. Tap it to ring the alarm: the hammer rattles between the bells and the whole clock shakes and hops. Pick its color in the Toy tab.",
+      "A wind-up alarm clock has two metal bells on top and a little hammer between them. At the set time a spring inside lets the hammer go, and it strikes the two bells back and forth very fast, loud enough to wake a sleeper. Before alarm clocks were common, some people were paid to go around town tapping on windows to wake others up.\n\nThe hands on this clock show the real time where you are, or in another time zone you pick in the Toy tab. Tap it to ring the alarm: the hammer rattles between the bells and the whole clock shakes and hops. Pick its color in the Toy tab.",
   },
   "gift-box": {
     howTo: "Tap to open the present; tap again to close it.",
@@ -1296,7 +1296,8 @@ export const TOY_HELP = {
       "A hypercube, or tesseract, is a cube in four dimensions. A square has 4 corners and a cube has 8; a tesseract has 16 corners and 32 edges, and its sides are 8 cubes. We can't see four dimensions, so this toy shows its shadow in our three: a cube inside a cube, with their corners joined.\n\nAt rest it rocks gently in 4D. Tap it to turn it once around through the fourth dimension: the pink inner cube swells out to become the outer one while the blue one folds inside, then it turns on back to where it started. Every edge stays perfectly straight the whole time.",
   },
   "torus-knot": {
-    howTo: "Tap to pull it and let go. Pick another knot in the Toy tab.",
+    howTo:
+      "Tap it: the knot pulls loose and springs back. Drag to turn it. Pick a knot in the Toy tab.",
     about:
       "A torus knot is a knot that winds around the surface of a donut shape, called a torus. It goes around the hole a few times one way while it loops through it a few times the other way. The simplest is the trefoil, which winds 2 and 3 times; it is the simplest true knot, one that can never be untied without cutting it.\n\nTap it and the knot is pulled loose, its loops stretching and swirling; then it is let go and springs back past its rest shape and wobbles to a stop, like a spring. Pick a trefoil, a cinquefoil or another knot in the Toy tab.",
   },
@@ -1376,7 +1377,7 @@ export const TOY_HELP = {
   cnn: {
     howTo: "Tap it to read the digit. Draw your own digit in the Toy tab.",
     about:
-      "A convolutional network, or CNN, is a neural network built for pictures. It slides small filters across the picture: each filter is a little grid of weights that lights up where it finds its pattern, such as a slanted stroke, and makes a feature map. Pooling shrinks the map, keeping the strongest signal in each patch, and later layers combine the features to recognize the whole shape.\n\nTap it: a glowing 3-by-3 filter slides over a handwritten 7, stamping a feature map tile by tile; the tiles pool into a smaller map, and the scores for the digits 0 to 9 rise with 7 on top. In the Toy tab, pick a 3D view, or draw a digit and a small trained network reads it.",
+      "A convolutional network, or CNN, is a neural network built for pictures. It slides small filters across the picture: each filter is a little grid of weights that lights up where it finds its pattern, such as a slanted stroke, and makes a feature map. Pooling shrinks the map, keeping the strongest signal in each patch, and later layers combine the features to recognize the whole shape.\n\nTap it: a glowing 3-by-3 filter slides over a handwritten 7, stamping a feature map tile by tile; the tiles pool into a smaller map, and the scores for the digits 0 to 9 rise with 7 on top. In the Toy tab, pick a 3D view, or draw a digit and a small trained network reads it. Each square on the drawing pad is one pixel of the small 8-by-8 picture the network reads: the lighter its gray, the more ink it holds, and the pad starts with the sample 7.",
   },
   rnn: {
     howTo: "Tap it to read a sentence one word at a time. Try the LSTM style in the Toy tab.",
@@ -1505,6 +1506,13 @@ export const TOY_HELP = {
       "Tap to lift the picture's depth out of it, then tap again to lay it flat. Open your own photo in the Toy tab.",
     about:
       "A photo is flat, but a computer can guess how far away each part of it is. A depth model, a small neural network trained on millions of pictures, looks at your photo and gives every spot a distance: the path is near, the trees are far. This toy runs that model right on your device, and then rebuilds the photo as splats. Each splat takes the photo's color at its place and sits at its guessed depth, so when you turn the toy, near things move across far ones, the way they do when you move your head.\n\nWhere the depth jumps, a near leaf against a far tree, the surface is cut, so the leaf stands as its own layer instead of being smeared to the background. Tap to raise the layers one after another and sway. Layers pulls them apart. Depth sets how deep the relief is. Open a JPEG, PNG or WebP in the Toy tab (the model, 27 MB, loads the first time). Your photo never leaves your device.",
+  },
+
+  "video-3d": {
+    howTo:
+      "Tap to fly the video's own camera path, then drag to roam off it. Open your own video in the Toy tab.",
+    about:
+      "A video is a string of photos taken from a moving camera. If the scene stands still, each photo shows it from a slightly different place, and that is enough to rebuild it in 3D. This toy picks the sharpest frames of the stretch you choose, finds the same small features (corners, specks, edges) in many of them, and works out where the camera must have been for each frame so that they all line up. That is called structure from motion. Then it trains 3D Gaussian splats: it starts from the points it found and keeps nudging each splat's place, size, shape and color until the scene, seen from each camera, looks like the frame taken there.\n\nIt all runs on your device's graphics card (WebGPU), and nothing is uploaded. It takes minutes, longer on a phone. Things that move while the camera films (cars, people, water) blur or vanish, and blank walls or sky give it nothing to match. Tap Replay flight to fly the video's path with its sound, or save the splats as a PLY.",
   },
 
   // ---- Lab (lane Lab) -------------------------------------------------------------------
