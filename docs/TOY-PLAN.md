@@ -10,8 +10,8 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 335 toys. 335 have a tap action today; the other 0 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 331.
+- 337 toys. 337 have a tap action today; the other 0 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 333.
 - **more** (has an effect; make it clearer or more dramatic): 0.
 - **new** (needs its own effect): 4.
 - Visual fixes: 0 open, 30 done. Touch or drag interaction asked for: 4.
@@ -56,7 +56,8 @@ Proposals below are suggestions; the owner may change them.
   Neural network, Convolutional network, Recurrent network, Transformer, Looped transformer,
   Diffusion model, Gradient descent, Gaussian splatting, Word vectors, Sorting machine, Half adder,
   Turing machine, Difference engine, Enigma machine, Bombe, Your book, Photo album, Picture frame,
-  Model to splats, Photo to 3D, Video to 3D, Splat field, Fluid lab, Screen.
+  Room echo meter, Splat mirror, Model to splats, Photo to 3D, Video to 3D, Splat field, Fluid lab,
+  Screen.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -2470,7 +2471,7 @@ Proposals below are suggestions; the owner may change them.
     style; sharp sets (even placement in square tiles, walnut, velvet, brass and gold).
   - Sound: Switching on is the click and crackle without the hum; switching off is unchanged.
 
-## Studio (5)
+## Studio (7)
 
 - **Song landscape** (`song-landscape`). Now: tap: Play or pause the song. Plan: new effect (E6).
   - Owner: Approved on the Splashery Universe page (lane Studio Sound), September 29, 2026.
@@ -2484,6 +2485,28 @@ Proposals below are suggestions; the owner may change them.
   - Effect: A tap bows a square metal plate: every sand grain hops where the plate swings and slides
     to the still lines, and in about 3.6 s the mode's figure appears; tap again to stir it up.
   - Sound: The plate's hum with the sand sliding as it settles (no patter of clicks).
+- **Room echo meter** (`room-echo`). Now: tap: Clap in the sample room. Plan: keep.
+  - Owner: The owner's approval of lane Live input ("live input go", September 30, 2026; labs only).
+  - Effect: A splat room with a wooden floor and three walls. Tap “Use my microphone” and clap once:
+    rings of sound spread across the floor from the clap, a new one every 70 ms for as long as the
+    room still rings, each as bright as the sound was at that moment (on a dB scale), and the walls
+    glow as they arrive; the rings run at half speed. The page measures the room's reverberation
+    time (RT60, Schroeder's backward integral, T20 or T10) and shows it on the back wall, or says
+    plainly when the room is too noisy. A tap claps in a sample room (0.8 s) or the last room
+    measured.
+  - Improved: Live input: the first toy fed by the microphone, turned on only by its button; the
+    measurement is tested on synthetic decays of 0.4, 0.8 and 1.6 s (within 10%).
+  - Sound: A hand clap that rings as long as the room (silent while the microphone listens).
+- **Splat mirror** (`splat-mirror`). Now: tap: Flatten or raise the depth. Plan: keep.
+  - Owner: The owner's approval of lane Live input ("live input go", September 30, 2026; labs only).
+  - Effect: A framed picture of splats. Tap “Use my camera” and it shows you as in a mirror; the
+    depth model (Depth Anything V2 Small, in a worker, loaded only after the tap) works out how near
+    each part is as often as the device allows, and the picture rises into a relief you can turn.
+    Before the camera is on it shows a still life with its depth. A tap flattens the relief into its
+    frame and the next raises it again (about 1.4 s); the picture itself keeps still.
+  - Improved: Live input: relief splats (a new kind) take their color and lift from a canvas drawn
+    each frame, so the picture moves without a rebuild.
+  - Sound: A soft rising whoosh as the depth comes up; a falling one as it flattens.
 - **Model to splats** (`model-splats`). Now: tap: Lift off and settle back. Plan: keep.
   - Owner: Approved on the Splashery Universe page (lane Studio Models), September 29, 2026.
   - Effect: A 3D model file (glTF, OBJ or STL) turned into splats on the device; the tap lifts every

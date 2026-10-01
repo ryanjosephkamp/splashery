@@ -3354,6 +3354,27 @@ export const TOYS = [
     tags: "chladni plate sand sound vibration frequency resonance mode nodal lines pattern bow physics",
     camera: { yaw: 0.2, pitch: 0.95, roll: 0, distance: 4.1 },
   },
+  // ---- Pack: live (lane Live input) ----
+  {
+    id: "room-echo",
+    label: "Room echo meter",
+    category: "studio",
+    kind: "kit",
+    pack: "live",
+    labs: true,
+    tags: "room echo reverb reverberation rt60 clap acoustics sound decay microphone live measure",
+    camera: { yaw: 0, pitch: 0.6, roll: 0, distance: 3.3 },
+  },
+  {
+    id: "splat-mirror",
+    label: "Splat mirror",
+    category: "studio",
+    kind: "kit",
+    pack: "live",
+    labs: true,
+    tags: "mirror camera webcam selfie live depth hologram 3d relief video you",
+    camera: { yaw: 0, pitch: 0, roll: 0, distance: 3.2 },
+  },
   // ---- Pack: studio-models (lane Studio Models) ----
   {
     id: "model-splats",
