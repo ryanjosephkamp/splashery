@@ -135,7 +135,7 @@ export const TOY_HELP = {
   "vintage-camera": {
     howTo: "Tap it to take a photo with a flash.",
     about:
-      "An old film camera. Inside, a roll of film coated with chemicals that change when light hits them sits behind the lens. Pressing the button opens a shutter for a split second, the lens lets in a picture of the world, and the film keeps it. Then a lever winds the film on to a fresh frame.\n\nTap it and the flash bursts, the whole scene whites out for a moment, and you hear the shutter click and the film wind on. Early cameras needed people to sit still for minutes; a modern shutter can open for less than a thousandth of a second.",
+      "An old film camera. Inside, a roll of film coated with chemicals that change when light hits them sits behind the lens. Pressing the button opens a shutter for a split second, the lens lets in a picture of the world, and the film keeps it. Then a lever winds the film on to a fresh frame.\n\nTap it and the flash bursts, the whole scene whites out for a moment, and you hear the shutter and the whoomph of the flash powder. Early cameras needed people to sit still for minutes; a modern shutter can open for less than a thousandth of a second.",
   },
   boombox: {
     howTo: "Tap it to play a beat.",
@@ -417,7 +417,7 @@ export const TOY_HELP = {
   pulsar: {
     howTo: "Tap it to spin it up. Set its spin speed in the Toy tab.",
     about:
-      "A pulsar is a neutron star, the crushed core left after a giant star explodes. It is only about 20 kilometers across, the size of a city, yet it holds more matter than the Sun. It spins fast and sends out two beams of light from its magnetic poles.\n\nLike a lighthouse, it seems to flash each time a beam sweeps past. Tap it to spin it up until the flashes blur into a strobe, each with a tick, then it winds down. Set its spin speed in the Toy tab. The first pulsar was found by Jocelyn Bell Burnell in 1967, and the fastest spin hundreds of times a second.",
+      "A pulsar is a neutron star, the crushed core left after a giant star explodes. It is only about 20 kilometers across, the size of a city, yet it holds more matter than the Sun. It spins fast and sends out two beams of light from its magnetic poles.\n\nLike a lighthouse, it seems to flash each time a beam sweeps past. Tap it to spin it up until the flashes blur into a strobe, each with a deep pulse, then it winds down. Set its spin speed in the Toy tab. The first pulsar was found by Jocelyn Bell Burnell in 1967, and the fastest spin hundreds of times a second.",
   },
   "black-hole": {
     howTo: "Tap it to feed it a star.",

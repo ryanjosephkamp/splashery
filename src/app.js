@@ -1,7 +1,7 @@
 // Splashery app: the shelf, the tools, making toys, look, bring-your-own
 // files and sharing, on top of the shared Player runtime.
 
-import { Player, NoGPUError, Gestures } from "./player.js";
+import { Player, NoGPUError, Gestures, ui2On } from "./player.js";
 import { createUI } from "./ui.js";
 import {
   createScene,
@@ -385,10 +385,13 @@ class App {
       q.setAttribute("aria-current", "true");
       nodes.push(q);
     }
-    // Recorded samples in the toy's tap sound (src/sound-credits.js).
-    for (const file of samplesIn(info?.id ? toySound(info.id) : null)) {
+    // Recorded samples in the toy's tap sound (src/sound-credits.js), one
+    // line per source (a sampled instrument's notes share one).
+    const sources = new Set();
+    for (const file of samplesIn(info?.id ? toySound(info.id) : null, [], true)) {
       const c = SOUND_CREDITS[file];
-      if (!c) continue;
+      if (!c || sources.has(c.source)) continue;
+      sources.add(c.source);
       const q = document.createElement("p");
       q.className = "credit";
       const strong = document.createElement("strong");
@@ -595,6 +598,8 @@ class App {
         // While the phone sheet is open, a tap on the toy only closes it.
         if (this.ui.sheetOpen()) return "orbit";
         if (e.button === 1 || e.button === 2 || this.spaceHeld) return "orbit";
+        // UI r2: Shift or Option/Alt and a drag moves the toy (any tool).
+        if (ui2On() && (e.shiftKey || e.altKey) && e.pointerType !== "touch") return "orbit";
         // A stretchy toy: with Orbit, a drag that starts on it stretches it
         // (toolStart turns a drag that starts off it back into an orbit).
         if (this.tool === "orbit") return this.player.canGrab() ? "tool" : "orbit";
@@ -612,26 +617,32 @@ class App {
         player.interact();
         canvas.focus({ preventScroll: true });
       },
-      onOrbitStart: () => {
+      onOrbitStart: (e) => {
         cam.begin();
-        canvas.classList.add("orbiting");
+        // UI r2: a drag begun with Shift or Option/Alt held moves the toy.
+        this.panDrag = ui2On() && !!(e?.shiftKey || e?.altKey) && e.type === "pointerdown";
+        canvas.classList.add(this.panDrag ? "panning" : "orbiting");
       },
       onOrbit: (dx, dy, dt) => {
         // Pictures: close up on a page, a drag moves across it.
-        if (player.pansHere()) player.panBy(dx, dy);
+        if (this.panDrag || player.pansHere()) player.panBy(dx, dy);
         else cam.rotateBy(dx, dy, dt);
         player.stage.requestRender();
       },
       onOrbitEnd: () => {
         cam.end();
-        canvas.classList.remove("orbiting");
+        this.panDrag = false;
+        canvas.classList.remove("orbiting", "panning");
       },
+      pairPinch: ui2On(), // UI r2: read two fingers' moves as pairs
       onPinchStart: () => cam.begin(),
       onPinch: ({ scale, dx, dy, twist, mode, dt }) => {
         // Pictures: two fingers move a picture toy, as in a photo viewer.
         if (player.pictures) player.panBy(dx, dy);
         // A pinch only zooms: two fingers turn the toy only when they move
-        // together first (lane Viewer).
+        // together first (lane Viewer). UI r2: that two-finger drag moves
+        // the toy instead; one finger turns it.
+        else if (mode === "drag" && ui2On()) player.panBy(dx, dy);
         else if (mode === "drag") cam.rotateBy(dx, dy, dt);
         if (scale > 0) cam.zoomBy(1 / scale);
         cam.rollBy(-twist);
@@ -1055,7 +1066,11 @@ class App {
       if (/^[1-5]$/.test(e.key)) this.setTool(tools[Number(e.key) - 1]);
       else if (e.key === "p" || e.key === "P") this.pokeRandom();
       else if (e.key === "r" || e.key === "R") this.resetCamera();
-      else if (e.key === "Escape") this.ui.collapseSheet();
+      else if (e.key === "Escape") this.ui.escape() || this.ui.collapseSheet();
+      else if (ui2On() && (e.key === "f" || e.key === "F"))
+        this.ui.toggleFocus(); // UI r2
+      else if (ui2On() && e.key === "[")
+        this.ui.togglePanel(); // UI r2
       else if (e.target === canvas && e.key.startsWith("Arrow")) {
         e.preventDefault();
         const step = 36;

@@ -870,7 +870,9 @@ const BRASS = "#c9a24a";
 const grand = keyboardRuntime({
   low: 21,
   high: 108,
-  voice: "grand",
+  // Recorded piano notes (lane Sound A; the synth "grand" stays on the
+  // electronic keyboard's PIANO button).
+  voice: "concert",
   songs: [SONGS.elise, SONGS.clair, SONGS.gymnopedie, SONGS.ode],
 });
 const grandLevers = levers();

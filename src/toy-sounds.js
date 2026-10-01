@@ -40,14 +40,154 @@ export const TOY_SOUNDS = {
   millipede: { voice: "patter", f: 2200, n: 30, decay: 2, vol: 0.8 },
   bumblebee: { voice: "buzz", f: 130, rate: 6, bright: 0.35, decay: 2.4 },
   raspberry: [
-    { voice: "squish", pitch: 1.4, bright: 0.5, decay: 0.9 },
-    { voice: "bubbles", at: 0.05, f: 900, n: 4, decay: 0.5 },
-    { voice: "patter", at: 0.45, f: 1500, n: 14, decay: 1.6, vol: 0.7 },
+    {
+      voice: "sample",
+      file: "raspberry-squish.mp3",
+      len: 0.45,
+      pitch: 1.25,
+      vol: 1.1,
+      fallback: { voice: "squish", pitch: 1.4 },
+    },
+    {
+      voice: "sample",
+      file: ["raspberry-land-1.mp3", "raspberry-land-2.mp3"],
+      at: 0.55,
+      pitch: 2.6,
+      vol: 0.8,
+      fallback: { voice: "thud", f: 300, decay: 0.3 },
+    },
+    {
+      voice: "sample",
+      file: ["raspberry-land-1.mp3", "raspberry-land-2.mp3"],
+      at: 0.68,
+      pitch: 2.9,
+      vol: 0.7,
+      fallback: { voice: "thud", f: 300, decay: 0.3 },
+    },
+    {
+      voice: "sample",
+      file: ["raspberry-land-1.mp3", "raspberry-land-2.mp3"],
+      at: 0.8,
+      pitch: 2.4,
+      vol: 0.75,
+      fallback: { voice: "thud", f: 300, decay: 0.3 },
+    },
+    {
+      voice: "sample",
+      file: ["raspberry-land-1.mp3", "raspberry-land-2.mp3"],
+      at: 0.97,
+      pitch: 2.8,
+      vol: 0.65,
+      fallback: { voice: "thud", f: 300, decay: 0.3 },
+    },
+    {
+      voice: "sample",
+      file: ["raspberry-land-1.mp3", "raspberry-land-2.mp3"],
+      at: 1.12,
+      pitch: 2.5,
+      vol: 0.6,
+      fallback: { voice: "thud", f: 300, decay: 0.3 },
+    },
+    {
+      voice: "sample",
+      file: ["raspberry-land-1.mp3", "raspberry-land-2.mp3"],
+      at: 1.33,
+      pitch: 3,
+      vol: 0.5,
+      fallback: { voice: "thud", f: 300, decay: 0.3 },
+    },
+    {
+      voice: "sample",
+      file: ["raspberry-land-1.mp3", "raspberry-land-2.mp3"],
+      at: 1.55,
+      pitch: 2.6,
+      vol: 0.45,
+      fallback: { voice: "thud", f: 300, decay: 0.3 },
+    },
+    {
+      voice: "sample",
+      file: ["raspberry-land-1.mp3", "raspberry-land-2.mp3"],
+      at: 1.8,
+      pitch: 2.8,
+      vol: 0.35,
+      fallback: { voice: "thud", f: 300, decay: 0.3 },
+    },
+    {
+      voice: "sample",
+      file: "raspberry-squish.mp3",
+      at: 2.25,
+      len: 0.35,
+      pitch: 1.5,
+      vol: 0.5,
+      fallback: { voice: "squish", pitch: 1.6, vol: 0.4 },
+    },
   ],
   blackberry: [
-    { voice: "squish", pitch: 0.8, bright: 0.2, decay: 1.2 },
-    { voice: "bubbles", at: 0.06, f: 420, n: 3, decay: 0.6 },
-    { voice: "patter", at: 0.75, f: 900, n: 12, decay: 0.8, vol: 0.8 },
+    {
+      voice: "sample",
+      file: "raspberry-squish.mp3",
+      len: 0.55,
+      pitch: 0.95,
+      vol: 1.2,
+      fallback: { voice: "squish", pitch: 0.8 },
+    },
+    {
+      voice: "sample",
+      file: ["raspberry-land-1.mp3", "raspberry-land-2.mp3"],
+      at: 0.85,
+      pitch: 2.1,
+      vol: 0.85,
+      fallback: { voice: "thud", f: 300, decay: 0.3 },
+    },
+    {
+      voice: "sample",
+      file: ["raspberry-land-1.mp3", "raspberry-land-2.mp3"],
+      at: 0.93,
+      pitch: 2.3,
+      vol: 0.75,
+      fallback: { voice: "thud", f: 300, decay: 0.3 },
+    },
+    {
+      voice: "sample",
+      file: ["raspberry-land-1.mp3", "raspberry-land-2.mp3"],
+      at: 1,
+      pitch: 1.9,
+      vol: 0.8,
+      fallback: { voice: "thud", f: 300, decay: 0.3 },
+    },
+    {
+      voice: "sample",
+      file: ["raspberry-land-1.mp3", "raspberry-land-2.mp3"],
+      at: 1.08,
+      pitch: 2.2,
+      vol: 0.65,
+      fallback: { voice: "thud", f: 300, decay: 0.3 },
+    },
+    {
+      voice: "sample",
+      file: ["raspberry-land-1.mp3", "raspberry-land-2.mp3"],
+      at: 1.17,
+      pitch: 2,
+      vol: 0.55,
+      fallback: { voice: "thud", f: 300, decay: 0.3 },
+    },
+    {
+      voice: "sample",
+      file: ["raspberry-land-1.mp3", "raspberry-land-2.mp3"],
+      at: 1.27,
+      pitch: 2.4,
+      vol: 0.45,
+      fallback: { voice: "thud", f: 300, decay: 0.3 },
+    },
+    {
+      voice: "sample",
+      file: "raspberry-squish.mp3",
+      at: 1.75,
+      len: 0.4,
+      pitch: 1.15,
+      vol: 0.55,
+      fallback: { voice: "squish", pitch: 1, vol: 0.4 },
+    },
   ],
   blueberry: [
     { voice: "tear", f: 900, to: 0.7, decay: 1.2, bright: 0.4, vol: 0.8 },
@@ -58,9 +198,30 @@ export const TOY_SOUNDS = {
     { voice: "squish", at: 2.3, pitch: 1.6, vol: 0.5 },
   ],
   "star-cookie": [
-    { voice: "crunch", f: 2100, n: 18, decay: 1.3, bright: 0.7 },
-    { voice: "patter", at: 0.2, f: 1300, n: 8, decay: 0.6, vol: 0.7 },
-    { voice: "whoosh", at: 1.55, f: 600, to: 2, decay: 0.6, vol: 0.5 },
+    {
+      voice: "sample",
+      file: "star-cookie-snap.mp3",
+      vol: 1.5,
+      fallback: { voice: "crack", f: 2000 },
+    },
+    {
+      voice: "sample",
+      file: "star-cookie-crumble.mp3",
+      at: 0.12,
+      len: 0.8,
+      vol: 1.1,
+      fallback: { voice: "crunch", n: 6 },
+    },
+    {
+      voice: "sample",
+      file: "star-cookie-crumble.mp3",
+      at: 1.65,
+      from: 0.2,
+      len: 0.8,
+      pitch: 1.15,
+      vol: 0.5,
+      fallback: { voice: "crunch", n: 4, vol: 0.4 },
+    },
   ],
   tomatoes: [
     { voice: "thud", at: 0.4, f: 110, bright: 0.2 },
@@ -68,19 +229,40 @@ export const TOY_SOUNDS = {
     { voice: "thud", at: 0.85, f: 140, bright: 0.2, vol: 0.6 },
     { voice: "thud", at: 1.1, f: 150, bright: 0.2, vol: 0.45 },
   ],
-  mandeltorus: { voice: "shimmer", f: "G4", rate: 7, to: 1.5, decay: 1.4 },
+  // Modeled on the Mandelbulb (the owner likes its sound): a low drone and a
+  // ratchet as the rings start to turn, and again as they lock back.
+  mandeltorus: [
+    { voice: "drone", f: 62, bright: 0.35, decay: 1.9, vol: 0.5 },
+    { voice: "ratchet", at: 0.1, f: 1650, n: 7, rate: 9 },
+    { voice: "ratchet", at: 1.65, f: 1400, n: 7, rate: 8 },
+  ],
   basket: [
     { voice: "rattle", f: 1600, n: 6, decay: 0.8, vol: 0.6 },
     { voice: "clatter", at: 0.5, f: 2200, n: 14, kind: "shell", decay: 2.4 },
   ],
   "rubber-duck-real": { voice: "squeak", f: 2300, to: 1.25, decay: 1.4 },
   "garden-gnome": [
-    { voice: "chuckle", f: 640, n: 4 },
-    { voice: "switch", at: 0.45, f: 2600 },
+    { voice: "thud", at: 0.4, f: 120, bright: 0.25, decay: 0.8, vol: 0.9 },
+    {
+      voice: "sample",
+      file: "lantern-match.mp3",
+      at: 0.38,
+      from: 0.08,
+      len: 0.7,
+      vol: 0.5,
+      fallback: { voice: "roar", f: 200, decay: 0.4, vol: 0.4 },
+    },
+    { voice: "roar", at: 0.42, f: 220, bright: 0.3, decay: 0.5, vol: 0.35 },
   ],
   "wooden-elephant": [
-    { voice: "wood", f: 520, decay: 1.2 },
-    { voice: "brass", at: 0.35, f: "A4", decay: 2.4, vol: 0.8 },
+    { voice: "wood", f: 520, decay: 0.8, vol: 0.5 },
+    {
+      voice: "sample",
+      file: "wooden-elephant-trumpet.mp3",
+      at: 0.33,
+      vol: 0.85,
+      fallback: { voice: "brass", f: "A4", decay: 2 },
+    },
   ],
   // SAL-VE, A-MI-CE: one murmur per syllable, as the jaw drops.
   "marble-bust": [
@@ -90,11 +272,20 @@ export const TOY_SOUNDS = {
   ],
   // Four strums (down, down, up, down) on the ukulele's own tuning: C, F, G, C.
   ukulele: { voice: "nylon", notes: "G4+C4+E4+C5 - A4+C4+F4+A4 B4+D4+G4+B4 - G4+C4+E4+C5", step: 0.15, strum: 0.03, bright: 0.45, decay: 0.9 }, // prettier-ignore
-  "alarm-clock": { voice: "bell", notes: Array(14).fill("A5 C6").join(" "), step: 0.06, decay: 0.3, bright: 0.8 }, // prettier-ignore
-  "vintage-camera": [
-    { voice: "switch", f: 3600, decay: 1.5 },
-    { voice: "ratchet", at: 0.2, f: 1400, n: 9, rate: 26 },
-  ],
+  "alarm-clock": {
+    voice: "sample",
+    file: "alarm-clock-bell.mp3",
+    len: 2.3,
+    vol: 1.4,
+    fallback: { voice: "bell", notes: "A5 C6 A5 C6 A5 C6 A5 C6", step: 0.06, decay: 0.3 },
+  },
+  "vintage-camera": {
+    voice: "sample",
+    file: "vintage-camera-flash.mp3",
+    from: 0.03,
+    vol: 0.8,
+    fallback: { voice: "switch", f: 3600 },
+  },
   boombox: [
     { voice: "kick", notes: "C2 - C2 C2 - - C2 - C2 - C2 C2 - - C2 -", step: 0.15, vol: 0.55 },
     {
@@ -112,8 +303,17 @@ export const TOY_SOUNDS = {
     { voice: "hiss", at: 0.35, decay: 0.8, vol: 0.3 },
   ],
   "carrot-cake": [
-    { voice: "scrape", f: 1400, rate: 3, decay: 1.4, vol: 0.6 },
-    { voice: "thud", at: 2.5, f: 180, vol: 0.4 },
+    { voice: "scrape", f: 1100, rate: 3, decay: 1.4, vol: 0.5 },
+    {
+      voice: "sample",
+      file: "raspberry-squish.mp3",
+      at: 0.15,
+      len: 0.5,
+      pitch: 0.5,
+      vol: 0.3,
+      fallback: { voice: "squish", pitch: 0.5, vol: 0.3 },
+    },
+    { voice: "thud", at: 2.5, f: 180, vol: 0.45 },
   ],
   pomegranate: [
     { voice: "crack", f: 1600, bright: 0.4 },
@@ -121,14 +321,30 @@ export const TOY_SOUNDS = {
   ],
   lantern: {
     on: [
-      { voice: "scrape", f: 2400, rate: 40, decay: 0.3, vol: 0.8 },
-      { voice: "whoosh", at: 0.15, f: 250, to: 3, decay: 0.8 },
+      {
+        voice: "sample",
+        file: "lantern-match.mp3",
+        vol: 0.9,
+        fallback: { voice: "crack", f: 1800 },
+      },
+      { voice: "roar", at: 0.25, f: 240, bright: 0.3, decay: 0.6, vol: 0.35 },
     ],
-    off: { voice: "breath", f: 900, to: 0.6, decay: 0.5, vol: 0.7 },
+    off: {
+      voice: "sample",
+      file: "lantern-blow.mp3",
+      vol: 0.6,
+      fallback: { voice: "breath", f: 900, to: 0.6, decay: 0.5, vol: 0.7 },
+    },
   },
   "cat-statue": [
-    { voice: "scrape", f: 620, rate: 11, decay: 0.9 },
-    { voice: "mew", at: 0.45, f: 700 },
+    { voice: "scrape", f: 520, rate: 9, decay: 0.8, vol: 0.45 },
+    {
+      voice: "sample",
+      file: "cat-statue-meow.mp3",
+      at: 0.42,
+      vol: 0.7,
+      fallback: { voice: "mew", f: 700 },
+    },
   ],
   // Tap to play the Opera Game (each move clacks as it lands, from the recipe);
   // tap again and the pieces slide home.
@@ -137,8 +353,15 @@ export const TOY_SOUNDS = {
     off: { voice: "scrape", f: 900, rate: 6, decay: 1.4, vol: 0.5 },
   },
   "horse-statue": [
-    { voice: "scrape", f: 450, rate: 9, decay: 1.1 },
-    { voice: "whinny", at: 0.4, f: 1150 },
+    { voice: "scrape", f: 420, rate: 8, decay: 0.9, vol: 0.45 },
+    {
+      voice: "sample",
+      file: "horse-statue-whinny.mp3",
+      at: 0.35,
+      vol: 0.7,
+      fallback: { voice: "whinny", f: 1150 },
+    },
+    { voice: "thud", at: 2.3, f: 110, bright: 0.3, decay: 0.7, vol: 0.7 },
   ],
   "pencil-real": [
     { voice: "wood", f: 1500, decay: 0.5, vol: 0.8 },
@@ -146,23 +369,56 @@ export const TOY_SOUNDS = {
   ],
   "tin-can-real": [
     { voice: "metal", f: 520, decay: 0.5, bright: 0.7 },
-    { voice: "ratchet", at: 0.1, f: 3200, n: 22, rate: 9, to: 2.6, vol: 0.45 },
+    {
+      voice: "sample",
+      file: "tin-can-spin.mp3",
+      at: 0.08,
+      len: 2.2,
+      vol: 0.7,
+      fallback: { voice: "scrape", f: 2000, rate: 20, decay: 2, vol: 0.3 },
+    },
     { voice: "metal", at: 2.3, f: 470, decay: 0.7, bright: 0.6, vol: 0.9 },
   ],
-
   // ---- Shapes -----------------------------------------------------------------------
   blob: [
     { voice: "gloop", f: 140, decay: 1.2 },
     { voice: "gloop", at: 1.8, f: 110, decay: 0.9, vol: 0.7 },
   ],
   donut: [
-    { voice: "crack", f: 900, bright: 0.2, vol: 0.7 },
-    { voice: "patter", at: 0.3, f: 2600, n: 16, decay: 1.2 },
-    { voice: "thud", at: 1.9, f: 150, bright: 0.3, vol: 0.5 },
+    {
+      voice: "sample",
+      file: "raspberry-squish.mp3",
+      len: 0.5,
+      pitch: 0.62,
+      vol: 1,
+      fallback: { voice: "squish", pitch: 0.7 },
+    },
+    { voice: "tear", at: 0.02, f: 420, to: 0.8, decay: 0.7, bright: 0.15, vol: 0.45 },
+    {
+      voice: "sample",
+      file: "raspberry-squish.mp3",
+      at: 1.62,
+      len: 0.4,
+      pitch: 0.7,
+      vol: 0.5,
+      fallback: { voice: "squish", pitch: 0.8, vol: 0.4 },
+    },
   ],
-  knot: { voice: "hum", f: 120, to: 1.4, bright: 0.8, decay: 2.4 },
-  planet: { voice: "wind", f: 700, rate: 0.5, decay: 2 },
-
+  knot: [
+    {
+      voice: "sample",
+      file: "neuron-arc.mp3",
+      len: 0.22,
+      pitch: 0.8,
+      vol: 0.35,
+      fallback: { voice: "crackle", n: 3, vol: 0.3 },
+    },
+    { voice: "hum", at: 0.05, f: 120, bright: 0.6, decay: 2.6, vol: 0.75 },
+  ],
+  planet: [
+    { voice: "wind", f: 300, rate: 0.4, decay: 1.6, vol: 0.45 },
+    { voice: "whoosh", at: 0.25, f: 180, to: 1.3, decay: 1.2, vol: 0.3 },
+  ],
   // ---- Balls ------------------------------------------------------------------------
   basketball: [
     { voice: "boing", f: 95, to: 0.8, rate: 30, decay: 0.8 },
@@ -177,21 +433,52 @@ export const TOY_SOUNDS = {
     { voice: "flutter", at: 0.1, f: 500, rate: 12, decay: 3, vol: 0.5 },
     { voice: "thud", at: 1.65, f: 100, bright: 0.3, vol: 0.7 },
   ],
-  "tennis-ball": { voice: "pock", f: 820 },
+  "tennis-ball": {
+    voice: "sample",
+    file: "tennis-ball-slam.mp3",
+    vol: 1.1,
+    fallback: { voice: "pock", f: 500, bright: 0.2 },
+  },
   // The pitch's whoosh, then the crack of the bat as it comes back.
   baseball: [
     { voice: "whoosh", at: 0.24, f: 900, to: 3, decay: 0.5, vol: 0.4 },
-    { voice: "crack", at: 0.82, f: 2400, bright: 0.8 },
+    {
+      voice: "sample",
+      file: "baseball-bat.mp3",
+      at: 0.82,
+      vol: 1.6,
+      fallback: { voice: "crack", f: 2400, bright: 0.8 },
+    },
   ],
   // The underhand release, then a muffled thud where it lands far off.
   softball: [
     { voice: "whoosh", at: 0.52, f: 500, to: 2, decay: 0.6, vol: 0.3 },
-    { voice: "thud", at: 1.4, f: 130, bright: 0.25, decay: 0.8 },
+    {
+      voice: "sample",
+      file: "tennis-ball-slam.mp3",
+      at: 1.4,
+      pitch: 0.6,
+      vol: 1.1,
+      fallback: { voice: "thud", f: 130, bright: 0.25, decay: 0.8 },
+    },
   ],
   // A soft punch up, then the plasticky boing as it lands.
   "beach-ball": [
-    { voice: "slap", f: 600, vol: 0.35 },
-    { voice: "boing", at: 1.42, f: 240, to: 1.4, rate: 9, decay: 0.8 },
+    {
+      voice: "sample",
+      file: "beach-ball-bounce.mp3",
+      len: 0.3,
+      pitch: 1.35,
+      vol: 0.6,
+      fallback: { voice: "slap", f: 600, vol: 0.35 },
+    },
+    {
+      voice: "sample",
+      file: "beach-ball-bounce.mp3",
+      at: 1.42,
+      vol: 0.9,
+      fallback: { voice: "thud", f: 200, vol: 0.6 },
+    },
   ],
   "golf-ball": [
     { voice: "clack", f: 3400, decay: 1.4 },
@@ -220,15 +507,31 @@ export const TOY_SOUNDS = {
   ],
   // The roll's rumble, then the pins crash far off.
   "bowling-ball": [
-    { voice: "rumble", at: 0.32, f: 70, rate: 12, decay: 0.9 },
-    { voice: "clatter", at: 2.02, f: 1100, n: 10, kind: "wood" },
+    {
+      voice: "sample",
+      file: "bowling-ball-roll.mp3",
+      at: 0.32,
+      from: 0.1,
+      len: 1.75,
+      vol: 0.9,
+      fallback: { voice: "rumble", f: 70, rate: 12, decay: 0.9 },
+    },
+    {
+      voice: "sample",
+      file: "bowling-ball-pins.mp3",
+      at: 2.02,
+      vol: 0.8,
+      fallback: { voice: "clatter", f: 1100, n: 10, kind: "wood" },
+    },
   ],
-  "pool-ball": { voice: "clack", f: 2900 },
+  "pool-ball": {
+    voice: "sample",
+    file: "pool-ball-cue.mp3",
+    vol: 1.1,
+    fallback: { voice: "clack", f: 1800 },
+  },
   // The paddle's hollow pop, and air whistling through the holes.
-  pickleball: [
-    { voice: "pock", f: 1250, bright: 0.2, decay: 1.3 },
-    { voice: "whistle", f: 1800, to: 0.8, decay: 0.9, vol: 0.35 },
-  ],
+  pickleball: { voice: "pock", f: 1250, bright: 0.2, decay: 1.3 },
   // Lifted, then the rubbery bwong as it is slammed down.
   dodgeball: [
     { voice: "whoosh", f: 400, to: 2, decay: 0.3, vol: 0.25 },
@@ -247,10 +550,14 @@ export const TOY_SOUNDS = {
   ],
   "bouncy-ball": { voice: "boing", f: 260, to: 2.6, rate: 16 },
   // A glassy clink, and a soft whirr as it rolls.
-  marble: [
-    { voice: "glass", f: 2350, decay: 0.6, bright: 0.7 },
-    { voice: "rumble", f: 380, rate: 28, decay: 1.2, vol: 0.18 },
-  ],
+  marble: {
+    voice: "sample",
+    file: "marble-roll.mp3",
+    len: 2.4,
+    vol: 0.8,
+    fallback: { voice: "rumble", f: 380, rate: 28, decay: 1.2, vol: 0.18 },
+  },
+
   "hockey-puck": [
     { voice: "slap", f: 1700, vol: 0.9 },
     { voice: "scrape", at: 0.08, f: 3000, rate: 40, decay: 1.9, vol: 0.5 },
@@ -272,20 +579,22 @@ export const TOY_SOUNDS = {
   ],
   // A chord rising as the planets swing into line, a shimmer at the eclipse.
   "solar-system": [
-    { voice: "pad", notes: "C4 G4 C5+E5", step: 0.7, decay: 1.2 },
-    { voice: "shimmer", at: 3.3, f: "E6", rate: 6, decay: 1.2, vol: 0.8 },
+    { voice: "whoosh", f: 200, to: 1.8, decay: 1.8, vol: 0.45 },
+    { voice: "roar", at: 3.1, f: 160, bright: 0.3, decay: 1.15, vol: 0.45 },
+    { voice: "whoosh", at: 3.9, f: 300, to: 0.6, decay: 1, vol: 0.4 },
   ],
   // A bright tone as it spins, then the sizzle of the day side's heat.
   mercury: [
-    { voice: "tone", f: "E6", decay: 0.5 },
-    { voice: "sizzle", at: 0.5, f: 3200, decay: 1.8, vol: 0.5 },
+    { voice: "whoosh", f: 400, to: 1.5, decay: 0.6, vol: 0.35 },
+    { voice: "roar", at: 0.1, f: 120, bright: 0.35, decay: 2.2, vol: 0.6 },
+    { voice: "sizzle", at: 0.25, f: 2600, decay: 1.8, vol: 0.3 },
   ],
   venus: { voice: "wind", f: 260, rate: 0.4, decay: 2.4 },
   // Surf and wind through the day, a soft chime as the city lights come on.
   earth: [
-    { voice: "wave", f: 500, decay: 1.4 },
-    { voice: "wind", f: 900, rate: 0.6, decay: 2.2, vol: 0.5 },
-    { voice: "ding", at: 1.6, f: "E6", decay: 1.2, vol: 0.4 },
+    { voice: "wave", f: 500, decay: 1.4, vol: 0.6 },
+    { voice: "wind", f: 700, rate: 0.6, decay: 1.4, vol: 0.18 },
+    { voice: "ding", at: 1.6, f: "E6", decay: 1.2, vol: 0.5 },
   ],
   // A hollow chime at full moon, a lower one at new moon (2.8 s).
   // The descent engine's rumble and hiss (the touchdown thud, the flag's
@@ -298,62 +607,245 @@ export const TOY_SOUNDS = {
     off: { voice: "breath", f: 700, to: 0.8, decay: 0.6, vol: 0.5 },
   },
   mars: [
-    { voice: "hiss", f: 2200, decay: 2.4 },
-    { voice: "wind", at: 0.3, f: 700, rate: 1.4, decay: 2, vol: 0.6 },
+    { voice: "hiss", f: 1500, decay: 2.4, vol: 0.45 },
+    { voice: "wind", at: 0.3, f: 450, rate: 1.2, decay: 2, vol: 0.45 },
   ],
   jupiter: { voice: "drone", f: 44, bright: 0.2, decay: 1.8 },
   // A shimmer for each ripple across the rings.
   saturn: [
-    { voice: "shimmer", f: "E5", rate: 5 },
-    { voice: "shimmer", at: 0.8, f: "B5", rate: 6, decay: 0.8, vol: 0.7 },
+    { voice: "whoosh", f: 2500, to: 1.5, decay: 1, vol: 0.35 },
+    { voice: "whoosh", at: 0.8, f: 3000, to: 1.4, decay: 0.9, vol: 0.28 },
+    { voice: "sparkle", at: 0.1, f: 4200, n: 5, decay: 1.4, vol: 0.2 },
   ],
-  uranus: { voice: "tone", f: "B4", to: 1.02, kind: "triangle", decay: 3 },
+  uranus: [
+    { voice: "rumble", f: 60, rate: 4, decay: 1.2, vol: 0.5 },
+    { voice: "rumble", at: 2.05, f: 55, rate: 4, decay: 1.2, vol: 0.45 },
+  ],
   neptune: { voice: "wind", f: 330, rate: 0.9, decay: 2.4 },
-  "aurora-planet": { voice: "whistle", f: 1500, to: 1.3, decay: 2.4, vol: 0.7 },
+  "aurora-planet": [
+    { voice: "whoosh", f: 300, to: 1.1, decay: 2.4, vol: 0.4 },
+    { voice: "breath", at: 0.1, f: 600, to: 0.8, decay: 2, vol: 0.3 },
+  ],
   // The crack, a boom as it falls apart, and a knock as the pieces meet again.
   asteroid: [
-    { voice: "crack", f: 1300, bright: 0.3 },
-    { voice: "kick", at: 0.3, f: 45, decay: 2 },
+    { voice: "crack", f: 900, bright: 0.25, vol: 0.9 },
+    {
+      voice: "sample",
+      file: "meteor-boom.mp3",
+      len: 0.7,
+      pitch: 1.5,
+      vol: 0.45,
+      fallback: { voice: "rumble", f: 50, rate: 4, decay: 1.5, vol: 0.6 },
+    },
+    {
+      voice: "sample",
+      file: "asteroid-crumble.mp3",
+      at: 0.45,
+      len: 1.9,
+      vol: 0.8,
+      fallback: { voice: "crunch", f: 900, n: 10 },
+    },
+    {
+      voice: "sample",
+      file: "asteroid-crumble.mp3",
+      at: 2.9,
+      from: 1.2,
+      len: 1.4,
+      pitch: 0.8,
+      vol: 0.35,
+    },
     { voice: "stone", at: 4.5, f: 260, decay: 1.2 },
   ],
-  comet: { voice: "whoosh", f: 200, to: 6, decay: 2.2 },
+  comet: [
+    {
+      voice: "sample",
+      file: "comet-fire.mp3",
+      at: 0.1,
+      pitch: 0.9,
+      vol: 0.85,
+      fallback: { voice: "roar", f: 180, decay: 2 },
+    },
+    { voice: "roar", at: 0.3, f: 150, bright: 0.3, decay: 2.8, vol: 0.35 },
+  ],
   // It sizzles in and bursts (0.36 s); the next one sizzles in (3.4 s).
   meteor: [
-    { voice: "sizzle", f: 4500, decay: 0.5 },
-    { voice: "kick", at: 0.36, f: 50, decay: 2.2 },
-    { voice: "sizzle", at: 3.4, f: 3800, decay: 0.8, vol: 0.7 },
+    {
+      voice: "sample",
+      file: "meteor-fire.mp3",
+      len: 0.45,
+      vol: 0.8,
+      fallback: { voice: "roar", f: 300, decay: 0.3 },
+    },
+    {
+      voice: "sample",
+      file: "meteor-boom.mp3",
+      at: 0.36,
+      vol: 1.1,
+      fallback: { voice: "rumble", f: 50, rate: 4, decay: 1.5, vol: 0.6 },
+    },
+    { voice: "sample", file: "comet-fire.mp3", at: 0.5, from: 0.4, len: 1.4, vol: 0.35 },
+    { voice: "sample", file: "meteor-fire.mp3", at: 3.4, len: 0.6, pitch: 0.9, vol: 0.55 },
   ],
   // Swelling to a giant and the whoosh as it puffs off its shell; the
   // recipe rings a bell when the new star lights (6.6 s).
   star: [
-    { voice: "pad", notes: "A3 E4", step: 1.2, decay: 1.6 },
-    { voice: "whoosh", at: 3.6, f: 250, to: 3, decay: 2 },
+    { voice: "roar", f: 90, bright: 0.2, decay: 2, vol: 0.45 },
+    {
+      voice: "sample",
+      file: "meteor-boom.mp3",
+      at: 2.1,
+      len: 0.6,
+      pitch: 0.6,
+      vol: 0.35,
+      fallback: { voice: "rumble", f: 50, rate: 4, decay: 1.5, vol: 0.6 },
+    },
+    {
+      voice: "sample",
+      file: "meteor-boom.mp3",
+      at: 2.7,
+      len: 0.6,
+      pitch: 0.62,
+      vol: 0.35,
+      fallback: { voice: "rumble", f: 50, rate: 4, decay: 1.5, vol: 0.6 },
+    },
+    {
+      voice: "sample",
+      file: "supernova-boom.mp3",
+      at: 3.6,
+      len: 2.2,
+      pitch: 1.1,
+      vol: 0.9,
+      fallback: { voice: "rumble", f: 50, rate: 4, decay: 1.5, vol: 0.6 },
+    },
+    { voice: "roar", at: 6.5, f: 200, bright: 0.3, decay: 1.2, vol: 0.3 },
   ],
   // It hums as it spins up; the recipe adds a tick at each flash.
-  pulsar: { voice: "hum", f: 110, to: 3, bright: 0.4, decay: 2.4 },
+  pulsar: [
+    { voice: "roar", f: 70, bright: 0.2, decay: 3.5, vol: 0.5 },
+    {
+      voice: "sample",
+      file: "supernova-boom.mp3",
+      len: 1.5,
+      pitch: 0.5,
+      vol: 0.35,
+      fallback: { voice: "rumble", f: 50, rate: 4, decay: 1.5, vol: 0.6 },
+    },
+  ],
   // The fall, and a deep boom as the star plunges in (3.2 s).
   "black-hole": [
-    { voice: "drone", f: 70, to: 0.5, bright: 0.1, decay: 1.8 },
-    { voice: "kick", at: 3.2, f: 38, decay: 2.4 },
+    { voice: "roar", f: 50, bright: 0.15, decay: 2.4, vol: 0.55 },
+    { voice: "whoosh", at: 1.8, f: 150, to: 3, decay: 1.2, vol: 0.35 },
+    {
+      voice: "sample",
+      file: "supernova-boom.mp3",
+      at: 3.15,
+      len: 2.6,
+      pitch: 0.55,
+      vol: 0.85,
+      fallback: { voice: "rumble", f: 50, rate: 4, decay: 1.5, vol: 0.6 },
+    },
+    { voice: "whoosh", at: 3.5, f: 400, to: 0.4, decay: 1.8, vol: 0.3 },
   ],
-  "star-cluster": { voice: "sparkle", f: 3100, n: 12, decay: 2.4 },
+  "star-cluster": [
+    { voice: "breath", f: 800, to: 1.2, decay: 1.2, vol: 0.4 },
+    { voice: "breath", at: 1.4, f: 900, to: 0.7, decay: 1.4, vol: 0.35 },
+    { voice: "hiss", at: 0.2, f: 5000, decay: 1.8, vol: 0.12 },
+  ],
   // A pad, and a shimmer as the shock reaches the ring (1.7 s).
   "planetary-nebula": [
-    { voice: "pad", notes: "D4+A4", step: 0, decay: 1.4 },
-    { voice: "shimmer", at: 1.7, f: "A5", rate: 8, decay: 1, vol: 0.7 },
+    {
+      voice: "sample",
+      file: "meteor-boom.mp3",
+      len: 0.8,
+      pitch: 1.3,
+      vol: 0.5,
+      fallback: { voice: "rumble", f: 50, rate: 4, decay: 1.5, vol: 0.6 },
+    },
+    { voice: "whoosh", at: 0.05, f: 250, to: 2, decay: 1.2, vol: 0.45 },
+    {
+      voice: "sample",
+      file: "supernova-boom.mp3",
+      at: 1.7,
+      len: 1.8,
+      pitch: 0.8,
+      vol: 0.45,
+      fallback: { voice: "rumble", f: 50, rate: 4, decay: 1.5, vol: 0.6 },
+    },
   ],
   // A ping for each new star as it lights.
-  nebula: {
-    voice: "ding",
-    notes: "E6 B6 G6 D7 A6 E7 C7",
-    step: 0.36,
-    at: 0.4,
-    decay: 0.8,
-    vol: 0.6,
-  },
+  nebula: [
+    {
+      voice: "sample",
+      file: "meteor-fire.mp3",
+      at: 0.4,
+      len: 0.45,
+      pitch: 1,
+      vol: 0.55,
+      fallback: { voice: "roar", f: 260, bright: 0.3, decay: 0.35, vol: 0.4 },
+    },
+    {
+      voice: "sample",
+      file: "meteor-fire.mp3",
+      at: 0.76,
+      len: 0.45,
+      pitch: 0.85,
+      vol: 0.55,
+      fallback: { voice: "roar", f: 260, bright: 0.3, decay: 0.35, vol: 0.4 },
+    },
+    {
+      voice: "sample",
+      file: "meteor-fire.mp3",
+      at: 1.12,
+      len: 0.45,
+      pitch: 1.15,
+      vol: 0.55,
+      fallback: { voice: "roar", f: 260, bright: 0.3, decay: 0.35, vol: 0.4 },
+    },
+    {
+      voice: "sample",
+      file: "meteor-fire.mp3",
+      at: 1.48,
+      len: 0.45,
+      pitch: 0.9,
+      vol: 0.55,
+      fallback: { voice: "roar", f: 260, bright: 0.3, decay: 0.35, vol: 0.4 },
+    },
+    {
+      voice: "sample",
+      file: "meteor-fire.mp3",
+      at: 1.84,
+      len: 0.45,
+      pitch: 1.1,
+      vol: 0.55,
+      fallback: { voice: "roar", f: 260, bright: 0.3, decay: 0.35, vol: 0.4 },
+    },
+    {
+      voice: "sample",
+      file: "meteor-fire.mp3",
+      at: 2.2,
+      len: 0.45,
+      pitch: 0.8,
+      vol: 0.55,
+      fallback: { voice: "roar", f: 260, bright: 0.3, decay: 0.35, vol: 0.4 },
+    },
+    {
+      voice: "sample",
+      file: "meteor-fire.mp3",
+      at: 2.56,
+      len: 0.45,
+      pitch: 1.05,
+      vol: 0.55,
+      fallback: { voice: "roar", f: 260, bright: 0.3, decay: 0.35, vol: 0.4 },
+    },
+  ],
   supernova: [
-    { voice: "kick", f: 40, decay: 3 },
-    { voice: "roar", f: 110, bright: 0.5, decay: 2.2 },
+    {
+      voice: "sample",
+      file: "supernova-boom.mp3",
+      vol: 1.1,
+      fallback: { voice: "rumble", f: 50, rate: 4, decay: 1.5, vol: 0.6 },
+    },
+    { voice: "roar", f: 110, bright: 0.5, decay: 2.2, vol: 0.55 },
   ],
   "spiral-galaxy": [
     { voice: "drone", f: 62, bright: 0.45, decay: 1.8 },
@@ -367,7 +859,6 @@ export const TOY_SOUNDS = {
     { voice: "squish", at: 0.55, pitch: 1.6, decay: 0.6 },
     { voice: "pop", at: 0.9, f: 600 },
     { voice: "pop", at: 1.05, f: 720, vol: 0.8 },
-    { voice: "shimmer", at: 2.3, f: "E6", rate: 9, decay: 1.2, vol: 0.35 },
   ],
   bacteriophage: [
     { voice: "boing", f: 120, to: 0.5, rate: 30, decay: 0.5 },
@@ -382,16 +873,22 @@ export const TOY_SOUNDS = {
   ],
   // Curls into a sickle, then relaxes back (2.5 s).
   "red-blood-cell": [
-    { voice: "squeak", f: 900, to: 1.3, decay: 1.6, vol: 0.6 },
-    { voice: "squeak", at: 2.5, f: 1150, to: 0.8, decay: 1.4, vol: 0.45 },
+    { voice: "squish", pitch: 0.7, bright: 0.2, decay: 1.4, vol: 0.8 },
+    { voice: "gloop", at: 2.5, f: 140, decay: 0.6, vol: 0.5 },
   ],
   neuron: [
-    { voice: "zap", f: 2400, to: 0.1 },
-    { voice: "crackle", at: 0.2, f: 3600, n: 16, decay: 0.9 },
+    {
+      voice: "sample",
+      file: "neuron-arc.mp3",
+      len: 1.5,
+      vol: 0.8,
+      fallback: { voice: "zap", f: 2400, to: 0.1 },
+    },
+    { voice: "sample", file: "neuron-arc.mp3", at: 1.6, from: 0.5, len: 0.35, vol: 1.3 },
   ],
   // The wave spreads out along the arms; the vessel swells (1.8 s).
   astrocyte: [
-    { voice: "shimmer", f: "C6", rate: 11, decay: 2.2 },
+    { voice: "breath", f: 1200, to: 0.5, decay: 2.2, vol: 0.45 },
     { voice: "wave", at: 1.8, f: 180, decay: 0.8, vol: 0.45 },
   ],
   // The nucleus splits, the cell pinches in two (2.1 s), then rejoins (3.2 s).
@@ -400,12 +897,22 @@ export const TOY_SOUNDS = {
     { voice: "pop", at: 2.1, f: 450 },
     { voice: "gloop", at: 3.2, f: 140, decay: 1.2, vol: 0.7 },
   ],
-  dna: { voice: "ratchet", f: 3000, n: 26, rate: 40, to: 1.6 },
+  dna: [
+    {
+      voice: "sample",
+      file: "dna-zipper.mp3",
+      from: 0.3,
+      pitch: 0.9,
+      vol: 0.8,
+      fallback: { voice: "tear", f: 900, decay: 1.2 },
+    },
+    { voice: "sample", file: "dna-zipper.mp3", at: 3.3, from: 0.3, pitch: 0.8, vol: 0.6 },
+  ],
   // A bacterium wriggles in, is gulped (2.1 s) and digested (3.6 s).
   "white-blood-cell": [
-    { voice: "flutter", f: 1800, rate: 24, decay: 3, vol: 0.35 },
+    { voice: "squish", pitch: 0.6, bright: 0.2, decay: 1.6, vol: 0.5 },
     { voice: "gloop", at: 2.1, f: 110, decay: 0.7 },
-    { voice: "sizzle", at: 3.6, f: 3500, decay: 1, vol: 0.35 },
+    { voice: "sizzle", at: 3.6, f: 2500, decay: 1, vol: 0.2 },
   ],
   // Reaches out, sweeps twice (0.9 s, 2.1 s), draws back.
   microglia: [
@@ -432,19 +939,28 @@ export const TOY_SOUNDS = {
   ],
   // The fibres pull the chromatids apart (0.5 s); they rejoin (3.9 s).
   chromosome: [
-    { voice: "twang", at: 0.45, f: 90, decay: 1.6 },
-    { voice: "clack", at: 0.55, f: 2000 },
-    { voice: "clack", at: 3.9, f: 1600, vol: 0.6 },
+    {
+      voice: "sample",
+      file: "protein-velcro.mp3",
+      at: 0.45,
+      pitch: 0.6,
+      vol: 0.6,
+      fallback: { voice: "tear", f: 500, decay: 0.8 },
+    },
+    { voice: "squish", at: 0.5, pitch: 0.8, bright: 0.2, decay: 0.8, vol: 0.5 },
+    { voice: "squish", at: 3.9, pitch: 0.9, bright: 0.2, decay: 0.6, vol: 0.45 },
   ],
   // Powers up along the cristae; ATP pops out in three waves (0.95 s on).
   mitochondrion: [
-    { voice: "hum", f: 90, to: 2.5, bright: 0.5 },
-    { voice: "blip", at: 0.95, notes: "C6 E6 G6", step: 0.35, decay: 0.6, vol: 0.5 },
+    { voice: "hum", f: 90, bright: 0.4, decay: 1.4, vol: 0.7 },
+    { voice: "pop", at: 0.95, f: 900, vol: 0.5 },
+    { voice: "pop", at: 1.3, f: 1000, vol: 0.45 },
+    { voice: "pop", at: 1.65, f: 1100, vol: 0.4 },
   ],
   // The cilia beat hard while it swims its loop.
   paramecium: [
-    { voice: "flutter", f: 2600, rate: 30, decay: 5, vol: 0.7 },
-    { voice: "flutter", at: 1.5, f: 2300, rate: 28, decay: 4, vol: 0.5 },
+    { voice: "flutter", f: 500, rate: 14, decay: 4, vol: 0.55 },
+    { voice: "whoosh", at: 0.3, f: 250, to: 1.3, decay: 2.5, vol: 0.25 },
   ],
   // A pod pushes out and it oozes over; then back the other way (2.5 s).
   amoeba: [
@@ -455,44 +971,117 @@ export const TOY_SOUNDS = {
   // ---- Atoms ------------------------------------------------------------------------
   // Up as the photon is taken in (0.45 s), down as it is given out (3 s).
   orbital: [
-    { voice: "blip", at: 0.45, f: 700, to: 2 },
-    { voice: "blip", at: 3, f: 1400, to: 0.5 },
+    {
+      voice: "sample",
+      file: "neuron-arc.mp3",
+      at: 0.45,
+      len: 0.3,
+      vol: 0.7,
+      fallback: { voice: "zap", f: 1200, to: 0.5 },
+    },
+    { voice: "whoosh", at: 0.45, f: 600, to: 1.6, decay: 0.8, vol: 0.3 },
+    { voice: "sample", file: "neuron-arc.mp3", at: 3, from: 0.4, len: 0.35, pitch: 1.2, vol: 0.8 },
+    { voice: "whoosh", at: 3, f: 1200, to: 0.6, decay: 0.7, vol: 0.3 },
   ],
-  atom: { voice: "hum", f: 220, to: 1.8, bright: 0.2, decay: 2.6 },
-  molecule: { voice: "boing", f: 330, to: 1.3, rate: 11, decay: 2 },
+  atom: [
+    { voice: "hum", f: 150, bright: 0.3, decay: 2.6, vol: 0.6 },
+    { voice: "whoosh", at: 0.2, f: 900, to: 1, decay: 2.4, vol: 0.3 },
+  ],
+  molecule: [
+    { voice: "roar", f: 200, bright: 0.25, decay: 2.4, vol: 0.35 },
+    { voice: "clatter", at: 0.2, f: 700, n: 8, kind: "wood", decay: 1.6, vol: 0.3 },
+  ],
   // An airy rush as the pieces fly apart, and soft clicks as they lock back.
   protein: [
-    { voice: "whoosh", f: 260, to: 3, decay: 1.4, vol: 0.8 },
-    { voice: "clatter", at: 3.4, f: 900, n: 6, kind: "wood", decay: 0.9, vol: 0.7 },
+    {
+      voice: "sample",
+      file: "protein-velcro.mp3",
+      vol: 0.8,
+      fallback: { voice: "tear", f: 900, decay: 0.8 },
+    },
+    { voice: "whoosh", at: 0.1, f: 260, to: 2, decay: 1.2, vol: 0.4 },
+    { voice: "sample", file: "protein-velcro.mp3", at: 3.3, pitch: 1.3, vol: 0.4 },
+    { voice: "thud", at: 3.45, f: 170, bright: 0.3, decay: 0.6, vol: 0.5 },
   ],
   // A ping as the wave passes each part of the lattice.
-  "crystal-lattice": { voice: "glass", notes: "C6 E6 G6 C7", step: 0.55, at: 0.3, decay: 0.6 },
-
+  "crystal-lattice": [
+    {
+      voice: "sample",
+      file: "crystal-lattice-chain.mp3",
+      at: 0.3,
+      pitch: 0.9,
+      vol: 0.7,
+      fallback: { voice: "clatter", f: 1400, n: 8 },
+    },
+    { voice: "sample", file: "crystal-lattice-chain.mp3", at: 1.4, from: 0.1, pitch: 1, vol: 0.45 },
+  ],
   // Lane Chemistry. On: the tile's soft click and a rising shimmer as the
   // atom builds (each shell's note and the photon's ping are cues from the
   // recipe). Off: a soft falling hush as it sinks back into its tile.
   "periodic-table": {
     on: [
-      { voice: "click", f: 2400, vol: 0.6 },
-      { voice: "shimmer", at: 0.15, f: 880, to: 2, decay: 2.2, vol: 0.45 },
+      { voice: "whoosh", f: 300, to: 1.6, decay: 1.4, vol: 0.45 },
+      { voice: "thud", at: 0.05, f: 160, bright: 0.3, decay: 0.5, vol: 0.35 },
     ],
     off: [
       { voice: "whoosh", f: 700, to: 0.4, decay: 0.9, vol: 0.45 },
-      { voice: "click", at: 0.85, f: 1600, vol: 0.5 },
+      { voice: "thud", at: 0.85, f: 160, bright: 0.3, decay: 0.6, vol: 0.45 },
     ],
   },
-
   // ---- Gems -------------------------------------------------------------------------
   diamond: [
-    { voice: "glass", f: 3520, decay: 1.2, bright: 0.9 },
-    { voice: "sparkle", at: 0.3, f: 4200, n: 8, decay: 2.4, vol: 0.7 },
+    {
+      voice: "sample",
+      file: "diamond-tap.mp3",
+      vol: 0.9,
+      fallback: { voice: "glass", f: 3000, decay: 0.3, vol: 0.5 },
+    },
+    {
+      voice: "sample",
+      file: "diamond-tap.mp3",
+      at: 0.45,
+      pitch: 1.25,
+      vol: 0.3,
+      fallback: { voice: "glass", f: 3000, decay: 0.3, vol: 0.5 },
+    },
+    {
+      voice: "sample",
+      file: "diamond-tap.mp3",
+      at: 1,
+      pitch: 1.4,
+      vol: 0.25,
+      fallback: { voice: "glass", f: 3000, decay: 0.3, vol: 0.5 },
+    },
+    {
+      voice: "sample",
+      file: "diamond-tap.mp3",
+      at: 1.7,
+      pitch: 1.15,
+      vol: 0.22,
+      fallback: { voice: "glass", f: 3000, decay: 0.3, vol: 0.5 },
+    },
   ],
   // A warm chime, and a softer one on each throb of the glow.
   ruby: [
-    { voice: "bell", f: "C5", decay: 0.8, bright: 0.25 },
-    { voice: "bell", at: 1.3, f: "C5", decay: 0.5, bright: 0.2, vol: 0.4 },
+    {
+      voice: "sample",
+      file: "diamond-tap.mp3",
+      pitch: 0.75,
+      vol: 0.9,
+      fallback: { voice: "glass", f: 3000, decay: 0.3, vol: 0.5 },
+    },
+    { voice: "drone", at: 0.1, f: 98, bright: 0.3, decay: 1.6, vol: 0.35 },
   ],
-  emerald: { voice: "glass", f: "G5", decay: 2, bright: 0.35 },
+  emerald: [
+    {
+      voice: "sample",
+      file: "diamond-tap.mp3",
+      pitch: 0.9,
+      vol: 0.9,
+      fallback: { voice: "glass", f: 3000, decay: 0.3, vol: 0.5 },
+    },
+    { voice: "whoosh", at: 0.15, f: 1800, to: 0.5, decay: 1.8, vol: 0.25 },
+  ],
   "amethyst-geode": {
     on: [
       { voice: "crack", f: 1100, bright: 0.3 },
@@ -500,7 +1089,16 @@ export const TOY_SOUNDS = {
     ],
     off: [{ voice: "stone", f: 300, decay: 1.4 }],
   },
-  sapphire: { voice: "bell", f: "E6", decay: 0.7, bright: 0.7 },
+  sapphire: [
+    {
+      voice: "sample",
+      file: "diamond-tap.mp3",
+      pitch: 1.05,
+      vol: 0.9,
+      fallback: { voice: "glass", f: 3000, decay: 0.3, vol: 0.5 },
+    },
+    { voice: "whoosh", at: 0.2, f: 3000, to: 0.6, decay: 1.6, vol: 0.2 },
+  ],
   // A chime for each point as it lights, left to right.
   "quartz-cluster": {
     voice: "glass",
@@ -509,45 +1107,144 @@ export const TOY_SOUNDS = {
     at: 0.2,
     decay: 0.7,
   },
-  opal: { voice: "shimmer", f: "A5", rate: 14, decay: 2 },
+  opal: [
+    {
+      voice: "sample",
+      file: "diamond-tap.mp3",
+      pitch: 0.6,
+      len: 0.12,
+      vol: 0.8,
+      fallback: { voice: "glass", f: 3000, decay: 0.3, vol: 0.5 },
+    },
+    { voice: "stone", at: 0.35, f: 420, decay: 0.5, vol: 0.35 },
+    { voice: "stone", at: 1.6, f: 400, decay: 0.5, vol: 0.3 },
+  ],
   pearl: {
     on: { voice: "clack", f: 1800, decay: 2.5, bright: 0.2 },
     off: { voice: "clack", f: 1500, decay: 2, bright: 0.2 },
   },
   "crystal-ball": [
-    { voice: "shimmer", f: "D5", rate: 4, decay: 1.8 },
-    { voice: "theremin", f: 440, to: 1.2, vol: 0.5 },
+    { voice: "whoosh", f: 400, to: 1.5, decay: 1.6, vol: 0.35 },
+    {
+      voice: "sample",
+      file: "crystal-ball-ring.mp3",
+      at: 0.6,
+      vol: 0.9,
+      fallback: { voice: "glass", f: 1200, decay: 1.2, vol: 0.4 },
+    },
   ],
-
   // ---- Anatomy ----------------------------------------------------------------------
   // Lub-dub on each squeeze: racing to 155 bpm by 0.5 s, calming by 4.6 s.
   heart: [
-    { voice: "heartbeat", at: 0.16, f: 72, vol: 0.8 },
-    { voice: "heartbeat", at: 0.61, f: 72, vol: 0.9 },
-    { voice: "heartbeat", at: 0.99, f: 72, vol: 1 },
-    { voice: "heartbeat", at: 1.38, f: 72, vol: 1 },
-    { voice: "heartbeat", at: 1.76, f: 72, vol: 1 },
-    { voice: "heartbeat", at: 2.15, f: 72, vol: 1 },
-    { voice: "heartbeat", at: 2.54, f: 72, vol: 1 },
-    { voice: "heartbeat", at: 2.93, f: 72, vol: 0.95 },
-    { voice: "heartbeat", at: 3.36, f: 72, vol: 0.85 },
-    { voice: "heartbeat", at: 3.91, f: 72, vol: 0.75 },
+    {
+      voice: "sample",
+      file: "heart-beat.mp3",
+      at: 0.16,
+      vol: 0.64,
+      pitch: 1.25,
+      fallback: { voice: "heartbeat", f: 72, vol: 0.8 },
+    },
+    {
+      voice: "sample",
+      file: "heart-beat.mp3",
+      at: 0.61,
+      vol: 0.72,
+      pitch: 1.35,
+      fallback: { voice: "heartbeat", f: 72, vol: 0.9 },
+    },
+    {
+      voice: "sample",
+      file: "heart-beat.mp3",
+      at: 0.99,
+      vol: 0.8,
+      pitch: 1.4,
+      fallback: { voice: "heartbeat", f: 72, vol: 1 },
+    },
+    {
+      voice: "sample",
+      file: "heart-beat.mp3",
+      at: 1.38,
+      vol: 0.8,
+      pitch: 1.4,
+      fallback: { voice: "heartbeat", f: 72, vol: 1 },
+    },
+    {
+      voice: "sample",
+      file: "heart-beat.mp3",
+      at: 1.76,
+      vol: 0.8,
+      pitch: 1.4,
+      fallback: { voice: "heartbeat", f: 72, vol: 1 },
+    },
+    {
+      voice: "sample",
+      file: "heart-beat.mp3",
+      at: 2.15,
+      vol: 0.8,
+      pitch: 1.4,
+      fallback: { voice: "heartbeat", f: 72, vol: 1 },
+    },
+    {
+      voice: "sample",
+      file: "heart-beat.mp3",
+      at: 2.54,
+      vol: 0.8,
+      pitch: 1.4,
+      fallback: { voice: "heartbeat", f: 72, vol: 1 },
+    },
+    {
+      voice: "sample",
+      file: "heart-beat.mp3",
+      at: 2.93,
+      vol: 0.76,
+      pitch: 1.35,
+      fallback: { voice: "heartbeat", f: 72, vol: 0.95 },
+    },
+    {
+      voice: "sample",
+      file: "heart-beat.mp3",
+      at: 3.36,
+      vol: 0.68,
+      pitch: 1.25,
+      fallback: { voice: "heartbeat", f: 72, vol: 0.85 },
+    },
+    {
+      voice: "sample",
+      file: "heart-beat.mp3",
+      at: 3.91,
+      vol: 0.6,
+      pitch: 1.15,
+      fallback: { voice: "heartbeat", f: 72, vol: 0.75 },
+    },
   ],
   // Sparks crackle over the lobes; every lobe flashes at once (1.75 s).
   brain: [
-    { voice: "crackle", f: 4200, n: 26, decay: 2 },
-    { voice: "ding", at: 1.75, f: "E6" },
+    { voice: "whoosh", f: 700, to: 1.6, decay: 1.4, vol: 0.4 },
+    {
+      voice: "sample",
+      file: "meteor-boom.mp3",
+      at: 1.75,
+      len: 0.5,
+      pitch: 1.6,
+      vol: 0.3,
+      fallback: { voice: "thud", f: 120, vol: 0.4 },
+    },
   ],
-  eye: { voice: "whoosh", f: 1500, to: 0.6, decay: 0.35, vol: 0.6 },
+  eye: [
+    { voice: "pock", at: 0.1, f: 1800, bright: 0.1, decay: 0.25, vol: 0.8 },
+    { voice: "pock", at: 0.26, f: 1500, bright: 0.1, decay: 0.2, vol: 0.4 },
+  ],
   // A deep breath in (1.7 s), held, then out (2.2 s).
-  lungs: [
-    { voice: "breath", f: 700, to: 1.4, decay: 2.4 },
-    { voice: "breath", at: 2.2, f: 900, to: 0.6, decay: 2.1 },
-  ],
+  lungs: {
+    voice: "sample",
+    file: "lungs-breath.mp3",
+    vol: 0.8,
+    fallback: { voice: "breath", f: 700, to: 1.4, decay: 2.4 },
+  },
   // A squeaky polish across it, a ding as it gleams (1.1 s), twinkles after.
   tooth: [
-    { voice: "squeak", f: 3000, to: 1.2, decay: 4, vol: 0.6 },
-    { voice: "ding", at: 1.1, f: "C7", decay: 0.6 },
+    { voice: "whoosh", f: 2500, to: 0.8, decay: 0.8, vol: 0.2 },
+    { voice: "ding", at: 1.1, f: "C7", decay: 0.35, vol: 0.8 },
     { voice: "sparkle", at: 1.7, f: 4200, n: 4, decay: 0.9, vol: 0.4 },
   ],
   // Three pulses (0, 1.15, 2.3 s), each with a drop down the ureter a second later.
@@ -565,7 +1262,6 @@ export const TOY_SOUNDS = {
     { voice: "breath", f: 1300, to: 0.55, decay: 1.5, vol: 0.5 },
     { voice: "flutter", f: 900, rate: 12, decay: 1.4, vol: 0.22, at: 0.12 },
   ],
-
   // ---- Nature -----------------------------------------------------------------------
   // E4: timed to the tap effects in src/packs/nature.js; later hits (the
   // palm's coconuts, the daisy's plucks, the bamboo's sections, the pebbles'
@@ -1198,7 +1894,7 @@ export const TOY_SOUNDS = {
   // songs, and the electronic keyboard's keys (in the voice picked on its
   // panel), are played by the recipes (src/packs/pianos.js).
   "grand-piano": {
-    voice: "grand",
+    voice: "concert",
     notes:
       "A0 A#0 B0 C1 C#1 D1 D#1 E1 F1 F#1 G1 G#1 A1 A#1 B1 C2 C#2 D2 D#2 E2 F2 F#2 G2 G#2 A2 A#2 B2 C3 C#3 D3 D#3 E3 F3 F#3 G3 G#3 A3 A#3 B3 C4 C#4 D4 D#4 E4 F4 F#4 G4 G#4 A4 A#4 B4 C5 C#5 D5 D#5 E5 F5 F#5 G5 G#5 A5 A#5 B5 C6 C#6 D6 D#6 E6 F6 F#6 G6 G#6 A6 A#6 B6 C7 C#7 D7 D#7 E7 F7 F#7 G7 G#7 A7 A#7 B7 C8",
     step: 0.028,
