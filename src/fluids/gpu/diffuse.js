@@ -225,10 +225,14 @@ export class GpuDiffuse {
   // Where a sheet or a drop thins to a particle or two a cell and moves
   // fast, above the pool, it sheds fine droplets along its motion (a crown's
   // rim breaking into drops, Rayleigh-Plateau), as spray.
-  shed(d, n, dt) {
+  shed(d, n, elapsed) {
     const rand = this.rand;
+    // (spread along their paths over the time since the last read, at most
+    // a tenth of a second: each read stands for that stretch of the breakup)
+    const dt = Math.min(elapsed, 0.1);
+    const gy = this.liq.gravity[1];
     const vMin = this.vRef() * 0.35;
-    const p = Math.min(1, this.breakup * dt);
+    const p = Math.min(1, this.breakup * elapsed);
     for (let i = 0; i < n; i++) {
       if (rand() > p) continue;
       const x = d[i * 6];
@@ -240,20 +244,27 @@ export class GpuDiffuse {
       const vy = d[i * 6 + 4];
       const vz = d[i * 6 + 5];
       const v = Math.hypot(vx, vy, vz);
-      if (v < vMin || this.nearPool(x, y, z)) continue;
+      // (thrown out, as a crown's rim is; not a falling ball's skin)
+      if (v < vMin || vy < -0.6 * v || this.nearPool(x, y, z)) continue;
+      // (only over the vessel: a drop already past its rim sheds no more)
+      const gl = this.glass;
+      if (gl && Math.hypot(x - gl.at[0], z - gl.at[2]) > gl.r) continue;
       const m = 2 + Math.floor(rand() * 3);
       for (let k = 0; k < m; k++) {
         // spread over the time since the last read, and a little apart
         const t = rand() * dt;
-        const s = 0.18 * v;
+        const s = 0.08 * v;
+        const ux = vx + (rand() - 0.5) * s;
+        const uy = vy + (rand() - 0.3) * s;
+        const uz = vz + (rand() - 0.5) * s;
         this.add(
           DKIND.spray,
-          x + vx * t + (rand() - 0.5) * 0.8,
-          y + vy * t + (rand() - 0.5) * 0.8,
-          z + vz * t + (rand() - 0.5) * 0.8,
-          vx + (rand() - 0.5) * s,
-          vy + (rand() - 0.3) * s,
-          vz + (rand() - 0.5) * s,
+          x + ux * t + (rand() - 0.5) * 0.8,
+          y + uy * t + 0.5 * gy * t * t + (rand() - 0.5) * 0.8,
+          z + uz * t + (rand() - 0.5) * 0.8,
+          ux,
+          uy + gy * t,
+          uz,
           0.8 + rand() * 0.8,
         );
       }
@@ -311,13 +322,13 @@ export class GpuDiffuse {
         kind = DKIND.foam;
         this.age[i] = 0;
         this.life[i] = 0.6 + rand() * 0.9;
-      } else if (kind === DKIND.spray && k >= 5) {
-        // (a fine droplet falling back into the pool joins it)
-        if (this.breakup) {
-          this.remove(i);
-          continue;
-        }
+      } else if (kind === DKIND.spray && k >= 5 && !this.breakup) {
         kind = DKIND.foam;
+      } else if (kind === DKIND.spray && k >= 5 && vel[i3 + 1] < 0 && this.age[i] > 0.15) {
+        // (a fine droplet falling back into the pool joins it; one just shed
+        // beside its sheet is not back yet)
+        this.remove(i);
+        continue;
       }
       this.kind[i] = kind;
       let vx = vel[i3];

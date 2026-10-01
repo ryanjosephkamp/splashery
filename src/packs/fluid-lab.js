@@ -126,16 +126,19 @@ function splashScene(k, o) {
     gpu: {
       fill: { cylinder: { at: [0, 0.04, 0], radius: 0.76, height: 0.065 } },
       fillShare: 0.9,
-      drop: { at: [0.03, 0.95, 0.02], radius: 0.12, vel: [0, -1, 0] },
+      drop: { at: [0.03, 0.95, 0.02], radius: 0.1, vel: [0, -2, 0] },
       friction: 0.025,
       tension: 0,
       // (no stream to hold together: drawn barely stretched, so the ball and
       // the crown's drops stay round; larger sprites join the crown's thin
       // sheet)
       stretch: 0.15,
-      sprite: 1.6,
+      sprite: 1.1,
       // (and they catch the light as real drops do)
       drops: 0.8,
+      // The crown's rim breaks into fine droplets, smaller than the grid
+      // (diffuse.js, shed).
+      breakup: 6,
     },
   });
   k.reach([0, 1.75, 0]);
