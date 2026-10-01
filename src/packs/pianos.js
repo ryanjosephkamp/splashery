@@ -12,6 +12,7 @@
 import { mix, shade, smoothstep, clamp, spline, quatAxisAngle, vec } from "../kit.js";
 import { evenCylinder, evenRoundBox } from "./even.js";
 import { SongPlayer, songControls, makeSong, midiOf, songFromText } from "../songs.js";
+import { glissando, newTaps } from "./glissando.js"; // lane UI r4
 
 const TAU = Math.PI * 2;
 const LIGHT = vec.unit([0.3, 0.8, 0.55]);
@@ -655,9 +656,9 @@ function keyboardRuntime({ low, high, songs, voice, hold = 0.9, drums = false })
     }
     const dt = rt.last === null ? 0 : Math.max(0, Math.min(0.1, now - rt.last));
     rt.last = now;
-    const tap = info.tap;
-    if (tap && tap.n !== m.tapN) {
-      m.tapN = tap.n;
+    // Every tap since the last frame: a glissando can press several keys
+    // between two frames (lane UI r4).
+    for (const tap of newTaps(info, m)) {
       if (tap.key === "strike" && tap.pick !== null && tap.pick !== undefined)
         rt.strikes[clamp(Math.round(tap.pick), 0, n - 1)] = now;
       rt.onTap?.(tap, info);
@@ -1797,6 +1798,8 @@ function keyboardRecipe({ rt, keyAtPoint, drive, build, density = 2, opening = 6
         return i === null ? null : { key: "strike", pick: i };
       },
     },
+    // Lane UI r4: press a key and drag along the keyboard for a glissando.
+    drag: glissando(keyAtPoint),
     drive,
     build,
   };

@@ -58,6 +58,7 @@ export class MotionDriver {
     this.targets = {};
     this.hopStart = -100;
     this.tap = null;
+    this.taps = []; // UI r4: taps since the last frame
     this.sound = null; // the site's Sound (Player.setSound), as drive's info.sound
     this.kitClock = { t: 0, last: null, rate: 1 };
     this.moveClock = { t: 0, last: null, rate: 1 };
@@ -91,6 +92,7 @@ export class MotionDriver {
     }
     this.hopStart = -100;
     this.tap = null;
+    this.taps = []; // UI r4
     this.addon = null;
     this.addonU = null;
     this.pausedAt = null; // UI r3
@@ -191,6 +193,10 @@ export class MotionDriver {
     }
     if (this.pausedKey) this.resume(time); // another control fires: carry on
     this.tap = { point, key: key || "hop", pick, time, n: (this.tap?.n ?? 0) + 1 };
+    // UI r4: every tap since the last frame, oldest first (a glissando can
+    // fire several keys between two frames); drive() sees them as info.taps.
+    this.taps.push(this.tap);
+    if (this.taps.length > 64) this.taps.shift();
     if (key && this.controlDef(key)) {
       if (this.controlDef(key).type === "pulse") {
         this.state[key] = 1;
@@ -301,8 +307,9 @@ export class MotionDriver {
     // site's Sound (src/sound.js): a toy that plays its own audio checks
     // sound.enabled (the speaker button; embeds keep it off) and plays through
     // sound.audio() and sound.master (the site's limiter).
-    const about = { time, R, tap: this.tap, data: this.ctx?.kit?.data, sound: this.sound };
+    const about = { time, R, tap: this.tap, taps: this.taps, data: this.ctx?.kit?.data, sound: this.sound }; // prettier-ignore
     if (this.recipe?.drive) this.recipe.drive(kt, this.state, drive, about);
+    this.taps = []; // UI r4
     if (drive.body) {
       if (drive.body.quat) q = quatMul(drive.body.quat, q);
       if (drive.body.offset) {

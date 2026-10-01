@@ -8,6 +8,7 @@ import { TOYS, thumbURL, shelfCategories, searchToys, onShelf, holdsStill } from
 import { IDLE_EFFECTS, formatCount } from "./state.js";
 import { MOVES } from "./motion.js";
 import { PATTERNS, PROJECTIONS, loadFlags } from "./patterns.js";
+import { initLive, renderLive } from "./live/panel.js"; // lane Live input
 import { ui2On } from "./player.js"; // UI r2
 
 const $ = (id) => document.getElementById(id);
@@ -38,6 +39,7 @@ function pct(v) {
 }
 
 export function createUI(app) {
+  initLive(app); // lane Live input: the live sources, and Clap to tap (labs)
   const els = {
     panel: $("panel"),
     panelBody: $("panel-body"),
@@ -1509,6 +1511,7 @@ export function createUI(app) {
     }
     if (input.pad) box.append(renderInputPad(input.pad, apply));
     if (input.media) box.append(renderInputMedia(input.media, error)); // Pictures
+    if (input.live) box.append(renderLive(input.live, { error })); // Live input
     const file = document.createElement("input");
     file.type = "file";
     file.accept = input.accept || "";

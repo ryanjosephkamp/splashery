@@ -102,6 +102,20 @@ OR OTHER DEALINGS IN THE SOFTWARE.
 - License: Apache License 2.0 for the Small model, checked on the live model cards on September
   29, 2026. The Base, Large and Giant sizes are CC BY-NC and are not used.
 
+## Splat.js 0.1.0 (lane Video 3D)
+
+- Source: https://github.com/arrival-space/splat.js, commit
+  `88efe9aaf32279b0b9bcb781ea0deb4d60c49dff` (September 23, 2026; package version 0.1.0). Files in
+  `vendor/splatjs/src/`: the 20 modules that `session.js` and its two workers reach (structure from
+  motion, the WebGPU trainer, frame decoding and the PLY writer), all unmodified; the list and what
+  was left out are in `vendor/splatjs/VERSION.md`. The library's own video reader
+  (`src/io/video.js`, which loads Mediabunny, MPL-2.0) is not vendored: Splashery picks the frames
+  itself.
+- Loaded only when someone opens a video in the Video to 3D toy (a dynamic import in
+  `src/video3d/run.js`); never on the shelf, in another toy or in an embed. Labs only.
+- License: MIT (Copyright (c) 2026 Stratum1 GmbH; checked on the live repository page on September
+  30, 2026; the full text is in `vendor/splatjs/LICENSE`).
+
 ## omggif 1.0.10 (lane Pictures)
 
 - Package: `omggif@1.0.10` (file: `vendor/omggif/omggif.js`, the package's `omggif.js` with two

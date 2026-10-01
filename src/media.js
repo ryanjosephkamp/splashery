@@ -146,6 +146,8 @@ function tooBig(size, cap) {
 }
 
 export async function openMedia(source, { profile = "mid" } = {}) {
+  // A live stream (lane Live input: a shared screen, a camera).
+  if (source?.live && source.stream) return (await import("./live/stream.js")).openStream(source);
   const limits = MEDIA_LIMITS[profile] || MEDIA_LIMITS.mid;
   if (Array.isArray(source)) return openImageSet(source, limits); // lane Books
   const src = await readSource(source, limits);
