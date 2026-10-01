@@ -370,6 +370,48 @@ Commons page on September 30, 2026:
 The camera path and the splats are worked out on the device by
 [Splat.js](https://github.com/arrival-space/splat.js) (Stratum1 GmbH, MIT). Videos people open are
 read in their browser and never uploaded.
+## Science (lane Science)
+
+The Science toys (labs, lane Science) show published science data as splats. Each license was
+checked on the live source page on September 30, 2026.
+
+- Thermal ellipsoids: aspirin (form II) at 300 K,
+  [COD 2104857](https://www.crystallography.net/cod/2104857.html), deposited by E. J. Chan, T. R.
+  Welberry, A. P. Heerdegen and D. J. Goossens (Acta Crystallographica B 66, 696–707, 2010), in the
+  public domain (the [Crystallography Open Database](https://www.crystallography.net/cod/): "All
+  data on this site have been placed in the public domain by the contributors"). The file is
+  unchanged.
+- Thermal ellipsoids: crambin at 0.54 Å, [PDB 1EJG](https://www.rcsb.org/structure/1EJG), by C.
+  Jelsch, M. M. Teeter, V. Lamzin, V. Pichon-Pesme, R. H. Blessing and C. Lecomte (PNAS 97,
+  3171–3176, 2000), [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) under the
+  [wwPDB data policy](https://www.rcsb.org/pages/usage-policy). The PDB file with its header, atom
+  and ANISOU records kept and the water left out.
+- The test fixtures `tests/fixtures/sci/paracetamol-cod-2104364.cif` and
+  `tests/fixtures/sci/sucrose-cod-2300557.cif` are
+  [COD 2104364](https://www.crystallography.net/cod/2104364.html) (paracetamol at 100 K) and
+  [COD 2300557](https://www.crystallography.net/cod/2300557.html) (sucrose at 298 K, by A. O.
+  Dmitrienko and I. S. Bushmarinov, Journal of Applied Crystallography 48, 2015), public domain,
+  unchanged.
+- Super-resolution microscope: "Microtubules and clathrin in a Cos cell" by Christophe Leterrier
+  (Aix Marseille Université, CNRS, NeuroCyto) on ShareLoc.XYZ,
+  [10.5281/zenodo.5507427](https://doi.org/10.5281/zenodo.5507427),
+  [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). A subset: the 170,401 localizations in
+  a 12 µm square of the cell, cut by `tools/sci-samples.mjs` into the same .smlm format.
+- Super-resolution microscope: "Zola-3D NUP full nucleus" (nuclear pores over a whole nucleus, in
+  3D) by Andrey Aristov (Institut Pasteur), uploaded by Benoit Lelandais, on ShareLoc.XYZ,
+  [10.5281/zenodo.7233696](https://doi.org/10.5281/zenodo.7233696),
+  [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). A subset: a random half of the
+  localizations (149,633), cut by `tools/sci-samples.mjs` into the same .smlm format.
+- Galaxy in a box: the FIRE-2 cosmological zoom-in simulation m12i, snapshot 600 (z = 0), from the
+  [FIRE-2 public data release](https://flathub.flatironinstitute.org/fire) on FlatHUB,
+  [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). As the release asks: "We use the
+  publicly-available FIRE-2 cosmological zoom-in simulations (Wetzel et al. 2023, 2025), from the
+  Feedback In Realistic Environments (FIRE) project, generated using the Gizmo code (Hopkins 2015)
+  and the FIRE-2 physics model (Hopkins et al. 2018)." m12i was introduced by Wetzel et al. (2016).
+  A subset: 300,000 of the 2.37 million gas particles in a 40 × 12 × 40 kpc box round the galaxy,
+  cut by `tools/sci-galaxy.mjs`.
+
+Files people open in these toys are read in their browser and never uploaded.
 
 ## Worlds
 
@@ -497,3 +539,6 @@ Pictures and pages use [PDF.js](https://github.com/mozilla/pdf.js) (Apache 2.0) 
 Photo to 3D uses [ONNX Runtime Web](https://github.com/microsoft/onnxruntime) (MIT) and Depth
 Anything V2 Small (Apache 2.0), loaded only when someone opens a photo in that toy (or, in lane Live
 input's Splat mirror and Photo to 3D's live view, only after someone taps "Use my camera").
+Anything V2 Small (Apache 2.0), loaded only when someone opens a photo in that toy. The Science
+shelf's galaxy sample was cut with [jsfive](https://github.com/usnistgov/jsfive) (public domain), a
+build tool only.

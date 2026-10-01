@@ -6,7 +6,11 @@
       "label": "Cactus",
       "source": ".cache/assets/cactus/cactus_splat3_30kSteps_464k_splats.ply",
       "sourceNote": "Member of 3DGS_PLY_sample_data.zip from https://note.com/steam_studio/n/ne9736d94f162 (Box share https://app.box.com/s/itozvq23jh4av2a5hg08d7qevdbi93ii). Download the zip and copy this file into .cache/assets/cactus/.",
-      "rotate": [180, 0, 0],
+      "rotate": [
+        180,
+        0,
+        0
+      ],
       "splats": 450000,
       "lite": 120000
     },
@@ -15,7 +19,11 @@
       "label": "Strawberry",
       "source": "https://d28zzqy0iyovbz.cloudfront.net/84df8849/v1/meta.json",
       "sourceNote": "The SOG the public SuperSplat viewer streams for https://superspl.at/scene/84df8849 (downloads enabled, CC BY 4.0).",
-      "rotate": [180, 0, 0],
+      "rotate": [
+        180,
+        0,
+        0
+      ],
       "splats": 450000,
       "lite": 120000
     },
@@ -24,7 +32,11 @@
       "label": "Heart cookie",
       "source": "https://d28zzqy0iyovbz.cloudfront.net/bd964899/v3/meta.json",
       "sourceNote": "The SOG the public SuperSplat viewer streams for https://superspl.at/scene/bd964899 (downloads enabled, CC BY 4.0).",
-      "rotate": [180, 180, 0],
+      "rotate": [
+        180,
+        180,
+        0
+      ],
       "splats": 420000,
       "lite": 120000
     },
@@ -33,19 +45,36 @@
       "label": "Honeybee",
       "source": "https://d28zzqy0iyovbz.cloudfront.net/ae58ed2c/v1/meta.json",
       "sourceNote": "The SOG the public SuperSplat viewer streams for https://superspl.at/scene/ae58ed2c (downloads enabled, CC BY 4.0).",
-      "rotate": [180, 0, 0],
+      "rotate": [
+        180,
+        0,
+        0
+      ],
       "splats": 450000,
       "lite": 120000,
-      "crop": [-1.35, -0.4, -1.35, 1.35, 0.4, 1.35],
+      "crop": [
+        -1.35,
+        -0.4,
+        -1.35,
+        1.35,
+        0.4,
+        1.35
+      ],
       "cropNote": "Trims the specimen pin above and below the body and drops the faintest haze.",
-      "filters": ["opacity,gt,0.1"]
+      "filters": [
+        "opacity,gt,0.1"
+      ]
     },
     {
       "id": "rubber-duck-real",
       "label": "Rubber Duck Toy",
       "source": ".cache/models/rubber-duck-real/rubber-duck-real.ply",
       "sourceNote": "Made by tools/mesh-to-splats.mjs (see tools/models.json) from the CC0 model https://polyhaven.com/a/rubber_duck_toy",
-      "rotate": [0, 0, 0],
+      "rotate": [
+        0,
+        0,
+        0
+      ],
       "splats": 200000,
       "lite": 80000
     },
@@ -54,7 +83,11 @@
       "label": "Garden Gnome",
       "source": ".cache/models/garden-gnome/garden-gnome.ply",
       "sourceNote": "Made by tools/mesh-to-splats.mjs (see tools/models.json) from the CC0 model https://polyhaven.com/a/garden_gnome",
-      "rotate": [0, 0, 0],
+      "rotate": [
+        0,
+        0,
+        0
+      ],
       "splats": 200000,
       "lite": 80000
     },
@@ -63,7 +96,11 @@
       "label": "Carved Wooden Elephant",
       "source": ".cache/models/wooden-elephant/wooden-elephant.ply",
       "sourceNote": "Made by tools/mesh-to-splats.mjs (see tools/models.json) from the CC0 model https://polyhaven.com/a/carved_wooden_elephant",
-      "rotate": [0, 0, 0],
+      "rotate": [
+        0,
+        0,
+        0
+      ],
       "splats": 200000,
       "lite": 80000
     },
@@ -72,7 +109,11 @@
       "label": "Marble Bust 01",
       "source": ".cache/models/marble-bust/marble-bust.ply",
       "sourceNote": "Made by tools/mesh-to-splats.mjs (see tools/models.json) from the CC0 model https://polyhaven.com/a/marble_bust_01",
-      "rotate": [0, 0, 0],
+      "rotate": [
+        0,
+        0,
+        0
+      ],
       "splats": 200000,
       "lite": 80000
     },
@@ -81,7 +122,11 @@
       "label": "Ukulele 01",
       "source": ".cache/models/ukulele/ukulele.ply",
       "sourceNote": "Made by tools/mesh-to-splats.mjs (see tools/models.json) from the CC0 model https://polyhaven.com/a/Ukulele_01",
-      "rotate": [0, 0, 0],
+      "rotate": [
+        0,
+        0,
+        0
+      ],
       "splats": 200000,
       "lite": 80000
     },
@@ -90,7 +135,11 @@
       "label": "Alarm Clock 01",
       "source": ".cache/models/alarm-clock/alarm-clock.ply",
       "sourceNote": "Made by tools/mesh-to-splats.mjs (see tools/models.json) from the CC0 model https://polyhaven.com/a/alarm_clock_01",
-      "rotate": [0, 0, 0],
+      "rotate": [
+        0,
+        0,
+        0
+      ],
       "splats": 200000,
       "lite": 80000
     },
@@ -99,7 +148,11 @@
       "label": "Camera 01",
       "source": ".cache/models/vintage-camera/vintage-camera.ply",
       "sourceNote": "Made by tools/mesh-to-splats.mjs (see tools/models.json) from the CC0 model https://polyhaven.com/a/Camera_01",
-      "rotate": [0, 0, 0],
+      "rotate": [
+        0,
+        0,
+        0
+      ],
       "splats": 200000,
       "lite": 80000
     },
@@ -108,7 +161,11 @@
       "label": "Boombox",
       "source": ".cache/models/boombox/boombox.ply",
       "sourceNote": "Made by tools/mesh-to-splats.mjs (see tools/models.json) from the CC0 model https://polyhaven.com/a/boombox",
-      "rotate": [0, 0, 0],
+      "rotate": [
+        0,
+        0,
+        0
+      ],
       "splats": 200000,
       "lite": 80000
     },
@@ -117,7 +174,11 @@
       "label": "Croissant",
       "source": ".cache/models/croissant-real/croissant-real.ply",
       "sourceNote": "Made by tools/mesh-to-splats.mjs (see tools/models.json) from the CC0 model https://polyhaven.com/a/croissant",
-      "rotate": [0, 0, 0],
+      "rotate": [
+        0,
+        0,
+        0
+      ],
       "splats": 200000,
       "lite": 80000
     },
@@ -126,7 +187,11 @@
       "label": "Carrot Cake",
       "source": ".cache/models/carrot-cake/carrot-cake.ply",
       "sourceNote": "Made by tools/mesh-to-splats.mjs (see tools/models.json) from the CC0 model https://polyhaven.com/a/carrot_cake",
-      "rotate": [0, 0, 0],
+      "rotate": [
+        0,
+        0,
+        0
+      ],
       "splats": 200000,
       "lite": 80000
     },
@@ -135,7 +200,11 @@
       "label": "Food Pomegranate 01",
       "source": ".cache/models/pomegranate/pomegranate.ply",
       "sourceNote": "Made by tools/mesh-to-splats.mjs (see tools/models.json) from the CC0 model https://polyhaven.com/a/food_pomegranate_01",
-      "rotate": [0, 0, 0],
+      "rotate": [
+        0,
+        0,
+        0
+      ],
       "splats": 200000,
       "lite": 80000
     },
@@ -144,7 +213,11 @@
       "label": "Lantern 01",
       "source": ".cache/models/lantern/lantern.ply",
       "sourceNote": "Made by tools/mesh-to-splats.mjs (see tools/models.json) from the CC0 model https://polyhaven.com/a/Lantern_01",
-      "rotate": [0, 0, 0],
+      "rotate": [
+        0,
+        0,
+        0
+      ],
       "splats": 200000,
       "lite": 80000
     },
@@ -153,7 +226,11 @@
       "label": "Concrete Cat Statue",
       "source": ".cache/models/cat-statue/cat-statue.ply",
       "sourceNote": "Made by tools/mesh-to-splats.mjs (see tools/models.json) from the CC0 model https://polyhaven.com/a/concrete_cat_statue",
-      "rotate": [0, 0, 0],
+      "rotate": [
+        0,
+        0,
+        0
+      ],
       "splats": 200000,
       "lite": 80000
     },
@@ -162,7 +239,11 @@
       "label": "Chess Set",
       "source": ".cache/models/chess-set/chess-set.ply",
       "sourceNote": "Made by tools/mesh-to-splats.mjs (see tools/models.json) from the CC0 model https://polyhaven.com/a/chess_set",
-      "rotate": [0, 0, 0],
+      "rotate": [
+        0,
+        0,
+        0
+      ],
       "splats": 200000,
       "lite": 80000
     },
@@ -171,7 +252,11 @@
       "label": "Horse Statue 01",
       "source": ".cache/models/horse-statue/horse-statue.ply",
       "sourceNote": "Made by tools/mesh-to-splats.mjs (see tools/models.json) from the CC0 model https://polyhaven.com/a/horse_statue_01",
-      "rotate": [0, 0, 0],
+      "rotate": [
+        0,
+        0,
+        0
+      ],
       "splats": 200000,
       "lite": 80000
     },
@@ -180,7 +265,11 @@
       "label": "Cluster Fly",
       "source": "https://d28zzqy0iyovbz.cloudfront.net/285082b2/v2/meta.json",
       "sourceNote": "The SOG the public SuperSplat viewer streams for https://superspl.at/scene/285082b2 (downloads enabled, CC BY 4.0, by danylyon).",
-      "rotate": [180, 0, 0],
+      "rotate": [
+        180,
+        0,
+        0
+      ],
       "splats": 300000,
       "lite": 100000
     },
@@ -189,7 +278,11 @@
       "label": "MAY-BEETLE-HIRES",
       "source": "https://d28zzqy0iyovbz.cloudfront.net/9d4c4442/v4/meta.json",
       "sourceNote": "The SOG the public SuperSplat viewer streams for https://superspl.at/scene/9d4c4442 (downloads enabled, CC BY 4.0, by trilithon).",
-      "rotate": [180, 0, 0],
+      "rotate": [
+        180,
+        0,
+        0
+      ],
       "splats": 300000,
       "lite": 100000
     },
@@ -198,7 +291,11 @@
       "label": "millipede spec.",
       "source": "https://d28zzqy0iyovbz.cloudfront.net/3d5482d4/v1/meta.json",
       "sourceNote": "The SOG the public SuperSplat viewer streams for https://superspl.at/scene/3d5482d4 (downloads enabled, CC BY 4.0, by scant3d).",
-      "rotate": [180, 0, 0],
+      "rotate": [
+        180,
+        0,
+        0
+      ],
       "splats": 300000,
       "lite": 100000
     },
@@ -207,7 +304,11 @@
       "label": "Macroscan - Brown-banded carder bumblebee (Bombus humilis)",
       "source": "https://d28zzqy0iyovbz.cloudfront.net/65ff2330/v1/meta.json",
       "sourceNote": "The SOG the public SuperSplat viewer streams for https://superspl.at/scene/65ff2330 (downloads enabled, CC BY 4.0, by macroscans).",
-      "rotate": [180, 0, 0],
+      "rotate": [
+        180,
+        0,
+        0
+      ],
       "splats": 300000,
       "lite": 100000
     },
@@ -216,7 +317,11 @@
       "label": "Raspberry",
       "source": "https://d28zzqy0iyovbz.cloudfront.net/04bdd392/v1/meta.json",
       "sourceNote": "The SOG the public SuperSplat viewer streams for https://superspl.at/scene/04bdd392 (downloads enabled, CC BY 4.0, by danylyon).",
-      "rotate": [180, 0, 0],
+      "rotate": [
+        180,
+        0,
+        0
+      ],
       "splats": 300000,
       "lite": 100000
     },
@@ -225,7 +330,11 @@
       "label": "Blackberry",
       "source": "https://d28zzqy0iyovbz.cloudfront.net/827133e7/v1/meta.json",
       "sourceNote": "The SOG the public SuperSplat viewer streams for https://superspl.at/scene/827133e7 (downloads enabled, CC BY 4.0, by danylyon).",
-      "rotate": [180, 0, 0],
+      "rotate": [
+        180,
+        0,
+        0
+      ],
       "splats": 300000,
       "lite": 100000
     },
@@ -234,7 +343,11 @@
       "label": "Blueberry",
       "source": "https://d28zzqy0iyovbz.cloudfront.net/fd8b85a7/v1/meta.json",
       "sourceNote": "The SOG the public SuperSplat viewer streams for https://superspl.at/scene/fd8b85a7 (downloads enabled, CC BY 4.0, by danylyon).",
-      "rotate": [180, 0, 0],
+      "rotate": [
+        180,
+        0,
+        0
+      ],
       "splats": 300000,
       "lite": 100000
     },
@@ -243,7 +356,11 @@
       "label": "Grape",
       "source": "https://d28zzqy0iyovbz.cloudfront.net/4ae563ac/v1/meta.json",
       "sourceNote": "The SOG the public SuperSplat viewer streams for https://superspl.at/scene/4ae563ac (downloads enabled, CC BY 4.0, by danylyon).",
-      "rotate": [180, 0, 0],
+      "rotate": [
+        180,
+        0,
+        0
+      ],
       "splats": 300000,
       "lite": 100000
     },
@@ -252,7 +369,11 @@
       "label": "Cinnamon Star Cookie",
       "source": "https://d28zzqy0iyovbz.cloudfront.net/6584b96e/v3/meta.json",
       "sourceNote": "The SOG the public SuperSplat viewer streams for https://superspl.at/scene/6584b96e (downloads enabled, CC BY 4.0, by danylyon).",
-      "rotate": [180, 180, 0],
+      "rotate": [
+        180,
+        180,
+        0
+      ],
       "splats": 300000,
       "lite": 100000
     },
@@ -261,7 +382,11 @@
       "label": "Tomatoes - No Postshot!",
       "source": "https://d28zzqy0iyovbz.cloudfront.net/0101ad57/v3/meta.json",
       "sourceNote": "The SOG the public SuperSplat viewer streams for https://superspl.at/scene/0101ad57 (downloads enabled, CC BY 4.0, by simonbethke).",
-      "rotate": [180, 0, 0],
+      "rotate": [
+        180,
+        0,
+        0
+      ],
       "splats": 300000,
       "lite": 100000
     },
@@ -270,7 +395,11 @@
       "label": "MandelTorus 4,12,8,1.5 (Spirula Studio)",
       "source": "https://d28zzqy0iyovbz.cloudfront.net/e7088609/v1/meta.json",
       "sourceNote": "The SOG the public SuperSplat viewer streams for https://superspl.at/scene/e7088609 (downloads enabled, CC BY 4.0, by harry7557558).",
-      "rotate": [180, 0, 0],
+      "rotate": [
+        180,
+        0,
+        0
+      ],
       "splats": 300000,
       "lite": 100000
     },
@@ -279,7 +408,11 @@
       "label": "Basket",
       "source": "https://d28zzqy0iyovbz.cloudfront.net/efa1fa80/v1/meta.json",
       "sourceNote": "The SOG the public SuperSplat viewer streams for https://superspl.at/scene/efa1fa80 (downloads enabled, CC BY 4.0, by hollmar).",
-      "rotate": [180, 0, 0],
+      "rotate": [
+        180,
+        0,
+        0
+      ],
       "splats": 300000,
       "lite": 100000
     },
@@ -287,7 +420,11 @@
       "id": "pencil-real",
       "label": "Pencil",
       "lite": 80000,
-      "rotate": [180, 0, 0],
+      "rotate": [
+        180,
+        0,
+        0
+      ],
       "source": ".cache/g/out/pencil-1/pencil-1.ply",
       "sourceNote": "Made by tools/image-to-3d.mjs (TRELLIS, seed 1) from the CC BY 2.0 photo https://commons.wikimedia.org/wiki/File:Kleiner_Bleistift_(40045317711).jpg by Tim Reckmann, resized to 1024 px: node tools/image-to-3d.mjs <photo.png> --name=pencil-1. After packing, node tools/g-looks.mjs pencil-real --all paints the yellow pencil look and the other looks (pencil-real-<look>.sog).",
       "splats": 200000
@@ -296,7 +433,11 @@
       "id": "tin-can-real",
       "label": "Tin can",
       "lite": 160000,
-      "rotate": [180, 0, 0],
+      "rotate": [
+        180,
+        0,
+        0
+      ],
       "source": ".cache/g/out/soup-can-1/soup-can-1.ply",
       "sourceNote": "Made by tools/image-to-3d.mjs (TRELLIS, seed 1) from the CC0 photo https://commons.wikimedia.org/wiki/File:Can_opened_with_side_opener.jpg by Ll1324, resized to 1024 px: node tools/image-to-3d.mjs <photo.png> --name=soup-can-1. After packing, node tools/g-looks.mjs tin-can-real --all wraps on the peaches label and writes the other looks (tin-can-real-<look>.sog; the labels are original CC0 designs drawn by that tool).",
       "splats": 200000
@@ -331,7 +472,10 @@
       "id": "kloofendal_48d_partly_cloudy_puresky",
       "use": "hybrid sky (dome and image-based light)",
       "name": "Kloofendal 48d Partly Cloudy (Pure Sky)",
-      "authors": ["Greg Zaal", "Jarod Guest"],
+      "authors": [
+        "Greg Zaal",
+        "Jarod Guest"
+      ],
       "page": "https://polyhaven.com/a/kloofendal_48d_partly_cloudy_puresky",
       "license": "CC0 1.0",
       "out": "assets/worlds/sky/",
@@ -341,7 +485,9 @@
       "id": "sand_01",
       "use": "hybrid ground (sand)",
       "name": "Sand 01",
-      "authors": ["Rob Tuytel"],
+      "authors": [
+        "Rob Tuytel"
+      ],
       "page": "https://polyhaven.com/a/sand_01",
       "license": "CC0 1.0",
       "out": "assets/worlds/ground/",
@@ -351,7 +497,9 @@
       "id": "rocky_terrain_02",
       "use": "hybrid ground (grass)",
       "name": "Rocky Terrain 02",
-      "authors": ["Amal Kumar"],
+      "authors": [
+        "Amal Kumar"
+      ],
       "page": "https://polyhaven.com/a/rocky_terrain_02",
       "license": "CC0 1.0",
       "out": "assets/worlds/ground/",
@@ -361,7 +509,9 @@
       "id": "rock_ground",
       "use": "hybrid ground (rock)",
       "name": "Rock Ground",
-      "authors": ["Rob Tuytel"],
+      "authors": [
+        "Rob Tuytel"
+      ],
       "page": "https://polyhaven.com/a/rock_ground",
       "license": "CC0 1.0",
       "out": "assets/worlds/ground/",
@@ -371,7 +521,9 @@
       "id": "damp_beach_sand",
       "use": "hybrid ground (wet)",
       "name": "Damp Beach Sand",
-      "authors": ["Dimitrios Savva"],
+      "authors": [
+        "Dimitrios Savva"
+      ],
       "page": "https://polyhaven.com/a/damp_beach_sand",
       "license": "CC0 1.0",
       "out": "assets/worlds/ground/",
@@ -381,7 +533,9 @@
       "id": "kenney-animated-characters-protagonists",
       "use": "hybrid mesh character (model, skaterMaleA skin, idle and run)",
       "name": "Animated Characters: Protagonists",
-      "authors": ["Kenney"],
+      "authors": [
+        "Kenney"
+      ],
       "page": "https://kenney.nl/assets/animated-characters-protagonists",
       "license": "CC0 1.0",
       "out": "assets/worlds/character/",
@@ -391,7 +545,9 @@
       "id": "makehuman-system-assets",
       "use": "hybrid realistic character (body, skin, eyes, eyebrows, eyelashes, hair short02, clothes male_casualsuit06, shoes06)",
       "name": "MakeHuman system assets",
-      "authors": ["The MakeHuman team"],
+      "authors": [
+        "The MakeHuman team"
+      ],
       "page": "http://files.makehumancommunity.org/asset_packs/makehuman_system_assets/",
       "license": "CC0 1.0",
       "out": "assets/worlds/character/",
@@ -401,7 +557,11 @@
       "id": "100style",
       "use": "hybrid realistic character's idle, walk and run (motion capture: Neutral_ID, Neutral_FW, Proud_FR)",
       "name": "100STYLE",
-      "authors": ["Ian Mason", "Sebastian Starke", "Taku Komura"],
+      "authors": [
+        "Ian Mason",
+        "Sebastian Starke",
+        "Taku Komura"
+      ],
       "page": "https://zenodo.org/records/8127870",
       "license": "CC BY 4.0",
       "out": "assets/worlds/character/",
@@ -411,7 +571,9 @@
       "id": "rock_moss_set_02",
       "use": "hybrid model props (boulders)",
       "name": "Rock Moss Set 02",
-      "authors": ["Kless Gyzen"],
+      "authors": [
+        "Kless Gyzen"
+      ],
       "page": "https://polyhaven.com/a/rock_moss_set_02",
       "license": "CC0 1.0",
       "out": "assets/worlds/props/",
@@ -421,7 +583,10 @@
       "id": "namaqualand_boulder_05",
       "use": "hybrid model props (boulders)",
       "name": "Namaqualand Boulder 05",
-      "authors": ["Dario Barresi", "Jenelle van Heerden"],
+      "authors": [
+        "Dario Barresi",
+        "Jenelle van Heerden"
+      ],
       "page": "https://polyhaven.com/a/namaqualand_boulder_05",
       "license": "CC0 1.0",
       "out": "assets/worlds/props/",
@@ -431,7 +596,10 @@
       "id": "namaqualand_stones_01",
       "use": "hybrid model props (stones, pebbles)",
       "name": "Namaqualand Stones 01",
-      "authors": ["Greg Zaal", "Jenelle van Heerden"],
+      "authors": [
+        "Greg Zaal",
+        "Jenelle van Heerden"
+      ],
       "page": "https://polyhaven.com/a/namaqualand_stones_01",
       "license": "CC0 1.0",
       "out": "assets/worlds/props/",
@@ -441,7 +609,9 @@
       "id": "rock_moss_set_01",
       "use": "hybrid model props (stones, pebbles)",
       "name": "Rock Moss Set 01",
-      "authors": ["Kless Gyzen"],
+      "authors": [
+        "Kless Gyzen"
+      ],
       "page": "https://polyhaven.com/a/rock_moss_set_01",
       "license": "CC0 1.0",
       "out": "assets/worlds/props/",
@@ -451,7 +621,9 @@
       "id": "lambis_shell",
       "use": "hybrid model props (shells)",
       "name": "Lambis Shell",
-      "authors": ["Kuutti Siitonen"],
+      "authors": [
+        "Kuutti Siitonen"
+      ],
       "page": "https://polyhaven.com/a/lambis_shell",
       "license": "CC0 1.0",
       "out": "assets/worlds/props/",
@@ -461,7 +633,10 @@
       "id": "dead_tree_trunk_02",
       "use": "hybrid model props (driftwood)",
       "name": "Dead Tree Trunk 02",
-      "authors": ["Jenelle van Heerden", "Rico Cilliers"],
+      "authors": [
+        "Jenelle van Heerden",
+        "Rico Cilliers"
+      ],
       "page": "https://polyhaven.com/a/dead_tree_trunk_02",
       "license": "CC0 1.0",
       "out": "assets/worlds/props/",
@@ -471,7 +646,9 @@
       "id": "tree_stump_01",
       "use": "hybrid model props (stumps)",
       "name": "Tree Stump 01",
-      "authors": ["Rob Tuytel"],
+      "authors": [
+        "Rob Tuytel"
+      ],
       "page": "https://polyhaven.com/a/tree_stump_01",
       "license": "CC0 1.0",
       "out": "assets/worlds/props/",
@@ -520,7 +697,9 @@
     {
       "id": "alarm-clock-bell",
       "file": "assets/sounds/alarm-clock-bell.mp3",
-      "toys": ["alarm-clock"],
+      "toys": [
+        "alarm-clock"
+      ],
       "name": "old alarm clock ringing",
       "author": "tuberatanka",
       "page": "https://freesound.org/people/tuberatanka/sounds/102435/",
@@ -531,7 +710,9 @@
     {
       "id": "asteroid-crumble",
       "file": "assets/sounds/asteroid-crumble.mp3",
-      "toys": ["asteroid"],
+      "toys": [
+        "asteroid"
+      ],
       "name": "Rocks.wav",
       "author": "adamgryu",
       "page": "https://freesound.org/people/adamgryu/sounds/336023/",
@@ -542,7 +723,9 @@
     {
       "id": "baseball-bat",
       "file": "assets/sounds/baseball-bat.mp3",
-      "toys": ["baseball"],
+      "toys": [
+        "baseball"
+      ],
       "name": "Bat Hit 9 FF095.aif",
       "author": "martinimeniscus",
       "page": "https://freesound.org/people/martinimeniscus/sounds/162886/",
@@ -553,7 +736,9 @@
     {
       "id": "beach-ball-bounce",
       "file": "assets/sounds/beach-ball-bounce.mp3",
-      "toys": ["beach-ball"],
+      "toys": [
+        "beach-ball"
+      ],
       "name": "fotballPlast.wav",
       "author": "blindmanonacid",
       "page": "https://freesound.org/people/blindmanonacid/sounds/117111/",
@@ -564,7 +749,9 @@
     {
       "id": "bowling-ball-pins",
       "file": "assets/sounds/bowling-ball-pins.mp3",
-      "toys": ["bowling-ball"],
+      "toys": [
+        "bowling-ball"
+      ],
       "name": "B_2 Bowling ball striking pins.wav",
       "author": "Yarmonics",
       "page": "https://freesound.org/people/Yarmonics/sounds/441856/",
@@ -575,7 +762,9 @@
     {
       "id": "bowling-ball-roll",
       "file": "assets/sounds/bowling-ball-roll.mp3",
-      "toys": ["bowling-ball"],
+      "toys": [
+        "bowling-ball"
+      ],
       "name": "Bowling Ball.wav",
       "author": "driftworks",
       "page": "https://freesound.org/people/driftworks/sounds/128969/",
@@ -586,7 +775,9 @@
     {
       "id": "cat-statue-meow",
       "file": "assets/sounds/cat-statue-meow.mp3",
-      "toys": ["cat-statue"],
+      "toys": [
+        "cat-statue"
+      ],
       "name": "cat meow short",
       "author": "skymary",
       "page": "https://freesound.org/people/skymary/sounds/412017/",
@@ -597,7 +788,10 @@
     {
       "id": "comet-fire",
       "file": "assets/sounds/comet-fire.mp3",
-      "toys": ["comet", "meteor"],
+      "toys": [
+        "comet",
+        "meteor"
+      ],
       "name": "Torch.wav",
       "author": "DanielVega",
       "page": "https://freesound.org/people/DanielVega/sounds/479338/",
@@ -608,7 +802,9 @@
     {
       "id": "crystal-ball-ring",
       "file": "assets/sounds/crystal-ball-ring.mp3",
-      "toys": ["crystal-ball"],
+      "toys": [
+        "crystal-ball"
+      ],
       "name": "Wine glass clink deeper.wav",
       "author": "lmr9",
       "page": "https://freesound.org/people/lmr9/sounds/178178/",
@@ -619,7 +815,9 @@
     {
       "id": "crystal-lattice-chain",
       "file": "assets/sounds/crystal-lattice-chain.mp3",
-      "toys": ["crystal-lattice"],
+      "toys": [
+        "crystal-lattice"
+      ],
       "name": "Steel chain soft drop",
       "author": "ani_music",
       "page": "https://freesound.org/people/ani_music/sounds/167913/",
@@ -630,7 +828,13 @@
     {
       "id": "diamond-tap",
       "file": "assets/sounds/diamond-tap.mp3",
-      "toys": ["diamond", "ruby", "emerald", "sapphire", "opal"],
+      "toys": [
+        "diamond",
+        "ruby",
+        "emerald",
+        "sapphire",
+        "opal"
+      ],
       "name": "Glass Tap.wav",
       "author": "Unicornaphobist",
       "page": "https://freesound.org/people/Unicornaphobist/sounds/262958/",
@@ -641,7 +845,9 @@
     {
       "id": "dna-zipper",
       "file": "assets/sounds/dna-zipper.mp3",
-      "toys": ["dna"],
+      "toys": [
+        "dna"
+      ],
       "name": "Zipper Unzip 3 (Slow) .wav",
       "author": "RutgerMuller",
       "page": "https://freesound.org/people/RutgerMuller/sounds/51176/",
@@ -652,7 +858,9 @@
     {
       "id": "heart-beat",
       "file": "assets/sounds/heart-beat.mp3",
-      "toys": ["heart"],
+      "toys": [
+        "heart"
+      ],
       "name": "Human Heartbeat (60 BPM)",
       "author": "FenrirFangs",
       "page": "https://freesound.org/people/FenrirFangs/sounds/213181/",
@@ -663,7 +871,9 @@
     {
       "id": "horse-statue-whinny",
       "file": "assets/sounds/horse-statue-whinny.mp3",
-      "toys": ["horse-statue"],
+      "toys": [
+        "horse-statue"
+      ],
       "name": "Renill de cavall / Horse Neigh",
       "author": "Salsero_classic",
       "page": "https://freesound.org/people/Salsero_classic/sounds/826753/",
@@ -674,7 +884,9 @@
     {
       "id": "lantern-blow",
       "file": "assets/sounds/lantern-blow.mp3",
-      "toys": ["lantern"],
+      "toys": [
+        "lantern"
+      ],
       "name": "blowing out candle.wav",
       "author": "Reitanna",
       "page": "https://freesound.org/people/Reitanna/sounds/242867/",
@@ -685,7 +897,10 @@
     {
       "id": "lantern-match",
       "file": "assets/sounds/lantern-match.mp3",
-      "toys": ["garden-gnome", "lantern"],
+      "toys": [
+        "garden-gnome",
+        "lantern"
+      ],
       "name": "Match Lighting Candle",
       "author": "devilqube",
       "page": "https://freesound.org/people/devilqube/sounds/370362/",
@@ -696,7 +911,9 @@
     {
       "id": "lungs-breath",
       "file": "assets/sounds/lungs-breath.mp3",
-      "toys": ["lungs"],
+      "toys": [
+        "lungs"
+      ],
       "name": "Male breathing",
       "author": "zogmachine",
       "page": "https://freesound.org/people/zogmachine/sounds/202606/",
@@ -707,7 +924,9 @@
     {
       "id": "marble-roll",
       "file": "assets/sounds/marble-roll.mp3",
-      "toys": ["marble"],
+      "toys": [
+        "marble"
+      ],
       "name": "Marble (single) rolling on wooden floor.wav",
       "author": "LiezelDippenaar",
       "page": "https://freesound.org/people/LiezelDippenaar/sounds/707545/",
@@ -718,7 +937,13 @@
     {
       "id": "meteor-boom",
       "file": "assets/sounds/meteor-boom.mp3",
-      "toys": ["asteroid", "meteor", "star", "planetary-nebula", "brain"],
+      "toys": [
+        "asteroid",
+        "meteor",
+        "star",
+        "planetary-nebula",
+        "brain"
+      ],
       "name": "Muffled Distant Explosion",
       "author": "NenadSimic",
       "page": "https://freesound.org/people/NenadSimic/sounds/149966/",
@@ -729,7 +954,10 @@
     {
       "id": "meteor-fire",
       "file": "assets/sounds/meteor-fire.mp3",
-      "toys": ["meteor", "nebula"],
+      "toys": [
+        "meteor",
+        "nebula"
+      ],
       "name": "Waving Torch.wav",
       "author": "spookymodem",
       "page": "https://freesound.org/people/spookymodem/sounds/249809/",
@@ -740,7 +968,11 @@
     {
       "id": "neuron-arc",
       "file": "assets/sounds/neuron-arc.mp3",
-      "toys": ["knot", "neuron", "orbital"],
+      "toys": [
+        "knot",
+        "neuron",
+        "orbital"
+      ],
       "name": "highvoltagearc.wav",
       "author": "Sclolex",
       "page": "https://freesound.org/people/Sclolex/sounds/210878/",
@@ -751,7 +983,9 @@
     {
       "id": "pool-ball-cue",
       "file": "assets/sounds/pool-ball-cue.mp3",
-      "toys": ["pool-ball"],
+      "toys": [
+        "pool-ball"
+      ],
       "name": "pool_break.wav",
       "author": "reg7783",
       "page": "https://freesound.org/people/reg7783/sounds/204187/",
@@ -762,7 +996,10 @@
     {
       "id": "protein-velcro",
       "file": "assets/sounds/protein-velcro.mp3",
-      "toys": ["chromosome", "protein"],
+      "toys": [
+        "chromosome",
+        "protein"
+      ],
       "name": "Velcro",
       "author": "paulocorona",
       "page": "https://freesound.org/people/paulocorona/sounds/334991/",
@@ -773,7 +1010,10 @@
     {
       "id": "raspberry-land-1",
       "file": "assets/sounds/raspberry-land-1.mp3",
-      "toys": ["raspberry", "blackberry"],
+      "toys": [
+        "raspberry",
+        "blackberry"
+      ],
       "name": "Impact Sounds (impactSoft_medium_000.ogg)",
       "author": "Kenney",
       "page": "https://kenney.nl/assets/impact-sounds",
@@ -784,7 +1024,10 @@
     {
       "id": "raspberry-land-2",
       "file": "assets/sounds/raspberry-land-2.mp3",
-      "toys": ["raspberry", "blackberry"],
+      "toys": [
+        "raspberry",
+        "blackberry"
+      ],
       "name": "Impact Sounds (impactSoft_medium_002.ogg)",
       "author": "Kenney",
       "page": "https://kenney.nl/assets/impact-sounds",
@@ -795,7 +1038,11 @@
     {
       "id": "raspberry-squish",
       "file": "assets/sounds/raspberry-squish.mp3",
-      "toys": ["raspberry", "blackberry", "donut"],
+      "toys": [
+        "raspberry",
+        "blackberry",
+        "donut"
+      ],
       "name": "Squish impact",
       "author": "Bertsz",
       "page": "https://freesound.org/people/Bertsz/sounds/500912/",
@@ -806,7 +1053,9 @@
     {
       "id": "star-cookie-crumble",
       "file": "assets/sounds/star-cookie-crumble.mp3",
-      "toys": ["star-cookie"],
+      "toys": [
+        "star-cookie"
+      ],
       "name": "Crisp Crunch.m4a",
       "author": "Yin_Yang_Jake007",
       "page": "https://freesound.org/people/Yin_Yang_Jake007/sounds/443469/",
@@ -817,7 +1066,9 @@
     {
       "id": "star-cookie-snap",
       "file": "assets/sounds/star-cookie-snap.mp3",
-      "toys": ["star-cookie"],
+      "toys": [
+        "star-cookie"
+      ],
       "name": "Crisp Crunch.m4a",
       "author": "Yin_Yang_Jake007",
       "page": "https://freesound.org/people/Yin_Yang_Jake007/sounds/443469/",
@@ -828,7 +1079,13 @@
     {
       "id": "supernova-boom",
       "file": "assets/sounds/supernova-boom.mp3",
-      "toys": ["star", "pulsar", "black-hole", "planetary-nebula", "supernova"],
+      "toys": [
+        "star",
+        "pulsar",
+        "black-hole",
+        "planetary-nebula",
+        "supernova"
+      ],
       "name": "Deep Boom",
       "author": "Za-Games",
       "page": "https://freesound.org/people/Za-Games/sounds/539968/",
@@ -839,7 +1096,9 @@
     {
       "id": "tennis-ball-bounce",
       "file": "assets/sounds/tennis-ball-bounce.mp3",
-      "toys": ["tennis-ball"],
+      "toys": [
+        "tennis-ball"
+      ],
       "name": "bola de tenis caindo.wav",
       "author": "Negraovictor",
       "page": "https://freesound.org/people/Negraovictor/sounds/394355/",
@@ -850,7 +1109,10 @@
     {
       "id": "tennis-ball-slam",
       "file": "assets/sounds/tennis-ball-slam.mp3",
-      "toys": ["tennis-ball", "softball"],
+      "toys": [
+        "tennis-ball",
+        "softball"
+      ],
       "name": "ball_hit_ground.wav",
       "author": "Kyanite_",
       "page": "https://freesound.org/people/Kyanite_/sounds/432912/",
@@ -861,7 +1123,9 @@
     {
       "id": "tin-can-spin",
       "file": "assets/sounds/tin-can-spin.mp3",
-      "toys": ["tin-can-real"],
+      "toys": [
+        "tin-can-real"
+      ],
       "name": "Spinning Coin",
       "author": "CassieTee",
       "page": "https://freesound.org/people/CassieTee/sounds/209462/",
@@ -872,7 +1136,9 @@
     {
       "id": "vintage-camera-flash",
       "file": "assets/sounds/vintage-camera-flash.mp3",
-      "toys": ["vintage-camera"],
+      "toys": [
+        "vintage-camera"
+      ],
       "name": "Vintage Camera Flash Powder and Shutter",
       "author": "Werra",
       "page": "https://freesound.org/people/Werra/sounds/232130/",
@@ -883,7 +1149,9 @@
     {
       "id": "wooden-elephant-trumpet",
       "file": "assets/sounds/wooden-elephant-trumpet.mp3",
-      "toys": ["wooden-elephant"],
+      "toys": [
+        "wooden-elephant"
+      ],
       "name": "Elephant Trumpets Growls.flac",
       "author": "D.jones",
       "page": "https://freesound.org/people/D.jones/sounds/527845/",
@@ -894,7 +1162,9 @@
     {
       "id": "grand-piano-a0",
       "file": "assets/sounds/grand-piano-a0.mp3",
-      "toys": ["grand-piano"],
+      "toys": [
+        "grand-piano"
+      ],
       "name": "A0.ogg (88 piano keys, long reverb)",
       "author": "TEDAgame",
       "page": "https://freesound.org/people/TEDAgame/sounds/448579/",
@@ -905,7 +1175,9 @@
     {
       "id": "grand-piano-cs1",
       "file": "assets/sounds/grand-piano-cs1.mp3",
-      "toys": ["grand-piano"],
+      "toys": [
+        "grand-piano"
+      ],
       "name": "C#1.ogg (88 piano keys, long reverb)",
       "author": "TEDAgame",
       "page": "https://freesound.org/people/TEDAgame/sounds/448540/",
@@ -916,7 +1188,9 @@
     {
       "id": "grand-piano-f1",
       "file": "assets/sounds/grand-piano-f1.mp3",
-      "toys": ["grand-piano"],
+      "toys": [
+        "grand-piano"
+      ],
       "name": "F1.ogg (88 piano keys, long reverb)",
       "author": "TEDAgame",
       "page": "https://freesound.org/people/TEDAgame/sounds/448581/",
@@ -927,7 +1201,9 @@
     {
       "id": "grand-piano-a1",
       "file": "assets/sounds/grand-piano-a1.mp3",
-      "toys": ["grand-piano"],
+      "toys": [
+        "grand-piano"
+      ],
       "name": "A1.ogg (88 piano keys, long reverb)",
       "author": "TEDAgame",
       "page": "https://freesound.org/people/TEDAgame/sounds/448578/",
@@ -938,7 +1214,9 @@
     {
       "id": "grand-piano-cs2",
       "file": "assets/sounds/grand-piano-cs2.mp3",
-      "toys": ["grand-piano"],
+      "toys": [
+        "grand-piano"
+      ],
       "name": "C#2.ogg (88 piano keys, long reverb)",
       "author": "TEDAgame",
       "page": "https://freesound.org/people/TEDAgame/sounds/448541/",
@@ -949,7 +1227,9 @@
     {
       "id": "grand-piano-f2",
       "file": "assets/sounds/grand-piano-f2.mp3",
-      "toys": ["grand-piano"],
+      "toys": [
+        "grand-piano"
+      ],
       "name": "F2.ogg (88 piano keys, long reverb)",
       "author": "TEDAgame",
       "page": "https://freesound.org/people/TEDAgame/sounds/448588/",
@@ -960,7 +1240,9 @@
     {
       "id": "grand-piano-a2",
       "file": "assets/sounds/grand-piano-a2.mp3",
-      "toys": ["grand-piano"],
+      "toys": [
+        "grand-piano"
+      ],
       "name": "A2.ogg (88 piano keys, long reverb)",
       "author": "TEDAgame",
       "page": "https://freesound.org/people/TEDAgame/sounds/448563/",
@@ -971,7 +1253,9 @@
     {
       "id": "grand-piano-cs3",
       "file": "assets/sounds/grand-piano-cs3.mp3",
-      "toys": ["grand-piano"],
+      "toys": [
+        "grand-piano"
+      ],
       "name": "C#3.ogg (88 piano keys, long reverb)",
       "author": "TEDAgame",
       "page": "https://freesound.org/people/TEDAgame/sounds/448538/",
@@ -982,7 +1266,9 @@
     {
       "id": "grand-piano-f3",
       "file": "assets/sounds/grand-piano-f3.mp3",
-      "toys": ["grand-piano"],
+      "toys": [
+        "grand-piano"
+      ],
       "name": "F3.ogg (88 piano keys, long reverb)",
       "author": "TEDAgame",
       "page": "https://freesound.org/people/TEDAgame/sounds/448589/",
@@ -993,7 +1279,9 @@
     {
       "id": "grand-piano-a3",
       "file": "assets/sounds/grand-piano-a3.mp3",
-      "toys": ["grand-piano"],
+      "toys": [
+        "grand-piano"
+      ],
       "name": "A3.ogg (88 piano keys, long reverb)",
       "author": "TEDAgame",
       "page": "https://freesound.org/people/TEDAgame/sounds/448562/",
@@ -1004,7 +1292,9 @@
     {
       "id": "grand-piano-cs4",
       "file": "assets/sounds/grand-piano-cs4.mp3",
-      "toys": ["grand-piano"],
+      "toys": [
+        "grand-piano"
+      ],
       "name": "C#4.ogg (88 piano keys, long reverb)",
       "author": "TEDAgame",
       "page": "https://freesound.org/people/TEDAgame/sounds/448539/",
@@ -1015,7 +1305,9 @@
     {
       "id": "grand-piano-f4",
       "file": "assets/sounds/grand-piano-f4.mp3",
-      "toys": ["grand-piano"],
+      "toys": [
+        "grand-piano"
+      ],
       "name": "F4.ogg (88 piano keys, long reverb)",
       "author": "TEDAgame",
       "page": "https://freesound.org/people/TEDAgame/sounds/448595/",
@@ -1026,7 +1318,9 @@
     {
       "id": "grand-piano-a4",
       "file": "assets/sounds/grand-piano-a4.mp3",
-      "toys": ["grand-piano"],
+      "toys": [
+        "grand-piano"
+      ],
       "name": "A4.ogg (88 piano keys, long reverb)",
       "author": "TEDAgame",
       "page": "https://freesound.org/people/TEDAgame/sounds/448561/",
@@ -1037,7 +1331,9 @@
     {
       "id": "grand-piano-cs5",
       "file": "assets/sounds/grand-piano-cs5.mp3",
-      "toys": ["grand-piano"],
+      "toys": [
+        "grand-piano"
+      ],
       "name": "C#5.ogg (88 piano keys, long reverb)",
       "author": "TEDAgame",
       "page": "https://freesound.org/people/TEDAgame/sounds/448532/",
@@ -1048,7 +1344,9 @@
     {
       "id": "grand-piano-f5",
       "file": "assets/sounds/grand-piano-f5.mp3",
-      "toys": ["grand-piano"],
+      "toys": [
+        "grand-piano"
+      ],
       "name": "F5.ogg (88 piano keys, long reverb)",
       "author": "TEDAgame",
       "page": "https://freesound.org/people/TEDAgame/sounds/448594/",
@@ -1059,7 +1357,9 @@
     {
       "id": "grand-piano-a5",
       "file": "assets/sounds/grand-piano-a5.mp3",
-      "toys": ["grand-piano"],
+      "toys": [
+        "grand-piano"
+      ],
       "name": "A5.ogg (88 piano keys, long reverb)",
       "author": "TEDAgame",
       "page": "https://freesound.org/people/TEDAgame/sounds/448560/",
@@ -1070,7 +1370,9 @@
     {
       "id": "grand-piano-cs6",
       "file": "assets/sounds/grand-piano-cs6.mp3",
-      "toys": ["grand-piano"],
+      "toys": [
+        "grand-piano"
+      ],
       "name": "C#6.ogg (88 piano keys, long reverb)",
       "author": "TEDAgame",
       "page": "https://freesound.org/people/TEDAgame/sounds/448533/",
@@ -1081,7 +1383,9 @@
     {
       "id": "grand-piano-f6",
       "file": "assets/sounds/grand-piano-f6.mp3",
-      "toys": ["grand-piano"],
+      "toys": [
+        "grand-piano"
+      ],
       "name": "F6.ogg (88 piano keys, long reverb)",
       "author": "TEDAgame",
       "page": "https://freesound.org/people/TEDAgame/sounds/448597/",
@@ -1092,7 +1396,9 @@
     {
       "id": "grand-piano-a6",
       "file": "assets/sounds/grand-piano-a6.mp3",
-      "toys": ["grand-piano"],
+      "toys": [
+        "grand-piano"
+      ],
       "name": "A6.ogg (88 piano keys, long reverb)",
       "author": "TEDAgame",
       "page": "https://freesound.org/people/TEDAgame/sounds/448567/",
@@ -1103,7 +1409,9 @@
     {
       "id": "grand-piano-cs7",
       "file": "assets/sounds/grand-piano-cs7.mp3",
-      "toys": ["grand-piano"],
+      "toys": [
+        "grand-piano"
+      ],
       "name": "C#7.ogg (88 piano keys, long reverb)",
       "author": "TEDAgame",
       "page": "https://freesound.org/people/TEDAgame/sounds/448545/",
@@ -1114,7 +1422,9 @@
     {
       "id": "grand-piano-f7",
       "file": "assets/sounds/grand-piano-f7.mp3",
-      "toys": ["grand-piano"],
+      "toys": [
+        "grand-piano"
+      ],
       "name": "F7.ogg (88 piano keys, long reverb)",
       "author": "TEDAgame",
       "page": "https://freesound.org/people/TEDAgame/sounds/448596/",
@@ -1125,7 +1435,9 @@
     {
       "id": "grand-piano-a7",
       "file": "assets/sounds/grand-piano-a7.mp3",
-      "toys": ["grand-piano"],
+      "toys": [
+        "grand-piano"
+      ],
       "name": "A7.ogg (88 piano keys, long reverb)",
       "author": "TEDAgame",
       "page": "https://freesound.org/people/TEDAgame/sounds/448566/",
@@ -1136,7 +1448,9 @@
     {
       "id": "grand-piano-c8",
       "file": "assets/sounds/grand-piano-c8.mp3",
-      "toys": ["grand-piano"],
+      "toys": [
+        "grand-piano"
+      ],
       "name": "C8.ogg (88 piano keys, long reverb)",
       "author": "TEDAgame",
       "page": "https://freesound.org/people/TEDAgame/sounds/448543/",
@@ -1147,7 +1461,9 @@
     {
       "id": "puzzle-cube-turn",
       "file": "assets/sounds/puzzle-cube-turn.mp3",
-      "toys": ["puzzle-cube"],
+      "toys": [
+        "puzzle-cube"
+      ],
       "name": "Cube Turn - 9 (a puzzle cube turning)",
       "author": "SpaceJoe",
       "page": "https://freesound.org/s/486585/",
@@ -1158,7 +1474,9 @@
     {
       "id": "balloon-dog-pop",
       "file": "assets/sounds/balloon-dog-pop.mp3",
-      "toys": ["balloon-dog"],
+      "toys": [
+        "balloon-dog"
+      ],
       "name": "Balloon-Burst-07.wav",
       "author": "Gniffelbaf",
       "page": "https://freesound.org/s/82121/",
@@ -1169,7 +1487,12 @@
     {
       "id": "book-page",
       "file": "assets/sounds/book-page.mp3",
-      "toys": ["book", "picture-lab", "your-book", "photo-album"],
+      "toys": [
+        "book",
+        "picture-lab",
+        "your-book",
+        "photo-album"
+      ],
       "name": "Book Turn Page 2.wav",
       "author": "esperri",
       "page": "https://freesound.org/s/119127/",
@@ -1180,7 +1503,9 @@
     {
       "id": "apple-bite",
       "file": "assets/sounds/apple-bite.mp3",
-      "toys": ["apple"],
+      "toys": [
+        "apple"
+      ],
       "name": "Bite (Apple)",
       "author": "wadaltmon",
       "page": "https://freesound.org/s/275015/",
@@ -1191,7 +1516,9 @@
     {
       "id": "popcorn-popping",
       "file": "assets/sounds/popcorn-popping.mp3",
-      "toys": ["popcorn"],
+      "toys": [
+        "popcorn"
+      ],
       "name": "popcorn.wav",
       "author": "Mike888",
       "page": "https://freesound.org/s/488722/",
@@ -1202,7 +1529,9 @@
     {
       "id": "taco-crack",
       "file": "assets/sounds/taco-crack.mp3",
-      "toys": ["taco"],
+      "toys": [
+        "taco"
+      ],
       "name": "chips crunch sound",
       "author": "TomatoHater",
       "page": "https://freesound.org/s/705360/",
@@ -1213,7 +1542,10 @@
     {
       "id": "fireworks-burst",
       "file": "assets/sounds/fireworks-burst.mp3",
-      "toys": ["fireworks", "eiffel-tower"],
+      "toys": [
+        "fireworks",
+        "eiffel-tower"
+      ],
       "name": "Firework Explosion 3",
       "author": "a deleted Freesound account (deleted_user_3544904)",
       "page": "https://freesound.org/s/212683/",
@@ -1224,7 +1556,9 @@
     {
       "id": "colosseum-crowd",
       "file": "assets/sounds/colosseum-crowd.mp3",
-      "toys": ["colosseum"],
+      "toys": [
+        "colosseum"
+      ],
       "name": "cheering and clapping crowd 1",
       "author": "AlaskaRobotics",
       "page": "https://freesound.org/s/221568/",
@@ -1235,7 +1569,9 @@
     {
       "id": "colosseum-hooves",
       "file": "assets/sounds/colosseum-hooves.mp3",
-      "toys": ["colosseum"],
+      "toys": [
+        "colosseum"
+      ],
       "name": "Horse and Carriage.mp3",
       "author": "maadmacs",
       "page": "https://freesound.org/s/388391/",
@@ -1246,7 +1582,9 @@
     {
       "id": "steam-train-chug",
       "file": "assets/sounds/steam-train-chug.mp3",
-      "toys": ["steam-train"],
+      "toys": [
+        "steam-train"
+      ],
       "name": "Steam Train In Motion 1.wav",
       "author": "lolamadeus",
       "page": "https://freesound.org/s/179349/",
@@ -1257,7 +1595,9 @@
     {
       "id": "sports-car-rev",
       "file": "assets/sounds/sports-car-rev.mp3",
-      "toys": ["sports-car"],
+      "toys": [
+        "sports-car"
+      ],
       "name": "Car Engine Revving.WAV",
       "author": "DigPro120",
       "page": "https://freesound.org/s/558844/",
@@ -1268,7 +1608,9 @@
     {
       "id": "tractor-engine",
       "file": "assets/sounds/tractor-engine.mp3",
-      "toys": ["tractor"],
+      "toys": [
+        "tractor"
+      ],
       "name": "Tractor whirring",
       "author": "vonis22",
       "page": "https://freesound.org/s/339167/",
@@ -1279,7 +1621,9 @@
     {
       "id": "helicopter-rotor",
       "file": "assets/sounds/helicopter-rotor.mp3",
-      "toys": ["helicopter"],
+      "toys": [
+        "helicopter"
+      ],
       "name": "Helicopter.wav",
       "author": "Mike_Leister",
       "page": "https://freesound.org/s/488089/",
@@ -1290,7 +1634,9 @@
     {
       "id": "propeller-plane-engine",
       "file": "assets/sounds/propeller-plane-engine.mp3",
-      "toys": ["propeller-plane"],
+      "toys": [
+        "propeller-plane"
+      ],
       "name": "Aeroplane Passing Close.wav",
       "author": "paulprit",
       "page": "https://freesound.org/s/507446/",
@@ -1301,7 +1647,10 @@
     {
       "id": "bow-and-target-release",
       "file": "assets/sounds/bow-and-target-release.mp3",
-      "toys": ["bow-and-target", "crossbow"],
+      "toys": [
+        "bow-and-target",
+        "crossbow"
+      ],
       "name": "Bow Release (Bow and Arrow) 3",
       "author": "Ali_6868",
       "page": "https://freesound.org/s/384918/",
@@ -1312,7 +1661,9 @@
     {
       "id": "owl-hoot",
       "file": "assets/sounds/owl-hoot.mp3",
-      "toys": ["owl"],
+      "toys": [
+        "owl"
+      ],
       "name": "Owl Hoot",
       "author": "Breviceps",
       "page": "https://freesound.org/s/465697/",
@@ -1323,7 +1674,9 @@
     {
       "id": "frog-croak",
       "file": "assets/sounds/frog-croak.mp3",
-      "toys": ["frog"],
+      "toys": [
+        "frog"
+      ],
       "name": "Frog croaking sound effect",
       "author": "betterchinese",
       "page": "https://freesound.org/s/354132/",
@@ -1334,7 +1687,9 @@
     {
       "id": "frog-fly",
       "file": "assets/sounds/frog-fly.mp3",
-      "toys": ["frog"],
+      "toys": [
+        "frog"
+      ],
       "name": "Fly_Buzzing_Edited.wav",
       "author": "AmberdeMeillon",
       "page": "https://freesound.org/s/443059/",
@@ -1345,7 +1700,9 @@
     {
       "id": "bonsai-snip",
       "file": "assets/sounds/bonsai-snip.mp3",
-      "toys": ["bonsai"],
+      "toys": [
+        "bonsai"
+      ],
       "name": "scissors cut.wav",
       "author": "mywhats",
       "page": "https://freesound.org/s/175522/",
@@ -1356,7 +1713,9 @@
     {
       "id": "oak-leaves",
       "file": "assets/sounds/oak-leaves.mp3",
-      "toys": ["oak"],
+      "toys": [
+        "oak"
+      ],
       "name": "FallingLeaves",
       "author": "falcospizaetus",
       "page": "https://freesound.org/s/489911/",
@@ -1367,7 +1726,9 @@
     {
       "id": "rocks-pebbles",
       "file": "assets/sounds/rocks-pebbles.mp3",
-      "toys": ["rocks"],
+      "toys": [
+        "rocks"
+      ],
       "name": "Slow Pebble Tumble.wav",
       "author": "bbrocer",
       "page": "https://freesound.org/s/398698/",
@@ -1378,7 +1739,9 @@
     {
       "id": "iceberg-crack",
       "file": "assets/sounds/iceberg-crack.mp3",
-      "toys": ["iceberg"],
+      "toys": [
+        "iceberg"
+      ],
       "name": "Ice Crack 1",
       "author": "j_p_higgins",
       "page": "https://freesound.org/s/262635/",
@@ -1389,7 +1752,9 @@
     {
       "id": "klein-bottle-slosh",
       "file": "assets/sounds/klein-bottle-slosh.mp3",
-      "toys": ["klein-bottle"],
+      "toys": [
+        "klein-bottle"
+      ],
       "name": "Bottle Slosh 2",
       "author": "alegemaate",
       "page": "https://freesound.org/s/667273/",
@@ -1400,7 +1765,9 @@
     {
       "id": "spinning-top-spin",
       "file": "assets/sounds/spinning-top-spin.mp3",
-      "toys": ["spinning-top"],
+      "toys": [
+        "spinning-top"
+      ],
       "name": "Metallic Spinning Top (Dry Sound).wav",
       "author": "Uzbazur",
       "page": "https://freesound.org/s/334970/",
@@ -1411,7 +1778,9 @@
     {
       "id": "spring-toy-boing",
       "file": "assets/sounds/spring-toy-boing.mp3",
-      "toys": ["spring-toy"],
+      "toys": [
+        "spring-toy"
+      ],
       "name": "battery compartment spring 01.wav",
       "author": "denalwa",
       "page": "https://freesound.org/s/472478/",
@@ -1422,7 +1791,9 @@
     {
       "id": "chess-set-move",
       "file": "assets/sounds/chess-set-move.mp3",
-      "toys": ["chess-set"],
+      "toys": [
+        "chess-set"
+      ],
       "name": "Piece Placement.mp3",
       "author": "el_boss",
       "page": "https://freesound.org/s/546119/",
@@ -1433,7 +1804,9 @@
     {
       "id": "robot-wind",
       "file": "assets/sounds/robot-wind.mp3",
-      "toys": ["robot"],
+      "toys": [
+        "robot"
+      ],
       "name": "Wind-up sound",
       "author": "Breviceps",
       "page": "https://freesound.org/s/445966/",
@@ -1444,7 +1817,9 @@
     {
       "id": "dice-throw",
       "file": "assets/sounds/dice-throw.mp3",
-      "toys": ["dice"],
+      "toys": [
+        "dice"
+      ],
       "name": "Casino Audio 1.1: dice-throw-1.ogg and dice-throw-3.ogg",
       "author": "Kenney (kenney.nl)",
       "page": "https://kenney.nl/assets/casino-audio",
@@ -1511,5 +1886,62 @@
     "license": "MIT",
     "checked": "September 30, 2026",
     "note": "The 20 modules session.js and its workers reach, unmodified (vendor/splatjs/VERSION.md). Loaded only when someone opens a video in the Video to 3D toy."
-  }
+  },
+  "scienceSamples": [
+    {
+      "id": "aspirin",
+      "file": "assets/toys/thermal-ellipsoids/aspirin-cod-2104857.cif",
+      "toy": "thermal-ellipsoids",
+      "name": "Aspirin (form II) at 300 K, COD 2104857",
+      "author": "E. J. Chan, T. R. Welberry, A. P. Heerdegen, D. J. Goossens",
+      "page": "https://www.crystallography.net/cod/2104857.html",
+      "license": "Public domain (Crystallography Open Database)",
+      "checked": "September 30, 2026",
+      "note": "Unchanged CIF."
+    },
+    {
+      "id": "crambin",
+      "file": "assets/toys/thermal-ellipsoids/crambin-1ejg.pdb",
+      "toy": "thermal-ellipsoids",
+      "name": "Crambin at ultra-high resolution, PDB 1EJG",
+      "author": "C. Jelsch, M. M. Teeter, V. Lamzin, V. Pichon-Pesme, R. H. Blessing, C. Lecomte",
+      "page": "https://www.rcsb.org/structure/1EJG",
+      "license": "CC0 1.0",
+      "checked": "September 30, 2026",
+      "note": "The PDB file's HEADER, TITLE, AUTHOR, resolution, ATOM, HETATM, ANISOU, TER and END records, water left out."
+    },
+    {
+      "id": "cos7-mt-clathrin",
+      "file": "assets/toys/smlm-microscope/cos7-mt-clathrin.smlm",
+      "toy": "smlm-microscope",
+      "name": "Microtubules and clathrin in a Cos cell (ShareLoc.XYZ)",
+      "author": "Christophe Leterrier",
+      "page": "https://doi.org/10.5281/zenodo.5507427",
+      "license": "CC BY 4.0",
+      "checked": "September 30, 2026",
+      "note": "A subset: the localizations in a 12 µm square, cut by tools/sci-samples.mjs."
+    },
+    {
+      "id": "nucleus-nup",
+      "file": "assets/toys/smlm-microscope/nucleus-nup.smlm",
+      "toy": "smlm-microscope",
+      "name": "Zola-3D NUP full nucleus (ShareLoc.XYZ)",
+      "author": "Andrey Aristov (uploaded by Benoit Lelandais)",
+      "page": "https://doi.org/10.5281/zenodo.7233696",
+      "license": "CC BY 4.0",
+      "checked": "September 30, 2026",
+      "note": "A subset: a random half of the localizations, cut by tools/sci-samples.mjs."
+    },
+    {
+      "id": "m12i-gas",
+      "file": "assets/toys/galaxy-box/m12i-gas.bin",
+      "toy": "galaxy-box",
+      "name": "FIRE-2 m12i (res7100), snapshot 600 (z = 0), gas",
+      "author": "The FIRE project (Wetzel et al. 2016, 2023, 2025; Hopkins 2015; Hopkins et al. 2018)",
+      "page": "https://flathub.flatironinstitute.org/fire",
+      "license": "CC BY 4.0",
+      "checked": "September 30, 2026",
+      "note": "A subset: 300,000 of the 2.37 million gas particles in a 40 × 12 × 40 kpc box round the galaxy, cut by tools/sci-galaxy.mjs."
+    }
+  ]
 }
