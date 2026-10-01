@@ -17,8 +17,9 @@ import {
 import { defaultEffects, effectDef } from "./effects.js";
 import { normalizePattern, flagInfo, loadFlags, DEFAULT_PATTERN } from "./patterns.js";
 import { Sound } from "./sound.js";
-import { specFor } from "./voices.js";
+import { specFor, samplesIn } from "./voices.js";
 import { toySound } from "./toy-sounds.js";
+import { SOUND_CREDITS } from "./sound-credits.js";
 import { normalizeGenerator, PROFILES } from "./generators.js";
 import { decodeSceneHash, parseHash } from "./codec.js";
 import { TOYS, findToy } from "./toys.js";
@@ -394,6 +395,25 @@ class App {
       lic.textContent = c.license;
       q.append(strong, ": ", a, ` by ${c.author}, `, lic, ".");
       q.setAttribute("aria-current", "true");
+      nodes.push(q);
+    }
+    // Recorded samples in the toy's tap sound (src/sound-credits.js).
+    for (const file of samplesIn(info?.id ? toySound(info.id) : null)) {
+      const c = SOUND_CREDITS[file];
+      if (!c) continue;
+      const q = document.createElement("p");
+      q.className = "credit";
+      const strong = document.createElement("strong");
+      strong.textContent = c.label || "Sound";
+      const a = document.createElement("a");
+      a.href = c.source;
+      a.textContent = c.title;
+      const lic = document.createElement("a");
+      lic.href = c.licenseUrl;
+      lic.textContent = c.license;
+      q.append(strong, ": “", a, `” by ${c.author}, `, lic, ".");
+      q.setAttribute("aria-current", "true");
+      q.dataset.sample = file;
       nodes.push(q);
     }
     const f = document.createElement("p");

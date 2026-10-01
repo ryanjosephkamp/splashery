@@ -29,7 +29,7 @@ import path from "node:path";
 import { execSync } from "node:child_process";
 import { TOYS, CATEGORIES } from "../src/toys.js";
 import { TOY_SOUNDS } from "../src/toy-sounds.js";
-import { specProblems } from "../src/voices.js";
+import { specProblems, samplesIn } from "../src/voices.js";
 
 const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
 const arg = (name, fallback) =>
@@ -81,9 +81,23 @@ try {
 }
 const built = new Date().toISOString().slice(0, 10) + (commit ? `, ${commit}` : "");
 
+// Recorded samples ride along as data: URLs, so the page plays them offline.
+const sampleFiles = samplesIn([
+  ...Object.values(sounds),
+  ...Object.values(review.toys || {}).flatMap((r) => (r.candidates || []).map((c) => c.sound)),
+]);
+const sampleData = Object.fromEntries(
+  sampleFiles.map((f) => {
+    const bytes = fs.readFileSync(path.join(root, "assets/sounds", f));
+    const type = f.endsWith(".m4a") ? "audio/mp4" : "audio/mpeg";
+    return [f, `data:${type};base64,${bytes.toString("base64")}`];
+  }),
+);
+
 const data = [
   voices.replace(/^export /gm, "").trimEnd(),
   nextVoices.trimEnd(),
+  `SAMPLES.data = ${JSON.stringify(sampleData)};`,
   "",
   `const TOY_SOUNDS = ${JSON.stringify(sounds)};`,
   `const TOYS = ${JSON.stringify(toys)};`,
