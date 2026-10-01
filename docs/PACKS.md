@@ -255,6 +255,15 @@ Newton's cradle). `plane` is `"view"`, a normal, or `(point) => normal`; without
 the horizontal plane it started on (the laptop). A drag that starts beside the toy still turns the
 view. `tools/drag-clip.mjs` renders drags and taps as clips for review.
 
+**Focus** (lane Books, page focus): `focus(point, time)` lets a double-tap look closely at part of
+the toy (a book's page). The app calls it with the tapped point in recipe units (null off the toy,
+or when a zoom out lets go); it returns true when it took the double-tap (false: the view resets, as
+on other toys). A toy with `focus` waits about 0.3 s before a single tap, to tell it from a
+double-tap. The drive says what to show in `out.view`: `{ key, center, size }` (a rectangle facing
+the front, in recipe units) or `{ key }` for the whole toy. Each new key glides the view there (0.7
+s on the toy's clock): face-on, centered, the rectangle filling the screen; the whole toy goes back
+to the toy's home view. Zooming out past a focused view calls `focus(null)`.
+
 **Image-to-3D scans** (lane G): the side the photo can't see is a guess (the pencil's underside came
 out dark), so pick taps that keep the photographed side toward the camera.
 
@@ -612,6 +621,18 @@ a cloud splat:
 
 `amount` from `drive` multiplies beat, breathe, flame, rise, twinkle, sway and wave. Behaviours run
 in the toy's rest pose, before parts move it.
+
+**Rim (glass; lane Fix4, September 30, 2026).** `kind: "rim", params: [face, sharpness]` sets a
+splat's opacity by how squarely it faces the eye, seen from its part's center (the part's pivot plus
+its offset; the toy's center for splats on no part): `mix(face, 1, (1 − |f|)^sharpness)`, where `f`
+is the same facing number the part cull uses. A thin, even shell of flat splats with this kind is
+nearly clear face on (`face` about 0.02) and solid where it turns away, from any side: clear glass
+with a crisp edge, with no grain. `sharpness` 2 gives a soft edge, 4 to 8 a crisp one. It runs with
+motion on or off, and combines with a part (the part moves the shell and its center). Build the
+shell round the part's pivot, so the center is the sphere's. The opacity is the splat's own opacity
+times this factor. Flat shells without it can't do this: a fine shell of splats is only 1 to 2 px on
+a phone, so each splat draws as a dot however it is turned, and the edge and the face film rise and
+fall together (docs/handoff/Fix4.md).
 
 **Channels (E3).** `out.morph = [a, b, c, d]` sets four channels (0 at rest) that drive three more
 kinds. They run with motion on or off (like parts), and a shape or cloud splat picks its channel

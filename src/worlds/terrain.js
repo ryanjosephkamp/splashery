@@ -9,7 +9,7 @@
 
 import { mulberry32, createNoise3, mixSeed } from "../noise.js";
 import { SplatBuffer, discRotation } from "../generators.js";
-import { rgb, mix, smoothstep, clamp } from "../kit.js";
+import { rgb, mix, shade, smoothstep, clamp } from "../kit.js";
 
 const TAU = Math.PI * 2;
 
@@ -114,7 +114,8 @@ export class Terrain {
   }
 
   // The ground's color at a point (h, n already known), with small variation.
-  colorAt(x, z, h, n, r) {
+  // `lit: false` leaves out the baked sunlight (hybrid mode's lit ground).
+  colorAt(x, z, h, n, r, { lit: bake = true } = {}) {
     const c = this.colors;
     const t = this.t;
     const w = this.water;
@@ -133,7 +134,7 @@ export class Terrain {
     col = mix(col, c.snow, smoothstep(t.snowLine - 0.5, t.snowLine + 0.5, h + v * 2));
     // Fake light from the sun: the kit's toys bake their shading the same way.
     const sun = this.sun || (this.sun = unit3([-0.45, 0.8, 0.35]));
-    const lit = 0.72 + 0.38 * Math.max(0, n[0] * sun[0] + n[1] * sun[1] + n[2] * sun[2]);
+    const lit = bake ? 0.72 + 0.38 * Math.max(0, n[0] * sun[0] + n[1] * sun[1] + n[2] * sun[2]) : 1; // prettier-ignore
     const j = (r() - 0.5) * 0.02;
     return [
       clamp(col[0] * lit + j, 0, 1),
@@ -194,13 +195,15 @@ export class Terrain {
   // Builds a chunk's ground splats at a level into a SplatBuffer.
   // Positions are relative to the chunk's corner (x0, water, z0), so the
   // numbers stay small; the renderer places the chunk there.
-  buildGround(chunk, level, { density = 1, grass = 1 } = {}) {
+  // `carpet: false` leaves out the ground itself and keeps the grass blades
+  // (hybrid mode draws the ground as a model).
+  buildGround(chunk, level, { density = 1, grass = 1, carpet = true } = {}) {
     const t = this.t;
     const L = TERRAIN_LEVELS[level];
     const d = L.density * density;
     const spacing = 1 / Math.sqrt(d);
     const C = chunk.size;
-    const cells = Math.max(1, Math.round(C / spacing));
+    const cells = carpet ? Math.max(1, Math.round(C / spacing)) : 0;
     const step = C / cells;
     const r = mulberry32(mixSeed(this.seed, `ground-${chunk.id}-${level}`));
     const blades = level === 0 ? Math.round(C * C * BLADES * grass) : 0;
@@ -215,10 +218,12 @@ export class Terrain {
         if (h < floor) continue;
         const n = this.normalAt(x, z);
         const col = this.colorAt(x, z, h, n, r);
-        const s = size * Math.exp((r() - 0.5) * 0.35);
+        // Flat, nearly round, nearly the same size: an even carpet reads
+        // as solid ground (uneven sizes and shapes read as grain).
+        const s = size * Math.exp((r() - 0.5) * 0.14);
         buf.push(
           [x - chunk.x0, h - this.water, z - chunk.z0],
-          [s, s * (0.8 + 0.3 * r()), s * 0.18],
+          [s, s * (0.92 + 0.1 * r()), s * 0.12],
           discRotation(n, r() * TAU),
           [col[0], col[1], col[2], 1],
         );
@@ -236,7 +241,11 @@ export class Terrain {
       const tall = 0.06 + 0.08 * r();
       const lean = r() * TAU;
       const dir = unit3([Math.cos(lean) * 0.35, 1, Math.sin(lean) * 0.35]);
-      const col = mix(mix(c.grass, c.grassLight, r()), c.grassDark, r() * 0.5);
+      // A blade takes the ground's own color, a little lighter or darker,
+      // so blades read as texture rather than as flecks.
+      const base = this.colorAt(x, z, h, n, r);
+      const col =
+        r() < 0.75 ? mix(base, c.grassLight, 0.12 + 0.22 * r()) : shade(base, 0.82 + 0.1 * r());
       buf.push(
         [
           x - chunk.x0 + dir[0] * tall,

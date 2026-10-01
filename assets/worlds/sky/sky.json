@@ -1,0 +1,24 @@
+{
+  "about": "The hybrid sky (tools/world-assets.mjs): the HDRI lights the models; the JPEG is its upper 60 percent, tone-mapped, for the sky dome.",
+  "id": "kloofendal_48d_partly_cloudy_puresky",
+  "name": "Kloofendal 48d Partly Cloudy (Pure Sky)",
+  "authors": [
+    "Greg Zaal",
+    "Jarod Guest"
+  ],
+  "page": "https://polyhaven.com/a/kloofendal_48d_partly_cloudy_puresky",
+  "license": "CC0 1.0",
+  "hdr": "kloofendal_48d_partly_cloudy_puresky-light.hdr",
+  "dome": "kloofendal_48d_partly_cloudy_puresky-sky.jpg",
+  "domeRows": 0.6,
+  "exposure": 1.6,
+  "horizon": [
+    0.776,
+    0.794,
+    0.847
+  ],
+  "sun": {
+    "u": 0.5952,
+    "elevation": 47.99
+  }
+}

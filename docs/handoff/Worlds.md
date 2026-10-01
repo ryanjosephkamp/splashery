@@ -206,3 +206,127 @@ Model: Opus 5.5 (default effort).
 - Lessons: build limbs as lathes (even spreading draws a lattice on `k.cone`), keep solids at
   opacity 1 and color noise low, and judge it with `tools/world-clip.mjs … character` (a close-up at
   2x).
+
+## r2: a sharper island
+
+Branch `claude/lane-worlds-r2`, PR "Phase Worlds r2: a sharper island". Built by Opus 5.5.
+
+The owner's words (September 29, 2026), word for word: "My main criticism is about the worlds: still
+just a bit too grainy, and the player/character looks way too low-poly and simplistic. But, the
+mechanics are solid! So it primarily seems like design problems and sharpness, not physics and
+mechanics."
+
+The Operator's plan: the character goes to a new Character lane (it owns `src/worlds/character.js`
+and the character section of docs/WORLDS.md). This round takes the grain out of everything else:
+
+1. The ground, the grass, the sand and rocks, the water's surface, the sky and the signs, with
+   Fidelity A's method (even placement, full opacity, full density at each tier, flat splats on flat
+   ground, thin blades, clean colors with low noise).
+2. The props rebaked from the 97 toys Fidelity A and B sharpened, checked at walking distance.
+3. The render settings lane Sharpness measured (#107): the pixel-ratio cap, the resolution drop and
+   the sharp kernel, applied in `src/worlds/render.js` where they help.
+4. Within the tier budgets, measured.
+
+Cards: `wd-island-r2`, `wd-ground-r2`, `wd-props-r2`, `wd-sky-r2`.
+
+### r2 state
+
+- September 29, 2026: branch restarted from main after #78 merged.
+- The grain, measured (`tools/world-grain.mjs`, 390×844 at 2x, mid): speckle on the ground view 0.07
+  → 0.03, the shore 0.09 → 0.05, the props 0.09 → 0.05 (lower is cleaner). Lab's sharp kernel alone
+  halved it; the ground, water and sign changes make the rest visible as cleaner texture (see the
+  before and after in `wd-island-r2`).
+- Changes: an even, flat, nearly uniform ground carpet (sizes within ±7%, nearly round, fully
+  opaque, color noise ±1%); grass blades in the ground's own color; round, even water splats with a
+  soft, isotropic sheen; sign boards with a flat front face and letters placed exactly (nine splats
+  per font pixel), kept at full detail to about 80 m; bushes as solid shells; the sharp kernel on
+  every tier; the pixel ratio capped per tier (1.5, 2, 3, 3), with `?dpr=` and `?kernel=` to
+  override.
+- Cards: `wd-island-r2` (before and after), `wd-ground-r2`, `wd-props-r2`, `wd-sky-r2`.
+- The props rebake from the packs on main, so they carry Fidelity A and B's fixes.
+
+### r2 known issues
+
+- A bush seen from very close reads as a smooth green shape (solid, but plain).
+- The far sea under the aerial view is soft (large far-level splats), without grain.
+
+## Hybrid: model ground, water and sky with splat props
+
+Branch `claude/lane-worlds-hybrid` (from the r2 head; it merges after #108), PR "Phase Worlds
+hybrid: model ground, water and sky with splat props (Opus 5.5)". Built by Opus 5.5. Labs only.
+
+The owner's words on the r2 cards (September 29, 2026), word for word: "This continues to get
+better, but the quality is still not at the level of a real video game. Is that an unrealistic
+expectation for Gaussian splats? Are there other tools that we could integrate (i.e., by upgrading
+your tech stack, etc.) to make the graphics better while maintaining Gaussian splat functionality?
+Eventually, I do want to see how a hybrid approach would look, where we use Gaussian splats
+strategically and use better game tools for other parts, and then integrate these together to build
+games that can do things that are almost impossible without Gaussian splats. We can certainly
+continue to build out the splat-only world, but if it can't achieve ~AAA graphics and gameplay, then
+we can see if there's a way to do that with other tools." After the Operator's report, his answer:
+"Hybrid yes." and "I am very interested in making a hyper-realistic hybrid game or simulation
+world."
+
+The Operator's brief (the report's steps 1 and 2):
+
+1. Light, shadows and atmosphere in both modes: one sun, soft shadows from the character and the
+   props (a shadow catcher over the ground in splats mode), shared haze and a color grade.
+2. Hybrid mode: the ground as a lit, textured model of the same height field (near grass stays
+   splats), depth-aware water, an HDRI sky that also lights the models, sign boards as models, and
+   splats that hide correctly behind and in front of the models.
+3. Frames per second and counts per tier in both modes; textures small (under about 10 MB).
+4. Side-by-side clips (splats left, hybrid right): `wd-hybrid-walk`, `wd-hybrid-shore`,
+   `wd-hybrid-shadows`, `wd-hybrid-sky`.
+
+A world file's `render` (`"splats"` or `"hybrid"`) picks the mode and `?render=` overrides it; the
+Test island stays in splats mode until the owner picks. How it works is in docs/WORLDS.md,
+"Rendering".
+
+### Hybrid state
+
+- September 29, 2026: built. New modules `src/worlds/lighting.js` (sun, shadows, haze, grade, the
+  shadow catcher) and `src/worlds/hybrid.js` (ground tiles and their atlas shader, water, sky dome,
+  sign boards); `render.js` gained the mesh and light systems and three layers (`WdSky`, `WdGround`,
+  `WdSurface`). No engine files changed (`src/pc.js`, `src/kit.js`, `src/stage.js` are untouched),
+  so the toy box looks the same.
+- Assets: four Poly Haven texture sets and one HDRI, all CC0, packed by `tools/world-assets.mjs`
+  into `assets/worlds/` (about 5 MB); credited in CREDITS.md, `tools/assets.json` and the Worlds
+  page's list of places.
+- Depth: splats test against the models' depth. In splats mode an invisible depth-only ground model
+  keeps a hill in front of the props behind it now that the ground's splats draw in their own layer.
+  `tests/wdh.spec.mjs` checks it in both modes (taking away a bush behind the hill changes no
+  pixel).
+- The character A/B (the Operator's addendum of September 29, 2026, after the owner's marks on the
+  Character cards: "Better, but still looks too low-poly. We can stop trying to perfect this for
+  now. The hybrid simulation will hopefully enable better characters."): `?character=mesh` swaps in
+  a lit, skinned character, Kenney's "Animated Characters: Protagonists" (CC0, checked on the live
+  page and in the pack's license file), with idle, walk and run blended by speed and driven by the
+  world's clock. The pack has no walk; `tools/world-character.mjs` makes one from the run.
+  Quaternius packs were the first choice, but Google Drive refused the downloads here ("Quota
+  exceeded") and the one Quaternius pack on OpenGameArt is the older chibi style. My pick for hybrid
+  worlds: the mesh character (it reads as a finished game character at phone size), though it is
+  stylized, not realistic. The owner decides from `wd-hybrid-character`.
+- Cards (390×844, splats left, hybrid right, the same walk): `wd-hybrid-walk`, `wd-hybrid-shore`,
+  `wd-hybrid-shadows`, `wd-hybrid-sky`, plus `wd-hybrid-depth` (the depth close-up) and
+  `wd-hybrid-character` (splats and mesh characters in the hybrid island).
+- Frames, in our software renderer at 390×844, 2x, mid tier (relative only): splats mode about 1.9 s
+  a frame, hybrid about 1.8 s. Hybrid draws fewer splats (the ground is a model; only the near grass
+  stays splats) and adds about 90 models (64 ground tiles, the water, the sky dome, the signs). The
+  owner's phone is the real test.
+
+### Hybrid known issues
+
+- `tests/chr.spec.mjs:249` (the Character lane's island test, three tiers in one 240 s test) times
+  out on this branch: splats mode's shadows and haze cost more per frame in the software renderer,
+  and #108 alone already needs 3.9 of its 4 minutes. A proposed patch (`test.setTimeout(480_000)` in
+  that test) is on the PR for the Operator to decide. Splats mode's light was made cheaper first: no
+  tone map there, the catcher only within the shadows' reach, PCF3, only level-0 props cast, and no
+  shadows on the low tier.
+- Where the shore is steep, the hybrid sand picks up the gravel (rock) texture.
+- A thin gray band can show at the horizon, where the sky photo's haze meets the far water.
+- The grass texture (a meadow photo) shows small pale pebbles close up; its strength is lowered.
+- The depth clip's bush is wholly behind the hill (the test checks it pixel by pixel); a bush only
+  half hidden was not found on the island.
+- The splat character is unchanged from main (#110 merges separately).
+- Not in this round (the brief): time of day, a PlayCanvas upgrade, photos or scans as places, the
+  pilot game.
