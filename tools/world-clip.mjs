@@ -47,6 +47,12 @@ const render = opt("render", "");
 const left = opt("left", "");
 const right = opt("right", "");
 const labels = opt("labels", "A,B").split(",");
+// --fast: one frame drawn per clip frame (the world steps and is shot in the
+// same frame), about half the time in the software renderer.
+const fast = args.includes("--fast");
+// --still-left: the left side (--left) is one still, held beside the right
+// side's clip (a before-and-after at half the cost).
+const stillLeft = args.includes("--still-left");
 
 // ---- Scenes ---------------------------------------------------------------------
 
@@ -170,6 +176,46 @@ const SCENES = {
     { move: { y: -1 }, secs: 1.6 },
     { hold: 1.0 },
   ],
+  // Round 3: the realistic character close up. Behind it, the camera comes
+  // round to its face (idle), then from the side it walks and runs.
+  "character-r3": [
+    { place: [-1, 15, 180], camera: { distance: 2.2, pitch: 0.08 }, noCards: true },
+    { hold: 0.5 },
+    { look: [Math.PI, 0], secs: 2.0 },
+    { hold: 1.4 },
+    { look: [-Math.PI / 2, 0], secs: 0.8 },
+    { move: { x: 1 }, secs: 2.4 },
+    { move: { x: 1, run: true }, secs: 1.6 },
+    { hold: 1.0 },
+  ],
+  // Walking through the boulder garden: the scanned boulders up close, the
+  // regraded trees behind.
+  "props-r3": [
+    { place: [7, 12.5, 90], camera: { distance: 4, pitch: 0.2 }, noCards: true },
+    { hold: 0.5 },
+    { move: { y: 1 }, secs: 3.2 },
+    { move: { y: 0.7 }, look: [0.9, 0], secs: 2.6 },
+    { hold: 0.8 },
+  ],
+  // The island wide (from the air), then near (a walk along the shore).
+  "island-r3": [
+    { start: true, overview: true, noCards: true, hold: 3 },
+    { overviewOff: true, place: [-23, -9, 0], camera: { distance: 5.2, pitch: 0.3 } },
+    { hold: 0.3 },
+    { move: { y: 1 }, secs: 3.2 },
+    { move: { y: 1 }, look: [-0.7, 0], secs: 1.6 },
+  ],
+  // Following the character at the normal camera: along the west beach,
+  // then up through the grass.
+  "character-walk-r3": [
+    { place: [-26, -12, 10], noCards: true },
+    { hold: 0.5 },
+    { move: { y: 1 }, secs: 3.4 },
+    { move: { y: 1, x: 0.7 }, look: [-0.6, 0], secs: 2.6 },
+    { move: { y: 1, run: true }, secs: 2.0 },
+    { move: { y: 1 }, secs: 1.4 },
+    { hold: 0.6 },
+  ],
   // Depth, close up: a bush half behind a hill, then the character wading.
   "hybrid-depth": [
     { place: [-17.2, 0.8, 180], camera: { distance: 3.2, pitch: 0.08 } },
@@ -222,16 +268,18 @@ async function record(scene, url, tag = null, query = "") {
   const frames = [];
   let finger = null;
   const shoot = async () => {
-    const png = PNG.sync.read(await page.screenshot());
+    const png = PNG.sync.read(await page.screenshot({ timeout: 180_000 }));
     const w = Math.round(png.width * scale);
     const h = Math.round(png.height * scale);
     const rgba = shrink(png, w, h);
     frames.push({ rgba, w, h });
+    if (frames.length % fps === 0)
+      console.log(`  ${tag || "clip"}: ${frames.length / fps} s recorded`);
   };
   // One frame: the world steps dt with this input, then a screenshot.
   const tick = async (input = null) => {
     await page.evaluate(({ dt, input }) => window.__world.tick(dt, input), { dt, input });
-    await page.evaluate(() => window.__world.tick(0));
+    if (!fast) await page.evaluate(() => window.__world.tick(0));
     await shoot();
   };
   const setFinger = async (p) => {
@@ -264,6 +312,12 @@ async function record(scene, url, tag = null, query = "") {
     // The camera's distance and tilt first, so a new place starts with them.
     if (s.camera)
       await page.evaluate((c) => Object.assign(window.__world.world.camera, c), s.camera);
+    if (s.overviewOff)
+      await page.evaluate(() => {
+        window.__world.world.overview = false;
+        window.__world.page.started = true;
+        document.getElementById("hud").hidden = false;
+      });
     if (s.place) {
       await page.evaluate((p) => {
         window.__world.place(p[0], p[1], p[2]);
@@ -342,7 +396,17 @@ for (const name of names) {
   const scene = SCENES[name];
   if (!scene) throw new Error(`No scene "${name}" (${Object.keys(SCENES).join(", ")}).`);
   let frames;
-  if (left && right)
+  if (left && right && stillLeft) {
+    // The scene up to its first look round (the camera comes round to
+    // the face), its last frame held.
+    const first = scene.slice(0, scene.findIndex((st) => st.look) + 1);
+    const still = (await record(first, base, labels[0], left)).at(-1);
+    const clip = await record(scene, base, labels[1], right);
+    frames = sideBySide(
+      clip.map(() => still),
+      clip,
+    );
+  } else if (left && right)
     frames = sideBySide(await record(scene, base, labels[0], left), await record(scene, base, labels[1], right)); // prettier-ignore
   else if (modes)
     frames = sideBySide(await record(scene, base, "Splats", "&render=splats"), await record(scene, base, "Hybrid", "&render=hybrid")); // prettier-ignore
