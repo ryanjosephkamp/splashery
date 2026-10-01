@@ -126,29 +126,30 @@ LiveInput record on page 2.
 
 Model: **Opus 5.5** (default effort), no helpers.
 
-October 1, 2026, morning (UTC): **round 2 working.**
+October 1, 2026, morning (UTC): **round 2 ready for the Operator.**
 
-- Round 1: engine PR #144 and lane PR #150, drafts, main through #145 merged in (not yet pushed).
-  Cards marked good: `live-permission`, `live-echo`, `live-landscape`, `live-chladni`, `live-tuner`,
+- Round 1: engine PR #144 and lane PR #150, drafts, main through #137 merged in and pushed. Cards
+  marked good: `live-permission`, `live-echo`, `live-landscape`, `live-chladni`, `live-tuner`,
   `live-clap`, `live-screen`. The mirror and Photo to 3D live got a second "fix" (still moving):
   `live-mirror-r3` and `live-photo3d-r3` hold the view still (no turn, a still test camera, no tap
   at the end).
-- Round 2 is built and tested (below); the clips, cards and PRs are under way.
-- Start time (Chromium, SwiftShader, this container). Before: file chosen to the landscape built (it
-  could play only after that, on a tap). After: file chosen to playing (the tap included).
+- Round 2 is built, tested and posted: cards `live2-*` on page 2, its engine PR and lane PR open as
+  drafts (stacked on #144 and #150).
+- Start time (Chromium, SwiftShader, this container; the software renderer itself takes about two of
+  the four cores, so runs vary). Before: file chosen to the landscape built (it could play only
+  after that, on a tap). After: file chosen to playing (a long song plays as it opens).
 
   | Song                 | Before, 4×          | After, 4×                    | Before, 6× | After, 6× |
   | -------------------- | ------------------- | ---------------------------- | ---------- | --------- |
-  | 3 min MP3 (4.3 MB)   | 6.1 s               | 2.2 s                        | 8.3 s      | 3.0 s     |
-  | 6 min MP3 (8.6 MB)   | 6.2 s               | 1.8 s                        | 10.3 s     | 3.2 s     |
-  | 10 min MP3 (14 MB)   | 8.9 s               | 2.5 s (1.3 to 2.5 over runs) | 12.2 s     | 2.3 s     |
-  | 50 MB MP3 (21.5 min) | refused (40 MB cap) | 3.4 s (2.3 in a rerun)       | refused    | 3.6 s     |
+  | 3 min MP3 (4.3 MB)   | 6.1 s               | 2.3 s                        | 8.3 s      | 1.4 s     |
+  | 6 min MP3 (8.6 MB)   | 6.2 s               | 3.1 s                        | 10.3 s     | 1.8 s     |
+  | 10 min MP3 (14 MB)   | 8.9 s               | 1.2 s (1.2 to 1.8 over runs) | 12.2 s     | 3.6 s     |
+  | 50 MB MP3 (21.5 min) | refused (40 MB cap) | 1.1 s                        | refused    | 1.5 s     |
 
-  Before, the page froze for the whole load; after, the longest frame gap is 0.5 to 0.75 s (the
-  renderer's own frame here is 0.2 to 0.4 s), with an occasional 1.5 s for the 50 MB file or at 6×.
-  The whole song is measured 6 s (3 min) to 30 s (50 MB) after it opens at 4×. An MP3 is decoded for
-  measuring in pieces cut between its frames (`src/packs/song-mp3.js`), so the page never waits on
-  one long decode.
+  Before, the page froze for the whole load. After, the longest frame gap is 0.5 to 1.7 s (the
+  renderer's own frame here is 0.2 to 0.4 s at 4×). The whole song is measured 7 s (3 min) to 29 s
+  (50 MB) after it opens, at 4×. An MP3 is decoded for measuring in pieces cut between its frames
+  (`src/packs/song-mp3.js`), so the page never waits on one long decode.
 
 - The click track (tests/live2.spec.mjs): all 12 clicks cross the now mark 3 to 36 ms from when an
   analyser on the output hears them (the output latency reported is 42 ms).
