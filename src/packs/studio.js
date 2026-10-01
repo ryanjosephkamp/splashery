@@ -9,6 +9,11 @@ import { spectrogram, landscapePlan, toMono, DB_FLOOR, F_MIN, F_MAX } from "./st
 import { live as liveIn } from "../live/live.js";
 import { bandLevels } from "../live/analysis.js";
 import { reliefGrid } from "../live/relief.js";
+// Lane Live input r2: a long song plays at once and is measured in a worker;
+// the measured looks (Ribbons, Tube, Lines, Mesh).
+import { Track, SongAnalysis } from "./song-stream.js";
+import { LOOKS, buildLook, drawLook, lookMotion, lookVersion, buildLandscapeLong, drawLandscapeLong, landscapeCaps } from "./song-looks.js"; // prettier-ignore
+import { HOP as FRAME } from "./song-analysis.js";
 
 // ---- The Chladni plate ----------------------------------------------------------------
 // The classic model of a square plate of side L = 1 (x, y from 0 to 1) in one
@@ -41,7 +46,11 @@ function sheet(k, { x0, x1, z0, z1, y, cells, color, part = 0, opacity = 1, extr
         const z = z0 + (j + 0.5 + layer * 0.5) * sz;
         list.push({ p: [x, y, z], n: [0, 1, 0], flat: 0.02, size, opacity, color: color(x, z), part, pattern: false, ...(extra ? extra(x, z) : null) }); // prettier-ignore
       }
-  k.cloud({ share: list.length / k.count, pattern: false }, (rand, i) => list[i] || null);
+  // Exact sizes and colors (no jitter): smooth, not grainy (lane Live input r2).
+  k.cloud(
+    { share: list.length / k.count, pattern: false, jitter: 0 },
+    (rand, i) => list[i] || null,
+  );
 }
 
 export const F0 = 60; // Hz per unit of n² + m²
@@ -402,7 +411,83 @@ function songColor(look, f, nf, h) {
 }
 
 // Where the song is (for the tests): playing or not, and the second.
-export const playState = () => ({ on: PLAY.on, pos: PLAY.pos, audio: !!PLAY.src });
+export const playState = () => {
+  const t = SONG.current?.track;
+  if (t) return { on: t.playing, pos: t.time(), audio: !!t.src, long: true }; // lane Live input r2
+  return { on: PLAY.on, pos: PLAY.pos, audio: !!PLAY.src };
+};
+
+// ---- Lane Live input r2: long songs, measured looks -----------------------------------
+// A song longer than SHORT seconds plays from the file itself as soon as it
+// opens (song-stream.js Track) and is measured in a worker while it plays;
+// a short one (the sample, a clip) is decoded and built at once, as before.
+// Every song also gets the worker's frame-by-frame measurements for the
+// measured looks (song-looks.js).
+export const SHORT = 30;
+export const MAX_BYTES = 400e6;
+const R2 = { look: null, land: null, an: null, anFor: null, actN: 0, lastShown: "" };
+
+export const songAnalysisStarted = () => R2.an?.started;
+// For the sync test: what the look last drew at its "now" mark.
+export const songShown = () => R2.look?.shown ?? null;
+export const songTest = () => ({
+  track: SONG.current?.track ?? null,
+  features: R2.an?.features ?? null,
+});
+
+// For the tests: how far the song on show has been measured.
+export const songAnalysisState = () => {
+  const an = R2.an;
+  return { progress: an?.progress ?? 0, finished: !!an?.finished, error: an?.error ?? null, doneMs: an?.doneMs ?? 0, marks: an?.marks, look: R2.look?.look ?? null, land: !!R2.land }; // prettier-ignore
+};
+
+// The analysis for the song on show (started once per song). A song over
+// 12 minutes is measured from a copy at 32 kHz, which halves its memory.
+function analysisFor(song) {
+  if (!song || typeof Worker === "undefined") return null;
+  if (R2.anFor === song && R2.an) return R2.an;
+  R2.an?.close();
+  const an = new SongAnalysis();
+  R2.an = an;
+  R2.anFor = song;
+  (song.long
+    ? an.start(song.file, song.duration > 720 ? 32000 : 44100)
+    : an.start(song.samples, song.rate)
+  ).catch((err) => {
+    an.error = err?.message || String(err);
+  });
+  return an;
+}
+
+// What the song's audio clock says is being heard now (seconds).
+function heardNow() {
+  const t = SONG.current?.track;
+  if (t) return t.time();
+  const lat = PLAY.ctx ? (PLAY.ctx.outputLatency || 0) + (PLAY.ctx.baseLatency || 0) : 0;
+  return PLAY.on ? Math.max(0, PLAY.pos - lat) : PLAY.pos;
+}
+
+// A line under the input panel (the analysis' progress), set straight on the
+// panel's own line while it shows.
+function setShown(text) {
+  if (typeof document === "undefined" || text === R2.lastShown) return;
+  const el = document.querySelector("#toy-input .input-shown");
+  if (!el) return;
+  R2.lastShown = text;
+  el.textContent = text;
+  el.hidden = !text;
+}
+
+function progressLine() {
+  const song = SONG.current;
+  const an = R2.an;
+  if (!song) return "";
+  const name = `${song.name} (${Math.round(song.duration)} s)`;
+  if (!an || an.finished || (!song.long && R2.look === null)) return name;
+  if (an.error)
+    return `${name}. The picture couldn't be measured (${an.error}); the sound still plays.`;
+  return `${name}. Measuring the picture: ${Math.round(an.progress * 100)}%`;
+}
 
 // The song's sound and the moving marker: one frame's step.
 function playStep(song, sound, on, time) {
@@ -446,8 +531,76 @@ function playStep(song, sound, on, time) {
   return PLAY.pos;
 }
 
+// Lane Live input r2: a measured look (any song), or a long song's
+// landscape, filled in from the worker's frames as they come.
+function buildR2(k, o, song) {
+  stopShort();
+  const live = o.view === "live";
+  const an = analysisFor(song);
+  const nf = an?.features?.nf ?? 104;
+  if (LOOKS.includes(o.look)) {
+    R2.look = buildLook(k, o.look, { view: o.view, backdrop: o.backdrop, nf });
+    R2.look.backdrop = o.backdrop;
+  } else {
+    R2.land = buildLandscapeLong(k, { nf, duration: song.duration, look: o.look, live, W, H, songColor }); // prettier-ignore
+  }
+  k.data = { song: { r2: true, song, live, look: o.look, D: R2.land?.D ?? 0 } };
+}
+
+// A short song's player, stopped (a new build starts stopped).
+function stopShort() {
+  try {
+    PLAY.src?.stop();
+  } catch {
+    // Already ended.
+  }
+  Object.assign(PLAY, {
+    on: false,
+    want: false,
+    pos: 0,
+    last: null,
+    src: null,
+    ctx: null,
+    taps: 0,
+  });
+}
+
+function driveR2(g, out, info) {
+  const song = g.song;
+  const t = song.track;
+  // Each tap plays or pauses. A long song's tap already did it inside the
+  // gesture (action.onAct); a tap that came some other way does it here.
+  const n = info.tap?.n ?? 0;
+  if (n < PLAY.taps) PLAY.taps = 0;
+  if (n > PLAY.taps) {
+    PLAY.taps = n;
+    if (R2.actN > 0) R2.actN = 0;
+    else if (t) t.playing ? t.pause() : t.play(info.sound);
+    else PLAY.want = !PLAY.on;
+  }
+  if (!t) playStep(song, info.sound, PLAY.want, info.time);
+  const now = heardNow();
+  R2.an?.focus(Math.floor(now / FRAME));
+  const duration = song.duration || 1;
+  if (R2.look) {
+    const m = lookMotion(R2.look, now, duration);
+    out.parts.look = { offset: m.look };
+    out.parts.gate = { offset: m.gate };
+  } else if (R2.land) {
+    const f = clamp01(now / duration);
+    if (g.live) {
+      out.parts.look = { offset: [0, 0, f * g.D] };
+      const caps = landscapeCaps(R2.land, R2.an, now);
+      if (caps) out.tokens = caps;
+    } else out.parts.marker = { offset: [0, 0, -f * g.D] };
+  }
+  setShown(progressLine());
+}
+
 const SONG_LANDSCAPE = {
-  alive: () => PLAY.on || liveIn.on("mic"), // lane Live input
+  // Lane Live input: the microphone; r2: a long song's track, and the
+  // picture filling in while the song is measured.
+  alive: () => PLAY.on || liveIn.on("mic") || !!SONG.current?.track?.playing || !!(R2.an && !R2.an.finished && (R2.look || R2.land)), // prettier-ignore
   density: 1,
   options: [
     {
@@ -458,6 +611,11 @@ const SONG_LANDSCAPE = {
       choices: [
         { id: "pitch", label: "Pitch (a rainbow across)" },
         { id: "loudness", label: "Loudness (dark to bright)" },
+        // Lane Live input r2: the measured looks.
+        { id: "ribbons", label: "Ribbons (six bands, bass to treble)" },
+        { id: "tube", label: "Tube (loudness, pitch and brightness)" },
+        { id: "lines", label: "Lines (the spectrum, frame by frame)" },
+        { id: "mesh", label: "Mesh (the spectrum as a wireframe)" },
       ],
     },
     {
@@ -470,11 +628,35 @@ const SONG_LANDSCAPE = {
         { id: "live", label: "Live (scrolls with the music)" },
       ],
     },
+    {
+      // Lane Live input r2: the line looks on a cream paper card, or alone.
+      key: "backdrop",
+      label: "Background (line looks)",
+      type: "select",
+      default: "paper",
+      choices: [
+        { id: "paper", label: "Paper" },
+        { id: "none", label: "None" },
+      ],
+    },
     { key: "song", label: "Song", type: "text", default: "sample", hidden: true },
     { key: "songName", label: "Song name", type: "text", default: "", hidden: true },
   ],
   controls: [{ key: "play", label: "Play", type: "pulse", ease: 0.3 }],
-  action: { key: "play", label: "Play or pause the song", quiet: ["play"] },
+  action: {
+    key: "play",
+    label: "Play or pause the song",
+    quiet: ["play"],
+    // Lane Live input r2: a long song's audio starts inside the tap itself
+    // (a phone lets a sound start only there); the drive then only follows.
+    onAct() {
+      const t = SONG.current?.track;
+      if (!t || liveIn.on("mic")) return;
+      if (t.playing) t.pause();
+      else t.play(R2.sound);
+      R2.actN++;
+    },
+  },
   // Your own song: opened with the Toy tab's panel (a file the browser can
   // decode), read on this device.
   input: {
@@ -482,12 +664,39 @@ const SONG_LANDSCAPE = {
     accept: "audio/*,.mp3,.wav,.ogg,.m4a,.flac,.aac,.opus",
     binary: true,
     fileButton: "Open a song…",
-    note: "Open an MP3, WAV, OGG, M4A or FLAC file. It is decoded on this device; nothing is uploaded. A long song makes a longer landscape at lower detail.",
+    note: "Open an MP3, WAV, OGG, M4A or FLAC file. A long song starts playing at once, exactly as the file sounds, while its picture is measured on this device (the line under it shows how far); nothing is uploaded. Tap to pause or play.",
+    maxBytes: MAX_BYTES, // lane Live input r2: a long song streams from the file
     async read(_text, fileName, file) {
       if (!file) throw new Error("Open a sound file.");
+      const name = fileName.replace(/\.[^.]+$/, "");
+      // Lane Live input r2: the browser reads the file's header (its length)
+      // first, which is quick; a short sound is then decoded and built at
+      // once as before, a long one plays from the file while it is measured.
+      if (typeof Audio !== "undefined" && typeof URL?.createObjectURL === "function") {
+        const url = URL.createObjectURL(file);
+        const track = new Track(url);
+        let duration;
+        try {
+          duration = await track.ready;
+        } catch (err) {
+          track.close();
+          URL.revokeObjectURL(url);
+          throw err;
+        }
+        if (duration > SHORT && Number.isFinite(duration)) {
+          if (SONG.custom?.url) SONG.custom.track?.close();
+          SONG.custom = { long: true, file, url, track, name, duration };
+          // It plays now, while the landscape is built around it (a browser
+          // that wants a fresh tap first gets it: the next tap plays it).
+          track.play(R2.sound);
+          return { song: "custom", songName: name };
+        }
+        track.close();
+        URL.revokeObjectURL(url);
+      }
       const s = await decodeSound(file);
       if (s.samples.length / s.rate < 0.5) throw new Error("That sound is too short.");
-      SONG.custom = { ...s, name: fileName.replace(/\.[^.]+$/, "") };
+      SONG.custom = { ...s, name };
       return { song: "custom", songName: SONG.custom.name };
     },
     shown: () =>
@@ -495,16 +704,28 @@ const SONG_LANDSCAPE = {
     // Lane Live input: the microphone instead of a file.
     live: [{ kind: "mic" }],
   },
-  // Lane Live input: the live landscape's heights and colors.
+  // Lane Live input: the live landscape's heights and colors; r2: the
+  // measured looks' and a long song's landscape's places and colors.
   screen: {
     get width() {
-      return LIVE_SONG.nf * 2;
+      const L = R2.look || R2.land;
+      return L ? L.atlas.cols * 2 : LIVE_SONG.nf * 2;
     },
     get height() {
-      return LIVE_SONG.nt;
+      const L = R2.look || R2.land;
+      return L ? L.atlas.rows : LIVE_SONG.nt;
     },
-    version: (time) => (liveIn.on("mic") ? Math.floor(time * LIVE_SONG.rate) : "off"),
-    draw: (g, time) => liveSongDraw(g, time),
+    version(time) {
+      if (liveIn.on("mic")) return Math.floor(time * LIVE_SONG.rate);
+      if (R2.look) return lookVersion(R2.look, R2.an, heardNow());
+      if (R2.land) return `${R2.an?.version ?? -1}|${R2.land.live ? Math.floor((heardNow() / Math.max(1, SONG.current?.duration || 1)) * R2.land.nt) : 0}`; // prettier-ignore
+      return "off";
+    },
+    draw(g, time) {
+      if (liveIn.on("mic")) return liveSongDraw(g, time);
+      if (R2.look) return drawLook(g, R2.look, R2.an, heardNow(), { backdrop: R2.look.backdrop });
+      if (R2.land) return drawLandscapeLong(g, R2.land, R2.an, heardNow(), SONG.current?.duration || 0); // prettier-ignore
+    },
   },
   credits: [
     {
@@ -525,8 +746,10 @@ const SONG_LANDSCAPE = {
     if (!SONG.want.duration) SONG.want.duration = SONG.want.samples.length / SONG.want.rate;
   },
   drive(t, c, out, info) {
+    if (info?.sound) R2.sound = info.sound; // lane Live input r2: for a tap's onAct
     const g = info?.data?.song;
     if (!g || g.liveMic) return; // lane Live input: the microphone's landscape moves by itself
+    if (g.r2) return driveR2(g, out, info); // lane Live input r2
     // Each tap plays or pauses (a song that has ended plays again from the start).
     const n = info.tap?.n ?? 0;
     if (n < PLAY.taps) PLAY.taps = 0;
@@ -562,8 +785,12 @@ const SONG_LANDSCAPE = {
   },
   build(k, o) {
     const song = SONG.want || SONG.sample;
+    if (SONG.current?.track && SONG.current !== song) SONG.current.track.pause(); // lane Live input r2
     SONG.current = song;
+    R2.look = null;
+    R2.land = null;
     if (liveIn.on("mic")) return liveSongBuild(k, o); // lane Live input
+    if (LOOKS.includes(o.look) || song.long) return buildR2(k, o, song); // lane Live input r2
     // A new build (another song, a look) starts stopped.
     try {
       PLAY.src?.stop();
@@ -691,14 +918,14 @@ const clamp01 = (x) => (x < 0 ? 0 : x > 1 ? 1 : x);
 // take their height and color from a canvas drawn on each frame.
 const LIVE_RANGE = 36; // dB from the floor to the top
 const LIVE_SONG = {
-  nf: 96,
+  nf: 128,
   nt: 150,
   rate: 30, // rows a second
   top: -40, // dB of the loudest band heard lately
   rows: 0, // rows written
   last: null,
   look: "pitch",
-  bands: new Float32Array(96),
+  bands: new Float32Array(128),
 };
 
 function liveSongBuild(k, o) {
@@ -716,8 +943,8 @@ function liveSongBuild(k, o) {
     axis: 1,
     lift: H,
     n: [0, 1, 0],
-    size: Math.max(cw, cd) * 0.8,
-    layers: 2,
+    size: Math.max(cw, cd) * 0.7, // finer (r2): smaller, exact splats
+    layers: 3,
   });
   sheet(k, { x0: -W / 2 - 0.08, x1: W / 2 + 0.08, z0: -D / 2 - 0.08, z1: D / 2 + 0.08, y: -0.005, cells: k.count * 0.06, color: () => "#2a303a" }); // prettier-ignore
   // Now: a glowing line across the front.
