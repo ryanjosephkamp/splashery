@@ -171,6 +171,12 @@ State (see docs/FLUIDS.md, "r4"):
   a crisp traced glass (rim ring, edges, foot); fl-r4-splash (honest: no crown yet, clear water hard
   to see on a dark background); fl-r4-phone (tools/fl-bench.html gives a phone's real numbers once
   merged).
+- October 1, 2026: the owner marked fl-r4-flame, fl-r4-phone, fl-r4-pour-r2, fl-r4-smoke and
+  fl-r4-soda-r3 "good"; fl-r4-splash "fix". fl-r4-splash-r2: the ball now starts inside the GPU grid
+  (it started above it and arrived flattened) and drops onto a shallow film, so it throws up a crown
+  that breaks into drops and falls back (the recipe's `gpu` settings; the CPU splash is unchanged).
+  The owner's note for the record: a cup's rim and outer surface sharp and easy to read, and with a
+  dark liquid the far side of the cup's bottom must not show through.
 - Sound: from the simulation (src/fluids/acoustic.js), after the owner's Sound Board note ("isn't in
   sync with fluid pour animation"); real recordings wait for Sound A's sample voice.
 - Lessons: a collider wall thinner than about three cells lets MPM particles through; a sprite

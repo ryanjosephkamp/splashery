@@ -242,6 +242,16 @@ liquid that rise at their terminal speed and mostly pop at the top; spray is bal
 the CPU every frame (a few thousand at most) and are drawn by the surface pass: foam and spray over
 the liquid, bubbles inside it, tinted by it.
 
+**The splash** (fl-r4-splash-r2, October 1, 2026). A recipe's `gpu` settings override the rest on
+the GPU solver only, so the CPU splash the owner marked good stays as it was. The GPU splash drops a
+smaller ball (0.24 units across, about 8 cm) from lower down onto a shallow film (about 2 cm deep),
+as a drop lands on a wet plate: the impact throws up a crown, a thin sheet that leans outward and
+breaks into drops at its rim, which fall back; the film rushes back over the dry crater and meets in
+a small central mound, then settles flat in about a second and a half. The walls have low friction
+and the water no cohesion, or the crater stays dry for seconds. Before this, the ball started above
+the GPU grid's top and arrived flattened; the grid now always contains the ball's start (`drop`). On
+the low tier the film is two particles deep and the crater takes about a second to close.
+
 ### A real liquid surface
 
 Screen-space fluid rendering (Green, "Screen Space Fluid Rendering for Games", GDC 2010; van der
