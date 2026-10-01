@@ -580,8 +580,8 @@ export const TOY_SOUNDS = {
   // A chord rising as the planets swing into line, a shimmer at the eclipse.
   "solar-system": [
     { voice: "whoosh", f: 200, to: 1.8, decay: 1.8, vol: 0.45 },
-    { voice: "roar", at: 3.2, f: 160, bright: 0.3, decay: 1.4, vol: 0.45 },
-    { voice: "whoosh", at: 4.8, f: 300, to: 0.6, decay: 1.6, vol: 0.4 },
+    { voice: "roar", at: 3.1, f: 160, bright: 0.3, decay: 1.15, vol: 0.45 },
+    { voice: "whoosh", at: 3.9, f: 300, to: 0.6, decay: 1, vol: 0.4 },
   ],
   // A bright tone as it spins, then the sizzle of the day side's heat.
   mercury: [
@@ -592,7 +592,7 @@ export const TOY_SOUNDS = {
   venus: { voice: "wind", f: 260, rate: 0.4, decay: 2.4 },
   // Surf and wind through the day, a soft chime as the city lights come on.
   earth: [
-    { voice: "wave", f: 500, decay: 1.4, vol: 0.75 },
+    { voice: "wave", f: 500, decay: 1.4, vol: 0.6 },
     { voice: "wind", f: 700, rate: 0.6, decay: 1.4, vol: 0.18 },
     { voice: "ding", at: 1.6, f: "E6", decay: 1.2, vol: 0.5 },
   ],
@@ -774,13 +774,69 @@ export const TOY_SOUNDS = {
   ],
   // A ping for each new star as it lights.
   nebula: [
-    { voice: "sample", file: "meteor-fire.mp3", at: 0.4, len: 0.45, pitch: 1, vol: 0.55 },
-    { voice: "sample", file: "meteor-fire.mp3", at: 0.76, len: 0.45, pitch: 0.85, vol: 0.55 },
-    { voice: "sample", file: "meteor-fire.mp3", at: 1.12, len: 0.45, pitch: 1.15, vol: 0.55 },
-    { voice: "sample", file: "meteor-fire.mp3", at: 1.48, len: 0.45, pitch: 0.9, vol: 0.55 },
-    { voice: "sample", file: "meteor-fire.mp3", at: 1.84, len: 0.45, pitch: 1.1, vol: 0.55 },
-    { voice: "sample", file: "meteor-fire.mp3", at: 2.2, len: 0.45, pitch: 0.8, vol: 0.55 },
-    { voice: "sample", file: "meteor-fire.mp3", at: 2.56, len: 0.45, pitch: 1.05, vol: 0.55 },
+    {
+      voice: "sample",
+      file: "meteor-fire.mp3",
+      at: 0.4,
+      len: 0.45,
+      pitch: 1,
+      vol: 0.55,
+      fallback: { voice: "roar", f: 260, bright: 0.3, decay: 0.35, vol: 0.4 },
+    },
+    {
+      voice: "sample",
+      file: "meteor-fire.mp3",
+      at: 0.76,
+      len: 0.45,
+      pitch: 0.85,
+      vol: 0.55,
+      fallback: { voice: "roar", f: 260, bright: 0.3, decay: 0.35, vol: 0.4 },
+    },
+    {
+      voice: "sample",
+      file: "meteor-fire.mp3",
+      at: 1.12,
+      len: 0.45,
+      pitch: 1.15,
+      vol: 0.55,
+      fallback: { voice: "roar", f: 260, bright: 0.3, decay: 0.35, vol: 0.4 },
+    },
+    {
+      voice: "sample",
+      file: "meteor-fire.mp3",
+      at: 1.48,
+      len: 0.45,
+      pitch: 0.9,
+      vol: 0.55,
+      fallback: { voice: "roar", f: 260, bright: 0.3, decay: 0.35, vol: 0.4 },
+    },
+    {
+      voice: "sample",
+      file: "meteor-fire.mp3",
+      at: 1.84,
+      len: 0.45,
+      pitch: 1.1,
+      vol: 0.55,
+      fallback: { voice: "roar", f: 260, bright: 0.3, decay: 0.35, vol: 0.4 },
+    },
+    {
+      voice: "sample",
+      file: "meteor-fire.mp3",
+      at: 2.2,
+      len: 0.45,
+      pitch: 0.8,
+      vol: 0.55,
+      fallback: { voice: "roar", f: 260, bright: 0.3, decay: 0.35, vol: 0.4 },
+    },
+    {
+      voice: "sample",
+      file: "meteor-fire.mp3",
+      at: 2.56,
+      len: 0.45,
+      pitch: 1.05,
+      vol: 0.55,
+      fallback: { voice: "roar", f: 260, bright: 0.3, decay: 0.35, vol: 0.4 },
+    },
   ],
   supernova: [
     {
