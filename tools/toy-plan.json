@@ -261,7 +261,7 @@
       "v": "keep",
       "effect": "Clouds race around and a day-night band sweeps over it.",
       "sound": "A quiet, darker breeze and a soft low whoosh as the clouds race round.",
-      "improved": "E1: the clouds race once round the planet and a night band sweeps across it (2.8 s)."
+      "improved": "E1: the clouds race once round the planet and a night band sweeps across it (2.8 s). Shelves: moved to Space; the Toy tab's Planet picks Earth, Mars, the Moon, Jupiter or Neptune, each in the same tiny-planet style."
     },
     "basketball": {
       "v": "keep",
@@ -2212,6 +2212,13 @@
       "effect": "A sandbox for the fluid engine: a nozzle pours water, soda, honey or lava into a glass (the third tap empties it first), a ball of liquid splashes into a bowl, a candle is blown out and lights again, or a breath bends a hot cup's steam (about 3 to 5 s).",
       "sound": "The pour's splash and glug (soda fizzes; honey and lava a thick gloop), a splash, a breath on the candle and the cup.",
       "improved": "Fluids: new sandbox on the Lab shelf (labs). Liquids are position-based fluids with a viscosity from water to lava, drawn as stretched, lit surface splats; smoke and steam rise in a curl field; flames cool through a real color ramp with sparks; colliders keep the liquid in the glass and the bowl."
+    },
+    "torus": {
+      "v": "keep",
+      "owner": "Owner's notes of September 28, 2026 (lane Shelves): Shapes keeps a plain torus people can dress as a donut, a bagel or a swim ring.",
+      "effect": "Pops onto its edge, wobbles around like a coin spun on a table, and settles flat.",
+      "sound": "A soft pop, a roll that circles faster, a settle.",
+      "improved": "Shelves: a sharp, even kit torus with a Dress it as choice (plain, donut, bagel, swim ring). A tap pops it up onto its edge; it wobbles around like a settling coin, leaning lower and circling faster, and drops flat with a small bounce (3.6 s)."
     }
   }
 }
