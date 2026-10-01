@@ -138,6 +138,10 @@ October 1, 2026, morning (UTC): **round 2 ready for the Operator.**
   `live-photo3d-r3` hold the view still (no turn, a still test camera, no tap at the end).
 - Round 2 is built, tested and posted: cards `live2-*` on page 2, engine PR #162 and lane PR #163
   open as drafts (stacked on #144 and #150).
+- The owner's marks of October 1 (via the Operator): the r3 mirror and Photo to 3D live, and
+  `live2-tube-whole`, good; every other `live2` card "Good, but could look even better. Keep going."
+  So the looks got a second pass (finer strands, smoother curves, deeper color), posted as
+  `live2-*-r2` cards.
 - Start time (Chromium, SwiftShader, this container; the software renderer itself takes about two of
   the four cores, so runs vary). Before: file chosen to the landscape built (it could play only
   after that, on a tap). After: file chosen to playing (a long song plays as it opens).
@@ -194,9 +198,11 @@ October 1, 2026, morning (UTC): **round 2 ready for the Operator.**
   whose samples are in, nearest the playhead first (`song-analysis.js`: bands, six bands, loudness,
   centroid, YIN pitch, flux, every 40 ms). Songs of 30 s or less keep the old decode-and-build path.
 - **The looks** (`src/packs/song-looks.js`) are relief splats with axis 3 (a 3D offset per splat
-  from the screen canvas, from the r2 engine PR). A needle's sigmas are a third of its thickness and
-  a 2.6th of its length, with no jitter: longer ones smear into their neighbors. In Live, slot 0
-  sits on the gate and a frame's line crosses it as the frame's middle is heard (`liveFrame`).
+  from the screen canvas, from the r2 engine PR). Two needles per slot along time (`SUB`) and per
+  band across pitch (`SUBF`), the in-between ones taking the values between measured neighbors;
+  colors come from tables built once. A needle's sigmas are a third of its thickness and a 2.6th of
+  its length, with no jitter: longer ones smear into their neighbors. In Live, slot 0 sits on the
+  gate and a frame's line crosses it as the frame's middle is heard (`liveFrame`).
 - **Song clips:** `tools/live-clip.mjs --song=<file> --clock` opens a song, waits until it is
   measured, steps its audio clock with the clip's and shows it; `<out>.json` gives the second of the
   song at the first frame, for adding the sound to the MP4.

@@ -269,7 +269,7 @@ export function buildLook(k, look, { view, backdrop, nf }) {
     // Across: SUBF needles per band, the last band's one alone.
     for (let s = 0; s < S; s++)
       for (let f = 0; f < K; f++)
-        for (let q = 0; q < (f < K - 1 ? SUBF : 1); q++) needle(list, [xk(f + q / SUBF), 0, zs(s)], [1, 0, 0], (W / K / SUBF) * 1.6, 0.0034, [s, f, 0, q]); // prettier-ignore
+        for (let q = 0; q < (f < K - 1 ? SUBF : 1); q++) needle(list, [xk(f + q / SUBF), 0, zs(s)], [1, 0, 0], (W / K / SUBF) * 1.6, look === "lines" ? 0.0046 : 0.0034, [s, f, 0, q]); // prettier-ignore
     if (look === "mesh")
       for (let f = 1; f < K; f += 4)
         for (let s = 0; s < S; s++)
@@ -368,7 +368,7 @@ export function drawLook(g, L, an, now, { backdrop }) {
   // Color from a table entry or an RGB triple, times a brightness, then the
   // Live fade with age (into the paper, or darker without it).
   const setCol = (src, at, k, age) => {
-    const fadeTo = L.live && paper ? 0.55 * age ** 1.5 : 0;
+    const fadeTo = L.live && paper ? 0.4 * age ** 1.5 : 0;
     const dim = L.live && !paper ? 1 - 0.5 * age : 1;
     for (let j = 0; j < 3; j++) {
       const v = Math.min(255, src[at + j] * k * dim);
@@ -467,7 +467,7 @@ export function drawLook(g, L, an, now, { backdrop }) {
       // fine, the loud ridges full).
       const at = Math.round((a / (K - 1)) * (TABLE - 1)) * 3;
       setCol(T.pitch, at, 0.62 + 0.55 * l, age);
-      const pale = 0.45 * (1 - l) ** 2;
+      const pale = 0.2 * (1 - l) ** 2;
       for (let j = 0; j < 3; j++)
         col[j] = Math.round(col[j] + (T.paper[j] - col[j]) * (paper ? pale : 0));
       put(i, P, R, true);
