@@ -821,6 +821,9 @@ export class Player {
 
   // Where the toy's media comes from: { key, source, page }.
   mediaSource(toy, recipe, options) {
+    // A live stream (lane Live input) on the toy that started it; never saved in the scene.
+    const lv = this.liveMedia;
+    if (lv && lv.toy === toy.id) return { key: lv.key, source: lv.source, page: 0 };
     const m = toy.media;
     if (m?.file && this.mediaFile && this.mediaFile.name === m.file.name)
       return { key: mediaKey(this.mediaFile), source: this.mediaFile, page: m.page || 0 };
