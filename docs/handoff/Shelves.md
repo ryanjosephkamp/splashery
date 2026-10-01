@@ -86,8 +86,10 @@ Model: Opus 5.5 (default effort).
 - Lane PR #148: the crystal ball in Medieval (after the wizard's orb), the donut in Food (after the
   macarons), the tiny planet in Space (after Neptune) with its Planet choice, and the new Torus in
   Shapes (`src/packs/shapes-torus.js`) with four dressings, its wobble tap and its sound.
-- tests/shv.spec.mjs: 15/15 pass. Full suite: running.
-- Cards: `shv-torus`, `shv-planets`, `shv-shelves` (being posted).
+- tests/shv.spec.mjs: 15/15 pass. Full suite (in parts, after two container restarts): 579 of 581
+  pass; the two failures are the smoke.spec.mjs lines the move changes (lines 102 and 133).
+- Cards on Effect review page 2: `shv-torus`, `shv-planets`, `shv-shelves`, all marked good by the
+  owner (September 30, 2026).
 
 ## Notes
 
