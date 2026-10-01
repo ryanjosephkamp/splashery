@@ -126,7 +126,7 @@ test("a kit toy rebuilt with new options keeps moving as it was until the new bu
     () => window.__splashery.player.motion.ctx?.kit?.data?.element === "C",
   );
   await page.waitForTimeout(500);
-  // Watched every frame through a tile tap's rebuild: the toy on screen always has its motion
+  // Watched every frame through a tile tap's switch (Player.switchTo): the toy on screen always has its motion
   // (so its hidden parts, such as the atom's photon, stay hidden), first carbon's, then iron's.
   const r = await page.evaluate(async () => {
     const { player } = window.__splashery;
@@ -139,13 +139,14 @@ test("a kit toy rebuilt with new options keeps moving as it was until the new bu
       requestAnimationFrame(watch);
     };
     watch();
-    await player.rebuild({ element: "Fe" });
+    await player.switchTo({ options: { element: "Fe" }, key: "up" });
     await new Promise((ok) => setTimeout(ok, 300));
     done = true;
     return seen;
   });
   expect(r).not.toContain("none");
   expect(r[0]).toBe("C:0");
-  expect(r.at(-1)).toBe("Fe:0");
+  // (Fe's atom rises after the switch, its photon still hidden.)
+  expect(r.at(-1)).toMatch(/^Fe:0/);
   expect(r.filter((x) => !/:0$/.test(x))).toEqual([]);
 });

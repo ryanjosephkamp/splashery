@@ -252,10 +252,10 @@ export class Player {
     this.driver.clearPokes();
     let info;
     const shelfDef = toy.kind === "builtin" ? findToy(toy.id) : null;
-    // A kit toy rebuilt with new options (a periodic table tile) keeps
-    // moving as it was until the new build replaces it, so its hidden parts
-    // stay hidden while it stays on screen (lane Fix6).
-    const same = shelfDef?.kind === "kit" && this.toyInfo?.kind === "kit" && this.toyInfo.id === shelfDef.id; // prettier-ignore
+    // A kit toy that switches its own options (a periodic table tile,
+    // Player.switchTo) keeps moving as it was until the new build replaces
+    // it, so its hidden parts stay hidden while it stays on screen (lane Fix6).
+    const same = this.switching && shelfDef?.kind === "kit" && this.toyInfo?.kind === "kit" && this.toyInfo.id === shelfDef.id; // prettier-ignore
     if (!same) this.motion.setToy(null, null);
     if (shelfDef?.kind === "kit") {
       info = await this.buildKit(shelfDef, toy, token, progress);
@@ -1231,7 +1231,12 @@ export class Player {
         toy.options = { ...(toy.options || {}), ...options };
         return this.loadToy(toy);
       });
-    await rebuild(r.options);
+    this.switching = true;
+    try {
+      await rebuild(r.options);
+    } finally {
+      this.switching = false;
+    }
     if (this.scene.toy !== toy || !this.motion.controlDef(r.key)) return;
     const next = this.motion.act(this.time, null, { key: r.key, pick: r.pick });
     this.scene.motion.controls = { ...this.scene.motion.controls, [next.key]: this.motion.targets[next.key] }; // prettier-ignore
