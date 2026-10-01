@@ -1,8 +1,9 @@
 # Lane Live input (prefix `live`)
 
 The microphone, the camera and the screen, live, as splats. Branches `claude/lane-live-input-engine`
-(the engine PR, #144) and `claude/lane-live-input` (the lane PR). Everything is behind the labs
-switch.
+(the engine PR, #144) and `claude/lane-live-input` (the lane PR, #150). Round 2 (prefix `live2`):
+`claude/lane-live-input-r2-engine` (its engine PR) and `claude/lane-live-input-r2` (its lane PR),
+stacked on #144 and #150. Everything is behind the labs switch.
 
 ## Brief (written by the Operator on September 30, 2026, from the owner's approval that day)
 
@@ -101,23 +102,53 @@ If you need another engine change, put it in the engine PR.
 Lanes Fluids r4, Science, Video 3D, Worlds r3, Sound A and B, Fix5, Shelves and the Integrators run
 at the same time; leave their files alone. The laptop is locked.
 
+## Round 2 (from the Operator, October 1, 2026; a summary of the brief)
+
+Opus 5.5. The lane owns `src/packs/studio.js`, `src/packs/studio-audio.js` and new files; it stays
+labs. One PR, "Phase Live input r2: …", tests in `tests/live2.spec.mjs`, cards `live2-*` in the
+LiveInput record on page 2.
+
+1. **Start fast.** Measure 3-, 6- and 10-minute MP3s and a 50 MB file at 4× and 6× CPU throttle.
+   Play as soon as the audio can play, with no resampling or re-encoding; analyze in a module worker
+   in chunks, with a progress line; the landscape fills in and the page never freezes. Target: a
+   10-minute song plays within about 3 s at 4×.
+2. **The looks** (the owner's reference images, for the idea only; none of their art, names or
+   logo): Ribbons (six bands, teal to orange, fine strands, out of a "now" gate), Tube (loudness is
+   the radius, pitch tilts the ring, colored by brightness), Lines (a spectrum waterfall, a thin
+   line per 40 ms frame), Mesh (a wireframe landscape); Coil only if beat tracking is reliable.
+   Every shape a measured feature, in sync on the audio clock (a click-track test: each peak at the
+   now mark within 50 ms). Pitch and Loudness stay; Whole and Live both work; thin, crisp, elongated
+   splats; a light paper background with a still of each; a "What you're seeing" text per look.
+3. **Clips:** music (CC0) and speech (CC0 or synthesized), 10 to 15 s at phone size, MP4, the audio
+   clock on screen; a before-and-after start-time clip with a timer.
+
 ## State
 
 Model: **Opus 5.5** (default effort), no helpers.
 
-October 1, 2026, early morning (UTC): **ready for the Operator.**
+October 1, 2026, morning (UTC): **round 2 working.**
 
-- Engine PR #144 and lane PR #150 are open as drafts. Both have main through #153 merged in.
-- The full suite on the lane branch (which contains #144): 609 passed and 1 failed. The failure was
-  my help lines' length; they're fixed, and the test passes when rerun alone. After the last main
-  merge, the live, live-engine, fx4, fx4-engine and help specs pass (46 tests).
-- The relief kind is 24 (lane Fix4's rim took 23).
-- Cards on Effect review page 2, as MP4s:
-  - marked good: `live-permission`, `live-echo`, `live-landscape`, `live-chladni`, `live-tuner`,
-    `live-clap`, `live-screen`;
-  - redone after the owner's "fix" (the swinging): `live-mirror-r2` and `live-photo3d-r2`.
-- The owner's review of October 1 names a later "Live input r2" lane for the song landscape (start
-  at once, analysis in a worker, fluid-like looks); not started here.
+- Round 1: engine PR #144 and lane PR #150, drafts, main through #145 merged in (not yet pushed).
+  Cards marked good: `live-permission`, `live-echo`, `live-landscape`, `live-chladni`, `live-tuner`,
+  `live-clap`, `live-screen`. The mirror and Photo to 3D live got a second "fix" (still moving):
+  `live-mirror-r3` and `live-photo3d-r3` hold the view still (no turn, a still test camera, no tap
+  at the end).
+- Round 2 is built and tested (below); the clips, cards and PRs are under way.
+- Start time, file chosen to playing (Chromium, SwiftShader, this container):
+
+  | Song                 | Before, 4×          | After, 4×    | Before, 6× | After, 6× |
+  | -------------------- | ------------------- | ------------ | ---------- | --------- |
+  | 3 min MP3 (4.3 MB)   | 6.1 s               | 1.2 s        | 8.3 s      | 3.3 s     |
+  | 6 min MP3 (8.6 MB)   | 6.2 s               | 2.5 s        | 10.3 s     | 1.3 s     |
+  | 10 min MP3 (14 MB)   | 8.9 s               | 1.4 to 2.4 s | 12.2 s     | 1.4 s     |
+  | 50 MB MP3 (21.5 min) | refused (40 MB cap) | 1.5 s        | refused    | 1.6 s     |
+
+  Before, the page froze for all of it; after, the one stall left is Chrome finishing
+  `decodeAudioData` of the analysis copy (about 0.6 s at 4×, while the song already plays). A
+  10-minute song is fully measured about 14 s after it opens at 4×.
+
+- The click track (tests/live2.spec.mjs): all 12 clicks cross the now mark 3 to 36 ms from when an
+  analyser on the output hears them (the output latency reported is 42 ms).
 
 ## Notes
 
@@ -147,6 +178,20 @@ October 1, 2026, early morning (UTC): **ready for the Operator.**
   `tools/live-clip.mjs` feeds a WAV into the page's own analyser in step with the clip's clock
   (`--audio`), plays a Y4M through Chromium's fake camera (`--video`, and `--depth` waits for the
   depth model each frame), or draws a plain window for "Share a screen" (`--screen-demo`).
+
+- **Round 2's song player** (`src/packs/song-stream.js`): `Track` plays the file through an
+  `<audio>` element routed to the site's sound; its clock is the element's time, smoothed between
+  its steps, less the output latency. `SongAnalysis` decodes a copy (32 kHz past 12 minutes), mixes
+  it to mono a slice at a time and hands it to `song-worker.js`, which measures 2-second chunks
+  nearest the playhead first (`song-analysis.js`: bands, six bands, loudness, centroid, YIN pitch,
+  flux, every 40 ms). Songs of 30 s or less keep the old decode-and-build path.
+- **The looks** (`src/packs/song-looks.js`) are relief splats with axis 3 (a 3D offset per splat
+  from the screen canvas, from the r2 engine PR). A needle's sigmas are a third of its thickness and
+  a 2.6th of its length, with no jitter: longer ones smear into their neighbors. In Live, slot 0
+  sits on the gate and a frame's line crosses it as the frame's middle is heard (`liveFrame`).
+- **Song clips:** `tools/live-clip.mjs --song=<file> --clock` opens a song, waits until it is
+  measured, steps its audio clock with the clip's and shows it; `<out>.json` gives the second of the
+  song at the first frame, for adding the sound to the MP4.
 
 ## Known issues
 

@@ -10,6 +10,7 @@
 //     [--js=<code run before recording>] [--at=<js run at time t: "t:code;t:code">]
 //     [--depth] [--strip=8] [--sheet=full] [--report=<js whose result is printed after>]
 //     [--ready=<js: recording waits until it returns true>] [--screen-demo] [--opt=key=value] [--turn=t0,t1,radians]
+//     [--song=<sound file>] [--clock]
 //
 // The page's clock is stepped by hand (as tools/effect-clip.mjs does), so a
 // clip shows the toy at its real speed however slow the renderer is.
@@ -22,6 +23,11 @@
 // a fast computer (the clip says how long the model took here). --press
 // clicks buttons (the live buttons) before recording. --sheet=full opens
 // the phone's settings sheet at its full stop first (UI r2), if it has one.
+// --song (lane Live input r2): opens the file in the Song landscape, waits
+// until it is measured and plays it from the clip's start, its audio clock
+// stepped with the clip's (the sound itself is left out: add it to the video
+// from <out>.json's songStart, the second of the song at the first frame).
+// --clock shows the song's audio clock at the top of the page.
 
 import { chromium } from "@playwright/test";
 import fs from "node:fs";
@@ -166,9 +172,12 @@ await page.evaluate(async (toy) => {
   player.idle.weight = 0;
 }, toy);
 await page.waitForTimeout(1500);
-if (opt("opt", "")) {
-  const [key, value] = opt("opt", "").split("=");
-  await page.evaluate(([k, v]) => window.__splashery.app.setToyOption(k, v), [key, value]);
+// Every --opt=key=value (there may be several).
+const opts = Object.fromEntries(
+  args.filter((a) => a.startsWith("--opt=")).map((a) => a.slice(6).split("=")),
+);
+if (Object.keys(opts).length) {
+  await page.evaluate((o) => window.__splashery.app.setToyOptions(o), opts);
   await page.waitForTimeout(1000);
 }
 if (opt("sheet", "") === "full") {
@@ -267,6 +276,37 @@ for (let calm = 0; calm < 4; ) {
   calm = (await page.evaluate(() => document.getElementById("progress").hidden)) ? calm + 1 : 0;
 }
 if (js) await page.evaluate(`(async () => { ${js} })()`);
+const song = opt("song", "");
+if (song) {
+  await page.locator("#toy-input-file").setInputFiles(song);
+  await page.waitForFunction(() => window.__splashery.player.proc?.ctx?.kit?.data?.song?.song?.name, null, { timeout: 120000 }); // prettier-ignore
+  for (let i = 0; i < 1200; i++) {
+    const done = await page.evaluate(async () => (await import("/src/packs/studio.js")).songAnalysisState().finished); // prettier-ignore
+    if (done) break;
+    await page.waitForTimeout(250);
+  }
+  await page.waitForTimeout(1500);
+  // A long song's track keeps the clip's time instead of the element's.
+  await page.evaluate(async () => {
+    const { songTest } = await import("/src/packs/studio.js");
+    const t = songTest().track;
+    window.__song = { t: 0, on: false };
+    if (!t) return;
+    t.el.pause();
+    t.time = () => window.__song.t;
+    Object.defineProperty(t, "playing", { get: () => window.__song.on });
+    t.play = () => (window.__song.on = true);
+    t.pause = () => (window.__song.on = false);
+  });
+}
+if (flag("clock"))
+  await page.evaluate(() => {
+    const d = document.createElement("div");
+    d.id = "clip-clock";
+    d.style.cssText =
+      "position:fixed;left:50%;transform:translateX(-50%);top:92px;z-index:99;font:600 13px system-ui;background:#000a;color:#fff;padding:3px 9px;border-radius:10px";
+    document.body.append(d);
+  });
 // Take over the clock.
 await page.evaluate(() => {
   const { player } = window.__splashery;
@@ -324,6 +364,7 @@ for (let n = 0; n < total; n++) {
   await page.evaluate(
     async ({ step, audio }) => {
       if (audio) window.__feed(step);
+      if (window.__song?.on) window.__song.t += step;
       window.__pending = step;
       const { player } = window.__splashery;
       await player.stage.captureFrame();
@@ -334,6 +375,14 @@ for (let n = 0; n < total; n++) {
   if (!frames.length && n < total - 1 && !(await page.evaluate(() => document.getElementById("progress").hidden))) continue; // prettier-ignore
   // The first screenshots can still show the page as it was before the clock was taken over.
   if (n < 2) continue;
+  const pos = song ? await page.evaluate(async () => {
+    const p = (await import("/src/packs/studio.js")).playState().pos;
+    const c = document.getElementById("clip-clock");
+    if (c) c.textContent = `audio clock ${p.toFixed(2)} s`;
+    return p;
+  }) : null; // prettier-ignore
+  if (song && frames.length === 0)
+    fs.writeFileSync(`${out}.json`, JSON.stringify({ songStart: pos }));
   const png = PNG.sync.read(await page.screenshot());
   frames.push({ png, t });
 }

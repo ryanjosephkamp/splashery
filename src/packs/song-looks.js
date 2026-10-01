@@ -39,7 +39,8 @@ const ramp = (stops, t) => {
 
 // Sizes per look and view: slots (time steps) and the time axis's length.
 const LIVE_SECONDS = 6;
-const LEN = 3.4; // recipe units along time
+const LEN = 3.4; // recipe units along time (Lines and Mesh: 0.8 of it in depth)
+const LEN_X = 2.4; // Ribbons and Tube, along x (their bands and rings are tall)
 
 // Live: the newest frame whose middle has been heard (slot 0 on the gate),
 // so a frame's line crosses the gate as its middle is heard.
@@ -130,14 +131,17 @@ function emit(k, list, lift, part) {
   const cols = Math.min(512, Math.max(16, Math.ceil(Math.sqrt(n * 2))));
   const rows = Math.max(1, Math.ceil(n / cols));
   const unit = 0.01; // a cloud-only recipe's base splat size
-  k.cloud({ share: n / k.count, pattern: false, opacity: 1 }, (rand, i) => {
+  // A splat shows out to about two sigmas each way, so a needle's sigmas
+  // are a third of its thickness and 2.6th of its length (exact sizes:
+  // no jitter), and its neighbors don't smear into it.
+  k.cloud({ share: n / k.count, pattern: false, opacity: 1, jitter: 0 }, (rand, i) => {
     const s = list[i];
     if (!s) return null;
-    const sz = s.thick / 0.7;
+    const sz = s.thick / 3 / 0.7;
     return {
       p: s.p,
       dir: s.dir,
-      stretch: Math.max(1, s.len / sz),
+      stretch: Math.max(1, s.len / 2.6 / sz),
       size: sz / unit,
       color: "#888888",
       opacity: 1,
@@ -210,11 +214,11 @@ export function buildLook(k, look, { view, backdrop, nf }) {
   if (look === "ribbons" || look === "tube") {
     // Time runs along x, out of the gate at the left.
     const J = 14; // strands per ribbon
-    const P = 36; // points per ring
+    const P = 48; // points per ring
     S = slotsFor(view, look === "ribbons" ? 6 * J : P, k.count);
     if (look === "tube" && !live) S = Math.min(S, 180); // rings you can tell apart
-    const dx = LEN / S;
-    const x0 = -LEN / 2;
+    const dx = LEN_X / S;
+    const x0 = -LEN_X / 2;
     // Live: slot s's line is where the frame heard s frames ago is (slot 0
     // on the gate); Whole: slot s is the s-th share of the song.
     const xs = (s) => x0 + (s + (live ? 0 : 0.5)) * dx;
@@ -228,15 +232,15 @@ export function buildLook(k, look, { view, backdrop, nf }) {
         for (let p = 0; p < P; p++) {
           const th = (p / P) * Math.PI * 2;
           const r = 0.02;
-          needle(list, [xs(s), r * Math.cos(th), r * Math.sin(th)], [0, -Math.sin(th), Math.cos(th)], ((2 * Math.PI * 0.2) / P) * 1.3, 0.004, [s, p, 0]); // prettier-ignore
+          needle(list, [xs(s), r * Math.cos(th), r * Math.sin(th)], [0, -Math.sin(th), Math.cos(th)], ((2 * Math.PI * 0.4) / P) * 1.2, 0.004, [s, p, 0]); // prettier-ignore
         }
       lift = 0.42;
     }
     geo = { axis: "x", x0, dx, J, P };
     gateBox(k, gate, [x0, 0, 0], 0.035, 0.62, 0.32, "#8fb4c4");
-    if (backdrop === "paper") card(k, { at: (u, v) => [(u - 0.5) * (LEN + 0.6), (0.5 - v) * 1.6, -0.55], cols: 120, rows: 54, n: [0, 0, 1], color: PAPER }); // prettier-ignore
-    k.reach([-LEN / 2 - 0.1, 0.8, 0.5]);
-    k.reach([LEN / 2 + 0.1, -0.8, -0.55]);
+    if (backdrop === "paper") card(k, { at: (u, v) => [(u - 0.5) * (LEN_X + 0.6), (0.5 - v) * 1.6, -0.55], cols: 100, rows: 54, n: [0, 0, 1], color: PAPER }); // prettier-ignore
+    k.reach([-LEN_X / 2 - 0.1, 0.8, 0.5]);
+    k.reach([LEN_X / 2 + 0.1, -0.8, -0.55]);
   } else {
     // Lines and Mesh: pitch across x, height for loudness, time in depth
     // (the newest line at the front, z = D / 2).
@@ -244,8 +248,10 @@ export function buildLook(k, look, { view, backdrop, nf }) {
     const D = LEN * 0.8;
     const K = nf;
     S = slotsFor(view, look === "mesh" ? K * 1.5 : K, k.count);
-    if (look === "mesh") S = Math.min(S, live ? 100 : 160);
-    else S = Math.min(S, live ? 120 : 200);
+    // Live: one line per frame over the last 3 s (2.4 s for the mesh), few
+    // enough to tell apart at phone size.
+    if (look === "mesh") S = Math.min(S, live ? 60 : 100);
+    else S = Math.min(S, live ? 75 : 120);
     const dz = D / S;
     const xk = (f) => ((f + 0.5) / K - 0.5) * W;
     const zs = (s) => D / 2 - (s + (live ? 0 : 0.5)) * dz;
@@ -384,7 +390,7 @@ export function lookMotion(L, now, duration) {
   const frac = now / HOP - 0.5 - liveFrame(now);
   if (L.geo.axis === "x") {
     if (L.live) return { look: [frac * L.geo.dx, 0, 0], gate: [0, 0, 0] };
-    return { look: [0, 0, 0], gate: [Math.min(1, now / Math.max(1e-6, duration)) * LEN, 0, 0] };
+    return { look: [0, 0, 0], gate: [Math.min(1, now / Math.max(1e-6, duration)) * LEN_X, 0, 0] };
   }
   if (L.live) return { look: [0, 0, -frac * L.geo.dz], gate: [0, 0, 0] };
   return { look: [0, 0, 0], gate: [0, 0, -Math.min(1, now / Math.max(1e-6, duration)) * L.geo.D] };
