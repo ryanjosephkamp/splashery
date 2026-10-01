@@ -3,6 +3,55 @@
 Prefix `wd`. Branch `claude/lane-worlds-engine`, PR "Engine: Worlds, the world engine and a sandbox
 island". How lanes work: [OPERATING.md](../OPERATING.md). Earlier lessons: [history.md](history.md).
 
+## Brief (r4)
+
+(From the Operator's message of October 1, 2026, with the owner's marks)
+
+Good: `wd-island-r3`, `wd-island-r3-desktop` and the rocks. Fix: `wd-character-r3`,
+`wd-character-walk-r3`, `wd-character-splats-r3` and `wd-props-r3`. The owner's words: "Standing and
+walking: looks too much like a zombie (arms unnaturally hanging in front of torso, etc. Running:
+needs to look much more realistic; legs and arms don't move enough, etc." and, on running, "seems to
+bounce left and right too much". He approved a dedicated character lab.
+
+Round 4, on `claude/lane-worlds-r4` (cut from r3; merges after #135), one draft PR "Phase Worlds r4:
+a character lab, and a character who moves like a person":
+
+- The lab, behind the labs switch: the character alone on a plain floor or treadmill; stand, walk
+  and run; side, front and three-quarter views; slow motion and a speed control.
+- Checked against measured gait data: hip, knee, ankle, shoulder and elbow over one stride; arm
+  swing opposite the legs; the pelvis's sway and bob. Sources cited here; the reference shown beside
+  the character; anything shipped CC0 or CC BY, checked on its live page.
+- Standing and walking: the arms at the sides (relaxed shoulders, elbows slightly bent, hands by the
+  thighs), swinging from the shoulder opposite the legs.
+- Running: knee drive and heel recovery, elbows near 90° and pumping, a short flight phase, a slight
+  forward lean, the bounce mostly vertical with little side-to-side sway.
+- Cards on Effect review page 2 (lane record "Worlds"): the lab clips (stand, walk, run beside the
+  reference), then the character on the island (walk and run on the beach, the boulder garden) as
+  `-r4` cards, each naming the r3 card it replaces in its note.
+
+## r4 state
+
+Model: Opus 5.5 (default effort). Branch `claude/lane-worlds-r4`.
+
+- October 1, 2026: #135 refreshed (main merged, Worlds specs green); r4 cut from it.
+- **Sources** (all in docs/WORLDS.md, "The character lab"): walking angles from Fukuchi, Fukuchi and
+  Duarte (2018, PeerJ 6:e4640; figshare 10.6084/m9.figshare.5722711, CC BY 4.0), nine people at 1.26
+  m/s; running angles and the running pelvis from Fukuchi, Fukuchi and Duarte (2017, PeerJ 5:e3298;
+  figshare 10.6084/m9.figshare.4543435, CC BY 4.0), 31 runners at 2.5 m/s; arm ranges from Kang et
+  al. (2023) and Tartaruga et al. (cited in Wilk et al. 2024); arms opposite the legs from Pontzer
+  et al. (2009); the walking pelvis from Orendurff et al. (2004). The datasets were downloaded to
+  `.cache/worlds/r4/` (not committed); only the means and SDs ship (4 KB).
+- **The gait** (`tools/wd-character.py`, `GAIT`, `Shaper`, `shape_cycle`): legs follow the reference
+  means exactly (by construction); arms from the shoulder, opposite the legs. Built: walk stride
+  1.32 m, shoulder range 44° (people 56 ± 13°), elbow 7–37° (range 30°, people 30 ± 10°), pelvis bob
+  2.2 cm (people 4.0–4.8), sway 4.2 cm (3.9–4.6); run at 2.5 m/s (was 2.7), stride 1.64 m, elbow
+  69–101° (range 32°, people 39 ± 13°), pelvis bob 7.7 cm (runners 9.7), sway 2.2 cm (2.2), forward
+  lean 8°, a flight phase between stances.
+- **The lab** (`worlds/lab/`, `src/worlds/lab.js`): see docs/WORLDS.md.
+- **Fixed on the way:** the r3 clips' keys started at frame 1, so every loop held its first pose for
+  a frame and lasted 1.033 s (a small hitch each stride, and the feet slid 3% more). Keys now start
+  at 0; each loop is exactly 1 s. The lab found it: its measured curves drifted against the build's.
+
 ## Brief (r3)
 
 (Written by the Operator on September 30, 2026, from the owner's marks of September 29 and 30)

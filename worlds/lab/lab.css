@@ -1,0 +1,121 @@
+/* The character lab (worlds/lab/): the bar, the chart and the notes over the
+   canvas. Tokens from worlds.css. */
+
+body.lab {
+  background: #e9edf2;
+}
+
+.lab-bar {
+  position: fixed;
+  top: calc(8px + env(safe-area-inset-top));
+  left: calc(8px + env(safe-area-inset-left));
+  right: calc(8px + env(safe-area-inset-right));
+  z-index: 10;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+  align-items: center;
+  padding: 8px 10px;
+  border-radius: var(--radius);
+  background: var(--paper);
+  box-shadow: var(--shadow);
+  font-size: 14px;
+}
+
+.lab-title {
+  margin: 0;
+  font-weight: 700;
+}
+
+.lab-group {
+  display: flex;
+  gap: 4px;
+}
+
+.lab-group button {
+  min-height: 34px;
+  padding: 4px 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink);
+}
+
+.lab-group button[aria-pressed="true"] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-ink);
+}
+
+.lab-speed {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.lab-speed input {
+  width: 120px;
+}
+
+.lab-chart {
+  position: fixed;
+  right: calc(8px + env(safe-area-inset-right));
+  bottom: calc(8px + env(safe-area-inset-bottom));
+  z-index: 10;
+  width: min(360px, calc(50vw - 12px));
+  padding: 6px;
+  border-radius: var(--radius);
+  background: var(--paper);
+  box-shadow: var(--shadow);
+}
+
+.lab-chart canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.lab-note {
+  margin: 4px 2px 0;
+  font-size: 12px;
+  line-height: 1.35;
+  white-space: pre-line;
+}
+
+.lab-loading {
+  position: fixed;
+  inset: 45% 0 auto;
+  margin: 0;
+  text-align: center;
+  font-weight: 600;
+}
+
+.lab-credits {
+  position: fixed;
+  left: calc(8px + env(safe-area-inset-left));
+  bottom: calc(8px + env(safe-area-inset-bottom));
+  z-index: 9;
+  max-width: min(420px, calc(50vw - 16px));
+  padding: 6px 8px;
+  border-radius: 10px;
+  background: var(--paper);
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+@media (max-width: 600px) {
+  .lab-chart {
+    left: calc(8px + env(safe-area-inset-left));
+    width: auto;
+    padding: 4px 6px;
+  }
+  .lab-note {
+    font-size: 11px;
+  }
+  .lab-credits {
+    display: none;
+  }
+  .lab-speed input {
+    width: 90px;
+  }
+}
