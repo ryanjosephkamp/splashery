@@ -216,29 +216,29 @@ const SCENES = {
     { move: { y: 1 }, secs: 1.4 },
     { hold: 0.6 },
   ],
-  // Round 4: the character's new walk and run on the west beach. From
-  // behind, the camera comes round to its side, so the arms and legs read
-  // in profile; it walks, runs, then walks again.
+  // Round 4: the character's new walk and run along the west beach. The
+  // camera comes round to its side (the sea side) and it walks across the
+  // view, so the arms and legs read in profile: a walk, a run, a walk.
   "beach-r4": [
-    { place: [-26, -12, 10], camera: { distance: 3.4, pitch: 0.14 }, noCards: true },
-    { hold: 0.6 },
-    { move: { y: 1 }, secs: 1.6 },
-    { move: { y: 1 }, look: [-Math.PI / 2, 0], secs: 1.2 },
-    { move: { y: 1 }, secs: 2.4 },
-    { move: { y: 1, run: true }, secs: 3.0 },
-    { move: { y: 1 }, secs: 1.6 },
+    { place: [-26, -12, 10], camera: { distance: 3.6, pitch: 0.12 }, noCards: true },
+    { hold: 0.4 },
+    { look: [-Math.PI / 2, 0], secs: 1.0 },
+    { move: { x: -1 }, secs: 3.2 },
+    { move: { x: -1, run: true }, secs: 3.0 },
+    { move: { x: -1 }, secs: 2.0 },
     { hold: 0.8 },
   ],
-  // Round 4: the boulder garden (round 3's walk) with the new walk and a
-  // run, the camera a little to the side.
+  // Round 4: through the boulder garden (round 3's walk), seen from the
+  // side away from the trees, the boulders behind it: a walk, a run, a
+  // walk.
   "props-r4": [
-    { place: [7, 12.5, 90], camera: { distance: 4, pitch: 0.2 }, noCards: true },
-    { hold: 0.5 },
-    { look: [-0.6, 0], secs: 0.6 },
-    { move: { y: 1 }, secs: 3.0 },
-    { move: { y: 1, run: true }, secs: 2.0 },
-    { move: { y: 0.7 }, look: [0.9, 0], secs: 2.2 },
-    { hold: 0.8 },
+    { place: [7, 12.5, 90], camera: { distance: 4.2, pitch: 0.3 }, noCards: true },
+    { hold: 0.4 },
+    { look: [Math.PI / 2, 0], secs: 1.0 },
+    { move: { x: 1 }, secs: 2.8 },
+    { move: { x: 1, run: true }, secs: 2.2 },
+    { move: { x: 1 }, secs: 3.0 },
+    { hold: 0.6 },
   ],
   // Depth, close up: a bush half behind a hill, then the character wading.
   "hybrid-depth": [
