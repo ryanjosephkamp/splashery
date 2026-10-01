@@ -1331,13 +1331,18 @@ export function loadSample(ctx, file) {
 }
 
 // Every sample file a spec names (both halves of a toggle, and fallbacks).
-export function samplesIn(spec, out = []) {
+// With `voices`, also the files a sampled instrument voice (the concert
+// grand) may play: the Sound Board carries them and the About tab credits
+// them, but a tap doesn't wait for them (the voice loads its own).
+export function samplesIn(spec, out = [], voices = false) {
   if (!spec || typeof spec !== "object") return out;
-  if (Array.isArray(spec)) spec.forEach((s) => samplesIn(s, out));
-  else if ("on" in spec || "off" in spec) [spec.on, spec.off].forEach((s) => samplesIn(s, out));
+  if (Array.isArray(spec)) spec.forEach((s) => samplesIn(s, out, voices));
+  else if ("on" in spec || "off" in spec)
+    [spec.on, spec.off].forEach((s) => samplesIn(s, out, voices));
   else {
     if (spec.voice === "sample") for (const f of [].concat(spec.file || [])) out.push(f);
-    if (spec.fallback) samplesIn(spec.fallback, out);
+    if (voices && VOICES[spec.voice]?.samples) out.push(...VOICES[spec.voice].samples);
+    if (spec.fallback) samplesIn(spec.fallback, out, voices);
   }
   return [...new Set(out)];
 }
@@ -1350,8 +1355,9 @@ export function samplesReady(spec) {
   });
 }
 
+// Loads a spec's files, and a sampled voice's too (offline tools hear them).
 export function loadSamples(ctx, spec) {
-  return Promise.all(samplesIn(spec).map((f) => loadSample(ctx, f)));
+  return Promise.all(samplesIn(spec, [], true).map((f) => loadSample(ctx, f)));
 }
 
 function playSample(c, o, t, p) {
@@ -1396,6 +1402,62 @@ function playSample(c, o, t, p) {
 }
 
 VOICES.sample = { f: 1, play: playSample };
+
+// The concert grand (the owner's mark of September 30, 2026: the synth
+// "grand" sounded like an electronic keyboard): recorded notes of a real
+// acoustic piano (CC0, TEDAgame on Freesound), one every four semitones, each
+// note played from the nearest one at its pitch. The key's `hold` lets the
+// damper fall. Until its files arrive (fetched on its first note), a note
+// plays the synth grand; a song note scheduled far enough ahead waits for its
+// file and plays on time. The electronic keyboard's PIANO keeps the synth.
+const GRAND_NOTES = "A0 C#1 F1 A1 C#2 F2 A2 C#3 F3 A3 C#4 F4 A4 C#5 F5 A5 C#6 F6 A6 C#7 F7 A7 C8".split(" "); // prettier-ignore
+const grandFile = (n) => `grand-piano-${n.toLowerCase().replace("#", "s")}.mp3`;
+
+function playConcert(c, o, t, p) {
+  const f = p.f || 262;
+  let note = GRAND_NOTES[0];
+  for (const n of GRAND_NOTES)
+    if (Math.abs(Math.log2(f / noteFreq(n))) < Math.abs(Math.log2(f / noteFreq(note)))) note = n;
+  const file = grandFile(note);
+  const synth = (at) =>
+    VOICES.grand.play(c, o, at, { ...p, bright: VOICES.grand.bright, vol: (p.vol * LEVEL.grand) / LEVEL.concert }); // prettier-ignore
+  const e = sampleCache.get(file);
+  if (!e?.buf) {
+    const live = typeof OfflineAudioContext === "undefined" || !(c instanceof OfflineAudioContext);
+    VOICES.concert.samples.forEach((s) => loadSample(c, s));
+    if (!live || e?.failed || t - c.currentTime < 0.15) return synth(t);
+    loadSample(c, file).then((buf) => {
+      if (buf && c.currentTime < t - 0.005) playConcert(c, o, t, p);
+      else synth(Math.max(t, c.currentTime + 0.005));
+    });
+    return 2;
+  }
+  const rate = f / noteFreq(note);
+  // Low notes ring longer; the recording's own decay does the rest.
+  const ring = Math.min(e.buf.duration / rate, 3.2 * (262 / f) ** 0.5 * (p.decay ?? 1));
+  const stop = p.hold !== undefined ? Math.min(ring, Math.max(0.06, p.hold)) : ring;
+  const release = 0.16;
+  const src = c.createBufferSource();
+  src.buffer = e.buf;
+  src.playbackRate.value = rate;
+  const g = c.createGain();
+  const vol = Math.max(TAIL * 2, p.vol);
+  g.gain.setValueAtTime(vol, t);
+  g.gain.setTargetAtTime(0, t + stop, release / 3);
+  // A little darker when played softly, as a real hammer is.
+  const lp = c.createBiquadFilter();
+  lp.type = "lowpass";
+  lp.frequency.value = Math.min(
+    c.sampleRate * 0.45,
+    2500 + 9000 * Math.min(1, p.vol / LEVEL.concert),
+  );
+  src.connect(lp).connect(g).connect(o);
+  src.start(t);
+  src.stop(t + stop + release * 2);
+  return stop + release;
+}
+
+VOICES.concert = { f: 262, samples: GRAND_NOTES.map(grandFile), play: playConcert };
 
 // The twelve original shared sounds (and "click" and "heartbeat"), exactly as
 // they were: recipes and the effect switches still name them.
@@ -1536,6 +1598,7 @@ const LEVEL = {
   chuckle: 10.14,
   heartbeat: 1.7,
   sample: 1,
+  concert: 0.75,
 };
 export const VOICE_NAMES = Object.keys(VOICES);
 

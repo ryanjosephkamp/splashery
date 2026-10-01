@@ -66,8 +66,9 @@ export const LINT = {
   loud: { warn: 0.2, fail: 0.3 }, // the loudest 50 ms (RMS)
 };
 
-// The owner's exceptions (7e): sounds he likes as they are.
-const EXCEPTIONS = new Set(["mandelbulb", "sorting-machine", "looped-transformer", "newtons-cradle", "ocean-liner", "pyramids"]); // prettier-ignore
+// The owner's exceptions (7e): sounds he likes as they are (and the
+// Mandeltorus, which he asked to sound like the Mandelbulb).
+const EXCEPTIONS = new Set(["mandelbulb", "mandeltorus", "sorting-machine", "looped-transformer", "newtons-cradle", "ocean-liner", "pyramids"]); // prettier-ignore
 const MUSIC_SHELF = "music";
 const NOISE_BEDS = new Set(["wind", "wave", "hiss", "whoosh", "breath", "rumble"]);
 const HARSH_BEDS = new Set(["wind", "wave", "hiss"]); // the owner's "overwhelming" ones
