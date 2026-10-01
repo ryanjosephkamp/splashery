@@ -46,7 +46,11 @@ function sheet(k, { x0, x1, z0, z1, y, cells, color, part = 0, opacity = 1, extr
         const z = z0 + (j + 0.5 + layer * 0.5) * sz;
         list.push({ p: [x, y, z], n: [0, 1, 0], flat: 0.02, size, opacity, color: color(x, z), part, pattern: false, ...(extra ? extra(x, z) : null) }); // prettier-ignore
       }
-  k.cloud({ share: list.length / k.count, pattern: false }, (rand, i) => list[i] || null);
+  // Exact sizes and colors (no jitter): smooth, not grainy (lane Live input r2).
+  k.cloud(
+    { share: list.length / k.count, pattern: false, jitter: 0 },
+    (rand, i) => list[i] || null,
+  );
 }
 
 export const F0 = 60; // Hz per unit of n² + m²
@@ -913,14 +917,14 @@ const clamp01 = (x) => (x < 0 ? 0 : x > 1 ? 1 : x);
 // take their height and color from a canvas drawn on each frame.
 const LIVE_RANGE = 36; // dB from the floor to the top
 const LIVE_SONG = {
-  nf: 96,
+  nf: 128,
   nt: 150,
   rate: 30, // rows a second
   top: -40, // dB of the loudest band heard lately
   rows: 0, // rows written
   last: null,
   look: "pitch",
-  bands: new Float32Array(96),
+  bands: new Float32Array(128),
 };
 
 function liveSongBuild(k, o) {
@@ -938,8 +942,8 @@ function liveSongBuild(k, o) {
     axis: 1,
     lift: H,
     n: [0, 1, 0],
-    size: Math.max(cw, cd) * 0.8,
-    layers: 2,
+    size: Math.max(cw, cd) * 0.7, // finer (r2): smaller, exact splats
+    layers: 3,
   });
   sheet(k, { x0: -W / 2 - 0.08, x1: W / 2 + 0.08, z0: -D / 2 - 0.08, z1: D / 2 + 0.08, y: -0.005, cells: k.count * 0.06, color: () => "#2a303a" }); // prettier-ignore
   // Now: a glowing line across the front.

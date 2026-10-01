@@ -146,6 +146,13 @@ October 1, 2026, morning (UTC): **round 2 done (marked good), waiting on the mer
   2 is done pending tests. Merge order: #144, #150, #162, #163. #144 is in Integrator 1's run with
   #138; once both merge, the Operator asks for main in #150 (CREDITS, TOY-PLAN and toy-sounds
   conflict with #138), then #162 and #163 follow.
+- Evening of October 1: the owner marked `live-echo` and `live-permission` "fix" ("a bit
+  blurry/grainy") and `live-landscape` good but "a bit grainy". Most of it was the clips (drawn at
+  0.75 scale and squeezed into a 256-color GIF); the rest was the toys' own random splat size and
+  color. `tools/live-clip.mjs` now takes `--dpr=2` and `--frames=<dir>` (PNG frames straight into
+  the MP4), the room, the relief grids and the Studio floor use exact splats (`jitter: 0`), the
+  floorboards have seams, and the live landscape has 128 bands and three layers. Posted as
+  `live-echo-r2`, `live-permission-r2`, `live-landscape-r2` and a before-and-after still.
 - Start time (Chromium, SwiftShader, this container; the software renderer itself takes about two of
   the four cores, so runs vary). Before: file chosen to the landscape built (it could play only
   after that, on a tap). After: file chosen to playing (a long song plays as it opens).

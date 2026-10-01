@@ -10,7 +10,7 @@
 //     [--js=<code run before recording>] [--at=<js run at time t: "t:code;t:code">]
 //     [--depth] [--strip=8] [--sheet=full] [--report=<js whose result is printed after>]
 //     [--ready=<js: recording waits until it returns true>] [--screen-demo] [--opt=key=value] [--turn=t0,t1,radians]
-//     [--song=<sound file>] [--clock]
+//     [--song=<sound file>] [--clock] [--dpr=1] [--frames=<dir>]
 //
 // The page's clock is stepped by hand (as tools/effect-clip.mjs does), so a
 // clip shows the toy at its real speed however slow the renderer is.
@@ -28,6 +28,10 @@
 // stepped with the clip's (the sound itself is left out: add it to the video
 // from <out>.json's songStart, the second of the song at the first frame).
 // --clock shows the song's audio clock at the top of the page.
+// --dpr renders at that pixel density (2 is a phone's); --frames writes each
+// frame as a PNG into the folder (frame-0000.png, …) instead of the GIF, for
+// an MP4 without the GIF's 256 colors (ffmpeg -framerate <fps> -i
+// <dir>/frame-%04d.png …).
 
 import { chromium } from "@playwright/test";
 import fs from "node:fs";
@@ -99,7 +103,9 @@ const browser = await chromium.launch({
   executablePath: process.env.SPLASHERY_CHROMIUM || undefined,
   args: launchArgs,
 });
-const page = await browser.newPage({ viewport: { width: W, height: H }, deviceScaleFactor: 1 });
+const dpr = Number(opt("dpr", 1));
+const framesDir = opt("frames", "");
+const page = await browser.newPage({ viewport: { width: W, height: H }, deviceScaleFactor: dpr });
 page.on("pageerror", (e) => console.error("page error:", e.message));
 if (audio) {
   // The microphone button gets a silent stream; the samples come from the WAV.
@@ -383,12 +389,22 @@ for (let n = 0; n < total; n++) {
   }) : null; // prettier-ignore
   if (song && frames.length === 0)
     fs.writeFileSync(`${out}.json`, JSON.stringify({ songStart: pos }));
+  if (framesDir) {
+    fs.mkdirSync(framesDir, { recursive: true });
+    fs.writeFileSync(path.join(framesDir, `frame-${String(frames.length).padStart(4, "0")}.png`), await page.screenshot()); // prettier-ignore
+    frames.push({ t });
+    continue;
+  }
   const png = PNG.sync.read(await page.screenshot());
   frames.push({ png, t });
 }
 if (opt("report", "")) console.log("report:", JSON.stringify(await page.evaluate(`(async () => { ${opt("report", "")} })()`))); // prettier-ignore
 await browser.close();
 
+if (framesDir) {
+  console.log(`${framesDir}: ${frames.length} frames`);
+  process.exit(0);
+}
 const gifenc = await import("gifenc");
 const { GIFEncoder, quantize, applyPalette } = gifenc.default || gifenc;
 const ow = Math.round(W * scale);
