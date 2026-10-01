@@ -97,8 +97,12 @@ October 1, 2026:
 
 - Part 1 (Photo to 3D) is on `claude/lane-fix6-1`, PR #154.
 - The engine piece is on `claude/lane-fix6-engine`, PR #155 ("Engine: …"); merge it first.
-- Part 2 (the Enigma, the periodic table, the acoustic guitar) is on `claude/lane-fix6-2`, stacked
-  on both. `tests/fx6-2.spec.mjs` passes.
+- Part 2 (the Enigma, the periodic table, the acoustic guitar) is on `claude/lane-fix6-2`, PR #159,
+  stacked on both. `tests/fx6-2.spec.mjs` passes. All of the full suite ran here in parts (the
+  session's 2-hour limit cut the first run); every failure was fixed (see #159).
+- Every periodic table build has the same 14 parts in the same order, so the frame at the switch
+  (old build, new motion) moves each piece as itself. #155 keeps a toy's motion only through its own
+  switch (`Player.switchTo`); keeping it through Toy-tab rebuilds broke the book and Screen tests.
 
 ## Notes
 
