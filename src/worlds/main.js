@@ -68,9 +68,12 @@ class Page {
     // ?render=splats|hybrid overrides the world file's mode; ?shadows=0
     // turns the sun's shadows off.
     const mode = RENDER_MODES.includes(params.get("render")) ? params.get("render") : def.render;
-    // ?character=splats|mesh overrides the world file's character.
-    const characterModel = ["splats", "mesh"].includes(params.get("character")) ? params.get("character") : def.character.model; // prettier-ignore
-    const world = new World(this.view, def, this.tier, { reducedMotion, mode, shadows: params.get("shadows") !== "0", characterModel }); // prettier-ignore
+    // ?character=splats|mesh|kenney overrides the world file's character.
+    const characterModel = ["splats", "mesh", "kenney", "splat-person"].includes(params.get("character")) ? params.get("character") : def.character.model; // prettier-ignore
+    // ?frame=0|1 turns hybrid mode's camera frame (bloom, grade, ambient
+    // occlusion) off or on whatever the tier.
+    const frame = params.has("frame") ? params.get("frame") === "1" : null;
+    const world = new World(this.view, def, this.tier, { reducedMotion, mode, shadows: params.get("shadows") !== "0", characterModel, frame }); // prettier-ignore
     this.world = world;
     // A wide view behind the start screen.
     world.overview = true;
@@ -97,8 +100,37 @@ class Page {
     });
     $("enter").disabled = false;
     $("enter").focus();
+    if (params.get("stats") === "1") this.showStats();
     this.exposeForTests();
     document.body.dataset.ready = "true";
+  }
+
+  // ?stats=1: a small readout for testing on a phone (frames per second, the
+  // tier, the mode, the character, splats drawn and draw calls), twice a
+  // second. Nothing is sent anywhere; a screenshot carries the numbers.
+  showStats() {
+    const box = document.createElement("div");
+    box.id = "stats";
+    box.className = "stats";
+    box.setAttribute("aria-live", "off");
+    document.body.append(box);
+    const w = this.world;
+    const tick = () => {
+      const f = this.view.frameMs.slice(-60).sort((a, b) => a - b);
+      const ms = f.length ? f[Math.floor(f.length / 2)] : 0;
+      const s = w.stats();
+      const who = w.characterModel === "mesh" ? `person (${w.meshCharacter?.wdCharacter?.level || "?"})` : w.characterModel; // prettier-ignore
+      box.textContent = [
+        `${ms ? (1000 / ms).toFixed(0) : "–"} fps (${ms.toFixed(1)} ms)`,
+        `${w.tier} tier · ${w.mode}`,
+        `character: ${who}`,
+        `${Math.round(s.total / 1000)}k splats · ${this.view.drawCalls ?? 0} draws`,
+        `${this.view.canvas.width}×${this.view.canvas.height} px`,
+      ].join("\n");
+      box.dataset.fps = ms ? (1000 / ms).toFixed(1) : "0";
+    };
+    tick();
+    this.statsTimer = setInterval(tick, 500);
   }
 
   fail(message) {

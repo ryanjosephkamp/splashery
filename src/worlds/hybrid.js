@@ -161,6 +161,16 @@ var<private> wdFade: f32;
 var<private> wdUV: array<vec2f, 4>;
 var<private> wdDX: array<vec2f, 4>;
 var<private> wdDY: array<vec2f, 4>;
+var<private> wdUV2: array<vec2f, 4>;
+var<private> wdDX2: array<vec2f, 4>;
+var<private> wdDY2: array<vec2f, 4>;
+fn wdGHash(p: vec2f) -> f32 { return fract(sin(dot(p, vec2f(127.1, 311.7))) * 43758.5453); }
+fn wdGNoise(p: vec2f) -> f32 {
+  let i = floor(p);
+  let f = fract(p);
+  let u = f * f * (3.0 - 2.0 * f);
+  return mix(mix(wdGHash(i), wdGHash(i + vec2f(1.0, 0.0)), u.x), mix(wdGHash(i + vec2f(0.0, 1.0)), wdGHash(i + vec2f(1.0, 1.0)), u.x), u.y);
+}
 fn wdPrepare() {
   let w = uniform.uWdGround.x;
   let h = vPositionW.y;
@@ -169,8 +179,11 @@ fn wdPrepare() {
   let big = vVertexColor.a * 2.0 - 1.0;
   let wet = smoothstep(w + 0.35, w - 0.05, h);
   let edge = w + uniform.uWdGround.y + big * 0.8;
-  let grass = smoothstep(edge - 0.25, edge + 0.35, h);
-  let rock = smoothstep(uniform.uWdGround.z * 0.8, uniform.uWdGround.z * 1.15, slope);
+  // Sand gives way to grass in patches, not along a smooth line.
+  let patchy = (wdGNoise(vPositionW.xz * 1.7) * 0.65 + wdGNoise(vPositionW.xz * 5.3) * 0.35 - 0.5) * 0.7;
+  let grass = smoothstep(edge - 0.2, edge + 0.25, h + patchy);
+  // Steep sand by the water stays sand (no gravel on the beach).
+  let rock = smoothstep(uniform.uWdGround.z * 0.8, uniform.uWdGround.z * 1.15, slope) * smoothstep(w + 0.3, edge + 0.4, h);
   wdW = vec4f((1.0 - grass) * (1.0 - wet), grass, 0.0, (1.0 - grass) * wet) * (1.0 - rock);
   wdW.z = rock;
   let d = length(uniform.view_position - vPositionW);
@@ -185,6 +198,12 @@ fn wdPrepare() {
     wdUV[k] = (cell * 1024.0 + 32.0 + fract(q) * 960.0) / 2048.0;
     wdDX[k] = dpx / rep[k] * (960.0 / 2048.0);
     wdDY[k] = dpy / rep[k] * (960.0 / 2048.0);
+    // A second, larger and turned sample breaks the repeat.
+    let r2 = rep[k] * 3.3;
+    let rp = vec2f(p.x * 0.8 - p.y * 0.6, p.x * 0.6 + p.y * 0.8);
+    wdUV2[k] = (cell * 1024.0 + 32.0 + fract(rp / r2 + 0.37) * 960.0) / 2048.0;
+    wdDX2[k] = vec2f(dpx.x * 0.8 - dpx.y * 0.6, dpx.x * 0.6 + dpx.y * 0.8) / r2 * (960.0 / 2048.0);
+    wdDY2[k] = vec2f(dpy.x * 0.8 - dpy.y * 0.6, dpy.x * 0.6 + dpy.y * 0.8) / r2 * (960.0 / 2048.0);
   }
 }
 `
@@ -202,6 +221,16 @@ float wdFade;
 vec2 wdUV[4];
 vec2 wdDX[4];
 vec2 wdDY[4];
+vec2 wdUV2[4];
+vec2 wdDX2[4];
+vec2 wdDY2[4];
+float wdGHash(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
+float wdGNoise(vec2 p) {
+  vec2 i = floor(p);
+  vec2 f = fract(p);
+  vec2 u = f * f * (3.0 - 2.0 * f);
+  return mix(mix(wdGHash(i), wdGHash(i + vec2(1.0, 0.0)), u.x), mix(wdGHash(i + vec2(0.0, 1.0)), wdGHash(i + vec2(1.0, 1.0)), u.x), u.y);
+}
 void wdPrepare() {
   float w = uWdGround.x;
   float h = vPositionW.y;
@@ -210,8 +239,11 @@ void wdPrepare() {
   float big = vVertexColor.a * 2.0 - 1.0;
   float wet = smoothstep(w + 0.35, w - 0.05, h);
   float edge = w + uWdGround.y + big * 0.8;
-  float grass = smoothstep(edge - 0.25, edge + 0.35, h);
-  float rock = smoothstep(uWdGround.z * 0.8, uWdGround.z * 1.15, slope);
+  // Sand gives way to grass in patches, not along a smooth line.
+  float patchy = (wdGNoise(vPositionW.xz * 1.7) * 0.65 + wdGNoise(vPositionW.xz * 5.3) * 0.35 - 0.5) * 0.7;
+  float grass = smoothstep(edge - 0.2, edge + 0.25, h + patchy);
+  // Steep sand by the water stays sand (no gravel on the beach).
+  float rock = smoothstep(uWdGround.z * 0.8, uWdGround.z * 1.15, slope) * smoothstep(w + 0.3, edge + 0.4, h);
   wdW = vec4((1.0 - grass) * (1.0 - wet), grass, 0.0, (1.0 - grass) * wet) * (1.0 - rock);
   wdW.z = rock;
   float d = length(view_position - vPositionW);
@@ -226,6 +258,12 @@ void wdPrepare() {
     wdUV[k] = (cell * 1024.0 + 32.0 + fract(q) * 960.0) / 2048.0;
     wdDX[k] = dpx / rep[k] * (960.0 / 2048.0);
     wdDY[k] = dpy / rep[k] * (960.0 / 2048.0);
+    // A second, larger and turned sample breaks the repeat.
+    float r2 = rep[k] * 3.3;
+    mat2 turn = mat2(0.8, 0.6, -0.6, 0.8);
+    wdUV2[k] = (cell * 1024.0 + 32.0 + fract(turn * p / r2 + 0.37) * 960.0) / 2048.0;
+    wdDX2[k] = turn * dpx / r2 * (960.0 / 2048.0);
+    wdDY2[k] = turn * dpy / r2 * (960.0 / 2048.0);
   }
 }
 `;
@@ -240,7 +278,11 @@ void getAlbedo() {
   for (int k = 0; k < 4; k++) {
     if (wdW[k] > 0.004) {
       vec3 t = {STD_DIFFUSE_TEXTURE_DECODE}(textureGrad({STD_DIFFUSE_TEXTURE_NAME}, wdUV[k], wdDX[k], wdDY[k])).rgb;
-      ratio += wdW[k] * mix(vec3(1.0), clamp(t / max(means[k], vec3(0.01)), 0.25, 2.4), uWdStrength[k]);
+      vec3 t2 = {STD_DIFFUSE_TEXTURE_DECODE}(textureGrad({STD_DIFFUSE_TEXTURE_NAME}, wdUV2[k], wdDX2[k], wdDY2[k])).rgb;
+      // (The grass photo's pale pebbles are held down.)
+      float hi = k == 1 ? 1.3 : 2.4;
+      vec3 q = clamp(mix(t, t2, 0.42) / max(means[k], vec3(0.01)), 0.25, hi);
+      ratio += wdW[k] * mix(vec3(1.0), q, uWdStrength[k]);
     } else ratio += wdW[k];
   }
   dAlbedo = tint * mix(vec3(1.0), ratio, wdFade);
@@ -257,7 +299,11 @@ fn getAlbedo() {
   var strength = array<f32, 4>(uniform.uWdStrength.x, uniform.uWdStrength.y, uniform.uWdStrength.z, uniform.uWdStrength.w);
   for (var k = 0; k < 4; k++) {
     let t = {STD_DIFFUSE_TEXTURE_DECODE}(textureSampleGrad({STD_DIFFUSE_TEXTURE_NAME}, {STD_DIFFUSE_TEXTURE_NAME}Sampler, wdUV[k], wdDX[k], wdDY[k])).rgb;
-    ratio = ratio + wdW[k] * mix(vec3f(1.0), clamp(t / max(means[k], vec3f(0.01)), vec3f(0.25), vec3f(2.4)), strength[k]);
+    let t2 = {STD_DIFFUSE_TEXTURE_DECODE}(textureSampleGrad({STD_DIFFUSE_TEXTURE_NAME}, {STD_DIFFUSE_TEXTURE_NAME}Sampler, wdUV2[k], wdDX2[k], wdDY2[k])).rgb;
+    // (The grass photo's pale pebbles are held down.)
+    let hi = select(2.4, 1.3, k == 1);
+    let q = clamp(mix(t, t2, 0.42) / max(means[k], vec3f(0.01)), vec3f(0.25), vec3f(hi));
+    ratio = ratio + wdW[k] * mix(vec3f(1.0), q, strength[k]);
   }
   dAlbedo = tint * mix(vec3f(1.0), ratio, wdFade);
 }
@@ -354,6 +400,9 @@ fn wdPrepareWater() {
   let n = wdNoise(p * 1.3 + vec2f(t * 0.3, -t * 0.2)) * 0.6 + wdNoise(p * 3.1 - vec2f(t * 0.5, t * 0.4)) * 0.4;
   let band = 0.5 + 0.5 * sin(wdDepth * 14.0 - t * 1.7);
   wdFoamK = smoothstep(0.42, 0.0, wdDepth) * smoothstep(0.25, 0.75, n * 0.7 + band * 0.45);
+  // The foam strip along the shore itself, breathing in and out.
+  let reach = 0.09 + 0.04 * sin(t * 0.8 + p.x * 0.35 + p.y * 0.2);
+  wdFoamK = max(wdFoamK, smoothstep(reach, reach * 0.35, wdDepth) * (0.7 + 0.3 * n));
 }
 `
     : /* glsl */ `
@@ -377,6 +426,9 @@ void wdPrepareWater() {
   float n = wdNoise(p * 1.3 + vec2(t * 0.3, -t * 0.2)) * 0.6 + wdNoise(p * 3.1 - vec2(t * 0.5, t * 0.4)) * 0.4;
   float band = 0.5 + 0.5 * sin(wdDepth * 14.0 - t * 1.7);
   wdFoamK = smoothstep(0.42, 0.0, wdDepth) * smoothstep(0.25, 0.75, n * 0.7 + band * 0.45);
+  // The foam strip along the shore itself, breathing in and out.
+  float reach = 0.09 + 0.04 * sin(t * 0.8 + p.x * 0.35 + p.y * 0.2);
+  wdFoamK = max(wdFoamK, smoothstep(reach, reach * 0.35, wdDepth) * (0.7 + 0.3 * n));
 }
 `;
 
