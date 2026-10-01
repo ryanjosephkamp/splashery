@@ -589,7 +589,7 @@ void main() {
       float r = length(eye.xz + rd.xz * t1 - c.xz);
       // (only near the glass: toward the horizon k goes to 0)
       float k = r < 2.0 * rOut ? abs(rd.y) / (t1 * px) : 1e9;
-      float seen = -(uToyToView * vec4(eye + rd * t1, 1.0)).z > liqZ ? liqT : 1.0;
+      float seen = -(uToyToView * vec4(eye + rd * t1, 1.0)).z > liqZ ? liqT * 0.5 : 1.0;
       line = max(line, seen * (1.0 - smoothstep(0.5, 1.5, abs(r - rOut) * k)));
       line = max(line, seen * 0.7 * (1.0 - smoothstep(0.5, 1.5, abs(r - rIn) * k)));
       if (r > rIn && r < rOut && k < 1e8) line = max(line, seen * 0.6);
@@ -598,7 +598,7 @@ void main() {
     if (t0 > 0.0) {
       float r = length(eye.xz + rd.xz * t0 - c.xz);
       float k = r < 2.0 * rOut ? abs(rd.y) / (t0 * px) : 1e9;
-      float seen = -(uToyToView * vec4(eye + rd * t0, 1.0)).z > liqZ ? liqT : 1.0;
+      float seen = -(uToyToView * vec4(eye + rd * t0, 1.0)).z > liqZ ? liqT * 0.5 : 1.0;
       line = max(line, seen * 0.6 * (1.0 - smoothstep(0.5, 1.5, abs(r - rOut) * k)));
     }
     col = mix(col, vec3(0.97), line * 0.85);
@@ -691,6 +691,8 @@ uniform uGlassB: vec4f;
 uniform uMisc: vec4f;
 uniform uFoam: vec4f;
 uniform uDrop: vec2f;
+var uProps: texture_2d<uff>;
+uniform uPropInfo: vec4f;
 var uGas: texture_2d<uff>;
 uniform uGasA: vec4f;
 uniform uGasB: vec4f;
@@ -803,10 +805,128 @@ fn hitCyl(o: vec3f, d: vec3f, c: vec3f, r: f32) -> vec2f {
 fn fresnel(cosT: f32, f0: f32) -> f32 {
   return f0 + (1.0 - f0) * pow(1.0 - clamp(cosT, 0.0, 1.0), 5.0);
 }
+// The props around the liquid (a board, a stand, a nozzle and its handle),
+// traced like the glass so they are as crisp (index.js; up to 8 shapes, 5
+// texels each: type, radii and angle; a or center; b or half size; color and
+// material; pivot).
+struct PropHit { t: f32, n: vec3f, i: i32 }
+fn propTexel(i: i32, k: i32) -> vec4f { return textureLoad(uProps, vec2i(i * 5 + k, 0), 0); }
+fn iCyl(ro: vec3f, rd: vec3f, pa: vec3f, pb: vec3f, ra: f32) -> vec4f {
+  let ba = pb - pa;
+  let oc = ro - pa;
+  let baba = dot(ba, ba);
+  let bard = dot(ba, rd);
+  let baoc = dot(ba, oc);
+  let k2 = baba - bard * bard;
+  let k1 = baba * dot(oc, rd) - baoc * bard;
+  let k0 = baba * dot(oc, oc) - baoc * baoc - ra * ra * baba;
+  var h = k1 * k1 - k2 * k0;
+  if (h < 0.0) { return vec4f(-1.0); }
+  h = sqrt(h);
+  var t = (-k1 - h) / k2;
+  let y = baoc + t * bard;
+  if (y > 0.0 && y < baba) { return vec4f(t, (oc + t * rd - ba * y / baba) / ra); }
+  t = (select(baba, 0.0, y < 0.0) - baoc) / bard;
+  if (abs(k1 + k2 * t) < h) { return vec4f(t, ba * sign(y) / sqrt(baba)); }
+  return vec4f(-1.0);
+}
+fn iCone(ro: vec3f, rd: vec3f, pa: vec3f, pb: vec3f, ra: f32, rb: f32) -> vec4f {
+  let ba = pb - pa;
+  let oa = ro - pa;
+  let ob = ro - pb;
+  let m0 = dot(ba, ba);
+  let m1 = dot(oa, ba);
+  let m2 = dot(rd, ba);
+  let m3 = dot(rd, oa);
+  let m5 = dot(oa, oa);
+  let m9 = dot(ob, ba);
+  if (m1 < 0.0) {
+    let q = oa * m2 - rd * m1;
+    if (dot(q, q) < ra * ra * m2 * m2) { return vec4f(-m1 / m2, -ba * inverseSqrt(m0)); }
+  } else if (m9 > 0.0) {
+    let t = -m9 / m2;
+    let q = ob + rd * t;
+    if (dot(q, q) < rb * rb) { return vec4f(t, ba * inverseSqrt(m0)); }
+  }
+  let rr = ra - rb;
+  let hy = m0 + rr * rr;
+  let k2 = m0 * m0 - m2 * m2 * hy;
+  let k1 = m0 * m0 * m3 - m1 * m2 * hy + m0 * ra * (rr * m2);
+  let k0 = m0 * m0 * m5 - m1 * m1 * hy + m0 * ra * (rr * m1 * 2.0 - m0 * ra);
+  let h = k1 * k1 - k2 * k0;
+  if (h < 0.0) { return vec4f(-1.0); }
+  let t = (-k1 - sqrt(h)) / k2;
+  let y = m1 + t * m2;
+  if (y < 0.0 || y > m0) { return vec4f(-1.0); }
+  return vec4f(t, normalize(m0 * (m0 * (oa + t * rd) + rr * ba * ra) - ba * hy * y));
+}
+fn rotZ(v: vec3f, a: f32) -> vec3f {
+  let c = cos(a);
+  let s = sin(a);
+  return vec3f(c * v.x - s * v.y, s * v.x + c * v.y, v.z);
+}
+fn iBox(ro0: vec3f, rd0: vec3f, c: vec3f, hs: vec3f, ang: f32, piv: vec3f) -> vec4f {
+  // into the box's frame: turned back about z around its pivot
+  let ro = rotZ(ro0 - piv, -ang) + piv - c;
+  let rd = rotZ(rd0, -ang);
+  let m = 1.0 / rd;
+  let n = m * ro;
+  let k = abs(m) * hs;
+  let t1 = -n - k;
+  let t2 = -n + k;
+  let tN = max(max(t1.x, t1.y), t1.z);
+  let tF = min(min(t2.x, t2.y), t2.z);
+  if (tN > tF || tF < 0.0) { return vec4f(-1.0); }
+  let nl = -sign(rd) * step(t1.yzx, t1.xyz) * step(t1.zxy, t1.xyz);
+  return vec4f(tN, rotZ(nl, ang));
+}
+fn traceProps(ro: vec3f, rd: vec3f) -> PropHit {
+  var best = PropHit(1e9, vec3f(0.0, 1.0, 0.0), -1);
+  let n = i32(uniform.uPropInfo.x);
+  for (var i = 0; i < 8; i++) {
+    if (i >= n) { break; }
+    let t0 = propTexel(i, 0);
+    let t1 = propTexel(i, 1);
+    let t2 = propTexel(i, 2);
+    var r = vec4f(-1.0);
+    if (t0.x < 1.5) { r = iCyl(ro, rd, t1.xyz, t2.xyz, t0.y); }
+    else if (t0.x < 2.5) { r = iBox(ro, rd, t1.xyz, t2.xyz, t0.w, propTexel(i, 4).xyz); }
+    else { r = iCone(ro, rd, t1.xyz, t2.xyz, t0.y, t0.z); }
+    if (r.x > 0.0 && r.x < best.t) { best = PropHit(r.x, r.yzw, i); }
+  }
+  return best;
+}
+fn shadeProp(h: PropHit, ro: vec3f, rd: vec3f) -> vec3f {
+  let c = propTexel(h.i, 3);
+  let n = normalize(h.n);
+  let p = ro + rd * h.t;
+  if (c.w > 1.5) {
+    // wood: a calm, low-frequency grain (as the recipe's splats had)
+    let g = 0.5 + 0.5 * sin(p.x * 7.0 + 1.3 * sin(p.z * 3.0 + p.x * 1.2));
+    let w = mix(vec3f(0.49, 0.32, 0.19), vec3f(0.60, 0.42, 0.24), g * 0.8);
+    return w * (0.82 + 0.18 * max(n.y, 0.0));
+  }
+  var col = c.rgb * (0.85 + 0.3 * max(0.0, n.y) + 0.1 * n.x);
+  if (c.w > 0.5) {
+    // steel: a soft highlight from the room's light
+    let H = normalize(normalize(uniform.uLight.xyz) - rd);
+    col += vec3f(pow(max(dot(n, H), 0.0), 40.0) * 0.35);
+  }
+  return col;
+}
+fn sceneAt(uv: vec2f) -> vec3f {
+  let c = textureSampleLevel(uScene, uSceneSampler, flipUv(uv), 0.0).rgb;
+  if (uniform.uPropInfo.x < 0.5) { return c; }
+  let eye = (uniform.uViewToToy * vec4f(0.0, 0.0, 0.0, 1.0)).xyz;
+  let rd = normalize((uniform.uViewToToy * vec4f(normalize(viewPos(uv, 1.0)), 0.0)).xyz);
+  let h = traceProps(eye, rd);
+  if (h.i < 0) { return c; }
+  return shadeProp(h, eye, rd);
+}
 @fragment fn fragmentMain(input: FragmentInput) -> FragmentOutput {
   var output: FragmentOutput;
   let uv0 = input.uv0;
-  let scene = textureSampleLevel(uScene, uSceneSampler, flipUv(uv0), 0.0).rgb;
+  let scene = sceneAt(uv0);
   var col = scene;
   let pv = viewPos(uv0, 1.0);
   let eye = (uniform.uViewToToy * vec4f(0.0, 0.0, 0.0, 1.0)).xyz;
@@ -866,7 +986,7 @@ fn fresnel(cosT: f32, f0: f32) -> f32 {
     let V = -rd;
     let thick = thickAll(uv0).r;
     let off = nV.xy * uniform.uMisc.x * clamp(thick * 4.0, 0.0, 1.0);
-    let behind = textureSampleLevel(uScene, uSceneSampler, flipUv(clamp(uv0 - off, vec2f(0.001), vec2f(0.999))), 0.0).rgb;
+    let behind = sceneAt(clamp(uv0 - off, vec2f(0.001), vec2f(0.999)));
     let T = exp(-uniform.uAbsorb.rgb * thick);
     let lit = uniform.uColor.rgb * (0.35 + 0.65 * max(dot(n, L), 0.0));
     var rr = refract(rd, n, 0.75);
@@ -878,6 +998,17 @@ fn fresnel(cosT: f32, f0: f32) -> f32 {
     let H = normalize(L + V);
     let spec = pow(max(dot(n, H), 0.0), 180.0) * 1.6;
     var liq = mix(body, refl, F) + spec + uniform.uColor.rgb * uniform.uAbsorb.a;
+    // The top surface reads even when the liquid is dark: the room's light
+    // on it, and a thin bright meniscus where it meets the glass.
+    if (uniform.uGlassB.w > 0.5 && n.y > 0.6) {
+      let Pt2 = (uniform.uViewToToy * vec4f(P, 1.0)).xyz;
+      let rl2 = length(Pt2.xz - uniform.uGlassA.xz);
+      let w = 1.8 * uniform.uMisc.w * length(Pt2 - eye);
+      let r0 = uniform.uGlassA.w - 0.5 * uniform.uMisc.z;
+      let ring = smoothstep(r0 - 2.0 * w, r0 - w, rl2) * (1.0 - smoothstep(r0 + w, r0 + 3.0 * w, rl2));
+      liq = mix(liq, refl, 0.1 * smoothstep(0.6, 0.95, n.y));
+      liq = mix(liq, vec3f(0.93, 0.94, 0.95), ring * 0.65);
+    }
     let thin = uniform.uDrop.x * (1.0 - smoothstep(uniform.uDrop.y, 4.0 * uniform.uDrop.y, thick));
     liq = mix(liq, sky(normalize(vec3f(n.x, 1.0, n.z))) * 0.75 + spec, thin);
     // Bubbles inside: bright specks, tinted by the liquid around them.
@@ -918,7 +1049,7 @@ fn fresnel(cosT: f32, f0: f32) -> f32 {
     if (t1 > 0.0) {
       let r = length(eye.xz + rd.xz * t1 - c.xz);
       let k = select(1e9, abs(rd.y) / (t1 * px), r < 2.0 * rOut);
-      let seen = select(1.0, liqT, -(uniform.uToyToView * vec4f(eye + rd * t1, 1.0)).z > liqZ);
+      let seen = select(1.0, liqT * 0.5, -(uniform.uToyToView * vec4f(eye + rd * t1, 1.0)).z > liqZ);
       line = max(line, seen * (1.0 - smoothstep(0.5, 1.5, abs(r - rOut) * k)));
       line = max(line, seen * 0.7 * (1.0 - smoothstep(0.5, 1.5, abs(r - rIn) * k)));
       if (r > rIn && r < rOut && k < 1e8) { line = max(line, seen * 0.6); }
@@ -927,10 +1058,18 @@ fn fresnel(cosT: f32, f0: f32) -> f32 {
     if (t0 > 0.0) {
       let r = length(eye.xz + rd.xz * t0 - c.xz);
       let k = select(1e9, abs(rd.y) / (t0 * px), r < 2.0 * rOut);
-      let seen = select(1.0, liqT, -(uniform.uToyToView * vec4f(eye + rd * t0, 1.0)).z > liqZ);
+      let seen = select(1.0, liqT * 0.5, -(uniform.uToyToView * vec4f(eye + rd * t0, 1.0)).z > liqZ);
       line = max(line, seen * 0.6 * (1.0 - smoothstep(0.5, 1.5, abs(r - rOut) * k)));
     }
     col = mix(col, vec3f(0.97), line * 0.85);
+  }
+  // A prop in front of the liquid or the glass covers them.
+  if (uniform.uPropInfo.x > 0.5) {
+    let ph = traceProps(eye, rd);
+    if (ph.i >= 0) {
+      let pz = -(uniform.uToyToView * vec4f(eye + rd * ph.t, 1.0)).z;
+      if (pz < liqZ && ph.t < tFront) { col = shadeProp(ph, eye, rd); }
+    }
   }
   if (uniform.uGasC.w > 0.5) {
     let lo = uniform.uGasA.xyz;
@@ -1216,6 +1355,10 @@ export class FluidSurface {
     scope.resolve("uMisc").setValue([p.refract, liquid ? 1 : 0, 2.5 * (src.cell || 0), 2 / (proj.data[5] * d.height)]); // prettier-ignore
     scope.resolve("uFoam").setValue([...p.foam, liquid && src.diffuse?.n ? 1 : 0]);
     scope.resolve("uDrop").setValue([src.drops ?? 0, (src.radius ?? 0) * toyScale * 2]);
+    // The props (index.js), traced on WebGPU only.
+    const props = d.isWebGPU ? p.props : null;
+    scope.resolve("uProps").setValue(this.propTexture(props));
+    scope.resolve("uPropInfo").setValue([props?.length ?? 0, 0, 0, 0]);
     // Up to two gas grids (gasscene.js: a flame's fine grid and the smoke's).
     const gases = src.gas || [];
     for (const [k, name] of [
@@ -1235,6 +1378,17 @@ export class FluidSurface {
     this.stats.ms = performance.now() - t0;
   }
 
+  // Packs the props (index.js): 5 texels a shape.
+  propTexture(shapes) {
+    this.propTex ||= this.tex(40, 1, pc.PIXELFORMAT_RGBA32F, "flProps");
+    if (!shapes?.length) return this.propTex;
+    const data = this.propTex.lock();
+    data.fill(0);
+    shapes.slice(0, 8).forEach((s, i) => data.set(s.texels, i * 20));
+    this.propTex.unlock();
+    return this.propTex;
+  }
+
   blankGas() {
     this.blank ||= this.tex(1, 1, pc.PIXELFORMAT_RGBA16F, "flGasBlank");
     return this.blank;
@@ -1242,6 +1396,7 @@ export class FluidSurface {
 
   destroy() {
     this.blank?.destroy();
+    this.propTex?.destroy();
     this.destroyTargets();
     this.depthPass.destroy();
     this.thickPass.destroy();

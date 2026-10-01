@@ -59,6 +59,8 @@ export class FluidWorld {
       const s = mixSeed(seed, name);
       let sys;
       const full = { ...spec, name };
+      // (props: shapes the GPU surface pass traces, or left to the kit's splats)
+      if (spec.kind === "props") return;
       if ((spec.kind || "liquid") === "liquid" && gpu) {
         sys = new gpu.GpuLiquid(full, { device: gpu.device, profile: this.profile, gravity, seed: s, unit }); // prettier-ignore
       } else if (

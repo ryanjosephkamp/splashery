@@ -50,41 +50,64 @@ function glass(k, g, budget = 9000) {
   k.reach([g.at[0] - g.radius - g.wall, g.at[1], g.at[2] - g.radius - g.wall]);
 }
 
+// Props the GPU liquid's surface pass traces (src/fluids/gpu/index.js): it
+// sets `drawn` on this spec, and drive() hides their splats then.
+function props(k, shapes) {
+  const i = k.fluid({ name: "props", kind: "props", shapes });
+  return k.fluids[i];
+}
+
 // ---- Scenes -----------------------------------------------------------------------------
 
 function glassScene(k, o) {
   const look = LIQUID_LOOKS[o.liquid] || LIQUID_LOOKS.water;
+  // The props are splats, and on WebGPU the liquid's surface pass traces the
+  // same shapes crisply instead (props(): the splats hide then).
+  const stand = k.part("stand");
+  const N = NOZZLE;
   // A round wooden board under the glass and the stand.
-  k.add(k.cylinder(1.0, 0.06), { pos: [-0.25, -0.03, 0], color: wood, even: true });
+  k.add(k.cylinder(1.0, 0.06), { pos: [-0.25, -0.03, 0], color: wood, even: true, part: stand });
   glass(k, GLASS);
   // The lab stand: a foot, a rod, an arm and a nozzle over the glass.
   const steel = (c) => shade("#9aa3ab", 0.85 + 0.3 * Math.max(0, c.n[1]) + 0.1 * c.n[0]);
-  k.add(k.cylinder(0.035, 1.95), { pos: [-0.95, 0.975, -0.2], color: steel, even: true });
-  k.add(k.box(0.3, 0.05, 0.3), { pos: [-0.95, 0.025, -0.2], color: "#3c4148", even: true });
+  k.add(k.cylinder(0.035, 1.95), { pos: [-0.95, 0.975, -0.2], color: steel, even: true, part: stand }); // prettier-ignore
+  k.add(k.box(0.3, 0.05, 0.3), { pos: [-0.95, 0.025, -0.2], color: "#3c4148", even: true, part: stand }); // prettier-ignore
   k.add(k.cylinder(0.025, 0.92), {
-    pos: [(-0.95 + NOZZLE[0]) / 2, 1.9, -0.1],
-    rot: [0, (Math.atan2(0.2, NOZZLE[0] + 0.95) * 180) / Math.PI, 90],
+    pos: [(-0.95 + N[0]) / 2, 1.9, -0.1],
+    rot: [0, (Math.atan2(0.2, N[0] + 0.95) * 180) / Math.PI, 90],
     color: steel,
     even: true,
+    part: stand,
   });
   // The nozzle: a short funnel and its tap handle (a part that turns open).
   k.add(k.cone(0.07, 0.12, 0.2, { caps: false }), {
-    pos: [NOZZLE[0], NOZZLE[1] + 0.12, NOZZLE[2]],
+    pos: [N[0], N[1] + 0.12, N[2]],
     color: steel,
     even: true,
+    part: stand,
   });
   k.add(k.cylinder(0.05, 0.08), {
-    pos: [NOZZLE[0], NOZZLE[1] + 0.25, NOZZLE[2]],
+    pos: [N[0], N[1] + 0.25, N[2]],
     color: "#6d757d",
     even: true,
+    part: stand,
   });
-  const valve = k.part("valve", { pivot: [NOZZLE[0], NOZZLE[1] + 0.25, NOZZLE[2]], axis: [0, 0, 1] }); // prettier-ignore
+  const valve = k.part("valve", { pivot: [N[0], N[1] + 0.25, N[2]], axis: [0, 0, 1] }); // prettier-ignore
   k.add(k.box(0.26, 0.035, 0.035), {
-    pos: [NOZZLE[0] + 0.13, NOZZLE[1] + 0.25, NOZZLE[2] + 0.06],
+    pos: [N[0] + 0.13, N[1] + 0.25, N[2] + 0.06],
     color: "#c9302c",
     part: valve,
     even: true,
   });
+  const traced = props(k, [
+    { type: "cyl", a: [-0.25, -0.06, 0], b: [-0.25, 0, 0], r: 1.0, look: "wood" },
+    { type: "cyl", a: [-0.95, 0, -0.2], b: [-0.95, 1.95, -0.2], r: 0.035, color: "#9aa3ab", look: "steel" }, // prettier-ignore
+    { type: "box", at: [-0.95, 0.025, -0.2], half: [0.15, 0.025, 0.15], color: "#3c4148" },
+    { type: "cyl", a: [-0.95, 1.9, -0.2], b: [N[0], 1.9, N[2]], r: 0.025, color: "#9aa3ab", look: "steel" }, // prettier-ignore
+    { type: "cone", a: [N[0], N[1] + 0.02, N[2]], b: [N[0], N[1] + 0.22, N[2]], ra: 0.07, rb: 0.12, color: "#9aa3ab", look: "steel" }, // prettier-ignore
+    { type: "cyl", a: [N[0], N[1] + 0.21, N[2]], b: [N[0], N[1] + 0.29, N[2]], r: 0.05, color: "#6d757d", look: "steel" }, // prettier-ignore
+    { type: "box", at: [N[0] + 0.13, N[1] + 0.25, N[2] + 0.06], half: [0.13, 0.0175, 0.0175], pivot: [N[0], N[1] + 0.25, N[2]], part: "valve", color: "#c9302c", look: "steel" }, // prettier-ignore
+  ]);
   k.fluid({
     name: "liquid",
     kind: "liquid",
@@ -98,7 +121,7 @@ function glassScene(k, o) {
   });
   k.reach([0.9, 2.1, 0.5]);
   k.reach([-1.25, -0.05, -0.5]);
-  k.data = { scene: "glass", pour: look.pour };
+  k.data = { scene: "glass", pour: look.pour, props: traced };
 }
 
 // A wide, shallow glass basin (seen through, so the pool shows from the side).
@@ -106,10 +129,12 @@ const BASIN = { type: "glass", at: [0, 0, 0], radius: 0.78, height: 0.4, wall: 0
 
 function splashScene(k, o) {
   const look = LIQUID_LOOKS[o.liquid] || LIQUID_LOOKS.water;
-  k.add(k.cylinder(1.05, 0.06), { pos: [0, -0.03, 0], color: wood, even: true });
+  const stand = k.part("stand");
+  k.add(k.cylinder(1.05, 0.06), { pos: [0, -0.03, 0], color: wood, even: true, part: stand });
   // (a second layer under the basin: seen through clear water, the board's
   // splats alone leave gaps)
-  k.add(k.cylinder(0.82, 0.02), { pos: [0, -0.012, 0], color: wood, even: true });
+  k.add(k.cylinder(0.82, 0.02), { pos: [0, -0.012, 0], color: wood, even: true, part: stand });
+  const traced = props(k, [{ type: "cyl", a: [0, -0.06, 0], b: [0, 0, 0], r: 1.05, look: "wood" }]);
   glass(k, BASIN, 12000);
   k.fluid({
     name: "liquid",
@@ -142,7 +167,7 @@ function splashScene(k, o) {
     },
   });
   k.reach([0, 1.75, 0]);
-  k.data = { scene: "splash" };
+  k.data = { scene: "splash", props: traced };
 }
 
 function candleScene(k) {
@@ -303,6 +328,9 @@ export const RECIPES = {
       if (n < LAB.tapN) LAB.tapN = 0;
       if (fresh) LAB.tapN = n;
       out.fluid = {};
+      // (traced on WebGPU: the splats step aside)
+      const splats = d.props?.drawn ? 0 : 1;
+      if (d.props) out.parts.stand = { visible: splats };
       if (d.scene === "glass") {
         // Every third tap empties the glass before it pours.
         const empty = n > 0 && n % 3 === 0;
@@ -311,7 +339,8 @@ export const RECIPES = {
         out.fluid.liquid = { on, drain: empty && e < 1.3 ? 0.55 : 0 };
         // The red handle turns a quarter turn while it pours.
         const open = Math.min(1, Math.max(0, Math.min((e - start) / 0.25, (start + d.pour - e) / 0.25))); // prettier-ignore
-        out.parts.valve = { angle: -1.35 * open };
+        out.parts.valve = { angle: -1.35 * open, visible: splats };
+        out.fluid.props = { valve: -1.35 * open };
         // (the pour's sound comes from the simulation: src/fluids/runtime.js)
       } else if (d.scene === "splash") {
         out.fluid.liquid = {

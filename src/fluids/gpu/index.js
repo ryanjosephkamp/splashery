@@ -30,6 +30,20 @@ const LOOKS = {
   lava: { color: [1.0, 0.36, 0.08], scatter: 1, absorb: [1, 1, 1], glow: 0.9 },
 };
 
+// A prop for the surface pass: 5 texels (type, radii, angle; a or center;
+// b or half size; color and look; pivot), recipe units.
+function packProp(s, angles) {
+  const t = new Float32Array(20);
+  const box = s.type === "box";
+  const n = parseInt((s.color || "#808080").slice(1), 16);
+  t.set([box ? 2 : s.type === "cone" ? 3 : 1, s.r ?? s.ra ?? 0, s.rb ?? 0, (s.part && angles[s.part]) || 0], 0); // prettier-ignore
+  t.set(box ? s.at : s.a, 4);
+  t.set(box ? s.half : s.b, 8);
+  t.set([((n >> 16) & 255) / 255, ((n >> 8) & 255) / 255, (n & 255) / 255, s.look === "wood" ? 2 : s.look === "steel" ? 1 : 0], 12); // prettier-ignore
+  t.set(s.pivot || [0, 0, 0], 16);
+  return { texels: t };
+}
+
 export class GpuFluids {
   // world: the FluidWorld (null when it runs in the worker); specs: the
   // recipe's fluid specs; glass: draw the glass (the GPU liquid path only).
@@ -38,6 +52,11 @@ export class GpuFluids {
     this.world = world;
     this.specs = specs;
     this.drawGlass = glass;
+    // The props (the recipe's kind "props"), traced crisply on WebGPU; the
+    // recipe hides their splats while `drawn` is set.
+    this.props = glass && stage.device.isWebGPU ? specs.find((s) => s.kind === "props") || null : null; // prettier-ignore
+    if (this.props) this.props.drawn = true;
+    this.angles = {};
     this.gas = specs.some((s) => s.kind === "gas" || s.kind === "flame") ? new GasScene(stage.device, specs, { profile }) : null; // prettier-ignore
     this.transform = transform || { center: [0, 0, 0], scale: 1 };
     const scale = profile === "low" || profile === "mid" ? 0.5 : profile === "max" ? 0.75 : 0.6;
@@ -54,6 +73,8 @@ export class GpuFluids {
 
   command(cmds) {
     this.gas?.command(cmds);
+    const a = this.props && cmds?.[this.props.name];
+    if (a) Object.assign(this.angles, a);
   }
 
   step(dt) {
@@ -88,8 +109,9 @@ export class GpuFluids {
       p.absorb = [...look.absorb, look.glow];
       p.foam = look.foam || [0.95, 0.96, 0.97];
     }
+    p.props = this.props ? this.props.shapes.map((s) => packProp(s, this.angles)) : null;
     const gas = this.gas?.view() || [];
-    if (!liq && !gas.length && !glassSpec) return;
+    if (!liq && !gas.length && !glassSpec && !p.props) return;
     surf.render(
       liq
         ? { texture: liq.texture, texWidth: liq.sim.texWidth, count: liq.n, simToToy: liq.simToRecipe(), radius: liq.d * 0.8 * (liq.spec.sprite ?? 1), velRow: liq.sim.texHeight, stretch: liq.spec.stretch ?? 1, drops: liq.spec.drops, cell: liq.h, diffuse: liq.diffuse, gas } // prettier-ignore
@@ -99,6 +121,7 @@ export class GpuFluids {
   }
 
   destroy() {
+    if (this.props) this.props.drawn = false;
     this.stage.app.off("postrender", this.onPost);
     this.surface.destroy();
     this.gas?.destroy();
