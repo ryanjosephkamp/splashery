@@ -1066,6 +1066,9 @@ Proposals below are suggestions; the owner may change them.
     strongest visible line (NIST).
   - Improved: Chemistry: all 118 elements in the standard layout, colored by family; the atom rises
     (5 s), a tap on it sends an electron up a shell and back (3.2 s), a tap on the table lowers it.
+    Fix6: a tile tap switches with no loading overlay; a tap on its own tile lowers the atom; a tap
+    on the empty board starts a tour of all 118 elements (about 2 s each, the tile lit; by atomic
+    number or shuffled), and any tap stops it.
   - Sound: A soft whoosh up and a soft thud as the atom rises; a whoosh down and a soft thud as it
     lowers (no clicks).
 
@@ -1940,6 +1943,8 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Keep the strum; strings vibrate visibly.
   - Improved: C2: the strum rocks the guitar about 13 degrees with a small hop, the strings bend and
     vibrate one after another, and rings of light pulse out of the soundhole. Music is Phase D.
+    Fix6: smooth lacquered wood (the top, sunburst, back, ribs and neck placed evenly with no color
+    noise or fine grain), a clean three-ring rosette, and thin strings drawn as clean lines.
   - Sound: A real strummed chord progression (synth plucks).
 - **Snare drum** (`drum`). Now: tap: Play a roll. Plan: keep.
   - Owner: Could be more dramatic. Fast taps could play longer and faster rolls.
@@ -2373,7 +2378,8 @@ Proposals below are suggestions; the owner may change them.
   - Improved: Machines A: kit-built (no CC0 or CC BY scan found), rotors I, II, III with reflector B
     and a plugboard (the historical wirings and double step), 26 keys and a moving lamp glow, the
     operator's pad on the lid (coded letters in red, decoded in blue); your own message in the Toy
-    tab.
+    tab. Fix6: tap a key (or type on a keyboard) to code your own letters one by one; a tap off the
+    keys decodes them; a tap on the pad gives a clean sheet (the pad is a live picture).
   - Sound: Heavy key clacks, the ratchet of the rotors stepping, and a faint click as each lamp
     lights.
 - **Bombe** (`bombe`). Now: tap: Start the search. Plan: keep.
