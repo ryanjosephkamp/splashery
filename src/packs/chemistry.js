@@ -423,7 +423,9 @@ export const RECIPES = {
       if (m.floor) u = m.dir === -1 ? Math.min(1, raw * (m.scale || 1)) : Math.max(raw, m.floor);
       // The tour: the shown element's atom rises faster, holds, and then
       // the table moves on to the next element (out.next, a rebuild).
-      const touring = TOUR.on && TOUR.symbol === SHOWN.symbol;
+      // (By this build's own element: while the next one builds, SHOWN
+      // already names it, and this toy is still the one on screen.)
+      const touring = TOUR.on && TOUR.symbol === D.element;
       if (TOUR.on && !touring && !m.asked) {
         m.asked = true;
         out.next = { options: { element: TOUR.symbol }, key: "up" };
@@ -811,7 +813,7 @@ export const RECIPES = {
       k.add(
         k.param(
           (u, v) => {
-            const h = TILE / 2 + 0.03 + v * 0.04;
+            const h = TILE / 2 + 0.015 + v * 0.085;
             const q = u * 4;
             const f = q - Math.floor(q);
             const side = Math.min(3, Math.floor(q));
@@ -824,11 +826,12 @@ export const RECIPES = {
           even: true,
           flat: 0.2,
           opacity: 1,
-          jitter: 0.004,
-          weight: 0.6,
+          jitter: 0,
+          weight: 4,
+          size: 1.3,
           part: halo,
           pattern: false,
-          color: (c) => keep(mix("#fff6c8", "#ffc94a", c.v)),
+          color: (c) => keep(mix("#ffffff", "#ffd23a", Math.min(1, c.v * 1.4))),
         },
       );
     },
