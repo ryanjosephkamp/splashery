@@ -138,9 +138,9 @@ Model: Opus 5.5 (claude-opus-5-5), default effort.
 ## Notes
 
 - **Main merge of October 1, 2026 (Books r4, engine fix 4).** `sci`, `kit`, `help`, `smoke` and
-  `fx4-engine` specs: 97 passed, 1 failed. The failure is the smoke "rigs pick splats by colour"
-  test (line 749, the back-to-rest pixel check). It fails the same way on plain `origin/main`
-  (8a2e05ed) in a separate worktree, so it is not this branch's.
+  `fx4-engine` specs: 97 passed, 1 failed. The failure is the smoke rigs test (line 749, the
+  back-to-rest pixel check). It fails the same way on plain `origin/main` (8a2e05ed) in a separate
+  worktree, so it is not this branch's.
 - **Owner's marks (23:07 UTC, September 30, 2026).** Every current card is marked good, including
   `sci-galaxy-r3` on page 2. Nothing is left to fix.
 - **Latest main merge (September 30, 2026, evening).** Main's Worlds hybrid mode merged in; the
