@@ -562,8 +562,34 @@ void main() {
     col = mix(col, refl, F);
     vec3 H = normalize(L - rd);
     col += pow(max(dot(nFront, H), 0.0), 120.0) * 0.8;
-    // edge lines where the ray grazes the wall (silhouette)
-    col = mix(col, vec3(0.92), smoothstep(0.25, 0.05, cosT) * 0.5);
+    // edge lines where the ray grazes the wall (silhouette): crisp
+    col = mix(col, vec3(0.95), smoothstep(0.12, 0.02, cosT) * 0.85);
+  }
+  // The rim and the foot as clean lines a pixel or so wide (the owner: "it's
+  // kind of hard to discern the rim of the glass"): the rim's outer and inner
+  // edges and its top face, and the foot's edge on the table.
+  if (uGlassB.w > 0.5 && abs(rd.y) > 1e-4) {
+    float px = uMisc.w;
+    vec3 c = uGlassA.xyz;
+    float rIn = uGlassA.w;
+    float rOut = rIn + uGlassB.y;
+    float line = 0.0;
+    float t1 = (c.y + uGlassB.x - eye.y) / rd.y;
+    if (t1 > 0.0) {
+      float r = length(eye.xz + rd.xz * t1 - c.xz);
+      // (only near the glass: toward the horizon k goes to 0)
+      float k = r < 2.0 * rOut ? abs(rd.y) / (t1 * px) : 1e9;
+      line = max(line, 1.0 - smoothstep(0.5, 1.5, abs(r - rOut) * k));
+      line = max(line, 0.7 * (1.0 - smoothstep(0.5, 1.5, abs(r - rIn) * k)));
+      if (r > rIn && r < rOut && k < 1e8) line = max(line, 0.6);
+    }
+    float t0 = (c.y - eye.y) / rd.y;
+    if (t0 > 0.0) {
+      float r = length(eye.xz + rd.xz * t0 - c.xz);
+      float k = r < 2.0 * rOut ? abs(rd.y) / (t0 * px) : 1e9;
+      line = max(line, 0.6 * (1.0 - smoothstep(0.5, 1.5, abs(r - rOut) * k)));
+    }
+    col = mix(col, vec3(0.97), line * 0.85);
   }
   // Gas: march the grid's box front to back.
   if (uGasC.w > 0.5) {
@@ -861,7 +887,29 @@ fn fresnel(cosT: f32, f0: f32) -> f32 {
     col = mix(col, refl, F);
     let H = normalize(L - rd);
     col += vec3f(pow(max(dot(nFront, H), 0.0), 120.0) * 0.8);
-    col = mix(col, vec3f(0.92), smoothstep(0.25, 0.05, cosT) * 0.5);
+    col = mix(col, vec3f(0.95), smoothstep(0.12, 0.02, cosT) * 0.85);
+  }
+  if (uniform.uGlassB.w > 0.5 && abs(rd.y) > 1e-4) {
+    let px = uniform.uMisc.w;
+    let c = uniform.uGlassA.xyz;
+    let rIn = uniform.uGlassA.w;
+    let rOut = rIn + uniform.uGlassB.y;
+    var line = 0.0;
+    let t1 = (c.y + uniform.uGlassB.x - eye.y) / rd.y;
+    if (t1 > 0.0) {
+      let r = length(eye.xz + rd.xz * t1 - c.xz);
+      let k = select(1e9, abs(rd.y) / (t1 * px), r < 2.0 * rOut);
+      line = max(line, 1.0 - smoothstep(0.5, 1.5, abs(r - rOut) * k));
+      line = max(line, 0.7 * (1.0 - smoothstep(0.5, 1.5, abs(r - rIn) * k)));
+      if (r > rIn && r < rOut) { line = max(line, 0.6); }
+    }
+    let t0 = (c.y - eye.y) / rd.y;
+    if (t0 > 0.0) {
+      let r = length(eye.xz + rd.xz * t0 - c.xz);
+      let k = select(1e9, abs(rd.y) / (t0 * px), r < 2.0 * rOut);
+      line = max(line, 0.6 * (1.0 - smoothstep(0.5, 1.5, abs(r - rOut) * k)));
+    }
+    col = mix(col, vec3f(0.97), line * 0.85);
   }
   if (uniform.uGasC.w > 0.5) {
     let lo = uniform.uGasA.xyz;
@@ -1141,7 +1189,8 @@ export class FluidSurface {
     scope.resolve("uLight").setValue(p.light);
     scope.resolve("uGlassA").setValue(p.glassA);
     scope.resolve("uGlassB").setValue(p.glassB);
-    scope.resolve("uMisc").setValue([p.refract, liquid ? 1 : 0, 2.5 * (src.cell || 0), 0]);
+    // w: the angle one screen pixel spans (for lines a pixel or so wide)
+    scope.resolve("uMisc").setValue([p.refract, liquid ? 1 : 0, 2.5 * (src.cell || 0), 2 / (proj.data[5] * d.height)]); // prettier-ignore
     scope.resolve("uFoam").setValue([...p.foam, liquid && src.diffuse?.n ? 1 : 0]);
     // Up to two gas grids (gasscene.js: a flame's fine grid and the smoke's).
     const gases = src.gas || [];
