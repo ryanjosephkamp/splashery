@@ -127,10 +127,10 @@ September 30, 2026, evening:
   `src/live/panel.js`). A toy reads `live.on(kind)`, `live.mic` (the analyser) and `live.camera`
   from its drive or build. After a source starts or stops the toy is rebuilt (unless the entry says
   `rebuild: false`), so a build can switch to its live view.
-- **Relief splats** (kind 23) are how a live picture moves without a rebuild: the recipe builds a
-  grid once (`reliefGrid` in `src/live/relief.js`) and draws its screen canvas every frame, colors
-  on the left half and heights on the right. The live song landscape, the mirror and Photo to 3D's
-  live view use it.
+- **Relief splats** (kind 24; lane Fix4 took 23 first) are how a live picture moves without a
+  rebuild: the recipe builds a grid once (`reliefGrid` in `src/live/relief.js`) and draws its screen
+  canvas every frame, colors on the left half and heights on the right. The live song landscape, the
+  mirror and Photo to 3D's live view use it.
 - **The depth model in a worker** (`src/live/depth-worker.js`): one frame at a time, at 140 to 308
   pixels on the long side by tier. Here (one CPU thread, SwiftShader) it takes about 0.5 s a frame;
   a laptop should do several a second. Heights ease toward each answer and the depth range is eased
