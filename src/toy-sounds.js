@@ -2451,6 +2451,12 @@ export const TOY_SOUNDS = {
       vol: 0.45,
     },
   ],
+  // Lane Live input: a hand clap that rings like the sample room; the mirror's depth rises and falls.
+  "room-echo": [{ voice: "clap", f: 1400, decay: 4.4, vol: 0.8 }],
+  "splat-mirror": {
+    on: { voice: "whoosh", f: 240, to: 5, decay: 1.6, vol: 0.5 },
+    off: { voice: "whoosh", f: 1800, to: 0.2, decay: 1.2, vol: 0.45 },
+  },
   // Lane Photo to 3D, Sound B (his note: no wind, no whoosh): the photo's
   // paper lifting as the depth comes up and settling back as it lies flat.
   "photo-3d": {
