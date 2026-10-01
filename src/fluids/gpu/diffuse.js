@@ -20,10 +20,13 @@ const TEX_W = 256;
 const CPU_D = 0.045;
 
 export class GpuDiffuse {
-  constructor(liquid, { foam = 0, fizz = 0, cap = 2000 }) {
+  constructor(liquid, { foam = 0, fizz = 0, breakup = 0, cap = 2000 }) {
     this.liq = liquid;
     this.foam = foam;
     this.fizz = fizz;
+    // A splash's thin sheets and drops shed fine droplets (smaller than the
+    // grid can hold): droplets a second for each thin, fast particle.
+    this.breakup = breakup;
     this.cap = Math.ceil(cap / TEX_W) * TEX_W;
     this.n = 0;
     this.pos = new Float32Array(this.cap * 3);
@@ -70,7 +73,8 @@ export class GpuDiffuse {
   // Reads the liquid back every ~1/10 s (one read in flight at a time).
   maybeRead(dt) {
     this.sinceRead += dt;
-    if (this.pending || this.sinceRead < 0.1 || !this.liq.n) return;
+    // (a splash's breakup is quick: read three times as often)
+    if (this.pending || this.sinceRead < (this.breakup ? 0.033 : 0.1) || !this.liq.n) return;
     this.pending = true;
     const elapsed = this.sinceRead;
     this.sinceRead = 0;
@@ -199,6 +203,7 @@ export class GpuDiffuse {
           );
       }
     }
+    if (this.breakup > 0) this.shed(d, n, dt);
     if (this.fizz > 0 && n) {
       // Nucleation: streams of bubbles from points deep in the liquid, at
       // the CPU liquid's rate for the same volume.
@@ -213,6 +218,44 @@ export class GpuDiffuse {
         if (above < 0 || this.count[above] < 4) continue;
         this.add(DKIND.bubble, x, y, z, 0, 0, 0, 6);
         k--;
+      }
+    }
+  }
+
+  // Where a sheet or a drop thins to a particle or two a cell and moves
+  // fast, above the pool, it sheds fine droplets along its motion (a crown's
+  // rim breaking into drops, Rayleigh-Plateau), as spray.
+  shed(d, n, dt) {
+    const rand = this.rand;
+    const vMin = this.vRef() * 0.35;
+    const p = Math.min(1, this.breakup * dt);
+    for (let i = 0; i < n; i++) {
+      if (rand() > p) continue;
+      const x = d[i * 6];
+      const y = d[i * 6 + 1];
+      const z = d[i * 6 + 2];
+      const c = this.cell(x, y, z);
+      if (c < 0 || this.count[c] > 3) continue;
+      const vx = d[i * 6 + 3];
+      const vy = d[i * 6 + 4];
+      const vz = d[i * 6 + 5];
+      const v = Math.hypot(vx, vy, vz);
+      if (v < vMin || this.nearPool(x, y, z)) continue;
+      const m = 2 + Math.floor(rand() * 3);
+      for (let k = 0; k < m; k++) {
+        // spread over the time since the last read, and a little apart
+        const t = rand() * dt;
+        const s = 0.18 * v;
+        this.add(
+          DKIND.spray,
+          x + vx * t + (rand() - 0.5) * 0.8,
+          y + vy * t + (rand() - 0.5) * 0.8,
+          z + vz * t + (rand() - 0.5) * 0.8,
+          vx + (rand() - 0.5) * s,
+          vy + (rand() - 0.3) * s,
+          vz + (rand() - 0.5) * s,
+          0.8 + rand() * 0.8,
+        );
       }
     }
   }
@@ -268,7 +311,14 @@ export class GpuDiffuse {
         kind = DKIND.foam;
         this.age[i] = 0;
         this.life[i] = 0.6 + rand() * 0.9;
-      } else if (kind === DKIND.spray && k >= 5) kind = DKIND.foam;
+      } else if (kind === DKIND.spray && k >= 5) {
+        // (a fine droplet falling back into the pool joins it)
+        if (this.breakup) {
+          this.remove(i);
+          continue;
+        }
+        kind = DKIND.foam;
+      }
       this.kind[i] = kind;
       let vx = vel[i3];
       let vy = vel[i3 + 1];
@@ -316,14 +366,14 @@ export class GpuDiffuse {
         const floor = gl.at[1] + 1.2;
         if (r0 <= gl.r && ny < floor) {
           ny = floor;
-          if (kind === DKIND.spray) this.kind[i] = DKIND.foam;
+          if (kind === DKIND.spray) this.kind[i] = this.breakup ? 0 : DKIND.foam;
           vy = 0;
         }
       }
       if (ny < 1) {
         ny = 1;
         vy = 0;
-        if (kind === DKIND.spray) this.kind[i] = DKIND.foam;
+        if (kind === DKIND.spray) this.kind[i] = this.breakup ? 0 : DKIND.foam;
       }
       pos[i3] = nx;
       pos[i3 + 1] = ny;
@@ -332,7 +382,7 @@ export class GpuDiffuse {
       vel[i3 + 1] = vy;
       vel[i3 + 2] = vz;
       this.age[i] += dt;
-      if (this.age[i] > this.life[i]) this.remove(i);
+      if (this.age[i] > this.life[i] || !this.kind[i]) this.remove(i);
     }
     this.upload();
   }

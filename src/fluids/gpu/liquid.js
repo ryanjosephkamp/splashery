@@ -148,8 +148,9 @@ export class GpuLiquid {
     const fizz = spec.fizz ?? preset.fizz ?? 0;
     // (every liquid reads itself back for its sound, acoustic.js; one without
     // foam keeps a token budget)
-    const cap = foam > 0 || fizz > 0 ? Math.round((fizz > 0 ? 9000 : 2500) * (spec.diffuse ?? 1) * (tier.diffuse ?? 1)) : 256; // prettier-ignore
-    this.diffuse = new GpuDiffuse(this, { foam, fizz, cap });
+    const breakup = spec.breakup ?? 0;
+    const cap = foam > 0 || fizz > 0 || breakup > 0 ? Math.round((fizz > 0 ? 9000 : breakup > 0 ? 6000 : 2500) * (spec.diffuse ?? 1) * (tier.diffuse ?? 1)) : 256; // prettier-ignore
+    this.diffuse = new GpuDiffuse(this, { foam, fizz, breakup, cap });
     // (fillShare: how much of the budget the starting pool may take, leaving
     // room for what a tap adds, such as the splash's dropped ball)
     if (spec.fill) this.fill(spec.fill, { count: Math.floor(this.cap * (spec.fillShare ?? 1)) });
