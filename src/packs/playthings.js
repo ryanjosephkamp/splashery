@@ -2359,26 +2359,26 @@ export const RECIPES = {
         params: [0.82, 0],
         color: (c) => shade(col, 0.8),
       });
-      // Scraps for the pop, hidden until then.
+      // Scraps for the pop, hidden until then (lane Fix5). Each scrap is
+      // built on the skin of one of the balloon's own pieces, so it takes
+      // the color the rubber had there: the balloon color, or a flag's
+      // colors when a flag theme is on (the pattern layer follows the rest
+      // position).
       BURST.forEach((d, i) => {
         const part = k.part("bit" + i, { pivot: [0, 0.3, 0] });
         // Each burst direction carries a few ragged scraps of rubber.
-        k.cloud({ share: 0.004, size: 1.4, part, pattern: false }, (rand, j) => {
+        k.cloud({ share: 0.004, size: 1.4, part }, (rand, j) => {
           const scrap = j % 5;
-          const centre = add(
-            [0.1, 0.3, 0],
-            mul(
-              add(d, [
-                Math.sin(scrap * 2.1) * 0.5,
-                Math.cos(scrap * 1.7) * 0.5,
-                Math.sin(scrap * 3.3) * 0.5,
-              ]),
-              0.3,
-            ),
-          );
+          const [a, b, r] = pieces[(i * 5 + scrap * 3) % pieces.length];
+          const t = 0.2 + 0.6 * ((scrap * 0.618 + i * 0.37) % 1);
+          const axis = unit(sub(b, a));
+          const side = unit(cross(axis, Math.abs(axis[1]) < 0.9 ? [0, 1, 0] : [1, 0, 0]));
+          const ang = scrap * 2.1 + i;
+          const out = add(mul(side, Math.cos(ang)), mul(cross(axis, side), Math.sin(ang)));
+          const centre = add(add(a, mul(sub(b, a), t)), mul(out, r));
           return {
             p: add(centre, [(rand() - 0.5) * 0.06, (rand() - 0.5) * 0.06, (rand() - 0.5) * 0.06]),
-            n: [Math.sin(scrap), 1, Math.cos(scrap * 2)],
+            n: out,
             flat: 0.2,
             color: shade(col, 0.8 + 0.3 * rand()),
             opacity: 0.95,
