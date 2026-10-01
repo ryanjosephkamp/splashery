@@ -79,7 +79,7 @@ September 30, 2026: all seven fixes are built on `claude/lane-fix5`, which stack
   `pickAlpha: 0.1` (the Lab's splat field does the same). The test fails without it (0 of 3 taps
   hit) and passes with it.
 - **Torus knot**: it has no pull you can drag (the tap plays a scripted pull). The help now says
-  "Tap it: the knot is pulled loose and springs back. Drag to turn it. …"
+  "Tap it: the knot pulls loose and springs back. Drag to turn it. …"
 - **CNN**: About text gains "Each square on the drawing pad is one pixel of the small 8-by-8 picture
   the network reads: the lighter its gray, the more ink it holds, and the pad starts with the sample
   7." This matches UI r2's pad (PR #131: a cell inks by how much of it the pen covers).

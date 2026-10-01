@@ -1297,7 +1297,7 @@ export const TOY_HELP = {
   },
   "torus-knot": {
     howTo:
-      "Tap it: the knot is pulled loose and springs back. Drag to turn it. Pick another knot in the Toy tab.",
+      "Tap it: the knot pulls loose and springs back. Drag to turn it. Pick a knot in the Toy tab.",
     about:
       "A torus knot is a knot that winds around the surface of a donut shape, called a torus. It goes around the hole a few times one way while it loops through it a few times the other way. The simplest is the trefoil, which winds 2 and 3 times; it is the simplest true knot, one that can never be untied without cutting it.\n\nTap it and the knot is pulled loose, its loops stretching and swirling; then it is let go and springs back past its rest shape and wobbles to a stop, like a spring. Pick a trefoil, a cinquefoil or another knot in the Toy tab.",
   },
