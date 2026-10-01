@@ -3,3 +3,4 @@ test-results/
 playwright-report/
 .cache/
 .DS_Store
+.grooph/events/
