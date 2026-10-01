@@ -91,6 +91,11 @@ Model: Opus 5.5 (default effort).
 - Cards on Effect review page 2: `shv-torus`, `shv-planets`, `shv-shelves`, all marked good by the
   owner (September 30, 2026).
 
+- October 1, 2026: engine PR #147 merged (main 6333e79); main merged into this branch (15 files
+  differ from main now). Post-merge checks: unit, shv, help, taps, hta, fx5 and snda-engine pass,
+  102/102. `tools/sound-lint.mjs --toy torus`: no violation (the roll now sits just under the
+  opening pop). Head c13f484 before this note.
+
 ## Notes
 
 - The torus's pack is `src/packs/shapes-torus.js` (a new pack; the other Shapes are procedural
