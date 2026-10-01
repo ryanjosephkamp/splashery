@@ -62,9 +62,13 @@ void main() {
   float r = max(uRadius, uMinPx.x * max(-vp.z, 1e-3) / uMinPx.y);
   // Fast flow is drawn stretched along its motion (a frame's travel), so a
   // falling stream reads as one continuous stream, not beads.
-  vec3 vel = (uSimToView * vec4(texelFetch(uParticles, q + ivec2(0, int(uStretch.y)), 0).xyz, 0.0)).xyz;
+  vec3 v0 = texelFetch(uParticles, q + ivec2(0, int(uStretch.y)), 0).xyz;
+  vec3 vel = (uSimToView * vec4(v0, 0.0)).xyz;
   float sl = length(vel.xy);
-  float L = min(sl * uStretch.x, 24.0 * r);
+  // a falling stream (straight down) is drawn twice as long as a splash's
+  // flying pieces, which would smear into streaks
+  float down = pow(clamp(-v0.y / max(length(v0), 1e-6), 0.0, 1.0), 4.0);
+  float L = min(sl * uStretch.x * (1.0 + down), (10.0 + 14.0 * down) * r);
   vec2 dir = sl > 1e-6 ? vel.xy / sl : vec2(1.0, 0.0);
   // stretched, it narrows as a thinning stream does (its cross-section keeps
   // the particle's volume)
@@ -100,9 +104,11 @@ varying vS: f32;
   let p = textureLoad(uParticles, q, 0);
   let vp = uniform.uSimToView * vec4f(p.xyz, 1.0);
   let r = max(uniform.uRadius, uniform.uMinPx.x * max(-vp.z, 1e-3) / uniform.uMinPx.y);
-  let vel = (uniform.uSimToView * vec4f(textureLoad(uParticles, q + vec2i(0, i32(uniform.uStretch.y)), 0).xyz, 0.0)).xyz;
+  let v0 = textureLoad(uParticles, q + vec2i(0, i32(uniform.uStretch.y)), 0).xyz;
+  let vel = (uniform.uSimToView * vec4f(v0, 0.0)).xyz;
   let sl = length(vel.xy);
-  let L = min(sl * uniform.uStretch.x, 24.0 * r);
+  let down = pow(clamp(-v0.y / max(length(v0), 1e-6), 0.0, 1.0), 4.0);
+  let L = min(sl * uniform.uStretch.x * (1.0 + down), (10.0 + 14.0 * down) * r);
   var dir = vec2f(1.0, 0.0);
   if (sl > 1e-6) { dir = vel.xy / sl; }
   let sq = sqrt(r / (r + 0.5 * L));
@@ -519,7 +525,12 @@ void main() {
     vec3 behind = texture2D(uScene, clamp(uv0 - off, vec2(0.001), vec2(0.999))).rgb;
     vec3 T = exp(-uAbsorb.rgb * thick);
     vec3 lit = uColor.rgb * (0.35 + 0.65 * max(dot(n, L), 0.0));
-    vec3 body = mix(behind * T + uColor.rgb * (1.0 - T) * 0.25, lit, uColor.a);
+    // (the room seen through the liquid: the frame behind it carries only what
+    // is on screen, so a clear drop against a dark background would vanish;
+    // the same soft studio as the reflections lights it from around)
+    vec3 rr = refract(rd, n, 0.75);
+    vec3 room = sky(dot(rr, rr) > 0.0 ? rr : reflect(rd, n)) * 0.3;
+    vec3 body = mix((behind + room) * T + uColor.rgb * (1.0 - T) * 0.25, lit, uColor.a);
     float F = fresnel(dot(n, V), 0.02);
     vec3 refl = sky(reflect(-V, n));
     vec3 H = normalize(L + V);
@@ -817,7 +828,10 @@ fn fresnel(cosT: f32, f0: f32) -> f32 {
     let behind = textureSampleLevel(uScene, uSceneSampler, flipUv(clamp(uv0 - off, vec2f(0.001), vec2f(0.999))), 0.0).rgb;
     let T = exp(-uniform.uAbsorb.rgb * thick);
     let lit = uniform.uColor.rgb * (0.35 + 0.65 * max(dot(n, L), 0.0));
-    let body = mix(behind * T + uniform.uColor.rgb * (1.0 - T) * 0.25, lit, uniform.uColor.a);
+    var rr = refract(rd, n, 0.75);
+    if (dot(rr, rr) <= 0.0) { rr = reflect(rd, n); }
+    let room = sky(rr) * 0.3;
+    let body = mix((behind + room) * T + uniform.uColor.rgb * (1.0 - T) * 0.25, lit, uniform.uColor.a);
     let F = fresnel(dot(n, V), 0.02);
     let refl = sky(reflect(-V, n));
     let H = normalize(L + V);
@@ -1083,10 +1097,10 @@ export class FluidSurface {
       scope.resolve("uFar").setValue(cam.farClip);
       const projY = proj.data[5] * this.size[1] * 0.5;
       scope.resolve("uMinPx").setValue([1.6, projY]);
-      // velocities are cells/s; a 15th of a second of travel (a stream thins
+      // velocities are cells/s; a 30th of a second of travel (a stream thins
       // below a particle a cell as it falls and MPM breaks it into clumps:
       // drawn this long, it reads as the thread it is)
-      scope.resolve("uStretch").setValue([1 / 15, src.velRow ?? 0]);
+      scope.resolve("uStretch").setValue([1 / 30, src.velRow ?? 0]);
       this.depthPass.count = count;
       this.depthPass.render();
       this.thickPass.count = count;
