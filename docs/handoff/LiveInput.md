@@ -126,7 +126,7 @@ LiveInput record on page 2.
 
 Model: **Opus 5.5** (default effort), no helpers.
 
-October 1, 2026, morning (UTC): **round 2 ready for the Operator.**
+October 1, 2026, morning (UTC): **round 2 done (marked good), waiting on the merge order.**
 
 - The Operator's overnight notes (07:22 and 08:35 UTC: hold r2 until the morning's go, no self
   check-ins; merge main with UI r2 into #144 and #150) reached this session only at 10:10 UTC, after
@@ -142,6 +142,10 @@ October 1, 2026, morning (UTC): **round 2 ready for the Operator.**
   `live2-tube-whole`, good; every other `live2` card "Good, but could look even better. Keep going."
   So the looks got a second pass (finer strands, smoother curves, deeper color), posted as
   `live2-*-r2` cards.
+- October 1, 15:30 UTC: the owner marked all 13 `live2-*-r2` cards and `live2-start` good, so round
+  2 is done pending tests. Merge order: #144, #150, #162, #163. #144 is in Integrator 1's run with
+  #138; once both merge, the Operator asks for main in #150 (CREDITS, TOY-PLAN and toy-sounds
+  conflict with #138), then #162 and #163 follow.
 - Start time (Chromium, SwiftShader, this container; the software renderer itself takes about two of
   the four cores, so runs vary). Before: file chosen to the landscape built (it could play only
   after that, on a tap). After: file chosen to playing (a long song plays as it opens).
