@@ -1385,6 +1385,9 @@ export const RECIPES = {
       { key: "surge", label: "Surge", type: "pulse", ease: 4.5 },
     ],
     action: { key: "surge", label: "Send water through" },
+    // The glass is see-through (opacity 0.28, under the pick's 0.3), so a
+    // tap on it found nothing; pick it at a lower alpha (lane Fix5).
+    pickAlpha: 0.1,
     // A tap pours a surge of glowing water in at the base: its front runs up
     // the body, through the neck and round into the bottom, then it fades.
     drive(t, c, out) {
