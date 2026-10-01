@@ -3,143 +3,143 @@
   "note": "He named only the toys to change, so any toy not listed stays as it is, and he called the whole Music category pretty much perfect. He wants realistic, subtle sound effects (often a real recorded sound \"from a sound pack\") and dislikes clicking on almost every toy, the \"vroom\" acceleration sound, whistles, robotic chimes and jingles, string or xylophone tones on things that aren't instruments, and wind that's too loud (it's fine on a few, like Venus and Neptune). On September 30 he marked the newer toys on the Sound Board and said everything he didn't mark or note is approved as it is.",
   "toys": {
     "raspberry": {
-      "status": "change",
+      "status": "site",
       "said": "The raspberry sounds a little bit too much like bubbles.",
       "note": "It sounds too much like bubbles.",
-      "plan": "Drop the bubbles layer; keep a juicy squish and give the falling drupelets soft, wet little taps.",
+      "plan": "A real juicy squish as the drupelets break off, then a soft tap for each one landing on the table, and a small squish as they come back (no bubbles).",
       "candidates": []
     },
     "blackberry": {
-      "status": "change",
+      "status": "site",
       "said": "The raspberry sounds a little bit too much like bubbles. The blackberry does as well.",
       "note": "Like the raspberry, it sounds too much like bubbles.",
-      "plan": "Drop the bubbles layer; a deeper juicy squish and soft, wet taps as the drupelets fall.",
+      "plan": "A darker, deeper real squish, the drupelets tapping down on the table as they bounce, and a soft squish as they spring back (no bubbles).",
       "candidates": []
     },
     "star-cookie": {
-      "status": "change",
+      "status": "site",
       "said": "The cinnamon star cookie sounds almost like a zipper unzipping. It doesn't actually sound like a cookie breaking apart or anything like that.",
       "note": "It sounds like a zipper, not a cookie breaking apart.",
-      "plan": "A real, crisp cookie snap and crumble (recorded CC0 or a drier, sharper crunch) with small crumb taps as the pieces fall; drop the zipper-like crunch and the whoosh.",
+      "plan": "A real crisp snap and crumble as it breaks, and a small soft crumble as it puts itself back together.",
       "candidates": []
     },
     "mandeltorus": {
-      "status": "change",
+      "status": "site",
       "said": "The mandalorian is a little too robotic sounding. … And quite frankly, we could make the Mandel torus have something kind of similar in terms of the sound effect.",
       "note": "It sounds too robotic; he'd like something similar to the Mandelbulb's sound, which he loves.",
-      "plan": "Replace the robotic shimmer with a sound built like the Mandelbulb's (a low drone with soft ratchet ticks as it changes), varied so the two aren't identical.",
+      "plan": "Like the Mandelbulb: a low drone with a ratchet as the rings start to turn, and again as they lock back.",
       "candidates": []
     },
     "garden-gnome": {
-      "status": "change",
+      "status": "site",
       "said": "The garden gnome is a little weird. I'm not sure about this one. I don't really like the chirp sound that it makes at the beginning.",
       "note": "A little weird; he doesn't like the chirp at the start.",
-      "plan": "Drop the chirp at the start; a soft hop and a warm little flame catching as its lantern lights.",
+      "plan": "A soft stone thud as the gnome lands from its hop, and a match-like flare and soft flame as its lantern lights (no chirp, no click).",
       "candidates": []
     },
     "lantern": {
-      "status": "change",
+      "status": "site",
       "said": "I don't like the click sound that the lantern makes. So if we could find something else that's more suitable.",
       "note": "He doesn't like the click; he wants something more suitable.",
-      "plan": "Replace the click with a real match strike and a soft flame catching (recorded CC0), and a gentle puff when it's blown out.",
+      "plan": "A real match strike and a soft flame catching when it lights; a real puff blowing it out.",
       "candidates": []
     },
     "wooden-elephant": {
-      "status": "change",
+      "status": "site",
       "said": "The wooden elephant should actually have an elephant-like trumpet sound, like the real sound of an elephant making its trumpet sound. Elephants have a characteristic sound that comes out of their snout or their nose, so we should use that.",
       "note": "It should trumpet like a real elephant.",
-      "plan": "A recorded CC0 elephant trumpet on tap (after the wooden knock); drop the synth brass tone.",
+      "plan": "A light wooden knock, then a real elephant trumpeting as the trunk lifts.",
       "candidates": []
     },
     "alarm-clock": {
-      "status": "change",
+      "status": "site",
       "said": "The alarm clock within the photo real category could sound a little bit more like a real alarm clock. This currently sounds almost like a wooden instrument. I don't know how to describe it, but it doesn't sound very much like an alarm clock. … The alarm clock here in the Open Me category, kind of like the other alarm clock in the Photo Real category, if I'm not mistaken, should sound more realistic.",
       "note": "It sounds like a wooden instrument, not an alarm clock; it should sound like a real one.",
-      "plan": "A real mechanical alarm-clock ring (a fast hammer on twin bells, recorded CC0 or a closer model) in place of the wooden-sounding bell notes.",
+      "plan": "A real mechanical twin-bell alarm ringing while the clock rattles (2.3 s).",
       "candidates": []
     },
     "vintage-camera": {
-      "status": "change",
+      "status": "site",
       "said": "The vintage camera, the flash should sound more realistic. Right now it sounds kind of like too clicky.",
       "note": "The flash is too clicky; it should sound realistic.",
-      "plan": "A real vintage shutter and flash (a soft mechanical shutter and the pop and whine of a flash, recorded CC0); drop the clicky switch and ratchet.",
+      "plan": "A real vintage press camera: a soft shutter and the whoomph of the flash powder.",
       "candidates": []
     },
     "carrot-cake": {
-      "status": "change",
+      "status": "site",
       "said": "The carrot cake sound is pretty underwhelming. I guess it's acceptable, but it's really simple. I guess we can leave it. I don't know. If you can find something more suitable, that would be fine.",
       "note": "Acceptable but underwhelming and very simple; a better one would be welcome, otherwise leave it.",
-      "plan": "Optional: a richer, softer cake sound (e.g., a knife sinking into moist cake and a soft plate thud); keep the current one if nothing better turns up.",
+      "plan": "A softer knife slide, a moist crumb as the slice lifts out, and the same soft plate thud.",
       "candidates": []
     },
     "cat-statue": {
-      "status": "change",
+      "status": "site",
       "said": "The cat statue should actually have a cat meowing instead of whatever that noise is that it makes.",
       "note": "It should meow like a real cat.",
-      "plan": "A recorded CC0 cat meow in place of the current noise.",
+      "plan": "A soft stone scrape as the head turns, then a real cat's meow as it tilts.",
       "candidates": []
     },
     "horse-statue": {
-      "status": "change",
+      "status": "site",
       "said": "The horse statue should actually have a horse like whinny or neigh. There's a certain sound that a horse makes. I think you maybe tried to replicate that here, but it actually sounds kind of like some sort of whistle, which is not quite right.",
       "note": "The whinny sounds like a whistle; it should be a real horse whinny or neigh.",
-      "plan": "A recorded CC0 horse whinny/neigh in place of the whistle-like synth whinny.",
+      "plan": "A soft stone scrape, a real horse's whinny as it rears, and a stone thud as it lands.",
       "candidates": []
     },
     "tin-can-real": {
-      "status": "change",
+      "status": "site",
       "said": "The real tin can, I don't think that it needs to have like that clicking. It's okay that it has the metallic sound, like if you were to flick it or hit it with something, like it currently does at the beginning. But then it has like this clicking sound when it rolls that doesn't sound right.",
       "note": "Keep the metallic flick at the start, but drop the clicking while it rolls.",
-      "plan": "Keep the metallic flick; drop the clicking ratchet while it rolls (a soft tin roll or nothing).",
+      "plan": "The metallic knock, a real spinning whirr on its rim that speeds up like a settling coin, and the clank as it drops flat.",
       "candidates": []
     },
     "donut": {
-      "status": "change",
+      "status": "site",
       "said": "The donut sounds a little too clicky. It's like when it breaks apart, it just sounds like it's clicking. I don't know if we can make it sound a little bit more like dough actually breaking.",
       "note": "Too clicky when it breaks apart; it should sound like dough breaking.",
-      "plan": "A soft dough tear as it pulls apart, with dull, soft thuds for the pieces; drop the clicky patter.",
+      "plan": "A soft doughy squish and tear as it breaks into chunks, and a soft squish as it comes back together (no sprinkle clicks).",
       "candidates": []
     },
     "knot": {
-      "status": "change",
+      "status": "site",
       "said": "The neon knot has this vroom kind of like acceleration sound, and there are a lot of toys that have that sound. I really don't like it. I understand, you know, you're using it for things that accelerate or speed up, but it just doesn't sound right. We need something that's a bit more, I don't know, cool? This is just, it's almost like a robotic acceleration sound that doesn't sound right.",
       "note": "He really dislikes the robotic \"vroom\" acceleration sound (here and on many toys); he wants something cooler.",
-      "plan": "Replace the rising hum with a cooler, subtler sound (e.g., a soft electric neon buzz and glow swell), with no acceleration sweep.",
+      "plan": "A short electric crackle as the neon strikes, then a steady neon hum while it writhes (no rising pitch).",
       "candidates": []
     },
     "planet": {
-      "status": "change",
+      "status": "site",
       "said": "The tiny planet, it's too much wind. It's kind of loud and almost hurts the ears. There are other toys that have a similar wind effect. For some of them, the wind sound is fine. I may mention those and tell you that that's fine, but generally the wind sound is just a little too overwhelming for a lot of the toys that use it, and the tiny planet is an example of that.",
       "note": "Too much wind: loud enough to hurt the ears (the wind is too strong on many toys).",
-      "plan": "Turn the wind way down (much quieter and softer) or swap it for a gentle airy swell.",
+      "plan": "A quiet, darker breeze and a soft low whoosh as the clouds race round.",
       "candidates": []
     },
     "tennis-ball": {
-      "status": "change",
+      "status": "site",
       "said": "The tennis ball does not sound like a tennis ball. It sounds more like a ping pong ball right now. If we can make it sound a little bit more like a real tennis ball, I'd appreciate that.",
       "note": "It sounds like a ping-pong ball; it should sound like a real tennis ball.",
-      "plan": "A real tennis-ball sound (a duller, felt-covered pock off the racket and the bounce, recorded CC0) in place of the bright pock.",
+      "plan": "A real tennis ball slammed down, then a real tennis-ball bounce on each bounce, softer each time.",
       "candidates": []
     },
     "baseball": {
-      "status": "change",
+      "status": "site",
       "said": "The baseball, the sound is nearly perfect, but when it gets hit by the invisible bat or whatever, it doesn't sound like it's being hit by, like, a bat. We can make it sound like it's being hit by a wooden bat.",
       "note": "Nearly perfect, but the hit should sound like a wooden bat.",
-      "plan": "Keep the pitch whoosh; make the hit a real wooden-bat crack (recorded CC0).",
+      "plan": "The same pitch whoosh, then the crack of a real wooden bat.",
       "candidates": []
     },
     "softball": {
-      "status": "change",
+      "status": "site",
       "said": "The softball is kind of the same situation as the baseball.",
       "note": "Like the baseball: the hit should sound like a real bat.",
-      "plan": "Keep the whoosh; make the hit a real bat-on-ball crack (a little heavier than the baseball's, recorded CC0).",
+      "plan": "The same whoosh, then the real dull thump of a heavy ball landing (away and back home). Its motion has no bat (an underhand pitch that lands), so the landing is what sounded like a hit; a bat crack would need a bat hit in the motion.",
       "candidates": []
     },
     "beach-ball": {
-      "status": "change",
+      "status": "site",
       "said": "The beach ball sounds a little too cartoony when it bounces.",
       "note": "The bounce is too cartoony.",
-      "plan": "A real beach-ball bounce (a light, hollow vinyl thump, recorded CC0) in place of the cartoon boing.",
+      "plan": "A real plastic beach-ball bounce each time it lands (no boing), and a light slap as it's punched up.",
       "candidates": []
     },
     "golf-ball": {
@@ -150,45 +150,45 @@
       "candidates": []
     },
     "bowling-ball": {
-      "status": "change",
+      "status": "site",
       "said": "For the bowling ball, I feel like we can make it sound just a little bit more like a bowling ball rolling on the bowling alley floor, and then when it hits the invisible pins, those need to sound like actual pins falling down. There is a real sound. You could probably find a sound pack that contains that that's realistic. Right now it just sounds a little too much like a toy. Real pins, like bowling alley pins, have a characteristic sound that you can find that's pretty consistent. This is close, but it's not quite right.",
       "note": "Close, but too toy-like: it should sound like a ball rolling down a real lane and real pins falling.",
-      "plan": "A real bowling ball rolling down a wooden lane and a real pin strike and clatter (recorded CC0) in place of the toy-like rumble and wood clatter.",
+      "plan": "A real bowling ball rolling down the lane, real pins crashing far off, and the roll back.",
       "candidates": []
     },
     "pool-ball": {
-      "status": "change",
+      "status": "site",
       "said": "The pool ball sounds a little too high-pitched. It almost sounds like the pool ball is hollow or something. It should have the sound that's made when somebody actually hits, like, a pool ball with a pool stick. So it should sound a bit more solid, if that makes any sense. You can also probably find that. It's a pretty characteristic sound.",
       "note": "Too high-pitched and hollow; it should sound solid, like a real cue striking a pool ball.",
-      "plan": "A real cue-on-ball strike and a solid, lower ball clack (recorded CC0) in place of the high, hollow click.",
+      "plan": "The real solid tock of a cue tip striking the ball.",
       "candidates": []
     },
     "pickleball": {
-      "status": "change",
+      "status": "site",
       "said": "I've never played pickleball, so I don't know if the whistling sound is realistic. It's kind of annoying. If we could change that, I'd appreciate it, unless it's really realistic. Maybe we could change how the whistle sounds at the very least.",
       "note": "The whistling is annoying; change it unless it's truly realistic.",
-      "plan": "Drop the whistle (or make it far subtler); keep the paddle pock.",
+      "plan": "Its hollow plastic pock, without the whistle.",
       "candidates": []
     },
     "marble": {
-      "status": "change",
+      "status": "site",
       "said": "I think the marble could sound a little bit better. It's hard to describe what's wrong with it. It just doesn't sound like glass rolling, and maybe we don't need it to have that, like, noise at the beginning where it, like, it clinks or whatever that noise is.",
       "note": "It doesn't sound like glass rolling, and the clink at the start isn't needed.",
-      "plan": "A real glass marble rolling on a hard surface (recorded CC0); drop the clink at the start.",
+      "plan": "A real glass marble rolling on a wooden floor for its whole lap (no clink).",
       "candidates": []
     },
     "solar-system": {
-      "status": "change",
+      "status": "site",
       "said": "The solar system is pretty cool. I don't know if we could make it sound a little bit less robotic or electronic. I don't know if that makes any sense to you. If we have to keep it the way it is, it's fine.",
       "note": "Pretty cool, but a little less robotic or electronic would be better; it's fine to keep if needed.",
-      "plan": "Optional: soften the electronic pad and shimmer into a gentler, less synthetic swell; keep the current one if nothing better fits.",
+      "plan": "No synth chord: a soft whoosh as the planets swing into line, a warm flare as the corona shows, and a whoosh as they swing on.",
       "candidates": []
     },
     "mercury": {
-      "status": "change",
+      "status": "site",
       "said": "Mercury is kind of weird. I don't know if it matches what is supposed to be happening here. So this has to do with heat, right? So I'm looking at the description of Mercury, and it spins fast while the side facing the sun glows red hot and shimmers. This doesn't really sound like that, if that makes any sense.",
       "note": "It doesn't match the effect (a fast spin while the sunlit side glows red hot and shimmers).",
-      "plan": "A quick spin whoosh into a soft sizzle and heat shimmer as the side glows red hot; drop the high electronic tone.",
+      "plan": "A quick spin whoosh, then a low roar of heat and a soft searing sizzle while the day side glows, fading as it cools (no tone).",
       "candidates": []
     },
     "venus": {
@@ -199,31 +199,31 @@
       "candidates": []
     },
     "earth": {
-      "status": "change",
+      "status": "site",
       "said": "I think that for the Earth, it doesn't need to have such a dramatic wind sound.",
       "note": "The wind is too dramatic.",
-      "plan": "Turn the wind way down (softer, shorter and quieter); keep the rest.",
+      "plan": "The same ocean wash (a little softer) and chime, with the wind turned right down (softer, shorter and quieter).",
       "candidates": []
     },
     "mars": {
-      "status": "change",
+      "status": "site",
       "said": "Mars kind of has, like, a weird wind sound to it, but I think it's okay. Maybe we could improve it a little bit.",
       "note": "The wind is a little weird; okay, but could be a bit better.",
-      "plan": "Smooth the wind into a softer, more natural dusty breeze.",
+      "plan": "The dust storm is quieter and darker: a softer hiss of dust and a lower wind.",
       "candidates": []
     },
     "saturn": {
-      "status": "change",
+      "status": "site",
       "said": "I don't really like the robotic kind of, like, noise that plays with Saturn.",
       "note": "He doesn't like the robotic noise.",
-      "plan": "Replace the robotic shimmer tones with a soft, natural sound for the rings (e.g., a gentle airy swell with a faint icy hiss).",
+      "plan": "Two soft icy sweeps as the waves ripple out across the rings, with a faint glitter (no synth shimmer).",
       "candidates": []
     },
     "uranus": {
-      "status": "change",
+      "status": "site",
       "said": "For Uranus, I don't really like the little bell or whatever that noise is that plays at the beginning. And it doesn't seem to make any noises as it rolls. We don't need to have, like, a really loud wind noise as it kind of rolls, but it would be nice if there was, like, some little effect there.",
       "note": "Drop the bell-like tone at the start; add a small sound while it rolls (not loud wind).",
-      "plan": "Drop the opening tone; add a soft, low rolling rumble while it rolls.",
+      "plan": "A soft low rumble as it rolls to the right, and again as it rolls back (no bell).",
       "candidates": []
     },
     "neptune": {
@@ -234,80 +234,80 @@
       "candidates": []
     },
     "aurora-planet": {
-      "status": "change",
+      "status": "site",
       "said": "For the Aurora world, the whistling is really weird. I don't think we need to have whistling there, and the wind is a little odd as well. Maybe we could have something that's a bit more... I don't know what the right word would be. I'm sorry, I'm trying to think of one. It could almost be like a little calm noise.",
       "note": "The whistling is weird and the wind odd; he'd like a calm sound.",
-      "plan": "Drop the whistle; a calm, soft ambient hum or gentle airy shimmer.",
+      "plan": "A calm, soft airy swell as the aurora flares and settles (no whistle).",
       "candidates": []
     },
     "asteroid": {
-      "status": "change",
+      "status": "site",
       "said": "The asteroid doesn't really sound like it's breaking apart.",
       "note": "It doesn't sound like it's breaking apart.",
-      "plan": "A real rock-breaking crack and crumble as it breaks apart, and stony knocks as the pieces come back.",
+      "plan": "A rock crack and a muffled boom, real rocks crumbling apart, a soft grinding as the rubble comes back, and the stone settling.",
       "candidates": []
     },
     "comet": {
-      "status": "change",
+      "status": "site",
       "said": "The comet sounds more like wind or like a waterfall. I'd like to change that and make it sound more like something that's on fire, unless that's unrealistic.",
       "note": "It sounds like wind or a waterfall; it should sound more like something on fire.",
-      "plan": "A fiery roar and crackle (a burning rush) in place of the wind-like whoosh.",
+      "plan": "A real burning torch roaring as the jets and tails flare, fading as they die back.",
       "candidates": []
     },
     "meteor": {
-      "status": "change",
+      "status": "site",
       "said": "The meteor should also sound more like fire. Right now it's just, like, a bunch of clicking, and then when it bursts, we should actually have an explosion sound.",
       "note": "It's just clicking; it should sound like fire, with a real explosion when it bursts.",
-      "plan": "A burning fire rush as it falls and a real explosion boom when it bursts; drop the clicky sizzle.",
+      "plan": "A fiery whoosh as it streaks in, a real explosion as it bursts, the fragments burning out, and the next one whooshing in.",
       "candidates": []
     },
     "star": {
-      "status": "change",
+      "status": "site",
       "said": "The star uses a robotic sort of song type of thing. I'd almost prefer that that's not there, and then we have some sounds that, like, kind of have it bursting like an explosion. I want it to be more realistic sound effects, but I don't want it to be, like, overwhelming wind or other stuff like that, if that makes any sense.",
       "note": "Drop the robotic song; realistic sounds of it bursting like an explosion, without overwhelming wind.",
-      "plan": "Drop the synth pad; a deep swell into a realistic explosion burst, not overwhelming and without big wind.",
+      "plan": "A deep stellar roar as it swells, low throbs as the red giant pulses, a real explosion as it puffs off its shell, and a soft roar as a new star lights.",
       "candidates": []
     },
     "pulsar": {
-      "status": "change",
+      "status": "site",
       "said": "The pulsar uses that, like, acceleration sound, the vroom kind of sound that's like a buzz. It's really annoying. I want to use something else, and I don't like the clicking that it makes. We should do something different, make it sound more epic.",
       "note": "The \"vroom\" buzz and the clicking are annoying; it should sound more epic.",
-      "plan": "Replace the rising hum and clicks with something epic, e.g. deep, regular pulses under a rich, slow swell.",
+      "plan": "A deep boom and rumble as it spins up, and a deep pulse with each flash instead of a tick.",
       "candidates": []
     },
     "black-hole": {
-      "status": "change",
+      "status": "site",
       "said": "For the black hole, we could make it a little more dramatic, that low buzzing noise as the star spirals into it. It's just a little too robotic sounding.",
       "note": "The low buzz as the star spirals in should be more dramatic and less robotic.",
-      "plan": "A deeper, more dramatic, textured rumble as the star spirals in, in place of the synthetic buzz.",
+      "plan": "A deep growing roar as the star spirals in, a rushing whoosh, a huge low boom as it plunges, and the gas swirling down after it.",
       "candidates": []
     },
     "star-cluster": {
-      "status": "change",
+      "status": "site",
       "said": "The star cluster just sounds too robotic or, like, not very good.",
       "note": "It sounds too robotic.",
-      "plan": "Replace the robotic sparkle with a softer, more natural twinkle or airy shimmer.",
+      "plan": "A soft airy breath in and out as the cluster breathes, with a faint glitter (no synth sparkle).",
       "candidates": []
     },
     "planetary-nebula": {
-      "status": "change",
+      "status": "site",
       "said": "Yeah, the Ring Nebula, it has, like, that weird robotic music. We should change it completely.",
       "note": "The robotic music is weird; change it completely.",
-      "plan": "Replace the pad and shimmer music entirely with a soft, non-musical ambient swell.",
+      "plan": "A small burst as the star flares, a whoosh as the shock ring expands, and a deep soft boom as it pushes the main ring out.",
       "candidates": []
     },
     "nebula": {
-      "status": "change",
+      "status": "site",
       "said": "The nebula, kind of similar to the star cluster, like the little chimes or whatever you want to call that, little bells. I don't quite like it. I know that we have stars here, so we can maybe just change it a little bit.",
       "note": "Like the star cluster, he doesn't like the little chimes; change it a little.",
-      "plan": "Replace the bell chimes with a softer, more natural shimmer.",
+      "plan": "A soft fiery flare for each of the seven new stars as it lights (no chimes).",
       "candidates": []
     },
     "supernova": {
-      "status": "change",
+      "status": "site",
       "said": "The supernova, it doesn't really sound like an explosion. It sounds more like the ocean or, like, wind. So we should change that.",
       "note": "It sounds like the ocean or wind, not an explosion.",
-      "plan": "A real explosion: a sharp blast and a deep, rolling boom in place of the wind-like roar.",
+      "plan": "A real deep explosion with a long rumble, over the fiery roar.",
       "candidates": []
     },
     "spiral-galaxy": {
@@ -318,122 +318,122 @@
       "candidates": []
     },
     "virus": {
-      "status": "change",
+      "status": "site",
       "said": "For the virus, we don't need that little sound that plays at the end of the animation.",
       "note": "Drop the little sound at the end of the animation.",
-      "plan": "Drop the shimmer at the end; keep the rest.",
+      "plan": "The same ripple, squish and pops as the copies bud, without the shimmer at the end.",
       "candidates": []
     },
     "red-blood-cell": {
-      "status": "change",
+      "status": "site",
       "said": "For the red blood cell, I feel like we could make the sound different. It sounds almost like a little whistle of some sort. I don't know how to describe the sound, but it's a little weird.",
       "note": "It sounds like a little whistle; a little weird.",
-      "plan": "Replace the whistle-like squeaks with a soft, wet squish as the cell flexes.",
+      "plan": "A soft, gel-like squish as it stretches into a crescent, and a soft wobble as it relaxes (no squeaks).",
       "candidates": []
     },
     "neuron": {
-      "status": "change",
+      "status": "site",
       "said": "The neuron could sound more like electricity, if that makes any sense. Right now it just sounds like clicking. It's just like a lot of clicking.",
       "note": "It's just a lot of clicking; it should sound more like electricity.",
-      "plan": "A crackling electric zap running along the cell in place of the dense clicking.",
+      "plan": "A real crackling electric arc running down the axon, and a brighter burst at the terminals.",
       "candidates": []
     },
     "astrocyte": {
-      "status": "change",
+      "status": "site",
       "said": "The astrocyte is almost perfect, but the first sound that's made, that, like, noise that's played when you click on the astrocyte at the beginning, can we change that and make it sound less robotic or just a different tune?",
       "note": "Almost perfect; only the first sound should be less robotic or a different tune.",
-      "plan": "Replace the opening robotic shimmer with a softer, more natural swell; keep the rest.",
+      "plan": "A soft airy swell as the calcium wave spreads (no synth shimmer), then the same soft wash as the vessel widens.",
       "candidates": []
     },
     "dna": {
-      "status": "change",
+      "status": "site",
       "said": "The DNA is really close. It's kind of like a zipper, which I guess is the point. I don't know if we could make it sound a little bit more like a real zipper. If we have to keep it the way that it is now, it's okay, but it would be nice if it could sound a little different.",
       "note": "Really close; it could sound more like a real zipper, but it's okay to keep.",
-      "plan": "Optional: a real zipper (recorded CC0) in place of the synth ratchet; the current one is acceptable.",
+      "plan": "A real zipper opening as it unzips, and closing as it zips back up.",
       "candidates": []
     },
     "white-blood-cell": {
-      "status": "change",
+      "status": "site",
       "said": "The white blood cell uses maybe a little bit more clicking than I'd prefer, but it's mostly good.",
       "note": "Mostly good, with a bit less clicking.",
-      "plan": "Keep it, but thin out the clicking (the fast flutter and the closing sizzle).",
+      "plan": "A soft squishy membrane reaching out (no flutter clicks), the same gulp as it swallows, and a quieter fizz as it digests.",
       "candidates": []
     },
     "chromosome": {
-      "status": "change",
+      "status": "site",
       "said": "For the chromosome, I'd almost prefer that it's just, like, more realistic sound effects and not the, like, guitar string or instrument string.",
       "note": "Realistic sound effects, not a plucked string.",
-      "plan": "Drop the string twang; a soft stretch and a clean split as it pulls apart.",
+      "plan": "A soft sticky tear as the chromatids pull apart, and a soft squish as they come back together (no string, no clacks).",
       "candidates": []
     },
     "mitochondrion": {
-      "status": "change",
+      "status": "site",
       "said": "For the mitochondria, I don't really like that vroom kind of acceleration noise that it does. If we could change that, would be nice.",
       "note": "He doesn't like the \"vroom\" acceleration noise.",
-      "plan": "Replace the rising hum with a soft, pulsing energy sound (no acceleration sweep).",
+      "plan": "A steady low hum as it powers up (no rising pitch), and soft pops for each wave of ATP sparks (no synth notes).",
       "candidates": []
     },
     "paramecium": {
-      "status": "change",
+      "status": "site",
       "said": "For the paramecium, the scutter or, like, almost like sand noise that it makes is a little awkward. We should change that.",
       "note": "The scuttling, sandy noise is awkward.",
-      "plan": "Replace the sandy flutter with a soft, watery swimming sound.",
+      "plan": "A soft low paddling of the cilia and a gentle swish as it swims its loop.",
       "candidates": []
     },
     "orbital": {
-      "status": "change",
+      "status": "site",
       "said": "So for the electron orbital, I feel like we could make it sound a little bit more, like almost like electrical. I don't know how to describe that. I don't want it to be, like, totally unrealistic, but as the photon is, or I guess the, yeah, photon is absorbed and then sent out. It could sound a little bit more intricate. I don't know what the right word is. Right now it just sounds like a little chirp or something like that.",
       "note": "It's just a little chirp; it should sound a bit more electrical and intricate as the photon is absorbed and sent out.",
-      "plan": "A soft electric zap with a shimmering tail as the photon is absorbed, and its mirror as it's sent out, in place of the chirps.",
+      "plan": "A short electric crackle and a rising swish as the photon is absorbed, and a brighter crackle and falling swish as it is given out.",
       "candidates": []
     },
     "atom": {
-      "status": "change",
+      "status": "site",
       "said": "For the atom, this is that acceleration noise. I really don't like it. I don't really know what a good sound would be for the atom. I understand that, you know, you click on it and, like, the stuff accelerates, so it makes sense that you chose that. But it would be cool if we could find something else that's more suitable.",
       "note": "He really dislikes the acceleration noise; find something more suitable.",
-      "plan": "Replace the rising hum with a soft electric whir or crackle that swells with the electrons (no acceleration sweep).",
+      "plan": "A steady electric hum and a soft whirl as the electrons race (no rising pitch).",
       "candidates": []
     },
     "molecule": {
-      "status": "change",
+      "status": "site",
       "said": "For the molecule, it sounds like a rubber band, and while that might be okay for, like, caffeine, for example, I almost think that it isn't the best for other molecules. So maybe we could change that and make it less of, like, a rubber band sound. But if we have to keep it this way, I guess it's all right.",
       "note": "It sounds like a rubber band, which may suit caffeine but not the others; less of that if possible.",
-      "plan": "Optional: a softer molecular vibration in place of the rubber-band boing (perhaps varying by molecule); the current one can stay if needed.",
+      "plan": "A soft warm roar of heat and the light wooden rattle of the atoms jiggling on their bonds (no boing).",
       "candidates": []
     },
     "protein": {
-      "status": "change",
+      "status": "site",
       "said": "So for the protein, more or less what we're doing here for the animation is that, like, we're pulling the different parts of the ribbon apart, right? Right now it more or less sounds like wind or something like that, and then you can hear what sounds like building blocks. I'd like to make this more intricate. When it pulls apart, it should sound like something is kind of breaking apart or being separated, and then when it gets put together, it should sound like it's being put together. Right now it's a little too toy sounding.",
       "note": "It sounds like wind and building blocks; it should sound like parts separating, then fitting back together.",
-      "plan": "A stretch-and-separate sound as the ribbon pulls apart and a clean fitting-together sound as it reassembles; drop the wind and the block clatter.",
+      "plan": "A real tearing apart as it separates, with a whoosh, then a pressing-together and a soft thud as it reassembles (no building blocks).",
       "candidates": []
     },
     "crystal-lattice": {
-      "status": "change",
+      "status": "site",
       "said": "The crystal lattice, really, we need to, like, totally change the sound. If anything, it could sound a little bit more like the pieces are shuffling or something. I don't know how else to describe this. Kind of like a chain? It just shouldn't sound like that. Right now, it just sounds like playing a xylophone. It's really awkward.",
       "note": "Change it completely: it sounds like a xylophone; maybe pieces shuffling, like a chain.",
-      "plan": "Replace the xylophone notes with a shuffling, chain-like clink of the pieces moving.",
+      "plan": "A real chain shuffling as the wave runs across the crystal, twice.",
       "candidates": []
     },
     "ruby": {
-      "status": "change",
+      "status": "site",
       "said": "The ruby should have a different sound effect. Maybe for the ones that I mention, or just for all of the ones here that I don't tell you are, like, basically perfect, perhaps you could find, like, what a real gem of this type sounds like if somebody were to, like, hit on it or tap it or something like that. I don't know if they have a characteristic sound. … Maybe see if you can find something better for the ruby.",
       "note": "It needs a different sound: ideally what a real ruby sounds like when tapped.",
-      "plan": "The real sound of tapping a ruby (a hard, short stone click with a slight ring, recorded CC0 or modeled on one) in place of the bell.",
+      "plan": "A lower real glassy tap and a warm low glow as it lights red.",
       "candidates": []
     },
     "diamond": {
-      "status": "change",
+      "status": "site",
       "said": "Maybe for the ones that I mention, or just for all of the ones here that I don't tell you are, like, basically perfect, perhaps you could find, like, what a real gem of this type sounds like if somebody were to, like, hit on it or tap it or something like that. I don't know if they have a characteristic sound. I think the diamond, you can maybe find something for the diamond.",
       "note": "Find something better: ideally what a real diamond sounds like when tapped.",
-      "plan": "The real sound of tapping a diamond (a very hard, bright, short tick and ring) in place of the glass tone and sparkle.",
+      "plan": "A real bright glassy tap, and smaller tinks as the facets flash.",
       "candidates": []
     },
     "emerald": {
-      "status": "change",
+      "status": "site",
       "said": "Maybe for the ones that I mention, or just for all of the ones here that I don't tell you are, like, basically perfect, perhaps you could find, like, what a real gem of this type sounds like if somebody were to, like, hit on it or tap it or something like that. I don't know if they have a characteristic sound. … Try to find something better for the emerald.",
       "note": "Find something better: ideally what a real emerald sounds like when tapped.",
-      "plan": "The real sound of tapping an emerald (a hard gemstone click with a short ring) in place of the long glass tone.",
+      "plan": "A real glassy tap and a soft glinting swish as the light spirals in.",
       "candidates": []
     },
     "amethyst-geode": {
@@ -444,10 +444,10 @@
       "candidates": []
     },
     "sapphire": {
-      "status": "change",
+      "status": "site",
       "said": "Maybe for the ones that I mention, or just for all of the ones here that I don't tell you are, like, basically perfect, perhaps you could find, like, what a real gem of this type sounds like if somebody were to, like, hit on it or tap it or something like that. I don't know if they have a characteristic sound. … The sapphire you should try to find something for.",
       "note": "Find something better: ideally what a real sapphire sounds like when tapped.",
-      "plan": "The real sound of tapping a sapphire (a hard, bright stone click with a short ring) in place of the bell tone.",
+      "plan": "A real glassy tap and a soft bright swish as the star glides across.",
       "candidates": []
     },
     "quartz-cluster": {
@@ -458,10 +458,10 @@
       "candidates": []
     },
     "opal": {
-      "status": "change",
+      "status": "site",
       "said": "Maybe for the ones that I mention, or just for all of the ones here that I don't tell you are, like, basically perfect, perhaps you could find, like, what a real gem of this type sounds like if somebody were to, like, hit on it or tap it or something like that. I don't know if they have a characteristic sound. … The opal definitely needs work. It sounds, like, robotic or something. You need to find something for that.",
       "note": "It definitely needs work: it sounds robotic.",
-      "plan": "The real sound of tapping an opal (a softer, duller glassy tick) with a gentle natural shimmer, in place of the robotic shimmer.",
+      "plan": "A softer, duller real tap and the stone rocking gently on the table (no synth shimmer).",
       "candidates": []
     },
     "pearl": {
@@ -472,45 +472,45 @@
       "candidates": []
     },
     "crystal-ball": {
-      "status": "change",
+      "status": "site",
       "said": "… also the sound for this is, like, too robotic. I don't really like it. We should change it.",
       "note": "It sounds too robotic; change it.",
-      "plan": "Replace the robotic shimmer and theremin with a softer, more natural, mysterious sound (e.g., a gentle glass hum).",
+      "plan": "A soft misty whoosh and a real crystal glass ringing as the sign rises (no theremin).",
       "candidates": []
     },
     "heart": {
-      "status": "change",
+      "status": "site",
       "said": "The beating heart is, I think, okay, but it almost sounds different from how a heart normally would beat. So it should, you know, from text alone, it's probably hard for me to describe how this should sound. It should basically have, like, two beats and then a bit of a pause, and then it repeats with two beats kind of together or close together and then a bit of a pause. That sort of thing. That's roughly how the heart kind of sounds. … Don't take that too literally. Just see if you can find, like, a better, more realistic heart sound.",
       "note": "Okay, but not how a heart really sounds: it should be two close beats, then a pause (lub-dub), repeating.",
-      "plan": "A realistic lub-dub heartbeat (two close beats, then a pause; recorded CC0 or modeled on one) kept in time with the beats on screen.",
+      "plan": "A real heartbeat (lub-dub, pause) on every squeeze, quicker as it races and calming again.",
       "candidates": []
     },
     "brain": {
-      "status": "change",
+      "status": "site",
       "said": "The brain is odd. It has, like, a lot of clipping and stuff. I'd prefer that we change that.",
       "note": "It's odd, with a lot of \"clipping\" (probably the clicking crackle); change it.",
-      "plan": "Drop the dense crackle and the ding; a smoother, softer electrical sound for the signals, checked so it doesn't clip.",
+      "plan": "A soft rushing swell as the thought races round the lobes, and a soft low thump as they all flash (no crackle).",
       "candidates": []
     },
     "eye": {
-      "status": "change",
+      "status": "site",
       "said": "The eyeball or the eye. So the sound here, of course, is when the eye blinks, and it sounds like sand or something. It doesn't actually sound like an eye blinking. The eye blink should be something a little bit closer to, like, a click than it is to wind. And this sounds more like wind.",
       "note": "The blink sounds like sand or wind; it should be closer to a click.",
-      "plan": "A short, soft, moist click for the blink in place of the whoosh.",
+      "plan": "A soft, small click as the lids close, and a fainter one as they open.",
       "candidates": []
     },
     "lungs": {
-      "status": "change",
+      "status": "site",
       "said": "The lungs just sound a little bit too, almost, like, too loud, or the wind is just not the right exact sound for this, if that makes any sense. It should sound more like inhaling and exhaling. You could probably find sounds of somebody taking breaths or something and use that.",
       "note": "Too loud, and wind isn't right; it should sound like real breathing in and out.",
-      "plan": "Real inhale and exhale breaths (recorded CC0), quieter than now.",
+      "plan": "A real person's slow deep breath in, then out.",
       "candidates": []
     },
     "tooth": {
-      "status": "change",
+      "status": "site",
       "said": "The tooth is almost perfect, but that little whistle or noise at the beginning of the sound effect should just be removed. It's like a whistle. It's kind of awkward.",
       "note": "Almost perfect; remove the whistle-like noise at the start.",
-      "plan": "Drop the squeak at the start; keep the ding and sparkle.",
+      "plan": "A soft polishing swish instead of the squeak, then the same short gleam and sparkles.",
       "candidates": []
     },
     "kidney": {
@@ -1326,10 +1326,10 @@
       "candidates": []
     },
     "grand-piano": {
-      "status": "change",
+      "status": "site",
       "said": "(September 30, 2026, on the Sound Board) Sounds too much like an electronic keyboard.",
       "note": "Sounds too much like an electronic keyboard.",
-      "plan": "A real grand piano: a richer, sampled or better-modeled tone with hammer and string resonance, not an electronic keyboard. (Sound A)",
+      "plan": "A real acoustic piano: recorded CC0 notes (one every four semitones, each played at its key's pitch), with the damper falling when a key comes up. The electronic keyboard's PIANO button keeps the synth.",
       "candidates": []
     },
     "graph-plotter": {
@@ -1375,10 +1375,10 @@
       "candidates": []
     },
     "periodic-table": {
-      "status": "change",
+      "status": "site",
       "said": "(September 30, 2026, on the Sound Board) Too robotic",
       "note": "Too robotic",
-      "plan": "Less robotic: soft, real sounds for picking and lighting up an element. (Sound A)",
+      "plan": "A soft whoosh up and a soft thud as the atom rises; a whoosh down and a soft thud as it lowers (no clicks).",
       "candidates": []
     },
     "photo-3d": {

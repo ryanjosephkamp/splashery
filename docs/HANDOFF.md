@@ -4,7 +4,7 @@ Where Splashery stands, in short. The Operator session keeps this file; each lan
 in [handoff/](handoff/). The ground rules are in [CLAUDE.md](../CLAUDE.md); how the parallel lanes
 work is in [OPERATING.md](OPERATING.md).
 
-## State of main (2026-09-30)
+## State of main (2026-10-01)
 
 - Phases A to E4 are merged: A (splashery PR #13, homepage PR #33 in
   `ryanjosephkamp/ryanjosephkamp.github.io`), B (#17), C1 (#18), C2 (#19), D (#20), E1 (#21), E1b
@@ -91,7 +91,7 @@ work is in [OPERATING.md](OPERATING.md).
   Fluids engine). The plan (`tools/toy-plan.json`, [TOY-PLAN.md](TOY-PLAN.md)) has all 334. Scene
   schema v3; v2 still loads.
 - Every kit toy's tap is checked by `tests/taps.spec.mjs`; its known exceptions (with reasons) are
-  listed at its top. The full suite has 444 tests.
+  listed at its top. The full suite has 591 tests (October 1, 2026).
 - The governance from September 27 is merged (#53): the Operator runs the lanes, workers are Opus
   5.5 only, new public text is in American English (`tools/us-english.mjs`), and the sound review
   runs on the Sound Board. Splashery's own code is MIT licensed (#51, `LICENSE`); assets keep their
@@ -136,6 +136,15 @@ work is in [OPERATING.md](OPERATING.md).
   Music, Open me, the chess set and the puzzle cube (lane UI r3). The Effect review page filled its
   1 GB that evening, so new clips go on page 2 (OPERATING.md, "The Effect review page").
   docs/WORLDS.md now words the hybrid mode's rule.
+- Early on October 1, 2026 (UTC): Books r4 (#126, page focus and a Reading choice), Fix4 (#134, with
+  engine PR #136 for the view-dependent `rim` opacity) and Fix5 (#145) merged, then three engine PRs
+  after a 591-test run: shelf looks and tiny-planet palettes (#147), a `sample` voice for recorded
+  sounds and the sound lint (#141), and video-to-3D support (#137, labs). The owner's review of
+  October 1 ([review](reviews/2026-10-01-review/review.md)) went to Fix6 (Photo to 3D opens your own
+  photos: the depth model's download had sized its buffer from a gzip `content-length`; typing on
+  the Enigma's keys; the periodic table without its loading flash and with a tour of the elements; a
+  smoother guitar), UI r4 (a glissando on every keyboard) and Live input r2 (the Song landscape
+  starts at once and gets new looks drawn from measured features, synced to the audio clock).
 - Locked (owner approved, do not change its look or behaviour): the laptop. Its smoke test guards
   it.
 
@@ -143,34 +152,33 @@ work is in [OPERATING.md](OPERATING.md).
 
 The full table, with owned files, sessions, branches and PRs, is [WORKSTREAMS.md](WORKSTREAMS.md).
 
-| Lane                                                                            | Status                                                                                                 | Handoff                                |
-| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ | -------------------------------------- |
-| Operator                                                                        | Running; runs the lanes                                                                                | —                                      |
-| Worlds r3: a premium character and a sharper island                             | Running, Opus 5.5 (r2 #108 and hybrid #127 merged; r3 #135)                                            | [handoff/Worlds.md](handoff/Worlds.md) |
-| Fluids r4: particle liquids, smoke and flames                                   | Running, Opus 5.5 (v1 #121 merged; r4 on its branch)                                                   | [handoff/Fluids.md](handoff/Fluids.md) |
-| Books r4: page focus, the turn's flash and the stapled paper's edge             | Running, Opus 5.5 (#126, in the combined test run)                                                     | [handoff/Books.md](handoff/Books.md)   |
-| Science: real science data as splats                                            | Running, Opus 5.5 (#132)                                                                               | `handoff/Science.md` (on its branch)   |
-| UI r2 and r3: focus, panels, pad and pan; tap to pause, quiet turntables        | Running, Opus 5.5 (#131 in the combined test run; #146)                                                | `handoff/UIr2.md` (on its branch)      |
-| Video 3D: a one-week spike                                                      | Running, Opus 5.5 (#133, engine #137)                                                                  | `handoff/Video3D.md` (on its branch)   |
-| Fix4 and Fix5: the owner's small fixes                                          | Running, Opus 5.5 (#134, engine #136 in the combined test run, #145)                                   | `handoff/Fix4.md` (on its branch)      |
-| Sound A: recorded samples, the sound lint and real sounds for the first shelves | Running, Opus 5.5 (engine #141, #142)                                                                  | `handoff/SoundA.md` (on its branch)    |
-| Sound B: real sounds for the other shelves                                      | Running, Opus 5.5 (#138)                                                                               | `handoff/SoundB.md` (on its branch)    |
-| Live input: microphone, camera and screen                                       | Running, Opus 5.5 (engine #144, #150)                                                                  | `handoff/LiveInput.md` (on its branch) |
-| Shelves: a torus, the donut in Food, the tiny planet in Space                   | Running, Opus 5.5 (engine #147, #148)                                                                  | `handoff/Shelves.md` (on its branch)   |
-| Integrator: combined test runs                                                  | Running, Sonnet 5.5 (September 29, 2026)                                                               | —                                      |
-| Integrator 2: a second runner                                                   | Running, Sonnet 5.5 (again since September 30, 2026)                                                   | —                                      |
-| Next (WORKSTREAMS.md, Next)                                                     | The real island, Quality (the sweep's list), Knots, Food r2; later a web screen and the Wikipedia book | —                                      |
+| Lane                                                                                     | Status                                                                                                 | Handoff                                |
+| ---------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ | -------------------------------------- |
+| Operator                                                                                 | Running; runs the lanes                                                                                | —                                      |
+| Worlds r3: a premium character and a sharper island                                      | Running, Opus 5.5 (r2 #108 and hybrid #127 merged; r3 #135)                                            | [handoff/Worlds.md](handoff/Worlds.md) |
+| Fluids r4: particle liquids, smoke and flames                                            | Running, Opus 5.5 (v1 #121 merged; r4 on its branch)                                                   | [handoff/Fluids.md](handoff/Fluids.md) |
+| Science: real science data as splats                                                     | Running, Opus 5.5 (#132)                                                                               | `handoff/Science.md` (on its branch)   |
+| UI r2, r3 and r4: focus, panels, pad and pan; tap to pause; a glissando on the keyboards | Running, Opus 5.5 (#131 in the combined test run; #146; r4 engine #156, #157)                          | `handoff/UIr2.md` (on its branch)      |
+| Video 3D: a one-week spike                                                               | Running, Opus 5.5 (#133; engine #137 merged)                                                           | `handoff/Video3D.md` (on its branch)   |
+| Fix6: Photo to 3D, the Enigma's keys, the periodic table, the guitar                     | Running, Opus 5.5 (Fix4 #134 and Fix5 #145 merged; Fix6 #154, engine #155)                             | `handoff/Fix6.md` (on its branch)      |
+| Sound A: recorded samples, the sound lint and real sounds for the first shelves          | Running, Opus 5.5 (engine #141 merged; #142 in the combined test run)                                  | `handoff/SoundA.md` (on its branch)    |
+| Sound B: real sounds for the other shelves                                               | Running, Opus 5.5 (#138 in the combined test run)                                                      | `handoff/SoundB.md` (on its branch)    |
+| Live input: microphone, camera and screen; r2, the Song landscape                        | Running, Opus 5.5 (engine #144, #150; r2 next)                                                         | `handoff/LiveInput.md` (on its branch) |
+| Shelves: a torus, the donut in Food, the tiny planet in Space                            | Running, Opus 5.5 (engine #147 merged; #148 waits for the owner's marks)                               | `handoff/Shelves.md` (on its branch)   |
+| Integrator: combined test runs                                                           | Running, Sonnet 5.5 (September 29, 2026)                                                               | —                                      |
+| Integrator 2: a second runner                                                            | Running, Sonnet 5.5 (again since September 30, 2026)                                                   | —                                      |
+| Next (WORKSTREAMS.md, Next)                                                              | The real island, Quality (the sweep's list), Knots, Food r2; later a web screen and the Wikipedia book | —                                      |
 
 E4-finish, E5, E6a, E6b, F, G, Math, Fix3, AI, Help, HelpTextA, HelpTextB, Pictures, Manual and
 Screens are done, and so are Viewer, Studio Sound, Learn, Lab, Studio Models, Books, Fidelity A,
 Fidelity B, Worlds (the engine), Anatomy, the A/B toy piano and Character, and on September 30 the
 sharper default (Sharpness), the text layer, Chemistry, Machines A, Song live, Books r3, Photo to
-3D, Lab r2, Real objects, Screens r2, Pianos, Fluids v1, Worlds r2 and the hybrid round
-(WORKSTREAMS.md, "Done"). On September 27, 2026 the owner approved the plan in Part 1 of the How
-Splashery Is Made page: the Operator runs the lanes, workers are Opus 5.5 only (at the default
-effort, a trial), new public text is in American English, and the work goes in the order in
-ROADMAP.md, "Now". Lanes AI and Math started that day, and the Sound Board has its review features,
-ready for the owner's sound notes.
+3D, Lab r2, Real objects, Screens r2, Pianos, Fluids v1, Worlds r2 and the hybrid round, and on
+October 1 Books r4, Fix4 and Fix5 (WORKSTREAMS.md, "Done"). On September 27, 2026 the owner approved
+the plan in Part 1 of the How Splashery Is Made page: the Operator runs the lanes, workers are Opus
+5.5 only (at the default effort, a trial), new public text is in American English, and the work goes
+in the order in ROADMAP.md, "Now". Lanes AI and Math started that day, and the Sound Board has its
+review features, ready for the owner's sound notes.
 
 On September 29, 2026 the owner reviewed the new labs toys
 ([reviews/2026-09-29-new-toys](reviews/2026-09-29-new-toys/review.md)): "very impressed", the

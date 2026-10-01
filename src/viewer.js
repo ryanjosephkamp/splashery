@@ -2,7 +2,7 @@
 // turntable and an optional gentle autoplay effect. Used by embed/index.html
 // and by the <splashery-toy> custom element.
 
-import { Player, NoGPUError, Gestures } from "./player.js";
+import { Player, NoGPUError, Gestures, ui2On } from "./player.js";
 import { createScene, normalizeScene, normalizeLook } from "./state.js";
 import { decodeSceneHash } from "./codec.js";
 import { findToy, TOYS, ROOT } from "./toys.js";
@@ -103,20 +103,26 @@ export class Viewer {
         this.wheelZooms = true;
         player.interact();
       },
-      onOrbitStart: () => cam.begin(),
+      onOrbitStart: (e) => {
+        cam.begin();
+        // UI r2: Shift or Option/Alt and a drag moves the toy.
+        this.panDrag = ui2On() && !!(e?.shiftKey || e?.altKey) && e.type === "pointerdown";
+      },
       onOrbit: (dx, dy, dt) => {
         // Pictures: close up on a page, a drag moves across it.
-        if (player.pansHere()) player.panBy(dx, dy);
+        if (this.panDrag || player.pansHere()) player.panBy(dx, dy);
         else cam.rotateBy(dx, dy, dt);
         player.stage.requestRender();
       },
       onOrbitEnd: () => cam.end(),
+      pairPinch: ui2On(), // UI r2: read two fingers' moves as pairs
       onPinchStart: () => cam.begin(),
       onPinch: ({ scale, dx, dy, twist, mode, dt }) => {
         // Pictures: two fingers move a picture toy, as in a photo viewer.
         if (player.pictures) player.panBy(dx, dy);
         // A pinch only zooms: two fingers turn the toy only when they move
-        // together first (lane Viewer).
+        // together first (lane Viewer). UI r2: that drag moves the toy.
+        else if (mode === "drag" && ui2On()) player.panBy(dx, dy);
         else if (mode === "drag") cam.rotateBy(dx, dy, dt);
         if (scale > 0) cam.zoomBy(1 / scale);
         cam.rollBy(-twist);
