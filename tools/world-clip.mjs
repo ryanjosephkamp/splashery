@@ -229,16 +229,15 @@ const SCENES = {
     { hold: 0.8 },
   ],
   // Round 4: through the boulder garden (round 3's walk), seen from the
-  // side away from the trees, the boulders behind it: a walk, a run, a
-  // walk.
+  // side away from the trees, the boulders behind it: a walk, then a run.
   "props-r4": [
     { place: [7, 12.5, 90], camera: { distance: 4.2, pitch: 0.3 }, noCards: true },
     { hold: 0.4 },
     { look: [Math.PI / 2, 0], secs: 1.0 },
     { move: { x: 1 }, secs: 2.8 },
-    { move: { x: 1, run: true }, secs: 2.2 },
-    { move: { x: 1 }, secs: 3.0 },
-    { hold: 0.6 },
+    // (It ends mid-run: a little further on, the boulder garden's sign
+    // stands in the way.)
+    { move: { x: 1, run: true }, secs: 1.7 },
   ],
   // Depth, close up: a bush half behind a hill, then the character wading.
   "hybrid-depth": [
