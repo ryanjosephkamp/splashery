@@ -60,11 +60,15 @@ export class OrbitCamera {
 
   // Fits limits around a toy of this bounding radius.
   fit(radius, center = [0, 0, 0]) {
+    // Page focus (lane Books r4): the home view keeps its distance in toy
+    // radii, so a toy rebuilt for a new option (or its own file) comes home
+    // to the view it opened with, not the default distance.
+    const rel = this.home.distance / this.radius;
     this.radius = radius;
     this.target = center.slice();
     this.minDistance = radius * 1.25;
     this.maxDistance = radius * 10;
-    this.home.distance = radius * DEFAULT_CAMERA.distance;
+    this.home.distance = radius * (Number.isFinite(rel) && rel > 0 ? rel : DEFAULT_CAMERA.distance);
   }
 
   interact() {
