@@ -255,6 +255,15 @@ Newton's cradle). `plane` is `"view"`, a normal, or `(point) => normal`; without
 the horizontal plane it started on (the laptop). A drag that starts beside the toy still turns the
 view. `tools/drag-clip.mjs` renders drags and taps as clips for review.
 
+**Focus** (lane Books, page focus): `focus(point, time)` lets a double-tap look closely at part of
+the toy (a book's page). The app calls it with the tapped point in recipe units (null off the toy,
+or when a zoom out lets go); it returns true when it took the double-tap (false: the view resets, as
+on other toys). A toy with `focus` waits about 0.3 s before a single tap, to tell it from a
+double-tap. The drive says what to show in `out.view`: `{ key, center, size }` (a rectangle facing
+the front, in recipe units) or `{ key }` for the whole toy. Each new key glides the view there (0.7
+s on the toy's clock): face-on, centered, the rectangle filling the screen; the whole toy goes back
+to the toy's home view. Zooming out past a focused view calls `focus(null)`.
+
 **Image-to-3D scans** (lane G): the side the photo can't see is a guess (the pencil's underside came
 out dark), so pick taps that keep the photographed side toward the camera.
 
