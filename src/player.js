@@ -252,7 +252,11 @@ export class Player {
     this.driver.clearPokes();
     let info;
     const shelfDef = toy.kind === "builtin" ? findToy(toy.id) : null;
-    this.motion.setToy(null, null);
+    // A kit toy rebuilt with new options (a periodic table tile) keeps
+    // moving as it was until the new build replaces it, so its hidden parts
+    // stay hidden while it stays on screen (lane Fix6).
+    const same = shelfDef?.kind === "kit" && this.toyInfo?.kind === "kit" && this.toyInfo.id === shelfDef.id; // prettier-ignore
+    if (!same) this.motion.setToy(null, null);
     if (shelfDef?.kind === "kit") {
       info = await this.buildKit(shelfDef, toy, token, progress);
       if (!info) return null;
