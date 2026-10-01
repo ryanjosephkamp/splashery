@@ -2250,6 +2250,12 @@ export const TOY_SOUNDS = {
     ],
     off: { voice: "whoosh", f: 2600, to: 0.14, decay: 1.8, vol: 0.7 },
   },
+  // Lane Video 3D: a soft, level breath of air as the flight sets off and as the camera comes home
+  // (no rising sweep; the video's own sound plays during the flight of a video you opened).
+  "video-3d": {
+    on: { voice: "whoosh", f: 700, to: 1, decay: 1.2, vol: 0.22 },
+    off: { voice: "whoosh", f: 600, to: 1, decay: 1.0, vol: 0.18 },
+  },
   // Lane Screens: the old TV's click and hum (each style plays its own
   // cues as it switches on: the flat TV's soft tone, the cinema's curtains,
   // the hologram's shimmer).

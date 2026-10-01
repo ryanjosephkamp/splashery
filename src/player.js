@@ -28,10 +28,11 @@ import {
 import { findToy, assetURL, lookOption, pickLook, labsOn } from "./toys.js";
 
 // UI r2: focus mode, the sheet's extra stops, the desktop panel's fold and
-// gallery page, the finer drawing pad and moving (panning) a toy show behind
-// the labs switch until the owner's marks; then this returns true.
+// gallery page, the finer drawing pad and moving (panning) a toy. They showed
+// behind the labs switch until the owner's marks (all eight good); since
+// October 1, 2026 they are on for everyone.
 export function ui2On() {
-  return labsOn();
+  return true;
 }
 import { pickKernel } from "./kernels.js"; // Lab
 import { pickSharpness, sharpOff } from "./sharpness.js"; // Sharpness

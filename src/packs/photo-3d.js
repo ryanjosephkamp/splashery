@@ -85,7 +85,16 @@ export async function decodePhoto(source) {
     try {
       bmp = await createImageBitmap(blob, { imageOrientation: "from-image" });
     } catch {
-      throw new Error("That file is not a photo this toy can read. Open a JPEG, PNG or WebP.");
+      // Lane Fix6: say what happened and what to do.
+      const head = new Uint8Array(await blob.slice(0, 16).arrayBuffer());
+      const brand = String.fromCharCode(...head.slice(4, 12));
+      if (/^ftyp(heic|heix|hevc|heim|heis|mif1|msf1)/.test(brand))
+        throw new Error(
+          "This browser can't read HEIC photos (the iPhone's own format). Save the photo as a JPEG and open that, or open it in Safari. On an iPhone, Settings › Camera › Formats › Most Compatible takes JPEG photos.",
+        );
+      throw new Error(
+        "This browser couldn't read that file as a photo. Save it as a JPEG, PNG or WebP and open that.",
+      );
     }
     const f = Math.min(1, MAX_SIDE / Math.max(bmp.width, bmp.height));
     const w = Math.max(2, Math.round(bmp.width * f));
@@ -227,10 +236,11 @@ const PHOTO_3D = {
   action: { key: "flat", label: "Raise or flatten the depth" },
   input: {
     title: "Your own photo",
-    accept: ".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp",
+    accept:
+      ".jpg,.jpeg,.png,.webp,.heic,.heif,image/jpeg,image/png,image/webp,image/heic,image/heif",
     binary: true,
     fileButton: "Open a photo…",
-    note: "Open a JPEG, PNG or WebP photo. A depth model that runs on this device (about 27 MB, loaded the first time) works out how far away each part of the picture is, and the photo is rebuilt as splats in 3D. Nothing is uploaded. It takes a few seconds, longer on a phone.",
+    note: "Open a JPEG, PNG or WebP photo (HEIC too, where the browser can read it). Large photos are scaled down to 2,048 pixels on the long side, and turned upright by their camera tag. A depth model that runs on this device (about 27 MB, loaded the first time) works out how far away each part of the picture is, and the photo is rebuilt as splats in 3D. Your photo never leaves your device. It takes a few seconds, longer on a phone.",
     async read(_text, fileName, file) {
       if (!file) throw new Error("Open a photo.");
       const p = await openPhoto(
