@@ -203,6 +203,14 @@ function slotsFor(view, perSlot, count) {
   return Math.max(60, Math.min(420, Math.floor((count * 0.55) / perSlot)));
 }
 
+// Fine detail (round 2's second pass): every look draws its measured values
+// as many short needles, and the ones between two measured slots (or two
+// bands) take the values in between, so a curve bends smoothly instead of
+// stepping. Nothing is invented: each in-between value lies on the straight
+// line between two measured neighbors.
+const SUB = 2; // needles per slot along time (Ribbons, Tube, Mesh's long lines)
+const SUBF = 2; // needles per band across pitch (Lines, Mesh)
+
 export function buildLook(k, look, { view, backdrop, nf }) {
   const live = view === "live";
   const list = [];
@@ -213,27 +221,30 @@ export function buildLook(k, look, { view, backdrop, nf }) {
   let geo = {};
   if (look === "ribbons" || look === "tube") {
     // Time runs along x, out of the gate at the left.
-    const J = 14; // strands per ribbon
-    const P = 48; // points per ring
-    S = slotsFor(view, look === "ribbons" ? 6 * J : P, k.count);
+    const J = 22; // strands per ribbon
+    const P = 72; // points per ring
+    S = slotsFor(view, (look === "ribbons" ? 6 * J : P) * SUB, k.count);
     if (look === "tube" && !live) S = Math.min(S, 180); // rings you can tell apart
     const dx = LEN_X / S;
     const x0 = -LEN_X / 2;
     // Live: slot s's line is where the frame heard s frames ago is (slot 0
-    // on the gate); Whole: slot s is the s-th share of the song.
-    const xs = (s) => x0 + (s + (live ? 0 : 0.5)) * dx;
+    // on the gate); Whole: slot s is the s-th share of the song. Sub-step h
+    // lies h / SUB of the way to the next slot.
+    const xs = (s, h) => x0 + (s + h / SUB + (live ? 0 : 0.5)) * dx;
     if (look === "ribbons") {
       for (let b = 0; b < 6; b++)
         for (let j = 0; j < J; j++)
-          for (let s = 0; s < S; s++) needle(list, [xs(s), ribbonBase(b), 0], [1, 0, 0], dx * 1.45, 0.0045, [s, b, j]); // prettier-ignore
+          for (let s = 0; s < S; s++)
+            for (let h = 0; h < SUB; h++) needle(list, [xs(s, h), ribbonBase(b), 0], [1, 0, 0], (dx / SUB) * 1.6, 0.0032, [s, b, j, h]); // prettier-ignore
       lift = 0.5;
     } else {
       for (let s = 0; s < S; s++)
-        for (let p = 0; p < P; p++) {
-          const th = (p / P) * Math.PI * 2;
-          const r = 0.02;
-          needle(list, [xs(s), r * Math.cos(th), r * Math.sin(th)], [0, -Math.sin(th), Math.cos(th)], ((2 * Math.PI * 0.4) / P) * 1.2, 0.004, [s, p, 0]); // prettier-ignore
-        }
+        for (let h = 0; h < SUB; h++)
+          for (let p = 0; p < P; p++) {
+            const th = (p / P) * Math.PI * 2;
+            const r = 0.02;
+            needle(list, [xs(s, h), r * Math.cos(th), r * Math.sin(th)], [0, -Math.sin(th), Math.cos(th)], ((2 * Math.PI * 0.4) / P) * 1.25, 0.003, [s, p, 0, h]); // prettier-ignore
+          }
       lift = 0.42;
     }
     geo = { axis: "x", x0, dx, J, P };
@@ -247,19 +258,22 @@ export function buildLook(k, look, { view, backdrop, nf }) {
     const W = 2;
     const D = LEN * 0.8;
     const K = nf;
-    S = slotsFor(view, look === "mesh" ? K * 1.5 : K, k.count);
+    S = slotsFor(view, (look === "mesh" ? K * 1.5 : K) * SUBF, k.count);
     // Live: one line per frame over the last 3 s (2.4 s for the mesh), few
     // enough to tell apart at phone size.
     if (look === "mesh") S = Math.min(S, live ? 60 : 100);
     else S = Math.min(S, live ? 75 : 120);
     const dz = D / S;
     const xk = (f) => ((f + 0.5) / K - 0.5) * W;
-    const zs = (s) => D / 2 - (s + (live ? 0 : 0.5)) * dz;
+    const zs = (s, h = 0) => D / 2 - (s + h / SUB + (live ? 0 : 0.5)) * dz;
+    // Across: SUBF needles per band, the last band's one alone.
     for (let s = 0; s < S; s++)
-      for (let f = 0; f < K; f++) needle(list, [xk(f), 0, zs(s)], [1, 0, 0], (W / K) * 1.4, 0.0042, [s, f, 0]); // prettier-ignore
+      for (let f = 0; f < K; f++)
+        for (let q = 0; q < (f < K - 1 ? SUBF : 1); q++) needle(list, [xk(f + q / SUBF), 0, zs(s)], [1, 0, 0], (W / K / SUBF) * 1.6, 0.0034, [s, f, 0, q]); // prettier-ignore
     if (look === "mesh")
       for (let f = 1; f < K; f += 4)
-        for (let s = 0; s < S; s++) needle(list, [xk(f), 0, zs(s)], [0, 0, 1], dz * 1.45, 0.0042, [s, f, 1]); // prettier-ignore
+        for (let s = 0; s < S; s++)
+          for (let h = 0; h < SUB; h++) needle(list, [xk(f), 0, zs(s, h)], [0, 0, 1], (dz / SUB) * 1.6, 0.0034, [s, f, 1, h]); // prettier-ignore
     lift = 0.7;
     geo = { axis: "z", W, D, dz, K };
     // The gate: a line across the front.
@@ -282,44 +296,68 @@ const ribbonBase = (b) => -0.55 + b * 0.21;
 // rest place (red, green, blue each about a half: x, y, z) and whether it
 // shows (alpha) on the right.
 
+// Color tables (0..255 bytes, three per entry), built once.
+const TABLE = 256;
+function table(stops) {
+  const t = new Uint8Array(TABLE * 3);
+  for (let i = 0; i < TABLE; i++) {
+    const c = rgb(ramp(stops, i / (TABLE - 1)));
+    for (let j = 0; j < 3; j++) t[i * 3 + j] = Math.round(c[j] * 255);
+  }
+  return t;
+}
+let TABLES = null;
+const tables = () =>
+  (TABLES ??= {
+    six: SIX_COLORS.map((c) => rgb(c).map((x) => x * 255)),
+    bright: table(["#13706f", "#1f8a8c", "#2f86c8", "#4b5fb8", "#7c4aa3", "#b0427a", "#d9566b", "#ee8a3c", "#f6b45a"]), // prettier-ignore
+    pitch: table(["#3f2c8c", "#5b3fa0", "#8a45a0", "#b84a8e", "#d9566b", "#e8714f", "#ee8a3c"]), // prettier-ignore
+    paper: rgb(PAPER).map((x) => x * 255),
+  });
+
 export function drawLook(g, L, an, now, { backdrop }) {
   const { cols, rows } = L.atlas;
   if (!L.img || L.img.width !== cols * 2) L.img = g.createImageData(cols * 2, rows);
   const px = L.img.data;
+  const T = tables();
   const fe = an?.features;
   const n = fe?.n || 0;
   const nowFrame = L.live ? liveFrame(now) : Math.floor(now / HOP);
   const range = slotFrames(L.view, L.S, n, nowFrame);
-  // Tops: the loudest measured so far (kept on the look).
+  // Tops: the loudest measured so far (kept on the look, from new frames only).
   if (fe && L.topsVersion !== an.version) {
     L.topsVersion = an.version;
-    let rms = -120;
-    let six = -120;
-    let band = -120;
-    for (let f = 0; f < n; f++) {
-      if (!fe.done[f]) continue;
-      const o = f * NFI;
-      rms = Math.max(rms, fe.feat[o + F.rms]);
-      for (let i = 0; i < 6; i++) six = Math.max(six, fe.feat[o + F.six0 + i]);
-      for (let b = 0; b < fe.nf; b++) band = Math.max(band, fe.bands[f * fe.nf + b]);
+    if (!L.seen || L.seen.length !== n) {
+      L.seen = new Uint8Array(n);
+      L.tops = { rms: -120, six: -120, band: -120 };
     }
-    L.tops = { rms, six, band };
+    const t = L.tops;
+    for (let f = 0; f < n; f++) {
+      if (!fe.done[f] || L.seen[f]) continue;
+      L.seen[f] = 1;
+      const o = f * NFI;
+      t.rms = Math.max(t.rms, fe.feat[o + F.rms]);
+      for (let i = 0; i < 6; i++) t.six = Math.max(t.six, fe.feat[o + F.six0 + i]);
+      for (let b = 0; b < fe.nf; b++) t.band = Math.max(t.band, fe.bands[f * fe.nf + b]);
+    }
   }
   const tops = L.tops || { rms: 0, six: 0, band: 0 };
-  const cache = new Map();
-  const values = (s) => {
-    if (!cache.has(s)) cache.set(s, fe ? slotValues(fe.feat, fe.done, range(s), L.live, n) : null);
-    return cache.get(s);
-  };
+  // Each slot's values, once per drawing (and one slot past the end, for the
+  // in-between needles of the last).
+  const S = L.S;
+  const vals = new Array(S + 1);
+  for (let s = 0; s <= S; s++)
+    vals[s] = fe ? slotValues(fe.feat, fe.done, range(s), L.live, n) : null;
   const paper = backdrop === "paper";
   const lift2 = 2 * L.lift;
-  const put = (i, P, R, col, show) => {
+  const col = [0, 0, 0];
+  const put = (i, P, R, show) => {
     const c = i % cols;
     const r = Math.floor(i / cols);
     const o = (r * cols * 2 + c) * 4;
-    px[o] = Math.round(col[0] * 255);
-    px[o + 1] = Math.round(col[1] * 255);
-    px[o + 2] = Math.round(col[2] * 255);
+    px[o] = col[0];
+    px[o + 1] = col[1];
+    px[o + 2] = col[2];
     px[o + 3] = 255;
     const q = (r * cols * 2 + cols + c) * 4;
     px[q] = Math.round(255 * clamp01((P[0] - R[0]) / lift2 + 0.5));
@@ -327,53 +365,119 @@ export function drawLook(g, L, an, now, { backdrop }) {
     px[q + 2] = Math.round(255 * clamp01((P[2] - R[2]) / lift2 + 0.5));
     px[q + 3] = show ? 255 : 0;
   };
+  // Color from a table entry or an RGB triple, times a brightness, then the
+  // Live fade with age (into the paper, or darker without it).
+  const setCol = (src, at, k, age) => {
+    const fadeTo = L.live && paper ? 0.55 * age ** 1.5 : 0;
+    const dim = L.live && !paper ? 1 - 0.5 * age : 1;
+    for (let j = 0; j < 3; j++) {
+      const v = Math.min(255, src[at + j] * k * dim);
+      col[j] = Math.round(v + (T.paper[j] - v) * fadeTo);
+    }
+  };
   const geo = L.geo;
-  const fade = (col, s) => (L.live && paper ? mix(col, PAPER, 0.55 * (s / L.S) ** 1.5) : L.live ? shade(col, 1 - 0.5 * (s / L.S)) : col); // prettier-ignore
+  const P = [0, 0, 0];
+  const lerp = (a, b, t) => a + (b - a) * t;
+  // Lines and Mesh: each slot's band levels (0..1), worked out once.
+  let lv = null;
+  if (geo.axis === "z" && fe) {
+    const K = geo.K;
+    lv = new Float32Array((S + 1) * K).fill(-1);
+    for (let s = 0; s <= S; s++) {
+      const f0 = range(s);
+      if (!vals[s] || !f0) continue;
+      for (let b = 0; b < K; b++) {
+        let db = DB_FLOOR;
+        if (L.live) db = fe.bands[f0[0] * fe.nf + b];
+        else for (let f = f0[0]; f < f0[1]; f++) db = Math.max(db, fe.bands[f * fe.nf + b]);
+        lv[s * K + b] = level(db, tops.band, 45) ** 1.3;
+      }
+    }
+  }
   for (let i = 0; i < L.n; i++) {
-    const [s, a, b] = L.roles[i];
+    const [s, a, b, h] = L.roles[i];
     const R = L.rest[i];
-    const v = values(s);
+    const v = vals[s];
     if (!v) {
-      put(i, R, R, [0.5, 0.5, 0.5], false);
+      col[0] = col[1] = col[2] = 128;
+      put(i, R, R, false);
       continue;
     }
-    if (L.look === "ribbons") {
-      // Ribbon a (a band, bass at the bottom), strand b: the band's loudness
-      // lifts the ribbon and spreads its strands.
-      // The ribbon turns with the band's change since the slot before it
-      // (rising one way, falling the other).
-      const lv = level(v.six[a], tops.six, 40);
-      const w = values(L.live ? s + 1 : s - 1);
-      const turn = w ? Math.max(-1.3, Math.min(1.3, (lv - level(w.six[a], tops.six, 40)) * 8)) : 0;
-      const across = (b / (geo.J - 1) - 0.5) * (0.02 + 0.26 * lv);
-      const P = [R[0], ribbonBase(a) + 0.14 * lv + across * Math.cos(turn) * 0.5, across * Math.sin(turn) + across * 0.6]; // prettier-ignore
-      put(i, P, R, fade(rgb(shade(SIX_COLORS[a], 0.8 + 0.3 * lv)), s), true);
-    } else if (L.look === "tube") {
-      // Ring s, point a: loudness is the radius, pitch tilts the ring,
-      // brightness colors it.
-      const lv = level(v.rms, tops.rms, 42);
-      const r = 0.02 + 0.38 * lv ** 1.2;
-      const th = (a / geo.P) * Math.PI * 2;
-      const tilt = 0.7 * pitchUnit(pitchHz(v));
-      const P = [R[0] + r * Math.sin(th) * Math.sin(tilt), r * Math.cos(th), r * Math.sin(th) * Math.cos(tilt)]; // prettier-ignore
-      put(i, P, R, fade(rgb(ramp(BRIGHT, brightUnit(v.cen))), s), true);
+    const age = s / S;
+    if (L.look === "ribbons" || L.look === "tube") {
+      // The values h / SUB of the way to the next slot (or this slot's own
+      // at the end of the song).
+      const w = vals[s + 1] || v;
+      const t = h / SUB;
+      if (L.look === "ribbons") {
+        // Ribbon a (a band, bass at the bottom), strand b: the band's
+        // loudness widens the ribbon; it turns as the loudness rises or
+        // falls (the change from the slot before), and bends a little into
+        // depth like a sheet, its middle strands brightest.
+        const lvOf = (x) => level(x.six[a], tops.six, 40);
+        const l0 = lerp(lvOf(v), lvOf(w), t);
+        // (The change over two slots each side: a steady turn, not a zigzag.)
+        const p0 = vals[Math.max(0, s - 2)] || v;
+        const n0 = vals[Math.min(S, s + 2)] || w;
+        const dl = (lvOf(n0) - lvOf(p0)) / 4;
+        const turn = Math.max(-0.9, Math.min(0.9, dl * 10 * (L.live ? -1 : 1)));
+        const u = b / (geo.J - 1) - 0.5;
+        const width = 0.02 + 0.26 * l0;
+        const across = u * width;
+        const bend = (0.25 - u * u) * width * 0.9;
+        P[0] = R[0];
+        P[1] = ribbonBase(a) + 0.14 * l0 + across * Math.cos(turn) * 0.5;
+        P[2] = across * Math.sin(turn) + across * 0.6 + bend;
+        const c = T.six[a];
+        setCol(c, 0, 0.72 + 0.28 * (1 - 2 * Math.abs(u)) + 0.3 * l0, age);
+        put(i, P, R, true);
+      } else {
+        // Ring s, point a: loudness is the radius, pitch tilts the ring,
+        // brightness colors it; lit from above and in front.
+        const rOf = (x) => 0.02 + 0.38 * level(x.rms, tops.rms, 42) ** 1.2;
+        const r = lerp(rOf(v), rOf(w), t);
+        const tilt = 0.7 * lerp(pitchUnit(pitchHz(v)), pitchUnit(pitchHz(w)), t);
+        const bu = lerp(brightUnit(v.cen), brightUnit(w.cen), t);
+        const th = (a / geo.P) * Math.PI * 2;
+        P[0] = R[0] + r * Math.sin(th) * Math.sin(tilt);
+        P[1] = r * Math.cos(th);
+        P[2] = r * Math.sin(th) * Math.cos(tilt);
+        const light = 0.78 + 0.2 * Math.cos(th) + 0.14 * Math.sin(th);
+        setCol(T.bright, Math.round(bu * (TABLE - 1)) * 3, light, age);
+        put(i, P, R, true);
+      }
     } else {
-      // Lines and Mesh: band a's loudness at slot s is the height.
-      const f0 = range(s);
-      let db = DB_FLOOR;
-      if (L.live) db = fe.bands[f0[0] * fe.nf + a];
-      else for (let f = f0[0]; f < f0[1]; f++) db = Math.max(db, fe.bands[f * fe.nf + a]);
-      const lv = level(db, tops.band, 45) ** 1.3;
-      const P = [R[0], lv * 0.62 + 0.004, R[2]];
-      const col = ramp(LOW_HIGH, a / (geo.K - 1));
-      put(i, P, R, fade(rgb(shade(col, 0.85 + 0.25 * lv)), s), true);
+      // Lines and Mesh: band a's level at slot s is the height; a needle q /
+      // SUBF of the way to the next band (or h / SUB to the next slot)
+      // takes the level in between.
+      const K = geo.K;
+      let l;
+      if (b === 0) {
+        const t = h / SUBF;
+        l = lerp(lv[s * K + a], lv[s * K + Math.min(K - 1, a + 1)], t);
+      } else {
+        const nx = lv[(s + 1) * K + a];
+        l = lerp(lv[s * K + a], nx >= 0 ? nx : lv[s * K + a], h / SUB);
+      }
+      l = Math.max(0, l);
+      P[0] = R[0];
+      P[1] = l * 0.62 + 0.004;
+      P[2] = R[2];
+      // Pitch picks the hue; the height deepens it (low lines pale and
+      // fine, the loud ridges full).
+      const at = Math.round((a / (K - 1)) * (TABLE - 1)) * 3;
+      setCol(T.pitch, at, 0.62 + 0.55 * l, age);
+      const pale = 0.45 * (1 - l) ** 2;
+      for (let j = 0; j < 3; j++)
+        col[j] = Math.round(col[j] + (T.paper[j] - col[j]) * (paper ? pale : 0));
+      put(i, P, R, true);
     }
   }
   g.putImageData(L.img, 0, 0);
   // What was drawn at the "now" mark, for the sync test: the moment and its
   // slot's loudness (dB).
   const at = L.live ? 0 : Math.min(L.S - 1, Math.floor((nowFrame * L.S) / Math.max(1, n)));
-  L.shown = { now, rms: values(at)?.rms ?? null };
+  L.shown = { now, rms: vals[at]?.rms ?? null };
 }
 
 const rgb = (c) => (typeof c === "string" ? hexToRgb(c) : c);
