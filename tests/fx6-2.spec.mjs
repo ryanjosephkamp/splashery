@@ -226,11 +226,14 @@ test("periodic table: the tour's shuffled order", async ({ page }) => {
   await tableTap(page, "board");
 });
 
-test("periodic table: the help names the new gestures", async () => {
+test("periodic table and Enigma: the help names the new gestures", async () => {
   const { TOY_HELP } = await import("../src/toy-help.js");
-  expect(TOY_HELP["periodic-table"].howTo).toMatch(/tile again to lower/);
+  expect(TOY_HELP["periodic-table"].howTo).toMatch(/again to lower/);
   expect(TOY_HELP["periodic-table"].howTo).toMatch(/tour/);
   expect(TOY_HELP["enigma-machine"].howTo).toMatch(/keys/);
+  // How-to lines fit the help line (95 characters, tests/hta.spec.mjs).
+  for (const id of ["periodic-table", "enigma-machine"])
+    expect(TOY_HELP[id].howTo.length).toBeLessThanOrEqual(95);
 });
 
 // ---- The acoustic guitar: smooth lacquer, clean strings ----------------------------------
