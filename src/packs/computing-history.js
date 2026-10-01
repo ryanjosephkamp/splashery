@@ -1907,7 +1907,9 @@ export const RECIPES = {
       shown: () => EN_SHOWN.label,
     },
     controls: [
-      { key: "go", label: "Type it", type: "pulse", ease: EN.E },
+      // A tap off the keys always types or decodes (the next tap starts the
+      // next message), so it never pauses (UI r3's long-effect pause).
+      { key: "go", label: "Type it", type: "pulse", ease: EN.E, pausable: false },
       { key: "type", label: "Key", type: "pulse", ease: 0.2 },
       { key: "clear", label: "Clean sheet", type: "pulse", ease: 0.3 },
     ],

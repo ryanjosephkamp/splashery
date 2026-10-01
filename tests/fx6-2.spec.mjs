@@ -107,6 +107,8 @@ test("Enigma: a key press moves the key, steps the rotor and lights its lamp", (
     pad: { plain: "", coded: "", dec: "", typed: true },
     rest: [0, 0, 0],
   };
+  // A tap off the keys always types or decodes: UI r3 never pauses it.
+  expect(r.controls.find((c) => c.key === "go").pausable).toBe(false);
   expect(r.typeKey("q")).toEqual({ key: "type", pick: ENIGMA.AZ.indexOf("Q") });
   expect(r.typeKey("p")).toBeNull();
   expect(r.typeKey("r")).toBeNull();

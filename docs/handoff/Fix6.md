@@ -180,6 +180,13 @@ October 1, 2026:
     mm, with splats drawn out along them, so they read as clean lines. They still bend and vibrate
     on the strum.
 
+- **Enigma and UI r3** (#146). UI r3 pauses a tap effect longer than about 2 s on the next tap. The
+  Enigma's tap off the keys eases over 9 s, so for some seconds after a message finished, the next
+  tap (to decode, or to type the stored message) only paused an effect that was already over:
+  nothing happened. Its `go` control is now `pausable: false`, so a tap off the keys always types or
+  decodes. Checked by hand in UI r3's hold-still view (closer, turntable off) on a phone and a
+  desktop: the keys type, the pad clears, a tap off the keys types the stored message.
+
 ## Known issues
 
 - The panel's line "… splats in 1 pieces of surface" (an older line) reads oddly for one piece.
