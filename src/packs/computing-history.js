@@ -1835,11 +1835,11 @@ function driveBombe(t, c, out, info) {
   }
   out.parts.lamp = { visible: pose.lamp };
   out.morph = [pose.shown[0], pose.shown[1], 0, 0];
-  // Sounds: a dense clatter of drums and the whirr of the motor while it
-  // searches, then a sharp stop and a bell when a setting is found.
+  // Sounds: a dense clatter of drums while it searches (Sound B: no motor
+  // buzz, the owner's note), then a sharp stop and a bell when a setting is
+  // found.
   if (data.run && s >= 0) {
     cuesAt(m, "cue", s, [
-      [0.45, { voice: "engine", f: 70, decay: 3.8, vol: 0.45 }],
       [0.5, { voice: "clatter", f: 900, n: 30, rate: 8, decay: 3.6, vol: 0.4 }],
       [4.3, { voice: "crack", f: 1800, decay: 0.4, vol: 0.8 }],
       [4.35, { voice: "bell", f: "C6", decay: 1.6, vol: 0.8 }],

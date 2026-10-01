@@ -13,6 +13,7 @@ import {
   vec,
 } from "../kit.js";
 import { evenCylinder, evenTorus, evenTube } from "./even.js";
+import { glissando, newTaps } from "./glissando.js"; // lane UI r4
 
 const TAU = Math.PI * 2;
 const LIGHT = vec.unit([0.3, 0.8, 0.55]);
@@ -127,7 +128,7 @@ const stickAxis = (s) => vec.unit(vec.cross(vec.sub(s.tip, s.butt), [0, 1, 0]));
 
 // Where the xylophone's mallet head is (so a quick second tap swings on
 // from there instead of jumping home first).
-const xylo = { head: null, from: null, tap: -1 };
+const xylo = { head: null, from: null, tap: -1, hits: new Map() }; // hits: bar -> struck at (lane UI r4)
 
 // The xylophone's bars (x, length) and the mallet's resting head.
 const XYLO = (() => {
@@ -301,6 +302,38 @@ function steel(c) {
   const d = dot(c.n, LIGHT);
   const h = Math.pow(Math.max(0, dot(c.n, HALF)), 6);
   return mix(mix("#6f7780", "#e2e7ec", 0.5 + 0.5 * d), "#ffffff", 0.7 * h);
+}
+
+// Lane UI r4: the xylophone bar under a point (null off the bars).
+function xyloBar(p) {
+  const X = XYLO;
+  if (p[1] < X.top - 0.07 || p[1] > X.top + 0.25) return null;
+  let i = -1;
+  let best = 0.14;
+  X.bars.forEach((b, k) => {
+    const d = Math.abs(p[0] - b.x);
+    if (d < best && Math.abs(p[2]) < (b.len * 0.86) / 2 + 0.08) [i, best] = [k, d];
+  });
+  return i < 0 ? null : i;
+}
+
+// Lane UI r4: the toy piano key under a point on the keyboard (null off
+// the keys; the hammers and rods are for taps only).
+function tpKeyAt([x, y, z]) {
+  if (!(z > 0.09 && z < 0.5 && y > TP.keyTop - 0.1 && y < TP.keyTop + 0.1)) return null;
+  let best = -1;
+  let far = Infinity;
+  if (z < 0.32 && y > TP.keyTop - 0.01)
+    TP.keys.forEach((k) => {
+      const d = Math.abs(x - k.x);
+      if (k.black && d < 0.036 && d < far) [best, far] = [k.i, d];
+    });
+  if (best < 0)
+    TP.keys.forEach((k) => {
+      const d = Math.abs(x - k.x);
+      if (!k.black && d < TP.W / 2 + 0.02 && d < far) [best, far] = [k.i, d];
+    });
+  return best < 0 ? null : best;
 }
 
 export const RECIPES = {
@@ -732,17 +765,12 @@ export const RECIPES = {
       // Any tap over the row of bars strikes the nearest bar (fingers are
       // wide); a tap on the mallet, a wheel or the rail ends plays the scale.
       at(p) {
-        const X = XYLO;
-        if (p[1] < X.top - 0.07 || p[1] > X.top + 0.25) return null;
-        let i = -1;
-        let best = 0.14;
-        X.bars.forEach((b, k) => {
-          const d = Math.abs(p[0] - b.x);
-          if (d < best && Math.abs(p[2]) < (b.len * 0.86) / 2 + 0.08) [i, best] = [k, d];
-        });
-        return i < 0 ? null : { key: "strike", pick: i };
+        const i = xyloBar(p);
+        return i === null ? null : { key: "strike", pick: i };
       },
     },
+    // Lane UI r4: press a bar and drag along the row for a glissando.
+    drag: glissando(xyloBar),
     drive(t, c, out, info) {
       const X = XYLO;
       const u = 1 - c.play;
@@ -762,6 +790,14 @@ export const RECIPES = {
         else if (u < 0.85) head = at((u - 0.1) / 0.75);
         else head = vec.add(at(1), vec.mul(vec.sub(X.rest, at(1)), easeInOut((u - 0.85) / 0.15)));
         X.bars.forEach((b, k) => (dip[k] = ring((u - 0.1 - (0.75 * k) / 7) * 3)));
+      }
+      // Every bar struck since the last frame rings (a glissando strikes
+      // several in a row; lane UI r4).
+      const now = info?.time ?? 0;
+      for (const tp of newTaps(info, xylo)) if (tp.key === "strike" && tp.pick !== null) xylo.hits.set(tp.pick, now); // prettier-ignore
+      for (const [k, at] of xylo.hits) {
+        if (now - at > 1.2 || now < at) xylo.hits.delete(k);
+        else dip[k] = Math.min(dip[k], ring(now - at - 0.12, 0.045));
       }
       // One bar: the mallet swings over it from wherever it is, strikes at
       // 0.12 s (with the note), bounces up and goes home; the bar jumps.
@@ -920,16 +956,16 @@ export const RECIPES = {
         return best < 0 ? null : { key: "strike", pick: best };
       },
     },
+    // Lane UI r4: press a key and drag along the keyboard for a glissando.
+    drag: glissando(tpKeyAt),
     drive(t, c, out, info) {
       const m = mem(c);
       if (!m.hits) m.hits = new Map();
       const now = info?.time ?? 0;
-      const tap = info?.tap;
-      if (tap && tap.n !== m.n) {
-        m.n = tap.n;
+      // Every tap since the last frame (a glissando presses several keys).
+      for (const tap of newTaps(info, m))
         if (tap.key === "strike" && tap.pick !== null && c.strike > 0)
           m.hits.set(tap.pick, { at: now, sounded: false });
-      }
       // How long ago each key started down (the latest press wins).
       const since = TP.keys.map(() => Infinity);
       if (c.play > 0) {

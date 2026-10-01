@@ -157,7 +157,8 @@ function chladniCue(mode, on) {
     return [
       { voice: "tone", f, decay: 9, kind: "sine", vol: 0.9 },
       { voice: "tone", f: f * 2, decay: 9, kind: "triangle", vol: 0.12 },
-      { voice: "patter", at: 0.1, f: 2600, n: 40, decay: 2.2, vol: 0.3 },
+      // Sound B: the sand slides as it settles, not a patter of clicks.
+      { voice: "breath", at: 0.1, f: 2600, to: 0.8, decay: 3, vol: 0.25 },
     ];
   return [{ voice: "hiss", f: 3000, decay: 0.7, vol: 0.3 }];
 }

@@ -311,6 +311,61 @@ and others, Apache 2.0; the quantized ONNX build is by
 [ONNX Runtime Web](https://github.com/microsoft/onnxruntime) (MIT). Photos people open are processed
 in their browser and never uploaded.
 
+## Sound effects (lane Sound B)
+
+Recorded sound effects for some toys on the nature, weather, food, toys, Open me, medieval, animals,
+math, holidays, vehicles and landmarks shelves, in `assets/sounds/`. Every one is CC0 1.0 (public
+domain), checked on its live page on September 30, 2026. Each was cut, faded, made mono,
+peak-normalized and saved as a small MP3; it loads only when its toy is tapped. The details are in
+[tools/assets.json](tools/assets.json) (`sounds`).
+
+| File                         | Work                                                                                             | Author                                             | License                                                       |
+| ---------------------------- | ------------------------------------------------------------------------------------------------ | -------------------------------------------------- | ------------------------------------------------------------- |
+| `puzzle-cube-turn.mp3`       | [Cube Turn - 9 (a puzzle cube turning)](https://freesound.org/s/486585/)                         | SpaceJoe                                           | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `balloon-dog-pop.mp3`        | [Balloon-Burst-07.wav](https://freesound.org/s/82121/)                                           | Gniffelbaf                                         | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `book-page.mp3`              | [Book Turn Page 2.wav](https://freesound.org/s/119127/)                                          | esperri                                            | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `apple-bite.mp3`             | [Bite (Apple)](https://freesound.org/s/275015/)                                                  | wadaltmon                                          | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `popcorn-popping.mp3`        | [popcorn.wav](https://freesound.org/s/488722/)                                                   | Mike888                                            | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `taco-crack.mp3`             | [chips crunch sound](https://freesound.org/s/705360/)                                            | TomatoHater                                        | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `fireworks-burst.mp3`        | [Firework Explosion 3](https://freesound.org/s/212683/)                                          | a deleted Freesound account (deleted_user_3544904) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `colosseum-crowd.mp3`        | [cheering and clapping crowd 1](https://freesound.org/s/221568/)                                 | AlaskaRobotics                                     | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `colosseum-hooves.mp3`       | [Horse and Carriage.mp3](https://freesound.org/s/388391/)                                        | maadmacs                                           | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `steam-train-chug.mp3`       | [Steam Train In Motion 1.wav](https://freesound.org/s/179349/)                                   | lolamadeus                                         | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `sports-car-rev.mp3`         | [Car Engine Revving.WAV](https://freesound.org/s/558844/)                                        | DigPro120                                          | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `tractor-engine.mp3`         | [Tractor whirring](https://freesound.org/s/339167/)                                              | vonis22                                            | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `helicopter-rotor.mp3`       | [Helicopter.wav](https://freesound.org/s/488089/)                                                | Mike_Leister                                       | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `propeller-plane-engine.mp3` | [Aeroplane Passing Close.wav](https://freesound.org/s/507446/)                                   | paulprit                                           | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `bow-and-target-release.mp3` | [Bow Release (Bow and Arrow) 3](https://freesound.org/s/384918/)                                 | Ali_6868                                           | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `owl-hoot.mp3`               | [Owl Hoot](https://freesound.org/s/465697/)                                                      | Breviceps                                          | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `frog-croak.mp3`             | [Frog croaking sound effect](https://freesound.org/s/354132/)                                    | betterchinese                                      | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `frog-fly.mp3`               | [Fly_Buzzing_Edited.wav](https://freesound.org/s/443059/)                                        | AmberdeMeillon                                     | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `bonsai-snip.mp3`            | [scissors cut.wav](https://freesound.org/s/175522/)                                              | mywhats                                            | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `oak-leaves.mp3`             | [FallingLeaves](https://freesound.org/s/489911/)                                                 | falcospizaetus                                     | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `rocks-pebbles.mp3`          | [Slow Pebble Tumble.wav](https://freesound.org/s/398698/)                                        | bbrocer                                            | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `iceberg-crack.mp3`          | [Ice Crack 1](https://freesound.org/s/262635/)                                                   | j_p_higgins                                        | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `klein-bottle-slosh.mp3`     | [Bottle Slosh 2](https://freesound.org/s/667273/)                                                | alegemaate                                         | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `spinning-top-spin.mp3`      | [Metallic Spinning Top (Dry Sound).wav](https://freesound.org/s/334970/)                         | Uzbazur                                            | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `spring-toy-boing.mp3`       | [battery compartment spring 01.wav](https://freesound.org/s/472478/)                             | denalwa                                            | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `chess-set-move.mp3`         | [Piece Placement.mp3](https://freesound.org/s/546119/)                                           | el_boss                                            | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `robot-wind.mp3`             | [Wind-up sound](https://freesound.org/s/445966/)                                                 | Breviceps                                          | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `dice-throw.mp3`             | [Casino Audio 1.1: dice-throw-1.ogg and dice-throw-3.ogg](https://kenney.nl/assets/casino-audio) | Kenney (kenney.nl)                                 | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+
+The Video to 3D toy (a labs toy, lane Video 3D) ships two sample scenes in `assets/toys/video-3d/`,
+each trained by `tools/v3d-sample.mjs` from a stretch of a video on Wikimedia Commons (the splats
+and the solved camera path only; the videos are not shipped). Each license was checked on its live
+Commons page on September 30, 2026:
+
+- "Statue Of Liberty 4k Drone" by the Dronalist (14 seconds from 3:24),
+  [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Statue_Of_Liberty_4k_Drone.webm).
+- "Walking in EDINBURGH - Scotland (UK) - 4K 60fps (UHD)" by POPtravel (10 seconds from 7:32),
+  [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/), on
+  [Commons](<https://commons.wikimedia.org/wiki/File:Walking_in_EDINBURGH_-_Scotland_(UK)_-_4K_60fps_(UHD).webm>).
+
+The camera path and the splats are worked out on the device by
+[Splat.js](https://github.com/arrival-space/splat.js) (Stratum1 GmbH, MIT). Videos people open are
+read in their browser and never uploaded.
+
 ## Worlds
 
 Hybrid mode in Worlds (a labs page) lights its ground with four texture sets and its sky with one
