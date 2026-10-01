@@ -306,6 +306,12 @@
       tap. Mark each one "Looks right" or "Needs work" and add a note; the lane that made it reads
       your marks.
     </p>
+    <p>
+      This page filled its storage on September 30, 2026, so new clips now go on
+      <a href="https://claude.ai/artifact/BSayVkzQ2FKESesrkrSUMK" target="_blank" rel="noopener"
+        >page 2</a
+      >. A clip redone there leaves this page.
+    </p>
   </header>
 
   <div class="bar" role="group" aria-label="Show">
@@ -418,7 +424,8 @@
   // lanes that are open, or all lanes when finished ones are shown.
   function current() {
     return Object.values(cards).filter((t) => {
-      if (t.replacedBy && cards[t.replacedBy]) return false;
+      // "page2:<id>" means the newer clip is on page 2.
+      if (t.replacedBy && (cards[t.replacedBy] || /^page2:/.test(t.replacedBy))) return false;
       const lane = lanes[String(t.lane || "other")];
       if (lane?.finished && !showFinished) return false;
       if (laneFilter !== "all" && String(t.lane || "other") !== laneFilter) return false;

@@ -34,6 +34,10 @@ export class OrbitCamera {
     // the toy's own center, where Reset puts it back.
     this.aim = [0, 0, 0];
     this.center = [0, 0, 0];
+    // True while the view eases to its aim (after Reset): only then does the
+    // camera move the target itself, so a page's focus glide (which sets the
+    // target) is never pulled back.
+    this.easeAim = false;
     this.follow = [0, 0, 0]; // extra target offset the camera eases towards
     this.offset = [0, 0, 0];
     this.turntable = !reducedMotion;
@@ -64,13 +68,17 @@ export class OrbitCamera {
 
   // Fits limits around a toy of this bounding radius.
   fit(radius, center = [0, 0, 0]) {
+    // Page focus (lane Books r4): the home view keeps its distance in toy
+    // radii, so a toy rebuilt for a new option (or its own file) comes home
+    // to the view it opened with, not the default distance.
+    const rel = this.home.distance / this.radius;
     this.radius = radius;
     this.target = center.slice();
     this.aim = center.slice(); // UI r2
     this.center = center.slice(); // UI r2
     this.minDistance = radius * 1.25;
     this.maxDistance = radius * 10;
-    this.home.distance = radius * DEFAULT_CAMERA.distance;
+    this.home.distance = radius * (Number.isFinite(rel) && rel > 0 ? rel : DEFAULT_CAMERA.distance);
   }
 
   interact() {
@@ -151,7 +159,8 @@ export class OrbitCamera {
     const k = (2 * this.cur.distance * Math.tan((19 * Math.PI) / 180)) / Math.max(200, this.viewportHeight); // prettier-ignore
     const R = this.radius;
     for (let i = 0; i < 3; i++) {
-      const v = this.aim[i] - pose.right[i] * dx * k + pose.up[i] * dy * k;
+      // From where the view is now (a page's focus may have moved it).
+      const v = this.target[i] - pose.right[i] * dx * k + pose.up[i] * dy * k;
       this.aim[i] = Math.min(this.center[i] + R, Math.max(this.center[i] - R, v));
       this.target[i] = this.aim[i]; // a drag moves the view at once; Reset eases back
     }
@@ -173,10 +182,12 @@ export class OrbitCamera {
       this.aim[i] = this.center[i] + v * this.radius;
       if (snap) this.target[i] = this.aim[i];
     }
+    this.easeAim = !snap;
   }
 
   reset() {
     this.aim = this.center.slice(); // UI r2: Reset puts a moved toy back in the middle
+    this.easeAim = true;
     this.tgt = { ...this.home };
     // Take the short way round.
     this.cur.yaw = this.tgt.yaw + wrapAngle(this.cur.yaw - this.tgt.yaw);
@@ -249,7 +260,7 @@ export class OrbitCamera {
       }
     }
     // UI r2 (pan): the view eases to its aim like the rest of the pose.
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; this.easeAim && i < 3; i++) {
       const d = this.aim[i] - this.target[i];
       if (Math.abs(d) > 1e-5 * this.radius) {
         this.target[i] += d * k;
@@ -258,6 +269,7 @@ export class OrbitCamera {
         this.target[i] = this.aim[i];
       }
     }
+    if (this.aim.every((v, i) => v === this.target[i])) this.easeAim = false;
     for (const key of ["yaw", "pitch", "roll", "distance"]) {
       const d = this.tgt[key] - this.cur[key];
       if (Math.abs(d) > 1e-5) {
