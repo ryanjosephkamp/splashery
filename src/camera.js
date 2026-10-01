@@ -30,6 +30,14 @@ export class OrbitCamera {
     this.maxDistance = 9;
     this.radius = 1;
     this.target = [0, 0, 0];
+    // UI r2 (pan): the point the view eases towards (target follows it), and
+    // the toy's own center, where Reset puts it back.
+    this.aim = [0, 0, 0];
+    this.center = [0, 0, 0];
+    // True while the view eases to its aim (after Reset): only then does the
+    // camera move the target itself, so a page's focus glide (which sets the
+    // target) is never pulled back.
+    this.easeAim = false;
     this.follow = [0, 0, 0]; // extra target offset the camera eases towards
     this.offset = [0, 0, 0];
     this.turntable = !reducedMotion;
@@ -66,6 +74,8 @@ export class OrbitCamera {
     const rel = this.home.distance / this.radius;
     this.radius = radius;
     this.target = center.slice();
+    this.aim = center.slice(); // UI r2
+    this.center = center.slice(); // UI r2
     this.minDistance = radius * 1.25;
     this.maxDistance = radius * 10;
     this.home.distance = radius * (Number.isFinite(rel) && rel > 0 ? rel : DEFAULT_CAMERA.distance);
@@ -141,7 +151,43 @@ export class OrbitCamera {
     this.interact();
   }
 
+  // UI r2 (pan): moves the view across the toy by a drag in CSS pixels, so
+  // the toy follows the finger. The aim stays within the toy's bounds (a box
+  // of its radius round its center), so the toy never leaves the screen.
+  panBy(dx, dy) {
+    const pose = this.pose();
+    const k = (2 * this.cur.distance * Math.tan((19 * Math.PI) / 180)) / Math.max(200, this.viewportHeight); // prettier-ignore
+    const R = this.radius;
+    for (let i = 0; i < 3; i++) {
+      // From where the view is now (a page's focus may have moved it).
+      const v = this.target[i] - pose.right[i] * dx * k + pose.up[i] * dy * k;
+      this.aim[i] = Math.min(this.center[i] + R, Math.max(this.center[i] - R, v));
+      this.target[i] = this.aim[i]; // a drag moves the view at once; Reset eases back
+    }
+    this.interact();
+  }
+
+  // UI r2 (pan): how far the view is moved off the toy's center, in toy radii
+  // (null when centered).
+  getPan() {
+    const r = (v) => Math.round(v * 1e4) / 1e4;
+    const p = this.aim.map((v, i) => r((v - this.center[i]) / this.radius));
+    return p.some((v) => v !== 0) ? p : null;
+  }
+
+  setPan(p, snap = true) {
+    const ok = Array.isArray(p) && p.length === 3 && p.every(Number.isFinite);
+    for (let i = 0; i < 3; i++) {
+      const v = ok ? Math.min(1, Math.max(-1, p[i])) : 0;
+      this.aim[i] = this.center[i] + v * this.radius;
+      if (snap) this.target[i] = this.aim[i];
+    }
+    this.easeAim = !snap;
+  }
+
   reset() {
+    this.aim = this.center.slice(); // UI r2: Reset puts a moved toy back in the middle
+    this.easeAim = true;
     this.tgt = { ...this.home };
     // Take the short way round.
     this.cur.yaw = this.tgt.yaw + wrapAngle(this.cur.yaw - this.tgt.yaw);
@@ -157,6 +203,8 @@ export class OrbitCamera {
       pitch: r(this.tgt.pitch),
       roll: r(this.tgt.roll),
       distance: r(this.tgt.distance / this.radius),
+      // UI r2: a moved view (pan) only; a centered one saves as before.
+      ...(this.getPan() ? { pan: this.getPan() } : {}),
     };
   }
 
@@ -174,6 +222,7 @@ export class OrbitCamera {
     };
     this.tgt = { ...next };
     if (snap) this.cur = { ...next };
+    this.setPan(s?.pan, snap); // UI r2: no pan field shows the toy centered
     if (asHome) this.home = { ...next };
     this.vel.yaw = this.vel.pitch = 0;
   }
@@ -210,6 +259,17 @@ export class OrbitCamera {
         this.offset[i] = this.follow[i];
       }
     }
+    // UI r2 (pan): the view eases to its aim like the rest of the pose.
+    for (let i = 0; this.easeAim && i < 3; i++) {
+      const d = this.aim[i] - this.target[i];
+      if (Math.abs(d) > 1e-5 * this.radius) {
+        this.target[i] += d * k;
+        moving = true;
+      } else {
+        this.target[i] = this.aim[i];
+      }
+    }
+    if (this.aim.every((v, i) => v === this.target[i])) this.easeAim = false;
     for (const key of ["yaw", "pitch", "roll", "distance"]) {
       const d = this.tgt[key] - this.cur[key];
       if (Math.abs(d) > 1e-5) {
@@ -363,6 +423,7 @@ export class Gestures {
       this.pinch = this.pinchState();
       this.pinchStart = this.pinch;
       this.pinchKind = null;
+      this.pinchHalf = false; // UI r2
       this.h.onPinchStart?.();
     }
   }
@@ -405,6 +466,11 @@ export class Gestures {
       p.x = e.clientX;
       p.y = e.clientY;
       p.t = e.timeStamp;
+      // UI r2: the browser sends each finger's move on its own, so after one
+      // finger's step the pair looks pinched. With pairPinch the gesture is
+      // read every second move (both fingers' steps, or one finger's two
+      // while the other rests), so a two-finger drag reads as a drag.
+      if (this.h.pairPinch && (this.pinchHalf = !this.pinchHalf)) return;
       const s = this.pinchState();
       const prev = this.pinch;
       const was = this.pinchKind;
