@@ -39,7 +39,7 @@ function packProp(s, angles) {
   t.set([box ? 2 : s.type === "cone" ? 3 : 1, s.r ?? s.ra ?? 0, s.rb ?? 0, (s.part && angles[s.part]) || 0], 0); // prettier-ignore
   t.set(box ? s.at : s.a, 4);
   t.set(box ? s.half : s.b, 8);
-  t.set([((n >> 16) & 255) / 255, ((n >> 8) & 255) / 255, (n & 255) / 255, s.look === "wood" ? 2 : s.look === "steel" ? 1 : 0], 12); // prettier-ignore
+  t.set([((n >> 16) & 255) / 255, ((n >> 8) & 255) / 255, (n & 255) / 255, s.look === "wax" ? 3 : s.look === "wood" ? 2 : s.look === "steel" ? 1 : 0], 12); // prettier-ignore
   t.set(s.pivot || [0, 0, 0], 16);
   return { texels: t };
 }
@@ -54,7 +54,9 @@ export class GpuFluids {
     this.drawGlass = glass;
     // The props (the recipe's kind "props"), traced crisply on WebGPU; the
     // recipe hides their splats while `drawn` is set.
-    this.props = glass && stage.device.isWebGPU ? specs.find((s) => s.kind === "props") || null : null; // prettier-ignore
+    this.props = stage.device.isWebGPU ? specs.find((s) => s.kind === "props") || null : null;
+    // A flame's light on the props (props.light): eased on and off.
+    this.light = { want: 1, now: 0, t: 0 };
     if (this.props) this.props.drawn = true;
     this.angles = {};
     this.gas = specs.some((s) => s.kind === "gas" || s.kind === "flame") ? new GasScene(stage.device, specs, { profile }) : null; // prettier-ignore
@@ -75,9 +77,17 @@ export class GpuFluids {
     this.gas?.command(cmds);
     const a = this.props && cmds?.[this.props.name];
     if (a) Object.assign(this.angles, a);
+    if (a?.light !== undefined) this.light.want = a.light;
   }
 
   step(dt) {
+    const L = this.light;
+    if (dt > 0) {
+      // (lit in a quarter second, out in a tenth, as a flame catches and dies)
+      const k = 1 - Math.exp(-dt / (L.want > L.now ? 0.25 : 0.1));
+      L.now += (L.want - L.now) * k;
+      L.t += dt;
+    }
     return this.gas?.step(dt) || 0;
   }
 
@@ -110,6 +120,15 @@ export class GpuFluids {
       p.foam = look.foam || [0.95, 0.96, 0.97];
     }
     p.props = this.props ? this.props.shapes.map((s) => packProp(s, this.angles)) : null;
+    const lt = this.props?.light;
+    if (lt) {
+      // a candle's light flickers a little (a few percent, slowly)
+      const t = this.light.t;
+      const f = 1 + 0.04 * Math.sin(t * 9.1) + 0.03 * Math.sin(t * 13.7 + 1.3);
+      const n = parseInt(lt.color.slice(1), 16);
+      p.propLight = [...lt.at, this.light.now * f];
+      p.propLightC = [((n >> 16) & 255) / 255, ((n >> 8) & 255) / 255, (n & 255) / 255, 0];
+    } else p.propLight = [0, 0, 0, 0];
     const gas = this.gas?.view() || [];
     if (!liq && !gas.length && !glassSpec && !p.props) return;
     surf.render(

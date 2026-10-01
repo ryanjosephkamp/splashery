@@ -44,14 +44,14 @@ export class GasScene {
       smokeWeight: 0,
       // (slow enough that the fuel rises about three wick heights, the
       // length of a real candle flame)
-      burn: 35,
+      burn: 24,
       burnHeat: 4,
       vort: 1,
       noise: 0,
       decay: [0.9, 0.88, 0.97, 1],
     });
     this.flameGrid = g;
-    this.flameLook = { color: [0, 0, 0], density: 0, flame: 120, steps: this.steps, light: 0 };
+    this.flameLook = { color: [0, 0, 0], density: 0, flame: 85, steps: this.steps, light: 0 };
   }
 
   makeSmoke(device) {
@@ -76,11 +76,12 @@ export class GasScene {
     });
     this.smokeGrid = g;
     this.smokeLook = {
-      color: steam ? [0.93, 0.95, 0.97] : hex(this.gases[0]?.color || "#8f8f8f"),
-      density: steam ? 6 : 26,
+      // (a candle's smoke is pale gray where the room's light catches it)
+      color: steam ? [0.93, 0.95, 0.97] : hex(this.gases[0]?.color || "#8f8f8f").map((c) => c + (0.92 - c) * 0.5), // prettier-ignore
+      density: steam ? 6 : 20,
       flame: 0,
       steps: this.steps,
-      light: steam ? 1.15 : 0.9,
+      light: steam ? 1.15 : 1.1,
     };
   }
 
@@ -137,8 +138,9 @@ export class GasScene {
         const steam = s.look === "steam";
         list.push({
           at: src.at,
-          radius: Math.max(src.radius ?? 0.03, g.cell * 1.5) * (steam ? 0.9 : 2.2),
-          smoke: (steam ? 3.2 : 90) * flow,
+          // (a smoking wick sends up a thin thread)
+          radius: Math.max(src.radius ?? 0.03, g.cell * 1.5) * (steam ? 0.9 : 1.3),
+          smoke: (steam ? 3.2 : 120) * flow,
           heat: (steam ? 0.9 : 2.2) * flow,
           up: (src.speed ?? s.rise ?? 0.4) * (steam ? 0.6 : 1),
         });

@@ -171,11 +171,13 @@ function splashScene(k, o) {
 }
 
 function candleScene(k) {
-  k.add(k.cylinder(0.5, 0.05), { pos: [0, 0.025, 0], color: "#c9b27c", even: true, size: 1.5 });
+  const stand = k.part("stand");
+  k.add(k.cylinder(0.5, 0.05), { pos: [0, 0.025, 0], color: "#c9b27c", even: true, size: 1.5, part: stand }); // prettier-ignore
   k.add(k.cylinder(0.5, 0.03, { caps: false }), {
     pos: [0, 0.05, 0],
     color: "#d8c38c",
     even: true,
+    part: stand,
   });
   // Wax: warm cream, lighter at the top where the flame lights it.
   k.add(k.cylinder(0.17, 0.85), {
@@ -188,10 +190,19 @@ function candleScene(k) {
     weight: 2.5,
     size: 1.7,
     flat: 0.35,
+    part: stand,
   });
   // The melted pool on top and the wick.
-  k.add(k.disc(0.12), { pos: [0, 0.902, 0], color: "#f7e9c9", share: 0.01 });
-  k.add(k.cylinder(0.009, 0.08), { pos: [0, 0.94, 0], color: "#2a211b", share: 0.004 });
+  k.add(k.disc(0.12), { pos: [0, 0.902, 0], color: "#f7e9c9", share: 0.01, part: stand });
+  k.add(k.cylinder(0.009, 0.08), { pos: [0, 0.94, 0], color: "#2a211b", share: 0.004, part: stand }); // prettier-ignore
+  // Traced on WebGPU: the dish, the wax (lit from within near the flame, as
+  // wax is) and the wick.
+  const traced = props(k, [
+    { type: "cyl", a: [0, 0, 0], b: [0, 0.065, 0], r: 0.5, color: "#c9b27c" },
+    { type: "cyl", a: [0, 0.05, 0], b: [0, 0.9, 0], r: 0.17, color: "#ece0c2", look: "wax" },
+    { type: "cyl", a: [0, 0.9, 0], b: [0, 0.98, 0], r: 0.009, color: "#2a211b" },
+  ]);
+  traced.light = { at: [0, 1.04, 0], color: "#ffb35a" };
   k.fluid({
     name: "smoke",
     kind: "gas",
@@ -220,7 +231,7 @@ function candleScene(k) {
   });
   k.reach([0, 2.0, 0]);
   k.reach([0.5, 0, 0.5]);
-  k.data = { scene: "candle" };
+  k.data = { scene: "candle", props: traced };
 }
 
 function cupScene(k) {
@@ -351,6 +362,7 @@ export const RECIPES = {
         // Blown out for three seconds, then it lights again.
         const out3 = e < 3;
         out.fluid.flame = { on: !out3, wind: e < 0.35 ? [2.5, 0, 0] : [0, 0, 0] };
+        out.fluid.props = { light: out3 ? 0 : 1 };
         // Put out, the hot wick sends up a thick ribbon of smoke that thins.
         out.fluid.smoke = { on: e < 2.6, flow: e < 2.6 ? (1 - e / 2.6) ** 1.5 : 0 };
         if (fresh) out.cues.push(BLOW_SOUND);

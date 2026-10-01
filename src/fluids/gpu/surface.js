@@ -414,8 +414,8 @@ vec4 gas2Sample(vec3 p0) {
 // meets air, then the soot glowing yellow-white, yellow, orange, dull red.
 vec3 flameRamp(float t) {
   vec3 c = mix(vec3(0.5, 0.08, 0.02), vec3(1.0, 0.45, 0.08), smoothstep(0.1, 0.35, t));
-  c = mix(c, vec3(1.0, 0.82, 0.45), smoothstep(0.35, 0.6, t));
-  c = mix(c, vec3(1.0, 0.97, 0.88), smoothstep(0.6, 0.9, t));
+  c = mix(c, vec3(1.0, 0.76, 0.32), smoothstep(0.35, 0.65, t));
+  c = mix(c, vec3(1.0, 0.95, 0.82), smoothstep(0.75, 1.0, t));
   return c;
 }
 
@@ -693,6 +693,8 @@ uniform uFoam: vec4f;
 uniform uDrop: vec2f;
 var uProps: texture_2d<uff>;
 uniform uPropInfo: vec4f;
+uniform uPropLight: vec4f;
+uniform uPropLightC: vec4f;
 var uGas: texture_2d<uff>;
 uniform uGasA: vec4f;
 uniform uGasB: vec4f;
@@ -753,8 +755,8 @@ fn gas2Sample(p0: vec3f) -> vec4f {
 }
 fn flameRamp(t: f32) -> vec3f {
   var c = mix(vec3f(0.5, 0.08, 0.02), vec3f(1.0, 0.45, 0.08), smoothstep(0.1, 0.35, t));
-  c = mix(c, vec3f(1.0, 0.82, 0.45), smoothstep(0.35, 0.6, t));
-  c = mix(c, vec3f(1.0, 0.97, 0.88), smoothstep(0.6, 0.9, t));
+  c = mix(c, vec3f(1.0, 0.76, 0.32), smoothstep(0.35, 0.65, t));
+  c = mix(c, vec3f(1.0, 0.95, 0.82), smoothstep(0.75, 1.0, t));
   return c;
 }
 
@@ -898,15 +900,33 @@ fn traceProps(ro: vec3f, rd: vec3f) -> PropHit {
 }
 fn shadeProp(h: PropHit, ro: vec3f, rd: vec3f) -> vec3f {
   let c = propTexel(h.i, 3);
-  let n = normalize(h.n);
+  var n = normalize(h.n);
+  if (dot(n, rd) > 0.0) { n = -n; }
   let p = ro + rd * h.t;
+  // A flame's warm light (uPropLight: place, strength).
+  var lit = vec3f(0.0);
+  if (uniform.uPropLight.w > 0.001) {
+    let dl = uniform.uPropLight.xyz - p;
+    let dist = length(dl);
+    let I = uniform.uPropLight.w * uniform.uPropLightC.rgb;
+    lit = I * max(dot(n, dl / dist), 0.0) * 0.5 / (1.0 + (dist / 0.3) * (dist / 0.3));
+    if (c.w > 2.5) {
+      // wax carries the light into itself: its top glows from within
+      let below = max(uniform.uPropLight.y - 0.12 - p.y, 0.0);
+      lit += I * vec3f(1.0, 0.75, 0.5) * 0.55 * exp(-below / 0.09);
+    }
+  }
+  if (c.w > 2.5) {
+    // wax: soft, matte and a little lighter toward the top
+    return c.rgb * (0.78 + 0.22 * max(n.y, 0.0) + 0.08 * n.x) + c.rgb * lit;
+  }
   if (c.w > 1.5) {
     // wood: a calm, low-frequency grain (as the recipe's splats had)
     let g = 0.5 + 0.5 * sin(p.x * 7.0 + 1.3 * sin(p.z * 3.0 + p.x * 1.2));
     let w = mix(vec3f(0.49, 0.32, 0.19), vec3f(0.60, 0.42, 0.24), g * 0.8);
-    return w * (0.82 + 0.18 * max(n.y, 0.0));
+    return w * (0.82 + 0.18 * max(n.y, 0.0) + lit);
   }
-  var col = c.rgb * (0.85 + 0.3 * max(0.0, n.y) + 0.1 * n.x);
+  var col = c.rgb * (0.85 + 0.3 * max(0.0, n.y) + 0.1 * n.x + lit);
   if (c.w > 0.5) {
     // steel: a soft highlight from the room's light
     let H = normalize(normalize(uniform.uLight.xyz) - rd);
@@ -1070,6 +1090,14 @@ fn sceneAt(uv: vec2f) -> vec3f {
       let pz = -(uniform.uToyToView * vec4f(eye + rd * ph.t, 1.0)).z;
       if (pz < liqZ && ph.t < tFront) { col = shadeProp(ph, eye, rd); }
     }
+  }
+  // A flame's glow in the air around it (a lens and the eye see a halo).
+  if (uniform.uPropLight.w > 0.001) {
+    let q = uniform.uPropLight.xyz - eye;
+    let tq = max(dot(q, rd), 0.0);
+    let dq = length(q - rd * tq);
+    let g = 0.22 * exp(-(dq / 0.1) * (dq / 0.1)) + 0.06 / (1.0 + (dq / 0.05) * (dq / 0.05));
+    col += uniform.uPropLightC.rgb * uniform.uPropLight.w * g;
   }
   if (uniform.uGasC.w > 0.5) {
     let lo = uniform.uGasA.xyz;
@@ -1359,6 +1387,8 @@ export class FluidSurface {
     const props = d.isWebGPU ? p.props : null;
     scope.resolve("uProps").setValue(this.propTexture(props));
     scope.resolve("uPropInfo").setValue([props?.length ?? 0, 0, 0, 0]);
+    scope.resolve("uPropLight").setValue(d.isWebGPU && p.propLight ? p.propLight : [0, 0, 0, 0]);
+    scope.resolve("uPropLightC").setValue(p.propLightC || [1, 0.7, 0.35, 0]);
     // Up to two gas grids (gasscene.js: a flame's fine grid and the smoke's).
     const gases = src.gas || [];
     for (const [k, name] of [
