@@ -736,6 +736,12 @@ export const KINDS = {
   // says (uSpLever): z = lever index (0..95) + 128 * group (0..5), w = the
   // splat's place along a string (0..1) for the vibrate mode.
   lever: 22,
+  // Lane Fix4 (engine): glass. A splat's opacity follows how squarely it
+  // faces the eye, seen from its part's center (the part cull's facing
+  // number; the toy's center for splats on no part): mix(z, 1, (1 - |f|)^w),
+  // so a thin shell is nearly clear face on (z) and solid at its edge.
+  // z = opacity face on (0..1), w = sharpness (about 2 to 8).
+  rim: 23,
 };
 
 // Levers: 96 amounts (three 8-bit channels each) and 6 groups.
@@ -940,6 +946,12 @@ vec3 spKitCenter(vec3 p) {
     }
     spKitScale *= vis * (1.0 + pv.w);
   }
+  if (kind == 23) {
+    // Rim (lane Fix4): clear face on, solid at the edge.
+    vec3 rc = part > 0 ? uSpParts[part * 3 + 1].xyz + uSpParts[part * 3 + 2].xyz : toy;
+    float fr = abs(dot(normalize(p - rc + vec3(1e-6)), normalize(uSpCam.xyz - p)));
+    spFade *= mix(clamp(an.z, 0.0, 1.0), 1.0, pow(clamp(1.0 - fr, 0.0, 1.0), max(an.w, 0.05)));
+  }
   return p;
 }
 `;
@@ -1130,6 +1142,13 @@ fn spKitCenter(p0: vec3f) -> vec3f {
       vis = vis * smoothstep(-0.12, -0.02, fd);
     }
     spKitScale = spKitScale * vis * (1.0 + pv.w);
+  }
+  if (kind == 23) {
+    // Rim (lane Fix4): clear face on, solid at the edge.
+    var rc = toy;
+    if (part > 0) { rc = uniform.uSpParts[part * 3 + 1].xyz + uniform.uSpParts[part * 3 + 2].xyz; }
+    let fr = abs(dot(normalize(p - rc + vec3f(1e-6)), normalize(uniform.uSpCam.xyz - p)));
+    spFade = spFade * mix(clamp(an.z, 0.0, 1.0), 1.0, pow(clamp(1.0 - fr, 0.0, 1.0), max(an.w, 0.05)));
   }
   return p;
 }
