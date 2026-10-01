@@ -105,11 +105,11 @@ by a permission check, say exactly which edit it is, and I'll handle it.
 
 ## For the Operator
 
-- `tests/unit.spec.mjs:188` ("a tap knows where it landed: a xylophone bar strikes that bar") fails
-  by design: it presses Play while the 3 s scale from the line before still runs and expects a
-  restart (`m.tap.n` 3); a long effect now pauses instead. The test needs, after `m.act(2, null)`,
-  `{ key: "play", paused: true }` and `m.tap.n` 2 (or `m.state.play = 0` before it, so the scale has
-  finished). It is another lane's test, so it is left as it is.
+- `tests/unit.spec.mjs:188` ("a tap knows where it landed: a xylophone bar strikes that bar")
+  pressed Play right after a tap started the 3 s scale, with no frame in between, and expected a
+  restart. Fixed on October 1, 2026 in `src/motion.js`: a long effect pauses only once a frame has
+  drawn it (`unseen`), so a second tap before that starts it again. The test is unchanged and
+  passes.
 - `tests/smoke.spec.mjs:730` ("rigs pick splats by colour…", the strawberry) fails on main too
   (8a2e05e, run alone) and on the UI r2 head: not this lane's.
 - `tests/help.spec.mjs:261` at 1440x900 failed because the Fourier circles now face you: fixed in

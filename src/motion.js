@@ -73,6 +73,9 @@ export class MotionDriver {
     // after (pausedAt is the clock time it paused at, pausedKey its control).
     this.pausedAt = null;
     this.pausedKey = null;
+    // A long effect started since the last frame (its key): a tap before it
+    // has been drawn starts it again rather than pausing it unseen.
+    this.unseen = null;
   }
 
   // Attaches a kit toy (recipe + build context) or clears it.
@@ -92,6 +95,7 @@ export class MotionDriver {
     this.addonU = null;
     this.pausedAt = null; // UI r3
     this.pausedKey = null;
+    this.unseen = null;
   }
 
   // A rig's add-on (a small kit-built splat cloud with its own parts).
@@ -116,6 +120,7 @@ export class MotionDriver {
   effectState(key = this.recipe?.action?.key) {
     if (!key) return null;
     if (this.pausedKey === key) return "paused";
+    if (this.unseen === key) return null;
     return this.isLong(this.controlDef(key)) && (this.state[key] ?? 0) > 0.002 ? "running" : null;
   }
 
@@ -191,7 +196,9 @@ export class MotionDriver {
       if (this.controlDef(key).type === "pulse") {
         this.state[key] = 1;
         this.targets[key] = 0;
-        return { key, value: 1, pick, point, long: this.isLong(this.controlDef(key)) };
+        const long = this.isLong(this.controlDef(key));
+        if (long) this.unseen = key;
+        return { key, value: 1, pick, point, long };
       }
       const cur = this.targets[key] ?? 0;
       this.setControl(key, cur > 0.5 ? 0 : 1);
@@ -237,6 +244,7 @@ export class MotionDriver {
   compute({ time: clock, dt, motion, info, cameraPos }) {
     // UI r3: while a tap effect is paused, its controls and clocks hold still
     // at the moment it paused (a whole-toy move from the Toy tab carries on).
+    this.unseen = null; // this frame draws it
     const paused = this.pausedAt !== null;
     const time = paused ? this.pausedAt : clock;
     const speed = clamp(motion.speed ?? 0.5, 0, 1);
