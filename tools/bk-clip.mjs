@@ -15,7 +15,7 @@
 // styles), book-long (paging through a 300-page PDF), album, frame (the
 // swing), frame-digital; and round 3: book-taps, book-pull, stapled-taps,
 // album-pull, lab-taps, lab-edges, frame-gold, frame-gif, frame-video,
-// frame-order. Writes <out-dir>/bk-<scene>.gif and a strip of six
+// frame-order; and page focus (r4): page-focus, one-page. Writes <out-dir>/bk-<scene>.gif and a strip of six
 // frames, bk-<scene>-strip.png. Uses the fixtures in tests/fixtures/bk/
 // (tools/bk-samples.mjs).
 
@@ -109,6 +109,7 @@ async function record(scene) {
       await run((dt) => {
         const pl = window.__splashery.player;
         pl.time += dt;
+        pl.camera.update(dt); // (the view's glide, page focus)
         pl.stage.requestRender();
       }, STEP);
       await draw();
@@ -142,6 +143,8 @@ async function record(scene) {
   const tap = () => run(() => window.__splashery.player.act());
   // A tap where it lands (a point in the toy's own units).
   const tapAt = (p) => run((p) => window.__splashery.player.act(window.__splashery.player.fromRecipe(p)), p); // prettier-ignore
+  // A double-tap where it lands (page focus; null: off the toy).
+  const focusAt = (p) => run((p) => { const pl = window.__splashery.player; pl.focusAt(p && pl.fromRecipe(p)); }, p); // prettier-ignore
   // A pull by hand: the toy's own drag, a frame each step (steps of 1/12 s).
   const pull = async (id, from, to, steps, hold = 0) => {
     await run(async ([id, from]) => {
@@ -331,6 +334,46 @@ async function record(scene) {
     // Order: Random.
     await open("picture-frame", { frame: "digital", order: "random" });
     await play(5.5);
+  } else if (scene === "page-focus") {
+    // Both pages: a double-tap on a page focuses it, forward goes on to the
+    // right page, then turns the leaf; a double-tap again shows both.
+    await open("your-book", { reading: "both" }, `${FIX}booklet.pdf`);
+    await tapAt([0.3, 0, 0.02]);
+    await play(1.25);
+    await tapAt([0.3, 0, 0.02]);
+    await play(1.25);
+    await hold(1100);
+    await focusAt([-0.35, 0, 0.02]);
+    await play(1);
+    await hold(1100);
+    for (const x of [-0.2, 0.55]) {
+      await tapAt([x, 0, 0.02]);
+      await play(1.3);
+      await hold(1000);
+    }
+    await focusAt([-0.35, 0, 0.02]);
+    await play(1);
+    await hold(1200);
+  } else if (scene === "one-page") {
+    // One page (the phone's default): the book opens to its right page;
+    // forward goes left page, right page, turn; back the other way.
+    await open("your-book", { reading: "one" }, `${FIX}booklet.pdf`);
+    await play(1);
+    await hold(1000);
+    for (const x of [0.4, 0.55, -0.2, 0.55, -0.55, -0.55]) {
+      await tapAt([x, 0, 0.02]);
+      await play(1.3);
+      await hold(800);
+    }
+    // The photo album reads the same way.
+    await open("photo-album", { reading: "one" });
+    await play(1);
+    await hold(800);
+    for (const x of [0.5, 0.7, -0.3]) {
+      await tapAt([x, 0, 0.02]);
+      await play(1.4);
+      await hold(800);
+    }
   } else if (scene === "frame-digital") {
     await open("picture-frame", { frame: "digital" });
     await play(15);

@@ -269,6 +269,29 @@ What r3 does:
   itself, muted. The digital frame has an Order option (In order, Random) and lists its photos in
   the Toy tab (`media.list`, engine PR 2: `claude/lane-books-engine-2`).
 
+## r4: the turn's flash, the stapled paper's edge, and page focus (September 30, 2026)
+
+PR #126 (`claude/lane-books-r4`, from r3's head). The owner's two "fix" marks on the r3 cards, and
+page focus (approved September 30, 2026).
+
+- bk-book-taps: the page a leaf lands on showed its old figure for a moment as the leaf came down.
+  It now hides once the leaf is within about 17 degrees of it (`landing` in `bookLayout`), as the
+  page under a leaf shows only once the leaf has lifted clear (`lifted`).
+- bk-stapled-taps: white paper on a white page had no outline. The stack has darker edges, a soft
+  shadow behind it, and a thin gray line round the top sheet.
+- Page focus: a double-tap on a page glides the view until the page fills the screen; a double-tap
+  again, or a zoom out, shows both pages. While a page is in view, taps go by its halves, and
+  forward goes from the left page to the right one, then turns the leaf and lands on the next left
+  page (back the other way). A new option, Reading (Both pages, One page), keeps a page in view; its
+  default follows the screen's shape (One page on a phone held upright), so old links and scenes,
+  which don't have it, load as before and nothing new is stored unless it is chosen. The frame and
+  the Picture lab focus on the photo or page. On these toys a double-tap no longer resets the view
+  (↺ and the R key still do; a double-tap off the toy still resets).
+- The engine hook (small, additive, marked "Page focus"): `recipe.focus(point)` and `out.view`
+  (PACKS.md, "Focus"); `Player.focusAt`, `followView` and `glideTo` in src/player.js;
+  `App.tapOrFocus` in src/app.js (a single tap on such a toy waits 0.3 s, to tell it from a
+  double-tap).
+
 ## Notes
 
 ### How the book works
