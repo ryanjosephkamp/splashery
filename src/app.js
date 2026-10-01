@@ -138,7 +138,9 @@ class App {
     player.on("toy", (info) => this.onToy(info));
     player.on("action", (r) => this.onAction(r));
     // A tap that switches the toy's options rebuilds it the way the Toy tab does.
-    player.rebuild = (options) => this.setToyOptions(options);
+    // A toy's own tap that switches its options (a periodic table tile) rebuilds it with no
+    // loading overlay: the toy stays on screen and its tap sound plays at once (lane Fix6).
+    player.rebuild = (options) => this.setToyOptions(options, { quiet: Infinity });
     player.on("cue", (cues) => {
       for (const spec of cues) this.sound.play(spec, { key: "cue" });
     });
@@ -229,23 +231,33 @@ class App {
     this.updateStatus();
   }
 
-  async loadToy(toy, { file = null } = {}) {
+  // `quiet` (ms, lane Fix6): hold the loading overlay back that long, so a quick rebuild shows
+  // none; Infinity: never show it (a toy's own tap switching its options, such as the periodic
+  // table's element, while the toy stays on screen). 0: as before.
+  async loadToy(toy, { file = null, quiet = 0 } = {}) {
     const ui = this.ui;
     let shown = false;
-    const timer = setTimeout(() => {
-      shown = true;
-      ui.progress.show("Loading…");
-    }, 120);
+    let last = null;
+    const start = performance.now();
+    const hold = Math.max(120, quiet);
+    const timer = Number.isFinite(hold)
+      ? setTimeout(() => {
+          shown = true;
+          ui.progress.show(last?.label || "Loading…");
+          if (last) ui.progress.update(last.f, last.label);
+        }, hold)
+      : null;
     try {
       return await this.player.loadToy(toy, {
         file,
         onProgress: (f, label) => {
-          if (!shown && f < 1) {
+          last = { f, label };
+          if (!shown && f < 1 && performance.now() - start >= quiet) {
             shown = true;
             clearTimeout(timer);
             ui.progress.show(label);
           }
-          ui.progress.update(f, label);
+          if (shown) ui.progress.update(f, label);
         },
       });
     } finally {
@@ -773,14 +785,14 @@ class App {
   }
 
   // Sets several of a kit toy's options at once and rebuilds it.
-  async setToyOptions(partial) {
+  async setToyOptions(partial, { quiet = 500 } = {}) {
     const player = this.player;
     const toy = player.scene.toy;
     if (toy.kind !== "builtin") return;
     toy.options = { ...(toy.options || {}), ...partial };
     const cam = player.camera.getState();
     try {
-      await this.loadToy(toy);
+      await this.loadToy(toy, { quiet });
       player.camera.setState(cam, { snap: true });
       player.syncDrop();
     } catch (err) {
