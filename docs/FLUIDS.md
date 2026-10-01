@@ -256,6 +256,12 @@ drawn barely stretched along its motion and with larger sprites (the recipe's `s
 above it as a real drop does (`drops`). A second wooden layer under the basin fills gaps between the
 board's splats that showed through the clear water.
 
+Round 3 (fl-r4-splash-r3): the ball lands faster (a smaller ball, thrown down), and where the
+crown's sheet thins to a particle or two a cell and moves fast above the pool, it sheds fine
+droplets as spray (`breakup` in the recipe, `shed` in `diffuse.js`), smaller than the grid can hold,
+as a real rim breaks into drops. They fly on along ballistic paths and join the pool when they fall
+back. The sheet itself stays coarse: it reads as a ring of spray more than a clear wall.
+
 ### A real liquid surface
 
 Screen-space fluid rendering (Green, "Screen Space Fluid Rendering for Games", GDC 2010; van der

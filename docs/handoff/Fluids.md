@@ -177,6 +177,12 @@ State (see docs/FLUIDS.md, "r4"):
   that breaks into drops and falls back (the recipe's `gpu` settings; the CPU splash is unchanged).
   The owner's note for the record: a cup's rim and outer surface sharp and easy to read, and with a
   dark liquid the far side of the cup's bottom must not show through.
+- October 1, 2026 (afternoon): fl-r4-splash-r2 marked "fix" ("looking really good so far"; a taller
+  crown, many more, smaller drops): fl-r4-splash-r3 sheds fine droplets from the crown's rim. Then
+  the owner changed four marks to "fix": fl-r4-flame and fl-r4-smoke ("can look more realistic"; the
+  smoke's grid "looks good"), fl-r4-pour-r2 (the glass's foot behind the liquid a bit too visible;
+  the board, faucet, handle and spout grainy) and fl-r4-soda-r3 (the liquid's top surface hard to
+  see; the same grainy props).
 - Sound: from the simulation (src/fluids/acoustic.js), after the owner's Sound Board note ("isn't in
   sync with fluid pour animation"); real recordings wait for Sound A's sample voice.
 - Lessons: a collider wall thinner than about three cells lets MPM particles through; a sprite
