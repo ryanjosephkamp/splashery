@@ -565,9 +565,9 @@ export const TOY_HELP = {
   },
   "periodic-table": {
     howTo:
-      "Tap an element to build its atom. Tap the atom to make it glow; tap the table to lower it.",
+      "Tap an element to build its atom; tap its tile again to lower it. Tap the atom to make it glow. Tap an empty part of the board for a tour of all 118 elements; tap again to stop it.",
     about:
-      "The periodic table lists all 118 elements in order of their protons, in rows that repeat their chemistry: each column's elements behave alike. The colors are the families, from the alkali metals on the left to the noble gases on the right.\n\nTap an element and its atom rises and builds itself: the protons (red) and neutrons (gray) of its commonest isotope, then the electrons, filling their shells in the real order. Tap the atom and an electron jumps up a shell and falls back, giving off light the color of the element's brightest visible line: red for hydrogen, yellow for sodium, green for copper. Elements with no visible line measured flash white. Numbers from NIST, PubChem and IUPAC.",
+      "The periodic table lists all 118 elements in order of their protons, in rows that repeat their chemistry: each column's elements behave alike. The colors are the families, from the alkali metals on the left to the noble gases on the right.\n\nTap an element and its atom rises and builds itself: the protons (red) and neutrons (gray) of its commonest isotope, then the electrons, filling their shells in the real order. Tap the atom and an electron jumps up a shell and falls back, giving off light the color of the element's brightest visible line: red for hydrogen, yellow for sodium, green for copper. Elements with no visible line measured flash white. Tap an empty part of the board (the wide gap at the top) and the table takes you on a tour: each element's atom rises in turn, by atomic number or shuffled (the Tour order option), until you tap again. Numbers from NIST, PubChem and IUPAC.",
   },
   "crystal-lattice": {
     howTo: "Tap to send a wave through it. Pick one of eleven crystals in the Toy tab.",
@@ -1437,9 +1437,9 @@ export const TOY_HELP = {
   },
   "enigma-machine": {
     howTo:
-      "Tap to type your message in code; tap again to decode it. Type your own message in the Toy tab.",
+      "Tap the keys (or type on a keyboard) to code your own letters, then tap the machine off the keys to decode them. Tap the pad for a clean sheet.",
     about:
-      "The Enigma was a cipher machine that German forces used to keep radio messages secret in World War II. Each key press steps the rotors on like an odometer, and an electric current runs through the plugboard, three wired rotors and a reflector, lighting a different letter on the lampboard. Because the rotors keep turning, the same letter comes out differently each time. Polish mathematicians first broke it in 1932.\n\nTap it: each key goes down, the rotors step (with the middle rotor's real double step), and the coded letter lights up and is written on the pad. Tap again: the coded letters, typed from the same start, give your message back. It uses the historical wirings of rotors I, II and III and reflector B.",
+      "The Enigma was a cipher machine that German forces used to keep radio messages secret in World War II. Each key press steps the rotors on like an odometer, and an electric current runs through the plugboard, three wired rotors and a reflector, lighting a different letter on the lampboard. Because the rotors keep turning, the same letter comes out differently each time. Polish mathematicians first broke it in 1932.\n\nTap a key, or type on a keyboard: the key goes down, the rotors step (with the middle rotor's real double step), and the coded letter lights up and is written on the pad under yours. Tap the machine off the keys: the coded letters, typed from the same start, give your message back. With nothing typed, that tap types the message on the pad (HELLO, or your own from the Toy tab) and the next one decodes it. Tap the pad for a clean sheet. On a keyboard, hold Shift for P and R (on their own they poke the toy and reset the view). It uses the historical wirings of rotors I, II and III and reflector B.",
   },
   bombe: {
     howTo: "Tap it to search for the Enigma setting. Type a message to break in the Toy tab.",

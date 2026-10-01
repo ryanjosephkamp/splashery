@@ -920,7 +920,7 @@
       "owner": "Lane Chemistry, from the owner's notes on the atoms toys (September 29, 2026).",
       "effect": "Tap an element's tile and its atom rises out of the table and builds itself: every proton and neutron of its commonest isotope, then the electrons filling their shells in order. Tap the atom and an electron jumps up a shell and falls back with a flash in the element's strongest visible line (NIST).",
       "sound": "A soft tile click and a rising shimmer as the shells fill (a note per shell), a bright ping for the photon.",
-      "improved": "Chemistry: all 118 elements in the standard layout, colored by family; the atom rises (5 s), a tap on it sends an electron up a shell and back (3.2 s), a tap on the table lowers it."
+      "improved": "Chemistry: all 118 elements in the standard layout, colored by family; the atom rises (5 s), a tap on it sends an electron up a shell and back (3.2 s), a tap on the table lowers it. Fix6: a tile tap switches with no loading overlay; a tap on its own tile lowers the atom; a tap on the empty board starts a tour of all 118 elements (about 2 s each, the tile lit; by atomic number or shuffled), and any tap stops it."
     },
     "diamond": {
       "v": "keep",
@@ -2051,7 +2051,7 @@
       "owner": "The owner's own idea on the Toy Ideas page (lane Machines A).",
       "effect": "An Enigma cipher machine in its wooden box: tap and it types your message, each key going down, the rotors stepping like an odometer and the coded letter lighting on the lampboard; a second tap types the coded text back and gets the message again (about 4 s).",
       "sound": "Heavy key clacks, the ratchet of the rotors stepping, and a faint click as each lamp lights.",
-      "improved": "Machines A: kit-built (no CC0 or CC BY scan found), rotors I, II, III with reflector B and a plugboard (the historical wirings and double step), 26 keys and a moving lamp glow, the operator's pad on the lid (coded letters in red, decoded in blue); your own message in the Toy tab."
+      "improved": "Machines A: kit-built (no CC0 or CC BY scan found), rotors I, II, III with reflector B and a plugboard (the historical wirings and double step), 26 keys and a moving lamp glow, the operator's pad on the lid (coded letters in red, decoded in blue); your own message in the Toy tab. Fix6: tap a key (or type on a keyboard) to code your own letters one by one; a tap off the keys decodes them; a tap on the pad gives a clean sheet (the pad is a live picture)."
     },
     "bombe": {
       "v": "keep",
