@@ -538,6 +538,50 @@ const TELE = { dir: unit([0.72, 0.5, -0.3]), mount: [0, 0.2, 0] };
 
 const NOTE_PATHS = [0, 1, 2].map((i) => ({ x: -0.25 + i * 0.25, z: 0.1 - i * 0.08, phase: i / 3 }));
 
+// Lane Fix5: the clock's time zones (IANA names; "local" is this device's
+// own) and the hours, minutes and seconds it is there now.
+const CLOCK_ZONES = [
+  ["local", "This device"],
+  ["UTC", "UTC"],
+  ["America/Los_Angeles", "Los Angeles"],
+  ["America/Denver", "Denver"],
+  ["America/Chicago", "Chicago"],
+  ["America/New_York", "New York"],
+  ["America/Sao_Paulo", "São Paulo"],
+  ["Europe/London", "London"],
+  ["Europe/Paris", "Paris"],
+  ["Africa/Cairo", "Cairo"],
+  ["Asia/Dubai", "Dubai"],
+  ["Asia/Kolkata", "Mumbai"],
+  ["Asia/Shanghai", "Beijing"],
+  ["Asia/Tokyo", "Tokyo"],
+  ["Australia/Sydney", "Sydney"],
+  ["Pacific/Auckland", "Auckland"],
+];
+const zoneFormats = new Map();
+function clockTime(d, zone) {
+  if (!zone) return [d.getHours(), d.getMinutes(), d.getSeconds()];
+  let f = zoneFormats.get(zone);
+  if (f === undefined) {
+    try {
+      f = new Intl.DateTimeFormat("en-US", {
+        timeZone: zone,
+        hour: "numeric",
+        minute: "numeric",
+        second: "numeric",
+        hourCycle: "h23",
+      });
+    } catch {
+      f = null; // an unknown zone: this device's time
+    }
+    zoneFormats.set(zone, f);
+  }
+  if (!f) return [d.getHours(), d.getMinutes(), d.getSeconds()];
+  const parts = f.formatToParts(d);
+  const part = (type) => Number(parts.find((p) => p.type === type)?.value ?? 0);
+  return [part("hour") % 24, part("minute"), part("second")];
+}
+
 export const RECIPES = {
   chest: {
     alive: true,
@@ -1423,19 +1467,42 @@ export const RECIPES = {
 
   clock: {
     alive: true,
-    options: [{ key: "color", label: "Colour", type: "color", default: "#d6453d" }],
+    options: [
+      { key: "color", label: "Color", type: "color", default: "#d6453d" },
+      // Lane Fix5: the time zone the hands show (this device's own by
+      // default, read by the browser with no permission needed).
+      {
+        key: "zone",
+        label: "Time zone",
+        type: "select",
+        default: "local",
+        choices: CLOCK_ZONES.map(([id, label]) => ({ id, label })),
+      },
+    ],
     controls: [{ key: "ring", label: "Ring", type: "pulse", ease: 2.2 }],
     action: { key: "ring", label: "Ring the bell" },
     drive(t, c, out, info) {
-      // The hands show the real local time.
+      // The hands show the real time, in this device's zone or the one
+      // picked in the Toy tab.
       const d = new Date();
-      const s = d.getSeconds() + d.getMilliseconds() / 1000;
-      const m = d.getMinutes() + s / 60;
-      const h = (d.getHours() % 12) + m / 60;
+      const [hh, mm, ss] = clockTime(d, info?.data?.zone);
+      const s = ss + d.getMilliseconds() / 1000;
+      const m = mm + s / 60;
+      const h = (hh % 12) + m / 60;
       const tick = Math.floor(s) + ease3(clamp((s % 1) / 0.18, 0, 1));
       out.parts.hour = { angle: (-h / 12) * TAU };
       out.parts.minute = { angle: (-m / 60) * TAU };
       out.parts.second = { angle: (-tick / 60) * TAU };
+      // Splats sort in the pose they were built in (the hands at 12), so a
+      // hand turned round would sort as if it still pointed up and the dial
+      // could draw over it. Sort the hands where they stand each time the
+      // second hand has ticked (lane Fix4).
+      const kd = info?.data;
+      const now = Math.floor(h * 3600 - 0.2);
+      if (kd && now !== kd.handsSorted) {
+        kd.handsSorted = now;
+        out.resortPose = true;
+      }
       const r = c.ring;
       const time = info?.time ?? t;
       out.parts.hammer = { angle: r > 0 ? 0.5 * Math.sin(time * 70) * Math.min(1, r * 2) : 0 };
@@ -1450,6 +1517,9 @@ export const RECIPES = {
       };
     },
     build(k, o) {
+      // drive() keeps when it last sorted the hands here, and reads the
+      // time zone (lane Fix5).
+      k.data = { zone: o.zone && o.zone !== "local" ? o.zone : null };
       const body = o.color;
       const R = 0.8;
       const Dp = 0.34;
@@ -1519,46 +1589,74 @@ export const RECIPES = {
           return keep(shade(dial, 0.97 + 0.03 * (1 - r)));
         },
       });
-      // Hands (parts turning about the centre).
-      const hand = (name, len, w, col, back = 0) => {
+      // Hands (parts turning about the centre). Each is a thin, flat blade
+      // with a round boss, stacked on a visible arbor a few millimetres apart
+      // like a real clock's: high enough above the dial that the dial's big,
+      // flat splats never sort in front of a hand (lane Fix4).
+      const HAND_Z = { hour: 0.04, minute: 0.055, second: 0.07 };
+      const hand = (name, len, w, col, back = 0, tip = 0.5) => {
         const part = k.part(name, { pivot: [0, 0, 0], axis: [0, 0, 1] });
-        const z = zf + (name === "second" ? 0.03 : name === "minute" ? 0.02 : 0.01);
-        k.add(roundBox(w, len + back, 0.008, w * 0.45), {
+        const z = zf + HAND_Z[name];
+        const look = {
           even: true,
           opacity: 1,
           jitter: 0.015,
-          pos: [0, (len - back) / 2, z],
           part,
           flat: 0.15,
           weight: 3,
           pattern: false,
-          color: (c) => keep(lit(col, c.n, { spec: 0.4 })),
-        });
+          color: (c) => keep(lit(col, [0, 0, 1], { spec: 0.4 })),
+        };
+        // The blade: full width at the centre, tapering to a point.
+        const blade = k.param(
+          (u, v) => {
+            const y = -back + v * (len + back);
+            const f = y < 0 ? 1 : 1 - (1 - tip) * (y / len);
+            const pt = y > len - w ? (len - y) / w : 1;
+            return [(u - 0.5) * w * f * Math.max(0, pt), y, 0];
+          },
+          { grid: 48 },
+        );
+        k.add(blade, { ...look, pos: [0, 0, z] });
+        // The boss round the arbor.
+        k.add(k.disc(w * 0.85 + 0.012), { ...look, pos: [0, 0, z + 0.001], rot: [90, 0, 0] });
         return part;
       };
-      hand("hour", 0.36, 0.055, "#1d1d22", 0.05);
-      hand("minute", 0.55, 0.04, "#1d1d22", 0.06);
-      const sec = hand("second", 0.6, 0.012, "#d62828", 0.16);
-      k.add(k.cylinder(0.035, 0.01), {
+      hand("hour", 0.36, 0.055, "#1d1d22", 0.05, 0.55);
+      hand("minute", 0.55, 0.04, "#1d1d22", 0.06, 0.45);
+      const sec = hand("second", 0.6, 0.012, "#d62828", 0.16, 0.8);
+      k.add(k.disc(0.035), {
         even: true,
         opacity: 1,
         jitter: 0.015,
-        pos: [0, -0.11, zf + 0.03],
+        pos: [0, -0.11, zf + HAND_Z.second + 0.001],
         rot: [90, 0, 0],
         part: sec,
         weight: 3,
         pattern: false,
-        color: "#d62828",
+        color: (c) => keep(lit("#d62828", [0, 0, 1], { spec: 0.4 })),
       });
-      k.add(k.cylinder(0.04, 0.04), {
+      // The arbor the hands turn on, from the dial up through them, and the
+      // little cap nut that holds them on.
+      k.add(k.cylinder(0.014, HAND_Z.second + 0.01, { caps: false }), {
         even: true,
         opacity: 1,
         jitter: 0.015,
-        pos: [0, 0, zf + 0.035],
+        pos: [0, 0, zf + (HAND_Z.second + 0.01) / 2],
         rot: [90, 0, 0],
         weight: 3,
         pattern: false,
-        color: (c) => chrome(c.n),
+        color: (c) => chrome(c.n, "#c9a45c"),
+      });
+      k.add(k.sphere(0.022), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
+        pos: [0, 0, zf + HAND_Z.second + 0.008],
+        scale: [1, 1, 0.55],
+        weight: 3,
+        pattern: false,
+        color: (c) => chrome(c.n, "#c9a45c"),
       });
       // Bells, a handle and a hammer between them.
       for (const s of [-1, 1]) {

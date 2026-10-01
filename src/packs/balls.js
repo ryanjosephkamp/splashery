@@ -1499,6 +1499,18 @@ const WP_RINGS = [0, 0.3, 0.9];
 // Marble: it rolls round a little circle as wide as itself, turning about
 // the way it rolls and with it (so after one lap it is back exactly as it
 // was), the swirl inside turning as it goes.
+// The marble's glass (lane Fix4): the two shells' opacities and the
+// highlight's angular radius.
+const GLASS = {
+  edge: 0.12,
+  band: 0.08,
+  tint: 0.015,
+  fin: 0.02,
+  size: 0.45,
+  count: 30000,
+  spot: 0.1,
+};
+
 const MARBLE = (() => {
   const a0 = rollAxis(ACROSS);
   const turn = (u) => TAU * easeIO(u);
@@ -2243,6 +2255,8 @@ export const RECIPES = {
   },
 
   marble: {
+    // The glass's fins need numbers to read as one clean edge (lane Fix4).
+    density: 2,
     options: [{ key: "color", label: "Swirl", type: "color", default: "#1e88e5" }],
     // It rolls round a little circle, the swirl inside turning as it goes,
     // and is back exactly as it was after one lap.
@@ -2260,37 +2274,78 @@ export const RECIPES = {
       // vanes turn when it rolls (part "ball"); the glass only moves.
       const glass = k.part("glass");
       const ball = k.part("ball");
+      // The glass (lane Fix4). Real glass is clear face on and shows a bright,
+      // crisp edge where it turns away. Splats can't see the camera, so the
+      // edge is built from "fins": thin splats standing on edge across the
+      // surface, each in a plane through the centre. Face on, the eye sees
+      // every fin edge on, as a hairline, so the glass is nearly clear; at
+      // the rim it sees them side on, stacked along its line of sight, so
+      // they add up to a solid edge from any side. A dark fin layer outside
+      // (a thin dark line on a light page) and a bright one inside it (a
+      // bright edge on a dark page).
+      // The same fine fins on every device: a smaller budget makes every
+      // splat bigger and gives fewer fins, so they are sized back down and
+      // made more opaque to add up to the same edge.
+      const tier = k.count / 200000;
+      const fins = (r, col, opacity, count) => {
+        let dirs = [];
+        k.cloud({ count, part: glass, pattern: false, jitter: 0 }, (rand, i, n) => {
+          // (The kit may scale the count to the toy's budget.)
+          if (dirs.length !== n) dirs = fibonacciSphere(n);
+          // A little scatter, so the fins' even rows never show as rings.
+          const g = 0.8 / Math.sqrt(n);
+          const d = unit(dirs[i].map((x) => x + (rand() - 0.5) * g));
+          const a = unit(cross(d, Math.abs(d[1]) < 0.9 ? [0, 1, 0] : [1, 0, 0]));
+          const b = cross(d, a);
+          const t = rand() * TAU;
+          return {
+            p: d.map((x) => x * r),
+            n: [0, 1, 2].map((j) => a[j] * Math.cos(t) + b[j] * Math.sin(t)),
+            flat: GLASS.fin,
+            size: GLASS.size * Math.sqrt(Math.min(1, tier)),
+            color: col,
+            opacity: Math.min(0.6, opacity / Math.min(1, tier)),
+          };
+        });
+      };
+      fins(0.99, "#2c4452", GLASS.edge, GLASS.count);
+      fins(0.965, "#f6fcff", GLASS.band, GLASS.count);
+      // A faint tint over the whole ball, face on.
       k.add(k.sphere(1), {
         even: true,
-        jitter: 0.01,
+        jitter: 0,
         part: glass,
-        flat: 0.15,
-        opacity: 0.16,
-        kind: "glint",
-        params: [0.2, 0],
+        flat: 0.05,
+        opacity: GLASS.tint,
         pattern: false,
-        color: (c) => mix("#e8f4ff", "#ffffff", Math.max(0, c.n[1])),
+        color: "#cfe6ea",
       });
-      // A soft highlight on the glass, up and to the left: a spiral of
-      // splats that fade toward its edge.
-      const L = unit([0.21, 0.68, 1]);
-      const e1 = unit(cross(L, [0, 1, 0]));
-      const e2 = cross(e1, L);
-      k.cloud({ count: 700, part: glass, pattern: false, flat: 0.15 }, (rand, i, n) => {
-        const f = (i + 0.5) / n;
-        const th = 0.13 * Math.sqrt(f);
-        const ph = i * 2.399963229728653;
-        const d = [0, 1, 2].map(
-          (j) => L[j] * Math.cos(th) + (e1[j] * Math.cos(ph) + e2[j] * Math.sin(ph)) * Math.sin(th),
-        );
-        return {
-          p: d.map((x) => x * 1.004),
-          n: d,
-          color: "#ffffff",
-          size: 0.9,
-          opacity: 0.55 * (1 - f) ** 1.5,
-        };
-      });
+      // A highlight up and to the left, crisp at its edge, and its small
+      // reflection low on the right (the light coming back off the far
+      // side of the glass): discs of splats on the shell.
+      const spot = (dir, radius, count, peak) => {
+        const L = unit(dir);
+        const e1 = unit(cross(L, [0, 1, 0]));
+        const e2 = cross(e1, L);
+        k.cloud({ count, part: glass, pattern: false, flat: 0.15 }, (rand, i, n) => {
+          const f = (i + 0.5) / n;
+          const th = radius * Math.sqrt(f);
+          const ph = i * 2.399963229728653;
+          const d = [0, 1, 2].map(
+            (j) =>
+              L[j] * Math.cos(th) + (e1[j] * Math.cos(ph) + e2[j] * Math.sin(ph)) * Math.sin(th),
+          );
+          return {
+            p: d.map((x) => x * 1.004),
+            n: d,
+            color: "#ffffff",
+            size: 0.7,
+            opacity: peak * (1 - smoothstep(0.1, 1, f)),
+          };
+        });
+      };
+      spot([0.21, 0.68, 1], GLASS.spot, 500, 0.95);
+      spot([0.85, -0.28, 0.7], GLASS.spot * 0.45, 120, 0.75);
       for (let v = 0; v < 3; v++) {
         const base = (v / 3) * TAU;
         const vane = k.param(
