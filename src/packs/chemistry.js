@@ -468,9 +468,10 @@ export const RECIPES = {
         visible: vis,
         quat: quatAxisAngle([0.2, 1, 0.1], 0.35 * Math.sin(t * 0.5)),
       };
-      D.shells.forEach((_, i) => {
-        out.parts[`shell${i}`] = { offset: off, scale: sc, visible: vis, angle: t * shellSpeed(i) };
-      });
+      for (let i = 0; i < 7; i++) {
+        const used = i < D.shells.length;
+        out.parts[`shell${i}`] = { offset: off, scale: sc, visible: used ? vis : 0, angle: t * shellSpeed(i) }; // prettier-ignore
+      }
       // A tap on the atom: its outermost electron jumps out to a higher
       // orbit (shown faintly), stays a moment, and falls back, giving off a
       // photon in the color of the element's strongest visible line.
@@ -531,6 +532,18 @@ export const RECIPES = {
       }
       const home = TILE_OF.get(el.symbol);
       const tile = k.part("tile");
+      // Every element has the same parts in the same order (all seven
+      // shells, used or not), so when the table switches elements the frame
+      // that still shows the old build with the new one's motion moves each
+      // piece as itself: nothing hidden flashes up.
+      const L0 = atomLayout(el);
+      k.part("nucleus", { pivot: ATOM_AT });
+      for (let i = 0; i < 7; i++) k.part(`shell${i}`, { pivot: ATOM_AT, axis: shellNormal(i) });
+      k.part("jumper", { pivot: ATOM_AT, axis: shellNormal(L0.jumper.shell) });
+      k.part("ghost", { pivot: ATOM_AT, axis: shellNormal(L0.jumper.shell) });
+      k.part("flash", { pivot: ATOM_AT });
+      k.part("photon", { pivot: ATOM_AT });
+      k.part("halo");
       // The board behind the tiles.
       const bc = mul(add(BOARD_LO, BOARD_HI), 0.5);
       const bs = sub(BOARD_HI, BOARD_LO);
