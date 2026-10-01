@@ -53,14 +53,15 @@ card, and for most runs it shared the CPU with the full test suite. The numbers 
 pipeline works end to end and how the stages compare; they are not the times anyone will see. The
 samples were trained with small settings to fit (360 px, 800 to 1,500 steps).
 
-| Video (CC BY 3.0, Wikimedia Commons)          | Frames picked / placed | Camera path    | Training             | Splats | PLY     | Result                                    |
-| --------------------------------------------- | ---------------------- | -------------- | -------------------- | ------ | ------- | ----------------------------------------- |
-| Splat.js's own test set (12 rendered views)   | 12 / 12                | 32 s           | 212 steps, 518 s     | 20,325 | 1.1 MB  | Works                                     |
-| Statue orbit (the Dronalist), 20 s at 3:18    | 36 / 24                | 528 s          | 1,504 steps, 88 min  | 30,558 | 1.65 MB | Works from the filmed angles              |
-| Statue orbit, 14 s at 3:24 (one shot), 480 px | 27 / 26                | 233 s          | 2,006 steps, 111 min | 38,621 | 2.2 MB  | Works; the r4 card (+44% edge sharpness)  |
-| Edinburgh walk (POPtravel), 10 s at 7:32      | 20 / 20                | 62 s           | 800 steps, 59 min    | 30,135 | 1.58 MB | Works; walkers become ghosts              |
-| Nicosia by drone (The Track Record), 0:45     | 20 / –                 | failed, 33 min | –                    | –      | –       | Frames taken for panoramas (a bug, fixed) |
-| Nicosia by drone, 19 s at 1:04 (fixed crop)   | 24 / –                 | failed, 1 min  | –                    | –      | –       | Too little parallax (high, slow flight)   |
+| Video (CC BY 3.0, Wikimedia Commons)          | Frames picked / placed | Camera path    | Training             | Splats | PLY     | Result                                      |
+| --------------------------------------------- | ---------------------- | -------------- | -------------------- | ------ | ------- | ------------------------------------------- |
+| Splat.js's own test set (12 rendered views)   | 12 / 12                | 32 s           | 212 steps, 518 s     | 20,325 | 1.1 MB  | Works                                       |
+| Statue orbit (the Dronalist), 20 s at 3:18    | 36 / 24                | 528 s          | 1,504 steps, 88 min  | 30,558 | 1.65 MB | Works from the filmed angles                |
+| Statue orbit, 14 s at 3:24 (one shot), 480 px | 27 / 26                | 233 s          | 2,006 steps, 111 min | 38,621 | 2.2 MB  | Works; the r4 card (+44% edge sharpness)    |
+| Edinburgh walk (POPtravel), 10 s at 7:32      | 20 / 20                | 62 s           | 800 steps, 59 min    | 30,135 | 1.58 MB | Works; walkers become ghosts                |
+| Edinburgh walk, 28 frames, 480 px             | 28 / 28                | 112 s          | 2,006 steps, 109 min | 40,474 | 2.3 MB  | Works; the r4 card (edge sharpness doubled) |
+| Nicosia by drone (The Track Record), 0:45     | 20 / –                 | failed, 33 min | –                    | –      | –       | Frames taken for panoramas (a bug, fixed)   |
+| Nicosia by drone, 19 s at 1:04 (fixed crop)   | 24 / –                 | failed, 1 min  | –                    | –      | –       | Too little parallax (high, slow flight)     |
 
 Picking the frames took 10 to 17 seconds (seeking a 480p WebM), decoding them under a second.
 
