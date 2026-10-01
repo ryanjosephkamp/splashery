@@ -105,20 +105,19 @@ at the same time; leave their files alone. The laptop is locked.
 
 Model: **Opus 5.5** (default effort), no helpers.
 
-September 30, 2026, evening:
+October 1, 2026, early morning (UTC): **ready for the Operator.**
 
-- Engine PR #144 (`src/live/`, the relief kind, the input panel's `input.live`) is open as a draft.
-  Its full test run is being finished (the session's worker restarted once, part way through).
-- Built on the lane branch, each with a clip made by `tools/live-clip.mjs`:
-  - Room echo meter (new toy, `room-echo`): clap, rings, RT60 on the back wall.
-  - Splat mirror (new toy, `splat-mirror`): the camera as relief splats, live depth in a worker.
-  - Song landscape, live: the microphone's spectrum as a waterfall of relief splats.
-  - Sing to the Chladni plate: the sung note picks the mode and settles the sand.
-  - Voice tuner on the four keyboards (labs): the sung key goes down and lights gold.
-  - Clap to tap (labs setting, engine PR): a clap taps the open toy.
-  - Photo to 3D, live: the camera in depth, then "Take the picture".
-  - Screen sharing on the Screen toy (computers only).
-- Next: `tests/live.spec.mjs`, screenshots, the cards, the permission clip.
+- Engine PR #144 and lane PR #150 are open as drafts. Both have main through #153 merged in.
+- The full suite on the lane branch (which contains #144): 609 passed and 1 failed. The failure was
+  my help lines' length; they're fixed, and the test passes when rerun alone. After the last main
+  merge, the live, live-engine, fx4, fx4-engine and help specs pass (46 tests).
+- The relief kind is 24 (lane Fix4's rim took 23).
+- Cards on Effect review page 2, as MP4s:
+  - marked good: `live-permission`, `live-echo`, `live-landscape`, `live-chladni`, `live-tuner`,
+    `live-clap`, `live-screen`;
+  - redone after the owner's "fix" (the swinging): `live-mirror-r2` and `live-photo3d-r2`.
+- The owner's review of October 1 names a later "Live input r2" lane for the song landscape (start
+  at once, analysis in a worker, fluid-like looks); not started here.
 
 ## Notes
 
