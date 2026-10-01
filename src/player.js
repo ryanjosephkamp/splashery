@@ -1362,6 +1362,14 @@ export class Player {
         this.stage.setScreenCanvas(scr.canvas);
       }
     }
+    // A toy that moves on by itself (the periodic table's tour) names new
+    // options in out.next ({ options, key }): it is rebuilt as a tile tap
+    // rebuilds it, without the tap's sound, and then `key` fires (lane Fix6).
+    const next = this.motion.out?.next;
+    if (next?.options && !this.movingOn && info.kind === "kit") {
+      this.movingOn = true;
+      this.switchTo({ ...next, echo: true }).finally(() => (this.movingOn = false));
+    }
     this.pictures?.update(this.motion.out, this.time); // Pictures
     const gliding = this.followView(); // Page focus
     // Fluids: step the toy's fluids on its own clock, steered by out.fluid.
