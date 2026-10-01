@@ -15,7 +15,7 @@
 // Photo to 3D's live view shares the mirror's picture (src/live/relief.js),
 // so both look and behave the same.
 
-import { mix, shade, clamp, smoothstep, quatAxisAngle } from "../kit.js";
+import { mix, shade, clamp, smoothstep } from "../kit.js";
 import { live } from "../live/live.js";
 import { MIRROR, buildMirror, mirrorScreen, mirrorStatus } from "../live/relief.js";
 import { decodePhoto, unpackDepth } from "./photo-3d.js";
@@ -357,12 +357,9 @@ const SPLAT_MIRROR = {
     }
   },
   drive(t, c, out) {
+    // The tap flattens or raises the relief; the picture itself keeps still
+    // (the owner's review of October 1, 2026: no swaying).
     MIRROR.gain = clamp(MIRROR.depth * (1 - (c.flat ?? 0)), 0, 1);
-    // The picture sways a little as the depth rises, so the relief shows.
-    const r = 1 - (c.flat ?? 0);
-    out.body = {
-      quat: quatAxisAngle([0, 1, 0], 0.25 * Math.sin(TAU * r) * Math.sin(Math.PI * r) ** 0.5),
-    };
   },
   build(k, o) {
     MIRROR.depth = o.depth ?? 0.6;

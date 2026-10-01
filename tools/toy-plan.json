@@ -2132,7 +2132,7 @@
     "splat-mirror": {
       "v": "keep",
       "owner": "The owner's approval of lane Live input (\"live input go\", September 30, 2026; labs only).",
-      "effect": "A framed picture of splats. Tap “Use my camera” and it shows you as in a mirror; the depth model (Depth Anything V2 Small, in a worker, loaded only after the tap) works out how near each part is as often as the device allows, and the picture rises into a relief you can turn. Before the camera is on it shows a still life with its depth. A tap flattens the relief, and the picture sways a little as it rises again (about 1.4 s).",
+      "effect": "A framed picture of splats. Tap “Use my camera” and it shows you as in a mirror; the depth model (Depth Anything V2 Small, in a worker, loaded only after the tap) works out how near each part is as often as the device allows, and the picture rises into a relief you can turn. Before the camera is on it shows a still life with its depth. A tap flattens the relief into its frame and the next raises it again (about 1.4 s); the picture itself keeps still.",
       "sound": "A soft rising whoosh as the depth comes up; a falling one as it flattens.",
       "improved": "Live input: relief splats (a new kind) take their color and lift from a canvas drawn each frame, so the picture moves without a rebuild."
     },

@@ -9,7 +9,7 @@
 //     [--audio=<wav>] [--video=<y4m>] [--press=<selector>[,<selector>…]]
 //     [--js=<code run before recording>] [--at=<js run at time t: "t:code;t:code">]
 //     [--depth] [--strip=8] [--sheet=full] [--report=<js whose result is printed after>]
-//     [--ready=<js: recording waits until it returns true>] [--screen-demo] [--opt=key=value]
+//     [--ready=<js: recording waits until it returns true>] [--screen-demo] [--opt=key=value] [--turn=t0,t1,radians]
 //
 // The page's clock is stepped by hand (as tools/effect-clip.mjs does), so a
 // clip shows the toy at its real speed however slow the renderer is.
@@ -284,8 +284,24 @@ const step = 1 / fps;
 const frames = [];
 const total = Math.round((before + secs) / step);
 let depthMs = [];
+// --turn=t0,t1,radians: one slow, even turn of the view between t0 and t1.
+const turn = opt("turn", "") ? opt("turn", "").split(",").map(Number) : null;
+let turned = 0;
 for (let n = 0; n < total; n++) {
   const t = n * step - before;
+  if (turn) {
+    const [t0, t1, rad] = turn;
+    const f = Math.max(0, Math.min(1, (t - t0) / (t1 - t0)));
+    const want = rad * (0.5 - 0.5 * Math.cos(Math.PI * f)); // eased in and out
+    if (Math.abs(want - turned) > 1e-6) {
+      await page.evaluate((d) => {
+        const c = window.__splashery.player.camera;
+        const s = c.getState();
+        c.setState({ ...s, yaw: s.yaw + d }, { snap: true });
+      }, want - turned);
+      turned = want;
+    }
+  }
   for (const a of atList)
     if (a.t <= t && !a.done) {
       a.done = true;
