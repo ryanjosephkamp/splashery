@@ -115,3 +115,35 @@ test("a toy's drive can ask for new options (out.next): rebuilt quietly, then it
   // No tap sound for a move the toy made by itself.
   expect(r.sounds.filter((k) => k === "toy")).toEqual([]);
 });
+
+test("a kit toy rebuilt with new options keeps moving as it was until the new build lands", async ({
+  page,
+}) => {
+  await page.goto("/?renderer=webgl2&profile=weak");
+  await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
+  await page.evaluate(() => window.__splashery.app.chooseToy("periodic-table"));
+  await page.waitForFunction(() => window.__splashery.player.motion.ctx?.kit?.data?.element === "C");
+  await page.waitForTimeout(500);
+  // Watched every frame through a tile tap's rebuild: the toy on screen always has its motion
+  // (so its hidden parts, such as the atom's photon, stay hidden), first carbon's, then iron's.
+  const r = await page.evaluate(async () => {
+    const { player } = window.__splashery;
+    const seen = [];
+    let done = false;
+    const watch = () => {
+      if (done) return;
+      const d = player.motion.ctx?.kit?.data;
+      seen.push(d ? `${d.element}:${player.motion.out?.parts?.photon?.visible ?? "-"}` : "none");
+      requestAnimationFrame(watch);
+    };
+    watch();
+    await player.rebuild({ element: "Fe" });
+    await new Promise((ok) => setTimeout(ok, 300));
+    done = true;
+    return seen;
+  });
+  expect(r).not.toContain("none");
+  expect(r[0]).toBe("C:0");
+  expect(r.at(-1)).toBe("Fe:0");
+  expect(r.filter((x) => !/:0$/.test(x))).toEqual([]);
+});
