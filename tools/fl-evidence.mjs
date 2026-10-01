@@ -12,7 +12,8 @@
 //     "checks": [{ "ok": "yes" | "partly" | "no", "text": "..." }], "note": "..." }
 // or a static page: { "id": "fl-physics-r1", "html": "<section>...</section>" }.
 // A reference can also be a video (r4): { "video": "candle.webm", "start": 2,
-// "label", "credit" }, played in step with the clip, frame by frame.
+// "label", "credit" }, played in step with the clip, frame by frame. A
+// reference image may set "fit": "contain" (a plot shown whole).
 // Reference photos are never committed: each card credits its photos (author,
 // license, Commons page), which must be CC0, CC BY or public domain.
 
@@ -77,7 +78,7 @@ function sideBySide(card, h) {
     .map((r, i) =>
       r.video
         ? `<figure class="pane" style="height:${refH}px"><video id="ref${i}" muted playsinline preload="auto" src="${dataUrl(r.video)}" style="display:block;width:100%;height:100%;object-fit:cover;object-position:${r.pos || "50% 50%"}"></video><figcaption>${esc(r.label)}</figcaption></figure>`
-        : `<figure class="pane" style="height:${refH}px"><img src="${dataUrl(r.file)}" style="object-position:${r.pos || "50% 50%"}"><figcaption>${esc(r.label)}</figcaption></figure>`,
+        : `<figure class="pane" style="height:${refH}px"><img src="${dataUrl(r.file)}" style="object-position:${r.pos || "50% 50%"};object-fit:${r.fit || "cover"}"><figcaption>${esc(r.label)}</figcaption></figure>`,
     )
     .join("");
   const videos = card.refs.some((r) => r.video);
