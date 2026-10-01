@@ -30,7 +30,8 @@ around the toys; the rules below keep it apart.
 
 | Page                       | Link                                              | Who changes it                                                               |
 | -------------------------- | ------------------------------------------------- | ---------------------------------------------------------------------------- |
-| Effect review              | https://claude.ai/artifact/NCsg9V5SzFY3Mnwuwgq7pi | Lanes add clips and cards (below); the owner marks; the Operator tidies      |
+| Effect review, page 2      | https://claude.ai/artifact/BSayVkzQ2FKESesrkrSUMK | Lanes add clips and cards (below); the owner marks; the Operator tidies      |
+| Effect review, page 1      | https://claude.ai/artifact/NCsg9V5SzFY3Mnwuwgq7pi | Full since September 30, 2026: older clips and marks; no new uploads         |
 | Sound Board                | https://claude.ai/artifact/VE9XCTxH3djST6dGb6ZAkj | The Operator (after merges and each sound-review round); the owner may mark  |
 | Help Board                 | https://claude.ai/artifact/P1NCWsGRE3MFqYTWTnTuqN | The Operator (`node tools/help-board.mjs`, below); the owner marks           |
 | Toy Plan (owner's marks)   | https://claude.ai/artifact/PNGPx7REMdhxLMHDXARhw8 | The owner marks; the Operator republishes (`node tools/toy-plan.mjs --json`) |
@@ -248,57 +249,67 @@ board with its lane's review.
 
 ## The Effect review page
 
-The owner reviews every new or changed effect as a clip on one page:
-https://claude.ai/artifact/NCsg9V5SzFY3Mnwuwgq7pi. The page reads everything from its own database,
-so lanes add clips and cards at the same time without republishing it. Its collections:
+The owner reviews every new or changed effect as a clip on the Effect review page. Each page holds 1
+GB of clips, and page 1 (https://claude.ai/artifact/NCsg9V5SzFY3Mnwuwgq7pi) filled on September 30,
+2026, so new clips go on page 2: https://claude.ai/artifact/BSayVkzQ2FKESesrkrSUMK. Page 1 keeps its
+clips and the owner's marks on them. Each page reads everything from its own database, so lanes add
+clips and cards at the same time without republishing it. The collections (the same on both pages):
 
 - `lanes/<lane id>`: `{ title, note, order, finished, groups: [{ id, title, note }] }`. The Operator
   makes each lane's record. A lane may set its own record's `groups` (sections within the lane).
-- `cards/<card id>`: one clip. `{ lane, group, order, name, said, now, asset, at }`, and
-  `replacedBy` once a newer clip of the same effect is posted. `lane` is the lane id (as in
-  `lanes/`), `group` one of the lane's group ids (optional), `order` a number (cards sort by it),
-  `name` the toy's shelf name (add ": the second tap" or ": Cairn style" for a variant), `said` what
-  the owner said about it (their review note or their mark's note, quoted; else "(No note; plan: …)"
-  with the plan's effect), `now` what the tap does now in plain words with its length, `asset` the
-  uploaded clip's id, `at` the date (YYYY-MM-DD). Older cards use `clip` (a file published with the
-  page, such as `e4/oak.gif`) instead of `asset`.
+- `cards/<card id>`: one clip. `{ lane, group, order, name, said, now, asset, at }`, `video: true`
+  when the clip is an MP4, and `replacedBy` once a newer clip of the same effect is posted. `lane`
+  is the lane id (as in `lanes/`), `group` one of the lane's group ids (optional), `order` a number
+  (cards sort by it), `name` the toy's shelf name (add ": the second tap" or ": Cairn style" for a
+  variant), `said` what the owner said about it (their review note or their mark's note, quoted;
+  else "(No note; plan: …)" with the plan's effect), `now` what the tap does now in plain words with
+  its length, `asset` the uploaded clip's id, `at` the date (YYYY-MM-DD). Older cards use `clip` (a
+  file published with the page, such as `e4/oak.gif`) instead of `asset`.
 - `verdicts/<card id>`: the owner's marks, `{ verdict: "good" | "fix" | "", note, at }`. Only the
   owner writes these.
 
 Card ids are `<prefix>-<toy id>`, with a variant after it (`e5-cherries-pair`). A clip redone after
-the owner's note gets the old card's id plus `-r2` (then `-r3`), in the old card's lane.
+the owner's note gets the old card's id plus `-r2` (then `-r3`), in the old card's lane. A card's
+marks live on the same page as the card.
 
-The page's source is `tools/pages/effect-review.html`; only the Operator republishes it. Its clip
-box takes each clip's own shape (square, landscape or a tall 390×844 phone clip), capped at about
-three quarters of the screen's height, where the clip letterboxes. Never give `.clip` a fixed
+The pages' sources are `tools/pages/effect-review.html` (page 1) and
+`tools/pages/effect-review-2.html` (page 2); only the Operator republishes them. Their clip box
+takes each clip's own shape (square, landscape or a tall 390×844 phone clip), capped at about three
+quarters of the screen's height, where the clip letterboxes. Never give `.clip` a fixed
 `aspect-ratio`: a clip taller than the box spills over the card's text and buttons (the owner's
 report of September 30, 2026). After any change to the page's layout, render a tall phone clip and a
 square one in a card at 390 pixels and at desktop width, and check that nothing overlaps before
-republishing.
+republishing. When page 2 fills, the Operator opens a page 3 the same way: a copy with its own
+title, the active lanes' records, and a link each way.
 
 ### Steps for a lane
 
 1. Render each clip: `node tools/effect-clip.mjs --strip=8 --size=320 <toy id>:<seconds>` (the
    server must be running; `--taps`, `--opt=key=value` and `--pgn=` are in the tool's header). It
    writes a looping GIF. Watch it before posting. For a drag, use `node tools/drag-clip.mjs`
-   instead.
-2. Read the page once in the session (a session must read an artifact before it can add to it):
-   Artifact tool, `action: "read"`, `url` the page's link.
+   instead. To save space, post an MP4 instead of the GIF (about five times smaller) and add
+   `"video": true` to its card: `pip install imageio-ffmpeg`, then run its `ffmpeg`
+   (`python3 -c 'import imageio_ffmpeg;print(imageio_ffmpeg.get_ffmpeg_exe())'`) with
+   `-i clip.gif -movflags +faststart -pix_fmt yuv420p -vf "scale=trunc(iw/2)*2:trunc(ih/2)*2" -c:v libx264 -crf 23 clip.mp4`.
+2. Read page 2 once in the session (a session must read an artifact before it can add to it):
+   Artifact tool, `action: "read"`, `url` the page's link. "The page" in the steps below is page 2;
+   nothing more goes on page 1.
 3. Upload the clips: Artifact tool, `action: "publish"`, `url` the page's link, `asset: true`,
-   `file_paths` the GIFs (up to 25 per call). Never publish to the page without `asset: true`: that
+   `file_paths` the clips (up to 25 per call). Never publish to the page without `asset: true`: that
    would replace the page. Each result line gives a clip's id (32 hex characters).
 4. Add the cards: ArtifactData tool, `action: "batch"`, `url` the page's link, `writes` one entry
    per clip (up to 50 per batch), for example
    `{ "op": "set", "collection": "cards", "doc_id": "e5-watermelon", "data": { "lane": "E5", "group": "fruit", "order": 10, "name": "Watermelon", "said": "…", "now": "…", "asset": "<id>", "at": "2026-09-27" } }`.
    To give your lane sections, add
    `{ "op": "update", "collection": "lanes", "doc_id": "E5", "data": { "groups": [{ "id": "fruit", "title": "Fruit", "note": "…" }] } }`.
-5. Read the owner's marks: ArtifactData, `action: "list"`, `collection: "verdicts"`,
+5. Read the owner's marks on both pages: ArtifactData, `action: "list"`, `collection: "verdicts"`,
    `query: { "limit": 1000 }`, and keep the ids that start with your prefix. Treat notes as the
    owner's review, and fix every "fix" in the same PR.
 6. After a fix, post the new clip as a new card (`<old id>-r2`, the owner's note quoted in `said`)
    and mark the old one replaced in the same batch:
    `{ "op": "update", "collection": "cards", "doc_id": "<old id>", "data": { "replacedBy": "<old id>-r2" } }`.
-   The page then shows only the new clip.
+   The page then shows only the new clip. When the old card is on page 1, post the new one on page 2
+   and set the old card's `replacedBy` (on page 1) to `"page2:<old id>-r2"`; page 1 then hides it.
 
 Never republish the page, write to `verdicts`, change another lane's cards or record, or delete
 clips. When the owner has approved all of a lane's clips and its PR has merged, the Operator sets
