@@ -105,10 +105,23 @@ character and a sharper island".
   real person; close up it is grainier (specks on the face, a light band at the waist) than the
   kit-built splat character, so that one stays splats mode's default. Card `wd-character-splats-r3`
   lets the owner judge.
-- **Cards so far:** `wd-character-r3` (replaces `wd-hybrid-character`), `wd-character-walk-r3`
-  (replaces `wd-walk-r3` and `wd-list-r3`). The Effect review page's asset storage was full (1.06 of
-  1.07 GB) when I started posting: my cards are WebM videos (`tools/wd-webm.mjs`, under 1 MB each
-  instead of 10–20 MB GIFs).
+- **Cards** (all WebM, 0.6–1.25 MB): `wd-character-r3` (replaces `wd-hybrid-character`),
+  `wd-character-walk-r3` (replaces `wd-walk-r3` and `wd-list-r3`), `wd-props-r3`, `wd-island-r3`,
+  `wd-island-r3-desktop` (1440×900, high tier, camera frame) and `wd-character-splats-r3`.
+- `tests/wd.spec.mjs`, `wdh.spec.mjs` and `wdr3.spec.mjs`: 32 passed (47.6 min). Measured: the
+  standing foot slides 0.047 m/s walking at 1.3 m/s and 0.16 m/s running at 2.7 m/s; hybrid download
+  9.49 MB (low, mid) and 10.50 MB (high, max); frame times in the software renderer (mid, 390×844)
+  about 2.1 s in both modes, as before (relative only; the phone is the real test: open
+  `worlds/?labs=1&render=hybrid&stats=1`).
+- Changed in `tests/wdh.spec.mjs` (mine): hybrid mode's character is the person now, so the "both
+  modes" test checks its model casts shadows instead of splat parts, and the mesh-character test
+  runs for `mesh` (the person, bone names `foot_l`, `head`; it starts in Idle) and `kenney`.
+- Main merged after #127 (September 30, 2026).
+- Full suite after merging main (October 1, 2026): 582 passed, 1 failed in 3.2 h. The failure,
+  `tests/smoke.spec.mjs:730` (a toy's rig back at rest within 3 s), is in the toy app, which this
+  branch doesn't touch, and passed on its own rerun (48 s). The Effect review page's asset storage
+  was full (1.06 of 1.07 GB) when I started posting: my cards are WebM videos (`tools/wd-webm.mjs`,
+  under 1 MB each instead of 10–20 MB GIFs).
 - **Clip speed:** a phone-size clip takes about 15 s a frame in this container's software renderer
   (`--fast --dpr=1.5`), so a 10-second card takes 25–35 minutes.
 - **Model props** (`tools/wd-props.py`, `src/worlds/mesh-props.js`): Poly Haven boulders, stones, a
