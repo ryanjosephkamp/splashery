@@ -9,6 +9,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import config from "../playwright.config.mjs";
+import { mp3Frames } from "../src/packs/song-mp3.js";
 import { makeAnalyser, makeFeatures, analyzeFrames, frameCount, F, FIELDS, HOP } from "../src/packs/song-analysis.js"; // prettier-ignore
 
 const APP = "/?renderer=webgl2&adapt=off&profile=mid&labs=1";
@@ -76,6 +77,31 @@ test.describe("the measurements (no browser)", () => {
       expect(f(5)).toBe(0); // silence
       expect(Math.abs(f(30) / hz - 1)).toBeLessThan(0.01);
     }
+  });
+
+  test("an MP3's frames are found between an ID3 tag and the end; other bytes aren't an MP3", () => {
+    // 128 kb/s, 44.1 kHz MPEG-1 Layer III frames: 417 bytes, or 418 padded.
+    const frame = (pad) => {
+      const f = new Uint8Array(417 + pad);
+      f.set([0xff, 0xfb, 0x90 | (pad << 1), 0x64]);
+      return f;
+    };
+    const tag = new Uint8Array(10 + 300);
+    tag.set([0x49, 0x44, 0x33, 4, 0, 0, 0, 0, 2, 44]); // "ID3", 300 bytes (syncsafe 2·128 + 44)
+    const frames = Array.from({ length: 40 }, (_, i) => frame(i % 3 === 0 ? 1 : 0));
+    const bytes = new Uint8Array(tag.length + frames.reduce((a, f) => a + f.length, 0));
+    let at = tag.length;
+    bytes.set(tag);
+    const want = [];
+    for (const f of frames) {
+      want.push(at);
+      bytes.set(f, at);
+      at += f.length;
+    }
+    const fr = mp3Frames(bytes);
+    expect(fr).toMatchObject({ rate: 44100, samples: 1152, end: bytes.length });
+    expect(fr.offsets).toEqual(want);
+    expect(mp3Frames(fs.readFileSync(CLICK_WAV))).toBe(null);
   });
 
   test("measuring in chunks, in any order, gives the same numbers as all at once", () => {
@@ -149,6 +175,32 @@ test.describe("in the browser", () => {
     await page.waitForTimeout(500);
     const b = await page.evaluate(async (m) => (await import(m)).playState(), studio);
     expect(b.pos).toBeCloseTo(a.pos, 3);
+    expect(errors).toEqual([]);
+    await browser.close();
+  });
+
+  test("an MP3 is measured piece by piece, and its clicks land where they are", async ({
+    playwright,
+  }) => {
+    // Our own click track (tests/fixtures/live2/clicks.mp3, 64 s at 32 kb/s:
+    // a click every 1.37 s from 0.5 s), long enough to be decoded in pieces.
+    const { browser, page, errors } = await songPage(playwright);
+    await page.locator("#toy-input-file").setInputFiles("tests/fixtures/live2/clicks.mp3");
+    await until(page, () => window.__splashery.player.proc?.ctx?.kit?.data?.song?.song?.long);
+    await until(page, async (m) => (await import(m)).songAnalysisState().finished, studio, 120_000);
+    const r = await page.evaluate(async (m) => {
+      const fe = (await import(m)).songTest().features;
+      const off = [];
+      for (let c = 0.5; c < fe.n * 0.04 - 1; c += 1.37) {
+        let best = -1;
+        for (let i = Math.max(0, Math.floor(c / 0.04) - 5); i <= Math.floor(c / 0.04) + 5; i++) if (best < 0 || fe.feat[i * 10] > fe.feat[best * 10]) best = i; // prettier-ignore
+        off.push(Math.round(((best + 0.5) * 0.04 - c) * 1000));
+      }
+      return { off, measured: fe.done.every((x) => x) };
+    }, studio);
+    expect(r.measured).toBe(true);
+    expect(r.off.length).toBeGreaterThan(40);
+    for (const o of r.off) expect(Math.abs(o)).toBeLessThanOrEqual(25); // half a frame
     expect(errors).toEqual([]);
     await browser.close();
   });
