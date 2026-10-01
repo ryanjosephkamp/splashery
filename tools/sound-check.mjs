@@ -37,6 +37,8 @@ if (args.includes("--voices")) {
     const { playSpec, VOICE_NAMES } = await import("/src/voices.js");
     const out = {};
     for (const voice of VOICE_NAMES) {
+      // A sample's level is in its file (normalized when it was made).
+      if (voice === "sample") continue;
       let loud = 0;
       let peak = 0;
       // Noisy voices differ each time, so take the loudest of three.
@@ -79,7 +81,7 @@ await page.goto(`${base}/tools/`);
 const results = await page.evaluate(
   async ({ ids, wantSheet, wantWav }) => {
     const { TOY_SOUNDS } = await import("/src/toy-sounds.js");
-    const { playSpec, specFor } = await import("/src/voices.js");
+    const { playSpec, specFor, loadSamples } = await import("/src/voices.js");
     const { masterChain } = await import("/src/sound.js");
     const rate = 22050;
     const seconds = 6;
@@ -104,6 +106,7 @@ const results = await page.evaluate(
       }
       const ctx = new OfflineAudioContext(1, rate * seconds, rate);
       const master = masterChain(ctx);
+      await loadSamples(ctx, job.spec);
       playSpec(ctx, master, 0.01, job.spec);
       const buf = await ctx.startRendering();
       const d = buf.getChannelData(0);
