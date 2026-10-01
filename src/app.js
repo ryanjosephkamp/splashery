@@ -699,9 +699,8 @@ class App {
     // when the toy is switched off (the lid closes, the tune stops).
     const tune = r.pick === null && soundEvents(chosen).some((e) => e.t > 2);
     if (r.toggle && !(r.value > 0.5)) this.sound.stopHeld("toy");
-    if ((r.long || (r.toggle && tune)) && r.pick === null)
-      this.sound.playHeld(chosen, { key: "toy" }); // prettier-ignore
-    else this.sound.play(chosen, { key: "toy", pick: r.pick });
+    const held = (r.long || (r.toggle && tune)) && r.pick === null;
+    this.sound.play(chosen, { key: "toy", pick: r.pick, held });
     this.ui.setMotion(player.scene.motion, player.motion.targets);
   }
 

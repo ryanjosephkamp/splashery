@@ -46,8 +46,10 @@ export class Sound {
 
   // Plays a sound: an old name ("chime") or a spec from the voice library.
   // Repeats under the same key are spaced out by `gap` seconds. `pick` plays
-  // only that note (or chord) of a spec's tune.
-  play(spec, { gap = 0.06, pitch = 1, key, pick = null } = {}) {
+  // only that note (or chord) of a spec's tune. `held` plays it through the
+  // pausable scheduler below (UI r3).
+  play(spec, { gap = 0.06, pitch = 1, key, pick = null, held = false } = {}) {
+    if (held) return this.playHeld(spec, { key: key || "toy", pitch }); // UI r3
     if (!this.enabled || !spec) return;
     const ctx = this.audio();
     if (!ctx) return;
