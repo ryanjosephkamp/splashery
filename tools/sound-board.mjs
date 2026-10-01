@@ -82,10 +82,14 @@ try {
 const built = new Date().toISOString().slice(0, 10) + (commit ? `, ${commit}` : "");
 
 // Recorded samples ride along as data: URLs, so the page plays them offline.
-const sampleFiles = samplesIn([
-  ...Object.values(sounds),
-  ...Object.values(review.toys || {}).flatMap((r) => (r.candidates || []).map((c) => c.sound)),
-]);
+const sampleFiles = samplesIn(
+  [
+    ...Object.values(sounds),
+    ...Object.values(review.toys || {}).flatMap((r) => (r.candidates || []).map((c) => c.sound)),
+  ],
+  [],
+  true,
+);
 const sampleData = Object.fromEntries(
   sampleFiles.map((f) => {
     const bytes = fs.readFileSync(path.join(root, "assets/sounds", f));

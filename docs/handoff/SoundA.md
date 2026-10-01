@@ -141,68 +141,78 @@ at the same time; leave their files alone. The laptop is locked.
   docs/OPERATING.md, docs/PACKS.md, docs/WORKSTREAMS.md and docs/handoff/history.md (lessons from
   earlier lanes).
 - Your handoff file: create it. Start it with this brief, word for word, under "## Brief", then keep
-  "## State", "## Notes", "## Known issues" and "## For the Operator" current. Note your model at
-  the top of "## State" (the blog post compares the two models).
-- Shared lists: edit only your own entries in src/toys.js, src/toy-sounds.js, src/toy-help.js (a
-  how-to line and an About text per toy, following docs/handoff/Help.md), tools/toy-plan.json,
-  CREDITS.md and tools/assets.json. Regenerate docs/TOY-PLAN.md with `node tools/toy-plan.mjs`;
-  never merge it by hand.
-- Never edit tests/taps.spec.mjs. Your own tests go in tests/<prefix>.spec.mjs. If a finished lane's
-  test breaks because of a count or a list your work changes, don't edit it: say which test and why
-  in your message, and the Operator fixes it.
-- Assets: CC0, CC BY or public domain only, checked on the live source page and credited
-  (CREDITS.md, tools/assets.json and the toy's in-app credit). Never BY-SA or NC. No logos, brand
-  names or insignia.
-- Review: the owner reviews sounds on the Sound Board, not the Effect review page; post clips there
-  only if an effect changes. Don't republish either page, and never write to "verdicts".
-- Push your work in progress to your branch about every hour, so it isn't only in your container,
-  and open your draft PR early. Many lanes run at once now, so main moves often: merge it into your
-  branch before each push (never rebase a pushed branch) and keep both sides of any conflict.
-- Before every push, follow "Before every push" in CLAUDE.md: the full Playwright suite
-  (SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium npx playwright test), prettier,
-  `node tools/us-english.mjs --diff`, and your own screenshots only if a Toy tab changed. Then put
-  back the standard screenshots (`node tools/upkeep.mjs --restore-shots`) and any other lane's
-  screenshots your branch didn't change.
-- PR: a draft PR against main with the five sections (Summary, Verification, Deviations, Known
-  issues, What was cut), and the model that built it in the Summary. When main moves, merge it into
-  your branch.
-- While you work, keep a check-in scheduled about an hour out (send_later), so a container restart
-  can't stall you. Stop the check-ins once your PR is merged or closed.
-- Finish every working turn with a short final message that starts with "READY:" (PR link, test
-  results, the list of changed toys, anything for the Operator), "WORKING:" (what's left), or
-  "BLOCKED:" (exactly what you need).
-
-## State
+  "## State
 
 - Model: Opus 5.5 (claude-opus-5-5), default effort.
-- September 30, 2026: engine PR (`claude/lane-sound-a-engine`) built: the `sample` voice in
-  `src/voices.js` (marked block "Recorded samples (lane Sound A)"), the first-play wait in
-  `src/sound.js`, samples carried inside the Sound Board page (`tools/sound-board.mjs`), preloading
-  in `tools/sound-check.mjs`, `tools/sound-lint.mjs`, docs in PACKS.md (section 5, "Recorded
-  samples" and "The sound lint") and `tests/snda-engine.spec.mjs`.
-- Next: the lane PR (`claude/lane-sound-a`): samples and fixes, shelf by shelf.
+- Engine PR (`claude/lane-sound-a-engine`): the `sample` voice in `src/voices.js` (marked block
+  "Recorded samples (lane Sound A)"), the first-play wait in `src/sound.js`, sample credits in the
+  About tab (`src/sound-credits.js`, `renderCredits` in `src/app.js`), samples carried inside the
+  Sound Board page (`tools/sound-board.mjs`), preloading in `tools/sound-check.mjs`,
+  `tools/sound-lint.mjs`, docs in PACKS.md (section 5, "Recorded samples" and "The sound lint") and
+  `tests/snda-engine.spec.mjs`.
+- Lane PR (`claude/lane-sound-a`, on top of the engine PR): 67 toys on the eight shelves have new
+  sounds (every toy the owner asked to change there, the carrot cake's optional one, and the
+  periodic table under 7e; he marked the anatomy atlas good on the Sound Board on September 30, so
+  it stays as it was), with 34 CC0 samples in `assets/sounds/` (400 KB in all, 1 to 30 KB each).
+  Their entries in `tools/sound-review.json` are `"status": "site"` with a `plan` saying what they
+  are now; the eight toys he said to keep on these shelves are `keep`. The toy plan's sound lines
+  follow the plans; TOY-PLAN.md is regenerated.
+- The grand piano (the owner's Sound Board mark of September 30: "sounds too much like an electronic
+  keyboard"; relayed by the Operator): a new `concert` voice in `src/voices.js` plays recorded notes
+  of a real acoustic piano (23 CC0 notes from TEDAgame's "88 piano keys, long reverb" pack, one
+  every four semitones, 395 KB), each at its key's pitch, with the damper falling when the key comes
+  up. Its songs (`src/packs/pianos.js`, one line) and its tap use it; the electronic keyboard's
+  PIANO button keeps the synth `grand`, and no other piano changed. The voice fetches its notes on
+  its first note, playing the synth grand until they arrive (a song note scheduled far enough ahead
+  waits and plays on time). A better grand would be the University of Iowa Steinway samples, but
+  their terms are Iowa's own ("free ... without restrictions"), not CC0 or public domain, so they
+  need the owner's call.
+- `node tools/sound-lint.mjs --toy <the 67>`: no clear violation. `tests/snda.spec.mjs` checks it.
 
 ## Notes
 
-- `tools/sound-review.json` was empty on main and on the Operator's sound-review branch when this
-  lane started, so the lane works from the review itself (docs/reviews/2026-09-28-sounds/review.md)
-  and fills in its own shelves' entries.
+- Sources: Freesound (CC0 filter, each sound's own page checked on September 30, 2026) and Kenney's
+  Impact Sounds (CC0). Freesound's originals need a login, so the files were cut from each sound's
+  public high-quality preview (128 kbps MP3), which carries the same CC0 dedication; no API key or
+  account was needed.
+- Processing (scratch, not in the repo): cut, trim silence, a short fade, normalize so the loudest
+  50 ms is near 0.25 RMS and the peak near 0.85 (the kit's level at `vol: 1`), mono MP3 at 64 kbps
+  (48 kbps at 22 kHz for low sounds). Each file's cut is in `tools/assets.json`. ffmpeg came from
+  `pip install imageio-ffmpeg` (a static binary).
+- Listening proxies: every changed sound was rendered offline and checked with the lint (clicks,
+  whistles, vroom, noise beds, instrument tunes, level) and, for the samples, by eye on
+  spectrograms. The owner's ears are the real test.
+- Ball bounces are `cue` specs inside `src/packs/balls.js` (the tennis ball's bounces, the beach
+  ball's second bounce, the softball's landing home, the bowling ball's roll back); the pulsar's
+  per-flash tick is a cue in `src/packs/space.js`. Those cue specs changed, and nothing else in the
+  packs.
 - The lint's thresholds were set by running it over every toy (`--all --json`): the toys the owner
-  complained about (the knot, pulsar, atom and mitochondrion "vroom"; the aurora's whistle; the
-  Earth's and tiny planet's wind; the tin can's and camera's clicks; the tooth's whistle; the
-  crystal lattice's xylophone) fail, and the ones he likes mostly pass. Clicks only fail with a
-  clicking voice in the spec, since crunches and taps have sharp transients too.
-- Audio tools in this container: no ffmpeg was installed; `pip install imageio-ffmpeg` brings a
-  static ffmpeg binary (a scratch tool only, nothing in the repo depends on it).
+  complained about fail and the ones he likes mostly pass. Clicks only fail with a clicking voice in
+  the spec; the heard vroom needs a clearly tonal partial (a real zipper's rising tooth rate is not
+  one).
 
 ## Known issues
 
-- The lint's whistle check also catches long glassy rings (the quartz cluster, which the owner
-  likes); marking such toys `keep` in `tools/sound-review.json` turns them into warnings.
+- The softball's motion has no bat: it is an underhand pitch that lands and is tossed back. The
+  owner heard its landing thud as a bat hit; it is now a real heavy-ball thump. A bat crack would
+  need a bat hit in the motion (a look change, outside this lane).
+- The lint's whistle check also catches long glassy rings and real animal calls (the quartz cluster,
+  the elephant's trumpet, the horse's whinny) as warnings.
+- The first tap of a toy with samples waits for them (up to 0.6 s) on a slow network; after that
+  they are cached for the session.
 
 ## For the Operator
 
-- The Sound Board page now carries the sample files as data URLs (`SAMPLES.data`), so the page grows
-  by the size of the samples it uses (about 40 KB each, a few hundred KB in all).
-- `tools/sound-board.mjs` got a small change for that (it is on the Operator's list); nothing else
-  in the page template changed.
+- The crystal ball: the owner asked why it is on the Gems shelf (it isn't a gem). Only its sound
+  changed here; moving it is a shelf change for you or him.
+- The Sound Board page now carries the sample files as data URLs (`SAMPLES.data`), about 600 KB in
+  all. `tools/sound-board.mjs` got a small change for that; the page template is unchanged.
+- Two help texts changed with the sounds (the vintage camera's "film wind on" and the pulsar's
+  "tick"); the Help Board would need a rebuild.
+- Lane Sound B: the `sample` voice and `tools/sound-lint.mjs` are documented in PACKS.md section 5.
+  Put files in `assets/sounds/<toy id>-<what>.mp3`, add each to `tools/assets.json`
+  ("soundSamples"), `src/sound-credits.js` and CREDITS.md ("Sounds"), and run
+  `node tools/sound-lint.mjs --changed`. Samples here that Sound B may reuse: the fire
+  (`comet-fire.mp3`, `meteor-fire.mp3`), the explosions (`supernova-boom.mp3`, `meteor-boom.mp3`),
+  the match and candle puff (`lantern-match.mp3`, `lantern-blow.mp3`), a real squish
+  (`raspberry-squish.mp3`) and a glass tap (`diamond-tap.mp3`).

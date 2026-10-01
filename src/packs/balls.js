@@ -1053,7 +1053,8 @@ function buildHand(k) {
 // Tennis: slammed onto the floor, it squashes hard and shoots up high with
 // topspin; a tennis ball keeps about 0.75 of its speed at each bounce.
 const TN_G = grav(0.033);
-const POCK = (f, k) => ({ voice: "pock", f, vol: 0.9 * k });
+// A real tennis ball bouncing on a hard floor (lane Sound A: a recorded sample).
+const POCK = (f, k) => ({ voice: "sample", file: "tennis-ball-bounce.mp3", pitch: f / 820, vol: 1.1 * k, fallback: { voice: "pock", f, vol: 0.9 * k } }); // prettier-ignore
 const TENNIS = [
   { hit: 0.07, squash: 0.3 },
   { fly: { h: 0.72 }, spin: -2.4, axis: TOWARD },
@@ -1107,7 +1108,7 @@ const BASEBALL = [
 const SB_AWAY = at3(-0.55, 0, -1.9);
 const SB_RELEASE = at3(0, 0.12, -0.25);
 const SB_BACK = unit(scale3(rollAxis(sub(SB_AWAY, SB_RELEASE)), -1));
-const THUD_SOFT = (k) => ({ voice: "thud", f: 130, bright: 0.25, decay: 0.8, vol: k });
+const THUD_SOFT = (k) => ({ voice: "sample", file: "tennis-ball-slam.mp3", pitch: 0.6, vol: 1.2 * k, fallback: { voice: "thud", f: 130, bright: 0.25, decay: 0.8, vol: k } }); // prettier-ignore
 const SOFTBALL = [
   { path: 0.3, pos: (u) => lerp3([0, 0, 0], at3(0, 0.34, 0.45), easeOut(u)) },
   {
@@ -1147,7 +1148,8 @@ const BEACH = [
   spinDown(0.35, 0.08, TOWARD),
 ];
 function BEACH_BOING(k) {
-  return { voice: "boing", f: 240, to: 1.4, rate: 9, decay: 0.7, vol: k };
+  // A real inflatable ball bouncing (lane Sound A: a recorded sample).
+  return { voice: "sample", file: "beach-ball-bounce.mp3", pitch: 1.1, vol: k, fallback: { voice: "thud", f: 200, vol: 0.6 * k } }; // prettier-ignore
 }
 
 // Golf: a chip: it pops up with heavy backspin, lands, checks with a tiny
@@ -1384,7 +1386,7 @@ const BOWLING = [
     rollPath: 1.5,
     pos: (u) => lerp3(BW_FAR, [0, 0, 0], easeOut(u)),
     absorb: true,
-    cue: { voice: "rumble", f: 60, rate: 10, decay: 0.8, vol: 0.5 },
+    cue: { voice: "sample", file: "bowling-ball-roll.mp3", from: 0.4, len: 1.5, vol: 0.5, fallback: { voice: "rumble", f: 60, rate: 10, decay: 0.8, vol: 0.5 } }, // prettier-ignore
   },
 ];
 
