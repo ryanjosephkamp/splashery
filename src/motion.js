@@ -120,7 +120,6 @@ export class MotionDriver {
   effectState(key = this.recipe?.action?.key) {
     if (!key) return null;
     if (this.pausedKey === key) return "paused";
-    if (this.unseen === key) return null;
     return this.isLong(this.controlDef(key)) && (this.state[key] ?? 0) > 0.002 ? "running" : null;
   }
 
@@ -181,7 +180,7 @@ export class MotionDriver {
     }
     // UI r3: a tap on a long effect that is running pauses it, and the next
     // tap resumes it; once it has finished, a tap starts it again.
-    const state = forced ? null : this.effectState(key);
+    const state = forced || this.unseen === key ? null : this.effectState(key);
     if (state === "running") {
       this.pause(time, key);
       return { key, value: 1, pick, point, paused: true, long: true };
