@@ -182,7 +182,9 @@ State (see docs/FLUIDS.md, "r4"):
   the owner changed four marks to "fix": fl-r4-flame and fl-r4-smoke ("can look more realistic"; the
   smoke's grid "looks good"), fl-r4-pour-r2 (the glass's foot behind the liquid a bit too visible;
   the board, faucet, handle and spout grainy) and fl-r4-soda-r3 (the liquid's top surface hard to
-  see; the same grainy props).
+  see; the same grainy props). Redone (evening): fl-r4-pour-r3 and fl-r4-soda-r4 (props traced
+  crisply on WebGPU, the foot behind the liquid at half strength, a meniscus), fl-r4-flame-r2 and
+  fl-r4-smoke-r2 (a traced candle lit by its flame, a taller yellow flame, paler smoke).
 - Sound: from the simulation (src/fluids/acoustic.js), after the owner's Sound Board note ("isn't in
   sync with fluid pour animation"); real recordings wait for Sound A's sample voice.
 - Lessons: a collider wall thinner than about three cells lets MPM particles through; a sprite

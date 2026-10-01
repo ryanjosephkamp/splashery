@@ -295,6 +295,23 @@ The volume is ray-marched in the surface pass.
   smoke and steam share a coarser one.
 - A room's faint drafts (slow, smooth, stronger higher up) make a plume sway and meander instead of
   standing straight; the grid's edges fade out, so its box never shows.
+- A candle's flame lights the scene (October 1, 2026, after the owner's "can look more realistic"):
+  the candle and its dish are traced props (below), lit warmly by the flame, and the wax glows from
+  within near its top, as wax does; the flame has a soft halo and a faint, slow flicker of its
+  light. Its fuel burns more slowly, so it stands taller, and its body is yellow with a white core.
+- The smoke from a blown-out wick is paler (the room's light catches it) and comes from a thinner
+  source, so it rises as a thread.
+
+### Crisp props
+
+The owner found the objects around the glass grainy (the board, the stand, the faucet, its handle
+and the spout). A recipe may list its props as simple shapes (`kind: "props"`: cylinders, boxes with
+a turning part, cones), and on WebGPU the surface pass traces them exactly, as it does the glass,
+with a wood grain for the board and a soft highlight on steel. The recipe hides their splats while
+the GPU draws them (the props spec's `drawn`), so phones without WebGPU keep the splats. Refraction
+through the liquid sees the traced props too. The glass's foot behind the liquid shows at half
+strength, and a liquid's top gets the room's light and a thin bright meniscus at the glass, so a
+dark liquid's top still reads.
 
 | Tier | Smoke grid (cells a side) | Pressure iterations | Steps a second |
 | ---- | ------------------------- | ------------------- | -------------- |
