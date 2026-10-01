@@ -92,7 +92,7 @@ export class GpuFluids {
     if (!liq && !gas.length && !glassSpec) return;
     surf.render(
       liq
-        ? { texture: liq.texture, texWidth: liq.sim.texWidth, count: liq.n, simToToy: liq.simToRecipe(), radius: liq.d * 0.8, velRow: liq.sim.texHeight, cell: liq.h, diffuse: liq.diffuse, gas } // prettier-ignore
+        ? { texture: liq.texture, texWidth: liq.sim.texWidth, count: liq.n, simToToy: liq.simToRecipe(), radius: liq.d * 0.8 * (liq.spec.sprite ?? 1), velRow: liq.sim.texHeight, stretch: liq.spec.stretch ?? 1, drops: liq.spec.drops, cell: liq.h, diffuse: liq.diffuse, gas } // prettier-ignore
         : { count: 0, gas },
       { camera: this.stage.cameraEntity.camera, toyToWorld: this.toyToWorld() },
     );

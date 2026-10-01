@@ -107,6 +107,9 @@ const BASIN = { type: "glass", at: [0, 0, 0], radius: 0.78, height: 0.4, wall: 0
 function splashScene(k, o) {
   const look = LIQUID_LOOKS[o.liquid] || LIQUID_LOOKS.water;
   k.add(k.cylinder(1.05, 0.06), { pos: [0, -0.03, 0], color: wood, even: true });
+  // (a second layer under the basin: seen through clear water, the board's
+  // splats alone leave gaps)
+  k.add(k.cylinder(0.82, 0.02), { pos: [0, -0.012, 0], color: wood, even: true });
   glass(k, BASIN, 12000);
   k.fluid({
     name: "liquid",
@@ -126,6 +129,13 @@ function splashScene(k, o) {
       drop: { at: [0.03, 0.95, 0.02], radius: 0.12, vel: [0, -1, 0] },
       friction: 0.025,
       tension: 0,
+      // (no stream to hold together: drawn barely stretched, so the ball and
+      // the crown's drops stay round; larger sprites join the crown's thin
+      // sheet)
+      stretch: 0.15,
+      sprite: 1.6,
+      // (and they catch the light as real drops do)
+      drops: 0.8,
     },
   });
   k.reach([0, 1.75, 0]);

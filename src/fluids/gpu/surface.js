@@ -348,6 +348,7 @@ uniform vec4 uGlassA;      // xyz base center (toy), w inner radius
 uniform vec4 uGlassB;      // x height, y wall, z bottom, w on (0/1)
 uniform vec4 uMisc;        // x refraction strength, y liquid on
 uniform vec4 uFoam;        // rgb foam color, w on
+uniform vec2 uDrop;        // x how much a drop in flight lights up, y one drop's thickness
 // The gas grid (gas.js): scalars atlas (r smoke, g heat, b fuel).
 uniform sampler2D uGas;
 uniform vec4 uGasA;        // xyz lower corner (toy), w cell size
@@ -539,6 +540,10 @@ void main() {
     vec3 H = normalize(L + V);
     float spec = pow(max(dot(n, H), 0.0), 180.0) * 1.6;
     vec3 liq = mix(body, refl, F) + spec + uColor.rgb * uAbsorb.a;
+    // A drop in flight is a small lens: it shows the bright room above,
+    // flipped, and a highlight (the splash's crown and its drops; src.drops).
+    float thin = uDrop.x * (1.0 - smoothstep(uDrop.y, 4.0 * uDrop.y, thick));
+    liq = mix(liq, sky(normalize(vec3(n.x, 1.0, n.z))) * 0.75 + spec, thin);
     // Bubbles inside: bright specks, tinted by the liquid around them.
     float bub = clamp(thickAll(uv0).b * 1.2, 0.0, 1.0) * uFoam.w;
     liq = mix(liq, mix(uColor.rgb, vec3(1.0), 0.6) * (0.65 + 0.35 * max(dot(n, L), 0.0)) + 0.08, bub * 0.75);
@@ -685,6 +690,7 @@ uniform uGlassA: vec4f;
 uniform uGlassB: vec4f;
 uniform uMisc: vec4f;
 uniform uFoam: vec4f;
+uniform uDrop: vec2f;
 var uGas: texture_2d<uff>;
 uniform uGasA: vec4f;
 uniform uGasB: vec4f;
@@ -872,6 +878,8 @@ fn fresnel(cosT: f32, f0: f32) -> f32 {
     let H = normalize(L + V);
     let spec = pow(max(dot(n, H), 0.0), 180.0) * 1.6;
     var liq = mix(body, refl, F) + spec + uniform.uColor.rgb * uniform.uAbsorb.a;
+    let thin = uniform.uDrop.x * (1.0 - smoothstep(uniform.uDrop.y, 4.0 * uniform.uDrop.y, thick));
+    liq = mix(liq, sky(normalize(vec3f(n.x, 1.0, n.z))) * 0.75 + spec, thin);
     // Bubbles inside: bright specks, tinted by the liquid around them.
     let bub = clamp(thickAll(uv0).b * 1.2, 0.0, 1.0) * uniform.uFoam.w;
     liq = mix(liq, mix(uniform.uColor.rgb, vec3f(1.0), 0.6) * (0.65 + 0.35 * max(dot(n, L), 0.0)) + vec3f(0.08), bub * 0.75);
@@ -1160,8 +1168,10 @@ export class FluidSurface {
       scope.resolve("uMinPx").setValue([1.6, projY]);
       // velocities are cells/s; a 30th of a second of travel (a stream thins
       // below a particle a cell as it falls and MPM breaks it into clumps:
-      // drawn this long, it reads as the thread it is)
-      scope.resolve("uStretch").setValue([1 / 30, src.velRow ?? 0]);
+      // drawn this long, it reads as the thread it is; a recipe without a
+      // stream, such as the splash, stretches less, so a falling ball and its
+      // drops stay round)
+      scope.resolve("uStretch").setValue([(src.stretch ?? 1) / 30, src.velRow ?? 0]);
       this.depthPass.count = count;
       this.depthPass.render();
       this.thickPass.count = count;
@@ -1205,6 +1215,7 @@ export class FluidSurface {
     // w: the angle one screen pixel spans (for lines a pixel or so wide)
     scope.resolve("uMisc").setValue([p.refract, liquid ? 1 : 0, 2.5 * (src.cell || 0), 2 / (proj.data[5] * d.height)]); // prettier-ignore
     scope.resolve("uFoam").setValue([...p.foam, liquid && src.diffuse?.n ? 1 : 0]);
+    scope.resolve("uDrop").setValue([src.drops ?? 0, (src.radius ?? 0) * toyScale * 2]);
     // Up to two gas grids (gasscene.js: a flame's fine grid and the smoke's).
     const gases = src.gas || [];
     for (const [k, name] of [
