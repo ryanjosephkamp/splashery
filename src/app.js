@@ -605,7 +605,11 @@ class App {
       },
       onTap: (e) => {
         if (this.ui.sheetOpen()) this.ui.collapseSheet();
-        else if (this.tool === "orbit" && !this.spaceHeld) this.tapToy(e);
+        else if (this.tool === "orbit" && !this.spaceHeld) {
+          // Page focus (lane Books r4): a toy with recipe.focus takes double-taps.
+          if (player.canFocus()) this.tapOrFocus(e);
+          else this.tapToy(e);
+        }
       },
       onInteract: () => {
         player.interact();
@@ -642,7 +646,9 @@ class App {
         cam.zoomBy(Math.exp(e.deltaY * unit * (e.ctrlKey ? 0.01 : 0.0015)));
         player.stage.requestRender();
       },
-      onDoubleTap: () => player.resetCamera(),
+      // Page focus (lane Books r4): a toy that focuses on a page takes its
+      // double-taps in tapOrFocus (↺ and the R key still reset its view).
+      onDoubleTap: () => player.canFocus() || player.resetCamera(),
       onToolStart: (e) => this.toolStart(e),
       onToolMove: (e) => this.toolMove(e),
       onToolEnd: (e) => this.toolEnd(e),
@@ -656,6 +662,37 @@ class App {
     player.pickDirty = true;
     const hit = await player.pickAt(x, y);
     if (hit) player.act(hit);
+  }
+
+  // Page focus (lane Books r4): on a toy that can focus on a page, a double-tap
+  // focuses (or lets go), so a single tap waits a moment to be sure.
+  tapOrFocus(e) {
+    const last = this.lastTap;
+    const at = { clientX: e.clientX, clientY: e.clientY };
+    if (
+      last &&
+      e.timeStamp - last.time < 320 &&
+      Math.hypot(e.clientX - last.x, e.clientY - last.y) < 30
+    ) {
+      clearTimeout(last.timer);
+      this.lastTap = null;
+      this.focusToy(at);
+      return;
+    }
+    const timer = setTimeout(() => {
+      this.lastTap = null;
+      this.tapToy(at);
+    }, 300);
+    this.lastTap = { time: e.timeStamp, x: e.clientX, y: e.clientY, timer };
+  }
+
+  async focusToy(e) {
+    const player = this.player;
+    const [x, y] = player.canvasPoint(e);
+    player.pickDirty = true;
+    const hit = await player.pickAt(x, y);
+    // (A double-tap the toy doesn't take resets the view, as elsewhere.)
+    if (!player.focusAt(hit || null)) player.resetCamera();
   }
 
   onAction(r) {
