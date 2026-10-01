@@ -114,6 +114,9 @@ export class GasScene {
       // A flame lit again grows back over about half a second (a full
       // fuel jet into still air stands up as a thin rod first).
       st.lit = st.on ? Math.min(1, (st.lit ?? 1) + dt / 0.6) : 0;
+      // (and in still air: the old flame's updraft is gone by then)
+      if (st.on && st.wasOff) g.clearAll();
+      st.wasOff = !st.on;
       g.sources.a = st.on
         ? {
             at: [f.at[0], f.at[1] + (f.height ?? 0.3) * 0.06, f.at[2]],
