@@ -128,11 +128,14 @@ Model: **Opus 5.5** (default effort), no helpers.
 
 October 1, 2026, morning (UTC): **round 2 ready for the Operator.**
 
-- Round 1: engine PR #144 and lane PR #150, drafts, main through #137 merged in and pushed. Cards
-  marked good: `live-permission`, `live-echo`, `live-landscape`, `live-chladni`, `live-tuner`,
-  `live-clap`, `live-screen`. The mirror and Photo to 3D live got a second "fix" (still moving):
-  `live-mirror-r3` and `live-photo3d-r3` hold the view still (no turn, a still test camera, no tap
-  at the end).
+- The Operator's overnight notes (07:22 and 08:35 UTC: hold r2 until the morning's go, no self
+  check-ins; merge main with UI r2 into #144 and #150) reached this session only at 10:10 UTC, after
+  r2 was built and posted. The self check-in is deleted. #144 and #150 now have main through #142
+  (UI r2's conflicts in `src/ui.js` and `styles.css` kept both sides).
+- Round 1: engine PR #144 and lane PR #150, drafts. Cards marked good: `live-permission`,
+  `live-echo`, `live-landscape`, `live-chladni`, `live-tuner`, `live-clap`, `live-screen`. The
+  mirror and Photo to 3D live got a second "fix" (still moving): `live-mirror-r3` and
+  `live-photo3d-r3` hold the view still (no turn, a still test camera, no tap at the end).
 - Round 2 is built, tested and posted: cards `live2-*` on page 2, engine PR #162 and lane PR #163
   open as drafts (stacked on #144 and #150).
 - Start time (Chromium, SwiftShader, this container; the software renderer itself takes about two of
