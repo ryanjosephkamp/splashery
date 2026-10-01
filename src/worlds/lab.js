@@ -261,6 +261,7 @@ class Lab {
     this.curves = { hip: [], knee: [], ankle: [], shoulder: [], elbow: [], bob: [], sway: [] };
     for (const k in this.curves) this.curves[k] = new Array(BINS).fill(null);
     this.phase = 0;
+    this.lastBin = null;
   }
 
   step(dt) {
@@ -314,8 +315,22 @@ class Lab {
     this.phase = ((t % 1) + 1) % 1;
     const a = this.angles();
     this.now = a;
-    const bin = Math.round(this.phase * (BINS - 1));
-    for (const k in this.curves) this.curves[k][bin] = a[k];
+    const N = BINS - 1;
+    const bin = Math.round(this.phase * N) % N;
+    // The bins a frame skipped (a run at ten frames a second moves about
+    // seven), filled in a straight line from the last frame's.
+    const last = this.lastBin;
+    const steps = last ? (bin - last.bin + N) % N : 0;
+    for (const k in this.curves) {
+      const put = (j, v) => {
+        this.curves[k][j] = v;
+        if (j === 0) this.curves[k][N] = v;
+      };
+      if (steps > 1 && steps <= 12)
+        for (let j = 1; j < steps; j++) put((last.bin + j) % N, last.a[k] + ((a[k] - last.a[k]) * j) / steps); // prettier-ignore
+      put(bin, a[k]);
+    }
+    this.lastBin = { bin, a };
   }
 
   range(k) {
