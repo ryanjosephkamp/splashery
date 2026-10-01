@@ -127,7 +127,15 @@ Model: Opus 5.5 (the lane's assigned model), default effort, the whole lane.
 - `src/packs/video3d.js`: the labs toy "Video to 3D" on the Studio shelf, with three samples
   (Liberty orbit, Edinburgh street, Nicosia drone) trained here by `tools/v3d-sample.mjs`.
 - Report: `docs/lab/VIDEO3D.md` (measurements, what fails, phones, recommendation, the Mac route).
-- Cards: `v3d-object`, `v3d-street` posted; `v3d-drone`, `v3d-progress` from the drone run.
+- Cards (Effect review page 1, then page 2 from 20:26 UTC on September 30): `v3d-object` → r2 → r3 →
+  `v3d-object-r4` (page 2, good); `v3d-street` → r2 → r3 → `v3d-street-r4` (page 2);
+  `v3d-object-compare` and `v3d-street-compare` (the source video beside the splat flight, good);
+  `v3d-drone` (where it fails, page 2, good); `v3d-progress` (page 2, good).
+- r2: the far water, sky and skyline kept (pulled in onto a shell between radius 1 and 2, built as a
+  `fit: false` cloud); floaters and smears pruned near the subject; the flight uses the video's own
+  lens. r3: the Lab lane's `kernel: "sharp"`. r4: both samples retrained at 480 px for 2,006 steps
+  (the statue from one shot, after the cut): edge sharpness +44% (statue) and more than double
+  (street).
 
 ## Notes
 
@@ -136,9 +144,13 @@ Model: Opus 5.5 (the lane's assigned model), default effort, the whole lane.
   settings (360 px, 800 to 1,500 steps), one to one and a half hours each.
 - The Commons API rate-limits this container (HTTP 429); the file pages and upload.wikimedia.org
   work. Clips were trimmed with a pip-installed ffmpeg (imageio-ffmpeg) in the scratchpad only.
-- The first Nicosia stretch (0:45, a slow push over rooftops) failed the camera solve ("need more
-  parallax/overlap") after 33 minutes; a 19-second stretch at 1:04 (a steadier flight across the
-  city, 1.3 frames a second) solved.
+- The drone clip, cropped to remove a credit line, was 2.02:1, and Splat.js takes anything within 5%
+  of 2:1 for a 360-degree panorama: the first run failed after 33 minutes and a second "solved" 144
+  cube-face views. `panoSafeCrop` now trims such frames to 1.9:1. With that, the drone stretch fails
+  honestly in a minute (too little parallax from a high, slow flight): the v3d-drone card.
+- The container restarted once (October 1, about 23:00 UTC on September 30); the street retrain was
+  started again. The first full suite (557 passed, 8 failed) ran while samples trained on the same
+  CPU; the lane's own three failures were fixed, and a second full run went on a quiet CPU.
 - Replay flight drives `player.camera` (target, yaw, pitch, roll, distance) from the recipe's drive
   through `k.data.flight`; the toy opens at the video's first view until the visitor turns or zooms
   (the app puts its own camera back after a load).
