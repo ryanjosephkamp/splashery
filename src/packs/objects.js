@@ -538,6 +538,50 @@ const TELE = { dir: unit([0.72, 0.5, -0.3]), mount: [0, 0.2, 0] };
 
 const NOTE_PATHS = [0, 1, 2].map((i) => ({ x: -0.25 + i * 0.25, z: 0.1 - i * 0.08, phase: i / 3 }));
 
+// Lane Fix5: the clock's time zones (IANA names; "local" is this device's
+// own) and the hours, minutes and seconds it is there now.
+const CLOCK_ZONES = [
+  ["local", "This device"],
+  ["UTC", "UTC"],
+  ["America/Los_Angeles", "Los Angeles"],
+  ["America/Denver", "Denver"],
+  ["America/Chicago", "Chicago"],
+  ["America/New_York", "New York"],
+  ["America/Sao_Paulo", "São Paulo"],
+  ["Europe/London", "London"],
+  ["Europe/Paris", "Paris"],
+  ["Africa/Cairo", "Cairo"],
+  ["Asia/Dubai", "Dubai"],
+  ["Asia/Kolkata", "Mumbai"],
+  ["Asia/Shanghai", "Beijing"],
+  ["Asia/Tokyo", "Tokyo"],
+  ["Australia/Sydney", "Sydney"],
+  ["Pacific/Auckland", "Auckland"],
+];
+const zoneFormats = new Map();
+function clockTime(d, zone) {
+  if (!zone) return [d.getHours(), d.getMinutes(), d.getSeconds()];
+  let f = zoneFormats.get(zone);
+  if (f === undefined) {
+    try {
+      f = new Intl.DateTimeFormat("en-US", {
+        timeZone: zone,
+        hour: "numeric",
+        minute: "numeric",
+        second: "numeric",
+        hourCycle: "h23",
+      });
+    } catch {
+      f = null; // an unknown zone: this device's time
+    }
+    zoneFormats.set(zone, f);
+  }
+  if (!f) return [d.getHours(), d.getMinutes(), d.getSeconds()];
+  const parts = f.formatToParts(d);
+  const part = (type) => Number(parts.find((p) => p.type === type)?.value ?? 0);
+  return [part("hour") % 24, part("minute"), part("second")];
+}
+
 export const RECIPES = {
   chest: {
     alive: true,
@@ -1423,15 +1467,28 @@ export const RECIPES = {
 
   clock: {
     alive: true,
-    options: [{ key: "color", label: "Colour", type: "color", default: "#d6453d" }],
+    options: [
+      { key: "color", label: "Color", type: "color", default: "#d6453d" },
+      // Lane Fix5: the time zone the hands show (this device's own by
+      // default, read by the browser with no permission needed).
+      {
+        key: "zone",
+        label: "Time zone",
+        type: "select",
+        default: "local",
+        choices: CLOCK_ZONES.map(([id, label]) => ({ id, label })),
+      },
+    ],
     controls: [{ key: "ring", label: "Ring", type: "pulse", ease: 2.2 }],
     action: { key: "ring", label: "Ring the bell" },
     drive(t, c, out, info) {
-      // The hands show the real local time.
+      // The hands show the real time, in this device's zone or the one
+      // picked in the Toy tab.
       const d = new Date();
-      const s = d.getSeconds() + d.getMilliseconds() / 1000;
-      const m = d.getMinutes() + s / 60;
-      const h = (d.getHours() % 12) + m / 60;
+      const [hh, mm, ss] = clockTime(d, info?.data?.zone);
+      const s = ss + d.getMilliseconds() / 1000;
+      const m = mm + s / 60;
+      const h = (hh % 12) + m / 60;
       const tick = Math.floor(s) + ease3(clamp((s % 1) / 0.18, 0, 1));
       out.parts.hour = { angle: (-h / 12) * TAU };
       out.parts.minute = { angle: (-m / 60) * TAU };
@@ -1460,7 +1517,9 @@ export const RECIPES = {
       };
     },
     build(k, o) {
-      k.data = {}; // drive() keeps when it last sorted the hands here
+      // drive() keeps when it last sorted the hands here, and reads the
+      // time zone (lane Fix5).
+      k.data = { zone: o.zone && o.zone !== "local" ? o.zone : null };
       const body = o.color;
       const R = 0.8;
       const Dp = 0.34;
