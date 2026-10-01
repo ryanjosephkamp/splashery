@@ -583,12 +583,15 @@ class App {
       onTap: (e) => {
         if (this.ui.sheetOpen()) this.ui.collapseSheet();
         else if (this.tool === "orbit" && !this.spaceHeld) {
+          // UI r4: a press that a toy's drag already played (a key) is not a tap too.
+          if (player.dragFired) player.dragFired = false;
           // Page focus (lane Books r4): a toy with recipe.focus takes double-taps.
-          if (player.canFocus()) this.tapOrFocus(e);
+          else if (player.canFocus()) this.tapOrFocus(e);
           else this.tapToy(e);
         }
       },
       onInteract: () => {
+        player.dragFired = false; // UI r4: each press starts afresh
         player.interact();
         canvas.focus({ preventScroll: true });
       },
@@ -691,9 +694,28 @@ class App {
       return;
     }
     const spec = own || recipe?.action?.sound || (r.key === "hop" ? "hop" : "pop");
+    // UI r4: a drag across keys plays each key's note under its own key, so
+    // notes in quick succession overlap as on a real keyboard; a run faster
+    // than about 24 notes a second skips some notes so it never crackles.
+    if (r.drag) {
+      if (!this.dragNotes(performance.now())) return;
+      this.sound.play(specFor(spec, true), { key: `toy:${r.pick}`, pick: r.pick, gap: 0.03 });
+      this.ui.setMotion(player.scene.motion, player.motion.targets);
+      return;
+    }
     // A tap that picked an item (a xylophone bar) plays that item's note.
     this.sound.play(specFor(spec, r.key === "hop" || r.value > 0.5), { key: "toy", pick: r.pick });
     this.ui.setMotion(player.scene.motion, player.motion.targets);
+  }
+
+  // UI r4: the voice cap for a drag across keys: at most 12 notes in any
+  // half second. True when this note may sound.
+  dragNotes(now) {
+    const t = (this.dragNoteTimes ||= []);
+    while (t.length && now - t[0] > 500) t.shift();
+    if (t.length >= 12) return false;
+    t.push(now);
+    return true;
   }
 
   act() {
