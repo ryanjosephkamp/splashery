@@ -623,21 +623,21 @@
   "frames": 28,
   "registered": 28,
   "points": 3313,
-  "splats": 49695,
-  "iters": 3000,
-  "psnr": 24,
-  "plyBytes": 2571223,
+  "splats": 120000,
+  "iters": 3002,
+  "psnr": null,
+  "plyBytes": 7914052,
   "start": 0,
   "end": 10,
   "rate": 2.8
  },
  "timings": {
-  "frames": 11.5,
-  "decode": 1,
-  "path": 143,
-  "seed": 2.6,
-  "train": 15053.7,
-  "export": 0.1,
-  "total": 15211.8
+  "frames": 21.2,
+  "decode": 2.5,
+  "path": 225.2,
+  "seed": 8.1,
+  "train": 31033.2,
+  "export": 0.4,
+  "total": 31290.7
  }
 }
