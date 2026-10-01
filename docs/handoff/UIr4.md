@@ -70,7 +70,8 @@ Reply with "READY:", "WORKING:" or "BLOCKED:" at the end.
   sound, between them the run is chromatic, as on a real keyboard.
 
 - Cards on Effect review page 2, lane UIr4 (MP4, 390×844): ui4-grand-piano, ui4-upright-piano,
-  ui4-harpsichord, ui4-electronic-keyboard, ui4-toy-piano, ui4-xylophone.
+  ui4-harpsichord, ui4-electronic-keyboard, ui4-toy-piano, ui4-xylophone. The owner marked all six
+  "good" on October 1, 2026.
 
 ## Known issues
 
