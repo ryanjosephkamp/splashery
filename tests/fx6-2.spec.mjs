@@ -232,3 +232,48 @@ test("periodic table: the help names the new gestures", async () => {
   expect(TOY_HELP["periodic-table"].howTo).toMatch(/tour/);
   expect(TOY_HELP["enigma-machine"].howTo).toMatch(/keys/);
 });
+
+// ---- The acoustic guitar: smooth lacquer, clean strings ----------------------------------
+
+test("guitar: every solid piece is placed evenly with no color noise; the strings still strum", async () => {
+  const { RECIPES } = await import("../src/packs/music.js");
+  const { buildRecipe } = await import("../src/kit.js");
+  const r = RECIPES.guitar;
+  const it = buildRecipe(r, { seed: 5, count: 60000, options: { finish: "sunburst" } }, () => {});
+  let b = it.next();
+  while (!b.done) b = it.next();
+  const kit = b.value.kit;
+  // The soundboard, back, ribs, neck, fingerboard, headstock, bridge and strings: no grain
+  // speckle (the old top had fine sine stripes and every piece random color noise).
+  const solid = kit.items.filter((x) => x.kind === "surface");
+  expect(solid.length).toBeGreaterThan(20);
+  for (const x of solid) {
+    expect(x.opts.jitter ?? 0.04).toBe(0);
+    expect(x.opts.even).toBe(true);
+  }
+  // Neighboring splats on the top differ only by the soft sunburst and the light: compare each
+  // top splat with the next one along the build (even placement keeps them close).
+  const top = solid[0];
+  let worst = 0;
+  for (let i = top.start + 1; i < top.end; i++) {
+    const d = (a, b) => Math.hypot(...[0, 1, 2].map((k) => kit.buf.pos[a * 3 + k] - kit.buf.pos[b * 3 + k])); // prettier-ignore
+    if (d(i, i - 1) > 0.02) continue;
+    const c = [0, 1, 2].map((k) => Math.abs(kit.buf.color[i * 4 + k] - kit.buf.color[(i - 1) * 4 + k])); // prettier-ignore
+    worst = Math.max(worst, ...c);
+  }
+  expect(worst).toBeLessThan(0.08);
+  // A strum still moves every string.
+  const out = { parts: {}, cues: [] };
+  r.drive(1, { strum: 0.9 }, out, {});
+  for (let i = 0; i < 6; i++) expect(Math.abs(out.parts[`s${i}a`].angle)).toBeGreaterThan(0);
+});
+
+test("guitar screenshot at 1440x900", async ({ page }) => {
+  test.setTimeout(240_000);
+  await open(page, "guitar", { size: [1440, 900] });
+  await page.waitForTimeout(800);
+  await page.screenshot({ path: path.join(SHOTS, "fx6-guitar-1440x900.png") });
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.waitForTimeout(800);
+  await page.screenshot({ path: path.join(SHOTS, "fx6-guitar-390x844.png") });
+});

@@ -57,6 +57,22 @@ function wood(c, base, p, axis = 1, dark = 0.75) {
   return mix(base, shade(base, dark), 0.3 * ring + 0.3 * (0.5 + 0.5 * g));
 }
 
+// Lacquered wood (the guitar, lane Fix6): a smooth color lit softly, with one
+// broad sheen and no fine grain or noise, so it reads as a glossy finish at
+// any size. `bands` gives a faint, wide figure (0 for none).
+function lacquer(c, col, gloss = 0.35, bands = 0) {
+  const d = dot(c.n, LIGHT);
+  let out = shade(col, 0.92 + 0.22 * d);
+  if (bands) {
+    const [x, y] = c.lp;
+    const f = 0.5 + 0.5 * Math.sin(x * 14 + y * 1.5 + 2.5 * c.noise(x * 1.5, y * 0.6, 0.3));
+    out = mix(out, shade(out, 0.8), bands * f);
+  }
+  const h = Math.pow(Math.max(0, dot(c.n, HALF)), 10);
+  return keep(mix(out, "#fff8ee", gloss * h));
+}
+const smooth = { even: true, jitter: 0 };
+
 // A group of shapes moved and turned together.
 function group(k, pos = [0, 0, 0], rot = [0, 0, 0]) {
   const q = rot.length === 4 ? rot : quatEuler(...rot);
@@ -357,37 +373,58 @@ export const RECIPES = {
         cherry: ["#d8402e", "#5a0e10"],
       }[o.finish];
       const side = o.finish === "natural" ? "#8a4a22" : "#5a2412";
-      // Soundboard with a sound hole and rosette.
-      const face = (z, flip) =>
-        k.param(
-          (u, v) => {
-            const y = yb + v * (yt - yb);
-            return [(u * 2 - 1) * halfW(y), y, z];
+      // Soundboard with a sound hole and rosette. (Each face is a flat sheet
+      // whose rows are spaced by the outline's width, so its splats are
+      // spread alike everywhere: no rows, no lattice.)
+      const ROWS = 256;
+      const cum = [0];
+      for (let i = 0; i < ROWS; i++)
+        cum.push(cum[i] + 2 * halfW(yb + ((i + 0.5) / ROWS) * (yt - yb)));
+      const yAt = (v) => {
+        const want = v * cum[ROWS];
+        let i = 0;
+        while (i < ROWS - 1 && cum[i + 1] < want) i++;
+        const f = (want - cum[i]) / Math.max(1e-9, cum[i + 1] - cum[i]);
+        return yb + ((i + f) / ROWS) * (yt - yb);
+      };
+      const face = (z, flip) => {
+        const n = [0, 0, flip ? -1 : 1];
+        return {
+          area: (cum[ROWS] / ROWS) * (yt - yb),
+          thick: 0.01,
+          dims: 2,
+          sample(rand) {
+            const u = rand();
+            const v = rand();
+            const y = yAt(v);
+            return { p: [(u * 2 - 1) * halfW(y), y, z], n, u, v, face: flip ? 3 : 2 };
           },
-          { grid: 64, flip, normal: () => [0, 0, flip ? -1 : 1] },
-        );
+        };
+      };
       g.add(face(T / 2, false), {
         flat: 0.15,
+        ...smooth,
         color: (c) => {
           const [x, y] = c.lp;
           const hole = Math.hypot(x, y + 0.02);
           if (hole < 0.11) return null;
-          if (hole < 0.15)
-            return keep(Math.abs(fract(hole * 70) - 0.5) < 0.25 ? "#2a1a10" : "#e8d8b8");
+          if (hole < 0.15) {
+            const dark = hole < 0.117 || (hole > 0.127 && hole < 0.133) || hole > 0.143;
+            return keep(dark ? "#2a1a10" : "#e8d8b8");
+          }
           const w = halfW(y) || 1;
-          if (Math.abs(x) > w - 0.015) return keep("#f4ead8");
+          if (Math.abs(x) > w - 0.02) return keep("#f4ead8");
           const edge = Math.max(Math.abs(x) / w, band(Math.abs(y + 0.25), 0.4, 0.66));
-          const grain = 0.5 + 0.5 * Math.sin(x * 160 + c.noise(x * 4, y * 20, 0) * 3);
-          const col = mix(top[0], top[1], Math.pow(edge, 3));
-          return lit(c, shade(col, 0.95 + 0.07 * grain), 0.25, 0.45);
+          return lacquer(c, mix(top[0], top[1], Math.pow(edge, 3)), 0.4);
         },
       });
       g.add(face(-T / 2, true), {
         flat: 0.15,
-        color: (c) => lit(c, wood(c, side, c.lp, 1), 0.3, 0.3),
+        ...smooth,
+        color: (c) => lacquer(c, side, 0.3, 0.12),
       });
       // The dark inside, seen through the sound hole.
-      g.add(k.disc(0.12), { pos: [0, -0.02, -T / 2 + 0.02], rot: [90, 0, 0], color: "#140c08" });
+      g.add(k.disc(0.12), { pos: [0, -0.02, -T / 2 + 0.02], rot: [90, 0, 0], ...smooth, color: () => keep("#140c08") }); // prettier-ignore
       // Ribs round the outline.
       g.add(
         k.param(
@@ -399,20 +436,23 @@ export const RECIPES = {
           },
           { grid: 96 },
         ),
-        { flat: 0.15, color: (c) => lit(c, wood(c, side, c.lp, 1), 0.3, 0.3) },
+        // The cream binding wraps over the top edge of the ribs.
+        { flat: 0.15, ...smooth, color: (c) => (c.v > 0.86 ? keep("#f4ead8") : lacquer(c, side, 0.3, 0.1)) }, // prettier-ignore
       );
       // Bridge and saddle.
       g.add(k.roundedBox(0.3, 0.06, 0.025, 4), {
         pos: [0, -0.58, T / 2 + 0.012],
         flat: 0.2,
         weight: 2,
-        color: (c) => lit(c, "#2a1810", 0.3, 0.3),
+        ...smooth,
+        color: (c) => lacquer(c, "#2a1810", 0.3),
       });
       g.add(k.box(0.2, 0.008, 0.012), {
         pos: [0, -0.575, T / 2 + 0.028],
         weight: 3,
         pattern: false,
-        color: "#f4efe0",
+        ...smooth,
+        color: () => keep("#f4efe0"),
       });
       // Neck, fingerboard with frets and dots, and the headstock with pegs.
       const nutY = 1.36;
@@ -421,12 +461,14 @@ export const RECIPES = {
       g.add(k.box(0.1, nutY - 0.38, 0.05), {
         pos: [0, (nutY + 0.38) / 2, T / 2 - 0.035],
         flat: 0.2,
-        color: (c) => lit(c, wood(c, "#9a6a3a", c.lp, 1), 0.3),
+        ...smooth,
+        color: (c) => lacquer(c, "#9a6a3a", 0.3, 0.1),
       });
       g.add(k.box(0.1, nutY - 0.12, 0.018), {
         pos: [0, (nutY + 0.12) / 2, T / 2 + 0.005],
         flat: 0.15,
         weight: 1.5,
+        ...smooth,
         color: (c) => {
           const y = c.p === undefined ? 0 : c.lp[1] + (nutY + 0.12) / 2;
           for (let n = 1; n <= 19; n++)
@@ -439,20 +481,22 @@ export const RECIPES = {
             Math.abs(Math.abs(c.lp[0]) - 0.025) < 0.012
           )
             return keep("#f4f0e6");
-          return lit(c, "#2e1e14", 0.25);
+          return lacquer(c, "#2e1e14", 0.2);
         },
       });
       g.add(k.box(0.105, 0.012, 0.022), {
         pos: [0, nutY, T / 2 + 0.012],
         weight: 3,
         pattern: false,
-        color: "#f4efe0",
+        ...smooth,
+        color: () => keep("#f4efe0"),
       });
       g.add(k.roundedBox(0.16, 0.34, 0.035, 5), {
         pos: [0, nutY + 0.18, T / 2 - 0.04],
         rot: [-10, 0, 0],
         flat: 0.2,
-        color: (c) => lit(c, "#2a1810", 0.3, 0.4),
+        ...smooth,
+        color: (c) => lacquer(c, "#2a1810", 0.4),
       });
       for (let i = 0; i < 3; i++)
         for (const s of [-1, 1]) {
@@ -462,13 +506,15 @@ export const RECIPES = {
             rot: [0, 0, 90],
             weight: 3,
             pattern: false,
-            color: (c) => chrome(c),
+            ...smooth,
+            color: (c) => keep(chrome(c)),
           });
           g.add(k.roundedBox(0.03, 0.05, 0.015, 4), {
             pos: [s * 0.15, y, T / 2 - 0.04],
             weight: 3,
             pattern: false,
-            color: (c) => lit(c, "#f0e8d8", 0.3),
+            ...smooth,
+            color: (c) => lacquer(c, "#f0e8d8", 0.3),
           });
         }
       // Rings of sound that pulse out of the soundhole, hidden at rest: three
@@ -501,7 +547,7 @@ export const RECIPES = {
         const a = [f * 0.075, -0.575, zS];
         const b = [f * 0.042, nutY, zS];
         const mid = vec.mul(vec.add(a, b), 0.5);
-        const r = 0.005 - i * 0.0004;
+        const r = 0.0026 - i * 0.00026;
         const wound = i < 4;
         for (const [p0, p1, key] of [
           [a, mid, "a"],
@@ -513,8 +559,12 @@ export const RECIPES = {
             flat: 0.3,
             weight: 6,
             size: 0.6,
+            // Splats drawn out along the string, so it reads as one line.
+            stretch: 3,
             pattern: false,
-            color: (c) => lit(c, wound ? "#e8c890" : "#ffffff", 0.15),
+            ...smooth,
+            // Clean lines: one even color along each string, lit softly.
+            color: (c) => keep(lit(c, wound ? "#dcbc84" : "#eef1f4", 0.12)),
           });
         }
       }

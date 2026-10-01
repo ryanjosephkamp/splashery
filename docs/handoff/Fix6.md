@@ -93,8 +93,12 @@ you make or a CC0 photo, opened end to end), 2, 3a, 3b and 4. Reply with "READY:
 
 Model: Opus 5.5 (default effort).
 
-October 1, 2026: part 1 (Photo to 3D) is built and tested on `claude/lane-fix6-1`, PR "Phase Fix6,
-part 1: Photo to 3D opens your own photos". Parts 2 to 4 follow on `claude/lane-fix6-2`.
+October 1, 2026:
+
+- Part 1 (Photo to 3D) is on `claude/lane-fix6-1`, PR #154.
+- The engine piece is on `claude/lane-fix6-engine`, PR #155 ("Engine: …"); merge it first.
+- Part 2 (the Enigma, the periodic table, the acoustic guitar) is on `claude/lane-fix6-2`, stacked
+  on both. `tests/fx6-2.spec.mjs` passes.
 
 ## Notes
 
@@ -125,6 +129,53 @@ part 1: Photo to 3D opens your own photos". Parts 2 to 4 follow on `claude/lane-
     Safari …". Any other unreadable file: "This browser couldn't read that file as a photo. Save it
     as a JPEG, PNG or WebP and open that."
 
+- **Periodic table, no loading flash** (3a, engine PR #155). A tile tap sets the "element" option
+  and rebuilds the toy, and the app showed its loading overlay after 120 ms. A rebuild takes 1.3 to
+  2.4 s in the test browser, so delaying the overlay alone would not have helped. Now
+  `player.rebuild` (a toy's own tap) never shows the overlay: the table stays and the new atom
+  rises. An option changed in the Toy tab shows it only after 0.5 s; choosing a toy, as before.
+- **Periodic table, the tour** (3b).
+  - A tap on an empty part of the board (the wide gap at the top, or the margins; not a tile, not
+    the atom) starts a walk through all 118 elements. Each atom rises and fills in 1.6 s, holds, and
+    the table moves on after 2.2 s (plus the rebuild), with a lit frame (part `halo`) round the
+    tile.
+  - The tour lives in module state (`TOUR`) because each element is its own build. The drive asks
+    for the next element with the new engine hook `out.next` (rebuilt like a tile tap, no tap
+    sound).
+  - Option "Tour order": "By atomic number" (default) or "Shuffled".
+  - Any tap stops it, and so does lowering the atom (the Toy tab's button, or a tap beside the toy).
+  - Lowering is now a tap on the shown element's own tile (it already toggled; the risen tile now
+    counts too).
+  - The halo is built last, so the table's own splats are the same for every element (chs test).
+- **Enigma machine** (2).
+  - A tap on a key of the machine's keyboard, or a letter typed on a keyboard, types that letter:
+    the key goes down, the rotors step, the lamp lights, and the letter and its code go on the pad.
+    Keys queue (like the laptop's), so quick typing loses none.
+  - The pad is now a live picture (the recipe's `screen`, kind "screen", as on the laptop), so it
+    can show any letters: MESSAGE, CODED and DECODED in five-letter groups, and a line "Tap the keys
+    to type. Tap this pad for a clean sheet."
+  - A tap off the keys decodes what was typed. With nothing typed, it types the stored message and
+    the next one decodes it, as before. A tap on the pad gives a clean sheet, and the rotors turn
+    back to the start. A message is up to 20 letters; the next key starts a clean sheet.
+  - The keyboard: a field being typed in keeps its keys (`ui.isTyping`, as the laptop), and so do
+    the site's shortcuts p (poke) and r (reset view); Shift+P and Shift+R type those letters.
+    Digits,
+    - and −, arrows and Escape aren't letters, so they stay the site's too.
+  - The panel is now titled "Type your own message", with a note saying you can type on the machine,
+    and the file button is gone (it only took text).
+  - Sounds: the same clack, ratchet and click cues as before, played per key. No new sounds.
+- **Acoustic guitar** (4).
+  - The grain was three things: fine sine stripes on the top (`sin(x*160 + noise)`), fbm wood on the
+    back, ribs and neck, and the kit's default color noise (jitter 0.04) with random placement on
+    every piece.
+  - Now every solid piece is placed evenly with no color noise, colored by `lacquer()`: a smooth
+    color, soft light and one broad sheen, with a faint wide figure on the back and neck.
+  - The top and back are sheets whose rows follow the outline's width (no lattice), the rosette is
+    three clean rings, and the cream binding wraps over the ribs' edge.
+  - The strings were modeled 5 to 3 mm thick and drawn as scattered dots. They are now 2.6 to 1.3
+    mm, with splats drawn out along them, so they read as clean lines. They still bend and vibrate
+    on the strum.
+
 ## Known issues
 
 - The panel's line "… splats in 1 pieces of surface" (an older line) reads oddly for one piece.
@@ -132,3 +183,6 @@ part 1: Photo to 3D opens your own photos". Parts 2 to 4 follow on `claude/lane-
 ## For the Operator
 
 - Part 1 is ready for an Integrator as soon as its PR is up.
+- Merge order: #154 (part 1), #155 (engine), then part 2.
+- Sound B: nothing new is needed. The tour plays each atom's own shell notes as it fills; the
+  Enigma's keys reuse its clack, ratchet and click.
