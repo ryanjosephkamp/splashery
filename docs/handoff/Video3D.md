@@ -148,9 +148,9 @@ Model: Opus 5.5 (the lane's assigned model), default effort, the whole lane.
   of 2:1 for a 360-degree panorama: the first run failed after 33 minutes and a second "solved" 144
   cube-face views. `panoSafeCrop` now trims such frames to 1.9:1. With that, the drone stretch fails
   honestly in a minute (too little parallax from a high, slow flight): the v3d-drone card.
-- The container restarted once (October 1, about 23:00 UTC on September 30); the street retrain was
-  started again. The first full suite (557 passed, 8 failed) ran while samples trained on the same
-  CPU; the lane's own three failures were fixed, and a second full run went on a quiet CPU.
+- The container restarted once (late on September 30, UTC); the street retrain was started again.
+  The first full suite (557 passed, 8 failed) ran while samples trained on the same CPU; the lane's
+  own three failures were fixed, and a second full run went on a quiet CPU.
 - Replay flight drives `player.camera` (target, yaw, pitch, roll, distance) from the recipe's drive
   through `k.data.flight`; the toy opens at the video's first view until the visitor turns or zooms
   (the app puts its own camera back after a load).
