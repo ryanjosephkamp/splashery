@@ -85,3 +85,35 @@ Operator asked for them again.
   decoded and analyzed on the main thread before playback. Lane Live input r2: start playback at
   once, analyze in a Web Worker, and add new looks that move like a fluid (waves, flowing ink and a
   third). Labs.
+
+## His reference images (October 1, 2026, later that night)
+
+His message, word for word:
+
+> Sorry, I didn't attach the images.
+>
+> Here are some inspiration images. I only want to make these kinds of visualizations if they are
+> accurate somehow and sync properly with the actual audio files.
+>
+> I don't know if you can read these pages and see their demos/videos/etc., but these links are from
+> the site (oruk.ai) where I found the images:
+>
+> https://oruk.ai/research/voice-and-social-meaning
+>
+> https://oruk.ai/research/jev-speech
+>
+> Please see what you can you with these.
+>
+> Thank you!
+
+The four images are another company's art, so they are not stored in the repo; the Live input lane
+has them privately. In words: colored ribbons of fine strands that swell and twist along their
+length; a wireframe sheet in big swells; a mesh coil above a waterfall of thin spectrum lines; and
+tubes for speech that swell into lattice bulbs on each syllable and thin to a thread in silence.
+
+Where it went: Live input r2 builds "Ribbons" (six bands, each swelling with its own loudness),
+"Tube" (the loudness envelope as a tube, turned by pitch), "Lines" (a spectrum waterfall) and "Mesh"
+(the landscape as a wireframe), and a "Coil" only if beats can be found reliably. Every shape is a
+measured feature of the sound, kept in sync with the audio clock, with a test that clicks at known
+times line up within 50 ms. The decorative ideas in the first brief (free-flowing ink and water)
+were dropped.

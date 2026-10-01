@@ -1285,6 +1285,118 @@ export const VOICES = {
   },
 };
 
+// ---- Recorded samples (lane Sound A) -----------------------------------------------
+// The `sample` voice plays a short recorded file from assets/sounds/ (CC0 or
+// public domain, credited in tools/assets.json). Nothing is fetched until a
+// sound that names the file first plays; each file is then decoded once and
+// kept for the session. If a file can't load, the layer's `fallback` (a synth
+// spec) plays instead, or nothing. src/sound.js waits (briefly) for a spec's
+// files before playing it, so a sample stays in time with its other layers;
+// offline tools call loadSamples() before rendering.
+//
+//   { voice: "sample", file: "cat-statue-meow.mp3" }
+//   { voice: "sample", file: ["a.mp3", "b.mp3"], pitch: 0.9, from: 0.1, len: 1.2,
+//     vol: 0.8, at: 0.3, fallback: { voice: "mew" } }
+//
+// file: one file name, or a list to pick one from at random on each play;
+// pitch: playback rate (also the pitch); from: start this far into the file;
+// len: play at most this long (with a short fade); decay multiplies the length.
+
+// Where the files are: `base` (src/sound.js sets it beside the module) and
+// `data`, file name -> data: URL, for pages that carry their own files (the
+// Sound Board).
+export const SAMPLES = { base: "assets/sounds/", data: {} };
+const sampleCache = new Map(); // file -> { buf, failed, promise }
+
+export function loadSample(ctx, file) {
+  let e = sampleCache.get(file);
+  if (!e) {
+    e = { buf: null, failed: false, promise: null };
+    const entry = e;
+    e.promise = fetch(SAMPLES.data[file] || SAMPLES.base + file)
+      .then((r) => {
+        if (!r.ok) throw new Error(`${file}: ${r.status}`);
+        return r.arrayBuffer();
+      })
+      // The callback form, for older Safari.
+      .then((bytes) => new Promise((ok, fail) => ctx.decodeAudioData(bytes, ok, fail)))
+      .then((buf) => (entry.buf = buf))
+      .catch(() => {
+        entry.failed = true;
+        return null;
+      });
+    sampleCache.set(file, e);
+  }
+  return e.promise;
+}
+
+// Every sample file a spec names (both halves of a toggle, and fallbacks).
+export function samplesIn(spec, out = []) {
+  if (!spec || typeof spec !== "object") return out;
+  if (Array.isArray(spec)) spec.forEach((s) => samplesIn(s, out));
+  else if ("on" in spec || "off" in spec) [spec.on, spec.off].forEach((s) => samplesIn(s, out));
+  else {
+    if (spec.voice === "sample") for (const f of [].concat(spec.file || [])) out.push(f);
+    if (spec.fallback) samplesIn(spec.fallback, out);
+  }
+  return [...new Set(out)];
+}
+
+// True when every file a spec names is decoded (or has failed for good).
+export function samplesReady(spec) {
+  return samplesIn(spec).every((f) => {
+    const e = sampleCache.get(f);
+    return e && (e.buf || e.failed);
+  });
+}
+
+export function loadSamples(ctx, spec) {
+  return Promise.all(samplesIn(spec).map((f) => loadSample(ctx, f)));
+}
+
+function playSample(c, o, t, p) {
+  const files = [].concat(p.file || []);
+  const file = files[Math.floor(Math.random() * files.length)];
+  const e = file && sampleCache.get(file);
+  const fallback = () => (p.fallback ? playSpec(c, o, t, p.fallback, { pitch: p.f }) : 0);
+  if (!e || !e.buf) {
+    if (!file || e?.failed) return fallback();
+    // An offline render that didn't load its samples first (loadSamples)
+    // hears the fallback.
+    if (typeof OfflineAudioContext !== "undefined" && c instanceof OfflineAudioContext)
+      return fallback();
+    // Not loaded yet (a page that plays specs directly): load it, then play
+    // it late if it arrives within a second.
+    loadSample(c, file).then((buf) => {
+      const late = c.currentTime - t;
+      if (late < 1) (buf ? playSample : fallback)(c, o, Math.max(t, c.currentTime + 0.01), p);
+    });
+    return 0.5;
+  }
+  const rate = Math.max(0.25, Math.min(4, p.f || 1));
+  const from = Math.max(0, Math.min(e.buf.duration - 0.01, p.from || 0));
+  const len = Math.min(e.buf.duration - from, p.len ?? Infinity) * (p.decay || 1);
+  const dur = len / rate;
+  const src = c.createBufferSource();
+  src.buffer = e.buf;
+  src.playbackRate.value = rate;
+  const g = c.createGain();
+  const vol = Math.max(TAIL * 2, p.vol);
+  // A short fade in when starting mid-file, and out when cut short, so the
+  // edges never click.
+  g.gain.setValueAtTime(from > 0 ? 0 : vol, t);
+  if (from > 0) g.gain.linearRampToValueAtTime(vol, t + 0.006);
+  if (len < e.buf.duration - from - 0.01) {
+    g.gain.setValueAtTime(vol, t + Math.max(0.007, dur - 0.05));
+    g.gain.linearRampToValueAtTime(0, t + dur);
+  }
+  src.connect(g).connect(o);
+  src.start(t, from, len);
+  return dur;
+}
+
+VOICES.sample = { f: 1, play: playSample };
+
 // The twelve original shared sounds (and "click" and "heartbeat"), exactly as
 // they were: recipes and the effect switches still name them.
 const LEGACY = {
@@ -1423,13 +1535,16 @@ const LEVEL = {
   cheer: 2.24,
   chuckle: 10.14,
   heartbeat: 1.7,
+  sample: 1,
 };
 export const VOICE_NAMES = Object.keys(VOICES);
 
 // ---- Specs ------------------------------------------------------------------------
 
 const PARAMS = new Set(
-  "voice pitch f decay vol bright at pickAt notes step strum n rate to kind hold".split(" "),
+  "voice pitch f decay vol bright at pickAt notes step strum n rate to kind hold file from len fallback".split(
+    " ",
+  ),
 );
 
 // Checks a spec and returns a list of problems (empty when it is fine).
@@ -1475,6 +1590,8 @@ export function specProblems(spec, where = "sound") {
     "rate",
     "to",
     "hold",
+    "from",
+    "len",
   ])
     if (k in spec && !(typeof spec[k] === "number" && Number.isFinite(spec[k])))
       out.push(`${where}: ${k} must be a number`);
@@ -1484,6 +1601,20 @@ export function specProblems(spec, where = "sound") {
     } catch (e) {
       out.push(`${where}: ${e.message}`);
     }
+  }
+  if (spec.voice === "sample") {
+    const files = [].concat(spec.file ?? []);
+    if (!files.length) out.push(`${where}: a sample needs a file`);
+    for (const f of files)
+      if (typeof f !== "string" || !/^[a-z0-9][a-z0-9-]*\.(mp3|m4a)$/.test(f))
+        out.push(`${where}: bad sample file "${f}" (a name like toy-what.mp3 in assets/sounds/)`);
+    if ("f" in spec) out.push(`${where}: a sample takes pitch, not f`);
+  } else
+    for (const k of ["file", "from", "len", "fallback"])
+      if (k in spec) out.push(`${where}: "${k}" is only for the sample voice`);
+  if (spec.fallback) {
+    if (samplesIn(spec.fallback).length) out.push(`${where}: a fallback must be synth voices`);
+    out.push(...specProblems(spec.fallback, `${where}.fallback`));
   }
   if ("notes" in spec) {
     try {
