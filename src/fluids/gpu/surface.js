@@ -491,6 +491,9 @@ void main() {
 
   // Liquid.
   float d = uMisc.y > 0.5 ? sampleDepth(uv0) : 0.0;
+  // what of the glass's lines lies behind the liquid shows only through it
+  float liqZ = 1e9;
+  float liqT = 1.0;
   if (d > 0.0) {
     vec2 px = 1.0 / uDepthSize;
     vec3 P = viewPos(uv0, d);
@@ -540,6 +543,8 @@ void main() {
     float bub = clamp(thickAll(uv0).b * 1.2, 0.0, 1.0) * uFoam.w;
     liq = mix(liq, mix(uColor.rgb, vec3(1.0), 0.6) * (0.65 + 0.35 * max(dot(n, L), 0.0)) + 0.08, bub * 0.75);
     float a = clamp(thick * 200.0, 0.0, 1.0);
+    liqZ = -P.z;
+    liqT = mix(1.0, dot(T, vec3(0.333)), a);
     col = mix(col, liq, a);
   }
   // Foam and spray over the liquid.
@@ -579,15 +584,17 @@ void main() {
       float r = length(eye.xz + rd.xz * t1 - c.xz);
       // (only near the glass: toward the horizon k goes to 0)
       float k = r < 2.0 * rOut ? abs(rd.y) / (t1 * px) : 1e9;
-      line = max(line, 1.0 - smoothstep(0.5, 1.5, abs(r - rOut) * k));
-      line = max(line, 0.7 * (1.0 - smoothstep(0.5, 1.5, abs(r - rIn) * k)));
-      if (r > rIn && r < rOut && k < 1e8) line = max(line, 0.6);
+      float seen = -(uToyToView * vec4(eye + rd * t1, 1.0)).z > liqZ ? liqT : 1.0;
+      line = max(line, seen * (1.0 - smoothstep(0.5, 1.5, abs(r - rOut) * k)));
+      line = max(line, seen * 0.7 * (1.0 - smoothstep(0.5, 1.5, abs(r - rIn) * k)));
+      if (r > rIn && r < rOut && k < 1e8) line = max(line, seen * 0.6);
     }
     float t0 = (c.y - eye.y) / rd.y;
     if (t0 > 0.0) {
       float r = length(eye.xz + rd.xz * t0 - c.xz);
       float k = r < 2.0 * rOut ? abs(rd.y) / (t0 * px) : 1e9;
-      line = max(line, 0.6 * (1.0 - smoothstep(0.5, 1.5, abs(r - rOut) * k)));
+      float seen = -(uToyToView * vec4(eye + rd * t0, 1.0)).z > liqZ ? liqT : 1.0;
+      line = max(line, seen * 0.6 * (1.0 - smoothstep(0.5, 1.5, abs(r - rOut) * k)));
     }
     col = mix(col, vec3(0.97), line * 0.85);
   }
@@ -819,6 +826,8 @@ fn fresnel(cosT: f32, f0: f32) -> f32 {
 
   var d = 0.0;
   if (uniform.uMisc.y > 0.5) { d = sampleDepth(uv0); }
+  var liqZ = 1e9;
+  var liqT = 1.0;
   if (d > 0.0) {
     let px = 1.0 / uniform.uDepthSize;
     let P = viewPos(uv0, d);
@@ -867,6 +876,8 @@ fn fresnel(cosT: f32, f0: f32) -> f32 {
     let bub = clamp(thickAll(uv0).b * 1.2, 0.0, 1.0) * uniform.uFoam.w;
     liq = mix(liq, mix(uniform.uColor.rgb, vec3f(1.0), 0.6) * (0.65 + 0.35 * max(dot(n, L), 0.0)) + vec3f(0.08), bub * 0.75);
     let a = clamp(thick * 200.0, 0.0, 1.0);
+    liqZ = -P.z;
+    liqT = mix(1.0, dot(T, vec3f(0.333)), a);
     col = mix(col, liq, a);
   }
   // Foam and spray over the liquid.
@@ -899,15 +910,17 @@ fn fresnel(cosT: f32, f0: f32) -> f32 {
     if (t1 > 0.0) {
       let r = length(eye.xz + rd.xz * t1 - c.xz);
       let k = select(1e9, abs(rd.y) / (t1 * px), r < 2.0 * rOut);
-      line = max(line, 1.0 - smoothstep(0.5, 1.5, abs(r - rOut) * k));
-      line = max(line, 0.7 * (1.0 - smoothstep(0.5, 1.5, abs(r - rIn) * k)));
-      if (r > rIn && r < rOut) { line = max(line, 0.6); }
+      let seen = select(1.0, liqT, -(uniform.uToyToView * vec4f(eye + rd * t1, 1.0)).z > liqZ);
+      line = max(line, seen * (1.0 - smoothstep(0.5, 1.5, abs(r - rOut) * k)));
+      line = max(line, seen * 0.7 * (1.0 - smoothstep(0.5, 1.5, abs(r - rIn) * k)));
+      if (r > rIn && r < rOut && k < 1e8) { line = max(line, seen * 0.6); }
     }
     let t0 = (c.y - eye.y) / rd.y;
     if (t0 > 0.0) {
       let r = length(eye.xz + rd.xz * t0 - c.xz);
       let k = select(1e9, abs(rd.y) / (t0 * px), r < 2.0 * rOut);
-      line = max(line, 0.6 * (1.0 - smoothstep(0.5, 1.5, abs(r - rOut) * k)));
+      let seen = select(1.0, liqT, -(uniform.uToyToView * vec4f(eye + rd * t0, 1.0)).z > liqZ);
+      line = max(line, seen * 0.6 * (1.0 - smoothstep(0.5, 1.5, abs(r - rOut) * k)));
     }
     col = mix(col, vec3f(0.97), line * 0.85);
   }
