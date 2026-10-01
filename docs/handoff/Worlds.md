@@ -48,6 +48,16 @@ Model: Opus 5.5 (default effort). Branch `claude/lane-worlds-r4`.
   69–101° (range 32°, people 39 ± 13°), pelvis bob 7.7 cm (runners 9.7), sway 2.2 cm (2.2), forward
   lean 8°, a flight phase between stances.
 - **The lab** (`worlds/lab/`, `src/worlds/lab.js`): see docs/WORLDS.md.
+- **Posture:** the capture's spine, neck and collarbones were stooped (r3's hands hung 17 cm in
+  front of the hips). The shaper now aims the spine, neck, head and collarbones from the model's
+  upright rest pose plus the gait's lean; standing, the hands are 2 cm behind the hip line.
+- **Cards** (page 2, lane record "Worlds", groups "lab" and "island"; WebM): `wd-lab-stand-r4`,
+  `wd-lab-walk-r4`, `wd-lab-run-r4` (`tools/wd-lab-clip.mjs`), `wd-beach-r4` (replaces
+  `wd-character-walk-r3` and `wd-character-r3`) and `wd-props-r4` (replaces `wd-props-r3`), from
+  `tools/world-clip.mjs`'s `beach-r4` and `props-r4` scenes. `wd-character-splats-r3` was not
+  redone: the splat person plays the same clips, so it moves the same way now.
+- `tests/wdr4.spec.mjs`: 7 tests (the reference and credits, the built clips against it, the lab
+  behind the switch, its live curves, hands by the thighs, controls, screenshots `wdr4-lab-*`).
 - **Fixed on the way:** the r3 clips' keys started at frame 1, so every loop held its first pose for
   a frame and lasted 1.033 s (a small hitch each stride, and the feet slid 3% more). Keys now start
   at 0; each loop is exactly 1 s. The lab found it: its measured curves drifted against the build's.
