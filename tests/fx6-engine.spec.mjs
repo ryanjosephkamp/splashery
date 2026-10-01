@@ -122,7 +122,9 @@ test("a kit toy rebuilt with new options keeps moving as it was until the new bu
   await page.goto("/?renderer=webgl2&profile=weak");
   await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
   await page.evaluate(() => window.__splashery.app.chooseToy("periodic-table"));
-  await page.waitForFunction(() => window.__splashery.player.motion.ctx?.kit?.data?.element === "C");
+  await page.waitForFunction(
+    () => window.__splashery.player.motion.ctx?.kit?.data?.element === "C",
+  );
   await page.waitForTimeout(500);
   // Watched every frame through a tile tap's rebuild: the toy on screen always has its motion
   // (so its hidden parts, such as the atom's photon, stay hidden), first carbon's, then iron's.
