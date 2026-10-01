@@ -1,8 +1,15 @@
-// Sound effects, synthesised with WebAudio (no files; the voices are in
-// src/voices.js). Off until the visitor presses the speaker button; the
-// choice is remembered in this browser. Embeds never make sound.
+// Sound effects, synthesised with WebAudio (the voices are in src/voices.js),
+// plus a few short recorded samples from assets/sounds/, fetched only when a
+// sound that uses one first plays. Off until the visitor presses the speaker
+// button; the choice is remembered in this browser. Embeds never make sound.
 
-import { playSpec, parseNotes, LEGACY_NAMES } from "./voices.js";
+import { playSpec, parseNotes, LEGACY_NAMES, SAMPLES, samplesIn, samplesReady, loadSamples } from "./voices.js"; // prettier-ignore
+
+SAMPLES.base = new URL("../assets/sounds/", import.meta.url).href;
+
+// How long a tap waits for its samples to arrive on their first play before
+// it plays without them (their layers then play late, or fall back).
+const SAMPLE_WAIT = 0.6;
 
 const KEY = "splashery.sound";
 
@@ -57,8 +64,21 @@ export class Sound {
     const k = key || (typeof spec === "string" ? spec : "spec");
     if (this.last[k] && now - this.last[k] < gap) return;
     this.last[k] = now;
-    this.scheduled++;
-    playSpec(ctx, this.master, now + 0.005, spec, { pitch, pick });
+    this.scheduled++; // UI r3
+    if (typeof spec === "string" || !samplesIn(spec).length || samplesReady(spec)) {
+      playSpec(ctx, this.master, now + 0.005, spec, { pitch, pick });
+      return;
+    }
+    // First play of a sound with recorded samples: load them, then play the
+    // whole spec at once so every layer stays in time.
+    let done = false;
+    const go = () => {
+      if (done) return;
+      done = true;
+      playSpec(ctx, this.master, ctx.currentTime + 0.005, spec, { pitch, pick });
+    };
+    loadSamples(ctx, spec).then(go);
+    setTimeout(go, SAMPLE_WAIT * 1000);
   }
 
   // ---- UI r3: a long tap's sound pauses and resumes ---------------------------------
@@ -72,6 +92,9 @@ export class Sound {
     if (!this.enabled || !spec) return;
     const ctx = this.audio();
     if (!ctx) return;
+    // Recorded samples load in the background (the first notes may play
+    // without them, as a first plain play does).
+    if (typeof spec !== "string" && samplesIn(spec).length && !samplesReady(spec)) loadSamples(ctx, spec); // prettier-ignore
     const out = ctx.createGain();
     out.connect(this.master);
     const h = { events: soundEvents(spec), i: 0, out, pitch, start: ctx.currentTime + 0.01, pos: 0, timer: 0 }; // prettier-ignore

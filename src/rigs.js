@@ -306,6 +306,17 @@ function panel(k, at, n, w, h, share, part, fn, { size = 0.6 } = {}) {
 
 // ---- Rigs -----------------------------------------------------------------------
 
+// Lane Fix5: where the scanned alarm clock's second hand lies at rest (read
+// from renders face on and from the side): from the center of the dial, which
+// sits at z = 0.21 behind the bezel, toward "I".
+const CLOCK_HAND = {
+  pivot: [0, -0.18, 0.21],
+  dir: [0.405, 0.914, 0],
+  len: 0.63,
+  tail: 0.1,
+  z: 0.03,
+};
+
 export const RIGS = {
   // ---- Scans ----------------------------------------------------------------------
 
@@ -1156,7 +1167,7 @@ export const RIGS = {
         name: "second",
         pivot: [0, -0.18, 0.4],
         axis: [0, 0, -1],
-        regions: [{ at: [0, -0.18, 0.4], r: [0.66, 0.66, 0.3], soft: 0.05, color: "#d84a34", tol: 0.45 }], // prettier-ignore
+        regions: [{ at: [0, -0.18, 0.21], r: [0.75, 0.75, 0.15], soft: 0.05, color: "#d84a34", tol: 0.55 }], // prettier-ignore
       },
       {
         name: "bells",
@@ -1168,6 +1179,49 @@ export const RIGS = {
         ],
       },
     ],
+    // Lane Fix5: the scanned second hand is too thin to cut out cleanly (its
+    // pale edge splats only half belonged to it, so they lagged behind as it
+    // turned). It is hidden (the dial is whole under it), and a kit-built hand
+    // turns in its place as one solid piece, lifted a little off the dial so
+    // the dial's big splats never sort in front of it.
+    addon: {
+      count: 2000,
+      build(k) {
+        const { pivot, dir, len, tail, z } = CLOCK_HAND;
+        const side = [dir[1], -dir[0], 0];
+        const at = (a, w, dz) => [
+          pivot[0] + dir[0] * a + side[0] * w,
+          pivot[1] + dir[1] * a + side[1] * w,
+          pivot[2] + dz,
+        ];
+        // The hand: a thin red needle with a short tail and a round boss.
+        const hand = k.part("hand", { pivot, axis: [0, 0, -1] });
+        k.cloud({ share: 0.85, part: hand, pattern: false }, (rand) => {
+          const a = -tail + rand() * (len + tail);
+          const half = a < 0 ? 0.009 : 0.007 * (1 - 0.4 * (a / len));
+          return {
+            p: at(a, (rand() - 0.5) * 2 * half, z),
+            n: [0, 0, 1],
+            color: mix("#e2432c", "#c83322", rand() * 0.5),
+            size: 0.5,
+            flat: 0.15,
+            opacity: 1,
+          };
+        });
+        k.cloud({ share: 0.15, part: hand, pattern: false }, (rand) => {
+          const r = 0.024 * Math.sqrt(rand());
+          const t = rand() * TAU;
+          return {
+            p: [pivot[0] + r * Math.cos(t), pivot[1] + r * Math.sin(t), pivot[2] + z + 0.002],
+            n: [0, 0, 1],
+            color: "#d23b27",
+            size: 0.5,
+            flat: 0.15,
+            opacity: 1,
+          };
+        });
+      },
+    },
     controls: [pulse("ring", "Ring", 2.4)],
     action: { key: "ring", label: "Ring" },
     drive(t, c, out, info) {
@@ -1175,7 +1229,8 @@ export const RIGS = {
       const s = Math.floor(t);
       const f = t - s;
       const tick = s + 1 - Math.exp(-f * 30) * Math.cos(f * 40);
-      out.parts.second = { angle: (tick / 60) * TAU };
+      out.parts.second = { angle: 0, visible: 0 };
+      out.addon = { parts: { hand: { angle: (tick / 60) * TAU } } };
       const e = since(c, "ring", 2.4);
       if (e < 0) return;
       const ring = env(e, 0, 0.05, 1.8, 2.3);
