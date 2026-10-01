@@ -835,8 +835,10 @@ export class Kit {
   }
 
   // Free-form splats: sample(rand, i, n) -> { p, color, size?, opacity?,
-  // n?, flat?, part?, kind?, params?, pattern?, to?, channel?, skin? } in
-  // toy coordinates (to, channel and skin as in add()).
+  // n?, flat?, scales?, quat?, part?, kind?, params?, pattern?, to?, channel?,
+  // skin? } in toy coordinates (to, channel and skin as in add()). scales and
+  // quat give a trained splat its own shape: sizes on its three axes (toy
+  // units, not scaled by size) and its rotation [x, y, z, w].
   // Sized by share (fraction of the budget) or count.
   cloud(opts, sample) {
     const item = { kind: "cloud", opts, sample, area: 0 };
@@ -1076,7 +1078,10 @@ export class Kit {
       const sz = base * (s.size ?? 1) * Math.exp((rand() - 0.5) * jitter);
       let scl;
       let q;
-      if (s.n) {
+      if (s.scales) {
+        scl = s.scales;
+        q = s.quat ?? [0, 0, 0, 1];
+      } else if (s.n) {
         const f = s.flat ?? o.flat ?? 0.3;
         scl = [sz, sz, sz * f];
         q = discRotation(unit(s.n), rand() * TAU);
