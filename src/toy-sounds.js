@@ -2504,6 +2504,28 @@ export const TOY_SOUNDS = {
   // Sound B (his note: too robotic): a soft ripple through the field, like
   // grass stirring, as the pulse runs out.
   "splat-field": { voice: "rustle", f: 3000, n: 30, decay: 2.4, bright: 0.3, vol: 0.35 },
+  // ---- Science (lane Science) ----------------------------------------------------------
+  // Quiet and subtle (PACKS.md 7e): atoms make no sound, so the jiggle is a faint
+  // jostle of tiny taps under a soft breath, and it settles with a softer one.
+  "thermal-ellipsoids": {
+    on: [
+      { voice: "patter", f: 2400, n: 18, decay: 1.4, vol: 0.35 },
+      { voice: "breath", f: 700, to: 1, decay: 1.2, vol: 0.3 },
+    ],
+    off: { voice: "breath", f: 600, to: 0.6, decay: 1, vol: 0.3 },
+  },
+  // A microscope's focus knob turning smoothly while the view dives in (about 2.6 s),
+  // and turning back, a little lower, as it comes out.
+  "smlm-microscope": {
+    on: { voice: "scrape", f: 420, rate: 4, decay: 4.4, vol: 0.35 },
+    off: { voice: "scrape", f: 360, rate: 4, decay: 4, vol: 0.3 },
+  },
+  // Space is silent: a long, soft breath as the view glides into the gas, and a
+  // lower one as it pulls back out.
+  "galaxy-box": {
+    on: { voice: "breath", f: 500, to: 0.8, decay: 2.8, vol: 0.35 },
+    off: { voice: "breath", f: 400, to: 1.2, decay: 2.4, vol: 0.3 },
+  },
   // ---- Fluid lab (lane Fluids) ------------------------------------------------------
   // A pour's splash and glug (each scene plays its own through cues: a pour,
   // a thick gloop for honey and lava, a splash, a breath on the candle).
