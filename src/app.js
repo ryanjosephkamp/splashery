@@ -407,7 +407,8 @@ class App {
     // Recorded samples in the toy's tap sound (src/sound-credits.js), one
     // line per source (a sampled instrument's notes share one).
     const sources = new Set();
-    for (const file of samplesIn(info?.id ? toySound(info.id) : null, [], true)) {
+    const specs = [info?.id ? toySound(info.id) : null, ...this.recipeSounds()]; // Sound C
+    for (const file of samplesIn(specs, [], true)) {
       const c = SOUND_CREDITS[file];
       if (!c || sources.has(c.source)) continue;
       sources.add(c.source);
@@ -746,12 +747,18 @@ class App {
   // sound's, and any its recipe's `sounds` lists for its cues, for the
   // options it was built with), so its first tap sounds on time.
   preloadSounds() {
-    const player = this.player;
-    const toy = player?.scene.toy;
+    const toy = this.player?.scene.toy;
     if (!this.sound.enabled || toy?.kind !== "builtin") return;
-    const extra = player.toyInfo?.recipe?.sounds;
-    const more = typeof extra === "function" ? extra(toy.options || {}) : extra;
-    this.sound.preload([toySound(toy.id), ...[].concat(more || [])]);
+    this.sound.preload([toySound(toy.id), ...this.recipeSounds()]);
+  }
+
+  // Sound C: the specs a kit recipe's `sounds` lists (the recorded samples
+  // its cues may play, for the options it was built with), as a list.
+  recipeSounds() {
+    const player = this.player;
+    const extra = player?.toyInfo?.recipe?.sounds;
+    const more = typeof extra === "function" ? extra(player.scene.toy?.options || {}) : extra;
+    return [].concat(more || []).filter(Boolean);
   }
 
   onAction(r) {
@@ -767,21 +774,22 @@ class App {
       return;
     }
     const own = toy.kind === "builtin" ? toySound(toy.id) : null;
-    // Some taps (a laptop key) make their own sound through cues.
-    if (recipe?.action?.quiet?.includes(r.key)) {
-      this.ui.setMotion(player.scene.motion, player.motion.targets);
-      return;
-    }
     // UI r3: a tap on a long effect that is running pauses its sound too, and
     // the next one resumes it from the same place.
     if (r.paused || r.resumed) {
-      // Sound C: all of the toy's sound, not only the notes still to come.
+      // Sound C: all of the toy's sound, not only the notes still to come
+      // (a quiet tap's cue sounds too, so this comes first).
       if (r.paused) this.sound.pauseToy();
       else this.sound.resumeToy();
       this.ui.setMotion(player.scene.motion, player.motion.targets);
       return;
     }
     this.sound.resumeToy(); // Sound C: another control firing carries a paused effect on
+    // Some taps (a laptop key) make their own sound through cues.
+    if (recipe?.action?.quiet?.includes(r.key)) {
+      this.ui.setMotion(player.scene.motion, player.motion.targets);
+      return;
+    }
     const spec = own || recipe?.action?.sound || (r.key === "hop" ? "hop" : "pop");
     // UI r4: a drag across keys plays each key's note under its own key, so
     // notes in quick succession overlap as on a real keyboard; a run faster

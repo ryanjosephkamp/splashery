@@ -138,3 +138,37 @@ test("a recipe's `sounds` (its cues' samples, by option) load with the toy; noth
   expect(fetched).toContain("dice-throw.mp3");
   expect(fetched).not.toContain("chess-set-move.mp3");
 });
+
+test("a quiet tap (its sound from cues) pauses and resumes its sound too", async ({ page }) => {
+  await open(page);
+  await pick(page, "gaussian-splatting");
+  await page.click("#toy-action");
+  await page.waitForFunction(() => window.__splashery.player.motion.effectState() === "running");
+  await page.waitForTimeout(400);
+  await page.click("#toy-action");
+  await expect.poll(() => audio(page).then((a) => a.state), { timeout: 500 }).toBe("suspended");
+  await page.click("#toy-action");
+  await expect.poll(() => audio(page).then((a) => a.state), { timeout: 500 }).toBe("running");
+});
+
+test("a recipe's `sounds` are credited in the About tab, and its drive sees the camera's turn", async ({
+  page,
+}) => {
+  await open(page);
+  await pick(page, "dice");
+  const view = await page.evaluate(async () => {
+    const { app, player } = window.__splashery;
+    const r = player.toyInfo.recipe;
+    r.sounds = [{ voice: "sample", file: "chess-set-move.mp3" }];
+    app.renderCredits(player.toyInfo);
+    const seen = [];
+    const drive = r.drive;
+    r.drive = (t, c, out, info) => (seen.push(info.view), drive?.call(r, t, c, out, info));
+    player.stage.requestRender();
+    await new Promise((ok) => setTimeout(ok, 500));
+    return seen;
+  });
+  await expect(page.locator('#credits [data-sample="chess-set-move.mp3"]')).toHaveCount(1);
+  expect(view.length).toBeGreaterThan(0);
+  expect(typeof view[0]).toBe("number");
+});
