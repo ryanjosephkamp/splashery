@@ -1,6 +1,6 @@
 {
-  "round": "2026-09-28 notes and the Sound Board marks of September 30, 2026",
-  "note": "He named only the toys to change, so any toy not listed stays as it is, and he called the whole Music category pretty much perfect. He wants realistic, subtle sound effects (often a real recorded sound \"from a sound pack\") and dislikes clicking on almost every toy, the \"vroom\" acceleration sound, whistles, robotic chimes and jingles, string or xylophone tones on things that aren't instruments, and wind that's too loud (it's fine on a few, like Venus and Neptune). On September 30 he marked the newer toys on the Sound Board and said everything he didn't mark or note is approved as it is.",
+  "round": "2026-10-02 review (the mega review of the preview site)",
+  "note": "October 2, 2026: the owner went through every toy on the preview site and named the sounds to change; every toy he called perfect or fine stays as it is. Two notes cover every toy: when a tap pauses an effect, its sound must pause and resume with it; and a toy's first tap often sounds late (later taps are in sync). He still wants subtle, realistic sounds, often real recordings, with no wind unless it belongs, no motor 'vroom', no buzz or horn and no robotic tones. The full review is docs/reviews/2026-10-02-mega-review/review.md.",
   "toys": {
     "raspberry": {
       "status": "site",
@@ -87,24 +87,24 @@
       "candidates": []
     },
     "tin-can-real": {
-      "status": "site",
-      "said": "The real tin can, I don't think that it needs to have like that clicking. It's okay that it has the metallic sound, like if you were to flick it or hit it with something, like it currently does at the beginning. But then it has like this clicking sound when it rolls that doesn't sound right.",
-      "note": "Keep the metallic flick at the start, but drop the clicking while it rolls.",
-      "plan": "The metallic knock, a real spinning whirr on its rim that speeds up like a settling coin, and the clank as it drops flat.",
+      "status": "change",
+      "said": "(October 2, 2026, review) It sounds like somebody plays a little drum and then a coin, like a metal quarter, is rolling around on the ground. ... It could just sound kind of metallic as it rolls, but I don't need the drum either.",
+      "note": "Drop the drum hit and the coin-like ring; just a plain metallic roll.",
+      "plan": "One real recording of a tin can rolling on its rim: a light metallic roll that slows and settles. No drum hit, no coin ring.",
       "candidates": []
     },
     "donut": {
-      "status": "site",
-      "said": "The donut sounds a little too clicky. It's like when it breaks apart, it just sounds like it's clicking. I don't know if we can make it sound a little bit more like dough actually breaking.",
-      "note": "Too clicky when it breaks apart; it should sound like dough breaking.",
-      "plan": "A soft doughy squish and tear as it breaks into chunks, and a soft squish as it comes back together (no sprinkle clicks).",
+      "status": "change",
+      "said": "(October 2, 2026, review) It kind of sounds almost too wet.",
+      "note": "Sounds too wet; find a better one (right direction).",
+      "plan": "A drier, softer sound than now.",
       "candidates": []
     },
     "knot": {
-      "status": "site",
-      "said": "The neon knot has this vroom kind of like acceleration sound, and there are a lot of toys that have that sound. I really don't like it. I understand, you know, you're using it for things that accelerate or speed up, but it just doesn't sound right. We need something that's a bit more, I don't know, cool? This is just, it's almost like a robotic acceleration sound that doesn't sound right.",
-      "note": "He really dislikes the robotic \"vroom\" acceleration sound (here and on many toys); he wants something cooler.",
-      "plan": "A short electric crackle as the neon strikes, then a steady neon hum while it writhes (no rising pitch).",
+      "status": "change",
+      "said": "(October 2, 2026, review) The neon knot has that buzzing sound that I hate. It should not make that noise. ... We can make it sound more like jelly or something wiggling a little bit.",
+      "note": "No buzz or horn. A soft jelly-like wiggle instead.",
+      "plan": "A soft, rubbery jelly wobble (a real recording) that follows the knot's wiggle. No hum, buzz or horn.",
       "candidates": []
     },
     "planet": {
@@ -171,10 +171,10 @@
       "candidates": []
     },
     "marble": {
-      "status": "site",
-      "said": "I think the marble could sound a little bit better. It's hard to describe what's wrong with it. It just doesn't sound like glass rolling, and maybe we don't need it to have that, like, noise at the beginning where it, like, it clinks or whatever that noise is.",
-      "note": "It doesn't sound like glass rolling, and the clink at the start isn't needed.",
-      "plan": "A real glass marble rolling on a wooden floor for its whole lap (no clink).",
+      "status": "change",
+      "said": "(October 2, 2026, review) The marble is a little too loud. The sound is close. ... It's just, like, kind of annoyingly loud by default.",
+      "note": "Same sound, quieter by default (or a slightly better real marble recording).",
+      "plan": "The same marble sound about 6 dB quieter, or a close real recording of a glass marble if one fits better.",
       "candidates": []
     },
     "solar-system": {
@@ -234,10 +234,10 @@
       "candidates": []
     },
     "aurora-planet": {
-      "status": "site",
-      "said": "For the Aurora world, the whistling is really weird. I don't think we need to have whistling there, and the wind is a little odd as well. Maybe we could have something that's a bit more... I don't know what the right word would be. I'm sorry, I'm trying to think of one. It could almost be like a little calm noise.",
-      "note": "The whistling is weird and the wind odd; he'd like a calm sound.",
-      "plan": "A calm, soft airy swell as the aurora flares and settles (no whistle).",
+      "status": "change",
+      "said": "(October 2, 2026, review) we can make the wind sound a little bit less dramatic",
+      "note": "Wind less loud and dramatic.",
+      "plan": "The same aurora, with the wind lower and gentler.",
       "candidates": []
     },
     "asteroid": {
@@ -255,10 +255,10 @@
       "candidates": []
     },
     "meteor": {
-      "status": "site",
-      "said": "The meteor should also sound more like fire. Right now it's just, like, a bunch of clicking, and then when it bursts, we should actually have an explosion sound.",
-      "note": "It's just clicking; it should sound like fire, with a real explosion when it bursts.",
-      "plan": "A fiery whoosh as it streaks in, a real explosion as it bursts, the fragments burning out, and the next one whooshing in.",
+      "status": "change",
+      "said": "(October 2, 2026, review) The meteor still doesn't really sound like it explodes at the end. ... you can use that same sound for the meteor, because the star sound is basically perfect.",
+      "note": "It should audibly explode at the end: reuse the star's burst sound, in sync.",
+      "plan": "The streak as now, ending with the star's burst sound when it explodes.",
       "candidates": []
     },
     "star": {
@@ -283,10 +283,10 @@
       "candidates": []
     },
     "star-cluster": {
-      "status": "site",
-      "said": "The star cluster just sounds too robotic or, like, not very good.",
-      "note": "It sounds too robotic.",
-      "plan": "A soft airy breath in and out as the cluster breathes, with a faint glitter (no synth sparkle).",
+      "status": "change",
+      "said": "(October 2, 2026, review) it sounds like kind of like a wind sound or something. It could be a little bit less overwhelming",
+      "note": "Less wind-like and more subtle.",
+      "plan": "Lower and subtler; less wind in it.",
       "candidates": []
     },
     "planetary-nebula": {
@@ -346,10 +346,10 @@
       "candidates": []
     },
     "dna": {
-      "status": "site",
-      "said": "The DNA is really close. It's kind of like a zipper, which I guess is the point. I don't know if we could make it sound a little bit more like a real zipper. If we have to keep it the way that it is now, it's okay, but it would be nice if it could sound a little different.",
-      "note": "Really close; it could sound more like a real zipper, but it's okay to keep.",
-      "plan": "A real zipper opening as it unzips, and closing as it zips back up.",
+      "status": "change",
+      "said": "(October 2, 2026, review) the zipper sound doesn't seem exactly synchronized. Maybe we could find a different zipper sound",
+      "note": "The zip isn't quite in sync with the unzipping; sync it or find a better zipper recording (flexible).",
+      "plan": "The zip timed to the strand opening (or a cleaner zipper recording).",
       "candidates": []
     },
     "white-blood-cell": {
@@ -367,17 +367,17 @@
       "candidates": []
     },
     "mitochondrion": {
-      "status": "site",
-      "said": "For the mitochondria, I don't really like that vroom kind of acceleration noise that it does. If we could change that, would be nice.",
-      "note": "He doesn't like the \"vroom\" acceleration noise.",
-      "plan": "A steady low hum as it powers up (no rising pitch), and soft pops for each wave of ATP sparks (no synth notes).",
+      "status": "change",
+      "said": "(October 2, 2026, review) I really don't like that vroom or, like, buzz or motor sound. ... It could be, like, the sound of maybe, like, a furnace",
+      "note": "No motor, vroom or buzz. A 'powerhouse' sound such as a furnace; try a few and pick.",
+      "plan": "Two or three 'powerhouse' candidates, such as a gas furnace's soft roar or a boiler's low rumble, no motor or whine; the best goes in.",
       "candidates": []
     },
     "paramecium": {
-      "status": "site",
-      "said": "For the paramecium, the scutter or, like, almost like sand noise that it makes is a little awkward. We should change that.",
-      "note": "The scuttling, sandy noise is awkward.",
-      "plan": "A soft low paddling of the cilia and a gentle swish as it swims its loop.",
+      "status": "change",
+      "said": "(October 2, 2026, review) change the little shuffle sound at the beginning, maybe make it sound a little bit more like it's swimming, but not make it sound really windy",
+      "note": "Replace the opening shuffle with soft swimming strokes, not wind.",
+      "plan": "Soft water strokes in time with its cilia beating; no shuffle, no wind.",
       "candidates": []
     },
     "orbital": {
@@ -388,17 +388,17 @@
       "candidates": []
     },
     "atom": {
-      "status": "site",
-      "said": "For the atom, this is that acceleration noise. I really don't like it. I don't really know what a good sound would be for the atom. I understand that, you know, you click on it and, like, the stuff accelerates, so it makes sense that you chose that. But it would be cool if we could find something else that's more suitable.",
-      "note": "He really dislikes the acceleration noise; find something more suitable.",
-      "plan": "A steady electric hum and a soft whirl as the electrons race (no rising pitch).",
+      "status": "change",
+      "said": "(October 2, 2026, review) The atom has, like, this vroom or motor kind of sound ... the sound that's on the periodic table that plays when I click the atom ... is almost perfect.",
+      "note": "No motor sound. Use the periodic table's atom-appear sound (a subtle electric one).",
+      "plan": "The periodic table's atom-appear sound (a subtle electric crackle), with no motor.",
       "candidates": []
     },
     "molecule": {
-      "status": "site",
-      "said": "For the molecule, it sounds like a rubber band, and while that might be okay for, like, caffeine, for example, I almost think that it isn't the best for other molecules. So maybe we could change that and make it less of, like, a rubber band sound. But if we have to keep it this way, I guess it's all right.",
-      "note": "It sounds like a rubber band, which may suit caffeine but not the others; less of that if possible.",
-      "plan": "A soft warm roar of heat and the light wooden rattle of the atoms jiggling on their bonds (no boing).",
+      "status": "change",
+      "said": "(October 2, 2026, review) there's, like, a wind sound. We don't need the wind sound. And then for the kind of, like, building blocks sound, we should choose something different.",
+      "note": "No wind; replace the building-block clicks with something better.",
+      "plan": "No wind; soft clicks of atoms settling into place, replacing the building-block sound.",
       "candidates": []
     },
     "protein": {
@@ -409,10 +409,10 @@
       "candidates": []
     },
     "crystal-lattice": {
-      "status": "site",
-      "said": "The crystal lattice, really, we need to, like, totally change the sound. If anything, it could sound a little bit more like the pieces are shuffling or something. I don't know how else to describe this. Kind of like a chain? It just shouldn't sound like that. Right now, it just sounds like playing a xylophone. It's really awkward.",
-      "note": "Change it completely: it sounds like a xylophone; maybe pieces shuffling, like a chain.",
-      "plan": "A real chain shuffling as the wave runs across the crystal, twice.",
+      "status": "change",
+      "said": "(October 2, 2026, review) The sound is, like, metal chains or something. That's fine, I guess, but maybe we could make it a little bit better.",
+      "note": "The metal-chain sound is OK; could be better (low priority).",
+      "plan": "Keep the light metallic chime; a cleaner take if one fits better (low priority).",
       "candidates": []
     },
     "ruby": {
@@ -430,10 +430,10 @@
       "candidates": []
     },
     "emerald": {
-      "status": "site",
-      "said": "Maybe for the ones that I mention, or just for all of the ones here that I don't tell you are, like, basically perfect, perhaps you could find, like, what a real gem of this type sounds like if somebody were to, like, hit on it or tap it or something like that. I don't know if they have a characteristic sound. … Try to find something better for the emerald.",
-      "note": "Find something better: ideally what a real emerald sounds like when tapped.",
-      "plan": "A real glassy tap and a soft glinting swish as the light spirals in.",
+      "status": "change",
+      "said": "(October 2, 2026, review) there's almost like this wind sound, or whoosh sound, that's unnecessary",
+      "note": "Remove the wind/whoosh.",
+      "plan": "Its sound without the wind.",
       "candidates": []
     },
     "amethyst-geode": {
@@ -444,10 +444,10 @@
       "candidates": []
     },
     "sapphire": {
-      "status": "site",
-      "said": "Maybe for the ones that I mention, or just for all of the ones here that I don't tell you are, like, basically perfect, perhaps you could find, like, what a real gem of this type sounds like if somebody were to, like, hit on it or tap it or something like that. I don't know if they have a characteristic sound. … The sapphire you should try to find something for.",
-      "note": "Find something better: ideally what a real sapphire sounds like when tapped.",
-      "plan": "A real glassy tap and a soft bright swish as the star glides across.",
+      "status": "change",
+      "said": "(October 2, 2026, review) we don't need the wind or, like, sand shuffling sound",
+      "note": "Remove the wind and sand-shuffle sound.",
+      "plan": "Its sound without the wind and the sandy shuffle.",
       "candidates": []
     },
     "quartz-cluster": {
@@ -479,17 +479,17 @@
       "candidates": []
     },
     "heart": {
-      "status": "site",
-      "said": "The beating heart is, I think, okay, but it almost sounds different from how a heart normally would beat. So it should, you know, from text alone, it's probably hard for me to describe how this should sound. It should basically have, like, two beats and then a bit of a pause, and then it repeats with two beats kind of together or close together and then a bit of a pause. That sort of thing. That's roughly how the heart kind of sounds. … Don't take that too literally. Just see if you can find, like, a better, more realistic heart sound.",
-      "note": "Okay, but not how a heart really sounds: it should be two close beats, then a pause (lub-dub), repeating.",
-      "plan": "A real heartbeat (lub-dub, pause) on every squeeze, quicker as it races and calming again.",
+      "status": "change",
+      "said": "(October 2, 2026, review) I can barely hear the heart beating ... If you could make it louder, but keep the sound, like the same",
+      "note": "Louder, same beat and tempo.",
+      "plan": "The same heartbeat at the same tempo, louder.",
       "candidates": []
     },
     "brain": {
-      "status": "site",
-      "said": "The brain is odd. It has, like, a lot of clipping and stuff. I'd prefer that we change that.",
-      "note": "It's odd, with a lot of \"clipping\" (probably the clicking crackle); change it.",
-      "plan": "A soft rushing swell as the thought races round the lobes, and a soft low thump as they all flash (no crackle).",
+      "status": "change",
+      "said": "(October 2, 2026, review) It should sound kind of electrical, similarly to the neuron. ... a subtle current instead of this wind sound.",
+      "note": "Replace the wind with a subtle electrical current (related to the neuron's, not the same).",
+      "plan": "A subtle electric current (related to the neuron's, not the same) instead of the wind.",
       "candidates": []
     },
     "eye": {
@@ -500,10 +500,10 @@
       "candidates": []
     },
     "lungs": {
-      "status": "site",
-      "said": "The lungs just sound a little bit too, almost, like, too loud, or the wind is just not the right exact sound for this, if that makes any sense. It should sound more like inhaling and exhaling. You could probably find sounds of somebody taking breaths or something and use that.",
-      "note": "Too loud, and wind isn't right; it should sound like real breathing in and out.",
-      "plan": "A real person's slow deep breath in, then out.",
+      "status": "change",
+      "said": "(October 2, 2026, review) Could you try to find different inhalation and exhalation sounds, just so I have something to compare it to?",
+      "note": "Acceptable; try other inhale and exhale recordings to compare.",
+      "plan": "Two other real inhale and exhale recordings on the board to compare with the current one.",
       "candidates": []
     },
     "tooth": {
@@ -570,10 +570,10 @@
       "candidates": []
     },
     "daisy": {
-      "status": "site",
-      "said": "For the daisies, if it's possible, I would prefer that we synchronize the sound of the little petals of the flower, so that when they hit the ground, you can kind of hear that, if that makes any sense. And then we don't need it to really make the, like, chopping or clicking sound as it spins.",
-      "note": "Sync a sound to each petal landing, and drop the chopping or clicking while it spins.",
-      "plan": "Now: a soft whirr of the spin, and a soft brush as each petal lands on the grass, in sync (no ticks).",
+      "status": "change",
+      "said": "(October 2, 2026, review) The falling petals mostly fall in sync. They could probably be synchronized just a little bit better with the sound",
+      "note": "Sync the petal-landing sounds a little better with the falling petals.",
+      "plan": "Each petal's landing tap timed to its landing.",
       "candidates": []
     },
     "fern": {
@@ -633,10 +633,10 @@
       "candidates": []
     },
     "ice-cream": {
-      "status": "site",
-      "said": "The ice cream just sounds like bubbles popping or something, or like water dripping. It should sound more intricate, like melting.",
-      "note": "It sounds like bubbles or dripping water; it should sound more like melting.",
-      "plan": "Now: a slow, thick melt with heavy drops plopping down (no bubbles or drips).",
+      "status": "keep",
+      "said": "(October 2, 2026, review) it sounds like a little bit too much like wind ... We can leave it like this.",
+      "note": "A bit windy, but acceptable as it is (leave it).",
+      "plan": "Kept as it is (he said it can stay).",
       "candidates": []
     },
     "watermelon": {
@@ -654,10 +654,10 @@
       "candidates": []
     },
     "popcorn": {
-      "status": "site",
-      "said": "The popcorn just sounds like bubbles popping, and that's close to being correct, but it needs to sound more dry, like actual popcorn would.",
-      "note": "Close, but it sounds like bubbles popping; it should be drier, like real popcorn.",
-      "plan": "Now: dry kernels popping, each a short papery bang with a little thump (no bubbly rising pops); real CC0 recordings now (popcorn-popping.mp3), with the synthesized sound as a fallback.",
+      "status": "change",
+      "said": "(October 2, 2026, review) It should actually be able to hear the pops ... you can hear the kernels popping. Like that's what you should kind of hear. It should be like a dry pop.",
+      "note": "Real, dry kernel pops (like microwave popcorn without the hum).",
+      "plan": "Real dry kernel pops, scattered and quickening, with no hum.",
       "candidates": []
     },
     "jelly": {
@@ -710,10 +710,10 @@
       "candidates": []
     },
     "pizza": {
-      "status": "site",
-      "said": "The pizza is pretty close, but we should be able to hear the cheese stretching a little bit.",
-      "note": "Pretty close, but we should hear the cheese stretching.",
-      "plan": "Now: the crust gives and the cheese stretches as the slice pulls away.",
+      "status": "change",
+      "said": "(October 2, 2026, review) The pizza doesn't need to sound so windy.",
+      "note": "Not so windy.",
+      "plan": "Its sound without the wind.",
       "candidates": []
     },
     "burger": {
@@ -738,10 +738,10 @@
       "candidates": []
     },
     "banana": {
-      "status": "site",
-      "said": "I think that the bananas are okay, but it really just sounds like tapping or something weird. Maybe we can make it sound a little different with the peeling, but not unrealistic or too cartoonish.",
-      "note": "Okay, but it sounds like tapping; the peeling should sound a bit different, realistic and not cartoonish.",
-      "plan": "Now: the peel pulled back in soft fibrous strips, for each banana (no tapping or zipper).",
+      "status": "change",
+      "said": "(October 2, 2026, review) the peeling sound is just too loud, and it sounds more like a zipper or something. We can make it more subtle.",
+      "note": "The peel is too loud and sounds like a zipper; make it subtle like a real peel.",
+      "plan": "A quiet, real banana-peel sound; nothing zipper-like.",
       "candidates": []
     },
     "cherries": {
@@ -759,10 +759,10 @@
       "candidates": []
     },
     "spinning-top": {
-      "status": "site",
-      "said": "The spinning top accelerates and has that acceleration noise. I don't really like that, and I don't want it to be, like, really windy either. You can probably find a sound pack with a spinning top noise. It has a certain sound to it, and it's usually not that overwhelming of a sound either.",
-      "note": "No acceleration noise and not windy; it should sound like a real spinning top, which is quiet.",
-      "plan": "Now: a quiet, steady whirr that wobbles as it precesses and slowly sinks (no rising hum, no wind); real CC0 recordings now (spinning-top-spin.mp3), with the synthesized sound as a fallback.",
+      "status": "change",
+      "said": "(October 2, 2026, review) it should actually kind of make the spinning noise, and the spinning noise shouldn't be so loud and kind of awkward ... as the thing gets faster, the spinning sound kind of gets a little bit louder",
+      "note": "The spin sound more subtle, in sync with the speed (louder as it spins faster), including when you spin it yourself.",
+      "plan": "A subtle spinning hum whose loudness follows the top's speed, also when you spin it yourself.",
       "candidates": []
     },
     "dice": {
@@ -780,10 +780,10 @@
       "candidates": []
     },
     "teddy-bear": {
-      "status": "site",
-      "said": "For the teddy bear, I don't really like the whistle at the beginning. It should have some other sound, or no sound there. It could just wave. It's very cute.",
-      "note": "Remove the whistle at the start; some other sound, or none, while it waves.",
-      "plan": "Now: no whistle; only a soft plush rustle as it waves.",
+      "status": "change",
+      "said": "(October 2, 2026, review) it kind of sounds like wood is stretching or something when it moves ... maybe, like, a wind or the sand kind of sound would make sense, but very subtly",
+      "note": "Sounds like wood stretching; make it a subtle soft, plush sound.",
+      "plan": "A soft, plush rustle instead of the creak.",
       "candidates": []
     },
     "yo-yo": {
@@ -801,10 +801,10 @@
       "candidates": []
     },
     "spring-toy": {
-      "status": "site",
-      "said": "For the spring toy, there actually is a sound that a spring toy makes. This sounds more like a rubber band. So if we could fix that, I'd appreciate it.",
-      "note": "It sounds like a rubber band; it should sound like a real spring toy.",
-      "plan": "Now: a metal coil spring's ringing sproing, not a rubber band; real CC0 recordings now (spring-toy-boing.mp3), with the synthesized sound as a fallback.",
+      "status": "change",
+      "said": "(October 2, 2026, review) The sound is not good. I don't know if you've ever heard what a Slinky ... sounds like in real life, but it's kind of like a... it's almost like sand",
+      "note": "Not good: make it sound like a real Slinky (a shimmering, almost sandy metallic sound).",
+      "plan": "A real Slinky sound: a soft metallic shimmer as the coils move.",
       "candidates": []
     },
     "kite": {
@@ -815,10 +815,10 @@
       "candidates": []
     },
     "paper-plane": {
-      "status": "site",
-      "said": "Paper plane is pretty close. You can maybe make the wind a little bit different, just kind of dial it back, or change it a bit.",
-      "note": "Pretty close; dial back or slightly change the wind.",
-      "plan": "Now: a papery launch and a gentler, quieter glide.",
+      "status": "change",
+      "said": "(October 2, 2026, review) the sound is almost perfect. It's just a little bit too loud.",
+      "note": "The wind a little too loud.",
+      "plan": "The same, with the wind a little lower.",
       "candidates": []
     },
     "origami-crane": {
@@ -836,10 +836,10 @@
       "candidates": []
     },
     "soap-bubbles": {
-      "status": "site",
-      "said": "The soap bubbles are really close. They could sound a little bit more like blowing bubbles, but if we have to keep them this way, it's fine.",
-      "note": "Really close; a bit more like blowing bubbles, but fine to keep.",
-      "plan": "Now: a soft breath blowing them and tiny wet pops (no pitched pops).",
+      "status": "change",
+      "said": "(October 2, 2026, review) the wind sound for, like, blowing the bubble is a little bit too loud, and the bubbles could be a little bit louder",
+      "note": "Blowing wind softer; the bubbles a little louder and more like real bubbles.",
+      "plan": "Softer blowing; the bubbles a little louder, from a real bubble recording.",
       "candidates": []
     },
     "robot": {
@@ -934,17 +934,17 @@
       "candidates": []
     },
     "jellyfish": {
-      "status": "site",
-      "said": "So the jellyfish is, like, extremely basic. The sound is really, really basic. … But it doesn't really sound like it's swimming. It just kind of sounds like a little drum, or, like, something is being, like, tapped. We could change it a little bit. I don't want wind, but we can maybe change it to sound more like it's moving in water.",
-      "note": "Very basic, like a little drum tap; it should sound like it's moving through water (no wind).",
-      "plan": "Now: two soft pushes of water as the bell pulses, with a low bloop.",
+      "status": "change",
+      "said": "(October 2, 2026, review) The sound could be just a tiny bit louder.",
+      "note": "A tiny bit louder.",
+      "plan": "The same, a little louder.",
       "candidates": []
     },
     "ladybug": {
-      "status": "site",
-      "said": "The ladybug sound is just a little too, like, robotic.",
-      "note": "A little too robotic.",
-      "plan": "Now: a beetle's real wingbeat that wanders in pitch and loudness, and a light landing.",
+      "status": "change",
+      "said": "(October 2, 2026, review) the sound is just a little bit too loud",
+      "note": "Quieter, less overwhelming.",
+      "plan": "The same, quieter.",
       "candidates": []
     },
     "snail": {
@@ -976,10 +976,10 @@
       "candidates": []
     },
     "owl": {
-      "status": "site",
-      "said": "I think the owl is pretty close. Maybe we could use a real owl sound, though. Like, the hoot could be more realistic.",
-      "note": "Pretty close, but the hoot could be a real owl's.",
-      "plan": "Now: a great horned owl's call, \"hoo, h-hoo, hooo, hoo\", low and breathy; real CC0 recordings now (owl-hoot.mp3), with the synthesized sound as a fallback.",
+      "status": "change",
+      "said": "(October 2, 2026, review) The howl of the owl, or the hoot of the owl, is too long. ... It almost sounds more like a dog howling. ... Can you find a different owl sound clip to use?",
+      "note": "The hoot is too long and sounds like a dog howling: a short, natural owl hoot recording.",
+      "plan": "A short, natural owl hoot from a real recording.",
       "candidates": []
     },
     "lorenz": {
@@ -1137,10 +1137,10 @@
       "candidates": []
     },
     "decorated-tree": {
-      "status": "site",
-      "said": "For the decorated tree, I don't need the clicking for the lights coming on. I'd rather it just play like a little bit of a real Christmas carol, or like, you know, Jingle Bells or something like that, from an actual sound pack, not just like a robotic chime or something.",
-      "note": "No clicking for the lights; play a little of a real Christmas carol (e.g., \"Jingle Bells\"), not a robotic chime.",
-      "plan": "Now: the lights come on to the start of \"Jingle Bells\" on the piano (no clicking); off, the branches' soft rustle.",
+      "status": "change",
+      "said": "(October 2, 2026, review) maybe we can make the Jingle Bells song a little bit better, like we could maybe use a different piano or find, like, another chime",
+      "note": "Jingle Bells on a nicer instrument (real chimes or bells, or a better piano).",
+      "plan": "Jingle Bells on real bells or chimes (or a better piano), at the same tempo.",
       "candidates": []
     },
     "menorah": {
@@ -1158,17 +1158,17 @@
       "candidates": []
     },
     "helicopter": {
-      "status": "site",
-      "said": "The helicopter could sound a little bit more realistic, like the blades.",
-      "note": "The blades could sound more realistic.",
-      "plan": "Now: the heavy whump of real rotor blades over the turbine's hush; real CC0 recordings now (helicopter-rotor.mp3), with the synthesized sound as a fallback.",
+      "status": "change",
+      "said": "(October 2, 2026, review) We need it to sound like the actual, like, kind of chopping of the propeller.",
+      "note": "It should sound like real rotor blades chopping.",
+      "plan": "Real rotor chop that follows the blades' speed.",
       "candidates": []
     },
     "steam-train": {
-      "status": "site",
-      "said": "The steam train should actually chug along and sound like a real steam engine.",
-      "note": "It should chug along like a real steam engine.",
-      "plan": "Now: a short steam whistle, then it chugs along with strong and soft chuffs over the wheels' rumble; real CC0 recordings now (steam-train-chug.mp3), with the synthesized sound as a fallback.",
+      "status": "change",
+      "said": "(October 2, 2026, review) It doesn't need to make that little, like, chime or bell noise or horn noise at the beginning, and the wheel noise doesn't really sound like a steam train. It should kind of chug along",
+      "note": "No bell or horn at the start; the wheels should chug like a real steam train.",
+      "plan": "No bell or horn at the start; a real steam chuff and wheel rhythm.",
       "candidates": []
     },
     "ocean-liner": {
@@ -1179,10 +1179,10 @@
       "candidates": []
     },
     "sports-car": {
-      "status": "site",
-      "said": "So for the race car, it should actually have a race car sound, and we'll get to the race car when we actually hit vehicles and go to the vehicles section here. But the race car should sound kind of like a real race car. … The sports car, I like the sound, but we need to change it to something that sounds like an actual sports car kind of revving its engine or moving or something.",
-      "note": "He likes it, but it should sound like a real sports car revving or driving.",
-      "plan": "Now: a real engine's growl, revved twice; real CC0 recordings now (sports-car-rev.mp3), with the synthesized sound as a fallback.",
+      "status": "change",
+      "said": "(October 2, 2026, review) when the exhaust kind of disappears from the back of it, it still continues to make a noise",
+      "note": "The engine keeps sounding after the exhaust has gone; stop it in sync.",
+      "plan": "The engine sound ends when the exhaust fades.",
       "candidates": []
     },
     "propeller-plane": {
@@ -1277,10 +1277,10 @@
       "candidates": []
     },
     "hoodie": {
-      "status": "approved",
-      "said": "(September 30, 2026, on the Sound Board) marked good",
-      "note": "Approved as it is.",
-      "plan": "",
+      "status": "change",
+      "said": "(October 2, 2026, review) The hoodie does not need to have so much wind.",
+      "note": "Less wind; subtler.",
+      "plan": "Its sound with less wind.",
       "candidates": []
     },
     "sunglasses": {
@@ -1305,10 +1305,10 @@
       "candidates": []
     },
     "gaussian-splatting": {
-      "status": "site",
-      "said": "(September 30, 2026, on the Sound Board) Doesn't need the ascending xylophone notes; sounds too robotic; choose something else, please.",
-      "note": "Doesn't need the ascending xylophone notes; sounds too robotic; choose something else, please.",
-      "plan": "Now: a soft patter of splats settling into place as the picture forms (no rising notes or tones).",
+      "status": "change",
+      "said": "(October 2, 2026, review) it plays almost like this robotic chord ... and then it has like almost like a xylophone noise ... it's just kind of tacky ... a subtle, descending, continuous sound as the curve is plotted ... For the sorting view ... kind of like the pebble sound, but importantly, I want it to be synchronized.",
+      "note": "Training view: drop the opening chord; instead of the xylophone notes, a subtle, continuous descending tone as the loss curve is drawn. One-splat view: the robotic sound must go; something subtle. Many-splats view: the twinkle quieter and subtler. Sorting view: a pebble-like click in sync with each splat placed, slightly different each time.",
+      "plan": "Training: no opening chord; a soft, continuous falling tone as the loss curve draws. One splat: something subtle instead of the robotic sound. Many splats: the twinkle quieter. Sorting: a pebble-like click for each splat placed, in sync, each slightly different.",
       "candidates": []
     },
     "difference-engine": {
@@ -1326,10 +1326,10 @@
       "candidates": []
     },
     "your-book": {
-      "status": "site",
-      "said": "(September 30, 2026, on the Sound Board) Sounds too much like wind or sand, not pages turning.",
-      "note": "Sounds too much like wind or sand, not pages turning.",
-      "plan": "Now: a paper page turning and the landing thud; real CC0 recordings now (book-page.mp3), with the synthesized sound as a fallback.",
+      "status": "change",
+      "said": "(October 2, 2026, review) Maybe we could use a slightly different page-turning sound depending on the book type.",
+      "note": "A page sound per book type: glossier for a magazine, different for paperback and hardcover.",
+      "plan": "A page sound per book: glossy for a magazine, papery for a paperback, fuller for a hardcover.",
       "candidates": []
     },
     "photo-album": {
@@ -1361,10 +1361,10 @@
       "candidates": []
     },
     "splat-field": {
-      "status": "site",
-      "said": "(September 30, 2026, on the Sound Board) Too robotic",
-      "note": "Too robotic",
-      "plan": "Now: a soft ripple through the field, like grass stirring, as the pulse runs out (no tones).",
+      "status": "change",
+      "said": "(October 2, 2026, review) I really don't like the sound, like this default pulse sound of the splat field. ... It sounds robotic. I don't like it.",
+      "note": "Replace the robotic, accelerating pulse; maybe a different sound per field.",
+      "plan": "No robotic pulse; a soft sound that suits each field (water for the ocean, a hush for the galaxy, a tone for the knot).",
       "candidates": []
     },
     "anatomy-atlas": {
@@ -1411,9 +1411,9 @@
     },
     "fluid-lab": {
       "status": "change",
-      "said": "(September 30, 2026, on the Sound Board) Isn't in sync with fluid pour animation, and needs to be more realistic.",
-      "note": "Isn't in sync with fluid pour animation, and needs to be more realistic.",
-      "plan": "Pours, glugs and splashes in sync with the animation, from real recordings (lane Fluids, r4). (Fluids)",
+      "said": "(October 2, 2026, review) The sound effect for it could be just a little bit louder",
+      "note": "Honey a little louder (the sound is very good).",
+      "plan": "Honey a little louder.",
       "candidates": []
     },
     "grand-piano": {
@@ -1452,10 +1452,10 @@
       "candidates": []
     },
     "periodic-table": {
-      "status": "site",
-      "said": "(September 30, 2026, on the Sound Board) Too robotic",
-      "note": "Too robotic",
-      "plan": "A soft whoosh up and a soft thud as the atom rises; a whoosh down and a soft thud as it lowers (no clicks).",
+      "status": "change",
+      "said": "(October 2, 2026, review) the whooshing sound ... doesn't need to be so loud ... I'd like for there to be, like, a faint synchronized sound that plays for each element as each of those subatomic particles gets packed into the nucleus.",
+      "note": "The whoosh on tapping an element: keep it but much more subtle. Add a faint sound in sync with each proton and neutron packing into the nucleus (not bubbles, not plastic blocks).",
+      "plan": "The tap's whoosh much quieter, plus a faint soft tick for each proton and neutron as it packs into the nucleus, in sync.",
       "candidates": []
     },
     "picture-frame": {
@@ -1830,10 +1830,10 @@
       "candidates": []
     },
     "pollen": {
-      "status": "approved",
-      "said": "",
-      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
-      "plan": "",
+      "status": "change",
+      "said": "(October 2, 2026, review) can we make the sound just a little bit less, like, loud by default?",
+      "note": "A little quieter by default.",
+      "plan": "The same sound, quieter.",
       "candidates": []
     },
     "snowflake": {
@@ -1844,10 +1844,10 @@
       "candidates": []
     },
     "amoeba": {
-      "status": "approved",
-      "said": "",
-      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
-      "plan": "",
+      "status": "change",
+      "said": "(October 2, 2026, review) we can make that almost like rubber band bounce sound a little bit louder",
+      "note": "Barely audible: louder rubbery jelly bounce, like the gummy bear's but no whistle or ding.",
+      "plan": "A louder rubbery, jelly-like bounce, close to the gummy bear's but with no whistle or ding.",
       "candidates": []
     },
     "palm": {
@@ -1858,10 +1858,10 @@
       "candidates": []
     },
     "rose": {
-      "status": "approved",
-      "said": "",
-      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
-      "plan": "",
+      "status": "change",
+      "said": "(October 2, 2026, review) we could actually have, like a little soft sound of the petal of the rose falling on the ground ... we can use that for the rose's petal when it hits the ground.",
+      "note": "Add a tiny, soft tap when a petal lands; reuse the daisies' petal-landing sound.",
+      "plan": "As now, plus the daisies' soft petal-landing tap when the petal lands.",
       "candidates": []
     },
     "dandelion": {
@@ -2271,10 +2271,10 @@
       "candidates": []
     },
     "bicycle": {
-      "status": "approved",
-      "said": "",
-      "note": "Approved as it is (the owner, September 30, 2026: everything not marked approved or needing work is approved).",
-      "plan": "",
+      "status": "change",
+      "said": "(October 2, 2026, review) I feel like the bell is maybe not realistic. It could sound more like a real bell.",
+      "note": "The bell sounds like a cartoon; use a real bicycle bell.",
+      "plan": "A real bicycle bell.",
       "candidates": []
     },
     "lighthouse": {
