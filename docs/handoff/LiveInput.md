@@ -249,6 +249,13 @@ moved below the header. Lane PR: `claude/lane-live-input-r3`, "Phase Live input 
   (cyan, drifting scanlines, glowing depth edges) beside Plain.
 - **The Live pill** sat over the header's buttons at 390 by 844; it now sits below them
   (`live3-pill-before-*` and `live3-pill-*` screenshots).
+- October 2, 17:00 UTC: main (`ced2a55`: Sound C, Physics, UI r5) merged into both branches. In
+  `src/app.js` UI r5's `tilt: "free"` and the r3 recipe `tiltLock` both stay. At 390 by 844 the Live
+  pill (top), UI r5's Record pill (bottom left) and the Physics hands bar (bottom right) don't meet;
+  on a computer the Record pill sits at the top of the stage too, so the Live pill drops below it
+  while it shows (#187's pill test checks all three at both sizes). The Operator's list (`live`,
+  `live2`, `live3` and their engine specs, `phy-engine`, `ui5-engine`, `sndc-engine`, `help`,
+  `smoke`): 137 passed.
 - **Moving photo to 3D** (new, labs, Studio shelf beside Photo to 3D): a GIF or video, its first 8
   s, up to 48 frames, 256 px on the long side; each frame's depth from the vendored model in its
   worker (196 px long side). Each splat rests at its average depth over the clip, so it sorts right.
