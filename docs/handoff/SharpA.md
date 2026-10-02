@@ -112,6 +112,11 @@ Model: Opus 5.5 (claude-opus-5-5), default effort.
 - **Holidays.** Fireworks: an even, solid crate with a calm grain, and even tubes with broad paper
   bands and a dark mouth (the bursts and the rapid taps, Fix7's item, are untouched).
 
+- October 2, 2026, 10:30 UTC: every card posted (64). Full suite with main merged in: 436 + 256 + 16
+  passed; two tests (`smoke.spec.mjs:650`, a SwiftShader console warning, and
+  `chs-engine.spec.mjs:11`) failed once in the long run and pass on their own. Pushed; PR #172 ready
+  for the owner's marks. No marks yet; an hourly check-in reads them.
+
 ## Notes
 
 - What made these toys grainy, beyond the five causes in PACKS.md 7c:
