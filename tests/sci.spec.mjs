@@ -18,7 +18,7 @@ import {
   readCifBlocks,
 } from "../src/science/crystal.js";
 import { readSmlm, readThunderstormCsv, readLocalizations, zipEntries } from "../src/science/smlm.js"; // prettier-ignore
-import { packAtom, unpackAtom, quatFromAxes, jiggleNoise, unmagnify } from "../src/science/field.js"; // prettier-ignore
+import { packAtom, unpackAtom, quatFromAxes, jiggleNoise, unmagnify, sciModifier } from "../src/science/field.js"; // prettier-ignore
 import {
   RECIPES,
   ellipsoidState,
@@ -26,7 +26,10 @@ import {
   galaxyState,
   readGalaxy,
   MICROSCOPE_DENSITY,
+  MICROSCOPE_CLOSE,
+  GALAXY_CLOSE,
   GALAXY_DENSITY,
+  THERMAL_DENSITY,
   KERNEL_SIGMA,
 } from "../src/packs/science.js";
 import { buildRecipe, quatRotate } from "../src/kit.js";
@@ -68,6 +71,37 @@ test.describe("the shelf", () => {
       expect(TOY_HELP[id]?.about, id).toBeTruthy();
       expect(RECIPES[id].credits?.length, id).toBeGreaterThan(0);
     }
+  });
+});
+
+test.describe("r2: zoom with the camera", () => {
+  test("the microscope and the galaxy zoom with a pinch or the wheel; their taps slice and peel", () => {
+    const mic = RECIPES["smlm-microscope"];
+    const gal = RECIPES["galaxy-box"];
+    expect(mic.closeUp).toEqual({ minDistance: MICROSCOPE_CLOSE });
+    expect(gal.closeUp).toEqual({ minDistance: GALAXY_CLOSE });
+    // About 150 and 60 times closer than their home views (2.9 and 3 radii).
+    expect(2.9 / MICROSCOPE_CLOSE).toBeGreaterThan(100);
+    expect(3 / GALAXY_CLOSE).toBeGreaterThan(50);
+    for (const r of [mic, gal]) expect(r.controls.some((c) => c.key === "zoom")).toBe(false);
+    expect(mic.action.key).toBe("slice");
+    expect(gal.action.key).toBe("peel");
+    // The thermal ellipsoids keep their magnifier (and no closeUp).
+    expect(RECIPES["thermal-ellipsoids"].closeUp).toBeUndefined();
+    expect(THERMAL_DENSITY).toBeLessThan(1);
+  });
+
+  test("the free shader has no magnifier; it fades what is much nearer than the view's point", () => {
+    const free = sciModifier(1, 1, { free: true });
+    const kept = sciModifier(1, 1);
+    for (const m of [free, kept]) {
+      expect(m.glsl).toMatch(/modifySplatCenter/);
+      expect(m.wgsl).toMatch(/modifySplatCenter/);
+    }
+    expect(free.glsl).toMatch(/const bool FREE = true;/);
+    expect(free.wgsl).toMatch(/const FREE: bool = true;/);
+    expect(kept.glsl).toMatch(/const bool FREE = false;/);
+    expect(free.glsl).toMatch(/uSpCam\.w/);
   });
 });
 
@@ -236,6 +270,24 @@ test.describe("crystal files", () => {
       expect(st.counts.atoms).toBe(options.structure === "crambin" ? 637 : 21);
       if (options.hydrogens === "hidden") expect(st.shownAtoms).toBe(13);
     }
+  });
+
+  // r2: the kit's pattern flag (+16 in the part field) once turned every
+  // atom's splats into the "gauss" type, so each atom drew as a big disc.
+  test("every splat keeps the type it was packed with (atoms, bonds, one-Gaussian atoms)", async () => {
+    const types = (ctx) => {
+      const n = [0, 0, 0, 0, 0, 0, 0, 0];
+      const a = ctx.buf.anim;
+      for (let i = 0; i < ctx.buf.count; i++) n[Math.round(a[i * 4] / 16) % 8]++;
+      return n;
+    };
+    const solid = types(await build("thermal-ellipsoids", 60000, {}));
+    expect(solid[1]).toBeGreaterThan(1000); // bonds
+    expect(solid[2]).toBeGreaterThan(10000); // the atoms' solid ellipsoids
+    expect(solid[3]).toBe(0);
+    const gauss = types(await build("thermal-ellipsoids", 60000, { look: "gauss" }));
+    expect(gauss[3]).toBeGreaterThan(20);
+    expect(gauss[2]).toBe(0);
   });
 });
 
