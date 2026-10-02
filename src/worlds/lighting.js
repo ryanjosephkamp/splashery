@@ -76,6 +76,39 @@ export class Lighting {
     app.scene.ambientLight = new pc.Color(...L.ambient);
   }
 
+  // Hybrid mode on strong devices (the high and max tiers, or ?frame=1): the
+  // engine's camera frame, a film-like finish over the whole picture. A
+  // touch of bloom on bright highlights, a little more depth in the
+  // colors, soft ambient occlusion where models meet the ground, and a light
+  // vignette. It renders the scene to its own target first, so it costs a
+  // pass and some memory: weaker devices go without.
+  enableFrame() {
+    const app = this.view.app;
+    const cam = this.view.camera.camera;
+    const f = new pc.CameraFrame(app, cam);
+    f.rendering.toneMapping = pc.TONEMAP_NEUTRAL;
+    f.rendering.samples = 4;
+    f.rendering.sceneDepthMap = true;
+    f.bloom.intensity = 0.012;
+    f.bloom.blurLevel = 10;
+    f.colorEnhance.enabled = true;
+    f.colorEnhance.vibrance = 0.18;
+    f.colorEnhance.shadows = -0.08;
+    f.colorEnhance.highlights = -0.12;
+    f.colorEnhance.dehaze = 0.12;
+    f.vignette.intensity = 0.22;
+    f.vignette.inner = 0.55;
+    f.vignette.outer = 1.25;
+    f.ssao.type = pc.SSAOTYPE_LIGHTING;
+    f.ssao.intensity = 0.45;
+    f.ssao.radius = 1.2;
+    f.ssao.samples = 10;
+    f.ssao.scale = 0.5;
+    f.update();
+    this.frame = f;
+    return f;
+  }
+
   // Splats mode: the depth of the ground and the shadow catcher over it.
   buildCatcher(terrain) {
     const view = this.view;

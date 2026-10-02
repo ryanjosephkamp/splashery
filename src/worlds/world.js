@@ -6,7 +6,7 @@
 
 import { Terrain, TERRAIN_LEVELS, BLADES, groundShare } from "./terrain.js";
 import { buildWater, buildSky, buildOcean, WATER_LEVELS } from "./water.js";
-import { bakeProp, thinOut, buildSign, PROP_TYPES, PROP_STRIDES } from "./props.js";
+import { bakeProp, thinOut, buildSign, gradeFoliage, PROP_TYPES, PROP_STRIDES } from "./props.js";
 import { buildCharacter, JOINTS, BODY, pose, stepGait, WALK_SPEED, RUN_SPEED, CHARACTER_SPLATS } from "./character.js"; // prettier-ignore
 import { Physics } from "./physics.js";
 import { FollowCamera } from "./camera.js";
@@ -14,17 +14,21 @@ import { planLevels } from "./lod.js";
 import { WORLD_BUDGETS } from "./tiers.js";
 import { Lighting } from "./lighting.js";
 import { loadHybridAssets, groundTiles, groundMaterial, groundColor, waterMaterial, waterMeshes, skyDome, skyMaterial, useHDRI, signBoard } from "./hybrid.js"; // prettier-ignore
-import { loadMeshCharacter, stepMeshCharacter } from "./mesh-character.js";
+import { loadMeshCharacter, loadHuman, loadSplatPerson, stepMeshCharacter } from "./mesh-character.js"; // prettier-ignore
+import { MeshProps, MESH_PROP_TYPES } from "./mesh-props.js";
 import * as pc from "../pc.js";
 import { mulberry32, mixSeed } from "../noise.js";
 import { rgb } from "../kit.js";
+
+// Prop types whose leaves hybrid mode regrades (props.js, gradeFoliage).
+const FOLIAGE = ["palm", "pine", "oak", "bush"];
 
 const DEG = 180 / Math.PI;
 const nextFrame = () => new Promise((r) => requestAnimationFrame(() => r()));
 
 export class World {
   // mode: "splats" or "hybrid" (docs/WORLDS.md, "Rendering").
-  // characterModel: "splats" or "mesh" (mesh-character.js).
+  // characterModel: "splats", "mesh", "kenney" or "auto" (mesh-character.js).
   constructor(
     view,
     def,
@@ -34,6 +38,7 @@ export class World {
       mode = def.render,
       shadows = true,
       characterModel = def.character.model,
+      frame = null,
     } = {},
   ) {
     // prettier-ignore
@@ -43,7 +48,15 @@ export class World {
     this.mode = mode === "hybrid" ? "hybrid" : "splats";
     this.hybrid = this.mode === "hybrid";
     this.shadows = shadows;
-    this.characterModel = characterModel === "mesh" ? "mesh" : "splats";
+    // The camera frame (lighting.js): hybrid mode on high and max, or as
+    // asked (?frame=0|1).
+    this.useFrame = this.hybrid && (frame ?? ["high", "max"].includes(tier));
+    // "auto": the realistic person in hybrid mode, the splat character in
+    // splats mode.
+    const cm = characterModel === "auto" ? (this.hybrid ? "mesh" : "splats") : characterModel;
+    this.characterModel = ["mesh", "kenney", "splat-person"].includes(cm) ? cm : "splats";
+    // Walking and running speeds (the realistic person's own are slower).
+    this.speeds = { walk: WALK_SPEED, run: RUN_SPEED };
     this.budget = WORLD_BUDGETS[tier] || WORLD_BUDGETS.mid;
     this.reducedMotion = reducedMotion;
     // Landmarks stand on level ground: each flattens a small circle.
@@ -85,6 +98,7 @@ export class World {
     // One sun, shadows, haze and the grade, in both modes.
     const budget = this.shadows ? this.budget : { ...this.budget, shadows: 0 };
     this.lighting = new Lighting(view, def, budget, this.mode);
+    if (this.useFrame) this.lighting.enableFrame();
     this.skyCount = 0;
     if (this.hybrid) await this.buildModels(progress);
     else {
@@ -133,7 +147,7 @@ export class World {
     progress(0.8, "Painting the signs…");
     this.buildSigns();
     progress(0.86, "Making your character…");
-    if (this.characterModel === "mesh") await this.buildMeshCharacter();
+    if (this.characterModel !== "splats") await this.buildMeshCharacter();
     else this.buildCharacter();
     this.spawn();
     progress(0.9, "Growing the grass…");
@@ -207,8 +221,10 @@ export class World {
   // Where every prop stands: the world file's own list, then scatter.
   placements() {
     const def = this.def;
-    const out = def.props.map((p) => ({ ...p }));
-    for (const s of def.scatter) {
+    // Props and scatters marked for the other mode are left out.
+    const here = (x) => !x.only || x.only === this.mode;
+    const out = def.props.filter(here).map((p) => ({ ...p }));
+    for (const s of def.scatter.filter(here)) {
       const r = mulberry32(mixSeed(s.seed, "scatter"));
       const half = this.terrain.half - 4;
       let placed = 0;
@@ -255,7 +271,14 @@ export class World {
     const bakes = new Map();
     let done = 0;
     const kinds = new Set(list.map((p) => `${p.type}|${p.seed}|${p.detail}|${JSON.stringify(p.options)}`)); // prettier-ignore
+    // Hybrid mode draws rocks, stones, driftwood and stumps as models
+    // (mesh-props.js).
+    const models = [];
     for (const p of list) {
+      if (this.hybrid && MESH_PROP_TYPES[p.type]) {
+        models.push(p);
+        continue;
+      }
       const type = PROP_TYPES[p.type];
       if (!type) {
         console.warn(`Worlds: unknown prop type "${p.type}" (${p.id}) is left out.`);
@@ -270,6 +293,8 @@ export class World {
           options: p.options,
           count: type.count * this.budget.props * p.detail,
         });
+        // Hybrid mode: trees and bushes in deeper greens, shaded inside.
+        if (this.hybrid && FOLIAGE.includes(p.type)) gradeFoliage(baked.buf, p.seed);
         const levels = PROP_STRIDES.map((s) => this.view.container(thinOut(baked.buf, s)));
         bakes.set(key, { ...baked, levels, counts: levels.map((c) => c.splatCount) });
         done++;
@@ -311,6 +336,25 @@ export class World {
       }
     }
     this.bakes = bakes;
+    if (models.length) await this.buildMeshProps(models, progress);
+  }
+
+  async buildMeshProps(list, progress) {
+    progress(0.76, "Setting the rocks…");
+    const mp = new MeshProps(this.view.app, { shadows: this.shadows && this.budget.shadows > 0, near: this.budget.near }); // prettier-ignore
+    await mp.load(new Set(list.map((p) => MESH_PROP_TYPES[p.type].kind)));
+    for (const p of list) {
+      const type = MESH_PROP_TYPES[p.type];
+      const y = p.y ?? this.terrain.heightAt(p.at[0], p.at[1]) + p.lift;
+      if (type.as === "scatter") {
+        mp.addScatter(p, y, type);
+        continue;
+      }
+      const col = mp.add(p, y, type);
+      if (col && p.collider !== false) this.physics.add(col);
+    }
+    mp.finishScatter();
+    this.meshProps = mp;
   }
 
   buildSigns() {
@@ -380,12 +424,27 @@ export class World {
   // The lit, skinned character (mesh-character.js). In splats mode, where
   // no sky lights the models, a soft ambient light stands in for it.
   async buildMeshCharacter() {
-    const { model } = await loadMeshCharacter(this.view.app);
+    const look = this.def.character;
+    const cm = this.characterModel;
+    const count = CHARACTER_SPLATS[this.tier] ?? CHARACTER_SPLATS.mid;
+    const {
+      model,
+      meta,
+      splats = 0,
+    } = cm === "mesh"
+      ? await loadHuman(this.view.app, { tier: this.tier, look })
+      : cm === "splat-person"
+        ? await loadSplatPerson(this.view.app, this.view, { tier: this.tier, look, count })
+        : await loadMeshCharacter(this.view.app);
+    if (cm !== "kenney") this.speeds = { walk: meta.walkSpeed, run: meta.runSpeed };
     const root = this.view.group("character");
     root.addChild(model);
+    // The first pose now (idle), not the model's rest pose. (Only once it
+    // has a parent: the clips find their bones from there.)
+    if (this.characterModel !== "kenney") model.anim.update(0.001);
     this.joints = { root };
     this.meshCharacter = model;
-    this.charCount = 0;
+    this.charCount = splats;
     if (!this.hybrid) this.view.app.scene.ambientLight = new pc.Color(...this.def.light.hazeColor.map((v) => v * 0.55)); // prettier-ignore
   }
 
@@ -536,6 +595,7 @@ export class World {
     }
     const f = this.view.frameMs.slice(-60).sort((a, b) => a - b);
     out.frameMs = f.length ? f[Math.floor(f.length / 2)] : 0;
+    if (this.meshProps) out.meshProps = this.meshProps.stats();
     return out;
   }
 
@@ -546,12 +606,14 @@ export class World {
     dt = Math.min(dt, 0.1);
     this.time += dt;
     this.stepCharacter(dt, input);
-    const run = Math.max(0, Math.min(1, (this.char.gait.speed - WALK_SPEED) / (RUN_SPEED - WALK_SPEED))); // prettier-ignore
+    const { walk: ws, run: rs } = this.speeds;
+    const run = Math.max(0, Math.min(1, (this.char.gait.speed - ws) / (rs - ws)));
     const { pos, target } = this.overview
       ? this.overviewPose(dt)
       : this.camera.update(this.focus(), dt, run, this.time);
     this.view.setCameraPose(pos, target);
     this.lighting.update(pos);
+    this.meshProps?.update(pos);
     if (this.hybrid) this.sky.setPosition(pos[0], pos[1], pos[2]);
     else this.sky.setPosition(pos[0], this.terrain.water, pos[2]);
     this.waterMaterial?.setParameter("uWdWater", [this.reducedMotion ? 0 : this.time, 0, 0, 0]);
@@ -586,7 +648,7 @@ export class World {
       const dx = forward[0] * input.y + right[0] * input.x;
       const dz = forward[1] * input.y + right[1] * input.x;
       const l = Math.hypot(dx, dz) || 1;
-      speed = (input.run ? RUN_SPEED : WALK_SPEED) * Math.min(1, amt);
+      speed = (input.run ? this.speeds.run : this.speeds.walk) * Math.min(1, amt);
       const want = Math.atan2(dx / l, dz / l);
       c.facing = turnToward(c.facing, want, dt * 10);
       const res = this.physics.move(c.pos, (dx / l) * speed * dt, (dz / l) * speed * dt);
