@@ -70,6 +70,17 @@ vec4 flQuat(vec3 a, vec3 b, vec3 c) {
 vec3 flAny(vec3 n) {
   return normalize(cross(n, abs(n.y) < 0.9 ? vec3(0.0, 1.0, 0.0) : vec3(1.0, 0.0, 0.0)));
 }
+float flHash(vec3 p) { return fract(sin(dot(p, vec3(127.1, 311.7, 74.7))) * 43758.5453); }
+// Value noise (a lava crust's cracks follow its ridges).
+float flNoise(vec3 p) {
+  vec3 i = floor(p);
+  vec3 f = fract(p);
+  vec3 u = f * f * (3.0 - 2.0 * f);
+  return mix(mix(mix(flHash(i), flHash(i + vec3(1.0, 0.0, 0.0)), u.x),
+                 mix(flHash(i + vec3(0.0, 1.0, 0.0)), flHash(i + vec3(1.0, 1.0, 0.0)), u.x), u.y),
+             mix(mix(flHash(i + vec3(0.0, 0.0, 1.0)), flHash(i + vec3(1.0, 0.0, 1.0)), u.x),
+                 mix(flHash(i + vec3(0.0, 1.0, 1.0)), flHash(i + vec3(1.0, 1.0, 1.0)), u.x), u.y), u.z);
+}
 vec3 flRamp(float f) {
   vec3 blue = vec3(0.25, 0.42, 1.0);
   vec3 white = vec3(1.0, 0.93, 0.62);
@@ -203,8 +214,11 @@ void modifySplatColor(vec3 center, inout vec4 color) {
     if (m1.y > 0.0) {
       // Lava: its own light by its heat, a dark crust where it cooled.
       vec3 hot = mix(vec3(1.0, 0.32, 0.04), vec3(1.0, 0.78, 0.25), smoothstep(0.75, 1.0, flTone));
-      vec3 crust = vec3(0.16, 0.05, 0.03) * lit + vec3(spec * 0.25);
-      rgb = mix(crust, hot * 1.25, smoothstep(0.3, 0.85, flTone) * m1.y);
+      // (r5: a darker basalt crust, and glowing cracks where it parted)
+      vec3 crust = vec3(0.09, 0.06, 0.05) * lit + vec3(spec * 0.25);
+      float vein = 1.0 - smoothstep(0.0, 0.07, abs(flNoise(center * 11.0) - 0.5));
+      float g = max(smoothstep(0.5, 0.85, flTone), vein * smoothstep(0.05, 0.4, flTone) * 0.85);
+      rgb = mix(crust, hot * 1.25, g * m1.y);
     }
   } else if (flKind < 2.5) {
     float lit = 0.86 + 0.14 * max(dot(vec3(0.0, 1.0, 0.0), L), 0.0);
@@ -299,6 +313,16 @@ fn flAny(n: vec3f) -> vec3f {
   var r = vec3f(1.0, 0.0, 0.0);
   if (abs(n.y) < 0.9) { r = vec3f(0.0, 1.0, 0.0); }
   return normalize(cross(n, r));
+}
+fn flHash(p: vec3f) -> f32 { return fract(sin(dot(p, vec3f(127.1, 311.7, 74.7))) * 43758.5453); }
+fn flNoise(p: vec3f) -> f32 {
+  let i = floor(p);
+  let f = fract(p);
+  let u = f * f * (3.0 - 2.0 * f);
+  return mix(mix(mix(flHash(i), flHash(i + vec3f(1.0, 0.0, 0.0)), u.x),
+                 mix(flHash(i + vec3f(0.0, 1.0, 0.0)), flHash(i + vec3f(1.0, 1.0, 0.0)), u.x), u.y),
+             mix(mix(flHash(i + vec3f(0.0, 0.0, 1.0)), flHash(i + vec3f(1.0, 0.0, 1.0)), u.x),
+                 mix(flHash(i + vec3f(0.0, 1.0, 1.0)), flHash(i + vec3f(1.0, 1.0, 1.0)), u.x), u.y), u.z);
 }
 fn flRamp(f: f32) -> vec3f {
   let blue = vec3f(0.25, 0.42, 1.0);
@@ -424,8 +448,10 @@ fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {
     alpha = 1.0;
     if (m1.y > 0.0) {
       let hot = mix(vec3f(1.0, 0.32, 0.04), vec3f(1.0, 0.78, 0.25), smoothstep(0.75, 1.0, flTone));
-      let crust = vec3f(0.16, 0.05, 0.03) * lit + vec3f(spec * 0.25);
-      rgb = mix(crust, hot * 1.25, smoothstep(0.3, 0.85, flTone) * m1.y);
+      let crust = vec3f(0.09, 0.06, 0.05) * lit + vec3f(spec * 0.25);
+      let vein = 1.0 - smoothstep(0.0, 0.07, abs(flNoise(center * 11.0) - 0.5));
+      let g = max(smoothstep(0.5, 0.85, flTone), vein * smoothstep(0.05, 0.4, flTone) * 0.85);
+      rgb = mix(crust, hot * 1.25, g * m1.y);
     }
   } else if (flKind < 2.5) {
     let lit = 0.86 + 0.14 * max(dot(vec3f(0.0, 1.0, 0.0), L), 0.0);
