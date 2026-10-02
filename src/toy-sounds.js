@@ -381,6 +381,15 @@ export const TOY_SOUNDS = {
     { voice: "metal", at: 2.3, f: 470, decay: 0.7, bright: 0.6, vol: 0.9 },
   ],
   // ---- Shapes -----------------------------------------------------------------------
+  // A soft pop onto its edge, a roll that circles faster as it leans lower, and a settle.
+  torus: [
+    { voice: "thud", f: 120, bright: 0.2, vol: 0.55 },
+    { voice: "rumble", at: 0.35, f: 150, rate: 5, decay: 1.4, vol: 0.32 },
+    { voice: "rumble", at: 1.05, f: 175, rate: 8, decay: 1.3, vol: 0.34 },
+    { voice: "rumble", at: 1.75, f: 205, rate: 12, decay: 1.0, vol: 0.36 },
+    { voice: "rumble", at: 2.35, f: 235, rate: 18, decay: 0.7, vol: 0.36 },
+    { voice: "thud", at: 3.05, f: 100, bright: 0.25, vol: 0.65 },
+  ],
   blob: [
     { voice: "gloop", f: 140, decay: 1.2 },
     { voice: "gloop", at: 1.8, f: 110, decay: 0.9, vol: 0.7 },
@@ -2495,6 +2504,28 @@ export const TOY_SOUNDS = {
   // Sound B (his note: too robotic): a soft ripple through the field, like
   // grass stirring, as the pulse runs out.
   "splat-field": { voice: "rustle", f: 3000, n: 30, decay: 2.4, bright: 0.3, vol: 0.35 },
+  // ---- Science (lane Science) ----------------------------------------------------------
+  // Quiet and subtle (PACKS.md 7e): atoms make no sound, so the jiggle is a faint
+  // jostle of tiny taps under a soft breath, and it settles with a softer one.
+  "thermal-ellipsoids": {
+    on: [
+      { voice: "patter", f: 2400, n: 18, decay: 1.4, vol: 0.35 },
+      { voice: "breath", f: 700, to: 1, decay: 1.2, vol: 0.3 },
+    ],
+    off: { voice: "breath", f: 600, to: 0.6, decay: 1, vol: 0.3 },
+  },
+  // A microscope's focus knob turning smoothly while the view dives in (about 2.6 s),
+  // and turning back, a little lower, as it comes out.
+  "smlm-microscope": {
+    on: { voice: "scrape", f: 420, rate: 4, decay: 4.4, vol: 0.35 },
+    off: { voice: "scrape", f: 360, rate: 4, decay: 4, vol: 0.3 },
+  },
+  // Space is silent: a long, soft breath as the view glides into the gas, and a
+  // lower one as it pulls back out.
+  "galaxy-box": {
+    on: { voice: "breath", f: 500, to: 0.8, decay: 2.8, vol: 0.35 },
+    off: { voice: "breath", f: 400, to: 1.2, decay: 2.4, vol: 0.3 },
+  },
   // ---- Fluid lab (lane Fluids) ------------------------------------------------------
   // A pour's splash and glug (each scene plays its own through cues: a pour,
   // a thick gloop for honey and lava, a splash, a breath on the candle).

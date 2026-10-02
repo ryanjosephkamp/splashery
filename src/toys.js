@@ -33,6 +33,7 @@ export const CATEGORIES = [
   { id: "pictures", label: "Pictures and pages" },
   { id: "studio", label: "Studio" },
   { id: "lab", label: "Lab" },
+  { id: "science", label: "Science" },
   { id: "holidays", label: "Holidays" },
   { id: "music", label: "Music" },
   { id: "vehicles", label: "Vehicles" },
@@ -111,6 +112,15 @@ export const TOYS = [
     },
   },
   {
+    id: "torus",
+    label: "Torus",
+    category: "shapes",
+    kind: "kit",
+    pack: "shapes-torus",
+    tags: "ring donut doughnut bagel swim ring float geometry math shape",
+    camera: { yaw: 0.4, pitch: 0.62, roll: 0, distance: 5 },
+  },
+  {
     id: "blob",
     label: "Jelly blob",
     category: "shapes",
@@ -126,22 +136,6 @@ export const TOYS = [
     },
   },
   {
-    id: "donut",
-    label: "Donut",
-    category: "shapes",
-    tags: "doughnut torus food sprinkles frosting generated",
-    kind: "procedural",
-    generator: {
-      shape: "torus",
-      palette: "frosting",
-      seed: 5,
-      sizeJitter: 0.3,
-      roughness: 0.2,
-      colorNoise: 0.3,
-    },
-    camera: { yaw: 0.4, pitch: 0.62, roll: 0, distance: 5 },
-  },
-  {
     id: "knot",
     label: "Neon knot",
     category: "shapes",
@@ -154,22 +148,6 @@ export const TOYS = [
       sizeJitter: 0.3,
       roughness: 0.15,
       colorNoise: 0.15,
-    },
-  },
-  {
-    id: "planet",
-    label: "Tiny planet",
-    category: "shapes",
-    tags: "earth world globe space generated v1",
-    kind: "procedural",
-    note: "A tribute to Splashery v1",
-    generator: {
-      shape: "sphere",
-      palette: "planet",
-      seed: 3,
-      sizeJitter: 0.3,
-      roughness: 0.2,
-      colorNoise: 0.25,
     },
   },
   // ---- More captured scans (CC BY 4.0, from SuperSplat) ----
@@ -1053,6 +1031,32 @@ export const TOYS = [
     tags: "planet ice giant blue dark spot wind",
   },
   {
+    id: "planet",
+    label: "Tiny planet",
+    category: "space",
+    tags: "earth world globe space generated v1 mars moon jupiter neptune",
+    kind: "procedural",
+    note: "A tribute to Splashery v1",
+    // Planets to pick (lane Shelves): each look is the same tiny-planet
+    // generator with its own colors; only the look's id is saved.
+    lookLabel: "Planet",
+    looks: [
+      { id: "earth", label: "Earth" },
+      { id: "mars", label: "Mars", generator: { palette: "mars" } },
+      { id: "moon", label: "The Moon", generator: { palette: "moon" } },
+      { id: "jupiter", label: "Jupiter", generator: { palette: "jupiter" } },
+      { id: "neptune", label: "Neptune", generator: { palette: "neptune" } },
+    ],
+    generator: {
+      shape: "sphere",
+      palette: "planet",
+      seed: 3,
+      sizeJitter: 0.3,
+      roughness: 0.2,
+      colorNoise: 0.25,
+    },
+  },
+  {
     id: "aurora-planet",
     label: "Aurora world",
     category: "space",
@@ -1425,14 +1429,6 @@ export const TOYS = [
     kind: "kit",
     pack: "gems",
     tags: "gem jewel oyster shell lustre sea open",
-  },
-  {
-    id: "crystal-ball",
-    label: "Crystal ball",
-    category: "gems",
-    kind: "kit",
-    pack: "gems",
-    tags: "glass orb magic mist fortune stand swirl",
   },
 
   // ---- Pack: anatomy ----
@@ -1901,6 +1897,22 @@ export const TOYS = [
     pack: "food",
     tags: "french biscuits pastel almond sweet stack",
     camera: { yaw: 0.55, pitch: 0.3, roll: 0, distance: 4.1 },
+  },
+  {
+    id: "donut",
+    label: "Donut",
+    category: "food",
+    tags: "doughnut torus food sprinkles frosting generated",
+    kind: "procedural",
+    generator: {
+      shape: "torus",
+      palette: "frosting",
+      seed: 5,
+      sizeJitter: 0.3,
+      roughness: 0.2,
+      colorNoise: 0.3,
+    },
+    camera: { yaw: 0.4, pitch: 0.62, roll: 0, distance: 5 },
   },
   {
     id: "gummy-bear",
@@ -2597,6 +2609,14 @@ export const TOYS = [
     pack: "medieval",
     tags: "magic crystal ball fantasy spell swirl sparkles",
     camera: { yaw: 0.55, pitch: 0.28, roll: 0, distance: 4.4 },
+  },
+  {
+    id: "crystal-ball",
+    label: "Crystal ball",
+    category: "medieval",
+    kind: "kit",
+    pack: "gems",
+    tags: "glass orb magic mist fortune stand swirl",
   },
 
   // ---- Pack: animals ----
@@ -3418,6 +3438,37 @@ export const TOYS = [
     labs: true,
     tags: "gpu field galaxy spiral ocean waves sea knot flow particles shader lab experiment",
     camera: { yaw: 0.3, pitch: 0.85, roll: 0, distance: 3.0 },
+  },
+  // ---- Pack: science (lane Science) ----
+  {
+    id: "thermal-ellipsoids",
+    label: "Thermal ellipsoids",
+    category: "science",
+    kind: "kit",
+    pack: "science",
+    labs: true,
+    tags: "crystal crystallography cif mmcif pdb anisotropic displacement ellipsoid ortep atoms vibration uncertainty gaussian science",
+    camera: { yaw: 0.35, pitch: 0.3, roll: 0, distance: 2.9 },
+  },
+  {
+    id: "smlm-microscope",
+    label: "Super-resolution microscope",
+    category: "science",
+    kind: "kit",
+    pack: "science",
+    labs: true,
+    tags: "microscope super resolution smlm storm palm paint localization thunderstorm cell microtubules clathrin fluorescence nanometer science",
+    camera: { yaw: 0, pitch: 0.12, roll: 0, distance: 2.9 },
+  },
+  {
+    id: "galaxy-box",
+    label: "Galaxy in a box",
+    category: "science",
+    kind: "kit",
+    pack: "science",
+    labs: true,
+    tags: "galaxy simulation fire gizmo sph gas particles temperature dwarf cosmology astrophysics hot cold disk science",
+    camera: { yaw: 0.3, pitch: 1.0, roll: 0, distance: 3.0 },
   },
   // ---- Pack: fluid-lab (lane Fluids) ----
   {
