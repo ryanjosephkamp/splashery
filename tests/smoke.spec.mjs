@@ -99,7 +99,7 @@ test.describe("Splashery app (WebGL2)", () => {
     await waitForToy(page, "Cactus");
     const cards = page.locator(".toy-card");
     await expect(cards).toHaveCount(TOYS.length);
-    for (const id of ["cactus", "strawberry", "cookie", "bee", "blob", "donut", "knot", "planet"]) {
+    for (const id of ["cactus", "strawberry", "cookie", "bee", "torus", "blob", "knot"]) {
       await expect(page.locator(`.toy-card[data-toy='${id}'] img`)).toHaveJSProperty(
         "complete",
         true,
@@ -130,7 +130,7 @@ test.describe("Splashery app (WebGL2)", () => {
     const shown = () =>
       page.locator("#shelf .toy-card").evaluateAll((cards) => cards.map((c) => c.dataset.toy));
     await page.click(".chip[data-category='shapes']");
-    expect(await shown()).toEqual(["blob", "donut", "knot", "planet"]);
+    expect(await shown()).toEqual(["torus", "blob", "knot"]);
     await expect(page.locator(".chip[data-category='shapes']")).toHaveAttribute(
       "aria-pressed",
       "true",
