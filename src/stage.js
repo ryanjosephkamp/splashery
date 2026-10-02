@@ -61,6 +61,7 @@ export class Stage {
     this.weak = weak;
     this.pixelCap = pixelRatio;
     this.adaptive = adaptive;
+    this.nearFollow = false; // Science r2: the near clip follows a closeUp toy's camera
     this.reduced = false;
     this.busy = false;
     this.frameAvg = 0;
@@ -261,6 +262,10 @@ export class Stage {
     const portrait = this.canvas.width < this.canvas.height;
     if (e.camera.horizontalFov !== portrait) e.camera.horizontalFov = portrait;
     e.setPosition(pose.position[0], pose.position[1], pose.position[2]);
+    // Science r2: for a toy with a closeUp, the near clip follows the camera
+    // in (0.02, as always, from a distance of 1 on).
+    const near = this.nearFollow && Number.isFinite(pose.distance) ? Math.min(0.02, pose.distance * 0.02) : 0.02; // prettier-ignore
+    if (e.camera.nearClip !== near) e.camera.nearClip = near;
     e.setRotation(
       new pc.Quat(pose.rotation[0], pose.rotation[1], pose.rotation[2], pose.rotation[3]),
     );
@@ -319,6 +324,38 @@ export class Stage {
     this.toy = { entity, resource, asset, owned, kit, rig };
     this.requestRender();
     return this.toy;
+  }
+
+  // Lane Physics: the whole toy picked up in Hands-on. Moves the toy's
+  // entity, and its add-on, sheets and fluid layers with it, by a rigid
+  // pose about `pivot` (world): x' = q (x - pivot) + pivot + t. null puts
+  // them back where they were built.
+  setToyPose(pose) {
+    const t = this.toy;
+    if (!t) return;
+    const ents = [t.entity, t.addon?.entity, ...(t.sheets || []).map((s) => s.entity), ...(t.layers || []).map((l) => l.entity)]; // prettier-ignore
+    for (const e of ents) {
+      if (!e) continue;
+      if (!e.spBase) {
+        if (!pose) continue;
+        e.spBase = { p: e.getLocalPosition().clone(), r: e.getLocalRotation().clone() };
+      }
+      const b = e.spBase;
+      if (!pose) {
+        e.setLocalPosition(b.p);
+        e.setLocalRotation(b.r);
+        e.spBase = null;
+        continue;
+      }
+      const q = new pc.Quat(pose.q[0], pose.q[1], pose.q[2], pose.q[3]);
+      const pv = new pc.Vec3(pose.pivot[0], pose.pivot[1], pose.pivot[2]);
+      const rel = new pc.Vec3().sub2(b.p, pv);
+      q.transformVector(rel, rel);
+      rel.add(pv).add(new pc.Vec3(pose.t[0], pose.t[1], pose.t[2]));
+      e.setLocalPosition(rel);
+      e.setLocalRotation(new pc.Quat().mul2(q, b.r));
+    }
+    this.requestRender();
   }
 
   // A scan rig's add-on: a small kit-built splat cloud (a flame, flowers, a

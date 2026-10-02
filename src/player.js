@@ -39,6 +39,7 @@ import { pickSharpness, sharpOff } from "./sharpness.js"; // Sharpness
 import { createScene, THEMES } from "./state.js";
 import { mulberry32, mixSeed, hash32 } from "./noise.js";
 import { Pictures } from "./pictures.js"; // Pictures
+import { HandsOn } from "./physics/hands-on.js"; // lane Physics
 
 export { NoGPUError };
 
@@ -138,6 +139,7 @@ export class Player {
     this.pickDirty = true;
     this.lastPoseKey = "";
     this.motion = new MotionDriver();
+    this.handsOn = new HandsOn(this); // lane Physics
     // Under reduced motion, toys only move once someone asks them to.
     this.motionAllowed = !this.reducedMotion;
     this.patternOn = false;
@@ -362,6 +364,7 @@ export class Player {
       Object.assign(info, { id: null, label: file.name, kind: "file", bytes: file.size });
     }
     this.toyInfo = info;
+    this.handsOn.attach(info); // lane Physics
     // Lab: a sharper splat kernel, labs only (src/kernels.js).
     const kernelParam = new URLSearchParams(location.search).get("kernel");
     this.stage.setKernel(pickKernel({ labs: labsOn(), param: kernelParam, recipe: info.kernel }));
@@ -383,6 +386,12 @@ export class Player {
     this.camera.fit(info.radius, info.center);
     // Pictures: a page viewer comes close enough to read a page's small print.
     if (this.pictures) this.camera.minDistance = info.radius * 0.3;
+    // Science r2: a recipe's closeUp ({ minDistance } in toy radii) lets the
+    // camera come that close, so a pinch or the wheel zooms all the way in
+    // (the near clip follows; see Stage.setCameraPose).
+    const close = info.closeUp?.minDistance;
+    this.stage.nearFollow = Number.isFinite(close) && close > 0;
+    if (this.stage.nearFollow) this.camera.minDistance = info.radius * close;
     this.time = 0;
     this.idle.pokeAt = 0;
     this.idle.pokes = 0;
@@ -540,6 +549,7 @@ export class Player {
       lum: ctx.lum,
       kernel: recipe.kernel, // Lab
       pickAlpha: recipe.pickAlpha, // Lab r2
+      closeUp: recipe.closeUp || null, // Science r2
       recipe,
       options,
       credit: def.credit || null,
@@ -735,6 +745,8 @@ export class Player {
       profile: this.profile,
       seed: ctx.g?.seed ?? 1,
       transform: ctx.transform,
+      // Fluids r4: the liquid's sounds come from the simulation.
+      onCue: (cues) => !this.frozen && this.emit("cue", cues),
     });
   }
 
@@ -1043,7 +1055,9 @@ export class Player {
 
   // A one-finger drag pans (instead of turning) on a picture toy seen close up.
   pansHere() {
-    return !!this.pictures && this.camera.cur.distance < (this.toyInfo?.radius || 1) * 1.6;
+    // Science r2: so does a toy with a closeUp, close up.
+    const close = !!this.pictures || !!this.toyInfo?.closeUp;
+    return close && this.camera.cur.distance < (this.toyInfo?.radius || 1) * 1.6;
   }
 
   // A container in the kit format for a picture sheet.
@@ -1198,6 +1212,8 @@ export class Player {
   // The toy's tap action (open the lid, blow out the candles), or a hop.
   // `world` is where a tap on the toy landed (null from the Play button).
   act(world = null) {
+    // Lane Physics: pieces moved in Hands-on go home before the toy's tap.
+    if (this.handsOn.mode === "pieces") this.handsOn.reset();
     const r = this.motion.act(this.time, world ? this.toRecipe(world) : null);
     if (r.options) {
       this.switchTo(r);
@@ -1309,7 +1325,8 @@ export class Player {
       const k = Math.min(1, (this.time - d.start) / 0.9) * d.floor * 0.5;
       this.camera.follow = [d.gravity[0] * k, d.gravity[1] * k, d.gravity[2] * k];
     } else {
-      this.camera.follow = [0, 0, 0];
+      // Lane Physics: the view drifts after a toy tossed in Hands-on.
+      this.camera.follow = this.handsOn.follow() || [0, 0, 0];
     }
     const moving = this.frozen ? false : this.camera.update(dt);
     const pose = this.camera.pose();
@@ -1338,6 +1355,8 @@ export class Player {
       if (idleNow && idleMode === "pokes" && this.time >= this.idle.pokeAt) this.idlePoke();
     }
 
+    // Lane Physics: Hands-on play moves the toy, or its pieces.
+    const handsBusy = !this.loading && this.handsOn.step(this.frozen ? 0 : dt);
     const effects = this.effectiveEffects();
     const info = this.toyInfo;
     const u = this.driver.compute({
@@ -1365,9 +1384,13 @@ export class Player {
         motion,
         info,
         cameraPos: pose.position,
+        cameraDistance: pose.distance, // Science r2
       }),
       patternUniforms(this.scene.pattern, info.half, info.lum ?? 0.5, this.patternOn),
     );
+    const sq = this.handsOn.squishUniforms(); // lane Physics
+    u.uSpBodyS = sq ? [sq.axis[0], sq.axis[1], sq.axis[2], sq.amount] : [0, 1, 0, 0];
+    u.uSpBodyP = sq ? [sq.pivot[0], sq.pivot[1], sq.pivot[2], 0] : [0, 0, 0, 0];
     if (info.rig) u.uSpRigDbg = [this.rigDebug ? 1 : 0, 0, 0, 0];
     if (info.kind === "kit") u["uSpLeaf[0]"] = this.leafUniform(); // Pictures
     this.stage.setUniforms(u);
@@ -1401,9 +1424,9 @@ export class Player {
       this.driver.isAnimating(effects, this.time) ||
       this.motion.isAnimating(motion, this.time) ||
       this.idle.weight > 0;
-    const busy = moving || animating || dripping || !!this.stroke || gliding;
+    const busy = moving || animating || dripping || !!this.stroke || gliding || handsBusy;
     if (busy) {
-      this.pickDirty = this.pickDirty || animating;
+      this.pickDirty = this.pickDirty || animating || handsBusy;
       this.stage.requestRender();
     }
     const drag = !!this.camera.dragging || !!this.stroke; // Sharpness
