@@ -317,6 +317,44 @@
     </div>
     <!-- /UI r3 -->
 
+    <!-- UI r5: Record. While it records: the time and Stop; then Save (and Share on a phone). -->
+    <div id="rec-pill" class="rec-pill" role="status" aria-live="polite" hidden>
+      <span class="rec-dot" aria-hidden="true"></span>
+      <span id="rec-time" class="rec-time">0:00</span>
+      <button type="button" id="rec-stop" class="rec-stop">Stop</button>
+      <button type="button" id="rec-save" class="primary" hidden>Save video</button>
+      <button type="button" id="rec-share" hidden>Share</button>
+      <button type="button" id="rec-close" class="rec-close" aria-label="Close" hidden>
+        <svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true">
+          <path
+            d="M4 4l8 8M12 4l-8 8"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+          />
+        </svg>
+      </button>
+    </div>
+
+    <!-- UI r5: the gallery (every toy on a full page; the full grid on a phone), a round button
+         in the top row so it is always one tap away. -->
+    <button
+      id="gallery-open"
+      type="button"
+      class="view-button ui2-only"
+      aria-expanded="false"
+      title="Gallery: every toy on one page (G)"
+      aria-label="Gallery"
+    >
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+        <rect x="4" y="4" width="6.5" height="6.5" rx="1.4" fill="currentColor" />
+        <rect x="13.5" y="4" width="6.5" height="6.5" rx="1.4" fill="currentColor" />
+        <rect x="4" y="13.5" width="6.5" height="6.5" rx="1.4" fill="currentColor" />
+        <rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.4" fill="currentColor" />
+      </svg>
+    </button>
+    <!-- /UI r5 -->
+
     <!-- UI r2: focus mode. The button hides everything but the toy (F too); the small button
          in the corner, Escape or a swipe up from the bottom edge brings it all back. -->
     <button
@@ -545,16 +583,6 @@
           </button>
           <button type="button" id="shelf-surprise" class="chip" title="Pick a random toy">
             Surprise me
-          </button>
-          <!-- UI r2: every toy on a full page (the full grid on a phone). -->
-          <button
-            type="button"
-            id="gallery-open"
-            class="chip ui2-only"
-            aria-expanded="false"
-            title="Every toy on a full page"
-          >
-            Gallery
           </button>
         </div>
         <nav class="shelf" id="shelf" aria-label="Toy shelf"></nav>
@@ -1116,6 +1144,14 @@
                 <button id="export-webm" type="button">Save video</button>
               </div>
               <p id="webm-unavailable" class="note" hidden></p>
+              <!-- UI r5: a live recording of the stage while you play, with the sound. -->
+              <div class="row compact" id="record-row">
+                <span>Record</span>
+                <button id="record-start" type="button">Record</button>
+                <span class="note">You play, it records (up to 1 minute, with sound)</span>
+              </div>
+              <p id="record-unavailable" class="note" hidden></p>
+              <!-- /UI r5 -->
             </section>
             <section class="group" id="embed-group" aria-labelledby="h-embed">
               <h2 id="h-embed">Put it on a web page</h2>
@@ -1198,7 +1234,8 @@
                 </li>
                 <li class="ui2-only">
                   <b>F</b> or the focus button shows only the toy (<b>Esc</b> brings the rest back);
-                  <b>[</b> folds the panel away; <b>Gallery</b> shows every toy on one page
+                  <b>[</b> folds the panel away; <b>G</b> or the gallery button shows every toy on
+                  one page
                 </li>
                 <li class="ui2-only">
                   On a phone, swipe the toy row down to hide it, and the square button fills the
