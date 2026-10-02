@@ -195,6 +195,24 @@ State (see docs/FLUIDS.md, "r4"):
   plume in perfectly still air stands straight, and a room's faint drafts make it meander. WebGPU in
   this container is SwiftShader (software), so GPU frame times here are not a phone's.
 
+## r5 (October 2, 2026): the owner's phone review
+
+Brief (the Operator, from the owner's review of October 2): 1) tap the faucet's handle to pour; 2)
+the poured water looked dark gray on his phone; 3) lava "does not look right yet"; 4) the Fluid lab
+made his phone lag badly; 5) then the Weather shelf's candle and the birthday cake's candles with
+the Fluid lab's flame, if it runs well on a phone. Branch `claude/lane-fluids-r5` from the r4 head;
+PR "Phase Fluids r5: …", merged after #152.
+
+State (see docs/FLUIDS.md, "r5"): 1 to 4 are done and tested here. The phone's gray water is not
+reproduced (the r3 splats are light blue here; the GPU stream was gray and is fixed). 5 waits for
+the owner's phone to show the flame runs well; the candle (`elements.js`) and the cake (`food.js`)
+are other lanes' packs.
+
+Lessons: explicit MPM viscosity needs `nu * dt` well under 0.1 cells² (honey ran at 0.06, lava at
+0.12 blew up). A toy whose splats are hidden can't be tapped: shrink them inside a traced shape
+instead. When a shader change seems to break the motion, check first whether the simulation itself
+is unstable (lava's was).
+
 ## Notes
 
 - Engine hooks (small, additive, marked "Fluids"): `src/stage.js` (`addLayer`, `setLayerUniforms`,
