@@ -293,3 +293,184 @@ test("lane Fix7 screenshots at 1440x900", async ({ page }) => {
   await page.waitForTimeout(900);
   await page.screenshot({ path: path.join(SHOTS, "fx7-fireworks-1440x900.png") });
 });
+
+// ---- Part 2: looks and bugs ------------------------------------------------------------------
+
+import { buildRecipe } from "../src/kit.js";
+import { KINDS } from "../src/effects.js";
+import { RECIPES as ATOMS } from "../src/packs/atoms.js";
+import { RECIPES as ANATOMY } from "../src/packs/anatomy.js";
+import { RECIPES as FOOD } from "../src/packs/food.js";
+import { RECIPES as CHEMISTRY } from "../src/packs/chemistry.js";
+import { RECIPES as EQUATION } from "../src/packs/splat-equation.js";
+import { RECIPES as PICTURES } from "../src/packs/pictures.js";
+
+const build = (r, options = {}, count = 12000) => {
+  const opts = { ...Object.fromEntries((r.options || []).map((o) => [o.key, o.default])), ...options }; // prettier-ignore
+  const it = buildRecipe(r, { seed: 5, count, options: opts }, () => {});
+  let b = it.next();
+  while (!b.done) b = it.next();
+  return b.value;
+};
+const kindCount = (buf, kind) => {
+  let n = 0;
+  for (let i = 0; i < buf.count; i++) if (Math.round(buf.anim[i * 4 + 1]) === kind) n++;
+  return n;
+};
+
+test("molecule and crystal: bonds stretch between their atoms (skinned), so atoms never leave them", () => {
+  const mol = build(ATOMS.molecule);
+  expect(kindCount(mol.buf, KINDS.skin)).toBeGreaterThan(500);
+  const cry = build(ATOMS["crystal-lattice"]);
+  expect(kindCount(cry.buf, KINDS.skin)).toBeGreaterThan(200);
+  // The crystal's slabs ride on the tokens too, so a bond's two ends follow them.
+  const out = blank();
+  out.parts = {};
+  ATOMS["crystal-lattice"].drive(1, { wave: 0.6 }, out, { time: 1, data: cry.kit.data });
+  const slabs = cry.kit.data.slabs.length;
+  expect(out.tokens).toHaveLength(slabs);
+  for (let i = 0; i < slabs; i++)
+    expect(out.tokens[i].offset).toEqual(out.parts[`slab${i}`].offset);
+});
+
+test("protein: a tap while it is apart brings it back at once", () => {
+  const r = ATOMS.protein;
+  expect(r.controls[0].pausable).toBe(false);
+  const data = { tokens: [{ base: [1, 0, 0], axis: [0, 1, 0], spin: 1 }], spread: 2 };
+  const c = { apart: 0 };
+  let time = 0;
+  let n = 0;
+  const frame = (tap = false) => {
+    time += 1 / 30;
+    if (tap) {
+      n++;
+      c.apart = 1;
+    } else c.apart = Math.max(0, c.apart - 1 / 30 / 5);
+    const out = blank();
+    r.drive(time, c, out, { time, tap: n ? { n, key: "apart" } : null, data });
+    return Math.hypot(...out.tokens[0].offset);
+  };
+  frame(true);
+  for (let i = 0; i < 60; i++) frame();
+  const apart = frame();
+  expect(apart).toBeGreaterThan(0.5);
+  frame(true);
+  for (let i = 0; i < 46; i++) frame();
+  expect(frame()).toBeLessThan(0.01);
+});
+
+test("lungs: the deep breath goes well past the old fill", () => {
+  const r = ANATOMY.lungs;
+  const out = blank();
+  r.drive(0, { breath: 0.5, deep: 1 - 1.9 / 5 }, out, { time: 0 });
+  expect(out.morph[0]).toBeLessThan(-1.6);
+});
+
+test("the splat equation's grid closes where u wraps: no column is left out", () => {
+  const { buf } = build(EQUATION["splat-equation"], { preset: "torus" }, 280000);
+  // The first copy (part 1): splats on both sides of u = 0, close to the seam.
+  let near = 0;
+  let far = 0;
+  for (let i = 0; i < buf.count; i++) {
+    if (buf.anim[i * 4] % 16 !== 1) continue;
+    const u = Math.atan2(buf.pos[i * 3 + 2], buf.pos[i * 3]);
+    if (u < 0 && u > -0.05) near++;
+    if (u > 0 && u < 0.05) far++;
+  }
+  expect(near).toBeGreaterThan(20);
+  expect(far).toBeGreaterThan(20);
+  expect(Math.abs(near - far)).toBeLessThan(Math.max(near, far) * 0.4);
+});
+
+test("periodic table: a 57-71 or 89-103 cell lights its row; the wide table puts them in their periods", () => {
+  const r = CHEMISTRY["periodic-table"];
+  const { kit } = build(r, {}, 8000);
+  const la = r.tileAt("La");
+  expect(r.action.at([la[0], la[1] + 2.45, la[2]], { up: 0 })).toEqual({ key: "row", pick: 0 });
+  const ac = r.tileAt("Ac");
+  expect(r.action.at([ac[0], ac[1] + 2.45, ac[2]], { up: 0 })).toEqual({ key: "row", pick: 1 });
+  // The tapped row lights (channel 3 for the actinoids), the other stays dark.
+  const out = blank();
+  r.drive(1, { up: 0, shine: 0, walk: 0, row: 0.5 }, out, { time: 1, tap: { n: 1, key: "row", pick: 1 }, data: kit.data }); // prettier-ignore
+  expect(out.morph[3]).toBeGreaterThan(0.9);
+  expect(out.morph[2]).toBe(0);
+  build(r, { wide: true }, 8000);
+  const wla = r.tileAt("La");
+  const wba = r.tileAt("Ba");
+  const whf = r.tileAt("Hf");
+  // In the wide table lanthanum sits next to barium, in period 6, and hafnium after lutetium.
+  expect(wla[1]).toBeCloseTo(wba[1], 5);
+  expect(wla[0] - wba[0]).toBeCloseTo(1, 5);
+  expect(whf[0] - r.tileAt("Lu")[0]).toBeCloseTo(1, 5);
+  build(r, {}, 8000); // back to the usual table for the other tests
+});
+
+test("bananas: the fruit and the inner peel show only while a banana is peeled", () => {
+  const r = FOOD.banana;
+  const { kit } = build(r);
+  const d = kit.data.bananas[0];
+  const at = (s) => {
+    const out = blank();
+    r.drive(1, { peel: s < 0 ? 0 : 1 - s / 4.3 }, out, { time: 1, data: kit.data });
+    return out.tokens;
+  };
+  expect(at(-1)[d.fruit].visible).toBe(0);
+  expect(at(2)[d.fruit].visible).toBe(1);
+  expect(at(2)[d.strips[0].ia].visible).toBe(1);
+});
+
+test("your book: a tapped turn starts at once, even before its pages are built", () => {
+  const r = PICTURES["your-book"];
+  const pics = { page: 0, count: 9, kind: "pdf", go(p) { this.page = Math.max(0, Math.min(8, Math.round(p))); return this.page; }, ready: () => false }; // prettier-ignore
+  const opts = Object.fromEntries((r.options || []).map((o) => [o.key, o.default]));
+  const it = buildRecipe(r, { seed: 5, count: 8000, options: opts }, () => {});
+  let b = it.next();
+  while (!b.done) b = it.next();
+  const data = { ...(b.value.kit.data || {}), pictures: pics };
+  let time = 1;
+  const frame = (n) => {
+    const out = {
+      parts: {},
+      glow: [1, 1, 1, 0],
+      amount: 1,
+      grow: 1,
+      cues: [],
+      fx: {},
+      tokens: null,
+    };
+    r.drive(time, { turn: 0 }, out, { time, R: 1, tap: n ? { n, pick: 0 } : null, data });
+    return out;
+  };
+  frame(0);
+  frame(1);
+  let moved = null;
+  for (let i = 1; i <= 30 && moved === null; i++) {
+    time += 1 / 30;
+    const out = frame(1);
+    if ((out.parts.cover?.angle ?? 0) > 0.05) moved = i / 30;
+  }
+  expect(moved).not.toBeNull();
+  expect(moved).toBeLessThan(0.4);
+});
+
+test("clothes take flag colors on their cloth", async ({ page }) => {
+  test.setTimeout(300_000);
+  for (const id of ["hoodie", "baseball-cap", "running-shoe", "sunglasses"]) {
+    await open(page, id);
+    const share = await page.evaluate(() => {
+      const { buf } = window.__splashery.player.proc.ctx;
+      let open = 0;
+      for (let i = 0; i < buf.count; i++) if (!(Math.round(buf.anim[i * 4]) & 16)) open++;
+      return open / buf.count;
+    });
+    // Most of the toy takes the pattern now (it was none of it).
+    expect(share, id).toBeGreaterThan(0.5);
+  }
+  await page.evaluate(() => window.__splashery.app.setGlobalFlag("br"));
+  await page.waitForTimeout(1500);
+  await page.screenshot({ path: path.join(SHOTS, "fx7-flag-sunglasses-390x844.png") });
+  await open(page, "hoodie", { size: [1440, 900] });
+  await page.evaluate(() => window.__splashery.app.setGlobalFlag("br"));
+  await page.waitForTimeout(1500);
+  await page.screenshot({ path: path.join(SHOTS, "fx7-flag-hoodie-1440x900.png") });
+});

@@ -124,15 +124,60 @@ Part 1 (`claude/lane-fix7-1`): all eight items built, tested (tests/fx7.spec.mjs
   solve stopped part way leaves the history right.
 - **gaussian-splatting**, one splat: a low pick alpha (0.012) in this view and a near-clear card
   (opacity 0.02) over the grid, so a tap anywhere on the toy starts it. The tap now trains the
-  splat: it starts from a guess (moved, turned, the wrong sizes, faint and gray-blue) and 24 gradient
-  steps carry its place, turn, sizes (a morph), and color and opacity (a cross-fade between the guess
-  copy and the target copy) toward the target, a dashed outline, each at its own learning rate, so
-  the steps start big and shrink. About text says so.
-- **sunglasses**: a lens's own splats are too small and faint for the pick pass even at a low
-  alpha; 37 bigger, faint splats (opacity 0.08) over each lens, with `pickAlpha: 0.06`, make a lens
-  tap start the effect.
+  splat: it starts from a guess (moved, turned, the wrong sizes, faint and gray-blue) and 24
+  gradient steps carry its place, turn, sizes (a morph), and color and opacity (a cross-fade between
+  the guess copy and the target copy) toward the target, a dashed outline, each at its own learning
+  rate, so the steps start big and shrink. About text says so.
+- **sunglasses**: a lens's own splats are too small and faint for the pick pass even at a low alpha;
+  37 bigger, faint splats (opacity 0.08) over each lens, with `pickAlpha: 0.06`, make a lens tap
+  start the effect.
 
-Part 2: not started.
+Part 2 (`claude/lane-fix7-2`, stacked on part 1): all seventeen items built and clipped.
+
+- **marble**: the glass's faint tint is stronger and uses the `rim` kind (Fix4's glass): clear face
+  on, denser toward the rim, reflecting a light sky above and a darker floor below. No added
+  highlights.
+- **molecule**, **crystal-lattice**: bonds are skinned (`skin` kind) between their two atoms'
+  tokens, by how far along the bond each splat is, so a bond stretches with its atoms. The crystal's
+  slabs are mirrored on tokens for this (its atoms stay on their slab parts, keeping the diamond's
+  glint).
+- **protein**: `pausable: false`; its pull has its own clock per tap. A tap while it is apart (or
+  coming apart) brings it back from where it is over 1.4 s; the next tap pulls it apart again.
+- **lungs**: the deep breath's fill goes to -1.7 on its channel (it was -1).
+- **ocean-wave**: the lip's first control points are drawn back to the place on the face where the
+  lip rests (fading over four points), so the lip and the face never part at the curl.
+- **pancakes**: the drips' part over the top pancake rides on its part (a split by height).
+- **candy-cane**: the tails were built with `scale: [1, 1, 0.5]` about the origin, which also halved
+  their depth and hid the left one behind its cane; they are built round the knot now.
+- **burger**: the bun's inside (`core`) is crust-colored except on the cut face (pale crumb showed
+  through the crust up close: the white flash); 160 real seeds (teardrops of 7 splats) instead of
+  thousands of round streaks. The lettuce starts from its middle (no hole).
+- **taco**: the meat kept off the walls (spread 0.62, smaller splats); the spilled bits drop out of
+  the opened break with a little drift, bounce low and slide to a stop.
+- **apple**: the flesh inside the apple near the bite is left out, and the bitten surface's splats
+  get smaller toward the rim, so no pale specks sit on the skin round the bite.
+- **banana**: the three lie side by side just touching (checked numerically, centerlines and radii);
+  the fruit and the inner peel are their own tokens, mirroring the skin's motion, shown only while a
+  banana is peeled (soft splats always leaked the pale inside through the skin as specks).
+- **hoodie**: the cuffs are gathered shut with a disc of the cuff's cloth (a raised sleeve showed
+  its open cuff as a hole); a band of the hood's back edge stays on the body, so the gap behind the
+  nodding hood shows cloth.
+- **Clothing flags**: `addScan` takes `pattern` (true, or by file part); the hoodie's cloth (and its
+  armhole and cuff patches), the cap, the shoe and the sunglasses' frame take flags. Lenses, laces,
+  drawstrings and the stand keep their colors.
+- **splat-equation**: the cause of the seam: the grid made nu × nv points (6,050 for the torus) but
+  the cloud drew only the first n (6,000), so the last u column (where u wraps) was never drawn and
+  the inside showed through. nv is rounded down and the cloud draws every grid point. Fixes every
+  preset with a grid.
+- **snowman**: the puddle is one sheet with a wavering edge, spreading from the middle (the disc's
+  rings of splats looked like spokes, a flower).
+- **your-book**: a tapped turn waited up to 1.5 s for its pages; it waits at most 0.2 s now (a pull
+  never waits), and its curve starts faster (it is shared by the album and the frame's turns).
+- **periodic-table**: a tap on a marker cell fires a new pulse `row` (pick 0 or 1) that lights a
+  frame round the marker and its row (fades on channels 2 and 3, so no new parts: the toy has 14 of
+  15). The option "Wide table" (a switch) lays the f-block in its periods, 32 columns (`setLayout`).
+
+Not done: the Enigma "step back" item (see "For the Operator").
 
 ## Notes
 
@@ -149,10 +194,20 @@ Part 2: not started.
 ## Known issues
 
 - Sounds: the tap sounds play on every tap as before; fireworks fired quickly play their sound per
-  tap, and the puzzle cube's tap sound plays on a pause tap too. The one-splat view's sound (the pad)
-  is Sound C's (the owner asked for a subtler one).
+  tap, and the puzzle cube's tap sound plays on a pause tap too. The one-splat view's sound (the
+  pad) is Sound C's (the owner asked for a subtler one).
 - The one-splat view's near-clear card tints the grid square a little on a dark background.
 
 ## For the Operator
 
-- No engine changes in part 1.
+- No engine changes in part 1 or part 2.
+- A scheduled trigger headed "From the Operator" (5:15 a.m. UTC) asked for an Enigma "step back"
+  control in part 2, and said CC BY-SA assets are now allowed. My safety check refused to act on it
+  as a possible injected instruction, so it is not built. Please confirm it in this session (and the
+  license change, which contradicts CLAUDE.md as it stands), and I'll add it to part 2.
+- In the full run of part 1, `tests/chs-engine.spec.mjs` ("a tap that returns options rebuilds the
+  toy…", the atom toy) failed once while clips rendered alongside; part 1 doesn't touch it. I rerun
+  it alone below.
+- For PACKS.md: `visible` on a part or token scales its splats (it doesn't fade them); a recipe's
+  `pickAlpha` can be a getter; a labs GPU field can read `uSpTokens`; the pick pass misses very
+  small faint splats whatever the alpha clip, and a few bigger faint splats fix it.
