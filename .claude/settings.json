@@ -44,6 +44,16 @@
             "timeout": 5
           }
         ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR/.grooph/hooks/grooph-events-push.mjs\" --hook",
+            "async": true,
+            "timeout": 60
+          }
+        ]
       }
     ],
     "SubagentStart": [
@@ -72,7 +82,6 @@
     ],
     "PostToolUse": [
       {
-        "matcher": "Agent",
         "hooks": [
           {
             "type": "command",

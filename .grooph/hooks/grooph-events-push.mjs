@@ -14,6 +14,9 @@
  *                     prefix, for example --branch claude/grooph-events-lane-a
  *   --remote <name>   default: origin
  *   --no-push         make the commit and print its id; send nothing
+ *   --hook            run as a harness hook at the end of a turn (grooph hooks install --push):
+ *                     wait a moment for the event hook's own line, then push; print nothing
+ *                     and exit 0 whatever happens; give way if another push is under way
  *
  * What it does, and all it does:
  *   - it makes one commit whose tree is .grooph/events/ and nothing else, on top
@@ -35,16 +38,48 @@
  * runs the same code.
  */
 import { execFileSync } from "node:child_process";
-import { existsSync, readFileSync, readdirSync, realpathSync, statSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, readdirSync, realpathSync, rmSync, statSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const EVENTS = ".grooph/events";
 
+/**
+ * How git is run. By a person, as it is. As a hook, unattended: git must never ask for a password on a terminal
+ * nobody is at, and no call may outlast its limit, or a turn's end would hang on a remote that does not answer.
+ */
+const how = { env: process.env, limits: undefined, deadline: undefined };
+/** The time one call may take: its own limit, and never past the whole run's deadline. */
+const limitFor = (args) => {
+  const own = how.limits?.[args[0]] ?? how.limits?.other;
+  if (own === undefined || how.deadline === undefined) return own;
+  const left = how.deadline - Date.now();
+  if (left < 500) throw new Error("out of time");
+  return Math.min(own, left);
+};
+/**
+ * A call that talks to a remote, with a limit, on a system with a shell: git is started in a process group of its
+ * own and the whole group is stopped when the time is up. Stopping git alone would leave its helper (the program
+ * that holds the connection) running after it, one more for every turn that ends while the remote is down.
+ */
+const GROUPED = 'set -m 2>/dev/null; t="$1"; shift; "$@" & pid=$!; ( sleep "$t"; kill -9 -"$pid" 2>/dev/null || kill -9 "$pid" 2>/dev/null ) >/dev/null 2>&1 & guard=$!; wait "$pid"; code=$?; kill "$guard" 2>/dev/null; exit "$code"';
+const run = (cwd, args, input) => {
+  const limit = limitFor(args);
+  const options = { encoding: "utf8", input, stdio: [input === undefined ? "ignore" : "pipe", "pipe", "pipe"], maxBuffer: 64_000_000, env: how.env };
+  const remote = args[0] === "fetch" || args[0] === "push";
+  // The connection itself has limits too, for the helper's sake: no ten-minute waits on a link that has gone quiet.
+  const patient = remote && limit ? ["-c", "http.lowSpeedLimit=1000", "-c", "http.lowSpeedTime=10"] : [];
+  if (remote && limit && process.platform !== "win32") {
+    const out = execFileSync("sh", ["-c", GROUPED, "sh", String(Math.max(1, Math.ceil(limit / 1000))), "git", "-C", cwd, ...patient, ...args], { ...options, timeout: limit + 3000, killSignal: "SIGKILL" });
+    return out.replace(/\n$/, "");
+  }
+  return execFileSync("git", ["-C", cwd, ...patient, ...args], { ...options, ...(limit ? { timeout: limit, killSignal: "SIGKILL" } : {}) }).replace(/\n$/, "");
+};
+
 /** One git command in `cwd`; its output, or undefined when it fails. `input` is given on standard input. */
 function git(cwd, args, input) {
   try {
-    return execFileSync("git", ["-C", cwd, ...args], { encoding: "utf8", input, stdio: ["pipe", "pipe", "pipe"], maxBuffer: 64_000_000 }).replace(/\n$/, "");
+    return run(cwd, args, input);
   } catch (err) {
     return undefined;
   }
@@ -53,7 +88,7 @@ function git(cwd, args, input) {
 /** The same, but a failure is an error that says what git said. */
 function must(cwd, args, input) {
   try {
-    return execFileSync("git", ["-C", cwd, ...args], { encoding: "utf8", input, stdio: ["pipe", "pipe", "pipe"], maxBuffer: 64_000_000 }).replace(/\n$/, "");
+    return run(cwd, args, input);
   } catch (err) {
     const said = String(err?.stderr ?? err?.message ?? err).trim().split("\n").slice(-3).join(" ");
     throw new Error(`git ${args[0]} failed: ${said}`);
@@ -140,54 +175,79 @@ export function pushEvents(options) {
   if (branch === checkedOut) throw new Error(`"${branch}" is the branch checked out here: the events go to a branch of their own, never to a branch of work. Leave --branch out, or name another`);
   const ref = `refs/heads/${branch}`;
 
-  // What the branch holds on the remote now, if it exists there: the new commit goes on top of it.
-  let parent;
-  if (options.push !== false || git(project, ["remote", "get-url", remote]) !== undefined) {
-    if (git(project, ["fetch", "--quiet", "--no-tags", remote, ref]) !== undefined) parent = git(project, ["rev-parse", "--verify", "--quiet", "FETCH_HEAD^{commit}"]);
-  }
+  const hasRemote = git(project, ["remote", "get-url", remote]) !== undefined;
+  if (!hasRemote && options.push !== false) throw new Error(`there is no remote named "${remote}" here`);
 
-  // The branch may hold events and nothing else. Anything more is someone's work, and this would replace it.
-  if (parent) {
-    const why = notAnEventsBranch(project, parent);
-    if (why) throw new Error(`${remote} ${branch} is not an events branch: ${why}. Nothing was sent. Name a branch that holds only ${EVENTS}/, or one that does not exist yet`);
-  }
-
-  // The tree: every event file on the branch, and every one here; a file both have is joined, never shortened.
-  const entries = (parent && entriesOf(project, `${parent}:${EVENTS}`)) || new Map();
-  for (const name of files) {
-    const local = readFileSync(join(dir, name), "utf8");
-    const had = entries.get(name);
-    const before = had ? git(project, ["cat-file", "blob", had.id]) : undefined;
-    // `git()` trims one trailing newline; the comparison is of lines, so give it back.
-    const text = before === undefined ? local : joined(before === "" ? "" : `${before}\n`, local);
-    entries.set(name, { mode: "100644", type: "blob", id: must(project, ["hash-object", "-w", "--stdin"], text) });
-  }
-  const [top, leaf] = EVENTS.split("/");
-  const eventsTree = treeOf(project, entries);
-  const root = treeOf(project, new Map([[top, { mode: "040000", type: "tree", id: treeOf(project, new Map([[leaf, { mode: "040000", type: "tree", id: eventsTree }]])) }]]));
-
-  if (parent && git(project, ["rev-parse", `${parent}^{tree}`]) === root) {
-    return { status: "unchanged", branch, commit: parent, files: entries.size, message: `Nothing new: ${remote} ${branch} already holds these ${entries.size} event file${entries.size === 1 ? "" : "s"}.` };
-  }
-
-  // A commit needs a name; a sandbox may have none configured.
-  const identity = [];
-  if (!git(project, ["config", "user.name"])) identity.push("-c", "user.name=grooph");
-  if (!git(project, ["config", "user.email"])) identity.push("-c", "user.email=grooph@localhost");
-  const when = (options.now ?? new Date()).toISOString();
-  const said = `grooph events: ${entries.size} session file${entries.size === 1 ? "" : "s"}, ${when}`;
-  const commit = must(project, [...identity, "commit-tree", root, ...(parent ? ["-p", parent] : []), "-m", said]);
-
-  if (options.push === false) return { status: "committed", branch, commit, files: entries.size, message: `Made commit ${commit.slice(0, 7)} for ${branch} (${entries.size} event file${entries.size === 1 ? "" : "s"}); not sent (--no-push).` };
-
-  must(project, ["push", "--quiet", remote, `${commit}:${ref}`]);
-  return {
-    status: "pushed",
-    branch,
-    commit,
-    files: entries.size,
-    message: `Sent ${entries.size} event file${entries.size === 1 ? "" : "s"} to ${remote} ${branch} (${commit.slice(0, 7)}). Read them elsewhere after a fetch: grooph sessions <name>=git:${remote}/${branch}`,
+  // The branch's tip on the remote is fetched into a ref of grooph's own, never into FETCH_HEAD: a session that
+  // fetched something and means to use FETCH_HEAD next must still find what it fetched there.
+  const TIP = "refs/grooph/events-tip";
+  const tipOnRemote = () => {
+    if (!hasRemote) return undefined;
+    const spec = `+${ref}:${TIP}`;
+    // `--no-write-fetch-head` is git 2.29 and later. An older git has no way to fetch without writing FETCH_HEAD.
+    const [major, minor] = (/(\d+)\.(\d+)/.exec(git(project, ["version"]) ?? "") ?? []).slice(1).map(Number);
+    const keep = major > 2 || (major === 2 && minor >= 29) ? ["--no-write-fetch-head"] : [];
+    const began = Date.now();
+    const fetched = git(project, ["fetch", "--quiet", "--no-tags", ...keep, remote, spec]);
+    // A fetch that used up its whole limit did not learn that the branch is missing: the remote did not answer.
+    if (fetched === undefined && how.limits && Date.now() - began >= (how.limits.fetch ?? Infinity) - 500) throw new Error(`${remote} did not answer in time`);
+    return fetched === undefined ? undefined : git(project, ["rev-parse", "--verify", "--quiet", `${TIP}^{commit}`]);
   };
+
+  // Another session may send to the same branch between this one's fetch and its push. Git then refuses the push,
+  // and the answer is to look again and put this commit on top of theirs: three tries, then give up and say so.
+  for (let attempt = 1; ; attempt += 1) {
+    // What the branch holds on the remote now, if it exists there: the new commit goes on top of it.
+    const parent = tipOnRemote();
+
+    // The branch may hold events and nothing else. Anything more is someone's work, and this would replace it.
+    if (parent) {
+      const why = notAnEventsBranch(project, parent);
+      if (why) throw new Error(`${remote} ${branch} is not an events branch: ${why}. Nothing was sent. Name a branch that holds only ${EVENTS}/, or one that does not exist yet`);
+    }
+
+    // The tree: every event file on the branch, and every one here; a file both have is joined, never shortened.
+    const entries = (parent && entriesOf(project, `${parent}:${EVENTS}`)) || new Map();
+    for (const name of files) {
+      const local = readFileSync(join(dir, name), "utf8");
+      const had = entries.get(name);
+      const before = had ? git(project, ["cat-file", "blob", had.id]) : undefined;
+      // `git()` trims one trailing newline; the comparison is of lines, so give it back.
+      const text = before === undefined ? local : joined(before === "" ? "" : `${before}\n`, local);
+      entries.set(name, { mode: "100644", type: "blob", id: must(project, ["hash-object", "-w", "--stdin"], text) });
+    }
+    const [top, leaf] = EVENTS.split("/");
+    const eventsTree = treeOf(project, entries);
+    const root = treeOf(project, new Map([[top, { mode: "040000", type: "tree", id: treeOf(project, new Map([[leaf, { mode: "040000", type: "tree", id: eventsTree }]])) }]]));
+    const count = `${entries.size} event file${entries.size === 1 ? "" : "s"}`;
+
+    if (parent && git(project, ["rev-parse", `${parent}^{tree}`]) === root) {
+      return { status: "unchanged", branch, commit: parent, files: entries.size, message: `Nothing new: ${remote} ${branch} already holds these ${count}.` };
+    }
+
+    // A commit needs a name; a sandbox may have none configured.
+    const identity = [];
+    if (!git(project, ["config", "user.name"])) identity.push("-c", "user.name=grooph");
+    if (!git(project, ["config", "user.email"])) identity.push("-c", "user.email=grooph@localhost");
+    const when = (options.now ?? new Date()).toISOString();
+    const commit = must(project, [...identity, "commit-tree", root, ...(parent ? ["-p", parent] : []), "-m", `grooph events: ${entries.size} session file${entries.size === 1 ? "" : "s"}, ${when}`]);
+
+    if (options.push === false) return { status: "committed", branch, commit, files: entries.size, message: `Made commit ${commit.slice(0, 7)} for ${branch} (${count}); not sent (--no-push).` };
+
+    try {
+      must(project, ["push", "--quiet", remote, `${commit}:${ref}`]);
+    } catch (err) {
+      if (attempt < 3) continue;
+      throw err;
+    }
+    return {
+      status: "pushed",
+      branch,
+      commit,
+      files: entries.size,
+      message: `Sent ${count} to ${remote} ${branch} (${commit.slice(0, 7)}). Read them elsewhere after a fetch: grooph sessions <name>=git:${remote}/${branch}`,
+    };
+  }
 }
 
 /** The project a copy of this script belongs to: <script>/../.. when it sits in .grooph/hooks/, else where it is run. */
@@ -224,7 +284,68 @@ export function main(argv, project, out = console.log, err = console.error) {
   }
 }
 
+/**
+ * As a hook at the end of a turn. A session's events are only seen elsewhere when they are sent, and a session
+ * cannot send what it writes as it stops: so this runs when a turn ends, after the event hook's line for that end.
+ * It keeps the event hook's promises: nothing printed, exit 0 whatever happens, nothing the harness reads back.
+ * It is not the event hook, and it is installed only when asked for (--push).
+ *
+ * A harness runs the hooks of one event side by side, so the turn's own last line may not be written yet:
+ * `settle` waits for it. One push at a time: a lock folder beside the events; a lock more than two minutes
+ * from now, either way, was left by a push that died or by a wrong clock, and is taken over.
+ *
+ * Unattended: git is told never to ask anything of a terminal, and every call has a limit, so a remote that
+ * wants a password or never answers costs a turn's end some seconds and never hangs it. If the harness stops
+ * this process, the lock goes with it.
+ */
+export async function hookMain(argv, project, settle = Number(process.env.GROOPH_PUSH_SETTLE_MS ?? 1500)) {
+  const lock = join(project, EVENTS, ".pushing");
+  let mine = false;
+  const release = () => {
+    if (!mine) return;
+    mine = false;
+    try {
+      rmSync(lock, { recursive: true, force: true });
+    } catch {
+      // left for the next push to take over
+    }
+  };
+  for (const signal of ["SIGTERM", "SIGINT", "SIGHUP"]) {
+    process.once(signal, () => {
+      release();
+      process.exit(0);
+    });
+  }
+  try {
+    // Everything together stays well inside the hook's own limit of sixty seconds, retries included.
+    how.limits = { fetch: 12_000, push: 20_000, other: 8_000 };
+    how.deadline = Date.now() + 45_000;
+    how.env = { ...process.env, GIT_TERMINAL_PROMPT: "0", GIT_ASKPASS: "", SSH_ASKPASS: "", GCM_INTERACTIVE: "never" };
+    // ssh asks on the terminal by itself; batch mode stops it. A project's or a person's own ssh command is left alone.
+    if (!process.env.GIT_SSH_COMMAND && !git(project, ["config", "core.sshCommand"])) how.env.GIT_SSH_COMMAND = "ssh -oBatchMode=yes -oConnectTimeout=10";
+    await new Promise((done) => setTimeout(done, Number.isFinite(settle) && settle >= 0 ? settle : 1500));
+    if (!existsSync(join(project, EVENTS))) return 0;
+    try {
+      mkdirSync(lock);
+      mine = true;
+    } catch {
+      if (Math.abs(Date.now() - statSync(lock).mtimeMs) < 120_000) return 0; // another push is under way; the next turn's will carry this one's lines
+      rmSync(lock, { recursive: true, force: true });
+      mkdirSync(lock);
+      mine = true;
+    }
+    main(argv.filter((arg) => arg !== "--hook"), project, () => {}, () => {});
+  } catch {
+    // A hook that fails must not fail a turn.
+  } finally {
+    release();
+  }
+  return 0;
+}
+
 const invoked = process.argv[1] ? realpathSync(process.argv[1]) : "";
 if (invoked === realpathSync(fileURLToPath(import.meta.url))) {
-  process.exitCode = main(process.argv.slice(2), projectOf(invoked, process.cwd()));
+  const argv = process.argv.slice(2);
+  const project = projectOf(invoked, process.cwd());
+  process.exitCode = argv.includes("--hook") ? await hookMain(argv, project) : main(argv, project);
 }
