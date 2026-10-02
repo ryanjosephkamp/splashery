@@ -151,9 +151,9 @@ Model: Opus 5.5 (default effort), all of it, and its one helper (it found and cu
   - The duplicate `"splat-field"` entry was already gone on main 2ba6455: nothing to do.
   - Measured: the first tap's sample starts 7.6 ms after the motion takes the tap, with a slow (400
     ms) network for the samples. On main, the sample isn't loaded before the tap at all.
-- **Toys** (`claude/lane-sound-c`): all 44 toys of the round are done except the honey level (see
-  "For the Operator"). 42 are `"site"` and lungs is `"ready"`, with two candidates. Their sounds are
-  listed in the PR, and each toy's "plan" in `tools/sound-review.json` says what it sounds like now.
+- **Toys** (`claude/lane-sound-c`): all 44 toys of the round are done. 42 are `"site"` and lungs is
+  `"ready"`, with two candidates. Their sounds are listed in the PR, and each toy's "plan" in
+  `tools/sound-review.json` says what it sounds like now.
   - 24 new CC0 recordings from Freesound, each checked on its live page and credited in CREDITS.md,
     tools/assets.json and src/sound-credits.js. Each is 32 or 64 kbps mono and under 16 KB.
   - Six recordings that my toys no longer use were removed, with their credits: the tin can's spin,
@@ -221,11 +221,9 @@ Model: Opus 5.5 (default effort), all of it, and its one helper (it found and cu
      - The folder total is now about 1.11 MB, over its 1 MB cap. Main alone was 987 KB, and this
        lane adds 24 recordings even after re-encoding the bigger ones at 32 kbps. Suggest a 1.5 MB
        cap: a recording loads only with its toy, so the cap guards the repo, not a page.
-- **Honey** (one number, yours to place): Fluids r4 moved the Fluid lab's sound into
-  `src/fluids/runtime.js` on its unmerged branch, where the honey's gloops share `vol: 0.35 * v`
-  with lava and syrup. To make honey a little louder without touching the others:
-  `vol: (s.preset === "honey" ? 0.5 : 0.35) * v` (about 3 dB). Editing it now would conflict with
-  Fluids r4, so the Fluid lab's review entry is left for that lane.
+- **Honey**: done once Fluids r4 merged. In `src/fluids/runtime.js` the honey's gloops are now
+  `0.5 * v` (lava and syrup stay at `0.35 * v`), about 3 dB louder. The Fluid lab's review entry
+  keeps the status Fluids gave it.
 - **Mitochondrion**: the site plays candidate A, a gas furnace lighting (a soft whoomp, then a warm
   roar), with the ATP sparks' soft pops. B is a gas burner's steadier, breathier roar. A third find,
   a boiler, was dropped because its source title names a brand.
