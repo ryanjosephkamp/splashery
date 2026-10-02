@@ -153,11 +153,9 @@ Model: Opus 5.5 (claude-opus-5-5), default effort.
 
 ## For the Operator
 
-- **The laptop:** the brief lists it ("a little bit sharper"), but CLAUDE.md, HANDOFF.md and
-  history.md say it is locked (("do not change its look" or how it works)) and the brief ends "The
-  laptop is locked." I left it untouched. If the owner wants it sharper, say so and I'll do it as
-  its own small card (its body and deck the same way as the others; the keys and screen stay as they
-  are).
+- **The laptop:** the brief lists it ("a little bit sharper"), but the owner has locked it. The
+  Operator confirmed on October 2, 2026 (21:05 UTC): leave it exactly as it is on main. This PR does
+  not change it.
 - Shared helpers changed additively (default off): `addScan()` in real-objects.js (`sizeMul`,
   `exact`, `smooth`), `polytope().sampleEven` and `addGem` options in gems.js, `lattice`, `water`
   and `ground` `even` options in landmarks.js, `rod`'s `even` in vehicles.js, `beam`'s `even` in
