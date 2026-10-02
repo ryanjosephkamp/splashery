@@ -122,11 +122,96 @@ LiveInput record on page 2.
 3. **Clips:** music (CC0) and speech (CC0 or synthesized), 10 to 15 s at phone size, MP4, the audio
    clock on screen; a before-and-after start-time clip with a timer.
 
+## Brief r3 (from the Operator, October 2, 2026, 09:36 UTC)
+
+Live input r3 (Opus 5.5, prefix `live3`). Branches: `claude/lane-live-input-r3-engine` (only if you
+need player/ui/app/kit changes: small, additive "Engine: …" PR, merged first) and
+`claude/lane-live-input-r3` ("Phase Live input r3: …"), both from main once #163 has merged. Keep
+your handoff file current (add an "## Brief r3" section with this text). These toys are behind the
+labs switch, so the Operator merges after the full test run; still post clips for the owner.
+
+The owner reviewed your toys on October 2 (docs/reviews/2026-10-02-mega-review/review.md, lines 686
+to 770 and 870 to 892: read his words first). He loved them ("might also be one of the coolest
+things that we've made so far"). He accepted this round:
+
+**Song landscape**
+
+1. Tilt: let the view tilt up and down (vertical rotation, within sensible limits) so you can see
+   the notes better.
+2. Keep the microphone's audio: when someone records live, keep the audio (in memory only, never
+   uploaded or stored without their action) so they can play it back with the landscape and export a
+   clip. The live-input rule still holds: the mic is asked for only on the tap that starts it.
+3. Restart, pause and scrub: a way to restart the song, pause it and scrub back and forth, without a
+   hover play bar that gets in the way of the toy (he doesn't want a bar like the other music toys'
+   that covers the stage; a small, out-of-the-way control or a drag along the landscape itself are
+   both fine; your call, say why).
+4. Mesh lines slightly thicker (the "lines"/"mesh" looks; the ribbons are fine).
+5. Live (scrolling) view as the default instead of the whole song (he's on the fence; make it the
+   default and keep the whole-song view one tap away).
+6. Explain what each look and color mode shows (loudness, pitch, brightness; tube, lines, ribbons,
+   mesh) in the toy's About text and how-to line (src/toy-help.js), plainly.
+
+**Chladni plate**
+
+7. Tilt to see the plate more from the side.
+8. Bug: with the live microphone the sand doesn't move in real time; it moves only after he stops
+   the mic. Find the cause and fix it, with a test.
+
+**Room echo meter**
+
+9. The text on its screen is blurry: make it crisp at phone size.
+10. A clap or snap shows the loading animation and then "Too noisy". Today any failure shows "Too
+    noisy" (it needs about a 25 dB range). Show the real reason (too quiet, too noisy, no clear
+    decay, clipped, and so on) with a hint of what to do, and check whether a clap in an ordinary
+    room can work (a lower threshold, a fit over a shorter range, or T20/T30 from what's
+    measurable). Say what you found.
+
+**Splat mirror**
+
+11. Bug: with the default paintings it jitters and flashes in the default view (turning it a little
+    stops it; the camera mode doesn't do it). Fix it; don't make the camera mode worse ("It works
+    really, really well with my actual camera").
+12. Make the camera the main feature: a big "Start camera" button (the camera is still asked for
+    only on that tap).
+13. A switch to the rear camera (facingMode), where the device has one.
+14. Save the footage as a video (and a GIF if it's simple). Lane UI r5's engine PR #177 adds a
+    Record button (src/exports.js) that records the stage and its sound; if it merges first, use it
+    rather than a second recorder; if not, keep yours small and tell me.
+15. Optional, if time allows: a more hologram-like look as an option (scanlines or a soft edge
+    glow), never replacing the plain look.
+
+**Everywhere**
+
+16. On a phone, the Live camera / Live microphone / Stop pill covers the buttons. Move it so it
+    never covers a control at 390×844 (screenshots before and after).
+
+**New toy (his idea, N1): Moving photo to 3D**
+
+17. Like the live camera to 3D, but for a GIF or video the person opens (or a sample we ship): run
+    the depth model on every frame (or every few frames), at the depth they choose, and play it back
+    in 3D like the live camera. Use the vendored Depth Anything V2 Small and omggif already in
+    vendor/; loaded only when someone opens a file for it; nothing leaves the device. Keep frame
+    count and resolution modest so it runs on a phone (say what you chose). Behind labs, in the same
+    shelf as Photo to 3D and the live camera toy. A small sample clip must be CC0/CC BY/public
+    domain (BY-SA is now allowed with its notice beside it); credit it as usual.
+
+Clips: post cards in a lane record "Live input r3" on Effect review page 2 (I'll make the record; if
+it isn't there when you post, add your cards under "Live input" and tell me), 390×844, "built by
+Opus 5.5", with a dot where the finger is. You don't have the mic or camera in the container: use
+the fake media streams Chromium offers (--use-fake-device-for-media-stream,
+--use-file-for-fake-audio-capture / video) as in r2.
+
+Other lanes running: Sound C (sounds; your toys' sounds are yours unless the owner named one; he
+didn't this round), Physics, Fix7, UI r5, Fluids, Video 3D, Science, Sharpness A, Photoreal,
+Integrators. Leave their files alone. The laptop is locked.
+
+Finish each working turn with READY:/WORKING:/BLOCKED: as before.
+
 ## State
 
 Model: **Opus 5.5** (default effort), no helpers.
 
-October 1, 2026, morning (UTC): **round 2 done (marked good), waiting on the merge order.**
+October 2, 2026 (UTC): **round 3 working.** #144, #150, #162 and #163 are all merged.
 
 - The Operator's overnight notes (07:22 and 08:35 UTC: hold r2 until the morning's go, no self
   check-ins; merge main with UI r2 into #144 and #150) reached this session only at 10:10 UTC, after
