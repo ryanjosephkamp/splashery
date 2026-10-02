@@ -13,8 +13,10 @@ import {
   quatMul,
   quatFromTo,
   quatRotate,
+  quatEuler,
 } from "../kit.js";
 import { capPoint, evenCylinder, evenEllipsoid, evenTorus } from "./even.js";
+import { surfacePoints } from "../physics/world.js"; // lane Physics
 
 const TAU = Math.PI * 2;
 const add = (a, b) => [a[0] + b[0], a[1] + b[1], a[2] + b[2]];
@@ -478,6 +480,40 @@ const BRICK_COLOURS = {
   ocean: ["#0b3c5d", "#1d7ea8", "#5bc0be", "#b8e1dd", "#f6f5ae", "#328cc1", "#f5f5f0"],
 };
 // ---- Building bricks -----------------------------------------------------------------
+// Hands-on (lane Physics): a brick held over another lines up with its studs:
+// turned square to it (the nearest quarter turn), its middle on the stud
+// grid of the brick below.
+function snapBrick({ held, under, at }) {
+  const ub = under.body;
+  const yawOf = (q) => {
+    const f = quatRotate(q, [1, 0, 0]);
+    return Math.atan2(-f[2], f[0]);
+  };
+  const uy = yawOf(ub.q);
+  const hy = yawOf(held.body.holdQ || held.body.q);
+  const quarter = Math.round((hy - uy) / (Math.PI / 2));
+  const yaw = uy + (quarter * Math.PI) / 2;
+  // The offset in the lower brick's own frame, on its stud grid.
+  const c = Math.cos(uy);
+  const s = Math.sin(uy);
+  const dx = at[0] - ub.pos[0];
+  const dz = at[2] - ub.pos[2];
+  let lx = c * dx - s * dz;
+  let lz = s * dx + c * dz;
+  const [hw, hd] = quarter % 2 ? [held.def.studs[1], held.def.studs[0]] : held.def.studs;
+  const [uw, ud] = under.def.studs;
+  const grid = (v, a, b) => {
+    const o = ((((a - b) / 2) % 1) + 1) % 1;
+    return Math.round(v - o) + o;
+  };
+  lx = grid(lx, hw, uw);
+  lz = grid(lz, hd, ud);
+  return {
+    at: [ub.pos[0] + c * lx + s * lz, at[1], ub.pos[2] - s * lx + c * lz],
+    quat: quatAxisAngle([0, 1, 0], yaw),
+  };
+}
+
 // Units are studs; a brick is BRICK_H tall. Kinds are [studs along x, studs
 // along z] as the brick lies unturned.
 const BRICK_H = 1.2;
@@ -1097,6 +1133,23 @@ export const RECIPES = {
     density: 1.5,
     controls: [{ key: "snap", label: "Build", type: "pulse", ease: BUILD.secs }],
     action: { key: "snap", label: "Build something" },
+    // Hands-on (lane Physics): pick up any brick and stack it. Held over
+    // another brick it lines up with the studs and turns square to it, and
+    // clicks down; off the studs it lands as it falls.
+    handsOn: true,
+    hands: {
+      floor: 0,
+      area: 1.05,
+      lift: 0.12,
+      pieces: () =>
+        BRICKS.map((b, i) => {
+          const [w, d] = BRICK_KINDS[b.kind];
+          const solid = { type: "box", half: [w / 2 - 0.03, BRICK_H / 2, d / 2 - 0.03] };
+          return { token: i, pos: [b.x, BRICK_H / 2, b.z], quat: quatEuler(0, b.yaw, 0), solid, points: surfacePoints(solid, 2), pick: [w / 2, BRICK_H / 2 + 0.1, d / 2], mass: w * d, friction: 0.7, restitution: 0.1, studs: [w, d] }; // prettier-ignore
+        }),
+      snap: snapBrick,
+      sound: (hit, vol) => (hit.other ? { voice: "click", vol: Math.min(0.9, 0.3 + vol) } : { voice: "clack", vol: vol * 0.6 }), // prettier-ignore
+    },
     drive(t, c, out, info) {
       bricksDrive(c, out, info);
     },

@@ -4798,6 +4798,7 @@ export const RECIPES = {
     hands: {
       floor: 0,
       area: 1.05,
+      center: 0.45,
       pieces: (d) =>
         (d?.stones || []).map((st, i) => {
           const r = 0.8 * Math.min(st.size[0], st.size[2]);

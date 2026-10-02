@@ -537,9 +537,9 @@ export const TOY_HELP = {
       "A paramecium is a living thing made of a single cell, shaped a bit like a slipper, that lives in ponds and puddles. It is covered in thousands of tiny hairs called cilia, which beat in waves like oars to row it through the water. A groove in its side sweeps in bacteria to eat.\n\nTap it and its cilia beat hard as it swims a full loop and comes back to where it was. A paramecium is just big enough to see with a magnifying glass, as a tiny moving speck.",
   },
   amoeba: {
-    howTo: "Tap it to make it crawl over and back.",
+    howTo: "Drag it to pull out a pseudopod; let go and it oozes back. Tap it to make it crawl.",
     about:
-      'An amoeba is a living thing made of one soft cell with no fixed shape. It lives in ponds and damp soil and moves by pushing out a bulge called a pseudopod, which means "false foot," and flowing into it. It eats by wrapping its body around bits of food.\n\nTap it and it crawls: a pseudopod pushes out to one side, the grains inside stream into it and the cell oozes over; then it pushes out the other way and oozes back. Even at rest, its pods stretch a little.',
+      'An amoeba is a living thing made of one soft cell with no fixed shape. It lives in ponds and damp soil and moves by pushing out a bulge called a pseudopod, which means "false foot," and flowing into it. It eats by wrapping its body around bits of food.\n\nDrag any part of it and it stretches toward your finger like a new pseudopod; let go and it oozes back. Tap it and it crawls: a pseudopod pushes out to one side, the grains inside stream into it and the cell oozes over; then it pushes out the other way and oozes back. Even at rest, its pods stretch a little.',
   },
 
   // ---- Atoms ----------------------------------------------------------------------------
@@ -760,9 +760,9 @@ export const TOY_HELP = {
       "Bamboo is a giant grass with tall, hollow stems split into sections by rings called nodes. It is one of the fastest-growing plants in the world: some kinds can grow almost a meter in a single day. People use its strong, light stems to build houses, scaffolding and furniture.\n\nThree young shoots sit on the ground. Tap it and they shoot up a section at a time, each new section sliding up out of the one below with a hollow knock, and a tuft of leaves opens at the top; later they sink back down.",
   },
   rocks: {
-    howTo: "Tap to tumble and stack them. Pick a pile or a cairn in the Toy tab.",
+    howTo: "Drag a pebble to pick it up and set it on another to stack them. Tap to tumble them.",
     about:
-      "Pebbles are small stones rounded smooth by water. As rivers and waves roll them over and over, knocking against sand and other stones, their sharp corners wear away, a process that can take hundreds or thousands of years. A cairn is a pile of stones stacked up by people, often to mark a trail.\n\nTap it and the pebbles roll out over the sand, then five of them hop one at a time onto a cairn, biggest at the bottom, with a clack each; at the end they all hop back. Pick a pebble pile or a cairn in the Toy tab, and a Seed for different stones.",
+      "Pebbles are small stones rounded smooth by water. As rivers and waves roll them over and over, knocking against sand and other stones, their sharp corners wear away, a process that can take hundreds or thousands of years. A cairn is a pile of stones stacked up by people, often to mark a trail.\n\nDrag a pebble to pick it up: it lifts clear, and you can set it down on the sand or on another stone. Stack them carefully and the stack stands; set one on the edge and it topples. The ✋ button turns this off, and the reset button puts every stone back. Tap it and the pebbles roll out over the sand, then five of them hop one at a time onto a cairn, biggest at the bottom, with a clack each; at the end they all hop back. Pick a pebble pile or a cairn in the Toy tab, and a Seed for different stones.",
   },
   kelp: {
     howTo: "Tap it to bring fish in to nibble the kelp.",
@@ -859,9 +859,9 @@ export const TOY_HELP = {
       "Popcorn is a kind of corn whose kernels puff up when they are heated. Each kernel has a hard shell with a little water inside. When it gets hot, the water turns to steam, the pressure builds until the shell bursts with a pop, and the soft starch inside puffs out into a white, crunchy foam.\n\nTap it and fresh kernels pop up out of the striped bucket, tumble and land on the heap. People in the Americas were popping corn thousands of years ago, long before movie theaters.",
   },
   jelly: {
-    howTo: "Tap it to poke it and watch it wobble.",
+    howTo: "Drag it to stretch it; let go and it wobbles back. Tap it to poke it.",
     about:
-      "A jelly, or gelatin dessert, is fruit juice or sweet flavored water set with gelatin and turned out of a mold. Gelatin makes a fine, stretchy mesh that traps the water, so the jelly holds its shape but wobbles when you touch it.\n\nThis one always jiggles a little. Tap it to poke it: it squashes and wobbles hard, then settles down. In the Toy tab, pick strawberry, lime, orange, blueberry, grape or rainbow, and choose whether it has fruit set inside.",
+      "A jelly, or gelatin dessert, is fruit juice or sweet flavored water set with gelatin and turned out of a mold. Gelatin makes a fine, stretchy mesh that traps the water, so the jelly holds its shape but wobbles when you touch it.\n\nThis one always jiggles a little. Drag any part of it and it stretches toward your finger; let go and it springs back and wobbles on its plate. Tap it to poke it: it squashes and wobbles hard, then settles down. In the Toy tab, pick strawberry, lime, orange, blueberry, grape or rainbow, and choose whether it has fruit set inside.",
   },
   pancakes: {
     howTo: "Tap to flip the top pancake. Set the stack and the syrup in the Toy tab.",
@@ -884,9 +884,10 @@ export const TOY_HELP = {
       "A candy cane is a stick of hard peppermint candy bent into a hook, with red and white stripes, and it is often hung on trees in the Christmas season. The stripes are made by twisting ropes of red and white candy together while they are warm and soft.\n\nTap it and each cane twists, the hook turning and the stripes winding tighter, until it snaps with a crack. The top half springs clear, sugar chips fly, then the halves come back together and mend with a glint. Pick a pair with a bow or a single cane, and the stripe color, in the Toy tab.",
   },
   macarons: {
-    howTo: "Tap it and the two in front hop up onto the stack.",
+    howTo:
+      "Drag a macaron to pick it up and stack it. Tap and the two in front hop up onto the stack.",
     about:
-      "A macaron is a small French sweet: two light, round cookies made of ground almonds, egg whites and sugar, stuck together with a creamy filling. The tops are smooth and domed, and each cookie has a frilly edge at the bottom, called the foot, that rises as it bakes.\n\nTap it and the two macarons in front hop, one after the other, up onto the stack and land with a soft tap. The tower of five sways, then they hop back down. Pick a pastel mix or one flavor in the Toy tab.",
+      "A macaron is a small French sweet: two light, round cookies made of ground almonds, egg whites and sugar, stuck together with a creamy filling. The tops are smooth and domed, and each cookie has a frilly edge at the bottom, called the foot, that rises as it bakes.\n\nDrag any macaron to pick it up and set it down on the plate or on top of the stack; set one down crooked and it slides off. Tap it and the two macarons in front hop, one after the other, up onto the stack and land with a soft tap. The tower of five sways, then they hop back down. Pick a pastel mix or one flavor in the Toy tab.",
   },
   donut: {
     howTo: "Tap it to break it apart and put it back together.",
@@ -964,9 +965,10 @@ export const TOY_HELP = {
       "A pineapple is a tropical fruit with a tough, scaly skin and a spiky crown of leaves. It is really many small fruits grown together: each scale on the skin comes from a single flower. Pineapples first grew in South America, and a crown twisted off and planted can grow a whole new plant.\n\nTap it for four chops, top first. With each chop, everything above lifts and leans toward you, until five rings stand apart in a leaning stack, showing their golden flesh and pale cores. Then they drop back onto each other.",
   },
   cherries: {
-    howTo: "Tap it to swing the cherries apart; they knock back together.",
+    howTo:
+      "Pull a cherry out on its stem and let go; it swings back and knocks the other. Tap to swing them.",
     about:
-      "Cherries are small, round fruits that grow on trees, often in pairs whose long stems are joined at the top. Each cherry has one hard stone in the middle with the seed inside, so it is called a stone fruit, like a plum or a peach.\n\nTap it and a flick swings the two cherries apart on their own stems. They swing back and knock together with a plink, bouncing apart again and again until they settle, while the joint of the stems bobs.",
+      "Cherries are small, round fruits that grow on trees, often in pairs whose long stems are joined at the top. Each cherry has one hard stone in the middle with the seed inside, so it is called a stone fruit, like a plum or a peach.\n\nPull a cherry out on its stem and let go: it swings back and knocks the other one, which swings out in turn, until they settle. Tap it and a flick swings the two cherries apart on their own stems. They swing back and knock together with a plink, bouncing apart again and again until they settle, while the joint of the stems bobs.",
   },
   grapes: {
     howTo: "Tap it: grapes drop off the bunch, bounce and hop back.",
@@ -981,9 +983,9 @@ export const TOY_HELP = {
 
   // ---- Toys -----------------------------------------------------------------------------
   bricks: {
-    howTo: "Tap to build a model from the bricks; tap again to build another.",
+    howTo: "Drag a brick onto another to stack it; it clicks onto the studs. Tap to build a model.",
     about:
-      "Building bricks are small plastic blocks with round studs on top that press into tubes underneath the next brick, so they hold together firmly and can be pulled apart again. With enough of them you can build almost anything, and even six ordinary bricks can be stacked together in hundreds of millions of different ways.\n\nHere eighteen bricks lie spread out on the table. Each tap pops the last model apart and builds a new one in the middle, brick by brick from the bottom up, each clicking into place: a tower, a bridge, stairs, a dog or a tree. Pick a set of colors in the Toy tab.",
+      "Building bricks are small plastic blocks with round studs on top that press into tubes underneath the next brick, so they hold together firmly and can be pulled apart again. With enough of them you can build almost anything, and even six ordinary bricks can be stacked together in hundreds of millions of different ways.\n\nHere eighteen bricks lie spread out on the table. Drag one to pick it up and hold it over another: it turns square and lines up with the studs, and clicks on when you let go, so you can build your own. Each tap pops the last model apart and builds a new one in the middle, brick by brick from the bottom up, each clicking into place: a tower, a bridge, stairs, a dog or a tree. Pick a set of colors in the Toy tab.",
   },
   "rubber-duck": {
     howTo: "Tap it to squeeze it: it squeaks, hops and bobs.",

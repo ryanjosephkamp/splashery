@@ -41,23 +41,23 @@ Proposals below are suggestions; the owner may change them.
   tree, Palm tree, Cherry blossom, Maple tree, Bonsai, Weeping willow, Sunflower, Rose, Tulips,
   Daisies, Lotus, Toadstool, Fern, Saguaro cactus, Coral reef, Pinecone, Acorns, Succulent, Bamboo,
   Pebbles, Kelp, Lava lamp, Ice swan, Tornado, Rainbow, Iceberg, Waterfall, Ocean wave, Ice cream,
-  Watermelon, Cupcake, Lollipop, Candy cane, Macarons, Donut, Gummy bear, Pretzel, Croissant, Sushi,
-  Taco, Coffee, Apple, Bananas, Orange, Kiwi, Pineapple, Cherries, Grapes, Avocado, Building bricks,
-  Rubber duck, Newton's cradle, Puzzle cube, Kite, Chess set, Lorenz attractor, Möbius strip, Klein
-  bottle, Menger sponge, Hypercube, Torus knot, Gyroid, Mandelbulb, Seashell spiral, Graph plotter,
-  Surface plotter, Circle and waves, Fourier circles, Pythagoras proof, Splat equation, Fountain
-  pen, Water bottle, Soda can, Running shoe, Hoodie, Sunglasses, Baseball cap, Heraldic shield,
-  Crown, Wizard's orb, Crystal ball, Jellyfish, School of fish, Pufferfish, Nautilus, Snail,
-  Octopus, Sea urchin, Frog, Snowman, Fireworks, Decorated tree, Diya, Acoustic guitar, Snare drum,
-  Xylophone, Toy piano, Grand piano, Upright piano, Harpsichord, Electronic keyboard, Hot-air
-  balloon, Bus, Jet airliner, Sailboat, Submarine, Bicycle, Eiffel Tower, Washington Monument,
-  Pyramids of Giza, Twisting supertall, Statue of Liberty, White House, Leaning Tower of Pisa,
-  Colosseum, Parthenon, Stonehenge, Big Ben, Taj Mahal, Castle, Pagoda, Windmill, Perceptron,
-  Multilayer perceptron, Neural network, Convolutional network, Recurrent network, Transformer,
-  Looped transformer, Diffusion model, Gradient descent, Gaussian splatting, Word vectors, Sorting
-  machine, Half adder, Turing machine, Difference engine, Enigma machine, Bombe, Your book, Photo
-  album, Picture frame, Room echo meter, Splat mirror, Model to splats, Photo to 3D, Video to 3D,
-  Splat field, Fluid lab, Screen.
+  Watermelon, Jelly, Cupcake, Lollipop, Candy cane, Macarons, Donut, Gummy bear, Pretzel, Croissant,
+  Sushi, Taco, Coffee, Apple, Bananas, Orange, Kiwi, Pineapple, Cherries, Grapes, Avocado, Building
+  bricks, Rubber duck, Newton's cradle, Puzzle cube, Kite, Chess set, Lorenz attractor, Möbius
+  strip, Klein bottle, Menger sponge, Hypercube, Torus knot, Gyroid, Mandelbulb, Seashell spiral,
+  Graph plotter, Surface plotter, Circle and waves, Fourier circles, Pythagoras proof, Splat
+  equation, Fountain pen, Water bottle, Soda can, Running shoe, Hoodie, Sunglasses, Baseball cap,
+  Heraldic shield, Crown, Wizard's orb, Crystal ball, Jellyfish, School of fish, Pufferfish,
+  Nautilus, Snail, Octopus, Sea urchin, Frog, Snowman, Fireworks, Decorated tree, Diya, Acoustic
+  guitar, Snare drum, Xylophone, Toy piano, Grand piano, Upright piano, Harpsichord, Electronic
+  keyboard, Hot-air balloon, Bus, Jet airliner, Sailboat, Submarine, Bicycle, Eiffel Tower,
+  Washington Monument, Pyramids of Giza, Twisting supertall, Statue of Liberty, White House, Leaning
+  Tower of Pisa, Colosseum, Parthenon, Stonehenge, Big Ben, Taj Mahal, Castle, Pagoda, Windmill,
+  Perceptron, Multilayer perceptron, Neural network, Convolutional network, Recurrent network,
+  Transformer, Looped transformer, Diffusion model, Gradient descent, Gaussian splatting, Word
+  vectors, Sorting machine, Half adder, Turing machine, Difference engine, Enigma machine, Bombe,
+  Your book, Photo album, Picture frame, Room echo meter, Splat mirror, Model to splats, Photo to
+  3D, Video to 3D, Splat field, Fluid lab, Screen.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -1017,7 +1017,7 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Pushes out a pseudopod and oozes over.
   - Improved: E3: it crawls: a round pseudopod pushes out to the right, granules stream into it and
     the cell oozes over; then one pushes out to the left and it oozes back; at rest its pods stretch
-    a little (5.2 s).
+    a little (5.2 s). Physics (Hands-on): drag it to pull out a pseudopod; let go and it oozes back.
   - Sound: Gloopy ooze.
 
 ## Atoms (6)
@@ -1280,7 +1280,8 @@ Proposals below are suggestions; the owner may change them.
   - Improved: E4: a tap tumbles the pebbles: each rolls out over the sand on its own path to lie
     clear of the others, then five hop one at a time onto a cairn, biggest at the bottom, with a
     clack each; at the end they all hop back (about 7 s). In the Cairn style the top four topple off
-    and are stacked again.
+    and are stacked again. Physics (Hands-on): drag a pebble to pick it up and set it on the sand or
+    on another stone; a careful stack stands, a careless one topples.
   - Sound: Real stone-on-stone knocks as the pile shifts and tumbles home; the stacking knocks stay;
     real CC0 recordings now (rocks-pebbles.mp3), with the synthesized sound as a fallback.
 - **Kelp** (`kelp`). Now: tap: Fish come to nibble. Plan: keep.
@@ -1316,6 +1317,8 @@ Proposals below are suggestions; the owner may change them.
     pops); real CC0 recordings now (popcorn-popping.mp3), with the synthesized sound as a fallback.
 - **Jelly** (`jelly`). Now: tap: Poke. Plan: keep.
   - Owner: Pretty much fine.
+  - Improved: Physics (Hands-on): drag it to stretch it toward the finger; let go and it springs
+    back and wobbles on its plate.
   - Sound: A wet, heavy wobble instead of a cartoon boing.
 - **Pancakes** (`pancakes`). Now: tap: Flip the top one. Plan: keep.
   - Owner: Really neat.
@@ -1345,7 +1348,8 @@ Proposals below are suggestions; the owner may change them.
   - Effect: They stack themselves into a tower.
   - Improved: E5: the two in front hop one after the other up onto the stack, rising clear of its
     rim and landing level with a soft tap; the tower of five sways, then they hop back down (about
-    3.5 s).
+    3.5 s). Physics (Hands-on): pick up any macaron and stack it on the plate or the stack; a
+    crooked one slides off.
   - Sound: Soft taps.
 - **Donut** (`donut`). Now: tap: Break apart (rig). Plan: keep.
   - Owner: Interesting; good-looking.
@@ -1453,7 +1457,8 @@ Proposals below are suggestions; the owner may change them.
   - Effect: The pair swings and bounces on its stems.
   - Improved: E5: a flick swings the two cherries apart on their own stems; they swing back and
     knock together (a plink each time), bouncing apart again until they settle, while the joint bobs
-    (about 3.6 s).
+    (about 3.6 s). Physics (Hands-on): pull a cherry out on its stem and let go; it swings back and
+    knocks the other, which swings out in turn.
   - Sound: No string note, only the stems' soft swish; the knocking is unchanged.
 - **Grapes** (`grapes`). Now: tap: Drop grapes. Plan: keep.
   - Owner: Could fall off the stem.
@@ -1476,7 +1481,9 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Bricks rearrange into a random small build (tower, bridge, animal), different each tap.
   - Improved: F: eighteen bricks lie poured out round the table. Each tap pops the last model apart
     and builds a new one in the middle, brick by brick from the bottom up, each clicking into place:
-    a tower, a bridge, stairs, a dog or a tree (never the same twice running; about 5 s).
+    a tower, a bridge, stairs, a dog or a tree (never the same twice running; about 5 s). Physics
+    (Hands-on): pick up any brick and stack it; over another brick it turns square, lines up with
+    the studs and clicks on.
   - Sound: A lower plastic clack, for the tap and each brick landing.
   - Touch or drag interaction (phase F).
 - **Rubber duck** (`rubber-duck`). Now: tap: Squeak. Plan: keep.

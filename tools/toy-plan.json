@@ -888,7 +888,7 @@
       "owner": "Needs an effect.",
       "effect": "Pushes out a pseudopod and oozes over.",
       "sound": "Gloopy ooze.",
-      "improved": "E3: it crawls: a round pseudopod pushes out to the right, granules stream into it and the cell oozes over; then one pushes out to the left and it oozes back; at rest its pods stretch a little (5.2 s)."
+      "improved": "E3: it crawls: a round pseudopod pushes out to the right, granules stream into it and the cell oozes over; then one pushes out to the left and it oozes back; at rest its pods stretch a little (5.2 s). Physics (Hands-on): drag it to pull out a pseudopod; let go and it oozes back."
     },
     "orbital": {
       "v": "keep",
@@ -1128,7 +1128,7 @@
       "owner": "Should fall or drop.",
       "effect": "The pebbles drop and scatter, then stack into a cairn.",
       "sound": "Real stone-on-stone knocks as the pile shifts and tumbles home; the stacking knocks stay; real CC0 recordings now (rocks-pebbles.mp3), with the synthesized sound as a fallback.",
-      "improved": "E4: a tap tumbles the pebbles: each rolls out over the sand on its own path to lie clear of the others, then five hop one at a time onto a cairn, biggest at the bottom, with a clack each; at the end they all hop back (about 7 s). In the Cairn style the top four topple off and are stacked again."
+      "improved": "E4: a tap tumbles the pebbles: each rolls out over the sand on its own path to lie clear of the others, then five hop one at a time onto a cairn, biggest at the bottom, with a clack each; at the end they all hop back (about 7 s). In the Cairn style the top four topple off and are stacked again. Physics (Hands-on): drag a pebble to pick it up and set it on the sand or on another stone; a careful stack stands, a careless one topples."
     },
     "kelp": {
       "v": "keep",
@@ -1164,7 +1164,8 @@
     "jelly": {
       "v": "keep",
       "owner": "Pretty much fine.",
-      "sound": "A wet, heavy wobble instead of a cartoon boing."
+      "sound": "A wet, heavy wobble instead of a cartoon boing.",
+      "improved": "Physics (Hands-on): drag it to stretch it toward the finger; let go and it springs back and wobbles on its plate."
     },
     "pancakes": {
       "v": "keep",
@@ -1197,7 +1198,7 @@
       "owner": "Maybe they do something.",
       "effect": "They stack themselves into a tower.",
       "sound": "Soft taps.",
-      "improved": "E5: the two in front hop one after the other up onto the stack, rising clear of its rim and landing level with a soft tap; the tower of five sways, then they hop back down (about 3.5 s)."
+      "improved": "E5: the two in front hop one after the other up onto the stack, rising clear of its rim and landing level with a soft tap; the tower of five sways, then they hop back down (about 3.5 s). Physics (Hands-on): pick up any macaron and stack it on the plate or the stack; a crooked one slides off."
     },
     "gummy-bear": {
       "v": "keep",
@@ -1297,7 +1298,7 @@
       "owner": "No idea.",
       "effect": "The pair swings and bounces on its stems.",
       "sound": "No string note, only the stems' soft swish; the knocking is unchanged.",
-      "improved": "E5: a flick swings the two cherries apart on their own stems; they swing back and knock together (a plink each time), bouncing apart again until they settle, while the joint bobs (about 3.6 s)."
+      "improved": "E5: a flick swings the two cherries apart on their own stems; they swing back and knock together (a plink each time), bouncing apart again until they settle, while the joint bobs (about 3.6 s). Physics (Hands-on): pull a cherry out on its stem and let go; it swings back and knocks the other, which swings out in turn."
     },
     "grapes": {
       "v": "keep",
@@ -1319,7 +1320,7 @@
       "owner": "Build something random from the blocks.",
       "effect": "Bricks rearrange into a random small build (tower, bridge, animal), different each tap.",
       "sound": "A lower plastic clack, for the tap and each brick landing.",
-      "improved": "F: eighteen bricks lie poured out round the table. Each tap pops the last model apart and builds a new one in the middle, brick by brick from the bottom up, each clicking into place: a tower, a bridge, stairs, a dog or a tree (never the same twice running; about 5 s)."
+      "improved": "F: eighteen bricks lie poured out round the table. Each tap pops the last model apart and builds a new one in the middle, brick by brick from the bottom up, each clicking into place: a tower, a bridge, stairs, a dog or a tree (never the same twice running; about 5 s). Physics (Hands-on): pick up any brick and stack it; over another brick it turns square, lines up with the studs and clicks on."
     },
     "rubber-duck": {
       "v": "keep",

@@ -21,6 +21,7 @@ import {
   vec,
 } from "../kit.js";
 import { evenBox, evenCylinder, evenEllipsoid, evenTorus, evenTube } from "./even.js";
+import { surfacePoints } from "../physics/world.js"; // lane Physics
 
 const TAU = Math.PI * 2;
 const { add, sub, mul, dot, len, cross, unit } = vec;
@@ -2393,6 +2394,20 @@ export const RECIPES = {
     ],
     controls: [{ key: "stack", label: "Stack up", type: "pulse", ease: MAC_SECS }],
     action: { key: "stack", label: "Stack up" },
+    // Hands-on (lane Physics): pick up any macaron and stack it; a stack
+    // set down crooked topples.
+    handsOn: true,
+    hands: {
+      floor: 0,
+      area: 1.1,
+      center: 0.7,
+      pieces: (d) =>
+        (d?.homes || []).map((pos, i) => {
+          const solid = { type: "cylinder", r: 0.42, h: 0.245 };
+          return { token: i, pos, quat: d.quats[i], solid, points: surfacePoints(solid, 1), pick: [0.45, 0.27, 0.45], mass: 1, friction: 0.8, restitution: 0.1 }; // prettier-ignore
+        }),
+      sound: (hit, vol) => (hit.other ? { voice: "wood", f: "E6", decay: 0.5, vol: Math.min(0.8, 0.25 + vol) } : { voice: "wood", f: "C6", decay: 0.4, vol: vol * 0.5 }), // prettier-ignore
+    },
     // A tap sends the two in front hopping, one after the other, up onto
     // the stack: each rises clear of the stack's rim, comes over and lands
     // level on top with a soft tap. The tower of five sways, then they hop
