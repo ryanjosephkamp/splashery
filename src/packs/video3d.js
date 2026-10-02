@@ -13,6 +13,7 @@ import { readSplatPly } from "../video3d/ply.js";
 import { sceneFrame, splatsInFrame, toyCamera, pruneSplats } from "../video3d/scene.js";
 import { SAMPLES } from "../video3d/samples.js";
 import { makeFlight } from "../video3d/flight.js";
+import { GUIDE_NOTE } from "../video3d/guide.js";
 
 const V3D = {
   file: null, // the video somebody opened (a File; it stays on the device)
@@ -78,6 +79,18 @@ async function loadSample(id) {
   return V3D.samples.get(s.id);
 }
 
+const fmt = (n) => Math.round(n).toLocaleString("en-US");
+
+// The settings somebody can pick (frames.js TIERS); "auto" is phone-safe on a phone and the
+// device's own tier elsewhere.
+const SETTING_LABELS = {
+  phone: "Phone-safe",
+  low: "Light",
+  mid: "Standard",
+  high: "High",
+  max: "Highest",
+};
+
 const isBrowser = () => typeof window !== "undefined" && typeof document !== "undefined";
 
 // Trains the open video's chosen stretch (browser only), showing the progress card.
@@ -88,11 +101,33 @@ async function trainVideo(o, key) {
     import("../player.js"),
     import("../exports.js"),
   ]);
+  const { isPhone, estimateMinutes } = await import("../video3d/run.js");
+  const { tierSettings } = await import("../video3d/frames.js");
   const card = progressCard();
   card.reset(`${V3D.videoName}: ${o.length} s from ${o.start} s`);
+  // The setting: phone-safe on a phone unless somebody picks another (r7).
+  const phone = isPhone();
+  const profile = globalThis.window?.__splashery?.player?.profile || detectProfile();
+  const tier = !o.setting || o.setting === "auto" ? (phone ? "phone" : profile) : o.setting;
+  const set = { ...tierSettings(tier), ...(globalThis.__v3dSettings || {}) };
+  const [lo, hi] = estimateMinutes(tier, set);
+  const label = SETTING_LABELS[tier] || tier;
+  const plan = `${label}: up to ${set.maxFrames} frames, ${fmt(set.iters)} training steps, up to ${fmt(set.splats)} splats. A rough guess: ${lo} to ${hi} minutes.`; // prettier-ignore
+  const warn = phone
+    ? ` On a phone it gets warm. Keep this tab open and the phone plugged in if you can${tier === "phone" ? `; training stops by itself after ${set.maxMinutes} minutes and keeps what it has` : ". A heavier setting than phone-safe can make a phone hot and slow"}. Finish now keeps what has been trained.` // prettier-ignore
+    : "";
+  // A phone asks first (the tools that train the samples skip it).
+  if (phone && !globalThis.__v3dSettings) {
+    const go = await card.confirm(plan + warn);
+    if (!go) {
+      V3D.error = "Not started.";
+      card.fail("Not started. Pick a stretch or a setting and open the video again.", { advice: false }); // prettier-ignore
+      return null;
+    }
+  }
+  card.planLine(plan);
   const ctrl = new AbortController();
   card.stopButton(() => ctrl.abort());
-  const tier = globalThis.window?.__splashery?.player?.profile || detectProfile();
   try {
     const r = await videoTo3D(V3D.file, {
       start: Number(o.start),
@@ -114,7 +149,8 @@ async function trainVideo(o, key) {
     return V3D.custom;
   } catch (e) {
     V3D.error = e?.name === "AbortError" ? "Stopped." : e?.message || String(e);
-    card.fail(V3D.error);
+    // What makes a video work, unless the video was not the trouble (no WebGPU, or stopped).
+    card.fail(V3D.error, { advice: e?.name !== "AbortError" && !/WebGPU|graphics card|play that video/.test(V3D.error) }); // prettier-ignore
     return null;
   }
 }
@@ -131,8 +167,6 @@ export async function openVideoFile(file, name) {
   V3D.custom = null;
   return { duration: v.duration, width: v.width, height: v.height };
 }
-
-const fmt = (n) => Math.round(n).toLocaleString("en-US");
 
 // A stand-in when there is nothing to show yet: a strip of film.
 function buildFilmStrip(k) {
@@ -192,6 +226,18 @@ const VIDEO_3D = {
         { id: "6", label: "6 a second" },
       ],
     },
+    {
+      key: "setting",
+      label: "Setting",
+      type: "select",
+      default: "auto",
+      choices: [
+        { id: "auto", label: "Automatic (phone-safe on a phone)" },
+        { id: "phone", label: "Phone-safe (quickest, softest)" },
+        { id: "mid", label: "Standard" },
+        { id: "high", label: "High (a computer with a graphics card)" },
+      ],
+    },
     { key: "videoName", label: "Video name", type: "text", default: "", hidden: true },
   ],
   controls: [{ key: "replay", label: "Replay flight", type: "toggle", default: 0, ease: 0.6 }],
@@ -201,7 +247,7 @@ const VIDEO_3D = {
     accept: "video/*,.mp4,.m4v,.mov,.webm",
     binary: true,
     fileButton: "Open a video…",
-    note: "Open a video of a place or an object that stands still, filmed while moving around it (a walk around a statue, a street, a drone flight). Choose the stretch above first: its sharpest frames are picked, the camera path is worked out and splats are trained on this device through WebGPU. Nothing is uploaded. It takes minutes, longer on a phone. Moving cars and people blur or vanish.",
+    note: GUIDE_NOTE,
     async read(_text, fileName, file) {
       if (!file) throw new Error("Open a video.");
       const name = (file.name || fileName || "Your video").replace(/\.[^.]+$/, "");
@@ -229,7 +275,7 @@ const VIDEO_3D = {
   async prepare(o) {
     V3D.want = null;
     if (o.source === "custom" && V3D.file && isBrowser()) {
-      const key = `${V3D.fileUid}/${o.start}/${o.length}/${o.rate}`;
+      const key = `${V3D.fileUid}/${o.start}/${o.length}/${o.rate}/${o.setting || "auto"}`;
       if (V3D.custom?.key !== key) await trainVideo(o, key);
       if (V3D.custom?.key === key) V3D.want = V3D.custom;
     }
