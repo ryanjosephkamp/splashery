@@ -458,6 +458,22 @@ the Kenney character moved to `?character=kenney`:
   record on September 30, 2026): the takes Neutral_ID (idle), Neutral_FW (walk) and Proud_FR (run),
   retargeted onto the character, cut to one loop each and played in place.
 
+Round 4 (October 1, 2026) shaped the walk and the run to measured human gait and added the character
+lab (`worlds/lab/`), which draws that gait beside the character. `tools/wd-gait-refs.py` builds
+`assets/worlds/lab/gait-reference.json` (joint-angle means and standard deviations, numbers only)
+from two public datasets, both [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) (checked on
+their live figshare pages on October 1, 2026):
+
+- Walking: Claudiane A. Fukuchi, Reginaldo K. Fukuchi and Marcos Duarte (2018),
+  [A public data set of overground and treadmill walking kinematics and kinetics of healthy individuals](https://figshare.com/articles/dataset/A_public_data_set_of_overground_and_treadmill_walking_kinematics_and_kinetics_of_healthy_individuals/5722711)
+  (doi 10.6084/m9.figshare.5722711), PeerJ 6:e4640.
+- Running: Reginaldo K. Fukuchi, Claudiane A. Fukuchi and Marcos Duarte (2017),
+  [A public data set of running biomechanics and the effects of running speed on lower extremity kinematics and kinetics](https://figshare.com/articles/dataset/A_comprehensive_public_data_set_of_running_biomechanics_and_the_effects_of_running_speed_on_lower_extremity_kinematics_and_kinetics/4543435)
+  (doi 10.6084/m9.figshare.4543435), PeerJ 5:e3298.
+
+The arm ranges and the walking pelvis's bob and sway are published values (facts, cited in
+docs/WORLDS.md, "The character lab").
+
 Its model props (hybrid mode; `tools/wd-props.py` builds `assets/worlds/props/`) are scanned models
 from [Poly Haven](https://polyhaven.com), all
 [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (checked on each live page on

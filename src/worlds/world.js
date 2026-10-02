@@ -14,7 +14,7 @@ import { planLevels } from "./lod.js";
 import { WORLD_BUDGETS } from "./tiers.js";
 import { Lighting } from "./lighting.js";
 import { loadHybridAssets, groundTiles, groundMaterial, groundColor, waterMaterial, waterMeshes, skyDome, skyMaterial, useHDRI, signBoard } from "./hybrid.js"; // prettier-ignore
-import { loadMeshCharacter, loadHuman, loadSplatPerson, stepMeshCharacter } from "./mesh-character.js"; // prettier-ignore
+import { loadMeshCharacter, loadHuman, loadSplatPerson, stepMeshCharacter, fetchTuning, useWorldTuning } from "./mesh-character.js"; // prettier-ignore
 import { MeshProps, MESH_PROP_TYPES } from "./mesh-props.js";
 import * as pc from "../pc.js";
 import { mulberry32, mixSeed } from "../noise.js";
@@ -38,6 +38,7 @@ export class World {
       mode = def.render,
       shadows = true,
       characterModel = def.character.model,
+      tuning = true,
       frame = null,
     } = {},
   ) {
@@ -55,6 +56,9 @@ export class World {
     // splats mode.
     const cm = characterModel === "auto" ? (this.hybrid ? "mesh" : "splats") : characterModel;
     this.characterModel = ["mesh", "kenney", "splat-person"].includes(cm) ? cm : "splats";
+    // The person's gait tuning (assets/worlds/character/tuning.json, from the
+    // character lab); ?tuning=0 plays the measured gait.
+    this.useTuning = tuning;
     // Walking and running speeds (the realistic person's own are slower).
     this.speeds = { walk: WALK_SPEED, run: RUN_SPEED };
     this.budget = WORLD_BUDGETS[tier] || WORLD_BUDGETS.mid;
@@ -424,8 +428,11 @@ export class World {
   // The lit, skinned character (mesh-character.js). In splats mode, where
   // no sky lights the models, a soft ambient light stands in for it.
   async buildMeshCharacter() {
-    const look = this.def.character;
     const cm = this.characterModel;
+    // The lab's tuning: the person's height and the jeans' and shoes' tints
+    // (the world keeps its own shirt color), and the gait, below.
+    const tuned = cm === "mesh" && this.useTuning ? await fetchTuning() : null;
+    const look = tuned ? { ...this.def.character, height: tuned.look.height, pants: tuned.look.pants, shoes: tuned.look.shoes } : this.def.character; // prettier-ignore
     const count = CHARACTER_SPLATS[this.tier] ?? CHARACTER_SPLATS.mid;
     const {
       model,
@@ -437,6 +444,7 @@ export class World {
         ? await loadSplatPerson(this.view.app, this.view, { tier: this.tier, look, count })
         : await loadMeshCharacter(this.view.app);
     if (cm !== "kenney") this.speeds = { walk: meta.walkSpeed, run: meta.runSpeed };
+    if (tuned) await useWorldTuning(model, meta, tuned.raw);
     const root = this.view.group("character");
     root.addChild(model);
     // The first pose now (idle), not the model's rest pose. (Only once it

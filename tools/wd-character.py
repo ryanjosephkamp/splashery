@@ -47,7 +47,7 @@ import numpy as np
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CACHE = os.path.join(ROOT, ".cache/worlds/r3")
-OUT = os.path.join(ROOT, "assets/worlds/character")
+OUT = os.environ.get("WD_OUT") or os.path.join(ROOT, "assets/worlds/character")
 SOURCES = {
     "mpfb": {
         "file": "mpfb-2.0.17.zip",
@@ -101,7 +101,31 @@ IDLE_LIFT = {"head": -0.4, "neck_01": -0.12}
 # about 0.9 (walk) and 1.9 (run); the clips play faster to match (about 1.4
 # times), a brisk walk and a steady run.
 WALK_SPEED = 1.3
-RUN_SPEED = 2.7
+RUN_SPEED = 2.5
+
+# Round 4: the gait shaped to measured human motion (tools/wd-gait-refs.py
+# builds the reference; docs/WORLDS.md, "The character lab"). The legs'
+# sagittal angles follow the measured means; the arms hang at the sides and
+# swing from the shoulder opposite the legs; the trunk leans a little (more
+# running); the pelvis's height comes from the feet on the ground and its
+# side-to-side sway is scaled to the measured amount. Angles in degrees:
+#   tilt      the pelvis's forward tilt the hip angles are measured against
+#             (WBDS mean about 10 when walking; running about 15)
+#   lean      the trunk's forward lean
+#   shoulder  (mean, half range) of the upper arm against the trunk,
+#             positive forward (walking range 44, within Kang et al.'s 56 +/- 13)
+#   elbow     (mean, half range) of flexion (walking range 30: Kang et al.
+#             29.7; running mean near 90, range 38: Tartaruga et al. 38.8)
+#   abduct    the upper arm out from the side (frontal plane)
+#   stance    the share of the stride a foot is down (toe-off)
+#   sway      the pelvis's side-to-side range in cm (Orendurff et al.;
+#             running from the RBDS markers)
+GAIT_REF = os.path.join(ROOT, "assets/worlds/lab/gait-reference.json")
+GAIT = {
+    "walk": {"tilt": 10, "lean": 3, "shoulder": (-5, 22), "elbow": (22, 15), "abduct": 9, "stance": 0.62, "sway": 4.2, "heel": 0.0},
+    "run": {"tilt": 15, "lean": 8, "shoulder": (-22, 28), "elbow": (85, 16), "abduct": 12, "stance": 0.40, "sway": 2.2, "heel": 0.0},
+    "idle": {"tilt": 10, "lean": 0, "shoulder": (-3, 0), "elbow": (12, 0), "abduct": 8},
+}
 CYCLE_KEYS = 32
 
 # The levels: high and max use "high", low and mid use "low".
@@ -483,8 +507,102 @@ def finger_curl(name):
     return Quaternion()
 
 
-def retarget(rig, take, f0, f1, mode, lift, samples, dz=0.0):
-    """Returns per-sample (basis, armature-space matrices) for every bone."""
+def sag(d):
+    """A limb's angle from straight down, in the side view, positive forward
+    (the character faces -y)."""
+    return math.degrees(math.atan2(-d[1], -d[2]))
+
+
+def aim(Q, phi, lateral=None):
+    """Turns a bone's world rotation so it points phi degrees from straight
+    down (side view), keeping (or setting) its sideways component."""
+    from mathutils import Vector
+
+    d = Q.col[1].normalized()
+    x = d.x if lateral is None else lateral
+    r = math.sqrt(max(0.0, 1 - x * x))
+    p = math.radians(phi)
+    return d.rotation_difference(Vector((x, -math.sin(p) * r, -math.cos(p) * r))).to_matrix() @ Q
+
+
+def cyc(curve, phase):
+    """A reference curve (every 2% of the stride) at a phase in [0, 1)."""
+    n = len(curve) - 1
+    x = (phase % 1.0) * n
+    i = int(x)
+    return curve[i] + (curve[min(i + 1, n)] - curve[i]) * (x - i)
+
+
+class Shaper:
+    """The round-4 gait (GAIT above): per bone, its world rotation from the
+    reference curves, top-down, given the bones above it."""
+
+    def __init__(self, gait, rig, ref):
+        self.g = GAIT[gait]
+        self.kind = gait
+        self.ref = ref.get(gait) if gait in ("walk", "run") else None
+        rest = {b.name: b.matrix_local for b in rig.data.bones}
+        # The foot's rest angle against the shank (both seen from the side).
+        self.foot0 = {s: sag(rest[f"foot_{s}"].col[1]) - sag(rest[f"calf_{s}"].col[1]) for s in "lr"}
+        self.ball0 = {s: sag(rest[f"ball_{s}"].col[1]) - sag(rest[f"foot_{s}"].col[1]) for s in "lr"}
+        # The upright rest pose's spine, neck, head and collarbones (the
+        # capture's are stooped, the shoulders rounded forward).
+        self.rest_dir = {n: rest[n].to_3x3().col[1].normalized() for n in ("spine_01", "spine_02", "spine_03", "neck_01", "head", "clavicle_l", "clavicle_r")}
+        if self.ref:
+            hip = self.ref["joints"]["hip"]["mean"]
+            self.hip_mid = (max(hip) + min(hip)) / 2
+            self.hip_half = (max(hip) - min(hip)) / 2
+
+    def phase(self, side, u):
+        return (u + (0.0 if side == "l" else 0.5)) % 1.0
+
+    def __call__(self, n, Q, u, M):
+        g = self.g
+        side = n[-1] if n.endswith(("_l", "_r")) else None
+        other = {"l": "r", "r": "l"}.get(side)
+        sign = 1.0 if side == "l" else -1.0
+        if n in ("spine_01", "spine_02", "spine_03", "neck_01", "head"):
+            # Upright as at rest, leaning forward by the gait's lean (the head
+            # level); the capture's small sideways sway is kept.
+            d0 = self.rest_dir[n]
+            return aim(Q, sag(d0) - (0 if n == "head" else g["lean"]))
+        if n.startswith("clavicle"):
+            d0 = self.rest_dir[n]
+            return aim(Q, sag(d0), d0.x)
+        if self.ref and side and n.startswith(("thigh", "calf", "foot", "ball")):
+            j = self.ref["joints"]
+            ph = self.phase(side, u)
+            if n.startswith("thigh"):
+                return aim(Q, cyc(j["hip"]["mean"], ph) - g["tilt"])
+            if n.startswith("calf"):
+                return aim(Q, sag(M[f"thigh_{side}"].col[1]) - cyc(j["knee"]["mean"], ph))
+            if n.startswith("foot"):
+                return aim(Q, sag(M[f"calf_{side}"].col[1]) + self.foot0[side] + cyc(j["ankle"]["mean"], ph))
+            return aim(Q, sag(M[f"foot_{side}"].col[1]) + self.ball0[side])
+        if side and n.startswith(("upperarm", "lowerarm", "hand")):
+            # The trunk's forward lean (spine_03 points up).
+            up = M["spine_03"].col[1]
+            trunk = math.degrees(math.atan2(-up[1], up[2]))
+            # The arm swings with the opposite leg's hip (forward as that leg
+            # comes forward), the elbow bending most as the arm comes forward.
+            if self.ref:
+                k = (cyc(self.ref["joints"]["hip"]["mean"], self.phase(other, u)) - self.hip_mid) / self.hip_half
+            else:
+                k = 0.0
+            sh = g["shoulder"][0] + g["shoulder"][1] * k + trunk
+            el = g["elbow"][0] + g["elbow"][1] * k
+            ab = math.sin(math.radians(g["abduct"])) * sign
+            if n.startswith("upperarm"):
+                return aim(Q, sh, ab)
+            if n.startswith("lowerarm"):
+                return aim(Q, sh + el, ab * 0.4)
+            return aim(Q, sh + el + 4, ab * 0.4)
+        return Q
+
+
+def retarget(rig, take, f0, f1, mode, lift, samples, dz=0.0, shape=None, shift=None):
+    """Returns per-sample (basis, armature-space matrices) for every bone.
+    shape: a Shaper (round 4); shift: per sample (x, y, z) added to the pelvis."""
     from mathutils import Matrix, Quaternion, Vector
 
     J, D, dt = read_take(take)
@@ -528,6 +646,9 @@ def retarget(rig, take, f0, f1, mode, lift, samples, dz=0.0):
             base = hips[f0:f1].mean(0) * scale
         hp = hips[f] * scale
         hp = Vector((hp[0] - base[0], hp[1] - base[1], hp[2] + dz))
+        if shift is not None:
+            k = samples.index(u)
+            hp = Vector((hp[0] * shift[k][3] + shift[k][0], shift[k][1], hp[2] + shift[k][2]))
         M, B = {}, {}
         for n in order:
             b = bones[n]
@@ -539,6 +660,8 @@ def retarget(rig, take, f0, f1, mode, lift, samples, dz=0.0):
                 Q = Matrix(Rb[f, idx[BONE_MAP[n][0]]].tolist()) @ align[n] @ rest[n].to_3x3()
                 if n in lift:
                     Q = Q @ Matrix.Rotation(lift[n], 3, "X")
+                if shape is not None:
+                    Q = shape(n, Q, u, M)
                 if n == "pelvis":
                     Mt = Matrix.Translation(hp) @ Q.to_4x4()
                     Bm = base_m.inverted() @ Mt
@@ -564,24 +687,18 @@ def build_clip(bpy, rig, name, take, f0, f1, mode):
         n = (f1 - f0) // 2
         samples = [k / n for k in range(n + 1)]
         duration = (f1 - f0) / 60
-    out, scale = retarget(rig, take, f0, f1, mode, lift, samples)
-    # The feet onto the ground: the balls of the feet at their rest height
-    # when they stand.
-    zz = np.array([[M["ball_l"].to_translation().z, M["ball_r"].to_translation().z] for B, M in out]).min(1)
-    dz = rig.data.bones["ball_l"].head_local.z - np.percentile(zz, 10)
-    out, scale = retarget(rig, take, f0, f1, mode, lift, samples, dz)
-    # The stride: how far the standing foot travels (backward) in one cycle.
-    fl = np.array([list(M["ball_l"].to_translation()) for B, M in out])
-    fr = np.array([list(M["ball_r"].to_translation()) for B, M in out])
-    step = duration / (len(out) - 1)
-    stride = 0.0
+    gait = {"walk": "walk", "run": "run", "idle": "idle"}[name]
+    shaper = Shaper(gait, rig, json.load(open(GAIT_REF)))
     if mode == "cycle":
-        v = []
-        for fx in (fl, fr):
-            vel = np.gradient(fx, axis=0) / step
-            stand = fx[:, 2] < np.percentile(fx[:, 2], 30)
-            v.append(np.median(vel[stand, 1]))
-        stride = float(np.mean(v)) * duration
+        out, scale, shift, stride, report = shape_cycle(rig, take, f0, f1, mode, lift, samples, shaper, duration)
+    else:
+        out, scale = retarget(rig, take, f0, f1, mode, lift, samples, shape=shaper)
+        # The feet onto the ground: the balls of the feet at their rest
+        # height when they stand.
+        zz = np.array([[M["ball_l"].to_translation().z, M["ball_r"].to_translation().z] for B, M in out]).min(1)
+        dz = rig.data.bones["ball_l"].head_local.z - np.percentile(zz, 10)
+        out, scale = retarget(rig, take, f0, f1, mode, lift, samples, dz, shape=shaper)
+        stride, report = 0.0, {}
     rig.animation_data_create()
     act = bpy.data.actions.new(name)
     rig.animation_data.action = act
@@ -598,14 +715,135 @@ def build_clip(bpy, rig, name, take, f0, f1, mode):
             pb.rotation_mode = "QUATERNION"
             pb.rotation_quaternion = q
             pb.location = loc
-            frame = 1 + u * duration * fps
+            # From frame 0, so the clip's keys start at time 0 (from frame 1 the
+            # loop held its first pose for a frame and lasted 1.033 s).
+            frame = u * duration * fps
             pb.keyframe_insert("rotation_quaternion", frame=frame)
             if bn == "pelvis":
                 pb.keyframe_insert("location", frame=frame)
     act.use_fake_user = True
     # Feet: their slide while standing, relative to the stride (for the log).
-    log(f"clip {name}: {take} {f0}-{f1}, {duration:.2f} s, stride {stride:.3f} m, scale {scale:.3f}, lift {dz:+.3f} m")
-    return {"name": name, "duration": duration, "stride": round(stride, 4), "take": take, "frames": [f0, f1]}
+    summary = {k: v for k, v in report.items() if not isinstance(v, list)}
+    log(f"clip {name}: {take} {f0}-{f1}, {duration:.2f} s, stride {stride:.3f} m, scale {scale:.3f}", summary)
+    return {"name": name, "duration": duration, "stride": round(stride, 4), "take": take, "frames": [f0, f1], "measured": report, "foot0": round(shaper.foot0["l"], 2)}
+
+def contacts(rig):
+    """Points on each sole (heel, ball, toe tip), each in its bone's own
+    frame, from the rest pose."""
+    from mathutils import Vector
+
+    b = rig.data.bones
+    out = {}
+    for s in "lr":
+        foot, ball = b[f"foot_{s}"].matrix_local, b[f"ball_{s}"].matrix_local
+        ankle, mtp, tip = b[f"foot_{s}"].head_local, b[f"ball_{s}"].head_local, b[f"ball_{s}"].tail_local
+        out[s] = {
+            "heel": ("foot", foot.inverted() @ Vector((ankle.x, ankle.y + 0.045, 0.0))),
+            "ball": ("foot", foot.inverted() @ Vector((mtp.x, mtp.y, 0.0))),
+            "tip": ("ball", ball.inverted() @ Vector((tip.x, tip.y, 0.0))),
+        }
+    return out
+
+
+def shape_cycle(rig, take, f0, f1, mode, lift, samples, shaper, duration):
+    """A walk or run cycle, shaped (Shaper), its pelvis placed from the feet:
+    the lower foot on the ground (walking) or the standing foot on the ground
+    with a ballistic flight between (running), the standing foot held still
+    while it is down (the pelvis surges a little instead), and the side sway
+    scaled to the measured range. Returns the samples, the stride (how far a
+    standing foot travels back in one cycle) and the measured angles."""
+    g = shaper.g
+    n = len(samples)
+    zero = [(0.0, 0.0, 0.0, 1.0)] * n
+    out, scale = retarget(rig, take, f0, f1, mode, lift, samples, shape=shaper, shift=zero)
+    pts = contacts(rig)
+
+    def point(M, s, key):
+        bone, local = pts[s][key]
+        return M[f"{bone}_{s}"] @ local
+
+    P = {s: {k: np.array([list(point(M, s, k)) for B, M in out]) for k in ("heel", "ball", "tip")} for s in "lr"}
+    low = {s: np.minimum.reduce([P[s][k][:, 2] for k in ("heel", "ball", "tip")]) for s in "lr"}
+    ph = {s: np.array([shaper.phase(s, u) for u in samples]) for s in "lr"}
+    down = {s: ph[s] < g["stance"] for s in "lr"}
+    # Height.
+    z = np.zeros(n)
+    if shaper.kind == "walk":
+        z = -np.minimum(low["l"], low["r"])
+    else:
+        known = np.zeros(n, bool)
+        for s in "lr":
+            z[down[s]] = -low[s][down[s]]
+            known |= down[s]
+        # Flight: a ballistic arc between take-off and landing (the time from
+        # the natural cadence, about 0.74 s a stride at 2.5 m/s).
+        T = 0.74
+        for i in range(n):
+            if known[i]:
+                continue
+            a = i
+            while not known[a % n]:
+                a -= 1
+            b = i
+            while not known[b % n]:
+                b += 1
+            w = (i - a) / (b - a)
+            span = (b - a) / (n - 1) * T
+            tt = w * span
+            z[i] = z[a % n] * (1 - w) + z[b % n] * w + 0.5 * 9.81 * tt * (span - tt)
+    # Forward: the standing foot held still (its ball; its heel at first
+    # when walking), moving back at one speed.
+    lockpt = {s: np.where(ph[s] < g.get("heel", 0.0), P[s]["heel"][:, 1], P[s]["ball"][:, 1]) for s in "lr"}
+    # (Against each foot's own phase: the right foot's stance wraps round
+    # the end of the cycle.)
+    v = float(np.mean([np.polyfit(ph[s][down[s]], lockpt[s][down[s]], 1)[0] for s in "lr" if down[s].sum() > 2])) / duration
+    off = np.zeros(n)
+    cnt = np.zeros(n)
+    for s in "lr":
+        m = down[s]
+        tt = ph[s][m] * duration
+        c = np.mean(lockpt[s][m] - v * tt)
+        off[m] += c + v * tt - lockpt[s][m]
+        cnt[m] += 1
+    has = cnt > 0
+    off[has] /= cnt[has]
+    if (~has).any():
+        off[~has] = np.interp(np.flatnonzero(~has), np.flatnonzero(has), off[has])
+    off -= np.linspace(off[0], off[-1], n)  # periodic
+    off -= off.mean()
+    # Sideways: the capture's sway, scaled to the measured range.
+    xs = np.array([M["pelvis"].to_translation().x for B, M in out])
+    rng = float(xs.max() - xs.min()) or 1.0
+    k = (g["sway"] / 100) / rng
+    shift = [(0.0, float(off[i]), float(z[i]), k) for i in range(n)]
+    out, scale = retarget(rig, take, f0, f1, mode, lift, samples, shape=shaper, shift=shift)
+    stride = abs(v) * duration
+    # What came out, measured the way the lab measures it.
+    rep = measure(out, shaper)
+    hz = np.array([M["pelvis"].to_translation().z for B, M in out])
+    hx = np.array([M["pelvis"].to_translation().x for B, M in out])
+    rep["pelvisBobCm"] = round(float(hz.max() - hz.min()) * 100, 1)
+    rep["pelvisSwayCm"] = round(float(hx.max() - hx.min()) * 100, 1)
+    return out, scale, shift, stride, rep
+
+
+def measure(out, shaper):
+    """The left side's joint angles over the cycle, as the lab measures them."""
+    g = shaper.g
+    rows = {"hip": [], "knee": [], "ankle": [], "shoulder": [], "elbow": []}
+    for B, M in out:
+        up = M["spine_03"].col[1]
+        trunk = math.degrees(math.atan2(-up[1], up[2]))
+
+        def d(b):
+            return M[b].col[1]
+
+        rows["hip"].append(sag(d("thigh_l")) + g["tilt"])
+        rows["knee"].append(sag(d("thigh_l")) - sag(d("calf_l")))
+        rows["ankle"].append(sag(d("foot_l")) - sag(d("calf_l")) - shaper.foot0["l"])
+        rows["shoulder"].append(sag(d("upperarm_l")) - trunk)
+        rows["elbow"].append(sag(d("lowerarm_l")) - sag(d("upperarm_l")))
+    return {k: [round(float(x), 1) for x in v] for k, v in rows.items()}
 
 
 # ---- Building -----------------------------------------------------------------------------
@@ -733,6 +971,8 @@ def build(level):
     log(level, "triangles", sum(tris.values()), tris)
     # Clips.
     clips = [build_clip(bpy, rig, name, *spec) for name, spec in CLIPS.items()]
+    if os.environ.get("WD_BLEND"):
+        bpy.ops.wm.save_as_mainfile(filepath=os.environ["WD_BLEND"])
     rig.animation_data.action = None
     for pb in rig.pose.bones:
         pb.rotation_quaternion = (1, 0, 0, 0)
@@ -977,7 +1217,15 @@ def main():
             "height": levels["high"]["height"],
             "walkSpeed": WALK_SPEED,
             "runSpeed": RUN_SPEED,
-            "clips": {c["name"]: {"duration": c["duration"], "stride": c["stride"]} for c in levels["high"]["clips"]},
+            "clips": {c["name"]: {"duration": c["duration"], "stride": c["stride"], "measured": c.get("measured") or None} for c in levels["high"]["clips"]},
+            # How the character lab measures the angles (worlds/lab/, src/worlds/lab.js).
+            # The baked arm and torso settings, which the lab's tuner changes
+            # (src/worlds/gait-tuner.js).
+            "gait": {
+                "tilt": {k: GAIT[k]["tilt"] for k in ("walk", "run")},
+                "foot0": levels["high"]["clips"][0]["foot0"],
+                "base": {k: {f: GAIT[k][f] for f in ("lean", "shoulder", "elbow", "abduct")} for k in ("walk", "run", "idle")},
+            },
             "levels": {lv: levels[lv]["level"] for lv in LEVELS},
             "credits": [
                 {"what": "Body, face, skin, eyes, eyebrows, eyelashes, hair, T-shirt, jeans and shoes", "name": "MakeHuman system assets", "authors": ["The MakeHuman team"], "page": "http://files.makehumancommunity.org/asset_packs/makehuman_system_assets/", "license": "CC0 1.0"},

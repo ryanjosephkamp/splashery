@@ -476,15 +476,18 @@ others. The world's `shirt` color dyes the white T-shirt.
   the low and mid tiers `human-low.glb` (about 17k, 1K). Both have the same skeleton (MPFB's
   game-engine rig, 53 bones) and clips.
 - **Motion.** Motion capture from the 100STYLE dataset (CC BY 4.0): an idle, a walk (the neutral
-  style) and a run (the "proud" style: upright, the arms swinging). The walk and the run are one
-  gait cycle each, from one left heel strike to the next on a straight stretch, played in place and
-  resampled to one second, so they blend in step. The idle cross-fades in when the character stops.
+  style) and a run (the "proud" style). The walk and the run are one gait cycle each, from one left
+  heel strike to the next on a straight stretch, played in place and resampled to one second, so
+  they blend in step. Since round 4 the build tool shapes them to measured human gait (below, "The
+  character lab"): the capture gives the timing, the head and the trunk's small movements, and the
+  legs, the arms and the pelvis follow the measured curves. The idle cross-fades in when the
+  character stops.
 - **Planted feet.** `human.json` has each clip's stride (how far the standing foot travels in one
   cycle). The world plays the clips at speed ÷ stride cycles a second (`humanRate()`), so the
   standing foot stays put on the ground: it slides less than a tenth of the body's speed.
-- **Speeds.** The person walks at 1.3 m/s and runs at 2.7 m/s (`walkSpeed` and `runSpeed` in
-  `human.json`); the captured ones are about 0.9 and 1.9, played about 1.4 times faster. The splat
-  character keeps 1.9 and 4.6.
+- **Speeds.** The person walks at 1.3 m/s and runs at 2.5 m/s (2.7 before round 4) (`walkSpeed` and
+  `runSpeed` in `human.json`); the captured ones are about 0.9 and 1.9, played about 1.4 times
+  faster. The splat character keeps 1.9 and 4.6.
 - **Building it.** `tools/wd-character.py` runs in Blender as a Python module (`bpy` 5.0.1) with the
   MPFB 2.0.17 add-on: it makes the person, paints the logos out of the clothes' texture, gives every
   part a plain physically based material (the hair as strands over an opaque cap, so nothing shows
@@ -503,6 +506,130 @@ it is grainier than the kit-built splat character, which stays splats mode's def
 The earlier mesh character (`?character=kenney`) is Kenney's "Animated Characters: Protagonists"
 (CC0), built by `tools/world-character.mjs` into `character.glb`, with a walk made from its run.
 Collision, the camera and the controls are the same for every character.
+
+### The character lab (`worlds/lab/`, `lab.js`)
+
+`worlds/lab/?labs=1` shows the realistic person alone on a treadmill: stand, walk and run (or any
+speed with the slider: the walk and run blend as in the world), side, front and three-quarter views,
+and slow motion (1×, ½×, ¼×, ⅒×). The belt scrolls at the ground speed, so the standing foot moves
+with it. A chart beside the person draws, for one stride of the left leg and arm, the hip, knee,
+ankle, shoulder and elbow angles measured from its bones as it moves (red) over measured people
+(blue: the mean dashed, one standard deviation as a band), and a note gives its arm ranges and the
+pelvis's bob and sway beside the published ones. Parameters: `?gait=stand|walk|run`, `?speed=<m/s>`,
+`?slow=`, `?view=side|front|three`, `?level=low|high` (high by default), `?chart=0`,
+`?tuning=default` (start from the measured gait) and `?clock=manual` (tests and clips;
+`window.__lab`).
+
+**The reference** (`assets/worlds/lab/gait-reference.json`, built by `tools/wd-gait-refs.py`; 4 KB
+of numbers; both datasets CC BY 4.0, checked on their figshare pages on October 1, 2026, credited in
+CREDITS.md):
+
+- Walking: Fukuchi, Fukuchi and Duarte (2018), PeerJ 6:e4640, figshare doi
+  10.6084/m9.figshare.5722711. Nine people's treadmill trials nearest 1.3 m/s (mean 1.26 m/s), both
+  legs, sagittal hip, knee and ankle angles from heel strike to heel strike.
+- Running: Fukuchi, Fukuchi and Duarte (2017), PeerJ 5:e3298, figshare doi
+  10.6084/m9.figshare.4543435. Thirty-one runners at 2.5 m/s, the same angles from foot strike; the
+  pelvis's bob (9.7 cm) and sway (2.2 cm) from the markers of the first twelve.
+- Published values: walking shoulder range 56.4 ± 12.7° and elbow 29.7 ± 10.2° (Kang et al. 2023,
+  Clin Shoulder Elb 26(2):126–130); running elbow range 38.8 ± 12.6° (Tartaruga et al., cited in
+  Wilk et al. 2024, Shoulder & Elbow 17(6):825–830); the arms swing opposite the legs (Pontzer et
+  al. 2009, J Exp Biol 212:523–534); the walking body's center of mass rises and falls 4.0–4.8 cm
+  and sways 3.9–4.6 cm (Orendurff et al. 2004, J Rehabil Res Dev 41(6A):829–834).
+
+**How the gait is shaped** (`tools/wd-character.py`, `GAIT` and `Shaper`): after the capture is
+retargeted, each frame's legs are re-aimed in the side view so that the hip, knee and ankle follow
+the reference means (left leg at the cycle's phase, right leg half a cycle later); the arms hang
+from relaxed shoulders, slightly out from the body, and swing from the shoulder opposite the legs,
+with the elbow a little bent walking (about 7–37°) and near a right angle running (about 70–100°),
+pumping; the trunk leans 3° walking and 8° running. Then the pelvis is solved: walking, the lowest
+point of either sole stays on the ground; running, the stance foot stays on the ground and the body
+flies between stances (a short flight phase); forward, the ball of the stance foot is held still,
+which gives the stride; side to side, the sway is scaled to the measured range. Each bone turns as
+one solid piece. `human.json` keeps each clip's measured angles (`measured`) and how they are
+measured (`gait`).
+
+The angles, the same in the tool and in the lab: each limb's angle from straight down in the side
+view, positive forward; hip = thigh angle + the pelvis tilt the reference is measured against (10°
+walking, 15° running); knee = thigh − shank; ankle = foot − shank − the foot's rest angle; shoulder
+= upper arm − trunk lean; elbow = forearm − upper arm.
+
+### Tuning the gait (`gait-tuner.js`, `assets/worlds/character/tuning.json`)
+
+The lab's **Tune** button opens a control for every gait setting, for the gait on show (Stand, Walk
+and Run each have their own), and for the person's look. The chart keeps the measured people in
+blue, so a change shows against them. The settings stay in the browser (local storage) until **Reset
+this gait** or **Reset all** (back to the measured gait). **Copy** puts them on the clipboard and
+**Save file** downloads `splashery-gait.json`; **Open file** or a paste loads them back. Files stay
+on the device.
+
+Each setting changes the baked, measured motion; the defaults are that motion exactly, and then the
+tuner does nothing. It runs on the bones every frame after the clips play (bones only: every part
+turns as one solid piece):
+
+- **Legs** (walk, run): `hip`, `knee` and `ankle`, each `{ "scale", "offset" }`: the joint's swing
+  about the middle of its measured range, times `scale` (1 = as measured), plus `offset` degrees.
+  The knee never bends backward.
+- **Arms**: `shoulder` `{ "center", "swing" }` (degrees: the middle of the arm's swing, forward
+  positive, and how far it swings from there), `elbow` `{ "center", "swing" }` (the bend and how
+  much it changes), and `armOut` (degrees out from the body). The swing keeps the measured timing,
+  opposite the legs.
+- **Torso and head**: `lean` (degrees forward) and `head` (degrees, chin down).
+- **Pelvis**: `bob` and `sway`, times the measured up-and-down and side-to-side motion.
+- **Stride**: `stride`, times the measured stride. The clips play at speed ÷ stride, so at a set
+  speed the cadence follows (steps a minute = 120 × speed ÷ stride); the hip swing scales the stride
+  too, so the feet stay planted. The lab shows both under the controls.
+- **Standing** (`stand`): `lean`, `head`, `shoulder.center`, `elbow.center`, `armOut`, and
+  `hip.offset` and `knee.offset`.
+- After the limbs move, the body moves up or down so the lowest foot stays where the measured pose
+  had it: the feet stay on the ground.
+
+**The person** (`look`): `height` in meters (1.5–2.0; the world's character is 1.74), and `shirt`,
+`pants` and `shoes` colors (`"#rrggbb"`; the jeans and shoes take a tint over their textures, so
+white leaves them as they are).
+
+The file (version 1; every number is clamped to its control's range when loaded, and missing keys
+take the measured values):
+
+```json
+{
+  "format": "splashery-gait",
+  "version": 1,
+  "look": { "height": 1.74, "shirt": "#e0533d", "pants": "#ffffff", "shoes": "#ffffff" },
+  "stand": {
+    "lean": 0,
+    "head": 0,
+    "shoulder": { "center": -3 },
+    "elbow": { "center": 12 },
+    "armOut": 8,
+    "hip": { "offset": 0 },
+    "knee": { "offset": 0 }
+  },
+  "walk": {
+    "hip": { "scale": 1, "offset": 0 },
+    "knee": { "scale": 1, "offset": 0 },
+    "ankle": { "scale": 1, "offset": 0 },
+    "shoulder": { "center": -5, "swing": 22 },
+    "elbow": { "center": 22, "swing": 15 },
+    "armOut": 9,
+    "lean": 3,
+    "head": 0,
+    "bob": 1,
+    "sway": 1,
+    "stride": 1
+  },
+  "run": { "…": "as walk; measured: shoulder -22 and 28, elbow 85 and 16, armOut 12, lean 8" }
+}
+```
+
+**In Worlds**: the world reads `assets/worlds/character/tuning.json` (the measured gait as shipped)
+for the realistic person in hybrid mode. To use settings from the lab, replace that file with the
+exported one. The world takes the gait, the height and the jeans' and shoes' tints; each world keeps
+its own shirt color (`character.shirt` in the world file). With the measured gait the file changes
+nothing and the gait reference isn't loaded. `?tuning=0` ignores the file.
+
+**Sharper**: the lab shows the detailed body (`human-high.glb`, 2K textures) on every tier, and the
+person's textures are filtered anisotropically (up to 8×) in the lab and the world, so the cloth and
+skin stay crisp seen at a slant.
 
 ### Model props (`mesh-props.js`)
 

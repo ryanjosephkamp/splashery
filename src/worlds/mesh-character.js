@@ -14,6 +14,7 @@
 import * as pc from "../pc.js";
 import { WALK_SPEED, RUN_SPEED, BODY } from "./character.js";
 import { SplatBuffer } from "../generators.js";
+import { GaitTuner, isDefaultTuning, normalizeTuning } from "./gait-tuner.js";
 
 const BASE = new URL("../../assets/worlds/character/", import.meta.url);
 
@@ -48,15 +49,20 @@ export async function loadHuman(app, { tier = "mid", look = {} } = {}) {
   const asset = await loadContainer(app, new URL(`human-${level}.glb`, BASE).href);
   const res = asset.resource;
   const model = res.instantiateRenderEntity({ castShadows: true, receiveShadows: true });
-  const s = BODY.height / meta.height;
+  // look.height: the person's height in meters (the lab's tuning).
+  const s = (look.height || BODY.height) / meta.height;
   model.setLocalScale(s, s, s);
-  const shirt = look.shirt ? linear(look.shirt) : null;
+  const tint = { shirt: look.shirt, trousers: look.pants, shoes: look.shoes };
+  // Sharper at a glancing angle (the cloth and skin seen side-on).
+  const aniso = Math.min(8, app.graphicsDevice.maxAnisotropy || 1);
   for (const r of model.findComponents("render"))
     for (const mi of r.meshInstances) {
       const m = mi.material;
       m.useFog = true;
-      // The tee is white cloth: the world's shirt color dyes it.
-      if (m.name === "shirt" && shirt) m.diffuse = shirt;
+      // The tee is white cloth: the world's shirt color dyes it. The jeans
+      // and shoes take a tint over their textures (white leaves them).
+      if (tint[m.name]) m.diffuse = linear(tint[m.name]);
+      for (const t of [m.diffuseMap, m.normalMap]) if (t) t.anisotropy = aniso;
       m.update();
     }
   const tracks = {};
@@ -112,8 +118,42 @@ export function humanRate(info, speed) {
   if (speed <= 0.1) return 1;
   const { meta, scale, walk, run } = info;
   const w = Math.max(0, Math.min(1, (speed - walk) / (run - walk)));
-  const stride = ((1 - w) * meta.clips.walk.stride + w * meta.clips.run.stride) * scale;
+  const tuned = info.tuner ? info.tuner.strideScale(speed) : 1;
+  const stride = ((1 - w) * meta.clips.walk.stride + w * meta.clips.run.stride) * scale * tuned;
   return speed / stride;
+}
+
+// Worlds' tuning file (docs/WORLDS.md, "Tuning the gait"): the settings
+// exported from the character lab. Returns null when there is none; `look`
+// is checked and filled in (before the model loads, for its height).
+export async function fetchTuning() {
+  try {
+    const r = await fetch(new URL("tuning.json", BASE));
+    if (!r.ok) return null;
+    const raw = await r.json();
+    return { raw, look: normalizeTuning(raw, {}).look };
+  } catch {
+    return null;
+  }
+}
+
+// Applies the tuning file's gait to the person; the measured gait (the
+// file's defaults) needs nothing, so nothing more loads.
+export async function useWorldTuning(model, meta, raw) {
+  const tuning = normalizeTuning(raw, meta);
+  if (isDefaultTuning(tuning, meta)) return null;
+  const ref = await fetch(new URL("../lab/gait-reference.json", BASE)).then((r) => r.json());
+  return tuneHuman(model, ref, tuning);
+}
+
+// Gives the realistic character a gait tuning (gait-tuner.js): the lab's
+// settings, or Worlds' tuning.json. `ref` is the lab's gait reference.
+export function tuneHuman(model, ref, tuning) {
+  const info = model.wdCharacter;
+  if (info?.kind !== "mesh") return null;
+  info.tuner ??= new GaitTuner(model, info.meta, ref, tuning);
+  info.tuner.set(tuning);
+  return info.tuner;
 }
 
 export async function loadMeshCharacter(app) {
@@ -177,7 +217,12 @@ export function stepMeshCharacter(model, speed, dt) {
   model.anim.setFloat("speed", speed);
   const info = model.wdCharacter;
   const rate = info?.kind === "mesh" ? humanRate(info, speed) : 1;
-  if (dt > 0) model.anim.update(dt * rate);
+  if (dt > 0) {
+    model.anim.update(dt * rate);
+    // The tuning on top of the clips (only after they play: they set every
+    // bone again each step, so the changes never add up).
+    info?.tuner?.apply(model.anim.baseLayer.activeState !== "Move", speed, dt);
+  }
 }
 
 // The same person as splats (?character=splat-person; docs/WORLDS.md, "The
