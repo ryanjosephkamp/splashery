@@ -354,19 +354,32 @@ async function readBytes(rel) {
 }
 
 const SPLAT_MIRROR = {
-  alive: () => live.on("camera"),
+  alive: () => live.on("camera") || MIRROR.look === "hologram",
   density: 1,
   turntable: false,
   options: [
     { key: "depth", label: "Depth", type: "slider", min: 0, max: 1, step: 0.05, default: 0.6 },
+    {
+      // r3: a hologram look beside the plain one.
+      key: "look",
+      label: "Look",
+      type: "select",
+      default: "plain",
+      choices: [
+        { id: "plain", label: "Plain" },
+        { id: "hologram", label: "Hologram (cyan, scanlines, glowing edges)" },
+      ],
+    },
   ],
   controls: [{ key: "flat", label: "Flatten the picture", type: "toggle", default: 0, ease: 1.4 }],
   action: { key: "flat", label: "Flatten or raise the depth" },
   input: {
     title: "Your camera",
     fileButton: false,
-    live: [{ kind: "camera", status: mirrorStatus }],
-    note: `Tap “Use my camera” and the mirror shows you in splats. The depth model (about 27 MB, loaded the first time) then works out how near each part is, many times a second, and the picture rises into a relief you can turn.`,
+    // r3: a big "Start camera" over the picture, the back camera, and a
+    // recording of what the mirror shows.
+    live: [{ kind: "camera", status: mirrorStatus, button: "Start camera", big: true, stage: true, flip: true, record: true }], // prettier-ignore
+    note: `Tap “Start camera” and the mirror shows you in splats. The depth model (about 27 MB, loaded the first time) then works out how near each part is, many times a second, and the picture rises into a relief you can turn.`,
   },
   credits: [
     {
@@ -395,7 +408,7 @@ const SPLAT_MIRROR = {
   },
   build(k, o) {
     MIRROR.depth = o.depth ?? 0.6;
-    const { height } = buildMirror(k, { width: 2, lift: 0.9 });
+    const { height } = buildMirror(k, { width: 2, lift: 0.9, look: o.look ?? "plain" });
     // A dark frame round the picture, like a mirror's.
     const f = 0.07;
     const w = 1 + f;

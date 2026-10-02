@@ -361,3 +361,115 @@ test.describe("the room echo meter's reasons", () => {
     expect(shown).toEqual({ big: "Too loud", small: "Clap softer or farther" });
   });
 });
+
+// ---- The splat mirror (items 11-15) ------------------------------------------------
+test.describe("the splat mirror, r3", () => {
+  test("the still picture holds still face on: nudging the view a hair doesn't reshuffle its splats", async ({
+    playwright,
+    baseURL,
+  }) => {
+    // At phone size, where the owner saw it flash.
+    const { page, close } = await micPage(playwright, baseURL, null);
+    await open(page, "splat-mirror");
+    await idle(page);
+    await page.waitForTimeout(3000);
+    // The largest change at each pixel over 16 hair-width nudges back and
+    // forth. With the splats all resting at z = 0 (before r3), 15,600 pixels
+    // flashed by over 40 levels here; resting at their depth, about 270.
+    const n = await page.evaluate(async () => {
+      const pl = window.__splashery.player;
+      const canvas = document.querySelector("canvas");
+      const grab = () =>
+        new Promise((r) =>
+          requestAnimationFrame(() =>
+            requestAnimationFrame(() => {
+              const t = document.createElement("canvas");
+              t.width = canvas.width;
+              t.height = canvas.height;
+              const g = t.getContext("2d");
+              g.drawImage(canvas, 0, 0);
+              r(g.getImageData(0, 0, t.width, t.height).data);
+            }),
+          ),
+        );
+      let prev = await grab();
+      const acc = new Float32Array(prev.length / 4);
+      for (let i = 0; i < 16; i++) {
+        pl.camera.rotateBy((i % 2 ? -1 : 1) * 0.02, 0);
+        pl.stage.requestRender();
+        await new Promise((r) => setTimeout(r, 120));
+        const d = await grab();
+        for (let j = 0; j < acc.length; j++) acc[j] = Math.max(acc[j], Math.abs(d[j * 4] - prev[j * 4]) + Math.abs(d[j * 4 + 1] - prev[j * 4 + 1])); // prettier-ignore
+        prev = d;
+      }
+      return acc.filter((v) => v > 40).length;
+    });
+    await close();
+    console.log(`mirror: ${n} pixels changed by over 40 levels`);
+    expect(n).toBeLessThan(2500);
+  });
+
+  test("a big Start camera over the picture, the back camera, a recording to save, and the hologram look", async ({
+    playwright,
+    baseURL,
+  }) => {
+    const { page, errors, close } = await micPage(playwright, baseURL, null);
+    try {
+      await open(page, "splat-mirror");
+      await idle(page);
+      // Nothing asked for before the tap.
+      expect(await page.evaluate(async () => (await import("/src/live/live.js")).live.on("camera"))).toBe(false); // prettier-ignore
+      await page.waitForSelector("#live-camera-stage", { state: "visible" });
+      const box = await page.locator("#live-camera-stage").boundingBox();
+      expect(box.height).toBeGreaterThan(40);
+      await page.click("#live-camera-stage");
+      await until(page, async () => (await import("/src/live/relief.js")).MIRROR.cam?.video?.videoWidth > 0); // prettier-ignore
+      expect(await page.isVisible("#live-camera-stage")).toBe(false);
+      // The front camera shows as a mirror; the back one the right way round.
+      expect(await page.evaluate(async () => (await import("/src/live/relief.js")).MIRROR.cam.mirror)).toBe(true); // prettier-ignore
+      const facing = await page.evaluate(async () => (await import("/src/live/live.js")).switchCamera()); // prettier-ignore
+      expect(facing).toBe("environment");
+      await page.evaluate(() => window.__splashery.app.setToyOptions({}));
+      await idle(page);
+      const after = await page.evaluate(async () => {
+        const { MIRROR } = await import("/src/live/relief.js");
+        const { live } = await import("/src/live/live.js");
+        return { mirror: MIRROR.cam?.mirror, facing: live.camera?.facing, on: live.on("camera") };
+      });
+      expect(after).toEqual({ mirror: false, facing: "environment", on: true });
+      // Record two seconds and save it: a video file, made on this device.
+      await tap(page, "#live-camera-record");
+      await page.waitForTimeout(2500);
+      await tap(page, "#live-camera-record");
+      await page.waitForFunction(() => !document.getElementById("live-camera-save").hidden, null, { timeout: 30_000 }); // prettier-ignore
+      const [download] = await Promise.all([page.waitForEvent("download"), tap(page, "#live-camera-save")]); // prettier-ignore
+      expect(download.suggestedFilename()).toMatch(
+        /^splashery-splat-mirror-\d{8}-\d{6}\.(mp4|webm)$/,
+      );
+      expect(fs.statSync(await download.path()).size).toBeGreaterThan(1000);
+      // The hologram look: cool cyan colors.
+      await page.evaluate(() => window.__splashery.app.setToyOptions({ look: "hologram" }));
+      await idle(page);
+      const tint = await page.evaluate(async () => {
+        const { MIRROR, mirrorScreen } = await import("/src/live/relief.js");
+        const c = document.createElement("canvas");
+        c.width = MIRROR.cols * 2;
+        c.height = MIRROR.rows;
+        const g = c.getContext("2d");
+        mirrorScreen.draw(g, 1);
+        const d = g.getImageData(0, 0, MIRROR.cols, MIRROR.rows).data;
+        let r = 0;
+        let b = 0;
+        for (let i = 0; i < d.length; i += 4) {
+          r += d[i];
+          b += d[i + 2];
+        }
+        return b / Math.max(1, r);
+      });
+      expect(tint).toBeGreaterThan(2);
+      expect(errors).toEqual([]);
+    } finally {
+      await close();
+    }
+  });
+});
