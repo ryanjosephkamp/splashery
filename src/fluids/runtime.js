@@ -248,7 +248,13 @@ export class FluidRuntime {
       const v = Math.min(1, loud);
       if (thick) {
         st.next = st.t + 0.22 + 0.2 * Math.random();
-        layers.push({ voice: "gloop", f: 110 + 70 * Math.random(), decay: 0.7, vol: 0.35 * v });
+        // Sound C (the owner's note of October 2): honey a little louder, about 3 dB.
+        layers.push({
+          voice: "gloop",
+          f: 110 + 70 * Math.random(),
+          decay: 0.7,
+          vol: (s.preset === "honey" ? 0.5 : 0.35) * v,
+        });
       } else {
         st.next = st.t + 0.07 + 0.05 * Math.random();
         layers.push({ voice: "bubbles", n: 2 + Math.round(3 * v), f: (res ? res * 1.6 : 900) * (0.8 + 0.4 * Math.random()), decay: 0.35, vol: 0.3 * v }); // prettier-ignore

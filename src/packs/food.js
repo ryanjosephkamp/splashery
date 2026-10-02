@@ -4634,6 +4634,7 @@ export const RECIPES = {
     ],
     controls: [{ key: "peel", label: "Peel them", type: "pulse", ease: BANANA_SECS }],
     action: { key: "peel", label: "Peel them" },
+    sounds: [{ voice: "sample", file: "banana-peel.mp3" }], // Sound C: its peels' cues
     // A tap pulls the three bananas apart off their crown, then peels each
     // one from its tip, front first: its skin splits into three strips that
     // curl back one after another (each bending at two places), showing the
@@ -4667,7 +4668,8 @@ export const RECIPES = {
         c,
         "banana",
         s,
-        d.bananas.map((bn, i) => [bn.t0 + 0.1, { voice: "peel", f: 1100 + 150 * i, n: 16, decay: 0.8, vol: 0.7 }]), // prettier-ignore
+        // Sound C (his note of October 2: quieter, not a zipper): a real banana peel.
+        d.bananas.map((bn, i) => [bn.t0 + 0.1, { voice: "sample", file: "banana-peel.mp3", pitch: 0.95 + 0.06 * i, vol: 0.6, fallback: { voice: "peel", f: 1100 + 150 * i, n: 10, decay: 0.8, vol: 0.35 } }]), // prettier-ignore
         out,
       );
     },

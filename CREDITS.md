@@ -337,18 +337,14 @@ peak-normalized and saved as a small MP3; it loads only when its toy is tapped. 
 | `balloon-dog-pop.mp3`        | [Balloon-Burst-07.wav](https://freesound.org/s/82121/)                                           | Gniffelbaf                                         | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | `book-page.mp3`              | [Book Turn Page 2.wav](https://freesound.org/s/119127/)                                          | esperri                                            | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | `apple-bite.mp3`             | [Bite (Apple)](https://freesound.org/s/275015/)                                                  | wadaltmon                                          | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
-| `popcorn-popping.mp3`        | [popcorn.wav](https://freesound.org/s/488722/)                                                   | Mike888                                            | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | `taco-crack.mp3`             | [chips crunch sound](https://freesound.org/s/705360/)                                            | TomatoHater                                        | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | `fireworks-burst.mp3`        | [Firework Explosion 3](https://freesound.org/s/212683/)                                          | a deleted Freesound account (deleted_user_3544904) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | `colosseum-crowd.mp3`        | [cheering and clapping crowd 1](https://freesound.org/s/221568/)                                 | AlaskaRobotics                                     | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | `colosseum-hooves.mp3`       | [Horse and Carriage.mp3](https://freesound.org/s/388391/)                                        | maadmacs                                           | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
-| `steam-train-chug.mp3`       | [Steam Train In Motion 1.wav](https://freesound.org/s/179349/)                                   | lolamadeus                                         | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | `sports-car-rev.mp3`         | [Car Engine Revving.WAV](https://freesound.org/s/558844/)                                        | DigPro120                                          | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | `tractor-engine.mp3`         | [Tractor whirring](https://freesound.org/s/339167/)                                              | vonis22                                            | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
-| `helicopter-rotor.mp3`       | [Helicopter.wav](https://freesound.org/s/488089/)                                                | Mike_Leister                                       | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | `propeller-plane-engine.mp3` | [Aeroplane Passing Close.wav](https://freesound.org/s/507446/)                                   | paulprit                                           | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | `bow-and-target-release.mp3` | [Bow Release (Bow and Arrow) 3](https://freesound.org/s/384918/)                                 | Ali_6868                                           | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
-| `owl-hoot.mp3`               | [Owl Hoot](https://freesound.org/s/465697/)                                                      | Breviceps                                          | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | `frog-croak.mp3`             | [Frog croaking sound effect](https://freesound.org/s/354132/)                                    | betterchinese                                      | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | `frog-fly.mp3`               | [Fly_Buzzing_Edited.wav](https://freesound.org/s/443059/)                                        | AmberdeMeillon                                     | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | `bonsai-snip.mp3`            | [scissors cut.wav](https://freesound.org/s/175522/)                                              | mywhats                                            | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
@@ -357,7 +353,6 @@ peak-normalized and saved as a small MP3; it loads only when its toy is tapped. 
 | `iceberg-crack.mp3`          | [Ice Crack 1](https://freesound.org/s/262635/)                                                   | j_p_higgins                                        | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | `klein-bottle-slosh.mp3`     | [Bottle Slosh 2](https://freesound.org/s/667273/)                                                | alegemaate                                         | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | `spinning-top-spin.mp3`      | [Metallic Spinning Top (Dry Sound).wav](https://freesound.org/s/334970/)                         | Uzbazur                                            | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
-| `spring-toy-boing.mp3`       | [battery compartment spring 01.wav](https://freesound.org/s/472478/)                             | denalwa                                            | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | `chess-set-move.mp3`         | [Piece Placement.mp3](https://freesound.org/s/546119/)                                           | el_boss                                            | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | `robot-wind.mp3`             | [Wind-up sound](https://freesound.org/s/445966/)                                                 | Breviceps                                          | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | `dice-throw.mp3`             | [Casino Audio 1.1: dice-throw-1.ogg and dice-throw-3.ogg](https://kenney.nl/assets/casino-audio) | Kenney (kenney.nl)                                 | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
@@ -377,6 +372,42 @@ Commons page on September 30, 2026:
 The camera path and the splats are worked out on the device by
 [Splat.js](https://github.com/arrival-space/splat.js) (Stratum1 GmbH, MIT). Videos people open are
 read in their browser and never uploaded.
+
+## Sound effects (lane Sound C)
+
+Recorded sound effects for the owner's sound notes of October 2, 2026, in `assets/sounds/`. Every
+one is CC0 1.0 (public domain), checked on its live Freesound page on October 2, 2026. Each was cut,
+faded, made mono, peak-normalized and saved as a small MP3; a toy's recordings load when it opens
+with the speaker on. `mitochondrion-fire.mp3`, `lungs-breath-b.mp3` and `lungs-breath-c.mp3` are
+Sound Board candidates only. The details are in [tools/assets.json](tools/assets.json)
+(`soundSamples`).
+
+| File                        | Work                                                                                                        | Author          | License                                                       |
+| --------------------------- | ----------------------------------------------------------------------------------------------------------- | --------------- | ------------------------------------------------------------- |
+| `tin-can-real-roll.mp3`     | [Rolling Can Sound 2](https://freesound.org/people/cower/sounds/185370/)                                    | cower           | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `knot-jelly.mp3`            | [Jelly Wobbling in Egg Cup 2.wav](https://freesound.org/people/lolamadeus/sounds/181915/)                   | lolamadeus      | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `mitochondrion-furnace.mp3` | [Gas furnace - Ignition happy](https://freesound.org/people/ldezem/sounds/386166/)                          | ldezem          | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `mitochondrion-fire.mp3`    | [Gas burner 01.wav](https://freesound.org/people/PegasusCZ/sounds/569332/)                                  | PegasusCZ       | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `paramecium-swim.mp3`       | [Water, Gentle Movement.wav](https://freesound.org/people/Daen23/sounds/431627/)                            | Daen23          | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `banana-peel.mp3`           | [Banana Peel](https://freesound.org/people/spanrucker/sounds/272219/)                                       | spanrucker      | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `spring-toy-slinky.mp3`     | [slinky Copy.wav](https://freesound.org/people/foxraid/sounds/449261/)                                      | foxraid         | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `soap-bubbles-blow.mp3`     | [Blow air short](https://freesound.org/people/yehdawgo/sounds/720066/)                                      | yehdawgo        | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `owl-hoot-short.mp3`        | [owl_hooting_000102_0145S3 002-070 000-002 068-074.wav](https://freesound.org/people/Gerent/sounds/558396/) | Gerent          | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `decorated-tree-bell.mp3`   | [Glockenspiel - C5 (glock_medium_C5.wav)](https://freesound.org/people/sgossner/sounds/373364/)             | sgossner        | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `decorated-tree-sleigh.mp3` | [Sleigh bells hit](https://freesound.org/people/Selector/sounds/369506/)                                    | Selector        | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `helicopter-chop.mp3`       | [Helicopter Flyby / Pass](https://freesound.org/people/mil0001/sounds/241190/)                              | mil0001         | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `steam-train-chuff.mp3`     | [d_s478_underbridge.wav](https://freesound.org/people/relwin/sounds/686061/)                                | relwin          | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `popcorn-pops.mp3`          | [Popcorn](https://freesound.org/people/elricadavis/sounds/764604/)                                          | elricadavis     | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `lungs-breath-b.mp3`        | [- Deep Breath](https://freesound.org/people/rrehl/sounds/717167/)                                          | rrehl           | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `lungs-breath-c.mp3`        | [Sigh1.wav](https://freesound.org/people/elle-trudgett/sounds/146769/)                                      | elle-trudgett   | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `bicycle-bell.mp3`          | [Bicycle Bell.wav](https://freesound.org/people/PanosA/sounds/546371/)                                      | PanosA          | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `your-book-magazine.mp3`    | [Turn Page](https://freesound.org/people/KikeVilaplana/sounds/511402/)                                      | KikeVilaplana   | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `your-book-paperback.mp3`   | [Turning pages in a book](https://freesound.org/people/Mateusz_Chenc/sounds/519102/)                        | Mateusz_Chenc   | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `your-book-hardcover.mp3`   | [Hardback 1](https://freesound.org/people/magnuswaker/sounds/697733/)                                       | magnuswaker     | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `donut-tear.mp3`            | [bread slice serrated knife cut and rip](https://freesound.org/people/spanrucker/sounds/272223/)            | spanrucker      | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `teddy-bear-plush.mp3`      | [08. Relleno de oso.wav](https://freesound.org/people/lemigoga/sounds/427719/)                              | lemigoga        | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `splat-field-ocean.mp3`     | [Gentle Ocean Waves Loop](https://freesound.org/people/kkenny101/sounds/852826/)                            | kkenny101       | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `soap-bubbles-pops.mp3`     | [mutliple bubbles bursting](https://freesound.org/people/florianreichelt/sounds/683100/)                    | florianreichelt | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 
 ## Science (lane Science)
 
@@ -534,7 +565,6 @@ uses.
 | `supernova-boom.mp3`                     | star, pulsar, black-hole, planetary-nebula, supernova | [Deep Boom](https://freesound.org/people/Za-Games/sounds/539968/)                                          | Za-Games         |
 | `tennis-ball-bounce.mp3`                 | tennis-ball                                           | [bola de tenis caindo.wav](https://freesound.org/people/Negraovictor/sounds/394355/)                       | Negraovictor     |
 | `tennis-ball-slam.mp3`                   | tennis-ball, softball                                 | [ball_hit_ground.wav](https://freesound.org/people/Kyanite_/sounds/432912/)                                | Kyanite\_        |
-| `tin-can-spin.mp3`                       | tin-can-real                                          | [Spinning Coin](https://freesound.org/people/CassieTee/sounds/209462/)                                     | CassieTee        |
 | `vintage-camera-flash.mp3`               | vintage-camera                                        | [Vintage Camera Flash Powder and Shutter](https://freesound.org/people/Werra/sounds/232130/)               | Werra            |
 | `wooden-elephant-trumpet.mp3`            | wooden-elephant                                       | [Elephant Trumpets Growls.flac](https://freesound.org/people/D.jones/sounds/527845/)                       | D.jones          |
 
