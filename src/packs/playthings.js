@@ -1585,7 +1585,10 @@ export const RECIPES = {
       const yb = -0.16;
       const wood = "#5b3a24";
       // Base.
-      k.add(roundBox(2.1, 0.13, 0.98, 0.04, { bottom: false }), {
+      // (Closed and evenly laid underneath, lane Sharpness B: from below
+      // the open box showed its top through.)
+      k.add(roundBox(2.1, 0.13, 0.98, 0.04), {
+        even: true,
         opacity: 1,
         jitter: 0.015,
         pos: [0, yb - 0.065, 0],
@@ -2722,7 +2725,8 @@ export const RECIPES = {
           flat: 0.15,
           color: tin(metal),
         });
-        k.add(roundBox(0.24, 0.09, 0.34, 0.035, { bottom: false }), {
+        // (Soles closed underneath, lane Sharpness B: they were open boxes.)
+        k.add(roundBox(0.24, 0.09, 0.34, 0.035), {
           even: true,
           opacity: 1,
           jitter: 0.015,

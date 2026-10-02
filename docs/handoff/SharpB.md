@@ -129,6 +129,7 @@ Model: Opus 5.5 (claude-opus-5-5), default effort.
 - Jelly, bricks and sushi (and the pebbles' base) wait for Physics part 2 (#184), still open.
 - Shared helpers changed additively (default off): `board()` in computing.js (`even`),
   `grassMound()` in nature.js (`even`), `buildSideBound()` in pictures.js (`coverShare`), `polyTube`
-  and `cellFaces` in maths.js (even placement, used only when a toy asks for `even: true`). The old
-  random `fuzz()` in playthings.js gave way to `evenFuzz()` (only the teddy bear used it).
+  and `cellFaces` in `src/packs/maths.js` (even placement, used only when a toy asks for
+  `even: true`). The old random `fuzz()` in playthings.js gave way to `evenFuzz()` (only the teddy
+  bear used it).
 - `src/rigs.js` now imports the even shapes from `src/packs/even.js` for the bases' add-ons.
