@@ -225,7 +225,10 @@ test.describe("computer", () => {
       mimeType: "model/gltf-binary",
       buffer: Buffer.alloc(2000),
     });
-    await expect(page.locator("#toy-input .warning")).toHaveText(/too big/);
+    // The generic message, or the recipe's own (input.tooBig) where it has one.
+    await expect(page.locator("#toy-input .warning")).toHaveText(
+      /too big|the most this device can open/,
+    );
     expect(errors).toEqual([]);
   });
 });
