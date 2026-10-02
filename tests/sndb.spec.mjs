@@ -37,6 +37,11 @@ const layers = (spec) =>
 test("every changed toy has a sound and a review entry marked as in the site", () => {
   for (const id of CHANGED) {
     expect(TOY_SOUNDS[id], id).toBeTruthy();
+    // A later review may reopen a toy (its entry then carries that review's "round" and a new plan).
+    if (REVIEW.toys[id]?.round) {
+      expect(REVIEW.toys[id].plan, id).toBeTruthy();
+      continue;
+    }
     expect(REVIEW.toys[id]?.status, id).toBe("site");
     expect(REVIEW.toys[id]?.plan, id).toMatch(/^Now: /);
   }

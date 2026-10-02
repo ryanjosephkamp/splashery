@@ -10,8 +10,8 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 337 toys. 337 have a tap action today; the other 0 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 333.
+- 341 toys. 341 have a tap action today; the other 0 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 337.
 - **more** (has an effect; make it clearer or more dramatic): 0.
 - **new** (needs its own effect): 4.
 - Visual fixes: 0 open, 30 done. Touch or drag interaction asked for: 4.
@@ -23,41 +23,42 @@ Proposals below are suggestions; the owner may change them.
   Baseball, Softball, Rugby ball, Volleyball, Cricket ball, Pool ball, Medicine ball, Squash ball,
   Hockey puck, Flying disc, Comet, Lava lamp, Storybook, Laptop, Decorated tree, Diya, Sports car,
   Tractor, Statue of Liberty, Your book, Photo album. Effects to make clearer or more dramatic,
-  still open: none. Done in C2: Cactus, Strawberry, Heart cookie, Honeybee, Jelly blob, Donut, Neon
-  knot, Tiny planet, Cluster fly, May beetle, Millipede, Carder bumblebee, Raspberry, Blackberry,
-  Blueberry, Grape, Cinnamon star cookie, Tomatoes, Mandeltorus, Basket, Real rubber duck, Garden
-  gnome, Wooden elephant, Marble bust, Ukulele, Real alarm clock, Vintage camera, Boombox, Real
-  croissant, Carrot cake, Pomegranate, Lantern, Cat statue, Horse statue, Real pencil, Real tin can,
-  Basketball, Soccer ball, American football, Tennis ball, Baseball, Softball, Beach ball, Golf
-  ball, Rugby ball, Volleyball, Water polo ball, Ping-pong ball, Cricket ball, Bowling ball, Pool
-  ball, Pickleball, Dodgeball, Medicine ball, Lacrosse ball, Squash ball, Bouncy ball, Marble,
-  Hockey puck, Shuttlecock, Flying disc, Beating heart, Sun, Solar system, Mercury, Venus, Earth,
-  Moon, Mars, Jupiter, Saturn, Uranus, Neptune, Aurora world, Asteroid, Comet, Meteor, Star, Pulsar,
-  Black hole, Star cluster, Ring nebula, Nebula, Spiral galaxy, Virus, Bacteriophage, Bacterium, Red
-  blood cell, Neuron, Astrocyte, Animal cell, DNA, White blood cell, Microglia, Diatom, Pollen
-  grain, Snowflake, Chromosome, Mitochondrion, Paramecium, Amoeba, Electron orbital, Atom, Molecule,
-  Protein, Crystal lattice, Periodic table, Diamond, Ruby, Emerald, Amethyst geode, Sapphire, Quartz
-  cluster, Opal, Crystal ball, Brain, Eye, Lungs, Tooth, Kidney, Anatomy atlas, Oak tree, Pine tree,
-  Palm tree, Cherry blossom, Maple tree, Bonsai, Weeping willow, Sunflower, Rose, Tulips, Daisies,
-  Lotus, Toadstool, Fern, Saguaro cactus, Coral reef, Pinecone, Acorns, Succulent, Bamboo, Pebbles,
-  Kelp, Storm cloud, Lava lamp, Ice swan, Tornado, Rainbow, Iceberg, Waterfall, Ocean wave, Ice
-  cream, Watermelon, Pancakes, Cupcake, Lollipop, Candy cane, Macarons, Gummy bear, Pretzel,
-  Croissant, Burger, Sushi, Taco, Coffee, Apple, Bananas, Orange, Kiwi, Pineapple, Cherries, Grapes,
-  Avocado, Building bricks, Rubber duck, Newton's cradle, Puzzle cube, Kite, Chess set, Lorenz
-  attractor, Möbius strip, Klein bottle, Menger sponge, Hypercube, Torus knot, Gyroid, Mandelbulb,
-  Seashell spiral, Graph plotter, Surface plotter, Circle and waves, Fourier circles, Pythagoras
-  proof, Splat equation, Fountain pen, Water bottle, Soda can, Running shoe, Hoodie, Sunglasses,
-  Baseball cap, Heraldic shield, Crown, Wizard's orb, Jellyfish, School of fish, Pufferfish,
-  Nautilus, Snail, Octopus, Sea urchin, Frog, Snowman, Fireworks, Decorated tree, Paper lantern,
-  Diya, Acoustic guitar, Snare drum, Xylophone, Toy piano, Grand piano, Upright piano, Harpsichord,
-  Electronic keyboard, Hot-air balloon, Bus, Jet airliner, Sailboat, Submarine, Bicycle, Eiffel
-  Tower, Washington Monument, Pyramids of Giza, Twisting supertall, Statue of Liberty, White House,
-  Leaning Tower of Pisa, Colosseum, Parthenon, Stonehenge, Big Ben, Taj Mahal, Castle, Pagoda,
-  Windmill, Perceptron, Multilayer perceptron, Neural network, Convolutional network, Recurrent
-  network, Transformer, Looped transformer, Diffusion model, Gradient descent, Gaussian splatting,
-  Word vectors, Sorting machine, Half adder, Turing machine, Difference engine, Enigma machine,
-  Bombe, Your book, Photo album, Picture frame, Room echo meter, Splat mirror, Model to splats,
-  Photo to 3D, Video to 3D, Splat field, Fluid lab, Screen.
+  still open: none. Done in C2: Cactus, Strawberry, Heart cookie, Honeybee, Torus, Jelly blob, Neon
+  knot, Cluster fly, May beetle, Millipede, Carder bumblebee, Raspberry, Blackberry, Blueberry,
+  Grape, Cinnamon star cookie, Tomatoes, Mandeltorus, Basket, Real rubber duck, Garden gnome, Wooden
+  elephant, Marble bust, Ukulele, Real alarm clock, Vintage camera, Boombox, Real croissant, Carrot
+  cake, Pomegranate, Lantern, Cat statue, Horse statue, Real pencil, Real tin can, Basketball,
+  Soccer ball, American football, Tennis ball, Baseball, Softball, Beach ball, Golf ball, Rugby
+  ball, Volleyball, Water polo ball, Ping-pong ball, Cricket ball, Bowling ball, Pool ball,
+  Pickleball, Dodgeball, Medicine ball, Lacrosse ball, Squash ball, Bouncy ball, Marble, Hockey
+  puck, Shuttlecock, Flying disc, Beating heart, Sun, Solar system, Mercury, Venus, Earth, Moon,
+  Mars, Jupiter, Saturn, Uranus, Neptune, Tiny planet, Aurora world, Asteroid, Comet, Meteor, Star,
+  Pulsar, Black hole, Star cluster, Ring nebula, Nebula, Spiral galaxy, Virus, Bacteriophage,
+  Bacterium, Red blood cell, Neuron, Astrocyte, Animal cell, DNA, White blood cell, Microglia,
+  Diatom, Pollen grain, Snowflake, Chromosome, Mitochondrion, Paramecium, Amoeba, Electron orbital,
+  Atom, Molecule, Protein, Crystal lattice, Periodic table, Diamond, Ruby, Emerald, Amethyst geode,
+  Sapphire, Quartz cluster, Opal, Brain, Eye, Lungs, Tooth, Kidney, Anatomy atlas, Oak tree, Pine
+  tree, Palm tree, Cherry blossom, Maple tree, Bonsai, Weeping willow, Sunflower, Rose, Tulips,
+  Daisies, Lotus, Toadstool, Fern, Saguaro cactus, Coral reef, Pinecone, Acorns, Succulent, Bamboo,
+  Pebbles, Kelp, Storm cloud, Lava lamp, Ice swan, Tornado, Rainbow, Iceberg, Waterfall, Ocean wave,
+  Ice cream, Watermelon, Pancakes, Cupcake, Lollipop, Candy cane, Macarons, Donut, Gummy bear,
+  Pretzel, Croissant, Burger, Sushi, Taco, Coffee, Apple, Bananas, Orange, Kiwi, Pineapple,
+  Cherries, Grapes, Avocado, Building bricks, Rubber duck, Newton's cradle, Puzzle cube, Kite, Chess
+  set, Lorenz attractor, Möbius strip, Klein bottle, Menger sponge, Hypercube, Torus knot, Gyroid,
+  Mandelbulb, Seashell spiral, Graph plotter, Surface plotter, Circle and waves, Fourier circles,
+  Pythagoras proof, Splat equation, Fountain pen, Water bottle, Soda can, Running shoe, Hoodie,
+  Sunglasses, Baseball cap, Heraldic shield, Crown, Wizard's orb, Crystal ball, Jellyfish, School of
+  fish, Pufferfish, Nautilus, Snail, Octopus, Sea urchin, Frog, Snowman, Fireworks, Decorated tree,
+  Paper lantern, Diya, Acoustic guitar, Snare drum, Xylophone, Toy piano, Grand piano, Upright
+  piano, Harpsichord, Electronic keyboard, Hot-air balloon, Bus, Jet airliner, Sailboat, Submarine,
+  Bicycle, Eiffel Tower, Washington Monument, Pyramids of Giza, Twisting supertall, Statue of
+  Liberty, White House, Leaning Tower of Pisa, Colosseum, Parthenon, Stonehenge, Big Ben, Taj Mahal,
+  Castle, Pagoda, Windmill, Perceptron, Multilayer perceptron, Neural network, Convolutional
+  network, Recurrent network, Transformer, Looped transformer, Diffusion model, Gradient descent,
+  Gaussian splatting, Word vectors, Sorting machine, Half adder, Turing machine, Difference engine,
+  Enigma machine, Bombe, Your book, Photo album, Picture frame, Room echo meter, Splat mirror, Model
+  to splats, Photo to 3D, Video to 3D, Splat field, Thermal ellipsoids, Super-resolution microscope,
+  Galaxy in a box, Fluid lab, Screen.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -296,31 +297,28 @@ Proposals below are suggestions; the owner may change them.
   - Sound: The metallic knock, a real spinning whirr on its rim that speeds up like a settling coin,
     and the clank as it drops flat.
 
-## Shapes (4)
+## Shapes (3)
 
+- **Torus** (`torus`). Now: tap: Spin it on its edge. Plan: keep.
+  - Owner: Owner's notes of September 28, 2026 (lane Shelves): Shapes keeps a plain torus people can
+    dress as a donut, a bagel or a swim ring.
+  - Effect: Pops onto its edge, wobbles around like a coin spun on a table, and settles flat.
+  - Improved: Shelves: a sharp, even kit torus with a Dress it as choice (plain, donut, bagel, swim
+    ring). A tap pops it up onto its edge; it wobbles around like a settling coin, leaning lower and
+    circling faster, and drops flat with a small bounce (3.6 s).
+  - Sound: A soft pop, a roll that circles faster, a settle.
 - **Jelly blob** (`blob`). Now: tap: Split (rig). Plan: keep.
   - Owner: Interesting; no idea for an effect. The original shapes are really good-looking.
   - Effect: Splits into three small blobs that merge back.
   - Improved: E1: splits into three smaller blobs that wobble apart, then merge back with a jelly
     bounce (2.8 s).
   - Sound: Gloopy wobble.
-- **Donut** (`donut`). Now: tap: Break apart (rig). Plan: keep.
-  - Owner: Interesting; good-looking.
-  - Effect: Sprinkles jump off and rain back down.
-  - Improved: E1b: it snaps into chunks that fly apart and tumble (the dough shows inside), the
-    sprinkles spray off, then it all flies back together (2.8 s).
-  - Sound: A soft doughy squish and tear as it breaks into chunks, and a soft squish as it comes
-    back together (no sprinkle clicks).
 - **Neon knot** (`knot`). Now: tap: Contort (rig). Plan: keep.
   - Effect: The neon flows along the knot and it ties tighter, then relaxes.
   - Improved: E1b: the knot contorts: waves of swelling loops run round the tube, lifting and
     twisting it, then it settles back into its trefoil (3 s).
   - Sound: A short electric crackle as the neon strikes, then a steady neon hum while it writhes (no
     rising pitch).
-- **Tiny planet** (`planet`). Now: tap: Day and night (rig). Plan: keep.
-  - Effect: Clouds race around and a day-night band sweeps over it.
-  - Improved: E1: the clouds race once round the planet and a night band sweeps across it (2.8 s).
-  - Sound: A quiet, darker breeze and a soft low whoosh as the clouds race round.
 
 ## Balls (25)
 
@@ -732,7 +730,7 @@ Proposals below are suggestions; the owner may change them.
   - Sound: The soda sloshing as it shakes, a sharp pssht as the tab opens and a fine, soft fizz that
     dies away (no bubbles).
 
-## Space (23)
+## Space (24)
 
 - **Sun** (`sun`). Now: tap: Solar flare. Plan: keep.
   - Owner: Incredible. It should pulse and churn by default, dramatically, like the real Sun. Needs
@@ -813,6 +811,12 @@ Proposals below are suggestions; the owner may change them.
   - Improved: E2: a tap sends the belts of white cloud racing round it twice while the band with the
     dark storm and its white companion drifts the other way once (3.8 s).
   - Sound: Deep icy wind.
+- **Tiny planet** (`planet`). Now: tap: Day and night (rig). Plan: keep.
+  - Effect: Clouds race around and a day-night band sweeps over it.
+  - Improved: E1: the clouds race once round the planet and a night band sweeps across it (2.8 s).
+    Shelves: moved to Space; the Toy tab's Planet picks Earth, Mars, the Moon, Jupiter or Neptune,
+    each in the same tiny-planet style.
+  - Sound: A quiet, darker breeze and a soft low whoosh as the clouds race round.
 - **Aurora world** (`aurora-planet`). Now: tap: Auroral surge. Plan: keep.
   - Owner: The auroras should actually move, realistically and dynamically.
   - Effect: Idle: auroras ripple as curtains. Tap: a bright surge of green and violet.
@@ -1085,7 +1089,7 @@ Proposals below are suggestions; the owner may change them.
   - Sound: A soft whoosh up and a soft thud as the atom rises; a whoosh down and a soft thud as it
     lowers (no clicks).
 
-## Gems (9)
+## Gems (8)
 
 - **Diamond** (`diamond`). Now: tap: Turn it in the light. Plan: keep.
   - Owner: Gems need effects.
@@ -1129,12 +1133,6 @@ Proposals below are suggestions; the owner may change them.
 - **Pearl** (`pearl`). Now: tap: Open or close. Plan: keep.
   - Owner: Really cool.
   - Sound: Soft round clink.
-- **Crystal ball** (`crystal-ball`). Now: tap: Gaze into the ball. Plan: keep.
-  - Owner: Hard to tell what the effect is; make it clearer and more dramatic.
-  - Effect: Mist swirls hard and a glowing shape appears inside, then fades.
-  - Improved: C2: the mist whips round and thins, and a glowing sign rises out of it and fades: a
-    star, a moon or a heart in turn (about 3.5 s).
-  - Sound: A soft misty whoosh and a real crystal glass ringing as the sign rises (no theremin).
 
 ## Nature (23)
 
@@ -1306,7 +1304,7 @@ Proposals below are suggestions; the owner may change them.
     swings back as the fish swim off to the right (about 5.5 s). The kelp also sways gently at rest.
   - Sound: Underwater bubbles.
 
-## Food (27)
+## Food (28)
 
 - **Ice cream** (`ice-cream`). Now: tap: Melt and refreeze. Plan: keep.
   - Owner: Really neat; I like that you can melt it. Make melting part of the tap effect.
@@ -1365,6 +1363,13 @@ Proposals below are suggestions; the owner may change them.
     rim and landing level with a soft tap; the tower of five sways, then they hop back down (about
     3.5 s).
   - Sound: Soft taps.
+- **Donut** (`donut`). Now: tap: Break apart (rig). Plan: keep.
+  - Owner: Interesting; good-looking.
+  - Effect: Sprinkles jump off and rain back down.
+  - Improved: E1b: it snaps into chunks that fly apart and tumble (the dough shows inside), the
+    sprinkles spray off, then it all flies back together (2.8 s).
+  - Sound: A soft doughy squish and tear as it breaks into chunks, and a soft squish as it comes
+    back together (no sprinkle clicks).
 - **Gummy bear** (`gummy-bear`). Now: tap: Squish. Plan: keep.
   - Owner: Underwhelming. Press, hold and drag to stretch its arm or body, and let go to spring back
     with realistic physics.
@@ -1793,7 +1798,7 @@ Proposals below are suggestions; the owner may change them.
   - Sound: Fabric rustles instead of whooshes as it flips; the flick and the soft landings are
     unchanged.
 
-## Medieval (9)
+## Medieval (10)
 
 - **Sword in the stone** (`sword-in-stone`). Now: tap: Pull. Plan: keep.
   - Owner: Perfect.
@@ -1839,6 +1844,12 @@ Proposals below are suggestions; the owner may change them.
   - Improved: C2: a bigger spell: a flash fills the glass, the swirl spins up, sparks spiral out in
     five arms and a ring of runes rises and circles the orb (about 3 s).
   - Sound: A deep, slow hum of power swelling in the glass (no wind or twinkles).
+- **Crystal ball** (`crystal-ball`). Now: tap: Gaze into the ball. Plan: keep.
+  - Owner: Hard to tell what the effect is; make it clearer and more dramatic.
+  - Effect: Mist swirls hard and a glowing shape appears inside, then fades.
+  - Improved: C2: the mist whips round and thins, and a glowing sign rises out of it and fades: a
+    star, a moon or a heart in turn (about 3.5 s).
+  - Sound: A soft misty whoosh and a real crystal glass ringing as the sign rises (no theremin).
 
 ## Animals (13)
 
@@ -2614,3 +2625,46 @@ Proposals below are suggestions; the owner may change them.
     glass and the bowl.
   - Sound: The pour's splash and glug (soda fizzes; honey and lava a thick gloop), a splash, a
     breath on the candle and the cup.
+
+## Science (3)
+
+- **Thermal ellipsoids** (`thermal-ellipsoids`). Now: tap: Jiggle the atoms. Plan: keep.
+  - Owner: The owner's question of September 29, 2026 (can splats be a real science tool?) and his
+    answer "Science yes" (lane Science; labs only).
+  - Effect: Each atom of a crystal structure is the Gaussian of its measured displacement tensor U,
+    drawn as a solid ellipsoid at a probability level (50% by default) with its three principal
+    planes, or as one Gaussian splat. The tap makes every atom jiggle through places drawn from its
+    own Gaussian while the bonds fade to a ghost of the mean structure; a second tap stills them.
+    Zoom in with the slider and tap an atom to look there.
+  - Improved: Science: CIF (small molecule, U converted from the reciprocal cell to Cartesian axes),
+    mmCIF and PDB (ANISOU) readers; a GPU program (labs) moves each atom by its own U, sets the
+    one-Gaussian look's exact shape, and magnifies about a focus with a clipping slab. Samples:
+    aspirin form II at 300 K (COD 2104857, public domain) and crambin at 0.54 Å (PDB 1EJG, CC0).
+  - Sound: Quiet: a faint jostle of tiny taps under a soft breath as the atoms jiggle; a softer
+    breath as they settle.
+- **Super-resolution microscope** (`smlm-microscope`). Now: tap: Zoom in or out. Plan: keep.
+  - Owner: The owner's question of September 29, 2026 (can splats be a real science tool?) and his
+    answer "Science yes" (lane Science; labs only).
+  - Effect: A super-resolution microscope's localizations, each a Gaussian as wide as its
+    localization precision (and deeper by its axial precision), colored by depth, time or channel.
+    The tap dives about 60 times into the place you tap, down to single molecules, showing a thin
+    slice at the depth there (2.6 s); a second tap zooms back out.
+  - Improved: Science: .smlm (a zip, inflated with DecompressionStream) and ThunderSTORM CSV
+    readers; tier budgets (84k to 392k localizations); a size floor so the whole field shows at any
+    zoom. Sample: a 12 µm square of Christophe Leterrier's microtubules and clathrin record on
+    ShareLoc.XYZ (CC BY 4.0, a subset).
+  - Sound: A microscope's focus knob turning smoothly as the view dives in, and turning back as it
+    zooms out.
+- **Galaxy in a box** (`galaxy-box`). Now: tap: Zoom in or out. Plan: keep.
+  - Owner: The owner's question of September 29, 2026 (can splats be a real science tool?) and his
+    answer "Science yes" (lane Science; labs only).
+  - Effect: The gas of the FIRE-2 Milky Way–mass galaxy m12i today, each particle the Gaussian with
+    the same spread as its smoothing kernel (0.27 of its smoothing length), colored by temperature
+    and brighter where denser, in a box with a dark floor. The tap zooms about 8 times into the gas
+    you tap (2.2 s); a second tap zooms out. Only the cold gas peels the hot gas away.
+  - Improved: Science: tools/sci-galaxy.mjs (jsfive) cuts 300,000 of the 2.4 million gas particles
+    in a 40 × 12 × 40 kpc box round the galaxy from the CC BY 4.0 snapshot (FlatHUB), turns the disk
+    face up and works out each temperature; the toy draws them approximately (not a column-density
+    integral).
+  - Sound: Space is silent: a long, soft breath as the view glides in, and a lower one as it pulls
+    back.
