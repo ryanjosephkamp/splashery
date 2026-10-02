@@ -137,7 +137,7 @@ export class HandsOn {
     const w = new World({ gravity: [0, -g, 0], substeps: 8, sleepSpeed: 0.03 * R, minHit: 0.6 * R }); // prettier-ignore
     const floor = hull.floor;
     w.plane([0, 1, 0], floor, { friction: 0.7, restitution: 0.3 });
-    const A = hull.reach * 1.25 + 0.6 * R;
+    const A = hull.reach * 1.05 + 0.4 * R;
     const c = hull.center;
     for (const [nx, nz] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) // prettier-ignore
       w.plane([nx, 0, nz], nx * (c[0] - nx * A) + nz * (c[2] - nz * A), { friction: 0.3, restitution: 0.4 }); // prettier-ignore
@@ -178,7 +178,7 @@ export class HandsOn {
     const R = info.radius;
     const n = centers ? Math.floor(centers.length / 3) : 0;
     const count = Math.min(n, res?.numSplats || n);
-    const sample = Math.min(count, 24000);
+    const sample = Math.min(count, 6000);
     const pts = [];
     if (sample > 8) {
       const step = count / sample;
@@ -342,6 +342,8 @@ export class HandsOn {
     // Held a little in from the surface, so it hangs from inside the toy.
     const joint = w.joint(body, la, null, hit, { compliance: 0, damping: 0 });
     body.held = true;
+    body.holdQ = body.q.slice();
+    body.holdK = 10;
     body.angDampingFree ??= body.angDamping;
     body.angDamping = 7; // held, it hangs calmly from the finger
     this.hold = { body, joint, plane: { point: hit.slice(), normal: ray.dir.slice() }, target: hit.slice(), follow: hit.slice() }; // prettier-ignore
@@ -372,12 +374,16 @@ export class HandsOn {
     if (!h) return false;
     this.world.removeJoint(h.joint);
     h.body.held = false;
+    h.body.holdQ = null;
     h.body.angDamping = h.body.angDampingFree ?? h.body.angDamping;
     // Not too wild a throw.
     const R = this.info.radius;
     const max = 9 * R;
     const sp = v3.len(h.body.vel);
     if (sp > max) h.body.vel = v3.scale(h.body.vel, max / sp);
+    // A thrown thing turns a little the way it flies.
+    const fwd = v3.cross([0, 1, 0], h.body.vel);
+    h.body.omega = v3.add(h.body.omega, v3.scale(fwd, 0.25 / Math.max(h.body.bound, 0.2 * R)));
     const wmax = 14;
     const ws = v3.len(h.body.omega);
     if (ws > wmax) h.body.omega = v3.scale(h.body.omega, wmax / ws);
@@ -441,7 +447,16 @@ export class HandsOn {
         this.moved = false;
         w.asleep = true;
       }
-    } else if (w.step(dt)) busy = true;
+    } else {
+      // Slow frames catch up in steps of at most 1/60 s (up to 0.1 s a
+      // frame), so a toss plays at its real speed on a slow phone too.
+      let left = Math.min(dt, 0.1);
+      while (left > 1e-6) {
+        const d = Math.min(left, 1 / 60);
+        if (w.step(d)) busy = true;
+        left -= d;
+      }
+    }
     for (const hit of w.takeHits()) this.onHit(hit);
     if (this.squish) {
       const s = this.squish;
@@ -462,7 +477,7 @@ export class HandsOn {
       if (hit.body?.pinned && speed > 0.8) this.free(hit.body);
     }
     if (this.mode === "toy" && this.soft > 0 && speed > 0.8) {
-      const amp = Math.min(0.42, this.soft * 0.06 * speed);
+      const amp = Math.min(0.45, this.soft * 0.08 * speed);
       if (!this.squish || amp > this.squishAmp()) {
         this.squish = { amp, t0: this.time, axis: hit.n.slice(), point: hit.point.slice() };
       }
@@ -474,7 +489,7 @@ export class HandsOn {
     const s = this.squish;
     if (!s) return 0;
     const t = this.time - s.t0;
-    return s.amp * Math.exp(-6 * t) * Math.cos(17 * t);
+    return s.amp * Math.exp(-4.5 * t) * Math.cos(12 * t);
   }
 
   // Puts the bodies' poses on the toy: the entity for Level 1, tokens for

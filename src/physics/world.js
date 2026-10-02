@@ -522,6 +522,10 @@ export class World {
     }
     // Positions: joints, links, then contacts.
     for (const j of this.joints) this.solveJoint(j, h);
+    // A held body keeps near the turn it was picked up in (a hand grips; a
+    // pin would let it swing face down), easing back after a sway.
+    for (const b of this.bodies)
+      if (b.holdQ) b.q = quat.slerp(b.q, b.holdQ, 1 - Math.exp(-b.holdK * h));
     for (const l of this.links) this.solveLink(l, h);
     const contacts = this.contacts();
     // Each touching pair's pushes first, then its friction against the
