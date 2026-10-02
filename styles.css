@@ -2090,3 +2090,474 @@ body.embed #stage {
 }
 
 /* /View settings */
+
+/* Live input (lane Live input): the pill that shows while the microphone,
+   the camera or a screen is on, with its Stop button. */
+.live-indicator {
+  position: fixed;
+  top: calc(env(safe-area-inset-top, 0px) + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 4px 4px 12px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: var(--paper);
+  box-shadow: var(--shadow);
+  color: var(--ink);
+  font-size: 13px;
+}
+
+.live-indicator[hidden] {
+  display: none;
+}
+
+.live-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #d0302f;
+  animation: live-blink 1.6s ease-in-out infinite;
+}
+
+@keyframes live-blink {
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .live-dot {
+    animation: none;
+  }
+}
+
+.live-indicator button {
+  padding: 3px 12px;
+  border-radius: 999px;
+}
+
+.input-live {
+  margin: 6px 0;
+}
+
+.input-live .live-note {
+  margin-top: 4px;
+}
+
+/* UI r2 --------------------------------------------------------------------- */
+/* Focus mode, the phone sheet's hidden and full stops, the desktop panel's
+   fold and gallery page, and the drawing pad's pens. All of it shows only
+   with body.ui2 (the labs switch until the owner's marks). */
+
+body:not(.ui2) .ui2-only,
+body.ui2 .ui2-hide {
+  display: none !important;
+}
+
+#focus-toggle {
+  right: calc(var(--panel-w) + 36px + 220px);
+}
+
+#stage.panning {
+  cursor: move;
+}
+
+/* Focus mode: only the toy, and a small "show" button in the corner. */
+body.focus #stage {
+  width: 100%;
+  height: 100%;
+}
+
+body.focus .brand,
+body.focus .toy-status,
+body.focus .toy-legend,
+body.focus .sound-toggle,
+body.focus .view-button,
+body.focus .help-toggle,
+body.focus .help-line,
+body.focus .game-bar,
+body.focus .panel,
+body.focus .panel-fold {
+  display: none !important;
+}
+
+.focus-exit {
+  position: fixed;
+  top: calc(10px + env(safe-area-inset-top, 0px));
+  right: calc(10px + env(safe-area-inset-right, 0px));
+  z-index: 30;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  background: color-mix(in srgb, var(--paper) 70%, transparent);
+  color: var(--muted);
+  opacity: 0.8;
+}
+
+.focus-exit:hover,
+.focus-exit:focus-visible {
+  opacity: 1;
+  color: var(--ink);
+}
+
+.focus-edge {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 29;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: calc(26px + env(safe-area-inset-bottom, 0px));
+  padding-bottom: calc(6px + env(safe-area-inset-bottom, 0px));
+  touch-action: none;
+}
+
+.focus-edge span {
+  width: 38px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--line-strong);
+  opacity: 0.6;
+}
+
+/* The desktop panel's fold: a tab on the panel's left edge. Folded, the
+   panel is a thin edge with only the tab, and the stage takes the width. */
+.panel-fold {
+  position: fixed;
+  top: 50%;
+  right: calc(var(--panel-w) + 13px);
+  z-index: 11;
+  display: grid;
+  place-items: center;
+  width: 18px;
+  height: 52px;
+  margin-top: -26px;
+  padding: 0;
+  border-radius: 9px 0 0 9px;
+  border-right: 0;
+  background: var(--paper);
+  color: var(--muted);
+}
+
+.panel-fold:hover {
+  color: var(--ink);
+}
+
+body.panel-folded .panel-fold svg {
+  transform: rotate(180deg);
+}
+
+.sheet-max,
+.gallery-close {
+  display: none;
+}
+
+@media (min-width: 761px) {
+  body.ui2.panel-folded {
+    --panel-w: 0px;
+  }
+
+  body.ui2.panel-folded .panel {
+    display: none;
+  }
+
+  /* The gallery page: the shelf, every toy in a big grid, over the stage. */
+  body.gallery-page .panel {
+    left: 12px;
+    z-index: 20;
+    width: auto;
+    background: var(--page);
+  }
+
+  body.gallery-page .panel-body,
+  body.gallery-page .grip,
+  body.gallery-page .toolbar,
+  body.gallery-page .panel-fold {
+    display: none;
+  }
+
+  body.gallery-page .dock {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    min-height: 0;
+    padding: 14px 20px 12px;
+    border-bottom: 0;
+  }
+
+  body.gallery-page .dock > * {
+    flex: none;
+  }
+
+  body.gallery-page .gallery-close:not([hidden]) {
+    display: block;
+    align-self: flex-end;
+    margin: 0 0 8px;
+  }
+
+  body.gallery-page .shelf {
+    flex: 1 1 auto;
+    min-height: 0;
+    max-height: none;
+    grid-template-columns: repeat(auto-fill, minmax(104px, 1fr));
+    gap: 12px 8px;
+  }
+
+  body.gallery-page .toy-card {
+    font-size: 12.5px;
+  }
+
+  body.gallery-page .toy-card img,
+  body.gallery-page .toy-card .thumb {
+    max-width: 96px;
+  }
+}
+
+@media (max-width: 760px) {
+  #focus-toggle {
+    right: 234px;
+  }
+
+  /* Six round buttons beside the name: the tagline makes room. */
+  body.ui2 .brand p {
+    display: none;
+  }
+
+  .panel-fold,
+  .focus-exit {
+    top: calc(10px + env(safe-area-inset-top, 0px));
+  }
+
+  .panel-fold {
+    display: none;
+  }
+
+  .sheet-max:not([hidden]) {
+    display: inline-grid;
+    flex: none;
+    place-items: center;
+    padding: 7px 10px;
+  }
+
+  .sheet-max[aria-pressed="true"] {
+    background: var(--accent-soft);
+    border-color: var(--ink);
+  }
+
+  /* The full stop: the grid or the settings fill the screen, with a strip of
+     the toy still showing at the top. The settings leave the shelf row out. */
+  body.ui2.sheet-full .panel {
+    height: calc(100dvh - max(150px, 22dvh));
+    max-height: none;
+  }
+
+  body.sheet-full.sheet-open .dock > :not(.sheet-handle):not(.toolbar) {
+    display: none;
+  }
+
+  /* The hidden stop: only the handle stays, to pull the sheet back up. */
+  body.sheet-hidden .dock > :not(.sheet-handle) {
+    display: none !important;
+  }
+
+  body.sheet-hidden .dock {
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+
+  body.sheet-hidden .sheet-handle {
+    padding: 9px 0 13px;
+  }
+
+  body.focus .focus-edge:not([hidden]) {
+    display: flex;
+  }
+}
+
+@media (min-width: 761px) {
+  .focus-edge {
+    display: none !important;
+  }
+}
+
+@media (max-width: 380px) {
+  #focus-toggle {
+    right: 202px;
+  }
+}
+
+/* The drawing pad (lane AI's input.pad): bigger, with pens and an eraser. */
+body.ui2 .input-pad canvas {
+  width: min(100%, 248px);
+  height: auto;
+}
+
+.pad-pens {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.pad-pens button {
+  padding: 4px 11px;
+  font-size: 13px;
+}
+
+.pad-pens button[aria-pressed="true"] {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--page);
+}
+
+/* /UI r2 */
+
+/* UI r3 --------------------------------------------------------------------- */
+/* The flag button: flag colors for every toy, in the row of round buttons
+   (after the focus button when that shows). */
+
+#flag-toggle {
+  right: calc(var(--panel-w) + 36px + 220px);
+}
+
+body.ui2 #flag-toggle {
+  right: calc(var(--panel-w) + 36px + 264px);
+}
+
+.flag-pop {
+  position: fixed;
+  top: 58px;
+  right: calc(var(--panel-w) + 36px);
+  z-index: 12;
+  display: grid;
+  gap: 6px;
+  width: 280px;
+  padding: 10px 12px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  font-size: 13.5px;
+}
+
+.flag-pop label {
+  font-weight: 600;
+}
+
+.flag-pop .note {
+  margin: 0;
+}
+
+@media (max-width: 760px) {
+  /* The round buttons beside the name: the tagline makes room. */
+  .brand p {
+    display: none;
+  }
+
+  #flag-toggle {
+    right: 234px;
+  }
+
+  .flag-pop {
+    top: 52px;
+    right: 14px;
+    width: min(300px, calc(100% - 28px));
+  }
+
+  /* Seven round buttons (with the focus button): a little closer together. */
+  body.ui2 .view-button,
+  body.ui2 .sound-toggle,
+  body.ui2 .help-toggle {
+    width: 34px;
+    height: 34px;
+    top: 11px;
+  }
+
+  body.ui2 .sound-toggle {
+    right: 14px;
+  }
+
+  body.ui2 .help-toggle {
+    right: 52px;
+  }
+
+  body.ui2 #turntable-toggle {
+    right: 90px;
+  }
+
+  body.ui2 #tilt-toggle {
+    right: 128px;
+  }
+
+  body.ui2 #view-reset {
+    right: 166px;
+  }
+
+  body.ui2 #focus-toggle {
+    right: 204px;
+  }
+
+  body.ui2 #flag-toggle {
+    right: 242px;
+  }
+}
+
+@media (max-width: 380px) {
+  #flag-toggle {
+    right: 202px;
+  }
+
+  body.ui2 .brand h1 {
+    font-size: 16px;
+  }
+
+  body.ui2 .view-button,
+  body.ui2 .sound-toggle,
+  body.ui2 .help-toggle {
+    width: 32px;
+    height: 32px;
+    top: 12px;
+  }
+
+  body.ui2 .sound-toggle {
+    right: 12px;
+  }
+
+  body.ui2 .help-toggle {
+    right: 48px;
+  }
+
+  body.ui2 #turntable-toggle {
+    right: 84px;
+  }
+
+  body.ui2 #tilt-toggle {
+    right: 120px;
+  }
+
+  body.ui2 #view-reset {
+    right: 156px;
+  }
+
+  body.ui2 #focus-toggle {
+    right: 192px;
+  }
+
+  body.ui2 #flag-toggle {
+    right: 228px;
+  }
+}
+
+body.focus #flag-toggle,
+body.focus .flag-pop {
+  display: none !important;
+}
+
+/* /UI r3 */

@@ -4,10 +4,12 @@
 
 import { EFFECTS, AXES } from "./effects.js";
 import { SHAPES, PALETTES, PROFILES } from "./generators.js";
-import { TOYS, thumbURL, shelfCategories, searchToys, onShelf } from "./toys.js";
+import { TOYS, thumbURL, shelfCategories, searchToys, onShelf, holdsStill } from "./toys.js";
 import { IDLE_EFFECTS, formatCount } from "./state.js";
 import { MOVES } from "./motion.js";
 import { PATTERNS, PROJECTIONS, loadFlags } from "./patterns.js";
+import { initLive, renderLive } from "./live/panel.js"; // lane Live input
+import { ui2On } from "./player.js"; // UI r2
 
 const $ = (id) => document.getElementById(id);
 
@@ -24,6 +26,9 @@ const SWATCHES = [
 ];
 const TOOL_HINTS = {
   orbit: "Drag to turn the toy, scroll or pinch to zoom, twist two fingers to roll.",
+  // UI r2 (the labs switch): moving the toy.
+  orbit2:
+    "Drag to turn the toy, scroll or pinch to zoom, twist two fingers to roll. Shift-drag or two fingers move it.",
   // The Orbit tool on a stretchy toy (a recipe with `grab`).
   stretch: "Drag the toy to stretch it; drag beside it to turn it. Scroll or pinch to zoom.",
   clay: "Drag on a generated toy to add lumps of clay, or switch to Erase to carve it away.",
@@ -34,12 +39,23 @@ function pct(v) {
 }
 
 export function createUI(app) {
+  initLive(app); // lane Live input: the live sources, and Clap to tap (labs)
   const els = {
     panel: $("panel"),
     panelBody: $("panel-body"),
     dock: document.querySelector(".dock"),
     sheetToggle: $("sheet-toggle"),
     sheetHandle: $("sheet-handle"),
+    sheetMax: $("sheet-max"), // UI r2
+    focusToggle: $("focus-toggle"), // UI r2
+    focusExit: $("focus-exit"), // UI r2
+    focusEdge: $("focus-edge"), // UI r2
+    panelFold: $("panel-fold"), // UI r2
+    galleryOpen: $("gallery-open"), // UI r2
+    galleryClose: $("gallery-close"), // UI r2
+    flagToggle: $("flag-toggle"), // UI r3
+    flagPop: $("flag-pop"), // UI r3
+    flagGlobal: $("flag-global"), // UI r3
     tabs: $("tabs"),
     panes: $("panes"),
     shelf: $("shelf"),
@@ -216,6 +232,7 @@ export function createUI(app) {
     b.addEventListener("click", () => {
       // Picking from the phone grid folds it back to the row at once.
       if (mode === "grid") setMode("row");
+      if (galleryOn) setGallery(false); // UI r2
       app.chooseToy(toy.id);
     });
     cards.set(toy.id, b);
@@ -446,7 +463,8 @@ export function createUI(app) {
     for (const [k, v] of [...sliders]) if (k.startsWith(`${tool}.`)) sliders.delete(k);
     const def = EFFECTS.find((e) => e.id === tool);
     const stretchy = tool === "orbit" && app.player?.toyInfo?.recipe?.grab;
-    els.toolHint.textContent = def ? def.hint : TOOL_HINTS[stretchy ? "stretch" : tool] || "";
+    const hint = stretchy ? "stretch" : tool === "orbit" && ui2On() ? "orbit2" : tool; // UI r2
+    els.toolHint.textContent = def ? def.hint : TOOL_HINTS[hint] || "";
     if (def) for (const p of def.params) makeSlider(def, p, els.toolParams);
     els.paintExtras.hidden = tool !== "paint";
     els.clayExtras.hidden = tool !== "clay";
@@ -473,7 +491,8 @@ export function createUI(app) {
   function renderToyPanel(info) {
     const recipe = info?.recipe || null;
     if (app.tool === "orbit")
-      els.toolHint.textContent = TOOL_HINTS[recipe?.grab ? "stretch" : "orbit"];
+      els.toolHint.textContent =
+        TOOL_HINTS[recipe?.grab ? "stretch" : ui2On() ? "orbit2" : "orbit"]; // UI r2
     els.toyActionRow.hidden = !recipe?.action;
     els.toyAction.textContent = recipe?.action?.label || "";
     els.toyAliveRow.hidden = !recipe?.alive;
@@ -723,6 +742,7 @@ export function createUI(app) {
   // and a button that hands the drawing to input.read as the text
   // "pad:v,v,..." (row by row, each cell 0..max). value() gives the drawing
   // to start from, in the same form.
+  let padPen = null; // UI r2: the pad's pen for this visit
   function renderInputPad(pad, apply) {
     const cols = pad.cols || 8;
     const rows = pad.rows || 8;
@@ -764,16 +784,113 @@ export function createUI(app) {
         }
       draw();
     };
+    // UI r2: a harder, smaller pen that inks by the distance drawn, not by
+    // the number of pointer events: each stroke is walked in short steps,
+    // and each step inks every cell by how much of it the pen's disk covers.
+    // Fine, medium and bold pens, and an eraser that takes ink away.
+    const PENS = { fine: 0.5, medium: 0.75, bold: 1.05 };
+    // The pen stays as chosen when the panel is drawn again (after a read).
+    const pen = (padPen ||= {
+      size: narrow.matches || matchMedia("(pointer: coarse)").matches ? "fine" : "medium",
+      erase: false,
+    });
+    let last = null;
+    const cellAt = (e) => {
+      const r = canvas.getBoundingClientRect();
+      return [((e.clientX - r.left) / r.width) * cols, ((e.clientY - r.top) / r.height) * rows];
+    };
+    // How much of cell (i, j) a disk of radius rad at (x, y) covers, 0..1.
+    const cover = (i, j, x, y, rad) => {
+      let n = 0;
+      for (let a = 0; a < 4; a++)
+        for (let b = 0; b < 4; b++)
+          if (Math.hypot(i + (a + 0.5) / 4 - x, j + (b + 0.5) / 4 - y) <= rad) n++;
+      return n / 16;
+    };
+    const dab = (x, y, amount) => {
+      const rad = PENS[pen.size];
+      const sign = pen.erase ? -1.6 : 1;
+      for (
+        let j = Math.max(0, Math.floor(y - rad));
+        j <= Math.min(rows - 1, Math.floor(y + rad));
+        j++
+      )
+        for (
+          let i = Math.max(0, Math.floor(x - rad));
+          i <= Math.min(cols - 1, Math.floor(x + rad));
+          i++
+        ) {
+          const c = cover(i, j, x, y, rad);
+          if (c > 0) cells[j * cols + i] = Math.min(max, Math.max(0, cells[j * cols + i] + sign * max * amount * c)); // prettier-ignore
+        }
+    };
+    const stroke = (e) => {
+      const [x, y] = cellAt(e);
+      if (!last) {
+        dab(x, y, 0.45); // a touch leaves a dot
+      } else {
+        const len = Math.hypot(x - last[0], y - last[1]);
+        const steps = Math.ceil(len / 0.1);
+        for (let s = 1; s <= steps; s++) {
+          const f = s / steps;
+          dab(last[0] + (x - last[0]) * f, last[1] + (y - last[1]) * f, (1.4 * len) / steps);
+        }
+      }
+      last = [x, y];
+      draw();
+    };
     let down = false;
     canvas.addEventListener("pointerdown", (e) => {
       down = true;
+      last = null;
       canvas.setPointerCapture?.(e.pointerId);
-      ink(e);
+      if (UI2) stroke(e);
+      else ink(e);
     });
-    canvas.addEventListener("pointermove", (e) => down && ink(e));
-    const up = () => (down = false);
+    canvas.addEventListener("pointermove", (e) => down && (UI2 ? stroke(e) : ink(e)));
+    const up = () => {
+      down = false;
+      last = null;
+    };
     canvas.addEventListener("pointerup", up);
     canvas.addEventListener("pointercancel", up);
+    // The pens and the eraser (UI r2).
+    const pens = document.createElement("div");
+    pens.className = "pad-pens";
+    pens.setAttribute("role", "group");
+    pens.setAttribute("aria-label", "Pen size");
+    const penButtons = [];
+    const refreshPens = () => {
+      for (const b of penButtons) {
+        const on = b.dataset.pen === "erase" ? pen.erase : !pen.erase && b.dataset.pen === pen.size;
+        b.setAttribute("aria-pressed", String(on));
+      }
+    };
+    for (const [id, label] of [
+      ["fine", "Fine"],
+      ["medium", "Medium"],
+      ["bold", "Bold"],
+      ["erase", "Eraser"],
+    ]) {
+      // prettier-ignore
+      const b = document.createElement("button");
+      b.type = "button";
+      b.dataset.pen = id;
+      b.id = `toy-input-pad-${id}`;
+      b.textContent = label;
+      b.addEventListener("click", () => {
+        if (id === "erase") pen.erase = !pen.erase;
+        else {
+          pen.size = id;
+          pen.erase = false;
+        }
+        refreshPens();
+      });
+      penButtons.push(b);
+      pens.append(b);
+    }
+    refreshPens();
+    pens.hidden = !UI2;
     const buttons = document.createElement("div");
     buttons.className = "button-row";
     const clear = document.createElement("button");
@@ -791,7 +908,7 @@ export function createUI(app) {
     go.textContent = pad.button || "Use this drawing";
     go.addEventListener("click", () => apply(`pad:${cells.map((v) => Math.round(v)).join(",")}`));
     buttons.append(clear, go);
-    wrap.append(canvas, buttons);
+    wrap.append(canvas, pens, buttons);
     draw();
     return wrap;
   }
@@ -1394,6 +1511,7 @@ export function createUI(app) {
     }
     if (input.pad) box.append(renderInputPad(input.pad, apply));
     if (input.media) box.append(renderInputMedia(input.media, error)); // Pictures
+    if (input.live) box.append(renderLive(input.live, { error })); // Live input
     const file = document.createElement("input");
     file.type = "file";
     file.accept = input.accept || "";
@@ -1707,7 +1825,9 @@ export function createUI(app) {
       for (const f of sorted) {
         els.patFlag.add(new Option(f.name, f.code));
         els.toyFlag.add(new Option(f.name, f.code));
+        els.flagGlobal.add(new Option(f.name, f.code)); // UI r3
       }
+      els.flagGlobal.value = app.globalFlag || "";
       const p = app.player?.scene.pattern;
       els.patFlag.value = p?.flag || "";
       els.toyFlag.value = p?.id === "flag" ? p.flag : "";
@@ -1723,6 +1843,25 @@ export function createUI(app) {
   els.toyFlag.addEventListener("change", () => {
     const code = els.toyFlag.value;
     app.setPattern(code ? { id: "flag", flag: code } : { id: "none" });
+  });
+  // UI r3: the top bar's flag button, flag colors for every toy.
+  function showFlagPop(on) {
+    els.flagPop.hidden = !on;
+    els.flagToggle.setAttribute("aria-expanded", String(on));
+    if (on) listFlags().then(() => els.flagGlobal.focus({ preventScroll: true }));
+  }
+  els.flagToggle.addEventListener("click", () => showFlagPop(els.flagPop.hidden));
+  els.flagPop.addEventListener("keydown", (e) => {
+    if (e.key !== "Escape") return;
+    showFlagPop(false);
+    els.flagToggle.focus();
+  });
+  els.flagGlobal.addEventListener("change", () => {
+    app.setGlobalFlag(els.flagGlobal.value);
+    showFlagPop(false);
+  });
+  document.addEventListener("pointerdown", (e) => {
+    if (!els.flagPop.hidden && !e.target.closest?.("#flag-pop, #flag-toggle")) showFlagPop(false);
   });
   els.patId.addEventListener("change", () => app.setPattern({ id: els.patId.value }));
   els.patFlag.addEventListener("change", () => app.setPattern({ flag: els.patFlag.value }));
@@ -2060,6 +2199,12 @@ export function createUI(app) {
   const SHELF_GRID = true;
   const narrow = matchMedia("(max-width: 760px)");
   let mode = "row";
+  // UI r2: two more stops. "hidden" folds the sheet down to its handle, and
+  // `full` makes the grid or the panel fill the screen but for a strip of the
+  // toy at the top.
+  const UI2 = ui2On();
+  document.body.classList.toggle("ui2", UI2);
+  let full = false;
   function refreshDock() {
     if (!narrow.matches) {
       document.documentElement.style.removeProperty("--dock-h");
@@ -2073,21 +2218,33 @@ export function createUI(app) {
     els.panelBody.hidden = narrow.matches && m !== "panel";
     document.body.classList.toggle("sheet-open", m === "panel");
     document.body.classList.toggle("shelf-grid", m === "grid");
+    document.body.classList.toggle("sheet-hidden", m === "hidden"); // UI r2
+    document.body.classList.toggle("sheet-full", narrow.matches && full); // UI r2
+    els.sheetMax.hidden = !UI2 || !(m === "grid" || m === "panel"); // UI r2
+    els.sheetMax.setAttribute("aria-pressed", String(full));
+    els.sheetMax.title = full ? "Make it smaller" : "Fill the screen";
     els.sheetToggle.setAttribute("aria-expanded", String(mode === "panel"));
     // From the grid, More goes straight to the settings (one tap); the
     // handle, a swipe down, a pick or a tap on the toy closes the grid.
     els.sheetToggle.textContent = m === "panel" ? "Done" : "More";
     refreshDock();
   };
-  function setMode(m) {
+  function setMode(m, fill = false) {
     if (m === "grid" && !SHELF_GRID) m = "panel";
-    if (mode === m) return;
+    if (m === "hidden" && !UI2) m = "row";
+    const f = UI2 && fill && (m === "grid" || m === "panel");
+    if (mode === m && full === f) return;
     mode = m;
+    full = f;
     applySheet();
     if (m !== "panel") revealCurrent();
   }
   new ResizeObserver(refreshDock).observe(els.panel);
-  els.sheetToggle.addEventListener("click", () => setMode(mode === "panel" ? "row" : "panel"));
+  els.sheetToggle.addEventListener("click", () =>
+    mode === "panel" ? setMode("row") : (setMode("panel", bigInput()), fitInput()),
+  );
+  // UI r2: the maximize button fills the screen with the grid or the panel.
+  els.sheetMax.addEventListener("click", () => setMode(mode, !full));
   narrow.addEventListener("change", applySheet);
 
   // The handle: swipe up for the grid, down for the row, tap to toggle. The
@@ -2102,8 +2259,16 @@ export function createUI(app) {
       if (!start || e.pointerId !== start.id) return;
       const dy = e.clientY - start.y;
       start = null;
-      if (dy > 28) setMode("row");
+      // UI r2: down from full goes back to the usual size, down from the row
+      // hides the sheet; up from the hidden sheet brings the row back, and up
+      // from the grid or the panel fills the screen.
+      if (UI2 && dy > 28 && full) setMode(mode);
+      else if (UI2 && dy > 28 && mode === "row" && el === els.sheetHandle) setMode("hidden");
+      else if (dy > 28) setMode("row");
+      else if (UI2 && dy < -28 && mode === "hidden") setMode("row");
+      else if (UI2 && dy < -28 && up() === mode) setMode(mode, true);
       else if (dy < -28) setMode(up());
+      else if (UI2 && mode === "hidden") setMode("row");
       else if (tap) setMode(tap());
     });
     el.addEventListener("pointercancel", () => (start = null));
@@ -2139,6 +2304,10 @@ export function createUI(app) {
       if (mode !== "grid" && dy < -36 && -dy > dx * 1.5) {
         lift = null;
         setMode("grid");
+      } else if (UI2 && mode === "row" && dy > 36 && dy > dx * 1.5) {
+        // UI r2: swiping the toy row down hides the sheet.
+        lift = null;
+        setMode("hidden");
       } else if (mode === "grid" && lift.top <= 0 && els.shelf.scrollTop <= 0) {
         if (dy > 90 && dy > dx * 2) {
           lift = null;
@@ -2156,7 +2325,8 @@ export function createUI(app) {
     "touchstart",
     (e) => {
       const t = e.touches[0];
-      const onInput = e.target.closest?.("input, select, textarea");
+      // UI r2: a stroke on the drawing pad draws; it never closes the sheet.
+      const onInput = e.target.closest?.("input, select, textarea, canvas");
       pull =
         narrow.matches && mode === "panel" && e.touches.length === 1 && !onInput
           ? { x: t.clientX, y: t.clientY, top: els.panes.scrollTop }
@@ -2172,13 +2342,149 @@ export function createUI(app) {
       const dy = t.clientY - pull.y;
       if (dy > 90 && dy > Math.abs(t.clientX - pull.x) * 2) {
         pull = null;
-        setMode("row");
+        setMode(full ? "panel" : "row"); // UI r2: from full, back to the usual size
       }
     },
     { passive: true },
   );
   els.panes.addEventListener("touchend", () => (pull = null), { passive: true });
   applySheet();
+
+  // ---- UI r2: focus mode, the desktop panel's fold and the gallery page ------------
+  // Focus mode (the top bar's focus button or F) hides everything but the toy
+  // and uses the browser's full screen where it has one (computers and
+  // Android). Escape, the small "show" button in the corner or a swipe up from
+  // the bottom edge of a phone brings it all back. On a computer the panel
+  // folds to a thin edge (its tab or "[") and the shelf opens as a full page
+  // (Gallery; Escape or a pick closes it). None of it goes into links.
+  let focusOn = false;
+  let wentFull = false;
+  function setFocus(on) {
+    on = UI2 && !!on;
+    if (on === focusOn) return;
+    focusOn = on;
+    if (on && galleryOn) setGallery(false);
+    document.body.classList.toggle("focus", on);
+    els.focusToggle.setAttribute("aria-pressed", String(on));
+    els.focusExit.hidden = !on;
+    els.focusEdge.hidden = !on;
+    hideHelpLine();
+    const doc = document;
+    try {
+      if (on && doc.fullscreenEnabled && !doc.fullscreenElement) {
+        wentFull = true;
+        doc.documentElement.requestFullscreen?.({ navigationUI: "hide" })?.catch?.(() => (wentFull = false)); // prettier-ignore
+      } else if (!on && wentFull && doc.fullscreenElement) {
+        wentFull = false;
+        doc.exitFullscreen?.()?.catch?.(() => {});
+      }
+    } catch {
+      wentFull = false; // Full screen is a bonus, never required.
+    }
+    if (on) els.focusExit.focus({ preventScroll: true });
+    else els.focusToggle.focus({ preventScroll: true });
+    refreshDock();
+  }
+  // Leaving the browser's full screen (its own Escape) leaves focus mode too.
+  document.addEventListener("fullscreenchange", () => {
+    if (!document.fullscreenElement && wentFull) {
+      wentFull = false;
+      setFocus(false);
+    }
+  });
+  els.focusToggle.addEventListener("click", () => setFocus(!focusOn));
+  els.focusExit.addEventListener("click", () => setFocus(false));
+  // A swipe up from the bottom edge (a thin strip there) brings it all back.
+  {
+    let from = null;
+    els.focusEdge.addEventListener("pointerdown", (e) => {
+      from = { y: e.clientY, id: e.pointerId };
+      els.focusEdge.setPointerCapture?.(e.pointerId);
+    });
+    els.focusEdge.addEventListener("pointermove", (e) => {
+      if (from && e.pointerId === from.id && from.y - e.clientY > 30) {
+        from = null;
+        setFocus(false);
+      }
+    });
+    const stop = () => (from = null);
+    els.focusEdge.addEventListener("pointerup", stop);
+    els.focusEdge.addEventListener("pointercancel", stop);
+  }
+
+  // The desktop panel folds to a thin edge (remembered in this browser).
+  const FOLD_KEY = "splashery.panelFolded";
+  let folded = false;
+  function setFolded(on, save = true) {
+    folded = UI2 && !!on;
+    document.body.classList.toggle("panel-folded", folded);
+    els.panelFold.setAttribute("aria-expanded", String(!folded));
+    els.panelFold.title = folded ? "Show the panel ([)" : "Fold the panel away ([)";
+    els.panelFold.setAttribute("aria-label", folded ? "Show the panel" : "Fold the panel away");
+    if (!save) return;
+    try {
+      if (folded) localStorage.setItem(FOLD_KEY, "1");
+      else localStorage.removeItem(FOLD_KEY);
+    } catch {
+      // No storage: it still folds now.
+    }
+  }
+  els.panelFold.addEventListener("click", () => setFolded(!folded));
+  try {
+    setFolded(localStorage.getItem(FOLD_KEY) === "1", false);
+  } catch {
+    setFolded(false, false);
+  }
+
+  // The gallery: on a computer every toy as a full page over the stage; on a
+  // phone the grid at the full stop.
+  let galleryOn = false;
+  function setGallery(on) {
+    on = UI2 && !!on;
+    if (on && narrow.matches) {
+      setMode("grid", true);
+      return;
+    }
+    if (on === galleryOn) return;
+    galleryOn = on;
+    if (on && folded) setFolded(false, false);
+    document.body.classList.toggle("gallery-page", on);
+    els.galleryOpen.setAttribute("aria-expanded", String(on));
+    els.galleryClose.hidden = !on;
+    if (on) els.galleryClose.focus({ preventScroll: true });
+    else if (!folded) els.galleryOpen.focus({ preventScroll: true });
+    revealCurrent();
+  }
+  els.galleryOpen.addEventListener("click", () => setGallery(!galleryOn));
+  els.galleryClose.addEventListener("click", () => setGallery(false));
+  narrow.addEventListener("change", () => galleryOn && setGallery(false));
+
+  // Toys with a big input (a drawing pad, or a panel taller than the sheet)
+  // open their settings at the full stop on a phone, so the input fits whole.
+  function bigInput() {
+    return UI2 && !!els.toyOptions.querySelector(".input-pad");
+  }
+  // Checked again once the panel shows: an input taller than the panel's
+  // scrolling area goes to the full stop too.
+  function fitInput() {
+    requestAnimationFrame(() => {
+      const box = els.toyOptions.querySelector("#toy-input");
+      if (!UI2 || mode !== "panel" || full || !box || currentTab !== "play") return;
+      if (box.getBoundingClientRect().height > els.panes.clientHeight - 8) setMode("panel", true);
+    });
+  }
+  // /UI r2
+
+  // ---- UI r3: the action button pauses and resumes a long effect ---------------------
+  // While a long tap effect (a tune, a long demo) runs, the Toy tab's action
+  // button reads Pause; while it is paused, Resume.
+  app.player?.on("frame", () => {
+    const base = app.player.toyInfo?.recipe?.action?.label;
+    if (!base) return;
+    const st = app.player.motion?.effectState?.();
+    const label = st === "running" ? "Pause" : st === "paused" ? "Resume" : base;
+    if (els.toyAction.textContent !== label) els.toyAction.textContent = label;
+  });
 
   // ---- A toy's labels (lane Anatomy) ------------------------------------------------
   // A kit toy's drive() may set out.legend = { title, items: [{ text, head,
@@ -2251,6 +2557,58 @@ export function createUI(app) {
   function placeHelpLine() {
     const r = els.toyStatus.getBoundingClientRect();
     help.line.style.top = narrow.matches && r.height ? `${Math.round(r.bottom + 6)}px` : "";
+    help.line.style.bottom = "";
+    // UI r3: on a computer a toy that holds still, facing you (a chart, a
+    // page), can reach up under the line; then the line sits at the bottom
+    // left instead, above the toy's name, when the toy is clear of it there.
+    const toy = app.player?.scene?.toy;
+    const still = toy?.kind === "builtin" && holdsStill(TOYS.find((t) => t.id === toy.id));
+    if (narrow.matches || !still) return;
+    const box = toyScreenBox();
+    if (!box) return;
+    const line = help.line.getBoundingClientRect();
+    const h = line.height || 60;
+    if (box.left > 18 + (line.width || 440) + 4) return;
+    // How far the toy's box reaches under the line at the top and at the
+    // bottom (the box is a little larger than the toy): the side it reaches
+    // less far wins.
+    const lowTop = r.top - h - 8;
+    const atTop = 62 + h + 4 - box.top;
+    const atBottom = box.bottom - (lowTop - 4);
+    if (atTop > 0 && atBottom < atTop) {
+      help.line.style.top = "auto";
+      help.line.style.bottom = `${Math.round(window.innerHeight - r.top + 8)}px`;
+    }
+  }
+  // UI r3: where the toy's bounding box falls on the stage (CSS pixels).
+  function toyScreenBox() {
+    const p = app.player;
+    const info = p?.toyInfo;
+    const canvas = $("stage");
+    if (!info?.half || !canvas) return null;
+    // Where the view is going (it may still be easing there).
+    const cam = p.camera;
+    const cur = cam.cur;
+    cam.cur = { ...cam.tgt };
+    const pose = cam.pose();
+    cam.cur = cur;
+    const W = canvas.clientWidth;
+    const H = canvas.clientHeight;
+    const f = H / 2 / Math.tan((19 * Math.PI) / 180);
+    const dot = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+    const box = { left: Infinity, right: -Infinity, top: Infinity, bottom: -Infinity };
+    for (let i = 0; i < 8; i++) {
+      const c = [0, 1, 2].map((k) => info.center[k] + ((i >> k) & 1 ? 1 : -1) * info.half[k] - pose.position[k]); // prettier-ignore
+      const z = dot(c, pose.forward);
+      if (z < 0.01) return null;
+      const x = W / 2 + (dot(c, pose.right) / z) * f;
+      const y = H / 2 - (dot(c, pose.up) / z) * f;
+      box.left = Math.min(box.left, x);
+      box.right = Math.max(box.right, x);
+      box.top = Math.min(box.top, y);
+      box.bottom = Math.max(box.bottom, y);
+    }
+    return box;
   }
   function showHelpLine() {
     clearTimeout(helpTimer);
@@ -2260,6 +2618,8 @@ export function createUI(app) {
     help.line.classList.add("show");
     help.toggle.setAttribute("aria-expanded", "true");
     helpTimer = setTimeout(hideHelpLine, HELP_MS);
+    // UI r3: placed again once the new toy's view is set (it may move).
+    for (const ms of [250, 800]) setTimeout(() => !help.line.hidden && placeHelpLine(), ms);
   }
   function renderToyAbout(h) {
     help.name.textContent = h.label;
@@ -2561,7 +2921,32 @@ export function createUI(app) {
     },
     // True when the phone sheet (the grid or the panel) covers part of the stage.
     sheetOpen() {
-      return mode !== "row" && narrow.matches;
+      return (mode === "grid" || mode === "panel") && narrow.matches;
+    },
+    // UI r2: the sheet's stop ("hidden", "row", "grid", "panel" or "full").
+    sheetStop() {
+      return full ? "full" : mode;
+    },
+    setSheetStop(stop) {
+      if (stop === "full") setMode(mode === "grid" ? "grid" : "panel", true);
+      else setMode(stop);
+    },
+    toggleFocus: () => setFocus(!focusOn),
+    // UI r3: the flag button shows whether a flag is set for every toy.
+    setGlobalFlag(code) {
+      els.flagToggle.setAttribute("aria-pressed", String(!!code));
+      els.flagGlobal.value = code || "";
+    },
+    focusMode: () => focusOn,
+    togglePanel: () => setFolded(!folded),
+    // Escape: leave focus mode or the gallery page first (true when it did).
+    escape() {
+      if (!els.flagPop.hidden)
+        els.flagPop.hidden = true; // UI r3
+      else if (focusOn) setFocus(false);
+      else if (galleryOn) setGallery(false);
+      else return false;
+      return true;
     },
     showTab,
     currentTab() {

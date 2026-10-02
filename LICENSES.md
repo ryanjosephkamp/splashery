@@ -102,6 +102,20 @@ OR OTHER DEALINGS IN THE SOFTWARE.
 - License: Apache License 2.0 for the Small model, checked on the live model cards on September
   29, 2026. The Base, Large and Giant sizes are CC BY-NC and are not used.
 
+## Splat.js 0.1.0 (lane Video 3D)
+
+- Source: https://github.com/arrival-space/splat.js, commit
+  `88efe9aaf32279b0b9bcb781ea0deb4d60c49dff` (September 23, 2026; package version 0.1.0). Files in
+  `vendor/splatjs/src/`: the 20 modules that `session.js` and its two workers reach (structure from
+  motion, the WebGPU trainer, frame decoding and the PLY writer), all unmodified; the list and what
+  was left out are in `vendor/splatjs/VERSION.md`. The library's own video reader
+  (`src/io/video.js`, which loads Mediabunny, MPL-2.0) is not vendored: Splashery picks the frames
+  itself.
+- Loaded only when someone opens a video in the Video to 3D toy (a dynamic import in
+  `src/video3d/run.js`); never on the shelf, in another toy or in an embed. Labs only.
+- License: MIT (Copyright (c) 2026 Stratum1 GmbH; checked on the live repository page on September
+  30, 2026; the full text is in `vendor/splatjs/LICENSE`).
+
 ## omggif 1.0.10 (lane Pictures)
 
 - Package: `omggif@1.0.10` (file: `vendor/omggif/omggif.js`, the package's `omggif.js` with two
@@ -149,6 +163,13 @@ These are `devDependencies` used to prepare assets and run tests; nothing from t
 - `three` 0.186.1 (MIT), https://github.com/mrdoob/three.js: its FBX loader and glTF exporter turn
   the Worlds mesh character (Kenney, CC0) into one GLB in `tools/world-character.mjs`, run in
   Chromium at build time. Nothing of three.js is served.
+- `bpy` 5.0.1 (Blender as a Python module; GPL-3.0-or-later), https://pypi.org/project/bpy/, with
+  `pillow` 12.3.0 (MIT-CMU), https://pypi.org/project/pillow/, in a virtual environment under
+  `.cache/`: builds the Worlds realistic character (`tools/wd-character.py`) and model props
+  (`tools/wd-props.py`) at build time. Nothing of Blender is served.
+- MPFB 2.0.17 (GPL-3.0-or-later), https://extensions.blender.org/add-ons/mpfb/: the MakeHuman add-on
+  for Blender, downloaded by `tools/wd-character.py` into `.cache/` to put the character together.
+  Nothing of it is served; the character it makes is from CC0 assets (CREDITS.md).
 - The TRELLIS Space on Hugging Face (not a package; `tools/image-to-3d.mjs` calls it over HTTPS with
   plain fetch): https://huggingface.co/spaces/trellis-community/TRELLIS (MIT), running the TRELLIS
   model https://huggingface.co/microsoft/TRELLIS-image-large (MIT) and rembg's u2net background

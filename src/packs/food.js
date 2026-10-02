@@ -2779,7 +2779,7 @@ export const RECIPES = {
         "croissant",
         s,
         [
-          [0.6, { voice: "sizzle", f: 4200, decay: 1.5, vol: 0.25 }],
+          [0.6, { voice: "hiss", f: 4500, decay: 1.5, vol: 0.25 }],
           [2.85, { voice: "thud", f: 170, bright: 0.2, decay: 0.5, vol: 0.5 }],
         ],
         out,
@@ -4667,7 +4667,7 @@ export const RECIPES = {
         c,
         "banana",
         s,
-        d.bananas.map((bn, i) => [bn.t0 + 0.1, { voice: "tear", f: 800 + 180 * i, to: 1.5, decay: 0.8, vol: 0.7 }]), // prettier-ignore
+        d.bananas.map((bn, i) => [bn.t0 + 0.1, { voice: "peel", f: 1100 + 150 * i, n: 16, decay: 0.8, vol: 0.7 }]), // prettier-ignore
         out,
       );
     },

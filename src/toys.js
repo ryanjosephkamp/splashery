@@ -3355,6 +3355,27 @@ export const TOYS = [
     tags: "chladni plate sand sound vibration frequency resonance mode nodal lines pattern bow physics",
     camera: { yaw: 0.2, pitch: 0.95, roll: 0, distance: 4.1 },
   },
+  // ---- Pack: live (lane Live input) ----
+  {
+    id: "room-echo",
+    label: "Room echo meter",
+    category: "studio",
+    kind: "kit",
+    pack: "live",
+    labs: true,
+    tags: "room echo reverb reverberation rt60 clap acoustics sound decay microphone live measure",
+    camera: { yaw: 0, pitch: 0.6, roll: 0, distance: 3.3 },
+  },
+  {
+    id: "splat-mirror",
+    label: "Splat mirror",
+    category: "studio",
+    kind: "kit",
+    pack: "live",
+    labs: true,
+    tags: "mirror camera webcam selfie live depth hologram 3d relief video you",
+    camera: { yaw: 0, pitch: 0, roll: 0, distance: 3.2 },
+  },
   // ---- Pack: studio-models (lane Studio Models) ----
   {
     id: "model-splats",
@@ -3375,6 +3396,17 @@ export const TOYS = [
     pack: "photo-3d",
     labs: true,
     tags: "photo picture image depth 3d parallax relief layers convert converter depth map jpeg png webp",
+    camera: { yaw: 0, pitch: 0, roll: 0, distance: 2.6 },
+  },
+  // ---- Pack: video3d (lane Video 3D) ----
+  {
+    id: "video-3d",
+    label: "Video to 3D",
+    category: "studio",
+    kind: "kit",
+    pack: "video3d",
+    labs: true,
+    tags: "video film clip drone flight walk street 3d scene camera path structure from motion gaussian splats train webgpu convert converter mp4 webm",
     camera: { yaw: 0, pitch: 0, roll: 0, distance: 2.6 },
   },
   // ---- Pack: lab (lane Lab) ----
@@ -3539,4 +3571,31 @@ export function assetURL(path) {
 
 export function thumbURL(toy) {
   return assetURL(`assets/toys/${toy.id}/thumb.webp`);
+}
+
+// ---- UI r3: toys that hold still --------------------------------------------------
+// Toys that read like a chart, a diagram, a page or an instrument start the
+// way the picture toys do: the turntable off and the tilt locked (the
+// owner's request of September 30, 2026). A person can still switch the
+// turntable on for one; a link or a saved scene keeps its own settings.
+const STILL_SHELVES = new Set(["computing", "music", "objects"]);
+const STILL_TOYS = new Set([
+  // The owner's list.
+  "graph-plotter",
+  "surface-plotter",
+  "unit-circle",
+  "fourier-circles",
+  "pythagoras-proof",
+  "chess-set",
+  "puzzle-cube",
+  // Added: they read like a chart, a diagram or a page.
+  "periodic-table",
+  "splat-equation",
+  "chladni-plate",
+  "anatomy-atlas",
+  "song-landscape",
+]);
+
+export function holdsStill(toy) {
+  return !!toy && (STILL_SHELVES.has(toy.category) || STILL_TOYS.has(toy.id));
 }

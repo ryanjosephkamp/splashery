@@ -14,7 +14,7 @@ import { Kit, mix, shade, clamp, rgb, quatRotate, quatAxisAngle } from "../kit.j
 import { SplatBuffer } from "../generators.js";
 import { KINDS } from "../effects.js";
 import { BITMAP } from "../font.js";
-import { mulberry32, mixSeed, hash32 } from "../noise.js";
+import { mulberry32, mixSeed, hash32, createNoise3 } from "../noise.js";
 
 // Every prop type a world file can name. `pack` and `recipe` pick a toy's
 // recipe; `build` is a world-only prop. `count` is the splats of the near
@@ -418,4 +418,57 @@ function ink(text, s, t) {
   if (!ch || gx > 4) return false;
   const g = BITMAP[ch];
   return !!g && ((g[Math.floor(t)] >> (4 - gx)) & 1) === 1;
+}
+
+// Hybrid mode's foliage (docs/WORLDS.md, "Model props"): a baked tree's or
+// bush's leaves in deeper, varied greens, with shade inside the crown, so a
+// canopy reads as leaves in sunlight rather than one soft green shape. Only
+// green splats change (trunks, fruit and flowers keep their colors). The
+// buffer is a baked prop (1 m tall, foot at the origin).
+export function gradeFoliage(buf, seed = 1) {
+  const n = buf.count;
+  const leaf = new Uint8Array(n);
+  const c = [0, 0, 0];
+  let m = 0;
+  for (let i = 0; i < n; i++) {
+    const r = buf.color[i * 4];
+    const g = buf.color[i * 4 + 1];
+    const b = buf.color[i * 4 + 2];
+    if (g > r * 1.04 && g > b * 1.04 && buf.scale[i * 3] > 0) {
+      leaf[i] = 1;
+      for (let a = 0; a < 3; a++) c[a] += buf.pos[i * 3 + a];
+      m++;
+    }
+  }
+  if (m < 50) return buf;
+  for (let a = 0; a < 3; a++) c[a] /= m;
+  // The crown's size along each axis (from the spread of its leaves).
+  const R = [0, 0, 0];
+  for (let i = 0; i < n; i++)
+    if (leaf[i]) for (let a = 0; a < 3; a++) R[a] += (buf.pos[i * 3 + a] - c[a]) ** 2;
+  for (let a = 0; a < 3; a++) R[a] = Math.max(0.02, Math.sqrt(R[a] / m) * 1.7);
+  const noise = createNoise3(mixSeed(seed, "foliage"));
+  const f = 9; // clusters of leaves about a ninth of the tree across
+  for (let i = 0; i < n; i++) {
+    if (!leaf[i]) continue;
+    const p = [buf.pos[i * 3], buf.pos[i * 3 + 1], buf.pos[i * 3 + 2]];
+    const d = Math.hypot((p[0] - c[0]) / R[0], (p[1] - c[1]) / R[1], (p[2] - c[2]) / R[2]);
+    // Deep inside the crown is in shade; the sunny top is lighter.
+    const t = clamp((d - 0.25) / 0.75, 0, 1);
+    const shade = 0.42 + 0.58 * t * t * (3 - 2 * t) + 0.1 * clamp((p[1] - c[1]) / R[1], -1, 1);
+    // Clusters vary: some yellower, some bluer, some darker.
+    const hue = noise(p[0] * f, p[1] * f, p[2] * f);
+    const val = noise(p[0] * f * 2.3 + 17, p[1] * f * 2.3, p[2] * f * 2.3);
+    let r = buf.color[i * 4];
+    let g = buf.color[i * 4 + 1];
+    let b = buf.color[i * 4 + 2];
+    // Deeper greens: a little less red and blue, the whole a little darker.
+    r *= 0.78 + 0.22 * hue;
+    b *= 0.85 - 0.2 * hue;
+    const k = 0.8 * shade * (1 + 0.14 * val);
+    buf.color[i * 4] = clamp(r * k, 0, 1);
+    buf.color[i * 4 + 1] = clamp(g * k, 0, 1);
+    buf.color[i * 4 + 2] = clamp(b * k, 0, 1);
+  }
+  return buf;
 }

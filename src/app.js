@@ -1,7 +1,7 @@
 // Splashery app: the shelf, the tools, making toys, look, bring-your-own
 // files and sharing, on top of the shared Player runtime.
 
-import { Player, NoGPUError, Gestures } from "./player.js";
+import { Player, NoGPUError, Gestures, ui2On } from "./player.js";
 import { createUI } from "./ui.js";
 import {
   createScene,
@@ -16,13 +16,13 @@ import {
 } from "./state.js";
 import { defaultEffects, effectDef } from "./effects.js";
 import { normalizePattern, flagInfo, loadFlags, DEFAULT_PATTERN } from "./patterns.js";
-import { Sound } from "./sound.js";
+import { Sound, soundEvents } from "./sound.js";
 import { specFor, samplesIn } from "./voices.js";
 import { toySound } from "./toy-sounds.js";
 import { SOUND_CREDITS } from "./sound-credits.js";
 import { normalizeGenerator, PROFILES } from "./generators.js";
 import { decodeSceneHash, parseHash } from "./codec.js";
-import { TOYS, findToy } from "./toys.js";
+import { TOYS, findToy, holdsStill } from "./toys.js";
 import { extOf, readPlyHeader, decimatePly, resourceFromProps, LIMITS } from "./loaders.js";
 import {
   downloadBlob,
@@ -110,7 +110,9 @@ class App {
     this.toolState = null;
     this.sound = new Sound();
     this.tiltLocks = new Map(); // toy key -> locked (lane Viewer)
+    this.spins = new Map(); // UI r3: toy key -> turntable, chosen for a toy that holds still
     this.toyFlags = new Map(); // toy key -> its flag colours, or null (lane Viewer)
+    this.globalFlag = null; // UI r3: the top bar's flag, for every toy (a flag code)
   }
 
   async start() {
@@ -138,7 +140,9 @@ class App {
     player.on("toy", (info) => this.onToy(info));
     player.on("action", (r) => this.onAction(r));
     // A tap that switches the toy's options rebuilds it the way the Toy tab does.
-    player.rebuild = (options) => this.setToyOptions(options);
+    // A toy's own tap that switches its options (a periodic table tile) rebuilds it with no
+    // loading overlay: the toy stays on screen and its tap sound plays at once (lane Fix6).
+    player.rebuild = (options) => this.setToyOptions(options, { quiet: Infinity });
     player.on("cue", (cues) => {
       for (const spec of cues) this.sound.play(spec, { key: "cue" });
     });
@@ -229,23 +233,33 @@ class App {
     this.updateStatus();
   }
 
-  async loadToy(toy, { file = null } = {}) {
+  // `quiet` (ms, lane Fix6): hold the loading overlay back that long, so a quick rebuild shows
+  // none; Infinity: never show it (a toy's own tap switching its options, such as the periodic
+  // table's element, while the toy stays on screen). 0: as before.
+  async loadToy(toy, { file = null, quiet = 0 } = {}) {
     const ui = this.ui;
     let shown = false;
-    const timer = setTimeout(() => {
-      shown = true;
-      ui.progress.show("Loading…");
-    }, 120);
+    let last = null;
+    const start = performance.now();
+    const hold = Math.max(120, quiet);
+    const timer = Number.isFinite(hold)
+      ? setTimeout(() => {
+          shown = true;
+          ui.progress.show(last?.label || "Loading…");
+          if (last) ui.progress.update(last.f, last.label);
+        }, hold)
+      : null;
     try {
       return await this.player.loadToy(toy, {
         file,
         onProgress: (f, label) => {
-          if (!shown && f < 1) {
+          last = { f, label };
+          if (!shown && f < 1 && performance.now() - start >= quiet) {
             shown = true;
             clearTimeout(timer);
             ui.progress.show(label);
           }
-          ui.progress.update(f, label);
+          if (shown) ui.progress.update(f, label);
         },
       });
     } finally {
@@ -291,7 +305,9 @@ class App {
     // for it earlier in this visit. A link's saved pose still wins (the
     // scene's camera is set after this).
     const key = toyKey(scene.toy);
-    const lock = this.tiltLocks.has(key) ? this.tiltLocks.get(key) : !!info.recipe?.tiltLock;
+    // UI r3: a toy that holds still (a chart, a page, an instrument) starts locked.
+    const still = scene.toy.kind === "builtin" && holdsStill(findToy(scene.toy.id));
+    const lock = this.tiltLocks.has(key) ? this.tiltLocks.get(key) : !!info.recipe?.tiltLock || still; // prettier-ignore
     player.camera.setTiltLock(lock);
     ui.setTiltLock(lock);
     // A toy that lays flag colours on its own way (the chess board: from
@@ -385,10 +401,13 @@ class App {
       q.setAttribute("aria-current", "true");
       nodes.push(q);
     }
-    // Recorded samples in the toy's tap sound (src/sound-credits.js).
-    for (const file of samplesIn(info?.id ? toySound(info.id) : null)) {
+    // Recorded samples in the toy's tap sound (src/sound-credits.js), one
+    // line per source (a sampled instrument's notes share one).
+    const sources = new Set();
+    for (const file of samplesIn(info?.id ? toySound(info.id) : null, [], true)) {
       const c = SOUND_CREDITS[file];
-      if (!c) continue;
+      if (!c || sources.has(c.source)) continue;
+      sources.add(c.source);
       const q = document.createElement("p");
       q.className = "credit";
       const strong = document.createElement("strong");
@@ -455,13 +474,15 @@ class App {
     if (this.busy) return;
     const toy = findToy(id);
     if (!toy) return;
+    this.sound.stopHeld("toy"); // UI r3: the last toy's tune stops with it
     const player = this.player;
     const scene = player.scene;
     // Flag colours belong to the toy they were chosen on (lane Viewer): keep
     // this toy's, and bring back the next toy's own (none if it had none).
     const pat = scene.pattern;
     this.toyFlags.set(toyKey(scene.toy), pat.id === "flag" ? { ...pat } : null);
-    const flag = this.toyFlags.get(toyKey({ kind: "builtin", id }));
+    // UI r3: the top bar's flag, when one is set, goes on every toy.
+    const flag = this.globalFlag ? { ...pat, id: "flag", flag: this.globalFlag } : this.toyFlags.get(toyKey({ kind: "builtin", id })); // prettier-ignore
     if (flag) scene.pattern = flag;
     else if (pat.id === "flag") scene.pattern = { ...DEFAULT_PATTERN };
     if (scene.pattern !== pat) this.ui.setPattern(scene.pattern);
@@ -476,11 +497,26 @@ class App {
     try {
       await this.loadToy(scene.toy);
       player.camera.setState(toy.camera || createScene().camera, { asHome: true, snap: false });
+      this.holdStill(toy); // UI r3
       player.syncDrop();
       this.ui.setMotion(scene.motion);
     } catch (err) {
       this.ui.toast(err.message, 5000);
     }
+  }
+
+  // UI r3: a toy picked from the shelf that holds still (a chart, a page, an
+  // instrument) starts with the turntable off, unless it was switched on for
+  // it this visit; the next toy gets the device's choice back.
+  holdStill(toy) {
+    const player = this.player;
+    const still = holdsStill(toy);
+    if (!still && !this.stillOut) return;
+    this.stillOut = still;
+    const on = still ? (this.spins.get(toyKey(player.scene.toy)) ?? false) : turntablePref() !== false; // prettier-ignore
+    player.scene.autoplay = { ...player.scene.autoplay, turntable: on };
+    player.camera.setTurntable(on);
+    this.ui.setAutoplay(player.scene.autoplay, player.reducedMotion);
   }
 
   // ---- Tools ------------------------------------------------------------------
@@ -595,6 +631,8 @@ class App {
         // While the phone sheet is open, a tap on the toy only closes it.
         if (this.ui.sheetOpen()) return "orbit";
         if (e.button === 1 || e.button === 2 || this.spaceHeld) return "orbit";
+        // UI r2: Shift or Option/Alt and a drag moves the toy (any tool).
+        if (ui2On() && (e.shiftKey || e.altKey) && e.pointerType !== "touch") return "orbit";
         // A stretchy toy: with Orbit, a drag that starts on it stretches it
         // (toolStart turns a drag that starts off it back into an orbit).
         if (this.tool === "orbit") return this.player.canGrab() ? "tool" : "orbit";
@@ -603,35 +641,44 @@ class App {
       onTap: (e) => {
         if (this.ui.sheetOpen()) this.ui.collapseSheet();
         else if (this.tool === "orbit" && !this.spaceHeld) {
+          // UI r4: a press that a toy's drag already played (a key) is not a tap too.
+          if (player.dragFired) player.dragFired = false;
           // Page focus (lane Books r4): a toy with recipe.focus takes double-taps.
-          if (player.canFocus()) this.tapOrFocus(e);
+          else if (player.canFocus()) this.tapOrFocus(e);
           else this.tapToy(e);
         }
       },
       onInteract: () => {
+        player.dragFired = false; // UI r4: each press starts afresh
         player.interact();
         canvas.focus({ preventScroll: true });
       },
-      onOrbitStart: () => {
+      onOrbitStart: (e) => {
         cam.begin();
-        canvas.classList.add("orbiting");
+        // UI r2: a drag begun with Shift or Option/Alt held moves the toy.
+        this.panDrag = ui2On() && !!(e?.shiftKey || e?.altKey) && e.type === "pointerdown";
+        canvas.classList.add(this.panDrag ? "panning" : "orbiting");
       },
       onOrbit: (dx, dy, dt) => {
         // Pictures: close up on a page, a drag moves across it.
-        if (player.pansHere()) player.panBy(dx, dy);
+        if (this.panDrag || player.pansHere()) player.panBy(dx, dy);
         else cam.rotateBy(dx, dy, dt);
         player.stage.requestRender();
       },
       onOrbitEnd: () => {
         cam.end();
-        canvas.classList.remove("orbiting");
+        this.panDrag = false;
+        canvas.classList.remove("orbiting", "panning");
       },
+      pairPinch: ui2On(), // UI r2: read two fingers' moves as pairs
       onPinchStart: () => cam.begin(),
       onPinch: ({ scale, dx, dy, twist, mode, dt }) => {
         // Pictures: two fingers move a picture toy, as in a photo viewer.
         if (player.pictures) player.panBy(dx, dy);
         // A pinch only zooms: two fingers turn the toy only when they move
-        // together first (lane Viewer).
+        // together first (lane Viewer). UI r2: that two-finger drag moves
+        // the toy instead; one finger turns it.
+        else if (mode === "drag" && ui2On()) player.panBy(dx, dy);
         else if (mode === "drag") cam.rotateBy(dx, dy, dt);
         if (scale > 0) cam.zoomBy(1 / scale);
         cam.rollBy(-twist);
@@ -710,10 +757,45 @@ class App {
       this.ui.setMotion(player.scene.motion, player.motion.targets);
       return;
     }
+    // UI r3: a tap on a long effect that is running pauses its sound too, and
+    // the next one resumes it from the same place.
+    if (r.paused || r.resumed) {
+      if (r.paused) this.sound.pauseHeld("toy");
+      else this.sound.resumeHeld("toy");
+      this.ui.setMotion(player.scene.motion, player.motion.targets);
+      return;
+    }
     const spec = own || recipe?.action?.sound || (r.key === "hop" ? "hop" : "pop");
-    // A tap that picked an item (a xylophone bar) plays that item's note.
-    this.sound.play(specFor(spec, r.key === "hop" || r.value > 0.5), { key: "toy", pick: r.pick });
+    // UI r4: a drag across keys plays each key's note under its own key, so
+    // notes in quick succession overlap as on a real keyboard; a run faster
+    // than about 24 notes a second skips some notes so it never crackles.
+    if (r.drag) {
+      if (!this.dragNotes(performance.now())) return;
+      this.sound.play(specFor(spec, true), { key: `toy:${r.pick}`, pick: r.pick, gap: 0.03 });
+      this.ui.setMotion(player.scene.motion, player.motion.targets);
+      return;
+    }
+    const chosen = specFor(spec, r.key === "hop" || r.value > 0.5);
+    // A tap that picked an item (a xylophone bar) plays that item's note. A
+    // long effect's sound (a tune) plays held, so it can pause and never
+    // overlaps itself (UI r3).
+    // A toggle's long "on" tune (the music box's) plays held too, and stops
+    // when the toy is switched off (the lid closes, the tune stops).
+    const tune = r.pick === null && soundEvents(chosen).some((e) => e.t > 2);
+    if (r.toggle && !(r.value > 0.5)) this.sound.stopHeld("toy");
+    const held = (r.long || (r.toggle && tune)) && r.pick === null;
+    this.sound.play(chosen, { key: "toy", pick: r.pick, held });
     this.ui.setMotion(player.scene.motion, player.motion.targets);
+  }
+
+  // UI r4: the voice cap for a drag across keys: at most 12 notes in any
+  // half second. True when this note may sound.
+  dragNotes(now) {
+    const t = (this.dragNoteTimes ||= []);
+    while (t.length && now - t[0] > 500) t.shift();
+    if (t.length >= 12) return false;
+    t.push(now);
+    return true;
   }
 
   act() {
@@ -740,14 +822,14 @@ class App {
   }
 
   // Sets several of a kit toy's options at once and rebuilds it.
-  async setToyOptions(partial) {
+  async setToyOptions(partial, { quiet = 500 } = {}) {
     const player = this.player;
     const toy = player.scene.toy;
     if (toy.kind !== "builtin") return;
     toy.options = { ...(toy.options || {}), ...partial };
     const cam = player.camera.getState();
     try {
-      await this.loadToy(toy);
+      await this.loadToy(toy, { quiet });
       player.camera.setState(cam, { snap: true });
       player.syncDrop();
     } catch (err) {
@@ -795,6 +877,38 @@ class App {
     return media;
   }
 
+  // A live stream (lane Live input: a shared screen or a camera, from
+  // src/live/panel.js) on the picture toy that shows now. It is never saved
+  // in the scene or a link; closeLiveMedia() goes back to what showed before.
+  async openLiveMedia(stream, name) {
+    const player = this.player;
+    const toy = player.scene.toy;
+    if (toy.kind !== "builtin" || !player.pictures) throw new Error("Pick a picture toy first.");
+    const { openMedia } = await import("./media.js");
+    const source = { live: true, stream, name };
+    const media = await openMedia(source);
+    player.closeMedia();
+    const key = `live:${stream.id}`;
+    player.liveMedia = { toy: toy.id, source, key };
+    player.pictureMedia = { key, media, ready: Promise.resolve(media) };
+    const cam = player.camera.getState();
+    await this.loadToy(toy);
+    player.camera.setState(cam, { snap: true });
+    return media;
+  }
+
+  async closeLiveMedia() {
+    const player = this.player;
+    if (!player.liveMedia) return;
+    const same = player.liveMedia.toy === player.scene.toy.id;
+    player.liveMedia = null;
+    player.closeMedia();
+    if (!same) return;
+    const cam = player.camera.getState();
+    await this.loadToy(player.scene.toy);
+    player.camera.setState(cam, { snap: true });
+  }
+
   // Back to the toy's own sample.
   async clearMedia() {
     const player = this.player;
@@ -829,6 +943,14 @@ class App {
   }
 
   // ---- End of pictures ---------------------------------------------------------------
+
+  // UI r3: the top bar's flag button sets flag colors for every toy (or none).
+  async setGlobalFlag(code) {
+    this.globalFlag = code || null;
+    this.toyFlags.clear();
+    this.ui.setGlobalFlag(this.globalFlag);
+    await this.setPattern(code ? { id: "flag", flag: code } : { id: "none" });
+  }
 
   async setPattern(partial) {
     const player = this.player;
@@ -1023,7 +1145,11 @@ class App {
       if (/^[1-5]$/.test(e.key)) this.setTool(tools[Number(e.key) - 1]);
       else if (e.key === "p" || e.key === "P") this.pokeRandom();
       else if (e.key === "r" || e.key === "R") this.resetCamera();
-      else if (e.key === "Escape") this.ui.collapseSheet();
+      else if (e.key === "Escape") this.ui.escape() || this.ui.collapseSheet();
+      else if (ui2On() && (e.key === "f" || e.key === "F"))
+        this.ui.toggleFocus(); // UI r2
+      else if (ui2On() && e.key === "[")
+        this.ui.togglePanel(); // UI r2
       else if (e.target === canvas && e.key.startsWith("Arrow")) {
         e.preventDefault();
         const step = 36;
@@ -1109,7 +1235,12 @@ class App {
 
   setAutoplay(partial) {
     const player = this.player;
-    if ("turntable" in partial) rememberTurntable(partial.turntable); // lane Viewer
+    // UI r3: switched for a toy that holds still, the turntable is that toy's
+    // choice for the visit; otherwise it is the device's (lane Viewer).
+    const toy = player.scene.toy;
+    const still = toy.kind === "builtin" && holdsStill(findToy(toy.id));
+    if ("turntable" in partial && still) this.spins.set(toyKey(toy), partial.turntable);
+    else if ("turntable" in partial) rememberTurntable(partial.turntable); // lane Viewer
     player.scene.autoplay = { ...player.scene.autoplay, ...partial };
     player.camera.setTurntable(player.scene.autoplay.turntable);
     this.ui.setAutoplay(player.scene.autoplay, player.reducedMotion);

@@ -20,6 +20,17 @@ import {
 
 export { PHOTO_BUDGETS };
 
+// ---- Live input (lane Live input): the camera's live view ----------------------------
+// With the camera on, the toy shows what the camera sees, in depth, before
+// you take the picture: the same live relief as the splat mirror (a grid
+// of relief splats colored by the camera and lifted by the depth model,
+// running in a worker). "Take the picture" then turns the frame into a
+// photo in 3D as if it had been opened. The tap flattens and raises it.
+import { live } from "../live/live.js";
+import { MIRROR, buildMirror, mirrorScreen, mirrorStatus } from "../live/relief.js";
+const liveOn = () => live.on("camera");
+// ---- End of live input ---------------------------------------------------------------
+
 // The CC0 samples in assets/toys/photo-3d/: a photo (<id>.jpg) and its depth map (<id>.depth).
 export const SAMPLES = [
   {
@@ -74,7 +85,16 @@ export async function decodePhoto(source) {
     try {
       bmp = await createImageBitmap(blob, { imageOrientation: "from-image" });
     } catch {
-      throw new Error("That file is not a photo this toy can read. Open a JPEG, PNG or WebP.");
+      // Lane Fix6: say what happened and what to do.
+      const head = new Uint8Array(await blob.slice(0, 16).arrayBuffer());
+      const brand = String.fromCharCode(...head.slice(4, 12));
+      if (/^ftyp(heic|heix|hevc|heim|heis|mif1|msf1)/.test(brand))
+        throw new Error(
+          "This browser can't read HEIC photos (the iPhone's own format). Save the photo as a JPEG and open that, or open it in Safari. On an iPhone, Settings › Camera › Formats › Most Compatible takes JPEG photos.",
+        );
+      throw new Error(
+        "This browser couldn't read that file as a photo. Save it as a JPEG, PNG or WebP and open that.",
+      );
     }
     const f = Math.min(1, MAX_SIDE / Math.max(bmp.width, bmp.height));
     const w = Math.max(2, Math.round(bmp.width * f));
@@ -216,10 +236,11 @@ const PHOTO_3D = {
   action: { key: "flat", label: "Raise or flatten the depth" },
   input: {
     title: "Your own photo",
-    accept: ".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp",
+    accept:
+      ".jpg,.jpeg,.png,.webp,.heic,.heif,image/jpeg,image/png,image/webp,image/heic,image/heif",
     binary: true,
     fileButton: "Open a photo…",
-    note: "Open a JPEG, PNG or WebP photo. A depth model that runs on this device (about 27 MB, loaded the first time) works out how far away each part of the picture is, and the photo is rebuilt as splats in 3D. Nothing is uploaded. It takes a few seconds, longer on a phone.",
+    note: "Open a JPEG, PNG or WebP photo (HEIC too, where the browser can read it). Large photos are scaled down to 2,048 pixels on the long side, and turned upright by their camera tag. A depth model that runs on this device (about 27 MB, loaded the first time) works out how far away each part of the picture is, and the photo is rebuilt as splats in 3D. Your photo never leaves your device. It takes a few seconds, longer on a phone.",
     async read(_text, fileName, file) {
       if (!file) throw new Error("Open a photo.");
       const p = await openPhoto(
@@ -228,7 +249,10 @@ const PHOTO_3D = {
       );
       return { source: "custom", photoName: p.name };
     },
+    // Lane Live input: the camera, and a button that takes the picture.
+    live: [{ kind: "camera", capture: { button: "Take the picture", name: "Camera picture.jpg" }, status: mirrorStatus }], // prettier-ignore
     shown() {
+      if (liveOn()) return "Live: what the camera sees, in depth. Take the picture to keep it."; // lane Live input
       const i = P3D.info;
       if (!i) return "";
       const took = i.ms ? ` The depth model took ${(i.ms / 1000).toFixed(1)} s.` : "";
@@ -247,7 +271,13 @@ const PHOTO_3D = {
     if (o.source === "custom" && P3D.custom) P3D.want = P3D.custom;
     else P3D.want = await loadSample(o.source === "custom" ? SAMPLES[0].id : o.source);
   },
+  screen: mirrorScreen, // lane Live input: the live view's colors and depth
   drive(t, c, out) {
+    if (liveOn() && MIRROR.cam) {
+      // Lane Live input: the live view shows its depth at once; a tap flattens it.
+      MIRROR.gain = Math.min(1, 1.6 * MIRROR.depth) * (c.flat ?? 1);
+      return;
+    }
     const r = 1 - (c.flat ?? 1); // how far the depth has risen (0 flat, 1 with its depth)
     // The splats are built with their depth (so they sort right) and morph to the flat picture.
     out.morph = [0, 1, 2, 3].map((b) => layerMorph(r, b));
@@ -259,6 +289,16 @@ const PHOTO_3D = {
     for (let b = 0; b < LAYERS; b++) out.parts[`layer${b}`] = { offset: [0, 0, (b - (LAYERS - 1) / 2) * 0.22 * L] }; // prettier-ignore
   },
   build(k, o) {
+    if (liveOn()) {
+      // Lane Live input: the camera's live view.
+      MIRROR.depth = o.depth ?? 0.5;
+      buildMirror(k, { width: 2, lift: 0.9 });
+      k.reach([0, 0, 0.9]);
+      k.data = { photo: { live: true } };
+      return;
+    }
+    MIRROR.cam?.close(); // lane Live input: the live view ends
+    MIRROR.cam = null;
     const src = P3D.want;
     if (!src) throw new Error("There is no photo to show.");
     const budget = Math.max(100, Math.floor(k.count * 0.98));
