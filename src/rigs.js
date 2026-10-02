@@ -880,7 +880,12 @@ export const RIGS = {
       {
         name: "fringe",
         pivot: [0, -0.4, 0],
-        regions: [{ at: [0, -0.43, 0], r: [2.5, 0.21, 2.5] }],
+        regions: [
+          { at: [0, -0.43, 0], r: [2.5, 0.21, 2.5] },
+          // The tomatoes' reflections baked into the glaze under the plate's
+          // top (red stains seen from below), in a thin band only.
+          { at: [0, -0.2, 0], r: [1.2, 0.045, 1.2], color: "#9a3a34", tol: 0.5 },
+        ],
       },
     ],
     controls: [pulse("roll", "Roll", 2.6)],
@@ -951,11 +956,13 @@ export const RIGS = {
             const z = c.p[2] + 0.02;
             const r = Math.hypot(x, z);
             const a = Math.atan2(z, x);
-            // Coiled rings of cane, stitched across by spokes.
-            const ring = 0.5 + 0.5 * Math.cos(r * TAU * 16);
-            const spoke = Math.abs(Math.sin(a * 12 + r * 4)) > 0.93 ? 1 : 0;
-            const col = mix("#7a5530", "#a98252", ring * 0.8);
-            return shade(spoke ? mix(col, "#5a3c1e", 0.6) : col, 0.78);
+            // Coiled rows of cane like the basket's wall (no spokes: they
+            // read as a target), each row a little uneven.
+            const row = r * 26 + 0.3 * Math.sin(a * 3 + r * 9);
+            const coil = Math.pow(Math.abs(Math.sin(row * Math.PI)), 0.6);
+            const tone = 0.5 + 0.5 * Math.sin(a * 40 + Math.floor(row) * 2.1);
+            const col = mix("#6e5232", "#a8875a", 0.35 + 0.45 * coil + 0.15 * tone);
+            return shade(col, 0.82);
           },
         });
       },
@@ -1818,17 +1825,25 @@ export const RIGS = {
   // flat with a clank.
   "tin-can-real": {
     // The can's bottom lid (lane Sharpness B): the capture shows through it.
-    // It rides on the body, so it rocks and rolls with the can.
+    // It rides on the body, so it rocks and rolls with the can. Laid on a
+    // sunflower spiral (an even grid of rings showed a ripple).
     addon: {
       count: 9000,
       build(k) {
-        underDisc(k, [-0.04, -0.905, -0.02], 0.57, "#cfc8a0", {
-          color: (c) => {
-            const r = Math.hypot(c.p[0] + 0.04, c.p[2] + 0.02);
-            // Pressed rings and a rolled rim, softly lit.
-            const ridge = r > 0.53 ? 0.82 : r > 0.47 ? 1 : r > 0.3 && r < 0.34 ? 0.9 : 0.95;
-            return shade("#cbc49c", 0.8 * ridge);
-          },
+        const c0 = [-0.04, -0.905, -0.02];
+        const R = 0.57;
+        k.cloud({ share: 1, pattern: false }, (rand, i, n) => {
+          const r = R * Math.sqrt((i + 0.5) / n);
+          const a = i * 2.399963229728653;
+          const ridge = r > 0.53 ? 0.82 : r > 0.47 ? 1 : r > 0.3 && r < 0.34 ? 0.9 : 0.95;
+          return {
+            p: [c0[0] + r * Math.cos(a), c0[1], c0[2] + r * Math.sin(a)],
+            n: [0, -1, 0],
+            flat: 0.2,
+            jitter: 0,
+            opacity: 1,
+            color: shade("#cbc49c", 0.8 * ridge),
+          };
         });
       },
     },

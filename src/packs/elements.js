@@ -2949,7 +2949,7 @@ export const RECIPES = {
         const strata = Math.abs(Math.sin(c.p[1] * 22 + g * 3));
         let col = mix("#6a6258", "#3e3832", 0.4 + 0.5 * g);
         col = shade(col, 0.85 + 0.2 * strata);
-        if (c.n[1] > 0.6) col = mix(col, mix("#3f6a24", "#6a8a34", c.rand()), 0.85);
+        if (c.n[1] > 0.6) col = mix(col, mix("#3f6a24", "#6a8a34", 0.5 + 0.5 * c.noise(c.p[0] * 9, c.p[1] * 9, c.p[2] * 9)), 0.85); // prettier-ignore
         return lit(col, c.n, 0.5);
       };
       // (Evenly laid and closed underneath, lane Sharpness B: from below
@@ -2959,13 +2959,18 @@ export const RECIPES = {
         opacity: 1,
         jitter: 0.015,
         pos: [0, TOP / 2, -0.05],
-        color: (c) => (c.s.face === 3 ? lit(shade("#3e3832", 0.8), c.n, 0.6) : rock(c)),
+        // (The underside's splats a little larger, so nothing above shows
+        // through between them.)
+        color: (c) => (c.s.face === 3 ? { c: shade("#3e3832", 0.75), size: 1.35 } : rock(c)),
       });
       for (let i = 0; i < 12; i++) {
         const x = (rand() - 0.5) * 1.7;
         if (Math.abs(x) < 0.35) continue;
         const s = 0.12 + 0.12 * rand();
-        k.add(k.ellipsoid(s * 1.2, s, s * 0.8), {
+        k.add(evenEllipsoid(k, s * 1.2, s, s * 0.8, 40), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           pos: [x, rand() * TOP, 0.25 + rand() * 0.05],
           color: rock,
         });

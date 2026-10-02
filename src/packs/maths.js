@@ -1239,8 +1239,8 @@ export const RECIPES = {
         even: true,
         opacity: 1,
         jitter: 0.01,
-        flat: 0.6,
-        stretch: 2.2,
+        flat: 0.45,
+        stretch: 1.4,
         kind: "pulse",
         params: (c) => [(c.t * 6) % 1, 0],
         color: (c) => {
@@ -2164,10 +2164,25 @@ function textPixels(text, at, h) {
 // strokes.
 function textCloud(k, pixels, opts, look) {
   const per = 4;
-  k.cloud({ count: pixels.length * per, pattern: false, ...opts }, (rand, i) => {
+  // opts.exact (lane Sharpness B): the four dots of a pixel sit on a 2 x 2
+  // grid inside it, with exact sizes, so the letter is crisp.
+  const { exact, ...rest } = opts;
+  k.cloud({ count: pixels.length * per, pattern: false, ...rest }, (rand, i) => {
     const px = pixels[Math.floor(i / per)];
     if (!px) return null;
     const j = px.px * 0.45;
+    if (exact) {
+      const q = i % per;
+      const d = px.px * 0.25;
+      return {
+        p: [px.p[0] + (q & 1 ? d : -d), px.p[1] + (q & 2 ? d : -d), px.p[2]],
+        n: [0, 0, 1],
+        flat: 0.4,
+        jitter: 0,
+        size: Math.max(0.6, (px.px / 0.014) * 0.6),
+        ...look(px, rand),
+      };
+    }
     return {
       p: [px.p[0] + (rand() - 0.5) * j, px.p[1] + (rand() - 0.5) * j, px.p[2]],
       n: [0, 0, 1],
@@ -2569,7 +2584,7 @@ function gridLines(lines, width, z) {
 // The slider under a plot: a track with an "a" beside it and a knob that
 // slides with a (knob at the middle for a's rest value).
 const SLIDER_LEN = 1.1;
-function plotSlider(k, at, { part = null } = {}) {
+function plotSlider(k, at, { part = null, exact = false } = {}) {
   const [x, y, z] = at;
   k.add(evenCylinder(0.018, 0.018, SLIDER_LEN), {
     even: true,
@@ -2592,7 +2607,7 @@ weight: 2,
 color: "#8b97ad",
 }); // prettier-ignore
   const label = textPixels("a", [x - SLIDER_LEN / 2 - 0.16, y, z], 0.09);
-  textCloud(k, label.pixels, {}, () => ({ color: "#ffd166" }));
+  textCloud(k, label.pixels, { exact }, () => ({ color: "#ffd166" }));
   const knob = part ?? k.part("knob", { pivot: [x, y, z] });
   k.add(evenCylinder(0.055, 0.055, 0.05), {
     even: true,
@@ -3050,7 +3065,7 @@ Object.assign(RECIPES, {
         // The mesh lines in smaller splats, so they read as thin, crisp lines
         // rather than a dashed blur.
         const line = onLine(c.u, c.v);
-        if (line) col = shade(col, 0.66);
+        if (line) col = shade(col, 0.78);
         const out = lit(col, c.n, { amb: 0.66, dif: 0.42, spec: 0.22, two: true });
         return line ? { c: out, size: 0.6 } : out;
       };
@@ -3112,7 +3127,8 @@ Object.assign(RECIPES, {
       // read crisp.)
       k.add(evenBox(2.2, 0.05, 2.2), {
         pos: [0, baseY, 0],
-        weight: 1.1,
+        weight: 1.6,
+        size: 1.1,
         even: true,
         opacity: 1,
         jitter: 0.008,
@@ -3123,7 +3139,7 @@ Object.assign(RECIPES, {
           return col;
         },
       });
-      if (g.usesA) plotSlider(k, [0.12, baseY - 0.05, 1.22]);
+      if (g.usesA) plotSlider(k, [0.12, baseY - 0.05, 1.22], { exact: true });
     },
   },
 });
