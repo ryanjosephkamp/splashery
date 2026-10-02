@@ -853,20 +853,20 @@ export const RIGS = {
     // The plate's underside: a white glazed foot and floor, so the plate
     // reads solid from below (lane Sharpness B).
     addon: {
-      count: 12000,
+      count: 14000,
       build(k) {
         k.add(
           k.param(
             (u, v) => {
               const a = u * TAU;
-              const r = 0.93 - 0.33 * v;
-              return [-0.03 + Math.sin(a) * r, -0.1 - 0.11 * v, 0.02 + Math.cos(a) * r];
+              const r = 0.93 - 0.08 * v;
+              return [-0.03 + Math.sin(a) * r, -0.1 - 0.125 * v, 0.02 + Math.cos(a) * r];
             },
             { grid: 64, normal: () => [0, -1, 0] },
           ),
           { even: true, opacity: 1, jitter: 0.01, flat: 0.2, pattern: false, color: () => "#d9d7d1" }, // prettier-ignore
         );
-        underDisc(k, [-0.03, -0.21, 0.02], 0.61, "#cfccc4");
+        underDisc(k, [-0.03, -0.225, 0.02], 0.86, "#cfccc4", { grid: 80 });
       },
     },
     parts: [
@@ -880,7 +880,7 @@ export const RIGS = {
       {
         name: "fringe",
         pivot: [0, -0.4, 0],
-        regions: [{ at: [0, -0.43, 0], r: [1.5, 0.215, 1.5] }],
+        regions: [{ at: [0, -0.43, 0], r: [2.5, 0.21, 2.5] }],
       },
     ],
     controls: [pulse("roll", "Roll", 2.6)],

@@ -1919,9 +1919,16 @@ export const RECIPES = {
           { grid: 120, thick: 0.45 },
         ),
         {
+          // (Evenly laid and solid, its core the liner's color near the
+          // paper, so the liner's floor and walls are closed from below; lane
+          // Sharpness B.)
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
+          size: 1.08,
           flat: 0.2,
           interior: 0.1,
-          core: cake,
+          core: (c) => (c.p[1] < 0.06 || Math.hypot(c.p[0], c.p[2]) > 0.32 ? shade(o.liner, 0.8) : cake), // prettier-ignore
           color: (c) =>
             lit(c, mix(o.liner, "#ffffff", 0.12 * c.noise(0, c.p[1] * 30, 0)), 0.7, 0.45),
         },

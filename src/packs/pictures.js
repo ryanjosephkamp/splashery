@@ -1282,17 +1282,19 @@ function albumCloth(style, bx, by) {
       // crossing over and under in turn (a checker of across and down), with
       // crisp, narrow gaps between threads (soft ones read as a blur), and
       // each thread a little thicker or thinner along its length (slubs).
-      const q = 15;
+      const q = 20;
       const fx = p[0] * q;
       const fy = p[1] * q;
-      const gapX = smoothstep(0.36, 0.5, Math.abs((fx % 1) - 0.5));
-      const gapY = smoothstep(0.36, 0.5, Math.abs((fy % 1) - 0.5));
+      const ux = fx - Math.floor(fx);
+      const uy = fy - Math.floor(fy);
+      const gapX = smoothstep(0.36, 0.5, Math.abs(ux - 0.5));
+      const gapY = smoothstep(0.36, 0.5, Math.abs(uy - 0.5));
       const over = (Math.floor(fx) + Math.floor(fy)) % 2 === 0;
       // The thread on top is lit along its length; the gap beside it is darker.
-      const lit = over ? 0.04 * (0.5 - Math.abs((fy % 1) - 0.5)) : 0.04 * (0.5 - Math.abs((fx % 1) - 0.5)); // prettier-ignore
+      const lit = 0.04 * (0.5 - Math.abs((over ? uy : ux) - 0.5));
       const slub = bkNoise(p[0] * 2.5, fy * 1.5) + bkNoise(fx * 1.5 + 5, p[1] * 2.5) - 1;
       const mottle = bkNoise(p[0] * 3 + 2, p[1] * 3 + 8) - 0.5;
-      col = shade(col, 0.99 + lit - 0.08 * Math.max(gapX, gapY) + 0.03 * slub + 0.04 * mottle);
+      col = shade(col, 0.99 + lit - 0.07 * Math.max(gapX, gapY) + 0.03 * slub + 0.04 * mottle);
     } else {
       // Kraft card: soft, broad fiber mottling and a few longer fibers,
       // none finer than a few splats.
