@@ -124,7 +124,9 @@ test("jelly and amoeba stretch and spring back; cherries swing and knock", async
     h.release();
     const right = h.pieces[1].body;
     let moved = 0;
-    for (let i = 0; i < 90; i++) {
+    // (The swing back takes two to five seconds: how hard it was let go
+    // depends on the real time between the moves.)
+    for (let i = 0; i < 180; i++) {
       player.update(1 / 30);
       moved = Math.max(moved, Math.hypot(right.pos[0] - right.home.pos[0], right.pos[1] - right.home.pos[1])); // prettier-ignore
     }
