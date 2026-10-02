@@ -1,8 +1,8 @@
 # Lane Sound C: The sound notes of October 2
 
-Prefix `sndc`. Branches `claude/lane-sound-c-engine` (PR "Engine: sounds pause with their effect, and
-a toy's first tap sounds on time") and `claude/lane-sound-c` (PR "Phase Sound C: the sound notes of
-October 2"). How lanes work: [OPERATING.md](../OPERATING.md).
+Prefix `sndc`. Branches `claude/lane-sound-c-engine` (PR "Engine: sounds pause with their effect,
+and a toy's first tap sounds on time") and `claude/lane-sound-c` (PR "Phase Sound C: the sound notes
+of October 2"). How lanes work: [OPERATING.md](../OPERATING.md).
 
 ## Brief
 
@@ -122,76 +122,117 @@ except the honey level, which is yours (one number). The laptop is locked.
   the labs switch, and additive engine PRs once the full test run passes. Changes to toys the public
   already sees wait for the owner's "good" marks (since September 30, sound-only changes go live
   without waiting). Never merge anything yourself.
-- Language: every new public-facing text is in American English (color, center, gray, math,
-  license, toward, -ize endings, dates like "September 29, 2026"). Leave code identifiers, file
-  names and anything stored in links as they are.
+- Language: every new public-facing text is in American English (color, center, gray, math, license,
+  toward, -ize endings, dates like "September 29, 2026"). Leave code identifiers, file names and
+  anything stored in links as they are.
 - Read first: CLAUDE.md (the ground rules and "Effect quality rules" are binding),
   docs/OPERATING.md, docs/PACKS.md, docs/WORKSTREAMS.md and docs/handoff/history.md (lessons from
   earlier lanes), and docs/handoff/SoundA.md and SoundB.md (how the last sound lanes worked).
 - Your handoff file: create it. Start it with this brief, word for word, under "## Brief", then keep
-  "## State", "## Notes", "## Known issues" and "## For the Operator" current. Note your model at
-  the top of "## State" (the blog post compares the two models).
-- Shared lists: edit only your own entries in src/toys.js, src/toy-sounds.js, src/toy-help.js (a
-  how-to line and an About text per toy, following docs/handoff/Help.md), tools/toy-plan.json,
-  CREDITS.md and tools/assets.json. Regenerate docs/TOY-PLAN.md with `node tools/toy-plan.mjs`;
-  never merge it by hand.
-- Never edit tests/taps.spec.mjs. Your own tests go in tests/<prefix>.spec.mjs. If a finished lane's
-  test breaks because of a count or a list your work changes, don't edit it: say which test and why
-  in your message, and the Operator fixes it.
-- Assets: CC0, CC BY or public domain only, checked on the live source page and credited
-  (CREDITS.md, tools/assets.json and the toy's in-app credit). Never BY-SA or NC. No logos, brand
-  names or insignia.
-- Review: post clips and cards to the Effect review page,
-  https://claude.ai/artifact/BSayVkzQ2FKESesrkrSUMK (Effect review page 2), as OPERATING.md's "Steps
-  for a lane" says. Judge every effect as motion at phone size against the effect quality rules
-  before you post it. The Operator has made your lane's record. Don't republish the page, and never
-  write to "verdicts".
-- Push your work in progress to your branch about every hour, so it isn't only in your container,
-  and open your draft PR early. Many lanes run at once now, so main moves often: merge it into your
-  branch before each push (never rebase a pushed branch) and keep both sides of any conflict.
-- Before every push, follow "Before every push" in CLAUDE.md: the full Playwright suite
-  (SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium npx playwright test), prettier,
-  `node tools/us-english.mjs --diff`, `node tools/check-packs.mjs <pack>` for new or changed toys, a
-  contact sheet and thumbnails, and your own screenshots at 390×844 and 1440×900. Then put back the
-  standard screenshots (`node tools/upkeep.mjs --restore-shots`) and any other lane's screenshots
-  your branch didn't change.
-- PR: one draft PR per branch against main with the five sections (Summary, Verification,
-  Deviations, Known issues, What was cut), and the model that built it in the Summary. When main
-  moves, merge it into your branch.
-- If you post cards, check the owner's marks (the "verdicts" collection, ids starting with your
-  prefix) about once an hour with a scheduled check-in (send_later). Fix every "fix" in the same PR,
-  post the new clip as a "-r2" card, and set replacedBy on the old one. Stop the check-ins once your
-  PR is merged or closed.
-- Finish every working turn with a short final message that starts with "READY:" (PR link, card
-  ids, test results, anything for the Operator), "WORKING:" (what's left), or "BLOCKED:" (exactly
-  what you need).
+  "## State
 
-## State
+Model: Opus 5.5 (default effort), all of it, and its one helper (it found and cut the recordings).
 
-Model: Opus 5.5 (default effort), all of it, and its one helper (sourcing recordings).
-
-- October 2, 2026: started. The engine part is done on `claude/lane-sound-c-engine`; the toys are in
-  progress on `claude/lane-sound-c`.
+- October 2, 2026: started from main 2ba6455 and the Ops branch `claude/operator-mega-review`
+  (merged to main as #170 during the day, then main merged in).
+- **Engine** (`claude/lane-sound-c-engine`): done.
+  - A tap that pauses a long effect suspends the AudioContext, so everything the toy is sounding
+    stops at that moment and resumes from it (held tunes, ringing notes, cue sounds, a recipe's own
+    audio). This works for a "quiet" tap too (one whose sound comes from cues). Opening another toy,
+    or a tap on another control, carries on.
+  - A toy's recorded samples load when it opens with the speaker on. That covers its tap sound, and
+    any its recipe lists in a new optional `sounds` key (an array of specs, or `(options) => specs`,
+    so a toy's options can bring their own). A rebuild for new options loads those too. They are
+    decoded in a small offline context, so no AudioContext is created before a gesture.
+  - The first press or key of a visit starts (or wakes) the audio before the tap it begins fires.
+  - The About tab credits the samples a recipe's `sounds` lists, as it does the tap sound's.
+  - A recipe's drive sees `info.view`, the camera's turn about the toy (for the spinning top's hum,
+    which follows a drag's spin).
+  - The duplicate `"splat-field"` entry was already gone on main 2ba6455: nothing to do.
+  - Measured: the first tap's sample starts 7.6 ms after the motion takes the tap, with a slow (400
+    ms) network for the samples. On main, the sample isn't loaded before the tap at all.
+- **Toys** (`claude/lane-sound-c`): all 44 toys of the round are done except the honey level (see
+  "For the Operator"). 42 are `"site"` and lungs is `"ready"`, with two candidates. Their sounds are
+  listed in the PR, and each toy's "plan" in `tools/sound-review.json` says what it sounds like now.
+  - 24 new CC0 recordings from Freesound, each checked on its live page and credited in CREDITS.md,
+    tools/assets.json and src/sound-credits.js. Each is 32 or 64 kbps mono and under 16 KB.
+  - Six recordings that my toys no longer use were removed, with their credits: the tin can's spin,
+    the old owl, rotor, steam chug, popcorn and spring boing. The sports car's rev was cut to 1.8 s,
+    and the top's spin was remade as a seamless loop. Both keep their names and credits.
+  - Pack cues changed only where a sound is timed to the motion: the daisy's and rose's petals
+    (nature), the nucleon ticks (chemistry), the splatting views and sorting clicks (splatting), the
+    splat fields (lab), the book styles' pages (pictures), the top's hum and the bubbles' pops
+    (playthings), and the bananas' peels (food). No motion changed.
+  - A new voice, `glide` (a soft, warm, falling tone), is in a "Sound C" block at the end of
+    src/voices.js, with its measured level of 0.9.
 
 ## Notes
 
 - **Pause by suspending the AudioContext.** A per-toy bus can mute a toy but can't pause it: sounds
   already handed to WebAudio keep their clock and would play on (or be lost) under a muted bus.
-  Suspending the context stops its clock, so every scheduled and ringing sound (held tunes, cue
-  sounds, a recipe's own audio through `sound.master`, such as the song landscape) stops at the
-  paused moment and carries on from it. Nothing else needs to sound while a toy's effect is paused;
-  a UI sound played meanwhile waits for the resume.
-- **Cues share one key**, so the site plays at most one cue per 60 ms (`gap`). Many cues in a row
-  (one per frame) are dropped. Timed ticks (the nucleons, the sorting splats) come as one cue per
-  batch, every 0.2 s or so, each tick with its own `at`.
+  Suspending the context stops its clock, so every scheduled and ringing sound stops at the paused
+  moment and carries on from it. That includes held tunes, cue sounds and a recipe's own audio
+  through `sound.master`, such as the song landscape. Nothing else needs to sound while a toy's
+  effect is paused; a UI sound played meanwhile waits for the resume.
+- **Cues share one key**, so the site plays at most one cue per 60 ms (`gap`), and many cues in a
+  row (one per frame) get dropped. Timed ticks (the nucleons, the sorting splats) come as one cue
+  per batch, about every 0.2 s, and each tick has its own `at`.
 - **Lead scheduling.** A cue for a known moment is handed over a little early and scheduled for the
   moment itself (`at`), so it lands in sync at any frame rate (the daisy's and rose's petals).
+- **Headless frames are slow** (about 1 fps on heavy toys), so effects run in slow motion there. The
+  lane's tests wait for a control to run out rather than for a fixed time.
+- **Option sounds.** The book's style and the splat field's program can't change a toy's entry in
+  src/toy-sounds.js (one spec per toy), so those toys make the tap `quiet` and push their own sound
+  from drive. They list their files in the recipe's `sounds`, so they preload and get credited.
+- Listening proxies: `tools/sound-lint.mjs` on every changed toy, and envelope checks on each
+  recording (its onset, its length, where its peaks are) to choose the cuts. The owner's ears are
+  the real test.
 
 ## Known issues
 
+- The steam train's tap is still labeled "Blow the whistle", and its how-to line says so too. Now it
+  chuffs with no whistle sound (his note). A text lane could relabel it ("Get up steam").
+- The spinning top's hum follows a drag's spin through the camera's turn (`info.view`). If the
+  Physics lane adds a real hand-spin of the top, its speed should feed `topHum` instead.
+- `tools/sound-lint.mjs` flags three sounds as he asked for them. The atom's ping is the periodic
+  table's sound he likes, now shorter. The bicycle's is a real bell. The sports car's rising pitch
+  is the real rev, unchanged from Sound B.
+- The slinky and soap-bubble recordings were the weakest of the finds (the helper said so). Worth a
+  listen first.
+
 ## For the Operator
 
-- `tests/snda.spec.mjs:89` ("no sample loads on page load or when a toy opens, only on its tap")
-  asserts the old rule that this lane's brief replaces: with the speaker on, a toy's samples now load
-  when it opens. It fails on the engine branch. Suggested fix: expect nothing on page load, and the
-  toy's own samples (and no others) after opening it.
+- **Lines touched in the engine** (on `claude/lane-sound-c-engine`):
+  - src/sound.js: the constructor (the wake on first press), `audio()`, and the new `preload`,
+    `pauseToy` and `resumeToy`.
+  - src/voices.js: `loadSample` decodes with an offline context when no context is given.
+  - src/app.js: the cue handler (it resumes when cues run), `onToy` (resume and preload),
+    `renderCredits` (recipe sounds), `toggleSound` (preload), and `onAction`. In `onAction` the
+    pause comes before the `quiet` check, and a resume happens before a new tap's sound. Two new
+    methods, `preloadSounds` and `recipeSounds`.
+  - src/motion.js: `info.view` in the drive's info.
+- **Tests from finished lanes this lane changes** (please update; I didn't edit them):
+  1. `tests/snda.spec.mjs:89` ("no sample loads … when a toy opens, only on its tap"): the brief
+     replaces that rule. With the speaker on, a toy's samples now load when it opens. Suggest:
+     nothing on page load, then the toy's own samples (and no others) after it opens.
+  2. `tests/snda.spec.mjs:32` ("every sample is used …"):
+     - `used` reads cue files only from src/packs/balls.js. It should read every pack
+       (`file: "….mp3"` in src/packs/\*.js) and the candidates in tools/sound-review.json. This
+       lane's recipe sounds (book pages, ocean, bubble pops, banana peel) and its board candidates
+       (lungs B and C, the mitochondrion's gas burner) are otherwise "unused".
+     - The folder total is now about 1.11 MB, over its 1 MB cap. Main alone was 987 KB, and this
+       lane adds 24 recordings even after re-encoding the bigger ones at 32 kbps. Suggest a 1.5 MB
+       cap: a recording loads only with its toy, so the cap guards the repo, not a page.
+- **Honey** (one number, yours to place): Fluids r4 moved the Fluid lab's sound into
+  `src/fluids/runtime.js` on its unmerged branch, where the honey's gloops share `vol: 0.35 * v`
+  with lava and syrup. To make honey a little louder without touching the others:
+  `vol: (s.preset === "honey" ? 0.5 : 0.35) * v` (about 3 dB). Editing it now would conflict with
+  Fluids r4, so the Fluid lab's review entry is left for that lane.
+- **Mitochondrion**: the site plays candidate A, a gas furnace lighting (a soft whoomp, then a warm
+  roar), with the ATP sparks' soft pops. B is a gas burner's steadier, breathier roar. A third find,
+  a boiler, was dropped because its source title names a brand.
+- **Lungs**: the site's breath is unchanged. Candidates B (a deep breath, in and out at the same
+  strength) and C (a soft breath in, a long breath out) are on the board entry.
+- A PACKS.md lesson: when a toy's option should change its sound, make the tap `quiet`, push the
+  option's sound from drive, and list its files in the recipe's `sounds`, so they preload and get
+  credited.
