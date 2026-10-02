@@ -180,27 +180,35 @@ test.describe("computer", () => {
   test("Record stops by itself at its time limit", async ({ page }) => {
     const errors = watchErrors(page);
     await open(page);
-    await pick(page, "donut"); // a light toy: frames come quickly in a software renderer
+    await pick(page, "donut"); // a light toy, so the page's main thread is free
+    await page.waitForTimeout(1000);
     const out = await page.evaluate(async () => {
       const { startRecording, recordSupport } = await import("/src/exports.js");
       const { app } = window.__splashery;
       app.sound.setEnabled(true);
       const ctx = app.sound.audio();
-      const rec = startRecording({
-        canvas: document.getElementById("stage"),
-        audio: { ctx, node: app.sound.master },
-        maxSeconds: 3,
-      });
-      const kick = () => rec.frame();
-      app.player.stage.app.on("frameend", kick);
-      app.player.stage.requestRender(4000); // frames for the video track
+      // A small canvas drawn here, so the take does not hang on how fast a
+      // software renderer draws the stage (the time limit is what is tested).
+      const canvas = document.createElement("canvas");
+      canvas.width = 160;
+      canvas.height = 120;
+      document.body.append(canvas);
+      const g = canvas.getContext("2d");
+      let i = 0;
+      const draw = setInterval(() => {
+        g.fillStyle = `hsl(${(i++ * 25) % 360} 70% 50%)`;
+        g.fillRect(0, 0, 160, 120);
+        rec.frame();
+      }, 50);
+      const rec = startRecording({ canvas, audio: { ctx, node: app.sound.master }, maxSeconds: 3 });
       const osc = ctx.createOscillator();
       osc.connect(app.sound.master);
       osc.start();
       const t0 = performance.now();
       const { blob, ext, seconds } = await rec.done;
       osc.stop();
-      app.player.stage.app.off("frameend", kick);
+      clearInterval(draw);
+      canvas.remove();
       return { sup: recordSupport(), ext, seconds, took: performance.now() - t0, size: blob.size, type: blob.type }; // prettier-ignore
     });
     expect(out.sup.ok).toBe(true);
