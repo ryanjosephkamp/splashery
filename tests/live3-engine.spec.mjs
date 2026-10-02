@@ -41,6 +41,19 @@ test("the app gives each toy its own range when it opens, and none to a toy with
   expect(range).toBe(null);
 });
 
+test("a toy that holds still still starts with its tilt locked", async ({ page }) => {
+  // (A recipe's tiltLock: false wins over that: the lane's tests check it on
+  // the Song landscape and the Chladni plate.)
+  await page.goto(APP);
+  await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
+  const lock = await page.evaluate(async () => {
+    const { player, app } = window.__splashery;
+    await app.chooseToy("graph-plotter");
+    return player.camera.tiltLock;
+  });
+  expect(lock).toBe(true);
+});
+
 test("the Live pill never covers a control, on a phone or a desktop", async ({
   playwright,
   baseURL,
