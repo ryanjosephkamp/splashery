@@ -237,6 +237,13 @@
       "sound": "The metallic knock, a real spinning whirr on its rim that speeds up like a settling coin, and the clank as it drops flat.",
       "improved": "G: made from one CC0 photo of a plain unlabelled can with the TRELLIS image-to-3D model. A tap tips it onto its bottom rim; it spins round on the rim faster as it leans less, like a settling coin, and drops flat with a clank (2.6 s). G review: an original vintage-style peaches label (CC0) wraps its side; the rims and lid stay metal. G looks: the Toy tab's Look picks the peaches label, a tomatoes label, plain metal or the original bare scan."
     },
+    "torus": {
+      "v": "keep",
+      "owner": "Owner's notes of September 28, 2026 (lane Shelves): Shapes keeps a plain torus people can dress as a donut, a bagel or a swim ring.",
+      "effect": "Pops onto its edge, wobbles around like a coin spun on a table, and settles flat.",
+      "sound": "A soft pop, a roll that circles faster, a settle.",
+      "improved": "Shelves: a sharp, even kit torus with a Dress it as choice (plain, donut, bagel, swim ring). A tap pops it up onto its edge; it wobbles around like a settling coin, leaning lower and circling faster, and drops flat with a small bounce (3.6 s)."
+    },
     "blob": {
       "v": "keep",
       "owner": "Interesting; no idea for an effect. The original shapes are really good-looking.",
@@ -261,7 +268,7 @@
       "v": "keep",
       "effect": "Clouds race around and a day-night band sweeps over it.",
       "sound": "A quiet, darker breeze and a soft low whoosh as the clouds race round.",
-      "improved": "E1: the clouds race once round the planet and a night band sweeps across it (2.8 s)."
+      "improved": "E1: the clouds race once round the planet and a night band sweeps across it (2.8 s). Shelves: moved to Space; the Toy tab's Planet picks Earth, Mars, the Moon, Jupiter or Neptune, each in the same tiny-planet style."
     },
     "basketball": {
       "v": "keep",
