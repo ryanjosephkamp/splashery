@@ -162,7 +162,7 @@ const HOP = 0.09; // the highest hop, in recipe units
 const BOW_SECS = 3.6;
 
 // Sound and drive state for the tap (one toy at a time).
-const CH = { was: 0 };
+const CH = { was: 0, bowAtSing: null };
 
 function chladniCue(mode, on) {
   const f = modeFreq(mode);
@@ -203,7 +203,13 @@ const CHLADNI = {
     if (!g) return;
     // Lane Live input: while the microphone is on, your voice bows the plate.
     const sung = liveIn.on("mic");
-    const p = sung ? singDrive(info.time ?? t, g.mode) : clamp01(c.bow ?? 0);
+    // After the microphone stops, the sung sand stays as it is until the
+    // next tap (the bow's own state takes over then), rather than jumping to
+    // wherever a tap made while singing had left the bow.
+    if (sung) CH.bowAtSing = c.bow ?? 0;
+    else if (CH.bowAtSing !== null && (c.bow ?? 0) !== CH.bowAtSing) CH.bowAtSing = null;
+    const keep = !sung && CH.bowAtSing !== null && SING.p > 0;
+    const p = sung ? singDrive(info.time ?? t, g.mode) : keep ? SING.p : clamp01(c.bow ?? 0);
     // The sound: the hum when the bowing starts, a hiss when it is stirred.
     if (sung) CH.was = p; // your voice is the sound
     else if (CH.was <= 0.001 && p > 0.001) for (const s of chladniCue(g.mode, true)) out.cues.push(s);
@@ -229,6 +235,8 @@ const CHLADNI = {
     const mode = modeById(o.mode);
     // Lane Live input: a new plate's sand starts scattered.
     Object.assign(SING, { p: 0, want: null, asked: false, last: null });
+    SING.builds++;
+    CH.bowAtSing = null;
     // The stand: a base, a post, and the plate clamped on top.
     const plate = k.part("plate", { pivot: [0, 0, 0], axis: [0, 1, 0] });
     k.add(k.cylinder(0.5, 0.1, { caps: true }), {
@@ -1008,14 +1016,18 @@ function liveSongDraw(g, time) {
 // plate's frequencies go with its thickness) has its modes where voices
 // are: 75, 150, 195, 255 and 375 Hz. The mode nearest your note is the one
 // that rings; how strongly follows a resonance curve (half as strong about
-// 60 cents away), times how loud you sing. While it rings the sand hops
+// SING_WIDTH cents away), times how loud you sing. While it rings the sand hops
 // and drifts to its still lines, as when it is bowed; when you stop, the
 // sand stays where it is. A different mode, held for a moment, gets its
 // own plate of scattered sand.
 export const SING_F0 = F0 / 4;
+// Half strength this many cents off a mode: wide enough that any note from
+// about 60 to 450 Hz rings the nearest mode (an ordinary voice lands between
+// modes; at 60 cents most notes rang nothing, the owner's October 2 review).
+const SING_WIDTH = 150;
 export const singFreq = (mode) => SING_F0 * (mode.n * mode.n + mode.m * mode.m);
-const SING = { p: 0, want: null, since: 0, last: null, note: null, near: null, r: 0 };
-export const singState = () => ({ p: SING.p, note: SING.note, mode: SING.near?.mode.id ?? null }); // prettier-ignore
+const SING = { p: 0, want: null, since: 0, last: null, built: 0, note: null, near: null, r: 0, builds: 0 }; // prettier-ignore
+export const singState = () => ({ p: SING.p, note: SING.note, mode: SING.near?.mode.id ?? null, builds: SING.builds }); // prettier-ignore
 
 // The mode nearest a sung frequency (keeping the sign of the one on show
 // when the pair shares a frequency), and how strongly it rings (0..1).
@@ -1026,7 +1038,7 @@ export function singMode(hz, current) {
     const d = Math.abs(cents) - (current && m.n === current.n && m.m === current.m && m.s === current.s ? 1e-6 : 0); // prettier-ignore
     if (!best || d < best.d) best = { mode: m, d, cents };
   }
-  const x = best.cents / 60;
+  const x = best.cents / SING_WIDTH;
   return { ...best, response: 1 / (1 + x * x) };
 }
 
@@ -1040,29 +1052,43 @@ function singStatus() {
   return `You: ${n.name} (${Math.round(n.hz)} Hz). Nearest mode ${near.mode.n}, ${near.mode.m} rings at ${hz} Hz on this plate.${side}`; // prettier-ignore
 }
 
-// One frame of the sung plate: how far the sand has settled (0..1).
+// One frame of the sung plate: how far the sand has settled (0..1). The
+// plate on show rings with its own resonance to whatever is sung, so the
+// sand moves whenever the note is anywhere near its mode (a real voice
+// wavers). Another mode takes over only when it is clearly nearer and held
+// for a second, and not within two seconds of the last change: a new mode is
+// a new plate of scattered sand, so switching on every waver kept the sand
+// from ever settling (lane Live input r3, the owner's review of October 2).
+const SWITCH_HOLD = 1; // seconds another mode must be held
+const SWITCH_REST = 2; // seconds after a build before another switch
 function singDrive(time, mode) {
   const dt = SING.last === null ? 0 : Math.min(0.1, Math.max(0, time - SING.last));
+  if (SING.last === null) SING.built = time;
   SING.last = time;
   const pitch = liveIn.mic?.pitch;
   const loud = clamp01((liveIn.mic?.db ?? -120) / 30 + 1.8); // −54 dBFS nothing, −24 full
   if (pitch && loud > 0) {
     SING.note = pitch.note && { name: pitch.note.name, hz: pitch.hz };
     SING.near = singMode(pitch.hz, mode);
-    SING.r = SING.near.response * loud;
+    // This plate's own response to the note.
+    const x = (1200 * Math.log2(pitch.hz / singFreq(mode))) / SING_WIDTH;
+    const own = 1 / (1 + x * x);
+    SING.r = own * loud;
+    SING.p = Math.min(1, SING.p + (dt / BOW_SECS) * SING.r * 1.4);
     const other = SING.near.mode.id !== mode.id;
-    if (other && SING.near.response > 0.5) {
+    if (other && SING.near.response > own * 1.5) {
       if (SING.want !== SING.near.mode.id) {
         SING.want = SING.near.mode.id;
         SING.since = time;
-      } else if (time - SING.since > 0.4 && !SING.asked) {
+      } else if (
+        time - SING.since > SWITCH_HOLD &&
+        time - SING.built > SWITCH_REST &&
+        !SING.asked
+      ) {
         SING.asked = true;
         liveIn.setOptions?.({ mode: SING.want });
       }
-    } else if (!other) {
-      SING.want = null;
-      SING.p = Math.min(1, SING.p + (dt / BOW_SECS) * SING.r * 1.4);
-    }
+    } else SING.want = null;
   } else {
     SING.r = 0;
     SING.want = null;
