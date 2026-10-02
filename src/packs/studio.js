@@ -561,6 +561,7 @@ function buildR2(k, o, song) {
 
 // A short song's player, stopped (a new build starts stopped).
 function stopShort() {
+  const keep = R3.keep; // r3: the same song keeps its place
   try {
     PLAY.src?.stop();
   } catch {
@@ -575,6 +576,7 @@ function stopShort() {
     ctx: null,
     taps: 0,
   });
+  if (keep) Object.assign(PLAY, keep);
 }
 
 function driveR2(g, out, info) {
@@ -952,6 +954,9 @@ const SONG_LANDSCAPE = {
       }
     }
     const song = SONG.want || SONG.sample;
+    // r3: the same song rebuilt (another view or look) keeps its place, and
+    // keeps playing if it was.
+    R3.keep = SONG.current === song ? { pos: PLAY.pos, want: PLAY.want } : null;
     if (SONG.current?.track && SONG.current !== song) SONG.current.track.pause(); // lane Live input r2
     SONG.current = song;
     R2.look = null;
@@ -973,6 +978,7 @@ const SONG_LANDSCAPE = {
       ctx: null,
       taps: 0,
     });
+    if (R3.keep) Object.assign(PLAY, R3.keep); // r3
     const budget = Math.floor(k.count * 0.3); // cells rise in up to three layers
     const d = landscapeData(song.samples, song.rate, budget);
     const D = landscapeLength(d.duration);

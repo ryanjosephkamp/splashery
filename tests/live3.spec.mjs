@@ -247,6 +247,9 @@ test.describe("the Song landscape, r3", () => {
       await tap(page, "#landscape-view");
       await idle(page);
       expect(await page.evaluate(async (m) => (await import(m)).transport.state().live, song)).toBe(false); // prettier-ignore
+      // The song kept playing from where it was.
+      const p4 = await until(page, async (m) => { const s = (await import(m)).transport.state(); return s.pos > 0.5 ? s : null; }, song, 30_000); // prettier-ignore
+      expect(p4.playing).toBe(true);
       expect(await page.evaluate(() => document.getElementById("landscape-view")?.textContent)).toBe("Live view"); // prettier-ignore
       expect(errors).toEqual([]);
     } finally {

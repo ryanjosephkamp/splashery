@@ -140,6 +140,8 @@ export function songTransport(t) {
   seek.setAttribute("aria-label", "Where in the song (drag to move there)");
   const at = document.createElement("output");
   at.className = "song-clock";
+  seekRow.style.cssText = "display:flex;align-items:center;gap:10px";
+  seek.style.flex = "1";
   seekRow.append(seek, at);
   let seeking = false;
   seek.addEventListener("input", () => {
