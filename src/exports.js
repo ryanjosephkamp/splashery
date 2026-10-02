@@ -218,8 +218,14 @@ export function startRecording({
         }
         tap.limit.disconnect();
       }
-      if (!chunks.length) reject(new Error("The recording came out empty."));
-      else resolve({ blob: new Blob(chunks, { type }), ext, seconds: length });
+      // A busy device can hand over the last piece a moment after the stop:
+      // wait a little for it before calling the take empty.
+      const finish = (tries) => {
+        if (chunks.length) resolve({ blob: new Blob(chunks, { type }), ext, seconds: length });
+        else if (tries > 0) setTimeout(() => finish(tries - 1), 250);
+        else reject(new Error("The recording came out empty."));
+      };
+      finish(8);
     };
     rec.onerror = (e) => reject(e.error || new Error("The recording stopped."));
   });
@@ -233,6 +239,11 @@ export function startRecording({
   const stop = () => {
     if (rec.state === "inactive") return;
     length = Math.min(maxSeconds, seconds());
+    try {
+      rec.requestData(); // what the encoder holds so far
+    } catch {
+      // Not recording any more.
+    }
     rec.stop();
   };
   // A timeslice keeps memory in small pieces on long takes.
