@@ -1471,13 +1471,14 @@ export const TOY_SOUNDS = {
   // the knife swings, only a soft settle of the melon.
   watermelon: { voice: "thud", f: 120, bright: 0.2, decay: 0.4, vol: 0.3 },
   // Sound B: blown out with a breath, then the last line of "Happy Birthday
-  // to You" (public domain) on the piano, with its chords.
+  // to You" (public domain) on the piano, with its chords. Sound C (the owner's
+  // call of October 2): on the concert grand's recorded notes, same tempo.
   "birthday-cake": {
     on: [
       { voice: "breath", f: 1300, to: 0.5, decay: 0.5, vol: 0.7 },
-      { voice: "grand", at: 0.5, notes: "F5 - - F5 E5 - - - C5 - - - D5", step: 0.15, hold: 0.35, vol: 0.6 }, // prettier-ignore
-      { voice: "grand", at: 2.9, f: "C5", hold: 1.2, vol: 0.6 },
-      { voice: "grand", at: 0.5, notes: "- - - - F3+A3+C4 - - - - - - - G3+B3+F4 - - - C3+E3+G3", step: 0.15, hold: 1.2, vol: 0.35 }, // prettier-ignore
+      { voice: "concert", at: 0.5, notes: "F5 - - F5 E5 - - - C5 - - - D5", step: 0.15, hold: 0.35, vol: 0.6 }, // prettier-ignore
+      { voice: "concert", at: 2.9, f: "C5", hold: 1.2, vol: 0.6 },
+      { voice: "concert", at: 0.5, notes: "- - - - F3+A3+C4 - - - - - - - G3+B3+F4 - - - C3+E3+G3", step: 0.15, hold: 1.2, vol: 0.35 }, // prettier-ignore
     ],
     off: [
       { voice: "scrape", f: 2800, rate: 50, decay: 0.2, vol: 0.7 },
