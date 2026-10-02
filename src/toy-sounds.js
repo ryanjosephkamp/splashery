@@ -2628,14 +2628,14 @@ export const TOY_SOUNDS = {
     ],
     off: { voice: "breath", f: 600, to: 0.6, decay: 1, vol: 0.3 },
   },
-  // A microscope's focus knob turning smoothly while the view dives in (about 2.6 s),
-  // and turning back, a little lower, as it comes out.
+  // A microscope's focus knob turning smoothly while the slice comes in, and
+  // turning back, a little lower, as it goes.
   "smlm-microscope": {
     on: { voice: "scrape", f: 420, rate: 4, decay: 4.4, vol: 0.35 },
     off: { voice: "scrape", f: 360, rate: 4, decay: 4, vol: 0.3 },
   },
-  // Space is silent: a long, soft breath as the view glides into the gas, and a
-  // lower one as it pulls back out.
+  // Space is silent: a long, soft breath as the hot gas thins away, and a lower
+  // one as it comes back.
   "galaxy-box": {
     on: { voice: "breath", f: 500, to: 0.8, decay: 2.8, vol: 0.35 },
     off: { voice: "breath", f: 400, to: 1.2, decay: 2.4, vol: 0.3 },
