@@ -121,8 +121,8 @@ docs/HANDS-ON-PLAN.md.
 - October 2, 2026, 15:09 UTC: #176 (the engine) merged. Main merged into `claude/lane-physics`
   (TOY-PLAN.md regenerated). #184 (the showcase toys) waits for the owner's marks on the cards.
 - October 2, 2026, evening: the full suite on #184 ran file by file (76 files). Two failures, both
-  ours and both fixed: Pebbles' About text was over the nature shelf's 140 words, and the bricks test
-  pressed before the camera had settled. Everything else passed, the anatomy atlas included.
+  ours and both fixed: Pebbles' About text was over the nature shelf's 140 words, and the bricks
+  test pressed before the camera had settled. Everything else passed, the anatomy atlas included.
 
 ## Notes
 
