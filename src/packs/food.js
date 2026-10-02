@@ -4300,7 +4300,14 @@ export const RECIPES = {
           null,
           { flip: true },
         ),
-        { even: true, opacity: 1, jitter: 0.008, flat: 0.2, size: 1.1, color: (c) => shade(cup, 0.9) },
+        {
+          even: true,
+          opacity: 1,
+          jitter: 0.008,
+          flat: 0.2,
+          size: 1.1,
+          color: (c) => shade(cup, 0.9),
+        },
       );
       k.add(evenTorus(k, 0.592, 0.014, 160), {
         even: true,

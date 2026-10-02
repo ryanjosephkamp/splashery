@@ -106,6 +106,7 @@ function polyTube(pts, radius, { closed = false } = {}) {
   return {
     area: TAU * avg * L,
     thick: maxR,
+    dims: 2, // two numbers per splat: under even: true, along and around
     sample(rand) {
       const s = rand() * L;
       let lo = 0;
@@ -434,19 +435,39 @@ function cellFaces(grid, want, shade = grid) {
               const off = d[0] ? [0, a, b] : d[1] ? [a, 0, b] : [a, b, 0];
               occl += shade.at(fi + off[0], fj + off[1], fk + off[2]);
             }
-          faces.push(i, j, k, f, occl);
+          // Which of the face's four sides is a real edge (the surface turns
+          // there) rather than a seam with the next cell's face: bits for
+          // -u, +u, -v, +v.
+          const ua = d[0] ? 1 : 0;
+          const va = d[2] ? 1 : 2;
+          let rim = 0;
+          [
+            [ua, -1],
+            [ua, 1],
+            [va, -1],
+            [va, 1],
+          ].forEach(([ax, sgn], b) => {
+            const e = [0, 0, 0];
+            e[ax] = sgn;
+            const on = at(i + e[0], j + e[1], k + e[2]);
+            if (!on || at(i + e[0] + d[0], j + e[1] + d[1], k + e[2] + d[2])) rim |= 1 << b;
+          });
+          faces.push(i, j, k, f, occl, rim);
         });
       }
-  const count = faces.length / 5;
+  const count = faces.length / 6;
   const cell = 1 / n;
   const at3 = (fi, u, v) => {
-    const q = fi * 5;
+    const q = fi * 6;
     const f = faces[q + 3];
     const d = CUBE_DIRS[f];
     const p = [0, 1, 2].map((a) => (faces[q + a] + 0.5 + d[a] * 0.5) * cell - 0.5);
     p[d[0] ? 1 : 0] += (u - 0.5) * cell;
     p[d[2] ? 1 : 2] += (v - 0.5) * cell;
-    return { p, n: d, u, v, face: f, occl: faces[q + 4] };
+    // How far (in cells) to the nearest real edge of the surface.
+    const rim = faces[q + 5];
+    const edge = Math.min(rim & 1 ? u : 1, rim & 2 ? 1 - u : 1, rim & 4 ? v : 1, rim & 8 ? 1 - v : 1); // prettier-ignore
+    return { p, n: d, u, v, face: f, occl: faces[q + 4], edge };
   };
   return {
     area: count * cell * cell,
@@ -1215,6 +1236,9 @@ export const RECIPES = {
       const pts = lorenzPath();
       const stops = ["#1d2671", "#4b2c91", "#8f3bb3", "#d6479a", "#ff7a59", "#ffc15e"];
       k.add(polyTube(pts, 0.011), {
+        even: true,
+        opacity: 1,
+        jitter: 0.01,
         flat: 0.6,
         stretch: 2.2,
         kind: "pulse",
@@ -1555,14 +1579,21 @@ export const RECIPES = {
     build(k, o) {
       const L = o.level === "2" ? 2 : 3;
       const whole = mengerGrid(L);
-      k.add(cellFaces(whole, () => true), {
-        even: true,
-        opacity: 1,
-        jitter: 0.01,
-        size: 1.08,
-        flat: 0.12,
-        color: (c) => mengerLook(c.p, c.s.face, c.s.occl),
-      });
+      k.add(
+        cellFaces(whole, () => true),
+        {
+          even: true,
+          opacity: 1,
+          jitter: 0.01,
+          size: 1.08,
+          flat: 0.12,
+          color: (c) => {
+            const col = mengerLook(c.p, c.s.face, c.s.occl);
+            // Smaller splats along the holes' edges keep them crisp.
+            return c.s.edge < 0.18 ? { c: col, size: 0.72 } : col;
+          },
+        },
+      );
       // The plugs (clear at rest): big ones for level 1, one part per face
       // direction for levels 1 and 2, and the smallest only fade.
       const look = (c) => mengerLook(c.s.at, c.s.face, c.s.occl);
@@ -1918,16 +1949,20 @@ export const RECIPES = {
       faces.forEach((f, i) => {
         const part = k.part(o.solid + groups[i], { pivot: [0, 0, 0] });
         const tint = ramp(pal.slice(1), (i * 0.618 + 0.1) % 1);
-        k.add(polyShape(f.pts), {
+        // (Nudged a little off the even fan, whose rings showed as a moiré,
+        // with smaller splats along the rim's lines so they stay crisp.)
+        k.add(nudgedEven(polyShape(f.pts), 0.004), {
           even: true,
           opacity: 1,
-          jitter: 0.015,
+          jitter: 0.01,
           part,
           flat: 0.12,
+          weight: 1.15,
           color: (c) => {
             const col = lit(tint, f.n, { amb: 0.6, dif: 0.5, spec: 0.4, pow: 20 });
-            if (c.s.edge < rim) return keep(mix(col, "#fffaf0", 0.85));
-            if (c.s.edge < rim * 2) return shade(col, 0.88);
+            const e = c.s.edge;
+            if (e < rim) return keep(mix(col, "#fffaf0", 0.85), e > rim * 0.75 || e < rim * 0.25 ? 0.7 : 0.9); // prettier-ignore
+            if (e < rim * 2) return { c: shade(col, 0.88), size: e < rim * 1.25 ? 0.7 : 1 };
             return col;
           },
         });
@@ -3047,6 +3082,7 @@ Object.assign(RECIPES, {
         part: k.part("surface"),
         flat: 0.35,
         even: true,
+        opacity: 1,
         jitter: 0.01,
         channel: 0,
         to: (c) => [c.p[0], g.floorY, c.p[2]],
@@ -3068,14 +3104,19 @@ Object.assign(RECIPES, {
       }
       // A dark base plate under it, and the a slider in front.
       const baseY = -SURF_H - 0.12;
-      k.add(k.box(2.2, 0.05, 2.2), {
+      // (Evenly laid and as dense as the rest, with smaller splats along
+      // its border's edge, so the plate and its rim read crisp.)
+      k.add(evenBox(2.2, 0.05, 2.2), {
         pos: [0, baseY, 0],
-        weight: 0.4,
+        weight: 1.1,
         even: true,
-        jitter: 0.01,
+        opacity: 1,
+        jitter: 0.008,
+        flat: 0.2,
         color: (c) => {
           const edge = Math.min(1.1 - Math.abs(c.p[0]), 1.1 - Math.abs(c.p[2]));
-          return lit(edge < 0.06 ? "#4a5874" : "#1c2536", c.n, { amb: 0.75, dif: 0.3, spec: 0 });
+          const col = lit(edge < 0.06 ? "#4a5874" : "#1c2536", c.n, { amb: 0.75, dif: 0.3, spec: 0 }); // prettier-ignore
+          return Math.abs(edge - 0.06) < 0.012 || edge < 0.012 ? { c: col, size: 0.7 } : col;
         },
       });
       if (g.usesA) plotSlider(k, [0.12, baseY - 0.05, 1.22]);

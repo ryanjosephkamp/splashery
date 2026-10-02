@@ -686,33 +686,53 @@ function buildSorting(k) {
   const side = norm([look[2], 0, -look[0]]);
   const up = cross(side, look);
   const at = (a, b, c) => [cam[0] + side[0] * a + up[0] * b + look[0] * c, cam[1] + side[1] * a + up[1] * b + look[1] * c, cam[2] + side[2] * a + up[2] * b + look[2] * c]; // prettier-ignore
+  // Its body and lens are laid on even grids (random points read as grain
+  // at phone size), the body with darker edges so the box reads crisp.
   const body = [];
-  for (let i = 0; i < 6500; i++) {
-    const f = Math.floor(rand() * 6);
-    const u = rand() * 2 - 1;
-    const v = rand() * 2 - 1;
-    const half = [0.13, 0.09, 0.08];
-    const q = [0, 0, 0];
+  const half = [0.13, 0.09, 0.08];
+  const step = 0.0058;
+  for (let f = 0; f < 6; f++) {
     const ax = f >> 1;
-    q[ax] = (f & 1 ? -1 : 1) * half[ax];
-    q[(ax + 1) % 3] = u * half[(ax + 1) % 3];
-    q[(ax + 2) % 3] = v * half[(ax + 2) % 3];
-    body.push({ p: at(q[0], q[1], q[2] - 0.05), shade: 0.75 + (0.25 * ((f + 1) % 3)) / 2 });
+    const a1 = (ax + 1) % 3;
+    const a2 = (ax + 2) % 3;
+    const nu = Math.round((2 * half[a1]) / step);
+    const nv = Math.round((2 * half[a2]) / step);
+    for (let iu = 0; iu < nu; iu++)
+      for (let iv = 0; iv < nv; iv++) {
+        const u = ((iu + 0.5) / nu) * 2 - 1;
+        const v = ((iv + 0.5) / nv) * 2 - 1;
+        const q = [0, 0, 0];
+        q[ax] = (f & 1 ? -1 : 1) * half[ax];
+        q[a1] = u * half[a1];
+        q[a2] = v * half[a2];
+        const rim = Math.max(Math.abs(u), Math.abs(v)) > 1 - 2 / Math.min(nu, nv);
+        const lightF = 0.75 + (0.25 * ((f + 1) % 3)) / 2;
+        body.push({ p: at(q[0], q[1], q[2] - 0.05), shade: rim ? lightF * 0.8 : lightF });
+      }
   }
   k.cloud({ count: (body.length * 160000) / k.count + 1, pattern: false }, (r, i) => {
     if (i >= body.length) return null;
-    return { p: body[i].p, size: 0.7, color: shade("#3a3f48", body[i].shade), opacity: 1 };
+    return { p: body[i].p, size: 0.9, jitter: 0, color: shade("#3a3f48", body[i].shade), opacity: 1 }; // prettier-ignore
   });
-  // The lens: a short barrel towards the ball.
+  // The lens: a short barrel towards the ball, closed by its glass.
   const lens = [];
-  for (let i = 0; i < 1500; i++) {
-    const a = rand() * TAU;
-    const z = rand() * 0.16;
-    lens.push(at(0.055 * Math.cos(a), 0.055 * Math.sin(a), 0.07 + z * 0.6));
+  const na = 64;
+  const nz = 16;
+  for (let ia = 0; ia < na; ia++)
+    for (let iz = 0; iz < nz; iz++) {
+      const a = ((ia + 0.5 * (iz % 2)) / na) * TAU;
+      const z = ((iz + 0.5) / nz) * 0.16;
+      lens.push({ p: at(0.055 * Math.cos(a), 0.055 * Math.sin(a), 0.07 + z * 0.6), c: "#1d2026" });
+    }
+  for (let i = 0; i < 220; i++) {
+    const rr = 0.052 * Math.sqrt((i + 0.5) / 220);
+    const a = i * 2.399963;
+    const glint = Math.hypot(rr * Math.cos(a) + 0.02, rr * Math.sin(a) - 0.02) < 0.014;
+    lens.push({ p: at(rr * Math.cos(a), rr * Math.sin(a), 0.07 + 0.096), c: glint ? "#7d8796" : "#2b3a4f" }); // prettier-ignore
   }
   k.cloud({ count: (lens.length * 160000) / k.count + 1, pattern: false }, (r, i) => {
     if (i >= lens.length) return null;
-    return { p: lens[i], size: 0.9, color: "#1d2026", opacity: 1 };
+    return { p: lens[i].p, size: 0.9, jitter: 0, color: lens[i].c, opacity: 1 };
   });
   // Lines of sight: faint dotted lines from the lens to the ball's rim.
   const eye = at(0, 0, 0.18);
