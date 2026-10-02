@@ -213,14 +213,9 @@ Model: Opus 5.5 (default effort), all of it, and its one helper (it found and cu
   - src/motion.js: `info.view` in the drive's info.
 - **Tests from finished lanes this lane changes** (please update; I didn't edit them):
   1. `tests/snda.spec.mjs` (the preload rule): done in #183, with the Operator's authorization.
-  2. `tests/snda.spec.mjs:32` ("every sample is used …"):
-     - `used` reads cue files only from src/packs/balls.js. It should read every pack
-       (`file: "….mp3"` in src/packs/\*.js) and the candidates in tools/sound-review.json. This
-       lane's recipe sounds (book pages, ocean, bubble pops, banana peel) and its board candidates
-       (lungs B and C, the mitochondrion's gas burner) are otherwise "unused".
-     - The folder total is now about 1.11 MB, over its 1 MB cap. Main alone was 987 KB, and this
-       lane adds 24 recordings even after re-encoding the bigger ones at 32 kbps. Suggest a 1.5 MB
-       cap: a recording loads only with its toy, so the cap guards the repo, not a page.
+  2. `tests/snda.spec.mjs` ("every sample is used …"): changed in #192 after Integrator 2's combo D.
+     "Used" now counts every pack's recipe and cue files and the review's candidates, and the folder
+     cap is 1.5 MB (the reasons are in #192).
 - **Honey**: done once Fluids r4 merged. In `src/fluids/runtime.js` the honey's gloops are now
   `0.5 * v` (lava and syrup stay at `0.35 * v`), about 3 dB louder. The Fluid lab's review entry
   keeps the status Fluids gave it.
