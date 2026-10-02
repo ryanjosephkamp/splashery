@@ -75,7 +75,7 @@ the license its author chose; scenes with downloads off are left out. The tables
 search of about 190 subject words (639 downloadable scenes), then a check of each listed scene's
 page. The titles and author notes were read; only a few dozen scenes have been looked at as renders
 (the ones on the private comparison page), so a listed scene may still turn out to be poor, upside
-down or cluttered with background. The comparison page marks which ones were seen.
+down or cluttered with background. The Caveats section lists which ones were rendered.
 
 SuperSplat's license mix in that search (downloadable scenes): CC BY 546, CC BY-NC 41, CC BY-NC-SA
 39, CC BY-NC-ND 6, CC BY-SA 5, CC BY-ND 2.
@@ -502,7 +502,7 @@ Findings:
 | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ | -------------------------------------------------------- |
 | Food and fruit    | Heart Shaped Donut, SUSHI, Seeded Bread Loaf, Cowboy Steak, Stollen, Physalis (SuperSplat, CC BY)                                                   | a cereal-box render (CC BY-NC)                                           | a real apple, banana, pineapple, watermelon              |
 | Gems and minerals | CC BY mineral meshes (tomstevenson, rocksandminerals, florianstephens) plus Model to splats; the SuperSplat "Homemade Crystal Gem" and "alum-stone" | idirectships mineral splats (CC BY-NC); Pixel Lab pack (paid)            | clean gem splats (emerald, ruby, sapphire, opal, pearl)  |
-| Animals           | Fallen owl, penguin, puffin, T. rex toy scan (CC BY); Smithsonian CC0 animals as meshes                                                             | NHM Vienna and British Museum scans; scant3d insect specimens (CC BY-NC) | a clean frog or cat                                      |
+| Animals           | Fallen owl, puffin, T. rex toy scan (CC BY); Smithsonian CC0 animals as meshes                                                                      | NHM Vienna and British Museum scans; scant3d insect specimens (CC BY-NC) | a clean frog, penguin or cat                             |
 | Vehicles          | Eicher tractor, Ferguson 35, BMX, Marin MTB, Vespa, KTM Duke, VW Beetle, Gibb and Hogg locomotive (CC BY)                                           | Prussian T3 steam locomotive (CC BY-NC-SA)                               | a bus, a sports car, a plane that is not military        |
 | Landmarks         | Stonehenge, Pantheon interior, Eiffel Tower seen from the Trocadero, Vilnius bell tower, lighthouses, windmills (CC BY)                             | Stonehenge (gsplat) (CC BY-NC-SA); Google Earth (not allowed)            | Taj Mahal, Colosseum, Big Ben, Statue of Liberty         |
 | Anatomy           | CC0 skulls and a brain model, the Triceratops skull (owner's OK first)                                                                              | AnatomyTOOL NC items                                                     | organs and skin specimens                                |
@@ -526,8 +526,15 @@ For the owner to pick from the private comparison page. In order of payoff:
 
 ## Caveats
 
-- A listed scene's quality was judged from its title and author's note, except the ones rendered on
-  the private comparison page. Check the render before the toy is planned.
+- Twenty-one scenes were rendered in a browser on October 2, 2026 (reduced to 500,000 to 700,000
+  splats where the source was larger). Fourteen are on the private comparison page and look good:
+  the Moon, cherry blossom, donut, sushi, owl, tractor, BMX bicycle, bonsai, mushroom, horse statue,
+  Triceratops skull, globe, hoodoos, plush. Seven rendered badly or were not what the title said:
+  the apple scenes are a head, and the frog and the penguin were cluttered or fuzzy; under automatic
+  framing (Stonehenge was washed out, Preikestolen came out in fragments, the rabbit skull was a
+  gold blob and the brain tractography looked like fur); the last four stay listed but need hand
+  framing, so do not count on them. Every other listed scene's quality was judged from its title and
+  author's note only. Check the render before a toy is planned.
 - Sketchfab lists show the most-liked items, not every item; the lists are samples.
 - Unreachable from this environment: 3d.si.edu and www.si.edu (403), spacedata.copernicus.eu (503),
   the OpenTopography terms page, NASA Earthdata (403), and Commons searches late in the session

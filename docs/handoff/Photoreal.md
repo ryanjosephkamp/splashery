@@ -81,39 +81,60 @@ input, Science and the Integrators); you don't touch their files.
 - Read first: CLAUDE.md (the ground rules), docs/OPERATING.md and CREDITS.md (how we record licenses
   today).
 - Your handoff file: create it. Start it with this brief, word for word, under "## Brief", then keep
-  "## State", "## Notes", "## Known issues" and "## For the Operator" current. Note your model at
-  the top of "## State".
-- Licenses: read each license on the source's live page, not from a listing or a search snippet, and
-  quote the exact license name. If a page is unclear, say "unclear" and put it in "private only".
-- No logos, brand names or insignia on anything you'd propose for the site; nothing that targets
-  real people; no modern real-world firearms.
-- Push your work in progress about every hour and open your draft PR early. Before pushing:
-  `npx prettier --check .` and `node tools/us-english.mjs --diff`.
-- PR: one draft PR against main with the five sections (Summary, Verification, Deviations, Known
-  issues, What was cut), and the model that built it in the Summary.
-- Finish every working turn with a short final message that starts with "READY:" (PR link, the
-  private page's link, anything for the Operator), "WORKING:" (what's left), or "BLOCKED:" (exactly
-  what you need).
-
-## State
+  "## State
 
 Model: Sonnet 5.5 (default effort), plus one Sonnet 5.5 helper for the non-SuperSplat sources.
 
-Started October 2, 2026. In progress: the research document, the private comparison page. Nothing is
-pushed yet.
+Done October 2, 2026:
+
+- `docs/research/PHOTOREAL.md`: sources by shelf, terrain, weather, elements, anatomy and depth
+  models, each license read from the live page or the source's API.
+- The private comparison page (14 captures, each beside our toy's thumbnail):
+  https://claude.ai/artifact/9cT8ieg8etXXRbXECeoPcK (a private artifact; 133 files, about 100 MB).
+  Three of the 14 are NonCommercial (cherry blossom at High Park, the cheap globe and the dog plush)
+  and marked private only on the page.
+- Nothing in the site changed; no capture file is in the repository.
 
 ## Notes
 
 - SuperSplat's scene pages publish each scene's license and download switch as data
   (`/scene/<id>.data`); the `rel="license"` link on the HTML page agrees with it. SuperSplat has no
   CC0 choice: the licenses seen were CC BY, CC BY-SA, CC BY-NC, CC BY-NC-SA, CC BY-ND and CC
-  BY-NC-ND.
+  BY-NC-ND. `https://superspl.at/_root.data?q=<words>` returns the search results (first page).
 - The thumbnails the brief calls `thumbs/` live in `assets/toys/<id>/thumb.webp`.
+- How the page's files were made: each scene's SOG
+  (`d28zzqy0iyovbz.cloudfront.net/<id>/v<n>/meta.json` plus its webp textures) was downloaded; the
+  ones over 12 MB were decimated with `splat-transform <in> -m -H 0 -d <n> out.ply`, then
+  `splat-transform out.ply -H 0 out/meta.json` (actions go after the input file; an action placed
+  before it is ignored, and compressing spherical harmonics on the CPU takes about half an hour).
+  The page loads the unbundled `meta.json` plus textures because the artifact store takes images but
+  not a single `.sog` file.
+- The page loads PlayCanvas 2.22.3 from cdn.jsdelivr.net and the capture files by relative URL, so
+  it needs no capability. I tested it in a headless browser against a local server; I could not open
+  it in the claude.ai viewer, so the viewer's own limits are untested.
+- Three lessons for PACKS.md or the Studio docs: the splat-transform action order above, the
+  SuperSplat `.data` and search routes, and that SuperSplat has no CC0 licenses.
 
 ## Known issues
 
-(none yet)
+- The page was not opened in the claude.ai viewer. If a capture shows "Could not load", the viewer's
+  frame may block the relative fetches; the files are all in the artifact's file list.
+- Seven candidates rendered badly or were mislabeled (see the Caveats in PHOTOREAL.md); they are not
+  on the page.
+- Unreachable: 3d.si.edu (403), the Copernicus license text, OpenTopography terms, NASA Earthdata.
 
 ## For the Operator
 
-(to fill in)
+- **The page link** (private to the owner's account):
+  https://claude.ai/artifact/9cT8ieg8etXXRbXECeoPcK. The 14 captures: Moon (Artemis II data), cherry
+  blossom, donut, sushi, owl, tractor, BMX bicycle, bonsai, mushroom, horse statue, Triceratops
+  skull, globe, hoodoos, plush.
+- **Findings the owner will want first**: the Depth Anything V2 Base and Large models are CC BY-NC
+  (so Photo to 3D cannot use them); Depth Anything 3 Small and Base are Apache-2.0 with ONNX builds.
+  Real tornadoes do not exist as captures (only a lab vortex of unclear data license). Real gem
+  splats are paid or NonCommercial. USGS height data (public domain) is the best terrain route.
+- **Asks for the owner**: (1) the Splataverse dataset (CC0, CC BY and CC BY-SA Sketchfab splats, 4
+  TB) is gated behind his Hugging Face account; (2) three captures were made from someone else's
+  video (Stonehenge, Preikestolen, the mud volcanoes), so ask before any goes on the site; (3)
+  anatomy items all wait for his OK.
+- For lane N15 (elements) and N27 (depth models), the relevant sections are 6 and 8 of PHOTOREAL.md.
