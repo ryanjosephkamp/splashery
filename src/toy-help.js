@@ -1554,14 +1554,14 @@ export const TOY_HELP = {
   },
   "smlm-microscope": {
     howTo:
-      "Tap a spot to zoom in to single molecules; tap again to zoom out. Open your own file in the Toy tab.",
+      "Pinch or scroll to zoom down to single molecules. Tap to see a thin slice at one depth.",
     about:
-      "A light microscope can't see things smaller than about 250 nanometers, but super-resolution microscopy (STORM, PALM, PAINT) gets around that: dye molecules blink on a few at a time, and each blink is pinned down to within a few nanometers. The result is a table of positions, each with its uncertainty, which is already a Gaussian. So each one here is a splat exactly as wide as its precision.\n\nThe sample is a 12 µm square of a cell's microtubules and clathrin pits, a subset of a record by Christophe Leterrier on ShareLoc.XYZ (CC BY 4.0). Tap to dive in about 60 times: each fuzzy spot is then one blink of one molecule. Scientists use ThunderSTORM and napari for this; this toy is for looking and sharing, not for measuring.",
+      "A light microscope can't see things smaller than about 250 nanometers, but super-resolution microscopy (STORM, PALM, PAINT) gets around that: dye molecules blink on a few at a time, and each blink is pinned down to within a few nanometers. The result is a table of positions, each with its uncertainty, which is already a Gaussian. So each one here is a splat exactly as wide as its precision.\n\nThe sample is a 12 µm square of a cell's microtubules and clathrin pits, a subset of a record by Christophe Leterrier on ShareLoc.XYZ (CC BY 4.0). Pinch or scroll to zoom in about 150 times: each fuzzy spot is then one blink of one molecule. Tap for a slice 200 nanometers thick at the depth you tap. Scientists use ThunderSTORM and napari for this; this toy is for looking and sharing, not for measuring.",
   },
   "galaxy-box": {
-    howTo: "Tap the gas to zoom in; tap again to zoom out.",
+    howTo: "Pinch or scroll to zoom into the gas. Tap to peel away the hot gas.",
     about:
-      "Galaxy simulations follow gas as millions of particles, each with a bit of mass and a smoothing length, the size its gas is spread over. This is the gas of a Milky Way–mass galaxy today from the FIRE-2 simulations (CC BY 4.0), a subset cut to a box round it. Each particle is the Gaussian with the same spread as the simulation's smoothing kernel, colored by temperature (cold blue, hot orange and red) and brighter where denser, so the spiral arms stand out.\n\nTap to zoom into the gas; Only the cold gas peels away the hot. This is an approximation: the simulation's kernel isn't a Gaussian, and blended splats aren't the column density that tools like SPLASH and yt compute. It shows the shape of the gas, not measurements.",
+      "Galaxy simulations follow gas as millions of particles, each with a bit of mass and a smoothing length, the size its gas is spread over. This is the gas of a Milky Way–mass galaxy today from the FIRE-2 simulations (CC BY 4.0), a subset cut to a box round it. Each particle is the Gaussian with the same spread as the simulation's smoothing kernel, colored by temperature (cold blue, hot orange and red) and brighter where denser, so the spiral arms stand out.\n\nPinch or scroll to zoom far into the gas; tap to peel away the hot gas. This is an approximation: the simulation's kernel isn't a Gaussian, and blended splats aren't the column density that tools like SPLASH and yt compute. It shows the shape of the gas, not measurements.",
   },
 
   // ---- Fluid lab (lane Fluids) ---------------------------------------------------------

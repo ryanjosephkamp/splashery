@@ -248,8 +248,8 @@ export class MotionDriver {
   }
 
   // ctx: { time, dt, motion, info: { center, half, radius }, cameraPos,
-  // reducedMotion }. Returns the uniforms.
-  compute({ time: clock, dt, motion, info, cameraPos }) {
+  // cameraDistance (to the point it looks at), reducedMotion }. Returns the uniforms.
+  compute({ time: clock, dt, motion, info, cameraPos, cameraDistance }) {
     // UI r3: while a tap effect is paused, its controls and clocks hold still
     // at the moment it paused (a whole-toy move from the Toy tab carries on).
     this.unseen = null; // this frame draws it
@@ -310,7 +310,10 @@ export class MotionDriver {
     // site's Sound (src/sound.js): a toy that plays its own audio checks
     // sound.enabled (the speaker button; embeds keep it off) and plays through
     // sound.audio() and sound.master (the site's limiter).
-    const about = { time, R, tap: this.tap, taps: this.taps, data: this.ctx?.kit?.data, sound: this.sound }; // prettier-ignore
+    // Sound C: info.view is the camera's turn about the toy (radians about
+    // the vertical), so a toy can tell when a drag spins it (the spinning top).
+    const view = cameraPos && info?.center ? Math.atan2(cameraPos[0] - info.center[0], cameraPos[2] - info.center[2]) : null; // prettier-ignore
+    const about = { time, R, tap: this.tap, taps: this.taps, data: this.ctx?.kit?.data, sound: this.sound, view }; // prettier-ignore
     if (this.recipe?.drive) this.recipe.drive(kt, this.state, drive, about);
     this.taps = []; // UI r4
     if (drive.body) {
@@ -334,7 +337,8 @@ export class MotionDriver {
       // The four channels of the morph, band and fade kinds (always set).
       const m = drive.morph || [];
       u.uSpMorph = [m[0] ?? 0, m[1] ?? 0, m[2] ?? 0, m[3] ?? 0];
-      u.uSpCam = [cameraPos[0], cameraPos[1], cameraPos[2], 0];
+      // w (Science r2): how far the camera is from the point it looks at.
+      u.uSpCam = [cameraPos[0], cameraPos[1], cameraPos[2], cameraDistance ?? 0];
       const scale = this.ctx?.transform?.scale ?? 1;
       u["uSpParts[0]"] = packParts(this.partsData, this.ctx?.parts || [], drive.parts, scale);
       // Always set (unset tokens are shown in place): the uniform keeps the
