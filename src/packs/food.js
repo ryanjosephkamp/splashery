@@ -3343,7 +3343,8 @@ export const RECIPES = {
         k.param(
           (u, v) => {
             const a = u * TAU;
-            const r = (0.3 + 0.66 * v) * (1 + 0.05 * v * Math.sin(a * 7));
+            // (From the middle out: real lettuce has no hole. Lane Fix7.)
+            const r = (0.02 + 0.94 * v) * (1 + 0.05 * v * Math.sin(a * 7));
             const y = 0.5 + v * v * (0.035 * Math.sin(a * 13 + v * 4) - 0.02);
             return [Math.sin(a) * r, y, Math.cos(a) * r];
           },
@@ -3397,7 +3398,10 @@ export const RECIPES = {
         part: topBun,
         flat: 0.22,
         interior: 0.1,
-        core: crumb,
+        // Lane Fix7: inside the crust, the crust's own brown (pale crumb
+        // there showed through the crust close up, as a white flash); the
+        // crumb shows only on the cut face underneath.
+        core: (c) => (c.p[1] < 0.68 ? crumb(c) : shade("#c98a45", 0.95)),
         color: (c) => {
           if (c.n[1] < -0.85) return crumb(c);
           const col = mix("#e0a24e", "#b7671f", smoothstep(0.7, 1.12, c.p[1]));
@@ -3411,17 +3415,30 @@ export const RECIPES = {
         [0.4, 1.11],
         [0, 1.14],
       ]);
-      k.cloud({ share: 0.02, size: 0.8, part: topBun, pattern: false }, (rand) => {
-        const y = 0.8 + rand() * 0.33;
+      // Lane Fix7: about 160 real seeds, each a small flat teardrop of a few
+      // splats lying on the crust. (There were thousands of round white
+      // streaks, which piled up into a white flash close up.)
+      const SEEDS = 160;
+      const PER = 7;
+      const seeds = [];
+      const srand = k.rand;
+      for (let i = 0; i < SEEDS; i++) {
+        const y = 0.8 + srand() * 0.33;
         const r = domeAt(y);
-        const a = rand() * TAU;
-        const p = [Math.sin(a) * r, y + 0.006, Math.cos(a) * r];
+        const a = srand() * TAU;
+        const p = [Math.sin(a) * r, y + 0.004, Math.cos(a) * r];
         const n = unit([p[0], 0.9, p[2]]);
+        seeds.push({ p, n, d: tangentDir(srand, n), col: mix("#f6e7c1", "#e2c891", srand()) });
+      }
+      k.cloud({ count: SEEDS * PER, size: 0.8, part: topBun, pattern: false }, (rand, i) => {
+        const sd = seeds[Math.floor(i / PER) % SEEDS];
+        const f = (i % PER) / (PER - 1) - 0.5;
         return {
-          p,
-          dir: tangentDir(rand, n),
-          stretch: 1.9,
-          color: mix("#fbf0d2", "#e8d2a0", rand()),
+          p: add(sd.p, mul(sd.d, f * 0.034)),
+          n: sd.n,
+          flat: 0.3,
+          size: 0.8 * (1 - 0.5 * Math.abs(f) - 0.3 * f),
+          color: sd.col,
           opacity: 1,
         };
       });
@@ -3722,10 +3739,14 @@ export const RECIPES = {
         if (!on || s < bt.t0) return { base: bt.home };
         const u = s - bt.t0;
         const back = TACO_BACK + bt.lag;
-        const fall = bounce(u, bt.h, 0.4, 12, 0.3);
+        // Lane Fix7: it drops out of the opened break with a little drift,
+        // lands with a small bounce, and slides and tumbles on to a stop
+        // (friction), instead of flying sideways out through the shell.
+        const fall = bounce(u, bt.h, 0.15, 12, 0.25);
         const f = Math.min(1, u / bt.t1);
-        let p = [bt.home[0] + bt.dx * f, bt.floor + fall.y, bt.home[2] + bt.dz * f];
-        let q = quatAxisAngle(bt.axis, bt.spin * f);
+        const slide = 0.25 * f + 0.75 * easeOut(band(u, bt.t1, bt.t1 + 0.45));
+        let p = [bt.home[0] + bt.dx * slide, bt.floor + fall.y, bt.home[2] + bt.dz * slide];
+        let q = quatAxisAngle(bt.axis, bt.spin * (0.6 * f + 0.4 * easeOut(band(u, bt.t1, bt.t1 + 0.45)))); // prettier-ignore
         if (s >= back) {
           const g = smooth(band(s, back, back + 0.4));
           p = hopTo(p, bt.home, g, 0.2);
@@ -3794,8 +3815,9 @@ export const RECIPES = {
         return quatRotate(q, [x, y, z]);
       };
       const byX = (p) => (p[0] < xb ? L : Rt);
-      k.cloud({ share: 0.16, size: 1.5, flat: 0.6 }, (rand) => {
-        const p = inU(rand, -0.4, -0.02, 0.8);
+      // (The meat kept off the walls, so none shows through the shell: Fix7.)
+      k.cloud({ share: 0.16, size: 1.25, flat: 0.6 }, (rand) => {
+        const p = inU(rand, -0.4, -0.05, 0.62);
         const n = randDir(rand);
         const l = Math.max(0, dot(n, LIGHT));
         return {
@@ -3910,13 +3932,14 @@ export const RECIPES = {
       const floor = -0.01;
       bits.forEach((bt, i) => {
         const a = 0.2 + (i / bits.length) * 2.6 + 0.3 * k.rand();
-        const r = 0.25 + 0.3 * k.rand();
-        bt.dx = Math.cos(a) * r * 0.9;
-        bt.dz = 0.35 + Math.sin(a) * r * 0.6;
+        const r = 0.15 + 0.2 * k.rand();
+        bt.dx = Math.cos(a) * r * 0.6;
+        bt.dz = 0.2 + Math.sin(a) * r * 0.6;
         bt.h = bt.home[1] - floor - 0.03;
         bt.floor = floor + 0.03;
-        bt.t0 = 0.18 + 0.035 * i;
-        bt.t1 = landings(bt.h, 0.4, 12, 0.3, 1)[0];
+        // (Once the break has opened, so they fall through the gap.)
+        bt.t0 = 0.3 + 0.04 * i;
+        bt.t1 = landings(bt.h, 0.15, 12, 0.25, 1)[0];
         bt.axis = randDir(k.rand);
         bt.spin = 1 + 2 * k.rand();
         bt.lag = 0.03 * (bits.length - i);
@@ -4419,6 +4442,10 @@ export const RECIPES = {
         r: 0.29,
       }));
       const inBite = (p) => teeth.some((t) => len(sub(p, t.at)) < t.r);
+      // Lane Fix7: near the bite, the flesh inside the apple is left out (the
+      // bitten surface covers it), so none pokes out round the bite's rim
+      // as white specks on the skin.
+      const nearBite = (p) => teeth.some((t) => len(sub(p, t.at)) < t.r + 0.05);
       const coreColor = (c) => {
         const [x, y, z] = c.p;
         const r = Math.hypot(x, z);
@@ -4459,7 +4486,7 @@ export const RECIPES = {
           jitter: 0.015,
           flat: 0.2,
           interior: 0.12,
-          core: (c) => (inBite(c.p) ? null : coreColor(c)),
+          core: (c) => (nearBite(c.p) ? null : coreColor(c)),
           color: (c) => (inBite(c.p) ? null : skinColor(c)),
         },
       );
@@ -4517,6 +4544,9 @@ export const RECIPES = {
             if (teeth.some((o2) => o2 !== t && len(sub(c.p, o2.at)) < o2.r * 0.999)) return null;
             const edge = Math.hypot(c.p[0], c.p[2]) / rAt(c.p[1]);
             if (edge > 0.975) return keep(skinColor(c));
+            // Smaller toward the rim, so the pale flesh stops at the skin's
+            // edge instead of spilling over it (lane Fix7).
+            const rim = 1 - 0.45 * smoothstep(0.9, 0.975, edge);
             // Deeper in, a little yellower; lit as a hollow (inward normal),
             // with a shadow under the top edge.
             const depth = clamp((1 - edge) / 0.25, 0, 1);
@@ -4524,7 +4554,7 @@ export const RECIPES = {
             let col = mix("#fbf4dc", "#eedcaa", 0.6 * depth + 0.3 * (0.5 + 0.5 * fibre));
             col = mix(col, "#d9c07e", 0.35 * smoothstep(0.93, 0.975, edge));
             const l = dot(mul(c.n, -1), LIGHT);
-            return keep(shade(col, 0.86 + 0.2 * l - 0.08 * depth));
+            return keep(shade(col, 0.86 + 0.2 * l - 0.08 * depth), rim);
           },
         });
       }
@@ -4660,6 +4690,11 @@ export const RECIPES = {
         const os = mul(bn.away, sep);
         const place = (p) => add(add(quatRotate(qs, sub(p, bn.neck)), bn.neck), os);
         out.tokens[bn.body] = { base: bn.neck, quat: qs, offset: os };
+        // The pale insides (the fruit and the inner peel) are their own
+        // pieces, riding with the skin but shown only while it is open
+        // (lane Fix7: at rest they glinted through the skin as specks).
+        const open = on && s > bn.t0 - 0.02 && s < 3.6 ? 1 : 0;
+        out.tokens[bn.fruit] = { ...out.tokens[bn.body], visible: open };
         bn.strips.forEach((st, j) => {
           const t0 = bn.t0 + 0.12 * j;
           const fa = on ? easeOut(band(s, t0, t0 + 0.5)) * (1 - close) : 0;
@@ -4669,6 +4704,8 @@ export const RECIPES = {
           out.tokens[st.a] = { base: st.hingeA, quat: quatMul(qs, qa), offset: sub(place(st.hingeA), st.hingeA) }; // prettier-ignore
           const hb = add(quatRotate(qa, sub(st.hingeB, st.hingeA)), st.hingeA);
           out.tokens[st.b] = { base: st.hingeB, quat: quatMul(qs, quatMul(qa, qb)), offset: sub(place(hb), st.hingeB) }; // prettier-ignore
+          out.tokens[st.ia] = { ...out.tokens[st.a], visible: open };
+          out.tokens[st.ib] = { ...out.tokens[st.b], visible: open };
         });
       });
       cuesAt(
@@ -4709,10 +4746,12 @@ export const RECIPES = {
         col = shade(col, 1 - 0.12 * edge);
         return glossy(c, col, 0.35, 20, 0.74, 0.38);
       };
+      // Lane Fix7: side by side as in a real hand, just touching (they
+      // used to cross, the back ones' tips passing through the front one).
       const bananas = [
-        { rot: [0, -24, -6], pos: [0, 0, -0.18] },
+        { rot: [0, -4, -6], pos: [0, -0.02, -0.36] },
         { rot: [0, 4, 4], pos: [0, 0.02, 0] },
-        { rot: [0, 30, 12], pos: [0, 0.05, 0.18] },
+        { rot: [0, 12, 12], pos: [0, 0.03, 0.36] },
       ];
       // Each banana is pieces: its body (the skin down to BANANA_HINGE and
       // the fruit) and its peel beyond, three strips of two pieces each
@@ -4744,7 +4783,9 @@ export const RECIPES = {
       const fruit = k.param(
         (u, v) => {
           const t = th - 0.02 + v * (0.97 - th + 0.02);
-          return around(t, u * TAU, rad(t) * 0.84).p;
+          // (Well inside the skin, so none of it shows through as white
+          // specks: lane Fix7.)
+          return around(t, u * TAU, rad(t) * 0.78).p;
         },
         { grid: 64, normal: (u, v) => around(th + v * (1 - th), u * TAU, 1).d },
       );
@@ -4767,13 +4808,20 @@ export const RECIPES = {
         const toW = (p) => add(bn.pos, quatRotate(q, p));
         const dirW = (v) => quatRotate(q, v);
         const body = tok++;
+        const inside = tok++;
         const piece = (token) => ({ quat: q, pos: bn.pos, kind: "token", params: [token, 0] });
         k.add(stub, {
           ...piece(body),
           flat: 0.22,
           color: (c) => skinAt(c, c.v * th, c.u * TAU),
         });
-        k.add(fruit, { ...piece(body), flat: 0.3, weight: 1.2, pattern: false, color: fruitColor });
+        k.add(fruit, {
+          ...piece(inside),
+          flat: 0.3,
+          weight: 1.2,
+          pattern: false,
+          color: fruitColor,
+        });
         const strips = [];
         for (let j = 0; j < 3; j++) {
           const a0 = (j / 3) * TAU + 0.35;
@@ -4781,28 +4829,35 @@ export const RECIPES = {
           const am = (a0 + a1) / 2;
           const ta = tok++;
           const tb = tok++;
+          const ia = tok++;
+          const ib = tok++;
           const ha = around(th, am, rad(th));
           const hb = around(tm, am, rad(tm));
           strips.push({
             a: ta,
             b: tb,
+            ia,
+            ib,
             hingeA: toW(ha.p),
             hingeB: toW(hb.p),
             axisA: unit(dirW(cross(ha.f.t, ha.d))),
             axisB: unit(dirW(cross(hb.f.t, hb.d))),
           });
-          for (const [t0, t1, token] of [
-            [th, tm, ta],
-            [tm, 1, tb],
+          for (const [t0, t1, token, inner] of [
+            [th, tm, ta, ia],
+            [tm, 1, tb, ib],
           ]) {
+            // (Denser, so the pale inside never shows through: lane Fix7.)
             k.add(skinPatch(t0, t1, a0, a1, 1, false), {
               ...piece(token),
               flat: 0.22,
+              weight: 1.6,
               color: (c) => skinAt(c, t0 + c.v * (t1 - t0), a0 + c.u * (a1 - a0)),
             });
-            k.add(skinPatch(t0, t1, a0 + 0.04, a1 - 0.04, 0.93, true), {
-              ...piece(token),
-              flat: 0.22,
+            k.add(skinPatch(t0, t1, a0 + 0.04, a1 - 0.04, 0.88, true), {
+              ...piece(inner),
+              flat: 0.12,
+              size: 0.75,
               weight: 0.8,
               pattern: false,
               color: (c) => keep(lit(c, mix("#f3e6c0", "#e8d7a6", c.rand() * 0.5), 0.84, 0.25)),
@@ -4817,7 +4872,7 @@ export const RECIPES = {
             { ...piece(tb), flat: 0.3, weight: 2, color: (c) => lit(c, "#3a2716") },
           );
         }
-        list.push({ body, neck: toW(arc(0)), strips, ...moves[i] });
+        list.push({ body, fruit: inside, neck: toW(arc(0)), strips, ...moves[i] });
         k.reach(add(toW(arc(1)), [0, 0.3, 0]));
         k.reach(add(toW(arc(0.9)), [0, -0.45, moves[i].away[2]]));
       });
