@@ -184,25 +184,20 @@ export const TOY_HELP = {
   },
 
   // ---- Shapes -------------------------------------------------------------------------
+  torus: {
+    howTo: "Tap it to spin it on its edge. Dress it as a donut, bagel or swim ring in the Toy tab.",
+    about:
+      "A torus is the shape of a ring: a circle swept around a line beside it, like a hoop made of tube. Donuts, bagels, swim rings and bicycle inner tubes are all tori. In topology, the math of shapes that can stretch but not tear, a torus has exactly one hole, so a coffee mug with its handle counts as one too.\n\nTap it and it pops up onto its edge and wobbles around like a coin spun on a table, leaning lower and circling faster until it drops flat. Real rings and coins do this: as one leans lower, its low point runs around faster, so a settling coin whirs quicker just before it stops. Under Dress it as in the Toy tab, pick a plain torus, a donut, a bagel or a swim ring.",
+  },
   blob: {
     howTo: "Tap it to split it into three. Make a shape of your own in the Make tab.",
     about:
       "A wobbly jelly blob, built by the computer from a few rules rather than from photos. Thousands of splats, tiny soft blobs of color, are scattered over a lumpy round shape, and a pattern called noise gives it its bumps and swirls of candy color.\n\nTap it and it splits into three smaller blobs that wobble apart, then merge back with a jelly bounce. Real jelly wobbles because it is mostly water, held in a loose net of gelatin strands. In the Make tab you can pick a shape, a palette and a seed to build a blob of your own.",
   },
-  donut: {
-    howTo: "Tap it to break it apart and put it back together.",
-    about:
-      "A frosted donut with sprinkles, built by the computer from a simple ring shape. To a mathematician, a ring like this is a torus. In topology, the math of shapes that can stretch but not tear, a donut and a coffee mug count as the same shape, because each has exactly one hole.\n\nTap it and it snaps into chunks that fly apart and tumble, showing the dough inside, while the sprinkles spray off. Then it all flies back together. The Make tab builds shapes like this from a shape, a palette and a seed.",
-  },
   knot: {
     howTo: "Tap it to make it twist and writhe.",
     about:
       "A glowing tube tied in a trefoil knot, the simplest true knot. Tie a knot in a string and join the two ends, and you get a loop that can never be untangled without cutting it; the trefoil crosses itself three times. Mathematicians study knots like this in a field called knot theory.\n\nTap it and waves of swelling loops run around the tube, lifting and twisting it as it glows pink, then it settles back into its trefoil. Real neon signs glow because electricity makes the gas inside the glass tube shine; pure neon glows red-orange.",
-  },
-  planet: {
-    howTo: "Tap it to spin the clouds and sweep night across it.",
-    about:
-      "A tiny, made-up planet with blue seas, green and sandy land and white clouds, built by the computer from a sphere and a palette of planet colors. It is a tribute to the very first version of Splashery.\n\nTap it and the clouds race once around the planet while a band of night sweeps across it. Day and night happen because a planet spins: at any moment, the half facing its star has day and the other half has night. Earth turns once about every 24 hours.",
   },
 
   // ---- Balls ----------------------------------------------------------------------------
@@ -388,6 +383,11 @@ export const TOY_HELP = {
     howTo: "Tap it to race the clouds around it.",
     about:
       "Neptune is the eighth and farthest planet from the Sun, a deep blue ice giant. It has the strongest winds in the solar system, faster than 2,000 kilometers an hour. It was the first planet found by math: astronomers worked out where it must be before they saw it in 1846.\n\nTap it and belts of white cloud race around it twice while a band with a dark storm drifts the other way. The spacecraft Voyager 2 saw a great dark storm like this when it flew past in 1989. Neptune takes about 165 years to go around the Sun once.",
+  },
+  planet: {
+    howTo: "Tap it to sweep night across it. Pick a planet under Planet in the Toy tab.",
+    about:
+      "A tiny, made-up planet built by the computer from a sphere and a palette of planet colors: blue seas, green land and white clouds for Earth, rusty deserts and white polar caps for Mars, gray craters for the Moon, and banded storms for Jupiter and Neptune. It is a tribute to the very first version of Splashery.\n\nTap it and a band of night sweeps across it while any clouds race once around it. Day and night happen because a planet spins: at any moment, the half facing its star has day and the other half has night. Earth turns once about every 24 hours, Jupiter in under 10. Pick Earth, Mars, the Moon, Jupiter or Neptune under Planet in the Toy tab.",
   },
   "aurora-planet": {
     howTo: "Tap it for a burst of bright auroras.",
@@ -614,11 +614,6 @@ export const TOY_HELP = {
     howTo: "Tap to close the oyster; tap again to open it.",
     about:
       "A pearl is a gem made by a living animal. When a bit of grit or other irritant gets inside an oyster or mussel, the animal coats it with layer after layer of nacre, or mother-of-pearl, the same shiny stuff that lines its shell. The thin layers give a pearl its soft glow, called luster.\n\nThis oyster starts open, with its pearl inside. Tap it to close the shell; tap again to open it. A pearl can take years to grow, and most pearls sold today are grown on pearl farms.",
-  },
-  "crystal-ball": {
-    howTo: "Tap it to swirl the mist and raise a glowing sign.",
-    about:
-      "A crystal ball is a ball of clear glass or quartz. In old stories, fortune tellers gaze into one to see visions of what is to come. A real clear ball also works like a lens: look through it and you see the room behind it, small and upside down.\n\nThis one is filled with glowing mist. Tap it and the mist whips around and thins, and a glowing sign rises out of it, turns once and fades: a star, a moon or a heart in turn. Pick the color of the mist in the Toy tab.",
   },
 
   // ---- Body -----------------------------------------------------------------------------
@@ -893,6 +888,11 @@ export const TOY_HELP = {
     howTo: "Tap it and the two in front hop up onto the stack.",
     about:
       "A macaron is a small French sweet: two light, round cookies made of ground almonds, egg whites and sugar, stuck together with a creamy filling. The tops are smooth and domed, and each cookie has a frilly edge at the bottom, called the foot, that rises as it bakes.\n\nTap it and the two macarons in front hop, one after the other, up onto the stack and land with a soft tap. The tower of five sways, then they hop back down. Pick a pastel mix or one flavor in the Toy tab.",
+  },
+  donut: {
+    howTo: "Tap it to break it apart and put it back together.",
+    about:
+      "A frosted donut with sprinkles, built by the computer from a simple ring shape. To a mathematician, a ring like this is a torus. In topology, the math of shapes that can stretch but not tear, a donut and a coffee mug count as the same shape, because each has exactly one hole.\n\nTap it and it snaps into chunks that fly apart and tumble, showing the dough inside, while the sprinkles spray off. Then it all flies back together. The Make tab builds shapes like this from a shape, a palette and a seed.",
   },
   "gummy-bear": {
     howTo: "Drag the bear to stretch it; let go and it springs back. Tap to squish it.",
@@ -1202,6 +1202,11 @@ export const TOY_HELP = {
     howTo: "Tap it to cast a spell: sparks spiral out and runes circle the orb.",
     about:
       "A wizard's orb is a glass ball from stories of magic, where a wizard gazes into it to see faraway places or the future. This one sits on a stand, with glowing magic swirling inside. Runes, the letters of old alphabets once used in northern Europe, are often carved on magic things in stories.\n\nTap it to cast a spell: a flash of light fills the glass, the swirl spins up, sparks spiral out in five arms, and a ring of runes rises and circles the orb before it fades. Pick the color of the magic in the Toy tab.",
+  },
+  "crystal-ball": {
+    howTo: "Tap it to swirl the mist and raise a glowing sign.",
+    about:
+      "A crystal ball is a ball of clear glass or quartz. In old stories, fortune tellers gaze into one to see visions of what is to come. A real clear ball also works like a lens: look through it and you see the room behind it, small and upside down.\n\nThis one is filled with glowing mist. Tap it and the mist whips around and thins, and a glowing sign rises out of it, turns once and fades: a star, a moon or a heart in turn. Pick the color of the mist in the Toy tab.",
   },
 
   // ---- Animals --------------------------------------------------------------------------
@@ -1535,6 +1540,25 @@ export const TOY_HELP = {
     howTo: "Tap to send a pulse through it; tap again for another. Pick a Field in the Toy tab.",
     about:
       "Nearly 300,000 splats, and the graphics chip works out where every one of them is, and its color, again every frame. Each splat only knows its own two numbers, u and v; a small program turns them and the time into a place. That is why so many splats can move smoothly at once.\n\nThe galaxy's stars each follow an oval orbit, turned a little more the farther out it is, so the ovals crowd into two spiral arms that stay while every star keeps moving. The ocean is four waves added together, each splat tilted to the water's slope, and the knot is a flow along a knotted tube. Tap to send a bright ring out through the galaxy, drop a stone in the sea where you tap, or push the flow once more around the knot. Each tap adds its own: tap the sea in a few places and the rings cross.",
+  },
+
+  // ---- Science (lane Science) -----------------------------------------------------------
+  "thermal-ellipsoids": {
+    howTo:
+      "Tap to make the atoms jiggle. Zoom in, then tap an atom to look there. Open your own CIF in the Toy tab.",
+    about:
+      "X-ray crystallography measures each atom as a place and a spread: heat makes it jiggle, so it is smeared into a small cloud, a 3D Gaussian written in the file as six numbers, the displacement tensor U. Each atom here is exactly that Gaussian; its long axis is the way it moves most.\n\nCrystallographers draw it as an ellipsoid that holds the atom 50% of the time (as ORTEP and Mercury do); the dark lines are its principal planes. Hydrogens are placed by rule, so they are small spheres. The samples are aspirin at room temperature (Crystallography Open Database) and crambin, a small protein (Protein Data Bank). Jiggle moves each atom through places drawn from its own Gaussian, slowed down a trillion times. For looking and sharing, not for measuring.",
+  },
+  "smlm-microscope": {
+    howTo:
+      "Tap a spot to zoom in to single molecules; tap again to zoom out. Open your own file in the Toy tab.",
+    about:
+      "A light microscope can't see things smaller than about 250 nanometers, but super-resolution microscopy (STORM, PALM, PAINT) gets around that: dye molecules blink on a few at a time, and each blink is pinned down to within a few nanometers. The result is a table of positions, each with its uncertainty, which is already a Gaussian. So each one here is a splat exactly as wide as its precision.\n\nThe sample is a 12 µm square of a cell's microtubules and clathrin pits, a subset of a record by Christophe Leterrier on ShareLoc.XYZ (CC BY 4.0). Tap to dive in about 60 times: each fuzzy spot is then one blink of one molecule. Scientists use ThunderSTORM and napari for this; this toy is for looking and sharing, not for measuring.",
+  },
+  "galaxy-box": {
+    howTo: "Tap the gas to zoom in; tap again to zoom out.",
+    about:
+      "Galaxy simulations follow gas as millions of particles, each with a bit of mass and a smoothing length, the size its gas is spread over. This is the gas of a Milky Way–mass galaxy today from the FIRE-2 simulations (CC BY 4.0), a subset cut to a box round it. Each particle is the Gaussian with the same spread as the simulation's smoothing kernel, colored by temperature (cold blue, hot orange and red) and brighter where denser, so the spiral arms stand out.\n\nTap to zoom into the gas; Only the cold gas peels away the hot. This is an approximation: the simulation's kernel isn't a Gaussian, and blended splats aren't the column density that tools like SPLASH and yt compute. It shows the shape of the gas, not measurements.",
   },
 
   // ---- Fluid lab (lane Fluids) ---------------------------------------------------------

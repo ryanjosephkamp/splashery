@@ -225,7 +225,9 @@ function parsePdb(text) {
 // strings and ;-delimited text fields. Reads line by line without splitting
 // the whole file, and stops early when token() returns false, so a huge
 // file costs little once the reader has what it needs.
-function eachCifToken(text, token) {
+// Exported for lane Science's crystal reader (src/science/crystal.js; a small,
+// additive change of September 30, 2026).
+export function eachCifToken(text, token) {
   const src = String(text);
   let field = null; // lines of a ;-delimited text field being read
   for (let start = 0; start < src.length; ) {
