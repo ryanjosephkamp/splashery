@@ -43,21 +43,21 @@ Proposals below are suggestions; the owner may change them.
   Pebbles, Kelp, Lava lamp, Ice swan, Tornado, Rainbow, Iceberg, Waterfall, Ocean wave, Ice cream,
   Watermelon, Jelly, Cupcake, Lollipop, Candy cane, Macarons, Donut, Gummy bear, Pretzel, Croissant,
   Sushi, Taco, Coffee, Apple, Bananas, Orange, Kiwi, Pineapple, Cherries, Grapes, Avocado, Building
-  bricks, Rubber duck, Newton's cradle, Puzzle cube, Kite, Chess set, Lorenz attractor, Möbius
-  strip, Klein bottle, Menger sponge, Hypercube, Torus knot, Gyroid, Mandelbulb, Seashell spiral,
-  Graph plotter, Surface plotter, Circle and waves, Fourier circles, Pythagoras proof, Splat
+  bricks, Rubber duck, Newton's cradle, Puzzle cube, Spring toy, Kite, Chess set, Lorenz attractor,
+  Möbius strip, Klein bottle, Menger sponge, Hypercube, Torus knot, Gyroid, Mandelbulb, Seashell
+  spiral, Graph plotter, Surface plotter, Circle and waves, Fourier circles, Pythagoras proof, Splat
   equation, Fountain pen, Water bottle, Soda can, Running shoe, Hoodie, Sunglasses, Baseball cap,
-  Heraldic shield, Crown, Wizard's orb, Crystal ball, Jellyfish, School of fish, Pufferfish,
-  Nautilus, Snail, Octopus, Sea urchin, Frog, Snowman, Fireworks, Decorated tree, Diya, Acoustic
-  guitar, Snare drum, Xylophone, Toy piano, Grand piano, Upright piano, Harpsichord, Electronic
-  keyboard, Hot-air balloon, Bus, Jet airliner, Sailboat, Submarine, Bicycle, Eiffel Tower,
-  Washington Monument, Pyramids of Giza, Twisting supertall, Statue of Liberty, White House, Leaning
-  Tower of Pisa, Colosseum, Parthenon, Stonehenge, Big Ben, Taj Mahal, Castle, Pagoda, Windmill,
-  Perceptron, Multilayer perceptron, Neural network, Convolutional network, Recurrent network,
-  Transformer, Looped transformer, Diffusion model, Gradient descent, Gaussian splatting, Word
-  vectors, Sorting machine, Half adder, Turing machine, Difference engine, Enigma machine, Bombe,
-  Your book, Photo album, Picture frame, Room echo meter, Splat mirror, Model to splats, Photo to
-  3D, Video to 3D, Splat field, Fluid lab, Screen.
+  Heraldic shield, Bow and target, Crown, Wizard's orb, Crystal ball, Jellyfish, School of fish,
+  Pufferfish, Nautilus, Snail, Octopus, Sea urchin, Frog, Snowman, Fireworks, Decorated tree, Diya,
+  Acoustic guitar, Snare drum, Xylophone, Toy piano, Grand piano, Upright piano, Harpsichord,
+  Electronic keyboard, Hot-air balloon, Bus, Jet airliner, Sailboat, Submarine, Bicycle, Eiffel
+  Tower, Washington Monument, Pyramids of Giza, Twisting supertall, Statue of Liberty, White House,
+  Leaning Tower of Pisa, Colosseum, Parthenon, Stonehenge, Big Ben, Taj Mahal, Castle, Pagoda,
+  Windmill, Perceptron, Multilayer perceptron, Neural network, Convolutional network, Recurrent
+  network, Transformer, Looped transformer, Diffusion model, Gradient descent, Gaussian splatting,
+  Word vectors, Sorting machine, Half adder, Turing machine, Difference engine, Enigma machine,
+  Bombe, Your book, Photo album, Picture frame, Room echo meter, Splat mirror, Model to splats,
+  Photo to 3D, Video to 3D, Splat field, Fluid lab, Screen.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -1395,7 +1395,8 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Chopsticks pick up a roll, dip it and put it back.
   - Improved: E5: the chopsticks lift off the board as if held by an invisible hand, pinch a roll
     (click), carry it to a new dish of soy sauce and dip it twice, set it back (click) and lie down
-    again (about 4.7 s).
+    again (about 4.7 s). Physics: a tap on a piece sends the chopsticks to that piece (either nigiri
+    or any maki); they dip it and put it back.
   - Sound: Wooden chopstick clicks.
 - **Taco** (`taco`). Now: tap: Break in half. Plan: keep.
   - Owner: Break in half to show what is inside. Really cool taco.
@@ -1531,6 +1532,8 @@ Proposals below are suggestions; the owner may change them.
   - Touch or drag interaction (phase F).
 - **Spring toy** (`spring-toy`). Now: tap: Make it walk. Plan: keep.
   - Owner: Basically perfect.
+  - Improved: Physics (Hands-on): pull its top coils up or sideways and it stretches coil by coil;
+    let go and it springs back, wobbles and walks on.
   - Sound: A metal coil spring's ringing sproing, not a rubber band; real CC0 recordings now
     (spring-toy-boing.mp3), with the synthesized sound as a fallback.
 - **Kite** (`kite`). Now: tap: Gust of wind. Plan: keep.
@@ -1790,6 +1793,8 @@ Proposals below are suggestions; the owner may change them.
   - Sound: The clang and the gleam's shimmer, no crackling clicks.
 - **Bow and target** (`bow-and-target`). Now: tap: Shoot. Plan: keep.
   - Owner: Unbelievably impressive.
+  - Improved: Physics (Hands-on): pull the arrow back on the string and let go; it flies under
+    gravity, faster the further it was drawn, and sticks in the target or the grass.
   - Sound: A real bowstring's thump and the arrow's hiss, not a guitar-like note; the hit is
     unchanged; real CC0 recordings now (bow-and-target-release.mp3), with the synthesized sound as a
     fallback.

@@ -1237,7 +1237,7 @@
       "owner": "Chopsticks lifted by an invisible hand pick up the sushi.",
       "effect": "Chopsticks pick up a roll, dip it and put it back.",
       "sound": "Wooden chopstick clicks.",
-      "improved": "E5: the chopsticks lift off the board as if held by an invisible hand, pinch a roll (click), carry it to a new dish of soy sauce and dip it twice, set it back (click) and lie down again (about 4.7 s)."
+      "improved": "E5: the chopsticks lift off the board as if held by an invisible hand, pinch a roll (click), carry it to a new dish of soy sauce and dip it twice, set it back (click) and lie down again (about 4.7 s). Physics: a tap on a piece sends the chopsticks to that piece (either nigiri or any maki); they dip it and put it back."
     },
     "taco": {
       "v": "keep",
@@ -1368,7 +1368,8 @@
     "spring-toy": {
       "v": "keep",
       "owner": "Basically perfect.",
-      "sound": "A metal coil spring's ringing sproing, not a rubber band; real CC0 recordings now (spring-toy-boing.mp3), with the synthesized sound as a fallback."
+      "sound": "A metal coil spring's ringing sproing, not a rubber band; real CC0 recordings now (spring-toy-boing.mp3), with the synthesized sound as a fallback.",
+      "improved": "Physics (Hands-on): pull its top coils up or sideways and it stretches coil by coil; let go and it springs back, wobbles and walks on."
     },
     "kite": {
       "v": "keep",
@@ -1532,7 +1533,8 @@
     "bow-and-target": {
       "v": "keep",
       "owner": "Unbelievably impressive.",
-      "sound": "A real bowstring's thump and the arrow's hiss, not a guitar-like note; the hit is unchanged; real CC0 recordings now (bow-and-target-release.mp3), with the synthesized sound as a fallback."
+      "sound": "A real bowstring's thump and the arrow's hiss, not a guitar-like note; the hit is unchanged; real CC0 recordings now (bow-and-target-release.mp3), with the synthesized sound as a fallback.",
+      "improved": "Physics (Hands-on): pull the arrow back on the string and let go; it flies under gravity, faster the further it was drawn, and sticks in the target or the grass."
     },
     "trebuchet": {
       "v": "keep",

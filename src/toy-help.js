@@ -920,9 +920,9 @@ export const TOY_HELP = {
       "A burger is a round patty of ground meat, or of vegetables, cooked and served in a sliced bun with toppings. The name comes from the city of Hamburg, in Germany. This one has a sesame bun, a patty, a slice of cheese, lettuce and tomato.\n\nTap it to spread out the layers in the air, one above the other, so every part shows, and tap again to stack them back up. Engineers call a picture like this an exploded view: it shows how the parts of a machine fit together without taking the real thing apart.",
   },
   sushi: {
-    howTo: "Tap it: the chopsticks pick up a piece and dip it in soy sauce.",
+    howTo: "Tap a piece: the chopsticks pick that one up, dip it in soy sauce and put it back.",
     about:
-      "Sushi is a Japanese dish of rice mixed with a little vinegar and sugar, served with fish, vegetables or egg. This board has nigiri, a pillow of rice with a slice of fish draped on top, and maki, rice and a filling rolled up in a sheet of dried seaweed called nori and cut into rounds.\n\nTap it and the chopsticks lift off the board as if held by an invisible hand, pinch a piece with a click, carry it to a little dish of soy sauce and dip it twice, then set it back and lie down again.",
+      "Sushi is a Japanese dish of rice mixed with a little vinegar and sugar, served with fish, vegetables or egg. This board has nigiri, a pillow of rice with a slice of fish draped on top, and maki, rice and a filling rolled up in a sheet of dried seaweed called nori and cut into rounds.\n\nTap a piece and the chopsticks lift off the board as if held by an invisible hand, pinch that piece with a click, carry it to a little dish of soy sauce and dip it twice, then set it back and lie down again.",
   },
   taco: {
     howTo: "Tap it to break the shell in half; then it closes up again.",
@@ -1023,9 +1023,9 @@ export const TOY_HELP = {
       "A twisting puzzle cube: 26 small cubes around a hidden core, with one color on each of its six faces. Each turn moves a whole row or column of nine cubes, and the puzzle is to bring every face back to one color.\n\nHere every little cube is its own piece, and the cube keeps track of each turn, so you can really solve it: drag across a face to turn that row or column. A tap scrambles a solved cube, or turns a scrambled one back to solved, one layer at a time, and solving it by hand earns a hop and a chime. The cube has about 43 quintillion arrangements, yet any of them can be solved in 20 moves or fewer.",
   },
   "spring-toy": {
-    howTo: "Tap it to hurry it along; it flips end over end faster.",
+    howTo: "Pull its top coils up or sideways; let go and it springs back. Tap to hurry it along.",
     about:
-      "A spring toy is a long, loose coil of metal or plastic that can walk down stairs by itself. Set one end on a lower step and it flips over, end over end, as each coil tips across in turn and the weight moves from one end to the other. It was invented in the 1940s by an engineer who saw a spring fall off a shelf and keep moving.\n\nThis one walks by itself, its coils flipping over from one side to the other. Tap it to hurry it along. Pick a rainbow, metal or pastel coil in the Toy tab.",
+      "A spring toy is a long, loose coil of metal or plastic that can walk down stairs by itself. Set one end on a lower step and it flips over, end over end, as each coil tips across in turn and the weight moves from one end to the other. It was invented in the 1940s by an engineer who saw a spring fall off a shelf and keep moving.\n\nThis one walks by itself, its coils flipping over from one side to the other. Pull its top coils up or to the side and it gathers into a stack and stretches out, coil by coil; let go and it springs back down and wobbles, then walks on. Tap it to hurry it along. Pick a rainbow, metal or pastel coil in the Toy tab.",
   },
   kite: {
     howTo: "Tap it for a gust of wind: the kite loops and the tail whips.",
@@ -1168,9 +1168,9 @@ export const TOY_HELP = {
       "A heraldic shield carries a coat of arms, a painted design that showed who a knight was, even when a helmet hid the face. Heraldry has its own words: the background is the field, and a shape on it is a charge. A chevron is an upside-down V, a bend is a stripe from corner to corner, a saltire is an X-shaped cross, and per pale means split down the middle.\n\nTap it and it takes an unseen knock: it jolts and rocks, sparks spray off its iron rim, and a gleam sweeps across the emblem. Pick one of seven designs and the colors of the field and the charge in the Toy tab.",
   },
   "bow-and-target": {
-    howTo: "Tap to shoot an arrow; tap again to go back.",
+    howTo: "Pull the arrow back on the string and let go to shoot it. Tap to shoot too.",
     about:
-      "Archery is the sport of shooting arrows with a bow at a target. Drawing back the string bends the bow's springy limbs, which store the energy of your pull; when the string is let go, the limbs spring back and send the arrow flying. A target has rings of color, with gold in the middle, and the closer to the center, the more points.\n\nTap to shoot: the string draws back, the arrow flies across and lands in the target, and a fresh arrow waits on the string. Tap again to go back. Archery was first part of the Olympic Games in 1900.",
+      "Archery is the sport of shooting arrows with a bow at a target. Drawing back the string bends the bow's springy limbs, which store the energy of your pull; when the string is let go, the limbs spring back and send the arrow flying. A target has rings of color, with gold in the middle, and the closer to the center, the more points.\n\nPull the arrow back on the string, up or down a little to aim, and let go: the further you pull, the faster it flies, and it sticks where it lands, in the target or the grass. Tap to shoot too: the string draws back, the arrow flies across and lands in the target, and a fresh arrow waits on the string. Tap again to go back. Archery was first part of the Olympic Games in 1900.",
   },
   trebuchet: {
     howTo: "Tap it to launch: the weight drops and the long arm flings a stone.",
