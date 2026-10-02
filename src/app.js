@@ -1558,14 +1558,20 @@ class App {
   // A live recording of the stage while someone plays, with the site's sound.
   // The Share tab starts it; the pill on the stage shows the time, stops it and
   // then saves (or, on a phone, shares) the video. 60 seconds at most.
-  startRecord() {
-    if (this.recording || this.busy) return;
+  async startRecord() {
+    if (this.recording || this.recordWait || this.busy) return;
     const player = this.player;
     const stage = player.stage;
     // The site's sound (its context is made now, in the tap, so a sound
     // switched on while recording is in the video too).
     const ctx = this.sound.audio?.();
     const audio = ctx && this.sound.master ? { ctx, node: this.sound.master } : null;
+    // On a phone the sheet closes first, so the take starts at the stage's
+    // own size (two frames for the new size to reach the canvas).
+    this.ui.collapseSheet?.();
+    this.recordWait = true;
+    await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
+    this.recordWait = false;
     // A steady size for the encoder: no drop in resolution while dragging,
     // and at most 1920 pixels on the long side.
     const saved = { adaptive: stage.adaptive, cap: stage.pixelCap };
@@ -1600,7 +1606,6 @@ class App {
     this.recording = rec;
     this.recorded = null;
     this.ui.setRecord({ state: "rec", seconds: 0, limit: RECORD_LIMIT });
-    this.ui.collapseSheet?.(); // on a phone: the toy, to play with
     stage.requestRender();
     rec.done
       .then(({ blob, ext, seconds }) => {
