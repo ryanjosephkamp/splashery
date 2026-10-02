@@ -294,3 +294,70 @@ test.describe("the Song landscape, r3", () => {
     }
   });
 });
+
+// ---- The room echo meter: real reasons (item 10) -----------------------------------
+test.describe("the room echo meter's reasons", () => {
+  // A clap in a room: decaying noise over a steady background, as hop energies.
+  const HOP = 240;
+  function clap({ rt = 0.5, rangeDb = 40, bg = 0.01, extra = null, seed = 7 } = {}) {
+    let s = seed;
+    const rnd = () => ((s = (s * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff) * 2 - 1;
+    const peak = bg * 10 ** (rangeDb / 20);
+    const e = [];
+    for (let i = 0; i + HOP <= RATE * 2.5; i += HOP) {
+      let sum = 0;
+      for (let j = 0; j < HOP; j++) {
+        const t = (i + j) / RATE;
+        const v = peak * rnd() * Math.exp((-6.91 * t) / rt) + bg * rnd() + (extra ? extra(t) * rnd() : 0); // prettier-ignore
+        sum += v * v;
+      }
+      e.push(sum / HOP);
+    }
+    return { e: Float32Array.from(e), noise: (bg * bg) / 3 };
+  }
+
+  test("an ordinary clap in an ordinary room measures, down to about 20 dB above the background", async () => {
+    const { measureDecay } = await import("../src/live/analysis.js");
+    for (const rt of [0.3, 0.5, 0.8])
+      for (const rangeDb of [22, 25, 30, 40, 50]) {
+        const { e, noise } = clap({ rt, rangeDb });
+        const r = measureDecay(e, HOP / RATE, noise);
+        expect(r.ok, `${rt} s at ${rangeDb} dB`).toBe(true);
+        expect(Math.abs(r.rt60 - rt) / rt).toBeLessThan(0.12);
+        expect(r.method).toBe(rangeDb >= 45 ? "T30" : rangeDb >= 35 ? "T20" : "T10");
+      }
+  });
+
+  test("each failure says why, with a hint", async () => {
+    const { measureDecay, DECAY_HINTS } = await import("../src/live/analysis.js");
+    const hop = HOP / RATE;
+    // Too quiet: a soft clap in a silent room, 15 dB above it.
+    let c = clap({ rangeDb: 15, bg: 0.0005 });
+    expect(measureDecay(c.e, hop, c.noise).why).toBe("quiet");
+    // Too noisy: a loud background.
+    c = clap({ rangeDb: 15, bg: 0.05 });
+    expect(measureDecay(c.e, hop, c.noise).why).toBe("noisy");
+    // Too loud: the analyser counted full-scale samples.
+    c = clap();
+    expect(measureDecay(c.e, hop, c.noise, { clipped: 0.1 }).why).toBe("clipped");
+    // Interrupted: a second loud sound 0.4 s in.
+    c = clap({ rt: 0.8, extra: (t) => (t > 0.4 && t < 0.6 ? 0.3 : 0) });
+    expect(measureDecay(c.e, hop, c.noise).why).toBe("interrupted");
+    // Too short: a sound that stops at once.
+    c = clap({ rt: 0.01, rangeDb: 40 });
+    expect(measureDecay(c.e, hop, c.noise).why).toBe("short");
+    for (const why of ["quiet", "noisy", "clipped", "interrupted", "short", "uneven"])
+      expect(DECAY_HINTS[why].length).toBeGreaterThan(20);
+  });
+
+  test("the panel shows the reason and the input panel the hint", async ({ page }) => {
+    await open(page, "room-echo");
+    const shown = await page.evaluate(async () => {
+      const m = await import("/src/packs/live.js");
+      m.ECHO.result = { why: "clipped", rangeDb: 50 };
+      m.ECHO.sample = false;
+      return m.echoText();
+    });
+    expect(shown).toEqual({ big: "Too loud", small: "Clap softer or farther" });
+  });
+});
