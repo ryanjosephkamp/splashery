@@ -927,7 +927,7 @@
       "owner": "Lane Chemistry, from the owner's notes on the atoms toys (September 29, 2026).",
       "effect": "Tap an element's tile and its atom rises out of the table and builds itself: every proton and neutron of its commonest isotope, then the electrons filling their shells in order. Tap the atom and an electron jumps up a shell and falls back with a flash in the element's strongest visible line (NIST).",
       "sound": "A soft whoosh up and a soft thud as the atom rises; a whoosh down and a soft thud as it lowers (no clicks).",
-      "improved": "Chemistry: all 118 elements in the standard layout, colored by family; the atom rises (5 s), a tap on it sends an electron up a shell and back (3.2 s), a tap on the table lowers it."
+      "improved": "Chemistry: all 118 elements in the standard layout, colored by family; the atom rises (5 s), a tap on it sends an electron up a shell and back (3.2 s), a tap on the table lowers it. Fix6: a tile tap switches with no loading overlay; a tap on its own tile lowers the atom; a tap on the empty board starts a tour of all 118 elements (about 2 s each, the tile lit; by atomic number or shuffled), and any tap stops it."
     },
     "diamond": {
       "v": "keep",
@@ -1703,7 +1703,7 @@
       "owner": "Looks fine; add the music.",
       "effect": "Keep the strum; strings vibrate visibly.",
       "sound": "A real strummed chord progression (synth plucks).",
-      "improved": "C2: the strum rocks the guitar about 13 degrees with a small hop, the strings bend and vibrate one after another, and rings of light pulse out of the soundhole. Music is Phase D."
+      "improved": "C2: the strum rocks the guitar about 13 degrees with a small hop, the strings bend and vibrate one after another, and rings of light pulse out of the soundhole. Music is Phase D. Fix6: smooth lacquered wood (the top, sunburst, back, ribs and neck placed evenly with no color noise or fine grain), a clean three-ring rosette, and thin strings drawn as clean lines."
     },
     "drum": {
       "v": "keep",
@@ -2058,7 +2058,7 @@
       "owner": "The owner's own idea on the Toy Ideas page (lane Machines A).",
       "effect": "An Enigma cipher machine in its wooden box: tap and it types your message, each key going down, the rotors stepping like an odometer and the coded letter lighting on the lampboard; a second tap types the coded text back and gets the message again (about 4 s).",
       "sound": "Heavy key clacks, the ratchet of the rotors stepping, and a faint click as each lamp lights.",
-      "improved": "Machines A: kit-built (no CC0 or CC BY scan found), rotors I, II, III with reflector B and a plugboard (the historical wirings and double step), 26 keys and a moving lamp glow, the operator's pad on the lid (coded letters in red, decoded in blue); your own message in the Toy tab."
+      "improved": "Machines A: kit-built (no CC0 or CC BY scan found), rotors I, II, III with reflector B and a plugboard (the historical wirings and double step), 26 keys and a moving lamp glow, the operator's pad on the lid (coded letters in red, decoded in blue); your own message in the Toy tab. Fix6: tap a key (or type on a keyboard) to code your own letters one by one; a tap off the keys decodes them; a tap on the pad gives a clean sheet (the pad is a live picture)."
     },
     "bombe": {
       "v": "keep",
@@ -2128,6 +2128,20 @@
       "effect": "Your photo rebuilt as splats in 3D by an on-device depth model: each splat takes the photo's color at its place and sits at its depth, and the surface is cut where the depth jumps, so a near object stands as its own layer. The picture starts flat; the tap raises its depth layer by layer while the toy sways (about 3 s), and a second tap lays it flat. Depth sets how deep the relief is; Layers pulls the depth bands apart.",
       "sound": "The photo's paper lifting as the depth comes up and settling as it lies flat (no wind, no whoosh).",
       "improved": "Photo to 3D: Depth Anything V2 Small (Apache-2.0, quantized, 27 MB) on ONNX Runtime Web (MIT), both loaded only when a photo is opened; an even grid of splats sized to their neighbors on the same surface, cut at depth jumps; three CC0 samples (a forest path, a cobbled street, a still life)."
+    },
+    "room-echo": {
+      "v": "keep",
+      "owner": "The owner's approval of lane Live input (\"live input go\", September 30, 2026; labs only).",
+      "effect": "A splat room with a wooden floor and three walls. Tap “Use my microphone” and clap once: rings of sound spread across the floor from the clap, a new one every 70 ms for as long as the room still rings, each as bright as the sound was at that moment (on a dB scale), and the walls glow as they arrive; the rings run at half speed. The page measures the room's reverberation time (RT60, Schroeder's backward integral, T20 or T10) and shows it on the back wall, or says plainly when the room is too noisy. A tap claps in a sample room (0.8 s) or the last room measured.",
+      "sound": "A hand clap that rings as long as the room (silent while the microphone listens).",
+      "improved": "Live input: the first toy fed by the microphone, turned on only by its button; the measurement is tested on synthetic decays of 0.4, 0.8 and 1.6 s (within 10%)."
+    },
+    "splat-mirror": {
+      "v": "keep",
+      "owner": "The owner's approval of lane Live input (\"live input go\", September 30, 2026; labs only).",
+      "effect": "A framed picture of splats. Tap “Use my camera” and it shows you as in a mirror; the depth model (Depth Anything V2 Small, in a worker, loaded only after the tap) works out how near each part is as often as the device allows, and the picture rises into a relief you can turn. Before the camera is on it shows a still life with its depth. A tap flattens the relief into its frame and the next raises it again (about 1.4 s); the picture itself keeps still.",
+      "sound": "A soft rising whoosh as the depth comes up; a falling one as it flattens.",
+      "improved": "Live input: relief splats (a new kind) take their color and lift from a canvas drawn each frame, so the picture moves without a rebuild."
     },
     "screen": {
       "v": "keep",

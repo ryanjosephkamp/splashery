@@ -1210,9 +1210,10 @@ const EN_ROTOR_C = [0, 0.02, -0.72];
 // The timeline of a tap: each letter's key goes down (the rotors step as
 // it goes), the lamp lights, the key comes up; then the operator turns the
 // rotors back to the start.
-function enTimes(n) {
+function enTimes(n, from = [0, 0, 0]) {
   const dt = Math.min(0.5, 6.4 / Math.max(1, n));
-  const t0 = 0.2;
+  // The rotors are turned back to the start first, if they are not there.
+  const t0 = from.some((p) => p) ? 0.6 : 0.2;
   const end = t0 + n * dt;
   return { dt, t0, end, back: end + 0.25, done: end + 1.05 };
 }
@@ -1225,7 +1226,11 @@ function buildEnigma(k, o) {
   const enc = mach.type(msg, start);
   const coded = enc.map((e) => AZ[e.lamp]).join("");
   const dec = mach.type(coded, start);
-  k.data = { msg, coded, runs: [enc, dec], mode: 0, m: {}, shown: [0, 0], run: null };
+  EN_KEYS.length = 0;
+  k.data = { msg, coded, runs: [enc, dec], mach, m: {}, run: null, key: null, home: null };
+  k.data.pad = { plain: msg, coded: "", dec: "", typed: false };
+  k.data.rest = [0, 0, 0];
+  k.data.view = [msg, "", ""];
   // The box: a wooden case with a dark crackle-finish top plate.
   const W = 1.62;
   const D = 1.72;
@@ -1359,53 +1364,163 @@ function buildEnigma(k, o) {
   const padH = 0.74;
   const pcy = lidH / 2 + 0.02;
   panelBox(k, [padW, padH, 0.01], [0, pcy, lz + 0.03], (c) => keep(lit("#f3ecd8", c.n, { amb: 0.85, dif: 0.2, spec: 0 })), { front: 1.4 }, { edge: 0.006 }); // prettier-ignore
-  const px = 0.022;
-  const lines = [
-    ["MESSAGE", msg, null],
-    ["CODED", coded, 0],
-    ["DECODED", dec.map((e) => AZ[e.lamp]).join(""), 1],
-  ];
-  lines.forEach(([label, str, ch], li) => {
-    const y = pcy + padH / 2 - 0.16 - li * 0.235;
-    text(k, label, [-padW / 2 + 0.06, y + 0.105, lz + 0.05], 0.007, "#8a6d4c", { weight: 8, align: "left" }); // prettier-ignore
-    [...str].forEach((l, i) => {
-      const x = -padW / 2 + 0.08 + i * px * 6 + (px * 5) / 2;
-      const opts = ch === null ? {} : { kind: "fade", params: [(i + 0.5) / str.length, -0.3 / str.length], channel: ch }; // prettier-ignore
-      text(k, l, [x, y, lz + 0.05], px * 0.92, ch === 1 ? "#1d4f8a" : ch === 0 ? "#8a1d1d" : "#1f1c18", { weight: 10, ...opts }); // prettier-ignore
-    });
+  // The writing on the pad is a live picture (the recipe's `screen`), so it
+  // shows whatever is typed: the message, the coded letters as the lamps
+  // light them and the decoded ones.
+  k.add(enSheet(padW - 0.03, padH - 0.03), {
+    pos: [0, pcy, lz + 0.04],
+    kind: "screen",
+    params: (c) => [c.u, c.v],
+    flat: 0.08,
+    even: true,
+    weight: 6,
+    size: 1.05,
+    jitter: 0,
+    pattern: false,
+    color: () => keep("#f3ecd8"),
   });
+  EN_PAD.y = pcy;
+  EN_PAD.z = lz;
 }
+
+// A flat sheet facing the front (+z), with u across and v down from its top.
+function enSheet(w, h) {
+  return {
+    area: w * h,
+    thick: 0.004,
+    dims: 2,
+    sample(rand) {
+      const u = rand();
+      const v = rand();
+      return { p: [(u - 0.5) * w, (0.5 - v) * h, 0], n: [0, 0, 1], u, v, face: 2 };
+    },
+  };
+}
+
+// The pad's picture: three ruled lines (the message, the coded letters and
+// the decoded ones) in five-letter groups, as operators wrote them.
+function enDrawPad(g, view) {
+  const [W, H] = [EN_PAD.w, EN_PAD.h];
+  const [plain, coded, dec] = view;
+  g.fillStyle = "#f3ecd8";
+  g.fillRect(0, 0, W, H);
+  g.textBaseline = "top";
+  const rows = [
+    ["MESSAGE", plain, "#1f1c18"],
+    ["CODED", coded, "#8a1d1d"],
+    ["DECODED", dec, "#1d4f8a"],
+  ];
+  rows.forEach(([label, str, col], i) => {
+    const y = 12 + i * 104;
+    g.fillStyle = "#8a6d4c";
+    g.font = "bold 22px sans-serif";
+    g.fillText(label, 26, y);
+    g.fillStyle = "#cdbb9c";
+    g.fillRect(22, y + 88, W - 44, 3);
+    const groups = (str.match(/.{1,5}/g) || []).join(" ");
+    let size = 46;
+    g.font = `bold ${size}px "Courier New", Courier, monospace`;
+    const wide = g.measureText(groups).width;
+    if (wide > W - 52) {
+      size = Math.floor((size * (W - 52)) / wide);
+      g.font = `bold ${size}px "Courier New", Courier, monospace`;
+    }
+    g.fillStyle = col;
+    g.fillText(groups, 26, y + 34);
+  });
+  g.fillStyle = "#9c825f";
+  g.font = "italic 21px sans-serif";
+  g.fillText("Tap the keys to type. Tap this pad for a clean sheet.", 26, H - 34);
+}
+
+// Keys tapped on the machine or typed on a keyboard, waiting their turn.
+const EN_KEYS = [];
+// The pad's picture size, where it sits (for a tap on it), and the shown
+// Enigma's data (its pad's lines are in data.view).
+const EN_PAD = { w: 640, h: 364, y: 0.51, z: -1.14, live: null };
+const EN_KEY_T = 0.36;
+const enBlank = () => ({ plain: "", coded: "", dec: "", typed: true });
+
+// The shortest turn from one rotor setting to another, part of the way.
+const enTurn = (from, to, f) =>
+  from.map((p, j) => {
+    let d = mod26(to[j] - p);
+    if (d > 13) d -= 26;
+    return p + d * f;
+  });
 
 function driveEnigma(t, c, out, info) {
   const data = info?.data;
   if (!data) return;
+  EN_PAD.live = data;
   const m = data.m;
+  out.cues = out.cues || [];
+  // A tap on the pad: a clean sheet, and the rotors turned back to the start.
+  const cl = since(c.clear, 0.3);
+  if (cl >= 0 && (m.clS === undefined || m.clS < 0 || cl < m.clS)) enClear(data, t, out);
+  m.clS = cl;
+  // A tap anywhere else: type the stored message, or decode what is on the
+  // pad (the stored message's code, or the letters you typed).
   const s = since(c.go, EN.E);
-  // A new tap: type the message (or, the next time, the coded text).
   if (s >= 0 && (m.lastS === undefined || m.lastS < 0 || s < m.lastS)) {
+    enFlushKeys(data);
     if (data.run) enCommit(data);
-    data.run = { mode: data.mode, list: data.runs[data.mode] };
-    if (data.mode === 0) data.shown = [0, 0];
+    data.run = enNextRun(data);
+    data.home = null;
     m.cue = -1;
   }
   m.lastS = s;
+  // A key tapped or typed: it finishes a running message at once, then the
+  // keys play one after another.
+  if (EN_KEYS.length && data.run) enCommit(data);
+  if (data.key && t - data.key.t0 >= data.key.dt) enKeyDone(data);
+  if (!data.key && EN_KEYS.length) enKeyStart(data, EN_KEYS.shift(), t, out);
   let pose = null;
   if (data.run) {
-    const T = enTimes(data.run.list.length);
+    const T = enTimes(data.run.list.length, data.run.from);
     if (s < 0 || s >= T.done) enCommit(data);
     else pose = enPose(data.run, T, s);
   }
+  if (data.key) {
+    const kk = data.key;
+    const f = clamp01((t - kk.t0) / kk.dt);
+    const lampOn = f > 0.22 && f < 0.85;
+    if (f > 0.22 && !kk.lit) {
+      kk.lit = true;
+      data.pad.coded += AZ[kk.lamp];
+      out.cues.push({ voice: "click", f: 4200, decay: 0.3, vol: 0.25 });
+    }
+    const rotors = enTurn(kk.from, kk.to, ease(band(f, 0, 0.25)));
+    pose = { key: kk.k, down: Math.sin(Math.PI * band(f, 0, 0.8)), lamp: lampOn ? kk.lamp : -1, rotors }; // prettier-ignore
+  }
+  if (!pose && data.home) {
+    const f = ease(band(t - data.home.t0, 0, 0.6));
+    if (f >= 1) data.home = null;
+    else pose = { key: -1, down: 0, lamp: -1, rotors: enTurn(data.home.from, [0, 0, 0], f) };
+  }
+  // The pad's lines: a running message shows its letters as they light.
+  const pad = data.pad;
+  let view = [pad.plain, pad.coded, pad.dec];
+  if (data.run && pose) {
+    const r = data.run;
+    const lit = r.list
+      .slice(0, pose.count)
+      .map((e) => AZ[e.lamp])
+      .join("");
+    view = r.mode === 0 ? [r.plain, lit, ""] : [r.plain, r.coded, lit];
+  }
+  data.view = view;
+  const n = Math.max(1, view[0].length);
+  out.morph = [view[1].length / n, view[2].length / n, 0, 0];
   out.tokens = [];
   for (let i = 0; i < 26; i++) out.tokens[i] = { offset: [0, pose && pose.key === i ? -0.03 * pose.down : 0, 0], visible: 1 }; // prettier-ignore
   const g0 = enLampPos("A");
   const lampAt = pose && pose.lamp >= 0 ? enLampPos(AZ[pose.lamp]) : g0;
   out.tokens[26] = { offset: [lampAt[0] - g0[0], 0, lampAt[2] - g0[2]], visible: pose && pose.lamp >= 0 ? 1 : 0 }; // prettier-ignore
-  const pos = pose ? pose.rotors : [0, 0, 0];
-  ["rotorL", "rotorM", "rotorR"].forEach((n, i) => (out.parts[n] = { angle: pos[i] * EN.step }));
-  const shown = pose ? pose.shown : data.shown;
-  out.morph = [shown[0], shown[1], 0, 0];
+  const pos = pose ? pose.rotors : data.rest;
+  ["rotorL", "rotorM", "rotorR"].forEach((nm, i) => (out.parts[nm] = { angle: pos[i] * EN.step }));
   // The lamp's glow and the turned rotors are sorted again where they are.
-  const key = pose ? `${pose.lamp}:${pos.map((v) => Math.round(v * 4)).join(",")}` : "rest";
+  const key = pose ? `${pose.lamp}:${pos.map((v) => Math.round(v * 4)).join(",")}` : `rest:${data.rest}`; // prettier-ignore
   out.resort = key !== m.sortKey;
   out.resortPose = out.resort;
   m.sortKey = key;
@@ -1413,8 +1528,9 @@ function driveEnigma(t, c, out, info) {
   // and a faint click as each lamp lights.
   if (data.run && s >= 0) {
     if (m.cuesFor !== data.run) {
-      const T = enTimes(data.run.list.length);
+      const T = enTimes(data.run.list.length, data.run.from);
       const list = [];
+      if (T.t0 > 0.3) list.push([0.05, { voice: "ratchet", f: 1200, n: 4, rate: 10, vol: 0.4 }]);
       data.run.list.forEach((e, i) => {
         const a = T.t0 + i * T.dt;
         list.push([a, { voice: "clack", f: 420, decay: 0.5, vol: 0.8 }]);
@@ -1428,37 +1544,92 @@ function driveEnigma(t, c, out, info) {
     cuesAt(m, "cue", s, m.cues, out);
   }
 }
+// What the next tap off the keys does: decode the letters typed on the pad,
+// or the stored message's code; otherwise type the stored message.
+function enNextRun(data) {
+  const pad = data.pad;
+  const from = data.rest.slice();
+  if (pad.typed && pad.coded && !pad.dec) {
+    const list = data.mach.type(pad.coded, [0, 0, 0]);
+    return { mode: 1, list, plain: pad.plain, coded: pad.coded, typed: true, from };
+  }
+  if (!pad.typed && pad.coded === data.coded && !pad.dec)
+    return { mode: 1, list: data.runs[1], plain: data.msg, coded: data.coded, typed: false, from }; // prettier-ignore
+  return { mode: 0, list: data.runs[0], plain: data.msg, coded: data.coded, typed: false, from };
+}
 // Where the keys, lamp, rotors and pad are at time s of a tap.
 function enPose(run, T, s) {
   const n = run.list.length;
-  const shownCh = run.mode;
-  const base = run.mode === 0 ? [0, 0] : [1, 0];
+  if (s < T.t0) {
+    // The rotors are first turned back to the start, if they are not there.
+    const rotors = enTurn(run.from, [0, 0, 0], ease(band(s, 0, T.t0 - 0.05)));
+    return { key: -1, down: 0, lamp: -1, rotors, count: 0 };
+  }
   if (s < T.end) {
     const i = Math.max(0, Math.min(n - 1, Math.floor((s - T.t0) / T.dt)));
-    const f = s < T.t0 ? 0 : clamp01((s - T.t0) / T.dt - i);
+    const f = clamp01((s - T.t0) / T.dt - i);
     const e = run.list[i];
     const prev = i > 0 ? run.list[i - 1].pos : [0, 0, 0];
     const stepF = ease(band(f, 0.0, 0.25));
     const rotors = [0, 1, 2].map((j) => prev[j] + mod26(e.pos[j] - prev[j]) * stepF);
-    const lampOn = s >= T.t0 && f > 0.22 && f < 0.85;
-    const shown = base.slice();
-    shown[shownCh] = (i + (f > 0.22 ? 1 : 0)) / n;
-    if (s < T.t0) shown[shownCh] = 0;
-    return { key: s < T.t0 ? -1 : e.key, down: Math.sin(Math.PI * band(f, 0, 0.8)), lamp: lampOn ? e.lamp : -1, rotors, shown }; // prettier-ignore
+    const lampOn = f > 0.22 && f < 0.85;
+    return { key: e.key, down: Math.sin(Math.PI * band(f, 0, 0.8)), lamp: lampOn ? e.lamp : -1, rotors, count: i + (f > 0.22 ? 1 : 0) }; // prettier-ignore
   }
   // Turned back to the start: each rotor turns the short way home.
-  const last = run.list[n - 1].pos;
   const b = ease(band(s, T.back, T.done - 0.1));
-  const rotors = last.map((p) => (p > 13 ? p + (26 - p) * b : p * (1 - b)));
-  const shown = base.slice();
-  shown[shownCh] = 1;
-  return { key: -1, down: 0, lamp: -1, rotors, shown };
+  return { key: -1, down: 0, lamp: -1, rotors: enTurn(run.list[n - 1].pos, [0, 0, 0], b), count: n }; // prettier-ignore
 }
 function enCommit(data) {
-  if (!data.run) return;
-  data.shown = data.run.mode === 0 ? [1, 0] : [1, 1];
-  data.mode = 1 - data.run.mode;
+  const r = data.run;
+  if (!r) return;
+  const lit = r.list.map((e) => AZ[e.lamp]).join("");
+  data.pad = r.mode === 0 ? { plain: r.plain, coded: lit, dec: "", typed: r.typed } : { plain: r.plain, coded: r.coded, dec: lit, typed: r.typed }; // prettier-ignore
+  data.rest = [0, 0, 0];
   data.run = null;
+}
+// One key: the rotors step, then the lamp lights and the letter is written.
+// A key after a finished message (or a full pad) starts a clean sheet, with
+// the rotors set back to the start.
+function enKeyStart(data, k, t, out) {
+  let start = data.rest;
+  if (!data.pad.typed || data.pad.dec || data.pad.plain.length >= EN_MAX) {
+    data.pad = enBlank();
+    start = [0, 0, 0];
+  }
+  const to = data.mach.step(start);
+  data.pad.plain += AZ[k];
+  const dt = EN_KEYS.length ? 0.22 : EN_KEY_T;
+  data.key = { k, lamp: data.mach.letter(k, to), from: data.rest.slice(), to, t0: t, dt, lit: false }; // prettier-ignore
+  data.rest = to;
+  data.home = null;
+  out.cues.push({ voice: "clack", f: 420, decay: 0.5, vol: 0.8 });
+  out.cues.push({ voice: "ratchet", f: 1500, n: 1, vol: 0.35 });
+}
+function enKeyDone(data) {
+  const kk = data.key;
+  if (!kk) return;
+  if (!kk.lit) data.pad.coded += AZ[kk.lamp];
+  data.key = null;
+}
+// Plays every waiting key at once (a tap off the keys comes after them).
+function enFlushKeys(data) {
+  enKeyDone(data);
+  const out = { cues: [] };
+  while (EN_KEYS.length) {
+    enKeyStart(data, EN_KEYS.shift(), 0, out);
+    enKeyDone(data);
+  }
+}
+function enClear(data, t, out) {
+  EN_KEYS.length = 0;
+  enKeyDone(data);
+  data.run = null;
+  data.pad = enBlank();
+  if (data.rest.some((p) => p)) {
+    data.home = { from: data.rest.slice(), t0: t };
+    out.cues.push({ voice: "ratchet", f: 1200, n: 4, rate: 10, vol: 0.4 });
+  }
+  data.rest = [0, 0, 0];
 }
 
 // ---- The Turing-Welchman Bombe --------------------------------------------------------
@@ -1723,10 +1894,11 @@ export const RECIPES = {
       { key: "message", label: "Your message", type: "text", default: EN_DEFAULT, hidden: true },
     ],
     input: {
-      title: "Your own message",
+      title: "Type your own message",
       placeholder: "HELLO",
       button: "Put it on the pad",
-      note: "Type a message of up to 20 letters (spaces and anything that isn't a letter are left out, as Enigma operators did). The first tap types it and the lamps give the coded letters; the second tap types the coded text back, and your message comes out again.",
+      fileButton: false,
+      note: "Or tap the machine's keys (or type on a keyboard) to code a message letter by letter, then tap the machine off the keys to decode it. A message you put on the pad here, up to 20 letters (spaces and anything that isn't a letter are left out, as Enigma operators did), is typed with a tap off the keys; the next tap decodes it.",
       read(text) {
         const msg = enClean(text);
         if (!msg) throw new Error("Type a message with some letters in it, like HELLO.");
@@ -1734,8 +1906,59 @@ export const RECIPES = {
       },
       shown: () => EN_SHOWN.label,
     },
-    controls: [{ key: "go", label: "Type it", type: "pulse", ease: EN.E }],
-    action: { key: "go", label: "Type the message" },
+    controls: [
+      // A tap off the keys always types or decodes (the next tap starts the
+      // next message), so it never pauses (UI r3's long-effect pause).
+      { key: "go", label: "Type it", type: "pulse", ease: EN.E, pausable: false },
+      { key: "type", label: "Key", type: "pulse", ease: 0.2 },
+      { key: "clear", label: "Clean sheet", type: "pulse", ease: 0.3 },
+    ],
+    action: {
+      key: "go",
+      label: "Type the message",
+      // A key makes its own clack (cues), and so does a clean sheet.
+      quiet: ["type", "clear"],
+      at(p) {
+        // A key of the keyboard (its cap or letter, above the top plate).
+        if (p[1] > 0.015 && p[2] > 0.08 && p[2] < 0.58) {
+          let best = -1;
+          let near = 0.075;
+          for (const ch of AZ) {
+            const q = enKeyPos(ch);
+            const d = Math.hypot(p[0] - q[0], p[2] - q[2]);
+            if (d < near) [best, near] = [idx(ch), d];
+          }
+          if (best >= 0) {
+            EN_KEYS.push(best);
+            return { key: "type", pick: best };
+          }
+        }
+        // The operator's pad on the lid: a clean sheet.
+        if (
+          Math.abs(p[0]) < 0.66 &&
+          Math.abs(p[1] - EN_PAD.y) < 0.38 &&
+          p[2] > EN_PAD.z - 0.01 &&
+          p[2] < EN_PAD.z + 0.09
+        )
+          // prettier-ignore
+          return { key: "clear" };
+        return null;
+      },
+    },
+    // A keyboard's letters type on the machine too. Plain p and r stay the
+    // site's shortcuts (poke, reset the view): hold Shift for those two.
+    typeKey(ch) {
+      if (!/^[a-z]$/i.test(ch) || ch === "p" || ch === "r") return null;
+      const k = idx(ch.toUpperCase());
+      EN_KEYS.push(k);
+      return { key: "type", pick: k };
+    },
+    screen: {
+      width: EN_PAD.w,
+      height: EN_PAD.h,
+      version: () => (EN_PAD.live?.view || []).join("|"),
+      draw: (g) => enDrawPad(g, EN_PAD.live?.view || ["", "", ""]),
+    },
     drive: driveEnigma,
     build: buildEnigma,
   },
