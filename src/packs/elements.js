@@ -1270,13 +1270,16 @@ export const RECIPES = {
       const ymin = -0.2;
       const ymax = 1.0;
       for (const pf of puffs) {
+        // (Lane Sharpness A: even, a little smaller and more solid, for
+        // crisper puffs.)
         k.add(k.sphere(pf.s), {
+          even: true,
           pos: pf.c,
           scale: [1, 0.82, 1],
-          size: 2.2,
+          size: 1.9,
           flat: 0.9,
-          opacity: 0.82,
-          jitter: 0.03,
+          opacity: 0.9,
+          jitter: 0.01,
           color: (c) => {
             const h = clamp((c.p[1] - ymin) / (ymax - ymin), 0, 1);
             const l = dot(c.n, LIGHT);
@@ -1303,7 +1306,7 @@ export const RECIPES = {
       });
       // Rain: streaks through the whole column, each falling a short way.
       const rain = k.part("rain", { pivot: [0, -0.6, 0] });
-      k.cloud({ share: 0.08, size: 0.55, pattern: false }, (r) => {
+      k.cloud({ share: 0.08, size: 0.45, pattern: false }, (r) => {
         const a = r() * TAU;
         const rr = Math.sqrt(r());
         return {
@@ -1311,7 +1314,7 @@ export const RECIPES = {
           dir: [0.08, -1, 0],
           stretch: 4.5,
           color: mix("#7a92b0", "#b4c4d8", r()),
-          opacity: 0.45,
+          opacity: 0.55,
           kind: "fall",
           params: [0.35, r()],
           part: rain,
@@ -2392,18 +2395,20 @@ export const RECIPES = {
         const y = i === 0 ? 0 : i === TW_BANDS - 1 ? H : ((i + 0.5) / TW_BANDS) * H;
         return k.part(`band${i}`, { pivot: [0, y, 0] });
       });
-      k.cloud({ share: 0.55, size: 2.3, pattern: false }, (r) => {
-        const y = H * Math.pow(r(), 0.8);
-        const a = r() * TAU;
-        const rr = rad(y) * (0.82 + 0.22 * Math.sqrt(r()));
+      // (Lane Sharpness A: spread evenly over the funnel, in a thinner wall,
+      // so it reads as a smooth, defined column of dust.)
+      k.cloud({ share: 0.55, size: 1.9, pattern: false }, (r, i) => {
+        const y = H * Math.pow((i * 0.7548776662466927 + 0.5) % 1, 0.8);
+        const a = ((i * 0.5698402909980532 + 0.5) % 1) * TAU;
+        const rr = rad(y) * (0.88 + 0.14 * Math.sqrt(r()));
         const streak = 0.5 + 0.5 * Math.sin(a * 3 + y * 9);
-        const v = clamp(0.25 + 0.5 * (y / H) + 0.25 * streak + 0.1 * (r() - 0.5), 0, 1);
+        const v = clamp(0.25 + 0.5 * (y / H) + 0.25 * streak + 0.04 * (r() - 0.5), 0, 1);
         return {
           p: [Math.sin(a) * rr, y, Math.cos(a) * rr],
           dir: [Math.cos(a), 0.15, -Math.sin(a)],
           stretch: 1.8,
           color: ramp(["#4a3e34", "#66584a", "#847a70", "#a09a94", "#c0bcb8"], v),
-          opacity: 0.55 + 0.3 * (1 - y / H),
+          opacity: 0.7 + 0.25 * (1 - y / H),
           kind: "orbit",
           params: [2.2, 0.6],
           part: bands[twBand(y)],
@@ -2461,7 +2466,7 @@ export const RECIPES = {
             pos,
             scale: [1.2, 0.8, 1],
             count: 60,
-            color: (c) => lit(mix("#4a3624", "#6a5238", c.rand()), c.n, 0.4),
+            color: (c) => lit("#5a4430", c.n, 0.4),
           });
         else
           k.add(k.ellipsoid(0.036, 0.005, 0.021), {
@@ -2489,11 +2494,13 @@ export const RECIPES = {
       }
       for (const pf of puffs) {
         k.add(k.sphere(pf.s), {
+          even: true,
+          jitter: 0.01,
           pos: pf.c,
           scale: [1, 0.7, 1],
-          size: 2.4,
+          size: 2,
           flat: 1,
-          opacity: 0.75,
+          opacity: 0.85,
           pattern: false,
           kind: "orbit",
           params: [0.25, 0],
@@ -2507,7 +2514,7 @@ export const RECIPES = {
               0.3 +
                 0.35 * c.n[1] +
                 0.25 * dot(c.n, LIGHT) +
-                0.12 * c.fbm(c.p[0] * 3, c.p[1] * 3, c.p[2] * 3),
+                0.08 * c.fbm(c.p[0] * 2.5, c.p[1] * 2.5, c.p[2] * 2.5),
               0,
               1,
             );
@@ -2516,16 +2523,17 @@ export const RECIPES = {
         });
       }
       // Flat fields below.
-      k.add(k.disc(1.05), {
-        pos: [0, 0, 0],
-        color: (c) => {
-          if (c.n[1] < 0) return "#3a2e20";
-          const r = Math.hypot(c.p[0], c.p[2]);
-          const g = c.fbm(c.p[0] * 5, 0, c.p[2] * 5);
-          let col = mix("#5a7a2a", "#8a9a3a", 0.5 + 0.5 * g);
-          if (Math.abs(Math.sin(c.p[0] * 14)) < 0.15) col = mix(col, "#6a5a3a", 0.4);
-          return mix(col, "#6a5a44", smoothstep(0.45, 0.1, r));
-        },
+      // (Lane Sharpness A: laid out on a sunflower spiral of solid splats,
+      // so the field is even and clean at phone size.)
+      k.cloud({ share: 0.1, size: 1.25, pattern: false, jitter: 0.15 }, (r, i, n) => {
+        const rr = 1.05 * Math.sqrt((i + 0.5) / n);
+        const a = i * 2.399963229728653;
+        const p = [Math.sin(a) * rr, 0, Math.cos(a) * rr];
+        const g = k.noise.fbm(p[0] * 3, 0, p[2] * 3);
+        let col = mix("#5a7a2a", "#8a9a3a", 0.5 + 0.35 * g);
+        if (Math.abs(Math.sin(p[0] * 14)) < 0.15) col = mix(col, "#6a5a3a", 0.4);
+        col = mix(col, "#6a5a44", smoothstep(0.45, 0.1, rr));
+        return { p, n: [0, 1, 0], flat: 0.2, color: col, opacity: 1 };
       });
     },
   },
