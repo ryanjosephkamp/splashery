@@ -959,9 +959,10 @@ notes per toy.
   machine, the looped transformer, Newton's cradle, the ocean liner, the Pyramids and the whole
   music shelf.
 - **Recorded samples.** Only CC0 or public domain first; CC BY only if nothing CC0 fits, credited
-  like any asset. Never BY-SA, NC or "royalty-free" custom licenses (Pixabay, Mixkit, Zapsplat,
-  Sonniss). Check the license on the live page of each sound, and record it in CREDITS.md and
-  `tools/assets.json`. Keep samples short, mono and small, loaded only when the toy is tapped.
+  like any asset; CC BY-SA (since October 2, 2026) only if nothing else fits, with its notice. Never
+  NC or "royalty-free" custom licenses (Pixabay, Mixkit, Zapsplat, Sonniss). Check the license on
+  the live page of each sound, and record it in CREDITS.md and `tools/assets.json`. Keep samples
+  short, mono and small, loaded only when the toy is tapped.
 
 Since September 30, 2026, a new sound may go live before the owner has heard it. He says which ones
 to fix, and the sound patrol checks new toys against this section.

@@ -15,7 +15,8 @@ import { samplesIn, specProblems } from "../src/voices.js";
 const APP = "/?renderer=webgl2&adapt=off&profile=mid";
 const SHELVES = ["scans", "shapes", "balls", "space", "tiny", "atoms", "gems", "anatomy"];
 const review = JSON.parse(fs.readFileSync("tools/sound-review.json", "utf8")).toys;
-const CHANGED = TOYS.filter((t) => SHELVES.includes(t.category) && review[t.id]?.status === "site").map((t) => t.id); // prettier-ignore
+// A toy a later review reopened (its entry carries that review's "round") still counts as the lane's.
+const CHANGED = TOYS.filter((t) => SHELVES.includes(t.category) && (review[t.id]?.status === "site" || review[t.id]?.round)).map((t) => t.id); // prettier-ignore
 const assets = JSON.parse(fs.readFileSync("tools/assets.json", "utf8")).soundSamples;
 const cueFiles = [...fs.readFileSync("src/packs/balls.js", "utf8").matchAll(/file: "([a-z0-9-]+\.mp3)"/g)].map((m) => m[1]); // prettier-ignore
 const FILES = fs.readdirSync("assets/sounds");
