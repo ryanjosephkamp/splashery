@@ -5,7 +5,7 @@
 import { EFFECTS, AXES } from "./effects.js";
 import { SHAPES, PALETTES, PROFILES } from "./generators.js";
 import { TOYS, thumbURL, shelfCategories, searchToys, onShelf, holdsStill } from "./toys.js";
-import { IDLE_EFFECTS, formatCount } from "./state.js";
+import { IDLE_EFFECTS, formatCount, formatBytes } from "./state.js";
 import { MOVES } from "./motion.js";
 import { PATTERNS, PROJECTIONS, loadFlags } from "./patterns.js";
 import { initLive, renderLive } from "./live/panel.js"; // lane Live input
@@ -168,6 +168,15 @@ export function createUI(app) {
     webmSeconds: $("webm-seconds"),
     exportWebm: $("export-webm"),
     webmUnavailable: $("webm-unavailable"),
+    recordRow: $("record-row"), // UI r5
+    recordStart: $("record-start"),
+    recordUnavailable: $("record-unavailable"),
+    recPill: $("rec-pill"),
+    recTime: $("rec-time"),
+    recStop: $("rec-stop"),
+    recSave: $("rec-save"),
+    recShare: $("rec-share"),
+    recClose: $("rec-close"),
     embedTransparent: $("embed-transparent"),
     embedSize: $("embed-size"),
     embedCopy: $("embed-copy"),
@@ -1476,12 +1485,24 @@ export function createUI(app) {
     // file: the File itself, for a recipe with input.binary (a sound file,
     // say), which reads it itself; the text is then "". files: every file
     // picked, for a recipe with input.multiple too (a model and its textures).
+    // UI r5: input.read gets a fifth argument, progress(text), for the steps
+    // of a long read (a big model file); the line clears when it is done.
+    const status = document.createElement("p");
+    status.className = "note input-progress";
+    status.setAttribute("role", "status");
+    status.hidden = true;
+    const progress = (msg) => {
+      status.textContent = msg || "";
+      status.hidden = !msg;
+    };
     const apply = async (text, fileName = "", file = null, files = file ? [file] : []) => {
       error.hidden = true;
       try {
-        const options = await input.read(text, fileName, file, files);
+        const options = await input.read(text, fileName, file, files, progress);
+        progress("");
         await app.setToyOptions(options);
       } catch (err) {
+        progress("");
         error.textContent = err.message;
         error.hidden = false;
       }
@@ -1534,8 +1555,11 @@ export function createUI(app) {
       const f = files[0];
       file.value = "";
       if (!f) return;
-      if (files.reduce((sum, x) => sum + x.size, 0) > 40e6) {
-        error.textContent = "That file is too big (over 40 MB).";
+      // UI r5: a recipe may set its own cap (input.maxBytes, a number or a
+      // function of nothing); 40 MB otherwise.
+      const cap = (typeof input.maxBytes === "function" ? input.maxBytes() : input.maxBytes) || 40e6; // prettier-ignore
+      if (files.reduce((sum, x) => sum + x.size, 0) > cap) {
+        error.textContent = input.tooBig?.(cap) || `That file is too big (over ${Math.round(cap / 1e6)} MB).`; // prettier-ignore
         error.hidden = false;
         return;
       }
@@ -1545,7 +1569,7 @@ export function createUI(app) {
     const note = document.createElement("p");
     note.className = "note";
     note.textContent = input.note || "";
-    box.append(fileRow, shown, error, note, file);
+    box.append(fileRow, shown, status, error, note, file);
     els.toyOptions.appendChild(box);
   }
 
@@ -1557,10 +1581,17 @@ export function createUI(app) {
   let barSong = null; // the song bar's song (lane Pianos)
   let seeking = false;
   const playing = () => (app.player?.motion?.targets?.play ?? 0) > 0.5;
+  // UI r5: on a phone the stage ends above the bar, so the toy is framed in
+  // the room the bar leaves (styles.css, body.bar-up).
+  new ResizeObserver(() => {
+    const h = els.gameBar.hidden ? 0 : els.gameBar.getBoundingClientRect().height;
+    document.documentElement.style.setProperty("--bar-h", `${Math.round(h)}px`);
+  }).observe(els.gameBar);
   function refreshGameBar() {
     const game = barGame;
     const song = !game ? barSong : null;
     els.gameBar.hidden = !game && !song;
+    document.body.classList.toggle("bar-up", !els.gameBar.hidden); // UI r5
     // The song bar (lane Pianos) is the game bar with its song buttons.
     els.gameBar.classList.toggle("song-bar", !!song);
     for (const id of ["game-back", "game-next", "game-end", "game-bar-title"])
@@ -2051,6 +2082,12 @@ export function createUI(app) {
     }),
   );
   els.exportWebm.addEventListener("click", () => app.exportWebM(Number(els.webmSeconds.value)));
+  // UI r5: Record (the Share tab starts it; the pill on the stage stops and saves it).
+  els.recordStart.addEventListener("click", () => (app.recording ? app.stopRecord() : app.startRecord())); // prettier-ignore
+  els.recStop.addEventListener("click", () => app.stopRecord());
+  els.recSave.addEventListener("click", () => app.saveRecord());
+  els.recShare.addEventListener("click", () => app.shareRecord());
+  els.recClose.addEventListener("click", () => app.closeRecord());
   els.embedTransparent.addEventListener("change", () => app.updateEmbed());
   els.embedSize.addEventListener("change", () => app.updateEmbed());
   els.embedCopy.addEventListener("click", () =>
@@ -2222,6 +2259,8 @@ export function createUI(app) {
     document.body.classList.toggle("sheet-full", narrow.matches && full); // UI r2
     els.sheetMax.hidden = !UI2 || !(m === "grid" || m === "panel"); // UI r2
     els.sheetMax.setAttribute("aria-pressed", String(full));
+    if (narrow.matches)
+      els.galleryOpen?.setAttribute("aria-expanded", String(mode === "grid" && full)); // UI r5
     els.sheetMax.title = full ? "Make it smaller" : "Fill the screen";
     els.sheetToggle.setAttribute("aria-expanded", String(mode === "panel"));
     // From the grid, More goes straight to the settings (one tap); the
@@ -2455,7 +2494,13 @@ export function createUI(app) {
     else if (!folded) els.galleryOpen.focus({ preventScroll: true });
     revealCurrent();
   }
-  els.galleryOpen.addEventListener("click", () => setGallery(!galleryOn));
+  // UI r5: the top row's gallery button (or G) toggles it; on a phone a
+  // second press puts the full grid back to the toy row.
+  function toggleGallery() {
+    if (UI2 && narrow.matches && mode === "grid" && full) setMode("row");
+    else setGallery(!galleryOn);
+  }
+  els.galleryOpen.addEventListener("click", toggleGallery);
   els.galleryClose.addEventListener("click", () => setGallery(false));
   narrow.addEventListener("change", () => galleryOn && setGallery(false));
 
@@ -2869,6 +2914,32 @@ export function createUI(app) {
       els.byoFile.disabled = on;
       els.panel.setAttribute("aria-busy", String(on));
     },
+    // UI r5: Record's state: "off", "rec" (with seconds and the limit),
+    // "ready" (with seconds, bytes and whether the phone can share it) or "busy".
+    setRecord({ state, seconds = 0, limit = 60, bytes = 0, share = false }) {
+      const clock = (t) => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, "0")}`;
+      const rec = state === "rec";
+      const ready = state === "ready";
+      els.recPill.hidden = state === "off";
+      els.recPill.classList.toggle("recording", rec);
+      els.recStop.hidden = !rec;
+      els.recSave.hidden = !ready;
+      els.recShare.hidden = !ready || !share;
+      els.recClose.hidden = !ready;
+      els.recTime.textContent = rec
+        ? `${clock(seconds)} / ${clock(limit)}`
+        : ready
+          ? `${clock(seconds)} · ${formatBytes(bytes)}`
+          : "Saving…";
+      els.recordStart.textContent = rec ? "Stop" : "Record";
+      els.recordStart.classList.toggle("primary", rec);
+      els.recordStart.disabled = state === "busy";
+    },
+    setRecordUnavailable(reason) {
+      els.recordRow.hidden = !!reason;
+      els.recordUnavailable.hidden = !reason;
+      els.recordUnavailable.textContent = reason ? `Recording is unavailable: ${reason}` : "";
+    },
     setWebmUnavailable(reason) {
       els.webmRow.hidden = !!reason;
       els.webmUnavailable.hidden = !reason;
@@ -2939,6 +3010,7 @@ export function createUI(app) {
     },
     focusMode: () => focusOn,
     togglePanel: () => setFolded(!folded),
+    toggleGallery, // UI r5
     // Escape: leave focus mode or the gallery page first (true when it did).
     escape() {
       if (!els.flagPop.hidden)

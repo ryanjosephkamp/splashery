@@ -31,6 +31,10 @@ import {
   encodeGIF,
   webmSupport,
   recordWebM,
+  recordSupport, // UI r5
+  startRecording,
+  canShareFile,
+  RECORD_LIMIT,
   buildShareHash,
   shareURL,
   iframeSnippet,
@@ -159,6 +163,8 @@ class App {
     player.on("media", (m) => ui.setPictures?.(player.pictures?.info() || null, m));
     const wm = webmSupport();
     ui.setWebmUnavailable(wm.ok ? null : wm.reason);
+    const rs = recordSupport(); // UI r5
+    ui.setRecordUnavailable(rs.ok ? null : rs.reason);
     ui.setTool("orbit");
     ui.setClayMode("add");
 
@@ -306,7 +312,9 @@ class App {
     // scene's camera is set after this).
     const key = toyKey(scene.toy);
     // UI r3: a toy that holds still (a chart, a page, an instrument) starts locked.
-    const still = scene.toy.kind === "builtin" && holdsStill(findToy(scene.toy.id));
+    const toyEntry = scene.toy.kind === "builtin" ? findToy(scene.toy.id) : null;
+    // UI r5: an entry's tilt: "free" starts unlocked even on a shelf that holds still.
+    const still = !!toyEntry && holdsStill(toyEntry) && toyEntry.tilt !== "free";
     const lock = this.tiltLocks.has(key) ? this.tiltLocks.get(key) : !!info.recipe?.tiltLock || still; // prettier-ignore
     player.camera.setTiltLock(lock);
     ui.setTiltLock(lock);
@@ -1150,6 +1158,8 @@ class App {
         this.ui.toggleFocus(); // UI r2
       else if (ui2On() && e.key === "[")
         this.ui.togglePanel(); // UI r2
+      else if (ui2On() && (e.key === "g" || e.key === "G"))
+        this.ui.toggleGallery(); // UI r5
       else if (e.target === canvas && e.key.startsWith("Arrow")) {
         e.preventDefault();
         const step = 36;
@@ -1542,6 +1552,100 @@ class App {
         return blob;
       }),
     );
+  }
+
+  // ---- UI r5: Record ---------------------------------------------------------------
+  // A live recording of the stage while someone plays, with the site's sound.
+  // The Share tab starts it; the pill on the stage shows the time, stops it and
+  // then saves (or, on a phone, shares) the video. 60 seconds at most.
+  startRecord() {
+    if (this.recording || this.busy) return;
+    const player = this.player;
+    const stage = player.stage;
+    // The site's sound (its context is made now, in the tap, so a sound
+    // switched on while recording is in the video too).
+    const ctx = this.sound.audio?.();
+    const audio = ctx && this.sound.master ? { ctx, node: this.sound.master } : null;
+    // A steady size for the encoder: no drop in resolution while dragging,
+    // and at most 1920 pixels on the long side.
+    const saved = { adaptive: stage.adaptive, cap: stage.pixelCap };
+    const r = canvas.getBoundingClientRect();
+    const long = Math.max(r.width, r.height, 1);
+    stage.adaptive = false;
+    stage.reduced = false;
+    stage.setPixelRatio(Math.min(saved.cap ?? 3, 1920 / long));
+    let rec;
+    const kick = () => rec?.frame(); // each drawn frame goes into the video
+    stage.app.on("frameend", kick);
+    const restore = () => {
+      stage.app.off("frameend", kick);
+      stage.adaptive = saved.adaptive;
+      stage.setPixelRatio(saved.cap);
+    };
+    try {
+      rec = startRecording({
+        canvas,
+        audio,
+        maxSeconds: RECORD_LIMIT,
+        onTick: (seconds) => {
+          this.ui.setRecord({ state: "rec", seconds, limit: RECORD_LIMIT });
+          stage.requestRender(0); // a still toy still gives the video a few frames a second
+        },
+      });
+    } catch (err) {
+      restore();
+      this.ui.toast(`Could not record: ${err.message || err}`);
+      return;
+    }
+    this.recording = rec;
+    this.recorded = null;
+    this.ui.setRecord({ state: "rec", seconds: 0, limit: RECORD_LIMIT });
+    this.ui.collapseSheet?.(); // on a phone: the toy, to play with
+    stage.requestRender();
+    rec.done
+      .then(({ blob, ext, seconds }) => {
+        this.recorded = { blob, name: timestampName(ext), seconds };
+        const share = !!canShareFile(blob, this.recorded.name);
+        this.ui.setRecord({ state: "ready", seconds, bytes: blob.size, share });
+      })
+      .catch((err) => {
+        this.ui.setRecord({ state: "off" });
+        this.ui.toast(`Could not record: ${err?.message || err}`);
+      })
+      .finally(() => {
+        this.recording = null;
+        restore();
+      });
+  }
+
+  stopRecord() {
+    if (!this.recording) return;
+    this.ui.setRecord({ state: "busy" });
+    this.recording.stop();
+  }
+
+  saveRecord() {
+    const r = this.recorded;
+    if (!r) return;
+    downloadBlob(r.blob, r.name);
+    this.ui.toast(`Video saved (${formatBytes(r.blob.size)}).`);
+  }
+
+  // The phone's share sheet (Save Video on an iPhone); saving is the fallback.
+  async shareRecord() {
+    const r = this.recorded;
+    const file = r && canShareFile(r.blob, r.name);
+    if (!file) return this.saveRecord();
+    try {
+      await navigator.share({ files: [file], title: "Splashery" });
+    } catch (err) {
+      if (err?.name !== "AbortError") this.saveRecord();
+    }
+  }
+
+  closeRecord() {
+    this.recorded = null;
+    this.ui.setRecord({ state: "off" });
   }
 }
 
