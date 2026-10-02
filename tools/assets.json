@@ -1230,7 +1230,7 @@
       "page": "https://freesound.org/s/558844/",
       "license": "CC0 1.0",
       "checked": "September 30, 2026",
-      "note": "Lane Sound B. Freesound's HQ preview, cut to 0.9 to 4.2 s, faded, peak-normalized to -3 dBFS, 32 kbps at 32 kHz mono MP3 (13,616 bytes). Loaded only when the toy is tapped. Lane Sound C (October 2, 2026): cut to its first 1.8 s with a fade from 1.35 s, so the engine ends with the exhaust (14,881 bytes)."
+      "note": "Lane Sound B. Freesound's HQ preview, cut to 0.9 to 4.2 s, faded, peak-normalized to -3 dBFS, 32 kbps at 32 kHz mono MP3 (13,616 bytes). Loaded only when the toy is tapped. Lane Sound C (October 2, 2026): cut to its first 1.8 s with a fade from 1.35 s, so the engine ends with the exhaust (now 32 kbps at 32 kHz, 7,569 bytes)."
     },
     {
       "id": "tractor-engine",
@@ -1351,7 +1351,7 @@
       "page": "https://freesound.org/s/334970/",
       "license": "CC0 1.0",
       "checked": "September 30, 2026",
-      "note": "Lane Sound B. Freesound's HQ preview, cut to 0.3 to 3.5 s, faded, peak-normalized to -3 dBFS, 32 kbps at 32 kHz mono MP3 (13,184 bytes). Loaded only when the toy is tapped. Lane Sound C (October 2, 2026): remade as a seamless 2.2 s loop (0.3 s to 2.9 s of the preview, the end crossfaded into the start over 0.4 s, with 0.1 s of the loop on each side), played as the top's hum (19,688 bytes)."
+      "note": "Lane Sound B. Freesound's HQ preview, cut to 0.3 to 3.5 s, faded, peak-normalized to -3 dBFS, 32 kbps at 32 kHz mono MP3 (13,184 bytes). Loaded only when the toy is tapped. Lane Sound C (October 2, 2026): remade as a seamless 2.2 s loop (0.3 s to 2.9 s of the preview, the end crossfaded into the start over 0.4 s, with 0.1 s of the loop on each side), played as the top's hum (now 32 kbps at 32 kHz, 10,017 bytes)."
     },
     {
       "id": "chess-set-move",
@@ -1395,7 +1395,7 @@
       "page": "https://freesound.org/people/cower/sounds/185370/",
       "license": "CC0 1.0",
       "checked": "October 2, 2026",
-      "note": "Lane Sound C. Freesound's HQ preview, cut from 0.839 s (2.3 s kept), faded, peak-normalized to -3 dBFS, 64 kbps at 44.1 kHz mono MP3 (19,061 bytes). Loaded when its toy opens with the speaker on."
+      "note": "Lane Sound C. Freesound's HQ preview, cut from 0.839 s (2.3 s kept), faded, peak-normalized to -3 dBFS, 32 kbps at 32 kHz mono MP3 (9,585 bytes). Loaded when its toy opens with the speaker on."
     },
     {
       "id": "knot-jelly",
@@ -1406,7 +1406,7 @@
       "page": "https://freesound.org/people/lolamadeus/sounds/181915/",
       "license": "CC0 1.0",
       "checked": "October 2, 2026",
-      "note": "Lane Sound C. Freesound's HQ preview, cut from 0.629 s (1.8 s kept), faded, peak-normalized to -3 dBFS, 64 kbps at 44.1 kHz mono MP3 (14,881 bytes). Loaded when its toy opens with the speaker on."
+      "note": "Lane Sound C. Freesound's HQ preview, cut from 0.629 s (1.8 s kept), faded, peak-normalized to -3 dBFS, 32 kbps at 32 kHz mono MP3 (7,569 bytes). Loaded when its toy opens with the speaker on."
     },
     {
       "id": "mitochondrion-furnace",
@@ -1417,7 +1417,7 @@
       "page": "https://freesound.org/people/ldezem/sounds/386166/",
       "license": "CC0 1.0",
       "checked": "October 2, 2026",
-      "note": "Lane Sound C. Freesound's HQ preview, cut from 0.001 s (2.6 s kept), faded, peak-normalized to -3 dBFS, 64 kbps at 44.1 kHz mono MP3 (21,359 bytes). Loaded when its toy opens with the speaker on."
+      "note": "Lane Sound C. Freesound's HQ preview, cut from 0.001 s (2.6 s kept), faded, peak-normalized to -3 dBFS, 32 kbps at 32 kHz mono MP3 (10,881 bytes). Loaded when its toy opens with the speaker on."
     },
     {
       "id": "mitochondrion-fire",
@@ -1428,7 +1428,7 @@
       "page": "https://freesound.org/people/PegasusCZ/sounds/569332/",
       "license": "CC0 1.0",
       "checked": "October 2, 2026",
-      "note": "Lane Sound C. A Sound Board candidate only. Freesound's HQ preview, cut from 2.5 s (2.8 s kept), faded, peak-normalized to -3 dBFS, 64 kbps at 44.1 kHz mono MP3 (23,031 bytes). Loaded when its toy opens with the speaker on."
+      "note": "Lane Sound C. A Sound Board candidate only. Freesound's HQ preview, cut from 2.5 s (2.8 s kept), faded, peak-normalized to -3 dBFS, 32 kbps at 32 kHz mono MP3 (11,601 bytes). Loaded when its toy opens with the speaker on."
     },
     {
       "id": "paramecium-swim",
@@ -1439,7 +1439,7 @@
       "page": "https://freesound.org/people/Daen23/sounds/431627/",
       "license": "CC0 1.0",
       "checked": "October 2, 2026",
-      "note": "Lane Sound C. Freesound's HQ preview, cut from 6.826 s (3.6 s kept), faded, peak-normalized to -3 dBFS, 64 kbps at 44.1 kHz mono MP3 (29,301 bytes). Loaded when its toy opens with the speaker on."
+      "note": "Lane Sound C. Freesound's HQ preview, cut from 6.826 s (3.6 s kept), faded, peak-normalized to -3 dBFS, 32 kbps at 32 kHz mono MP3 (14,769 bytes). Loaded when its toy opens with the speaker on."
     },
     {
       "id": "banana-peel",
@@ -1461,7 +1461,7 @@
       "page": "https://freesound.org/people/foxraid/sounds/449261/",
       "license": "CC0 1.0",
       "checked": "October 2, 2026",
-      "note": "Lane Sound C. Freesound's HQ preview, cut from 4.657 s (2.15 s kept), faded, peak-normalized to -3 dBFS, 64 kbps at 44.1 kHz mono MP3 (17,807 bytes). Loaded when its toy opens with the speaker on."
+      "note": "Lane Sound C. Freesound's HQ preview, cut from 4.657 s (2.15 s kept), faded, peak-normalized to -3 dBFS, 32 kbps at 32 kHz mono MP3 (9,009 bytes). Loaded when its toy opens with the speaker on."
     },
     {
       "id": "soap-bubbles-blow",
@@ -1483,7 +1483,7 @@
       "page": "https://freesound.org/people/Gerent/sounds/558396/",
       "license": "CC0 1.0",
       "checked": "October 2, 2026",
-      "note": "Lane Sound C. Freesound's HQ preview, cut from 1.042 s (1.62 s kept), faded, peak-normalized to -3 dBFS, 64 kbps at 44.1 kHz mono MP3 (13,627 bytes). Loaded when its toy opens with the speaker on."
+      "note": "Lane Sound C. Freesound's HQ preview, cut from 1.042 s (1.62 s kept), faded, peak-normalized to -3 dBFS, 32 kbps at 32 kHz mono MP3 (6,993 bytes). Loaded when its toy opens with the speaker on."
     },
     {
       "id": "decorated-tree-bell",
@@ -1494,7 +1494,7 @@
       "page": "https://freesound.org/people/sgossner/sounds/373364/",
       "license": "CC0 1.0",
       "checked": "October 2, 2026",
-      "note": "Lane Sound C. Freesound's HQ preview, cut from 0.004 s (1.4 s kept), faded, peak-normalized to -3 dBFS, 64 kbps at 44.1 kHz mono MP3 (11,746 bytes). Loaded when its toy opens with the speaker on."
+      "note": "Lane Sound C. Freesound's HQ preview, cut from 0.004 s (1.4 s kept), faded, peak-normalized to -3 dBFS, 32 kbps at 32 kHz mono MP3 (5,985 bytes). Loaded when its toy opens with the speaker on."
     },
     {
       "id": "decorated-tree-sleigh",
@@ -1516,7 +1516,7 @@
       "page": "https://freesound.org/people/mil0001/sounds/241190/",
       "license": "CC0 1.0",
       "checked": "October 2, 2026",
-      "note": "Lane Sound C. Freesound's HQ preview, cut from 2.5 s (3.0 s kept), faded, peak-normalized to -3 dBFS, 64 kbps at 44.1 kHz mono MP3 (24,494 bytes). Loaded when its toy opens with the speaker on."
+      "note": "Lane Sound C. Freesound's HQ preview, cut from 2.5 s (3.0 s kept), faded, peak-normalized to -3 dBFS, 32 kbps at 32 kHz mono MP3 (12,465 bytes). Loaded when its toy opens with the speaker on."
     },
     {
       "id": "steam-train-chuff",
@@ -1527,7 +1527,7 @@
       "page": "https://freesound.org/people/relwin/sounds/686061/",
       "license": "CC0 1.0",
       "checked": "October 2, 2026",
-      "note": "Lane Sound C. Freesound's HQ preview, cut from 0.569 s (3.5 s kept), faded, peak-normalized to -3 dBFS, 64 kbps at 44.1 kHz mono MP3 (28,465 bytes). Loaded when its toy opens with the speaker on."
+      "note": "Lane Sound C. Freesound's HQ preview, cut (to its first 2.25 s here) from 0.569 s (3.5 s kept), faded, peak-normalized to -3 dBFS, 32 kbps at 32 kHz mono MP3 (9,441 bytes). Loaded when its toy opens with the speaker on."
     },
     {
       "id": "popcorn-pops",
@@ -1538,7 +1538,7 @@
       "page": "https://freesound.org/people/elricadavis/sounds/764604/",
       "license": "CC0 1.0",
       "checked": "October 2, 2026",
-      "note": "Lane Sound C. Freesound's HQ preview, cut from 5.489 s (2.0 s kept), faded, peak-normalized to -3 dBFS, 64 kbps at 44.1 kHz mono MP3 (16,553 bytes). Loaded when its toy opens with the speaker on."
+      "note": "Lane Sound C. Freesound's HQ preview, cut (to its first 0.68 s here) from 5.489 s (2.0 s kept), faded, peak-normalized to -3 dBFS, 32 kbps at 32 kHz mono MP3 (3,105 bytes). Loaded when its toy opens with the speaker on."
     },
     {
       "id": "lungs-breath-b",
@@ -1549,7 +1549,7 @@
       "page": "https://freesound.org/people/rrehl/sounds/717167/",
       "license": "CC0 1.0",
       "checked": "October 2, 2026",
-      "note": "Lane Sound C. A Sound Board candidate only. Freesound's HQ preview, cut from 0.091 s (3.32 s kept), faded, peak-normalized to -3 dBFS, 64 kbps at 44.1 kHz mono MP3 (27,211 bytes). Loaded when its toy opens with the speaker on."
+      "note": "Lane Sound C. A Sound Board candidate only. Freesound's HQ preview, cut from 0.091 s (3.32 s kept), faded, peak-normalized to -3 dBFS, 32 kbps at 32 kHz mono MP3 (13,761 bytes). Loaded when its toy opens with the speaker on."
     },
     {
       "id": "lungs-breath-c",
@@ -1560,7 +1560,7 @@
       "page": "https://freesound.org/people/elle-trudgett/sounds/146769/",
       "license": "CC0 1.0",
       "checked": "October 2, 2026",
-      "note": "Lane Sound C. A Sound Board candidate only. Freesound's HQ preview, cut from 0.822 s (3.88 s kept), faded, peak-normalized to -3 dBFS, 64 kbps at 44.1 kHz mono MP3 (31,599 bytes). Loaded when its toy opens with the speaker on."
+      "note": "Lane Sound C. A Sound Board candidate only. Freesound's HQ preview, cut from 0.822 s (3.88 s kept), faded, peak-normalized to -3 dBFS, 32 kbps at 32 kHz mono MP3 (15,921 bytes). Loaded when its toy opens with the speaker on."
     },
     {
       "id": "bicycle-bell",
@@ -1637,7 +1637,7 @@
       "page": "https://freesound.org/people/kkenny101/sounds/852826/",
       "license": "CC0 1.0",
       "checked": "October 2, 2026",
-      "note": "Lane Sound C. Freesound's HQ preview, cut from 2.52 s (2.2 s kept), faded, peak-normalized to -3 dBFS, 64 kbps at 44.1 kHz mono MP3 (18,225 bytes). Loaded when its toy opens with the speaker on."
+      "note": "Lane Sound C. Freesound's HQ preview, cut from 2.52 s (2.2 s kept), faded, peak-normalized to -3 dBFS, 32 kbps at 32 kHz mono MP3 (9,297 bytes). Loaded when its toy opens with the speaker on."
     },
     {
       "id": "soap-bubbles-pops",
