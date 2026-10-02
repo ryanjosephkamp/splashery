@@ -1,8 +1,10 @@
 // Lane Sound A (docs/handoff/SoundA.md): real sounds for the first shelves
 // (scans, shapes, balls, space, tiny, atoms, gems and the body), some of them
 // recorded samples in assets/sounds/. Every changed toy's sound plays without
-// errors, no sample loads before a tap, each file is credited and small, and
-// the sound lint passes them all.
+// errors, no sample loads on page load (since Sound C, October 2, 2026: a
+// toy's samples load when it opens, so its first tap is on time, and only
+// that toy's), each file is credited and small, and the sound lint passes
+// them all.
 
 import { test, expect } from "@playwright/test";
 import fs from "node:fs";
@@ -87,23 +89,36 @@ test("every changed toy's sound plays in the app without errors or warnings", as
   expect(problems).toEqual([]);
 });
 
-test("no sample loads on page load or when a toy opens, only on its tap", async ({ page }) => {
+// Since Sound C, October 2, 2026: a toy's samples load when it opens, so its
+// first tap is on time. Page load still fetches none, and opening a toy
+// fetches only its own (its sound entry's and its recipe's for its options).
+test("no sample loads on page load; opening a toy loads only its own", async ({ page }) => {
   const fetched = [];
+  const names = () => fetched.map((u) => u.split("/").pop());
   page.on("request", (r) => r.url().includes("/assets/sounds/") && fetched.push(r.url()));
   await page.goto(APP);
   await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
   await page.evaluate(() => window.__splashery.app.sound.setEnabled(true));
   expect(fetched).toEqual([]);
+  const seen = new Set();
   for (const id of ["cat-statue", "tennis-ball"]) {
+    const before = fetched.length;
     await page.evaluate((toy) => window.__splashery.app.chooseToy(toy), id);
     await page.waitForFunction(() => window.__splashery.player.toyInfo?.recipe || window.__splashery.player.toyInfo?.rig, null, { timeout: 120_000 }); // prettier-ignore
     await page.waitForTimeout(1500);
-    expect(fetched, `opening ${id}`).toEqual([]);
+    // The toy's own files: its sound entry's, and its recipe's `sounds`.
+    const extra = await page.evaluate(() => window.__splashery.app.recipeSounds());
+    const own = samplesIn([TOY_SOUNDS[id], ...extra], [], true);
+    const now = names().slice(before);
+    for (const f of now) expect(own, `opening ${id} fetched ${f}`).toContain(f);
+    // Nothing fetched twice (the first toy's files stay cached).
+    for (const f of now) expect(seen.has(f), `opening ${id} fetched ${f} again`).toBe(false);
+    now.forEach((f) => seen.add(f));
   }
-  // The tennis ball's tap loads its slam, then its bounces load their own file.
+  // The tennis ball's slam loaded when it opened; its bounces load their own file on the tap.
   await page.evaluate(() => window.__splashery.player.act(null));
-  await expect.poll(() => fetched.map((u) => u.split("/").pop()), { timeout: 10_000 }).toContain("tennis-ball-slam.mp3"); // prettier-ignore
-  await expect.poll(() => fetched.map((u) => u.split("/").pop()), { timeout: 10_000 }).toContain("tennis-ball-bounce.mp3"); // prettier-ignore
+  await expect.poll(names, { timeout: 10_000 }).toContain("tennis-ball-slam.mp3");
+  await expect.poll(names, { timeout: 10_000 }).toContain("tennis-ball-bounce.mp3");
   // The About tab credits the samples this toy's tap uses.
   await expect(page.locator('#credits [data-sample="tennis-ball-slam.mp3"]')).toHaveCount(1);
 });
