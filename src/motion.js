@@ -77,6 +77,8 @@ export class MotionDriver {
     // A long effect started since the last frame (its key): a tap before it
     // has been drawn starts it again rather than pausing it unseen.
     this.unseen = null;
+    this.handsTokens = null; // lane Physics: [{ index, token }] from Hands-on
+    this.handsResort = false;
   }
 
   // Attaches a kit toy (recipe + build context) or clears it.
@@ -309,6 +311,16 @@ export class MotionDriver {
     // sound.audio() and sound.master (the site's limiter).
     const about = { time, R, tap: this.tap, taps: this.taps, data: this.ctx?.kit?.data, sound: this.sound }; // prettier-ignore
     if (this.recipe?.drive) this.recipe.drive(kt, this.state, drive, about);
+    // Lane Physics: pieces picked up in Hands-on go where the physics puts
+    // them (src/physics/hands-on.js), and are sorted again now and then.
+    if (this.handsTokens) {
+      const list = (drive.tokens ||= []);
+      for (const { index, token } of this.handsTokens) list[index] = token;
+    }
+    if (this.handsResort) {
+      drive.resort = true;
+      this.handsResort = false;
+    }
     this.taps = []; // UI r4
     if (drive.body) {
       if (drive.body.quat) q = quatMul(drive.body.quat, q);

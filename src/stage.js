@@ -321,6 +321,38 @@ export class Stage {
     return this.toy;
   }
 
+  // Lane Physics: the whole toy picked up in Hands-on. Moves the toy's
+  // entity, and its add-on, sheets and fluid layers with it, by a rigid
+  // pose about `pivot` (world): x' = q (x - pivot) + pivot + t. null puts
+  // them back where they were built.
+  setToyPose(pose) {
+    const t = this.toy;
+    if (!t) return;
+    const ents = [t.entity, t.addon?.entity, ...(t.sheets || []).map((s) => s.entity), ...(t.layers || []).map((l) => l.entity)]; // prettier-ignore
+    for (const e of ents) {
+      if (!e) continue;
+      if (!e.spBase) {
+        if (!pose) continue;
+        e.spBase = { p: e.getLocalPosition().clone(), r: e.getLocalRotation().clone() };
+      }
+      const b = e.spBase;
+      if (!pose) {
+        e.setLocalPosition(b.p);
+        e.setLocalRotation(b.r);
+        e.spBase = null;
+        continue;
+      }
+      const q = new pc.Quat(pose.q[0], pose.q[1], pose.q[2], pose.q[3]);
+      const pv = new pc.Vec3(pose.pivot[0], pose.pivot[1], pose.pivot[2]);
+      const rel = new pc.Vec3().sub2(b.p, pv);
+      q.transformVector(rel, rel);
+      rel.add(pv).add(new pc.Vec3(pose.t[0], pose.t[1], pose.t[2]));
+      e.setLocalPosition(rel);
+      e.setLocalRotation(new pc.Quat().mul2(q, b.r));
+    }
+    this.requestRender();
+  }
+
   // A scan rig's add-on: a small kit-built splat cloud (a flame, flowers, a
   // speech bubble) drawn with the toy and freed with it. `resource` is a
   // container in the kit format (it carries the splatAnim stream).

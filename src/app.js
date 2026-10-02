@@ -3,6 +3,7 @@
 
 import { Player, NoGPUError, Gestures, ui2On } from "./player.js";
 import { createUI } from "./ui.js";
+import { canPlay } from "./physics/hands-on.js"; // lane Physics
 import {
   createScene,
   normalizeScene,
@@ -110,6 +111,7 @@ class App {
     this.toolState = null;
     this.sound = new Sound();
     this.tiltLocks = new Map(); // toy key -> locked (lane Viewer)
+    this.handsChoice = new Map(); // toy key -> Hands-on on (lane Physics)
     this.spins = new Map(); // UI r3: toy key -> turntable, chosen for a toy that holds still
     this.toyFlags = new Map(); // toy key -> its flag colours, or null (lane Viewer)
     this.globalFlag = null; // UI r3: the top bar's flag, for every toy (a flag code)
@@ -143,6 +145,11 @@ class App {
     // A toy's own tap that switches its options (a periodic table tile) rebuilds it with no
     // loading overlay: the toy stays on screen and its tap sound plays at once (lane Fix6).
     player.rebuild = (options) => this.setToyOptions(options, { quiet: Infinity });
+    // Lane Physics: a toy or piece tossed in Hands-on lands with a sound.
+    player.on("frame", () => {
+      const hits = player.handsOn.takeSounds();
+      if (hits.length) this.handsSounds(hits);
+    });
     player.on("cue", (cues) => {
       for (const spec of cues) this.sound.play(spec, { key: "cue" });
     });
@@ -310,6 +317,10 @@ class App {
     const lock = this.tiltLocks.has(key) ? this.tiltLocks.get(key) : !!info.recipe?.tiltLock || still; // prettier-ignore
     player.camera.setTiltLock(lock);
     ui.setTiltLock(lock);
+    // Lane Physics: Hands-on starts on for a toy that is hands-on already,
+    // or as it was left on this toy earlier in the visit.
+    if (this.handsChoice.has(key)) player.handsOn.setOn(this.handsChoice.get(key));
+    this.showHands();
     // A toy that lays flag colours on its own way (the chess board: from
     // above, gently) gets that way when it comes out with a flag on, and
     // the next toy gets the usual way back, unless the look was changed.
@@ -621,6 +632,30 @@ class App {
     player.stage.requestRender();
   }
 
+  // ---- Hands-on (lane Physics) ----------------------------------------------------
+
+  showHands() {
+    const h = this.player.handsOn;
+    const info = this.player.toyInfo;
+    this.ui.setHands({ on: h.on, available: canPlay(info), action: !!info });
+  }
+
+  toggleHands() {
+    const h = this.player.handsOn;
+    h.setOn(!h.on);
+    this.handsChoice.set(toyKey(this.player.scene.toy), h.on);
+    this.showHands();
+    if (h.on && !h.own)
+      this.ui.toast("Hands-on: drag the toy to pick it up, and let go to toss it.", 3000); // prettier-ignore
+    else if (!h.on) this.ui.toast("Hands-on off: dragging turns the view.", 2200);
+    this.player.stage.requestRender();
+  }
+
+  resetHands() {
+    this.player.handsOn.reset();
+    this.player.stage.requestRender();
+  }
+
   // ---- End of top-bar settings --------------------------------------------------------
 
   bindGestures() {
@@ -635,7 +670,12 @@ class App {
         if (ui2On() && (e.shiftKey || e.altKey) && e.pointerType !== "touch") return "orbit";
         // A stretchy toy: with Orbit, a drag that starts on it stretches it
         // (toolStart turns a drag that starts off it back into an orbit).
-        if (this.tool === "orbit") return this.player.canGrab() ? "tool" : "orbit";
+        // Lane Physics: with Hands-on on, a drag that starts on any toy picks
+        // it up (toolStart); with it off, a toy's own drags turn the view.
+        if (this.tool === "orbit") {
+          const h = this.player.handsOn;
+          return (h.ownDrags() && this.player.canGrab()) || h.canGrab() ? "tool" : "orbit";
+        }
         return "tool";
       },
       onTap: (e) => {
@@ -982,6 +1022,21 @@ class App {
     return (own || flags[Math.floor(Math.random() * flags.length)])?.code || "";
   }
 
+  // Lane Physics: landing sounds for Hands-on (a recipe's hands.sound
+  // picks its own, as the pebbles' clack).
+  handsSounds(hits) {
+    const recipe = this.player.toyInfo?.recipe;
+    for (const h of hits) {
+      const vol = Math.min(0.8, Math.max(0.12, h.speed / 7));
+      let spec = recipe?.hands?.sound?.(h, vol);
+      if (spec === undefined) {
+        if (h.soft > 0.3) spec = { voice: "squish", vol: vol * 0.9 };
+        else spec = { voice: "thud", vol };
+      }
+      if (spec) this.sound.play(spec, { key: "hands", gap: 0.05 });
+    }
+  }
+
   toggleSound() {
     this.sound.setEnabled(!this.sound.enabled);
     this.ui.setSound(this.sound.enabled);
@@ -1015,6 +1070,12 @@ class App {
     if (this.toolState !== st) return;
     if (!hit) {
       this.toOrbit();
+      return;
+    }
+    // Lane Physics: Hands-on picks up the toy (or the piece) under the finger.
+    if (st.tool === "grab" && player.handsOn.pressAt(hit, x, y)) {
+      st.tool = "hands";
+      st.started = true;
       return;
     }
     if (st.tool === "grab" && !player.dragStartsHere(hit)) {
@@ -1074,6 +1135,11 @@ class App {
       player.grabAt(x, y);
       return;
     }
+    if (st.tool === "hands") {
+      player.handsOn.moveTo(x, y); // lane Physics
+      player.stage.requestRender();
+      return;
+    }
     const now = performance.now();
     const minGap = st.tool === "poke" ? 150 : st.tool === "clay" ? 110 : 0;
     if (st.busy || now - st.last < minGap) return;
@@ -1099,6 +1165,7 @@ class App {
     if (!st) return;
     if (st.tool === "magnet") this.player.magnetAt(st.x, st.y, false);
     if (st.tool === "clay") this.player.refreshPaint();
+    if (st.tool === "hands") this.player.handsOn.release(); // lane Physics
     if (st.tool === "grab" && st.started) {
       // A real stretch plays the toy's sound as it springs back.
       const stretched = this.player.grabEnd();
