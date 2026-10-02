@@ -902,7 +902,8 @@ function cubeReset() {
   });
 }
 cubeReset();
-const cubeBusy = () => !!(cube.seq || cube.snap || cube.live) || cube.lastTime - cube.cheer < 1.2;
+// A paused scramble or solve (lane Fix7) lets the cube be turned by hand.
+const cubeBusy = () => !!((cube.seq && !cube.seq.paused) || cube.snap || cube.live) || cube.lastTime - cube.cheer < 1.2; // prettier-ignore
 const roundV = (v) => v.map((x) => Math.round(x));
 // The cubies in a layer.
 const layerOf = (axis, layer) => CUBIES.map((_, i) => i).filter((i) => cube.pos[i][axis] === layer); // prettier-ignore
@@ -967,6 +968,9 @@ function cubeDragMove(p) {
     const b = Math.abs(dv[b1]) >= Math.abs(dv[b2]) ? b1 : b2;
     if (Math.abs(dv[b]) < 0.2) return;
     const axis = 3 - d.a - b;
+    // A move of one's own ends a paused scramble or solve; the next tap
+    // starts a new one from here.
+    if (cube.seq?.paused) cube.seq = null;
     // Which way round the axis moves the face's surface along +b.
     const k = cross(AXES[axis], d.n)[b];
     cube.live = { axis, b, k, layer: clamp(Math.round(d.p0[axis]), -1, 1), angle: 0 };
@@ -992,9 +996,20 @@ function cubeDrive(c, out, info) {
   const now = info.time;
   cube.lastTime = now;
   const click = (vol = 1) => out.cues.push({ voice: "sample", file: "puzzle-cube-turn.mp3", pitch: 0.92 + 0.16 * Math.random(), vol: 1.4 * vol, fallback: { voice: "twist", f: 1600 + 300 * Math.random(), vol } }); // prettier-ignore
-  // A tap: scramble a solved cube, or play its turns back to solved.
-  if (fired(m, "twist", c.twist)) {
-    if (cube.seq) for (const t of cube.seq.turns.slice(cube.seq.done)) cubeApply(t);
+  // A tap: scramble a solved cube, or play its turns back to solved. A tap
+  // while one plays pauses it once the turn in progress lands (so the cube
+  // can be turned by hand), and the next tap carries on (lane Fix7).
+  const seq = cube.seq;
+  const tapped = fired(m, "twist", c.twist);
+  if (tapped && seq && !seq.paused && seq.hold === null) {
+    const slot = (now - seq.at) / seq.per;
+    seq.hold = Math.min(seq.turns.length, slot - seq.done < 0.05 ? seq.done : seq.done + 1);
+  } else if (tapped && seq) {
+    // Carry on: from where it paused, or as it was if it hadn't yet.
+    if (seq.paused) seq.at = now - seq.done * seq.per;
+    seq.hold = null;
+    seq.paused = false;
+  } else if (tapped) {
     cube.live = cube.drag = cube.snap = null;
     let turns;
     if (!cube.history.length || cubeSolved()) {
@@ -1016,19 +1031,28 @@ function cubeDrive(c, out, info) {
         for (let j = 0; j < n; j++) turns.push({ axis: h.axis, layer: h.layer, q: -Math.sign(h.q) }); // prettier-ignore
       }
     }
-    cube.seq = { turns, done: 0, solving: !!cube.history.length };
+    // Its own clock: the whole scramble or solve takes CUBE_TAP seconds.
+    const per = CUBE_TAP / Math.max(1, turns.length);
+    cube.seq = { turns, done: 0, solving: !!cube.history.length, at: now, per, hold: null, paused: false }; // prettier-ignore
   }
   let anim = null;
-  if (cube.seq) {
+  if (cube.seq?.paused) {
+    // Paused between turns: nothing moves until a tap or a hand turn.
+  } else if (cube.seq) {
     const { turns } = cube.seq;
-    const slot = c.twist > 0 ? (1 - c.twist) * turns.length : turns.length;
-    while (cube.seq.done < Math.min(turns.length, Math.floor(slot))) {
-      cubeApply(turns[cube.seq.done++], !cube.seq.solving);
+    const end = cube.seq.hold ?? turns.length;
+    const slot = Math.min(end, Math.max(0, (now - cube.seq.at) / cube.seq.per));
+    // Every turn is recorded (a solve's turns cancel the history as they
+    // go), so a solve stopped part way leaves the history right.
+    while (cube.seq.done < Math.floor(slot)) {
+      cubeApply(turns[cube.seq.done++]);
       click(0.8);
     }
     if (cube.seq.done >= turns.length) {
       if (cube.seq.solving) cube.history = [];
       cube.seq = null;
+    } else if (cube.seq.done >= end) {
+      cube.seq.paused = true;
     } else {
       const t = turns[cube.seq.done];
       anim = { axis: t.axis, layer: t.layer, angle: easeInOut(slot - cube.seq.done) * t.q * (Math.PI / 2) }; // prettier-ignore
@@ -1903,7 +1927,8 @@ export const RECIPES = {
     alive: () => cubeBusy(),
     // More splats: 26 cubies spend half theirs on faces hidden inside.
     density: 1.8,
-    controls: [{ key: "twist", label: "Scramble", type: "pulse", ease: CUBE_TAP }],
+    // The cube pauses itself (between turns), so the site's pause is off.
+    controls: [{ key: "twist", label: "Scramble", type: "pulse", ease: CUBE_TAP, pausable: false }],
     action: { key: "twist", label: "Scramble or solve" },
     // For tests: whether each face shows one colour, and the turns since.
     cube: { solved: () => cubeSolved(), turns: () => cube.history.length },

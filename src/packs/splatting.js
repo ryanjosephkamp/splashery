@@ -10,7 +10,8 @@
 //   The fitted splats are drawn exactly as the fit drew them: flat, front
 //   to back, over a card of the fit's background color.
 // - One splat: one big soft splat drawn as an ellipsoid of many small
-//   splats, with its three axes as rods.
+//   splats, with its three axes as rods. A tap trains it: from a guess,
+//   gradient steps carry it to the target (lane Fix7).
 // - Many splats: a small kit-built rubber duck, then every splat shrunk to
 //   a dot, and back.
 // - Sorting: the splats of a small ball appear one by one in the back-to-
@@ -189,6 +190,11 @@ export const RECIPES = {
       return c;
     },
     action: { key: "play", label: "Train, or play the view", quiet: ["play"] },
+    // The one-splat view is soft and faint: a tap finds it, or the card
+    // behind it, at a low alpha (lane Fix7).
+    get pickAlpha() {
+      return SPL.view === "one" ? 0.012 : undefined;
+    },
     // The training view shows the photo it learns on a small picture sheet.
     pictures: { sample: () => SAMPLE, accept: ["image"] },
     get input() {
@@ -466,11 +472,53 @@ function line(k, a, b, color, t, count) {
 
 // ---- One splat ---------------------------------------------------------------------------------
 
-// The tap: the splat swells and settles, turning a little.
+// The tap trains it (lane Fix7): one splat learning a target by gradient
+// descent, the step at the heart of Gaussian splatting. The splat as set in
+// the options (its sizes, opacity and color, turned by Turn) is the target,
+// drawn as a dashed outline while it learns. The tap starts the splat from
+// a guess (moved, turned, the wrong sizes, faint and gray-blue), and then
+// 24 gradient steps carry each of its parameters toward the target: each
+// step closes a share of what is left (its learning rate), so the steps
+// start big and get smaller, as real training does. Position, rotation,
+// sizes and color learn at different rates, as they do in a real fit.
+const ONE = {
+  steps: 24,
+  move: [-0.85, 0.6, 0.15], // the guess's place, from the target's
+  spin: -1.1, // its extra turn (radians)
+  sizes: [0.35, 0.95, 0.55], // its sizes (x, y, z)
+  rate: { move: 0.24, spin: 0.19, size: 0.15, look: 0.13 },
+};
+// What is left of a parameter's error at p (0 at the tap, 1 at rest): it
+// grows to the guess, then falls by (1 - rate) a step, each step a short
+// slide, and lands on the target at the end.
+function oneLeft(p, rate) {
+  const start = ease(win(p, 0, 0.08));
+  const k = win(p, 0.1, 0.92) * ONE.steps;
+  const n = Math.floor(k);
+  const f = ease(Math.min(1, (k - n) / 0.55));
+  return start * Math.pow(1 - rate, n + f) * (1 - ease(win(p, 0.92, 1)));
+}
 function driveOne(p, c, out) {
-  const b = bump(win(p, 0, 0.3));
-  const turn = (c.turn ?? 0.15) * Math.PI + 0.5 * Math.sin(TAU * win(p, 0, 0.3)) * b;
-  out.parts.splat = { quat: quatAxisAngle([0, 0, 1], turn), scale: 1 + 0.25 * b };
+  const on = c.play > 0;
+  const R = ONE.rate;
+  const move = on ? oneLeft(p, R.move) : 0;
+  const spin = on ? oneLeft(p, R.spin) : 0;
+  const size = on ? oneLeft(p, R.size) : 0;
+  const look = on ? oneLeft(p, R.look) : 0;
+  const turn = (c.turn ?? 0.15) * Math.PI;
+  const q = quatAxisAngle([0, 0, 1], turn + ONE.spin * spin);
+  const offset = ONE.move.map((v) => v * move);
+  // The guess's look (color and opacity) gives way to the target's.
+  out.parts.splat = { quat: q, offset, visible: 1 - look };
+  out.parts.guess = { quat: q, offset, visible: look };
+  out.parts.rods = { quat: q, offset };
+  out.parts.target = {
+    quat: quatAxisAngle([0, 0, 1], turn),
+    visible: on ? win(p, 0, 0.05) * (1 - win(p, 0.94, 1)) : 0,
+  };
+  // The sizes (channel 0): each small splat slides between its place in the
+  // target and in the guess.
+  out.morph = [size, 0, 0, 0];
 }
 
 // Normally distributed numbers (Box-Muller) from rand.
@@ -485,79 +533,103 @@ function buildOne(k, o) {
   const sz = o.sz ?? 0.3;
   const alpha = o.alpha ?? 0.85;
   const col = rgb(o.color || "#e8553d");
+  const S = [sx, sy, sz];
+  const G = ONE.sizes;
   const splat = k.part("splat", { pivot: [0, 0, 0], axis: [0, 0, 1] });
+  const guess = k.part("guess", { pivot: [0, 0, 0], axis: [0, 0, 1] });
+  const rods = k.part("rods", { pivot: [0, 0, 0], axis: [0, 0, 1] });
+  const target = k.part("target", { pivot: [0, 0, 0], axis: [0, 0, 1] });
   // Its extent: the renderer cuts a splat off at 2.83 of its sizes.
   const cut = 2.83;
   k.reach([2.5, 2.5, 0]);
   k.reach([-2.5, -2.5, 0]);
+  // A point at (x, y, z) sizes from the middle: in the target, and (its
+  // morph target) in the guess.
+  const at = (v) => ({ p: v.map((x, i) => x * S[i]), kind: "morph", channel: 0, to: v.map((x, i) => x * G[i]) }); // prettier-ignore
   // The soft splat: small splats spread as the Gaussian says (dense in the
   // middle, thin at the edge), each a little see-through, so together they
-  // glow like the one big splat.
-  const N = 14000;
-  k.cloud({ count: (N * 160000) / k.count + 1, part: splat, pattern: false }, (rand, i) => {
-    if (i >= N) return null;
-    let x;
-    let y;
-    let z;
-    do {
-      x = gauss(rand);
-      y = gauss(rand);
-      z = gauss(rand);
-    } while (x * x + y * y + z * z > cut * cut);
-    const r = Math.sqrt(x * x + y * y + z * z) / cut;
-    return {
-      p: [x * sx, y * sy, z * sz],
-      size: 1.6 + 0.8 * rand(),
-      color: mix(shade(col, 1.25), shade(col, 0.8), r),
-      opacity: alpha * 0.22,
-    };
-  });
+  // glow like the one big splat. The guess is the same cloud, gray-blue and
+  // fainter, shown while it learns.
+  const soft = (part, N, colOf, opacity) =>
+    k.cloud({ count: (N * 160000) / k.count + 1, part, pattern: false }, (rand, i) => {
+      if (i >= N) return null;
+      let v;
+      do v = [gauss(rand), gauss(rand), gauss(rand)];
+      while (v[0] * v[0] + v[1] * v[1] + v[2] * v[2] > cut * cut);
+      const r = Math.hypot(...v) / cut;
+      return { ...at(v), size: 1.6 + 0.8 * rand(), color: colOf(r), opacity };
+    });
+  soft(splat, 14000, (r) => mix(shade(col, 1.25), shade(col, 0.8), r), alpha * 0.22);
+  const gray = "#7d8fa8";
+  soft(guess, 9000, (r) => mix(shade(gray, 1.2), shade(gray, 0.85), r), 0.09);
   // Its three axes: thin rods as long as its sizes (twice each way), red,
   // green and blue.
   const axes = [
-    [[1, 0, 0], sx, "#e0463a"],
-    [[0, 1, 0], sy, "#3fae4a"],
-    [[0, 0, 1], sz, "#3b6fe0"],
+    [[1, 0, 0], 0, "#e0463a"],
+    [[0, 1, 0], 1, "#3fae4a"],
+    [[0, 0, 1], 2, "#3b6fe0"],
   ];
-  for (const [d, len, color] of axes) {
-    const L = 2 * len;
+  for (const [d, ax, color] of axes) {
+    const L = 2 * S[ax];
     const count = Math.max(40, Math.round(L * 260));
     k.cloud(
-      { count: (2 * count * 160000) / k.count + 1, part: splat, pattern: false },
+      { count: (2 * count * 160000) / k.count + 1, part: rods, pattern: false },
       (rand, i) => {
         if (i >= 2 * count) return null;
-        const u = (i / (2 * count - 1)) * 2 - 1;
-        return {
-          p: [d[0] * u * L, d[1] * u * L, d[2] * u * L],
-          size: 1.1,
-          color,
-          opacity: 1,
-        };
+        const u = ((i / (2 * count - 1)) * 2 - 1) * 2;
+        return { ...at(d.map((x) => x * u)), size: 1.1, color, opacity: 1 };
       },
     );
     // A ball at each end.
     for (const sgn of [-1, 1]) {
-      k.cloud({ count: (50 * 160000) / k.count + 1, part: splat, pattern: false }, (rand, i) => {
+      k.cloud({ count: (50 * 160000) / k.count + 1, part: rods, pattern: false }, (rand, i) => {
         if (i >= 50) return null;
         const v = [gauss(rand), gauss(rand), gauss(rand)];
         const l = Math.hypot(...v) || 1;
         const r = 0.04;
-        return {
-          p: [d[0] * sgn * L + (v[0] / l) * r, d[1] * sgn * L + (v[1] / l) * r, d[2] * sgn * L + (v[2] / l) * r], // prettier-ignore
-          size: 1.3,
-          color: shade(color, 1.1),
-          opacity: 1,
-        };
+        const end = d.map((x) => x * sgn * 2);
+        const ball = (s) => end.map((x, j) => x * s[j] + (v[j] / l) * r);
+        return { p: ball(S), kind: "morph", channel: 0, to: ball(G), size: 1.3, color: shade(color, 1.1), opacity: 1 }; // prettier-ignore
       });
     }
   }
+  // The target, while it learns: a dashed outline at twice its sizes.
+  k.cloud({ count: (900 * 160000) / k.count + 1, part: target, pattern: false }, (rand, i) => {
+    if (i >= 900) return null;
+    const a = (i / 900) * TAU;
+    if (Math.floor((a / TAU) * 48) % 2) return null;
+    return {
+      p: [Math.cos(a) * 2 * sx, Math.sin(a) * 2 * sy, 0.02],
+      size: 1.2,
+      color: shade(col, 0.7),
+      opacity: 1,
+    };
+  });
   // A faint square grid behind, so its size reads.
-  const G = 11;
-  for (let i = 0; i < G; i++) {
-    const v = -2.4 + (4.8 * i) / (G - 1);
+  const lines = 11;
+  for (let i = 0; i < lines; i++) {
+    const v = -2.4 + (4.8 * i) / (lines - 1);
     line(k, [v, -2.4, -1.2], [v, 2.4, -1.2], "#c7ccd4", 0.01, 110);
     line(k, [-2.4, v, -1.2], [2.4, v, -1.2], "#c7ccd4", 0.01, 110);
   }
+  // A near-clear card over the grid, so a tap anywhere on the toy starts it
+  // (with the low pick alpha this view asks for).
+  const cardN = 2500;
+  k.cloud({ count: (cardN * 160000) / k.count + 1, pattern: false }, (rand, i) => {
+    if (i >= cardN) return null;
+    return {
+      p: [
+        (((i % 50) + 0.5) / 50) * 4.8 - 2.4,
+        ((Math.floor(i / 50) + 0.5) / 50) * 4.8 - 2.4,
+        -1.21,
+      ],
+      n: [0, 0, 1],
+      flat: 0.3,
+      size: 9,
+      color: "#c7ccd4",
+      opacity: 0.02,
+    };
+  });
 }
 
 // ---- Many splats -------------------------------------------------------------------------------
