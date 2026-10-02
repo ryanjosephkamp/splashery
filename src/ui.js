@@ -1538,8 +1538,11 @@ export function createUI(app) {
       const f = files[0];
       file.value = "";
       if (!f) return;
-      if (files.reduce((sum, x) => sum + x.size, 0) > 40e6) {
-        error.textContent = "That file is too big (over 40 MB).";
+      // input.maxBytes (lane Live input r2): a toy that streams its file
+      // (the song landscape) may take bigger ones.
+      const max = input.maxBytes || 40e6;
+      if (files.reduce((sum, x) => sum + x.size, 0) > max) {
+        error.textContent = `That file is too big (over ${Math.round(max / 1e6)} MB).`;
         error.hidden = false;
         return;
       }

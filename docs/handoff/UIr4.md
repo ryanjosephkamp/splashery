@@ -46,6 +46,7 @@ Reply with "READY:", "WORKING:" or "BLOCKED:" at the end.
 ## State
 
 - Model: Opus 5.5 (claude-opus-5-5), default effort.
+- Merged: the engine PR #156, then PR #157, on October 1, 2026 (main ba830c1).
 - October 1, 2026: built.
   - Engine (`claude/lane-ui-r4-engine`, from main): the recipe `drag` the laptop's trackpad already
     used (`at`, `start`, `move`, `end`) may now return taps to fire from `start` and `move`
@@ -75,10 +76,10 @@ Reply with "READY:", "WORKING:" or "BLOCKED:" at the end.
 
 ## Known issues
 
-- None yet.
+- At the end of the keyboard, a finger that runs past the last key and comes back plays that key
+  again.
 
 ## For the Operator
 
-- The engine PR is based on today's main (#131 has not merged yet); it touches `src/player.js`
-  (grabStart, grabAt, a new fireDrag), `src/motion.js` (info.taps) and `src/app.js` (onTap,
-  onAction, onInteract). Main is merged into it once #131 lands.
+- Both PRs are merged. The engine PR touches `src/player.js` (grabStart, grabAt, a new fireDrag),
+  `src/motion.js` (info.taps) and `src/app.js` (onTap, onAction, onInteract).
