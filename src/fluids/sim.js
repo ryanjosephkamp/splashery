@@ -1113,7 +1113,8 @@ export class Liquid {
     const { hot, nrm } = this;
     for (let i = 0; i < n; i++) {
       const s = nrm[i * 4 + 3];
-      hot[i] += ((s > 0.5 ? 0.35 : 1) - hot[i]) * Math.min(1, dt * 0.6);
+      // (r5: its skin crusts over within a couple of seconds)
+      hot[i] += ((s > 0.5 ? 0.05 : 1) - hot[i]) * Math.min(1, dt * (s > 0.5 ? 1.2 : 0.6));
     }
   }
 

@@ -315,6 +315,7 @@ export class OrbitCamera {
       this.target[2] + this.offset[2],
     ];
     return {
+      distance,
       position: [t[0] + back[0] * distance, t[1] + back[1] * distance, t[2] + back[2] * distance],
       rotation: q,
       right: rotate(q, [1, 0, 0]),
