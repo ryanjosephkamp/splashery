@@ -1411,9 +1411,9 @@
     },
     "fluid-lab": {
       "status": "change",
-      "said": "(October 2, 2026, review) The sound effect for it could be just a little bit louder",
-      "note": "Honey a little louder (the sound is very good).",
-      "plan": "Honey a little louder.",
+      "said": "(September 30, 2026, on the Sound Board) Isn't in sync with fluid pour animation, and needs to be more realistic. (October 2, 2026, review) The sound effect for it could be just a little bit louder",
+      "note": "Isn't in sync with fluid pour animation, and needs to be more realistic. Also (October 2): the honey a little louder; its sound is very good.",
+      "plan": "Pours, glugs and splashes in sync with the animation, from real recordings (lane Fluids, r4). (Fluids) Honey a little louder (lane Sound C).",
       "candidates": []
     },
     "grand-piano": {
