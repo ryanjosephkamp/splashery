@@ -187,7 +187,8 @@ async function record(clip) {
   };
 
   if (clip === "pour") {
-    await open({ scene: "glass", liquid: "water" }, { at: [-0.1, 0.85, 0], zoom: 0.62 });
+    // (framed to show the faucet's handle, which the tap must reach)
+    await open({ scene: "glass", liquid: "water" }, { at: [-0.15, 1.05, 0], zoom: 0.5 });
     await play(0.6);
     await tapHandle();
     await play(3.85);
@@ -217,7 +218,7 @@ async function record(clip) {
     await tap();
     await play(3.5);
   } else if (clip === "lava") {
-    await open({ scene: "glass", liquid: "lava" }, { at: [-0.1, 0.85, 0], zoom: 0.62 });
+    await open({ scene: "glass", liquid: "lava" }, { at: [-0.15, 1.05, 0], zoom: 0.5 });
     await play(0.6);
     await tapHandle();
     await play(6.5);
