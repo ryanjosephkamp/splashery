@@ -1539,6 +1539,25 @@ export const TOY_HELP = {
       "Nearly 300,000 splats, and the graphics chip works out where every one of them is, and its color, again every frame. Each splat only knows its own two numbers, u and v; a small program turns them and the time into a place. That is why so many splats can move smoothly at once.\n\nThe galaxy's stars each follow an oval orbit, turned a little more the farther out it is, so the ovals crowd into two spiral arms that stay while every star keeps moving. The ocean is four waves added together, each splat tilted to the water's slope, and the knot is a flow along a knotted tube. Tap to send a bright ring out through the galaxy, drop a stone in the sea, or push the flow once more around the knot.",
   },
 
+  // ---- Science (lane Science) -----------------------------------------------------------
+  "thermal-ellipsoids": {
+    howTo:
+      "Tap to make the atoms jiggle. Zoom in, then tap an atom to look there. Open your own CIF in the Toy tab.",
+    about:
+      "X-ray crystallography measures each atom as a place and a spread: heat makes it jiggle, so it is smeared into a small cloud, a 3D Gaussian written in the file as six numbers, the displacement tensor U. Each atom here is exactly that Gaussian; its long axis is the way it moves most.\n\nCrystallographers draw it as an ellipsoid that holds the atom 50% of the time (as ORTEP and Mercury do); the dark lines are its principal planes. Hydrogens are placed by rule, so they are small spheres. The samples are aspirin at room temperature (Crystallography Open Database) and crambin, a small protein (Protein Data Bank). Jiggle moves each atom through places drawn from its own Gaussian, slowed down a trillion times. For looking and sharing, not for measuring.",
+  },
+  "smlm-microscope": {
+    howTo:
+      "Tap a spot to zoom in to single molecules; tap again to zoom out. Open your own file in the Toy tab.",
+    about:
+      "A light microscope can't see things smaller than about 250 nanometers, but super-resolution microscopy (STORM, PALM, PAINT) gets around that: dye molecules blink on a few at a time, and each blink is pinned down to within a few nanometers. The result is a table of positions, each with its uncertainty, which is already a Gaussian. So each one here is a splat exactly as wide as its precision.\n\nThe sample is a 12 µm square of a cell's microtubules and clathrin pits, a subset of a record by Christophe Leterrier on ShareLoc.XYZ (CC BY 4.0). Tap to dive in about 60 times: each fuzzy spot is then one blink of one molecule. Scientists use ThunderSTORM and napari for this; this toy is for looking and sharing, not for measuring.",
+  },
+  "galaxy-box": {
+    howTo: "Tap the gas to zoom in; tap again to zoom out.",
+    about:
+      "Galaxy simulations follow gas as millions of particles, each with a bit of mass and a smoothing length, the size its gas is spread over. This is the gas of a Milky Way–mass galaxy today from the FIRE-2 simulations (CC BY 4.0), a subset cut to a box round it. Each particle is the Gaussian with the same spread as the simulation's smoothing kernel, colored by temperature (cold blue, hot orange and red) and brighter where denser, so the spiral arms stand out.\n\nTap to zoom into the gas; Only the cold gas peels away the hot. This is an approximation: the simulation's kernel isn't a Gaussian, and blended splats aren't the column density that tools like SPLASH and yt compute. It shows the shape of the gas, not measurements.",
+  },
+
   // ---- Fluid lab (lane Fluids) ---------------------------------------------------------
   "fluid-lab": {
     howTo:
