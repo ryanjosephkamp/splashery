@@ -187,3 +187,110 @@ test.describe("the Chladni plate, sung to", () => {
     }
   });
 });
+
+// ---- The Song landscape: the transport, the recording, the tilt (items 1-6) --------
+const song = "/src/packs/studio.js";
+
+test.describe("the Song landscape, r3", () => {
+  test("it opens in Live, tilts within its range, and the transport starts over, pauses, scrubs and switches views", async ({
+    playwright,
+    baseURL,
+  }) => {
+    const { page, errors, close } = await micPage(playwright, baseURL, null);
+    try {
+      await open(page, "song-landscape");
+      await idle(page);
+      const cam = await page.evaluate(() => {
+        const c = window.__splashery.player.camera;
+        return { lock: c.tiltLock, range: c.pitchRange };
+      });
+      expect(cam.lock).toBe(false);
+      expect(cam.range).toEqual([0.05, 1.35]);
+      expect(await page.evaluate(() => window.__splashery.player.scene.toy.options?.view ?? null)).not.toBe("whole"); // prettier-ignore
+      expect(await page.evaluate(async (m) => (await import(m)).transport.state().live, song)).toBe(true); // prettier-ignore
+      await page.waitForSelector("#landscape-transport", { state: "attached" });
+      // Play, then scrub to the middle while it plays.
+      await tap(page, "#landscape-play");
+      await until(page, async (m) => (await import(m)).transport.state().pos > 0.5, song, 30_000);
+      const len = await page.evaluate(async (m) => (await import(m)).transport.state().length, song); // prettier-ignore
+      await page.evaluate((v) => {
+        const s = document.getElementById("landscape-seek");
+        s.value = String(v);
+        s.dispatchEvent(new Event("input"));
+        s.dispatchEvent(new Event("change"));
+      }, 500);
+      const mid = await until(page, async (m) => { const s = (await import(m)).transport.state(); return s.pos > 0 ? s : null; }, song); // prettier-ignore
+      expect(Math.abs(mid.pos - len / 2)).toBeLessThan(1.5);
+      expect(mid.playing).toBe(true);
+      // Pause: the clock holds.
+      await tap(page, "#landscape-play");
+      const p0 = await page.evaluate(async (m) => (await import(m)).transport.state().pos, song);
+      await page.waitForTimeout(700);
+      const p1 = await page.evaluate(async (m) => (await import(m)).transport.state(), song);
+      expect(p1.playing).toBe(false);
+      expect(Math.abs(p1.pos - p0)).toBeLessThan(0.05);
+      // Scrub while paused: it moves there and stays paused.
+      await page.evaluate(() => {
+        const s = document.getElementById("landscape-seek");
+        s.value = "200";
+        s.dispatchEvent(new Event("input"));
+      });
+      const p2 = await page.evaluate(async (m) => (await import(m)).transport.state(), song);
+      expect(Math.abs(p2.pos - len * 0.2)).toBeLessThan(0.3);
+      expect(p2.playing).toBe(false);
+      // Start over: back to 0 and playing.
+      await tap(page, "#landscape-start");
+      const p3 = await page.evaluate(async (m) => (await import(m)).transport.state(), song);
+      expect(p3.pos).toBeLessThan(0.3);
+      expect(p3.playing).toBe(true);
+      // Whole is one tap away, and back.
+      await tap(page, "#landscape-view");
+      await idle(page);
+      expect(await page.evaluate(async (m) => (await import(m)).transport.state().live, song)).toBe(false); // prettier-ignore
+      expect(await page.evaluate(() => document.getElementById("landscape-view")?.textContent)).toBe("Live view"); // prettier-ignore
+      expect(errors).toEqual([]);
+    } finally {
+      await close();
+    }
+  });
+
+  test("what the microphone hears is kept in memory, becomes the song when it stops, plays back and saves as a WAV", async ({
+    playwright,
+    baseURL,
+  }) => {
+    const { page, errors, close } = await micPage(playwright, baseURL, WAVER);
+    try {
+      await open(page, "song-landscape");
+      await idle(page);
+      await tap(page, "#live-mic");
+      await until(page, async (m) => (await import(m)).recordState().recording > 3, song, 60_000);
+      // Nothing is saved or sent while it records: no download, no request.
+      const requests = [];
+      page.on("request", (r) => requests.push(r.url()));
+      await tap(page, "#live-mic"); // stop
+      await until(page, async (m) => (await import(m)).recordState().onRecording, song, 60_000);
+      const st = await page.evaluate(async (m) => (await import(m)).recordState(), song);
+      expect(st.recorded).toBeGreaterThan(3);
+      expect(requests.filter((u) => !u.startsWith(baseURL) && !u.startsWith("blob:") && !u.startsWith("data:"))).toEqual([]); // prettier-ignore
+      // It plays back: the song's clock moves and the recording has the voice in it.
+      await tap(page, "#landscape-recording-play");
+      await until(page, async (m) => (await import(m)).transport.state().pos > 0.5, song, 30_000);
+      // Save: a WAV file of the same length.
+      const [download] = await Promise.all([page.waitForEvent("download"), tap(page, "#landscape-recording-save")]); // prettier-ignore
+      expect(download.suggestedFilename()).toMatch(/^splashery-recording-\d{8}-\d{6}\.wav$/);
+      const file = await download.path();
+      const bytes = fs.readFileSync(file);
+      expect(bytes.toString("ascii", 0, 4)).toBe("RIFF");
+      const rate = bytes.readUInt32LE(24);
+      const secs = (bytes.length - 44) / 2 / rate;
+      expect(Math.abs(secs - st.recorded)).toBeLessThan(0.1);
+      // The voice is in it (a sung G3: loud, not silence).
+      let sum = 0;
+      for (let i = 44; i < bytes.length; i += 2) sum += (bytes.readInt16LE(i) / 32768) ** 2;
+      expect(Math.sqrt(sum / ((bytes.length - 44) / 2))).toBeGreaterThan(0.02);
+      expect(errors).toEqual([]);
+    } finally {
+      await close();
+    }
+  });
+});

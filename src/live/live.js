@@ -106,6 +106,8 @@ export const live = {
   setOptions: null,
   // Set by the page so a live sound can tap the toy (clap to tap).
   tap: null,
+  // Set by the page: draws a frame now (r3: the Song landscape's scrub).
+  wake: null,
   on: (kind) => sources.has(kind),
   owners: (kind) => [...(sources.get(kind)?.owners || [])],
   stream: (kind) => sources.get(kind)?.stream ?? null,

@@ -14,6 +14,7 @@ import { reliefGrid } from "../live/relief.js";
 import { Track, SongAnalysis } from "./song-stream.js";
 import { LOOKS, buildLook, drawLook, lookMotion, lookVersion, buildLandscapeLong, drawLandscapeLong, landscapeCaps } from "./song-looks.js"; // prettier-ignore
 import { HOP as FRAME } from "./song-analysis.js";
+import { MicRecorder, wavBlob, saveBlob, songTransport } from "./song-record.js";
 
 // ---- The Chladni plate ----------------------------------------------------------------
 // The classic model of a square plate of side L = 1 (x, y from 0 to 1) in one
@@ -177,6 +178,9 @@ function chladniCue(mode, on) {
 }
 
 const CHLADNI = {
+  // Lane Live input r3: tilt to see the plate from the side (above the stage only).
+  tiltLock: false,
+  pitchRange: [0.05, 1.35],
   alive: (c) => (c.bow > 0.001 && c.bow < 0.999) || liveIn.on("mic"), // lane Live input: sung to
   // Sand grains take most of the budget (in twelve copies of which one shows).
   density: 2,
@@ -576,6 +580,7 @@ function stopShort() {
 function driveR2(g, out, info) {
   const song = g.song;
   const t = song.track;
+  playAfter(song, info.sound); // r3
   // Each tap plays or pauses. A long song's tap already did it inside the
   // gesture (action.onAct); a tap that came some other way does it here.
   const n = info.tap?.n ?? 0;
@@ -605,7 +610,138 @@ function driveR2(g, out, info) {
   setShown(progressLine());
 }
 
+// ---- Lane Live input r3: the recording and the transport ------------------------------
+// While the microphone is on, what it hears is kept in memory (song-record.js);
+// when it stops, the recording becomes the song on show, to play back, scrub
+// and save. The transport in the Toy tab starts over, plays or pauses, scrubs
+// and switches Live and Whole.
+const REC = { rec: null, last: null, song: null };
+const R3 = { view: "live", playAfter: false };
+
+export const recordState = () => ({
+  recording: REC.rec?.seconds ?? 0,
+  recorded: REC.last?.duration ?? 0,
+  onRecording: !!REC.song && SONG.current === REC.song,
+});
+
+// The recording as a song: a short one decoded at once, a long one played
+// from a WAV file in memory like an opened song.
+async function recordingSong() {
+  if (REC.song) return REC.song;
+  const r = REC.last;
+  const name = "Your recording";
+  if (r.duration > SHORT && typeof Audio !== "undefined") {
+    const file = new File([wavBlob(r.samples, r.rate)], "recording.wav", { type: "audio/wav" });
+    const url = URL.createObjectURL(file);
+    const track = new Track(url);
+    const duration = await track.ready;
+    REC.song = { long: true, file, url, track, name, duration };
+  } else REC.song = { samples: r.samples, rate: r.rate, duration: r.duration, name };
+  return REC.song;
+}
+
+function dropRecording() {
+  const s = REC.song;
+  if (s?.track) {
+    s.track.close();
+    URL.revokeObjectURL(s.url);
+  }
+  REC.song = null;
+  REC.last = null;
+}
+
+const wake = () => liveIn.wake?.();
+
+function songSeek(sec) {
+  const s = SONG.current;
+  if (!s) return;
+  const x = Math.max(0, Math.min(s.duration || 0, sec));
+  if (s.track) {
+    s.track.el.currentTime = x;
+    s.track.anchor = null;
+  } else {
+    PLAY.pos = x;
+    if (PLAY.on) {
+      // Restarted from there on the next frame (want stays on).
+      try {
+        PLAY.src?.stop();
+      } catch {
+        // Already ended.
+      }
+      Object.assign(PLAY, { on: false, src: null, ctx: null });
+    }
+  }
+  wake();
+}
+
+const songPlaying = () => {
+  const t = SONG.current?.track;
+  return t ? t.playing : PLAY.want;
+};
+
+function songPlay(on) {
+  const t = SONG.current?.track;
+  if (t) {
+    if (on && !t.playing) t.play(R2.sound);
+    if (!on && t.playing) t.pause();
+  } else PLAY.want = on;
+  wake();
+}
+
+export const transport = {
+  state() {
+    const mic = liveIn.on("mic");
+    const s = SONG.current;
+    return {
+      pos: mic || !s ? 0 : heardNow(),
+      length: mic ? 0 : s?.duration || 0,
+      playing: !mic && songPlaying(),
+      live: R3.view === "live",
+      mic,
+      ...recordState(),
+    };
+  },
+  toStart() {
+    songSeek(0);
+    songPlay(true);
+  },
+  toggle() {
+    songPlay(!songPlaying());
+  },
+  seek: songSeek,
+  setLive(on) {
+    liveIn.setOptions?.({ view: on ? "live" : "whole" });
+  },
+  playRecording() {
+    if (!REC.last) return;
+    if (SONG.current === REC.song && REC.song) {
+      songSeek(0);
+      return songPlay(true);
+    }
+    R3.playAfter = true;
+    liveIn.setOptions?.({ song: "recording", songName: "Your recording" });
+  },
+  saveRecording() {
+    if (!REC.last) return;
+    const d = new Date();
+    const p = (n) => String(n).padStart(2, "0");
+    const stamp = `${d.getFullYear()}${p(d.getMonth() + 1)}${p(d.getDate())}-${p(d.getHours())}${p(d.getMinutes())}${p(d.getSeconds())}`; // prettier-ignore
+    saveBlob(wavBlob(REC.last.samples, REC.last.rate), `splashery-recording-${stamp}.wav`);
+  },
+};
+
+// A song built with "play after" set starts at once (the recording's button).
+function playAfter(song, sound) {
+  if (!R3.playAfter || song !== REC.song) return;
+  R3.playAfter = false;
+  if (song.track) song.track.play(sound);
+  else PLAY.want = true;
+}
+
 const SONG_LANDSCAPE = {
+  // Lane Live input r3: tilt up and down, from a level look to one from above.
+  tiltLock: false,
+  pitchRange: [0.05, 1.35],
   // Lane Live input: the microphone; r2: a long song's track, and the
   // picture filling in while the song is measured.
   alive: () => PLAY.on || liveIn.on("mic") || !!SONG.current?.track?.playing || !!(R2.an && !R2.an.finished && (R2.look || R2.land)), // prettier-ignore
@@ -630,10 +766,10 @@ const SONG_LANDSCAPE = {
       key: "view",
       label: "View",
       type: "select",
-      default: "whole",
+      default: "live",
       choices: [
-        { id: "whole", label: "Whole song" },
         { id: "live", label: "Live (scrolls with the music)" },
+        { id: "whole", label: "Whole song" },
       ],
     },
     {
@@ -672,7 +808,7 @@ const SONG_LANDSCAPE = {
     accept: "audio/*,.mp3,.wav,.ogg,.m4a,.flac,.aac,.opus",
     binary: true,
     fileButton: "Open a song…",
-    note: "Open an MP3, WAV, OGG, M4A or FLAC file. A long song starts playing at once, exactly as the file sounds, while its picture is measured on this device (the line under it shows how far); nothing is uploaded. Tap to pause or play.",
+    note: "Open an MP3, WAV, OGG, M4A or FLAC file. A long song starts playing at once, exactly as the file sounds, while its picture is measured on this device (the line under it shows how far); nothing is uploaded. Tap the picture to pause or play; the buttons above start over, pause, scrub and switch between Live and the whole song.",
     maxBytes: MAX_BYTES, // lane Live input r2: a long song streams from the file
     async read(_text, fileName, file) {
       if (!file) throw new Error("Open a sound file.");
@@ -709,8 +845,15 @@ const SONG_LANDSCAPE = {
     },
     shown: () =>
       liveIn.on("mic") ? "Live: what the microphone hears now is at the front." : SONG.current ? `${SONG.current.name} (${Math.round(SONG.current.duration)} s)` : "", // prettier-ignore
-    // Lane Live input: the microphone instead of a file.
-    live: [{ kind: "mic" }],
+    // Lane Live input: the microphone instead of a file; r3, the transport
+    // and the recording (kept in memory, saved only on a tap).
+    live: [
+      { render: () => songTransport(transport) },
+      {
+        kind: "mic",
+        note: "Stays on this device. While the microphone is on, what it hears is kept in this page's memory so you can play it back. Nothing is sent, and it's saved only if you tap Save the recording.",
+      },
+    ],
   },
   // Lane Live input: the live landscape's heights and colors; r2: the
   // measured looks' and a long song's landscape's places and colors.
@@ -751,6 +894,7 @@ const SONG_LANDSCAPE = {
       SONG.sample = { samples, rate, duration: samples.length / rate, name: "Sample tune" };
     }
     SONG.want = o.song === "custom" && SONG.custom ? SONG.custom : SONG.sample;
+    if (o.song === "recording" && REC.last) SONG.want = await recordingSong(); // r3
     if (!SONG.want.duration) SONG.want.duration = SONG.want.samples.length / SONG.want.rate;
   },
   drive(t, c, out, info) {
@@ -758,7 +902,7 @@ const SONG_LANDSCAPE = {
     const g = info?.data?.song;
     if (!g || g.liveMic) return; // lane Live input: the microphone's landscape moves by itself
     if (g.r2) return driveR2(g, out, info); // lane Live input r2
-    // Each tap plays or pauses (a song that has ended plays again from the start).
+    playAfter(g.song, info.sound); // r3    // Each tap plays or pauses (a song that has ended plays again from the start).
     const n = info.tap?.n ?? 0;
     if (n < PLAY.taps) PLAY.taps = 0;
     if (n > PLAY.taps) {
@@ -792,6 +936,21 @@ const SONG_LANDSCAPE = {
     out.body = { offset: [0, 0, ((f - 0.5) * 0.5 * g.D * g.fit) / (info.R || 1)] };
   },
   build(k, o) {
+    R3.view = o.view;
+    // r3: the microphone's recording. A new one starts with the microphone;
+    // when it stops, the recording becomes the song on show.
+    if (liveIn.on("mic") && liveIn.mic && REC.rec?.mic !== liveIn.mic) {
+      REC.rec?.finish();
+      REC.rec = new MicRecorder(liveIn.mic);
+    } else if (!liveIn.on("mic") && REC.rec) {
+      const r = REC.rec.finish();
+      REC.rec = null;
+      if (r.duration >= 0.5) {
+        dropRecording();
+        REC.last = r;
+        setTimeout(() => liveIn.setOptions?.({ song: "recording", songName: "Your recording" }), 0); // prettier-ignore
+      }
+    }
     const song = SONG.want || SONG.sample;
     if (SONG.current?.track && SONG.current !== song) SONG.current.track.pause(); // lane Live input r2
     SONG.current = song;

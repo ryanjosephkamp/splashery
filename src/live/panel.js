@@ -24,6 +24,12 @@
 //   takes the frame as a JPEG and hands it to input.read like an opened file.
 // - `status()` returns a line shown under the buttons, refreshed while the
 //   source is on (the room echo meter's reading).
+// - `note` replaces the line about privacy under the buttons (r3: the Song
+//   landscape keeps its recording in memory, and says so).
+// - `big: true` makes the button large (r3: the splat mirror's "Start
+//   camera").
+// - An entry with `render()` instead of a kind is the toy's own block of
+//   controls, put in that place (r3: the Song landscape's transport).
 
 import { live, start, stop, canUse, onChange, keepOnly, LABELS, LIVE_NOTE } from "./live.js";
 
@@ -40,6 +46,7 @@ export function initLive(app) {
   appRef = app;
   live.setOptions = (partial) => app.setToyOptions(partial);
   live.tap = () => app.act();
+  live.wake = () => app.player?.stage?.requestRender?.(); // r3: draw a frame now
   // A toy that is closed lets go of what it started.
   app.player.on("toy", () => {
     const id = currentToy();
@@ -68,6 +75,10 @@ export function renderLive(entries, { error }) {
   wrap.className = "input-live";
   const rows = [];
   for (const entry of entries) {
+    if (entry.render) {
+      wrap.append(entry.render());
+      continue;
+    }
     if (!LABELS[entry.kind]) continue;
     if (!canUse(entry.kind)) continue; // no screen capture on phones
     const row = document.createElement("div");
@@ -88,6 +99,7 @@ export function renderLive(entries, { error }) {
       const on = live.on(entry.kind);
       b.textContent = on ? LABELS[entry.kind].stop : entry.button || LABELS[entry.kind].button;
       b.classList.toggle("primary", !on);
+      b.classList.toggle("live-big", !!entry.big && !on);
       b.setAttribute("aria-pressed", String(on));
       cap.hidden = !(on && entry.capture);
       const s = on && entry.status ? entry.status() : "";
@@ -141,7 +153,7 @@ export function renderLive(entries, { error }) {
   if (!rows.length) return wrap;
   const note = document.createElement("p");
   note.className = "note live-note";
-  note.textContent = LIVE_NOTE;
+  note.textContent = entries.find((e) => e.note)?.note || LIVE_NOTE;
   wrap.append(note);
   const off = onChange(() => rows.forEach((f) => f()));
   const timer = setInterval(() => {
