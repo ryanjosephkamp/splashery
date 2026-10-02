@@ -14,6 +14,7 @@ import { reliefGrid } from "../live/relief.js";
 import { Track, SongAnalysis } from "./song-stream.js";
 import { LOOKS, buildLook, drawLook, lookMotion, lookVersion, buildLandscapeLong, drawLandscapeLong, landscapeCaps } from "./song-looks.js"; // prettier-ignore
 import { HOP as FRAME } from "./song-analysis.js";
+import { MicRecorder, wavBlob, saveBlob, songTransport } from "./song-record.js";
 
 // ---- The Chladni plate ----------------------------------------------------------------
 // The classic model of a square plate of side L = 1 (x, y from 0 to 1) in one
@@ -162,7 +163,7 @@ const HOP = 0.09; // the highest hop, in recipe units
 const BOW_SECS = 3.6;
 
 // Sound and drive state for the tap (one toy at a time).
-const CH = { was: 0 };
+const CH = { was: 0, bowAtSing: null };
 
 function chladniCue(mode, on) {
   const f = modeFreq(mode);
@@ -177,6 +178,9 @@ function chladniCue(mode, on) {
 }
 
 const CHLADNI = {
+  // Lane Live input r3: tilt to see the plate from the side (above the stage only).
+  tiltLock: false,
+  pitchRange: [0.05, 1.35],
   alive: (c) => (c.bow > 0.001 && c.bow < 0.999) || liveIn.on("mic"), // lane Live input: sung to
   // Sand grains take most of the budget (in twelve copies of which one shows).
   density: 2,
@@ -203,7 +207,13 @@ const CHLADNI = {
     if (!g) return;
     // Lane Live input: while the microphone is on, your voice bows the plate.
     const sung = liveIn.on("mic");
-    const p = sung ? singDrive(info.time ?? t, g.mode) : clamp01(c.bow ?? 0);
+    // After the microphone stops, the sung sand stays as it is until the
+    // next tap (the bow's own state takes over then), rather than jumping to
+    // wherever a tap made while singing had left the bow.
+    if (sung) CH.bowAtSing = c.bow ?? 0;
+    else if (CH.bowAtSing !== null && (c.bow ?? 0) !== CH.bowAtSing) CH.bowAtSing = null;
+    const keep = !sung && CH.bowAtSing !== null && SING.p > 0;
+    const p = sung ? singDrive(info.time ?? t, g.mode) : keep ? SING.p : clamp01(c.bow ?? 0);
     // The sound: the hum when the bowing starts, a hiss when it is stirred.
     if (sung) CH.was = p; // your voice is the sound
     else if (CH.was <= 0.001 && p > 0.001) for (const s of chladniCue(g.mode, true)) out.cues.push(s);
@@ -229,6 +239,8 @@ const CHLADNI = {
     const mode = modeById(o.mode);
     // Lane Live input: a new plate's sand starts scattered.
     Object.assign(SING, { p: 0, want: null, asked: false, last: null });
+    SING.builds++;
+    CH.bowAtSing = null;
     // The stand: a base, a post, and the plate clamped on top.
     const plate = k.part("plate", { pivot: [0, 0, 0], axis: [0, 1, 0] });
     k.add(k.cylinder(0.5, 0.1, { caps: true }), {
@@ -549,6 +561,7 @@ function buildR2(k, o, song) {
 
 // A short song's player, stopped (a new build starts stopped).
 function stopShort() {
+  const keep = R3.keep; // r3: the same song keeps its place
   try {
     PLAY.src?.stop();
   } catch {
@@ -563,11 +576,13 @@ function stopShort() {
     ctx: null,
     taps: 0,
   });
+  if (keep) Object.assign(PLAY, keep);
 }
 
 function driveR2(g, out, info) {
   const song = g.song;
   const t = song.track;
+  playAfter(song, info.sound); // r3
   // Each tap plays or pauses. A long song's tap already did it inside the
   // gesture (action.onAct); a tap that came some other way does it here.
   const n = info.tap?.n ?? 0;
@@ -597,7 +612,138 @@ function driveR2(g, out, info) {
   setShown(progressLine());
 }
 
+// ---- Lane Live input r3: the recording and the transport ------------------------------
+// While the microphone is on, what it hears is kept in memory (song-record.js);
+// when it stops, the recording becomes the song on show, to play back, scrub
+// and save. The transport in the Toy tab starts over, plays or pauses, scrubs
+// and switches Live and Whole.
+const REC = { rec: null, last: null, song: null };
+const R3 = { view: "live", playAfter: false };
+
+export const recordState = () => ({
+  recording: REC.rec?.seconds ?? 0,
+  recorded: REC.last?.duration ?? 0,
+  onRecording: !!REC.song && SONG.current === REC.song,
+});
+
+// The recording as a song: a short one decoded at once, a long one played
+// from a WAV file in memory like an opened song.
+async function recordingSong() {
+  if (REC.song) return REC.song;
+  const r = REC.last;
+  const name = "Your recording";
+  if (r.duration > SHORT && typeof Audio !== "undefined") {
+    const file = new File([wavBlob(r.samples, r.rate)], "recording.wav", { type: "audio/wav" });
+    const url = URL.createObjectURL(file);
+    const track = new Track(url);
+    const duration = await track.ready;
+    REC.song = { long: true, file, url, track, name, duration };
+  } else REC.song = { samples: r.samples, rate: r.rate, duration: r.duration, name };
+  return REC.song;
+}
+
+function dropRecording() {
+  const s = REC.song;
+  if (s?.track) {
+    s.track.close();
+    URL.revokeObjectURL(s.url);
+  }
+  REC.song = null;
+  REC.last = null;
+}
+
+const wake = () => liveIn.wake?.();
+
+function songSeek(sec) {
+  const s = SONG.current;
+  if (!s) return;
+  const x = Math.max(0, Math.min(s.duration || 0, sec));
+  if (s.track) {
+    s.track.el.currentTime = x;
+    s.track.anchor = null;
+  } else {
+    PLAY.pos = x;
+    if (PLAY.on) {
+      // Restarted from there on the next frame (want stays on).
+      try {
+        PLAY.src?.stop();
+      } catch {
+        // Already ended.
+      }
+      Object.assign(PLAY, { on: false, src: null, ctx: null });
+    }
+  }
+  wake();
+}
+
+const songPlaying = () => {
+  const t = SONG.current?.track;
+  return t ? t.playing : PLAY.want;
+};
+
+function songPlay(on) {
+  const t = SONG.current?.track;
+  if (t) {
+    if (on && !t.playing) t.play(R2.sound);
+    if (!on && t.playing) t.pause();
+  } else PLAY.want = on;
+  wake();
+}
+
+export const transport = {
+  state() {
+    const mic = liveIn.on("mic");
+    const s = SONG.current;
+    return {
+      pos: mic || !s ? 0 : heardNow(),
+      length: mic ? 0 : s?.duration || 0,
+      playing: !mic && songPlaying(),
+      live: R3.view === "live",
+      mic,
+      ...recordState(),
+    };
+  },
+  toStart() {
+    songSeek(0);
+    songPlay(true);
+  },
+  toggle() {
+    songPlay(!songPlaying());
+  },
+  seek: songSeek,
+  setLive(on) {
+    liveIn.setOptions?.({ view: on ? "live" : "whole" });
+  },
+  playRecording() {
+    if (!REC.last) return;
+    if (SONG.current === REC.song && REC.song) {
+      songSeek(0);
+      return songPlay(true);
+    }
+    R3.playAfter = true;
+    liveIn.setOptions?.({ song: "recording", songName: "Your recording" });
+  },
+  saveRecording() {
+    if (!REC.last) return;
+    const d = new Date();
+    const p = (n) => String(n).padStart(2, "0");
+    const stamp = `${d.getFullYear()}${p(d.getMonth() + 1)}${p(d.getDate())}-${p(d.getHours())}${p(d.getMinutes())}${p(d.getSeconds())}`; // prettier-ignore
+    saveBlob(wavBlob(REC.last.samples, REC.last.rate), `splashery-recording-${stamp}.wav`);
+  },
+};
+
+// A song built with "play after" set starts at once (the recording's button).
+function playAfter(song, sound) {
+  if (!R3.playAfter || song !== REC.song) return;
+  R3.playAfter = false;
+  if (song.track) song.track.play(sound);
+  else PLAY.want = true;
+}
+
 const SONG_LANDSCAPE = {
+  // Lane Live input r3: tilt up and down, from a level look to one from above.
+  tiltLock: false,
+  pitchRange: [0.05, 1.35],
   // Lane Live input: the microphone; r2: a long song's track, and the
   // picture filling in while the song is measured.
   alive: () => PLAY.on || liveIn.on("mic") || !!SONG.current?.track?.playing || !!(R2.an && !R2.an.finished && (R2.look || R2.land)), // prettier-ignore
@@ -622,10 +768,10 @@ const SONG_LANDSCAPE = {
       key: "view",
       label: "View",
       type: "select",
-      default: "whole",
+      default: "live",
       choices: [
-        { id: "whole", label: "Whole song" },
         { id: "live", label: "Live (scrolls with the music)" },
+        { id: "whole", label: "Whole song" },
       ],
     },
     {
@@ -664,7 +810,7 @@ const SONG_LANDSCAPE = {
     accept: "audio/*,.mp3,.wav,.ogg,.m4a,.flac,.aac,.opus",
     binary: true,
     fileButton: "Open a song…",
-    note: "Open an MP3, WAV, OGG, M4A or FLAC file. A long song starts playing at once, exactly as the file sounds, while its picture is measured on this device (the line under it shows how far); nothing is uploaded. Tap to pause or play.",
+    note: "Open an MP3, WAV, OGG, M4A or FLAC file. A long song starts playing at once, exactly as the file sounds, while its picture is measured on this device (the line under it shows how far); nothing is uploaded. Tap the picture to pause or play; the buttons above start over, pause, scrub and switch between Live and the whole song.",
     maxBytes: MAX_BYTES, // lane Live input r2: a long song streams from the file
     async read(_text, fileName, file) {
       if (!file) throw new Error("Open a sound file.");
@@ -701,8 +847,15 @@ const SONG_LANDSCAPE = {
     },
     shown: () =>
       liveIn.on("mic") ? "Live: what the microphone hears now is at the front." : SONG.current ? `${SONG.current.name} (${Math.round(SONG.current.duration)} s)` : "", // prettier-ignore
-    // Lane Live input: the microphone instead of a file.
-    live: [{ kind: "mic" }],
+    // Lane Live input: the microphone instead of a file; r3, the transport
+    // and the recording (kept in memory, saved only on a tap).
+    live: [
+      { render: () => songTransport(transport) },
+      {
+        kind: "mic",
+        note: "Stays on this device. While the microphone is on, what it hears is kept in this page's memory so you can play it back. Nothing is sent, and it's saved only if you tap Save the recording.",
+      },
+    ],
   },
   // Lane Live input: the live landscape's heights and colors; r2: the
   // measured looks' and a long song's landscape's places and colors.
@@ -743,6 +896,7 @@ const SONG_LANDSCAPE = {
       SONG.sample = { samples, rate, duration: samples.length / rate, name: "Sample tune" };
     }
     SONG.want = o.song === "custom" && SONG.custom ? SONG.custom : SONG.sample;
+    if (o.song === "recording" && REC.last) SONG.want = await recordingSong(); // r3
     if (!SONG.want.duration) SONG.want.duration = SONG.want.samples.length / SONG.want.rate;
   },
   drive(t, c, out, info) {
@@ -750,7 +904,7 @@ const SONG_LANDSCAPE = {
     const g = info?.data?.song;
     if (!g || g.liveMic) return; // lane Live input: the microphone's landscape moves by itself
     if (g.r2) return driveR2(g, out, info); // lane Live input r2
-    // Each tap plays or pauses (a song that has ended plays again from the start).
+    playAfter(g.song, info.sound); // r3    // Each tap plays or pauses (a song that has ended plays again from the start).
     const n = info.tap?.n ?? 0;
     if (n < PLAY.taps) PLAY.taps = 0;
     if (n > PLAY.taps) {
@@ -784,7 +938,25 @@ const SONG_LANDSCAPE = {
     out.body = { offset: [0, 0, ((f - 0.5) * 0.5 * g.D * g.fit) / (info.R || 1)] };
   },
   build(k, o) {
+    R3.view = o.view;
+    // r3: the microphone's recording. A new one starts with the microphone;
+    // when it stops, the recording becomes the song on show.
+    if (liveIn.on("mic") && liveIn.mic && REC.rec?.mic !== liveIn.mic) {
+      REC.rec?.finish();
+      REC.rec = new MicRecorder(liveIn.mic);
+    } else if (!liveIn.on("mic") && REC.rec) {
+      const r = REC.rec.finish();
+      REC.rec = null;
+      if (r.duration >= 0.5) {
+        dropRecording();
+        REC.last = r;
+        setTimeout(() => liveIn.setOptions?.({ song: "recording", songName: "Your recording" }), 0); // prettier-ignore
+      }
+    }
     const song = SONG.want || SONG.sample;
+    // r3: the same song rebuilt (another view or look) keeps its place, and
+    // keeps playing if it was.
+    R3.keep = SONG.current === song ? { pos: PLAY.pos, want: PLAY.want } : null;
     if (SONG.current?.track && SONG.current !== song) SONG.current.track.pause(); // lane Live input r2
     SONG.current = song;
     R2.look = null;
@@ -806,6 +978,7 @@ const SONG_LANDSCAPE = {
       ctx: null,
       taps: 0,
     });
+    if (R3.keep) Object.assign(PLAY, R3.keep); // r3
     const budget = Math.floor(k.count * 0.3); // cells rise in up to three layers
     const d = landscapeData(song.samples, song.rate, budget);
     const D = landscapeLength(d.duration);
@@ -1008,14 +1181,18 @@ function liveSongDraw(g, time) {
 // plate's frequencies go with its thickness) has its modes where voices
 // are: 75, 150, 195, 255 and 375 Hz. The mode nearest your note is the one
 // that rings; how strongly follows a resonance curve (half as strong about
-// 60 cents away), times how loud you sing. While it rings the sand hops
+// SING_WIDTH cents away), times how loud you sing. While it rings the sand hops
 // and drifts to its still lines, as when it is bowed; when you stop, the
 // sand stays where it is. A different mode, held for a moment, gets its
 // own plate of scattered sand.
 export const SING_F0 = F0 / 4;
+// Half strength this many cents off a mode: wide enough that any note from
+// about 60 to 450 Hz rings the nearest mode (an ordinary voice lands between
+// modes; at 60 cents most notes rang nothing, the owner's October 2 review).
+const SING_WIDTH = 150;
 export const singFreq = (mode) => SING_F0 * (mode.n * mode.n + mode.m * mode.m);
-const SING = { p: 0, want: null, since: 0, last: null, note: null, near: null, r: 0 };
-export const singState = () => ({ p: SING.p, note: SING.note, mode: SING.near?.mode.id ?? null }); // prettier-ignore
+const SING = { p: 0, want: null, since: 0, last: null, built: 0, note: null, near: null, r: 0, builds: 0 }; // prettier-ignore
+export const singState = () => ({ p: SING.p, note: SING.note, mode: SING.near?.mode.id ?? null, builds: SING.builds }); // prettier-ignore
 
 // The mode nearest a sung frequency (keeping the sign of the one on show
 // when the pair shares a frequency), and how strongly it rings (0..1).
@@ -1026,7 +1203,7 @@ export function singMode(hz, current) {
     const d = Math.abs(cents) - (current && m.n === current.n && m.m === current.m && m.s === current.s ? 1e-6 : 0); // prettier-ignore
     if (!best || d < best.d) best = { mode: m, d, cents };
   }
-  const x = best.cents / 60;
+  const x = best.cents / SING_WIDTH;
   return { ...best, response: 1 / (1 + x * x) };
 }
 
@@ -1040,29 +1217,43 @@ function singStatus() {
   return `You: ${n.name} (${Math.round(n.hz)} Hz). Nearest mode ${near.mode.n}, ${near.mode.m} rings at ${hz} Hz on this plate.${side}`; // prettier-ignore
 }
 
-// One frame of the sung plate: how far the sand has settled (0..1).
+// One frame of the sung plate: how far the sand has settled (0..1). The
+// plate on show rings with its own resonance to whatever is sung, so the
+// sand moves whenever the note is anywhere near its mode (a real voice
+// wavers). Another mode takes over only when it is clearly nearer and held
+// for a second, and not within two seconds of the last change: a new mode is
+// a new plate of scattered sand, so switching on every waver kept the sand
+// from ever settling (lane Live input r3, the owner's review of October 2).
+const SWITCH_HOLD = 1; // seconds another mode must be held
+const SWITCH_REST = 2; // seconds after a build before another switch
 function singDrive(time, mode) {
   const dt = SING.last === null ? 0 : Math.min(0.1, Math.max(0, time - SING.last));
+  if (SING.last === null) SING.built = time;
   SING.last = time;
   const pitch = liveIn.mic?.pitch;
   const loud = clamp01((liveIn.mic?.db ?? -120) / 30 + 1.8); // −54 dBFS nothing, −24 full
   if (pitch && loud > 0) {
     SING.note = pitch.note && { name: pitch.note.name, hz: pitch.hz };
     SING.near = singMode(pitch.hz, mode);
-    SING.r = SING.near.response * loud;
+    // This plate's own response to the note.
+    const x = (1200 * Math.log2(pitch.hz / singFreq(mode))) / SING_WIDTH;
+    const own = 1 / (1 + x * x);
+    SING.r = own * loud;
+    SING.p = Math.min(1, SING.p + (dt / BOW_SECS) * SING.r * 1.4);
     const other = SING.near.mode.id !== mode.id;
-    if (other && SING.near.response > 0.5) {
+    if (other && SING.near.response > own * 1.5) {
       if (SING.want !== SING.near.mode.id) {
         SING.want = SING.near.mode.id;
         SING.since = time;
-      } else if (time - SING.since > 0.4 && !SING.asked) {
+      } else if (
+        time - SING.since > SWITCH_HOLD &&
+        time - SING.built > SWITCH_REST &&
+        !SING.asked
+      ) {
         SING.asked = true;
         liveIn.setOptions?.({ mode: SING.want });
       }
-    } else if (!other) {
-      SING.want = null;
-      SING.p = Math.min(1, SING.p + (dt / BOW_SECS) * SING.r * 1.4);
-    }
+    } else SING.want = null;
   } else {
     SING.r = 0;
     SING.want = null;
