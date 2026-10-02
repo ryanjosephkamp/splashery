@@ -762,7 +762,7 @@ export const TOY_HELP = {
   rocks: {
     howTo: "Drag a pebble to pick it up and set it on another to stack them. Tap to tumble them.",
     about:
-      "Pebbles are small stones rounded smooth by water. As rivers and waves roll them over and over, knocking against sand and other stones, their sharp corners wear away, a process that can take hundreds or thousands of years. A cairn is a pile of stones stacked up by people, often to mark a trail.\n\nDrag a pebble to pick it up: it lifts clear, and you can set it down on the sand or on another stone. Stack them carefully and the stack stands; set one on the edge and it topples. The ✋ button turns this off, and the reset button puts every stone back. Tap it and the pebbles roll out over the sand, then five of them hop one at a time onto a cairn, biggest at the bottom, with a clack each; at the end they all hop back. Pick a pebble pile or a cairn in the Toy tab, and a Seed for different stones.",
+      "Pebbles are small stones rounded smooth by water. As rivers and waves roll them over and over, knocking against sand and other stones, their sharp corners wear away, a process that can take hundreds or thousands of years. A cairn is a pile of stones stacked up by people, often to mark a trail.\n\nDrag a pebble to lift it and set it on the sand or on another stone. A careful stack stands; one set on the edge topples. The ✋ button turns this off, and reset puts every stone back. Tap it and five pebbles hop one at a time onto a cairn, biggest at the bottom, then all hop back. Pick a pile or a cairn in the Toy tab.",
   },
   kelp: {
     howTo: "Tap it to bring fish in to nibble the kelp.",
