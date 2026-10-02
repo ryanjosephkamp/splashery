@@ -150,6 +150,8 @@ uniform vec4 uSpAccent;  // rgb accent colour
 uniform vec4 uSpBodyQ;   // whole-toy rotation (quaternion x, y, z, w)
 uniform vec4 uSpBodyT;   // xyz whole-toy offset, w squash (+ flattens, - stretches)
 uniform vec4 uSpBodyF;   // x floor distance below the toy centre
+uniform vec4 uSpBodyS;   // Hands-on squish (lane Physics): xyz axis, w amount (+ flattens)
+uniform vec4 uSpBodyP;   // xyz the squish's pivot, where it touched
 uniform vec4 uSpPat;     // x on, y projection (0 wrap, 1 front, 2 globe), z repeats, w amount
 uniform vec4 uSpPatB;    // x keep detail, y half height, z mean luminance, w half width
 uniform sampler2D uSpPattern;
@@ -211,7 +213,16 @@ vec3 spBody(vec3 p) {
     rel = vec3(rel.x * (1.0 + 0.5 * s), (rel.y + f) * (1.0 - s) - f, rel.z * (1.0 + 0.5 * s));
   }
   spBodyQ = q;
-  return toy + spQuatRotate(q, rel) + uSpBodyT.xyz;
+  vec3 out3 = toy + spQuatRotate(q, rel) + uSpBodyT.xyz;
+  // Lane Physics: a toy tossed in Hands-on squishes where it lands.
+  float hs = uSpBodyS.w;
+  if (hs != 0.0) {
+    vec3 a = uSpBodyS.xyz;
+    vec3 v = out3 - uSpBodyP.xyz;
+    float h = dot(v, a);
+    out3 = uSpBodyP.xyz + (v - a * h) * (1.0 + 0.5 * hs) + a * h * (1.0 - hs);
+  }
+  return out3;
 }
 
 // The pattern layer: a 2D design wrapped around the toy's rest pose.
@@ -438,6 +449,8 @@ uniform uSpAccent: vec4f;
 uniform uSpBodyQ: vec4f;
 uniform uSpBodyT: vec4f;
 uniform uSpBodyF: vec4f;
+uniform uSpBodyS: vec4f;
+uniform uSpBodyP: vec4f;
 uniform uSpPat: vec4f;
 uniform uSpPatB: vec4f;
 var uSpPattern: texture_2d<f32>;
@@ -497,7 +510,16 @@ fn spBody(p: vec3f) -> vec3f {
     rel = vec3f(rel.x * (1.0 + 0.5 * s), (rel.y + f) * (1.0 - s) - f, rel.z * (1.0 + 0.5 * s));
   }
   spBodyQ = q;
-  return toy + spQuatRotate(q, rel) + uniform.uSpBodyT.xyz;
+  var out3 = toy + spQuatRotate(q, rel) + uniform.uSpBodyT.xyz;
+  // Lane Physics: a toy tossed in Hands-on squishes where it lands.
+  let hs = uniform.uSpBodyS.w;
+  if (hs != 0.0) {
+    let a = uniform.uSpBodyS.xyz;
+    let v = out3 - uniform.uSpBodyP.xyz;
+    let h = dot(v, a);
+    out3 = uniform.uSpBodyP.xyz + (v - a * h) * (1.0 + 0.5 * hs) + a * h * (1.0 - hs);
+  }
+  return out3;
 }
 
 fn spPattern(rgb: vec3f) -> vec3f {
