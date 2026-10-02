@@ -189,3 +189,21 @@ test("the spring toy stretches and settles; the bow shoots; sushi picks the tapp
   expect(pick.nigiri).toBeGreaterThan(0.1);
   expect(pick.roll).toBeLessThan(1e-6);
 });
+
+for (const [w, h] of [
+  [390, 844],
+  [1440, 900],
+]) {
+  test(`screenshots: the Hands-on buttons on Pebbles at ${w}x${h}`, async ({ page }) => {
+    await page.setViewportSize({ width: w, height: h });
+    await open(page, "rocks", { style: "cairn" });
+    await expect(page.locator("#hands-bar")).toBeVisible();
+    await expect(page.locator("#hands-toggle")).toHaveAttribute("aria-pressed", "true");
+    // The buttons stay clear of the toy's name and the top bar.
+    const bar = await page.locator("#hands-bar").boundingBox();
+    expect(bar.y).toBeGreaterThan(120);
+    expect(bar.x + bar.width).toBeLessThanOrEqual(w);
+    await page.waitForTimeout(1500);
+    await page.screenshot({ path: `tests/screenshots/phy-rocks-${w}x${h}.png` });
+  });
+}

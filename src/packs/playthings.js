@@ -895,6 +895,7 @@ function slinkyPull(p) {
 }
 function slinkyLetGo() {
   if (SLK.grab < 0) return;
+  SLK.letGo = SLK.last ?? 0;
   SLK.world.particles[SLK.grab].invMass = SLK.mass;
   SLK.grab = -1;
   SLK.world.wake();
@@ -917,7 +918,8 @@ function slinkyStep(time, out) {
     if (!q.invMass) continue;
     for (const i of [0, 2]) q.vel[i] += (q.home[i] - q.pos[i]) * 45 * dt;
   }
-  for (let left = dt; left > 1e-6; left -= 1 / 60) w.step(Math.min(left, 1 / 60));
+  if (!(SLK.grab < 0 && time - SLK.letGo > 1.6))
+    for (let left = dt; left > 1e-6; left -= 1 / 60) w.step(Math.min(left, 1 / 60));
   SLK.blend = Math.min(1, SLK.blend + dt / 0.3);
   const { N, r } = SLINKY;
   const pitch = r * 2.1;
@@ -940,7 +942,18 @@ function slinkyStep(time, out) {
     out.parts["c" + j] = part;
     off = Math.max(off, len(sub(P[j].pos, P[j].home)));
   }
-  if (w.asleep && SLK.grab < 0 && off < 0.004) {
+  // A while after it is let go, once it has sprung back, the coils glide
+  // the last bit home (the chain's links keep up a small jitter of their
+  // own), and the walk goes on from there.
+  const homing = SLK.grab < 0 && time - SLK.letGo > 1.6;
+  if (homing) {
+    const k = Math.min(1, 6 * dt);
+    for (const q of P) {
+      q.pos = q.pos.map((v, i) => v + (q.home[i] - v) * k);
+      q.vel = [0, 0, 0];
+    }
+  }
+  if (homing && off < 0.004) {
     SLK.still = true;
     SLK.settled = true;
     SLK.last = null;
