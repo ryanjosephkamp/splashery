@@ -175,3 +175,8 @@ These are `devDependencies` used to prepare assets and run tests; nothing from t
   model https://huggingface.co/microsoft/TRELLIS-image-large (MIT) and rembg's u2net background
   cut-out (Apache-2.0). It made the Real pencil and Real tin can; their photos' licences are in
   CREDITS.md.
+- `jsfive` 0.4.2 (public domain; based on pyfive, BSD-3-Clause, © 2016 Jonathan J. Helmus),
+  https://github.com/usnistgov/jsfive, with its dependency `pako` 2.2.0 (MIT AND Zlib),
+  https://github.com/nodeca/pako: reads the FIRE-2 simulation's HDF5 snapshot in
+  `tools/sci-galaxy.mjs` (lane Science). The site never loads them. `pngjs` (above) also writes that
+  tool's picture of the source data (`--map`).

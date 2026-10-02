@@ -164,8 +164,11 @@ test("a recipe's `sounds` are credited in the About tab, and its drive sees the 
     const seen = [];
     const drive = r.drive;
     r.drive = (t, c, out, info) => (seen.push(info.view), drive?.call(r, t, c, out, info));
-    player.stage.requestRender();
-    await new Promise((ok) => setTimeout(ok, 500));
+    // Frames can be slow here: ask for frames until the drive has run.
+    for (let i = 0; i < 100 && !seen.length; i++) {
+      player.stage.requestRender();
+      await new Promise((ok) => setTimeout(ok, 100));
+    }
     return seen;
   });
   await expect(page.locator('#credits [data-sample="chess-set-move.mp3"]')).toHaveCount(1);

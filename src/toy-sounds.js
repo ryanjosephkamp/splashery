@@ -2618,6 +2618,28 @@ export const TOY_SOUNDS = {
   // recipe (src/packs/lab.js): a soft hush for the galaxy's ring, a stone's plop and a gentle wash
   // for the ocean, a warm swelling tone for the knot. This is the galaxy's.
   "splat-field": { voice: "breath", f: 520, to: 0.75, decay: 3.4, vol: 0.2 },
+  // ---- Science (lane Science) ----------------------------------------------------------
+  // Quiet and subtle (PACKS.md 7e): atoms make no sound, so the jiggle is a faint
+  // jostle of tiny taps under a soft breath, and it settles with a softer one.
+  "thermal-ellipsoids": {
+    on: [
+      { voice: "patter", f: 2400, n: 18, decay: 1.4, vol: 0.35 },
+      { voice: "breath", f: 700, to: 1, decay: 1.2, vol: 0.3 },
+    ],
+    off: { voice: "breath", f: 600, to: 0.6, decay: 1, vol: 0.3 },
+  },
+  // A microscope's focus knob turning smoothly while the view dives in (about 2.6 s),
+  // and turning back, a little lower, as it comes out.
+  "smlm-microscope": {
+    on: { voice: "scrape", f: 420, rate: 4, decay: 4.4, vol: 0.35 },
+    off: { voice: "scrape", f: 360, rate: 4, decay: 4, vol: 0.3 },
+  },
+  // Space is silent: a long, soft breath as the view glides into the gas, and a
+  // lower one as it pulls back out.
+  "galaxy-box": {
+    on: { voice: "breath", f: 500, to: 0.8, decay: 2.8, vol: 0.35 },
+    off: { voice: "breath", f: 400, to: 1.2, decay: 2.4, vol: 0.3 },
+  },
   // ---- Fluid lab (lane Fluids) ------------------------------------------------------
   // A pour's splash and glug (each scene plays its own through cues: a pour,
   // a thick gloop for honey and lava, a splash, a breath on the candle).
