@@ -206,6 +206,8 @@ test("without WebGPU the toy says so plainly and keeps going", async ({ page }) 
   // The toy is still there (the sample or the stand-in), the page is fine, nothing heavy came.
   await page.waitForFunction(() => window.__splashery.player.proc?.ctx?.kit?.data?.video, null, { timeout: 60_000 }); // prettier-ignore
   await expect(page.locator("#toy-input")).toContainText("did not finish");
+  // Not the video's fault: no advice on what to film.
+  await expect(page.locator("#v3d-card .v3d-guide")).toBeHidden();
   expect(requests.filter(splatjs)).toEqual([]);
   expect(errors).toEqual([]);
 });
@@ -222,4 +224,135 @@ test("screenshots at phone and desktop size", async ({ browser }) => {
     await page.screenshot({ path: `tests/screenshots/v3d-video-3d-${w}x${h}.png` });
     await page.close();
   }
+});
+
+// ---- r7 ---------------------------------------------------------------------------------------
+
+test("a failed camera path is explained in plain words, with what to try", async () => {
+  const { solveMessage, RELAXED_SFM } = await import("../src/video3d/run.js");
+  const m = solveMessage("no image pair with enough matches");
+  expect(m).toMatch(/No two frames shared enough/);
+  expect(m).toMatch(/turns on the spot/);
+  expect(m).not.toMatch(/no image pair/);
+  expect(solveMessage("not enough parallax")).toMatch(/too nearly the same place/);
+  expect(solveMessage("something else")).toMatch(/Try a slower, steadier stretch/);
+  // The retry matches more loosely than the first try.
+  expect(RELAXED_SFM.siftFeats).toBeGreaterThan(3000);
+  expect(RELAXED_SFM.pairMinInliers).toBeLessThan(100);
+});
+
+test("the phone-safe setting is the lightest, and its rough time the shortest", async () => {
+  const { TIERS } = await import("../src/video3d/frames.js");
+  const { estimateMinutes } = await import("../src/video3d/run.js");
+  const { WORKS, FAILS, GUIDE_NOTE } = await import("../src/video3d/guide.js");
+  for (const k of ["maxFrames", "trainSide", "iters", "splats"])
+    expect(TIERS.phone[k], k).toBeLessThan(TIERS.low[k]);
+  expect(TIERS.phone.maxMinutes).toBeGreaterThan(0);
+  const [plo, phi] = estimateMinutes("phone");
+  const [hlo, hhi] = estimateMinutes("high");
+  expect(plo).toBeLessThanOrEqual(phi);
+  expect(phi).toBeLessThan(hhi);
+  expect(hlo).toBeGreaterThan(0);
+  expect(WORKS.length).toBeGreaterThan(3);
+  expect(FAILS.join(" ")).toMatch(/panorama/);
+  expect(FAILS.join(" ")).toMatch(/time-lapse/);
+  expect(GUIDE_NOTE).toMatch(/^Works: /);
+});
+
+// A stand-in for the stage's orbit camera, enough for the flight.
+function fakeCamera() {
+  const pose = { yaw: 0, pitch: 0, roll: 0, distance: 1 };
+  return {
+    cur: { ...pose },
+    tgt: { ...pose },
+    vel: { yaw: 0, pitch: 0 },
+    target: [0, 0, 0],
+    minDistance: 0.01,
+    maxDistance: 50,
+    idleFor: 0,
+    dragging: false,
+    turntable: false,
+    getState() {
+      return { ...this.cur };
+    },
+    setState(s) {
+      this.cur = { ...this.cur, ...s };
+      this.tgt = { ...this.cur };
+    },
+  };
+}
+
+test("Replay flight: a drag turns the view while it flies, and switching it off pauses there", async () => {
+  const { makeFlight } = await import("../src/video3d/flight.js");
+  const cam = fakeCamera();
+  globalThis.window = { __splashery: { player: { camera: cam } } };
+  try {
+    // A straight walk along -z over 4 s, looking ahead.
+    const cams = [0, 1, 2, 3, 4].map((t) => ({ time: t, pos: [0, 0, 1 - t * 0.3], yaw: 0, pitch: 0, roll: 0 })); // prettier-ignore
+    const fly = makeFlight(cams, null);
+    fly(0, { time: 0 });
+    fly(1, { time: 0 }); // on
+    fly(1, { time: 1 });
+    const onPath = { ...cam.cur };
+    // The visitor drags (the camera's tgt turns) and zooms between two frames.
+    cam.tgt.yaw += 0.5;
+    cam.tgt.distance *= 2;
+    fly(1, { time: 1.5 });
+    expect(cam.cur.yaw).toBeCloseTo(onPath.yaw + 0.5, 5);
+    expect(fly.state.off.zoom).toBeCloseTo(2, 5);
+    expect(fly.state.active).toBe(true);
+    // Switched off mid-flight: paused at 1.5 s, the view held.
+    fly(0.8, { time: 1.6 });
+    expect(fly.state.active).toBe(false);
+    expect(fly.state.pausedAt).toBeCloseTo(1.5, 5);
+    const held = { ...cam.cur, target: cam.target.slice() };
+    fly(0.3, { time: 2.5 });
+    fly(0, { time: 3 });
+    expect(cam.cur.yaw).toBeCloseTo(held.yaw, 9);
+    expect(cam.target).toEqual(held.target);
+    // On again: it goes on from 1.5 s, back on the path.
+    fly(0.4, { time: 10 });
+    expect(fly.state.active).toBe(true);
+    expect(fly.state.pausedAt).toBe(null);
+    fly(1, { time: 10.5 });
+    expect(fly.state.time).toBeCloseTo(2, 5);
+    expect(cam.cur.yaw).toBeCloseTo(0, 5);
+  } finally {
+    delete globalThis.window;
+  }
+});
+
+test("on a phone the card asks first, with the setting and a rough time", async ({ page }) => {
+  test.setTimeout(240_000);
+  const errors = [];
+  page.on("pageerror", (e) => errors.push(e.message));
+  await page.addInitScript(() => {
+    globalThis.__v3dPhone = true;
+  });
+  await openToy(page);
+  await expect(page.locator("#toy-input p.note", { hasText: "Works:" })).toBeVisible();
+  await page.locator("#toy-input-file").setInputFiles(`${FIX}/tiny.webm`);
+  const plan = page.locator("#v3d-card .v3d-plan");
+  await expect(plan).toContainText("Phone-safe", { timeout: 60_000 });
+  await expect(plan).toContainText("minutes");
+  await expect(plan).toContainText("gets warm");
+  await page.locator("#v3d-cancel").click();
+  await expect(page.locator("#v3d-card .v3d-err")).toContainText("Not started");
+  await expect(page.locator("#v3d-card .v3d-guide")).toBeHidden();
+  expect(errors).toEqual([]);
+});
+
+test("a failure shows what makes a video work, again", async ({ page }) => {
+  test.setTimeout(240_000);
+  await openToy(page);
+  await page.evaluate(async () => {
+    const { progressCard } = await import("./src/video3d/panel.js");
+    const card = progressCard();
+    card.reset("test");
+    card.fail("No two frames shared enough of the same details to line them up.");
+  });
+  const guide = page.locator("#v3d-card .v3d-guide");
+  await expect(guide).toBeVisible();
+  await expect(guide).toContainText("What works");
+  await expect(guide).toContainText("Turning on the spot");
 });

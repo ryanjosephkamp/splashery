@@ -1533,9 +1533,9 @@ export const TOY_HELP = {
 
   "video-3d": {
     howTo:
-      "Tap to fly the video's own camera path, then drag to roam off it. Open your own video in the Toy tab.",
+      "Tap to fly the video's path; drag while it flies, tap again to pause. Open a video in the Toy tab.",
     about:
-      "A video is a string of photos taken from a moving camera. If the scene stands still, each photo shows it from a slightly different place, and that is enough to rebuild it in 3D. This toy picks the sharpest frames of the stretch you choose, finds the same small features (corners, specks, edges) in many of them, and works out where the camera must have been for each frame so that they all line up. That is called structure from motion. Then it trains 3D Gaussian splats: it starts from the points it found and keeps nudging each splat's place, size, shape and color until the scene, seen from each camera, looks like the frame taken there.\n\nIt all runs on your device's graphics card (WebGPU), and nothing is uploaded. It takes minutes, longer on a phone. Things that move while the camera films (cars, people, water) blur or vanish, and blank walls or sky give it nothing to match. Tap Replay flight to fly the video's path with its sound, or save the splats as a PLY.",
+      "A video is a string of photos from a moving camera. If the scene stands still, each frame shows it from a slightly different place, and that is enough to rebuild it in 3D. This toy picks the sharpest frames of your stretch, finds the same small details (corners, specks, edges) in many of them and works out where the camera was for each one. That is structure from motion. Then it trains 3D Gaussian splats: starting from those points, it nudges each splat's place, size, shape and color until the scene, seen from each camera, looks like that frame.\n\nIt all runs on your device's graphics card, and nothing is uploaded. Film by walking slowly around an object or through a place, so the camera moves sideways: 10 to 40 seconds, steady, with texture. Turning on the spot, a tripod, blank walls, sky, water and blur give it nothing to match. On a phone, the phone-safe setting keeps it quick and cool.",
   },
 
   // ---- Lab (lane Lab) -------------------------------------------------------------------
