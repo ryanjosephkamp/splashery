@@ -439,20 +439,30 @@ function cellFaces(grid, want, shade = grid) {
       }
   const count = faces.length / 5;
   const cell = 1 / n;
+  const at3 = (fi, u, v) => {
+    const q = fi * 5;
+    const f = faces[q + 3];
+    const d = CUBE_DIRS[f];
+    const p = [0, 1, 2].map((a) => (faces[q + a] + 0.5 + d[a] * 0.5) * cell - 0.5);
+    p[d[0] ? 1 : 0] += (u - 0.5) * cell;
+    p[d[2] ? 1 : 2] += (v - 0.5) * cell;
+    return { p, n: d, u, v, face: f, occl: faces[q + 4] };
+  };
   return {
     area: count * cell * cell,
     thick: 0.2,
     faces: count,
     sample(rand) {
-      const q = Math.floor(rand() * count) * 5;
-      const f = faces[q + 3];
-      const d = CUBE_DIRS[f];
-      const u = rand();
-      const v = rand();
-      const p = [0, 1, 2].map((a) => (faces[q + a] + 0.5 + d[a] * 0.5) * cell - 0.5);
-      p[d[0] ? 1 : 0] += (u - 0.5) * cell;
-      p[d[2] ? 1 : 2] += (v - 0.5) * cell;
-      return { p, n: d, u, v, face: f, occl: faces[q + 4] };
+      const fi = Math.floor(rand() * count);
+      return at3(fi, rand(), rand());
+    },
+    // For even: true (lane Sharpness B): a runs through the faces laid end
+    // to end (its fraction within a face is u) and b is v, so every face
+    // gets its share of splats spread evenly instead of in random clumps.
+    sampleEven(a, b) {
+      const x = Math.min(a, 1 - 1e-9) * count;
+      const fi = Math.floor(x);
+      return at3(fi, x - fi, b);
     },
   };
 }
@@ -550,12 +560,24 @@ function gyroidShape(scale, clip) {
   const vol = clip === "sphere" ? (4 / 3) * Math.PI : 1.7 ** 3;
   // Area per volume of this gyroid is about 3.09 / (2 pi) per unit of scale.
   const area = (3.09 / TAU) * scale * vol * 2;
+  // Under even: true the first four numbers come from an even sequence
+  // (dims: 4): a start point spread evenly through the clip (cube or ball)
+  // and the side, so the projected points cover the surface evenly instead
+  // of in random clumps (lane Sharpness B).
+  const start = (a, b, c) => {
+    if (clip !== "sphere") return [(a * 2 - 1) * 0.85, (b * 2 - 1) * 0.85, (c * 2 - 1) * 0.85];
+    const r = Math.cbrt(a) * 0.99;
+    const z = b * 2 - 1;
+    const s = Math.sqrt(1 - z * z);
+    return [r * s * Math.cos(c * TAU), r * z, r * s * Math.sin(c * TAU)];
+  };
   return {
     area,
     thick: 0.05,
+    dims: 4,
     sample(rand) {
       for (let tries = 0; tries < 40; tries++) {
-        let p = [rand() * 2 - 1, rand() * 2 - 1, rand() * 2 - 1];
+        let p = start(rand(), rand(), rand());
         let n = [0, 1, 0];
         for (let it = 0; it < 6; it++) {
           const x = p[0] * scale;
@@ -1533,10 +1555,14 @@ export const RECIPES = {
     build(k, o) {
       const L = o.level === "2" ? 2 : 3;
       const whole = mengerGrid(L);
-      k.add(
-        cellFaces(whole, () => true),
-        { flat: 0.12, color: (c) => mengerLook(c.p, c.s.face, c.s.occl) },
-      );
+      k.add(cellFaces(whole, () => true), {
+        even: true,
+        opacity: 1,
+        jitter: 0.01,
+        size: 1.08,
+        flat: 0.12,
+        color: (c) => mengerLook(c.p, c.s.face, c.s.occl),
+      });
       // The plugs (clear at rest): big ones for level 1, one part per face
       // direction for levels 1 and 2, and the smallest only fade.
       const look = (c) => mengerLook(c.s.at, c.s.face, c.s.occl);

@@ -149,15 +149,20 @@ function triShape(a, b, c) {
 }
 
 // Pushes samples out along the normal a little: fur and fuzz.
-function fuzz(shape, amount) {
+// A soft pile of fur (lane Sharpness B, after the old random fuzz()): an
+// evenly sampled surface, each splat lifted by a fixed hash of where it
+// sits instead of a random draw, so the plush stays smooth and solid.
+function evenFuzz(shape, amount) {
+  const lift = (s, a, b) => {
+    const h = Math.abs(Math.sin(a * 127.1 + b * 311.7) * 43758.5453) % 1;
+    s.p = add(s.p, mul(s.n, amount * h * h));
+    return s;
+  };
   return {
     area: shape.area,
     thick: shape.thick,
-    sample(rand) {
-      const s = shape.sample(rand);
-      s.p = add(s.p, mul(s.n, amount * rand() * rand()));
-      return s;
-    },
+    sample: (rand) => lift(shape.sample(rand), rand(), rand()),
+    sampleEven: (a, b) => lift(shape.sampleEven(a, b), a, b),
   };
 }
 
@@ -1693,16 +1698,26 @@ export const RECIPES = {
       const light = mix(fur, "#f6e2c6", 0.6);
       const dark = "#2a1a12";
       const furCol = (c, base) => {
-        const n = c.fbm(c.p[0] * 9, c.p[1] * 9, c.p[2] * 9);
-        const col = shade(base, 0.86 + 0.18 * c.rand() + 0.12 * n);
+        // Soft plush mottling, no per-splat noise (it read as grain).
+        const n = c.fbm(c.p[0] * 7, c.p[1] * 7, c.p[2] * 7);
+        const col = shade(base, 0.93 + 0.04 * c.rand() + 0.1 * n);
         return lit(col, c.n, { amb: 0.66, dif: 0.45, spec: 0 });
       };
-      const soft = { flat: 0.55, jitter: 0.07, interior: 0.08, core: "#e9dcc3" };
+      const soft = {
+        even: true,
+        opacity: 1,
+        flat: 0.45,
+        jitter: 0.025,
+        size: 1.1,
+        interior: 0.06,
+        core: shade(fur, 0.8),
+      };
+      const plush = (a, b, c, amt, grid = 64) => evenFuzz(evenEllipsoid(k, a, b, c, grid), amt);
       const head = k.part("head", { pivot: [0, 0.42, 0], axis: [0, 0, 1] });
       const armR = k.part("armR", { pivot: [0.33, 0.3, 0.04], axis: [0, 0, 1] });
       const armL = k.part("armL", { pivot: [-0.33, 0.3, 0.04], axis: [0, 0, 1] });
       // Body with a lighter tummy.
-      k.add(fuzz(k.ellipsoid(0.42, 0.47, 0.37), 0.035), {
+      k.add(plush(0.42, 0.47, 0.37, 0.014), {
         ...soft,
         pos: [0, 0, 0],
         color: (c) => {
@@ -1711,14 +1726,14 @@ export const RECIPES = {
         },
       });
       // Head, ears, snout, eyes and nose.
-      k.add(fuzz(k.sphere(0.35), 0.035), {
+      k.add(plush(0.35, 0.35, 0.35, 0.014), {
         ...soft,
         pos: [0, 0.7, 0.02],
         part: head,
         color: (c) => furCol(c, fur),
       });
       for (const s of [-1, 1]) {
-        k.add(fuzz(k.ellipsoid(0.13, 0.13, 0.075), 0.03), {
+        k.add(plush(0.13, 0.13, 0.075, 0.01, 40), {
           ...soft,
           pos: [s * 0.27, 0.97, -0.02],
           rot: [0, 0, s * -18],
@@ -1728,7 +1743,10 @@ export const RECIPES = {
             return furCol(c, inner ? light : fur);
           },
         });
-        k.add(k.sphere(0.045), {
+        k.add(evenEllipsoid(k, 0.045, 0.045, 0.045, 28), {
+          even: true,
+          opacity: 1,
+          jitter: 0.01,
           pos: [s * 0.13, 0.79, 0.31],
           part: head,
           flat: 0.3,
@@ -1742,7 +1760,7 @@ export const RECIPES = {
         [0, 0.56, -0.06, 0.525],
         [0, 0.56, 0.06, 0.525],
       ];
-      k.add(fuzz(k.ellipsoid(0.17, 0.13, 0.13), 0.012), {
+      k.add(plush(0.17, 0.13, 0.13, 0.006, 48), {
         ...soft,
         pos: [0, 0.6, 0.29],
         part: head,
@@ -1761,7 +1779,10 @@ export const RECIPES = {
           return furCol(c, light);
         },
       });
-      k.add(k.ellipsoid(0.07, 0.05, 0.045), {
+      k.add(evenEllipsoid(k, 0.07, 0.05, 0.045, 32), {
+        even: true,
+        opacity: 1,
+        jitter: 0.01,
         pos: [0, 0.665, 0.415],
         part: head,
         flat: 0.25,
@@ -1771,7 +1792,10 @@ export const RECIPES = {
       });
       // A ribbon bow.
       for (const s of [-1, 1])
-        k.add(k.ellipsoid(0.1, 0.065, 0.03), {
+        k.add(evenEllipsoid(k, 0.1, 0.065, 0.03, 32), {
+          even: true,
+          opacity: 1,
+          jitter: 0.01,
           pos: [s * 0.09, 0.4, 0.33],
           rot: [0, s * -20, s * 18],
           flat: 0.2,
@@ -1779,7 +1803,10 @@ export const RECIPES = {
           pattern: false,
           color: (c) => lit("#d62839", c.n, { spec: 0.4 }),
         });
-      k.add(k.sphere(0.04), {
+      k.add(evenEllipsoid(k, 0.04, 0.04, 0.04, 24), {
+        even: true,
+        opacity: 1,
+        jitter: 0.01,
         pos: [0, 0.4, 0.35],
         flat: 0.2,
         weight: 2,
@@ -1791,7 +1818,7 @@ export const RECIPES = {
         [1, armR],
         [-1, armL],
       ])
-        k.add(fuzz(k.ellipsoid(0.12, 0.27, 0.12), 0.03), {
+        k.add(plush(0.12, 0.27, 0.12, 0.012, 48), {
           ...soft,
           pos: [s * 0.44, 0.1, 0.09],
           rot: [18, 0, s * 26],
@@ -1800,7 +1827,7 @@ export const RECIPES = {
         });
       // Legs with foot pads.
       for (const s of [-1, 1])
-        k.add(fuzz(k.ellipsoid(0.15, 0.15, 0.27), 0.03), {
+        k.add(plush(0.15, 0.15, 0.27, 0.012, 48), {
           ...soft,
           pos: [s * 0.22, -0.38, 0.2],
           rot: [0, s * 10, 0],
@@ -1843,6 +1870,10 @@ export const RECIPES = {
       );
       for (const s of [1, -1]) {
         k.add(half, {
+          even: true,
+          opacity: 1,
+          jitter: 0.01,
+          size: 1.06,
           pos: [0, cy, 0],
           rot: [s * 90, 0, 0],
           part: yoyo,
@@ -1855,23 +1886,32 @@ export const RECIPES = {
             else if (face && r < 0.13) base = shade(col, 0.7);
             else if (face && Math.abs(r - 0.25) < 0.02) base = "#fdfbf5";
             else if (!face && c.lp[1] > 0.06 && c.lp[1] < 0.085) base = "#fdfbf5";
-            return lit(base, c.n, { amb: 0.64, dif: 0.45, spec: 0.5, pow: 26 });
+            // Smaller splats along the rings' edges keep them crisp.
+            const edge =
+              face && (Math.abs(r - 0.1) < 0.008 || Math.abs(r - 0.13) < 0.008 || Math.abs(Math.abs(r - 0.25) - 0.02) < 0.008); // prettier-ignore
+            const out = lit(base, c.n, { amb: 0.64, dif: 0.45, spec: 0.3, pow: 26 });
+            return edge ? { c: out, size: 0.75 } : out;
           },
         });
       }
       // The string wound on the axle.
-      k.add(k.torus(0.075, 0.02), {
+      k.add(evenTorus(k, 0.075, 0.02, 64), {
+        even: true,
+        opacity: 1,
+        jitter: 0.01,
         pos: [0, cy, 0],
         rot: [90, 0, 0],
         part: yoyo,
         flat: 0.4,
         weight: 1.5,
-        color: (c) => shade("#efe9dc", 0.8 + 0.2 * Math.sin(c.u * 80)),
+        color: (c) => shade("#efe9dc", 0.85 + 0.15 * Math.sin(c.u * 36)),
       });
       // The string: segments that slide over each other as it pays out.
       for (let j = 0; j < YO.K; j++) {
         const part = j ? k.part("s" + j, { pivot: [0, 0, 0] }) : 0;
-        k.add(k.cylinder(0.008, YO.seg * 1.08, { caps: false }), {
+        k.add(evenCylinder(0.008, 0.008, YO.seg * 1.08, false), {
+          even: true,
+          opacity: 1,
           pos: [0, top - (j + 0.5) * YO.seg, 0],
           part,
           share: 0.004,
@@ -1883,7 +1923,9 @@ export const RECIPES = {
       // Room for most of the throw.
       k.reach([0, top - YO.max - 0.1, 0]);
       // A loop for the finger.
-      k.add(k.torus(0.055, 0.011), {
+      k.add(evenTorus(k, 0.055, 0.011, 48), {
+        even: true,
+        opacity: 1,
         pos: [0, top + 0.05, 0],
         rot: [90, 0, 0],
         share: 0.006,
