@@ -28,6 +28,12 @@ export class Sound {
     this.last = {};
     this.held = {}; // UI r3: long taps' sounds, by key (see playHeld)
     this.scheduled = 0; // UI r3: sound events handed to WebAudio (the tests read it)
+    this.toyPaused = false; // Sound C: the toy's effect is paused (pauseToy)
+    // Sound C: the first press or key of a visit starts (or wakes) the audio
+    // before the tap it begins fires, so the first tap's sound is on time.
+    const wake = () => this.enabled && this.audio();
+    globalThis.addEventListener?.("pointerdown", wake, { capture: true, passive: true });
+    globalThis.addEventListener?.("keydown", wake, { capture: true, passive: true });
   }
 
   setEnabled(on) {
@@ -47,8 +53,41 @@ export class Sound {
       this.ctx = new AC();
       this.master = masterChain(this.ctx);
     }
-    if (this.ctx.state === "suspended") this.ctx.resume();
+    if (this.ctx.state === "suspended" && !this.toyPaused) this.ctx.resume();
     return this.ctx;
+  }
+
+  // ---- Sound C: samples load when a toy opens ---------------------------------------
+  // Fetches and decodes every recorded sample the specs name, so the first
+  // tap plays them at once instead of waiting for them (SAMPLE_WAIT). Only
+  // while the speaker is on; the decode needs no running AudioContext.
+  preload(specs) {
+    if (!this.enabled) return;
+    for (const spec of [].concat(specs || []))
+      if (spec && typeof spec === "object" && samplesIn(spec).length && !samplesReady(spec))
+        loadSamples(this.ctx, spec);
+  }
+
+  // ---- Sound C: a toy's sound pauses with its effect -----------------------------------
+  // A tap that pauses a long effect suspends the whole AudioContext, so
+  // everything the toy is sounding stops where it is: the held tune, notes
+  // already ringing, its cue sounds and anything a recipe plays through
+  // sound.master (all of it is scheduled on the context's clock, which stops
+  // too). Resuming carries on from the same moment. Nothing else needs to
+  // sound while the toy is paused (a sound played then waits for the resume).
+  pauseToy() {
+    this.pauseHeld("toy");
+    const ctx = this.ctx;
+    if (!ctx || this.toyPaused || !ctx.suspend) return;
+    this.toyPaused = true;
+    ctx.suspend();
+  }
+
+  resumeToy() {
+    this.resumeHeld("toy");
+    if (!this.toyPaused) return;
+    this.toyPaused = false;
+    if (this.ctx?.state === "suspended") this.ctx.resume();
   }
 
   // Plays a sound: an old name ("chime") or a spec from the voice library.
