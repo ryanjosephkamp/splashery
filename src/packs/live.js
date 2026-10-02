@@ -34,7 +34,11 @@ function sheet(k, { cols, rows, at, n, color, part = 0, extra = null, size }) {
         const b = (j + 0.5 + layer * 0.5) / rows;
         list.push({ p: at(a, b), n, flat: 0.03, size: size / 0.01, opacity: 1, color: color(a, b), part, pattern: false, ...(extra ? extra(a, b) : null) }); // prettier-ignore
       }
-  k.cloud({ share: list.length / k.count, pattern: false }, (rand, i) => list[i] || null);
+  // Exact sizes and colors (no jitter): a smooth, crisp surface, not a grainy one.
+  k.cloud(
+    { share: list.length / k.count, pattern: false, jitter: 0 },
+    (rand, i) => list[i] || null,
+  );
 }
 
 // ---- The room echo meter ---------------------------------------------------------------
@@ -246,14 +250,17 @@ const ROOM_ECHO = {
     sheet(k, {
       cols: floorN,
       rows: floorN,
-      size: ((2 * ROOM) / floorN) * 1.5,
+      size: ((2 * ROOM) / floorN) * 1.25,
       n: [0, 1, 0],
       at: (a, b) => [(a - 0.5) * 2 * ROOM, 0, (b - 0.5) * 2 * ROOM],
       color: (a, b) => {
         const board = Math.floor(b * 14);
         const tone = 0.86 + 0.12 * Math.sin(board * 12.9898) * Math.sin(board * 4.1);
         const grain = 0.04 * Math.sin(a * 60 + board * 7);
-        return shade(mix("#8a5a34", "#b07a48", 0.4 + 0.4 * b), tone + grain);
+        // A fine dark seam between boards.
+        const edge = Math.min(b * 14 - board, board + 1 - b * 14);
+        const seam = edge < 0.06 ? 0.7 : 1;
+        return shade(mix("#8a5a34", "#b07a48", 0.4 + 0.4 * b), (tone + grain) * seam);
       },
     });
     // Three walls, pale plaster, with a skirting board.
@@ -283,9 +290,12 @@ const ROOM_ECHO = {
       for (let i = 0; i < pcols; i++) {
         const u = (i + 0.5) / pcols;
         const v = (j + 0.5) / prows;
-        panel.push({ p: [(u - 0.5) * pw, WALL_H * 0.55 - (v - 0.5) * ph, -ROOM + 0.02], n: [0, 0, 1], flat: 0.03, size: ((pw / pcols) * 1.5) / 0.01, color: "#101418", kind: "screen", params: [u, v], opacity: 1, pattern: false }); // prettier-ignore
+        panel.push({ p: [(u - 0.5) * pw, WALL_H * 0.55 - (v - 0.5) * ph, -ROOM + 0.02], n: [0, 0, 1], flat: 0.03, size: ((pw / pcols) * 2) / 0.01, color: "#101418", kind: "screen", params: [u, v], opacity: 1, pattern: false }); // prettier-ignore
       }
-    k.cloud({ share: panel.length / k.count, pattern: false }, (rand, i) => panel[i] || null);
+    k.cloud(
+      { share: panel.length / k.count, pattern: false, jitter: 0 },
+      (rand, i) => panel[i] || null,
+    );
     // The clap: a small bright mark where the sound starts.
     const clap = k.part("clap", { pivot: [0, 0.02, 0] });
     k.add(k.sphere(0.06), { pos: [0, 0.06, 0], color: "#fff3c0", part: clap, share: 0.004 });
