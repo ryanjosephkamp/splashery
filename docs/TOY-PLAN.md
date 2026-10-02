@@ -10,8 +10,8 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 338 toys. 338 have a tap action today; the other 0 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 334.
+- 341 toys. 341 have a tap action today; the other 0 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 337.
 - **more** (has an effect; make it clearer or more dramatic): 0.
 - **new** (needs its own effect): 4.
 - Visual fixes: 0 open, 30 done. Touch or drag interaction asked for: 4.
@@ -57,7 +57,7 @@ Proposals below are suggestions; the owner may change them.
   Looped transformer, Diffusion model, Gradient descent, Gaussian splatting, Word vectors, Sorting
   machine, Half adder, Turing machine, Difference engine, Enigma machine, Bombe, Your book, Photo
   album, Picture frame, Room echo meter, Splat mirror, Model to splats, Photo to 3D, Video to 3D,
-  Splat field, Fluid lab, Screen.
+  Splat field, Thermal ellipsoids, Super-resolution microscope, Galaxy in a box, Fluid lab, Screen.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -2600,3 +2600,46 @@ Proposals below are suggestions; the owner may change them.
     glass and the bowl.
   - Sound: The pour's splash and glug (soda fizzes; honey and lava a thick gloop), a splash, a
     breath on the candle and the cup.
+
+## Science (3)
+
+- **Thermal ellipsoids** (`thermal-ellipsoids`). Now: tap: Jiggle the atoms. Plan: keep.
+  - Owner: The owner's question of September 29, 2026 (can splats be a real science tool?) and his
+    answer "Science yes" (lane Science; labs only).
+  - Effect: Each atom of a crystal structure is the Gaussian of its measured displacement tensor U,
+    drawn as a solid ellipsoid at a probability level (50% by default) with its three principal
+    planes, or as one Gaussian splat. The tap makes every atom jiggle through places drawn from its
+    own Gaussian while the bonds fade to a ghost of the mean structure; a second tap stills them.
+    Zoom in with the slider and tap an atom to look there.
+  - Improved: Science: CIF (small molecule, U converted from the reciprocal cell to Cartesian axes),
+    mmCIF and PDB (ANISOU) readers; a GPU program (labs) moves each atom by its own U, sets the
+    one-Gaussian look's exact shape, and magnifies about a focus with a clipping slab. Samples:
+    aspirin form II at 300 K (COD 2104857, public domain) and crambin at 0.54 Å (PDB 1EJG, CC0).
+  - Sound: Quiet: a faint jostle of tiny taps under a soft breath as the atoms jiggle; a softer
+    breath as they settle.
+- **Super-resolution microscope** (`smlm-microscope`). Now: tap: Zoom in or out. Plan: keep.
+  - Owner: The owner's question of September 29, 2026 (can splats be a real science tool?) and his
+    answer "Science yes" (lane Science; labs only).
+  - Effect: A super-resolution microscope's localizations, each a Gaussian as wide as its
+    localization precision (and deeper by its axial precision), colored by depth, time or channel.
+    The tap dives about 60 times into the place you tap, down to single molecules, showing a thin
+    slice at the depth there (2.6 s); a second tap zooms back out.
+  - Improved: Science: .smlm (a zip, inflated with DecompressionStream) and ThunderSTORM CSV
+    readers; tier budgets (84k to 392k localizations); a size floor so the whole field shows at any
+    zoom. Sample: a 12 µm square of Christophe Leterrier's microtubules and clathrin record on
+    ShareLoc.XYZ (CC BY 4.0, a subset).
+  - Sound: A microscope's focus knob turning smoothly as the view dives in, and turning back as it
+    zooms out.
+- **Galaxy in a box** (`galaxy-box`). Now: tap: Zoom in or out. Plan: keep.
+  - Owner: The owner's question of September 29, 2026 (can splats be a real science tool?) and his
+    answer "Science yes" (lane Science; labs only).
+  - Effect: The gas of the FIRE-2 Milky Way–mass galaxy m12i today, each particle the Gaussian with
+    the same spread as its smoothing kernel (0.27 of its smoothing length), colored by temperature
+    and brighter where denser, in a box with a dark floor. The tap zooms about 8 times into the gas
+    you tap (2.2 s); a second tap zooms out. Only the cold gas peels the hot gas away.
+  - Improved: Science: tools/sci-galaxy.mjs (jsfive) cuts 300,000 of the 2.4 million gas particles
+    in a 40 × 12 × 40 kpc box round the galaxy from the CC BY 4.0 snapshot (FlatHUB), turns the disk
+    face up and works out each temperature; the toy draws them approximately (not a column-density
+    integral).
+  - Sound: Space is silent: a long, soft breath as the view glides in, and a lower one as it pulls
+    back.
