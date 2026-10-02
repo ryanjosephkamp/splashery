@@ -59,7 +59,11 @@ export function reliefGrid(
         });
       }
     }
-  k.cloud({ share: items.length / k.count, pattern: false }, (rand, i) => items[i] || null);
+  // Exact sizes and colors (no jitter), so a live picture stays crisp.
+  k.cloud(
+    { share: items.length / k.count, pattern: false, jitter: 0 },
+    (rand, i) => items[i] || null,
+  );
   return items.length;
 }
 
