@@ -137,6 +137,13 @@ their files alone and keep your engine changes small and additive. The laptop is
     and on-device simplification (`simplifyMesh` in studio-models-core.js).
     `tools/ui5-big-model.mjs` (a big textured GLB for testing). `tests/ui5.spec.mjs` (3 tests).
 
+- October 2, 2026, evening: #177 (engine) merged. The owner's marks: "good" on ui5-gallery,
+  ui5-gallery-desktop-r2, ui5-songbar, ui5-rotation, ui5-record and ui5-record-output; "fix" with no
+  note on ui5-model-big. Posted ui5-model-big-r2 (and -r2-desktop): a real CC0 scan (Poly Haven's
+  Boulder 01, glTF + .bin + 8K textures, 151 MB) opened on a phone and a computer at the high
+  profile (the first clip showed a test sphere at the lowest profile). The scan is not in the
+  repository; `UI5_MODEL_DIR=<folder> node tools/ui5-clip.mjs <out> model-real-390` records it.
+
 ## Notes
 
 - **Gallery**: a round grid button in the top row, left of the flag (G on a keyboard). On a computer

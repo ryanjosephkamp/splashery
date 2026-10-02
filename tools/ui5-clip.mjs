@@ -51,6 +51,44 @@ async function drag(page, x0, y0, x1, y1, steps = 14) {
   await page.mouse.up();
 }
 
+async function openRealModel(page) {
+  const dir = process.env.UI5_MODEL_DIR;
+  if (!dir) throw new Error("Set UI5_MODEL_DIR to a folder with a glTF and its files.");
+  const files = [];
+  const walk = (d) =>
+    fs.readdirSync(d, { withFileTypes: true }).forEach((e) => {
+      const f = path.join(d, e.name);
+      if (e.isDirectory()) walk(f);
+      else if (/\.(gltf|glb|bin|jpe?g|png|webp|obj|mtl|stl)$/i.test(e.name)) files.push(f);
+    });
+  walk(dir);
+  await pick(page, "model-splats");
+  await wait(page, 1.5);
+  const phone = page.viewportSize().width < 700;
+  if (phone) await page.click("#sheet-toggle");
+  await wait(page, 1);
+  await page.locator("#toy-input-file").setInputFiles(files);
+  const main = path
+    .basename(files.find((f) => /\.(gltf|glb|obj|stl)$/i.test(f)))
+    .replace(/\.[^.]+$/, "");
+  await page.waitForFunction((n) => window.__splashery.player.proc?.ctx?.kit?.data?.model?.name === n, main, { timeout: 300_000 }); // prettier-ignore
+  await wait(page, 0.5);
+  await page.evaluate(() => document.getElementById("toy-input")?.scrollIntoView({ block: "center" })); // prettier-ignore
+  await wait(page, 2.5);
+  if (phone) await page.click("#sheet-toggle");
+  await wait(page, 1.5);
+  const b = await page.locator("#stage").boundingBox();
+  await drag(
+    page,
+    b.x + b.width * 0.15,
+    b.y + b.height * 0.5,
+    b.x + b.width * 0.85,
+    b.y + b.height * 0.5,
+    30,
+  );
+  await wait(page, 2);
+}
+
 const CLIPS = {
   async "gallery-390"(page) {
     await wait(page, 1.5);
@@ -122,6 +160,14 @@ const CLIPS = {
     await page.evaluate(() => window.__splashery.app.act());
     await wait(page, 4);
   },
+  // A real model, every file of it (UI5_MODEL_DIR: a downloaded glTF with its
+  // .bin and textures, e.g. a Poly Haven scan; not kept in the repository).
+  async "model-real-390"(page) {
+    await openRealModel(page);
+  },
+  async "model-real-1440"(page) {
+    await openRealModel(page);
+  },
   async "record-390"(page) {
     await pick(page, "toy-piano");
     await page.evaluate(() => window.__splashery.app.sound.setEnabled(true));
@@ -172,7 +218,9 @@ for (const [name, run] of Object.entries(CLIPS)) {
   const ctx = await browser.newContext({ viewport: size, hasTouch: phone, isMobile: phone, acceptDownloads: true, recordVideo: { dir: tmp, size } }); // prettier-ignore
   const page = await ctx.newPage();
   page.on("pageerror", (e) => console.log(name, "ERR", e.message));
-  await page.goto(`${base}?renderer=webgl2&profile=weak`);
+  await page.goto(
+    `${base}?renderer=webgl2&profile=${name.startsWith("model-real") ? "high" : "weak"}`,
+  );
   await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
   // The finger: a white dot where the pointer is down.
   await page.addStyleTag({ content: "#ui5-dot{position:fixed;z-index:99;width:30px;height:30px;margin:-15px 0 0 -15px;border-radius:50%;background:rgba(255,255,255,.85);border:2px solid rgba(0,0,0,.45);pointer-events:none;display:none}" }); // prettier-ignore
