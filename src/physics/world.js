@@ -370,6 +370,14 @@ const round = (s) => s && (s.type === "sphere" || s.type === "ellipsoid");
 // on one point it would balance like a pin).
 const rolls = (b) => round(b.solid) && !b.points.length;
 
+// The part of rotation q that turns about unit axis a (swing-twist).
+function twist(q, a) {
+  const d = q[0] * a[0] + q[1] * a[1] + q[2] * a[2];
+  const t = [a[0] * d, a[1] * d, a[2] * d, q[3]];
+  const l = Math.hypot(t[0], t[1], t[2], t[3]);
+  return l > 1e-9 ? t.map((v) => v / l) : [0, 0, 0, 1];
+}
+
 // Contacts grouped by the pair of bodies (a plane counts as one).
 function groupPairs(contacts) {
   const m = new Map();
@@ -508,6 +516,16 @@ export class World {
       b.prevPos = b.pos.slice();
       b.prevQ = b.q.slice();
       if (b.fixed) continue;
+      // A springy body (a stem) is turned back toward its rest turn, with
+      // some damping: restK is the spring's stiffness (per second squared).
+      if (b.restQ && !b.held) {
+        let dq = quat.mul(b.restQ, quat.conj(b.q));
+        if (dq[3] < 0) dq = dq.map((v) => -v);
+        const sn = Math.hypot(dq[0], dq[1], dq[2]);
+        const ang = 2 * Math.atan2(sn, dq[3]);
+        const ax = sn > 1e-9 ? [dq[0] / sn, dq[1] / sn, dq[2] / sn] : [0, 0, 0];
+        for (let i = 0; i < 3; i++) b.omega[i] += (b.restK * ang * ax[i] - (b.restD ?? 2) * b.omega[i]) * h; // prettier-ignore
+      }
       const ld = Math.exp(-b.damping * h);
       const ad = Math.exp(-b.angDamping * h);
       for (let i = 0; i < 3; i++) {
@@ -531,6 +549,9 @@ export class World {
     // pin would let it swing face down), easing back after a sway.
     for (const b of this.bodies)
       if (b.holdQ) b.q = quat.slerp(b.q, b.holdQ, 1 - Math.exp(-b.holdK * h));
+    // A hinged body only turns about its hinge's axis (world), from its
+    // rest turn: the rest of a turn is dropped.
+    for (const b of this.bodies) if (b.hinge) b.q = quat.norm(quat.mul(twist(quat.mul(b.q, quat.conj(b.hinge.q)), b.hinge.axis), b.hinge.q)); // prettier-ignore
     for (const l of this.links) this.solveLink(l, h);
     const contacts = this.contacts();
     // Each touching pair's pushes first, then its friction against the

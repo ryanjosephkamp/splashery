@@ -436,6 +436,8 @@ function melonFlesh(rho, c) {
 // The cherries' swing (E5): two pendulums hung from one joint that touch
 // at rest, played once at load. A tap flicks them apart; each swings on
 // its own stem, and when they meet they knock and bounce apart again.
+// Where the cherries' stems meet (their parts turn about it).
+const CHERRY_JOINT = [0.06, 1.0, 0];
 const CHERRY_SECS = 3.6;
 // The macarons: which one hops onto the stack when, and when it hops back
 // down; the two in front keep their turn about the vertical as they go.
@@ -5396,6 +5398,36 @@ export const RECIPES = {
   cherries: {
     controls: [{ key: "swing", label: "Swing", type: "pulse", ease: CHERRY_SECS }],
     action: { key: "swing", label: "Swing" },
+    // Hands-on (lane Physics): pull one cherry out on its stem and let go:
+    // it swings back and knocks the other (a plink, as the tap's).
+    handsOn: true,
+    hands: {
+      place: false,
+      gravity: 0, // the stems hold them as they hang; they spring back
+      floor: -1.4,
+      area: 1.6,
+      pieces: () =>
+        [
+          [-0.36, -0.42, 0.05],
+          [0.34, -0.5, -0.06],
+        ].map((pos, i) => ({
+          part: i ? "right" : "left",
+          pivot: CHERRY_JOINT,
+          pos,
+          solid: { type: "sphere", r: 0.345 },
+          pick: [0.42, 0.42, 0.42],
+          joint: CHERRY_JOINT,
+          spring: 30,
+          hinge: [0, 0, 1],
+          free: true,
+          mass: 1,
+          restitution: 0.55,
+          friction: 0.3,
+          damping: 0.1,
+          angDamping: 0.25,
+        })),
+      sound: (hit, vol) => (hit.other ? { voice: "pop", f: Math.random() < 0.5 ? "C6" : "G5", decay: 1.1, vol: Math.min(1, 0.3 + vol) } : null), // prettier-ignore
+    },
     // A tap flicks the pair: each cherry swings out on its own stem from the
     // joint, and they swing back and knock together (a plink each time),
     // bouncing apart again until they settle. The joint bobs as they go.
@@ -5443,7 +5475,7 @@ export const RECIPES = {
         null,
         { grid: 80, thick: 0.35 },
       );
-      const joint = [0.06, 1.0, 0];
+      const joint = CHERRY_JOINT;
       const parts = ["left", "right"].map((n) => k.part(n, { pivot: joint, axis: [0, 0, 1] }));
       const cherries = [
         { pos: [-0.36, -0.42, 0.05], rot: [0, 0, 8] },

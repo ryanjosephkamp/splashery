@@ -101,6 +101,7 @@ export class HandsOn {
     this.moved = false;
     this.player.stage.setToyPose?.(null);
     this.player.motion.handsTokens = null;
+    this.player.motion.handsParts = null;
   }
 
   // Pieces live in the recipe's own coordinates (a kit toy is centred and
@@ -276,6 +277,19 @@ export class HandsOn {
         damping: p.damping ?? 0.3,
         angDamping: p.angDamping ?? 1.5,
       });
+      w.add(body);
+      this.pieces.push({ body, token: p.token, part: p.part, home: { pos: p.pos.slice(), q: (p.quat || [0, 0, 0, 1]).slice() }, def: p }); // prettier-ignore
+      // A piece on a stem (a cherry): pinned to its point, springing back
+      // to how it hung.
+      if (p.joint) w.joint(body, body.toLocal(p.joint), null, p.joint, { length: p.jointLength ?? 0 });
+      if (p.spring) {
+        body.restQ = body.q.slice();
+        body.restK = p.spring;
+      }
+      if (p.hinge) body.hinge = { axis: v3.norm(p.hinge), q: body.q.slice() };
+      body.invMassFree = body.invMass;
+      body.invIFree = body.invI.slice();
+      if (p.free) continue;
       // Pieces stay where they were built until picked up or knocked hard
       // (a heap of pebbles that was never balanced doesn't slump by itself).
       body.pinned = true;
@@ -285,12 +299,8 @@ export class HandsOn {
         body.solid = p.rest;
         body.bound = boundOf(body);
       }
-      body.invMassFree = body.invMass;
-      body.invIFree = body.invI.slice();
       body.invMass = 0;
       body.invI = [0, 0, 0];
-      w.add(body);
-      this.pieces.push({ body, token: p.token, home: { pos: p.pos.slice(), q: (p.quat || [0, 0, 0, 1]).slice() }, def: p }); // prettier-ignore
     }
     // Pairs that overlapped when one of them came loose pass through each
     // other until they have come apart (a heap built for looks has stones
@@ -388,7 +398,8 @@ export class HandsOn {
     const at = place ? body.pos.slice() : hit;
     const joint = w.joint(body, la, null, at, { compliance: 0, damping: 0 });
     body.held = true;
-    body.holdQ = place ? yawOnly(body.q) : body.q.slice();
+    const def = this.pieces.find((pc) => pc.body === body)?.def;
+    body.holdQ = place ? yawOnly(body.q) : def?.joint ? null : body.q.slice();
     body.holdK = 10;
     body.angDampingFree ??= body.angDamping;
     body.angDamping = 7; // held, it hangs calmly from the finger
@@ -645,11 +656,22 @@ export class HandsOn {
       const out = [];
       for (const pc of this.pieces) {
         const b = pc.body;
-        if (b.pinned && !this.homing) continue;
+        if ((b.pinned && !this.homing) || pc.token === undefined) continue;
         const dq = quat.mul(b.q, quat.conj(pc.home.q));
         out.push({ index: pc.token, token: { base: pc.home.pos, offset: v3.sub(b.pos, pc.home.pos), quat: dq } }); // prettier-ignore
       }
       player.motion.handsTokens = out.length ? out : null;
+      // Pieces that are a recipe's parts (turned about the part's pivot).
+      let parts = null;
+      for (const pc of this.pieces) {
+        if (!pc.part) continue;
+        const b = pc.body;
+        const dq = quat.mul(b.q, quat.conj(pc.home.q));
+        const pv = pc.def.pivot || pc.home.pos;
+        const off = v3.sub(v3.sub(b.pos, pv), quat.rotate(dq, v3.sub(pc.home.pos, pv)));
+        (parts ||= {})[pc.part] = { quat: dq, offset: off };
+      }
+      player.motion.handsParts = this.moved || this.homing ? parts : null;
       // Sort the moved pieces again now and then (and once they rest).
       const asleep = this.world.asleep;
       if (out.length && (this.time - this.lastResort > 0.25 || (asleep && !this.restSorted))) {
