@@ -1508,9 +1508,9 @@ export const TOY_HELP = {
   },
   "song-landscape": {
     howTo:
-      "Tap to play the song as a landscape. View: Live scrolls it with the music. Open your own song in the Toy tab.",
+      "Tap to play or pause. Pick a look and a view in the Toy tab, or open your own song there.",
     about:
-      "A song is a wave, but you can also see what it is made of. This toy cuts the sound into short slices, measures how loud each pitch is in every slice (a short-time Fourier transform) and stands the answer up as a landscape of splats: time runs away from you, pitch runs across from low to high, and loudness is height.\n\nTap to play it: a glowing line and the camera glide along the landscape in time with the music. View: Live turns it into a scrolling waterfall like an audio tool's: the part playing now sits on a line at the front, the next seconds come toward you from the back, what has played fades away, and a row of small caps rises with the loudness at the line. Open a song of your own in the Toy tab; it is read on your device and never uploaded. Long songs make longer, coarser landscapes.",
+      "A song is a wave, but you can also see what it is made of. This toy cuts the sound into slices 40 milliseconds apart and measures each one: how loud each pitch is (a short-time Fourier transform), how loud the slice is, its pitch and its brightness. Every shape is one of those measurements, drawn as the sound reaches you. Open your own song in the Toy tab: it plays at once, is read on your device and is never uploaded.\n\nWhat you're seeing. Pitch and Loudness: a landscape with time running away from you, pitch across and loudness as height. Ribbons: six bands from bass (teal) to treble (orange), each widening with its loudness and turning as it rises or falls. Tube: a ring per slice, as wide as the sound is loud, tilted by its pitch and colored by its brightness. Lines: a thin line per slice, the spectrum across. Mesh: the same as a wireframe. Live scrolls past the now mark; Whole shows the song at once.",
   },
 
   "model-splats": {
@@ -1550,14 +1550,14 @@ export const TOY_HELP = {
   },
   "smlm-microscope": {
     howTo:
-      "Tap a spot to zoom in to single molecules; tap again to zoom out. Open your own file in the Toy tab.",
+      "Pinch or scroll to zoom down to single molecules. Tap to see a thin slice at one depth.",
     about:
-      "A light microscope can't see things smaller than about 250 nanometers, but super-resolution microscopy (STORM, PALM, PAINT) gets around that: dye molecules blink on a few at a time, and each blink is pinned down to within a few nanometers. The result is a table of positions, each with its uncertainty, which is already a Gaussian. So each one here is a splat exactly as wide as its precision.\n\nThe sample is a 12 µm square of a cell's microtubules and clathrin pits, a subset of a record by Christophe Leterrier on ShareLoc.XYZ (CC BY 4.0). Tap to dive in about 60 times: each fuzzy spot is then one blink of one molecule. Scientists use ThunderSTORM and napari for this; this toy is for looking and sharing, not for measuring.",
+      "A light microscope can't see things smaller than about 250 nanometers, but super-resolution microscopy (STORM, PALM, PAINT) gets around that: dye molecules blink on a few at a time, and each blink is pinned down to within a few nanometers. The result is a table of positions, each with its uncertainty, which is already a Gaussian. So each one here is a splat exactly as wide as its precision.\n\nThe sample is a 12 µm square of a cell's microtubules and clathrin pits, a subset of a record by Christophe Leterrier on ShareLoc.XYZ (CC BY 4.0). Pinch or scroll to zoom in about 150 times: each fuzzy spot is then one blink of one molecule. Tap for a slice 200 nanometers thick at the depth you tap. Scientists use ThunderSTORM and napari for this; this toy is for looking and sharing, not for measuring.",
   },
   "galaxy-box": {
-    howTo: "Tap the gas to zoom in; tap again to zoom out.",
+    howTo: "Pinch or scroll to zoom into the gas. Tap to peel away the hot gas.",
     about:
-      "Galaxy simulations follow gas as millions of particles, each with a bit of mass and a smoothing length, the size its gas is spread over. This is the gas of a Milky Way–mass galaxy today from the FIRE-2 simulations (CC BY 4.0), a subset cut to a box round it. Each particle is the Gaussian with the same spread as the simulation's smoothing kernel, colored by temperature (cold blue, hot orange and red) and brighter where denser, so the spiral arms stand out.\n\nTap to zoom into the gas; Only the cold gas peels away the hot. This is an approximation: the simulation's kernel isn't a Gaussian, and blended splats aren't the column density that tools like SPLASH and yt compute. It shows the shape of the gas, not measurements.",
+      "Galaxy simulations follow gas as millions of particles, each with a bit of mass and a smoothing length, the size its gas is spread over. This is the gas of a Milky Way–mass galaxy today from the FIRE-2 simulations (CC BY 4.0), a subset cut to a box round it. Each particle is the Gaussian with the same spread as the simulation's smoothing kernel, colored by temperature (cold blue, hot orange and red) and brighter where denser, so the spiral arms stand out.\n\nPinch or scroll to zoom far into the gas; tap to peel away the hot gas. This is an approximation: the simulation's kernel isn't a Gaussian, and blended splats aren't the column density that tools like SPLASH and yt compute. It shows the shape of the gas, not measurements.",
   },
 
   // ---- Fluid lab (lane Fluids) ---------------------------------------------------------

@@ -1308,9 +1308,21 @@ export const VOICES = {
 export const SAMPLES = { base: "assets/sounds/", data: {} };
 const sampleCache = new Map(); // file -> { buf, failed, promise }
 
+// `ctx` may be null (lane Sound C): a toy's samples load when it opens, before
+// the site's AudioContext may start, so they decode in a small offline context
+// (a decoded AudioBuffer plays in any context).
+let decoder = null;
+function offlineDecoder() {
+  const OAC = globalThis.OfflineAudioContext || globalThis.webkitOfflineAudioContext;
+  if (!decoder && OAC) decoder = new OAC(1, 1, 48000);
+  return decoder;
+}
+
 export function loadSample(ctx, file) {
   let e = sampleCache.get(file);
   if (!e) {
+    ctx = ctx || offlineDecoder();
+    if (!ctx) return Promise.resolve(null);
     e = { buf: null, failed: false, promise: null };
     const entry = e;
     e.promise = fetch(SAMPLES.data[file] || SAMPLES.base + file)
