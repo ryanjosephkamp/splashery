@@ -1527,7 +1527,7 @@ export const TOY_HELP = {
 
   "video-3d": {
     howTo:
-      "Tap to fly the video's own path; drag or pinch while it flies, and tap again to pause. Open your own video in the Toy tab.",
+      "Tap to fly the video's path; drag while it flies, tap again to pause. Open a video in the Toy tab.",
     about:
       "A video is a string of photos from a moving camera. If the scene stands still, each frame shows it from a slightly different place, and that is enough to rebuild it in 3D. This toy picks the sharpest frames of your stretch, finds the same small details (corners, specks, edges) in many of them and works out where the camera was for each one. That is structure from motion. Then it trains 3D Gaussian splats: starting from those points, it nudges each splat's place, size, shape and color until the scene, seen from each camera, looks like that frame.\n\nIt all runs on your device's graphics card, and nothing is uploaded. Film by walking slowly around an object or through a place, so the camera moves sideways: 10 to 40 seconds, steady, with texture. Turning on the spot, a tripod, blank walls, sky, water and blur give it nothing to match. On a phone, the phone-safe setting keeps it quick and cool.",
   },
