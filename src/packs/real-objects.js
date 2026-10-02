@@ -1472,6 +1472,81 @@ const HOODIE = {
         return { p, size: 0.006, color: col.map((v) => Math.min(1, v * sh)), part };
       });
     }
+    // Lane Fix7: the cuffs, gathered shut. A raised sleeve points its cuff
+    // toward the viewer, and its open end read as a hole: a disc of the
+    // cuff's own cloth closes it, a little inside the rim, darker toward the
+    // middle and creased where the rib gathers.
+    for (const [fp, sleeve] of [
+      [2, sleeveL],
+      [3, sleeveR],
+    ]) {
+      const ids = [];
+      for (let i = 0; i < scan.n; i++) if (scan.part[i] === fp) ids.push(i);
+      if (ids.length < 50) continue;
+      let ymin = Infinity;
+      for (const i of ids) ymin = Math.min(ymin, scan.pos[i * 3 + 1]);
+      const P = (i) => [scan.pos[i * 3], scan.pos[i * 3 + 1], scan.pos[i * 3 + 2]];
+      const avg = (list, f) => [0, 1, 2].map((q) => list.reduce((t, i) => t + f(i)[q], 0) / list.length); // prettier-ignore
+      const end = ids.filter((i) => scan.pos[i * 3 + 1] < ymin + 0.025);
+      const near = ids.filter((i) => scan.pos[i * 3 + 1] < ymin + 0.15);
+      if (end.length < 10) continue;
+      const c = avg(end, P);
+      const axis = (() => {
+        const a = c.map((v, q) => v - avg(near, P)[q]);
+        const l = Math.hypot(...a) || 1;
+        return a.map((v) => v / l);
+      })();
+      const dot3 = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+      let rad = 0;
+      for (const i of end) {
+        const d = P(i).map((v, q) => v - c[q]);
+        const along = dot3(d, axis);
+        rad = Math.max(rad, Math.hypot(...d.map((v, q) => v - along * axis[q])));
+      }
+      const col = avg(end, (i) => [scan.rgb[i * 3], scan.rgb[i * 3 + 1], scan.rgb[i * 3 + 2]]);
+      const t1 = (() => {
+        const a = Math.abs(axis[1]) < 0.9 ? [0, 1, 0] : [1, 0, 0];
+        const x = [axis[1] * a[2] - axis[2] * a[1], axis[2] * a[0] - axis[0] * a[2], axis[0] * a[1] - axis[1] * a[0]]; // prettier-ignore
+        const l = Math.hypot(...x) || 1;
+        return x.map((v) => v / l);
+      })();
+      const t2 = [axis[1] * t1[2] - axis[2] * t1[1], axis[2] * t1[0] - axis[0] * t1[2], axis[0] * t1[1] - axis[1] * t1[0]]; // prettier-ignore
+      const n = Math.round(k.count * 0.004);
+      const size = Math.sqrt((Math.PI * rad * rad) / (n * Math.PI)) * 1.4;
+      addCloud(k, n, (i) => {
+        const f = Math.sqrt((i + 0.5) / n);
+        const a = i * 2.39996323;
+        const r = f * rad * 0.96;
+        const p = [0, 1, 2].map((q) => c[q] - axis[q] * (0.012 * (1 - f * f)) + r * (Math.cos(a) * t1[q] + Math.sin(a) * t2[q])); // prettier-ignore
+        const crease = 0.9 + 0.1 * Math.cos(a * 9);
+        return { p, n: axis, size, color: col.map((v) => v * (0.62 + 0.3 * f) * crease), part: sleeve, pattern: true }; // prettier-ignore
+      });
+    }
+    // Lane Fix7: when the hood nods forward its back edge lifts off the
+    // neck; a band of the hood's own cloth stays on the body under that
+    // edge, so the gap shows cloth, not the inside of the garment.
+    {
+      const ids = [];
+      let ymin = Infinity;
+      for (let i = 0; i < scan.n; i++) {
+        // (The back half of the hood: its low edge there is what lifts.)
+        if (scan.part[i] !== 1 || scan.pos[i * 3 + 2] > HD.neck[2] - 0.02) continue;
+        ids.push(i);
+        ymin = Math.min(ymin, scan.pos[i * 3 + 1]);
+      }
+      const band = ids.filter((i) => scan.pos[i * 3 + 1] < ymin + 0.1);
+      const step = Math.max(1, Math.floor(band.length / Math.round(k.count * 0.006)));
+      const pick = band.filter((_, j) => j % step === 0);
+      addCloud(k, pick.length, (j) => {
+        const i = pick[j];
+        const nrm = [scan.nrm[i * 3], scan.nrm[i * 3 + 1], scan.nrm[i * 3 + 2]];
+        const p = [0, 1, 2].map((q) => scan.pos[i * 3 + q] - nrm[q] * 0.006);
+        const col = [scan.rgb[i * 3], scan.rgb[i * 3 + 1], scan.rgb[i * 3 + 2]].map(
+          (v) => v * 0.85,
+        );
+        return { p, n: nrm, size: scan.sig[i] * 1.3, color: col, part: 0, pattern: true };
+      });
+    }
     k.reach([0, 0.62, -0.6]);
     k.reach([0.4, -0.3, 0.75]);
     k.reach([-0.4, -0.3, 0.75]);

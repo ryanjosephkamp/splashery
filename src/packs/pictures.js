@@ -61,7 +61,9 @@ const clamp01 = (x) => (x < 0 ? 0 : x > 1 ? 1 : x);
 const easeIO = (x) => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2);
 // A page's turn: it lifts at once and lands softly (no pause at the start,
 // when the page would only bend where it lies).
-const easeTurn = (x) => 0.5 - 0.5 * Math.cos(Math.PI * x);
+// A tapped turn's curve: it lifts off at once (lane Fix7: it used to start
+// slowly, which felt laggy beside a page pulled by hand) and settles gently.
+const easeTurn = (x) => 0.6 * (0.5 - 0.5 * Math.cos(Math.PI * x)) + 0.4 * (1 - (1 - x) * (1 - x));
 
 // Baked light from the upper left, in front.
 const BK_LIGHT = (() => {
@@ -800,8 +802,9 @@ const BOOK_RECIPE = {
         }
       }
     } else if (a && a.t0 === null) {
-      // A turn starts once the pages it shows are built (at most a second
-      // and a half on: a page that fails to build should not stop the book).
+      // A turn starts once the pages it shows are built (at most a fifth of
+      // a second on, as a pulled page starts at once: lane Fix7; it was a
+      // second and a half, which a tap felt as lag).
       const mid = bookLayout(st, N, time, 0.5);
       const want = [];
       const need = (i, fb, side) => {
@@ -812,7 +815,7 @@ const BOOK_RECIPE = {
         if (s.fv) need(i, "f", s.f);
         if (s.bv) need(i, "b", s.b);
       });
-      if (!pics || time - a.asked > 1.5 || want.every((id) => pics.ready(id))) a.t0 = time;
+      if (!pics || time - a.asked > 0.2 || want.every((id) => pics.ready(id))) a.t0 = time;
     }
     if (a && !a.pull && a.t0 !== null && time - a.t0 >= a.dur) {
       BOOK.K = a.to;
