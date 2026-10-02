@@ -17,6 +17,7 @@
 //   { "from3": [x, y, z], "to3": [[x, y, z], ...], "secs": 0.6 }
 //        the same, from and to recipe points (a piece's home, a spot)
 //   { "tap": [dx, dy] }                     a tap there
+//   { "tap3": [x, y, z] }                   a tap on a recipe point
 // Writes <out-dir>/<name>.mp4 and <name>-strip.png (8 frames).
 
 import { chromium } from "@playwright/test";
@@ -138,11 +139,15 @@ for (const s of script) {
     await page.evaluate((b) => document.getElementById(b).click(), s.button);
     for (let i = 0; i < 3; i++) await shoot();
     await page.evaluate(() => (window.__clip.finger = null));
-  } else if (s.tap) {
-    const at = await page.evaluate((d) => {
-      const m = window.__clip.middle();
-      return [m[0] + d[0], m[1] + d[1]];
-    }, s.tap);
+  } else if (s.tap || s.tap3) {
+    const at = await page.evaluate(
+      ({ d, p3 }) => {
+        if (p3) return window.__clip.screenOf(p3);
+        const m = window.__clip.middle();
+        return [m[0] + d[0], m[1] + d[1]];
+      },
+      { d: s.tap, p3: s.tap3 },
+    );
     await page.evaluate((at) => {
       const S = window.__clip;
       S.finger = at;
