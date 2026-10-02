@@ -1,0 +1,183 @@
+{
+  "$comment": "Source: 79a24ecc7ae24af8c407bc0f94106ee253efcf89:tests/smoke.spec.mjs. Replayed exported/shared visitor state from the named smoke flow; default seed/timestamp pinned.",
+  "$compat": {
+    "commit": "79a24ecc7ae24af8c407bc0f94106ee253efcf89",
+    "file": "tests/smoke.spec.mjs",
+    "description": "Replayed exported/shared visitor state from the named smoke flow; default seed/timestamp pinned.",
+    "origin": "historical interaction replay",
+    "hash": "d.fVJBjtswDPwLe_UGqtOku77tG9rTLnqgZdoRIkuCRMdJA_-9lJJsgyzak01hhpwZ8gwYAjSQgsW0o3iCCg4Uk_EOmnUFOhIyda8smFrV2yf18lSvfyrV1M9NvV4ppd6Ekog6aF4qYH-C5gx746SGdjKWjROAKaX1LSwVWO_3GdWi3g_RTwUbcCAB8o5GkhIn9lKi1uT4b5118g-NVjBfK6Bj8GmKuZC-1PekOeXWwe8pf7ONHm0ioXIkN_AOGrXaVjD7ts1d1Goj1LkI_id-s6mgM1G6l2DUksuUvD18mhIkse7GSaEEc5nRRR8e0K2Y10XEt4zWyEzxhh9xcMT_UfW9goidmdKlgVB4NumRgaMM4dL03rUsF49GqHDKO0nW6Ecvkq25GhbATBQKcfPBPGZmQOM-qTS_6TrxclnXQnvrxR98oe26rQmWe35iHIO0ff8lrxpHipifTzjf4gyGdWlVP4t1b21RJptgLDHmCPKhyMhyhjxFx1gMc5zodiEiwHlHF_E5cZfB5UQlXhMoyaX1Fgd56GOGjf6SwxnQmsNHu9HnfyEZkXK_7ezUsSjMx7gsyx8",
+    "expected": {
+      "app": "splashery",
+      "version": 3,
+      "seed": 9,
+      "toy": {
+        "kind": "builtin",
+        "id": "blob"
+      },
+      "look": {
+        "background": "page",
+        "theme": "auto",
+        "accent": "auto",
+        "splatScale": 1,
+        "exposure": 1
+      },
+      "effects": {
+        "poke": {
+          "on": false,
+          "strength": 0.6,
+          "wobble": 0.5
+        },
+        "wind": {
+          "on": false,
+          "strength": 0.55,
+          "direction": 0
+        },
+        "dissolve": {
+          "on": false,
+          "spread": 0.55,
+          "speed": 0.5
+        },
+        "drop": {
+          "on": false,
+          "bounce": 0.45,
+          "scatter": 0.5
+        },
+        "magnet": {
+          "on": false,
+          "strength": 0.7,
+          "radius": 0.45
+        },
+        "twist": {
+          "on": false,
+          "amount": 0.5,
+          "wobble": 0.3,
+          "axis": "y"
+        },
+        "slice": {
+          "on": false,
+          "position": 0,
+          "sweep": 0.35,
+          "axis": "x"
+        },
+        "paint": {
+          "on": false,
+          "size": 0.5,
+          "splash": 0.5,
+          "color": "#e63b2e"
+        }
+      },
+      "paint": {
+        "stamps": []
+      },
+      "camera": {
+        "yaw": 0.55,
+        "pitch": 0.28,
+        "roll": 0,
+        "distance": 5
+      },
+      "autoplay": {
+        "turntable": true,
+        "effect": "none"
+      },
+      "pattern": {
+        "id": "stripes",
+        "flag": "fr",
+        "projection": "wrap",
+        "repeats": 1,
+        "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+        "scale": 0.5,
+        "amount": 1,
+        "detail": 0.6
+      },
+      "motion": {
+        "alive": true,
+        "move": "still",
+        "speed": 0.5,
+        "controls": {}
+      }
+    }
+  },
+  "app": "splashery",
+  "version": 3,
+  "createdAt": "2026-09-23T00:28:23.000Z",
+  "seed": 9,
+  "toy": {
+    "kind": "builtin",
+    "id": "blob"
+  },
+  "look": {
+    "background": "page",
+    "theme": "auto",
+    "accent": "auto",
+    "splatScale": 1,
+    "exposure": 1
+  },
+  "effects": {
+    "poke": {
+      "on": false,
+      "strength": 0.6,
+      "wobble": 0.5
+    },
+    "wind": {
+      "on": false,
+      "strength": 0.55,
+      "direction": 0
+    },
+    "dissolve": {
+      "on": false,
+      "spread": 0.55,
+      "speed": 0.5
+    },
+    "drop": {
+      "on": false,
+      "bounce": 0.45,
+      "scatter": 0.5
+    },
+    "magnet": {
+      "on": false,
+      "strength": 0.7,
+      "radius": 0.45
+    },
+    "twist": {
+      "on": false,
+      "amount": 0.5,
+      "wobble": 0.3,
+      "axis": "y"
+    },
+    "slice": {
+      "on": false,
+      "position": 0,
+      "sweep": 0.35,
+      "axis": "x"
+    },
+    "paint": {
+      "on": false,
+      "size": 0.5,
+      "splash": 0.5,
+      "color": "#e63b2e"
+    }
+  },
+  "paint": {
+    "stamps": []
+  },
+  "camera": {
+    "yaw": 0.55,
+    "pitch": 0.28,
+    "roll": 0,
+    "distance": 5
+  },
+  "autoplay": {
+    "turntable": true,
+    "effect": "none"
+  },
+  "pattern": {
+    "id": "stripes",
+    "flag": "fr"
+  },
+  "motion": {
+    "alive": true,
+    "move": "still",
+    "speed": 0.5,
+    "controls": {}
+  }
+}

@@ -1,0 +1,116 @@
+{
+  "$comment": "Source: 675e9365ec806a2a0e18362265db7d2f54e221d4:tests/shv.spec.mjs. a link to Mars opens the tiny planet as Mars; complete literal.",
+  "$compat": {
+    "commit": "675e9365ec806a2a0e18362265db7d2f54e221d4",
+    "file": "tests/shv.spec.mjs",
+    "description": "a link to Mars opens the tiny planet as Mars; complete literal.",
+    "origin": "historical test replay",
+    "hash": "d.FYtBDoAgDAT_smcu6o3fYGxiA1JC0YQQ_m45zu7MQCgFHlpS0Jtqh8NHVVky_OGgRBf8tjs06fADkbMNOF9OjbPZvNDqTM1ISrNUl5lEol1PqIo55w8",
+    "expected": {
+      "app": "splashery",
+      "version": 3,
+      "seed": 12,
+      "toy": {
+        "kind": "builtin",
+        "id": "planet",
+        "options": {
+          "look": "mars"
+        }
+      },
+      "look": {
+        "background": "page",
+        "theme": "auto",
+        "accent": "auto",
+        "splatScale": 1,
+        "exposure": 1
+      },
+      "effects": {
+        "poke": {
+          "on": false,
+          "strength": 0.6,
+          "wobble": 0.5
+        },
+        "wind": {
+          "on": false,
+          "strength": 0.55,
+          "direction": 0
+        },
+        "dissolve": {
+          "on": false,
+          "spread": 0.55,
+          "speed": 0.5
+        },
+        "drop": {
+          "on": false,
+          "bounce": 0.45,
+          "scatter": 0.5
+        },
+        "magnet": {
+          "on": false,
+          "strength": 0.7,
+          "radius": 0.45
+        },
+        "twist": {
+          "on": false,
+          "amount": 0.5,
+          "wobble": 0.3,
+          "axis": "y"
+        },
+        "slice": {
+          "on": false,
+          "position": 0,
+          "sweep": 0.35,
+          "axis": "x"
+        },
+        "paint": {
+          "on": false,
+          "size": 0.5,
+          "splash": 0.5,
+          "color": "#e63b2e"
+        }
+      },
+      "paint": {
+        "stamps": []
+      },
+      "camera": {
+        "yaw": 0.55,
+        "pitch": 0.28,
+        "roll": 0,
+        "distance": 5
+      },
+      "autoplay": {
+        "turntable": true,
+        "effect": "none"
+      },
+      "pattern": {
+        "id": "none",
+        "flag": "",
+        "projection": "wrap",
+        "repeats": 1,
+        "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+        "scale": 0.5,
+        "amount": 1,
+        "detail": 0.6
+      },
+      "motion": {
+        "alive": true,
+        "move": "still",
+        "speed": 0.5,
+        "controls": {}
+      }
+    },
+    "builtOptions": {
+      "look": "mars"
+    }
+  },
+  "app": "splashery",
+  "version": 3,
+  "seed": 12,
+  "toy": {
+    "kind": "builtin",
+    "id": "planet",
+    "options": {
+      "look": "mars"
+    }
+  }
+}

@@ -1,0 +1,117 @@
+{
+  "$comment": "Source: 98e9793116c000c20074ad3267d3745031bfaa57:tests/ui3.spec.mjs. an old link and a saved scene keep their own camera and turntable; complete link literal.",
+  "$compat": {
+    "commit": "98e9793116c000c20074ad3267d3745031bfaa57",
+    "file": "tests/ui3.spec.mjs",
+    "description": "an old link and a saved scene keep their own camera and turntable; complete link literal.",
+    "origin": "historical test replay",
+    "hash": "d.HY7BDoMwDEP_xecMjbFd-jehhFGta6s0bEKIf1_ZzU-2Ze_gUuBQS-S6iG4gfERryAnuRqgiE9xAsLzB7XiF1BjjGqKF1MLhxKdyWS4lZjNRHATPb1E-Cxt_4fquJ5RgfoG7dsODoDnGpglTqMbJC9y9u7Umr5bbl_-YrZqMx9hM01UIMs_irQ2mnATH8QM",
+    "expected": {
+      "app": "splashery",
+      "version": 3,
+      "seed": 3,
+      "toy": {
+        "kind": "builtin",
+        "id": "graph-plotter"
+      },
+      "look": {
+        "background": "page",
+        "theme": "auto",
+        "accent": "auto",
+        "splatScale": 1,
+        "exposure": 1
+      },
+      "effects": {
+        "poke": {
+          "on": false,
+          "strength": 0.6,
+          "wobble": 0.5
+        },
+        "wind": {
+          "on": false,
+          "strength": 0.55,
+          "direction": 0
+        },
+        "dissolve": {
+          "on": false,
+          "spread": 0.55,
+          "speed": 0.5
+        },
+        "drop": {
+          "on": false,
+          "bounce": 0.45,
+          "scatter": 0.5
+        },
+        "magnet": {
+          "on": false,
+          "strength": 0.7,
+          "radius": 0.45
+        },
+        "twist": {
+          "on": false,
+          "amount": 0.5,
+          "wobble": 0.3,
+          "axis": "y"
+        },
+        "slice": {
+          "on": false,
+          "position": 0,
+          "sweep": 0.35,
+          "axis": "x"
+        },
+        "paint": {
+          "on": false,
+          "size": 0.5,
+          "splash": 0.5,
+          "color": "#e63b2e"
+        }
+      },
+      "paint": {
+        "stamps": []
+      },
+      "camera": {
+        "yaw": 1.1,
+        "pitch": 0.35,
+        "roll": 0,
+        "distance": 4.2
+      },
+      "autoplay": {
+        "turntable": true,
+        "effect": "none"
+      },
+      "pattern": {
+        "id": "none",
+        "flag": "",
+        "projection": "wrap",
+        "repeats": 1,
+        "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+        "scale": 0.5,
+        "amount": 1,
+        "detail": 0.6
+      },
+      "motion": {
+        "alive": true,
+        "move": "still",
+        "speed": 0.5,
+        "controls": {}
+      }
+    }
+  },
+  "app": "splashery",
+  "version": 2,
+  "seed": 3,
+  "toy": {
+    "kind": "builtin",
+    "id": "graph-plotter"
+  },
+  "camera": {
+    "yaw": 1.1,
+    "pitch": 0.35,
+    "roll": 0,
+    "distance": 4.2
+  },
+  "autoplay": {
+    "turntable": true,
+    "effect": "none"
+  }
+}

@@ -1,0 +1,173 @@
+{
+  "$comment": "Source: a77cae23a3ea864b5f59e7b13b7d16c6c83e6664:docs/SCENE-SCHEMA.md. Copied complete JSON document in the Shape section.",
+  "$compat": {
+    "commit": "a77cae23a3ea864b5f59e7b13b7d16c6c83e6664",
+    "file": "docs/SCENE-SCHEMA.md",
+    "description": "Copied complete JSON document in the Shape section.",
+    "origin": "copied JSON example",
+    "hash": "j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjoyLCJjcmVhdGVkQXQiOiIyMDI2LTA5LTIyVDE5OjQ5OjMwLjAwMFoiLCJzZWVkIjoxMjM0NTYsInRveSI6eyJraW5kIjoiYnVpbHRpbiIsImlkIjoiY2FjdHVzIn0sImxvb2siOnsiYmFja2dyb3VuZCI6InBhZ2UiLCJ0aGVtZSI6ImF1dG8iLCJhY2NlbnQiOiJhdXRvIiwic3BsYXRTY2FsZSI6MSwiZXhwb3N1cmUiOjF9LCJlZmZlY3RzIjp7InBva2UiOnsib24iOmZhbHNlLCJzdHJlbmd0aCI6MC42LCJ3b2JibGUiOjAuNX0sIndpbmQiOnsib24iOnRydWUsInN0cmVuZ3RoIjowLjU1LCJkaXJlY3Rpb24iOjB9LCJkaXNzb2x2ZSI6eyJvbiI6ZmFsc2UsInNwcmVhZCI6MC41NSwic3BlZWQiOjAuNX0sImRyb3AiOnsib24iOmZhbHNlLCJib3VuY2UiOjAuNDUsInNjYXR0ZXIiOjAuNX0sIm1hZ25ldCI6eyJvbiI6ZmFsc2UsInN0cmVuZ3RoIjowLjcsInJhZGl1cyI6MC40NX0sInR3aXN0Ijp7Im9uIjpmYWxzZSwiYW1vdW50IjowLjUsIndvYmJsZSI6MC4zLCJheGlzIjoieSJ9LCJzbGljZSI6eyJvbiI6ZmFsc2UsInBvc2l0aW9uIjowLCJzd2VlcCI6MC4zNSwiYXhpcyI6IngifSwicGFpbnQiOnsib24iOmZhbHNlLCJzaXplIjowLjUsInNwbGFzaCI6MC41LCJjb2xvciI6IiNlNjNiMmUifX0sInBhaW50Ijp7InN0YW1wcyI6W1swLjEyLDAuMywwLjU1LDAuMDYsIiNlNjNiMmUiLDFdXX0sImNhbWVyYSI6eyJ5YXciOjAuNTUsInBpdGNoIjowLjMyLCJyb2xsIjowLCJkaXN0YW5jZSI6NC41fSwiYXV0b3BsYXkiOnsidHVybnRhYmxlIjp0cnVlLCJlZmZlY3QiOiJub25lIn19",
+    "expected": {
+      "app": "splashery",
+      "version": 3,
+      "seed": 123456,
+      "toy": {
+        "kind": "builtin",
+        "id": "cactus"
+      },
+      "look": {
+        "background": "page",
+        "theme": "auto",
+        "accent": "auto",
+        "splatScale": 1,
+        "exposure": 1
+      },
+      "effects": {
+        "poke": {
+          "on": false,
+          "strength": 0.6,
+          "wobble": 0.5
+        },
+        "wind": {
+          "on": true,
+          "strength": 0.55,
+          "direction": 0
+        },
+        "dissolve": {
+          "on": false,
+          "spread": 0.55,
+          "speed": 0.5
+        },
+        "drop": {
+          "on": false,
+          "bounce": 0.45,
+          "scatter": 0.5
+        },
+        "magnet": {
+          "on": false,
+          "strength": 0.7,
+          "radius": 0.45
+        },
+        "twist": {
+          "on": false,
+          "amount": 0.5,
+          "wobble": 0.3,
+          "axis": "y"
+        },
+        "slice": {
+          "on": false,
+          "position": 0,
+          "sweep": 0.35,
+          "axis": "x"
+        },
+        "paint": {
+          "on": false,
+          "size": 0.5,
+          "splash": 0.5,
+          "color": "#e63b2e"
+        }
+      },
+      "paint": {
+        "stamps": [[0.12, 0.3, 0.55, 0.06, "#e63b2e", 1]]
+      },
+      "camera": {
+        "yaw": 0.55,
+        "pitch": 0.32,
+        "roll": 0,
+        "distance": 4.5
+      },
+      "autoplay": {
+        "turntable": true,
+        "effect": "none"
+      },
+      "pattern": {
+        "id": "none",
+        "flag": "",
+        "projection": "wrap",
+        "repeats": 1,
+        "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+        "scale": 0.5,
+        "amount": 1,
+        "detail": 0.6
+      },
+      "motion": {
+        "alive": true,
+        "move": "still",
+        "speed": 0.5,
+        "controls": {}
+      }
+    }
+  },
+  "app": "splashery",
+  "version": 2,
+  "createdAt": "2026-09-22T19:49:30.000Z",
+  "seed": 123456,
+  "toy": {
+    "kind": "builtin",
+    "id": "cactus"
+  },
+  "look": {
+    "background": "page",
+    "theme": "auto",
+    "accent": "auto",
+    "splatScale": 1,
+    "exposure": 1
+  },
+  "effects": {
+    "poke": {
+      "on": false,
+      "strength": 0.6,
+      "wobble": 0.5
+    },
+    "wind": {
+      "on": true,
+      "strength": 0.55,
+      "direction": 0
+    },
+    "dissolve": {
+      "on": false,
+      "spread": 0.55,
+      "speed": 0.5
+    },
+    "drop": {
+      "on": false,
+      "bounce": 0.45,
+      "scatter": 0.5
+    },
+    "magnet": {
+      "on": false,
+      "strength": 0.7,
+      "radius": 0.45
+    },
+    "twist": {
+      "on": false,
+      "amount": 0.5,
+      "wobble": 0.3,
+      "axis": "y"
+    },
+    "slice": {
+      "on": false,
+      "position": 0,
+      "sweep": 0.35,
+      "axis": "x"
+    },
+    "paint": {
+      "on": false,
+      "size": 0.5,
+      "splash": 0.5,
+      "color": "#e63b2e"
+    }
+  },
+  "paint": {
+    "stamps": [[0.12, 0.3, 0.55, 0.06, "#e63b2e", 1]]
+  },
+  "camera": {
+    "yaw": 0.55,
+    "pitch": 0.32,
+    "roll": 0,
+    "distance": 4.5
+  },
+  "autoplay": {
+    "turntable": true,
+    "effect": "none"
+  }
+}

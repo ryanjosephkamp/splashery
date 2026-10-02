@@ -1,0 +1,144 @@
+{
+  "$comment": "Source: a77cae23a3ea864b5f59e7b13b7d16c6c83e6664:tests/unit.spec.mjs. normalizeScene clamps garbage; complete scene input.",
+  "$compat": {
+    "commit": "a77cae23a3ea864b5f59e7b13b7d16c6c83e6664",
+    "file": "tests/unit.spec.mjs",
+    "description": "normalizeScene clamps garbage; complete scene input.",
+    "origin": "historical test replay",
+    "hash": "j.eyJ2ZXJzaW9uIjoyLCJ0b3kiOnsia2luZCI6InByb2NlZHVyYWwiLCJnZW5lcmF0b3IiOnsic2hhcGUiOiJub3BlIiwiY291bnQiOjEwMDAwMDAwMDAsInJvdWdobmVzcyI6N319LCJsb29rIjp7ImJhY2tncm91bmQiOiJyZWQiLCJleHBvc3VyZSI6OTksInRoZW1lIjoic2VwaWEifSwiZWZmZWN0cyI6eyJkcm9wIjp7Im9uIjp0cnVlfSwiZGlzc29sdmUiOnsib24iOnRydWV9LCJ3aW5kIjp7InN0cmVuZ3RoIjotM30sInBva2UiOnsib24iOnRydWV9fSwicGFpbnQiOnsic3RhbXBzIjpbWzAsMCwwLDAuMSwiI2ZmMDAwMCIsMV0sWyJ4Il0sWzEsMiwzLC0xLCIjMDBmZjAwIiwxXV19LCJjYW1lcmEiOnsiZGlzdGFuY2UiOjEwMDB9fQ",
+    "expected": {
+      "app": "splashery",
+      "version": 3,
+      "seed": 1,
+      "toy": {
+        "kind": "procedural",
+        "id": null,
+        "generator": {
+          "shape": "blob",
+          "palette": "candy",
+          "seed": 1,
+          "count": 120000,
+          "sizeJitter": 0.35,
+          "roughness": 1,
+          "colorNoise": 0.25
+        },
+        "clay": []
+      },
+      "look": {
+        "background": "page",
+        "theme": "auto",
+        "accent": "auto",
+        "splatScale": 1,
+        "exposure": 2.5
+      },
+      "effects": {
+        "poke": {
+          "on": false,
+          "strength": 0.6,
+          "wobble": 0.5
+        },
+        "wind": {
+          "on": false,
+          "strength": 0,
+          "direction": 0
+        },
+        "dissolve": {
+          "on": false,
+          "spread": 0.55,
+          "speed": 0.5
+        },
+        "drop": {
+          "on": true,
+          "bounce": 0.45,
+          "scatter": 0.5
+        },
+        "magnet": {
+          "on": false,
+          "strength": 0.7,
+          "radius": 0.45
+        },
+        "twist": {
+          "on": false,
+          "amount": 0.5,
+          "wobble": 0.3,
+          "axis": "y"
+        },
+        "slice": {
+          "on": false,
+          "position": 0,
+          "sweep": 0.35,
+          "axis": "x"
+        },
+        "paint": {
+          "on": false,
+          "size": 0.5,
+          "splash": 0.5,
+          "color": "#e63b2e"
+        }
+      },
+      "paint": {
+        "stamps": [[0, 0, 0, 0.1, "#ff0000", 1]]
+      },
+      "camera": {
+        "yaw": 0.55,
+        "pitch": 0.28,
+        "roll": 0,
+        "distance": 10
+      },
+      "autoplay": {
+        "turntable": true,
+        "effect": "none"
+      },
+      "pattern": {
+        "id": "none",
+        "flag": "",
+        "projection": "wrap",
+        "repeats": 1,
+        "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+        "scale": 0.5,
+        "amount": 1,
+        "detail": 0.6
+      },
+      "motion": {
+        "alive": true,
+        "move": "still",
+        "speed": 0.5,
+        "controls": {}
+      }
+    }
+  },
+  "version": 2,
+  "toy": {
+    "kind": "procedural",
+    "generator": {
+      "shape": "nope",
+      "count": 1000000000,
+      "roughness": 7
+    }
+  },
+  "look": {
+    "background": "red",
+    "exposure": 99,
+    "theme": "sepia"
+  },
+  "effects": {
+    "drop": {
+      "on": true
+    },
+    "dissolve": {
+      "on": true
+    },
+    "wind": {
+      "strength": -3
+    },
+    "poke": {
+      "on": true
+    }
+  },
+  "paint": {
+    "stamps": [[0, 0, 0, 0.1, "#ff0000", 1], ["x"], [1, 2, 3, -1, "#00ff00", 1]]
+  },
+  "camera": {
+    "distance": 1000
+  }
+}
