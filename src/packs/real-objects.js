@@ -68,22 +68,64 @@ const BASE = 0.01;
 // Adds the scan's splats as a cloud: `share` of the toy's budget (the file's first splats, an
 // even sample, grown to close the surface when fewer are used). `parts[i]` is the kit part for
 // the file's part i; `color(c, i, filePart)` may recolor a splat.
-export function addScan(k, scan, { share = 0.86, parts = [], color, keep } = {}) {
+// Lane Sharpness A's options (off unless a toy asks): `sizeMul` scales every splat, `exact` keeps
+// each splat's own size (no random size jitter, which frays the outline), and `smooth` (0..1)
+// blends each splat's color toward the mean of its neighbors within `cell` model units, to calm a
+// scan's speckled texture.
+export function addScan(
+  k,
+  scan,
+  {
+    share = 0.86,
+    parts = [],
+    color,
+    keep,
+    sizeMul = 1,
+    exact = false,
+    smooth = 0,
+    cell = 0.012,
+  } = {},
+) {
   k.data = k.data || {}; // sortWhileMoving keeps its state here
   const m = Math.min(scan.n, Math.max(1000, Math.floor(k.count * share)));
   const grow = Math.sqrt(scan.n / m);
   const list = [];
   for (let i = 0; i < m; i++) if (!keep || keep(scan.part[i], i)) list.push(i);
+  let mean = null;
+  if (smooth > 0) {
+    // Mean color per grid cell (and part), over every splat in the file.
+    const sums = new Map();
+    const key = (i) =>
+      `${Math.floor(scan.pos[i * 3] / cell)},${Math.floor(scan.pos[i * 3 + 1] / cell)},${Math.floor(scan.pos[i * 3 + 2] / cell)},${scan.part[i]}`;
+    for (let i = 0; i < scan.n; i++) {
+      const kk = key(i);
+      let e = sums.get(kk);
+      if (!e) sums.set(kk, (e = [0, 0, 0, 0]));
+      e[0] += scan.rgb[i * 3];
+      e[1] += scan.rgb[i * 3 + 1];
+      e[2] += scan.rgb[i * 3 + 2];
+      e[3]++;
+    }
+    mean = (i) => {
+      const e = sums.get(key(i));
+      return [e[0] / e[3], e[1] / e[3], e[2] / e[3]];
+    };
+  }
   const item = k.cloud({ count: (list.length * 160000) / k.count, pattern: false }, (_r, j) => {
     const i = list[j];
     if (i === undefined) return null;
     const fp = scan.part[i];
     let c = [scan.rgb[i * 3], scan.rgb[i * 3 + 1], scan.rgb[i * 3 + 2]];
+    if (mean) {
+      const a = mean(i);
+      c = c.map((v, j) => v + (a[j] - v) * smooth);
+    }
     if (color) c = color(c, i, fp) || c;
     return {
       p: [scan.pos[i * 3], scan.pos[i * 3 + 1], scan.pos[i * 3 + 2]],
       n: [scan.nrm[i * 3], scan.nrm[i * 3 + 1], scan.nrm[i * 3 + 2]],
-      size: (scan.sig[i] * grow) / BASE,
+      size: (scan.sig[i] * grow * sizeMul) / BASE,
+      ...(exact ? { jitter: 0 } : {}),
       flat: 0.14,
       color: c,
       opacity: 1,
@@ -1229,7 +1271,16 @@ const RUNNING_SHOE = {
   build(k) {
     const scan = SCANS.get("running-shoe");
     const shoe = k.part("shoe", { pivot: RS.heel, axis: [0, 0, 1] });
-    addScan(k, scan, { share: 0.82, parts: [shoe, shoe], keep: (fp) => fp === 0 });
+    // (Lane Sharpness A: exact, slightly smaller splats for a crisp outline, and a calmer
+    // fabric texture.)
+    addScan(k, scan, {
+      share: 0.82,
+      parts: [shoe, shoe],
+      keep: (fp) => fp === 0,
+      exact: true,
+      sizeMul: 0.9,
+      smooth: 0.45,
+    });
     // The laces: round splats along each chain, each following the two joints it lies between.
     const n = RS.joints;
     const per = Math.max(30, Math.round((k.count * 0.05) / (2 * (n - 1))));
