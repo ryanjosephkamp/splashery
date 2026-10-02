@@ -79,22 +79,30 @@ run at the same time; leave their files alone. The laptop is locked.
 
 Model: Opus 5.5 (default effort).
 
-- September 30, 2026: lane started on `claude/lane-shelves` from main at 0354a1f.
-- Engine PR #147 (`claude/lane-shelves-engine`): procedural shelf toys can offer looks (generator
-  settings), `lookOption()` takes `lookLabel`, and four tiny-planet palettes (mars, moon, jupiter,
-  neptune). Merged into this branch; it must merge first.
-- Lane PR #148: the crystal ball in Medieval (after the wizard's orb), the donut in Food (after the
-  macarons), the tiny planet in Space (after Neptune) with its Planet choice, and the new Torus in
-  Shapes (`src/packs/shapes-torus.js`) with four dressings, its wobble tap and its sound.
-- tests/shv.spec.mjs: 15/15 pass. Full suite (in parts, after two container restarts): 579 of 581
-  pass; the two failures are the smoke.spec.mjs lines the move changes (lines 102 and 133).
-- Cards on Effect review page 2: `shv-torus`, `shv-planets`, `shv-shelves`, all marked good by the
-  owner (September 30, 2026).
+**Finished: merged October 2, 2026.** Engine PR #147 merged on October 1 (main 6333e79), and lane PR
+#148 merged on October 2 (main 8c961ed, from head 3883fdf). The owner marked all three cards good
+(September 30) and called the torus and the moved toys fine in his review of October 2.
 
-- October 1, 2026: engine PR #147 merged (main 6333e79); main merged into this branch (15 files
-  differ from main now). Post-merge checks: unit, shv, help, taps, hta, fx5 and snda-engine pass,
-  102/102. `tools/sound-lint.mjs --toy torus`: no violation (the roll now sits just under the
-  opening pop). Head c13f484 before this note.
+What shipped:
+
+- The crystal ball is in Medieval (after the wizard's orb), the donut in Food (after the macarons)
+  and the tiny planet in Space (after Neptune). Ids, looks, taps, sounds and old links are
+  unchanged.
+- The tiny planet has a Planet choice in the Toy tab: Earth (default), Mars, the Moon, Jupiter and
+  Neptune, in the same v1 style (#147: procedural shelf toys can offer looks with generator
+  settings, `lookOption()` takes `lookLabel`, and four new palettes).
+- A new Torus in Shapes (`src/packs/shapes-torus.js`) with four dressings (plain, donut, bagel, swim
+  ring), a wobble tap like a coin spun on a table (3.6 s) and a soft roll sound. The Shapes shelf is
+  now Torus, Jelly blob, Neon knot.
+- `tests/shv.spec.mjs` (15 tests) and two lines of `tests/smoke.spec.mjs` (102 and 133, with the
+  Operator's approval) for the new shelves.
+
+Tests: the last run on head 3883fdf passed 141/141 (shv, smoke, unit, taps, hta, help); the
+Operator's run on main 2ba6455 with the lane passed 145/145, and Integrator 2's full run 674/675
+(the one failure, wd.spec:210, fails on main alone too).
+
+Cards on Effect review page 2: `shv-torus`, `shv-planets` (MP4s) and `shv-shelves` (stills), all
+good.
 
 ## Notes
 
@@ -109,17 +117,16 @@ Model: Opus 5.5 (default effort).
 
 ## Known issues
 
-- `tests/smoke.spec.mjs:133` expects Shapes to be blob, donut, knot, planet; it is now torus, blob,
-  knot. `tests/smoke.spec.mjs:102` expects the donut's thumbnail loaded at start; it is now far down
-  the All shelf. The Operator updates those lines.
+- None known. The two `tests/smoke.spec.mjs` lines the move changed (102 and 133) were updated in
+  #148 with the Operator's approval. Integrator 2 also found that the planet palette test called
+  `expect` once per splat and blocked its worker; it now checks the splats in plain loops and
+  asserts once.
 
 ## For the Operator
 
-- smoke.spec.mjs line 133: change the expected Shapes list to `["torus", "blob", "knot"]`.
-- smoke.spec.mjs line 102: its list of thumbnails loaded at start names the donut and the tiny
-  planet, which now sit far down the All shelf (Food, Space), so their lazy thumbnails haven't
-  loaded; swap them for `"torus"` (or drop them). The test's later check, which loads every
-  offscreen thumbnail, still covers them.
 - PACKS.md: a procedural shelf toy may now list `looks` with `generator` settings and a `lookLabel`
-  (engine PR #147).
+  (engine PR #147); the tiny planet is the example.
 - The four new palettes show in the Make tab too, labeled "(tribute)".
+- PACKS.md lesson for tests: never call `expect` once per splat in a loop over a buffer (150,000
+  calls blocked a worker past its timeout); collect the bad ones and assert once.
+- The Shelves lane on Effect review page 2 can be set `finished`.
