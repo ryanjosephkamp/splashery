@@ -27,16 +27,21 @@ const kinds = (ctx) => {
 };
 
 test.describe("the Live view (no browser)", () => {
-  test("View is an option, and Whole song stays the default", () => {
+  // Lane Live input r3: Live is the default since the owner's review of October 2, 2026 ("I like
+  // the live view much more than I like the full spectrum because the full spectrum doesn't
+  // usually seem to move very much while the song is playing, whereas live it actually moves");
+  // Whole song is one tap away.
+  test("View is an option, Live is the default and Whole song one choice away", () => {
     const opt = R.options.find((x) => x.key === "view");
-    expect(opt.default).toBe("whole");
-    expect(opt.choices.map((c) => c.id)).toEqual(["whole", "live"]);
-    // an old link or saved scene has no view: it resolves to the whole song
-    expect(resolveOptions(R, {}).view).toBe("whole");
+    expect(opt.default).toBe("live");
+    expect(opt.choices.map((c) => c.id)).toEqual(["live", "whole"]);
+    // a link or saved scene with no view opens in Live; one that saved Whole keeps it
+    expect(resolveOptions(R, {}).view).toBe("live");
+    expect(resolveOptions(R, { view: "whole" }).view).toBe("whole");
   });
 
   test("Whole song builds as before: no fading splats, no caps", async () => {
-    const ctx = await build({});
+    const ctx = await build({ view: "whole" });
     const n = kinds(ctx);
     expect(n[KINDS.fade] || 0).toBe(0);
     expect(n[KINDS.token] || 0).toBe(0);
@@ -86,10 +91,8 @@ test.describe("in the browser", () => {
     await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
     await page.evaluate(() => window.__splashery.app.chooseToy("song-landscape"));
     await page.waitForFunction(() => window.__splashery.player.proc?.ctx?.kit?.data?.song, null, { timeout: 90_000 }); // prettier-ignore
-    // the default is the whole song
-    expect(await page.evaluate(() => window.__splashery.player.proc.ctx.kit.data.song.live)).toBe(false); // prettier-ignore
-    await page.evaluate(() => window.__splashery.app.setToyOptions({ view: "live" }));
-    await page.waitForFunction(() => window.__splashery.player.proc?.ctx?.kit?.data?.song?.live === true, null, { timeout: 90_000 }); // prettier-ignore
+    // the default is Live (lane Live input r3)
+    expect(await page.evaluate(() => window.__splashery.player.proc.ctx.kit.data.song.live)).toBe(true); // prettier-ignore
     const z = () =>
       page.evaluate(() => window.__splashery.player.motion.out?.body?.offset?.[2] ?? 0);
     const still = await z();
@@ -102,6 +105,9 @@ test.describe("in the browser", () => {
     const a = await z();
     await page.waitForTimeout(1500);
     expect(await z()).toBeCloseTo(a, 5); // paused: a still landscape
+    // Whole song is one choice away, and builds without the Live view's fading cells
+    await page.evaluate(() => window.__splashery.app.setToyOptions({ view: "whole" }));
+    await page.waitForFunction(() => window.__splashery.player.proc?.ctx?.kit?.data?.song?.live === false, null, { timeout: 90_000 }); // prettier-ignore
     expect(errors).toEqual([]);
   });
 

@@ -67,6 +67,7 @@ export class MicAnalyser {
     this.hop = Math.max(64, Math.round(this.rate * 0.005));
     this.hopAt = 0; // samples into the current hop
     this.hopSum = 0;
+    this.hopClip = 0;
     this.onsets = new OnsetDetector({ hopMs: (this.hop / this.rate) * 1000 });
     this.window = new Float32Array(2048);
     this.level = 0;
@@ -109,19 +110,23 @@ export class MicAnalyser {
       const v = block[i];
       ring[this.written++ & (RING - 1)] = v;
       this.hopSum += v * v;
+      if (v >= 0.99 || v <= -0.99) this.hopClip++; // r3: full scale
       if (++this.hopAt === this.hop) this.endHop(this.hopSum / this.hop);
     }
   }
 
   endHop(energy) {
+    const clip = this.hopClip;
     this.hopAt = 0;
     this.hopSum = 0;
+    this.hopClip = 0;
     if (this.decay) {
+      if (this.decay.energy.length < this.decay.clipHops) this.decay.clip += clip;
       this.decay.energy.push(energy);
       if (this.decay.energy.length >= this.decay.want) this.finishDecay();
     }
     if (this.onsets.push(energy)) {
-      if (this.decay) this.finishDecay();
+      if (this.decay) this.finishDecay(true);
       this.claps++;
       this.clapAt = performance.now();
       this.emit("clap", { n: this.claps, at: this.clapAt });
@@ -130,14 +135,18 @@ export class MicAnalyser {
         energy: [energy],
         noise: this.onsets.background(),
         want: Math.round(2.5 / (this.hop / this.rate)),
+        // r3: samples at full scale in its first 50 ms (an overloaded clap).
+        clip,
+        clipHops: Math.ceil(0.05 / (this.hop / this.rate)),
       };
     }
   }
 
-  finishDecay() {
+  finishDecay(interrupted = false) {
     const d = this.decay;
     this.decay = null;
-    const r = measureDecay(Float32Array.from(d.energy), this.hop / this.rate, d.noise);
+    const clipped = d.clip / (d.clipHops * this.hop);
+    const r = measureDecay(Float32Array.from(d.energy), this.hop / this.rate, d.noise, { clipped, interrupted }); // prettier-ignore
     this.lastDecay = { ...r, at: performance.now(), n: this.claps };
     this.emit("decay", this.lastDecay);
   }
