@@ -28,18 +28,19 @@ around the toys; the rules below keep it apart.
 
 ## Pages
 
-| Page                       | Link                                              | Who changes it                                                               |
-| -------------------------- | ------------------------------------------------- | ---------------------------------------------------------------------------- |
-| Effect review, page 2      | https://claude.ai/artifact/BSayVkzQ2FKESesrkrSUMK | Lanes add clips and cards (below); the owner marks; the Operator tidies      |
-| Effect review, page 1      | https://claude.ai/artifact/NCsg9V5SzFY3Mnwuwgq7pi | Full since September 30, 2026: older clips and marks; no new uploads         |
-| Sound Board                | https://claude.ai/artifact/VE9XCTxH3djST6dGb6ZAkj | The Operator (after merges and each sound-review round); the owner may mark  |
-| Help Board                 | https://claude.ai/artifact/P1NCWsGRE3MFqYTWTnTuqN | The Operator (`node tools/help-board.mjs`, below); the owner marks           |
-| Toy Plan (owner's marks)   | https://claude.ai/artifact/PNGPx7REMdhxLMHDXARhw8 | The owner marks; the Operator republishes (`node tools/toy-plan.mjs --json`) |
-| Toy Ideas                  | https://claude.ai/artifact/5TukiuV3mCt3G3zk6Arx9S | The Operator adds three ideas each Monday; the owner marks (below)           |
-| Splashery Parallel Plan    | https://claude.ai/artifact/KjJrfKxi4phzJmbgSyRbr7 | The Operator (the lane prompts)                                              |
-| Splashery Operator Manual  | https://claude.ai/artifact/3WYMJxtZDR7m1ecTCN47ZB | The Operator (the owner's how-to)                                            |
-| How Splashery Is Made      | https://claude.ai/artifact/HHj9PBXUQck3kAHrHhdkjA | The Operator (the plan in Part 1, the public write-up's basis in Part 2)     |
-| Pages into Splats (report) | https://claude.ai/artifact/9mrrJYPiZKbSD9s5gFBpaA | The Operator (the picture-and-page plan, accepted September 28, 2026)        |
+| Page                       | Link                                              | Who changes it                                                                                                          |
+| -------------------------- | ------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| Effect review, page 2      | https://claude.ai/artifact/BSayVkzQ2FKESesrkrSUMK | Lanes add clips and cards (below); the owner marks; the Operator tidies                                                 |
+| Effect review, page 1      | https://claude.ai/artifact/NCsg9V5SzFY3Mnwuwgq7pi | Full since September 30, 2026: older clips and marks; no new uploads                                                    |
+| Sound Board                | https://claude.ai/artifact/VE9XCTxH3djST6dGb6ZAkj | The Operator (after merges and each sound-review round); the owner may mark                                             |
+| Help Board                 | https://claude.ai/artifact/P1NCWsGRE3MFqYTWTnTuqN | The Operator (`node tools/help-board.mjs`, below); the owner marks                                                      |
+| Toy Plan (owner's marks)   | https://claude.ai/artifact/PNGPx7REMdhxLMHDXARhw8 | The owner marks; the Operator republishes (`node tools/toy-plan.mjs --json`)                                            |
+| Toy Ideas                  | https://claude.ai/artifact/5TukiuV3mCt3G3zk6Arx9S | The Operator adds three ideas each Monday; the owner marks (below)                                                      |
+| Hands-on Plan              | https://claude.ai/artifact/ENvHXomEozJrTYE3tUphyG | The owner marks each toy's hands-on line (approve, change or skip); the Operator rebuilds it from docs/HANDS-ON-PLAN.md |
+| Splashery Parallel Plan    | https://claude.ai/artifact/KjJrfKxi4phzJmbgSyRbr7 | The Operator (the lane prompts)                                                                                         |
+| Splashery Operator Manual  | https://claude.ai/artifact/3WYMJxtZDR7m1ecTCN47ZB | The Operator (the owner's how-to)                                                                                       |
+| How Splashery Is Made      | https://claude.ai/artifact/HHj9PBXUQck3kAHrHhdkjA | The Operator (the plan in Part 1, the public write-up's basis in Part 2)                                                |
+| Pages into Splats (report) | https://claude.ai/artifact/9mrrJYPiZKbSD9s5gFBpaA | The Operator (the picture-and-page plan, accepted September 28, 2026)                                                   |
 
 ## Lanes and file ownership
 
