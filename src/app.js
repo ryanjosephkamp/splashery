@@ -144,6 +144,7 @@ class App {
     // loading overlay: the toy stays on screen and its tap sound plays at once (lane Fix6).
     player.rebuild = (options) => this.setToyOptions(options, { quiet: Infinity });
     player.on("cue", (cues) => {
+      if (!player.motion.pausedKey) this.sound.resumeToy(); // Sound C: cues mean it runs
       for (const spec of cues) this.sound.play(spec, { key: "cue" });
     });
     player.on("profile", () => this.updateRenderInfo());
@@ -272,6 +273,8 @@ class App {
     const ui = this.ui;
     const player = this.player;
     const scene = player.scene;
+    this.sound.resumeToy(); // Sound C: a new or rebuilt toy starts unpaused
+    this.preloadSounds();
     ui.setShelf(
       scene.toy.kind === "builtin"
         ? scene.toy.id
@@ -739,6 +742,18 @@ class App {
     if (!player.focusAt(hit || null)) player.resetCamera();
   }
 
+  // Sound C: fetches and decodes the open toy's recorded samples (its tap
+  // sound's, and any its recipe's `sounds` lists for its cues, for the
+  // options it was built with), so its first tap sounds on time.
+  preloadSounds() {
+    const player = this.player;
+    const toy = player?.scene.toy;
+    if (!this.sound.enabled || toy?.kind !== "builtin") return;
+    const extra = player.toyInfo?.recipe?.sounds;
+    const more = typeof extra === "function" ? extra(toy.options || {}) : extra;
+    this.sound.preload([toySound(toy.id), ...[].concat(more || [])]);
+  }
+
   onAction(r) {
     const player = this.player;
     const recipe = player.toyInfo?.recipe;
@@ -760,11 +775,13 @@ class App {
     // UI r3: a tap on a long effect that is running pauses its sound too, and
     // the next one resumes it from the same place.
     if (r.paused || r.resumed) {
-      if (r.paused) this.sound.pauseHeld("toy");
-      else this.sound.resumeHeld("toy");
+      // Sound C: all of the toy's sound, not only the notes still to come.
+      if (r.paused) this.sound.pauseToy();
+      else this.sound.resumeToy();
       this.ui.setMotion(player.scene.motion, player.motion.targets);
       return;
     }
+    this.sound.resumeToy(); // Sound C: another control firing carries a paused effect on
     const spec = own || recipe?.action?.sound || (r.key === "hop" ? "hop" : "pop");
     // UI r4: a drag across keys plays each key's note under its own key, so
     // notes in quick succession overlap as on a real keyboard; a run faster
@@ -987,6 +1004,7 @@ class App {
     this.ui.setSound(this.sound.enabled);
     this.player.setMediaSound(this.sound.enabled); // Pictures
     if (this.sound.enabled) this.sound.play("chime");
+    this.preloadSounds(); // Sound C
   }
 
   // Tool strokes. A stroke that starts off the toy becomes an orbit instead.
