@@ -21,8 +21,10 @@ const TAP_SECS = 5;
 export const LIQUID_LOOKS = {
   water: { preset: "water", nozzle: { speed: 1.6, radius: 0.08 }, pour: 2.4 },
   soda: { preset: "soda", nozzle: { speed: 1.6, radius: 0.08 }, pour: 2.4 },
-  honey: { preset: "honey", nozzle: { speed: 0.75, radius: 0.1 }, pour: 3.2 },
-  lava: { preset: "lava", nozzle: { speed: 0.75, radius: 0.1 }, pour: 3.2 },
+  // (gpuRadius: the GPU liquid's particles are small enough for a real
+  // honey pour's thin thread)
+  honey: { preset: "honey", nozzle: { speed: 0.75, radius: 0.1, gpuRadius: 0.05 }, pour: 3.2 },
+  lava: { preset: "lava", nozzle: { speed: 0.75, radius: 0.1, gpuRadius: 0.05 }, pour: 3.2 },
 };
 
 // The glass (recipe units, standing on y = 0).
@@ -48,41 +50,64 @@ function glass(k, g, budget = 9000) {
   k.reach([g.at[0] - g.radius - g.wall, g.at[1], g.at[2] - g.radius - g.wall]);
 }
 
+// Props the GPU liquid's surface pass traces (src/fluids/gpu/index.js): it
+// sets `drawn` on this spec, and drive() hides their splats then.
+function props(k, shapes) {
+  const i = k.fluid({ name: "props", kind: "props", shapes });
+  return k.fluids[i];
+}
+
 // ---- Scenes -----------------------------------------------------------------------------
 
 function glassScene(k, o) {
   const look = LIQUID_LOOKS[o.liquid] || LIQUID_LOOKS.water;
+  // The props are splats, and on WebGPU the liquid's surface pass traces the
+  // same shapes crisply instead (props(): the splats hide then).
+  const stand = k.part("stand");
+  const N = NOZZLE;
   // A round wooden board under the glass and the stand.
-  k.add(k.cylinder(1.0, 0.06), { pos: [-0.25, -0.03, 0], color: wood, even: true });
+  k.add(k.cylinder(1.0, 0.06), { pos: [-0.25, -0.03, 0], color: wood, even: true, part: stand });
   glass(k, GLASS);
   // The lab stand: a foot, a rod, an arm and a nozzle over the glass.
   const steel = (c) => shade("#9aa3ab", 0.85 + 0.3 * Math.max(0, c.n[1]) + 0.1 * c.n[0]);
-  k.add(k.cylinder(0.035, 1.95), { pos: [-0.95, 0.975, -0.2], color: steel, even: true });
-  k.add(k.box(0.3, 0.05, 0.3), { pos: [-0.95, 0.025, -0.2], color: "#3c4148", even: true });
+  k.add(k.cylinder(0.035, 1.95), { pos: [-0.95, 0.975, -0.2], color: steel, even: true, part: stand }); // prettier-ignore
+  k.add(k.box(0.3, 0.05, 0.3), { pos: [-0.95, 0.025, -0.2], color: "#3c4148", even: true, part: stand }); // prettier-ignore
   k.add(k.cylinder(0.025, 0.92), {
-    pos: [(-0.95 + NOZZLE[0]) / 2, 1.9, -0.1],
-    rot: [0, (Math.atan2(0.2, NOZZLE[0] + 0.95) * 180) / Math.PI, 90],
+    pos: [(-0.95 + N[0]) / 2, 1.9, -0.1],
+    rot: [0, (Math.atan2(0.2, N[0] + 0.95) * 180) / Math.PI, 90],
     color: steel,
     even: true,
+    part: stand,
   });
   // The nozzle: a short funnel and its tap handle (a part that turns open).
   k.add(k.cone(0.07, 0.12, 0.2, { caps: false }), {
-    pos: [NOZZLE[0], NOZZLE[1] + 0.12, NOZZLE[2]],
+    pos: [N[0], N[1] + 0.12, N[2]],
     color: steel,
     even: true,
+    part: stand,
   });
   k.add(k.cylinder(0.05, 0.08), {
-    pos: [NOZZLE[0], NOZZLE[1] + 0.25, NOZZLE[2]],
+    pos: [N[0], N[1] + 0.25, N[2]],
     color: "#6d757d",
     even: true,
+    part: stand,
   });
-  const valve = k.part("valve", { pivot: [NOZZLE[0], NOZZLE[1] + 0.25, NOZZLE[2]], axis: [0, 0, 1] }); // prettier-ignore
+  const valve = k.part("valve", { pivot: [N[0], N[1] + 0.25, N[2]], axis: [0, 0, 1] }); // prettier-ignore
   k.add(k.box(0.26, 0.035, 0.035), {
-    pos: [NOZZLE[0] + 0.13, NOZZLE[1] + 0.25, NOZZLE[2] + 0.06],
+    pos: [N[0] + 0.13, N[1] + 0.25, N[2] + 0.06],
     color: "#c9302c",
     part: valve,
     even: true,
   });
+  const traced = props(k, [
+    { type: "cyl", a: [-0.25, -0.06, 0], b: [-0.25, 0, 0], r: 1.0, look: "wood" },
+    { type: "cyl", a: [-0.95, 0, -0.2], b: [-0.95, 1.95, -0.2], r: 0.035, color: "#9aa3ab", look: "steel" }, // prettier-ignore
+    { type: "box", at: [-0.95, 0.025, -0.2], half: [0.15, 0.025, 0.15], color: "#3c4148" },
+    { type: "cyl", a: [-0.95, 1.9, -0.2], b: [N[0], 1.9, N[2]], r: 0.025, color: "#9aa3ab", look: "steel" }, // prettier-ignore
+    { type: "cone", a: [N[0], N[1] + 0.02, N[2]], b: [N[0], N[1] + 0.22, N[2]], ra: 0.07, rb: 0.12, color: "#9aa3ab", look: "steel" }, // prettier-ignore
+    { type: "cyl", a: [N[0], N[1] + 0.21, N[2]], b: [N[0], N[1] + 0.29, N[2]], r: 0.05, color: "#6d757d", look: "steel" }, // prettier-ignore
+    { type: "box", at: [N[0] + 0.13, N[1] + 0.25, N[2] + 0.06], half: [0.13, 0.0175, 0.0175], pivot: [N[0], N[1] + 0.25, N[2]], part: "valve", color: "#c9302c", look: "steel" }, // prettier-ignore
+  ]);
   k.fluid({
     name: "liquid",
     kind: "liquid",
@@ -96,7 +121,7 @@ function glassScene(k, o) {
   });
   k.reach([0.9, 2.1, 0.5]);
   k.reach([-1.25, -0.05, -0.5]);
-  k.data = { scene: "glass", pour: look.pour };
+  k.data = { scene: "glass", pour: look.pour, props: traced };
 }
 
 // A wide, shallow glass basin (seen through, so the pool shows from the side).
@@ -104,7 +129,12 @@ const BASIN = { type: "glass", at: [0, 0, 0], radius: 0.78, height: 0.4, wall: 0
 
 function splashScene(k, o) {
   const look = LIQUID_LOOKS[o.liquid] || LIQUID_LOOKS.water;
-  k.add(k.cylinder(1.05, 0.06), { pos: [0, -0.03, 0], color: wood, even: true });
+  const stand = k.part("stand");
+  k.add(k.cylinder(1.05, 0.06), { pos: [0, -0.03, 0], color: wood, even: true, part: stand });
+  // (a second layer under the basin: seen through clear water, the board's
+  // splats alone leave gaps)
+  k.add(k.cylinder(0.82, 0.02), { pos: [0, -0.012, 0], color: wood, even: true, part: stand });
+  const traced = props(k, [{ type: "cyl", a: [0, -0.06, 0], b: [0, 0, 0], r: 1.05, look: "wood" }]);
   glass(k, BASIN, 12000);
   k.fluid({
     name: "liquid",
@@ -115,17 +145,39 @@ function splashScene(k, o) {
     budget: 1300,
     colliders: [BASIN, { type: "floor", y: 0 }],
     fill: { cylinder: { at: [0, 0.04, 0], radius: 0.76, height: 0.13 } },
+    // The GPU liquid (r4): a shallow film and a smaller ball, so the ball
+    // throws up a crown as a drop does on a wet plate; low friction and no
+    // cohesion, so the film flows back in and settles.
+    gpu: {
+      fill: { cylinder: { at: [0, 0.04, 0], radius: 0.76, height: 0.065 } },
+      fillShare: 0.9,
+      drop: { at: [0.03, 0.95, 0.02], radius: 0.1, vel: [0, -2, 0] },
+      friction: 0.025,
+      tension: 0,
+      // (no stream to hold together: drawn barely stretched, so the ball and
+      // the crown's drops stay round; larger sprites join the crown's thin
+      // sheet)
+      stretch: 0.15,
+      sprite: 1.1,
+      // (and they catch the light as real drops do)
+      drops: 0.8,
+      // The crown's rim breaks into fine droplets, smaller than the grid
+      // (diffuse.js, shed).
+      breakup: 6,
+    },
   });
   k.reach([0, 1.75, 0]);
-  k.data = { scene: "splash" };
+  k.data = { scene: "splash", props: traced };
 }
 
 function candleScene(k) {
-  k.add(k.cylinder(0.5, 0.05), { pos: [0, 0.025, 0], color: "#c9b27c", even: true, size: 1.5 });
+  const stand = k.part("stand");
+  k.add(k.cylinder(0.5, 0.05), { pos: [0, 0.025, 0], color: "#c9b27c", even: true, size: 1.5, part: stand }); // prettier-ignore
   k.add(k.cylinder(0.5, 0.03, { caps: false }), {
     pos: [0, 0.05, 0],
     color: "#d8c38c",
     even: true,
+    part: stand,
   });
   // Wax: warm cream, lighter at the top where the flame lights it.
   k.add(k.cylinder(0.17, 0.85), {
@@ -138,10 +190,19 @@ function candleScene(k) {
     weight: 2.5,
     size: 1.7,
     flat: 0.35,
+    part: stand,
   });
   // The melted pool on top and the wick.
-  k.add(k.disc(0.12), { pos: [0, 0.902, 0], color: "#f7e9c9", share: 0.01 });
-  k.add(k.cylinder(0.009, 0.08), { pos: [0, 0.94, 0], color: "#2a211b", share: 0.004 });
+  k.add(k.disc(0.12), { pos: [0, 0.902, 0], color: "#f7e9c9", share: 0.01, part: stand });
+  k.add(k.cylinder(0.009, 0.08), { pos: [0, 0.94, 0], color: "#2a211b", share: 0.004, part: stand }); // prettier-ignore
+  // Traced on WebGPU: the dish, the wax (lit from within near the flame, as
+  // wax is) and the wick.
+  const traced = props(k, [
+    { type: "cyl", a: [0, 0, 0], b: [0, 0.065, 0], r: 0.5, color: "#c9b27c" },
+    { type: "cyl", a: [0, 0.05, 0], b: [0, 0.9, 0], r: 0.17, color: "#ece0c2", look: "wax" },
+    { type: "cyl", a: [0, 0.9, 0], b: [0, 0.98, 0], r: 0.009, color: "#2a211b" },
+  ]);
+  traced.light = { at: [0, 1.04, 0], color: "#ffb35a" };
   k.fluid({
     name: "smoke",
     kind: "gas",
@@ -170,16 +231,18 @@ function candleScene(k) {
   });
   k.reach([0, 2.0, 0]);
   k.reach([0.5, 0, 0.5]);
-  k.data = { scene: "candle" };
+  k.data = { scene: "candle", props: traced };
 }
 
 function cupScene(k) {
   // A saucer, a mug with a handle, and hot coffee with a light crema ring.
-  k.add(k.cylinder(0.6, 0.04), { pos: [0, 0.02, 0], color: "#f2efe9", even: true });
+  const stand = k.part("stand");
+  k.add(k.cylinder(0.6, 0.04), { pos: [0, 0.02, 0], color: "#f2efe9", even: true, part: stand });
   k.add(k.cylinder(0.6, 0.03, { caps: false }), {
     pos: [0, 0.03, 0],
     color: "#e6e1d8",
     even: true,
+    part: stand,
   });
   k.add(
     k.lathe(
@@ -191,9 +254,9 @@ function cupScene(k) {
       ],
       { grid: 64 },
     ),
-    { color: (c) => shade("#c8553d", 0.85 + 0.25 * Math.max(0, c.n[0] * 0.5 + c.n[2] * 0.5)), even: true }, // prettier-ignore
+    { color: (c) => shade("#c8553d", 0.85 + 0.25 * Math.max(0, c.n[0] * 0.5 + c.n[2] * 0.5)), even: true, part: stand }, // prettier-ignore
   );
-  k.add(k.disc(0.38, 0.34), { pos: [0, 0.62, 0], color: "#d86a51", share: 0.02, even: true });
+  k.add(k.disc(0.38, 0.34), { pos: [0, 0.62, 0], color: "#d86a51", share: 0.02, even: true, part: stand }); // prettier-ignore
   k.add(k.torus(0.15, 0.035), { pos: [0.47, 0.35, 0], rot: [90, 0, 0], color: "#c8553d", share: 0.03 }); // prettier-ignore
   k.add(k.disc(0.345), {
     pos: [0, 0.56, 0],
@@ -202,7 +265,15 @@ function cupScene(k) {
       return mix("#3b2014", "#a8784e", Math.max(0, (r - 0.8) / 0.2) * 0.8);
     },
     even: true,
+    part: stand,
   });
+  // Traced on WebGPU (the handle stays splats): the saucer, the mug and the
+  // coffee in it.
+  const traced = props(k, [
+    { type: "cyl", a: [0, 0, 0], b: [0, 0.04, 0], r: 0.6, color: "#d6d2ca" },
+    { type: "cone", a: [0, 0.04, 0], b: [0, 0.62, 0], ra: 0.31, rb: 0.36, color: "#c8553d", look: "steel" }, // prettier-ignore
+    { type: "cyl", a: [0, 0.6, 0], b: [0, 0.622, 0], r: 0.335, look: "coffee" },
+  ]);
   k.fluid({
     name: "steam",
     kind: "gas",
@@ -219,22 +290,13 @@ function cupScene(k) {
   });
   k.reach([0, 1.9, 0]);
   k.reach([0.6, 0, 0.6]);
-  k.data = { scene: "cup" };
+  k.data = { scene: "cup", props: traced };
 }
 
 // ---- The recipe -----------------------------------------------------------------------------
 
-const POUR_SOUND = [
-  { voice: "splash", f: 520, decay: 1.2, vol: 0.55 },
-  { voice: "bubbles", at: 0.25, n: 7, rate: 9, decay: 1.4, vol: 0.45 },
-];
-const SODA_SOUND = [...POUR_SOUND, { voice: "sizzle", at: 0.4, decay: 2.2, vol: 0.3 }];
-const THICK_SOUND = [{ voice: "gloop", f: 180, decay: 1.6, vol: 0.7 }];
-const SPLASH_SOUND = [{ voice: "splash", f: 700, decay: 1.4, vol: 0.8 }];
-const BLOW_SOUND = [
-  { voice: "breath", decay: 0.8, vol: 0.8 },
-  { voice: "hiss", at: 0.1, decay: 0.8, vol: 0.25 },
-];
+// A short, soft puff (a real blow-out is quick and quiet; tools/sound-lint.mjs).
+const BLOW_SOUND = { voice: "breath", decay: 0.6, vol: 0.45 };
 const STEAM_SOUND = [{ voice: "breath", decay: 1.1, vol: 0.7 }];
 
 export const RECIPES = {
@@ -287,6 +349,9 @@ export const RECIPES = {
       if (n < LAB.tapN) LAB.tapN = 0;
       if (fresh) LAB.tapN = n;
       out.fluid = {};
+      // (traced on WebGPU: the splats step aside)
+      const splats = d.props?.drawn ? 0 : 1;
+      if (d.props) out.parts.stand = { visible: splats };
       if (d.scene === "glass") {
         // Every third tap empties the glass before it pours.
         const empty = n > 0 && n % 3 === 0;
@@ -295,20 +360,19 @@ export const RECIPES = {
         out.fluid.liquid = { on, drain: empty && e < 1.3 ? 0.55 : 0 };
         // The red handle turns a quarter turn while it pours.
         const open = Math.min(1, Math.max(0, Math.min((e - start) / 0.25, (start + d.pour - e) / 0.25))); // prettier-ignore
-        out.parts.valve = { angle: -1.35 * open };
-        if (fresh) {
-          const liquid = d.liquidId;
-          out.cues.push(liquid === "soda" ? SODA_SOUND : liquid === "honey" || liquid === "lava" ? THICK_SOUND : POUR_SOUND); // prettier-ignore
-        }
+        out.parts.valve = { angle: -1.35 * open, visible: splats };
+        out.fluid.props = { valve: -1.35 * open };
+        // (the pour's sound comes from the simulation: src/fluids/runtime.js)
       } else if (d.scene === "splash") {
         out.fluid.liquid = {
           once: { id: n, do: "drop", at: [0.05, 1.45, 0.03], radius: 0.19, vel: [0, -1.5, 0] },
         };
-        if (fresh) out.cues.push(d.liquidId === "honey" || d.liquidId === "lava" ? THICK_SOUND : SPLASH_SOUND); // prettier-ignore
+        // (its splash comes from the simulation, as it lands)
       } else if (d.scene === "candle") {
         // Blown out for three seconds, then it lights again.
         const out3 = e < 3;
         out.fluid.flame = { on: !out3, wind: e < 0.35 ? [2.5, 0, 0] : [0, 0, 0] };
+        out.fluid.props = { light: out3 ? 0 : 1 };
         // Put out, the hot wick sends up a thick ribbon of smoke that thins.
         out.fluid.smoke = { on: e < 2.6, flow: e < 2.6 ? (1 - e / 2.6) ** 1.5 : 0 };
         if (fresh) out.cues.push(BLOW_SOUND);

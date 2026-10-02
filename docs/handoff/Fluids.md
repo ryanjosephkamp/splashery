@@ -145,6 +145,56 @@ Model: Opus 5.5 (claude-opus-5-5), default effort.
   a thumbnail.
 - Tests: `tests/fl.spec.mjs` (8 tests).
 
+## r4 (September 30, 2026): a GPU solver, a liquid surface and a gas grid
+
+The Operator's brief of 15:05 UTC, from the owner's note ("I marked the fluids as looking right, but
+that might have been premature... They still don't seem realistic enough for me"; "r4 yes"): far
+more particles on the GPU (WebGPU compute, PBF or MLS-MPM after a short measurement), a real liquid
+surface (screen-space fluid rendering, splats kept for spray, foam and bubbles), real smoke and
+flames (a grid gas solver with vorticity confinement and buoyancy, ray-marched, WebGL2 too), and
+evidence Ryan can see (each scene beside real footage or a published measurement). Branch
+`claude/lane-fluids-r4` from b328e58 (v1, PR #121); PR "Engine: Fluids r4, a GPU solver and a liquid
+surface". Cards: fl-r4-pour, fl-r4-splash, fl-r4-soda, fl-r4-smoke, fl-r4-flame, fl-r4-phone.
+
+State (see docs/FLUIDS.md, "r4"):
+
+- `src/fluids/gpu/`: MLS-MPM liquid (`mpm.js`, `liquid.js`), foam, bubbles and spray (`diffuse.js`),
+  the liquid surface and glass (`surface.js`), the gas grid (`gas.js`, `gasscene.js`), `index.js`.
+  Wired in `src/fluids/runtime.js` and `src/fluids/world.js` (lane files, not engine files).
+- WebGPU with compute: GPU liquid and surface. WebGL2: the r3 CPU liquid, unchanged, plus the gas
+  grid. `?fluids=cpu`: r3 everywhere.
+- Tools: `tools/fl-gpu-physics.mjs` (the dam break on the GPU solver), `tools/fl-bench.html` (frame
+  times on a real device, tier by tier; served by Pages once merged).
+- Cards on Effect review page 2 (October 1, 2026): fl-r4-flame and fl-r4-smoke marked "good";
+  fl-r4-pour and fl-r4-soda "fix" (the owner: the glass's rim and outline were hard to make out;
+  "the liquid itself is definitely getting better"), redone as fl-r4-pour-r2 and fl-r4-soda-r2 with
+  a crisp traced glass (rim ring, edges, foot); fl-r4-splash (honest: no crown yet, clear water hard
+  to see on a dark background); fl-r4-phone (tools/fl-bench.html gives a phone's real numbers once
+  merged).
+- October 1, 2026: the owner marked fl-r4-flame, fl-r4-phone, fl-r4-pour-r2, fl-r4-smoke and
+  fl-r4-soda-r3 "good"; fl-r4-splash "fix". fl-r4-splash-r2: the ball now starts inside the GPU grid
+  (it started above it and arrived flattened) and drops onto a shallow film, so it throws up a crown
+  that breaks into drops and falls back (the recipe's `gpu` settings; the CPU splash is unchanged).
+  The owner's note for the record: a cup's rim and outer surface sharp and easy to read, and with a
+  dark liquid the far side of the cup's bottom must not show through.
+- October 1, 2026 (afternoon): fl-r4-splash-r2 marked "fix" ("looking really good so far"; a taller
+  crown, many more, smaller drops): fl-r4-splash-r3 sheds fine droplets from the crown's rim. Then
+  the owner changed four marks to "fix": fl-r4-flame and fl-r4-smoke ("can look more realistic"; the
+  smoke's grid "looks good"), fl-r4-pour-r2 (the glass's foot behind the liquid a bit too visible;
+  the board, faucet, handle and spout grainy) and fl-r4-soda-r3 (the liquid's top surface hard to
+  see; the same grainy props). Redone (evening): fl-r4-pour-r3 and fl-r4-soda-r4 (props traced
+  crisply on WebGPU, the foot behind the liquid at half strength, a meniscus), fl-r4-flame-r2 and
+  fl-r4-smoke-r2 (a traced candle lit by its flame, a taller yellow flame, paler smoke; a relit
+  flame grows back in still air; the hot cup traced too). All six r4 cards are redone on Effect
+  review page 2.
+- Sound: from the simulation (src/fluids/acoustic.js), after the owner's Sound Board note ("isn't in
+  sync with fluid pour animation"); real recordings wait for Sound A's sample voice.
+- Lessons: a collider wall thinner than about three cells lets MPM particles through; a sprite
+  smaller than a texel breaks a far liquid into specks (the surface pass enlarges it and keeps its
+  volume); foam must spawn only where a stream plunges into the slow pool, or it coats the stream; a
+  plume in perfectly still air stands straight, and a room's faint drafts make it meander. WebGPU in
+  this container is SwiftShader (software), so GPU frame times here are not a phone's.
+
 ## Notes
 
 - Engine hooks (small, additive, marked "Fluids"): `src/stage.js` (`addLayer`, `setLayerUniforms`,
