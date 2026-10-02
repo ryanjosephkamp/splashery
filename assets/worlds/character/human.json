@@ -1,0 +1,89 @@
+{
+  "about": "Hybrid mode's realistic character (tools/wd-character.py): a MakeHuman adult (CC0) rigged with MPFB's game-engine skeleton, with idle, walk and run from the 100STYLE motion capture (CC BY 4.0).",
+  "height": 1.5738,
+  "walkSpeed": 1.3,
+  "runSpeed": 2.7,
+  "clips": {
+    "idle": {
+      "duration": 5.0,
+      "stride": 0.0
+    },
+    "walk": {
+      "duration": 1.0,
+      "stride": 1.1714
+    },
+    "run": {
+      "duration": 1.0,
+      "stride": 1.5483
+    }
+  },
+  "levels": {
+    "high": {
+      "triangles": 30785,
+      "parts": {
+        "body": 14666,
+        "brows": 192,
+        "lashes": 368,
+        "eyes": 2040,
+        "cloth": 1702,
+        "shoes": 1838,
+        "hair": 3344,
+        "hair_cap": 1169,
+        "shirt": 5466
+      },
+      "bytes": 2172744,
+      "textures": {
+        "skin": 2048,
+        "cloth": 1024,
+        "shoes": 512,
+        "hair": 1024,
+        "eyes": 256,
+        "brows": 256
+      }
+    },
+    "low": {
+      "triangles": 17156,
+      "parts": {
+        "body": 6902,
+        "brows": 192,
+        "eyes": 2040,
+        "cloth": 936,
+        "shoes": 1072,
+        "hair": 1672,
+        "hair_cap": 1337,
+        "shirt": 3005
+      },
+      "bytes": 1165500,
+      "textures": {
+        "skin": 1024,
+        "cloth": 512,
+        "shoes": 256,
+        "hair": 512,
+        "eyes": 128,
+        "brows": 128
+      }
+    }
+  },
+  "credits": [
+    {
+      "what": "Body, face, skin, eyes, eyebrows, eyelashes, hair, T-shirt, jeans and shoes",
+      "name": "MakeHuman system assets",
+      "authors": [
+        "The MakeHuman team"
+      ],
+      "page": "http://files.makehumancommunity.org/asset_packs/makehuman_system_assets/",
+      "license": "CC0 1.0"
+    },
+    {
+      "what": "Idle, walk and run (motion capture)",
+      "name": "100STYLE",
+      "authors": [
+        "Ian Mason",
+        "Sebastian Starke",
+        "Taku Komura"
+      ],
+      "page": "https://zenodo.org/records/8127870",
+      "license": "CC BY 4.0"
+    }
+  ]
+}

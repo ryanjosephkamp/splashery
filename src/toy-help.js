@@ -184,25 +184,20 @@ export const TOY_HELP = {
   },
 
   // ---- Shapes -------------------------------------------------------------------------
+  torus: {
+    howTo: "Tap it to spin it on its edge. Dress it as a donut, bagel or swim ring in the Toy tab.",
+    about:
+      "A torus is the shape of a ring: a circle swept around a line beside it, like a hoop made of tube. Donuts, bagels, swim rings and bicycle inner tubes are all tori. In topology, the math of shapes that can stretch but not tear, a torus has exactly one hole, so a coffee mug with its handle counts as one too.\n\nTap it and it pops up onto its edge and wobbles around like a coin spun on a table, leaning lower and circling faster until it drops flat. Real rings and coins do this: as one leans lower, its low point runs around faster, so a settling coin whirs quicker just before it stops. Under Dress it as in the Toy tab, pick a plain torus, a donut, a bagel or a swim ring.",
+  },
   blob: {
     howTo: "Tap it to split it into three. Make a shape of your own in the Make tab.",
     about:
       "A wobbly jelly blob, built by the computer from a few rules rather than from photos. Thousands of splats, tiny soft blobs of color, are scattered over a lumpy round shape, and a pattern called noise gives it its bumps and swirls of candy color.\n\nTap it and it splits into three smaller blobs that wobble apart, then merge back with a jelly bounce. Real jelly wobbles because it is mostly water, held in a loose net of gelatin strands. In the Make tab you can pick a shape, a palette and a seed to build a blob of your own.",
   },
-  donut: {
-    howTo: "Tap it to break it apart and put it back together.",
-    about:
-      "A frosted donut with sprinkles, built by the computer from a simple ring shape. To a mathematician, a ring like this is a torus. In topology, the math of shapes that can stretch but not tear, a donut and a coffee mug count as the same shape, because each has exactly one hole.\n\nTap it and it snaps into chunks that fly apart and tumble, showing the dough inside, while the sprinkles spray off. Then it all flies back together. The Make tab builds shapes like this from a shape, a palette and a seed.",
-  },
   knot: {
     howTo: "Tap it to make it twist and writhe.",
     about:
       "A glowing tube tied in a trefoil knot, the simplest true knot. Tie a knot in a string and join the two ends, and you get a loop that can never be untangled without cutting it; the trefoil crosses itself three times. Mathematicians study knots like this in a field called knot theory.\n\nTap it and waves of swelling loops run around the tube, lifting and twisting it as it glows pink, then it settles back into its trefoil. Real neon signs glow because electricity makes the gas inside the glass tube shine; pure neon glows red-orange.",
-  },
-  planet: {
-    howTo: "Tap it to spin the clouds and sweep night across it.",
-    about:
-      "A tiny, made-up planet with blue seas, green and sandy land and white clouds, built by the computer from a sphere and a palette of planet colors. It is a tribute to the very first version of Splashery.\n\nTap it and the clouds race once around the planet while a band of night sweeps across it. Day and night happen because a planet spins: at any moment, the half facing its star has day and the other half has night. Earth turns once about every 24 hours.",
   },
 
   // ---- Balls ----------------------------------------------------------------------------
@@ -388,6 +383,11 @@ export const TOY_HELP = {
     howTo: "Tap it to race the clouds around it.",
     about:
       "Neptune is the eighth and farthest planet from the Sun, a deep blue ice giant. It has the strongest winds in the solar system, faster than 2,000 kilometers an hour. It was the first planet found by math: astronomers worked out where it must be before they saw it in 1846.\n\nTap it and belts of white cloud race around it twice while a band with a dark storm drifts the other way. The spacecraft Voyager 2 saw a great dark storm like this when it flew past in 1989. Neptune takes about 165 years to go around the Sun once.",
+  },
+  planet: {
+    howTo: "Tap it to sweep night across it. Pick a planet under Planet in the Toy tab.",
+    about:
+      "A tiny, made-up planet built by the computer from a sphere and a palette of planet colors: blue seas, green land and white clouds for Earth, rusty deserts and white polar caps for Mars, gray craters for the Moon, and banded storms for Jupiter and Neptune. It is a tribute to the very first version of Splashery.\n\nTap it and a band of night sweeps across it while any clouds race once around it. Day and night happen because a planet spins: at any moment, the half facing its star has day and the other half has night. Earth turns once about every 24 hours, Jupiter in under 10. Pick Earth, Mars, the Moon, Jupiter or Neptune under Planet in the Toy tab.",
   },
   "aurora-planet": {
     howTo: "Tap it for a burst of bright auroras.",
@@ -614,11 +614,6 @@ export const TOY_HELP = {
     howTo: "Tap to close the oyster; tap again to open it.",
     about:
       "A pearl is a gem made by a living animal. When a bit of grit or other irritant gets inside an oyster or mussel, the animal coats it with layer after layer of nacre, or mother-of-pearl, the same shiny stuff that lines its shell. The thin layers give a pearl its soft glow, called luster.\n\nThis oyster starts open, with its pearl inside. Tap it to close the shell; tap again to open it. A pearl can take years to grow, and most pearls sold today are grown on pearl farms.",
-  },
-  "crystal-ball": {
-    howTo: "Tap it to swirl the mist and raise a glowing sign.",
-    about:
-      "A crystal ball is a ball of clear glass or quartz. In old stories, fortune tellers gaze into one to see visions of what is to come. A real clear ball also works like a lens: look through it and you see the room behind it, small and upside down.\n\nThis one is filled with glowing mist. Tap it and the mist whips around and thins, and a glowing sign rises out of it, turns once and fades: a star, a moon or a heart in turn. Pick the color of the mist in the Toy tab.",
   },
 
   // ---- Body -----------------------------------------------------------------------------
@@ -892,6 +887,11 @@ export const TOY_HELP = {
     howTo: "Tap it and the two in front hop up onto the stack.",
     about:
       "A macaron is a small French sweet: two light, round cookies made of ground almonds, egg whites and sugar, stuck together with a creamy filling. The tops are smooth and domed, and each cookie has a frilly edge at the bottom, called the foot, that rises as it bakes.\n\nTap it and the two macarons in front hop, one after the other, up onto the stack and land with a soft tap. The tower of five sways, then they hop back down. Pick a pastel mix or one flavor in the Toy tab.",
+  },
+  donut: {
+    howTo: "Tap it to break it apart and put it back together.",
+    about:
+      "A frosted donut with sprinkles, built by the computer from a simple ring shape. To a mathematician, a ring like this is a torus. In topology, the math of shapes that can stretch but not tear, a donut and a coffee mug count as the same shape, because each has exactly one hole.\n\nTap it and it snaps into chunks that fly apart and tumble, showing the dough inside, while the sprinkles spray off. Then it all flies back together. The Make tab builds shapes like this from a shape, a palette and a seed.",
   },
   "gummy-bear": {
     howTo: "Drag the bear to stretch it; let go and it springs back. Tap to squish it.",
@@ -1200,6 +1200,11 @@ export const TOY_HELP = {
     about:
       "A wizard's orb is a glass ball from stories of magic, where a wizard gazes into it to see faraway places or the future. This one sits on a stand, with glowing magic swirling inside. Runes, the letters of old alphabets once used in northern Europe, are often carved on magic things in stories.\n\nTap it to cast a spell: a flash of light fills the glass, the swirl spins up, sparks spiral out in five arms, and a ring of runes rises and circles the orb before it fades. Pick the color of the magic in the Toy tab.",
   },
+  "crystal-ball": {
+    howTo: "Tap it to swirl the mist and raise a glowing sign.",
+    about:
+      "A crystal ball is a ball of clear glass or quartz. In old stories, fortune tellers gaze into one to see visions of what is to come. A real clear ball also works like a lens: look through it and you see the room behind it, small and upside down.\n\nThis one is filled with glowing mist. Tap it and the mist whips around and thins, and a glowing sign rises out of it, turns once and fades: a star, a moon or a heart in turn. Pick the color of the mist in the Toy tab.",
+  },
 
   // ---- Animals --------------------------------------------------------------------------
   jellyfish: {
@@ -1485,6 +1490,19 @@ export const TOY_HELP = {
       "Tap to bow the plate and watch the sand find its still lines. Pick a mode in the Toy tab.",
     about:
       "In 1787 Ernst Chladni sprinkled sand on a metal plate and drew a violin bow along its edge. The plate shook, and the sand jumped away from the places that moved and gathered on the lines that stayed still, a different picture for each pitch. Those still lines are called nodal lines.\n\nTap to bow the plate: it hums at the mode's pitch and every grain of sand, a splat of its own, hops and slides until the figure appears. Tap again to stir the sand up. The Mode choice picks the pitch and the pattern. This toy uses the classic square-plate model, cos(nπx)·cos(mπy) ± cos(mπx)·cos(nπy) = 0, with a pitch that grows with n² + m².",
+  },
+  // Lane Live input.
+  "room-echo": {
+    howTo:
+      "Tap “Use my microphone” in the Toy tab, then clap once: the echo time shows on the back wall.",
+    about:
+      "When a sound stops, a room keeps ringing for a moment as the sound bounces between its walls, fading a little at each bounce. The reverberation time, RT60, is how long it takes to fade by 60 dB, to a millionth of its energy. A living room with a sofa and curtains is around half a second; a stone church can be several seconds.\n\nTap “Use my microphone” and clap once, sharply. The page listens to your clap fade away, takes away the room's background hum, and fits a straight line to the decay (Schroeder's method, the one acousticians use), then shows the RT60 on the back wall. The rings on the floor are the sound spreading out, each as bright as the room still was at that moment, at half speed. If the room is too noisy for the clap to stand out, it says so. The sound stays on this device; nothing is recorded or sent.",
+  },
+  "splat-mirror": {
+    howTo:
+      "Tap “Use my camera” in the Toy tab to see yourself in splats; turn the picture to see its depth.",
+    about:
+      "A mirror made of splats. Tap “Use my camera” and each splat takes the color of its place in the picture, so the mirror shows you, live.\n\nA depth model, Depth Anything V2 Small, then works out how near each part of the picture is, as often as your device can (several times a second on a computer), and each splat moves toward you by that much: your nose comes forward and the wall behind you stays back. Turn the picture to see the relief. It is a guess from one camera, so the depth is relative, like a sculptor's relief, not exact distances. The model (about 27 MB) loads only after you tap, and the pictures stay on this device; nothing is recorded or sent.",
   },
   "song-landscape": {
     howTo:

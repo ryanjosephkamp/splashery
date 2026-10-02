@@ -16,6 +16,7 @@
 
 import { mix, shade, clamp, quatAxisAngle } from "../kit.js";
 import { evenCylinder, evenTube } from "./even.js";
+import { live } from "../live/live.js"; // lane Live input: a shared screen on the set
 
 const TAU = Math.PI * 2;
 const add = (a, b) => [a[0] + b[0], a[1] + b[1], a[2] + b[2]];
@@ -487,6 +488,9 @@ export const RECIPES = {
       title: "Your own video",
       media: { accept: ["video", "gif", "image"] },
       note: "Open a video or a GIF, or paste a web address, and watch it on the screen. Turn the sound on with the speaker button. Files stay on this device; nothing is uploaded.",
+      // Lane Live input: a tab, a window or the whole screen, live on the set
+      // (computers only; view only, so clicks don't reach the real window).
+      live: [{ kind: "screen", media: true, name: "Your screen" }],
     },
     drive(t, c, out, info) {
       const pics = info.data?.pictures;
@@ -497,7 +501,13 @@ export const RECIPES = {
       // A new build starts switched off: a video still playing stops.
       if (SCR.fresh && pics?.kind) {
         SCR.fresh = false;
-        if (video && pics.playing) pics.togglePlay();
+        if (SCR.live) {
+          // Lane Live input: a shared screen switches the set on by itself.
+          SCR.on = true;
+          SCR.at = time;
+          if (video && !pics.playing) pics.togglePlay();
+          out.cues.push(ON_SOUND[style]);
+        } else if (video && pics.playing) pics.togglePlay();
       }
       const switchOn = () => {
         SCR.on = true;
@@ -556,6 +566,7 @@ export const RECIPES = {
       SCR.wasPlaying = false;
       SCR.resume = true;
       SCR.gifPaused = false;
+      SCR.live = live.on("screen"); // lane Live input
       if (style === "tv") buildTV(k);
       else if (style === "flat") buildFlat(k);
       else if (style === "cinema") buildCinema(k);

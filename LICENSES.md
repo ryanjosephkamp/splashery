@@ -163,6 +163,13 @@ These are `devDependencies` used to prepare assets and run tests; nothing from t
 - `three` 0.186.1 (MIT), https://github.com/mrdoob/three.js: its FBX loader and glTF exporter turn
   the Worlds mesh character (Kenney, CC0) into one GLB in `tools/world-character.mjs`, run in
   Chromium at build time. Nothing of three.js is served.
+- `bpy` 5.0.1 (Blender as a Python module; GPL-3.0-or-later), https://pypi.org/project/bpy/, with
+  `pillow` 12.3.0 (MIT-CMU), https://pypi.org/project/pillow/, in a virtual environment under
+  `.cache/`: builds the Worlds realistic character (`tools/wd-character.py`) and model props
+  (`tools/wd-props.py`) at build time. Nothing of Blender is served.
+- MPFB 2.0.17 (GPL-3.0-or-later), https://extensions.blender.org/add-ons/mpfb/: the MakeHuman add-on
+  for Blender, downloaded by `tools/wd-character.py` into `.cache/` to put the character together.
+  Nothing of it is served; the character it makes is from CC0 assets (CREDITS.md).
 - The TRELLIS Space on Hugging Face (not a package; `tools/image-to-3d.mjs` calls it over HTTPS with
   plain fetch): https://huggingface.co/spaces/trellis-community/TRELLIS (MIT), running the TRELLIS
   model https://huggingface.co/microsoft/TRELLIS-image-large (MIT) and rembg's u2net background

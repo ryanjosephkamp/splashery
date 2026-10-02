@@ -381,6 +381,15 @@ export const TOY_SOUNDS = {
     { voice: "metal", at: 2.3, f: 470, decay: 0.7, bright: 0.6, vol: 0.9 },
   ],
   // ---- Shapes -----------------------------------------------------------------------
+  // A soft pop onto its edge, a roll that circles faster as it leans lower, and a settle.
+  torus: [
+    { voice: "thud", f: 120, bright: 0.2, vol: 0.55 },
+    { voice: "rumble", at: 0.35, f: 150, rate: 5, decay: 1.4, vol: 0.32 },
+    { voice: "rumble", at: 1.05, f: 175, rate: 8, decay: 1.3, vol: 0.34 },
+    { voice: "rumble", at: 1.75, f: 205, rate: 12, decay: 1.0, vol: 0.36 },
+    { voice: "rumble", at: 2.35, f: 235, rate: 18, decay: 0.7, vol: 0.36 },
+    { voice: "thud", at: 3.05, f: 100, bright: 0.25, vol: 0.65 },
+  ],
   blob: [
     { voice: "gloop", f: 140, decay: 1.2 },
     { voice: "gloop", at: 1.8, f: 110, decay: 0.9, vol: 0.7 },
@@ -2451,6 +2460,12 @@ export const TOY_SOUNDS = {
       vol: 0.45,
     },
   ],
+  // Lane Live input: a hand clap that rings like the sample room; the mirror's depth rises and falls.
+  "room-echo": [{ voice: "clap", f: 1400, decay: 4.4, vol: 0.8 }],
+  "splat-mirror": {
+    on: { voice: "whoosh", f: 240, to: 5, decay: 1.6, vol: 0.5 },
+    off: { voice: "whoosh", f: 1800, to: 0.2, decay: 1.2, vol: 0.45 },
+  },
   // Lane Photo to 3D, Sound B (his note: no wind, no whoosh): the photo's
   // paper lifting as the depth comes up and settling back as it lies flat.
   "photo-3d": {
