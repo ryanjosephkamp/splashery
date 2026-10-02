@@ -23,12 +23,17 @@ async function open(page, id, options = null) {
       window.__carry = async (from, to, hold = 0.3) => {
         const h = player.handsOn;
         const s0 = player.screenPoint(from);
-        player.pickDirty = true;
-        const hit = await player.pickAt(...s0);
-        if (!hit || !h.pressAt(hit, ...s0)) return -1;
         const s1 = player.screenPoint(to);
-        for (let i = 1; i <= 20; i++) {
-          h.moveTo(s0[0] + ((s1[0] - s0[0]) * i) / 20, s0[1] + ((s1[1] - s0[1]) * i) / 20);
+        // Pressed at the piece's own point (not through the GPU pick, which
+        // soon after a toy opens can read a frame drawn before it).
+        if (!h.pressAt(player.fromRecipe(from), ...s0)) return -1;
+        const step = (i) => h.moveTo(s0[0] + ((s1[0] - s0[0]) * i) / 20, s0[1] + ((s1[1] - s0[1]) * i) / 20); // prettier-ignore
+        let k = 1;
+        for (; k <= 20 && !h.hold; k++) step(k); // past a few pixels, it lifts
+        if (!h.hold) return -1;
+        player.update(1 / 30);
+        for (let i = k; i <= 20; i++) {
+          step(i);
           player.update(1 / 30);
         }
         const held = h.hold?.body;
@@ -39,6 +44,17 @@ async function open(page, id, options = null) {
       };
     },
     { id, options },
+  );
+  // The camera eases in to fit the toy; the finger's screen points need it
+  // still.
+  await page.waitForFunction(
+    () => {
+      const c = window.__splashery.player.camera;
+      const d = c.cur && c.tgt ? Math.abs(c.cur.yaw - c.tgt.yaw) + Math.abs(c.cur.pitch - c.tgt.pitch) + Math.abs(c.cur.distance - c.tgt.distance) / (c.tgt.distance || 1) : 0; // prettier-ignore
+      return d < 1e-3;
+    },
+    null,
+    { timeout: 30_000 },
   );
   await page.waitForTimeout(500);
 }
