@@ -7,7 +7,9 @@
 //   python3 -m http.server 4173 --bind 127.0.0.1 &
 //   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/sci-clip.mjs <out-dir> [--w=390] [--h=844] [--fps=12] [--strip=6] [--strip-scale=0.5] card ...
 //
-// Writes <out-dir>/<card>.gif (and <card>-strip.png with --strip). The clock
+// Writes <out-dir>/<card>.gif (and <card>-strip.png with --strip; with
+// --frames, each frame as a JPEG in <card>-frames/ for an MP4, e.g.
+// ffmpeg -framerate 12 -i %04d.jpg -pix_fmt yuv420p -crf 20 card.mp4). The clock
 // is stepped by hand, so a clip runs at real speed however slow the
 // renderer is. The cards are in CARDS below.
 
@@ -29,6 +31,7 @@ const stripN = Number(opt("strip", 0));
 const bg = opt("bg", "#111111");
 const stripScale = Number(opt("strip-scale", 0.5)); // the strip's frames at this scale
 const profile = opt("profile", "high"); // the tier (r2: "low" for the phone's)
+const framesOut = args.includes("--frames"); // also <card>-frames/NNNN.jpg, for an MP4
 
 // A card: the toy, its options, and a script of timed steps. Each step runs
 // at `t` seconds: { yaw: radians per second } turns the camera from then on;
@@ -107,7 +110,7 @@ const CARDS = {
     near: 0.62,
     steps: [
       { t: 0, yaw: 0.03 },
-      { t: 0.8, fly: { point: [-0.4, -0.4], dist: 0.02, secs: 5 } },
+      { t: 0.8, fly: { point: [-0.4, -0.4], dist: 0.04, secs: 5 } },
       { t: 6.2, tap: [-0.4, -0.4, 0] },
       { t: 8, fly: { dist: 1.8, secs: 2 } },
     ],
@@ -178,8 +181,14 @@ for (const name of cards) {
   if (!card) throw new Error(`No card ${name}`);
   const files = {};
   for (const s of card.steps) if (s.file) files[s.file] = fs.readFileSync(s.file, "utf8");
+  const frameDir = path.join(outDir, `${name}-frames`);
+  if (framesOut) fs.mkdirSync(frameDir, { recursive: true });
+  let frameNo = 0;
+  await page.exposeFunction(`saveFrame_${name.replace(/\W/g, "_")}`, (data) => {
+    fs.writeFileSync(path.join(frameDir, `${String(frameNo++).padStart(4, "0")}.jpg`), Buffer.from(data.split(",")[1], "base64")); // prettier-ignore
+  });
   const { bytes, strip } = await page.evaluate(
-    async ({ card, W, H, fps, stripN, bg, files, stripScale }) => {
+    async ({ card, W, H, fps, stripN, bg, files, stripScale, framesOut, saver }) => {
       const { app, player } = window.__splashery;
       const { GIFEncoder, quantize, applyPalette } = await import("gifenc");
       await app.chooseToy(card.toy);
@@ -277,6 +286,7 @@ for (const name of cards) {
         pending = 0;
         const c = await stage.captureFrame();
         if (pickAt.has(n)) shots.push({ bmp: await createImageBitmap(c), t: time });
+        if (framesOut) await window[saver](c.toDataURL("image/jpeg", 0.95));
         const rgba = c.getContext("2d").getImageData(0, 0, W, H).data;
         const palette = quantize(rgba, 256, { format: "rgb565" });
         gif.writeFrame(applyPalette(rgba, palette, "rgb565"), W, H, { palette, delay, repeat: 0 }); // prettier-ignore
@@ -307,7 +317,7 @@ for (const name of cards) {
       }
       return { bytes: Array.from(gif.bytes()), strip };
     },
-    { card, W, H, fps, stripN, bg, files, stripScale },
+    { card, W, H, fps, stripN, bg, files, stripScale, framesOut, saver: `saveFrame_${name.replace(/\W/g, "_")}` }, // prettier-ignore
   );
   const out = path.join(outDir, `${name}.gif`);
   fs.writeFileSync(out, Buffer.from(bytes));

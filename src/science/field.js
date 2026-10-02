@@ -211,9 +211,13 @@ void modifySplatColor(vec3 center, inout vec4 color) {
   float a = color.a;
   if (sciKind == 1) a *= 1.0 - 0.8 * uSpMorph.x;
   if (sciKind == 4) a *= 1.0 - (1.0 - clamp(uSpKitB.x, 0.0, 1.0)) * smoothstep(4.1, 4.6, sciAn.z);
-  if (FREE && uSpGlowC.w > 0.0) {
+  if (FREE) {
     // A slice: the localizations within w of the depth z of uSpGlowC.
-    a *= 1.0 - smoothstep(uSpGlowC.w, 1.6 * uSpGlowC.w, abs(center.z - uSpGlowC.z));
+    if (sciKind == 5 && uSpGlowC.w > 0.0) a *= 1.0 - smoothstep(uSpGlowC.w, 1.6 * uSpGlowC.w, abs(center.z - uSpGlowC.z));
+    // Close up, what is much nearer than the point the camera looks at
+    // (uSpCam.w: its distance) fades, so it doesn't fill the view as big
+    // soft spots.
+    if (uSpCam.w > 0.0) a *= smoothstep(0.3, 0.55, length(center - uSpCam.xyz) / uSpCam.w);
   }
   if (!FREE && uSpMorph.w != 0.0) {
     float front = dot(center, normalize(uSpCam.xyz));
@@ -310,8 +314,13 @@ fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {
   var a = (*color).a;
   if (sciKind == 1) { a = a * (1.0 - 0.8 * uniform.uSpMorph.x); }
   if (sciKind == 4) { a = a * (1.0 - (1.0 - clamp(uniform.uSpKitB.x, 0.0, 1.0)) * smoothstep(4.1, 4.6, sciAn.z)); }
-  if (FREE && uniform.uSpGlowC.w > 0.0) {
-    a = a * (1.0 - smoothstep(uniform.uSpGlowC.w, 1.6 * uniform.uSpGlowC.w, abs(center.z - uniform.uSpGlowC.z)));
+  if (FREE) {
+    if (sciKind == 5 && uniform.uSpGlowC.w > 0.0) {
+      a = a * (1.0 - smoothstep(uniform.uSpGlowC.w, 1.6 * uniform.uSpGlowC.w, abs(center.z - uniform.uSpGlowC.z)));
+    }
+    if (uniform.uSpCam.w > 0.0) {
+      a = a * smoothstep(0.3, 0.55, length(center - uniform.uSpCam.xyz) / uniform.uSpCam.w);
+    }
   }
   if (!FREE && uniform.uSpMorph.w != 0.0) {
     var front = dot(center, normalize(uniform.uSpCam.xyz));
@@ -328,7 +337,9 @@ fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {
 // scale (toy units per recipe unit), for the localizations' true sizes. With
 // `free` (r2: the microscope and the galaxy, whose camera comes all the way
 // in) there is no magnifier: the size floor follows each splat's distance from
-// the camera, and uSpGlowC (z, w) is a slice (its depth and half thickness).
+// the camera, uSpGlowC (z, w) is a slice (its depth and half thickness), and
+// what is much nearer the camera than the point it looks at fades (uSpCam.w,
+// that distance, from the engine since Science r2).
 export function sciModifier(sigMax = 1, unit = 1, { free = false } = {}) {
   const s = Number.isFinite(sigMax) && sigMax > 0 ? sigMax : 1;
   const u = Number.isFinite(unit) && unit > 0 ? unit : 1;

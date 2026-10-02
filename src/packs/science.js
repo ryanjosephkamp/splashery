@@ -461,9 +461,10 @@ export const microscopeState = () => (MIC.info ? { ...MIC.info } : null);
 export const MICROSCOPE_DENSITY = 1.4;
 // r2 (the owner: "Couldn't they just zoom in really, really far
 // themselves?"): the camera comes all the way in with a pinch or the wheel,
-// to 0.006 of the field's radius (about 500 times closer than the home view,
-// a few tens of nanometers across on the samples).
-export const MICROSCOPE_CLOSE = 0.006;
+// to 0.02 of the field's radius (about 150 times closer than the home view, a
+// view about 120 nm across on the sample; closer, the camera would be inside
+// a 3D cloud of molecules).
+export const MICROSCOPE_CLOSE = 0.02;
 // The tap's slice: 100 nm either side of the depth you tap.
 const SLICE_NM = 100;
 const UM = 1e-3; // nm to µm (the recipe's units)
@@ -627,7 +628,8 @@ const MICROSCOPE = {
     const s = smoothstep(0, 1, c.slice ?? 0);
     const thin = SLICE_NM * UM * (MIC.grid?.stretch ?? 1) * (MIC.unit ?? 1);
     out.morph = [0, 1, 0.0008, 0];
-    out.glow = [0, 0, MIC.sliceZ ?? 0, s > 0.01 ? mixN(2, thin, s) : 0];
+    // (on a log scale, so it visibly narrows all the way)
+    out.glow = [0, 0, MIC.sliceZ ?? 0, s > 0.01 ? thin * Math.pow(2 / thin, 1 - s) : 0];
   },
   build(k, o) {
     const want = MIC.want;
