@@ -134,18 +134,19 @@ function standInFit() {
 
 const VIEWS = ["training", "one", "many", "sorting"];
 
-// Each view's sound, played as cues (so each view has its own).
+// Each view's sound, played as cues (so each view has its own). Sound C (the
+// owner's notes of October 2): training, a soft tone falling as the loss
+// curve draws (0.35 s to 6.5 s), with no chord or notes; one splat, a soft
+// airy swell as it turns; many splats, the twinkle quieter; sorting, a
+// pebble's click as each splat is placed (driveSorting), and nothing on the tap.
 const CUES = {
-  training: [
-    { voice: "shimmer", f: 523, to: 2, decay: 3.3, vol: 0.35 },
-    { voice: "glass", notes: "C5 E5 G5 B5 D6", step: 0.7, at: 0.4, vol: 0.3 },
-  ],
-  one: [{ voice: "pad", f: "A3", to: 1.5, decay: 0.9, vol: 0.5 }],
+  training: { voice: "glide", at: 0.35, f: 740, to: 0.45, decay: 2.07, vol: 0.45 },
+  one: { voice: "breath", f: 1100, to: 1.3, decay: 3, vol: 0.22 },
   many: [
-    { voice: "sparkle", vol: 0.6 },
-    { voice: "sparkle", at: 1.7, vol: 0.5 },
+    { voice: "sparkle", vol: 0.25 },
+    { voice: "sparkle", at: 1.7, vol: 0.2 },
   ],
-  sorting: { voice: "blip", notes: "C5 D5 E5 F5 G5 A5 B5 C6", step: 0.42, at: 0.2, vol: 0.7 },
+  sorting: null,
 };
 
 const SPLAT_OPTS = [
@@ -235,7 +236,7 @@ export const RECIPES = {
       if (n < SPL.tapN) SPL.tapN = 0;
       if (n > SPL.tapN) {
         SPL.tapN = n;
-        out.cues.push(CUES[SPL.view]);
+        if (CUES[SPL.view]) out.cues.push(CUES[SPL.view]);
       }
       // p: 0 at the tap, 1 at rest.
       const p = 1 - c.play;
@@ -249,6 +250,7 @@ export const RECIPES = {
       const view = VIEWS.includes(o.view) ? o.view : "training";
       SPL.view = view;
       SPL.tapN = 0;
+      SPL.sortP = undefined;
       if (view === "training") buildTraining(k);
       else if (view === "one") buildOne(k, o);
       else if (view === "many") buildMany(k);
@@ -629,6 +631,29 @@ const SORT = { cam: [0.3, 1.1, 0.45], count: 300, bead: 220 };
 // furthest from the camera first, as the renderer draws them.
 function driveSorting(p, out) {
   out.morph[0] = p >= 1 ? 1 : win(p, 0.05, 0.75);
+  sortClicks(p, out);
+}
+
+// Sound C: a pebble's click as each splat is placed (each a little
+// different), in sync: the clicks come in batches about 0.2 s ahead, each
+// scheduled for the moment its splat appears (`at`; the effect runs 7 s), so
+// they keep time at any frame rate (one cue every 0.2 s or so, as the site
+// spaces a toy's cues 60 ms apart).
+function sortClicks(p, out) {
+  const T = 7;
+  const N = SORT.count;
+  if (SPL.sortP === undefined || p < SPL.sortP - 0.3) SPL.sortP = p;
+  if (p >= 1 || SPL.sortP - p > 0.05 / T) return;
+  const reach = p + 0.25 / T;
+  const clicks = [];
+  for (let i = 0; i < N; i++) {
+    const at = 0.05 + 0.7 * (0.02 + (0.96 * i) / (N - 1) + 0.006);
+    if (at <= SPL.sortP || at > reach) continue;
+    const h = (i * 0.618034) % 1;
+    clicks.push({ voice: "pebble", f: 2300 * (0.8 + 0.5 * h), vol: 0.22 + 0.14 * ((i * 0.381966) % 1), at: (at - p) * T }); // prettier-ignore
+  }
+  SPL.sortP = reach;
+  if (clicks.length) out.cues.push(clicks);
 }
 
 function buildSorting(k) {

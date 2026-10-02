@@ -550,13 +550,13 @@ export const TOY_SOUNDS = {
     { voice: "pock", at: 0.2, f: 380, bright: 0.1, decay: 1.2 },
   ],
   "bouncy-ball": { voice: "boing", f: 260, to: 2.6, rate: 16 },
-  // A glassy clink, and a soft whirr as it rolls.
+  // Sound A: the real glass marble rolling (Sound C: about 6 dB quieter, his note of October 2).
   marble: {
     voice: "sample",
     file: "marble-roll.mp3",
     len: 2.4,
-    vol: 0.8,
-    fallback: { voice: "rumble", f: 380, rate: 28, decay: 1.2, vol: 0.18 },
+    vol: 0.4,
+    fallback: { voice: "rumble", f: 380, rate: 28, decay: 1.2, vol: 0.09 },
   },
 
   "hockey-puck": [
@@ -623,9 +623,10 @@ export const TOY_SOUNDS = {
     { voice: "rumble", at: 2.05, f: 55, rate: 4, decay: 1.2, vol: 0.45 },
   ],
   neptune: { voice: "wind", f: 330, rate: 0.9, decay: 2.4 },
+  // Sound C: the aurora's air, much lower and gentler (his note: less dramatic wind).
   "aurora-planet": [
-    { voice: "whoosh", f: 300, to: 1.1, decay: 2.4, vol: 0.4 },
-    { voice: "breath", at: 0.1, f: 600, to: 0.8, decay: 2, vol: 0.3 },
+    { voice: "whoosh", f: 300, to: 1.05, decay: 2.4, vol: 0.16 },
+    { voice: "breath", at: 0.1, f: 600, to: 0.85, decay: 2, vol: 0.12 },
   ],
   // The crack, a boom as it falls apart, and a knock as the pieces meet again.
   asteroid: [
@@ -668,7 +669,8 @@ export const TOY_SOUNDS = {
     },
     { voice: "roar", at: 0.3, f: 150, bright: 0.3, decay: 2.8, vol: 0.35 },
   ],
-  // It sizzles in and bursts (0.36 s); the next one sizzles in (3.4 s).
+  // Sound A: the streak's fire; Sound C: it bursts with the star's own burst (his note of October
+  // 2), in time with the fireball at 0.38 s, over a short crack; then the next one streaks in.
   meteor: [
     {
       voice: "sample",
@@ -680,12 +682,22 @@ export const TOY_SOUNDS = {
     {
       voice: "sample",
       file: "meteor-boom.mp3",
-      at: 0.36,
-      vol: 1.1,
+      at: 0.37,
+      len: 0.5,
+      vol: 0.55,
+      fallback: { voice: "thud", f: 70, decay: 0.6 },
+    },
+    {
+      voice: "sample",
+      file: "supernova-boom.mp3",
+      at: 0.37,
+      from: 0.2,
+      len: 2.2,
+      pitch: 1.1,
+      vol: 0.95,
       fallback: { voice: "rumble", f: 50, rate: 4, decay: 1.5, vol: 0.6 },
     },
-    { voice: "sample", file: "comet-fire.mp3", at: 0.5, from: 0.4, len: 1.4, vol: 0.35 },
-    { voice: "sample", file: "meteor-fire.mp3", at: 3.4, len: 0.6, pitch: 0.9, vol: 0.55 },
+    { voice: "sample", file: "meteor-fire.mp3", at: 3.4, len: 0.6, pitch: 0.9, vol: 0.5 },
   ],
   // Swelling to a giant and the whoosh as it puffs off its shell; the
   // recipe rings a bell when the new star lights (6.6 s).
@@ -747,10 +759,11 @@ export const TOY_SOUNDS = {
     },
     { voice: "whoosh", at: 3.5, f: 400, to: 0.4, decay: 1.8, vol: 0.3 },
   ],
+  // Sound C: a faint, soft air as the stars swarm (his note: less wind, less overwhelming), no
+  // hiss.
   "star-cluster": [
-    { voice: "breath", f: 800, to: 1.2, decay: 1.2, vol: 0.4 },
-    { voice: "breath", at: 1.4, f: 900, to: 0.7, decay: 1.4, vol: 0.35 },
-    { voice: "hiss", at: 0.2, f: 5000, decay: 1.8, vol: 0.12 },
+    { voice: "breath", f: 700, to: 1.1, decay: 1.2, vol: 0.13 },
+    { voice: "breath", at: 1.4, f: 800, to: 0.8, decay: 1.4, vol: 0.11 },
   ],
   // A pad, and a shimmer as the shock reaches the ring (1.7 s).
   "planetary-nebula": [
@@ -928,10 +941,10 @@ export const TOY_SOUNDS = {
     { voice: "glass", at: 4, f: 2400, decay: 0.5, vol: 0.7 },
   ],
   tardigrade: { voice: "squeak", notes: "C7 - D7", step: 0.18, decay: 0.5, vol: 0.6 },
-  // It swells and bursts (0.2 s), a puff of granules drifts away.
+  // Sound C: the puff and its tiny chirp, quieter (his note of October 2).
   pollen: [
-    { voice: "breath", at: 0.18, f: 1300, to: 0.5, decay: 0.6 },
-    { voice: "chirp", at: 0.4, f: 3200, n: 1 },
+    { voice: "breath", at: 0.18, f: 1300, to: 0.5, decay: 0.6, vol: 0.6 },
+    { voice: "chirp", at: 0.4, f: 3200, n: 1, vol: 0.55 },
   ],
   // The arms melt back, then a new flake grows out (1.2 s).
   snowflake: [
@@ -984,9 +997,11 @@ export const TOY_SOUNDS = {
     { voice: "sample", file: "neuron-arc.mp3", at: 3, from: 0.4, len: 0.35, pitch: 1.2, vol: 0.8 },
     { voice: "whoosh", at: 3, f: 1200, to: 0.6, decay: 0.7, vol: 0.3 },
   ],
+  // Sound C: the periodic table's atom sound, which he likes (October 2): the electrons' soft
+  // electric blip as they speed up, and the ping as they blur into rings. No motor.
   atom: [
-    { voice: "hum", f: 150, bright: 0.3, decay: 2.6, vol: 0.6 },
-    { voice: "whoosh", at: 0.2, f: 900, to: 1, decay: 2.4, vol: 0.3 },
+    { voice: "blip", at: 0.05, f: 660, to: 2, decay: 0.5, vol: 0.5 },
+    { voice: "ding", at: 1.45, f: 1700, decay: 1.4, vol: 0.6 },
   ],
   molecule: [
     { voice: "roar", f: 200, bright: 0.25, decay: 2.4, vol: 0.35 },
@@ -1016,17 +1031,17 @@ export const TOY_SOUNDS = {
     },
     { voice: "sample", file: "crystal-lattice-chain.mp3", at: 1.4, from: 0.1, pitch: 1, vol: 0.45 },
   ],
-  // Lane Chemistry. On: the tile's soft click and a rising shimmer as the
-  // atom builds (each shell's note and the photon's ping are cues from the
-  // recipe). Off: a soft falling hush as it sinks back into its tile.
+  // Sound C: the atom's whoosh much quieter (his note of October 2); a faint tick for each proton
+  // and neutron as it packs into the nucleus comes from the recipe (src/packs/chemistry.js), in
+  // sync.
   "periodic-table": {
     on: [
-      { voice: "whoosh", f: 300, to: 1.6, decay: 1.4, vol: 0.45 },
-      { voice: "thud", at: 0.05, f: 160, bright: 0.3, decay: 0.5, vol: 0.35 },
+      { voice: "whoosh", f: 300, to: 1.6, decay: 1.4, vol: 0.13 },
+      { voice: "thud", at: 0.05, f: 160, bright: 0.3, decay: 0.5, vol: 0.3 },
     ],
     off: [
-      { voice: "whoosh", f: 700, to: 0.4, decay: 0.9, vol: 0.45 },
-      { voice: "thud", at: 0.85, f: 160, bright: 0.3, decay: 0.6, vol: 0.45 },
+      { voice: "whoosh", f: 700, to: 0.4, decay: 0.9, vol: 0.13 },
+      { voice: "thud", at: 0.85, f: 160, bright: 0.3, decay: 0.6, vol: 0.4 },
     ],
   },
   // ---- Gems -------------------------------------------------------------------------
@@ -1073,16 +1088,14 @@ export const TOY_SOUNDS = {
     },
     { voice: "drone", at: 0.1, f: 98, bright: 0.3, decay: 1.6, vol: 0.35 },
   ],
-  emerald: [
-    {
-      voice: "sample",
-      file: "diamond-tap.mp3",
-      pitch: 0.9,
-      vol: 0.9,
-      fallback: { voice: "glass", f: 3000, decay: 0.3, vol: 0.5 },
-    },
-    { voice: "whoosh", at: 0.15, f: 1800, to: 0.5, decay: 1.8, vol: 0.25 },
-  ],
+  // Sound A: a crisp tap on a cut gem (Sound C: no whoosh, his note of October 2).
+  emerald: {
+    voice: "sample",
+    file: "diamond-tap.mp3",
+    pitch: 0.9,
+    vol: 0.9,
+    fallback: { voice: "glass", f: 3000, decay: 0.3, vol: 0.5 },
+  },
   "amethyst-geode": {
     on: [
       { voice: "crack", f: 1100, bright: 0.3 },
@@ -1090,16 +1103,15 @@ export const TOY_SOUNDS = {
     ],
     off: [{ voice: "stone", f: 300, decay: 1.4 }],
   },
-  sapphire: [
-    {
-      voice: "sample",
-      file: "diamond-tap.mp3",
-      pitch: 1.05,
-      vol: 0.9,
-      fallback: { voice: "glass", f: 3000, decay: 0.3, vol: 0.5 },
-    },
-    { voice: "whoosh", at: 0.2, f: 3000, to: 0.6, decay: 1.6, vol: 0.2 },
-  ],
+  // Sound A: a crisp tap on a cut gem, a little higher than the emerald's (Sound C: no wind or
+  // sandy shuffle).
+  sapphire: {
+    voice: "sample",
+    file: "diamond-tap.mp3",
+    pitch: 1.05,
+    vol: 0.9,
+    fallback: { voice: "glass", f: 3000, decay: 0.3, vol: 0.5 },
+  },
   // A chime for each point as it lights, left to right.
   "quartz-cluster": {
     voice: "glass",
@@ -1590,10 +1602,11 @@ export const TOY_SOUNDS = {
     { voice: "wind", f: 600, rate: 1.5, decay: 0.8, vol: 0.3 },
     { voice: "flutter", at: 0.2, f: 900, rate: 16, decay: 0.8, vol: 0.7 },
   ],
-  // Sound B: a papery launch and a gentler glide.
+  // Sound C: the fold's paper rustle and the glide's air, a little lower (his note: almost perfect,
+  // a bit loud).
   "paper-plane": [
-    { voice: "rustle", f: 3000, n: 6, decay: 0.25, vol: 0.4 },
-    { voice: "whoosh", at: 0.05, f: 700, to: 2, decay: 1.4, vol: 0.4 },
+    { voice: "rustle", f: 3000, n: 6, decay: 0.25, vol: 0.35 },
+    { voice: "whoosh", at: 0.05, f: 700, to: 2, decay: 1.4, vol: 0.24 },
   ],
   "origami-crane": { voice: "flutter", f: 1500, rate: 9, decay: 1.4 },
   // Sound B: a real balloon bursting (no whistle first).
@@ -1811,13 +1824,13 @@ export const TOY_SOUNDS = {
     { voice: "thud", at: 3.34, f: 140, vol: 0.7 },
     { voice: "thud", at: 3.84, f: 150, vol: 0.7 },
   ],
-  // Soft fabric swishes as the hood flips and the sleeves swing, and a zip-like flick.
+  // Sound C: the fabric's soft brushes and the zip, with much less wind (his note of October 2).
   hoodie: [
-    { voice: "breath", f: 700, to: 0.6, decay: 0.8, vol: 0.5 },
-    { voice: "breath", at: 0.62, f: 900, to: 1.4, decay: 0.8, vol: 0.45 },
+    { voice: "breath", f: 700, to: 0.6, decay: 0.8, vol: 0.28 },
+    { voice: "breath", at: 0.62, f: 900, to: 1.4, decay: 0.8, vol: 0.25 },
     { voice: "tear", at: 1.2, f: 1600, to: 2.4, decay: 0.35, vol: 0.3 },
-    { voice: "whoosh", at: 1.25, f: 250, to: 4, decay: 1.1, vol: 0.35 },
-    { voice: "whoosh", at: 2.95, f: 300, to: 3, decay: 1.1, vol: 0.3 },
+    { voice: "whoosh", at: 1.25, f: 250, to: 2, decay: 1.1, vol: 0.1 },
+    { voice: "whoosh", at: 2.95, f: 300, to: 1.8, decay: 1.1, vol: 0.09 },
   ],
   // Sound B (his note: too robotic and tacky): each fold is a plastic hinge
   // sliding shut and seating; the lenses darken silently.
@@ -1906,8 +1919,8 @@ export const TOY_SOUNDS = {
   ],
 
   // ---- Animals ----------------------------------------------------------------------
-  // Sound B: two soft pushes of water as the bell pulses.
-  jellyfish: { voice: "swim", f: 380, n: 2, rate: 1.1 },
+  // Sound C: two soft swimming pulses, a little louder (his note of October 2).
+  jellyfish: { voice: "swim", f: 380, n: 2, rate: 1.1, vol: 1.35 },
   // Water swishes as the school swirls into a ball, then bursts apart.
   "fish-school": [
     { voice: "whoosh", f: 500, to: 1.8, decay: 2.6, vol: 0.6 },
@@ -1928,12 +1941,12 @@ export const TOY_SOUNDS = {
     { voice: "hollow", at: 2.05, f: 200, decay: 1.6, bright: 0.2, vol: 0.6 },
     { voice: "bubbles", at: 3.1, f: 380, n: 5, decay: 1, vol: 0.4 },
   ],
-  // Sound B: a beetle's real wingbeat, wandering, not a steady buzz.
+  // Sound C: the wings' soft whirr on take-off and landing, quieter (his note of October 2).
   ladybug: {
-    on: { voice: "flybuzz", f: 95, bright: 0.8, decay: 0.8, vol: 0.5 },
+    on: { voice: "flybuzz", f: 95, bright: 0.6, decay: 0.8, vol: 0.27 },
     off: [
-      { voice: "flybuzz", f: 90, bright: 0.8, decay: 0.4, vol: 0.4 },
-      { voice: "patter", at: 0.4, f: 2000, n: 2, decay: 0.2, vol: 0.3 },
+      { voice: "flybuzz", f: 90, bright: 0.6, decay: 0.4, vol: 0.22 },
+      { voice: "patter", at: 0.4, f: 2000, n: 2, decay: 0.2, vol: 0.2 },
     ],
   },
   // Sound B: wetter and slimier.

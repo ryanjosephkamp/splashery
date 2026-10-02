@@ -498,7 +498,9 @@ export const RECIPES = {
       },
     ],
     controls: [{ key: "pulse", label: "Pulse", type: "pulse", ease: PULSE_SECS }],
-    action: { key: "pulse", label: "Send a pulse" },
+    // Sound C: each field's own sound (FIELD_SOUNDS), played by drive.
+    action: { key: "pulse", label: "Send a pulse", quiet: ["pulse"] },
+    sounds: (o) => [FIELD_SOUNDS[o.program] || FIELD_SOUNDS.galaxy],
     // The tap's progress (0..1) goes to the GPU program on channel 0.
     // Where a tap landed (field units) rides on channels 1 and 2, so the
     // ocean's stone drops there; everything is 0 again at rest.
@@ -506,12 +508,20 @@ export const RECIPES = {
       const p = c.pulse > 0 ? 1 - c.pulse : 0;
       const at = info?.tap?.key === "pulse" ? info.tap.point : null;
       out.morph = p > 0 && at ? [p, at[0], at[2], 1] : [p, 0, 0, 0];
+      const n = info?.tap?.n ?? 0;
+      if (n < FIELD_TAP.n) FIELD_TAP.n = 0;
+      if (n > FIELD_TAP.n) {
+        FIELD_TAP.n = n;
+        out.cues.push(FIELD_SOUNDS[info.data?.program] || FIELD_SOUNDS.galaxy);
+      }
     },
     gpuField(o, fit) {
       return fitOk(fit) ? fieldModifier(o.program, fitOf(fit)) : null;
     },
     build(k, o) {
       const program = FIELDS[o.program] ? o.program : "galaxy";
+      k.data = { program };
+      FIELD_TAP.n = 0;
       const field = FIELDS[program];
       const look = LOOK[program];
       const n = Math.max(1, Math.floor(k.count * 0.99));
@@ -548,6 +558,20 @@ export const RECIPES = {
     },
   },
 };
+
+// Sound C (the owner's note of October 2: no robotic pulse; a sound that
+// suits each field): the galaxy's ring, a soft hush; the ocean's stone, a
+// plop and the ripple's gentle wash; the knot's flow, a warm tone that swells
+// once round.
+const FIELD_SOUNDS = {
+  galaxy: { voice: "breath", f: 520, to: 0.75, decay: 3.4, vol: 0.2 },
+  ocean: [
+    { voice: "drip", f: 520, n: 1, vol: 0.8 },
+    { voice: "sample", file: "splat-field-ocean.mp3", at: 0.12, vol: 0.45, fallback: { voice: "wave", f: 500, decay: 1.6, vol: 0.25 } }, // prettier-ignore
+  ],
+  knot: { voice: "glide", f: 330, to: 1.2, decay: 0.9, vol: 0.3 },
+};
+const FIELD_TAP = { n: 0 };
 
 function fitOk(fit) {
   return !!fit && Number.isFinite(fit.scale) && fit.center?.length === 3;
