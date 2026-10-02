@@ -2478,7 +2478,7 @@ export const TOY_SOUNDS = {
   // (src/packs/splatting.js): training, a soft tone falling as the loss curve draws; one splat, a
   // soft airy swell; many splats, a faint twinkle; sorting, a pebble's click as each splat is
   // placed. This is the training view's.
-  "gaussian-splatting": { voice: "glide", at: 0.35, f: 740, to: 0.45, decay: 2.07, vol: 0.45 },
+  "gaussian-splatting": { voice: "glide", at: 0.35, f: 740, to: 0.45, decay: 1.5, vol: 0.45 },
   // Three chimes as the arrows run (0.15, 0.85, 1.55 s), a bright ding as
   // QUEEN lights.
   "word-vectors": [

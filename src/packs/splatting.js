@@ -136,11 +136,12 @@ const VIEWS = ["training", "one", "many", "sorting"];
 
 // Each view's sound, played as cues (so each view has its own). Sound C (the
 // owner's notes of October 2): training, a soft tone falling as the loss
-// curve draws (0.35 s to 6.5 s), with no chord or notes; one splat, a soft
+// curve draws (from 0.35 s, most of its fall early as the curve's, fading by
+// 4.9 s, inside the 5 s a sound may last), with no chord or notes; one splat, a soft
 // airy swell as it turns; many splats, the twinkle quieter; sorting, a
 // pebble's click as each splat is placed (driveSorting), and nothing on the tap.
 const CUES = {
-  training: { voice: "glide", at: 0.35, f: 740, to: 0.45, decay: 2.07, vol: 0.45 },
+  training: { voice: "glide", at: 0.35, f: 740, to: 0.45, decay: 1.5, vol: 0.45 },
   one: { voice: "breath", f: 1100, to: 1.3, decay: 3, vol: 0.22 },
   many: [
     { voice: "sparkle", vol: 0.25 },
