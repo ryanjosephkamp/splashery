@@ -27,7 +27,8 @@ const LOOKS = {
   },
   syrup: { color: [0.55, 0.25, 0.06], scatter: 0.1, absorb: [2, 6, 14], glow: 0 },
   honey: { color: [0.86, 0.55, 0.1], scatter: 0.18, absorb: [0.8, 3.2, 12], glow: 0 },
-  lava: { color: [1.0, 0.36, 0.08], scatter: 1, absorb: [1, 1, 1], glow: 0.9 },
+  // (heat: seconds for its skin to crust over; surface.js draws the crust)
+  lava: { color: [1.0, 0.36, 0.08], scatter: 1, absorb: [1, 1, 1], glow: 0.9, heat: 1.6 },
 };
 
 // A prop for the surface pass: 5 texels (type, radii, angle; a or center;
@@ -133,7 +134,7 @@ export class GpuFluids {
     if (!liq && !gas.length && !glassSpec && !p.props) return;
     surf.render(
       liq
-        ? { texture: liq.texture, texWidth: liq.sim.texWidth, count: liq.n, simToToy: liq.simToRecipe(), radius: liq.d * 0.8 * (liq.spec.sprite ?? 1), velRow: liq.sim.texHeight, stretch: liq.spec.stretch ?? 1, drops: liq.spec.drops, cell: liq.h, diffuse: liq.diffuse, gas } // prettier-ignore
+        ? { texture: liq.texture, texWidth: liq.sim.texWidth, count: liq.n, simToToy: liq.simToRecipe(), radius: liq.d * 0.8 * (liq.spec.sprite ?? 1), velRow: liq.sim.texHeight, stretch: liq.spec.stretch ?? 1, drops: liq.spec.drops, heat: (LOOKS[liq.spec.preset] || LOOKS.water).heat, cell: liq.h, diffuse: liq.diffuse, gas } // prettier-ignore
         : { count: 0, gas },
       { camera: this.stage.cameraEntity.camera, toyToWorld: this.toyToWorld() },
     );

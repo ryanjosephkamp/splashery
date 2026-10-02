@@ -12,6 +12,9 @@ import { GpuDiffuse } from "./diffuse.js";
 // substeps a frame may take, per tier. The particle spacing is half a cell
 // (8 particles per cell at rest). A slower device runs in slow motion rather
 // than take longer steps.
+// The viscous step limit (nu * dt, cells^2): r4 allowed 0.12, which blew lava up.
+const VISC_STEP = 0.05;
+
 export const GPU_TIERS = {
   low: { cell: 0.04, maxSub: 16, cap: 12000, diffuse: 0.5 },
   mid: { cell: 0.03, maxSub: 24, cap: 40000, diffuse: 0.7 },
@@ -322,9 +325,14 @@ export class GpuLiquid {
     // actually simulated.
     const g = Math.hypot(...this.gravity);
     const vmax = (this.emitter?.speed ?? 0) / this.h + Math.sqrt(2 * g * this.dims[1]);
-    const dtMax = Math.min(0.8 / (this.sound + vmax), 0.12 / Math.max(1e-6, this.nu));
+    const dtSound = 0.8 / (this.sound + vmax);
+    const dtMax = Math.min(dtSound, VISC_STEP / Math.max(1e-6, this.nu));
     const n = Math.min(this.maxSub, Math.max(1, Math.ceil(dt / dtMax - 1e-6)));
-    const sub = Math.min(dt / n, dtMax);
+    const sub = Math.min(dt / n, dtSound);
+    // Explicit viscosity is stable only while nu * dt stays below about
+    // VISC_STEP cells^2; past the tier's substeps, a stiffer liquid (lava) is
+    // capped there rather than blowing up (r4's lava did).
+    this.sim.params.viscosity = this.sim.params.rho0 * Math.min(this.nu, VISC_STEP / sub);
     const simDt = n * sub;
     this.time += simDt;
     this.emit(simDt);
