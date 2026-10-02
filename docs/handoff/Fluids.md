@@ -1,5 +1,22 @@
 # Lane Fluids: liquids, smoke and flames made of splats
 
+## State on main (October 2, 2026)
+
+Everything is merged: v1 (#121), r4 (#152, the GPU solver, the liquid surface, the gas grid, the
+traced props) and r5 (#180, the faucet's tap, the clear stream, the lava crust and the phone tier),
+on main since October 2, 2026, after a full run on main with four PRs that passed. The Fluid lab is
+behind the labs switch. No branch of this lane is open.
+
+Waiting on the owner (the Operator passed the questions on October 2):
+
+- His phone's model and browser, or a screenshot of the gray pour (the r3 splat water is light blue
+  here, so what made it gray on his phone is not known).
+- Whether the Fluid lab, flame included, runs smoothly on his phone after r5. Only then the Weather
+  shelf's candle (`elements.js`) and the birthday cake's candles (`food.js`) get the Fluid lab's
+  flame (r5's item 5), with those packs' lanes.
+
+Later, as the owner said: a liquid vortex, a tornado and dripping syrup.
+
 ## Brief
 
 You are a Splashery worker session, started by the Operator (the coordinating session). Repo:
@@ -203,10 +220,10 @@ made his phone lag badly; 5) then the Weather shelf's candle and the birthday ca
 the Fluid lab's flame, if it runs well on a phone. Branch `claude/lane-fluids-r5` from the r4 head;
 PR "Phase Fluids r5: …", merged after #152.
 
-State (see docs/FLUIDS.md, "r5"): 1 to 4 are done and tested here. The phone's gray water is not
-reproduced (the r3 splats are light blue here; the GPU stream was gray and is fixed). 5 waits for
-the owner's phone to show the flame runs well; the candle (`elements.js`) and the cake (`food.js`)
-are other lanes' packs.
+State (see docs/FLUIDS.md, "r5"): merged October 2, 2026 (#180). 1 to 4 are done; cards fl-r5-pour
+and fl-r5-lava on Effect review page 2. The phone's gray water is not reproduced (the r3 splats are
+light blue here; the GPU stream was gray and is fixed). 5 waits for the owner's phone to show the
+flame runs well; the candle (`elements.js`) and the cake (`food.js`) are other lanes' packs.
 
 Lessons: explicit MPM viscosity needs `nu * dt` well under 0.1 cells² (honey ran at 0.06, lava at
 0.12 blew up). A toy whose splats are hidden can't be tapped: shrink them inside a traced shape
@@ -238,6 +255,11 @@ is unstable (lava's was).
 
 ## Known issues
 
+- GPU path (r4, r5): the splash's crown reads as a ring of spray more than a clear wall; a smoke
+  ribbon rises as a soft plume a few cells wide; the lava's cracks follow a fixed pattern in space;
+  a thin stream or the honey and lava threads can look dashed; the mug's handle is still splats.
+- Frame times on a real phone have not been measured (this lane's container has a software GPU);
+  `tools/fl-bench.html`, served by Pages, times each tier on a real device.
 - Colliders don't move with parts yet (no tipping jug, no stirring spoon).
 - Every scene fits a 30 fps frame on the mid tier's stand-in (4× CPU throttling; the soda pour is
   the tightest at 30 ms after r3, 40 ms on its slowest tenth of frames, and 33 ms on max at 1×, from
