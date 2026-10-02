@@ -61,6 +61,7 @@ export class Stage {
     this.weak = weak;
     this.pixelCap = pixelRatio;
     this.adaptive = adaptive;
+    this.nearFollow = false; // Science r2: the near clip follows a closeUp toy's camera
     this.reduced = false;
     this.busy = false;
     this.frameAvg = 0;
@@ -261,6 +262,10 @@ export class Stage {
     const portrait = this.canvas.width < this.canvas.height;
     if (e.camera.horizontalFov !== portrait) e.camera.horizontalFov = portrait;
     e.setPosition(pose.position[0], pose.position[1], pose.position[2]);
+    // Science r2: for a toy with a closeUp, the near clip follows the camera
+    // in (0.02, as always, from a distance of 1 on).
+    const near = this.nearFollow && Number.isFinite(pose.distance) ? Math.min(0.02, pose.distance * 0.02) : 0.02; // prettier-ignore
+    if (e.camera.nearClip !== near) e.camera.nearClip = near;
     e.setRotation(
       new pc.Quat(pose.rotation[0], pose.rotation[1], pose.rotation[2], pose.rotation[3]),
     );
