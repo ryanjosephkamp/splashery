@@ -579,21 +579,21 @@
   "frames": 27,
   "registered": 26,
   "points": 3511,
-  "splats": 38621,
-  "iters": 2006,
-  "psnr": 39.9,
-  "plyBytes": 2164583,
+  "splats": 120000,
+  "iters": 3002,
+  "psnr": null,
+  "plyBytes": 7907388,
   "start": 0,
   "end": 13.6,
   "rate": 1.985
  },
  "timings": {
-  "frames": 14.3,
-  "decode": 0.8,
-  "path": 232.7,
+  "frames": 14.4,
+  "decode": 0.9,
+  "path": 169.5,
   "seed": 2.8,
-  "train": 6658.4,
-  "export": 0.1,
-  "total": 6909.2
+  "train": 25874.5,
+  "export": 0.3,
+  "total": 26062.3
  }
 }
