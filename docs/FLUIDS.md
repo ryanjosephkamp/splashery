@@ -214,8 +214,8 @@ closely than the CPU solver did.
 
 | Tier | Cell (cm) | Particles at most | Substeps a frame | Foam and bubble budget |
 | ---- | --------- | ----------------- | ---------------- | ---------------------- |
-| low  | 1.3       | 12,000            | 14               | 0.5×                   |
-| mid  | 1.0       | 40,000            | 24               | 0.7×                   |
+| low  | 1.65      | 6,000             | 10               | 0.3×                   |
+| mid  | 1.3       | 14,000            | 12               | 0.4×                   |
 | high | 0.73      | 120,000           | 36               | 1×                     |
 | max  | 0.59      | 200,000           | 44               | 1.3×                   |
 
@@ -315,8 +315,8 @@ dark liquid's top still reads.
 
 | Tier | Smoke grid (cells a side) | Pressure iterations | Steps a second |
 | ---- | ------------------------- | ------------------- | -------------- |
-| low  | 24                        | 12                  | 30             |
-| mid  | 32                        | 16                  | 30             |
+| low  | 20                        | 10                  | 30             |
+| mid  | 28                        | 12                  | 30             |
 | high | 44                        | 20                  | 45             |
 | max  | 56                        | 24                  | 60             |
 
@@ -344,6 +344,33 @@ a quarter at the bottom of a glass; the test "the GPU liquid keeps the CPU liqui
 it.
 
 `?fluids=cpu` keeps the r3 path everywhere (the tests use it for the splat program on WebGPU).
+
+## r5 (October 2, 2026): the owner's phone review
+
+From the owner's review on his phone (docs/reviews/2026-10-02-mega-review/review.md):
+
+- **A tap on the faucet's handle pours.** On WebGPU the props are traced, and r4 hid their splats,
+  so a tap found nothing to hit (the app finds the toy by its splats). They now shrink to 0.55 of
+  their size inside the traced shapes, which cover them, and stay there to be tapped; the clip tool
+  taps the handle as a finger would (`tapHandle` in `tools/fl-clip.mjs`).
+- **Water that reads as water.** A thin stream of clear liquid drew as a gray cut-out of the dark
+  room behind it. It is now light and silvery (the room's light along its curved sides), and the
+  room seen through thin liquid is dimmer. The owner saw dark gray on his phone on the r3 splats as
+  well; what makes that one gray on a phone is not known yet (it is light blue here).
+- **Lava.** r4's GPU lava blew up: the solver let `nu * dt` reach 0.12 cells² a substep, and lava
+  (the stiffest preset) went unstable. It is now held at 0.05 (`VISC_STEP`): a liquid too stiff for
+  the tier's substeps has its viscosity capped there. Each particle's age reaches the surface pass
+  (the depth pass's second channel, kept for the front particle and smoothed with the depth), so
+  lava glows orange-yellow fresh from the nozzle and its skin cools within a second or two to a dark
+  basalt crust, with glowing cracks where it parted. The CPU lava's skin now crusts over too, with
+  the same cracks.
+- **A phone tier that stays smooth.** The phone tiers (low and mid; computers are high or max and
+  unchanged) take about a third of r4's particles, a coarser grid, half the substeps and a softer
+  sound speed (6 recipe units a second), so 60 frames a second still run in real time; the surface
+  is drawn at 0.4 of the screen (0.35 on low), the smoke grid is smaller and there is less spray. A
+  phone whose frames keep running long (over 24 ms for a second and a half) steps the fluid down by
+  itself, up to three times: fewer substeps (a little slow motion instead of lag), a coarser surface
+  and a shorter ray march.
 
 ## Limits and next steps
 

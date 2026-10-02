@@ -92,10 +92,12 @@ uniform uProj: mat4x4f;
 uniform uRadius: f32;
 uniform uMinPx: vec2f;
 uniform uStretch: vec2f;
+uniform uHeat: vec4f;
 varying vUv: vec2f;
 varying vCenter: vec3f;
 varying vR: f32;
 varying vS: f32;
+varying vH: f32;
 @vertex fn vertexMain(input: VertexInput) -> VertexOutput {
   var output: VertexOutput;
   let i = i32(input.instanceIndex);
@@ -104,7 +106,10 @@ varying vS: f32;
   let p = textureLoad(uParticles, q, 0);
   let vp = uniform.uSimToView * vec4f(p.xyz, 1.0);
   let r = max(uniform.uRadius, uniform.uMinPx.x * max(-vp.z, 1e-3) / uniform.uMinPx.y);
-  let v0 = textureLoad(uParticles, q + vec2i(0, i32(uniform.uStretch.y)), 0).xyz;
+  let v4 = textureLoad(uParticles, q + vec2i(0, i32(uniform.uStretch.y)), 0);
+  let v0 = v4.xyz;
+  // a lava's heat: it cools with the time since it left the nozzle (w)
+  output.vH = exp(-v4.w * uniform.uHeat.x);
   let vel = (uniform.uSimToView * vec4f(v0, 0.0)).xyz;
   let sl = length(vel.xy);
   let down = pow(clamp(-v0.y / max(length(v0), 1e-6), 0.0, 1.0), 4.0);
@@ -216,12 +221,14 @@ varying vUv: vec2f;
 varying vCenter: vec3f;
 varying vR: f32;
 varying vS: f32;
+varying vH: f32;
 @fragment fn fragmentMain(input: FragmentInput) -> FragmentOutput {
   var output: FragmentOutput;
   let r2 = dot(input.vUv, input.vUv);
   if (r2 > 1.0) { discard; }
   let d = -(input.vCenter.z + sqrt(1.0 - r2) * input.vR);
-  output.color = vec4f(d, 0.0, 0.0, 1.0);
+  // (g: the front particle's heat; the depth test keeps the front one)
+  output.color = vec4f(d, input.vH, 0.0, 1.0);
   output.fragDepth = clamp(d / uniform.uFar, 0.0, 1.0);
   return output;
 }
@@ -248,6 +255,7 @@ varying vUv: vec2f;
 varying vCenter: vec3f;
 varying vR: f32;
 varying vS: f32;
+varying vH: f32;
 @fragment fn fragmentMain(input: FragmentInput) -> FragmentOutput {
   var output: FragmentOutput;
   let r2 = dot(input.vUv, input.vUv);
@@ -298,33 +306,38 @@ uniform uDir: vec2f;
 uniform uWorldR: f32;
 uniform uProjY: f32;
 uniform uEdge: f32;
-fn texel(uv: vec2f) -> f32 {
+fn texel2(uv: vec2f) -> vec2f {
   let size = vec2f(textureDimensions(uSrc, 0));
   let q = clamp(vec2i(vec2f(uv.x, 1.0 - uv.y) * size), vec2i(0), vec2i(size) - vec2i(1));
-  return textureLoad(uSrc, q, 0).r;
+  return textureLoad(uSrc, q, 0).rg;
 }
 @fragment fn fragmentMain(input: FragmentInput) -> FragmentOutput {
   var output: FragmentOutput;
-  let d0 = texel(input.uv0);
+  let c0 = texel2(input.uv0);
+  let d0 = c0.x;
   if (d0 <= 0.0) { output.color = vec4f(0.0); return output; }
   let rpx = clamp(uniform.uWorldR * uniform.uProjY / d0, 4.0, 24.0);
   let stp = rpx / 8.0;
   let edge = max(uniform.uEdge, 5.0 * d0 / uniform.uProjY);
   var sum = d0;
+  var hsum = c0.y;
   var wsum = 1.0;
   for (var k = 1; k <= 8; k++) {
     let x = f32(k) * stp;
     let ws = exp(-2.0 * f32(k * k) / 64.0);
     for (var s = -1; s <= 1; s += 2) {
-      let d = texel(input.uv0 + uniform.uDir * x * f32(s));
+      let c = texel2(input.uv0 + uniform.uDir * x * f32(s));
+      let d = c.x;
       if (d <= 0.0) { continue; }
       let dz = (d - d0) / edge;
       let w = ws * exp(-dz * dz);
       sum += d * w;
+      hsum += c.y * w;
       wsum += w;
     }
   }
-  output.color = vec4f(sum / wsum, 0.0, 0.0, 1.0);
+  // (g: the heat, smoothed with the depth so a crust's edge is soft)
+  output.color = vec4f(sum / wsum, hsum / wsum, 0.0, 1.0);
   return output;
 }
 `;
@@ -693,6 +706,7 @@ uniform uFoam: vec4f;
 uniform uDrop: vec2f;
 var uProps: texture_2d<uff>;
 uniform uPropInfo: vec4f;
+uniform uHeat: vec4f;
 uniform uPropLight: vec4f;
 uniform uPropLightC: vec4f;
 var uGas: texture_2d<uff>;
@@ -770,6 +784,24 @@ fn sampleDepth(uv: vec2f) -> f32 {
   let size = vec2f(textureDimensions(uDepth, 0));
   let q = clamp(vec2i(flipUv(uv) * size), vec2i(0), vec2i(size) - vec2i(1));
   return textureLoad(uDepth, q, 0).r;
+}
+// A lava's heat at its front surface (the depth pass's g, smoothed).
+fn sampleHeat(uv: vec2f) -> f32 {
+  let size = vec2f(textureDimensions(uDepth, 0));
+  let q = clamp(vec2i(flipUv(uv) * size), vec2i(0), vec2i(size) - vec2i(1));
+  return textureLoad(uDepth, q, 0).g;
+}
+fn hash3(p: vec3f) -> f32 {
+  return fract(sin(dot(p, vec3f(127.1, 311.7, 74.7))) * 43758.5453);
+}
+fn vnoise(p: vec3f) -> f32 {
+  let i = floor(p);
+  let f = fract(p);
+  let u = f * f * (3.0 - 2.0 * f);
+  return mix(mix(mix(hash3(i), hash3(i + vec3f(1.0, 0.0, 0.0)), u.x),
+                 mix(hash3(i + vec3f(0.0, 1.0, 0.0)), hash3(i + vec3f(1.0, 1.0, 0.0)), u.x), u.y),
+             mix(mix(hash3(i + vec3f(0.0, 0.0, 1.0)), hash3(i + vec3f(1.0, 0.0, 1.0)), u.x),
+                 mix(hash3(i + vec3f(0.0, 1.0, 1.0)), hash3(i + vec3f(1.0, 1.0, 1.0)), u.x), u.y), u.z);
 }
 fn thickAll(uv: vec2f) -> vec4f {
   let size = vec2f(textureDimensions(uThick, 0));
@@ -1018,13 +1050,20 @@ fn sceneAt(uv: vec2f) -> vec3f {
     let lit = uniform.uColor.rgb * (0.35 + 0.65 * max(dot(n, L), 0.0));
     var rr = refract(rd, n, 0.75);
     if (dot(rr, rr) <= 0.0) { rr = reflect(rd, n); }
-    let room = sky(rr) * 0.3;
+    // (the room seen through the liquid: dim through a thin stream, which
+    // shows mostly what is behind it, so clear water never reads as gray)
+    let room = sky(rr) * 0.3 * mix(0.25, 1.0, clamp(thick * 6.0, 0.0, 1.0));
     let body = mix((behind + room) * T + uniform.uColor.rgb * (1.0 - T) * 0.25, lit, uniform.uColor.a);
     let F = fresnel(dot(n, V), 0.02);
     let refl = sky(reflect(-V, n));
     let H = normalize(L + V);
     let spec = pow(max(dot(n, H), 0.0), 180.0) * 1.6;
     var liq = mix(body, refl, F) + spec + uniform.uColor.rgb * uniform.uAbsorb.a;
+    // A thin stream of clear liquid catches the room's light all along its
+    // curved sides (a lit room is brighter than the wall behind): it reads
+    // light and silvery, never as a gray cut-out of the dark behind it.
+    let stream = (1.0 - smoothstep(2.0 * uniform.uDrop.y, 7.0 * uniform.uDrop.y, thick)) * dot(T, vec3f(0.333)) * (1.0 - uniform.uColor.a);
+    liq = mix(liq, behind * 0.45 + vec3f(0.6, 0.7, 0.78) + spec, 0.6 * stream);
     // The top surface reads even when the liquid is dark: the room's light
     // on it, and a thin bright meniscus where it meets the glass.
     if (uniform.uGlassB.w > 0.5 && n.y > 0.6) {
@@ -1041,6 +1080,21 @@ fn sceneAt(uv: vec2f) -> vec3f {
     // Bubbles inside: bright specks, tinted by the liquid around them.
     let bub = clamp(thickAll(uv0).b * 1.2, 0.0, 1.0) * uniform.uFoam.w;
     liq = mix(liq, mix(uniform.uColor.rgb, vec3f(1.0), 0.6) * (0.65 + 0.35 * max(dot(n, L), 0.0)) + vec3f(0.08), bub * 0.75);
+    if (uniform.uHeat.y > 0.5) {
+      // Lava: fresh from the nozzle it glows orange-yellow; within a second
+      // or two its skin cools to a dark crust, which the flow beneath tears
+      // into plates and folds, glowing in the cracks between them.
+      let Pt3 = (uniform.uViewToToy * vec4f(P, 1.0)).xyz;
+      let heat = sampleHeat(uv0);
+      let nz = vnoise(Pt3 * 28.0) * 0.6 + vnoise(Pt3 * 70.0) * 0.4;
+      // (the crust's cracks: thin veins where it parted, glowing as long as
+      // the lava under it is still hot, longer than its skin)
+      let vein = 1.0 - smoothstep(0.0, 0.07, abs(vnoise(Pt3 * 11.0) - 0.5));
+      let g = max(smoothstep(0.45, 0.8, heat + 0.2 * (nz - 0.5)), vein * smoothstep(0.03, 0.3, heat) * 0.85);
+      let crust = vec3f(0.085, 0.06, 0.05) * (0.55 + 0.45 * max(dot(n, L), 0.0)) * (0.8 + 0.4 * nz) + vec3f(spec * 0.35);
+      let glow = mix(vec3f(0.85, 0.16, 0.02), vec3f(1.0, 0.68, 0.18), smoothstep(0.55, 0.95, heat + 0.1 * nz)) * 1.35;
+      liq = mix(crust, glow, g);
+    }
     let a = clamp(thick * 200.0, 0.0, 1.0);
     liqZ = -P.z;
     liqT = mix(1.0, dot(T, vec3f(0.333)), a);
@@ -1221,7 +1275,8 @@ export class FluidSurface {
     this.device = device;
     this.scale = scale;
     const floatOk = device.textureFloatRenderable;
-    this.depthFormat = floatOk ? pc.PIXELFORMAT_R32F : pc.PIXELFORMAT_RGBA16F;
+    // (two channels: depth, and a lava's heat)
+    this.depthFormat = floatOk ? pc.PIXELFORMAT_RG32F : pc.PIXELFORMAT_RGBA16F;
     this.sh = {
       depth: shader(device, "depth", SPRITE_VS, DEPTH_FS, SPRITE_VS_W, DEPTH_FS_W),
       thick: shader(device, "thick", SPRITE_VS, THICK_FS, SPRITE_VS_W, THICK_FS_W),
@@ -1346,6 +1401,8 @@ export class FluidSurface {
       // stream, such as the splash, stretches less, so a falling ball and its
       // drops stay round)
       scope.resolve("uStretch").setValue([(src.stretch ?? 1) / 30, src.velRow ?? 0]);
+      // A lava's cooling (index.js): 1 / its time to crust over (s), and on.
+      scope.resolve("uHeat").setValue(src.heat ? [1 / src.heat, 1, 0, 0] : [0, 0, 0, 0]);
       this.depthPass.count = count;
       this.depthPass.render();
       this.thickPass.count = count;
@@ -1390,6 +1447,7 @@ export class FluidSurface {
     scope.resolve("uMisc").setValue([p.refract, liquid ? 1 : 0, 2.5 * (src.cell || 0), 2 / (proj.data[5] * d.height)]); // prettier-ignore
     scope.resolve("uFoam").setValue([...p.foam, liquid && src.diffuse?.n ? 1 : 0]);
     scope.resolve("uDrop").setValue([src.drops ?? 0, (src.radius ?? 0) * toyScale * 2]);
+    if (!liquid) scope.resolve("uHeat").setValue([0, 0, 0, 0]);
     // The props (index.js), traced on WebGPU only.
     const props = d.isWebGPU ? p.props : null;
     scope.resolve("uProps").setValue(this.propTexture(props));

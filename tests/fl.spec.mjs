@@ -372,3 +372,68 @@ test("screenshots at phone and desktop size", async ({ browser }) => {
     await page.close();
   }
 });
+
+// Lane Fluids r5: the owner wanted to tap the faucet's handle to pour. On
+// WebGPU the props are traced and their splats shrink inside the traced
+// shapes, but they stay there to be tapped.
+test("a tap on the faucet's handle pours", async ({ page }) => {
+  await open(page, "/?renderer=webgpu&adapt=off&profile=low&labs=1");
+  const dev = await page.evaluate(() => window.__splashery.player.stage?.deviceType);
+  test.skip(dev !== "webgpu", "No WebGPU adapter in this browser.");
+  const at = await page.evaluate(async () => {
+    const pc = await import("/src/pc.js");
+    const { app, player } = window.__splashery;
+    await app.chooseToy("fluid-lab");
+    const stage = player.stage;
+    for (let i = 0; i < 200 && !player.fluids?.fx; i++) await stage.captureFrame();
+    for (let i = 0; i < 10; i++) await stage.captureFrame();
+    const m = player.fluids.fx.toyToWorld();
+    // The red handle's middle (recipe units: the nozzle at x -0.06, y 1.72).
+    const s = stage.cameraEntity.camera.worldToScreen(
+      m.transformPoint(new pc.Vec3(0.14, 1.97, 0.06)),
+    );
+    const r = stage.app.graphicsDevice.canvas.getBoundingClientRect();
+    return [r.left + s.x, r.top + s.y];
+  });
+  const pouring = () =>
+    page.evaluate(() => {
+      const liq = window.__splashery.player.fluids.world.systems.find((s) => s.gpu);
+      return !!liq.emitter?.on;
+    });
+  expect(await pouring()).toBe(false);
+  await page.mouse.click(at[0], at[1]);
+  await expect.poll(pouring, { timeout: 20_000 }).toBe(true);
+});
+
+// Lane Fluids r5: a phone whose frames keep running long steps the fluid down
+// (fewer substeps, a coarser surface); a computer never does.
+test("a struggling phone steps the fluid down; a computer does not", async ({ page }) => {
+  await open(page, "/?renderer=webgpu&adapt=off&profile=mid&labs=1");
+  const dev = await page.evaluate(() => window.__splashery.player.stage?.deviceType);
+  test.skip(dev !== "webgpu", "No WebGPU adapter in this browser.");
+  const r = await page.evaluate(async () => {
+    const { GpuFluids } = await import("/src/fluids/gpu/index.js");
+    const stage = window.__splashery.player.stage;
+    const run = (profile) => {
+      const fx = new GpuFluids(stage, null, { profile, specs: [] });
+      stage.app.off("postrender", fx.onPost);
+      const s0 = fx.surface.scale;
+      let t = 0;
+      const real = performance.now;
+      performance.now = () => t;
+      for (let i = 0; i < 200; i++) {
+        t += 40; // 25 frames a second
+        fx.watch();
+      }
+      performance.now = real;
+      const out = { before: s0, after: fx.surface.scale, steps: fx.watchState.steps };
+      fx.destroy();
+      return out;
+    };
+    return { mid: run("mid"), high: run("high") };
+  });
+  expect(r.mid.steps).toBeGreaterThan(0);
+  expect(r.mid.after).toBeLessThan(r.mid.before);
+  expect(r.high.steps).toBe(0);
+  expect(r.high.after).toBe(r.high.before);
+});

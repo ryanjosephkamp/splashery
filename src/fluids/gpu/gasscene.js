@@ -22,7 +22,7 @@ export class GasScene {
     for (const s of this.gases) this.state.set(s.name, { on: s.source?.on ?? true, flow: 1, wind: [0, 0, 0] }); // prettier-ignore
     if (this.flame) this.state.set(this.flame.name, { on: this.flame.on ?? true, wind: [0, 0, 0] });
     this.profile = profile;
-    this.steps = profile === "low" ? 24 : profile === "mid" ? 36 : 56;
+    this.steps = profile === "low" ? 18 : profile === "mid" ? 28 : 56;
     if (this.flame) this.makeFlame(device);
     if (this.gases.some((s) => s.source)) this.makeSmoke(device);
   }
@@ -164,8 +164,9 @@ export class GasScene {
   // What the surface pass draws: up to two grids.
   view() {
     const out = [];
-    if (this.flameGrid) out.push({ grid: this.flameGrid, ...this.flameLook });
-    if (this.smokeGrid) out.push({ grid: this.smokeGrid, ...this.smokeLook });
+    // (steps: the ray march's, which a struggling phone lowers: index.js)
+    if (this.flameGrid) out.push({ grid: this.flameGrid, ...this.flameLook, steps: this.steps });
+    if (this.smokeGrid) out.push({ grid: this.smokeGrid, ...this.smokeLook, steps: this.steps });
     return out;
   }
 

@@ -305,7 +305,8 @@ fn main(@builtin(global_invocation_id) id: vec3u) {
   let q = vec2i(i32(id.x % u.texWidth), i32(id.x / u.texWidth));
   textureStore(outTex, q, vec4f(x, length(v)));
   // the lower half: velocities (cells/s), for drawing fast flow stretched
-  textureStore(outTex, q + vec2i(0, i32(u.pad)), vec4f(v, 0.0));
+  // (w: the particle's age in seconds, for a lava's cooling)
+  textureStore(outTex, q + vec2i(0, i32(u.pad)), vec4f(v, particles[b + 1u].w));
 }
 `;
 

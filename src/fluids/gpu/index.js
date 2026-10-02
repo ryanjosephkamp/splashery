@@ -27,7 +27,8 @@ const LOOKS = {
   },
   syrup: { color: [0.55, 0.25, 0.06], scatter: 0.1, absorb: [2, 6, 14], glow: 0 },
   honey: { color: [0.86, 0.55, 0.1], scatter: 0.18, absorb: [0.8, 3.2, 12], glow: 0 },
-  lava: { color: [1.0, 0.36, 0.08], scatter: 1, absorb: [1, 1, 1], glow: 0.9 },
+  // (heat: seconds for its skin to crust over; surface.js draws the crust)
+  lava: { color: [1.0, 0.36, 0.08], scatter: 1, absorb: [1, 1, 1], glow: 0.9, heat: 1.6 },
 };
 
 // A prop for the surface pass: 5 texels (type, radii, angle; a or center;
@@ -61,7 +62,11 @@ export class GpuFluids {
     this.angles = {};
     this.gas = specs.some((s) => s.kind === "gas" || s.kind === "flame") ? new GasScene(stage.device, specs, { profile }) : null; // prettier-ignore
     this.transform = transform || { center: [0, 0, 0], scale: 1 };
-    const scale = profile === "low" || profile === "mid" ? 0.5 : profile === "max" ? 0.75 : 0.6;
+    const scale =
+      profile === "low" ? 0.35 : profile === "mid" ? 0.4 : profile === "max" ? 0.75 : 0.6;
+    // Phones step themselves down if their frames still run long (watch()).
+    this.phone = profile === "low" || profile === "mid";
+    this.watchState = { last: 0, ema: 16, slow: 0, steps: 0 };
     this.surface = new FluidSurface(stage.device, { scale });
     this.onPost = () => this.render();
     stage.app.on("postrender", this.onPost);
@@ -103,8 +108,30 @@ export class GpuFluids {
     return toy ? new pc.Mat4().mul2(toy.getWorldTransform(), fit) : fit;
   }
 
+  // On a phone, frames that keep running long (over 24 ms for a second and
+  // a half) step the fluid down: fewer substeps (it runs a little slower
+  // instead of lagging) and a coarser surface, up to three times.
+  watch() {
+    const w = this.watchState;
+    const now = performance.now();
+    const dt = w.last ? now - w.last : 16;
+    w.last = now;
+    if (!this.phone || dt > 250 || w.steps >= 3) return;
+    w.ema += (dt - w.ema) * 0.1;
+    w.slow = w.ema > 24 ? w.slow + dt : 0;
+    if (w.slow < 1500) return;
+    w.slow = 0;
+    w.ema = 16;
+    w.steps++;
+    const liq = this.liquid();
+    if (liq) liq.maxSub = Math.max(6, Math.floor(liq.maxSub * 0.75));
+    this.surface.scale = Math.max(0.28, this.surface.scale * 0.85);
+    if (this.gas) this.gas.steps = Math.max(12, Math.floor(this.gas.steps * 0.8));
+  }
+
   render() {
     if (!this.enabled || !this.stage.toy) return;
+    this.watch();
     const liq = this.liquid();
     const surf = this.surface;
     const p = surf.params;
@@ -133,7 +160,7 @@ export class GpuFluids {
     if (!liq && !gas.length && !glassSpec && !p.props) return;
     surf.render(
       liq
-        ? { texture: liq.texture, texWidth: liq.sim.texWidth, count: liq.n, simToToy: liq.simToRecipe(), radius: liq.d * 0.8 * (liq.spec.sprite ?? 1), velRow: liq.sim.texHeight, stretch: liq.spec.stretch ?? 1, drops: liq.spec.drops, cell: liq.h, diffuse: liq.diffuse, gas } // prettier-ignore
+        ? { texture: liq.texture, texWidth: liq.sim.texWidth, count: liq.n, simToToy: liq.simToRecipe(), radius: liq.d * 0.8 * (liq.spec.sprite ?? 1), velRow: liq.sim.texHeight, stretch: liq.spec.stretch ?? 1, drops: liq.spec.drops, heat: (LOOKS[liq.spec.preset] || LOOKS.water).heat, cell: liq.h, diffuse: liq.diffuse, gas } // prettier-ignore
         : { count: 0, gas },
       { camera: this.stage.cameraEntity.camera, toyToWorld: this.toyToWorld() },
     );
