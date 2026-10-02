@@ -133,8 +133,8 @@ except the honey level, which is yours (one number). The laptop is locked.
 
 Model: Opus 5.5 (default effort), all of it, and its one helper (it found and cut the recordings).
 
-- October 2, 2026: started from main 2ba6455 and the Ops branch `claude/operator-mega-review`
-  (merged to main as #170 during the day, then main merged in).
+- October 2, 2026: the engine PR #183 merged. Started from main 2ba6455 and the Ops branch
+  `claude/operator-mega-review` (merged to main as #170 during the day, then main merged in).
 - **Engine** (`claude/lane-sound-c-engine`): done.
   - A tap that pauses a long effect suspends the AudioContext, so everything the toy is sounding
     stops at that moment and resumes from it (held tunes, ringing notes, cue sounds, a recipe's own
@@ -212,9 +212,7 @@ Model: Opus 5.5 (default effort), all of it, and its one helper (it found and cu
     methods, `preloadSounds` and `recipeSounds`.
   - src/motion.js: `info.view` in the drive's info.
 - **Tests from finished lanes this lane changes** (please update; I didn't edit them):
-  1. `tests/snda.spec.mjs:89` ("no sample loads … when a toy opens, only on its tap"): the brief
-     replaces that rule. With the speaker on, a toy's samples now load when it opens. Suggest:
-     nothing on page load, then the toy's own samples (and no others) after it opens.
+  1. `tests/snda.spec.mjs` (the preload rule): done in #183, with the Operator's authorization.
   2. `tests/snda.spec.mjs:32` ("every sample is used …"):
      - `used` reads cue files only from src/packs/balls.js. It should read every pack
        (`file: "….mp3"` in src/packs/\*.js) and the candidates in tools/sound-review.json. This
