@@ -19,12 +19,14 @@ const UNIT = 0.33;
 const TAP_SECS = 5;
 
 export const LIQUID_LOOKS = {
-  water: { preset: "water", nozzle: { speed: 1.6, radius: 0.08 }, pour: 2.4 },
-  soda: { preset: "soda", nozzle: { speed: 1.6, radius: 0.08 }, pour: 2.4 },
+  // (gpuRadius, r6: a real tap's stream, about a centimeter across at the
+  // spout; the CPU's coarser particles keep the wider one)
+  water: { preset: "water", nozzle: { speed: 1.6, radius: 0.08, gpuRadius: 0.04 }, pour: 2.4 },
+  soda: { preset: "soda", nozzle: { speed: 1.6, radius: 0.08, gpuRadius: 0.04 }, pour: 2.4 },
   // (gpuRadius: the GPU liquid's particles are small enough for a real
   // honey pour's thin thread)
-  honey: { preset: "honey", nozzle: { speed: 0.75, radius: 0.1, gpuRadius: 0.05 }, pour: 3.2 },
-  lava: { preset: "lava", nozzle: { speed: 0.75, radius: 0.1, gpuRadius: 0.05 }, pour: 3.2 },
+  honey: { preset: "honey", nozzle: { speed: 0.75, radius: 0.1, gpuRadius: 0.04 }, pour: 3.2 },
+  lava: { preset: "lava", nozzle: { speed: 0.75, radius: 0.1, gpuRadius: 0.045 }, pour: 3.2 },
 };
 
 // The glass (recipe units, standing on y = 0).
@@ -151,13 +153,20 @@ function splashScene(k, o) {
     gpu: {
       fill: { cylinder: { at: [0, 0.04, 0], radius: 0.76, height: 0.065 } },
       fillShare: 0.9,
-      drop: { at: [0.03, 0.95, 0.02], radius: 0.1, vel: [0, -2, 0] },
+      // (r6: a big falling drop is no sphere: flattened, flat underneath and
+      // rounder on top, as a large raindrop falls)
+      drop: {
+        at: [0.03, 0.95, 0.02],
+        radius: 0.1,
+        vel: [0, -2, 0],
+        shape: [1.22, 0.85, 1.12, 0.55],
+      },
       friction: 0.025,
       tension: 0,
       // (no stream to hold together: drawn barely stretched, so the ball and
       // the crown's drops stay round; larger sprites join the crown's thin
       // sheet)
-      stretch: 0.15,
+      stretch: 0.35,
       sprite: 1.1,
       // (and they catch the light as real drops do)
       drops: 0.8,

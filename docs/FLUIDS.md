@@ -372,6 +372,23 @@ From the owner's review on his phone (docs/reviews/2026-10-02-mega-review/review
   itself, up to three times: fewer substeps (a little slow motion instead of lag), a coarser surface
   and a shorter ray march.
 
+## r6 (October 2, 2026): the owner's marks on r4 and r5
+
+- **A thin meniscus.** The bright ring on a liquid's top read as a white ring. It is now a hairline
+  about a pixel wide, a soft highlight of the room, as a real meniscus is.
+- **A tap's stream.** The GPU nozzle pours a stream about a centimeter across (`gpuRadius` 0.04 for
+  water and soda, 0.04 for honey and 0.045 for lava); the CPU's coarser particles keep the wider
+  one.
+- **Lava, one material.** Its color comes only from its heat, on one incandescent ramp (`lavaRamp`:
+  orange-yellow, orange, red, dull red, black), and its heat falls on one curve wherever it is: the
+  time since it left the spout. So the stream and the pool where it lands are the same orange, and
+  the pool darkens and crusts as it cools; the crust's cracks show the hotter lava just under it, on
+  the same ramp. The glass's starting pool is already old (`fillAge`, 8 s), a dark, glossy gray
+  crust like cooled pahoehoe. The CPU lava uses the same ramp.
+- **A drop that isn't a sphere.** The splash's falling drop starts flattened, flat underneath and
+  rounder on top (`drop.shape`), as a large raindrop falls, and fast liquid is drawn a little more
+  stretched along its motion.
+
 ## Limits and next steps
 
 - Colliders don't move with a part yet (a tipping jug, a stirring spoon). The runtime would need the
