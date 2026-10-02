@@ -124,13 +124,13 @@ Part 1 (`claude/lane-fix7-1`): all eight items built, tested (tests/fx7.spec.mjs
   solve stopped part way leaves the history right.
 - **gaussian-splatting**, one splat: a low pick alpha (0.012) in this view and a near-clear card
   (opacity 0.02) over the grid, so a tap anywhere on the toy starts it. The tap now trains the
-  splat: it starts from a guess (moved, turned, the wrong sizes, faint and gray-blue) and 24 gradient
-  steps carry its place, turn, sizes (a morph), and color and opacity (a cross-fade between the guess
-  copy and the target copy) toward the target, a dashed outline, each at its own learning rate, so
-  the steps start big and shrink. About text says so.
-- **sunglasses**: a lens's own splats are too small and faint for the pick pass even at a low
-  alpha; 37 bigger, faint splats (opacity 0.08) over each lens, with `pickAlpha: 0.06`, make a lens
-  tap start the effect.
+  splat: it starts from a guess (moved, turned, the wrong sizes, faint and gray-blue) and 24
+  gradient steps carry its place, turn, sizes (a morph), and color and opacity (a cross-fade between
+  the guess copy and the target copy) toward the target, a dashed outline, each at its own learning
+  rate, so the steps start big and shrink. About text says so.
+- **sunglasses**: a lens's own splats are too small and faint for the pick pass even at a low alpha;
+  37 bigger, faint splats (opacity 0.08) over each lens, with `pickAlpha: 0.06`, make a lens tap
+  start the effect.
 
 Part 2: not started.
 
@@ -149,8 +149,8 @@ Part 2: not started.
 ## Known issues
 
 - Sounds: the tap sounds play on every tap as before; fireworks fired quickly play their sound per
-  tap, and the puzzle cube's tap sound plays on a pause tap too. The one-splat view's sound (the pad)
-  is Sound C's (the owner asked for a subtler one).
+  tap, and the puzzle cube's tap sound plays on a pause tap too. The one-splat view's sound (the
+  pad) is Sound C's (the owner asked for a subtler one).
 - The one-splat view's near-clear card tints the grid square a little on a dark background.
 
 ## For the Operator
