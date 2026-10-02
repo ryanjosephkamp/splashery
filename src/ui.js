@@ -2503,6 +2503,16 @@ export function createUI(app) {
     else setGallery(!galleryOn);
   }
   els.galleryOpen.addEventListener("click", toggleGallery);
+  // UI r5: on a phone the button is in the top row; on a computer it sits in
+  // the panel beside the search field, so it never covers the toy (a tall
+  // toy, the fluid lab's faucet, reaches up under the top row there).
+  const galleryHome = { parent: els.galleryOpen.parentNode, next: els.galleryOpen.nextSibling };
+  function placeGallery() {
+    if (narrow.matches) galleryHome.parent.insertBefore(els.galleryOpen, galleryHome.next);
+    else els.shelfFind.append(els.galleryOpen);
+  }
+  narrow.addEventListener("change", placeGallery);
+  placeGallery();
   els.galleryClose.addEventListener("click", () => setGallery(false));
   narrow.addEventListener("change", () => galleryOn && setGallery(false));
 

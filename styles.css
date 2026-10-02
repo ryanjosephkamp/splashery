@@ -2563,12 +2563,31 @@ body.focus .flag-pop {
 /* /UI r3 */
 
 /* UI r5 --------------------------------------------------------------------- */
-/* The gallery button joins the row of round buttons (after the flag), so the
-   gallery is one tap away wherever the toy row is scrolled. Eight buttons on a
-   phone: a little smaller and closer, and the name a little smaller. */
+/* On a phone the gallery button joins the row of round buttons (after the
+   flag), so the gallery is one tap away wherever the toy row is scrolled.
+   Eight buttons there: a little smaller and closer, and the name a little
+   smaller. */
 
-#gallery-open {
-  right: calc(var(--panel-w) + 36px + 308px);
+/* On a computer it sits in the panel, beside the search field (ui.js moves
+   it there), so it never covers the toy. */
+@media (min-width: 761px) {
+  .shelf-find {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .shelf-find input {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .shelf-find #gallery-open {
+    position: static;
+    flex: none;
+    width: 34px;
+    height: 34px;
+  }
 }
 
 #gallery-open[aria-expanded="true"] {
