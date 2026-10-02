@@ -86,6 +86,17 @@ test("the Live pill never covers a control, on a phone or a desktop", async ({
         return hit;
       });
       expect(over, `${w}×${h}`).toEqual([]);
+      // UI r5's Record pill and the Physics hands bar don't meet it either.
+      await page.evaluate(() => document.getElementById("record-start").click());
+      await page.waitForSelector("#rec-pill:not([hidden])", { timeout: 30_000 });
+      await page.evaluate(() => (document.getElementById("hands-bar").hidden = false));
+      const meet = await page.evaluate(() => {
+        const r = (id) => document.getElementById(id).getBoundingClientRect();
+        const hit = (a, b) => a.left < b.right && a.right > b.left && a.top < b.bottom && a.bottom > b.top; // prettier-ignore
+        const live = r("live-indicator");
+        return { rec: hit(live, r("rec-pill")), hands: hit(live, r("hands-bar")), recHands: hit(r("rec-pill"), r("hands-bar")) }; // prettier-ignore
+      });
+      expect(meet, `${w}×${h}`).toEqual({ rec: false, hands: false, recHands: false });
       await page.screenshot({ path: `tests/screenshots/live3-pill-${w}x${h}.png` });
       await page.close();
     }

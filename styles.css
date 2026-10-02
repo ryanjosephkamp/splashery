@@ -2117,6 +2117,14 @@ body.embed #stage {
   display: none;
 }
 
+/* On a computer, UI r5's Record pill sits at the top of the stage too: while
+   it shows, the Live pill drops below it (it widens with Save and Share). */
+@media (min-width: 761px) {
+  body:has(#rec-pill:not([hidden])) .live-indicator {
+    top: calc(env(safe-area-inset-top, 0px) + 116px);
+  }
+}
+
 .live-dot {
   width: 9px;
   height: 9px;
