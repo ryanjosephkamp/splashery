@@ -20,7 +20,7 @@ import {
   rgb,
   vec,
 } from "../kit.js";
-import { evenBox, evenCylinder, evenEllipsoid, evenTorus, evenTube } from "./even.js";
+import { evenBox, evenCylinder, evenDisc, evenEllipsoid, evenTorus, evenTube } from "./even.js";
 
 const TAU = Math.PI * 2;
 const { add, sub, mul, dot, len, cross, unit } = vec;
@@ -1102,11 +1102,23 @@ export const RECIPES = {
         {
           even: true,
           opacity: 1,
-          jitter: 0.015,
+          jitter: 0.008,
           flat: 0.2,
-          color: (c) => glossy(c, "#f3f1ee", 0.8, 50, 0.76, 0.3),
+          weight: 1.3,
+          color: (c) => glossy(c, "#f3f1ee", 0.5, 50, 0.76, 0.3),
         },
       );
+      // The stand's foot, closed underneath.
+      k.add(evenDisc(k, 0.42, 0, 40), {
+        even: true,
+        opacity: 1,
+        jitter: 0.008,
+        pos: [0, -0.5, 0],
+        rot: [180, 0, 0],
+        flat: 0.2,
+        weight: 1.3,
+        color: (c) => shade("#f3f1ee", 0.8 - 0.1 * Math.hypot(c.p[0], c.p[2])),
+      });
       // Drips of ganache from the top edge.
       const drips = [];
       for (let i = 0; i < 17; i++) {
@@ -1135,19 +1147,32 @@ export const RECIPES = {
         pos: [0, H / 2, 0],
         flat: 0.2,
         interior: 0.12,
+        weight: 1.2,
         color: (c) => {
           const y = c.lp[1] + H / 2;
-          if (c.s.cap === "top") return glossy(c, o.drip, 0.6, 30);
+          if (c.s.cap === "top") return glossy(c, o.drip, 0.4, 30);
           if (c.s.cap) return o.frosting;
           const a = c.u * TAU;
-          if (dripAt(a, y)) return glossy(c, o.drip, 0.8, 30, 0.8, 0.3);
-          const swirl = 0.04 * Math.sin(y * 60 + 2 * c.noise(a * 3, y * 4, 0));
-          return lit(c, shade(o.frosting, 1 + swirl), 0.76, 0.34);
+          // Smaller splats along the drips' edges keep them crisp.
+          const on = dripAt(a, y);
+          const e = 0.018;
+          const edge =
+            on !== dripAt(a + e / R, y) ||
+            on !== dripAt(a - e / R, y) ||
+            on !== dripAt(a, y + e) ||
+            on !== dripAt(a, y - e);
+          const size = edge ? 0.85 : 1.15;
+          if (on) return { c: glossy(c, o.drip, 0.5, 30, 0.8, 0.3), size };
+          // Broad, soft palette-knife swirls (fine bands read as grain).
+          const swirl = 0.05 * Math.sin(y * 26 + 1.5 * c.noise(a * 2, y * 3, 0));
+          return { c: lit(c, shade(o.frosting, 1 + swirl), 0.76, 0.34), size };
         },
         core: (c) => {
           const y = c.p[1];
           const r = Math.hypot(c.p[0], c.p[2]);
-          if (r > R * 0.94) return o.frosting;
+          // Near the skin, the skin's own color and shade, so none shows
+          // through between the skin's splats as lighter flecks.
+          if (r > R * 0.8) return shade(dripAt((Math.atan2(c.p[0], c.p[2]) + TAU) % TAU, y) ? o.drip : o.frosting, 0.86); // prettier-ignore
           if (y > H - 0.04) return o.drip;
           for (const ly of [0.24, 0.47]) {
             if (Math.abs(y - ly) < 0.012) return "#d6344d";
@@ -1173,8 +1198,10 @@ export const RECIPES = {
       for (let i = 0; i < ros; i++) {
         const a = (i / ros) * TAU;
         k.add(rosette, {
+          even: true,
           opacity: 1,
-          jitter: 0.015,
+          jitter: 0.01,
+          size: 1.12,
           pos: [Math.sin(a) * (R - 0.1), H - 0.005, Math.cos(a) * (R - 0.1)],
           rot: [0, i * 23, 0],
           flat: 0.3,
@@ -1302,12 +1329,18 @@ export const RECIPES = {
         const edge = 0.1 + 0.11 * f * f;
         return r - edge;
       };
-      k.add(k.cone(R0, R1, H, { caps: "bottom" }), {
+      k.add(evenCylinder(R0, R1, H, "bottom"), {
+        even: true,
+        opacity: 1,
+        jitter: 0.01,
         pos: [0, H / 2, 0],
         flat: 0.2,
+        weight: 1.4,
+        interior: 0.06,
+        core: (c) => (c.p[1] < 0.06 ? "#c9c1b4" : null),
         color: (c) => {
           const y = c.lp[1] + H / 2;
-          if (c.s.cap) return "#c9c1b4";
+          if (c.s.cap) return lit(c, "#d8d0c2", 0.8, 0.2);
           const u = (c.u + 1) % 1;
           const r = R0 + (R1 - R0) * (y / H);
           let du = u - badgeA;
@@ -1315,19 +1348,19 @@ export const RECIPES = {
           const sd = starDist(du * TAU * r, y - 0.55);
           if (sd < 0) return keep(lit(c, sd > -0.02 ? "#f08a1c" : "#ffd23f", 0.82, 0.3));
           const stripe = Math.floor(u * 16) % 2;
-          const edge = Math.abs(((u * 16) % 1) - 0.5) > 0.47;
+          // Smaller splats along each stripe's edge keep it crisp.
+          const edge = Math.abs(((u * 16) % 1) - 0.5) > 0.43;
           let col = stripe ? "#d9252f" : "#fbf6ec";
-          if (edge) col = shade(col, 0.9);
           if (y > H - 0.05) col = "#fbf6ec";
-          return lit(
-            c,
-            shade(col, 0.95 + 0.05 * c.noise(c.p[0] * 12, y * 3, c.p[2] * 12)),
-            0.72,
-            0.4,
-          );
+          // Broad, soft paper shading (fine noise reads as grain).
+          col = lit(c, shade(col, 0.97 + 0.03 * c.noise(c.p[0] * 3, y * 2, c.p[2] * 3)), 0.72, 0.4); // prettier-ignore
+          return edge && y <= H - 0.05 ? { c: col, size: 0.8 } : { c: col, size: 1.1 };
         },
       });
-      k.add(k.torus(R1, 0.02), {
+      k.add(evenTorus(k, R1, 0.02, 120), {
+        even: true,
+        opacity: 1,
+        jitter: 0.01,
         pos: [0, H, 0],
         flat: 0.3,
         weight: 2,
@@ -1345,6 +1378,8 @@ export const RECIPES = {
           { grid: 40 },
         ),
         {
+          even: true,
+          opacity: 1,
           flat: 0.4,
           size: 1.3,
           color: (c) =>
