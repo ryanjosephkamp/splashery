@@ -1459,6 +1459,10 @@ export const RECIPES = {
     ],
     controls: [{ key: "poke", label: "Poke", type: "pulse", ease: 2.4 }],
     action: { key: "poke", label: "Poke" },
+    // Hands-on (lane Physics): pull it and it stretches toward the finger;
+    // let go and it springs back and wobbles on its plate.
+    grab: { radius: 0.5, max: 0.7, wobble: "poke" },
+    pickAlpha: 0.1, // a press finds the see-through jelly, not the plate behind it
     drive(t, c, out, info) {
       const w = jiggle(t, info.time, c.poke);
       out.parts.jelly = {
