@@ -270,6 +270,8 @@ test.describe("the Song landscape, r3", () => {
       // Nothing is saved or sent while it records: no download, no request.
       const requests = [];
       page.on("request", (r) => requests.push(r.url()));
+      // (The button is disabled until the toy has rebuilt for the microphone.)
+      await page.waitForFunction(() => !document.getElementById("live-mic").disabled, null, { timeout: 60_000 }); // prettier-ignore
       await tap(page, "#live-mic"); // stop
       await until(page, async (m) => (await import(m)).recordState().onRecording, song, 60_000);
       const st = await page.evaluate(async (m) => (await import(m)).recordState(), song);
