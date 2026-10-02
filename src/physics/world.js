@@ -218,7 +218,7 @@ function inertiaOf(solid, m) {
   return [m * 0.4, m * 0.4, m * 0.4];
 }
 
-function boundOf(b) {
+export function boundOf(b) {
   let r = 0;
   for (const p of b.points) r = Math.max(r, v3.len(p) + b.radius);
   const s = b.solid;
@@ -405,6 +405,11 @@ export class World {
     this.hits = [];
     this.minHit = o.minHit ?? 0.5;
     this.pairs = o.pairs ?? null; // (a, b) => false to let two bodies pass
+    // How far one contact may push per substep, and the top speed: pieces
+    // that start out overlapping (a heap built for looks) ease apart
+    // instead of flying off.
+    this.maxPush = o.maxPush ?? Infinity;
+    this.maxSpeed = o.maxSpeed ?? Infinity;
   }
 
   add(body) {
@@ -556,6 +561,11 @@ export class World {
       for (let i = 0; i < 3; i++) p.vel[i] = (p.pos[i] - p.prev[i]) / h;
     }
     for (const c of contacts) this.contactVelocity(c, h);
+    if (this.maxSpeed < Infinity)
+      for (const b of this.bodies) {
+        const sp = v3.len(b.vel);
+        if (sp > this.maxSpeed) b.vel = v3.scale(b.vel, this.maxSpeed / sp);
+      }
     for (const j of this.joints) if (j.damping) this.jointDamping(j, h);
   }
 
@@ -659,22 +669,33 @@ export class World {
         const b = bodies[k];
         if (a.fixed && b.fixed) continue;
         if (this.pairs && !this.pairs(a, b)) continue;
-        const d = v3.len(v3.sub(a.pos, b.pos));
-        if (d > a.bound + b.bound + 1e-6) continue;
-        if (a.solid?.type === "sphere" && b.solid?.type === "sphere") {
-          this.sphereContact(out, a, b);
-          continue;
-        }
-        // A round piece meets another solid at its deepest point (its own
-        // sample points would make it balance on a point, like a pin).
-        if (rolls(a) && b.solid) this.roundContact(out, a, b);
-        else if (b.solid) for (const lp of a.points) this.pointContact(out, a, lp, a.radius, b);
-        if (rolls(b) && a.solid) {
-          if (!rolls(a)) this.roundContact(out, b, a);
-        } else if (a.solid) for (const lp of b.points) this.pointContact(out, b, lp, b.radius, a);
+        this.pairContacts(out, a, b);
       }
     }
     return out;
+  }
+
+  // The contacts between two bodies (pushed onto out).
+  pairContacts(out, a, b) {
+    const d = v3.len(v3.sub(a.pos, b.pos));
+    if (d > a.bound + b.bound + 1e-6) return out;
+    if (a.solid?.type === "sphere" && b.solid?.type === "sphere") {
+      this.sphereContact(out, a, b);
+      return out;
+    }
+    // A round piece meets another solid at its deepest point (its own
+    // sample points would make it balance on a point, like a pin).
+    if (rolls(a) && b.solid) this.roundContact(out, a, b);
+    else if (b.solid) for (const lp of a.points) this.pointContact(out, a, lp, a.radius, b);
+    if (rolls(b) && a.solid) {
+      if (!rolls(a)) this.roundContact(out, b, a);
+    } else if (a.solid) for (const lp of b.points) this.pointContact(out, b, lp, b.radius, a);
+    return out;
+  }
+
+  // Whether two bodies overlap now.
+  touching(a, b) {
+    return this.pairContacts([], a, b).length > 0;
   }
 
   planeContact(out, a, lp, rad, pl) {
@@ -822,7 +843,7 @@ export class World {
       pb = v3.add(b.pos, rb);
     } else pb = c.lb;
     // Depth now, along the contact normal (a's point ball against b).
-    const depth = v3.dot(v3.sub(pb, pa), n) + c.rad;
+    const depth = Math.min(this.maxPush, v3.dot(v3.sub(pb, pa), n) + c.rad);
     c.lambda = 0;
     if (depth <= 0) return null;
     const wa = a.weight(ra, n);
