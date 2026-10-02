@@ -144,6 +144,101 @@ their files alone and keep your engine changes small and additive. The laptop is
   profile (the first clip showed a test sphere at the lowest profile). The scan is not in the
   repository; `UI5_MODEL_DIR=<folder> node tools/ui5-clip.mjs <out> model-real-390` records it.
 
+## Model sizes: what people will open, and what we take (October 2, 2026)
+
+The owner asked how big a relatively high-quality 3D model typically is, and whether our limit is
+still too strict. Researched October 2, 2026; no code changed.
+
+### Typical sizes
+
+| Source (what was measured)                                       | Median                                                   | Middle half | 90% under | Largest  |
+| ---------------------------------------------------------------- | -------------------------------------------------------- | ----------- | --------- | -------- |
+| Sketchfab, 120 most liked downloadable models (GLB download)     | 30 MB                                                    | 10–74 MB    | 118 MB    | 217 MB   |
+| Sketchfab, 120 recent staff picks (GLB)                          | 50 MB                                                    | 16–98 MB    | 196 MB    | 619 MB   |
+| Sketchfab, 120 most liked scans (cultural heritage, GLB)         | 64 MB                                                    | 39–98 MB    | 163 MB    | 303 MB   |
+| Sketchfab, 120 most recent uploads (GLB)                         | 8 MB                                                     | 1–23 MB     | 49 MB     | 152 MB   |
+| Smithsonian, its 172 CC0 models on Sketchfab (web versions, GLB) | 15 MB                                                    | 13–23 MB    | 32 MB     | 68 MB    |
+| Poly Haven, all 520 models (glTF with 4K textures)               | 25 MB                                                    | n/a         | 53 MB     | 1,060 MB |
+| Poly Haven, 331 models with 8K textures                          | 92 MB                                                    | n/a         | 163 MB    | 1,295 MB |
+| NASA 3D Resources (spacecraft, GLB)                              | 0.7–2.5 MB                                               | n/a         | n/a       | n/a      |
+| STL (any source)                                                 | 50 bytes per triangle: 100k triangles = 5 MB, 1M = 50 MB |             |           |          |
+
+- **Textures are most of the file.** In the Sketchfab sample a median 71% of each GLB is textures
+  (76% for files over 40 MB); half of the high-quality ones use 4K textures. The mesh alone is
+  usually small: median 4.6 MB (90% under 45 MB). Poly Haven's meshes have a median of 0.3 MB, and
+  the files grow only with texture resolution.
+- **So "relatively high quality" means about 20–100 MB with textures, and 1–45 MB without.** Scans
+  sit at the top: a median of 460,000 triangles and 64 MB. A few go past 200 MB, almost all because
+  of 8K textures.
+- **Formats.** Sketchfab offers GLB and glTF for every downloadable model, plus the original
+  ("source"; often FBX, which we don't read). Poly Haven offers glTF (multi-file), and NASA offers
+  GLB and STL. STL has no color, and OBJ is text, so it is a few times bigger than the same mesh as
+  a GLB. The Smithsonian's own site (3d.si.edu) also has "full resolution" downloads that can run to
+  gigabytes, but it refused automated requests, so I could not measure them.
+
+Sources: the Sketchfab Data API (`api.sketchfab.com/v3/models`, each model's `archives` sizes,
+triangle counts and texture resolution); the Poly Haven API (`api.polyhaven.com/files/<id>`, every
+file in each glTF download); NASA 3D Resources model pages (sizes listed per file; the old
+nasa3d.arc.nasa.gov pages now redirect to science.nasa.gov/3d-resources, which lists formats but not
+sizes); the Library of Congress format description of STL (80-byte header, 4-byte count, 50 bytes
+per triangle); a 3D printing service caps uploads of STL and OBJ files at 100 MB (3DPrint.com, "How
+to reduce the size of your STL file").
+
+### Our limits, against those sizes
+
+- **Today (after this lane):**
+  - A computer opens 600 MB of files and 40 million triangles (300 MB and 15 million where Chrome
+    reports 4 GB of memory or less).
+  - A phone opens 250 MB and 12 million triangles (120 MB and 6 million at 3 GB or less).
+  - Meshes over 1.2 million triangles (400,000 on a phone) are simplified on the device.
+- **Coverage:** that takes every model sampled on a computer except one Sketchfab staff pick (619
+  MB) and three Poly Haven 8K models. On a phone it takes all but about 3% of the high-quality
+  samples (8 staff picks, 1 scan and 15 Poly Haven 8K models are over 250 MB). **The limit is not
+  too strict for typical models.**
+- **What fails above it:** memory, not time.
+  - In Node, a 440 MB, 20-million-triangle GLB peaked at about 1.2 GB and took about 6 seconds to
+    parse and simplify; time grows roughly with the triangle count.
+  - The bigger risk is textures. Each 8K texture decodes to 268 MB of pixels (8192 × 8192 × 4)
+    before we shrink it to 2,048 px.
+  - We also read every file that was picked, even textures we never use (normal, roughness and metal
+    maps). A Poly Haven 8K download is two-thirds such maps.
+  - A phone tab (iOS Safari especially) runs out of memory well before a laptop does. Until it's
+    tested on a real phone, 250 MB stays the phone's limit.
+
+### Ways to take bigger files, in order
+
+1. **Read only what the model uses, without a full copy.** Read a GLB's small JSON header first
+   (`File.slice`), then only the parts it points at: positions, indices, UVs and the base-color
+   texture. Skip unused files a person picked along with it (the normal and roughness maps), and
+   count only the files used against the limit.
+   - Cost: none for the person.
+   - Risk: low (unchanged parsing, just less read).
+   - Work: about a day.
+   - Effect: a Poly Haven 8K download drops from 151 MB read to about 50 MB, and memory falls about
+     as much.
+2. **Downscale textures as they load.** Decode the base-color image straight at 2,048 px
+   (`createImageBitmap` with `resizeWidth`/`resizeHeight`) instead of full size and then shrinking.
+   - Cost: none visible (we already use 2,048 px at most).
+   - Risk: low. Browsers differ in how much memory the decode saves, so measure on a phone.
+   - Work: hours.
+3. **Decimate the mesh on load.** Already done this lane (vertex clustering with baked colors). A
+   higher-quality simplifier (quadric edge collapse, for example meshoptimizer's, MIT, about 50 KB
+   of WebAssembly) would keep shapes truer at the same triangle count.
+   - Cost: a new vendored library (needs the owner's OK).
+   - Risk: low.
+   - Work: about a day.
+   - Worth it only if simplified models look wrong.
+4. **Read Draco and meshopt compression.** Today those files get a clear message. Decoders are Draco
+   (Google, Apache 2.0, about 300 KB of WebAssembly, loaded only for such files) and the meshopt
+   decoder (MIT, a few KB). This opens more files rather than bigger ones.
+   - Cost: new vendored libraries (the owner's OK).
+   - Risk: medium (decoder memory on phones).
+   - Work: one to two days.
+
+**Recommendation:** keep the limits. Do 1 and 2 next: small, no new libraries, and they cut memory
+most for the files people actually have. Then test a 200 MB model on a real phone before raising the
+phone's limit. Leave 3 and 4 until a model needs them.
+
 ## Notes
 
 - **Gallery**: a round grid button in the top row, left of the flag (G on a keyboard). On a computer
