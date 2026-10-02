@@ -410,7 +410,7 @@ export const RIGS = {
   strawberry: {
     // A solid core just inside, so the thin underside reads as fruit (lane
     // Sharpness B).
-    addon: { count: 9000, build: (k) => fruitCore(k, [-0.17, 0, 0.02], [0.58, 0.64, 0.72], "#8e1b22") }, // prettier-ignore
+    addon: { count: 9000, build: (k) => fruitCore(k, [-0.2, 0, 0], [0.46, 0.52, 0.6], "#8e1b22") }, // prettier-ignore
     parts: [],
     keys: [
       { color: "#c9b25a", tol: 0.2 },

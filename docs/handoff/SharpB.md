@@ -87,15 +87,24 @@ Model: Opus 5.5 (claude-opus-5-5), default effort.
 
 - October 2, 2026: draft PR #185. Sharper (only the look; shape, tap, sound and budget kept, every
   changed pack within budget in `node tools/check-packs.mjs`): the birthday cake, popcorn bucket,
-  pancakes (plate and stack only), croissant, coffee, orange, kiwi, pizza, teddy bear, yo-yo, coral,
-  Menger sponge, gyroid, Platonic solids, surface plotter, Lorenz attractor, CNN (all three views)
-  and the gaussian-splatting Sorting view's camera, and the photo album's three covers.
-- Closed bases so far: the cake stand's foot, the popcorn bucket, the coral's rock, the succulent's
-  pot, the bonsai's pot, the kelp's sea floor, the waterfall's cliff and pool, and (rig add-ons in
-  `src/rigs.js`) the scanned strawberry, raspberry, blackberry and blueberry (a solid core just
-  inside), the tomatoes' plate, the basket's floor, the tin can's lid and the cactus's stand.
-- Still to do: post the cards by shelf, finish the from-below audit of every toy
-  (docs/audits/bases-2026-10.md), and the jelly, bricks and sushi after Physics (#184).
+  pancakes (plate and stack only), croissant, coffee, orange, kiwi, pizza (and its cheese strings
+  subtler), teddy bear, yo-yo, coral, Menger sponge, gyroid, Platonic solids (a small change),
+  surface plotter, Lorenz attractor, CNN (all three views), the gaussian-splatting Sorting view's
+  camera, and the photo album's three covers.
+- Bases audit done: every toy (341, labs included) rendered from below;
+  [docs/audits/bases-2026-10.md](../audits/bases-2026-10.md) lists each with what was open and what
+  was done. Closed: the cactus's stand, the scanned strawberry, raspberry, blackberry and blueberry
+  (a solid core just inside), the tomatoes' plate, the basket's floor, the tin can's lid (rig
+  add-ons in `src/rigs.js`), the coral, succulent, bonsai, kelp, waterfall, snow globe, popcorn
+  bucket and cake stand from his list, and, found in the audit, the cupcake's liner, the robot's
+  soles, Newton's cradle's base, the toy piano's plinth and gradient descent's block.
+- Cards on Effect review page 2, lane SharpB, by shelf: Food (`shb-<toy>` before/after and
+  `shb-<toy>-tap`, 8 toys), Toys and nature (teddy bear, yo-yo, coral), Math (Menger sponge, gyroid,
+  Platonic solids, surface plotter, Lorenz), AI and the photo album (CNN, gaussian-splatting
+  Sorting, the album's leather, leather close up, linen and scrapbook, and its tap) and Closed bases
+  (`shb-base-<toy>`, 20 toys, from below).
+- Still to do: jelly, bricks and sushi (sharper) and the pebbles' base, after Physics (#184); the
+  quartz cluster's and the tornado's bases after Sharpness A (#172).
 
 ## Notes
 
@@ -123,6 +132,15 @@ Model: Opus 5.5 (claude-opus-5-5), default effort.
   speck measure and the before/after pair joiner).
 
 ## Known issues
+
+- The strawberry scan has two small dark spots underneath that are the capture's own splats; the
+  core can't cover them without poking through the skin elsewhere.
+- The tomatoes' plate keeps faint pink stains from below (reflections baked into the capture just
+  above the new floor).
+- The gyroid shows a few specks at the deepest breath, where the surface stretches thin (as before).
+- The Platonic solids changed little: the faint rings in the faces come from the even fan layout,
+  and nudging it made the rims speckle, so that was left out.
+- The pancakes' syrup is lane Fix7's (unchanged here).
 
 ## For the Operator
 
