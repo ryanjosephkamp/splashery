@@ -382,8 +382,8 @@ Nothing photoreal found.
   domain (credit requested; photos on USGS pages may be copyrighted). It offers 1 m seamless DEMs
   and lidar point clouds, no login.
 - **Copernicus DEM** (GLO-30 and GLO-90 on the public AWS buckets): "available on a free basis for
-  the general public under the terms and conditions of the Licence". The license text could not be
-  read (503), so the attribution wording is **unverified**.
+  the general public under the terms and conditions of the Copernicus license". The license text
+  could not be read (503), so the attribution wording is **unverified**.
 - **NASA**: its media guidelines say 3D models and textures "generally are not subject to copyright
   in the United States"; third-party material and NASA's logos are excluded. SRTM and Earthdata
   policies could not be read (403).
@@ -457,9 +457,9 @@ radioactive or too rare to capture.
   Science Museum Group's brain model (CC0), animal skulls from Dundee (CC0) and the Smithsonian's
   fossil dolphin skull (CC0), a CC BY elephant skull (Dundee), several CC BY human skull scans on
   Sketchfab by individual uploaders (real scan status unchecked; a fetal skull is also there and
-  best skipped), and the Open3DModel "Coloured skull base" (CC BY-SA 4.0, viewer only, no download
-  confirmed). On SuperSplat (CC BY): the Triceratops skull, a rabbit skull, a chicken skeleton and
-  the synthetic brain tractography.
+  best skipped), and the Open3DModel skull-base model with English labels (CC BY-SA 4.0, viewer
+  only, no download confirmed). On SuperSplat (CC BY): the Triceratops skull, a rabbit skull, a
+  chicken skeleton and the synthetic brain tractography.
 - **Private only**: AnatomyTOOL skull items under CC BY-NC-SA (read in a search result only), the
   SuperSplat "Skull Fog" (CC BY-NC).
 - **No good capture found**: photoreal organs or skin specimens under CC0 or CC BY (a heart, a
