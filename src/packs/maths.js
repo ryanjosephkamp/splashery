@@ -1808,8 +1808,11 @@ export const RECIPES = {
       // Slightly large splats, so each face covers the other (the far face
       // showed through the gaps as specks of the other colour).
       k.add(gyroidShape(scale, o.clip), {
-        flat: 0.1,
-        size: 1.3,
+        even: true,
+        opacity: 1,
+        jitter: 0.01,
+        flat: 0.08,
+        size: 1.5,
         to: (c) => {
           const q = gyroidLevel(c.s.at, 0.85, scale, o.clip);
           return add(q.p, mul(q.n, c.s.side * 0.014));
@@ -1949,20 +1952,17 @@ export const RECIPES = {
       faces.forEach((f, i) => {
         const part = k.part(o.solid + groups[i], { pivot: [0, 0, 0] });
         const tint = ramp(pal.slice(1), (i * 0.618 + 0.1) % 1);
-        // (Nudged a little off the even fan, whose rings showed as a moiré,
-        // with smaller splats along the rim's lines so they stay crisp.)
-        k.add(nudgedEven(polyShape(f.pts), 0.004), {
+        k.add(polyShape(f.pts), {
           even: true,
           opacity: 1,
           jitter: 0.01,
           part,
           flat: 0.12,
-          weight: 1.15,
+          weight: 1.2,
           color: (c) => {
             const col = lit(tint, f.n, { amb: 0.6, dif: 0.5, spec: 0.4, pow: 20 });
-            const e = c.s.edge;
-            if (e < rim) return keep(mix(col, "#fffaf0", 0.85), e > rim * 0.75 || e < rim * 0.25 ? 0.7 : 0.9); // prettier-ignore
-            if (e < rim * 2) return { c: shade(col, 0.88), size: e < rim * 1.25 ? 0.7 : 1 };
+            if (c.s.edge < rim) return keep(mix(col, "#fffaf0", 0.85));
+            if (c.s.edge < rim * 2) return shade(col, 0.88);
             return col;
           },
         });
@@ -3040,15 +3040,19 @@ Object.assign(RECIPES, {
       const onLine = (U, V) => {
         const fu = Math.abs(((((U / gridStep[0] - gridOff[0]) % 1) + 1) % 1) - 0.5);
         const fv = Math.abs(((((V / gridStep[1] - gridOff[1]) % 1) + 1) % 1) - 0.5);
-        return Math.max(fu, fv) > 0.47;
+        return Math.max(fu, fv) > 0.475;
       };
       // Coloured by height, with a fine mesh of darker lines, two-sided. A
       // point off the plot is marked `bad` (a hole).
       const look = (c) => {
         if (c.s.p.bad) return null;
         let col = ramp(SURF_RAMP, (c.p[1] + SURF_H) / (2 * SURF_H));
-        if (onLine(c.u, c.v)) col = shade(col, 0.62);
-        return lit(col, c.n, { amb: 0.66, dif: 0.42, spec: 0.22, two: true });
+        // The mesh lines in smaller splats, so they read as thin, crisp lines
+        // rather than a dashed blur.
+        const line = onLine(c.u, c.v);
+        if (line) col = shade(col, 0.66);
+        const out = lit(col, c.n, { amb: 0.66, dif: 0.42, spec: 0.22, two: true });
+        return line ? { c: out, size: 0.6 } : out;
       };
       // Normals from a grid of heights (cheaper than asking the equation
       // twice more for every splat).
@@ -3104,8 +3108,8 @@ Object.assign(RECIPES, {
       }
       // A dark base plate under it, and the a slider in front.
       const baseY = -SURF_H - 0.12;
-      // (Evenly laid and as dense as the rest, with smaller splats along
-      // its border's edge, so the plate and its rim read crisp.)
+      // (Evenly laid and as dense as the rest, so the plate and its rim
+      // read crisp.)
       k.add(evenBox(2.2, 0.05, 2.2), {
         pos: [0, baseY, 0],
         weight: 1.1,
@@ -3116,7 +3120,7 @@ Object.assign(RECIPES, {
         color: (c) => {
           const edge = Math.min(1.1 - Math.abs(c.p[0]), 1.1 - Math.abs(c.p[2]));
           const col = lit(edge < 0.06 ? "#4a5874" : "#1c2536", c.n, { amb: 0.75, dif: 0.3, spec: 0 }); // prettier-ignore
-          return Math.abs(edge - 0.06) < 0.012 || edge < 0.012 ? { c: col, size: 0.7 } : col;
+          return col;
         },
       });
       if (g.usesA) plotSlider(k, [0.12, baseY - 0.05, 1.22]);

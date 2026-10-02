@@ -16,6 +16,7 @@
 
 import { quatAxisAngle, quatMul, quatFromTo, quatRotate, mix, shade } from "./kit.js";
 import { inked } from "./font.js";
+import { evenBox, evenDisc, evenEllipsoid } from "./packs/even.js";
 
 const TAU = Math.PI * 2;
 const clamp = (x, a, b) => Math.min(b, Math.max(a, x));
@@ -85,6 +86,48 @@ const FLY = (() => {
     B: leg([0.66, -0.13, -0.24], [0.8, -0.42, -0.4], [0.92, -0.7, -0.78], [0.88, -0.03, -0.3]),
   };
 })();
+
+// ---- Closed bases (lane Sharpness B) ----------------------------------------------------
+// Some captures are thin or open underneath, so from below the far side or
+// the inside shows through. These add-on pieces close them with hard edges
+// (never by smearing the scan): a solid core just inside a fruit, the same
+// color as its flesh, which only shows where the skin is thin; or a
+// kit-built underside (a plate's foot, a basket's woven floor, a can's
+// lid). All in world coordinates, measured with tools/rig-map.mjs.
+
+// The light from the upper left (as the kit toys fake it) on normal n.
+const BASE_LIGHT = [-0.45, 0.8, 0.55];
+const baseLit = (col, n, amb = 0.72, dif = 0.3) =>
+  shade(col, amb + dif * Math.max(0, n[0] * BASE_LIGHT[0] + n[1] * BASE_LIGHT[1] + n[2] * BASE_LIGHT[2])); // prettier-ignore
+
+// A solid core inside a fruit: an even ellipsoid of opaque splats.
+function fruitCore(k, at, r, color, part = 0) {
+  k.add(evenEllipsoid(k, r[0], r[1], r[2], 64), {
+    even: true,
+    opacity: 1,
+    jitter: 0.02,
+    pos: at,
+    part,
+    flat: 0.5,
+    size: 1.2,
+    pattern: false,
+    color: (c) => baseLit(color, c.n, 0.8, 0.2),
+  });
+}
+
+// A flat, closed underside: a disc facing down at height y, round (cx, cz).
+function underDisc(k, [cx, y, cz], r, color, opts = {}) {
+  k.add(evenDisc(k, r, 0, opts.grid ?? 64), {
+    even: true,
+    opacity: 1,
+    jitter: 0.01,
+    pos: [cx, y, cz],
+    rot: [180, 0, 0],
+    flat: 0.2,
+    pattern: false,
+    color: opts.color || (() => color),
+  });
+}
 
 // The tomatoes on their plate: name, x, z, radius (from a top view).
 const PLATE_Y = -0.17;
@@ -326,7 +369,7 @@ export const RIGS = {
     controls: [pulse("bloom", "Bloom", 3.4)],
     action: { key: "bloom", label: "Bloom" },
     addon: {
-      count: 9000,
+      count: 13000,
       build(k) {
         for (let i = 0; i < 9; i++) {
           const a = (i / 9) * TAU + 0.3;
@@ -336,6 +379,18 @@ export const RIGS = {
           const part = k.part(`f${i}`, { pivot: at });
           flower(k, at, [at[0], y - 0.68, at[2]], part, { r: 0.06 + 0.012 * (i % 3) });
         }
+        // The stand's underside, closed (lane Sharpness B): the capture's
+        // square stand is see-through from below.
+        k.add(evenBox(0.7, 0.012, 0.7), {
+          even: true,
+          opacity: 1,
+          jitter: 0.01,
+          pos: [-0.02, -0.935, 0],
+          rot: [0, -29, 0],
+          flat: 0.2,
+          pattern: false,
+          color: (c) => (c.n[1] < -0.5 ? "#8f8b85" : "#b9b5ae"),
+        });
       },
     },
     drive(t, c, out) {
@@ -353,6 +408,9 @@ export const RIGS = {
 
   // Seeds pop out and sparkle, then settle; the berry blushes redder.
   strawberry: {
+    // A solid core just inside, so the thin underside reads as fruit (lane
+    // Sharpness B).
+    addon: { count: 9000, build: (k) => fruitCore(k, [-0.17, 0, 0.02], [0.58, 0.64, 0.72], "#8e1b22") }, // prettier-ignore
     parts: [],
     keys: [
       { color: "#c9b25a", tol: 0.2 },
@@ -636,6 +694,9 @@ export const RIGS = {
   // Drupelets break off one after another, tumble down to the table and
   // hop back into place.
   raspberry: {
+    // A solid core just inside (lane Sharpness B), hidden while the
+    // drupelets fall away.
+    addon: { count: 9000, build: (k) => fruitCore(k, [0.02, -0.01, -0.02], [0.54, 0.54, 0.72], "#7a1420", k.part("core")) }, // prettier-ignore
     parts: [],
     fx: [
       {
@@ -654,12 +715,15 @@ export const RIGS = {
       // Each piece falls over about 0.5 s of its own; they come back together.
       const phase = e < 2.2 ? band(e, 0.02, 1.5) : 1 - ease(band(e, 2.2, 3.1));
       out.fx.drop = { move: 1.6, phase };
+      out.addon = { parts: { core: { visible: phase > 0.01 ? 0 : 1 } } };
     },
   },
 
   // The glossy drupelets burst off all round, bounce on the table, glint,
   // and spring back.
   blackberry: {
+    // A solid core just inside (lane Sharpness B), hidden while it bursts.
+    addon: { count: 9000, build: (k) => fruitCore(k, [-0.01, -0.03, 0], [0.46, 0.52, 0.72], "#17141c", k.part("core")) }, // prettier-ignore
     parts: [],
     fx: [
       {
@@ -682,6 +746,7 @@ export const RIGS = {
       const e = since(c, "burst", 2.8);
       if (e < 0) return;
       const phase = e < 1.7 ? band(e, 0.02, 0.9) : 1 - ease(band(e, 1.7, 2.6));
+      out.addon = { parts: { core: { visible: phase > 0.01 ? 0 : 1 } } };
       // A small bounce as the pieces land.
       out.fx.burst = { move: 1.2 * (1 - 0.12 * Math.sin(Math.PI * band(e, 0.9, 1.3))), phase };
       out.fx.glint = { color: 2.5 * env(e, 0.8, 1.0, 1.4, 1.8) };
@@ -691,6 +756,8 @@ export const RIGS = {
   // Like the grape: the dark skin peels back towards you in five strips to
   // show the pale green flesh, then closes.
   blueberry: {
+    // A solid core just inside (lane Sharpness B), hidden while it peels.
+    addon: { count: 9000, build: (k) => fruitCore(k, [-0.05, -0.1, 0], [0.78, 0.64, 0.76], "#1f2a3d", k.part("core")) }, // prettier-ignore
     parts: [],
     fx: [
       {
@@ -717,6 +784,7 @@ export const RIGS = {
       const open = env(e, 0.05, 0.9, 2.2, 3.0);
       out.fx.flesh = { color: 0.8 * open };
       out.fx.peel = { move: 1.35 * open, color: 0.9 * open };
+      out.addon = { parts: { core: { visible: open > 0.01 ? 0 : 1 } } };
     },
   },
 
@@ -782,6 +850,25 @@ export const RIGS = {
   // settling with a wobble. Hops stay low and rolls small, so no tomato
   // shows the unscanned side where it touched its neighbours.
   tomatoes: {
+    // The plate's underside: a white glazed foot and floor, so the plate
+    // reads solid from below (lane Sharpness B).
+    addon: {
+      count: 12000,
+      build(k) {
+        k.add(
+          k.param(
+            (u, v) => {
+              const a = u * TAU;
+              const r = 0.93 - 0.33 * v;
+              return [-0.03 + Math.sin(a) * r, -0.09 - 0.1 * v, 0.02 + Math.cos(a) * r];
+            },
+            { grid: 64, normal: () => [0, -1, 0] },
+          ),
+          { even: true, opacity: 1, jitter: 0.01, flat: 0.2, pattern: false, color: () => "#d9d7d1" }, // prettier-ignore
+        );
+        underDisc(k, [-0.03, -0.19, 0.02], 0.6, "#cfccc4");
+      },
+    },
     parts: TOMATOES.map(([name, x, z, r]) => ({
       name,
       pivot: [x, PLATE_Y + r, z],
@@ -844,6 +931,25 @@ export const RIGS = {
   // back into place. The blurry fringe the capture left under the basket
   // is hidden.
   basket: {
+    // A woven floor (lane Sharpness B): the capture is open underneath.
+    addon: {
+      count: 12000,
+      build(k) {
+        underDisc(k, [0.03, -0.17, -0.02], 0.8, "#8a6338", {
+          color: (c) => {
+            const x = c.p[0] - 0.03;
+            const z = c.p[2] + 0.02;
+            const r = Math.hypot(x, z);
+            const a = Math.atan2(z, x);
+            // Coiled rings of cane, stitched across by spokes.
+            const ring = 0.5 + 0.5 * Math.cos(r * TAU * 16);
+            const spoke = Math.abs(Math.sin(a * 12 + r * 4)) > 0.93 ? 1 : 0;
+            const col = mix("#7a5530", "#a98252", ring * 0.8);
+            return shade(spoke ? mix(col, "#5a3c1e", 0.6) : col, 0.78);
+          },
+        });
+      },
+    },
     parts: [
       {
         name: "fringe",
@@ -1701,6 +1807,21 @@ export const RIGS = {
   // faster and faster as it leans less (like a coin settling), and drops back
   // flat with a clank.
   "tin-can-real": {
+    // The can's bottom lid (lane Sharpness B): the capture shows through it.
+    // It rides on the body, so it rocks and rolls with the can.
+    addon: {
+      count: 9000,
+      build(k) {
+        underDisc(k, [-0.04, -0.905, -0.02], 0.57, "#cfc8a0", {
+          color: (c) => {
+            const r = Math.hypot(c.p[0] + 0.04, c.p[2] + 0.02);
+            // Pressed rings and a rolled rim, softly lit.
+            const ridge = r > 0.53 ? 0.82 : r > 0.47 ? 1 : 0.92 + 0.06 * Math.cos(r * TAU * 7);
+            return shade("#cbc49c", 0.8 * ridge);
+          },
+        });
+      },
+    },
     parts: [],
     controls: [pulse("knock", "Knock", 2.6)],
     action: { key: "knock", label: "Knock" },

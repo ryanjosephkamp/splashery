@@ -3,7 +3,7 @@
 // now one plain test toy, the Picture lab (labs only); the toy lanes that
 // follow add the book, the photo album, the frame and the screens.
 
-import { mix, shade } from "../kit.js";
+import { mix, shade, smoothstep, clamp } from "../kit.js";
 
 // Each toy's tap state (one toy is shown at a time).
 const LAB = { tapN: 0, focus: false };
@@ -959,7 +959,7 @@ function buildSideBound(k, st, o, extra) {
     const zp = (c0 - T) / 2;
     const cp = k.part("cover", { pivot: [0, 0, zp], axis: [0, -1, 0] });
     boxFaces(k, bx, by, coverZ, {
-      front: { share: 0.1, color: cloth([0, 0, 1]) },
+      front: { share: extra.coverShare ?? 0.1, color: cloth([0, 0, 1]) },
       back: { share: 0.05, color: () => bkLit(inside, [0, 0, 1]) },
       right: { share: 0.006, color: cloth([1, 0, 0]) },
       top: { share: 0.006, color: cloth([0, 1, 0]) },
@@ -1225,6 +1225,30 @@ function bkNoise(x, y) {
   return a + (b - a) * sy;
 }
 
+// A cell pattern (Worley noise): the distances to the nearest and the next
+// nearest of a jittered grid of points, and the offset from the nearest.
+function bkCells(x, y) {
+  const xi = Math.floor(x);
+  const yi = Math.floor(y);
+  let d1 = 9;
+  let d2 = 9;
+  let dx = 0;
+  let dy = 0;
+  for (let j = -1; j <= 1; j++)
+    for (let i = -1; i <= 1; i++) {
+      const cx = xi + i + 0.15 + 0.7 * bkHash(xi + i, yi + j);
+      const cy = yi + j + 0.15 + 0.7 * bkHash(xi + i + 17.3, yi + j + 5.1);
+      const d = Math.hypot(x - cx, y - cy);
+      if (d < d1) {
+        d2 = d1;
+        d1 = d;
+        dx = x - cx;
+        dy = y - cy;
+      } else if (d < d2) d2 = d;
+    }
+  return { d1, d2, dx, dy };
+}
+
 // The cover's look: leather, woven linen, or kraft card. Every texture is
 // at least three splats across (a finer one reads as speckle on a phone);
 // the leather's stitches and groove and the scrapbook's label are their own
@@ -1235,36 +1259,45 @@ function albumCloth(style, bx, by) {
     let col = look.cover;
     const face = n[2] > 0.5;
     if (style === "leather") {
-      // Pebbled grain (little rounded bumps, lit from the upper left), a
-      // broad mottle, and on the front a soft sheen and darker, worn edges.
-      // (Two layers turned apart, so the noise's grid doesn't show.)
-      const pebble = (x, y) =>
-        0.5 * bkNoise(26 * (0.8 * x + 0.6 * y), 26 * (0.8 * y - 0.6 * x)) +
-        0.5 * bkNoise(29 * (0.28 * x - 0.96 * y) + 5, 29 * (0.28 * y + 0.96 * x) + 9);
-      const g = pebble(p[0], p[1]);
-      const gl = pebble(p[0] - 0.012, p[1] + 0.012);
+      // Pebbled grain: a cell pattern of rounded pebbles (each a few splats
+      // across), each lit from the upper left like a little dome, with
+      // crisp, darker creases between them (soft value noise read as a
+      // blur), a broad mottle, and on the front a soft sheen and darker,
+      // worn edges.
+      const { d1, d2, dx, dy } = bkCells(p[0] * 20 + 0.3 * p[1], p[1] * 20 - 0.3 * p[0]);
+      const crease = 1 - smoothstep(0.04, 0.16, d2 - d1);
+      const dome = clamp((-0.7 * dx + 0.7 * dy) / 0.6, -1, 1);
       const mottle = bkNoise(4 * (0.8 * p[0] + 0.6 * p[1]) + 7, 4 * (0.8 * p[1] - 0.6 * p[0]) + 3);
-      let f = 0.9 + 0.12 * g + 0.25 * (g - gl) + 0.1 * (mottle - 0.5);
+      let f = 0.95 + 0.07 * dome - 0.18 * crease + 0.12 * (mottle - 0.5);
       if (face) {
         const cx = bx[0] + 0.3 * (bx[1] - bx[0]);
         const cy = by[1] - 0.3 * (by[1] - by[0]);
-        f += 0.24 * Math.exp(-((p[0] - cx) ** 2 + (p[1] - cy) ** 2) / 0.12);
+        f += 0.2 * Math.exp(-((p[0] - cx) ** 2 + (p[1] - cy) ** 2) / 0.12);
         const d = Math.min(p[0] - bx[0], bx[1] - p[0], p[1] - by[0], by[1] - p[1]);
         f -= 0.14 * Math.max(0, 1 - d / 0.03);
       }
       col = shade(col, f);
     } else if (style === "linen") {
-      // Threads across and down in a plain weave: the gaps between them
-      // show as fine darker lines, and each thread is a little thicker or
-      // thinner along its length (slubs).
-      const q = 19;
-      const gap = (t, w) => Math.pow(Math.abs(Math.cos(t * q * Math.PI)), 6) * (0.6 + 0.8 * w);
-      const across = gap(p[1], bkNoise(p[0] * 3, p[1] * q));
-      const down = gap(p[0], bkNoise(p[1] * 3 + 11, p[0] * q));
-      const slub = bkNoise(p[0] * 2.5, p[1] * q * 2) + bkNoise(p[0] * q * 2 + 5, p[1] * 2.5) - 1;
-      col = shade(col, 1.0 - 0.06 * across - 0.06 * down + 0.035 * slub);
+      // Book linen: threads across and down in a plain weave, broad enough
+      // to read at phone size (each thread about three splats), softly
+      // shaded so the weave shows as texture, not as fine dark lines, and
+      // each thread a little thicker or thinner along its length (slubs).
+      const q = 11;
+      const ridge = (t, w) => Math.pow(Math.abs(Math.cos(t * q * Math.PI)), 3) * (0.7 + 0.6 * w);
+      const across = ridge(p[1], bkNoise(p[0] * 3, p[1] * q));
+      const down = ridge(p[0], bkNoise(p[1] * 3 + 11, p[0] * q));
+      const over = (Math.floor(p[0] * q) + Math.floor(p[1] * q)) % 2 ? across : down;
+      const slub =
+        bkNoise(p[0] * 2.5, p[1] * q * 1.5) + bkNoise(p[0] * q * 1.5 + 5, p[1] * 2.5) - 1;
+      const mottle = bkNoise(p[0] * 3 + 2, p[1] * 3 + 8) - 0.5;
+      col = shade(col, 1.0 - 0.05 * over - 0.03 * (across + down) + 0.03 * slub + 0.05 * mottle);
     } else {
-      col = shade(col, 0.97 + 0.03 * Math.sin(p[0] * 61 + p[1] * 37) * Math.sin(p[1] * 83));
+      // Kraft card: soft, broad fiber mottling and a few longer fibers,
+      // none finer than a few splats.
+      const mottle = bkNoise(p[0] * 7 + 3, p[1] * 7 + 1) - 0.5;
+      const fiber = bkNoise(p[0] * 26 + 9, p[1] * 5 + 4) - 0.5;
+      const fleck = Math.max(0, bkNoise(p[0] * 13 + 7, p[1] * 13 + 2) - 0.78);
+      col = shade(col, 0.98 + 0.08 * mottle + 0.04 * fiber - 0.5 * fleck);
     }
     return bkLit(col, n);
   };
@@ -1424,6 +1457,9 @@ const ALBUM_RECIPE = {
       inside: look.page,
       bands: false,
       coverSheet: false,
+      // A denser front cover (lane Sharpness B), so its grain is fine and
+      // crisp rather than blurred.
+      coverShare: 0.16,
       cloth: albumCloth(o.cover, [0, W + st.ov], [-H / 2 - st.ov, H / 2 + st.ov]),
       onCover: (k, cp, at) => albumTrim(o.cover, k, cp, at),
       leaves(k, leafOf) {
