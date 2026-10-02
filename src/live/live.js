@@ -106,6 +106,8 @@ export const live = {
   setOptions: null,
   // Set by the page so a live sound can tap the toy (clap to tap).
   tap: null,
+  // Set by the page: draws a frame now (r3: the Song landscape's scrub).
+  wake: null,
   on: (kind) => sources.has(kind),
   owners: (kind) => [...(sources.get(kind)?.owners || [])],
   stream: (kind) => sources.get(kind)?.stream ?? null,
@@ -159,13 +161,16 @@ export async function start(kind, { owner = null, ...opts } = {}) {
   sources.set(kind, entry);
   // A track that ends by itself (the browser's own "Stop sharing", a
   // camera unplugged) stops the source.
-  for (const t of stream.getTracks()) t.addEventListener("ended", () => stop(kind), { once: true });
+  for (const t of stream.getTracks()) t.addEventListener("ended", () => sources.get(kind) === entry && stop(kind), { once: true }); // prettier-ignore
   try {
     if (kind === "mic") {
       micModule ||= await import("./mic.js");
       live.mic = await micModule.startAnalyser(stream);
     } else {
-      live[kind] = { stream, video: await videoFor(stream, kind === "camera") };
+      // r3: which way the camera faces ("user", the front one, shows as a
+      // mirror; "environment", the back one, the right way round).
+      const facing = kind === "camera" ? opts.facing || "user" : null;
+      live[kind] = { stream, video: await videoFor(stream, kind === "camera" && facing === "user"), facing }; // prettier-ignore
     }
   } catch (err) {
     stop(kind);
@@ -173,6 +178,43 @@ export async function start(kind, { owner = null, ...opts } = {}) {
   }
   changed(kind);
   return stream;
+}
+
+// r3: swaps a running camera for the other one (the front or the back),
+// keeping who asked for it. The new camera is asked for first, from the
+// tap; only then does the old one stop.
+export async function switchCamera() {
+  const had = sources.get("camera");
+  if (!had) return null;
+  const facing = live.camera?.facing === "environment" ? "user" : "environment";
+  let stream;
+  try {
+    stream = await media().getUserMedia(constraints("camera", { facing }));
+  } catch (err) {
+    throw new LiveError(explain("camera", err));
+  }
+  const entry = { stream, owners: new Set(had.owners), started: Date.now() };
+  sources.set("camera", entry);
+  for (const t of had.stream.getTracks()) t.stop();
+  for (const t of stream.getTracks()) t.addEventListener("ended", () => sources.get("camera") === entry && stop("camera"), { once: true }); // prettier-ignore
+  try {
+    live.camera = { stream, video: await videoFor(stream, facing === "user"), facing };
+  } catch (err) {
+    stop("camera");
+    throw new LiveError(explain("camera", err));
+  }
+  changed("camera");
+  return facing;
+}
+
+// r3: whether this device has more than one camera (known once one is on).
+export async function cameraCount() {
+  try {
+    const all = await media()?.enumerateDevices?.();
+    return (all || []).filter((d) => d.kind === "videoinput").length;
+  } catch {
+    return 0;
+  }
 }
 
 // A playing, silent, off-page video element for a camera or a screen.

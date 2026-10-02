@@ -15,6 +15,7 @@ import {
   quatRotate,
 } from "../kit.js";
 import { capPoint, evenCylinder, evenEllipsoid, evenTorus } from "./even.js";
+import { loadSample } from "../voices.js";
 
 const TAU = Math.PI * 2;
 const add = (a, b) => [a[0] + b[0], a[1] + b[1], a[2] + b[2]];
@@ -84,6 +85,85 @@ function integrate(m, key, t, rate) {
   const dt = last === undefined ? 0 : clamp(t - last, 0, 0.25);
   m[key] = (m[key] ?? 0) + dt * rate;
   return m[key];
+}
+
+// Sound C (the owner's note of October 2): the top's spin is heard softly
+// while it spins fast, louder and a little higher the faster it turns, fading
+// as it slows; a drag that turns the view round it (spinning it by hand)
+// counts too. A loop of the real top recording, played through the site's
+// sound (info.sound); it fades out by itself when the frames stop (another
+// toy opened) and stops a moment later.
+const TOP_LOOP = "spinning-top-spin.mp3"; // a seamless loop between 0.1 s and 2.3 s
+const TOP = { buf: null, loading: false };
+function topHum(m, info, own) {
+  const time = info?.time ?? 0;
+  let turn = 0;
+  if (typeof info?.view === "number") {
+    if (m.view !== undefined && time > m.viewT) {
+      const d = info.view - m.view;
+      turn = (d - Math.round(d / TAU) * TAU) / (time - m.viewT);
+    }
+    [m.view, m.viewT] = [info.view, time];
+  }
+  m.turn = (m.turn ?? 0) * 0.7 + turn * 0.3;
+  const level = clamp((Math.abs(own - m.turn) - 10) / 20, 0, 1);
+  const sound = info?.sound;
+  const ctx = sound?.enabled ? sound.ctx : null;
+  if (!ctx || !sound.master) return;
+  if (!TOP.buf) {
+    if (!TOP.loading) {
+      TOP.loading = true;
+      loadSample(ctx, TOP_LOOP).then((buf) => (TOP.buf = buf));
+    }
+    return;
+  }
+  if (!m.hum) {
+    if (level < 0.02) return;
+    const src = ctx.createBufferSource();
+    src.buffer = TOP.buf;
+    src.loop = true;
+    src.loopStart = 0.1;
+    src.loopEnd = TOP.buf.duration - 0.1;
+    const g = ctx.createGain();
+    g.gain.value = 0;
+    src.connect(g).connect(sound.master);
+    src.start(ctx.currentTime, 0.1 + Math.random() * 2);
+    m.hum = { src, g };
+  }
+  const h = m.hum;
+  const now = ctx.currentTime;
+  const hold = (p) => {
+    if (p.cancelAndHoldAtTime) p.cancelAndHoldAtTime(now);
+    else {
+      p.cancelScheduledValues(now);
+      p.setValueAtTime(p.value, now);
+    }
+  };
+  hold(h.g.gain);
+  h.g.gain.setTargetAtTime(0.5 * level ** 1.3, now, 0.06);
+  h.g.gain.setTargetAtTime(0, now + 0.3, 0.08);
+  hold(h.src.playbackRate);
+  h.src.playbackRate.setTargetAtTime(0.8 + 0.4 * level, now, 0.1);
+  clearTimeout(h.kill);
+  h.kill = setTimeout(
+    () => {
+      try {
+        h.src.stop();
+      } catch {
+        // Already stopped.
+      }
+      h.g.disconnect();
+      if (m.hum === h) m.hum = null;
+    },
+    level < 0.02 ? 600 : 1500,
+  );
+}
+
+// A soap bubble's pop: one of the six in soap-bubbles-pops.mp3 (CC0,
+// florianreichelt on Freesound), a little different each time.
+const POP_AT = [0, 0.1, 0.185, 0.33, 0.455, 0.59];
+function bubblePop(i) {
+  return { voice: "sample", file: "soap-bubbles-pops.mp3", from: POP_AT[i % POP_AT.length], len: 0.08, pitch: 0.9 + 0.25 * ((i * 0.618) % 1), vol: 0.75, fallback: { voice: "kernel", f: 3800, vol: 0.3 } }; // prettier-ignore
 }
 
 function nlerpQ(a, b, t) {
@@ -1249,8 +1329,10 @@ export const RECIPES = {
     ],
     controls: [{ key: "whip", label: "Spin", type: "pulse", ease: 3 }],
     action: { key: "whip", label: "Spin it" },
-    drive(t, c, out) {
+    sounds: [{ voice: "sample", file: TOP_LOOP }], // Sound C: the hum (topHum)
+    drive(t, c, out, info) {
       const m = mem(c);
+      topHum(m, info, 9 + 26 * c.whip);
       const spin = integrate(m, "spin", t, 9 + 26 * c.whip);
       const prec = integrate(m, "prec", t, 1.4 + 1.5 * c.whip) + 0.6;
       const tilt = 0.16 + 0.1 * c.whip * (0.6 + 0.4 * Math.sin(t * 9));
@@ -2393,17 +2475,25 @@ export const RECIPES = {
     options: [{ key: "color", label: "Wand", type: "color", default: "#8e5bd9" }],
     controls: [{ key: "blow", label: "Blow", type: "pulse", ease: 2.5 }],
     action: { key: "blow", label: "Blow bubbles" },
+    sounds: [{ voice: "sample", file: "soap-bubbles-pops.mp3" }], // Sound C: the pops
     drive(t, c, out) {
       const m = mem(c);
       const tau = integrate(m, "tau", t, 0.07 + 0.35 * c.blow);
+      const pops = [];
       BUBBLES.forEach((b, i) => {
         const s = (tau * b.speed + b.s0) % 1;
+        // Sound C (his note of October 2): while it's blown, each bubble
+        // pops softly as it bursts (one of six real pops, CC0).
+        const was = m["s" + i] ?? s;
+        m["s" + i] = s;
+        if (c.blow > 0.05 && was < 0.95 && s >= 0.95) pops.push(bubblePop(i));
         const p = bubbleAt(b, s);
         out.parts["b" + i] = {
           offset: sub(p, b.rest),
           visible: smoothstep(0, 0.05, s) * (1 - smoothstep(0.94, 1, s)),
         };
       });
+      if (pops.length) out.cues.push(pops);
     },
     build(k, o) {
       const wand = o.color;

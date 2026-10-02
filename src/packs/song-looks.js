@@ -269,11 +269,11 @@ export function buildLook(k, look, { view, backdrop, nf }) {
     // Across: SUBF needles per band, the last band's one alone.
     for (let s = 0; s < S; s++)
       for (let f = 0; f < K; f++)
-        for (let q = 0; q < (f < K - 1 ? SUBF : 1); q++) needle(list, [xk(f + q / SUBF), 0, zs(s)], [1, 0, 0], (W / K / SUBF) * 1.6, look === "lines" ? 0.0046 : 0.0034, [s, f, 0, q]); // prettier-ignore
+        for (let q = 0; q < (f < K - 1 ? SUBF : 1); q++) needle(list, [xk(f + q / SUBF), 0, zs(s)], [1, 0, 0], (W / K / SUBF) * 1.6, look === "lines" ? 0.0068 : 0.005, [s, f, 0, q]); // prettier-ignore
     if (look === "mesh")
       for (let f = 1; f < K; f += 4)
         for (let s = 0; s < S; s++)
-          for (let h = 0; h < SUB; h++) needle(list, [xk(f), 0, zs(s, h)], [0, 0, 1], (dz / SUB) * 1.6, 0.0034, [s, f, 1, h]); // prettier-ignore
+          for (let h = 0; h < SUB; h++) needle(list, [xk(f), 0, zs(s, h)], [0, 0, 1], (dz / SUB) * 1.6, 0.005, [s, f, 1, h]); // prettier-ignore
     lift = 0.7;
     geo = { axis: "z", W, D, dz, K };
     // The gate: a line across the front.
