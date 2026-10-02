@@ -349,8 +349,9 @@ export const RECIPES = {
       if (n < LAB.tapN) LAB.tapN = 0;
       if (fresh) LAB.tapN = n;
       out.fluid = {};
-      // (traced on WebGPU: the splats step aside)
-      const splats = d.props?.drawn ? 0 : 1;
+      // (traced on WebGPU: the splats shrink inside the traced shapes, which
+      // cover them, and stay there to be tapped: a tap on the handle pours)
+      const splats = d.props?.drawn ? 0.55 : 1;
       if (d.props) out.parts.stand = { visible: splats };
       if (d.scene === "glass") {
         // Every third tap empties the glass before it pours.
