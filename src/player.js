@@ -383,6 +383,12 @@ export class Player {
     this.camera.fit(info.radius, info.center);
     // Pictures: a page viewer comes close enough to read a page's small print.
     if (this.pictures) this.camera.minDistance = info.radius * 0.3;
+    // Science r2: a recipe's closeUp ({ minDistance } in toy radii) lets the
+    // camera come that close, so a pinch or the wheel zooms all the way in
+    // (the near clip follows; see Stage.setCameraPose).
+    const close = info.closeUp?.minDistance;
+    this.stage.nearFollow = Number.isFinite(close) && close > 0;
+    if (this.stage.nearFollow) this.camera.minDistance = info.radius * close;
     this.time = 0;
     this.idle.pokeAt = 0;
     this.idle.pokes = 0;
@@ -540,6 +546,7 @@ export class Player {
       lum: ctx.lum,
       kernel: recipe.kernel, // Lab
       pickAlpha: recipe.pickAlpha, // Lab r2
+      closeUp: recipe.closeUp || null, // Science r2
       recipe,
       options,
       credit: def.credit || null,
@@ -1043,7 +1050,9 @@ export class Player {
 
   // A one-finger drag pans (instead of turning) on a picture toy seen close up.
   pansHere() {
-    return !!this.pictures && this.camera.cur.distance < (this.toyInfo?.radius || 1) * 1.6;
+    // Science r2: so does a toy with a closeUp, close up.
+    const close = !!this.pictures || !!this.toyInfo?.closeUp;
+    return close && this.camera.cur.distance < (this.toyInfo?.radius || 1) * 1.6;
   }
 
   // A container in the kit format for a picture sheet.
