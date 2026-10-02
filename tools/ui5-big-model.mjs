@@ -64,7 +64,9 @@ const json = {
   scene: 0,
   scenes: [{ nodes: [0] }],
   nodes: [{ mesh: 0 }],
-  meshes: [{ primitives: [{ attributes: { POSITION: 0, TEXCOORD_0: 1 }, indices: 2, material: 0 }] }],
+  meshes: [
+    { primitives: [{ attributes: { POSITION: 0, TEXCOORD_0: 1 }, indices: 2, material: 0 }] },
+  ],
   materials: [{ pbrMetallicRoughness: { baseColorTexture: { index: 0 } } }],
   textures: [{ source: 0 }],
   images: [{ bufferView: 3, mimeType: "image/png" }],
@@ -73,7 +75,11 @@ const json = {
     { bufferView: 1, componentType: 5126, count: nv, type: "VEC2" },
     { bufferView: 2, componentType: 5125, count: nt * 3, type: "SCALAR" },
   ],
-  bufferViews: views.map(({ buffer, byteOffset, byteLength }) => ({ buffer, byteOffset, byteLength })),
+  bufferViews: views.map(({ buffer, byteOffset, byteLength }) => ({
+    buffer,
+    byteOffset,
+    byteLength,
+  })),
   buffers: [{ byteLength: bin.length }],
 };
 let js = Buffer.from(JSON.stringify(json));
@@ -89,4 +95,6 @@ const ch = (len, type) => {
   return b;
 };
 fs.writeFileSync(out, Buffer.concat([head, ch(js.length, 0x4e4f534a), js, ch(bin.length, 0x004e4942), bin])); // prettier-ignore
-console.log(`${out}: ${nt.toLocaleString("en-US")} triangles, ${(fs.statSync(out).size / 1e6).toFixed(0)} MB`);
+console.log(
+  `${out}: ${nt.toLocaleString("en-US")} triangles, ${(fs.statSync(out).size / 1e6).toFixed(0)} MB`,
+);
