@@ -143,6 +143,8 @@ HOW THIS LANE RUNS
   "## State
 
 - Model: Opus 5.5 (claude-opus-5-5), default effort.
+- Merged: PR #131 on October 1, 2026 (main 5ef0bbf). The Operator's Ops PR #160 then made `ui2On()`
+  return true, so all of UI r2 is on for everyone.
 - September 30, 2026: all six parts built behind the labs switch, with tests (`tests/ui2.spec.mjs`,
   12 tests, passing) and clips. Draft PR #131. Full suite: 564 of 568 passed; the four failures were
   fixed (the Picture lab's pan test, commit 2cf0745) or pass alone (three timing tests run while
@@ -166,8 +168,8 @@ HOW THIS LANE RUNS
 
 ## Notes
 
-- One flag, `ui2On()` in `src/player.js`, gates everything (it returns `labsOn()`); making it return
-  true makes all of it the default. `body.ui2` gates the CSS, and `.ui2-only` / `.ui2-hide` the
+- One flag, `ui2On()` in `src/player.js`, gates everything; it returns true since #160 (October 1,
+  2026), so all of it is the default. `body.ui2` gates the CSS, and `.ui2-only` / `.ui2-hide` the
   markup.
 - The camera now has `aim` (where the view is going) and `center` (the toy's), and `target` eases to
   `aim` like the rest of the pose. `panBy`, `getPan`, `setPan` live in `src/camera.js`; the player's

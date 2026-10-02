@@ -70,6 +70,9 @@ by a permission check, say exactly which edit it is, and I'll handle it.
 ## State
 
 - Model: Opus 5.5 (claude-opus-5-5), default effort.
+- Merged: PR #146 on October 1, 2026 (main c8f4e71), after Integrator 1's run (652 of 653) and the
+  Operator's overlap run. The Enigma (Fix6) keeps the hold-still default; the Fix lane adapted its
+  typing test.
 - September 30, 2026: all three parts built, not behind labs (public changes, after the owner's
   marks); `tests/ui3.spec.mjs` (8 tests) passes.
   1. Pause: `MotionDriver` (src/motion.js) pauses a pulse longer than 2 s (or `pausable: true`) on a

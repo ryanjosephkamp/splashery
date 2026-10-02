@@ -7,7 +7,9 @@
 //   python3 -m http.server 4173 --bind 127.0.0.1 &
 //   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/sci-clip.mjs <out-dir> [--w=390] [--h=844] [--fps=12] [--strip=6] [--strip-scale=0.5] card ...
 //
-// Writes <out-dir>/<card>.gif (and <card>-strip.png with --strip). The clock
+// Writes <out-dir>/<card>.gif (and <card>-strip.png with --strip; with
+// --frames, each frame as a JPEG in <card>-frames/ for an MP4, e.g.
+// ffmpeg -framerate 12 -i %04d.jpg -pix_fmt yuv420p -crf 20 card.mp4). The clock
 // is stepped by hand, so a clip runs at real speed however slow the
 // renderer is. The cards are in CARDS below.
 
@@ -28,13 +30,18 @@ const fps = Number(opt("fps", 12));
 const stripN = Number(opt("strip", 0));
 const bg = opt("bg", "#111111");
 const stripScale = Number(opt("strip-scale", 0.5)); // the strip's frames at this scale
+const profile = opt("profile", "high"); // the tier (r2: "low" for the phone's)
+const framesOut = args.includes("--frames"); // also <card>-frames/NNNN.jpg, for an MP4
 
 // A card: the toy, its options, and a script of timed steps. Each step runs
 // at `t` seconds: { yaw: radians per second } turns the camera from then on;
 // { set: { key: value } } sets controls; { ease: { key, from, to, secs } }
 // moves a control smoothly; { tap: [x, y, z] | true } taps (a point in
 // recipe coordinates, or the toy's action); { file, options } opens a file
-// through the toy's input panel.
+// through the toy's input panel; { fly: { to: [x, y, z] (recipe), point:
+// [x, y] (the toy's sciPoint), dist: toy radii, secs } } moves the camera in
+// (or out) as a pinch would, its aim to the point and its distance eased on a
+// log scale (r2: the microscope and the galaxy zoom with the camera).
 const CARDS = {
   "sci-ellipsoids": {
     toy: "thermal-ellipsoids",
@@ -93,6 +100,61 @@ const CARDS = {
       { t: 1.2, focus: [3, 2], tap: true },
     ],
   },
+  // r2 (October 2, 2026): the camera zooms all the way in, as a pinch or the
+  // wheel does now; the tap shows a slice (the microscope) or peels the hot
+  // gas (the galaxy). The ellipsoids at the phone's tier (--profile=low).
+  "sci-microscope-r3": {
+    toy: "smlm-microscope",
+    options: { data: "sample", color: "depth" },
+    secs: 10,
+    near: 0.62,
+    steps: [
+      { t: 0, yaw: 0.03 },
+      { t: 0.8, fly: { point: [-0.4, -0.4], dist: 0.04, secs: 5 } },
+      { t: 6.2, tap: [-0.4, -0.4, 0] },
+      { t: 8, fly: { dist: 1.8, secs: 2 } },
+    ],
+  },
+  "sci-microscope-nucleus-r2": {
+    toy: "smlm-microscope",
+    options: { data: "nucleus", color: "depth" },
+    secs: 9,
+    near: 0.62,
+    steps: [
+      { t: 0, yaw: 0.05 },
+      { t: 0.8, fly: { point: [3, 2], dist: 0.08, secs: 4.5 } },
+      { t: 5.8, tap: [3, 2, 0] },
+      { t: 7.4, fly: { dist: 1.8, secs: 1.6 } },
+    ],
+  },
+  "sci-galaxy-r4": {
+    toy: "galaxy-box",
+    options: { color: "temperature" },
+    secs: 10,
+    near: 0.85,
+    steps: [
+      { t: 0, yaw: 0.12 },
+      { t: 0.6, fly: { to: [6, 0, 3], dist: 0.12, secs: 4.6 } },
+      { t: 5.8, tap: true },
+      { t: 8, fly: { dist: 2.55, secs: 2 } },
+    ],
+  },
+  "sci-ellipsoids-phone": {
+    toy: "thermal-ellipsoids",
+    options: { structure: "aspirin", level: "50" },
+    secs: 6,
+    near: 0.6,
+    steps: [
+      { t: 0, yaw: 0.45 },
+      { t: 3.2, tap: true },
+    ],
+  },
+  "sci-protein-phone": {
+    toy: "thermal-ellipsoids",
+    options: { structure: "crambin", level: "50" },
+    secs: 6,
+    steps: [{ t: 0, yaw: 0.25 }],
+  },
   "sci-open": {
     toy: "thermal-ellipsoids",
     options: { structure: "aspirin", level: "50" },
@@ -112,15 +174,21 @@ const browser = await chromium.launch({
 });
 const page = await browser.newPage({ viewport: { width: W, height: H } });
 page.on("pageerror", (e) => console.error("page error:", e.message));
-await page.goto(`${base}?labs=1&renderer=webgl2&profile=high&adapt=off`);
+await page.goto(`${base}?labs=1&renderer=webgl2&profile=${profile}&adapt=off`);
 await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
 for (const name of cards) {
   const card = CARDS[name];
   if (!card) throw new Error(`No card ${name}`);
   const files = {};
   for (const s of card.steps) if (s.file) files[s.file] = fs.readFileSync(s.file, "utf8");
+  const frameDir = path.join(outDir, `${name}-frames`);
+  if (framesOut) fs.mkdirSync(frameDir, { recursive: true });
+  let frameNo = 0;
+  await page.exposeFunction(`saveFrame_${name.replace(/\W/g, "_")}`, (data) => {
+    fs.writeFileSync(path.join(frameDir, `${String(frameNo++).padStart(4, "0")}.jpg`), Buffer.from(data.split(",")[1], "base64")); // prettier-ignore
+  });
   const { bytes, strip } = await page.evaluate(
-    async ({ card, W, H, fps, stripN, bg, files, stripScale }) => {
+    async ({ card, W, H, fps, stripN, bg, files, stripScale, framesOut, saver }) => {
       const { app, player } = window.__splashery;
       const { GIFEncoder, quantize, applyPalette } = await import("gifenc");
       await app.chooseToy(card.toy);
@@ -144,10 +212,13 @@ for (const name of cards) {
       if (card.near) cam.home.distance *= card.near;
       let yaw = cam.home.yaw;
       let yawRate = 0;
+      let dist = cam.home.distance;
+      let flight = null;
       const pose = () => {
-        cam.cur = { ...cam.home, yaw };
-        cam.tgt = { ...cam.home, yaw };
+        cam.cur = { ...cam.home, yaw, distance: dist };
+        cam.tgt = { ...cam.home, yaw, distance: dist };
       };
+      const panNow = () => cam.aim.map((v, i) => (v - cam.center[i]) / cam.radius);
       const step = 1 / fps;
       const gif = GIFEncoder();
       const delay = Math.round(1000 / fps);
@@ -174,6 +245,13 @@ for (const name of cards) {
           if (s.set) for (const [k, v] of Object.entries(s.set)) app.setControl(k, v);
           if (s.ease) eases.push({ ...s.ease, t0: time });
           if (s.focus) recipe()?.sciFocus?.(s.focus);
+          if (s.fly) {
+            const f = s.fly;
+            const to = f.point ? recipe().sciPoint(f.point) : f.to;
+            const w = to ? toWorld(to) : null;
+            const pan = w ? w.map((v, i) => (v - cam.center[i]) / cam.radius) : panNow();
+            flight = { t0: time, secs: f.secs ?? 2, d0: dist, d1: (f.dist ?? 1) * cam.radius, p0: panNow(), p1: pan }; // prettier-ignore
+          }
           if (s.tap) player.act(s.tap === true ? null : toWorld(s.tap));
           if (s.file) {
             const opts = await recipe().input.read(files[s.file], s.file.split("/").pop());
@@ -192,6 +270,15 @@ for (const name of cards) {
           player.motion.state[e.key] = e.from + (e.to - e.from) * sm;
           app.setControl(e.key, e.from + (e.to - e.from) * sm);
         }
+        if (flight) {
+          const f = Math.max(0, Math.min(1, (time - flight.t0) / flight.secs));
+          const sm = f * f * (3 - 2 * f);
+          dist = flight.d0 * Math.pow(flight.d1 / flight.d0, sm);
+          cam.setPan(
+            flight.p0.map((v, i) => v + (flight.p1[i] - v) * sm),
+            true,
+          );
+        }
         yaw += yawRate * step;
         pending = step;
         pose();
@@ -199,12 +286,14 @@ for (const name of cards) {
         pending = 0;
         const c = await stage.captureFrame();
         if (pickAt.has(n)) shots.push({ bmp: await createImageBitmap(c), t: time });
+        if (framesOut) await window[saver](c.toDataURL("image/jpeg", 0.95));
         const rgba = c.getContext("2d").getImageData(0, 0, W, H).data;
         const palette = quantize(rgba, 256, { format: "rgb565" });
         gif.writeFrame(applyPalette(rgba, palette, "rgb565"), W, H, { palette, delay, repeat: 0 }); // prettier-ignore
       }
       gif.finish();
       cam.home.distance = homeDistance;
+      cam.setPan(null, true);
       stage.setFixedSize(null);
       stage.updateHandlers.length = 0;
       stage.updateHandlers.push(...handlers);
@@ -228,7 +317,7 @@ for (const name of cards) {
       }
       return { bytes: Array.from(gif.bytes()), strip };
     },
-    { card, W, H, fps, stripN, bg, files, stripScale },
+    { card, W, H, fps, stripN, bg, files, stripScale, framesOut, saver: `saveFrame_${name.replace(/\W/g, "_")}` }, // prettier-ignore
   );
   const out = path.join(outDir, `${name}.gif`);
   fs.writeFileSync(out, Buffer.from(bytes));
