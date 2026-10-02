@@ -139,6 +139,14 @@ Model: Opus 5.5 (the lane's assigned model), default effort, the whole lane.
   (the statue from one shot, after the cut): edge sharpness +44% (statue) and more than double
   (street). r5: the street at 640 px for 3,000 steps. r6: the refine schedule scaled to the run, so
   short runs grow splats (the street grew from 49,695 to 120,000).
+- r7 (the owner's review of October 2, on `claude/lane-video-3d-r7`, its own draft PR): what to film
+  (`src/video3d/guide.js`, in the Toy tab and on any failure); plain words for a failed camera path
+  and one retry with looser matching; a Setting choice and the phone-safe setting (16 frames, 1,200
+  steps, 30,000 splats, trained in bursts, paused while hidden, stopped after 8 minutes keeping what
+  it has), a confirm step with a rough time on phones and the time left while training; turning and
+  zooming during Replay flight, and switching it off mid-flight pauses there; the write-up
+  `docs/lab/VIDEO3D-HOW.md` for the Manual, and a new About text. Cards `v3d-r7-steer` and
+  `v3d-r7-phone` (page 2).
 
 ## Notes
 

@@ -8,7 +8,11 @@
 
 // The settings by device tier (player.js detectProfile): phones get fewer frames, a smaller
 // picture and fewer splats; the desktop gets more of each.
+// phone (r7): the phone-safe setting. A short stretch's worth of small frames, few steps and a
+// low splat cap, so a phone finishes in minutes without locking up (run.js also trains it in
+// short bursts with rests, pauses it when the tab is hidden and stops it after a time limit).
 export const TIERS = {
+  phone: { maxFrames: 16, frameSide: 480, featSide: 480, trainSide: 320, iters: 1200, splats: 30000, seed: 15000, maxMinutes: 8 }, // prettier-ignore
   low: { maxFrames: 20, frameSide: 480, featSide: 480, trainSide: 360, iters: 1500, splats: 60000 },
   mid: {
     maxFrames: 32,
