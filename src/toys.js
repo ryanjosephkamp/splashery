@@ -3422,6 +3422,17 @@ export const TOYS = [
     tags: "photo picture image depth 3d parallax relief layers convert converter depth map jpeg png webp",
     camera: { yaw: 0, pitch: 0, roll: 0, distance: 2.6 },
   },
+  // Lane Live input r3: a GIF or a video played back in 3D.
+  {
+    id: "moving-photo-3d",
+    label: "Moving photo to 3D",
+    category: "studio",
+    kind: "kit",
+    pack: "live",
+    labs: true,
+    tags: "gif video animation movie clip moving photo depth 3d relief frames muybridge horse convert converter",
+    camera: { yaw: 0, pitch: 0, roll: 0, distance: 2.6 },
+  },
   // ---- Pack: video3d (lane Video 3D) ----
   {
     id: "video-3d",

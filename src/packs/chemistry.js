@@ -30,6 +30,40 @@ const band = (x, a, b) => clamp01((x - a) / (b - a));
 const bump = (x, a, b, c, d) => band(x, a, b) * (1 - band(x, c, d));
 const progress = (v) => (v > 0 ? 1 - v : 1);
 const MEM = new WeakMap();
+// Sound C: a faint, soft tick as each proton and neutron packs into the
+// nucleus (each fades in at its own point of channel 0, from the middle out;
+// protons a little brighter). The ticks come in batches a moment ahead, each
+// scheduled for its own moment (`at`, from how fast the atom is building), so
+// they stay in sync at any frame rate (and one cue every 0.2 s or so, as the
+// site spaces a toy's cues 60 ms apart). A big nucleus ticks every few
+// nucleons (at most about 40 a second), more softly.
+function nucleonTicks(D, m, u, down, time, out) {
+  const list = D.nucleons;
+  if (!list?.length) return;
+  const A = list.length;
+  const uOf = (i) => 0.1 + 0.4 * Math.min(1, (0.96 * i) / A + 0.02);
+  if (down || m.tickT === undefined || u < m.tickLast - 1e-6) {
+    // Lowering (or a fresh build): ticks start again from here.
+    [m.tickU, m.tickT, m.tickLast] = [u, time, u];
+    return;
+  }
+  const rate = (u - m.tickLast) / Math.max(1e-3, time - m.tickT);
+  [m.tickT, m.tickLast] = [time, u];
+  if (rate <= 0 || m.tickU - u > rate * 0.06 || m.tickU >= 0.5) return;
+  const reach = Math.min(1, u + rate * 0.25);
+  const every = Math.max(1, Math.ceil((rate * A * 0.4) / 40));
+  const vol = 0.2 / Math.sqrt(every);
+  const ticks = [];
+  for (let i = 0; i < A; i += every) {
+    const ui = uOf(i);
+    if (ui <= m.tickU || ui > reach) continue;
+    const f = (list[i] ? 3300 : 2700) * (0.94 + 0.12 * ((i * 0.618) % 1));
+    ticks.push({ voice: "clack", f, decay: 0.6, bright: 0.25, vol, at: Math.max(0, (ui - u) / rate) }); // prettier-ignore
+  }
+  m.tickU = reach;
+  if (ticks.length) out.cues.push(ticks);
+}
+
 function mem(c) {
   let m = MEM.get(c);
   if (!m) MEM.set(c, (m = {}));
@@ -458,6 +492,7 @@ export const RECIPES = {
       const sc = (0.12 + 0.88 * rise) * (rise > 0 ? 1 + (D.show - 1) * rise : 1);
       const off = mul(D.home, 1 - rise);
       out.morph = [nuc, ele, 0, 0];
+      nucleonTicks(D, m, u, m.dir === -1, info.time, out);
       const lift = [0, 0, 0.28 * (m.dir === -1 ? rise : ease(band(u, 0, 0.12)))];
       out.parts.tile = { offset: lift };
       // The tour lights the shown element's tile.
@@ -819,6 +854,7 @@ export const RECIPES = {
         rHigh: L.rHigh,
         show: L.show,
         ping: { voice: "ding", f: pingNote(el), decay: 1.4, vol: 0.7 },
+        nucleons: L.nucleus.proton.slice(), // Sound C: a tick as each one packs in
       };
       // A lit frame round the shown tile, on during the tour (last, and the
       // same size for every element, so the table is built the same).

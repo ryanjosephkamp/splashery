@@ -47,6 +47,19 @@ const TOP = -0.014; // the top of a page block, under the pages
 // block (T), the cover's thickness (cb) and overhang (ov), the gap from the
 // spine to the pages (g), and how much a turning page (curl) and a flexing
 // cover (coverCurl) bend, in radians per unit of page at the middle of a turn.
+// Sound C (the owner's note of October 2: a page sound per book type): a
+// real page turning for each style, with a soft landing for the heavier
+// ones. Glossy and slick for the magazine, light and papery for the paperback
+// (and the stapled paper and spiral notebook), fuller for the hardcover.
+const PAGE = (file, o = {}) => ({ voice: "sample", file, vol: 1.1, ...o, fallback: { voice: "pageflip", f: 1900, decay: 1.4, vol: 0.7 } }); // prettier-ignore
+const PAGE_SOUNDS = {
+  hardcover: [PAGE("your-book-hardcover.mp3"), { voice: "thud", at: 0.82, f: 150, decay: 0.35, vol: 0.3 }], // prettier-ignore
+  paperback: PAGE("your-book-paperback.mp3"),
+  magazine: PAGE("your-book-magazine.mp3"),
+  spiral: PAGE("your-book-paperback.mp3", { pitch: 0.92 }),
+  stapled: PAGE("your-book-paperback.mp3", { pitch: 1.08, vol: 0.9 }),
+};
+
 const BOOK_STYLES = {
   hardcover: { bound: "side", cover: "board", T: 0.045, cb: 0.024, ov: 0.03, g: 0, curl: 1.25, coverCurl: 0 }, // prettier-ignore
   paperback: { bound: "side", cover: "card", T: 0.036, cb: 0.005, ov: 0, g: 0, curl: 1.25, coverCurl: 1.0 }, // prettier-ignore
@@ -748,7 +761,9 @@ const BOOK_RECIPE = {
     READING,
   ],
   controls: [{ key: "turn", label: "Turn the page", type: "pulse", ease: 1.2 }],
-  action: { key: "turn", label: "Turn the page", at: bookTapAt },
+  // Sound C: each style's own page sound (PAGE_SOUNDS), played by drive.
+  action: { key: "turn", label: "Turn the page", at: bookTapAt, quiet: ["turn"] },
+  sounds: (o) => [PAGE_SOUNDS[o.style] || PAGE_SOUNDS.hardcover],
   focus: bookFocus,
   drag: bookDrag(BOOK_PULL),
   pictures: {
@@ -773,6 +788,9 @@ const BOOK_RECIPE = {
     if (n > BOOK.tapN) {
       BOOK.tapN = n;
       if (N && BOOK.queue.length < 3) BOOK.queue.push(info.tap?.pick === 1 ? -1 : 1);
+      // Sound C: the page's own sound for this style (the album has its own tap sound).
+      const page = PAGE_SOUNDS[Object.keys(BOOK_STYLES).find((id) => BOOK_STYLES[id] === st)];
+      if (page) out.cues.push(page);
     }
     BOOK.N = N;
     if (BOOK.resume && pics && N) {

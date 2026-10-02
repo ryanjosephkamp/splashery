@@ -17,8 +17,10 @@
 
 import { mix, shade, clamp, smoothstep } from "../kit.js";
 import { live } from "../live/live.js";
+import { DECAY_HINTS } from "../live/analysis.js";
 import { MIRROR, buildMirror, mirrorScreen, mirrorStatus } from "../live/relief.js";
 import { decodePhoto, unpackDepth } from "./photo-3d.js";
+import { MOVING_PHOTO } from "./moving-photo.js";
 
 const TAU = Math.PI * 2;
 
@@ -105,8 +107,18 @@ export function echoText() {
   if (ECHO.listening) return { big: "…", small: "Listening to the room" };
   if (!r) return { big: "Clap", small: "Clap once, sharply" };
   if (r.rt60) return { big: `${r.rt60.toFixed(2)} s`, small: ECHO.sample ? "RT60, a sample room" : `RT60 (${r.method})` }; // prettier-ignore
-  return { big: "Too noisy", small: "Clap louder, or try a quieter moment" };
+  // r3: the real reason, in two or three words, and a short hint.
+  return ECHO_FAIL[r.why] || ECHO_FAIL.uneven;
 }
+
+const ECHO_FAIL = {
+  quiet: { big: "Too quiet", small: "Clap louder or nearer" },
+  noisy: { big: "Too noisy", small: "Clap louder, or wait for quiet" },
+  clipped: { big: "Too loud", small: "Clap softer or farther" },
+  interrupted: { big: "Interrupted", small: "Clap once, then keep still" },
+  short: { big: "Too short", small: "Try the middle of the room" },
+  uneven: { big: "No clear fade", small: "Clap once more, keep still" },
+};
 
 function echoStatus() {
   if (!live.on("mic")) return "";
@@ -117,7 +129,10 @@ function echoStatus() {
     const feel = r.rt60 < 0.4 ? "a dry room (soft furnishings, like a living room)" : r.rt60 < 1 ? "an ordinary room" : r.rt60 < 2 ? "a lively room (bare walls, a hall)" : "a very echoey space"; // prettier-ignore
     return `RT60 ${r.rt60.toFixed(2)} s: the room takes that long to fade by 60 dB, ${feel}. Measured by ${r.method}, the clap ${Math.round(r.rangeDb)} dB above the background.`; // prettier-ignore
   }
-  return `Too noisy to measure: the clap stood only ${Math.round(r.rangeDb ?? 0)} dB above the background, and it needs about 25. Clap louder, or try when it's quieter.`; // prettier-ignore
+  // r3: what went wrong, and what to try.
+  const above = Number.isFinite(r.rangeDb) ? ` (the clap stood ${Math.round(r.rangeDb)} dB above the background; it needs about 20)` : ""; // prettier-ignore
+  const hint = DECAY_HINTS[r.why] || DECAY_HINTS.uneven;
+  return r.why === "noisy" || r.why === "quiet" ? hint.replace(/\.(?= )/, `${above}.`) : hint;
 }
 
 // Follows the microphone (read on each frame, so nothing is missed while
@@ -156,6 +171,9 @@ function followMic(time) {
   }
 }
 
+const PANEL_W = 416;
+const PANEL_H = 130;
+
 const ROOM_ECHO = {
   alive: () => live.on("mic") || ECHO.start !== null,
   density: 1,
@@ -169,22 +187,27 @@ const ROOM_ECHO = {
     note: "Tap “Use my microphone”, then clap once, sharply, and keep still for two seconds. The page listens to the clap fade away and measures the reverberation time: how long the room takes to go 60 dB quieter. Headphones off; a quiet moment works best.",
     shown: () => (live.on("mic") ? "" : "A tap claps in a sample room (0.8 s)."),
   },
+  // r3: one canvas pixel per panel splat (PANEL_W by PANEL_H), so the
+  // letters are as sharp as the splats can draw them; drawn in a 512 by 160
+  // frame scaled to it.
   screen: {
-    width: 512,
-    height: 160,
+    width: PANEL_W,
+    height: PANEL_H,
     version: () => `${echoText().big}|${echoText().small}`,
     draw(g) {
       const { big, small } = echoText();
+      g.setTransform(PANEL_W / 512, 0, 0, PANEL_H / 160, 0, 0);
       g.fillStyle = "#101418";
       g.fillRect(0, 0, 512, 160);
       g.fillStyle = "#ffe9a8";
       g.textAlign = "center";
       g.textBaseline = "middle";
       g.font = "bold 76px ui-sans-serif, system-ui, sans-serif";
-      g.fillText(big, 256, 66);
+      g.fillText(big, 256, 66, 496);
       g.fillStyle = "#9fb2c4";
-      g.font = "bold 30px ui-sans-serif, system-ui, sans-serif";
-      g.fillText(small, 256, 128);
+      g.font = "bold 34px ui-sans-serif, system-ui, sans-serif";
+      g.fillText(small, 256, 128, 496);
+      g.setTransform(1, 0, 0, 1, 0, 0);
     },
   },
   drive(t, c, out, info) {
@@ -283,14 +306,14 @@ const ROOM_ECHO = {
     // the toy's screen (the number).
     const pw = 2.3;
     const ph = pw * (160 / 512);
-    const pcols = 260;
-    const prows = Math.round(pcols * (ph / pw));
+    const pcols = PANEL_W;
+    const prows = PANEL_H;
     const panel = [];
     for (let j = 0; j < prows; j++)
       for (let i = 0; i < pcols; i++) {
         const u = (i + 0.5) / pcols;
         const v = (j + 0.5) / prows;
-        panel.push({ p: [(u - 0.5) * pw, WALL_H * 0.55 - (v - 0.5) * ph, -ROOM + 0.02], n: [0, 0, 1], flat: 0.03, size: ((pw / pcols) * 2) / 0.01, color: "#101418", kind: "screen", params: [u, v], opacity: 1, pattern: false }); // prettier-ignore
+        panel.push({ p: [(u - 0.5) * pw, WALL_H * 0.55 - (v - 0.5) * ph, -ROOM + 0.02], n: [0, 0, 1], flat: 0.03, size: ((pw / pcols) * 1.5) / 0.01, color: "#101418", kind: "screen", params: [u, v], opacity: 1, pattern: false }); // prettier-ignore
       }
     k.cloud(
       { share: panel.length / k.count, pattern: false, jitter: 0 },
@@ -332,19 +355,32 @@ async function readBytes(rel) {
 }
 
 const SPLAT_MIRROR = {
-  alive: () => live.on("camera"),
+  alive: () => live.on("camera") || MIRROR.look === "hologram",
   density: 1,
   turntable: false,
   options: [
     { key: "depth", label: "Depth", type: "slider", min: 0, max: 1, step: 0.05, default: 0.6 },
+    {
+      // r3: a hologram look beside the plain one.
+      key: "look",
+      label: "Look",
+      type: "select",
+      default: "plain",
+      choices: [
+        { id: "plain", label: "Plain" },
+        { id: "hologram", label: "Hologram (cyan, scanlines, glowing edges)" },
+      ],
+    },
   ],
   controls: [{ key: "flat", label: "Flatten the picture", type: "toggle", default: 0, ease: 1.4 }],
   action: { key: "flat", label: "Flatten or raise the depth" },
   input: {
     title: "Your camera",
     fileButton: false,
-    live: [{ kind: "camera", status: mirrorStatus }],
-    note: `Tap “Use my camera” and the mirror shows you in splats. The depth model (about 27 MB, loaded the first time) then works out how near each part is, many times a second, and the picture rises into a relief you can turn.`,
+    // r3: a big "Start camera" over the picture, the back camera, and a
+    // recording of what the mirror shows.
+    live: [{ kind: "camera", status: mirrorStatus, button: "Start camera", big: true, stage: true, flip: true, record: true }], // prettier-ignore
+    note: `Tap “Start camera” and the mirror shows you in splats. The depth model (about 27 MB, loaded the first time) then works out how near each part is, many times a second, and the picture rises into a relief you can turn.`,
   },
   credits: [
     {
@@ -373,7 +409,7 @@ const SPLAT_MIRROR = {
   },
   build(k, o) {
     MIRROR.depth = o.depth ?? 0.6;
-    const { height } = buildMirror(k, { width: 2, lift: 0.9 });
+    const { height } = buildMirror(k, { width: 2, lift: 0.9, look: o.look ?? "plain" });
     // A dark frame round the picture, like a mirror's.
     const f = 0.07;
     const w = 1 + f;
@@ -397,4 +433,5 @@ const SPLAT_MIRROR = {
 export const RECIPES = {
   "room-echo": ROOM_ECHO,
   "splat-mirror": SPLAT_MIRROR,
+  "moving-photo-3d": MOVING_PHOTO, // r3
 };

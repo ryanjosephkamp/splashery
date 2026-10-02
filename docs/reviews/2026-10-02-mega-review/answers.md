@@ -15,8 +15,8 @@ word:
 ## What they mean
 
 - **Pace (Q1):** up to ten Splashery workers for about three days, to close out the toys; CLAUDE.md
-  records it. Matterhorn's lanes on this account wait until then (Q9); Codex and his other account
-  may go ahead.
+  records it. The other project's lanes on this account wait until then (Q9); Codex and his other
+  account may go ahead.
 - **Lanes:** Sharpness A and UI r5 started (Q2, Q3); Sharpness B (food, toys, maths, AI, the photo
   album's covers and the bases audit) starts when a slot frees. Live input r3 and Science r2 start
   after #163 and #132 merge (Q4, Q5); Fluids r5 after r4 (Q6), Video 3D r7 after r6 (Q7). Category
