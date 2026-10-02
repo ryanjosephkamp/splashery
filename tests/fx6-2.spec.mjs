@@ -48,9 +48,10 @@ test("Enigma: a tapped key types its letter in code, and a keyboard types too", 
   page.on("pageerror", (e) => errors.push(e.message));
   await open(page, "enigma-machine");
   // Tapping keys on the machine: each one goes down and writes its letter and code.
-  for (const ch of "SPL") {
+  // Wait for each letter before the next tap, so a busy machine can't swap their order.
+  for (const [i, ch] of [..."SPL"].entries()) {
     await tapAt(page, KEY(ch));
-    await page.waitForTimeout(150);
+    await page.waitForFunction((n) => window.__splashery.player.proc.ctx.kit.data.pad.coded.length === n, i + 1, { timeout: 30_000 }); // prettier-ignore
   }
   await page.waitForFunction(() => window.__splashery.player.proc.ctx.kit.data.pad.coded.length === 3, null, { timeout: 30_000 }); // prettier-ignore
   expect(await enigma(page)).toMatchObject({ plain: "SPL", coded: code("SPL"), typed: true });
