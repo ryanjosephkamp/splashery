@@ -77,6 +77,9 @@ export class MotionDriver {
     // A long effect started since the last frame (its key): a tap before it
     // has been drawn starts it again rather than pausing it unseen.
     this.unseen = null;
+    this.handsTokens = null; // lane Physics: [{ index, token }] from Hands-on
+    this.handsParts = null; // and { name: { quat, offset } }
+    this.handsResort = false;
   }
 
   // Attaches a kit toy (recipe + build context) or clears it.
@@ -310,8 +313,22 @@ export class MotionDriver {
     // site's Sound (src/sound.js): a toy that plays its own audio checks
     // sound.enabled (the speaker button; embeds keep it off) and plays through
     // sound.audio() and sound.master (the site's limiter).
-    const about = { time, R, tap: this.tap, taps: this.taps, data: this.ctx?.kit?.data, sound: this.sound }; // prettier-ignore
+    // Sound C: info.view is the camera's turn about the toy (radians about
+    // the vertical), so a toy can tell when a drag spins it (the spinning top).
+    const view = cameraPos && info?.center ? Math.atan2(cameraPos[0] - info.center[0], cameraPos[2] - info.center[2]) : null; // prettier-ignore
+    const about = { time, R, tap: this.tap, taps: this.taps, data: this.ctx?.kit?.data, sound: this.sound, view }; // prettier-ignore
     if (this.recipe?.drive) this.recipe.drive(kt, this.state, drive, about);
+    // Lane Physics: pieces picked up in Hands-on go where the physics puts
+    // them (src/physics/hands-on.js), and are sorted again now and then.
+    if (this.handsTokens) {
+      const list = (drive.tokens ||= []);
+      for (const { index, token } of this.handsTokens) list[index] = token;
+    }
+    if (this.handsParts) Object.assign(drive.parts, this.handsParts);
+    if (this.handsResort) {
+      drive.resort = true;
+      this.handsResort = false;
+    }
     this.taps = []; // UI r4
     if (drive.body) {
       if (drive.body.quat) q = quatMul(drive.body.quat, q);
