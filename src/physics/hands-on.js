@@ -281,7 +281,8 @@ export class HandsOn {
       this.pieces.push({ body, token: p.token, part: p.part, home: { pos: p.pos.slice(), q: (p.quat || [0, 0, 0, 1]).slice() }, def: p }); // prettier-ignore
       // A piece on a stem (a cherry): pinned to its point, springing back
       // to how it hung.
-      if (p.joint) w.joint(body, body.toLocal(p.joint), null, p.joint, { length: p.jointLength ?? 0 });
+      if (p.joint)
+        w.joint(body, body.toLocal(p.joint), null, p.joint, { length: p.jointLength ?? 0 });
       if (p.spring) {
         body.restQ = body.q.slice();
         body.restK = p.spring;
@@ -327,7 +328,8 @@ export class HandsOn {
     body.invI = body.invIFree.slice();
     for (const pc of this.pieces) {
       const b = pc.body;
-      if (b !== body && b.pinned && this.world.touching(body, b)) this.passing.add(this.pairKey(body, b)); // prettier-ignore
+      // (Sunk in, not just resting on each other.)
+      if (b !== body && b.pinned && this.world.touching(body, b, 0.04 * this.R())) this.passing.add(this.pairKey(body, b)); // prettier-ignore
     }
   }
 
@@ -461,23 +463,46 @@ export class HandsOn {
     // What is right under it there: straight down from above, at its
     // middle and four points round its footprint.
     const foot = def?.pick ? 0.6 * Math.min(def.pick[0], def.pick[2]) : 0.5 * b.bound;
-    top = fl;
-    for (const [dx, dz] of [
-      [0, 0],
-      [1, 0],
-      [-1, 0],
-      [0, 1],
-      [0, -1],
-    ]) {
-      const o = [p[0] + dx * foot, fl + 6 * R, p[2] + dz * foot];
-      for (const pc of this.pieces) {
-        if (pc.body === b) continue;
-        const r = pc.def.pick || [pc.body.bound, pc.body.bound, pc.body.bound];
-        const t = rayEllipsoid(pc.body, r, { origin: o, dir: [0, -1, 0] });
-        if (t < Infinity) top = Math.max(top, o[1] - t);
+    // A recipe may snap it onto the piece below (a brick onto the studs).
+    const snap = this.info.recipe.hands.snap;
+    const under = (at) => {
+      let y = fl;
+      let who = null;
+      const spots = [[0, 0], [1, 0], [-1, 0], [0, 1], [0, -1]]; // prettier-ignore
+      for (const [dx, dz] of spots) {
+        const o = [at[0] + dx * foot, fl + 6 * R, at[2] + dz * foot];
+        for (const pc of this.pieces) {
+          if (pc.body === b) continue;
+          const r = pc.def.pick || [pc.body.bound, pc.body.bound, pc.body.bound];
+          const t = rayEllipsoid(pc.body, r, { origin: o, dir: [0, -1, 0] });
+          if (t < Infinity && o[1] - t > y) {
+            y = o[1] - t;
+            who = pc;
+          }
+        }
+      }
+      return { y, who };
+    };
+    let u = under(p);
+    // A recipe's `center` (0..1) draws it toward the middle of the piece
+    // under it (a hand sets a stone on a stone, not on its edge).
+    const pull = this.info.recipe.hands.center ?? 0;
+    if (pull && u.who) {
+      const c = u.who.body.pos;
+      p = [p[0] + (c[0] - p[0]) * pull, p[1], p[2] + (c[2] - p[2]) * pull];
+      u = under(p);
+    }
+    if (snap && u.who) {
+      const me = this.pieces.find((pc) => pc.body === b);
+      const r = snap({ held: me, under: u.who, at: p.slice() });
+      if (r) {
+        p = r.at;
+        if (r.quat) b.holdQ = r.quat;
+        u = under(p);
       }
     }
-    const y = top + below + 0.06 * R;
+    top = u.y;
+    const y = top + below + (this.info.recipe.hands.lift ?? 0.06 * R);
     h.target = [Math.max(-lim, Math.min(lim, p[0])), Math.min(fl + 5 * R, y), Math.max(-lim, Math.min(lim, p[2]))]; // prettier-ignore
   }
 
@@ -514,6 +539,14 @@ export class HandsOn {
     const max = 9 * R;
     const sp = v3.len(h.body.vel);
     if (sp > max) h.body.vel = v3.scale(h.body.vel, max / sp);
+    // A piece being placed is set down, not thrown.
+    if (h.place) {
+      h.body.vel = [0, Math.min(0, h.body.vel[1]), 0];
+      h.body.omega = [0, 0, 0];
+      this.hold = null;
+      this.world.wake();
+      return true;
+    }
     // A thrown thing turns a little the way it flies.
     const fwd = v3.cross([0, 1, 0], h.body.vel);
     h.body.omega = v3.add(h.body.omega, v3.scale(fwd, 0.25 / Math.max(h.body.bound, 0.2 * R)));

@@ -554,9 +554,10 @@ export class World {
     for (const b of this.bodies) if (b.hinge) b.q = quat.norm(quat.mul(twist(quat.mul(b.q, quat.conj(b.hinge.q)), b.hinge.axis), b.hinge.q)); // prettier-ignore
     for (const l of this.links) this.solveLink(l, h);
     const contacts = this.contacts();
-    // Each touching pair's pushes first, then its friction against the
-    // pair's whole push (solved one by one, the later points of a resting
-    // face would get almost none and slide).
+    // Each touching pair's pushes, and the push its friction works against
+    // (the pair's whole push shared out: one by one, the later points of a
+    // resting face would get almost none and slide). Friction acts on the
+    // speeds below; undoing slides here, point by point, made stacks creep.
     for (const group of groupPairs(contacts)) {
       this.solveGroup(group);
       let sum = 0;
@@ -565,8 +566,7 @@ export class World {
         sum += c.lambda;
         if (c.lambda > 0) on++;
       }
-      for (const c of group)
-        if (c.lambda > 0) this.contactFriction(c, Math.max(c.lambda, sum / on));
+      for (const c of group) if (c.lambda > 0) c.push = Math.max(c.lambda, sum / on);
     }
     this.particlePlanes();
     // Velocities from the moves.
@@ -581,7 +581,24 @@ export class World {
       if (!p.invMass) continue;
       for (let i = 0; i < 3; i++) p.vel[i] = (p.pos[i] - p.prev[i]) / h;
     }
-    for (const c of contacts) this.contactVelocity(c, h);
+    for (const c of contacts) {
+      this.contactVelocity(c, h);
+      if (c.lambda) {
+        c.a.touchTick = this.tick;
+        if (c.b) c.b.touchTick = this.tick;
+      }
+    }
+    // A body resting on something that only creeps (a slow slide, a
+    // rock) is calmed, so stacks settle instead of crawling.
+    const slow = this.sleepSpeed * 10;
+    const calm = Math.exp(-12 * h);
+    for (const b of this.bodies) {
+      if (b.fixed || b.held || b.touchTick !== this.tick) continue;
+      if (v3.len(b.vel) < slow && v3.len(b.omega) * (b.bound || 1) < slow) {
+        b.vel = v3.scale(b.vel, calm);
+        b.omega = v3.scale(b.omega, calm);
+      }
+    }
     if (this.maxSpeed < Infinity)
       for (const b of this.bodies) {
         const sp = v3.len(b.vel);
@@ -714,9 +731,9 @@ export class World {
     return out;
   }
 
-  // Whether two bodies overlap now.
-  touching(a, b) {
-    return this.pairContacts([], a, b).length > 0;
+  // Whether two bodies overlap now (by more than `depth`).
+  touching(a, b, depth = 0) {
+    return this.pairContacts([], a, b).some((c) => c.depth > depth);
   }
 
   planeContact(out, a, lp, rad, pl) {
@@ -893,36 +910,6 @@ export class World {
       if (b) b.applyPos(ps, rb, -1);
     }
     for (const c of group) c.lambda *= k;
-  }
-
-  // Static friction: undo the sliding along the surface this substep, as
-  // long as it would take less than mu times the push.
-  contactFriction(c, push) {
-    const { a, b, n } = c;
-    c.push = push;
-    const ra2 = quat.rotate(a.q, c.la);
-    const pa2 = v3.add(a.pos, ra2);
-    const paPrev = v3.add(a.prevPos, quat.rotate(a.prevQ, c.la));
-    let dp = v3.sub(pa2, paPrev);
-    if (b) {
-      const rb2 = quat.rotate(b.q, c.lb);
-      const pbNow = v3.add(b.pos, rb2);
-      const pbPrev = v3.add(b.prevPos, quat.rotate(b.prevQ, c.lb));
-      dp = v3.sub(dp, v3.sub(pbNow, pbPrev));
-    }
-    const dt = v3.sub(dp, v3.scale(n, v3.dot(dp, n)));
-    const slide = v3.len(dt);
-    if (slide < 1e-12) return;
-    const tdir = v3.scale(dt, -1 / slide);
-    const wta = a.weight(ra2, tdir);
-    const wtb = b ? b.weight(quat.rotate(b.q, c.lb), tdir) : 0;
-    if (wta + wtb <= 0) return;
-    const dlt = slide / (wta + wtb);
-    if (dlt < c.friction * push * 1.2) {
-      const pt = v3.scale(tdir, dlt);
-      a.applyPos(pt, ra2, 1);
-      if (b) b.applyPos(pt, quat.rotate(b.q, c.lb), -1);
-    }
   }
 
   contactVelocity(c, h) {
