@@ -3,6 +3,64 @@
 Prefix `wd`. Branch `claude/lane-worlds-engine`, PR "Engine: Worlds, the world engine and a sandbox
 island". How lanes work: [OPERATING.md](../OPERATING.md). Earlier lessons: [history.md](history.md).
 
+## Start here (paused after r4, October 2, 2026)
+
+The owner paused Worlds on October 2, 2026 (his review that night) while the team closes out the
+toys: a pause, not a stop. He liked the island and the character lab. Written by the r1–r4 session
+(Opus 5.5) for whoever picks Worlds up next.
+
+**State.** Main has r1–r3 (r3 is #135, merged October 1). Round 4 is PR #168 on
+`claude/lane-worlds-r4` (draft, "Phase Worlds r4: the controls (paused)"), not merged. Everything is
+behind the labs switch (`?labs=1`).
+
+**What works (r4):**
+
+- The character lab, `worlds/lab/?labs=1` (`src/worlds/lab.js`, `worlds/lab/`): the person on a
+  treadmill; stand, walk, run or any speed; side, front and three-quarter views; slow motion; a
+  chart of hip, knee, ankle, shoulder and elbow angles, live from the bones, over measured people
+  (`assets/worlds/lab/gait-reference.json`, built by `tools/wd-gait-refs.py` from the Fukuchi
+  datasets, CC BY 4.0; sources in docs/WORLDS.md, "The character lab").
+- The walk and run shaped to that data in the build (`tools/wd-character.py`, `GAIT`, `Shaper`,
+  `shape_cycle`): upright posture, arms at the sides swinging opposite the legs; the run with knee
+  drive, pumping elbows, a flight phase, 2.5 m/s. Rebuild with
+  `/opt/bpyenv/bin/python tools/wd-character.py` (Blender 5.0.1 as a module, MPFB 2.0.17; the
+  MakeHuman assets and 100STYLE in `.cache/worlds/r3/`, the gait data in `.cache/worlds/r4/`,
+  neither committed; the tool's header says where they come from).
+- Tuning (the owner's ask on the lab cards): the lab's Tune panel, a control per gait setting for
+  stand, walk and run, plus height and clothing colors; Reset; Copy, Save file, Open file and paste
+  of a small JSON (`"format": "splashery-gait"`, version 1; docs/WORLDS.md, "Tuning the gait", has
+  the format). `src/worlds/gait-tuner.js` applies it to the bones after the clips play and keeps the
+  feet down; the defaults are the measured gait (no change). Worlds reads
+  `assets/worlds/character/tuning.json` (shipped as the measured gait).
+- The island (r3, on main): the hybrid island, the realistic person by default, the scanned props,
+  `?stats=1`. Marked good by the owner: `wd-island-r3`, `wd-island-r3-desktop`, the rocks.
+
+**Open items (for the next round):**
+
+1. The owner's tuning file: when he sends his export, replace `assets/worlds/character/tuning.json`
+   with it (it is validated and clamped on load), then render `beach-r4` again
+   (`tools/world-clip.mjs`) and post it.
+2. Unmarked cards on Effect review page 2: `wd-beach-r4`, `wd-props-r4`, `wd-lab-controls-r5`. The
+   three lab cards are marked "fix" but the note is a yes (it asked for the controls, now built).
+3. The walking pelvis bobs 2.2 cm against a published 4–4.8 cm (a tuning setting can raise it).
+4. More customizable characters (body shapes beyond height, skin tones) and sharper: only height,
+   clothing colors and texture filtering are done.
+5. `wd-character-splats-r3` (the splat person) was not re-clipped; it plays the same clips.
+6. The last full run on the final head (`c497b65`: the `wd.spec` screenshot split and main with
+   #150) was stopped at 410 of 711 for the pause, with no failures; the head before it (`31319cf`)
+   ran 695 of 696 (the one failure, `smoke.spec.mjs:694`, is in the toy app and passed alone). Run
+   the full suite on #168's head before it merges.
+
+**How to test:**
+
+- `SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium npx playwright test tests/wd.spec.mjs tests/wdh.spec.mjs tests/wdr3.spec.mjs tests/wdr4.spec.mjs`
+  (about an hour in the software renderer; the island tests are the slow ones).
+- The lab by hand: `worlds/lab/?labs=1` (add `&tuning=default` to start from the measured gait). The
+  island: `worlds/?labs=1&render=hybrid&stats=1`.
+- Clips: `tools/wd-lab-clip.mjs` (the lab: `stand walk run controls`) and `tools/world-clip.mjs`
+  (the island scenes, e.g. `beach-r4 props-r4`), then `tools/wd-webm.mjs` for a small WebM. The
+  island renders at about 3 minutes per clip-second here; the lab at about 10 seconds.
+
 ## Brief (r4)
 
 (From the Operator's message of October 1, 2026, with the owner's marks)
