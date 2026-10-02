@@ -1,0 +1,205 @@
+{
+  "$comment": "Source: 79a24ecc7ae24af8c407bc0f94106ee253efcf89:src/state.js. normalizeOptions accepts booleans, finite numbers, hex colors and short words; historical input reconstruction.",
+  "$compat": {
+    "commit": "79a24ecc7ae24af8c407bc0f94106ee253efcf89",
+    "file": "src/state.js",
+    "description": "normalizeOptions accepts booleans, finite numbers, hex colors and short words; historical input reconstruction.",
+    "origin": "historical option reconstruction",
+    "hash": "j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJjcmVhdGVkQXQiOiIyMDI2LTA5LTIzVDAwOjI4OjIzLjAwMFoiLCJzZWVkIjo5LCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6ImhlYXJ0Iiwib3B0aW9ucyI6eyJjb2xvciI6IiNjNDJmM2MiLCJzdHlsZSI6ImxvdmUiLCJuIjowLjI1LCJmbGFnIjp0cnVlfX0sImxvb2siOnsiYmFja2dyb3VuZCI6InBhZ2UiLCJ0aGVtZSI6ImF1dG8iLCJhY2NlbnQiOiJhdXRvIiwic3BsYXRTY2FsZSI6MSwiZXhwb3N1cmUiOjF9LCJlZmZlY3RzIjp7InBva2UiOnsib24iOmZhbHNlLCJzdHJlbmd0aCI6MC42LCJ3b2JibGUiOjAuNX0sIndpbmQiOnsib24iOmZhbHNlLCJzdHJlbmd0aCI6MC41NSwiZGlyZWN0aW9uIjowfSwiZGlzc29sdmUiOnsib24iOmZhbHNlLCJzcHJlYWQiOjAuNTUsInNwZWVkIjowLjV9LCJkcm9wIjp7Im9uIjpmYWxzZSwiYm91bmNlIjowLjQ1LCJzY2F0dGVyIjowLjV9LCJtYWduZXQiOnsib24iOmZhbHNlLCJzdHJlbmd0aCI6MC43LCJyYWRpdXMiOjAuNDV9LCJ0d2lzdCI6eyJvbiI6ZmFsc2UsImFtb3VudCI6MC41LCJ3b2JibGUiOjAuMywiYXhpcyI6InkifSwic2xpY2UiOnsib24iOmZhbHNlLCJwb3NpdGlvbiI6MCwic3dlZXAiOjAuMzUsImF4aXMiOiJ4In0sInBhaW50Ijp7Im9uIjpmYWxzZSwic2l6ZSI6MC41LCJzcGxhc2giOjAuNSwiY29sb3IiOiIjZTYzYjJlIn19LCJwYWludCI6eyJzdGFtcHMiOltdfSwiY2FtZXJhIjp7InlhdyI6MC41NSwicGl0Y2giOjAuMjgsInJvbGwiOjAsImRpc3RhbmNlIjo1fSwiYXV0b3BsYXkiOnsidHVybnRhYmxlIjp0cnVlLCJlZmZlY3QiOiJub25lIn0sInBhdHRlcm4iOnsiaWQiOiJub25lIiwiZmxhZyI6IiIsInByb2plY3Rpb24iOiJ3cmFwIiwicmVwZWF0cyI6MSwiY29sb3JzIjpbIiNmZmZmZmYiLCIjZTYzYjJlIiwiIzBiNGY5YyJdLCJzY2FsZSI6MC41LCJhbW91bnQiOjEsImRldGFpbCI6MC42fSwibW90aW9uIjp7ImFsaXZlIjp0cnVlLCJtb3ZlIjoic3RpbGwiLCJzcGVlZCI6MC41LCJjb250cm9scyI6e319fQ",
+    "expected": {
+      "app": "splashery",
+      "version": 3,
+      "seed": 9,
+      "toy": {
+        "kind": "builtin",
+        "id": "heart",
+        "options": {
+          "color": "#c42f3c",
+          "style": "love",
+          "n": 0.25,
+          "flag": true
+        }
+      },
+      "look": {
+        "background": "page",
+        "theme": "auto",
+        "accent": "auto",
+        "splatScale": 1,
+        "exposure": 1
+      },
+      "effects": {
+        "poke": {
+          "on": false,
+          "strength": 0.6,
+          "wobble": 0.5
+        },
+        "wind": {
+          "on": false,
+          "strength": 0.55,
+          "direction": 0
+        },
+        "dissolve": {
+          "on": false,
+          "spread": 0.55,
+          "speed": 0.5
+        },
+        "drop": {
+          "on": false,
+          "bounce": 0.45,
+          "scatter": 0.5
+        },
+        "magnet": {
+          "on": false,
+          "strength": 0.7,
+          "radius": 0.45
+        },
+        "twist": {
+          "on": false,
+          "amount": 0.5,
+          "wobble": 0.3,
+          "axis": "y"
+        },
+        "slice": {
+          "on": false,
+          "position": 0,
+          "sweep": 0.35,
+          "axis": "x"
+        },
+        "paint": {
+          "on": false,
+          "size": 0.5,
+          "splash": 0.5,
+          "color": "#e63b2e"
+        }
+      },
+      "paint": {
+        "stamps": []
+      },
+      "camera": {
+        "yaw": 0.55,
+        "pitch": 0.28,
+        "roll": 0,
+        "distance": 5
+      },
+      "autoplay": {
+        "turntable": true,
+        "effect": "none"
+      },
+      "pattern": {
+        "id": "none",
+        "flag": "",
+        "projection": "wrap",
+        "repeats": 1,
+        "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+        "scale": 0.5,
+        "amount": 1,
+        "detail": 0.6
+      },
+      "motion": {
+        "alive": true,
+        "move": "still",
+        "speed": 0.5,
+        "controls": {}
+      }
+    },
+    "builtOptions": {
+      "color": "#c42f3c",
+      "style": "love"
+    }
+  },
+  "app": "splashery",
+  "version": 3,
+  "createdAt": "2026-09-23T00:28:23.000Z",
+  "seed": 9,
+  "toy": {
+    "kind": "builtin",
+    "id": "heart",
+    "options": {
+      "color": "#c42f3c",
+      "style": "love",
+      "n": 0.25,
+      "flag": true
+    }
+  },
+  "look": {
+    "background": "page",
+    "theme": "auto",
+    "accent": "auto",
+    "splatScale": 1,
+    "exposure": 1
+  },
+  "effects": {
+    "poke": {
+      "on": false,
+      "strength": 0.6,
+      "wobble": 0.5
+    },
+    "wind": {
+      "on": false,
+      "strength": 0.55,
+      "direction": 0
+    },
+    "dissolve": {
+      "on": false,
+      "spread": 0.55,
+      "speed": 0.5
+    },
+    "drop": {
+      "on": false,
+      "bounce": 0.45,
+      "scatter": 0.5
+    },
+    "magnet": {
+      "on": false,
+      "strength": 0.7,
+      "radius": 0.45
+    },
+    "twist": {
+      "on": false,
+      "amount": 0.5,
+      "wobble": 0.3,
+      "axis": "y"
+    },
+    "slice": {
+      "on": false,
+      "position": 0,
+      "sweep": 0.35,
+      "axis": "x"
+    },
+    "paint": {
+      "on": false,
+      "size": 0.5,
+      "splash": 0.5,
+      "color": "#e63b2e"
+    }
+  },
+  "paint": {
+    "stamps": []
+  },
+  "camera": {
+    "yaw": 0.55,
+    "pitch": 0.28,
+    "roll": 0,
+    "distance": 5
+  },
+  "autoplay": {
+    "turntable": true,
+    "effect": "none"
+  },
+  "pattern": {
+    "id": "none",
+    "flag": "",
+    "projection": "wrap",
+    "repeats": 1,
+    "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+    "scale": 0.5,
+    "amount": 1,
+    "detail": 0.6
+  },
+  "motion": {
+    "alive": true,
+    "move": "still",
+    "speed": 0.5,
+    "controls": {}
+  }
+}
