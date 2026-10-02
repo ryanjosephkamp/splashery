@@ -21,10 +21,13 @@ const PATH_STEPS = {
   ba: "Refining the whole path",
   focal: "Trying lens widths",
   solved: "Camera path done",
+  retry: "No match yet: trying again with looser matching",
 };
 
+import { WORKS, FAILS } from "./guide.js";
+
 const CSS = `
-.v3d-card { position: fixed; z-index: 4; top: 84px; left: 18px; width: min(300px, calc(100% - 32px));
+.v3d-card { position: fixed; z-index: 26; top: 84px; max-height: calc(100dvh - 110px); overflow-y: auto; left: 18px; width: min(300px, calc(100% - 32px));
   box-sizing: border-box; padding: 12px 14px; background: var(--paper, #fff); color: var(--ink, #111);
   border: 1px solid var(--line, #ddd); border-radius: var(--radius, 12px); box-shadow: var(--shadow);
   font: 13px/1.4 var(--font-body, sans-serif); }
@@ -37,7 +40,7 @@ const CSS = `
 .v3d-card .v3d-bar { height: 4px; margin: 6px 0; background: var(--line, #ddd); border-radius: 2px; overflow: hidden; }
 .v3d-card .v3d-bar i { display: block; height: 100%; width: 0; background: var(--accent, #0b4f9c); transition: width 0.2s; }
 .v3d-card canvas { display: block; width: 100%; aspect-ratio: 16 / 9; margin: 6px 0; border-radius: 6px; background: #000; }
-.v3d-card canvas[hidden] { display: none; }
+.v3d-card canvas[hidden], .v3d-card [hidden] { display: none; }
 .v3d-card .v3d-note { margin: 6px 0 0; color: var(--muted, #3f3f3f); font-size: 12px; }
 .v3d-card .v3d-err { margin: 6px 0 0; padding: 6px 8px; border-radius: 6px; background: var(--warn-soft, #fff4dc); color: var(--warn, #7a4b00); }
 .v3d-card .v3d-row { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
@@ -47,7 +50,11 @@ const CSS = `
 .v3d-card dl { display: grid; grid-template-columns: auto 1fr; gap: 1px 10px; margin: 6px 0 0; font-size: 12px; }
 .v3d-card dt { color: var(--faint, #525252); }
 .v3d-card dd { margin: 0; font-family: var(--font-mono, monospace); overflow-wrap: anywhere; }
-@media (max-width: 760px) { .v3d-card { top: 76px; left: 16px; } }
+.v3d-card .v3d-guide { margin: 8px 0 0; font-size: 12px; }
+.v3d-card .v3d-guide h3 { font-size: 12px; margin: 6px 0 2px; }
+.v3d-card .v3d-guide ul { margin: 0; padding-left: 18px; }
+.v3d-card .v3d-plan { margin: 6px 0 0; padding: 6px 8px; border-radius: 6px; background: var(--accent-soft, #e8f0fa); }
+@media (max-width: 760px) { .v3d-card { top: 76px; left: 16px; max-height: calc(100dvh - 76px - 240px); } }
 `;
 
 let card = null;
@@ -87,12 +94,17 @@ export function progressCard() {
   err.hidden = true;
   const stats = el("dl");
   stats.hidden = true;
+  const plan = el("p", { class: "v3d-plan" });
+  plan.hidden = true;
+  const guide = el("div", { class: "v3d-guide" });
+  guide.hidden = true;
   const buttons = el("div", { class: "v3d-row" });
-  root.append(title, list, bar, preview, note, err, stats, buttons);
+  root.append(title, plan, list, bar, preview, note, err, guide, stats, buttons);
   document.body.append(root);
   const started = {};
   const secs = {};
   let current = null;
+  let pace = null; // training's first measured step: { t, done }
 
   const api = {
     root,
@@ -105,8 +117,13 @@ export function progressCard() {
       for (const k of Object.keys(started)) delete started[k];
       for (const k of Object.keys(secs)) delete secs[k];
       current = null;
+      pace = null;
+      list.hidden = false;
+      bar.hidden = false;
       fill.style.width = "0";
       preview.hidden = true;
+      plan.hidden = true;
+      guide.hidden = true;
       err.hidden = true;
       stats.hidden = true;
       stats.replaceChildren();
@@ -130,22 +147,41 @@ export function progressCard() {
         current = e.stage;
         started[current] = now;
         rows[current].className = "on";
-        if (current === "train") preview.hidden = false;
+        if (current === "train") {
+          preview.hidden = false;
+          if (api.stopEl && !api.stopEl.disabled) api.stopEl.textContent = "Finish now";
+        }
       }
       const part = e.total ? Math.min(1, e.done / e.total) : 0;
       fill.style.width = `${Math.round(part * 100)}%`;
       const count = e.total > 1 ? `${e.done} / ${e.total}` : "";
       rows[current].lastChild.textContent = count;
-      if (e.stage === "train") note.textContent = e.note ? `Training: ${e.note}` : "";
-      else if (e.stage === "path")
+      if (e.stage === "train") {
+        // Time left, from the pace measured since the first step (r7).
+        let left = "";
+        if (e.done > 0 && !pace) pace = { t: now, done: e.done };
+        else if (pace && e.done > pace.done && now - pace.t > 5000 && e.total) {
+          const perStep = (now - pace.t) / (e.done - pace.done);
+          const mins = ((e.total - e.done) * perStep) / 60000;
+          left = mins < 1 ? ", under a minute left" : `, about ${Math.round(mins)} min left`;
+        }
+        note.textContent = e.note ? `Training: ${e.note}${left}` : "";
+      } else if (e.stage === "path")
         note.textContent = `${PATH_STEPS[e.note] || "Solving"}${count ? `: ${count}` : ""}`; // prettier-ignore
       else note.textContent = "";
     },
-    fail(message) {
+    fail(message, { advice = true } = {}) {
       if (current) rows[current].className = "done";
       err.textContent = message;
       err.hidden = false;
       preview.hidden = true;
+      plan.hidden = true;
+      // What makes a video work, again (r7), in place of the stages.
+      if (advice) {
+        list.hidden = true;
+        bar.hidden = true;
+        showGuide(guide);
+      }
       const close = el("button", { type: "button", id: "v3d-close" }, "Hide");
       close.addEventListener("click", () => (root.hidden = true));
       buttons.replaceChildren(close);
@@ -161,8 +197,16 @@ export function progressCard() {
       for (const [id] of STAGES) if (t[id] != null) rows[id].lastChild.textContent = `${t[id].toFixed(1)} s`; // prettier-ignore
       fill.style.width = "100%";
       preview.hidden = true;
-      note.textContent =
-        "Done. Turn and zoom it, or tap Replay flight to fly the video's own path.";
+      const st = result.stats || {};
+      const how = [
+        st.retried ? "The first try found no match; looser matching worked." : "",
+        st.timedOut
+          ? "Training stopped at the phone's time limit, with what it had."
+          : st.stoppedEarly
+            ? "Training was stopped early, with what it had."
+            : "",
+      ].filter(Boolean);
+      note.textContent = `Done. ${how.join(" ")}${how.length ? " " : ""}Turn and zoom it, or tap Replay flight to fly the video's own path.`; // prettier-ignore
       readout(stats, result);
       stats.hidden = false;
       buttons.replaceChildren();
@@ -180,8 +224,32 @@ export function progressCard() {
     },
     stopButton(onStop) {
       const stop = el("button", { type: "button", id: "v3d-stop" }, "Stop");
-      stop.addEventListener("click", onStop);
+      stop.addEventListener("click", () => {
+        // Once training has started, Stop keeps what has been trained so far.
+        stop.disabled = true;
+        stop.textContent = current === "train" ? "Finishing…" : "Stopping…";
+        onStop();
+      });
       buttons.replaceChildren(stop);
+      api.stopEl = stop;
+    },
+    // Before training (r7): the setting, a rough time and, on a phone, a warning, with Start and
+    // Cancel. Resolves true to start.
+    confirm(text) {
+      plan.textContent = text;
+      plan.hidden = false;
+      return new Promise((resolve) => {
+        const go = el("button", { type: "button", class: "primary", id: "v3d-start" }, "Start");
+        const no = el("button", { type: "button", id: "v3d-cancel" }, "Cancel");
+        go.addEventListener("click", () => resolve(true));
+        no.addEventListener("click", () => resolve(false));
+        buttons.replaceChildren(go, no);
+      });
+    },
+    // The plan line, kept while it works.
+    planLine(text) {
+      plan.textContent = text;
+      plan.hidden = !text;
     },
     hide() {
       root.hidden = true;
@@ -189,6 +257,21 @@ export function progressCard() {
   };
   card = api;
   return api;
+}
+
+function showGuide(box) {
+  const list = (items) => {
+    const ul = el("ul");
+    for (const t of items) ul.append(el("li", {}, t));
+    return ul;
+  };
+  box.replaceChildren(
+    el("h3", {}, "What works"),
+    list(WORKS),
+    el("h3", {}, "What fails"),
+    list(FAILS),
+  );
+  box.hidden = false;
 }
 
 export function hideCard() {
