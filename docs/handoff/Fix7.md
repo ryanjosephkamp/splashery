@@ -204,6 +204,12 @@ Not done: the Enigma "step back" item, waiting on the Operator (see "For the Ope
 - Question: the Enigma "step back" control (your trigger of 5:15 a.m. UTC) is not on a toy my brief
   names, so I haven't built it. Shall I add it to part 2 (a small change to computing-history.js)?
   The CC BY-SA change I've seen in CLAUDE.md on main; Fix7 adds no assets.
+- Two finished lanes' tests break on part 2 by a count or a list (not edited, per the rules):
+  `tests/fix3.spec.mjs:25` caps the bananas' token index at `bananas.length * 7`; each banana now
+  has 14 tokens (its fruit and inner peel are their own pieces, shown only while peeled), so the cap
+  would be `* 14`. `tests/fx4-engine.spec.mjs:79` lists the marble among "toys without the rim
+  kind"; its glass now uses the rim kind, so another toy without it (say the beach ball) would
+  replace it there.
 - In the full run of part 1, `tests/chs-engine.spec.mjs` ("a tap that returns options rebuilds the
   toy…", the atom toy) failed once while clips rendered alongside; part 1 doesn't touch it. I rerun
   it alone below.

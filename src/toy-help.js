@@ -565,9 +565,9 @@ export const TOY_HELP = {
   },
   "periodic-table": {
     howTo:
-      "Tap a tile to raise its atom, again to lower it. Tap the empty board for a tour, or a 57-71 or 89-103 cell to light its row.",
+      "Tap a tile to raise its atom, again to lower it. Tap the board for a tour, 57-71 for its row.",
     about:
-      "The periodic table lists all 118 elements in order of their protons, in rows that repeat their chemistry: each column's elements behave alike. The colors are the families, from the alkali metals on the left to the noble gases on the right.\n\nTap an element and its atom rises and builds itself: the protons (red) and neutrons (gray) of its commonest isotope, then the electrons, filling their shells in the real order. Tap the atom and an electron jumps up a shell and falls back, giving off light the color of the element's brightest visible line: red for hydrogen, yellow for sodium, green for copper. Elements with no visible line measured flash white. Tap the empty board for a tour through every element. The lanthanides (57 to 71) and actinides (89 to 103) sit in the two rows under the table, to keep it narrow: tap the 57-71 or 89-103 cell and its row lights up. Turn on Wide table in the Toy tab to see them in their places in the table instead, 32 columns wide. Numbers from NIST, PubChem and IUPAC.",
+      "The periodic table lists all 118 elements in order of their protons, in rows that repeat their chemistry: each column's elements behave alike. The colors are the families, from the alkali metals on the left to the noble gases on the right.\n\nTap an element and its atom rises and builds itself: the protons (red) and neutrons (gray) of its commonest isotope, then the electrons, filling their shells in the real order. Tap the atom and an electron jumps up a shell and falls back, giving off light the color of the element's brightest visible line: red for hydrogen, yellow for sodium, green for copper. Elements with no visible line measured flash white. Tap the board for a tour. Tap 57-71 or 89-103 to light that row; Wide table shows it in place. Numbers from NIST, PubChem and IUPAC.",
   },
   "crystal-lattice": {
     howTo: "Tap to send a wave through it. Pick one of eleven crystals in the Toy tab.",
