@@ -281,12 +281,58 @@ export function mirrorGrid(count) {
   return { cols, rows: Math.round((cols * 3) / 4) };
 }
 
+// The still picture's normalized depth (0 far .. 1 near) at (u, v).
+function stillDepth(depth) {
+  let lo = Infinity;
+  let hi = -Infinity;
+  for (const v of depth.d) {
+    if (v < lo) lo = v;
+    if (v > hi) hi = v;
+  }
+  const span = hi > lo ? hi - lo : 1;
+  return (u, v) => {
+    const dx = Math.min(depth.w - 1, Math.floor(u * depth.w));
+    const dy = Math.min(depth.h - 1, Math.floor(v * depth.h));
+    return (depth.d[dy * depth.w + dx] - lo) / span;
+  };
+}
+
 // Builds the relief picture: width 2 (recipe units), lift up to `lift`.
-export function buildMirror(k, { width = 2, lift = 0.8, part = 0 } = {}) {
+//
+// r3 (the owner's review of October 2, 2026: the still picture jittered and
+// flashed face on, until turned or flattened): the splats are sorted by
+// where they rest, and a relief splat is lifted only on the GPU, so a
+// picture whose splats all rest at z = 0 sorts as a tie, and the order
+// flips from frame to frame where neighbors overlap. The still picture's
+// splats now rest at their own depth (the option's depth, MIRROR.depth),
+// and a signed offset (axis 3) only brings them back toward the plane as
+// it flattens, so they sort the way they show. The camera's picture, whose
+// depth isn't known until it arrives, is built as before.
+export function buildMirror(k, { width = 2, lift = 0.8, part = 0, look = "plain" } = {}) {
+  MIRROR.look = look;
   const { cols, rows } = mirrorGrid(k.count);
   MIRROR.cols = cols;
   MIRROR.rows = rows;
   const height = (width * rows) / cols;
+  MIRROR.stillLift = 0;
+  if (!live.camera?.video && MIRROR.still) {
+    const at = stillDepth(MIRROR.still.depth);
+    const full = lift * Math.max(0, MIRROR.depth ?? 0.6);
+    MIRROR.stillLift = full;
+    MIRROR.liftUnit = lift;
+    MIRROR.stillAt = at;
+    const items = [];
+    for (let j = 0; j < rows; j++)
+      for (let i = 0; i < cols; i++) {
+        const u = (i + 0.5) / cols;
+        const v = (j + 0.5) / rows;
+        items.push({ p: [(u - 0.5) * width, (0.5 - v) * height, full * at(u, v)], n: [0, 0, 1], size: ((width / cols) * 1.45) / 0.01, flat: 0.08, opacity: 1, color: "#808080", kind: "relief", params: [u, v, 3, Math.max(0.001, full)], part, pattern: false }); // prettier-ignore
+      }
+    k.cloud({ share: items.length / k.count, pattern: false, jitter: 0 }, (rand, i) => items[i] || null); // prettier-ignore
+    MIRROR.cam?.close();
+    MIRROR.cam = null;
+    return { cols, rows, height };
+  }
   reliefGrid(k, {
     cols,
     rows,
@@ -302,7 +348,9 @@ export function buildMirror(k, { width = 2, lift = 0.8, part = 0 } = {}) {
   MIRROR.cam = null;
   if (live.camera?.video) {
     const tier = k.count > 200000 ? "high" : k.count > 90000 ? "mid" : "low";
-    MIRROR.cam = new CameraDepth(live.camera.video, { cols, rows, tier });
+    // r3: the back camera shows the right way round, not as a mirror.
+    const mirror = live.camera.facing !== "environment";
+    MIRROR.cam = new CameraDepth(live.camera.video, { cols, rows, tier, mirror });
   }
   return { cols, rows, height };
 }
@@ -317,14 +365,75 @@ export const mirrorScreen = {
     return MIRROR.rows;
   },
   version: (time) =>
-    MIRROR.cam ? Math.floor(time * 60) : `${MIRROR.still ? 1 : 0}|${MIRROR.gain.toFixed(3)}`,
+    MIRROR.cam || MIRROR.look === "hologram" ? Math.floor(time * 60) : `${MIRROR.still ? 1 : 0}|${MIRROR.gain.toFixed(3)}`, // prettier-ignore
   draw(g, time) {
     const dt = Math.max(0, Math.min(0.1, time - MIRROR.last));
     MIRROR.last = time;
     if (MIRROR.cam && live.camera) MIRROR.cam.draw(g, { gain: MIRROR.gain, dt });
+    else if (MIRROR.still && MIRROR.stillAt) drawStillRested(g); // r3
     else if (MIRROR.still) drawStill(g, MIRROR.cols, MIRROR.rows, MIRROR.still.photo, MIRROR.still.depth, { gain: MIRROR.gain }); // prettier-ignore
+    if (MIRROR.look === "hologram") hologram(g, MIRROR.cols, MIRROR.rows, time);
   },
 };
+
+// The still picture built at its depth (buildMirror): its colors on the
+// left, and on the right the signed offset (blue, about a half) that brings
+// each splat back toward the plane as the picture flattens.
+function drawStillRested(g) {
+  const { cols, rows, still, stillAt } = MIRROR;
+  const full = MIRROR.stillLift;
+  // How flat (0 the full relief the splats rest at .. 1 flat).
+  const f = full > 0 ? 1 - Math.max(0, Math.min(1, (MIRROR.gain * MIRROR.liftUnit) / full)) : 1;
+  const key = `${cols}x${rows}`;
+  if (MIRROR.colorsFor !== key) {
+    // The colors, once per build.
+    const c = document.createElement("canvas");
+    c.width = cols * 2;
+    c.height = rows;
+    const cg = c.getContext("2d");
+    drawStill(cg, cols, rows, still.photo, still.depth, { gain: 0 });
+    MIRROR.colors = cg.getImageData(0, 0, cols, rows);
+    MIRROR.near = new Float32Array(cols * rows);
+    for (let j = 0; j < rows; j++)
+      for (let i = 0; i < cols; i++) MIRROR.near[j * cols + i] = stillAt((i + 0.5) / cols, (j + 0.5) / rows); // prettier-ignore
+    MIRROR.colorsFor = key;
+  }
+  g.putImageData(MIRROR.colors, 0, 0);
+  const img = g.createImageData(cols, rows);
+  const px = img.data;
+  for (let i = 0; i < cols * rows; i++) {
+    const o = i * 4;
+    px[o] = px[o + 1] = 128;
+    px[o + 2] = Math.round(255 * (0.5 - (MIRROR.near[i] * f) / 2));
+    px[o + 3] = 255;
+  }
+  g.putImageData(img, cols, 0);
+}
+
+// r3: the hologram look (the owner's idea of October 2, 2026; the plain
+// look stays the default). The colors turn a cool cyan by their
+// brightness, every other row dims (scanlines that drift slowly upward),
+// and edges where the depth jumps glow.
+export function hologram(g, cols, rows, time) {
+  const img = g.getImageData(0, 0, cols * 2, rows);
+  const px = img.data;
+  const W = cols * 2;
+  const shift = Math.floor(time * 6) % 3;
+  for (let j = 0; j < rows; j++)
+    for (let i = 0; i < cols; i++) {
+      const o = (j * W + i) * 4;
+      const y = (0.3 * px[o] + 0.59 * px[o + 1] + 0.11 * px[o + 2]) / 255;
+      // Depth jumps (the height channel, red, on the right half).
+      const h = (x, yy) => px[(Math.min(rows - 1, Math.max(0, yy)) * W + cols + Math.min(cols - 1, Math.max(0, x))) * 4 + (MIRROR.stillAt && !MIRROR.cam ? 2 : 0)]; // prettier-ignore
+      const edge = Math.min(1, (Math.abs(h(i + 1, j) - h(i - 1, j)) + Math.abs(h(i, j + 1) - h(i, j - 1))) / 40); // prettier-ignore
+      const scan = (j + shift) % 3 === 0 ? 0.55 : 1;
+      const v = Math.min(1, (0.15 + 0.85 * y) * scan + 0.7 * edge);
+      px[o] = Math.round(255 * v * 0.35);
+      px[o + 1] = Math.round(255 * Math.min(1, v * 0.95 + 0.05));
+      px[o + 2] = Math.round(255 * Math.min(1, v * 1.1 + 0.1));
+    }
+  g.putImageData(img, 0, 0, 0, 0, cols, rows);
+}
 
 export function mirrorStatus() {
   const cam = MIRROR.cam;

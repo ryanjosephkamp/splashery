@@ -156,14 +156,20 @@ work is in [OPERATING.md](OPERATING.md).
   [reviews/2026-10-02-mega-review](reviews/2026-10-02-mega-review/review.md), with his plan answers
   in answers.md there) and accepted every recommendation: up to ten workers until about October 5,
   CC BY-SA assets per asset (#173), and every toy interactive with hands-on play and a little
-  physics before the team turns to Matterhorn. Merged that day: the review and its sound round
+  physics before the team turns to other work. Merged that day: the review and its sound round
   (#170), Shelves (#148), Science (#132) and Science r2 (#182, #181: pinch-and-scroll zoom and
   thermal ellipsoids on phones), Live input r2 (#162, #163: the Song landscape plays at once, with
   four measured looks), Fluids r4 and r5 (#152, #180: a GPU solver and a liquid surface, a tappable
   faucet, real lava and a smooth phone tier), the Photoreal research (#175, with a private
-  comparison page) and four handoff updates. Lane Physics drafted the hands-on plan for every toy
-  (docs/HANDS-ON-PLAN.md on its branch); the owner marks it on the Hands-on Plan page (OPERATING.md,
-  "Pages"), and category lanes build what he approves.
+  comparison page), four handoff updates, Sound C (#183, #192: new sounds for the 44 toys he named,
+  sounds that pause with their effects and a first tap on time), the physics engine (#176), UI r5's
+  engine (#177: the gallery button and rotation defaults), Video 3D part 2 and r7 (#169, #186:
+  sharper streets, what to film, phone-safe training and steering the flight; labs), and Live input
+  r3 (#187, #191: the Song landscape opens in its Live view, tilts, replays and scrubs; Moving photo
+  to 3D; labs). Codex tasks 02 to 06 (docs/codex/) audit credits, test health, phone and
+  accessibility, old links and load times; the owner starts them. Lane Physics drafted the hands-on
+  plan for every toy (docs/HANDS-ON-PLAN.md on its branch); the owner marks it on the Hands-on Plan
+  page (OPERATING.md, "Pages"), and category lanes build what he approves.
 - Locked (owner approved, do not change its look or behaviour): the laptop. Its smoke test guards
   it.
 
@@ -171,22 +177,22 @@ work is in [OPERATING.md](OPERATING.md).
 
 The full table, with owned files, sessions, branches and PRs, is [WORKSTREAMS.md](WORKSTREAMS.md).
 
-| Lane                                                                        | Status                                                                                     | Handoff                                  |
-| --------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ | ---------------------------------------- |
-| Operator                                                                    | Running; runs the lanes                                                                    | —                                        |
-| Sound C: the sound notes of October 2                                       | Running, Opus 5.5 (engine #183 fixing one test; the toys next)                             | `handoff/SoundC.md` (on its branch)      |
-| Fix7: taps where you tap, and the bugs from October 2                       | Running, Opus 5.5 (part 1 #174 waits for marks; part 2 #179)                               | `handoff/Fix7.md` (on its branch)        |
-| Physics: hands-on play and a physics engine                                 | Running, Opus 5.5 (engine #176 in a test run; showcase toys #184; the hands-on plan)       | `handoff/Physics.md` (on its branch)     |
-| Sharpness A: landmarks, vehicles, Medieval, Open me, gems, space, weather   | Running, Opus 5.5 (#172 waits for marks)                                                   | `handoff/SharpA.md` (on its branch)      |
-| Sharpness B: food, toys, math, AI, the album covers, closed bases           | Running, Opus 5.5 (started October 2, 2026)                                                | `handoff/SharpB.md` (on its branch)      |
-| UI r5: gallery button, rotation defaults, the piano bar, big models, Record | Running, Opus 5.5 (engine #177 in a test run; #178 waits for marks)                        | `handoff/UIr5.md` (on its branch)        |
-| Live input r3: the October 2 notes and Moving photo to 3D                   | Running, Opus 5.5 (r2 merged)                                                              | `handoff/LiveInput.md`                   |
-| Video 3D: a one-week spike                                                  | Running, Opus 5.5 (part 2 #169, r7)                                                        | [handoff/Video3D.md](handoff/Video3D.md) |
-| Fluids r4 and r5                                                            | Merged; waits for the owner's phone test before the next round                             | [handoff/Fluids.md](handoff/Fluids.md)   |
-| Science                                                                     | Idle after r2 (merged)                                                                     | [handoff/Science.md](handoff/Science.md) |
-| Worlds r4: the character lab                                                | Paused at the owner's request (October 2, 2026; #168 draft)                                | [handoff/Worlds.md](handoff/Worlds.md)   |
-| Integrator and Integrator 2                                                 | Running, Sonnet 5.5; they can split one run's spec files in half                           | —                                        |
-| Next (WORKSTREAMS.md, Next)                                                 | Category hands-on lanes once the owner approves the hands-on plan; Quality, Knots, Food r2 | —                                        |
+| Lane                                                                        | Status                                                                                       | Handoff                                  |
+| --------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | ---------------------------------------- |
+| Operator                                                                    | Running; runs the lanes                                                                      | —                                        |
+| Sound C: the sound notes of October 2                                       | Merged (engine #183, toys #192); its sounds are live                                         | `handoff/SoundC.md` (on its branch)      |
+| Fix7: taps where you tap, and the bugs from October 2                       | Running, Opus 5.5 (#174 and #179 wait for marks)                                             | `handoff/Fix7.md` (on its branch)        |
+| Physics: hands-on play and a physics engine                                 | Running, Opus 5.5 (engine #176 merged; showcase toys #184 wait for marks; the hands-on plan) | `handoff/Physics.md` (on its branch)     |
+| Sharpness A: landmarks, vehicles, Medieval, Open me, gems, space, weather   | Running, Opus 5.5 (#172 waits for marks)                                                     | `handoff/SharpA.md` (on its branch)      |
+| Sharpness B: food, toys, math, AI, the album covers, closed bases           | Running, Opus 5.5 (#185 waits for marks)                                                     | `handoff/SharpB.md` (on its branch)      |
+| UI r5: gallery button, rotation defaults, the piano bar, big models, Record | Running, Opus 5.5 (engine #177 merged; #178 waits for marks)                                 | `handoff/UIr5.md` (on its branch)        |
+| Live input r3: the October 2 notes and Moving photo to 3D                   | Merged (#187, #191; labs)                                                                    | `handoff/LiveInput.md`                   |
+| Video 3D: a one-week spike                                                  | Merged r7 (#169, #186; labs)                                                                 | [handoff/Video3D.md](handoff/Video3D.md) |
+| Fluids r4 and r5                                                            | Merged; waits for the owner's phone test before the next round                               | [handoff/Fluids.md](handoff/Fluids.md)   |
+| Science                                                                     | Idle after r2 (merged)                                                                       | [handoff/Science.md](handoff/Science.md) |
+| Worlds r4: the character lab                                                | Paused at the owner's request (October 2, 2026; #168 draft)                                  | [handoff/Worlds.md](handoff/Worlds.md)   |
+| Integrator and Integrator 2                                                 | Running, Sonnet 5.5; they can split one run's spec files in half                             | —                                        |
+| Next (WORKSTREAMS.md, Next)                                                 | Category hands-on lanes once the owner approves the hands-on plan; Quality, Knots, Food r2   | —                                        |
 
 E4-finish, E5, E6a, E6b, F, G, Math, Fix3, AI, Help, HelpTextA, HelpTextB, Pictures, Manual and
 Screens are done, and so are Viewer, Studio Sound, Learn, Lab, Studio Models, Books, Fidelity A,
