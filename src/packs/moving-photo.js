@@ -219,7 +219,32 @@ export async function depthOf(frames, w, h, onStatus) {
 
 // A clip: { name, n, w, h, delays (ms), colors (RGBA per frame, w by h),
 // near (0..1 per frame), mean (each pixel's average nearness) }.
+// Where the depth jumps (a near bunny before a far meadow), the model's
+// depth, smaller than the frame and blurred, ramps across a few pixels, and
+// those pixels would hang as dots between the two. Each pixel whose 5 by 5
+// neighborhood spans more than EDGE goes with the nearer or farther side,
+// whichever it is closer to, so the edge is a clean cut.
+const EDGE = 0.15;
+export function sharpenEdges(d, w, h) {
+  const out = new Float32Array(d.length);
+  for (let y = 0; y < h; y++)
+    for (let x = 0; x < w; x++) {
+      let lo = Infinity;
+      let hi = -Infinity;
+      for (let j = Math.max(0, y - 2); j <= Math.min(h - 1, y + 2); j++)
+        for (let i = Math.max(0, x - 2); i <= Math.min(w - 1, x + 2); i++) {
+          const v = d[j * w + i];
+          if (v < lo) lo = v;
+          if (v > hi) hi = v;
+        }
+      const v = d[y * w + x];
+      out[y * w + x] = hi - lo > EDGE ? (v - lo < hi - v ? lo : hi) : v;
+    }
+  return out;
+}
+
 export function makeClip(name, w, h, frames, near) {
+  near = near.map((d) => sharpenEdges(d, w, h));
   const mean = new Float32Array(w * h);
   for (const d of near) for (let i = 0; i < mean.length; i++) mean[i] += d[i] / near.length;
   return {
@@ -490,6 +515,22 @@ export const MOVING_PHOTO = {
         const u = (i + 0.5) / cols;
         const v = (j + 0.5) / rows;
         items.push({ p: [(u - 0.5) * width, (0.5 - v) * height, full * mean(u, v)], n: [0, 0, 1], size: ((width / cols) * 1.3) / 0.01, flat: 0.08, opacity: 1, color: "#808080", kind: "relief", params: [u, v, 3, Math.max(0.001, full)], pattern: false }); // prettier-ignore
+      }
+    // A backing layer at the farthest depth near each place, in the frame's
+    // own colors: where a near part stands forward, what it uncovers from
+    // the side (no splats were there) shows the frame's color instead of
+    // gaps. It barely moves (its lift is a thousandth).
+    const far = (u, v) => {
+      let lo = 1;
+      for (let dy = -3; dy <= 3; dy++)
+        for (let dx = -3; dx <= 3; dx++) lo = Math.min(lo, mean(Math.min(1, Math.max(0, u + dx / cols)), Math.min(1, Math.max(0, v + dy / rows)))); // prettier-ignore
+      return lo;
+    };
+    for (let j = 0; j < rows; j += 2)
+      for (let i = 0; i < cols; i += 2) {
+        const u = (i + 1) / cols;
+        const v = (j + 1) / rows;
+        items.push({ p: [(u - 0.5) * width, (0.5 - v) * height, -0.02], n: [0, 0, 1], size: ((width / cols) * 2.8) / 0.01, flat: 0.08, opacity: 1, color: "#808080", kind: "relief", params: [u, v, 3, 0.001], pattern: false }); // prettier-ignore
       }
     k.cloud({ share: items.length / k.count, pattern: false, jitter: 0 }, (rand, i) => items[i] || null); // prettier-ignore
     // A thin dark frame, like a screen's.
