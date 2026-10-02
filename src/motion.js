@@ -307,7 +307,10 @@ export class MotionDriver {
     // site's Sound (src/sound.js): a toy that plays its own audio checks
     // sound.enabled (the speaker button; embeds keep it off) and plays through
     // sound.audio() and sound.master (the site's limiter).
-    const about = { time, R, tap: this.tap, taps: this.taps, data: this.ctx?.kit?.data, sound: this.sound }; // prettier-ignore
+    // Sound C: info.view is the camera's turn about the toy (radians about
+    // the vertical), so a toy can tell when a drag spins it (the spinning top).
+    const view = cameraPos && info?.center ? Math.atan2(cameraPos[0] - info.center[0], cameraPos[2] - info.center[2]) : null; // prettier-ignore
+    const about = { time, R, tap: this.tap, taps: this.taps, data: this.ctx?.kit?.data, sound: this.sound, view }; // prettier-ignore
     if (this.recipe?.drive) this.recipe.drive(kt, this.state, drive, about);
     this.taps = []; // UI r4
     if (drive.body) {
