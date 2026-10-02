@@ -2602,31 +2602,38 @@ Proposals below are suggestions; the owner may change them.
     mmCIF and PDB (ANISOU) readers; a GPU program (labs) moves each atom by its own U, sets the
     one-Gaussian look's exact shape, and magnifies about a focus with a clipping slab. Samples:
     aspirin form II at 300 K (COD 2104857, public domain) and crambin at 0.54 Å (PDB 1EJG, CC0).
+    Science r2 (the owner's review of October 2, 2026: "really, really big" and slow on his phone):
+    a pattern flag in the part field had turned every atom splat into a whole-atom Gaussian (big
+    overlapping discs hiding the bonds); now each keeps its type, and the toy draws 0.6 of the kit's
+    count (36k on the low tier).
   - Sound: Quiet: a faint jostle of tiny taps under a soft breath as the atoms jiggle; a softer
     breath as they settle.
-- **Super-resolution microscope** (`smlm-microscope`). Now: tap: Zoom in or out. Plan: keep.
+- **Super-resolution microscope** (`smlm-microscope`). Now: tap: Show a slice at the depth you tap.
+  Plan: keep.
   - Owner: The owner's question of September 29, 2026 (can splats be a real science tool?) and his
     answer "Science yes" (lane Science; labs only).
   - Effect: A super-resolution microscope's localizations, each a Gaussian as wide as its
     localization precision (and deeper by its axial precision), colored by depth, time or channel.
-    The tap dives about 60 times into the place you tap, down to single molecules, showing a thin
-    slice at the depth there (2.6 s); a second tap zooms back out.
+    Pinch or scroll zooms the camera all the way down to single molecules (about 150 times closer)
+    and back out; every localization stays at least a pixel wide. The tap shows a slice 200 nm thick
+    at the depth of the molecules you tap; a second tap shows them all.
   - Improved: Science: .smlm (a zip, inflated with DecompressionStream) and ThunderSTORM CSV
     readers; tier budgets (84k to 392k localizations); a size floor so the whole field shows at any
     zoom. Sample: a 12 µm square of Christophe Leterrier's microtubules and clathrin record on
     ShareLoc.XYZ (CC BY 4.0, a subset).
-  - Sound: A microscope's focus knob turning smoothly as the view dives in, and turning back as it
-    zooms out.
-- **Galaxy in a box** (`galaxy-box`). Now: tap: Zoom in or out. Plan: keep.
+  - Sound: A microscope's focus knob turning smoothly as the slice comes in, and turning back as it
+    goes.
+- **Galaxy in a box** (`galaxy-box`). Now: tap: Peel away the hot gas. Plan: keep.
   - Owner: The owner's question of September 29, 2026 (can splats be a real science tool?) and his
     answer "Science yes" (lane Science; labs only).
   - Effect: The gas of the FIRE-2 Milky Way–mass galaxy m12i today, each particle the Gaussian with
     the same spread as its smoothing kernel (0.27 of its smoothing length), colored by temperature
-    and brighter where denser, in a box with a dark floor. The tap zooms about 8 times into the gas
-    you tap (2.2 s); a second tap zooms out. Only the cold gas peels the hot gas away.
+    and brighter where denser, in a box with a dark floor. Pinch or scroll zooms the camera far into
+    the gas (about 60 times closer) and back out. The tap peels the hot gas away (a second tap
+    brings it back).
   - Improved: Science: tools/sci-galaxy.mjs (jsfive) cuts 300,000 of the 2.4 million gas particles
     in a 40 × 12 × 40 kpc box round the galaxy from the CC BY 4.0 snapshot (FlatHUB), turns the disk
     face up and works out each temperature; the toy draws them approximately (not a column-density
     integral).
-  - Sound: Space is silent: a long, soft breath as the view glides in, and a lower one as it pulls
-    back.
+  - Sound: Space is silent: a long, soft breath as the hot gas thins away, and a lower one as it
+    comes back.
