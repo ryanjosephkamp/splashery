@@ -135,6 +135,25 @@ Model: Opus 5.5 (claude-opus-5-5), default effort.
   to PACKS.md 7e (quiet, no clicks, whooshes, pads or notes). Main merged twice (Fluids, the sound
   review).
 
+- October 2, 2026: #132 merged. Round 2 (the owner's review of October 2, after trying the toys on
+  his phone; the Operator's brief of 07:05 UTC) on `claude/lane-science-r2`, draft PR #181, with the
+  engine part in "Engine: …" PR #182 (`claude/lane-science-engine`, merge first):
+  - Thermal ellipsoids: the atoms' and bonds' colors returned `{ keep }`, and the kit adds 16 to the
+    part field for it, which is where the packed type lives: every atom splat became a whole-atom
+    Gaussian (his big overlapping discs, the bonds hidden, and about 23 times slower on the low
+    tier). Fixed, with a test that decodes every splat's type; density 0.6 (36k splats on a phone).
+    The 50% scale (1.5382) was right all along. Only with labs on, which is why r1's clips missed
+    it.
+  - Microscope and galaxy: the normal pinch and wheel zoom the camera itself, all the way in and out
+    (`closeUp`: 0.02 and 0.05 radii, about 150 and 60 times closer than home); the tap-to-zoom
+    magnifier is gone. The shader's free mode keeps every splat at least a pixel wide at its own
+    distance from the camera and fades what is much nearer than the point the camera looks at. The
+    microscope's tap shows a slice 200 nm thick at the tapped depth; the galaxy's peels the hot gas.
+  - Cards on page 2: `sci-microscope-r3`, `sci-microscope-nucleus-r2`, `sci-galaxy-r4`,
+    `sci-ellipsoids-phone`, `sci-protein-phone` (MP4s); the cards they replace are marked
+    (`sci-galaxy-r3`, `sci-microscope-nucleus`, and on page 1 `sci-microscope-r2` and
+    `sci-ellipsoids`).
+
 ## Notes
 
 - **Main merge of October 1, 2026 (Books r4, engine fix 4).** `sci`, `kit`, `help`, `smoke` and
@@ -219,6 +238,11 @@ Model: Opus 5.5 (claude-opus-5-5), default effort.
   against its carbon.
 - A tap that re-aims the zoomed-in ellipsoids goes through the pick pass; it lands where the
   magnified splats are drawn, and the recipe maps it back.
+- r2: close up, each localization (or gas particle) is drawn at its true size, so uncertain ones are
+  big, soft spots; that is the data, not a blur. The microscope stops at 0.02 radii because, closer,
+  the camera sits inside a 3D cloud of molecules.
+- r2: WebGPU couldn't be checked here (the page crashes in this sandbox's headless Chromium); the
+  phone bug was in the packing, so the fix holds on both renderers.
 
 - Page 1 of the Effect review filled its 1 GB of clip storage during the r2 round.
   `sci-microscope-r2` and the source cards are on page 1; `sci-galaxy-r2` and
@@ -235,5 +259,7 @@ Model: Opus 5.5 (claude-opus-5-5), default effort.
 - For PACKS.md: a lesson: `gpuField` can carry per-splat data for any purpose in the four splatAnim
   floats (kind numbers of 1000 and up are safe in the kit's program), and uniforms can ride on
   `out.morph`, `out.glow` and `out.grow` (`src/science/field.js` is an example).
+- For PACKS.md: a kit color function's `{ keep: true }` (or `pattern: false`) adds 16 to the part
+  field (anim x). A recipe that packs its own data in the part field must not use them.
 - For PACKS.md: rebuilding a toy with new options resets the camera's home to the app's default
   distance, not the toy's own `camera.distance` (a clip tool that snaps to home sees it jump).

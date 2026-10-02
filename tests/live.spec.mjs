@@ -316,7 +316,7 @@ test.describe("a sung G3", () => {
       );
       await idle(page);
       const d = await page.evaluate(() => window.__splashery.player.motion.ctx.kit.data.song);
-      expect(d).toMatchObject({ liveMic: true, nf: 96 });
+      expect(d).toMatchObject({ liveMic: true, nf: 128 });
       await page.waitForTimeout(3000);
       await page.screenshot({ path: "tests/screenshots/live-landscape-390x844.png" });
       // The front row holds the note: its brightest band is near 196 Hz.
