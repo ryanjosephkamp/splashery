@@ -5,7 +5,8 @@
 // pose eases towards them, and a released drag coasts to a stop. An idle
 // turntable starts after a pause (never under prefers-reduced-motion).
 // With the tilt locked (lane Viewer), a drag only spins the toy around its
-// vertical axis: pitch and roll stay at the toy's home pose.
+// vertical axis: pitch and roll stay at the toy's home pose. A toy may also
+// keep the tilt within its own range (setPitchRange, lane Live input r3).
 
 const TAU = Math.PI * 2;
 const PITCH_LIMIT = 1.45;
@@ -42,6 +43,7 @@ export class OrbitCamera {
     this.offset = [0, 0, 0];
     this.turntable = !reducedMotion;
     this.tiltLock = false;
+    this.pitchRange = null; // [low, high] radians, or the usual limits
     this.turntableSpeed = 0.18;
     this.idleDelay = 2.5;
     this.idleFor = 0;
@@ -54,6 +56,19 @@ export class OrbitCamera {
 
   setTurntable(on) {
     this.turntable = !!on && !this.reducedMotion;
+  }
+
+  // Keeps the tilt between low and high (radians; positive looks down), or
+  // within the usual limits with null (lane Live input r3).
+  setPitchRange(range) {
+    const ok = Array.isArray(range) && range.length === 2 && range.every(Number.isFinite);
+    this.pitchRange = ok ? [Math.max(-PITCH_LIMIT, range[0]), Math.min(PITCH_LIMIT, range[1])] : null; // prettier-ignore
+    this.tgt.pitch = this.clampPitch(this.tgt.pitch);
+  }
+
+  clampPitch(p) {
+    const [lo, hi] = this.pitchRange || [-PITCH_LIMIT, PITCH_LIMIT];
+    return Math.min(hi, Math.max(lo, p));
   }
 
   // Locks or frees the tilt. Locking eases pitch and roll back home.
@@ -108,7 +123,7 @@ export class OrbitCamera {
     const dYaw = -rx * k;
     const dPitch = ry * k;
     this.tgt.yaw += dYaw;
-    this.tgt.pitch = clampPitch(this.tgt.pitch + dPitch);
+    this.tgt.pitch = this.clampPitch(this.tgt.pitch + dPitch);
     if (dt > 0) {
       const inv = 1 / Math.max(dt, 1 / 240);
       this.vel.yaw = this.vel.yaw * 0.5 + dYaw * inv * 0.5;
@@ -213,7 +228,7 @@ export class OrbitCamera {
     const n = (v, d) => (Number.isFinite(v) ? v : d);
     const next = {
       yaw: n(s?.yaw, DEFAULT_CAMERA.yaw),
-      pitch: clampPitch(n(s?.pitch, DEFAULT_CAMERA.pitch)),
+      pitch: this.clampPitch(n(s?.pitch, DEFAULT_CAMERA.pitch)),
       roll: wrapAngle(n(s?.roll, 0)),
       distance: Math.min(
         this.maxDistance,
@@ -235,7 +250,7 @@ export class OrbitCamera {
       const coast = Math.abs(this.vel.yaw) + Math.abs(this.vel.pitch) > 1e-3;
       if (coast) {
         this.tgt.yaw += this.vel.yaw * dt;
-        this.tgt.pitch = clampPitch(this.tgt.pitch + this.vel.pitch * dt);
+        this.tgt.pitch = this.clampPitch(this.tgt.pitch + this.vel.pitch * dt);
         const f = Math.exp(-dt / 0.22);
         this.vel.yaw *= f;
         this.vel.pitch *= f;
@@ -308,10 +323,6 @@ export class OrbitCamera {
       forward: [-back[0], -back[1], -back[2]],
     };
   }
-}
-
-function clampPitch(p) {
-  return Math.min(PITCH_LIMIT, Math.max(-PITCH_LIMIT, p));
 }
 
 function wrapAngle(a) {

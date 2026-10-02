@@ -5,10 +5,12 @@
 //
 //   python3 -m http.server 4173 --bind 127.0.0.1 &
 //   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/v3d-clip.mjs <out.gif> \
-//     --scene=<sample id> --mode=turn|replay|roam [--size=390x844] [--secs=8] [--fps=12]
+//     --scene=<sample id> --mode=turn|replay|roam|steer [--size=390x844] [--secs=8] [--fps=12]
 //
 // turn: the camera swings around the scene. replay: the tap (Replay flight) flies the video's
-// camera path. roam: the flight, then the camera turns away from where the flight ended.
+// camera path. roam: the flight, then the camera turns away from where the flight ended. steer
+// (r7): the flight, a drag that turns the view while it flies (2 to 4 s), a tap that pauses it
+// (at 5.5 s, the view held) and a tap that goes on (at 8 s).
 // --strip=6 also writes <out>-strip.png, six frames side by side.
 
 import { chromium } from "@playwright/test";
@@ -93,6 +95,22 @@ const res = await page.evaluate(
         const yaw = home.yaw + s.swing * Math.sin(f * Math.PI * 2);
         cam.cur = { ...home, yaw, pitch: home.pitch + 0.15 * Math.sin(f * Math.PI * 4) };
         cam.tgt = { ...cam.cur };
+      }
+      if (s.mode === "steer") {
+        // As a visitor would: a drag turns cam.tgt while the flight flies, then two taps.
+        const t = n * step;
+        if (t > 2 && t < 4) {
+          cam.tgt.yaw += step * 0.2;
+          cam.tgt.pitch += step * 0.03;
+        }
+        if (!roamFrom && t >= 5.5) {
+          roamFrom = t;
+          player.act(null);
+        }
+        if (roamFrom && roamFrom < 8 && t >= 8) {
+          roamFrom = 8;
+          player.act(null);
+        }
       }
       if (s.mode === "roam" && player.motion.state.replay > 0.5) {
         // After the path's end, the camera turns away from where the flight ended.

@@ -1500,15 +1500,21 @@ export const TOY_HELP = {
   },
   "splat-mirror": {
     howTo:
-      "Tap “Use my camera” in the Toy tab to see yourself in splats; turn the picture to see its depth.",
+      "Tap “Start camera” to see yourself in splats; turn it to see the depth. More in the Toy tab.",
     about:
-      "A mirror made of splats. Tap “Use my camera” and each splat takes the color of its place in the picture, so the mirror shows you, live.\n\nA depth model, Depth Anything V2 Small, then works out how near each part of the picture is, as often as your device can (several times a second on a computer), and each splat moves toward you by that much: your nose comes forward and the wall behind you stays back. Turn the picture to see the relief. It is a guess from one camera, so the depth is relative, like a sculptor's relief, not exact distances. The model (about 27 MB) loads only after you tap, and the pictures stay on this device; nothing is recorded or sent.",
+      "A mirror made of splats. Tap “Start camera” and each splat takes the color of its place in the picture, so the mirror shows you, live.\n\nA depth model, Depth Anything V2 Small, then works out how near each part of the picture is, as often as your device can (several times a second on a computer), and each splat moves toward you by that much: your nose comes forward and the wall behind you stays back. Turn the picture to see the relief. It is a guess from one camera, so the depth is relative, like a sculptor's relief, not exact distances. On a phone you can switch to the back camera. Record a video keeps what the mirror shows in this page's memory until you save it. Look: Hologram turns it cyan, with scanlines and glowing edges. The model (about 27 MB) loads only after you tap, and the pictures stay on this device; nothing is sent.",
+  },
+  "moving-photo-3d": {
+    howTo:
+      "Tap to pause or play, and turn the picture to see its depth. Open your own GIF or video in the Toy tab.",
+    about:
+      "A video is a string of photos, and a computer can guess how far away each part of a photo is. This toy does that for every frame: a depth model, a small neural network (Depth Anything V2 Small), looks at each frame and gives every spot a distance, and the frames play back as splats that move toward you by as much as they are near. The bunny comes forward, the meadow and the sky stay back, and as the clip plays the relief moves with it. Turn the picture to see it from the side.\n\nOpen a GIF or a short video in the Toy tab: its first eight seconds, up to 48 frames, are read on your device, the model (about 27 MB) loads the first time, and each frame takes a moment. Nothing is uploaded. Depth sets how deep the relief is. The sample is a scene from Big Buck Bunny (Blender Foundation, CC BY 3.0).",
   },
   "song-landscape": {
     howTo:
-      "Tap to play or pause. Pick a look and a view in the Toy tab, or open your own song there.",
+      "Tap to play or pause; drag to turn or tilt. The Toy tab starts over, scrubs, changes the look or uses the mic.",
     about:
-      "A song is a wave, but you can also see what it is made of. This toy cuts the sound into slices 40 milliseconds apart and measures each one: how loud each pitch is (a short-time Fourier transform), how loud the slice is, its pitch and its brightness. Every shape is one of those measurements, drawn as the sound reaches you. Open your own song in the Toy tab: it plays at once, is read on your device and is never uploaded.\n\nWhat you're seeing. Pitch and Loudness: a landscape with time running away from you, pitch across and loudness as height. Ribbons: six bands from bass (teal) to treble (orange), each widening with its loudness and turning as it rises or falls. Tube: a ring per slice, as wide as the sound is loud, tilted by its pitch and colored by its brightness. Lines: a thin line per slice, the spectrum across. Mesh: the same as a wireframe. Live scrolls past the now mark; Whole shows the song at once.",
+      "A song is a wave, but you can also see what it is made of. This toy measures each 40-millisecond slice of it: how loud each pitch is, how loud it is overall, its pitch and its brightness. Open your own song in the Toy tab (it stays on your device), or use the microphone: what it hears is kept in the page's memory to play back, and saved only if you tap Save.\n\nLive (the start) brings the newest sound to the bright line at the front; Whole song shows it all at once. Pitch: low notes on the left, high on the right, louder pitches as higher hills, colored like a rainbow. Loudness: the same, dark blue for quiet to white for loud. Ribbons: six bands, bass at the bottom (teal) to treble at the top (orange), each wider when louder. Tube: a ring per slice, wider when louder, tilted by pitch, turning orange when bright. Lines: one line per slice, like stacked mountain outlines. Mesh: the same as a wire net.",
   },
 
   "model-splats": {
@@ -1527,9 +1533,9 @@ export const TOY_HELP = {
 
   "video-3d": {
     howTo:
-      "Tap to fly the video's own camera path, then drag to roam off it. Open your own video in the Toy tab.",
+      "Tap to fly the video's path; drag while it flies, tap again to pause. Open a video in the Toy tab.",
     about:
-      "A video is a string of photos taken from a moving camera. If the scene stands still, each photo shows it from a slightly different place, and that is enough to rebuild it in 3D. This toy picks the sharpest frames of the stretch you choose, finds the same small features (corners, specks, edges) in many of them, and works out where the camera must have been for each frame so that they all line up. That is called structure from motion. Then it trains 3D Gaussian splats: it starts from the points it found and keeps nudging each splat's place, size, shape and color until the scene, seen from each camera, looks like the frame taken there.\n\nIt all runs on your device's graphics card (WebGPU), and nothing is uploaded. It takes minutes, longer on a phone. Things that move while the camera films (cars, people, water) blur or vanish, and blank walls or sky give it nothing to match. Tap Replay flight to fly the video's path with its sound, or save the splats as a PLY.",
+      "A video is a string of photos from a moving camera. If the scene stands still, each frame shows it from a slightly different place, and that is enough to rebuild it in 3D. This toy picks the sharpest frames of your stretch, finds the same small details (corners, specks, edges) in many of them and works out where the camera was for each one. That is structure from motion. Then it trains 3D Gaussian splats: starting from those points, it nudges each splat's place, size, shape and color until the scene, seen from each camera, looks like that frame.\n\nIt all runs on your device's graphics card, and nothing is uploaded. Film by walking slowly around an object or through a place, so the camera moves sideways: 10 to 40 seconds, steady, with texture. Turning on the spot, a tripod, blank walls, sky, water and blur give it nothing to match. On a phone, the phone-safe setting keeps it quick and cool.",
   },
 
   // ---- Lab (lane Lab) -------------------------------------------------------------------

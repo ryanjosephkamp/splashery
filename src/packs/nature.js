@@ -460,6 +460,11 @@ function mem(c) {
   if (!m) MEM.set(c, (m = {}));
   return m;
 }
+// Sound C: a petal's soft tap as it lands on the grass (the daisy's and the
+// rose's). Cues for a moment are handed over LEAD seconds early and scheduled
+// for the moment itself (`at`), so they land in sync at any frame rate.
+const PETAL_LAND = { voice: "rustle", f: 2600, n: 2, decay: 0.05, vol: 0.55 };
+const LEAD = 0.12;
 // Calls hit(i) for each moment in `times` that the clock s has just passed.
 function crossing(c, key, s, times, hit) {
   const m = mem(c);
@@ -2157,6 +2162,10 @@ export const RECIPES = {
           visible: 1 - ease(band(s, 4.0, 4.5)),
         };
       });
+      // Sound C: the daisy's soft tap as the loose petal lands.
+      crossing(c, "rose", on ? s : 0, [3.7 - LEAD], () =>
+        out.cues.push({ ...PETAL_LAND, at: Math.max(0, 3.7 - s) }),
+      );
     },
     build(k, o) {
       const rand = k.rand;
@@ -2712,13 +2721,15 @@ export const RECIPES = {
           visible: 1 - ease(band(s, 4.2, 4.6)),
         };
       });
+      // Sound B: a soft brush as each petal lands on the grass (Sound C: timed
+      // to the landing itself).
+      const lands = d.plucked.map((_, i) => 0.55 + 0.28 * i + 1.9);
       crossing(
         c,
         "daisy",
         on ? s : 0,
-        // Sound B: a soft brush as each petal lands on the grass.
-        d.plucked.map((_, i) => 0.55 + 0.28 * i + 1.9),
-        () => out.cues.push({ voice: "rustle", f: 2600, n: 3, decay: 0.12, vol: 0.5 }),
+        lands.map((x) => x - LEAD),
+        (i) => out.cues.push({ ...PETAL_LAND, at: Math.max(0, lands[i] - s) }),
       );
     },
     build(k) {
