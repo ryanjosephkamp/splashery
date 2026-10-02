@@ -16,7 +16,7 @@ import {
   quatEuler,
 } from "../kit.js";
 import { capPoint, evenCylinder, evenEllipsoid, evenTorus } from "./even.js";
-import { surfacePoints } from "../physics/world.js"; // lane Physics
+import { World, surfacePoints } from "../physics/world.js"; // lane Physics
 
 const TAU = Math.PI * 2;
 const add = (a, b) => [a[0] + b[0], a[1] + b[1], a[2] + b[2]];
@@ -810,6 +810,141 @@ const YO = { top: 1.0, rest: 0.62, max: 1.1, K: 8 };
 YO.seg = YO.max / YO.K;
 
 const SLINKY = { N: 15, R: 0.36, r: 0.028, d: 0.62 };
+
+// Hands-on (lane Physics): the spring toy as a soft chain, one point per coil
+// (the bottom one stays on the table), held by springy links. Each coil
+// moves with its point and tilts along the chain.
+const SLK = {
+  world: null,
+  grab: -1,
+  last: null,
+  still: true,
+  angles: null,
+  blend: 1,
+  settled: false,
+};
+// The chain, from the straight stack: picking it up mid-walk gathers the
+// coils into the stack first (SLK.blend eases from the walk's pose), and it
+// springs back to the stack, where the walk starts again.
+function slinkyWorld() {
+  const { N, r, d } = SLINKY;
+  const pitch = r * 2.1;
+  const pivot = [0, r + ((N - 1) * pitch) / 2, 0];
+  const angles = Array(N).fill(0); // from the straight stack
+  const w = new World({ gravity: [0, -3, 0], substeps: 16, particleDamping: 2.2, sleepSpeed: 0.004 }); // prettier-ignore
+  SLK.rest = [];
+  for (let j = 0; j < N; j++) {
+    const q = quatAxisAngle([0, 0, 1], angles[j]);
+    const at = add(pivot, quatRotate(q, sub([-d, r + j * pitch, 0], pivot)));
+    w.particle(at, { mass: j ? 1 : 0 });
+    SLK.rest.push(q);
+  }
+  for (let j = 1; j < N; j++) {
+    w.link(j - 1, j, { compliance: 0.0015, only: "stretch" });
+    // Coils can't be pushed closer than they rest (they'd pass through).
+    w.link(j - 1, j, { compliance: 0, only: "above", length: 0.95 * pitch });
+  }
+  // Links two and three coils apart keep it from folding up.
+  for (let j = 2; j < N; j++) w.link(j - 2, j, { compliance: 0.004 });
+  for (let j = 3; j < N; j++) w.link(j - 3, j, { compliance: 0.01 });
+  // The table.
+  w.plane([0, 1, 0], 0, { friction: 0.8 });
+  w.particles.forEach((q) => (q.radius = r));
+  SLK.dirs = w.particles.map((_, j) => slinkyDir(w.particles, j, "home"));
+  SLK.world = w;
+  return w;
+}
+function slinkyDir(P, j, key = "pos") {
+  const N = P.length;
+  return unit(sub(P[Math.min(N - 1, j + 1)][key], P[Math.max(0, j - 1)][key]));
+}
+function slinkyGrab(p) {
+  const w = SLK.still || !SLK.world ? slinkyWorld() : SLK.world;
+  let best = 1;
+  let bd = Infinity;
+  w.particles.forEach((q, j) => {
+    const dd = Math.hypot(q.pos[0] - p[0], q.pos[1] - p[1], q.pos[2] - p[2]);
+    if (j && dd < bd) [best, bd] = [j, dd];
+  });
+  // Held from the coil it was pressed on (the top ones pull the most).
+  SLK.grab = best;
+  SLK.target = w.particles[best].pos.slice();
+  SLK.mass = w.particles[best].invMass;
+  w.particles[best].invMass = 0;
+  if (SLK.still) {
+    SLK.blend = 0;
+    SLK.from = (SLK.angles || []).slice();
+  }
+  SLK.still = false;
+  w.wake();
+}
+function slinkyPull(p) {
+  if (SLK.grab < 0) return;
+  const w = SLK.world;
+  const home = w.particles[SLK.grab].home;
+  // It stretches up to about three times its height.
+  const dd = [p[0] - home[0], p[1] - home[1], p[2] - home[2]];
+  const l = Math.hypot(...dd);
+  const max = 2.2;
+  const k = l > max ? max / l : 1;
+  SLK.target = [home[0] + dd[0] * k, Math.max(0.02, home[1] + dd[1] * k), home[2] + dd[2] * k];
+  w.wake();
+}
+function slinkyLetGo() {
+  if (SLK.grab < 0) return;
+  SLK.world.particles[SLK.grab].invMass = SLK.mass;
+  SLK.grab = -1;
+  SLK.world.wake();
+}
+// Steps the chain and puts the coils where it says (true while it moves
+// or is off its rest).
+function slinkyStep(time, out) {
+  const w = SLK.world;
+  if (!w || SLK.still) return false;
+  const dt = SLK.last === null ? 0 : Math.min(0.1, Math.max(0, time - SLK.last));
+  SLK.last = time;
+  if (SLK.grab >= 0) {
+    const q = w.particles[SLK.grab];
+    const f = 1 - Math.exp(-dt / 0.04);
+    q.pos = q.pos.map((v, i) => v + (SLK.target[i] - v) * f);
+  }
+  // Its bending stiffness: each loose coil is drawn back over its rest
+  // spot sideways, so it springs upright instead of buckling.
+  for (const q of w.particles) {
+    if (!q.invMass) continue;
+    for (const i of [0, 2]) q.vel[i] += (q.home[i] - q.pos[i]) * 45 * dt;
+  }
+  for (let left = dt; left > 1e-6; left -= 1 / 60) w.step(Math.min(left, 1 / 60));
+  SLK.blend = Math.min(1, SLK.blend + dt / 0.3);
+  const { N, r } = SLINKY;
+  const pitch = r * 2.1;
+  const pivot = [0, r + ((N - 1) * pitch) / 2, 0];
+  const P = w.particles;
+  let off = 0;
+  for (let j = 0; j < N; j++) {
+    // Turned as it stands mid-walk, then tilted along the chain.
+    const q = quatMul(quatFromTo(SLK.dirs[j], slinkyDir(P, j)), SLK.rest[j]);
+    const home = [-SLINKY.d, r + j * pitch, 0];
+    // The part turns about the pivot: move it so the coil's middle lands on its point.
+    const turned = add(pivot, quatRotate(q, sub(home, pivot)));
+    let part = { quat: q, offset: sub(P[j].pos, turned) };
+    if (SLK.blend < 1) {
+      // Still gathering from the walk's pose (turned about the pivot).
+      const e = SLK.blend * SLK.blend * (3 - 2 * SLK.blend);
+      const qw = quatAxisAngle([0, 0, 1], SLK.from[j] || 0);
+      part = { quat: nlerpQ(qw, q, e), offset: mul(part.offset, e) };
+    }
+    out.parts["c" + j] = part;
+    off = Math.max(off, len(sub(P[j].pos, P[j].home)));
+  }
+  if (w.asleep && SLK.grab < 0 && off < 0.004) {
+    SLK.still = true;
+    SLK.settled = true;
+    SLK.last = null;
+    for (const p of P) p.pos = p.home.slice();
+  }
+  return true;
+}
 
 // Soap bubbles drift from the wand towards the top right.
 const WAND = { c: [-0.6, -0.42, 0.1], n: unit([0.55, 0.65, 0.5]), r: 0.2 };
@@ -2022,14 +2157,34 @@ export const RECIPES = {
     ],
     controls: [{ key: "hurry", label: "Hurry", type: "pulse", ease: 2.5 }],
     action: { key: "hurry", label: "Make it walk" },
-    drive(t, c, out) {
+    // Hands-on (lane Physics): pull its top coils up or to the side and it
+    // stretches out, coil by coil; let go and it springs back and wobbles.
+    drag: {
+      plane: "view",
+      at: (p) => p[1] > 0.25 && Math.hypot(p[0] + SLINKY.d, p[2]) < SLINKY.R * 1.4,
+      start: (p) => slinkyGrab(p),
+      move: (p) => slinkyPull(p),
+      end: () => slinkyLetGo(),
+    },
+    drive(t, c, out, info) {
       const m = mem(c);
+      // While it is held or springing back, the walk waits.
+      if (slinkyStep(info.time, out)) {
+        m.t_walk = t;
+        return;
+      }
+      // Settled on its stack: the walk goes on from there (all coils home).
+      if (SLK.settled) {
+        SLK.settled = false;
+        m.walk = -Math.PI / 2;
+      }
       const ph = integrate(m, "walk", t, 0.5 + 1.8 * c.hurry);
       const w = 0.5 + 0.5 * Math.sin(ph);
       const W = 0.42;
       for (let j = 0; j < SLINKY.N; j++) {
         const s = ((SLINKY.N - 1 - j) / (SLINKY.N - 1)) * (1 - W);
         out.parts["c" + j] = { angle: -Math.PI * easeInOut(clamp((w - s) / W, 0, 1)) };
+        (SLK.angles ||= [])[j] = out.parts["c" + j].angle; // lane Physics
       }
     },
     build(k, o) {

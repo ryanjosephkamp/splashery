@@ -418,6 +418,7 @@ export class World {
     // instead of flying off.
     this.maxPush = o.maxPush ?? Infinity;
     this.maxSpeed = o.maxSpeed ?? Infinity;
+    this.particleDamping = o.particleDamping ?? 0; // per second
   }
 
   add(body) {
@@ -462,7 +463,10 @@ export class World {
   link(a, b, o = {}) {
     const pa = this.particles[a].pos;
     const pb = this.particles[b].pos;
-    this.links.push({ a, b, length: o.length ?? v3.len(v3.sub(pa, pb)), compliance: o.compliance ?? 0, lambda: 0 }); // prettier-ignore
+    // only: "stretch" acts only when pulled longer, "push" only when pushed
+    // shorter, "above" keeps b at least `length` above a (rings resting on
+    // each other).
+    this.links.push({ a, b, length: o.length ?? v3.len(v3.sub(pa, pb)), compliance: o.compliance ?? 0, only: o.only ?? null, lambda: 0 }); // prettier-ignore
   }
 
   wake() {
@@ -535,11 +539,12 @@ export class World {
       }
       b.q = quat.norm(addRot(b.q, b.omega, 0.5 * h));
     }
+    const pd = Math.exp(-(this.particleDamping ?? 0) * h);
     for (const p of this.particles) {
       p.prev = p.pos.slice();
       if (!p.invMass) continue;
       for (let i = 0; i < 3; i++) {
-        p.vel[i] += g[i] * h;
+        p.vel[i] = (p.vel[i] + g[i] * h) * pd;
         p.pos[i] += p.vel[i] * h;
       }
     }
@@ -653,7 +658,16 @@ export class World {
     if (!w) return;
     const d = v3.sub(B.pos, A.pos);
     const len = v3.len(d);
-    if (len < 1e-9) return;
+    if (len < 1e-9 && l.only !== "above") return;
+    if (l.only === "above") {
+      // b rests on a (wide rings stacked): it stays `length` above it.
+      const gap = B.pos[1] - A.pos[1] - l.length;
+      if (gap >= 0) return;
+      A.pos[1] += (gap * A.invMass) / w;
+      B.pos[1] -= (gap * B.invMass) / w;
+      return;
+    }
+    if ((l.only === "stretch" && len < l.length) || (l.only === "push" && len > l.length)) return;
     const alpha = l.compliance / (h * h);
     const dl = (len - l.length) / (w + alpha);
     const n = v3.scale(d, dl / len);
