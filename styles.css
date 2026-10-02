@@ -2178,6 +2178,7 @@ body.focus .toy-legend,
 body.focus .sound-toggle,
 body.focus .view-button,
 body.focus .help-toggle,
+body.focus .hands-bar,
 body.focus .help-line,
 body.focus .game-bar,
 body.focus .panel,
@@ -2682,7 +2683,13 @@ body.focus .flag-pop {
   display: none;
 }
 
+/* Taps pass through the pill to the toy, except on its buttons. */
+.rec-pill {
+  pointer-events: none;
+}
+
 .rec-pill button {
+  pointer-events: auto;
   min-height: 0;
   padding: 5px 12px;
   font-size: 13px;
@@ -2754,4 +2761,78 @@ body.focus #gallery-open {
   display: none !important;
 }
 
+@media (max-width: 760px) {
+  /* The Hands-on buttons (lane Physics) sit just above a song or game bar,
+     by its measured height (--bar-h). */
+  body.bar-up:has(#game-bar:not([hidden])) .hands-bar {
+    bottom: calc(var(--dock-h, 200px) + var(--bar-h, 0px) + 12px);
+  }
+
+  /* The Record pill sits at the left, clear of the Hands-on column. */
+  .rec-pill {
+    left: 12px;
+    max-width: calc(100% - 72px);
+    transform: none;
+  }
+}
+
 /* /UI r5 */
+
+/* Hands-on (lane Physics) --------------------------------------------------- */
+/* Play, the Hands-on switch and Reset: round buttons like the top bar's, in a
+   column at the bottom right of the stage (above the sheet on a phone, and
+   above the game bar when a game or a song shows one). */
+
+.hands-bar {
+  position: fixed;
+  right: calc(var(--panel-w) + 36px);
+  bottom: 40px;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.hands-bar[hidden] {
+  display: none;
+}
+
+.hands-button {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  background: var(--paper);
+  color: var(--muted);
+}
+
+.hands-button[hidden] {
+  display: none;
+}
+
+.hands-button[aria-pressed="true"] {
+  color: var(--accent-ink, var(--ink));
+  background: var(--accent, var(--paper));
+  border-color: var(--ink);
+}
+
+body:has(#game-bar:not([hidden])) .hands-bar {
+  bottom: 150px;
+}
+
+@media (max-width: 760px) {
+  .hands-bar {
+    right: 12px;
+    bottom: calc(var(--dock-h, 200px) + 12px);
+  }
+
+  body:has(#game-bar:not([hidden])) .hands-bar {
+    bottom: calc(var(--dock-h, 200px) + 104px);
+  }
+
+  body.sheet-open .hands-bar,
+  body.shelf-grid .hands-bar {
+    display: none;
+  }
+}

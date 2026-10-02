@@ -100,6 +100,10 @@ export function createUI(app) {
     turntableToggle: $("turntable-toggle"), // lane Viewer
     tiltToggle: $("tilt-toggle"), // lane Viewer
     viewReset: $("view-reset"), // lane Viewer
+    handsBar: $("hands-bar"), // lane Physics
+    handsPlay: $("hands-play"),
+    handsToggle: $("hands-toggle"),
+    handsReset: $("hands-reset"),
     tools: $("tools"),
     toolHint: $("tool-hint"),
     toolParams: $("tool-params"),
@@ -1960,6 +1964,10 @@ export function createUI(app) {
   els.turntableToggle.addEventListener("click", () => app.toggleTurntable());
   els.tiltToggle.addEventListener("click", () => app.toggleTiltLock());
   els.viewReset.addEventListener("click", () => app.resetCamera());
+  // Lane Physics: Play, the Hands-on switch and Reset.
+  els.handsPlay.addEventListener("click", () => app.act());
+  els.handsToggle.addEventListener("click", () => app.toggleHands());
+  els.handsReset.addEventListener("click", () => app.resetHands());
 
   // ---- Make a toy -------------------------------------------------------------
   for (const s of SHAPES) els.genShape.add(new Option(s.label, s.id));
@@ -2880,6 +2888,18 @@ export function createUI(app) {
         : spin
           ? "Turntable: spins when idle, on every toy"
           : "Turntable: off for every toy";
+    },
+    // Lane Physics: the Hands-on buttons for the toy on show (hidden for a
+    // toy that doesn't play hands-on and has no tap).
+    setHands({ on, available, action }) {
+      els.handsBar.hidden = !available && !action;
+      els.handsPlay.hidden = !action;
+      els.handsToggle.hidden = !available;
+      els.handsToggle.setAttribute("aria-pressed", String(!!on));
+      els.handsToggle.title = on
+        ? "Hands-on: on (drag the toy to pick it up)"
+        : "Hands-on: off (drag to turn the view)";
+      els.handsReset.hidden = !on;
     },
     // The top-bar tilt lock button (lane Viewer).
     setTiltLock(locked) {
