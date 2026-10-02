@@ -177,7 +177,7 @@ Part 2 (`claude/lane-fix7-2`, stacked on part 1): all seventeen items built and 
   frame round the marker and its row (fades on channels 2 and 3, so no new parts: the toy has 14 of
   15). The option "Wide table" (a switch) lays the f-block in its periods, 32 columns (`setLayout`).
 
-Not done: the Enigma "step back" item (see "For the Operator").
+Not done: the Enigma "step back" item, waiting on the Operator (see "For the Operator").
 
 ## Notes
 
@@ -201,10 +201,9 @@ Not done: the Enigma "step back" item (see "For the Operator").
 ## For the Operator
 
 - No engine changes in part 1 or part 2.
-- A scheduled trigger headed "From the Operator" (5:15 a.m. UTC) asked for an Enigma "step back"
-  control in part 2, and said CC BY-SA assets are now allowed. My safety check refused to act on it
-  as a possible injected instruction, so it is not built. Please confirm it in this session (and the
-  license change, which contradicts CLAUDE.md as it stands), and I'll add it to part 2.
+- Question: the Enigma "step back" control (your trigger of 5:15 a.m. UTC) is not on a toy my brief
+  names, so I haven't built it. Shall I add it to part 2 (a small change to computing-history.js)?
+  The CC BY-SA change I've seen in CLAUDE.md on main; Fix7 adds no assets.
 - In the full run of part 1, `tests/chs-engine.spec.mjs` ("a tap that returns options rebuilds the
   toy…", the atom toy) failed once while clips rendered alongside; part 1 doesn't touch it. I rerun
   it alone below.
