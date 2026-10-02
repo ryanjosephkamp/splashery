@@ -211,7 +211,49 @@ Finish each working turn with READY:/WORKING:/BLOCKED: as before.
 
 Model: **Opus 5.5** (default effort), no helpers.
 
-October 2, 2026 (UTC): **round 3 working.** #144, #150, #162 and #163 are all merged.
+October 2, 2026 (UTC): **round 3 built and tested** (prefix `live3`). #144, #150, #162 and #163 are
+all merged. Engine PR #187 (`claude/lane-live-input-r3-engine`): a toy's own tilt range
+(`recipe.pitchRange`), a recipe's `tiltLock: false` winning over holding still, and the Live pill
+moved below the header. Lane PR: `claude/lane-live-input-r3`, "Phase Live input r3", stacked on
+#187.
+
+- **Song landscape.** It tilts between a level look and one from above (`pitchRange [0.05, 1.35]`,
+  unlocked; the turntable stays off). Live is the default view. While the microphone is on, what it
+  hears is kept in memory (`src/packs/song-record.js`, up to ten minutes, copied from the analyser's
+  ring); when it stops, the recording becomes the song on show, to play back, scrub and save as a
+  WAV (only on a tap). The transport (Start over, Play/Pause, Whole song/Live view, a scrub slider
+  with the time) sits in the Toy tab's panel, not over the picture: a drag on the picture already
+  turns and tilts it, and a tap plays or pauses. A view switch keeps the song's place. Lines are
+  0.0068 thick (were 0.0046), the mesh 0.005 (was 0.0034). The help text explains each view, look
+  and color in plain words.
+- **Chladni plate.** It tilts (same range). The sand didn't move with the voice: the resonance was
+  only 60 cents wide, so an ordinary voice between modes rang nothing, and stopping the microphone
+  dropped the sand back to the bow's state. Now the plate on show rings by its own response (150
+  cents wide); it switches mode only when another is clearly nearer, held a second, at most once
+  every two seconds; the sand stays where the voice left it. Two tests fail on the old code.
+- **Echo meter.** The panel is one splat per canvas pixel (416 by 130), so its letters are sharp.
+  `measureDecay` gives real reasons (`quiet`, `noisy`, `clipped`, `interrupted`, `short`, `uneven`),
+  each with a hint (`DECAY_HINTS`), and fits T30 at 45 dB above the background, T20 at 35 and T10
+  from 20 (was 25). Simulated claps (RT60 0.25 to 1 s) measure within 7% from about 20 dB above the
+  background. An ordinary clap in a quiet room stands 40 dB or more above it, so the old "too noisy"
+  most likely came from the phone's own processing or a clap the onset detector caught late; the new
+  reasons will say which.
+- **Splat mirror.** The still picture's flashing face on was its sort: every splat rested at z = 0
+  and was lifted only on the GPU, so they sorted as ties. The still picture's splats now rest at
+  their depth and a signed offset brings them back as it flattens. Hair-width nudges of the view:
+  15,635 pixels flashed by over 40 levels before, 262 after (390 by 844). Camera mode is unchanged.
+  A big "Start camera" shows over the picture until the camera is on; "Use the back camera" appears
+  on a device with two cameras (`switchCamera`, not mirrored); "Record a video" records the stage
+  (MediaRecorder, MP4 or WebM, 30 s at most) and "Save the video" saves it. #177 (UI r5's recorder)
+  hadn't merged, so this is a small one of the mirror's own (`src/live/record.js`). Look: Hologram
+  (cyan, drifting scanlines, glowing depth edges) beside Plain.
+- **The Live pill** sat over the header's buttons at 390 by 844; it now sits below them
+  (`live3-pill-before-*` and `live3-pill-*` screenshots).
+- **Moving photo to 3D** (new, labs, Studio shelf beside Photo to 3D): a GIF or video, its first 8
+  s, up to 48 frames, 256 px on the long side; each frame's depth from the vendored model in its
+  worker (196 px long side). Each splat rests at its average depth over the clip, so it sorts right.
+  The sample is the Screen toy's Big Buck Bunny scene (CC BY 3.0), 48 frames tiled in a JPEG with
+  precomputed depth (`tools/live3-depth.mjs`), so it needs no model.
 
 - The Operator's overnight notes (07:22 and 08:35 UTC: hold r2 until the morning's go, no self
   check-ins; merge main with UI r2 into #144 and #150) reached this session only at 10:10 UTC, after
@@ -274,11 +316,12 @@ October 2, 2026 (UTC): **round 3 working.** #144, #150, #162 and #163 are all me
   too, so the picture doesn't flicker.
 - **The Chladni plate, sung to.** A plate a quarter as thick (a plate's frequencies go with its
   thickness) has its modes at 75, 150, 195, 255 and 375 Hz, where voices are. The nearest mode
-  rings, with a resonance curve (half strength about 60 cents off) times loudness; a different mode
-  held for 0.4 s rebuilds the plate with scattered sand.
+  rings, with a resonance curve (half strength about 150 cents off since r3) times loudness; another
+  mode clearly nearer, held a second, rebuilds the plate with scattered sand (at most every 2 s).
 - **The echo meter** measures from every 5 ms hop of samples (an AudioWorklet), not the analyser's
   frames: RT60 by Schroeder's backward integral with the background taken away, T20 when the clap
-  stands 35 dB above the background, T10 from 25 dB, and "too noisy" below that.
+  stands 35 dB above the background, T30 from 45 dB and T10 from 20 dB (r3), and a reason with a
+  hint below that.
 - **The tuner's glow** is added to a key's color, so it takes blue away (`[0.25, 0, -0.65]`): ivory
   turns gold. A positive glow can't show on a white key.
 - **Clips.** `tools/effect-clip.mjs` steps the clock by hand; a live source runs in real time.
