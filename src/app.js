@@ -309,6 +309,8 @@ class App {
     const still = scene.toy.kind === "builtin" && holdsStill(findToy(scene.toy.id));
     const lock = this.tiltLocks.has(key) ? this.tiltLocks.get(key) : !!info.recipe?.tiltLock || still; // prettier-ignore
     player.camera.setTiltLock(lock);
+    // Lane Live input r3: a toy's own tilt range (recipe.pitchRange), or none.
+    player.camera.setPitchRange(info.recipe?.pitchRange ?? null);
     ui.setTiltLock(lock);
     // A toy that lays flag colours on its own way (the chess board: from
     // above, gently) gets that way when it comes out with a flag on, and

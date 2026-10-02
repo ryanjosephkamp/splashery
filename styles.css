@@ -2092,10 +2092,12 @@ body.embed #stage {
 /* /View settings */
 
 /* Live input (lane Live input): the pill that shows while the microphone,
-   the camera or a screen is on, with its Stop button. */
+   the camera or a screen is on, with its Stop button. It sits just under the
+   header's row of buttons, over the stage, so it never covers a control
+   (lane Live input r3; on a phone it used to cover five of them). */
 .live-indicator {
   position: fixed;
-  top: calc(env(safe-area-inset-top, 0px) + 8px);
+  top: calc(env(safe-area-inset-top, 0px) + 80px);
   left: 50%;
   transform: translateX(-50%);
   z-index: 60;
