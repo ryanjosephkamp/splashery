@@ -115,8 +115,9 @@ HOW THIS LANE RUNS
 Model: Opus 5.5 (the lane's assigned model), default effort, the whole lane.
 
 - PRs: #137 "Engine: kit clouds take a trained splat's own sizes and rotation" and #133 "Phase Video
-  3D: the video-to-3D spike" (both merged October 1, 2026); part 2, "Phase Video 3D, part 2: a
-  sharper street", on `claude/lane-video-3d-2`.
+  3D: the video-to-3D spike" (both merged October 1, 2026); #169 "Phase Video 3D, part 2: a sharper
+  street and statue" (merged October 2, 2026, 83352b0); #186 "Phase Video 3D, part 3 (r7)" on
+  `claude/lane-video-3d-r7` (the Integrator's run of main + #186 passed 774 of 774).
 - Splat.js vendored in `vendor/splatjs/` (MIT, commit 88efe9a, 20 modules, 544 KB; its own video
   reader, which needs Mediabunny under MPL-2.0, is left out). It needs WebGPU and nothing else: no
   SharedArrayBuffer, no cross-origin isolation, so GitHub Pages serves it as is.
@@ -166,6 +167,16 @@ Model: Opus 5.5 (the lane's assigned model), default effort, the whole lane.
 - Replay flight drives `player.camera` (target, yaw, pitch, roll, distance) from the recipe's drive
   through `k.data.flight`; the toy opens at the video's first view until the visitor turns or zooms
   (the app puts its own camera back after a load).
+
+## Left from the owner's notes (October 2, 2026)
+
+- Try r7 on a real phone and send the card's readout (the phone safeguards and the rough time were
+  never run on a phone here).
+- The sky-edge rays on both samples (from the training; next to try: a sky mask or a random
+  background while training, sharper 960 px input frames, or growth that stops earlier).
+- A depth-per-frame "video in 3D" mode like the live camera's (the owner's idea in the same review):
+  a different toy, not started; the Operator decides who builds it.
+- The Manual's own pages take `docs/lab/VIDEO3D-HOW.md` (lane Manual).
 
 ## Known issues
 
