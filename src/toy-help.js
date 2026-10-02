@@ -1500,9 +1500,15 @@ export const TOY_HELP = {
   },
   "splat-mirror": {
     howTo:
-      "Tap “Use my camera” in the Toy tab to see yourself in splats; turn the picture to see its depth.",
+      "Tap “Start camera” to see yourself in splats; turn the picture to see its depth. In the Toy tab: the back camera, a recording to save, and a hologram look.",
     about:
-      "A mirror made of splats. Tap “Use my camera” and each splat takes the color of its place in the picture, so the mirror shows you, live.\n\nA depth model, Depth Anything V2 Small, then works out how near each part of the picture is, as often as your device can (several times a second on a computer), and each splat moves toward you by that much: your nose comes forward and the wall behind you stays back. Turn the picture to see the relief. It is a guess from one camera, so the depth is relative, like a sculptor's relief, not exact distances. The model (about 27 MB) loads only after you tap, and the pictures stay on this device; nothing is recorded or sent.",
+      "A mirror made of splats. Tap “Start camera” and each splat takes the color of its place in the picture, so the mirror shows you, live.\n\nA depth model, Depth Anything V2 Small, then works out how near each part of the picture is, as often as your device can (several times a second on a computer), and each splat moves toward you by that much: your nose comes forward and the wall behind you stays back. Turn the picture to see the relief. It is a guess from one camera, so the depth is relative, like a sculptor's relief, not exact distances. On a phone you can switch to the back camera. Record a video keeps what the mirror shows in this page's memory until you save it. Look: Hologram turns it cyan, with scanlines and glowing edges. The model (about 27 MB) loads only after you tap, and the pictures stay on this device; nothing is sent.",
+  },
+  "moving-photo-3d": {
+    howTo:
+      "Tap to pause or play, and turn the picture to see its depth. Open your own GIF or video in the Toy tab.",
+    about:
+      "A video is a string of photos, and a computer can guess how far away each part of a photo is. This toy does that for every frame: a depth model, a small neural network (Depth Anything V2 Small), looks at each frame and gives every spot a distance, and the frames play back as splats that move toward you by as much as they are near. The bunny comes forward, the meadow and the sky stay back, and as the clip plays the relief moves with it. Turn the picture to see it from the side.\n\nOpen a GIF or a short video in the Toy tab: its first eight seconds, up to 48 frames, are read on your device, the model (about 27 MB) loads the first time, and each frame takes a moment. Nothing is uploaded. Depth sets how deep the relief is. The sample is a scene from Big Buck Bunny (Blender Foundation, CC BY 3.0).",
   },
   "song-landscape": {
     howTo:

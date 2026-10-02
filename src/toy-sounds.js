@@ -2466,6 +2466,11 @@ export const TOY_SOUNDS = {
     on: { voice: "whoosh", f: 240, to: 5, decay: 1.6, vol: 0.5 },
     off: { voice: "whoosh", f: 1800, to: 0.2, decay: 1.2, vol: 0.45 },
   },
+  // Lane Live input r3: Moving photo to 3D pauses and plays with a soft click.
+  "moving-photo-3d": {
+    on: { voice: "click", f: 1200, decay: 0.05, vol: 0.35 },
+    off: { voice: "click", f: 900, decay: 0.05, vol: 0.3 },
+  },
   // Lane Photo to 3D, Sound B (his note: no wind, no whoosh): the photo's
   // paper lifting as the depth comes up and settling back as it lies flat.
   "photo-3d": {

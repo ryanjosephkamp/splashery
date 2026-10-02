@@ -473,3 +473,66 @@ test.describe("the splat mirror, r3", () => {
     }
   });
 });
+
+// ---- Moving photo to 3D (item 17) --------------------------------------------------
+test.describe("Moving photo to 3D", () => {
+  const mp = "/src/packs/moving-photo.js";
+
+  test("the sample plays its frames in relief, a tap pauses it, and each splat rests at its average depth", async ({
+    page,
+  }) => {
+    const errors = [];
+    page.on("pageerror", (e) => errors.push(e.message));
+    await open(page, "moving-photo-3d");
+    await idle(page);
+    const s0 = await page.evaluate(async (m) => (await import(m)).movingState(), mp);
+    expect(s0.clip.n).toBe(48);
+    // It plays: the frame moves on.
+    const s1 = await until(page, async (m) => { const s = (await import(m)).movingState(); return s.t > 1 ? s : null; }, mp, 60_000); // prettier-ignore
+    expect(s1.t).toBeGreaterThan(1);
+    // The frame's canvas: depth offsets around a half, both ways (the bunny
+    // nearer than it rests in some frames, farther in others).
+    const spread = await page.evaluate(async (m) => {
+      const { MOVING } = await import(m);
+      const { cols, rows } = MOVING.grid;
+      let lo = 255;
+      let hi = 0;
+      for (const img of MOVING.images)
+        for (let j = 0; j < rows; j++)
+          for (let i = 0; i < cols; i++) {
+            const b = img[(j * cols * 2 + cols + i) * 4 + 2];
+            lo = Math.min(lo, b);
+            hi = Math.max(hi, b);
+          }
+      return { lo, hi };
+    }, mp);
+    expect(spread.lo).toBeLessThan(110);
+    expect(spread.hi).toBeGreaterThan(146);
+    // A tap pauses: the clock holds.
+    await page.evaluate(() => window.__splashery.app.act());
+    await page.waitForTimeout(600);
+    const a = await page.evaluate(async (m) => (await import(m)).movingState().t, mp);
+    await page.waitForTimeout(800);
+    const b = await page.evaluate(async (m) => (await import(m)).movingState().t, mp);
+    expect(b - a).toBeLessThan(0.05);
+    expect(errors).toEqual([]);
+  });
+
+  test("an opened GIF gets each frame's depth on this device and plays", async ({ page }) => {
+    test.setTimeout(300_000);
+    const errors = [];
+    page.on("pageerror", (e) => errors.push(e.message));
+    const requests = [];
+    page.on("request", (r) => requests.push(r.url()));
+    await open(page, "moving-photo-3d");
+    await idle(page);
+    await page.setInputFiles("#toy-input-file", "assets/toys/screen/horse.gif");
+    const s = await until(page, async (m) => { const s = (await import(m)).movingState(); return s.clip?.name === "horse" ? s : null; }, mp, 280_000); // prettier-ignore
+    expect(s.clip.n).toBe(15);
+    expect(s.clip.w).toBe(256);
+    // Only this site's own files were fetched (the model among them).
+    const base = new URL(page.url()).origin;
+    expect(requests.filter((u) => !u.startsWith(base) && !u.startsWith("blob:") && !u.startsWith("data:"))).toEqual([]); // prettier-ignore
+    expect(errors).toEqual([]);
+  });
+});

@@ -20,6 +20,7 @@ import { live } from "../live/live.js";
 import { DECAY_HINTS } from "../live/analysis.js";
 import { MIRROR, buildMirror, mirrorScreen, mirrorStatus } from "../live/relief.js";
 import { decodePhoto, unpackDepth } from "./photo-3d.js";
+import { MOVING_PHOTO } from "./moving-photo.js";
 
 const TAU = Math.PI * 2;
 
@@ -432,4 +433,5 @@ const SPLAT_MIRROR = {
 export const RECIPES = {
   "room-echo": ROOM_ECHO,
   "splat-mirror": SPLAT_MIRROR,
+  "moving-photo-3d": MOVING_PHOTO, // r3
 };

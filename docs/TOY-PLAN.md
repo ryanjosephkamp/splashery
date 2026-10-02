@@ -10,8 +10,8 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 341 toys. 341 have a tap action today; the other 0 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 337.
+- 342 toys. 342 have a tap action today; the other 0 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 338.
 - **more** (has an effect; make it clearer or more dramatic): 0.
 - **new** (needs its own effect): 4.
 - Visual fixes: 0 open, 30 done. Touch or drag interaction asked for: 4.
@@ -57,8 +57,8 @@ Proposals below are suggestions; the owner may change them.
   Looped transformer, Diffusion model, Gradient descent, Gaussian splatting, Word vectors, Sorting
   machine, Half adder, Turing machine, Difference engine, Enigma machine, Bombe, Your book, Photo
   album, Picture frame, Song landscape, Room echo meter, Splat mirror, Model to splats, Photo to 3D,
-  Video to 3D, Splat field, Thermal ellipsoids, Super-resolution microscope, Galaxy in a box, Fluid
-  lab, Screen.
+  Moving photo to 3D, Video to 3D, Splat field, Thermal ellipsoids, Super-resolution microscope,
+  Galaxy in a box, Fluid lab, Screen.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -2482,7 +2482,7 @@ Proposals below are suggestions; the owner may change them.
     style; sharp sets (even placement in square tiles, walnut, velvet, brass and gold).
   - Sound: Switching on is the click and crackle without the hum; switching off is unchanged.
 
-## Studio (7)
+## Studio (8)
 
 - **Song landscape** (`song-landscape`). Now: tap: Play or pause the song. Plan: new effect (E6).
   - Owner: Approved on the Splashery Universe page (lane Studio Sound), September 29, 2026.
@@ -2520,7 +2520,9 @@ Proposals below are suggestions; the owner may change them.
     Before the camera is on it shows a still life with its depth. A tap flattens the relief into its
     frame and the next raises it again (about 1.4 s); the picture itself keeps still.
   - Improved: Live input: relief splats (a new kind) take their color and lift from a canvas drawn
-    each frame, so the picture moves without a rebuild.
+    each frame, so the picture moves without a rebuild. r3: the still picture rests at its depth, so
+    it no longer flashes face on; a big Start camera, the back camera, a recording to save, and a
+    hologram look.
   - Sound: A soft rising whoosh as the depth comes up; a falling one as it flattens.
 - **Model to splats** (`model-splats`). Now: tap: Lift off and settle back. Plan: keep.
   - Owner: Approved on the Splashery Universe page (lane Studio Models), September 29, 2026.
@@ -2547,6 +2549,15 @@ Proposals below are suggestions; the owner may change them.
     street, a still life).
   - Sound: The photo's paper lifting as the depth comes up and settling as it lies flat (no wind, no
     whoosh).
+- **Moving photo to 3D** (`moving-photo-3d`). Now: tap: Play or pause the clip. Plan: keep.
+  - Owner: The owner's idea in his review of October 2, 2026 (lane Live input r3; labs only): a GIF
+    or video played back in 3D, like the live camera.
+  - Effect: A GIF or a short video playing in 3D: every frame's depth comes from the depth model,
+    and the picture moves in relief as it plays (turn it to see the depth). It opens with six
+    seconds of Big Buck Bunny, its depth worked out ahead. A tap pauses or plays it.
+  - Improved: Live input r3: each splat rests at its average depth over the clip and moves from
+    there, so the picture sorts the way it shows and doesn't flash.
+  - Sound: A soft click as it pauses or plays.
 - **Video to 3D** (`video-3d`). Now: tap: Replay flight. Plan: new effect (E6).
   - Owner: Approved as a one-week labs spike (the owner's question and the Operator's answer, call
     18, September 30, 2026; lane Video 3D).

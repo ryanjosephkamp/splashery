@@ -2142,7 +2142,14 @@
       "owner": "The owner's approval of lane Live input (\"live input go\", September 30, 2026; labs only).",
       "effect": "A framed picture of splats. Tap “Use my camera” and it shows you as in a mirror; the depth model (Depth Anything V2 Small, in a worker, loaded only after the tap) works out how near each part is as often as the device allows, and the picture rises into a relief you can turn. Before the camera is on it shows a still life with its depth. A tap flattens the relief into its frame and the next raises it again (about 1.4 s); the picture itself keeps still.",
       "sound": "A soft rising whoosh as the depth comes up; a falling one as it flattens.",
-      "improved": "Live input: relief splats (a new kind) take their color and lift from a canvas drawn each frame, so the picture moves without a rebuild."
+      "improved": "Live input: relief splats (a new kind) take their color and lift from a canvas drawn each frame, so the picture moves without a rebuild. r3: the still picture rests at its depth, so it no longer flashes face on; a big Start camera, the back camera, a recording to save, and a hologram look."
+    },
+    "moving-photo-3d": {
+      "v": "keep",
+      "owner": "The owner's idea in his review of October 2, 2026 (lane Live input r3; labs only): a GIF or video played back in 3D, like the live camera.",
+      "effect": "A GIF or a short video playing in 3D: every frame's depth comes from the depth model, and the picture moves in relief as it plays (turn it to see the depth). It opens with six seconds of Big Buck Bunny, its depth worked out ahead. A tap pauses or plays it.",
+      "sound": "A soft click as it pauses or plays.",
+      "improved": "Live input r3: each splat rests at its average depth over the clip and moves from there, so the picture sorts the way it shows and doesn't flash."
     },
     "screen": {
       "v": "keep",
