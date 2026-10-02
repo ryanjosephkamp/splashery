@@ -58,6 +58,7 @@ samples were trained with small settings to fit (360 px, 800 to 1,500 steps).
 | Splat.js's own test set (12 rendered views)   | 12 / 12                | 32 s           | 212 steps, 518 s     | 20,325  | 1.1 MB  | Works                                       |
 | Statue orbit (the Dronalist), 20 s at 3:18    | 36 / 24                | 528 s          | 1,504 steps, 88 min  | 30,558  | 1.65 MB | Works from the filmed angles                |
 | Statue orbit, 14 s at 3:24 (one shot), 480 px | 27 / 26                | 233 s          | 2,006 steps, 111 min | 38,621  | 2.2 MB  | Works; the r4 card (+44% edge sharpness)    |
+| Statue orbit, 640 px, splats grown            | 27 / 26                | 170 s          | 3,000 steps, 431 min | 120,000 | 7.9 MB  | Works; the r5 card (+21% over r4)           |
 | Edinburgh walk (POPtravel), 10 s at 7:32      | 20 / 20                | 62 s           | 800 steps, 59 min    | 30,135  | 1.58 MB | Works; walkers become ghosts                |
 | Edinburgh walk, 28 frames, 480 px             | 28 / 28                | 112 s          | 2,006 steps, 109 min | 40,474  | 2.3 MB  | Works; the r4 card (edge sharpness doubled) |
 | Edinburgh walk, 28 frames, 640 px             | 28 / 28                | 143 s          | 3,000 steps, 251 min | 49,695  | 2.6 MB  | Works; the r5 card (+49% over r4)           |
@@ -205,10 +206,12 @@ on both samples). What is left is training, and that depends on the device, not 
   schedule to the run (`src/video3d/run.js`: a refine every 1/30 of the run, at least every 100
   steps, growth until 80% of it); the first refine still waits for step 1,500 (fixed inside
   Splat.js). The same street, frames and steps grew to 120,000 splats: edge sharpness +37% over r5.
-  The same change helps on a real GPU: the "high" setting (7,000 steps) got one growth round before.
-  What it cost: training slows as the splats grow (5 to 14 s a step here) and the PLY triples. Thin
-  bright rays at the edge of the sky grew with it; shortening stretched splats did not remove them
-  (tried on the far shell and on all splats), so they come from the training itself.
+  The statue, retrained the same way at 640 px, grew from 38,621 to 120,000 splats: +21% over its r4
+  (over the whole picture), with the same rays along the skyline. The same change helps on a real
+  GPU: the "high" setting (7,000 steps) got one growth round before. What it cost: training slows as
+  the splats grow (5 to 14 s a step here) and the PLY triples. Thin bright rays at the edge of the
+  sky grew with it; shortening stretched splats did not remove them (tried on the far shell and on
+  all splats), so they come from the training itself.
 
 Brush was not run in this container: it trains on the GPU through wgpu, and on a software Vulkan
 device it would take days for one scene; its web build needs WebGPU like Splat.js, so it would be no

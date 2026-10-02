@@ -1486,7 +1486,7 @@
       "page": "https://commons.wikimedia.org/wiki/File:Statue_Of_Liberty_4k_Drone.webm",
       "license": "CC BY 3.0",
       "checked": "September 30, 2026",
-      "note": "14 seconds from 3:24 (the 480p transcode on Commons, one shot), trained by tools/v3d-sample.mjs at 480 px for 2,006 steps. Only the trained splats and the camera path are shipped."
+      "note": "14 seconds from 3:24 (the 480p transcode on Commons, one shot), trained by tools/v3d-sample.mjs at 640 px for 3,000 steps, with the splats grown to 120,000. Only the trained splats and the camera path are shipped."
     },
     {
       "id": "edinburgh",
@@ -1511,5 +1511,62 @@
     "license": "MIT",
     "checked": "September 30, 2026",
     "note": "The 20 modules session.js and its workers reach, unmodified (vendor/splatjs/VERSION.md). Loaded only when someone opens a video in the Video to 3D toy."
-  }
+  },
+  "scienceSamples": [
+    {
+      "id": "aspirin",
+      "file": "assets/toys/thermal-ellipsoids/aspirin-cod-2104857.cif",
+      "toy": "thermal-ellipsoids",
+      "name": "Aspirin (form II) at 300 K, COD 2104857",
+      "author": "E. J. Chan, T. R. Welberry, A. P. Heerdegen, D. J. Goossens",
+      "page": "https://www.crystallography.net/cod/2104857.html",
+      "license": "Public domain (Crystallography Open Database)",
+      "checked": "September 30, 2026",
+      "note": "Unchanged CIF."
+    },
+    {
+      "id": "crambin",
+      "file": "assets/toys/thermal-ellipsoids/crambin-1ejg.pdb",
+      "toy": "thermal-ellipsoids",
+      "name": "Crambin at ultra-high resolution, PDB 1EJG",
+      "author": "C. Jelsch, M. M. Teeter, V. Lamzin, V. Pichon-Pesme, R. H. Blessing, C. Lecomte",
+      "page": "https://www.rcsb.org/structure/1EJG",
+      "license": "CC0 1.0",
+      "checked": "September 30, 2026",
+      "note": "The PDB file's HEADER, TITLE, AUTHOR, resolution, ATOM, HETATM, ANISOU, TER and END records, water left out."
+    },
+    {
+      "id": "cos7-mt-clathrin",
+      "file": "assets/toys/smlm-microscope/cos7-mt-clathrin.smlm",
+      "toy": "smlm-microscope",
+      "name": "Microtubules and clathrin in a Cos cell (ShareLoc.XYZ)",
+      "author": "Christophe Leterrier",
+      "page": "https://doi.org/10.5281/zenodo.5507427",
+      "license": "CC BY 4.0",
+      "checked": "September 30, 2026",
+      "note": "A subset: the localizations in a 12 µm square, cut by tools/sci-samples.mjs."
+    },
+    {
+      "id": "nucleus-nup",
+      "file": "assets/toys/smlm-microscope/nucleus-nup.smlm",
+      "toy": "smlm-microscope",
+      "name": "Zola-3D NUP full nucleus (ShareLoc.XYZ)",
+      "author": "Andrey Aristov (uploaded by Benoit Lelandais)",
+      "page": "https://doi.org/10.5281/zenodo.7233696",
+      "license": "CC BY 4.0",
+      "checked": "September 30, 2026",
+      "note": "A subset: a random half of the localizations, cut by tools/sci-samples.mjs."
+    },
+    {
+      "id": "m12i-gas",
+      "file": "assets/toys/galaxy-box/m12i-gas.bin",
+      "toy": "galaxy-box",
+      "name": "FIRE-2 m12i (res7100), snapshot 600 (z = 0), gas",
+      "author": "The FIRE project (Wetzel et al. 2016, 2023, 2025; Hopkins 2015; Hopkins et al. 2018)",
+      "page": "https://flathub.flatironinstitute.org/fire",
+      "license": "CC BY 4.0",
+      "checked": "September 30, 2026",
+      "note": "A subset: 300,000 of the 2.37 million gas particles in a 40 × 12 × 40 kpc box round the galaxy, cut by tools/sci-galaxy.mjs."
+    }
+  ]
 }
