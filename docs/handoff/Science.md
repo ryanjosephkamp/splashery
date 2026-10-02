@@ -136,8 +136,9 @@ Model: Opus 5.5 (claude-opus-5-5), default effort.
   review).
 
 - October 2, 2026: #132 merged. Round 2 (the owner's review of October 2, after trying the toys on
-  his phone; the Operator's brief of 07:05 UTC) on `claude/lane-science-r2`, draft PR #181, with the
-  engine part in "Engine: …" PR #182 (`claude/lane-science-engine`, merge first):
+  his phone; the Operator's brief of 07:05 UTC): PR #181 (`claude/lane-science-r2`) and the engine
+  part, "Engine: …" PR #182 (`claude/lane-science-engine`), both merged on October 2, 2026 (12:31
+  UTC) after the Operator's split full run on main:
   - Thermal ellipsoids: the atoms' and bonds' colors returned `{ keep }`, and the kit adds 16 to the
     part field for it, which is where the packed type lives: every atom splat became a whole-atom
     Gaussian (his big overlapping discs, the bonds hidden, and about 23 times slower on the low
@@ -153,6 +154,11 @@ Model: Opus 5.5 (claude-opus-5-5), default effort.
     `sci-ellipsoids-phone`, `sci-protein-phone` (MP4s); the cards they replace are marked
     (`sci-galaxy-r3`, `sci-microscope-nucleus`, and on page 1 `sci-microscope-r2` and
     `sci-ellipsoids`).
+
+- State at hand-off (October 2, 2026, 12:55 UTC): everything is merged; nothing of the lane is open.
+  The five r2 cards wait for the owner's marks (none yet). No check-ins are scheduled; the Operator
+  comes back if the owner asks for more. The PACKS.md notes below (gpuField's per-splat data, the
+  part field's +16, the camera's home after a rebuild) go into the Operator's next Ops PR.
 
 ## Notes
 
