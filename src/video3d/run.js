@@ -91,13 +91,19 @@ export async function videoTo3D(file, opts = {}) {
   // 2 to 4. Splat.js: decode, the camera path, seed.
   progress({ stage: "load", done: 0, total: 1, note: "Loading the splat trainer…" });
   if (!splatjs) splatjs = await import(SPLATJS);
+  // Splat.js's refine schedule (grow splats where the picture is wrong, move the dead ones) is
+  // set for runs of tens of thousands of steps: its first refine comes at step 2,500, after growth
+  // has stopped in any shorter run, so a few thousand steps kept the seed's splats and stayed
+  // soft. Here it scales with the run: a refine every 1/30 of it, growth until 80% of it.
+  const refineEvery = Math.max(100, Math.min(2500, Math.round(set.iters / 30)));
   const s = splatjs.createSession({
     maxIters: set.iters,
+    refineEvery,
     lowMem: tier === "low" || tier === "mid",
     initTarget: set.seed || Math.min(60000, Math.round(set.splats / 3)),
     evalHoldEvery: 1e9,
     sfm: tier === "low" || tier === "mid" ? { siftFeats: 3000, siftFirstOctave: 0, refineAspect: false } : {}, // prettier-ignore
-    trainer: { shDeg: 0, maxSplats: set.splats },
+    trainer: { shDeg: 0, maxSplats: set.splats, growUntil: Math.round(set.iters * 0.8), growFrac: 0.25 }, // prettier-ignore
     frames: { trainMaxDim: set.trainSide, featMaxDim: set.featSide },
   });
   const stop = () => {

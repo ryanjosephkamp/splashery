@@ -1486,7 +1486,7 @@
       "page": "https://commons.wikimedia.org/wiki/File:Statue_Of_Liberty_4k_Drone.webm",
       "license": "CC BY 3.0",
       "checked": "September 30, 2026",
-      "note": "14 seconds from 3:24 (the 480p transcode on Commons, one shot), trained by tools/v3d-sample.mjs at 480 px for 2,006 steps. Only the trained splats and the camera path are shipped."
+      "note": "14 seconds from 3:24 (the 480p transcode on Commons, one shot), trained by tools/v3d-sample.mjs at 640 px for 3,000 steps, with the splats grown to 120,000. Only the trained splats and the camera path are shipped."
     },
     {
       "id": "edinburgh",
@@ -1498,7 +1498,7 @@
       "page": "https://commons.wikimedia.org/wiki/File:Walking_in_EDINBURGH_-_Scotland_(UK)_-_4K_60fps_(UHD).webm",
       "license": "CC BY 3.0",
       "checked": "September 30, 2026",
-      "note": "10 seconds from 7:32 (the 480p transcode on Commons), 28 frames, trained by tools/v3d-sample.mjs at 480 px for 2,006 steps. Only the trained splats and the camera path are shipped."
+      "note": "10 seconds from 7:32 (the 480p transcode on Commons), 28 frames, trained by tools/v3d-sample.mjs at 640 px for 3,000 steps, with the splats grown to 120,000. Only the trained splats and the camera path are shipped."
     }
   ],
   "splatTrainer": {
