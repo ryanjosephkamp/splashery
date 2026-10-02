@@ -1632,6 +1632,9 @@ export const RECIPES = {
           even: true,
           opacity: 1,
           jitter: 0.015,
+          // (Slightly larger splats: the base's underside let the snow
+          // inside show through faintly. Lane Sharpness B.)
+          size: 1.12,
           flat: 0.2,
           interior: 0.06,
           core: shade(o.base, 0.6),

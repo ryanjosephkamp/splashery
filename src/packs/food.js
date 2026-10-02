@@ -2883,8 +2883,11 @@ export const RECIPES = {
         let col = mix("#f4d08e", "#c26a1f", smoothstep(0.2, 0.85, b));
         col = mix(col, "#9a5418", 0.5 * tip);
         col = mix(col, "#e9bb72", under * 0.7);
-        // Soft blistering, broad enough not to read as grain.
+        // Soft blistering, broad enough not to read as grain, and the
+        // laminated layers as fine flaky streaks along each roll.
         col = shade(col, 0.96 + 0.07 * c.noise(c.p[0] * 12, c.p[1] * 12, c.p[2] * 12));
+        const flake = Math.sin(cv * TAU * 34 + cu * TAU * 2 + 2 * c.noise(cu * 6, cv * 20, 0.7));
+        col = shade(col, 1 - 0.07 * smoothstep(0.3, 1, flake) * smoothstep(0.15, 0.6, b));
         return glossy(c, col, 0.4 * (1 - under), 20, 0.72, 0.42);
       }
       // The cut faces (the bottom's facing up, the top's facing down): the

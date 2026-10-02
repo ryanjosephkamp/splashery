@@ -410,7 +410,7 @@ export const RIGS = {
   strawberry: {
     // A solid core just inside, so the thin underside reads as fruit (lane
     // Sharpness B).
-    addon: { count: 9000, build: (k) => fruitCore(k, [-0.17, -0.02, 0.02], [0.64, 0.7, 0.8], "#8e1b22") }, // prettier-ignore
+    addon: { count: 9000, build: (k) => fruitCore(k, [-0.17, 0, 0.02], [0.58, 0.64, 0.72], "#8e1b22") }, // prettier-ignore
     parts: [],
     keys: [
       { color: "#c9b25a", tol: 0.2 },
@@ -860,23 +860,33 @@ export const RIGS = {
             (u, v) => {
               const a = u * TAU;
               const r = 0.93 - 0.33 * v;
-              return [-0.03 + Math.sin(a) * r, -0.09 - 0.1 * v, 0.02 + Math.cos(a) * r];
+              return [-0.03 + Math.sin(a) * r, -0.1 - 0.11 * v, 0.02 + Math.cos(a) * r];
             },
             { grid: 64, normal: () => [0, -1, 0] },
           ),
           { even: true, opacity: 1, jitter: 0.01, flat: 0.2, pattern: false, color: () => "#d9d7d1" }, // prettier-ignore
         );
-        underDisc(k, [-0.03, -0.19, 0.02], 0.6, "#cfccc4");
+        underDisc(k, [-0.03, -0.21, 0.02], 0.61, "#cfccc4");
       },
     },
-    parts: TOMATOES.map(([name, x, z, r]) => ({
-      name,
-      pivot: [x, PLATE_Y + r, z],
-      regions: [{ at: [x, PLATE_Y + r, z], r: [r * 1.15, r * 1.35, r * 1.15], notColor: "#eeeeea", tol: 0.2 }], // prettier-ignore
-    })),
+    parts: [
+      ...TOMATOES.map(([name, x, z, r]) => ({
+        name,
+        pivot: [x, PLATE_Y + r, z],
+        regions: [{ at: [x, PLATE_Y + r, z], r: [r * 1.15, r * 1.35, r * 1.15], notColor: "#eeeeea", tol: 0.2 }], // prettier-ignore
+      })),
+      // The capture's smear under the plate (the table and reflections), hidden
+      // (lane Sharpness B) so the plate's kit-built underside shows.
+      {
+        name: "fringe",
+        pivot: [0, -0.4, 0],
+        regions: [{ at: [0, -0.43, 0], r: [1.5, 0.215, 1.5] }],
+      },
+    ],
     controls: [pulse("roll", "Roll", 2.6)],
     action: { key: "roll", label: "Roll" },
     drive(t, c, out, info) {
+      out.parts.fringe = { visible: 0 };
       const e = since(c, "roll", 2.6);
       if (e < 0) return;
       const way = vary(info.tap) > 0.5 ? 1 : -1;
@@ -1816,7 +1826,7 @@ export const RIGS = {
           color: (c) => {
             const r = Math.hypot(c.p[0] + 0.04, c.p[2] + 0.02);
             // Pressed rings and a rolled rim, softly lit.
-            const ridge = r > 0.53 ? 0.82 : r > 0.47 ? 1 : 0.92 + 0.06 * Math.cos(r * TAU * 7);
+            const ridge = r > 0.53 ? 0.82 : r > 0.47 ? 1 : r > 0.3 && r < 0.34 ? 0.9 : 0.95;
             return shade("#cbc49c", 0.8 * ridge);
           },
         });
