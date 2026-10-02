@@ -307,7 +307,8 @@ class App {
     const key = toyKey(scene.toy);
     // UI r3: a toy that holds still (a chart, a page, an instrument) starts locked.
     const still = scene.toy.kind === "builtin" && holdsStill(findToy(scene.toy.id));
-    const lock = this.tiltLocks.has(key) ? this.tiltLocks.get(key) : !!info.recipe?.tiltLock || still; // prettier-ignore
+    // Lane Live input r3: a recipe's own tiltLock (true or false) wins over that.
+    const lock = this.tiltLocks.has(key) ? this.tiltLocks.get(key) : (info.recipe?.tiltLock ?? still); // prettier-ignore
     player.camera.setTiltLock(lock);
     // Lane Live input r3: a toy's own tilt range (recipe.pitchRange), or none.
     player.camera.setPitchRange(info.recipe?.pitchRange ?? null);
