@@ -62,7 +62,11 @@ export class GpuFluids {
     this.angles = {};
     this.gas = specs.some((s) => s.kind === "gas" || s.kind === "flame") ? new GasScene(stage.device, specs, { profile }) : null; // prettier-ignore
     this.transform = transform || { center: [0, 0, 0], scale: 1 };
-    const scale = profile === "low" || profile === "mid" ? 0.5 : profile === "max" ? 0.75 : 0.6;
+    const scale =
+      profile === "low" ? 0.35 : profile === "mid" ? 0.4 : profile === "max" ? 0.75 : 0.6;
+    // Phones step themselves down if their frames still run long (watch()).
+    this.phone = profile === "low" || profile === "mid";
+    this.watchState = { last: 0, ema: 16, slow: 0, steps: 0 };
     this.surface = new FluidSurface(stage.device, { scale });
     this.onPost = () => this.render();
     stage.app.on("postrender", this.onPost);
@@ -104,8 +108,30 @@ export class GpuFluids {
     return toy ? new pc.Mat4().mul2(toy.getWorldTransform(), fit) : fit;
   }
 
+  // On a phone, frames that keep running long (over 24 ms for a second and
+  // a half) step the fluid down: fewer substeps (it runs a little slower
+  // instead of lagging) and a coarser surface, up to three times.
+  watch() {
+    const w = this.watchState;
+    const now = performance.now();
+    const dt = w.last ? now - w.last : 16;
+    w.last = now;
+    if (!this.phone || dt > 250 || w.steps >= 3) return;
+    w.ema += (dt - w.ema) * 0.1;
+    w.slow = w.ema > 24 ? w.slow + dt : 0;
+    if (w.slow < 1500) return;
+    w.slow = 0;
+    w.ema = 16;
+    w.steps++;
+    const liq = this.liquid();
+    if (liq) liq.maxSub = Math.max(6, Math.floor(liq.maxSub * 0.75));
+    this.surface.scale = Math.max(0.28, this.surface.scale * 0.85);
+    if (this.gas) this.gas.steps = Math.max(12, Math.floor(this.gas.steps * 0.8));
+  }
+
   render() {
     if (!this.enabled || !this.stage.toy) return;
+    this.watch();
     const liq = this.liquid();
     const surf = this.surface;
     const p = surf.params;

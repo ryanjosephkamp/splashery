@@ -332,8 +332,8 @@ const CLEAR = pass("clear", [], [], `gl_FragColor = vec4(0.0);`, `out = vec4f(0.
 // Grid sizes per tier (cells along the widest side; the height is doubled),
 // Jacobi iterations, and steps per second.
 export const GAS_TIERS = {
-  low: { n: 24, jacobi: 12, hz: 30 },
-  mid: { n: 32, jacobi: 16, hz: 30 },
+  low: { n: 20, jacobi: 10, hz: 30 },
+  mid: { n: 28, jacobi: 12, hz: 30 },
   high: { n: 44, jacobi: 20, hz: 45 },
   max: { n: 56, jacobi: 24, hz: 60 },
 };
