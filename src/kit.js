@@ -924,12 +924,13 @@ export class Kit {
     }
     if (kind === KINDS.skin) return [(skin[0] | 0) + 64 * (skin[1] | 0), skin[2] ?? 0];
     if (kind === KINDS.relief) {
-      // params [u, v, axis (0 x, 1 y, 2 z), lift at full height in recipe
-      // units]; the lift is kept aside until the fit (encodeReliefs).
+      // params [u, v, axis (0 x, 1 y, 2 z, 3 a 3D offset), lift at full
+      // height in recipe units]; the lift is kept aside until the fit
+      // (encodeReliefs).
       if (!this.relief) this.relief = new Float32Array(this.buf.capacity);
       const i = this.buf.count;
       if (i < this.buf.capacity) this.relief[i] = Math.max(0, pr[3] ?? 0);
-      const axis = Math.max(0, Math.min(2, Math.round(pr[2] ?? 1)));
+      const axis = Math.max(0, Math.min(3, Math.round(pr[2] ?? 1)));
       return [Math.max(0, Math.min(1, pr[0] ?? 0)) + 2 * axis, Math.max(0, Math.min(1, pr[1] ?? 0))]; // prettier-ignore
     }
     return [pr[0] ?? 0, pr[1] ?? 0];
