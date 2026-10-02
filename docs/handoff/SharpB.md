@@ -103,6 +103,11 @@ Model: Opus 5.5 (claude-opus-5-5), default effort.
   Platonic solids, surface plotter, Lorenz), AI and the photo album (CNN, gaussian-splatting
   Sorting, the album's leather, leather close up, linen and scrapbook, and its tap) and Closed bases
   (`shb-base-<toy>`, 20 toys, from below).
+- October 2, 2026, evening: the owner's marks came in: 51 good, 13 fix, with no notes. Redone as
+  "-r2" cards: the basket's floor (no spokes), the tin can's lid (no ripples), the tomatoes' plate
+  (fewer stains), the waterfall's underside, the surface plotter (and its tap) and the Lorenz
+  attractor (and its tap). Not redone yet, waiting for a note: gradient descent's base and the
+  pizza's tap (see "For the Operator").
 - Still to do: jelly, bricks and sushi (sharper) and the pebbles' base, after Physics (#184); the
   quartz cluster's and the tornado's bases after Sharpness A (#172).
 
@@ -143,6 +148,10 @@ Model: Opus 5.5 (claude-opus-5-5), default effort.
 - The pancakes' syrup is lane Fix7's (unchanged here).
 
 ## For the Operator
+
+- The owner marked `shb-base-gradient-descent` and `shb-pizza-tap` "Needs work" with no note, and
+  nothing in them stands out to me (the block is now closed and dark; the slice slides out with
+  thinner strings, as asked). What does he want changed?
 
 - Jelly, bricks and sushi (and the pebbles' base) wait for Physics part 2 (#184), still open.
 - Shared helpers changed additively (default off): `board()` in computing.js (`even`),
