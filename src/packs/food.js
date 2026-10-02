@@ -1779,6 +1779,10 @@ export const RECIPES = {
             flat: 0.25,
             weight: 2,
             pattern: false,
+            // Lane Fix7: the drips' run down the top pancake goes with it
+            // when it flips; below it, the syrup has already run onto the
+            // pancakes under it and stays.
+            part: (c) => (c.p[1] > topY - T ? top : 0),
             kind: "grow",
             params: (c) => [0.05 + 0.9 * (c.t ?? 0) * (d.L / 0.73), 0],
             color: syrup,
@@ -2336,12 +2340,15 @@ export const RECIPES = {
           pattern: false,
           color: satin,
         });
+        // The tails hang from the knot, in front of the canes. Lane Fix7:
+        // built round the knot (the scale used to flatten their place as
+        // well as the ribbon, which put the left tail behind its cane).
         k.add(
           k.tube(
             spline([
-              [0.02 * s, bowY - 0.02, 0.18],
-              [0.12 * s, bowY - 0.2, 0.2],
-              [0.2 * s, bowY - 0.4, 0.17],
+              [0.02 * s, -0.02, 0.02],
+              [0.12 * s, -0.2, 0.05],
+              [0.2 * s, -0.4, 0.04],
             ]),
             (t) => 0.045 * (1 - 0.3 * t),
           ),
@@ -2352,6 +2359,7 @@ export const RECIPES = {
             flat: 0.3,
             weight: 1.5,
             pattern: false,
+            pos: [0, bowY, 0.18],
             scale: [1, 1, 0.5],
             color: satin,
           },

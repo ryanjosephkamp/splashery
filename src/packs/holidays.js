@@ -553,17 +553,36 @@ export const RECIPES = {
           c.lp[1] < -0.08 && c.lp[1] > -0.13 ? lit(c, "#c8262e", 0.3) : lit(c, "#222026", 0.3, 0.3),
       });
       k.data = { balls, pieces };
-      // A puddle spreads as it melts.
-      k.add(k.disc(1), {
-        even: true,
-        jitter: 0.015,
-        pos: [0, -0.965, 0],
-        pattern: false,
-        opacity: 0.6,
-        kind: "grow",
-        params: (c) => [0.15 + 0.6 * clamp(Math.hypot(c.p[0], c.p[2]), 0, 1), 0],
-        color: (c) => mix("#bfe3ff", "#e8f6ff", c.rand()),
-      });
+      // A puddle spreads as it melts. Lane Fix7: one sheet of meltwater with
+      // a wavering edge, spreading from under the snowman (it was a disc
+      // whose rings of splats showed as spokes, like a flower). Its edge is
+      // a little darker and its middle catches the light.
+      const edge = (a) => 1 + 0.1 * Math.sin(3 * a + 1.3) + 0.07 * Math.sin(5 * a + 0.4) + 0.04 * Math.sin(9 * a + 2.1); // prettier-ignore
+      k.add(
+        k.param(
+          (u, v) => {
+            const a = u * TAU;
+            const r = 1.02 * Math.sqrt(v) * edge(a);
+            return [Math.cos(a) * r, -0.965, Math.sin(a) * r];
+          },
+          { grid: 96 },
+        ),
+        {
+          even: true,
+          jitter: 0.01,
+          flat: 0.1,
+          size: 1.4,
+          pattern: false,
+          opacity: 0.55,
+          kind: "grow",
+          params: (c) => [0.15 + 0.6 * Math.sqrt(c.v), 0],
+          color: (c) => {
+            const r = Math.sqrt(c.v);
+            const sheen = Math.exp(-((c.p[0] + 0.25) ** 2 + (c.p[2] - 0.1) ** 2) / 0.08);
+            return mix(mix("#d4ecfb", "#8fb8d6", smoothstep(0.75, 1, r)), "#ffffff", 0.5 * sheen);
+          },
+        },
+      );
       // Drips falling from the bottom ball as the melt starts (hidden at
       // rest, and before that ball shrinks).
       k.cloud({ share: 0.002, size: 0.9, pattern: false, part: k.part("drips") }, (rand) => {

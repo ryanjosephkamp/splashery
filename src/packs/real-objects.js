@@ -67,8 +67,10 @@ const BASE = 0.01;
 
 // Adds the scan's splats as a cloud: `share` of the toy's budget (the file's first splats, an
 // even sample, grown to close the surface when fewer are used). `parts[i]` is the kit part for
-// the file's part i; `color(c, i, filePart)` may recolor a splat.
-export function addScan(k, scan, { share = 0.86, parts = [], color, keep } = {}) {
+// the file's part i; `color(c, i, filePart)` may recolor a splat. `pattern` (true, or
+// (filePart) => true) lets the flag and pattern layer reach those splats (lane Fix7: the clothes'
+// cloth); by default the scan keeps its own colors under any flag.
+export function addScan(k, scan, { share = 0.86, parts = [], color, keep, pattern = false } = {}) {
   k.data = k.data || {}; // sortWhileMoving keeps its state here
   const m = Math.min(scan.n, Math.max(1000, Math.floor(k.count * share)));
   const grow = Math.sqrt(scan.n / m);
@@ -88,6 +90,7 @@ export function addScan(k, scan, { share = 0.86, parts = [], color, keep } = {})
       color: c,
       opacity: 1,
       part: parts[fp] ?? 0,
+      pattern: typeof pattern === "function" ? !!pattern(fp) : pattern,
     };
   });
   // The tests find the model's splats in the buffer through this (item.start, item.end).
@@ -548,7 +551,8 @@ const SUNGLASSES = {
     const front = k.part("front", { pivot: SG.center });
     const armL = k.part("armL", { pivot: SG.hingeL });
     const armR = k.part("armR", { pivot: SG.hingeR });
-    addScan(k, scan, { share: 0.78, parts: [front, armL, armR] });
+    // The frame takes flag colors (lane Fix7); the lenses keep theirs.
+    addScan(k, scan, { share: 0.78, parts: [front, armL, armR], pattern: true });
     const L = SG.lens;
     const nLens = Math.round(k.count * 0.05);
     for (const side of [-1, 1]) {
@@ -669,7 +673,8 @@ const BASEBALL_CAP = {
   build(k) {
     const scan = SCANS.get("baseball-cap");
     const cap = k.part("cap", { pivot: BC.pivot });
-    addScan(k, scan, { share: 0.78, parts: [cap] });
+    // The cap takes flag colors (lane Fix7); its stand keeps its walnut.
+    addScan(k, scan, { share: 0.78, parts: [cap], pattern: true });
     // The stand: one turned walnut profile (a round foot, a slim post and a dome that fills the
     // crown), placed evenly (a golden-angle spiral) so its edges stay crisp.
     const zc = -0.2;
@@ -1240,7 +1245,8 @@ const RUNNING_SHOE = {
   build(k) {
     const scan = SCANS.get("running-shoe");
     const shoe = k.part("shoe", { pivot: RS.heel, axis: [0, 0, 1] });
-    addScan(k, scan, { share: 0.82, parts: [shoe, shoe], keep: (fp) => fp === 0 });
+    // The shoe takes flag colors (lane Fix7); its laces keep theirs.
+    addScan(k, scan, { share: 0.82, parts: [shoe, shoe], keep: (fp) => fp === 0, pattern: true });
     // The laces: round splats along each chain, each following the two joints it lies between.
     const n = RS.joints;
     const per = Math.max(30, Math.round((k.count * 0.05) / (2 * (n - 1))));
@@ -1360,7 +1366,8 @@ const HOODIE = {
     const sleeveR = k.part("sleeveR", { pivot: HD.shoulderR });
     const stringL = k.part("stringL", { pivot: HD.strings[0].top });
     const stringR = k.part("stringR", { pivot: HD.strings[1].top });
-    addScan(k, scan, { share: 0.86, parts: [0, hood, sleeveL, sleeveR], keep: (fp) => fp < 4 });
+    // The cloth takes flag colors (lane Fix7); the drawstrings keep theirs.
+    addScan(k, scan, { share: 0.86, parts: [0, hood, sleeveL, sleeveR], keep: (fp) => fp < 4, pattern: true }); // prettier-ignore
     // The armholes: each is closed with fabric that follows the opening's own outline (the
     // sleeve's splats that touch the body, above the armpit, laid flat on the plane that fits
     // them best), one patch on the body and one on the sleeve's top, so a raised sleeve shows
@@ -1442,7 +1449,7 @@ const HOODIE = {
           const r = f * rad[Math.floor(((t / (2 * Math.PI)) % 1) * bins)] * 0.97;
           const [u, v] = [r * Math.cos(t), r * Math.sin(t)];
           const p = [0, 1, 2].map((q) => c[q] + u * e1[q] + v * e2[q] + off * nrm[q]);
-          return { p, n: nrm.map((q) => q * face), size, color: col.map((q) => q * (0.86 + 0.1 * f)), part }; // prettier-ignore
+          return { p, n: nrm.map((q) => q * face), size, color: col.map((q) => q * (0.86 + 0.1 * f)), part, pattern: true }; // prettier-ignore
         });
       }
     }
