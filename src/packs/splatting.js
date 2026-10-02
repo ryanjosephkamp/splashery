@@ -734,12 +734,12 @@ function buildSorting(k) {
     if (i >= lens.length) return null;
     return { p: lens[i].p, size: 0.9, jitter: 0, color: lens[i].c, opacity: 1 };
   });
-  // Lines of sight: faint dotted lines from the lens to the ball's rim.
+  // Lines of sight: thin lines from the lens to the ball's rim.
   const eye = at(0, 0, 0.18);
   for (let j = 0; j < 4; j++) {
     const a = (j / 4) * TAU + 0.4;
     const rim = [0, 1, 2].map((j) => (side[j] * Math.cos(a) + up[j] * Math.sin(a)) * 0.62); // prettier-ignore
-    line(k, eye, rim, "#9aa3b0", 0.01, 70);
+    line(k, eye, rim, "#9aa3b0", 0.008, 180); // a thin, continuous line
   }
 }
 

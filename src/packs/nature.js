@@ -20,7 +20,7 @@ import {
   quatEuler,
   vec,
 } from "../kit.js";
-import { evenCylinder, evenDisc, evenEllipsoid, evenTube } from "./even.js";
+import { evenBox, evenCylinder, evenDisc, evenEllipsoid, evenTube } from "./even.js";
 
 const TAU = Math.PI * 2;
 const OAK_SECS = 6.6;
@@ -348,6 +348,9 @@ function grassMound(k, r, y, o = {}) {
       { thick: d },
     ),
     {
+      // o.even (lane Sharpness B): laid evenly and solid, so the mound is
+      // closed from below (random placement shows the far side through).
+      ...(o.even ? { even: true, opacity: 1 } : {}),
       flat: 0.3,
       color: (c) => {
         const g = c.fbm(c.p[0] * 9, c.p[1] * 9, c.p[2] * 9);
@@ -1541,7 +1544,13 @@ export const RECIPES = {
         const hi = Math.pow(Math.max(0, dot(c.n, unit([-0.3, 0.45, 0.85]))), 10);
         return mix(lit(col, c.n, 0.4), "#ffffff", 0.25 * hi);
       };
-      k.add(k.box(1.6, 0.28, 1.0), {
+      // (Evenly laid, solid splats: a random box let the inside show
+      // through the pot's walls and floor from below.)
+      k.add(evenBox(1.6, 0.28, 1.0), {
+        even: true,
+        opacity: 1,
+        jitter: 0.012,
+        size: 1.08,
         pos: [0, -0.16, 0],
         color: (c) => (c.s.face === 2 ? null : glaze(c)),
       });
@@ -1551,7 +1560,10 @@ export const RECIPES = {
         [0.06, 1.0, 0.81, 0],
         [0.06, 1.0, -0.81, 0],
       ]) {
-        k.add(k.box(sx, 0.05, sz), {
+        k.add(evenBox(sx, 0.05, sz), {
+          even: true,
+          opacity: 1,
+          jitter: 0.012,
           pos: [x, -0.02, z],
           weight: 1.5,
           color: (c) => glaze(c, c.s.face === 3 ? 0.6 : 1.05),
@@ -1563,7 +1575,10 @@ export const RECIPES = {
         [-0.62, 0.36],
         [0.62, 0.36],
       ]) {
-        k.add(k.box(0.16, 0.08, 0.12), {
+        k.add(evenBox(0.16, 0.08, 0.12), {
+          even: true,
+          opacity: 1,
+          jitter: 0.012,
           pos: [x, -0.32, z],
           weight: 2,
           color: (c) => lit(shade(potCol, 0.7), c.n, 0.4),
@@ -1573,6 +1588,8 @@ export const RECIPES = {
       k.add(
         k.param((u, v) => [(u - 0.5) * 1.52, -0.015, (v - 0.5) * 0.92], { grid: 8, flip: true }),
         {
+          even: true,
+          opacity: 1,
           color: (c) => {
             const m = c.fbm(c.p[0] * 6, 0, c.p[2] * 6);
             return m > -0.3
@@ -4505,6 +4522,9 @@ export const RECIPES = {
           [0.38, 0.0],
         ]),
         {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
           flat: 0.25,
           color: (c) => {
             const g = c.fbm(c.p[0] * 10, c.p[1] * 10, c.p[2] * 10);
@@ -4514,6 +4534,19 @@ export const RECIPES = {
           },
         },
       );
+      // The pot's floor, closed underneath like a real clay pot.
+      k.add(evenDisc(k, 0.272, 0, 40), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
+        pos: [0, -0.5, 0],
+        rot: [180, 0, 0],
+        flat: 0.25,
+        color: (c) => {
+          const g = c.fbm(c.p[0] * 10, c.p[1] * 10, c.p[2] * 10);
+          return shade(mix("#b85a32", "#d8804a", 0.5 + 0.4 * g), 0.62);
+        },
+      });
       k.add(k.disc(0.39), {
         pos: [0, -0.02, 0],
         color: (c) =>
@@ -5061,6 +5094,7 @@ export const RECIPES = {
       };
       // Sandy sea floor with rocks.
       grassMound(k, 0.85, 0, {
+        even: true,
         h: 0.06,
         colors: ["#b8a070", "#d0bc8c", "#e2d4aa"],
         soil: "#7a6444",
@@ -5068,7 +5102,9 @@ export const RECIPES = {
       for (let i = 0; i < 7; i++) {
         const a = rand() * TAU;
         const s = 0.07 + rand() * 0.08;
-        k.add(k.ellipsoid(s * 1.3, s * 0.7, s), {
+        k.add(evenEllipsoid(k, s * 1.3, s * 0.7, s, 32), {
+          even: true,
+          opacity: 1,
           pos: [Math.sin(a) * (0.25 + rand() * 0.45), 0.04, Math.cos(a) * (0.25 + rand() * 0.45)],
           rot: [0, rand() * 180, 0],
           color: (c) => {

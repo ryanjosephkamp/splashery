@@ -381,15 +381,15 @@ export const RIGS = {
         }
         // The stand's underside, closed (lane Sharpness B): the capture's
         // square stand is see-through from below.
-        k.add(evenBox(0.7, 0.012, 0.7), {
+        k.add(evenBox(0.75, 0.012, 0.75), {
           even: true,
           opacity: 1,
           jitter: 0.01,
-          pos: [-0.02, -0.935, 0],
+          pos: [-0.02, -0.955, 0],
           rot: [0, -29, 0],
           flat: 0.2,
           pattern: false,
-          color: (c) => (c.n[1] < -0.5 ? "#8f8b85" : "#b9b5ae"),
+          color: (c) => (c.n[1] < -0.5 ? "#5f5c58" : "#8a8680"),
         });
       },
     },
@@ -410,7 +410,7 @@ export const RIGS = {
   strawberry: {
     // A solid core just inside, so the thin underside reads as fruit (lane
     // Sharpness B).
-    addon: { count: 9000, build: (k) => fruitCore(k, [-0.17, 0, 0.02], [0.58, 0.64, 0.72], "#8e1b22") }, // prettier-ignore
+    addon: { count: 9000, build: (k) => fruitCore(k, [-0.17, -0.02, 0.02], [0.64, 0.7, 0.8], "#8e1b22") }, // prettier-ignore
     parts: [],
     keys: [
       { color: "#c9b25a", tol: 0.2 },

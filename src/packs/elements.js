@@ -16,7 +16,7 @@ import {
   quatRotate,
   vec,
 } from "../kit.js";
-import { evenEllipsoid, evenTorus } from "./even.js";
+import { evenBox, evenDisc, evenEllipsoid, evenTorus } from "./even.js";
 
 const TAU = Math.PI * 2;
 const { add, sub, mul, dot, cross, len, unit } = vec;
@@ -2949,9 +2949,14 @@ export const RECIPES = {
         if (c.n[1] > 0.6) col = mix(col, mix("#3f6a24", "#6a8a34", c.rand()), 0.85);
         return lit(col, c.n, 0.5);
       };
-      k.add(k.box(1.6, TOP, 0.6), {
+      // (Evenly laid and closed underneath, lane Sharpness B: from below
+      // the water showed through an open, speckled box.)
+      k.add(evenBox(1.6, TOP, 0.6), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: [0, TOP / 2, -0.05],
-        color: (c) => (c.s.face === 3 ? null : rock(c)),
+        color: (c) => (c.s.face === 3 ? lit(shade("#3e3832", 0.8), c.n, 0.6) : rock(c)),
       });
       for (let i = 0; i < 12; i++) {
         const x = (rand() - 0.5) * 1.7;
@@ -3043,6 +3048,18 @@ export const RECIPES = {
           params: [0.28, r()],
           part: streaks,
         };
+      });
+      // The pool's stony bed under it, closed from below.
+      k.add(evenDisc(k, 0.75, 0, 48), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
+        pos: [0, 0.03, 0.55],
+        scale: [1.1, 1, 0.75],
+        rot: [180, 0, 0],
+        flat: 0.2,
+        pattern: false,
+        color: (c) => shade(mix("#4a443c", "#2e2a26", 0.5 + 0.5 * c.noise(c.p[0] * 5, 0, c.p[2] * 5)), 0.85), // prettier-ignore
       });
       // The pool, with foam where the water lands and drifting mist.
       k.add(k.disc(0.75), {
