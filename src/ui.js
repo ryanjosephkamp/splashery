@@ -1555,8 +1555,10 @@ export function createUI(app) {
       const f = files[0];
       file.value = "";
       if (!f) return;
-      // UI r5: a recipe may set its own cap (input.maxBytes, a number or a
-      // function of nothing); 40 MB otherwise.
+      // input.maxBytes: a recipe's own cap, a number (the song landscape, lane
+      // Live input r2, which streams its file) or a function of nothing (UI r5:
+      // Model to splats, by the device), with input.tooBig(cap) for its own
+      // message; 40 MB otherwise.
       const cap = (typeof input.maxBytes === "function" ? input.maxBytes() : input.maxBytes) || 40e6; // prettier-ignore
       if (files.reduce((sum, x) => sum + x.size, 0) > cap) {
         error.textContent = input.tooBig?.(cap) || `That file is too big (over ${Math.round(cap / 1e6)} MB).`; // prettier-ignore

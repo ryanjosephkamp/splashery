@@ -178,6 +178,12 @@ Model: Opus 5.5 (default effort), all of it.
   `tools/sound-lint.mjs --changed`: the only clear violations left are what the owner asked for or
   kept (the tunes, the laptop's screen-on pad, the crown's pings, the monument's chime, the half
   adder's ding, the Screen's off sound, the sports car's real rev).
+- **Integrator fixes** (October 1, 2026): the recordings' credits moved to the `soundSamples` key in
+  `tools/assets.json` (each with its `toys`) and into `src/sound-credits.js` for the About tab; the
+  recordings were re-encoded (32 kbps at 32 kHz for sustained sounds, 48 kbps for short hits) so all
+  of `assets/sounds/` (85 files) is 986,778 bytes, under Sound A's 1 MB budget.
+- **Merged** as #138 into main 6c0c8ac on October 1, 2026, after the Operator's full check of main
+  with #138. The lane's scope is done; the owner hears the new sounds on the Sound Board.
 
 ## Notes
 
@@ -193,7 +199,8 @@ Model: Opus 5.5 (default effort), all of it.
   previews (128 kbps MP3) download without one; each sound's license was read on its own page.
   Kenney's Casino Audio (CC0, License.txt in the pack) gave the dice. The files were cut and encoded
   with a local ffmpeg (from the `imageio-ffmpeg` wheel, not a repo dependency), mono, faded,
-  peak-normalized to -3 dBFS, 64 kbps.
+  peak-normalized to -3 dBFS, then re-encoded at 32 kbps (32 kHz) for sustained sounds and 48 kbps
+  for short hits to fit the 1 MB budget.
 - `hold` (the key's time down) keeps piano tunes (the cake, the tree, the diffusion model, the
   splatting toy) inside the 5 s limit; `decay` alone rings too long.
 

@@ -745,7 +745,9 @@ export const KINDS = {
   // Relief (lane Live input; 24 since lane Fix4 took 23): a splat lifted from its place by a live
   // height and coloured from a live picture, both drawn by the recipe into
   // its screen canvas (recipe.screen): the colour at (u / 2, v), the height
-  // (red, 0..1) at (1 / 2 + u / 2, v). z = u + 2 * axis (0 x, 1 y, 2 z),
+  // (red, 0..1) at (1 / 2 + u / 2, v). z = u + 2 * axis (0 x, 1 y, 2 z; 3:
+  // a 3D offset, red, green and blue each signed about a half, along x, y
+  // and z, with alpha under a half hiding the splat),
   // w = v + 2 * lift at full height (thousandths of a toy unit; see
   // Kit.encodeReliefs). A live spectrogram, a camera picture with depth.
   relief: 24,
@@ -874,9 +876,16 @@ vec3 spKitCenter(vec3 p) {
     float rax = floor(an.z * 0.5);
     float rlq = floor(an.w * 0.5);
     vec2 ruv = vec2(an.z - 2.0 * rax, an.w - 2.0 * rlq);
-    float rh = textureLod(uSpScreen, vec2(0.5 + 0.5 * ruv.x, ruv.y), 0.0).r;
-    vec3 rdir = rax < 0.5 ? vec3(1.0, 0.0, 0.0) : rax < 1.5 ? vec3(0.0, 1.0, 0.0) : vec3(0.0, 0.0, 1.0);
-    p += rdir * rh * rlq * 0.001;
+    vec4 rt = textureLod(uSpScreen, vec2(0.5 + 0.5 * ruv.x, ruv.y), 0.0);
+    if (rax > 2.5) {
+      // 3D: red, green and blue are a signed offset along x, y and z, and
+      // alpha under a half hides the splat.
+      p += (rt.rgb - 0.5) * 2.0 * rlq * 0.001;
+      if (rt.a < 0.5) spKitScale = 0.0;
+    } else {
+      vec3 rdir = rax < 0.5 ? vec3(1.0, 0.0, 0.0) : rax < 1.5 ? vec3(0.0, 1.0, 0.0) : vec3(0.0, 0.0, 1.0);
+      p += rdir * rt.r * rlq * 0.001;
+    }
     spScreenUV = vec3(0.5 * ruv.x, ruv.y, 1.0);
   }
   if (kind == 16 && int(an.z + 0.5) == int(floor(uSpKitB.w + 0.001)) && uSpKitB.w >= 0.0) {
@@ -1089,10 +1098,15 @@ fn spKitCenter(p0: vec3f) -> vec3f {
     let rax = floor(an.z * 0.5);
     let rlq = floor(an.w * 0.5);
     let ruv = vec2f(an.z - 2.0 * rax, an.w - 2.0 * rlq);
-    let rh = textureSampleLevel(uSpScreen, uSpScreenSampler, vec2f(0.5 + 0.5 * ruv.x, ruv.y), 0.0).r;
-    var rdir = vec3f(0.0, 0.0, 1.0);
-    if (rax < 0.5) { rdir = vec3f(1.0, 0.0, 0.0); } else if (rax < 1.5) { rdir = vec3f(0.0, 1.0, 0.0); }
-    p = p + rdir * rh * rlq * 0.001;
+    let rt = textureSampleLevel(uSpScreen, uSpScreenSampler, vec2f(0.5 + 0.5 * ruv.x, ruv.y), 0.0);
+    if (rax > 2.5) {
+      p = p + (rt.rgb - vec3f(0.5)) * 2.0 * rlq * 0.001;
+      if (rt.a < 0.5) { spKitScale = 0.0; }
+    } else {
+      var rdir = vec3f(0.0, 0.0, 1.0);
+      if (rax < 0.5) { rdir = vec3f(1.0, 0.0, 0.0); } else if (rax < 1.5) { rdir = vec3f(0.0, 1.0, 0.0); }
+      p = p + rdir * rt.r * rlq * 0.001;
+    }
     spScreenUV = vec3f(0.5 * ruv.x, ruv.y, 1.0);
   }
   if (kind == 16 && i32(an.z + 0.5) == i32(floor(uniform.uSpKitB.w + 0.001)) && uniform.uSpKitB.w >= 0.0) {
