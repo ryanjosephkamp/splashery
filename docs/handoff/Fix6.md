@@ -93,16 +93,16 @@ you make or a CC0 photo, opened end to end), 2, 3a, 3b and 4. Reply with "READY:
 
 Model: Opus 5.5 (default effort).
 
-October 1, 2026:
+October 1, 2026: **done, all merged.** Every `fx6-*` card on Effect review page 2 is marked good.
 
-- Part 1 (Photo to 3D) is on `claude/lane-fix6-1`, PR #154.
-- The engine piece is on `claude/lane-fix6-engine`, PR #155 ("Engine: …"); merge it first.
-- Part 2 (the Enigma, the periodic table, the acoustic guitar) is on `claude/lane-fix6-2`, PR #159,
-  stacked on both. `tests/fx6-2.spec.mjs` passes. All of the full suite ran here in parts (the
-  session's 2-hour limit cut the first run); every failure was fixed (see #159).
+- Part 1 (Photo to 3D): #154, merged.
+- Engine (no loading overlay on a toy's own switch, `out.next`, the kept motion): #155, merged.
+- Part 2 (the Enigma's keys, the periodic table's tour, the smooth acoustic guitar): #159, merged
+  (main bc4a889), after the Operator's run of 150 of 150 on main + #159.
 - Every periodic table build has the same 14 parts in the same order, so the frame at the switch
   (old build, new motion) moves each piece as itself. #155 keeps a toy's motion only through its own
   switch (`Player.switchTo`); keeping it through Toy-tab rebuilds broke the book and Screen tests.
+- No sounds were added or changed; nothing for Sound B.
 
 ## Notes
 
