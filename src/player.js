@@ -1374,6 +1374,7 @@ export class Player {
         motion,
         info,
         cameraPos: pose.position,
+        cameraDistance: pose.distance, // Science r2
       }),
       patternUniforms(this.scene.pattern, info.half, info.lum ?? 0.5, this.patternOn),
     );

@@ -77,6 +77,21 @@ test("a recipe's closeUp lets the camera come that close; the near clip follows;
     return { near: player.stage.cameraEntity.camera.nearClip, pans: player.pansHere() };
   });
   expect(back).toEqual({ near: 0.02, pans: false });
+  // The shaders get the camera's distance to the point it looks at (uSpCam.w).
+  const w = await page.evaluate(async () => {
+    const { player } = window.__splashery;
+    const st = player.stage;
+    let got = null;
+    const orig = st.setUniforms.bind(st);
+    st.setUniforms = (u) => {
+      got ??= u.uSpCam?.slice();
+      orig(u);
+    };
+    await st.captureFrame();
+    st.setUniforms = orig;
+    return { w: got?.[3], distance: player.camera.cur.distance };
+  });
+  expect(w.w).toBeCloseTo(w.distance, 4);
   // Another toy afterwards gets the usual limits back.
   const other = await zoomAllTheWay(page, "soccer-ball");
   expect(other.min).toBeCloseTo(1.25, 5);
