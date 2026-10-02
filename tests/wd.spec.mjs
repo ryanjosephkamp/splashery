@@ -207,21 +207,26 @@ test.describe("worlds", () => {
     expect(seen.mid).toBeLessThan(seen.high);
   });
 
-  test("screenshots at 390x844 and 1440x900", async ({ browser }) => {
-    for (const [w, h] of [
-      [390, 844],
-      [1440, 900],
-    ]) {
+  // One test per size, each with room for a slow software renderer: the two
+  // in one test reached the 240 s limit on the Integrators' machines (October
+  // 2, 2026), at the screenshot. Each still waits for the world's ready
+  // signal (open) and draws its frames on the manual clock first.
+  for (const [w, h] of [
+    [390, 844],
+    [1440, 900],
+  ]) {
+    test(`screenshot at ${w}x${h}`, async ({ browser }) => {
+      test.setTimeout(420_000);
       const page = await browser.newPage({ viewport: { width: w, height: h } });
       await open(page);
       await page.click("#enter");
       await settle(page);
       await page.evaluate(() => window.__world.step({ y: 1 }, 1.2));
       await settle(page);
-      await page.screenshot({ path: `tests/screenshots/wd-island-${w}x${h}.png` });
+      await page.screenshot({ path: `tests/screenshots/wd-island-${w}x${h}.png`, timeout: 180_000 }); // prettier-ignore
       await page.close();
-    }
-  });
+    });
+  }
 
   test("the toy box links to Worlds only with the labs switch", async ({ page }) => {
     // The link sits in the About tab; `hidden` says whether it shows there.
