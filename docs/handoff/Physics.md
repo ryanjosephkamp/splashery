@@ -118,6 +118,11 @@ docs/HANDS-ON-PLAN.md.
   stack, snap onto the studs), macarons (pick up and stack), spring toy (stretch and spring back),
   sushi (a tap on a piece picks that one) and the bow (draw and shoot). Help lines, About texts and
   plan entries updated; `tests/phy.spec.mjs`; docs/HANDS-ON-PLAN.md (every toy, by shelf).
+- October 2, 2026, 15:09 UTC: #176 (the engine) merged. Main merged into `claude/lane-physics`
+  (TOY-PLAN.md regenerated). #184 (the showcase toys) waits for the owner's marks on the cards.
+- October 2, 2026, evening: the full suite on #184 ran file by file (76 files). Two failures, both
+  ours and both fixed: Pebbles' About text was over the nature shelf's 140 words, and the bricks test
+  pressed before the camera had settled. Everything else passed, the anatomy atlas included.
 
 ## Notes
 
@@ -146,6 +151,8 @@ docs/HANDS-ON-PLAN.md.
   clean showcase.
 - A brick or stone set down on an edge may slide off: that is the physics, but aim matters.
 - Level 1 reads a sample of 6,000 splats on the first pick-up to find the toy's outside.
+- This container is reclaimed when the session sits idle, which kills a detached test run; run the
+  suite as a harness background task, or file by file.
 
 ## For the Operator
 
