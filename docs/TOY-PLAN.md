@@ -56,8 +56,9 @@ Proposals below are suggestions; the owner may change them.
   Multilayer perceptron, Neural network, Convolutional network, Recurrent network, Transformer,
   Looped transformer, Diffusion model, Gradient descent, Gaussian splatting, Word vectors, Sorting
   machine, Half adder, Turing machine, Difference engine, Enigma machine, Bombe, Your book, Photo
-  album, Picture frame, Room echo meter, Splat mirror, Model to splats, Photo to 3D, Video to 3D,
-  Splat field, Thermal ellipsoids, Super-resolution microscope, Galaxy in a box, Fluid lab, Screen.
+  album, Picture frame, Song landscape, Room echo meter, Splat mirror, Model to splats, Photo to 3D,
+  Video to 3D, Splat field, Thermal ellipsoids, Super-resolution microscope, Galaxy in a box, Fluid
+  lab, Screen.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -2507,6 +2508,10 @@ Proposals below are suggestions; the owner may change them.
     marker and the camera glide along it. View: Live scrolls the landscape with the music like a
     waterfall: the part playing now sits on a fixed line at the front, the next seconds come toward
     you, what has played fades away, and a row of caps rises with the loudness at the line.
+  - Improved: Live input r2: a long song plays from the file at once (no decoding first) and its
+    picture is measured in a worker, filling in as it plays. Four measured looks: Ribbons (six
+    bands), Tube (loudness, pitch and brightness), Lines (a spectrum waterfall) and Mesh (its
+    wireframe), on cream paper or alone, all on the audio clock.
   - Sound: The song itself.
 - **Chladni plate** (`chladni-plate`). Now: tap: Bow the plate. Plan: new effect (E6).
   - Owner: Approved on the Splashery Universe page (lane Studio Sound), September 29, 2026.
