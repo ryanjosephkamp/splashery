@@ -185,6 +185,14 @@ their files alone and keep your engine changes small and additive. The laptop is
 
 ## For the Operator
 
+- Tests (October 2, 2026, at c34acff): the full suite was stopped twice by container restarts (130
+  passed, none failed, before that). The affected files (ui2, ui3, ui4, ui5, vw, help, stm, pno, fb,
+  chs, smoke, taps): 213 of 215 passed; `help.spec.mjs:261` (1440x900) and `stm.spec.mjs:366` failed
+  only with three workers and pass alone. The rest of the suite (bk to wdr3, apart from those) is
+  for the Integrator's combined run.
+- Standard screenshots with the top row (ui2, ui3, vw, help) change: the gallery button shows there
+  now. Restored on the branch, not committed.
+
 - Engine PR touches index.html (the gallery button moved, the Record row and pill), src/app.js
   (`startRecord` and friends, the G key, the `tilt: "free"` check), src/ui.js, src/exports.js and
   styles.css (a UI r5 block at the end). No other lane's files.
