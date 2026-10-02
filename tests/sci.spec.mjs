@@ -237,6 +237,24 @@ test.describe("crystal files", () => {
       if (options.hydrogens === "hidden") expect(st.shownAtoms).toBe(13);
     }
   });
+
+  // r2: the kit's pattern flag (+16 in the part field) once turned every
+  // atom's splats into the "gauss" type, so each atom drew as a big disc.
+  test("every splat keeps the type it was packed with (atoms, bonds, one-Gaussian atoms)", async () => {
+    const types = (ctx) => {
+      const n = [0, 0, 0, 0, 0, 0, 0, 0];
+      const a = ctx.buf.anim;
+      for (let i = 0; i < ctx.buf.count; i++) n[Math.round(a[i * 4] / 16) % 8]++;
+      return n;
+    };
+    const solid = types(await build("thermal-ellipsoids", 60000, {}));
+    expect(solid[1]).toBeGreaterThan(1000); // bonds
+    expect(solid[2]).toBeGreaterThan(10000); // the atoms' solid ellipsoids
+    expect(solid[3]).toBe(0);
+    const gauss = types(await build("thermal-ellipsoids", 60000, { look: "gauss" }));
+    expect(gauss[3]).toBeGreaterThan(20);
+    expect(gauss[2]).toBe(0);
+  });
 });
 
 test.describe("localizations", () => {

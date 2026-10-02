@@ -142,7 +142,11 @@ function faceOn(atoms) {
   return eigenSym3(m).vectors;
 }
 
+// A molecule needs fewer splats than most toys: 0.6 of the kit's count (36k,
+// 84k, 120k and 168k by tier) keeps every atom solid and a phone smooth.
+export const THERMAL_DENSITY = 0.6;
 const THERMAL = {
+  density: THERMAL_DENSITY,
   alive: (c) => (c.jiggle ?? 0) > 0,
   options: [
     {
@@ -312,6 +316,10 @@ const THERMAL = {
       // ORTEP's principal ellipses: a dark line round each principal plane
       // of an anisotropic atom (spheres, the isotropic atoms, have none).
       const band = a.aniso ? 0.075 : 0;
+      // The colors never ask the kit to keep them from a pattern ({ keep }):
+      // that adds 16 to the part field, which holds the packed type here, and
+      // turned every atom's splats into whole-atom Gaussians (r2: the owner's
+      // "really big" ellipsoids).
       k.add(unit, {
         pos: pos[i],
         quat,
@@ -325,7 +333,7 @@ const THERMAL = {
         color: (cc) => {
           const lp = cc.lp;
           const line = band && Math.min(Math.abs(lp[0]), Math.abs(lp[1]), Math.abs(lp[2])) < band;
-          return { c: lit(line ? shade(col, a.el === "H" ? 0.5 : 0.35) : col, cc.n), keep: true };
+          return lit(line ? shade(col, a.el === "H" ? 0.5 : 0.35) : col, cc.n);
         },
       });
     });
@@ -369,7 +377,7 @@ const THERMAL = {
           opacity: 1,
           weight: 0.6,
           part: sciPart(SCI_TYPE.bond),
-          color: (cc) => ({ c: lit(shade(cc.lp[1] < 0 ? ci : cj, 0.85), cc.n, 0.2), keep: true }),
+          color: (cc) => lit(shade(cc.lp[1] < 0 ? ci : cj, 0.85), cc.n, 0.2),
         });
       }
     }
