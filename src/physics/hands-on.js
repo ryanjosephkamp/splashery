@@ -17,7 +17,7 @@
 // `handsOn: true | false` on a recipe starts the switch on, or keeps the
 // toy out of Hands-on (a picture toy). Pure JavaScript, no DOM.
 
-import { World, Body, quat, v3 } from "./world.js";
+import { World, Body, boundOf, quat, v3 } from "./world.js";
 
 // How much a toy squishes when it lands (0: not at all) and how much it
 // bounces. Anything not listed is solid and bounces a little.
@@ -48,7 +48,7 @@ export const BOUNCE = {
 // Toys that are hands-on already: their own drags keep working, and the
 // switch starts on for them.
 export function ownHands(recipe) {
-  return !!(recipe?.drag || recipe?.grab || recipe?.handsOn === true);
+  return !!(recipe?.drag || recipe?.grab);
 }
 
 // Whether a toy plays in Hands-on at all (a picture toy keeps its pages).
@@ -86,7 +86,7 @@ export class HandsOn {
   attach(info) {
     this.clear();
     this.info = info;
-    this.on = canPlay(info) && ownHands(info?.recipe);
+    this.on = canPlay(info) && (ownHands(info?.recipe) || info?.recipe?.handsOn === true);
   }
 
   clear() {
@@ -101,6 +101,22 @@ export class HandsOn {
     this.moved = false;
     this.player.stage.setToyPose?.(null);
     this.player.motion.handsTokens = null;
+    this.player.motion.handsParts = null;
+  }
+
+  // Pieces live in the recipe's own coordinates (a kit toy is centred and
+  // scaled to fit); the whole toy lives in the world.
+  units() {
+    const tf = this.mode === "pieces" ? this.player.motion.ctx?.transform : null;
+    return tf?.scale || 1;
+  }
+
+  R() {
+    return this.info.radius / this.units();
+  }
+
+  ray(x, y) {
+    return this.mode === "pieces" ? this.player.recipeRay(x, y) : this.player.stage.ray(x, y);
   }
 
   get own() {
@@ -134,7 +150,7 @@ export class HandsOn {
     if (hands?.pieces) return this.buildPieces(hands);
     const hull = this.hull();
     const g = (hands?.gravity ?? GRAVITY) * R;
-    const w = new World({ gravity: [0, -g, 0], substeps: 8, sleepSpeed: 0.03 * R, minHit: 0.6 * R }); // prettier-ignore
+    const w = new World({ gravity: [0, -g, 0], substeps: 8, sleepSpeed: 0.03 * R, minHit: 0.6 * R, maxSpeed: 12 * R }); // prettier-ignore
     const floor = hull.floor;
     w.plane([0, 1, 0], floor, { friction: 0.7, restitution: 0.3 });
     const A = hull.reach * 1.05 + 0.4 * R;
@@ -238,10 +254,11 @@ export class HandsOn {
 
   buildPieces(hands) {
     const info = this.info;
-    const R = info.radius;
+    this.mode = "pieces";
+    const R = this.R();
     const data = this.player.proc?.ctx?.kit?.data;
     const g = (hands.gravity ?? GRAVITY) * R;
-    const w = new World({ gravity: [0, -g, 0], substeps: hands.substeps ?? 10, sleepSpeed: 0.02 * R, minHit: 0.35 * R }); // prettier-ignore
+    const w = new World({ gravity: [0, -g, 0], substeps: hands.substeps ?? 10, sleepSpeed: 0.02 * R, minHit: 0.35 * R, maxPush: 0.01 * R, maxSpeed: 10 * R }); // prettier-ignore
     w.plane([0, 1, 0], hands.floor ?? 0, { friction: hands.friction ?? 0.9, restitution: 0.15, grip: hands.grip ?? 0 }); // prettier-ignore
     const A = (hands.area ?? 1.6) * R;
     for (const [nx, nz] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) // prettier-ignore
@@ -260,18 +277,40 @@ export class HandsOn {
         damping: p.damping ?? 0.3,
         angDamping: p.angDamping ?? 1.5,
       });
+      w.add(body);
+      this.pieces.push({ body, token: p.token, part: p.part, home: { pos: p.pos.slice(), q: (p.quat || [0, 0, 0, 1]).slice() }, def: p }); // prettier-ignore
+      // A piece on a stem (a cherry): pinned to its point, springing back
+      // to how it hung.
+      if (p.joint)
+        w.joint(body, body.toLocal(p.joint), null, p.joint, { length: p.jointLength ?? 0 });
+      if (p.spring) {
+        body.restQ = body.q.slice();
+        body.restK = p.spring;
+      }
+      if (p.hinge) body.hinge = { axis: v3.norm(p.hinge), q: body.q.slice() };
+      body.invMassFree = body.invMass;
+      body.invIFree = body.invI.slice();
+      if (p.free) continue;
       // Pieces stay where they were built until picked up or knocked hard
       // (a heap of pebbles that was never balanced doesn't slump by itself).
       body.pinned = true;
-      body.invMassFree = body.invMass;
-      body.invIFree = body.invI.slice();
+      // While it lies where it was built it is ground for others, in its
+      // full shape (`rest`, else its solid).
+      if (p.rest) {
+        body.solid = p.rest;
+        body.bound = boundOf(body);
+      }
       body.invMass = 0;
       body.invI = [0, 0, 0];
-      w.add(body);
-      this.pieces.push({ body, token: p.token, home: { pos: p.pos.slice(), q: (p.quat || [0, 0, 0, 1]).slice() }, def: p }); // prettier-ignore
     }
-    // A free piece that hits a pinned one hard enough frees it.
-    w.pairs = (a, b) => !(a.pinned && b.pinned);
+    // Pairs that overlapped when one of them came loose pass through each
+    // other until they have come apart (a heap built for looks has stones
+    // sunk into each other: pushed apart, they would stand on edge).
+    this.passing = new Set();
+    const key = (a, b) => (a.id < b.id ? `${a.id}:${b.id}` : `${b.id}:${a.id}`);
+    this.pairKey = key;
+    w.pairs = (a, b) =>
+      !(a.pinned && b.pinned) && !a.held && !b.held && !this.passing.has(key(a, b));
     this.mode = "pieces";
     this.world = w;
     return w;
@@ -280,8 +319,18 @@ export class HandsOn {
   free(body) {
     if (!body.pinned) return;
     body.pinned = false;
+    const def = this.pieces.find((pc) => pc.body === body)?.def;
+    if (def?.rest) {
+      body.solid = def.solid;
+      body.bound = boundOf(body);
+    }
     body.invMass = body.invMassFree;
     body.invI = body.invIFree.slice();
+    for (const pc of this.pieces) {
+      const b = pc.body;
+      // (Sunk in, not just resting on each other.)
+      if (b !== body && b.pinned && this.world.touching(body, b, 0.04 * this.R())) this.passing.add(this.pairKey(body, b)); // prettier-ignore
+    }
   }
 
   // ---- The finger ----
@@ -289,7 +338,7 @@ export class HandsOn {
   // A press on the toy at world point `hit` (screen x, y). Returns true
   // when it is something Hands-on picks up (the drag is then ours).
   pressAt(hit, x, y) {
-    if (!this.canGrab()) return false;
+    if (!this.canGrab() || !hit) return false;
     this.press = { hit: hit.slice(), x, y };
     return true;
   }
@@ -304,7 +353,12 @@ export class HandsOn {
     }
     const h = this.hold;
     if (!h) return;
-    const ray = this.player.stage.ray(x, y);
+    const ray = this.ray(x, y);
+    if (h.place) {
+      this.placeAt(h, ray);
+      this.world.wake();
+      return;
+    }
     const n = h.plane.normal;
     const den = v3.dot(ray.dir, n);
     if (Math.abs(den) < 1e-4) return;
@@ -312,8 +366,7 @@ export class HandsOn {
     if (t < 0) return;
     let p = v3.add(ray.origin, v3.scale(ray.dir, t));
     // Keep the finger's point inside the play area, above the floor.
-    const info = this.info;
-    const R = info.radius;
+    const R = this.R();
     const fl = this.world.planes[0].d;
     p[1] = Math.max(p[1], fl + 0.05 * R);
     p[1] = Math.min(p[1], fl + 5 * R);
@@ -330,6 +383,7 @@ export class HandsOn {
     this.homing = null;
     let body = this.body;
     if (this.mode === "pieces") {
+      hit = this.player.toRecipe(hit);
       body = this.pieceAt(hit);
       if (!body) {
         this.press = null;
@@ -337,34 +391,138 @@ export class HandsOn {
       }
       this.free(body);
     }
-    const ray = this.player.stage.ray(x, y);
-    const la = body.toLocal(hit);
-    // Held a little in from the surface, so it hangs from inside the toy.
-    const joint = w.joint(body, la, null, hit, { compliance: 0, damping: 0 });
+    const ray = this.ray(x, y);
+    // Pieces are picked and placed: held by the middle, turned level (only
+    // their turn about the upright stays), hovering just above whatever is
+    // under the finger, so letting go sets one down on a stack.
+    const place = this.mode === "pieces" && this.info.recipe.hands.place !== false;
+    const la = place ? [0, 0, 0] : body.toLocal(hit);
+    const at = place ? body.pos.slice() : hit;
+    const joint = w.joint(body, la, null, at, { compliance: 0, damping: 0 });
     body.held = true;
-    body.holdQ = body.q.slice();
+    const def = this.pieces.find((pc) => pc.body === body)?.def;
+    body.holdQ = place ? yawOnly(body.q) : def?.joint ? null : body.q.slice();
     body.holdK = 10;
     body.angDampingFree ??= body.angDamping;
     body.angDamping = 7; // held, it hangs calmly from the finger
-    this.hold = { body, joint, plane: { point: hit.slice(), normal: ray.dir.slice() }, target: hit.slice(), follow: hit.slice() }; // prettier-ignore
+    this.hold = { body, joint, place, plane: { point: hit.slice(), normal: ray.dir.slice() }, target: at.slice(), follow: at.slice() }; // prettier-ignore
+    if (place) {
+      // Lifted first, then it follows the finger.
+      this.hold.lift = this.time;
+      this.placeAt(this.hold, ray);
+    }
     this.moved = true;
     this.press = null;
     w.wake();
   }
 
-  // The piece under a point (the nearest one, by its solid).
+  // Where a held piece hovers: over the first thing the finger's ray meets
+  // (another piece, as an ellipsoid of its `pick` radii, or the floor), its
+  // underside a little above it.
+  placeAt(h, ray) {
+    const R = this.R();
+    const b = h.body;
+    const fl = this.world.planes[0].d;
+    let best = Infinity;
+    let top = fl;
+    let n = [0, 1, 0];
+    for (const pc of this.pieces) {
+      const o = pc.body;
+      if (o === b) continue;
+      const r = pc.def.pick || [o.bound, o.bound, o.bound];
+      const t = rayEllipsoid(o, r, ray);
+      if (t < best) {
+        best = t;
+        const p = v3.add(ray.origin, v3.scale(ray.dir, t));
+        top = p[1];
+        n = p;
+      }
+    }
+    const lim = (this.info.recipe.hands.area ?? 1.6) * R;
+    const tf = ray.dir[1] < -1e-4 ? (fl - ray.origin[1]) / ray.dir[1] : Infinity;
+    const pf = tf < Infinity ? v3.add(ray.origin, v3.scale(ray.dir, tf)) : null;
+    const inside = pf && Math.abs(pf[0]) <= lim && Math.abs(pf[2]) <= lim;
+    let p;
+    if (tf < best && inside) {
+      p = pf;
+      top = fl;
+    } else if (best < Infinity) p = n;
+    else {
+      // Over nothing (the finger is up in the air): it hangs where the
+      // finger's line passes the piece's own upright.
+      const c = b.pos;
+      const d = [ray.dir[0], 0, ray.dir[2]];
+      const dd = v3.dot(d, d) || 1;
+      const t = -((ray.origin[0] - c[0]) * d[0] + (ray.origin[2] - c[2]) * d[2]) / dd;
+      p = v3.add(ray.origin, v3.scale(ray.dir, t));
+      h.target = [Math.max(-lim, Math.min(lim, p[0])), Math.max(fl + 0.1 * R, Math.min(fl + 5 * R, p[1])), Math.max(-lim, Math.min(lim, p[2]))]; // prettier-ignore
+      return;
+    }
+    const def = this.pieces.find((pc) => pc.body === b)?.def;
+    const below = def?.pick ? def.pick[1] : b.bound;
+    // What is right under it there: straight down from above, at its
+    // middle and four points round its footprint.
+    const foot = def?.pick ? 0.6 * Math.min(def.pick[0], def.pick[2]) : 0.5 * b.bound;
+    // A recipe may snap it onto the piece below (a brick onto the studs).
+    const snap = this.info.recipe.hands.snap;
+    const under = (at) => {
+      let y = fl;
+      let who = null;
+      const spots = [[0, 0], [1, 0], [-1, 0], [0, 1], [0, -1]]; // prettier-ignore
+      for (const [dx, dz] of spots) {
+        const o = [at[0] + dx * foot, fl + 6 * R, at[2] + dz * foot];
+        for (const pc of this.pieces) {
+          if (pc.body === b) continue;
+          const r = pc.def.pick || [pc.body.bound, pc.body.bound, pc.body.bound];
+          const t = rayEllipsoid(pc.body, r, { origin: o, dir: [0, -1, 0] });
+          if (t < Infinity && o[1] - t > y) {
+            y = o[1] - t;
+            who = pc;
+          }
+        }
+      }
+      return { y, who };
+    };
+    let u = under(p);
+    // A recipe's `center` (0..1) draws it toward the middle of the piece
+    // under it (a hand sets a stone on a stone, not on its edge).
+    const pull = this.info.recipe.hands.center ?? 0;
+    if (pull && u.who) {
+      const c = u.who.body.pos;
+      p = [p[0] + (c[0] - p[0]) * pull, p[1], p[2] + (c[2] - p[2]) * pull];
+      u = under(p);
+    }
+    if (snap && u.who) {
+      const me = this.pieces.find((pc) => pc.body === b);
+      const r = snap({ held: me, under: u.who, at: p.slice() });
+      if (r) {
+        p = r.at;
+        if (r.quat) b.holdQ = r.quat;
+        u = under(p);
+      }
+    }
+    top = u.y;
+    const y = top + below + (this.info.recipe.hands.lift ?? 0.06 * R);
+    h.target = [Math.max(-lim, Math.min(lim, p[0])), Math.min(fl + 5 * R, y), Math.max(-lim, Math.min(lim, p[2]))]; // prettier-ignore
+  }
+
+  // The piece under a point: the one whose shape (the piece's `pick`
+  // radii, an ellipsoid about its middle, else its reach) it is nearest
+  // to, measured in that shape's own size.
   pieceAt(p) {
     let best = null;
     let bd = Infinity;
     for (const pc of this.pieces) {
       const b = pc.body;
-      const d = v3.len(v3.sub(p, b.pos)) - b.bound * 0.6;
+      const l = b.toLocal(p);
+      const r = pc.def.pick || [b.bound, b.bound, b.bound];
+      const d = Math.hypot(l[0] / r[0], l[1] / r[1], l[2] / r[2]);
       if (d < bd) {
         bd = d;
         best = b;
       }
     }
-    return bd < 0.4 * this.info.radius ? best : null;
+    return bd < 1.6 ? best : null;
   }
 
   // Lets go: whatever it was holding flies on with the finger's speed.
@@ -377,10 +535,18 @@ export class HandsOn {
     h.body.holdQ = null;
     h.body.angDamping = h.body.angDampingFree ?? h.body.angDamping;
     // Not too wild a throw.
-    const R = this.info.radius;
+    const R = this.R();
     const max = 9 * R;
     const sp = v3.len(h.body.vel);
     if (sp > max) h.body.vel = v3.scale(h.body.vel, max / sp);
+    // A piece being placed is set down, not thrown.
+    if (h.place) {
+      h.body.vel = [0, Math.min(0, h.body.vel[1]), 0];
+      h.body.omega = [0, 0, 0];
+      this.hold = null;
+      this.world.wake();
+      return true;
+    }
     // A thrown thing turns a little the way it flies.
     const fwd = v3.cross([0, 1, 0], h.body.vel);
     h.body.omega = v3.add(h.body.omega, v3.scale(fwd, 0.25 / Math.max(h.body.bound, 0.2 * R)));
@@ -439,12 +605,18 @@ export class HandsOn {
           b.goHome();
           if (this.mode === "pieces" && !b.pinned) {
             b.pinned = true;
+            const def = this.pieces.find((pc) => pc.body === b)?.def;
+            if (def?.rest) {
+              b.solid = def.rest;
+              b.bound = boundOf(b);
+            }
             b.invMass = 0;
             b.invI = [0, 0, 0];
           }
         }
         this.homing = null;
         this.moved = false;
+        this.passing?.clear();
         w.asleep = true;
       }
     } else {
@@ -455,6 +627,13 @@ export class HandsOn {
         const d = Math.min(left, 1 / 60);
         if (w.step(d)) busy = true;
         left -= d;
+      }
+    }
+    if (this.passing?.size) {
+      const byId = new Map(this.pieces.map((pc) => [pc.body.id, pc.body]));
+      for (const k of this.passing) {
+        const [a, b] = k.split(":").map((v) => byId.get(Number(v)));
+        if (!a || !b || !w.touching(a, b)) this.passing.delete(k);
       }
     }
     for (const hit of w.takeHits()) this.onHit(hit);
@@ -469,12 +648,13 @@ export class HandsOn {
   }
 
   onHit(hit) {
-    const R = this.info.radius;
+    const R = this.R();
     const speed = hit.speed / R;
     // A free piece that hits a pinned one knocks it loose.
-    if (this.mode === "pieces") {
-      if (hit.other?.pinned && speed > 0.8) this.free(hit.other);
-      if (hit.body?.pinned && speed > 0.8) this.free(hit.body);
+    // (Not by the piece in the hand: it brushes past others as it goes.)
+    if (this.mode === "pieces" && !hit.body?.held && !hit.other?.held) {
+      if (hit.other?.pinned && speed > 2.5) this.free(hit.other);
+      if (hit.body?.pinned && speed > 2.5) this.free(hit.body);
     }
     if (this.mode === "toy" && this.soft > 0 && speed > 0.8) {
       const amp = Math.min(0.45, this.soft * 0.08 * speed);
@@ -509,11 +689,22 @@ export class HandsOn {
       const out = [];
       for (const pc of this.pieces) {
         const b = pc.body;
-        if (b.pinned && !this.homing) continue;
+        if ((b.pinned && !this.homing) || pc.token === undefined) continue;
         const dq = quat.mul(b.q, quat.conj(pc.home.q));
         out.push({ index: pc.token, token: { base: pc.home.pos, offset: v3.sub(b.pos, pc.home.pos), quat: dq } }); // prettier-ignore
       }
       player.motion.handsTokens = out.length ? out : null;
+      // Pieces that are a recipe's parts (turned about the part's pivot).
+      let parts = null;
+      for (const pc of this.pieces) {
+        if (!pc.part) continue;
+        const b = pc.body;
+        const dq = quat.mul(b.q, quat.conj(pc.home.q));
+        const pv = pc.def.pivot || pc.home.pos;
+        const off = v3.sub(v3.sub(b.pos, pv), quat.rotate(dq, v3.sub(pc.home.pos, pv)));
+        (parts ||= {})[pc.part] = { quat: dq, offset: off };
+      }
+      player.motion.handsParts = this.moved || this.homing ? parts : null;
       // Sort the moved pieces again now and then (and once they rest).
       const asleep = this.world.asleep;
       if (out.length && (this.time - this.lastResort > 0.25 || (asleep && !this.restSorted))) {
@@ -565,6 +756,28 @@ export class HandsOn {
       bodies: bodies.filter(Boolean).map((b) => ({ pos: b.pos.slice(), q: b.q.slice(), home: b.home.pos.slice(), pinned: !!b.pinned })), // prettier-ignore
     };
   }
+}
+
+// A rotation's turn about the upright alone (a piece picked up level).
+function yawOnly(q) {
+  const f = quat.rotate(q, [1, 0, 0]);
+  const a = Math.atan2(-f[2], f[0]);
+  return quat.axisAngle([0, 1, 0], a);
+}
+
+// Where a ray first meets body o's ellipsoid of radii r (Infinity: never).
+function rayEllipsoid(o, r, ray) {
+  const lo = o.toLocal(ray.origin);
+  const ld = quat.rotate(quat.conj(o.q), ray.dir);
+  const p = [lo[0] / r[0], lo[1] / r[1], lo[2] / r[2]];
+  const d = [ld[0] / r[0], ld[1] / r[1], ld[2] / r[2]];
+  const a = v3.dot(d, d);
+  const bb = 2 * v3.dot(p, d);
+  const c = v3.dot(p, p) - 1;
+  const disc = bb * bb - 4 * a * c;
+  if (disc < 0) return Infinity;
+  const t = (-bb - Math.sqrt(disc)) / (2 * a);
+  return t > 0 ? t : Infinity;
 }
 
 // n directions spread evenly over the sphere.

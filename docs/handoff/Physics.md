@@ -103,51 +103,61 @@ another lane is editing, keep yours small and say so. The laptop is locked.
   docs/OPERATING.md, docs/PACKS.md, docs/WORKSTREAMS.md, docs/ROADMAP.md (steps 7 and 8) and
   docs/handoff/history.md (lessons from earlier lanes).
 - Your handoff file: create it. Start it with this brief, word for word, under "## Brief", then keep
-  "## State", "## Notes", "## Known issues" and "## For the Operator" current. Note your model at
-  the top of "## State" (the blog post compares the two models).
-- Shared lists: edit only your own entries in src/toys.js, src/toy-sounds.js, src/toy-help.js (a
-  how-to line and an About text per toy, following docs/handoff/Help.md), tools/toy-plan.json,
-  CREDITS.md and tools/assets.json. Regenerate docs/TOY-PLAN.md with `node tools/toy-plan.mjs`;
-  never merge it by hand.
-- Never edit tests/taps.spec.mjs. Your own tests go in tests/<prefix>.spec.mjs. If a finished lane's
-  test breaks because of a count or a list your work changes, don't edit it: say which test and why
-  in your message, and the Operator fixes it.
-- Assets: CC0, CC BY or public domain only, checked on the live source page and credited
-  (CREDITS.md, tools/assets.json and the toy's in-app credit). Never BY-SA or NC. No logos, brand
-  names or insignia.
-- Review: post clips and cards to the Effect review page,
-  https://claude.ai/artifact/BSayVkzQ2FKESesrkrSUMK (Effect review page 2), as OPERATING.md's "Steps
-  for a lane" says. Judge every effect as motion at phone size against the effect quality rules
-  before you post it. The Operator has made your lane's record. Don't republish the page, and never
-  write to "verdicts".
-- Push your work in progress to your branch about every hour, so it isn't only in your container,
-  and open your draft PR early. Many lanes run at once now, so main moves often: merge it into your
-  branch before each push (never rebase a pushed branch) and keep both sides of any conflict.
-- Before every push, follow "Before every push" in CLAUDE.md: the full Playwright suite
-  (SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium npx playwright test), prettier,
-  `node tools/us-english.mjs --diff`, `node tools/check-packs.mjs <pack>` for new or changed toys, a
-  contact sheet and thumbnails, and your own screenshots at 390×844 and 1440×900. Then put back the
-  standard screenshots (`node tools/upkeep.mjs --restore-shots`) and any other lane's screenshots
-  your branch didn't change.
-- PR: one draft PR per branch against main with the five sections (Summary, Verification,
-  Deviations, Known issues, What was cut), and the model that built it in the Summary. When main
-  moves, merge it into your branch.
-- After you post your cards, check the owner's marks (the "verdicts" collection, ids starting with
-  your prefix) about once an hour with a scheduled check-in (send_later). Fix every "fix" in the
-  same PR, post the new clip as a "-r2" card, and set replacedBy on the old one. Stop the check-ins
-  once your PRs are merged or closed.
-- Finish every working turn with a short final message that starts with "READY:" (PR link, card ids,
-  test results, anything for the Operator), "WORKING:" (what's left), or "BLOCKED:" (exactly what
-  you need).
+  "## State
 
-## State
+Model: Opus 5.5 (claude-opus-5-5), default effort. One helper (same model) drafted
+docs/HANDS-ON-PLAN.md.
 
-Model: Opus 5.5 (claude-opus-5-5), default effort.
-
-- October 2, 2026: lane started. Branch `claude/lane-physics-engine` from main.
+- October 2, 2026: lane started. Part 1 (the engine) on `claude/lane-physics-engine`, draft PR #176.
+  Part 2 (the showcase toys and the plan) on `claude/lane-physics`, built on top of it.
+- Part 1: `src/physics/world.js` (the XPBD engine), `src/physics/hands-on.js` (Hands-on play: Level
+  1 for every toy and pieces for kit recipes), the ▶ / ✋ / ↺ buttons, `tools/phy-clip.mjs`
+  (phone-size clips of the whole page with a finger dot) and `tests/phy-engine.spec.mjs`.
+- Part 2: all nine showcase toys have their hands-on parts: Pebbles (pick up and stack, best in the
+  Cairn style), jelly and amoeba (stretch), cherries (pull, swing and knock), bricks (pick up,
+  stack, snap onto the studs), macarons (pick up and stack), spring toy (stretch and spring back),
+  sushi (a tap on a piece picks that one) and the bow (draw and shoot). Help lines, About texts and
+  plan entries updated; `tests/phy.spec.mjs`; docs/HANDS-ON-PLAN.md (every toy, by shelf).
 
 ## Notes
 
+- Units: the whole toy (Level 1) lives in the world and moves the toy's entity (`Stage.setToyPose`),
+  so splats sort and taps land where it lies. Pieces live in the recipe's own coordinates (a kit toy
+  is centered and scaled to fit) and move tokens (`motion.handsTokens`) or parts
+  (`motion.handsParts`).
+- What made stacking work: a pair's contact pushes are worked out from one state and shared out
+  (Jacobi), and friction acts on speeds only. Point-by-point pushes made stacks shiver; undoing
+  slides point by point made them creep; both are gone.
+- Rounded stones on rounded stones rock and fall in this engine, so stacked pieces collide as flat
+  pucks (a pebble) or boxes and cylinders; a pinned heap stone collides in its full shape.
+- Pieces are picked and placed: held level by the middle, hovering just above whatever is under them
+  (a ray straight down), passing over other pieces while held; a recipe can pull it toward the
+  middle of the piece below (`hands.center`) or snap it (`hands.snap`, the bricks' studs).
+- A heap built for looks has stones sunk into each other: a stone that comes loose passes through
+  the pinned ones it is sunk into until they part, and contacts push at most so far per substep, so
+  nothing flies off.
+- The spring toy is a chain of particles with one-way links (stretch, and "rests above"), and a
+  sideways spring for its bending stiffness. The bow's arrow is a body under gravity.
+
 ## Known issues
 
+- Pebble pile (the default style): stones you pull from under others leave those hanging where they
+  were until something knocks them (they are pinned until touched hard). The Cairn style is the
+  clean showcase.
+- A brick or stone set down on an edge may slide off: that is the physics, but aim matters.
+- Level 1 reads a sample of 6,000 splats on the first pick-up to find the toy's outside.
+
 ## For the Operator
+
+- Engine lines (all additive): `src/player.js` (import; `this.handsOn`; `attach` on load; `step` in
+  `update`; squish uniforms; busy flag; camera drift; pieces go home before a tap), `src/app.js`
+  (classify; the "hands" tool in `toolStart/Move/End`; landing sounds; `showHands`, `toggleHands`,
+  `resetHands`; a stretchy recipe's `grab.wobble`), `src/ui.js` (the three buttons, `setHands`),
+  `src/stage.js` (`setToyPose`), `src/motion.js` (`handsTokens`, `handsParts`, `handsResort`),
+  `src/effects.js` (uniforms `uSpBodyS`, `uSpBodyP` in GLSL and WGSL `spBody`), `index.html` (the
+  buttons), `styles.css` (a section at the end).
+- New tool: `tools/phy-clip.mjs`. Lesson for PACKS.md: a recipe's `hands` block (pieces, floor,
+  area, lift, center, snap, sound) and `handsOn: true`; see `src/physics/hands-on.js`'s header.
+- Sound C: the landing and knock sounds are cues in the recipes' `hands.sound` (stone clacks, the
+  cherries' plink, brick clicks, macaron taps, the bow's twang and thud) and a generic thud or
+  squish in `app.handsSounds`; none of the toys' entries in `src/toy-sounds.js` changed.

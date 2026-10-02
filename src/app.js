@@ -1172,6 +1172,10 @@ class App {
       const toy = this.player.scene.toy;
       const spec = toy.kind === "builtin" ? toySound(toy.id) : null;
       if (stretched > 0.15 && spec) this.sound.play(specFor(spec, true), { key: "toy" });
+      // Lane Physics: a stretchy toy may wobble as it springs back (the jelly).
+      const wobble = this.player.toyInfo?.recipe?.grab?.wobble;
+      if (stretched > 0.15 && wobble)
+        this.player.motion.act(this.player.time, null, { key: wobble });
     }
   }
 

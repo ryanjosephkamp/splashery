@@ -14,7 +14,10 @@
 //        a finger drag in CSS pixels from the toy's middle on screen (or
 //        from a recipe point `from3` = [x, y, z]): press, move along the
 //        points over secs, hold, let go (the app's own pointer path)
+//   { "from3": [x, y, z], "to3": [[x, y, z], ...], "secs": 0.6 }
+//        the same, from and to recipe points (a piece's home, a spot)
 //   { "tap": [dx, dy] }                     a tap there
+//   { "tap3": [x, y, z] }                   a tap on a recipe point
 // Writes <out-dir>/<name>.mp4 and <name>-strip.png (8 frames).
 
 import { chromium } from "@playwright/test";
@@ -34,6 +37,7 @@ const script = JSON.parse(fs.readFileSync(scriptFile, "utf8"));
 const fps = Number(opt("fps", 20));
 const zoom = Number(opt("zoom", 1));
 const cam = opt("cam", "") ? opt("cam", "").split(",").map(Number) : null;
+const toyOpt = opt("opt", ""); // key=value[,key=value]: the toy's options
 const W = 390;
 const H = 844;
 
@@ -48,9 +52,11 @@ page.on("pageerror", (e) => console.error("page error:", e.message));
 await page.goto(`${base}?renderer=webgl2&profile=mid&adapt=off`);
 await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
 await page.evaluate(
-  async ({ id, fps, cam, zoom }) => {
+  async ({ id, fps, cam, zoom, toyOpt }) => {
     const { app, player } = window.__splashery;
     await app.chooseToy(id);
+    if (toyOpt)
+      await app.setToyOptions(Object.fromEntries(toyOpt.split(",").map((kv) => kv.split("="))));
     player.opts.idleDelay = 1e9;
     player.idle.weight = 0;
     player.scene.autoplay.turntable = false;
@@ -113,7 +119,7 @@ await page.evaluate(
       stage.canvas.dispatchEvent(new PointerEvent(type, { clientX: x, clientY: y, pointerId: 7, pointerType: "touch", isPrimary: true, bubbles: true, button: 0, buttons: type === "pointerup" ? 0 : 1 })); // prettier-ignore
     };
   },
-  { id, fps, cam, zoom },
+  { id, fps, cam, zoom, toyOpt },
 );
 
 let n = 0;
@@ -133,11 +139,15 @@ for (const s of script) {
     await page.evaluate((b) => document.getElementById(b).click(), s.button);
     for (let i = 0; i < 3; i++) await shoot();
     await page.evaluate(() => (window.__clip.finger = null));
-  } else if (s.tap) {
-    const at = await page.evaluate((d) => {
-      const m = window.__clip.middle();
-      return [m[0] + d[0], m[1] + d[1]];
-    }, s.tap);
+  } else if (s.tap || s.tap3) {
+    const at = await page.evaluate(
+      ({ d, p3 }) => {
+        if (p3) return window.__clip.screenOf(p3);
+        const m = window.__clip.middle();
+        return [m[0] + d[0], m[1] + d[1]];
+      },
+      { d: s.tap, p3: s.tap3 },
+    );
     await page.evaluate((at) => {
       const S = window.__clip;
       S.finger = at;
@@ -146,10 +156,29 @@ for (const s of script) {
     }, at);
     for (let i = 0; i < 4; i++) await shoot();
     await page.evaluate(() => (window.__clip.finger = null));
-  } else if (s.drag) {
+  } else if (s.drag || s.to3) {
     const o = await page.evaluate((f) => (f ? window.__clip.screenOf(f) : window.__clip.middle()), s.from3 || null); // prettier-ignore
     const from = s.from ? [o[0] + s.from[0], o[1] + s.from[1]] : o;
-    const pts = [[0, 0], ...s.drag].map((d) => [from[0] + d[0], from[1] + d[1]]);
+    // `to3`: the drag's points as recipe points (where the finger aims).
+    // With "centers": true, to3 are where the piece's middle should go: the
+    // finger aims there plus where it pressed on the piece.
+    let to3 = s.to3;
+    if (to3 && s.centers && s.from3) {
+      const d = await page.evaluate(
+        async ({ f, at }) => {
+          const { player } = window.__splashery;
+          const r = player.stage.canvas.getBoundingClientRect();
+          player.pickDirty = true;
+          const hit = await player.pickAt(at[0] - r.left, at[1] - r.top);
+          const q = hit ? player.toRecipe(hit) : f;
+          return [q[0] - f[0], q[1] - f[1], q[2] - f[2]];
+        },
+        { f: s.from3, at: from },
+      );
+      to3 = to3.map((p) => [p[0] + d[0], p[1] + d[1], p[2] + d[2]]);
+    }
+    const aims = to3 ? await page.evaluate((l) => l.map((p) => window.__clip.screenOf(p)), to3) : null; // prettier-ignore
+    const pts = aims ? [from, ...aims] : [[0, 0], ...s.drag].map((d) => [from[0] + d[0], from[1] + d[1]]); // prettier-ignore
     const at = (u) => {
       const f = Math.min(pts.length - 1, u * (pts.length - 1));
       const i = Math.min(pts.length - 2, Math.floor(f));

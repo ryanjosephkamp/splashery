@@ -218,7 +218,7 @@ function inertiaOf(solid, m) {
   return [m * 0.4, m * 0.4, m * 0.4];
 }
 
-function boundOf(b) {
+export function boundOf(b) {
   let r = 0;
   for (const p of b.points) r = Math.max(r, v3.len(p) + b.radius);
   const s = b.solid;
@@ -370,6 +370,14 @@ const round = (s) => s && (s.type === "sphere" || s.type === "ellipsoid");
 // on one point it would balance like a pin).
 const rolls = (b) => round(b.solid) && !b.points.length;
 
+// The part of rotation q that turns about unit axis a (swing-twist).
+function twist(q, a) {
+  const d = q[0] * a[0] + q[1] * a[1] + q[2] * a[2];
+  const t = [a[0] * d, a[1] * d, a[2] * d, q[3]];
+  const l = Math.hypot(t[0], t[1], t[2], t[3]);
+  return l > 1e-9 ? t.map((v) => v / l) : [0, 0, 0, 1];
+}
+
 // Contacts grouped by the pair of bodies (a plane counts as one).
 function groupPairs(contacts) {
   const m = new Map();
@@ -405,6 +413,12 @@ export class World {
     this.hits = [];
     this.minHit = o.minHit ?? 0.5;
     this.pairs = o.pairs ?? null; // (a, b) => false to let two bodies pass
+    // How far one contact may push per substep, and the top speed: pieces
+    // that start out overlapping (a heap built for looks) ease apart
+    // instead of flying off.
+    this.maxPush = o.maxPush ?? Infinity;
+    this.maxSpeed = o.maxSpeed ?? Infinity;
+    this.particleDamping = o.particleDamping ?? 0; // per second
   }
 
   add(body) {
@@ -449,7 +463,10 @@ export class World {
   link(a, b, o = {}) {
     const pa = this.particles[a].pos;
     const pb = this.particles[b].pos;
-    this.links.push({ a, b, length: o.length ?? v3.len(v3.sub(pa, pb)), compliance: o.compliance ?? 0, lambda: 0 }); // prettier-ignore
+    // only: "stretch" acts only when pulled longer, "push" only when pushed
+    // shorter, "above" keeps b at least `length` above a (rings resting on
+    // each other).
+    this.links.push({ a, b, length: o.length ?? v3.len(v3.sub(pa, pb)), compliance: o.compliance ?? 0, only: o.only ?? null, lambda: 0 }); // prettier-ignore
   }
 
   wake() {
@@ -503,6 +520,16 @@ export class World {
       b.prevPos = b.pos.slice();
       b.prevQ = b.q.slice();
       if (b.fixed) continue;
+      // A springy body (a stem) is turned back toward its rest turn, with
+      // some damping: restK is the spring's stiffness (per second squared).
+      if (b.restQ && !b.held) {
+        let dq = quat.mul(b.restQ, quat.conj(b.q));
+        if (dq[3] < 0) dq = dq.map((v) => -v);
+        const sn = Math.hypot(dq[0], dq[1], dq[2]);
+        const ang = 2 * Math.atan2(sn, dq[3]);
+        const ax = sn > 1e-9 ? [dq[0] / sn, dq[1] / sn, dq[2] / sn] : [0, 0, 0];
+        for (let i = 0; i < 3; i++) b.omega[i] += (b.restK * ang * ax[i] - (b.restD ?? 2) * b.omega[i]) * h; // prettier-ignore
+      }
       const ld = Math.exp(-b.damping * h);
       const ad = Math.exp(-b.angDamping * h);
       for (let i = 0; i < 3; i++) {
@@ -512,11 +539,12 @@ export class World {
       }
       b.q = quat.norm(addRot(b.q, b.omega, 0.5 * h));
     }
+    const pd = Math.exp(-(this.particleDamping ?? 0) * h);
     for (const p of this.particles) {
       p.prev = p.pos.slice();
       if (!p.invMass) continue;
       for (let i = 0; i < 3; i++) {
-        p.vel[i] += g[i] * h;
+        p.vel[i] = (p.vel[i] + g[i] * h) * pd;
         p.pos[i] += p.vel[i] * h;
       }
     }
@@ -526,11 +554,15 @@ export class World {
     // pin would let it swing face down), easing back after a sway.
     for (const b of this.bodies)
       if (b.holdQ) b.q = quat.slerp(b.q, b.holdQ, 1 - Math.exp(-b.holdK * h));
+    // A hinged body only turns about its hinge's axis (world), from its
+    // rest turn: the rest of a turn is dropped.
+    for (const b of this.bodies) if (b.hinge) b.q = quat.norm(quat.mul(twist(quat.mul(b.q, quat.conj(b.hinge.q)), b.hinge.axis), b.hinge.q)); // prettier-ignore
     for (const l of this.links) this.solveLink(l, h);
     const contacts = this.contacts();
-    // Each touching pair's pushes first, then its friction against the
-    // pair's whole push (solved one by one, the later points of a resting
-    // face would get almost none and slide).
+    // Each touching pair's pushes, and the push its friction works against
+    // (the pair's whole push shared out: one by one, the later points of a
+    // resting face would get almost none and slide). Friction acts on the
+    // speeds below; undoing slides here, point by point, made stacks creep.
     for (const group of groupPairs(contacts)) {
       this.solveGroup(group);
       let sum = 0;
@@ -539,8 +571,7 @@ export class World {
         sum += c.lambda;
         if (c.lambda > 0) on++;
       }
-      for (const c of group)
-        if (c.lambda > 0) this.contactFriction(c, Math.max(c.lambda, sum / on));
+      for (const c of group) if (c.lambda > 0) c.push = Math.max(c.lambda, sum / on);
     }
     this.particlePlanes();
     // Velocities from the moves.
@@ -555,7 +586,29 @@ export class World {
       if (!p.invMass) continue;
       for (let i = 0; i < 3; i++) p.vel[i] = (p.pos[i] - p.prev[i]) / h;
     }
-    for (const c of contacts) this.contactVelocity(c, h);
+    for (const c of contacts) {
+      this.contactVelocity(c, h);
+      if (c.lambda) {
+        c.a.touchTick = this.tick;
+        if (c.b) c.b.touchTick = this.tick;
+      }
+    }
+    // A body resting on something that only creeps (a slow slide, a
+    // rock) is calmed, so stacks settle instead of crawling.
+    const slow = this.sleepSpeed * 10;
+    const calm = Math.exp(-12 * h);
+    for (const b of this.bodies) {
+      if (b.fixed || b.held || b.touchTick !== this.tick) continue;
+      if (v3.len(b.vel) < slow && v3.len(b.omega) * (b.bound || 1) < slow) {
+        b.vel = v3.scale(b.vel, calm);
+        b.omega = v3.scale(b.omega, calm);
+      }
+    }
+    if (this.maxSpeed < Infinity)
+      for (const b of this.bodies) {
+        const sp = v3.len(b.vel);
+        if (sp > this.maxSpeed) b.vel = v3.scale(b.vel, this.maxSpeed / sp);
+      }
     for (const j of this.joints) if (j.damping) this.jointDamping(j, h);
   }
 
@@ -605,7 +658,16 @@ export class World {
     if (!w) return;
     const d = v3.sub(B.pos, A.pos);
     const len = v3.len(d);
-    if (len < 1e-9) return;
+    if (len < 1e-9 && l.only !== "above") return;
+    if (l.only === "above") {
+      // b rests on a (wide rings stacked): it stays `length` above it.
+      const gap = B.pos[1] - A.pos[1] - l.length;
+      if (gap >= 0) return;
+      A.pos[1] += (gap * A.invMass) / w;
+      B.pos[1] -= (gap * B.invMass) / w;
+      return;
+    }
+    if ((l.only === "stretch" && len < l.length) || (l.only === "push" && len > l.length)) return;
     const alpha = l.compliance / (h * h);
     const dl = (len - l.length) / (w + alpha);
     const n = v3.scale(d, dl / len);
@@ -659,22 +721,33 @@ export class World {
         const b = bodies[k];
         if (a.fixed && b.fixed) continue;
         if (this.pairs && !this.pairs(a, b)) continue;
-        const d = v3.len(v3.sub(a.pos, b.pos));
-        if (d > a.bound + b.bound + 1e-6) continue;
-        if (a.solid?.type === "sphere" && b.solid?.type === "sphere") {
-          this.sphereContact(out, a, b);
-          continue;
-        }
-        // A round piece meets another solid at its deepest point (its own
-        // sample points would make it balance on a point, like a pin).
-        if (rolls(a) && b.solid) this.roundContact(out, a, b);
-        else if (b.solid) for (const lp of a.points) this.pointContact(out, a, lp, a.radius, b);
-        if (rolls(b) && a.solid) {
-          if (!rolls(a)) this.roundContact(out, b, a);
-        } else if (a.solid) for (const lp of b.points) this.pointContact(out, b, lp, b.radius, a);
+        this.pairContacts(out, a, b);
       }
     }
     return out;
+  }
+
+  // The contacts between two bodies (pushed onto out).
+  pairContacts(out, a, b) {
+    const d = v3.len(v3.sub(a.pos, b.pos));
+    if (d > a.bound + b.bound + 1e-6) return out;
+    if (a.solid?.type === "sphere" && b.solid?.type === "sphere") {
+      this.sphereContact(out, a, b);
+      return out;
+    }
+    // A round piece meets another solid at its deepest point (its own
+    // sample points would make it balance on a point, like a pin).
+    if (rolls(a) && b.solid) this.roundContact(out, a, b);
+    else if (b.solid) for (const lp of a.points) this.pointContact(out, a, lp, a.radius, b);
+    if (rolls(b) && a.solid) {
+      if (!rolls(a)) this.roundContact(out, b, a);
+    } else if (a.solid) for (const lp of b.points) this.pointContact(out, b, lp, b.radius, a);
+    return out;
+  }
+
+  // Whether two bodies overlap now (by more than `depth`).
+  touching(a, b, depth = 0) {
+    return this.pairContacts([], a, b).some((c) => c.depth > depth);
   }
 
   planeContact(out, a, lp, rad, pl) {
@@ -822,7 +895,7 @@ export class World {
       pb = v3.add(b.pos, rb);
     } else pb = c.lb;
     // Depth now, along the contact normal (a's point ball against b).
-    const depth = v3.dot(v3.sub(pb, pa), n) + c.rad;
+    const depth = Math.min(this.maxPush, v3.dot(v3.sub(pb, pa), n) + c.rad);
     c.lambda = 0;
     if (depth <= 0) return null;
     const wa = a.weight(ra, n);
@@ -851,36 +924,6 @@ export class World {
       if (b) b.applyPos(ps, rb, -1);
     }
     for (const c of group) c.lambda *= k;
-  }
-
-  // Static friction: undo the sliding along the surface this substep, as
-  // long as it would take less than mu times the push.
-  contactFriction(c, push) {
-    const { a, b, n } = c;
-    c.push = push;
-    const ra2 = quat.rotate(a.q, c.la);
-    const pa2 = v3.add(a.pos, ra2);
-    const paPrev = v3.add(a.prevPos, quat.rotate(a.prevQ, c.la));
-    let dp = v3.sub(pa2, paPrev);
-    if (b) {
-      const rb2 = quat.rotate(b.q, c.lb);
-      const pbNow = v3.add(b.pos, rb2);
-      const pbPrev = v3.add(b.prevPos, quat.rotate(b.prevQ, c.lb));
-      dp = v3.sub(dp, v3.sub(pbNow, pbPrev));
-    }
-    const dt = v3.sub(dp, v3.scale(n, v3.dot(dp, n)));
-    const slide = v3.len(dt);
-    if (slide < 1e-12) return;
-    const tdir = v3.scale(dt, -1 / slide);
-    const wta = a.weight(ra2, tdir);
-    const wtb = b ? b.weight(quat.rotate(b.q, c.lb), tdir) : 0;
-    if (wta + wtb <= 0) return;
-    const dlt = slide / (wta + wtb);
-    if (dlt < c.friction * push * 1.2) {
-      const pt = v3.scale(tdir, dlt);
-      a.applyPos(pt, ra2, 1);
-      if (b) b.applyPos(pt, quat.rotate(b.q, c.lb), -1);
-    }
   }
 
   contactVelocity(c, h) {

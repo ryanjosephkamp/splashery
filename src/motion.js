@@ -78,6 +78,7 @@ export class MotionDriver {
     // has been drawn starts it again rather than pausing it unseen.
     this.unseen = null;
     this.handsTokens = null; // lane Physics: [{ index, token }] from Hands-on
+    this.handsParts = null; // and { name: { quat, offset } }
     this.handsResort = false;
   }
 
@@ -320,6 +321,7 @@ export class MotionDriver {
       const list = (drive.tokens ||= []);
       for (const { index, token } of this.handsTokens) list[index] = token;
     }
+    if (this.handsParts) Object.assign(drive.parts, this.handsParts);
     if (this.handsResort) {
       drive.resort = true;
       this.handsResort = false;
