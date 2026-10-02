@@ -422,7 +422,6 @@ export const MICROSCOPE_SAMPLES = [
     id: "sample",
     choice: "Microtubules and clathrin",
     file: "cos7-mt-clathrin.smlm",
-    zoom: 40, // down to a clathrin pit
     label: "Microtubules and clathrin in a COS cell (a 12 µm square)",
     title: "Microtubules and clathrin in a Cos cell (ShareLoc.XYZ, 10.5281/zenodo.5507427)",
     author:
@@ -434,7 +433,6 @@ export const MICROSCOPE_SAMPLES = [
     id: "nucleus",
     choice: "A whole nucleus (3D)",
     file: "nucleus-nup.smlm",
-    zoom: 8, // a patch of the envelope with its pores
     label: "Nuclear pores over a whole nucleus, in 3D (half the localizations)",
     title: "Zola-3D NUP full nucleus (ShareLoc.XYZ, 10.5281/zenodo.7233696)",
     author:
@@ -450,7 +448,8 @@ const MIC = {
   custom: null, // { name, table }
   want: null,
   info: null,
-  focus: focusState(),
+  sliceZ: 0, // the tap's slice depth (toy units)
+  unit: 1, // toy units per µm
   toy: null,
   grid: null, // localizations bucketed by x, y for the tap's depth
 };
@@ -460,9 +459,13 @@ export const microscopeState = () => (MIC.info ? { ...MIC.info } : null);
 // 280k and 392k localizations on the low, mid, high and max tiers), so the
 // sample's 170,401 are all drawn from the mid tier up.
 export const MICROSCOPE_DENSITY = 1.4;
-// The tap's magnification: each sample's own, or for a file of yours the
-// field down to a view about 250 nm across, between 8 and 40 times.
-const micZoom = (info) => info?.zoom ?? Math.max(8, Math.min(40, Math.max(...(info?.size ?? [12])) / 0.25)); // prettier-ignore
+// r2 (the owner: "Couldn't they just zoom in really, really far
+// themselves?"): the camera comes all the way in with a pinch or the wheel,
+// to 0.006 of the field's radius (about 500 times closer than the home view,
+// a few tens of nanometers across on the samples).
+export const MICROSCOPE_CLOSE = 0.006;
+// The tap's slice: 100 nm either side of the depth you tap.
+const SLICE_NM = 100;
 const UM = 1e-3; // nm to µm (the recipe's units)
 
 // A perceptual rainbow for depth (Google's Turbo, a polynomial fit) and a
@@ -561,16 +564,18 @@ const MICROSCOPE = {
     },
     { key: "fileName", label: "File name", type: "text", default: "", hidden: true },
   ],
-  controls: [{ key: "zoom", label: "Zoom in", type: "toggle", default: 0, ease: 2.6 }],
+  closeUp: { minDistance: MICROSCOPE_CLOSE },
+  controls: [
+    { key: "slice", label: "A slice at one depth", type: "toggle", default: 0, ease: 0.6 },
+  ],
   action: {
-    key: "zoom",
-    label: "Zoom in or out",
-    // A tap zooms in on the place you tap (at the depth of the molecules
-    // there) and a second tap zooms back out.
+    key: "slice",
+    label: "Show a slice at the depth you tap",
+    // A tap shows a thin slice (200 nm) at the depth of the molecules you tap;
+    // a second tap shows them all again.
     at(point, c) {
-      if ((c.zoom ?? 0) > 0.5 || !MIC.toy || !MIC.info) return undefined;
-      MIC.focus.goal = MIC.toy(focusPoint(point));
-      MIC.focus.at = MIC.focus.goal.slice();
+      if ((c.slice ?? 0) > 0.5 || !MIC.toy || !MIC.info) return undefined;
+      MIC.sliceZ = MIC.toy(focusPoint(point))[2];
       return undefined;
     },
   },
@@ -614,20 +619,15 @@ const MICROSCOPE = {
       const bytes = await readAsset(`../../assets/toys/smlm-microscope/${def.file}`, true);
       MIC.samples.set(def.id, await readSmlm(bytes));
     }
-    MIC.want = { name: def.label, table: MIC.samples.get(def.id), custom: false, zoom: def.zoom };
+    MIC.want = { name: def.label, table: MIC.samples.get(def.id), custom: false };
   },
-  drive(t, c, out, info) {
-    const z = smoothstep(0, 1, c.zoom ?? 0);
-    const m = Math.pow(micZoom(MIC.info), z);
-    const u = smoothstep(0, 0.35, z);
-    easeFocus(MIC.focus, info.time);
-    const F = MIC.focus.at;
-    // Zoomed out, every localization is drawn at least about a pixel wide;
-    // zoomed in, a clipping slab shows a slice at the tapped depth.
-    // Zoomed in, a slice about the tapped depth (negative: both sides).
-    const clip = z > 0.02 ? -mixN(2.5, 0.35, u) : 0;
-    out.morph = [0, m, 0.0008, clip];
-    out.glow = [F[0], F[1], F[2], u];
+  drive(t, c, out) {
+    // Every localization is drawn at least about a pixel wide, wherever the
+    // camera is; the slice narrows from the whole field to 200 nm.
+    const s = smoothstep(0, 1, c.slice ?? 0);
+    const thin = SLICE_NM * UM * (MIC.grid?.stretch ?? 1) * (MIC.unit ?? 1);
+    out.morph = [0, 1, 0.0008, 0];
+    out.glow = [0, 0, MIC.sliceZ ?? 0, s > 0.01 ? mixN(2, thin, s) : 0];
   },
   build(k, o) {
     const want = MIC.want;
@@ -720,7 +720,6 @@ const MICROSCOPE = {
       if (g.length < 64) g.push(T.z[i]);
     }
     MIC.grid = { cell, grid, cx, cy, cz, stretch };
-    MIC.focus = focusState();
     MIC.info = {
       name: want.name,
       custom: want.custom,
@@ -730,7 +729,6 @@ const MICROSCOPE = {
       has3D: T.has3D,
       channels: T.channels,
       notes: T.notes,
-      zoom: want.zoom,
       size: [(x1 - x0) * UM, (y1 - y0) * UM],
     };
     k.data = { microscope: MIC.info };
@@ -771,16 +769,12 @@ MICROSCOPE.gpuField = function (_o, fit) {
   const s = fit?.scale ?? 1;
   const c = fit?.center ?? [0, 0, 0];
   MIC.toy = (p) => p.map((v, i) => (v - c[i]) * s);
-  MIC.recipe = (q) => q.map((v, i) => v / s + c[i]);
-  return sciModifier(1, s);
+  MIC.unit = s;
+  return sciModifier(1, s, { free: true });
 };
-MICROSCOPE.sciFocus = function (xy) {
-  // For the clips: [x, y] in µm from the field's center.
-  if (!MIC.toy) return false;
-  MIC.focus.goal = MIC.toy(focusPoint([xy[0], xy[1], 0]));
-  MIC.focus.at = MIC.focus.goal.slice();
-  return true;
-};
+// For the clips: [x, y] in µm from the field's center, moved to the depth
+// of the molecules there (recipe units).
+MICROSCOPE.sciPoint = (xy) => focusPoint([xy[0], xy[1], 0]);
 
 // ---- Galaxy in a box ---------------------------------------------------------------------
 
@@ -795,9 +789,10 @@ export const GALAXY_SAMPLE = {
   licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
 };
 
-const GAL = { data: null, info: null, focus: focusState(), toy: null };
+const GAL = { data: null, info: null };
 export const KERNEL_SIGMA = 0.274; // the cubic spline's σ over its support radius
-const GAL_ZOOM = 8; // the tap's magnification
+// r2: how close the camera may come (the box's radii).
+export const GALAXY_CLOSE = 0.05;
 export const galaxyState = () => (GAL.info ? { ...GAL.info } : null);
 // The gas's big see-through splats cost the most to draw (they overlap), so
 // the galaxy keeps the kit's plain counts: 60k, 140k, 200k and 280k by tier.
@@ -862,21 +857,13 @@ const GALAXY = {
     },
     { key: "box", label: "The box", type: "switch", default: true },
   ],
-  controls: [
-    { key: "zoom", label: "Zoom in", type: "toggle", default: 0, ease: 2.2 },
-    { key: "peel", label: "Only the cold gas", type: "toggle", default: 0, ease: 1.6 },
-  ],
-  action: {
-    key: "zoom",
-    label: "Zoom in or out",
-    // A tap zooms in on the gas you tap; a second tap zooms back out.
-    at(point, c) {
-      if ((c.zoom ?? 0) > 0.5 || !GAL.toy) return undefined;
-      GAL.focus.goal = GAL.toy(point);
-      GAL.focus.at = GAL.focus.goal.slice();
-      return undefined;
-    },
-  },
+  // r2: a pinch or the wheel zooms all the way in, to 0.05 of the box's
+  // radius (about 60 times closer than the home view, a few hundred parsecs).
+  closeUp: { minDistance: GALAXY_CLOSE },
+  controls: [{ key: "peel", label: "Only the cold gas", type: "toggle", default: 0, ease: 1.6 }],
+  // A tap peels the hot gas away (the cold, dense gas of the disk and its
+  // arms stays); a second tap brings it back.
+  action: { key: "peel", label: "Peel away the hot gas" },
   credits: [
     {
       label: "Galaxy",
@@ -890,28 +877,14 @@ const GALAXY = {
   async prepare() {
     if (!GAL.data) GAL.data = readGalaxy(await readAsset(`../../assets/toys/galaxy-box/${GALAXY_SAMPLE.file}`, true)); // prettier-ignore
   },
-  drive(t, c, out, info) {
+  drive(t, c, out) {
     out.grow = 1 - smoothstep(0, 1, c.peel ?? 0);
-    const z = smoothstep(0, 1, c.zoom ?? 0);
-    const m = Math.pow(GAL_ZOOM, z);
-    const u = smoothstep(0, 0.35, z);
-    easeFocus(GAL.focus, info.time);
-    const F = GAL.focus.at;
-    out.morph = [0, m, 0.0006, z > 0.02 ? mixN(2.5, 0.6, u) : 0];
-    out.glow = [F[0], F[1], F[2], u];
+    // Every particle at least about a pixel wide, wherever the camera is.
+    out.morph = [0, 1, 0.0006, 0];
+    out.glow = [0, 0, 0, 0];
   },
-  gpuField(_o, fit) {
-    const s = fit?.scale ?? 1;
-    const c = fit?.center ?? [0, 0, 0];
-    GAL.toy = (p) => p.map((v, i) => (v - c[i]) * s);
-    return sciModifier(1);
-  },
-  // For the clips: [x, y, z] in kpc from the galaxy's center.
-  sciFocus(p) {
-    if (!GAL.toy) return false;
-    GAL.focus.goal = GAL.toy(p);
-    GAL.focus.at = GAL.focus.goal.slice();
-    return true;
+  gpuField() {
+    return sciModifier(1, 1, { free: true });
   },
   build(k, o) {
     const G = GAL.data;
@@ -1035,7 +1008,6 @@ const GALAXY = {
         params: [asF32(logT), 0],
       };
     });
-    GAL.focus = focusState();
     GAL.info = {
       n: G.n,
       drawn: count,
