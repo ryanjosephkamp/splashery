@@ -2651,5 +2651,5 @@ const SOUND_C = {
 };
 Object.assign(VOICES, SOUND_C);
 // Levels (node tools/sound-check.mjs --voices).
-Object.assign(LEVEL, { glide: 1 });
+Object.assign(LEVEL, { glide: 0.9 });
 VOICE_NAMES.push(...Object.keys(SOUND_C));
