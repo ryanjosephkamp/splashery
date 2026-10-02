@@ -3,6 +3,7 @@
 
 import { Player, NoGPUError, Gestures, ui2On } from "./player.js";
 import { createUI } from "./ui.js";
+import { canPlay } from "./physics/hands-on.js"; // lane Physics
 import {
   createScene,
   normalizeScene,
@@ -31,6 +32,10 @@ import {
   encodeGIF,
   webmSupport,
   recordWebM,
+  recordSupport, // UI r5
+  startRecording,
+  canShareFile,
+  RECORD_LIMIT,
   buildShareHash,
   shareURL,
   iframeSnippet,
@@ -110,6 +115,7 @@ class App {
     this.toolState = null;
     this.sound = new Sound();
     this.tiltLocks = new Map(); // toy key -> locked (lane Viewer)
+    this.handsChoice = new Map(); // toy key -> Hands-on on (lane Physics)
     this.spins = new Map(); // UI r3: toy key -> turntable, chosen for a toy that holds still
     this.toyFlags = new Map(); // toy key -> its flag colours, or null (lane Viewer)
     this.globalFlag = null; // UI r3: the top bar's flag, for every toy (a flag code)
@@ -143,6 +149,11 @@ class App {
     // A toy's own tap that switches its options (a periodic table tile) rebuilds it with no
     // loading overlay: the toy stays on screen and its tap sound plays at once (lane Fix6).
     player.rebuild = (options) => this.setToyOptions(options, { quiet: Infinity });
+    // Lane Physics: a toy or piece tossed in Hands-on lands with a sound.
+    player.on("frame", () => {
+      const hits = player.handsOn.takeSounds();
+      if (hits.length) this.handsSounds(hits);
+    });
     player.on("cue", (cues) => {
       if (!player.motion.pausedKey) this.sound.resumeToy(); // Sound C: cues mean it runs
       for (const spec of cues) this.sound.play(spec, { key: "cue" });
@@ -160,6 +171,8 @@ class App {
     player.on("media", (m) => ui.setPictures?.(player.pictures?.info() || null, m));
     const wm = webmSupport();
     ui.setWebmUnavailable(wm.ok ? null : wm.reason);
+    const rs = recordSupport(); // UI r5
+    ui.setRecordUnavailable(rs.ok ? null : rs.reason);
     ui.setTool("orbit");
     ui.setClayMode("add");
 
@@ -309,10 +322,16 @@ class App {
     // scene's camera is set after this).
     const key = toyKey(scene.toy);
     // UI r3: a toy that holds still (a chart, a page, an instrument) starts locked.
-    const still = scene.toy.kind === "builtin" && holdsStill(findToy(scene.toy.id));
+    const toyEntry = scene.toy.kind === "builtin" ? findToy(scene.toy.id) : null;
+    // UI r5: an entry's tilt: "free" starts unlocked even on a shelf that holds still.
+    const still = !!toyEntry && holdsStill(toyEntry) && toyEntry.tilt !== "free";
     const lock = this.tiltLocks.has(key) ? this.tiltLocks.get(key) : !!info.recipe?.tiltLock || still; // prettier-ignore
     player.camera.setTiltLock(lock);
     ui.setTiltLock(lock);
+    // Lane Physics: Hands-on starts on for a toy that is hands-on already,
+    // or as it was left on this toy earlier in the visit.
+    if (this.handsChoice.has(key)) player.handsOn.setOn(this.handsChoice.get(key));
+    this.showHands();
     // A toy that lays flag colours on its own way (the chess board: from
     // above, gently) gets that way when it comes out with a flag on, and
     // the next toy gets the usual way back, unless the look was changed.
@@ -625,6 +644,30 @@ class App {
     player.stage.requestRender();
   }
 
+  // ---- Hands-on (lane Physics) ----------------------------------------------------
+
+  showHands() {
+    const h = this.player.handsOn;
+    const info = this.player.toyInfo;
+    this.ui.setHands({ on: h.on, available: canPlay(info), action: !!info });
+  }
+
+  toggleHands() {
+    const h = this.player.handsOn;
+    h.setOn(!h.on);
+    this.handsChoice.set(toyKey(this.player.scene.toy), h.on);
+    this.showHands();
+    if (h.on && !h.own)
+      this.ui.toast("Hands-on: drag the toy to pick it up, and let go to toss it.", 3000); // prettier-ignore
+    else if (!h.on) this.ui.toast("Hands-on off: dragging turns the view.", 2200);
+    this.player.stage.requestRender();
+  }
+
+  resetHands() {
+    this.player.handsOn.reset();
+    this.player.stage.requestRender();
+  }
+
   // ---- End of top-bar settings --------------------------------------------------------
 
   bindGestures() {
@@ -639,7 +682,12 @@ class App {
         if (ui2On() && (e.shiftKey || e.altKey) && e.pointerType !== "touch") return "orbit";
         // A stretchy toy: with Orbit, a drag that starts on it stretches it
         // (toolStart turns a drag that starts off it back into an orbit).
-        if (this.tool === "orbit") return this.player.canGrab() ? "tool" : "orbit";
+        // Lane Physics: with Hands-on on, a drag that starts on any toy picks
+        // it up (toolStart); with it off, a toy's own drags turn the view.
+        if (this.tool === "orbit") {
+          const h = this.player.handsOn;
+          return (h.ownDrags() && this.player.canGrab()) || h.canGrab() ? "tool" : "orbit";
+        }
         return "tool";
       },
       onTap: (e) => {
@@ -1007,6 +1055,21 @@ class App {
     return (own || flags[Math.floor(Math.random() * flags.length)])?.code || "";
   }
 
+  // Lane Physics: landing sounds for Hands-on (a recipe's hands.sound
+  // picks its own, as the pebbles' clack).
+  handsSounds(hits) {
+    const recipe = this.player.toyInfo?.recipe;
+    for (const h of hits) {
+      const vol = Math.min(0.8, Math.max(0.12, h.speed / 7));
+      let spec = recipe?.hands?.sound?.(h, vol);
+      if (spec === undefined) {
+        if (h.soft > 0.3) spec = { voice: "squish", vol: vol * 0.9 };
+        else spec = { voice: "thud", vol };
+      }
+      if (spec) this.sound.play(spec, { key: "hands", gap: 0.05 });
+    }
+  }
+
   toggleSound() {
     this.sound.setEnabled(!this.sound.enabled);
     this.ui.setSound(this.sound.enabled);
@@ -1041,6 +1104,12 @@ class App {
     if (this.toolState !== st) return;
     if (!hit) {
       this.toOrbit();
+      return;
+    }
+    // Lane Physics: Hands-on picks up the toy (or the piece) under the finger.
+    if (st.tool === "grab" && player.handsOn.pressAt(hit, x, y)) {
+      st.tool = "hands";
+      st.started = true;
       return;
     }
     if (st.tool === "grab" && !player.dragStartsHere(hit)) {
@@ -1100,6 +1169,11 @@ class App {
       player.grabAt(x, y);
       return;
     }
+    if (st.tool === "hands") {
+      player.handsOn.moveTo(x, y); // lane Physics
+      player.stage.requestRender();
+      return;
+    }
     const now = performance.now();
     const minGap = st.tool === "poke" ? 150 : st.tool === "clay" ? 110 : 0;
     if (st.busy || now - st.last < minGap) return;
@@ -1125,12 +1199,17 @@ class App {
     if (!st) return;
     if (st.tool === "magnet") this.player.magnetAt(st.x, st.y, false);
     if (st.tool === "clay") this.player.refreshPaint();
+    if (st.tool === "hands") this.player.handsOn.release(); // lane Physics
     if (st.tool === "grab" && st.started) {
       // A real stretch plays the toy's sound as it springs back.
       const stretched = this.player.grabEnd();
       const toy = this.player.scene.toy;
       const spec = toy.kind === "builtin" ? toySound(toy.id) : null;
       if (stretched > 0.15 && spec) this.sound.play(specFor(spec, true), { key: "toy" });
+      // Lane Physics: a stretchy toy may wobble as it springs back (the jelly).
+      const wobble = this.player.toyInfo?.recipe?.grab?.wobble;
+      if (stretched > 0.15 && wobble)
+        this.player.motion.act(this.player.time, null, { key: wobble });
     }
   }
 
@@ -1176,6 +1255,8 @@ class App {
         this.ui.toggleFocus(); // UI r2
       else if (ui2On() && e.key === "[")
         this.ui.togglePanel(); // UI r2
+      else if (ui2On() && (e.key === "g" || e.key === "G"))
+        this.ui.toggleGallery(); // UI r5
       else if (e.target === canvas && e.key.startsWith("Arrow")) {
         e.preventDefault();
         const step = 36;
@@ -1568,6 +1649,105 @@ class App {
         return blob;
       }),
     );
+  }
+
+  // ---- UI r5: Record ---------------------------------------------------------------
+  // A live recording of the stage while someone plays, with the site's sound.
+  // The Share tab starts it; the pill on the stage shows the time, stops it and
+  // then saves (or, on a phone, shares) the video. 60 seconds at most.
+  async startRecord() {
+    if (this.recording || this.recordWait || this.busy) return;
+    const player = this.player;
+    const stage = player.stage;
+    // The site's sound (its context is made now, in the tap, so a sound
+    // switched on while recording is in the video too).
+    const ctx = this.sound.audio?.();
+    const audio = ctx && this.sound.master ? { ctx, node: this.sound.master } : null;
+    // On a phone the sheet closes first, so the take starts at the stage's
+    // own size (two frames for the new size to reach the canvas).
+    this.ui.collapseSheet?.();
+    this.recordWait = true;
+    await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
+    this.recordWait = false;
+    // A steady size for the encoder: no drop in resolution while dragging,
+    // and at most 1920 pixels on the long side.
+    const saved = { adaptive: stage.adaptive, cap: stage.pixelCap };
+    const r = canvas.getBoundingClientRect();
+    const long = Math.max(r.width, r.height, 1);
+    stage.adaptive = false;
+    stage.reduced = false;
+    stage.setPixelRatio(Math.min(saved.cap ?? 3, 1920 / long));
+    let rec;
+    const kick = () => rec?.frame(); // each drawn frame goes into the video
+    stage.app.on("frameend", kick);
+    const restore = () => {
+      stage.app.off("frameend", kick);
+      stage.adaptive = saved.adaptive;
+      stage.setPixelRatio(saved.cap);
+    };
+    try {
+      rec = startRecording({
+        canvas,
+        audio,
+        maxSeconds: RECORD_LIMIT,
+        onTick: (seconds) => {
+          this.ui.setRecord({ state: "rec", seconds, limit: RECORD_LIMIT });
+          stage.requestRender(0); // a still toy still gives the video a few frames a second
+        },
+      });
+    } catch (err) {
+      restore();
+      this.ui.toast(`Could not record: ${err.message || err}`);
+      return;
+    }
+    this.recording = rec;
+    this.recorded = null;
+    this.ui.setRecord({ state: "rec", seconds: 0, limit: RECORD_LIMIT });
+    stage.requestRender();
+    rec.done
+      .then(({ blob, ext, seconds }) => {
+        this.recorded = { blob, name: timestampName(ext), seconds };
+        const share = !!canShareFile(blob, this.recorded.name);
+        this.ui.setRecord({ state: "ready", seconds, bytes: blob.size, share });
+      })
+      .catch((err) => {
+        this.ui.setRecord({ state: "off" });
+        this.ui.toast(`Could not record: ${err?.message || err}`);
+      })
+      .finally(() => {
+        this.recording = null;
+        restore();
+      });
+  }
+
+  stopRecord() {
+    if (!this.recording) return;
+    this.ui.setRecord({ state: "busy" });
+    this.recording.stop();
+  }
+
+  saveRecord() {
+    const r = this.recorded;
+    if (!r) return;
+    downloadBlob(r.blob, r.name);
+    this.ui.toast(`Video saved (${formatBytes(r.blob.size)}).`);
+  }
+
+  // The phone's share sheet (Save Video on an iPhone); saving is the fallback.
+  async shareRecord() {
+    const r = this.recorded;
+    const file = r && canShareFile(r.blob, r.name);
+    if (!file) return this.saveRecord();
+    try {
+      await navigator.share({ files: [file], title: "Splashery" });
+    } catch (err) {
+      if (err?.name !== "AbortError") this.saveRecord();
+    }
+  }
+
+  closeRecord() {
+    this.recorded = null;
+    this.ui.setRecord({ state: "off" });
   }
 }
 
