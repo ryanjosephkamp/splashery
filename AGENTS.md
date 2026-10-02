@@ -8,7 +8,8 @@ docs/codex/01-about-audit.md in this repository and do it."
 ## Rules for Codex tasks
 
 - Work on the branch the task names (`codex/<name>`), cut from `main`, and open one draft pull
-  request against `main`. Never merge, and never push to anyone else's branch.
+  request against `main`. Leave it a draft (don't mark it ready for review). Never merge, and never
+  push to anyone else's branch.
 - Follow the ground rules in `CLAUDE.md`: American English for new text (color, center, gray,
   license, -ize endings, dates like "October 2, 2026"); assets only under the licenses it allows; no
   logos, brand names or insignia.
