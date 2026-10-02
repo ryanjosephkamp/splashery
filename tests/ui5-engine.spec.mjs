@@ -136,15 +136,19 @@ test.describe("phone", () => {
 test.describe("computer", () => {
   test.use(DESK);
 
-  test("the gallery button in the top row (and G) opens and closes the gallery page", async ({
+  test("the gallery button beside the search field (and G) opens and closes the gallery page, and never covers the stage", async ({
     page,
   }) => {
     const errors = watchErrors(page);
     await open(page);
+    // In the panel, beside the search field, not over the stage.
+    await expect(page.locator("#shelf-find #gallery-open")).toHaveCount(1);
     const g = await box(page, "#gallery-open");
-    const flag = await box(page, "#flag-toggle");
-    expect(Math.abs(g.y - flag.y)).toBeLessThan(2);
-    expect(g.x + g.width).toBeLessThanOrEqual(flag.x);
+    const search = await box(page, "#shelf-search");
+    const panel = await box(page, "#panel");
+    expect(Math.abs(g.y + g.height / 2 - (search.y + search.height / 2))).toBeLessThan(3);
+    expect(g.x).toBeGreaterThanOrEqual(search.x + search.width);
+    expect(g.x).toBeGreaterThanOrEqual(panel.x);
     await page.screenshot({ path: shot("ui5-gallery-1440x900.png") });
     await page.click("#gallery-open");
     await expect(page.locator("body")).toHaveClass(/gallery-page/);
@@ -155,6 +159,10 @@ test.describe("computer", () => {
     await expect(page.locator("body")).toHaveClass(/gallery-page/);
     await page.keyboard.press("g");
     await expect(page.locator("body")).not.toHaveClass(/gallery-page/);
+    // Narrowed to a phone's width, it goes back to the top row.
+    await page.setViewportSize({ width: 390, height: 844 });
+    await expect(page.locator("#shelf-find #gallery-open")).toHaveCount(0);
+    expect((await box(page, "#gallery-open")).y).toBeLessThan(60);
     expect(errors).toEqual([]);
   });
 
