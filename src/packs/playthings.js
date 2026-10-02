@@ -502,9 +502,12 @@ function snapBrick({ held, under, at }) {
   let lz = s * dx + c * dz;
   const [hw, hd] = quarter % 2 ? [held.def.studs[1], held.def.studs[0]] : held.def.studs;
   const [uw, ud] = under.def.studs;
+  // On the stud grid, and drawn to the middle within about a stud (a
+  // brick set a stud off a small one would tip off).
   const grid = (v, a, b) => {
     const o = ((((a - b) / 2) % 1) + 1) % 1;
-    return Math.round(v - o) + o;
+    const n = Math.abs(v - o) < 1.1 ? 0 : Math.round(v - o);
+    return n + o;
   };
   lx = grid(lx, hw, uw);
   lz = grid(lz, hd, ud);
