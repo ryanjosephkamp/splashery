@@ -338,7 +338,7 @@ export class HandsOn {
   // A press on the toy at world point `hit` (screen x, y). Returns true
   // when it is something Hands-on picks up (the drag is then ours).
   pressAt(hit, x, y) {
-    if (!this.canGrab()) return false;
+    if (!this.canGrab() || !hit) return false;
     this.press = { hit: hit.slice(), x, y };
     return true;
   }

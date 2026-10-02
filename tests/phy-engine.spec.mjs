@@ -179,7 +179,7 @@ test("toys that are hands-on already start on and keep their drags", async ({ pa
 test("a soft toy squishes when it lands; a link and a saved scene don't change", async ({
   page,
 }) => {
-  await ready(page, "jelly");
+  await ready(page, "blob");
   const before = await page.evaluate(() => JSON.stringify(window.__splashery.app.sceneJSON?.() ?? window.__splashery.player.scene)); // prettier-ignore
   await page.evaluate(() => window.__splashery.app.toggleHands());
   const squish = await page.evaluate(async () => {
@@ -188,7 +188,7 @@ test("a soft toy squishes when it lands; a link and a saved scene don't change",
     const c = player.stage.toScreen(player.toyInfo.center);
     player.pickDirty = true;
     const hit = await player.pickAt(c[0], c[1]);
-    h.pressAt(hit, c[0], c[1]);
+    if (!h.pressAt(hit, c[0], c[1])) return -1;
     for (let i = 1; i <= 20; i++) {
       h.moveTo(c[0], c[1] - i * 12);
       player.update(1 / 60);

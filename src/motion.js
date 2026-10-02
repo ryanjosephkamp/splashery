@@ -162,6 +162,9 @@ export class MotionDriver {
   // tap as info.tap = { point, key, pick, time, n }.
   act(time, point = null, forced = null) {
     const a = this.recipe?.action;
+    // Lane Live input r2: a recipe may act inside the person's own gesture
+    // (a song's audio may start playing only there, on a phone).
+    a?.onAct?.(point, this.state);
     let key = a?.key;
     let pick = null;
     if (forced) {
