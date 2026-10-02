@@ -339,7 +339,7 @@ real ball.
 | Penguin (`penguin`)            | Push it: it wobbles and rocks back upright.                               |
 | Owl (`owl`)                    | Move your finger around it: its head turns to follow.                     |
 
-## Maths
+## Math
 
 | Toy                                   | Hands-on beyond Level 1                                      |
 | ------------------------------------- | ------------------------------------------------------------ |
