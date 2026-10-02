@@ -128,7 +128,7 @@ function hash01(n, salt) {
   return h / 4294967296;
 }
 
-const GLSL = (sigMax, unit) => `
+const GLSL = (sigMax, unit, free) => `
 uniform vec4 uSpClock;   // y splat scale, z exposure
 uniform vec4 uSpKit;     // x the toy's clock
 uniform vec4 uSpMorph;   // jiggle, magnification, size floor, near clip
@@ -137,6 +137,7 @@ uniform vec4 uSpCam;     // camera position
 uniform vec4 uSpKitB;    // x: 1 - the hot gas's peel
 const float SIG_MAX = ${num(sigMax)};
 const float UNIT = ${num(unit)};
+const bool FREE = ${free ? "true" : "false"};
 vec4 sciAn = vec4(0.0);
 int sciKind = 0;
 vec4 sciQ = vec4(0.0, 0.0, 0.0, 1.0);
@@ -183,6 +184,10 @@ void modifySplatCenter(inout vec3 center) {
       p += j * sciRot(sciQ, sciSig * zz);
     }
   }
+  if (FREE) {
+    center = p;
+    return;
+  }
   float m = max(uSpMorph.y, 1e-3);
   center = (p - uSpGlowC.xyz) * m + uSpGlowC.xyz * (1.0 - uSpGlowC.w);
 }
@@ -192,6 +197,12 @@ void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter, inout ve
     scale = sciSig * 1.4142136;
   }
   if (sciKind == 5) scale = vec3(sciAn.z, sciAn.z, sciAn.w) * UNIT;
+  if (FREE) {
+    scale *= uSpClock.y;
+    // The size floor: about a pixel at the splat's own distance from the camera.
+    if (uSpMorph.z > 0.0) scale = max(scale, vec3(uSpMorph.z * length(uSpCam.xyz - modifiedCenter)));
+    return;
+  }
   float m = max(uSpMorph.y, 1e-3);
   scale *= uSpClock.y * m;
   if (uSpMorph.z > 0.0) scale = max(scale, vec3(uSpMorph.z * length(uSpCam.xyz)));
@@ -200,7 +211,15 @@ void modifySplatColor(vec3 center, inout vec4 color) {
   float a = color.a;
   if (sciKind == 1) a *= 1.0 - 0.8 * uSpMorph.x;
   if (sciKind == 4) a *= 1.0 - (1.0 - clamp(uSpKitB.x, 0.0, 1.0)) * smoothstep(4.1, 4.6, sciAn.z);
-  if (uSpMorph.w != 0.0) {
+  if (FREE) {
+    // A slice: the localizations within w of the depth z of uSpGlowC.
+    if (sciKind == 5 && uSpGlowC.w > 0.0) a *= 1.0 - smoothstep(uSpGlowC.w, 1.6 * uSpGlowC.w, abs(center.z - uSpGlowC.z));
+    // Close up, what is much nearer than the point the camera looks at
+    // (uSpCam.w: its distance) fades, so it doesn't fill the view as big
+    // soft spots.
+    if (uSpCam.w > 0.0) a *= smoothstep(0.3, 0.55, length(center - uSpCam.xyz) / uSpCam.w);
+  }
+  if (!FREE && uSpMorph.w != 0.0) {
     float front = dot(center, normalize(uSpCam.xyz));
     if (uSpMorph.w < 0.0) front = abs(front);
     float wc = abs(uSpMorph.w);
@@ -210,7 +229,7 @@ void modifySplatColor(vec3 center, inout vec4 color) {
 }
 `;
 
-const WGSL = (sigMax, unit) => `
+const WGSL = (sigMax, unit, free) => `
 uniform uSpClock: vec4f;
 uniform uSpKit: vec4f;
 uniform uSpMorph: vec4f;
@@ -219,6 +238,7 @@ uniform uSpCam: vec4f;
 uniform uSpKitB: vec4f;
 const SIG_MAX: f32 = ${num(sigMax)};
 const UNIT: f32 = ${num(unit)};
+const FREE: bool = ${free ? "true" : "false"};
 var<private> sciAn: vec4f = vec4f(0.0);
 var<private> sciKind: i32 = 0;
 var<private> sciQ: vec4f = vec4f(0.0, 0.0, 0.0, 1.0);
@@ -264,6 +284,10 @@ fn modifySplatCenter(center: ptr<function, vec3f>) {
       p += j * sciRot(sciQ, sciSig * zz);
     }
   }
+  if (FREE) {
+    *center = p;
+    return;
+  }
   let m = max(uniform.uSpMorph.y, 1e-3);
   *center = (p - uniform.uSpGlowC.xyz) * m + uniform.uSpGlowC.xyz * (1.0 - uniform.uSpGlowC.w);
 }
@@ -273,6 +297,13 @@ fn modifySplatRotationScale(originalCenter: vec3f, modifiedCenter: vec3f, rotati
     *scale = sciSig * 1.4142136;
   }
   if (sciKind == 5) { *scale = vec3f(sciAn.z, sciAn.z, sciAn.w) * UNIT; }
+  if (FREE) {
+    *scale = *scale * uniform.uSpClock.y;
+    if (uniform.uSpMorph.z > 0.0) {
+      *scale = max(*scale, vec3f(uniform.uSpMorph.z * length(uniform.uSpCam.xyz - modifiedCenter)));
+    }
+    return;
+  }
   let m = max(uniform.uSpMorph.y, 1e-3);
   *scale = *scale * (uniform.uSpClock.y * m);
   if (uniform.uSpMorph.z > 0.0) {
@@ -283,7 +314,15 @@ fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {
   var a = (*color).a;
   if (sciKind == 1) { a = a * (1.0 - 0.8 * uniform.uSpMorph.x); }
   if (sciKind == 4) { a = a * (1.0 - (1.0 - clamp(uniform.uSpKitB.x, 0.0, 1.0)) * smoothstep(4.1, 4.6, sciAn.z)); }
-  if (uniform.uSpMorph.w != 0.0) {
+  if (FREE) {
+    if (sciKind == 5 && uniform.uSpGlowC.w > 0.0) {
+      a = a * (1.0 - smoothstep(uniform.uSpGlowC.w, 1.6 * uniform.uSpGlowC.w, abs(center.z - uniform.uSpGlowC.z)));
+    }
+    if (uniform.uSpCam.w > 0.0) {
+      a = a * smoothstep(0.3, 0.55, length(center - uniform.uSpCam.xyz) / uniform.uSpCam.w);
+    }
+  }
+  if (!FREE && uniform.uSpMorph.w != 0.0) {
     var front = dot(center, normalize(uniform.uSpCam.xyz));
     if (uniform.uSpMorph.w < 0.0) { front = abs(front); }
     let wc = abs(uniform.uSpMorph.w);
@@ -295,11 +334,16 @@ fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {
 
 // The modifier for a toy; sigMax is the largest standard deviation packed
 // (toy units; any positive number for toys without atoms) and unit the fit's
-// scale (toy units per recipe unit), for the localizations' true sizes.
-export function sciModifier(sigMax = 1, unit = 1) {
+// scale (toy units per recipe unit), for the localizations' true sizes. With
+// `free` (r2: the microscope and the galaxy, whose camera comes all the way
+// in) there is no magnifier: the size floor follows each splat's distance from
+// the camera, uSpGlowC (z, w) is a slice (its depth and half thickness), and
+// what is much nearer the camera than the point it looks at fades (uSpCam.w,
+// that distance, from the engine since Science r2).
+export function sciModifier(sigMax = 1, unit = 1, { free = false } = {}) {
   const s = Number.isFinite(sigMax) && sigMax > 0 ? sigMax : 1;
   const u = Number.isFinite(unit) && unit > 0 ? unit : 1;
-  return { glsl: GLSL(s, u), wgsl: WGSL(s, u) };
+  return { glsl: GLSL(s, u, free), wgsl: WGSL(s, u, free) };
 }
 
 // Where a displayed point came from: the inverse of the magnifier (toy

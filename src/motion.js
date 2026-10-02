@@ -159,6 +159,9 @@ export class MotionDriver {
   // tap as info.tap = { point, key, pick, time, n }.
   act(time, point = null, forced = null) {
     const a = this.recipe?.action;
+    // Lane Live input r2: a recipe may act inside the person's own gesture
+    // (a song's audio may start playing only there, on a phone).
+    a?.onAct?.(point, this.state);
     let key = a?.key;
     let pick = null;
     if (forced) {
@@ -245,8 +248,8 @@ export class MotionDriver {
   }
 
   // ctx: { time, dt, motion, info: { center, half, radius }, cameraPos,
-  // reducedMotion }. Returns the uniforms.
-  compute({ time: clock, dt, motion, info, cameraPos }) {
+  // cameraDistance (to the point it looks at), reducedMotion }. Returns the uniforms.
+  compute({ time: clock, dt, motion, info, cameraPos, cameraDistance }) {
     // UI r3: while a tap effect is paused, its controls and clocks hold still
     // at the moment it paused (a whole-toy move from the Toy tab carries on).
     this.unseen = null; // this frame draws it
@@ -331,7 +334,8 @@ export class MotionDriver {
       // The four channels of the morph, band and fade kinds (always set).
       const m = drive.morph || [];
       u.uSpMorph = [m[0] ?? 0, m[1] ?? 0, m[2] ?? 0, m[3] ?? 0];
-      u.uSpCam = [cameraPos[0], cameraPos[1], cameraPos[2], 0];
+      // w (Science r2): how far the camera is from the point it looks at.
+      u.uSpCam = [cameraPos[0], cameraPos[1], cameraPos[2], cameraDistance ?? 0];
       const scale = this.ctx?.transform?.scale ?? 1;
       u["uSpParts[0]"] = packParts(this.partsData, this.ctx?.parts || [], drive.parts, scale);
       // Always set (unset tokens are shown in place): the uniform keeps the
