@@ -7,7 +7,7 @@
 // --width (360), with a small "built by Opus 5.5" label.
 //
 //   python3 -m http.server 4173 --bind 127.0.0.1 &
-//   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/fl-clip.mjs <out-dir> [pour splash soda smoke flame] [--ratio=3] [--profile=mid] [--fps=15]
+//   SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/fl-clip.mjs <out-dir> [pour splash soda smoke flame lava] [--ratio=3] [--profile=mid] [--fps=15]
 //
 // Writes <out-dir>/fl-<clip>.gif and fl-<clip>-strip.png (six frames).
 
@@ -25,18 +25,30 @@ const opt = (name, def) => {
 };
 const [outDir, ...clips] = args.filter((a) => !a.startsWith("--"));
 if (!outDir) throw new Error("Usage: node tools/fl-clip.mjs <out-dir> [clip ...]");
-const ALL = ["pour", "splash", "soda", "smoke", "flame"];
+const ALL = ["pour", "splash", "soda", "smoke", "flame", "lava"];
 const list = clips.length ? clips : ALL;
 const STEP = 1 / Number(opt("fps", 15));
 const WIDTH = Number(opt("width", 360));
 const PROFILE = opt("profile", "mid");
 // The canvas's pixel-ratio cap: 3, the mid tier's cap once PR #118 lands.
 const RATIO = Number(opt("ratio", 3));
+// The renderer (webgl2 or webgpu) and, for experiments, a module to install
+// once the toy is open (its install(stage) runs after the first build).
+const RENDERER = opt("renderer", "webgl2");
+const INJECT = opt("inject", "");
 fs.mkdirSync(outDir, { recursive: true });
 
 const browser = await chromium.launch({
   executablePath: process.env.SPLASHERY_CHROMIUM || undefined,
-  args: ["--use-angle=swiftshader", "--enable-unsafe-swiftshader", "--ignore-gpu-blocklist"],
+  args: [
+    "--use-angle=swiftshader",
+    "--enable-unsafe-swiftshader",
+    "--ignore-gpu-blocklist",
+    "--enable-unsafe-webgpu",
+    "--enable-features=Vulkan,WebGPU",
+    "--use-webgpu-adapter=swiftshader",
+    "--use-vulkan=swiftshader",
+  ],
 });
 
 // Box-filter shrink of a PNG to `w` pixels wide.
@@ -68,7 +80,7 @@ function shrink(png, w) {
 async function record(clip) {
   const page = await browser.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 3 }); // prettier-ignore
   page.on("pageerror", (e) => console.error("page error:", e.message));
-  await page.goto(`${base}?renderer=webgl2&adapt=off&profile=${PROFILE}&labs=1`);
+  await page.goto(`${base}?renderer=${RENDERER}&adapt=off&profile=${PROFILE}&labs=1`);
   await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
   const frames = [];
   const run = (fn, arg) => page.evaluate(fn, arg);
@@ -137,17 +149,49 @@ async function record(clip) {
     // then let it settle a moment.
     for (let i = 0; i < 200; i++) {
       await step(STEP);
-      if (await run(() => window.__splashery.player.fluids?.stats?.particles > 0)) break;
+      if (
+        await run(() => {
+          const st = window.__splashery.player.fluids?.stats;
+          return st?.particles > 0 || st?.gasCells > 0;
+        })
+      )
+        break;
     }
+    if (INJECT)
+      await run(async (path) => {
+        window.__flInjected ||= (await import(path)).install(window.__splashery.player.stage);
+      }, `/${INJECT}`);
     for (let i = 0; i < 8; i++) await step(STEP);
   };
   const tap = () => run(() => window.__splashery.player.act(null));
+  // A tap on the faucet's red handle, as a finger would (the app's own
+  // tapToy, so it must hit the toy), marked with a ring for a moment.
+  const tapHandle = async () => {
+    await run(async () => {
+      const pc = await import("/src/pc.js");
+      const { app, player } = window.__splashery;
+      const stage = player.stage;
+      const m = player.fluids.fx.toyToWorld();
+      const s = stage.cameraEntity.camera.worldToScreen(m.transformPoint(new pc.Vec3(0.14, 1.97, 0.06))); // prettier-ignore
+      const r = stage.app.graphicsDevice.canvas.getBoundingClientRect();
+      const x = r.left + s.x;
+      const y = r.top + s.y;
+      const dot = document.createElement("div");
+      dot.id = "fl-tapdot";
+      dot.style.cssText = `position:fixed;left:${x - 16}px;top:${y - 16}px;width:32px;height:32px;border-radius:50%;border:3px solid #fff;background:rgba(255,255,255,.3);z-index:99;pointer-events:none`; // prettier-ignore
+      document.body.append(dot);
+      await app.tapToy({ clientX: x, clientY: y });
+    });
+    await play(0.35);
+    await run(() => document.getElementById("fl-tapdot")?.remove());
+  };
 
   if (clip === "pour") {
-    await open({ scene: "glass", liquid: "water" }, { at: [-0.1, 0.85, 0], zoom: 0.62 });
+    // (framed to show the faucet's handle, which the tap must reach)
+    await open({ scene: "glass", liquid: "water" }, { at: [-0.2, 1.0, 0], zoom: 0.85 });
     await play(0.6);
-    await tap();
-    await play(4.2);
+    await tapHandle();
+    await play(3.85);
     await open({ liquid: "honey" }, { at: [-0.1, 0.85, 0], zoom: 0.62 });
     await play(0.6);
     await tap();
@@ -173,6 +217,11 @@ async function record(clip) {
     await play(1.5);
     await tap();
     await play(3.5);
+  } else if (clip === "lava") {
+    await open({ scene: "glass", liquid: "lava" }, { at: [-0.2, 1.0, 0], zoom: 0.85 });
+    await play(0.6);
+    await tapHandle();
+    await play(6.5);
   } else if (clip === "flame") {
     await open({ scene: "candle" }, { at: [0, 1.08, 0], zoom: 0.4 });
     await play(4.0);
