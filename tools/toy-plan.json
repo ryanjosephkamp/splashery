@@ -2062,7 +2062,7 @@
       "owner": "The owner's own idea on the Toy Ideas page (lane Machines A).",
       "effect": "An Enigma cipher machine in its wooden box: tap and it types your message, each key going down, the rotors stepping like an odometer and the coded letter lighting on the lampboard; a second tap types the coded text back and gets the message again (about 4 s).",
       "sound": "Heavy key clacks, the ratchet of the rotors stepping, and a faint click as each lamp lights.",
-      "improved": "Machines A: kit-built (no CC0 or CC BY scan found), rotors I, II, III with reflector B and a plugboard (the historical wirings and double step), 26 keys and a moving lamp glow, the operator's pad on the lid (coded letters in red, decoded in blue); your own message in the Toy tab. Fix6: tap a key (or type on a keyboard) to code your own letters one by one; a tap off the keys decodes them; a tap on the pad gives a clean sheet (the pad is a live picture)."
+      "improved": "Machines A: kit-built (no CC0 or CC BY scan found), rotors I, II, III with reflector B and a plugboard (the historical wirings and double step), 26 keys and a moving lamp glow, the operator's pad on the lid (coded letters in red, decoded in blue); your own message in the Toy tab. Fix6: tap a key (or type on a keyboard) to code your own letters one by one; a tap off the keys decodes them; a tap on the pad gives a clean sheet (the pad is a live picture). Fix7: step back, as an operator corrected a mistake (the real machine had no delete key): a tap on the rotors' thumb wheels, Backspace or the Step back button takes the last typed letter (and its coded letter) off the pad and turns the rotors back to where they stood before it."
     },
     "bombe": {
       "v": "keep",

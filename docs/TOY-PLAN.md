@@ -2429,7 +2429,10 @@ Proposals below are suggestions; the owner may change them.
     and a plugboard (the historical wirings and double step), 26 keys and a moving lamp glow, the
     operator's pad on the lid (coded letters in red, decoded in blue); your own message in the Toy
     tab. Fix6: tap a key (or type on a keyboard) to code your own letters one by one; a tap off the
-    keys decodes them; a tap on the pad gives a clean sheet (the pad is a live picture).
+    keys decodes them; a tap on the pad gives a clean sheet (the pad is a live picture). Fix7: step
+    back, as an operator corrected a mistake (the real machine had no delete key): a tap on the
+    rotors' thumb wheels, Backspace or the Step back button takes the last typed letter (and its
+    coded letter) off the pad and turns the rotors back to where they stood before it.
   - Sound: Heavy key clacks, the ratchet of the rotors stepping, and a faint click as each lamp
     lights.
 - **Bombe** (`bombe`). Now: tap: Start the search. Plan: keep.

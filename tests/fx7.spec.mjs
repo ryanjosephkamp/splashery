@@ -474,3 +474,45 @@ test("clothes take flag colors on their cloth", async ({ page }) => {
   await page.waitForTimeout(1500);
   await page.screenshot({ path: path.join(SHOTS, "fx7-flag-hoodie-1440x900.png") });
 });
+
+test("Enigma: a step back takes the last letter off the pad and turns the rotors back one", async ({
+  page,
+}) => {
+  test.setTimeout(240_000);
+  const errors = [];
+  page.on("pageerror", (e) => errors.push(e.message));
+  await open(page, "enigma-machine");
+  const pad = () => page.evaluate(() => window.__splashery.player.proc.ctx.kit.data.pad);
+  const rest = () => page.evaluate(() => window.__splashery.player.proc.ctx.kit.data.rest.slice());
+  await page.keyboard.type("ash");
+  await page.waitForFunction(() => window.__splashery.player.proc.ctx.kit.data.pad.coded.length === 3, null, { timeout: 30_000 }); // prettier-ignore
+  const three = await pad();
+  const after3 = await rest();
+  await page.keyboard.type("x");
+  await page.waitForFunction(() => window.__splashery.player.proc.ctx.kit.data.pad.coded.length === 4, null, { timeout: 30_000 }); // prettier-ignore
+  // Backspace: the X and its coded letter go, and the rotors stand where they did after ASH.
+  await page.keyboard.press("Backspace");
+  await page.waitForFunction(() => window.__splashery.player.proc.ctx.kit.data.pad.plain === "ASH", null, { timeout: 30_000 }); // prettier-ignore
+  expect(await pad()).toMatchObject({ plain: "ASH", coded: three.coded });
+  expect(await rest()).toEqual(after3);
+  // Typing on from there codes as if the X was never pressed.
+  await page.keyboard.type("y");
+  await page.waitForFunction(() => window.__splashery.player.proc.ctx.kit.data.pad.coded.length === 4, null, { timeout: 30_000 }); // prettier-ignore
+  const want = await page.evaluate(async () => {
+    const { ENIGMA } = await import("/src/packs/computing-history.js");
+    return ENIGMA.machine()
+      .type("ASHY", [0, 0, 0])
+      .map((e) => ENIGMA.AZ[e.lamp])
+      .join("");
+  });
+  expect((await pad()).coded).toBe(want);
+  // A tap on the rotors' thumb wheels steps back too.
+  await page.evaluate(() => {
+    const { player } = window.__splashery;
+    const tf = player.motion.ctx.transform;
+    player.act([0.22, 0.02 + 0.2, -0.72].map((v, i) => (v - tf.center[i]) * tf.scale));
+  });
+  await page.waitForFunction(() => window.__splashery.player.proc.ctx.kit.data.pad.plain === "ASH", null, { timeout: 30_000 }); // prettier-ignore
+  await page.screenshot({ path: path.join(SHOTS, "fx7-enigma-390x844.png") });
+  expect(errors).toEqual([]);
+});

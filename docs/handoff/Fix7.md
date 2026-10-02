@@ -177,7 +177,12 @@ Part 2 (`claude/lane-fix7-2`, stacked on part 1): all seventeen items built and 
   frame round the marker and its row (fades on channels 2 and 3, so no new parts: the toy has 14 of
   15). The option "Wide table" (a switch) lays the f-block in its periods, 32 columns (`setLayout`).
 
-Not done: the Enigma "step back" item, waiting on the Operator (see "For the Operator").
+- **enigma-machine** (added by the Operator, October 2, 11:08 UTC): step back. A tap on the rotors'
+  thumb wheels, Backspace, or a new "Step back" pulse control takes the last typed letter and its
+  coded letter off the pad and turns the rotors back to where they stood before it (each key keeps
+  the rotors' place before it in `data.hist`, since a step can't simply be undone: the double step).
+  A stored or decoded message has nothing to take back. The pad's footnote and the About text say so
+  (the real machine had no delete key). The key taps and the go control are as they were.
 
 ## Notes
 
@@ -201,9 +206,7 @@ Not done: the Enigma "step back" item, waiting on the Operator (see "For the Ope
 ## For the Operator
 
 - No engine changes in part 1 or part 2.
-- Question: the Enigma "step back" control (your trigger of 5:15 a.m. UTC) is not on a toy my brief
-  names, so I haven't built it. Shall I add it to part 2 (a small change to computing-history.js)?
-  The CC BY-SA change I've seen in CLAUDE.md on main; Fix7 adds no assets.
+- The Enigma "step back" question is answered (yes, 11:08 UTC) and built in part 2.
 - Two finished lanes' tests break on part 2 by a count or a list (not edited, per the rules):
   `tests/fix3.spec.mjs:25` caps the bananas' token index at `bananas.length * 7`; each banana now
   has 14 tokens (its fruit and inner peel are their own pieces, shown only while peeled), so the cap
