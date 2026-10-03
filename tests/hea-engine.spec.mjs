@@ -82,7 +82,7 @@ test("materials: a beach ball floats down; a basketball drops", () => {
   expect(Math.abs(basket - free)).toBeLessThan(0.05); // barely slowed
   expect(beach).toBeGreaterThan(free * 1.2); // the air holds it up
   // It reaches its top speed, about sqrt(Fr G R), within a few radii (a
-  // 60 cm inflatable of 80 g; Fr from its mass and size).
+  // 60 cm inflatable of 60 g; Fr from its mass and size).
   const m = materialFor({ material: "beach-ball" });
   expect(m.fr).toBeGreaterThan(2);
   expect(m.fr).toBeLessThan(6);
@@ -363,7 +363,7 @@ const frames = (page, n) =>
   }, n);
 
 test("in the app: a toy without these pieces has no extras", async ({ page }) => {
-  await open(page, "basketball", null);
+  await open(page, "soccer-ball", null);
   const s = await page.evaluate(() => {
     const { player } = window.__splashery;
     return { extras: player.handsOn.extras ?? null, hands: player.motion.hands ?? null };

@@ -61,7 +61,7 @@ export const MATERIALS = {
   "tennis-ball": { mass: 0.058, r: 0.0335, bounce: 0.75, friction: 0.6, roll: 0.03, cd: 0.55, spin: 0.8, magnus: 0.03 }, // prettier-ignore
   baseball: { mass: 0.145, r: 0.0366, bounce: 0.55, friction: 0.5, roll: 0.04, cd: 0.35, spin: 1, magnus: 0.06 }, // prettier-ignore
   softball: { mass: 0.18, r: 0.0485, bounce: 0.45, friction: 0.5, roll: 0.05, cd: 0.4, spin: 0.8, magnus: 0.04 }, // prettier-ignore
-  "beach-ball": { mass: 0.08, r: 0.3, bounce: 0.6, friction: 0.5, roll: 0.05, cd: 0.47, spin: 0.5, magnus: 0.04, spinDecay: 0.4, drift: 0.06 }, // prettier-ignore
+  "beach-ball": { mass: 0.06, r: 0.3, bounce: 0.6, friction: 0.5, roll: 0.05, cd: 0.47, spin: 0.5, magnus: 0.04, spinDecay: 0.4, drift: 0.06 }, // prettier-ignore
   "golf-ball": { mass: 0.0459, r: 0.02135, bounce: 0.78, friction: 0.5, roll: 0.03, cd: 0.27, spin: 1.2, magnus: 0.07 }, // prettier-ignore
   "rugby-ball": { mass: 0.44, r: 0.15, bounce: 0.5, friction: 0.6, roll: 0.1, cd: 0.2, spin: 0.6, tumble: 9 }, // prettier-ignore
   volleyball: { mass: 0.27, r: 0.105, bounce: 0.7, friction: 0.6, roll: 0.04, cd: 0.47, spin: 0.6, magnus: 0.03 }, // prettier-ignore
