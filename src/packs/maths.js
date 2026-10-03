@@ -2586,6 +2586,18 @@ function gridLines(lines, width, z) {
 // The slider under a plot: a track with an "a" beside it and a knob that
 // slides with a (knob at the middle for a's rest value).
 const SLIDER_LEN = 1.1;
+// Splats sort where they were built (the knob at the middle), so a knob
+// moved along the track drew under it: sort it where it stands as it moves
+// (lane Sharpness B).
+function sortKnob(out, info, u) {
+  const d = info?.data;
+  const slot = Math.round(u * 40);
+  if (d && slot !== d.knobSlot) {
+    d.knobSlot = slot;
+    out.resortPose = true;
+  }
+}
+
 // The a slider's knob can be dragged along its track (lane Sharpness B): the
 // toy's a control, and the panel's slider, follow it. Each plotter's build
 // says where its slider is (or null when its equation has no a).
@@ -2777,7 +2789,10 @@ Object.assign(RECIPES, {
       out.parts.curve = { visible: showRest ? 1 : 0 };
       for (let i = 0; i < g.copies; i++) out.parts[`sweep${i}`] = { visible: !showRest && i === j ? 1 : 0 }; // prettier-ignore
       out.morph = [drawing && sPen < 1 ? 1.002 - sPen : 0, showRest ? 0 : frac, 0, 0];
-      if (g.usesA) out.parts.knob = { offset: [(u - 0.5) * SLIDER_LEN, 0, 0] };
+      if (g.usesA) {
+        out.parts.knob = { offset: [(u - 0.5) * SLIDER_LEN, 0, 0] };
+        sortKnob(out, info, u);
+      }
       // The pen comes down, draws and lifts away.
       const pv = on ? bump(e, 0.02, 0.2, drawEnd, drawEnd + 0.25) : 0;
       const pen = penAt(g.path, sPen);
@@ -3071,7 +3086,10 @@ Object.assign(RECIPES, {
       out.parts.surface = { visible: showRest ? 1 : 0 };
       for (let i = 0; i < g.copies; i++) out.parts[`sweep${i}`] = { visible: !showRest && i === j ? 1 : 0 }; // prettier-ignore
       out.morph = [showRest ? flat : 0, showRest ? 0 : frac, 0, 0];
-      if (g.usesA) out.parts.knob = { offset: [(u - 0.5) * SLIDER_LEN, 0, 0] };
+      if (g.usesA) {
+        out.parts.knob = { offset: [(u - 0.5) * SLIDER_LEN, 0, 0] };
+        sortKnob(out, info, u);
+      }
     },
     build(k, o) {
       const g = surfacePlot(o);
