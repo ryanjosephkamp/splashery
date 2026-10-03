@@ -91,7 +91,7 @@ Model: Opus 5.5 (claude-opus-5-5), default effort. No helper.
 - October 3, 2026: lane started.
 - Engine PR #225 (`claude/lane-hands-engine-c`, "Engine: hands-on soft parts: ropes, cloth and
   stretch"): ready for the Operator's full test run and merge. Category lanes can start from
-  docs/PACKS.md, section 5f.
+  docs/PACKS.md, section 5h.
 - Lane PR #230 (`claude/lane-hands-engine-c-toys`, stacked on #225): the six demo toys are built and
   tested (`tests/hec.spec.mjs`, 8 tests). Clips are going up on Effect review page 2 under
   HandsEngineC; the toys wait for the owner's marks.

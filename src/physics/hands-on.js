@@ -18,6 +18,8 @@
 // toy out of Hands-on (a picture toy). Pure JavaScript, no DOM.
 
 import { World, Body, boundOf, quat, v3 } from "./world.js";
+import { extrasFor, poseKitUniforms } from "./fields.js"; // lane Hands engine A
+import { makeJoints } from "./joints.js"; // lane Hands engine B
 import { SoftParts, hasSoft } from "./soft.js"; // lane Hands engine C
 
 // How much a toy squishes when it lands (0: not at all) and how much it
@@ -106,6 +108,8 @@ export class HandsOn {
     this.clear();
     this.info = info;
     this.on = canPlay(info) && (ownHands(info?.recipe) || info?.recipe?.handsOn === true);
+    this.extras?.dispose(); // lane Hands engine A: materials and fields
+    this.extras = extrasFor(this, info);
   }
 
   clear() {
@@ -118,11 +122,14 @@ export class HandsOn {
     this.squish = null;
     this.homing = null;
     this.moved = false;
+    this.joints = null; // lane Hands engine B
     this.softParts?.stretchHome(); // lane Hands engine C
     this.softParts = null;
     this.player.stage.setToyPose?.(null);
     this.player.motion.handsTokens = null;
     this.player.motion.handsParts = null;
+    this.player.motion.handsFix = null; // lane Hands engine A
+    this.player.motion.handsAddon = null; // lane Hands engine B
   }
 
   // Pieces live in the recipe's own coordinates (a kit toy is centred and
@@ -168,7 +175,7 @@ export class HandsOn {
     const info = this.info;
     const R = info.radius;
     const hands = info.recipe?.hands;
-    if (hands?.pieces || hasSoft(hands)) return this.buildPieces(hands); // soft parts: lane Hands engine C
+    if (hands?.pieces || hands?.joints || hasSoft(hands)) return this.buildPieces(hands); // (joints: lane Hands engine B; soft parts: lane Hands engine C)
     const hull = this.hull();
     const g = (hands?.gravity ?? GRAVITY) * R;
     const w = new World({ gravity: [0, -g, 0], substeps: 8, sleepSpeed: 0.03 * R, minHit: 0.6 * R, maxSpeed: 12 * R }); // prettier-ignore
@@ -201,6 +208,8 @@ export class HandsOn {
     this.soft = soft;
     this.mode = "toy";
     this.world = w;
+    this.extras?.build(w); // lane Hands engine A
+    this.joints = makeJoints(this, w); // lane Hands engine B: hands.upright
     return w;
   }
 
@@ -334,6 +343,8 @@ export class HandsOn {
       !(a.pinned && b.pinned) && !a.held && !b.held && !this.passing.has(key(a, b));
     this.mode = "pieces";
     this.world = w;
+    this.extras?.build(w); // lane Hands engine A
+    this.joints = makeJoints(this, w); // lane Hands engine B: hinges, sliders, dials, sockets, breaks
     // Lane Hands engine C: ropes, cloth and stretch (src/physics/soft.js).
     this.softParts = hasSoft(hands) ? new SoftParts(this).build(hands, data, info) : null;
     return w;
@@ -362,6 +373,7 @@ export class HandsOn {
   // when it is something Hands-on picks up (the drag is then ours).
   pressAt(hit, x, y) {
     if (!this.canGrab() || !hit) return false;
+    if (this.extras?.pressAt(hit, x, y)) return true; // lane Hands engine A: a toy that flees the finger
     this.press = { hit: hit.slice(), x, y };
     return true;
   }
@@ -369,6 +381,7 @@ export class HandsOn {
   // The finger moved (screen x, y). The first move past a few pixels picks
   // the thing up; after that it follows.
   moveTo(x, y) {
+    if (this.extras?.moveTo(x, y)) return; // lane Hands engine A: shakes, fleeing, wheels
     const pr = this.press;
     if (pr && !this.hold) {
       const d = Math.hypot(x - pr.x, y - pr.y);
@@ -376,7 +389,9 @@ export class HandsOn {
       // A short drag on a whole toy is a nudge: the finger pushes it where
       // it touched, so it slides and turns a little. Further, it's picked
       // up (by the same spot, wherever the push left it).
-      const pieces = !!this.info?.recipe?.hands?.pieces || hasSoft(this.info?.recipe?.hands);
+      const pieces =
+        !!(this.info?.recipe?.hands?.pieces || this.info?.recipe?.hands?.joints) ||
+        hasSoft(this.info?.recipe?.hands);
       if (!pieces && d < NUDGE) {
         this.pushTo(pr, x, y);
         return;
@@ -388,6 +403,7 @@ export class HandsOn {
     if (!h) return;
     h.travel = Math.max(h.travel, Math.hypot(x - h.x0, y - h.y0));
     const ray = this.ray(x, y);
+    if (this.joints?.move(h, ray)) return; // lane Hands engine B: a joint's part follows
     if (h.place) {
       this.placeAt(h, ray);
       this.world.wake();
@@ -473,6 +489,7 @@ export class HandsOn {
         this.press = null;
         return;
       }
+      if (this.joints?.grab(body, hit, x, y)) return; // lane Hands engine B
       this.free(body);
     }
     const ray = this.ray(x, y);
@@ -639,9 +656,11 @@ export class HandsOn {
 
   // Lets go: whatever it was holding flies on with the finger's speed.
   release() {
+    if (this.extras?.release()) return true; // lane Hands engine A
     const h = this.hold;
     this.press = null;
     if (!h) return false;
+    if (this.joints?.release(h)) return true; // lane Hands engine B
     if (h.soft) {
       this.softParts.release(this.throwSpeed(h)); // lane Hands engine C
       this.hold = null;
@@ -658,6 +677,7 @@ export class HandsOn {
     h.body.damping = Math.max(h.body.damping, AIR_DRAG);
     // A piece being placed is set down, not thrown.
     if (h.place) {
+      this.extras?.thrown(h); // lane Hands engine A
       // Set down from where it hovers at least, so a quick let-go never
       // starts it inside the piece below (it may still be catching up).
       if (h.body.pos[1] < h.target[1]) h.body.pos[1] = h.target[1];
@@ -677,6 +697,7 @@ export class HandsOn {
     const wmax = 14;
     const ws = v3.len(h.body.omega);
     if (ws > wmax) h.body.omega = v3.scale(h.body.omega, wmax / ws);
+    this.extras?.thrown(h); // lane Hands engine A: the material's weight and spin
     this.hold = null;
     this.world.wake();
     return true;
@@ -727,9 +748,10 @@ export class HandsOn {
   // while anything moves.
   step(dt) {
     this.time += dt;
+    const extra = this.extras?.step(dt) || false; // lane Hands engine A
     const w = this.world;
-    if (!w) return false;
-    let busy = false;
+    if (!w) return extra;
+    let busy = extra;
     const h = this.hold;
     if (h) busy = true;
     if (this.press?.push) {
@@ -740,6 +762,7 @@ export class HandsOn {
       const f = Math.min(1, (this.time - this.homing.t0) / HOME_SECS);
       const e = f * f * (3 - 2 * f);
       for (const { b, pos, q } of this.homing.from) {
+        if (this.joints?.home(b, e)) continue; // lane Hands engine B: along its joint
         b.pos = pos.map((v, i) => v + (b.home.pos[i] - v) * e);
         b.q = quat.slerp(q, b.home.q, e);
         b.vel = [0, 0, 0];
@@ -762,6 +785,7 @@ export class HandsOn {
         }
         this.homing = null;
         this.moved = false;
+        this.joints?.reset(); // lane Hands engine B: parts home, breaks mended
         this.passing?.clear();
         w.asleep = true;
       }
@@ -772,8 +796,9 @@ export class HandsOn {
       while (this.acc >= STEP - 1e-9) {
         this.acc -= STEP;
         this.simTime += STEP;
-        if (h) this.followStep(h);
+        if (h && !h.ctl) this.followStep(h);
         if (w.step(STEP)) busy = true;
+        if (this.joints?.step(STEP)) busy = true; // lane Hands engine B
         if (this.softParts?.step(STEP, this.simTime)) busy = true; // lane Hands engine C
       }
     }
@@ -819,7 +844,9 @@ export class HandsOn {
   }
 
   onHit(hit) {
+    this.extras?.onHit(hit); // lane Hands engine A: projectiles stick in targets
     const R = this.R();
+    this.joints?.hit(hit); // lane Hands engine B: a knock breaks a piece off
     const speed = hit.speed / R;
     // A free piece that hits a pinned one knocks it loose.
     // (Not by the piece in the hand: it brushes past others as it goes.)
@@ -854,6 +881,9 @@ export class HandsOn {
       const t = v3.sub(b.pos, c);
       const home = !this.moved && !this.homing;
       player.stage.setToyPose?.(home ? null : { pivot: c, q: dq, t });
+      // Lane Hands engine A: a kit toy's parts and tokens move with it.
+      const pose = { pivot: c, q: dq, t };
+      player.motion.handsFix = home || !player.motion.ctx?.kit ? null : (u) => poseKitUniforms(u, pose); // prettier-ignore
       return;
     }
     if (this.mode === "pieces") {
@@ -878,7 +908,8 @@ export class HandsOn {
         const off = v3.sub(v3.sub(b.pos, pv), quat.rotate(dq, v3.sub(pc.home.pos, pv)));
         (parts ||= {})[pc.part] = { quat: dq, offset: off };
       }
-      if (so) parts = Object.assign(parts || {}, so.parts);
+      if (this.joints) parts = this.joints.parts(parts); // lane Hands engine B
+      if (so) parts = Object.assign(parts || {}, so.parts); // lane Hands engine C
       player.motion.handsParts = this.moved || this.homing || so ? parts : null;
       // Sort the moved pieces again now and then (and once they rest).
       const asleep = this.world.asleep;

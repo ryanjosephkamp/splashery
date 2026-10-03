@@ -198,7 +198,7 @@ These are `devDependencies` used to prepare assets and run tests; nothing from t
   the captured toys to SOG (`tools/prepare-assets.mjs`).
 - `@playwright/test` 1.56.1 (Apache-2.0): the smoke test and the thumbnail tool.
 - `prettier` 3.8.1 (MIT): formatting.
-- grooph 0.2.4 (MIT), https://github.com/ryanjosephkamp/grooph: its two hook scripts in
+- grooph 0.2.5 (MIT), https://github.com/ryanjosephkamp/grooph: its two hook scripts in
   `.grooph/hooks/`, run by `.claude/settings.json` in the Claude Code sessions that work on this
   repository. They record each session's start, turns, subagents and tool names (never prompts,
   inputs or outputs) and push them to `grooph-events/*` branches. Nothing of it is served.

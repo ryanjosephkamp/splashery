@@ -123,6 +123,12 @@ docs/HANDS-ON-PLAN.md.
 - October 2, 2026, evening: the full suite on #184 ran file by file (76 files). Two failures, both
   ours and both fixed: Pebbles' About text was over the nature shelf's 140 words, and the bricks
   test pressed before the camera had settled. Everything else passed, the anatomy atlas included.
+- October 3, 2026: the owner found the ✋ grab flung toys on a touch. #203 (Engine: a physical
+  hands-on grab) rebuilt it over three rounds of clips, and the owner marked phy-grab-nudge-r2,
+  phy-grab-hold-r3 and phy-grab-flick-r3 good. #222 (a placed piece follows closely and sets down
+  clear of the one below) fixed a stacking knock it exposed. #203, #222 and #184 are merged; the
+  owner accepted every line of docs/HANDS-ON-PLAN.md. The lane is done; the spring toy waits for the
+  owner to try it on the live site.
 
 ## Notes
 
@@ -143,6 +149,35 @@ docs/HANDS-ON-PLAN.md.
   nothing flies off.
 - The spring toy is a chain of particles with one-way links (stretch, and "rests above"), and a
   sideways spring for its bending stiffness. The bow's arrow is a body under gravity.
+
+- The grab (#203, #222; constants at the top of `src/physics/hands-on.js`): the world steps in fixed
+  1/60 s steps (`STEP`). A drag under 24 px (`NUDGE`) on a whole toy pushes it where the finger
+  touched (`pushTo`, `pushStep`). Past that it's picked up by that spot, lifts `PICK_LIFT` and hangs
+  from it: the held point follows on a critically damped spring (`FOLLOW`, stepped exactly), a weak
+  pull (`HOLD_UPRIGHT`) and damping (`HOLD_SWING_DAMPING`) let it swing. A let-go takes the finger's
+  speed over its last 0.1 s, capped at 4 toy radii a second; a still hold lets go still. A piece
+  being placed follows closer (`PLACE_FOLLOW`) and is set down from its hover height. The owner
+  marked this feel good: change it only with new clips for him.
+
+## For the next lanes (hands-on categories, Any pose)
+
+- Where a toy's pose lives: Level 1 moves the whole toy with `Stage.setToyPose({ pivot, q, t })`
+  (the entity's transform, from `HandsOn.apply`); `player.handsOn.body` has `pos`, `q` and `home`;
+  `player.handsOn.moved` is true while it's off home. ↺ (`handsOn.reset()`) glides it home.
+- Taps on a moved toy: `player.toRecipe` and `fromRecipe` go through the entity's transform, so a
+  tap's point lands on the right part in any pose, and the tap effect plays in the toy's own frame.
+  So an effect that means "up" (a hop, a fall, smoke, pouring) points the toy's up, sideways when it
+  lies on its side. That is the Any pose lane's work; pieces (not Level 1) go home before a tap
+  (`player.act`).
+- A new hands-on toy: a recipe's `hands` block (`pieces`, `floor`, `area`, `lift`, `center`, `snap`,
+  `place`, `gravity`, `sound`) or `drag` / `grab` for its own gestures; see the header of
+  `src/physics/hands-on.js` and the nine showcase toys (`rocks`, `jelly`, `amoeba`, `cherries`,
+  `bricks`, `macarons`, `spring-toy`, `sushi`, `bow-and-target`).
+- Tests: drive the clock by hand (`player.update(1 / 30)`), wait for the camera to settle after
+  opening a toy, and press at a known point (`player.fromRecipe(...)`) rather than through the GPU
+  pick, which can read a frame drawn before the toy (see `tests/phy.spec.mjs`, `__carry`).
+- Clips: `tools/phy-clip.mjs` (phone size, finger dot, a `{"toy": id}` step for several toys in one
+  clip). In a clip, a toy opened twice keeps its ✋ state, so don't press the switch again.
 
 ## Known issues
 
