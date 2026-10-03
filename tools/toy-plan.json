@@ -890,7 +890,7 @@
       "owner": "Needs an effect.",
       "effect": "Pushes out a pseudopod and oozes over.",
       "sound": "Louder: a soft squelch and a low rubbery wobble as each pseudopod pushes out; no whistle or ding (Sound C, October 2, 2026).",
-      "improved": "E3: it crawls: a round pseudopod pushes out to the right, granules stream into it and the cell oozes over; then one pushes out to the left and it oozes back; at rest its pods stretch a little (5.2 s)."
+      "improved": "E3: it crawls: a round pseudopod pushes out to the right, granules stream into it and the cell oozes over; then one pushes out to the left and it oozes back; at rest its pods stretch a little (5.2 s). Physics (Hands-on): drag it to pull out a pseudopod; let go and it oozes back."
     },
     "orbital": {
       "v": "keep",
@@ -1130,7 +1130,7 @@
       "owner": "Should fall or drop.",
       "effect": "The pebbles drop and scatter, then stack into a cairn.",
       "sound": "Real stone-on-stone knocks as the pile shifts and tumbles home; the stacking knocks stay; real CC0 recordings now (rocks-pebbles.mp3), with the synthesized sound as a fallback.",
-      "improved": "E4: a tap tumbles the pebbles: each rolls out over the sand on its own path to lie clear of the others, then five hop one at a time onto a cairn, biggest at the bottom, with a clack each; at the end they all hop back (about 7 s). In the Cairn style the top four topple off and are stacked again."
+      "improved": "E4: a tap tumbles the pebbles: each rolls out over the sand on its own path to lie clear of the others, then five hop one at a time onto a cairn, biggest at the bottom, with a clack each; at the end they all hop back (about 7 s). In the Cairn style the top four topple off and are stacked again. Physics (Hands-on): drag a pebble to pick it up and set it on the sand or on another stone; a careful stack stands, a careless one topples."
     },
     "kelp": {
       "v": "keep",
@@ -1166,7 +1166,8 @@
     "jelly": {
       "v": "keep",
       "owner": "Pretty much fine.",
-      "sound": "A wet, heavy wobble instead of a cartoon boing."
+      "sound": "A wet, heavy wobble instead of a cartoon boing.",
+      "improved": "Physics (Hands-on): drag it to stretch it toward the finger; let go and it springs back and wobbles on its plate."
     },
     "pancakes": {
       "v": "keep",
@@ -1200,7 +1201,7 @@
       "owner": "Maybe they do something.",
       "effect": "They stack themselves into a tower.",
       "sound": "Soft taps.",
-      "improved": "E5: the two in front hop one after the other up onto the stack, rising clear of its rim and landing level with a soft tap; the tower of five sways, then they hop back down (about 3.5 s)."
+      "improved": "E5: the two in front hop one after the other up onto the stack, rising clear of its rim and landing level with a soft tap; the tower of five sways, then they hop back down (about 3.5 s). Physics (Hands-on): pick up any macaron and stack it on the plate or the stack; a crooked one slides off."
     },
     "gummy-bear": {
       "v": "keep",
@@ -1241,7 +1242,7 @@
       "owner": "Chopsticks lifted by an invisible hand pick up the sushi.",
       "effect": "Chopsticks pick up a roll, dip it and put it back.",
       "sound": "Wooden chopstick clicks.",
-      "improved": "E5: the chopsticks lift off the board as if held by an invisible hand, pinch a roll (click), carry it to a new dish of soy sauce and dip it twice, set it back (click) and lie down again (about 4.7 s)."
+      "improved": "E5: the chopsticks lift off the board as if held by an invisible hand, pinch a roll (click), carry it to a new dish of soy sauce and dip it twice, set it back (click) and lie down again (about 4.7 s). Physics: a tap on a piece sends the chopsticks to that piece (either nigiri or any maki); they dip it and put it back."
     },
     "taco": {
       "v": "keep",
@@ -1302,7 +1303,7 @@
       "owner": "No idea.",
       "effect": "The pair swings and bounces on its stems.",
       "sound": "No string note, only the stems' soft swish; the knocking is unchanged.",
-      "improved": "E5: a flick swings the two cherries apart on their own stems; they swing back and knock together (a plink each time), bouncing apart again until they settle, while the joint bobs (about 3.6 s)."
+      "improved": "E5: a flick swings the two cherries apart on their own stems; they swing back and knock together (a plink each time), bouncing apart again until they settle, while the joint bobs (about 3.6 s). Physics (Hands-on): pull a cherry out on its stem and let go; it swings back and knocks the other, which swings out in turn."
     },
     "grapes": {
       "v": "keep",
@@ -1324,7 +1325,7 @@
       "owner": "Build something random from the blocks.",
       "effect": "Bricks rearrange into a random small build (tower, bridge, animal), different each tap.",
       "sound": "A lower plastic clack, for the tap and each brick landing.",
-      "improved": "F: eighteen bricks lie poured out round the table. Each tap pops the last model apart and builds a new one in the middle, brick by brick from the bottom up, each clicking into place: a tower, a bridge, stairs, a dog or a tree (never the same twice running; about 5 s)."
+      "improved": "F: eighteen bricks lie poured out round the table. Each tap pops the last model apart and builds a new one in the middle, brick by brick from the bottom up, each clicking into place: a tower, a bridge, stairs, a dog or a tree (never the same twice running; about 5 s). Physics (Hands-on): pick up any brick and stack it; over another brick it turns square, lines up with the studs and clicks on."
     },
     "rubber-duck": {
       "v": "keep",
@@ -1373,7 +1374,8 @@
     "spring-toy": {
       "v": "keep",
       "owner": "Basically perfect.",
-      "sound": "A real metal Slinky's shimmering coils as it walks (Sound C, October 2, 2026)."
+      "sound": "A real metal Slinky's shimmering coils as it walks (Sound C, October 2, 2026).",
+      "improved": "Physics (Hands-on): pull its top coils up or sideways and it stretches coil by coil; let go and it springs back, wobbles and walks on."
     },
     "kite": {
       "v": "keep",
@@ -1537,7 +1539,8 @@
     "bow-and-target": {
       "v": "keep",
       "owner": "Unbelievably impressive.",
-      "sound": "A real bowstring's thump and the arrow's hiss, not a guitar-like note; the hit is unchanged; real CC0 recordings now (bow-and-target-release.mp3), with the synthesized sound as a fallback."
+      "sound": "A real bowstring's thump and the arrow's hiss, not a guitar-like note; the hit is unchanged; real CC0 recordings now (bow-and-target-release.mp3), with the synthesized sound as a fallback.",
+      "improved": "Physics (Hands-on): pull the arrow back on the string and let go; it flies under gravity, faster the further it was drawn, and sticks in the target or the grass."
     },
     "trebuchet": {
       "v": "keep",
@@ -2085,7 +2088,7 @@
       "owner": "Lane Books, from the owner's notes of September 27 and 28, 2026 (Pages into Splats).",
       "effect": "Open a PDF of any length and turn its pages: each page turns over its spine as a solid sheet, curling as it goes, with the next page on its back. Five styles: hardcover, paperback, magazine, stapled paper and spiral notebook.",
       "sound": "A real page per book type: glossy and slick for the magazine, light for the paperback (and the stapled and spiral ones), fuller with a soft landing for the hardcover (Sound C, October 2, 2026).",
-      "improved": "Books: a tap opens the cover, then turns each leaf over (about 1 s), the page curling as it goes with the next page on its back; at the end a tap closes the book. Previous and Next in the Toy tab turn back and forth. The page shape follows the PDF, and only the pages reached are built. Books r3: a tap on the right page turns forward and on the left goes back (stapled paper: the top quarter of the page goes back); a page can be pulled over by hand, turning if let go past halfway or flicked and falling back otherwise; the turn lifts at once, the page curling as it goes, with no bend before it moves. Books r4 (page focus, approved September 30, 2026): a double-tap on a page glides the view in until the page fills the screen, and again (or a zoom out) shows both pages; while a page is in view, forward goes from the left page to the right one, then turns the leaf and lands on the next left page (back the other way). Reading: One page (the default on a phone held upright) keeps a page in view. Fix7: a tapped page turn starts at once (it waited up to 1.5 s for its pages) and lifts off quickly, like a page pulled by hand.",
+      "improved": "Books: a tap opens the cover, then turns each leaf over (about 1 s), the page curling as it goes with the next page on its back; at the end a tap closes the book. Previous and Next in the Toy tab turn back and forth. The page shape follows the PDF, and only the pages reached are built. Books r3: a tap on the right page turns forward and on the left goes back (stapled paper: the top quarter of the page goes back); a page can be pulled over by hand, turning if let go past halfway or flicked and falling back otherwise; the turn lifts at once, the page curling as it goes, with no bend before it moves. Books r4 (page focus, approved September 30, 2026): a double-tap on a page glides the view in until the page fills the screen, and again (or a zoom out) shows both pages; while a page is in view, forward goes from the left page to the right one, then turns the leaf and lands on the next left page (back the other way). Reading: One page (the default on a phone held upright) keeps a page in view. Fix7: a tapped page turn starts at once (it waited up to 1.5 s for its pages) and lifts off quickly, like a page pulled by hand. Books r5 (October 3, 2026, labs): links in a PDF work: a tap on a web link shows its address and opens it in a new tab only when you say so (http, https and mailto only), and a link to another page turns the book there; links show a faint blue tint and underline. Pop out lifts the picture on the page in view off the paper toward you as one solid piece (it rises, grows a little and turns toward the middle in about 1 s, swaying a few times), leaving its soft shadow on the page; a photo rises with its depth from the on-device depth model, a chart or diagram as a card with its strongest shapes a little in front. Draw a box: drag round anything else on a page to lift it out. A tap lays it back (0.7 s).",
       "fixed": "Books r2 (the owner's note of September 29, 2026: the book, not the pages, a little blurry or grainy around the edges): the covers, spine, bands and page blocks have clean, sharp edges (faces stop short of their edges, with finer splats and a line of thin splats along each), full density and smooth cloth colors; the spiral's wire and the staples are thin splats along the wire."
     },
     "photo-album": {
@@ -2093,7 +2096,7 @@
       "owner": "Lane Books, from the owner's notes of September 27 and 28, 2026 (Pages into Splats).",
       "effect": "Open a set of photos and turn through them on thick album pages, each photo held by four photo corners, one or two to a page as fits their shapes, with the file names as captions.",
       "sound": "A thick card page turning and the thud; real CC0 recordings now (book-page.mp3), with the synthesized sound as a fallback.",
-      "improved": "Books: a tap opens the leather, linen or scrapbook cover, then turns the thick pages (about 1 s each), the photos mounted in photo corners with their file names beneath; at the end a tap closes the album. Books r3: taps by where they land, as the book; a page pulled by hand lags the finger a little, falls back more readily and settles slowly, like a heavy card page. Books r4: page focus and Reading: One page, as the book.",
+      "improved": "Books: a tap opens the leather, linen or scrapbook cover, then turns the thick pages (about 1 s each), the photos mounted in photo corners with their file names beneath; at the end a tap closes the album. Books r3: taps by where they land, as the book; a page pulled by hand lags the finger a little, falls back more readily and settles slowly, like a heavy card page. Books r4: page focus and Reading: One page, as the book. Books r5 (October 3, 2026, labs): Pop out lifts the photo on the page in view out of its corners toward you as one solid piece, with its depth from the on-device depth model, leaving its shadow between the empty corners; a tap on the other photo of a page lifts that one instead, and a tap lays it back.",
       "fixed": "Books r2 (the owner's note of September 29, 2026: a little blurry or grainy around the edges): the covers and card pages have clean, sharp edges and full density; the leather's stitches and groove are thin splats in front of the cover, the scrapbook's label its own card, and the leather and linen smooth."
     },
     "picture-frame": {
@@ -2102,6 +2105,12 @@
       "effect": "A photo in a frame hung on a nail by a wire: a tap swings it about the nail as one solid piece, and it settles like a pendulum (about 3 s). Wood, gold, modern or digital frames; the digital one fades through a set of photos.",
       "sound": "A knock on the wall, the wire creaking on the nail, and a softer knock.",
       "improved": "Books: a tap swings the frame, its wire and photo about the nail like a damped pendulum, smaller each swing, until it hangs straight again (3 s). Books r3: a molded gold frame (a bead, a flat, a cove and a big bead, burnished on the raised parts); every frame plays a GIF or a video on a loop; the digital frame lists its photos in the Toy tab to reorder, and steps through them in order or at random. Books r4: a double-tap fills the screen with the photo, and again steps back."
+    },
+    "qr-code": {
+      "v": "new",
+      "owner": "The owner's idea of October 1, 2026 (\"go hard on it\"), lane QR, October 3, 2026.",
+      "effect": "A QR code made of splats in seven styles (Classic, Dots, Rounded, Bricks, Gems, Bubbles, Neon) that always scans. A tap bursts it: every module, finder and alignment pattern tumbles off as a solid piece, falls to a floor and flies back to its exact place (3.6 s). The Toy tab adds Assemble (the pieces fly in and lock into place) and Flip (tiles turn over in a wave, showing their back color).",
+      "sound": "Soft: a muffled pop, a whoosh out, the light knock of pieces landing and a rush back (Assemble: a rush in and a settle; Flip: two soft sweeps)."
     },
     "chladni-plate": {
       "v": "new",

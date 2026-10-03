@@ -48,7 +48,13 @@ export const MODEL_BUDGETS = Object.fromEntries(
 export const CREASE_DEG = 32; // a fold sharper than this is a hard edge
 const CREASE_COS = Math.cos((CREASE_DEG * Math.PI) / 180);
 const ADJ_MAX_TRIS = 450000; // above this, no edge adjacency (detail weights and crisp edges)
-const MAX_TRIS = 4000000;
+// The most triangles a model may have (UI r5: was 4 million; a caller can set
+// its own with parseModel's maxTriangles, the toy by the device). Very large
+// meshes are simplified on the way in (prepareModel's simplifyTo).
+export const MAX_TRIS = 40000000;
+let triLimit = MAX_TRIS;
+const tooManyTris = (nt) =>
+  new Error(`That model has ${nt.toLocaleString("en-US")} triangles; the most this device reads is ${triLimit.toLocaleString("en-US")}. Try it on a computer, or open a lighter version of the model (in Blender, the Decimate modifier makes one).`); // prettier-ignore
 
 const SRGB_TO_LIN = new Float32Array(256);
 for (let i = 0; i < 256; i++) {
@@ -59,6 +65,11 @@ const toSrgbF = (c) => (c <= 0.0031308 ? c * 12.92 : 1.055 * c ** (1 / 2.4) - 0.
 const LIN_TO_SRGB = new Float32Array(4097);
 for (let i = 0; i <= 4096; i++) LIN_TO_SRGB[i] = toSrgbF(i / 4096);
 const linToSrgb = (c) => LIN_TO_SRGB[c <= 0 ? 0 : c >= 1 ? 4096 : Math.round(c * 4096)];
+const SRGB_TO_LIN_F = new Float32Array(4097); // UI r5: for baking millions of vertex colors
+for (let i = 0; i <= 4096; i++) {
+  const c = i / 4096;
+  SRGB_TO_LIN_F[i] = c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
+}
 export const srgbToLinear = (c) => (c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4);
 export const linearToSrgb = toSrgbF;
 
@@ -105,7 +116,8 @@ export function modelFormat(bytes, fileName = "") {
   return "";
 }
 
-export function parseModel(bytes, fileName = "model", { files } = {}) {
+export function parseModel(bytes, fileName = "model", { files, maxTriangles = MAX_TRIS } = {}) {
+  triLimit = maxTriangles; // UI r5
   const format = modelFormat(bytes, fileName);
   const table = fileTable(files);
   const name = String(fileName).replace(/\.[^.]+$/, "") || "model";
@@ -137,6 +149,14 @@ class Chunks {
     let nv = this.n;
     let nt = 0;
     for (const c of this.list) nt += c.idx.length / 3;
+    if (nt > triLimit) throw tooManyTris(nt); // before the big arrays (UI r5)
+    // UI r5: one mesh (most big scans) keeps its own arrays: no second copy.
+    const one = this.list.length === 1 && this.list[0];
+    if (one && one.idx instanceof Uint32Array) {
+      this.list = [];
+      const mat = new Uint16Array(nt).fill(one.mat);
+      return { pos: one.pos, nor: one.nor, uv: one.uv, col: one.col, idx: one.idx, mat, materials, images, notes }; // prettier-ignore
+    }
     const pos = new Float32Array(nv * 3);
     const useUv = this.list.some((c) => c.uv);
     const useCol = this.list.some((c) => c.col);
@@ -152,12 +172,16 @@ class Chunks {
       if (uv && c.uv) uv.set(c.uv, c.base * 2);
       if (col && c.col) col.set(c.col, c.base * 4);
       if (nor) nor.set(c.nor, c.base * 3);
-      const nTri = c.idx.length / 3;
-      for (let i = 0; i < c.idx.length; i++) idx[ti * 3 + i] = c.idx[i] + c.base;
+      const ci = c.idx;
+      const base = c.base;
+      const nTri = ci.length / 3;
+      const at = ti * 3;
+      for (let i = 0; i < ci.length; i++) idx[at + i] = ci[i] + base;
       mat.fill(c.mat, ti, ti + nTri);
       ti += nTri;
+      c.pos = c.uv = c.col = c.nor = c.idx = null; // copied: memory back as it goes (UI r5)
     }
-    if (nt > MAX_TRIS) throw new Error(`That model has ${nt.toLocaleString("en-US")} triangles; the most this toy reads is ${MAX_TRIS.toLocaleString("en-US")}.`); // prettier-ignore
+    this.list = [];
     return { pos, nor, uv, col, idx, mat, materials, images, notes };
   }
 }
@@ -219,6 +243,10 @@ function readAccessor(gl, buffers, ai, asIndex = false) {
     }
     if (a.componentType === 5126 && stride === 4 * size && base % 4 === 0 && !asIndex) {
       out.set(new Float32Array(buf.buffer, base, n * size));
+    } else if (asIndex && a.componentType === 5125 && stride === 4 * size && base % 4 === 0) {
+      out.set(new Uint32Array(buf.buffer, base, n * size)); // UI r5: big index lists, fast
+    } else if (asIndex && a.componentType === 5123 && stride === 2 * size && base % 2 === 0) {
+      out.set(new Uint16Array(buf.buffer, base, n * size));
     } else {
       const dv = new DataView(buf.buffer, buf.byteOffset, buf.byteLength);
       const get = dv[comp.get].bind(dv);
@@ -460,9 +488,10 @@ export function parseGltf(bytes, table) {
       if (prim.extensions?.KHR_draco_mesh_compression) {
         throw new Error("This glTF is compressed with Draco, which this toy does not read.");
       }
-      const p0 = readAccessor(json, buffers, at.POSITION);
+      // Moved in place (UI r5): readAccessor's array is this mesh's own.
+      const pos = readAccessor(json, buffers, at.POSITION);
+      const p0 = pos;
       const nv = p0.length / 3;
-      const pos = new Float32Array(nv * 3);
       for (let i = 0; i < nv; i++) {
         const x = p0[i * 3];
         const y = p0[i * 3 + 1];
@@ -474,7 +503,7 @@ export function parseGltf(bytes, table) {
       let nor = null;
       if (at.NORMAL !== undefined) {
         const n0 = readAccessor(json, buffers, at.NORMAL);
-        nor = new Float32Array(nv * 3);
+        nor = n0; // turned in place
         const q = nm.m;
         for (let i = 0; i < nv; i++) {
           const x = n0[i * 3];
@@ -740,6 +769,7 @@ export function parseStl(bytes) {
   const notes = [];
   const dv = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
   const nBin = bytes.length >= 84 ? dv.getUint32(80, true) : 0;
+  if (bytes.length >= 84 && 84 + nBin * 50 === bytes.length && nBin > triLimit) throw tooManyTris(nBin); // prettier-ignore
   let pos;
   if (bytes.length >= 84 && 84 + nBin * 50 === bytes.length) {
     pos = new Float32Array(nBin * 9);
@@ -921,12 +951,214 @@ function weld(pos, nv, diag) {
   return { id, n };
 }
 
-// Prepares a raw mesh (from parseModel) for sampling. `decodeImage(bytes, mime)`
-// returns { w, h, data: Uint8Array RGBA } (or throws; that texture is then left out).
-export async function prepareModel(raw, { decodeImage } = {}) {
-  const notes = raw.notes.slice();
+// ---- Simplifying a very large mesh (UI r5) ---------------------------------------------
+// Vertex clustering on a grid, sized so about `target` triangles are left: the
+// vertices in a cell (of one material) become one at their average, and a
+// triangle whose corners land in fewer than three cells goes. Colors are baked
+// into the vertices first (the material color, the texture at each vertex's own
+// UV, the vertex color), so texture seams never smear; the result carries
+// vertex colors and no texture. Normals are left to prepareModel.
+export function simplifyMesh(raw, materials, target) {
   const { pos, idx } = raw;
   const nv = pos.length / 3;
+  const nt0 = idx.length / 3;
+  let lx = Infinity;
+  let ly = Infinity;
+  let lz = Infinity;
+  let hx = -Infinity;
+  let hy = -Infinity;
+  let hz = -Infinity;
+  for (let i = 0; i < nv; i++) {
+    const x = pos[i * 3];
+    const y = pos[i * 3 + 1];
+    const z = pos[i * 3 + 2];
+    if (x < lx) lx = x;
+    if (y < ly) ly = y;
+    if (z < lz) lz = z;
+    if (x > hx) hx = x;
+    if (y > hy) hy = y;
+    if (z > hz) hz = z;
+  }
+  // The surface's area, and each vertex's material (the first triangle's).
+  let area = 0;
+  const vMat = new Uint16Array(nv).fill(65535);
+  const nm = Math.max(1, materials.length);
+  for (let t = 0; t < nt0; t++) {
+    const a = idx[t * 3];
+    const b = idx[t * 3 + 1];
+    const c = idx[t * 3 + 2];
+    const e1x = pos[b * 3] - pos[a * 3];
+    const e1y = pos[b * 3 + 1] - pos[a * 3 + 1];
+    const e1z = pos[b * 3 + 2] - pos[a * 3 + 2];
+    const e2x = pos[c * 3] - pos[a * 3];
+    const e2y = pos[c * 3 + 1] - pos[a * 3 + 1];
+    const e2z = pos[c * 3 + 2] - pos[a * 3 + 2];
+    area += Math.hypot(e1y * e2z - e1z * e2y, e1z * e2x - e1x * e2z, e1x * e2y - e1y * e2x) / 2; // prettier-ignore
+    const m = Math.min(raw.mat[t], nm - 1);
+    if (vMat[a] === 65535) vMat[a] = m;
+    if (vMat[b] === 65535) vMat[b] = m;
+    if (vMat[c] === 65535) vMat[c] = m;
+  }
+  // Baked colors (linear RGBA), as prepared models' vertex colors are.
+  const vCol = new Float32Array(nv * 4);
+  const px = new Float32Array(4);
+  for (let v = 0; v < nv; v++) {
+    if (vMat[v] === 65535) continue;
+    const M = materials[vMat[v]];
+    let r = M ? M.rgb[0] : 0.8;
+    let g = M ? M.rgb[1] : 0.8;
+    let b = M ? M.rgb[2] : 0.8;
+    let a = 1;
+    if (M?.mip && raw.uv) {
+      let tu = raw.uv[v * 2];
+      let tv = raw.uv[v * 2 + 1];
+      if (M.transform) {
+        const { offset, rotation, scale } = M.transform;
+        const sx = tu * scale[0];
+        const sy = tv * scale[1];
+        const cr = Math.cos(rotation);
+        const sr = Math.sin(rotation);
+        tu = cr * sx + sr * sy + offset[0];
+        tv = -sr * sx + cr * sy + offset[1];
+      }
+      sampleMip(M.mip, tu, tv, 0, M.wrapS, M.wrapT, px, M.nearest);
+      r *= px[0];
+      g *= px[1];
+      b *= px[2];
+      a *= px[3];
+    }
+    if (raw.col) {
+      r *= linToSrgb(raw.col[v * 4]);
+      g *= linToSrgb(raw.col[v * 4 + 1]);
+      b *= linToSrgb(raw.col[v * 4 + 2]);
+      a *= raw.col[v * 4 + 3];
+    }
+    vCol[v * 4] = SRGB_TO_LIN_F[r <= 0 ? 0 : r >= 1 ? 4096 : Math.round(r * 4096)];
+    vCol[v * 4 + 1] = SRGB_TO_LIN_F[g <= 0 ? 0 : g >= 1 ? 4096 : Math.round(g * 4096)];
+    vCol[v * 4 + 2] = SRGB_TO_LIN_F[b <= 0 ? 0 : b >= 1 ? 4096 : Math.round(b * 4096)];
+    vCol[v * 4 + 3] = a;
+  }
+  const ext = Math.max(hx - lx, hy - ly, hz - lz) || 1;
+  // About two triangles per vertex left, and a vertex per occupied cell.
+  // (A little coarser than that: corners shared by fewer triangles at the edges.)
+  let h = Math.max(1.15 * Math.sqrt(area / Math.max(1, target / 2)), ext / 4000);
+  let out = null;
+  for (let pass = 0; pass < 5; pass++) {
+    out = clusterOnce(h);
+    if (out && out.nt <= target * 1.3) break;
+    h *= out ? Math.max(1.08, Math.sqrt(out.nt / target)) : 1.6;
+  }
+  return out;
+
+  function clusterOnce(h) {
+    const nx = Math.floor((hx - lx) / h) + 1;
+    const ny = Math.floor((hy - ly) / h) + 1;
+    const cap = Math.min(nv, Math.ceil(target * 1.5) + 1024);
+    const cid = new Int32Array(nv).fill(-1);
+    // The occupied cells: an open-addressed table of cell keys (faster than a
+    // Map for millions of vertices).
+    let tsize = 1024;
+    while (tsize < cap * 2) tsize *= 2;
+    const tmask = tsize - 1;
+    const tkey = new Float64Array(tsize).fill(-1);
+    const tval = new Int32Array(tsize);
+    const sum = new Float64Array(cap * 3);
+    const col = new Float32Array(cap * 4);
+    const cnt = new Uint32Array(cap);
+    let n = 0;
+    for (let v = 0; v < nv; v++) {
+      if (vMat[v] === 65535) continue;
+      const ix = Math.floor((pos[v * 3] - lx) / h);
+      const iy = Math.floor((pos[v * 3 + 1] - ly) / h);
+      const iz = Math.floor((pos[v * 3 + 2] - lz) / h);
+      const key = ((iz * ny + iy) * nx + ix) * nm + vMat[v];
+      let slot = Math.imul((key >>> 0) ^ Math.imul((key / 4294967296) | 0, 0x9e3779b1), 0x85ebca6b) & tmask; // prettier-ignore
+      while (tkey[slot] !== -1 && tkey[slot] !== key) slot = (slot + 1) & tmask;
+      let c;
+      if (tkey[slot] === key) c = tval[slot];
+      else {
+        if (n >= cap) return null; // cells too small: a coarser grid
+        c = n++;
+        tkey[slot] = key;
+        tval[slot] = c;
+      }
+      cid[v] = c;
+      sum[c * 3] += pos[v * 3];
+      sum[c * 3 + 1] += pos[v * 3 + 1];
+      sum[c * 3 + 2] += pos[v * 3 + 2];
+      for (let k = 0; k < 4; k++) col[c * 4 + k] += vCol[v * 4 + k];
+      cnt[c]++;
+    }
+    // Triangles that keep three cells, each once (a hash of the sorted corners).
+    let live = 0;
+    for (let t = 0; t < nt0; t++) {
+      const a = cid[idx[t * 3]];
+      const b = cid[idx[t * 3 + 1]];
+      const c = cid[idx[t * 3 + 2]];
+      if (a !== b && b !== c && a !== c) live++;
+    }
+    let size = 1024;
+    while (size < live * 1.6) size *= 2;
+    const mask = size - 1;
+    const table = new Int32Array(size * 3).fill(-1);
+    const oIdx = new Uint32Array(live * 3);
+    const oMat = new Uint16Array(live);
+    let m = 0;
+    for (let t = 0; t < nt0; t++) {
+      const a = cid[idx[t * 3]];
+      const b = cid[idx[t * 3 + 1]];
+      const c = cid[idx[t * 3 + 2]];
+      if (a === b || b === c || a === c) continue;
+      const lo = Math.min(a, b, c);
+      const hi = Math.max(a, b, c);
+      const mid = a + b + c - lo - hi;
+      let slot = (Math.imul(lo, 73856093) ^ Math.imul(mid, 19349663) ^ Math.imul(hi, 83492791)) & mask; // prettier-ignore
+      let dup = false;
+      while (table[slot * 3] !== -1) {
+        if (table[slot * 3] === lo && table[slot * 3 + 1] === mid && table[slot * 3 + 2] === hi) {
+          dup = true;
+          break;
+        }
+        slot = (slot + 1) & mask;
+      }
+      if (dup) continue;
+      table[slot * 3] = lo;
+      table[slot * 3 + 1] = mid;
+      table[slot * 3 + 2] = hi;
+      oIdx[m * 3] = a;
+      oIdx[m * 3 + 1] = b;
+      oIdx[m * 3 + 2] = c;
+      oMat[m] = raw.mat[t];
+      m++;
+    }
+    const oPos = new Float32Array(n * 3);
+    const oCol = new Float32Array(n * 4);
+    for (let c = 0; c < n; c++) {
+      const k = 1 / cnt[c];
+      for (let j = 0; j < 3; j++) oPos[c * 3 + j] = sum[c * 3 + j] * k;
+      for (let j = 0; j < 4; j++) oCol[c * 4 + j] = col[c * 4 + j] * k;
+    }
+    return {
+      pos: oPos,
+      col: oCol,
+      idx: oIdx.slice(0, m * 3),
+      mat: oMat.slice(0, m),
+      nor: null,
+      uv: null,
+      nt: m,
+    };
+  }
+}
+
+// Prepares a raw mesh (from parseModel) for sampling. `decodeImage(bytes, mime)`
+// returns { w, h, data: Uint8Array RGBA } (or throws; that texture is then left out).
+// UI r5: a mesh over 1.25 times `simplifyTo` triangles is simplified to about
+// that many first (simplifyMesh); onStep(text) reports the long steps (and may
+// wait, so a page can show them).
+export async function prepareModel(raw, { decodeImage, simplifyTo = 0, onStep } = {}) {
+  const notes = raw.notes.slice();
+  let { pos, idx } = raw;
+  let nv = pos.length / 3;
   // Textures, only those in use.
   const mips = new Map();
   const materials = [];
@@ -963,6 +1195,23 @@ export async function prepareModel(raw, { decodeImage } = {}) {
     }
     materials.push(M);
   }
+  // UI r5: a very large mesh, simplified (its colors baked into the vertices).
+  const nRaw = idx.length / 3;
+  if (simplifyTo > 0 && nRaw > simplifyTo * 1.25) {
+    await onStep?.(`Simplifying ${nRaw.toLocaleString("en-US")} triangles…`);
+    const sm = simplifyMesh(raw, materials, simplifyTo);
+    raw = { ...raw, ...sm };
+    pos = raw.pos;
+    idx = raw.idx;
+    nv = pos.length / 3;
+    for (const M of materials) {
+      M.rgb = [1, 1, 1];
+      M.mip = null;
+      M.transform = null;
+    }
+    notes.push(`It had ${nRaw.toLocaleString("en-US")} triangles, so it was simplified to ${sm.nt.toLocaleString("en-US")} on this device first.`); // prettier-ignore
+    await onStep?.("Spreading the splats…");
+  }
   // Bounds, then triangles: drop the empty ones.
   let lx = Infinity;
   let ly = Infinity;
@@ -983,11 +1232,14 @@ export async function prepareModel(raw, { decodeImage } = {}) {
   }
   const bbox = { min: [lx, ly, lz], max: [hx, hy, hz] };
   const diag = Math.hypot(hx - lx, hy - ly, hz - lz) || 1;
-  const keep = [];
-  const fn0 = [];
-  const ar0 = [];
+  // Typed arrays (UI r5): a big model's millions of triangles fit in memory.
+  const nt0 = idx.length / 3;
+  const keep = new Uint32Array(nt0);
+  const fn0 = new Float32Array(nt0 * 3);
+  const ar0 = new Float32Array(nt0);
+  let nt = 0;
   let totalArea = 0;
-  for (let t = 0; t < idx.length / 3; t++) {
+  for (let t = 0; t < nt0; t++) {
     const a = idx[t * 3] * 3;
     const b = idx[t * 3 + 1] * 3;
     const c = idx[t * 3 + 2] * 3;
@@ -1002,12 +1254,14 @@ export async function prepareModel(raw, { decodeImage } = {}) {
     const cz = e1x * e2y - e1y * e2x;
     const l = Math.hypot(cx, cy, cz);
     if (!(l > 1e-12 * diag * diag)) continue;
-    keep.push(t);
-    fn0.push(cx / l, cy / l, cz / l);
-    ar0.push(l / 2);
+    keep[nt] = t;
+    fn0[nt * 3] = cx / l;
+    fn0[nt * 3 + 1] = cy / l;
+    fn0[nt * 3 + 2] = cz / l;
+    ar0[nt] = l / 2;
+    nt++;
     totalArea += l / 2;
   }
-  const nt = keep.length;
   if (!nt) throw new Error("That model has no surface to convert (every triangle is empty).");
   const tri = new Uint32Array(nt * 3);
   const mat = new Uint16Array(nt);
@@ -1018,8 +1272,8 @@ export async function prepareModel(raw, { decodeImage } = {}) {
     tri[i * 3 + 2] = idx[t * 3 + 2];
     mat[i] = Math.min(raw.mat[t], materials.length - 1);
   }
-  const fn = Float32Array.from(fn0);
-  const area = Float32Array.from(ar0);
+  const fn = nt === nt0 ? fn0 : fn0.slice(0, nt * 3);
+  const area = nt === nt0 ? ar0 : ar0.slice(0, nt);
   // UV density (uv units per unit of length), for choosing a texture level.
   const uvd = new Float32Array(nt);
   if (raw.uv) {

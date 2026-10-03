@@ -29,8 +29,8 @@ import {
   evenTorus,
   evenTube,
 } from "./even.js";
-import { surfacePoints } from "../physics/world.js"; // lane Hands engine C
-import { ropeSkin } from "../physics/soft.js";
+import { surfacePoints } from "../physics/world.js"; // lane Physics
+import { ropeSkin } from "../physics/soft.js"; // lane Hands engine C
 
 const TAU = Math.PI * 2;
 const { add, sub, mul, dot, len, cross, unit } = vec;
@@ -446,6 +446,8 @@ function melonFlesh(rho, c) {
 // The cherries' swing (E5): two pendulums hung from one joint that touch
 // at rest, played once at load. A tap flicks them apart; each swings on
 // its own stem, and when they meet they knock and bounce apart again.
+// Where the cherries' stems meet (their parts turn about it).
+const CHERRY_JOINT = [0.06, 1.0, 0];
 const CHERRY_SECS = 3.6;
 // The macarons: which one hops onto the stack when, and when it hops back
 // down; the two in front keep their turn about the vertical as they go.
@@ -488,6 +490,16 @@ const TACO_SECS = 3.1;
 // it go at drop and lie back down by lay.
 const SUSHI_T = { lift: 0.55, grab: 0.95, drop: 3.65, lay: 4.15 };
 const SUSHI_SECS = 4.7;
+// The pieces the chopsticks can pick (lane Physics): each a part, held at
+// its middle; the roll in front is the one a tap off the pieces picks.
+const SUSHI_PIECES = [
+  { part: "nigiri0", at: [-0.82, 0.15, 0.02] },
+  { part: "nigiri1", at: [-0.24, 0.15, 0.1] },
+  { part: "roll", at: [0.36, 0.11, 0.12] },
+  { part: "roll1", at: [0.74, 0.11, 0.02] },
+  { part: "roll2", at: [1.08, 0.11, 0.16] },
+];
+const SUSHI_ROLL = 2;
 const ORANGE_SECS = 3.0;
 // The kiwi: its long axis at right angles to the view, and how far each
 // half turns to show its face.
@@ -1504,6 +1516,10 @@ export const RECIPES = {
     ],
     controls: [{ key: "poke", label: "Poke", type: "pulse", ease: 2.4 }],
     action: { key: "poke", label: "Poke" },
+    // Hands-on (lane Physics): pull it and it stretches toward the finger;
+    // let go and it springs back and wobbles on its plate.
+    grab: { radius: 0.5, max: 0.7, wobble: "poke" },
+    pickAlpha: 0.1, // a press finds the see-through jelly, not the plate behind it
     drive(t, c, out, info) {
       const w = jiggle(t, info.time, c.poke);
       out.parts.jelly = {
@@ -2453,6 +2469,20 @@ export const RECIPES = {
     ],
     controls: [{ key: "stack", label: "Stack up", type: "pulse", ease: MAC_SECS }],
     action: { key: "stack", label: "Stack up" },
+    // Hands-on (lane Physics): pick up any macaron and stack it; a stack
+    // set down crooked topples.
+    handsOn: true,
+    hands: {
+      floor: 0,
+      area: 1.1,
+      center: 0.7,
+      pieces: (d) =>
+        (d?.homes || []).map((pos, i) => {
+          const solid = { type: "cylinder", r: 0.42, h: 0.245 };
+          return { token: i, pos, quat: d.quats[i], solid, points: surfacePoints(solid, 1), pick: [0.45, 0.27, 0.45], mass: 1, friction: 0.8, restitution: 0.1 }; // prettier-ignore
+        }),
+      sound: (hit, vol) => (hit.other ? { voice: "wood", f: "E6", decay: 0.5, vol: Math.min(0.8, 0.25 + vol) } : { voice: "wood", f: "C6", decay: 0.4, vol: vol * 0.5 }), // prettier-ignore
+    },
     // A tap sends the two in front hopping, one after the other, up onto
     // the stack: each rises clear of the stack's rim, comes over and lands
     // level on top with a soft tap. The tower of five sways, then they hop
@@ -3598,7 +3628,21 @@ export const RECIPES = {
 
   sushi: {
     controls: [{ key: "dip", label: "Pick up and dip", type: "pulse", ease: SUSHI_SECS }],
-    action: { key: "dip", label: "Pick up and dip" },
+    // Lane Physics: a tap on a piece picks that piece (the roll in front
+    // otherwise).
+    action: {
+      key: "dip",
+      label: "Pick up and dip",
+      at: (p) => {
+        let best = null;
+        let bd = 0.32;
+        SUSHI_PIECES.forEach((pc, n) => {
+          const dd = Math.hypot(p[0] - pc.at[0], p[2] - pc.at[2]);
+          if (dd < bd && p[1] < 0.45) [best, bd] = [n, dd];
+        });
+        return best === null ? null : { key: "dip", pick: best };
+      },
+    },
     // A tap lifts the chopsticks off the board as if by an invisible hand.
     // They open over a roll, come down and pinch it (click), carry it over
     // to the soy sauce and dip it twice, bring it back and set it down
@@ -3608,7 +3652,9 @@ export const RECIPES = {
       const d = info.data;
       if (!d) return;
       const on = s >= 0;
-      const roll = d.roll;
+      // The piece it picks: the one tapped (lane Physics), else the roll.
+      const which = SUSHI_PIECES[info.tap?.pick ?? SUSHI_ROLL] || SUSHI_PIECES[SUSHI_ROLL];
+      const roll = which.at;
       // The roll's centre over time (it rides between the tips when held).
       const above = add(roll, [0, 0.34, 0]);
       const overDish = [d.dish[0], 0.45, d.dish[2]];
@@ -3636,7 +3682,7 @@ export const RECIPES = {
           }
         }
       }
-      out.parts.roll = {
+      out.parts[which.part] = {
         offset: sub(at, roll),
         quat: quatAxisAngle([Math.cos(0.45), 0, -Math.sin(0.45)], swing * 0.5),
       };
@@ -3691,8 +3737,10 @@ export const RECIPES = {
         return lit(c, shade("#f8f5ee", 0.86 + 0.14 * Math.abs(n) * 2), 0.8, 0.3);
       };
       // Nigiri: a pillow of rice and a draped slice of fish.
-      const nigiri = (x, z, yaw, fish) => {
+      const nigiri = (x, z, yaw, fish, n) => {
+        const part = k.part(SUSHI_PIECES[n].part, { pivot: SUSHI_PIECES[n].at });
         k.add(k.roundedBox(0.52, 0.2, 0.3, 3.2), {
+          part,
           even: true,
           opacity: 1,
           jitter: 0.015,
@@ -3709,6 +3757,7 @@ export const RECIPES = {
           jitter: 0.015,
           pos: [x, 0.225, z],
           rot: [0, yaw, 0],
+          part,
           flat: 0.25,
           interior: 0.06,
           core: fish === "salmon" ? "#f48a5e" : "#b81c34",
@@ -3723,15 +3772,17 @@ export const RECIPES = {
           },
         });
       };
-      nigiri(-0.82, 0.02, 8, "salmon");
-      nigiri(-0.24, 0.1, -6, "tuna");
+      nigiri(-0.82, 0.02, 8, "salmon", 0);
+      nigiri(-0.24, 0.1, -6, "tuna", 1);
       // Maki rolls: nori outside, rice, and a filling.
       const fills = [
         ["#f47a4d", "#f47a4d"],
         ["#7cc242", "#b8e07a"],
         ["#ffd23f", "#7cc242"],
       ];
-      const rollPart = k.part("roll", { pivot: [0.36, 0.11, 0.12] });
+      const rollParts = [2, 3, 4].map((n) =>
+        k.part(SUSHI_PIECES[n].part, { pivot: SUSHI_PIECES[n].at }),
+      );
       [
         [0.36, 0.12],
         [0.74, 0.02],
@@ -3744,7 +3795,7 @@ export const RECIPES = {
           jitter: 0.015,
           pos: [x, 0.11, z],
           rot: [0, i * 50, 0],
-          part: i === 0 ? rollPart : 0,
+          part: rollParts[i],
           flat: 0.25,
           interior: 0.08,
           core: "#f4f0e6",
@@ -5654,6 +5705,36 @@ export const RECIPES = {
   cherries: {
     controls: [{ key: "swing", label: "Swing", type: "pulse", ease: CHERRY_SECS }],
     action: { key: "swing", label: "Swing" },
+    // Hands-on (lane Physics): pull one cherry out on its stem and let go:
+    // it swings back and knocks the other (a plink, as the tap's).
+    handsOn: true,
+    hands: {
+      place: false,
+      gravity: 0, // the stems hold them as they hang; they spring back
+      floor: -1.4,
+      area: 1.6,
+      pieces: () =>
+        [
+          [-0.36, -0.42, 0.05],
+          [0.34, -0.5, -0.06],
+        ].map((pos, i) => ({
+          part: i ? "right" : "left",
+          pivot: CHERRY_JOINT,
+          pos,
+          solid: { type: "sphere", r: 0.345 },
+          pick: [0.42, 0.42, 0.42],
+          joint: CHERRY_JOINT,
+          spring: 30,
+          hinge: [0, 0, 1],
+          free: true,
+          mass: 1,
+          restitution: 0.55,
+          friction: 0.3,
+          damping: 0.1,
+          angDamping: 0.25,
+        })),
+      sound: (hit, vol) => (hit.other ? { voice: "pop", f: Math.random() < 0.5 ? "C6" : "G5", decay: 1.1, vol: Math.min(1, 0.3 + vol) } : null), // prettier-ignore
+    },
     // A tap flicks the pair: each cherry swings out on its own stem from the
     // joint, and they swing back and knock together (a plink each time),
     // bouncing apart again until they settle. The joint bobs as they go.
@@ -5701,7 +5782,7 @@ export const RECIPES = {
         null,
         { grid: 80, thick: 0.35 },
       );
-      const joint = [0.06, 1.0, 0];
+      const joint = CHERRY_JOINT;
       const parts = ["left", "right"].map((n) => k.part(n, { pivot: joint, axis: [0, 0, 1] }));
       const cherries = [
         { pos: [-0.36, -0.42, 0.05], rot: [0, 0, 8] },
