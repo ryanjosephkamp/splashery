@@ -21,6 +21,158 @@
 // the toy's recipe and against a real source for every fact.
 
 export const TOY_HELP = {
+  // ---- Photoreal r2 (lane Photoreal r2) ----
+  "heart-donut": {
+    howTo: "Tap it to make it hop; drag to turn it.",
+    about:
+      "A real heart-shaped donut with a white glaze, captured from 411 photos on a turntable and drawn with about a quarter of a million soft splats. A donut is a ring or heart of dough fried in oil, so its crust browns and its crumb puffs.\n\nTap it and it hops. Drag to turn it and see the glossy glaze, the golden fried sides and the pale ring where the dough rose in the fryer.",
+  },
+  "sushi-boat": {
+    howTo: "Tap it to make it hop; drag to turn it.",
+    about:
+      "A wooden serving boat of sushi, captured from photos and drawn with splats. Sushi is vinegared rice served with fish, egg or vegetables; the word names the rice, not the raw fish. A boat-shaped tray is a classic way to serve a shared plate.\n\nTap it and it hops. Drag to circle it and look at the rolls, the slices of fish and the grain of the wood.",
+  },
+  "seeded-loaf": {
+    howTo: "Tap it to make it hop; drag to turn it.",
+    about:
+      "A loaf of seeded bread, captured from many photos and drawn with soft splats. Bread is flour and water, risen with yeast, whose gas puffs up the dough before the oven sets it into a crust. The seeds on top are baked on and crunch when you bite.\n\nTap it and it hops. Drag around the loaf to see the golden crust and the scatter of seeds.",
+  },
+  steak: {
+    howTo: "Tap it to make it hop; drag to turn it.",
+    about:
+      "A grilled cowboy steak, a thick rib cut with the bone left in, captured from photos and drawn with splats. Grilling browns the surface through the Maillard reaction, where heat joins sugars and proteins into new flavors and a dark crust.\n\nTap it and it hops. Drag to turn it and look at the char marks, the fat along the edge and the juicy texture.",
+  },
+  stollen: {
+    howTo: "Tap it to make it hop; drag to turn it.",
+    about:
+      "A stollen, the German Christmas bread full of dried fruit and nuts and rolled in butter and powdered sugar. This one was captured from photos and is drawn with splats. Bakers have made stollen since the 1400s, and its folded shape is said to recall a swaddled baby.\n\nTap it and it hops. Drag to circle the loaf and look at the sugar crust and the cut face.",
+  },
+  "orange-photo": {
+    howTo: "Tap it to make it hop; drag to turn it.",
+    about:
+      "A real orange, captured from photos and drawn with soft splats. The peel is covered in tiny pockets of oil that give citrus its smell; the bumps you see are those pockets. Oranges are a hybrid of the pomelo and the mandarin and grow on evergreen trees.\n\nTap it and it hops. Drag to turn it and look at the dimpled peel and the little dark spot where the stem was.",
+  },
+  physalis: {
+    howTo: "Tap it to make it hop; drag to turn it.",
+    about:
+      "A sprig of physalis, also called Chinese lantern or cape gooseberry, captured from photos and drawn with splats. Its fruit grows inside a papery husk that turns bright orange as it ripens; the husk is the plant's lantern and guards the berry.\n\nTap it and it hops. Drag to circle it and look at the thin veined husks and the green leaves above them.",
+  },
+  "crystal-gem": {
+    howTo: "Tap it to make it hop; drag to turn it.",
+    about:
+      "A cluster of clear crystals, captured from photos and drawn with splats. A crystal forms when atoms stack in a repeating pattern, usually while a mineral-rich liquid cools or dries slowly. Slow growth gives sharp faces that bend and bounce light.\n\nTap it and it hops. Drag to turn it: the glints move across the faces because this capture keeps a little view-dependent shine.",
+  },
+  "alum-crystal": {
+    howTo: "Tap it to make it hop; drag to turn it.",
+    about:
+      "A pink block of alum, captured from photos and drawn with splats. Alum is a mineral salt that people have used for centuries to clear muddy water, to fix dye in cloth and, as a crystal stick, to stop small shaving nicks from bleeding.\n\nTap it and it hops. Drag around it to see the frosted, uneven faces and the dark stand it sits on.",
+  },
+  puffin: {
+    howTo: "Tap it to make it hop; drag to turn it.",
+    about:
+      "A puffin, captured from photos and drawn with splats. Puffins are small seabirds of the North Atlantic that nest in burrows on cliff tops. In summer their beaks glow orange, and they flap up to four hundred times a minute to fly and use their wings to swim underwater.\n\nTap it and it hops. Drag to circle it and look at the striped beak, the white face and the orange feet.",
+  },
+  "toy-trex": {
+    howTo: "Tap it to make it hop; drag to turn it.",
+    about:
+      "A rubber toy Tyrannosaurus rex on a green base, captured from photos and drawn with splats. Real T. rex lived about 68 million years ago and had a bite strong enough to crush bone, but their arms were tiny. Scientists now think they were covered in scaly skin, perhaps with a few feathers.\n\nTap it and it hops. Drag to circle it and look at the painted stripes.",
+  },
+  "monkey-doll": {
+    howTo: "Tap it to make it hop; drag to turn it.",
+    about:
+      "A plush monkey in a striped sweater, captured from photos and drawn with soft splats. Fuzzy fabric is hard to scan because each loop of yarn casts its own tiny shadow, so the doll is a good test of how well splats can show soft materials.\n\nTap it and it hops. Drag to circle it and look at the nap of the fur, the stitched face and the curled tail.",
+  },
+  "elephant-souvenir": {
+    howTo: "Tap it to make it hop; drag to turn it.",
+    about:
+      "A souvenir elephant figure with a gold blanket on its back, captured from photos and drawn with splats. Elephants are the largest land animals; the trunk is a nose and an upper lip joined in one muscular tool with about forty thousand muscle bundles.\n\nTap it and it hops. Drag to circle it and look at the raised trunk, the white tusks and the patterned golden cloth.",
+  },
+  "turtle-souvenir": {
+    howTo: "Tap it to make it hop; drag to turn it.",
+    about:
+      "A souvenir sea turtle, captured from photos and drawn with splats. Sea turtles have flippers instead of feet and cannot pull their heads into their shells. Mother turtles come back to the beach where they hatched to lay their eggs, sometimes after decades at sea.\n\nTap it and it hops. Drag to circle it and look at the shell plates and the flippers.",
+  },
+  "cave-lioness": {
+    howTo: "Tap it to make it hop; drag to turn it.",
+    about:
+      "The head and shoulders of a lioness of the extinct cave lion kind, captured from photos of a life-size model and drawn with splats. Cave lions lived in Europe and Asia in the Ice Age and were larger than lions today. Cave paintings show them without manes.\n\nTap it and it hops. Drag to circle it and look at the whiskers, the fur and the watching eyes.",
+  },
+  "dog-plush": {
+    howTo: "Tap it to make it hop; drag to turn it.",
+    about:
+      "A plush dog lying on a wooden board, scanned with a handheld Revopoint scanner plus extra photos and drawn with splats. Soft toys are made of fabric stuffed with fiber; the short fuzz that covers them is called pile.\n\nTap it and it hops. Drag to circle it and look at the floppy ears and the brown and white patches.",
+  },
+  "bmx-bike": {
+    howTo: "Tap it to make it hop; drag to turn it.",
+    about:
+      "A BMX bicycle, captured from photos and drawn with splats. BMX stands for bicycle motocross: small-wheeled bikes built in the 1970s for racing on dirt tracks, then for jumps and tricks. This one is an old-style frame with plastic mag wheels.\n\nTap it and it hops. Drag to circle it and look at the spokes, the chain and the handlebars.",
+  },
+  "murex-shell": {
+    howTo: "Tap it to make it hop; drag to turn it.",
+    about:
+      "A murex shell, captured from photos and drawn with splats. This shape is the Venus comb murex, a sea snail whose long spines guard it from crabs and fish. The shell is made of calcium carbonate that the snail builds, a little at a time, from the sea water.\n\nTap it and it hops. Drag to turn it and look at the fine, comb-like spines.",
+  },
+  "sunflower-photo": {
+    howTo: "Tap it to make it hop; drag to turn it.",
+    about:
+      "A real sunflower, captured from photos and drawn with splats. The big yellow head is made of hundreds of small flowers; the dark center ones turn into seeds in a spiral pattern. Young sunflowers follow the sun across the sky, then stop and face east.\n\nTap it and it hops. Drag to circle it and look at the petals, the seed disc and the green stem.",
+  },
+  "white-roses": {
+    howTo: "Tap it to make it hop; drag to turn it.",
+    about:
+      "Two white roses in a glass bottle, captured from photos and drawn with splats. Roses have been grown in gardens for thousands of years. Their stems carry prickles, not true thorns, and a white rose gets its color from having no pigment in its petals.\n\nTap it and it hops. Drag to circle it and look at the folded petals and the clear glass.",
+  },
+  "bonsai-photo": {
+    howTo: "Tap it to make it hop; drag to turn it.",
+    about:
+      "A real bonsai, captured from photos and drawn with splats. Bonsai is the Japanese art of growing a tree in a shallow pot and shaping it with careful pruning and wire so that it looks like an old tree in the wild. Some bonsai are kept for hundreds of years.\n\nTap it and it hops. Drag to circle it and look at the trunk, the moss and the tiny leaves.",
+  },
+  "mushroom-photo": {
+    howTo: "Tap it to make it hop; drag to turn it.",
+    about:
+      "A small mushroom on the forest floor, captured from photos and drawn with splats. What you see is only the fruiting body; most of a fungus is a web of thin threads called mycelium that spreads through soil and wood and feeds on dead leaves.\n\nTap it and it hops. Drag to circle it and look at the orange cap, the wood chips and the green seedlings around it.",
+  },
+  "cactus-real": {
+    howTo: "Tap it to make it hop; drag to turn it.",
+    about:
+      "A round cactus, captured from photos and drawn with thousands of splats. Cactus spines are leaves that dried into needles; they shade the plant and cool it, catch dew and keep animals from eating it. The ribbed stem stores water and swells when it rains.\n\nTap it and it hops. Drag to circle it and look at the pattern of spines.",
+  },
+  "crochet-earth": {
+    howTo: "Tap it to make it hop; drag to turn it.",
+    about:
+      "A crocheted Earth, captured from photos and drawn with splats. Crochet makes cloth from one long loop-pulled thread and a hook. Here the yarn colors draw blue oceans, green and cream land and white ice, so each stitch is one tiny pixel of the planet.\n\nTap it and it hops. Drag to turn it and look for the continents among the stitches.",
+  },
+  "desk-globe": {
+    howTo: "Tap it to make it hop; drag to turn it.",
+    about:
+      "A desk globe on a wooden base, captured from photos and drawn with splats. A globe is the only map of Earth with no stretching: every country has the right shape and size next to its neighbors. Its axis is tilted about 23 degrees, like the real planet.\n\nTap it and it hops. Drag to circle it and look at the tilted blue ball, the black stand and the wood.",
+  },
+  "cherry-blossom-photo": {
+    howTo: "Tap it to make it hop; drag to turn it.",
+    about:
+      "A few cherry trees in bloom, captured from drone photos and drawn with splats. Cherry blossoms last only about a week, which is why people in Japan gather under them for hanami, the custom of watching the flowers. The petals fall like pale snow.\n\nTap it and it hops. Drag to circle the trees and look at the soft clouds of blossom and the grass beneath.",
+  },
+  "maple-tree": {
+    howTo: "Tap it to make it hop; drag to turn it.",
+    about:
+      "A small golden maple in a garden, captured from photos and drawn with splats. In autumn a tree stops making green chlorophyll and the yellow and orange pigments that were hidden all summer show through. Japanese maples are bred for such bright leaves.\n\nTap it and it hops. Drag to circle it and look at the layered branches and the plants around its roots.",
+  },
+  peony: {
+    howTo: "Tap it to make it hop; drag to turn it.",
+    about:
+      "A vase of pink peonies, captured from photos and drawn with splats. Peonies are garden plants with big, layered, sweet-smelling flowers. A peony plant can live and bloom for a hundred years. Ants often visit the buds for the sugary drops they make.\n\nTap it and it hops. Drag to circle the vase and look at the ruffled petals, the stems and the clear glass.",
+  },
+  "money-tree": {
+    howTo: "Tap it to make it hop; drag to turn it.",
+    about:
+      "A money tree in a white pot, captured from photos and drawn with splats. Pachira is a houseplant from the wetlands of Central and South America. Its trunks are often braided when young, and in several countries it is kept as a symbol of good luck.\n\nTap it and it hops. Drag to circle it and look at the glossy leaves, the trunk and the soil.",
+  },
+  "knight-horse": {
+    howTo: "Tap it to make it hop; drag to turn it.",
+    about:
+      "A painted miniature of a knight on an armored horse, captured from photos and drawn with splats. Medieval knights wore plate armor made of steel pieces that were shaped to fit each person, and horses had cloth covers called caparisons over their own armor.\n\nTap it and it hops. Drag to circle it and look at the raised sword, the shield and the horse's cloth.",
+  },
+
   // ---- Photoreal ----------------------------------------------------------------------
   cactus: {
     howTo: "Tap it to open a ring of flowers around its top.",
