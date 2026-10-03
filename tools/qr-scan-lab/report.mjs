@@ -174,6 +174,59 @@ out.push(
     "Plain readers. Short, 43-character and about-100-character texts give different code versions.",
   ),
 );
+
+const REALISTIC = [
+  "front",
+  "tilt20",
+  "mod4",
+  "mod6",
+  "blur20",
+  "jpeg30",
+  "light30",
+  "persp",
+  "phone",
+];
+const real = warp.filter((r) => r.scheme === "preset" && REALISTIC.includes(r.condition));
+const realCell = (list, inv) => {
+  const perText = uniq((r) => r.text, list).map((t) =>
+    rate(
+      list.filter((r) => r.text === t),
+      inv,
+    ),
+  );
+  return `${pct(rate(list, inv))} (worst text ${pct(Math.min(...perText))})`;
+};
+out.push(
+  table(
+    "Phone-like captures, preset colors: error correction level against style",
+    ["Level", ...styles],
+    ecs.map((e) => [
+      e,
+      ...styles.map((s) =>
+        realCell(
+          sub(real, s, (r) => r.ec === e),
+          s === "neon",
+        ),
+      ),
+    ]),
+    `Plain readers for every style but neon (inverted-aware here). Conditions: ${REALISTIC.join(", ")}; the three texts pooled, with the worst text in brackets.`,
+  ),
+);
+const realOk = (r) => ok(r, r.style === "neon");
+out.push(
+  table(
+    "Module size, preset colors (px per module in the capture, front-on)",
+    ["Condition", ...styles],
+    ["mod3", "mod4", "mod6", "front"].map((c) => [
+      c === "front" ? "8 px (front)" : `${c.slice(3)} px`,
+      ...styles.map((s) => {
+        const l = sub(warp, s, (r) => r.scheme === "preset" && r.condition === c);
+        return pct(l.filter(realOk).length / l.length);
+      }),
+    ]),
+    "Neon is read by the inverted-aware readers here.",
+  ),
+);
 if (cam.length) {
   const camConds = uniq((r) => r.condition, cam);
   const camStyles = uniq((r) => r.style, cam).sort(

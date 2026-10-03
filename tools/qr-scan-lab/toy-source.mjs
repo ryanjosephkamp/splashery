@@ -4,6 +4,7 @@
 import { chromium } from "@playwright/test";
 import { PNG } from "pngjs";
 import { resize } from "./sim.mjs";
+import { readJsqr } from "./readers.mjs";
 import { contrastRatio } from "./reference.mjs";
 
 export const TOY_STYLES = ["classic", "dots", "rounded", "bricks", "gems", "bubbles", "neon"];
@@ -95,9 +96,21 @@ export async function toySource({ opt }) {
   return {
     styles: opt("styles", TOY_STYLES.join(",")).split(","),
     async render(job, text) {
-      const info = await set(job, text);
-      if (info.error) throw new Error(info.error);
-      const img = await flat();
+      // The picture is checked against the text it should hold: a read that returns some other
+      // text means the render was taken before the toy finished rebuilding, so it is taken again.
+      let info;
+      let img;
+      for (let attempt = 0; attempt < 4; attempt++) {
+        info = await set(job, text);
+        if (info.error) throw new Error(info.error);
+        await page.evaluate(() => window.__splashery.qr.check());
+        img = await flat();
+        const got = readJsqr(img);
+        if (got === null || got === text) break;
+        console.error(
+          `stale render (${job.style}/${job.ec}/${job.scheme}), read "${got.slice(0, 40)}"; retry ${attempt + 1}`,
+        );
+      }
       const o = info.options || {};
       const fg = hexRGB(o.fg || "#000000");
       const bg = hexRGB(o.bg || "#ffffff");

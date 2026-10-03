@@ -8,7 +8,7 @@ import { test, expect } from "@playwright/test";
 import fs from "node:fs";
 import { PNG } from "pngjs";
 import { applyCondition, conditions } from "../tools/qr-scan-lab/sim.mjs";
-import { readers } from "../tools/qr-scan-lab/readers.mjs";
+import { readers, invertedReaders } from "../tools/qr-scan-lab/readers.mjs";
 
 const APP = "/?renderer=webgl2&adapt=off&profile=mid&labs=1";
 const TEXT = "https://ryanjosephkamp.github.io/splashery/";
@@ -53,7 +53,8 @@ test("every QR style at its defaults scans after simulated phone captures", asyn
     const base = conditions().find((c) => c.id === "front");
     for (const ck of CHECKS) {
       const cap = applyCondition(flat, modules, { ...base, yaw: ck.yaw, modulePx: ck.modulePx });
-      for (const [name, read] of Object.entries(readers)) {
+      // Neon is light on dark by design: it is read by readers that also try inverted codes.
+      for (const [name, read] of Object.entries(style === "neon" ? invertedReaders : readers)) {
         if (read(cap) !== TEXT) failures.push(`${style} ${ck.id} (${name})`);
       }
     }
