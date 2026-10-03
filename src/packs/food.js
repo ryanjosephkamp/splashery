@@ -3052,7 +3052,7 @@ export const RECIPES = {
           attach: { piece: 0, nodes: [4] },
           mass: 0.2,
           stiff: 0.5, // past its length, melted cheese stretches
-          breakAt: 1.7,
+          breakAt: 1.45,
           bend: 0,
           drag: 2,
           radius: 0.008,
