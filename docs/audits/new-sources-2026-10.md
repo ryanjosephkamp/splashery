@@ -1,23 +1,37 @@
 # Sources for science, imaging, maps, and hardware splats
 
-Checked October 3, 2026. Research by dotio. This is a source shortlist, not asset approval or a finished toy.
+Checked October 3, 2026. Research by dotio. This is a source shortlist, not asset approval or a
+finished toy.
 
 ## Ten-line summary
 
-1. Start with Vienna's mineral and meteorite scans: they have clear rights, textures, and direct downloads.
-2. Use the tiny geometric MRI phantom to test a volume converter before processing a large real scan.
-3. The walnut, gar, ant, bacterial, and insect-muscle datasets offer real measured interiors without human subjects.
-4. Use USGS terrain, GEBCO bathymetry, and Helsinki building geometry for small, grounded map scenes.
-5. Tides, weather forecasts, radar, satellite images, and ocean temperatures can add time-based play.
-6. Hardware designs need a separate visual check: a reusable board file can still contain banned logos and brand names.
-7. Keep CC BY-SA derivatives under their source license; tag NC outputs, and never fuse NC and BY-SA material into one asset.
-8. Custom terms stay in the “not on our list: Ryan decides” column; unknown, ND, paid, and personal-use-only files stay out.
-9. Sizes below describe source downloads, not browser payloads; each lane must crop, simplify, and measure its result.
-10. The tables contain 37 source entries, followed by ten ranked ideas; only this report is added to the repository.
+1. Start with Vienna's mineral and meteorite scans: they have clear rights, textures, and direct
+   downloads.
+2. Use the tiny geometric MRI phantom to test a volume converter before processing a large real
+   scan.
+3. The walnut, gar, ant, bacterial, and insect-muscle datasets offer real measured interiors without
+   human subjects.
+4. Use USGS terrain, GEBCO bathymetry, and Helsinki building geometry for small, grounded map
+   scenes.
+5. Tides, weather forecasts, radar, satellite images, and ocean temperatures can add time-based
+   play.
+6. Hardware designs need a separate visual check: a reusable board file can still contain banned
+   logos and brand names.
+7. Keep CC BY-SA derivatives under their source license; tag NC outputs, and never fuse NC and BY-SA
+   material into one asset.
+8. Custom terms stay in the “not on our list: Ryan decides” column; unknown, ND, paid, and
+   personal-use-only files stay out.
+9. Sizes below describe source downloads, not browser payloads; each lane must crop, simplify, and
+   measure its result.
+10. The tables contain 37 source entries, followed by ten ranked ideas; only this report is added to
+    the repository.
 
 ## A. Scientific captures
 
-These are eight measured-object sources and one clearly marked NASA alternative. Separate datasets from one museum count as separate source entries, not separate providers. A textured mesh converted to splats is a surface sample; it is not automatically a trained photoreal Gaussian capture. “Yes” below means the license fits the list, subject to the visual and credit checks at the end.
+These are eight measured-object sources and one clearly marked NASA alternative. Separate datasets
+from one museum count as separate source entries, not separate providers. A textured mesh converted
+to splats is a surface sample; it is not automatically a trained photoreal Gaussian capture. “Yes”
+below means the license fits the list, subject to the visual and credit checks at the end.
 
 | Name                                                          | Source and download route                                                                                                                                                                         | License: exact source quote and check date                                                                                                                                         | Allowed?                                                           | Not on our list: Ryan decides                                                                                                                                             | Format and source size                                                                                                                                                                                                                            | Free, documented download without account or key?                                                                                                                 | One toy idea and visual flags                                                                                                                | How hard |
 | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
@@ -33,9 +47,15 @@ These are eight measured-object sources and one clearly marked NASA alternative.
 
 ## B. Imaging volumes
 
-All eight selected entries are non-human specimens or non-human geometric/test phantoms. The synthetic “subj42” file in B5 is described as a ring, not a human scan. This report does not clear any human dataset; human anatomy still requires Ryan's approval, even if de-identified or openly licensed.
+All eight selected entries are non-human specimens or non-human geometric/test phantoms. The
+synthetic “subj42” file in B5 is described as a ring, not a human scan. This report does not clear
+any human dataset; human anatomy still requires Ryan's approval, even if de-identified or openly
+licensed.
 
-For the six Zenodo entries, the live public record API returned the quoted license ID and exact file sizes. Several human-readable record pages returned HTTP 403 or 429 in direct requests, or hid the license in the text reader. The successful record API supplies item-specific rights evidence; the linked CC deed explains those rights. No account or key was used.
+For the six Zenodo entries, the live public record API returned the quoted license ID and exact file
+sizes. Several human-readable record pages returned HTTP 403 or 429 in direct requests, or hid the
+license in the text reader. The successful record API supplies item-specific rights evidence; the
+linked CC deed explains those rights. No account or key was used.
 
 | Name                                                  | Source and download route                                                                                                                                                                                             | License: exact source quote and check date                                                                                                                                              | Allowed?                                                                         | Not on our list: Ryan decides | Format and source size                                                                                                                                                                                                                   | Free, documented download without account or key?                                                                                                                                                          | One toy idea and visual flags                                                                                                            | How hard |
 | ----------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | -------- |
@@ -50,7 +70,10 @@ For the six Zenodo entries, the live public record API returned the quoted licen
 
 ## C. Maps and the Earth
 
-Prefer small, dated snapshots that can ship as static assets. A moving display can replay measured or forecast time steps without a backend. Continuous refresh, whole-world streaming, and a live operational service are separate builds; this research does not start them. Public-domain status below applies to the named data, not agency seals, third-party basemaps, or every item on the host.
+Prefer small, dated snapshots that can ship as static assets. A moving display can replay measured
+or forecast time steps without a backend. Continuous refresh, whole-world streaming, and a live
+operational service are separate builds; this research does not start them. Public-domain status
+below applies to the named data, not agency seals, third-party basemaps, or every item on the host.
 
 | Name                                                | Source and download route                                                                                                                                                                                                                                                                                                                               | License: exact source quote and check date                                                                                                                                                 | Allowed?                                                                                                              | Not on our list: Ryan decides                                                                                                                          | Format and source size                                                                                                                                                                                                                                             | Free, documented download without account or key?                                                                                                                              | One toy idea and visual flags                                                                                                                                            | How hard |
 | --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------- |
@@ -69,7 +92,10 @@ Prefer small, dated snapshots that can ship as static assets. A moving display c
 
 ## D. Circuits and hardware
 
-Use geometry and board traces separately from silkscreen, labels, and photos. An open hardware license does not grant a trademark license. Keep truthful source names in required credits; omit brands from the toy name and visible toy geometry. A photograph is a 2D source unless real depth or layout data also exist.
+Use geometry and board traces separately from silkscreen, labels, and photos. An open hardware
+license does not grant a trademark license. Keep truthful source names in required credits; omit
+brands from the toy name and visible toy geometry. A photograph is a 2D source unless real depth or
+layout data also exist.
 
 | Name                                          | Source and download route                                                                                                                                                                                                    | License: exact source quote and check date                                                                                                                         | Allowed?                                                                                     | Not on our list: Ryan decides                                                                                                                                      | Format and source size                                                                                                                                               | Free, documented download without account or key?                                 | One toy idea and visual flags                                                                                                                                                         | How hard |
 | --------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
@@ -84,60 +110,150 @@ Use geometry and board traces separately from silkscreen, labels, and photos. An
 
 ## Top 10 toy ideas, best first
 
-Ranking favors clear rights, useful interaction, manageable source size, and a path that does not need paid compute. Each item has exactly two sentences; any named hold still applies.
+Ranking favors clear rights, useful interaction, manageable source size, and a path that does not
+need paid compute. Each item has exactly two sentences; any named hold still applies.
 
-1. **Mineral light table (A2).** Turn the real aragonite under a movable light and inspect its surface beside a scale bar. The small textured-mesh route is a practical first build, with NC credit and a clear note that baked texture lighting may limit relighting.
-2. **Tiny scan lab (B5).** Move a slice through three geometric shapes and compare the slice with a splat view. This tiny, openly licensed synthetic dataset can expose axis, spacing, opacity, and missing-value bugs before a lane tackles gigabytes.
-3. **Meteorite magnifier (A3).** Rotate the Hraschina meteorite and zoom in on its surface pits with a measurement cursor. Keep the real scan rigid and explain that the capture records the exterior, not a measured cross-section.
-4. **Inside a walnut (B1).** Slide a cutting plane through a reconstructed walnut to reveal shell, kernel, and air gaps. A cropped, reduced volume can support a satisfying real-data toy without training a new model or pretending that raw X-ray projections are already 3D.
-5. **Key-switch workbench (D4, optionally D3).** Separate a switch into verified parts and press it to show how those parts move. Start with the tiny CC0 STEP subset, use generic visual labels, and keep any added BY-SA component in a separately credited asset.
-6. **Tide clock (C3).** Scrub one day's predicted tide beside a simple pier and read the height and UTC time. One small JSON snapshot supports the interaction, while the station and datum prevent an attractive but misleading water-level display.
-7. **Chip-map loupe (D5).** Zoom across the die photo and tap the regions labeled in the source. Keep it explicitly a flat measured image with explanatory overlays, preserve uncertain labels, and do not invent transistor behavior or hidden layers.
-8. **City sun box (C5).** Move the sun over one geometry-only block of Kalasatama and explore roof shapes and shadows. A small untextured crop avoids most logo and face risks, but its heights, coordinate system, and snapshot date still need validation.
-9. **Ocean-floor reveal (C2, after Ryan's terms decision).** Lower a display water plane to reveal a cropped trench and seamount scene. Show which areas rest on measured versus inferred source data, and label the animation as an illustration rather than a physical drainage model.
-10. **Clouds over Earth (C11, with C7 for optional outlines).** Replay a short sequence of dated Terra MODIS images on a globe or terrain patch. Keep acquisition gaps visible and treat the photographs as surface imagery, not measured 3D cloud geometry.
+1. **Mineral light table (A2).** Turn the real aragonite under a movable light and inspect its
+   surface beside a scale bar. The small textured-mesh route is a practical first build, with NC
+   credit and a clear note that baked texture lighting may limit relighting.
+2. **Tiny scan lab (B5).** Move a slice through three geometric shapes and compare the slice with a
+   splat view. This tiny, openly licensed synthetic dataset can expose axis, spacing, opacity, and
+   missing-value bugs before a lane tackles gigabytes.
+3. **Meteorite magnifier (A3).** Rotate the Hraschina meteorite and zoom in on its surface pits with
+   a measurement cursor. Keep the real scan rigid and explain that the capture records the exterior,
+   not a measured cross-section.
+4. **Inside a walnut (B1).** Slide a cutting plane through a reconstructed walnut to reveal shell,
+   kernel, and air gaps. A cropped, reduced volume can support a satisfying real-data toy without
+   training a new model or pretending that raw X-ray projections are already 3D.
+5. **Key-switch workbench (D4, optionally D3).** Separate a switch into verified parts and press it
+   to show how those parts move. Start with the tiny CC0 STEP subset, use generic visual labels, and
+   keep any added BY-SA component in a separately credited asset.
+6. **Tide clock (C3).** Scrub one day's predicted tide beside a simple pier and read the height and
+   UTC time. One small JSON snapshot supports the interaction, while the station and datum prevent
+   an attractive but misleading water-level display.
+7. **Chip-map loupe (D5).** Zoom across the die photo and tap the regions labeled in the source.
+   Keep it explicitly a flat measured image with explanatory overlays, preserve uncertain labels,
+   and do not invent transistor behavior or hidden layers.
+8. **City sun box (C5).** Move the sun over one geometry-only block of Kalasatama and explore roof
+   shapes and shadows. A small untextured crop avoids most logo and face risks, but its heights,
+   coordinate system, and snapshot date still need validation.
+9. **Ocean-floor reveal (C2, after Ryan's terms decision).** Lower a display water plane to reveal a
+   cropped trench and seamount scene. Show which areas rest on measured versus inferred source data,
+   and label the animation as an illustration rather than a physical drainage model.
+10. **Clouds over Earth (C11, with C7 for optional outlines).** Replay a short sequence of dated
+    Terra MODIS images on a globe or terrain patch. Keep acquisition gaps visible and treat the
+    photographs as surface imagery, not measured 3D cloud geometry.
 
 ## How a volume can become splats
 
 This is a proposed build path, not a tested converter or a claim of medical accuracy.
 
-1. **Read the right object.** A TIFF stack, NIfTI image, or MRC map can hold a reconstructed volume; a sinogram, raw MRI k-space file, or set of X-ray projections first needs a documented reconstruction. B1 supplies reconstructions; B4 still needs that extra step.
-2. **Keep physical meaning.** Read axis order, voxel spacing, orientation, units, time, and missing-data markers before sampling. In NIfTI, use the affine; in TIFF, recover the published spacing rather than assuming square cubes.
-3. **Choose surface or volume.** For a solid shell, extract a selected threshold surface and sample its mesh into small surface splats. For a see-through volume, select occupied voxels or small voxel groups and derive centers, scales, colors, and opacity from an explicit transfer function.
-4. **Avoid false anatomy.** CT intensity, MRI signal, and electron-microscope contrast mean different things. A threshold is not a validated tissue label, false color is not natural color, and a dim voxel is not automatically empty space.
-5. **Reduce before display.** Crop to one object, remove confirmed background, downsample with a stated rule, and create low/high tiers. Do not allocate one splat for every voxel of a large scan or send a multi-gigabyte archive to a phone.
-6. **Compare against the source.** Check three orthogonal slices, known dimensions, clipping planes, opacity, and front/back order. Standard visual splat alpha blending is not a calibrated X-ray or MRI forward model; retain a slice view as the reference.
-7. **Animate honestly.** A slice slider, separate segmented parts, or a real time series can move. A single static scan does not justify fabricated biological motion, and this route is not a trained dynamic 4D capture.
+1. **Read the right object.** A TIFF stack, NIfTI image, or MRC map can hold a reconstructed volume;
+   a sinogram, raw MRI k-space file, or set of X-ray projections first needs a documented
+   reconstruction. B1 supplies reconstructions; B4 still needs that extra step.
+2. **Keep physical meaning.** Read axis order, voxel spacing, orientation, units, time, and
+   missing-data markers before sampling. In NIfTI, use the affine; in TIFF, recover the published
+   spacing rather than assuming square cubes.
+3. **Choose surface or volume.** For a solid shell, extract a selected threshold surface and sample
+   its mesh into small surface splats. For a see-through volume, select occupied voxels or small
+   voxel groups and derive centers, scales, colors, and opacity from an explicit transfer function.
+4. **Avoid false anatomy.** CT intensity, MRI signal, and electron-microscope contrast mean
+   different things. A threshold is not a validated tissue label, false color is not natural color,
+   and a dim voxel is not automatically empty space.
+5. **Reduce before display.** Crop to one object, remove confirmed background, downsample with a
+   stated rule, and create low/high tiers. Do not allocate one splat for every voxel of a large scan
+   or send a multi-gigabyte archive to a phone.
+6. **Compare against the source.** Check three orthogonal slices, known dimensions, clipping planes,
+   opacity, and front/back order. Standard visual splat alpha blending is not a calibrated X-ray or
+   MRI forward model; retain a slice view as the reference.
+7. **Animate honestly.** A slice slider, separate segmented parts, or a real time series can move. A
+   single static scan does not justify fabricated biological motion, and this route is not a trained
+   dynamic 4D capture.
 
-For a formal reference, the [original 3D Gaussian Splatting project](https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/) describes a method fitted from calibrated images, not a general-purpose quantitative volume viewer. Its implementation license must be checked separately before any use; this report neither imports nor approves that code.
+For a formal reference, the
+[original 3D Gaussian Splatting project](https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/)
+describes a method fitted from calibrated images, not a general-purpose quantitative volume viewer.
+Its implementation license must be checked separately before any use; this report neither imports
+nor approves that code.
 
 ## Rights, evidence, and handoff rules
 
-- **This is an allowlist check, not a legal opinion.** NC works fit Ryan's project list but are not unrestricted open data: they cannot simply stay in a monetized version. Unknown rights are a stop, never implied permission.
-- **Apply current rules.** Read [CLAUDE.md](../../CLAUDE.md), [Dot jobs](dot-jobs-2026-10.md), the [credits audit](credits-audit-2026-10.md), and [BACKLOG.md](../BACKLOG.md). Older backlog wording that excludes all BY-SA sources is superseded by the current Ground rules and this assignment; anatomy still has a separate gate.
-- **Keep notices tied to outputs.** Save source URL, item/DOI, author, exact license/version, check date, downloaded-file hash, conversion settings, and output hash. Later builds need matching entries in CREDITS.md, the asset/model manifest, and the visible in-app credit, including a plain change notice.
-- **Share-alike and NC stay per asset.** Keep applicable licenses on converted splats and thumbnails; add `nc: true` for NC material and verify the NC inventory command. Never combine NC and BY-SA material into one derived file; side-by-side separately credited assets are different.
-- **No faces, logos, or brand labels in toys.** Before importing a scan, check geometry, texture sheets, alternate views, labels, and bases. Required source attribution belongs in credits; a CC license does not excuse a logo in the toy itself. The die image received a visual check, while most other full asset payloads did not.
-- **Human approval is explicit.** Do not extend the non-human shortlist to patients, human remains, face-bearing scans, or human-derived anatomy without Ryan's approval. NC or BY-SA anatomy also needs the existing Ground rules approval, including the non-human dog cranium in A5.
-- **Data is not the host's code.** A website footer, open-source viewer, paper license, or software license does not clear a dataset. B8's data is CC BY 4.0 while its supplied software has different terms; D4's code and general images do not inherit the STEP subset's CC0 dedication.
-- **Map assets need their metadata.** Keep horizontal and vertical coordinate systems, height datums, units, forecast issue/valid times, and nodata. A coarse DEM, uncertain building height, interpolated sea floor, or missing radar beam must not look like a precise measurement.
-- **Download evidence is bounded.** “Yes” describes a documented anonymous route, not an assertion that every byte was downloaded. HEAD proves a file response and advertised size, not file integrity; API size is metadata; only the small die image, gear STL, tide sample, quake sample, and OSM extract were fully fetched for their stated byte counts. The tree-core and walnut ZIPs received small byte-range directory checks.
-- **Size labels differ.** Exact byte counts are given where measured or supplied by an API. Preserve the museum's published MB labels rather than silently equating them with decimal megabytes; HTTP and catalog sizes can also describe different forms, as C5 shows.
+- **This is an allowlist check, not a legal opinion.** NC works fit Ryan's project list but are not
+  unrestricted open data: they cannot simply stay in a monetized version. Unknown rights are a stop,
+  never implied permission.
+- **Apply current rules.** Read [CLAUDE.md](../../CLAUDE.md), [Dot jobs](dot-jobs-2026-10.md), the
+  [credits audit](credits-audit-2026-10.md), and [BACKLOG.md](../BACKLOG.md). Older backlog wording
+  that excludes all BY-SA sources is superseded by the current Ground rules and this assignment;
+  anatomy still has a separate gate.
+- **Keep notices tied to outputs.** Save source URL, item/DOI, author, exact license/version, check
+  date, downloaded-file hash, conversion settings, and output hash. Later builds need matching
+  entries in CREDITS.md, the asset/model manifest, and the visible in-app credit, including a plain
+  change notice.
+- **Share-alike and NC stay per asset.** Keep applicable licenses on converted splats and
+  thumbnails; add `nc: true` for NC material and verify the NC inventory command. Never combine NC
+  and BY-SA material into one derived file; side-by-side separately credited assets are different.
+- **No faces, logos, or brand labels in toys.** Before importing a scan, check geometry, texture
+  sheets, alternate views, labels, and bases. Required source attribution belongs in credits; a CC
+  license does not excuse a logo in the toy itself. The die image received a visual check, while
+  most other full asset payloads did not.
+- **Human approval is explicit.** Do not extend the non-human shortlist to patients, human remains,
+  face-bearing scans, or human-derived anatomy without Ryan's approval. NC or BY-SA anatomy also
+  needs the existing Ground rules approval, including the non-human dog cranium in A5.
+- **Data is not the host's code.** A website footer, open-source viewer, paper license, or software
+  license does not clear a dataset. B8's data is CC BY 4.0 while its supplied software has different
+  terms; D4's code and general images do not inherit the STEP subset's CC0 dedication.
+- **Map assets need their metadata.** Keep horizontal and vertical coordinate systems, height
+  datums, units, forecast issue/valid times, and nodata. A coarse DEM, uncertain building height,
+  interpolated sea floor, or missing radar beam must not look like a precise measurement.
+- **Download evidence is bounded.** “Yes” describes a documented anonymous route, not an assertion
+  that every byte was downloaded. HEAD proves a file response and advertised size, not file
+  integrity; API size is metadata; only the small die image, gear STL, tide sample, quake sample,
+  and OSM extract were fully fetched for their stated byte counts. The tree-core and walnut ZIPs
+  received small byte-range directory checks.
+- **Size labels differ.** Exact byte counts are given where measured or supplied by an API. Preserve
+  the museum's published MB labels rather than silently equating them with decimal megabytes; HTTP
+  and catalog sizes can also describe different forms, as C5 shows.
 
 ### Sources held back rather than silently cleared
 
-- **MorphoSource:** its [terms URL](https://www.morphosource.org/terms) did not expose usable terms in this environment. Item-specific license, download approval, account requirements, and bytes remain unresolved; it is not counted among the cleared entries and no model was taken from it.
-- **Visual6502:** the [SIGGRAPH presentation](https://visual6502.org/docs/6502_in_action_14_web.pdf) says “Attribution-NonCommercial-NoDerivs 3.0 Unported.” That presentation is excluded because ND forbids the requested adaptation; do not infer a license for separate die photos or circuit data from it.
-- **Generic NASA or museum catalogs:** do not substitute the site's general openness for item-specific rights. A9 remains a search route under review, and the eight measured-object entries do not depend on it.
-- **Human collections:** no human scan was selected. A permissive license or anonymization claim alone would not satisfy Ryan's human-anatomy approval requirement.
-- **BeagleBone:** the documentation shows CC BY-SA terms plus separate conditions, but a specific design-file release was not cleared here. It was not needed to fill D's eight stronger entries.
+- **MorphoSource:** its [terms URL](https://www.morphosource.org/terms) did not expose usable terms
+  in this environment. Item-specific license, download approval, account requirements, and bytes
+  remain unresolved; it is not counted among the cleared entries and no model was taken from it.
+- **Visual6502:** the [SIGGRAPH presentation](https://visual6502.org/docs/6502_in_action_14_web.pdf)
+  says “Attribution-NonCommercial-NoDerivs 3.0 Unported.” That presentation is excluded because ND
+  forbids the requested adaptation; do not infer a license for separate die photos or circuit data
+  from it.
+- **Generic NASA or museum catalogs:** do not substitute the site's general openness for
+  item-specific rights. A9 remains a search route under review, and the eight measured-object
+  entries do not depend on it.
+- **Human collections:** no human scan was selected. A permissive license or anonymization claim
+  alone would not satisfy Ryan's human-anatomy approval requirement.
+- **BeagleBone:** the documentation shows CC BY-SA terms plus separate conditions, but a specific
+  design-file release was not cleared here. It was not needed to fill D's eight stronger entries.
 
 ## Verification and limits
 
-- Checked 37 source entries: A = 9, B = 8, C = 12, D = 8. Every row has a rights quote, a source link, a check date, a format/size statement, an account-free access assessment, a proposed toy, and an effort label.
-- Source checks used direct public HTTP pages, raw license files, dataset APIs, and selected HEAD/GET/range requests on October 3, 2026. USGS's general copyright page was readable through the web reader but blocked direct HTTP; the 3DEP rights statement was independently read in a live tile XML.
-- Smithsonian's object rights were readable, but its embedded download service rejected the request. Sketchfab's item licenses were readable, but no account-free archive download was established. These limits are retained rather than treated as successful asset retrieval.
-- Effort labels are relative engineering judgments: **small** is a bounded converter/viewer sample, **medium** adds cleanup or a new importer, and **large** adds reconstruction, specialist formats, or a substantial time/volume pipeline. They are not promised durations, phone-performance measurements, or compute estimates.
-- All source sizes refer to acquisition files. No source was converted to splats, no full toy was rendered, and no phone transfer, appearance, or performance result is claimed.
-- This report is the only intended repository change. Formatting, American English, structure, and changed-file scope are checked for the report; runtime Playwright and full-repository formatting are not claimed for this source-only research.
-- The work was performed directly by dotio using its own cloud tools and the connected GitHub actions. No Work or Codex task was created or delegated. The [official launch usage notice](https://help.openai.com/en/articles/6825453-chatgpt-release-notes) was the basis for proceeding during the temporary dot-usage exemption; this is not a claim of unlimited future free work or an account-level billing measurement.
+- Checked 37 source entries: A = 9, B = 8, C = 12, D = 8. Every row has a rights quote, a source
+  link, a check date, a format/size statement, an account-free access assessment, a proposed toy,
+  and an effort label.
+- Source checks used direct public HTTP pages, raw license files, dataset APIs, and selected
+  HEAD/GET/range requests on October 3, 2026. USGS's general copyright page was readable through the
+  web reader but blocked direct HTTP; the 3DEP rights statement was independently read in a live
+  tile XML.
+- Smithsonian's object rights were readable, but its embedded download service rejected the request.
+  Sketchfab's item licenses were readable, but no account-free archive download was established.
+  These limits are retained rather than treated as successful asset retrieval.
+- Effort labels are relative engineering judgments: **small** is a bounded converter/viewer sample,
+  **medium** adds cleanup or a new importer, and **large** adds reconstruction, specialist formats,
+  or a substantial time/volume pipeline. They are not promised durations, phone-performance
+  measurements, or compute estimates.
+- All source sizes refer to acquisition files. No source was converted to splats, no full toy was
+  rendered, and no phone transfer, appearance, or performance result is claimed.
+- This report is the only intended repository change. Formatting, American English, structure, and
+  changed-file scope are checked for the report; runtime Playwright and full-repository formatting
+  are not claimed for this source-only research.
+- The work was performed directly by dotio using its own cloud tools and the connected GitHub
+  actions. No Work or Codex task was created or delegated. The
+  [official launch usage notice](https://help.openai.com/en/articles/6825453-chatgpt-release-notes)
+  was the basis for proceeding during the temporary dot-usage exemption; this is not a claim of
+  unlimited future free work or an account-level billing measurement.
