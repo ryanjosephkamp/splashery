@@ -11,7 +11,13 @@ import {
   quatFromTo,
   quatRotate,
 } from "../kit.js";
-import { evenBox, evenCylinder, evenEllipsoid, evenTube } from "./even.js";
+import {
+  evenBox,
+  evenCylinder,
+  evenEllipsoid,
+  evenTorus as evenTorusOut,
+  evenTube,
+} from "./even.js";
 import { inked } from "../font.js";
 
 const easeInOut = (x) => (x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2);
@@ -602,25 +608,31 @@ export const RECIPES = {
       const gold = "#d4a63c";
       const planks = (c) => {
         const band = Math.abs((((c.p[1] + 1) * 7.5) % 1) - 0.5) > 0.46;
-        const grain = c.fbm(c.p[0] * 3, c.p[1] * 30, c.p[2] * 3);
-        return shade(mix(wood, shade(wood, 0.6), 0.5 + 0.5 * grain), band ? 0.55 : 1);
+        const grain = c.fbm(c.p[0] * 2, c.p[1] * 12, c.p[2] * 2);
+        return shade(mix(wood, shade(wood, 0.72), 0.5 + 0.35 * grain), band ? 0.55 : 1);
       };
       // The body: an open-topped box (the top face is left out).
-      k.add(k.box(W, H, D), {
+      k.add(evenBox(W, H, D), {
+        even: true,
+        opacity: 1,
+        jitter: 0.012,
         pos: [0, -0.2, 0],
         flat: 0.2,
         color: (c) => (c.s.face === 2 ? null : planks(c)),
       });
       // Metal bands and corners.
       for (const x of [-0.36, 0.36]) {
-        k.add(k.box(0.08, H + 0.02, D + 0.02), {
+        k.add(evenBox(0.08, H + 0.02, D + 0.02), {
+          even: true,
+          opacity: 1,
+          jitter: 0.012,
           pos: [x, -0.2, 0],
           flat: 0.2,
           weight: 1.5,
           color: (c) =>
             c.s.face === 2
               ? null
-              : mix(gold, "#8a6a1f", 0.3 + 0.3 * c.fbm(c.p[0] * 20, c.p[1] * 20, 0)),
+              : lit(mix(gold, "#8a6a1f", 0.25 + 0.12 * c.fbm(c.p[0] * 6, c.p[1] * 6, 0)), c.n),
         });
       }
       // The lid: a half cylinder along X, hinged at the back edge.
@@ -633,7 +645,7 @@ export const RECIPES = {
         },
         { grid: 48, flip: true },
       );
-      k.add(arc, { part: lid, flat: 0.2, color: planks });
+      k.add(arc, { even: true, opacity: 1, jitter: 0.012, part: lid, flat: 0.2, color: planks });
       for (const x of [-0.36, 0.36]) {
         const strap = k.param(
           (u, v) => {
@@ -643,7 +655,15 @@ export const RECIPES = {
           },
           { grid: 24, flip: true },
         );
-        k.add(strap, { part: lid, flat: 0.2, weight: 1.5, color: gold });
+        k.add(strap, {
+          even: true,
+          opacity: 1,
+          jitter: 0.012,
+          part: lid,
+          flat: 0.2,
+          weight: 1.5,
+          color: gold,
+        });
       }
       for (const side of [-1, 1]) {
         const end = k.param(
@@ -653,24 +673,33 @@ export const RECIPES = {
           },
           { grid: 24 },
         );
-        k.add(end, { part: lid, flat: 0.2, color: planks });
+        k.add(end, { even: true, opacity: 1, jitter: 0.012, part: lid, flat: 0.2, color: planks });
       }
       // The lid's flat underside, so the open lid is not hollow.
-      k.add(k.box(W, 0.01, D), {
+      k.add(evenBox(W, 0.01, D), {
+        even: true,
+        opacity: 1,
+        jitter: 0.012,
         pos: [0, top + 0.005, 0],
         part: lid,
         flat: 0.2,
         color: shade(wood, 0.7),
       });
       // The lock plate on the front of the lid.
-      k.add(k.box(0.16, 0.2, 0.03), {
+      k.add(evenBox(0.16, 0.2, 0.03), {
+        even: true,
+        opacity: 1,
+        jitter: 0.012,
         pos: [0, top - 0.02, D / 2 + 0.01],
         part: lid,
         flat: 0.2,
         weight: 2,
         color: gold,
       });
-      k.add(k.box(0.12, 0.08, 0.03), {
+      k.add(evenBox(0.12, 0.08, 0.03), {
+        even: true,
+        opacity: 1,
+        jitter: 0.012,
         pos: [0, top - 0.16, D / 2 + 0.01],
         flat: 0.2,
         weight: 2,
@@ -716,8 +745,21 @@ export const RECIPES = {
     options: [{ key: "color", label: "Cover", type: "color", default: "#7a2432" }],
     controls: [{ key: "open", label: "Open", type: "toggle", default: 1, ease: 2 }],
     action: { key: "open", label: "Open or close" },
-    drive(t, c, out) {
+    drive(t, c, out, info) {
       const o = c.open;
+      // Splats sort in the pose they were built in (the book closed), so a
+      // turned leaf would draw its paper over its words, and the turned
+      // cover and leaves over the pages they lie on. They are sorted where
+      // they stand on the first frame and every hundredth of a turn, and
+      // again on the frame after (the sort uses the pose the frame starts
+      // with) (lane Sharpness A).
+      const d = info?.data;
+      const slot = Math.round(o * 100);
+      if (d && (slot !== d.sortSlot || d.sortAgain)) {
+        d.sortAgain = slot !== d.sortSlot;
+        d.sortSlot = slot;
+        out.resortPose = true;
+      }
       const lift = [0, 0, 0, 0, 0, 0, 0, 0.012, 0.03, 0.06];
       const cover = Math.PI * ease3(window01(o, 0, 0.42));
       out.parts.cover = { angle: cover };
@@ -744,6 +786,7 @@ export const RECIPES = {
     },
     build(k, o) {
       const { W, H, ct, leaves, lt, T } = BOOK;
+      k.data = {}; // drive() keeps its sort state here
       const cover = o.color;
       const gold = "#d9b45a";
       const paper = "#f6efdf";
@@ -784,7 +827,7 @@ export const RECIPES = {
         return inked(page.lines, s, t);
       };
       const ink = "#2f2a26";
-      const pageCol = (c, x, z, seed, picture = false, flipped = false) => {
+      const pageCol = (c, x, z, seed, picture = false, flipped = false, dots = false) => {
         if (
           picture &&
           Math.abs(x) > 0.18 &&
@@ -802,7 +845,9 @@ export const RECIPES = {
           const edge = Math.min(u, 1 - u, v, 1 - v);
           return keep(edge < 0.02 ? "#5b4a3a" : col);
         }
-        if (text(x, z, seed, flipped, picture)) return keep(ink, 0.8);
+        // Pages seen only mid-turn have few, large splats: their words are a
+        // soft gray, so they read as lines of print rather than black blots.
+        if (!dots && text(x, z, seed, flipped, picture)) return keep(mix(ink, paper, 0.45), 0.8);
         // A turned page is lit as it lies once turned over.
         const n = flipped ? [-c.n[0], -c.n[1], c.n[2]] : c.n;
         return lit(shade(paper, 0.985 + 0.015 * c.noise(x * 12, z * 12, seed)), n, {
@@ -815,7 +860,7 @@ export const RECIPES = {
       k.add(roundBox(W, ct, H, 0.012), {
         pos: [W / 2, ct / 2, 0],
         flat: 0.15,
-        weight: 1.6,
+        weight: 2.4,
         even: true,
         jitter: 0.01,
         size: 0.8,
@@ -849,7 +894,7 @@ export const RECIPES = {
         pos: [W / 2, T - ct / 2, 0],
         part: coverPart,
         flat: 0.15,
-        weight: 1.6,
+        weight: 4,
         even: true,
         jitter: 0.01,
         size: 0.8,
@@ -900,10 +945,10 @@ export const RECIPES = {
       k.add(evenBox(PW, block, PH), {
         pos: [PW / 2 + 0.005, ct + block / 2, 0],
         flat: 0.15,
-        weight: 1.8,
+        weight: 2.4,
         even: true,
         jitter: 0,
-        size: 1.1,
+        size: 1,
         color: (c) => {
           if (c.s.face === 2 || c.s.face === 3) return null;
           if (c.s.face === 1) return shade(paper, 0.8);
@@ -917,8 +962,43 @@ export const RECIPES = {
         even: true,
         jitter: 0.01,
         size: 1.25,
-        color: (c) => pageCol(c, c.p[0], c.p[2], 3, true),
+        color: (c) => pageCol(c, c.p[0], c.p[2], 3, true, false, true),
       });
+      // The words on the two pages seen while the book lies open (lane
+      // Sharpness A): every font pixel is a 2 x 2 grid of small ink dots
+      // laid exactly on it, just off the paper, like the laptop's keys
+      // (random splats on the page blurred the letters).
+      const inkDots = (seed, picture, flipped, y, part) => {
+        const page = pageText(seed, picture);
+        const dots = [];
+        page.lines.forEach((line, r) => {
+          for (let s0 = 0; s0 < 6 * line.length; s0++)
+            for (let gy = 0; gy < 7; gy++) {
+              const t0 = r * 10 + gy;
+              if (!inked(page.lines, s0 + 0.5, t0 + 0.5)) continue;
+              for (let a2 = 0; a2 < 2; a2++)
+                for (let b2 = 0; b2 < 2; b2++) {
+                  const sp = (s0 + (a2 + 0.5) / 2) * PX;
+                  const ax = flipped ? W - margin - sp : margin + sp;
+                  const z = (t0 + page.skip * 10 + (b2 + 0.5) / 2) * PX - H / 2 + 0.12;
+                  dots.push([ax, y, z]);
+                }
+            }
+        });
+        const r = PX * 0.6;
+        k.cloud({ count: dots.length, pattern: false, part }, (rand, j, n) => {
+          const d = dots[Math.floor((j * dots.length) / n)];
+          const m = Math.sqrt(Math.max(1, dots.length / n));
+          return {
+            p: d,
+            scales: [r * m, r * 0.15, r * m],
+            quat: [0, 0, 0, 1],
+            color: ink,
+            opacity: 1,
+          };
+        });
+      };
+      inkDots(3, true, false, ct + block + 0.0012, undefined);
       // Leaves that flip one after another.
       for (let i = 0; i < leaves; i++) {
         const part = k.part("leaf" + i, { pivot, axis: [0, 0, 1] });
@@ -948,8 +1028,10 @@ export const RECIPES = {
             even: true,
             jitter: 0.01,
             size: 1.25,
-            color: (c) => pageCol(c, c.p[0], c.p[2], i * 2 + (up < 0 ? 1 : 0), false, up < 0),
+            color: (c) =>
+              pageCol(c, c.p[0], c.p[2], i * 2 + (up < 0 ? 1 : 0), false, up < 0, shown),
           });
+          if (shown) inkDots(i * 2 + 1, false, true, y + up * lt * 0.4 - 0.0012, part);
         }
       }
       // The left pile's edges, shown once the leaves under the top one hide.
@@ -1277,18 +1359,25 @@ export const RECIPES = {
       const H = 0.5;
       const D = 0.76;
       const top = H;
+      // Polished wood like the Enigma machine's case (lane Sharpness A):
+      // broad, soft grain bands and a sheen, no fine noise.
       const grain = (c) => {
-        const g = c.fbm(c.p[0] * 3, c.p[1] * 26, c.p[2] * 3);
-        return lit(mix(wood, shade(wood, 0.62), 0.5 + 0.45 * g), c.n, {
-          amb: 0.66,
-          dif: 0.42,
-          spec: 0.35,
-        });
+        const g =
+          0.5 +
+          0.5 * Math.sin(c.p[1] * 22 + c.p[2] * 9 + c.p[0] * 4 + Math.sin(c.p[0] * 3.1) * 1.4);
+        return keep(
+          lit(mix(wood, shade(wood, 0.84), g), c.n, {
+            amb: 0.66,
+            dif: 0.42,
+            spec: 0.3,
+          }),
+        );
       };
       k.add(roundBox(W, H, D, 0.03, { top: false, bottom: false, even2d: true }), {
         even: true,
         opacity: 1,
-        jitter: 0.015,
+        jitter: 0.008,
+        weight: 1.8,
         pos: [0, H / 2, 0],
         flat: 0.15,
         color: (c) => {
@@ -1304,7 +1393,7 @@ export const RECIPES = {
         jitter: 0.015,
         pos: [0, H / 2 + 0.03, 0],
         flat: 0.3,
-        color: (c) => (c.s.face === 2 ? null : shade(velvet, 0.7 + 0.25 * c.rand())),
+        color: (c) => (c.s.face === 2 ? null : shade(velvet, 0.78 + 0.08 * c.rand())),
       });
       // The lid with a mirror inside, hinged at the back. Its top is a part
       // of its own that hides while the lid stands open, so the mirror shows
@@ -1314,7 +1403,8 @@ export const RECIPES = {
       k.add(roundBox(W, 0.1, D, 0.03, { top: false, even2d: true }), {
         even: true,
         opacity: 1,
-        jitter: 0.015,
+        jitter: 0.008,
+        weight: 1.8,
         pos: [0, top + 0.05, 0],
         part: lid,
         flat: 0.15,
@@ -1329,8 +1419,10 @@ export const RECIPES = {
         },
       });
       k.add(quad(W - 0.06, D - 0.06), {
+        even: true,
         opacity: 1,
-        jitter: 0.015,
+        jitter: 0.008,
+        weight: 1.8,
         pos: [0, top + 0.1, 0],
         part: lidTop,
         flat: 0.15,
@@ -1769,12 +1861,18 @@ export const RECIPES = {
           spec: 0.18,
         });
       };
-      k.add(roundBox(S, H, S, 0.025, { top: false, bottom: false }), {
+      k.add(roundBox(S, H, S, 0.025, { top: false, bottom: false, even2d: true }), {
+        even: true,
+        opacity: 1,
+        jitter: 0.01,
         pos: [0, H / 2, 0],
         flat: 0.15,
         color: (c) => wrap(c, false),
       });
-      k.add(k.box(S - 0.03, H - 0.02, S - 0.03), {
+      k.add(evenBox(S - 0.03, H - 0.02, S - 0.03), {
+        even: true,
+        opacity: 1,
+        jitter: 0.01,
         pos: [0, H / 2 + 0.01, 0],
         flat: 0.2,
         color: (c) => (c.s.face === 2 ? null : shade(paper, 0.45)),
@@ -1782,7 +1880,10 @@ export const RECIPES = {
       // The lid, with the bow on top.
       const lidY = H + 0.03;
       const lid = k.part("lid", { pivot: [0, lidY, -S / 2], axis: [1, 0, 0] });
-      k.add(roundBox(S + 0.07, 0.16, S + 0.07, 0.03), {
+      k.add(roundBox(S + 0.07, 0.16, S + 0.07, 0.03, { even2d: true }), {
+        even: true,
+        opacity: 1,
+        jitter: 0.01,
         pos: [0, lidY, 0],
         part: lid,
         flat: 0.15,
@@ -1790,7 +1891,10 @@ export const RECIPES = {
       });
       const bowY = lidY + 0.08;
       for (const s of [-1, 1]) {
-        k.add(k.torus(0.13, 0.04), {
+        k.add(evenTorusOut(k, 0.13, 0.04), {
+          even: true,
+          opacity: 1,
+          jitter: 0.01,
           pos: [s * 0.13, bowY + 0.1, 0],
           rot: [90, 0, s * -30],
           scale: [1.15, 1, 0.7],
@@ -1799,7 +1903,10 @@ export const RECIPES = {
           weight: 1.4,
           color: (c) => lit(ribbon, c.n, { amb: 0.66, dif: 0.42, spec: 0.5, pow: 20 }),
         });
-        k.add(k.box(0.09, 0.012, 0.3), {
+        k.add(evenBox(0.09, 0.012, 0.3), {
+          even: true,
+          opacity: 1,
+          jitter: 0.01,
           pos: [s * 0.06, bowY + 0.005, 0.2],
           rot: [0, s * 25, 0],
           part: lid,
@@ -1809,6 +1916,9 @@ export const RECIPES = {
         });
       }
       k.add(k.sphere(0.06), {
+        even: true,
+        opacity: 1,
+        jitter: 0.01,
         pos: [0, bowY + 0.04, 0],
         part: lid,
         weight: 2,

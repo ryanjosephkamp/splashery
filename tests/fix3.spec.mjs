@@ -27,10 +27,20 @@ test("every piece of the bananas rides on a banana, with no crown left behind", 
   const { KINDS } = await import("../src/effects.js");
   const { anim, count } = kit.buf;
   // Nothing is left standing still when the bunch pulls apart: every
-  // splat belongs to one of the bananas' 21 pieces.
+  // splat belongs to one of the bananas' pieces (since lane Fix7, 14 each:
+  // the stub, the fruit, and an outer and inner peel on each strip's two
+  // hinges).
+  const pieces = new Set(
+    kit.data.bananas.flatMap((bn) => [
+      bn.body,
+      bn.fruit,
+      ...bn.strips.flatMap((st) => [st.a, st.b, st.ia, st.ib]),
+    ]),
+  );
+  expect(pieces.size).toBe(kit.data.bananas.length * 14);
   for (let i = 0; i < count; i++) {
     expect(anim[i * 4 + 1]).toBe(KINDS.token);
-    expect(anim[i * 4 + 2]).toBeLessThan(kit.data.bananas.length * 7);
+    expect(pieces.has(anim[i * 4 + 2])).toBe(true);
   }
 });
 

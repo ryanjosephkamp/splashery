@@ -1618,10 +1618,19 @@ export class Player {
 
   // UI r4: fires the taps a recipe's drag returned, in order, as taps on the
   // toy would (each sounds and moves its key); `dragFired` tells the app the
-  // drag played, so letting go is not also a tap.
+  // drag played, so letting go is not also a tap. Lane Sharpness B: a drag
+  // may also set one of the toy's sliders ({ control, value }, 0..1), as a
+  // knob dragged along the toy's own slider; the panel's slider follows
+  // ("controls").
   fireDrag(taps) {
     if (!taps) return;
     for (const t of Array.isArray(taps) ? taps : [taps]) {
+      if (t?.control && this.motion.controlDef(t.control)?.type === "slider") {
+        this.setControl(t.control, Math.min(1, Math.max(0, Number(t.value) || 0)));
+        this.dragFired = true;
+        this.emit("controls", this.motion.targets);
+        continue;
+      }
       if (!t?.key || !this.motion.controlDef(t.key)) continue;
       const r = this.motion.act(this.time, null, { key: t.key, pick: t.pick ?? null });
       this.dragFired = true;
