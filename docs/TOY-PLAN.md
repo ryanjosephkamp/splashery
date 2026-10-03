@@ -46,19 +46,20 @@ Proposals below are suggestions; the owner may change them.
   Cherries, Grapes, Avocado, Building bricks, Rubber duck, Newton's cradle, Puzzle cube, Kite, Chess
   set, Lorenz attractor, Möbius strip, Klein bottle, Menger sponge, Hypercube, Torus knot, Gyroid,
   Mandelbulb, Seashell spiral, Graph plotter, Surface plotter, Circle and waves, Fourier circles,
-  Pythagoras proof, Splat equation, Fountain pen, Water bottle, Soda can, Running shoe, Hoodie,
-  Sunglasses, Baseball cap, Heraldic shield, Crown, Wizard's orb, Crystal ball, Jellyfish, School of
-  fish, Pufferfish, Nautilus, Snail, Octopus, Sea urchin, Frog, Snowman, Fireworks, Decorated tree,
-  Paper lantern, Diya, Acoustic guitar, Snare drum, Xylophone, Toy piano, Grand piano, Upright
-  piano, Harpsichord, Electronic keyboard, Hot-air balloon, Bus, Jet airliner, Sailboat, Submarine,
-  Bicycle, Eiffel Tower, Washington Monument, Pyramids of Giza, Twisting supertall, Statue of
-  Liberty, White House, Leaning Tower of Pisa, Colosseum, Parthenon, Stonehenge, Big Ben, Taj Mahal,
-  Castle, Pagoda, Windmill, Perceptron, Multilayer perceptron, Neural network, Convolutional
-  network, Recurrent network, Transformer, Looped transformer, Diffusion model, Gradient descent,
-  Gaussian splatting, Word vectors, Sorting machine, Half adder, Turing machine, Difference engine,
-  Enigma machine, Bombe, Your book, Photo album, Picture frame, Song landscape, Room echo meter,
-  Splat mirror, Model to splats, Photo to 3D, Moving photo to 3D, Video to 3D, Splat field, Thermal
-  ellipsoids, Super-resolution microscope, Galaxy in a box, Fluid lab, Screen.
+  Pythagoras proof, Splat equation, Storybook, Fountain pen, Water bottle, Soda can, Running shoe,
+  Hoodie, Sunglasses, Baseball cap, Heraldic shield, Crown, Wizard's orb, Crystal ball, Jellyfish,
+  School of fish, Pufferfish, Nautilus, Snail, Octopus, Sea urchin, Frog, Snowman, Fireworks,
+  Decorated tree, Paper lantern, Diya, Acoustic guitar, Snare drum, Xylophone, Toy piano, Grand
+  piano, Upright piano, Harpsichord, Electronic keyboard, Hot-air balloon, Bus, Jet airliner,
+  Sailboat, Submarine, Bicycle, Eiffel Tower, Washington Monument, Pyramids of Giza, Twisting
+  supertall, Statue of Liberty, White House, Leaning Tower of Pisa, Colosseum, Parthenon,
+  Stonehenge, Big Ben, Taj Mahal, Castle, Pagoda, Windmill, Perceptron, Multilayer perceptron,
+  Neural network, Convolutional network, Recurrent network, Transformer, Looped transformer,
+  Diffusion model, Gradient descent, Gaussian splatting, Word vectors, Sorting machine, Half adder,
+  Turing machine, Difference engine, Enigma machine, Bombe, Your book, Photo album, Picture frame,
+  Song landscape, Room echo meter, Splat mirror, Model to splats, Photo to 3D, Moving photo to 3D,
+  Video to 3D, Splat field, Thermal ellipsoids, Super-resolution microscope, Galaxy in a box, Fluid
+  lab, Screen.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -656,6 +657,10 @@ Proposals below are suggestions; the owner may change them.
     a crisper cover, and no red strip (the cover's inside drew over the pages). E1b: the outside is
     crisp: evenly spread, denser splats on the cover, spine and page edges, a fine woven cloth and
     page lines splats can show.
+  - Improved: Sharpness A (October 2, 2026): the words on the two open pages are ink dots laid on
+    the font's pixels. Round 2 (October 3, 2026): the turned leaves are sorted where they lie, so
+    the left page's paper no longer covers its words and the cover's inside no longer shows through;
+    a solid cover rim, cleaner page edges, and soft gray words on the pages seen only mid-turn.
   - Sound: Real paper pages turning (no wind); real CC0 recordings now (book-page.mp3), with the
     synthesized sound as a fallback.
 - **Laptop** (`laptop`). Now: tap: Open or close. Plan: keep.
