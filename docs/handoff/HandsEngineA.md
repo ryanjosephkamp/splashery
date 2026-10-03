@@ -89,10 +89,66 @@ file. Engine lines in shared files go only through your engine PR.
   owner approved in full, especially "Engine pieces this plan needs"); docs/handoff/Physics.md (how
   the engine works: units, stacking, picking and placing, known issues); `src/physics/world.js` and
   `src/physics/hands-on.js`; `tools/phy-clip.mjs` (phone-size clips with a finger dot).
-- Your handoff file: start it with this brief, word for word, under "## Brief", then keep "## State"
-  current.
-- Before every push: CLAUDE.md, "Before every push".
+- Your handoff file: start it with this brief, word for word, under "## Brief", then keep "## State
 
-## State
+Model: Opus 5.5 (claude-opus-5-5), default effort. No helper so far.
 
-Starting, October 3, 2026.
+- October 3, 2026: the engine PR is up on `claude/lane-hands-engine-a` ("Engine: hands-on bodies and
+  fields"). The demo toys come next on `claude/lane-hands-engine-a-toys`, built on top of it.
+- Engine: `src/physics/materials.js` (per-toy materials: bounce, weight, friction, rolling
+  resistance, spin, drag, Magnus curve, a flier's lift, nose-first flight, the fingertip spin),
+  `src/physics/fields.js` (water line and buoyancy, buoyancy in air, gravity wells, wheels, shake
+  detection, follow or flee the finger, projectiles that stick in targets, and the `Extras` glue to
+  Hands-on), `src/physics/water-view.js` (the water's surface: its own splat entity, sorted with the
+  toy's, loaded only when a water toy has Hands-on on). Documented in docs/PACKS.md, "5f. Hands-on:
+  bodies and fields". Tests: `tests/hea-engine.spec.mjs` (13 engine tests measuring heights, times,
+  angles and positions; 5 in the app).
+- Real numbers: `tools/hands-on-materials.json` (Codex task 11) had not landed, so the presets use
+  the governing bodies' regulation sizes and masses and the rule books' bounce tests (listed at the
+  top of `materials.js`). Drag is the real thing, scaled (Fr = 2 m / (rho cd pi r^3) has no units).
+  Lift and the Magnus curve are set to show at Hands-on's slow throws (at most 4 toy radii per
+  second, about a hundred times slower than a real pitch), in the real direction and order.
+
+## Notes
+
+- Shared-file lines (all additive): `src/physics/world.js` (`World.force`, called once per substep
+  before anything moves; `b.coasts` skips the calming of slow resting bodies, for wheels),
+  `src/physics/hands-on.js` (an import; `this.extras` made in `attach`; `extras.build(w)` when
+  either world is built; hooks at the top of `pressAt`, `moveTo`, `release` and `onHit`;
+  `extras.thrown(h)` on a let-go; `extras.step(dt)` each frame), `src/motion.js` (one line:
+  `info.hands` for a recipe's drive). A toy whose hands block asks for none of these keys gets no
+  Extras: it plays exactly as before.
+- The stage draws only splats (no mesh component system), so the water is a disc of flat splats,
+  unified with the toy so the part under the line shows faintly through the water.
+- A water ball rests where its density says: the water line is worked out from the toy at home, so
+  nothing moves until touched. The water moving with a bobbing ball (its added mass) and the waves
+  it makes take its bob away in two or three bobs.
+- Wheels: a drag pushes (never lifts); the play area's walls move out to 2.4 toy radii; the wheel
+  parts' angle comes from the distance rolled, so they roll back as ↺ Reset glides it home.
+
+## Plan lines these pieces cover (for the category lanes)
+
+- Material: every ball (25: basketball, soccer ball, American football, tennis ball, baseball,
+  softball, beach ball, golf ball, rugby ball, volleyball, water polo ball, ping-pong ball, cricket
+  ball, bowling ball, pool ball, pickleball, dodgeball, medicine ball, lacrosse ball, squash ball,
+  bouncy ball, marble, hockey puck, shuttlecock, flying disc), paper plane, baseball cap; balloon
+  dog ("falls slowly and light": a material with a low mass and big r).
+- Water line: water polo ball, lotus, iceberg (and its chunk, as a piece), ocean liner, submarine,
+  sailboat (heels and rights itself: points under water lift where they are).
+- Air: hot-air balloon.
+- Wells: solar system, black hole (`capture`), asteroid (chunks drift back together: a well at its
+  middle with pieces).
+- Wheels: steam train (`info.hands.rolled` turns the rods), sports car, bus, bicycle (pedals are a
+  crank: lane B), tractor.
+- Shake: snow globe, soda can (shake level for the spray), oak, pine, cherry blossom, maple,
+  decorated tree (ornaments swing: lane C's chains with the shake level).
+- Follow or flee: school of fish (flee), owl and eye (follow `info.hands.point`), frog (follow, with
+  a fly piece), white blood cell (follow a dragged bacterium piece).
+- Projectiles and targets: bow and target, crossbow and trebuchet (the string and arm are lane B's
+  sliders and hinges; the bolt and stone are projectile pieces).
+
+## Known issues
+
+- Lift and the curve are toy-speed values, not measured ones (see above).
+- The fingertip spin needs a quick upward flick while holding the ball (about 700 CSS pixels per
+  second); slower lifts just lift it.
