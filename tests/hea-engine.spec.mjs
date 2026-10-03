@@ -409,9 +409,8 @@ test("in the app: water shows its line, the ball floats at home, and a dropped o
 
 test("in the app: a shake while holding fires the toy's shake", async ({ page }) => {
   await open(page, "snow-globe", { shake: true });
-  // A press and a pick-up, then the shake's moves as quick as a hand, all
-  // through Hands-on's own path (headless mouse moves come too slowly, each
-  // drawing a frame).
+  // A press and a pick-up, then the shake, all through Hands-on's own path
+  // (headless mouse moves come too slowly, each drawing a frame).
   const s = await page.evaluate(() => {
     const { player } = window.__splashery;
     const h = player.handsOn;
@@ -419,15 +418,11 @@ test("in the app: a shake while holding fires the toy's shake", async ({ page })
     h.pressAt(player.toyInfo.center.slice(), c[0], c[1]);
     h.moveTo(c[0], c[1] - 40);
     player.update(1 / 60);
-    const t0 = performance.now();
-    let k = 0;
-    // Two strokes a second each way, 70 pixels, for a second.
-    while (performance.now() - t0 < 1000) {
-      const t = (performance.now() - t0) / 1000;
-      h.moveTo(c[0] + 70 * Math.sin(t * 4 * Math.PI), c[1] - 40);
-      if (++k % 50 === 0) player.update(1 / 60);
-      const end = performance.now() + 8;
-      while (performance.now() < end);
+    // Two strokes a second each way, 70 pixels, for a second (a frame
+    // stepped between moves, as on a phone).
+    for (let k = 1; k <= 60; k++) {
+      h.moveTo(c[0] + 70 * Math.sin((k / 60) * 4 * Math.PI), c[1] - 40);
+      player.update(1 / 60);
     }
     const out = { level: player.motion.hands.shake, shake: player.motion.tap?.key, holding: h.holding }; // prettier-ignore
     h.release();

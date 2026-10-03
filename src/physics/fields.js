@@ -508,7 +508,7 @@ export class Extras {
 
   // A press: a toy that flees (or follows) the finger takes the drag.
   pressAt(hit, x, y) {
-    this.samples = [{ t: now(), x, y }];
+    this.samples = [{ t: this.ho.time, x, y }];
     this.spin = null;
     if (!this.flee) return false;
     this.fingerDown = true;
@@ -517,9 +517,7 @@ export class Extras {
   }
 
   moveTo(x, y) {
-    // (The finger's own clock: a shake is as quick as the hand, whatever
-    // the frame rate.)
-    const t = now();
+    const t = this.ho.time;
     this.samples.push({ t, x, y });
     while (this.samples.length > 2 && this.samples[0].t < t - 0.2) this.samples.shift();
     if (this.shake && this.shake.add(t, x, y)) this.fireShake();
@@ -625,7 +623,7 @@ export class Extras {
     ab.on = ho.on;
     let busy = false;
     if (this.shake) {
-      ab.shake = this.shake.decay(now());
+      ab.shake = this.shake.decay(ho.time);
       if (ab.shake > 0.01) busy = true;
     }
     if (this.flee) {
@@ -738,9 +736,6 @@ export class Extras {
     this.view = null;
   }
 }
-
-// Seconds, from the page's clock (or Node's).
-const now = () => (globalThis.performance?.now() ?? Date.now()) / 1000;
 
 // A material's density relative to water (a ball of its mass and radius).
 export function densityOf(m) {
