@@ -301,17 +301,18 @@ export function snapEdges(d, w, h) {
   return out;
 }
 
-// A backing of splats behind the picture, at its plane, in the picture's own
-// colors (r5): turned to the side, what a near part uncovers (no splats
-// were there) shows color, not holes. Every other cell, a little larger. It
-// reads the same canvas as the picture, as a 3D offset of a thousandth.
+// A dark board behind the picture (r5), like a mirror's back: turned to
+// the side, what a near part uncovers (no splats were there) reads as a
+// shadow on the board rather than holes. (A backing in the picture's own
+// colors showed a second copy of the person on the wall.)
 function backing(k, { cols, rows, width, height, z, part }) {
   const items = [];
-  for (let j = 0; j < rows; j += 2)
-    for (let i = 0; i < cols; i += 2) {
-      const u = (i + 1) / cols;
-      const v = (j + 1) / rows;
-      items.push({ p: [(u - 0.5) * width, (0.5 - v) * height, z], n: [0, 0, 1], size: ((width / cols) * 2.8) / 0.01, flat: 0.08, opacity: 1, color: "#808080", kind: "relief", params: [u, v, 3, 0.001], part, pattern: false }); // prettier-ignore
+  const step = 3;
+  for (let j = 0; j < rows; j += step)
+    for (let i = 0; i < cols; i += step) {
+      const u = (i + step / 2) / cols;
+      const v = (j + step / 2) / rows;
+      items.push({ p: [(u - 0.5) * width, (0.5 - v) * height, z], n: [0, 0, 1], size: ((width / cols) * step * 1.4) / 0.01, flat: 0.05, opacity: 1, color: "#2b2f36", part, pattern: false }); // prettier-ignore
     }
   k.cloud({ share: items.length / k.count, pattern: false, jitter: 0 }, (rand, i) => items[i] || null); // prettier-ignore
 }
