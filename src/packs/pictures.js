@@ -1100,9 +1100,12 @@ function bk5Pose(T, u, time) {
   const f = BOOK.focus;
   const view = f === "L" ? [-(g + W / 2), 0] : f === "R" ? [g + W / 2, 0] : [0, 0];
   const z0 = r.z + 0.008;
-  const lift = 0.3;
-  const C = [r.cx + (view[0] - r.cx) * 0.3 * u, r.cy + (view[1] - r.cy) * 0.3 * u, z0 + lift * u];
-  const grow = Math.max(1, Math.min(1.3, (0.82 * H) / (2 * r.hh), (0.92 * (f ? W : 2 * W)) / (2 * r.hw))); // prettier-ignore
+  // Seen a page at a time the view is close: the figure comes less far
+  // toward you and further toward the middle, so it stays on the screen.
+  const lift = f ? 0.18 : 0.3;
+  const pull = f ? 0.65 : 0.3;
+  const C = [r.cx + (view[0] - r.cx) * pull * u, r.cy + (view[1] - r.cy) * pull * u, z0 + lift * u]; // prettier-ignore
+  const grow = Math.max(1, Math.min(f ? 1.15 : 1.3, (0.82 * H) / (2 * r.hh), (0.82 * (f ? W : 2 * W)) / (2 * r.hw))); // prettier-ignore
   const s = T.g0 * (1 + (grow - 1) * u);
   const face = Math.max(-0.32, Math.min(0.32, -(r.cx - view[0]) * 0.45));
   const since = POP.phase === "up" ? time - POP.tUp : 0;
