@@ -414,6 +414,9 @@ export const RECIPES = {
     ],
     controls: [{ key: "swirl", label: "Swirl", type: "pulse", ease: FISH_SECS }],
     action: { key: "swirl", label: "Bait ball" },
+    // Hands-on (lane Hands engine A): a drag through the school sends the fish
+    // near the finger darting away; each swims back to its place.
+    hands: { flee: { radius: 0.32, push: 1.2, back: 2, max: 0.45 } },
     drive(t, c, out, info) {
       // Each fish is its own piece, orbiting with its shell. A tap: the
       // school tightens into a spinning bait ball, then bursts outwards in
@@ -431,8 +434,21 @@ export const RECIPES = {
         const rho = 1 - 0.45 * ball + (0.18 + 0.24 * f.far) * burst;
         const face = -(Math.PI / 2) * (on ? band(s, 2.2 + d, 2.4 + d) * (1 - band(s, 2.9 + d, 3.7 + d)) : 0); // prettier-ignore
         const th = f.rate * t + spin;
-        const q = quatAxisAngle([0, 1, 0], th + face);
-        const P = quatRotate(quatAxisAngle([0, 1, 0], th), vec.mul(f.pos, rho));
+        let q = quatAxisAngle([0, 1, 0], th + face);
+        let P = quatRotate(quatAxisAngle([0, 1, 0], th), vec.mul(f.pos, rho));
+        // Hands-on: darting away from the finger, head first, then back.
+        const away = info.hands?.flee(i, P);
+        if (away) {
+          const v = away.vel;
+          const sp = Math.hypot(v[0], v[2]);
+          if (sp > 0.05) {
+            const head = quatRotate(q, f.fwd);
+            const want = Math.atan2(-v[2], v[0]) - Math.atan2(-head[2], head[0]);
+            const turn = Math.atan2(Math.sin(want), Math.cos(want)) * Math.min(1, sp / 0.6);
+            q = quatMul(quatAxisAngle([0, 1, 0], turn), q);
+          }
+          P = vec.add(P, away.offset);
+        }
         return { base: [0, 0, 0], quat: q, offset: vec.sub(P, quatRotate(q, f.pos)) };
       });
     },
@@ -472,7 +488,9 @@ export const RECIPES = {
           });
         }
       }
-      k.data = { fish: fish.map((f) => ({ pos: f.pos, rate: f.rate, jit: f.jit, far: f.far })) };
+      k.data = {
+        fish: fish.map((f) => ({ pos: f.pos, fwd: f.fwd, rate: f.rate, jit: f.jit, far: f.far })),
+      };
       const L = 0.25;
       const D = 0.085;
       const W = 0.044;
