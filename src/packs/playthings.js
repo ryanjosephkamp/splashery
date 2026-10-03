@@ -16,6 +16,7 @@ import {
 } from "../kit.js";
 import { capPoint, evenCylinder, evenEllipsoid, evenTorus } from "./even.js";
 import { loadSample } from "../voices.js";
+import { ropeSkin } from "../physics/soft.js"; // lane Hands engine C
 
 const TAU = Math.PI * 2;
 const add = (a, b) => [a[0] + b[0], a[1] + b[1], a[2] + b[2]];
@@ -194,6 +195,21 @@ const KITE = (() => {
     p[2],
   ];
   return { tilt, bridle: tilt([0, 0.1, 0.1]), flyer: [0.85, -1.05, 0.3] };
+})();
+// Hands-on (lane Hands engine C): the line is a rope from the flyer's hand
+// up to the bridle, the kite rides its end, lifted by the wind along the
+// line, and the tail is a rope hung from the kite's foot that streams and
+// flaps in the wind. Their splats follow the nodes (skin).
+const KITE_LINE = (() => {
+  const [a, b] = [KITE.bridle, KITE.flyer];
+  const at = (t) => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t - 0.12 * Math.sin(Math.PI * t), a[2] + (b[2] - a[2]) * t]; // prettier-ignore
+  return { at, nodes: [1, 5 / 6, 4 / 6, 3 / 6, 2 / 6, 1 / 6, 0].map(at), tokens: [0, 1, 2, 3, 4, 5, 6] }; // prettier-ignore
+})();
+const KITE_TAIL = (() => {
+  const R = KITE.tilt;
+  const at = spline([R([0, -0.72, 0]), R([-0.16, -0.95, 0.02]), R([-0.42, -1.06, 0.04]), R([-0.66, -0.98, 0.02]), R([-0.86, -1.08, 0])]); // prettier-ignore
+  const ts = [0, 0.2, 0.4, 0.6, 0.8, 1];
+  return { at, ts, nodes: ts.map(at), tokens: [7, 8, 9, 10, 11, 12] };
 })();
 
 // ---- Custom shapes ------------------------------------------------------------
@@ -857,6 +873,42 @@ function film(p, n, c) {
 
 const YO = { top: 1.0, rest: 0.62, max: 1.1, K: 8 };
 YO.seg = YO.max / YO.K;
+// Hands-on (lane Hands engine C): the string is a rope of K + 1 nodes from
+// the finger loop down to the yo-yo, each string segment riding its link
+// and the yo-yo riding the end. Pulled down, the string pays out; let go
+// below its rest, the yo-yo drops to the end of the string, spins there a
+// moment and climbs back, spinning all the while.
+const YH = { L: YO.rest, v: 0, phase: "rest", t: 0, spin: 0, touched: false, calm: -1e9 };
+const YO_NODES = Array.from({ length: YO.K + 1 }, (_, j) => [0, YO.top - (j * YO.rest) / YO.K, 0]); // prettier-ignore
+function yoyoReel(strand, dt, soft) {
+  const held = soft.hold?.node?.strand === strand;
+  const top = YO_NODES[0];
+  const L0 = YH.L;
+  if (held) {
+    const want = Math.hypot(...soft.hold.target.map((v, i) => v - top[i]));
+    YH.L += (Math.min(YO.max, Math.max(0.3, want)) - YH.L) * Math.min(1, dt * 14);
+    YH.phase = "held";
+    YH.v = 0;
+  } else if (YH.phase === "held") {
+    YH.phase = YH.L > YO.rest + 0.08 ? "drop" : "rest";
+  }
+  if (YH.phase === "drop") {
+    YH.v += 9 * dt;
+    YH.L += YH.v * dt;
+    if (YH.L >= YO.max) [YH.L, YH.phase, YH.t] = [YO.max, "sleep", 0];
+  } else if (YH.phase === "sleep") {
+    YH.spin += 30 * dt; // spinning at the end of the string
+    if ((YH.t += dt) > 0.35) [YH.phase, YH.t] = ["climb", 0];
+  } else if (YH.phase === "climb") {
+    YH.t += dt / 0.8;
+    const e = Math.min(1, YH.t);
+    YH.L = YO.max + (YO.rest - YO.max) * (1 - (1 - e) * (1 - e));
+    if (e >= 1) YH.phase = "rest";
+  }
+  YH.spin += Math.abs(YH.L - L0) / 0.06;
+  strand.scale = YH.L / YO.rest;
+  YH.touched = true;
+}
 
 const SLINKY = { N: 15, R: 0.36, r: 0.028, d: 0.62 };
 
@@ -1951,8 +2003,33 @@ export const RECIPES = {
     options: [{ key: "color", label: "Colour", type: "color", default: "#e6392f" }],
     controls: [{ key: "throw", label: "Throw", type: "pulse", ease: 1.8 }],
     action: { key: "throw", label: "Throw" },
-    drive(t, c, out) {
-      const idle = YO.rest + 0.12 * Math.sin(t * 2.4);
+    hands: {
+      floor: -0.6,
+      area: 1.4,
+      ropes: () => [
+        {
+          name: "string",
+          points: YO_NODES,
+          mass: YO_NODES.map((_, j) => (j === YO.K ? 2 : 0.5)),
+          grab: [YO.K],
+          pick: 0.45,
+          reach: 1.15,
+          bend: 0.05,
+          drag: 0.8,
+          update: yoyoReel,
+          reset: () => Object.assign(YH, { L: YO.rest, v: 0, phase: "rest", t: 0, spin: 0 }),
+          pieces: [
+            ...Array.from({ length: YO.K }, (_, j) => ({ part: "s" + j, from: j, at: [0, YO.top - j * YO.seg, 0] })), // prettier-ignore
+            { part: "yoyo", node: YO.K, spin: () => -YH.spin, axis: [0, 0, 1] },
+          ],
+        },
+      ],
+    },
+    drive(t, c, out, info) {
+      // The idle bob eases back in after Hands-on play.
+      if (YH.touched) [YH.touched, YH.calm] = [false, info.time];
+      const calm = Math.min(1, Math.max(0, (info.time - YH.calm - 0.3) / 1.5));
+      const idle = YO.rest + 0.12 * calm * Math.sin(t * 2.4);
       const p = 1 - c.throw;
       const D = c.throw > 0 ? idle + (YO.max - idle) * Math.pow(bump(p), 0.7) : idle;
       const f = (D - YO.seg) / ((YO.K - 1) * YO.seg);
@@ -2017,8 +2094,8 @@ export const RECIPES = {
       });
       // The string: segments that slide over each other as it pays out.
       for (let j = 0; j < YO.K; j++) {
-        const part = j ? k.part("s" + j, { pivot: [0, 0, 0] }) : 0;
-        k.add(evenCylinder(0.008, 0.008, YO.seg * 1.08, false), {
+        const part = k.part("s" + j, { pivot: [0, 0, 0] });
+        k.add(evenCylinder(0.008, 0.008, YO.seg * 1.3, false), {
           even: true,
           opacity: 1,
           pos: [0, top - (j + 0.5) * YO.seg, 0],
@@ -2166,6 +2243,45 @@ export const RECIPES = {
     ],
     controls: [{ key: "gust", label: "Gust", type: "pulse", ease: 2.8 }],
     action: { key: "gust", label: "Gust of wind" },
+    hands: {
+      floor: -1.15,
+      area: 1.6,
+      ropes: () => {
+        const dir = unit(sub(KITE.bridle, KITE.flyer));
+        const last = KITE_LINE.nodes.length - 1;
+        return [
+          {
+            name: "line",
+            points: KITE_LINE.nodes,
+            mass: KITE_LINE.nodes.map((_, j) => (j === last ? 1 : 0.12)),
+            // The wind on the sail holds it up and pulls the line taut.
+            lift: [[last, add([0, 26, 0], mul(dir, 22))]],
+            weight: 0.35, // a light line: it sags a little, and the kite stays up
+            wind: { vel: [0, 0, 0], gust: 0, flap: 0.25, k: 1.2 },
+            bend: 0.02,
+            drag: 1.6,
+            pick: 0.3,
+            tokens: KITE_LINE.tokens,
+            pieces: [
+              { part: "kite", node: last, turnBy: 0.45 }, // it keeps facing the wind
+              { part: "line", node: 0, turn: false }, // the line's own aim stays still
+            ],
+          },
+          {
+            name: "tail",
+            points: KITE_TAIL.nodes,
+            attach: { rope: 0, node: last, turnBy: 0.45 },
+            frame: "kite",
+            weight: 0.3,
+            bend: 0.15,
+            drag: 1,
+            wind: { vel: [-4, 0.5, 0], gust: 0.6, flap: 1.2, k: 4 },
+            grab: false,
+            tokens: KITE_TAIL.tokens,
+          },
+        ];
+      },
+    },
     drive(t, c, out) {
       // A gust: the kite climbs round a loop, turning once about its bridle,
       // while the tail whips. The line stays tied to the bridle.
@@ -2192,6 +2308,13 @@ export const RECIPES = {
         offset: mul(dir, len(to) - len(from)),
       };
       out.amount = 1 + (on ? 4 * bump(band(e, 0, 2.6)) : 0);
+      // The tail ripples in the wind (its splats follow these nodes).
+      out.tokens = [];
+      KITE_TAIL.nodes.forEach((p, j) => {
+        const tt = KITE_TAIL.ts[j];
+        const w = (0.07 + 0.08 * (on ? bump(band(e, 0, 2.6)) : 0)) * tt;
+        out.tokens[KITE_TAIL.tokens[j]] = { base: p, offset: [0, w * Math.sin(p[0] * 5 + p[2] * 3 - t * 2 * out.amount), 0] }; // prettier-ignore
+      });
     },
     build(k, o) {
       const R = KITE.tilt;
@@ -2225,22 +2348,16 @@ export const RECIPES = {
           },
         });
       }
-      // Tail with bows, rippling in the wind.
-      const tail = spline([
-        B,
-        R([-0.16, -0.95, 0.02]),
-        R([-0.42, -1.06, 0.04]),
-        R([-0.66, -0.98, 0.02]),
-        R([-0.86, -1.08, 0]),
-      ]);
+      // Tail with bows, rippling in the wind (by its nodes, KITE_TAIL).
+      const tail = KITE_TAIL.at;
+      const tailSkin = ropeSkin(KITE_TAIL.nodes, KITE_TAIL.tokens);
       k.add(k.tube(tail, 0.022, { samples: 200 }), {
         opacity: 1,
         jitter: 0.015,
         part: kite,
         share: 0.04,
         flat: 0.4,
-        kind: "wave",
-        params: (c) => [0.07 * c.t, 0],
+        skin: (c) => tailSkin(c.p),
         color: (c) => lit(shade(o.c1, 0.85), c.n, { amb: 0.8, dif: 0.3 }),
       });
       for (let i = 1; i <= 5; i++) {
@@ -2261,30 +2378,21 @@ export const RECIPES = {
             weight: 2.5,
             size: 1.5,
             flat: 0.2,
-            kind: "wave",
-            params: [0.07 * tt, 0],
+            skin: (c) => tailSkin(c.p),
             color: (c) => lit(col, [0, 0, 1], { amb: 0.8, dif: 0.3 }),
           });
         }
       }
       // The line down to the flyer, aimed at the bridle as the kite moves.
       const line = k.part("line", { pivot: KITE.flyer });
-      const a = KITE.bridle;
-      const b = KITE.flyer;
+      const lineSkin = ropeSkin(KITE_LINE.nodes, KITE_LINE.tokens);
       k.add(
-        k.tube(
-          (t) => [
-            a[0] + (b[0] - a[0]) * t,
-            a[1] + (b[1] - a[1]) * t - 0.12 * Math.sin(Math.PI * t),
-            a[2] + (b[2] - a[2]) * t,
-          ],
-          0.006,
-          { samples: 64, grid: 24 },
-        ),
+        k.tube(KITE_LINE.at, 0.006, { samples: 64, grid: 24 }),
         {
           opacity: 1,
           jitter: 0.015,
           part: line,
+          skin: (c) => lineSkin(c.p),
           share: 0.02,
           flat: 0.5,
           pattern: false,

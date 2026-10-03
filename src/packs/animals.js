@@ -16,6 +16,7 @@ import {
   vec,
 } from "../kit.js";
 import { evenEllipsoid, evenTube } from "./even.js";
+import { ropeSkin } from "../physics/soft.js"; // lane Hands engine C
 
 const TAU = Math.PI * 2;
 const DEG = Math.PI / 180;
@@ -23,6 +24,22 @@ const LIGHT = vec.unit([0.3, 0.8, 0.55]);
 const VIEW = vec.unit([0.52, 0.27, 0.81]);
 const HALF = vec.unit(vec.add(LIGHT, VIEW));
 const keep = (c, size) => ({ c, keep: true, size });
+
+// The octopus's arms (lane Hands engine C): each a rope of six nodes along
+// its curl, the root riding the body. The arm's splats follow the nodes
+// (skin), so the drive sways them by moving the nodes, and in Hands-on they
+// trail behind the body and curl back to their shape.
+const OCTO_GROUND = -0.45;
+const OCTO_PIVOT = [0, 0.2, 0];
+const OCTO_ARMS = Array.from({ length: 8 }, (_, i) => {
+  const a = (i / 8) * TAU + TAU / 16;
+  const d = [Math.sin(a), 0, Math.cos(a)];
+  const P = (r, y) => [d[0] * r, y, d[2] * r];
+  const g = OCTO_GROUND;
+  const curl = spline([P(0.1, 0.0), P(0.34, g + 0.12), P(0.62, g + 0.04), P(0.86, g + 0.08), P(1.0, g + 0.26), P(0.94, g + 0.4), P(0.84, g + 0.34)]); // prettier-ignore
+  const nodes = [0, 0.2, 0.4, 0.6, 0.8, 1].map((t) => curl(t));
+  return { d, curl, nodes, tokens: nodes.map((_, j) => i * 6 + j), pivot: P(0.1, 0), axis: [d[2], 0, -d[0]] }; // prettier-ignore
+});
 const band = (x, a, b) => clamp((x - a) / (b - a), 0, 1);
 const dot = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
 const fract = (x) => x - Math.floor(x);
@@ -1545,6 +1562,46 @@ export const RECIPES = {
     ],
     controls: [{ key: "ink", label: "Ink", type: "pulse", ease: 4.5 }],
     action: { key: "ink", label: "Squirt ink" },
+    // Hands-on (lane Hands engine C): drag the body and the arms trail
+    // behind it and curl back; pull an arm and it stretches out and curls
+    // back when let go.
+    hands: {
+      floor: OCTO_GROUND,
+      area: 1.4,
+      pieces: () => [
+        {
+          part: "octo",
+          pos: OCTO_PIVOT,
+          pivot: OCTO_PIVOT,
+          solid: { type: "ellipsoid", r: [0.44, 0.55, 0.44] },
+          // It stands on its arms: where they touch the ground, and its outside.
+          points: [
+            ...OCTO_ARMS.map((arm) => vec.sub(arm.curl(0.4), OCTO_PIVOT)),
+            [0, 0.68, -0.1],
+            [0.44, 0.2, -0.1],
+            [-0.44, 0.2, -0.1],
+            [0, 0.2, 0.42],
+            [0, 0.2, -0.6],
+          ],
+          radius: 0.04,
+          pick: [0.45, 0.55, 0.45],
+          mass: 1,
+          friction: 0.8,
+          restitution: 0.1,
+        },
+      ],
+      ropes: () =>
+        OCTO_ARMS.map((arm) => ({
+          points: arm.nodes,
+          attach: { piece: 0, nodes: [0] },
+          keep: 7,
+          bend: 0.35,
+          drag: 2.5,
+          weight: 0,
+          radius: 0.04,
+          tokens: arm.tokens,
+        })),
+    },
     drive(t, c, out) {
       // A big cloud of ink billows out behind while the octopus jets up and
       // away with its arms streaming, then it drifts back as the ink thins.
@@ -1556,8 +1613,21 @@ export const RECIPES = {
       const trail = on ? easeInOut(band(e, 0.05, 0.35)) * (1 - easeInOut(band(e, 0.9, 2.6))) : 0;
       const off = [0.12 * jet, 0.3 * jet, 0.06 * jet];
       out.parts.octo = { offset: off };
-      for (let i = 0; i < 8; i++)
-        out.parts[`a${i}`] = { offset: off, angle: 0.55 * trail * (1 + 0.15 * Math.sin(i * 2.1)) };
+      // The arms stream back with the jet and sway gently, tips the most.
+      const tokens = [];
+      OCTO_ARMS.forEach((arm, i) => {
+        const turn = quatAxisAngle(arm.axis, 0.55 * trail * (1 + 0.15 * Math.sin(i * 2.1)));
+        const side = [arm.d[2], 0, -arm.d[0]];
+        arm.nodes.forEach((home, j) => {
+          const f = (j / 5) ** 2;
+          const sw = 0.05 * f * Math.sin(t * 1.3 + i * 0.9);
+          const up = 0.025 * f * Math.sin(t * 1.1 + i * 1.7);
+          const p = vec.add(arm.pivot, quatRotate(turn, vec.sub(home, arm.pivot)));
+          const at = vec.add(vec.add(p, off), [side[0] * sw, up, side[2] * sw]);
+          tokens[arm.tokens[j]] = { base: home, offset: vec.sub(at, home) };
+        });
+      });
+      out.tokens = tokens;
       out.grow = on ? 1 - (1 - band(e, 0.05, 1.3)) ** 2 : 0;
       out.parts.ink = {
         offset: [0, 0.18 * easeInOut(band(e, 0.4, 4.5)), 0],
@@ -1570,7 +1640,6 @@ export const RECIPES = {
         o.color
       ];
       const pale = mix(skin, "#fff4e8", 0.55);
-      const ground = -0.45;
       const skinCol = (c) => {
         const n = c.noise(c.p[0] * 16, c.p[1] * 16, c.p[2] * 16);
         let col = shade(skin, 0.92 + 0.12 * n);
@@ -1619,31 +1688,18 @@ export const RECIPES = {
           iris: "#141418",
         });
       }
-      // Eight arms that curl up at the tips and sway.
-      for (let i = 0; i < 8; i++) {
-        const a = (i / 8) * TAU + TAU / 16;
-        const d = [Math.sin(a), 0, Math.cos(a)];
-        const P = (r, y) => [d[0] * r, y, d[2] * r];
-        const curl = spline([
-          P(0.1, 0.0),
-          P(0.34, ground + 0.12),
-          P(0.62, ground + 0.04),
-          P(0.86, ground + 0.08),
-          P(1.0, ground + 0.26),
-          P(0.94, ground + 0.4),
-          P(0.84, ground + 0.34),
-        ]);
-        const arm = k.part(`a${i}`, { pivot: P(0.1, 0), axis: [d[2], 0, -d[0]] });
+      // Eight arms that curl up at the tips; they sway and stream by their
+      // nodes (OCTO_ARMS).
+      for (const { d, curl, nodes, tokens } of OCTO_ARMS) {
+        const sk = ropeSkin(nodes, tokens);
         k.add(
           evenTube(k, curl, (t) => 0.1 * (1 - t) + 0.018, { grid: 32, samples: 96, caps: true }),
           {
             even: true,
             opacity: 1,
             jitter: 0.015,
-            part: arm,
             flat: 0.2,
-            kind: "sway",
-            params: [0.25, ground + 0.1],
+            skin: (c) => sk(c.p),
             color: (c) => {
               const under = dot(c.n, [0, -1, 0]) + 0.3 * dot(c.n, [-d[0], 0, -d[2]]);
               if (under > 0.35 && fract(c.t * 20) < 0.55) return keep(lit(c, "#fde7df", 0.25));
