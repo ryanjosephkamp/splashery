@@ -498,11 +498,11 @@ test.describe("Moving photo to 3D", () => {
     // The frame's canvas: depth offsets around a half, both ways (the bunny
     // nearer than it rests in some frames, farther in others).
     const spread = await page.evaluate(async (m) => {
-      const { MOVING } = await import(m);
+      const { MOVING, frameImages } = await import(m);
       const { cols, rows } = MOVING.grid;
       let lo = 255;
       let hi = 0;
-      for (const img of MOVING.images)
+      for (const img of frameImages(MOVING.clip, cols, rows))
         for (let j = 0; j < rows; j++)
           for (let i = 0; i < cols; i++) {
             const b = img[(j * cols * 2 + cols + i) * 4 + 2];
@@ -534,7 +534,7 @@ test.describe("Moving photo to 3D", () => {
     await page.setInputFiles("#toy-input-file", "assets/toys/screen/horse.gif");
     const s = await until(page, async (m) => { const s = (await import(m)).movingState(); return s.clip?.name === "horse" ? s : null; }, mp, 280_000); // prettier-ignore
     expect(s.clip.n).toBe(15);
-    expect(s.clip.w).toBe(256);
+    expect(s.clip.w).toBe(300); // the GIF's own width (r5: up to 384 at this profile, never larger than the source)
     // Only this site's own files were fetched (the model among them).
     const base = new URL(page.url()).origin;
     expect(requests.filter((u) => !u.startsWith(base) && !u.startsWith("blob:") && !u.startsWith("data:"))).toEqual([]); // prettier-ignore
