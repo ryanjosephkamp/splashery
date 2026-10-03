@@ -19,3 +19,5 @@ merges.
 | 06-perf-audit.md         | Load size and frame time per toy, and what would lighten it  | report and data            | no            |
 | 08-fidelity-stage1.md    | The boombox trained from Blender renders, on the owner's Mac | scripts, two SOGs, report  | yes           |
 | 09-supersplat-compare.md | Splashery and SuperSplat compared, with evidence             | report and data            | yes           |
+| 11-hands-on-materials.md | Real physical properties for the hands-on toys, with sources | data and report            | yes           |
+| 12-hands-l1-sweep.md     | Every toy picks up, lands, settles and goes home on Reset    | one new test file, report  | no            |
