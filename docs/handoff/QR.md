@@ -278,7 +278,14 @@ and the scan-view camera; it lives in the session's scratch space, not the repo.
 `lanes/QR` record on the page yet (the Operator makes it); the cards show under the id "QR" until
 then.
 
+Round 2 cards (October 3, 2026, about 10:50 UTC): `qr-neon-burst-r2` and `qr-gems-burst-r2` (they
+replace `qr-neon-burst` and `qr-gems-burst`), `qr-neon-light-burst`, and in the new group `alive`:
+`qr-classic-alive`, `qr-dots-alive`, `qr-rounded-alive`, `qr-bricks-alive`, `qr-gems-alive`,
+`qr-bubbles-alive`, `qr-neon-alive`, `qr-neon-light-alive` (filmed in Scan view throughout; 12 of 12
+sampled frames of every MP4 read back; in the Bubbles clip's GIF jsQR missed 4 of 84 frames, said on
+its card). `qr-neon-assemble` still shows the first Neon.
+
 ### Next
 
-- The QR scan lab's scorecard: set the defaults and warnings from it.
+- The QR scan lab's scorecard: set the defaults and warnings from its measurements of the toy.
 - The owner's marks on the cards.
