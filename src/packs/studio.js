@@ -4,16 +4,24 @@
 // plate (sand on a bowed metal plate finding the plate's still lines).
 
 import { mix, shade, clamp, smoothstep, ramp } from "../kit.js";
-import { spectrogram, landscapePlan, toMono, DB_FLOOR, F_MIN, F_MAX } from "./studio-audio.js";
+import {
+  spectrogram,
+  landscapePlan,
+  toMono,
+  bands,
+  DB_FLOOR,
+  F_MIN,
+  F_MAX,
+} from "./studio-audio.js";
 // Lane Live input: the microphone (src/live/), only once someone taps for it.
-import { live as liveIn } from "../live/live.js";
-import { bandLevels } from "../live/analysis.js";
+import { live as liveIn, stop as liveStop } from "../live/live.js";
+import { bandLevels, noteOf } from "../live/analysis.js";
 import { reliefGrid } from "../live/relief.js";
 // Lane Live input r2: a long song plays at once and is measured in a worker;
 // the measured looks (Ribbons, Tube, Lines, Mesh).
 import { Track, SongAnalysis } from "./song-stream.js";
 import { LOOKS, buildLook, drawLook, lookMotion, lookVersion, buildLandscapeLong, drawLandscapeLong, landscapeCaps } from "./song-looks.js"; // prettier-ignore
-import { HOP as FRAME } from "./song-analysis.js";
+import { HOP as FRAME, F as FIELD, FIELDS } from "./song-analysis.js";
 import { MicRecorder, wavBlob, saveBlob, songTransport } from "./song-record.js";
 
 // ---- The Chladni plate ----------------------------------------------------------------
@@ -181,7 +189,7 @@ const CHLADNI = {
   // Lane Live input r3: tilt to see the plate from the side (above the stage only).
   tiltLock: false,
   pitchRange: [0.05, 1.35],
-  alive: (c) => (c.bow > 0.001 && c.bow < 0.999) || liveIn.on("mic"), // lane Live input: sung to
+  alive: (c) => (c.bow > 0.001 && c.bow < 0.999) || liveIn.on("mic") || !!CHF.song?.track?.playing, // lane Live input: sung to, r4 played to
   // Sand grains take most of the budget (in twelve copies of which one shows).
   density: 2,
   options: [
@@ -194,28 +202,55 @@ const CHLADNI = {
     },
   ],
   controls: [{ key: "bow", label: "Bow the plate", type: "toggle", default: 0, ease: BOW_SECS }],
-  action: { key: "bow", label: "Bow the plate", quiet: ["bow"] },
-  // Lane Live input: sing to the plate.
+  action: {
+    key: "bow",
+    label: "Bow the plate",
+    quiet: ["bow"],
+    // Lane Live input r4: with your audio open, a tap plays or pauses it
+    // (inside the tap itself, as a phone wants).
+    onAct() {
+      const t = CHF.song?.track;
+      if (!t || liveIn.on("mic")) return;
+      if (t.playing) t.pause();
+      else t.play(CHF.sound);
+    },
+  },
+  // Lane Live input: sing to the plate; r4, or play your own audio to it.
   input: {
-    title: "Sing to the plate",
-    fileButton: false,
-    live: [{ kind: "mic", rebuild: false, status: singStatus }],
-    note: "Tap “Use my microphone” and sing a steady note. The plate listens as a thinner plate would, with its modes at 75, 150, 195, 255 and 375 Hz: the mode nearest your note rings, and the sand settles into its figure while you hold it. Change the note and another mode takes over.",
+    title: "Sing or play to the plate",
+    accept: "audio/*,.mp3,.wav,.ogg,.m4a,.flac,.aac,.opus",
+    binary: true,
+    maxBytes: 400e6, // as the Song landscape: it plays from the file
+    fileButton: "Open your own audio…",
+    async read(_text, fileName, file) {
+      return openChladniAudio(file, fileName);
+    },
+    shown: () => chladniShown(),
+    live: [
+      { render: () => songTransport(chladniTransport) },
+      { kind: "mic", rebuild: false, status: singStatus },
+    ],
+    note: "Tap “Use my microphone” and sing a steady note, or open a song or any sound file. The plate listens as a thinner plate would, with its modes at 75, 150, 195, 255 and 375 Hz: the mode nearest the note rings, and the sand settles into its figure. Change the note and another mode takes over, with fresh sand. A song's strongest pitch, moved by octaves into the plate's range, drives it as it plays; the file stays on your device.",
   },
   drive(t, c, out, info) {
     const g = info?.data?.chladni;
     if (!g) return;
-    // Lane Live input: while the microphone is on, your voice bows the plate.
+    if (info?.sound) CHF.sound = info.sound; // r4: for a tap's onAct
+    // Lane Live input: while the microphone is on, your voice bows the plate;
+    // r4: otherwise your audio, while it is open.
     const sung = liveIn.on("mic");
+    if (sung && CHF.song?.track?.playing) CHF.song.track.pause();
+    const played = !sung && !!CHF.song;
     // After the microphone stops, the sung sand stays as it is until the
     // next tap (the bow's own state takes over then), rather than jumping to
     // wherever a tap made while singing had left the bow.
-    if (sung) CH.bowAtSing = c.bow ?? 0;
+    if (sung || played) CH.bowAtSing = c.bow ?? 0;
     else if (CH.bowAtSing !== null && (c.bow ?? 0) !== CH.bowAtSing) CH.bowAtSing = null;
-    const keep = !sung && CH.bowAtSing !== null && SING.p > 0;
-    const p = sung ? singDrive(info.time ?? t, g.mode) : keep ? SING.p : clamp01(c.bow ?? 0);
+    const keep = !sung && !played && CH.bowAtSing !== null && SING.p > 0;
+    const time = info.time ?? t;
+    const p = sung ? singDrive(time, g.mode) : played ? fileDrive(time, g.mode) : keep ? SING.p : clamp01(c.bow ?? 0); // prettier-ignore
     // The sound: the hum when the bowing starts, a hiss when it is stirred.
-    if (sung) CH.was = p; // your voice is the sound
+    if (sung || played) CH.was = p; // your voice (or audio) is the sound
     else if (CH.was <= 0.001 && p > 0.001) for (const s of chladniCue(g.mode, true)) out.cues.push(s);
     else if (CH.was >= 0.999 && p < 0.999) for (const s of chladniCue(g.mode, false)) out.cues.push(s); // prettier-ignore
     CH.was = p;
@@ -226,8 +261,9 @@ const CHLADNI = {
     for (let i = 0; i < KEYS; i++) out.parts[`sand${i}`] = { visible: i === j ? 1 : 0 };
     out.morph = [pos - j, 0, 0, 0];
     // The bow is drawn along the front edge while the sand moves.
-    const bowing = !sung && p > 0.001 && p < 0.999;
-    const ramp = sung ? SING.r : Math.min(smoothstep(0, 0.06, p), 1 - smoothstep(0.94, 1, p));
+    const bowing = !sung && !played && p > 0.001 && p < 0.999;
+    const ramp =
+      sung || played ? SING.r : Math.min(smoothstep(0, 0.06, p), 1 - smoothstep(0.94, 1, p));
     out.parts.bow = {
       visible: bowing ? 1 : 0,
       offset: [0, 0.38 * Math.sin(t * 7) * ramp, 0],
@@ -1260,6 +1296,206 @@ function singDrive(time, mode) {
   }
   return SING.p;
 }
+// ---- Lane Live input r4: the Chladni plate plays your audio ---------------------------
+// A song or any sound file opened on the plate plays from the file itself
+// (song-stream.js Track, as the Song landscape plays it) and is measured in
+// the Song landscape's worker (song-analysis.js: pitch and loudness every
+// 40 ms). Each moment's strongest pitch (the voiced pitch where there is
+// one, else the loudest band) is moved by octaves into the plate's range
+// and rings the modes as a sung note does. A song changes note far faster
+// than a voice, so the modes keep a running score (each mode's response to
+// the music, fading over about a second); the plate on show rings by its
+// own response, and the top-scoring mode takes over, with fresh sand, when
+// it clearly leads (1.5 times the plate's own score) and the plate has had
+// FILE_REST seconds to settle. Nothing is uploaded.
+const CHF = { song: null, an: null, sound: null, score: new Map(), now: null };
+const FILE_REST = 2.5; // seconds a plate rings before the music may switch it
+const SCORE_FADE = 1.2; // seconds
+const BAND_HZ = bands(12).centers; // the analysis' bands (song-analysis.js NF)
+
+export const chladniFileState = () => ({
+  name: CHF.song?.name ?? null,
+  playing: !!CHF.song?.track?.playing,
+  pos: CHF.song ? CHF.song.track.time() : 0,
+  measured: CHF.an?.progress ?? 0,
+  now: CHF.now,
+  p: SING.p,
+  builds: SING.builds,
+});
+
+// Into the plate's range, by octaves (60 to 400 Hz).
+export function foldHz(hz) {
+  let x = hz;
+  while (x >= 400) x /= 2;
+  while (x < 60) x *= 2;
+  return x;
+}
+
+// Frame i's strongest pitch (Hz) and loudness (dBFS), or null if not measured.
+function strongest(i) {
+  const f = CHF.an?.features;
+  if (!f || i < 0 || i >= f.n || !f.done[i]) return null;
+  const nfi = FIELDS.length;
+  const db = f.feat[i * nfi + FIELD.rms];
+  let hz = f.feat[i * nfi + FIELD.f0];
+  if (!(hz > 0)) {
+    let top = -Infinity;
+    for (let b = 0; b < f.nf; b++) {
+      const v = f.bands[i * f.nf + b];
+      if (v > top) {
+        top = v;
+        hz = BAND_HZ[b];
+      }
+    }
+  }
+  return hz > 0 ? { hz, db } : null;
+}
+
+function fileDrive(time, mode) {
+  const dt = SING.last === null ? 0 : Math.min(0.1, Math.max(0, time - SING.last));
+  if (SING.last === null) SING.built = time;
+  SING.last = time;
+  const t = CHF.song.track;
+  if (!t.playing) {
+    SING.r = 0;
+    return SING.p;
+  }
+  const i = Math.floor(t.time() / FRAME);
+  CHF.an?.focus(i);
+  const s = strongest(i);
+  const fade = Math.exp(-dt / SCORE_FADE);
+  for (const [k, v] of CHF.score) CHF.score.set(k, v * fade);
+  if (!s) {
+    SING.r = 0;
+    return SING.p;
+  }
+  const hz = foldHz(s.hz);
+  const loud = clamp01((s.db + 54) / 30);
+  // Each mode's running score (modes that share a frequency share a score).
+  const respond = (m) => {
+    const x = (1200 * Math.log2(hz / singFreq(m))) / SING_WIDTH;
+    return 1 / (1 + x * x);
+  };
+  for (const m of MODES) {
+    const key = m.n * m.n + m.m * m.m;
+    if (m !== MODES.find((q) => q.n * q.n + q.m * q.m === key)) continue;
+    CHF.score.set(key, (CHF.score.get(key) ?? 0) + respond(m) * loud * dt);
+  }
+  const own = respond(mode);
+  SING.r = own * loud;
+  SING.p = Math.min(1, SING.p + (dt / BOW_SECS) * SING.r * 1.4);
+  SING.note = { name: noteOf(s.hz).name, hz: s.hz };
+  SING.near = singMode(hz, mode);
+  const ownKey = mode.n * mode.n + mode.m * mode.m;
+  let lead = ownKey;
+  for (const [k, v] of CHF.score) if (v > (CHF.score.get(lead) ?? 0)) lead = k;
+  CHF.now = { hz: s.hz, folded: hz, loud, lead, own: ownKey };
+  if (
+    lead !== ownKey &&
+    CHF.score.get(lead) > 1.5 * (CHF.score.get(ownKey) ?? 0) &&
+    time - SING.built > FILE_REST &&
+    !SING.asked
+  ) {
+    // prettier-ignore
+    SING.asked = true;
+    const next = singMode(SING_F0 * lead, mode).mode;
+    liveIn.setOptions?.({ mode: next.id });
+  }
+  return SING.p;
+}
+
+function closeChladniAudio() {
+  const s = CHF.song;
+  if (s) {
+    s.track.close();
+    URL.revokeObjectURL(s.url);
+  }
+  CHF.an?.close();
+  CHF.song = null;
+  CHF.an = null;
+  CHF.now = null;
+  CHF.score.clear();
+}
+
+async function openChladniAudio(file, fileName) {
+  if (!file) throw new Error("Open a sound file.");
+  if (liveIn.on("mic")) liveStop("mic");
+  closeChladniAudio();
+  const url = URL.createObjectURL(file);
+  const track = new Track(url);
+  let duration;
+  try {
+    duration = await track.ready;
+  } catch (err) {
+    track.close();
+    URL.revokeObjectURL(url);
+    throw err;
+  }
+  const an = new SongAnalysis();
+  an.start(file, 44100).catch((err) => (an.error = err?.message || String(err)));
+  CHF.song = { name: fileName.replace(/\.[^.]+$/, ""), url, track, duration };
+  CHF.an = an;
+  track.play(CHF.sound);
+  return {};
+}
+
+function chladniShown() {
+  const s = CHF.song;
+  if (!s) return "";
+  const an = CHF.an;
+  const left =
+    an && !an.finished ? ` Listening through it: ${Math.round(an.progress * 100)}%.` : "";
+  return `${s.name} (${Math.round(s.duration)} s).${left}`;
+}
+
+const chladniTransport = {
+  prefix: "chladni",
+  state() {
+    const s = CHF.song;
+    return {
+      hidden: !s,
+      pos: s ? s.track.time() : 0,
+      length: s?.duration || 0,
+      playing: !!s?.track?.playing,
+      mic: liveIn.on("mic"),
+      live: false,
+      recorded: 0,
+      recording: 0,
+    };
+  },
+  toStart() {
+    const t = CHF.song?.track;
+    if (!t) return;
+    t.el.currentTime = 0;
+    t.anchor = null;
+    if (!t.playing) t.play(CHF.sound);
+    liveIn.wake?.();
+  },
+  toggle() {
+    const t = CHF.song?.track;
+    if (!t) return;
+    if (t.playing) t.pause();
+    else t.play(CHF.sound);
+    liveIn.wake?.();
+  },
+  seek(sec) {
+    const t = CHF.song?.track;
+    if (!t) return;
+    t.el.currentTime = Math.max(0, Math.min(t.duration || 0, sec));
+    t.anchor = null;
+    liveIn.wake?.();
+  },
+  close() {
+    closeChladniAudio();
+    liveIn.wake?.();
+  },
+  // Another toy: the audio stops (a rebuild of the plate keeps it playing).
+  gone() {
+    setTimeout(() => {
+      if (globalThis.window?.__splashery?.player?.scene?.toy?.id !== "chladni-plate") CHF.song?.track?.pause(); // prettier-ignore
+    }, 300);
+  },
+};
 // ---- End of live input ----------------------------------------------------------------
 
 export const RECIPES = {
