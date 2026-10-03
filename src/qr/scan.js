@@ -48,13 +48,30 @@ export async function readCode(canvas, { native = true } = {}) {
     }
   }
   const read = await loadJsQR();
-  const ctx = canvas.getContext("2d", { willReadFrequently: true });
-  const img = ctx.getImageData(0, 0, canvas.width, canvas.height);
-  let r = read(img.data, img.width, img.height, { inversionAttempts: "dontInvert" });
-  if (r) return { text: r.data, reader: "jsQR", inverted: false };
-  // jsQR 1.4's "onlyInvert" never makes the inverted picture; "invertFirst"
-  // tries it first (the plain one has already failed above).
-  r = read(img.data, img.width, img.height, { inversionAttempts: "invertFirst" });
-  if (r) return { text: r.data, reader: "jsQR", inverted: true };
+  // The picture as it is, then at half size, as a phone's reader tries a
+  // code at more than one scale (jsQR alone reads one).
+  for (const scale of [1, 0.5]) {
+    const img = pixels(canvas, scale);
+    const at = scale === 1 ? "" : ", at half size";
+    let r = read(img.data, img.width, img.height, { inversionAttempts: "dontInvert" });
+    if (r) return { text: r.data, reader: `jsQR${at}`, inverted: false };
+    // jsQR 1.4's "onlyInvert" never makes the inverted picture; "invertFirst"
+    // tries it first (the plain one has already failed above).
+    r = read(img.data, img.width, img.height, { inversionAttempts: "invertFirst" });
+    if (r) return { text: r.data, reader: `jsQR${at}`, inverted: true };
+  }
   return null;
+}
+
+function pixels(canvas, scale) {
+  let c = canvas;
+  if (scale !== 1) {
+    c = document.createElement("canvas");
+    c.width = Math.round(canvas.width * scale);
+    c.height = Math.round(canvas.height * scale);
+    const g = c.getContext("2d");
+    g.imageSmoothingQuality = "high";
+    g.drawImage(canvas, 0, 0, c.width, c.height);
+  }
+  return c.getContext("2d", { willReadFrequently: true }).getImageData(0, 0, c.width, c.height);
 }

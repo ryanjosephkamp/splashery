@@ -136,8 +136,16 @@ const idle = (app) => {
 // Renders the scan view and reads it back. Sets QR.check:
 // { ok, text, reader, inverted, at } (ok: it read back the very text).
 export async function checkScan() {
+  clearTimeout(QR.timer); // a check asked for now replaces the automatic one
+  // One check at a time: a second call waits for the one running.
+  if (QR.running) return QR.running;
+  QR.running = runCheck().finally(() => (QR.running = null));
+  return QR.running;
+}
+
+async function runCheck() {
   const app = globalThis.__splashery?.app;
-  if (!app?.player || !QR.code || QR.checking) return QR.check;
+  if (!app?.player || !QR.code) return QR.check;
   QR.checking = true;
   refreshPanel();
   try {
@@ -376,9 +384,11 @@ function advice(o) {
   const tips = [];
   if (eccFor(o) !== "H") tips.push("raise the error correction (Q or H)");
   if (codeContrast(o).ratio < 4.5) tips.push("use more contrast");
-  if (o.style !== "classic") tips.push("try a flatter style (Classic or Rounded)");
+  if (o.style !== "classic") tips.push("pick a flatter style (Classic or Rounded)");
   if (o.gradient && o.gradient !== "none") tips.push("drop the gradient");
-  return tips.length ? `Try to ${tips.join(", ")}.` : "Try a shorter text.";
+  if (!tips.length) return "Try a shorter text.";
+  const list = tips.length > 1 ? `${tips.slice(0, -1).join(", ")} or ${tips.at(-1)}` : tips[0];
+  return `To help it, ${list}.`;
 }
 
 // ---- The recipe ---------------------------------------------------------------------------

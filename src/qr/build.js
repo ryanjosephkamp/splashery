@@ -115,9 +115,9 @@ export const gray = (c) => 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];
 // patch of the picture against its own neighborhood, so strong light and
 // dark detail inside a dark area (a bright bevel, a deep seam, a highlight)
 // reads as extra modules. jsQR takes an 8-pixel block whose range is under 24
-// levels (about 0.09) as flat, so within ±0.04 a dark area stays one dark area. Sides
+// levels (about 0.09) as flat, so within ±0.03 a dark area stays one dark area. Sides
 // seen only at an angle keep their full shading.
-export const SHADE_TOL = 0.04;
+export const SHADE_TOL = 0.03;
 export function steady(base, c, tol = SHADE_TOL) {
   const d = gray(c) - gray(base);
   if (Math.abs(d) <= tol) return c;
@@ -549,7 +549,7 @@ export function buildCode(code, o, budget = 120000) {
           }
           const across = (d) => {
             const f = clamp01(1 - d / w);
-            return mixc(glow, core, f * f);
+            return steady(glow, mixc(glow, core, f * f));
           };
           const links = [
             [dark(r, c + 1), 1, 0],

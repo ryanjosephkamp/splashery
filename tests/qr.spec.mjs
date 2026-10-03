@@ -125,12 +125,22 @@ for (const [w, h] of [
       // The screenshot, framed on the code as a phone would frame it (the
       // page's title and labels beside it are not part of the code).
       const r = await page.evaluate(() => window.__splashery.qr.screenRect());
-      const pad = 0;
+      // Plus 1.5 modules of the plate around the quiet zone, as a phone sees
+      // it (an inverted code's dark quiet zone alone, cut off at the picture's
+      // edge, reads as white in jsQR's thresholds).
+      // The page's title sits over the stage's top-left corner; the frame
+      // stops short of it (a phone's reader copes with it, jsQR doesn't).
+      const brand = await page.evaluate(() => document.querySelector("header.brand")?.getBoundingClientRect().toJSON()); // prettier-ignore
+      let pad = (r.width / (info.info.size + 8)) * 1.5;
+      if (brand && brand.right > r.x - pad) pad = Math.max(0, Math.min(pad, r.y - brand.bottom - 1));
       const x = Math.max(0, r.x - pad);
       const y = Math.max(0, r.y - pad);
       const clip = { x, y, width: Math.min(w - x, r.width + 2 * pad), height: Math.min(h - y, r.height + 2 * pad) }; // prettier-ignore
       const shot = await page.screenshot({ clip });
-      if (readPNG(shot) !== URL0) failed.push(`${style}: the ${w}x${h} screenshot`);
+      if (readPNG(shot) !== URL0) {
+        failed.push(`${style}: the ${w}x${h} screenshot`);
+        fs.writeFileSync(test.info().outputPath(`${style}-${w}x${h}.png`), shot);
+      }
       if (style === "classic" || style === "neon")
         await page.screenshot({ path: `tests/screenshots/qr-${style}-${w}x${h}.png` });
     }

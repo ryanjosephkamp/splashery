@@ -168,12 +168,21 @@ QR code generator made of splats"). No engine change was needed.
   speckle. Every patch is two staggered lattices now (`flat()` in `build.js`).
 - **No seams between modules.** Each module's patch reaches into its dark neighbors (`cell()`), so a
   run of modules is one dark area.
-- **3D shading within limits.** A face seen front on may stray at most 0.08 in gray from its
-  module's color (`steady()`, `SHADE_TOL`); sides seen only at an angle keep full shading. Gems,
+- **3D shading within limits.** A face seen front on may stray at most 0.03 in gray from its
+  module's color (`steady()`, `SHADE_TOL`): jsQR takes an 8-pixel block whose range is under 24 gray
+  levels as flat and thresholds anything wider at its own mean, so a highlight inside a big dark
+  area turned white. Sides seen only at an angle keep full shading. Neon's tube cores too. Gems,
   bubbles and bricks sit on a dark setting, so their gaps read dark.
 - **Solid finders.** In Bricks, Gems, Bubbles and Neon the finder and alignment patterns are smooth
   solid pieces with a bevel only on their outer edges: readers find a code by the 1:1:3:1:1 runs
   across them, and bevels or seams inside broke those runs at desktop size.
+- **The sheet has holes under the dark modules**, in splats as fine as the modules'. Seen at an
+  angle, a big sheet splat behind a module sorted in front of it and the code turned gray and
+  hatched.
+- **The check reads at two scales**: the 720 px picture, then half size (as phone readers try
+  several scales). The result says which (`reader: "jsQR, at half size"`).
+- **One check at a time**: a check asked for cancels the pending automatic one, and a second call
+  waits for the running one (the automatic check's capture once landed in a screenshot).
 - Neon is an inverted code (light on dark). It reads in jsQR and the panel warns that not every
   reader takes inverted codes.
 
@@ -209,6 +218,9 @@ qr.info(); // { text, version, size, ecc, style, options, check, warnings, error
   title over the stage otherwise trips jsQR's finder search) and in the toy's own check; the GIF's
   last frame (and the frame 1.2 s before it) reads back, a frame mid-burst doesn't; the PNG is 1024
   px and reads back; a `#s=` link round-trips the text, style, level and eye color; the warnings.
+
+- On screen, Scan view leaves 3 modules past the quiet zone; the toy opens in that view (camera
+  distance 3.1 radii, the same for any screen, since the field of view spans the narrower side).
 
 ### Next
 
