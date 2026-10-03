@@ -1313,6 +1313,9 @@ const FILE_REST = 2.5; // seconds a plate rings before the music may switch it
 const SCORE_FADE = 1.2; // seconds
 const BAND_HZ = bands(12).centers; // the analysis' bands (song-analysis.js NF)
 
+// For the clip tool: the open audio's track (its clock is stepped with the clip's).
+export const chladniTest = () => ({ track: CHF.song?.track ?? null });
+
 export const chladniFileState = () => ({
   name: CHF.song?.name ?? null,
   playing: !!CHF.song?.track?.playing,
