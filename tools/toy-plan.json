@@ -2101,6 +2101,12 @@
       "sound": "A knock on the wall, the wire creaking on the nail, and a softer knock.",
       "improved": "Books: a tap swings the frame, its wire and photo about the nail like a damped pendulum, smaller each swing, until it hangs straight again (3 s). Books r3: a molded gold frame (a bead, a flat, a cove and a big bead, burnished on the raised parts); every frame plays a GIF or a video on a loop; the digital frame lists its photos in the Toy tab to reorder, and steps through them in order or at random. Books r4: a double-tap fills the screen with the photo, and again steps back."
     },
+    "qr-code": {
+      "v": "new",
+      "owner": "The owner's idea of October 1, 2026 (\"go hard on it\"), lane QR, October 3, 2026.",
+      "effect": "A QR code made of splats in seven styles (Classic, Dots, Rounded, Bricks, Gems, Bubbles, Neon) that always scans. A tap bursts it: every module, finder and alignment pattern tumbles off as a solid piece, falls to a floor and flies back to its exact place (3.6 s). The Toy tab adds Assemble (the pieces fly in and lock into place) and Flip (tiles turn over in a wave, showing their back color).",
+      "sound": "Soft: a muffled pop, a whoosh out, the light knock of pieces landing and a rush back (Assemble: a rush in and a settle; Flip: two soft sweeps)."
+    },
     "chladni-plate": {
       "v": "new",
       "owner": "Approved on the Splashery Universe page (lane Studio Sound), September 29, 2026.",

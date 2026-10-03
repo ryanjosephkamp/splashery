@@ -1647,6 +1647,12 @@ export const TOY_HELP = {
     about:
       "In 1787 Ernst Chladni sprinkled sand on a metal plate and drew a violin bow along its edge. The plate shook, and the sand jumped away from the places that moved and gathered on the lines that stayed still, a different picture for each pitch. Those still lines are called nodal lines.\n\nTap to bow the plate: it hums at the mode's pitch and every grain of sand, a splat of its own, hops and slides until the figure appears. Tap again to stir the sand up. The Mode choice picks the pitch and the pattern.\n\nOr sing to it, or open a song: the note it hears rings the nearest mode, and a new note clearly held brings a new pattern with fresh sand. A song's strongest pitch, moved by octaves into the plate's range, plays it as the song goes, and the file stays on your device. This toy uses the classic square-plate model, cos(nπx)·cos(mπy) ± cos(mπx)·cos(nπy) = 0, with a pitch that grows with n² + m².",
   },
+  // Lane QR.
+  "qr-code": {
+    howTo: "Type a link in the Toy tab, pick a style, and tap “Check that it scans”.",
+    about:
+      "A QR code stores text in a square grid of dark and light modules. Three big finder patterns tell a camera where the code is and which way up it sits, and Reed-Solomon error correction lets it lose up to 7, 15, 25 or 30 percent (levels L, M, Q and H) and still read back. Masahiro Hara's team at Denso Wave invented it in 1994.\n\nHere every dark module is a crisp cell of splats, in one of seven styles. “Scan view” turns it flat to the camera, and the toy reads its own picture back to check that it still scans. Tap it and the modules burst, fall and fly back to their places. Your text never leaves your device.",
+  },
   // Lane Live input.
   "room-echo": {
     howTo:

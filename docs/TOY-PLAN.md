@@ -10,10 +10,10 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 372 toys. 342 have a tap action today; the other 30 only hop.
+- 373 toys. 343 have a tap action today; the other 30 only hop.
 - **keep** (the effect is right: the owner liked it, or C2 finished it): 368.
 - **more** (has an effect; make it clearer or more dramatic): 0.
-- **new** (needs its own effect): 4.
+- **new** (needs its own effect): 5.
 - Visual fixes: 0 open, 30 done. Touch or drag interaction asked for: 4.
 
 ## By phase
@@ -67,7 +67,8 @@ Proposals below are suggestions; the owner may change them.
 - **E3, new effects: tiny things, anatomy and maths.** None.
 - **E4, new effects: nature and weather.** None.
 - **E5, new effects: food.** None.
-- **E6, new effects: balls and the rest.** Picture lab, Song landscape, Chladni plate, Video to 3D
+- **E6, new effects: balls and the rest.** Picture lab, Song landscape, Chladni plate, QR code,
+  Video to 3D
 - **F, touch and drag interaction.** Gummy bear, Building bricks, Newton's cradle, Puzzle cube.
 
 ## Scans (62)
@@ -2707,7 +2708,7 @@ Proposals below are suggestions; the owner may change them.
     style; sharp sets (even placement in square tiles, walnut, velvet, brass and gold).
   - Sound: Switching on is the click and crackle without the hum; switching off is unchanged.
 
-## Studio (8)
+## Studio (9)
 
 - **Song landscape** (`song-landscape`). Now: tap: Play or pause the song. Plan: new effect (E6).
   - Owner: Approved on the Splashery Universe page (lane Studio Sound), September 29, 2026.
@@ -2760,6 +2761,15 @@ Proposals below are suggestions; the owner may change them.
     Poly Haven's vase).
   - Sound: A rising whoosh as the splats lift off, then four falling plucked notes as they settle
     back.
+- **QR code** (`qr-code`). Now: tap: Burst and return. Plan: new effect (E6).
+  - Owner: The owner's idea of October 1, 2026 ("go hard on it"), lane QR, October 3, 2026.
+  - Effect: A QR code made of splats in seven styles (Classic, Dots, Rounded, Bricks, Gems, Bubbles,
+    Neon) that always scans. A tap bursts it: every module, finder and alignment pattern tumbles off
+    as a solid piece, falls to a floor and flies back to its exact place (3.6 s). The Toy tab adds
+    Assemble (the pieces fly in and lock into place) and Flip (tiles turn over in a wave, showing
+    their back color).
+  - Sound: Soft: a muffled pop, a whoosh out, the light knock of pieces landing and a rush back
+    (Assemble: a rush in and a settle; Flip: two soft sweeps).
 - **Photo to 3D** (`photo-3d`). Now: tap: Raise or flatten the depth. Plan: keep.
   - Owner: Approved on the Splashery Universe page ("photo yes", September 29, 2026; lane Photo to
     3D; labs only).
