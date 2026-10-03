@@ -120,8 +120,10 @@ Model: Opus 5.5 (claude-opus-5-5), default effort.
   toy, and the panel's slider follows. That needs the small engine change in #200 ("Engine: a toy's
   drag can set one of its sliders", branch `claude/lane-sharp-b-engine`, merged into this branch),
   which goes in first.
-- Still to do: jelly, bricks and sushi (sharper) and the pebbles' base, after Physics (#184); the
-  quartz cluster's and the tornado's bases after Sharpness A (#172).
+- On hold (the owner's call of October 3, 2026: no new Sharpness rounds until the Fidelity lane's
+  Stage 1 reports): jelly, bricks and sushi (sharper) and the pebbles' base (they waited on Physics
+  #184), and the quartz cluster's and the tornado's bases (they waited on Sharpness A #172). This
+  lane only finishes the owner's marks on its current cards, #185 and #200.
 
 ## Notes
 
