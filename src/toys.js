@@ -3406,6 +3406,19 @@ export const TOYS = [
     tags: "3d model glb gltf obj stl mesh triangles convert converter wireframe texture cad print",
     camera: { yaw: 0.5, pitch: 0.28, roll: 0, distance: 4.5 },
   },
+  // ---- Pack: qr (lane QR) ----
+  {
+    id: "qr-code",
+    label: "QR code",
+    category: "studio",
+    kind: "kit",
+    pack: "qr",
+    labs: true,
+    tags: "qr code generator barcode link url scan camera phone print gif share",
+    // Opens in scan view: flat and square, the quiet zone clear of the
+    // stage's buttons on any screen (the field of view spans the narrower side).
+    camera: { yaw: 0, pitch: 0, roll: 0, distance: 3.1 },
+  },
   // ---- Pack: photo-3d (lane Photo to 3D) ----
   {
     id: "photo-3d",

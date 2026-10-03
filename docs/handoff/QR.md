@@ -130,10 +130,87 @@ Engine changes go only through an engine PR.
   - docs/PACKS.md (recipes, budgets, text and small details, "Effect quality");
   - `src/exports.js`;
   - how another Studio toy is built (`src/packs/studio.js`).
-- Your handoff file: start it with this brief, word for word, under "## Brief", then keep "## State"
-  current.
-- Before every push: CLAUDE.md, "Before every push".
+- Your handoff file: start it with this brief, word for word, under "## Brief", then keep "## State
 
-## State
+October 3, 2026 (Opus 5.5). First working version pushed on `claude/lane-qr` (draft PR "Phase QR: a
+QR code generator made of splats"). No engine change was needed.
 
-Starting, October 3, 2026.
+### What is built
+
+- **The toy**: "QR code" (`qr-code`) on the Studio shelf, labs only (`src/toys.js`), recipe in
+  `src/packs/qr.js`, the rest in `src/qr/`:
+  - `encode.js`: the encoder. Project Nayuki's QR Code generator library (MIT), vendored in
+    `vendor/qrcodegen/` (compiled from its TypeScript, commit `3c6d0b3`, with an ES module export
+    added). It marks each module's role and the finder and alignment patterns as their own pieces.
+  - `build.js`: the splats. Seven styles (Classic, Dots, Rounded, Bricks, Gems, Bubbles, Neon), each
+    with its own preset colors and plate (`PRESETS`); foreground, background, linear or radial
+    gradient, eye color, plate (paper, wood, metal, none), the flip's back color.
+  - `field.js`: the motions, as a labs GPU program (the toy's `gpuField`, as in the Lab toy): every
+    module, finder and alignment pattern moves as one solid piece and ends exactly on its grid.
+  - `scan.js`: the reader: `BarcodeDetector` where it reads `qr_code`, else jsQR 1.4.0 (Apache-2.0,
+    `vendor/jsqr/`), loaded by a script tag on the first check.
+- **The panel** (the Toy tab, through `input.live: [{ render }]`, so no engine change): the text
+  box, the style row, what the code is (version, size, level), the contrast and inverted-code
+  warnings, Scan view, "Check that it scans" (also run by itself about 0.6 s after each change),
+  Save a PNG (1600 px, scan view with the quiet zone) and Save a GIF (the burst, then 1.6 s held
+  still). Record and Save splats are the site's own (Share tab).
+- **Error correction**: Auto is M for Classic and Q for the other styles; L, M, Q and H can be
+  picked. The library may raise the level for free when the text fits the same version (the panel
+  says so).
+- **Motions** (Toy tab buttons; a tap is Burst): Assemble (3.2 s), Flip (3.4 s), Burst and return
+  (3.6 s). Their sounds go out as cues from `drive` (`SOUNDS` in the pack); the tap's own entry in
+  `src/toy-sounds.js` is the burst.
+
+### How the codes are kept scannable (what the checks taught)
+
+- **No ripple inside dark areas.** A patch of flat splats on one grid leaves a faint lattice (about
+  20 gray levels); jsQR thresholds 8-pixel blocks against their own range, so that ripple became
+  speckle. Every patch is two staggered lattices now (`flat()` in `build.js`).
+- **No seams between modules.** Each module's patch reaches into its dark neighbors (`cell()`), so a
+  run of modules is one dark area.
+- **3D shading within limits.** A face seen front on may stray at most 0.08 in gray from its
+  module's color (`steady()`, `SHADE_TOL`); sides seen only at an angle keep full shading. Gems,
+  bubbles and bricks sit on a dark setting, so their gaps read dark.
+- **Solid finders.** In Bricks, Gems, Bubbles and Neon the finder and alignment patterns are smooth
+  solid pieces with a bevel only on their outer edges: readers find a code by the 1:1:3:1:1 runs
+  across them, and bevels or seams inside broke those runs at desktop size.
+- Neon is an inverted code (light on dark). It reads in jsQR and the panel warns that not every
+  reader takes inverted codes.
+
+### The test hook (for the QR scan lab)
+
+With the QR code toy open (`window.__splashery.app.chooseToy("qr-code")`, labs on):
+
+```js
+const qr = window.__splashery.qr;
+await qr.set({ text, style, ecc, fg, bg, gradient, fg2, eyes, eye, plate, back }); // any subset
+// A style alone brings its preset colors and plate; colors given with it win.
+// ecc: "auto" | "L" | "M" | "Q" | "H"; style: classic | dots | rounded | bricks | gems | bubbles | neon
+// gradient: none | linear | radial; eyes: same | own; plate: paper | wood | metal | none
+qr.scanView(); // the camera flat and square to the code, quiet zone in view
+qr.scanPose(margin); // that camera state ({ yaw, pitch, roll, distance }), margin in modules
+qr.screenRect(); // the code's square with its quiet zone on the page (CSS pixels)
+await qr.check(); // renders the scan view at 720 px and reads it back:
+// { ok, read, reader, inverted, text }
+await qr.png(size); // the scan view as a PNG blob (default 1024 px; not downloaded)
+await qr.gif({ motion, size }); // the GIF as a blob ("burst" | "flip" | "assemble")
+qr.info(); // { text, version, size, ecc, style, options, check, warnings, error }
+```
+
+`set` resolves once the toy is rebuilt and in scan view. The automatic check runs after it; call
+`check()` yourself for a result you can wait on.
+
+### Proof
+
+- `tests/qr.spec.mjs`: the encoder against segno's codes (`tests/fixtures/qr-vectors.json`, the ISO
+  "01234567" 1-M and "HELLO WORLD" 1-Q) and jsQR read-backs of codes from version 1 to 16; nothing
+  QR-related loads before the toy opens; every style at its defaults reads back with jsQR from
+  screenshots at 390×844 and 1440×900 (framed on the code, as a phone frames it: the page's own
+  title over the stage otherwise trips jsQR's finder search) and in the toy's own check; the GIF's
+  last frame (and the frame 1.2 s before it) reads back, a frame mid-burst doesn't; the PNG is 1024
+  px and reads back; a `#s=` link round-trips the text, style, level and eye color; the warnings.
+
+### Next
+
+- Clips and cards on the Effect review page (page 2), each ending on a big, scannable still.
+- The QR scan lab's scorecard: set the defaults and warnings from it.

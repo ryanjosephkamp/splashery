@@ -578,4 +578,8 @@ Photo to 3D uses [ONNX Runtime Web](https://github.com/microsoft/onnxruntime) (M
 Anything V2 Small (Apache 2.0), loaded only when someone opens a photo in that toy (or, in lane Live
 input's Splat mirror and Photo to 3D's live view, only after someone taps "Use my camera"). The
 Science shelf's galaxy sample was cut with [jsfive](https://github.com/usnistgov/jsfive) (public
-domain), a build tool only.
+domain), a build tool only. The QR code toy (lane QR) uses Project Nayuki's
+[QR Code generator library](https://www.nayuki.io/page/qr-code-generator-library) (MIT) to encode
+its codes and [jsQR](https://github.com/cozmo/jsQR) (Apache 2.0) to check that they scan, both
+loaded only when that toy opens (jsQR only when a check runs in a browser without its own QR
+reader). "QR Code" is a registered trademark of DENSO WAVE INCORPORATED.
