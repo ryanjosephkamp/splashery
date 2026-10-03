@@ -14,7 +14,7 @@ import {
   quatRotate,
   quatMul,
 } from "../kit.js";
-import { evenBox, evenCylinder, evenEllipsoid, evenRoundBox, evenTorus } from "./even.js";
+import { evenBox, evenCylinder, evenDisc, evenEllipsoid, evenRoundBox, evenTorus } from "./even.js";
 
 const TAU = Math.PI * 2;
 const DEG = 180 / Math.PI;
@@ -144,15 +144,21 @@ function prism(k, n, r0, r1, y0, y1, opts, { a0 = Math.PI / n, cap = true } = {}
 
 // Free splats along straight members (lattice girders, rigging).
 // segs: [a, b, thickness]; the budget is shared by length times thickness.
-function lattice(k, segs, { share, size = 0.7, stretch = 2.4, color, part, pattern, more }) {
+// even: true spaces the splats evenly along the members (lane Sharpness A)
+// instead of at random, so a girder reads as a clean line, not a dotted one.
+function lattice(
+  k,
+  segs,
+  { share, size = 0.7, stretch = 2.4, color, part, pattern, more, even = false },
+) {
   const cum = new Float64Array(segs.length);
   let total = 0;
   segs.forEach((s, i) => {
     total += len(sub(s[1], s[0])) * (s[2] ?? 1);
     cum[i] = total;
   });
-  k.cloud({ share, size, part, pattern }, (rand) => {
-    const x = rand() * total;
+  k.cloud({ share, size, part, pattern, jitter: even ? 0.15 : undefined }, (rand, i, n) => {
+    const x = even ? ((i + 0.5) / n) * total : rand() * total;
     let lo = 0;
     let hi = segs.length - 1;
     while (lo < hi) {
@@ -161,9 +167,9 @@ function lattice(k, segs, { share, size = 0.7, stretch = 2.4, color, part, patte
       else hi = mid;
     }
     const [a, b, w = 1] = segs[lo];
-    const t = rand();
+    const t = even ? (x - (lo ? cum[lo - 1] : 0)) / (cum[lo] - (lo ? cum[lo - 1] : 0)) : rand();
     const d = sub(b, a);
-    const j = 0.006 * w;
+    const j = (even ? 0.004 : 0.006) * w;
     const p = add(lerp3(a, b, t), [(rand() - 0.5) * j, (rand() - 0.5) * j, (rand() - 0.5) * j]);
     const splat = { p, dir: d, stretch, size: 0.7 + 0.3 * Math.sqrt(w), color: color(p, d, rand) };
     return more ? { ...splat, ...more(p, rand) } : splat;
@@ -185,6 +191,8 @@ function water(k, y, rx, rz, o = {}) {
   // even: true lays a round patch out on a sunflower spiral (no thin spots)
   // with less random color, for a smooth sea at phone size.
   const even = o.even === true && !rect;
+  // A rectangle with even: true takes an even 2D sequence (lane Sharpness A).
+  const evenRect = o.even === true && rect;
   k.cloud({ share, size: 1.6, pattern: false }, (rand, i, n) => {
     let x;
     let z;
@@ -195,6 +203,10 @@ function water(k, y, rx, rz, o = {}) {
       x = Math.cos(a) * r * rx;
       z = Math.sin(a) * r * rz;
       edge = smoothstep(0.85, 1, r);
+    } else if (evenRect) {
+      x = (((i * 0.7548776662466927 + 0.31) % 1) * 2 - 1) * rx;
+      z = (((i * 0.5698402909980532 + 0.17) % 1) * 2 - 1) * rz;
+      edge = 0;
     } else if (rect) {
       x = (rand() * 2 - 1) * rx;
       z = (rand() * 2 - 1) * rz;
@@ -210,9 +222,9 @@ function water(k, y, rx, rz, o = {}) {
     z += z0;
     if (o.mask && !o.mask(x, z)) return null;
     const ripple = 0.5 + 0.5 * Math.sin(x * 11 + z * 7 + Math.sin(z * 4 + x * 2) * 2);
-    let col = mix(deep, light, 0.25 + 0.5 * ripple * ripple + (even ? 0.04 : 0.15) * rand());
+    let col = mix(deep, light, 0.25 + 0.5 * ripple * ripple + (o.even ? 0.04 : 0.15) * rand());
     const f = foam ? foam(x, z) : 0;
-    if (f > 0) col = mix(col, "#f4fbff", clamp(f, 0, 1) * (even ? 0.85 : 0.6 + 0.4 * rand()));
+    if (f > 0) col = mix(col, "#f4fbff", clamp(f, 0, 1) * (o.even ? 0.85 : 0.6 + 0.4 * rand()));
     return {
       p: [x, y + (rand() - 0.5) * 0.003, z],
       n: [0, 1, 0],
@@ -268,8 +280,11 @@ const usFlag = (u, v) => {
 };
 
 // A disc of lawn (or any ground) with a soft edge colour.
-function ground(k, r, y, color, { edge = "#6b5a44", h = 0.06, share } = {}) {
-  k.add(k.cylinder(r, h), {
+// even: true (lane Sharpness A) lays it out evenly, as solid splats.
+function ground(k, r, y, color, { edge = "#6b5a44", h = 0.06, share, even = false } = {}) {
+  const sharp = even ? { even: true, opacity: 1, jitter: 0.012 } : {};
+  k.add(even ? evenCylinder(r, r, h) : k.cylinder(r, h), {
+    ...sharp,
     pos: [0, y - h / 2, 0],
     pattern: false,
     flat: 0.2,
@@ -279,6 +294,9 @@ function ground(k, r, y, color, { edge = "#6b5a44", h = 0.06, share } = {}) {
 }
 const grass = (c, base = "#5d9e45") =>
   lit(shade(base, 0.86 + 0.22 * c.noise(c.p[0] * 7, 0, c.p[2] * 7) + 0.06 * c.rand()), c);
+// Lawn without the speckle (lane Sharpness A): a broad, gentle mottle only.
+const calmGrass = (c, base = "#5d9e45") =>
+  lit(shade(base, 0.93 + 0.1 * c.noise(c.p[0] * 4, 0, c.p[2] * 4)), c);
 const tree = (k, p, r, col = "#3f7f37") => {
   k.add(k.sphere(r), {
     pos: add(p, [0, r * 0.9, 0]),
@@ -469,7 +487,7 @@ function eiffelBuild(k) {
   const lat = (p, d, rand) => {
     const w = Math.max(0.06, eifW(p[1]));
     const side = (p[0] * SUN[0] + p[2] * SUN[2]) / w;
-    const f = 0.78 + 0.16 * side + 0.08 * (rand() - 0.5) + 0.08 * smoothstep(0, 2.8, p[1]);
+    const f = 0.78 + 0.16 * side + 0.025 * (rand() - 0.5) + 0.08 * smoothstep(0, 2.8, p[1]);
     return shade(brown, f);
   };
   // The ironwork glows gold at night as channel 1 rises towards 1 (its
@@ -477,7 +495,8 @@ function eiffelBuild(k) {
   lattice(k, segs, {
     share: 0.56,
     size: 0.75,
-    stretch: 2.4,
+    stretch: 2,
+    even: true,
     color: lat,
     more: () => ({ kind: "band", channel: 1, params: [1, 0.5] }),
   });
@@ -506,15 +525,33 @@ function eiffelBuild(k) {
   );
   // The top: a deck, the lantern and the antenna.
   const iron = (c) => lit(brown, c, 0.62);
-  k.add(roundBox(0.19, 0.04, 0.19, 0.006), { pos: [0, TOP, 0], flat: 0.2, weight: 2, color: iron });
-  k.add(k.box(0.11, 0.12, 0.11), {
+  k.add(evenRoundBox(0.19, 0.04, 0.19, 0.006), {
+    even: true,
+    jitter: 0.012,
+    opacity: 1,
+    pos: [0, TOP, 0],
+    flat: 0.2,
+    weight: 2,
+    color: iron,
+  });
+  k.add(evenBox(0.11, 0.12, 0.11), {
+    even: true,
+    jitter: 0.012,
+    opacity: 1,
     pos: [0, TOP + 0.08, 0],
     flat: 0.2,
     weight: 2,
     color: (c) =>
       Math.abs(c.n[1]) < 0.5 && Math.abs(c.p[1] - TOP - 0.09) < 0.025 ? keep("#e7dcc2") : iron(c),
   });
-  k.add(k.cylinder(0.035, 0.07), { pos: [0, TOP + 0.175, 0], weight: 2, color: iron });
+  k.add(evenCylinder(0.035, 0.035, 0.07), {
+    even: true,
+    jitter: 0.012,
+    opacity: 1,
+    pos: [0, TOP + 0.175, 0],
+    weight: 2,
+    color: iron,
+  });
   rod(
     k,
     [0, TOP + 0.2, 0],
@@ -525,14 +562,17 @@ function eiffelBuild(k) {
   );
   // The floors: a gallery ring on the first, a solid deck on the second.
   const deck = (c) => {
-    if (c.n[1] > 0.5) return lit("#9a7a55", c);
-    const band = Math.abs(((c.p[0] + c.p[2]) * 40) % 1) < 0.35;
-    return lit(band ? "#5f4630" : "#8e6d4a", c);
+    if (c.n[1] > 0.5) return { c: lit("#9a7a55", c), size: 0.7 };
+    const band = Math.abs(((c.p[0] + c.p[2]) * 40) % 1) < 0.4;
+    return { c: lit(band ? "#6a4f36" : "#8e6d4a", c), size: 0.6 };
   };
   const r1 = eifW(F1) + 0.025;
   for (let j = 0; j < 4; j++) {
     const a = (j * Math.PI) / 2;
-    k.add(k.box(2 * r1, 0.06, 0.07), {
+    k.add(evenBox(2 * r1, 0.06, 0.07), {
+      even: true,
+      jitter: 0.012,
+      opacity: 1,
       pos: rotY([0, F1, r1 - 0.035], a),
       rot: [0, a * DEG, 0],
       flat: 0.2,
@@ -541,26 +581,41 @@ function eiffelBuild(k) {
     });
   }
   const r2 = eifW(F2) + 0.02;
-  k.add(k.box(2 * r2, 0.045, 2 * r2), { pos: [0, F2, 0], flat: 0.2, weight: 1.3, color: deck });
+  k.add(evenBox(2 * r2, 0.045, 2 * r2), {
+    even: true,
+    jitter: 0.012,
+    opacity: 1,
+    pos: [0, F2, 0],
+    flat: 0.2,
+    weight: 1.3,
+    color: deck,
+  });
   // Stone piers and the park.
   for (const sx of [-1, 1])
     for (const sz of [-1, 1])
-      k.add(k.box(0.3, 0.05, 0.3), {
+      k.add(evenBox(0.3, 0.05, 0.3), {
+        even: true,
+        jitter: 0.012,
+        opacity: 1,
         pos: [sx * 0.47, g0 + 0.005, sz * 0.47],
         flat: 0.2,
         color: (c) => lit("#b8ad98", c),
       });
-  k.add(k.box(2.1, g0, 2.1), {
+  k.add(evenBox(2.1, g0, 2.1), {
+    even: true,
+    jitter: 0.012,
+    opacity: 1,
     pos: [0, g0 / 2, 0],
     pattern: false,
     flat: 0.2,
     color: (c) => {
-      if (c.n[1] < 0.5) return lit("#7a6a52", c);
+      if (c.n[1] < 0.5) return { c: lit("#9c8a6c", c), size: 0.85 };
       const [x, , z] = c.p;
+      if (Math.max(Math.abs(x), Math.abs(z)) > 1.02) return { c: lit("#cdbd98", c), size: 0.7 };
       const lawn =
         Math.abs(x) > 0.16 && Math.abs(z) > 0.16 && Math.max(Math.abs(x), Math.abs(z)) < 0.98;
-      if (lawn && Math.hypot(x, z) > 0.78) return grass(c);
-      return lit(shade("#d6c7a4", 0.92 + 0.12 * c.noise(x * 20, 0, z * 20)), c);
+      if (lawn && Math.hypot(x, z) > 0.78) return calmGrass(c);
+      return lit(shade("#d6c7a4", 0.96 + 0.05 * c.noise(x * 8, 0, z * 8)), c);
     },
   });
 }
@@ -714,6 +769,9 @@ function pyramid(k, cx, cy, cz, half, h, { cap = 0, weight = 1 } = {}) {
   const apex = [cx, cy + h, cz];
   const sand = "#d8b779";
   const casing = "#efe2c3";
+  // Lane Sharpness A: even faces of solid splats, and stone courses large
+  // enough to read as steps at phone size (fine blocks broke into speckle).
+  const course = 0.026 + 0.012 * Math.min(1, half / 1.1);
   for (let j = 0; j < 4; j++) {
     const r = (p) => add(rotY(p, (j * Math.PI) / 2), [cx, cy, cz]);
     const a = r([-half, 0, half]);
@@ -721,24 +779,28 @@ function pyramid(k, cx, cy, cz, half, h, { cap = 0, weight = 1 } = {}) {
     k.add(quad(k, a, b, apex, apex), {
       flat: 0.2,
       weight,
+      even: true,
+      jitter: 0.012,
+      opacity: 1,
       interior: 0.04,
       core: "#9c7d4c",
       color: (c) => {
         const y = c.p[1] - cy;
         if (cap && y > h * (1 - cap))
           return lit(
-            shade(casing, 0.95 + 0.08 * c.noise(c.p[0] * 40, y * 40, c.p[2] * 40)),
+            shade(casing, 0.97 + 0.04 * c.noise(c.p[0] * 12, y * 12, c.p[2] * 12)),
             c,
             0.55,
           );
+        // Each course a step: its lit tread (the upper part) a little
+        // lighter than its riser, and the blocks barely varied.
         const along = Math.abs(c.n[0]) > Math.abs(c.n[2]) ? c.p[2] : c.p[0];
-        const col = stone(c, sand, along, y, {
-          course: 0.028,
-          block: 0.06,
-          mortar: 0.14,
-          vary: 0.16,
-        });
-        const wear = 0.9 + 0.14 * c.fbm(c.p[0] * 6, y * 6, c.p[2] * 6);
+        const row = Math.floor(y / course);
+        const fy = y / course - row;
+        const blk = Math.floor(along / (course * 3.2) + (row % 2) * 0.5);
+        const step = 0.93 + 0.11 * smoothstep(0.35, 0.65, fy);
+        const col = shade(sand, step * (0.97 + 0.06 * hash(blk, row)));
+        const wear = 0.95 + 0.08 * c.fbm(c.p[0] * 4, y * 4, c.p[2] * 4);
         return lit(shade(col, wear), c, 0.55);
       },
     });
@@ -811,27 +873,53 @@ function pyramidsBuild(k) {
     const p = add(menk, at(0.85 + i * 0.52, 0.45));
     pyramid(k, p[0], 0, p[2], 0.17, 0.2);
   }
-  // A small sphinx keeps watch in front.
-  const sp = add(khafre, at(1.25, 1.95));
+  // A small sphinx keeps watch in front: a lion lying with its paws out,
+  // its chest raised and a man's head in a striped headdress (lane
+  // Sharpness A made it larger and even, so it reads at phone size).
+  const sp = add(khafre, at(1.6, 1.85));
   const lion = "#c9a468";
-  const skin = (c) =>
-    lit(shade(lion, 0.88 + 0.16 * c.noise(c.p[0] * 30, c.p[1] * 30, c.p[2] * 30)), c, 0.55);
-  const yaw = Math.atan2(f[0], f[2]);
-  const S = (p) => add(sp, rotY(p, yaw));
+  const skin = (c) => lit(shade(lion, 0.96 + 0.06 * c.noise(c.p[0] * 9, c.p[1] * 9, c.p[2] * 9)), c, 0.55); // prettier-ignore
+  // Turned three-quarters to the view, so its long body and raised head show.
+  const fwd = unit(add(mul(r, -0.6), mul(f, 0.8)));
+  const yaw = Math.atan2(fwd[0], fwd[2]);
+  const SZ = 1.55;
+  const S = (p) => add(sp, rotY(mul(p, SZ), yaw));
   const R = [0, yaw * DEG, 0];
-  const B = { rot: R, flat: 0.2, color: skin };
-  k.add(roundBox(0.2, 0.14, 0.56, 0.06), { ...B, pos: S([0, 0.07, -0.05]), weight: 1.5 });
+  const B = { rot: R, flat: 0.2, color: skin, even: true, jitter: 0.01, opacity: 1, weight: 3 };
+  const box = (x, y, z, r, pos, o = {}) =>
+    k.add(evenRoundBox(x * SZ, y * SZ, z * SZ, r * SZ), { ...B, pos: S(pos), ...o });
+  box(0.19, 0.12, 0.46, 0.055, [0, 0.06, -0.1]);
+  box(0.16, 0.16, 0.13, 0.05, [0, 0.08, 0.1]);
+  for (const s of [-1, 1]) box(0.055, 0.045, 0.22, 0.02, [s * 0.06, 0.0225, 0.25]);
+  // The head in its headdress (broad stripes), the face painted on its front
+  // with a darker brow and eyes.
+  const stripes = (c) => {
+    const st = Math.floor(((c.p[1] - sp[1]) / SZ) * 34) % 2;
+    return lit(st ? "#d6bc88" : "#b8945c", c, 0.55);
+  };
+  // The headdress: a cap over the head and two lappets flaring down beside
+  // the face, striped; the face in front, with a darker brow and eyes.
+  box(0.12, 0.08, 0.1, 0.035, [0, 0.255, 0.105], { color: stripes });
   for (const s of [-1, 1])
-    k.add(roundBox(0.06, 0.05, 0.26, 0.02), { ...B, pos: S([s * 0.07, 0.025, 0.3]), weight: 2 });
-  k.add(roundBox(0.12, 0.13, 0.12, 0.04), { ...B, pos: S([0, 0.19, 0.2]), weight: 2 });
-  k.add(roundBox(0.18, 0.1, 0.05, 0.02), { ...B, pos: S([0, 0.18, 0.15]), weight: 2 });
+    box(0.035, 0.11, 0.06, 0.012, [s * 0.058, 0.19, 0.12], { color: stripes });
+  box(0.075, 0.1, 0.08, 0.025, [0, 0.205, 0.13], {
+    color: (c) => {
+      const y = (c.p[1] - sp[1]) / SZ;
+      const front = c.n[0] * fwd[0] + c.n[2] * fwd[2];
+      if (front > 0.5 && Math.abs(y - 0.222) < 0.007) return lit("#7e5c34", c, 0.55);
+      return skin(c);
+    },
+  });
   // The desert.
   const cx = -0.35;
   const cz = 0.05;
-  k.add(k.cylinder(2.45, 0.08), {
+  k.add(evenCylinder(2.45, 2.45, 0.08), {
     pos: [cx, -0.04, cz],
     pattern: false,
     flat: 0.2,
+    even: true,
+    jitter: 0.012,
+    opacity: 1,
     color: (c) => {
       if (c.s.side) return lit("#b38f58", c);
       const n = c.fbm(c.p[0] * 1.3, 0, c.p[2] * 1.3);
@@ -880,11 +968,14 @@ function pyramidsBuild(k) {
     const a = k.rand() * TAU;
     const d = 1.75 + k.rand() * 0.45;
     const s = 0.3 + k.rand() * 0.35;
-    k.add(k.ellipsoid(s * 1.8, s * 0.22, s), {
+    k.add(evenEllipsoid(k, s * 1.8, s * 0.22, s), {
       pos: [cx + Math.sin(a) * d, 0, cz + Math.cos(a) * d],
       rot: [0, a * DEG + 40, 0],
       pattern: false,
       flat: 0.3,
+      even: true,
+      jitter: 0.01,
+      opacity: 1,
       color: (c) => (c.n[1] < 0 ? null : lit("#e0c08a", c)),
     });
   }
@@ -2107,10 +2198,11 @@ function pisaBuild(k) {
     pattern: false,
     flat: 0.2,
     color: (c) => {
-      if (c.n[1] < 0.5) return lit("#6b5a44", c);
+      if (c.n[1] < 0.5) return { c: lit("#7a6850", c), size: 0.85 };
       const [x, , z] = c.p;
-      if (Math.abs(x - z * 0.3) < 0.09 && z > 0.5) return lit("#e7e0cf", c);
-      return grass(c, "#5fa148");
+      const rim = Math.max(Math.abs(x), Math.abs(z)) > 1.32 ? 0.7 : 1;
+      if (Math.abs(x - z * 0.3) < 0.09 && z > 0.5) return { c: lit("#e7e0cf", c), size: rim };
+      return { c: calmGrass(c, "#5fa148"), size: rim };
     },
   });
   k.add(evenCylinder(0.64, 0.64, 0.06), {
@@ -2119,6 +2211,7 @@ function pisaBuild(k) {
     jitter: 0.015,
     pos: [0, 0.05, 0],
     flat: 0.2,
+    weight: 1.8,
     color: (c) => lit("#e3ddd0", c),
   });
   const tower = k.part("tower", { pivot: PISA.base, axis: PISA.axis });
@@ -2132,6 +2225,7 @@ function pisaBuild(k) {
     jitter: 0.015,
     ...T,
     pos: [0, y0 + 0.37, 0],
+    weight: 1.6,
     interior: 0.04,
     core: "#bdb5a5",
     color: (c) => {
@@ -2160,7 +2254,7 @@ function pisaBuild(k) {
     });
   }
   // Six open galleries.
-  const colShape = k.cylinder(0.016, 0.3, { caps: false });
+  const colShape = evenCylinder(0.016, 0.016, 0.3, false);
   for (let j = 0; j < 6; j++) {
     const yb = y0 + 0.74 + j * 0.42;
     k.add(evenCylinder(0.535, 0.535, 0.035), {
@@ -2169,6 +2263,7 @@ function pisaBuild(k) {
       jitter: 0.015,
       ...T,
       pos: [0, yb + 0.0175, 0],
+      weight: 2.5,
       color: (c) => (c.s.side ? lit(shade(marble, 0.9), c) : lit(marble, c)),
     });
     k.add(evenCylinder(0.41, 0.41, 0.385, false), {
@@ -2187,6 +2282,7 @@ function pisaBuild(k) {
     for (let i = 0; i < 30; i++) {
       const a = ((i + (j % 2) * 0.5) / 30) * TAU;
       k.add(colShape, {
+        even: true,
         opacity: 1,
         jitter: 0.015,
         ...T,
@@ -2218,6 +2314,7 @@ function pisaBuild(k) {
     jitter: 0.015,
     ...T,
     pos: [0, yb + 0.0175, 0],
+    weight: 2.5,
     color: (c) => lit(marble, c),
   });
   k.add(evenCylinder(0.33, 0.33, 0.3), {
@@ -2226,6 +2323,7 @@ function pisaBuild(k) {
     jitter: 0.015,
     ...T,
     pos: [0, yb + 0.185, 0],
+    weight: 2.5,
     color: (c) => {
       if (c.s.cap) return lit("#c9c2b3", c);
       const y = c.p[1] - yb;
@@ -2363,8 +2461,8 @@ function colosseumBuild(k) {
   const perim = Math.PI * (3 * (A + B) - Math.sqrt((3 * A + B) * (A + 3 * B)));
   const bayW = perim / bays;
   const grime = (c, col) => {
-    const n = c.fbm(c.p[0] * 5, c.p[1] * 9, c.p[2] * 5);
-    return mix(col, "#8e7d62", clamp(0.25 + 0.5 * n - c.p[1] * 0.5, 0, 0.6));
+    const n = c.fbm(c.p[0] * 3, c.p[1] * 4, c.p[2] * 3);
+    return mix(col, "#8e7d62", clamp(0.18 + 0.3 * n - c.p[1] * 0.4, 0, 0.4));
   };
   const wallColor = (outer, sc) => (c) => {
     const u = c.u;
@@ -2485,12 +2583,13 @@ function colosseumBuild(k) {
       jitter: 0.015,
       flat: 0.2,
       color: (c) => {
+        // Lane Sharpness A: the tiers as clean steps with broad, soft
+        // patches of brick and moss, and fewer, wider stairways.
         const step = Math.floor(c.v * 18) % 2;
-        const radial = (c.u * 40) % 1 < 0.06;
-        const n = c.fbm(c.p[0] * 4, 0, c.p[2] * 4);
-        let col = mix("#cbb998", "#a86a4c", smoothstep(-0.1, 0.4, n));
-        if (n > 0.45) col = mix(col, "#7e9b56", 0.6);
-        if (radial) col = shade(col, 0.7);
+        const radial = (c.u * 32) % 1 < 0.09;
+        const n = c.fbm(c.p[0] * 2.2, 0, c.p[2] * 2.2);
+        let col = mix("#cbb998", "#b07a58", 0.75 * smoothstep(0, 0.5, n));
+        if (radial) col = shade(col, 0.8);
         return lit(shade(col, step ? 0.9 : 1.02), c);
       },
     },
@@ -2511,17 +2610,18 @@ function colosseumBuild(k) {
       color: (c) => lit("#e3d9c3", c),
     },
   );
-  k.add(k.disc(1), {
+  k.add(evenDisc(k, 1, 0, 96), {
+    even: true,
     opacity: 1,
-    jitter: 0.015,
+    jitter: 0.012,
     pos: [0, 0.035, 0],
     scale: [aIn, 1, bIn],
     flat: 0.2,
+    weight: 1.6,
     color: (c) => {
-      if (c.n[1] < 0) return null;
       const [x, , z] = c.p;
-      if (x > 0.42) return lit(shade("#9c7650", Math.sin(z * 120) > 0.6 ? 0.8 : 1), c);
-      const wall = Math.abs(Math.sin(z * 40)) < 0.35 || Math.abs(Math.sin(x * 16)) < 0.18;
+      if (x > 0.42) return lit(shade("#9c7650", Math.sin(z * 70) > 0.5 ? 0.86 : 1), c);
+      const wall = Math.abs(Math.sin(z * 26)) < 0.3 || Math.abs(Math.sin(x * 12)) < 0.16;
       return lit(wall ? "#bfb197" : "#5f4f3d", c);
     },
   });
@@ -2568,7 +2668,7 @@ function colosseumBuild(k) {
     color: (c) =>
       c.s.side
         ? lit("#8a8274", c)
-        : lit(shade("#b8b2a6", 0.92 + 0.1 * c.noise(c.p[0] * 14, 0, c.p[2] * 14)), c),
+        : lit(shade("#b8b2a6", 0.96 + 0.05 * c.noise(c.p[0] * 5, 0, c.p[2] * 5)), c),
   });
 }
 
@@ -2604,19 +2704,26 @@ function parthenonBuild(k, o) {
   const sty = 0.18;
   const weather = (c, col, amb = 0.62) => {
     if (!ruin) return lit(col, c, amb);
-    const n = c.fbm(c.p[0] * 3, c.p[1] * 6, c.p[2] * 3);
-    return lit(mix(col, "#9d8a6c", clamp(0.2 + 0.45 * n, 0, 0.55)), c, amb);
+    const n = c.fbm(c.p[0] * 2, c.p[1] * 3, c.p[2] * 2);
+    return lit(mix(col, "#9d8a6c", clamp(0.14 + 0.28 * n, 0, 0.36)), c, amb);
   };
   // The rock of the hill and three steps.
-  k.add(roundBox(4.3, 0.4, 8.3, 0.12), {
+  k.add(evenRoundBox(4.3, 0.4, 8.3, 0.12), {
+    even: true,
+    opacity: 1,
+    jitter: 0.012,
     pos: [0, -0.2, 0],
     pattern: false,
     flat: 0.25,
-    color: (c) => lit(shade("#a79a84", 0.85 + 0.25 * c.fbm(c.p[0] * 2, c.p[1] * 5, c.p[2] * 2)), c),
+    color: (c) =>
+      lit(shade("#a79a84", 0.92 + 0.12 * c.fbm(c.p[0] * 1.5, c.p[1] * 3, c.p[2] * 1.5)), c),
   });
   for (let i = 0; i < 3; i++) {
     const g = 0.14 - i * 0.07;
-    k.add(k.box(2 * (X + g), 0.06, 2 * (Z + g)), {
+    k.add(evenBox(2 * (X + g), 0.06, 2 * (Z + g)), {
+      even: true,
+      opacity: 1,
+      jitter: 0.012,
       pos: [0, 0.03 + i * 0.06, 0],
       flat: 0.2,
       color: (c) => weather(c, marble),
@@ -2654,6 +2761,9 @@ function parthenonBuild(k, o) {
   for (const [x, z] of cols) {
     if (broken(x, z)) {
       k.add(column, {
+        even: true,
+        opacity: 1,
+        jitter: 0.012,
         pos: [x, sty, z],
         scale: [1, 0.4 + 0.25 * hash(z), 1],
         flat: 0.2,
@@ -2661,13 +2771,26 @@ function parthenonBuild(k, o) {
       });
       continue;
     }
-    k.add(column, { pos: [x, sty, z], flat: 0.2, color: flute });
-    k.add(k.cone(0.078, 0.125, 0.05), {
+    k.add(column, {
+      even: true,
+      opacity: 1,
+      jitter: 0.012,
+      pos: [x, sty, z],
+      flat: 0.2,
+      color: flute,
+    });
+    k.add(evenCylinder(0.078, 0.125, 0.05), {
+      even: true,
+      opacity: 1,
+      jitter: 0.012,
       pos: [x, sty + colH + 0.025, z],
       flat: 0.2,
       color: (c) => weather(c, marble),
     });
-    k.add(k.box(0.26, 0.04, 0.26), {
+    k.add(evenBox(0.26, 0.04, 0.26), {
+      even: true,
+      opacity: 1,
+      jitter: 0.012,
       pos: [x, sty + colH + 0.07, z],
       flat: 0.2,
       color: (c) => weather(c, marble),
@@ -2687,7 +2810,14 @@ function parthenonBuild(k, o) {
   const ring = (y, h, grow, color) => {
     const w = 0.28 + grow;
     const box = (sx, sz, px, pz) =>
-      k.add(k.box(sx, h, sz), { pos: [px, y + h / 2, pz], flat: 0.2, color });
+      k.add(evenBox(sx, h, sz), {
+        even: true,
+        opacity: 1,
+        jitter: 0.012,
+        pos: [px, y + h / 2, pz],
+        flat: 0.2,
+        color,
+      });
     for (const s of [-1, 1]) {
       box(2 * cx + w, w, 0, s * cz);
       if (ruin && s > 0) {
@@ -2710,6 +2840,9 @@ function parthenonBuild(k, o) {
   for (const s of [-1, 1]) {
     const z = s * (cz + 0.02);
     k.add(quad(k, [-pw, py, z], [pw, py, z], [0, py + ph, z], [0, py + ph, z], [0, 0, s]), {
+      even: true,
+      opacity: 1,
+      jitter: 0.012,
       flat: 0.2,
       color: (c) => weather(c, ruin ? shade(marble, 0.9) : "#6f8fb8"),
     });
@@ -2717,7 +2850,10 @@ function parthenonBuild(k, o) {
       const a = [sx * (pw + 0.05), py, z + s * 0.04];
       const b = [0, py + ph + 0.05, z + s * 0.04];
       const d = sub(b, a);
-      k.add(k.box(len(d), 0.07, 0.2), {
+      k.add(evenBox(len(d), 0.07, 0.2), {
+        even: true,
+        opacity: 1,
+        jitter: 0.012,
         pos: mul(add(a, b), 0.5),
         quat: quatFromTo([1, 0, 0], d),
         flat: 0.2,
@@ -2732,7 +2868,10 @@ function parthenonBuild(k, o) {
     for (const fx of figures) {
       const hgt = (ph - 0.06) * (1 - Math.abs(fx) / pw) * 0.85;
       if (hgt < 0.05) continue;
-      k.add(k.ellipsoid(0.07, hgt / 2, 0.05), {
+      k.add(evenEllipsoid(k, 0.07, hgt / 2, 0.05), {
+        even: true,
+        opacity: 1,
+        jitter: 0.012,
         pos: [fx, py + hgt / 2 + 0.02, z + s * 0.03],
         flat: 0.25,
         color: (c) => weather(c, shade(marble, 1.05)),
@@ -2744,12 +2883,18 @@ function parthenonBuild(k, o) {
   const hx = 1.02;
   const hz = 2.75;
   for (const s of [-1, 1]) {
-    k.add(k.box(0.1, wh, 2 * hz), {
+    k.add(evenBox(0.1, wh, 2 * hz), {
+      even: true,
+      opacity: 1,
+      jitter: 0.012,
       pos: [s * hx, sty + wh / 2, 0],
       flat: 0.2,
       color: (c) => weather(c, shade(marble, 0.92)),
     });
-    k.add(k.box(2 * hx, wh, 0.1), {
+    k.add(evenBox(2 * hx, wh, 0.1), {
+      even: true,
+      opacity: 1,
+      jitter: 0.012,
       pos: [0, sty + wh / 2, s * hz],
       flat: 0.2,
       color: (c) =>
@@ -2805,10 +2950,7 @@ function parthenonBuild(k, o) {
           [0, ry + ph + 0.04, cz + 0.04],
           [0, ry + ph + 0.04, -cz - 0.04],
         ),
-        {
-          flat: 0.2,
-          color: tile,
-        },
+        { even: true, opacity: 1, jitter: 0.012, flat: 0.2, color: tile },
       );
   }
 }
@@ -2834,20 +2976,27 @@ function stonehengeBuild(k) {
     params: (c) => [1 + 0.3 * (1 - clamp(0.5 + 0.6 * dot(c.n, HENGE.dir), 0, 1)), 0.5],
   };
   const rock = (c, base = sarsen) => {
-    const n = c.fbm(c.p[0] * 9, c.p[1] * 9, c.p[2] * 9);
-    let col = mix(base, "#5f5b53", clamp(0.35 + 0.5 * n, 0, 1) * 0.6);
-    const lichen = c.noise(c.p[0] * 22 + 5, c.p[1] * 22, c.p[2] * 22);
-    if (lichen > 0.45) col = mix(col, "#c9c6a0", 0.55);
-    else if (lichen < -0.55) col = mix(col, "#e2e0d8", 0.4);
+    // Lane Sharpness A: broad weathering and soft lichen patches instead
+    // of fine speckle.
+    const n = c.fbm(c.p[0] * 4, c.p[1] * 4, c.p[2] * 4);
+    let col = mix(base, "#5f5b53", clamp(0.3 + 0.4 * n, 0, 1) * 0.45);
+    const lichen = c.noise(c.p[0] * 7 + 5, c.p[1] * 7, c.p[2] * 7);
+    col = mix(col, "#c2bf9c", 0.4 * smoothstep(0.35, 0.6, lichen));
     return lit(col, c, 0.58);
   };
   // Grass, a gravel path and the old circular bank.
-  ground(k, 2.45, 0, (c) => {
-    const r = Math.hypot(c.p[0], c.p[2]);
-    if (Math.abs(r - 2.05) < 0.06) return lit("#cfc4a8", c);
-    if (Math.abs(r - 2.28) < 0.08) return grass(c, "#4f8f3c");
-    return grass(c, "#6aa24f");
-  });
+  ground(
+    k,
+    2.45,
+    0,
+    (c) => {
+      const r = Math.hypot(c.p[0], c.p[2]);
+      if (Math.abs(r - 2.05) < 0.06) return lit("#cfc4a8", c);
+      if (Math.abs(r - 2.28) < 0.08) return calmGrass(c, "#4f8f3c");
+      return calmGrass(c, "#6aa24f");
+    },
+    { even: true },
+  );
   const stoneAt = (
     r,
     a,
@@ -2859,7 +3008,10 @@ function stonehengeBuild(k) {
     const p = [Math.sin(a) * r, 0, Math.cos(a) * r];
     const yaw = (a - Math.PI / 2) * DEG;
     if (fallen) {
-      k.add(roundBox(h, d, w, 0.03), {
+      k.add(evenRoundBox(h, d, w, 0.03), {
+        even: true,
+        opacity: 1,
+        jitter: 0.012,
         pos: add(p, [0, d / 2, 0]),
         rot: [0, yaw + tilt, 0],
         flat: 0.25,
@@ -2868,7 +3020,10 @@ function stonehengeBuild(k) {
       });
       return;
     }
-    k.add(roundBox(d, h, w, Math.min(0.035, w * 0.25)), {
+    k.add(evenRoundBox(d, h, w, Math.min(0.035, w * 0.25)), {
+      even: true,
+      opacity: 1,
+      jitter: 0.012,
       pos: add(p, [0, h / 2 - sink, 0]),
       rot: [tilt, yaw, tilt * 0.5],
       flat: 0.25,
@@ -2894,7 +3049,10 @@ function stonehengeBuild(k) {
     if (lintels.has(i) && !missing.has((i + 1) % n)) {
       const am = a + step / 2;
       const p = [Math.sin(am) * R, h0 + 0.035, Math.cos(am) * R];
-      k.add(roundBox(0.1, 0.075, 2 * R * Math.sin(step / 2) + 0.04, 0.02), {
+      k.add(evenRoundBox(0.1, 0.075, 2 * R * Math.sin(step / 2) + 0.04, 0.02), {
+        even: true,
+        opacity: 1,
+        jitter: 0.012,
         pos: p,
         rot: [0, (am - Math.PI / 2) * DEG, 0],
         flat: 0.25,
@@ -2920,7 +3078,10 @@ function stonehengeBuild(k) {
     for (const s of [-1, 1]) {
       if (great && s > 0) continue;
       const p = add(c0, mul(t, s * 0.16));
-      k.add(roundBox(0.14, h, 0.25, 0.035), {
+      k.add(evenRoundBox(0.14, h, 0.25, 0.035), {
+        even: true,
+        opacity: 1,
+        jitter: 0.012,
         pos: add(p, [0, h / 2 - 0.03, 0]),
         rot: [0, (a - Math.PI / 2) * DEG, great ? 4 : 0],
         flat: 0.25,
@@ -2929,7 +3090,10 @@ function stonehengeBuild(k) {
       });
     }
     if (great) {
-      k.add(roundBox(0.62, 0.1, 0.14, 0.03), {
+      k.add(evenRoundBox(0.62, 0.1, 0.14, 0.03), {
+        even: true,
+        opacity: 1,
+        jitter: 0.012,
         pos: add(c0, [0.05, 0.05, 0.25]),
         rot: [0, (a - Math.PI / 2) * DEG + 25, 0],
         flat: 0.25,
@@ -2937,7 +3101,10 @@ function stonehengeBuild(k) {
         color: (c) => rock(c),
       });
     } else {
-      k.add(roundBox(0.14, 0.1, 0.64, 0.03), {
+      k.add(evenRoundBox(0.14, 0.1, 0.64, 0.03), {
+        even: true,
+        opacity: 1,
+        jitter: 0.012,
         pos: add(c0, [0, h + 0.02, 0]),
         rot: [0, (a - Math.PI / 2) * DEG, 0],
         flat: 0.25,
@@ -2957,7 +3124,10 @@ function stonehengeBuild(k) {
     const a = face + Math.PI + (-1.3 + (2.6 * i) / 10);
     stoneAt(0.66, a, 0.07, 0.06, 0.2 + 0.05 * hash(i, 4), { base: blue });
   }
-  k.add(roundBox(0.45, 0.06, 0.12, 0.02), {
+  k.add(evenRoundBox(0.45, 0.06, 0.12, 0.02), {
+    even: true,
+    opacity: 1,
+    jitter: 0.012,
     pos: [Math.sin(face + Math.PI) * 0.35, 0.03, Math.cos(face + Math.PI) * 0.35],
     rot: [0, face * DEG + 90, 0],
     flat: 0.25,
@@ -3012,7 +3182,10 @@ function stonehengeBuild(k) {
     };
   });
   const heel = [Math.sin(face + 0.15) * 2.25, 0, Math.cos(face + 0.15) * 2.25];
-  k.add(k.ellipsoid(0.14, 0.26, 0.12), {
+  k.add(evenEllipsoid(k, 0.14, 0.26, 0.12), {
+    even: true,
+    opacity: 1,
+    jitter: 0.012,
     pos: add(heel, [0, 0.2, 0]),
     rot: [0, 0, 12],
     flat: 0.25,
@@ -3294,7 +3467,11 @@ function tajBuild(k) {
   const g = 0.04;
   const base = g + 0.12;
   // The garden, the reflecting pool and cypress trees.
-  k.add(k.box(2.7, g, 4.4), {
+  k.add(evenBox(2.7, g, 4.4), {
+    even: true,
+    opacity: 1,
+    jitter: 0.012,
+    size: 1.15,
     ...night,
     pos: [0, g / 2, 0.85],
     pattern: false,
@@ -3304,10 +3481,11 @@ function tajBuild(k) {
       const [x, , z] = c.p;
       if (z > 1.05 && Math.abs(x) < 0.28) return lit("#e5dccb", c);
       if (Math.abs(x) < 0.06 || Math.abs(z - 2.2) < 0.05) return lit("#e5dccb", c);
-      return grass(c, "#4f9a45");
+      return calmGrass(c, "#4f9a45");
     },
   });
   water(k, g + 0.004, 0.12, 0.78, {
+    even: true,
     rect: true,
     x0: 0,
     z0: 1.9,
@@ -3319,21 +3497,29 @@ function tajBuild(k) {
   for (let i = 0; i < 7; i++)
     for (const s of [-1, 1]) {
       const z = 1.2 + i * 0.26;
-      k.add(k.cone(0.055, 0.0, 0.3), {
+      k.add(evenCylinder(0.055, 0.0, 0.3), {
+        even: true,
+        opacity: 1,
+        jitter: 0.012,
+        size: 1.15,
         ...night,
         pos: [s * 0.4, g + 0.15, z],
         pattern: false,
         flat: 0.35,
         color: (c) =>
           lit(
-            shade("#2f5d34", 0.85 + 0.3 * c.noise(c.p[0] * 40, c.p[1] * 40, c.p[2] * 40)),
+            shade("#2f5d34", 0.9 + 0.14 * c.noise(c.p[0] * 14, c.p[1] * 14, c.p[2] * 14)),
             c,
             0.6,
           ),
       });
     }
   // The plinth with its row of niches.
-  k.add(k.box(2.0, 0.12, 2.0), {
+  k.add(evenBox(2.0, 0.12, 2.0), {
+    even: true,
+    opacity: 1,
+    jitter: 0.012,
+    size: 1.15,
     ...night,
     pos: [0, g + 0.06, 0],
     flat: 0.2,
@@ -3389,6 +3575,10 @@ function tajBuild(k) {
     const n = dot(nn, mid) < 0 ? mul(nn, -1) : nn;
     const main = i % 2 === 0;
     k.add(quad(k, [x0, base, z0], [x1, base, z1], [x1, top, z1], [x0, top, z0], n), {
+      even: true,
+      opacity: 1,
+      jitter: 0.012,
+      size: 1.15,
       ...night,
       flat: 0.2,
       color: hallColor(main, mid),
@@ -3408,18 +3598,34 @@ function tajBuild(k) {
           [a[0], top + 0.1, a[2]],
           n,
         ),
-        { ...night, flat: 0.2, color: (c) => lit(marble, c) },
+        {
+          even: true,
+          opacity: 1,
+          jitter: 0.012,
+          size: 1.15,
+          ...night,
+          flat: 0.2,
+          color: (c) => lit(marble, c),
+        },
       );
     }
   }
-  k.add(k.box(2 * hw, 0.01, 2 * hw), {
+  k.add(evenBox(2 * hw, 0.01, 2 * hw), {
+    even: true,
+    opacity: 1,
+    jitter: 0.012,
+    size: 1.15,
     ...night,
     pos: [0, top, 0],
     flat: 0.2,
     color: (c) => lit(marble, c),
   });
   // The drum, the onion dome and its finial.
-  k.add(k.cylinder(0.3, 0.16), {
+  k.add(evenCylinder(0.3, 0.3, 0.16), {
+    even: true,
+    opacity: 1,
+    jitter: 0.012,
+    size: 1.15,
     pos: [0, top + 0.08, 0],
     flat: 0.2,
     color: (c) => lit(Math.abs(c.p[1] - top - 0.12) < 0.01 ? "#d6d0c2" : marble, c),
@@ -3439,6 +3645,10 @@ function tajBuild(k) {
     { grid: 64 },
   );
   k.add(dome, {
+    even: true,
+    opacity: 1,
+    jitter: 0.01,
+    size: 1.15,
     pos: [0, top + 0.16, 0],
     flat: 0.2,
     interior: 0.04,
@@ -3451,7 +3661,15 @@ function tajBuild(k) {
     [0.04, 0.03],
     [0.1, 0.022],
   ])
-    k.add(k.sphere(r), { pos: [0, fy + y, 0], weight: 3, color: "#d4af37" });
+    k.add(k.sphere(r), {
+      even: true,
+      opacity: 1,
+      jitter: 0.012,
+      size: 1.15,
+      pos: [0, fy + y, 0],
+      weight: 3,
+      color: "#d4af37",
+    });
   // Four kiosks round the dome and the corner pinnacles.
   const kiosk = (x, z, s) => {
     for (let i = 0; i < 6; i++) {
@@ -3464,13 +3682,21 @@ function tajBuild(k) {
         { ...night, weight: 2.5, color: (c) => lit(marble, c) },
       );
     }
-    k.add(k.cylinder(0.1 * s, 0.02 * s), {
+    k.add(evenCylinder(0.1 * s, 0.1 * s, 0.02 * s), {
+      even: true,
+      opacity: 1,
+      jitter: 0.012,
+      size: 1.15,
       ...night,
       pos: [x, top + 0.14 * s, z],
       flat: 0.2,
       color: (c) => lit(marble, c),
     });
     k.add(k.sphere(0.085 * s), {
+      even: true,
+      opacity: 1,
+      jitter: 0.012,
+      size: 1.15,
       ...night,
       pos: [x, top + 0.17 * s, z],
       scale: [1, 1.15, 1],
@@ -3498,7 +3724,11 @@ function tajBuild(k) {
     for (const sz of [-1, 1]) {
       const x = sx * 0.9;
       const z = sz * 0.9;
-      k.add(k.cone(0.075, 0.055, 1.18, { caps: false }), {
+      k.add(evenCylinder(0.075, 0.055, 1.18, false), {
+        even: true,
+        opacity: 1,
+        jitter: 0.012,
+        size: 1.15,
         ...night,
         pos: [x, base + 0.59, z],
         flat: 0.2,
@@ -3506,7 +3736,11 @@ function tajBuild(k) {
         color: (c) => lit(Math.abs(((c.p[1] - base) / 0.04) % 1) < 0.08 ? "#e3ddd0" : marble, c),
       });
       for (const y of [0.42, 0.8, 1.15])
-        k.add(k.cylinder(0.1 - y * 0.02, 0.025), {
+        k.add(evenCylinder(0.1 - y * 0.02, 0.1 - y * 0.02, 0.025), {
+          even: true,
+          opacity: 1,
+          jitter: 0.012,
+          size: 1.15,
           ...night,
           pos: [x, base + y, z],
           flat: 0.2,
@@ -3525,6 +3759,10 @@ function tajBuild(k) {
         );
       }
       k.add(k.sphere(0.07), {
+        even: true,
+        opacity: 1,
+        jitter: 0.012,
+        size: 1.15,
         ...night,
         pos: [x, mt + 0.09, z],
         scale: [1, 1.1, 1],
@@ -3592,10 +3830,10 @@ function castleBuild(k, o) {
     const along = Math.abs(c.n[0]) > Math.abs(c.n[2]) ? c.p[2] : c.p[0];
     return lit(
       stone(c, base, along + 5, c.p[1] + 1, {
-        course: 0.055,
-        block: 0.12,
-        mortar: 0.12,
-        vary: 0.18,
+        course: 0.07,
+        block: 0.16,
+        mortar: 0.16,
+        vary: 0.08,
       }),
       c,
       0.62,
@@ -3605,17 +3843,20 @@ function castleBuild(k, o) {
     const a = Math.atan2(c.p[0], c.p[2]);
     return lit(
       stone(c, base, a * 0.3 + 5, c.p[1] + 1, {
-        course: 0.055,
-        block: 0.1,
-        mortar: 0.12,
-        vary: 0.18,
+        course: 0.07,
+        block: 0.13,
+        mortar: 0.16,
+        vary: 0.08,
       }),
       c,
       0.62,
     );
   };
   // Grass, and a square moat.
-  k.add(k.box(4.4, 0.06, 4.4), {
+  k.add(evenBox(4.4, 0.06, 4.4), {
+    even: true,
+    opacity: 1,
+    jitter: 0.012,
     pos: [0, -0.03, 0],
     pattern: false,
     flat: 0.2,
@@ -3623,10 +3864,11 @@ function castleBuild(k, o) {
       if (c.n[1] < 0.5) return lit("#6b5a44", c);
       const m = Math.max(Math.abs(c.p[0]), Math.abs(c.p[2]));
       if (m > 1.36 && m < 1.84) return null;
-      return grass(c, "#63a24a");
+      return calmGrass(c, "#63a24a");
     },
   });
   water(k, -0.03, 1.84, 1.84, {
+    even: true,
     rect: true,
     share: 0.08,
     deep: "#2f6f8f",
@@ -3643,7 +3885,10 @@ function castleBuild(k, o) {
     const nM = Math.floor(L / 0.16);
     for (let i = 0; i <= nM; i++) {
       const p = lerp3(a, b, (i + 0.25) / (nM + 0.5));
-      k.add(k.box(0.085, 0.1, depth), {
+      k.add(evenBox(0.085, 0.1, depth), {
+        even: true,
+        opacity: 1,
+        jitter: 0.012,
         pos: add(p, [0, y + 0.05, 0]),
         quat: quatFromTo([1, 0, 0], d),
         flat: 0.2,
@@ -3655,7 +3900,10 @@ function castleBuild(k, o) {
   for (let j = 0; j < 4; j++) {
     const r = (p) => rotY(p, (j * Math.PI) / 2);
     const front = j === 0;
-    k.add(k.box(2.0, wallH, 0.18), {
+    k.add(evenBox(2.0, wallH, 0.18), {
+      even: true,
+      opacity: 1,
+      jitter: 0.012,
       pos: r([0, wallH / 2, 1.0]),
       rot: [0, j * 90, 0],
       flat: 0.2,
@@ -3681,7 +3929,10 @@ function castleBuild(k, o) {
   for (const sx of [-1, 1])
     for (const sz of [-1, 1]) {
       const p = [sx * 1.0, 0, sz * 1.0];
-      k.add(k.cylinder(0.28, 1.0, { caps: false }), {
+      k.add(evenCylinder(0.28, 0.28, 1.0, false), {
+        even: true,
+        opacity: 1,
+        jitter: 0.012,
         pos: add(p, [0, 0.5, 0]),
         flat: 0.2,
         color: (c) => {
@@ -3693,12 +3944,18 @@ function castleBuild(k, o) {
           return roundBlocks(c);
         },
       });
-      k.add(k.cylinder(0.32, 0.08), {
+      k.add(evenCylinder(0.32, 0.32, 0.08), {
+        even: true,
+        opacity: 1,
+        jitter: 0.012,
         pos: add(p, [0, 1.02, 0]),
         flat: 0.2,
         color: (c) => roundBlocks(c, shade(stoneC, 0.92)),
       });
-      k.add(k.cone(0.35, 0.0, 0.62), {
+      k.add(evenCylinder(0.35, 0.0, 0.62), {
+        even: true,
+        opacity: 1,
+        jitter: 0.012,
         pos: add(p, [0, 1.37, 0]),
         flat: 0.2,
         color: (c) => lit(shade(roofC, (c.p[1] * 25) % 1 < 0.2 ? 0.85 : 1), c, 0.6),
@@ -3719,7 +3976,10 @@ function castleBuild(k, o) {
     }
   // The keep.
   const kp = [-0.25, 0, -0.3];
-  k.add(k.box(0.72, 1.35, 0.72), {
+  k.add(evenBox(0.72, 1.35, 0.72), {
+    even: true,
+    opacity: 1,
+    jitter: 0.012,
     pos: add(kp, [0, 0.675, 0]),
     flat: 0.2,
     color: (c) => {
@@ -3751,24 +4011,36 @@ function castleBuild(k, o) {
   // Gate towers and the drawbridge.
   for (const s of [-1, 1]) {
     const p = [s * 0.32, 0, 1.05];
-    k.add(k.cylinder(0.17, 0.82, { caps: false }), {
+    k.add(evenCylinder(0.17, 0.17, 0.82, false), {
+      even: true,
+      opacity: 1,
+      jitter: 0.012,
       pos: add(p, [0, 0.41, 0]),
       flat: 0.2,
       color: (c) => roundBlocks(c),
     });
-    k.add(k.cylinder(0.2, 0.06), {
+    k.add(evenCylinder(0.2, 0.2, 0.06), {
+      even: true,
+      opacity: 1,
+      jitter: 0.012,
       pos: add(p, [0, 0.84, 0]),
       flat: 0.2,
       color: (c) => roundBlocks(c, shade(stoneC, 0.92)),
     });
-    k.add(k.cone(0.22, 0.0, 0.38), {
+    k.add(evenCylinder(0.22, 0.0, 0.38), {
+      even: true,
+      opacity: 1,
+      jitter: 0.012,
       pos: add(p, [0, 1.06, 0]),
       flat: 0.2,
       color: (c) => lit(roofC, c, 0.6),
     });
   }
   const bridge = k.part("bridge", { pivot: CASTLE.gate, axis: [1, 0, 0] });
-  k.add(k.box(0.34, 0.035, 0.84), {
+  k.add(evenBox(0.34, 0.035, 0.84), {
+    even: true,
+    opacity: 1,
+    jitter: 0.012,
     part: bridge,
     pos: add(CASTLE.gate, [0, 0, 0.42]),
     flat: 0.2,
@@ -3790,25 +4062,44 @@ function castleBuild(k, o) {
   const knight = (x, z) => {
     const K = { part: knights, weight: 3, flat: 0.3 };
     for (const s of [-1, 1])
-      k.add(k.box(0.022, 0.07, 0.026), {
+      k.add(evenBox(0.022, 0.07, 0.026), {
+        even: true,
+        opacity: 1,
+        jitter: 0.012,
         ...K,
         pos: [x + s * 0.016, 0.083, z],
         color: (c) => lit("#3b3530", c),
       });
-    k.add(k.ellipsoid(0.042, 0.055, 0.032), { ...K, pos: [x, 0.158, z], color: tunic });
+    k.add(evenEllipsoid(k, 0.042, 0.055, 0.032), {
+      even: true,
+      opacity: 1,
+      jitter: 0.012,
+      ...K,
+      pos: [x, 0.158, z],
+      color: tunic,
+    });
     for (const s of [-1, 1])
-      k.add(k.ellipsoid(0.013, 0.04, 0.014), {
+      k.add(evenEllipsoid(k, 0.013, 0.04, 0.014), {
+        even: true,
+        opacity: 1,
+        jitter: 0.012,
         ...K,
         pos: [x + s * 0.048, 0.158, z],
         color: (c) => lit("#b9bcc2", c, 0.6),
       });
     k.add(k.sphere(0.03), {
+      even: true,
+      opacity: 1,
+      jitter: 0.012,
       ...K,
       pos: [x, 0.238, z],
       color: (c) =>
         c.n[2] > 0.5 && Math.abs(c.p[1] - 0.241) < 0.005 ? "#1b1917" : lit("#c9ccd1", c, 0.55),
     });
-    k.add(k.cone(0.012, 0.0, 0.035), {
+    k.add(evenCylinder(0.012, 0.0, 0.035), {
+      even: true,
+      opacity: 1,
+      jitter: 0.012,
       ...K,
       pos: [x, 0.283, z],
       color: (c) => lit(roofC, c, 0.6),
@@ -3839,12 +4130,21 @@ function pagodaBuild(k, o) {
   const plaster = "#f1ebdd";
   const tile = "#3e4447";
   // Moss, gravel and a stone platform.
-  ground(k, 1.7, 0, (c) => {
-    const r = Math.hypot(c.p[0], c.p[2]);
-    if (r < 1.2) return lit(shade("#d8d2c4", 0.94 + 0.1 * Math.sin(r * 90)), c);
-    return grass(c, "#5d8f45");
-  });
-  k.add(k.box(1.5, 0.16, 1.5), {
+  ground(
+    k,
+    1.7,
+    0,
+    (c) => {
+      const r = Math.hypot(c.p[0], c.p[2]);
+      if (r < 1.2) return lit(shade("#d8d2c4", 0.96 + 0.06 * Math.sin(r * 50)), c);
+      return calmGrass(c, "#5d8f45");
+    },
+    { even: true },
+  );
+  k.add(evenBox(1.5, 0.16, 1.5), {
+    even: true,
+    opacity: 1,
+    jitter: 0.012,
     pos: [0, 0.08, 0],
     flat: 0.2,
     color: (c) =>
@@ -3866,7 +4166,10 @@ function pagodaBuild(k, o) {
     const h = i === 0 ? 0.4 : 0.3;
     const yb = y;
     // The storey: posts, plaster panels and a door.
-    k.add(k.box(2 * s, h, 2 * s), {
+    k.add(evenBox(2 * s, h, 2 * s), {
+      even: true,
+      opacity: 1,
+      jitter: 0.012,
       pos: [0, yb + h / 2, 0],
       flat: 0.2,
       color: (c) => {
@@ -3893,6 +4196,9 @@ function pagodaBuild(k, o) {
           face(-w, yb + h * 0.8),
         ),
         {
+          even: true,
+          opacity: 1,
+          jitter: 0.012,
           ...warm,
           color: (c) => mix("#ffe9a8", "#ffb347", smoothstep(0.03, 0.3, c.p[1] - yb)),
         },
@@ -3931,11 +4237,15 @@ function pagodaBuild(k, o) {
       { grid: 96, flip: true },
     );
     k.add(roof, {
+      even: true,
+      opacity: 1,
+      jitter: 0.01,
+      size: 1.15,
       flat: 0.2,
       color: (c) => {
         const t = (c.u * 4) % 1;
         const hip = Math.abs(t - 0) < 0.012 || Math.abs(t - 1) < 0.012;
-        const ribs = (t * 34) % 1 < 0.25;
+        const ribs = (t * 22) % 1 < 0.35;
         if (c.v > 0.95) return lit("#d8c9a6", c);
         return lit(shade(tile, hip ? 1.35 : ribs ? 0.85 : 1), c, 0.62);
       },
@@ -3948,7 +4258,13 @@ function pagodaBuild(k, o) {
       },
       { grid: 64 },
     );
-    k.add(under, { flat: 0.2, color: (c) => shade(wood, (c.u * 4 * 30) % 1 < 0.4 ? 0.55 : 0.7) });
+    k.add(under, {
+      even: true,
+      opacity: 1,
+      jitter: 0.01,
+      flat: 0.2,
+      color: (c) => shade(wood, (c.u * 4 * 30) % 1 < 0.4 ? 0.55 : 0.7),
+    });
     for (let q = 0; q < 4; q++) {
       const { xz } = sqPt(q / 4, outer);
       bells.push({ tier: i, p: [xz[0], roofY(1, 0) - 0.02, xz[1]] });
@@ -3973,12 +4289,18 @@ function pagodaBuild(k, o) {
     color: (c) => lit(bronze, c, 0.6),
   });
   for (let i = 0; i < 9; i++)
-    k.add(k.torus(0.07 - i * 0.004, 0.012), {
+    k.add(evenTorus(k, 0.07 - i * 0.004, 0.012), {
+      even: true,
+      opacity: 1,
+      jitter: 0.012,
       pos: [0, ty + 0.22 + i * 0.055, 0],
       weight: 2.5,
       color: (c) => lit(bronze, c, 0.6),
     });
   k.add(k.sphere(0.04), {
+    even: true,
+    opacity: 1,
+    jitter: 0.012,
     pos: [0, ty + 0.89, 0],
     weight: 3,
     color: (c) => lit("#e0b44a", c, 0.6),
@@ -3988,7 +4310,10 @@ function pagodaBuild(k, o) {
   for (const { tier, p: b } of bells) {
     const part = k.part(`chime${tier}`, { pivot: [0, b[1], 0] });
     rod(k, b, add(b, [0, -0.06, 0]), 0.004, { part, weight: 4, color: "#3a3028" });
-    k.add(k.cone(0.03, 0.012, 0.05), {
+    k.add(evenCylinder(0.03, 0.012, 0.05), {
+      even: true,
+      opacity: 1,
+      jitter: 0.012,
       part,
       pos: add(b, [0, -0.085, 0]),
       weight: 4,
@@ -4012,17 +4337,41 @@ function pagodaBuild(k, o) {
         add(tab, add(mul(side, 0.018), [0, -0.03, 0])),
         add(tab, add(mul(side, -0.018), [0, -0.03, 0])),
       ),
-      { part, weight: 4, pattern: false, color: "#d8342b" },
+      { even: true, opacity: 1, jitter: 0.012, part, weight: 4, pattern: false, color: "#d8342b" },
     );
   }
   // Two stone lanterns by the path to the door.
   const stoneL = (c) => lit("#b3ada1", c, 0.62);
   for (const sx of [-1, 1]) {
     const L = [sx * 0.46, 0, 1.12];
-    k.add(k.cylinder(0.09, 0.04), { pos: add(L, [0, 0.02, 0]), flat: 0.2, color: stoneL });
-    k.add(k.cylinder(0.035, 0.2), { pos: add(L, [0, 0.14, 0]), flat: 0.2, color: stoneL });
-    k.add(k.box(0.13, 0.03, 0.13), { pos: add(L, [0, 0.25, 0]), flat: 0.2, color: stoneL });
-    k.add(k.box(0.1, 0.1, 0.1), {
+    k.add(evenCylinder(0.09, 0.09, 0.04), {
+      even: true,
+      opacity: 1,
+      jitter: 0.012,
+      pos: add(L, [0, 0.02, 0]),
+      flat: 0.2,
+      color: stoneL,
+    });
+    k.add(evenCylinder(0.035, 0.035, 0.2), {
+      even: true,
+      opacity: 1,
+      jitter: 0.012,
+      pos: add(L, [0, 0.14, 0]),
+      flat: 0.2,
+      color: stoneL,
+    });
+    k.add(evenBox(0.13, 0.03, 0.13), {
+      even: true,
+      opacity: 1,
+      jitter: 0.012,
+      pos: add(L, [0, 0.25, 0]),
+      flat: 0.2,
+      color: stoneL,
+    });
+    k.add(evenBox(0.1, 0.1, 0.1), {
+      even: true,
+      opacity: 1,
+      jitter: 0.012,
       pos: add(L, [0, 0.315, 0]),
       flat: 0.2,
       color: (c) =>
@@ -4032,19 +4381,35 @@ function pagodaBuild(k, o) {
           ? keep("#2e2620")
           : stoneL(c),
     });
-    k.add(k.cone(0.1, 0.015, 0.075, { caps: true }), {
+    k.add(evenCylinder(0.1, 0.015, 0.075), {
+      even: true,
+      opacity: 1,
+      jitter: 0.012,
       pos: add(L, [0, 0.4, 0]),
       flat: 0.2,
       color: stoneL,
     });
-    k.add(k.sphere(0.018), { pos: add(L, [0, 0.45, 0]), weight: 3, color: stoneL });
+    k.add(k.sphere(0.018), {
+      even: true,
+      opacity: 1,
+      jitter: 0.012,
+      pos: add(L, [0, 0.45, 0]),
+      weight: 3,
+      color: stoneL,
+    });
     // The flame box and a halo of light.
-    k.add(k.box(0.105, 0.065, 0.105), {
+    k.add(evenBox(0.105, 0.065, 0.105), {
+      even: true,
+      opacity: 1,
+      jitter: 0.012,
       ...warm,
       pos: add(L, [0, 0.315, 0]),
       color: "#ffd98a",
     });
     k.add(k.sphere(0.13), {
+      even: true,
+      opacity: 1,
+      jitter: 0.012,
       ...warm,
       pos: add(L, [0, 0.315, 0]),
       weight: 0.8,
@@ -4080,7 +4445,7 @@ function windmillBuild(k) {
       jitter: 0.015,
       flat: 0.2,
       pattern: false,
-      color: (c) => grass(c, "#62a048"),
+      color: (c) => calmGrass(c, "#62a048"),
     },
   );
   const tulips = ["#e8332c", "#f5c02f", "#f06fa5", "#ff7a2a", "#e8332c"];
@@ -4096,21 +4461,28 @@ function windmillBuild(k) {
   });
   // The brick base and the thatched, eight-sided body.
   prism(k, 8, 0.66, 0.64, 0.1, 0.42, {
+    even: true,
+    opacity: 1,
+    jitter: 0.012,
     flat: 0.2,
     color: (c) => {
       const a = Math.atan2(c.p[0], c.p[2]);
       return lit(
         stone(c, "#a4543b", a * 0.6 + 5, c.p[1], {
-          course: 0.035,
-          block: 0.08,
-          mortar: 0.16,
-          vary: 0.2,
+          course: 0.045,
+          block: 0.1,
+          mortar: 0.2,
+          vary: 0.08,
         }),
         c,
       );
     },
   });
   prism(k, 8, 0.6, 0.38, 0.42, 2.0, {
+    even: true,
+    opacity: 1,
+    jitter: 0.012,
+    size: 1.1,
     flat: 0.2,
     color: (c) => {
       const a = Math.atan2(c.p[0], c.p[2]);
@@ -4124,7 +4496,7 @@ function windmillBuild(k) {
           return keep(
             Math.abs(d * r) > 0.045 || Math.abs(c.p[1] - wy) > 0.045 ? "#f4f1ea" : "#23313d",
           );
-      const straw = 0.9 + 0.12 * c.noise(a * 30, c.p[1] * 4, 0) + 0.06 * Math.sin(a * 90);
+      const straw = 0.93 + 0.06 * c.noise(a * 12, c.p[1] * 3, 0) + 0.03 * Math.sin(a * 60);
       return lit(shade(thatch, straw), c, 0.6);
     },
   });
@@ -4174,7 +4546,7 @@ function windmillBuild(k) {
     color: (c) =>
       c.p[1] < 1.99
         ? null
-        : lit(shade(thatch, 0.85 + 0.1 * c.noise(c.p[0] * 30, c.p[1] * 30, c.p[2] * 30)), c, 0.6),
+        : lit(shade(thatch, 0.9 + 0.05 * c.noise(c.p[0] * 10, c.p[1] * 10, c.p[2] * 10)), c, 0.6),
   });
   rod(k, [0, 2.12, 0], MILL.hub, 0.06, { weight: 2, color: (c) => lit(wood, c) });
   // The sails: four lattice arms covered in cloth, turning as one part.

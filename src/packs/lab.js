@@ -20,7 +20,12 @@
 // used, the toy shows the field frozen at t = 0.
 
 const TAU = Math.PI * 2;
+const clamp = (x, a, b) => Math.min(b, Math.max(a, x));
 const PULSE_SECS = 3;
+// Older pulses still running when a new tap comes (lane Fix7): each tap adds
+// its own (a stone, a ring, a lap) rather than pausing the last.
+const LF_OLD = 7;
+const pulseMem = new WeakMap();
 
 // ---- The fields, in JavaScript (t = 0, for placing the splats) --------------------
 
@@ -160,9 +165,11 @@ const GLSL_HEAD = (fit) => `
 uniform vec4 uSpClock;   // y splat scale, z exposure
 uniform vec4 uSpKit;     // x the toy's clock
 uniform vec4 uSpMorph;   // x the tap's progress 0..1
+uniform vec4 uSpTokens[96]; // the older pulses (lfOld)
 const vec3 LF_C = vec3(${fit.c.map(num).join(", ")});
 const float LF_S = ${num(fit.s)};
 const float TAU = 6.2831853;
+const int LF_OLD = ${LF_OLD};
 vec4 lfAn = vec4(0.0);
 vec3 lfColor = vec3(1.0);
 float lfAlpha = 1.0;
@@ -178,15 +185,23 @@ vec3 lfHsv(float h, float s, float v) {
   vec3 k = clamp(abs(fract(h + vec3(0.0, 2.0 / 3.0, 1.0 / 3.0)) * 6.0 - 3.0) - 1.0, 0.0, 1.0);
   return v * mix(vec3(1.0), k, s);
 }
+// An older pulse still running (lane Fix7): xyz where its tap landed (field
+// units), w its progress (running while 0 < w < 1).
+vec4 lfOld(int i) {
+  vec4 o = uSpTokens[i * 2];
+  return vec4(o.xyz / LF_S, o.w);
+}
 `;
 
 const WGSL_HEAD = (fit) => `
 uniform uSpClock: vec4f;
 uniform uSpKit: vec4f;
 uniform uSpMorph: vec4f;
+uniform uSpTokens: array<vec4f, 96>;
 const LF_C = vec3f(${fit.c.map(num).join(", ")});
 const LF_S: f32 = ${num(fit.s)};
 const TAU: f32 = 6.2831853;
+const LF_OLD: i32 = ${LF_OLD};
 var<private> lfAn: vec4f = vec4f(0.0);
 var<private> lfColor: vec3f = vec3f(1.0);
 var<private> lfAlpha: f32 = 1.0;
@@ -201,6 +216,10 @@ fn lfHash(u: f32, v: f32) -> f32 {
 fn lfHsv(h: f32, s: f32, v: f32) -> vec3f {
   let k = clamp(abs(fract(h + vec3f(0.0, 2.0 / 3.0, 1.0 / 3.0)) * 6.0 - 3.0) - 1.0, vec3f(0.0), vec3f(1.0));
   return v * mix(vec3f(1.0), k, s);
+}
+fn lfOld(i: i32) -> vec4f {
+  let o = uniform.uSpTokens[i * 2];
+  return vec4f(o.xyz / LF_S, o.w);
 }
 `;
 
@@ -242,11 +261,26 @@ vec3 lfField(float u, float v, float t, float p) {
     lfAlpha = 0.3 * pow(sin(M), 4.0) * smoothstep(0.95, 0.6, a);
   }
   float ring = exp(-pow((a - p * 1.15) / 0.07, 2.0)) * glow;
+  for (int i = 0; i < LF_OLD; i++) {
+    float q = lfOld(i).w;
+    if (q > 0.0 && q < 1.0) ring += exp(-pow((a - q * 1.15) / 0.07, 2.0)) * sin(3.1415927 * q);
+  }
   lfColor = lfColor * (1.0 + 2.2 * ring);
   return vec3(ex * c - ez * s, y, ex * s + ez * c);
 }
 `,
   ocean: `
+// One stone's rings at (x, z): returns the lift, and tilts the normal n.
+float lfStone(vec2 xz, vec2 st, float p, inout vec3 n) {
+  if (p <= 0.0 || p >= 1.0) return 0.0;
+  vec2 s = xz - st;
+  float rs = length(s);
+  float tau = p * 3.0;
+  float a = 0.035 * sin(3.1415927 * p) * smoothstep(tau * 0.55 + 0.05, tau * 0.55 - 0.05, rs);
+  float k = 22.0 * rs - 14.0 * tau;
+  n.xz -= a * 22.0 * cos(k) * s / max(rs, 1e-3);
+  return a * exp(-1.6 * rs) * sin(k);
+}
 vec3 lfField(float u, float v, float t, float p) {
   float r = sqrt(u);
   float x = r * cos(TAU * v);
@@ -266,18 +300,14 @@ vec3 lfField(float u, float v, float t, float p) {
     crest += w.w * sin(ph);
   }
   // The stone: a ring that runs out from where the tap landed (the middle
-  // for the button: uSpMorph.yz, when w is set) and dies away.
+  // for the button: uSpMorph.yz, when w is set) and dies away. Every
+  // earlier stone still running adds its own rings (lane Fix7).
   vec2 st = uSpMorph.w > 0.5 ? uSpMorph.yz : vec2(0.0);
-  float sx = x - st.x;
-  float sz = z - st.y;
-  float rs = sqrt(sx * sx + sz * sz);
-  float glow = sin(3.1415927 * p);
-  float tau = p * 3.0;
-  float front = smoothstep(tau * 0.55 + 0.05, tau * 0.55 - 0.05, rs);
-  float ring = 0.035 * glow * front * exp(-1.6 * rs) * sin(22.0 * rs - 14.0 * tau);
-  d.y += ring;
-  n.x -= 0.035 * glow * front * 22.0 * cos(22.0 * rs - 14.0 * tau) * sx / max(rs, 1e-3);
-  n.z -= 0.035 * glow * front * 22.0 * cos(22.0 * rs - 14.0 * tau) * sz / max(rs, 1e-3);
+  d.y += lfStone(vec2(x, z), st, p, n);
+  for (int i = 0; i < LF_OLD; i++) {
+    vec4 o = lfOld(i);
+    d.y += lfStone(vec2(x, z), o.xz, o.w, n);
+  }
   n = normalize(n);
   vec3 L = normalize(vec3(0.4, 0.8, 0.45));
   float diff = clamp(dot(n, L), 0.0, 1.0);
@@ -299,7 +329,13 @@ vec3 lfKnotAt(float q) {
 }
 vec3 lfField(float u, float v, float t, float p) {
   float h = lfHash(u, v);
+  // Each pulse still running carries the flow on around (a finished one
+  // has carried it a whole lap, the same as none).
   float lap = p - sin(TAU * p) / TAU;
+  for (int i = 0; i < LF_OLD; i++) {
+    float q = lfOld(i).w;
+    if (q > 0.0 && q < 1.0) lap += q - sin(TAU * q) / TAU;
+  }
   float s = u + t * 0.03 + lap;
   vec3 c = lfKnotAt(s);
   vec3 T = normalize(lfKnotAt(s + 0.001) - c);
@@ -350,12 +386,32 @@ fn lfField(u: f32, v: f32, t: f32, p: f32) -> vec3f {
     lfSize = 3.2;
     lfAlpha = 0.3 * pow(sin(M), 4.0) * smoothstep(0.95, 0.6, a);
   }
-  let ring = exp(-pow((a - p * 1.15) / 0.07, 2.0)) * glow;
+  var ring = exp(-pow((a - p * 1.15) / 0.07, 2.0)) * glow;
+  for (var i = 0; i < LF_OLD; i++) {
+    let q = lfOld(i).w;
+    if (q > 0.0 && q < 1.0) {
+      ring += exp(-pow((a - q * 1.15) / 0.07, 2.0)) * sin(3.1415927 * q);
+    }
+  }
   lfColor = lfColor * (1.0 + 2.2 * ring);
   return vec3f(ex * c - ez * s, y, ex * s + ez * c);
 }
 `,
   ocean: `
+fn lfStone(xz: vec2f, st: vec2f, p: f32, n: ptr<function, vec3f>) -> f32 {
+  if (p <= 0.0 || p >= 1.0) {
+    return 0.0;
+  }
+  let s = xz - st;
+  let rs = length(s);
+  let tau = p * 3.0;
+  let a = 0.035 * sin(3.1415927 * p) * smoothstep(tau * 0.55 + 0.05, tau * 0.55 - 0.05, rs);
+  let k = 22.0 * rs - 14.0 * tau;
+  let g = a * 22.0 * cos(k) * s / max(rs, 1e-3);
+  (*n).x -= g.x;
+  (*n).z -= g.y;
+  return a * exp(-1.6 * rs) * sin(k);
+}
 fn lfField(u: f32, v: f32, t: f32, p: f32) -> vec3f {
   let r = sqrt(u);
   let x = r * cos(TAU * v);
@@ -375,16 +431,11 @@ fn lfField(u: f32, v: f32, t: f32, p: f32) -> vec3f {
     crest += w.w * sin(ph);
   }
   let st = select(vec2f(0.0), uniform.uSpMorph.yz, uniform.uSpMorph.w > 0.5);
-  let sx = x - st.x;
-  let sz = z - st.y;
-  let rs = sqrt(sx * sx + sz * sz);
-  let glow = sin(3.1415927 * p);
-  let tau = p * 3.0;
-  let front = smoothstep(tau * 0.55 + 0.05, tau * 0.55 - 0.05, rs);
-  let ring = 0.035 * glow * front * exp(-1.6 * rs) * sin(22.0 * rs - 14.0 * tau);
-  d.y += ring;
-  n.x -= 0.035 * glow * front * 22.0 * cos(22.0 * rs - 14.0 * tau) * sx / max(rs, 1e-3);
-  n.z -= 0.035 * glow * front * 22.0 * cos(22.0 * rs - 14.0 * tau) * sz / max(rs, 1e-3);
+  d.y += lfStone(vec2f(x, z), st, p, &n);
+  for (var i = 0; i < LF_OLD; i++) {
+    let o = lfOld(i);
+    d.y += lfStone(vec2f(x, z), o.xz, o.w, &n);
+  }
   n = normalize(n);
   let L = normalize(vec3f(0.4, 0.8, 0.45));
   let diff = clamp(dot(n, L), 0.0, 1.0);
@@ -406,7 +457,13 @@ fn lfKnotAt(q: f32) -> vec3f {
 }
 fn lfField(u: f32, v: f32, t: f32, p: f32) -> vec3f {
   let h = lfHash(u, v);
-  let lap = p - sin(TAU * p) / TAU;
+  var lap = p - sin(TAU * p) / TAU;
+  for (var i = 0; i < LF_OLD; i++) {
+    let q = lfOld(i).w;
+    if (q > 0.0 && q < 1.0) {
+      lap += q - sin(TAU * q) / TAU;
+    }
+  }
   let s = u + t * 0.03 + lap;
   let c = lfKnotAt(s);
   let T = normalize(lfKnotAt(s + 0.001) - c);
@@ -497,13 +554,17 @@ export const RECIPES = {
         ],
       },
     ],
-    controls: [{ key: "pulse", label: "Pulse", type: "pulse", ease: PULSE_SECS }],
+    // A tap never pauses it (lane Fix7): a tap while a pulse runs starts
+    // another one beside it.
+    controls: [{ key: "pulse", label: "Pulse", type: "pulse", ease: PULSE_SECS, pausable: false }],
     // Sound C: each field's own sound (FIELD_SOUNDS), played by drive.
     action: { key: "pulse", label: "Send a pulse", quiet: ["pulse"] },
     sounds: (o) => [FIELD_SOUNDS[o.program] || FIELD_SOUNDS.galaxy],
     // The tap's progress (0..1) goes to the GPU program on channel 0.
     // Where a tap landed (field units) rides on channels 1 and 2, so the
-    // ocean's stone drops there; everything is 0 again at rest.
+    // ocean's stone drops there; everything is 0 again at rest. The pulses
+    // of earlier taps that still run ride on the tokens' uniform (unused by
+    // this toy otherwise): offset where it landed, `visible` its progress.
     drive(t, c, out, info) {
       const p = c.pulse > 0 ? 1 - c.pulse : 0;
       const at = info?.tap?.key === "pulse" ? info.tap.point : null;
@@ -514,6 +575,20 @@ export const RECIPES = {
         FIELD_TAP.n = n;
         out.cues.push(FIELD_SOUNDS[info.data?.program] || FIELD_SOUNDS.galaxy);
       }
+      if (info?.time === undefined) return;
+      let m = pulseMem.get(c);
+      if (!m) pulseMem.set(c, (m = { n: null, time: info.time, cur: null, old: [] }));
+      const dt = clamp(info.time - m.time, 0, 0.1);
+      m.time = info.time;
+      for (const o of m.old) o.p += dt / PULSE_SECS;
+      const tap = info.tap?.key === "pulse" ? info.tap : null;
+      if (tap && tap.n !== m.n) {
+        if (m.cur && m.cur.p > 0 && m.cur.p < 1) m.old.unshift(m.cur);
+        m.n = tap.n;
+      }
+      m.old = m.old.filter((o) => o.p < 1).slice(0, LF_OLD);
+      m.cur = { p, x: at ? at[0] : 0, z: at ? at[2] : 0 };
+      if (m.old.length) out.tokens = m.old.map((o) => ({ offset: [o.x, 0, o.z], visible: o.p }));
     },
     gpuField(o, fit) {
       return fitOk(fit) ? fieldModifier(o.program, fitOf(fit)) : null;

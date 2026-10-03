@@ -461,7 +461,7 @@ export const TOY_HELP = {
   marble: {
     howTo: "Tap it to roll it around a little circle.",
     about:
-      "A marble is a small, hard ball, usually of glass, with twists of color inside. Children have played games with little balls of clay and stone for thousands of years; glass marbles became common in the 1800s. A twist of colored glass is set in the middle of the ball while the glass is hot and soft.\n\nTap it and it rolls around a little circle, turning the way it rolls, so the swirl inside turns too. After one lap it is back exactly as it was. Pick the color of the swirl in the Toy tab.",
+      "A marble is a small, hard ball, usually of glass, with twists of color inside. Children have played games with little balls of clay and stone for thousands of years; glass marbles became common in the 1800s. A twist of colored glass is set in the middle of the ball while the glass is hot and soft.\n\nTap it and it rolls around a little circle, turning the way it rolls, so the swirl inside turns too, under a polished glass shell that catches the light at its edge. After one lap it is back exactly as it was. Pick the color of the swirl in the Toy tab.",
   },
   "hockey-puck": {
     howTo: "Tap it for a slap shot across the ice.",
@@ -708,22 +708,23 @@ export const TOY_HELP = {
   molecule: {
     howTo: "Tap it to heat it up. Pick a molecule, or type your own, in the Toy tab.",
     about:
-      "A molecule is a group of atoms held together by chemical bonds. This one is a ball-and-stick model: each ball is an atom, colored by its element (carbon dark gray, hydrogen white, oxygen red, nitrogen blue), and each stick is a bond.\n\nIt starts as caffeine, C8H10N4O2, the stimulant in coffee and tea; the Toy tab has sugars, medicines, vitamins and DNA too. The atoms always jiggle a little on their bonds, as real ones do; tap it to heat it up and they shake hard, the light hydrogens furthest, then it cools. In the Toy tab, pick another molecule, or type a name, a formula or a SMILES string (a way of writing a molecule on one line) to build your own.",
+      "A molecule is a group of atoms held together by chemical bonds. This one is a ball-and-stick model: each ball is an atom, colored by its element (carbon dark gray, hydrogen white, oxygen red, nitrogen blue), and each stick is a bond.\n\nIt starts as caffeine, C8H10N4O2, the stimulant in coffee and tea; the Toy tab has sugars, medicines, vitamins and DNA too. The atoms always jiggle a little on their bonds, as real ones do; tap it to heat it up and they shake hard, the light hydrogens furthest, each bond stretching and squeezing with its atoms, then it cools. In the Toy tab, pick another molecule, or type a name, a formula or a SMILES string (a way of writing a molecule on one line) to build your own.",
   },
   protein: {
     howTo: "Tap it to pull it apart. Pick a protein, or open your own file, in the Toy tab.",
     about:
-      "Proteins are the tiny machines of living things. Each is a long chain of building blocks called amino acids that folds up into its own shape: coils called helices, flat strands and loops. Hemoglobin carries oxygen in the blood, insulin helps control sugar, and a jellyfish protein, GFP, glows green.\n\nThese are real shapes from the Protein Data Bank, a free library of well over 200,000 structures that scientists share. Tap it to pull it apart into its pieces and put it back; in GFP the glowing part lights up while it is open. You can open any PDB or mmCIF file from the library in the Toy tab.",
+      "Proteins are the tiny machines of living things. Each is a long chain of building blocks called amino acids that folds up into its own shape: coils called helices, flat strands and loops. Hemoglobin carries oxygen in the blood, insulin helps control sugar, and a jellyfish protein, GFP, glows green.\n\nThese are real shapes from the Protein Data Bank, a free library of well over 200,000 structures that scientists share. Tap it to pull it apart into its pieces, and they come back by themselves; tap again while it is apart and they come back at once. In GFP the glowing part lights up while it is open. You can open any PDB or mmCIF file from the library in the Toy tab.",
   },
   "periodic-table": {
-    howTo: "Tap a tile to raise its atom, again to lower it. Tap the empty board for a tour.",
+    howTo:
+      "Tap a tile to raise its atom, again to lower it. Tap the board for a tour, 57-71 for its row.",
     about:
-      "The periodic table lists all 118 elements in order of their protons, in rows that repeat their chemistry: each column's elements behave alike. The colors are the families, from the alkali metals on the left to the noble gases on the right.\n\nTap an element and its atom rises and builds itself: the protons (red) and neutrons (gray) of its commonest isotope, then the electrons, filling their shells in the real order. Tap the atom and an electron jumps up a shell and falls back, giving off light the color of the element's brightest visible line: red for hydrogen, yellow for sodium, green for copper. Elements with no visible line measured flash white. Tap the empty board for a tour through every element. Numbers from NIST, PubChem and IUPAC.",
+      "The periodic table lists all 118 elements in order of their protons, in rows that repeat their chemistry: each column's elements behave alike. The colors are the families, from the alkali metals on the left to the noble gases on the right.\n\nTap an element and its atom rises and builds itself: the protons (red) and neutrons (gray) of its commonest isotope, then the electrons, filling their shells in the real order. Tap the atom and an electron jumps up a shell and falls back, giving off light the color of the element's brightest visible line: red for hydrogen, yellow for sodium, green for copper. Elements with no visible line measured flash white. Tap the board for a tour. Tap 57-71 or 89-103 to light that row; Wide table shows it in place. Numbers from NIST, PubChem and IUPAC.",
   },
   "crystal-lattice": {
     howTo: "Tap to send a wave through it. Pick one of eleven crystals in the Toy tab.",
     about:
-      "In a crystal, atoms are lined up in a pattern that repeats over and over, like tiles on a floor. In table salt, sodium and chlorine take turns in rows of little cubes. Diamond and graphite are both pure carbon: in diamond each atom holds on to four others, which makes it very hard, while graphite's flat sheets slide apart, which is why a pencil writes.\n\nTap it to send a wave through it: a ripple runs across, each slice of atoms rising and falling in turn. Sound and heat travel through solids as waves like this. In ice, the water molecules spread out into an open pattern, so ice floats on water. Metals, quartz and graphene are in the Toy tab too.",
+      "In a crystal, atoms are lined up in a pattern that repeats over and over, like tiles on a floor. In table salt, sodium and chlorine take turns in rows of little cubes. Diamond and graphite are both pure carbon: in diamond each atom holds on to four others, which makes it very hard, while graphite's flat sheets slide apart, which is why a pencil writes.\n\nTap it to send a wave through it: a ripple runs across, each slice of atoms rising and falling in turn, the bonds between them stretching and bending. Sound and heat travel through solids as waves like this. In ice, the water molecules spread out into an open pattern, so ice floats on water. Metals, quartz and graphene are in the Toy tab too.",
   },
 
   // ---- Gems -----------------------------------------------------------------------------
@@ -787,7 +788,7 @@ export const TOY_HELP = {
   lungs: {
     howTo: "Tap for a deep breath. Try the Breath slider in the Toy tab.",
     about:
-      "The lungs are two spongy organs in the chest that bring air into the body. Air comes down the windpipe, splits into two tubes and branches into smaller and smaller airways that end in millions of tiny air sacs, where oxygen passes into the blood and carbon dioxide passes out.\n\nThese lungs breathe gently by themselves. Tap for a deep breath: both lungs swell out, hold, then empty further than usual and settle back into their rhythm. The Breath slider sets how deeply they breathe at rest. An adult at rest takes about 12 to 20 breaths a minute.",
+      "The lungs are two spongy organs in the chest that bring air into the body. Air comes down the windpipe, splits into two tubes and branches into smaller and smaller airways that end in millions of tiny air sacs, where oxygen passes into the blood and carbon dioxide passes out.\n\nThese lungs breathe gently by themselves. Tap for a deep breath: both lungs swell out big, hold, then empty further than usual and settle back into their rhythm. The Breath slider sets how deeply they breathe at rest. An adult at rest takes about 12 to 20 breaths a minute.",
   },
   tooth: {
     howTo: "Tap it to polish it until it sparkles.",
@@ -929,9 +930,10 @@ export const TOY_HELP = {
       "A fire needs three things: fuel to burn, heat to start it, and oxygen from the air. Take any one away and it goes out. The yellow and orange glow of the flames comes from tiny bits of soot, heated until they shine.\n\nThis campfire has logs leaning together in a ring of stones, on a bed of glowing embers. Tap it to stoke the fire and the flames leap up with more sparks, then settle down again. Set how big the fire is in the Toy tab. A ring of stones helps keep a real campfire from spreading.",
   },
   "storm-cloud": {
-    howTo: "Tap for thunder. Try the Rain slider in the Toy tab.",
+    howTo:
+      "Tap for thunder: lightning strikes under your finger. Try the Rain slider in the Toy tab.",
     about:
-      "A thunderstorm cloud can tower more than 10 kilometers into the sky. Inside it, bits of ice and water crash together and build up electric charge, until a giant spark, lightning, jumps across. Lightning heats the air around it to about 30,000 degrees Celsius, hotter than the surface of the Sun, and the air bursts outward with the boom we call thunder.\n\nThis cloud rains and flashes with lightning by itself. Tap it for a big strike and a clap of thunder. Light travels much faster than sound, so count the seconds between flash and thunder: every 3 seconds is about 1 kilometer away.",
+      "A thunderstorm cloud can tower more than 10 kilometers into the sky. Inside it, bits of ice and water crash together and build up electric charge, until a giant spark, lightning, jumps across. Lightning heats the air around it to about 30,000 degrees Celsius, hotter than the surface of the Sun, and the air bursts outward with the boom we call thunder.\n\nThis cloud rains and flashes with lightning by itself. Tap it for a big strike and a clap of thunder: the bolt comes straight down from the cloud where you tapped. Light travels much faster than sound, so count the seconds between flash and thunder: every 3 seconds is about 1 kilometer away.",
   },
   "lava-lamp": {
     howTo: "Tap to heat it up. Pick colors, blobs and flow in the Toy tab.",
@@ -1018,7 +1020,7 @@ export const TOY_HELP = {
   pancakes: {
     howTo: "Tap to flip the top pancake. Set the stack and the syrup in the Toy tab.",
     about:
-      "Pancakes are flat, round cakes made from a runny batter of flour, eggs and milk, cooked on a hot pan. Baking powder in the batter makes bubbles of gas, so they puff up soft and fluffy. When bubbles pop on the top, it is time to flip.\n\nTap it to flip the top pancake: it hops up, turns a full somersault in the air and lands back on the stack. In the Toy tab, set how many pancakes are in the stack, from two to seven, and try the Syrup slider.",
+      "Pancakes are flat, round cakes made from a runny batter of flour, eggs and milk, cooked on a hot pan. Baking powder in the batter makes bubbles of gas, so they puff up soft and fluffy. When bubbles pop on the top, it is time to flip.\n\nTap it to flip the top pancake: it hops up, turns a full somersault in the air with its syrup and butter, and lands back on the stack. In the Toy tab, set how many pancakes are in the stack, from two to seven, and try the Syrup slider.",
   },
   cupcake: {
     howTo: "Tap it to flick the cherry up; it plops back down.",
@@ -1068,7 +1070,7 @@ export const TOY_HELP = {
   burger: {
     howTo: "Tap to spread out the layers; tap again to stack them up.",
     about:
-      "A burger is a round patty of ground meat, or of vegetables, cooked and served in a sliced bun with toppings. The name comes from the city of Hamburg, in Germany. This one has a sesame bun, a patty, a slice of cheese, lettuce and tomato.\n\nTap it to spread out the layers in the air, one above the other, so every part shows, and tap again to stack them back up. Engineers call a picture like this an exploded view: it shows how the parts of a machine fit together without taking the real thing apart.",
+      "A burger is a round patty of ground meat, or of vegetables, cooked and served in a sliced bun with toppings. The name comes from the city of Hamburg, in Germany. This one has a sesame seed bun, a patty, a slice of cheese, a leaf of lettuce and tomato.\n\nTap it to spread out the layers in the air, one above the other, so every part shows, and tap again to stack them back up. Engineers call a picture like this an exploded view: it shows how the parts of a machine fit together without taking the real thing apart.",
   },
   sushi: {
     howTo: "Tap it: the chopsticks pick up a piece and dip it in soy sauce.",
@@ -1078,7 +1080,7 @@ export const TOY_HELP = {
   taco: {
     howTo: "Tap it to break the shell in half; then it closes up again.",
     about:
-      "A taco is a Mexican dish: a tortilla, a thin, round flatbread of corn or wheat, folded around a filling such as meat, beans, cheese, lettuce and salsa. People in Mexico have made corn tortillas for thousands of years. This one has a crunchy, fried corn shell.\n\nTap it and the shell snaps across the middle with a crunch. The halves pull apart and swing open like a book, showing the filling in each break, and bits spill onto the plate and bounce. Then they hop back in and the halves close.",
+      "A taco is a Mexican dish: a tortilla, a thin, round flatbread of corn or wheat, folded around a filling such as meat, beans, cheese, lettuce and salsa. People in Mexico have made corn tortillas for thousands of years. This one has a crunchy, fried corn shell.\n\nTap it and the shell snaps across the middle with a crunch. The halves pull apart and swing open like a book, showing the filling in each break, and bits drop out of the break onto the plate, bounce a little and slide to a stop. Then they hop back in and the halves close.",
   },
   egg: {
     howTo: "Tap to crack it open; tap again to go back.",
@@ -1168,9 +1170,10 @@ export const TOY_HELP = {
       "A yo-yo is two disks joined by a short axle, with a string tied around the axle. Thrown down, it unwinds and spins fast; the spin keeps it steady, and a little tug on the string makes it wind itself back up into your hand. Children in ancient Greece played with yo-yos of wood, metal and clay.\n\nThis one bobs gently on its string. Tap it to throw it: it drops, spinning as the string unwinds, and then climbs back up the string to where it started. Pick its color in the Toy tab.",
   },
   "puzzle-cube": {
-    howTo: "Drag across a face to turn a row or column. Tap to scramble or solve it.",
+    howTo:
+      "Drag across a face to turn a row or column. Tap to scramble or solve it; tap again to pause.",
     about:
-      "A twisting puzzle cube: 26 small cubes around a hidden core, with one color on each of its six faces. Each turn moves a whole row or column of nine cubes, and the puzzle is to bring every face back to one color.\n\nHere every little cube is its own piece, and the cube keeps track of each turn, so you can really solve it: drag across a face to turn that row or column. A tap scrambles a solved cube, or turns a scrambled one back to solved, one layer at a time, and solving it by hand earns a hop and a chime. The cube has about 43 quintillion arrangements, yet any of them can be solved in 20 moves or fewer.",
+      "A twisting puzzle cube: 26 small cubes around a hidden core, with one color on each of its six faces. Each turn moves a whole row or column of nine cubes, and the puzzle is to bring every face back to one color.\n\nHere every little cube is its own piece, and the cube keeps track of each turn, so you can really solve it: drag across a face to turn that row or column. A tap scrambles a solved cube, or turns a scrambled one back to solved, one layer at a time. Tap while it turns and it pauses once the turn in progress lands, so you can take over by hand: your own move ends the automatic one, and the next tap starts again from there. Solving it by hand earns a hop and a chime. The cube has about 43 quintillion arrangements, yet any of them can be solved in 20 moves or fewer.",
   },
   "spring-toy": {
     howTo: "Tap it to hurry it along; it flips end over end faster.",
@@ -1289,22 +1292,23 @@ export const TOY_HELP = {
   "running-shoe": {
     howTo: "Tap it to untie the laces and tie them again, then watch it tap its toe.",
     about:
-      "A running shoe is laced through rows of eyelets, so the laces pull the shoe snug around the foot. The usual bow is a reef knot with two loops: if the second half is tied the wrong way round, it becomes a granny knot, which slips and comes undone much more easily.\n\nThis shoe is a photo scan of a real trail shoe. Tap it and its laces come undone, cross over and tie themselves into a bow again, and the shoe taps its toe twice.",
+      "A running shoe is laced through rows of eyelets, so the laces pull the shoe snug around the foot. The usual bow is a reef knot with two loops: if the second half is tied the wrong way round, it becomes a granny knot, which slips and comes undone much more easily.\n\nThis shoe is a photo scan of a real trail shoe. Tap it and its laces come undone, cross over and tie themselves into a bow again, and the shoe taps its toe twice. Pick a flag in the top bar and the shoe wears its colors.",
   },
   hoodie: {
     howTo: "Tap it to flip the hood and cross the sleeves.",
     about:
-      "A hoodie is a sweatshirt with a hood, first made in the 1930s for people working in cold places. Its soft fleece is knitted cotton brushed on the inside, and a drawstring runs through the edge of the hood to pull it snug. This one has raglan sleeves, whose seams run from the armpit up to the collar.\n\nIt is made from a detailed 3D model of a real hoodie. Tap it and the hood flops forward and flips back up as the drawstrings swing, then the sleeves swing up, cross in front and settle back.",
+      "A hoodie is a sweatshirt with a hood, first made in the 1930s for people working in cold places. Its soft fleece is knitted cotton brushed on the inside, and a drawstring runs through the edge of the hood to pull it snug. This one has raglan sleeves, whose seams run from the armpit up to the collar.\n\nIt is made from a detailed 3D model of a real hoodie. Tap it and the hood flops forward and flips back up as the drawstrings swing, then the sleeves swing up, cross in front and settle back. Pick a flag in the top bar and the hoodie wears its colors.",
   },
   sunglasses: {
-    howTo: "Tap them to fold the arms, flip the glasses round and darken the lenses.",
+    howTo:
+      "Tap them (the frame or a lens) to fold the arms, flip the glasses round and darken the lenses.",
     about:
-      "These are round glasses with light-changing lenses. Special molecules in the lenses change shape in the sun's ultraviolet light and start to absorb light, so the lenses turn dark outdoors and clear again a few minutes after you go inside.\n\nThe frame comes from a detailed 3D model of real vintage spectacles. Tap them and the arms fold in on their hinges one after the other, the glasses flip over to face you and the lenses darken from clear to deep gray, then everything unfolds and clears.",
+      "These are round glasses with light-changing lenses. Special molecules in the lenses change shape in the sun's ultraviolet light and start to absorb light, so the lenses turn dark outdoors and clear again a few minutes after you go inside.\n\nThe frame comes from a detailed 3D model of real vintage spectacles. Tap them and the arms fold in on their hinges one after the other, the glasses flip over to face you and the lenses darken from clear to deep gray, then everything unfolds and clears. Pick a flag in the top bar and the frame wears its colors.",
   },
   "baseball-cap": {
     howTo: "Tap it to flip the cap off its stand and spin it like a flying disc.",
     about:
-      "A baseball cap is a round crown sewn from six panels, with a button on top and a stiff brim that shades the eyes. Baseball players wore caps like it in the 1800s, and now people wear them everywhere.\n\nThis gray cap is made from a detailed 3D model of a real one, resting on a wooden stand. Tap it and it flips up off the stand, spins flat like a flying disc and lands brim backward, then a second flip turns it round the right way. A spinning disc stays level because its spin resists being tipped over.",
+      "A baseball cap is a round crown sewn from six panels, with a button on top and a stiff brim that shades the eyes. Baseball players wore caps like it in the 1800s, and now people wear them everywhere.\n\nThis gray cap is made from a detailed 3D model of a real one, resting on a wooden stand. Tap it and it flips up off the stand, spins flat like a flying disc and lands brim backward, then a second flip turns it round the right way. A spinning disc stays level because its spin resists being tipped over. Pick a flag in the top bar and the cap wears its colors.",
   },
   // ---- Medieval -------------------------------------------------------------------------
   "sword-in-stone": {
@@ -1313,9 +1317,9 @@ export const TOY_HELP = {
       "The sword in the stone comes from the old legends of King Arthur of Britain. A sword was stuck fast in a great stone, and only the true king could pull it out. Many strong knights tried and failed, until the young Arthur drew it out easily and was made king.\n\nTap it to try: the sword sticks at first and wiggles, then slides free and rises in a shower of golden sparkles. Tap again to put it back in the stone. The Arthur stories have been told and retold for more than 800 years.",
   },
   shield: {
-    howTo: "Tap it and it blocks a blow: sparks fly and the emblem gleams.",
+    howTo: "Tap it and it blocks a blow where you tap: sparks fly and the emblem gleams.",
     about:
-      "A heraldic shield carries a coat of arms, a painted design that showed who a knight was, even when a helmet hid the face. Heraldry has its own words: the background is the field, and a shape on it is a charge. A chevron is an upside-down V, a bend is a stripe from corner to corner, a saltire is an X-shaped cross, and per pale means split down the middle.\n\nTap it and it takes an unseen knock: it jolts and rocks, sparks spray off its iron rim, and a gleam sweeps across the emblem. Pick one of seven designs and the colors of the field and the charge in the Toy tab.",
+      "A heraldic shield carries a coat of arms, a painted design that showed who a knight was, even when a helmet hid the face. Heraldry has its own words: the background is the field, and a shape on it is a charge. A chevron is an upside-down V, a bend is a stripe from corner to corner, a saltire is an X-shaped cross, and per pale means split down the middle.\n\nTap it and it takes an unseen knock right where you tapped: it jolts and rocks away from the blow, sparks spray off the spot, and a gleam sweeps across the emblem. Pick one of seven designs and the colors of the field and the charge in the Toy tab.",
   },
   "bow-and-target": {
     howTo: "Tap to shoot an arrow; tap again to go back.",
@@ -1563,7 +1567,7 @@ export const TOY_HELP = {
   "gaussian-splatting": {
     howTo: "Tap it: random splats learn the photo. Pick another View in the Toy tab.",
     about:
-      "Gaussian splatting draws a scene with many soft, colored blobs called splats. Each one has a place, a size in three directions, a turn, a color and an opacity. A scan's splats are trained the way a network learns: start from a random cloud, compare the picture it makes with the photos, and nudge every splat a little, again and again, until they match.\n\nTap it: a cloud of random splats slides, stretches and recolors into the strawberry photo, a real fit of 2,400 splats, while its error falls on the chart. Other views show one splat with its three axes, a duck whose splats shrink to dots, and the back-to-front order splats are drawn in.",
+      "Gaussian splatting draws a scene with many soft, colored blobs called splats. Each one has a place, a size in three directions, a turn, a color and an opacity. A scan's splats are trained the way a network learns: start from a random cloud, compare the picture it makes with the photos, and nudge every splat a little, again and again, until they match.\n\nTap it: a cloud of random splats slides, stretches and recolors into the strawberry photo, a real fit of 2,400 splats, while its error falls on the chart. Other views show one splat with its three axes, which a tap trains: it starts from a wrong guess and gradient steps move its place, turn, sizes, color and opacity toward the target outline, big steps first and then smaller ones, as in a real fit; a duck whose splats shrink to dots, and the back-to-front order splats are drawn in.",
   },
   "word-vectors": {
     howTo: "Tap it to work out king − man + woman. Type your own words in the Toy tab.",
@@ -1596,7 +1600,7 @@ export const TOY_HELP = {
     howTo:
       "Tap the keys or type to code letters. Tap the machine to decode. Tap the pad to clear it.",
     about:
-      "The Enigma was a cipher machine that German forces used to keep radio messages secret in World War II. Each key press steps the rotors on like an odometer, and an electric current runs through the plugboard, three wired rotors and a reflector, lighting a different letter on the lampboard. Because the rotors keep turning, the same letter comes out differently each time. Polish mathematicians first broke it in 1932.\n\nTap a key, or type: the key goes down, the rotors step (with the middle rotor's real double step), and the coded letter lights up and is written on the pad under yours. Tap the machine off the keys: the coded letters, typed from the same start, give your message back. With nothing typed, that tap types the message on the pad (HELLO, or your own from the Toy tab) and the next one decodes it. Tap the pad for a clean sheet. On a keyboard, hold Shift for P and R. It uses the historical wirings of rotors I, II and III and reflector B.",
+      "The Enigma was a cipher machine that German forces used to keep radio messages secret in World War II. Each key press steps the rotors on like an odometer, and an electric current runs through the plugboard, three wired rotors and a reflector, lighting a different letter on the lampboard. Because the rotors keep turning, the same letter comes out differently each time. Polish mathematicians first broke it in 1932.\n\nTap a key, or type: the key goes down, the rotors step (with the middle rotor's real double step), and the coded letter lights up and is written on the pad under yours. Tap the machine off the keys: the coded letters, typed from the same start, give your message back. With nothing typed, it types the stored message (HELLO, or yours from the Toy tab). Tap the pad for a clean sheet. The real machine had no delete key: tap the rotors, or press Backspace, to turn them back a letter. On a keyboard, hold Shift for P and R. Its rotors and reflector have the historical wirings.",
   },
   bombe: {
     howTo: "Tap it to search for the Enigma setting. Type a message to break in the Toy tab.",
@@ -1692,9 +1696,9 @@ export const TOY_HELP = {
 
   // ---- Lab (lane Lab) -------------------------------------------------------------------
   "splat-field": {
-    howTo: "Tap to send a pulse through it. Pick a Field in the Toy tab.",
+    howTo: "Tap to send a pulse through it; tap again for another. Pick a Field in the Toy tab.",
     about:
-      "Nearly 300,000 splats, and the graphics chip works out where every one of them is, and its color, again every frame. Each splat only knows its own two numbers, u and v; a small program turns them and the time into a place. That is why so many splats can move smoothly at once.\n\nThe galaxy's stars each follow an oval orbit, turned a little more the farther out it is, so the ovals crowd into two spiral arms that stay while every star keeps moving. The ocean is four waves added together, each splat tilted to the water's slope, and the knot is a flow along a knotted tube. Tap to send a bright ring out through the galaxy, drop a stone in the sea, or push the flow once more around the knot.",
+      "Nearly 300,000 splats, and the graphics chip works out where every one of them is, and its color, again every frame. Each splat only knows its own two numbers, u and v; a small program turns them and the time into a place. That is why so many splats can move smoothly at once.\n\nThe galaxy's stars each follow an oval orbit, turned a little more the farther out it is, so the ovals crowd into two spiral arms that stay while every star keeps moving. The ocean is four waves added together, each splat tilted to the water's slope, and the knot is a flow along a knotted tube. Tap to send a bright ring out through the galaxy, drop a stone in the sea where you tap, or push the flow once more around the knot. Each tap adds its own: tap the sea in a few places and the rings cross.",
   },
 
   // ---- Science (lane Science) -----------------------------------------------------------
@@ -1733,12 +1737,12 @@ export const TOY_HELP = {
   snowman: {
     howTo: "Tap to melt it and build it again. Try the Warmth slider in the Toy tab.",
     about:
-      "A snowman is built from big balls of snow rolled across the ground, stacked up and given a face of coal, a carrot nose, stick arms, a scarf and a hat. Snow packs best when it is just at the melting point and a little wet, so the flakes stick together. Fresh snow is mostly air, which is why it is so light and fluffy.\n\nTap it and it melts: the snowballs shrink, the head first, drips fall, and the hat, nose, coals, arms and scarf drop off one by one into a spreading puddle. Then it builds itself again from the bottom up. The Warmth slider in the Toy tab melts it the same way.",
+      "A snowman is built from big balls of snow rolled across the ground, stacked up and given a face of coal, a carrot nose, stick arms, a scarf and a hat. Snow packs best when it is just at the melting point and a little wet, so the flakes stick together. Fresh snow is mostly air, which is why it is so light and fluffy.\n\nTap it and it melts: the snowballs shrink, the head first, drips fall, and the hat, nose, coals, arms and scarf drop off one by one, and the meltwater spreads into a puddle around it. Then it builds itself again from the bottom up. The Warmth slider in the Toy tab melts it the same way.",
   },
   fireworks: {
-    howTo: "Tap it to launch a firework; each one is different.",
+    howTo: "Tap it to launch a firework; tap quickly for a few at once.",
     about:
-      "Fireworks were invented in China more than a thousand years ago. A firework shell is shot high into the air, where it bursts and throws out little pellets called stars, which burn in bright colors. The colors come from metals mixed in: strontium burns red, barium green, copper blue and sodium yellow.\n\nTap it to launch: a rocket rises from one of the tubes in the crate and bursts in that tube's color. Each tap fires a different tube and a different shell: a round peony, a ring, a drooping willow or a star, so no two in a row look alike.",
+      "Fireworks were invented in China more than a thousand years ago. A firework shell is shot high into the air, where it bursts and throws out little pellets called stars, which burn in bright colors. The colors come from metals mixed in: strontium burns red, barium green, copper blue and sodium yellow.\n\nTap it to launch: a rocket rises from one of the tubes in the crate and bursts in that tube's color. Each tap fires a different tube and a different shell: a round peony, a ring, a drooping willow or a star, so no two in a row look alike. Tap quickly and up to three fly at once, one from each tube.",
   },
   "decorated-tree": {
     howTo: "Tap to switch the lights on or off.",
@@ -1751,9 +1755,9 @@ export const TOY_HELP = {
       "Decorating eggs with bright patterns is a spring tradition in many countries, especially at Easter. In Ukraine and nearby lands, painted eggs called pysanky are made by drawing lines in melted wax, dipping the egg in dye, and repeating with darker colors; the wax keeps each color where it was drawn.\n\nTap it to spin it. Pick a folk, striped, dotted, zigzag, flower or star pattern and its two colors in the Toy tab. Try spinning a real hard-boiled egg: it spins smoothly, while a raw one wobbles and stops, because the runny inside sloshes.",
   },
   "paper-lantern": {
-    howTo: "Tap it to set it swinging on its string.",
+    howTo: "Tap it to set it swinging on its string; tap again for another push.",
     about:
-      "A paper lantern is a light made of thin paper stretched over a frame of ribs, glowing from a light inside. In China and many other places, red lanterns stand for luck and happiness, and thousands are hung up for the Lantern Festival, which ends the Lunar New Year celebrations on the first full moon of the year.\n\nTap it and it swings on its string like a pendulum, back and forth, slowing a little on each swing until it hangs still again. Pick a red, gold, teal or purple lantern in the Toy tab.",
+      "A paper lantern is a light made of thin paper stretched over a frame of ribs, glowing from a light inside. In China and many other places, red lanterns stand for luck and happiness, and thousands are hung up for the Lantern Festival, which ends the Lunar New Year celebrations on the first full moon of the year.\n\nTap it and it swings on its string like a pendulum, back and forth, slowing a little on each swing until it hangs still again. Tap while it swings to give it another push. Pick a red, gold, teal or purple lantern in the Toy tab.",
   },
   diya: {
     howTo: "Tap to light the ring of diyas; tap again to put them out.",

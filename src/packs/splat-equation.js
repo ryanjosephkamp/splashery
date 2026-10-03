@@ -385,7 +385,10 @@ function params(prog, n, rand) {
     }
   const ratio = lu > 0 && lv > 0 ? Math.min(400, Math.max(1 / 400, lu / lv)) : 1;
   const nu = Math.max(2, Math.round(Math.sqrt(n * ratio)));
-  const nv = Math.max(2, Math.round(n / nu));
+  // (Rounded down, so the grid never has more points than splats: with one
+  // too many columns' worth, the last u column was left out and a seam
+  // opened where u wraps round. Lane Fix7.)
+  const nv = Math.max(2, Math.floor(n / nu));
   for (let i = 0; i < nu; i++)
     for (let j = 0; j < nv; j++)
       out.push([u0 + ((u1 - u0) * (i + 0.5)) / nu, v0 + ((v1 - v0) * (j + 0.5)) / nv]);
@@ -497,7 +500,7 @@ export const RECIPES = {
       for (let j = 0; j < copies; j++) {
         const t = times[j];
         const part = copies > 1 ? k.part(`t${j}`) : 0;
-        k.cloud({ share: n / k.count, size: 1 }, (rand, i) => {
+        k.cloud({ share: uv.length / k.count, size: 1 }, (rand, i) => {
           const p = P[j][i];
           if (!p || !ok(p)) return null;
           const [u, v] = uv[i];
@@ -557,7 +560,7 @@ export const RECIPES = {
             splat.channel = 1;
           } else {
             splat.kind = "fade";
-            splat.params = [1.002 - i / n, 0.02];
+            splat.params = [1.002 - i / uv.length, 0.02];
             splat.channel = 0;
           }
           return splat;
