@@ -76,12 +76,16 @@ pinned), and this handoff file.
   brief, and the test hook once it's documented), `tools/effect-clip.mjs` (how tools drive the toy).
 - Your handoff file: start it with this brief, word for word, under "## Brief", then keep "## State
 
-October 3, 2026, in progress.
+October 3, 2026, measured against lane QR's toy at `f86e0880` (PR #216).
 
-- Harness built against reference codes (`tools/qr-scan-lab.mjs`, `tools/qr-scan-lab/`): a pinned
-  encoder (`qrcode-generator`) draws five stand-in styles (classic, dots, rounded, bricks, glow) in
-  six color schemes; `sim.mjs` makes the phone captures (yaw, pitch, roll, module size, blur, JPEG
-  and noise, uneven light) in plain Node; `readers.mjs` decodes with jsQR and zxing-js. A capture
-  counts as decoded only when the reader returns the exact text.
-- Waiting for `origin/claude/lane-qr` (not pushed yet). The toy source
-  (`tools/qr-scan-lab/toy-source.mjs`) needs its test hook, documented in docs/handoff/QR.md.
+- Done: `tools/qr-scan-lab.mjs` (toy and reference sources), `tools/qr-scan-lab/` (`sim.mjs` capture
+  simulator, `readers.mjs` with plain and inverted passes, `toy-source.mjs`, `report.mjs`,
+  `cards.mjs`, data), the measured scorecard `docs/audits/qr-scan-lab-2026-10.md`,
+  `tests/qrl.spec.mjs` (skips itself until `src/packs/qr.js` is on the branch; passes against the
+  toy: 44 s), and seven cards (lane id `QRL`, ids `qrl-<style>`) on Effect review page 2.
+- Rerun: serve a tree with the toy on port 4173, then
+  `SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/qr-scan-lab.mjs --source=toy --tag=<name>`
+  (see its header for the options; the full sweep ran as three parallel shards in about 35 minutes),
+  `node tools/qr-scan-lab/report.mjs toy`, `node tools/qr-scan-lab/cards.mjs`.
+- Next: rerun when lane QR changes its styles or defaults; the sweep used 12 of the 22 conditions,
+  and the non-preset color schemes only on the 43-character text.
