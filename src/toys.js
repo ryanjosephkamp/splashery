@@ -2385,6 +2385,7 @@ export const TOYS = [
     pack: "objects",
     tags: "book pages read story hardcover open close flip",
     camera: { yaw: 0.25, pitch: 0.78, roll: 0, distance: 3.9 },
+    tilt: "free", // UI r5: no tilt lock (the owner's review of October 2, 2026)
   },
   {
     id: "laptop",
@@ -2430,6 +2431,7 @@ export const TOYS = [
     pack: "objects",
     tags: "rain parasol canopy open close",
     camera: { yaw: 0.4, pitch: 0.3, roll: 0, distance: 4.3 },
+    tilt: "free", // UI r5: turns any way (the owner's review of October 2, 2026)
   },
   {
     id: "desk-fan",
@@ -2834,7 +2836,9 @@ export const TOYS = [
     kind: "kit",
     pack: "music",
     tags: "instrument rainbow bars mallet toy glockenspiel",
-    camera: { yaw: 0.45, pitch: 0.5, roll: 0, distance: 4.1 },
+    // UI r5: a little more from above, and the tilt free (the owner's review of October 2, 2026).
+    camera: { yaw: 0.45, pitch: 0.62, roll: 0, distance: 4.1 },
+    tilt: "free",
   },
   {
     id: "toy-piano",
@@ -2864,6 +2868,7 @@ export const TOYS = [
     pack: "pianos",
     tags: "instrument piano keys hammers strings ragtime saloon honky-tonk song midi joplin",
     camera: { yaw: 0.42, pitch: 0.22, roll: 0, distance: 4.3 },
+    tilt: "free", // UI r5: look at it from above too (the owner's review of October 2, 2026)
   },
   {
     id: "harpsichord",
