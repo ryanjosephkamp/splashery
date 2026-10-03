@@ -29,6 +29,7 @@ import {
   evenTorus,
   evenTube,
 } from "./even.js";
+import { surfacePoints as hebPoints } from "../physics/world.js"; // lane Hands engine B
 
 const TAU = Math.PI * 2;
 const { add, sub, mul, dot, len, cross, unit } = vec;
@@ -2154,6 +2155,57 @@ export const RECIPES = {
     ],
     controls: [{ key: "snap", label: "Twist and snap", type: "pulse", ease: CANE_SECS }],
     action: { key: "snap", label: "Twist and snap" },
+    // Hands-on (lane Hands engine B): pull the hook and the cane bends a
+    // little, then snaps in two with a crack; the top half (and a single
+    // cane's bottom half) can be picked up. ↺ mends it.
+    hands: {
+      floor: -1.32,
+      area: 1.4,
+      pieces: (d) => {
+        const out = [];
+        (d?.canes || []).forEach((cn, i) => {
+          // Points along the cane's middle (each a ball as thick as the
+          // candy) above the break, or below it.
+          const piece = (from, to, part, pivot) => {
+            const loc = [];
+            for (let t = from; t <= to + 1e-9; t += 0.035) loc.push(cn.path(t));
+            const lo = [0, 1, 2].map((k) => Math.min(...loc.map((p) => p[k])) - 0.1);
+            const hi = [0, 1, 2].map((k) => Math.max(...loc.map((p) => p[k])) + 0.1);
+            const half = hi.map((v, k) => (v - lo[k]) / 2);
+            const mid = lo.map((v, k) => v + half[k]);
+            return {
+              part,
+              pivot,
+              pos: add(cn.pos, quatRotate(cn.quat, mid)),
+              quat: cn.quat,
+              points: loc.map((p) => sub(p, mid)),
+              radius: 0.1,
+              solid: { type: "box", half },
+              pick: half.map((v) => v + 0.06),
+              mass: 1,
+              friction: 0.5,
+              restitution: 0.3,
+            };
+          };
+          const tb = (d.yb + 1.3) / d.total;
+          out.push(piece(tb + 0.02, 1, cn.top, cn.pivot));
+          if (d.single) out.push(piece(0, tb - 0.02, cn.low, add(cn.pos, quatRotate(cn.quat, [0, -1.3, 0])))); // prettier-ignore
+        });
+        return out;
+      },
+      joints: (d) =>
+        (d?.canes || []).map((cn) => ({
+          type: "break",
+          part: cn.top,
+          to: d.single ? cn.low : null,
+          at: cn.pivot,
+          pull: 0.3,
+          give: 0.14,
+          knock: 5,
+          sound: (ev) => (ev.kind === "snap" ? { voice: "crack", f: 3000, bright: 0.9, decay: 0.6 } : undefined), // prettier-ignore
+        })),
+      sound: (hit, vol) => ({ voice: "glass", f: hit.other ? "E6" : "C6", decay: 0.25, vol: vol * 0.6 }), // prettier-ignore
+    },
     // A tap twists each cane: the hook turns and the stripes wind tighter
     // up the shaft, until it snaps in two with a crack. The top half springs
     // back, jumps clear and leans out, showing the white candy inside the
@@ -2367,6 +2419,9 @@ export const RECIPES = {
           low,
           pivot,
           axis,
+          quat,
+          pos,
+          path,
           lean,
           out: unit([lean < 0 ? 1 : -1, 0.2, 0]),
           chips,
@@ -2378,7 +2433,7 @@ export const RECIPES = {
         cane(quatEuler(0, 0, 16), [-0.12, 0, -0.07], 1);
         cane(quatEuler(0, 180, -16), [0.12, 0, 0.07], -1);
       }
-      k.data = { canes };
+      k.data = { canes, single: o.style === "single", yb, total };
       if (o.style === "single") return;
       // A satin bow where they cross.
       const bowY = -0.62;
@@ -5013,6 +5068,20 @@ export const RECIPES = {
     ],
     controls: [{ key: "open", label: "Open into wedges", type: "pulse", ease: ORANGE_SECS }],
     action: { key: "open", label: "Open into wedges" },
+    // Hands-on (lane Hands engine B): pull the wedges out one by one and
+    // set them down; bring one back over its place and it clicks home.
+    hands: {
+      floor: -0.68,
+      area: 1.5,
+      pieces: (d) =>
+        (d?.wedges || []).map((w) => {
+          // A wedge: thin across, tall, and reaching from the core to the peel.
+          const solid = { type: "ellipsoid", r: [0.12, w.H * 0.9, w.R * 0.36] };
+          return { token: w.token, pos: w.mid, quat: quatAxisAngle([0, 1, 0], w.yaw), solid, points: hebPoints(solid, 1), pick: [0.2, w.H, w.R * 0.48], mass: 1, friction: 0.9, restitution: 0.05 }; // prettier-ignore
+        }),
+      joints: (d) => (d?.wedges || []).map((w) => ({ type: "socket", token: w.token, snap: 0.3 })),
+      sound: (hit, vol) => ({ voice: "squish", pitch: 1.4, decay: 0.3, vol: vol * 0.6 }),
+    },
     // A tap opens the whole orange like a flower: it is cut into eight
     // wedges from the top, and they fall open outwards on their bottoms, one
     // just after another, showing the juicy cut faces, while juice squirts
@@ -5097,7 +5166,8 @@ export const RECIPES = {
           const token = tokens++;
           const piece = { kind: "token", params: [token, 0] };
           const pivot = add(pos, add([0, -H * 0.92, 0], mul(m, 0.18)));
-          wedges.push({ token, pivot, axis: unit(cross([0, 1, 0], m)) });
+          // (mid and yaw: the wedge as a piece in Hands-on.)
+          wedges.push({ token, pivot, axis: unit(cross([0, 1, 0], m)), mid: add(pos, mul(m, R * 0.36)), yaw: am, R, H }); // prettier-ignore
           k.add(
             k.param(
               (u, v) => {
