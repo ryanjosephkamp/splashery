@@ -831,7 +831,7 @@ export class Joints {
   // An event: the joint's own `sound(ev)` picks a cue (null: silent), else
   // a quiet default for its kind.
   cue(j, kind, speed, n) {
-    const ev = { kind, joint: j.name, speed, n, t: this.time };
+    const ev = { kind, joint: j.name, speed, n, v: j.v, t: this.time };
     this.events.push(ev);
     if (this.events.length > 200) this.events.shift();
     const vol = Math.min(0.8, Math.max(0.15, speed / 6));

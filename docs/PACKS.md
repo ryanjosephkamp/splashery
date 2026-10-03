@@ -667,8 +667,9 @@ Keys every joint takes:
   open says `start: (c) => 1.95 * ease3(c.open)`. ↺ brings it back there.
 - `sound(ev, vol)`: the cue for an event (null for silence); `ev.kind` is `"stop"` (a hinge or
   slider hit a stop), `"detent"` (a dial passed a click), `"free"` (a stuck slider came loose),
-  `"socket"` (clicked into place) or `"snap"` (broke off). Without it a quiet default plays (thud,
-  click, scrape, click, crack).
+  `"socket"` (clicked into place) or `"snap"` (broke off); `ev.v` is the joint's value then (which
+  stop), `ev.n` the detent's number and `ev.speed` how hard (toy radii per second). Without it a
+  quiet default plays (thud, click, scrape, click, crack).
 
 **Hinge**: swings about `axis` through `pivot`, from `min` to `max` radians (from the part as built;
 the sign follows the right-hand rule about `axis`). It falls by its own weight (`gravity`: `false`,
