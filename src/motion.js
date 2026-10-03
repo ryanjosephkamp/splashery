@@ -393,6 +393,7 @@ export class MotionDriver {
         "uSpParts[0]": packParts(this.addon.data, this.addon.parts, a.parts || {}, 1),
       };
     }
+    this.handsFix?.(u); // lane Hands engine A: a kit toy posed whole by Hands-on
     this.out = drive;
     return u;
   }

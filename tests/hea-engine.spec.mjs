@@ -7,7 +7,7 @@
 import { test, expect } from "@playwright/test";
 import { World, Body, surfacePoints, quat, v3 } from "../src/physics/world.js";
 import { materialFor, applyMaterial, airForce, rollForce, throwSpin, driftForce } from "../src/physics/materials.js"; // prettier-ignore
-import { sphereSubmerged, floatShape, restLevel, waterForce, airBuoyancy, wellForce, wheelForce, ShakeMeter, FleeField, densityOf } from "../src/physics/fields.js"; // prettier-ignore
+import { sphereSubmerged, floatShape, restLevel, waterForce, airBuoyancy, wellForce, wheelForce, ShakeMeter, FleeField, densityOf, poseKitUniforms } from "../src/physics/fields.js"; // prettier-ignore
 
 const G = 26; // Hands-on's gravity, in toy radii per second squared
 const R = 1;
@@ -332,6 +332,42 @@ test("flee: things near the finger's line dart away, and come back after", () =>
   for (let i = 0; i < 240; i++) f.step(STEP);
   expect(v3.len(near.d)).toBeLessThan(0.01);
   expect(f.step(STEP)).toBe(false);
+});
+
+test("a kit toy posed whole keeps its turning parts and tokens on it", () => {
+  const pose = {
+    pivot: [0.2, -0.1, 0.3],
+    q: quat.axisAngle([0.3, 1, 0.2], 0.9),
+    t: [0.5, 0.2, -0.4],
+  };
+  const P = (p) => v3.add(v3.add(quat.rotate(pose.q, v3.sub(p, pose.pivot)), pose.pivot), pose.t);
+  // A part turned about its pivot and pushed, and a token turned and moved.
+  const q = quat.axisAngle([0, 0, 1], 0.7);
+  const pv = [0.6, -0.1, 0.2];
+  const ofs = [0.05, 0.1, 0];
+  const tq = quat.axisAngle([1, 0, 0], 0.4);
+  const to = [0.1, -0.2, 0.05];
+  const parts = new Float32Array(24);
+  parts.set([0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1], 0); // part 0: untouched
+  parts.set([...q, ...pv, 0, ...ofs, 1], 12);
+  const tokens = new Float32Array(16);
+  tokens.set([0, 0, 0, 1, 0, 0, 0, 1], 0); // an unset token
+  tokens.set([...to, 1, ...tq], 8);
+  poseKitUniforms({ "uSpParts[0]": parts, "uSpTokens[0]": tokens }, pose);
+  const pm = [0.7, 0.05, 0.25];
+  // The shader's part move, on the posed (world) point.
+  const part = (o, p) => {
+    const Q = [...parts.slice(o, o + 4)];
+    const V = [...parts.slice(o + 4, o + 7)];
+    const O = [...parts.slice(o + 8, o + 11)];
+    return v3.add(v3.add(V, quat.rotate(Q, v3.sub(p, V))), O);
+  };
+  const token = (o, p) => v3.add(quat.rotate([...tokens.slice(o + 4, o + 8)], p), [...tokens.slice(o, o + 3)]); // prettier-ignore
+  const close = (a, b) => expect(v3.len(v3.sub(a, b))).toBeLessThan(1e-5);
+  close(part(0, P(pm)), P(pm));
+  close(part(12, P(pm)), P(v3.add(v3.add(pv, quat.rotate(q, v3.sub(pm, pv))), ofs)));
+  close(token(0, P(pm)), P(pm));
+  close(token(8, P(pm)), P(v3.add(quat.rotate(tq, pm), to)));
 });
 
 // ---- In the app: the pieces asked for by a recipe's hands block ----------

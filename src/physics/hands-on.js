@@ -18,7 +18,7 @@
 // toy out of Hands-on (a picture toy). Pure JavaScript, no DOM.
 
 import { World, Body, boundOf, quat, v3 } from "./world.js";
-import { extrasFor } from "./fields.js"; // lane Hands engine A
+import { extrasFor, poseKitUniforms } from "./fields.js"; // lane Hands engine A
 
 // How much a toy squishes when it lands (0: not at all) and how much it
 // bounces. Anything not listed is solid and bounces a little.
@@ -122,6 +122,7 @@ export class HandsOn {
     this.player.stage.setToyPose?.(null);
     this.player.motion.handsTokens = null;
     this.player.motion.handsParts = null;
+    this.player.motion.handsFix = null; // lane Hands engine A
   }
 
   // Pieces live in the recipe's own coordinates (a kit toy is centred and
@@ -819,6 +820,9 @@ export class HandsOn {
       const t = v3.sub(b.pos, c);
       const home = !this.moved && !this.homing;
       player.stage.setToyPose?.(home ? null : { pivot: c, q: dq, t });
+      // Lane Hands engine A: a kit toy's parts and tokens move with it.
+      const pose = { pivot: c, q: dq, t };
+      player.motion.handsFix = home || !player.motion.ctx?.kit ? null : (u) => poseKitUniforms(u, pose); // prettier-ignore
       return;
     }
     if (this.mode === "pieces") {

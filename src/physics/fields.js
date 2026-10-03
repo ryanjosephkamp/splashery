@@ -743,6 +743,44 @@ export class Extras {
   }
 }
 
+// A kit toy moved whole by Level 1 (its entity posed: x' = Q (x - c) + c + t)
+// still has its parts and tokens turning about where they were built: the
+// kit shader turns them in the world, about pivots made for the toy at home
+// (where its entity is the identity). This moves those pivots, turns and
+// offsets through the same pose, in place, so a tossed car's wheels stay on
+// and keep turning. pose: { pivot: c, q: Q, t }.
+export function poseKitUniforms(u, pose) {
+  const Q = pose.q;
+  const Qc = quat.conj(Q);
+  const c = pose.pivot;
+  const t = pose.t;
+  const conj = (q) => quat.mul(quat.mul(Q, q), Qc);
+  const parts = u["uSpParts[0]"];
+  if (parts)
+    for (let o = 0; o + 12 <= parts.length; o += 12) {
+      const q = [parts[o], parts[o + 1], parts[o + 2], parts[o + 3]];
+      if (q[3] === 0 && q[0] === 0 && q[1] === 0 && q[2] === 0) q[3] = 1;
+      const pv = [parts[o + 4], parts[o + 5], parts[o + 6]];
+      const ofs = [parts[o + 8], parts[o + 9], parts[o + 10]];
+      parts.set(conj(q), o);
+      parts.set(v3.add(v3.add(quat.rotate(Q, v3.sub(pv, c)), c), t), o + 4);
+      parts.set(quat.rotate(Q, ofs), o + 8);
+    }
+  const tokens = u["uSpTokens[0]"];
+  if (tokens)
+    for (let o = 0; o + 8 <= tokens.length; o += 8) {
+      const to = [tokens[o], tokens[o + 1], tokens[o + 2]];
+      const tq = [tokens[o + 4], tokens[o + 5], tokens[o + 6], tokens[o + 7]];
+      if (tq[3] === 0 && tq[0] === 0 && tq[1] === 0 && tq[2] === 0) tq[3] = 1;
+      const tw = conj(tq);
+      const ct = v3.add(c, t);
+      // to' = Q (tq c + to - c) + c + t - tq' (c + t)
+      const a = quat.rotate(Q, v3.sub(v3.add(quat.rotate(tq, c), to), c));
+      tokens.set(v3.sub(v3.add(a, ct), quat.rotate(tw, ct)), o);
+      tokens.set(tw, o + 4);
+    }
+}
+
 // A material's density relative to water (a ball of its mass and radius).
 export function densityOf(m) {
   return m.mass / ((4 / 3) * Math.PI * m.r ** 3 * 1000);
