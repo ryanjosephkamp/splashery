@@ -120,6 +120,9 @@ Model: Opus 5.5 (claude-opus-5-5), default effort.
   toy, and the panel's slider follows. That needs the small engine change in #200 ("Engine: a toy's
   drag can set one of its sliders", branch `claude/lane-sharp-b-engine`, merged into this branch),
   which goes in first.
+- October 3, 2026, 04:14 UTC: the owner marked 12 of the 13 new cards good. The one fix (the surface
+  plotter's knob drew under the slider's track while dragged) is fixed by sorting the knob where it
+  stands as it moves (`sortKnob` in `src/packs/maths.js`), card `shb-surface-plotter-drag-r2`.
 - On hold (the owner's call of October 3, 2026: no new Sharpness rounds until the Fidelity lane's
   Stage 1 reports): jelly, bricks and sushi (sharper) and the pebbles' base (they waited on Physics
   #184), and the quartz cluster's and the tornado's bases (they waited on Sharpness A #172). This
