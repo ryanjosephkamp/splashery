@@ -2637,6 +2637,9 @@ export const RECIPES = {
     options: [{ key: "color", label: "Colour", type: "color", default: "#9fb6ea" }],
     controls: [{ key: "crawl", label: "Crawl", type: "pulse", ease: 5.2 }],
     action: { key: "crawl", label: "Crawl" },
+    // Hands-on (lane Physics): pull a pseudopod out; let go and it oozes back.
+    grab: { radius: 0.6, max: 0.85 },
+    pickAlpha: 0.1, // a press finds the see-through cell
     // A tap makes it crawl: a pseudopod pushes out to the right (channel 0)
     // and the cell oozes over into it, then one pushes out to the left
     // (channel 1) and it oozes back. At rest its pods stretch a little.
