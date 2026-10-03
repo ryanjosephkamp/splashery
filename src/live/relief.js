@@ -408,6 +408,31 @@ export class BackPlate {
   }
 }
 
+// The still picture's layer (its splats rest at their depth): the colors
+// and, on the right, the signed offset (blue) that flattens each one as the
+// picture flattens (f, 0 at full depth .. 1 flat), as drawStillRested's.
+BackPlate.prototype.drawRested = function (g, cols, rows, f) {
+  const { cols: bc, rows: br, vals } = this;
+  if (!this.img || this.img.width !== cols * 2 || this.img.height !== rows) this.img = g.createImageData(cols * 2, rows); // prettier-ignore
+  const px = this.img.data;
+  for (let j = 0; j < rows; j++) {
+    const y = Math.min(br - 1, Math.floor((j * br) / rows));
+    for (let i = 0; i < cols; i++) {
+      const c = (y * bc + Math.min(bc - 1, Math.floor((i * bc) / cols))) * 4;
+      const o = (j * cols * 2 + i) * 4;
+      px[o] = vals[c];
+      px[o + 1] = vals[c + 1];
+      px[o + 2] = vals[c + 2];
+      px[o + 3] = 255;
+      const q = o + cols * 4;
+      px[q] = px[q + 1] = 128;
+      px[q + 2] = Math.round(255 * (0.5 - (vals[c + 3] * f) / 2));
+      px[q + 3] = 255;
+    }
+  }
+  g.putImageData(this.img, 0, rows);
+};
+
 // Fills the cells whose weight is 0 from their weighted neighbors, coarse
 // to fine (push-pull): each coarser level averages the known cells under
 // it, and each unknown cell takes the level above it.
@@ -565,13 +590,24 @@ export function buildMirror(
     if (withBack) {
       const bc = Math.ceil(cols / 2);
       const br = Math.ceil(rows / 2);
-      reliefGrid(k, { cols: bc, rows: br, at: (u, v) => [(u - 0.5) * width, (0.5 - v) * height, -0.006], axis: 2, lift, size: width / bc, part, v0: 0.5, vs: 0.5 }); // prettier-ignore
       const d = new Float32Array(cols * rows);
       for (let j = 0; j < rows; j++)
         for (let i = 0; i < cols; i++) d[j * cols + i] = at((i + 0.5) / cols, (j + 0.5) / rows);
       const { photo } = MIRROR.still;
-      MIRROR.stillBack = new BackPlate(bc, br);
-      MIRROR.stillBack.learn({ w: photo.w, h: photo.h, data: photo.data, crop: [0, 0, 1, 1] }, d, cols, rows, false); // prettier-ignore
+      const bp = new BackPlate(bc, br);
+      bp.learn({ w: photo.w, h: photo.h, data: photo.data, crop: [0, 0, 1, 1] }, d, cols, rows, false); // prettier-ignore
+      MIRROR.stillBack = bp;
+      // Like the picture's own splats, each rests at its depth (a hair
+      // behind the wall's) and a signed offset flattens it, so they sort
+      // the way they show (r3).
+      const back = [];
+      for (let j = 0; j < br; j++)
+        for (let i = 0; i < bc; i++) {
+          const u = (i + 0.5) / bc;
+          const v = (j + 0.5) / br;
+          back.push({ p: [(u - 0.5) * width, (0.5 - v) * height, full * bp.vals[(j * bc + i) * 4 + 3] - 0.02], n: [0, 0, 1], size: ((width / bc) * 1.45) / 0.01, flat: 0.08, opacity: 1, color: "#808080", kind: "relief", params: [u, 0.5 + v / 2, 3, Math.max(0.001, full)], part, pattern: false }); // prettier-ignore
+        }
+      k.cloud({ share: back.length / k.count, pattern: false, jitter: 0 }, (rand, i) => back[i] || null); // prettier-ignore
     }
     MIRROR.cam?.close();
     MIRROR.cam = null;
@@ -667,7 +703,7 @@ function drawStillRested(g) {
     px[o + 3] = 255;
   }
   g.putImageData(img, cols, 0);
-  MIRROR.stillBack?.draw(g, cols, rows, MIRROR.gain);
+  MIRROR.stillBack?.drawRested(g, cols, rows, f);
 }
 
 // r3: the hologram look (the owner's idea of October 2, 2026; the plain

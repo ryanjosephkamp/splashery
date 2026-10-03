@@ -526,7 +526,8 @@ export function sheetFrames(photos, side = SAMPLE.w) {
   const th = Math.round((h * tw) / w);
   const out = [];
   for (let photo of [].concat(photos)) {
-    if (tw < w) photo = scaledSheet(photo, cols * tw, rows * th);
+    if (tw < w && typeof document !== "undefined") photo = scaledSheet(photo, cols * tw, rows * th);
+    else if (tw < w) return sheetFrames(photos, w); // (Node: no canvas to scale with)
     for (let f = 0; f < cols * rows && out.length < frames; f++) {
       const x0 = (f % cols) * tw;
       const y0 = Math.floor(f / cols) * th;
@@ -560,7 +561,8 @@ export async function loadSample() {
   const { decodePhoto, unpackDepth } = await import("./photo-3d.js");
   const sheets = await Promise.all(Array.from({ length: SAMPLE.sheets }, (_, i) => readBytes(`../../assets/toys/moving-photo-3d/bunny-sheet-${i + 1}.jpg`).then(decodePhoto))); // prettier-ignore
   const dep = await readBytes("../../assets/toys/moving-photo-3d/bunny.depth");
-  const w = SAMPLE_SIDES[profile()] || SAMPLE_SIDES.mid;
+  // (Node, building toys for the tests, has no canvas to scale with.)
+  const w = typeof document === "undefined" ? SAMPLE.w : SAMPLE_SIDES[profile()] || SAMPLE_SIDES.mid; // prettier-ignore
   const h = Math.round((SAMPLE.h * w) / SAMPLE.w);
   const frames = sheetFrames(sheets, w);
   const raw = unpackDepths(dep, unpackDepth);
