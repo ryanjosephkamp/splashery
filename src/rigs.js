@@ -904,6 +904,7 @@ export const RIGS = {
     // rig part, moved whole) and set it down on the plate or on another;
     // one set down hard knocks its neighbors loose. Held level, so the
     // side the capture never saw stays underneath.
+    hard: true, // each splat wholly in one tomato (lane Hands engine B)
     hands: {
       floor: PLATE_Y,
       area: 0.82,
