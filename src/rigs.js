@@ -156,6 +156,36 @@ const TOMATO_WAVE = TOMATOES.map(([name, x, z, r]) => ({ name, x, z, r, a: Math.
   .sort((p, q) => p.a - q.a)
   .map((t, i, all) => ({ ...t, group: Math.floor((i * 4) / all.length) }));
 
+// Lane Hands engine B: a whole, kit-built tomato with its calyx (part kp),
+// to stand in for a scan tomato lifted off the plate (its hidden sides were
+// never captured), and darker tomatoes deep in the pile (part fp) to fill
+// the place it left. Built about the scan tomato's middle (its pivot).
+const TOMATO_RED = "#c8301b";
+function kitTomato(k, [x, y, z], r, kp) {
+  const L = unit([-0.45, 0.8, 0.55]);
+  const glossy = (c) => {
+    const d = Math.max(0, c.n[0] * L[0] + c.n[1] * L[1] + c.n[2] * L[2]);
+    const col = shade(mix(TOMATO_RED, "#e2552a", 0.3 + 0.3 * c.fbm(c.lp[0] * 6, c.lp[1] * 6, c.lp[2] * 6)), 0.8 + 0.22 * d); // prettier-ignore
+    return mix(col, "#ffe9dc", 0.55 * Math.pow(d, 24));
+  };
+  // Slightly squat, with soft lobes round its shoulders.
+  const radius = (d) => {
+    const lon = Math.atan2(d[2], d[0]);
+    return 1 + 0.035 * Math.cos(5 * lon) * (1 - Math.abs(d[1])) - 0.08 * Math.max(0, d[1]) ** 6;
+  };
+  k.add(k.radial(radius, { grid: 40 }), { pos: [x, y, z], scale: [r, r * 0.86, r], part: kp, opacity: 1, flat: 0.25, color: glossy }); // prettier-ignore
+  const top = [x, y + r * 0.8, z];
+  for (let i = 0; i < 5; i++) {
+    k.add(k.ellipsoid(r * 0.3, r * 0.025, r * 0.07), { pos: [top[0] + Math.cos((i * TAU) / 5) * r * 0.22, top[1], top[2] - Math.sin((i * TAU) / 5) * r * 0.22], rot: [0, i * 72, -12], part: kp, opacity: 1, pattern: false, color: (c) => shade("#3d6b23", 0.75 + 0.3 * Math.max(0, c.n[1])) }); // prettier-ignore
+  }
+  k.add(k.cylinder(r * 0.05, r * 0.2), { pos: [top[0], top[1] + r * 0.08, top[2]], part: kp, opacity: 1, pattern: false, color: "#4f7a2c" }); // prettier-ignore
+}
+function fillTomato(k, [x, y, z], r, fp) {
+  k.add(k.radial(() => 1, { grid: 28 }), { pos: [x, y - r * 0.35, z], scale: [r * 0.8, r * 0.7, r * 0.8], part: fp, opacity: 1, flat: 0.3, color: (c) => shade(TOMATO_RED, 0.45 + 0.25 * Math.max(0, c.n[1])) }); // prettier-ignore
+}
+// Each tomato's group (its fill).
+const TOMATO_GROUP = Object.fromEntries(TOMATO_WAVE.map((t) => [t.name, t.group]));
+
 // The biggest shells in the basket: name, x, z, radius (from a top view).
 const SHELLS = [
   ["urchinA", -0.43, -0.51, 0.155],
@@ -861,8 +891,16 @@ export const RIGS = {
     // The plate's underside: a white glazed foot and floor, so the plate
     // reads solid from below (lane Sharpness B).
     addon: {
-      count: 30000,
+      count: 70000,
       build(k) {
+        // Lane Hands engine B: stand-ins for tomatoes lifted off (hidden
+        // until one is), and fills for the place each leaves.
+        for (const [name, x, z, r] of TOMATOES) kitTomato(k, [x, PLATE_Y + r, z], r, k.part("k" + name, { pivot: [x, PLATE_Y + r, z] })); // prettier-ignore
+        for (let g = 0; g < 4; g++) {
+          const fp = k.part("fill" + g, { pivot: [0, PLATE_Y, 0] });
+          for (const t of TOMATO_WAVE)
+            if (t.group === g) fillTomato(k, [t.x, PLATE_Y + t.r, t.z], t.r, fp);
+        }
         k.add(
           k.param(
             (u, v) => {
@@ -921,9 +959,14 @@ export const RIGS = {
           },
         ),
       sound: (hit, vol) => ({ voice: "thud", f: hit.other ? 150 : 110, bright: 0.2, vol: vol * 0.8 }), // prettier-ignore
+      // A lifted tomato is a whole kit-built one; the pile is filled behind it.
+      swap: Object.fromEntries(TOMATOES.map(([n]) => [n, { kit: "k" + n, fill: "fill" + TOMATO_GROUP[n] }])), // prettier-ignore
     },
     drive(t, c, out, info) {
       out.parts.fringe = { visible: 0 };
+      // The stand-ins and fills show only while a tomato is off the plate
+      // by hand (Hands-on turns them on).
+      out.addon = { parts: Object.fromEntries([...TOMATOES.map((t) => ["k" + t[0], { visible: 0 }]), ...[0, 1, 2, 3].map((g) => ["fill" + g, { visible: 0 }])]) }; // prettier-ignore
       const e = since(c, "roll", 2.6);
       if (e < 0) return;
       const way = vary(info.tap) > 0.5 ? 1 : -1;

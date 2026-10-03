@@ -119,8 +119,10 @@ Model: Opus 5.5 (claude-opus-5-5), default effort. No helper.
 
 ## Known issues
 
-- Tomatoes: where a tomato is lifted off, the sides the capture never saw (where they touched) show
-  as pale fuzz; that can't be fixed from the scan.
+- Tomatoes (fixed October 3, 2026, after the Operator's note): a lifted tomato is swapped for a
+  kit-built one with its calyx (`hands.swap`, add-on parts), and the pile fills behind it; ↺ brings
+  the scan back. The kit tomato's light is baked in, so one that tumbles shows a slightly darker
+  side. Card heb-tomatoes-r2 replaces heb-tomatoes.
 - The music box's dancer jumps to the crank's turn the first time anything is moved by hand (the
   tap's dancer spins by the clock).
 - Chest and music box: a press on the box's front can pick the lid (the nearest piece); fine in
