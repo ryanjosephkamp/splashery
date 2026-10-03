@@ -105,12 +105,12 @@ Model: Opus 5.5 (claude-opus-5-5), default effort. No helper so far.
   joints"): `src/physics/joints.js` (hinges, sliders, dials, sockets, breaks, upright, and
   `rigPieces` for scan rigs), a few hook lines in `src/physics/hands-on.js`,
   `tests/heb-engine.spec.mjs` (each piece measured: angles, positions and clicks over time) and
-  docs/PACKS.md, "5f. Hands-on: joints". Draft PR #224, pushed for the category lanes. The demo toys
+  docs/PACKS.md, "5g. Hands-on: joints". Draft PR #224, pushed for the category lanes. The demo toys
   follow on `claude/lane-hands-engine-b-toys`.
 
 ## Plan lines my pieces cover (for the category lanes)
 
-Keys are in docs/PACKS.md, "5f. Hands-on: joints".
+Keys are in docs/PACKS.md, "5g. Hands-on: joints".
 
 - **hinge**: chest, book (cover), music box (lid), knight's helmet (visor), ladybug (wing cases),
   sunglasses (arms), pearl (oyster shell), desk lamp (arms, with `parent`), desk fan (head tilt),
