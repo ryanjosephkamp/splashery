@@ -411,7 +411,9 @@ const SPLAT_MIRROR = {
   },
   build(k, o) {
     MIRROR.depth = o.depth ?? 0.5;
-    const { height } = buildMirror(k, { width: 2, lift: 0.9, look: o.look ?? "plain" });
+    // r5: with the background layer, so what a near person uncovers, seen
+    // from the side, shows the wall rather than a hole.
+    const { height } = buildMirror(k, { width: 2, lift: 0.9, look: o.look ?? "plain", back: true }); // prettier-ignore
     // A dark frame round the picture, like a mirror's.
     const f = 0.07;
     const w = 1 + f;

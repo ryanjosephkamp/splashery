@@ -19,7 +19,9 @@ import { live } from "./live.js";
 // rest (u and v 0..1, the texel centers), `axis` (0 x, 1 y, 2 z) and `lift`
 // (recipe units at full height) where it rises to. `layers` > 1 adds
 // splats lower down each column, lifted less, so a tall ridge reads as a
-// wall from the side. `size` is a splat's diameter in recipe units.
+// wall from the side. `size` is a splat's diameter in recipe units. `v0`
+// and `vs` place the grid's rows in part of the canvas (the mirror's
+// background layer sits in its lower half, r5).
 export function reliefGrid(
   k,
   {
@@ -34,6 +36,8 @@ export function reliefGrid(
     part = 0,
     flat = 0.08,
     opacity = 1,
+    v0 = 0,
+    vs = 1,
   },
 ) {
   // prettier-ignore
@@ -53,7 +57,7 @@ export function reliefGrid(
           opacity,
           color: "#808080",
           kind: "relief",
-          params: [u, v, axis, lift * f],
+          params: [u, v0 + v * vs, axis, lift * f],
           part,
           pattern: false,
         });
@@ -123,8 +127,11 @@ export const DEPTH_SIDE = { low: 140, mid: 196, high: 252, max: 308 };
 // newest depth. The depth is scaled by its own 2nd and 98th percentiles,
 // eased too, so a person stepping nearer doesn't make the room flicker.
 export class CameraDepth {
-  constructor(video, { cols, rows, tier = "mid", mirror = true, depth = true } = {}) {
+  constructor(video, { cols, rows, tier = "mid", mirror = true, depth = true, back = null } = {}) {
     this.video = video;
+    // r5: the background layer ({ cols, rows }, coarser than the picture),
+    // drawn in the canvas's lower half.
+    this.back = back ? new BackPlate(back.cols, back.rows) : null;
     this.cols = cols;
     this.rows = rows;
     this.mirror = mirror;
@@ -173,6 +180,9 @@ export class CameraDepth {
     const g = c.getContext("2d", { willReadFrequently: true });
     g.drawImage(v, 0, 0, w, h);
     const data = g.getImageData(0, 0, w, h).data;
+    // r5: the background layer learns the wall from this same frame, when
+    // its depth comes back (the colors of a later frame wouldn't match it).
+    if (this.back) this.sent = { w, h, data: data.slice(), crop: this.crop.slice() };
     this.busy = true;
     this.worker.postMessage({ type: "frame", id: ++this.id, w, h, data }, [data.buffer]);
   }
@@ -224,6 +234,7 @@ export class CameraDepth {
     // the two (the owner's "detaching" of October 3): each goes with the near
     // or the far side, whichever it is closer to.
     t.set(snapEdges(t, cols, rows));
+    if (this.back && this.sent) this.back.learn(this.sent, t, cols, rows, this.mirror);
     if (!this.have) this.heights.set(t);
     this.have = true;
   }
@@ -268,6 +279,7 @@ export class CameraDepth {
       px[o + 3] = 255;
     }
     g.putImageData(img, cols, 0);
+    if (this.back) this.back.draw(g, cols, rows, gain);
     return true;
   }
 
@@ -275,6 +287,174 @@ export class CameraDepth {
     this.worker?.terminate();
     this.worker = null;
   }
+}
+
+// ---- The background behind a person (r5) -------------------------------------------------
+// Seen from the side, the wall behind a near person is a hole: one camera
+// can't see it. The background layer is a coarser grid of splats just
+// behind the picture, showing the wall only: each of its cells remembers
+// the colors and depth of the wall from whenever it was last seen (a cell
+// is wall where the depth is far), and the cells a person has always
+// covered are filled from the wall around them (fillHoles), never from the
+// person's own colors, so no second copy of them shows behind.
+const FAR = 0.35; // a cell is wall below this (0 far .. 1 near)
+export class BackPlate {
+  constructor(cols, rows) {
+    this.cols = cols;
+    this.rows = rows;
+    const n = cols * rows;
+    this.col = new Float32Array(n * 3); // remembered wall colors (0..255)
+    this.dep = new Float32Array(n); // and its depth (0..1)
+    this.seen = new Float32Array(n); // 1 where the wall has been seen
+    this.vals = new Float32Array(n * 4); // filled: r, g, b, depth
+    this.img = null;
+  }
+
+  // Learns the wall from a frame the depth model saw (frame: { w, h, data,
+  // crop }) and that frame's depth on the picture's grid (d, cols x rows,
+  // 0 far .. 1 near): a cell is wall where all of its depth, and its
+  // neighbors', is far (so a person's soft edge isn't taken for wall).
+  learn(frame, d, cols, rows, mirror) {
+    const { cols: bc, rows: br, col, dep, seen, vals } = this;
+    const near = new Uint8Array(bc * br);
+    const mean = new Float32Array(bc * br);
+    for (let y = 0; y < br; y++)
+      for (let x = 0; x < bc; x++) {
+        const x0 = Math.floor((x * cols) / bc);
+        const x1 = Math.max(x0 + 1, Math.floor(((x + 1) * cols) / bc));
+        const y0 = Math.floor((y * rows) / br);
+        const y1 = Math.max(y0 + 1, Math.floor(((y + 1) * rows) / br));
+        let top = 0;
+        let sum = 0;
+        let m = 0;
+        for (let j = y0; j < Math.min(rows, y1); j++)
+          for (let i = x0; i < Math.min(cols, x1); i++) {
+            const v = d[j * cols + i];
+            if (v > top) top = v;
+            sum += v;
+            m++;
+          }
+        near[y * bc + x] = top >= FAR ? 1 : 0;
+        mean[y * bc + x] = sum / m;
+      }
+    const [cx, cy, cw, ch] = frame.crop;
+    for (let y = 0; y < br; y++)
+      for (let x = 0; x < bc; x++) {
+        const c = y * bc + x;
+        let edge = false;
+        for (let j = Math.max(0, y - 1); j <= Math.min(br - 1, y + 1) && !edge; j++)
+          for (let i = Math.max(0, x - 1); i <= Math.min(bc - 1, x + 1); i++)
+            if (near[j * bc + i]) edge = true;
+        if (edge) continue;
+        // The cell's colors: the frame's pixels under it (mirrored with the
+        // picture, in the same crop).
+        const ua = mirror ? 1 - (x + 1) / bc : x / bc;
+        const ub = mirror ? 1 - x / bc : (x + 1) / bc;
+        const fx0 = Math.floor((cx + ua * cw) * frame.w);
+        const fx1 = Math.max(fx0 + 1, Math.floor((cx + ub * cw) * frame.w));
+        const fy0 = Math.floor((cy + (y / br) * ch) * frame.h);
+        const fy1 = Math.max(fy0 + 1, Math.floor((cy + ((y + 1) / br) * ch) * frame.h));
+        let r = 0;
+        let g = 0;
+        let b = 0;
+        let m = 0;
+        for (let j = fy0; j < Math.min(frame.h, fy1); j++)
+          for (let i = fx0; i < Math.min(frame.w, fx1); i++) {
+            const o = (j * frame.w + i) * 4;
+            r += frame.data[o];
+            g += frame.data[o + 1];
+            b += frame.data[o + 2];
+            m++;
+          }
+        if (!m) continue;
+        const k = seen[c] ? 0.5 : 1;
+        col[c * 3] += (r / m - col[c * 3]) * k;
+        col[c * 3 + 1] += (g / m - col[c * 3 + 1]) * k;
+        col[c * 3 + 2] += (b / m - col[c * 3 + 2]) * k;
+        dep[c] = mean[c];
+        seen[c] = 1;
+      }
+    for (let c = 0; c < bc * br; c++) {
+      vals[c * 4] = col[c * 3];
+      vals[c * 4 + 1] = col[c * 3 + 1];
+      vals[c * 4 + 2] = col[c * 3 + 2];
+      vals[c * 4 + 3] = dep[c];
+    }
+    fillHoles(vals, seen, bc, br, 4);
+  }
+
+  // Into the canvas's lower half: the colors on the left, the heights (a
+  // hair lower than the wall's, so the picture's own wall stays in front)
+  // on the right.
+  draw(g, cols, rows, gain) {
+    const { cols: bc, rows: br, vals } = this;
+    if (!this.img || this.img.width !== cols * 2 || this.img.height !== rows) this.img = g.createImageData(cols * 2, rows); // prettier-ignore
+    const px = this.img.data;
+    for (let j = 0; j < rows; j++) {
+      const y = Math.min(br - 1, Math.floor((j * br) / rows));
+      for (let i = 0; i < cols; i++) {
+        const c = (y * bc + Math.min(bc - 1, Math.floor((i * bc) / cols))) * 4;
+        const o = (j * cols * 2 + i) * 4;
+        px[o] = vals[c];
+        px[o + 1] = vals[c + 1];
+        px[o + 2] = vals[c + 2];
+        px[o + 3] = 255;
+        const q = o + cols * 4;
+        px[q] = Math.round(255 * Math.max(0, vals[c + 3] * gain - 0.02));
+        px[q + 3] = 255;
+      }
+    }
+    g.putImageData(this.img, 0, rows);
+  }
+}
+
+// Fills the cells whose weight is 0 from their weighted neighbors, coarse
+// to fine (push-pull): each coarser level averages the known cells under
+// it, and each unknown cell takes the level above it.
+export function fillHoles(vals, w, W, H, ch) {
+  if (W <= 1 && H <= 1) return;
+  const cw = Math.ceil(W / 2);
+  const chh = Math.ceil(H / 2);
+  const cv = new Float32Array(cw * chh * ch);
+  const cwt = new Float32Array(cw * chh);
+  for (let y = 0; y < H; y++)
+    for (let x = 0; x < W; x++) {
+      const a = y * W + x;
+      const b = (y >> 1) * cw + (x >> 1);
+      const ww = w[a];
+      if (!ww) continue;
+      cwt[b] += ww;
+      for (let k = 0; k < ch; k++) cv[b * ch + k] += vals[a * ch + k] * ww;
+    }
+  let any = false;
+  for (let b = 0; b < cw * chh; b++)
+    if (cwt[b] > 0) {
+      for (let k = 0; k < ch; k++) cv[b * ch + k] /= cwt[b];
+      cwt[b] = Math.min(1, cwt[b]);
+      any = true;
+    }
+  if (!any) return;
+  fillHoles(cv, cwt, cw, chh, ch);
+  // Each unknown cell takes the coarser level, sampled smoothly (bilinear),
+  // so the filled parts don't show its blocks.
+  for (let y = 0; y < H; y++)
+    for (let x = 0; x < W; x++) {
+      const a = y * W + x;
+      const ww = Math.min(1, w[a]);
+      if (ww >= 1) continue;
+      const fx = Math.max(0, Math.min(cw - 1, (x + 0.5) / 2 - 0.5));
+      const fy = Math.max(0, Math.min(chh - 1, (y + 0.5) / 2 - 0.5));
+      const x0 = Math.floor(fx);
+      const y0 = Math.floor(fy);
+      const x1 = Math.min(cw - 1, x0 + 1);
+      const y1 = Math.min(chh - 1, y0 + 1);
+      const ax = fx - x0;
+      const ay = fy - y0;
+      for (let k = 0; k < ch; k++) {
+        const v = (cv[(y0 * cw + x0) * ch + k] * (1 - ax) + cv[(y0 * cw + x1) * ch + k] * ax) * (1 - ay) + (cv[(y1 * cw + x0) * ch + k] * (1 - ax) + cv[(y1 * cw + x1) * ch + k] * ax) * ay; // prettier-ignore
+        vals[a * ch + k] = vals[a * ch + k] * ww + v * (1 - ww);
+      }
+    }
 }
 
 // Where the depth jumps by more than EDGE within a 9 by 9 neighborhood (the
@@ -314,6 +494,7 @@ export const MIRROR = {
   gain: 0,
   last: 0,
   version: 0,
+  back: false, // r5: the camera's picture has a background layer
 };
 
 // The grid for a splat budget (4 : 3, like most cameras).
@@ -350,9 +531,17 @@ function stillDepth(depth) {
 // and a signed offset (axis 3) only brings them back toward the plane as
 // it flattens, so they sort the way they show. The camera's picture, whose
 // depth isn't known until it arrives, is built as before.
-export function buildMirror(k, { width = 2, lift = 0.8, part = 0, look = "plain" } = {}) {
+//
+// r5: `back` (the splat mirror, plain look) adds the background layer
+// behind the camera's picture (BackPlate), with a fifth of the splats.
+export function buildMirror(
+  k,
+  { width = 2, lift = 0.8, part = 0, look = "plain", back: wantBack = false } = {},
+) {
   MIRROR.look = look;
-  const { cols, rows } = mirrorGrid(k.count);
+  const withBack = wantBack && look === "plain";
+  MIRROR.back = withBack;
+  const { cols, rows } = mirrorGrid(withBack ? k.count * 0.8 : k.count);
   MIRROR.cols = cols;
   MIRROR.rows = rows;
   const height = (width * rows) / cols;
@@ -368,9 +557,22 @@ export function buildMirror(k, { width = 2, lift = 0.8, part = 0, look = "plain"
       for (let i = 0; i < cols; i++) {
         const u = (i + 0.5) / cols;
         const v = (j + 0.5) / rows;
-        items.push({ p: [(u - 0.5) * width, (0.5 - v) * height, full * at(u, v)], n: [0, 0, 1], size: ((width / cols) * 1.45) / 0.01, flat: 0.08, opacity: 1, color: "#808080", kind: "relief", params: [u, v, 3, Math.max(0.001, full)], part, pattern: false }); // prettier-ignore
+        items.push({ p: [(u - 0.5) * width, (0.5 - v) * height, full * at(u, v)], n: [0, 0, 1], size: ((width / cols) * 1.45) / 0.01, flat: 0.08, opacity: 1, color: "#808080", kind: "relief", params: [u, withBack ? v / 2 : v, 3, Math.max(0.001, full)], part, pattern: false }); // prettier-ignore
       }
     k.cloud({ share: items.length / k.count, pattern: false, jitter: 0 }, (rand, i) => items[i] || null); // prettier-ignore
+    // r5: the still picture's background layer, learned once from the photo.
+    MIRROR.stillBack = null;
+    if (withBack) {
+      const bc = Math.ceil(cols / 2);
+      const br = Math.ceil(rows / 2);
+      reliefGrid(k, { cols: bc, rows: br, at: (u, v) => [(u - 0.5) * width, (0.5 - v) * height, -0.006], axis: 2, lift, size: width / bc, part, v0: 0.5, vs: 0.5 }); // prettier-ignore
+      const d = new Float32Array(cols * rows);
+      for (let j = 0; j < rows; j++)
+        for (let i = 0; i < cols; i++) d[j * cols + i] = at((i + 0.5) / cols, (j + 0.5) / rows);
+      const { photo } = MIRROR.still;
+      MIRROR.stillBack = new BackPlate(bc, br);
+      MIRROR.stillBack.learn({ w: photo.w, h: photo.h, data: photo.data, crop: [0, 0, 1, 1] }, d, cols, rows, false); // prettier-ignore
+    }
     MIRROR.cam?.close();
     MIRROR.cam = null;
     return { cols, rows, height };
@@ -384,7 +586,22 @@ export function buildMirror(k, { width = 2, lift = 0.8, part = 0, look = "plain"
     n: [0, 0, 1],
     size: width / cols,
     part,
+    vs: withBack ? 0.5 : 1,
   });
+  const back = withBack && live.camera?.video ? { cols: Math.ceil(cols / 2), rows: Math.ceil(rows / 2) } : null; // prettier-ignore
+  if (back)
+    reliefGrid(k, {
+      cols: back.cols,
+      rows: back.rows,
+      at: (u, v) => [(u - 0.5) * width, (0.5 - v) * height, -0.006],
+      axis: 2,
+      lift,
+      n: [0, 0, 1],
+      size: width / back.cols,
+      part,
+      v0: 0.5,
+      vs: 0.5,
+    });
   // Start (or stop) the camera's depth with this build.
   MIRROR.cam?.close();
   MIRROR.cam = null;
@@ -392,7 +609,7 @@ export function buildMirror(k, { width = 2, lift = 0.8, part = 0, look = "plain"
     const tier = k.count > 200000 ? "high" : k.count > 90000 ? "mid" : "low";
     // r3: the back camera shows the right way round, not as a mirror.
     const mirror = live.camera.facing !== "environment";
-    MIRROR.cam = new CameraDepth(live.camera.video, { cols, rows, tier, mirror });
+    MIRROR.cam = new CameraDepth(live.camera.video, { cols, rows, tier, mirror, back });
   }
   return { cols, rows, height };
 }
@@ -404,7 +621,7 @@ export const mirrorScreen = {
     return MIRROR.cols * 2;
   },
   get height() {
-    return MIRROR.rows;
+    return MIRROR.rows * (MIRROR.back ? 2 : 1);
   },
   version: (time) =>
     MIRROR.cam || MIRROR.look === "hologram" ? Math.floor(time * 60) : `${MIRROR.still ? 1 : 0}|${MIRROR.gain.toFixed(3)}`, // prettier-ignore
@@ -450,6 +667,7 @@ function drawStillRested(g) {
     px[o + 3] = 255;
   }
   g.putImageData(img, cols, 0);
+  MIRROR.stillBack?.draw(g, cols, rows, MIRROR.gain);
 }
 
 // r3: the hologram look (the owner's idea of October 2, 2026; the plain

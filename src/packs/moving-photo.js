@@ -4,9 +4,10 @@
 // vendored depth model (Depth Anything V2 Small, in src/live/depth-worker.js),
 // worked out on this device when the file is opened; nothing is uploaded.
 // The sample, six seconds of Big Buck Bunny (the bunny and the butterfly,
-// CC BY 3.0, the Screen toy's clip), ships as two sheets of 24 frames (480
-// by 270) with their depth worked out ahead (tools/live3-depth.mjs), so it
-// needs no model, and plays with the clip's own sound.
+// CC BY 3.0, the Screen toy's clip), ships as four sheets of its 48 frames
+// (640 by 360, shown at 480 by 270 below a high device) with their depth
+// worked out ahead (tools/live3-depth.mjs), so it needs no model, and plays
+// with the clip's own sound.
 //
 // What it takes (r5, the owner's review of October 3, 2026: sharper):
 //   - up to MAX_FRAMES (48) frames: a GIF's own frames (evenly thinned if it
@@ -24,6 +25,8 @@
 //     mean of their neighbors (half the wait, and steadier depth);
 //   - a video plays with its own sound, and its frames follow that sound's
 //     clock (pause and scrub with them).
+//   - each frame's colors are sharpened a little (SHARPEN), to make up for
+//     neighboring splats overlapping (r5, the owner's "even sharper?").
 //
 // The picture is a grid of relief splats (src/live/relief.js) whose canvas
 // holds the frame's colors and depth. Each splat rests at its average depth
@@ -418,9 +421,14 @@ export function clipGrid(clip, count) {
 // each splat when the grid is coarser than the frame; on the right, red and
 // green a half (no sideways move) and blue a half plus half the frame's
 // nearness less the average (the signed offset from where the splat rests).
-export function frameImage(clip, cols, rows, f) {
+// r5 (the owner's "even sharper?" of October 3): the colors are sharpened
+// a little (SHARPEN times their difference from their 3 by 3 neighborhood's
+// mean), which makes up for the softening of neighboring splats overlapping.
+export const SHARPEN = 0.6;
+export function frameImage(clip, cols, rows, f, sharpen = SHARPEN) {
   const W = cols * 2;
   const px = new Uint8ClampedArray(W * rows * 4);
+  const avg = new Float32Array(cols * rows * 3);
   const col = clip.colors[f];
   const near = clip.near[f];
   const span = (i, n, size) => [Math.floor((i * size) / n), Math.max(Math.floor((i * size) / n) + 1, Math.floor(((i + 1) * size) / n))]; // prettier-ignore
@@ -441,11 +449,10 @@ export function frameImage(clip, cols, rows, f) {
           b += col[o + 2];
           n++;
         }
-      const o = (j * W + i) * 4;
-      px[o] = r / n;
-      px[o + 1] = g / n;
-      px[o + 2] = b / n;
-      px[o + 3] = 255;
+      const a = (j * cols + i) * 3;
+      avg[a] = r / n;
+      avg[a + 1] = g / n;
+      avg[a + 2] = b / n;
       const s2 = ym * clip.w + Math.min(clip.w - 1, Math.floor(((i + 0.5) / cols) * clip.w));
       const q = (j * W + cols + i) * 4;
       px[q] = px[q + 1] = 128;
@@ -453,6 +460,22 @@ export function frameImage(clip, cols, rows, f) {
       px[q + 3] = 255;
     }
   }
+  for (let j = 0; j < rows; j++)
+    for (let i = 0; i < cols; i++) {
+      const a = (j * cols + i) * 3;
+      const o = (j * W + i) * 4;
+      for (let c = 0; c < 3; c++) {
+        let m = 0;
+        for (let dy = -1; dy <= 1; dy++)
+          for (let dx = -1; dx <= 1; dx++) {
+            const y = Math.min(rows - 1, Math.max(0, j + dy));
+            const x = Math.min(cols - 1, Math.max(0, i + dx));
+            m += avg[(y * cols + x) * 3 + c];
+          }
+        px[o + c] = avg[a + c] + sharpen * (avg[a + c] - m / 9);
+      }
+      px[o + 3] = 255;
+    }
   return px;
 }
 
@@ -482,9 +505,12 @@ async function readBytes(rel) {
 }
 
 // The sample's sheets: SAMPLE.sheets sheets of SAMPLE.cols by SAMPLE.rows
-// frames, each SAMPLE.w by SAMPLE.h, at SAMPLE.fps (tools/live3-depth.mjs
-// makes them; two, as a decoded picture is at most 2048 pixels wide).
-export const SAMPLE = { sheets: 2, cols: 4, rows: 6, w: 480, h: 270, fps: 8 };
+// frames (SAMPLE.frames in all), each SAMPLE.w by SAMPLE.h, at SAMPLE.fps
+// (tools/live3-depth.mjs makes them; four, as a decoded picture is at most
+// 2048 pixels on a side). r5: 640 by 360, the scene's own size, shown so
+// on a high or max device and at 480 by 270 otherwise (SAMPLE_SIDES).
+export const SAMPLE = { sheets: 4, cols: 3, rows: 5, frames: 48, w: 640, h: 360, fps: 8 };
+export const SAMPLE_SIDES = { low: 480, mid: 480, high: 640, max: 640 };
 // The same scene with its sound (the Screen toy's files): MP4, or WebM where
 // the browser can't play MP4 (some Chromium builds).
 const SAMPLE_SOUND = () =>
@@ -492,22 +518,41 @@ const SAMPLE_SOUND = () =>
     ? "../../assets/toys/screen/bunny.mp4"
     : "../../assets/toys/screen/bunny.webm";
 
-// The sheets (decoded) cut into frames, in order.
-export function sheetFrames(photos) {
-  const { cols, rows, w, h, fps } = SAMPLE;
+// The sheets (decoded) cut into frames, in order, each `side` pixels wide
+// (scaled down from the sheets' own size when smaller).
+export function sheetFrames(photos, side = SAMPLE.w) {
+  const { cols, rows, w, h, fps, frames } = SAMPLE;
+  const tw = Math.min(w, side);
+  const th = Math.round((h * tw) / w);
   const out = [];
-  for (const photo of [].concat(photos))
-    for (let f = 0; f < cols * rows; f++) {
-      const x0 = (f % cols) * w;
-      const y0 = Math.floor(f / cols) * h;
-      const data = new Uint8ClampedArray(w * h * 4);
-      for (let y = 0; y < h; y++) {
+  for (let photo of [].concat(photos)) {
+    if (tw < w) photo = scaledSheet(photo, cols * tw, rows * th);
+    for (let f = 0; f < cols * rows && out.length < frames; f++) {
+      const x0 = (f % cols) * tw;
+      const y0 = Math.floor(f / cols) * th;
+      const data = new Uint8ClampedArray(tw * th * 4);
+      for (let y = 0; y < th; y++) {
         const o = ((y0 + y) * photo.w + x0) * 4;
-        data.set(photo.data.subarray(o, o + w * 4), y * w * 4);
+        data.set(photo.data.subarray(o, o + tw * 4), y * tw * 4);
       }
       out.push({ data, delay: 1000 / fps });
     }
+  }
   return out;
+}
+
+function scaledSheet(photo, w, h) {
+  const src = document.createElement("canvas");
+  src.width = photo.w;
+  src.height = photo.h;
+  src.getContext("2d").putImageData(new ImageData(new Uint8ClampedArray(photo.data), photo.w, photo.h), 0, 0); // prettier-ignore
+  const c = document.createElement("canvas");
+  c.width = w;
+  c.height = h;
+  const g = c.getContext("2d", { willReadFrequently: true });
+  g.imageSmoothingQuality = "high";
+  g.drawImage(src, 0, 0, w, h);
+  return { w, h, data: g.getImageData(0, 0, w, h).data };
 }
 
 export async function loadSample() {
@@ -515,9 +560,11 @@ export async function loadSample() {
   const { decodePhoto, unpackDepth } = await import("./photo-3d.js");
   const sheets = await Promise.all(Array.from({ length: SAMPLE.sheets }, (_, i) => readBytes(`../../assets/toys/moving-photo-3d/bunny-sheet-${i + 1}.jpg`).then(decodePhoto))); // prettier-ignore
   const dep = await readBytes("../../assets/toys/moving-photo-3d/bunny.depth");
-  const frames = sheetFrames(sheets);
+  const w = SAMPLE_SIDES[profile()] || SAMPLE_SIDES.mid;
+  const h = Math.round((SAMPLE.h * w) / SAMPLE.w);
+  const frames = sheetFrames(sheets, w);
   const raw = unpackDepths(dep, unpackDepth);
-  const clip = makeClip("Big Buck Bunny (a six-second scene)", SAMPLE.w, SAMPLE.h, frames, normalizeDepths(raw, SAMPLE.w, SAMPLE.h)); // prettier-ignore
+  const clip = makeClip("Big Buck Bunny (a six-second scene)", w, h, frames, normalizeDepths(raw, w, h)); // prettier-ignore
   clip.audio = typeof Audio === "undefined" ? null : await soundOf(new URL(SAMPLE_SOUND(), import.meta.url).href, false); // prettier-ignore
   MOVING.sample = clip;
   return clip;

@@ -1,9 +1,9 @@
 // Moving photo to 3D (lane Live input r3): makes the sample clip. The frames
 // are six seconds of Big Buck Bunny (the Screen toy's clip,
 // assets/toys/screen/bunny.mp4, CC BY 3.0 Blender Foundation) at 8 a second,
-// 480 by 270 (r5; was 256 by 144), tiled 4 by 6 into two sheets,
-// assets/toys/moving-photo-3d/bunny-sheet-1.jpg and -2.jpg, with ffmpeg (a
-// decoded picture is at most 2048 pixels wide). Then each frame's depth is worked out with the same depth
+// 640 by 360 (r5; was 256 by 144), tiled 3 by 5 into four sheets,
+// assets/toys/moving-photo-3d/bunny-sheet-1.jpg to -4.jpg, with ffmpeg (a
+// decoded picture is at most 2048 pixels on a side). Then each frame's depth is worked out with the same depth
 // model the toy uses in the page (Depth Anything V2 Small, ONNX Runtime Web,
 // src/live/depth-worker.js), in the browser, halved (98 by 56), and written
 // to assets/toys/moving-photo-3d/bunny.depth (packDepths() in
@@ -17,7 +17,7 @@ import fs from "node:fs";
 
 const dir = "assets/toys/moving-photo-3d";
 const ffmpeg = process.env.FFMPEG || "ffmpeg";
-execFileSync(ffmpeg, ["-nostdin", "-v", "error", "-y", "-i", "assets/toys/screen/bunny.mp4", "-vf", "fps=8,scale=480:270:flags=lanczos,tile=4x6", "-frames:v", "2", "-q:v", "3", `${dir}/bunny-sheet-%d.jpg`]); // prettier-ignore
+execFileSync(ffmpeg, ["-nostdin", "-v", "error", "-y", "-i", "assets/toys/screen/bunny.mp4", "-vf", "fps=8,tile=3x5", "-frames:v", "4", "-q:v", "3", `${dir}/bunny-sheet-%d.jpg`]); // prettier-ignore
 
 const b = await chromium.launch({
   executablePath: process.env.SPLASHERY_CHROMIUM || undefined,
@@ -25,7 +25,7 @@ const b = await chromium.launch({
 });
 const page = await b.newPage();
 page.on("pageerror", (e) => console.log("pageerror:", e.message));
-await page.goto("http://127.0.0.1:4173/index.html?labs=1");
+await page.goto(`${process.env.SPLASHERY_URL || "http://127.0.0.1:4173"}/index.html?labs=1`);
 const r = await page.evaluate(async () => {
   const mp = await import("/src/packs/moving-photo.js");
   const { packDepth, decodePhoto } = await import("/src/packs/photo-3d.js");

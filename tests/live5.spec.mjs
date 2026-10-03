@@ -37,9 +37,27 @@ test("the sample is sharper on a stronger device and plays with its own sound", 
 }) => {
   await open(page, "max");
   const s = await state(page);
-  expect(s.w).toBe(480); // was 256 everywhere
-  expect(s.grid.cols).toBe(480);
+  expect(s.w).toBe(640); // the scene's own size (was 256 everywhere)
+  expect(s.grid.cols).toBeGreaterThan(600); // as many splats as the budget allows
   expect(s.audio).toBe(true);
+  // The colors are sharpened a little: the frame's fine contrast (the mean
+  // difference between neighbors) is higher than without.
+  const c = await page.evaluate(async (m) => {
+    const { MOVING, frameImage } = await import(m);
+    const { cols, rows } = MOVING.grid;
+    const fine = (px) => {
+      let s = 0;
+      for (let j = 0; j < rows; j++)
+        for (let i = 1; i < cols; i++)
+          s += Math.abs(px[(j * cols * 2 + i) * 4 + 1] - px[(j * cols * 2 + i - 1) * 4 + 1]);
+      return s / (rows * (cols - 1));
+    };
+    return {
+      plain: fine(frameImage(MOVING.clip, cols, rows, 10, 0)),
+      sharp: fine(frameImage(MOVING.clip, cols, rows, 10)),
+    };
+  }, mp);
+  expect(c.sharp).toBeGreaterThan(c.plain * 1.2);
 });
 
 test("a video plays with its own sound: the frames follow its clock, pause and scrub take both", async ({
@@ -104,6 +122,44 @@ test("the mirror's depth edges cut clean: no cell hangs between the near and far
   expect(out[5 * w + 37]).toBeCloseTo(0.9, 6);
 });
 
+test("the mirror's background layer shows the wall behind a person, never the person", async () => {
+  const { BackPlate, fillHoles } = await import("../src/live/relief.js");
+  // A frame of a blue wall with a red person in the middle third, and its
+  // depth: the person near (1), the wall far (0).
+  const cols = 60;
+  const rows = 40;
+  const fw = 120;
+  const fh = 80;
+  const data = new Uint8ClampedArray(fw * fh * 4);
+  for (let y = 0; y < fh; y++)
+    for (let x = 0; x < fw; x++) {
+      const person = x >= 40 && x < 80;
+      data.set(person ? [220, 30, 30, 255] : [40, 60, 200, 255], (y * fw + x) * 4);
+    }
+  const d = new Float32Array(cols * rows);
+  for (let y = 0; y < rows; y++)
+    for (let x = 0; x < cols; x++) d[y * cols + x] = x >= 20 && x < 40 ? 1 : 0;
+  const bp = new BackPlate(30, 20);
+  bp.learn({ w: fw, h: fh, data, crop: [0, 0, 1, 1] }, d, cols, rows, false);
+  // Behind the person (the middle of the layer): the wall's blue and depth.
+  const c = (10 * 30 + 15) * 4;
+  expect(bp.vals[c]).toBeLessThan(60); // red
+  expect(bp.vals[c + 2]).toBeGreaterThan(180); // blue
+  expect(bp.vals[c + 3]).toBeLessThan(0.05); // far
+  // A hole in a ramp fills smoothly from both sides.
+  const vals = new Float32Array(16);
+  const w = new Float32Array(16);
+  for (let i = 0; i < 16; i++) {
+    vals[i] = i;
+    w[i] = i >= 6 && i < 10 ? 0 : 1;
+  }
+  fillHoles(vals, w, 16, 1, 1);
+  for (let i = 6; i < 10; i++) {
+    expect(vals[i]).toBeGreaterThan(3);
+    expect(vals[i]).toBeLessThan(12);
+  }
+});
+
 test("the mirror's default depth is gentler", async ({ page }) => {
   await page.goto(APP("mid"));
   await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
@@ -111,4 +167,13 @@ test("the mirror's default depth is gentler", async ({ page }) => {
   await page.waitForFunction(() => window.__splashery.player.scene.toy.id === "splat-mirror" && window.__splashery.player.motion.recipe && document.getElementById("progress").hidden, null, { timeout: 180_000 }); // prettier-ignore
   const depth = await page.evaluate(async () => (await import("/src/live/relief.js")).MIRROR.depth);
   expect(depth).toBe(0.5); // was 0.6
+  // The still picture has its background layer (the canvas twice as tall);
+  // Photo to 3D's live view doesn't.
+  const m = await page.evaluate(async () => { const { MIRROR, mirrorScreen } = await import("/src/live/relief.js"); return { back: MIRROR.back, plate: !!MIRROR.stillBack, h: mirrorScreen.height, rows: MIRROR.rows }; }); // prettier-ignore
+  expect(m.back).toBe(true);
+  expect(m.plate).toBe(true);
+  expect(m.h).toBe(m.rows * 2);
+  await page.evaluate(() => window.__splashery.app.chooseToy("photo-3d"));
+  await page.waitForFunction(() => window.__splashery.player.scene.toy.id === "photo-3d" && document.getElementById("progress").hidden, null, { timeout: 180_000 }); // prettier-ignore
+  expect(await page.evaluate(async () => (await import("/src/live/relief.js")).MIRROR.back)).toBe(false); // prettier-ignore
 });
