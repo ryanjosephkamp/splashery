@@ -66,6 +66,7 @@ const HOME_SECS = 0.45;
 // The grab (the owner's note of October 3, 2026: a touch must never fling).
 const STEP = 1 / 60; // the world always steps this long, whatever the frame rate
 const FOLLOW = 14; // the held point's spring (per second), critically damped
+const PLACE_FOLLOW = 30; // a piece being placed (held level, no swing) follows closer
 const NUDGE = 24; // CSS pixels: a drag shorter than this pushes the toy, never picks it up
 const THROW_WINDOW = 0.1; // seconds of finger motion a let-go takes its speed from
 const THROW_MAX = 4; // toy radii per second
@@ -631,6 +632,9 @@ export class HandsOn {
     h.body.damping = Math.max(h.body.damping, AIR_DRAG);
     // A piece being placed is set down, not thrown.
     if (h.place) {
+      // Set down from where it hovers at least, so a quick let-go never
+      // starts it inside the piece below (it may still be catching up).
+      if (h.body.pos[1] < h.target[1]) h.body.pos[1] = h.target[1];
       h.body.vel = [0, 0, 0];
       h.body.omega = [0, 0, 0];
       this.hold = null;
@@ -769,12 +773,16 @@ export class HandsOn {
   // One STEP of the held point after the finger: a critically damped
   // spring (no overshoot), and a sample of the finger's path.
   followStep(h) {
-    const w2 = FOLLOW * FOLLOW;
+    // (Stepped exactly, so it's steady at any stiffness.)
+    const k = h.place ? PLACE_FOLLOW : FOLLOW;
+    const decay = Math.exp(-k * STEP);
     for (let i = 0; i < 3; i++) {
       const to = h.target[i] + (i === 1 && !h.place ? h.raise : 0); // lifted as it's picked up
-      const a = w2 * (to - h.follow[i]) - 2 * FOLLOW * h.followV[i];
-      h.followV[i] += a * STEP;
-      h.follow[i] += h.followV[i] * STEP;
+      const e = h.follow[i] - to;
+      const v = h.followV[i];
+      const c = v + k * e;
+      h.follow[i] = to + (e + c * STEP) * decay;
+      h.followV[i] = (v - k * c * STEP) * decay;
     }
     h.joint.lb = h.follow.slice();
     h.trail.push({ t: this.simTime, p: h.target.slice() });

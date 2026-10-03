@@ -378,6 +378,43 @@ phone with `grooph share docs/lane-loop.grooph.json`. Update it when these rules
   none.
 - The Operator starts the next lane when a slot is free, in the order in ROADMAP.md.
 
+## Local lanes (the second account, on the owner's Mac)
+
+Since October 3, 2026 (the owner's call that afternoon), some lanes run in Claude Code on the
+owner's Mac, signed in to his second Claude account, so they use that account's weekly usage. The
+Operator still writes their briefs, reviews their PRs and clips, and merges; only the mechanics
+differ. A local lane's brief says "Local lane" at the top. Its session:
+
+- **Starts** from the owner, in a terminal, in the lane's own folder (a git worktree on the lane's
+  branch), with the one-line prompt "Read docs/handoff/<lane>.md in this repository and do it." Its
+  brief is already in that file, so it adds "## State" below it instead of copying it.
+- **Has its own port.** Several lanes share one computer, and the test server reuses whatever
+  already answers on its port, so a lane on another lane's port tests the wrong files. Before any
+  test or tool, in each new shell:
+  `export SPLASHERY_PORT=<its port> SPLASHERY_URL=http://127.0.0.1:<its port>/`, and start the
+  tools' server from the lane's own folder with
+  `python3 -m http.server <its port> --bind 127.0.0.1`. Never use 4173 there. Most tools read
+  `SPLASHERY_URL`; `tools/sound-check.mjs` takes `--base=http://127.0.0.1:<its port>` instead.
+- **Tests** its own spec files, plus `tests/kit.spec.mjs`, `tests/taps.spec.mjs`,
+  `tests/help.spec.mjs` and `tests/unit.spec.mjs`, on its port. Four files still expect 4173 (`bk`,
+  `pic`, `smoke`, `vw`): skip them locally and say so in the PR; the Integrators run the full suite
+  in the cloud before anything merges. On the Mac, leave `SPLASHERY_CHROMIUM` unset (the owner
+  installed Playwright's own Chromium once); never run `playwright install`.
+- **Gets messages** as comments on its own PR that start "From the Operator". It reads them
+  (`gh api repos/ryanjosephkamp/splashery/issues/<PR>/comments`) when it starts each item of its
+  brief and before every push, and does what they say.
+- **Reports** in its handoff file: the first line under "## State" is "READY:", "WORKING:" or
+  "BLOCKED:" with the date and time, kept current and pushed, because the Operator can't read a
+  local session. It ends its session with the same line.
+- **Posts clips** as in "Steps for a lane" if its Artifact tools can read page 2 (the owner shares
+  page 2 with his second account). If they can't, it pushes the MP4 clips and a `cards.json` (the
+  card documents of step 4, with `"file"` naming each clip in place of `"asset"`) to its own branch
+  `claude/clips-<lane>` (never merged), and the Operator posts them. The owner's marks then reach it
+  through the owner, never through the repo or a PR.
+- **Keeps going** while the owner is away: when one item is blocked, it says so in "State" and moves
+  on to the next item of its brief. It pushes only its own branches, never merges, and never asks
+  the owner anything in the terminal.
+
 ## Branches and PRs
 
 - A lane works on the branch the Operator gives it and opens one draft PR against `main`, titled

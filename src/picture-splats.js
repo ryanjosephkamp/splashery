@@ -236,6 +236,42 @@ function blockColor(blocks, x, y, out) {
   return out;
 }
 
+// ---- Relief (lane Books r5) -------------------------------------------------------
+
+// A map's value at fractional cell (fx, fy), bilinear, clamped at the edges.
+function bilinear(d, rw, rh, fx, fy) {
+  const x = Math.min(rw - 1, Math.max(0, fx));
+  const y = Math.min(rh - 1, Math.max(0, fy));
+  const x0 = Math.floor(x);
+  const y0 = Math.floor(y);
+  const x1 = Math.min(rw - 1, x0 + 1);
+  const y1 = Math.min(rh - 1, y0 + 1);
+  const tx = x - x0;
+  const ty = y - y0;
+  const a = d[y0 * rw + x0] * (1 - tx) + d[y0 * rw + x1] * tx;
+  const b = d[y1 * rw + x0] * (1 - tx) + d[y1 * rw + x1] * tx;
+  return a * (1 - ty) + b * ty;
+}
+
+// The lowest value within r cells (a square), in two passes.
+function minFilter(d, rw, rh, r) {
+  const a = new Float32Array(rw * rh);
+  const b = new Float32Array(rw * rh);
+  for (let y = 0; y < rh; y++)
+    for (let x = 0; x < rw; x++) {
+      let m = Infinity;
+      for (let k = Math.max(0, x - r); k <= Math.min(rw - 1, x + r); k++) m = Math.min(m, d[y * rw + k]); // prettier-ignore
+      a[y * rw + x] = m;
+    }
+  for (let y = 0; y < rh; y++)
+    for (let x = 0; x < rw; x++) {
+      let m = Infinity;
+      for (let k = Math.max(0, y - r); k <= Math.min(rh - 1, y + r); k++) m = Math.min(m, a[k * rw + x]); // prettier-ignore
+      b[y * rw + x] = m;
+    }
+  return b;
+}
+
 // ---- The sheet -------------------------------------------------------------------
 
 // Counts, for sizing: how many splats a sheet of w x h pixels needs (an
@@ -256,6 +292,11 @@ export function sheetCount(w, h, method, inkPixels = w * h) {
 //     [x, y, z] (unit, from the spine along the page) } for a page that
 //     bends (kind "leaf"),
 //   opacity (default 0.99),
+//   relief: null, or { w, h, d (w * h values, 0 at the sheet to 1 at the
+//     most raised), amount (toy units at 1) } to raise the picture off the
+//     sheet toward its facing (lane Books r5: a figure that pops out). The
+//     base under the detail takes the lowest relief round it, so it never
+//     shows in front of the detail.
 // }
 // Returns { count, center (Float32 x4), color, scale, rotation (Uint16 half
 // x4), anim (Float32 x4), centers (Float32 x3), ink (the detail count) }.
@@ -318,11 +359,17 @@ export function buildSheet(job) {
   const alpha = toHalf(opacity);
   const lo = [Infinity, Infinity, Infinity];
   const hi = [-Infinity, -Infinity, -Infinity];
+  // Lane Books r5: the relief, sampled at a pixel of the picture.
+  const rel = job.relief?.d && job.relief.amount && job.relief.w > 0 && job.relief.h > 0 ? job.relief : null; // prettier-ignore
+  const relLow = rel ? minFilter(rel.d, rel.w, rel.h, Math.max(1, Math.ceil((2.2 * BASE_SIGMA * rel.w) / w))) : null; // prettier-ignore
+  const raise = (map, x, y) => rel.amount * Math.max(0, Math.min(1, bilinear(map, rel.w, rel.h, (x / w) * rel.w - 0.5, (y / h) * rel.h - 0.5))); // prettier-ignore
 
   // One splat at pixel coordinates (x, y), `up` world units in front of
   // the sheet, with sigmas sx, sy in pixels and color rgb (0..1), or for a
   // screen, uv at its center.
   const emit = (x, y, up, sx, sy, r, g, b) => {
+    // (The detail sits `lift` up; the base and the edge at 0 take the low relief.)
+    if (rel) up += up > 0 ? raise(rel.d, x, y) : raise(relLow, x, y);
     const i4 = n * 4;
     const i3 = n * 3;
     const px0 = ox + right[0] * x + down[0] * y + nz[0] * up;
