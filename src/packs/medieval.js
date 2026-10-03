@@ -25,6 +25,7 @@ import {
   evenTorus,
   evenTube,
 } from "./even.js";
+import { World, Body } from "../physics/world.js"; // lane Physics
 
 const TAU = Math.PI * 2;
 const DEG = Math.PI / 180;
@@ -141,6 +142,114 @@ const BOW = {
   arc: 0.12,
   target: [-0.85, 0.12, 0],
 };
+
+// Lane Physics: the arrow drawn by hand and shot. `draw` is how far the
+// nock is pulled back, `aim` the bow's tilt; once loosed the arrow is a body
+// in a small world with gravity, until it sticks in the target or the grass.
+const ARROW = {
+  draw: 0,
+  aim: 0,
+  held: false,
+  flying: null,
+  stuck: null,
+  last: null,
+  t0: 0,
+  cues: [],
+};
+const ARROW_MAX = 0.3;
+function arrowDraw(p, first) {
+  if (ARROW.flying) return;
+  if (first) {
+    ARROW.held = true;
+    ARROW.stuck = null;
+    ARROW.grabX = p[0] - ARROW.draw;
+    ARROW.grabY = p[1];
+  }
+  ARROW.draw = clamp(p[0] - ARROW.grabX, 0, ARROW_MAX);
+  ARROW.aim = clamp((p[1] - ARROW.grabY) * 0.9, -0.3, 0.3);
+}
+function arrowLoose() {
+  ARROW.held = false;
+  if (ARROW.draw < 0.04) {
+    ARROW.draw = 0;
+    return;
+  }
+  // Out of the bow along its aim, faster the further it was drawn.
+  const dir = [-Math.cos(ARROW.aim), -Math.sin(ARROW.aim), 0];
+  const speed = 1.6 + 3 * (ARROW.draw / ARROW_MAX);
+  const w = new World({ gravity: [0, -3.5, 0], substeps: 4 });
+  const tip = arrowTip(ARROW.draw, ARROW.aim);
+  const b = w.add(
+    new Body({ pos: tip, mass: 1, solid: { type: "sphere", r: 0.01 }, damping: 0.05 }),
+  );
+  b.vel = dir.map((v) => v * speed);
+  ARROW.flying = { w, b, power: ARROW.draw / ARROW_MAX };
+  ARROW.draw = 0;
+  ARROW.cues.push({ voice: "twang", f: 180 + 120 * ARROW.flying.power, vol: 0.7 });
+}
+// Where the nocked arrow's tip is, drawn back by d and tilted by a about
+// the nock.
+function arrowTip(d, a) {
+  const nock = [BOW.sx + d, BOW.nockY, 0];
+  const len = BOW.sx - BOW.tip[0];
+  return [nock[0] - len * Math.cos(a), nock[1] - len * Math.sin(a), 0];
+}
+// Puts the hand-drawn or flying arrow (and the string) on the parts; true
+// while it does.
+function arrowStep(time, out) {
+  const G = BOW;
+  const dt = ARROW.last === null ? 0 : clamp(time - ARROW.last, 0, 0.1);
+  ARROW.last = time;
+  out.cues.push(...ARROW.cues.splice(0));
+  const f = ARROW.flying;
+  if (!ARROW.held && !f && !ARROW.stuck && ARROW.draw === 0) return false;
+  let tip = arrowTip(ARROW.draw, ARROW.aim);
+  let dir = [-Math.cos(ARROW.aim), -Math.sin(ARROW.aim), 0];
+  let vis = 1;
+  let wob = 0;
+  if (f) {
+    for (let left = dt; left > 1e-6; left -= 1 / 60) f.w.step(Math.min(left, 1 / 60));
+    tip = f.b.pos.slice();
+    const sp = Math.hypot(...f.b.vel);
+    if (sp > 1e-6) dir = f.b.vel.map((v) => v / sp);
+    // The target's face (a disc facing +x), or the grass.
+    const face = G.target[0] + 0.08;
+    const r = Math.hypot(tip[1] - G.target[1], tip[2] - G.target[2]);
+    if (tip[0] <= face && r < 0.5) {
+      tip = [face - 0.06, tip[1], tip[2]];
+      ARROW.stuck = { tip, dir, t0: time, hit: true };
+      ARROW.flying = null;
+      ARROW.cues.push({ voice: "thud", vol: 0.5 + 0.4 * f.power });
+    } else if (tip[1] < -0.72 || tip[0] < -1.6) {
+      tip = [Math.max(tip[0], -1.6), Math.max(tip[1], -0.76), tip[2]];
+      ARROW.stuck = { tip, dir, t0: time, hit: false };
+      ARROW.flying = null;
+      ARROW.cues.push({ voice: "thud", vol: 0.3 });
+    }
+  }
+  if (ARROW.stuck) {
+    const st = ARROW.stuck;
+    tip = st.tip;
+    dir = st.dir;
+    const age = time - st.t0;
+    wob = 0.1 * Math.sin(age * 60) * Math.exp(-age * 9);
+    // A while later it fades and a fresh arrow comes onto the string.
+    vis = 1 - clamp((age - 1.4) / 0.4, 0, 1);
+    if (age > 1.8) {
+      ARROW.stuck = null;
+      ARROW.aim = 0;
+      return false;
+    }
+  }
+  const q = quatMul(quatAxisAngle([0, 0, 1], wob), quatFromTo([-1, 0, 0], dir));
+  out.parts.arrow = { offset: vec.sub(tip, G.tip), quat: q, visible: vis };
+  // The string follows the nock while drawn (and twangs once loosed).
+  const pull = ARROW.held || ARROW.draw ? ARROW.draw : 0;
+  const nockY = G.nockY + (ARROW.held ? Math.sin(ARROW.aim) * 0.3 : 0);
+  out.parts.stringUp = { angle: Math.atan2(pull, G.half - nockY) };
+  out.parts.stringDown = { angle: -Math.atan2(pull, G.half + nockY) };
+  return true;
+}
 
 // Seconds since a pulse fired, as 0..1 (1 at rest).
 const progress = (v) => (v > 0 ? 1 - v : 1);
@@ -665,7 +774,17 @@ export const RECIPES = {
     alive: true,
     controls: [{ key: "shot", label: "Shoot", type: "toggle", default: 0, ease: 1.3 }],
     action: { key: "shot", label: "Shoot" },
-    drive(t, c, out) {
+    // Hands-on (lane Physics): pull the arrow back on the string (up or
+    // down a little to aim) and let go: it flies and sticks where it hits.
+    drag: {
+      plane: [0, 0, 1],
+      at: (p) => !ARROW.flying && p[0] > 0.55 && p[0] < 1.3 && Math.abs(p[1] - BOW.nockY) < 0.45,
+      start: (p) => arrowDraw(p, true),
+      move: (p) => arrowDraw(p),
+      end: () => arrowLoose(),
+    },
+    drive(t, c, out, info) {
+      if (arrowStep(info.time, out)) return;
       const G = BOW;
       const dir = direction(c, "shot");
       const v = c.shot;
