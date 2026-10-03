@@ -237,6 +237,35 @@
     border-radius: 10px;
     padding: 8px 10px;
   }
+  .send {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+  }
+  .send button {
+    font: 600 13px/1 var(--body);
+    border-radius: 999px;
+    padding: 9px 13px;
+    cursor: pointer;
+    border: 1px solid var(--line);
+    background: transparent;
+    color: var(--ink);
+  }
+  .send button[data-send] {
+    background: var(--fix);
+    border-color: var(--fix);
+    color: var(--panel);
+  }
+  .send button[data-send]:disabled {
+    opacity: 0.45;
+    cursor: default;
+  }
+  .state.draft {
+    background: transparent;
+    border: 1px dashed var(--fix);
+    color: var(--fix);
+  }
   .saved {
     font-size: 12px;
     color: var(--muted);
@@ -303,8 +332,9 @@
     <h1>Splashery Effect Review, page 2</h1>
     <p>
       Clips of new and changed tap effects from every lane. Each clip starts a moment before the
-      tap. Mark each one "Looks right" or "Needs work" and add a note; the lane that made it reads
-      your marks.
+      tap. Mark each one "Looks right", or tap "Needs work", write your note and tap "Send to the
+      lane". A "Needs work" mark reaches the lane only when you send it with its note; until then
+      the clip stays under "Not marked yet".
     </p>
     <p>
       Page 1 filled its storage on September 30, 2026, so new clips come here. Clips from before
@@ -328,7 +358,8 @@
   <footer id="status">
     Clips are rendered in a headless browser, most of them at phone size, so colors and sharpness
     can look a little softer than on a real screen. Lanes add their clips here as they finish them;
-    a clip that has been redone after your note is replaced by the new one.
+    a clip that has been redone after your note is replaced by the new one. A note you have started
+    but not sent stays in this browser until you send it or cancel it.
   </footer>
 </div>
 
@@ -346,6 +377,21 @@
     lanes: document.getElementById("lanes"),
   };
   const marks = {};
+  // Notes being written, not sent yet (card id -> { note, fix }; fix: the draft turns the mark
+  // into "Needs work" when sent). A "Needs work" mark is stored only when
+  // its note is sent, so a lane never sees a "fix" without the owner's note (October 3, 2026).
+  // Drafts survive a reload in this browser (localStorage), and never reach the database.
+  const pending = {};
+  const DRAFTS = "effect-review-2-drafts";
+  try {
+    for (const [id, d] of Object.entries(JSON.parse(localStorage.getItem(DRAFTS) || "{}")))
+      if (d && typeof d.note === "string") pending[id] = { note: d.note, fix: !!d.fix };
+  } catch {}
+  const keepDrafts = () => {
+    try {
+      localStorage.setItem(DRAFTS, JSON.stringify(pending));
+    } catch {}
+  };
   const cards = {};
   const lanes = {};
   let filter = "all";
@@ -378,8 +424,12 @@
 
   function card(t) {
     const m = marks[t.id] || {};
-    const state =
-      m.verdict === "good"
+    const draft = pending[t.id];
+    const isDraft = draft !== undefined;
+    const newFix = isDraft && (draft.fix || !m.verdict);
+    const state = newFix
+      ? '<span class="state draft">Not sent yet</span>'
+      : m.verdict === "good"
         ? '<span class="state good">Looks right</span>'
         : m.verdict === "fix"
           ? '<span class="state fix">Needs work</span>'
@@ -401,9 +451,13 @@
         </dl>
         <div class="marks" role="group" aria-label="Your verdict on ${esc(t.name)}">
           <button type="button" data-v="good" aria-pressed="${m.verdict === "good"}">Looks right</button>
-          <button type="button" data-v="fix" aria-pressed="${m.verdict === "fix"}">Needs work</button>
+          <button type="button" data-v="fix" aria-pressed="${m.verdict === "fix" || newFix}">Needs work</button>
         </div>
-        <textarea id="note-${esc(t.id)}" data-note placeholder="What should change?" aria-label="Note on ${esc(t.name)}" ${m.verdict === "fix" || m.note ? "" : "hidden"}>${esc(m.note || "")}</textarea>
+        <textarea id="note-${esc(t.id)}" data-note placeholder="What should change? The lane sees this when you send it." aria-label="Note on ${esc(t.name)}" ${isDraft || m.verdict === "fix" || m.note ? "" : "hidden"}>${esc(isDraft ? draft.note : m.note || "")}</textarea>
+        <div class="send" ${isDraft ? "" : "hidden"}>
+          <button type="button" data-send ${String(draft?.note ?? "").trim() || !newFix ? "" : "disabled"}>${newFix ? "Send to the lane" : "Save note"}</button>
+          <button type="button" data-cancel>${newFix ? "Cancel" : "Undo changes"}</button>
+        </div>
         <div class="saved" data-saved></div>
       </div>
     </article>`;
@@ -526,24 +580,74 @@
     }
   }
 
+  function send(id, el) {
+    const text = String(pending[id]?.note ?? "").trim();
+    const verdict = pending[id]?.fix ? "fix" : marks[id]?.verdict || "fix";
+    if (verdict === "fix" && !text) {
+      const saved = el?.querySelector("[data-saved]");
+      if (saved) saved.textContent = "Write your note first.";
+      return;
+    }
+    delete pending[id];
+    keepDrafts();
+    save(id, { verdict, note: text }, el);
+    render();
+  }
+
   els.list.addEventListener("click", (e) => {
+    const el = e.target.closest(".toy");
+    if (!el) return;
+    const id = el.dataset.id;
+    if (e.target.closest("button[data-send]")) return send(id, el);
+    if (e.target.closest("button[data-cancel]")) {
+      delete pending[id];
+      keepDrafts();
+      return render();
+    }
     const b = e.target.closest(".marks button");
     if (!b) return;
-    const el = b.closest(".toy");
-    const id = el.dataset.id;
+    if (b.dataset.v === "fix" && marks[id]?.verdict !== "fix") {
+      // Open the note first; nothing is stored until "Send to the lane".
+      pending[id] = { note: pending[id]?.note ?? marks[id]?.note ?? "", fix: true };
+      keepDrafts();
+      render();
+      document.getElementById(`note-${id}`)?.focus();
+      return;
+    }
     const v = marks[id]?.verdict === b.dataset.v ? "" : b.dataset.v;
+    delete pending[id];
+    keepDrafts();
     save(id, { verdict: v }, el);
     render();
-    if (v === "fix") document.getElementById(`note-${id}`)?.focus();
   });
 
-  let noteTimer = null;
   els.list.addEventListener("input", (e) => {
     const ta = e.target.closest("textarea[data-note]");
     if (!ta) return;
     const el = ta.closest(".toy");
-    clearTimeout(noteTimer);
-    noteTimer = setTimeout(() => save(el.dataset.id, { note: ta.value }, el), 700);
+    const id = el.dataset.id;
+    pending[id] = { note: ta.value, fix: pending[id]?.fix || false };
+    keepDrafts();
+    // Show the send row without re-rendering (the note keeps its cursor).
+    const row = el.querySelector(".send");
+    if (row) {
+      row.hidden = false;
+      const newFix = pending[id].fix || !marks[id]?.verdict;
+      const btn = row.querySelector("button[data-send]");
+      btn.textContent = newFix ? "Send to the lane" : "Save note";
+      btn.disabled = newFix && !ta.value.trim();
+      row.querySelector("button[data-cancel]").textContent = newFix ? "Cancel" : "Undo changes";
+    }
+    const saved = el.querySelector("[data-saved]");
+    if (saved) saved.textContent = "";
+  });
+  els.list.addEventListener("keydown", (e) => {
+    const ta = e.target.closest?.("textarea[data-note]");
+    if (ta && e.key === "Enter" && (e.metaKey || e.ctrlKey)) {
+      e.preventDefault();
+      const el = ta.closest(".toy");
+      send(el.dataset.id, el);
+    }
   });
   els.list.addEventListener("focusout", (e) => {
     if (e.target.matches?.("textarea[data-note]")) setTimeout(render, 0);
