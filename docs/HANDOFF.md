@@ -298,6 +298,17 @@ Settled on 2026-09-24, when the owner approved every recommendation:
 Settled on 2026-09-26: the remaining work runs as parallel lanes with an Operator session
 (OPERATING.md).
 
+Settled on 2026-10-03, afternoon (the owner's notes at 16:25 UTC):
+
+- New work runs as local lanes in Claude Code on the owner's Mac, signed in to his second Claude
+  account, so it uses that account's weekly usage rather than this account's or cloud credits
+  (OPERATING.md, "Local lanes"; `SPLASHERY_PORT` gives each one its own test server). The first
+  five: Photoreal r3, Any pose, Imaging, Earth and maps, Circuits (WORKSTREAMS.md).
+- Moving photo to 3D keeps its sound on pause and resume, and plays at its source's speed and
+  sharpness: Live input r6, in the cloud.
+- The Dot jobs report merged (#231). The owner's Dot researches sources for the new shelves
+  (`docs/audits/new-sources-2026-10.md` when it lands).
+
 Settled on 2026-10-03, the owner's answers of that morning:
 
 - The QR code toy keeps its two vendored libraries: Project Nayuki's QR Code generator (MIT) and
