@@ -20,7 +20,15 @@ import {
   rgb,
   vec,
 } from "../kit.js";
-import { evenBox, evenCylinder, evenEllipsoid, evenTorus, evenTube } from "./even.js";
+import {
+  evenBox,
+  evenCylinder,
+  evenDisc,
+  evenEllipsoid,
+  evenRoundBox,
+  evenTorus,
+  evenTube,
+} from "./even.js";
 
 const TAU = Math.PI * 2;
 const { add, sub, mul, dot, len, cross, unit } = vec;
@@ -1102,11 +1110,23 @@ export const RECIPES = {
         {
           even: true,
           opacity: 1,
-          jitter: 0.015,
+          jitter: 0.008,
           flat: 0.2,
-          color: (c) => glossy(c, "#f3f1ee", 0.8, 50, 0.76, 0.3),
+          weight: 1.3,
+          color: (c) => glossy(c, "#f3f1ee", 0.5, 50, 0.76, 0.3),
         },
       );
+      // The stand's foot, closed underneath.
+      k.add(evenDisc(k, 0.42, 0, 40), {
+        even: true,
+        opacity: 1,
+        jitter: 0.008,
+        pos: [0, -0.5, 0],
+        rot: [180, 0, 0],
+        flat: 0.2,
+        weight: 1.3,
+        color: (c) => shade("#f3f1ee", 0.8 - 0.1 * Math.hypot(c.p[0], c.p[2])),
+      });
       // Drips of ganache from the top edge.
       const drips = [];
       for (let i = 0; i < 17; i++) {
@@ -1135,19 +1155,32 @@ export const RECIPES = {
         pos: [0, H / 2, 0],
         flat: 0.2,
         interior: 0.12,
+        weight: 1.2,
         color: (c) => {
           const y = c.lp[1] + H / 2;
-          if (c.s.cap === "top") return glossy(c, o.drip, 0.6, 30);
+          if (c.s.cap === "top") return glossy(c, o.drip, 0.4, 30);
           if (c.s.cap) return o.frosting;
           const a = c.u * TAU;
-          if (dripAt(a, y)) return glossy(c, o.drip, 0.8, 30, 0.8, 0.3);
-          const swirl = 0.04 * Math.sin(y * 60 + 2 * c.noise(a * 3, y * 4, 0));
-          return lit(c, shade(o.frosting, 1 + swirl), 0.76, 0.34);
+          // Smaller splats along the drips' edges keep them crisp.
+          const on = dripAt(a, y);
+          const e = 0.018;
+          const edge =
+            on !== dripAt(a + e / R, y) ||
+            on !== dripAt(a - e / R, y) ||
+            on !== dripAt(a, y + e) ||
+            on !== dripAt(a, y - e);
+          const size = edge ? 0.85 : 1.15;
+          if (on) return { c: glossy(c, o.drip, 0.5, 30, 0.8, 0.3), size };
+          // Broad, soft palette-knife swirls (fine bands read as grain).
+          const swirl = 0.05 * Math.sin(y * 26 + 1.5 * c.noise(a * 2, y * 3, 0));
+          return { c: lit(c, shade(o.frosting, 1 + swirl), 0.76, 0.34), size };
         },
         core: (c) => {
           const y = c.p[1];
           const r = Math.hypot(c.p[0], c.p[2]);
-          if (r > R * 0.94) return o.frosting;
+          // Near the skin, the skin's own color and shade, so none shows
+          // through between the skin's splats as lighter flecks.
+          if (r > R * 0.8) return shade(dripAt((Math.atan2(c.p[0], c.p[2]) + TAU) % TAU, y) ? o.drip : o.frosting, 0.86); // prettier-ignore
           if (y > H - 0.04) return o.drip;
           for (const ly of [0.24, 0.47]) {
             if (Math.abs(y - ly) < 0.012) return "#d6344d";
@@ -1173,8 +1206,10 @@ export const RECIPES = {
       for (let i = 0; i < ros; i++) {
         const a = (i / ros) * TAU;
         k.add(rosette, {
+          even: true,
           opacity: 1,
-          jitter: 0.015,
+          jitter: 0.01,
+          size: 1.12,
           pos: [Math.sin(a) * (R - 0.1), H - 0.005, Math.cos(a) * (R - 0.1)],
           rot: [0, i * 23, 0],
           flat: 0.3,
@@ -1302,12 +1337,18 @@ export const RECIPES = {
         const edge = 0.1 + 0.11 * f * f;
         return r - edge;
       };
-      k.add(k.cone(R0, R1, H, { caps: "bottom" }), {
+      k.add(evenCylinder(R0, R1, H, "bottom"), {
+        even: true,
+        opacity: 1,
+        jitter: 0.01,
         pos: [0, H / 2, 0],
         flat: 0.2,
+        weight: 1.4,
+        interior: 0.06,
+        core: (c) => (c.p[1] < 0.06 ? "#c9c1b4" : null),
         color: (c) => {
           const y = c.lp[1] + H / 2;
-          if (c.s.cap) return "#c9c1b4";
+          if (c.s.cap) return lit(c, "#d8d0c2", 0.8, 0.2);
           const u = (c.u + 1) % 1;
           const r = R0 + (R1 - R0) * (y / H);
           let du = u - badgeA;
@@ -1315,19 +1356,19 @@ export const RECIPES = {
           const sd = starDist(du * TAU * r, y - 0.55);
           if (sd < 0) return keep(lit(c, sd > -0.02 ? "#f08a1c" : "#ffd23f", 0.82, 0.3));
           const stripe = Math.floor(u * 16) % 2;
-          const edge = Math.abs(((u * 16) % 1) - 0.5) > 0.47;
+          // Smaller splats along each stripe's edge keep it crisp.
+          const edge = Math.abs(((u * 16) % 1) - 0.5) > 0.43;
           let col = stripe ? "#d9252f" : "#fbf6ec";
-          if (edge) col = shade(col, 0.9);
           if (y > H - 0.05) col = "#fbf6ec";
-          return lit(
-            c,
-            shade(col, 0.95 + 0.05 * c.noise(c.p[0] * 12, y * 3, c.p[2] * 12)),
-            0.72,
-            0.4,
-          );
+          // Broad, soft paper shading (fine noise reads as grain).
+          col = lit(c, shade(col, 0.97 + 0.03 * c.noise(c.p[0] * 3, y * 2, c.p[2] * 3)), 0.72, 0.4); // prettier-ignore
+          return edge && y <= H - 0.05 ? { c: col, size: 0.8 } : { c: col, size: 1.1 };
         },
       });
-      k.add(k.torus(R1, 0.02), {
+      k.add(evenTorus(k, R1, 0.02, 120), {
+        even: true,
+        opacity: 1,
+        jitter: 0.01,
         pos: [0, H, 0],
         flat: 0.3,
         weight: 2,
@@ -1345,6 +1386,8 @@ export const RECIPES = {
           { grid: 40 },
         ),
         {
+          even: true,
+          opacity: 1,
           flat: 0.4,
           size: 1.3,
           color: (c) =>
@@ -1638,11 +1681,14 @@ export const RECIPES = {
         {
           even: true,
           opacity: 1,
-          jitter: 0.015,
+          jitter: 0.008,
           flat: 0.2,
+          weight: 1.4,
+          // A crisp blue band (smaller splats on its edges) on calm glaze.
           color: (c) => {
-            const r = Math.hypot(c.p[0], c.p[2]);
-            return glossy(c, Math.abs(r - 1.1) < 0.02 ? "#3d7cc9" : "#f5f3ee", 0.6, 40, 0.8, 0.25);
+            const d = Math.abs(Math.hypot(c.p[0], c.p[2]) - 1.1);
+            const col = glossy(c, d < 0.02 ? "#3d7cc9" : "#f5f3ee", 0.4, 40, 0.8, 0.25);
+            return { c: col, size: Math.abs(d - 0.02) < 0.012 ? 0.75 : 1.1 };
           },
         },
       );
@@ -1673,16 +1719,17 @@ export const RECIPES = {
         k.add(shape, {
           even: true,
           opacity: 1,
-          jitter: 0.015,
+          jitter: 0.01,
           pos: [(k.rand() - 0.5) * 0.03, y, (k.rand() - 0.5) * 0.03],
           rot: [0, k.rand() * 360, 0],
           flat: 0.22,
+          size: 1.08,
           interior: 0.1,
           part: last ? top : 0,
           core: (c) =>
             Math.abs(c.lp[1]) > T * 0.38
               ? "#c98a45"
-              : shade("#f4dfa6", 0.92 + 0.12 * c.noise(c.p[0] * 40, c.p[1] * 40, c.p[2] * 40)),
+              : shade("#f4dfa6", 0.95 + 0.06 * c.noise(c.p[0] * 8, c.p[1] * 8, c.p[2] * 8)),
           color: (c) => {
             const face = Math.abs(c.ln[1]) > 0.6;
             const r = Math.hypot(c.lp[0], c.lp[2]) / R;
@@ -1691,8 +1738,9 @@ export const RECIPES = {
               const m = smoothstep(-0.3, 0.5, c.fbm(c.p[0] * 4 + i, c.p[2] * 4, i * 3, 4));
               col = mix("#e2ad62", "#a9642a", m * (1 - 0.5 * smoothstep(0.7, 1, r)));
             } else {
-              const pore = c.noise(c.p[0] * 60, c.p[1] * 60, c.p[2] * 60) > 0.45;
-              col = pore ? "#d6ac66" : "#f2d69c";
+              // Soft pores two or more splats wide (fine ones read as grain).
+              const pore = smoothstep(0.3, 0.6, c.noise(c.p[0] * 22, c.p[1] * 22, c.p[2] * 22));
+              col = mix("#f2d69c", "#dcb36e", pore * 0.8);
               col = mix(col, "#c98a45", smoothstep(0.55, 0.9, Math.abs(c.lp[1]) / (T / 2)));
             }
             return lit(c, col, 0.74, 0.38);
@@ -1701,9 +1749,10 @@ export const RECIPES = {
         topY = y + T / 2;
       }
       // A pat of butter.
-      k.add(k.roundedBox(0.3, 0.1, 0.26, 5), {
+      k.add(evenRoundBox(0.3, 0.1, 0.26, 0.03), {
+        even: true,
         opacity: 1,
-        jitter: 0.015,
+        jitter: 0.008,
         pos: [0.04, topY + 0.045, -0.02],
         rot: [3, 28, -4],
         part: top,
@@ -1779,6 +1828,10 @@ export const RECIPES = {
             flat: 0.25,
             weight: 2,
             pattern: false,
+            // Lane Fix7: the drips' run down the top pancake goes with it
+            // when it flips; below it, the syrup has already run onto the
+            // pancakes under it and stays.
+            part: (c) => (c.p[1] > topY - T ? top : 0),
             kind: "grow",
             params: (c) => [0.05 + 0.9 * (c.t ?? 0) * (d.L / 0.73), 0],
             color: syrup,
@@ -1870,9 +1923,16 @@ export const RECIPES = {
           { grid: 120, thick: 0.45 },
         ),
         {
+          // (Evenly laid and solid, its core the liner's color near the
+          // paper, so the liner's floor and walls are closed from below; lane
+          // Sharpness B.)
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
+          size: 1.08,
           flat: 0.2,
           interior: 0.1,
-          core: cake,
+          core: (c) => (c.p[1] < 0.06 || Math.hypot(c.p[0], c.p[2]) > 0.32 ? shade(o.liner, 0.8) : cake), // prettier-ignore
           color: (c) =>
             lit(c, mix(o.liner, "#ffffff", 0.12 * c.noise(0, c.p[1] * 30, 0)), 0.7, 0.45),
         },
@@ -2336,12 +2396,15 @@ export const RECIPES = {
           pattern: false,
           color: satin,
         });
+        // The tails hang from the knot, in front of the canes. Lane Fix7:
+        // built round the knot (the scale used to flatten their place as
+        // well as the ribbon, which put the left tail behind its cane).
         k.add(
           k.tube(
             spline([
-              [0.02 * s, bowY - 0.02, 0.18],
-              [0.12 * s, bowY - 0.2, 0.2],
-              [0.2 * s, bowY - 0.4, 0.17],
+              [0.02 * s, -0.02, 0.02],
+              [0.12 * s, -0.2, 0.05],
+              [0.2 * s, -0.4, 0.04],
             ]),
             (t) => 0.045 * (1 - 0.3 * t),
           ),
@@ -2352,6 +2415,7 @@ export const RECIPES = {
             flat: 0.3,
             weight: 1.5,
             pattern: false,
+            pos: [0, bowY, 0.18],
             scale: [1, 1, 0.5],
             color: satin,
           },
@@ -2812,15 +2876,17 @@ export const RECIPES = {
       const yc = CRO_CUT;
       const lid = k.part("lid", { pivot: [0, yc, -0.12], axis: [1, 0, 0] });
       k.add(shape, {
+        even: true,
         opacity: 1,
-        jitter: 0.015,
+        jitter: 0.01,
+        size: 1.08,
         part: (c) => (c.p[1] > yc ? lid : 0),
         flat: 0.25,
         interior: 0.1,
         core: (c) => {
           // Keep the crumb inside the thin tips.
           if (len(sub(c.p, c.lp)) > env(c.v) * 0.9) return null;
-          return c.noise(c.p[0] * 30, c.p[1] * 30, c.p[2] * 30) > 0.1 ? "#f6e2b0" : "#e2bd7c";
+          return c.noise(c.p[0] * 12, c.p[1] * 12, c.p[2] * 12) > 0.1 ? "#f6e2b0" : "#e2bd7c";
         },
         color: (c) => crust(c, c.v, c.u),
       });
@@ -2832,8 +2898,12 @@ export const RECIPES = {
         let col = mix("#f4d08e", "#c26a1f", smoothstep(0.2, 0.85, b));
         col = mix(col, "#9a5418", 0.5 * tip);
         col = mix(col, "#e9bb72", under * 0.7);
-        col = shade(col, 0.93 + 0.12 * c.noise(c.p[0] * 40, c.p[1] * 40, c.p[2] * 40));
-        return glossy(c, col, 0.55 * (1 - under), 20, 0.72, 0.42);
+        // Soft blistering, broad enough not to read as grain, and the
+        // laminated layers as fine flaky streaks along each roll.
+        col = shade(col, 0.96 + 0.07 * c.noise(c.p[0] * 12, c.p[1] * 12, c.p[2] * 12));
+        const flake = Math.sin(cv * TAU * 34 + cu * TAU * 2 + 2 * c.noise(cu * 6, cv * 20, 0.7));
+        col = shade(col, 1 - 0.07 * smoothstep(0.3, 1, flake) * smoothstep(0.15, 0.6, b));
+        return glossy(c, col, 0.4 * (1 - under), 20, 0.72, 0.42);
       }
       // The cut faces (the bottom's facing up, the top's facing down): the
       // soft crumb with the laminated layers curving round each roll, inside
@@ -2848,8 +2918,8 @@ export const RECIPES = {
       };
       const crumb = (c, w, v) => {
         const aw = Math.abs(w);
-        if (aw > 0.93) return keep(lit(c, mix("#c98333", "#a8621e", c.rand()), 0.85, 0.2));
-        const holes = c.noise(c.p[0] * 34, c.p[2] * 34, 3.1);
+        if (aw > 0.93) return keep(lit(c, mix("#c98333", "#a8621e", 0.4), 0.85, 0.2));
+        const holes = c.noise(c.p[0] * 22, c.p[2] * 22, 3.1);
         const layer = Math.sin(aw * 17 + 2.2 * c.noise(v * 20, aw * 3, 0.4));
         let col = mix("#f8e7bf", "#f1d49a", 0.5 + 0.5 * c.noise(c.p[0] * 9, c.p[2] * 9, 1.7));
         if (layer > 0.8) col = mix(col, "#d9a860", 0.7);
@@ -2909,7 +2979,7 @@ export const RECIPES = {
         jitter: 0.015,
         pos: [0, trayY - 0.03, -0.1],
         flat: 0.2,
-        weight: 0.6,
+        weight: 1.1,
         color: (c) => (c.n[1] > 0.5 ? lit(c, "#5a5f66", 0.8, 0.3) : lit(c, "#3c4046", 0.8, 0.3)),
       });
       k.add(
@@ -2920,12 +2990,12 @@ export const RECIPES = {
         {
           even: true,
           opacity: 1,
-          jitter: 0.015,
+          jitter: 0.008,
           flat: 0.15,
-          weight: 0.7,
+          weight: 1.3,
           color: (c) => {
-            const crinkle = c.noise(c.p[0] * 9, c.p[2] * 9, 1.3);
-            return lit(c, shade("#efe6d2", 0.94 + 0.1 * crinkle), 0.84, 0.2);
+            const crinkle = c.noise(c.p[0] * 5, c.p[2] * 5, 1.3);
+            return lit(c, shade("#efe6d2", 0.96 + 0.06 * crinkle), 0.84, 0.2);
           },
         },
       );
@@ -2950,12 +3020,21 @@ export const RECIPES = {
     ],
     controls: [{ key: "serve", label: "Take a slice", type: "toggle", default: 0, ease: 1.1 }],
     action: { key: "serve", label: "Take a slice" },
-    drive(t, c, out) {
+    drive(t, c, out, info) {
       // Linear in the eased value, so the cheese strings (which grow in with
       // it) always reach the slice.
       const s = c.serve;
       out.grow = s;
       out.parts.slice = { offset: [PIZZA_OUT[0] * s, PIZZA_OUT[1] * s, PIZZA_OUT[2] * s] };
+      // Splats sort where they were built, so the slice, lifted toward the
+      // viewer, drew under the board's front. Sort it where it stands as it
+      // moves (lane Sharpness B).
+      const d = info?.data;
+      const slot = Math.round(s * 12);
+      if (d && slot !== d.sortSlot) {
+        d.sortSlot = slot;
+        out.resortPose = true;
+      }
     },
     build(k, o) {
       const R = 0.9;
@@ -2965,6 +3044,7 @@ export const RECIPES = {
       const span = TAU / slices;
       const a0 = PIZZA_AZ - span / 2;
       const slice = k.part("slice");
+      k.data = {};
       const marg = o.topping === "margherita";
       const inSlice = (a) => {
         let d = a - PIZZA_AZ;
@@ -2972,12 +3052,15 @@ export const RECIPES = {
         return Math.abs(d) < span / 2;
       };
       // A wooden board underneath.
-      k.add(k.cylinder(1.13, 0.06), {
+      k.add(evenCylinder(1.13, 1.13, 0.06), {
+        even: true,
+        opacity: 1,
+        jitter: 0.01,
         pos: [0, -0.035, 0],
         flat: 0.2,
         color: (c) => {
-          if (c.s.cap === "bottom") return "#6b4a2a";
-          const g = c.fbm(c.p[0] * 2, c.p[2] * 14, 0.5, 3);
+          if (c.s.cap === "bottom") return lit(c, "#8a6038", 0.85, 0.2);
+          const g = c.fbm(c.p[0] * 2, c.p[2] * 8, 0.5, 3);
           return lit(c, mix("#c89660", "#9c6a3a", 0.5 + 0.5 * g), 0.74, 0.34);
         },
       });
@@ -2992,22 +3075,21 @@ export const RECIPES = {
           // Blistered golden spots.
           const b = c.noise(c.p[0] * 14, c.p[2] * 14, 3.3);
           if (b > 0.42) col = mix(col, "#c97a2a", smoothstep(0.42, 0.62, b));
-          col = mix(
-            col,
-            "#c7331f",
-            sauceEdge + (c.noise(c.p[0] * 9, c.p[2] * 9, 7) > 0.5 ? 0.6 : 0),
-          );
+          const sauce = 0.6 * smoothstep(0.42, 0.62, c.noise(c.p[0] * 7, c.p[2] * 7, 7));
+          col = mix(col, "#c7331f", Math.min(1, sauceEdge + sauce));
         }
         // The cuts between slices.
         let d = (a - PIZZA_AZ) / span + 0.5;
         d = Math.abs(d - Math.round(d)) * span * r;
-        if (d < 0.009 && r > 0.03) return keep(shade(col, 0.55));
-        return mix(lit(c, col, 0.8, 0.28), "#ffffff", 0.25 * spec(c, 20));
+        if (d < 0.009 && r > 0.03) return keep(shade(col, 0.6), 0.8);
+        return mix(lit(c, col, 0.8, 0.28), "#ffffff", 0.15 * spec(c, 20));
       };
       const crust = (c) => {
         const n = c.noise(c.p[0] * 10, c.p[1] * 10, c.p[2] * 10);
         let col = mix("#e7b56a", "#c78638", smoothstep(-0.2, 0.6, c.n[1] + 0.3 * n));
-        if (c.noise(c.p[0] * 22, c.p[1] * 22, c.p[2] * 22) > 0.5) col = "#8a5424";
+        // Soft, toasted spots (hard little ones read as grain).
+        const toast = smoothstep(0.4, 0.7, c.noise(c.p[0] * 11, c.p[1] * 11, c.p[2] * 11));
+        col = mix(col, "#9a6028", 0.7 * toast);
         return lit(c, col, 0.75, 0.38);
       };
       // Each piece: the cheesy top, the puffy crust, the base and the cut sides.
@@ -3023,10 +3105,13 @@ export const RECIPES = {
             { grid: 64, normal: () => [0, 1, 0], thick: 0.05 },
           ),
           {
+            even: true,
+            opacity: 1,
+            jitter: 0.01,
+            size: 1.1,
             part,
             flat: 0.15,
-            interior: 0.08,
-            core: (c) => (c.p[1] > 0.035 ? "#c7331f" : "#f1d9a6"),
+            weight: 1.2,
             color: (c) => cheese(c, c.v * R, from + c.u * w),
           },
         );
@@ -3041,7 +3126,7 @@ export const RECIPES = {
             },
             { grid: 64 },
           ),
-          { part, flat: 0.2, color: crust },
+          { even: true, opacity: 1, jitter: 0.01, size: 1.08, part, flat: 0.2, color: crust },
         );
         k.add(
           k.param(
@@ -3052,7 +3137,7 @@ export const RECIPES = {
             },
             { grid: 32, normal: () => [0, -1, 0] },
           ),
-          { part, flat: 0.15, color: "#d9a55c" },
+          { even: true, opacity: 1, jitter: 0.01, part, flat: 0.15, color: "#d9a55c" },
         );
         for (const [a, s] of [
           [from, -1],
@@ -3064,6 +3149,9 @@ export const RECIPES = {
               normal: () => [s * Math.cos(a), 0, -s * Math.sin(a)],
             }),
             {
+              even: true,
+              opacity: 1,
+              jitter: 0.01,
               part,
               flat: 0.15,
               color: (c) =>
@@ -3100,6 +3188,9 @@ export const RECIPES = {
       );
       const basil = (x, z, rot) =>
         k.add(leaf, {
+          even: true,
+          opacity: 1,
+          jitter: 0.01,
           pos: [x, top + 0.02, z],
           rot: [0, rot, 0],
           part: partAt(x, z),
@@ -3117,9 +3208,12 @@ export const RECIPES = {
                 ),
         });
       if (o.topping === "pepperoni") {
-        const pep = k.cylinder(0.1, 0.018);
+        const pep = evenCylinder(0.1, 0.1, 0.018);
         for (const [x, z] of spots) {
           k.add(pep, {
+            even: true,
+            opacity: 1,
+            jitter: 0.01,
             pos: [x, top + 0.012, z],
             part: partAt(x, z),
             flat: 0.2,
@@ -3128,8 +3222,9 @@ export const RECIPES = {
               if (c.s.side) return "#7d1510";
               const r = c.s.radial ?? 0;
               let col = mix("#c02a1c", "#7d1510", smoothstep(0.75, 1, r));
-              if (c.noise(c.p[0] * 60, c.p[2] * 60, 2) > 0.45) col = mix(col, "#e8836a", 0.6);
-              return glossy(c, col, 0.5, 20);
+              // Soft fat spots a few splats wide.
+              const fat = smoothstep(0.4, 0.65, c.noise(c.p[0] * 24, c.p[2] * 24, 2));
+              return glossy(c, mix(col, "#e0786a", 0.5 * fat), 0.4, 20);
             },
           });
         }
@@ -3141,7 +3236,10 @@ export const RECIPES = {
         for (const [x, z] of spots) {
           if (k.rand() < 0.25) continue;
           const s = 0.09 + k.rand() * 0.05;
-          k.add(k.ellipsoid(s, 0.025, s * (0.8 + k.rand() * 0.3)), {
+          k.add(evenEllipsoid(k, s, 0.025, s * (0.8 + k.rand() * 0.3), 32), {
+            even: true,
+            opacity: 1,
+            jitter: 0.01,
             pos: [x, top + 0.01, z],
             rot: [0, k.rand() * 180, 0],
             part: partAt(x, z),
@@ -3170,7 +3268,9 @@ export const RECIPES = {
           const part = partAt(x, z);
           const kind = i % 4;
           if (kind === 0) {
-            k.add(k.torus(0.06, 0.012), {
+            k.add(evenTorus(k, 0.06, 0.012, 48), {
+              even: true,
+              opacity: 1,
               pos: [x, top + 0.012, z],
               part,
               weight: 2,
@@ -3178,7 +3278,9 @@ export const RECIPES = {
               color: (c) => glossy(c, "#1e1a1a", 0.6, 20),
             });
           } else if (kind === 1) {
-            k.add(k.torus(0.09, 0.014), {
+            k.add(evenTorus(k, 0.09, 0.014, 56), {
+              even: true,
+              opacity: 1,
               pos: [x, top + 0.012, z],
               scale: [1, 1, 0.7],
               rot: [0, a * 57, 0],
@@ -3188,7 +3290,9 @@ export const RECIPES = {
               color: (c) => glossy(c, "#3f9a2c", 0.5, 20),
             });
           } else if (kind === 2) {
-            k.add(k.ellipsoid(0.08, 0.018, 0.06), {
+            k.add(evenEllipsoid(k, 0.08, 0.018, 0.06, 32), {
+              even: true,
+              opacity: 1,
               pos: [x, top + 0.014, z],
               rot: [0, a * 57, 0],
               part,
@@ -3204,7 +3308,9 @@ export const RECIPES = {
                 ),
             });
           } else {
-            k.add(k.torus(0.075, 0.01), {
+            k.add(evenTorus(k, 0.075, 0.01, 48), {
+              even: true,
+              opacity: 1,
               pos: [x, top + 0.012, z],
               scale: [1, 1, 0.8],
               part,
@@ -3216,21 +3322,24 @@ export const RECIPES = {
         }
       }
       // Strings of melted cheese that stretch as the slice comes away.
-      for (let i = 0; i < 5; i++) {
+      for (let i = 0; i < 4; i++) {
         const side = i % 2 ? a0 : a0 + span;
-        const r = 0.25 + i * 0.13;
+        const r = 0.28 + i * 0.15;
         const start = [Math.sin(side) * r, top + 0.005, Math.cos(side) * r];
         const end = add(start, PIZZA_OUT);
         const curve = (t) => {
           const p = add(start, mul(sub(end, start), t));
-          return [p[0], p[1] - 0.05 * Math.sin(Math.PI * t), p[2]];
+          return [p[0], p[1] - 0.035 * Math.sin(Math.PI * t), p[2]];
         };
         k.add(
-          k.tube(curve, (t) => 0.011 * (1 - 0.5 * Math.sin(Math.PI * t)), {
+          evenTube(k, curve, (t) => 0.008 * (1 - 0.55 * Math.sin(Math.PI * t)), {
             samples: 64,
             grid: 32,
           }),
           {
+            even: true,
+            opacity: 1,
+            jitter: 0.01,
             flat: 0.4,
             weight: 3,
             kind: "grow",
@@ -3335,7 +3444,8 @@ export const RECIPES = {
         k.param(
           (u, v) => {
             const a = u * TAU;
-            const r = (0.3 + 0.66 * v) * (1 + 0.05 * v * Math.sin(a * 7));
+            // (From the middle out: real lettuce has no hole. Lane Fix7.)
+            const r = (0.02 + 0.94 * v) * (1 + 0.05 * v * Math.sin(a * 7));
             const y = 0.5 + v * v * (0.035 * Math.sin(a * 13 + v * 4) - 0.02);
             return [Math.sin(a) * r, y, Math.cos(a) * r];
           },
@@ -3389,7 +3499,10 @@ export const RECIPES = {
         part: topBun,
         flat: 0.22,
         interior: 0.1,
-        core: crumb,
+        // Lane Fix7: inside the crust, the crust's own brown (pale crumb
+        // there showed through the crust close up, as a white flash); the
+        // crumb shows only on the cut face underneath.
+        core: (c) => (c.p[1] < 0.68 ? crumb(c) : shade("#c98a45", 0.95)),
         color: (c) => {
           if (c.n[1] < -0.85) return crumb(c);
           const col = mix("#e0a24e", "#b7671f", smoothstep(0.7, 1.12, c.p[1]));
@@ -3403,17 +3516,30 @@ export const RECIPES = {
         [0.4, 1.11],
         [0, 1.14],
       ]);
-      k.cloud({ share: 0.02, size: 0.8, part: topBun, pattern: false }, (rand) => {
-        const y = 0.8 + rand() * 0.33;
+      // Lane Fix7: about 160 real seeds, each a small flat teardrop of a few
+      // splats lying on the crust. (There were thousands of round white
+      // streaks, which piled up into a white flash close up.)
+      const SEEDS = 160;
+      const PER = 7;
+      const seeds = [];
+      const srand = k.rand;
+      for (let i = 0; i < SEEDS; i++) {
+        const y = 0.8 + srand() * 0.33;
         const r = domeAt(y);
-        const a = rand() * TAU;
-        const p = [Math.sin(a) * r, y + 0.006, Math.cos(a) * r];
+        const a = srand() * TAU;
+        const p = [Math.sin(a) * r, y + 0.004, Math.cos(a) * r];
         const n = unit([p[0], 0.9, p[2]]);
+        seeds.push({ p, n, d: tangentDir(srand, n), col: mix("#f6e7c1", "#e2c891", srand()) });
+      }
+      k.cloud({ count: SEEDS * PER, size: 0.8, part: topBun, pattern: false }, (rand, i) => {
+        const sd = seeds[Math.floor(i / PER) % SEEDS];
+        const f = (i % PER) / (PER - 1) - 0.5;
         return {
-          p,
-          dir: tangentDir(rand, n),
-          stretch: 1.9,
-          color: mix("#fbf0d2", "#e8d2a0", rand()),
+          p: add(sd.p, mul(sd.d, f * 0.034)),
+          n: sd.n,
+          flat: 0.3,
+          size: 0.8 * (1 - 0.5 * Math.abs(f) - 0.3 * f),
+          color: sd.col,
           opacity: 1,
         };
       });
@@ -3714,10 +3840,14 @@ export const RECIPES = {
         if (!on || s < bt.t0) return { base: bt.home };
         const u = s - bt.t0;
         const back = TACO_BACK + bt.lag;
-        const fall = bounce(u, bt.h, 0.4, 12, 0.3);
+        // Lane Fix7: it drops out of the opened break with a little drift,
+        // lands with a small bounce, and slides and tumbles on to a stop
+        // (friction), instead of flying sideways out through the shell.
+        const fall = bounce(u, bt.h, 0.15, 12, 0.25);
         const f = Math.min(1, u / bt.t1);
-        let p = [bt.home[0] + bt.dx * f, bt.floor + fall.y, bt.home[2] + bt.dz * f];
-        let q = quatAxisAngle(bt.axis, bt.spin * f);
+        const slide = 0.25 * f + 0.75 * easeOut(band(u, bt.t1, bt.t1 + 0.45));
+        let p = [bt.home[0] + bt.dx * slide, bt.floor + fall.y, bt.home[2] + bt.dz * slide];
+        let q = quatAxisAngle(bt.axis, bt.spin * (0.6 * f + 0.4 * easeOut(band(u, bt.t1, bt.t1 + 0.45)))); // prettier-ignore
         if (s >= back) {
           const g = smooth(band(s, back, back + 0.4));
           p = hopTo(p, bt.home, g, 0.2);
@@ -3786,8 +3916,9 @@ export const RECIPES = {
         return quatRotate(q, [x, y, z]);
       };
       const byX = (p) => (p[0] < xb ? L : Rt);
-      k.cloud({ share: 0.16, size: 1.5, flat: 0.6 }, (rand) => {
-        const p = inU(rand, -0.4, -0.02, 0.8);
+      // (The meat kept off the walls, so none shows through the shell: Fix7.)
+      k.cloud({ share: 0.16, size: 1.25, flat: 0.6 }, (rand) => {
+        const p = inU(rand, -0.4, -0.05, 0.62);
         const n = randDir(rand);
         const l = Math.max(0, dot(n, LIGHT));
         return {
@@ -3902,13 +4033,14 @@ export const RECIPES = {
       const floor = -0.01;
       bits.forEach((bt, i) => {
         const a = 0.2 + (i / bits.length) * 2.6 + 0.3 * k.rand();
-        const r = 0.25 + 0.3 * k.rand();
-        bt.dx = Math.cos(a) * r * 0.9;
-        bt.dz = 0.35 + Math.sin(a) * r * 0.6;
+        const r = 0.15 + 0.2 * k.rand();
+        bt.dx = Math.cos(a) * r * 0.6;
+        bt.dz = 0.2 + Math.sin(a) * r * 0.6;
         bt.h = bt.home[1] - floor - 0.03;
         bt.floor = floor + 0.03;
-        bt.t0 = 0.18 + 0.035 * i;
-        bt.t1 = landings(bt.h, 0.4, 12, 0.3, 1)[0];
+        // (Once the break has opened, so they fall through the gap.)
+        bt.t0 = 0.3 + 0.04 * i;
+        bt.t1 = landings(bt.h, 0.15, 12, 0.25, 1)[0];
         bt.axis = randDir(k.rand);
         bt.spin = 1 + 2 * k.rand();
         bt.lag = 0.03 * (bits.length - i);
@@ -4166,7 +4298,9 @@ export const RECIPES = {
     },
     build(k, o) {
       const cup = o.cup;
-      const ceramic = (c) => glossy(c, cup, 0.85, 45, 0.76, 0.3);
+      // Calm glaze: a soft sheen, and splats a little larger so nothing
+      // darker shows through the white between them.
+      const ceramic = (c) => ({ c: glossy(c, cup, 0.5, 45, 0.76, 0.3), size: 1.12 });
       // Saucer.
       k.add(
         revolve(
@@ -4183,7 +4317,7 @@ export const RECIPES = {
           null,
           { flip: true },
         ),
-        { even: true, opacity: 1, jitter: 0.015, flat: 0.2, color: ceramic },
+        { even: true, opacity: 1, jitter: 0.008, flat: 0.2, weight: 1.2, color: ceramic },
       );
       // The cup: outside, inside wall above the coffee, rim and handle.
       k.add(
@@ -4198,10 +4332,11 @@ export const RECIPES = {
         {
           even: true,
           opacity: 1,
-          jitter: 0.015,
+          jitter: 0.008,
           flat: 0.2,
+          weight: 1.2,
           interior: 0.06,
-          core: (c) => (c.p[1] > 0.54 ? null : Math.hypot(c.p[0], c.p[2]) > 0.5 ? cup : "#5a3418"),
+          core: (c) => (c.p[1] > 0.54 ? null : Math.hypot(c.p[0], c.p[2]) > 0.44 ? shade(cup, 0.9) : "#a87040"), // prettier-ignore
           color: ceramic,
         },
       );
@@ -4216,18 +4351,27 @@ export const RECIPES = {
           null,
           { flip: true },
         ),
-        { even: true, opacity: 1, jitter: 0.015, flat: 0.2, color: (c) => shade(cup, 0.9) },
+        {
+          even: true,
+          opacity: 1,
+          jitter: 0.008,
+          flat: 0.2,
+          size: 1.1,
+          color: (c) => shade(cup, 0.9),
+        },
       );
-      k.add(k.torus(0.592, 0.014), {
+      k.add(evenTorus(k, 0.592, 0.014, 160), {
+        even: true,
         opacity: 1,
-        jitter: 0.015,
+        jitter: 0.008,
         pos: [0, 0.662, 0],
         flat: 0.3,
         weight: 1.5,
         color: ceramic,
       });
       k.add(
-        k.tube(
+        evenTube(
+          k,
           spline([
             [0.54, 0.5, 0],
             [0.74, 0.55, 0],
@@ -4237,7 +4381,7 @@ export const RECIPES = {
           ]),
           0.045,
         ),
-        { opacity: 1, jitter: 0.015, scale: [1, 1, 0.8], flat: 0.25, weight: 1.3, color: ceramic },
+        { even: true, opacity: 1, jitter: 0.008, scale: [1, 1, 0.8], flat: 0.25, weight: 1.5, color: ceramic }, // prettier-ignore
       );
       // The coffee with latte art, on a part that turns when stirred.
       // It is made of rings, each a part, so a stir can twist the art.
@@ -4256,7 +4400,8 @@ export const RECIPES = {
         k.add(ring, {
           even: true,
           opacity: 1,
-          jitter: 0.015,
+          jitter: 0.008,
+          size: 1.12,
           pos: [0, 0.58, 0],
           part: k.part(`coffee${i}`, { pivot: [0, 0.58, 0], axis: [0, 1, 0] }),
           flat: 0.15,
@@ -4269,7 +4414,8 @@ export const RECIPES = {
             col = mix(col, "#a86a36", 0.3 * c.noise(x * 8, z * 8, 1));
             const a = art(x, -z);
             if (a > 0) col = mix(col, "#fbf3e4", smoothstep(0, 0.06, a));
-            return keep(mix(col, "#ffffff", 0.2 * spec(c, 30)));
+            // Larger splats in the foam, so no coffee shows through it.
+            return keep(mix(col, "#ffffff", 0.2 * spec(c, 30)), a > 0.03 ? 1.3 : undefined);
           },
         });
       }
@@ -4301,25 +4447,25 @@ export const RECIPES = {
       });
       // A teaspoon on the saucer.
       const q = quatEuler(0, 58, 0);
-      k.add(k.ellipsoid(0.12, 0.03, 0.08), {
+      k.add(evenEllipsoid(k, 0.12, 0.03, 0.08, 40), {
         even: true,
         opacity: 1,
-        jitter: 0.015,
+        jitter: 0.008,
         quat: q,
         pos: add([0, 0.07, 0], quatRotate(q, [0.3, 0, 0.62])),
         flat: 0.25,
         weight: 1.5,
-        color: (c) => glossy(c, mix("#aeb4bd", "#e4e8ee", 0.5 + 0.5 * c.n[1]), 0.9, 30),
+        color: (c) => glossy(c, mix("#aeb4bd", "#e4e8ee", 0.5 + 0.5 * c.n[1]), 0.45, 30),
       });
-      k.add(k.cone(0.022, 0.014, 0.62), {
+      k.add(evenCylinder(0.022, 0.014, 0.62), {
         even: true,
         opacity: 1,
-        jitter: 0.015,
+        jitter: 0.008,
         quat: quatMul(q, quatEuler(0, 0, 90)),
         pos: add([0, 0.08, 0], quatRotate(q, [0.3, 0, 0.62 - 0.4])),
         flat: 0.3,
         weight: 1.6,
-        color: (c) => glossy(c, "#c3c8cf", 0.9, 30),
+        color: (c) => glossy(c, "#c3c8cf", 0.45, 30),
       });
       k.reach([0, 1.4, 0]);
     },
@@ -4411,6 +4557,10 @@ export const RECIPES = {
         r: 0.29,
       }));
       const inBite = (p) => teeth.some((t) => len(sub(p, t.at)) < t.r);
+      // Lane Fix7: near the bite, the flesh inside the apple is left out (the
+      // bitten surface covers it), so none pokes out round the bite's rim
+      // as white specks on the skin.
+      const nearBite = (p) => teeth.some((t) => len(sub(p, t.at)) < t.r + 0.05);
       const coreColor = (c) => {
         const [x, y, z] = c.p;
         const r = Math.hypot(x, z);
@@ -4451,7 +4601,7 @@ export const RECIPES = {
           jitter: 0.015,
           flat: 0.2,
           interior: 0.12,
-          core: (c) => (inBite(c.p) ? null : coreColor(c)),
+          core: (c) => (nearBite(c.p) ? null : coreColor(c)),
           color: (c) => (inBite(c.p) ? null : skinColor(c)),
         },
       );
@@ -4509,6 +4659,9 @@ export const RECIPES = {
             if (teeth.some((o2) => o2 !== t && len(sub(c.p, o2.at)) < o2.r * 0.999)) return null;
             const edge = Math.hypot(c.p[0], c.p[2]) / rAt(c.p[1]);
             if (edge > 0.975) return keep(skinColor(c));
+            // Smaller toward the rim, so the pale flesh stops at the skin's
+            // edge instead of spilling over it (lane Fix7).
+            const rim = 1 - 0.45 * smoothstep(0.9, 0.975, edge);
             // Deeper in, a little yellower; lit as a hollow (inward normal),
             // with a shadow under the top edge.
             const depth = clamp((1 - edge) / 0.25, 0, 1);
@@ -4516,7 +4669,7 @@ export const RECIPES = {
             let col = mix("#fbf4dc", "#eedcaa", 0.6 * depth + 0.3 * (0.5 + 0.5 * fibre));
             col = mix(col, "#d9c07e", 0.35 * smoothstep(0.93, 0.975, edge));
             const l = dot(mul(c.n, -1), LIGHT);
-            return keep(shade(col, 0.86 + 0.2 * l - 0.08 * depth));
+            return keep(shade(col, 0.86 + 0.2 * l - 0.08 * depth), rim);
           },
         });
       }
@@ -4653,6 +4806,11 @@ export const RECIPES = {
         const os = mul(bn.away, sep);
         const place = (p) => add(add(quatRotate(qs, sub(p, bn.neck)), bn.neck), os);
         out.tokens[bn.body] = { base: bn.neck, quat: qs, offset: os };
+        // The pale insides (the fruit and the inner peel) are their own
+        // pieces, riding with the skin but shown only while it is open
+        // (lane Fix7: at rest they glinted through the skin as specks).
+        const open = on && s > bn.t0 - 0.02 && s < 3.6 ? 1 : 0;
+        out.tokens[bn.fruit] = { ...out.tokens[bn.body], visible: open };
         bn.strips.forEach((st, j) => {
           const t0 = bn.t0 + 0.12 * j;
           const fa = on ? easeOut(band(s, t0, t0 + 0.5)) * (1 - close) : 0;
@@ -4662,6 +4820,8 @@ export const RECIPES = {
           out.tokens[st.a] = { base: st.hingeA, quat: quatMul(qs, qa), offset: sub(place(st.hingeA), st.hingeA) }; // prettier-ignore
           const hb = add(quatRotate(qa, sub(st.hingeB, st.hingeA)), st.hingeA);
           out.tokens[st.b] = { base: st.hingeB, quat: quatMul(qs, quatMul(qa, qb)), offset: sub(place(hb), st.hingeB) }; // prettier-ignore
+          out.tokens[st.ia] = { ...out.tokens[st.a], visible: open };
+          out.tokens[st.ib] = { ...out.tokens[st.b], visible: open };
         });
       });
       cuesAt(
@@ -4703,10 +4863,12 @@ export const RECIPES = {
         col = shade(col, 1 - 0.12 * edge);
         return glossy(c, col, 0.35, 20, 0.74, 0.38);
       };
+      // Lane Fix7: side by side as in a real hand, just touching (they
+      // used to cross, the back ones' tips passing through the front one).
       const bananas = [
-        { rot: [0, -24, -6], pos: [0, 0, -0.18] },
+        { rot: [0, -4, -6], pos: [0, -0.02, -0.36] },
         { rot: [0, 4, 4], pos: [0, 0.02, 0] },
-        { rot: [0, 30, 12], pos: [0, 0.05, 0.18] },
+        { rot: [0, 12, 12], pos: [0, 0.03, 0.36] },
       ];
       // Each banana is pieces: its body (the skin down to BANANA_HINGE and
       // the fruit) and its peel beyond, three strips of two pieces each
@@ -4738,7 +4900,9 @@ export const RECIPES = {
       const fruit = k.param(
         (u, v) => {
           const t = th - 0.02 + v * (0.97 - th + 0.02);
-          return around(t, u * TAU, rad(t) * 0.84).p;
+          // (Well inside the skin, so none of it shows through as white
+          // specks: lane Fix7.)
+          return around(t, u * TAU, rad(t) * 0.78).p;
         },
         { grid: 64, normal: (u, v) => around(th + v * (1 - th), u * TAU, 1).d },
       );
@@ -4761,13 +4925,20 @@ export const RECIPES = {
         const toW = (p) => add(bn.pos, quatRotate(q, p));
         const dirW = (v) => quatRotate(q, v);
         const body = tok++;
+        const inside = tok++;
         const piece = (token) => ({ quat: q, pos: bn.pos, kind: "token", params: [token, 0] });
         k.add(stub, {
           ...piece(body),
           flat: 0.22,
           color: (c) => skinAt(c, c.v * th, c.u * TAU),
         });
-        k.add(fruit, { ...piece(body), flat: 0.3, weight: 1.2, pattern: false, color: fruitColor });
+        k.add(fruit, {
+          ...piece(inside),
+          flat: 0.3,
+          weight: 1.2,
+          pattern: false,
+          color: fruitColor,
+        });
         const strips = [];
         for (let j = 0; j < 3; j++) {
           const a0 = (j / 3) * TAU + 0.35;
@@ -4775,28 +4946,35 @@ export const RECIPES = {
           const am = (a0 + a1) / 2;
           const ta = tok++;
           const tb = tok++;
+          const ia = tok++;
+          const ib = tok++;
           const ha = around(th, am, rad(th));
           const hb = around(tm, am, rad(tm));
           strips.push({
             a: ta,
             b: tb,
+            ia,
+            ib,
             hingeA: toW(ha.p),
             hingeB: toW(hb.p),
             axisA: unit(dirW(cross(ha.f.t, ha.d))),
             axisB: unit(dirW(cross(hb.f.t, hb.d))),
           });
-          for (const [t0, t1, token] of [
-            [th, tm, ta],
-            [tm, 1, tb],
+          for (const [t0, t1, token, inner] of [
+            [th, tm, ta, ia],
+            [tm, 1, tb, ib],
           ]) {
+            // (Denser, so the pale inside never shows through: lane Fix7.)
             k.add(skinPatch(t0, t1, a0, a1, 1, false), {
               ...piece(token),
               flat: 0.22,
+              weight: 1.6,
               color: (c) => skinAt(c, t0 + c.v * (t1 - t0), a0 + c.u * (a1 - a0)),
             });
-            k.add(skinPatch(t0, t1, a0 + 0.04, a1 - 0.04, 0.93, true), {
-              ...piece(token),
-              flat: 0.22,
+            k.add(skinPatch(t0, t1, a0 + 0.04, a1 - 0.04, 0.88, true), {
+              ...piece(inner),
+              flat: 0.12,
+              size: 0.75,
               weight: 0.8,
               pattern: false,
               color: (c) => keep(lit(c, mix("#f3e6c0", "#e8d7a6", c.rand() * 0.5), 0.84, 0.25)),
@@ -4811,7 +4989,7 @@ export const RECIPES = {
             { ...piece(tb), flat: 0.3, weight: 2, color: (c) => lit(c, "#3a2716") },
           );
         }
-        list.push({ body, neck: toW(arc(0)), strips, ...moves[i] });
+        list.push({ body, fruit: inside, neck: toW(arc(0)), strips, ...moves[i] });
         k.reach(add(toW(arc(1)), [0, 0.3, 0]));
         k.reach(add(toW(arc(0.9)), [0, -0.45, moves[i].away[2]]));
       });
@@ -4871,12 +5049,13 @@ export const RECIPES = {
     build(k, o) {
       const R = 0.72;
       const peel = (c) => {
-        const n = c.noise(c.lp[0] * 45, c.lp[1] * 45, c.lp[2] * 45);
+        // Dimpled peel: soft pores a few splats wide (fine noise reads as grain).
+        const n = c.noise(c.lp[0] * 16, c.lp[1] * 16, c.lp[2] * 16);
         const col = shade(
           mix("#f7931e", "#ee7a12", 0.5 + 0.5 * c.fbm(c.lp[0] * 3, c.lp[1] * 3, c.lp[2] * 3, 2)),
-          0.93 + 0.12 * n,
+          0.97 + 0.05 * n,
         );
-        return glossy(c, col, 0.55, 30, 0.74, 0.38);
+        return glossy(c, col, 0.4, 30, 0.74, 0.38);
       };
       // Segments seen in a cut: angle a around the core, rho 0 centre .. 1 peel.
       const flesh = (a, rho, c) => {
@@ -4888,7 +5067,9 @@ export const RECIPES = {
         if (e > 0.465) return "#fde3b8";
         const juice = c.noise(Math.cos(a) * 3 + a * 6, rho * 9, 0.5);
         const col = mix("#fb9c1f", "#f57e0f", 0.5 + 0.5 * juice + 0.4 * (e - 0.25));
-        return c.noise(a * 30, rho * 30, 3) > 0.55 ? mix(col, "#ffd9a0", 0.5) : col;
+        // Juice sacs: soft streaks running out from the core.
+        const sac = smoothstep(0.35, 0.7, c.noise(a * 16, rho * 3, 3));
+        return mix(col, "#ffcf8a", 0.4 * sac);
       };
       // The whole orange is eight wedges (pieces), each its peel and two cut
       // faces, hinged at the bottom so it can fall open outwards.
@@ -4902,9 +5083,9 @@ export const RECIPES = {
         if (rho > 0.88) return "#fbeed6";
         if (x < 0.07) return "#fbeed6";
         // Juice sacs run out from the core towards the peel.
-        const sacs = c.noise(Math.atan2(y / H, x) * 18, rho * 4, 0.5);
-        const col = mix("#fb9c1f", "#f57e0f", 0.5 + 0.5 * c.noise(x * 9, y * 9, 1.5));
-        return sacs > 0.3 ? mix(col, "#ffcf8a", 0.55) : col;
+        const sacs = smoothstep(0.2, 0.6, c.noise(Math.atan2(y / H, x) * 16, rho * 3, 0.5));
+        const col = mix("#fb9c1f", "#f57e0f", 0.5 + 0.5 * c.noise(x * 5, y * 5, 1.5));
+        return mix(col, "#ffcf8a", 0.45 * sacs);
       };
       const whole = (pos) => {
         const n = 8;
@@ -4934,6 +5115,10 @@ export const RECIPES = {
               },
             ),
             {
+              even: true,
+              opacity: 1,
+              jitter: 0.01,
+              size: 1.08,
               pos,
               flat: 0.2,
               ...piece,
@@ -4960,9 +5145,13 @@ export const RECIPES = {
                 { grid: 32, normal: () => nrm },
               ),
               {
+                even: true,
+                opacity: 1,
+                jitter: 0.01,
+                size: 1.1,
                 pos,
                 flat: 0.15,
-                weight: 1.2,
+                weight: 1.3,
                 ...piece,
                 color: (c) => {
                   const rho = c.v;
@@ -5019,6 +5208,10 @@ export const RECIPES = {
         const q = quatMul(quatEuler(0, yaw, 0), quatEuler(tilt, 0, 0));
         const part = k.part("half", { pivot: add(pos, [0, -R * 0.6, 0]) });
         k.add(halfEllipsoid(k, R * 0.95, R * 0.95, R * 0.95), {
+          even: true,
+          opacity: 1,
+          jitter: 0.01,
+          size: 1.08,
           quat: q,
           pos,
           part,
@@ -5035,12 +5228,15 @@ export const RECIPES = {
             { grid: 64, normal: () => [0, 0, 1], thick: R * 0.9 },
           ),
           {
+            even: true,
+            opacity: 1,
+            jitter: 0.01,
+            size: 1.1,
+            weight: 1.3,
             quat: q,
             pos,
             part,
             flat: 0.15,
-            interior: 0.08,
-            core: "#f98d1c",
             color: (c) => {
               const col = flesh(c.u * TAU, c.v, c);
               return keep(mix(col, "#ffffff", 0.35 * spec(c, 30)));
@@ -5100,13 +5296,14 @@ export const RECIPES = {
       const B = 0.42;
       const C = 0.62;
       const skin = (c) => {
-        const n = c.noise(c.lp[0] * 60, c.lp[1] * 60, c.lp[2] * 60);
+        // Soft fuzz, a few splats across (finer noise reads as grain).
+        const n = c.noise(c.lp[0] * 20, c.lp[1] * 20, c.lp[2] * 20);
         const col = mix(
           "#8b6a3e",
           "#6a4a26",
           0.5 + 0.5 * c.fbm(c.lp[0] * 4, c.lp[1] * 4, c.lp[2] * 4, 2),
         );
-        return lit(c, shade(col, 0.9 + 0.2 * n), 0.74, 0.4);
+        return lit(c, shade(col, 0.94 + 0.12 * n), 0.74, 0.4);
       };
       // The cut face: x, y across the fruit scaled to the unit disc.
       const face = (x, y, c) => {
@@ -5114,7 +5311,7 @@ export const RECIPES = {
         const a = Math.atan2(y, x);
         if (rho > 0.97) return "#6f5230";
         if (rho > 0.92) return "#b8d86a";
-        const streak = 0.5 + 0.5 * Math.sin(a * 70 + 3 * c.noise(x * 6, y * 6, 0));
+        const streak = 0.5 + 0.5 * Math.sin(a * 34 + 3 * c.noise(x * 4, y * 4, 0));
         if (rho < 0.2) return mix("#f5f3d2", "#e7ecb0", smoothstep(0.1, 0.2, rho));
         if (rho < 0.44) {
           // A ring of small black seeds pointing outwards.
@@ -5124,7 +5321,9 @@ export const RECIPES = {
           const da = (s - j) * (TAU / n) * rho;
           const r0 = 0.33 + 0.05 * (hash3(j, 3, 7) - 0.5);
           const dr = rho - r0;
-          if ((dr / 0.05) ** 2 + (da / 0.02) ** 2 < 1) return keep("#1d1a12");
+          const sd = (dr / 0.05) ** 2 + (da / 0.02) ** 2;
+          if (sd < 1) return keep("#1d1a12", 0.8);
+          if (sd < 1.6) return keep(mix("#1d1a12", "#d9e89a", 0.6), 0.8);
           return mix("#d9e89a", "#9ccf2a", smoothstep(0.2, 0.44, rho) * (0.6 + 0.4 * streak));
         }
         return mix("#7fb80f", "#a6d83c", 0.35 * streak + 0.2 * smoothstep(0.6, 0.9, rho));
@@ -5146,10 +5345,13 @@ export const RECIPES = {
           const back = [-turn[0], -turn[1], -turn[2], turn[3]];
           halves.push({ token, face: faceToken, open, closed: pos, back });
           k.add(halfEllipsoid(k, A, B, C), {
+            even: true,
+            opacity: 1,
+            size: 1.08,
             quat: q,
             pos: open,
-            flat: 0.55,
-            jitter: 0.08,
+            flat: 0.45,
+            jitter: 0.04,
             kind: "token",
             params: [token, 0],
             // Lit as it lies at rest (closed), so the two halves match.
@@ -5167,10 +5369,14 @@ export const RECIPES = {
               { grid: 72, normal: () => [0, 0, 1] },
             ),
             {
+              even: true,
+              opacity: 1,
+              jitter: 0.01,
+              size: 1.1,
               quat: q,
               pos: open,
               flat: 0.15,
-              weight: 1.3,
+              weight: 1.4,
               kind: "token",
               params: [faceToken, 0],
               color: (c) => {
@@ -5188,11 +5394,14 @@ export const RECIPES = {
         const q = quatMul(quatEuler(0, yaw, 0), quatEuler(tilt, 0, 0));
         const part = k.part("half", { pivot: add(pos, [0, -0.3, 0]) });
         k.add(halfEllipsoid(k, A, B, C * 0.9), {
+          even: true,
+          opacity: 1,
+          size: 1.08,
           quat: q,
           pos,
           part,
-          flat: 0.55,
-          jitter: 0.08,
+          flat: 0.45,
+          jitter: 0.04,
           color: skin,
         });
         k.add(
@@ -5204,13 +5413,15 @@ export const RECIPES = {
             { grid: 72, normal: () => [0, 0, 1], thick: 0.4 },
           ),
           {
+            even: true,
+            opacity: 1,
+            jitter: 0.01,
+            size: 1.1,
             quat: q,
             pos,
             part,
             flat: 0.15,
-            weight: 1.3,
-            interior: 0.06,
-            core: "#8cc41a",
+            weight: 1.4,
             color: (c) => {
               const col = face(c.lp[0] / A, c.lp[1] / B, c);
               if (col.keep) return col;
