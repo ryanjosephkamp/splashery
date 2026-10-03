@@ -57,6 +57,8 @@ test("jelly blob: drag it and it stretches; let go and it wobbles back", async (
       ho.moveTo(s[0] + i * 10, s[1] - i * 3);
       player.update(1 / 60);
     }
+    // Held still a moment: the pull catches up with the finger.
+    for (let i = 0; i < 20; i++) player.update(1 / 60);
     const held = Math.hypot(...player.driver.grab.pull) / R;
     ho.release();
     let crossed = false;
