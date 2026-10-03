@@ -280,10 +280,10 @@ export class CameraDepth {
     if (last && last.length === cp.length)
       for (let i = 0; i < cp.length; i += 4) {
         const d = Math.abs(cp[i] - last[i]) + Math.abs(cp[i + 1] - last[i + 1]) + Math.abs(cp[i + 2] - last[i + 2]); // prettier-ignore
-        if (d < 36) {
-          cp[i] = last[i] + (cp[i] - last[i]) * 0.35;
-          cp[i + 1] = last[i + 1] + (cp[i + 1] - last[i + 1]) * 0.35;
-          cp[i + 2] = last[i + 2] + (cp[i + 2] - last[i + 2]) * 0.35;
+        if (d < 20) {
+          cp[i] = last[i] + (cp[i] - last[i]) * 0.5;
+          cp[i + 1] = last[i + 1] + (cp[i + 1] - last[i + 1]) * 0.5;
+          cp[i + 2] = last[i + 2] + (cp[i + 2] - last[i + 2]) * 0.5;
         }
       }
     this.lastColors = cp.slice();
