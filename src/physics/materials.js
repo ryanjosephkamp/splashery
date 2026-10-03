@@ -35,6 +35,8 @@
 //   paper plane's nose, a bolt), as strongly as `vane`.
 // - heavy: how a heavy thing can't be thrown fast (from the mass: a throw's
 //   top speed scales by (0.6 kg / mass)^0.2, between 0.45 and 1.25).
+// - drift: a light ball wanders sideways on the air as it falls (times
+//   gravity; a beach ball 0.06).
 // - fingertip: true for a ball that spins on a fingertip (an upward flick
 //   while holding it). warm: [first, top] bounce for a squash ball that
 //   gets livelier each throw.
@@ -59,7 +61,7 @@ export const MATERIALS = {
   "tennis-ball": { mass: 0.058, r: 0.0335, bounce: 0.75, friction: 0.6, roll: 0.03, cd: 0.55, spin: 0.8, magnus: 0.03 }, // prettier-ignore
   baseball: { mass: 0.145, r: 0.0366, bounce: 0.55, friction: 0.5, roll: 0.04, cd: 0.35, spin: 1, magnus: 0.06 }, // prettier-ignore
   softball: { mass: 0.18, r: 0.0485, bounce: 0.45, friction: 0.5, roll: 0.05, cd: 0.4, spin: 0.8, magnus: 0.04 }, // prettier-ignore
-  "beach-ball": { mass: 0.08, r: 0.3, bounce: 0.6, friction: 0.5, roll: 0.05, cd: 0.47, spin: 0.5, magnus: 0.04, spinDecay: 0.4 }, // prettier-ignore
+  "beach-ball": { mass: 0.08, r: 0.3, bounce: 0.6, friction: 0.5, roll: 0.05, cd: 0.47, spin: 0.5, magnus: 0.04, spinDecay: 0.4, drift: 0.06 }, // prettier-ignore
   "golf-ball": { mass: 0.0459, r: 0.02135, bounce: 0.78, friction: 0.5, roll: 0.03, cd: 0.27, spin: 1.2, magnus: 0.07 }, // prettier-ignore
   "rugby-ball": { mass: 0.44, r: 0.15, bounce: 0.5, friction: 0.6, roll: 0.1, cd: 0.2, spin: 0.6, tumble: 9 }, // prettier-ignore
   volleyball: { mass: 0.27, r: 0.105, bounce: 0.7, friction: 0.6, roll: 0.04, cd: 0.47, spin: 0.6, magnus: 0.03 }, // prettier-ignore
@@ -165,6 +167,19 @@ export function airForce(b, mat, G, R, h) {
     for (let i = 0; i < 3; i++) w[i] = (w[i] + t[i] * g * 20) * Math.exp(-6 * Math.min(1, sp / (0.5 * R)) * h); // prettier-ignore
   }
   for (let i = 0; i < 3; i++) v[i] += dv[i];
+}
+
+// A light ball drifts on the air as it falls: a slow, wandering sideways
+// push (what a breath of wind and its own wake do to a beach ball), as
+// strong as `drift` times gravity, while it is off the ground.
+export function driftForce(b, mat, G, h) {
+  if (b.fixed || b.held || !mat.drift) return;
+  const t = (b.driftT = (b.driftT ?? b.id * 1.7) + h);
+  const a = mat.drift * G;
+  b.vel[0] += a * Math.sin(t * 1.3 + Math.sin(t * 0.47) * 2) * h;
+  b.vel[2] += a * Math.cos(t * 0.9 + Math.sin(t * 0.61) * 2) * h;
+  // (And it turns lazily as it goes.)
+  b.omega[1] += 0.6 * a * Math.sin(t * 0.7) * h;
 }
 
 // Rolling resistance on the ground: the roll slows by `roll` times gravity

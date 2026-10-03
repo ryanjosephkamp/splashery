@@ -24,7 +24,7 @@
 // { on, shake, finger, point, rolled, flee(key, pos) }.
 
 import { quat, v3, surfacePoints } from "./world.js";
-import { materialFor, applyMaterial, airForce, rollForce, throwSpin } from "./materials.js";
+import { materialFor, applyMaterial, airForce, rollForce, throwSpin, driftForce } from "./materials.js"; // prettier-ignore
 
 // ---- Water --------------------------------------------------------------
 
@@ -494,6 +494,7 @@ export class Extras {
         // (Drag, lift and spin in the air, not under water.)
         const wet = this.water && b.pos[1] - b.bound < this.water.level;
         if (!wet) airForce(b, m, G, R, h);
+        if (!wet && !touching) driftForce(b, m, G, h);
         if (touching && m.roll != null) rollForce(b, m, G, h);
       }
       if (this.water) waterForce(b, this.floats.get(b), this.water, h);

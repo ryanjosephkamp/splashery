@@ -6,7 +6,7 @@
 
 import { test, expect } from "@playwright/test";
 import { World, Body, surfacePoints, quat, v3 } from "../src/physics/world.js";
-import { materialFor, applyMaterial, airForce, rollForce, throwSpin } from "../src/physics/materials.js"; // prettier-ignore
+import { materialFor, applyMaterial, airForce, rollForce, throwSpin, driftForce } from "../src/physics/materials.js"; // prettier-ignore
 import { sphereSubmerged, floatShape, restLevel, waterForce, airBuoyancy, wellForce, wheelForce, ShakeMeter, FleeField, densityOf } from "../src/physics/fields.js"; // prettier-ignore
 
 const G = 26; // Hands-on's gravity, in toy radii per second squared
@@ -24,6 +24,7 @@ function ballWorld(name, { floorY = -1 } = {}) {
     w.force = (h) => {
       airForce(b, mat, G, R, h);
       if (b.touchTick >= w.tick - 1) rollForce(b, mat, G, h);
+      else driftForce(b, mat, G, h);
     };
   }
   return { w, b, mat };
@@ -68,12 +69,15 @@ test("materials: a beach ball floats down; a basketball drops", () => {
     const { w, b } = ballWorld(name, { floorY: -20 });
     for (let i = 0; i < 600; i++) {
       w.step(STEP);
-      if (b.pos[1] < -6) return i * STEP;
+      if (b.pos[1] < -6) return { t: i * STEP, side: Math.hypot(b.pos[0], b.pos[2]) };
     }
-    return Infinity;
+    return { t: Infinity, side: 0 };
   };
-  const beach = fallTime("beach-ball");
-  const basket = fallTime("basketball");
+  const { t: beach, side } = fallTime("beach-ball");
+  const { t: basket, side: straight } = fallTime("basketball");
+  // It drifts sideways as it falls; the basketball drops straight.
+  expect(side).toBeGreaterThan(0.08);
+  expect(straight).toBeLessThan(1e-6);
   const free = Math.sqrt((2 * 6) / G);
   expect(Math.abs(basket - free)).toBeLessThan(0.05); // barely slowed
   expect(beach).toBeGreaterThan(free * 1.2); // the air holds it up

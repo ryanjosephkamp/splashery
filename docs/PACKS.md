@@ -667,10 +667,11 @@ The keys: `mass` (kg) and `r` (m) with `cd` set the air's drag (the real thing, 
 much a throw spins it, from where the finger holds it: a low grab gives backspin), `spinDecay`,
 `magnus` (the curve a spin gives), `lift` with `up`, `gyro` and `fade` (a disc's glide, tilt-hold
 and bank), `nose` with `vane` (flies nose first: a shuttlecock's cork), `spiral` and `tumble` (a
-football's spiral, a rugby ball's end over end), `hook` (a bowling ball), `fingertip: true` (an
-upward flick while holding it spins it on the fingertip; the basketball) and `warm: [first, top]` (a
-squash ball livelier each throw). Lift and the curve are set to show at Hands-on's slow throws, in
-the real direction and order. Pieces take a material too: `material` in a piece's def.
+football's spiral, a rugby ball's end over end), `hook` (a bowling ball), `drift` (a light ball
+wanders sideways as it falls; the beach ball), `fingertip: true` (an upward flick while holding it
+spins it on the fingertip; the basketball) and `warm: [first, top]` (a squash ball livelier each
+throw). Lift and the curve are set to show at Hands-on's slow throws, in the real direction and
+order. Pieces take a material too: `material` in a piece's def.
 
 **A water line** (`hands.water`): the toy floats on a round pool, bobs and settles; a boat (any
 non-round toy) rocks and rights itself, since each point under water lifts where it is. By default
