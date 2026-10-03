@@ -777,9 +777,10 @@ export const TOY_HELP = {
       "A fire needs three things: fuel to burn, heat to start it, and oxygen from the air. Take any one away and it goes out. The yellow and orange glow of the flames comes from tiny bits of soot, heated until they shine.\n\nThis campfire has logs leaning together in a ring of stones, on a bed of glowing embers. Tap it to stoke the fire and the flames leap up with more sparks, then settle down again. Set how big the fire is in the Toy tab. A ring of stones helps keep a real campfire from spreading.",
   },
   "storm-cloud": {
-    howTo: "Tap for thunder. Try the Rain slider in the Toy tab.",
+    howTo:
+      "Tap for thunder: lightning strikes under your finger. Try the Rain slider in the Toy tab.",
     about:
-      "A thunderstorm cloud can tower more than 10 kilometers into the sky. Inside it, bits of ice and water crash together and build up electric charge, until a giant spark, lightning, jumps across. Lightning heats the air around it to about 30,000 degrees Celsius, hotter than the surface of the Sun, and the air bursts outward with the boom we call thunder.\n\nThis cloud rains and flashes with lightning by itself. Tap it for a big strike and a clap of thunder. Light travels much faster than sound, so count the seconds between flash and thunder: every 3 seconds is about 1 kilometer away.",
+      "A thunderstorm cloud can tower more than 10 kilometers into the sky. Inside it, bits of ice and water crash together and build up electric charge, until a giant spark, lightning, jumps across. Lightning heats the air around it to about 30,000 degrees Celsius, hotter than the surface of the Sun, and the air bursts outward with the boom we call thunder.\n\nThis cloud rains and flashes with lightning by itself. Tap it for a big strike and a clap of thunder: the bolt comes straight down from the cloud where you tapped. Light travels much faster than sound, so count the seconds between flash and thunder: every 3 seconds is about 1 kilometer away.",
   },
   "lava-lamp": {
     howTo: "Tap to heat it up. Pick colors, blobs and flow in the Toy tab.",
@@ -1016,9 +1017,10 @@ export const TOY_HELP = {
       "A yo-yo is two disks joined by a short axle, with a string tied around the axle. Thrown down, it unwinds and spins fast; the spin keeps it steady, and a little tug on the string makes it wind itself back up into your hand. Children in ancient Greece played with yo-yos of wood, metal and clay.\n\nThis one bobs gently on its string. Tap it to throw it: it drops, spinning as the string unwinds, and then climbs back up the string to where it started. Pick its color in the Toy tab.",
   },
   "puzzle-cube": {
-    howTo: "Drag across a face to turn a row or column. Tap to scramble or solve it.",
+    howTo:
+      "Drag across a face to turn a row or column. Tap to scramble or solve it; tap again to pause.",
     about:
-      "A twisting puzzle cube: 26 small cubes around a hidden core, with one color on each of its six faces. Each turn moves a whole row or column of nine cubes, and the puzzle is to bring every face back to one color.\n\nHere every little cube is its own piece, and the cube keeps track of each turn, so you can really solve it: drag across a face to turn that row or column. A tap scrambles a solved cube, or turns a scrambled one back to solved, one layer at a time, and solving it by hand earns a hop and a chime. The cube has about 43 quintillion arrangements, yet any of them can be solved in 20 moves or fewer.",
+      "A twisting puzzle cube: 26 small cubes around a hidden core, with one color on each of its six faces. Each turn moves a whole row or column of nine cubes, and the puzzle is to bring every face back to one color.\n\nHere every little cube is its own piece, and the cube keeps track of each turn, so you can really solve it: drag across a face to turn that row or column. A tap scrambles a solved cube, or turns a scrambled one back to solved, one layer at a time. Tap while it turns and it pauses once the turn in progress lands, so you can take over by hand: your own move ends the automatic one, and the next tap starts again from there. Solving it by hand earns a hop and a chime. The cube has about 43 quintillion arrangements, yet any of them can be solved in 20 moves or fewer.",
   },
   "spring-toy": {
     howTo: "Tap it to hurry it along; it flips end over end faster.",
@@ -1145,7 +1147,8 @@ export const TOY_HELP = {
       "A hoodie is a sweatshirt with a hood, first made in the 1930s for people working in cold places. Its soft fleece is knitted cotton brushed on the inside, and a drawstring runs through the edge of the hood to pull it snug. This one has raglan sleeves, whose seams run from the armpit up to the collar.\n\nIt is made from a detailed 3D model of a real hoodie. Tap it and the hood flops forward and flips back up as the drawstrings swing, then the sleeves swing up, cross in front and settle back.",
   },
   sunglasses: {
-    howTo: "Tap them to fold the arms, flip the glasses round and darken the lenses.",
+    howTo:
+      "Tap them (the frame or a lens) to fold the arms, flip the glasses round and darken the lenses.",
     about:
       "These are round glasses with light-changing lenses. Special molecules in the lenses change shape in the sun's ultraviolet light and start to absorb light, so the lenses turn dark outdoors and clear again a few minutes after you go inside.\n\nThe frame comes from a detailed 3D model of real vintage spectacles. Tap them and the arms fold in on their hinges one after the other, the glasses flip over to face you and the lenses darken from clear to deep gray, then everything unfolds and clears.",
   },
@@ -1161,9 +1164,9 @@ export const TOY_HELP = {
       "The sword in the stone comes from the old legends of King Arthur of Britain. A sword was stuck fast in a great stone, and only the true king could pull it out. Many strong knights tried and failed, until the young Arthur drew it out easily and was made king.\n\nTap it to try: the sword sticks at first and wiggles, then slides free and rises in a shower of golden sparkles. Tap again to put it back in the stone. The Arthur stories have been told and retold for more than 800 years.",
   },
   shield: {
-    howTo: "Tap it and it blocks a blow: sparks fly and the emblem gleams.",
+    howTo: "Tap it and it blocks a blow where you tap: sparks fly and the emblem gleams.",
     about:
-      "A heraldic shield carries a coat of arms, a painted design that showed who a knight was, even when a helmet hid the face. Heraldry has its own words: the background is the field, and a shape on it is a charge. A chevron is an upside-down V, a bend is a stripe from corner to corner, a saltire is an X-shaped cross, and per pale means split down the middle.\n\nTap it and it takes an unseen knock: it jolts and rocks, sparks spray off its iron rim, and a gleam sweeps across the emblem. Pick one of seven designs and the colors of the field and the charge in the Toy tab.",
+      "A heraldic shield carries a coat of arms, a painted design that showed who a knight was, even when a helmet hid the face. Heraldry has its own words: the background is the field, and a shape on it is a charge. A chevron is an upside-down V, a bend is a stripe from corner to corner, a saltire is an X-shaped cross, and per pale means split down the middle.\n\nTap it and it takes an unseen knock right where you tapped: it jolts and rocks away from the blow, sparks spray off the spot, and a gleam sweeps across the emblem. Pick one of seven designs and the colors of the field and the charge in the Toy tab.",
   },
   "bow-and-target": {
     howTo: "Tap to shoot an arrow; tap again to go back.",
@@ -1411,7 +1414,7 @@ export const TOY_HELP = {
   "gaussian-splatting": {
     howTo: "Tap it: random splats learn the photo. Pick another View in the Toy tab.",
     about:
-      "Gaussian splatting draws a scene with many soft, colored blobs called splats. Each one has a place, a size in three directions, a turn, a color and an opacity. A scan's splats are trained the way a network learns: start from a random cloud, compare the picture it makes with the photos, and nudge every splat a little, again and again, until they match.\n\nTap it: a cloud of random splats slides, stretches and recolors into the strawberry photo, a real fit of 2,400 splats, while its error falls on the chart. Other views show one splat with its three axes, a duck whose splats shrink to dots, and the back-to-front order splats are drawn in.",
+      "Gaussian splatting draws a scene with many soft, colored blobs called splats. Each one has a place, a size in three directions, a turn, a color and an opacity. A scan's splats are trained the way a network learns: start from a random cloud, compare the picture it makes with the photos, and nudge every splat a little, again and again, until they match.\n\nTap it: a cloud of random splats slides, stretches and recolors into the strawberry photo, a real fit of 2,400 splats, while its error falls on the chart. Other views show one splat with its three axes, which a tap trains: it starts from a wrong guess and gradient steps move its place, turn, sizes, color and opacity toward the target outline, big steps first and then smaller ones, as in a real fit; a duck whose splats shrink to dots, and the back-to-front order splats are drawn in.",
   },
   "word-vectors": {
     howTo: "Tap it to work out king − man + woman. Type your own words in the Toy tab.",
@@ -1540,9 +1543,9 @@ export const TOY_HELP = {
 
   // ---- Lab (lane Lab) -------------------------------------------------------------------
   "splat-field": {
-    howTo: "Tap to send a pulse through it. Pick a Field in the Toy tab.",
+    howTo: "Tap to send a pulse through it; tap again for another. Pick a Field in the Toy tab.",
     about:
-      "Nearly 300,000 splats, and the graphics chip works out where every one of them is, and its color, again every frame. Each splat only knows its own two numbers, u and v; a small program turns them and the time into a place. That is why so many splats can move smoothly at once.\n\nThe galaxy's stars each follow an oval orbit, turned a little more the farther out it is, so the ovals crowd into two spiral arms that stay while every star keeps moving. The ocean is four waves added together, each splat tilted to the water's slope, and the knot is a flow along a knotted tube. Tap to send a bright ring out through the galaxy, drop a stone in the sea, or push the flow once more around the knot.",
+      "Nearly 300,000 splats, and the graphics chip works out where every one of them is, and its color, again every frame. Each splat only knows its own two numbers, u and v; a small program turns them and the time into a place. That is why so many splats can move smoothly at once.\n\nThe galaxy's stars each follow an oval orbit, turned a little more the farther out it is, so the ovals crowd into two spiral arms that stay while every star keeps moving. The ocean is four waves added together, each splat tilted to the water's slope, and the knot is a flow along a knotted tube. Tap to send a bright ring out through the galaxy, drop a stone in the sea where you tap, or push the flow once more around the knot. Each tap adds its own: tap the sea in a few places and the rings cross.",
   },
 
   // ---- Science (lane Science) -----------------------------------------------------------
@@ -1584,9 +1587,9 @@ export const TOY_HELP = {
       "A snowman is built from big balls of snow rolled across the ground, stacked up and given a face of coal, a carrot nose, stick arms, a scarf and a hat. Snow packs best when it is just at the melting point and a little wet, so the flakes stick together. Fresh snow is mostly air, which is why it is so light and fluffy.\n\nTap it and it melts: the snowballs shrink, the head first, drips fall, and the hat, nose, coals, arms and scarf drop off one by one into a spreading puddle. Then it builds itself again from the bottom up. The Warmth slider in the Toy tab melts it the same way.",
   },
   fireworks: {
-    howTo: "Tap it to launch a firework; each one is different.",
+    howTo: "Tap it to launch a firework; tap quickly for a few at once.",
     about:
-      "Fireworks were invented in China more than a thousand years ago. A firework shell is shot high into the air, where it bursts and throws out little pellets called stars, which burn in bright colors. The colors come from metals mixed in: strontium burns red, barium green, copper blue and sodium yellow.\n\nTap it to launch: a rocket rises from one of the tubes in the crate and bursts in that tube's color. Each tap fires a different tube and a different shell: a round peony, a ring, a drooping willow or a star, so no two in a row look alike.",
+      "Fireworks were invented in China more than a thousand years ago. A firework shell is shot high into the air, where it bursts and throws out little pellets called stars, which burn in bright colors. The colors come from metals mixed in: strontium burns red, barium green, copper blue and sodium yellow.\n\nTap it to launch: a rocket rises from one of the tubes in the crate and bursts in that tube's color. Each tap fires a different tube and a different shell: a round peony, a ring, a drooping willow or a star, so no two in a row look alike. Tap quickly and up to three fly at once, one from each tube.",
   },
   "decorated-tree": {
     howTo: "Tap to switch the lights on or off.",
@@ -1599,9 +1602,9 @@ export const TOY_HELP = {
       "Decorating eggs with bright patterns is a spring tradition in many countries, especially at Easter. In Ukraine and nearby lands, painted eggs called pysanky are made by drawing lines in melted wax, dipping the egg in dye, and repeating with darker colors; the wax keeps each color where it was drawn.\n\nTap it to spin it. Pick a folk, striped, dotted, zigzag, flower or star pattern and its two colors in the Toy tab. Try spinning a real hard-boiled egg: it spins smoothly, while a raw one wobbles and stops, because the runny inside sloshes.",
   },
   "paper-lantern": {
-    howTo: "Tap it to set it swinging on its string.",
+    howTo: "Tap it to set it swinging on its string; tap again for another push.",
     about:
-      "A paper lantern is a light made of thin paper stretched over a frame of ribs, glowing from a light inside. In China and many other places, red lanterns stand for luck and happiness, and thousands are hung up for the Lantern Festival, which ends the Lunar New Year celebrations on the first full moon of the year.\n\nTap it and it swings on its string like a pendulum, back and forth, slowing a little on each swing until it hangs still again. Pick a red, gold, teal or purple lantern in the Toy tab.",
+      "A paper lantern is a light made of thin paper stretched over a frame of ribs, glowing from a light inside. In China and many other places, red lanterns stand for luck and happiness, and thousands are hung up for the Lantern Festival, which ends the Lunar New Year celebrations on the first full moon of the year.\n\nTap it and it swings on its string like a pendulum, back and forth, slowing a little on each swing until it hangs still again. Tap while it swings to give it another push. Pick a red, gold, teal or purple lantern in the Toy tab.",
   },
   diya: {
     howTo: "Tap to light the ring of diyas; tap again to put them out.",
