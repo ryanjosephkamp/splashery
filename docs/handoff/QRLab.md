@@ -76,16 +76,20 @@ pinned), and this handoff file.
   brief, and the test hook once it's documented), `tools/effect-clip.mjs` (how tools drive the toy).
 - Your handoff file: start it with this brief, word for word, under "## Brief", then keep "## State
 
-October 3, 2026, measured against lane QR's toy at `f86e0880` (PR #216).
+October 3, 2026 (Sonnet 5.5). Round 2 done against lane QR's `7839a25b` (round 1 was `f86e0880`).
 
-- Done: `tools/qr-scan-lab.mjs` (toy and reference sources), `tools/qr-scan-lab/` (`sim.mjs` capture
-  simulator, `readers.mjs` with plain and inverted passes, `toy-source.mjs`, `report.mjs`,
-  `cards.mjs`, data), the measured scorecard `docs/audits/qr-scan-lab-2026-10.md`,
-  `tests/qrl.spec.mjs` (skips itself until `src/packs/qr.js` is on the branch; passes against the
-  toy: 44 s), and seven cards (lane id `QRL`, ids `qrl-<style>`) on Effect review page 2.
-- Rerun: serve a tree with the toy on port 4173, then
-  `SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/qr-scan-lab.mjs --source=toy --tag=<name>`
-  (see its header for the options; the full sweep ran as three parallel shards in about 35 minutes),
-  `node tools/qr-scan-lab/report.mjs toy`, `node tools/qr-scan-lab/cards.mjs`.
-- Next: rerun when lane QR changes its styles or defaults; the sweep used 12 of the 22 conditions,
-  and the non-preset color schemes only on the 43-character text.
+- Scorecard `docs/audits/qr-scan-lab-2026-10.md`: a "Round 2" section (headline numbers, round 1
+  against round 2, the Alive loop table, the pale-wall Neon) above round 1's measured tables.
+- Tools in `tools/qr-scan-lab/`: `toy-source.mjs`, `report.mjs`, `compare.mjs` (round 1 in `data/r1`
+  against round 2 in `data/`), `alive.mjs` (samples 12 of the loop's 44 frames per style, front-on
+  and at 10° and 20° yaw; Alive is a motion control, `player.motion.setControl("alive", 1)`, not a
+  style option) and `cards.mjs`. Data in `tools/qr-scan-lab/data/`.
+- `tests/qrl.spec.mjs` (eight styles, four captures each) passes against `7839a25b` (44 s); it skips
+  itself where `src/packs/qr.js` is missing.
+- Effect review page 2, lane `QRL`: cards `qrl-<style>-r2` replace the first seven (`replacedBy`),
+  and `qrl-neon-light` is new.
+- Rerun: serve a tree with the toy on port 4173, `node tools/qr-scan-lab.mjs --source=toy --tag=<n>`
+  (about 25 minutes as three shards), `report.mjs toy`, `compare.mjs`, `alive.mjs`, `cards.mjs`.
+- Open: the full-size (1,024 px) camera captures put about 15 px on each module, where the readers
+  themselves lose codes; read the shrunk (8 px) rows for phone-like results. Each 3D cell is 3
+  captures at one level.
