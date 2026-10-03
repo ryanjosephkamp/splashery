@@ -169,6 +169,8 @@ function splashScene(k, o) {
       },
       friction: 0.025,
       tension: 0,
+      // (its crown is no flat pool: drawn from its particles)
+      flatTop: false,
       // (no stream to hold together: drawn barely stretched, so the ball and
       // the crown's drops stay round; larger sprites join the crown's thin
       // sheet)

@@ -25,7 +25,7 @@ const opt = (name, def) => {
 };
 const [outDir, ...clips] = args.filter((a) => !a.startsWith("--"));
 if (!outDir) throw new Error("Usage: node tools/fl-clip.mjs <out-dir> [clip ...]");
-const ALL = ["pour", "splash", "soda", "smoke", "flame", "lava"];
+const ALL = ["pour", "splash", "soda", "smoke", "flame", "lava", "orbit"];
 const list = clips.length ? clips : ALL;
 const STEP = 1 / Number(opt("fps", 15));
 const WIDTH = Number(opt("width", 360));
@@ -221,7 +221,24 @@ async function record(clip) {
     await open({ scene: "glass", liquid: "lava" }, { at: [-0.2, 1.0, 0], zoom: 0.85 });
     await play(0.6);
     await tapHandle();
-    await play(6.5);
+    // (long enough to see the last of it crust over)
+    await play(10.5);
+  } else if (clip === "orbit") {
+    // The glass's top seen all the way around (r6: the surface's edge).
+    for (const liquid of ["water", "soda"]) {
+      await open({ scene: "glass", liquid }, { at: [0, 0.45, 0], zoom: 0.45 });
+      await tap();
+      await play(3.6);
+      for (let i = 0; i < 24; i++) {
+        await run((k) => {
+          const cam = window.__splashery.player.camera;
+          cam.home = { ...cam.home, yaw: 0.55 + (k / 24) * Math.PI * 2, pitch: 0.2 + 0.45 * Math.sin((k / 24) * Math.PI) }; // prettier-ignore
+          cam.cur = { ...cam.home };
+          cam.tgt = { ...cam.home };
+        }, i);
+        await play(1 / 6);
+      }
+    }
   } else if (clip === "flame") {
     await open({ scene: "candle" }, { at: [0, 1.08, 0], zoom: 0.4 });
     await play(4.0);

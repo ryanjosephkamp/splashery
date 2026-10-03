@@ -704,6 +704,7 @@ uniform uGlassB: vec4f;
 uniform uMisc: vec4f;
 uniform uFoam: vec4f;
 uniform uDrop: vec2f;
+uniform uLevel: vec4f;
 var uProps: texture_2d<uff>;
 uniform uPropInfo: vec4f;
 uniform uHeat: vec4f;
@@ -1078,13 +1079,7 @@ fn sceneAt(uv: vec2f) -> vec3f {
     if (uniform.uGlassB.w > 0.5 && n.y > 0.6) {
       let Pt2 = (uniform.uViewToToy * vec4f(P, 1.0)).xyz;
       let rl2 = length(Pt2.xz - uniform.uGlassA.xz);
-      // (r6: a real meniscus is a hairline that catches a little light, not
-      // a white ring: about a pixel wide, a soft highlight of the room)
-      let w = 0.8 * uniform.uMisc.w * length(Pt2 - eye);
-      let r0 = uniform.uGlassA.w - 0.5 * uniform.uMisc.z;
-      let ring = smoothstep(r0 - 2.0 * w, r0 - w, rl2) * (1.0 - smoothstep(r0, r0 + w, rl2));
       liq = mix(liq, refl, 0.1 * smoothstep(0.6, 0.95, n.y));
-      liq = mix(liq, refl * 1.15 + vec3f(0.06), ring * 0.3);
     }
     let thin = uniform.uDrop.x * (1.0 - smoothstep(uniform.uDrop.y, 4.0 * uniform.uDrop.y, thick));
     liq = mix(liq, sky(normalize(vec3f(n.x, 1.0, n.z))) * 0.75 + spec, thin);
@@ -1115,6 +1110,39 @@ fn sceneAt(uv: vec2f) -> vec3f {
     liqZ = -P.z;
     liqT = mix(1.0, dot(T, vec3f(0.333)), a);
     col = mix(col, liq, a);
+  }
+  // A thin liquid's top in a glass (r6): a flat surface at the pool's level
+  // that reaches the glass's inner wall, so it reads as one surface from any
+  // angle, with a hairline meniscus where it meets the wall (uLevel: the
+  // level, on).
+  if (uniform.uLevel.y > 0.5 && uniform.uGlassB.w > 0.5 && abs(rd.y) > 1e-4) {
+    let tP = (uniform.uLevel.x - eye.y) / rd.y;
+    let hit = eye + rd * tP;
+    let rIn = uniform.uGlassA.w;
+    let rr = length(hit.xz - uniform.uGlassA.xz);
+    let pz = -(uniform.uToyToView * vec4f(hit, 1.0)).z;
+    if (tP > 0.0 && rr < rIn && pz < liqZ + 0.02 && pz < tFront + 1e9) {
+      let nT = vec3f(0.0, 1.0, 0.0);
+      let V2 = -rd;
+      let F2 = fresnel(abs(rd.y), 0.02);
+      let refl2 = sky(reflect(rd, nT));
+      // through the liquid to the glass's bottom
+      let depthL = max(0.0, uniform.uLevel.x - uniform.uGlassA.y - uniform.uGlassB.z) / max(abs(rd.y), 0.15);
+      let tView = depthL * (uniform.uToyToView * vec4f(0.0, 1.0, 0.0, 0.0)).y;
+      let T2 = exp(-uniform.uAbsorb.rgb * abs(tView) * 1.0);
+      let behind2 = sceneAt(clamp(uv0 + vec2f(0.0, 0.004), vec2f(0.001), vec2f(0.999)));
+      let body2 = mix(behind2 * T2 + uniform.uColor.rgb * (1.0 - T2) * 0.25, uniform.uColor.rgb * 0.6, uniform.uColor.a);
+      let H2 = normalize(normalize(uniform.uLight.xyz) + V2);
+      var top = mix(body2, refl2, F2) + vec3f(pow(max(dot(nT, H2), 0.0), 180.0) * 1.6);
+      // the meniscus: the surface curves up the wall in its last millimeter,
+      // a hairline that catches the room's light
+      let px = uniform.uMisc.w * tP;
+      let men = smoothstep(rIn - 2.5 * px, rIn - 0.5 * px, rr);
+      top = mix(top, refl2 * 1.1 + vec3f(0.05), men * 0.35);
+      col = top;
+      liqZ = pz;
+      liqT = dot(T2, vec3f(0.333));
+    }
   }
   // Foam and spray over the liquid.
   if (uniform.uFoam.w > 0.5) {
@@ -1464,6 +1492,9 @@ export class FluidSurface {
     scope.resolve("uFoam").setValue([...p.foam, liquid && src.diffuse?.n ? 1 : 0]);
     scope.resolve("uDrop").setValue([src.drops ?? 0, (src.radius ?? 0) * toyScale * 2]);
     if (!liquid) scope.resolve("uHeat").setValue([0, 0, 0, 0]);
+    scope
+      .resolve("uLevel")
+      .setValue(liquid && src.level != null ? [src.level, 1, 0, 0] : [0, 0, 0, 0]);
     // The props (index.js), traced on WebGPU only.
     const props = d.isWebGPU ? p.props : null;
     scope.resolve("uProps").setValue(this.propTexture(props));
