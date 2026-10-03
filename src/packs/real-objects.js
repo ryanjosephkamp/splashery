@@ -87,7 +87,6 @@ export function addScan(
     exact = false,
     smooth = 0,
     cell = 0.012,
-    skin, // lane Hands engine C: (p, filePart) => a kit skin ([a, b, s] or [a, b, c, d, s, t]) or null
   } = {},
 ) {
   k.data = k.data || {}; // sortWhileMoving keeps its state here
@@ -135,7 +134,6 @@ export function addScan(
       opacity: 1,
       part: parts[fp] ?? 0,
       pattern: typeof pattern === "function" ? !!pattern(fp) : pattern,
-      ...(skin ? { skin: skin([scan.pos[i * 3], scan.pos[i * 3 + 1], scan.pos[i * 3 + 2]], fp) ?? undefined } : {}), // prettier-ignore
     };
   });
   // The tests find the model's splats in the buffer through this (item.start, item.end).
@@ -1365,53 +1363,19 @@ const HD = {
   ],
 };
 
-// Hands-on (lane Hands engine C): the hood is a sheet of cloth. Seen from
-// the side it is an arch over the head, so its grid runs across it (COLS,
-// left to right) and around a line through the head from ear to ear (ROWS,
-// from the back of the neck, over the top, to the front edge and down to
-// the neck in front); each node sits on the hood's own surface, and nodes
-// at the neck are sewn on. The hood's splats follow the four nodes around
-// them.
-const HOOD = { rows: 9, cols: 5, yc: 0.45, zc: 0.02, x0: -0.2, x1: 0.2, a0: -1.5, a1: 4.0 };
-HOOD.angle = (p) => {
-  const a = Math.atan2(p[1] - HOOD.yc, -(p[2] - HOOD.zc)); // 0 at the back, pi/2 on top
-  return a < -2 ? a + 2 * Math.PI : a;
+// Hands-on (lane Hands engine C): the hood is the scan's own hood part, cut
+// out with hard edges, on a sprung hinge across the neck (the tap's hinge).
+// A short rope from the neck to the hood's crown takes the finger; the hood
+// turns about the hinge as far as the crown has swung forward or back, so
+// it flops as one solid piece and swings back up.
+const HOOD = { crown: [0, 0.8, 0.02], min: -0.22, max: 0.55 };
+HOOD.angle = (strand, soft) => {
+  const a = soft.nodes[strand.first].x;
+  const b = soft.nodes[strand.first + 1].x;
+  const now = Math.atan2(b[2] - a[2], b[1] - a[1]);
+  const rest = Math.atan2(HOOD.crown[2] - HD.neck[2], HOOD.crown[1] - HD.neck[1]);
+  return Math.max(HOOD.min, Math.min(HOOD.max, now - rest));
 };
-HOOD.uv = (p) => [
-  ((p[0] - HOOD.x0) / (HOOD.x1 - HOOD.x0)) * (HOOD.cols - 1),
-  ((HOOD.angle(p) - HOOD.a0) / (HOOD.a1 - HOOD.a0)) * (HOOD.rows - 1),
-];
-HOOD.id = (r, c) => r * HOOD.cols + c;
-// Where a hood splat lies on the grid: its cell's four nodes and the blend.
-HOOD.skin = (p) => {
-  const [u, v] = HOOD.uv(p);
-  const c = Math.max(0, Math.min(HOOD.cols - 2, Math.floor(u)));
-  const r = Math.max(0, Math.min(HOOD.rows - 2, Math.floor(v)));
-  const s = Math.max(0, Math.min(1, u - c));
-  const t = Math.max(0, Math.min(1, v - r));
-  return [HOOD.id(r, c), HOOD.id(r, c + 1), HOOD.id(r + 1, c), HOOD.id(r + 1, c + 1), s, t];
-};
-// The nodes: at each place across and angle around, the hood's surface (the
-// median distance out from the ear-to-ear line of the splats near there).
-function hoodNodes(scan) {
-  const near = Array.from({ length: HOOD.rows * HOOD.cols }, () => []);
-  for (let i = 0; i < scan.n; i++) {
-    if (scan.part[i] !== 1) continue;
-    const p = [scan.pos[i * 3], scan.pos[i * 3 + 1], scan.pos[i * 3 + 2]];
-    const [u, v] = HOOD.uv(p);
-    const [c, r] = [Math.round(u), Math.round(v)];
-    if (c >= 0 && c < HOOD.cols && r >= 0 && r < HOOD.rows && Math.abs(u - c) < 0.5 && Math.abs(v - r) < 0.5) near[HOOD.id(r, c)].push(Math.hypot(p[1] - HOOD.yc, p[2] - HOOD.zc)); // prettier-ignore
-  }
-  return near.map((list, k) => {
-    const r = Math.floor(k / HOOD.cols);
-    const c = k % HOOD.cols;
-    const x = HOOD.x0 + (c / (HOOD.cols - 1)) * (HOOD.x1 - HOOD.x0);
-    const a = HOOD.a0 + (r / (HOOD.rows - 1)) * (HOOD.a1 - HOOD.a0);
-    list.sort((p, q) => p - q);
-    const rad = list.length ? list[Math.floor(list.length / 2)] : 0.17;
-    return [x, HOOD.yc + Math.sin(a) * rad, HOOD.zc - Math.cos(a) * rad];
-  });
-}
 
 // A damped swing that starts at `a` and dies away by the end.
 const swing = (s, a, amp, w = 11, k = 2.2) =>
@@ -1422,33 +1386,25 @@ const HOODIE = {
   density: 1.5, // as the Model to splats toy: 300,000 splats on the high tier
   controls: [{ key: "flip", label: "Flip the hood", type: "pulse", ease: HD.T }],
   action: { key: "flip", label: "Hood flip and cross the sleeves" },
-  // Hands-on (lane Hands engine C): pull the hood and it flops like cloth,
+  // Hands-on (lane Hands engine C): pull the hood and it flops forward or back
   // then springs back up into its shape.
   hands: {
     floor: -1,
     area: 1.4,
-    cloth: (d) =>
-      d?.hood
-        ? [
-            {
-              rows: HOOD.rows,
-              cols: HOOD.cols,
-              points: d.hood,
-              // Sewn on at the neck.
-              pin: d.hood.map((p, i) => (p[1] < 0.34 ? i : -1)).filter((i) => i >= 0),
-              stiff: 0.9,
-              bend: 0.3,
-              shear: 0.5,
-              keep: 6,
-              weight: 0,
-              drag: 4,
-              radius: 0.01,
-              pick: 0.15,
-              maxPull: 0.3,
-              tokens: d.hood.map((_, i) => i),
-            },
-          ]
-        : [],
+    ropes: () => [
+      {
+        name: "hood",
+        points: [HD.neck, HOOD.crown],
+        grab: [1],
+        pick: 0.3,
+        reach: 1.02,
+        maxPull: 0.35,
+        weight: 0,
+        keep: 6,
+        drag: 3,
+        pieces: [{ part: "hood", node: 0, turn: false, spin: HOOD.angle, axis: [1, 0, 0] }],
+      },
+    ],
   },
   credits: [
     {
@@ -1497,9 +1453,7 @@ const HOODIE = {
     const stringL = k.part("stringL", { pivot: HD.strings[0].top });
     const stringR = k.part("stringR", { pivot: HD.strings[1].top });
     // The cloth takes flag colors (lane Fix7); the drawstrings keep theirs.
-    k.data = k.data || {};
-    k.data.hood = hoodNodes(scan);
-    addScan(k, scan, { share: 0.86, parts: [0, hood, sleeveL, sleeveR], keep: (fp) => fp < 4, pattern: true, skin: (p, fp) => (fp === 1 ? HOOD.skin(p) : null) }); // prettier-ignore
+    addScan(k, scan, { share: 0.86, parts: [0, hood, sleeveL, sleeveR], keep: (fp) => fp < 4, pattern: true }); // prettier-ignore
     // The armholes: each is closed with fabric that follows the opening's own outline (the
     // sleeve's splats that touch the body, above the armpit, laid flat on the plane that fits
     // them best), one patch on the body and one on the sleeve's top, so a raised sleeve shows

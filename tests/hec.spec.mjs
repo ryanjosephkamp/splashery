@@ -171,26 +171,98 @@ test("pizza: pull the slice away and the cheese strings stretch and snap; Reset 
   expect(dist(r.slice.pos, r.slice.home)).toBeLessThan(1e-6);
 });
 
-test("hoodie: pull the hood and it flops like cloth, then springs back up", async ({ page }) => {
+test("hoodie: pull the hood and it flops forward as one solid piece, then swings back up", async ({
+  page,
+}) => {
   await open(page, "hoodie");
   const r = await page.evaluate(() => {
     const h = window.__hec;
-    const top = [0, 0.8, 0.05];
-    h.drag(top, h.line(top, [0.2, 0.55, 0.5], 20), false);
-    const held = window.__splashery.player.handsOn.state().soft.strands[0];
-    const moved = Math.max(...held.nodes.map((p, i) => Math.hypot(...p.map((v, k) => v - held.home[i][k])))); // prettier-ignore
-    window.__splashery.player.handsOn.release();
-    const later = h.run(4).soft;
-    const back = Math.max(...later.strands[0].nodes.map((p, i) => Math.hypot(...p.map((v, k) => v - later.strands[0].home[i][k])))); // prettier-ignore
-    // The sewn-on nodes stay put.
-    const pins = held.home.map((p, i) => [p, held.nodes[i]]).filter(([p]) => p[1] < 0.34);
-    return { moved, back, pinMove: Math.max(...pins.map(([a, b]) => Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2]))), pins: pins.length, asleep: later.asleep }; // prettier-ignore
+    const { player } = window.__splashery;
+    const crown = [0, 0.78, 0.05];
+    h.drag(crown, h.line(crown, [0.05, 0.6, 0.55], 20), false);
+    h.run(0.3);
+    const held = player.motion.handsParts?.hood;
+    const angle = (q) => (q ? 2 * Math.asin(Math.min(1, Math.hypot(q[0], q[1], q[2]))) : 0);
+    // The hood turns only about the hinge across the neck (x), and stays
+    // there (no slide): a solid piece on its seam.
+    const out = {
+      held: angle(held?.quat),
+      axisX: held
+        ? Math.abs(held.quat[0]) / Math.hypot(held.quat[0], held.quat[1], held.quat[2])
+        : 0,
+      offset: held ? Math.hypot(...held.offset) : 1,
+    };
+    player.handsOn.release();
+    let crossed = false;
+    for (let i = 0; i < 4 * 60; i++) {
+      player.update(1 / 60);
+      const q = player.motion.handsParts?.hood?.quat;
+      if (q && q[0] < -1e-3) crossed = true; // it swings back past upright
+    }
+    const later = player.handsOn.state().soft;
+    out.crossed = crossed;
+    out.moved = later.moved;
+    return out;
   });
-  expect(r.pins).toBeGreaterThanOrEqual(3);
-  expect(r.pinMove).toBeLessThan(1e-9);
-  expect(r.moved).toBeGreaterThan(0.15);
-  expect(r.moved).toBeLessThan(0.45); // never torn off (maxPull)
-  expect(r.back).toBeLessThan(0.02);
+  expect(r.held).toBeGreaterThan(0.25); // flopped forward
+  expect(r.held).toBeLessThan(0.56); // never past the hinge's limit
+  expect(r.axisX).toBeGreaterThan(0.999);
+  expect(r.offset).toBeLessThan(1e-6);
+  expect(r.crossed).toBe(true);
+  expect(r.moved).toBe(false); // home again: the tap's own flip works as before
+});
+
+test("on its side or upside down, the soft parts hang toward the world's down and Reset still works", async ({
+  page,
+}) => {
+  const out = {};
+  for (const [id, grab, to] of [
+    ["yo-yo", [0, 0.38, 0], [0.1, 0.3, 0]],
+    ["octopus", [0.89, -0.27, 0.37], [1.0, -0.1, 0.5]],
+    ["kite", [-0.03, 0.12, 0.1], [-0.2, 0.0, 0.1]],
+    ["hoodie", [0, 0.78, 0.05], [0.05, 0.7, 0.3]],
+  ]) {
+    for (const turn of ["side", "upside-down"]) {
+      await open(page, id);
+      out[`${id} ${turn}`] = await page.evaluate(
+        ({ grab, to, turn }) => {
+          const h = window.__hec;
+          const { player } = window.__splashery;
+          const s = Math.SQRT1_2;
+          const q = turn === "side" ? [0, 0, s, s] : [1, 0, 0, 0];
+          player.stage.setToyPose({ pivot: player.toyInfo.center, q, t: [0, 0, 0] });
+          // Nudge it so the soft parts wake, then let go and watch.
+          h.drag(grab, h.line(grab, to, 8));
+          const st = h.run(4).soft;
+          const finite = st.strands.every((x) => x.nodes.every((p) => p.every(Number.isFinite)));
+          // The world's down in the toy's own coordinates.
+          const a = player.toRecipe([0, 0, 0]);
+          const b = player.toRecipe([0, -1, 0]);
+          const down = b.map((v, k) => v - a[k]);
+          const L = Math.hypot(...down);
+          const first = st.strands[0];
+          const d = first.nodes.at(-1).map((v, k) => v - first.nodes[0][k]);
+          const along =
+            (d[0] * down[0] + d[1] * down[1] + d[2] * down[2]) / (L * Math.hypot(...d) || 1);
+          player.handsOn.reset();
+          // Right after the glide home (the kite's wind moves it on at once).
+          const home = h.run(0.5).soft;
+          const back = home.strands.every((x) => x.nodes.every((p, i) => Math.hypot(...p.map((v, k) => v - x.home[i][k])) < 0.02)); // prettier-ignore
+          player.stage.setToyPose(null);
+          return { finite, along, back };
+        },
+        { grab, to, turn },
+      );
+    }
+  }
+  console.log(`any pose: ${JSON.stringify(out)}`);
+  for (const [k, r] of Object.entries(out)) {
+    expect(r.finite, k).toBe(true);
+    expect(r.back, k).toBe(true);
+  }
+  // The yo-yo's string hangs toward the world's down however the toy lies.
+  expect(out["yo-yo side"].along).toBeGreaterThan(0.95);
+  expect(out["yo-yo upside-down"].along).toBeGreaterThan(0.95);
 });
 
 test("the soft parts' step time stays small with each demo toy in play", async ({ page }) => {
@@ -198,7 +270,7 @@ test("the soft parts' step time stays small with each demo toy in play", async (
   for (const [id, from, to] of [
     ["octopus", [0.8, -0.35, 0.35], [1.1, -0.1, 0.6]],
     ["kite", [-0.03, 0.12, 0.1], [-0.5, -0.4, 0.2]],
-    ["hoodie", [0, 0.8, 0.05], [0.2, 0.55, 0.5]],
+    ["hoodie", [0, 0.78, 0.05], [0.05, 0.6, 0.55]],
     ["pizza", [0.27, 0.06, 0.44], [1.1, 0.06, 0.1]],
     ["yo-yo", [0, 0.38, 0], [0, 0.05, 0]],
   ]) {

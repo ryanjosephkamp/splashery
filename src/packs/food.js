@@ -3052,10 +3052,10 @@ export const RECIPES = {
           attach: { piece: 0, nodes: [4] },
           mass: 0.2,
           stiff: 0.5, // past its length, melted cheese stretches
-          breakAt: 1.45,
+          breakAt: st.breakAt,
           bend: 0,
           drag: 2,
-          radius: 0.008,
+          radius: st.thick * 0.6,
           grab: false,
           tokens: st.tokens,
           // Seen once it is pulled out of the cut.
@@ -3378,21 +3378,22 @@ export const RECIPES = {
       }
       // Strings of melted cheese that stretch as the slice comes away (by
       // their nodes: PIZZA_STRINGS).
-      for (const { curve, nodes, tokens } of PIZZA_STRINGS) {
+      for (const { curve, nodes, tokens, thick } of PIZZA_STRINGS) {
         const sk = ropeSkin(nodes, tokens);
         k.add(
-          evenTube(k, curve, (t) => 0.008 * (1 - 0.55 * Math.sin(Math.PI * t)), {
-            samples: 64,
+          evenTube(k, curve, (t) => thick * (1 - 0.45 * Math.sin(Math.PI * t)), {
+            samples: 96,
             grid: 32,
           }),
           {
             even: true,
             opacity: 1,
             jitter: 0.01,
-            flat: 0.4,
-            weight: 3,
+            flat: 0.3,
+            weight: 4,
             skin: (c) => sk(c.p),
-            color: "#f9d77a",
+            // Melted mozzarella: creamy, with a soft sheen.
+            color: (c) => glossy(c, "#fbe8a8", 0.5, 24),
           },
         );
       }
@@ -6163,12 +6164,19 @@ const PIZZA_OUT = [Math.sin(PIZZA_AZ) * 0.5, 0.16, Math.cos(PIZZA_AZ) * 0.5];
 // back; the four cheese strings are ropes from the pizza to the slice's cut
 // edge, built pulled out (their splats follow their nodes), starting
 // bunched at the cut. Pulled out they sag, then stretch, then snap.
-const PIZZA_STRINGS = [0, 1, 2, 3].map((i) => {
+// Two thick ropes of mozzarella and three thin strands, each snapping at
+// its own stretch, so they break one after another.
+const PIZZA_STRINGS = [
+  { side: 1, r: 0.36, thick: 0.026, breakAt: 1.75 },
+  { side: 0, r: 0.62, thick: 0.024, breakAt: 1.65 },
+  { side: 0, r: 0.26, thick: 0.011, breakAt: 1.35 },
+  { side: 1, r: 0.55, thick: 0.012, breakAt: 1.45 },
+  { side: 0, r: 0.8, thick: 0.01, breakAt: 1.4 },
+].map(({ side: sd, r, thick, breakAt }, i) => {
   const top = 0.06;
   const span = (Math.PI * 2) / 8;
   const a0 = PIZZA_AZ - span / 2;
-  const side = i % 2 ? a0 : a0 + span;
-  const r = 0.28 + i * 0.15;
+  const side = sd ? a0 + span : a0;
   const start = [Math.sin(side) * r, top + 0.005, Math.cos(side) * r];
   const end = add(start, PIZZA_OUT);
   const curve = (t) => {
@@ -6176,7 +6184,7 @@ const PIZZA_STRINGS = [0, 1, 2, 3].map((i) => {
     return [p[0], p[1] - 0.035 * Math.sin(Math.PI * t), p[2]];
   };
   const ts = [0, 0.25, 0.5, 0.75, 1];
-  return { start, curve, nodes: ts.map(curve), tokens: ts.map((_, j) => i * 5 + j) };
+  return { start, curve, thick, breakAt, nodes: ts.map(curve), tokens: ts.map((_, j) => i * 5 + j) }; // prettier-ignore
 });
 
 const BURGER_LAYERS = ["patty", "cheese", "lettuce", "tomato", "top"];
