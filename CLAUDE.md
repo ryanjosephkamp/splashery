@@ -46,24 +46,33 @@ coordinates. [docs/OPERATING.md](docs/OPERATING.md) has the rules. In short:
 - Live input (approved September 30, 2026): a toy asks for the microphone, the camera or screen
   capture only when the person taps to start it. Nothing is requested or loaded before that, and
   nothing is recorded, stored or sent anywhere.
-- Build tools in `tools/` may use pinned devDependencies. List each one in `LICENSES.md`.
-- Assets must be CC0, CC BY, CC BY-SA or public domain. Never NC, and never unlicensed, "personal
-  use" or paid files. CC BY-SA (allowed since the owner's call of October 2, 2026) is per asset: its
-  license notice shows beside it, and anything made from it (a splat converted from a BY-SA mesh)
-  stays BY-SA. Check the license on the live source page. Record it in `CREDITS.md`, in
-  `tools/assets.json` or `tools/models.json`, and in the toy's in-app credit. One exception (the
-  owner's call of September 30, 2026): the Wikipedia book fetches an article live from Wikipedia's
-  REST API when the reader asks for it (CC BY-SA text). It is never stored in the repo, shipped with
-  the site or saved in a scene, and the article's credit and license show beside it.
-- Photoreal captures under licenses the site can't use may be viewed privately, on a private page,
-  for comparison (the owner's call of October 2, 2026). They never go into the repo or the site.
+- Build tools in `tools/` may use pinned devDependencies. List each one in `LICENSES.md`. Programs
+  outside npm that train splats on the owner's Mac (Blender, Brush or msplat; the Splat Fidelity
+  Plan, approved October 3, 2026) are build tools too: listed in `LICENSES.md`, never shipped.
+- Assets must be CC0, CC BY, CC BY-SA, CC BY-NC, CC BY-NC-SA or public domain. Never a NoDerivatives
+  ("ND") license, and never unlicensed, "personal use" or paid files. CC BY-SA (allowed since the
+  owner's call of October 2, 2026) is per asset: its license notice shows beside it, and anything
+  made from it (a splat converted from a BY-SA mesh) stays BY-SA. CC BY-NC and CC BY-NC-SA (the
+  owner's call of October 3, 2026) are per asset on four conditions: its license notice shows beside
+  it; never ND; it carries `"nc": true` in `tools/assets.json` or `tools/models.json`, so one
+  command (`node tools/nc-assets.mjs`) lists every NC asset to take out if the site ever earns
+  money; and anything made from it keeps its license. Never merge an NC asset and a BY-SA asset into
+  one asset (side by side in a scene is fine). Check the license on the live source page. Record it
+  in `CREDITS.md`, in `tools/assets.json` or `tools/models.json`, and in the toy's in-app credit.
+  One exception (the owner's call of September 30, 2026): the Wikipedia book fetches an article live
+  from Wikipedia's REST API when the reader asks for it (CC BY-SA text). It is never stored in the
+  repo, shipped with the site or saved in a scene, and the article's credit and license show beside
+  it.
+- Photoreal captures under licenses the site can't use (ND, no license) may be viewed privately, on
+  a private page, for comparison (the owner's call of October 2, 2026). They never go into the repo
+  or the site.
 - Old `#s=` links and saved scene JSON (schema v2 and v3) must keep loading.
 - No modern real-world firearms, no logos or brand names, no gore. Flags stay respectful. Since
   September 29, 2026, historical, fantasy and sci-fi weapons are fine where a world calls for them
   (a cutlass, a flintlock, ship cannons, a space blaster, a bow), and so are an inspector for those
   designs and a butterfly-knife toy. Targets are objects, never people or animals.
 - Anatomy is shown as a clinical atlas (the skin layer smooth like an anatomical mannequin, organs
-  as in a textbook). Ask the owner before using any CC BY-SA source.
+  as in a textbook). Ask the owner before using any CC BY-SA or NC source.
 - Splashery doesn't inspect, filter or censor what people open. Files stay on their device, and the
   terms of use in the About tab say they are responsible for what they open and share.
 - American English for every new public-facing text: the docs, the words on the site (toy names,
