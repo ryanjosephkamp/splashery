@@ -168,6 +168,7 @@ vec4 spBodyQ = vec4(0.0, 0.0, 0.0, 1.0);
 vec4 spPartQ = vec4(0.0, 0.0, 0.0, 1.0);
 float spCut = 0.0;
 float spShrink = 0.0;
+float spStretch = 0.0; // lane Hands engine C: how much the grab spreads splats here
 float spLanded = 0.0;
 float spShade = 0.0;
 float spGlow = 0.0;
@@ -325,7 +326,11 @@ void modifySplatCenter(inout vec3 center) {
   if (uSpGrabD.w > 0.5) {
     vec3 d = home - uSpGrab.xyz;
     float rad = max(uSpGrab.w, 1e-3);
-    p += uSpGrabD.xyz * exp(-dot(d, d) / (rad * rad) * 1.5);
+    float gf = exp(-dot(d, d) / (rad * rad) * 1.5);
+    p += uSpGrabD.xyz * gf;
+    // Lane Hands engine C: splats grow where the pull spreads them apart, so
+    // a stretched toy stays solid (no gaps, no speckle).
+    spStretch = min(1.5, length(uSpGrabD.xyz) * gf * 3.0 * length(d) / (rad * rad)) * 0.6;
   }
 
   if (uSpDiss.w > 0.5) {
@@ -393,7 +398,7 @@ void modifySplatCenter(inout vec3 center) {
 
 void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter, inout vec4 rotation, inout vec3 scale) {
   rotation = spQuatMul(spTwistQ, spQuatMul(spBodyQ, spQuatMul(spPartQ, rotation)));
-  scale *= uSpClock.y * spKitScale * (1.0 - 0.45 * spShrink) * (1.0 + 0.3 * spLanded);
+  scale *= uSpClock.y * spKitScale * (1.0 - 0.45 * spShrink) * (1.0 + 0.3 * spLanded) * (1.0 + spStretch);
   if (spCut > 0.5) scale = vec3(0.0);
 }
 
@@ -467,6 +472,7 @@ var<private> spBodyQ: vec4f = vec4f(0.0, 0.0, 0.0, 1.0);
 var<private> spPartQ: vec4f = vec4f(0.0, 0.0, 0.0, 1.0);
 var<private> spCut: f32 = 0.0;
 var<private> spShrink: f32 = 0.0;
+var<private> spStretch: f32 = 0.0; // lane Hands engine C
 var<private> spLanded: f32 = 0.0;
 var<private> spShade: f32 = 0.0;
 var<private> spGlow: f32 = 0.0;
@@ -616,7 +622,9 @@ fn modifySplatCenter(center: ptr<function, vec3f>) {
   if (uniform.uSpGrabD.w > 0.5) {
     let d = home - uniform.uSpGrab.xyz;
     let rad = max(uniform.uSpGrab.w, 1e-3);
-    p = p + uniform.uSpGrabD.xyz * exp(-dot(d, d) / (rad * rad) * 1.5);
+    let gf = exp(-dot(d, d) / (rad * rad) * 1.5);
+    p = p + uniform.uSpGrabD.xyz * gf;
+    spStretch = min(1.5, length(uniform.uSpGrabD.xyz) * gf * 3.0 * length(d) / (rad * rad)) * 0.6;
   }
 
   if (uniform.uSpDiss.w > 0.5) {
@@ -684,7 +692,7 @@ fn modifySplatCenter(center: ptr<function, vec3f>) {
 
 fn modifySplatRotationScale(originalCenter: vec3f, modifiedCenter: vec3f, rotation: ptr<function, vec4f>, scale: ptr<function, vec3f>) {
   *rotation = spQuatMul(spTwistQ, spQuatMul(spBodyQ, spQuatMul(spPartQ, *rotation)));
-  *scale = *scale * (uniform.uSpClock.y * spKitScale * (1.0 - 0.45 * spShrink) * (1.0 + 0.3 * spLanded));
+  *scale = *scale * (uniform.uSpClock.y * spKitScale * (1.0 - 0.45 * spShrink) * (1.0 + 0.3 * spLanded) * (1.0 + spStretch));
   if (spCut > 0.5) { *scale = vec3f(0.0); }
 }
 
