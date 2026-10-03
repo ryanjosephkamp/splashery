@@ -394,6 +394,40 @@
   };
   const cards = {};
   const lanes = {};
+  // Each clip's last shown height, so the page doesn't jump when a clip unloads or reloads.
+  const clipHeights = new Map();
+  const lazyMedia =
+    "IntersectionObserver" in window
+      ? new IntersectionObserver(
+          (entries) => {
+            for (const e of entries) {
+              const m = e.target;
+              if (e.isIntersecting) {
+                if (!m.getAttribute("src")) m.setAttribute("src", m.dataset.src);
+                if (m.tagName === "VIDEO") m.play?.().catch(() => {});
+              } else if (m.tagName === "VIDEO" && m.getAttribute("src")) {
+                m.pause();
+                m.removeAttribute("src");
+                m.load();
+              }
+            }
+          },
+          { rootMargin: "500px 0px" },
+        )
+      : null;
+  function watchMedia() {
+    for (const m of els.list.querySelectorAll("[data-src]")) {
+      const remember = () => {
+        if (m.clientHeight > 40) {
+          clipHeights.set(m.dataset.src, m.clientHeight);
+          m.parentElement.style.minHeight = m.clientHeight + "px";
+        }
+      };
+      m.addEventListener(m.tagName === "VIDEO" ? "loadeddata" : "load", remember);
+      if (lazyMedia) lazyMedia.observe(m);
+      else m.setAttribute("src", m.dataset.src);
+    }
+  }
   let filter = "all";
   let laneFilter = "all";
   let showFinished = false;
@@ -436,13 +470,16 @@
           : "";
     const src = clipSrc(t);
     const alt = `${esc(t.name)}: ${esc(t.now)}`;
+    // Clips load and play only near the screen (lazyMedia below): 170-odd videos playing at once
+    // froze phones (October 3, 2026).
     const media = !src
       ? '<p class="msg">No clip yet.</p>'
       : t.video || /\.(mp4|webm)$/i.test(src)
-        ? `<video src="${esc(src)}" autoplay muted loop playsinline aria-label="${alt}"></video>`
-        : `<img src="${esc(src)}" alt="${alt}" loading="lazy" width="360" height="360" />`;
+        ? `<video data-src="${esc(src)}" muted loop playsinline preload="none" aria-label="${alt}"></video>`
+        : `<img data-src="${esc(src)}" alt="${alt}" width="360" height="360" />`;
+    const h = clipHeights.get(src);
     return `<article class="toy" data-id="${esc(t.id)}">
-      <div class="clip">${media}</div>
+      <div class="clip"${h ? ` style="min-height:${h}px"` : ""}>${media}</div>
       <div class="body">
         <h3>${esc(t.name)} ${state}</h3>
         <dl>
@@ -548,9 +585,11 @@
         </section>`;
       })
       .join("");
+    lazyMedia?.disconnect();
     els.list.innerHTML =
       html ||
       `<p class="msg">${Object.keys(cards).length ? "Nothing here with this filter." : "No clips yet. Lanes add theirs here as they finish them."}</p>`;
+    watchMedia();
     updateCount();
   }
 
