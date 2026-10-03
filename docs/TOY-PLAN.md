@@ -10,16 +10,16 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 342 toys. 342 have a tap action today; the other 0 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 338.
+- 373 toys. 343 have a tap action today; the other 30 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 368.
 - **more** (has an effect; make it clearer or more dramatic): 0.
-- **new** (needs its own effect): 4.
+- **new** (needs its own effect): 5.
 - Visual fixes: 0 open, 30 done. Touch or drag interaction asked for: 4.
 
 ## By phase
 
 - **C, polish.** Visual fixes still open: none. Done in C1: Cinnamon star cookie, Wooden elephant, Vintage camera, Boombox, Horse statue, Basketball, Soccer ball, American football, Tennis ball, Baseball, Softball, Rugby ball, Volleyball, Cricket ball, Pool ball, Medicine ball, Squash ball, Hockey puck, Flying disc, Comet, Lava lamp, Storybook, Laptop, Decorated tree, Diya, Sports car, Tractor, Statue of Liberty, Your book, Photo album.
-  Effects to make clearer or more dramatic, still open: none. Done in C2: Cactus, Strawberry, Heart cookie, Honeybee, Torus, Jelly blob, Neon knot, Cluster fly, May beetle, Millipede, Carder bumblebee, Raspberry, Blackberry, Blueberry, Grape, Cinnamon star cookie, Tomatoes, Mandeltorus, Basket, Real rubber duck, Garden gnome, Wooden elephant, Marble bust, Ukulele, Real alarm clock, Vintage camera, Boombox, Real croissant, Carrot cake, Pomegranate, Lantern, Cat statue, Horse statue, Real pencil, Real tin can, Basketball, Soccer ball, American football, Tennis ball, Baseball, Softball, Beach ball, Golf ball, Rugby ball, Volleyball, Water polo ball, Ping-pong ball, Cricket ball, Bowling ball, Pool ball, Pickleball, Dodgeball, Medicine ball, Lacrosse ball, Squash ball, Bouncy ball, Marble, Hockey puck, Shuttlecock, Flying disc, Beating heart, Sun, Solar system, Mercury, Venus, Earth, Moon, Mars, Jupiter, Saturn, Uranus, Neptune, Tiny planet, Aurora world, Asteroid, Comet, Meteor, Star, Pulsar, Black hole, Star cluster, Ring nebula, Nebula, Spiral galaxy, Virus, Bacteriophage, Bacterium, Red blood cell, Neuron, Astrocyte, Animal cell, DNA, White blood cell, Microglia, Diatom, Pollen grain, Snowflake, Chromosome, Mitochondrion, Paramecium, Amoeba, Electron orbital, Atom, Molecule, Protein, Crystal lattice, Periodic table, Diamond, Ruby, Emerald, Amethyst geode, Sapphire, Quartz cluster, Opal, Brain, Eye, Lungs, Tooth, Kidney, Anatomy atlas, Oak tree, Pine tree, Palm tree, Cherry blossom, Maple tree, Bonsai, Weeping willow, Sunflower, Rose, Tulips, Daisies, Lotus, Toadstool, Fern, Saguaro cactus, Coral reef, Pinecone, Acorns, Succulent, Bamboo, Pebbles, Kelp, Storm cloud, Lava lamp, Snow globe, Ice swan, Tornado, Rainbow, Iceberg, Waterfall, Ocean wave, Ice cream, Watermelon, Pancakes, Cupcake, Lollipop, Candy cane, Macarons, Donut, Gummy bear, Pretzel, Croissant, Burger, Sushi, Taco, Coffee, Apple, Bananas, Orange, Kiwi, Pineapple, Cherries, Grapes, Avocado, Building bricks, Rubber duck, Newton's cradle, Puzzle cube, Kite, Chess set, Lorenz attractor, Möbius strip, Klein bottle, Menger sponge, Hypercube, Torus knot, Gyroid, Mandelbulb, Seashell spiral, Graph plotter, Surface plotter, Circle and waves, Fourier circles, Pythagoras proof, Splat equation, Storybook, Fountain pen, Water bottle, Soda can, Running shoe, Hoodie, Sunglasses, Baseball cap, Heraldic shield, Crown, Wizard's orb, Crystal ball, Jellyfish, School of fish, Pufferfish, Nautilus, Snail, Octopus, Sea urchin, Frog, Snowman, Fireworks, Decorated tree, Paper lantern, Diya, Acoustic guitar, Snare drum, Xylophone, Toy piano, Grand piano, Upright piano, Harpsichord, Electronic keyboard, Hot-air balloon, Sports car, Bus, Jet airliner, Sailboat, Submarine, Bicycle, Eiffel Tower, Washington Monument, Pyramids of Giza, Twisting supertall, Statue of Liberty, White House, Leaning Tower of Pisa, Colosseum, Parthenon, Stonehenge, Big Ben, Taj Mahal, Castle, Pagoda, Windmill, Perceptron, Multilayer perceptron, Neural network, Convolutional network, Recurrent network, Transformer, Looped transformer, Diffusion model, Gradient descent, Gaussian splatting, Word vectors, Sorting machine, Half adder, Turing machine, Difference engine, Enigma machine, Bombe, Your book, Photo album, Picture frame, Song landscape, Room echo meter, Splat mirror, Model to splats, Photo to 3D, Moving photo to 3D, Video to 3D, Splat field, Thermal ellipsoids, Super-resolution microscope, Galaxy in a box, Fluid lab, Screen.
+  Effects to make clearer or more dramatic, still open: none. Done in C2: Cactus, Strawberry, Heart cookie, Honeybee, Torus, Jelly blob, Neon knot, Cluster fly, May beetle, Millipede, Carder bumblebee, Raspberry, Blackberry, Blueberry, Grape, Cinnamon star cookie, Tomatoes, Mandeltorus, Basket, Real rubber duck, Garden gnome, Wooden elephant, Marble bust, Ukulele, Real alarm clock, Vintage camera, Boombox, Real croissant, Carrot cake, Pomegranate, Lantern, Cat statue, Horse statue, Real pencil, Real tin can, Basketball, Soccer ball, American football, Tennis ball, Baseball, Softball, Beach ball, Golf ball, Rugby ball, Volleyball, Water polo ball, Ping-pong ball, Cricket ball, Bowling ball, Pool ball, Pickleball, Dodgeball, Medicine ball, Lacrosse ball, Squash ball, Bouncy ball, Marble, Hockey puck, Shuttlecock, Flying disc, Beating heart, Sun, Solar system, Mercury, Venus, Earth, Moon, Mars, Jupiter, Saturn, Uranus, Neptune, Tiny planet, Aurora world, Asteroid, Comet, Meteor, Star, Pulsar, Black hole, Star cluster, Ring nebula, Nebula, Spiral galaxy, Virus, Bacteriophage, Bacterium, Red blood cell, Neuron, Astrocyte, Animal cell, DNA, White blood cell, Microglia, Diatom, Pollen grain, Snowflake, Chromosome, Mitochondrion, Paramecium, Amoeba, Electron orbital, Atom, Molecule, Protein, Crystal lattice, Periodic table, Diamond, Ruby, Emerald, Amethyst geode, Sapphire, Quartz cluster, Opal, Brain, Eye, Lungs, Tooth, Kidney, Anatomy atlas, Oak tree, Pine tree, Palm tree, Cherry blossom, Maple tree, Bonsai, Weeping willow, Sunflower, Rose, Tulips, Daisies, Lotus, Toadstool, Fern, Saguaro cactus, Coral reef, Pinecone, Acorns, Succulent, Bamboo, Pebbles, Kelp, Storm cloud, Lava lamp, Snow globe, Ice swan, Tornado, Rainbow, Iceberg, Waterfall, Ocean wave, Ice cream, Watermelon, Jelly, Pancakes, Cupcake, Lollipop, Candy cane, Macarons, Donut, Gummy bear, Pretzel, Croissant, Burger, Sushi, Taco, Coffee, Apple, Bananas, Orange, Kiwi, Pineapple, Cherries, Grapes, Avocado, Building bricks, Rubber duck, Newton's cradle, Puzzle cube, Spring toy, Kite, Chess set, Lorenz attractor, Möbius strip, Klein bottle, Menger sponge, Hypercube, Torus knot, Gyroid, Mandelbulb, Seashell spiral, Graph plotter, Surface plotter, Circle and waves, Fourier circles, Pythagoras proof, Splat equation, Storybook, Fountain pen, Water bottle, Soda can, Running shoe, Hoodie, Sunglasses, Baseball cap, Heraldic shield, Bow and target, Crown, Wizard's orb, Crystal ball, Jellyfish, School of fish, Pufferfish, Nautilus, Snail, Octopus, Sea urchin, Frog, Snowman, Fireworks, Decorated tree, Paper lantern, Diya, Acoustic guitar, Snare drum, Xylophone, Toy piano, Grand piano, Upright piano, Harpsichord, Electronic keyboard, Hot-air balloon, Sports car, Bus, Jet airliner, Sailboat, Submarine, Bicycle, Eiffel Tower, Washington Monument, Pyramids of Giza, Twisting supertall, Statue of Liberty, White House, Leaning Tower of Pisa, Colosseum, Parthenon, Stonehenge, Big Ben, Taj Mahal, Castle, Pagoda, Windmill, Perceptron, Multilayer perceptron, Neural network, Convolutional network, Recurrent network, Transformer, Looped transformer, Diffusion model, Gradient descent, Gaussian splatting, Word vectors, Sorting machine, Half adder, Turing machine, Difference engine, Enigma machine, Bombe, Your book, Photo album, Picture frame, Song landscape, Room echo meter, Splat mirror, Model to splats, Photo to 3D, Moving photo to 3D, Video to 3D, Splat field, Thermal ellipsoids, Super-resolution microscope, Galaxy in a box, Fluid lab, Screen.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -27,10 +27,10 @@ Proposals below are suggestions; the owner may change them.
 - **E3, new effects: tiny things, anatomy and maths.** None.
 - **E4, new effects: nature and weather.** None.
 - **E5, new effects: food.** None.
-- **E6, new effects: balls and the rest.** Picture lab, Song landscape, Chladni plate, Video to 3D
+- **E6, new effects: balls and the rest.** Picture lab, Song landscape, Chladni plate, QR code, Video to 3D
 - **F, touch and drag interaction.** Gummy bear, Building bricks, Newton's cradle, Puzzle cube.
 
-## Scans (32)
+## Scans (62)
 
 - **Cactus** (`cactus`). Now: tap: Bloom (rig). Plan: keep.
   - Owner: No special effect. Looks fine.
@@ -113,6 +113,126 @@ Proposals below are suggestions; the owner may change them.
   - Effect: Shells hop inside the basket one after another.
   - Improved: E1b: seen from above so the shells show; the basket shakes and ten of the biggest shells (urchins, sand dollars, starfish, a scallop) bounce up in turn, spinning, and drop back. The blurry fringe under the basket is hidden (2.6 s).
   - Sound: Clattering shells.
+- **Heart donut** (`heart-donut`). Now: hops. Plan: keep.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.
+  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Sound: A short sound that suits the object.
+- **Sushi boat** (`sushi-boat`). Now: hops. Plan: keep.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.
+  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Sound: A short sound that suits the object.
+- **Seeded bread loaf** (`seeded-loaf`). Now: hops. Plan: keep.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.
+  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Sound: A short sound that suits the object.
+- **Cowboy steak** (`steak`). Now: hops. Plan: keep.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.
+  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Sound: A short sound that suits the object.
+- **Stollen** (`stollen`). Now: hops. Plan: keep.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.
+  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Sound: A short sound that suits the object.
+- **Orange (photo)** (`orange-photo`). Now: hops. Plan: keep.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.
+  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Sound: A short sound that suits the object.
+- **Physalis** (`physalis`). Now: hops. Plan: keep.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.
+  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Sound: A short sound that suits the object.
+- **Crystal** (`crystal-gem`). Now: hops. Plan: keep.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.
+  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Sound: A short sound that suits the object.
+- **Alum crystal** (`alum-crystal`). Now: hops. Plan: keep.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.
+  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Sound: A short sound that suits the object.
+- **Puffin** (`puffin`). Now: hops. Plan: keep.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.
+  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Sound: A short sound that suits the object.
+- **Toy T. rex** (`toy-trex`). Now: hops. Plan: keep.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.
+  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Sound: A short sound that suits the object.
+- **Monkey doll** (`monkey-doll`). Now: hops. Plan: keep.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.
+  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Sound: A short sound that suits the object.
+- **Souvenir elephant** (`elephant-souvenir`). Now: hops. Plan: keep.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.
+  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Sound: A short sound that suits the object.
+- **Souvenir turtle** (`turtle-souvenir`). Now: hops. Plan: keep.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.
+  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Sound: A short sound that suits the object.
+- **Cave lioness** (`cave-lioness`). Now: hops. Plan: keep.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.
+  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Sound: A short sound that suits the object.
+- **Dog plush** (`dog-plush`). Now: hops. Plan: keep.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.
+  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Sound: A short sound that suits the object.
+- **BMX bicycle** (`bmx-bike`). Now: hops. Plan: keep.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.
+  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Sound: A short sound that suits the object.
+- **Murex shell** (`murex-shell`). Now: hops. Plan: keep.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.
+  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Sound: A short sound that suits the object.
+- **Sunflower (photo)** (`sunflower-photo`). Now: hops. Plan: keep.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.
+  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Sound: A short sound that suits the object.
+- **White roses** (`white-roses`). Now: hops. Plan: keep.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.
+  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Sound: A short sound that suits the object.
+- **Bonsai tree (photo)** (`bonsai-photo`). Now: hops. Plan: keep.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.
+  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Sound: A short sound that suits the object.
+- **Mushroom (photo)** (`mushroom-photo`). Now: hops. Plan: keep.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.
+  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Sound: A short sound that suits the object.
+- **Cactus (photo 2)** (`cactus-real`). Now: hops. Plan: keep.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.
+  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Sound: A short sound that suits the object.
+- **Crochet Earth** (`crochet-earth`). Now: hops. Plan: keep.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.
+  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Sound: A short sound that suits the object.
+- **Desk globe** (`desk-globe`). Now: hops. Plan: keep.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.
+  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Sound: A short sound that suits the object.
+- **Cherry blossom (photo)** (`cherry-blossom-photo`). Now: hops. Plan: keep.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.
+  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Sound: A short sound that suits the object.
+- **Golden maple** (`maple-tree`). Now: hops. Plan: keep.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.
+  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Sound: A short sound that suits the object.
+- **Peonies in a vase** (`peony`). Now: hops. Plan: keep.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.
+  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Sound: A short sound that suits the object.
+- **Money tree** (`money-tree`). Now: hops. Plan: keep.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.
+  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Sound: A short sound that suits the object.
+- **Knight on a horse** (`knight-horse`). Now: hops. Plan: keep.
+  - Owner: New in Photoreal r2 (October 3, 2026), behind the labs switch until the owner marks it good.
+  - Effect: A hop. The capture is one solid piece, so no part moves.
+  - Sound: A short sound that suits the object.
 - **Real rubber duck** (`rubber-duck-real`). Now: tap: Squeeze (rig). Plan: keep.
   - Owner: Squeeze and quack. It must differ from the other rubber duck.
   - Effect: Squeezes flat and springs back.
@@ -685,7 +805,7 @@ Proposals below are suggestions; the owner may change them.
 - **Amoeba** (`amoeba`). Now: tap: Crawl. Plan: keep.
   - Owner: Needs an effect.
   - Effect: Pushes out a pseudopod and oozes over.
-  - Improved: E3: it crawls: a round pseudopod pushes out to the right, granules stream into it and the cell oozes over; then one pushes out to the left and it oozes back; at rest its pods stretch a little (5.2 s).
+  - Improved: E3: it crawls: a round pseudopod pushes out to the right, granules stream into it and the cell oozes over; then one pushes out to the left and it oozes back; at rest its pods stretch a little (5.2 s). Physics (Hands-on): drag it to pull out a pseudopod; let go and it oozes back.
   - Sound: Louder: a soft squelch and a low rubbery wobble as each pseudopod pushes out; no whistle or ding (Sound C, October 2, 2026).
 
 ## Atoms (6)
@@ -855,7 +975,7 @@ Proposals below are suggestions; the owner may change them.
 - **Pebbles** (`rocks`). Now: tap: Tumble and stack. Plan: keep.
   - Owner: Should fall or drop.
   - Effect: The pebbles drop and scatter, then stack into a cairn.
-  - Improved: E4: a tap tumbles the pebbles: each rolls out over the sand on its own path to lie clear of the others, then five hop one at a time onto a cairn, biggest at the bottom, with a clack each; at the end they all hop back (about 7 s). In the Cairn style the top four topple off and are stacked again.
+  - Improved: E4: a tap tumbles the pebbles: each rolls out over the sand on its own path to lie clear of the others, then five hop one at a time onto a cairn, biggest at the bottom, with a clack each; at the end they all hop back (about 7 s). In the Cairn style the top four topple off and are stacked again. Physics (Hands-on): drag a pebble to pick it up and set it on the sand or on another stone; a careful stack stands, a careless one topples.
   - Sound: Real stone-on-stone knocks as the pile shifts and tumbles home; the stacking knocks stay; real CC0 recordings now (rocks-pebbles.mp3), with the synthesized sound as a fallback.
 - **Kelp** (`kelp`). Now: tap: Fish come to nibble. Plan: keep.
   - Owner: Maybe fish eat it; pick something.
@@ -883,6 +1003,7 @@ Proposals below are suggestions; the owner may change them.
   - Sound: A real dry pop for each kernel as it jumps (14 of them, at the toy's own times); no hum (Sound C, October 2, 2026).
 - **Jelly** (`jelly`). Now: tap: Poke. Plan: keep.
   - Owner: Pretty much fine.
+  - Improved: Physics (Hands-on): drag it to stretch it toward the finger; let go and it springs back and wobbles on its plate.
   - Sound: A wet, heavy wobble instead of a cartoon boing.
 - **Pancakes** (`pancakes`). Now: tap: Flip the top one. Plan: keep.
   - Owner: Really neat.
@@ -906,7 +1027,7 @@ Proposals below are suggestions; the owner may change them.
 - **Macarons** (`macarons`). Now: tap: Stack up. Plan: keep.
   - Owner: Maybe they do something.
   - Effect: They stack themselves into a tower.
-  - Improved: E5: the two in front hop one after the other up onto the stack, rising clear of its rim and landing level with a soft tap; the tower of five sways, then they hop back down (about 3.5 s).
+  - Improved: E5: the two in front hop one after the other up onto the stack, rising clear of its rim and landing level with a soft tap; the tower of five sways, then they hop back down (about 3.5 s). Physics (Hands-on): pick up any macaron and stack it on the plate or the stack; a crooked one slides off.
   - Sound: Soft taps.
 - **Donut** (`donut`). Now: tap: Break apart (rig). Plan: keep.
   - Owner: Interesting; good-looking.
@@ -939,7 +1060,7 @@ Proposals below are suggestions; the owner may change them.
 - **Sushi** (`sushi`). Now: tap: Pick up and dip. Plan: keep.
   - Owner: Chopsticks lifted by an invisible hand pick up the sushi.
   - Effect: Chopsticks pick up a roll, dip it and put it back.
-  - Improved: E5: the chopsticks lift off the board as if held by an invisible hand, pinch a roll (click), carry it to a new dish of soy sauce and dip it twice, set it back (click) and lie down again (about 4.7 s).
+  - Improved: E5: the chopsticks lift off the board as if held by an invisible hand, pinch a roll (click), carry it to a new dish of soy sauce and dip it twice, set it back (click) and lie down again (about 4.7 s). Physics: a tap on a piece sends the chopsticks to that piece (either nigiri or any maki); they dip it and put it back.
   - Sound: Wooden chopstick clicks.
 - **Taco** (`taco`). Now: tap: Break in half. Plan: keep.
   - Owner: Break in half to show what is inside. Really cool taco.
@@ -982,7 +1103,7 @@ Proposals below are suggestions; the owner may change them.
 - **Cherries** (`cherries`). Now: tap: Swing. Plan: keep.
   - Owner: No idea.
   - Effect: The pair swings and bounces on its stems.
-  - Improved: E5: a flick swings the two cherries apart on their own stems; they swing back and knock together (a plink each time), bouncing apart again until they settle, while the joint bobs (about 3.6 s).
+  - Improved: E5: a flick swings the two cherries apart on their own stems; they swing back and knock together (a plink each time), bouncing apart again until they settle, while the joint bobs (about 3.6 s). Physics (Hands-on): pull a cherry out on its stem and let go; it swings back and knocks the other, which swings out in turn.
   - Sound: No string note, only the stems' soft swish; the knocking is unchanged.
 - **Grapes** (`grapes`). Now: tap: Drop grapes. Plan: keep.
   - Owner: Could fall off the stem.
@@ -1000,7 +1121,7 @@ Proposals below are suggestions; the owner may change them.
 - **Building bricks** (`bricks`). Now: tap: Build something. Plan: keep.
   - Owner: Build something random from the blocks.
   - Effect: Bricks rearrange into a random small build (tower, bridge, animal), different each tap.
-  - Improved: F: eighteen bricks lie poured out round the table. Each tap pops the last model apart and builds a new one in the middle, brick by brick from the bottom up, each clicking into place: a tower, a bridge, stairs, a dog or a tree (never the same twice running; about 5 s).
+  - Improved: F: eighteen bricks lie poured out round the table. Each tap pops the last model apart and builds a new one in the middle, brick by brick from the bottom up, each clicking into place: a tower, a bridge, stairs, a dog or a tree (never the same twice running; about 5 s). Physics (Hands-on): pick up any brick and stack it; over another brick it turns square, lines up with the studs and clicks on.
   - Sound: A lower plastic clack, for the tap and each brick landing.
   - Touch or drag interaction (phase F).
 - **Rubber duck** (`rubber-duck`). Now: tap: Squeak. Plan: keep.
@@ -1034,6 +1155,7 @@ Proposals below are suggestions; the owner may change them.
   - Touch or drag interaction (phase F).
 - **Spring toy** (`spring-toy`). Now: tap: Make it walk. Plan: keep.
   - Owner: Basically perfect.
+  - Improved: Physics (Hands-on): pull its top coils up or sideways and it stretches coil by coil; let go and it springs back, wobbles and walks on.
   - Sound: A real metal Slinky's shimmering coils as it walks (Sound C, October 2, 2026).
 - **Kite** (`kite`). Now: tap: Gust of wind. Plan: keep.
   - Owner: Underwhelming; develop the animation further.
@@ -1180,6 +1302,7 @@ Proposals below are suggestions; the owner may change them.
   - Sound: The clang and the gleam's shimmer, no crackling clicks.
 - **Bow and target** (`bow-and-target`). Now: tap: Shoot. Plan: keep.
   - Owner: Unbelievably impressive.
+  - Improved: Physics (Hands-on): pull the arrow back on the string and let go; it flies under gravity, faster the further it was drawn, and sticks in the target or the grass.
   - Sound: A real bowstring's thump and the arrow's hiss, not a guitar-like note; the hit is unchanged; real CC0 recordings now (bow-and-target-release.mp3), with the synthesized sound as a fallback.
 - **Trebuchet** (`trebuchet`). Now: tap: Launch. Plan: keep.
   - Owner: Fine.
@@ -1587,13 +1710,13 @@ Proposals below are suggestions; the owner may change them.
   - Owner: Lane Books, from the owner's notes of September 27 and 28, 2026 (Pages into Splats).
   - Fixed: Books r2 (the owner's note of September 29, 2026: the book, not the pages, a little blurry or grainy around the edges): the covers, spine, bands and page blocks have clean, sharp edges (faces stop short of their edges, with finer splats and a line of thin splats along each), full density and smooth cloth colors; the spiral's wire and the staples are thin splats along the wire.
   - Effect: Open a PDF of any length and turn its pages: each page turns over its spine as a solid sheet, curling as it goes, with the next page on its back. Five styles: hardcover, paperback, magazine, stapled paper and spiral notebook.
-  - Improved: Books: a tap opens the cover, then turns each leaf over (about 1 s), the page curling as it goes with the next page on its back; at the end a tap closes the book. Previous and Next in the Toy tab turn back and forth. The page shape follows the PDF, and only the pages reached are built. Books r3: a tap on the right page turns forward and on the left goes back (stapled paper: the top quarter of the page goes back); a page can be pulled over by hand, turning if let go past halfway or flicked and falling back otherwise; the turn lifts at once, the page curling as it goes, with no bend before it moves. Books r4 (page focus, approved September 30, 2026): a double-tap on a page glides the view in until the page fills the screen, and again (or a zoom out) shows both pages; while a page is in view, forward goes from the left page to the right one, then turns the leaf and lands on the next left page (back the other way). Reading: One page (the default on a phone held upright) keeps a page in view. Fix7: a tapped page turn starts at once (it waited up to 1.5 s for its pages) and lifts off quickly, like a page pulled by hand.
+  - Improved: Books: a tap opens the cover, then turns each leaf over (about 1 s), the page curling as it goes with the next page on its back; at the end a tap closes the book. Previous and Next in the Toy tab turn back and forth. The page shape follows the PDF, and only the pages reached are built. Books r3: a tap on the right page turns forward and on the left goes back (stapled paper: the top quarter of the page goes back); a page can be pulled over by hand, turning if let go past halfway or flicked and falling back otherwise; the turn lifts at once, the page curling as it goes, with no bend before it moves. Books r4 (page focus, approved September 30, 2026): a double-tap on a page glides the view in until the page fills the screen, and again (or a zoom out) shows both pages; while a page is in view, forward goes from the left page to the right one, then turns the leaf and lands on the next left page (back the other way). Reading: One page (the default on a phone held upright) keeps a page in view. Fix7: a tapped page turn starts at once (it waited up to 1.5 s for its pages) and lifts off quickly, like a page pulled by hand. Books r5 (October 3, 2026, labs): links in a PDF work: a tap on a web link shows its address and opens it in a new tab only when you say so (http, https and mailto only), and a link to another page turns the book there; links show a faint blue tint and underline. Pop out lifts the picture on the page in view off the paper toward you as one solid piece (it rises, grows a little and turns toward the middle in about 1 s, swaying a few times), leaving its soft shadow on the page; a photo rises with its depth from the on-device depth model, a chart or diagram as a card with its strongest shapes a little in front. Draw a box: drag round anything else on a page to lift it out. A tap lays it back (0.7 s).
   - Sound: A real page per book type: glossy and slick for the magazine, light for the paperback (and the stapled and spiral ones), fuller with a soft landing for the hardcover (Sound C, October 2, 2026).
 - **Photo album** (`photo-album`). Now: tap: Turn the page. Plan: keep.
   - Owner: Lane Books, from the owner's notes of September 27 and 28, 2026 (Pages into Splats).
   - Fixed: Books r2 (the owner's note of September 29, 2026: a little blurry or grainy around the edges): the covers and card pages have clean, sharp edges and full density; the leather's stitches and groove are thin splats in front of the cover, the scrapbook's label its own card, and the leather and linen smooth.
   - Effect: Open a set of photos and turn through them on thick album pages, each photo held by four photo corners, one or two to a page as fits their shapes, with the file names as captions.
-  - Improved: Books: a tap opens the leather, linen or scrapbook cover, then turns the thick pages (about 1 s each), the photos mounted in photo corners with their file names beneath; at the end a tap closes the album. Books r3: taps by where they land, as the book; a page pulled by hand lags the finger a little, falls back more readily and settles slowly, like a heavy card page. Books r4: page focus and Reading: One page, as the book.
+  - Improved: Books: a tap opens the leather, linen or scrapbook cover, then turns the thick pages (about 1 s each), the photos mounted in photo corners with their file names beneath; at the end a tap closes the album. Books r3: taps by where they land, as the book; a page pulled by hand lags the finger a little, falls back more readily and settles slowly, like a heavy card page. Books r4: page focus and Reading: One page, as the book. Books r5 (October 3, 2026, labs): Pop out lifts the photo on the page in view out of its corners toward you as one solid piece, with its depth from the on-device depth model, leaving its shadow between the empty corners; a tap on the other photo of a page lifts that one instead, and a tap lays it back.
   - Sound: A thick card page turning and the thud; real CC0 recordings now (book-page.mp3), with the synthesized sound as a fallback.
 - **Picture frame** (`picture-frame`). Now: tap: Swing the frame. Plan: keep.
   - Owner: Lane Books, from the owner's notes of September 27 and 28, 2026 (Pages into Splats).
@@ -1606,7 +1729,7 @@ Proposals below are suggestions; the owner may change them.
   - Improved: Screens: four styles on a picture sheet with method "screen", a Big Buck Bunny scene (CC BY 3.0) and Muybridge's horse GIF (public domain) as samples, video sound on the speaker button. Screens r2: the picture's sheet is hidden while the set is off or the curtains are closed (nothing shows through), a GIF holds its frame and a video pauses; an off switch on each style; sharp sets (even placement in square tiles, walnut, velvet, brass and gold).
   - Sound: Switching on is the click and crackle without the hum; switching off is unchanged.
 
-## Studio (8)
+## Studio (9)
 
 - **Song landscape** (`song-landscape`). Now: tap: Play or pause the song. Plan: new effect (E6).
   - Owner: Approved on the Splashery Universe page (lane Studio Sound), September 29, 2026.
@@ -1632,6 +1755,10 @@ Proposals below are suggestions; the owner may change them.
   - Effect: A 3D model file (glTF, OBJ or STL) turned into splats on the device; the tap lifts every splat off the surface into a loose cloud and lets each settle back into its own place in about 3 s. Show: Wireframe draws the mesh's edges as thin splats.
   - Improved: Studio Models: a converter that samples the surface by area (more splats where it bends or is finely made), lays flat splats on it sized to their neighbors, colors them from the texture, vertex colors or material, and keeps hard edges hard; two CC0 samples (Kenney's burger, Poly Haven's vase).
   - Sound: A rising whoosh as the splats lift off, then four falling plucked notes as they settle back.
+- **QR code** (`qr-code`). Now: tap: Burst and return. Plan: new effect (E6).
+  - Owner: The owner's idea of October 1, 2026 ("go hard on it"), lane QR, October 3, 2026.
+  - Effect: A QR code made of splats in seven styles (Classic, Dots, Rounded, Bricks, Gems, Bubbles, Neon) that always scans. A tap bursts it: every module, finder and alignment pattern tumbles off as a solid piece, falls to a floor and flies back to its exact place (3.6 s). The Toy tab adds Assemble (the pieces fly in and lock into place) and Flip (tiles turn over in a wave, showing their back color).
+  - Sound: Soft: a muffled pop, a whoosh out, the light knock of pieces landing and a rush back (Assemble: a rush in and a settle; Flip: two soft sweeps).
 - **Photo to 3D** (`photo-3d`). Now: tap: Raise or flatten the depth. Plan: keep.
   - Owner: Approved on the Splashery Universe page ("photo yes", September 29, 2026; lane Photo to 3D; labs only).
   - Effect: Your photo rebuilt as splats in 3D by an on-device depth model: each splat takes the photo's color at its place and sits at its depth, and the surface is cut where the depth jumps, so a near object stands as its own layer. The picture starts flat; the tap raises its depth layer by layer while the toy sways (about 3 s), and a second tap lays it flat. Depth sets how deep the relief is; Layers pulls the depth bands apart.

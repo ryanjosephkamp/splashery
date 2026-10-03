@@ -298,6 +298,28 @@ Settled on 2026-09-24, when the owner approved every recommendation:
 Settled on 2026-09-26: the remaining work runs as parallel lanes with an Operator session
 (OPERATING.md).
 
+Settled on 2026-10-03, afternoon (the owner's notes at 16:25 UTC):
+
+- New work runs as local lanes in Claude Code on the owner's Mac, signed in to his second Claude
+  account, so it uses that account's weekly usage rather than this account's or cloud credits
+  (OPERATING.md, "Local lanes"; `SPLASHERY_PORT` gives each one its own test server). The first
+  five: Photoreal r3, Any pose, Imaging, Earth and maps, Circuits (WORKSTREAMS.md).
+- Moving photo to 3D keeps its sound on pause and resume, and plays at its source's speed and
+  sharpness: Live input r6, in the cloud.
+- The Dot jobs report merged (#231). The owner's Dot researches sources for the new shelves
+  (`docs/audits/new-sources-2026-10.md` when it lands).
+
+Settled on 2026-10-03, the owner's answers of that morning:
+
+- The QR code toy keeps its two vendored libraries: Project Nayuki's QR Code generator (MIT) and
+  jsQR (Apache-2.0), loaded only when the toy opens (CLAUDE.md).
+- #184 (the Physics showcase toys, the spring toy included) merges as it is after a full test run;
+  #178 (UI r5) merges once the lane's answer on model sizes is in.
+- His October 2 review file says "[the other project]" in place of its code name.
+- The lanes' grooph events go on this public repository (#227: grooph 0.2.4 hooks).
+- PDF.js's four Liberation Sans fonts: he asked for a comparison with the OFL builds first, and for
+  one page listing every license decision, to review if the site is ever commercialized.
+
 Settled on 2026-10-03, morning: the owner accepts every line of docs/HANDS-ON-PLAN.md (336 toys:
 Level 1 for all, and 183 toys with more). Three engine lanes build the plan's engine pieces at once
 (Hands-on engine A: bodies and fields; B: joints; C: soft parts), each with a few demo toys; five

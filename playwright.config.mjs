@@ -7,6 +7,9 @@ import { defineConfig } from "@playwright/test";
 // it. WebGL2 tests force ?renderer=webgl2; WebGPU tests skip themselves with a
 // message when no adapter is available.
 const executablePath = process.env.SPLASHERY_CHROMIUM || undefined;
+// SPLASHERY_PORT gives each local lane on one computer its own server (OPERATING.md, "Local
+// lanes"); everyone else keeps 4173.
+const port = Number(process.env.SPLASHERY_PORT) || 4173;
 
 export default defineConfig({
   testDir: "./tests",
@@ -17,7 +20,7 @@ export default defineConfig({
   retries: 0,
   reporter: [["list"]],
   use: {
-    baseURL: "http://127.0.0.1:4173",
+    baseURL: `http://127.0.0.1:${port}`,
     screenshot: "only-on-failure",
     trace: "retain-on-failure",
     launchOptions: {
@@ -36,8 +39,8 @@ export default defineConfig({
     },
   },
   webServer: {
-    command: "python3 -m http.server 4173 --bind 127.0.0.1",
-    url: "http://127.0.0.1:4173/",
+    command: `python3 -m http.server ${port} --bind 127.0.0.1`,
+    url: `http://127.0.0.1:${port}/`,
     reuseExistingServer: true,
     timeout: 60_000,
   },
