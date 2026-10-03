@@ -414,6 +414,11 @@ function ballStick(
     part,
     overlap = 0,
     crisp = false,
+    // Lane Fix7: bonds that stretch between their two atoms' tokens (the
+    // kit's "skin"), so an atom never leaves its bond. `bondTokens(i)` is
+    // atom i's token for its bonds (the molecule's atoms are tokens
+    // themselves; the crystal's slabs are mirrored on tokens).
+    bondTokens = null,
   } = {},
 ) {
   const phase = atoms.map(() => k.rand() * TAU);
@@ -462,12 +467,16 @@ function ballStick(
       ]) {
         const el = CPK[atom.el] || {};
         const col = grey || atom.bondColor || atom.color || el.color;
+        // Skinned: each splat follows both atoms, by how far along the bond it is.
+        const tA = bondTokens?.(i);
+        const tB = bondTokens?.(j);
+        const skin = bondTokens && tA !== tB ? (c) => [tA, tB, clamp(dot(sub(c.p, A.p), u) / L, 0, 1)] : null; // prettier-ignore
         k.add(k.cylinder(r, L / 2 + overlap, { caps: false }), {
           pos: add(lerp(from, to, 0.5), shift),
           quat: q,
           flat: 0.3,
           ...finish,
-          ...motion(idx, { kind: "breathe", params: [vibrate, phase[idx]] }),
+          ...(skin ? { skin } : motion(idx, { kind: "breathe", params: [vibrate, phase[idx]] })), // prettier-ignore
           color: (c) => lit(atom.el === "H" && !grey ? "#dcdcdc" : col, c.n, 0.65, 0.4),
         });
       }
@@ -1491,6 +1500,42 @@ function ribbonRun(k, run, token, scheme) {
   });
 }
 
+// The protein's pull (lane Fix7): how far apart its pieces are (0..1). Each
+// tap runs on its own clock: out over 1.5 s, a hold, and back by 4.75 s. A
+// tap while it is apart (or coming apart) brings it back at once, from
+// where it is, over PROTEIN_BACK seconds; the next tap pulls it apart again.
+const PROTEIN_SECS = 5;
+const PROTEIN_BACK = 1.4;
+function proteinApart(c, info) {
+  const m = mem(c);
+  const now = info?.time ?? 0;
+  const n = info?.tap?.key === "apart" ? info.tap.n : null;
+  const at = (p) => ease(band(p, 0, 0.3)) * (1 - ease(band(p, 0.58, 0.95)));
+  const pull = () => {
+    if (m.back) return m.back.from * (1 - ease(clamp((now - m.back.at) / PROTEIN_BACK, 0, 1)));
+    if (m.start === undefined) return 0;
+    const p = (now - m.start) / PROTEIN_SECS;
+    return p >= 1 ? 0 : at(p);
+  };
+  if (n !== null && n !== m.n && c.apart > 0) {
+    m.n = n;
+    const e = pull();
+    if (e > 0.02 && !m.back) m.back = { at: now, from: e };
+    else {
+      m.back = null;
+      m.start = now;
+    }
+  }
+  if (m.back && now - m.back.at >= PROTEIN_BACK) {
+    m.back = null;
+    m.start = undefined;
+  }
+  // Without a tap or a clock (a test driving the pulse by hand), the pulse
+  // itself is the clock.
+  if (!info?.tap || info.time === undefined) return c.apart > 0 ? at(progress(c.apart)) : 0;
+  return pull();
+}
+
 export const RECIPES = {
   // ---- Electron orbital ---------------------------------------------------------------
   orbital: {
@@ -1937,6 +1982,7 @@ export const RECIPES = {
       ballStick(k, atoms, bonds, {
         bondR: c60 ? 0.08 : 0.1,
         token: (i) => tokenOf[i],
+        bondTokens: (i) => tokenOf[i],
         overlap: 0.09,
         crisp: !!shelf,
       });
@@ -2001,6 +2047,9 @@ export const RECIPES = {
         const y = on * 0.13 * Math.exp(-(x * x) / (2 * 0.3 * 0.3)) * Math.sin(x * 7);
         out.parts[`slab${i}`] = { offset: mul(D.up, y) };
       });
+      // The bonds between slabs stretch between them (their two ends ride on
+      // these tokens, lane Fix7).
+      out.tokens = D.slabs.map((_, i) => ({ offset: out.parts[`slab${i}`].offset }));
     },
     build(k, o) {
       const make = {
@@ -2062,6 +2111,7 @@ export const RECIPES = {
         glint: lat.glint || 0,
         grey: lat.grey || null,
         part: (i) => slabs[slabAt(lat.atoms[i].p)],
+        bondTokens: (i) => slabAt(lat.atoms[i].p),
         overlap: 0.02,
         crisp: !!lat.crisp,
       });
@@ -2139,7 +2189,8 @@ export const RECIPES = {
       const text = await readAsset(`../../assets/proteins/${def.file}.pdb`);
       PROTEIN_CACHE.set(def.file, centreStructure(parseStructure(text, `${def.file}.pdb`)));
     },
-    controls: [{ key: "apart", label: "Pull apart", type: "pulse", ease: 5 }],
+    // Lane Fix7: a tap while it is apart brings it back at once (not a pause).
+    controls: [{ key: "apart", label: "Pull apart", type: "pulse", ease: PROTEIN_SECS, pausable: false }], // prettier-ignore
     action: { key: "apart", label: "Pull it apart" },
     // A tap pulls the protein apart into its pieces: every helix, strand
     // and loop (and each bound molecule) moves straight out from the middle,
@@ -2149,9 +2200,7 @@ export const RECIPES = {
     drive(t, c, out, info) {
       const D = info.data;
       if (!D?.tokens) return;
-      const p = progress(c.apart);
-      const on = c.apart > 0 ? 1 : 0;
-      const e = on * ease(band(p, 0, 0.3)) * (1 - ease(band(p, 0.58, 0.95)));
+      const e = proteinApart(c, info);
       out.tokens = D.tokens.map((tk, i) => {
         const r = len(tk.base);
         const away = Math.min(1, r / (0.25 * D.spread));
