@@ -98,4 +98,7 @@ Fluids, UI r5, Fix7 and the Integrators); you don't touch their files.
 
 ## State
 
-Starting, October 3, 2026.
+October 3, 2026 (Opus 5.5): started. Codex task 08 has not pushed `codex/fidelity-stage1` yet, so
+the lane does steps 2 and 3 first: the parts loader (`src/packs/fidelity.js`), the "Boombox,
+trained" toy wiring (waits on Codex's SOG files), and the Stage 2 orrery scripts in
+`tools/fidelity/` (tested here with Blender 4.5 LTS on the CPU at low resolution).
