@@ -890,10 +890,10 @@ export const RIGS = {
         regions: [
           { at: [0, -0.43, 0], r: [2.5, 0.23, 2.5] },
           // The tomatoes' reflections baked into the glaze under the plate's
-          // top (red stains seen from below), in a thin band only.
-          { at: [0, -0.2, 0], r: [1.2, 0.045, 1.2], color: "#9a3a34", tol: 0.5 },
-          // Dark and red needles hanging just under the plate's middle.
-          { at: [0, -0.21, 0], r: [0.8, 0.035, 0.8], notColor: "#eeeeea", tol: 0.25 },
+          // top (red stains seen from below) and the dark and red needles
+          // hanging just under it: anything but the plate's white, in a thin
+          // band inside the dark rim (one region, so the rig stays within 12).
+          { at: [0, -0.2, 0], r: [0.86, 0.045, 0.86], notColor: "#eeeeea", tol: 0.25 },
         ],
       },
     ],
