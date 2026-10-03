@@ -16,7 +16,15 @@ import {
   quatMul,
   vec,
 } from "../kit.js";
-import { evenBox, evenCylinder, evenEllipsoid, evenTorus, evenTube } from "./even.js";
+import {
+  evenBox,
+  evenCylinder,
+  evenDisc,
+  evenEllipsoid,
+  evenRoundBox,
+  evenTorus,
+  evenTube,
+} from "./even.js";
 
 const TAU = Math.PI * 2;
 const DEG = Math.PI / 180;
@@ -66,6 +74,17 @@ function wood(c, base, p, axis = 1, dark = 0.72) {
   return mix(base, shade(base, dark), 0.35 * ring + 0.35 * (0.5 + 0.5 * g));
 }
 
+// Wood with a calm grain (lane Sharpness A): long, soft streaks along the
+// axis instead of fine flecks, for toys seen small on a phone.
+function calmWood(c, base, p, axis = 1, dark = 0.72) {
+  const a = p[(axis + 1) % 3];
+  const b = p[(axis + 2) % 3];
+  const l = p[axis];
+  const g = c.fbm(a * 5, l * 0.8, b * 5, 2);
+  const ring = 0.5 + 0.5 * Math.sin((a * 0.7 + b * 0.5) * 22 + g * 4);
+  return mix(base, shade(base, dark), 0.2 * ring + 0.2 * (0.5 + 0.5 * g));
+}
+
 // A group of shapes moved and turned together.
 function group(k, pos = [0, 0, 0], rot = [0, 0, 0]) {
   const q = rot.length === 4 ? rot : quatEuler(...rot);
@@ -87,15 +106,18 @@ function group(k, pos = [0, 0, 0], rot = [0, 0, 0]) {
 }
 
 // A square beam of wood from a to b.
+// even: true (lane Sharpness A) makes it an even, solid box of calm wood.
 function beam(g, a, b, w, color, opts = {}) {
   const d = vec.sub(b, a);
   const len = vec.len(d);
-  g.add(g.kit.box(w, len, opts.depth ?? w), {
+  const { even, ...rest } = opts;
+  g.add(even ? evenBox(w, len, opts.depth ?? w) : g.kit.box(w, len, opts.depth ?? w), {
     pos: vec.mul(vec.add(a, b), 0.5),
     quat: quatFromTo([0, 1, 0], d),
     flat: 0.2,
-    color: (c) => lit(c, wood(c, color, c.lp, 1), 0.3),
-    ...opts,
+    ...(even ? { even: true, opacity: 1, jitter: 0.01 } : {}),
+    color: (c) => lit(c, (even ? calmWood : wood)(c, color, c.lp, 1), 0.3),
+    ...rest,
   });
 }
 
@@ -257,14 +279,14 @@ export const RECIPES = {
         color: (c) => {
           const p = c.p;
           const n = c.fbm(p[0] * 2.6, p[1] * 2.6, p[2] * 2.6, 4);
-          let col = mix("#9a958c", "#5e5a55", clamp(0.5 + 0.8 * n, 0, 1));
+          let col = mix("#9a958c", "#5e5a55", clamp(0.5 + 0.55 * n, 0, 1));
           const cr = Math.abs(c.fbm(p[0] * 2 + 5, p[1] * 4, p[2] * 2, 3));
-          if (cr < 0.03) col = shade(col, 0.55);
-          const lichen = c.noise(p[0] * 9, p[1] * 9 + 3, p[2] * 9);
-          if (lichen > 0.55) col = mix(col, "#c9c48f", 0.5);
+          if (cr < 0.03) col = shade(col, 0.7 + 10 * cr);
+          const lichen = c.noise(p[0] * 6, p[1] * 6 + 3, p[2] * 6);
+          col = mix(col, "#c9c48f", 0.45 * smoothstep(0.45, 0.65, lichen));
           const up = c.n[1] + 0.45 * c.fbm(p[0] * 3 + 9, p[1] * 3, p[2] * 3, 3);
           const moss = smoothstep(0.62, 0.9, up);
-          const tuft = 0.5 + 0.5 * c.noise(p[0] * 22, p[1] * 22, p[2] * 22);
+          const tuft = 0.5 + 0.35 * c.noise(p[0] * 10, p[1] * 10, p[2] * 10);
           col = mix(col, mix("#4f7a2a", "#9cbf4a", tuft), moss);
           // A dark slit where the blade goes in.
           if (Math.abs(p[0]) < 0.09 && Math.abs(p[2]) < 0.035 && p[1] > top - 0.1) col = "#2a2724";
@@ -343,6 +365,9 @@ export const RECIPES = {
       );
       for (const x of [-0.3, 0.3])
         k.add(k.sphere(0.042), {
+          even: true,
+          opacity: 1,
+          jitter: 0.012,
           pos: [x, base + 0.08, 0],
           part: sword,
           weight: 2,
@@ -357,7 +382,10 @@ export const RECIPES = {
         color: (c) => gold(c),
       });
       for (const z of [0.036, -0.036])
-        k.add(k.ellipsoid(0.028, 0.034, 0.012), {
+        k.add(evenEllipsoid(k, 0.028, 0.034, 0.012), {
+          even: true,
+          opacity: 1,
+          jitter: 0.012,
           pos: [0, base + 0.02, z],
           part: sword,
           weight: 4,
@@ -366,7 +394,10 @@ export const RECIPES = {
           params: [1, 0],
           color: (c) => gem(c, GEMS.ruby),
         });
-      k.add(k.cylinder(0.034, 0.3, { caps: false }), {
+      k.add(evenCylinder(0.034, 0.034, 0.3, false), {
+        even: true,
+        opacity: 1,
+        jitter: 0.012,
         pos: [0, base + 0.22, 0],
         part: sword,
         weight: 1.5,
@@ -378,6 +409,9 @@ export const RECIPES = {
         },
       });
       k.add(k.sphere(0.058), {
+        even: true,
+        opacity: 1,
+        jitter: 0.012,
         pos: [0, base + 0.42, 0],
         part: sword,
         weight: 2,
@@ -868,7 +902,7 @@ export const RECIPES = {
       const iron = "#5d6167";
       const g = group(k);
       const plank = (a, b, w, col = oak, extra = {}) =>
-        beam(g, a, b, w, col, { weight: 1.2, ...extra });
+        beam(g, a, b, w, col, { weight: 1.2, even: true, ...extra });
       // Base frame and wheels.
       for (const z of [-0.3, 0.3]) {
         plank([-0.85, 0.1, z], [0.85, 0.1, z], 0.085);
@@ -876,13 +910,19 @@ export const RECIPES = {
         plank([0.52, 0.14, z], [0.05, 0.98, z], 0.07);
         plank([0.05, 0.14, z], [0.05, 0.98, z], 0.06, dark);
         plank([-0.2, 0.55, z], [0.3, 0.55, z], 0.05, dark);
-        k.add(k.cylinder(0.14, 0.05), {
+        k.add(evenCylinder(0.14, 0.14, 0.05), {
+          even: true,
+          opacity: 1,
+          jitter: 0.012,
           pos: [-0.62, 0.14, z * 1.3],
           rot: [90, 0, 0],
           flat: 0.2,
           color: (c) => spokes(c),
         });
-        k.add(k.cylinder(0.14, 0.05), {
+        k.add(evenCylinder(0.14, 0.14, 0.05), {
+          even: true,
+          opacity: 1,
+          jitter: 0.012,
           pos: [0.62, 0.14, z * 1.3],
           rot: [90, 0, 0],
           flat: 0.2,
@@ -901,7 +941,10 @@ export const RECIPES = {
         return lit(c, "#3f3a36", 0.3);
       }
       for (const x of [-0.8, 0, 0.8]) plank([x, 0.1, -0.36], [x, 0.1, 0.36], 0.08, dark);
-      k.add(k.cylinder(0.035, 0.74), {
+      k.add(evenCylinder(0.035, 0.035, 0.74), {
+        even: true,
+        opacity: 1,
+        jitter: 0.012,
         pos: T.axle,
         rot: [90, 0, 0],
         flat: 0.2,
@@ -915,13 +958,16 @@ export const RECIPES = {
         [0.76, 0.36, 0.065],
       ])
         k.add(k.sphere(s), {
+          even: true,
+          opacity: 1,
+          jitter: 0.012,
           pos: [x, s * 0.9, z],
           flat: 0.3,
           weight: 1.6,
           color: (c) =>
             lit(
               c,
-              mix("#8e8a84", "#62605c", 0.5 + c.noise(c.p[0] * 30, c.p[1] * 30, c.p[2] * 30)),
+              mix("#8e8a84", "#62605c", 0.5 + 0.5 * c.noise(c.p[0] * 12, c.p[1] * 12, c.p[2] * 12)),
               0.35,
             ),
         });
@@ -929,10 +975,13 @@ export const RECIPES = {
       // The throwing arm, on the axle.
       const arm = k.part("arm", { pivot: T.axle, axis: [0, 0, 1] });
       const ag = { kit: k, add: (s, o) => k.add(s, { ...o, part: arm }) };
-      beam(ag, T.hinge, T.tip, 0.075, oak, { weight: 1.3, depth: 0.09 });
+      beam(ag, T.hinge, T.tip, 0.075, oak, { weight: 1.3, depth: 0.09, even: true });
       for (const f of [0.15, 0.55, 0.9]) {
         const p = vec.add(T.hinge, vec.mul(vec.sub(T.tip, T.hinge), f));
-        k.add(k.box(0.09, 0.03, 0.105), {
+        k.add(evenBox(0.09, 0.03, 0.105), {
+          even: true,
+          opacity: 1,
+          jitter: 0.012,
           pos: p,
           quat: quatFromTo([0, 1, 0], T.dl),
           part: arm,
@@ -943,6 +992,9 @@ export const RECIPES = {
       }
       // The sling's pouch at the long end.
       k.add(k.sphere(0.1), {
+        even: true,
+        opacity: 1,
+        jitter: 0.012,
         pos: T.stone,
         scale: [1, 0.6, 1],
         part: arm,
@@ -953,13 +1005,19 @@ export const RECIPES = {
       const weight = k.part("weight", { pivot: T.hinge, axis: [0, 0, 1] });
       const box = vec.add(T.hinge, [0, -0.3, 0]);
       for (const z of [-0.07, 0.07])
-        k.add(k.box(0.03, 0.2, 0.03), {
+        k.add(evenBox(0.03, 0.2, 0.03), {
+          even: true,
+          opacity: 1,
+          jitter: 0.012,
           pos: vec.add(T.hinge, [0, -0.09, z]),
           part: weight,
           weight: 2,
           color: (c) => lit(c, iron, 0.3),
         });
-      k.add(k.box(0.3, 0.26, 0.26), {
+      k.add(evenBox(0.3, 0.26, 0.26), {
+        even: true,
+        opacity: 1,
+        jitter: 0.012,
         pos: box,
         part: weight,
         flat: 0.2,
@@ -967,20 +1025,23 @@ export const RECIPES = {
         core: "#77736d",
         color: (c) => {
           const b = Math.abs(c.lp[1]) > 0.1 || Math.abs(c.lp[0]) > 0.13;
-          return lit(c, b ? iron : wood(c, dark, c.lp, 0), 0.3);
+          return lit(c, b ? iron : calmWood(c, dark, c.lp, 0), 0.3);
         },
       });
       // The stone.
       const stone = k.part("stone", { pivot: T.stone });
       k.add(k.sphere(0.075), {
+        even: true,
+        opacity: 1,
+        jitter: 0.012,
         pos: T.stone,
         part: stone,
         flat: 0.3,
         weight: 1.6,
         pattern: false,
         color: (c) => {
-          const n = c.fbm(c.p[0] * 25, c.p[1] * 25, c.p[2] * 25, 2);
-          return lit(c, mix("#a19c95", "#66625d", 0.5 + 0.7 * n), 0.4);
+          const n = c.fbm(c.p[0] * 12, c.p[1] * 12, c.p[2] * 12, 2);
+          return lit(c, mix("#a19c95", "#66625d", 0.5 + 0.45 * n), 0.4);
         },
       });
       k.reach([T.axle[0], T.axle[1] + 0.75, 0]);
@@ -1018,26 +1079,35 @@ export const RECIPES = {
       const walnut = "#7b4b26";
       const steel = "#8d949c";
       // Stock: a shoulder butt and the long tiller with the bolt groove.
-      g.add(k.roundedBox(0.16, 0.27, 0.42, 5), {
+      g.add(evenRoundBox(0.16, 0.27, 0.42, 0.05), {
+        even: true,
+        opacity: 1,
+        jitter: 0.01,
         pos: [0, -0.1, -0.68],
         rot: [12, 0, 0],
         flat: 0.2,
         interior: 0.1,
         core: "#5a3517",
-        color: (c) => lit(c, wood(c, walnut, c.lp, 2), 0.35, 0.2),
+        color: (c) => lit(c, calmWood(c, walnut, c.lp, 2), 0.35, 0.2),
       });
-      g.add(k.roundedBox(0.13, 0.12, 1.1, 6), {
+      g.add(evenRoundBox(0.13, 0.12, 1.1, 0.04), {
+        even: true,
+        opacity: 1,
+        jitter: 0.01,
         pos: [0, 0, 0.02],
         flat: 0.2,
         interior: 0.1,
         core: "#5a3517",
         color: (c) => {
           if (c.lp[1] > 0.045 && Math.abs(c.lp[0]) < 0.018) return keep(lit(c, "#3b220f", 0.2));
-          return lit(c, wood(c, walnut, c.lp, 2), 0.35, 0.2);
+          return lit(c, calmWood(c, walnut, c.lp, 2), 0.35, 0.2);
         },
       });
       for (const z of [0.3, -0.3])
-        g.add(k.roundedBox(0.125, 0.125, 0.05, 6), {
+        g.add(evenRoundBox(0.125, 0.125, 0.05, 0.015), {
+          even: true,
+          opacity: 1,
+          jitter: 0.01,
           pos: [0, 0, z],
           flat: 0.2,
           weight: 2,
@@ -1053,13 +1123,16 @@ export const RECIPES = {
         [X.tipR[0], X.tipR[1], X.tipR[2]],
       ]);
       g.add(
-        k.tube(prod, (t) => 0.022 + 0.026 * (1 - Math.abs(2 * t - 1)), { caps: true }),
+        evenTube(k, prod, (t) => 0.022 + 0.026 * (1 - Math.abs(2 * t - 1)), { caps: true }),
         {
           flat: 0.2,
           weight: 1.5,
           pattern: false,
           kind: "glint",
-          params: [0.12, 0],
+          params: [0.03, 0],
+          even: true,
+          opacity: 1,
+          jitter: 0.01,
           color: (c) => metal(c, "#6f767e"),
         },
       );
@@ -1074,10 +1147,21 @@ export const RECIPES = {
           ]),
           0.014,
         ),
-        { flat: 0.2, weight: 2, pattern: false, color: (c) => metal(c, steel) },
+        {
+          even: true,
+          opacity: 1,
+          jitter: 0.01,
+          flat: 0.2,
+          weight: 2,
+          pattern: false,
+          color: (c) => metal(c, steel),
+        },
       );
       // The latch that holds the string, and the trigger below.
-      g.add(k.cylinder(0.035, 0.06), {
+      g.add(evenCylinder(0.035, 0.035, 0.06), {
+        even: true,
+        opacity: 1,
+        jitter: 0.012,
         pos: X.latch,
         rot: [0, 0, 90],
         weight: 2,
@@ -1086,7 +1170,8 @@ export const RECIPES = {
       });
       const trigger = k.part("trigger", { pivot: g.pt([0, -0.05, -0.2]), axis: X.side });
       g.add(
-        k.tube(
+        evenTube(
+          k,
           spline([
             [0, -0.04, -0.2],
             [0, -0.14, -0.26],
@@ -1096,7 +1181,16 @@ export const RECIPES = {
           (t) => 0.016 - 0.006 * t,
           { caps: true },
         ),
-        { part: trigger, flat: 0.2, weight: 2, pattern: false, color: (c) => metal(c, steel) },
+        {
+          even: true,
+          opacity: 1,
+          jitter: 0.01,
+          part: trigger,
+          flat: 0.2,
+          weight: 2,
+          pattern: false,
+          color: (c) => metal(c, steel),
+        },
       );
       // The string, cocked back to the latch, in two halves hinged at the tips.
       for (const [name, tip] of [
@@ -1113,16 +1207,22 @@ export const RECIPES = {
       }
       // The bolt: a short heavy arrow in the groove.
       const bolt = k.part("bolt", { pivot: g.pt([0, 0.085, 0.2]) });
-      g.add(k.cylinder(0.018, 0.66, { caps: false }), {
+      g.add(evenCylinder(0.018, 0.018, 0.66, false), {
+        even: true,
+        opacity: 1,
+        jitter: 0.012,
         part: bolt,
         pos: [0, 0.085, 0.22],
         rot: [90, 0, 0],
         flat: 0.25,
         weight: 2,
         pattern: false,
-        color: (c) => lit(c, wood(c, "#c49a62", c.lp, 1), 0.3),
+        color: (c) => lit(c, calmWood(c, "#c49a62", c.lp, 1), 0.3),
       });
-      g.add(k.cone(0.036, 0, 0.12), {
+      g.add(evenCylinder(0.036, 0, 0.12), {
+        even: true,
+        opacity: 1,
+        jitter: 0.012,
         part: bolt,
         pos: [0, 0.085, 0.61],
         rot: [90, 0, 0],
@@ -1201,10 +1301,11 @@ export const RECIPES = {
         opacity: 1,
         jitter: 0.015,
         flat: 0.18,
+        size: 1.12,
         interior: 0,
         core: "#2a2a2e",
         kind: "glint",
-        params: [0.03, 0],
+        params: [0.01, 0],
         color: (c) => {
           if (front(c)) return null;
           let col = metal(c, steel);
@@ -1282,8 +1383,9 @@ export const RECIPES = {
         part: visor,
         flat: 0.18,
         weight: 1.2,
+        size: 1.1,
         kind: "glint",
-        params: [0.08, 0],
+        params: [0.02, 0],
         color: (c) => {
           const a = c.u * 2 - 1;
           const y = -0.44 + c.v * 0.8;
@@ -1398,8 +1500,9 @@ export const RECIPES = {
         opacity: 1,
         jitter: 0.015,
         flat: 0.15,
+        size: 1.12,
         kind: "glint",
-        params: [0.1, 0],
+        params: [0.03, 0],
         interior: 0,
         color: (c) => {
           const y = c.lp[1];
@@ -1552,8 +1655,8 @@ export const RECIPES = {
           const odd = Math.floor(a) % 2 === 1;
           const row = odd ? Math.sin(c.v * TAU) : Math.cos(c.v * TAU);
           if (Math.abs(fract(a) - 0.5) < 0.07 && Math.abs(row - 0.75) < 0.2) return "#16161a";
-          const fur = c.noise(c.p[0] * 60, c.p[1] * 60, c.p[2] * 60);
-          return lit(c, shade("#f7f5ef", 0.92 + 0.08 * fur), 0.3);
+          const fur = c.noise(c.p[0] * 24, c.p[1] * 24, c.p[2] * 24);
+          return lit(c, shade("#f7f5ef", 0.95 + 0.05 * fur), 0.3);
         },
       });
     },
