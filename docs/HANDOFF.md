@@ -298,6 +298,22 @@ Settled on 2026-09-24, when the owner approved every recommendation:
 Settled on 2026-09-26: the remaining work runs as parallel lanes with an Operator session
 (OPERATING.md).
 
+Settled on 2026-10-03, evening (the owner's review, docs/reviews/2026-10-03-labs-review/):
+
+- The QR code toy: sharper modules, more motions, living colors expanded, country-flag colors on the
+  splats, more palettes: lane QR r3, local.
+- The photoreal toys' sounds and bases, toy by toy, the dog plush's gaps and the real alarm clock's
+  time: added to Photoreal r3's brief (local).
+- The Splat mirror (blobs over the camera view when zoomed out; too flashy and grainy) joins Live
+  input r6, after Moving photo to 3D, which isn't on the labs site until r6 merges.
+- The Fluid Lab on a phone: Codex task 14 measures it first; lane Fluids builds the fix.
+- Codex task 13 audits the Tinkerer's Manual for a newcomer to Gaussian splats; task 15 brings the
+  lab notebook up to date.
+- grooph 0.2.5's hooks are on main (#241).
+- This account's weekly usage resets Wednesday, October 7, 2026, 4 p.m. ET. Until then it carries
+  the Operator, the Integrators and the cloud lanes already open; new building runs on the second
+  account.
+
 Settled on 2026-10-03, afternoon (the owner's notes at 16:25 UTC):
 
 - New work runs as local lanes in Claude Code on the owner's Mac, signed in to his second Claude
