@@ -1,9 +1,8 @@
 // Lane Sharpness A's own checks (docs/OPERATING.md): every toy the lane made
 // sharper still builds at the phone tier within its budget with finite
 // splats; the solid parts it laid out evenly are solid (no see-through
-// splats left from random placement); the storybook's words are ink dots
-// laid on the font's pixels; and the gems' new even layout stays on the
-// stone's facets.
+// splats left from random placement); and the gems' new even layout stays
+// on the stone's facets.
 
 import { test, expect } from "@playwright/test";
 import fs from "node:fs";
@@ -26,7 +25,7 @@ const TOYS = {
   ],
   vehicles: ["rocket", "helicopter", "hot-air-balloon", "steam-train", "ocean-liner"],
   medieval: ["trebuchet", "crossbow", "knights-helmet", "crown", "sword-in-stone"],
-  objects: ["chest", "gift-box", "music-box", "book"],
+  objects: ["chest", "gift-box", "music-box"],
   gems: ["amethyst-geode", "sapphire", "quartz-cluster"],
   space: ["spiral-galaxy"],
   elements: ["storm-cloud", "tornado"],
@@ -79,20 +78,6 @@ test("the solid landmarks and vehicles are mostly fully opaque splats", async ()
   }
 });
 
-test("the storybook's open pages carry their words as ink dots", async () => {
-  const { RECIPES } = await import("../src/packs/objects.js");
-  const { buf } = build(RECIPES.book);
-  // Ink dots: the ink color at full opacity, each a flat, small splat.
-  let ink = 0;
-  for (let i = 0; i < buf.count; i++) {
-    const r = buf.color[i * 4];
-    const g = buf.color[i * 4 + 1];
-    const b = buf.color[i * 4 + 2];
-    if (Math.abs(r - 0x2f / 255) < 0.01 && Math.abs(g - 0x2a / 255) < 0.01 && Math.abs(b - 0x26 / 255) < 0.01) ink++; // prettier-ignore
-  }
-  expect(ink).toBeGreaterThan(5000);
-});
-
 test("the gems' even layout stays on the stone's facets", async () => {
   // The quartz cluster lays its points out evenly through the polytope's
   // sampleEven: build it and check every splat is finite and the toy is
@@ -106,12 +91,11 @@ test("the gems' even layout stays on the stone's facets", async () => {
   }
 });
 
-// Screenshots of three changed toys at rest, at phone and desktop size.
+// Screenshots of two changed toys at rest, at phone and desktop size.
 const SHOTS = path.join(path.dirname(new URL(import.meta.url).pathname), "screenshots");
 for (const [id, label] of [
   ["pyramids", "Pyramids"],
   ["ocean-liner", "Ocean liner"],
-  ["book", "Storybook"],
 ]) {
   test(`${id} screenshots at 390x844 and 1440x900`, async ({ browser }) => {
     fs.mkdirSync(SHOTS, { recursive: true });

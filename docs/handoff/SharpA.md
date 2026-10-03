@@ -56,9 +56,9 @@ the Integrators run at the same time; leave their files alone. The laptop is loc
 Model: Opus 5.5 (claude-opus-5-5), default effort.
 
 - October 2, 2026: 33 of the 34 toys made sharper (all but the laptop, which is locked: see "For the
-  Operator"). Only the look changed: every toy keeps its shape, tap, sound and splat budget
-  (`node tools/check-packs.mjs` on every changed pack: all within budget and build time). Lane tests
-  in `tests/sha.spec.mjs`.
+  Operator"). The storybook has since moved to a PR of its own (see October 3). Only the look
+  changed: every toy keeps its shape, tap, sound and splat budget (`node tools/check-packs.mjs` on
+  every changed pack: all within budget and build time). Lane tests in `tests/sha.spec.mjs`.
 - Cards on Effect review page 2, lane SharpA, two per toy: `sha-<toy id>` (a before-and-after still
   at 390×844 on a 3x phone, cropped to the toy, left before and right after) and `sha-<toy id>-tap`
   (the tap after the change, an MP4 at 390×844, 2x, the mid tier). Posted by shelf: Landmarks (10
@@ -91,9 +91,7 @@ Model: Opus 5.5 (claude-opus-5-5), default effort.
   moss.
 - **Open me.** Chest: even planks, solid straps (the gems inside showed through the lid). Gift box:
   even paper, lid and bow. Music box: polished wood like the Enigma machine's case (broad soft grain
-  bands with a sheen, smaller splats for crisp edges). Storybook: the words on the two pages seen
-  while the book lies open are ink dots laid exactly on the font's pixels (2 × 2 per pixel, like the
-  laptop's keys), instead of random page splats colored as ink.
+  bands with a sheen, smaller splats for crisp edges). (The storybook: see October 3.)
 - **Clothing.** Running shoe (a scan): exact splat sizes (no random size jitter, which frayed the
   outline), slightly smaller splats and a calmer fabric (each splat's color blended 45% toward its
   neighbors'), through new, off-by-default options of `addScan()`.
@@ -116,6 +114,13 @@ Model: Opus 5.5 (claude-opus-5-5), default effort.
   passed; two tests (`smoke.spec.mjs:650`, a SwiftShader console warning, and
   `chs-engine.spec.mjs:11`) failed once in the long run and pass on their own. Pushed; PR #172 ready
   for the owner's marks. No marks yet; an hourly check-in reads them.
+- October 3, 2026, 00:40 UTC: the owner marked 62 of the 64 cards "good", every toy but the
+  storybook, which he marked "fix". At the Operator's request (October 2, 23:46 UTC) the storybook
+  left this PR: its recipe in objects.js, its thumbnail, its tests and its `sha-book` screenshots
+  are back to main's, so everything left in #172 is marked good. The storybook goes on in its own
+  PR, "Phase Sharpness A: the storybook" (branch `claude/lane-sharp-a-book`), with its round 2
+  (cards `sha-book-r2` and `sha-book-tap-r2`). Main merged in (to 4e55c9f; `tools/toy-plan.json`:
+  Sound C's sapphire sound kept beside the Sharpness note; TOY-PLAN.md regenerated).
 
 ## Notes
 
@@ -147,7 +152,6 @@ Model: Opus 5.5 (claude-opus-5-5), default effort.
 - The running shoe is a scan: its fabric is calmer and its outline crisper, but the collar's fuzzy
   edge is in the capture (edge-on splats); a sharper bake would need the source rebaked at a higher
   density for the mid tier, a Real objects job.
-- The storybook's other leaves (seen only mid-turn) keep their random text splats.
 - The Leaning Tower's belfry windows and arcades are still a little soft at phone size (small
   features at the tier's budget).
 
@@ -164,3 +168,4 @@ Model: Opus 5.5 (claude-opus-5-5), default effort.
   faces, random clouds).
 - If a toy is better merged sooner, the landmarks are self-contained in landmarks.js and could be a
   PR of their own.
+- **The storybook** is in its own PR (`claude/lane-sharp-a-book`); its notes are there.
