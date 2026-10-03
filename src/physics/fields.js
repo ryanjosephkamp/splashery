@@ -447,7 +447,7 @@ export class Extras {
       const o = this.player.fromRecipe([0, 0, 0]);
       const ax = v3.sub(this.player.fromRecipe(wh.axle || [0, 0, 1]), o);
       const unit = v3.len(ax) || 1;
-      this.wheels = { axle: quat.rotate(quat.conj(b.q), v3.scale(ax, 1 / unit)), r: (wh.r ?? 0.15) * unit, parts: wh.parts || [], sign: wh.sign ?? 1, grip: wh.grip ?? 14, roll: wh.roll ?? 0.015, yaw: wh.yaw ?? 3 }; // prettier-ignore
+      this.wheels = { axle: quat.rotate(quat.conj(b.q), v3.scale(ax, 1 / unit)), r: (wh.r ?? 0.15) * unit, parts: wh.parts || [], sign: wh.sign ?? 1, grip: wh.grip ?? 14, roll: wh.roll ?? 0.015, yaw: wh.yaw ?? 6 }; // prettier-ignore
       // The wheels roll; the body itself barely slides.
       b.friction = 0.002;
       // (A car coasts to a stop on its wheels: the world's calming of slow
