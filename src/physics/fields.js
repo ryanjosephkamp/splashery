@@ -368,6 +368,7 @@ export class Extras {
       finger: null,
       point: null,
       rolled: 0,
+      slosh: [0, 0, 0],
       flee(key, pos) {
         if (!self.flee) return { offset: [0, 0, 0], vel: [0, 0, 0] };
         const it = self.flee.get(key, pos);
@@ -654,6 +655,7 @@ export class Extras {
         ho.player.motion.handsParts = parts;
       }
     }
+    if (this.hands.slosh && ho.mode === "toy") this.sloshStep(dt);
     if (ho.homing) {
       for (const b of ho.mode === "toy" ? [ho.body] : ho.pieces.map((p) => p.body)) {
         b.captured = false;
@@ -661,6 +663,38 @@ export class Extras {
       }
     }
     return busy;
+  }
+
+  // Contents that lag behind the toy as it moves (a snow globe's snow, a
+  // glass's water): a damped spring driven by the toy's acceleration, in the
+  // toy's own frame and the recipe's units, at most `slosh` from its place
+  // and only across (never down through a floor). info.hands.slosh.
+  sloshStep(dt) {
+    const b = this.ho.body;
+    if (!b || dt <= 0) return;
+    const v = b.vel.slice();
+    const a = this.lastVel ? v3.scale(v3.sub(v, this.lastVel), 1 / dt) : [0, 0, 0];
+    this.lastVel = v;
+    const tf = this.player.motion?.ctx?.transform;
+    const unit = tf?.scale || 1;
+    // Into the toy's frame (undoing its turn from home), in recipe units.
+    const local = quat.rotate(quat.conj(quat.mul(b.q, quat.conj(b.home.q))), a).map((x) => x / unit); // prettier-ignore
+    const st = (this.slosh ||= { x: [0, 0, 0], v: [0, 0, 0] });
+    const w = 2 * Math.PI * 1.3;
+    const max = this.hands.slosh;
+    const h = Math.min(dt, 1 / 30);
+    for (const i of [0, 2]) {
+      st.v[i] += (-Math.max(-200, Math.min(200, local[i])) - w * w * st.x[i] - 2 * 0.3 * w * st.v[i]) * h; // prettier-ignore
+      st.x[i] += st.v[i] * h;
+    }
+    const l = Math.hypot(st.x[0], st.x[2]);
+    if (l > max) {
+      st.x[0] *= max / l;
+      st.x[2] *= max / l;
+      st.v[0] *= 0.5;
+      st.v[2] *= 0.5;
+    }
+    this.about.slosh = [st.x[0], 0, st.x[2]];
   }
 
   // An upward flick while holding a ball that spins on a fingertip: it
