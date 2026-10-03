@@ -56,6 +56,54 @@ The Mandeltorus is a rendered fractal rather than a scan.
 | Mandeltorus          | [MandelTorus 4,12,8,1.5 (Spirula Studio)](https://superspl.at/scene/e7088609)                    | harry7557558                            | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) |
 | Basket               | [Basket](https://superspl.at/scene/efa1fa80)                                                     | hollmar                                 | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) |
 
+### More scans from SuperSplat, round 2 (lane Photoreal r2)
+
+Thirty more SuperSplat scenes of single objects, added October 3, 2026 behind the labs switch. Each
+scene's license was read from its live page (the `rel="license"` link, checked October 3, 2026), and
+downloads are enabled on every one. Twenty-seven are CC BY 4.0. Three are NonCommercial, allowed per
+asset since the owner's call of October 3, 2026 (Dog plush, Desk globe, Cherry blossom (photo));
+each carries `"nc": true` in `tools/assets.json`, and `node tools/nc-assets.mjs` lists them so they
+can all come out if the site ever earns money. The cherry blossom is also ShareAlike (CC BY-NC-SA),
+so what is made from it keeps that license, and it is never merged with another asset. Scenes with
+no license shown on their page, and ones that show a brand name or a character from a game, were
+left out. Each file was changed by `tools/pr2-prepare.mjs`: rotated upright, recentred, scaled to a
+radius of about 0.9, cleaned of strays and decimated (at most 1,000,000 splats, 300,000 for the lite
+files). One band of spherical harmonics is kept on the full files (the lite files have none; the
+sources of the alum crystal and the monkey doll have none).
+
+| Toy                    | Scene                                                                                     | Author            | License                                                               |
+| ---------------------- | ----------------------------------------------------------------------------------------- | ----------------- | --------------------------------------------------------------------- |
+| Heart donut            | [Heart Shaped Donut](https://superspl.at/scene/d2a622ec)                                  | John Splat        | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)             |
+| Sushi boat             | [SUSHI](https://superspl.at/scene/43ddc643)                                               | leo esteves       | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)             |
+| Seeded bread loaf      | [Seeded Bread Loaf](https://superspl.at/scene/e1beac1a)                                   | John Splat        | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)             |
+| Cowboy steak           | [Cowboy Steak](https://superspl.at/scene/6e60e106)                                        | Eric Cornwell     | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)             |
+| Stollen                | [Stollen Confectionery](https://superspl.at/scene/070d50b8)                               | Dany Bittel       | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)             |
+| Orange (photo)         | [Fresh Orange](https://superspl.at/scene/633ea98d)                                        | Storm Geerling    | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)             |
+| Physalis               | [Physalis](https://superspl.at/scene/908ed1a1)                                            | Alfred Duemlein   | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)             |
+| Crystal                | [Homemade Crystal Gem](https://superspl.at/scene/6cca7765)                                | Eric Cornwell     | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)             |
+| Alum crystal           | [alum-stone](https://superspl.at/scene/9b0c8534)                                          | Arshad            | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)             |
+| Puffin                 | [Puffin](https://superspl.at/scene/d44e63ab)                                              | Dan Zeitman       | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)             |
+| Toy T. rex             | [Tyrannosaurus Rex](https://superspl.at/scene/d281a49d)                                   | Alfred Duemlein   | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)             |
+| Monkey doll            | [Monkey Doll](https://superspl.at/scene/726c5f45)                                         | Ethan             | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)             |
+| Souvenir elephant      | [Thai souvenir elephant toy](https://superspl.at/scene/b01bfc43)                          | Aung Sann Thit    | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)             |
+| Souvenir turtle        | [Turtle Souvenir](https://superspl.at/scene/c2051d75)                                     | Tony Rose         | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)             |
+| Cave lioness           | [Lioness (Panthera Spelaea)](https://superspl.at/scene/7e4e9bcb)                          | Spenser DIckerson | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)             |
+| Dog plush              | [Dog Plush - Revopoint POP4 with additional Pictures](https://superspl.at/scene/55d00502) | PrintedForFun     | [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/)       |
+| BMX bicycle            | [BMX Bicycle - Enhanced](https://superspl.at/scene/e95011f3)                              | Eric Cornwell     | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)             |
+| Murex shell            | [Murex Shell](https://superspl.at/scene/d55ecb52)                                         | Rigsters          | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)             |
+| Sunflower (photo)      | [Sunflower ](https://superspl.at/scene/d8c22218)                                          | Natural Ai        | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)             |
+| White roses            | [White Rose 2](https://superspl.at/scene/e34ad55d)                                        | Natural Ai        | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)             |
+| Bonsai tree (photo)    | [Bonsai Tree](https://superspl.at/scene/4c461e7c)                                         | Garrett Nelli     | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)             |
+| Mushroom (photo)       | [Rugiboletus extremiorientalis mushroom](https://superspl.at/scene/737cf53c)              | Alexander Omelko  | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)             |
+| Cactus (photo 2)       | [Cactus 1](https://superspl.at/scene/4e095e21)                                            | Natural Ai        | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)             |
+| Crochet Earth          | [Earth Crochet from Project Hail Mary](https://superspl.at/scene/8d1a69d2)                | Wan Xi            | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)             |
+| Desk globe             | [Cheap globe](https://superspl.at/scene/9e8174d2)                                         | ilk               | [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/)       |
+| Cherry blossom (photo) | [CHERRY BLOSSOM - HIGH PARK](https://superspl.at/scene/4eec644f)                          | Todd Smith        | [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) |
+| Golden maple           | [Golden Fullmoon Maple](https://superspl.at/scene/f233b115)                               | Joshua Trapani    | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)             |
+| Peonies in a vase      | [Pink Peonies](https://superspl.at/scene/50c8ccf7)                                        | Sergiu Zboras     | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)             |
+| Money tree             | [Money Tree (Pachira)](https://superspl.at/scene/45d3761b)                                | Natural Ai        | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)             |
+| Knight on a horse      | [A knight with a sword and shield on a black horse](https://superspl.at/scene/2d074d8a)   | Alfred Duemlein   | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)             |
+
 ### Models from Poly Haven, turned into splats
 
 Fifteen textured 3D models from [Poly Haven](https://polyhaven.com), all CC0: Poly Haven publishes
@@ -578,4 +626,8 @@ Photo to 3D uses [ONNX Runtime Web](https://github.com/microsoft/onnxruntime) (M
 Anything V2 Small (Apache 2.0), loaded only when someone opens a photo in that toy (or, in lane Live
 input's Splat mirror and Photo to 3D's live view, only after someone taps "Use my camera"). The
 Science shelf's galaxy sample was cut with [jsfive](https://github.com/usnistgov/jsfive) (public
-domain), a build tool only.
+domain), a build tool only. The QR code toy (lane QR) uses Project Nayuki's
+[QR Code generator library](https://www.nayuki.io/page/qr-code-generator-library) (MIT) to encode
+its codes and [jsQR](https://github.com/cozmo/jsQR) (Apache 2.0) to check that they scan, both
+loaded only when that toy opens (jsQR only when a check runs in a browser without its own QR
+reader). "QR Code" is a registered trademark of DENSO WAVE INCORPORATED.

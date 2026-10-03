@@ -42,7 +42,8 @@ coordinates. [docs/OPERATING.md](docs/OPERATING.md) has the rules. In short:
   Runtime Web and the Depth Anything V2 Small model (approved September 29, 2026) are vendored there
   too, loaded only when someone turns a photo into 3D. Splat.js (MIT; approved September 30, 2026,
   for the video-to-3D spike) may join them, behind the labs switch, loaded only when someone opens a
-  video for it.
+  video for it. Project Nayuki's QR Code generator (MIT) and jsQR (Apache-2.0) (approved October
+  3, 2026) are vendored there too, loaded only when someone opens the QR code toy.
 - Live input (approved September 30, 2026): a toy asks for the microphone, the camera or screen
   capture only when the person taps to start it. Nothing is requested or loaded before that, and
   nothing is recorded, stored or sent anywhere.
