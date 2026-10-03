@@ -18,6 +18,7 @@
 // toy out of Hands-on (a picture toy). Pure JavaScript, no DOM.
 
 import { World, Body, boundOf, quat, v3 } from "./world.js";
+import { extrasFor, poseKitUniforms } from "./fields.js"; // lane Hands engine A
 
 // How much a toy squishes when it lands (0: not at all) and how much it
 // bounces. Anything not listed is solid and bounces a little.
@@ -105,6 +106,8 @@ export class HandsOn {
     this.clear();
     this.info = info;
     this.on = canPlay(info) && (ownHands(info?.recipe) || info?.recipe?.handsOn === true);
+    this.extras?.dispose(); // lane Hands engine A: materials and fields
+    this.extras = extrasFor(this, info);
   }
 
   clear() {
@@ -120,6 +123,7 @@ export class HandsOn {
     this.player.stage.setToyPose?.(null);
     this.player.motion.handsTokens = null;
     this.player.motion.handsParts = null;
+    this.player.motion.handsFix = null; // lane Hands engine A
   }
 
   // Pieces live in the recipe's own coordinates (a kit toy is centred and
@@ -198,6 +202,7 @@ export class HandsOn {
     this.soft = soft;
     this.mode = "toy";
     this.world = w;
+    this.extras?.build(w); // lane Hands engine A
     return w;
   }
 
@@ -331,6 +336,7 @@ export class HandsOn {
       !(a.pinned && b.pinned) && !a.held && !b.held && !this.passing.has(key(a, b));
     this.mode = "pieces";
     this.world = w;
+    this.extras?.build(w); // lane Hands engine A
     return w;
   }
 
@@ -357,6 +363,7 @@ export class HandsOn {
   // when it is something Hands-on picks up (the drag is then ours).
   pressAt(hit, x, y) {
     if (!this.canGrab() || !hit) return false;
+    if (this.extras?.pressAt(hit, x, y)) return true; // lane Hands engine A: a toy that flees the finger
     this.press = { hit: hit.slice(), x, y };
     return true;
   }
@@ -364,6 +371,7 @@ export class HandsOn {
   // The finger moved (screen x, y). The first move past a few pixels picks
   // the thing up; after that it follows.
   moveTo(x, y) {
+    if (this.extras?.moveTo(x, y)) return; // lane Hands engine A: shakes, fleeing, wheels
     const pr = this.press;
     if (pr && !this.hold) {
       const d = Math.hypot(x - pr.x, y - pr.y);
@@ -611,6 +619,7 @@ export class HandsOn {
 
   // Lets go: whatever it was holding flies on with the finger's speed.
   release() {
+    if (this.extras?.release()) return true; // lane Hands engine A
     const h = this.hold;
     this.press = null;
     if (!h) return false;
@@ -625,6 +634,7 @@ export class HandsOn {
     h.body.damping = Math.max(h.body.damping, AIR_DRAG);
     // A piece being placed is set down, not thrown.
     if (h.place) {
+      this.extras?.thrown(h); // lane Hands engine A
       // Set down from where it hovers at least, so a quick let-go never
       // starts it inside the piece below (it may still be catching up).
       if (h.body.pos[1] < h.target[1]) h.body.pos[1] = h.target[1];
@@ -644,6 +654,7 @@ export class HandsOn {
     const wmax = 14;
     const ws = v3.len(h.body.omega);
     if (ws > wmax) h.body.omega = v3.scale(h.body.omega, wmax / ws);
+    this.extras?.thrown(h); // lane Hands engine A: the material's weight and spin
     this.hold = null;
     this.world.wake();
     return true;
@@ -693,9 +704,10 @@ export class HandsOn {
   // while anything moves.
   step(dt) {
     this.time += dt;
+    const extra = this.extras?.step(dt) || false; // lane Hands engine A
     const w = this.world;
-    if (!w) return false;
-    let busy = false;
+    if (!w) return extra;
+    let busy = extra;
     const h = this.hold;
     if (h) busy = true;
     if (this.press?.push) {
@@ -780,6 +792,7 @@ export class HandsOn {
   }
 
   onHit(hit) {
+    this.extras?.onHit(hit); // lane Hands engine A: projectiles stick in targets
     const R = this.R();
     const speed = hit.speed / R;
     // A free piece that hits a pinned one knocks it loose.
@@ -815,6 +828,9 @@ export class HandsOn {
       const t = v3.sub(b.pos, c);
       const home = !this.moved && !this.homing;
       player.stage.setToyPose?.(home ? null : { pivot: c, q: dq, t });
+      // Lane Hands engine A: a kit toy's parts and tokens move with it.
+      const pose = { pivot: c, q: dq, t };
+      player.motion.handsFix = home || !player.motion.ctx?.kit ? null : (u) => poseKitUniforms(u, pose); // prettier-ignore
       return;
     }
     if (this.mode === "pieces") {
