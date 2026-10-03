@@ -136,6 +136,15 @@ October 3, 2026 (Opus 5.5).
   - Clips: `tools/bk5-clip.mjs` (a copy of lane Books' recorder with this lane's scenes, so
     `tools/bk-clip.mjs` is untouched).
 
+- October 3, 2026, later: the owner marked `bk5-links`, `bk5-pdf-pop` and `bk5-album-pop` good.
+  Posted since: `bk5-links-r2` (replaces `bk5-links`: the page link now lands on its own page when
+  read a page at a time), `bk5-photo-pop`. `bk5-box` follows. A photo now waits at rest, unseen, up
+  to 2.5 s for its depth, so it rises with it; seen a page at a time, a risen figure comes less far
+  and further toward the middle, so it stays on the screen. The help texts are within their limits
+  (110 characters, 180 words). Main (9f87dc02) merged into both branches;
+  `tests/bk5-engine.spec.mjs`, `tests/bk5.spec.mjs`, `tests/bk.spec.mjs` and `tests/taps.spec.mjs`
+  pass (91). The full suite is left to the Integrators (the Operator's call).
+
 ## Notes
 
 - Kit splats on a part are sorted where they were built: the box's corners are built in front of the
