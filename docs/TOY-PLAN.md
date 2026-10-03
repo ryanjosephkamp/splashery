@@ -45,9 +45,9 @@ Proposals below are suggestions; the owner may change them.
   Taco, Coffee, Apple, Bananas, Orange, Kiwi, Pineapple, Cherries, Grapes, Avocado, Building bricks,
   Rubber duck, Newton's cradle, Puzzle cube, Kite, Chess set, Lorenz attractor, Möbius strip, Klein
   bottle, Menger sponge, Hypercube, Torus knot, Gyroid, Mandelbulb, Seashell spiral, Graph plotter,
-  Surface plotter, Circle and waves, Fourier circles, Pythagoras proof, Splat equation, Fountain
-  pen, Water bottle, Soda can, Running shoe, Hoodie, Sunglasses, Baseball cap, Heraldic shield,
-  Crown, Wizard's orb, Crystal ball, Jellyfish, School of fish, Pufferfish, Nautilus, Snail,
+  Surface plotter, Circle and waves, Fourier circles, Pythagoras proof, Splat equation, Storybook,
+  Fountain pen, Water bottle, Soda can, Running shoe, Hoodie, Sunglasses, Baseball cap, Heraldic
+  shield, Crown, Wizard's orb, Crystal ball, Jellyfish, School of fish, Pufferfish, Nautilus, Snail,
   Octopus, Sea urchin, Frog, Snowman, Fireworks, Decorated tree, Diya, Acoustic guitar, Snare drum,
   Xylophone, Toy piano, Grand piano, Upright piano, Harpsichord, Electronic keyboard, Hot-air
   balloon, Bus, Jet airliner, Sailboat, Submarine, Bicycle, Eiffel Tower, Washington Monument,
@@ -649,6 +649,10 @@ Proposals below are suggestions; the owner may change them.
     a crisper cover, and no red strip (the cover's inside drew over the pages). E1b: the outside is
     crisp: evenly spread, denser splats on the cover, spine and page edges, a fine woven cloth and
     page lines splats can show.
+  - Improved: Sharpness A (October 2, 2026): the words on the two open pages are ink dots laid on
+    the font's pixels. Round 2 (October 3, 2026): the turned leaves are sorted where they lie, so
+    the left page's paper no longer covers its words and the cover's inside no longer shows through;
+    a solid cover rim, cleaner page edges, and soft gray words on the pages seen only mid-turn.
   - Sound: Real paper pages turning (no wind); real CC0 recordings now (book-page.mp3), with the
     synthesized sound as a fallback.
 - **Laptop** (`laptop`). Now: tap: Open or close. Plan: keep.
