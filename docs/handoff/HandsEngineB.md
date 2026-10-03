@@ -102,7 +102,7 @@ Model: Opus 5.5 (claude-opus-5-5), default effort. No helper.
   `src/physics/joints.js` (hinges, sliders, dials, sockets, breaks, `parent`, `start`, `upright`,
   `rigPieces`), marked hook lines in `src/physics/hands-on.js`, `hard: true` for scan rigs (two
   shader lines in `src/rig.js`: each splat wholly in one part), `tests/heb-engine.spec.mjs` (12
-  tests) and docs/PACKS.md, "5f. Hands-on: joints".
+  tests) and docs/PACKS.md, "5g. Hands-on: joints".
 - Demo toys (`claude/lane-hands-engine-b-toys`): chest (lid hinge), music box (lid hinge, crank dial
   playing the tune note by note, dancer and notes ride on them), sword in the stone (slider, stuck
   then free, friction), orange (eight wedge sockets), candy cane (breaks; ↺ mends) and tomatoes
@@ -115,7 +115,8 @@ Model: Opus 5.5 (claude-opus-5-5), default effort. No helper.
 
 - Full suite (in parts; each run here stops at 2 hours): every spec file covered; all pass but one
   timeout in `smoke.spec.mjs` (desktop screenshot, the cactus scan loading slowly under load; it
-  passes alone in 22 s). Lane PR #229 (draft), stacked on #224.
+  passes alone in 22 s). Lane PR #229 (draft). #224 merged October 3, 2026 (with engines A and C,
+  combo J); main merged into the toys branch.
 
 ## Known issues
 
@@ -131,7 +132,7 @@ Model: Opus 5.5 (claude-opus-5-5), default effort. No helper.
 
 ## Plan lines my pieces cover (for the category lanes)
 
-Keys are in docs/PACKS.md, "5f. Hands-on: joints".
+Keys are in docs/PACKS.md, "5g. Hands-on: joints".
 
 - **hinge**: chest, book (cover), music box (lid), knight's helmet (visor), ladybug (wing cases),
   sunglasses (arms), pearl (oyster shell), desk lamp (arms, with `parent`), desk fan (head tilt),

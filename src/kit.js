@@ -802,7 +802,9 @@ export class Kit {
   //   channel: 0..3 or (c) => 0..3: which of out.morph drives a morph,
   //          band or fade splat
   //   skin: (c) => [a, b, s]: follows tokens a and b, blended by s (kind
-  //          "skin": an edge between two moving corners)
+  //          "skin": an edge between two moving corners), or [a, b, c, d,
+  //          s, t]: follows four (kind "skin4": a cell of cloth, corners
+  //          row by row; clothSkin() in src/physics/soft.js)
   //   pattern: false keeps the pattern layer off these splats
   //   fit: false leaves the shape out of the fit (a small rider built off
   //          to one side for the draw order; keep it inside the view)
@@ -923,6 +925,10 @@ export class Kit {
       return [pr[0] ?? 0, (w < 0 ? -1 : 1) * (c + width(Math.abs(w)))];
     }
     if (kind === KINDS.skin) return [(skin[0] | 0) + 64 * (skin[1] | 0), skin[2] ?? 0];
+    if (kind === KINDS.skin4) {
+      const q = (v) => Math.round(Math.max(0, Math.min(1, v ?? 0)) * 1023);
+      return [(skin[0] | 0) + 64 * (skin[1] | 0) + 4096 * (skin[2] | 0) + 262144 * (skin[3] | 0), 1024 * q(skin[4]) + q(skin[5])]; // prettier-ignore
+    }
     if (kind === KINDS.relief) {
       // params [u, v, axis (0 x, 1 y, 2 z, 3 a 3D offset), lift at full
       // height in recipe units]; the lift is kept aside until the fit
@@ -1059,9 +1065,11 @@ export class Kit {
       ];
       const pr = paramsFn ? paramsFn(c) : params;
       const ch = chanFn ? chanFn(c) : (o.channel ?? 0);
-      const [a, b] = this.animParams(kind, p, pr, toFn?.(c), ch, skinFn?.(c));
+      const sk = skinFn?.(c);
+      const kd = sk?.length >= 6 ? KINDS.skin4 : kind; // lane Hands engine C
+      const [a, b] = this.animParams(kd, p, pr, toFn?.(c), ch, sk);
       const part = partFn ? partFn(c) : partIdx;
-      buf.push(p, scl, q, color, [part + splatFlags, kind, a, b]);
+      buf.push(p, scl, q, color, [part + splatFlags, kd, a, b]);
     }
   }
 
@@ -1096,7 +1104,7 @@ export class Kit {
         scl = [sz, sz, sz];
         q = [0, 0, 0, 1];
       }
-      const kind = s.to ? KINDS.morph : s.skin ? KINDS.skin : kindOf(s.kind ?? o.kind);
+      const kind = s.to ? KINDS.morph : s.skin ? (s.skin.length >= 6 ? KINDS.skin4 : KINDS.skin) : kindOf(s.kind ?? o.kind); // prettier-ignore
       const pr = s.params ?? o.params ?? [0, 0];
       const partIdx = s.part ?? o.part ?? 0;
       const flags = (s.pattern ?? o.pattern) === false ? 16 : 0;

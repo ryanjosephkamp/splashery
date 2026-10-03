@@ -644,7 +644,117 @@ is a part); they follow the whole toy's move and turn, not a part's. A recipe wi
 `alive: true`. For crisp liquid, a labs toy can use `kernel: "sharp"`; smoke and flames look better
 with the Gaussian (the Fluid lab picks per scene with a getter).
 
-## 5f. Hands-on: joints
+## 5f. Hands-on: bodies and fields
+
+From lane Hands engine A (October 3, 2026; the code is `src/physics/materials.js` and
+`src/physics/fields.js`, the tests `tests/hea-engine.spec.mjs`). With the ✋ Hands-on switch on, a
+recipe's `hands` block can ask for these pieces; a toy that asks for none plays exactly as before
+(Level 1: pick it up and toss it). Nothing here loads or runs until the switch is on. Every piece
+goes home on ↺ Reset. Recipe units are the recipe's own (the toy fits in about one unit); "toy
+radii" are the toy's size on screen. A recipe's `drive()` reads what the finger does as `info.hands`
+(below); it is `undefined` for a toy without these pieces, so always write `info.hands?.…`.
+
+**A material** (`hands.material`): a thrown toy moves like the real thing. Name a preset (every
+ball, `shuttlecock`, `flying-disc`, `paper-plane`, `baseball-cap`; the list and the real numbers are
+at the top of `materials.js`), or give your own keys, or a preset with some keys changed.
+
+```js
+hands: { material: "basketball" },
+hands: { material: { preset: "baseball", magnus: 0.08 } },
+hands: { material: { mass: 0.3, r: 0.1, bounce: 0.6, cd: 0.47, roll: 0.05 } },
+```
+
+The keys: `mass` (kg) and `r` (m) with `cd` set the air's drag (the real thing, scaled); `bounce`
+(restitution on a hard floor), `friction`, `roll` (rolling resistance, times gravity), `spin` (how
+much a throw spins it, from where the finger holds it: a low grab gives backspin), `spinDecay`,
+`magnus` (the curve a spin gives), `lift` with `up`, `gyro` and `fade` (a disc's glide, tilt-hold
+and bank), `nose` with `vane` (flies nose first: a shuttlecock's cork), `spiral` and `tumble` (a
+football's spiral, a rugby ball's end over end), `hook` (a bowling ball), `drift` (a light ball
+wanders sideways as it falls; the beach ball), `fingertip: true` (an upward flick while holding it
+spins it on the fingertip; the basketball) and `warm: [first, top]` (a squash ball livelier each
+throw). Lift and the curve are set to show at Hands-on's slow throws, in the real direction and
+order. Pieces take a material too: `material` in a piece's def.
+
+**A water line** (`hands.water`): the toy floats on a round pool, bobs and settles; a boat (any
+non-round toy) rocks and rights itself, since each point under water lifts where it is. By default
+the line sits where the toy, at home, floats as it stands (from its density), so nothing moves until
+touched.
+
+```js
+hands: { material: "water-polo-ball", water: true },
+hands: { water: { density: 0.89, depth: 3, color: "#5aa9cf" } }, // an iceberg: mostly under
+hands: { water: { density: 0.35, level: -0.2, drag: 8, size: 3.5 } },
+```
+
+`density` (relative to water; from the material, else 0.5), `level` (toy radii from the home middle;
+else worked out), `depth` (to the pool's floor, toy radii, 2.2), `drag` (6), `size` (the pool's
+radius, toy radii, 3.2), `color`. With pieces, `level` is in recipe units and every piece floats.
+
+**Buoyancy in air** (`hands.air`): a hot-air balloon that settles where it hovers, floats back up
+when pulled down and sinks back when pushed up, its basket under it:
+`hands: { air: { hover: 0, spring: 0.3, drag: 3.2, floor: 1.5, upright: 6 } }` (or `air: true`).
+`hover` is toy radii from home; `floor` lowers the floor so it can be pulled down.
+
+**A gravity well** (`hands.well`): a pull toward a point instead of the floor. The floor goes
+(`floor: true` keeps it) and the air with it, so a piece thrown sideways orbits.
+
+```js
+hands: { pieces: planets, well: { at: [0, 0, 0], pull: 1, soft: 0.3 } },
+hands: { pieces: star, well: { at: [0, 0, 0], pull: 2, capture: 0.12 } }, // a black hole
+```
+
+`at` (recipe units; the toy's home by default), `pull` (gravity's strength one toy radius away,
+falling with distance squared), `soft` (toy radii; no pull spike near the middle), `capture` (toy
+radii: inside it a piece is swallowed and held there until ↺ Reset).
+
+**Wheels that roll** (`hands.wheels`, the whole toy): a drag on the toy pushes it (it is never
+lifted); it rolls on, gripping sideways and slowing only by rolling resistance, and its wheel parts
+turn by the distance it rolled (they stop their own idle spin while Hands-on is on).
+
+```js
+hands: { wheels: { axle: [0, 0, 1], r: 0.17, parts: ["front", "rear"] } },
+```
+
+`axle` (recipe axis), `r` (the wheels' radius, recipe units), `parts` (the wheel parts, turned about
+their own axis), `sign` (-1 turns them the other way), `grip` (14), `roll` (0.015), `yaw` (6) and
+`area` (how far it may roll, toy radii, 2.4). `info.hands.rolled` is the angle rolled, for parts
+that turn with the wheels (a steam train's rods).
+
+**Shake detection** (`hands.shake`): a quick back-and-forth drag on the toy (holding it, or on a
+tree's trunk) fires the toy's tap action (or `key`), at most every `gap` seconds; `info.hands.shake`
+(0 to 1) is how hard it is being shaken, to make the effect grow. `hands.slosh: 0.05` makes contents
+lag behind the moving toy: `info.hands.slosh` is a sideways offset (recipe units, at most that much)
+for a part (the snow globe's snow; keep the part inside its glass by that margin).
+
+```js
+hands: { shake: true },
+hands: { shake: { key: "snow", gap: 0.6 } },
+drive(t, c, out, info) {
+  const s = Math.max(c.shake, info.hands?.shake ?? 0); // the harder the shake, the more snow
+```
+
+**Follow or flee the finger** (`hands.flee`, `hands.follow`): a drag on the toy doesn't pick it up;
+the finger is a line through the scene instead. `info.hands.finger` is that line (`{ origin, dir }`,
+recipe units, or null when no finger is down) and `info.hands.point` its point nearest the toy's
+middle (an owl's head turns to it). With `flee`, `info.hands.flee(key, pos)` gives each thing its
+own dart away from the line and its spring back (`{ offset, vel }`, recipe units): add the offset to
+the thing's place and turn it to face `vel`.
+
+```js
+hands: { flee: { radius: 0.45, push: 1, back: 2.2, max: 0.6 } },
+drive(t, c, out, info) {
+  const f = info.hands?.flee(i, P) ?? NONE; // P: where fish i swims now
+  const at = vec.add(P, f.offset);
+```
+
+**Projectiles and targets** (pieces): a piece with `projectile: { nose: [0, 0, 1], vane: 20 }` flies
+nose first, and one that hits a piece with `target: true` sticks in it where it hit, until it is
+picked up again or ↺ Reset (objects only, never people or animals). `stick: false` lets it bounce.
+
+`info.hands.on` is whether Hands-on is on. Check the toy's frame time with the pieces running (the
+whole world's step is well under a millisecond for one body, a few for 40 pieces).
+
+## 5g. Hands-on: joints
 
 From lane Hands engine B (October 3, 2026; code in `src/physics/joints.js`, proof in
 `tests/heb-engine.spec.mjs`). With the ✋ switch on, a recipe's `hands.joints` makes its parts move
@@ -758,6 +868,114 @@ own part back.
 Check a joint with `player.handsOn.joints.state()` (each joint's value, speed, `broken`, `stuck`)
 and `player.handsOn.joints.events` (stops, clicks, snaps). Every joint follows the effect quality
 rules: parts move whole about real axes, a part stops at real stops, and nothing flies off.
+
+## 5h. Hands-on: soft parts
+
+Lane Hands engine C, October 3, 2026. With the ✋ Hands-on switch on, a recipe's `hands` block can
+name ropes and chains, cloth, and soft stretch (`src/physics/soft.js`). They are built on the first
+touch, so opening a toy costs nothing, and toys without them play exactly as before. A rope or a
+cloth can live beside `hands.pieces` (the octopus: the body is a piece, the arms ride it).
+Everything is in recipe coordinates; speeds and forces are per toy radius. ↺ Reset glides every node
+home and mends what snapped; once a strand is still at home, the recipe's own `drive` takes over
+again (so its idle sway comes back).
+
+What moves on screen, so solid things stay solid:
+
+- **Skin** (thin, bendy things: a string, a tentacle, a tail, a sheet). Give each node a token
+  (`tokens: [i, …]`, up to 48 tokens per toy, shared with pieces) and build the splats with
+  `skin: ropeSkin(points, tokens)` (each splat follows the two nodes it lies between) or
+  `skin: clothSkin({ rows, cols, points, tokens })` (each splat follows the four corners of its
+  cell, kind `skin4`). The splats move with the nodes; nothing is warped by soft falloffs.
+- **Rigid riders** (a bead, a chime, an ornament, the yo-yo):
+  `pieces: [{ token | part, from, to, at, turnBy, spin, axis }]`. The piece goes where node `from`
+  goes and turns as the link `from` → `to` turns (`to` defaults to the next node; `node: i` with no
+  `to` turns with the link before it; `turn: false` keeps it upright; `turnBy: 0.4` turns it only
+  that share of the way, as a kite keeps facing the wind). `spin: (strand) => angle` adds a turn
+  about `axis` (the yo-yo's spin). `at` is the built point that sits on the node when that isn't the
+  node's own place (the kite's bridle). A part's pivot is read from the kit.
+
+### Ropes and chains: `hands.ropes`
+
+`ropes: (data, info) => [rope, …]`. A rope is a list of nodes held by links: slack (it folds, it
+never pushes), with a little bending stiffness, under gravity and air drag.
+
+| Key       | Meaning                                                                                                                                                                                                                                                                                             |
+| --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `points`  | The nodes' places as built, first to last (required).                                                                                                                                                                                                                                               |
+| `start`   | Where the nodes start and go back to, when that isn't where they were built (cheese strings built stretched out start bunched at the cut).                                                                                                                                                          |
+| `pin`     | Nodes held where they are built (default `[0]`; `[]` with `attach`).                                                                                                                                                                                                                                |
+| `attach`  | `{ piece, nodes }`: these nodes (default `[0]`) ride `hands.pieces[piece]` (tied at their start, or at the points `at`); `{ rope, node, nodes }`: they ride node `node` of an earlier strand (by its place in the list, ropes then cloth) and turn with it (a kite's tail; `turnBy` as for riders). |
+| `mass`    | Per node (a number, or a list: a heavy end such as the yo-yo).                                                                                                                                                                                                                                      |
+| `stiff`   | 0..1 stretch stiffness (1, the default: it doesn't stretch; 0.6: a rubbery string).                                                                                                                                                                                                                 |
+| `bend`    | 0..1 bending stiffness (default 0.2; 0: a limp thread).                                                                                                                                                                                                                                             |
+| `keep`    | Per second: the pull back to the built shape, carried by the piece it rides (arms curl).                                                                                                                                                                                                            |
+| `drag`    | Air drag per second (default 1.2).                                                                                                                                                                                                                                                                  |
+| `weight`  | How much gravity pulls it (default 1; 0: it keeps its shape by `keep` alone, as muscles hold an arm).                                                                                                                                                                                               |
+| `breakAt` | A link snaps when stretched past this many times its length (cheese strings).                                                                                                                                                                                                                       |
+| `wind`    | `{ vel: [x, y, z], gust, flap, k }`: moving air (toy radii per second) it streams in.                                                                                                                                                                                                               |
+| `lift`    | `[[node, [ax, ay, az]], …]`: a steady push on a node (a kite's lift).                                                                                                                                                                                                                               |
+| `avoid`   | `[{ at, r, piece }]`: spheres the nodes stay out of (on a piece, if `piece` is given).                                                                                                                                                                                                              |
+| `radius`  | The nodes' size against the floor and spheres (default 0.02 toy radii).                                                                                                                                                                                                                             |
+| `grab`    | `false` (not taken by the finger), or the list of nodes the finger can take.                                                                                                                                                                                                                        |
+| `pick`    | How near a press must be to take a node (default about 0.12 toy radii).                                                                                                                                                                                                                             |
+| `reach`   | How far past its length a held rope may be pulled (default 1.04).                                                                                                                                                                                                                                   |
+| `maxPull` | The furthest (recipe units) the finger can pull a node from where it rests (a hood keeps its shape).                                                                                                                                                                                                |
+| `update`  | `(strand, dt, soft) => {}` each step: set `strand.scale` to reel the rope in or out.                                                                                                                                                                                                                |
+| `reset`   | `(strand, soft) => {}` when ↺ Reset mends it.                                                                                                                                                                                                                                                       |
+| `tokens`  | One token per node (or `null`) for skin splats.                                                                                                                                                                                                                                                     |
+| `frame`   | A part name: the tokens are given in that part's moving frame, for skin splats that are also on the part (the kite's tail; the part must be one of the riders).                                                                                                                                     |
+| `visible` | `(strand, soft) => 0..1`: how visible its tokens are (cheese strings show only once pulled out).                                                                                                                                                                                                    |
+| `pieces`  | Rigid riders (above).                                                                                                                                                                                                                                                                               |
+
+A hanging string of beads, each bead a part that turns with the string:
+
+```js
+hands: {
+  floor: 0,
+  ropes: () => [{
+    points: [[0, 1.2, 0], [0, 1.0, 0], [0, 0.8, 0], [0, 0.6, 0]],
+    pieces: [{ part: "bead1", node: 1 }, { part: "bead2", node: 2 }, { part: "bead3", node: 3 }],
+  }],
+},
+```
+
+An arm that rides the body and curls back (the body is `hands.pieces[0]`):
+
+```js
+ropes: () => ARMS.map((pts, a) => ({ points: pts, attach: { piece: 0 }, keep: 5, bend: 0.4, drag: 2, tokens: ARM_TOKENS[a] })), // prettier-ignore
+```
+
+### Cloth: `hands.cloth`
+
+`cloth: (data, info) => [sheet, …]`. A sheet is `rows` × `cols` nodes, `points` row by row, held by
+links along the rows and columns, across the cells (`shear`, 0..1, default 0.6) and two apart
+(`bend`). It takes the rope keys above (`pin`, `attach`, `mass`, `stiff`, `bend`, `drag`, `wind`,
+`avoid`, `radius`, `tokens`, `breakAt`) except that nothing is pinned unless you say so. Build the
+sheet's splats with `skin: clothSkin({ rows, cols, points, tokens })`. A flag on its pole:
+
+```js
+cloth: () => [{ rows: 5, cols: 7, points: FLAG_GRID, pin: [0, 7, 14, 21, 28], wind: { vel: [2.5, 0, 0], gust: 0.5 }, tokens: FLAG_TOKENS }], // prettier-ignore
+```
+
+### Soft stretch: `hands.stretch`
+
+`stretch: { radius, max, hz, damping, at }` (or a function of `(data, info)` returning it). A press
+on the toy that misses its pieces and nodes takes the toy's grab, as the gummy bear's: the splats
+near the finger follow it, fading over `radius` toy radii (default 0.5), up to `max` toy radii
+(default 0.8, a soft cap). Let go and the pull swings back through rest on a spring of `hz` wobbles
+a second (default 3) with `damping` (0..1, default 0.2: a few wobbles; 0.5: one soft bounce).
+`at: (p) => bool` limits where a press stretches. Keep `radius` at 0.45 or more and `max` under
+about 0.9 so a stretched toy stays solid (no gaps, no see-through). A jelly:
+
+```js
+hands: { floor: 0, stretch: { radius: 0.5, max: 0.7, hz: 3.5, damping: 0.18 } },
+```
+
+### Sounds and tests
+
+A link that snaps sends a hit with `snap: true` (and `strand`, the rope's `name`) to
+`hands.sound(hit, vol)`. In tests, `player.handsOn.state().soft` gives each strand's nodes, their
+homes and how many links are broken. `tests/hec-engine.spec.mjs` measures each piece.
 
 ## 6. Behaviours
 
