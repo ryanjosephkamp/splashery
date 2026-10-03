@@ -737,10 +737,12 @@ sailboat or a roly-poly penguin does.
 **Scan rigs**: `rigPieces(rig, names, opts)` (from `src/physics/joints.js`) turns a scan rig's
 hard-edged parts (src/rigs.js) into loose pieces, one body each, shaped as the part's first region
 (an ellipsoid, or `opts.solid(region)`), turning about that region's center; `opts` is copied onto
-each piece (`mass`, `friction`, ...). A rig with `hands.pieces` can be picked up piece by piece:
+each piece (`mass`, `friction`, ...). A rig with `hands.pieces` can be picked up piece by piece.
+Give such a rig `hard: true`: each splat then belongs wholly to one part (no soft edges), so a part
+lifted right off leaves no trail of half-moved splats:
 
 ```js
-tomatoes: { hands: { floor: -0.17, area: 0.9, pieces: () => rigPieces(RIGS.tomatoes, TOMATO_NAMES, { friction: 0.9 }) }, ... }
+tomatoes: { hard: true, hands: { floor: -0.17, area: 0.9, pieces: () => rigPieces(RIGS.tomatoes, TOMATO_NAMES, { friction: 0.9 }) }, ... }
 ```
 
 Check a joint with `player.handsOn.joints.state()` (each joint's value, speed, `broken`, `stuck`)
