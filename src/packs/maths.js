@@ -106,6 +106,7 @@ function polyTube(pts, radius, { closed = false } = {}) {
   return {
     area: TAU * avg * L,
     thick: maxR,
+    dims: 2, // two numbers per splat: under even: true, along and around
     sample(rand) {
       const s = rand() * L;
       let lo = 0;
@@ -434,25 +435,55 @@ function cellFaces(grid, want, shade = grid) {
               const off = d[0] ? [0, a, b] : d[1] ? [a, 0, b] : [a, b, 0];
               occl += shade.at(fi + off[0], fj + off[1], fk + off[2]);
             }
-          faces.push(i, j, k, f, occl);
+          // Which of the face's four sides is a real edge (the surface turns
+          // there) rather than a seam with the next cell's face: bits for
+          // -u, +u, -v, +v.
+          const ua = d[0] ? 1 : 0;
+          const va = d[2] ? 1 : 2;
+          let rim = 0;
+          [
+            [ua, -1],
+            [ua, 1],
+            [va, -1],
+            [va, 1],
+          ].forEach(([ax, sgn], b) => {
+            const e = [0, 0, 0];
+            e[ax] = sgn;
+            const on = at(i + e[0], j + e[1], k + e[2]);
+            if (!on || at(i + e[0] + d[0], j + e[1] + d[1], k + e[2] + d[2])) rim |= 1 << b;
+          });
+          faces.push(i, j, k, f, occl, rim);
         });
       }
-  const count = faces.length / 5;
+  const count = faces.length / 6;
   const cell = 1 / n;
+  const at3 = (fi, u, v) => {
+    const q = fi * 6;
+    const f = faces[q + 3];
+    const d = CUBE_DIRS[f];
+    const p = [0, 1, 2].map((a) => (faces[q + a] + 0.5 + d[a] * 0.5) * cell - 0.5);
+    p[d[0] ? 1 : 0] += (u - 0.5) * cell;
+    p[d[2] ? 1 : 2] += (v - 0.5) * cell;
+    // How far (in cells) to the nearest real edge of the surface.
+    const rim = faces[q + 5];
+    const edge = Math.min(rim & 1 ? u : 1, rim & 2 ? 1 - u : 1, rim & 4 ? v : 1, rim & 8 ? 1 - v : 1); // prettier-ignore
+    return { p, n: d, u, v, face: f, occl: faces[q + 4], edge };
+  };
   return {
     area: count * cell * cell,
     thick: 0.2,
     faces: count,
     sample(rand) {
-      const q = Math.floor(rand() * count) * 5;
-      const f = faces[q + 3];
-      const d = CUBE_DIRS[f];
-      const u = rand();
-      const v = rand();
-      const p = [0, 1, 2].map((a) => (faces[q + a] + 0.5 + d[a] * 0.5) * cell - 0.5);
-      p[d[0] ? 1 : 0] += (u - 0.5) * cell;
-      p[d[2] ? 1 : 2] += (v - 0.5) * cell;
-      return { p, n: d, u, v, face: f, occl: faces[q + 4] };
+      const fi = Math.floor(rand() * count);
+      return at3(fi, rand(), rand());
+    },
+    // For even: true (lane Sharpness B): a runs through the faces laid end
+    // to end (its fraction within a face is u) and b is v, so every face
+    // gets its share of splats spread evenly instead of in random clumps.
+    sampleEven(a, b) {
+      const x = Math.min(a, 1 - 1e-9) * count;
+      const fi = Math.floor(x);
+      return at3(fi, x - fi, b);
     },
   };
 }
@@ -550,12 +581,24 @@ function gyroidShape(scale, clip) {
   const vol = clip === "sphere" ? (4 / 3) * Math.PI : 1.7 ** 3;
   // Area per volume of this gyroid is about 3.09 / (2 pi) per unit of scale.
   const area = (3.09 / TAU) * scale * vol * 2;
+  // Under even: true the first four numbers come from an even sequence
+  // (dims: 4): a start point spread evenly through the clip (cube or ball)
+  // and the side, so the projected points cover the surface evenly instead
+  // of in random clumps (lane Sharpness B).
+  const start = (a, b, c) => {
+    if (clip !== "sphere") return [(a * 2 - 1) * 0.85, (b * 2 - 1) * 0.85, (c * 2 - 1) * 0.85];
+    const r = Math.cbrt(a) * 0.99;
+    const z = b * 2 - 1;
+    const s = Math.sqrt(1 - z * z);
+    return [r * s * Math.cos(c * TAU), r * z, r * s * Math.sin(c * TAU)];
+  };
   return {
     area,
     thick: 0.05,
+    dims: 4,
     sample(rand) {
       for (let tries = 0; tries < 40; tries++) {
-        let p = [rand() * 2 - 1, rand() * 2 - 1, rand() * 2 - 1];
+        let p = start(rand(), rand(), rand());
         let n = [0, 1, 0];
         for (let it = 0; it < 6; it++) {
           const x = p[0] * scale;
@@ -1193,13 +1236,18 @@ export const RECIPES = {
       const pts = lorenzPath();
       const stops = ["#1d2671", "#4b2c91", "#8f3bb3", "#d6479a", "#ff7a59", "#ffc15e"];
       k.add(polyTube(pts, 0.011), {
+        // Small splats drawn out along the path: each strand a clean line
+        // (lane Sharpness B; opaque, even ones broke it into dashes).
+        size: 0.7,
         flat: 0.6,
-        stretch: 2.2,
+        stretch: 3,
         kind: "pulse",
         params: (c) => [(c.t * 6) % 1, 0],
+        // The tube is only a few pixels wide, so light and shade round it
+        // read as grain: a gentle shade only (lane Sharpness B).
         color: (c) => {
           const col = ramp(stops, c.t);
-          return shade(col, 0.82 + 0.3 * Math.max(0, dot(c.n, LIGHT)));
+          return shade(col, 0.92 + 0.12 * Math.max(0, dot(c.n, LIGHT)));
         },
       });
       // The racing spark and its tail, and the bright trace it draws (all
@@ -1535,7 +1583,18 @@ export const RECIPES = {
       const whole = mengerGrid(L);
       k.add(
         cellFaces(whole, () => true),
-        { flat: 0.12, color: (c) => mengerLook(c.p, c.s.face, c.s.occl) },
+        {
+          even: true,
+          opacity: 1,
+          jitter: 0.01,
+          size: 1.08,
+          flat: 0.12,
+          color: (c) => {
+            const col = mengerLook(c.p, c.s.face, c.s.occl);
+            // Smaller splats along the holes' edges keep them crisp.
+            return c.s.edge < 0.18 ? { c: col, size: 0.72 } : col;
+          },
+        },
       );
       // The plugs (clear at rest): big ones for level 1, one part per face
       // direction for levels 1 and 2, and the smallest only fade.
@@ -1751,8 +1810,11 @@ export const RECIPES = {
       // Slightly large splats, so each face covers the other (the far face
       // showed through the gaps as specks of the other colour).
       k.add(gyroidShape(scale, o.clip), {
-        flat: 0.1,
-        size: 1.3,
+        even: true,
+        opacity: 1,
+        jitter: 0.01,
+        flat: 0.08,
+        size: 1.5,
         to: (c) => {
           const q = gyroidLevel(c.s.at, 0.85, scale, o.clip);
           return add(q.p, mul(q.n, c.s.side * 0.014));
@@ -1895,9 +1957,10 @@ export const RECIPES = {
         k.add(polyShape(f.pts), {
           even: true,
           opacity: 1,
-          jitter: 0.015,
+          jitter: 0.01,
           part,
           flat: 0.12,
+          weight: 1.2,
           color: (c) => {
             const col = lit(tint, f.n, { amb: 0.6, dif: 0.5, spec: 0.4, pow: 20 });
             if (c.s.edge < rim) return keep(mix(col, "#fffaf0", 0.85));
@@ -2103,10 +2166,25 @@ function textPixels(text, at, h) {
 // strokes.
 function textCloud(k, pixels, opts, look) {
   const per = 4;
-  k.cloud({ count: pixels.length * per, pattern: false, ...opts }, (rand, i) => {
+  // opts.exact (lane Sharpness B): the four dots of a pixel sit on a 2 x 2
+  // grid inside it, with exact sizes, so the letter is crisp.
+  const { exact, ...rest } = opts;
+  k.cloud({ count: pixels.length * per, pattern: false, ...rest }, (rand, i) => {
     const px = pixels[Math.floor(i / per)];
     if (!px) return null;
     const j = px.px * 0.45;
+    if (exact) {
+      const q = i % per;
+      const d = px.px * 0.25;
+      return {
+        p: [px.p[0] + (q & 1 ? d : -d), px.p[1] + (q & 2 ? d : -d), px.p[2]],
+        n: [0, 0, 1],
+        flat: 0.4,
+        jitter: 0,
+        size: Math.max(0.6, (px.px / 0.014) * 0.6),
+        ...look(px, rand),
+      };
+    }
     return {
       p: [px.p[0] + (rand() - 0.5) * j, px.p[1] + (rand() - 0.5) * j, px.p[2]],
       n: [0, 0, 1],
@@ -2508,15 +2586,51 @@ function gridLines(lines, width, z) {
 // The slider under a plot: a track with an "a" beside it and a knob that
 // slides with a (knob at the middle for a's rest value).
 const SLIDER_LEN = 1.1;
-function plotSlider(k, at, { part = null } = {}) {
+// Splats sort where they were built (the knob at the middle), so a knob
+// moved along the track drew under it: sort it where it stands as it moves
+// (lane Sharpness B).
+function sortKnob(out, info, u) {
+  const d = info?.data;
+  const slot = Math.round(u * 40);
+  if (d && slot !== d.knobSlot) {
+    d.knobSlot = slot;
+    out.resortPose = true;
+  }
+}
+
+// The a slider's knob can be dragged along its track (lane Sharpness B): the
+// toy's a control, and the panel's slider, follow it. Each plotter's build
+// says where its slider is (or null when its equation has no a).
+const PLOT_SLIDERS = {};
+// Where a plotter's a slider is, for the tests (null without one).
+export const plotSliderAt = (id) => PLOT_SLIDERS[id] ?? null;
+function plotSliderDrag(id) {
+  const place = (p) => {
+    const s = PLOT_SLIDERS[id];
+    return s ? { control: "a", value: clamp01((p[0] - s[0]) / SLIDER_LEN + 0.5) } : null;
+  };
+  return {
+    plane: "view",
+    at(p) {
+      const s = PLOT_SLIDERS[id];
+      return !!s && Math.abs(p[0] - s[0]) < SLIDER_LEN / 2 + 0.1 && Math.abs(p[1] - s[1]) < 0.12 && Math.abs(p[2] - s[2]) < 0.15; // prettier-ignore
+    },
+    start: place,
+    move: place,
+  };
+}
+
+function plotSlider(k, at, { part = null, exact = false } = {}) {
   const [x, y, z] = at;
+  // (Many small splats, lane Sharpness B: a few big ones read as beads.)
   k.add(evenCylinder(0.018, 0.018, SLIDER_LEN), {
     even: true,
     opacity: 1,
     jitter: 0.015,
     pos: [x, y, z],
     rot: [0, 0, 90],
-    weight: 1.5,
+    weight: 4,
+    size: 0.8,
     color: (c) => lit("#56637a", c.n, { amb: 0.7, dif: 0.35, spec: 0.3 }),
   });
   // Tick marks at the ends and the middle.
@@ -2531,7 +2645,7 @@ weight: 2,
 color: "#8b97ad",
 }); // prettier-ignore
   const label = textPixels("a", [x - SLIDER_LEN / 2 - 0.16, y, z], 0.09);
-  textCloud(k, label.pixels, {}, () => ({ color: "#ffd166" }));
+  textCloud(k, label.pixels, { exact }, () => ({ color: "#ffd166" }));
   const knob = part ?? k.part("knob", { pivot: [x, y, z] });
   k.add(evenCylinder(0.055, 0.055, 0.05), {
     even: true,
@@ -2540,10 +2654,10 @@ color: "#8b97ad",
     pos: [x, y, z + 0.03],
     rot: [90, 0, 0],
     part: knob,
-    weight: 1.2,
-    size: 1.3,
+    weight: 4,
+    size: 0.8,
     pattern: false,
-    color: (c) => lit(c.s.cap ? "#ffd166" : "#d9a93f", c.n, { amb: 0.72, dif: 0.35, spec: 0.5 }),
+    color: (c) => lit(c.s.cap ? "#ffd166" : "#f0bf52", c.n, { amb: 0.8, dif: 0.25, spec: 0.3 }),
   });
   return knob;
 }
@@ -2631,6 +2745,7 @@ Object.assign(RECIPES, {
       { key: "eq", label: "Your curve", type: "text", default: "", hidden: true },
     ],
     input: GRAPH_INPUT,
+    drag: plotSliderDrag("graph-plotter"),
     controls: [
       { key: "a", label: "a", type: "slider", default: 0.5 },
       { key: "draw", label: "Draw", type: "pulse", ease: 4.5 },
@@ -2674,7 +2789,10 @@ Object.assign(RECIPES, {
       out.parts.curve = { visible: showRest ? 1 : 0 };
       for (let i = 0; i < g.copies; i++) out.parts[`sweep${i}`] = { visible: !showRest && i === j ? 1 : 0 }; // prettier-ignore
       out.morph = [drawing && sPen < 1 ? 1.002 - sPen : 0, showRest ? 0 : frac, 0, 0];
-      if (g.usesA) out.parts.knob = { offset: [(u - 0.5) * SLIDER_LEN, 0, 0] };
+      if (g.usesA) {
+        out.parts.knob = { offset: [(u - 0.5) * SLIDER_LEN, 0, 0] };
+        sortKnob(out, info, u);
+      }
       // The pen comes down, draws and lifts away.
       const pv = on ? bump(e, 0.02, 0.2, drawEnd, drawEnd + 0.25) : 0;
       const pen = penAt(g.path, sPen);
@@ -2779,7 +2897,8 @@ Object.assign(RECIPES, {
       // The pen, built with its tip at the middle of the board (inside the
       // toy, so it doesn't change the framing) and moved to the curve.
       plotPen(k, [0, 0, PLOT_Z + 0.004], k.part("pen", { pivot: [0, 0, PLOT_Z] }));
-      if (g.usesA) plotSlider(k, [0.12, -BH / 2 - 0.16, 0.02]);
+      PLOT_SLIDERS["graph-plotter"] = g.usesA ? [0.12, -BH / 2 - 0.16, 0.02] : null;
+      if (g.usesA) plotSlider(k, PLOT_SLIDERS["graph-plotter"]);
     },
   },
 });
@@ -2918,6 +3037,7 @@ Object.assign(RECIPES, {
       { key: "eq", label: "Your surface", type: "text", default: "", hidden: true },
     ],
     input: SURFACE_INPUT,
+    drag: plotSliderDrag("surface-plotter"),
     controls: [
       { key: "a", label: "a", type: "slider", default: 0.5 },
       { key: "rise", label: "Rise", type: "pulse", ease: 5 },
@@ -2966,7 +3086,10 @@ Object.assign(RECIPES, {
       out.parts.surface = { visible: showRest ? 1 : 0 };
       for (let i = 0; i < g.copies; i++) out.parts[`sweep${i}`] = { visible: !showRest && i === j ? 1 : 0 }; // prettier-ignore
       out.morph = [showRest ? flat : 0, showRest ? 0 : frac, 0, 0];
-      if (g.usesA) out.parts.knob = { offset: [(u - 0.5) * SLIDER_LEN, 0, 0] };
+      if (g.usesA) {
+        out.parts.knob = { offset: [(u - 0.5) * SLIDER_LEN, 0, 0] };
+        sortKnob(out, info, u);
+      }
     },
     build(k, o) {
       const g = surfacePlot(o);
@@ -2976,18 +3099,76 @@ Object.assign(RECIPES, {
       const step = niceStep(g.dx[1] - g.dx[0], 12);
       const gridStep = [step / (g.dx[1] - g.dx[0]), step / (g.dy[1] - g.dy[0])];
       const gridOff = [(-g.dx[0] / step) % 1, (-g.dy[0] / step) % 1];
-      const onLine = (U, V) => {
-        const fu = Math.abs(((((U / gridStep[0] - gridOff[0]) % 1) + 1) % 1) - 0.5);
-        const fv = Math.abs(((((V / gridStep[1] - gridOff[1]) % 1) + 1) % 1) - 0.5);
-        return Math.max(fu, fv) > 0.47;
-      };
       // Coloured by height, with a fine mesh of darker lines, two-sided. A
       // point off the plot is marked `bad` (a hole).
       const look = (c) => {
         if (c.s.p.bad) return null;
         let col = ramp(SURF_RAMP, (c.p[1] + SURF_H) / (2 * SURF_H));
-        if (onLine(c.u, c.v)) col = shade(col, 0.62);
+        // The mesh lines darker, in full-size splats (smaller ones left
+        // pinholes that read as grain).
         return lit(col, c.n, { amb: 0.66, dif: 0.42, spec: 0.22, two: true });
+      };
+      // The mesh lines: thin tubes along the surface, in splats drawn out
+      // along them, so each reads as one crisp, unbroken line (lane
+      // Sharpness B; as darker splats of the surface they broke into
+      // dashes). A tube is cut where the surface has a hole. `next` is the
+      // value of a it morphs to (channel 1), or null to flatten (channel 0).
+      const lineU = [];
+      const lineV = [];
+      for (let n = -1; n <= 40; n++) {
+        const U = (n + gridOff[0]) * gridStep[0];
+        const V = (n + gridOff[1]) * gridStep[1];
+        if (U > 0.002 && U < 0.998) lineU.push(U);
+        if (V > 0.002 && V < 0.998) lineV.push(V);
+      }
+      const meshLines = (a, opts, next) => {
+        const runs = [];
+        const N = 160;
+        for (const [fixed, list] of [
+          [0, lineU],
+          [1, lineV],
+        ])
+          for (const L of list) {
+            let run = [];
+            for (let i = 0; i <= N; i++) {
+              const w = i / N;
+              const [U, V] = fixed === 0 ? [L, w] : [w, L];
+              const p = g.point(U, V, a);
+              if (p) run.push({ p, U, V });
+              if ((!p || i === N) && run.length > 1) runs.push(run);
+              if (!p) run = [];
+            }
+          }
+        for (const run of runs) {
+          const at = (c) => run[Math.min(run.length - 1, Math.round(c.s.at))];
+          k.add(
+            polyTube(
+              run.map((r) => r.p),
+              0.0035,
+            ),
+            {
+              ...opts,
+              even: true,
+              opacity: 1,
+              jitter: 0.01,
+              size: 0.65,
+              flat: 0.6,
+              stretch: 2.5,
+              pattern: false,
+              to: (c) => {
+                const r = at(c);
+                const q =
+                  next === null ? [r.p[0], g.floorY, r.p[2]] : g.point(r.U, r.V, next) || r.p;
+                return add(q, sub(c.p, r.p));
+              },
+              color: (c) => {
+                const y = at(c).p[1];
+                const col = shade(ramp(SURF_RAMP, (y + SURF_H) / (2 * SURF_H)), 0.62);
+                return lit(col, c.n, { amb: 0.8, dif: 0.25, spec: 0, two: true });
+              },
+            },
+          );
+        }
       };
       // Normals from a grid of heights (cheaper than asking the equation
       // twice more for every splat).
@@ -3021,11 +3202,13 @@ Object.assign(RECIPES, {
         part: k.part("surface"),
         flat: 0.35,
         even: true,
+        opacity: 1,
         jitter: 0.01,
         channel: 0,
         to: (c) => [c.p[0], g.floorY, c.p[2]],
         color: look,
       });
+      meshLines(g.A[1], { part: k.part("surface"), channel: 0, weight: 1.2 }, null);
       for (let j = 0; j < copies; j++) {
         const next = g.knots[j + 1];
         k.add(sheet(g.knots[j]), {
@@ -3039,20 +3222,28 @@ Object.assign(RECIPES, {
           to: (c) => g.point(c.u, c.v, next),
           color: look,
         });
+        meshLines(g.knots[j], { part: k.part(`sweep${j}`), channel: 1, weight: 1.1 }, next);
       }
       // A dark base plate under it, and the a slider in front.
       const baseY = -SURF_H - 0.12;
-      k.add(k.box(2.2, 0.05, 2.2), {
+      // (Evenly laid and as dense as the rest, so the plate and its rim
+      // read crisp.)
+      k.add(evenBox(2.2, 0.05, 2.2), {
         pos: [0, baseY, 0],
-        weight: 0.4,
+        weight: 1.6,
+        size: 1.1,
         even: true,
-        jitter: 0.01,
+        opacity: 1,
+        jitter: 0.008,
+        flat: 0.2,
         color: (c) => {
           const edge = Math.min(1.1 - Math.abs(c.p[0]), 1.1 - Math.abs(c.p[2]));
-          return lit(edge < 0.06 ? "#4a5874" : "#1c2536", c.n, { amb: 0.75, dif: 0.3, spec: 0 });
+          const col = lit(edge < 0.06 ? "#4a5874" : "#1c2536", c.n, { amb: 0.75, dif: 0.3, spec: 0 }); // prettier-ignore
+          return col;
         },
       });
-      if (g.usesA) plotSlider(k, [0.12, baseY - 0.05, 1.22]);
+      PLOT_SLIDERS["surface-plotter"] = g.usesA ? [0.12, baseY - 0.05, 1.22] : null;
+      if (g.usesA) plotSlider(k, PLOT_SLIDERS["surface-plotter"], { exact: true });
     },
   },
 });

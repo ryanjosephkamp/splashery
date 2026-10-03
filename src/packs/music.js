@@ -1024,7 +1024,8 @@ export const RECIPES = {
         };
 
       // Plinth, cheeks, the lower front board and the keybed.
-      box6(k, [0, 0.025, -0.08], [1.44, 0.05, 0.54], { color: lacquer, flat: 0.15 }, "Y");
+      // (Its underside closed, lane Sharpness B: from below it was open.)
+      box6(k, [0, 0.025, -0.08], [1.44, 0.05, 0.54], { color: lacquer, flat: 0.15 });
       for (const s of [-1, 1]) {
         box6(
           k,
