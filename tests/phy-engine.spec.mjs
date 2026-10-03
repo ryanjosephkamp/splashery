@@ -228,10 +228,11 @@ test("a nudge moves the toy no further than the finger; a still hold lets go sti
       for (let i = 0; i < 60; i++) player.update(1 / 60);
       // Pressed at the toy's middle (not through the GPU pick, which can
       // read a frame drawn before the last reset).
-      const c = player.stage.toScreen(player.toyInfo.center);
+      // (A little above the middle, as a finger touches a toy's front.)
       const hit = player.toyInfo.center.slice();
+      hit[1] += 0.25 * player.toyInfo.radius;
+      const c = player.stage.toScreen(hit);
       if (!h.pressAt(hit, c[0], c[1])) return null;
-      const home = h.body ? h.body.pos.slice() : null;
       for (let i = 1; i <= n; i++) {
         h.moveTo(c[0] + (dx * i) / n, c[1] + (dy * i) / n);
         player.update(dt);
@@ -239,7 +240,8 @@ test("a nudge moves the toy no further than the finger; a still hold lets go sti
       for (let t = 0; t < hold; t += dt) player.update(dt);
       const finger = h.hold ? Math.hypot(h.hold.target[0] - hit[0], h.hold.target[2] - hit[2]) : 0;
       const b = h.body;
-      const start = home ?? b.pos.slice();
+      const start = b.home.pos; // (it starts at home: a reset sends it there)
+      const q0 = b.home.q;
       const held = b.pos.slice();
       h.release();
       const v = Math.hypot(b.vel[0], b.vel[2]);
@@ -252,6 +254,7 @@ test("a nudge moves the toy no further than the finger; a still hold lets go sti
         moved: Math.hypot(b.pos[0] - start[0], b.pos[2] - start[2]),
         pos: b.pos.slice(),
         held,
+        turned: 2 * Math.acos(Math.min(1, Math.abs(b.q.reduce((a, v, i) => a + v * q0[i], 0)))), // prettier-ignore
       };
     };
     return {
@@ -264,9 +267,11 @@ test("a nudge moves the toy no further than the finger; a still hold lets go sti
     };
   });
   const R = r.nudge.R;
-  // A nudge: no throw, and the toy moves no further than the finger did.
-  expect(r.nudge.v).toBe(0);
-  expect(r.nudge.moved).toBeLessThanOrEqual(r.nudge.finger + 0.02 * R);
+  // A nudge pushes the toy where the finger touched: it slides a little and
+  // turns a little, and is never thrown.
+  expect(r.nudge.moved).toBeGreaterThan(0.01 * R);
+  expect(r.nudge.moved).toBeLessThan(0.35 * R);
+  expect(r.nudge.turned).toBeGreaterThan(0.01);
   // A quick drag down toward the floor: it isn't flung (it was thrown 1.16
   // toy radii before the fix; now it slides a little with the finger).
   expect(r.down.moved).toBeLessThan(0.4 * R);

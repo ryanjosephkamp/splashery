@@ -64,8 +64,8 @@ const GRAVITY = 26; // toy radii per second squared
 const HOME_SECS = 0.45;
 // The grab (the owner's note of October 3, 2026: a touch must never fling).
 const STEP = 1 / 60; // the world always steps this long, whatever the frame rate
-const FOLLOW = 22; // the held point's spring (per second), critically damped
-const NUDGE = 24; // CSS pixels: a drag shorter than this sets it down, never throws
+const FOLLOW = 14; // the held point's spring (per second), critically damped
+const NUDGE = 24; // CSS pixels: a drag shorter than this pushes the toy, never picks it up
 const THROW_WINDOW = 0.1; // seconds of finger motion a let-go takes its speed from
 const THROW_MAX = 4; // toy radii per second
 const THROW_MIN = 0.4; // toy radii per second: slower than this is a still hold
@@ -73,8 +73,9 @@ const AIR_DRAG = 0.6; // per second, on a thrown thing
 // Held, a thing hangs from the finger: it tilts and swings as the hand
 // speeds up and slows down, and a gentle pull (per second) brings it back
 // toward the way it stood. Picked up, it lifts this far (toy radii).
-const HOLD_UPRIGHT = 3;
-const HOLD_SWING_DAMPING = 2.5;
+const HOLD_UPRIGHT = 1;
+const HOLD_SWING_DAMPING = 1.2;
+const PUSH_MAX = 2; // toy radii per second: the fastest a nudge pushes
 const PICK_LIFT = 0.15;
 
 export class HandsOn {
@@ -364,8 +365,18 @@ export class HandsOn {
   moveTo(x, y) {
     const pr = this.press;
     if (pr && !this.hold) {
-      if (Math.hypot(x - pr.x, y - pr.y) < PRESS_MOVE) return;
-      this.pickUp(pr.hit, pr.x, pr.y);
+      const d = Math.hypot(x - pr.x, y - pr.y);
+      if (d < PRESS_MOVE) return;
+      // A short drag on a whole toy is a nudge: the finger pushes it where
+      // it touched, so it slides and turns a little. Further, it's picked
+      // up (by the same spot, wherever the push left it).
+      const pieces = !!this.info?.recipe?.hands?.pieces;
+      if (!pieces && d < NUDGE) {
+        this.pushTo(pr, x, y);
+        return;
+      }
+      const hit = pr.local && this.body ? this.body.toWorld(pr.local) : pr.hit;
+      this.pickUp(hit, pr.x, pr.y);
     }
     const h = this.hold;
     if (!h) return;
@@ -395,6 +406,52 @@ export class HandsOn {
     p[2] = Math.max(c[2] - lim, Math.min(c[2] + lim, p[2]));
     h.target = p;
     this.world.wake();
+  }
+
+  // A nudge: the finger's move (on the plane facing the view, through where
+  // it pressed) is kept along the floor, for step() to push with.
+  pushTo(pr, x, y) {
+    const w = this.ensure();
+    const b = this.body;
+    if (!pr.local) {
+      this.homing = null;
+      pr.local = b.toLocal(pr.hit);
+      pr.last = [pr.x, pr.y];
+      pr.normal = this.ray(pr.x, pr.y).dir.slice();
+    }
+    const onPlane = (sx, sy) => {
+      const ray = this.ray(sx, sy);
+      const den = v3.dot(ray.dir, pr.normal);
+      if (Math.abs(den) < 1e-4) return null;
+      const t = v3.dot(v3.sub(pr.hit, ray.origin), pr.normal) / den;
+      return t > 0 ? v3.add(ray.origin, v3.scale(ray.dir, t)) : null;
+    };
+    const a = onPlane(...pr.last);
+    const c = onPlane(x, y);
+    pr.last = [x, y];
+    if (!a || !c) return;
+    const d = v3.sub(c, a);
+    d[1] = 0;
+    pr.push = v3.add(pr.push ?? [0, 0, 0], d);
+    this.moved = true;
+    w.wake();
+  }
+
+  // The push: the touched point is pushed along the finger's way as fast as
+  // the finger went (only pushed, never pulled), so where the finger is off
+  // the middle the toy turns and tips a little too.
+  pushStep(pr, dt) {
+    const b = this.body;
+    const d = pr.push;
+    pr.push = null;
+    const len = v3.len(d);
+    if (!b || len < 1e-9) return;
+    const n = v3.scale(d, 1 / len);
+    const r = v3.sub(b.toWorld(pr.local), b.pos);
+    const speed = Math.min(len / Math.max(dt, STEP), PUSH_MAX * this.R());
+    const dv = speed - v3.dot(b.velAt(r), n);
+    if (dv <= 0) return;
+    b.applyVel(v3.scale(n, dv / b.weight(r, n)), r, 1);
   }
 
   pickUp(hit, x, y) {
@@ -637,6 +694,10 @@ export class HandsOn {
     let busy = false;
     const h = this.hold;
     if (h) busy = true;
+    if (this.press?.push) {
+      this.pushStep(this.press, dt);
+      busy = true;
+    }
     if (this.homing) {
       const f = Math.min(1, (this.time - this.homing.t0) / HOME_SECS);
       const e = f * f * (3 - 2 * f);
