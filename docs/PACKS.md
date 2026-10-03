@@ -400,7 +400,9 @@ limit is for all of them together.
 
 **Loading first**: `async prepare(options)` runs before each build (in the browser and in the Node
 tools), for toys that fetch a file (the protein toy reads `assets/proteins/*.pdb`). Cache what it
-loads; `build` itself stays synchronous.
+loads; `build` itself stays synchronous. In the app a third argument, `{ profile }`, gives the
+device's tier (`"low"` on a phone), so a toy can fetch lighter files there; the Node tools leave it
+out.
 
 **Credits**: `credits: [{ label, title, source, author, license, licenseUrl }]` adds the toy's own
 sources to the About tab (the protein toy's PDB entries).
