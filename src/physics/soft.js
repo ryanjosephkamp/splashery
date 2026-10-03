@@ -183,7 +183,7 @@ export class SoftParts {
       const at = this.nodes[on.first + j];
       for (const i of def.attach.nodes ?? [0]) {
         const nd = N(i);
-        nd.ride = { strand: on, node: j, local: v3.sub(nd.home, at.home) };
+        nd.ride = { strand: on, node: j, local: v3.sub(nd.home, at.home), by: def.attach.turnBy };
         nd.w = nd.w0 = 0;
       }
       s.rides = on;
@@ -445,7 +445,9 @@ export class SoftParts {
     const r = nd.ride;
     if (r.strand) {
       const at = this.nodes[r.strand.first + r.node];
-      return v3.add(at.x, quat.rotate(this.turnAt(r.strand, r.node), r.local));
+      let q = this.turnAt(r.strand, r.node);
+      if (r.by !== undefined) q = quat.slerp(ID, q, r.by);
+      return v3.add(at.x, quat.rotate(q, r.local));
     }
     return v3.add(r.body.pos, quat.rotate(r.body.q, r.local));
   }
