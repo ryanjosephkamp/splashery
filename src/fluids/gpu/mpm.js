@@ -447,7 +447,7 @@ export class GpuMpm {
 
   // Appends particles: positions (grid units) and velocities, Float32Array
   // of 3 per particle each. Kind per particle (optional).
-  add(pos, vel, kind = 0) {
+  add(pos, vel, kind = 0, age = 0) {
     const n = Math.min(pos.length / 3, this.cap - this.count);
     if (n <= 0) return 0;
     const data = new Float32Array(n * PARTICLE_VEC4 * 4);
@@ -460,6 +460,7 @@ export class GpuMpm {
       data[o + 4] = vel ? vel[i * 3] : 0;
       data[o + 5] = vel ? vel[i * 3 + 1] : 0;
       data[o + 6] = vel ? vel[i * 3 + 2] : 0;
+      data[o + 7] = age;
     }
     this.particles.write(this.count * PARTICLE_VEC4 * 16, data, 0, data.length);
     this.count += n;
